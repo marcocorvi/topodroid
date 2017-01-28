@@ -760,6 +760,8 @@
   <string name="pref_leg_shots_summary">Minimo numero di misure per tiro di poligonale</string>
   <string name="pref_station_prefix_title">Esporta il prefisso dei caposaldi</string>
   <string name="pref_station_prefix_summary">Esporta in cSurvey il prefisso dei caposaldi</string>
+  <!-- TODO string name="pref_trobot_names_title">TopoRobot station names</string -->
+  <!-- TODO string name="pref_trobot_names_summary">Station names are in TopoRobot style</string -->
   <string name="pref_ortho_lrud_title">Angolo di splay di tipo LRUD</string>
   <string name="pref_ortho_lrud_summary">Minimo angolo tra splay e battuta per uno splay di tipo LRUD</string>
   <string name="pref_ortho_lrud_message">LRUD: minimo angolo splay-battuta</string>

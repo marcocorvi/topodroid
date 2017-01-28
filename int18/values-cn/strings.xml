@@ -753,6 +753,8 @@
   <string name="pref_leg_shots_summary">每条主线最少的测量次数</string>
   <string name="pref_station_prefix_title">cSurvey 测量点名称前缀</string>
   <string name="pref_station_prefix_summary">输出cSurvey测量点名称前缀</string>
+  <!-- TODO string name="pref_trobot_names_title">TopoRobot station names</string -->
+  <!-- TODO string name="pref_trobot_names_summary">Station names are in TopoRobot style</string -->
   <string name="pref_ortho_lrud_title">LRUD 侧线的角度</string>
   <string name="pref_ortho_lrud_summary">每组LRUD侧线与主线的最小测量角度</string>
   <string name="pref_ortho_lrud_message">LRUD最小的侧线主线角度</string>

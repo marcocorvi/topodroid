@@ -28,8 +28,78 @@ public class TRobot
   {
     mSeries = new ArrayList< TRobotSeries >();
     mPoints = new ArrayList< TRobotPoint  >();
-    int mSrCnt = 0;
 
+    if ( TDSetting.mTRobotNames ) {
+      populateSeries( blks );
+    } else {
+      buildSeries( blks );
+    }
+  }
+
+  private void populateSeries( List<DistoXDBlock> blks )
+  {
+    TRobotSeries sf, st;
+    TRobotPoint pf, pt;
+    int nsf, npf, nst, npt;
+    for ( DistoXDBlock blk : blks ) {
+      if ( blk.mType != DistoXDBlock.BLOCK_MAIN_LEG ) continue;
+      String[] valf = blk.mFrom.split(".");
+      String[] valt = blk.mTo.split(".");
+      if ( valf.length != 2 || valt.length != 2 ) continue;
+      try {
+        nsf = Integer.parseInt(valf[0]);
+        npf = Integer.parseInt(valf[1]);
+        nst = Integer.parseInt(valt[0]);
+        npt = Integer.parseInt(valt[1]);
+        sf = getSeries( nsf );
+        st = getSeries( nst );
+        pf = getPoint( sf, npf );
+        pt = getPoint( st, npt );
+        if ( st != null ) { 
+          if ( sf == null ) {
+            // assert( pt != null )
+            sf = new TRobotSeries( nsf, pt );
+            pf = new TRobotPoint( npf, blk.mFrom, sf );
+            sf.append( pf );
+            pf.mBlk = blk;
+            pf.mForward = false;
+          } else if ( sf == st ) { 
+            if ( pt == null ) {
+              pt = new TRobotPoint( npt, blk.mTo, st );
+              st.append( pt );
+              pt.mBlk = blk;
+              pt.mForward = true;
+            } else if ( pf == null ) {
+              pf = new TRobotPoint( npf, blk.mFrom, sf );
+              sf.append( pf );
+              pf.mBlk = blk;
+              pf.mForward = false;
+            } else {
+              TDLog.Error("TRobot " + blk.Name() + " closes series " + sf.mNumber );
+            }
+          } else { 
+            TDLog.Error("TRobot " + blk.Name() + " joins " + sf.mNumber + " " + st.mNumber );
+          }
+        } else if ( sf != null ) { // st == null
+          // assert ( pf != null )
+          st = new TRobotSeries( nst, pf );
+          pt = new TRobotPoint( npt, blk.mTo, st );
+          st.append( pt );
+          pt.mBlk = blk;
+          pt.mForward = true;
+        } else { // st == null and sf == null
+          TDLog.Error("TRobot unattached block " + blk.Name() );
+        }
+      } catch ( NumberFormatException e ) {
+        TDLog.Error("TRobot " + e.getMessage() );
+      }   
+    }
+  }
+    
+
+  private void buildSeries( List<DistoXDBlock> blks )
+  {
+    int mSrCnt = 0;
     ArrayList< DistoXDBlock > repeat = new ArrayList<DistoXDBlock>();
     for ( DistoXDBlock blk : blks ) {
       if ( blk.mType == DistoXDBlock.BLOCK_MAIN_LEG ) repeat.add( blk );
@@ -67,6 +137,8 @@ public class TRobot
             pfr.mCnt --;
             pto.mCnt --;
             series.append( pto );
+            pto.mBlk = blk;
+            pto.mForward = true;
             added = true;
             repeat.remove( blk );
             break;
@@ -74,6 +146,8 @@ public class TRobot
             pfr.mCnt --;
             pto.mCnt --;
             series.append( pfr );
+            pto.mBlk = blk;
+            pto.mForward = false;
             added = true;
             repeat.remove( blk );
             break;
@@ -81,6 +155,23 @@ public class TRobot
         }
       }
     }
+  }
+
+  TRobotPoint getPoint( TRobotSeries sr, int np )
+  {
+    if ( sr == null ) return null;
+    for ( TRobotPoint pt : mPoints ) {
+      if ( np == pt.mNumber && sr == pt.mSeries ) return pt;
+    }
+    return null;
+  }
+
+  TRobotSeries getSeries( int ns )
+  {
+    for ( TRobotSeries sr : mSeries ) {
+      if ( ns == sr.mNumber ) return sr;
+    }
+    return null;
   }
       
 

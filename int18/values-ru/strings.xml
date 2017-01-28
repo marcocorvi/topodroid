@@ -756,6 +756,8 @@
   <string name="pref_leg_shots_summary">Минимальное кол-во повторяющихся замеров на отрезке</string>
   <string name="pref_station_prefix_title">Экспортировать префиксы пикетов</string>
   <string name="pref_station_prefix_summary">Экспортировать префиксы пикетов для cSurvey</string>
+  <!-- TODO string name="pref_trobot_names_title">TopoRobot station names</string -->
+  <!-- TODO string name="pref_trobot_names_summary">Station names are in TopoRobot style</string -->
   <string name="pref_ortho_lrud_title">Мин. угол бок. замера для ЛПВН</string>
   <string name="pref_ortho_lrud_summary">Минимальный угол между бок. замером и вектором для расчета ЛПВН при экспорте</string>
   <string name="pref_ortho_lrud_message">Мин. угол между бок. замером и вектором для расчета ЛПВН </string>

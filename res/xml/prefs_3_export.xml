@@ -68,6 +68,13 @@
        android:defaultValue="false"
      />
 
+   <CheckBoxPreference
+       android:key="DISTOX_TROBOT_NAMES"
+       android:summary="@string/pref_trobot_names_summary"
+       android:title="@string/pref_trobot_names_title"
+       android:defaultValue="false"
+     />
+
   <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_ORTHO_LRUD"
        android:title="@string/pref_ortho_lrud_title"

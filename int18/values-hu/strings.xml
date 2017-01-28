@@ -755,6 +755,8 @@
   <string name="pref_leg_shots_summary">Minimum number of shots per leg*Poligon mérések minmális száma poligonhosszanként</string>
   <string name="pref_station_prefix_title">cSurvey station prefix*Pontnév előtag cSurvey programhoz</string>
   <string name="pref_station_prefix_summary">Export cSurvey station prefix*cSurvey pontnév előtagok exportálása</string>
+  <!-- TODO string name="pref_trobot_names_title">TopoRobot station names</string -->
+  <!-- TODO string name="pref_trobot_names_summary">Station names are in TopoRobot style</string -->
   <string name="pref_ortho_lrud_title">LRUD splay angle*BJFL segédpontok szöge</string>
   <string name="pref_ortho_lrud_summary">Minimum splay-leg angle for an LRUD splay*A segédmérések és poligonmérések minmális szöge BJFL felmérésnél</string>
   <string name="pref_ortho_lrud_message">LRUD minimum splay-leg angle*Minimális poligon-segédmérés szög BJFL</string>

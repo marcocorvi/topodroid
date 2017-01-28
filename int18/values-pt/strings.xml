@@ -754,6 +754,8 @@
   <string name="pref_leg_shots_summary">Número mínimo de medições por cada visada principal</string>
   <string name="pref_station_prefix_title">Prefixos das bases em cSurvey</string>
   <string name="pref_station_prefix_summary">Exportar prefixo das bases em cSurvey</string>
+  <!-- TODO string name="pref_trobot_names_title">TopoRobot station names</string -->
+  <!-- TODO string name="pref_trobot_names_summary">Station names are in TopoRobot style</string -->
   <string name="pref_ortho_lrud_title">Ângulo splay LRUD</string>
   <string name="pref_ortho_lrud_summary">Ângulo mínimo de uma Splay/Leg para uma Splay LRUD</string>
   <string name="pref_ortho_lrud_message">Ângulo mínimo de uma visada principal/auxiliaria para uma visada auxiliaria LRUD</string>

@@ -766,6 +766,8 @@
   <string name="pref_leg_shots_summary">Número mínimo de tomas por visual</string>
   <string name="pref_station_prefix_title">Prefijo estación de exportación</string>
   <string name="pref_station_prefix_summary">Prefijo estación de exportación cSurvey</string>
+  <!-- TODO string name="pref_trobot_names_title">TopoRobot station names</string -->
+  <!-- TODO string name="pref_trobot_names_summary">Station names are in TopoRobot style</string -->
   <string name="pref_ortho_lrud_title">LRUD ángulo de apertura</string>
   <string name="pref_ortho_lrud_summary">Ángulo mínimo para tomas laterales</string>
   <string name="pref_ortho_lrud_message">Ángulo mínimo de tomas laterales</string>

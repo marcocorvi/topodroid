@@ -11,12 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-// import java.util.List;
-// import java.util.Locale;
-// import java.util.ArrayList;
-
 import android.util.Log;
-
 
 public class TRobotPoint
 {
@@ -24,6 +19,8 @@ public class TRobotPoint
   String mName; // TopoDroid station name
   TRobotSeries mSeries;
   int mCnt;     // number of TopoDroid legs with this station (used building series)
+  DistoXDBlock mBlk; // shot that leads to this point in the series
+  boolean mForward;  // this point is block's TO station
 
   TRobotPoint( int nr, String nm, TRobotSeries s )
   {
@@ -31,6 +28,8 @@ public class TRobotPoint
     mName   = nm;
     mSeries = s;
     mCnt    = 1;
+    mBlk    = null;
+    mForward = false;
   }
 
   void dump()

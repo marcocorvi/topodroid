@@ -754,6 +754,8 @@
   <string name="pref_leg_shots_summary">Nombre minimum de visées successives pour identifier un cheminement</string>
   <string name="pref_station_prefix_title">Préfixe station EcSurvey</string>
   <string name="pref_station_prefix_summary">Export préfixe station cSurvey</string>
+  <!-- TODO string name="pref_trobot_names_title">TopoRobot station names</string -->
+  <!-- TODO string name="pref_trobot_names_summary">Station names are in TopoRobot style</string -->
   <string name="pref_ortho_lrud_title">Angle visée chem. LRUD</string>
   <string name="pref_ortho_lrud_summary">Angle minimum visée de cheminement pour une cheminement LRUD</string>
   <string name="pref_ortho_lrud_message">Angle minimum LRUD</string>

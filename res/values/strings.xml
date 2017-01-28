@@ -757,6 +757,8 @@
   <string name="pref_leg_shots_summary">Minimum number of shots per leg</string>
   <string name="pref_station_prefix_title">Compass station prefix</string>
   <string name="pref_station_prefix_summary">Export station prefix (compass)</string>
+  <string name="pref_trobot_names_title">TopoRobot station names</string>
+  <string name="pref_trobot_names_summary">Station names are in TopoRobot style</string>
   <string name="pref_ortho_lrud_title">Compass LRUD splay angle</string>
   <string name="pref_ortho_lrud_summary">Minimum splay-leg angle for an LRUD splay</string>
   <string name="pref_ortho_lrud_message">LRUD minimum splay-leg angle</string>

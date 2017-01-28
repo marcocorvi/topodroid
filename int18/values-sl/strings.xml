@@ -756,6 +756,8 @@
   <string name="pref_leg_shots_summary">Minimalno število zaporednih vizur poligona</string>
   <string name="pref_station_prefix_title">Izvozi začetnico merilnih točk</string>
   <string name="pref_station_prefix_summary">Izvozi v cSurvey začetnico merilnih točk</string>
+  <!-- TODO string name="pref_trobot_names_title">TopoRobot station names</string -->
+  <!-- TODO string name="pref_trobot_names_summary">Station names are in TopoRobot style</string -->
   <string name="pref_ortho_lrud_title">Kot stranskih vizur  LRUD</string>
   <string name="pref_ortho_lrud_summary">Minimalen kot stranske vizure in  vizure  LRUD</string>
   <string name="pref_ortho_lrud_message">LRUD:minimalen kot stranske vizure in vizure</string>

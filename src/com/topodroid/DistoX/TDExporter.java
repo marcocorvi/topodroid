@@ -1819,7 +1819,7 @@ class TDExporter
 
       List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
       TRobot trobot = new TRobot( list );
-      trobot.dump(); // DEBUG
+      // trobot.dump(); // DEBUG
 
       List< FixedInfo > fixeds = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
       pw.format("<Entrances>\n");
@@ -1869,6 +1869,26 @@ class TDExporter
         TRobotPoint from = series.mBegin;
         for ( TRobotPoint pt : series.mPoints ) {
           // get leg from-pt and print it
+          DistoXDBlock blk = pt.mBlk;
+          if ( blk != null ) {
+            float az   = blk.mBearing;
+            float incl = blk.mClino;
+            if ( ! pt.mForward ) {
+              az = ( az + 180 ); if ( az >= 360 ) az -= 360;
+              incl = - incl;
+            }
+            float len = blk.mLength;
+            float up    = 0;
+            float left  = 0;
+            float down  = 0;
+            float right = 0;
+            pw.format(Locale.US, "<Shot Az=\"%.2f\" ID=\"%s\" Up=\"%.2f\" Code=\"1\" Down=\"%.2f\" Incl=\"%.2f\" ",
+              az, pt.mName, up, down, incl );
+            pw.format(Locale.US, "Left=\"%.2f\" Trip=\"1\" Label=\"%s\", Right=\"%.2f\" Length=\"%.3f\" ",
+              left, blk.Name(), right, len );
+            pw.format(Locale.US, "Secteur=\"0\" Comments=\"%s\" TypeShot=\"%d\" />\n",
+              blk.mComment, ( blk.isSurface() ? 7 : 0 ) );
+          }
           from = pt;
         }
         pw.format("</Stations>\n");
@@ -1878,6 +1898,18 @@ class TDExporter
 
       pw.format("<AntennaShots>\n");
       // for all splays
+      int number = 0;
+      for ( DistoXDBlock blk : list ) {
+        if ( blk.mType != DistoXDBlock.BLOCK_SPLAY ) continue;
+        TRobotPoint pt = trobot.getPoint( blk.mFrom );
+        if ( pt == null ) continue;
+        ++ number;
+        // Log.v("DistoX", "TRobot splay " + blk.mFrom + " nr " + number + " Pt " + pt.mSeries.mNumber + "." + pt.mNumber );
+        pw.format(Locale.US, "<AntennaShot Az=\"%.2f\" Code=\"1\" Incl=\"%.2f\" Trip=\"1\" Label=\"%s\" PtDep=\"%d\" ",
+          blk.mBearing, blk.mClino, blk.mFrom, pt.mNumber );
+        pw.format(Locale.US, "Length=\"%.3f\" Numero=\"%d\" SerDep=\"%d\" Network=\"1\" Secteur=\"1\" Comments=\"%s\" />\n",
+          blk.mLength, number, pt.mSeries.mNumber, blk.mComment );
+      }
       pw.format("</AntennaShots>\n");
 
 
