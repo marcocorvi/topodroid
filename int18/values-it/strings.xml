@@ -384,7 +384,7 @@
     <string name="toggle_failed">Attivazione modo calibrazione fallita</string>
     <string name="toggle_ok">DistoX in modo calibrazione</string>
     <string name="undelete_text">Seleziona oggetto da recuoperare</string>
-    <!-- TODO string name="delete_whole_leg">Delete whole leg</string -->
+    <string name="delete_whole_leg">Cancella l\'intera battuta</string>
     <string name="visible_border">bordo visibile</string>
     <!-- UNUSED string name="vthreshold">soglia vert.</string -->
     <string name="wait_scan">Scanning: attendi &#8230;</string>
@@ -464,10 +464,10 @@
     <string name="button_ok"        >OK        </string>
     <string name="button_open"      >Apri      </string>
     <string name="button_read"      >Leggi     </string>
-    <!-- TODO string name="button_redo"      >Redo      </string -->
+    <string name="button_redo"      >Ripeti azione</string>
     <!-- UNUSED string name="button_regroup"   >Raggruppare   </string -->
     <string name="button_dump"      >Scarica   </string>
-    <!-- TODO string name="button_replace"   >Replace   </string -->
+    <string name="button_replace"   >Sostituisci</string>
     <string name="button_reset"     >Resetta   </string>
     <string name="button_left"      >SINISTRA</string>
     <string name="button_right"     >DESTRA</string>
@@ -505,14 +505,14 @@
     <string name="btn_import">Importa</string>
     <string name="btn_install">Installa</string>
 
-    <!-- TODO string name="symbol_archeo">Archeo</string -->
-    <!-- TODO string name="symbol_bio">Biology</string -->
-    <!-- TODO string name="symbol_geo">Geology</string -->
-    <!-- TODO string name="symbol_mine">Mining</string -->
-    <!-- TODO string name="symbol_paleo">Paleo</string -->
-    <!-- TODO string name="symbol_speleo">Speleo</string -->
+    <string name="symbol_archeo">Archeologico</string>
+    <string name="symbol_bio">Biologico</string>
+    <string name="symbol_geo">Geologico</string>
+    <string name="symbol_mine">Minerario</string>
+    <string name="symbol_paleo">Paleologico</string>
+    <string name="symbol_speleo">Speleologico</string>
 
-    <!-- TODO string name="symbol_reload">Drawing Tools</string -->
+    <string name="symbol_reload">Strumenti Disegno</string>
 
 <!-- FIXME_SKETCH_3D -->    
     <!-- OK string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
@@ -771,8 +771,8 @@
   <string name="pref_survex_lrud_summary">Survex - Aggiungi LRUD alla export</string>
   <string name="pref_svg_grid_title">Griglia SVG</string>
   <string name="pref_svg_grid_summary">Aggiungi griglia alla export SVG</string>
-  <!-- TODO string name="pref_svg_in_html_title">SVG in HTML</string -->
-  <!-- TODO string name="pref_svg_in_html_summary">Embed SVG export in HTML</string -->
+  <string name="pref_svg_in_html_title">SVG nell\'HTML</string>
+  <string name="pref_svg_in_html_summary">Inserire SVG export in HTML</string>
   <string name="pref_kml_stations_title">Capisaldi KML</string>
   <string name="pref_kml_stations_summary">Capisaldi nell\'export KML</string>
   <string name="pref_kml_splays_title">Splays KML</string>
@@ -899,8 +899,8 @@
   <string name="pref_dxf_scale_title">Scala rilievo DXF</string>
   <string name="pref_dxf_scale_summary">Fattore di scala rilievo DXF</string>
   <string name="pref_dxf_scale_message">Fattore di scala per export rilievo in formato DXF</string>
-  <!-- TODO string name="pref_dxf_blocks_title">DXF splay endpoints</string -->
-  <!-- TODO string name="pref_dxf_blocks_summary">DXF splay endpoints</string -->
+  <string name="pref_dxf_blocks_title">splay endpoint DXF </string>
+  <string name="pref_dxf_blocks_summary">splay endpoint DXF </string>
   <string name="pref_thumbnail_title">Dimensione thumbnails</string>
   <string name="pref_thumbnail_summary">Dimensione immagini thumbnail</string>
   <string name="pref_thumbnail_message">Dimensione immagini thumbnail</string>
