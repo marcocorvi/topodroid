@@ -5,13 +5,13 @@
   <string-array name="unitGrid">
      <item name="meter">metros</item>
      <item name="yard">jardas</item>
-     <item name="two_tf">pés</item>
+     <item name="two_tf">2 pés</item>
   </string-array>
-  <!-- TODO string-array name="loopClosure">
-     <item name="none">Nenhum</item>
+  <string-array name="loopClosure">
+     <item name="none">Nenhuma</item>
      <item name="normal">Normal</item>
      <item name="triangles">Triângulos</item>
-  </string-array -->
+  </string-array>
 
   <string-array name="survexEol">
      <item name="lf">Linux</item>
@@ -43,11 +43,11 @@
      <item name="csurvey">cSurvey</item>
      <item name="grottolf">Grottolf</item>
      <item name="pockettopo">PocketTopo</item>
-     <item name="polygon">Polígono</item>
+     <item name="polygon">Polygon</item>
      <item name="survex">Survex</item>
      <item name="topo">Topo</item>
      <item name="visualtopo">VisualTopo</item>
-     <item name="walls">Paredes</item>
+     <item name="walls">Walls</item>
      <item name="csv">CSV</item>
      <item name="dxf">DXF</item>
   </string-array>
@@ -77,7 +77,7 @@
      <item name="basic">Básico</item>
      <item name="normal">Normal</item>
      <item name="advanced">Avançado</item>
-     <item name="expert">Experiente</item>
+     <item name="expert">Especialista</item>
      <!-- item name="complete">Completo</item -->
   </string-array>
   <string-array name="sizeButtons">
@@ -109,19 +109,19 @@
 
   <string-array name="surveyStations">
      <item name="no">Não</item>
-     <item name="for">Splays, próxima visada</item>
-     <item name="back">Splays, visada anterior</item>
-     <item name="for2">Próxima visada, splays</item>
-     <item name="back2">Visada anterior, splays</item>
+     <item name="for">Auxiliares (LRUD), próxima visada</item>
+     <item name="back">Auxiliares (LRUD), visada anterior</item>
+     <item name="for2">Próxima visada, auxiliares (LRUD)</item>
+     <item name="back2">Visada anterior, auxiliares (LRUD)</item>
      <item name="anomaly">Visada inversa</item>
      <item name="tripod">Tripé</item>
   </string-array>
 
   <string-array name="pickerType">
-     <item name="recent">Mais recente</item>
+     <item name="recent">Mais recentes</item>
      <item name="list">Lista</item>
-     <item name="grid">Grelha</item>
-     <item name="grid3">Grelha tripla</item>
+     <item name="grid">Grade</item>
+     <item name="grid3">Grade tripla</item>
   </string-array>
 
   <string-array name="sectionStations">
@@ -139,20 +139,20 @@
 
   <string-array name="deviceBT">
      <item name="0">Desativado</item>
-     <item name="1">Check na inicialização</item>
+     <item name="1">Verificado no início</item>
      <item name="2">Ativado</item>
   </string-array>
 
   <string-array name="lineStyle">
-     <item name="none">Sem estilo</item>
+     <item name="none">Detalhado</item>
      <item name="two">Normal</item>
-     <item name="two">Grosseira</item>
+     <item name="three">Grosseiro</item>
      <item name="bezier">Bezier (curva paramétrica)</item>
   </string-array>
 
   <string-array name="groupBy">
      <item name="distance">Distância</item>
-     <item name="four">4 de cada vez</item>
+     <item name="four">4 a 4</item>
      <item name="only16">Só os primeiros 16</item>
   </string-array>
 
@@ -162,8 +162,8 @@
   </string-array>
 
   <string-array name="unitAngle">
-     <item name="degrees">graus</item>
-     <item name="grads">rads</item>
+     <item name="degrees">graus decimais</item>
+     <item name="grads">grados decimais</item>
   </string-array>
 
   <string-array name="unitLocation">
@@ -178,10 +178,10 @@
      <!-- item name="minimum">Mínimo</item -->
   </string-array>
 
-  <!-- TODO string-array name="rawCData">
+  string-array name="rawCData">
      <item name="none">Nenhum</item>
      <item name="dec">Decimal</item>
      <item name="hex">Hexadecimal</item>
-  </string-array -->
+  </string-array>
 
 </resources>

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <plurals name="calib_saturated_values">
-    <item quantity="one">ATENÇÃO. Dado saturado</item>
+    <item quantity="one">ATENÇÃO. Um dado saturado</item>
     <item quantity="other" >ATENÇÃO. %1$d dados saturados</item>
   </plurals>
   <plurals name="read_data">
     <item quantity="zero">Nenhum dado lido</item>
-    <item quantity="other">Ler %1$d dados</item>
+    <item quantity="other">%1$d dados lidos</item>
   </plurals>
   <plurals name="read_calib_data">
     <item quantity="zero">Nenhum dado de calibração lido</item>
-    <item quantity="other">Lidos %1$d dados (%2$d packets)</item>
+    <item quantity="other">%1$d dados lidos (%2$d pacotes)</item>
   </plurals>
 </resources>
