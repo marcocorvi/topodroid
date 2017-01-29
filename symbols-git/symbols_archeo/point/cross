@@ -1,6 +1,7 @@
 symbol point
 name cross
 name-it croce
+name-pt cruz
 th_name cross
 color 0xff00ff
 csurvey 0 0 0

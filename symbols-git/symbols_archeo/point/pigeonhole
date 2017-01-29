@@ -1,6 +1,7 @@
 symbol point
 name pigeonhole
 name-it buco_per_piccioni
+name-pt acesso_pombo
 th_name pigeonhole
 color 0xcccccc
 csurvey 0 0 0

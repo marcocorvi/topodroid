@@ -1,6 +1,7 @@
 symbol point
 name joint-horizontal
 name-it giunto_orizzontale
+name-pt diaclase_horizontal
 th_name joint-horizontal
 color 0xcccc99
 csurvey 0 0 0

@@ -1,6 +1,7 @@
 symbol point
 name inscription
 name-it inscrizione
+name-pt inscrição
 th_name inscription
 color 0xff00cc
 csurvey 0 0 0

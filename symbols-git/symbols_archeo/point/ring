@@ -1,6 +1,7 @@
 symbol point
 name ring
 name-it anello
+name-pt anel
 th_name ring
 color 0xcccccc
 csurvey 0 0 0

@@ -1,5 +1,6 @@
 symbol point
 name coral
+name-pt coral
 th_name coral
 color 0xff3333
 csurvey 0 0 0

@@ -1,6 +1,7 @@
 symbol point
 name striae
 name-it strie
+name-pt estria
 th_name striae
 color 0xcccc99
 csurvey 0 0 0

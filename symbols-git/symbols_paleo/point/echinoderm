@@ -1,5 +1,6 @@
 symbol point
 name echinoderm
+name-pt equinodermo
 th_name echinoderm
 color 0xcc6699 
 csurvey 0 0 0

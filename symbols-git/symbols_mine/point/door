@@ -1,5 +1,6 @@
 symbol point
 name door
+name-pt porta
 th_name door
 color 0xffffff
 csurvey 0 0 0

@@ -1,5 +1,6 @@
 symbol point
 name stop
+name-pt pare
 th_name stop
 color 0xff0000
 csurvey 0 0 0

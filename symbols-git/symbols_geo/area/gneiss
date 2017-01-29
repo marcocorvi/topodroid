@@ -1,6 +1,7 @@
 symbol area
 name gneiss
 name-it gneiss
+name-pt gnaisse
 th_name gneiss
 color 0x99ff00 0xcc
 csurvey 1 48 0 3

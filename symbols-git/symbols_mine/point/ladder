@@ -1,5 +1,6 @@
 symbol point 
 name ladder
+name-pt escada
 th_name ladder
 color 0xcccccc
 csurvey 0 0 0

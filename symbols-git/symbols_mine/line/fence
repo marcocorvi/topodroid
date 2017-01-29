@@ -1,5 +1,6 @@
 symbol line
 name fence
+name-pt cerca
 th_name fence
 group fence
 color 0xff00ff 

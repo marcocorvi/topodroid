@@ -1,5 +1,6 @@
 symbol line
 name drain
+name-pt ralo
 th_name drain
 group drain
 color 0x3399ff

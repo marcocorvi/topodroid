@@ -1,5 +1,6 @@
 symbol point
 name sponge
+name-pt esponja
 th_name sponge
 color 0xcc9966
 csurvey 0 0 0

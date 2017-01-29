@@ -2,6 +2,7 @@ symbol area
 name limestone
 name-ua вапняк
 name-de Kalk
+name-pt calcário
 name-ru известняк
 th_name limestone
 color 0x99ff00 0xcc

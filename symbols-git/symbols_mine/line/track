@@ -1,5 +1,6 @@
 symbol line
 name track
+name-pt trilha
 th_name track
 group track
 color 0xcccccc 

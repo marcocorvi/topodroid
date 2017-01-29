@@ -1,6 +1,7 @@
 symbol area
 name sandstone
 name-it arenaria
+name-pt arenito
 th_name sandstone
 color 0xcc9933 0xcc
 csurvey 1 48 0 3

@@ -1,5 +1,6 @@
 symbol point
 name gas
+name-pt gás
 th_name gas
 color 0xffff33
 csurvey 0 0 0

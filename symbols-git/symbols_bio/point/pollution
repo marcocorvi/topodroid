@@ -1,6 +1,7 @@
 symbol point
 name pollution
 name-it inquinamento
+name-pt poluição
 th_name pollution
 orientation no
 color 0xff0000

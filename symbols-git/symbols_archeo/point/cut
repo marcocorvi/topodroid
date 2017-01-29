@@ -1,6 +1,7 @@
 symbol point
 name cut
-nameit scavo
+name-it scavo
+name-pt escavação
 th_name cut
 color 0xffffff
 csurvey 0 0 0

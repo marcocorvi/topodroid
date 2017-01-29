@@ -1,6 +1,7 @@
 symbol area
 name ignous
 name-it roccia_ignea
+name-pt ígnea
 th_name ignous
 color 0xcc6633 0xcc
 csurvey 1 48 0 3

@@ -1,5 +1,6 @@
 symbol point
 name closed
+name-pt fechado
 th_name closed
 color 0xffffff
 csurvey 0 0 0

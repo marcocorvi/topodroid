@@ -1,6 +1,7 @@
 symbol point
 name pit
 name-it pozzo
+name-pt poço
 th_name pit
 color 0xff6699
 csurvey 0 0 0

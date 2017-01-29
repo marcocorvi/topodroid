@@ -1,6 +1,7 @@
 symbol point
 name joint-vertical
 name-it giunto_verticale
+name-pt diaclase_vertical
 th_name joint-vertical
 color 0xcccc99
 csurvey 0 0 0

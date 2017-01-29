@@ -1,6 +1,7 @@
 symbol area
 name lava
 name-it lava
+name-pt lava
 th_name lava
 color 0xff6666 0xcc
 csurvey 1 48 0 3

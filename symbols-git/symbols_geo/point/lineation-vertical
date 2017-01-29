@@ -1,5 +1,6 @@
 symbol point
 name lineation-vertical
+name-pt lineação_vertical
 th_name lineation-vertical
 color 0xffffff
 csurvey 0 0 0

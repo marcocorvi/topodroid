@@ -1,5 +1,6 @@
 symbol area
 name mudstone
+name-pt pelito
 th_name mudstone
 color 0xcc6666 0xcc
 csurvey 1 48 0 3

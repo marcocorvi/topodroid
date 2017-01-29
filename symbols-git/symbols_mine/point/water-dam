@@ -1,5 +1,6 @@
 symbol point
 name water-dam
+name-pt barreira_água
 th_name water-dam
 color 0x00ccff
 csurvey 0 0 0

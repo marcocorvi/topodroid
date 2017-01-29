@@ -1,6 +1,7 @@
 symbol point
 name water-drip
 name-it stillicidio
+name-pt gotejamento
 th_name u:water-drip
 orientation no
 color 0x6666ff
