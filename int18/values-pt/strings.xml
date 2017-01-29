@@ -51,7 +51,7 @@
     <string name="calibration_clino">Clinômetro</string>
 
     <string name="calib_new">Nova calibração</string>
-    <string name="calib_exists">Calibração já existe</string>
+    <string name="calib_exists">Já existe uma calibração com este nome</string>
     <string name="calib_delete">Apagar calibração </string>
     <string name="calib_device_mismatch">ATENÇÃO: Dispositivo a ser calibrado incompatível</string>
     <string name="calib_no_name">Nome exigido</string>
@@ -126,9 +126,9 @@
     <string name="few_calibs">Calibrações insuficientes</string>
 
     <string name="calib_import_title">Importação da calibração</string>
-    <string name="import_title">Importação da topografia</string>
+    <string name="import_title">Importação da topo</string>
     <!-- UNUSED string name="import_wait">Importando arquivo &#8230; Por favor aguarde &#8230;</string -->
-    <string name="import_already">Topografia já importada</string>
+    <string name="import_already">Topo já importada</string>
     <string name="import_none">Nenhum arquivo a ser importado</string>
     <string name="import_failed">Importação de arquivo falhou</string>
     <string name="file_not_found">Arquivo não encontrado</string>
@@ -226,14 +226,14 @@
     <string name="no_leg_intersection">Linha de corte não cruza nenhuma linha de visada</string>
     <string name="no_location_data">Nenhuma informação de posição</string>
     <string name="no_paired_device">Nenhum dispositivo associado.\nBusque e associe um DistoX</string>
-    <string name="no_photos">Topografia sem foto</string>
-    <string name="no_plots">Esta topografia não tem croqui,\nUse o botão Novo para criar um</string>
+    <string name="no_photos">Topo sem foto</string>
+    <string name="no_plots">Topo sem nenhum croqui registrado.\nUse o botão Novo para criar um</string>
     <string name="no_profile_overview">Nenhuma panorâmica para as projeções</string>
     <string name="no_proj4">Proj4 não instalado</string>
-    <string name="no_sensors">Não há medições na topografia</string>
+    <string name="no_sensors">Topo sem informações de sensores externos</string>
     <string name="no_sketch">Nenhum croqui 3D</string>
-    <!-- UNUSED string name="no_shots">A topografia não possui visadas.\nUsar o botão Download para baixar algumas</string -->
-    <string name="no_survey">Nenhuma topografia selecionado.</string>
+    <!-- UNUSED string name="no_shots">Nenhuma medida registrada na topo.\nUsar o botão Download para baixar algumas</string -->
+    <string name="no_survey">Nenhuma topo selecionada</string>
     <string name="no_thmanager">O aplicativo ThManager não está instalado</string>
     <string name="no_db_viewer">DB_viewer não encontrado</string>
     <string name="no_undelete">Nenhum item a ser restaurado</string>
@@ -271,7 +271,7 @@
     <string name="menu_scan">PROCURAR</string>
     <!-- UNUSED string name="menu_station">BASES</string -->
     <string name="menu_stats">ESTATÍSTICAS</string>
-    <string name="menu_survey">INFO TOPOGRAFIA</string>
+    <string name="menu_survey">INFO TOPO</string>
     <string name="menu_sync">SINCRONIZAÇÃO</string>
     <!-- UNUSED string name="menu_tdr2th2">CROQUIS TH2</string -->
     <string name="menu_validate">VALIDAR</string>
@@ -301,7 +301,7 @@
     <!-- UNUSED string name="photo_external">medida</string -->
     <!-- UNUSED string name="photo_sensor_prompt">Selecionar foto ou sensor</string -->
     <!-- UNUSED string name="photo_shot">adicionar visada</string -->
-    <!-- UNUSED string name="photo_survey">dividir topografia</string -->
+    <!-- UNUSED string name="photo_survey">dividir topo</string -->
     <!-- UNUSED string name="picture_no_station">Nome da base exigido</string -->
     <string name="plot_delete">Apagar croqui?</string>
     <string name="item_delete">Apagar item %1$s?</string>
@@ -365,16 +365,16 @@
 
     <string name="station">base</string>
     <string name="station_ask">Inserir a base no croqui?</string>
-    <string name="station_set">Continuar a topografia a partir deste ponto?</string>
+    <string name="station_set">Continuar a topo a partir deste ponto?</string>
     <!-- UNUSED string name="station_base">base de referência</string -->
     <!-- UNUSED string name="station_next">próxima base</string -->
     <!-- UNUSED string name="station_viewed">base visualizada</string -->
-    <string name="survey_exists">A topografia já existe</string>
+    <string name="survey_exists">Já existe uma topo com este nome</string>
     <!-- UNUSED string name="survey_date">aaaa.mm.dd</string -->
-    <string name="survey_delete">Apagar a topografia?</string>
-    <string name="survey_split">Dividir a topografia?</string>
+    <string name="survey_delete">Apagar a topo?</string>
+    <string name="survey_split">Dividir a topo?</string>
     <string name="survey_not_attached">ATENÇÃO: visadas desconectadas</string>
-    <string name="cannot_rename">Não é possível renomear a topografia</string>
+    <string name="cannot_rename">Não é possível renomear a topo</string>
     <string name="declination">Decli. mag.</string>
     <string name="description">descrição</string>
     <string name="name">nome</string>
@@ -390,14 +390,14 @@
     <string name="write_failed">Falha ao gravar no DistoX</string>
     <string name="write_ok">Calibração gravada no DistoX</string>
     <string name="zip_saved">Salvo </string>
-    <string name="zip_failed">Falha na compressão da topografia</string>
-    <string name="unzip_fail">Falha na decompressão da topografia</string>
-    <string name="unzip_fail_survey">Falha: nome da topografia incompatível</string>
+    <string name="zip_failed">Falha na compressão da topo</string>
+    <string name="unzip_fail">Falha na decompressão da topo</string>
+    <string name="unzip_fail_survey">Falha: nome da topo incompatível</string>
     <string name="unzip_fail_db">Falha: versão do banco de dados incompatível</string>
     <string name="unzip_fail_td">Falha: versão do TopoDroid incompatível</string>
     <!-- UNUSED string name="zoom_in_out">Abrir/fechar zoom</string -->
 
-    <string name="survey_info">Informações da topografia</string>
+    <string name="survey_info">Informações da topo</string>
     <string name="stat_stddev_m">Desvio padrão M %1$.1f %%</string>
     <string name="stat_stddev_g">Desvio padrão G %1$.1f %%</string>
     <string name="stat_stddev_dip">Desvio padrão Dip %1$.1f graus (média %2$.1f graus)</string>
@@ -575,14 +575,14 @@
     <string name="help_current_station">Bases salvas</string>
     <string name="help_azimuth">Referência da "extenção"</string>
     <string name="help_device">Inserir atividade do dispositivo</string>
-    <string name="help_add_topodroid">Criar nova topografia/calibração</string>
-    <string name="help_import">Importar arquivo zip ou arquivo de topografia</string>
+    <string name="help_add_topodroid">Criar nova topo/calibração</string>
+    <string name="help_import">Importar arquivo zip ou arquivo de topo</string>
     <string name="help_symbol">Habilitar/desabilitar ferramentas de desenho</string>
     <!-- UNUSED string name="help_therion">App Therion manager</string -->
     <!-- UNUSED string name="help_database">App Visualizador de banco de dados (SQliteViewer)</string -->
     <string name="help_prefs">Editar preferências</string>
     <string name="help_log">Ativar/desativar configurações de log</string>
-    <string name="help_join_survey">topografia cooperativa</string>
+    <string name="help_join_survey">topo colaborativa</string>
     <string name="help_info_topodroid">Informações sobre o TopoDroid</string>
     <string name="help_download">Download de dados</string>
     <!-- UNUSED string name="help_splay">Atribuir bases à visadas auxiliares automaticamente</string -->
@@ -591,24 +591,24 @@
     <string name="help_validate">Validar calibração</string>
     <string name="help_overview">Atividades no contorno</string>
     <string name="help_plot">Inserir atividade no croqui</string>
-    <string name="help_note">Editar comentários da topografia</string>
+    <string name="help_note">Editar comentários da topo</string>
     <string name="help_bluetooth">Reiniciar conexão Bluetooth</string>
     <string name="help_remote">Controlo remoto do DistoX</string>
     <string name="help_add_shot">Criar uma medida inserindo manualmente os dados</string>
-    <string name="help_info_shot">Estatísticas da topografia</string>
-    <string name="help_survey_info">Informações sobre a topografia</string>
+    <string name="help_info_shot">Estatísticas da topo</string>
+    <string name="help_survey_info">Informações sobre a topo</string>
     <string name="help_undelete">Recuperar itens apagados</string>
     <string name="help_photo">Fotos</string>
-    <string name="help_sensor">Medições</string>
+    <string name="help_sensor">Sensores externos</string>
     <string name="help_3d">App de visualização 3D (Cave3D)</string>
     <string name="help_move">Modo mover/zoom</string>
     <string name="help_draw">Modo desenhar</string>
     <string name="help_edit">Modo editar itens existentes</string>
     <string name="help_refs">Definir referências do croqui</string>
-    <string name="help_rename">Mudar nome da topografia</string>
+    <string name="help_rename">Mudar nome da topo</string>
     <string name="help_plot_rename">Renomear/apagar croqui</string>
     <string name="help_plot_switch">Trocar croqui</string>
-    <string name="help_stats">Estatísticas da topografia</string>
+    <string name="help_stats">Estatísticas da topo</string>
     <string name="help_save_plot">Exportar croqui</string>
     <!-- UNUSED string name="help_tdr2th2">Converter arquivos binários do croqui em th2</string -->
     <string name="help_toggle_plot">Alternar entre planta baixa e corte</string>
@@ -634,11 +634,11 @@
 -->
     <string name="help_manual_calibration">Calibração manual dos instrumentos</string>
     <string name="help_note_plot">Editar as propriedades do item selecionado do croqui</string>
-    <!-- UNUSED string name="help_save">Salvar mudanças nas informações da topografia</string -->
+    <!-- UNUSED string name="help_save">Salvar mudanças nas informações da topo</string -->
     <string name="help_save_calib">Salvar alterações nas informações de calibração</string>
-    <string name="help_export_survey">Exportar topografia</string>
+    <string name="help_export_survey">Exportar topo</string>
     <string name="help_loc">Coordenada GPS</string>
-    <string name="help_delete_survey">Apagar topografia</string>
+    <string name="help_delete_survey">Apagar topo</string>
     <string name="help_delete_calib">Apagar calibração</string>
     <string name="help_detach">Limpar escolha atual do DistoX</string>
     <string name="help_firmware">Atualizador de firmware do DistoX2</string>
@@ -695,7 +695,7 @@
     <string name="title_manual">Manual do usuário do TopoDroid</string>
     <string name="title_mode">Modo de visualização</string>
     <string name="title_move">Movendo</string>
-    <string name="title_note">Comentários da topografia</string>
+    <string name="title_note">Comentários da topo</string>
     <string name="title_photo">Foto/Medições</string>
     <string name="title_photo_comment">Comentário da foto</string>
     <string name="title_plot_save">Exportar croqui</string>
@@ -703,7 +703,7 @@
     <string name="title_profile_flip">Virar o corte?</string>
     <string name="title_projection">Azimute do corte projetado %1$d</string>
     <string name="title_refs">Referências do croqui</string>
-    <string name="title_scraps">Croquis da topografia</string>
+    <string name="title_scraps">Croquis da topo</string>
     <string name="title_select">Selecionar</string>
     <string name="title_shift">Deslocar</string>
     <string name="title_shot_delete">Apagar medida?</string>
@@ -711,15 +711,15 @@
 
     <string name="title_stats">Estatísticas</string>
     <string name="title_step">Passo</string>
-    <string name="title_survey">Informações da topografia</string>
-    <string name="title_survey_new">Nova topografia</string>
-    <string name="title_survey_export">Exportar topografia</string>
-    <string name="title_survey_rename">Renomear topografia</string>
+    <string name="title_survey">Informações da topo</string>
+    <string name="title_survey_new">Nova topo</string>
+    <string name="title_survey_export">Exportar topo</string>
+    <string name="title_survey_rename">Renomear topo</string>
     <string name="title_plot_rename">Renomear croqui</string>
     <string name="title_calib_export">Exportar calibração</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-  <string name="pref_cat_survey">DADOS Da TOPOGRAFIA</string>
+  <string name="pref_cat_survey">DADOS DA TOPO</string>
   <string name="pref_cat_drawing">DESENHANDO CROQUI</string>
   <string name="pref_cat_import_export">IMPORTAR/EXPORTAR</string>
   <string name="pref_cat_calib">CALIBRAÇÕES</string>
@@ -736,14 +736,14 @@
   <!-- UNUSED string name="pref_bootloader_summary">Ativar bootloader</string -->
   <string name="pref_mkeyboard_title">Teclado</string>
   <string name="pref_mkeyboard_summary">Habilitar teclados customizados</string>
-  <string name="pref_cosurvey_title">Topografia cooperativa</string>
-  <string name="pref_cosurvey_summary">Habilitar topografia cooperativa</string>
+  <string name="pref_cosurvey_title">Topo colaborativa</string>
+  <string name="pref_cosurvey_summary">Habilitar topo colaborativa</string>
   <string name="pref_export_shots_title">Exportação padrão de dados</string>
   <string name="pref_export_shots_summary">Formato padrão de dados para exportação</string>
   <string name="pref_export_plot_title">Exportação padrão de croqui</string>
   <string name="pref_export_plot_summary">Formato padrão de exportação de croqui</string>
   <string name="pref_therion_maps_title">Mapas de Therion primeiro</string>
-  <string name="pref_therion_maps_summary">Mapas de Therion antes dos dados da topografia</string>
+  <string name="pref_therion_maps_summary">Mapas de Therion antes dos dados da topo</string>
   <string name="pref_extra_buttons_title">Nível de recursos</string>
   <string name="pref_extra_buttons_summary">Nível de recursos habilitados</string>
   <string name="pref_size_buttons_title">Tamanho botões</string>
@@ -845,9 +845,9 @@
   <string name="pref_mag_thr_title">Tolerância campo magnético</string>
   <string name="pref_mag_thr_summary">Percentual de tolerância para valores do campo magnético</string>
   <string name="pref_mag_thr_message">Percentual de tolerância para valores do campo magnético</string>
-  <string name="pref_dip_thr_title">Tolerância imersão magnética</string>
-  <string name="pref_dip_thr_summary">Percentual de tolerância para valores do imersão magnética</string>
-  <string name="pref_dip_thr_message">Percentual de tolerância para valores do imersão magnética</string>
+  <string name="pref_dip_thr_title">Tolerância declinação magnética</string>
+  <string name="pref_dip_thr_summary">Percentual de tolerância para valores da declinação magnética</string>
+  <string name="pref_dip_thr_message">Percentual de tolerância para valores da declinação magnética</string>
 
   <string name="pref_leg_title">Tolerância visadas</string>
   <string name="pref_leg_summary">Tolerância entre as medições de uma visada</string>
@@ -862,8 +862,8 @@
   <string name="pref_azimuth_manual_summary">Referência Esq/Dir de "extensão" fixa ou configurável</string>
 
   <string name="pref_team_title">Equipe</string>
-  <string name="pref_team_summary">Equipe da topografia</string>
-  <string name="pref_team_message">Equipe padrão para novas topografia</string>
+  <string name="pref_team_summary">Equipe da topo</string>
+  <string name="pref_team_message">Equipe padrão para novas topos</string>
 
   <string name="pref_ethr_title">Limite vertical de medida auxiliar</string>
   <string name="pref_ethr_summary">Região de medidas auxiliares verticais</string>
@@ -1061,7 +1061,7 @@
   <string name="pref_log_calib">Calibração</string>
   <string name="pref_log_comm">Comunicação BT</string>
   <string name="pref_log_csurvey">cSurvey</string>
-  <string name="pref_log_data">Dados da topografia</string>
+  <string name="pref_log_data">Dados da topo</string>
   <string name="pref_log_db">Banco de dados</string>
   <string name="pref_log_debug">Debug</string>
   <string name="pref_log_device">Janela do dispositivo</string>
