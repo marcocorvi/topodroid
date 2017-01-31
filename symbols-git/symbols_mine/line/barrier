@@ -1,5 +1,6 @@
 symbol line
 name barrier
+name-pt barreira
 th_name barrier
 group barrier
 color 0xffcc33 

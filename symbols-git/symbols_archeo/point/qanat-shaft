@@ -1,6 +1,7 @@
 symbol point
 name qanat-shaft
 name-it pozzo_per_qanat
+name-pt poço_qanat
 th_name qanat-shaft
 color 0xff6699
 csurvey 0 0 0

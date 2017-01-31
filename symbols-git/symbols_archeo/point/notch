@@ -1,6 +1,7 @@
 symbol point
 name notch
 name-it incastro
+name-pt entalhe
 th_name notch
 color 0x33ffcc
 csurvey 0 0 0

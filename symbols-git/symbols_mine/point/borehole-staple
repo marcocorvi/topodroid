@@ -1,5 +1,6 @@
 symbol point
 name borehole-staple
+name-pt sondagem_lacrada
 th_name borehole-staple
 color 0xff9933
 csurvey 0 0 0

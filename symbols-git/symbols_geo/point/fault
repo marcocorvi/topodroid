@@ -1,6 +1,7 @@
 symbol point
 name fault
 name-it faglia
+name-pt falha
 th_name fault
 color 0xff6666
 csurvey 0 0 0

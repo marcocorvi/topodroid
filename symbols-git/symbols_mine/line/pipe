@@ -1,5 +1,6 @@
 symbol line
 name pipe
+name-pt cano
 th_name pipe
 group pipe
 color 0x33ff66 0xff

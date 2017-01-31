@@ -1,5 +1,6 @@
 symbol point
 name lineation-horizontal
+name-pt lineação_horizontal
 th_name lineation-horizontal
 color 0xffffff
 csurvey 0 0 0

@@ -1,5 +1,6 @@
 symbol line
 name phone
+name-pt telefone
 th_name phone
 group phone
 color 0x33ff66 0xff

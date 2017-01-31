@@ -1,5 +1,6 @@
 symbol point
 name topo-station
+name-pt base_topográfica
 th_name topo-station
 color 0xff9999
 csurvey 0 0 0

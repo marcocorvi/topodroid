@@ -1,5 +1,6 @@
 symbol point
 name rock-moutonnee
+name-pt rocha_moutonnée
 th_name rock-moutonnee
 color 0xcccc99
 csurvey 0 0 0

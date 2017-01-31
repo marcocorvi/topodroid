@@ -1,6 +1,7 @@
 symbol area
 name marble
 name-it marmo
+name-pt mármore
 th_name marble
 color 0x99ff00 0xcc
 csurvey 1 48 0 3

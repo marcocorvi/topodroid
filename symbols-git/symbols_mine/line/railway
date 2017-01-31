@@ -1,5 +1,6 @@
 symbol line
 name railway
+name-pt trilho
 th_name railway
 group railway
 color 0xcccccc 

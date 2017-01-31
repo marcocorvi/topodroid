@@ -1,6 +1,7 @@
 symbol point
 name mud
 name-it fango
+name-pt lama
 th_name u:mud
 orientation no
 color 0xffcc66

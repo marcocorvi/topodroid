@@ -1,6 +1,7 @@
 symbol point
 name cut-marks
 name-it scavi_sovrapposti
+name-pt marcas_escavação
 th_name cut-marks
 color 0xffffff
 csurvey 0 0 0

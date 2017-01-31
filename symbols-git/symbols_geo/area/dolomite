@@ -1,6 +1,7 @@
 symbol area
 name dolomite
 name-it dolomite
+name-pt dolomito
 th_name dolomite
 color 0x99cccc 0xcc
 csurvey 1 48 0 3

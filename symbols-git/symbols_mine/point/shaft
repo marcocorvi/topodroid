@@ -1,5 +1,6 @@
 symbol point
 name shaft
+name-pt poço
 th_name shaft
 color 0xcccccc
 csurvey 0 0 0

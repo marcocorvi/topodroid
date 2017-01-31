@@ -1,6 +1,7 @@
 symbol point
 name cave-pearl
 name-it pisolite
+name-pt pérolas
 th_name cave-pearl
 orientation no
 color 0xffffff

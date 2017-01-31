@@ -1,6 +1,7 @@
 symbol point
 name fault-left
 name-it faglia_sinistra
+name-pt falha_esquerda
 th_name fault-left
 color 0xff6666
 csurvey 0 0 0

@@ -1,5 +1,6 @@
 symbol point
 name foliation-inclined
+name-pt foliação_oblíqua
 th_name foliation-inclined
 orientation yes
 color 0xcccc99

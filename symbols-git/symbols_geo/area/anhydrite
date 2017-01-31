@@ -1,6 +1,7 @@
 symbol area
 name anhydrite
 name-it anidrite
+name-pt anidrita
 th_name anhydrite
 color 0xcccccc 0xcc
 csurvey 1 48 0 3

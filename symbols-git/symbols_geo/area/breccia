@@ -1,6 +1,7 @@
 symbol area
-name agglomerate
-th_name agglomerate
+name breccia
+name-pt brecha
+th_name breccia
 color 0x99ff00 0xcc
 csurvey 1 48 0 3
 bitmap 40 30

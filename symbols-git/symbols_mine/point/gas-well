@@ -1,5 +1,6 @@
 symbol point
 name gas-well
+name-pt poço_gás
 th_name gas-well
 color 0xffff33
 csurvey 0 0 0

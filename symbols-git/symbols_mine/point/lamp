@@ -1,5 +1,6 @@
 symbol point
 name lamp
+name-pt luminária
 th_name lamp
 color 0x33ffff
 csurvey 0 0 0

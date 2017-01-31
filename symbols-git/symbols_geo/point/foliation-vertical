@@ -1,5 +1,6 @@
 symbol point
 name foliation-vertical
+name-pt foliação_vertical
 th_name foliation-vertical
 color 0xcccc99
 csurvey 0 0 0 

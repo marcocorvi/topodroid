@@ -1,5 +1,6 @@
 symbol point
 name air-green
+name-pt ar_verde
 th_name air-green
 color 0x00ff00
 csurvey 0 0 0 
