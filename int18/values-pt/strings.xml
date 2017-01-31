@@ -466,8 +466,9 @@
     <!-- UNUSED string name="button_regroup"   >Reagrupar   </string -->
     <string name="button_dump"      >Baix  ar  </string>
     <string name="button_replace"   >Substituir</string>
-    <string name="button_reset"     >Reiniciar <string>
+    <string name="button_reset"     >Reiniciar </string>
     <string name="button_left"      >ESQUERDA</string>
+
     <string name="button_right"     >DIREITA</string>
     <string name="button_clear"     >Limpar    </string>
     <string name="button_save"      >Salvar    </string>
