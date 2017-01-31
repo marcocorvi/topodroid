@@ -1192,10 +1192,15 @@ public class TopoDroidApp extends Application
   public void assignStationsAfter( DistoXDBlock blk0, List<DistoXDBlock> list )
   { 
     // if ( TDSetting.mSurveyStations < 0 ) return;
+    if ( TDSetting.mTRobotShot && TDSetting.mLevelOverAdvanced ) {
+      mStationName.assignStationsAfter_TRobot( mData, mSID, blk0, list );
+      return;
+    } 
     if ( TDSetting.mBacksightShot ) {
       mStationName.assignStationsAfter_Backsight( mData, mSID, blk0, list );
       return;
-    } else if ( TDSetting.mTripodShot ) {
+    } 
+    if ( TDSetting.mTripodShot ) {
       mStationName.assignStationsAfter_Tripod( mData, mSID, blk0, list );
       return;
     }
@@ -1208,10 +1213,15 @@ public class TopoDroidApp extends Application
   public void assignStations( List<DistoXDBlock> list )
   { 
     // if ( TDSetting.mSurveyStations < 0 ) return;
+    if ( TDSetting.mTRobotShot && TDSetting.mLevelOverAdvanced ) {
+      mStationName.assignStations_TRobot( mData, mSID, list );
+      return;
+    } 
     if ( TDSetting.mBacksightShot ) {
       mStationName.assignStations_Backsight( mData, mSID, list );
       return;
-    } else if ( TDSetting.mTripodShot ) {
+    } 
+    if ( TDSetting.mTripodShot ) {
       mStationName.assignStations_Tripod( mData, mSID, list );
       return;
     }

@@ -112,6 +112,7 @@
      <item name="back2">后测主线, 射线</item>
      <item name="anomaly">后测</item>
      <item name="tripod">脚架测量</item>
+     <item name="toporobot">TopoRobot</item>
   </string-array>
 
   <string-array name="pickerType">

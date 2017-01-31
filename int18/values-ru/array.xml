@@ -108,6 +108,7 @@
      <item name="back2">На пред. пикет потом ЛПВН</item>
      <item name="anomaly">На пред. пикет ЛПВН на след. пикет</item>
      <item name="tripod">Штатив</item>
+     <item name="toporobot">TopoRobot</item>
   </string-array>
 
   <string-array name="pickerType">

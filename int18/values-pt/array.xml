@@ -115,6 +115,7 @@
      <item name="back2">Visada anterior, auxiliares (LRUD)</item>
      <item name="anomaly">Visada inversa</item>
      <item name="tripod">Tripé</item>
+     <item name="toporobot">TopoRobot</item>
   </string-array>
 
   <string-array name="pickerType">
@@ -178,7 +179,7 @@
      <!-- item name="minimum">Mínimo</item -->
   </string-array>
 
-  string-array name="rawCData">
+  <string-array name="rawCData">
      <item name="none">Nenhum</item>
      <item name="dec">Decimal</item>
      <item name="hex">Hexadecimal</item>

@@ -107,6 +107,7 @@
      <item name="back2">Battuta inversa, splay</item>
      <item name="anomaly">Doppia battuta</item>
      <item name="tripod">Tripod</item>
+     <item name="toporobot">TopoRobot</item>
   </string-array>
 
   <string-array name="pickerType">

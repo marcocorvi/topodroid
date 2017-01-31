@@ -833,8 +833,8 @@
   <string name="pref_eraseness_message">Sketch item erasing radius</string>
   <string name="pref_min_shift_title">Shift sensitivity</string>
   <string name="pref_min_shift_message">Shift sensitivity</string>
-  <string name="pref_pointing_title">Pointing radius</string>
-  <string name="pref_pointing_message">Pointing radius</string>
+  <string name="pref_pointing_title">Pointing tolerance</string>
+  <string name="pref_pointing_message">Touch-down/lift-up tolerance for point selection</string>
   <string name="pref_vert_splay_title">Splay dash clino threshold</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Splay over this inclination are dashed</string -->
   <string name="pref_vert_splay_message">Splay over this inclination are dashed</string>

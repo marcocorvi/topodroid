@@ -325,6 +325,7 @@ class TDSetting
   static boolean mBacksight     = false;    // whether to check backsight
   static boolean mBacksightShot = false;    // backsight shooting policy
   static boolean mTripodShot    = false;    // tripod shooting policy
+  static boolean mTRobotShot    = false;    // TopoRobot shooting policy
   static boolean mMagAnomaly    = false;    // local magnetic anomaly survey
   static float   mSplayVertThrs = 80;
   static boolean mAzimuthManual = false;    // whether to manually set extend / or use reference azimuth
@@ -734,7 +735,6 @@ class TDSetting
     mExportStationsPrefix =  prefs.getBoolean( key[k++], false ); // DISTOX_STATION_PREFIX
     mStationNames = (prefs.getString( key[k++], "alpha").equals("number"))? 1 : 0; // DISTOX_STATION_NAMES
     mTRobotNames =  prefs.getBoolean( key[k++], false ); // DISTOX_TROBOT_NAMES
-   
 
     // setZoomControls( prefs.getBoolean( key[k++], false ) ); // DISTOX_ZOOM_CONTROLS
     setZoomControls( prefs.getString( key[k++], "1"), app.isMultitouch() ); // DISTOX_ZOOM_CTRL
@@ -1172,19 +1172,20 @@ class TDSetting
     } catch ( NumberFormatException e ) {
       mSurveyStations = 1;
     }
-    if ( mSurveyStations == 6 ) {  // TRIPOD
-      mBacksightShot   = false;
-      mTripodShot      = true;
-      mSurveyStations  = 1;
-      mShotAfterSplays = true;
+    /* defaults */
+    mTRobotShot   = false;
+    mBacksightShot   = false;
+    mTripodShot      = false;
+    mShotAfterSplays = true;
+    mSurveyStations  = 1;
+    if ( mSurveyStations == 7 ) {  // TOPOROBOT
+      mTRobotShot = true;
+      // FIXME Toast.makeToast( mContext, "WARNING TopoRobot policy is experimental", Toast.LENGTH_LONG).show();
+    } else if ( mSurveyStations == 6 ) {  // TRIPOD
+      mTripodShot = true;
     } else if ( mSurveyStations == 5 ) { // BACKSIGHT
-      mBacksightShot   = true;
-      mTripodShot      = false;
-      mSurveyStations  = 1;
-      mShotAfterSplays = true;
+      mBacksightShot = true;
     } else {
-      mBacksightShot   = false;
-      mTripodShot      = false;
       mShotAfterSplays = ( mSurveyStations <= 2 );
       if ( mSurveyStations > 2 ) mSurveyStations -= 2;
     }

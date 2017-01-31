@@ -106,6 +106,7 @@
      <item name="back2">Inversa, primero anchuras</item>
      <item name="anomaly">Punto respaldado</item>
      <item name="tripod">Tripode</item>
+     <item name="toporobot">TopoRobot</item>
   </string-array>
 
   <string-array name="pickerType">

@@ -133,6 +133,7 @@
      <item name="back2">Backward leg, splays*Hátrafelé mérés, segédpontok</item>
      <item name="anomaly">Backsight*Visszamérés</item>
      <item name="tripod">Háromláb</item>
+     <item name="toporobot">TopoRobot</item>
   </string-array>
 
   <string-array name="pickerType">

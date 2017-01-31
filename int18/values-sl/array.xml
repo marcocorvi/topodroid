@@ -103,6 +103,7 @@
      <item name="back2">viz nazaj, razširjeno</item>
      <item name="anomaly">Nazaj</item>
      <item name="tripod">Triopod</item>
+     <item name="toporobot">TopoRobot</item>
   </string-array>
 
   <!-- TODO string-array name="pickerType">

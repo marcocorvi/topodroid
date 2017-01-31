@@ -275,6 +275,7 @@
      <item name="back2">Backward leg, splays</item>
      <item name="anomaly">Backsight</item>
      <item name="tripod">Tripod</item>
+     <item name="toporobot">TopoRobot</item>
   </string-array>
   <string-array name="surveyStationsValue">
      <item name="no">0</item>
@@ -284,6 +285,7 @@
      <item name="back2">4</item>
      <item name="anomaly">5</item>
      <item name="tripod">6</item>
+     <item name="toporobot">7</item>
   </string-array>
 
   <string-array name="pickerType">
