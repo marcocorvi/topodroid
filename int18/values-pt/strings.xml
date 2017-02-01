@@ -870,8 +870,8 @@
   <string name="pref_ethr_summary">Região de medidas auxiliares verticais</string>
   <string name="pref_ethr_message">Ângulo máximo a partir dos 90° para considerar como vertical uma medida auxiliar [deg]</string>
   <string name="pref_vthr_title">Limite vertical medidas</string>
-  <string name="pref_vthr_summary">Limite vertical EDTC/WENS</string>
-  <string name="pref_vthr_message">Limite inclinação vertical de medidas para definição EDTC/WENS</string>
+  <string name="pref_vthr_summary">Limite vertical EDTC/NSLO</string>
+  <string name="pref_vthr_message">Limite inclinação vertical de medidas para definição EDTC/NSLO</string>
   <string name="pref_plan_vthr_title">Limite medida planta baixa</string>
   <!-- UNUSED string name="pref_plan_vthr_summary">Limite de medida auxiliar na visualização da planta baixa</string -->
   <string name="pref_plan_vthr_message">Esconder medidas auxiliares com grande inclinação na visualização da planta baixa</string>
