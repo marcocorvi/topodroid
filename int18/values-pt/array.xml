@@ -109,10 +109,10 @@
 
   <string-array name="surveyStations">
      <item name="no">Não</item>
-     <item name="for">Auxiliares (EDTB), próxima visada</item>
-     <item name="back">Auxiliares (EDTB), visada anterior</item>
-     <item name="for2">Próxima visada, auxiliares (EDTB)</item>
-     <item name="back2">Visada anterior, auxiliares (EDTB)</item>
+     <item name="for">Auxiliares (EDTC), próxima visada</item>
+     <item name="back">Auxiliares (EDTC), visada anterior</item>
+     <item name="for2">Próxima visada, auxiliares (EDTC)</item>
+     <item name="back2">Visada anterior, auxiliares (EDTC)</item>
      <item name="anomaly">Visada inversa</item>
      <item name="tripod">Tripé</item>
      <item name="toporobot">TopoRobot</item>

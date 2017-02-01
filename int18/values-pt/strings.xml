@@ -117,7 +117,7 @@
     <string name="extend_right">Direita</string>
     <string name="extend_vert">Vertical</string>
     <!-- UNUSED string name="external_prompt">Inserir medição</string -->
-    <string name="splay_at_to">Dados EDTB na base PARA</string>
+    <string name="splay_at_to">Dados EDTC na base PARA</string>
 
     <string name="few_data">Não há dados suficientes</string>
     <string name="few_iter">Falha ao iterar</string>
@@ -205,7 +205,7 @@
     <string name="barrier_del">Mostrar as visadas seguintes</string>
     <string name="hidden_add">Esconder as visadas anteriores</string>
     <string name="hidden_del">Mostrar as visadas anteriores</string>
-    <string name="splays_toggle">Alternar exibição das medidas auxiliares (EDTB)</string>
+    <string name="splays_toggle">Alternar exibição das medidas auxiliares (EDTC)</string>
     <string name="fixed">fixa</string>
     <string name="painted">pintada</string>
 
@@ -421,7 +421,7 @@
     <string name="hide_blank">Medidas vazias</string>
     <string name="hide_leg">Visadas repetidas</string>
     <string name="hide_ids">IDs das medidas</string>
-    <string name="hide_splay">Medidas auxiliares (EDTB)</string>
+    <string name="hide_splay">Medidas auxiliares (EDTC)</string>
 
     <string name="plan">PLANTA</string>
     <string name="extended">SECÇÃO</string>
@@ -757,15 +757,15 @@
   <string name="pref_station_prefix_summary">Exportar prefixo de bases (Compass)</string>
   <string name="pref_trobot_names_title">Nomes bases TopoRobot</string>
   <string name="pref_trobot_names_summary">Os nomes das bases usam o estilo do TopoRobot</string>
-  <string name="pref_ortho_lrud_title">Ângulo med. aux. EDTB Compass</string>
-  <string name="pref_ortho_lrud_summary">Ângulo mínimo entre uma medida auxiliar e uma visada para ser uma medida auxiliar EDTB</string>
-  <string name="pref_ortho_lrud_message">Ângulo mínimo entre uma medida auxiliar e uma visada para ser EDTB</string>
+  <string name="pref_ortho_lrud_title">Ângulo med. aux. EDTC Compass</string>
+  <string name="pref_ortho_lrud_summary">Ângulo mínimo entre uma medida auxiliar e uma visada para ser uma medida auxiliar EDTC</string>
+  <string name="pref_ortho_lrud_message">Ângulo mínimo entre uma medida auxiliar e uma visada para ser EDTC</string>
   <string name="pref_survex_eol_title">Terminação linha Survex/Topo</string>
   <string name="pref_survex_eol_summary">Terminação de linha Survex/Topo</string>
   <string name="pref_survex_splay_title">Base med. aux. Survex</string>
   <string name="pref_survex_splay_summary">Incluir a base PARA à medida auxiliar no Survex</string>
-  <string name="pref_survex_lrud_title">EDTB Survex</string>
-  <string name="pref_survex_lrud_summary">Incluir EDTB à exportação do Survex</string>
+  <string name="pref_survex_lrud_title">EDTC Survex</string>
+  <string name="pref_survex_lrud_summary">Incluir EDTC à exportação do Survex</string>
   <string name="pref_svg_grid_title">Grade SVG</string>
   <string name="pref_svg_grid_summary">Incluir grade no arquivo SVG exportado</string>
   <string name="pref_svg_in_html_title">SVG em HTML</string>
@@ -870,8 +870,8 @@
   <string name="pref_ethr_summary">Região de medidas auxiliares verticais</string>
   <string name="pref_ethr_message">Ângulo máximo a partir dos 90° para considerar como vertical uma medida auxiliar [deg]</string>
   <string name="pref_vthr_title">Limite vertical medidas</string>
-  <string name="pref_vthr_summary">Limite vertical EDTB/WENS</string>
-  <string name="pref_vthr_message">Limite inclinação vertical de medidas para definição EDTB/WENS</string>
+  <string name="pref_vthr_summary">Limite vertical EDTC/WENS</string>
+  <string name="pref_vthr_message">Limite inclinação vertical de medidas para definição EDTC/WENS</string>
   <string name="pref_plan_vthr_title">Limite medida planta baixa</string>
   <!-- UNUSED string name="pref_plan_vthr_summary">Limite de medida auxiliar na visualização da planta baixa</string -->
   <string name="pref_plan_vthr_message">Esconder medidas auxiliares com grande inclinação na visualização da planta baixa</string>
