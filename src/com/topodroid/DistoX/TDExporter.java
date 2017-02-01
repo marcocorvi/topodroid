@@ -1802,70 +1802,71 @@ class TDExporter
   // one of 6 14 31 83 115 164 211
   static int randomColor()
   {
-    return 211;
+    return 5;
   }
 
   static String exportSurveyAsGtx( long sid, DataHelper data, SurveyInfo info, String filename )
   {
+    String date = info.date.replaceAll( ".", "-" );
     try {
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
 
-      pw.format("<Genaral>\n");
-      pw.format("<Cavite FolderName=\"%s\" CoordsSystem=\"\" CoordsSystemEPSG=\"4978\" FolderObservcations=\"\"/>\n",
-                info.name );
-      pw.format("</General>\n");
+      pw.format("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<GHTopo>\n");
+      pw.format("  <General>\n");
+      pw.format("    <Cavite FolderName=\"%s created by TopoDroid v %s\" CoordsSystem=\"\" CoordsSystemEPSG=\"4978\" FolderObsercations=\"\"/>\n",
+                TopoDroidUtil.getDateString("yyyy/MM/dd"), TopoDroidApp.VERSION );
+      pw.format("  </General>\n");
 
       List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
       TRobot trobot = new TRobot( list );
       // trobot.dump(); // DEBUG
 
       List< FixedInfo > fixeds = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
-      pw.format("<Entrances>\n");
-      int ce = 0;
-      for ( FixedInfo fixed : fixeds ) {
-        ++ ce;
-        TRobotPoint pt = trobot.getPoint( fixed.name );
-        if ( pt != null ) {
-          pw.format(Locale.US, "<Entrance X=\"%.10f\" Y=\"%.10f\" Z=\"%.2f\" ", fixed.lng, fixed.lat, fixed.alt );
-          pw.format("Name=\"%s\" Numero=\"%d\" Comments=\"%s\" RefPoint=\"%d\" RefSerie=\"%d\" IdTerrain=\"\" />\n",
-                 fixed.name, ce, fixed.comment, pt.mNumber, pt.mSeries.mNumber );
+      if ( fixeds.size() > 0 ) {
+        pw.format("  <Entrances>\n");
+        int ce = 0;
+        for ( FixedInfo fixed : fixeds ) {
+          ++ ce;
+          TRobotPoint pt = trobot.getPoint( fixed.name );
+          if ( pt != null ) {
+            pw.format(Locale.US, "    <Entrance X=\"%.10f\" Y=\"%.10f\" Z=\"%.2f\" ", fixed.lng, fixed.lat, fixed.alt );
+            pw.format("Name=\"%s\" Numero=\"%d\" Comments=\"%s\" RefPoint=\"%d\" RefSerie=\"%d\" IdTerrain=\"\" />\n",
+                   fixed.name, ce, fixed.comment, pt.mNumber, pt.mSeries.mNumber );
+          }
         }
+        pw.format("  </Entrances>\n");
       }
-      pw.format("</Entrances>\n");
-
-      pw.format("<Networks>\n");
-      pw.format("<Network Name=\"%s\" Type=\"0\" ColorB=\"0\" ColorG=\"0\" ColorR=\"255\" Numero=\"1\" Comments=\"\"/>\n",
+      pw.format("  <Networks>\n");
+      pw.format("    <Network Name=\"%s\" Type=\"0\" ColorB=\"0\" ColorG=\"0\" ColorR=\"255\" Numero=\"1\" Comments=\"\"/>\n",
                  info.name );
-      pw.format("</Networks>\n");
+      pw.format("  </Networks>\n");
 
-      pw.format("<Codes>\n");
-      pw.format("<Code PsiL=\"0.05\" PsiP=\"1\" PsiAz=\"1\" Numero=\"1\"\n");
-      pw.format("  Comment=\"%s created by TopoDroid v %s\"\n",
-                TopoDroidUtil.getDateString("yyyy/MM/dd"), TopoDroidApp.VERSION );
-      pw.format("  FactLong=\"1\" ClinoUnit=\"360\" AngleLimite=\"100\" CompassUnit=\"360\" \n");
-      pw.format("  FuncCorrAzCo=\"0\" FuncCorrIncCo=\"0\" FuncCorrAzErrMax=\"0\" FuncCorrIncErrMax=\"0\" \n");
-      pw.format("  FuncCorrAzPosErrMax=\"0\" FuncCorrIncPosErrMax=\"0\" />\n");
-      pw.format("</Codes>\n");
+      pw.format("  <Codes>\n");
+      pw.format("    <Code PsiL=\"0.05\" PsiP=\"1.0\" PsiAz=\"1.0\" Numero=\"1\" Comment=\"\" ");
+      pw.format("FactLong=\"1\" ClinoUnit=\"360\" AngleLimite=\"100\" CompassUnit=\"360\" ");
+      pw.format("FuncCorrAzCo=\"0\" FuncCorrIncCo=\"0\" FuncCorrAzErrMax=\"0\" FuncCorrIncErrMax=\"0\" ");
+      pw.format("FuncCorrAzPosErrMax=\"0\" FuncCorrIncPosErrMax=\"0\" Type=\"0\"/>\n");
+      pw.format("  </Codes>\n");
 
-      pw.format("<Seances>\n");
-      pw.format("<Trip Date=\"%s\" Color=\"%d\" Numero=\"1\" Comments=\"%s\" ",
-        info.date, randomColor(), info.comment );
+      pw.format("  <Seances>\n");
+      pw.format("    <Trip Date=\"%s\" Color=\"%d\" Numero=\"1\" Comments=\"%s\" ",
+        date, randomColor(), info.comment );
       pw.format("Surveyor1=\"%s\" Surveyor2=\"\" Declination=\"0\" Inclination=\"0\" ModeDeclination=\"0\" />\n",
         info.team );
-      pw.format("</Seances>\n");
+      pw.format("  </Seances>\n");
 
-      pw.format("<Series>\n");
+      pw.format("  <Series>\n");
       for ( TRobotSeries series : trobot.mSeries ) {
         TRobotPoint dep = series.mBegin;
         TRobotPoint arr = series.mEnd;
-        pw.format("<Serie Name=\"\" Color=\"#000000\" PtArr=\"%d\" PtDep=\"%d\" Chance=\"0\" Numero=\"%d\" ",
+        pw.format("    <Serie Name=\"\" Color=\"#000000\" PtArr=\"%d\" PtDep=\"%d\" Chance=\"0\" Numero=\"%d\" ",
                  arr.mNumber, dep.mNumber, series.mNumber );
         pw.format("SerArr=\"%d\" SerDep=\"%d\" Network=\"1\" Raideur=\"1\" Entrance=\"0\" Obstacle=\"0\" ",
                  arr.mSeries.mNumber, dep.mSeries.mNumber );
         pw.format("Comments=\"\">\n");
-        pw.format("<Stations>\n");
+        pw.format("      <Stations>\n");
         TRobotPoint from = series.mBegin;
         for ( TRobotPoint pt : series.mPoints ) {
           // get leg from-pt and print it
@@ -1882,21 +1883,21 @@ class TDExporter
             float left  = 0;
             float down  = 0;
             float right = 0;
-            pw.format(Locale.US, "<Shot Az=\"%.2f\" ID=\"%s\" Up=\"%.2f\" Code=\"1\" Down=\"%.2f\" Incl=\"%.2f\" ",
+            pw.format(Locale.US, "        <Shot Az=\"%.2f\" ID=\"%s\" Up=\"%.2f\" Code=\"1\" Down=\"%.2f\" Incl=\"%.2f\" ",
               az, pt.mName, up, down, incl );
-            pw.format(Locale.US, "Left=\"%.2f\" Trip=\"1\" Label=\"%s\", Right=\"%.2f\" Length=\"%.3f\" ",
+            pw.format(Locale.US, "Left=\"%.2f\" Trip=\"1\" Label=\"%s\" Right=\"%.2f\" Length=\"%.3f\" ",
               left, blk.Name(), right, len );
             pw.format(Locale.US, "Secteur=\"0\" Comments=\"%s\" TypeShot=\"%d\" />\n",
               blk.mComment, ( blk.isSurface() ? 7 : 0 ) );
           }
           from = pt;
         }
-        pw.format("</Stations>\n");
-        pw.format("</Serie>\n");
+        pw.format("     </Stations>\n");
+        pw.format("   </Serie>\n");
       }
-      pw.format("</Series>\n");
+      pw.format("  </Series>\n");
 
-      pw.format("<AntennaShots>\n");
+      pw.format("  <AntennaShots>\n");
       // for all splays
       int number = 0;
       for ( DistoXDBlock blk : list ) {
@@ -1905,12 +1906,13 @@ class TDExporter
         if ( pt == null ) continue;
         ++ number;
         // Log.v("DistoX", "TRobot splay " + blk.mFrom + " nr " + number + " Pt " + pt.mSeries.mNumber + "." + pt.mNumber );
-        pw.format(Locale.US, "<AntennaShot Az=\"%.2f\" Code=\"1\" Incl=\"%.2f\" Trip=\"1\" Label=\"%s\" PtDep=\"%d\" ",
-          blk.mBearing, blk.mClino, blk.mFrom, pt.mNumber );
+        pw.format(Locale.US, "    <AntennaShot Az=\"%.2f\" Code=\"1\" Incl=\"%.2f\" Trip=\"1\" Label=\"\" PtDep=\"%d\" ",
+          blk.mBearing, blk.mClino, pt.mNumber );
         pw.format(Locale.US, "Length=\"%.3f\" Numero=\"%d\" SerDep=\"%d\" Network=\"1\" Secteur=\"1\" Comments=\"%s\" />\n",
           blk.mLength, number, pt.mSeries.mNumber, blk.mComment );
       }
-      pw.format("</AntennaShots>\n");
+      pw.format("  </AntennaShots>\n");
+      pw.format("</GHTopo>\n");
 
 
       fw.flush();

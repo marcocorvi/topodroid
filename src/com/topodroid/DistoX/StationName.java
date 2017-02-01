@@ -595,22 +595,28 @@ class StationName
     return Integer.toString( sr ) + "." + Integer.toString( pt );
   }
 
-  int getNextTRobotSeries( List<DistoXDBlock> list )
+  int getMaxTRobotSeries( List<DistoXDBlock> list )
   {
     int ret = 1;
     for ( DistoXDBlock blk : list ) {
       if ( blk.mType != DistoXDBlock.BLOCK_MAIN_LEG ) continue;
-      if ( blk.mFrom.length() > 0 )
-      {
-        String[] vals = blk.mFrom.split(".");
-        int k = Integer.parseInt( vals[0] );
-        if ( k >= ret ) ret = k+1;
+      if ( blk.mFrom.length() > 0 ) {
+        int pos = blk.mFrom.indexOf('.');
+        if ( pos > 0 ) {
+          try {
+            int r = Integer.parseInt( blk.mFrom.substring( 0, pos ) );
+            if ( r > ret ) ret = r;
+          } catch ( NumberFormatException e ) { }
+        }
       }
-      if ( blk.mTo.length() > 0 )
-      {
-        String[] vals = blk.mTo.split(".");
-        int k = Integer.parseInt( vals[0] );
-        if ( k >= ret ) ret = k+1;
+      if ( blk.mTo.length() > 0 ) {
+        int pos = blk.mTo.indexOf('.');
+        if ( pos > 0 ) {
+          try {
+            int r = Integer.parseInt( blk.mTo.substring( 0, pos ) );
+            if ( r > ret ) ret = r;
+          } catch ( NumberFormatException e ) { }
+        }
       }
     }
     return ret;
@@ -619,7 +625,7 @@ class StationName
   // WARNING TopoRobot renumbering consider all the shots in a single series
   void assignStationsAfter_TRobot( DataHelper data_helper, long sid, DistoXDBlock blk0, List<DistoXDBlock> list )
   {
-    // Log.v("DistoX", "assign stations after.  size " + list.size() );
+    // Log.v("DistoX", "TRobot assign stations after.  size " + list.size() );
     boolean increment = true;
     boolean flip = false; // whether to swap leg-stations (backsight backward shot)
     // TDLog.Log( TDLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
@@ -653,15 +659,17 @@ class StationName
 
   void assignStations_TRobot( DataHelper data_helper, long sid, List<DistoXDBlock> list )
   { 
-    // Log.v("DistoX", "assign stations. size " + list.size() );
+    int series = getMaxTRobotSeries( list );
+    // Log.v("DistoX", "TRobot assign stations. size " + list.size() );
     // TDLog.Log( TDLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
     DistoXDBlock prev = null;
-    String from = getTRobotStation( 1, 1 );
-    String to = null;
-    String station = mCurrentStationName; // if null use from
+    String from = getTRobotStation( 1, 0 );
+    String to   = getTRobotStation( 1, 1 );
+    String station = mCurrentStationName;
+    if ( station == null ) station = from;
 
-    // Log.v("DistoX", "assign stations: F <" + from + "> T <" + to + "> st. <" + station + "> Blk size " + list.size() );
-    // Log.v("DistoX", "Current St. " + ( (mCurrentStationName==null)? "null" : mCurrentStationName ) );
+    // Log.v("DistoX", "TRobot assign stations: F <" + from + "> T <" + to + "> st. <" + station + "> Blk size " + list.size() );
+    // Log.v("DistoX", "TRobot Current St. " + ( (mCurrentStationName==null)? "null" : mCurrentStationName ) );
 
     int nrLegShots = 0;
 
@@ -680,8 +688,9 @@ class StationName
             if ( nrLegShots == 0 ) {
               // checkCurrentStationName
               if ( mCurrentStationName != null ) {
+                ++series;
                 from = mCurrentStationName;
-                to   = getTRobotStation( getNextTRobotSeries(list), 1 );
+                to   = getTRobotStation( series, 1 );
               }
               nrLegShots = 2; // prev and this shot
             } else {
@@ -700,7 +709,7 @@ class StationName
             }
           } else { // distance from prev > "closeness" setting
             nrLegShots = 0;
-            blk.setName( station, "" );
+            blk.setName( ((station!=null)? station : from), "" );
             data_helper.updateShotName( blk.mId, sid, blk.mFrom, "", true ); // SPLAY
             prev = blk;
           }

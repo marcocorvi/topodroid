@@ -1172,19 +1172,22 @@ class TDSetting
     } catch ( NumberFormatException e ) {
       mSurveyStations = 1;
     }
+    // Log.v("DistoX", "survey stations " + mSurveyStations + " <" + str + ">" );
     /* defaults */
-    mTRobotShot   = false;
+    mTRobotShot      = false;
     mBacksightShot   = false;
     mTripodShot      = false;
     mShotAfterSplays = true;
-    mSurveyStations  = 1;
     if ( mSurveyStations == 7 ) {  // TOPOROBOT
       mTRobotShot = true;
+      mSurveyStations  = 1;
       // FIXME Toast.makeToast( mContext, "WARNING TopoRobot policy is experimental", Toast.LENGTH_LONG).show();
     } else if ( mSurveyStations == 6 ) {  // TRIPOD
       mTripodShot = true;
+      mSurveyStations  = 1;
     } else if ( mSurveyStations == 5 ) { // BACKSIGHT
       mBacksightShot = true;
+      mSurveyStations  = 1;
     } else {
       mShotAfterSplays = ( mSurveyStations <= 2 );
       if ( mSurveyStations > 2 ) mSurveyStations -= 2;

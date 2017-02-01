@@ -29,7 +29,7 @@ public class TRobot
     mSeries = new ArrayList< TRobotSeries >();
     mPoints = new ArrayList< TRobotPoint  >();
 
-    if ( TDSetting.mTRobotNames && TDSetting.mTRobotShot && TDSetting.mLevelOverAdvanced ) {
+    if ( TDSetting.mTRobotNames && TDSetting.mTRobotShot ) {
       populateSeries( blks );
     } else {
       buildSeries( blks );

@@ -45,6 +45,7 @@ import android.os.Messenger;
 import android.os.RemoteException;
 import android.os.Debug;
 import android.os.AsyncTask;
+import android.os.SystemClock; // FIXME TROBOT
 
 import android.app.Application;
 import android.app.KeyguardManager;
@@ -1186,13 +1187,22 @@ public class TopoDroidApp extends Application
   void clearCurrentStations() { mStationName.clearCurrentStations(); }
   String getCurrentOrLastStation( ) { return mStationName.getCurrentOrLastStation( mData, mSID); }
 
+  // FIXME TROBOT
+  static long trobotmillis = 0L;
+
   // called also by ShotWindow::updataBlockList
   // this re-assign stations to shots with station(s) already set
   //
   public void assignStationsAfter( DistoXDBlock blk0, List<DistoXDBlock> list )
   { 
+    // Log.v("DistoX", "assign stations after " + blk0.Name() + " size " + list.size() );
     // if ( TDSetting.mSurveyStations < 0 ) return;
-    if ( TDSetting.mTRobotShot && TDSetting.mLevelOverAdvanced ) {
+    if ( TDSetting.mTRobotShot ) {
+      long millis = SystemClock.uptimeMillis(); // FIXME TROBOT
+      if ( millis > trobotmillis + 10000 ) {
+        Toast.makeText( this, "WARNING TopoRobot policy is very experimental", Toast.LENGTH_SHORT).show();
+        trobotmillis = millis;
+      }
       mStationName.assignStationsAfter_TRobot( mData, mSID, blk0, list );
       return;
     } 
@@ -1212,8 +1222,14 @@ public class TopoDroidApp extends Application
   //
   public void assignStations( List<DistoXDBlock> list )
   { 
+    // Log.v("DistoX", "assign stations size " + list.size() + " TRobot " + TDSetting.mTRobotShot );
     // if ( TDSetting.mSurveyStations < 0 ) return;
-    if ( TDSetting.mTRobotShot && TDSetting.mLevelOverAdvanced ) {
+    if ( TDSetting.mTRobotShot ) {
+      long millis = SystemClock.uptimeMillis(); // FIXME TROBOT
+      if ( millis > trobotmillis + 10000 ) {
+        Toast.makeText( this, "WARNING TopoRobot policy is very experimental", Toast.LENGTH_SHORT).show();
+        trobotmillis = millis;
+      }
       mStationName.assignStations_TRobot( mData, mSID, list );
       return;
     } 

@@ -478,9 +478,11 @@ public class SurveyWindow extends Activity
           filename = mApp.exportSurveyAsCav();
           break;
         case TDConst.DISTOX_EXPORT_GRT: // Grottolf
+          Toast.makeText( this, "WARNING Grottolf export is untested", Toast.LENGTH_SHORT ).show(); 
           filename = mApp.exportSurveyAsGrt();
           break;
         case TDConst.DISTOX_EXPORT_GTX: // GHTopo
+          Toast.makeText( this, "WARNING GHTopo export is untested", Toast.LENGTH_SHORT ).show(); // FIXME TROBOT
           filename = mApp.exportSurveyAsGtx();
           break;
 
