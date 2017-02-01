@@ -45,8 +45,8 @@
     <string name="failed_snap_to_line">Nenhum ponto de fechamento de linha para atrair a borda da área</string>
     <string name="failed_snap_to_point">Nenhum ponto de fechamento para atrair o ponto</string>
 
-    <string name="calibration_title">Calibração de dispositivos</string>
-    <string name="calibration_length">Régua</string>
+    <string name="calibration_title">Calibração de instrumentos</string>
+    <string name="calibration_length">Trena</string>
     <string name="calibration_azimuth">Bússola</string>
     <string name="calibration_clino">Clinômetro</string>
 
@@ -85,7 +85,7 @@
     <string name="device_address">Endereço %1$s</string>
     <string name="device_busy">Dispositivo indisponível</string>
     <string name="device_illegal_addr">Endereço de memória inválido</string>
-    <string name="device_info">Informações do dispositivo</string>
+    <string name="device_info">Tipo de dispositivo</string>
     <string name="device_model_set">Quer realmente mudar o modelo do dispositivo?</string>
     <string name="device_none">Nenhum DistoX selecionado</string>
     <!-- UNUSED string name="device_paired">Dispositivo pareado</string -->
@@ -188,7 +188,7 @@
     <string name="error_sensor_required">Sensor exigido</string>
     <string name="error_value_required">Valor exigido</string>
     
-    <string name="group_title">Grupos de dados para calibração</string>
+    <string name="group_title">Grupos dados calibração</string>
     <string name="group_policy_four">Regra: agrupar 4 a 4</string>
     <string name="group_policy_sixteen">Regra: 4 grupos de 4, o restante isolados</string>
     <string name="group_policy_distance">Regra: agrupar por distância angular</string>
@@ -346,7 +346,7 @@
     <!-- UNUSED string name="shot_compass">bússola</string -->
     <string name="shot_delete">Apagar visada?</string>
     <string name="shot_from">de</string>
-    <string name="shot_info">Inserir dados da visada</string>
+    <string name="shot_info">Inserir medida manualmente</string>
     <!-- UNUSED string name="shot_length">comprimento</string -->
     <string name="shot_note">comentário</string>
     <string name="shot_not_found">Nenhuma visada encontrada</string>
@@ -375,7 +375,7 @@
     <string name="survey_split">Dividir a topo?</string>
     <string name="survey_not_attached">ATENÇÃO: visadas desconectadas</string>
     <string name="cannot_rename">Não é possível renomear a topo</string>
-    <string name="declination">Decli. mag.</string>
+    <string name="declination">declinação magnética</string>
     <string name="description">descrição</string>
     <string name="name">nome</string>
     <string name="team">equipe</string>
@@ -464,7 +464,7 @@
     <string name="button_read"      >Ler       </string>
     <string name="button_redo"      >Refazer   </string>
     <!-- UNUSED string name="button_regroup"   >Reagrupar   </string -->
-    <string name="button_dump"      >Baix  ar  </string>
+    <string name="button_dump"      >Baixar    </string>
     <string name="button_replace"   >Substituir</string>
     <string name="button_reset"     >Reiniciar </string>
     <string name="button_left"      >ESQUERDA</string>
@@ -488,7 +488,7 @@
     <string name="mode_station">Bases</string>
     <string name="mode_grid">Grade</string>
     <string name="mode_fixed">Referências fixas</string>
-    <string name="mode_outline">Soemnte contorno</string>
+    <string name="mode_outline">Somente contorno</string>
 
     <!-- UNUSED string name="remote_title">Controle remoto do dispositivo</string -->
     <!-- OK string name="remote_on">Laser ON</string -->
@@ -518,7 +518,7 @@
     <string name="title_sketch_new">Novo croqui 3D</string>
     <!-- UNUSED string name="title_sketch_edit">Editar superfície 3D</string -->
     <string name="title_sketch_shot">Nova visada</string>
-    <string name="title_sketch_refs">Modo de visualização</string>
+    <string name="title_sketch_refs">Tipos de medidas apresentadas</string>
     <!-- UNUSED string name="title_sketch_section_type">Tipo de cortes</string -->
     <!-- UNUSED string name="title_sketch_select">Selecionar objeto</string -->
 
@@ -575,7 +575,7 @@
     <string name="help_contour">Editar perfil</string>
     <string name="help_current_station">Bases salvas</string>
     <string name="help_azimuth">Referência da "extenção"</string>
-    <string name="help_device">Inserir atividade do dispositivo</string>
+    <string name="help_device">Editar dispositivo em uso</string>
     <string name="help_add_topodroid">Criar nova topo/calibração</string>
     <string name="help_import">Importar arquivo zip ou arquivo de topo</string>
     <string name="help_symbol">Habilitar/desabilitar ferramentas de desenho</string>
@@ -587,11 +587,11 @@
     <string name="help_info_topodroid">Informações sobre o TopoDroid</string>
     <string name="help_download">Download de dados</string>
     <!-- UNUSED string name="help_splay">Atribuir bases à visadas auxiliares automaticamente</string -->
-    <string name="help_display">Selecionar modo de visualização</string>
+    <string name="help_display">Selecionar tipos de medidas apresentadas</string>
     <string name="help_display_calib">Mudar exibição de medidas apagadas</string>
     <string name="help_validate">Validar calibração</string>
-    <string name="help_overview">Atividades no contorno</string>
-    <string name="help_plot">Inserir atividade no croqui</string>
+    <string name="help_overview">Visualização geral do croqui</string>
+    <string name="help_plot">Editar croqui</string>
     <string name="help_note">Editar comentários da topo</string>
     <string name="help_bluetooth">Reiniciar conexão Bluetooth</string>
     <string name="help_remote">Controlo remoto do DistoX</string>
@@ -603,9 +603,9 @@
     <string name="help_sensor">Sensores externos</string>
     <string name="help_3d">App de visualização 3D (Cave3D)</string>
     <string name="help_move">Modo mover/zoom</string>
-    <string name="help_draw">Modo desenhar</string>
-    <string name="help_edit">Modo editar itens existentes</string>
-    <string name="help_refs">Definir referências do croqui</string>
+    <string name="help_draw">Modo DESENHAR</string>
+    <string name="help_edit">Modo EDITAR</string>
+    <string name="help_refs">Definir tipos de medidas apresentadas</string>
     <string name="help_rename">Mudar nome da topo</string>
     <string name="help_plot_rename">Renomear/apagar croqui</string>
     <string name="help_plot_switch">Trocar croqui</string>
@@ -615,14 +615,14 @@
     <string name="help_toggle_plot">Alternar entre planta baixa e corte</string>
     <!-- UNUSED string name="help_trash">Apagar croqui</string -->
     <string name="help_undo">Desfazer última ação de desenho</string>
-    <string name="help_redo">Refazer última ação de desenho</string>
-    <string name="help_symbol_plot">Selecionar a ferramenta de desenho ativa</string>
+    <string name="help_redo">Refazer última ação desfeita de desenho</string>
+    <string name="help_symbol_plot">Selecionar ferramenta de desenho ativa</string>
     <string name="help_delete_item">Apagar objeto do croqui</string>
     <string name="help_range">Mover uma parte da linha</string>
     <!-- UNUSED string name="help_clear">Deselecionar tudo</string -->
-    <string name="help_eraser">Modo de apagamento</string>
-    <string name="help_previous">Objeto anterior na seleção</string>
-    <string name="help_next">Próximo objeto na seleção</string>
+    <string name="help_eraser">Modo APAGAR</string>
+    <string name="help_previous">Selecionar objeto anterior</string>
+    <string name="help_next">Selecionar próximo objeto</string>
     <string name="help_recover">Recarregar croqui do backup</string>
     <string name="help_zoom_fit">Encaixar croqui na tela</string>
    
@@ -643,7 +643,7 @@
     <string name="help_delete_calib">Apagar calibração</string>
     <string name="help_detach">Limpar escolha atual do DistoX</string>
     <string name="help_firmware">Atualizador de firmware do DistoX2</string>
-    <string name="help_toggle">Alternar modo calibração/normal do DistoX</string>
+    <string name="help_toggle">Alternar modo calibração do DistoX</string>
     <string name="help_sdcard">Funções de memória do DistoX</string>
     <string name="help_read">Ler e mostrar os coeficientes de calibração do DistoX</string>
     <string name="help_info_device">Informações do dispositivo</string>
@@ -672,7 +672,7 @@
     <string name="help_refine_triangle">Melhorar superfície nos lados longos</string>
   
 
-    <string name="title_azimut">Referência da extensão</string>
+    <string name="title_azimut">Referência de extensões</string>
     <string name="title_calib">Calibrações</string>
     <string name="title_coverage">Distribuição dos dados de calibração</string>
     <string name="title_coeff">Coeficientes de calibração</string>
@@ -743,7 +743,7 @@
   <string name="pref_export_shots_summary">Formato padrão de dados para exportação</string>
   <string name="pref_export_plot_title">Exportação padrão de croqui</string>
   <string name="pref_export_plot_summary">Formato padrão de exportação de croqui</string>
-  <string name="pref_therion_maps_title">Mapas de Therion primeiro</string>
+  <string name="pref_therion_maps_title">Mapas Therion primeiro</string>
   <string name="pref_therion_maps_summary">Mapas de Therion antes dos dados da topo</string>
   <string name="pref_extra_buttons_title">Nível de recursos</string>
   <string name="pref_extra_buttons_summary">Nível de recursos habilitados</string>
@@ -751,20 +751,20 @@
   <string name="pref_size_buttons_summary">Tamanho dos botões da barra de ações</string>
   <!-- UNUSED string name="pref_size_buttons_message">Defina o tamanho dos botões da barra de ações [pixels]</string -->
 
-  <string name="pref_leg_shots_title">Mínimo de medições por visada</string>
+  <string name="pref_leg_shots_title">Mínimo medições por visada</string>
   <string name="pref_leg_shots_summary">Quantidade mínimo de medições para uma visada</string>
-  <string name="pref_station_prefix_title">Prefixos de bases do Compass</string>
+  <string name="pref_station_prefix_title">Prefixos bases Compass</string>
   <string name="pref_station_prefix_summary">Exportar prefixo de bases (Compass)</string>
-  <string name="pref_trobot_names_title">Nomes de bases TopoRobot</string>
+  <string name="pref_trobot_names_title">Nomes bases TopoRobot</string>
   <string name="pref_trobot_names_summary">Os nomes das bases usam o estilo do TopoRobot</string>
-  <string name="pref_ortho_lrud_title">Ângulo da medida auxiliar EDTB para o Compass</string>
+  <string name="pref_ortho_lrud_title">Ângulo med. aux. EDTB Compass</string>
   <string name="pref_ortho_lrud_summary">Ângulo mínimo entre uma medida auxiliar e uma visada para ser uma medida auxiliar EDTB</string>
   <string name="pref_ortho_lrud_message">Ângulo mínimo entre uma medida auxiliar e uma visada para ser EDTB</string>
-  <string name="pref_survex_eol_title">Terminação de linha Survex/Topo</string>
+  <string name="pref_survex_eol_title">Terminação linha Survex/Topo</string>
   <string name="pref_survex_eol_summary">Terminação de linha Survex/Topo</string>
-  <string name="pref_survex_splay_title">Base de medida auxiliar do Survex</string>
+  <string name="pref_survex_splay_title">Base med. aux. Survex</string>
   <string name="pref_survex_splay_summary">Incluir a base PARA à medida auxiliar no Survex</string>
-  <string name="pref_survex_lrud_title">EDTB do Survex</string>
+  <string name="pref_survex_lrud_title">EDTB Survex</string>
   <string name="pref_survex_lrud_summary">Incluir EDTB à exportação do Survex</string>
   <string name="pref_svg_grid_title">Grade SVG</string>
   <string name="pref_svg_grid_summary">Incluir grade no arquivo SVG exportado</string>
@@ -789,9 +789,9 @@
   <string name="pref_wait_shot_summary">Pausa após a medição [ms]</string>
   <string name="pref_wait_data_title">Pausa dos dados [ms]</string>
   <string name="pref_wait_data_summary">Pausa após download dos dados [ms]</string>
-  <string name="pref_wait_conn_title">Tempo de espera para dados prontos [ms]</string>
+  <string name="pref_wait_conn_title">Tempo espera dados prontos [ms]</string>
   <string name="pref_wait_conn_summary">Tempo de espera até que os dados estejam prontos [ms]</string>
-  <string name="pref_conn_mode_title">Tipo de conexão de dados</string>
+  <string name="pref_conn_mode_title">Tipo conexão de dados</string>
   <string name="pref_conn_mode_summary">Tipo de conexão com DistoX</string>
   <string name="pref_auto_reconnect_title">Reconexão automática</string>
   <string name="pref_auto_reconnect_summary">Reconectar automaticamente quando a conexão for perdida</string>
@@ -819,7 +819,7 @@
   <string name="pref_cwd_title">Diretório de trabalho</string>
   <!-- UNUSED string name="pref_cwd_summary">Diretório de trabalho do Topodroid</string -->
   <!-- UNUSED string name="pref_cwd_message">Definir o diretório de trabalho do Topodroid</string -->
-  <string name="pref_pt_color_map_title">Esquema de cores do PocketTopo</string>
+  <string name="pref_pt_color_map_title">Esquema cores PocketTopo</string>
   <string name="pref_pt_color_map_summary">Esquema de cores do PocketTopo (importação PocketTopo)</string>
   <string name="pref_text_size_title">Tamanho texto</string>
   <string name="pref_text_size_summary">Tamanho do texto dos itens de lista</string>
@@ -833,7 +833,7 @@
   <string name="pref_min_shift_message">Mudar sensibilidade</string>
   <string name="pref_pointing_title">Raio do cursor</string>
   <string name="pref_pointing_message">Raio do cursor de seleção</string>
-  <string name="pref_vert_splay_title">Limite medidas auxiliares tracejadas</string>
+  <string name="pref_vert_splay_title">Limite med. aux. tracejadas</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Medidas auxiliares acima desta inclinação serão tracejadas</string -->
   <string name="pref_vert_splay_message">Medidas auxiliares acima dessa inclinação serão tracejadas</string>
 
@@ -866,13 +866,13 @@
   <string name="pref_team_summary">Equipe da topo</string>
   <string name="pref_team_message">Equipe padrão para novas topos</string>
 
-  <string name="pref_ethr_title">Limite vertical de medida auxiliar</string>
+  <string name="pref_ethr_title">Limite vertical med. aux.</string>
   <string name="pref_ethr_summary">Região de medidas auxiliares verticais</string>
   <string name="pref_ethr_message">Ângulo máximo a partir dos 90° para considerar como vertical uma medida auxiliar [deg]</string>
-  <string name="pref_vthr_title">Limite vertical das medidas</string>
+  <string name="pref_vthr_title">Limite vertical medidas</string>
   <string name="pref_vthr_summary">Limite vertical EDTB/WENS</string>
   <string name="pref_vthr_message">Limite inclinação vertical de medidas para definição EDTB/WENS</string>
-  <string name="pref_plan_vthr_title">Limite de medida na planta baixa</string>
+  <string name="pref_plan_vthr_title">Limite medida planta baixa</string>
   <!-- UNUSED string name="pref_plan_vthr_summary">Limite de medida auxiliar na visualização da planta baixa</string -->
   <string name="pref_plan_vthr_message">Esconder medidas auxiliares com grande inclinação na visualização da planta baixa</string>
   <string name="pref_init_station_title">Nome base inicial</string>
@@ -881,13 +881,13 @@
   <string name="pref_station_names_title">Nomes bases</string>
   <string name="pref_station_names_summary">Tipo de nome das bases</string>
 
-  <string name="pref_hthr_title">Limite horizontal corte h</string>
+  <string name="pref_hthr_title">Limite hor. corte h</string>
   <string name="pref_hthr_summary">Limite horizontal para cortes horizontais</string>
   <string name="pref_hthr_message">Inclinação da medida acima da qual cortes são horizontais</string>
   <string name="pref_bitmap_scale_title">Resolução PNG</string>
   <string name="pref_bitmap_scale_summary">Resolução imagem PNG croquis</string>
   <string name="pref_bitmap_scale_message">Resolução de imagem PNG de croqui exportado</string>
-  <string name="pref_bitmap_bgcolor_title">Cor de fundo PNG</string>
+  <string name="pref_bitmap_bgcolor_title">Cor fundo PNG</string>
   <string name="pref_bitmap_bgcolor_summary">Cor de fundo imagem PNG croquis</string>
   <string name="pref_bitmap_bgcolor_message">Cor de fundo de imagem PNG de croqui exportado</string>
   <string name="pref_acad_version_title">Versão AutoCAD</string>
@@ -895,45 +895,45 @@
   <string name="pref_dxf_scale_title">Escala croqui DXF</string>
   <string name="pref_dxf_scale_summary">Fator de escala croqui DXF</string>
   <string name="pref_dxf_scale_message">Fator de escala na exportação de croqui em DXF</string>
-  <string name="pref_dxf_blocks_title">Ponto final de medida auxiliar em DXF</string>
+  <string name="pref_dxf_blocks_title">Ponto final med. aux. DXF</string>
   <string name="pref_dxf_blocks_summary">Ponto final de medida auxiliar DXF</string>
-  <string name="pref_thumbnail_title">Tamanho dos Thumbnails</string>
+  <string name="pref_thumbnail_title">Tamanho Thumbnails</string>
   <string name="pref_thumbnail_summary">Tamanho das fotos miniatura</string>
   <string name="pref_thumbnail_message">Tamanho das fotos miniatura</string>
   <string name="pref_shot_timer_title">Temporização direção medidas</string>
   <string name="pref_shot_timer_summary">Segundos de espera antes de capturar a direção da medida</string>
   <string name="pref_shot_timer_message">Segundos antes de capturar direção da medida</string>
-  <string name="pref_beep_volume_title">Volume bip do temporizador</string>
+  <string name="pref_beep_volume_title">Volume bip temporizador</string>
   <string name="pref_beep_volume_summary">Percentual de volume do bip do temporizador</string>
   <string name="pref_beep_volume_message">Percentual de volume do bip do temporizador</string>
   <string name="pref_drawing_unit_title">Escala símbolos pontos</string>
   <string name="pref_drawing_unit_summary">Escala dos símbolos dos pontos</string>
   <string name="pref_drawing_unit_message">Escala dos símbolos dos pontos no desenho</string>
-  <string name="pref_unscaled_points_title">Ícones de pontos sem zoom</string>
+  <string name="pref_unscaled_points_title">Ícones pontos sem zoom</string>
   <string name="pref_unscaled_points_summary">Ícones de pontos não são alterados pelo zoom</string>
   <string name="pref_segment_title">Espaçamento entre pontos de linhas</string>
   <!-- UNUSED string name="pref_segment_summary">Distância mínima pontos de linhas</string -->
   <string name="pref_segment_message">Distância mínima entre pontos de linhas</string>
   <string name="pref_linestyle_title">Estilo linha</string>
   <string name="pref_linestyle_summary">Estilo de desenho da linha</string>
-  <string name="pref_lineacc_title">Precisão da interpolação</string>
+  <string name="pref_lineacc_title">Precisão interpolação</string>
   <string name="pref_lineacc_summary">Precisão da interpolação Bezier</string>
   <string name="pref_lineacc_message">Exatidão da interpolação cúbica das curvas Bezier</string>
-  <string name="pref_linecorner_title">Limite das quinas Bezier</string>
+  <string name="pref_linecorner_title">Limite quinas Bezier</string>
   <string name="pref_linecorner_summary">Limite das quinas Bezier</string>
   <string name="pref_linecorner_message">Limite para detecção de quinas nas curvas Bezier</string>
   <string name="pref_calib_algo_title">Algoritmo</string>
   <string name="pref_calib_algo_summary">Algoritmo de calibração</string>
-  <string name="pref_group_by_title">Regra de agrupamento</string>
+  <string name="pref_group_by_title">Regra agrupamento</string>
   <string name="pref_group_by_summary">Regra para agrupamento dos dados de calibração</string>
   <string name="pref_group_title">Tolerância grupos</string>
   <string name="pref_group_summary">Tolerância entre medidas de um mesmo grupo</string>
   <string name="pref_group_message">Tolerância entre medidas de um mesmo grupo</string>
-  <string name="pref_error_title">Erro do algoritmo</string>
+  <string name="pref_error_title">Erro algoritmo</string>
   <string name="pref_error_summary">Limite erro interrupção de calib.</string>
   <string name="pref_error_dialogtitle">Limite de erro para interrupção de calibração</string>
   <string name="pref_error_message">Limite de erro para interrupção de calibração</string>
-  <string name="pref_iter_title">Iterações do algoritmo</string>
+  <string name="pref_iter_title">Iterações algoritmo</string>
   <string name="pref_iter_summary">Máximo de iterações</string>
   <string name="pref_iter_dialogtitle">Máximo de iterações do algoritmo de calibração</string>
   <string name="pref_iter_message">Número máximo de iterações do algoritmo de calibração</string>
@@ -989,7 +989,7 @@
   <string name="pref_zoom_controls_summary">Controle do zoom em telas multitoque</string>
   <string name="pref_side_drag_title">Arrasto lateral</string>
   <string name="pref_side_drag_summary">Habilitar o arrastamento lateral na área de desenho do croqui</string>
-  <string name="pref_unit_grid_title">Unidades do croqui</string>
+  <string name="pref_unit_grid_title">Unidades croqui</string>
   <string name="pref_unit_grid_summary">Tamanho dos intervalos na grade do croqui</string>
   <string name="pref_recent_nr_title">Número ferramentas recentes</string>
   <string name="pref_recent_nr_summary">Número de ferramenta mais recentes na janela de seleção de ferramenta de desenho</string>
@@ -1105,17 +1105,17 @@
 \nPágina principal: botão MENU
 \nDocumentos: http://sites.google.com/site/speleoapps
 \nComentários, relatórios de bug, sugestões de novas funcionalidades: marco.corvi@gmail.com
-\nTradução por Angelo Roncolato (angelo.roncolato.110@gmail.com) e Rodrigo Severo (rodrigo@fabricadeideias.com)
+\nTradução para o português por Angelo Roncolato (angelo.roncolato.110@gmail.com) e Rodrigo Severo (rodrigo@fabricadeideias.com)
 \n
     </string>
 
   <string name="firmware_title">Atualizador Firmware</string>
   <string name="firmware_file_title">Arquivos Firmware</string>
   <string name="firmware_text">
-\n[1] Selecionar ou enviar um novo firmware para o DistoX ou copiar o firmware atual do DistoXpara um arquivo.
-\n[2] Selecione o arquivo a ser carregado ou salvo. Os arquivos do firmware estão na pasta bin.
+\n[1] Selecionar uma das 2 opções: "Enviar" um novo firmware para o DistoX ou "Baixar" o firmware atual do DistoXpara para um arquivo local.
+\n[2] Selecione o arquivo a ser enviado ou baixado. Os arquivos de firmware estão na pasta bin.
 \n[3] Assegure-se de que a versão do firmware seja compatível com a versão do hardware do DistoX.
-\n[4] Colocar o DistoX2 na modalidade bootloader: selecionar MAIS ou MENOS enquanto liga com a tecla DIST.
+\n[4] Colocar o DistoX2 na modalidade bootloader: manter o botão "MAIS ou MENOS" pressionado em quanto liga o Disto X com  a tecla DIST.
 \n[5] Apertar o botão OK.
 \n[6] Confirme para continuar e aguarde até a conclusão do processo.
 \n[7] Desligar o DistoX2 com a tecla CLR.
