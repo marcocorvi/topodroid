@@ -1,7 +1,7 @@
 symbol point
 name lineation-vertical
 name-pt lineação_vertical
-th_name lineation-vertical
+th_name u:lineation-vertical
 color 0xffffff
 csurvey 0 0 0
 path

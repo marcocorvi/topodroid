@@ -2,7 +2,7 @@ symbol point
 name winery
 name-it cantina
 name-pt adega
-th_name winery
+th_name u:winery
 color 0x9933ff
 csurvey 0 0 0
 path

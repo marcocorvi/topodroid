@@ -1,7 +1,7 @@
 symbol point
 name cleavage-horizontal
 name-pt clivagem_horizontal
-th_name cleavage-horizontal
+th_name u:cleavage-horizontal
 color 0xcccc99
 csurvey 0 0 0 
 path

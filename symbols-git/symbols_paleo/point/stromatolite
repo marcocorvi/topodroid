@@ -1,7 +1,7 @@
 symbol point
 name stromatolite
 name-pt estromatólito
-th_name stromatolite
+th_name u:stromatolite
 color 0xcccccc
 csurvey 0 0 0
 path

@@ -1,7 +1,7 @@
 symbol point
 name insect
 name-pt inseto
-th_name insect
+th_name u:insect
 color 0xffcc33
 csurvey 0 0 0
 path

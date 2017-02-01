@@ -1,7 +1,7 @@
 symbol line
 name drain
 name-pt ralo
-th_name drain
+th_name u:drain
 group drain
 color 0x3399ff
 width 2

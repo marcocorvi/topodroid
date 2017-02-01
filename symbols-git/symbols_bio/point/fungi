@@ -1,7 +1,7 @@
 symbol point
 name fungi
 name-pt fungo
-th_name fungi
+th_name u:fungi
 color 0xffcc66
 csurvey 0 0 0
 path

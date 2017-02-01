@@ -1,7 +1,7 @@
 symbol point
 name oil-well
 name-pt poço_óleo
-th_name oil-well
+th_name u:oil-well
 color 0x66ff99
 csurvey 0 0 0
 path

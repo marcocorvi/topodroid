@@ -1,7 +1,7 @@
 symbol point
 name brachiopod
 name-pt brachiopoda
-th_name brachiopod
+th_name u:brachiopod
 color 0xcccccc
 csurvey 0 0 0
 path

@@ -1,7 +1,7 @@
 symbol point
 name undercast
 name-pt subjacente
-th_name undercast
+th_name u:undercast
 color 0xffffff
 csurvey 0 0 0 
 path

@@ -1,7 +1,7 @@
 symbol point
 name fish
 name-pt peixe
-th_name fish
+th_name u:fish
 color 0x6699ff
 csurvey 0 0 0
 path

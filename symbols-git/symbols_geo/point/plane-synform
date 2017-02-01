@@ -1,7 +1,7 @@
 symbol point
 name plane-synform
 name-pt plano_sinforme
-th_name plane-synform
+th_name u:plane-synform
 color 0xcccccc
 csurvey 0 0 0
 path

@@ -2,7 +2,7 @@ symbol point
 name gravel
 name-it ghiaia
 name-pt cascalho
-th_name gravel
+th_name u:gravel
 color 0xcc9966
 csurvey 0 0 0
 path

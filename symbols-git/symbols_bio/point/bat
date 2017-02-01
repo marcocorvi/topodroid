@@ -1,7 +1,7 @@
 symbol point
 name bat
 name-pt morcego
-th_name bat
+th_name u:bat
 color 0xffcc33
 csurvey 0 0 0
 path

@@ -1,7 +1,7 @@
 symbol point
 name first-aid
 name-pt primeiros_socorros
-th_name first-aid
+th_name u:first-aid
 color 0xffffff
 csurvey 0 0 0 
 path

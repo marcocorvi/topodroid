@@ -1,7 +1,7 @@
 symbol point
 name echinoid
 name-pt equinóide
-th_name echinoid
+th_name u:echinoid
 color 0xcc9966
 csurvey 0 0 0
 path

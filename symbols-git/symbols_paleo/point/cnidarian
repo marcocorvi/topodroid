@@ -1,7 +1,7 @@
 symbol point
 name cnidarian
 name-pt cnidário
-th_name cnidarian
+th_name u:cnidarian
 color 0x66cc99
 csurvey 0 0 0
 path

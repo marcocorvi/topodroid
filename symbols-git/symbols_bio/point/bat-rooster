@@ -1,7 +1,7 @@
 symbol point
 name bat-rooster
 name-pt morcego_abrigo
-th_name bat-rooster
+th_name u:bat-rooster
 color 0xffffff
 csurvey 0 0 0
 path

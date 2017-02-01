@@ -1,7 +1,7 @@
 symbol point
 name foliation-inclined
 name-pt foliação_oblíqua
-th_name foliation-inclined
+th_name u:foliation-inclined
 orientation yes
 color 0xcccc99
 csurvey 0 0 0 

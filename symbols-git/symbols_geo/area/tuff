@@ -2,7 +2,7 @@ symbol area
 name tuff
 name-it tufo
 name-pt tufo
-th_name tuff
+th_name u:tuff
 color 0xff9966 0xcc
 csurvey 1 48 0 3
 bitmap 40 26

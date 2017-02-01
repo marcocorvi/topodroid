@@ -1,7 +1,7 @@
 symbol point
 name foliation-horizontal
 name-pt foliação_horizontal
-th_name foliation-horizontal
+th_name u:foliation-horizontal
 color 0xcccc99
 csurvey 0 0 0 
 path

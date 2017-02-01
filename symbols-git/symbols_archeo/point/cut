@@ -2,7 +2,7 @@ symbol point
 name cut
 name-it scavo
 name-pt escavação
-th_name cut
+th_name u:cut
 color 0xffffff
 csurvey 0 0 0
 orientation yes

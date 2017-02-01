@@ -1,7 +1,7 @@
 symbol point
 name switch
 name-pt troca
-th_name switch
+th_name u:switch
 color 0xffffff
 csurvey 0 0 0
 path

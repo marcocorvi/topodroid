@@ -2,7 +2,7 @@
 name fold
 name-it piega
 name-pt dobra
-th_name fold
+th_name u:fold
 group fold
 color 0x00cc33 0xff
 width 8

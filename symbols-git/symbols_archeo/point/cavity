@@ -2,7 +2,7 @@ symbol point
 name cavity
 name-it cavita`
 name-pt cavidade
-th_name cavity
+th_name u:cavity
 color 0xffffff
 csurvey 0 0 0
 path

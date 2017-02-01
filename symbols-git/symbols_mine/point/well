@@ -1,7 +1,7 @@
 symbol point
 name well
 name-pt cacimba
-th_name well
+th_name u:well
 color 0xffff33
 csurvey 0 0 0 
 path

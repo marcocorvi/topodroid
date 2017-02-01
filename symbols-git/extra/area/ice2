@@ -8,7 +8,7 @@ name-fr glace2
 name-de Eisfläche2
 name-ru лед2
 name-bg лед2
-th_name ice2
+th_name u:ice2
 color 0xcccccc 0x96
 csurvey 1 48 0 1
 bitmap 40 40 R R

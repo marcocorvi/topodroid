@@ -2,7 +2,7 @@ symbol point
 name hole
 name-it buco
 name-pt buraco
-th_name hole
+th_name u:hole
 color 0x66ffcc
 csurvey 0 0 0
 path

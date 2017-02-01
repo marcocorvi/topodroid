@@ -1,7 +1,7 @@
 symbol point 
 name ladder
 name-pt escada
-th_name ladder
+th_name u:ladder
 color 0xcccccc
 csurvey 0 0 0
 path

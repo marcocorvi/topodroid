@@ -1,7 +1,7 @@
 symbol point
 name stromatoporoid
 name-pt estromatoporóide
-th_name stromatoporoid
+th_name u:stromatoporoid
 color 0xcccccc
 csurvey 0 0 0
 path

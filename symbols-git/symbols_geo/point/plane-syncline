@@ -1,7 +1,7 @@
 symbol point
 name plane-syncline
 name-pt plano_sinclinal
-th_name plane-syncline
+th_name u:plane-syncline
 color 0xcccccc
 csurvey 0 0 0
 path

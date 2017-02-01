@@ -1,7 +1,7 @@
 symbol point
 name brick-earth
 name-pt solo-tijolo
-th_name brick-earth
+th_name u:brick-earth
 color 0xcc9966
 csurvey 0 0 0
 path

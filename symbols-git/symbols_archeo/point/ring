@@ -2,7 +2,7 @@ symbol point
 name ring
 name-it anello
 name-pt anel
-th_name ring
+th_name u:ring
 color 0xcccccc
 csurvey 0 0 0
 path

@@ -2,7 +2,7 @@ symbol point
 name dovecote
 name-it piccionaia
 name-pt pombal
-th_name dovecote
+th_name u:dovecote
 color 0xcccccc
 csurvey 0 0 0
 path

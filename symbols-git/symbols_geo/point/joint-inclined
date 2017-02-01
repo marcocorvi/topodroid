@@ -2,7 +2,7 @@ symbol point
 name joint-inclined
 name-it giunto-inclinato
 name-pt diaclase_oblíqua
-th_name joint-inclined
+th_name u:joint-inclined
 color 0xcccc99
 csurvey 0 0 0
 orientation yes

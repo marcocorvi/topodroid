@@ -1,7 +1,7 @@
 symbol line
 name powerline
 name-pt linha_elétrica
-th_name powerline
+th_name u:powerline
 group powerline
 color 0xff0000
 width 2

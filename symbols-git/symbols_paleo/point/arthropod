@@ -1,7 +1,7 @@
 symbol point
 name arthropod
 name-pt artrópode
-th_name arthropod
+th_name u:arthropod
 color 0xcc9933
 csurvey 0 0 0
 path

@@ -1,7 +1,7 @@
 symbol point
 name diatom
 name-pt diatomácea
-th_name diatom
+th_name u:diatom
 color 0xffffff 
 csurvey 0 0 0
 path

@@ -1,7 +1,7 @@
 symbol point
 name fire-dam
 name-pt barreira_incêndio
-th_name fire-dam
+th_name u:fire-dam
 color 0xff3333
 csurvey 0 0 0
 path

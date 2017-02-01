@@ -1,7 +1,7 @@
 symbol point
 name path
 name-pt caminho
-th_name path
+th_name u:path
 color 0xffffff
 csurvey 0 0 0
 path

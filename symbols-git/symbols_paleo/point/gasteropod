@@ -1,7 +1,7 @@
 symbol point
 name gasteropod
 name-pt gastrópode
-th_name gasteropod
+th_name u:gasteropod
 color 0xcccccc
 csurvey 0 0 0
 path

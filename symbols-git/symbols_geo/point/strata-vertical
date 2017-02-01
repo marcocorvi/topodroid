@@ -2,7 +2,7 @@ symbol point
 name strata-vertical
 name-it strati_verticali
 name-pt estrato_vertical
-th_name strata-vertical
+th_name u:strata-vertical
 color 0xcccccc
 csurvey 0 0 0
 orientation yes

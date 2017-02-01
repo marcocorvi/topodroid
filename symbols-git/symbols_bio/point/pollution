@@ -2,7 +2,7 @@ symbol point
 name pollution
 name-it inquinamento
 name-pt poluição
-th_name pollution
+th_name u:pollution
 orientation no
 color 0xff0000
 csurvey 6 6 80

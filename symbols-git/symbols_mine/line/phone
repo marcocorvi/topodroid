@@ -1,7 +1,7 @@
 symbol line
 name phone
 name-pt telefone
-th_name phone
+th_name u:phone
 group phone
 color 0x33ff66 0xff
 width 1

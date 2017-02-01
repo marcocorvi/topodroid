@@ -2,7 +2,7 @@ symbol point
 name clay
 name-it argilla
 name-pt argila
-th_name clay
+th_name u:clay
 color 0xff9933
 csurvey 0 0 0 
 path

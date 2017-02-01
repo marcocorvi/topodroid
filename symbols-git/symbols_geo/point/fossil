@@ -2,7 +2,7 @@ symbol point
 name fossil
 name-pt fóssil
 name-it fossile
-th_name fossil
+th_name u:fossil
 color 0x33ff66
 csurvey 0 0 0 
 path

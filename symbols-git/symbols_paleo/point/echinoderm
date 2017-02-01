@@ -1,7 +1,7 @@
 symbol point
 name echinoderm
 name-pt equinodermo
-th_name echinoderm
+th_name u:echinoderm
 color 0xcc6699 
 csurvey 0 0 0
 path

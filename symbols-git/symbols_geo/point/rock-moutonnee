@@ -1,7 +1,7 @@
 symbol point
 name rock-moutonnee
 name-pt rocha_moutonnée
-th_name rock-moutonnee
+th_name u:rock-moutonnee
 color 0xcccc99
 csurvey 0 0 0
 path

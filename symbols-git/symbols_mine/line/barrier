@@ -1,7 +1,7 @@
 symbol line
 name barrier
 name-pt barreira
-th_name barrier
+th_name u:barrier
 group barrier
 color 0xffcc33 
 width 2

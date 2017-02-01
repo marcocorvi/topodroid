@@ -2,7 +2,7 @@ symbol point
 name kitchen
 name-it cucina
 name-pt cozinha
-th_name kitchen
+th_name u:kitchen
 color 0xff9966
 csurvey 0 0 0
 path

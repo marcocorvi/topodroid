@@ -2,7 +2,7 @@ symbol point
 name wood
 name-it legno
 name-pt madeira
-th_name wood
+th_name u:wood
 color 0xcc9966
 csurvey 0 0 0
 path

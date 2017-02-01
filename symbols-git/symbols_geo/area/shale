@@ -2,7 +2,7 @@ symbol area
 name shale
 name-it scisto
 name-pt xisto
-th_name shale
+th_name u:shale
 color 0x99ff00 0xcc
 csurvey 1 48 0 3
 bitmap 40 13

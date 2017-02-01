@@ -1,7 +1,7 @@
 symbol point
 name plane-anticline
 name-pt plano_anticlinal
-th_name plane-anticline
+th_name u:plane-anticline
 color 0xcccccc
 csurvey 0 0 0
 path

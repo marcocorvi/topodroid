@@ -1,7 +1,7 @@
 symbol point
 name fan
 name-pt ventilador
-th_name fan
+th_name u:fan
 color 0xffffff
 csurvey 0 0 0 
 path

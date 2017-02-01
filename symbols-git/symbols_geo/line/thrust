@@ -1,7 +1,7 @@
 ﻿symbol line
 name thrust
 name-pt empurrão
-th_name thrust
+th_name u:thrust
 group thrust
 color 0x00cc33 0xff
 width 8

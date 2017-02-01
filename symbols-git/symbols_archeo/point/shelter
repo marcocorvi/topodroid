@@ -2,7 +2,7 @@ symbol point
 name shelter
 name-it riparo
 name-pt abrigo
-th_name shelter
+th_name u:shelter
 color 0xffffff
 csurvey 0 0 0
 path

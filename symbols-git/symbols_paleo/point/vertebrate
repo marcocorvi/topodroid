@@ -1,7 +1,7 @@
 ﻿symbol point
 name vertebrate
 name-pt vertebrado
-th_name vertebrate
+th_name u:vertebrate
 color 0xcc9966
 csurvey 6 6 80
 path

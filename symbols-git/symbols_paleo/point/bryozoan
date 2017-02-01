@@ -1,7 +1,7 @@
 symbol point
 name bryozoan
 name-pt bryozoa
-th_name bryozoan
+th_name u:bryozoan
 color 0x66cc99
 csurvey 0 0 0
 path

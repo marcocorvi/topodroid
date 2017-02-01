@@ -1,7 +1,7 @@
 symbol line
 name track
 name-pt trilha
-th_name track
+th_name u:track
 group track
 color 0xcccccc 
 width 2

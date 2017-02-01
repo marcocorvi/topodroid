@@ -1,7 +1,7 @@
 symbol point
 name borehole
 name-pt sondagem
-th_name borehole
+th_name u:borehole
 color 0xff9933
 csurvey 0 0 0
 path

@@ -1,7 +1,7 @@
 symbol point
 name closed
 name-pt fechado
-th_name closed
+th_name u:closed
 color 0xffffff
 csurvey 0 0 0
   moveTo 7.5 -7.5

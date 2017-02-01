@@ -1,7 +1,7 @@
 symbol line
 name railway
 name-pt trilho
-th_name railway
+th_name u:railway
 group railway
 color 0xcccccc 
 width 2

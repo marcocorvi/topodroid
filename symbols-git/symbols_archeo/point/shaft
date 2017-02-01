@@ -2,7 +2,7 @@ symbol point
 name shaft
 name-it passaggio_verticale
 name-pt passagem_vertical
-th_name shaft
+th_name u:shaft
 color 0xff6699
 csurvey 0 0 0
 path

@@ -10,7 +10,7 @@ name-ru колодец
 name-bg комин
 name-ua колодязь
 name-fa دودکش
-th_name chimney
+th_name u:chimney
 group chimney
 color 0xcc00cc 0xff
 width 1

@@ -1,7 +1,7 @@
 symbol point
 name shaft-abandoned
 name-pt poço_abandonado
-th_name shaft-abandoned
+th_name u:shaft-abandoned
 color 0xcccccc
 csurvey 0 0 0
 path

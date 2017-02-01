@@ -1,7 +1,7 @@
 symbol point
 name foraminifera
 name-pt foraminífero
-th_name foraminifera
+th_name u:foraminifera
 color 0xcccccc
 csurvey 0 0 0
 path

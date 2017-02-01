@@ -2,7 +2,7 @@ symbol point
 name foothold
 name-it pedarola
 name-pt apoio_pé
-th_name foothold
+th_name u:foothold
 color 0xcccccc
 csurvey 0 0 0
 path

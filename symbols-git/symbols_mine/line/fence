@@ -1,7 +1,7 @@
 symbol line
 name fence
 name-pt cerca
-th_name fence
+th_name u:fence
 group fence
 color 0xff00ff 
 width 2
