@@ -348,7 +348,7 @@
     <!-- UNUSED string name="shot_compass">азимут</string -->
     <string name="shot_delete">Удалить сегмент ?</string>
     <string name="shot_from">№ ОТ</string>
-    <string name="shot_info">Введите данные пикета</string>
+    <string name="shot_info">Введите данные измерений</string>
     <!-- UNUSED string name="shot_length">длинна</string -->
     <string name="shot_note">заметки</string>
     <string name="shot_not_found">Сегмент не найден</string>
