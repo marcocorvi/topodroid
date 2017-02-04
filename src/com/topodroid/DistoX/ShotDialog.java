@@ -55,7 +55,7 @@ public class ShotDialog extends MyDialog
   private DistoXDBlock mBlk;
   private DistoXDBlock mPrevBlk;
   private DistoXDBlock mNextBlk;
-  private int mPos; // item position in the parent' list
+  // private int mPos; // item position in the parent' list
 
   private Pattern mPattern; // name pattern
 
@@ -121,13 +121,13 @@ public class ShotDialog extends MyDialog
   private static int flagBearing  = MyKeyboard.FLAG_POINT;
   private static int flagClino    = MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_SIGN;
 
-  public ShotDialog( Context context, ShotWindow parent, int pos, DistoXDBlock blk,
+  public ShotDialog( Context context, ShotWindow parent, /* int pos, */ DistoXDBlock blk,
                      DistoXDBlock prev, DistoXDBlock next
                    )
   {
     super( context, R.string.ShotDialog );
     mParent = parent;
-    mPos = pos;
+    // mPos = pos;
     loadDBlock( blk, prev, next );
     // TDLog.Log( TDLog.LOG_SHOT, "Shot Dialog " + blk.toString(true) );
   }

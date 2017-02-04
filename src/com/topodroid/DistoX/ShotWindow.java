@@ -364,6 +364,7 @@ public class ShotWindow extends Activity
 
   boolean getShowIds() { return mDataAdapter.show_ids; }
 
+  // called only by updateDisplay
   private void updateShotList( List<DistoXDBlock> list, List< PhotoInfo > photos )
   {
     TDLog.Log( TDLog.LOG_SHOT, "updateShotList shots " + list.size() + " photos " + photos.size() );
@@ -378,6 +379,7 @@ public class ShotWindow extends Activity
     mDataAdapter.reviseBlockWithPhotos( photos );
   }
 
+  // called only by updateShotList
   private void processShotList( List<DistoXDBlock> list )
   {
     // Log.v("DistoX", "process shot list");
@@ -574,7 +576,7 @@ public class ShotWindow extends Activity
       //   TDLog.Log( TDLog.LOG_SHOT, "prev leg " + prevBlock.mFrom + " " + prevBlock.mTo );
       // }
     // }
-    (new ShotDialog( mActivity, this, pos, blk, prevBlock, nextBlock )).show();
+    (new ShotDialog( mActivity, this, /* pos, */ blk, prevBlock, nextBlock )).show();
   }
 
 // ---------------------------------------------------------------
