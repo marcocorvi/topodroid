@@ -86,7 +86,7 @@
     <string name="device_busy">Dispositivo indisponível</string>
     <string name="device_illegal_addr">Endereço de memória inválido</string>
     <string name="device_info">Tipo de dispositivo</string>
-    <string name="device_model_set">Quer realmente mudar o modelo do dispositivo?</string>
+    <string name="device_model_set">Quer realmente mudar o modelo do dispositivo</string>
     <string name="device_none">Nenhum DistoX selecionado</string>
     <!-- UNUSED string name="device_paired">Dispositivo pareado</string -->
     <string name="device_reset">Reiniciar memória do DistoX</string>
