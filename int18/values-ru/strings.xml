@@ -422,7 +422,7 @@
 
     <string name="hide_blank">Пустые замеры</string>
     <string name="hide_leg">Повторные измерения</string>
-    <string name="hide_ids">ID пикетов</string>
+    <string name="hide_ids">ID замеров</string>
     <string name="hide_splay">Боковые замеры</string>
 
     <string name="plan">ПЛАН</string>
