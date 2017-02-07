@@ -48,9 +48,10 @@ public class PhotoSensorsDialog extends MyDialog
   private EditText mETright;
   private EditText mETup;
   private EditText mETdown;
-  private Button mBTok;
+  private Button mBTlrud;
   private CheckBox mCBleg;
 
+  private MyCheckBox mButtonPlot;
   private MyCheckBox mButtonPhoto;
   private MyCheckBox mButtonSensor;
   private MyCheckBox mButtonShot;
@@ -96,18 +97,19 @@ public class PhotoSensorsDialog extends MyDialog
     mETright = (EditText)findViewById( R.id.shot_right );
     mETup    = (EditText)findViewById( R.id.shot_up );
     mETdown  = (EditText)findViewById( R.id.shot_down );
-    mBTok    = (Button)findViewById( R.id.btn_ok );
-    mBTok.setOnClickListener( this );
+    mBTlrud  = (Button)findViewById( R.id.btn_ok );
 
     mCBleg = (CheckBox) findViewById( R.id.leg );
     mCBleg.setChecked( false );
 
+    mButtonPlot   = new MyCheckBox( mContext, size, R.drawable.iz_plot, R.drawable.iz_plot ); 
     mButtonPhoto  = new MyCheckBox( mContext, size, R.drawable.iz_camera, R.drawable.iz_camera ); 
     mButtonSensor = new MyCheckBox( mContext, size, R.drawable.iz_sensor, R.drawable.iz_sensor ); 
     mButtonShot   = new MyCheckBox( mContext, size, R.drawable.iz_add_leg, R.drawable.iz_add_leg );
     mButtonSurvey = new MyCheckBox( mContext, size, R.drawable.iz_split, R.drawable.iz_split );
     mButtonDelete = new MyCheckBox( mContext, size, R.drawable.iz_delete, R.drawable.iz_delete );
 
+    layout4.addView( mButtonPlot, lp );
     layout4.addView( mButtonPhoto, lp );
     layout4.addView( mButtonSensor, lp );
     layout4.addView( mButtonShot, lp );
@@ -126,10 +128,26 @@ public class PhotoSensorsDialog extends MyDialog
     mTVstations.setText( mBlk.Name() );
     mTVdata.setText( mBlk.dataString( mContext.getResources().getString(R.string.shot_data) ) );
 
-    mRBfrom.setText( mBlk.mFrom );
-    mRBto.setText( mBlk.mTo );
-    mRBfrom.setChecked( true );
+    if ( mBlk.mFrom.length() > 0 ) {
+      mRBfrom.setText( mBlk.mFrom );
+      mRBfrom.setChecked( true );
+      if ( mBlk.mTo.length() > 0 ) {
+        mRBto.setText( mBlk.mTo );
+      } else {
+        mRBto.setVisibility( View.GONE );
+      }
+      mBTlrud.setOnClickListener( this );
+    } else {
+      mRBfrom.setVisibility( View.GONE );
+      mRBto.setVisibility( View.GONE );
+      mETleft.setVisibility( View.GONE );
+      mETright.setVisibility( View.GONE );
+      mETup.setVisibility( View.GONE );
+      mETdown.setVisibility( View.GONE );
+      mBTlrud.setVisibility( View.GONE );
+    }
 
+    mButtonPlot.setOnClickListener( this );
     mButtonPhoto.setOnClickListener( this );
     mButtonSensor.setOnClickListener( this );
     // mButtonExternal.setOnClickListener( this );
@@ -145,7 +163,7 @@ public class PhotoSensorsDialog extends MyDialog
     Button b = (Button) v;
     // TDLog.Log(  TDLog.LOG_INPUT, "PhotoiSensorDialog onClick() " + b.getText().toString() );
 
-    if ( b == mBTok ) { // AT-STATION LRUD
+    if ( b == mBTlrud ) { // AT-STATION LRUD
       String station = ( mRBto.isChecked() )? mBlk.mTo : mBlk.mFrom;
       // check the data
       mParent.insertLRUDatStation( station, mBlk.mBearing, mBlk.mClino, 
@@ -154,6 +172,9 @@ public class PhotoSensorsDialog extends MyDialog
         mETup.getText().toString().replace(',','.') ,
         mETdown.getText().toString().replace(',','.') 
       );
+      dismiss();
+    } else if ( b == mButtonPlot ) {       // PHOTO
+      mParent.highlightBlock( mBlk );
       dismiss();
     } else if ( b == mButtonPhoto ) {       // PHOTO
       mParent.askPhotoComment( );

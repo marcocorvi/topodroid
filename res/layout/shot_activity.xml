@@ -44,10 +44,12 @@
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        android:stackFromBottom="true"
-       android:transcriptMode="alwaysScroll"
+       android:transcriptMode="disabled"
        android:textSize="12sp"
        android:listSelector="@drawable/item"
-       android:fastScrollEnabled="true"
+       android:fastScrollEnabled="false"
+       android:scrollingCache="true"
+       android:smoothScrollbar="false"
      />  
 
 

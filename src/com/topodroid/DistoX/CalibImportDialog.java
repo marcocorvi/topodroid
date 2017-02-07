@@ -45,7 +45,7 @@ public class CalibImportDialog extends MyDialog
 
   private ArrayAdapter<String> mArrayAdapter;
   private ListView mList;
-  // private Button mBtnCancel;
+  private Button mBtnCancel;
 
   public CalibImportDialog( Context context, DeviceActivity parent )
   {
@@ -65,8 +65,8 @@ public class CalibImportDialog extends MyDialog
     mList.setOnItemClickListener( this );
     mList.setDividerHeight( 2 );
 
-    // mBtnCancel = (Button)findViewById( R.id.button_cancel );
-    // mBtnCancel.setOnClickListener( this );
+    mBtnCancel = (Button)findViewById( R.id.button_cancel );
+    mBtnCancel.setOnClickListener( this );
 
     // setTitleColor( 0x006d6df6 );
 

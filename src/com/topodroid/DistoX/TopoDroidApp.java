@@ -533,6 +533,9 @@ public class TopoDroidApp extends Application
   {
     super.onCreate();
 
+    // require large memory pre Honeycomb
+    // dalvik.system.VMRuntime.getRuntime().setMinimumHeapSize( 64<<20 );
+
     // Log.v("DistoX", "START" );
     // TDLog.Profile("TDApp onCreate");
     try {

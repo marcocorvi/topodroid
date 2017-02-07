@@ -38,6 +38,8 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
   boolean show_ids;  //!< whether to show data ids
   private LayoutInflater mLayoutInflater;
 
+  private ArrayList< View > mViews;
+
   public DistoXDBlockAdapter( Context ctx, ShotWindow parent, int id, ArrayList< DistoXDBlock > items )
   {
     super( ctx, id, items );
@@ -45,6 +47,7 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
     mParent  = parent;
     mItems   = items;
     mLayoutInflater = (LayoutInflater)ctx.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+    mViews = new ArrayList< View >();
   }
 
   /** this is not efficient because it scans the list of shots
@@ -148,15 +151,99 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
  
   private class ViewHolder
   { 
-    DistoXDBlock blk;
-    int          pos;
-    // TextView tvId;
-    // TextView tvFrom;
-    // TextView tvTo;
-    // TextView tvLength;
+    int      pos;
+    TextView tvId;
+    TextView tvFrom;
+    TextView tvTo;
+    TextView tvLength;
     // TextView tvCompass;
     // TextView tvClino;
     // TextView tvNote;
+
+    ViewHolder( TextView id, TextView from, TextView to,
+                TextView len /*, TextView ber, TextView cln, TextView note */ ) 
+    {
+      pos = 0;
+      tvId      = id;
+      tvFrom    = from;
+      tvTo      = to;
+      tvLength  = len;
+      // tvCompass = ber;
+      // tvClino   = cln;
+      // tvNote    = note;
+    }
+
+    void setViewText( DistoXDBlock b, OnLongClickListener listener )
+    {
+      tvId.setText( String.format( "%1$d", b.mId ) );
+      tvFrom.setText( b.mFrom );
+      tvTo.setText( b.mTo );
+      tvLength.setText(  String.format(Locale.US, "%1$6.2f %2$5.1f %3$5.1f %4$s", 
+        b.mLength * TDSetting.mUnitLength,
+        b.mBearing * TDSetting.mUnitAngle,
+        b.mClino * TDSetting.mUnitAngle,
+        b.toNote() ) );
+      // tvLength.setText(  String.format(Locale.US, "%1$.2f", b.mLength * TDSetting.mUnitLength ) );
+      // tvCompass.setText( String.format(Locale.US, "%1$.1f", b.mBearing * TDSetting.mUnitAngle ) );
+      // tvClino.setText(   String.format(Locale.US, "%1$.1f", b.mClino * TDSetting.mUnitAngle ) );
+      // tvNote.setText( b.toNote() );
+
+      OnClickListener toggle = new OnClickListener() {
+        public void onClick( View v ) { mParent.recomputeItems( ((TextView)v).getText().toString(), pos ); }
+      };
+      tvFrom.setOnClickListener( toggle );
+      tvTo.setOnClickListener( toggle );
+
+      if ( TDSetting.mLevelOverBasic ) {
+        tvFrom.setOnLongClickListener( listener );
+        tvTo.setOnLongClickListener( listener );
+      }
+
+      int col = b.color();
+      int text_size = TDSetting.mTextSize;
+
+      if ( tvFrom.getTextSize() != text_size ) {
+        tvId.setTextSize(      text_size );
+        tvFrom.setTextSize(    text_size );
+        tvTo.setTextSize(      text_size );
+        tvLength.setTextSize(  text_size );
+        // tvCompass.setTextSize( text_size );
+        // tvClino.setTextSize(   text_size );
+        // tvNote.setTextSize(    text_size );
+      }
+
+      if ( show_ids ) {
+        tvId.setVisibility( View.VISIBLE );
+        tvId.setTextColor( 0xff6666cc ); // light-blue
+      } else {
+        tvId.setVisibility( View.GONE );
+      }
+      if ( b.mType == DistoXDBlock.BLOCK_MAIN_LEG ) {
+        tvFrom.setTextColor( ( mParent.isCurrentStationName( b.mFrom) )? 0xff00ff00 : col );
+        tvTo.setTextColor(   ( mParent.isCurrentStationName( b.mTo )  )? 0xff00ff00 : col );
+      } else {
+        tvFrom.setTextColor( col );
+        tvTo.setTextColor(   col );
+      }
+      tvLength.setTextColor(  col );
+      // tvCompass.setTextColor( col );
+      // tvClino.setTextColor(   col );
+      // tvNote.setTextColor(    col );
+
+      if ( b.isRecent( mParent.secondLastShotId() ) ) {
+        tvFrom.setBackgroundColor( 0xff000033 ); // dark-blue
+        tvTo.setBackgroundColor( 0xff000033 ); // dark-blue
+      } 
+      if ( b.isMagneticBad( ) ) {
+        tvLength.setBackgroundColor( 0xff330000 ); // dark-red
+        // tvCompass.setBackgroundColor( 0xff330000 ); // dark-red
+        // tvClino.setBackgroundColor( 0xff330000 ); // dark-red
+      } else {
+        tvLength.setBackgroundColor( 0xff000000 ); // black
+        // tvCompass.setBackgroundColor( 0xff000000 ); // black
+        // tvClino.setBackgroundColor( 0xff000000 ); // black
+      }
+    }
   }
 
   @Override
@@ -166,26 +253,22 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
     ViewHolder holder = null; 
     if ( convertView == null ) {
       convertView = mLayoutInflater.inflate( R.layout.dblock_row, null );
-      holder = new ViewHolder();
-      holder.blk       = null;
-      holder.pos       = pos;
-      // holder.tvId      = (TextView) convertView.findViewById( R.id.id );
-      // holder.tvFrom    = (TextView) convertView.findViewById( R.id.from );
-      // holder.tvTo      = (TextView) convertView.findViewById( R.id.to );
-      // holder.tvLength  = (TextView) convertView.findViewById( R.id.length );
-      // holder.tvCompass = (TextView) convertView.findViewById( R.id.compass );
-      // holder.tvClino   = (TextView) convertView.findViewById( R.id.clino );
-      // holder.tvNote    = (TextView) convertView.findViewById( R.id.note );
+      holder = new ViewHolder( 
+        (TextView)convertView.findViewById( R.id.id ),
+        (TextView)convertView.findViewById( R.id.from ),
+        (TextView)convertView.findViewById( R.id.to ),
+        (TextView)convertView.findViewById( R.id.length ) );
+        // (TextView)convertView.findViewById( R.id.length ),
+        // (TextView)convertView.findViewById( R.id.compass ),
+        // (TextView)convertView.findViewById( R.id.clino ),
+        // (TextView)convertView.findViewById( R.id.note ) );
       convertView.setTag( holder );
     } else {
       holder = (ViewHolder) convertView.getTag();
-      if ( holder.blk != null ) {
-        holder.blk.mView = null;
-      }
     }
-    holder.blk = b;
+    holder.pos = pos;
     b.mView = convertView;
-    setViewText( holder, b );
+    holder.setViewText( b, this );
     convertView.setVisibility( b.mVisible );
     return convertView;
   }
@@ -194,100 +277,6 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
   public int getCount() { return mItems.size(); }
 
   public int size() { return mItems.size(); }
-
-  private void setViewText( final ViewHolder holder, DistoXDBlock b )
-  {
-    DistoXDBlock blk = holder.blk;
-    if ( b != blk ) return;
-    View view = blk.mView;
-    if ( view == null ) return;
-    TextView tvId      = (TextView) view.findViewById( R.id.id );
-    TextView tvFrom    = (TextView) view.findViewById( R.id.from );
-    TextView tvTo      = (TextView) view.findViewById( R.id.to );
-    TextView tvLength  = (TextView) view.findViewById( R.id.length );
-    TextView tvCompass = (TextView) view.findViewById( R.id.compass );
-    TextView tvClino   = (TextView) view.findViewById( R.id.clino );
-    TextView tvNote    = (TextView) view.findViewById( R.id.note );
-
-    tvId.setText( String.format( "%1$d", blk.mId ) );
-    tvFrom.setText( blk.mFrom );
-    tvTo.setText( blk.mTo );
-    tvLength.setText(  String.format(Locale.US, "%1$.2f", blk.mLength * TDSetting.mUnitLength ) );
-    tvCompass.setText( String.format(Locale.US, "%1$.1f", blk.mBearing * TDSetting.mUnitAngle ) );
-    tvClino.setText(   String.format(Locale.US, "%1$.1f", blk.mClino * TDSetting.mUnitAngle ) );
-    tvNote.setText( blk.toNote() );
-
-    OnClickListener toggle = new OnClickListener() {
-        public void onClick( View v ) { mParent.recomputeItems( ((TextView)v).getText().toString(), holder.pos ); }
-    };
-    OnClickListener edit1 = new OnClickListener() {
-        public void onClick( View v ) { mParent.onBlockClick( holder.blk, holder.pos ); }
-    };
-    OnLongClickListener edit10 = new OnLongClickListener() {
-        public boolean onLongClick( View v ) { mParent.highlightBlock( holder.blk ); return true; }
-    };
-    OnClickListener edit2 = new OnClickListener() {
-        public void onClick( View v ) { mParent.onBlockLongClick( holder.blk ); }
-    };
-    tvFrom.setOnClickListener( toggle );
-    tvTo.setOnClickListener( toggle );
-    tvLength.setOnClickListener( edit1 );
-    tvCompass.setOnClickListener( edit1 );
-    tvLength.setOnLongClickListener( edit10 );
-    tvCompass.setOnLongClickListener( edit10 );
-    tvClino.setOnClickListener( edit2 );
-    tvNote.setOnClickListener( edit2 );
-
-    if ( TDSetting.mLevelOverBasic ) {
-      tvFrom.setOnLongClickListener( this );
-      tvTo.setOnLongClickListener( this );
-    }
-
-    int col = blk.color();
-    int text_size = TDSetting.mTextSize;
-
-    if ( tvFrom.getTextSize() != text_size ) {
-      tvId.setTextSize(      text_size );
-      tvFrom.setTextSize(    text_size );
-      tvTo.setTextSize(      text_size );
-      tvLength.setTextSize(  text_size );
-      tvCompass.setTextSize( text_size );
-      tvClino.setTextSize(   text_size );
-      tvNote.setTextSize(    text_size );
-    }
-
-    if ( show_ids ) {
-      tvId.setVisibility( View.VISIBLE );
-      tvId.setTextColor( 0xff6666cc ); // light-blue
-    } else {
-      tvId.setVisibility( View.GONE );
-    }
-    if ( blk.mType == DistoXDBlock.BLOCK_MAIN_LEG ) {
-      tvFrom.setTextColor( ( mParent.isCurrentStationName( blk.mFrom) )? 0xff00ff00 : col );
-      tvTo.setTextColor(   ( mParent.isCurrentStationName( blk.mTo )  )? 0xff00ff00 : col );
-    } else {
-      tvFrom.setTextColor( col );
-      tvTo.setTextColor(   col );
-    }
-    tvLength.setTextColor(  col );
-    tvCompass.setTextColor( col );
-    tvClino.setTextColor(   col );
-    tvNote.setTextColor(    col );
-
-    if ( blk.isRecent( mParent.secondLastShotId() ) ) {
-      tvFrom.setBackgroundColor( 0xff000033 ); // dark-blue
-      tvTo.setBackgroundColor( 0xff000033 ); // dark-blue
-    } 
-    if ( blk.isMagneticBad( ) ) {
-      tvLength.setBackgroundColor( 0xff330000 ); // dark-red
-      tvCompass.setBackgroundColor( 0xff330000 ); // dark-red
-      tvClino.setBackgroundColor( 0xff330000 ); // dark-red
-    } else {
-      tvLength.setBackgroundColor( 0xff000000 ); // black
-      tvCompass.setBackgroundColor( 0xff000000 ); // black
-      tvClino.setBackgroundColor( 0xff000000 ); // black
-    }
-  }
 
   @Override
   public int getItemViewType(int pos) { return AdapterView.ITEM_VIEW_TYPE_IGNORE; }
@@ -301,7 +290,7 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
         View v = b.mView;
         if ( v != null ) {
           ViewHolder holder = (ViewHolder) v.getTag();
-          if ( holder != null ) setViewText( holder, b );
+          if ( holder != null ) holder.setViewText( b, this );
           v.setVisibility( b.mVisible );
           v.invalidate();
         }
@@ -311,22 +300,12 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
     return null;
   }
 
-  private void updateBlocksName( )
+  void updateBlocksName( )
   {
     for ( DistoXDBlock b : mItems ) {
       if ( b.mType == DistoXDBlock.BLOCK_MAIN_LEG ) {
         View v = b.mView;
         if ( v != null ) {
-          // ViewHolder holder = (ViewHolder) v.getTag();
-          // if ( holder != null ) {
-          //   holder.tvFrom.setTextColor( b.color() );
-          //   holder.tvTo.setTextColor( b.color() );
-          //   if ( mParent.isCurrentStationName( b.mFrom ) ) {
-          //     holder.tvFrom.setTextColor( 0xff00ff00 );
-          //   } else if ( mParent.isCurrentStationName( b.mTo ) ) {
-          //     holder.tvTo.setTextColor( 0xff00ff00 );
-          //   }
-          // }
           TextView tvFrom = (TextView) v.findViewById( R.id.from );
           TextView tvTo   = (TextView) v.findViewById( R.id.to );
           tvFrom.setTextColor( b.color() );

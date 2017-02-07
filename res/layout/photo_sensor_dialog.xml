@@ -32,10 +32,18 @@
   <LinearLayout android:id="@+id/layout5a"
     android:layout_width="fill_parent" 
     android:layout_height="50sp"
-    android:paddingLeft="10sp"
-    android:paddingRight="10sp"
+    android:layout_marginLeft="10sp"
+    android:layout_marginRight="10sp"
     android:orientation="horizontal" 
     >
+    <Button android:id="@+id/btn_ok"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:background="@drawable/button"
+      style="@style/button_default"
+      android:text="@string/button_lrud"
+      android:singleLine="true"
+      />
     <RadioGroup 
       android:id="@+id/station"
       android:layout_width="wrap_content" 
@@ -51,22 +59,6 @@
         android:layout_height="wrap_content" 
       />
     </RadioGroup>
-    <LinearLayout 
-      android:layout_width="fill_parent" 
-      android:layout_height="wrap_content"
-      android:orientation="horizontal" 
-      android:gravity="right"
-      android:layout_marginTop="25sp" 
-      >
-      <Button android:id="@+id/btn_ok"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:background="@drawable/button"
-        style="@style/button_default"
-        android:text="@string/button_ok"
-        android:singleLine="true"
-      />
-    </LinearLayout>
   </LinearLayout>
 
   <LinearLayout android:id="@+id/layout5b"
@@ -74,6 +66,7 @@
     android:layout_height="50sp"
     android:paddingLeft="10sp"
     android:paddingRight="10sp"
+    android:layout_marginBottom="10sp"
     android:orientation="horizontal" 
     >
     <EditText android:id="@+id/shot_left" 

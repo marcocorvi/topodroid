@@ -72,13 +72,12 @@ public class ShotDialog extends MyDialog
   
   private MyCheckBox mRBdup;
   private MyCheckBox mRBsurf;
-  private MyCheckBox mCBleg;
+  private MyCheckBox mCBlegPrev;
   private MyCheckBox mCBlegNext;
   private MyCheckBox mCBallSplay;
   private MyCheckBox mCBrenumber;
   // private MyCheckBox mCBhighlight;
 
-  private Button mButtonReverse;
 
   private CheckBox mRBleft;
   private CheckBox mRBvert;
@@ -93,9 +92,29 @@ public class ShotDialog extends MyDialog
   // private Button   mButtonDrop;
   private Button   mButtonOK;
   private Button   mButtonSave;
+  private Button   mButtonMore;
   private Button   mButtonBack;
+
   private Button   mButtonPrev;
   private Button   mButtonNext;
+  private Button mButtonReverse;
+
+  // private MyCheckBox mBTphoto;
+  // private MyCheckBox mBTsensor;
+  // private MyCheckBox mBTshot;
+  // private MyCheckBox mBTsurvey;
+  // private MyCheckBox mBTdelete;
+
+  // private RadioButton mRBfrom;
+  // private RadioButton mRBto;
+  // private Button mButtonLRUD;
+
+  // private EditText mETleft;
+  // private EditText mETright;
+  // private EditText mETup;
+  // private EditText mETdown;
+
+  // private CheckBox mCBdeleteLeg;
 
   String shot_from;
   String shot_to;
@@ -168,6 +187,8 @@ public class ShotDialog extends MyDialog
     shot_flag    = blk.mFlag;
     shot_leg     = blk.mType == DistoXDBlock.BLOCK_SEC_LEG;
     shot_comment = blk.mComment;
+
+    // if ( blk.type() != DistoXDBlock.BLOCK_MAIN_LEG ) mCBdeleteLeg.setVisibility( View.GONE );
   }
 
   private void updateView()
@@ -180,9 +201,15 @@ public class ShotDialog extends MyDialog
     mTVextra.setText( shot_extra );
     if ( shot_from.length() > 0 ) {
       mETfrom.setText( shot_from );
+      // mRBfrom.setText( shot_from );
+    // } else {
+    //   mRBfrom.setVisibility( View.GONE );
     }
     if ( shot_to.length() > 0 ) {
       mETto.setText( shot_to );
+      // mRBto.setText( shot_to );
+    // } else {
+    //   mRBto.setVisibility( View.GONE );
     }
     if ( shot_comment != null ) {
       mETcomment.setText( shot_comment );
@@ -195,7 +222,7 @@ public class ShotDialog extends MyDialog
     else if ( shot_flag == DistoXDBlock.BLOCK_SURFACE ) { mRBsurf.setChecked( true ); }
     // else if ( shot_flag == DistoXDBlock.BLOCK_BACKSHOT ) { mRBback.setChecked( true ); }
 
-    mCBleg.setChecked( shot_leg );
+    mCBlegPrev.setChecked( shot_leg );
 
     mRBleft.setChecked( false );
     mRBvert.setChecked( false );
@@ -253,17 +280,33 @@ public class ShotDialog extends MyDialog
     mETfrom    = (EditText) findViewById(R.id.shot_from );
     mETto      = (EditText) findViewById(R.id.shot_to );
     mETcomment = (EditText) findViewById(R.id.shot_comment );
+
+    // mRBfrom = (RadioButton) findViewById( R.id.station_from );
+    // mRBto   = (RadioButton) findViewById( R.id.station_to );
+
+    // mButtonLRUD = {Button} findViewById( R.id.btn_lrud );
+    // mETleft  = (EditText) findViewById(R.id.shot_left );
+    // mETright = (EditText) findViewById(R.id.shot_right);
+    // mETup    = (EditText) findViewById(R.id.shot_up   );
+    // mETdown  = (EditText) findViewById(R.id.shot_down );
    
     mETfrom.setOnLongClickListener( this );
     mETto.setOnLongClickListener( this );
+
+    // mCBdeleteLeg = (CheckBox) findViewById(R.id.delete_leg );
+    // mButtonLRUD.setOnClickListener( this );
 
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ),
                                 R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
     if ( TDSetting.mKeyboard ) {
       int flag = MyKeyboard.FLAG_POINT_LCASE_2ND;
       if ( TDSetting.mStationNames == 1 ) flag = MyKeyboard.FLAG_POINT;
-      MyKeyboard.registerEditText( mKeyboard, mETfrom, flag );
-      MyKeyboard.registerEditText( mKeyboard, mETto,   flag );
+      MyKeyboard.registerEditText( mKeyboard, mETfrom,  flag );
+      MyKeyboard.registerEditText( mKeyboard, mETto,    flag );
+      // MyKeyboard.registerEditText( mKeyboard, mETleft,  MyKeyboard.FLAG_POINT );
+      // MyKeyboard.registerEditText( mKeyboard, mETright, MyKeyboard.FLAG_POINT );
+      // MyKeyboard.registerEditText( mKeyboard, mETup,    MyKeyboard.FLAG_POINT );
+      // MyKeyboard.registerEditText( mKeyboard, mETdown,  MyKeyboard.FLAG_POINT );
       // mKeyboard.hide();
     } else {
       mKeyboard.hide();
@@ -271,11 +314,17 @@ public class ShotDialog extends MyDialog
         mETfrom.setInputType( InputType.TYPE_CLASS_NUMBER );
         mETto.setInputType( InputType.TYPE_CLASS_NUMBER );
       }
+      // mETleft.setInputType( InputType.TYPE_CLASS_NUMBER );
+      // mETright.setInputType( InputType.TYPE_CLASS_NUMBER );
+      // mETup.setInputType( InputType.TYPE_CLASS_NUMBER );
+      // mETdown.setInputType( InputType.TYPE_CLASS_NUMBER );
     }
     
     LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
+    // LinearLayout layout9 = (LinearLayout) findViewById( R.id.layout9 );
     int size = TopoDroidApp.getScaledSize( mContext );
     layout4.setMinimumHeight( size + 20 );
+    // layout9.setMinimumHeight( size + 20 );
 
     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
       LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
@@ -283,7 +332,7 @@ public class ShotDialog extends MyDialog
 
     mRBdup       = new MyCheckBox( mContext, size, R.drawable.iz_dup_ok, R.drawable.iz_dup_no );
     mRBsurf      = new MyCheckBox( mContext, size, R.drawable.iz_surface_ok, R.drawable.iz_surface_no );
-    mCBleg       = new MyCheckBox( mContext, size, R.drawable.iz_leg2_ok, R.drawable.iz_leg2_no );
+    mCBlegPrev   = new MyCheckBox( mContext, size, R.drawable.iz_leg2_ok, R.drawable.iz_leg2_no );
     mCBlegNext   = new MyCheckBox( mContext, size, R.drawable.iz_legnext_ok, R.drawable.iz_legnext_no );
     mCBallSplay  = new MyCheckBox( mContext, size, R.drawable.iz_splays_ok, R.drawable.iz_splays_no );
     mCBrenumber  = new MyCheckBox( mContext, size, R.drawable.iz_numbers_ok, R.drawable.iz_numbers_no );
@@ -291,17 +340,35 @@ public class ShotDialog extends MyDialog
 
     layout4.addView( mRBdup, lp );
     layout4.addView( mRBsurf, lp );
-    layout4.addView( mCBleg, lp );
+    layout4.addView( mCBlegPrev, lp );
     layout4.addView( mCBlegNext, lp );
     layout4.addView( mCBallSplay, lp );
     layout4.addView( mCBrenumber );
     // layout4.addView( mCBhighlight );
+    layout4.invalidate();
 
-    mCBleg.setOnClickListener( this );
+    mCBlegPrev.setOnClickListener( this );
     mCBlegNext.setOnClickListener( this );
     mCBallSplay.setOnClickListener( this );
 
-    layout4.invalidate();
+    // mBTphoto  = new MyCheckBox( mContext, size, R.drawable.iz_camera, R.drawable.iz_camera ); 
+    // mBTsensor = new MyCheckBox( mContext, size, R.drawable.iz_sensor, R.drawable.iz_sensor ); 
+    // mBTshot   = new MyCheckBox( mContext, size, R.drawable.iz_add_leg, R.drawable.iz_add_leg );
+    // mBTsurvey = new MyCheckBox( mContext, size, R.drawable.iz_split, R.drawable.iz_split );
+    // mBTdelete = new MyCheckBox( mContext, size, R.drawable.iz_delete, R.drawable.iz_delete );
+
+    // layout9.addView( mBTphoto,  lp );
+    // layout9.addView( mBTsensor, lp );
+    // layout9.addView( mBTshot,   lp );
+    // layout9.addView( mBTsurvey, lp );
+    // layout9.addView( mBTdelete, lp );
+    // layout9.invalidate();
+
+    // mBTphoto.setOnClickListener( this );
+    // mBTsensor.setOnClickListener( this );
+    // mBTshot.setOnClickListener( this );
+    // mBTsurvey.setOnClickListener( this );
+    // mBTdelete.setOnClickListener( this );
 
     mButtonReverse = (Button)  findViewById(R.id.shot_reverse );
 
@@ -317,8 +384,10 @@ public class ShotDialog extends MyDialog
 
     mButtonPrev = (Button) findViewById(R.id.btn_prev );
     mButtonNext = (Button) findViewById(R.id.btn_next );
+
     mButtonSave = (Button) findViewById(R.id.btn_save );
     mButtonOK   = (Button) findViewById(R.id.btn_ok );
+    mButtonMore = (Button) findViewById(R.id.btn_more );
     mButtonBack = (Button) findViewById(R.id.btn_back );
 
     // mETfrom.setRawInputType( InputType.TYPE_CLASS_NUMBER );
@@ -335,6 +404,7 @@ public class ShotDialog extends MyDialog
       mButtonSave.setVisibility( View.GONE );
     }
     mButtonOK.setOnClickListener( this );
+    mButtonMore.setOnClickListener( this );
     mButtonBack.setOnClickListener( this );
 
     mRBdup.setOnClickListener( this );
@@ -352,9 +422,26 @@ public class ShotDialog extends MyDialog
 
   private void saveDBlock()
   {
+    // add LRUD at station if any is checked and data have been entered
+    // String station = null;
+    // if ( mRBfrom.isChecked() ) {
+    //   station = mBlk.mFrom;
+    // } else if ( mRBto.isChecked() ) {
+    //   station = mBlk.mTo;
+    // }
+    // if ( station != null ) {
+    //   // check the data
+    //   mParent.insertLRUDatStation( station, mBlk.mBearing, mBlk.mClino, 
+    //     mETleft.getText().toString().replace(',','.') ,
+    //     mETright.getText().toString().replace(',','.') ,
+    //     mETup.getText().toString().replace(',','.') ,
+    //     mETdown.getText().toString().replace(',','.') 
+    //   );
+    // }
+
     boolean all_splay = mCBallSplay.isChecked();
     boolean leg_next  = false;
-    if ( mCBleg.isChecked() ) {
+    if ( mCBlegPrev.isChecked() ) {
       shot_from = "";
       shot_to = "";
       shot_leg = true;
@@ -462,10 +549,10 @@ public class ShotDialog extends MyDialog
       mRBleft.setChecked( false );
       mRBvert.setChecked( false );
 
-    } else if ( b == mCBleg ) {
+    } else if ( b == mCBlegPrev ) {
       // Log.v("DistoX", "CB leg clicked ");
-      mCBleg.toggleState();
-      if ( mCBleg.isChecked() ) {
+      mCBlegPrev.toggleState();
+      if ( mCBlegPrev.isChecked() ) {
         mCBallSplay.setState( false );
         mCBlegNext.setState( false );
       }
@@ -473,13 +560,13 @@ public class ShotDialog extends MyDialog
       // Log.v("DistoX", "CB all_splay clicked ");
       mCBallSplay.toggleState();
       if ( mCBallSplay.isChecked() ) {
-        mCBleg.setState( false );
+        mCBlegPrev.setState( false );
         mCBlegNext.setState( false );
       }
     } else if ( b == mCBlegNext ) {
       mCBlegNext.toggleState();
       if ( mCBlegNext.isChecked() ) {
-        mCBleg.setState( false );
+        mCBlegPrev.setState( false );
         mCBallSplay.setState( false );
       }
     } else if ( b == mRBdup ) {
@@ -492,11 +579,46 @@ public class ShotDialog extends MyDialog
       if ( mRBsurf.isChecked() ) {
         mRBdup.setState( false );
       }
+
+    // } else if ( b == mBTphoto ) {
+    //   mParent.askPhotoComment( );
+    //   dismiss();
+    // } else if ( b == mBTsensor ) {
+    //   mParent.askSensor( );
+    //   dismiss();
+    // } else if ( b == mBTshot ) {
+    //   mParent.insertShotAt( mBlk );
+    //   dismiss();
+    // } else if ( b == mBTsurvey ) { // SPLIT
+    //   TopoDroidAlertDialog.makeAlert( mParent, mParent.getResources(), R.string.survey_split,
+    //     new DialogInterface.OnClickListener() {
+    //       @Override
+    //       public void onClick( DialogInterface dialog, int btn ) {
+    //         mParent.doSplitSurvey();
+    //         dismiss();
+    //       }
+    //     } );
+    //   // mParent.askSurvey( );
+    // } else if ( b == mBTdelete ) { // DELETE
+    //   TopoDroidAlertDialog.makeAlert( mParent, mParent.getResources(), R.string.shot_delete,
+    //     new DialogInterface.OnClickListener() {
+    //       @Override
+    //       public void onClick( DialogInterface dialog, int btn ) {
+    //         mParent.doDeleteShot( mBlk.mId, mBlk, mCBdeleteLeg.isChecked() );
+    //         dismiss();
+    //       }
+    //     } );
+    //   // mParent.doDeleteShot( mBlk.mId );
     
     } else if ( b == mButtonBack ) {
       CutNPaste.dismissPopup();
       closeKeyboard();
       dismiss();
+    } else if ( b == mButtonMore ) {
+      CutNPaste.dismissPopup();
+      closeKeyboard();
+      dismiss();
+      mParent.onBlockLongClick( mBlk );
     } else if ( b == mButtonOK ) { // OK and SAVE close the keyboard
       closeKeyboard();
       saveDBlock();
@@ -519,6 +641,7 @@ public class ShotDialog extends MyDialog
       } else {
         TDLog.Log( TDLog.LOG_SHOT, "PREV is null" );
       }
+
     } else if ( b == mButtonNext ) {
       // shift:
       //        prev -- blk -- next

@@ -197,7 +197,7 @@ public class GMActivity extends Activity
     for ( CalibCBlock item : list ) mCalibration.AddValues( item );
     
     int iter = mCalibration.Calibrate();
-    if ( iter > 0 ) {
+    if ( iter > 0 && iter < TDSetting.mCalibMaxIt ) {
       float[] errors = mCalibration.Errors();
       for ( int k = 0; k < list.size(); ++k ) {
         CalibCBlock cb = list.get( k );
@@ -391,7 +391,10 @@ public class GMActivity extends Activity
       case CalibComputer.CALIB_COMPUTE_CALIB:
         resetTitle( );
         // Log.v("DistoX", "compute result " + result );
-        if ( result > 0 ) {
+        if ( result >= TDSetting.mCalibMaxIt ) {
+          Toast.makeText( this, R.string.few_iter, Toast.LENGTH_SHORT ).show();
+          return;
+        } else if ( result > 0 ) {
           enableWrite( true );
           Vector bg = mCalibration.GetBG();
           Matrix ag = mCalibration.GetAG();

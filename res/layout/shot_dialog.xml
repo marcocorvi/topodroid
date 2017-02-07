@@ -1,99 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:layout_width="match_parent" 
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="0sp"
-    >
+  android:layout_width="match_parent" 
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  android:padding="0sp"
+  >
 
-    <!-- TextView android:id="@+id/shot_data"
+  <!-- TextView android:id="@+id/shot_data"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
         android:textSize="18sp"
         android:text="@string/shot_info"
         / -->
   
-  <LinearLayout 
-      android:id="@+id/layout1"
-      android:layout_width="fill_parent" 
-      android:layout_height="wrap_content"
-      android:layout_marginTop="10sp"
-      android:orientation="horizontal"
-      >
+  <LinearLayout android:id="@+id/layout1"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10sp"
+    android:orientation="horizontal"
+    >
     <EditText android:id="@+id/shot_distance"
-        android:layout_width="0sp"
-        android:layout_weight="30"
-        android:layout_height="wrap_content" 
-        android:textSize="18sp"
-        android:layout_marginRight="10sp"
-        android:nextFocusDown="@+id/shot_bearing"
-        android:singleLine="true"
-        android:inputType="numberDecimal"
-        />
+      android:layout_width="0sp"
+      android:layout_weight="30"
+      android:layout_height="wrap_content" 
+      android:textSize="18sp"
+      android:layout_marginRight="10sp"
+      android:nextFocusDown="@+id/shot_bearing"
+      android:singleLine="true"
+      android:inputType="numberDecimal"
+      />
     <EditText android:id="@id/shot_bearing"
-        android:layout_width="0sp"
-        android:layout_weight="30"
-        android:layout_height="wrap_content" 
-        android:textSize="18sp"
-        android:layout_marginRight="10sp"
-        android:nextFocusDown="@+id/shot_clino"
-        android:singleLine="true"
-        android:inputType="numberDecimal"
-        />
+      android:layout_width="0sp"
+      android:layout_weight="30"
+      android:layout_height="wrap_content" 
+      android:textSize="18sp"
+      android:layout_marginRight="10sp"
+      android:nextFocusDown="@+id/shot_clino"
+      android:singleLine="true"
+      android:inputType="numberDecimal"
+      />
     <EditText android:id="@id/shot_clino"
-        android:layout_width="0sp"
-        android:layout_weight="30"
-        android:layout_height="wrap_content" 
-        android:textSize="18sp"
-        android:nextFocusDown="@+id/shot_from"
-        android:singleLine="true"
-        android:inputType="numberDecimal|numberSigned"
-        />
+      android:layout_width="0sp"
+      android:layout_weight="30"
+      android:layout_height="wrap_content" 
+      android:textSize="18sp"
+      android:nextFocusDown="@+id/shot_from"
+      android:singleLine="true"
+      android:inputType="numberDecimal|numberSigned"
+      />
   </LinearLayout>
 
   <TextView android:id="@+id/shot_extra"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        android:layout_below="@id/layout1"
-        android:textSize="18sp"
-        android:text="@string/shot_info"
-        />
+    android:layout_below="@id/layout1"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    android:textSize="18sp"
+    android:text="@string/shot_info"
+    />
 
-  <LinearLayout 
-      android:id="@+id/layout2"
-      android:layout_width="fill_parent" 
-      android:layout_height="wrap_content"
-      android:layout_below="@id/shot_extra"
-      android:orientation="horizontal" 
-      android:layout_marginTop="2sp"
-      >
-
-      <EditText android:id="@id/shot_from" 
-        android:layout_width="0sp"
-        android:layout_weight="50"
-        android:layout_height="wrap_content" 
-        android:text=""
-        android:nextFocusDown="@+id/shot_to"
-        android:singleLine="true"
-        android:inputType="text"
-        />
-      <EditText android:id="@id/shot_to" 
-        android:layout_width="0sp"
-        android:layout_weight="50"
-        android:layout_height="wrap_content" 
-        android:text=""
-        android:nextFocusDown="@+id/shot_comment"
-        android:singleLine="true"
-        android:inputType="text"
-        />
-
+  <LinearLayout android:id="@+id/layout2"
+    android:layout_below="@id/shot_extra"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" 
+    android:layout_marginTop="2sp"
+    >
+    <EditText android:id="@id/shot_from" 
+      android:layout_width="0sp"
+      android:layout_weight="50"
+      android:layout_height="wrap_content" 
+      android:text=""
+      android:nextFocusDown="@+id/shot_to"
+      android:singleLine="true"
+      android:inputType="text"
+      />
+    <EditText android:id="@id/shot_to" 
+      android:layout_width="0sp"
+      android:layout_weight="50"
+      android:layout_height="wrap_content" 
+      android:text=""
+      android:nextFocusDown="@+id/shot_comment"
+      android:singleLine="true"
+      android:inputType="text"
+      />
+    <!-- Button android:id="@+id/shot_reverse"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:layout_weight="20"
+      android:layout_gravity="left"
+      android:background="@drawable/ic_back"
+      / -->
   </LinearLayout>
    					  
-  <LinearLayout 
-      android:id="@+id/layout3"
+  <LinearLayout android:id="@+id/layout3"
+      android:layout_below="@id/layout2"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
-      android:layout_below="@id/layout2"
       android:orientation="horizontal" 
       android:layout_marginTop="2sp"
       >
@@ -124,92 +126,205 @@
 
     </LinearLayout>				  
 
-    <EditText
-        android:id="@id/shot_comment" 
-        android:maxLines="1" 
-        android:layout_marginTop="2sp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        android:layout_below="@id/layout3"
-      	android:ems="25"
-        android:scrollHorizontally="true"
-        android:inputType="text"
-        android:singleLine="true"
-        android:hint="@string/shot_note"
-        />
+  <EditText android:id="@id/shot_comment" 
+    android:layout_below="@id/layout3"
+    android:maxLines="1" 
+    android:layout_marginTop="2sp"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    android:ems="25"
+    android:scrollHorizontally="true"
+    android:inputType="text"
+    android:singleLine="true"
+    android:hint="@string/shot_note"
+    />
 
-    <LinearLayout 
-      android:id="@+id/layout5"
-      android:layout_below="@id/shot_comment"
-      android:layout_width="fill_parent" 
+  <LinearLayout android:id="@+id/layout5"
+    android:layout_below="@id/shot_comment"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" 
+    >
+    <CheckBox 
+      android:id="@+id/left"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/extend_left" />
+    <CheckBox 
+      android:id="@+id/vert"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/extend_vert" />
+    <CheckBox 
+      android:id="@+id/right"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/extend_right" />
+    <!-- CheckBox 
+      android:id="@+id/ignore"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/extend_ignore" / -->
+  </LinearLayout>
+
+  <LinearLayout android:id="@+id/layout4"
+    android:layout_below="@id/layout5"
+    android:layout_width="fill_parent" 
+    android:layout_height="50sp"
+    android:paddingLeft="10sp"
+    android:paddingRight="10sp"
+    android:orientation="horizontal" 
+    />
+
+<!--
+  <LinearLayout android:id="@+id/layout8"
+    android:layout_below="@id/layout4"
+    android:layout_width="fill_parent" 
+    android:layout_height="50sp"
+    android:paddingLeft="10sp"
+    android:paddingRight="10sp"
+    android:orientation="horizontal" 
+    >
+    <TextView 
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" 
+      android:text="LRUD at"
+    />
+    <RadioGroup 
+      android:id="@+id/station"
+      android:layout_width="wrap_content" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
       >
-      <CheckBox 
-        android:id="@+id/left"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/extend_left" />
-      <CheckBox 
-        android:id="@+id/vert"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/extend_vert" />
-      <CheckBox 
-        android:id="@+id/right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/extend_right" />
-      <!-- CheckBox 
-        android:id="@+id/ignore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/extend_ignore" / -->
-    </LinearLayout>
-
-    <LinearLayout 
-      android:id="@+id/layout4"
-      android:layout_below="@id/layout5"
-      android:layout_width="fill_parent" 
-      android:layout_height="50sp"
-      android:paddingLeft="10sp"
-      android:paddingRight="10sp"
-      android:orientation="horizontal" 
-      />
-
-    <LinearLayout 
-      android:id="@+id/layout7"
-      android:layout_below="@id/layout4"
-      android:layout_width="match_parent" 
-      android:layout_height="wrap_content"
-      android:layout_gravity="right"
-      android:orientation="horizontal" 
-      android:gravity="right"
-      >
-      <Button android:id="@+id/btn_ok"
+      <RadioButton android:id="@+id/station_from"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:layout_marginRight="10sp"
+      />
+      <RadioButton android:id="@+id/station_to"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+      />
+    </RadioGroup>
+    <!- - LinearLayout 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      android:gravity="right"
+      android:layout_marginTop="25sp" 
+      >
+      <Button android:id="@+id/btn_lrud"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
         android:background="@drawable/button"
         style="@style/button_default"
         android:text="@string/button_ok"
+        android:singleLine="true"
       />
-      <Button android:id="@+id/btn_save"
+    </LinearLayout - ->
+  </LinearLayout>
+
+  <LinearLayout android:id="@+id/layout10"
+    android:layout_below="@id/layout8"
+    android:layout_width="fill_parent" 
+    android:layout_height="50sp"
+    android:paddingLeft="10sp"
+    android:paddingRight="10sp"
+    android:orientation="horizontal" 
+    >
+    <EditText android:id="@+id/shot_left" 
+      android:maxLines="1" 
+      android:layout_width="0dp"
+      android:layout_weight="25"
+      android:layout_height="wrap_content" 
+      android:hint="&#x21A4;"
+      android:nextFocusRight="@+id/shot_right"
+      android:singleLine="true"
+      />
+    <EditText android:id="@id/shot_right" 
+      android:maxLines="1" 
+      android:layout_width="0dp"
+      android:layout_weight="25"
+      android:layout_height="wrap_content" 
+      android:hint="&#x21A6;"
+      android:nextFocusRight="@+id/shot_up"
+      android:singleLine="true"
+      />
+    <EditText android:id="@id/shot_up" 
+      android:maxLines="1" 
+      android:layout_width="0dp"
+      android:layout_weight="25"
+      android:layout_height="wrap_content" 
+      android:hint="&#x21A5;"
+      android:nextFocusRight="@+id/shot_down"
+      android:singleLine="true"
+      />
+    <EditText android:id="@id/shot_down" 
+      android:maxLines="1" 
+      android:layout_width="0dp"
+      android:layout_weight="25"
+      android:layout_height="wrap_content" 
+      android:hint="&#x21A7;"
+      android:singleLine="true"
+      />
+  </LinearLayout>
+
+  <LinearLayout android:id="@+id/layout9"
+    android:layout_below="@id/layout10"
+    android:layout_width="fill_parent" 
+    android:layout_height="50sp"
+    android:paddingLeft="10sp"
+    android:paddingRight="10sp"
+    android:orientation="horizontal" 
+    />
+
+  <CheckBox android:id="@+id/delete_leg"
+    android:layout_below="@id/layout9"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+    android:text="@string/delete_whole_leg"
+    />
+-->
+  <LinearLayout android:id="@+id/layout7"
+    android:layout_below="@id/layout4"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:layout_gravity="right"
+    android:orientation="horizontal" 
+    android:gravity="right"
+    >
+    <Button android:id="@+id/btn_ok"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:layout_marginRight="10sp"
+      android:background="@drawable/button"
+      style="@style/button_default"
+      android:text="@string/button_ok"
+    />
+    <Button android:id="@+id/btn_save"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:background="@drawable/button"
+      style="@style/button_default"
+      android:text="@string/button_save"
+    />
+    <Button android:id="@+id/btn_more"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:layout_marginRight="10sp"
+      android:background="@drawable/button"
+      style="@style/button_default"
+      android:text="@string/button_more"
+    />
+    <Button android:id="@+id/btn_back"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
+        android:layout_marginLeft="10sp" 
         android:background="@drawable/button"
         style="@style/button_default"
-        android:text="@string/button_save"
-      />
-      <Button android:id="@+id/btn_back"
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content" 
-          android:layout_marginLeft="10sp" 
-          android:background="@drawable/button"
-          style="@style/button_default"
-          android:text="@string/button_cancel"
-      />
-    </LinearLayout>
+        android:text="@string/button_cancel"
+    />
+  </LinearLayout>
+
 
   <android.inputmethodservice.KeyboardView
     android:id="@+id/keyboardview"

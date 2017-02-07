@@ -32,6 +32,7 @@ public class DistoXDBlock
   public static final int EXTEND_NONE   = EXTEND_VERT;
 
   View   mView;
+  int    mPos;     // position in the list
   int    mVisible; // whether is visible in the list
 
   long   mId;
@@ -96,6 +97,7 @@ public class DistoXDBlock
   {
     // assert( f != null && t != null );
     mView = null; // view is set by the DistoXDBlockAdapter
+    mPos  = 0;
     mVisible = View.VISIBLE;
     mId = 0;
     mSurveyId = 0;
@@ -121,6 +123,7 @@ public class DistoXDBlock
   public DistoXDBlock()
   {
     mView = null; // view is set by the DistoXDBlockAdapter
+    mPos  = 0;
     mVisible = View.VISIBLE;
     mId = 0;
     mSurveyId = 0;

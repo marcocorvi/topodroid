@@ -207,6 +207,7 @@ public class ShotWindow extends Activity
   // private int mListPos = -1;
   // private int mListTop = 0;
   private DistoXDBlockAdapter mDataAdapter;
+  // private ArrayAdapter< String > mDataAdapter;
   private ArrayList< String > mShowSplay;
 
 
@@ -350,6 +351,7 @@ public class ShotWindow extends Activity
       mApp.assignStations( mDataAdapter.getItemsForAssign() );
       mList.post( new Runnable() {
         @Override public void run() {
+          Log.v("DistoX", "notify data set changed");
           mDataAdapter.notifyDataSetChanged();
         }
       } );
@@ -370,7 +372,7 @@ public class ShotWindow extends Activity
     TDLog.Log( TDLog.LOG_SHOT, "updateShotList shots " + list.size() + " photos " + photos.size() );
     // Log.v( "DistoX", "update Shot List shots " + list.size() + " photos " + photos.size() );
     mDataAdapter.clear();
-    mList.setAdapter( mDataAdapter );
+    // mList.setAdapter( mDataAdapter );
     if ( list.size() == 0 ) {
       // Toast.makeText( mActivity, R.string.no_shots, Toast.LENGTH_SHORT ).show();
       return;
@@ -457,6 +459,37 @@ public class ShotWindow extends Activity
   // ---------------------------------------------------------------
   // list items click
 
+  private boolean mSkipItemClick = false;
+
+  @Override 
+  public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
+  {
+    if ( CutNPaste.dismissPopupBT() ) return;
+    if ( mSkipItemClick ) {
+      mSkipItemClick = false;
+      return;
+    }
+    if ( mMenu == (ListView)parent ) {
+      handleMenu( pos );
+      return;
+    }
+    if ( closeMenu() ) return;
+
+    // TDLog.Log( TDLog.LOG_INPUT, "ShotWindow onItemClick id " + id);
+    DistoXDBlock blk = mDataAdapter.get(pos);
+    onBlockClick( blk, pos );
+  }
+
+  void onBlockClick( DistoXDBlock blk, int pos )
+  {
+    mShotPos = pos;
+    DistoXDBlock prevBlock = null;
+    DistoXDBlock nextBlock = null;
+    prevBlock = getPreviousLegShot( blk, false );
+    nextBlock = getNextLegShot( blk, false );
+    (new ShotDialog( mActivity, this, /* pos, */ blk, prevBlock, nextBlock )).show();
+  }
+
   // @Override 
   // public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id)
   // {
@@ -469,6 +502,7 @@ public class ShotWindow extends Activity
   //   return true;
   // }
 
+  // called by ShotDialog "More" button
   void onBlockLongClick( DistoXDBlock blk )
   {
     mShotId = blk.mId;
@@ -479,7 +513,6 @@ public class ShotWindow extends Activity
     }
   }
 
-  private boolean mSkipItemClick = false;
 
   private void handleMenu( int pos )
   {
@@ -532,51 +565,6 @@ public class ShotWindow extends Activity
       // int nn = mNrButton1; //  + ( TopoDroidApp.mLevelOverNormal ?  mNrButton2 : 0 );
       (new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, menus.length ) ).show();
     }
-  }
-
-  @Override 
-  public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
-  {
-    if ( CutNPaste.dismissPopupBT() ) return;
-    if ( mSkipItemClick ) {
-      mSkipItemClick = false;
-      return;
-    }
-    if ( mMenu == (ListView)parent ) {
-      handleMenu( pos );
-      return;
-    }
-    if ( closeMenu() ) return;
-
-    // TDLog.Log( TDLog.LOG_INPUT, "ShotWindow onItemClick id " + id);
-    // DistoXDBlock blk = mDataAdapter.get(pos); // this is done by the DistoXDBlockAdapter
-    // onBlockClick( blk, pos );
-  }
-
-  void onBlockClick( DistoXDBlock blk, int pos )
-  {
-    mShotPos = pos;
-    // mSavePos = pos;
-    // mFirstPos = mList.getFirstVisiblePosition();
-    // mScroll   = mList.getScrollY();
-    // mSaveTextView = (TextView)view;
-
-    // TextView tv = (TextView)view;
-    // String msg = tv.getText().toString();
-    // String[] st = msg.split( " ", 6 );
-    // String data = st[2] + " " + st[3] + " " + st[4];
-      
-    DistoXDBlock prevBlock = null;
-    DistoXDBlock nextBlock = null;
-    // if ( blk.type() == DistoXDBlock.BLOCK_BLANK ) {
-      // prevBlock = mApp.mData.selectPreviousLegShot( blk.mId, mApp.mSID );
-      prevBlock = getPreviousLegShot( blk, false );
-      nextBlock = getNextLegShot( blk, false );
-      // if ( prevBlock != null ) {
-      //   TDLog.Log( TDLog.LOG_SHOT, "prev leg " + prevBlock.mFrom + " " + prevBlock.mTo );
-      // }
-    // }
-    (new ShotDialog( mActivity, this, /* pos, */ blk, prevBlock, nextBlock )).show();
   }
 
 // ---------------------------------------------------------------
@@ -785,7 +773,8 @@ public class ShotWindow extends Activity
     mActivity = this;
 
     mShowSplay   = new ArrayList< String >();
-    mDataAdapter = new DistoXDBlockAdapter( this, this, R.layout.row, new ArrayList<DistoXDBlock>() );
+    // mDataAdapter = new DistoXDBlockAdapter( this, this, R.layout.row, new ArrayList<DistoXDBlock>() );
+    mDataAdapter = new DistoXDBlockAdapter( this, this, R.layout.dblock_row, new ArrayList<DistoXDBlock>() );
 
     // mListItemsHandler = new Handler() {
     //   @Override
@@ -833,7 +822,7 @@ public class ShotWindow extends Activity
 
     mList = (ListView) findViewById(R.id.list);
     mList.setAdapter( mDataAdapter );
-    // mList.setOnItemClickListener( this );
+    mList.setOnItemClickListener( this );
     // mList.setLongClickable( true );
     // mList.setOnItemLongClickListener( this );
     mList.setDividerHeight( 2 );
@@ -1368,6 +1357,7 @@ public class ShotWindow extends Activity
     }
   }
 
+  // open the sketch and highlight block in the sketch
   void highlightBlock( DistoXDBlock blk ) 
   {
     // Log.v("DistoX", "highlight block " + ( (blk==null)? "null" : blk.mFrom ) );

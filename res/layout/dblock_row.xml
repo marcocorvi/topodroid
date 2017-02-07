@@ -6,14 +6,12 @@
 
   <TextView 
     android:id="@+id/id"
-    android:layout_weight="80"
+    android:layout_weight="20"
     android:layout_width="0dip"
     android:layout_height="wrap_content"
     android:textSize="14sp"
     android:typeface="monospace"
     android:padding="1dp"
-    android:layout_marginTop="2dp"
-    android:layout_marginBottom="2dp"
     android:gravity="left"
   />
 
@@ -26,8 +24,6 @@
     android:textSize="14sp"
     android:typeface="monospace"
     android:padding="1dp"
-    android:layout_marginTop="2dp"
-    android:layout_marginBottom="2dp"
     android:gravity="right"
   />
 
@@ -40,25 +36,21 @@
     android:textSize="14sp"
     android:typeface="monospace"
     android:padding="1dp"
-    android:layout_marginTop="2dp"
-    android:layout_marginBottom="2dp"
     android:gravity="right"
   />
 
   <TextView 
     android:id="@+id/length"
-    android:layout_weight="150"
+    android:layout_weight="340"
     android:layout_width="0dip"
     android:layout_height="wrap_content"
     android:textSize="14sp"
     android:singleLine="true"
     android:typeface="monospace"
     android:padding="1dp"
-    android:layout_marginTop="2dp"
-    android:layout_marginBottom="2dp"
-    android:gravity="right"
+    android:gravity="left"
   />
-
+<!--
   <TextView 
     android:id="@+id/compass"
     android:layout_weight="130"
@@ -68,8 +60,6 @@
     android:singleLine="true"
     android:typeface="monospace"
     android:padding="1dp"
-    android:layout_marginTop="2dp"
-    android:layout_marginBottom="2dp"
     android:gravity="right"
   />
 
@@ -82,8 +72,6 @@
     android:singleLine="true"
     android:typeface="monospace"
     android:padding="1dp"
-    android:layout_marginTop="2dp"
-    android:layout_marginBottom="2dp"
     android:gravity="right"
   />
 
@@ -99,5 +87,6 @@
     android:layout_marginTop="2dp"
     android:layout_marginBottom="2dp"
   />
+-->
 
 </LinearLayout>
