@@ -86,7 +86,7 @@
     <string name="device_busy">Dispositivo indisponível</string>
     <string name="device_illegal_addr">Endereço de memória inválido</string>
     <string name="device_info">Tipo de dispositivo</string>
-    <string name="device_model_set">Quer realmente mudar o modelo do dispositivo?</string>
+    <string name="device_model_set">Quer realmente mudar o modelo do dispositivo</string>
     <string name="device_none">Nenhum DistoX selecionado</string>
     <!-- UNUSED string name="device_paired">Dispositivo pareado</string -->
     <string name="device_reset">Reiniciar memória do DistoX</string>
@@ -833,8 +833,8 @@
   <string name="pref_eraseness_message">Raio da borracha no desenho</string>
   <string name="pref_min_shift_title">Mudar sensibilidade</string>
   <string name="pref_min_shift_message">Mudar sensibilidade</string>
-  <string name="pref_pointing_title">Raio do cursor</string>
-  <string name="pref_pointing_message">Raio do cursor de seleção</string>
+  <string name="pref_pointing_title">Diâmetro tolerância cursor</string>
+  <string name="pref_pointing_message">Tolerância entre toque e destoque para seleção de ponto</string>
   <string name="pref_vert_splay_title">Limite med. aux. tracejadas</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Medidas auxiliares acima desta inclinação serão tracejadas</string -->
   <string name="pref_vert_splay_message">Medidas auxiliares acima dessa inclinação serão tracejadas</string>
