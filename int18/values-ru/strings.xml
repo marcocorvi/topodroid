@@ -461,7 +461,7 @@
     <!-- UNUESD string name="button_direction">Азимут/угол</string -->
     <!-- UNUSED string name="button_azimuth">Азимут</string -->
     <string name="button_plot"    >Абрис</string>
-    <string name="button_more"    >Больше</string>
+    <string name="button_more"    >Ещё</string>
     <string name="button_lrud"    >Добавить ЛПВН</string>
     <!-- OK string name="button_ok"        >OK        </string -->
     <string name="button_open"      >Откр      </string>
