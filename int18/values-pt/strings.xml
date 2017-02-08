@@ -22,7 +22,7 @@
 
     <string name="memoryA3">Memória DistoX A3</string>
     <string name="memoryX310">Memória DistoX X310</string>
-    <!-- UNUSED string name="memory_data">DistoX data</string -->
+    <!-- UNUSED string name="memory_data">Dados DistoX</string -->
 
     <string name="thp_user">usuário</string>
     <string name="thp_label">rótulo</string>
@@ -73,7 +73,7 @@
     <string name="calib_ave_std">Exatidão: %1$.4f ± %2$.4f graus</string>
     <string name="calib_precision">Precisão</string>
     <string name="calib_iter">Iterações: %1$d</string>
-    <string name="calib_reset">Reiniciar a calibração do DistoX?</string>
+    <string name="calib_reset">Reiniciar a calibração da DistoX?</string>
     
     <string name="algorithm">Algoritmo:</string>
     <string name="auto">auto</string>
@@ -87,10 +87,10 @@
     <string name="device_illegal_addr">Endereço de memória inválido</string>
     <string name="device_info">Tipo de dispositivo</string>
     <string name="device_model_set">Quer realmente mudar o modelo do dispositivo</string>
-    <string name="device_none">Nenhum DistoX selecionado</string>
+    <string name="device_none">Nenhuma DistoX selecionada</string>
     <!-- UNUSED string name="device_paired">Dispositivo pareado</string -->
-    <string name="device_reset">Reiniciar memória do DistoX</string>
-    <string name="device_code">Código do DistoX %1$4d</string>
+    <string name="device_reset">Reiniciar memória da DistoX</string>
+    <string name="device_code">Código da DistoX %1$4d</string>
     <string name="device_firmware">Firmware  %1$d.%2$d</string>
     <string name="device_hardware">Hardware  %1$d.%2$d</string>
     <string name="device_status_angle_grad">Unidade angular: grado</string>
@@ -145,8 +145,8 @@
  
 
     <!-- UNUSED string name="head_tail">Memória: </string -->
-    <string name="head_tail_failed">Falha ao ler o índice de memória do DistoX</string>
-    <string name="head_tail_store_failed">Falha ao gravar o índice de memória do DistoX</string>
+    <string name="head_tail_failed">Falha ao ler o índice de memória da DistoX</string>
+    <string name="head_tail_store_failed">Falha ao gravar o índice de memória da DistoX</string>
     <!-- UNUSED string name="pairing_failed">Falha no pareamento</string -->
 
     <string name="illegal_data_value">Dado inválido</string>
@@ -225,7 +225,7 @@
     <string name="no_geo_station">Falha: nenhuma base geolocalizada</string>
     <string name="no_leg_intersection">Linha de corte não cruza nenhuma linha de visada</string>
     <string name="no_location_data">Nenhuma informação de posição</string>
-    <string name="no_paired_device">Nenhum dispositivo associado.\nBusque e associe um DistoX</string>
+    <string name="no_paired_device">Nenhum dispositivo associado.\nBusque e associe uma DistoX</string>
     <string name="no_photos">Topo sem foto</string>
     <string name="no_plots">Topo sem nenhum croqui registrado.\nUse o botão Novo para criar um</string>
     <string name="no_profile_overview">Nenhuma panorâmica para as projeções</string>
@@ -315,7 +315,7 @@
     <string name="plot_start">Base inicial</string>
     <!-- UNUSED string name="plot_view">Base visualizada</string -->
     <!-- UNUSED string name="read_fail_with_code">Falha na leitura: código erro </string -->
-    <string name="read_failed">Falha na leitura do DistoX</string>
+    <string name="read_failed">Falha na leitura da DistoX</string>
     <!-- UNUSED string name="reading_file_failed">Falha leitura do arquivo</string -->
     <string name="saved_file_1">Arquivo salvo</string>
     <string name="saved_file_2">Arquivo salvo %1$s Escala %2$.2f</string>
@@ -380,15 +380,15 @@
     <string name="name">nome</string>
     <string name="team">equipe</string>
     <!-- UNUSED string name="toggle_device">Alternar estado de calibração do dispositivo</string -->
-    <string name="toggle_failed">Falha ao alternar o DistoX</string>
-    <string name="toggle_ok">Estado de calibração do DistoX trocado</string>
+    <string name="toggle_failed">Falha ao alternar a DistoX</string>
+    <string name="toggle_ok">Estado de calibração da DistoX trocado</string>
     <string name="undelete_text">Toque no item para restaurá-lo</string>
     <string name="delete_whole_leg">Apague este braço inteiro</string>
     <string name="visible_border">borda visível</string>
     <!-- UNUSED string name="vthreshold">limite vertical</string -->
     <string name="wait_scan">Procurando: espere &#8230;</string>
-    <string name="write_failed">Falha ao gravar no DistoX</string>
-    <string name="write_ok">Calibração gravada no DistoX</string>
+    <string name="write_failed">Falha ao gravar na DistoX</string>
+    <string name="write_ok">Calibração gravada na DistoX</string>
     <string name="zip_saved">Salvo </string>
     <string name="zip_failed">Falha na compressão da topo</string>
     <string name="unzip_fail">Falha na decompressão da topo</string>
@@ -413,7 +413,7 @@
     <string name="stat_splay">Medidas auxiliares %1$d</string>
     <string name="stat_station">Bases %1$d</string>
     <string name="stat_surface">Medidas na superfície %1$d %2$.1f %3$s</string>
-    <!-- OK string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]</string -->
+    <string name="stat_wens">O %1$.0f  L %2$.0f  N %3$.0f  S %4$.0f [%5$s]</string>
     <string name="stat_angle_error">Erros de ângulo %1$.2f ± %2$.2f</string>
     <string name="shot_title">MEDIDA %1$s - %2$s</string>
     <!-- OK string name="shot_data">D %1$.2f  A %2$.1f  I %3$.1f</string -->
@@ -423,21 +423,21 @@
     <string name="hide_ids">IDs das medidas</string>
     <string name="hide_splay">Medidas auxiliares (EDTC)</string>
 
-    <string name="plan">PLANTA</string>
-    <string name="extended">SECÇÃO</string>
-    <string name="profile">PROJETO.</string>
-    <string name="extended_profile">Secção estendida</string>
+    <string name="plan">PLANTA BAIXA</string>
+    <string name="extended">CORTE</string>
+    <string name="profile">PROJETO</string>
+    <string name="extended_profile">Corte estendido</string>
     <!-- UNUSED string name="v_section">CORTE V</string -->
     <string name="h_section">CORTE H</string>
 
     <string name="distox_err_ok">OK</string>
-    <string name="distox_err_headtail">Falha na leitura da memória do DistoX</string>
-    <string name="distox_err_headtail_io">Erro de I/O na memória do DistoX</string>
-    <string name="distox_err_headtail_eof">Erro de EOF na memória do DistoX</string>
+    <string name="distox_err_headtail">Falha na leitura da memória da DistoX</string>
+    <string name="distox_err_headtail_io">Erro de I/O na memória da DistoX</string>
+    <string name="distox_err_headtail_eof">Erro de EOF na memória da DistoX</string>
     <string name="distox_err_connected">Dispositivo já conectado</string>
 
     <!-- UNUSED string name="ask_close">Fechar TopoDroid?</string -->
-    <string name="ask_reset">Reiniciar memória do DistoX?</string>
+    <string name="ask_reset">Reiniciar memória da DistoX?</string>
     <!-- UNUSED string name="ask_close_survey">Fechar mapa?</string -->
     <string name="ask_gps_service">Configurar o serviço GPS?</string>
 
@@ -459,8 +459,8 @@
     <!-- UNUSED string name="button_direction">Azimute/Clinômetro</string -->
     <!-- UNUSED string name="button_azimuth">Azimute</string -->
     <string name="button_plot"    >Croqui</string>
-    <!-- TODO string name="button_more"    >More</string -->
-    <!-- TODO string name="button_lrud"    >Add LRUD</string -->
+    <string name="button_more"    >Mais</string>
+    <string name="button_lrud"    >Incluir EDTC</string>
     <!-- OK string name="button_ok"        >OK        </string -->
     <string name="button_open"      >Abrir     </string>
     <string name="button_read"      >Ler       </string>
@@ -490,7 +490,7 @@
     <string name="mode_station">Bases</string>
     <string name="mode_grid">Grade</string>
     <string name="mode_fixed">Referências fixas</string>
-    <string name="mode_outline">Somente contorno</string>
+    <string name="mode_outline">Contorno</string>
 
     <!-- UNUSED string name="remote_title">Controle remoto do dispositivo</string -->
     <!-- OK string name="remote_on">Laser ON</string -->
@@ -596,7 +596,7 @@
     <string name="help_plot">Editar croqui</string>
     <string name="help_note">Editar comentários da topo</string>
     <string name="help_bluetooth">Reiniciar conexão Bluetooth</string>
-    <string name="help_remote">Controlo remoto do DistoX</string>
+    <string name="help_remote">Controle remoto da DistoX</string>
     <string name="help_add_shot">Criar uma medida inserindo manualmente os dados</string>
     <string name="help_info_shot">Estatísticas da topo</string>
     <string name="help_survey_info">Informações sobre a topo</string>
@@ -643,11 +643,11 @@
     <string name="help_loc">Coordenada GPS</string>
     <string name="help_delete_survey">Apagar topo</string>
     <string name="help_delete_calib">Apagar calibração</string>
-    <string name="help_detach">Limpar escolha atual do DistoX</string>
-    <string name="help_firmware">Atualizador de firmware do DistoX2</string>
-    <string name="help_toggle">Alternar modo calibração do DistoX</string>
-    <string name="help_sdcard">Funções de memória do DistoX</string>
-    <string name="help_read">Ler e mostrar os coeficientes de calibração do DistoX</string>
+    <string name="help_detach">Limpar escolha atual da DistoX</string>
+    <string name="help_firmware">Atualizador de firmware da DistoX2</string>
+    <string name="help_toggle">Alternar modo calibração da DistoX</string>
+    <string name="help_sdcard">Funções de memória da DistoX</string>
+    <string name="help_read">Ler e mostrar os coeficientes de calibração da DistoX</string>
     <string name="help_info_device">Informações do dispositivo</string>
     <string name="help_scan">Procurar por novos dispositivos DistoX</string>
     <string name="help_pair">Parear o dispositivo DistoX selecionado</string>
@@ -656,7 +656,7 @@
     <string name="help_group">Definir agrupamento dos números automaticamente</string>
     <string name="help_cover">Visualizar a distribuição angular dos dados de calibração</string>
     <string name="help_compute">Calcular calibração</string>
-    <string name="help_write">Gravar coeficientes de calibração no DistoX</string>
+    <string name="help_write">Gravar coeficientes de calibração na DistoX</string>
 <!-- FIXME_SKETCH_3D -->
     <!-- UNUSED string name="help_refs_model">Modo de visualização</string -->
     <string name="help_one_model">Encaixar o modelo 3D na visualização</string>
@@ -705,7 +705,7 @@
     <string name="title_plot_reload">Recarregar croqui</string>
     <string name="title_profile_flip">Virar o corte?</string>
     <string name="title_projection">Azimute do corte projetado %1$d</string>
-    <string name="title_refs">Referências do croqui</string>
+    <string name="title_refs">Mostrar</string>
     <string name="title_scraps">Croquis da topo</string>
     <string name="title_select">Selecionar</string>
     <string name="title_shift">Deslocar</string>
@@ -955,8 +955,8 @@
   <string name="pref_fixed_thickness_summary">Espessura das linhas de trena</string>
   <string name="pref_fixed_thickness_message">Espessura das linhas de trena</string>
   <!-- UNUSED string name="pref_device_title">Dispositivo</string -->
-  <!-- UNUSED string name="pref_device_summary">Nome do endereço do DistoX</string -->
-  <!-- UNUSED string name="pref_device_message">Nome do endereço do DistoX</string -->
+  <!-- UNUSED string name="pref_device_summary">Nome do endereço da DistoX</string -->
+  <!-- UNUSED string name="pref_device_message">Nome do endereço da DistoX</string -->
   <string name="pref_checkBT_title">Bluetooth</string>
   <string name="pref_checkBT_summary">Habilitar verificação do Bluetooth na abertura do aplicativo</string>
   <string name="pref_checkAttached_title">Verificação linha de trena</string>
@@ -1114,13 +1114,13 @@
   <string name="firmware_title">Atualizador Firmware</string>
   <string name="firmware_file_title">Arquivos Firmware</string>
   <string name="firmware_text">
-\n[1] Selecionar uma das 2 opções: "Enviar" um novo firmware para o DistoX ou "Baixar" o firmware atual do DistoXpara para um arquivo local.
+\n[1] Selecionar uma das 2 opções: "Enviar" um novo firmware para a DistoX ou "Baixar" o firmware atual da DistoX para para um arquivo local.
 \n[2] Selecione o arquivo a ser enviado ou baixado. Os arquivos de firmware estão na pasta bin.
-\n[3] Assegure-se de que a versão do firmware seja compatível com a versão do hardware do DistoX.
-\n[4] Colocar o DistoX2 na modalidade bootloader: manter o botão "MAIS ou MENOS" pressionado em quanto liga o Disto X com  a tecla DIST.
+\n[3] Assegure-se de que a versão do firmware seja compatível com a versão do hardware da DistoX.
+\n[4] Colocar a DistoX2 na modalidade bootloader: manter o botão "MAIS ou MENOS" pressionado em quanto liga o Disto X com  a tecla DIST.
 \n[5] Apertar o botão OK.
 \n[6] Confirme para continuar e aguarde até a conclusão do processo.
-\n[7] Desligar o DistoX2 com a tecla CLR.
+\n[7] Desligar a DistoX2 com a tecla CLR.
 \n
    </string>
    <string name="firmware_none">nenhum arquivo firmware encontrado</string>
