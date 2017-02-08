@@ -460,7 +460,7 @@
     <!-- UNUSED string name="button_azimuth">Azimute</string -->
     <string name="button_plot"    >Croqui</string>
     <string name="button_more"    >Mais</string>
-    <string name="button_lrud"    >Adicionar EDTC</string>
+    <string name="button_lrud"    >Incluir EDTC</string>
     <!-- OK string name="button_ok"        >OK        </string -->
     <string name="button_open"      >Abrir     </string>
     <string name="button_read"      >Ler       </string>
