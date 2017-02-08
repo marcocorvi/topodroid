@@ -413,7 +413,7 @@
     <string name="stat_splay">Medidas auxiliares %1$d</string>
     <string name="stat_station">Bases %1$d</string>
     <string name="stat_surface">Medidas na superfície %1$d %2$.1f %3$s</string>
-    <string name="stat_wens">L %1$.0f  O %2$.0f  N %3$.0f  S %4$.0f [%5$s]</string>
+    <string name="stat_wens">O %1$.0f  L %2$.0f  N %3$.0f  S %4$.0f [%5$s]</string>
     <string name="stat_angle_error">Erros de ângulo %1$.2f ± %2$.2f</string>
     <string name="shot_title">MEDIDA %1$s - %2$s</string>
     <!-- OK string name="shot_data">D %1$.2f  A %2$.1f  I %3$.1f</string -->
