@@ -148,7 +148,7 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
   //   for ( DistoXDBlock b : mItems ) if ( b.mId == id ) return b;
   //   return null;
   // }
- 
+
   private class ViewHolder
   { 
     int      pos;
@@ -156,22 +156,16 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
     TextView tvFrom;
     TextView tvTo;
     TextView tvLength;
-    // TextView tvCompass;
-    // TextView tvClino;
-    // TextView tvNote;
 
-    ViewHolder( TextView id, TextView from, TextView to,
-                TextView len /*, TextView ber, TextView cln, TextView note */ ) 
+    ViewHolder( TextView id, TextView from, TextView to, TextView len )
     {
       pos = 0;
       tvId      = id;
       tvFrom    = from;
       tvTo      = to;
       tvLength  = len;
-      // tvCompass = ber;
-      // tvClino   = cln;
-      // tvNote    = note;
     }
+
 
     void setViewText( DistoXDBlock b, OnLongClickListener listener )
     {
@@ -183,10 +177,6 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
         b.mBearing * TDSetting.mUnitAngle,
         b.mClino * TDSetting.mUnitAngle,
         b.toNote() ) );
-      // tvLength.setText(  String.format(Locale.US, "%1$.2f", b.mLength * TDSetting.mUnitLength ) );
-      // tvCompass.setText( String.format(Locale.US, "%1$.1f", b.mBearing * TDSetting.mUnitAngle ) );
-      // tvClino.setText(   String.format(Locale.US, "%1$.1f", b.mClino * TDSetting.mUnitAngle ) );
-      // tvNote.setText( b.toNote() );
 
       OnClickListener toggle = new OnClickListener() {
         public void onClick( View v ) { mParent.recomputeItems( ((TextView)v).getText().toString(), pos ); }
@@ -203,18 +193,15 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
       int text_size = TDSetting.mTextSize;
 
       if ( tvFrom.getTextSize() != text_size ) {
-        tvId.setTextSize(      text_size );
+        tvId.setTextSize(      text_size*0.75f );
         tvFrom.setTextSize(    text_size );
         tvTo.setTextSize(      text_size );
         tvLength.setTextSize(  text_size );
-        // tvCompass.setTextSize( text_size );
-        // tvClino.setTextSize(   text_size );
-        // tvNote.setTextSize(    text_size );
       }
 
       if ( show_ids ) {
         tvId.setVisibility( View.VISIBLE );
-        tvId.setTextColor( 0xff6666cc ); // light-blue
+        tvId.setTextColor( 0xff6699ff ); // light-blue
       } else {
         tvId.setVisibility( View.GONE );
       }
@@ -226,9 +213,6 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
         tvTo.setTextColor(   col );
       }
       tvLength.setTextColor(  col );
-      // tvCompass.setTextColor( col );
-      // tvClino.setTextColor(   col );
-      // tvNote.setTextColor(    col );
 
       if ( b.isRecent( mParent.secondLastShotId() ) ) {
         tvFrom.setBackgroundColor( 0xff000033 ); // dark-blue
@@ -236,12 +220,8 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
       } 
       if ( b.isMagneticBad( ) ) {
         tvLength.setBackgroundColor( 0xff330000 ); // dark-red
-        // tvCompass.setBackgroundColor( 0xff330000 ); // dark-red
-        // tvClino.setBackgroundColor( 0xff330000 ); // dark-red
       } else {
         tvLength.setBackgroundColor( 0xff000000 ); // black
-        // tvCompass.setBackgroundColor( 0xff000000 ); // black
-        // tvClino.setBackgroundColor( 0xff000000 ); // black
       }
     }
   }
@@ -258,10 +238,6 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
         (TextView)convertView.findViewById( R.id.from ),
         (TextView)convertView.findViewById( R.id.to ),
         (TextView)convertView.findViewById( R.id.length ) );
-        // (TextView)convertView.findViewById( R.id.length ),
-        // (TextView)convertView.findViewById( R.id.compass ),
-        // (TextView)convertView.findViewById( R.id.clino ),
-        // (TextView)convertView.findViewById( R.id.note ) );
       convertView.setTag( holder );
     } else {
       holder = (ViewHolder) convertView.getTag();

@@ -1807,7 +1807,7 @@ class TDExporter
 
   static String exportSurveyAsGtx( long sid, DataHelper data, SurveyInfo info, String filename )
   {
-    String date = info.date.replaceAll( ".", "-" );
+    String date = info.date.replace( '.', '-' );
     try {
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
@@ -1815,7 +1815,7 @@ class TDExporter
 
       pw.format("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<GHTopo>\n");
       pw.format("  <General>\n");
-      pw.format("    <Cavite FolderName=\"%s created by TopoDroid v %s\" CoordsSystem=\"\" CoordsSystemEPSG=\"4978\" FolderObsercations=\"\"/>\n",
+      pw.format("    <Cavite FolderName=\"%s created by TopoDroid v %s\" CoordsSystem=\"\" CoordsSystemEPSG=\"4978\" FolderObsevcations=\"\"/>\n",
                 TopoDroidUtil.getDateString("yyyy/MM/dd"), TopoDroidApp.VERSION );
       pw.format("  </General>\n");
 
