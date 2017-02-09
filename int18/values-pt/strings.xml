@@ -120,7 +120,7 @@
     <string name="splay_at_to">Dados EDTC na base PARA</string>
 
     <string name="few_data">Não há dados suficientes</string>
-    <string name="few_iter">Falha ao iterar</string>
+    <string name="few_iter">Falha: excesso de iterações</string>
     <string name="few_groups">Não há dados suficientes para os grupos</string>
     <!-- UNUSED string name="few_plots">Esboços não suficientes</string -->
     <string name="few_calibs">Calibrações insuficientes</string>
