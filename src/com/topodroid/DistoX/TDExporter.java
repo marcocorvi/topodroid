@@ -1815,7 +1815,7 @@ class TDExporter
 
       pw.format("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<GHTopo>\n");
       pw.format("  <General>\n");
-      pw.format("    <Cavite FolderName=\"%s created by TopoDroid v %s\" CoordsSystem=\"\" CoordsSystemEPSG=\"4978\" FolderObsevcations=\"\"/>\n",
+      pw.format("    <Cavite FolderName=\"%s created by TopoDroid v %s\" CoordsSystem=\"\" CoordsSystemEPSG=\"4978\" FolderObservations=\"\"/>\n",
                 TopoDroidUtil.getDateString("yyyy/MM/dd"), TopoDroidApp.VERSION );
       pw.format("  </General>\n");
 
@@ -1844,7 +1844,7 @@ class TDExporter
       pw.format("  </Networks>\n");
 
       pw.format("  <Codes>\n");
-      pw.format("    <Code PsiL=\"0.05\" PsiP=\"1.0\" PsiAz=\"1.0\" Numero=\"1\" Comment=\"\" ");
+      pw.format("    <Code PsiL=\"0.05\" PsiP=\"1.0\" PsiAz=\"1.0\" Numero=\"1\" Comments=\"\" ");
       pw.format("FactLong=\"1\" ClinoUnit=\"360\" AngleLimite=\"100\" CompassUnit=\"360\" ");
       pw.format("FuncCorrAzCo=\"0\" FuncCorrIncCo=\"0\" FuncCorrAzErrMax=\"0\" FuncCorrIncErrMax=\"0\" ");
       pw.format("FuncCorrAzPosErrMax=\"0\" FuncCorrIncPosErrMax=\"0\" Type=\"0\"/>\n");
