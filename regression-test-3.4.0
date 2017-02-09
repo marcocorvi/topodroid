@@ -1,0 +1,789 @@
+TopoDroid Regerssion Tests
+
+This is an incomplete list of things to check 
+
+[ ] install apk over an existing installation and check that it starts
+    preserving the user preferences
+[ ] install apk without existing installation and check it starts
+    with default user preferences values
+    check that the directory "topodroid" is properly populated
+
+LANGUAGES
+[ ] es [ ] fr [ ] de [ ] it [ ] cn [ ] bg [ ] ru [ ] ua [ ] sl [ ] pt [ ] hu
+
+MAIN WINDOW
+[ ] activity level
+    [ ] buttons presence according to the "activity-level"
+    [ ] functionalities enabled by the activity-level
+[ ] verify that the settings display as for the activity level
+    [ ] level-0 (basic)
+    [ ] level-1 (normal)
+    [ ] level-2 (advanced)
+    [ ] level-3 (experimental)
+    [ ] level-4 (complete)
+
+[ ] create a new survey
+[ ] set the "team" option and check it appears in the new survey
+[ ] set the "initial station" setting and check it appears in the new survey
+    [ ] check station cut-n-paste
+[ ] check the survey name is required
+[ ] check duplicate name not allowed
+
+[ ] import th file
+[ ] import dat file
+[ ] import tro file
+[ ] import top file
+
+[ ] palette button 
+    [ ] verify that changes to the global palette affect the drawing tools for the new sketches
+
+[ ] symbol-sets menu
+    [ ] insert symbol-set and check new symbol appear in the palette
+    [ ] replace symbol-set and check only new symbol are in the palette
+
+[ ] settings: check the proper navigation in the sub-settings
+[ ] for each setting check:
+    [ ] modification with immediate feedback of the new value on the screen
+    [ ] bound enforcing (when applicable)
+
+[ ] buttons size. check the button size on all interfaces:
+    [ ] main window
+    [ ] shot window
+    [ ] survey window
+    [ ] sketch window
+    [ ] overview window
+    [ ] device window
+    [ ] calib window
+    [ ] gm-data window
+[ ] text size:
+    [ ] main window: survey list
+    [ ] shot window: shot data list
+    [ ] device window: device list
+    [ ] gm-data window: calib data list
+[ ] language
+    [ ] check the supported languages are all listed in the language setting
+    [ ] check the unsupported languages are not listed in the language setting
+    [ ] check that topodroid uses the selected language
+    [ ] check that if no language is selected it uses the android locale (if available)
+    [ ] check that the language strings are properly rendered in every language
+        Buttons:  [ ] es [ ] fr [ ] de [ ] it [ ] cn [ ] bg [ ] ru [ ] ua [ ] sl [ ] pt [ ] hu
+        Titles:   [ ] es [ ] fr [ ] de [ ] it [ ] cn [ ] bg [ ] ru [ ] ua [ ] sl [ ] pt [ ] hu
+        Messages: [ ] es [ ] fr [ ] de [ ] it [ ] cn [ ] bg [ ] ru [ ] ua [ ] sl [ ] pt [ ] hu
+    [ ] on changing language the settings are updated to the new language
+[ ] current work directory
+    [ ] enter a name of non-existing directory: check it is created and properly populated of subdirs
+        this happens also if the cwd is set, the app is shit down, the directory is deleted, the app is restarted
+    [ ] enter a name without "topodroid": this must be prepended to the dir name
+    [ ] enter a name with prefix "topodroid": this is not prepended to the dir name
+    [ ] select existing directory
+
+[ ] about menu
+    the about menu in custom language must have the name and email of the translator
+    [ ] es  [ ] fr  [ ] de  [ ] it  [ ] cn  [ ] bg  [ ] ru  [ ] ua  [ ] sl  [ ] pt  [-] hu
+
+[ ] help menu: check the quick help strings
+[ ] sections and pages of the user manual and their navigation/organization
+[ ] content of the user-manual sections and pages
+[ ] web-link in the user manual
+[ ] in each activity/dialog the MENU button opens the help page
+[ ] the "index" refers to *all* the subpages
+
+
+DEVICE WINDOW
+[ ] buttons presence according to the "activity-level"
+
+[ ] bluetooth reset button
+[ ] calib-mode toggle button (*)
+    [ ] X310 first time on, second time off
+    [ ] A3 toggle according to the current state
+[ ] calibration button -> calib-list dialog
+[ ] memory info button -> memory dialog (*)
+    [ ] dump data from disto X310
+    [ ] dump data from disto A3
+    [ ] save data to file
+        [ ] "dump" dir must be automatically created
+[ ] calibration coeffs read
+[ ] info button (*)
+    [ ] X310
+    [ ] A3
+
+[ ] scan menu: (*)
+    forget DistoX from android and scan for it (might need a few trials)
+[ ] pair menu (*)
+    pair with the DistoX 
+[ ] disconnect menu: cancel the selected DistoX
+[ ] firmware menu -> firmware dialog
+    [ ] read the DistoX firmware to a file: check the file is in "bin" (*)
+    [ ] upload a new firmware to the DistoX (*)
+
+[ ] settings menu
+    [ ] BT check:
+        [ ] no BT:
+        [ ] check BT on start:
+    [ ] connection mode
+        [ ] try data download with on-demand 
+        [ ] try data download with continuous mode
+    [ ] auto reconnect
+    [ ] socket type
+        data download should work with every socket type
+    [ ] Z6 workaround
+        data download should work with or without it
+    [ ] socket delay
+        0 should be OK
+    [ ] auto pairing
+        make android forget the DistoX, scan for it with TopoDroid,
+        when found select it, try to use it without pairing it before.
+    (backup files are not cleared)
+        if set, it should be auto-paired, otherwise a pairing notification
+[ ] calibration sub-setting: should open the calib settings
+
+[ ] help strings
+
+
+CALIBRATION DIALOG
+[ ] import calibration
+    [ ] export a calibration in csv, check the file in the ccsv dir
+    [ ] delete the calibration: check the tables in device10.sqlite
+    [ ] import the csv calib file
+        [ ] toast message ok
+        [ ] calibration is added to the list
+    [ ] import again the csv calib file
+        [ ] import fails if calib already exists
+    [ ] reset DistoX calibration coeff
+        [ ] check the coeffs by reading them back
+[ ] new calibration
+
+CALIBRATION INFO SCREEN
+[ ] enter a name and save: open+read button must become enabled
+[ ] read calib coeff: when empty must be V=0 M=0 NL=0
+[ ] open calibration: opens the gm-data window
+[ ] select different algo and check its effect
+    [ ] select linear, save, go to GMActivity and calibrate
+    [ ] select non-linear etc.
+    [ ] select minimum etc.
+    [ ] select auto ect.
+
+CALIB DATA WINDOW
+[ ] data download (only on-demanad mode) (*)
+    [ ] the button and the title turn red while downloading
+    take a few calibration shots and download them
+    take more shots, download them: must be added to the list
+[ ] calib-mode toggle (*)
+[ ] group assignment
+    [ ] the button turn violet while computing
+    [ ] assign only numbers to data with "0"
+    [ ] "reset" resets all the group numbers (and does not do assignment)
+[ ] calib coeff compute
+    [ ] fails if not enough data (<= 16)
+    [ ] fails if not enough groups (<= 4)
+    [ ] fails if reaches max iteration numnber (set it to a small value to check)
+    [ ] the button turn violet while computing
+    [ ] the results is displayed: 
+        [ ] coeffs, 
+        [ ] error-stats,
+        [ ] histogram
+[ ] angle distribution 
+    [ ] enabled only after computing the coeffs
+[ ] calib coeff read from distox (*)
+[ ] calib coeff write to distox (*)
+    [ ] enabled only after computing the coeffs
+    [ ] write the coeffs just read)
+    [ ] read the coeffs to check them
+
+[ ] menu display: 
+    [ ] delete a data, check it is shown/hidden
+    [ ] undelete the data
+[ ] calib validate: need two good calibrations
+    [ ] the results is displayed: 
+        [ ] [ ] [ ] histogram
+        [ ] [ ] [ ] error-stats,
+[ ] settings
+    [ ] group policy
+    [ ] group distance
+    [ ] eps: try a large eps (0.1), the calib compute should end with few iterations
+    [ ] iterations: try a small value (10)
+    [ ] raw data
+    [ ] algo
+        [ ] auto should pick the algo by the device type/firmware
+        [ ] linear/non-linear should force the algo
+[ ] help strings
+
+SURVEY DATA WINDOW
+[ ] check display mode
+[ ] display colors: white-leg blue-splay grey-rep.leg
+[ ] tap on a station to display its splays
+    [ ] tap again to hide them
+[ ] selectively display splays of two stations
+[ ] select active-station (log-tap): it must turn green
+    [ ] download data and check next shot is attached to it (*)
+        [ ] with toporobot policy a new "traverse" is started
+    [ ] check it is displayed as hint in the manual shot dialog
+    [ ] check it is shown in the saved-stations dialog if opened
+
+[ ] sketches
+    [ ] add a new sketch: dialog (name + ref. station)
+        [ ] duplicate sketch name -> error
+        [ ] non-existing station -> error
+        [ ] origin station is the last one 
+        [ ] origin station is the active-station if defined 
+        [ ] check station cut-n-paste
+        [ ] select projected profile: orientation dialog
+            [ ] OK confirm
+            [ ] BACK cancel
+    [ ] open existing sketch
+        [ ] open with the plan view
+        [ ] open with the profile (extended/projected) view
+[ ] long-tap open last sketch, with the last view
+
+[ ] data download (*)
+    [ ] button grey if no DistoX selected
+    [ ] on-demand mode
+        [ ] button turns red (while connected), blue (non connected)
+    [ ] continuous mode without auto-reconnect
+        [ ] button turns red (while connected), blue (non connected)
+    [ ] continuous mode with auto-reconnect
+        [ ] button turns red (while connected), yellow (connecting), blue (non connected)
+    [ ] verify data delay
+    [ ] station naming policies
+        [ ] splays + forward
+        [ ] splays + backward
+        [ ] forward + splays
+        [ ] backward + splays
+        [ ] backward + splays + forward
+        [ ] tripod
+        [ ] toporobot
+    [ ] check proper station naming WHEN SPLAYS ARE MISSING
+        [ ] splays + forward
+        [ ] splays + backward
+        [ ] forward + splays
+        [ ] backward + splays
+        [ ] backward + splays + forward
+        [ ] tripod
+        [ ] toporobot
+
+[ ] bluetooth
+    X310 fw >= 3:
+      [ ] reset
+      [ ] laser on
+      [ l laser off 
+      [ ] measure with immediate download
+      // [ ] measure without download DROPPED
+      [ ] verify laser/shot delays
+    others
+      [ ] reset
+[ ] annotations
+    [ ] verify consistency with file on filesystem
+    [ ] consistency with annotation button of sketch window
+[ ] reference extend azimuth
+    [ ] if set to left/right (fixed) shot must be extended properly
+    [ ] if set to a direction shot must be right (along dir.) left (opposite dir.)
+    [ ] reference extend azimuth is maintained switching between shot-list and sketching
+[ ] saved stations dialog
+    [ ] add a station
+    [ ] select a saved station
+    [ ] check station cut-n-paste
+    [ ] marks (fixed/painted)
+[ ] manual shot
+    [ ] enter a new shot manually
+    [ ] check from station cut-n-paste
+    [ ] check to station cut-n-paste
+    [ ] station hints set by the auto-station policy
+    [ ] splays must be inserted according to the station-naming policy
+        [ ] splays before for "splays + forward"
+        [ ] splays before for "splays + backward"
+        [ ] splays after for "forward + splays"
+        [ ] splays after for "backward + splays"
+    [ ] backshot fields only if option is set
+    [ ] if backshot this is inserted as well (before the shot and the splays)
+    [ ] if only backshot this is inserted in place of the shot
+    [ ] check splays-at-to 
+    [ ] compass-button reads azimuth and clino
+
+SHOT DIALOGS
+tap a shot data
+[ ] if it was a manual shot length/azimuth/clino are editable
+    [ ] changes reflected in shot data list
+[ ] if it was a DistoX shot length/azimuth/clino are not editable
+[ ] check from station cut-n-paste
+[ ] check to station cut-n-paste
+[ ] "reverse": swap stations
+[ ] "<" ">": should navigate in the list of legs
+[ ] add comment: 'N' should be appended
+[ ] clear a comment: 'N' should disappear
+[ ] change extend: should reflect on the item line
+[ ] try the buttons
+    [ ] duplicate: +
+    [ ] surface: -
+    [ ] repeated-leg
+    [ ] merge to following leg
+    [ ] splay group: all splays of the group with same station should be updated
+    [ ] renumber: following shots should be renumbered according to the current station-naming policy
+[ ] "ok" saves changes and closes dialog
+[ ] "save" saves changes but does not close dialog
+[ ] "more" opens secondary dialog
+[ ] "cancel" closes dialog
+
+long tap on splay data
+[ ] opens last sketch with splay station in the middle and splay highlighted
+
+SECONDARY SHOT EDIT DIALOG
+[ ] take a photo
+[ ] take a sensor measurement
+[ ] add a shot before
+    [ ] station hints according to auto-station policy
+[ ] split survey at the shot (the shot is the first of the new survey)
+[ ] "delete" the shot (mark it as "deleted")
+    [ ] recover shot
+[ ] add LRUD at FROM station
+    [ ] check that left/right are to the shot direction
+[ ] add LRUD at TO station
+    [ ] not for splays
+    [ ] check that left/right are to the shot direction
+
+[ ] survey info menu
+[ ] recover deleted items: the dialog must show
+    [ ] deleted shot(s)
+    [ ] deleted sketch(es) [only plan/extended, no x-sections]
+    [ ] toast message if there is nothing to recover
+[ ] view photos
+    [ ] toast message if there is no photo
+    [ ] list photos
+        [ ] tapping a photo opens the photo dialog with thumbnail, comment, delete-button
+            [ ] change comment
+            [ ] view photo (tap thumbnail)
+            [ ] delete photo: check file disappear from filesystem
+[ ] view sensosrs measurements
+    [ ] toast message if there is no sensor measurement
+[ ] 3D display
+[ ] device window menu
+[ ] settings
+[ ] help strings
+
+SURVEY INFO WINDOWS
+[ ] check that the "name" is not editable
+[ ] change "team"
+[ ] change magn. declination
+[ ] change description
+[ ] date picker
+
+[ ] annotations: should be the same as in shot-window and sketch-window
+[ ] info
+[ ] 3D display
+[ ] gps dialog
+[ ] photo list dialog
+[ ] sensor list dialog
+
+[ ] export menu
+    export in each format and verify the file appear the respective directory
+    [ ] ZIP
+        [ ] default data export format is updated (if defined)
+    [ ] compass
+    [ ] PocketTopo
+    [ ] Polygon
+    [ ] Grottolf
+    [ ] GHTopo
+    [ ] Survex
+    [ ] Therion
+    [ ] Topo
+    [ ] VisualTopo
+    [ ] Walls
+    [ ] CSV
+    [ ] DXF
+    [ ] KML
+        [ ] fails if no geo-referenced station
+    [ ] Track file
+        [ ] fails if no geo-referenced station
+[ ] check the default data export format is done before the ZIP export and included
+[ ] rename the survey: check that all survey data get renamed
+    [ ] th2 sketch files 
+    [ ] tdr sketch files
+    [ ] other sketch files: csx, png, dxf, svg
+    [ ] photo directory
+    [ ] annotation file
+    [ ] records in the database tables
+    [ ] other exports: th, csv, cav, cave, dat, dxf, grt, gtx, plt, kml, sxv, svr, top, tro, csx, png, svg
+*** IMPORTANT sketch backups are not renamed
+
+[ ] delete the survey: check that all the related files are deleted
+    [ ] data exports must be deleted
+        [ ] compass
+        [ ] PocketTopo
+        [ ] Polygon
+        [ ] Survex
+        [ ] Grottolf
+        [ ] GHTopo
+        [ ] Therion
+        [ ] Topo
+        [ ] VisualTopo
+        [ ] Walls
+        [ ] CSV
+        [ ] DXF
+        [ ] KML
+        [ ] Track file
+    [ ] sketch files and backup must be deleted
+        [ ] tdr
+    [ ] sketch exports must be deleted
+        [ ] th2
+        [ ] csx
+        [ ] png
+        [ ] dxf
+        [ ] svg
+    [ ] zip archives are not deleted
+[ ] calibration: enter calibration values for tape, compass, clino:
+    [ ] verify that following manually entered shots are affected accordingly 
+        the values registered in the db are those entered in the dialog subtracted the calibrations
+        NOTE LRUD are affected only in the angles
+[ ] settings
+[ ] help strings
+
+GPS DIALOG
+[ ] check station cut-n-paste
+[ ] check that the GPS/add can be used only after a station has been entered
+[ ] if GPS is not enabled a doalog ask to enable it
+[ ] the GPS must show the number of satellites, and (when enough) update the position 
+[ ] with the GPS position "add" opens a dialog with the same position
+[ ] without GPS position the "add" dialog has empty fields
+    [ ] check that "W" is like minus, for longitude
+    [ ] check that "S" is like minus for latitude
+    [ ] check that the altitudes make sense
+    [ ] view point on a map-viewer
+    [ ] test coordinate conversion
+    [ ] enter point in other CRS thru Proj4
+[ ] check the use of MobileTopographer to get the position
+[ ] tap on a fixed-point line: location edit dialog
+    [ ] change station 
+    [ ] try coord conversion
+        [ ] Proj4 gets default CRS if fixed has no cs
+            [ ] and fixed gets cs selected inProj4
+        [ ] Proj4 gets fixed cs if defined
+        [ ] converted coordinates shown in the textfield below
+    [ ] view point on a map-viewer (Earth, Androzic, Maps, ...)
+    [ ] delete fixed-point
+
+Data reduction
+[ ] loop closure
+[ ] trilateration
+ 
+SKETCH WINDOW
+[ ] load/save of (binary) files ("label" and "danger" point)
+[ ] check that the sketch stays in cache
+[ ] check the default sketch export format is properly done
+
+[ ] with autostations check they are in the th2 files
+[ ] without autostations check that a station can be set for export and marked with a triangle
+
+<move mode>
+[ ] drag
+[ ] two-finger zoom
+[ ] zoom-controls
+[ ] data download
+    [ ] on demand mode
+    [ ] continuous mode without auto-reconnect
+    [ ] continuous mode with auto-reconnect
+    [ ] button changes color
+[ ] BT dialog (on-demand mode: continuous mode is only BT reset)
+    [ ] laser on
+    [ ] laser off
+    [ ] measure splay
+    [ ] measure leg
+    [ ] BT reset
+[ ] reference display
+    [ ] grid
+        [ ] check the three-level grids
+    [ ] centerline
+    [ ] splays
+    [ ] stations (pink)
+        [ ] check station textsize setting
+    [ ] fix ref two-finger drag
+[ ] plan/profile switch 
+[ ] extend reference azimuth
+    ...
+[ ] annotations
+
+[ ] profile flip (long-press plot/profile button)
+    [ ] only for extended profile view
+    [ ] flip shots as well
+    [ ] do not flip shots
+
+[ ] export menu: check the various format 
+    [ ] have the toast message
+    [ ] are properly exported in either plan, or profile, or x-section
+      [ ] [ ] [ ] therion
+      [ ] [ ] [ ] csurvey
+      [ ] [ ] [ ] PNG
+      [ ] [ ] [ ] DXF
+      [ ] [ ] [ ] SVG
+[ ] default export format: check they are exported and there is no toast message
+    [ ] are properly exported in either plan, or profile, or x-section
+      [ ] [ ] [ ] therion
+      [ ] [ ] [ ] csurvey
+      [ ] [ ] [ ] PNG
+      [ ] [ ] [ ] DXF
+      [ ] [ ] [ ] SVG
+[ ] stats
+[ ] reload from backup
+[ ] delete (mark as "deleted")
+[ ] palette
+    [ ] changes to the palette reflect on the item lists in the picker dialogs
+[ ] overview
+[ ] settings
+[ ] help strings
+
+<draw mode>
+[ ] draw a line
+[ ] change line type
+[ ] draw another line
+[ ] draw point(s)
+    [ ] label dialog
+[ ] draw areas(s)
+[ ] undo
+[ ] redo
+[ ] check line-continuation drawing (working within a line-group)
+    [ ] with option "join" (verify undo/redo)
+    [ ] with option "continue" (verify interaction with undo/redo)
+
+[ ] two finger drag
+[ ] two finger zoom
+[ ] side-drag (setting)
+[ ] zoom controls (setting)
+
+recent symbol picker
+[ ] tools remain consistent on a per-directory basis
+[ ] tap select item
+[ ] long tap brings item in front
+[ ] orientation is active iff first point is orientable
+[ ] "-/+" button decrease (tap) increase (long-tap) the scale
+[ ] number of symbols (setting)
+
+list/grid symbol picker
+[ ] selection of item
+[ ] tab switch
+[ ] orientation is active iff first point is orientable
+[ ] double-tap is select confirm
+[ ] close picks the last selection
+
+triple-grid symbol picker
+[ ] double-tap is select confirm
+[ ] close picks the last selection
+
+<erase mode>
+[ ] two finger draw
+[ ] two finger zoom
+[ ] side drag if enabled (setting)
+[ ] zoom comtrols (setting)
+[ ] erase part of a line from the beginning
+[ ] erase part of a line from the end
+[ ] erase the middle of a line
+[ ] erase a point
+[ ] erase an area (a piece at at time)
+[ ] verify erase radius (= size)
+[ ] undo
+[ ] redo
+
+<edit mode>
+[ ] selection
+[ ] drag, zoom, with selection 
+[ ] drag, zoom, with no selection 
+[ ] select a point and move it
+    [ ] check that moving a selected point transfer to the proper bucket:
+        move the point a lot and it must be "selectable" again
+[ ] select a line/area point and change it (possible its CP's)
+[ ] select a cluster of points: move among them with '<' '>'
+[ ] pointwise actions
+    [ ] snap to nearby point
+    [ ] snap to nearby line (for areas)
+    [ ] duplicate point (then move point off the duplicate: selection stays with prev point) 
+    [ ] cut line at point
+    [ ] straighten segment (drop CP's)
+    [ ] smoothen segment (insert CP's)
+    [ ] remove point (line/area)
+[ ] item-wise editing
+  - line 
+    [ ] line type
+    [ ] options
+    [ ] outline 
+    [ ] reverse
+        [ ] check consistency of the direction yellow tick
+    [ ] convert to polyline (if bezier)
+    [ ] straighten (good for rock-border, but it works also for other types)
+    [ ] close
+    [ ] delete 
+        [ ] undo delete
+  - section-line
+    [ ] the sketch is re-opened
+    [ ] the photo is overwritten if retaken
+    [ ] erase removes files (th2/tdr/photo) and info from the database
+    [ ] verify that the section point is inserted (if setting is on)
+  - area
+    [ ] visible border
+    [ ] orientation (if orientable)
+  - point
+    [ ] scale
+    [ ] orientation (if point is orientable)
+    [ ] text (label)
+    [ ] options
+  - leg/splay shot
+    [ ] extend correction
+    [ ] stations change
+        [ ] cut-n-paste
+  - station
+    [ ] select as station to export (visible only if not autostations)
+    [ ] hide/show previous centerline
+    [ ] hide/show following centerline
+    [ ] set current station: chck next shot is attached to it
+    [ ] toggle at-station splay display
+    [ ] at-station cross-sections
+        [ ] shown as a red tick
+
+OVERVIEW
+[ ] check overview from drawing window contains all sketches
+[ ] references in overview
+[ ] measure 
+[ ] settings are the same as for sketch
+[ ] help
+[ ] close menu
+
+IMPORT-EXPORT
+[ ] check proper treatement of LRUD for compass/vtopo import
+[ ] check ptopo cmap
+[ ] check "therion" import
+    [ ] "fix" command
+    [ ] "mark" command (fixed/painted stations)
+    [ ] "station" command
+    [ ] "flag" command
+    [ ] "units" are properly handled
+
+survey data export
+[ ] compass
+    [ ] check effect of LRUD-shot angle threshold
+[ ] survex
+    [ ] splays with '-' or with "auto-stations"
+    [ ] line termination lf/nl or nl
+    [ ] "units" agree with user settings
+[ ] walls
+    [ ] "units" agree with user settings
+[ ] therion
+    [ ] "fix"
+    [ ] "mark" (fixed/painted stations)
+    [ ] "station"
+    [ ] "units" agree with user settings
+    [ ] map command before or after centerline (setting)
+[ ] vtopo
+    [ ] check effect of LRUD-shot angle threshold
+    [ ] "Trou" with coords and "Entree" if there is a fixed
+    [ ] only "True" if no fixed
+[ ] ptopo
+[ ] dxf 3d
+[ ] csv
+    [ ] units
+[ ] kml
+    [ ] warning message if no fixed point
+[ ] track
+    [ ] warning message if no fixed point
+
+sketch export
+[ ] therion
+    // [ ] xtherion areas DROPPED
+    [ ] auto-stations or user-selected stations
+    [ ] splays in th2 (if option enabled)
+[ ] csurvey (plan profile in one file)
+    [ ] with/without survey prefix to stations
+[ ] dxf 2D
+    VariCAD BricsCAD
+    [ ] [ ] scale
+    [ ] [ ] layers
+    [ ] [ ] splines
+    [ ] [ ] labels
+    [ ] [ ] points orientation
+[ ] png
+    [ ] resolution setting
+    [ ] toast message with actual resolution
+    [ ] background setting
+[ ] svg
+    [ ] check including svg in html
+
+----------------------------------------------------------
+SEQUENCE OF OPS
+[ ] archive a survey,
+    [ ] check the manifest file
+        [ ] topodroid version
+        [ ] database version
+        [ ] survey name
+    [ ] check the sqlite file
+    [ ] check that the zip contains all the survey data 
+        [ ] csv
+        [ ] cav   Topo
+        [ ] cave  Polygon
+        [ ] dat   Compass
+        [ ] dxf
+        [ ] kml
+        [ ] plt   OziExplorer
+        [ ] srv   Walls
+        [ ] svx   Survex
+        [ ] th    Therion
+        [ ] top   PocketTopo
+        [ ] tro   VisualTopo
+    [ ] check that the zip contains the survey notes (txt)
+    [ ] check that the zip contains all the survey images (jpg)
+    [ ] check that the zip contains all the survey sketches
+        [ ] tdr: plan profile and x-sections
+        [ ] th2
+        [ ] png
+        [ ] csx
+        [ ] dxf
+        [ ] svg
+    delete the survey
+    [ ] check that all the survey files are deleted and the survey data are cancelled from the database
+    import from archive and check to have it all
+      [ ] data in the database and files
+        [ ] csv
+        [ ] cav
+        [ ] cave
+        [ ] dat
+        [ ] dxf
+        [ ] kml
+        [ ] plt
+        [ ] srv
+        [ ] svx
+        [ ] th
+        [ ] top
+        [ ] tro
+      [ ] survey notes file (txt)
+      [ ] photo directory with jpg files
+      [ ] sketch files (including x-sections)
+        [ ] tdr: plan profile and x-sections
+        [ ] th2
+        [ ] png
+        [ ] csx
+        [ ] dxf
+        [ ] svg
+    import the archive on another android
+    [ ] check that the survey has been trasferred to the other android
+    [ ] import fails if there is a version mismatch
+    [ ] import fails if there is a survey-name mismatch
+
+----------------------------------------------------------
+// MORE THAN EXPERIMENTAL
+
+[ ] co-surveying
+    [ ] verify that it is enabled only if the database has the proper key-value
+    [ ] start server on one android and connect from the other
+    [ ] create a survey
+    [ ] download shots
+    [ ] enter shots manually
+    [ ] edit shots
+
+[ ] 3d sketching
+    [ ] verify that it is enabled only if the database has the proper key-value and the device id is ok
+    [ ] ...
+
+[ ] experimental calibration (algo min)
+    [ ] verify that it is enabled only if the device id is ok
+    [ ] the button should appear in the algo list
+    [ ] the settings should also display
+    [ ] try it out
+
+[ ] Virtual DistoX
+    [ ] X000 is listed in the Device Window
+    [ ] ...
+

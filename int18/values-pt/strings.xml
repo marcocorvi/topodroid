@@ -120,7 +120,7 @@
     <string name="splay_at_to">Dados EDTC na base PARA</string>
 
     <string name="few_data">Não há dados suficientes</string>
-    <string name="few_iter">Falha ao iterar</string>
+    <string name="few_iter">Falha: excesso de iterações</string>
     <string name="few_groups">Não há dados suficientes para os grupos</string>
     <!-- UNUSED string name="few_plots">Esboços não suficientes</string -->
     <string name="few_calibs">Calibrações insuficientes</string>
@@ -259,7 +259,7 @@
     <string name="menu_rename">RENOMEAR</string>
     <string name="menu_switch">TROCAR/FECHAR</string>
     <string name="menu_help">AJUDA</string>
-    <string name="menu_join_survey">TOPOGRFIA COLABORATIVA</string>
+    <string name="menu_join_survey">TOPOGRAFIA COLABORATIVA</string>
     <string name="menu_logs">LOGS</string>
     <string name="menu_manual_calibration">CALIBRAÇÃO</string>
     <string name="menu_options">CONFIGURAÇÕES</string>
@@ -423,10 +423,10 @@
     <string name="hide_ids">IDs das medidas</string>
     <string name="hide_splay">Medidas auxiliares (EDTC)</string>
 
-    <string name="plan">PLANTA BAIXA</string>
-    <string name="extended">CORTE</string>
-    <string name="profile">PROJETO</string>
-    <string name="extended_profile">Corte estendido</string>
+    <string name="plan">PLANTA</string>
+    <string name="extended">RETIFICADO</string>
+    <string name="profile">LONGITUDINAL</string>
+    <string name="extended_profile">Perfil retificado</string>
     <!-- UNUSED string name="v_section">CORTE V</string -->
     <string name="h_section">CORTE H</string>
 
@@ -576,7 +576,7 @@
     <string name="help_continue">Continuar desenho de uma linha</string>
     <string name="help_contour">Editar perfil</string>
     <string name="help_current_station">Bases salvas</string>
-    <string name="help_azimuth">Referência da "extenção"</string>
+    <string name="help_azimuth">Referência de retificação</string>
     <string name="help_device">Editar dispositivo em uso</string>
     <string name="help_add_topodroid">Criar nova topo/calibração</string>
     <string name="help_import">Importar arquivo zip ou arquivo de topo</string>
@@ -674,7 +674,7 @@
     <string name="help_refine_triangle">Melhorar superfície nos lados longos</string>
   
 
-    <string name="title_azimut">Referência de extensões</string>
+    <string name="title_azimut">Referência de retificações</string>
     <string name="title_calib">Calibrações</string>
     <string name="title_coverage">Distribuição dos dados de calibração</string>
     <string name="title_coeff">Coeficientes de calibração</string>
@@ -861,8 +861,8 @@
   <string name="pref_prev_next_summary">Botões Ant/Próx na janela de medição</string>
   <string name="pref_mag_anomaly_title">Anomalia magnética</string>
   <string name="pref_mag_anomaly_summary">Compensar anomalia magnética local</string>
-  <string name="pref_azimuth_manual_title">Referência de "extensão"</string>
-  <string name="pref_azimuth_manual_summary">Referência Esq/Dir de "extensão" fixa ou configurável</string>
+  <string name="pref_azimuth_manual_title">Referência de retificação</string>
+  <string name="pref_azimuth_manual_summary">Referência Esq/Dir de retificação fixa ou configurável</string>
 
   <string name="pref_team_title">Equipe</string>
   <string name="pref_team_summary">Equipe da topo</string>
@@ -977,8 +977,8 @@
   <!-- UNUSED string name="pref_splayExtend_summary">Estimar extensão medida auxiliar</string -->
   <string name="pref_swapLR_title">Inverter Esq/Dir Compass</string>
   <string name="pref_swapLR_summary">Inverter Esquerda e Direita na exportação para o Compass</string>
-  <string name="pref_LRExtend_title">Estimar extensão Esq/Dir</string>
-  <string name="pref_LRExtend_summary">Estimar extensão Esquerda/Direita (importação Compass/VisualTopo)</string>
+  <string name="pref_LRExtend_title">Estimar retificação Esq/Dir</string>
+  <string name="pref_LRExtend_summary">Estimar retificação Esquerda/Direita (importação Compass/VisualTopo)</string>
 
   <string name="pref_picker_type_title">Selecionador ferramenta desenho</string>
   <string name="pref_picker_type_summary">Tipo de selecionador de ferramenta de desenho</string>

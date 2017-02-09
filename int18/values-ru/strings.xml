@@ -385,7 +385,7 @@
     <string name="toggle_failed">Не удалось переключить DistoX</string>
     <string name="toggle_ok">Переключить DistoX в режим калибровки</string>
     <string name="undelete_text">Нажмите на элемент чтобы восстановить</string>
-    <string name="delete_whole_leg">Удалить замер</string>
+    <string name="delete_whole_leg">Удалить все замеры</string>
     <string name="visible_border">видимая граница</string>
     <!-- UNUSED string name="vthreshold">верт. порог</string -->
     <string name="wait_scan">Сканирование: ждите &#8230;</string>
@@ -461,7 +461,7 @@
     <!-- UNUESD string name="button_direction">Азимут/угол</string -->
     <!-- UNUSED string name="button_azimuth">Азимут</string -->
     <string name="button_plot"    >Абрис</string>
-    <string name="button_more"    >Больше</string>
+    <string name="button_more"    >Ещё</string>
     <string name="button_lrud"    >Добавить ЛПВН</string>
     <!-- OK string name="button_ok"        >OK        </string -->
     <string name="button_open"      >Откр      </string>
