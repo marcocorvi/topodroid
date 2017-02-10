@@ -65,10 +65,12 @@ class DataDownloader
   void toggleDownload()
   {
     mDownload = ! mDownload;
+    // Log.v("DistoX", "toggle download to " + mDownload );
   }
 
   void doDataDownload()
   {
+    // Log.v("DistoX", "do data download " + mDownload + " connected " + mConnected );
     if ( mDownload ) {
       startDownloadData();
     } else {
@@ -99,10 +101,10 @@ class DataDownloader
   {
     // Log.v("DistoX", "stop Download Data() connected " + mConnected );
     // if ( ! mConnected ) return;
-    if ( TDSetting.isConnectionModeBatch() ) {
+    // if ( TDSetting.isConnectionModeBatch() ) {
       mApp.disconnectComm();
       notifyConnectionStatus( false );
-    }
+    // }
   }
 
   // called also by ReconnectTask
@@ -117,10 +119,10 @@ class DataDownloader
       }
       if ( ! mConnected ) {
         mConnected = mApp.connectDevice( mApp.mDevice.mAddress );
-        // TDLog.Log( TDLog.LOG_COMM, "**** try Connect status 0 --> " + mStatus );
+        // Log.v( "DistoX", "**** try Connect " + mConnected );
       } else {
         mConnected = false;
-        // TDLog.Log( TDLog.LOG_COMM, "**** try Connect status " + mStatus + " --> 0 " );
+        // Log.v( "DistoX", "**** try Connect false ");
       }
     }
   }

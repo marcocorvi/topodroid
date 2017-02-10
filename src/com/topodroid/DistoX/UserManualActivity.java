@@ -126,7 +126,8 @@ public class UserManualActivity extends Activity
     adapter.add("11. Cross-sections");
     adapter.add("12. Overview window");
     adapter.add("13. Import/Export");
-    adapter.add("14. Index");
+    adapter.add("14. 3D viewer");
+    adapter.add("15. Index");
     adapter.add("* Website");
  
     mList.setAdapter( adapter );
@@ -157,7 +158,7 @@ public class UserManualActivity extends Activity
     CharSequence item = ((TextView) view).getText();
     // Log.v("DistoX", "click " + item + " pos " + pos);
     mList.setVisibility( View.GONE );
-    if ( pos <= 14 ) {
+    if ( pos <= 15 ) {
       mCloseOnBack = 0;
       load( String.format( "manual%02d.htm", pos ) );
     } else {

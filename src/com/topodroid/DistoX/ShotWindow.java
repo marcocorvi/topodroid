@@ -351,7 +351,7 @@ public class ShotWindow extends Activity
       mApp.assignStations( mDataAdapter.getItemsForAssign() );
       mList.post( new Runnable() {
         @Override public void run() {
-          Log.v("DistoX", "notify data set changed");
+          // Log.v("DistoX", "notify data set changed");
           mDataAdapter.notifyDataSetChanged();
         }
       } );
@@ -615,10 +615,12 @@ public class ShotWindow extends Activity
   {
     (new ShotNewDialog( this, mApp, this, blk, mShotId )).show();
   }
+
   void insertLRUDatStation( String station, float bearing, float clino,
                             String left, String right, String up, String down )
   {
     mApp.insertLRUDatStation( station, bearing, clino, left, right, up, down );
+    updateDisplay( ); 
   }
 
   // called by PhotoSensorDialog to split the survey

@@ -14,6 +14,8 @@ package com.topodroid.DistoX;
 // import android.widget.Toast;
 import android.os.AsyncTask;
 
+import android.util.Log;
+
 
 public class ReconnectTask extends AsyncTask< String, Integer, Integer >
 {
@@ -35,11 +37,12 @@ public class ReconnectTask extends AsyncTask< String, Integer, Integer >
       while ( mDownloader.needReconnect() ) {
         try {
           Thread.sleep( 500 );
-          // Log.v("DistoX", "notify disconnected: try reconnect status " + mDataDownloader.isDownloading() );
+          // Log.v("DistoX", "notify disconnected: try reconnect status " + mDownloader.isDownloading() );
           mDownloader.tryConnect( ); 
         } catch ( InterruptedException e ) { }
       }
     }
+    // Log.v("DistoX", "reconnect task exits");
     return 0;
   }
 
@@ -52,6 +55,7 @@ public class ReconnectTask extends AsyncTask< String, Integer, Integer >
   @Override
   protected void onPostExecute( Integer res )
   {
+    // Log.v("DistoX", "reconnect task post-exec");
     // if ( res != null ) {
     //   int r = res.intValue();
     // }
