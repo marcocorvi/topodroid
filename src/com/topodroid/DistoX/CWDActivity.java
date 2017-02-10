@@ -63,8 +63,10 @@ public class CWDActivity extends Activity
       Toast.makeText( this, R.string.bad_cwd, Toast.LENGTH_SHORT ).show();
       return;
     }
-    if ( ! dir_name.startsWith( "TopoDroid" ) ) {
+    if ( ! dir_name.toUpperCase().startsWith( "TOPODROID" ) ) {
       dir_name = "TopoDroid-" + dir_name;
+    } else { 
+      dir_name = "TopoDroid" + dir_name.substring(9);
     }
     TDPath.checkBasePath( dir_name );
     // Log.v("DistoX", "dir name <" + dir_name + ">" );
