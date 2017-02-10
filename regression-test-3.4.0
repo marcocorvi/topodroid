@@ -2,18 +2,19 @@ TopoDroid Regerssion Tests
 
 This is an incomplete list of things to check 
 
-[ ] install apk over an existing installation and check that it starts
-    preserving the user preferences
+[x] install apk over an existing installation and check that it starts
+    preserving the user preferences - Checked 4 customized configurations (Rodrigo)
 [ ] install apk without existing installation and check it starts
     with default user preferences values
     check that the directory "topodroid" is properly populated
 
 LANGUAGES
-[ ] es [ ] fr [ ] de [ ] it [ ] cn [ ] bg [ ] ru [ ] ua [ ] sl [ ] pt [ ] hu
+[x] es [x] fr [x] de [x] it [x] cn [x] bg [x] ru [x] ua [x] sl [x] pt [x] hu
+Changed the language setting and confirmed that the language of the configuration windows changed. I can't recognize bg, ru and ua but there are 3 different languages that I don't recognize on the language settings also so I believe they are these 3 ;) (Rodrigo)
 
 MAIN WINDOW
 [ ] activity level
-    [ ] buttons presence according to the "activity-level"
+    [x] buttons presence according to the "activity-level" - So no change on the main window but I believe that's what's expected for this windows in particular (Rodrigo)
     [ ] functionalities enabled by the activity-level
 [ ] verify that the settings display as for the activity level
     [ ] level-0 (basic)
@@ -22,20 +23,20 @@ MAIN WINDOW
     [ ] level-3 (experimental)
     [ ] level-4 (complete)
 
-[ ] create a new survey
-[ ] set the "team" option and check it appears in the new survey
-[ ] set the "initial station" setting and check it appears in the new survey
-    [ ] check station cut-n-paste
-[ ] check the survey name is required
-[ ] check duplicate name not allowed
+[x] create a new survey
+[x] set the "team" option and check it appears in the new survey
+[x] set the "initial station" setting and check it appears in the new survey
+    [x] check station cut-n-paste - Tested "station NAME copy-n-paste" (Rodrigo)
+[x] check the survey name is required
+[x] check duplicate name not allowed
 
 [ ] import th file
 [ ] import dat file
 [ ] import tro file
 [ ] import top file
 
-[ ] palette button 
-    [ ] verify that changes to the global palette affect the drawing tools for the new sketches
+[x] palette button 
+    [x] verify that changes to the global palette affect the drawing tools for the new sketches
 
 [ ] symbol-sets menu
     [ ] insert symbol-set and check new symbol appear in the palette
@@ -47,45 +48,45 @@ MAIN WINDOW
     [ ] bound enforcing (when applicable)
 
 [ ] buttons size. check the button size on all interfaces:
-    [ ] main window
-    [ ] shot window
-    [ ] survey window
-    [ ] sketch window
-    [ ] overview window
-    [ ] device window
-    [ ] calib window
-    [ ] gm-data window
-[ ] text size:
-    [ ] main window: survey list
-    [ ] shot window: shot data list
-    [ ] device window: device list
-    [ ] gm-data window: calib data list
+    [x] main window
+    [x] shot window
+    [x] survey window
+    [x] sketch window
+    [x] overview window
+    [x] device window
+    [x] calib window
+    [ ] gm-data window - I don't know what window is that. (Rodrigo)
+[x] text size:
+    [x] main window: survey list
+    [x] shot window: shot data list
+    [x] device window: device list
+    [x] gm-data window: calib data list
 [ ] language
     [ ] check the supported languages are all listed in the language setting
     [ ] check the unsupported languages are not listed in the language setting
-    [ ] check that topodroid uses the selected language
+    [x] check that topodroid uses the selected language
     [ ] check that if no language is selected it uses the android locale (if available)
     [ ] check that the language strings are properly rendered in every language
-        Buttons:  [ ] es [ ] fr [ ] de [ ] it [ ] cn [ ] bg [ ] ru [ ] ua [ ] sl [ ] pt [ ] hu
-        Titles:   [ ] es [ ] fr [ ] de [ ] it [ ] cn [ ] bg [ ] ru [ ] ua [ ] sl [ ] pt [ ] hu
-        Messages: [ ] es [ ] fr [ ] de [ ] it [ ] cn [ ] bg [ ] ru [ ] ua [ ] sl [ ] pt [ ] hu
-    [ ] on changing language the settings are updated to the new language
-[ ] current work directory
-    [ ] enter a name of non-existing directory: check it is created and properly populated of subdirs
+        Buttons:  [ ] es [ ] fr [ ] de [ ] it [ ] cn [ ] bg [ ] ru [ ] ua [ ] sl [x] pt [ ] hu
+        Titles:   [ ] es [ ] fr [ ] de [ ] it [ ] cn [ ] bg [ ] ru [ ] ua [ ] sl [x] pt [ ] hu
+        Messages: [ ] es [ ] fr [ ] de [ ] it [ ] cn [ ] bg [ ] ru [ ] ua [ ] sl [x] pt [ ] hu
+    [x] on changing language the settings are updated to the new language
+[x] current work directory
+    [x] enter a name of non-existing directory: check it is created and properly populated of subdirs
         this happens also if the cwd is set, the app is shit down, the directory is deleted, the app is restarted
-    [ ] enter a name without "topodroid": this must be prepended to the dir name
-    [ ] enter a name with prefix "topodroid": this is not prepended to the dir name
-    [ ] select existing directory
+    [x] enter a name without "topodroid": this must be prepended to the dir name
+    [x] enter a name with prefix "topodroid": this is not prepended to the dir name It works as expected if the prefix is exactly "TOpoDroid" casa sensitive. (Rodrigo)
+    [x] select existing directory
 
 [ ] about menu
     the about menu in custom language must have the name and email of the translator
-    [ ] es  [ ] fr  [ ] de  [ ] it  [ ] cn  [ ] bg  [ ] ru  [ ] ua  [ ] sl  [ ] pt  [-] hu
+    [x] es  [x] fr  [x] de  [x] it  [ ] cn  [ ] bg  [ ] ru  [ ] ua  [ ] sl  [x] pt  [-] hu
 
-[ ] help menu: check the quick help strings
-[ ] sections and pages of the user manual and their navigation/organization
+[x] help menu: check the quick help strings - Checked on the portuguese translation - Rodrigo
+[x] sections and pages of the user manual and their navigation/organization
 [ ] content of the user-manual sections and pages
-[ ] web-link in the user manual
-[ ] in each activity/dialog the MENU button opens the help page
+[x] web-link in the user manual
+[x] in each activity/dialog the MENU button opens the help page
 [ ] the "index" refers to *all* the subpages
 
 
@@ -93,28 +94,28 @@ DEVICE WINDOW
 [ ] buttons presence according to the "activity-level"
 
 [ ] bluetooth reset button
-[ ] calib-mode toggle button (*)
-    [ ] X310 first time on, second time off
+[x] calib-mode toggle button (*)
+    [x] X310 first time on, second time off
     [ ] A3 toggle according to the current state
-[ ] calibration button -> calib-list dialog
+[x] calibration button -> calib-list dialog
 [ ] memory info button -> memory dialog (*)
-    [ ] dump data from disto X310
+    [x] dump data from disto X310
     [ ] dump data from disto A3
-    [ ] save data to file
-        [ ] "dump" dir must be automatically created
-[ ] calibration coeffs read
+    [x] save data to file
+        [x] "dump" dir must be automatically created
+[x] calibration coeffs read
 [ ] info button (*)
     [ ] X310
     [ ] A3
 
-[ ] scan menu: (*)
+[x] scan menu: (*)
     forget DistoX from android and scan for it (might need a few trials)
-[ ] pair menu (*)
+[x] pair menu (*)
     pair with the DistoX 
-[ ] disconnect menu: cancel the selected DistoX
+[x] disconnect menu: cancel the selected DistoX
 [ ] firmware menu -> firmware dialog
-    [ ] read the DistoX firmware to a file: check the file is in "bin" (*)
-    [ ] upload a new firmware to the DistoX (*)
+    [ ] read the DistoX firmware to a file: check the file is in "bin" (*) - Tried to download. The DistoX was apparently sending the firmware to Topodroid for more than 10 minutes when I turned the DistoX off and closed Topodroid. (Rodrigo)
+    [x] upload a new firmware to the DistoX (*)
 
 [ ] settings menu
     [ ] BT check:
@@ -142,26 +143,29 @@ DEVICE WINDOW
 
 CALIBRATION DIALOG
 [ ] import calibration
-    [ ] export a calibration in csv, check the file in the ccsv dir
-    [ ] delete the calibration: check the tables in device10.sqlite
-    [ ] import the csv calib file
-        [ ] toast message ok
-        [ ] calibration is added to the list
-    [ ] import again the csv calib file
-        [ ] import fails if calib already exists
+    [x] export a calibration in csv, check the file in the ccsv dir
+    [x] delete the calibration: check the tables in device10.sqlite
+    [x] import the csv calib file
+        [x] toast message ok
+        [x] calibration is added to the list
+    [x] import again the csv calib file
+        [x] import fails if calib already exists
+        NB. it does not import calib if there is already a calib with the same name
+        even if assigned to another DistoX
     [ ] reset DistoX calibration coeff
         [ ] check the coeffs by reading them back
 [ ] new calibration
 
 CALIBRATION INFO SCREEN
-[ ] enter a name and save: open+read button must become enabled
+[x] enter a name and save: open+read button must become enabled
+    [x] cannot save if name already present
 [ ] read calib coeff: when empty must be V=0 M=0 NL=0
-[ ] open calibration: opens the gm-data window
-[ ] select different algo and check its effect
-    [ ] select linear, save, go to GMActivity and calibrate
-    [ ] select non-linear etc.
-    [ ] select minimum etc.
-    [ ] select auto ect.
+[x] open calibration: opens the gm-data window
+[x] select different algo and check its effect
+    [x] select linear, save, go to GMActivity and calibrate
+    [x] select non-linear etc.
+    [x] select minimum etc.
+    [x] select auto ect.
 
 CALIB DATA WINDOW
 [ ] data download (only on-demanad mode) (*)
@@ -169,30 +173,30 @@ CALIB DATA WINDOW
     take a few calibration shots and download them
     take more shots, download them: must be added to the list
 [ ] calib-mode toggle (*)
-[ ] group assignment
-    [ ] the button turn violet while computing
-    [ ] assign only numbers to data with "0"
-    [ ] "reset" resets all the group numbers (and does not do assignment)
+[x] group assignment
+    [x] the button turn violet while computing
+    [x] assign only numbers to data with "0"
+    [x] "reset" resets all the group numbers (and does not do assignment)
 [ ] calib coeff compute
     [ ] fails if not enough data (<= 16)
     [ ] fails if not enough groups (<= 4)
-    [ ] fails if reaches max iteration numnber (set it to a small value to check)
-    [ ] the button turn violet while computing
-    [ ] the results is displayed: 
-        [ ] coeffs, 
-        [ ] error-stats,
-        [ ] histogram
-[ ] angle distribution 
-    [ ] enabled only after computing the coeffs
+    [x] fails if reaches max iteration numnber (set it to a small value to check)
+    [x] the button turn violet while computing
+    [x] the results is displayed: 
+        [x] coeffs, 
+        [x] error-stats,
+        [x] histogram
+[x] angle distribution 
+    [x] enabled only after computing the coeffs
 [ ] calib coeff read from distox (*)
 [ ] calib coeff write to distox (*)
     [ ] enabled only after computing the coeffs
     [ ] write the coeffs just read)
     [ ] read the coeffs to check them
 
-[ ] menu display: 
-    [ ] delete a data, check it is shown/hidden
-    [ ] undelete the data
+[x] menu display: 
+    [x] delete a data, check it is shown/hidden ("display" menu)
+    [x] undelete the data (tap on it)
 [ ] calib validate: need two good calibrations
     [ ] the results is displayed: 
         [ ] [ ] [ ] histogram
@@ -200,40 +204,43 @@ CALIB DATA WINDOW
 [ ] settings
     [ ] group policy
     [ ] group distance
-    [ ] eps: try a large eps (0.1), the calib compute should end with few iterations
-    [ ] iterations: try a small value (10)
-    [ ] raw data
+    [x] eps: try a large eps (0.1), the calib compute should end with few iterations
+    [x] iterations: try a small value (10) => Too few iteratons
+    [x] raw data:
+        [x]none,
+        [x] dec.
+        [x] hex
     [ ] algo
         [ ] auto should pick the algo by the device type/firmware
         [ ] linear/non-linear should force the algo
-[ ] help strings
+[x] help strings
 
 SURVEY DATA WINDOW
-[ ] check display mode
-[ ] display colors: white-leg blue-splay grey-rep.leg
-[ ] tap on a station to display its splays
-    [ ] tap again to hide them
-[ ] selectively display splays of two stations
-[ ] select active-station (log-tap): it must turn green
+[x] check display mode
+[x] display colors: white-leg blue-splay grey-rep.leg
+[x] tap on a station to display its splays
+    [x] tap again to hide them
+[x] selectively display splays of two stations
+[x] select active-station (log-tap): it must turn green
     [ ] download data and check next shot is attached to it (*)
         [ ] with toporobot policy a new "traverse" is started
-    [ ] check it is displayed as hint in the manual shot dialog
-    [ ] check it is shown in the saved-stations dialog if opened
+    [x] check it is displayed as hint in the manual shot dialog
+    [x] check it is shown in the saved-stations dialog if opened
 
 [ ] sketches
     [ ] add a new sketch: dialog (name + ref. station)
-        [ ] duplicate sketch name -> error
-        [ ] non-existing station -> error
-        [ ] origin station is the last one 
-        [ ] origin station is the active-station if defined 
-        [ ] check station cut-n-paste
-        [ ] select projected profile: orientation dialog
-            [ ] OK confirm
-            [ ] BACK cancel
-    [ ] open existing sketch
-        [ ] open with the plan view
-        [ ] open with the profile (extended/projected) view
-[ ] long-tap open last sketch, with the last view
+        [x] duplicate sketch name -> error
+        [x] non-existing station -> error
+        [x] origin station is the last one 
+        [x] origin station is the active-station if defined 
+        [n] check station copy-n-paste
+        [x] select projected profile: orientation dialog
+            [x] OK confirm
+            [x] BACK cancel
+    [x] open existing sketch
+        [x] open with the plan view
+        [x] open with the profile (extended/projected) view
+[x] long-tap open last sketch, with the last view
 
 [ ] data download (*)
     [ ] button grey if no DistoX selected
@@ -271,9 +278,9 @@ SURVEY DATA WINDOW
       [ ] verify laser/shot delays
     others
       [ ] reset
-[ ] annotations
-    [ ] verify consistency with file on filesystem
-    [ ] consistency with annotation button of sketch window
+[x] annotations
+    [x] verify consistency with file on filesystem
+    [x] consistency with annotation button of sketch window
 [ ] reference extend azimuth
     [ ] if set to left/right (fixed) shot must be extended properly
     [ ] if set to a direction shot must be right (along dir.) left (opposite dir.)
