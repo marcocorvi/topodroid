@@ -143,26 +143,29 @@ DEVICE WINDOW
 
 CALIBRATION DIALOG
 [ ] import calibration
-    [ ] export a calibration in csv, check the file in the ccsv dir
-    [ ] delete the calibration: check the tables in device10.sqlite
-    [ ] import the csv calib file
-        [ ] toast message ok
-        [ ] calibration is added to the list
-    [ ] import again the csv calib file
-        [ ] import fails if calib already exists
+    [x] export a calibration in csv, check the file in the ccsv dir
+    [x] delete the calibration: check the tables in device10.sqlite
+    [x] import the csv calib file
+        [x] toast message ok
+        [x] calibration is added to the list
+    [x] import again the csv calib file
+        [x] import fails if calib already exists
+        NB. it does not import calib if there is already a calib with the same name
+        even if assigned to another DistoX
     [ ] reset DistoX calibration coeff
         [ ] check the coeffs by reading them back
 [ ] new calibration
 
 CALIBRATION INFO SCREEN
-[ ] enter a name and save: open+read button must become enabled
+[x] enter a name and save: open+read button must become enabled
+    [x] cannot save if name already present
 [ ] read calib coeff: when empty must be V=0 M=0 NL=0
-[ ] open calibration: opens the gm-data window
-[ ] select different algo and check its effect
-    [ ] select linear, save, go to GMActivity and calibrate
-    [ ] select non-linear etc.
-    [ ] select minimum etc.
-    [ ] select auto ect.
+[x] open calibration: opens the gm-data window
+[x] select different algo and check its effect
+    [x] select linear, save, go to GMActivity and calibrate
+    [x] select non-linear etc.
+    [x] select minimum etc.
+    [x] select auto ect.
 
 CALIB DATA WINDOW
 [ ] data download (only on-demanad mode) (*)
@@ -170,30 +173,30 @@ CALIB DATA WINDOW
     take a few calibration shots and download them
     take more shots, download them: must be added to the list
 [ ] calib-mode toggle (*)
-[ ] group assignment
-    [ ] the button turn violet while computing
-    [ ] assign only numbers to data with "0"
-    [ ] "reset" resets all the group numbers (and does not do assignment)
+[x] group assignment
+    [x] the button turn violet while computing
+    [x] assign only numbers to data with "0"
+    [x] "reset" resets all the group numbers (and does not do assignment)
 [ ] calib coeff compute
     [ ] fails if not enough data (<= 16)
     [ ] fails if not enough groups (<= 4)
-    [ ] fails if reaches max iteration numnber (set it to a small value to check)
-    [ ] the button turn violet while computing
-    [ ] the results is displayed: 
-        [ ] coeffs, 
-        [ ] error-stats,
-        [ ] histogram
-[ ] angle distribution 
-    [ ] enabled only after computing the coeffs
+    [x] fails if reaches max iteration numnber (set it to a small value to check)
+    [x] the button turn violet while computing
+    [x] the results is displayed: 
+        [x] coeffs, 
+        [x] error-stats,
+        [x] histogram
+[x] angle distribution 
+    [x] enabled only after computing the coeffs
 [ ] calib coeff read from distox (*)
 [ ] calib coeff write to distox (*)
     [ ] enabled only after computing the coeffs
     [ ] write the coeffs just read)
     [ ] read the coeffs to check them
 
-[ ] menu display: 
-    [ ] delete a data, check it is shown/hidden
-    [ ] undelete the data
+[x] menu display: 
+    [x] delete a data, check it is shown/hidden ("display" menu)
+    [x] undelete the data (tap on it)
 [ ] calib validate: need two good calibrations
     [ ] the results is displayed: 
         [ ] [ ] [ ] histogram
@@ -201,40 +204,43 @@ CALIB DATA WINDOW
 [ ] settings
     [ ] group policy
     [ ] group distance
-    [ ] eps: try a large eps (0.1), the calib compute should end with few iterations
-    [ ] iterations: try a small value (10)
-    [ ] raw data
+    [x] eps: try a large eps (0.1), the calib compute should end with few iterations
+    [x] iterations: try a small value (10) => Too few iteratons
+    [x] raw data:
+        [x]none,
+        [x] dec.
+        [x] hex
     [ ] algo
         [ ] auto should pick the algo by the device type/firmware
         [ ] linear/non-linear should force the algo
-[ ] help strings
+[x] help strings
 
 SURVEY DATA WINDOW
-[ ] check display mode
-[ ] display colors: white-leg blue-splay grey-rep.leg
-[ ] tap on a station to display its splays
-    [ ] tap again to hide them
-[ ] selectively display splays of two stations
-[ ] select active-station (log-tap): it must turn green
+[x] check display mode
+[x] display colors: white-leg blue-splay grey-rep.leg
+[x] tap on a station to display its splays
+    [x] tap again to hide them
+[x] selectively display splays of two stations
+[x] select active-station (log-tap): it must turn green
     [ ] download data and check next shot is attached to it (*)
         [ ] with toporobot policy a new "traverse" is started
-    [ ] check it is displayed as hint in the manual shot dialog
-    [ ] check it is shown in the saved-stations dialog if opened
+    [x] check it is displayed as hint in the manual shot dialog
+    [x] check it is shown in the saved-stations dialog if opened
 
 [ ] sketches
     [ ] add a new sketch: dialog (name + ref. station)
-        [ ] duplicate sketch name -> error
-        [ ] non-existing station -> error
-        [ ] origin station is the last one 
-        [ ] origin station is the active-station if defined 
-        [ ] check station cut-n-paste
-        [ ] select projected profile: orientation dialog
-            [ ] OK confirm
-            [ ] BACK cancel
-    [ ] open existing sketch
-        [ ] open with the plan view
-        [ ] open with the profile (extended/projected) view
-[ ] long-tap open last sketch, with the last view
+        [x] duplicate sketch name -> error
+        [x] non-existing station -> error
+        [x] origin station is the last one 
+        [x] origin station is the active-station if defined 
+        [n] check station copy-n-paste
+        [x] select projected profile: orientation dialog
+            [x] OK confirm
+            [x] BACK cancel
+    [x] open existing sketch
+        [x] open with the plan view
+        [x] open with the profile (extended/projected) view
+[x] long-tap open last sketch, with the last view
 
 [ ] data download (*)
     [ ] button grey if no DistoX selected
@@ -272,9 +278,9 @@ SURVEY DATA WINDOW
       [ ] verify laser/shot delays
     others
       [ ] reset
-[ ] annotations
-    [ ] verify consistency with file on filesystem
-    [ ] consistency with annotation button of sketch window
+[x] annotations
+    [x] verify consistency with file on filesystem
+    [x] consistency with annotation button of sketch window
 [ ] reference extend azimuth
     [ ] if set to left/right (fixed) shot must be extended properly
     [ ] if set to a direction shot must be right (along dir.) left (opposite dir.)
