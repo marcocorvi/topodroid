@@ -47,7 +47,7 @@ MAIN WINDOW
     [ ] modification with immediate feedback of the new value on the screen
     [ ] bound enforcing (when applicable)
 
-[ ] buttons size. check the button size on all interfaces:
+[x] buttons size. check the button size on all interfaces:
     [x] main window
     [x] shot window
     [x] survey window
@@ -55,7 +55,7 @@ MAIN WINDOW
     [x] overview window
     [x] device window
     [x] calib window
-    [ ] gm-data window - I don't know what window is that. (Rodrigo)
+    [x] gm-data window - I don't know what window is that. (Rodrigo)
 [x] text size:
     [x] main window: survey list
     [x] shot window: shot data list
@@ -172,7 +172,7 @@ CALIB DATA WINDOW
     [ ] the button and the title turn red while downloading
     take a few calibration shots and download them
     take more shots, download them: must be added to the list
-[ ] calib-mode toggle (*)
+[x] calib-mode toggle (*)
 [x] group assignment
     [x] the button turn violet while computing
     [x] assign only numbers to data with "0"
@@ -188,7 +188,7 @@ CALIB DATA WINDOW
         [x] histogram
 [x] angle distribution 
     [x] enabled only after computing the coeffs
-[ ] calib coeff read from distox (*)
+[x] calib coeff read from distox (*)
 [ ] calib coeff write to distox (*)
     [ ] enabled only after computing the coeffs
     [ ] write the coeffs just read)
@@ -222,7 +222,7 @@ SURVEY DATA WINDOW
     [x] tap again to hide them
 [x] selectively display splays of two stations
 [x] select active-station (log-tap): it must turn green
-    [ ] download data and check next shot is attached to it (*)
+    [x] download data and check next shot is attached to it (*)
         [ ] with toporobot policy a new "traverse" is started
     [x] check it is displayed as hint in the manual shot dialog
     [x] check it is shown in the saved-stations dialog if opened
@@ -273,9 +273,9 @@ SURVEY DATA WINDOW
 [ ] bluetooth
     X310 fw >= 3:
       [x] reset
-      [ ] laser on
-      [ l laser off 
-      [ ] measure with immediate download
+      [x] laser on
+      [xl laser off 
+      [x] measure with immediate download
       // [ ] measure without download DROPPED
       [ ] verify laser/shot delays
     others
@@ -283,10 +283,10 @@ SURVEY DATA WINDOW
 [x] annotations
     [x] verify consistency with file on filesystem
     [x] consistency with annotation button of sketch window
-[ ] reference extend azimuth
-    [ ] if set to left/right (fixed) shot must be extended properly
-    [ ] if set to a direction shot must be right (along dir.) left (opposite dir.)
-    [ ] reference extend azimuth is maintained switching between shot-list and sketching
+[x] reference extend azimuth
+    [x] if set to left/right (fixed) shot must be extended properly
+    [x] if set to a direction shot must be right (along dir.) left (opposite dir.)
+    [x] reference extend azimuth is maintained switching between shot-list and sketching
 [ ] saved stations dialog
     [ ] add a station
     [ ] select a saved station
