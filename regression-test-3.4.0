@@ -287,11 +287,11 @@ SURVEY DATA WINDOW
     [x] if set to left/right (fixed) shot must be extended properly
     [x] if set to a direction shot must be right (along dir.) left (opposite dir.)
     [x] reference extend azimuth is maintained switching between shot-list and sketching
-[ ] saved stations dialog
-    [ ] add a station
-    [ ] select a saved station
-    [ ] check station cut-n-paste
-    [ ] marks (fixed/painted)
+[x] saved stations dialog
+    [x] add a station
+    [x] select a saved station
+    [x] check station cut-n-paste
+    [x] marks (fixed/painted)
 [ ] manual shot
     [x] enter a new shot manually
     [x] check from station cut-n-paste
@@ -331,11 +331,11 @@ tap a shot data
 [x] clear a comment: 'N' should disappear
 [x] change extend: should reflect on the item line
 [ ] try the buttons
-    [ ] duplicate: +
-    [ ] surface: -
-    [ ] repeated-leg
+    [x] duplicate: +
+    [x] surface: -
+    [ ] repeated-leg - I can't understand what happens when checking this or the following button. (Rodrigo)
     [ ] merge to following leg
-    [ ] splay group: all splays of the group with same station should be updated
+    [x] splay group: all splays of the group with same station should be updated
     [ ] renumber: following shots should be renumbered according to the current station-naming policy
 [x] "ok" saves changes and closes dialog
 [x] "save" saves changes but does not close dialog
@@ -346,11 +346,11 @@ long tap on splay data
 [ ] opens last sketch with splay station in the middle and splay highlighted
 
 SECONDARY SHOT EDIT DIALOG
-[ ] take a photo
-[ ] take a sensor measurement
-[ ] add a shot before
-    [ ] station hints according to auto-station policy
-[ ] split survey at the shot (the shot is the first of the new survey)
+[x] take a photo
+[x] take a sensor measurement
+[x] add a shot before
+    [ ] station hints according to auto-station policy - Apparently I just got the TO BASE value copied to the station field on the new shot. I don think that's exactly whats expected. (Rodrigo)
+[+/-] split survey at the shot (the shot is the first of the new survey) - The shot is the first of the new survey on the shot list but it's not the one listed on the "New survey" dialog, on the field under the "Team" field. (Rodrigo)
 [x] "delete" the shot (mark it as "deleted")
     [x] recover shot
 [x] add LRUD at FROM station
@@ -360,11 +360,11 @@ SECONDARY SHOT EDIT DIALOG
     [x] not for splays
     [ ] check that left/right are to the shot direction
 
-[ ] survey info menu
-[ ] recover deleted items: the dialog must show
+[x] survey info menu
+[x] recover deleted items: the dialog must show
     [x] deleted shot(s)
-    [ ] deleted sketch(es) [only plan/extended, no x-sections]
-    [ ] toast message if there is nothing to recover
+    [x] deleted sketch(es) [only plan/extended, no x-sections]
+    [x] toast message if there is nothing to recover
 [ ] view photos
     [x] toast message if there is no photo
     [x] list photos
@@ -372,7 +372,7 @@ SECONDARY SHOT EDIT DIALOG
             [x] change comment
             [x] view photo (tap thumbnail)
             [ ] delete photo: check file disappear from filesystem
-[ ] view sensosrs measurements
+[x] view sensosrs measurements
     [x] toast message if there is no sensor measurement
 [x] 3D display
 [x] device window menu
@@ -382,16 +382,16 @@ SECONDARY SHOT EDIT DIALOG
 SURVEY INFO WINDOWS
 [x] check that the "name" is not editable
 [x] change "team"
-[ ] change magn. declination
+[x] change magn. declination
 [x] change description
 [x] date picker
 
 [x] annotations: should be the same as in shot-window and sketch-window
 [x] info
 [x] 3D display
-[ ] gps dialog
+[x] gps dialog
 [x] photo list dialog
-[ ] sensor list dialog
+[x] sensor list dialog
 
 [ ] export menu
     export in each format and verify the file appear the respective directory
@@ -457,12 +457,12 @@ SURVEY INFO WINDOWS
 [ ] help strings
 
 GPS DIALOG
-[ ] check station cut-n-paste
-[ ] check that the GPS/add can be used only after a station has been entered
-[ ] if GPS is not enabled a doalog ask to enable it
-[ ] the GPS must show the number of satellites, and (when enough) update the position 
-[ ] with the GPS position "add" opens a dialog with the same position
-[ ] without GPS position the "add" dialog has empty fields
+[x] check station cut-n-paste
+[?] check that the GPS/add can be used only after a station has been entered - The "Save" button simply returns to the GPS dialog window with presenting an error nor saving anything. Shouldn't it present and error? Shouldn't there be a "Cancel" button? (Rodrigo)
+[x] if GPS is not enabled a dialog ask to enable it
+[x] the GPS must show the number of satellites, and (when enough) update the position 
+[x] with the GPS position "add" opens a dialog with the same position
+[x] without GPS position the "add" dialog has empty fields
     [ ] check that "W" is like minus, for longitude
     [ ] check that "S" is like minus for latitude
     [ ] check that the altitudes make sense
@@ -516,14 +516,14 @@ SKETCH WINDOW
         [x] check station textsize setting
     [ ] fix ref two-finger drag
 [x] plan/profile switch 
-[ ] extend reference azimuth
+[x] extend reference azimuth
     ...
 [x] annotations
 
 [x] profile flip (long-press plot/profile button)
-    [ ] only for extended profile view
-    [ ] flip shots as well
-    [ ] do not flip shots
+    [x] only for extended profile view
+    [x] flip shots as well
+    [x] do not flip shots
 
 [ ] export menu: check the various format 
     [ ] have the toast message
@@ -543,27 +543,27 @@ SKETCH WINDOW
 [x] stats
 [ ] reload from backup
 [ ] delete (mark as "deleted")
-[ ] palette
-    [ ] changes to the palette reflect on the item lists in the picker dialogs
+[x] palette
+    [x] changes to the palette reflect on the item lists in the picker dialogs
 [x] overview
 [x] settings
 [x] help strings
 
 <draw mode>
-[ ] draw a line
-[ ] change line type
-[ ] draw another line
-[ ] draw point(s)
-    [ ] label dialog
-[ ] draw areas(s)
-[ ] undo
-[ ] redo
+[x] draw a line
+[x] change line type
+[x] draw another line
+[x] draw point(s)
+    [x] label dialog
+[x] draw areas(s)
+[x] undo
+[x] redo
 [ ] check line-continuation drawing (working within a line-group)
     [ ] with option "join" (verify undo/redo)
     [ ] with option "continue" (verify interaction with undo/redo)
 
-[ ] two finger drag
-[ ] two finger zoom
+[x] two finger drag
+[x] two finger zoom
 [ ] side-drag (setting)
 [ ] zoom controls (setting)
 
@@ -587,43 +587,43 @@ triple-grid symbol picker
 [ ] close picks the last selection
 
 <erase mode>
-[ ] two finger draw
-[ ] two finger zoom
+[x] two finger drag
+[x] two finger zoom
 [ ] side drag if enabled (setting)
 [ ] zoom comtrols (setting)
-[ ] erase part of a line from the beginning
-[ ] erase part of a line from the end
-[ ] erase the middle of a line
-[ ] erase a point
-[ ] erase an area (a piece at at time)
+[x] erase part of a line from the beginning
+[x] erase part of a line from the end
+[x] erase the middle of a line
+[x] erase a point
+[x] erase an area (a piece at at time)
 [ ] verify erase radius (= size)
-[ ] undo
-[ ] redo
+[x] undo
+[x] redo
 
 <edit mode>
-[ ] selection
-[ ] drag, zoom, with selection 
-[ ] drag, zoom, with no selection 
+[x] selection
+[x] drag, zoom, with selection 
+[x] drag, zoom, with no selection 
 [ ] select a point and move it
-    [ ] check that moving a selected point transfer to the proper bucket:
+    [x] check that moving a selected point transfer to the proper bucket:
         move the point a lot and it must be "selectable" again
-[ ] select a line/area point and change it (possible its CP's)
+[x] select a line/area point and change it (possible its CP's)
 [ ] select a cluster of points: move among them with '<' '>'
 [ ] pointwise actions
-    [ ] snap to nearby point
+    [x] snap to nearby point
     [ ] snap to nearby line (for areas)
-    [ ] duplicate point (then move point off the duplicate: selection stays with prev point) 
-    [ ] cut line at point
-    [ ] straighten segment (drop CP's)
-    [ ] smoothen segment (insert CP's)
-    [ ] remove point (line/area)
+    [x] duplicate point (then move point off the duplicate: selection stays with prev point) 
+    [x] cut line at point
+    [x] straighten segment (drop CP's)
+    [x] smoothen segment (insert CP's)
+    [x] remove point (line/area)
 [ ] item-wise editing
   - line 
-    [ ] line type
+    [x] line type
     [ ] options
     [ ] outline 
-    [ ] reverse
-        [ ] check consistency of the direction yellow tick
+    [x] reverse
+        [x] check consistency of the direction yellow tick
     [ ] convert to polyline (if bezier)
     [ ] straighten (good for rock-border, but it works also for other types)
     [ ] close
@@ -635,12 +635,12 @@ triple-grid symbol picker
     [ ] erase removes files (th2/tdr/photo) and info from the database
     [ ] verify that the section point is inserted (if setting is on)
   - area
-    [ ] visible border
+    [x] visible border
     [ ] orientation (if orientable)
   - point
     [ ] scale
-    [ ] orientation (if point is orientable)
-    [ ] text (label)
+    [x] orientation (if point is orientable)
+    [x] text (label)
     [ ] options
   - leg/splay shot
     [ ] extend correction
