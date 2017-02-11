@@ -281,7 +281,7 @@
     <string name="popup_snap_ln">Juntar à linha mais próxima</string>
     <string name="popup_split_pt">Duplicar ponto</string>
     <string name="popup_split_ln">Corta a linha no ponto</string>
-    <string name="popup_sharp_pt">Linearizar/retificar segmento</string>
+    <string name="popup_sharp_pt">Deixar segmento reto</string>
     <string name="popup_curve_pt">Suavizar segmento</string>
     <string name="popup_remove_pt">Apagar ponto</string>
 
@@ -576,7 +576,7 @@
     <string name="help_continue">Continuar desenho de uma linha</string>
     <string name="help_contour">Editar perfil</string>
     <string name="help_current_station">Bases salvas</string>
-    <string name="help_azimuth">Referência de retificação</string>
+    <string name="help_azimuth">Referência para retificar perfil</string>
     <string name="help_device">Editar dispositivo em uso</string>
     <string name="help_add_topodroid">Criar nova topo/calibração</string>
     <string name="help_import">Importar arquivo zip ou arquivo de topo</string>
@@ -674,7 +674,7 @@
     <string name="help_refine_triangle">Melhorar superfície nos lados longos</string>
   
 
-    <string name="title_azimut">Referência de retificações</string>
+    <string name="title_azimut">Referência para retificar perfil</string>
     <string name="title_calib">Calibrações</string>
     <string name="title_coverage">Distribuição dos dados de calibração</string>
     <string name="title_coeff">Coeficientes de calibração</string>
@@ -855,14 +855,14 @@
   <string name="pref_leg_title">Tolerância visadas</string>
   <string name="pref_leg_summary">Tolerância entre as medições de uma visada</string>
   <string name="pref_leg_message">Tolerância entre as medições de uma visada</string>
-  <string name="pref_backsight_title">Contramedida</string>
-  <string name="pref_backsight_summary">Campos de contra medida na janela de nova visada</string>
+  <string name="pref_backsight_title">Medida contra</string>
+  <string name="pref_backsight_summary">Campos de contra azimute e inclinação invertida para inserção manual de medida</string>
   <string name="pref_prev_next_title">Botões Ant/Próx</string>
   <string name="pref_prev_next_summary">Botões Ant/Próx na janela de medição</string>
   <string name="pref_mag_anomaly_title">Anomalia magnética</string>
   <string name="pref_mag_anomaly_summary">Compensar anomalia magnética local</string>
-  <string name="pref_azimuth_manual_title">Referência de retificação</string>
-  <string name="pref_azimuth_manual_summary">Referência Esq/Dir de retificação fixa ou configurável</string>
+  <string name="pref_azimuth_manual_title">Referência retif. perfil</stri.ng>
+  <string name="pref_azimuth_manual_summary">Referência para retificação de perfil fixa</string>
 
   <string name="pref_team_title">Equipe</string>
   <string name="pref_team_summary">Equipe da topo</string>
@@ -977,8 +977,8 @@
   <!-- UNUSED string name="pref_splayExtend_summary">Estimar extensão medida auxiliar</string -->
   <string name="pref_swapLR_title">Inverter Esq/Dir Compass</string>
   <string name="pref_swapLR_summary">Inverter Esquerda e Direita na exportação para o Compass</string>
-  <string name="pref_LRExtend_title">Estimar retificação Esq/Dir</string>
-  <string name="pref_LRExtend_summary">Estimar retificação Esquerda/Direita (importação Compass/VisualTopo)</string>
+  <string name="pref_LRExtend_title">Estimar ref. retif. perfil</string>
+  <string name="pref_LRExtend_summary">Estimar referência para retificação do perfil (importação Compass/VisualTopo)</string>
 
   <string name="pref_picker_type_title">Selecionador ferramenta desenho</string>
   <string name="pref_picker_type_summary">Tipo de selecionador de ferramenta de desenho</string>
