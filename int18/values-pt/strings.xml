@@ -479,7 +479,7 @@
     <!-- UNUSED string name="button_start"     >Iniciar</string -->
     <!-- UNUSED string name="button_stop"      >Parar</string -->
     <string name="button_upload"    >Enviar     </string>
-    <string name="button_view"      >Ver externo</string>
+    <string name="button_view"      >Ver no mapa</string>
 
 
     <string name="button_write"     >Enviar</string>
@@ -493,8 +493,8 @@
     <string name="mode_outline">Contorno</string>
 
     <!-- UNUSED string name="remote_title">Controle remoto do dispositivo</string -->
-    <!-- OK string name="remote_on">Laser ON</string -->
-    <!-- OK string name="remote_off">Laser OFF</string -->
+    <string name="remote_on">Ligar laser</string>
+    <string name="remote_off">Desligar laser</string>
     <!-- UNUSED string name="remote_measure">Medir</string -->
     <string name="remote_reset">Reiniciar Bluetooth</string>
     <!-- UNUSED string name="download">Download</string -->
