@@ -53,7 +53,7 @@ public class DrawingShotDialog extends MyDialog
   private Button mRBwalls;
 
   private DrawingWindow mParent;
-  private DistoXDBlock mBlock;
+  private DBlock mBlock;
 
   MyKeyboard mKeyboard = null;
 
@@ -127,7 +127,7 @@ public class DrawingShotDialog extends MyDialog
     // mRBbackshot.setOnClickListener( this );
     if ( TDSetting.mWallsType != TDSetting.WALLS_NONE 
       && TDSetting.mLevelOverAdvanced 
-      && mBlock.mType == DistoXDBlock.BLOCK_MAIN_LEG
+      && mBlock.mType == DBlock.BLOCK_MAIN_LEG
       && ( PlotInfo.isSketch2D( mParent.getPlotType() ) ) ) {
       mRBwalls.setOnClickListener( this );
     } else {
@@ -143,30 +143,30 @@ public class DrawingShotDialog extends MyDialog
       mETcomment.setText( mBlock.mComment );
 
       switch ( (int)mBlock.mExtend ) {
-        case DistoXDBlock.EXTEND_LEFT:
+        case DBlock.EXTEND_LEFT:
           mRBleft.setChecked( true );
           break;
-        case DistoXDBlock.EXTEND_VERT:
+        case DBlock.EXTEND_VERT:
           mRBvert.setChecked( true );
           break;
-        case DistoXDBlock.EXTEND_RIGHT:
+        case DBlock.EXTEND_RIGHT:
           mRBright.setChecked( true );
           break;
-        // case DistoXDBlock.EXTEND_IGNORE:
+        // case DBlock.EXTEND_IGNORE:
         //   mRBignore.setChecked( true );
         //   break;
       }
       switch ( (int)mBlock.mFlag ) {
-        // case DistoXDBlock.BLOCK_SURVEY:
+        // case DBlock.BLOCK_SURVEY:
         //   mRBsurvey.setChecked( true );
         //   break;
-        case DistoXDBlock.BLOCK_DUPLICATE:
+        case DBlock.BLOCK_DUPLICATE:
           mRBdup.setChecked( true );
           break;
-        case DistoXDBlock.BLOCK_SURFACE:
+        case DBlock.BLOCK_SURFACE:
           mRBsurf.setChecked( true );
           break;
-        // case DistoXDBlock.BLOCK_BACKSHOT:
+        // case DBlock.BLOCK_BACKSHOT:
         //   mRBbackshot.setChecked( true );
         //   break;
       }
@@ -238,15 +238,15 @@ public class DrawingShotDialog extends MyDialog
       long extend = mBlock.mExtend;
       long flag   = mBlock.mFlag;
 
-      if ( mRBleft.isChecked() ) { extend = DistoXDBlock.EXTEND_LEFT; }
-      else if ( mRBvert.isChecked() ) { extend = DistoXDBlock.EXTEND_VERT; }
-      else if ( mRBright.isChecked() ) { extend = DistoXDBlock.EXTEND_RIGHT; }
-      else /* if ( mRBignore.isChecked() ) */ { extend = DistoXDBlock.EXTEND_IGNORE; }
+      if ( mRBleft.isChecked() ) { extend = DBlock.EXTEND_LEFT; }
+      else if ( mRBvert.isChecked() ) { extend = DBlock.EXTEND_VERT; }
+      else if ( mRBright.isChecked() ) { extend = DBlock.EXTEND_RIGHT; }
+      else /* if ( mRBignore.isChecked() ) */ { extend = DBlock.EXTEND_IGNORE; }
 
-      if ( mRBdup.isChecked() ) { flag = DistoXDBlock.BLOCK_DUPLICATE; }
-      else if ( mRBsurf.isChecked() ) { flag = DistoXDBlock.BLOCK_SURFACE; }
-      // else if ( mRBbackshot.isChecked() ) { flag = DistoXDBlock.BLOCK_BACKSHOT; }
-      else /* if ( mRBsurvey.isChecked() ) */ { flag = DistoXDBlock.BLOCK_SURVEY; }
+      if ( mRBdup.isChecked() ) { flag = DBlock.BLOCK_DUPLICATE; }
+      else if ( mRBsurf.isChecked() ) { flag = DBlock.BLOCK_SURFACE; }
+      // else if ( mRBbackshot.isChecked() ) { flag = DBlock.BLOCK_BACKSHOT; }
+      else /* if ( mRBsurvey.isChecked() ) */ { flag = DBlock.BLOCK_SURVEY; }
 
       mParent.updateBlockExtend( mBlock, extend ); // equal extend checked by the method
       mParent.updateBlockFlag( mBlock,flag ); // equal flag is checked by the method

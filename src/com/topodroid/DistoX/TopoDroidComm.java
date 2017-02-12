@@ -128,7 +128,7 @@ public class TopoDroidComm
             }
           }
           // if ( mLister != null ) {
-          //   DistoXDBlock blk = new DistoXDBlock( );
+          //   DBlock blk = new DBlock( );
           //   blk.setId( mLastShotId, mApp.mSID );
           //   blk.mLength  = (float)d;
           //   blk.mBearing = (float)b;

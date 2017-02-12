@@ -338,7 +338,7 @@ public class DrawingCommandManager
   //   mHighlight.clear();
   // }
 
-  // public DistoXDBlock setHighlight( int plot_type, float x, float y )
+  // public DBlock setHighlight( int plot_type, float x, float y )
   // {
   //   clearHighlight();
   //   if ( ! PlotInfo.isSketch2d( plot_type ) ) return null;
@@ -1180,7 +1180,7 @@ public class DrawingCommandManager
 
   private boolean showStationSplays( DrawingPath p, ArrayList<String> splay_stations ) 
   {
-    DistoXDBlock blk = p.mBlock;
+    DBlock blk = p.mBlock;
     if ( blk == null ) return false;
     String station = blk.mFrom;
     if ( station == null || station.length() == 0 ) return false;

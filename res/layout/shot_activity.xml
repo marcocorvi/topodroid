@@ -49,6 +49,7 @@
        android:fastScrollEnabled="false"
        android:scrollingCache="true"
        android:smoothScrollbar="false"
+       android:background="#111"
      />  
      <!--
        android:listSelector="@drawable/item"

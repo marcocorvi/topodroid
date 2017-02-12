@@ -1,4 +1,4 @@
-/** @file DistoXDBlockAdapter.java
+/** @file DBlockAdapter.java
  *
  * @author marco corvi
  * @date apr 2012
@@ -28,19 +28,19 @@ import java.util.Locale;
 
 import android.util.Log;
 
-class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
+class DBlockAdapter extends ArrayAdapter< DBlock >
                           implements OnLongClickListener
                                    // , OnClickListener
 {
   private Context mContext;
   private ShotWindow mParent;
-  ArrayList< DistoXDBlock > mItems;
+  ArrayList< DBlock > mItems;
   boolean show_ids;  //!< whether to show data ids
   private LayoutInflater mLayoutInflater;
 
   private ArrayList< View > mViews;
 
-  public DistoXDBlockAdapter( Context ctx, ShotWindow parent, int id, ArrayList< DistoXDBlock > items )
+  public DBlockAdapter( Context ctx, ShotWindow parent, int id, ArrayList< DBlock > items )
   {
     super( ctx, id, items );
     mContext = ctx;
@@ -57,8 +57,8 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
   boolean hasStation( String name ) 
   {
     if ( name == null ) return false;
-    for ( DistoXDBlock b : mItems ) {
-      if ( b.mType != DistoXDBlock.BLOCK_MAIN_LEG ) continue;
+    for ( DBlock b : mItems ) {
+      if ( b.mType != DBlock.BLOCK_MAIN_LEG ) continue;
       if ( name.equals( b.mFrom ) || name.equals( b.mTo ) ) return true;
     }
     return false;
@@ -67,21 +67,21 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
   /** get all the splays around a splay-block (from the prev leg to the next leg)
    * @param id    id of the given splay-block
    */
-  ArrayList< DistoXDBlock > getSplaysAtId( long id, String name )
+  ArrayList< DBlock > getSplaysAtId( long id, String name )
   {
-    ArrayList< DistoXDBlock > ret = new ArrayList< DistoXDBlock >();
+    ArrayList< DBlock > ret = new ArrayList< DBlock >();
     for ( int k = 0; k < mItems.size(); ++k ) {
-      DistoXDBlock b = mItems.get( k );
+      DBlock b = mItems.get( k );
       if ( b.mId == id ) {
         int k1 = k-1;
         for ( ; k1 > 0; --k1 ) {
-          DistoXDBlock b1 = mItems.get( k1 );
-          if ( b1.mType != DistoXDBlock.BLOCK_SPLAY || ! name.equals( b1.mFrom ) ) break;
+          DBlock b1 = mItems.get( k1 );
+          if ( b1.mType != DBlock.BLOCK_SPLAY || ! name.equals( b1.mFrom ) ) break;
         }
         int k2 = k;
         for ( ; k2 < mItems.size(); ++k2 ) {
-          DistoXDBlock b2 = mItems.get( k2 );
-          if ( b2.mType != DistoXDBlock.BLOCK_SPLAY || ! name.equals( b2.mFrom ) ) break;
+          DBlock b2 = mItems.get( k2 );
+          if ( b2.mType != DBlock.BLOCK_SPLAY || ! name.equals( b2.mFrom ) ) break;
         }
         for ( ++k1; k1<k2; ++k1 ) ret.add( mItems.get(k1) );
         break;
@@ -93,7 +93,7 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
   // called only by ShotWindow updateBlockList( blk )
   // this method changes the ArrayList of DistoxDBlock's
   //
-  void addDataBlock( DistoXDBlock blk ) 
+  void addDataBlock( DBlock blk ) 
   {
     mItems.add( blk );
     // notifyDataSetChanged();
@@ -103,10 +103,10 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
   //  
   void reviseBlockWithPhotos( List< PhotoInfo > photos )
   {
-    for ( DistoXDBlock b : mItems ) b.mWithPhoto = false; 
+    for ( DBlock b : mItems ) b.mWithPhoto = false; 
     for ( PhotoInfo p : photos ) {
       // mark block with p.shotid
-      for ( DistoXDBlock b : mItems ) {
+      for ( DBlock b : mItems ) {
         if ( b.mId == p.shotid ) { 
           b.mWithPhoto = true;
           break;
@@ -117,7 +117,7 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
 
   void updateBlockName( long id, String from, String to ) 
   {
-    for ( DistoXDBlock b : mItems ) {
+    for ( DBlock b : mItems ) {
       if ( b.mId == id ) {
         b.mFrom = from;
         b.mTo = to;
@@ -126,13 +126,13 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
     }
   }
 
-  ArrayList< DistoXDBlock > getItemsForAssign()
+  ArrayList< DBlock > getItemsForAssign()
   {
-    ArrayList< DistoXDBlock > ret = new ArrayList<DistoXDBlock>();
+    ArrayList< DBlock > ret = new ArrayList<DBlock>();
     int size = mItems.size();
     int k = size-1;
     for ( ; k > 0; --k ) {
-      DistoXDBlock blk = mItems.get(k);
+      DBlock blk = mItems.get(k);
       if ( blk.mFrom.length() > 0 && blk.mTo.length() > 0 ) break;
     }
     for ( ; k < size; ++k ) {
@@ -141,11 +141,11 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
     return ret;
   }
 
-  public DistoXDBlock get( int pos ) { return mItems.get(pos); }
+  public DBlock get( int pos ) { return mItems.get(pos); }
 
-  // public DistoXDBlock getBlockById( long id ) 
+  // public DBlock getBlockById( long id ) 
   // {
-  //   for ( DistoXDBlock b : mItems ) if ( b.mId == id ) return b;
+  //   for ( DBlock b : mItems ) if ( b.mId == id ) return b;
   //   return null;
   // }
 
@@ -167,7 +167,7 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
     }
 
 
-    void setViewText( DistoXDBlock b, OnLongClickListener listener )
+    void setViewText( DBlock b, OnLongClickListener listener )
     {
       tvId.setText( String.format( "%1$d", b.mId ) );
       tvFrom.setText( b.mFrom );
@@ -181,6 +181,7 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
       OnClickListener toggle = new OnClickListener() {
         public void onClick( View v ) { mParent.recomputeItems( ((TextView)v).getText().toString(), pos ); }
       };
+
       tvFrom.setOnClickListener( toggle );
       tvTo.setOnClickListener( toggle );
 
@@ -205,7 +206,7 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
       } else {
         tvId.setVisibility( View.GONE );
       }
-      if ( b.mType == DistoXDBlock.BLOCK_MAIN_LEG ) {
+      if ( b.mType == DBlock.BLOCK_MAIN_LEG ) {
         tvFrom.setTextColor( ( mParent.isCurrentStationName( b.mFrom) )? 0xff00ff00 : col );
         tvTo.setTextColor(   ( mParent.isCurrentStationName( b.mTo )  )? 0xff00ff00 : col );
       } else {
@@ -221,7 +222,7 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
       if ( b.isMagneticBad( ) ) {
         tvLength.setBackgroundColor( 0xff330000 ); // dark-red
       } else {
-        tvLength.setBackgroundColor( 0xff000000 ); // black
+        // tvLength.setBackgroundColor( 0xff000000 ); // black
       }
     }
   }
@@ -229,7 +230,7 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
   @Override
   public View getView( int pos, View convertView, ViewGroup parent )
   {
-    DistoXDBlock b = mItems.get( pos );
+    DBlock b = mItems.get( pos );
     ViewHolder holder = null; 
     if ( convertView == null ) {
       convertView = mLayoutInflater.inflate( R.layout.dblock_row, null );
@@ -259,9 +260,9 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
  
   // called by ShotWindow::updateShot()
   //
-  DistoXDBlock updateBlockView( long blk_id ) 
+  DBlock updateBlockView( long blk_id ) 
   {
-    for ( DistoXDBlock b : mItems ) {
+    for ( DBlock b : mItems ) {
       if ( b.mId == blk_id ) { // use block id instead of block itself
         View v = b.mView;
         if ( v != null ) {
@@ -278,8 +279,8 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
 
   void updateBlocksName( )
   {
-    for ( DistoXDBlock b : mItems ) {
-      if ( b.mType == DistoXDBlock.BLOCK_MAIN_LEG ) {
+    for ( DBlock b : mItems ) {
+      if ( b.mType == DBlock.BLOCK_MAIN_LEG ) {
         View v = b.mView;
         if ( v != null ) {
           TextView tvFrom = (TextView) v.findViewById( R.id.from );

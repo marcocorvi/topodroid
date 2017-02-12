@@ -54,9 +54,9 @@ class DistoXNum
   {
     int size = ts.blocks.size();
     for ( int i = 0; i < size; ++i ) {
-      DistoXDBlock blk1 = ts.blocks.get(i);
+      DBlock blk1 = ts.blocks.get(i);
       for ( int j = i+1; j < size; ++j ) {
-        DistoXDBlock blk2 = ts.blocks.get(j);
+        DBlock blk2 = ts.blocks.get(j);
         float e = blk1.relativeAngle( blk2 );
         mErr0 += 1;
         mErr1 += e;
@@ -121,7 +121,7 @@ class DistoXNum
   {
     ArrayList< NumSplay > ret = new ArrayList< NumSplay >();
     for ( NumSplay splay : mSplays ) {
-      if ( splay.getBlock().mType == DistoXDBlock.BLOCK_SPLAY && st == splay.from ) {
+      if ( splay.getBlock().mType == DBlock.BLOCK_SPLAY && st == splay.from ) {
         ret.add( splay );
       }
     }
@@ -218,7 +218,7 @@ class DistoXNum
    * @param view     barriers list
    * @param hide     hiding list
    */
-  DistoXNum( List<DistoXDBlock> data, String start, String view, String hide, float decl )
+  DistoXNum( List<DBlock> data, String start, String view, String hide, float decl )
   {
     mDecl = decl;
     surveyAttached = computeNum( data, start );
@@ -372,24 +372,24 @@ class DistoXNum
   //  *
   //  * @note the new shots are assumed not to close any loop
   //  */
-  // public boolean addNewData( List<DistoXDBlock> data )
+  // public boolean addNewData( List<DBlock> data )
   // {
   //   NumShot lastLeg = null;
   //
   //   boolean ret = true;
   //   NumStation sf, st;
-  //   for ( DistoXDBlock block : data ) {
+  //   for ( DBlock block : data ) {
   //     switch ( block.type() ) {
-  //       case DistoXDBlock.BLOCK_SPLAY:
+  //       case DBlock.BLOCK_SPLAY:
   //         // Log.v( TopoDroidApp.TAG, "add splay " + block.mFrom );
   //         lastLeg = null;
   //         break;
-  //       case DistoXDBlock.BLOCK_SEC_LEG:
+  //       case DBlock.BLOCK_SEC_LEG:
   //         if ( lastLeg != null ) {
   //           lastLeg.addBlock( block );
   //         }
   //         break;
-  //       case DistoXDBlock.BLOCK_MAIN_LEG:
+  //       case DBlock.BLOCK_MAIN_LEG:
   //         sf = getStation( block.mFrom );
   //         st = getStation( block.mTo );
   //         // Log.v( TopoDroidApp.TAG, "add centerline leg " + block.mFrom + " " + block.mTo + " FROM " + sf + " TO " + st );
@@ -410,7 +410,7 @@ class DistoXNum
   //             // if ( ts.duplicate ) { // FIXME
   //             //   ++mDupNr;
   //             // } 
-  //             // if ( block.mFlag == DistoXDBlock.BLOCK_SURFACE ) { // FIXME
+  //             // if ( block.mFlag == DBlock.BLOCK_SURFACE ) { // FIXME
   //             //   ++mSurfNr;
   //             // }
   //             // do close loop also on duplicate shots
@@ -480,8 +480,8 @@ class DistoXNum
   //   // }
 
   //   int rev = 0;
-  //   for ( DistoXDBlock block : data ) {
-  //     if ( block.type() == DistoXDBlock.BLOCK_SPLAY ) {
+  //   for ( DBlock block : data ) {
+  //     if ( block.type() == DBlock.BLOCK_SPLAY ) {
   //       // Log.v( TopoDroidApp.TAG, "add splay " + block.mFrom );
   //       String f = block.mFrom;
   //       rev = 1;
@@ -611,7 +611,7 @@ class DistoXNum
     }
     // Log.v("DistoX", "make shot " + sf.name + "-" + st.name + " blocks " + ts.blocks.size() );
     NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), 1, anomaly, mDecl );
-    ArrayList<DistoXDBlock> blks = ts.getBlocks();
+    ArrayList<DBlock> blks = ts.getBlocks();
     for ( int k = 1; k < blks.size(); ++k ) {
       sh.addBlock( blks.get(k) );
     }
@@ -621,7 +621,7 @@ class DistoXNum
   /** survey data reduction 
    * return true if all shots are attached
    */
-  private boolean computeNum( List<DistoXDBlock> data, String start )
+  private boolean computeNum( List<DBlock> data, String start )
   {
     resetBBox();
     resetStats();
@@ -639,10 +639,10 @@ class DistoXNum
     List<TriShot> tmpshots  = new ArrayList< TriShot >();
     List<TriSplay> tmpsplays = new ArrayList< TriSplay >();
 
-    for ( DistoXDBlock blk : data ) {
+    for ( DBlock blk : data ) {
       switch ( blk.type() ) {
 
-        case DistoXDBlock.BLOCK_SPLAY:
+        case DBlock.BLOCK_SPLAY:
           lastLeg = null;  // clear last-leg
           if ( blk.mFrom != null && blk.mFrom.length() > 0 ) { // normal splay
             tmpsplays.add( new TriSplay( blk, blk.mFrom, (int)(blk.mExtend), +1 ) );
@@ -651,19 +651,19 @@ class DistoXNum
           }
           break;
 
-        case DistoXDBlock.BLOCK_MAIN_LEG:
+        case DBlock.BLOCK_MAIN_LEG:
           lastLeg = new TriShot( blk, blk.mFrom, blk.mTo, (int)(blk.mExtend), +1 );
-          lastLeg.duplicate = ( blk.mFlag == DistoXDBlock.BLOCK_DUPLICATE );
-          lastLeg.surface   = ( blk.mFlag == DistoXDBlock.BLOCK_SURFACE );
-          // lastLeg.backshot  = ( blk.mFlag == DistoXDBlock.BLOCK_BACKSHOT ); // FIXME
+          lastLeg.duplicate = ( blk.mFlag == DBlock.BLOCK_DUPLICATE );
+          lastLeg.surface   = ( blk.mFlag == DBlock.BLOCK_SURFACE );
+          // lastLeg.backshot  = ( blk.mFlag == DBlock.BLOCK_BACKSHOT ); // FIXME
           tmpshots.add( lastLeg );
           break;
 
-        case DistoXDBlock.BLOCK_SEC_LEG:
+        case DBlock.BLOCK_SEC_LEG:
           if (lastLeg != null) lastLeg.addBlock( blk );
           break;
-        case DistoXDBlock.BLOCK_BLANK_LEG:
-        case DistoXDBlock.BLOCK_BLANK:
+        case DBlock.BLOCK_BLANK_LEG:
+        case DBlock.BLOCK_BLANK:
           if (lastLeg != null ) {
             if ( blk.isRelativeDistance( lastLeg.getFirstBlock() ) ) {
               lastLeg.addBlock( blk );
@@ -684,7 +684,7 @@ class DistoXNum
     for ( int i = 0; i < tmpshots.size(); ++i ) {
       TriShot ts0 = tmpshots.get( i );
       addToStats( ts0 );
-      DistoXDBlock blk0 = ts0.getFirstBlock();
+      DBlock blk0 = ts0.getFirstBlock();
       blk0.mMultiBad = false;
       if ( ts0.backshot != 0 ) continue;
 
@@ -716,7 +716,7 @@ class DistoXNum
         Vector v1 = new Vector( blk0.mLength * cc * sb, blk0.mLength * cc * cb, blk0.mLength * sc );
         ts1 = ts0.sibling;
         while ( ts1 != null ) {
-          DistoXDBlock blk1 = ts1.getFirstBlock();
+          DBlock blk1 = ts1.getFirstBlock();
           cc = TDMath.cosd( blk1.mClino );
           sc = TDMath.sind( blk1.mClino );
           cb = TDMath.cosd( blk1.mBearing + mDecl ); 

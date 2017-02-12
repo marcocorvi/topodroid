@@ -215,7 +215,7 @@ public class OverviewWindow extends ItemDrawer
 
     // splay = false
     // selectable = false
-    private void addFixedLine( DistoXDBlock blk, float x1, float y1, float x2, float y2, 
+    private void addFixedLine( DBlock blk, float x1, float y1, float x2, float y2, 
                                // float xoff, float yoff,
                                boolean splay )
     {
@@ -345,7 +345,7 @@ public class OverviewWindow extends ItemDrawer
     ArrayAdapter< String > mMenuAdapter;
     boolean onMenu;
   
-    List<DistoXDBlock> mBlockList = null;
+    List<DBlock> mBlockList = null;
   
     public float zoom() { return mZoom; }
 

@@ -39,9 +39,9 @@ class StationName
   // not efficient: use a better select with reverse order and test on FROM
   private String getLastStationName( DataHelper data_helper, long sid )
   {
-    DistoXDBlock last = null;
-    List<DistoXDBlock> list = data_helper.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
-    for ( DistoXDBlock blk : list ) {
+    DBlock last = null;
+    List<DBlock> list = data_helper.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+    for ( DBlock blk : list ) {
       if ( blk.mFrom != null && blk.mFrom.length() > 0 ) { last = blk; }
     }
     if ( last == null ) return "0";
@@ -63,7 +63,7 @@ class StationName
   }
 
 
-  private void setLegExtend( DataHelper data_helper, long sid, DistoXDBlock prev )
+  private void setLegExtend( DataHelper data_helper, long sid, DBlock prev )
   {
     // FIXME what has "splay extend" to do with "leg extend" ???
     // if ( ! TDSetting.mSplayExtend ) 
@@ -73,14 +73,14 @@ class StationName
     }
   }
 
-  void assignStationsAfter_Tripod( DataHelper data_helper, long sid, DistoXDBlock blk0, List<DistoXDBlock> list )
+  void assignStationsAfter_Tripod( DataHelper data_helper, long sid, DBlock blk0, List<DBlock> list )
   { 
     // Log.v("DistoX", "assign stations after.  size " + list.size() );
     boolean increment = true;
     boolean flip = false; // whether to swap leg-stations (backsight backward shot)
     // TDLog.Log( TDLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
 
-    DistoXDBlock prev = null;
+    DBlock prev = null;
     String from = blk0.mFrom; 
     String back = blk0.mTo;
     if ( DistoXStationName.isLessOrEqual( blk0.mFrom, blk0.mTo ) ) { // forward
@@ -96,8 +96,8 @@ class StationName
     String station = from;
     // Log.v("DistoX", "*    " + oldFrom + " " + from + "-" + back + "-" + next + ":" + station + " flip=" + (flip?"y":"n") );
 
-    for ( DistoXDBlock blk : list ) {
-      if ( blk.mType == DistoXDBlock.BLOCK_SPLAY ) {
+    for ( DBlock blk : list ) {
+      if ( blk.mType == DBlock.BLOCK_SPLAY ) {
         if ( flip ) { 
           flip = false;
         }
@@ -105,7 +105,7 @@ class StationName
         blk.setName( station, "" );
         data_helper.updateShotName( blk.mId, sid, blk.mFrom, "", true );  // SPLAY
         // Log.v("DistoX", "S:"+ station + "   " + oldFrom + " " + from + "-" + back + "-" + next + ":" + station + " flip=" + (flip?"y":"n") );
-      } else if ( blk.mType == DistoXDBlock.BLOCK_MAIN_LEG ) {
+      } else if ( blk.mType == DBlock.BLOCK_MAIN_LEG ) {
         if ( blk.mId != blk0.mId ) {
           String p_from = from;
           String p_to   = next;
@@ -132,9 +132,9 @@ class StationName
     }
   }
 
-  void assignStations_Tripod( DataHelper data_helper, long sid, List<DistoXDBlock> list )
+  void assignStations_Tripod( DataHelper data_helper, long sid, List<DBlock> list )
   { 
-    DistoXDBlock prev = null;
+    DBlock prev = null;
     String from = DistoXStationName.mSecondStation;     // 1
     String back = DistoXStationName.mInitialStation;    // 0
     String next = DistoXStationName.increment( from );  // 2
@@ -143,7 +143,7 @@ class StationName
     String station = ( mCurrentStationName != null )? mCurrentStationName : from;
     int nrLegShots = 1;
 
-    for ( DistoXDBlock blk : list ) {
+    for ( DBlock blk : list ) {
       // Log.v("DistoX", blk.mId + " <" + blk.mFrom + ">-<" + blk.mTo + "> F " + from + " T " + back + " N " + next );
       if ( blk.mFrom.length() == 0 ) // this implies blk.mTo.length() == 0
       {
@@ -246,7 +246,7 @@ class StationName
     }
   }
 
-  void assignStationsAfter_Backsight( DataHelper data_helper, long sid, DistoXDBlock blk0, List<DistoXDBlock> list )
+  void assignStationsAfter_Backsight( DataHelper data_helper, long sid, DBlock blk0, List<DBlock> list )
   { 
     // Log.v("DistoX", "assign stations after.  size " + list.size() );
     boolean shot_after_splays = TDSetting.mShotAfterSplays;
@@ -255,7 +255,7 @@ class StationName
     boolean flip = false; // whether to swap leg-stations (backsight backward shot)
     // TDLog.Log( TDLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
 
-    DistoXDBlock prev = null;
+    DBlock prev = null;
     String from = blk0.mFrom;
     String to   = blk0.mTo;
     String next;
@@ -276,8 +276,8 @@ class StationName
     // int nrLegShots = 0;
     // Log.v("DistoX", "*    " + oldFrom + " " + from + "-" + to + "-" + next + ":" + station + " flip=" + (flip?"y":"n") );
 
-    for ( DistoXDBlock blk : list ) {
-      if ( blk.mType == DistoXDBlock.BLOCK_SPLAY ) {
+    for ( DBlock blk : list ) {
+      if ( blk.mType == DBlock.BLOCK_SPLAY ) {
         if ( flip ) { 
           flip = false;
         }
@@ -285,7 +285,7 @@ class StationName
         blk.setName( station, "" );
         data_helper.updateShotName( blk.mId, sid, blk.mFrom, "", true );  // SPLAY
         // Log.v("DistoX", "S:"+ station + "   " + oldFrom + " " + from + "-" + to + "-" + next + ":" + station + " flip=" + (flip?"y":"n") );
-      } else if ( blk.mType == DistoXDBlock.BLOCK_MAIN_LEG ) {
+      } else if ( blk.mType == DBlock.BLOCK_MAIN_LEG ) {
         if ( blk.mId != blk0.mId ) {
           String p_to;
           if ( flip ) { // backward
@@ -314,12 +314,12 @@ class StationName
     }
   }
 
-  void assignStations_Backsight( DataHelper data_helper, long sid, List<DistoXDBlock> list )
+  void assignStations_Backsight( DataHelper data_helper, long sid, List<DBlock> list )
   { 
     // mSecondLastShotId = lastShotId(); // FIXME this probably not needed
     // Log.v("DistoX", "assign stations. size " + list.size() );
 
-    DistoXDBlock prev = null;
+    DBlock prev = null;
     String from = DistoXStationName.mInitialStation;
     String to   = DistoXStationName.mSecondStation;
     String oldFrom = "empty"; // FIXME
@@ -331,7 +331,7 @@ class StationName
 
     int nrLegShots = 0;
 
-    for ( DistoXDBlock blk : list ) {
+    for ( DBlock blk : list ) {
       // Log.v("DistoX", blk.mId + " <" + blk.mFrom + ">-<" + blk.mTo + "> F " + from + " T " + to + " OF " + oldFrom );
       if ( blk.mFrom.length() == 0 ) // this implies blk.mTo.length() == 0
       {
@@ -427,7 +427,7 @@ class StationName
     }
   }
   
-  void assignStationsAfter_Default( DataHelper data_helper, long sid, DistoXDBlock blk0, List<DistoXDBlock> list )
+  void assignStationsAfter_Default( DataHelper data_helper, long sid, DBlock blk0, List<DBlock> list )
   {
     // Log.v("DistoX", "assign stations after.  size " + list.size() );
     int survey_stations = TDSetting.mSurveyStations;
@@ -439,7 +439,7 @@ class StationName
     boolean flip = false; // whether to swap leg-stations (backsight backward shot)
     // TDLog.Log( TDLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
 
-    DistoXDBlock prev = null;
+    DBlock prev = null;
     String from = blk0.mFrom;
     String to   = blk0.mTo;
     String next;
@@ -453,12 +453,12 @@ class StationName
     }
 
     // int nrLegShots = 0;
-    for ( DistoXDBlock blk : list ) {
-      if ( blk.mType == DistoXDBlock.BLOCK_SPLAY ) {
+    for ( DBlock blk : list ) {
+      if ( blk.mType == DBlock.BLOCK_SPLAY ) {
         // blk.mFrom = station;
         blk.setName( station, "" );
         data_helper.updateShotName( blk.mId, sid, blk.mFrom, "", true );  // SPLAY
-      } else if ( blk.mType == DistoXDBlock.BLOCK_MAIN_LEG ) {
+      } else if ( blk.mType == DBlock.BLOCK_MAIN_LEG ) {
         if ( blk.mId != blk0.mId ) {
           if ( forward_shots ) {
             from = to;
@@ -480,7 +480,7 @@ class StationName
     }
   }
 
-  void assignStations_Default( DataHelper data_helper, long sid, List<DistoXDBlock> list )
+  void assignStations_Default( DataHelper data_helper, long sid, List<DBlock> list )
   { 
     // mSecondLastShotId = lastShotId(); // FIXME this probably not needed
     // Log.v("DistoX", "assign stations. size " + list.size() );
@@ -491,7 +491,7 @@ class StationName
 
     // TDLog.Log( TDLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
 
-    DistoXDBlock prev = null;
+    DBlock prev = null;
     String from = ( forward_shots )? DistoXStationName.mInitialStation  // next FROM station
                                    : DistoXStationName.mSecondStation;
     String to   = ( forward_shots )? DistoXStationName.mSecondStation   // nect TO station
@@ -503,7 +503,7 @@ class StationName
 
     int nrLegShots = 0;
 
-    for ( DistoXDBlock blk : list ) {
+    for ( DBlock blk : list ) {
       if ( blk.mFrom.length() == 0 ) // this implies blk.mTo.length() == 0
       {
         // Log.v( "DistoX", blk.mId + " EMPTY FROM. prev " + ( (prev==null)? "null" : prev.mId ) );
@@ -595,11 +595,11 @@ class StationName
     return Integer.toString( sr ) + "." + Integer.toString( pt );
   }
 
-  int getMaxTRobotSeries( List<DistoXDBlock> list )
+  int getMaxTRobotSeries( List<DBlock> list )
   {
     int ret = 1;
-    for ( DistoXDBlock blk : list ) {
-      if ( blk.mType != DistoXDBlock.BLOCK_MAIN_LEG ) continue;
+    for ( DBlock blk : list ) {
+      if ( blk.mType != DBlock.BLOCK_MAIN_LEG ) continue;
       if ( blk.mFrom.length() > 0 ) {
         int pos = blk.mFrom.indexOf('.');
         if ( pos > 0 ) {
@@ -623,26 +623,26 @@ class StationName
   }
 
   // WARNING TopoRobot renumbering consider all the shots in a single series
-  void assignStationsAfter_TRobot( DataHelper data_helper, long sid, DistoXDBlock blk0, List<DistoXDBlock> list )
+  void assignStationsAfter_TRobot( DataHelper data_helper, long sid, DBlock blk0, List<DBlock> list )
   {
     // Log.v("DistoX", "TRobot assign stations after.  size " + list.size() );
     boolean increment = true;
     boolean flip = false; // whether to swap leg-stations (backsight backward shot)
     // TDLog.Log( TDLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
 
-    DistoXDBlock prev = null;
+    DBlock prev = null;
     String from = blk0.mFrom;
     String to   = blk0.mTo;
     String next = DistoXStationName.increment( to );
     String station = to;
 
     // int nrLegShots = 0;
-    for ( DistoXDBlock blk : list ) {
-      if ( blk.mType == DistoXDBlock.BLOCK_SPLAY ) {
+    for ( DBlock blk : list ) {
+      if ( blk.mType == DBlock.BLOCK_SPLAY ) {
         // blk.mFrom = station;
         blk.setName( station, "" );
         data_helper.updateShotName( blk.mId, sid, blk.mFrom, "", true );  // SPLAY
-      } else if ( blk.mType == DistoXDBlock.BLOCK_MAIN_LEG ) {
+      } else if ( blk.mType == DBlock.BLOCK_MAIN_LEG ) {
         if ( blk.mId != blk0.mId ) {
           from = to;
           to   = next;
@@ -657,12 +657,12 @@ class StationName
     }
   }
 
-  void assignStations_TRobot( DataHelper data_helper, long sid, List<DistoXDBlock> list )
+  void assignStations_TRobot( DataHelper data_helper, long sid, List<DBlock> list )
   { 
     int series = getMaxTRobotSeries( list );
     // Log.v("DistoX", "TRobot assign stations. size " + list.size() );
     // TDLog.Log( TDLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
-    DistoXDBlock prev = null;
+    DBlock prev = null;
     String from = getTRobotStation( 1, 0 );
     String to   = getTRobotStation( 1, 1 );
     String station = mCurrentStationName;
@@ -673,7 +673,7 @@ class StationName
 
     int nrLegShots = 0;
 
-    for ( DistoXDBlock blk : list ) {
+    for ( DBlock blk : list ) {
       if ( blk.mFrom.length() == 0 ) // this implies blk.mTo.length() == 0
       {
         // Log.v( "DistoX", blk.mId + " EMPTY FROM. prev " + ( (prev==null)? "null" : prev.mId ) );

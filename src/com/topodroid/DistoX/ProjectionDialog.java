@@ -101,7 +101,7 @@ public class ProjectionDialog extends MyDialog
   private float mBorderInnerLeft  = 0;
   private float mBorderBottom     = 4096;
 
-  List<DistoXDBlock> mList = null;
+  List<DBlock> mList = null;
 
 
   public ProjectionDialog( Context context, ShotWindow parent, long sid, String name, String from )
@@ -162,7 +162,7 @@ public class ProjectionDialog extends MyDialog
 
   // -----------------------------------------------------------------
 
-  private void addFixedLine( DistoXDBlock blk, float x1, float y1, float x2, float y2, boolean splay )
+  private void addFixedLine( DBlock blk, float x1, float y1, float x2, float y2, boolean splay )
   {
     DrawingPath dpath = null;
     if ( splay ) {

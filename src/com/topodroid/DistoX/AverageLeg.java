@@ -31,8 +31,8 @@ class AverageLeg
     mCnt = 0;
   }
 
-  void set( DistoXDBlock blk ) { set( blk.mLength, blk.mBearing, blk.mClino ); }
-  void add( DistoXDBlock blk ) { add( blk.mLength, blk.mBearing, blk.mClino ); }
+  void set( DBlock blk ) { set( blk.mLength, blk.mBearing, blk.mClino ); }
+  void add( DBlock blk ) { add( blk.mLength, blk.mBearing, blk.mClino ); }
 
   void set( float l, float b, float c ) 
   {

@@ -19,7 +19,7 @@ public class TRobotPoint
   String mName; // TopoDroid station name
   TRobotSeries mSeries;
   int mCnt;     // number of TopoDroid legs with this station (used building series)
-  DistoXDBlock mBlk; // shot that leads to this point in the series
+  DBlock mBlk; // shot that leads to this point in the series
   boolean mForward;  // this point is block's TO station
 
   TRobotPoint( int nr, String nm, TRobotSeries s )

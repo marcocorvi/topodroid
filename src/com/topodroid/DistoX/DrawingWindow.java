@@ -521,7 +521,7 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.setNorthPath( dpath );
   }
 
-  private void addFixedLine( DistoXDBlock blk, float x1, float y1, float x2, float y2,
+  private void addFixedLine( DBlock blk, float x1, float y1, float x2, float y2,
                              // float xoff, float yoff, 
                              boolean splay, boolean selectable )
   {
@@ -554,7 +554,7 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.addFixedPath( dpath, splay, selectable );
   }
 
-  private void addFixedSectionSplay( DistoXDBlock blk, float x1, float y1, float x2, float y2,
+  private void addFixedSectionSplay( DBlock blk, float x1, float y1, float x2, float y2,
                                      // float xoff, float yoff, 
                                      boolean blue )
   {
@@ -948,16 +948,15 @@ public class DrawingWindow extends ItemDrawer
   private void setButton3( int type )
   {
     mHotItemType = type;
-    if (    type == DrawingPath.DRAWING_PATH_POINT 
-         || type == DrawingPath.DRAWING_PATH_LINE 
-         || type == DrawingPath.DRAWING_PATH_AREA 
-         || type == DrawingPath.DRAWING_PATH_STATION ) {
+    if ( //   type == DrawingPath.DRAWING_PATH_POINT ||
+         type == DrawingPath.DRAWING_PATH_LINE ||
+         type == DrawingPath.DRAWING_PATH_AREA 
+         // type == DrawingPath.DRAWING_PATH_STATION 
+       ) {
       inLinePoint = true;
-      // mButton3[ BTN_JOIN ].setBackgroundResource( icons00[ IC_JOIN ] );
       mButton3[ BTN_JOIN ].setBackgroundDrawable( mBMjoin );
     } else {
       inLinePoint = false;
-      // mButton3[ BTN_JOIN ].setBackgroundResource( icons00[ IC_JOIN_NO ] );
       mButton3[ BTN_JOIN ].setBackgroundDrawable( mBMjoin_no );
     }
   }
@@ -1434,7 +1433,7 @@ public class DrawingWindow extends ItemDrawer
       mCurrentArea  = ( BrushManager.mAreaLib.isSymbolEnabled( "water" ) )? 1 : 0;
       setButtonContinue( CONT_NO );
 
-      List<DistoXDBlock> list = null;
+      List<DBlock> list = null;
       if ( PlotInfo.isSection( mType ) ) {
         list = mData.selectAllShotsAtStations( mSid, mFrom, mTo );
       } else if ( PlotInfo.isXSection( mType ) ) { 
@@ -1461,7 +1460,7 @@ public class DrawingWindow extends ItemDrawer
       // TDLog.TimeEnd("do start done");
     }
 
-    private void makeSectionReferences( List<DistoXDBlock> list )
+    private void makeSectionReferences( List<DBlock> list )
     {
       // Log.v("DistoX", "Section " + mClino + " " + mAzimuth );
  
@@ -1493,7 +1492,7 @@ public class DrawingWindow extends ItemDrawer
       float Z2 = X0 * Y1 - X1 * Y0;
 
       float dist = 0;
-      DistoXDBlock blk = null;
+      DBlock blk = null;
       float xn = 0;  // X-North // Rotate as NORTH is upward
       float yn = -1; // Y-North
       if ( PlotInfo.isSection( mType ) ) {
@@ -1509,8 +1508,8 @@ public class DrawingWindow extends ItemDrawer
           }
         }
 
-        for ( DistoXDBlock b : list ) {
-          if ( b.mType == DistoXDBlock.BLOCK_SPLAY ) continue;
+        for ( DBlock b : list ) {
+          if ( b.mType == DBlock.BLOCK_SPLAY ) continue;
           if ( mFrom.equals( b.mFrom ) && mTo.equals( b.mTo ) ) { // FROM --> TO
             dist = b.mLength;
             blk = b;
@@ -1543,8 +1542,8 @@ public class DrawingWindow extends ItemDrawer
         mDrawingSurface.addDrawingStationName( mFrom, DrawingUtil.toSceneX(xfrom), DrawingUtil.toSceneY(yfrom) );
       }
 
-      for ( DistoXDBlock b : list ) { // repeat for splays
-        if ( b.mType != DistoXDBlock.BLOCK_SPLAY ) continue;
+      for ( DBlock b : list ) { // repeat for splays
+        if ( b.mType != DBlock.BLOCK_SPLAY ) continue;
    
         int splay_station = 3; // could use a boolean
         if ( b.mFrom.equals( mFrom ) ) {
@@ -1583,7 +1582,7 @@ public class DrawingWindow extends ItemDrawer
       // mDrawingSurface.setScaleBar( mCenter.x, mCenter.y ); // (90,160) center of the drawing
     }
 
-    private void loadFiles( long type, List<DistoXDBlock> list )
+    private void loadFiles( long type, List<DBlock> list )
     {
       // Log.v("DistoX", "load files()" );
       
@@ -1755,7 +1754,7 @@ public class DrawingWindow extends ItemDrawer
       modified();
     }
 
-    void updateBlockName( DistoXDBlock block, String from, String to )
+    void updateBlockName( DBlock block, String from, String to )
     {
       // if ( mFullName2 == null ) return; // nothing for PLOT_SECTION or PLOT_H_SECTION
       if ( PlotInfo.isAnySection( mType ) )  return;
@@ -1773,14 +1772,14 @@ public class DrawingWindow extends ItemDrawer
       modified();
     }
  
-    void updateBlockComment( DistoXDBlock block, String comment ) 
+    void updateBlockComment( DBlock block, String comment ) 
     {
       if ( comment.equals( block.mComment ) ) return;
       block.mComment = comment;
       mData.updateShotComment( block.mId, mSid, comment, true ); // true = forward
     }
     
-    void updateBlockFlag( DistoXDBlock block, long flag )
+    void updateBlockFlag( DBlock block, long flag )
     {
       if ( block.mFlag == flag ) return;
       block.mFlag = flag;
@@ -1788,7 +1787,7 @@ public class DrawingWindow extends ItemDrawer
     }
 
     // called only be DrawingShotDialog
-    void updateBlockExtend( DistoXDBlock block, long extend )
+    void updateBlockExtend( DBlock block, long extend )
     {
       if ( block.mExtend == extend ) return;
       block.mExtend = extend;
@@ -1801,7 +1800,7 @@ public class DrawingWindow extends ItemDrawer
     private void recomputeProfileReference()
     {
       if ( mType == PlotInfo.PLOT_EXTENDED ) { 
-        List<DistoXDBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
+        List<DBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
         mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl ); 
         // computeReferences( (int)mType, 0.0f, 0.0f, mApp.mScaleFactor, true );
         computeReferences( (int)mType, mApp.mScaleFactor, true );
@@ -2350,7 +2349,7 @@ public class DrawingWindow extends ItemDrawer
                         float azimuth = 90 + (float)(Math.atan2( l2.mX-l1.mX, -l2.mY+l1.mY ) * TDMath.RAD2GRAD );
                         azimuth = TDMath.in360( azimuth );
 
-                        DistoXDBlock blk = null;
+                        DBlock blk = null;
                         float intersection = 0;
                         if ( paths.size() > 1 ) {
                           Toast.makeText( mActivity, R.string.too_many_leg_intersection, Toast.LENGTH_SHORT ).show();
@@ -2594,11 +2593,11 @@ public class DrawingWindow extends ItemDrawer
       if ( plot == null  ) { // if there does not exist xsection xs-name create it
         float azimuth = 0;
         float clino   = 0;
-        List< DistoXDBlock > legs = mData.selectShotsAt( mApp.mSID, name, true ); // select "independent" legs
+        List< DBlock > legs = mData.selectShotsAt( mApp.mSID, name, true ); // select "independent" legs
         if ( legs.size() == 1 ) { 
           // one-leg: normal  = direction FROM - TO
           //          inverse = direction TO - FROM
-          DistoXDBlock leg0 = legs.get(0);
+          DBlock leg0 = legs.get(0);
           if ( inverse ) { // name.equals( leg0.mFrom ) ) 
             azimuth = leg0.mBearing + 180; 
             clino   = - leg0.mClino;
@@ -2609,8 +2608,8 @@ public class DrawingWindow extends ItemDrawer
         } else if ( legs.size() == 2 ) {
           // two-leg: normal  = FROM_0 - STATION - TO_1
           //          inverse = TO_1 - STATION - FROM_0
-          DistoXDBlock leg0 = legs.get(0);
-          DistoXDBlock leg1 = legs.get(1);
+          DBlock leg0 = legs.get(0);
+          DBlock leg1 = legs.get(1);
           float b0 = leg0.mBearing;
           float b1 = leg1.mBearing;
           float c0 = leg0.mClino;
@@ -3123,7 +3122,7 @@ public class DrawingWindow extends ItemDrawer
       }
     }
 
-    private void flipBlock( DistoXDBlock blk )
+    private void flipBlock( DBlock blk )
     {
       if ( blk != null ) {
         if ( blk.mExtend == -1 ) {
@@ -3143,7 +3142,7 @@ public class DrawingWindow extends ItemDrawer
     {
       mDrawingSurface.flipProfile( mZoom );
       if ( flip_shots ) {
-        DistoXDBlock blk;
+        DBlock blk;
         for ( NumShot sh : mNum.getShots() ) {
           NumStation st1 = sh.from;
           NumStation st2 = sh.to;
@@ -3296,7 +3295,7 @@ public class DrawingWindow extends ItemDrawer
         resetFixedPaint();
         updateReference();
         if ( mApp.mDevice == null ) {
-          // DistoXDBlock last_blk = null; // mApp.mData.selectLastLegShot( mApp.mSID );
+          // DBlock last_blk = null; // mApp.mData.selectLastLegShot( mApp.mSID );
           (new ShotNewDialog( mActivity, mApp, this, null, -1L )).show();
         } else {
           mDataDownloader.toggleDownload();
@@ -3381,7 +3380,7 @@ public class DrawingWindow extends ItemDrawer
               DrawingStationPath path = mDrawingSurface.getStationPath( sn.mName );
               boolean barrier = mNum.isBarrier( sn.mName );
               boolean hidden  = mNum.isHidden( sn.mName );
-              List< DistoXDBlock > legs = mData.selectShotsAt( mApp.mSID, sn.mName, true ); // select "independent" legs
+              List< DBlock > legs = mData.selectShotsAt( mApp.mSID, sn.mName, true ); // select "independent" legs
               new DrawingStationDialog( mActivity, this, sn, path, barrier, hidden, legs ).show();
               break;
             case DrawingPath.DRAWING_PATH_POINT:
@@ -3700,7 +3699,7 @@ public class DrawingWindow extends ItemDrawer
   private void doComputeReferences( boolean reset )
   {
     // Log.v("DistoX", "doComputeReferences() type " + mType );
-    List<DistoXDBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
+    List<DBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
     mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl );
     // doMoveTo();
     if ( mType == (int)PlotInfo.PLOT_PLAN ) {
@@ -3741,7 +3740,7 @@ public class DrawingWindow extends ItemDrawer
   {
     // Log.v("DistoX", "updateDisplay() type " + mType + " reference " + reference );
     // if ( compute ) {
-      // List<DistoXDBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
+      // List<DBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
       // mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl );
       // // doMoveTo();
       // // computeReferences( (int)mType, 0.0f, 0.0f, mApp.mScaleFactor, false );
@@ -3753,7 +3752,7 @@ public class DrawingWindow extends ItemDrawer
     if ( mType != (int)PlotInfo.PLOT_PLAN && ! PlotInfo.isProfile( mType ) ) {
       resetReference( mPlot3 );
     } else {
-      List<DistoXDBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
+      List<DBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
       mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl );
       recomputeReferences( mApp.mScaleFactor, false );
       // if ( mType == (int)PlotInfo.PLOT_PLAN ) {
@@ -3792,7 +3791,7 @@ public class DrawingWindow extends ItemDrawer
 
   // forward adding data to the ShotWindow
   @Override
-  public void updateBlockList( DistoXDBlock blk ) 
+  public void updateBlockList( DBlock blk ) 
   {
     // Log.v("DistoX", "Drawing window: update Block List block " + blk.mFrom + " - " + blk.mTo ); // DATA_DOWNLOAD
     updateDisplay( /* true, true */ );
@@ -4048,7 +4047,7 @@ public class DrawingWindow extends ItemDrawer
 // -------------------------------------------------------------
 // AUTO WALLS
 
-  void drawWallsAt( DistoXDBlock blk )
+  void drawWallsAt( DBlock blk )
   {
     if ( TDSetting.mWallsType == TDSetting.WALLS_NONE ) return;
 

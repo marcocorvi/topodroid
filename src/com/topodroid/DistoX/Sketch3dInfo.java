@@ -161,7 +161,7 @@ Nx=(-ca,-sa,0) | ,'
     return String.format(Locale.US, "%s-%s %.0f %.0f", st1, st2, shotBearing, shotClino ); // can skip Locale
   }
   
-  void setStations( NumStation s1, NumStation s2, DistoXDBlock blk, boolean set_origin )
+  void setStations( NumStation s1, NumStation s2, DBlock blk, boolean set_origin )
   {
     if ( set_origin ) {
       east  = s1.e;

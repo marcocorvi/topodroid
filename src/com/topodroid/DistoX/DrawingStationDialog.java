@@ -55,11 +55,11 @@ public class DrawingStationDialog extends MyDialog
     private String mStationName;
     private boolean mIsBarrier;
     private boolean mIsHidden;
-    private List<DistoXDBlock> mBlk;
+    private List<DBlock> mBlk;
 
     public DrawingStationDialog( Context context, DrawingWindow parent, DrawingStationName station,
                                  DrawingStationPath path,
-                                 boolean is_barrier, boolean is_hidden, List<DistoXDBlock> blk )
+                                 boolean is_barrier, boolean is_hidden, List<DBlock> blk )
     {
       super( context, R.string.DrawingStationDialog );
       mParent   = parent;
@@ -130,12 +130,12 @@ public class DrawingStationDialog extends MyDialog
           String direct  = null;
           String inverse = null;
           if ( leg_size == 1 ) {
-            DistoXDBlock leg0 = mBlk.get(0);
+            DBlock leg0 = mBlk.get(0);
             direct  = leg0.mFrom + ">" + leg0.mTo;
             inverse = leg0.mTo   + ">" + leg0.mFrom;
           } else if ( leg_size == 2 ) {
-            DistoXDBlock leg0 = mBlk.get(0);
-            DistoXDBlock leg1 = mBlk.get(1);
+            DBlock leg0 = mBlk.get(0);
+            DBlock leg1 = mBlk.get(1);
             String from = leg0.mFrom;
             if ( from.equals( mStationName ) ) from = leg0.mTo;
             String to = leg1.mTo;

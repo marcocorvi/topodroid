@@ -17,8 +17,8 @@ public class NumShot
 {
   NumStation from;
   NumStation to;
-  // DistoXDBlock block;
-  ArrayList<DistoXDBlock> blocks;
+  // DBlock block;
+  ArrayList<DBlock> blocks;
   int mBranchDir; // branch direction
   int mDirection; // direction of the block (1 same, -1 opposite)
   NumBranch branch;
@@ -38,19 +38,19 @@ public class NumShot
   // reset the average leg values
   void reset( float d, float b, float c ) { mAvgLeg.set( d, b, c ); }
 
-  DistoXDBlock getFirstBlock() { return blocks.get(0); }
+  DBlock getFirstBlock() { return blocks.get(0); }
 
-  NumShot( NumStation f, NumStation t, DistoXDBlock blk, int dir, float anomaly, float decl )
+  NumShot( NumStation f, NumStation t, DBlock blk, int dir, float anomaly, float decl )
   {
     from = f;
     to   = t;
     // block = blk;
-    mIgnoreExtend = ( blk.mExtend == DistoXDBlock.EXTEND_IGNORE);
+    mIgnoreExtend = ( blk.mExtend == DBlock.EXTEND_IGNORE);
     mUsed = false;
     mDirection = dir;
     mBranchDir = 0;
     branch = null;
-    blocks = new ArrayList<DistoXDBlock>();
+    blocks = new ArrayList<DBlock>();
     blocks.add( blk );
     // mLength  = blk.mLength;
     // mBearing = blk.mBearing;
@@ -65,7 +65,7 @@ public class NumShot
 
   // boolean isRecent( long id ) { return blocks.get(0) != null && blocks.get(0).isRecent( id ); }
 
-  void addBlock( DistoXDBlock blk )
+  void addBlock( DBlock blk )
   {
     int n = blocks.size();
     blocks.add( blk );

@@ -1,4 +1,4 @@
-/* @file DistoXDBlock.java
+/* @file DBlock.java
  *
  * @author marco corvi
  * @date nov 2011
@@ -20,7 +20,7 @@ import android.view.View;
 
 import android.util.Log;
 
-public class DistoXDBlock
+public class DBlock
 {
   public static final char[] mExtendTag = { '<', '|', '>', 'o', '-', '.' };
   public static final int EXTEND_LEFT = -1;
@@ -93,10 +93,10 @@ public class DistoXDBlock
 
 
   // used by PocketTopo parser only
-  public DistoXDBlock( String f, String t, float d, float b, float c, float r, int e, int type, int shot_type )
+  public DBlock( String f, String t, float d, float b, float c, float r, int e, int type, int shot_type )
   {
     // assert( f != null && t != null );
-    mView = null; // view is set by the DistoXDBlockAdapter
+    mView = null; // view is set by the DBlockAdapter
     mPos  = 0;
     mVisible = View.VISIBLE;
     mId = 0;
@@ -120,9 +120,9 @@ public class DistoXDBlock
     mMultiBad = false;
   }
 
-  public DistoXDBlock()
+  public DBlock()
   {
-    mView = null; // view is set by the DistoXDBlockAdapter
+    mView = null; // view is set by the DBlockAdapter
     mPos  = 0;
     mVisible = View.VISIBLE;
     mId = 0;
@@ -203,7 +203,7 @@ public class DistoXDBlock
   public int color() { return colors[ mType ]; }
 
   // compute relative angle in radians
-  public float relativeAngle( DistoXDBlock b )
+  public float relativeAngle( DBlock b )
   {
     float cc, sc, cb, sb;
     cc = TDMath.cosd( mClino );
@@ -220,7 +220,7 @@ public class DistoXDBlock
     return dv; // approximation: 2 * asin( dv/2 );
   }
 
-  public float relativeDistance( DistoXDBlock b )
+  public float relativeDistance( DBlock b )
   {
     float cc, sc, cb, sb, len;
     len = mLength;
@@ -238,7 +238,7 @@ public class DistoXDBlock
     return (v1.minus(v2)).Length();
   }
 
-  public boolean isRelativeDistance( DistoXDBlock b )
+  public boolean isRelativeDistance( DBlock b )
   {
     if ( b == null ) return false;
     float dist = relativeDistance( b );

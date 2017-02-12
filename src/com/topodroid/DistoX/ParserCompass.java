@@ -215,17 +215,17 @@ public class ParserCompass extends ImportParser
       return old_extend;
     }
     if ( extend.equals("left") || extend.equals("reverse") ) {
-      return DistoXDBlock.EXTEND_LEFT;
+      return DBlock.EXTEND_LEFT;
     } 
     if ( extend.startsWith("vert") ) {
-      return DistoXDBlock.EXTEND_VERT;
+      return DBlock.EXTEND_VERT;
     }
     if ( extend.startsWith("ignore") ) {
-      return DistoXDBlock.EXTEND_IGNORE;
+      return DBlock.EXTEND_IGNORE;
     }
     // if ( extend.equals("right") || extend.equals("normal") ) {
-    //   return DistoXDBlock.EXTEND_RIGHT;
+    //   return DBlock.EXTEND_RIGHT;
     // } 
-    return DistoXDBlock.EXTEND_RIGHT;
+    return DBlock.EXTEND_RIGHT;
   }
 }

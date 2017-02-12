@@ -119,8 +119,8 @@ public class TopoDroidApp extends Application
   static float mManualCalibrationAzimuth = 0;
   static float mManualCalibrationClino   = 0;
 
-  DistoXDBlock mHighlightedSplay = null;
-  void setHighlightedSplay( DistoXDBlock blk ) { mHighlightedSplay = blk; }
+  DBlock mHighlightedSplay = null;
+  void setHighlightedSplay( DBlock blk ) { mHighlightedSplay = blk; }
   long getHighlightedSplayId( ) { return (mHighlightedSplay == null)? -1 : mHighlightedSplay.mId; }
   int mSplayMode = 2; // cross-section splay display mode
   
@@ -1174,7 +1174,7 @@ public class TopoDroidApp extends Application
       // FIXME BATCH
       // if ( ret > 0 && TDSetting.mSurveyStations > 0 ) {
       //   // FIXME TODO select only shots after the last leg shots
-      //   List<DistoXDBlock> list = mData.selectAllShots( mSID, STATUS_NORMAL );
+      //   List<DBlock> list = mData.selectAllShots( mSID, STATUS_NORMAL );
       //   assign Stations( list );
       // }
     }
@@ -1196,7 +1196,7 @@ public class TopoDroidApp extends Application
   // called also by ShotWindow::updataBlockList
   // this re-assign stations to shots with station(s) already set
   //
-  public void assignStationsAfter( DistoXDBlock blk0, List<DistoXDBlock> list )
+  public void assignStationsAfter( DBlock blk0, List<DBlock> list )
   { 
     // Log.v("DistoX", "assign stations after " + blk0.Name() + " size " + list.size() );
     // if ( TDSetting.mSurveyStations < 0 ) return;
@@ -1223,7 +1223,7 @@ public class TopoDroidApp extends Application
   // called also by ShotWindow::updataBlockList
   // @param list blocks whose stations need to be set in the DB
   //
-  public void assignStations( List<DistoXDBlock> list )
+  public void assignStations( List<DBlock> list )
   { 
     // Log.v("DistoX", "assign stations size " + list.size() + " TRobot " + TDSetting.mTRobotShot );
     // if ( TDSetting.mSurveyStations < 0 ) return;
@@ -1745,13 +1745,13 @@ public class TopoDroidApp extends Application
    * NOTE manual shots take into account the instruents calibrations
    *      LRUD are not affected
    */
-  public DistoXDBlock insertManualShot( long at, String from, String to,
+  public DBlock insertManualShot( long at, String from, String to,
                            float distance, float bearing, float clino, long extend0,
                            String left, String right, String up, String down,
                            String splay_station )
   {
     mSecondLastShotId = lastShotId();
-    DistoXDBlock ret = null;
+    DBlock ret = null;
     long id;
 
     distance = (distance - mManualCalibrationLength)  / TDSetting.mUnitLength;

@@ -52,9 +52,9 @@ public class ShotDialog extends MyDialog
                                  , View.OnLongClickListener
 {
   private ShotWindow mParent;
-  private DistoXDBlock mBlk;
-  private DistoXDBlock mPrevBlk;
-  private DistoXDBlock mNextBlk;
+  private DBlock mBlk;
+  private DBlock mPrevBlk;
+  private DBlock mNextBlk;
   // private int mPos; // item position in the parent' list
 
   private Pattern mPattern; // name pattern
@@ -140,8 +140,8 @@ public class ShotDialog extends MyDialog
   private static int flagBearing  = MyKeyboard.FLAG_POINT;
   private static int flagClino    = MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_SIGN;
 
-  public ShotDialog( Context context, ShotWindow parent, /* int pos, */ DistoXDBlock blk,
-                     DistoXDBlock prev, DistoXDBlock next
+  public ShotDialog( Context context, ShotWindow parent, /* int pos, */ DBlock blk,
+                     DBlock prev, DBlock next
                    )
   {
     super( context, R.string.ShotDialog );
@@ -152,7 +152,7 @@ public class ShotDialog extends MyDialog
   }
 
 
-  private void loadDBlock( DistoXDBlock blk, DistoXDBlock prev, DistoXDBlock next )
+  private void loadDBlock( DBlock blk, DBlock prev, DBlock next )
   {
     mPrevBlk     = prev;
     mNextBlk     = next;
@@ -164,7 +164,7 @@ public class ShotDialog extends MyDialog
     shot_from    = blk.mFrom;
     shot_to      = blk.mTo;
     
-    if ( blk.isTypeBlank() && prev != null && prev.type() == DistoXDBlock.BLOCK_MAIN_LEG ) {
+    if ( blk.isTypeBlank() && prev != null && prev.type() == DBlock.BLOCK_MAIN_LEG ) {
       if ( DistoXStationName.isLessOrEqual( prev.mFrom, prev.mTo ) ) {
         shot_from = prev.mTo;
         shot_to   = DistoXStationName.increment( prev.mTo );
@@ -185,10 +185,10 @@ public class ShotDialog extends MyDialog
     shot_extra   = blk.extraString();
     shot_extend  = blk.mExtend;
     shot_flag    = blk.mFlag;
-    shot_leg     = blk.mType == DistoXDBlock.BLOCK_SEC_LEG;
+    shot_leg     = blk.mType == DBlock.BLOCK_SEC_LEG;
     shot_comment = blk.mComment;
 
-    // if ( blk.type() != DistoXDBlock.BLOCK_MAIN_LEG ) mCBdeleteLeg.setVisibility( View.GONE );
+    // if ( blk.type() != DBlock.BLOCK_MAIN_LEG ) mCBdeleteLeg.setVisibility( View.GONE );
   }
 
   private void updateView()
@@ -217,10 +217,10 @@ public class ShotDialog extends MyDialog
       mETcomment.setText( "" );
     }
    
-    // if ( shot_flag == DistoXDBlock.BLOCK_SURVEY ) { mRBreg.setChecked( true ); }
-    if ( shot_flag == DistoXDBlock.BLOCK_DUPLICATE ) { mRBdup.setChecked( true ); }
-    else if ( shot_flag == DistoXDBlock.BLOCK_SURFACE ) { mRBsurf.setChecked( true ); }
-    // else if ( shot_flag == DistoXDBlock.BLOCK_BACKSHOT ) { mRBback.setChecked( true ); }
+    // if ( shot_flag == DBlock.BLOCK_SURVEY ) { mRBreg.setChecked( true ); }
+    if ( shot_flag == DBlock.BLOCK_DUPLICATE ) { mRBdup.setChecked( true ); }
+    else if ( shot_flag == DBlock.BLOCK_SURFACE ) { mRBsurf.setChecked( true ); }
+    // else if ( shot_flag == DBlock.BLOCK_BACKSHOT ) { mRBback.setChecked( true ); }
 
     mCBlegPrev.setChecked( shot_leg );
 
@@ -228,17 +228,17 @@ public class ShotDialog extends MyDialog
     mRBvert.setChecked( false );
     mRBright.setChecked( false );
     // mRBignore.setChecked( false );
-    if ( shot_extend == DistoXDBlock.EXTEND_LEFT ) { mRBleft.setChecked( true ); }
-    else if ( shot_extend == DistoXDBlock.EXTEND_VERT ) { mRBvert.setChecked( true ); }
-    else if ( shot_extend == DistoXDBlock.EXTEND_RIGHT ) { mRBright.setChecked( true ); }
-    // else if ( shot_extend == DistoXDBlock.EXTEND_IGNORE ) { mRBignore.setChecked( true ); }
+    if ( shot_extend == DBlock.EXTEND_LEFT ) { mRBleft.setChecked( true ); }
+    else if ( shot_extend == DBlock.EXTEND_VERT ) { mRBvert.setChecked( true ); }
+    else if ( shot_extend == DBlock.EXTEND_RIGHT ) { mRBright.setChecked( true ); }
+    // else if ( shot_extend == DBlock.EXTEND_IGNORE ) { mRBignore.setChecked( true ); }
 
     // Spinner
     // switch ( shot_extend ) {
-    //   case DistoXDBlock.EXTEND_LEFT: break;
-    //   case DistoXDBlock.EXTEND_VERT: break;
-    //   case DistoXDBlock.EXTEND_RIGHT: break;
-    //   case DistoXDBlock.EXTEND_IGNORE: break;
+    //   case DBlock.EXTEND_LEFT: break;
+    //   case DBlock.EXTEND_VERT: break;
+    //   case DBlock.EXTEND_RIGHT: break;
+    //   case DBlock.EXTEND_IGNORE: break;
     // }
 
     mButtonNext.setEnabled( mNextBlk != null );
@@ -458,22 +458,22 @@ public class ShotDialog extends MyDialog
       shot_leg = false;
     }
 
-    shot_flag = DistoXDBlock.BLOCK_SURVEY;
-    if ( mRBdup.isChecked() )       { shot_flag = DistoXDBlock.BLOCK_DUPLICATE; }
-    else if ( mRBsurf.isChecked() ) { shot_flag = DistoXDBlock.BLOCK_SURFACE; }
-    // else if ( mRBback.isChecked() ) { shot_flag = DistoXDBlock.BLOCK_BACKSHOT; }
-    // else                            { shot_flag = DistoXDBlock.BLOCK_SURVEY; }
+    shot_flag = DBlock.BLOCK_SURVEY;
+    if ( mRBdup.isChecked() )       { shot_flag = DBlock.BLOCK_DUPLICATE; }
+    else if ( mRBsurf.isChecked() ) { shot_flag = DBlock.BLOCK_SURFACE; }
+    // else if ( mRBback.isChecked() ) { shot_flag = DBlock.BLOCK_BACKSHOT; }
+    // else                            { shot_flag = DBlock.BLOCK_SURVEY; }
 
     shot_extend = mBlk.mExtend;
-    if ( mRBleft.isChecked() )       { shot_extend = DistoXDBlock.EXTEND_LEFT; }
-    else if ( mRBvert.isChecked() )  { shot_extend = DistoXDBlock.EXTEND_VERT; }
-    else if ( mRBright.isChecked() ) { shot_extend = DistoXDBlock.EXTEND_RIGHT; }
-    else                             { shot_extend = DistoXDBlock.EXTEND_IGNORE; }
+    if ( mRBleft.isChecked() )       { shot_extend = DBlock.EXTEND_LEFT; }
+    else if ( mRBvert.isChecked() )  { shot_extend = DBlock.EXTEND_VERT; }
+    else if ( mRBright.isChecked() ) { shot_extend = DBlock.EXTEND_RIGHT; }
+    else                             { shot_extend = DBlock.EXTEND_IGNORE; }
 
     mBlk.mFlag = shot_flag;
     mBlk.mExtend = shot_extend;
     if ( shot_leg ) {
-      mBlk.mType = DistoXDBlock.BLOCK_SEC_LEG;
+      mBlk.mType = DBlock.BLOCK_SEC_LEG;
     } else if ( leg_next ) {
       long id = mParent.mergeToNextLeg( mBlk );
       if ( id >= 0 ) {
@@ -504,7 +504,7 @@ public class ShotDialog extends MyDialog
       mParent.updateSplayShots( shot_from, shot_to, shot_extend, shot_flag, shot_leg, comment, mBlk );
     } else {
       // mBlk.setName( shot_from, shot_to ); // done by parent.updateShot
-      // if ( shot_leg ) mBlk.mType = DistoXDBlock.BLOCK_SEC_LEG; // FIXME maybe not necessary
+      // if ( shot_leg ) mBlk.mType = DBlock.BLOCK_SEC_LEG; // FIXME maybe not necessary
       mParent.updateShot( shot_from, shot_to, shot_extend, shot_flag, shot_leg, comment, mBlk );
     }
     // mParent.scrollTo( mPos );
@@ -634,7 +634,7 @@ public class ShotDialog extends MyDialog
       //
       // saveDBlock();
       if ( mPrevBlk != null ) {
-        DistoXDBlock prevBlock = mParent.getPreviousLegShot( mPrevBlk, true );
+        DBlock prevBlock = mParent.getPreviousLegShot( mPrevBlk, true );
         // TDLog.Log( TDLog.LOG_SHOT, "PREV " + mPrevBlk.toString(true ) );
         loadDBlock( mPrevBlk, prevBlock, mBlk );
         updateView();
@@ -648,7 +648,7 @@ public class ShotDialog extends MyDialog
       //                blk -- next -- nextOfNext
       // saveDBlock();
       if ( mNextBlk != null ) {
-        DistoXDBlock next = mParent.getNextLegShot( mNextBlk, true );
+        DBlock next = mParent.getNextLegShot( mNextBlk, true );
         // TDLog.Log( TDLog.LOG_SHOT, "NEXT " + mNextBlk.toString(true ) );
         loadDBlock( mNextBlk, mBlk, next );
         updateView();

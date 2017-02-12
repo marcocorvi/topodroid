@@ -447,8 +447,8 @@ public class SurveyWindow extends Activity
           filename = mApp.exportSurveyAsCsv();
           break;
         case TDConst.DISTOX_EXPORT_DXF:
-          List<DistoXDBlock> list = mApp.mData.selectAllShots( mApp.mSID, TopoDroidApp.STATUS_NORMAL );
-          DistoXDBlock blk = list.get( 0 );
+          List<DBlock> list = mApp.mData.selectAllShots( mApp.mSID, TopoDroidApp.STATUS_NORMAL );
+          DBlock blk = list.get( 0 );
           if ( blk != null ) {
             // Log.v( TopoDroidApp.TAG, "DISTOX_EXPORT_DXF from " + blk.mFrom );
             float decl = mApp.mData.getSurveyDeclination( mApp.mSID );

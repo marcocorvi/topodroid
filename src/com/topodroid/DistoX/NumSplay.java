@@ -14,12 +14,12 @@ package com.topodroid.DistoX;
 public class NumSplay extends NumSurveyPoint
 {
   public NumStation from;
-  private DistoXDBlock block;
+  private DBlock block;
   float mDecl;
 
-  DistoXDBlock getBlock() { return block; }
+  DBlock getBlock() { return block; }
 
-  NumSplay( NumStation f, float d, float b, float c, float extend, DistoXDBlock blk, float decl )
+  NumSplay( NumStation f, float d, float b, float c, float extend, DBlock blk, float decl )
   {
     from = f;
     v = from.v - d * TDMath.sind( c );

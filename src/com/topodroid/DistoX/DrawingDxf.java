@@ -775,7 +775,7 @@ class DrawingDxf
         // centerline data
         if ( PlotInfo.isSketch2D( type ) ) {
           for ( DrawingPath sh : plot.getLegs() ) {
-            DistoXDBlock blk = sh.mBlock;
+            DBlock blk = sh.mBlock;
             if ( blk == null ) continue;
             
             StringWriter sw4 = new StringWriter();
@@ -811,7 +811,7 @@ class DrawingDxf
             out.flush();
           }
           for ( DrawingPath sh : plot.getSplays() ) {
-            DistoXDBlock blk = sh.mBlock;
+            DBlock blk = sh.mBlock;
             if ( blk == null ) continue;
             
             StringWriter sw41 = new StringWriter();

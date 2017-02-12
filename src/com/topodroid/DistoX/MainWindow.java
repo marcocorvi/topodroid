@@ -471,7 +471,7 @@ public class MainWindow extends Activity
           mApp.insert2dPlot( sid, "1", parser.mStartFrom, true, 0 ); // true = plan-extended plot, 0 = proj_dir
         }
 
-        // DistoXDBlock blk = mApp.mData.selectShot( 1, sid );
+        // DBlock blk = mApp.mData.selectShot( 1, sid );
         // String plan = parser.mOutline;
         // String extended = parser.mSideview;
         // if ( blk != null /* && plan != null || extended != null */ ) {
@@ -610,12 +610,12 @@ public class MainWindow extends Activity
     // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
     mMenuAdapter = new ArrayAdapter<String>(mActivity, R.layout.menu );
 
-    if ( TDSetting.mLevelOverExperimental ) mMenuAdapter.add( res.getString( menus[0] ) );
-    if ( TDSetting.mLevelOverAdvanced ) mMenuAdapter.add( res.getString( menus[1] ) );
-    if ( TDSetting.mLevelOverAdvanced && mApp.mCosurvey ) mMenuAdapter.add( res.getString( menus[2] ) );
-    mMenuAdapter.add( res.getString( menus[3] ) );
-    mMenuAdapter.add( res.getString( menus[4] ) );
-    mMenuAdapter.add( res.getString( menus[5] ) );
+    mMenuAdapter.add( res.getString( menus[0] ) );  // PALETTE
+    if ( TDSetting.mLevelOverAdvanced ) mMenuAdapter.add( res.getString( menus[1] ) ); // LOGS
+    if ( TDSetting.mLevelOverAdvanced && mApp.mCosurvey ) mMenuAdapter.add( res.getString( menus[2] ) ); // CO-SURVEY
+    mMenuAdapter.add( res.getString( menus[3] ) ); // ABOUT
+    mMenuAdapter.add( res.getString( menus[4] ) ); // SETTINGS
+    mMenuAdapter.add( res.getString( menus[5] ) ); // HELP
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
   }
@@ -633,13 +633,9 @@ public class MainWindow extends Activity
     closeMenu();
     // Toast.makeText(mActivity, item.toString(), Toast.LENGTH_SHORT).show();
     int p = 0;
-    // if ( p++ == pos ) { // PALETTE
-    //   BrushManager.makePaths( getResources() );
-    //   (new SymbolEnableDialog( mActivity, mApp )).show();
-    // } else { 
       Intent intent;
-      if ( TDSetting.mLevelOverExperimental && p++ == pos ) { // PALETTE EXTRA SYMBOLS
-        (new SymbolReload( mActivity, mApp )).show();
+      if ( p++ == pos ) { // PALETTE EXTRA SYMBOLS
+        (new SymbolReload( mActivity, mApp, TDSetting.mLevelOverExperimental )).show();
       } else if ( TDSetting.mLevelOverAdvanced && p++ == pos ) { // LOGS
         intent = new Intent( mActivity, TopoDroidPreferences.class );
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_LOG );

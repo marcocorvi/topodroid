@@ -56,7 +56,7 @@ public class SketchNewShotDialog extends MyDialog
   private TopoDroidApp   mApp;
   String mFrom;
   boolean manual_shot;
-  DistoXDBlock mBlk;
+  DBlock mBlk;
 
   private MyKeyboard mKeyboard;
 
@@ -139,7 +139,7 @@ public class SketchNewShotDialog extends MyDialog
       } else {
         mETfrom.setText( mFrom );
         String to = mFrom;
-        List< DistoXDBlock > list = mData.selectAllShots( mApp.mSID, 0 );
+        List< DBlock > list = mData.selectAllShots( mApp.mSID, 0 );
         do {
             to = DistoXStationName.increment( to ); 
         } while ( DistoXStationName.listHasName( list, to ) );
@@ -161,7 +161,7 @@ public class SketchNewShotDialog extends MyDialog
     Button b = (Button) v;
     boolean splay = mCBsplay.isChecked();
     if ( b == mBtnOk ) {
-      ArrayList<DistoXDBlock> updateList = null;
+      ArrayList<DBlock> updateList = null;
       if ( splay ) {
         to = "";
       }
@@ -170,8 +170,8 @@ public class SketchNewShotDialog extends MyDialog
         float ber = Float.parseFloat( mETazimuth.getText().toString() );
         float cln = Float.parseFloat( mETclino.getText().toString() );
         // append a new shot FIXME null splay ?
-        DistoXDBlock blk = mApp.insertManualShot( -1L, mFrom, to, len, ber, cln, 1L, null, null, null, null, null );
-        updateList = new ArrayList<DistoXDBlock>();
+        DBlock blk = mApp.insertManualShot( -1L, mFrom, to, len, ber, cln, 1L, null, null, null, null, null );
+        updateList = new ArrayList<DBlock>();
         updateList.add( blk );
       } else {
         // set stations to mBlk
@@ -183,7 +183,7 @@ public class SketchNewShotDialog extends MyDialog
         if ( ! splay ) {
           /* updateList = mShots.numberSplays(); // FIXME-EXTEND in may go away ... */
         } else {
-          updateList = new ArrayList<DistoXDBlock>();
+          updateList = new ArrayList<DBlock>();
         }
         updateList.add( mBlk );
       }

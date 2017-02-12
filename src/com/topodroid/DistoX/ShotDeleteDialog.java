@@ -31,7 +31,7 @@ public class ShotDeleteDialog extends MyDialog
                               implements View.OnClickListener
 {
   private ShotWindow mParent;
-  private DistoXDBlock mBlk;
+  private DBlock mBlk;
 
   private TextView mTVstations;
   private TextView mTVdata;
@@ -44,7 +44,7 @@ public class ShotDeleteDialog extends MyDialog
    * @param parent    parent
    * @param blk       shot block
    */
-  ShotDeleteDialog( Context context, ShotWindow parent, DistoXDBlock blk )
+  ShotDeleteDialog( Context context, ShotWindow parent, DBlock blk )
   {
     super( context, R.string.ShotDeleteDialog );
     mParent  = parent;
@@ -77,7 +77,7 @@ public class ShotDeleteDialog extends MyDialog
     mButtonDelete.setOnClickListener( this );
     // mButtonCancel.setOnClickListener( this );
 
-    if ( mBlk.type() != DistoXDBlock.BLOCK_MAIN_LEG ) mCBleg.setVisibility( View.GONE );
+    if ( mBlk.type() != DBlock.BLOCK_MAIN_LEG ) mCBleg.setVisibility( View.GONE );
 
   }
 

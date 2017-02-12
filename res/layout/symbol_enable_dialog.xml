@@ -69,7 +69,7 @@
           android:stackFromBottom="false"
           android:transcriptMode="alwaysScroll"
           android:layout_weight="1"
-          android:background="#ff000000"
+          android:background="#111"
       />  
   </LinearLayout>
 

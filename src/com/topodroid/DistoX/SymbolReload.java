@@ -46,10 +46,13 @@ public class SymbolReload extends MyDialog
   private CheckBox mCBpaleo;
   private CheckBox mCBbio;
 
-  public SymbolReload( Context context, TopoDroidApp app )
+  private boolean mAll;
+
+  public SymbolReload( Context context, TopoDroidApp app, boolean all )
   {
     super(context, R.string.SymbolReload );
     mApp = app;
+    mAll = all;
   }
 
 // -------------------------------------------------------------------
@@ -73,14 +76,25 @@ public class SymbolReload extends MyDialog
     mCBpaleo  = (CheckBox) findViewById( R.id.symbol_paleo  );
     mCBbio    = (CheckBox) findViewById( R.id.symbol_bio    );
 
-
     mBtnCancel  = (Button) findViewById( R.id.button_cancel );
     mBtnInstall = (Button) findViewById( R.id.button_add );
     mBtnReplace = (Button) findViewById( R.id.button_replace );
     mBtnCancel.setOnClickListener( this );
-    mBtnInstall.setOnClickListener( this );
     mBtnReplace.setOnClickListener( this );
-
+    if ( ! mAll ) {
+      mCBspeleo.setChecked( true );
+      mCBspeleo.setVisibility( View.GONE );
+      mCBmine.setVisibility( View.GONE );
+      mCBgeo.setVisibility( View.GONE );
+      mCBarcheo.setVisibility( View.GONE );
+      mCBpaleo.setVisibility( View.GONE );
+      mCBbio.setVisibility( View.GONE );
+      mBtnInstall.setVisibility( View.GONE );
+      String version = mApp.mDData.getValue( "symbol_version" );
+      tv.setText( String.format( mApp.getResources().getString(R.string.symbols_ask), TopoDroidApp.SYMBOL_VERSION, version ) );
+    } else {
+      mBtnInstall.setOnClickListener( this );
+    }
   }
 
   public void onClick(View v) 

@@ -690,7 +690,7 @@ public class SketchWindow extends ItemDrawer
     mInfo.xcenter = mApp.mDisplayWidth/2;
     mInfo.ycenter = mApp.mDisplayHeight/2;
 
-    List<DistoXDBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
+    List<DBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
     if ( list.size() == 0 ) {
       Toast.makeText( mActivity, R.string.few_data, Toast.LENGTH_SHORT ).show();
       finish();
@@ -863,7 +863,7 @@ public class SketchWindow extends ItemDrawer
   // then they are referred to the mInfo origin
   private void addFixed( float x1, float y1, float z1, 
                          float x2, float y2, float z2, 
-                         DistoXDBlock blk, boolean splay, boolean is_reference )
+                         DBlock blk, boolean splay, boolean is_reference )
   {
     x1 = Sketch3dInfo.mXScale * (x1 - mInfo.east);
     x2 = Sketch3dInfo.mXScale * (x2 - mInfo.east);
@@ -902,7 +902,7 @@ public class SketchWindow extends ItemDrawer
     NumStation station1 = mNum.getStation( mInfo.st1 );
     NumStation station2 = mNum.getStation( mInfo.st2 );
     NumShot    shot = mNum.getShot( mInfo.st1, mInfo.st2 );
-    DistoXDBlock blk = shot.getFirstBlock();
+    DBlock blk = shot.getFirstBlock();
     mInfo.setStations( station1, station2, blk, set_origin );
     // resetZoom();
 
@@ -957,7 +957,7 @@ public class SketchWindow extends ItemDrawer
     }
   }
 
-  private void prepareReferences( List<DistoXDBlock> list )
+  private void prepareReferences( List<DBlock> list )
   {
     // mSketchSurface.clearReferences();
     mNum = new DistoXNum( list, mInfo.start, null, null, mDecl ); // FIXME null: no barrier no hiding
@@ -968,13 +968,13 @@ public class SketchWindow extends ItemDrawer
     mSketchSurface.setModel( mModel );
   }
 
-  void recreateNum( List<DistoXDBlock> list )
+  void recreateNum( List<DBlock> list )
   {
     mNum = new DistoXNum( list, mInfo.start, null, null, mDecl ); // FIXME null: no barrier no hiding
     mModel.setNum( mNum );
   }
 
-  void updateNum( ArrayList<DistoXDBlock> list )
+  void updateNum( ArrayList<DBlock> list )
   {
     // FIXME mNum.addNewData( list );
     computeReferenceFrame( false ); // do not change origin
@@ -1224,7 +1224,7 @@ public class SketchWindow extends ItemDrawer
         if ( path == null ) {
           Toast.makeText( mActivity, R.string.shot_not_found, Toast.LENGTH_SHORT ).show();
         } else {
-          DistoXDBlock blk = path.mBlock;
+          DBlock blk = path.mBlock;
           if ( blk != null ) {
             // float a = mInfo.azimuth;
             // float c = mInfo.clino;
@@ -1942,7 +1942,7 @@ public class SketchWindow extends ItemDrawer
   
   // forward to the ShotWindow
   @Override
-  public void updateBlockList( DistoXDBlock blk )
+  public void updateBlockList( DBlock blk )
   {
     mApp.mShotWindow.updateBlockList( blk );
     // FIXME FIXME updateDisplay( true, true );
@@ -1961,7 +1961,7 @@ public class SketchWindow extends ItemDrawer
     mActivity.setTitleColor( TDConst.COLOR_NORMAL );
     if ( nr >= 0 ) {
       if ( nr > 0 ) {
-        List<DistoXDBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
+        List<DBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
         recreateNum( list );
       }
       Toast.makeText( mActivity, getResources().getQuantityString(R.plurals.read_data, nr, nr ), Toast.LENGTH_SHORT ).show();

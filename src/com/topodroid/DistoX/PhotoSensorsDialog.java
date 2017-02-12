@@ -37,7 +37,7 @@ public class PhotoSensorsDialog extends MyDialog
                                 implements View.OnClickListener
 {
   private ShotWindow mParent;
-  private DistoXDBlock mBlk;
+  private DBlock mBlk;
 
   private TextView mTVstations;
   private TextView mTVdata;
@@ -51,7 +51,7 @@ public class PhotoSensorsDialog extends MyDialog
   private Button mBTlrud;
   private CheckBox mCBleg;
 
-  private MyCheckBox mButtonPlot;
+  // private MyCheckBox mButtonPlot;
   private MyCheckBox mButtonPhoto;
   private MyCheckBox mButtonSensor;
   private MyCheckBox mButtonShot;
@@ -66,7 +66,7 @@ public class PhotoSensorsDialog extends MyDialog
    * @param group     data group
    * @param data      calibration data (as string)
    */
-  PhotoSensorsDialog( Context context, ShotWindow parent, DistoXDBlock blk )
+  PhotoSensorsDialog( Context context, ShotWindow parent, DBlock blk )
   {
     super( context, R.string.PhotoSensorsDialog );
     mParent  = parent;
@@ -102,14 +102,14 @@ public class PhotoSensorsDialog extends MyDialog
     mCBleg = (CheckBox) findViewById( R.id.leg );
     mCBleg.setChecked( false );
 
-    mButtonPlot   = new MyCheckBox( mContext, size, R.drawable.iz_plot, R.drawable.iz_plot ); 
+    // mButtonPlot   = new MyCheckBox( mContext, size, R.drawable.iz_plot, R.drawable.iz_plot ); 
     mButtonPhoto  = new MyCheckBox( mContext, size, R.drawable.iz_camera, R.drawable.iz_camera ); 
     mButtonSensor = new MyCheckBox( mContext, size, R.drawable.iz_sensor, R.drawable.iz_sensor ); 
     mButtonShot   = new MyCheckBox( mContext, size, R.drawable.iz_add_leg, R.drawable.iz_add_leg );
     mButtonSurvey = new MyCheckBox( mContext, size, R.drawable.iz_split, R.drawable.iz_split );
     mButtonDelete = new MyCheckBox( mContext, size, R.drawable.iz_delete, R.drawable.iz_delete );
 
-    layout4.addView( mButtonPlot, lp );
+    // layout4.addView( mButtonPlot, lp );
     layout4.addView( mButtonPhoto, lp );
     layout4.addView( mButtonSensor, lp );
     layout4.addView( mButtonShot, lp );
@@ -147,7 +147,7 @@ public class PhotoSensorsDialog extends MyDialog
       mBTlrud.setVisibility( View.GONE );
     }
 
-    mButtonPlot.setOnClickListener( this );
+    // mButtonPlot.setOnClickListener( this );
     mButtonPhoto.setOnClickListener( this );
     mButtonSensor.setOnClickListener( this );
     // mButtonExternal.setOnClickListener( this );
@@ -155,7 +155,7 @@ public class PhotoSensorsDialog extends MyDialog
     mButtonSurvey.setOnClickListener( this );
     mButtonDelete.setOnClickListener( this );
 
-    if ( mBlk.type() != DistoXDBlock.BLOCK_MAIN_LEG ) mCBleg.setVisibility( View.GONE );
+    if ( mBlk.type() != DBlock.BLOCK_MAIN_LEG ) mCBleg.setVisibility( View.GONE );
   }
 
   public void onClick(View v) 
@@ -173,9 +173,9 @@ public class PhotoSensorsDialog extends MyDialog
         mETdown.getText().toString().replace(',','.') 
       );
       dismiss();
-    } else if ( b == mButtonPlot ) {       // PHOTO
-      mParent.highlightBlock( mBlk );
-      dismiss();
+    // } else if ( b == mButtonPlot ) {       // PHOTO
+    //   mParent.highlightBlock( mBlk );
+    //   dismiss();
     } else if ( b == mButtonPhoto ) {       // PHOTO
       mParent.askPhotoComment( );
       dismiss();

@@ -30,14 +30,14 @@ import java.util.ArrayList;
  */
 public class SketchFixedPath extends SketchPath
 {
-  DistoXDBlock mBlock;
+  DBlock mBlock;
   Paint mStepPaint;
   float sx, sy;     // midpoint scene 2d coords
   float cx, cy, cz; // midpoint 3d coords
   Line3D  mLine;
 
 
-  public SketchFixedPath( int type, DistoXDBlock blk, Paint paint, Paint step_paint ) 
+  public SketchFixedPath( int type, DBlock blk, Paint paint, Paint step_paint ) 
   {
     super( type, blk.mFrom, blk.mTo );
     mBlock = blk;

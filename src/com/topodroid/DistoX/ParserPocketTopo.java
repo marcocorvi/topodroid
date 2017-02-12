@@ -75,16 +75,16 @@ public class ParserPocketTopo extends ImportParser
 
     int shot_count = ptfile.shotCount();
     // Log.v("PTDistoX", "PT nr shots " + shot_count );
-    int extend = DistoXDBlock.EXTEND_NONE;
+    int extend = DBlock.EXTEND_NONE;
     int ext_flag = extend;
-    // DistoXDBlock b     = null;  // temporary block pointer
-    // DistoXDBlock start = null;  // first block inserted
-    // DistoXDBlock last  = null;  // last block on the list
+    // DBlock b     = null;  // temporary block pointer
+    // DBlock start = null;  // first block inserted
+    // DBlock last  = null;  // last block on the list
 
     String from_prev = "";
     String to_prev   = "";
     // Pattern pattern = Pattern.compile( "0+" );
-    // ArrayList< DistoXDBlock > data = new ArrayList< DistoXDBlock >();
+    // ArrayList< DBlock > data = new ArrayList< DBlock >();
 
     for ( int s=0; s < shot_count; ++s ) {
       PTShot shot = ptfile.getShot(s);
@@ -107,18 +107,18 @@ public class ParserPocketTopo extends ImportParser
         to_prev   = to;
       }
       if ( shot.isFlipped() ) {
-        if ( extend != DistoXDBlock.EXTEND_LEFT ) {
-          extend = DistoXDBlock.EXTEND_LEFT;
+        if ( extend != DBlock.EXTEND_LEFT ) {
+          extend = DBlock.EXTEND_LEFT;
           ext_flag = extend;
         } else {
-          ext_flag = DistoXDBlock.EXTEND_NONE;
+          ext_flag = DBlock.EXTEND_NONE;
         }
       } else {
-        if ( extend != DistoXDBlock.EXTEND_RIGHT ) {
-          extend = DistoXDBlock.EXTEND_RIGHT;
+        if ( extend != DBlock.EXTEND_RIGHT ) {
+          extend = DBlock.EXTEND_RIGHT;
           ext_flag = extend;
         } else {
-          ext_flag = DistoXDBlock.EXTEND_NONE;
+          ext_flag = DBlock.EXTEND_NONE;
         }
       }
       shots.add( new ParserShot( from, to,  da, ba, ca, ra, extend, false, false, false,
@@ -127,7 +127,7 @@ public class ParserPocketTopo extends ImportParser
         mStartFrom = from;
       }
       // if ( from.length() > 0 && to.length() > 0 ) {
-      //   data.add( new DistoXDBlock( from, to,  da, ba, ca, ra, extend, DistoXDBlock.BLOCK_MAIN_LEG ) );
+      //   data.add( new DBlock( from, to,  da, ba, ca, ra, extend, DBlock.BLOCK_MAIN_LEG ) );
       // }
     }
     TDLog.Log( TDLog.LOG_PTOPO, "PT parser shot count " + shot_count + " size " + shots.size() );

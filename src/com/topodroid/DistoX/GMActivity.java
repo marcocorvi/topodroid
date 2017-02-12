@@ -545,7 +545,7 @@ public class GMActivity extends Activity
   }
     
   @Override
-  public void updateBlockList( DistoXDBlock blk ) { }
+  public void updateBlockList( DBlock blk ) { }
 
   @Override
   public void updateBlockList( long blk_id ) { }

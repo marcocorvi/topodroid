@@ -27,11 +27,11 @@ public class TriShot
   public boolean surface;
   public int     backshot; // 0 forward, +1 sibling forward, -1 sibling backshot
   public TriShot sibling;  // sibling shot with same stations
-  public ArrayList<DistoXDBlock> blocks;
+  public ArrayList<DBlock> blocks;
   AverageLeg mAvgLeg;
   TriCluster cluster;
 
-  public TriShot( DistoXDBlock blk, String f, String t, int e, int r )
+  public TriShot( DBlock blk, String f, String t, int e, int r )
   { 
     used = false;
     from = f;
@@ -42,7 +42,7 @@ public class TriShot
     surface   = false;
     backshot  = 0;
     sibling = null;
-    blocks = new ArrayList<DistoXDBlock>();
+    blocks = new ArrayList<DBlock>();
     blocks.add( blk );
     mAvgLeg = new AverageLeg( 0.0f ); // temporary shot do not consider declination
     mAvgLeg.set( blk );
@@ -53,15 +53,15 @@ public class TriShot
   double bearing() { return mAvgLeg.bearing(); } 
   double clino()   { return mAvgLeg.clino(); } 
 
-  void addBlock( DistoXDBlock blk )
+  void addBlock( DBlock blk )
   {
     blocks.add( blk );
     mAvgLeg.add( blk );
   }
 
-  DistoXDBlock getFirstBlock( ) { return blocks.get(0); }
+  DBlock getFirstBlock( ) { return blocks.get(0); }
 
-  ArrayList<DistoXDBlock> getBlocks() { return blocks; }
+  ArrayList<DBlock> getBlocks() { return blocks; }
 
   /** get the temp-shot distance
    * @note if the temp-shot is reversed the distance is negative
@@ -69,14 +69,14 @@ public class TriShot
   float d()
   {
     // float ret = 0.0f;
-    // for ( DistoXDBlock b : blocks ) ret += b.mLength; 
+    // for ( DBlock b : blocks ) ret += b.mLength; 
     // return ret / blocks.size();
     return mAvgLeg.length();
   }
 
   float b()
   {
-    // DistoXDBlock blk = blocks.get(0);
+    // DBlock blk = blocks.get(0);
     // int size = blocks.size();
     // float b0 = blk.mBearing;
     // if ( size == 1 ) {
@@ -100,7 +100,7 @@ public class TriShot
     // if ( blocks.size() == 1 ) {
     //   return reversed * blocks.get(0).mClino;
     // }
-    // for ( DistoXDBlock b : blocks ) ret += b.mClino;
+    // for ( DBlock b : blocks ) ret += b.mClino;
     // return ret / blocks.size();
 
     return reversed * mAvgLeg.clino(); 
@@ -109,7 +109,7 @@ public class TriShot
   // void Dump()
   // {
   //   Log.v( TDLog.TAG, "Shot " + from + "-" + to + " " + d() + " " + b() + " " + c() );
-  //   for ( DistoXDBlock b : blocks ) {
+  //   for ( DBlock b : blocks ) {
   //     Log.v( TDLog.TAG, b.mLength + " " + b.mBearing + " " + b.mClino );
   //   }
   // }

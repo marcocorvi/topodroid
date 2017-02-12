@@ -54,7 +54,7 @@ public class ParserTherionState
     mDeclination= 0.0f;
     mDuplicate = false;
     mSurface   = false;
-    mExtend = DistoXDBlock.EXTEND_RIGHT;
+    mExtend = DBlock.EXTEND_RIGHT;
     mPrefix = "";
     mSuffix = "";
     mSurveyLevel = 0;

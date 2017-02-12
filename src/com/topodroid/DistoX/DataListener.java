@@ -83,7 +83,7 @@ public interface DataListener
 
   public void onUpdateShotAMDR( long sid, long id, double acc, double mag, double dip, double r );
 
-  // public void onUpdateShotNameAndExtend( long sid, ArrayList< DistoXDBlock > updatelist );
+  // public void onUpdateShotNameAndExtend( long sid, ArrayList< DBlock > updatelist );
   // FIXME repeatedly call UpdateShotName() and UpdateShotExtend();
 
   public void onDeleteShot( long id, long sid );

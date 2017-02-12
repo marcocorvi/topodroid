@@ -889,9 +889,9 @@ class DrawingIO
             float x = st.cx * th;
             float y = - st.cy * th;
             th *= DrawingUtil.SCALE_FIX;
-            List< DistoXDBlock > blks = dh.selectSplaysAt( sid, st.mName, false );
+            List< DBlock > blks = dh.selectSplaysAt( sid, st.mName, false );
             if ( type == PlotInfo.PLOT_PLAN ) {
-              for ( DistoXDBlock blk : blks ) {
+              for ( DBlock blk : blks ) {
                 float h = blk.mLength * TDMath.cosd( blk.mClino ) * th;
                 float e = h * TDMath.sind( blk.mBearing );
                 float n = h * TDMath.cosd( blk.mBearing );
@@ -900,7 +900,7 @@ class DrawingIO
                 out.write( "endline\n" );
               }
             } else if ( PlotInfo.isProfile( type ) ) {
-              for ( DistoXDBlock blk : blks ) {
+              for ( DBlock blk : blks ) {
                 float v = blk.mLength * TDMath.sind( blk.mClino ) * th;
                 float h = blk.mLength * TDMath.cosd( blk.mClino ) * th * blk.mExtend;
                 out.write( "line splay\n" );
@@ -908,7 +908,7 @@ class DrawingIO
                 out.write( "endline\n" );
               }
             } else if ( PlotInfo.isSection( type ) ) {
-              for ( DistoXDBlock blk : blks ) {
+              for ( DBlock blk : blks ) {
                 float d = blk.mLength;
                 float b = blk.mBearing;
                 float c = blk.mClino;

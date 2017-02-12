@@ -128,7 +128,7 @@ class TDExporter
     //   }
     // }
 
-    List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+    List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
     List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
     List< PlotInfo > plots  = data.selectAllPlots( sid, TopoDroidApp.STATUS_NORMAL );
     try {
@@ -196,18 +196,18 @@ class TDExporter
       // boolean bck = false;  // backshot
       String com = null;    // comment
       String f="", t="";          // from to stations
-      DistoXDBlock ref_item = null;
+      DBlock ref_item = null;
       // float l=0.0f, b=0.0f, c=0.0f, b0=0.0f;
       // int n = 0;
       AverageLeg leg = new AverageLeg(0);
 
-      for ( DistoXDBlock item : list ) {
+      for ( DBlock item : list ) {
         String from = item.mFrom;
         String to   = item.mTo;
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null &&
-               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
+               ( item.mType == DBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
@@ -305,11 +305,11 @@ class TDExporter
             if ( item.mExtend != extend ) {
               extend = item.mExtend;
             }
-            if ( item.mFlag == DistoXDBlock.BLOCK_DUPLICATE ) {
+            if ( item.mFlag == DBlock.BLOCK_DUPLICATE ) {
               dup = true;
-            } else if ( item.mFlag == DistoXDBlock.BLOCK_SURFACE ) {
+            } else if ( item.mFlag == DBlock.BLOCK_SURFACE ) {
               sur = true;
-            // } else if ( item.mFlag == DistoXDBlock.BLOCK_BACKSHOT ) {
+            // } else if ( item.mFlag == DBlock.BLOCK_BACKSHOT ) {
             //   bck = true;
             }
             f = from;
@@ -386,7 +386,7 @@ class TDExporter
 
     DistoXNum num = null;
     FixedInfo origin = null;
-    List<DistoXDBlock> shots_data = data.selectAllShots( sid, 0 );
+    List<DBlock> shots_data = data.selectAllShots( sid, 0 );
     for ( FixedInfo fixed : fixeds ) {
       num = new DistoXNum( shots_data, fixed.name, null, null, decl );
       if ( num.getShots().size() > 0 ) {
@@ -634,13 +634,13 @@ class TDExporter
       TDLog.Error( "exportSurveyAsTop date parse error " + info.date );
     }
 
-    List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+    List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
     long extend = 0;  // current extend
 
-    DistoXDBlock ref_item = null;
+    DBlock ref_item = null;
     int fromId, toId;
 
-    for ( DistoXDBlock item : list ) {
+    for ( DBlock item : list ) {
       String from = item.mFrom;
       String to   = item.mTo;
       extend = item.mExtend;
@@ -649,7 +649,7 @@ class TDExporter
         if ( to == null || to.length() == 0 ) {
           to = "";
           if ( ref_item != null 
-            && ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
+            && ( item.mType == DBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
             from = ref_item.mFrom;
             to   = ref_item.mTo;
             extend = ref_item.mExtend;
@@ -725,7 +725,7 @@ class TDExporter
     // String uls = TDSetting.mUnitLengthStr;
     // String uas = TDSetting.mUnitAngleStr;
 
-    List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+    List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
     List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
     List< PlotInfo > plots  = data.selectAllPlots( sid, TopoDroidApp.STATUS_NORMAL );
     List< CurrentStation > stations = data.getStations( sid );
@@ -801,16 +801,16 @@ class TDExporter
       long extend = 0;  // current extend
       AverageLeg leg = new AverageLeg(0);
 
-      DistoXDBlock ref_item = null;
+      DBlock ref_item = null;
       boolean duplicate = false;
       boolean surface   = false; // TODO
-      for ( DistoXDBlock item : list ) {
+      for ( DBlock item : list ) {
         String from = item.mFrom;
         String to   = item.mTo;
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null &&
-               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
+               ( item.mType == DBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
@@ -876,13 +876,13 @@ class TDExporter
               extend = item.mExtend;
               pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
             }
-            if ( item.mFlag == DistoXDBlock.BLOCK_DUPLICATE ) {
+            if ( item.mFlag == DBlock.BLOCK_DUPLICATE ) {
               pw.format(therion_flags_duplicate);
               duplicate = true;
-            } else if ( item.mFlag == DistoXDBlock.BLOCK_SURFACE ) {
+            } else if ( item.mFlag == DBlock.BLOCK_SURFACE ) {
               pw.format(therion_flags_surface);
               surface = true;
-            // } else if ( item.mFlag == DistoXDBlock.BLOCK_BACKSHOT ) {
+            // } else if ( item.mFlag == DBlock.BLOCK_BACKSHOT ) {
             //   pw.format(therion_flags_duplicate);
             //   duplicate = true;
             }
@@ -959,7 +959,7 @@ class TDExporter
     pw.format("%s", TDSetting.mSurvexEol );
   }
 
-  static boolean writeSurvexLeg( PrintWriter pw, boolean first, boolean dup, AverageLeg leg, DistoXDBlock blk, float ul, float ua )
+  static boolean writeSurvexLeg( PrintWriter pw, boolean first, boolean dup, AverageLeg leg, DBlock blk, float ul, float ua )
   {
     if ( first ) {
       pw.format(Locale.US, "  %.2f %.1f %.1f", leg.length() * ul, leg.bearing() * ua, leg.clino() * ua );
@@ -984,7 +984,7 @@ class TDExporter
     }
   }
 
-  static void writeSurvexSplay( PrintWriter pw, String from, String to, DistoXDBlock blk, float ul, float ua )
+  static void writeSurvexSplay( PrintWriter pw, String from, String to, DBlock blk, float ul, float ua )
   {
     pw.format(Locale.US, "  %s %s %.2f %.1f %.1f", from, to, blk.mLength * ul, blk.mBearing * ua, blk.mClino * ua );
     if ( blk.mComment != null && blk.mComment.length() > 0 ) {
@@ -1003,9 +1003,9 @@ class TDExporter
     String uls = ( ul < 1.01f )? "meters"  : "feet"; // FIXME
     String uas = ( ua < 1.01f )? "degrees" : "grads";
 
-    List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+    List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
     List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
-    List<DistoXDBlock> st_blk = new ArrayList<DistoXDBlock>(); // blocks with from station (for LRUD)
+    List<DBlock> st_blk = new ArrayList<DBlock>(); // blocks with from station (for LRUD)
 
     // float decl = info.declination; // DECLINATION not used
     try {
@@ -1058,16 +1058,16 @@ class TDExporter
           writeSurvexLine(pw, "  *flags splay");
         }
         AverageLeg leg = new AverageLeg(0);
-        DistoXDBlock ref_item = null;
+        DBlock ref_item = null;
         boolean duplicate = false;
         boolean splays = false;
-        for ( DistoXDBlock item : list ) {
+        for ( DBlock item : list ) {
           String from = item.mFrom;
           String to   = item.mTo;
           if ( from == null || from.length() == 0 ) {
             if ( to == null || to.length() == 0 ) { // no station: not exported
               if ( ref_item != null &&
-                 ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
+                 ( item.mType == DBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
                 leg.add( item.mLength, item.mBearing, item.mClino );
               }
             } else { // only TO station
@@ -1127,7 +1127,7 @@ class TDExporter
                 splays = false;
               }
               ref_item = item;
-              if ( item.mFlag == DistoXDBlock.BLOCK_DUPLICATE ) {
+              if ( item.mFlag == DBlock.BLOCK_DUPLICATE ) {
                 if ( first ) writeSurvexLine(pw, survex_flags_duplicate);
                 duplicate = true;
               }
@@ -1185,7 +1185,7 @@ class TDExporter
                 index = size - 1;
                 sh = shots.get( index );
               }
-              DistoXDBlock blk0 = sh.getFirstBlock();
+              DBlock blk0 = sh.getFirstBlock();
               if ( size == 1 ) {
                 if ( step > 0 ) {
                   writeSurvexLRUD( pw, blk0.mFrom, computeLRUD( blk0, list, true ), ul );
@@ -1199,7 +1199,7 @@ class TDExporter
                 for ( int k = 1; k<size; ++k ) {
                   index += step;
                   sh = shots.get(index);
-                  DistoXDBlock blk = sh.getFirstBlock();
+                  DBlock blk = sh.getFirstBlock();
                   if ( k == 1 ) {
                     // Log.v("DistoX", blk0.mFrom + "-" + blk0.mTo + " branch dir " + sh.mBranchDir + " blk dir " + sh.mDirection );
                     if ( blk0.mFrom.equals( blk.mFrom ) || blk0.mFrom.equals( blk.mTo ) ) {
@@ -1256,7 +1256,7 @@ class TDExporter
         // if ( st_blk.size() > 0 ) {
         //   pw.format("*data passage station left right up down");
         //   writeSurvexEOL( pw );
-        //   for ( DistoXDBlock blk : st_blk ) {
+        //   for ( DBlock blk : st_blk ) {
         //     writeSurvexLRUD( pw, blk.mFrom, computeLRUD( blk, list, true ), ul );
         //   }
         // }
@@ -1286,7 +1286,7 @@ class TDExporter
   static String exportSurveyAsCsv( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     // Log.v("DistoX", "export as CSV: " + filename );
-    List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+    List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
     // List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
     float ul = TDSetting.mUnitLength;
     float ua = TDSetting.mUnitAngle;
@@ -1309,16 +1309,16 @@ class TDExporter
       pw.format(Locale.US, "# units tape %s compass clino %s\n", uls, uas );
       
       AverageLeg leg = new AverageLeg(0);
-      DistoXDBlock ref_item = null;
+      DBlock ref_item = null;
       boolean duplicate = false;
       boolean splays = false;
-      for ( DistoXDBlock item : list ) {
+      for ( DBlock item : list ) {
         String from = item.mFrom;
         String to   = item.mTo;
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null && 
-               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
+               ( item.mType == DBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
@@ -1381,7 +1381,7 @@ class TDExporter
               splays = false;
             }
             ref_item = item;
-            if ( item.mFlag == DistoXDBlock.BLOCK_DUPLICATE ) {
+            if ( item.mFlag == DBlock.BLOCK_DUPLICATE ) {
               duplicate = true;
             }
             pw.format("%s@%s,%s@%s", from, info.name, to, info.name );
@@ -1416,7 +1416,7 @@ class TDExporter
   //     dir.mkdirs();
   //   }
   //   String filename = TopoDroidApp.APP_TLX_PATH + info.name + ".tlx";
-  //   List<DistoXDBlock> list = mData.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+  //   List<DBlock> list = mData.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
   //   try {
   //     TDPath.checkPath( filename );
   //     FileWriter fw = new FileWriter( filename );
@@ -1431,11 +1431,11 @@ class TDExporter
   //     float b0[] = new float[10];
   //     float c0[] = new float[10];
   //     float r0[] = new float[10];
-  //     DistoXDBlock ref_item = null;
+  //     DBlock ref_item = null;
   //     int extend = 0;
-  //     int flag   = DistoXDBlock.BLOCK_SURVEY;
+  //     int flag   = DBlock.BLOCK_SURVEY;
 
-  //     for ( DistoXDBlock item : list ) {
+  //     for ( DBlock item : list ) {
   //       String from = item.mFrom;
   //       String to   = item.mTo;
   //       if ( from != null && from.length() > 0 ) {
@@ -1448,7 +1448,7 @@ class TDExporter
   //               pw.format(Locale.US, "@ %.2f %.1f %.1f %.1f\n", l0[n], b0[n], c0[n], r0[n] );
   //             }
   //             extend = 0;
-  //             flag   = DistoXDBlock.BLOCK_SURVEY;
+  //             flag   = DBlock.BLOCK_SURVEY;
   //           }
   //           n = 1;
   //           ref_item = item;
@@ -1474,7 +1474,7 @@ class TDExporter
   //             n = 0;
   //             ref_item = null;
   //             extend = 0;
-  //             flag   = DistoXDBlock.BLOCK_SURVEY;
+  //             flag   = DBlock.BLOCK_SURVEY;
   //           }
   //           // item.Comment()
   //           pw.format("    \"%s\" \"\" ", from );
@@ -1493,7 +1493,7 @@ class TDExporter
   //             n = 0;
   //             ref_item = null;
   //             extend = 0;
-  //             flag   = DistoXDBlock.BLOCK_SURVEY;
+  //             flag   = DBlock.BLOCK_SURVEY;
   //           }
   //           // item.Comment()
   //           pw.format("    \"\" \"%s\" ", to );
@@ -1502,7 +1502,7 @@ class TDExporter
   //         } else {
   //           // not exported
   //           if ( ref_item != null &&
-  //              ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
+  //              ( item.mType == DBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
   //             float bb = TopoDroidUtil.around( item.mBearing, b0[0] );
   //             l += item.mLength;
   //             b += bb;
@@ -1524,7 +1524,7 @@ class TDExporter
   //         pw.format(Locale.US, "@ %.2f %.1f %.1f %.1f\n", l0[n], b0[n], c0[n], r0[n] );
   //       }
   //       // extend = 0;
-  //       // flag   = DistoXDBlock.BLOCK_SURVEY;
+  //       // flag   = DBlock.BLOCK_SURVEY;
   //     }
   //     // pw.format(Locale.US, "%.2f %.1f %.1f %.1f %d %d %d\n", 
   //     //   item.mLength, item.mBearing, item.mClino, item.mRoll, item.mExtend, 0, 1 );
@@ -1541,7 +1541,7 @@ class TDExporter
   // -----------------------------------------------------------------------
   // COMPASS EXPORT 
 
-  static private LRUDprofile computeLRUDprofile( DistoXDBlock b, List<DistoXDBlock> list, boolean at_from )
+  static private LRUDprofile computeLRUDprofile( DBlock b, List<DBlock> list, boolean at_from )
   {
     LRUDprofile lrud = new LRUDprofile( b.mBearing );
     float n0  = TDMath.cosd( b.mBearing );
@@ -1552,7 +1552,7 @@ class TDExporter
     float sb0 = e0;
     String station = ( at_from ) ? b.mFrom : b.mTo;
     
-    for ( DistoXDBlock item : list ) {
+    for ( DBlock item : list ) {
       String from = item.mFrom;
       String to   = item.mTo;
       if ( from == null || from.length() == 0 ) { // skip blank
@@ -1591,7 +1591,7 @@ class TDExporter
     return lrud;
   }
 
-  static private LRUD computeLRUD( DistoXDBlock b, List<DistoXDBlock> list, boolean at_from )
+  static private LRUD computeLRUD( DBlock b, List<DBlock> list, boolean at_from )
   {
     LRUD lrud = new LRUD();
     float n0  = TDMath.cosd( b.mBearing );
@@ -1602,7 +1602,7 @@ class TDExporter
     float sb0 = e0;
     String station = ( at_from ) ? b.mFrom : b.mTo;
     
-    for ( DistoXDBlock item : list ) {
+    for ( DBlock item : list ) {
       String from = item.mFrom;
       String to   = item.mTo;
       if ( from == null || from.length() == 0 ) { // skip blank
@@ -1691,7 +1691,7 @@ class TDExporter
   static String exportSurveyAsDat( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     // Log.v("DistoX", "export as compass: " + filename + " swap LR " + TDSetting.mSwapLR );
-    List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+    List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
     try {
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
@@ -1734,20 +1734,20 @@ class TDExporter
       pw.format( "\r\n" );
 
       AverageLeg leg = new AverageLeg(0);
-      DistoXDBlock ref_item = null;
+      DBlock ref_item = null;
 
       int extra_cnt = 0;
       boolean in_splay = false;
       boolean duplicate = false;
       LRUD lrud;
 
-      for ( DistoXDBlock item : list ) {
+      for ( DBlock item : list ) {
         String from = item.mFrom;
         String to   = item.mTo;
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null && 
-               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
+               ( item.mType == DBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
@@ -1775,7 +1775,7 @@ class TDExporter
               printShotToDat( pw, leg, lrud, duplicate, ref_item.mComment );
             }
             ref_item = item;
-            duplicate = ( item.mFlag == DistoXDBlock.BLOCK_DUPLICATE );
+            duplicate = ( item.mFlag == DBlock.BLOCK_DUPLICATE );
             leg.set( item.mLength, item.mBearing, item.mClino );
           }
         }
@@ -1819,7 +1819,7 @@ class TDExporter
                 TopoDroidUtil.getDateString("yyyy/MM/dd"), TopoDroidApp.VERSION );
       pw.format("  </General>\n");
 
-      List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+      List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
       TRobot trobot = new TRobot( list );
       // trobot.dump(); // DEBUG
 
@@ -1870,7 +1870,7 @@ class TDExporter
         TRobotPoint from = series.mBegin;
         for ( TRobotPoint pt : series.mPoints ) {
           // get leg from-pt and print it
-          DistoXDBlock blk = pt.mBlk;
+          DBlock blk = pt.mBlk;
           if ( blk != null ) {
             float az   = blk.mBearing;
             float incl = blk.mClino;
@@ -1900,8 +1900,8 @@ class TDExporter
       pw.format("  <AntennaShots>\n");
       // for all splays
       int number = 0;
-      for ( DistoXDBlock blk : list ) {
-        if ( blk.mType != DistoXDBlock.BLOCK_SPLAY ) continue;
+      for ( DBlock blk : list ) {
+        if ( blk.mType != DBlock.BLOCK_SPLAY ) continue;
         TRobotPoint pt = trobot.getPoint( blk.mFrom );
         if ( pt == null ) continue;
         ++ number;
@@ -1939,7 +1939,7 @@ class TDExporter
   }
 
   static private void writeGrtLeg( PrintWriter pw, AverageLeg leg, String fr, String to, boolean first,
-                                   DistoXDBlock item, List<DistoXDBlock> list )
+                                   DBlock item, List<DBlock> list )
   {
     LRUDprofile lrud = null;
     if ( first ) {
@@ -1980,19 +1980,19 @@ class TDExporter
 
       List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
       boolean first = true; // first station
-      List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+      List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
       // int extend = 1;
       AverageLeg leg = new AverageLeg(0);
-      DistoXDBlock ref_item = null;
+      DBlock ref_item = null;
       String ref_from = null;
       String ref_to   = null;
-      for ( DistoXDBlock item : list ) {
+      for ( DBlock item : list ) {
         String from    = item.mFrom;
         String to      = item.mTo;
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null &&
-               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
+               ( item.mType == DBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
@@ -2112,19 +2112,19 @@ class TDExporter
 
       pw.format("#Units %s A=%s\n", uls, uas );
 
-      List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+      List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
       // int extend = 1;
       AverageLeg leg = new AverageLeg(0);
-      DistoXDBlock ref_item = null;
+      DBlock ref_item = null;
       boolean duplicate = false;
       boolean surface   = false; // TODO
-      for ( DistoXDBlock item : list ) {
+      for ( DBlock item : list ) {
         String from    = item.mFrom;
         String to      = item.mTo;
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null &&
-               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
+               ( item.mType == DBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
@@ -2209,13 +2209,13 @@ class TDExporter
             //   extend = item.mExtend;
             //   // FIXME pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
             // }
-            if ( item.mFlag == DistoXDBlock.BLOCK_DUPLICATE ) {
+            if ( item.mFlag == DBlock.BLOCK_DUPLICATE ) {
               // FIXME pw.format(therion_flags_duplicate);
               duplicate = true;
-            } else if ( item.mFlag == DistoXDBlock.BLOCK_SURFACE ) {
+            } else if ( item.mFlag == DBlock.BLOCK_SURFACE ) {
               // FIXME pw.format(therion_flags_surface);
               surface = true;
-            // } else if ( item.mFlag == DistoXDBlock.BLOCK_BACKSHOT ) {
+            // } else if ( item.mFlag == DBlock.BLOCK_BACKSHOT ) {
             //   // FIXME pw.format(therion_flags_duplicte);
             //   duplicate = true;
             }
@@ -2256,20 +2256,20 @@ class TDExporter
   private static long printFlagToCav( PrintWriter pw, long old_flag, long new_flag, String eol )
   {
     if ( old_flag == new_flag ) return old_flag;
-    if ( old_flag == DistoXDBlock.BLOCK_DUPLICATE ) {
+    if ( old_flag == DBlock.BLOCK_DUPLICATE ) {
       pw.format("#end_duplicate%s", eol);
-    } else if ( old_flag == DistoXDBlock.BLOCK_SURFACE ) {
+    } else if ( old_flag == DBlock.BLOCK_SURFACE ) {
       pw.format("#end_surface%s", eol);
     }
-    if ( new_flag == DistoXDBlock.BLOCK_DUPLICATE ) {
+    if ( new_flag == DBlock.BLOCK_DUPLICATE ) {
       pw.format("#duplicate%s", eol);
-    } else if ( new_flag == DistoXDBlock.BLOCK_SURFACE ) {
+    } else if ( new_flag == DBlock.BLOCK_SURFACE ) {
       pw.format("#surface%s", eol);
     }
     return new_flag;
   }
 
-  private static void printShotToCav( PrintWriter pw, AverageLeg leg, DistoXDBlock item, String eol, ArrayList ents )
+  private static void printShotToCav( PrintWriter pw, AverageLeg leg, DBlock item, String eol, ArrayList ents )
   {
     if ( ents != null ) {
       int s = ents.size();
@@ -2290,7 +2290,7 @@ class TDExporter
     leg.reset();
   }
 
-  private static void printSplayToCav( PrintWriter pw, DistoXDBlock blk, String eol )
+  private static void printSplayToCav( PrintWriter pw, DBlock blk, String eol )
   {
     // if ( duplicate ) pw.format("#duplicate%s", eol);
     pw.format(Locale.US, "%s\t-\t%.2f\t%.1f\t%.1f", blk.mFrom, blk.mLength, blk.mBearing, blk.mClino );
@@ -2305,11 +2305,11 @@ class TDExporter
   static long printCavExtend( PrintWriter pw, long extend, long item_extend, String eol )
   {
     if ( item_extend != extend ) { 
-      if ( item_extend == DistoXDBlock.EXTEND_LEFT ) {
+      if ( item_extend == DBlock.EXTEND_LEFT ) {
         pw.format("#R180%s", eol );
-      } else if ( item_extend == DistoXDBlock.EXTEND_RIGHT ) {
+      } else if ( item_extend == DBlock.EXTEND_RIGHT ) {
         pw.format("#R0%s", eol );
-      } else if ( item_extend == DistoXDBlock.EXTEND_VERT ) {
+      } else if ( item_extend == DBlock.EXTEND_VERT ) {
         pw.format("#PR[0]%s", eol );
       }
       return item_extend;
@@ -2366,22 +2366,22 @@ class TDExporter
       pw.format("#from_to%s", eol);
       pw.format("#R0%s", eol);
 
-      List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+      List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
       AverageLeg leg = new AverageLeg(0);
-      DistoXDBlock ref_item = null;
+      DBlock ref_item = null;
 
       long extend = 1;
       long flag = 0;
       // boolean in_splay = false;
       // LRUD lrud;
 
-      for ( DistoXDBlock item : list ) {
+      for ( DBlock item : list ) {
         String from = item.mFrom;
         String to   = item.mTo;
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null && 
-              ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
+              ( item.mType == DBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
@@ -2515,23 +2515,23 @@ class TDExporter
       pw.format("Survey data\n");
       pw.format("From\tTo\tLength\tAzimuth\tVertical\tLabel\tLeft\tRight\tUp\tDown\tNote\n");
 
-      List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+      List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
 
       AverageLeg leg = new AverageLeg(0);
-      DistoXDBlock ref_item = null;
+      DBlock ref_item = null;
 
       int extra_cnt = 0;
       boolean in_splay = false;
       boolean duplicate = false;
       LRUD lrud;
 
-      for ( DistoXDBlock item : list ) {
+      for ( DBlock item : list ) {
         String from = item.mFrom;
         String to   = item.mTo;
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null && 
-               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
+               ( item.mType == DBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
@@ -2559,7 +2559,7 @@ class TDExporter
               printShotToPlg( pw, leg, lrud, duplicate, ref_item.mComment );
             }
             ref_item = item;
-            duplicate = ( item.mFlag == DistoXDBlock.BLOCK_DUPLICATE );
+            duplicate = ( item.mFlag == DBlock.BLOCK_DUPLICATE );
             leg.set( item.mLength, item.mBearing, item.mClino );
           }
         }
@@ -2739,7 +2739,7 @@ class TDExporter
    ( @param list   ...
    * @note item is guaranteed not null by the caller
    */
-  static private boolean printStartShotToTro( PrintWriter pw, DistoXDBlock item, List< DistoXDBlock > list )
+  static private boolean printStartShotToTro( PrintWriter pw, DBlock item, List< DBlock > list )
   {
     if ( item == null ) return false;
     LRUD lrud = computeLRUD( item, list, true );
@@ -2752,7 +2752,7 @@ class TDExporter
     return true;
   }
 
-  static private boolean printShotToTro( PrintWriter pw, DistoXDBlock item, AverageLeg leg, LRUD lrud )
+  static private boolean printShotToTro( PrintWriter pw, DBlock item, AverageLeg leg, LRUD lrud )
   {
     if ( item == null ) return false;
     // Log.v( TAG, "shot " + item.mFrom + "-" + item.mTo + " " + l/n + " " + b + " " + c/n );
@@ -2773,7 +2773,7 @@ class TDExporter
   static String exportSurveyAsTro( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     // Log.v("DistoX", "export as visualtopo: " + filename );
-    List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+    List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
     List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
     try {
       TDPath.checkPath( filename );
@@ -2797,7 +2797,7 @@ class TDExporter
       pw.format(Locale.US, "Param Deca Degd Clino Degd %.4f Dir,Dir,Dir Arr Inc 0,0,0\r\n\r\n", info.declination );
 
       AverageLeg leg = new AverageLeg(0);
-      DistoXDBlock ref_item = null;
+      DBlock ref_item = null;
 
       int extra_cnt = 0;
       boolean in_splay  = false;
@@ -2805,13 +2805,13 @@ class TDExporter
       boolean started   = false;
       LRUD lrud;
 
-      for ( DistoXDBlock item : list ) {
+      for ( DBlock item : list ) {
         String from = item.mFrom;
         String to   = item.mTo;
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null && 
-               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
+               ( item.mType == DBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
               // Log.v( TAG, "data " + item.mLength + " " + item.mBearing + " " + item.mClino );
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
@@ -2846,7 +2846,7 @@ class TDExporter
               printShotToTro( pw, ref_item, leg, lrud );
             }
             ref_item = item;
-            duplicate = ( item.mFlag == DistoXDBlock.BLOCK_DUPLICATE );
+            duplicate = ( item.mFlag == DBlock.BLOCK_DUPLICATE );
             // Log.v( TAG, "first data " + item.mLength + " " + item.mBearing + " " + item.mClino );
             leg.set( item.mLength, item.mBearing, item.mClino );
           }

@@ -424,20 +424,20 @@ SURVEY INFO WINDOWS
     [ ] other exports: th, csv, cav, cave, dat, dxf, grt, gtx, plt, kml, sxv, svr, top, tro, csx, png, svg
 *** IMPORTANT sketch backups are not renamed
 
-[ ] delete the survey: check that all the related files are deleted
-    [ ] data exports must be deleted
-        [ ] compass
-        [ ] PocketTopo
-        [ ] Polygon
-        [ ] Survex
-        [ ] Grottolf
-        [ ] GHTopo
-        [ ] Therion
-        [ ] Topo
-        [ ] VisualTopo
-        [ ] Walls
-        [ ] CSV
-        [ ] DXF
+[x] delete the survey: check that all the related files are deleted
+    [x] data exports must be deleted
+        [x] compass
+        [x] PocketTopo
+        [x] Polygon
+        [x] Survex
+        [x] Grottolf
+        [x] GHTopo
+        [x] Therion
+        [x] Topo
+        [x] VisualTopo
+        [x] Walls
+        [x] CSV
+        [x] DXF
         [ ] KML
         [ ] Track file
     [ ] sketch files and backup must be deleted
@@ -448,7 +448,7 @@ SURVEY INFO WINDOWS
         [ ] png
         [ ] dxf
         [ ] svg
-    [ ] zip archives are not deleted
+    [x] zip archives are not deleted
 [ ] calibration: enter calibration values for tape, compass, clino:
     [ ] verify that following manually entered shots are affected accordingly 
         the values registered in the db are those entered in the dialog subtracted the calibrations
@@ -550,22 +550,22 @@ SKETCH WINDOW
 [x] help strings
 
 <draw mode>
-[ ] draw a line
-[ ] change line type
-[ ] draw another line
-[ ] draw point(s)
-    [ ] label dialog
-[ ] draw areas(s)
-[ ] undo
-[ ] redo
+[x] draw a line
+[x] change line type
+[x] draw another line
+[x] draw point(s)
+    [x] label dialog
+[x] draw areas(s)
+[x] undo
+[x] redo
 [ ] check line-continuation drawing (working within a line-group)
     [ ] with option "join" (verify undo/redo)
     [ ] with option "continue" (verify interaction with undo/redo)
 
-[ ] two finger drag
-[ ] two finger zoom
-[ ] side-drag (setting)
-[ ] zoom controls (setting)
+[x] two finger drag
+[x] two finger zoom
+[x] side-drag (setting)
+[x] zoom controls (setting)
 
 recent symbol picker
 [ ] tools remain consistent on a per-directory basis
@@ -587,10 +587,10 @@ triple-grid symbol picker
 [ ] close picks the last selection
 
 <erase mode>
-[ ] two finger draw
-[ ] two finger zoom
-[ ] side drag if enabled (setting)
-[ ] zoom comtrols (setting)
+[x] two finger draw
+[x] two finger zoom
+[x] side drag if enabled (setting)
+[x] zoom comtrols (setting)
 [ ] erase part of a line from the beginning
 [ ] erase part of a line from the end
 [ ] erase the middle of a line
@@ -656,12 +656,12 @@ triple-grid symbol picker
         [ ] shown as a red tick
 
 OVERVIEW
-[ ] check overview from drawing window contains all sketches
+[x] check overview from drawing window contains all sketches
 [ ] references in overview
 [ ] measure 
-[ ] settings are the same as for sketch
-[ ] help
-[ ] close menu
+[x] settings are the same as for sketch
+[x] help
+[x] close menu
 
 IMPORT-EXPORT
 [ ] check proper treatement of LRUD for compass/vtopo import

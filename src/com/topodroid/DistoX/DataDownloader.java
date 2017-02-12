@@ -149,7 +149,7 @@ class DataDownloader
       if ( mApp.mSID < 0 ) {
         TDLog.Error( "download data: no survey selected" );
       } else {
-        // DistoXDBlock last_blk = mApp.mData.selectLastLegShot( mApp.mSID );
+        // DBlock last_blk = mApp.mData.selectLastLegShot( mApp.mSID );
         // (new ShotNewDialog( mContext, mApp, lister, last_blk, -1L )).show();
       }
     }

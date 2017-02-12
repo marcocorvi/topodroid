@@ -24,7 +24,7 @@ public class TRobot
   ArrayList< TRobotSeries > mSeries;
   ArrayList< TRobotPoint  > mPoints;
 
-  TRobot( List< DistoXDBlock > blks )
+  TRobot( List< DBlock > blks )
   {
     mSeries = new ArrayList< TRobotSeries >();
     mPoints = new ArrayList< TRobotPoint  >();
@@ -36,13 +36,13 @@ public class TRobot
     }
   }
 
-  private void populateSeries( List<DistoXDBlock> blks )
+  private void populateSeries( List<DBlock> blks )
   {
     TRobotSeries sf, st;
     TRobotPoint pf, pt;
     int nsf, npf, nst, npt;
-    for ( DistoXDBlock blk : blks ) {
-      if ( blk.mType != DistoXDBlock.BLOCK_MAIN_LEG ) continue;
+    for ( DBlock blk : blks ) {
+      if ( blk.mType != DBlock.BLOCK_MAIN_LEG ) continue;
       String[] valf = blk.mFrom.split(".");
       String[] valt = blk.mTo.split(".");
       if ( valf.length != 2 || valt.length != 2 ) continue;
@@ -97,15 +97,15 @@ public class TRobot
   }
     
 
-  private void buildSeries( List<DistoXDBlock> blks )
+  private void buildSeries( List<DBlock> blks )
   {
     int mSrCnt = 0;
-    ArrayList< DistoXDBlock > repeat = new ArrayList<DistoXDBlock>();
-    for ( DistoXDBlock blk : blks ) {
-      if ( blk.mType == DistoXDBlock.BLOCK_MAIN_LEG ) repeat.add( blk );
+    ArrayList< DBlock > repeat = new ArrayList<DBlock>();
+    for ( DBlock blk : blks ) {
+      if ( blk.mType == DBlock.BLOCK_MAIN_LEG ) repeat.add( blk );
     }
     // find stations and number of occurrences
-    for ( DistoXDBlock blk : repeat ) {
+    for ( DBlock blk : repeat ) {
       TRobotPoint pt = getPoint( blk.mFrom );
       if ( pt != null ) { pt.mCnt ++; } else { mPoints.add( new TRobotPoint( 0, blk.mFrom, null ) ); }
       pt = getPoint( blk.mTo );
@@ -130,7 +130,7 @@ public class TRobot
       boolean added = true;
       while ( added ) { // now grow the series
         added = false;
-        for ( DistoXDBlock blk : repeat ) {
+        for ( DBlock blk : repeat ) {
           TRobotPoint pfr = getPoint( blk.mFrom );
           TRobotPoint pto = getPoint( blk.mTo );
           if ( series.mEnd == pfr ) {

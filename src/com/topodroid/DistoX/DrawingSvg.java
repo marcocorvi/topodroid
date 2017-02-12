@@ -153,7 +153,7 @@ class DrawingSvg
           // FIXME OK PROFILE
           out.write("<g style=\"fill:none;stroke-opacity:0.6;stroke:red\" >\n");
           for ( DrawingPath sh : plot.getLegs() ) {
-            DistoXDBlock blk = sh.mBlock;
+            DBlock blk = sh.mBlock;
             if ( blk == null ) continue;
 
             StringWriter sw4 = new StringWriter();
@@ -181,7 +181,7 @@ class DrawingSvg
             out.flush();
           }
           for ( DrawingPath sh : plot.getSplays() ) {
-            DistoXDBlock blk = sh.mBlock;
+            DBlock blk = sh.mBlock;
             if ( blk == null ) continue;
 
             StringWriter sw41 = new StringWriter();

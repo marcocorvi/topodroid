@@ -19,9 +19,9 @@ public class TriSplay
   public int reversed;  // -1 reversed, +1 normal 
                         // NOTE splay temp-shot can be reversed - leg temp-shot are always normal
                         // this is checked only in makeShotFromTmp to detect errors
-  public DistoXDBlock block;
+  public DBlock block;
 
-  public TriSplay( DistoXDBlock blk, String f, int e, int r )
+  public TriSplay( DBlock blk, String f, int e, int r )
   { 
     used = false;
     from = f;

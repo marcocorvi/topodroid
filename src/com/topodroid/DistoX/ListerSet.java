@@ -48,7 +48,7 @@ public class ListerSet implements ILister
     for ( ILister lister : mLister ) lister.updateBlockList( blk_id );
   }
 
-  public void updateBlockList( DistoXDBlock blk ) 
+  public void updateBlockList( DBlock blk ) 
   {
     for ( ILister lister : mLister ) lister.updateBlockList( blk );
   }

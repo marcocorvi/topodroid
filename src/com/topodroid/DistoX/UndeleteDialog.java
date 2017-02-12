@@ -42,11 +42,11 @@ public class UndeleteDialog extends MyDialog
   // ArrayAdapter< String >  mArrayAdapter;
   MyStringAdapter mArrayAdapter;
   ListView mList;
-  List< DistoXDBlock > mShots;
+  List< DBlock > mShots;
   List< PlotInfo >     mPlots;
 
   public UndeleteDialog( Context context, ShotWindow parent, DataHelper data, long sid,
-                         List<DistoXDBlock> shots, List<PlotInfo> plots )
+                         List<DBlock> shots, List<PlotInfo> plots )
   {
     super( context, R.string.UndeleteDialog );
     mParent = parent;
@@ -102,7 +102,7 @@ public class UndeleteDialog extends MyDialog
     mBtnCancel = (Button) findViewById( R.id.button_cancel );
     mBtnCancel.setOnClickListener( this );
 
-    for ( DistoXDBlock b : mShots ) {
+    for ( DBlock b : mShots ) {
       mArrayAdapter.add( 
         String.format(Locale.US, "shot %d <%s> %.2f %.1f %.1f", b.mId, b.Name(), b.mLength, b.mBearing, b.mClino ) );
     }

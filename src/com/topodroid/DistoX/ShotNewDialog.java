@@ -53,7 +53,7 @@ public class ShotNewDialog extends MyDialog
   // private ShotWindow mParent;
   private TopoDroidApp mApp;
   private ILister mLister;
-  private DistoXDBlock mPrevBlk;
+  private DBlock mPrevBlk;
   private boolean  notDone;
   private long mAt; // id of the shot where to add new shot (-1 end)
 
@@ -86,7 +86,7 @@ public class ShotNewDialog extends MyDialog
   TimerTask mTimer;
   private MyKeyboard mKeyboard = null;
 
-  public ShotNewDialog( Context context, TopoDroidApp app, ILister lister, DistoXDBlock last_blk, long at )
+  public ShotNewDialog( Context context, TopoDroidApp app, ILister lister, DBlock last_blk, long at )
   {
     super( context, R.string.ShotNewDialog );
     mApp     = app;
@@ -379,7 +379,7 @@ public class ShotNewDialog extends MyDialog
       //   // FIXME case 3: shot_extend = 2;  break;
       // }
 
-      DistoXDBlock blk = null;
+      DBlock blk = null;
       try {
         if ( shot_to.length() > 0 ) {
           String splay_station = mCBsplayAtTo.isChecked() ? shot_to : shot_from;

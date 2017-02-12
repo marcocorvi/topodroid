@@ -28,7 +28,7 @@ public interface ILister
    *   - DistoXComm.run()
    *   + updateBlockList( long ) for each class that implements this method
    */
-  public void updateBlockList( DistoXDBlock blk );
+  public void updateBlockList( DBlock blk );
 
   /** updateBlockList is called by
    *   - ListerHandler.handleMessage LISTER_BLOCK_ID

@@ -206,7 +206,7 @@ public class DataHelper extends DataSetObservable
      }
    }
 
-   private void fillBlock( long sid, DistoXDBlock block, Cursor cursor )
+   private void fillBlock( long sid, DBlock block, Cursor cursor )
    {
      block.setId( cursor.getLong(0), sid );
      block.setName( cursor.getString(1), cursor.getString(2) );  // from - to
@@ -221,7 +221,7 @@ public class DataHelper extends DataSetObservable
      block.mExtend  = cursor.getLong(9);
      block.mFlag    = cursor.getLong(10);
      if ( cursor.getLong(11) == 1 ) {
-       block.mType = DistoXDBlock.BLOCK_SEC_LEG; 
+       block.mType = DBlock.BLOCK_SEC_LEG; 
      }
      block.mComment = cursor.getString(12);
      block.mShotType = (int)cursor.getLong(13);
@@ -895,7 +895,7 @@ public class DataHelper extends DataSetObservable
     }
   }
   
-  public void updateShotNameAndExtend( long sid, ArrayList< DistoXDBlock > updatelist )
+  public void updateShotNameAndExtend( long sid, ArrayList< DBlock > updatelist )
   {
     // if ( myDB == null ) return;
     boolean success = false;
@@ -908,11 +908,11 @@ public class DataHelper extends DataSetObservable
       // myDB.execSQL("PRAGMA synchronous=OFF");
       myDB.setLockingEnabled( false );
       myDB.beginTransaction();
-      for ( DistoXDBlock b : updatelist ) {
+      for ( DBlock b : updatelist ) {
         updateShotNameAndExtendStmt.bindString( 1, b.mFrom );
         updateShotNameAndExtendStmt.bindString( 2, b.mTo );
         updateShotNameAndExtendStmt.bindLong(   3, b.mExtend );
-        updateShotNameAndExtendStmt.bindLong(   4, (b.mType == DistoXDBlock.BLOCK_SEC_LEG)? 1 : 0 );
+        updateShotNameAndExtendStmt.bindLong(   4, (b.mType == DBlock.BLOCK_SEC_LEG)? 1 : 0 );
         updateShotNameAndExtendStmt.bindLong(   5, sid );
         updateShotNameAndExtendStmt.bindLong(   6, b.mId );
         // try { 
@@ -931,10 +931,10 @@ public class DataHelper extends DataSetObservable
     }
     if ( success ) { // synchronized( mListeners )
       for ( DataListener listener : mListeners ) {
-        for ( DistoXDBlock b : updatelist ) {
+        for ( DBlock b : updatelist ) {
           listener.onUpdateShotName( b.mId, sid, b.mFrom, b.mTo );
           listener.onUpdateShotExtend( b.mId, sid, b.mExtend );
-          listener.onUpdateShotLeg( b.mId, sid, (b.mType == DistoXDBlock.BLOCK_SEC_LEG)? 1 : 0 );
+          listener.onUpdateShotLeg( b.mId, sid, (b.mType == DBlock.BLOCK_SEC_LEG)? 1 : 0 );
         }
       }
     }
@@ -981,9 +981,9 @@ public class DataHelper extends DataSetObservable
         ih.bind( magneticCol, 0.0);
         ih.bind( dipCol, 0.0);
         ih.bind( extendCol, s.extend );
-        ih.bind( flagCol, s.duplicate ? DistoXDBlock.BLOCK_DUPLICATE 
-                        : s.surface ? DistoXDBlock.BLOCK_SURFACE 
-                        // : s.backshot ? DistoXDBlock.BLOCK_BACKSHOT
+        ih.bind( flagCol, s.duplicate ? DBlock.BLOCK_DUPLICATE 
+                        : s.surface ? DBlock.BLOCK_SURFACE 
+                        // : s.backshot ? DBlock.BLOCK_BACKSHOT
                         : 0 );
         ih.bind( legCol, 0 );
         ih.bind( statusCol, 0 );
@@ -1005,9 +1005,9 @@ public class DataHelper extends DataSetObservable
     for ( DataListener listener : mListeners ) {
       for ( ParserShot s : shots ) {
         listener.onInsertShot( sid, id, s.from, s.to, s.len, s.ber, s.cln, s.rol, s.extend, 
-                          s.duplicate ? DistoXDBlock.BLOCK_DUPLICATE    // flag
-                          : s.surface ? DistoXDBlock.BLOCK_SURFACE 
-                          // : s.backshot ? DistoXDBlock.BLOCK_BACKSHOT
+                          s.duplicate ? DBlock.BLOCK_DUPLICATE    // flag
+                          : s.surface ? DBlock.BLOCK_SURFACE 
+                          // : s.backshot ? DBlock.BLOCK_BACKSHOT
                           : 0,
                           0, 0, // leg, status
                           0,    // shot_type: parser-shots are not modifiable
@@ -1020,7 +1020,7 @@ public class DataHelper extends DataSetObservable
   public long insertShot( long sid, long id, double d, double b, double c, double r, long extend,
                           int shot_type, boolean forward )
   {
-    return insertShot( sid, id, "", "",  d, b, c, r, extend, DistoXDBlock.BLOCK_SURVEY, 0L, 0L, shot_type, "", forward );
+    return insertShot( sid, id, "", "",  d, b, c, r, extend, DBlock.BLOCK_SURVEY, 0L, 0L, shot_type, "", forward );
   }
 
   public void updateShotAMDR( long id, long sid, double acc, double mag, double dip, double r, boolean forward )
@@ -1112,7 +1112,7 @@ public class DataHelper extends DataSetObservable
 
     try {
       while ( old_id < max_id ) {
-        DistoXDBlock blk = selectShot( old_id, old_sid );
+        DBlock blk = selectShot( old_id, old_sid );
         if ( blk == null ) continue;
 
         if ( transferShotStmt == null ) {
@@ -1200,7 +1200,7 @@ public class DataHelper extends DataSetObservable
     cv.put( "magnetic", 0.0 );
     cv.put( "dip",      0.0 );
     cv.put( "extend",   extend );
-    cv.put( "flag",     DistoXDBlock.BLOCK_SURVEY ); // flag );
+    cv.put( "flag",     DBlock.BLOCK_SURVEY ); // flag );
     cv.put( "leg",      LEG_NORMAL ); // leg );
     cv.put( "status",   TopoDroidApp.STATUS_NORMAL ); // status );
     cv.put( "comment",  "" ); // comment );
@@ -1209,7 +1209,7 @@ public class DataHelper extends DataSetObservable
       myDB.insert( SHOT_TABLE, null, cv ); 
       if ( forward ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) {
-          listener.onInsertShotAt( sid, at, d, b, c, r, extend, DistoXDBlock.BLOCK_SURVEY );
+          listener.onInsertShotAt( sid, at, d, b, c, r, extend, DBlock.BLOCK_SURVEY );
         }
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -1759,7 +1759,7 @@ public class DataHelper extends DataSetObservable
    }
 
    // mergeToNextLeg does not change anything if blk has both FROM and TO stations
-   long mergeToNextLeg( DistoXDBlock blk, long sid, boolean forward )
+   long mergeToNextLeg( DBlock blk, long sid, boolean forward )
    {
      long ret = -1;
      if ( myDB == null ) return ret;
@@ -1795,28 +1795,28 @@ public class DataHelper extends DataSetObservable
      return ret;
    }
 
-   public DistoXDBlock selectShot( long id, long sid )
+   public DBlock selectShot( long id, long sid )
    {
      // TDLog.Log( TDLog.LOG_DB, "selectShot " + id + "/" + sid );
      if ( myDB == null ) return null;
      Cursor cursor = myDB.query( SHOT_TABLE, mShotFields,
                                  WHERE_SID_ID, new String[] { Long.toString(sid), Long.toString(id) },
                                  null, null, null );
-     DistoXDBlock block = null;
+     DBlock block = null;
      if (cursor.moveToFirst()) {
-       block = new DistoXDBlock();
+       block = new DBlock();
        fillBlock( sid, block, cursor );
      }
      if (cursor != null && !cursor.isClosed()) cursor.close();
      return block;
    }
 
-   public DistoXDBlock selectLastLegShot( long sid )
+   public DBlock selectLastLegShot( long sid )
    {
      return selectPreviousLegShot( myNextId+1, sid );
    }
 
-   public DistoXDBlock selectPreviousLegShot( long shot_id, long sid )
+   public DBlock selectPreviousLegShot( long shot_id, long sid )
    {
      // TDLog.Log( TDLog.LOG_DB, "selectPreviousLegShot " + shot_id + "/" + sid );
      if ( myDB == null ) return null;
@@ -1824,11 +1824,11 @@ public class DataHelper extends DataSetObservable
                                  "surveyId=? and id<?",
                                  new String[] { Long.toString(sid), Long.toString(shot_id) },
                                  null, null, "id DESC" );
-     DistoXDBlock block = null;
+     DBlock block = null;
      if (cursor.moveToFirst()) {
        do {
          if ( cursor.getString(0).length() > 0 && cursor.getString(1).length() > 0 ) {
-           block = new DistoXDBlock();
+           block = new DBlock();
            fillBlock( sid, block, cursor );
          }  
        } while (block == null && cursor.moveToNext());
@@ -1897,7 +1897,7 @@ public class DataHelper extends DataSetObservable
    //   return Integer.toString(ret);
    // }
 
-   public DistoXDBlock selectNextLegShot( long shot_id, long sid ) 
+   public DBlock selectNextLegShot( long shot_id, long sid ) 
    {
      // TDLog.Log( TDLog.LOG_DB, "selectNextLegShot " + shot_id + "/" + sid );
      if ( myDB == null ) return null;
@@ -1905,11 +1905,11 @@ public class DataHelper extends DataSetObservable
                                  "surveyId=? and id>?",
                                  new String[] { Long.toString(sid), Long.toString(shot_id) },
                                  null, null, "id ASC" );
-     DistoXDBlock block = null;
+     DBlock block = null;
      if (cursor.moveToFirst()) {
        do {
          if ( cursor.getString(0).length() > 0 && cursor.getString(1).length() > 0 ) {
-           block = new DistoXDBlock();
+           block = new DBlock();
            fillBlock( sid, block, cursor );
          }  
        } while (block == null && cursor.moveToNext());
@@ -1943,9 +1943,9 @@ public class DataHelper extends DataSetObservable
    //   return ret;
    // }
 
-   public List<DistoXDBlock> selectShotsBetweenStations( long sid, String st1, String st2, long status )
+   public List<DBlock> selectShotsBetweenStations( long sid, String st1, String st2, long status )
    {
-     List< DistoXDBlock > list = new ArrayList< DistoXDBlock >();
+     List< DBlock > list = new ArrayList< DBlock >();
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
                      "surveyId=? and status=? and ( ( fStation=? and tStation=? ) or ( fStation=? and tStation=? ) )",
@@ -1953,7 +1953,7 @@ public class DataHelper extends DataSetObservable
                      null, null, "id" );
      if (cursor.moveToFirst()) {
        do {
-         DistoXDBlock block = new DistoXDBlock();
+         DBlock block = new DBlock();
          fillBlock( sid, block, cursor );
          list.add( block );
        } while (cursor.moveToNext());
@@ -1962,9 +1962,9 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
-   public List<DistoXDBlock> selectShotsAfterId( long sid, long id , long status )
+   public List<DBlock> selectShotsAfterId( long sid, long id , long status )
    {
-     List< DistoXDBlock > list = new ArrayList< DistoXDBlock >();
+     List< DBlock > list = new ArrayList< DBlock >();
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
                      "surveyId=? and status=? and id>?",
@@ -1972,7 +1972,7 @@ public class DataHelper extends DataSetObservable
                      null, null, "id" );
      if (cursor.moveToFirst()) {
        do {
-         DistoXDBlock block = new DistoXDBlock();
+         DBlock block = new DBlock();
          fillBlock( sid, block, cursor );
          list.add( block );
        } while (cursor.moveToNext());
@@ -1983,9 +1983,9 @@ public class DataHelper extends DataSetObservable
 
    // select shots (either legs or splays) at a station
    // in the case of legs, select only "independent" legs (one for each neighbor station)
-   public List<DistoXDBlock> selectShotsAt( long sid, String station, boolean leg )
+   public List<DBlock> selectShotsAt( long sid, String station, boolean leg )
    {
-     List< DistoXDBlock > list = new ArrayList< DistoXDBlock >();
+     List< DBlock > list = new ArrayList< DBlock >();
      if ( station == null || station.length() == 0 ) return list;
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
@@ -2001,7 +2001,7 @@ public class DataHelper extends DataSetObservable
          if ( leg ) { // legs only
            if ( fl > 0 && tl > 0 ) { // add block only if "independent"
              boolean independent = true;
-             for ( DistoXDBlock blk : list ) {
+             for ( DBlock blk : list ) {
                if (  ( fs.equals( blk.mFrom ) && ts.equals( blk.mTo   ) )
                   || ( fs.equals( blk.mTo   ) && ts.equals( blk.mFrom ) ) ) {
                  independent = false;
@@ -2009,14 +2009,14 @@ public class DataHelper extends DataSetObservable
                }
              }
              if ( independent ) {
-               DistoXDBlock block = new DistoXDBlock();
+               DBlock block = new DBlock();
                fillBlock( sid, block, cursor );
                list.add( block );
              }
            }
          } else { // splays only
            if ( ( fl > 0 && tl ==0 ) || ( fl == 0 && tl > 0 ) ) { 
-             DistoXDBlock block = new DistoXDBlock();
+             DBlock block = new DBlock();
              fillBlock( sid, block, cursor );
              list.add( block );
            }
@@ -2027,9 +2027,9 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
-   public List<DistoXDBlock> selectSplaysAt( long sid, String station, boolean leg )
+   public List<DBlock> selectSplaysAt( long sid, String station, boolean leg )
    {
-     List< DistoXDBlock > list = new ArrayList< DistoXDBlock >();
+     List< DBlock > list = new ArrayList< DBlock >();
      if ( station == null || station.length() == 0 ) return list;
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
@@ -2041,7 +2041,7 @@ public class DataHelper extends DataSetObservable
          int fl = cursor.getString(1).length();
          int tl = cursor.getString(2).length();
          if ( !leg && ( ( fl > 0 && tl ==0 ) || ( fl == 0 && tl > 0 ) ) ) { // splay only
-           DistoXDBlock block = new DistoXDBlock();
+           DBlock block = new DBlock();
            fillBlock( sid, block, cursor );
            list.add( block );
          }
@@ -2051,11 +2051,11 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
-   public List<DistoXDBlock> selectAllShotsAtStations( long sid, String station1, String station2 )
+   public List<DBlock> selectAllShotsAtStations( long sid, String station1, String station2 )
    {
      if ( station2 == null ) return selectAllShotsAtStation( sid, station1 );
 
-     List< DistoXDBlock > list = new ArrayList< DistoXDBlock >();
+     List< DBlock > list = new ArrayList< DBlock >();
      if ( station1 == null ) return list;
 
      if ( myDB == null ) return list;
@@ -2066,7 +2066,7 @@ public class DataHelper extends DataSetObservable
      if (cursor.moveToFirst()) {
        do {
          if ( cursor.getLong(11) == 0 ) { // skip leg-blocks
-           DistoXDBlock block = new DistoXDBlock();
+           DBlock block = new DBlock();
            fillBlock( sid, block, cursor );
            list.add( block );
          }
@@ -2077,9 +2077,9 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
-   public List<DistoXDBlock> selectAllShotsAtStation( long sid, String station )
+   public List<DBlock> selectAllShotsAtStation( long sid, String station )
    {
-     List< DistoXDBlock > list = new ArrayList< DistoXDBlock >();
+     List< DBlock > list = new ArrayList< DBlock >();
      if ( station == null ) return list;
 
      if ( myDB == null ) return list;
@@ -2090,7 +2090,7 @@ public class DataHelper extends DataSetObservable
      if (cursor.moveToFirst()) {
        do {
          if ( cursor.getLong(11) == 0 ) { // skip leg-blocks
-           DistoXDBlock block = new DistoXDBlock();
+           DBlock block = new DBlock();
            fillBlock( sid, block, cursor );
            list.add( block );
          }
@@ -2101,9 +2101,9 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
-   public List<DistoXDBlock> selectAllShotsToStation( long sid, String station )
+   public List<DBlock> selectAllShotsToStation( long sid, String station )
    {
-     List< DistoXDBlock > list = new ArrayList< DistoXDBlock >();
+     List< DBlock > list = new ArrayList< DBlock >();
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
                      "surveyId=? and status=? and tStation=?", 
@@ -2112,7 +2112,7 @@ public class DataHelper extends DataSetObservable
      if (cursor.moveToFirst()) {
        do {
          if ( cursor.getLong(11) == 0 ) { // skip leg-blocks
-           DistoXDBlock block = new DistoXDBlock();
+           DBlock block = new DBlock();
            fillBlock( sid, block, cursor );
            list.add( block );
          }
@@ -2123,9 +2123,9 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
-   public List<DistoXDBlock> selectAllShotsAfter( long id, long sid, long status )
+   public List<DBlock> selectAllShotsAfter( long id, long sid, long status )
    {
-     List< DistoXDBlock > list = new ArrayList< DistoXDBlock >();
+     List< DBlock > list = new ArrayList< DBlock >();
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
                      "id>=? and surveyId=? and status=?",
@@ -2133,7 +2133,7 @@ public class DataHelper extends DataSetObservable
                      null, null, "id" );
      if (cursor.moveToFirst()) {
        do {
-         DistoXDBlock block = new DistoXDBlock();
+         DBlock block = new DBlock();
          fillBlock( sid, block, cursor );
          list.add( block );
        } while (cursor.moveToNext());
@@ -2143,16 +2143,16 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
-   public List<DistoXDBlock> selectAllShots( long sid, long status )
+   public List<DBlock> selectAllShots( long sid, long status )
    {
-     List< DistoXDBlock > list = new ArrayList< DistoXDBlock >();
+     List< DBlock > list = new ArrayList< DBlock >();
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
                      WHERE_SID_STATUS, new String[]{ Long.toString(sid), Long.toString(status) },
                      null, null, "id" );
      if (cursor.moveToFirst()) {
        do {
-         DistoXDBlock block = new DistoXDBlock();
+         DBlock block = new DBlock();
          fillBlock( sid, block, cursor );
          list.add( block );
        } while (cursor.moveToNext());
@@ -2162,9 +2162,9 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
-   public List<DistoXDBlock> selectAllLegShots( long sid, long status )
+   public List<DBlock> selectAllLegShots( long sid, long status )
    {
-     List< DistoXDBlock > list = new ArrayList< DistoXDBlock >();
+     List< DBlock > list = new ArrayList< DBlock >();
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
                      WHERE_SID_STATUS, new String[]{ Long.toString(sid), Long.toString(status) },
@@ -2172,7 +2172,7 @@ public class DataHelper extends DataSetObservable
      if (cursor.moveToFirst()) {
        do {
          if ( cursor.getString(1).length() > 0 && cursor.getString(2).length() > 0 ) {
-           DistoXDBlock block = new DistoXDBlock();
+           DBlock block = new DBlock();
            fillBlock( sid, block, cursor );
            list.add( block );
          }

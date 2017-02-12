@@ -75,7 +75,7 @@ public class DistoXStationName
     return ( l1 <= l2 );
   }
 
-  public static String increment( String name, List<DistoXDBlock> list )
+  public static String increment( String name, List<DBlock> list )
   {
     do {
       name = DistoXStationName.increment( name ); 
@@ -120,11 +120,11 @@ public class DistoXStationName
     return "";
   }
 
-  static boolean listHasName( List<DistoXDBlock> list, String name )
+  static boolean listHasName( List<DBlock> list, String name )
   {
     if ( name != null ) {
-      for ( DistoXDBlock b : list ) {
-        if ( b.mType != DistoXDBlock.BLOCK_MAIN_LEG ) continue;
+      for ( DBlock b : list ) {
+        if ( b.mType != DBlock.BLOCK_MAIN_LEG ) continue;
         if ( name.equals( b.mFrom ) || name.equals( b.mTo ) ) return true;
       }
     }
