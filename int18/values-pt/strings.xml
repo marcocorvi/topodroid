@@ -861,7 +861,7 @@
   <string name="pref_prev_next_summary">Botões Ant/Próx na janela de medição</string>
   <string name="pref_mag_anomaly_title">Anomalia magnética</string>
   <string name="pref_mag_anomaly_summary">Compensar anomalia magnética local</string>
-  <string name="pref_azimuth_manual_title">Referência retif. perfil</stri.ng>
+  <string name="pref_azimuth_manual_title">Referência retif. perfil</string>
   <string name="pref_azimuth_manual_summary">Referência para retificação de perfil fixa</string>
 
   <string name="pref_team_title">Equipe</string>
