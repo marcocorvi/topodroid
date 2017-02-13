@@ -383,7 +383,7 @@
     <string name="toggle_failed">Error al alternar DistoX</string>
     <string name="toggle_ok">Alternar a modo de calibración DistoX</string>
     <string name="undelete_text">Pulse sobre la toma a recuperar</string>
-    <!-- TODO string name="delete_whole_leg">Delete whole leg</string -->
+    <string name="delete_whole_leg">Eliminar toda la visual</string>
     <string name="visible_border">Borde visible</string>
     <!-- UNUSED string name="vthreshold">Precisión</string -->
     <string name="wait_scan">Buscando: espere&#8230;</string>
@@ -459,15 +459,15 @@
     <!-- UNUSED string name="button_direction">Rumbo/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Rumbo</string -->
     <string name="button_plot"    >Dibujo</string>
-    <!-- TODO string name="button_more"    >More</string -->
-    <!-- TODO string name="button_lrud"    >Add LRUD</string -->
+    <string name="button_more"    >Más</string>
+    <string name="button_lrud"    >Añadir LRUD</string>
     <!-- OK string name="button_ok"        >OK        </string -->
     <string name="button_open"      >Abrir     </string>
     <string name="button_read"      >Leer      </string>
-    <!-- TODO string name="button_redo"      >Redo      </string -->
+    <string name="button_redo"      >Rehacer    </string>
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Enviar    </string>
-    <!-- TODO string name="button_replace"   >Replace   </string -->
+    <string name="button_replace"   >Remplazar   </string>
     <string name="button_reset"     >Resetear  </string>
     <string name="button_left"      >Izquierdo</string>
     <string name="button_right"     >Derecho</string>
@@ -517,22 +517,22 @@
     <string name="length">Longitud [m]</string>
     <string name="azimuth">Rumbo [deg]</string>
 
-<!-- FIXME_SKETCH_3D -->    
-    <!-- TODO string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
-    <!-- TODO string name="title_sketch_new">New 3D sketch</string -->
-    <!-- string name="title_sketch_edit">Edit 3D surface</string -->
-    <!-- TODO string name="title_sketch_shot">New shot</string -->
-    <!-- TODO string name="title_sketch_refs">View mode</string -->
-    <!-- string name="title_sketch_section_type">Sections type</string -->
-    <!-- string name="title_sketch_select">Select item</string -->
+<FIXME_SKETCH_3D>    
+    <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
+    <string name="title_sketch_new">Nuevo dibujo 3D</string>
+    <string name="title_sketch_edit">Editar la superficie 3D</string>
+    <string name="title_sketch_shot">Nueva toma</string>
+    <string name="title_sketch_refs">Modo de vista</string>
+    <string name="title_sketch_section_type">Tipo de secciones</string>
+    <string name="title_sketch_select">Seleccione un elemento</string>
 
-    <!-- TODO string name="sketch_mode_single">Single shot</string -->
-    <!-- TODO string name="sketch_mode_ngbh">Nearby shots</string -->
-    <!-- TODO string name="sketch_mode_all">All shots</string -->
-    <!-- TODO string name="sketch_delete">Delete 3D model ?</string -->
-    <!-- TODO string name="sketch_no_split">No refinement. Decrease side max. length to refine further.</string -->
-    <!-- TODO string name="length">Length [m]</string -->
-    <!-- TODO string name="azimuth">Azimuth [deg]</string -->
+    <string name="sketch_mode_single">Una sola toma</string>
+    <string name="sketch_mode_ngbh">Tomas cercanas</string>
+    <string name="sketch_mode_all">Todas las tomas</string>
+    <string name="sketch_delete">Eliminar modelo 3D ?</string>
+    <string name="sketch_no_split">Sin refinamiento. Disminución lateral máx. Longitud para refinar más.</string>
+    <string name="length">Longitud [m]</string>
+    <string name="azimuth">Rumbl [grad]</string>
     <string name="clino">Clino [deg]</string>
 
     <string name="orientation">orientación</string>
@@ -560,16 +560,16 @@
 
     <!-- UNUSED string name="station_next">NEXT</string -->
 
-    <!-- TODO string name="menu_head">HEAD</string -->
-    <!-- UNUSED string name="menu_save_th2">SAVE TH2</string -->
-<!-- END_SKETCH_3D -->    
+    <string name="menu_head">CABEZA</string>
+    <!-- UNUSED string name="menu_save_th2">GUARDAR TH2</string -->
+<END_SKETCH_3D>    
 
     <string name="help_help">Ayuda</string>
     <!-- UNUSED string name="help_manual">Manual online</string -->
     <string name="help_measure">Medir distancias</string>
     
-    <!-- TODO string name="no_shot_between_stations">no_shot_between_stations</string -->
-    <!-- TODO string name="few_line_points">Line has too few points</string -->
+    <string name="no_shot_between_stations">No hay tomas entre estaciones</string>
+    <!-- TODO string name="few_line_points">La línea tiene muy pocos puntos</string -->
     <string name="line_delete">Eliminar línea</string>
     <string name="flip_shots">Tomas contínuas</string>
 
