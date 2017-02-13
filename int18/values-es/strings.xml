@@ -430,7 +430,7 @@
     <!-- UNUSED string name="v_section">V-sección</string -->
     <string name="h_section">H-sección</string>
 
-    <!-- OK string name="distox_err_ok">OK</string -->
+    <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Fallo conexión bluetooth</string>
     <string name="distox_err_headtail_io">Fallo memoria DistoX I/O</string>
     <string name="distox_err_headtail_eof">Fallo memoria EOF DistoX</string>
@@ -448,9 +448,9 @@
     <string name="button_convert"   >Convertir </string>
     <string name="button_current"   >Corriente   </string>
     <string name="button_delete"    >Eliminar  </string>
-    <!-- TODO string name="button_eval"      >Eval      </string -->
-    <!-- TODO string name="button_eval_cal"  >Eval w. calib.</string -->
-    <!-- TODO string name="button_gps_start" >GPS       </string -->
+    <string name="button_eval"      >Eval      </string>
+    <string name="button_eval_cal"  >Eval w. calib.</string>
+    <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
     <!-- UNUSED string name="button_manual"    >Manual    </string -->
     <!-- UNUSED string name="button_measure"   >Medida   </string -->
@@ -489,7 +489,7 @@
     <string name="mode_station">Estaciones</string>
     <string name="mode_grid">Cuadriculas</string>
     <string name="mode_fixed">Desplazar objetos</string>
-    <!-- TODO string name="mode_outline">Outline only</string -->
+    <string name="mode_outline">Poligonal solo</string>
 
     <!-- UNUSED string name="remote_title">Control remoto del dispositivo</string -->
     <string name="remote_on">Láser ON</string>
@@ -505,14 +505,14 @@
     <string name="btn_import">Importar</string>
     <string name="btn_install">Instalar</string>
 
-    <!-- TODO string name="symbol_archeo">Archeo</string -->
-    <!-- TODO string name="symbol_bio">Biology</string -->
-    <!-- TODO string name="symbol_geo">Geology</string -->
-    <!-- TODO string name="symbol_mine">Mining</string -->
-    <!-- TODO string name="symbol_paleo">Paleo</string -->
-    <!-- TODO string name="symbol_speleo">Speleo</string -->
+    <string name="symbol_archeo">Arqueología</string>
+    <string name="symbol_bio">Biología</string>
+    <string name="symbol_geo">Geología</string>
+    <string name="symbol_mine">Minería</string>
+    <string name="symbol_paleo">Paleontología</string>
+    <string name="symbol_speleo">Espeleo</string>
 
-    <!-- TODO string name="symbol_reload">Drawing Tools</string -->
+    <string name="symbol_reload">Herramientas dibujo</string>
 
     <string name="length">Longitud [m]</string>
     <string name="azimuth">Rumbo [deg]</string>
