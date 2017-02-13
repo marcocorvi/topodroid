@@ -395,7 +395,7 @@
     <string name="unzip_fail_survey">Error: El nombre de la topo no coincide</string>
     <string name="unzip_fail_db">Error: la versión de base de datos no coincide</string>
     <string name="unzip_fail_td">Error: Versión TopoDroid no coincide</string>
-    <!-- string name="zoom_in_out">Zoom aumentar/disminuir</string -->
+    <string name="zoom_in_out">Zoom aumentar/disminuir</string>
 
     <string name="survey_info">Info Topografía</string>
     <!-- TODO string name="stat_stddev_m">M stddev %1$.1f %%</string -->
@@ -461,7 +461,7 @@
     <string name="button_plot"    >Dibujo</string>
     <string name="button_more"    >Más</string>
     <string name="button_lrud"    >Añadir LRUD</string>
-    <!-- OK string name="button_ok"        >OK        </string -->
+    <string name="button_ok"        >OK        </string>
     <string name="button_open"      >Abrir     </string>
     <string name="button_read"      >Leer      </string>
     <string name="button_redo"      >Rehacer    </string>
@@ -802,8 +802,8 @@
   <string name="pref_wait_shot_summary">Retardo de espera después de la medición [ms]</string>
   <string name="pref_wait_data_title">Pausa de datos [ms]</string>
   <string name="pref_wait_data_summary">Pausa después de descarga de datos [ms]</string>
-  <!-- TODO string name="pref_wait_conn_title">Data ready wait delay [ms]</string -->
-  <!-- TODO string name="pref_wait_conn_summary">Delay waiting for data to be ready [ms]</string -->
+  <string name="pref_wait_conn_title">Retardo de espera de datos [ms]</string>
+  <string name="pref_wait_conn_summary">Retraso en espera de que los datos estén listos [ms]</string>
   <string name="pref_conn_mode_title">Modo Conexión</string>
   <string name="pref_conn_mode_summary">Modo conexión con DistoX</string>
   <string name="pref_auto_reconnect_title">Autoconectar</string>
@@ -833,7 +833,7 @@
   <!-- UNUSED string name="pref_cwd_summary">Directorio principal TopoDroid</string -->
   <!-- UNUSED string name="pref_cwd_message">Introducir el directorio principal TopoDroid</string -->
   <string name="pref_pt_color_map_title">PocketTopo color mapa</string>
-  <!-- TODO string name="pref_pt_color_map_summary">PocketTopo color map (PocketTopo import)</string -->
+  <string name="pref_pt_color_map_summary">Mapa de colores PocketTopo (importación PocketTopo)</string>
   <string name="pref_text_size_title">Tamaño del texto de la lista</string>
   <string name="pref_text_size_summary">Tamaño del texto de las visuales</string>
   <string name="pref_text_size_message">Tamaño del texto de la lista</string>
@@ -909,8 +909,8 @@
   <string name="pref_dxf_scale_title">Escala de dibujo DXF</string>
   <string name="pref_dxf_scale_summary">Factor de escala del dibujo DXF</string>
   <string name="pref_dxf_scale_message">Factor de escala exportación del dibujo DXF</string>
-  <!-- TODO string name="pref_dxf_blocks_title">DXF splay endpoints</string -->
-  <!-- TODO string name="pref_dxf_blocks_summary">DXF splay endpoints</string -->
+  <string name="pref_dxf_blocks_title">Puntos finales de exportación tomas laterales DXF </string>
+  <string name="pref_dxf_blocks_summary">Puntos finales de exploración DXF</string>
   <string name="pref_thumbnail_title">Tamaño miniaturas</string>
   <string name="pref_thumbnail_summary">Tamaño de las imágenes en miniatura</string>
   <string name="pref_thumbnail_message">Tamaño de las imágenes en miniatura</string>
