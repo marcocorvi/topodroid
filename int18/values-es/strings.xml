@@ -212,7 +212,7 @@
     <string name="bad_line">Tipo de línea mala</string>
     <string name="bad_point">Tipo de punto malo</string>
 
-    <!-- OK string name="no_bt">No Bluetooth</string -->
+    <string name="no_bt">No hay Bluetooth</string>
     <string name="no_calib">No hay calibración</string>
     <string name="no_calibration">Calibración no seleccionada</string>
     <string name="no_capture_app">No hay aplicación para capturar imagen</string>
@@ -424,8 +424,8 @@
     <string name="hide_splay">Tomas Laterales</string>
 
     <string name="plan">Planta</string>
-    <string name="extended">Desarrollado</string>
-    <string name="extended_profile">Perfil extendido</string>
+    <string name="extended">Alzado</string>
+    <string name="extended_profile">Alzado desarrollado</string>
     <string name="profile">PROYECTO</string>
     <!-- UNUSED string name="v_section">V-sección</string -->
     <string name="h_section">H-sección</string>
