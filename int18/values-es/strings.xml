@@ -973,10 +973,10 @@
   <string name="pref_checkBT_summary">Bluetooth encendido/apagado </string>
   <string name="pref_checkAttached_title">Comprobación de la poligonal principal</string>
   <string name="pref_checkAttached_summary">Compruebe si se adjunta la estación</string>
-  <!-- TODO string name="pref_backup_number_title">Backup number</string -->
-  <!-- TODO string name="pref_backup_number_summary">Number of sketch files backups</string -->
-  <!-- TODO string name="pref_backup_interval_title">Backup interval</string -->
-  <!-- TODO string name="pref_backup_interval_summary">Minimum interval between two backups [s]</string -->
+  <string name="pref_backup_number_title">Número de copias de seguridad</string>
+  <string name="pref_backup_number_summary">Número de copias de seguridad de los archivos de dibujo</string>
+  <string name="pref_backup_interval_title">Intervalo de copia de seguridad</string>
+  <string name="pref_backup_interval_summary">Intervalo mínimo entre dos copias de seguridad [s]</string>
   <!-- UNUSED string name="pref_xtherion_areas_title">Áreas Xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Guardar áreas a xtherion</string -->
   <string name="pref_therion_splays_title">Anchuras therion</string>
@@ -987,8 +987,8 @@
   <string name="pref_loopClosure_summary">Error en cierre de bucle</string>
   <!-- UNUSED string name="pref_splayExtend_title">Estimate splay extend</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Estimate splay extend</string -->
-  <!-- TODO string name="pref_swapLR_title">Swap LR in Compass</string -->
-  <!-- TODO string name="pref_swapLR_summary">Swap LR in Compass export</string -->
+  <string name="pref_swapLR_title">Cambiar LR en Compass</string>
+  <string name="pref_swapLR_summary">Cambiar LR en Compass al exportar</string>
   <string name="pref_LRExtend_title">Ampliación izq./drch. estimada</string>
   <string name="pref_LRExtend_summary">Ampliación L/R estimada (Compass/VisualTopo import)</string>
 
@@ -1071,16 +1071,16 @@
 
   <string name="pref_log_stream_summary">Salida secuencia de registros</string>
   <string name="pref_log_stream_title">Secuencia de registros</string>
-  <!-- OK string name="pref_log_bt">Bluetooth</string -->
+  <string name="pref_log_bt">Bluetooth</string>
   <string name="pref_log_bezier">Curvas Bézier</string>
   <string name="pref_log_calib">Calibración</string>
   <string name="pref_log_comm">Communicación BT</string>
-  <!-- OK string name="pref_log_csurvey">cSurvey</string -->
+  <string name="pref_log_csurvey">cSurvey</string>
   <string name="pref_log_data">Datos</string>
   <string name="pref_log_db">Base de datos</string>
   <string name="pref_log_debug">Depurar</string>
   <string name="pref_log_device">Ventana dispositivo</string>
-  <!-- OK string name="pref_log_distox">DistoX</string -->
+  <string name="pref_log_distox">DistoX</string>
   <string name="pref_log_err">Error</string>
   <string name="pref_log_fixed">Puntos fijos</string>
   <string name="pref_log_input">Entrada usuario</string>
@@ -1089,12 +1089,12 @@
   <string name="pref_log_photo">Foto</string>
   <string name="pref_log_plot">Dibujo</string>
   <string name="pref_log_proto">Protocolo DistoX</string>
-  <!-- OK string name="pref_log_ptopo">PocketTopo</string -->
+  <string name="pref_log_ptopo">PocketTopo</string>
   <string name="pref_log_sensor">Sensores</string>
   <string name="pref_log_shot">Toma</string>
   <!-- NO string name="pref_log_sync">Cosurveying</string -->
   <string name="pref_log_survey">Topografía</string>
-  <!-- OK string name="pref_log_therion">Therion</string -->
+  <string name="pref_log_therion">Therion</string>
   <string name="pref_log_units">Unidades</string>
   <string name="pref_log_zip">Zip</string>
 
@@ -1103,7 +1103,7 @@
   <!-- UNUSED string name="line_normal">normal</string -->
   <!-- UNUSED string name="line_coarse">gruesa</string -->
 
-    <string name="welcome_title">Bienvenido a TopoDroid 2.8</string>
+    <string name="welcome_title">Bienvenido a TopoDroid 4</string>
 
 
     <string name="welcome_text">
