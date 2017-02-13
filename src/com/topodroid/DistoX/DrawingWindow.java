@@ -3913,10 +3913,14 @@ public class DrawingWindow extends ItemDrawer
           ( new PlotRecoverDialog( mActivity, this, mFullName3, mType ) ).show();
         }
       } else if ( p++ == pos ) { // ZOOM_FIT
+        // FIXME for big sketches this leaves out some bits at the ends
+        // maybe should increse the bitmap bounds by a small factor ...
         RectF b = mDrawingSurface.getBitmapBounds();
         float w = b.right - b.left;
         float h = b.bottom - b.top;
-        mZoom = TopoDroidApp.mDisplayWidth / ( 1 + ((w>h)? w : h ) );
+        float wZoom = TopoDroidApp.mDisplayWidth  / ( 1 + w );
+        float hZoom = TopoDroidApp.mDisplayHeight / ( 1 + h );
+        mZoom = ( hZoom < wZoom ) ? hZoom : wZoom;
         mOffset.x = TopoDroidApp.mDisplayWidth  / (2*mZoom) - (b.left + b.right) / 2;
         mOffset.y = TopoDroidApp.mDisplayHeight / (2*mZoom) - (b.top + b.bottom) / 2;
         // Log.v("DistoX", "W " + w + " H " + h + " zoom " + mZoom + " X " + mOffset.x + " Y " + mOffset.y );

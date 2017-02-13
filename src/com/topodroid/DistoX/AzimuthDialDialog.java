@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.text.method.KeyListener;
 
 import android.content.Context;
+import android.util.AttributeSet;
 import android.content.DialogInterface;
 
 import android.widget.TextView;
@@ -48,6 +49,7 @@ public class AzimuthDialDialog extends MyDialog
                               implements View.OnClickListener
                               , IBearingAndClino
 {
+
   private ILister mParent;
   float mAzimuth;
   private Bitmap mBMdial;
@@ -84,8 +86,9 @@ public class AzimuthDialDialog extends MyDialog
     Bitmap bm1 = Bitmap.createScaledBitmap( mBMdial, w, w, true );
     Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, w, w, m, true);
     mBTazimuth.setBackgroundDrawable( new BitmapDrawable( mContext.getResources(), bm2 ) );
-    mETazimuth.setText( Integer.toString( (int)mAzimuth ) );
   }
+
+  void updateEditText() { mETazimuth.setText( Integer.toString( (int)mAzimuth ) ); }
 
   void updateSeekBar() { mSeekBar.setProgress( ((int)mAzimuth + 180)%360 ); }
 
@@ -114,11 +117,28 @@ public class AzimuthDialDialog extends MyDialog
 
     mSeekBar  = (SeekBar) findViewById( R.id.seekbar );
     mETazimuth = (EditText) findViewById( R.id.et_azimuth );
-    mETazimuth.setOnEditorActionListener( new OnEditorActionListener() {
+    // mETazimuth.setOnEditorActionListener( new OnEditorActionListener() {
+    //   @Override
+    //   public boolean onEditorAction( TextView v, int action_id, KeyEvent ev )
+    //   {
+    //     if ( action_id == EditorInfo.IME_ACTION_DONE ) {
+    //       try {
+    //         int azimuth = Integer.parseInt( mETazimuth.getText().toString() );
+    //         if ( azimuth < 0 || azimuth > 360 ) azimuth = 0;
+    //         mAzimuth = azimuth;
+    //         updateSeekBar();
+    //         updateView();
+    //       } catch ( NumberFormatException e ) { }
+    //       return true;
+    //     }
+    //     return false;
+    //   }
+    // } );
+    mETazimuth.setOnKeyListener( new EditText.OnKeyListener() {
       @Override
-      public boolean onEditorAction( TextView v, int action_id, KeyEvent ev )
+      public boolean onKey( View v, int keycode, KeyEvent ev ) 
       {
-        if ( action_id == EditorInfo.IME_ACTION_DONE ) {
+        if ( ev.getAction() == KeyEvent.ACTION_UP ) {
           try {
             int azimuth = Integer.parseInt( mETazimuth.getText().toString() );
             if ( azimuth < 0 || azimuth > 360 ) azimuth = 0;
@@ -126,7 +146,6 @@ public class AzimuthDialDialog extends MyDialog
             updateSeekBar();
             updateView();
           } catch ( NumberFormatException e ) { }
-          return true;
         }
         return false;
       }
@@ -167,12 +186,14 @@ public class AzimuthDialDialog extends MyDialog
 
     updateSeekBar();
     updateView();
+    updateEditText();
   }
 
   public void setBearingAndClino( float b0, float c0 )
   {
     mAzimuth = b0;
     updateView();
+    updateEditText();
   }
 
   TimerTask mTimer = null;
@@ -192,11 +213,13 @@ public class AzimuthDialDialog extends MyDialog
     //   if ( mAzimuth < 0 ) mAzimuth += 360;
     //   updateSeekBar();
     //   updateView();
+    //   updateEditText();
     // } else if ( b == mBTfore ) {
     //   mAzimuth += 5;
     //   if ( mAzimuth >= 360 ) mAzimuth -= 360;
     //   updateSeekBar();
     //   updateView();
+    //   updateEditText();
     // } else 
     if ( b == mBtnCancel ) {
       dismiss();
@@ -205,6 +228,7 @@ public class AzimuthDialDialog extends MyDialog
       if ( mAzimuth >= 360 ) mAzimuth -= 360;
       updateSeekBar();
       updateView();
+      updateEditText();
     } else if ( b == mBTsensor ) {
       mTimer = new TimerTask( mContext, this, TimerTask.Y_AXIS );
       mTimer.execute();
