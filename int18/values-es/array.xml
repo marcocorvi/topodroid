@@ -66,7 +66,7 @@
      <item name="basic">Básico</item>
      <item name="normal">Normal</item>
      <item name="advanced">Avanzado</item>
-     <item name="expert">Experimental</item>
+     <item name="expert">Experto</item>
   </string-array>
 
   <string-array name="sizeButtons">
@@ -74,7 +74,7 @@
      <item name="normal">Normal</item>
      <item name="medium">Medium</item>
      <item name="large">Grande</item>
-     <item name="huge">Huge</item>
+     <item name="huge">Enorme</item>
   </string-array>
 
   <string-array name="logStream">
@@ -95,7 +95,7 @@
 
   <string-array name="sockType">
      <item name="default">Por defecto</item>
-     <item name="Insecure">Inestable</item>
+     <item name="Insecure">Inseguro</item>
   </string-array>
 
     <string-array name="surveyStations">
