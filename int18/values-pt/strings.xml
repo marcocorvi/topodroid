@@ -125,8 +125,8 @@
     <!-- UNUSED string name="few_plots">Esboços não suficientes</string -->
     <string name="few_calibs">Calibrações insuficientes</string>
 
-    <string name="calib_import_title">Importação da calibração</string>
-    <string name="import_title">Importação da topo</string>
+    <string name="calib_import_title">Importar calibração</string>
+    <string name="import_title">Importar topo</string>
     <!-- UNUSED string name="import_wait">Importando arquivo &#8230; Por favor aguarde &#8230;</string -->
     <string name="import_already">Topo já importada</string>
     <string name="import_none">Nenhum arquivo a ser importado</string>
