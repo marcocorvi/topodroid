@@ -125,8 +125,8 @@
     <!-- UNUSED string name="few_plots">Esboços não suficientes</string -->
     <string name="few_calibs">Calibrações insuficientes</string>
 
-    <string name="calib_import_title">Importação da calibração</string>
-    <string name="import_title">Importação da topo</string>
+    <string name="calib_import_title">Importar calibração</string>
+    <string name="import_title">Importar topo</string>
     <!-- UNUSED string name="import_wait">Importando arquivo &#8230; Por favor aguarde &#8230;</string -->
     <string name="import_already">Topo já importada</string>
     <string name="import_none">Nenhum arquivo a ser importado</string>
@@ -305,7 +305,7 @@
     <!-- UNUSED string name="picture_no_station">Nome da base exigido</string -->
     <string name="plot_delete">Apagar croqui?</string>
     <string name="item_delete">Apagar item %1$s?</string>
-    <string name="plot_duplicate_name">Duplicar nome do croqui</string>
+    <string name="plot_duplicate_name">Nome de croqui repetido</string>
     <!-- UNUSED string name="plot_name">Nome do croqui</string -->
     <string name="plot_new">Novo croqui</string>
     <string name="plot_not_found">Croqui não encontrado</string>
