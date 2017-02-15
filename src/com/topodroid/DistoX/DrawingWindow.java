@@ -2794,7 +2794,8 @@ public class DrawingWindow extends ItemDrawer
     // add a therion station point
     public void addStationPoint( DrawingStationName st )
     {
-      mDrawingSurface.addDrawingStationPath( new DrawingStationPath( st, DrawingPointPath.SCALE_M ) );
+      DrawingStationPath path = new DrawingStationPath( st, DrawingPointPath.SCALE_M );
+      mDrawingSurface.addDrawingStationPath( path );
       modified();
     }
 

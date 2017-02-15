@@ -367,6 +367,7 @@
 
     <string name="station">репер</string>
     <string name="station_ask">Вмъкване на репер в скицата?</string>
+    <!-- TODO string name="station_del">Remove station from sketch?</string -->
     <string name="station_set">Продължаване на картировката от тук?</string>
     <!-- string name="station_base">reference station</string -->
     <!-- string name="station_next">next station</string -->

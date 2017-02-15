@@ -376,6 +376,7 @@
 
     <string name="station">Messpunkt</string>
     <string name="station_ask">Messpunkt in Skizze anlegen?</string>
+    <!-- TODO string name="station_del">Remove station from sketch?</string -->
     <string name="station_set">Als Ausgangspunkt setzen</string>
     <!-- UNUSED string name="station_base">Bezugsmesspunkt</string -->
     <!-- UNUSED string name="station_next">Nächster Messpunkt</string -->

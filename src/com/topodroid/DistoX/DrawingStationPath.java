@@ -75,6 +75,7 @@ public class DrawingStationPath extends DrawingPath
     setScale( scale );
     mPaint = BrushManager.mStationSymbol.mPaint;
     // Log.v( TopoDroidApp.TAG, "Point cstr " + type + " orientation " + mOrientation + " flip " + mFlip );
+    setBBox( cx - 1, cx + 1, cy - 1, cy + 1 );
   }
 
   void setScale( int scale )

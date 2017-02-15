@@ -365,6 +365,7 @@
 
     <string name="station">base</string>
     <string name="station_ask">Inserir a base no croqui?</string>
+    <!-- TODO string name="station_del">Remove station from sketch?</string -->
     <string name="station_set">Continuar a topo a partir deste ponto?</string>
     <!-- UNUSED string name="station_base">base de referência</string -->
     <!-- UNUSED string name="station_next">próxima base</string -->

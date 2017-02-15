@@ -141,6 +141,16 @@ public class CalibAlgo
 
   // public int nrCoeff() { return mNonLinear ? 52 : 48; }
 
+  static final double MAX_M_VALUE = 1.99993896;
+
+  boolean hasSaturatedCoeff()
+  {
+    if ( Math.abs( aM.x.x ) >= MAX_M_VALUE ) return true;
+    if ( Math.abs( aM.y.y ) >= MAX_M_VALUE ) return true;
+    if ( Math.abs( aM.z.z ) >= MAX_M_VALUE ) return true;
+    return false;
+  }
+
   static protected long roundV( float x )
   {
     long v = (long)Math.round(x * TopoDroidUtil.FV);

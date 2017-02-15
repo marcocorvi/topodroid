@@ -365,6 +365,7 @@
 
     <string name="station">测量点</string>
     <string name="station_ask">是否插入测量点到草图?</string>
+    <!-- TODO string name="station_del">Remove station from sketch?</string -->
     <string name="station_set">从这里将测量连接?</string>
     <!-- UNUSED string name="station_base">参考测量点</string -->
     <!-- UNUSED string name="station_next">下一测量点</string -->

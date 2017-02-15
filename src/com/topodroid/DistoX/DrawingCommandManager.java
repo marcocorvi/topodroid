@@ -831,6 +831,7 @@ public class DrawingCommandManager
 
   void removeUserStation( DrawingStationPath path )
   {
+    // Log.v("DistoX", "remove user station " + path.mName );
     synchronized( mUserStations ) {
       mUserStations.remove( path );
     }
@@ -845,6 +846,7 @@ public class DrawingCommandManager
 
   void addUserStation( DrawingStationPath path )
   {
+    // Log.v("DistoX", "add user station " + path.mName );
     synchronized( mUserStations ) {
       mUserStations.add( (DrawingStationPath)path );
     }

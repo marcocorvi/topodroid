@@ -34,8 +34,8 @@ public class TopoDroidUtil
   static final long ZERO = 32768;
   static final long NEG  = 65536;
   static final float FV = 24000.0f;
-  static final float FM = 16384.0f;
-  static final float FN = 2796f; // 2^26 / FV
+  static final float FM = 16384.0f; // 2^14
+  static final float FN = 2796f;    // 2^26 / FV
 
   static final float DEG2GRAD = 400.0f/360.0f;
   static final float GRAD2DEG = 360.0f/400.0f;

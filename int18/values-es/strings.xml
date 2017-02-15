@@ -365,6 +365,7 @@
 
     <string name="station">Estación</string>
     <string name="station_ask">¿Insertar estación?</string>
+    <!-- TODO string name="station_del">Remove station from sketch?</string -->
     <string name="station_set">¿Quiere continuar la topo desde aquí?</string>
     <!-- UNUSED string name="station_base">Estación referencia</string -->
     <!-- UNUSED string name="station_next">Siguiente estación</string -->

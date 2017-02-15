@@ -118,6 +118,11 @@ public class DrawingStationDialog extends MyDialog
           mBtnOK.setVisibility( View.GONE );
           mLabel.setVisibility( View.GONE );
         } else {
+          if ( mPath != null ) {
+            mLabel.setText( mContext.getResources().getString(R.string.station_del) );
+          // } else {
+          //   mLabel.setText( mContext.getResources().getString(R.string.station_ask) );
+          }
           mBtnOK.setOnClickListener( this );
         }
         mBtnSet.setOnClickListener( this );

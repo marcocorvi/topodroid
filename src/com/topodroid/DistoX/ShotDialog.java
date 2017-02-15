@@ -418,6 +418,7 @@ public class ShotDialog extends MyDialog
     // mRBignore.setOnClickListener( this );
 
     updateView();
+    mParent.mOnOpenDialog = false;
   }
 
   private void saveDBlock()

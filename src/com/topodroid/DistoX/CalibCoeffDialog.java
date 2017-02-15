@@ -70,10 +70,11 @@ public class CalibCoeffDialog extends MyDialog
   private String error0;
   private String iter0;
   private byte[] mCoeff;
+  private boolean mSaturated;
 
   public CalibCoeffDialog( Context context, TopoDroidApp app,
                            Vector bg, Matrix ag, Vector bm, Matrix am, Vector nl, float[] errors,
-                           float delta, float delta2, float error, long iter, byte[] coeff )
+                           float delta, float delta2, float error, long iter, byte[] coeff, boolean saturated )
   {
     super( context, R.string.CalibCoeffDialog );
     mApp     = app;
@@ -103,6 +104,7 @@ public class CalibCoeffDialog extends MyDialog
     if ( errors != null ) {
       mBitmap = makeHistogramBitmap( errors, WIDTH, HEIGHT, 20, 5, 0xff6699ff );
     }
+    mSaturated = saturated;
   }
 
   static Bitmap makeHistogramBitmap( float[] error, int width, int height, int bin, int step, int col )
@@ -216,7 +218,11 @@ public class CalibCoeffDialog extends MyDialog
       mTextMaxError.setText( error0 );
       mTextIter.setText( iter0 );
       mButtonWrite.setOnClickListener( this );
-      mButtonWrite.setEnabled( mCoeff != null );
+      if ( mSaturated ) {
+        mButtonWrite.setEnabled( false );
+      } else {
+        mButtonWrite.setEnabled( mCoeff != null );
+      }
       // mButtonBack  = (Button) findViewById( R.id.button_coeff_back );
       // mButtonBack.setOnClickListener( this );
     } else {
@@ -227,7 +233,6 @@ public class CalibCoeffDialog extends MyDialog
       mTextIter.setVisibility( View.GONE );
       mButtonWrite.setVisibility( View.GONE );
     }
-
   }
 
   @Override

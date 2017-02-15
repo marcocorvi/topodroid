@@ -395,7 +395,11 @@ public class GMActivity extends Activity
           Toast.makeText( this, R.string.few_iter, Toast.LENGTH_SHORT ).show();
           return;
         } else if ( result > 0 ) {
-          enableWrite( true );
+          boolean saturated = mCalibration.hasSaturatedCoeff();
+          if ( saturated ) {
+            Toast.makeText( this, "WARNING. Saturated calibration coefficients", Toast.LENGTH_SHORT).show();
+          }
+          enableWrite( ! saturated );
           Vector bg = mCalibration.GetBG();
           Matrix ag = mCalibration.GetAG();
           Vector bm = mCalibration.GetBM();
@@ -406,7 +410,7 @@ public class GMActivity extends Activity
 
           (new CalibCoeffDialog( this, mApp, bg, ag, bm, am, nL, errors,
                                  mCalibration.Delta(), mCalibration.Delta2(), mCalibration.MaxError(), 
-                                 result, coeff ) ).show();
+                                 result, coeff, saturated ) ).show();
         } else if ( result == 0 ) {
           Toast.makeText( this, R.string.few_iter, Toast.LENGTH_SHORT ).show();
           return;

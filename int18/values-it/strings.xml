@@ -366,6 +366,7 @@
 
     <string name="station">caposaldo</string>
     <string name="station_ask">Inserisci caposaldo ?</string>
+    <!-- TODO string name="station_del">Remove station from sketch?</string -->
     <string name="station_set">Prosegui rilievo da qui?</string>
     <!-- UNUSED string name="station_base">caposaldo di riferimento</string -->
     <!-- UNUSED string name="station_next">prossimo caposaldo</string -->

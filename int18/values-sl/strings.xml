@@ -369,6 +369,7 @@
 
     <string name="station">Merilna točka</string>
     <string name="station_ask">Vnesi merilno točko</string>
+    <!-- TODO string name="station_del">Remove station from sketch?</string -->
     <string name="station_set">Definiraj merilno točko</string>
     <!-- UNUSED string name="station_base">caposaldo di riferimento</string -->
     <!-- UNUSED string name="station_next">prossimo caposaldo</string -->

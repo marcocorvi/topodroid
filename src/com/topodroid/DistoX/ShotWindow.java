@@ -222,10 +222,11 @@ public class ShotWindow extends Activity
   private int mNextPos  = 0;   // next shot entry position
   // private TextView mSaveTextView = null;
 
-  static long   mSensorId;
-  static long   mPhotoId;
-  static String mComment;
-  static long   mShotId;   // photo/sensor shot id
+  static long    mSensorId;
+  static long    mPhotoId;
+  static String  mComment;
+  static long    mShotId;   // photo/sensor shot id
+  boolean mOnOpenDialog = false;
 
   // ConnHandler mHandler;
 
@@ -482,6 +483,8 @@ public class ShotWindow extends Activity
 
   void onBlockClick( DBlock blk, int pos )
   {
+    if ( mOnOpenDialog ) return;
+    mOnOpenDialog = true;
     mShotPos = pos;
     DBlock prevBlock = null;
     DBlock nextBlock = null;
@@ -776,6 +779,7 @@ public class ShotWindow extends Activity
     mApp.mShotWindow = this; // FIXME
     mDataDownloader = mApp.mDataDownloader; // new DataDownloader( this, mApp );
     mActivity = this;
+    mOnOpenDialog = false;
 
     mShowSplay   = new ArrayList< String >();
     // mDataAdapter = new DBlockAdapter( this, this, R.layout.row, new ArrayList<DBlock>() );
