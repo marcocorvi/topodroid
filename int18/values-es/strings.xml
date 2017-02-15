@@ -396,7 +396,7 @@
     <string name="unzip_fail_survey">Error: El nombre de la topo no coincide</string>
     <string name="unzip_fail_db">Error: la versión de base de datos no coincide</string>
     <string name="unzip_fail_td">Error: Versión TopoDroid no coincide</string>
-    <string name="zoom_in_out">Zoom aumentar/disminuir</string>
+    <!-- UNUSED string name="zoom_in_out">Zoom aumentar/disminuir</string -->
 
     <string name="survey_info">Info Topografía</string>
     <!-- TODO string name="stat_stddev_m">M stddev %1$.1f %%</string -->
@@ -518,22 +518,20 @@
     <string name="length">Longitud [m]</string>
     <string name="azimuth">Rumbo [deg]</string>
 
-<FIXME_SKETCH_3D>    
+<!-- DO NOT CHANGE THIS LINE. FIXME_SKETCH_3D -->    
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
     <string name="title_sketch_new">Nuevo dibujo 3D</string>
-    <string name="title_sketch_edit">Editar la superficie 3D</string>
+    <!-- UNUSED string name="title_sketch_edit">Editar la superficie 3D</string -->
     <string name="title_sketch_shot">Nueva toma</string>
     <string name="title_sketch_refs">Modo de vista</string>
-    <string name="title_sketch_section_type">Tipo de secciones</string>
-    <string name="title_sketch_select">Seleccione un elemento</string>
+    <!-- UNUSED string name="title_sketch_section_type">Tipo de secciones</string -->
+    <!-- UNUSED string name="title_sketch_select">Seleccione un elemento</string -->
 
     <string name="sketch_mode_single">Una sola toma</string>
     <string name="sketch_mode_ngbh">Tomas cercanas</string>
     <string name="sketch_mode_all">Todas las tomas</string>
     <string name="sketch_delete">Eliminar modelo 3D ?</string>
     <string name="sketch_no_split">Sin refinamiento. Disminución lateral máx. Longitud para refinar más.</string>
-    <string name="length">Longitud [m]</string>
-    <string name="azimuth">Rumbl [grad]</string>
     <string name="clino">Clino [deg]</string>
 
     <string name="orientation">orientación</string>
@@ -563,7 +561,7 @@
 
     <string name="menu_head">CABEZA</string>
     <!-- UNUSED string name="menu_save_th2">GUARDAR TH2</string -->
-<END_SKETCH_3D>    
+<!-- DO NOT CHANGE THIS LINE. END_SKETCH_3D -->    
 
     <string name="help_help">Ayuda</string>
     <!-- UNUSED string name="help_manual">Manual online</string -->
@@ -662,17 +660,17 @@
     <string name="help_write">Enviar calibración a DistoX</string>
 
 
-<FIXME_SKETCH_3D>
+<!-- DO NOT CHANGE THIS LINE. FIXME_SKETCH_3D -->
     <!-- UNUSED string name="help_refs_model">View mode</string -->
     <string name="help_one_model">Ajustar el modelo 3D para visualizar</string>
     <string name="help_surface">Hacer superficie</string>
     <string name="help_save_model">Exportar modelo 3D</string>
     <string name="help_trash_model">Eliminar modelo 3D</string>
     <string name="help_head_model">Orientar modelo 3D</string>
-    <string name="help_erase_model">Borrar región</string>
+    <!-- UNUSED string name="help_erase_model">Borrar región</string -->
     <string name="help_cut_model">Cortar región</string>
     <string name="help_stretch_model">Alargar región</string>
-    <string name="help_extrude_model">Extruir región</string>
+    <!-- UNUSED string name="help_extrude_model">Extruir región</string -->
     <string name="help_refine_center">Refinar superficie en centros triangulares</string>
     <string name="help_refine_sides">Refinar la superficie en los lados del triángulo</string>
     <string name="help_refine_point">Refinar la superficie en el punto</string>
