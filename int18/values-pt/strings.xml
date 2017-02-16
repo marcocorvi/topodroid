@@ -6,8 +6,8 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Clicar novamente em VOLTAR para sair</string>
 
-    <string name="version_ask">Atualizando para uma nova versão do TopoDroid.\nQuer re-instalar as ferramentas de desenho?</string>
-    <string name="symbols_ask">Instalar ferramenta de desenho. v.%1$s?\n(Current v.%2$s)</string>
+    <string name="version_ask">Atualizando para uma nova versão do TopoDroid.\nQuer re-instalar os símbolos?</string>
+    <string name="symbols_ask">Instalar símbolos. v.%1$s?\n(Current v.%2$s)</string>
 
     <string name="POINT">PONTO</string>
     <string name="LINE">LINHA</string>
@@ -35,13 +35,13 @@
     <string name="make_walls">Paredes</string>
     <string name="missing_station">Base inexistente</string>
     <!-- UNUSED string name="missing_area">ÁREA</string -->
-    <!-- UNUSED string name="missing_hint">Habilitar as ferramentas que estão faltando ou instale-as</string -->
+    <!-- UNUSED string name="missing_hint">Habilite ou instale os símbolos que estão faltando</string -->
     <!-- UNUSED string name="missing_line">LINHA</string -->
     <!-- UNUSED string name="missing_point">PONTO</string -->
-    <!-- UNUSED string name="missing_save">O esboço não possui algumas ferramentas de desenho.\nNão o salve.</string -->
-    <!-- UNUSED string name="missing_symbols">Algumas ferramentas de desenho estão faltando.\nSalvar mesmo assim?</string -->
-    <!-- UNUSED string name="missing_title">SÍMBOLOS AUSENTES</string -->
-    <!-- UNUSED string name="missing_warning">A seguinte ferramenta de desenho está faltando.\n</string -->
+    <!-- UNUSED string name="missing_save">O croqui utiliza alguns símbolos desconhecidos.\nGravação cancelada.</string -->
+    <!-- UNUSED string name="missing_symbols">Alguns símbolos não foram reconhecidos.\nSalvar mesmo assim?</string -->
+    <!-- UNUSED string name="missing_title">SÍMBOLOS DESCONHECIDOS</string -->
+    <!-- UNUSED string name="missing_warning">Os seguintes símbolos são desconhecidos.\n</string -->
     <string name="failed_snap_to_line">Nenhum ponto de fechamento de linha para atrair a borda da área</string>
     <string name="failed_snap_to_point">Nenhum ponto de fechamento para atrair o ponto</string>
 
@@ -514,7 +514,7 @@
     <string name="symbol_paleo">Paleologia</string>
     <string name="symbol_speleo">Espeleologia</string>
 
-    <string name="symbol_reload">Ferramentas de desenho</string>
+    <string name="symbol_reload">Símbolos</string>
 
 <!-- FIXME_SKETCH_3D -->    
     <!-- OK string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
@@ -581,7 +581,7 @@
     <string name="help_device">Editar dispositivo em uso</string>
     <string name="help_add_topodroid">Criar nova topo/calibração</string>
     <string name="help_import">Importar arquivo zip ou arquivo de topo</string>
-    <string name="help_symbol">Habilitar/desabilitar ferramentas de desenho</string>
+    <string name="help_symbol">Habilitar/desabilitar símbolos</string>
     <!-- UNUSED string name="help_therion">App Therion manager</string -->
     <!-- UNUSED string name="help_database">App Visualizador de banco de dados (SQliteViewer)</string -->
     <string name="help_prefs">Editar preferências</string>
@@ -619,7 +619,7 @@
     <!-- UNUSED string name="help_trash">Apagar croqui</string -->
     <string name="help_undo">Desfazer última ação de desenho</string>
     <string name="help_redo">Refazer última ação desfeita de desenho</string>
-    <string name="help_symbol_plot">Selecionar ferramenta de desenho ativa</string>
+    <string name="help_symbol_plot">Selecionar símbolo ativo</string>
     <string name="help_delete_item">Apagar objeto do croqui</string>
     <string name="help_range">Mover uma parte da linha</string>
     <!-- UNUSED string name="help_clear">Deselecionar tudo</string -->
@@ -981,8 +981,8 @@
   <string name="pref_LRExtend_title">Estimar ref. retif. perfil</string>
   <string name="pref_LRExtend_summary">Estimar referência para retificação do perfil (importação Compass/VisualTopo)</string>
 
-  <string name="pref_picker_type_title">Selecionador ferramenta desenho</string>
-  <string name="pref_picker_type_summary">Tipo de selecionador de ferramenta de desenho</string>
+  <string name="pref_picker_type_title">Janela símbolos</string>
+  <string name="pref_picker_type_summary">Forma de apresentação da seleção de símbolos</string>
   <string name="pref_section_stations_title">Bases corte X</string>
   <string name="pref_section_stations_summary">Bases de referência cortes X</string>
   <string name="pref_station_size_title">Tamanho nome bases</string>
@@ -994,8 +994,8 @@
   <string name="pref_side_drag_summary">Habilitar o arrastamento lateral na área de desenho do croqui</string>
   <string name="pref_unit_grid_title">Unidades croqui</string>
   <string name="pref_unit_grid_summary">Tamanho dos intervalos na grade do croqui</string>
-  <string name="pref_recent_nr_title">Número ferramentas recentes</string>
-  <string name="pref_recent_nr_summary">Número de ferramenta mais recentes na janela de seleção de ferramenta de desenho</string>
+  <string name="pref_recent_nr_title">Número símbolos recentes</string>
+  <string name="pref_recent_nr_summary">Número de símbolos mais recentes na janela de seleção</string>
   <string name="pref_area_border_title">Visibilidade borda área</string>
   <string name="pref_area_border_summary">Visibilidade padrão das bordas da área</string>
   <string name="pref_auto_section_pt_title">Pontos corte</string>
