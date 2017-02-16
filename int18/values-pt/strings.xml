@@ -860,10 +860,10 @@
   <string name="pref_backsight_summary">Campos de contra azimute e inclinação invertida para inserção manual de medida</string>
   <string name="pref_prev_next_title">Botões Ant/Próx</string>
   <string name="pref_prev_next_summary">Botões Ant/Próx na janela de medição</string>
-  <string name="pref_mag_anomaly_title">Anomalia magnética</string>
-  <string name="pref_mag_anomaly_summary">Compensar anomalia magnética local</string>
-  <string name="pref_azimuth_manual_title">Referência retif. perfil</string>
-  <string name="pref_azimuth_manual_summary">Referência para retificação de perfil fixa</string>
+  <string name="pref_mag_anomaly_title">Declinação magnética</string>
+  <string name="pref_mag_anomaly_summary">Compensar declinação magnética local</string>
+  <string name="pref_azimuth_manual_title">Ref. fixa retif. perfil</string>
+  <string name="pref_azimuth_manual_summary">Referência fixa para retificação de perfil</string>
 
   <string name="pref_team_title">Equipe</string>
   <string name="pref_team_summary">Equipe da topo</string>
