@@ -11,7 +11,7 @@
   <string-array name="loopClosure">
      <item name="none">Nada</item>
      <item name="normal">Normal</item>
-     <item name="triangles">Triangulos</item>
+     <item name="triangles">Triángulos</item>
   </string-array>
 
   <string-array name="wallsType">
@@ -84,7 +84,7 @@
 
   <string-array name="connMode">
      <item name="batch">Demanda</item>
-     <item name="continuous">Continuo</item>
+     <item name="continuous">Contínuo</item>
      <item name="multi">Multi</item>
   </string-array>
 
@@ -113,7 +113,7 @@
      <item name="recent">Más reciente</item>
      <item name="list">Lista</item>
      <item name="grid">Cuadrícula</item>
-     <item name="grid3">Triple grid</item>
+     <item name="grid3">Triple cuadricula</item>
   </string-array>
 
   <string-array name="sectionStations">
