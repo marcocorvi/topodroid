@@ -367,7 +367,7 @@
 
     <string name="station">пикет</string>
     <string name="station_ask">Добавить пикет в абрис?</string>
-    <!-- TODO string name="station_del">Remove station from sketch?</string -->
+    <string name="station_del">Удалить пикет с абриса?</string>
     <string name="station_set">Сделать пикет текущим?</string>
     <!-- UNUSED string name="station_base">пикет привязки</string -->
     <!-- UNUSED string name="station_next">следующий пикет</string -->
