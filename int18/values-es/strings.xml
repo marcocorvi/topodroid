@@ -70,7 +70,7 @@
     <string name="calib_error">Error: %1$.4f grados</string>
     <string name="calib_stddev">Error stddev: %1$.4f grados</string>
     <string name="calib_max_error">Max. error: %1$.4f grados</string>
-    <string name="calib_ave_std">Accuracy: %1$.4f %2$.4f grados</string>
+    <string name="calib_ave_std">Precisión: %1$.4f %2$.4f grados</string>
     <string name="calib_precision">Precisión</string>
     <string name="calib_iter">Iteraciones: %1$d</string>
     <string name="calib_reset">¿Restablecer la calibración DistoX?</string>
@@ -443,7 +443,7 @@
     <string name="ask_gps_service">Establecer servicio de GPS?</string>
 
     <string name="button_add"       >Añadir    </string>
-    <string name="button_back"      >Atras     </string>
+    <string name="button_back"      >Atrás     </string>
     <string name="button_cancel"    >Cancelar  </string>
     <string name="button_close"     >Cerrar     </string>
     <string name="button_convert"   >Convertir </string>
