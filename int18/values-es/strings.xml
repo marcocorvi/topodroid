@@ -838,13 +838,13 @@
   <string name="pref_text_size_message">Tamaño del texto de la lista</string>
   <string name="pref_closeness_title">Selección nodo</string>
   <!-- UNUSED string name="pref_closeness_summary">Selección dibujo de elementos radio</string -->
-  <string name="pref_closeness_message">Objetos de dibujo selección Radio</string>
+  <string name="pref_closeness_message">Sensibilidad para seleccionar punto verde (nodo)</string>
   <string name="pref_eraseness_title">Tamaño goma de borrar</string>
   <string name="pref_eraseness_message">Haz de cancelación de un elemento de diseño</string>
   <string name="pref_min_shift_title">Sensibilidad pantalla</string>
   <string name="pref_min_shift_message">Sensibilidad para mover dibujo</string>
   <string name="pref_pointing_title">Orientación nodo</string>
-  <string name="pref_pointing_message">Orientación del nodo</string>
+  <string name="pref_pointing_message">Sensibilidad para orientar el punto verde (nodo)</string>
   <string name="pref_vert_splay_title">Límite de trazos del borde</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Límite de trazos del borde</string -->
   <string name="pref_vert_splay_message">Límite de trazos del borde</string>
