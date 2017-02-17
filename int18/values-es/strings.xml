@@ -56,7 +56,7 @@
     <string name="calib_device_mismatch">ADVERTENCIA: Desajuste en la calibración del dispositivo</string>
     <string name="calib_no_name">Escriba el nombre de la calibración</string>
     <string name="calib_gm_policy">Política</string>
-    <string name="calib_gm_undelete">¿Eliminar datos de calibración?</string>
+    <string name="calib_gm_undelete">¿Quiere eliminar los datos de calibración?</string>
     <string name="calib_saved">Guardar calibración</string>
     <string name="calib_updated">Descargar calibración</string>
     <string name="calib_compute_groups">Cálculo de calibración de lo grupos de datos &#8230;</string>
@@ -73,7 +73,7 @@
     <string name="calib_ave_std">Precisión: %1$.4f %2$.4f grados</string>
     <string name="calib_precision">Precisión</string>
     <string name="calib_iter">Iteraciones: %1$d</string>
-    <string name="calib_reset">¿Restablecer la calibración DistoX?</string>
+    <string name="calib_reset">¿Quiere restablecer la calibración DistoX?</string>
 
     <string name="algorithm">Algoritmo:</string>
     <string name="auto">auto</string>
@@ -86,7 +86,7 @@
     <string name="device_busy">Dispositivo ocupado</string>
     <string name="device_illegal_addr">Dirección de memoria no válida</string>
     <string name="device_info">información del dispositivo</string>
-    <string name="device_model_set">¿Desea cambiar de dispositivo?</string>
+    <string name="device_model_set">¿Quiere cambiar de dispositivo?</string>
     <string name="device_none">DistoX no seleccionado</string>
     <!-- UNUSED string name="device_paired">El dispositivo está emparejado</string -->
     <string name="device_reset">Reseteo memoria de DistoX </string>
@@ -200,8 +200,8 @@
     <string name="out">Fuera</string>
     <string name="in">Dentro</string>
     <!-- UNUSED string name="none">Nada</string -->
-    <string name="barrier_add">¿Dividir dibujo de la poligonal principal?</string>
-    <string name="barrier_del">¿Unir dibujo de la poligonal principal?</string>
+    <string name="barrier_add">¿Quiere dividir dibujo de la poligonal principal?</string>
+    <string name="barrier_del">¿Quiere unir dibujo de la poligonal principal?</string>
     <string name="hidden_add">Oculta dibujo de la poligonal principal</string>
     <string name="hidden_del">Mostrar dibujo de la poligonal principal</string>
     <string name="splays_toggle">Cambiar a tomas laterales</string>
@@ -256,7 +256,7 @@
     <string name="menu_reload">Importar</string>
     <string name="menu_rename_delete">Renombrar/Eliminar</string>
     <string name="menu_rename">Renombrar</string>
-    <string name="menu_switch">Cambia/Cierra</string>
+    <string name="menu_switch">Cambiar/Cerrar</string>
     <string name="menu_help">Ayuda</string>
     <string name="menu_join_survey">Unir topografías</string>
     <string name="menu_logs">Registros</string>
@@ -302,8 +302,8 @@
     <!-- UNUSED string name="photo_shot">Añadir toma</string -->
     <!-- UNUSED string name="photo_survey">Dividir topografía</string -->
     <!-- UNUSED string name="picture_no_station">Necesitas una estación / nombre para la foto</string -->
-    <string name="plot_delete">¿Eliminar dibujo?</string>
-    <string name="item_delete">Eliminar elemento %1$s ?</string>
+    <string name="plot_delete">¿Quiere eliminar dibujo?</string>
+    <string name="item_delete">¿Quiere eliminar elemento %1$s?</string>
     <string name="plot_duplicate_name">Nombre de dibujo duplicado</string>
     <!-- UNUSED string name="plot_name">Nombre dibujo</string -->
     <string name="plot_new">Nuevo dibujo</string>
@@ -322,9 +322,9 @@
     <string name="saving_">Guardar</string>
     <string name="saving_file_failed">Fallo al guardar archivo</string>
     <!-- UNUSED string name="scrap_name">Nombre de dibujo</string -->
-    <string name="splay">Toma Secundaria</string>
+    <string name="splay">Toma Lateral</string>
     <string name="too_many_leg_intersection">La línea de la sección abarca más de una visual</string>
-    <string name="too_many_legs_xsection">Demasiadas tomas de sección</string>
+    <string name="too_many_legs_xsection">Hay demasiadas tomas de sección</string>
     <!-- UNUSED string name="converted_tdr2th2">Archivos binarios de dibujo convertidos a Th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">¿Sobrescribir archivos de dibujo Th2?</string -->
     <string name="section_area">Sección de área: %1$.1f</string>
@@ -344,7 +344,7 @@
 
     <!-- UNUSED string name="shot_clino">Clino</string -->
     <!-- UNUSED string name="shot_compass">Brújula</string -->
-    <string name="shot_delete">¿Eliminar toma?</string>
+    <string name="shot_delete">¿Quiere eliminar la toma?</string>
     <string name="shot_from">Toma desde</string>
     <string name="shot_info">Introducir datos Toma</string>
     <!-- UNUSED string name="shot_length">Longitud de la toma</string -->
@@ -364,16 +364,16 @@
     <!-- UNUSED string name="sketch3d_start">Estación base</string -->
 
     <string name="station">Estación</string>
-    <string name="station_ask">¿Insertar estación?</string>
-    <!-- TODO string name="station_del">Remove station from sketch?</string -->
+    <string name="station_ask">¿Quiere Insertar estación?</string>
+    <string name="station_del">¿Quiere quitar la estación del dibujo?</string>
     <string name="station_set">¿Quiere continuar la topo desde aquí?</string>
     <!-- UNUSED string name="station_base">Estación referencia</string -->
     <!-- UNUSED string name="station_next">Siguiente estación</string -->
     <!-- UNUSED string name="station_viewed">Vista de estación</string -->
     <string name="survey_exists">Conflicto Nombre Topografía</string>
     <!-- UNUSED string name="survey_date">yyyy.mm.dd</string -->
-    <string name="survey_delete">¿Eliminar Topografía?</string>
-    <string name="survey_split">¿Dividir topografía?</string>
+    <string name="survey_delete">¿Quiere eliminar la topografía?</string>
+    <string name="survey_split">¿Quiere dividir la topografía?</string>
     <string name="survey_not_attached">ADVERTENCIA: Medidas no insertadas</string>
     <string name="cannot_rename">No se puede cambiar el nombre de la topografía</string>
     <string name="declination">Declinación magnética </string>
@@ -404,18 +404,18 @@
     <!-- TODO string name="stat_stddev_dip">Dip stddev %1$.1f deg. (average %2$.1f deg.)</string -->
     <string name="stat_component">Componentes %1$d</string>
     <string name="stat_depth">Profundidad %1$.1f %2$s %3$.1f %4$s"</string>
-    <string name="stat_duplicate">mediciones duplicadas %1$d %2$.1f %3$s</string>
+    <string name="stat_duplicate">Mediciones duplicadas %1$d %2$.1f %3$s</string>
     <string name="stat_leg">Visual %1$d %2$.1f %3$s</string>
     <string name="stat_length">Desarrollo %1$.1f %2$s</string>
     <string name="stat_loop">Bucle %1$d</string>
     <string name="stat_origin">Estación cero: %1$s</string>
     <string name="stat_azimuth">Perfil proyección Brújula: %1$.1f</string>
-    <string name="stat_shot">Toma  %1$d,   Duplicada %2$d,   Superficie %3$d</string>
-    <string name="stat_splay">Toma secundaria %1$d</string>
+    <string name="stat_shot">Tomas  %1$d,   Duplicada %2$d,   Superficie %3$d</string>
+    <string name="stat_splay">Tomas laterales %1$d</string>
     <string name="stat_station">Estaciones %1$d</string>
     <string name="stat_surface">mediciones Superficie %1$d %2$.1f %3$s</string>
     <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]"</string>
-    <string name="stat_angle_error">Error de angulo %1$.2f ± %2$.2f"</string>
+    <string name="stat_angle_error">Error de ángulo %1$.2f ± %2$.2f"</string>
     <string name="shot_title">Toma %1$s - %2$s"</string>
     <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f"</string>
 
@@ -438,7 +438,7 @@
     <string name="distox_err_connected">Dispositivo conectado con éxito</string>
 
     <!-- UNUSED string name="ask_close">¿Cerrar TopoDroid?</string -->
-    <string name="ask_reset">¿Reiniciar memoria DistoX?</string>
+    <string name="ask_reset">¿Quiere reiniciar la memoria DistoX?</string>
     <!-- UNUSED string name="ask_close_survey">Â¿Cerrar Topografía?</string -->
     <string name="ask_gps_service">Establecer servicio de GPS?</string>
 
@@ -488,9 +488,9 @@
     <string name="mode_leg">Visuales</string>
     <string name="mode_splay">Laterales</string>
     <string name="mode_station">Estaciones</string>
-    <string name="mode_grid">Cuadriculas</string>
+    <string name="mode_grid">Cuadrículas</string>
     <string name="mode_fixed">Desplazar objetos</string>
-    <string name="mode_outline">Poligonal solo</string>
+    <string name="mode_outline">Solo Poligonal</string>
 
     <!-- UNUSED string name="remote_title">Control remoto del dispositivo</string -->
     <string name="remote_on">Láser ON</string>
@@ -530,7 +530,7 @@
     <string name="sketch_mode_single">Una sola toma</string>
     <string name="sketch_mode_ngbh">Tomas cercanas</string>
     <string name="sketch_mode_all">Todas las tomas</string>
-    <string name="sketch_delete">Eliminar modelo 3D ?</string>
+    <string name="sketch_delete">¿quieres eliminar modelo 3D?</string>
     <string name="sketch_no_split">Sin refinamiento. Disminución lateral máx. Longitud para refinar más.</string>
     <string name="clino">Clino [deg]</string>
 
@@ -706,7 +706,7 @@
     <string name="title_photo_comment">Comentario Foto</string>
     <string name="title_plot_save">Guardar dibujo como</string>
     <string name="title_plot_reload">Actualizar dibujo</string>
-    <string name="title_profile_flip">¿Quieres cambiar al perfil del dibujo?</string>
+    <string name="title_profile_flip">¿Quiere cambiar a alzado del dibujo?</string>
     <string name="title_projection">Perfil de proyeccción de brújula %1$d</string>
     <string name="title_refs">Referencias de dibujo</string>
     <string name="title_scraps">Dibujo</string>
@@ -838,8 +838,8 @@
   <string name="pref_text_size_message">Tamaño del texto de la lista</string>
   <string name="pref_closeness_title">Selección radio</string>
   <!-- UNUSED string name="pref_closeness_summary">Selección dibujo de elementos radio</string -->
-  <string name="pref_closeness_message">objetos de dibujo selección Radio</string>
-  <string name="pref_eraseness_title">goma de borrar de un radio</string>
+  <string name="pref_closeness_message">Objetos de dibujo selección Radio</string>
+  <string name="pref_eraseness_title">Goma de borrar del radio</string>
   <string name="pref_eraseness_message">Haz de cancelación de un elemento de diseño</string>
   <string name="pref_min_shift_title">Sensibilidad \' para el cambio</string>
   <string name="pref_min_shift_message">Sensibilidad \' para el cambio</string>
@@ -867,8 +867,8 @@
   <string name="pref_leg_message">Precisión entre las mediciones de una visual</string>
   <string name="pref_backsight_title">Toma duplicada visual</string>
   <string name="pref_backsight_summary">Se duplican los datos en el diálogo de la toma manual</string>
-  <string name="pref_prev_next_title">Prev/Next botón</string>
-  <string name="pref_prev_next_summary">PREV/NEXT botones en el diálogo de toma</string>
+  <string name="pref_prev_next_title">Añadir botón Ant./Sig.</string>
+  <string name="pref_prev_next_summary">Añadir botón ANT./SIG.en diálogo de toma</string>
   <string name="pref_mag_anomaly_title">Declinación magnética</string>
   <string name="pref_mag_anomaly_summary">Compensar declinación magnética local</string>
   <string name="pref_azimuth_manual_title">Toma extendida</string>
