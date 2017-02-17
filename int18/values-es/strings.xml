@@ -7,7 +7,7 @@
     <string name="double_back">Haga doble click para salir</string>
 
     <string name="version_ask">Usted va a actualizar a una nueva versión de topodroid.\n¿Quiere volver a instalar los elementos de dibujo?</string>
-    <string name="symbols_ask">Instalar herramientas de dibujo v.%1$s?\n(Current v.%2$s)</string>
+    <string name="symbols_ask">¿Quiere instalar herramientas de dibujo v.%1$s?\n(Current v.%2$s)</string>
 
     <string name="POINT">Punto</string>
     <string name="LINE">Línea</string>
@@ -99,8 +99,8 @@
     <string name="device_status_compass_off">Compass/clino: off</string>
     <string name="device_status_calib">Modo: calibración</string>
     <string name="device_status_normal">Modo: normal</string>
-    <string name="device_status_silent_on">Silencioso: on</string>
-    <string name="device_status_silent_off">Silencioso: off</string>
+    <string name="device_status_silent_on">Silenciar: on</string>
+    <string name="device_status_silent_off">Silenciar: off</string>
     <string name="bt_reset">Reinicio conexión bluetooth</string>
     <string name="save_as">Guardar como</string>
     <string name="nickname">Seudónimo</string>
