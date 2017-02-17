@@ -274,7 +274,7 @@
     <string name="menu_sync">Sincro</string>
     <!-- UNUSED string name="menu_tdr2th2">Dibujos Th2</string -->
     <string name="menu_validate">Validar</string>
-    <string name="menu_zoom_fit">Ajuste zoom</string>
+    <string name="menu_zoom_fit">Ajustar a pantalla</string>
 
     <string name="popup_join_pt">Unir al punto más cercano</string>
     <string name="popup_snap_ln">Ajustar a la línea más cercana</string>
