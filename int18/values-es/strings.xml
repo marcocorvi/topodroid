@@ -7,7 +7,7 @@
     <string name="double_back">Haga doble click para salir</string>
 
     <string name="version_ask">Usted va a actualizar a una nueva versión de topodroid.\n¿Quiere volver a instalar los elementos de dibujo?</string>
-    <string name="symbols_ask">¿Quiere instalar herramientas de dibujo v.%1$s?\n(Current v.%2$s)</string>
+    <string name="symbols_ask">¿Quiere instalar herramientas de dibujo v.%1$s?\n(Actualiza v.%2$s)</string>
 
     <string name="POINT">Punto</string>
     <string name="LINE">Línea</string>
@@ -401,7 +401,7 @@
     <string name="survey_info">Info Topografía</string>
     <!-- TODO string name="stat_stddev_m">M stddev %1$.1f %%</string -->
     <!-- TODO string name="stat_stddev_g">G stddev %1$.1f %%</string -->
-    <!-- TODO string name="stat_stddev_dip">Dip stddev %1$.1f deg. (average %2$.1f deg.)</string -->
+    <!-- TODO string name="stat_stddev_dip">Dip stddev %1$.1f deg. (promedio %2$.1f deg.)</string -->
     <string name="stat_component">Componentes %1$d</string>
     <string name="stat_depth">Profundidad %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Mediciones duplicadas %1$d %2$.1f %3$s</string>
