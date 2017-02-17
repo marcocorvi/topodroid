@@ -370,7 +370,7 @@
     <!-- UNUSED string name="station_base">Estación referencia</string -->
     <!-- UNUSED string name="station_next">Siguiente estación</string -->
     <!-- UNUSED string name="station_viewed">Vista de estación</string -->
-    <string name="survey_exists">Conflicto Nombre Topografía</string>
+    <string name="survey_exists">Nombre de Topografía ya existe</string>
     <!-- UNUSED string name="survey_date">yyyy.mm.dd</string -->
     <string name="survey_delete">¿Quiere eliminar la topografía?</string>
     <string name="survey_split">¿Quiere dividir la topografía?</string>
@@ -677,7 +677,7 @@
     <string name="help_refine_triangle">Refinar la superficie de todos los lados largos</string>
 
 
-    <string name="title_azimut">Extensión de referencia</string>
+    <string name="title_azimut">Referencia declinación Magnética</string>
     <string name="title_calib">Calibración</string>
     <string name="title_coverage">Distibución datos Calibración</string>
     <string name="title_coeff">Coeficiente Calibración</string>
@@ -832,19 +832,19 @@
   <!-- UNUSED string name="pref_cwd_summary">Directorio principal TopoDroid</string -->
   <!-- UNUSED string name="pref_cwd_message">Introducir el directorio principal TopoDroid</string -->
   <string name="pref_pt_color_map_title">PocketTopo color mapa</string>
-  <string name="pref_pt_color_map_summary">Mapa de colores PocketTopo (importación PocketTopo)</string>
+  <string name="pref_pt_color_map_summary">Mapa de colores PocketTopo (Importación PocketTopo)</string>
   <string name="pref_text_size_title">Tamaño del texto de la lista</string>
   <string name="pref_text_size_summary">Tamaño del texto de las visuales</string>
   <string name="pref_text_size_message">Tamaño del texto de la lista</string>
-  <string name="pref_closeness_title">Selección radio</string>
+  <string name="pref_closeness_title">Selección nodo</string>
   <!-- UNUSED string name="pref_closeness_summary">Selección dibujo de elementos radio</string -->
   <string name="pref_closeness_message">Objetos de dibujo selección Radio</string>
-  <string name="pref_eraseness_title">Goma de borrar del radio</string>
+  <string name="pref_eraseness_title">Tamaño goma de borrar</string>
   <string name="pref_eraseness_message">Haz de cancelación de un elemento de diseño</string>
-  <string name="pref_min_shift_title">Sensibilidad \' para el cambio</string>
-  <string name="pref_min_shift_message">Sensibilidad \' para el cambio</string>
-  <string name="pref_pointing_title">Orientación Radio</string>
-  <string name="pref_pointing_message">Orientación del radio</string>
+  <string name="pref_min_shift_title">Sensibilidad pantalla</string>
+  <string name="pref_min_shift_message">Sensibilidad para mover dibujo</string>
+  <string name="pref_pointing_title">Orientación nodo</string>
+  <string name="pref_pointing_message">Orientación del nodo</string>
   <string name="pref_vert_splay_title">Límite de trazos del borde</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Límite de trazos del borde</string -->
   <string name="pref_vert_splay_message">Límite de trazos del borde</string>
@@ -956,9 +956,9 @@
   <string name="pref_arrow_length_title">Corte seccional</string>
   <!-- UNUSED string name="pref_arrow_length_summary">tamaño de la línea del corte de sección</string -->
   <string name="pref_arrow_length_message">tamaño de la línea del corte de sección</string>
-  <string name="pref_dot_radius_title">Puntos del radio</string>
+  <string name="pref_dot_radius_title">Puntos de nodo</string>
   <!-- UNUSED string name="pref_dot_radius_summary">Tamaño de los puntos verdes</string -->
-  <string name="pref_dot_radius_message">Tamaño de los puntos verdes</string>
+  <string name="pref_dot_radius_message">Tamaño de los puntos verdes (Nodos)</string>
   <string name="pref_line_thickness_title">Grosor de la línea</string>
   <string name="pref_line_thickness_summary">Grosor de la línea</string>
   <string name="pref_line_thickness_message">Grosor de la línea</string>
@@ -1036,7 +1036,7 @@
   <string name="pref_unit_location_title">Unidades de Posicionamiento</string>
   <string name="pref_unit_location_summary">Visualizar unidades de Posicionamiento</string>
 
-  <string name="pref_plot_walls_title">Paredes automaticas</string>
+  <string name="pref_plot_walls_title">Paredes automáticas</string>
   <string name="pref_walls_type_title">Tipo de pared</string>
   <string name="pref_walls_type_summary">Tipo de paredes</string>
   <string name="pref_walls_plan_thr_title">inclinación tomas laterales</string>
