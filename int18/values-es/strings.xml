@@ -970,7 +970,7 @@
   <!-- UNUSED string name="pref_device_message">Nombre dirección DistoX</string -->
   <string name="pref_checkBT_title">Bluetooth</string>
   <string name="pref_checkBT_summary">Bluetooth encendido/apagado </string>
-  <string name="pref_checkAttached_title">Comprobación de la poligonal principal</string>
+  <string name="pref_checkAttached_title">Verificar poligonal</string>
   <string name="pref_checkAttached_summary">Compruebe si se adjunta la estación</string>
   <string name="pref_backup_number_title">Número de copias de seguridad</string>
   <string name="pref_backup_number_summary">Número de copias de seguridad de los archivos de dibujo</string>
@@ -998,7 +998,7 @@
   <string name="pref_station_size_title">Tamaño de la etiqueta de la estación</string>
   <string name="pref_station_size_summary">Tamaño de la etiqueta de la estación</string>
   <string name="pref_station_size_message">Tamaño de la etiqueta de la estación</string>
-  <string name="pref_zoom_controls_title">Control de Zoom</string>
+  <string name="pref_zoom_controls_title">Visualizar botón del Zoom</string>
   <string name="pref_zoom_controls_summary">Control de Zoom multitouch</string>
   <string name="pref_side_drag_title">Arrastre lateral</string>
   <string name="pref_side_drag_summary">Habilitar el lado y arrastre en la ventana de dibujo</string>
