@@ -763,7 +763,7 @@
   <string name="pref_size_buttons_summary">Tamaño de los botones de la barra</string>
   <!-- UNUSED string name="pref_size_buttons_message">Introduzca el tamaño de los botones de la barra [pixels]</string -->
 
-  <string name="pref_leg_shots_title">Toma visual</string>
+  <string name="pref_leg_shots_title">Repeticiones de una visual</string>
   <string name="pref_leg_shots_summary">Número mínimo de tomas por visual</string>
   <string name="pref_station_prefix_title">Prefijo estación de exportación</string>
   <string name="pref_station_prefix_summary">Prefijo estación de exportación cSurvey</string>
