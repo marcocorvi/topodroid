@@ -205,7 +205,7 @@
     <string name="barrier_del">Mostrar as visadas seguintes</string>
     <string name="hidden_add">Esconder as visadas anteriores</string>
     <string name="hidden_del">Mostrar as visadas anteriores</string>
-    <string name="splays_toggle">Alternar exibição das medidas auxiliares (EDTC)</string>
+    <string name="splays_toggle">Alternar exibição das medidas auxiliares</string>
     <string name="fixed">fixa</string>
     <string name="painted">pintada</string>
 
@@ -422,7 +422,7 @@
     <string name="hide_blank">Medidas vazias</string>
     <string name="hide_leg">Visadas repetidas</string>
     <string name="hide_ids">IDs das medidas</string>
-    <string name="hide_splay">Medidas auxiliares (EDTC)</string>
+    <string name="hide_splay">Medidas auxiliares</string>
 
     <string name="plan">PLANTA</string>
     <string name="extended">RETIFICADO</string>
