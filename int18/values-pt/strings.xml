@@ -323,8 +323,8 @@
     <string name="saving_file_failed">Falha ao salvar o arquivo</string>
     <!-- UNUSED string name="scrap_name">nome do croqui</string -->
     <string name="splay">visada auxiliar</string>
-    <string name="too_many_leg_intersection">A linha de corte cruza visadas demais</string>
-    <string name="too_many_legs_xsection">Visadas demais para um corte X</string>
+    <string name="too_many_leg_intersection">A linha de corte cruza mais de uma linha de visada.</string>
+    <string name="too_many_legs_xsection">Corte X em bases com visadas para mais de 2 outras bases não é suportado.</string>
     <!-- UNUSED string name="converted_tdr2th2">Arquivos binários dos croquis convertidos para th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Sobrescrever arquivos de croqui th2?</string -->
     <string name="section_area">Área do corte: %1$.1f</string>
