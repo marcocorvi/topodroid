@@ -42,8 +42,8 @@
     <!-- UNUSED string name="missing_symbols">Faltan símbolos. \n¿Desea guardar de todos modos?</string -->
     <!-- UNUSED string name="missing_title">Faltan símbolos</string -->
     <!-- UNUSED string name="missing_warning">Faltan los siguientes símbolos en el dibujo.\n</string -->
-    <string name="failed_snap_to_line">Ninguna línea cercana al borde</string>
-    <string name="failed_snap_to_point">Nigún punto cercano al borde</string>
+    <string name="failed_snap_to_line">No hay línea cercana al borde</string>
+    <string name="failed_snap_to_point">No hay punto cercano al borde</string>
 
     <string name="calibration_title">Calibración de instrumentos</string>
     <string name="calibration_length">Cinta</string>
@@ -168,7 +168,7 @@
     <string name="error_azimuth_required">Introducir rumbo</string>
     <string name="error_length_required">Introducir Longitud</string>
     <string name="error_clino_required">Introducir Clino</string>
-    <string name="error_comment_required">Requiere comentario</string>
+    <string name="error_comment_required">Introducir comentario</string>
     <string name="error_begin_required">Introducir dirección de inicio</string>
     <string name="error_declination_number">La declinación debe ser un número</string>
     <string name="error_end_required">Introducir dirección final</string>
@@ -440,7 +440,7 @@
     <!-- UNUSED string name="ask_close">¿Cerrar TopoDroid?</string -->
     <string name="ask_reset">¿Quiere reiniciar la memoria DistoX?</string>
     <!-- UNUSED string name="ask_close_survey">Â¿Cerrar Topografía?</string -->
-    <string name="ask_gps_service">Establecer servicio de GPS?</string>
+    <string name="ask_gps_service">¿Quiere establecer el servicio de GPS?</string>
 
     <string name="button_add"       >Añadir    </string>
     <string name="button_back"      >Atrás     </string>
@@ -490,7 +490,7 @@
     <string name="mode_station">Estaciones</string>
     <string name="mode_grid">Cuadrículas</string>
     <string name="mode_fixed">Desplazar objetos</string>
-    <string name="mode_outline">Solo Poligonal</string>
+    <string name="mode_outline">Solo poligonal</string>
 
     <!-- UNUSED string name="remote_title">Control remoto del dispositivo</string -->
     <string name="remote_on">Láser ON</string>
@@ -530,7 +530,7 @@
     <string name="sketch_mode_single">Una sola toma</string>
     <string name="sketch_mode_ngbh">Tomas cercanas</string>
     <string name="sketch_mode_all">Todas las tomas</string>
-    <string name="sketch_delete">¿quieres eliminar modelo 3D?</string>
+    <string name="sketch_delete">¿Quiere eliminar modelo 3D?</string>
     <string name="sketch_no_split">Sin refinamiento. Disminución lateral máx. Longitud para refinar más.</string>
     <string name="clino">Clino [deg]</string>
 
@@ -593,7 +593,7 @@
     <string name="help_display">Seleccione modo de visualización</string>
     <string name="help_display_calib">Cambiar a pantalla de tomas eliminadas</string>
     <string name="help_validate">Validar la calibración</string>
-    <string name="help_overview">Actividad general</string>
+    <string name="help_overview">Editar medición</string>
     <string name="help_plot">Introducir datos en dibujo</string>
     <string name="help_note">Editar notas Topografía</string>
     <string name="help_bluetooth">Reinicio conexión bluetooth</string>
@@ -611,7 +611,7 @@
     <string name="help_refs">Opciones de visualización del dibujo</string>
     <string name="help_rename">Cambio nombre topografía</string>
     <string name="help_plot_rename">Eliminar/Renombrar dibujo</string>
-    <string name="help_plot_switch">Activación croquis</string>
+    <string name="help_plot_switch">Activación dibujo</string>
     <string name="help_stats">Estadísticas de Topografía</string>
     <string name="help_save_plot">Exportar dibujo</string>
     <!-- UNUSED string name="help_tdr2th2">Convertir archivos binarios de dibujo a th2</string -->
@@ -620,7 +620,7 @@
     <string name="help_undo">Deshacer última acción de dibujo</string>
     <string name="help_redo">Rehacer última acción de dibujo</string>
     <string name="help_symbol_plot">Seleccionar el símbolos</string>
-    <string name="help_delete_item">Eliminar simbolos del dibujo</string>
+    <string name="help_delete_item">Eliminar símbolos del dibujo</string>
     <string name="help_range">Mover una parte de la línea</string>
     <!-- UNUSED string name="help_clear">Borrar selección</string -->
     <string name="help_eraser">Borrar dibujo</string>
@@ -640,13 +640,13 @@
     <string name="help_note_plot">Editar propiedades del elemento de dibujo</string>
     <!-- UNUSED string name="help_save">Guardar cambios de la Topografía o calibración</string -->
     <string name="help_save_calib">Guardar cambios en la información de calibración</string>
-    <string name="help_export_survey">Exportar Topografía</string>
+    <string name="help_export_survey">Exportar topografía</string>
     <string name="help_loc">Posicionamiento GPS</string>
-    <string name="help_delete_survey">Eliminar Topografía</string>
+    <string name="help_delete_survey">Eliminar topografía</string>
     <string name="help_delete_calib">Eliminar calibración</string>
     <string name="help_detach">Eliminar el DistoX seleccionado en la lista</string>
     <string name="help_firmware">Actualización del firmware de DistoX2 </string>
-    <string name="help_toggle">Cambiar DistoX a modo: Calibración/normal</string>
+    <string name="help_toggle">Cambiar DistoX a modo: Calibración/Normal</string>
     <string name="help_sdcard">Funciones de memoria DistoX</string>
     <string name="help_read">Descargar calibración de DistoX</string>
     <string name="help_info_device">Información del dispositivo</string>
@@ -697,7 +697,7 @@
     <string name="title_fixed_edit">Punto de edición</string>
     <string name="title_fixed_import">Punto de importación fijado</string>
     <string name="title_fixed_gps">Punto fijo: GPS</string>
-    <string name="title_fixed_add">Punto fijo: insert</string>
+    <string name="title_fixed_add">Punto fijo: insertar</string>
     <string name="title_manual">Manual Usuario TopoDroid</string>
     <string name="title_mode">Modo de visualización</string>
     <string name="title_move">Mover</string>
@@ -723,9 +723,9 @@
 
     <string name="title_stats">Estadísticas</string>
     <string name="title_step">Medida</string>
-    <string name="title_survey">Info Topografía</string>
+    <string name="title_survey">Info. topografía</string>
     <string name="title_survey_new">Nueva topografía</string>
-    <string name="title_survey_export">Exportar Topografías</string>
+    <string name="title_survey_export">Exportar topografías</string>
     <string name="title_survey_rename">Renombrar topografía como&#8230;</string>
     <string name="title_plot_rename">Cambiar el nombre topografía</string>
     <string name="title_calib_export">Exportar topografía como&#8230;</string>
@@ -741,7 +741,7 @@
 
 
   <string name="pref_locale_title">Idioma</string>
-  <string name="pref_locale_summary">Idioma</string>
+  <string name="pref_locale_summary">Seleccione idioma</string>
 
   <string name="pref_raw_data_title">Datos sin procesar</string>
   <string name="pref_raw_data_summary">Mostrar datos sin procesar</string>
@@ -770,7 +770,7 @@
   <string name="pref_trobot_names_title">TopoRobot Nombres de estaciones</string>
   <string name="pref_trobot_names_summary">Los nombres de las estaciones están en el estilo TopoRobot</string>
   <string name="pref_ortho_lrud_title">LRUD ángulo de apertura</string>
-  <string name="pref_ortho_lrud_summary">Ángulo mínimo para tomas laterales</string>
+  <string name="pref_ortho_lrud_summary">Ángulo tomas laterales</string>
   <string name="pref_ortho_lrud_message">Ángulo mínimo de tomas laterales</string>
   <string name="pref_survex_eol_title">Terminación de línea Survex/Topo</string>
   <string name="pref_survex_eol_summary">Terminación de línea Survex/Topo</string>
@@ -833,14 +833,14 @@
   <!-- UNUSED string name="pref_cwd_message">Introducir el directorio principal TopoDroid</string -->
   <string name="pref_pt_color_map_title">PocketTopo color mapa</string>
   <string name="pref_pt_color_map_summary">Mapa de colores PocketTopo (Importación PocketTopo)</string>
-  <string name="pref_text_size_title">Tamaño del texto de la lista</string>
+  <string name="pref_text_size_title">Tamaño del texto</string>
   <string name="pref_text_size_summary">Tamaño del texto de las visuales</string>
   <string name="pref_text_size_message">Tamaño del texto de la lista</string>
   <string name="pref_closeness_title">Selección nodo</string>
   <!-- UNUSED string name="pref_closeness_summary">Selección dibujo de elementos radio</string -->
   <string name="pref_closeness_message">Sensibilidad para seleccionar punto verde (nodo)</string>
   <string name="pref_eraseness_title">Tamaño goma de borrar</string>
-  <string name="pref_eraseness_message">Haz de cancelación de un elemento de diseño</string>
+  <string name="pref_eraseness_message">Introduce el tamaño de la goma de borrar</string>
   <string name="pref_min_shift_title">Sensibilidad pantalla</string>
   <string name="pref_min_shift_message">Sensibilidad para mover dibujo</string>
   <string name="pref_pointing_title">Orientación nodo</string>
@@ -868,14 +868,14 @@
   <string name="pref_backsight_title">Toma duplicada visual</string>
   <string name="pref_backsight_summary">Se duplican los datos en el diálogo de la toma manual</string>
   <string name="pref_prev_next_title">Añadir botón Ant./Sig.</string>
-  <string name="pref_prev_next_summary">Añadir botón ANT./SIG.en diálogo de toma</string>
+  <string name="pref_prev_next_summary">Añade un botón Anterior/Sguiente en diálogo de toma</string>
   <string name="pref_mag_anomaly_title">Declinación magnética</string>
   <string name="pref_mag_anomaly_summary">Compensar declinación magnética local</string>
   <string name="pref_azimuth_manual_title">Toma extendida</string>
   <string name="pref_azimuth_manual_summary">fijas o con relación a la referencia extendida</string>
 
   <string name="pref_team_title">Equipo</string>
-  <string name="pref_team_summary">Equipo de Topógrafos</string>
+  <string name="pref_team_summary">Equipo de topógrafos</string>
   <string name="pref_team_message">Equipo de topógrafos por defecto</string>
 
   <string name="pref_ethr_title">Precisión toma lateral</string>
@@ -883,7 +883,7 @@
   <string name="pref_ethr_message">Cálculo del límite de la toma lateral</string>
   <string name="pref_vthr_title">Precisión toma vertical</string>
   <string name="pref_vthr_summary">Cáculo del límite de la toma vertical</string>
-  <string name="pref_vthr_message">límite visual vertical por LRUD/WENS</string>
+  <string name="pref_vthr_message">Límite visual vertical por LRUD/WENS</string>
 
   <string name="pref_plan_vthr_title">Límite visual vertical</string>
   <!-- UNUSED string name="pref_plan_vthr_summary">Límite vertical de la visual en planta</string -->
