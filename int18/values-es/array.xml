@@ -41,7 +41,7 @@
      <item name="none">Nada</item>
      <item name="therion">Therion</item>
      <item name="compass">Compass</item>
-     <item name="csurvey">cSurvey</item>
+     <item name="csurvey">CSurvey</item>
      <item name="grottolf">Grottolf</item>
      <item name="pockettopo">PocketTopo</item>
      <item name="polygon">Polygon</item>
@@ -170,9 +170,9 @@
   </string-array>
 
   <string-array name="calibAlgo">
-     <item name="auto">auto</item>
-     <item name="linear">lineal</item>
-     <item name="nonlinear">no lineal</item>
+     <item name="auto">Auto</item>
+     <item name="linear">Lineal</item>
+     <item name="nonlinear">No lineal</item>
   </string-array>
 
   <string-array name="rawCData">
