@@ -24,12 +24,12 @@
     <string name="memoryX310">Memoria DistoX X310</string>
     <!-- UNUSED string name="memory_data">Datos DistoX</string -->
 
-    <string name="thp_user">usuario</string>
+    <string name="thp_user">Usuario</string>
     <string name="thp_label">Texto</string>
     <!-- UNUSED string name="thp_danger">Peligro</string -->
-    <string name="thl_user">usuario</string>
+    <string name="thl_user">Usuario</string>
     <string name="thl_wall">Pared</string>
-    <string name="tha_user">usuario</string>
+    <string name="tha_user">Usuario</string>
     <string name="tha_water">Agua</string>
 
     <string name="make_walls">Paredes</string>
@@ -76,8 +76,8 @@
     <string name="calib_reset">¿Quiere restablecer la calibración DistoX?</string>
 
     <string name="algorithm">Algoritmo:</string>
-    <string name="auto">auto</string>
-    <string name="linear">lineal</string>
+    <string name="auto">Auto</string>
+    <string name="linear">Lineal</string>
     <string name="non_linear">No lineal</string>
     <!-- NO string name="algo_minimum">minimum</string -->
    
@@ -85,7 +85,7 @@
     <string name="device_address">Dirección %1$s</string>
     <string name="device_busy">Dispositivo ocupado</string>
     <string name="device_illegal_addr">Dirección de memoria no válida</string>
-    <string name="device_info">información del dispositivo</string>
+    <string name="device_info">Información del dispositivo</string>
     <string name="device_model_set">¿Quiere cambiar de dispositivo?</string>
     <string name="device_none">DistoX no seleccionado</string>
     <!-- UNUSED string name="device_paired">El dispositivo está emparejado</string -->
@@ -113,7 +113,7 @@
     <!-- UNUSED string name="surface">Superficie</string -->
     <!-- UNUSED string name="extend">ampliar</string -->
     <!-- UNUSED string name="extend_ignore">Ninguna</string -->
-    <string name="extend_left">izq.</string>
+    <string name="extend_left">Izq.</string>
     <string name="extend_right">Drch.</string>
     <string name="extend_vert">Vert.</string>
     <!-- UNUSED string name="external_prompt">Introducir medición</string -->
@@ -394,7 +394,7 @@
     <string name="zip_failed">Error al archivar Topografía</string>
     <string name="unzip_fail">Error al importar archivo</string>
     <string name="unzip_fail_survey">Error: El nombre de la topo no coincide</string>
-    <string name="unzip_fail_db">Error: la versión de base de datos no coincide</string>
+    <string name="unzip_fail_db">Error: La versión de base de datos no coincide</string>
     <string name="unzip_fail_td">Error: Versión TopoDroid no coincide</string>
     <!-- UNUSED string name="zoom_in_out">Zoom aumentar/disminuir</string -->
 
@@ -534,10 +534,10 @@
     <string name="sketch_no_split">Sin refinamiento. Disminución lateral máx. Longitud para refinar más.</string>
     <string name="clino">Clino [deg]</string>
 
-    <string name="orientation">orientación</string>
-    <string name="contents">contenido</string>
-    <string name="error_distribution">error distribucción</string>
-    <string name="angle_distribution">distribucción angular</string>
+    <string name="orientation">Orientación</string>
+    <string name="contents">Contenido</string>
+    <string name="error_distribution">Error distribucción</string>
+    <string name="angle_distribution">Distribucción angular</string>
 
     <!-- UNUSED string name="btn_head">head</string -->
     <!-- UNUSED string name="btn_stretch">Stretch</string -->
@@ -933,7 +933,7 @@
   <string name="pref_lineacc_summary">Precisión Bezier interpolación cúbica</string>
   <string name="pref_lineacc_message">Precisión Bezier interpolación cúbica</string>
   <string name="pref_linecorner_title">Ángulo Bezier</string>
-  <string name="pref_linecorner_summary">límite de la ángulo de línea Bezier</string>
+  <string name="pref_linecorner_summary">Límite de la ángulo de línea Bezier</string>
   <string name="pref_linecorner_message">Detección del límite del ángulo de línea Bezier</string>
   <string name="pref_calib_algo_title">Algoritmo</string>
   <string name="pref_calib_algo_summary">Algoritmo Calibración</string>
@@ -955,7 +955,7 @@
   <string name="pref_label_size_message">Tamaño del texto</string>
   <string name="pref_arrow_length_title">Corte seccional</string>
   <!-- UNUSED string name="pref_arrow_length_summary">tamaño de la línea del corte de sección</string -->
-  <string name="pref_arrow_length_message">tamaño de la línea del corte de sección</string>
+  <string name="pref_arrow_length_message">Tamaño de la línea del corte de sección</string>
   <string name="pref_dot_radius_title">Puntos de nodo</string>
   <!-- UNUSED string name="pref_dot_radius_summary">Tamaño de los puntos verdes</string -->
   <string name="pref_dot_radius_message">Tamaño de los puntos verdes (Nodos)</string>
@@ -1074,7 +1074,7 @@
   <string name="pref_log_bezier">Curvas Bézier</string>
   <string name="pref_log_calib">Calibración</string>
   <string name="pref_log_comm">Communicación BT</string>
-  <string name="pref_log_csurvey">cSurvey</string>
+  <string name="pref_log_csurvey">CSurvey</string>
   <string name="pref_log_data">Datos</string>
   <string name="pref_log_db">Base de datos</string>
   <string name="pref_log_debug">Depurar</string>
@@ -1084,7 +1084,7 @@
   <string name="pref_log_fixed">Puntos fijos</string>
   <string name="pref_log_input">Entrada usuario</string>
   <string name="pref_log_loc">Posicionamiento</string>
-  <string name="pref_log_num">reducción de datos</string>
+  <string name="pref_log_num">Reducción de datos</string>
   <string name="pref_log_photo">Foto</string>
   <string name="pref_log_plot">Dibujo</string>
   <string name="pref_log_proto">Protocolo DistoX</string>
