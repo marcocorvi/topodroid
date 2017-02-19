@@ -254,9 +254,9 @@
     <string name="menu_firmware">Firmware</string>
     <string name="menu_recover">Tomas eliminadas</string>
     <string name="menu_reload">Importar</string>
-    <string name="menu_rename_delete">Renombrar/Eliminar</string>
+    <string name="menu_rename_delete">Eliminar/Renombrar</string>
     <string name="menu_rename">Renombrar</string>
-    <string name="menu_switch">Cambiar/Cerrar</string>
+    <string name="menu_switch">Cerrar/Cambiar</string>
     <string name="menu_help">Ayuda</string>
     <string name="menu_join_survey">Unir topografías</string>
     <string name="menu_logs">Registros</string>
@@ -610,7 +610,7 @@
     <string name="help_edit">Seleccionar modo de edición</string>
     <string name="help_refs">Opciones de visualización del dibujo</string>
     <string name="help_rename">Cambio nombre topografía</string>
-    <string name="help_plot_rename">Renombrar/Eliminar dibujo</string>
+    <string name="help_plot_rename">Eliminar/Renombrar dibujo</string>
     <string name="help_plot_switch">Activación croquis</string>
     <string name="help_stats">Estadísticas de Topografía</string>
     <string name="help_save_plot">Exportar dibujo</string>
@@ -639,7 +639,7 @@
     <string name="help_manual_calibration">Manual instrumentos calibración</string>
     <string name="help_note_plot">Editar propiedades del elemento de dibujo</string>
     <!-- UNUSED string name="help_save">Guardar cambios de la Topografía o calibración</string -->
-    <string name="help_save_calib">Save changes to calibration info</string>
+    <string name="help_save_calib">Guardar cambios en la información de calibración</string>
     <string name="help_export_survey">Exportar Topografía</string>
     <string name="help_loc">Posicionamiento GPS</string>
     <string name="help_delete_survey">Eliminar Topografía</string>
