@@ -1,0 +1,33 @@
+symbol point
+name stalagmites
+name-pt estalagmites
+th_name stalagmites
+orientation no
+color 0xccff66
+csurvey 6 6 80
+path
+  moveTo -8 8
+  lineTo -6 6
+  lineTo -4 8
+  moveTo -6 6
+  lineTo -6 0
+
+  moveTo -4 4
+  lineTo -2 2
+  lineTo 0 4
+  moveTo -2 2
+  lineTo -2 -4
+
+  moveTo 0 8
+  lineTo 2 6
+  lineTo 4 8
+  moveTo 2 6
+  lineTo 2 0
+
+  moveTo 4 4
+  lineTo 6 2
+  lineTo 8 4
+  moveTo 6 2
+  lineTo 6 -4
+endpath
+endsymbol
