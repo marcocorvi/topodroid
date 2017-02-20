@@ -920,11 +920,11 @@
   <string name="pref_linestyle_title">Estilo linha</string>
   <string name="pref_linestyle_summary">Estilo de desenho da linha</string>
   <string name="pref_lineacc_title">Precisão interpolação</string>
-  <string name="pref_lineacc_summary">Precisão da interpolação Bezier</string>
-  <string name="pref_lineacc_message">Exatidão da interpolação cúbica das curvas Bezier</string>
-  <string name="pref_linecorner_title">Limite quinas Bezier</string>
-  <string name="pref_linecorner_summary">Limite das quinas Bezier</string>
-  <string name="pref_linecorner_message">Limite para detecção de quinas nas curvas Bezier</string>
+  <string name="pref_lineacc_summary">Precisão da interpolação Bézier</string>
+  <string name="pref_lineacc_message">Exatidão da interpolação cúbica das curvas Bézier</string>
+  <string name="pref_linecorner_title">Limite quinas Bézier</string>
+  <string name="pref_linecorner_summary">Limite das quinas Bézier</string>
+  <string name="pref_linecorner_message">Limite para detecção de quinas nas curvas Bézier</string>
   <string name="pref_calib_algo_title">Algoritmo</string>
   <string name="pref_calib_algo_summary">Algoritmo de calibração</string>
   <string name="pref_group_by_title">Regra agrupamento</string>
@@ -1061,7 +1061,7 @@
   <string name="pref_log_stream_summary">Fluxo do log de saída</string>
   <string name="pref_log_stream_title">Fluxo do log</string>
   <string name="pref_log_bt">Bluetooth</string>
-  <string name="pref_log_bezier">Curvas Bezier</string>
+  <string name="pref_log_bezier">Curvas Bézier</string>
   <string name="pref_log_calib">Calibração</string>
   <string name="pref_log_comm">Comunicação BT</string>
   <string name="pref_log_csurvey">cSurvey</string>
@@ -1087,7 +1087,7 @@
   <string name="pref_log_units">Unidades</string>
   <string name="pref_log_zip">ZIP</string>
 
-  <!-- UNUSED string name="line_bezier">Bezier</string -->
+  <!-- UNUSED string name="line_bezier">Bézier</string -->
   <!-- UNUSED string name="line_fine">fino</string -->
   <!-- UNUSED string name="line_normal">normal</string -->
   <!-- UNUSED string name="line_coarse">grosseiro</string -->
