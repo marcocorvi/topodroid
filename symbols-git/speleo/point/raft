@@ -1,0 +1,12 @@
+symbol point
+name raft
+name-pt jangada
+th_name raft
+orientation no
+color 0xccff66
+csurvey 6 6 80
+path
+  moveTo -5 0
+  cubicTo -3 4 3 -4 5 0
+endpath
+endsymbol
