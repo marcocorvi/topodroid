@@ -1,6 +1,7 @@
 symbol point
 name raftcone
 name-pt cone_de_jangadas
+name-ru конус_рафтовый
 th_name raftcone
 orientation no
 color 0xccff66

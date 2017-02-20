@@ -1,6 +1,7 @@
 symbol point
 name stalagmites
 name-pt estalagmites
+name-ru сталагмиты
 th_name stalagmites
 orientation no
 color 0xccff66

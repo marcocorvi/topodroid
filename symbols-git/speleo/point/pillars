@@ -1,6 +1,7 @@
 symbol point
 name pillars
 name-pt colunas
+name-ru колонны
 th_name pillars
 orientation no
 color 0xccff66
