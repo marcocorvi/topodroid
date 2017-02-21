@@ -89,11 +89,11 @@ public class SurveyStatDialog extends MyDialog
       float d = TDSetting.mDipThr/20;
       Log.v("DistoX", "G " + g + " M " + m + " D " + d );
       histG.setImageBitmap( makeHistogramBitmap( mStat.G, mStat.nrMGD, mStat.averageG, g,
-                            400, 100, 40, 0xff6699ff ) );
+                            400, 100, 40, TDColor.BLUE ) );
       histM.setImageBitmap( makeHistogramBitmap( mStat.M, mStat.nrMGD, mStat.averageM, m,
-                            400, 100, 40, 0xff6699ff ) );
+                            400, 100, 40, TDColor.BLUE ) );
       histD.setImageBitmap( makeHistogramBitmap( mStat.D, mStat.nrMGD, mStat.averageD, d,
-                            400, 100, 40, 0xff6699ff ) );
+                            400, 100, 40, TDColor.BLUE ) );
 
       mBtnBack = (Button) findViewById(R.id.btn_back);
       mBtnBack.setOnClickListener( this );
@@ -149,14 +149,12 @@ public class SurveyStatDialog extends MyDialog
     int max = 1; // histogram max
     for ( int k=0; k<bbin; ++k ) if ( hist[k] > max ) max = hist[k];
 
-    int red   = 0xffff0000;
-    int white = 0xffffffff;
     int joff = hh-10;
     int dx   = (int)( ww / bbin ); 
     if ( dx*20 >= ww ) dx --;
     int x, y;
     for ( int k=0; k<bbin; ++ k ) {
-      int brd = ( k == bin )? red : white;
+      int brd = ( k == bin )? TDColor.FIXED_RED : TDColor.WHITE;
       int h = (int)((joff * hist[k]) / max);
       x  = dx * k;
       for ( y=joff-h; y <= joff; ++y ) bitmap.setPixel( x, y, brd );
@@ -170,27 +168,27 @@ public class SurveyStatDialog extends MyDialog
       for ( y=joff-h; y <= joff; ++y ) bitmap.setPixel( x, y, brd );
     }
     for ( y = 0; y < hh; ++y ) {
-      bitmap.setPixel( (bin/2)*dx, y, 0xffffff00 );
-      bitmap.setPixel( (bin+1+bin/2)*dx, y, 0xffffff00 );
+      bitmap.setPixel( (bin/2)*dx, y, TDColor.YELLOW );
+      bitmap.setPixel( (bin+1+bin/2)*dx, y, TDColor.YELLOW );
     }
-    for ( x = 0; x < ww; ++x ) bitmap.setPixel( x, joff, red );
+    for ( x = 0; x < ww; ++x ) bitmap.setPixel( x, joff, TDColor.FIXED_RED );
     // for ( int k = 5; k <= bin; k+=5 ) {
     //   x  = ioff + dx * k;
     //   int yy = hh - ( ((k%10) == 0 )? 0 : 5 );
-    //   for ( y = joff; y < yy; ++y ) bitmap.setPixel( x, y, red );
+    //   for ( y = joff; y < yy; ++y ) bitmap.setPixel( x, y, TDColor.FIXED_RED );
     // }
     // if ( 5  <= bin ) {
     //   x  = ioff + dx * 5;
-    //   for ( y = 0; y < joff; ++y ) bitmap.setPixel( x, y, 0xffffff00 );
+    //   for ( y = 0; y < joff; ++y ) bitmap.setPixel( x, y, TDColor.YELLOW );
     // }
     // if ( 10  <= bin ) {
     //   x  = ioff + dx * 10;
-    //   for ( y = 0; y < joff; ++y ) bitmap.setPixel( x, y, 0xffff0000 );
+    //   for ( y = 0; y < joff; ++y ) bitmap.setPixel( x, y, TDColor.FIXED_RED );
     // }
     // for ( int k = 10; ; k += 10 ) {
     //   y = joff - step * k;
     //   if ( y < 0 ) break;
-    //   for ( x = 5; x < ioff; ++x ) bitmap.setPixel( x, y, red );
+    //   for ( x = 5; x < ioff; ++x ) bitmap.setPixel( x, y, TDColor.FIXED_RED );
     // }
       
     // Log.v("DistoX", "fill image done");

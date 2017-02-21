@@ -14,7 +14,7 @@ package com.topodroid.DistoX;
 import android.content.Context;
 
 import android.graphics.Paint;
-import android.graphics.Color;
+// import android.graphics.Color;
 import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.Matrix;
@@ -52,7 +52,7 @@ public class ItemButton extends Button
 
   private void setDefault()
   {
-    setBackgroundColor( Color.BLACK );
+    setBackgroundColor( TDColor.BLACK );
     setPadding(5, 5, 5, 5 );
     mPath  = null;
     mPaint = null;
@@ -61,7 +61,7 @@ public class ItemButton extends Button
   public ItemButton(Context context, Paint paint, Path path, float sx, float sy )
   {
     super(context);
-    setBackgroundColor( Color.BLACK );
+    setBackgroundColor( TDColor.BLACK );
     setPadding(5, 5, 5, 5 );
     reset( paint, path, sx, sy );
   }

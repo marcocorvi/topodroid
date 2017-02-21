@@ -1184,7 +1184,7 @@ public class TopoDroidApp extends Application
   // =======================================================
   StationName mStationName;
 
-  void setCurrentStationName( String name ) { mStationName.setCurrentStationName( name ); }
+  boolean setCurrentStationName( String name ) { return mStationName.setCurrentStationName( name ); }
   String getCurrentStationName() { return mStationName.getCurrentStationName(); }
   boolean isCurrentStationName( String name ) { return mStationName.isCurrentStationName( name ); }
   void clearCurrentStations() { mStationName.clearCurrentStations(); }

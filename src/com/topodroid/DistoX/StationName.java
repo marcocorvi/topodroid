@@ -22,13 +22,14 @@ class StationName
   // current station(s)
   private String mCurrentStationName = null;
 
-  void setCurrentStationName( String name ) 
+  boolean setCurrentStationName( String name ) 
   { 
     if ( name == null || name.equals(mCurrentStationName) ) {
       mCurrentStationName = null; // clear
-    } else {
-      mCurrentStationName = name;
-    }
+      return false;
+    } 
+    mCurrentStationName = name;
+    return true;
   }
 
   String getCurrentStationName() { return mCurrentStationName; }

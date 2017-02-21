@@ -278,28 +278,34 @@ public class Vector
    * Need to require that the points are traversed righthand wise,
    * going around the normal.
    */
-  static Vector computeVectorsNormal( ArrayList<Vector> pts )
-  {
-    float x0 = 0.0f;
-    float y0 = 0.0f;
-    float z0 = 0.0f;
-    for ( Vector p : pts ) {
-      x0 += p.x;
-      y0 += p.y;
-      z0 += p.z;
-    }
-    // note (x0, y0, z0) is the center of mass of the points
+  // static Vector computeVectorsNormal( ArrayList<Vector> pts )
+  // {
+  //   int s = pts.size();
+  //   if ( s < 3 ) return new Vector();
 
-    Vector n = new Vector( 0, 0, 0 );
-    Vector q = pts.get( pts.size() - 1 );
-    for ( Vector p : pts ) {
-      n.x += (q.y-y0)*(p.z-z0) - (q.z-z0)*(p.y-y0);
-      n.y += (q.z-z0)*(p.x-x0) - (q.x-x0)*(p.z-z0);
-      n.z += (q.x-x0)*(p.y-y0) - (q.y-y0)*(p.x-x0);
-    }
-    n.normalize();
-    return n;
-  }
+  //   float x0 = 0.0f;
+  //   float y0 = 0.0f;
+  //   float z0 = 0.0f;
+  //   for ( Vector p : pts ) {
+  //     x0 += p.x;
+  //     y0 += p.y;
+  //     z0 += p.z;
+  //   }
+  //   x0 /= s;
+  //   y0 /= s;
+  //   z0 /= s;
+  //   // note (x0, y0, z0) is the center of mass of the points
+
+  //   Vector n = new Vector( 0, 0, 0 );
+  //   Vector q = pts.get( s - 1 );
+  //   for ( Vector p : pts ) {
+  //     n.x += (q.y-y0)*(p.z-z0) - (q.z-z0)*(p.y-y0);
+  //     n.y += (q.z-z0)*(p.x-x0) - (q.x-x0)*(p.z-z0);
+  //     n.z += (q.x-x0)*(p.y-y0) - (q.y-y0)*(p.x-x0);
+  //   }
+  //   n.normalize();
+  //   return n;
+  // }
   
   /** compute the mean vector (CoM) of the vectors of an array
    */

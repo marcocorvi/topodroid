@@ -492,7 +492,7 @@ public class DataHelper extends DataSetObservable
     TopoDroidApp.mActivity.runOnUiThread( new Runnable() {
       public void run() {
         Toast toast = Toast.makeText( mContext, "Critical failure: Disk i/o error", Toast.LENGTH_LONG );
-        toast.getView().setBackgroundColor( 0xff993333 );
+        toast.getView().setBackgroundColor( TDColor.BROWN );
         toast.show();
       }
     } );
@@ -1049,8 +1049,10 @@ public class DataHelper extends DataSetObservable
       if ( forward ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateShotAMDR( sid, id, acc, mag, dip, r );
       }
-    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } catch (SQLiteException e) { logError("AMDR " + id, e); }
+    }
+    catch ( SQLiteDiskIOException e ) { handleDiskIOError( e ); }
+    catch (SQLiteException e) { logError("AMDR " + id, e); }
+    catch (RuntimeException e ) { TDLog.Error("AMDR runtime " + id + " " + e.getMessage() ); }
   }
 
   private void renamePlotFile( String oldname, String newname )

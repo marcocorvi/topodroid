@@ -61,9 +61,14 @@ public class DBlock
   public static final int BLOCK_SEC_LEG    = 3; // additional shot of a centerline leg
   public static final int BLOCK_BLANK_LEG  = 4; // blank centerline leg-shot
 
-  // block colors:                blank,      centerline, splay,      leg,        blank-leg, ...
-  //                              dark-red    white       blue        grey        violet
-  private static int[] colors = { 0xffffcccc, 0xffffffff, 0xffccccff, 0xffcccccc, 0xffff33ff, 0xffccffcc };
+  private static int[] colors = {
+    TDColor.LIGHT_PINK,   // blank
+    TDColor.WHITE,        // midline
+    TDColor.LIGHT_BLUE,   // splay
+    TDColor.LIGHT_GRAY,   // sec. leg
+    TDColor.VIOLET,       // blank leg
+    TDColor.GREEN
+  };
 
   public static final int BLOCK_SURVEY     = 0; // flags
   public static final int BLOCK_SURFACE    = 1;

@@ -52,13 +52,13 @@ class CalibCBlockAdapter extends ArrayAdapter< CalibCBlock >
       tw.setTextSize( TDSetting.mTextSize );
       tw.setTextColor( b.color() );
       if ( b.isSaturated() ) {
-        tw.setBackgroundColor( 0xff990000 );
+        tw.setBackgroundColor( TDColor.DARK_BROWN );
       } else if ( b.isGZero() ) {
-        tw.setBackgroundColor( 0xffcc0099 );
+        tw.setBackgroundColor( TDColor.PINK );
       } else if ( b.mStatus == 0 ) {
-        tw.setBackgroundColor( 0xff000000 );
+        tw.setBackgroundColor( TDColor.BLACK );
       } else {
-        tw.setBackgroundColor( 0xff666666 );
+        tw.setBackgroundColor( TDColor.DARK_GRAY );
       }
     }
     return v;

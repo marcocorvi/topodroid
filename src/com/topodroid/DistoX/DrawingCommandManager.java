@@ -2212,7 +2212,7 @@ public class DrawingCommandManager
 
 	if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
 	  DrawingLinePath lp = (DrawingLinePath)p;
-	  if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 2 ) continue;
+	  if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 3 ) continue;
 	  lp.toCsurvey( pw, cave, branch );
         }
       }

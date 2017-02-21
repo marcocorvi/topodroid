@@ -68,7 +68,6 @@ class SketchModel
   int mDisplayMode = SketchDef.DISPLAY_NGBH;
   int mActivityMode = SketchDef.MODE_MOVE;
 
-  public static final int highlightColor = 0xffff9999;
   int cnt;
 
   private float pi4 = (float)(Math.PI/4);

@@ -117,37 +117,24 @@ public class AzimuthDialDialog extends MyDialog
 
     mSeekBar  = (SeekBar) findViewById( R.id.seekbar );
     mETazimuth = (EditText) findViewById( R.id.et_azimuth );
-    // mETazimuth.setOnEditorActionListener( new OnEditorActionListener() {
-    //   @Override
-    //   public boolean onEditorAction( TextView v, int action_id, KeyEvent ev )
-    //   {
-    //     if ( action_id == EditorInfo.IME_ACTION_DONE ) {
-    //       try {
-    //         int azimuth = Integer.parseInt( mETazimuth.getText().toString() );
-    //         if ( azimuth < 0 || azimuth > 360 ) azimuth = 0;
-    //         mAzimuth = azimuth;
-    //         updateSeekBar();
-    //         updateView();
-    //       } catch ( NumberFormatException e ) { }
-    //       return true;
-    //     }
-    //     return false;
-    //   }
-    // } );
-    mETazimuth.setOnKeyListener( new EditText.OnKeyListener() {
+
+    mETazimuth.addTextChangedListener( new TextWatcher() {
       @Override
-      public boolean onKey( View v, int keycode, KeyEvent ev ) 
+      public void afterTextChanged( Editable e ) { }
+
+      @Override
+      public void beforeTextChanged( CharSequence cs, int start, int cnt, int after ) { }
+
+      @Override
+      public void onTextChanged( CharSequence cs, int start, int before, int cnt ) 
       {
-        if ( ev.getAction() == KeyEvent.ACTION_UP ) {
-          try {
-            int azimuth = Integer.parseInt( mETazimuth.getText().toString() );
-            if ( azimuth < 0 || azimuth > 360 ) azimuth = 0;
-            mAzimuth = azimuth;
-            updateSeekBar();
-            updateView();
-          } catch ( NumberFormatException e ) { }
-        }
-        return false;
+        try {
+          int azimuth = Integer.parseInt( mETazimuth.getText().toString() );
+          if ( azimuth < 0 || azimuth > 360 ) azimuth = 0;
+          mAzimuth = azimuth;
+          updateSeekBar();
+          updateView();
+        } catch ( NumberFormatException e ) { }
       }
     } );
 

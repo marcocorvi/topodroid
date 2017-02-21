@@ -142,24 +142,25 @@
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
         android:layout_marginRight="10dp"
+        android:text="@string/button_xsection"
         android:background="@drawable/button"
         style="@style/button_default"
-        android:text="@string/button_xsection"
       />
 
-      <CheckBox android:id="@+id/cb_direct"
+      <Button android:id="@+id/btn_direct"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
         android:layout_marginRight="10dp"
-        android:text="@string/reversed"
+        android:background="@drawable/button"
+        style="@style/button_default"
       />
-      <CheckBox android:id="@+id/cb_inverse"
+      <Button android:id="@+id/btn_inverse"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
         android:layout_marginRight="10dp"
-        android:text="@string/reversed"
+        android:background="@drawable/button"
+        style="@style/button_default"
       />
-
       <Button android:id="@+id/btn_xdelete"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 

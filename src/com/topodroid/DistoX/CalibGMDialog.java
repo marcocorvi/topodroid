@@ -177,7 +177,7 @@ public class CalibGMDialog extends MyDialog
         et.setBackgroundResource( android.R.drawable.edit_text );
       } else {
         MyKeyboard.registerEditText( mKeyboard, et, flag | MyKeyboard.FLAG_NOEDIT );
-        et.setBackgroundColor( 0xff999999 );
+        et.setBackgroundColor( TDColor.MID_GRAY );
       }
     } else {
       if ( editable ) {
@@ -189,7 +189,7 @@ public class CalibGMDialog extends MyDialog
         // et.setFocusable( false );
         // et.setClickable( false );
         et.setKeyListener( null );
-        et.setBackgroundColor( 0xff999999 );
+        et.setBackgroundColor( TDColor.MID_GRAY );
       }
     }
   }

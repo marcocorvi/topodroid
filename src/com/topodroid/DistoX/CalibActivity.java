@@ -291,7 +291,7 @@ public class CalibActivity extends Activity
     CalibResult res = new CalibResult();
     mApp.mDData.selectCalibError( mApp.mCID, res );
     (new CalibCoeffDialog( this, mApp, vG, mG, vM, mM, nL, null,
-                           res.error, res.stddev, res.max_error, res.iterations, coeff, false )).show();
+                           res.error, res.stddev, res.max_error, res.iterations, coeff /*, false */ )).show();
   }
 
   private void askDelete()

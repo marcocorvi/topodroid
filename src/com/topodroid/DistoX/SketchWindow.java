@@ -287,19 +287,19 @@ public class SketchWindow extends ItemDrawer
     // switch ( mSelect ) {
     //   case SketchDef.SELECT_SECTION:
     //     selectBtn.setText( res.getString(R.string.btn_section ) );
-    //     // selectBtn.setBackgroundColor( 0xff99ff99 );
+    //     // selectBtn.setBackgroundColor( TDColor.GREEN );
     //     break;
     //   case SketchDef.SELECT_STEP:
     //     selectBtn.setText( res.getString(R.string.btn_step ) );
-    //     // selectBtn.setBackgroundColor( 0xffff9999 );
+    //     // selectBtn.setBackgroundColor( TDColor.ORANGE );
     //     break;
     //   case SketchDef.SELECT_SHOT:
     //     selectBtn.setText( res.getString(R.string.btn_shot ) );
-    //     // selectBtn.setBackgroundColor( 0xffff3333 );
+    //     // selectBtn.setBackgroundColor( TDColor.FIXED_RED );
     //     break;
     //   case SketchDef.SELECT_JOIN:
     //     selectBtn.setText( res.getString(R.string.btn_join ) );
-    //     // selectBtn.setBackgroundColor( 0xffff3333 );
+    //     // selectBtn.setBackgroundColor( TDColor.BLUE );
     //     break;
     // }
 
@@ -1647,7 +1647,7 @@ public class SketchWindow extends ItemDrawer
         // TODO if there is an empty shot use it, else try to download the data
         //      with the Asynch task that download the data.
         //      if there is an empty shot assign it
-        mActivity.setTitleColor( TDConst.COLOR_CONNECTED );
+        mActivity.setTitleColor( TDColor.CONNECTED );
         ListerHandler handler = new ListerHandler( this ); // FIXME LISTER
         new DataDownloadTask( mApp, handler ).execute();
         // new DataDownloadTask( mApp, this ).execute();
@@ -1958,7 +1958,7 @@ public class SketchWindow extends ItemDrawer
   @Override
   public void refreshDisplay( int nr, boolean toast ) 
   {
-    mActivity.setTitleColor( TDConst.COLOR_NORMAL );
+    mActivity.setTitleColor( TDColor.NORMAL );
     if ( nr >= 0 ) {
       if ( nr > 0 ) {
         List<DBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );

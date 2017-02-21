@@ -113,7 +113,7 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
       // Log.v(TAG, "set listeners for " + e.getText().toString() );
 
       if ( ( flag & FLAG_NOEDIT ) == FLAG_NOEDIT ) {
-        e.setBackgroundColor( 0xff999999 );
+        e.setBackgroundColor( TDColor.MID_GRAY );
       } else {
         e.setBackgroundResource( android.R.drawable.edit_text );
       }
@@ -131,7 +131,7 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
               kbd.show( e );
               // kbd.getWindow().makeActive();
             } else {
-              // e.setBackgroundColor( 0xff999999 );
+              // e.setBackgroundColor( TDColor.MID_GRAY );
               kbd.setEditText( null );
             }
           } else {
@@ -157,7 +157,7 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
             // e.setBackgroundResource( R.drawable.textfield_selected );
             kbd.show( e );
           } else {
-            // e.setBackgroundColor( 0xff999999 );
+            // e.setBackgroundColor( TDColor.MID_GRAY );
             kbd.setEditText( null );
           }
         }
@@ -461,7 +461,7 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
         et.setBackgroundResource( android.R.drawable.edit_text );
       } else {
         registerEditText( kbd, et, flag | FLAG_NOEDIT );
-        et.setBackgroundColor( 0xff999999 );
+        et.setBackgroundColor( TDColor.MID_GRAY );
       }
     } else {
       if ( editable ) {
@@ -473,7 +473,7 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
         // et.setFocusable( false );
         // et.setClickable( false );
         et.setKeyListener( null );
-        et.setBackgroundColor( 0xff999999 );
+        et.setBackgroundColor( TDColor.MID_GRAY );
       }
     }
   }

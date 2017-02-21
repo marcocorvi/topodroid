@@ -469,6 +469,7 @@ public class OverviewWindow extends ItemDrawer
     protected synchronized void onResume()
     {
       super.onResume();
+      mApp.resetLocale();
       doResume();
     }
 

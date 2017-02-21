@@ -308,7 +308,7 @@ public class MainWindow extends Activity
   {
     // String title = getResources().getString( R.string.app_name );
     setTitle( mApp.getConnectionStateTitleStr() + mApp.mCWD );
-    setTitleColor( TDConst.COLOR_NORMAL );
+    setTitleColor( TDColor.NORMAL );
     // Log.v("DistoX", "TopoDroid activity set the title <" + mApp.getConnectionStateTitleStr() + title + ">" );
   }
 
@@ -564,7 +564,7 @@ public class MainWindow extends Activity
   {
     // FIXME connect-title string
     mActivity.setTitle( R.string.import_title );
-    mActivity.setTitleColor( TDConst.COLOR_CONNECTED );
+    mActivity.setTitleColor( TDColor.CONNECTED );
     if ( filename.endsWith(".th") ) {
       String filepath = TDPath.getImportFile( filename );
       String name = filename.replace(".th", "" );
@@ -635,7 +635,8 @@ public class MainWindow extends Activity
     int p = 0;
       Intent intent;
       if ( p++ == pos ) { // PALETTE EXTRA SYMBOLS
-        (new SymbolReload( mActivity, mApp, TDSetting.mLevelOverExperimental )).show();
+        // (new SymbolReload( mActivity, mApp, TDSetting.mLevelOverExperimental )).show();
+        (new SymbolReload( mActivity, mApp, TDSetting.mLevelOverAdvanced )).show();
       } else if ( TDSetting.mLevelOverAdvanced && p++ == pos ) { // LOGS
         intent = new Intent( mActivity, TopoDroidPreferences.class );
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_LOG );
@@ -849,6 +850,7 @@ public class MainWindow extends Activity
   public synchronized void onResume() 
   {
     super.onResume();
+    mApp.resetLocale();
     // TDLog.Profile("TDActivity onResume");
     // TDLog.Log( TDLog.LOG_MAIN, "onResume " );
     // mApp.resetLocale();

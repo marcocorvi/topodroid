@@ -202,27 +202,31 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
 
       if ( show_ids ) {
         tvId.setVisibility( View.VISIBLE );
-        tvId.setTextColor( 0xff6699ff ); // light-blue
+        tvId.setTextColor( TDColor.LIGHT_BLUE );
       } else {
         tvId.setVisibility( View.GONE );
       }
-      if ( b.mType == DBlock.BLOCK_MAIN_LEG ) {
-        tvFrom.setTextColor( ( mParent.isCurrentStationName( b.mFrom) )? 0xff00ff00 : col );
-        tvTo.setTextColor(   ( mParent.isCurrentStationName( b.mTo )  )? 0xff00ff00 : col );
-      } else {
-        tvFrom.setTextColor( col );
-        tvTo.setTextColor(   col );
-      }
+      // if ( b.mType == DBlock.BLOCK_MAIN_LEG ) {
+        if ( mParent.isCurrentStationName( b.mFrom ) ) {
+          tvFrom.setTextColor( TDColor.LIGHT_GREEN );
+        } else {
+          tvFrom.setTextColor( col );
+          tvTo.setTextColor( ( mParent.isCurrentStationName( b.mTo )  )? TDColor.LIGHT_GREEN : col );
+        }
+      // } else {
+      //   tvFrom.setTextColor( col );
+      //   tvTo.setTextColor(   col );
+      // }
       tvLength.setTextColor(  col );
 
       if ( b.isRecent( mParent.secondLastShotId() ) ) {
-        tvFrom.setBackgroundColor( 0xff000033 ); // dark-blue
-        tvTo.setBackgroundColor( 0xff000033 ); // dark-blue
+        tvFrom.setBackgroundColor( TDColor.DARK_GREEN );
+        tvTo.setBackgroundColor( TDColor.DARK_GREEN );
       } 
       if ( b.isMagneticBad( ) ) {
-        tvLength.setBackgroundColor( 0xff330000 ); // dark-red
+        tvLength.setBackgroundColor( TDColor.DARK_RED );
       } else {
-        // tvLength.setBackgroundColor( 0xff000000 ); // black
+        // tvLength.setBackgroundColor( TDColor.BLACK );
       }
     }
   }
@@ -277,24 +281,38 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     return null;
   }
 
-  void updateBlocksName( )
+  void updateBlocksName( boolean set )
   {
-    for ( DBlock b : mItems ) {
-      if ( b.mType == DBlock.BLOCK_MAIN_LEG ) {
-        View v = b.mView;
-        if ( v != null ) {
-          TextView tvFrom = (TextView) v.findViewById( R.id.from );
-          TextView tvTo   = (TextView) v.findViewById( R.id.to );
-          tvFrom.setTextColor( b.color() );
-          tvTo.setTextColor( b.color() );
-          if ( mParent.isCurrentStationName( b.mFrom ) ) {
-            tvFrom.setTextColor( 0xff00ff00 );
-          } else if ( mParent.isCurrentStationName( b.mTo ) ) {
-            tvTo.setTextColor( 0xff00ff00 );
+    if ( ! set ) {
+      for ( DBlock b : mItems ) {
+        // if ( b.mType == DBlock.BLOCK_MAIN_LEG ) {
+          View v = b.mView;
+          if ( v != null ) {
+            TextView tvFrom = (TextView) v.findViewById( R.id.from );
+            TextView tvTo   = (TextView) v.findViewById( R.id.to );
+            tvFrom.setTextColor( b.color() );
+            tvTo.setTextColor( b.color() );
           }
-          v.setVisibility( b.mVisible );
-          v.invalidate();
-        }
+        // }
+      }
+    } else {
+      for ( DBlock b : mItems ) {
+        // if ( b.mType == DBlock.BLOCK_MAIN_LEG ) {
+          View v = b.mView;
+          if ( v != null ) {
+            TextView tvFrom = (TextView) v.findViewById( R.id.from );
+            TextView tvTo   = (TextView) v.findViewById( R.id.to );
+            tvFrom.setTextColor( b.color() );
+            tvTo.setTextColor( b.color() );
+            if ( mParent.isCurrentStationName( b.mFrom ) ) {
+              tvFrom.setTextColor( TDColor.LIGHT_GREEN );
+            } else if ( mParent.isCurrentStationName( b.mTo ) ) {
+              tvTo.setTextColor( TDColor.LIGHT_GREEN );
+            }
+            v.setVisibility( b.mVisible );
+            v.invalidate();
+          }
+        // }
       }
     }
   }
@@ -313,8 +331,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       TextView tv = (TextView) view;
       if ( tv != null ) {
         String st = tv.getText().toString();
-        mParent.setCurrentStationName( st );
-        updateBlocksName();
+        boolean set = mParent.setCurrentStationName( st );
+        updateBlocksName( set );
       }
       return true;
     }

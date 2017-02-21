@@ -78,9 +78,9 @@ public class CalibValidateResultDialog extends MyDialog
     hist1 = (ImageView) findViewById( R.id.histogram1 );
     hist2 = (ImageView) findViewById( R.id.histogram2 );
 
-    hist0.setImageBitmap( CalibCoeffDialog.makeHistogramBitmap( errors0, 400, 100, 40, 5, 0xff6699ff ) );
-    hist1.setImageBitmap( CalibCoeffDialog.makeHistogramBitmap( errors1, 400, 100, 40, 5, 0xffff9966 ) );
-    hist2.setImageBitmap( CalibCoeffDialog.makeHistogramBitmap( errors2, 400, 100, 40, 2, 0xffcccccc ) );
+    hist0.setImageBitmap( CalibCoeffDialog.makeHistogramBitmap( errors0, 400, 100, 40, 5, TDColor.FIXED_BLUE ) );
+    hist1.setImageBitmap( CalibCoeffDialog.makeHistogramBitmap( errors1, 400, 100, 40, 5, TDColor.FIXED_ORANGE ) );
+    hist2.setImageBitmap( CalibCoeffDialog.makeHistogramBitmap( errors2, 400, 100, 40, 2, TDColor.LIGHT_GRAY ) );
 
     setTitle( title );
   }

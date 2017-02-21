@@ -86,11 +86,6 @@ public class BrushManager
   // --------------------------------------------------------------------------
   // LINES
 
-  static final int errorColor      = 0xffff00ff; // violet
-  static final int highlightColor1 = 0xffff9999; // pink
-  static final int highlightColor2 = 0x6600cc00; // green
-  static final int highlightColor3 = 0xffff3333; // reddish
-
   // -----------------------------------------------------------------------
   // AREAS
 
@@ -180,7 +175,7 @@ public class BrushManager
     if ( ! doneMakePaths ) {
       errorPaint = new Paint();
       errorPaint.setDither(true);
-      errorPaint.setColor( errorColor );
+      errorPaint.setColor( TDColor.FULL_VIOLET );
       errorPaint.setStyle(Paint.Style.FILL_AND_STROKE);
       errorPaint.setStrokeJoin(Paint.Join.ROUND);
       errorPaint.setStrokeCap(Paint.Cap.ROUND);
@@ -188,7 +183,7 @@ public class BrushManager
 
       highlightPaint = new Paint();
       highlightPaint.setDither(true);
-      highlightPaint.setColor( highlightColor1 );
+      highlightPaint.setColor( TDColor.HIGH_PINK );
       highlightPaint.setStyle(Paint.Style.STROKE);
       highlightPaint.setStrokeJoin(Paint.Join.ROUND);
       highlightPaint.setStrokeCap(Paint.Cap.ROUND);
@@ -196,7 +191,7 @@ public class BrushManager
 
       highlightPaint2 = new Paint();
       highlightPaint2.setDither(true);
-      highlightPaint2.setColor( highlightColor2 );
+      highlightPaint2.setColor( TDColor.HIGH_GREEN );
       highlightPaint2.setStyle(Paint.Style.FILL);
       highlightPaint2.setStrokeJoin(Paint.Join.ROUND);
       highlightPaint2.setStrokeCap(Paint.Cap.ROUND);
@@ -204,7 +199,7 @@ public class BrushManager
 
       highlightPaint3 = new Paint();
       highlightPaint3.setDither(true);
-      highlightPaint3.setColor( highlightColor3 );
+      highlightPaint3.setColor( TDColor.HIGH_RED );
       highlightPaint3.setStyle(Paint.Style.STROKE);
       highlightPaint3.setStrokeJoin(Paint.Join.ROUND);
       highlightPaint3.setStrokeCap(Paint.Cap.ROUND);
@@ -230,42 +225,42 @@ public class BrushManager
       fixedRedPaint.setStyle(Paint.Style.STROKE);
       fixedRedPaint.setStrokeJoin(Paint.Join.ROUND);
       fixedRedPaint.setStrokeCap(Paint.Cap.ROUND);
-      fixedRedPaint.setColor(0xFFff3333); // RED
+      fixedRedPaint.setColor( TDColor.FIXED_RED ); 
 
       fixedYellowPaint = new Paint();
       fixedYellowPaint.setDither(true);
       fixedYellowPaint.setStyle(Paint.Style.STROKE);
       fixedYellowPaint.setStrokeJoin(Paint.Join.ROUND);
       fixedYellowPaint.setStrokeCap(Paint.Cap.ROUND);
-      fixedYellowPaint.setColor(0xFFffff00); // YELLOW
+      fixedYellowPaint.setColor( TDColor.FIXED_YELLOW );
 
       fixedOrangePaint = new Paint();
       fixedOrangePaint.setDither(true);
       fixedOrangePaint.setStyle(Paint.Style.STROKE);
       fixedOrangePaint.setStrokeJoin(Paint.Join.ROUND);
       fixedOrangePaint.setStrokeCap(Paint.Cap.ROUND);
-      fixedOrangePaint.setColor(0xFFff9966); // ORANGE
+      fixedOrangePaint.setColor( TDColor.FIXED_ORANGE );
 
       fixedSplayPaint = new Paint();
       fixedSplayPaint.setDither(true);
       fixedSplayPaint.setStyle(Paint.Style.STROKE);
       fixedSplayPaint.setStrokeJoin(Paint.Join.ROUND);
       fixedSplayPaint.setStrokeCap(Paint.Cap.ROUND);
-      fixedSplayPaint.setColor(0xFF666666); // dark gray
+      fixedSplayPaint.setColor( TDColor.DARK_GRAY );
 
       fixedSplay2Paint = new Paint();
       fixedSplay2Paint.setDither(true);
       fixedSplay2Paint.setStyle(Paint.Style.STROKE);
       fixedSplay2Paint.setStrokeJoin(Paint.Join.ROUND);
       fixedSplay2Paint.setStrokeCap(Paint.Cap.ROUND);
-      fixedSplay2Paint.setColor(0xFFAAAAAA); // gray
+      fixedSplay2Paint.setColor( TDColor.LIGHT_BLUE );
 
       fixedSplay3Paint = new Paint();
       fixedSplay3Paint.setDither(true);
       fixedSplay3Paint.setStyle(Paint.Style.STROKE);
       fixedSplay3Paint.setStrokeJoin(Paint.Join.ROUND);
       fixedSplay3Paint.setStrokeCap(Paint.Cap.ROUND);
-      fixedSplay3Paint.setColor(0xFFAAAAAA); // gray
+      fixedSplay3Paint.setColor( TDColor.LIGHT_BLUE );
       float[] x = new float[2];
       x[0] = 24; // FIXME
       x[1] =  8;
@@ -277,7 +272,7 @@ public class BrushManager
       fixedSplay4Paint.setStyle(Paint.Style.STROKE);
       fixedSplay4Paint.setStrokeJoin(Paint.Join.ROUND);
       fixedSplay4Paint.setStrokeCap(Paint.Cap.ROUND);
-      fixedSplay4Paint.setColor(0xFFAAAAAA); // gray
+      fixedSplay4Paint.setColor( TDColor.LIGHT_BLUE );
       // float[] x = new float[2];
       x[0] = 14; // FIXME
       x[1] =  8; 
@@ -289,21 +284,21 @@ public class BrushManager
       fixedGridPaint.setStyle(Paint.Style.STROKE);
       fixedGridPaint.setStrokeJoin(Paint.Join.ROUND);
       fixedGridPaint.setStrokeCap(Paint.Cap.ROUND);
-      fixedGridPaint.setColor(0x99666666); // very dark gray
+      fixedGridPaint.setColor( TDColor.DARK_GRID );
 
       fixedGrid10Paint = new Paint();
       fixedGrid10Paint.setDither(true);
       fixedGrid10Paint.setStyle(Paint.Style.STROKE);
       fixedGrid10Paint.setStrokeJoin(Paint.Join.ROUND);
       fixedGrid10Paint.setStrokeCap(Paint.Cap.ROUND);
-      fixedGrid10Paint.setColor(0x99999999); // not so dark gray
+      fixedGrid10Paint.setColor( TDColor.GRID );
 
       fixedGrid100Paint = new Paint();
       fixedGrid100Paint.setDither(true);
       fixedGrid100Paint.setStyle(Paint.Style.STROKE);
       fixedGrid100Paint.setStrokeJoin(Paint.Join.ROUND);
       fixedGrid100Paint.setStrokeCap(Paint.Cap.ROUND);
-      fixedGrid100Paint.setColor(0x99cccccc); // almost white
+      fixedGrid100Paint.setColor( TDColor.LIGHT_GRID );
 
       fixedStationPaint = new Paint();
       fixedStationPaint.setDither(true);
@@ -311,7 +306,7 @@ public class BrushManager
       fixedStationPaint.setStrokeJoin(Paint.Join.ROUND);
       fixedStationPaint.setStrokeCap(Paint.Cap.ROUND);
       fixedStationPaint.setStrokeWidth( WIDTH_FIXED );
-      fixedStationPaint.setColor(0xFFFF66cc); // not very dark red
+      fixedStationPaint.setColor( TDColor.REDDISH );
 
       fixedStationBarrierPaint = new Paint();
       fixedStationBarrierPaint.setDither(true);
@@ -319,7 +314,7 @@ public class BrushManager
       fixedStationBarrierPaint.setStrokeJoin(Paint.Join.ROUND);
       fixedStationBarrierPaint.setStrokeCap(Paint.Cap.ROUND);
       fixedStationBarrierPaint.setStrokeWidth( WIDTH_FIXED );
-      fixedStationBarrierPaint.setColor(0xFFFF0000); // very red
+      fixedStationBarrierPaint.setColor( TDColor.FULL_RED );
 
       fixedStationHiddenPaint = new Paint();
       fixedStationHiddenPaint.setDither(true);
@@ -335,7 +330,7 @@ public class BrushManager
       labelPaint.setStrokeJoin(Paint.Join.ROUND);
       labelPaint.setStrokeCap(Paint.Cap.ROUND);
       labelPaint.setStrokeWidth( WIDTH_FIXED );
-      labelPaint.setColor(0xFFFFFFFF); // white
+      labelPaint.setColor( TDColor.WHITE );
 
       // stationPaint = new Paint();
       // stationPaint.setDither(true);
@@ -361,7 +356,7 @@ public class BrushManager
       // debugRed.setStrokeJoin(Paint.Join.ROUND);
       // debugRed.setStrokeCap(Paint.Cap.ROUND);
       // debugRed.setStrokeWidth( WIDTH_FIXED );
-      // debugRed.setColor(0xFFFF0000); // red
+      // debugRed.setColor( TDColor.FULL_RED );
 
       // debugGreen = new Paint();
       // debugGreen.setDither(true);
@@ -369,7 +364,7 @@ public class BrushManager
       // debugGreen.setStrokeJoin(Paint.Join.ROUND);
       // debugGreen.setStrokeCap(Paint.Cap.ROUND);
       // debugGreen.setStrokeWidth( WIDTH_FIXED );
-      // debugGreen.setColor(0xFF00FF00); // green
+      // debugGreen.setColor( TDColor.FULL_GREEN );
 
       // debugBlue = new Paint();
       // debugBlue.setDither(true);
@@ -377,7 +372,7 @@ public class BrushManager
       // debugBlue.setStrokeJoin(Paint.Join.ROUND);
       // debugBlue.setStrokeCap(Paint.Cap.ROUND);
       // debugBlue.setStrokeWidth( WIDTH_FIXED );
-      // debugBlue.setColor(0xFF0000FF); // blue
+      // debugBlue.setColor( TDColor.FULL_BLUE );
 
       fixedGridPaint.setStrokeWidth( WIDTH_FIXED ); //* TDSetting.mFixedThickness );
       fixedGrid10Paint.setStrokeWidth( WIDTH_FIXED ); // * TDSetting.mFixedThickness );

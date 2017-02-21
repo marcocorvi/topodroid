@@ -22,7 +22,7 @@ import android.view.View.OnClickListener;
 // import android.view.View.OnLongClickListener;
 // import android.view.MotionEvent;
 
-import android.graphics.Color;
+// import android.graphics.Color;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -74,7 +74,7 @@ public class MyButton
         TDLog.Error("out of memory: " + err.getMessage() );
         Toast toast = Toast.makeText( ctx, "WARNING. Out Of Memroy", Toast.LENGTH_LONG );
         TextView tv = (TextView)toast.getView().findViewById( android.R.id.message );
-        tv.setTextColor( Color.RED );
+        tv.setTextColor( TDColor.FIXED_RED );
         toast.show();
         // try { 
         //   InputStream is = ctx.getAssets().open("iz_oom.png");

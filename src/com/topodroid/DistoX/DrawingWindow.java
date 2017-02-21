@@ -1344,6 +1344,7 @@ public class DrawingWindow extends ItemDrawer
     protected synchronized void onResume()
     {
       super.onResume();
+      mApp.resetLocale();
       // Log.v("DistoX", "Drawing Activity onResume " + ((mDataDownloader!=null)?"with DataDownloader":"") );
       doResume();
       if ( mDataDownloader != null ) mDataDownloader.onResume();
@@ -2575,7 +2576,7 @@ public class DrawingWindow extends ItemDrawer
 
     // X-SECTION AT A STATION
     // @param name station name
-    void openXSection( DrawingStationName st, String name, long type, boolean inverse ) 
+    void openXSection( DrawingStationName st, String name, long type, float azimuth, float clino )
     {
       long xtype = -1;
       String xsname = null;
@@ -2591,49 +2592,7 @@ public class DrawingWindow extends ItemDrawer
 
       PlotInfo plot = mData.getPlotInfo( mApp.mSID, xsname );
       if ( plot == null  ) { // if there does not exist xsection xs-name create it
-        float azimuth = 0;
-        float clino   = 0;
-        List< DBlock > legs = mData.selectShotsAt( mApp.mSID, name, true ); // select "independent" legs
-        if ( legs.size() == 1 ) { 
-          // one-leg: normal  = direction FROM - TO
-          //          inverse = direction TO - FROM
-          DBlock leg0 = legs.get(0);
-          if ( inverse ) { // name.equals( leg0.mFrom ) ) 
-            azimuth = leg0.mBearing + 180; 
-            clino   = - leg0.mClino;
-          } else {
-            azimuth = leg0.mBearing; 
-            clino   = leg0.mClino;
-          }
-        } else if ( legs.size() == 2 ) {
-          // two-leg: normal  = FROM_0 - STATION - TO_1
-          //          inverse = TO_1 - STATION - FROM_0
-          DBlock leg0 = legs.get(0);
-          DBlock leg1 = legs.get(1);
-          float b0 = leg0.mBearing;
-          float b1 = leg1.mBearing;
-          float c0 = leg0.mClino;
-          float c1 = leg1.mClino;
-          if ( name.equals( leg1.mTo ) ) {
-            b1 = -b1;
-            c1 = -c1;
-          }
-          if ( name.equals( leg0.mFrom ) ) {
-            b0 = -b0;
-            c0 = -c0;
-          }
-          azimuth = (b1 + b0)/2;
-          if ( Math.abs( b1 - b0 ) > 180 ) azimuth += 180;
-          clino = ( c0 + c1 ) / 2;
-          if ( inverse ) {
-            azimuth += 180;
-            clino = -clino;
-          }
-        } else {
-          // Log.v("DistoX", "X_SECTION Too many legs" );
-          Toast.makeText( mActivity, R.string.too_many_legs_xsection, Toast.LENGTH_SHORT ).show();
-          return;
-        }
+        // Toast.makeText( mActivity, R.string.too_many_legs_xsection, Toast.LENGTH_SHORT ).show();
         if ( azimuth >= 360 ) azimuth -= 360;
 
         if ( PlotInfo.isProfile( type ) ) {
@@ -3721,7 +3680,7 @@ public class DrawingWindow extends ItemDrawer
   public void refreshDisplay( int nr, boolean toast )
   {
     // Log.v("DistoX", "refreshDisplay() type " + mType + " nr " + nr ); // DATA_DOWNLOAD
-    mActivity.setTitleColor( TDConst.COLOR_NORMAL );
+    mActivity.setTitleColor( TDColor.NORMAL );
     if ( nr >= 0 ) {
       if ( nr > 0 ) {
         doComputeReferences( false );

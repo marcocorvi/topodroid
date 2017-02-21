@@ -19,7 +19,11 @@ public class CalibCBlock
 {
   private static final float grad2rad = TDMath.GRAD2RAD;
 
-  private static int[] colors = { 0xffcccccc, 0xffffcccc, 0xffccccff };
+  private static int[] colors = { // 0xffcccccc, 0xffffcccc, 0xffccccff 
+    TDColor.LIGHT_GRAY,
+    TDColor.LIGHT_PINK,
+    TDColor.LIGHT_BLUE
+  };
 
   public long mId;
   public long mCalibId;

@@ -136,7 +136,7 @@ public class DeviceHelper extends DataSetObservable
     TopoDroidApp.mActivity.runOnUiThread( new Runnable() {
       public void run() {
         Toast toast = Toast.makeText( mContext, "Critical failure: Disk i/o error", Toast.LENGTH_LONG );
-        toast.getView().setBackgroundColor( 0xff993333 );
+        toast.getView().setBackgroundColor( TDColor.BROWN );
         toast.show();
       }
     } );

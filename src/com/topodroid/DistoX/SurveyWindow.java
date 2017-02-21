@@ -243,6 +243,7 @@ public class SurveyWindow extends Activity
   public synchronized void onResume() 
   {
     super.onResume();
+    mApp.resetLocale();
     float decl = mApp.mData.getSurveyDeclination( mApp.mSID );
     mEditDecl.setText( String.format(Locale.US, "%.4f", decl ) );
   }
@@ -292,12 +293,12 @@ public class SurveyWindow extends Activity
     }
   }
 
-  @Override
-  public void onStop()
-  {
-    saveSurvey();
-    super.onStop();
-  }
+  // @Override
+  // public void onStop()
+  // {
+  //   saveSurvey();
+  //   super.onStop();
+  // }
 
   private void doArchive()
   {
@@ -414,6 +415,7 @@ public class SurveyWindow extends Activity
 
   public void doExport( String type )
   {
+    saveSurvey();
     int index = TDConst.surveyExportIndex( type );
     if ( index == TDConst.DISTOX_EXPORT_ZIP ) {
       doArchive();
@@ -548,6 +550,7 @@ public class SurveyWindow extends Activity
   {
     switch ( code ) {
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
+        // saveSurvey();
         super.onBackPressed();
         return true;
       case KeyEvent.KEYCODE_SEARCH:
@@ -591,6 +594,7 @@ public class SurveyWindow extends Activity
     closeMenu();
     int p = 0;
     if ( p++ == pos ) { // CLOSE
+      // saveSurvey();
       super.onBackPressed();
     } else if ( p++ == pos ) { // EXPORT
       new ExportDialog( mActivity, this, TDConst.mSurveyExportTypes, R.string.title_survey_export ).show();

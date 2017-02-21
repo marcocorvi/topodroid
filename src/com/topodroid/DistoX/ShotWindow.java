@@ -318,14 +318,15 @@ public class ShotWindow extends Activity
     sb.append( mApp.mySurvey );
 
     mActivity.setTitle( sb.toString() );
-    // FIXME setTitleColor( TDConst.COLOR_NORMAL );
+    // FIXME setTitleColor( TDColor.NORMAL );
   }
 
   boolean isCurrentStationName( String st ) { return mApp.isCurrentStationName( st ); }
-  void setCurrentStationName( String st ) 
+
+  boolean setCurrentStationName( String st ) 
   { 
     mSkipItemClick = true;
-    mApp.setCurrentStationName( st ); 
+    return mApp.setCurrentStationName( st ); 
     // updateDisplay( );
   }
 
@@ -917,6 +918,7 @@ public class ShotWindow extends Activity
   public synchronized void onResume() 
   {
     super.onResume();
+    mApp.resetLocale();
     // Log.v("DistoX", "ShotWindow onResume()" );
 
     // FIXME NOTIFY register ILister

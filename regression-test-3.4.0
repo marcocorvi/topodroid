@@ -1,4 +1,4 @@
-TopoDroid Regerssion Tests
+TopoDroid Regression Tests
 
 This is an incomplete list of things to check 
 
@@ -136,7 +136,7 @@ DEVICE WINDOW
         when found select it, try to use it without pairing it before.
     (backup files are not cleared)
         if set, it should be auto-paired, otherwise a pairing notification
-[ ] calibration sub-setting: should open the calib settings
+[x] calibration sub-setting: should open the calib settings
 
 [ ] help strings
 
@@ -228,7 +228,7 @@ SURVEY DATA WINDOW
     [x] check it is shown in the saved-stations dialog if opened
 
 [ ] sketches
-    [ ] add a new sketch: dialog (name + ref. station)
+    [x] add a new sketch: dialog (name + ref. station)
         [x] duplicate sketch name -> error
         [x] non-existing station -> error
         [x] origin station is the last one 
@@ -333,17 +333,17 @@ tap a shot data
 [ ] try the buttons
     [x] duplicate: +
     [x] surface: -
-    [ ] repeated-leg - I can't understand what happens when checking this or the following button. (Rodrigo)
-    [ ] merge to following leg
+    [x] merge into previous leg
+    [x] merge into following leg
     [x] splay group: all splays of the group with same station should be updated
-    [ ] renumber: following shots should be renumbered according to the current station-naming policy
+    [x] renumber: following shots should be renumbered according to the current station-naming policy
 [x] "ok" saves changes and closes dialog
 [x] "save" saves changes but does not close dialog
 [x] "more" opens secondary dialog
 [x] "cancel" closes dialog
 
 long tap on splay data
-[ ] opens last sketch with splay station in the middle and splay highlighted
+[x] opens last sketch with splay station in the middle and splay highlighted
 
 SECONDARY SHOT EDIT DIALOG
 [x] take a photo
@@ -371,7 +371,7 @@ SECONDARY SHOT EDIT DIALOG
         [x] tapping a photo opens the photo dialog with thumbnail, comment, delete-button
             [x] change comment
             [x] view photo (tap thumbnail)
-            [ ] delete photo: check file disappear from filesystem
+            [x] delete photo: check file disappear from filesystem
 [x] view sensosrs measurements
     [x] toast message if there is no sensor measurement
 [x] 3D display
@@ -395,15 +395,15 @@ SURVEY INFO WINDOWS
 
 [ ] export menu
     export in each format and verify the file appear the respective directory
-    [ ] ZIP
+    [x] ZIP
         [ ] default data export format is updated (if defined)
-    [ ] compass
+    [ ] Compass
     [ ] PocketTopo
     [ ] Polygon
     [ ] Grottolf
     [ ] GHTopo
     [ ] Survex
-    [ ] Therion
+    [x] Therion
     [ ] Topo
     [ ] VisualTopo
     [ ] Walls
@@ -413,7 +413,7 @@ SURVEY INFO WINDOWS
         [x] fails if no geo-referenced station
     [ ] Track file
         [x] fails if no geo-referenced station
-[ ] check the default data export format is done before the ZIP export and included
+[x] check the default data export format is done before the ZIP export and included
 [ ] rename the survey: check that all survey data get renamed
     [ ] th2 sketch files 
     [ ] tdr sketch files
@@ -440,14 +440,14 @@ SURVEY INFO WINDOWS
         [x] DXF
         [ ] KML
         [ ] Track file
-    [ ] sketch files and backup must be deleted
-        [ ] tdr
+    [x] sketch files and backup must be deleted
+        [x] tdr
     [ ] sketch exports must be deleted
-        [ ] th2
+        [x] th2
         [ ] csx
         [ ] png
         [ ] dxf
-        [ ] svg
+        [x] svg
     [x] zip archives are not deleted
 [ ] calibration: enter calibration values for tape, compass, clino:
     [ ] verify that following manually entered shots are affected accordingly 
@@ -482,15 +482,15 @@ GPS DIALOG
 
 Data reduction
 [ ] loop closure
-[ ] trilateration
+[ ] trilateration ( this is FIXME )
  
 SKETCH WINDOW
 [ ] load/save of (binary) files ("label" and "danger" point)
 [ ] check that the sketch stays in cache
-[ ] check the default sketch export format is properly done
+[x] check the default sketch export format is properly done
 
-[ ] with autostations check they are in the th2 files
-[ ] without autostations check that a station can be set for export and marked with a triangle
+[x] with autostations check they are in the th2 files
+[x] without autostations check that a station can be set for export and marked with a triangle
 
 <move mode>
 [x] drag
@@ -514,7 +514,7 @@ SKETCH WINDOW
     [x] splays
     [x] stations (pink)
         [x] check station textsize setting
-    [ ] fix ref two-finger drag
+    [x] fix ref two-finger drag
 [x] plan/profile switch 
 [x] extend reference azimuth
     ...
@@ -528,15 +528,15 @@ SKETCH WINDOW
 [ ] export menu: check the various format 
     [ ] have the toast message
     [ ] are properly exported in either plan, or profile, or x-section
-      [ ] [ ] [ ] therion
-      [ ] [ ] [ ] csurvey
+      [ ] [ ] [ ] Therion
+      [ ] [ ] [ ] cSurvey
       [ ] [ ] [ ] PNG
       [ ] [ ] [ ] DXF
       [ ] [ ] [ ] SVG
 [ ] default export format: check they are exported and there is no toast message
     [ ] are properly exported in either plan, or profile, or x-section
-      [ ] [ ] [ ] therion
-      [ ] [ ] [ ] csurvey
+      [ ] [ ] [ ] Therion
+      [ ] [ ] [ ] cSurvey
       [ ] [ ] [ ] PNG
       [ ] [ ] [ ] DXF
       [ ] [ ] [ ] SVG
@@ -558,9 +558,9 @@ SKETCH WINDOW
 [x] draw areas(s)
 [x] undo
 [x] redo
-[ ] check line-continuation drawing (working within a line-group)
-    [ ] with option "join" (verify undo/redo)
-    [ ] with option "continue" (verify interaction with undo/redo)
+[x] check line-continuation drawing (working within a line-group)
+    [x] with option "join" (verify undo/redo)
+    [x] with option "continue" (verify interaction with undo/redo)
 
 [x] two finger drag
 [x] two finger zoom
@@ -569,22 +569,22 @@ SKETCH WINDOW
 
 recent symbol picker
 [ ] tools remain consistent on a per-directory basis
-[ ] tap select item
-[ ] long tap brings item in front
+[x] tap select item
+[x] long tap brings item in front
 [ ] orientation is active iff first point is orientable
 [ ] "-/+" button decrease (tap) increase (long-tap) the scale
 [ ] number of symbols (setting)
 
 list/grid symbol picker
 [ ] selection of item
-[ ] tab switch
+[x] tab switch
 [ ] orientation is active iff first point is orientable
-[ ] double-tap is select confirm
-[ ] close picks the last selection
+[x] double-tap is select confirm
+[x] close picks the last selection
 
 triple-grid symbol picker
-[ ] double-tap is select confirm
-[ ] close picks the last selection
+[x] double-tap is select confirm
+[x] close picks the last selection
 
 <erase mode>
 [x] two finger drag
@@ -620,17 +620,17 @@ triple-grid symbol picker
 [ ] item-wise editing
   - line 
     [x] line type
-    [ ] options
+    [x] options
     [ ] outline 
     [x] reverse
         [x] check consistency of the direction yellow tick
     [ ] convert to polyline (if bezier)
     [ ] straighten (good for rock-border, but it works also for other types)
-    [ ] close
-    [ ] delete 
-        [ ] undo delete
+    [x] close
+    [x] delete 
+        [x] undo delete
   - section-line
-    [ ] the sketch is re-opened
+    [x] the sketch is re-opened
     [ ] the photo is overwritten if retaken
     [ ] erase removes files (th2/tdr/photo) and info from the database
     [ ] verify that the section point is inserted (if setting is on)
@@ -638,7 +638,7 @@ triple-grid symbol picker
     [x] visible border
     [ ] orientation (if orientable)
   - point
-    [ ] scale
+    [x] scale
     [x] orientation (if point is orientable)
     [x] text (label)
     [ ] options
@@ -647,11 +647,11 @@ triple-grid symbol picker
     [ ] stations change
         [ ] cut-n-paste
   - station
-    [ ] select as station to export (visible only if not autostations)
-    [ ] hide/show previous centerline
-    [ ] hide/show following centerline
+    [x] select as station to export (visible only if not autostations)
+    [x] hide/show previous centerline
+    [x] hide/show following centerline
     [ ] set current station: chck next shot is attached to it
-    [ ] toggle at-station splay display
+    [x] toggle at-station splay display
     [ ] at-station cross-sections
         [ ] shown as a red tick
 

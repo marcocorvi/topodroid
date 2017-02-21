@@ -113,7 +113,7 @@ public class DrawingShotDialog extends MyDialog
 
     // if ( ! TopoDroidApp.mLoopClosure ) {
     //   mRBignore.setClickable( false );
-    //   mRBignore.setTextColor( 0xff999999 );
+    //   mRBignore.setTextColor( TDColor.MID_GRAY );
     // }
 
     mLabel.setText( mBlock.dataString( mContext.getResources().getString(R.string.shot_data) ) );

@@ -47,6 +47,9 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
+import android.text.TextWatcher;
+import android.text.Editable;
+
 import java.util.List;
 // import java.util.ArrayList;
 
@@ -71,6 +74,8 @@ public class ProjectionDialog extends MyDialog
   private ProjectionSurface mDrawingSurface;
   private SeekBar mSeekBar;
   private Button  mBtnOk;
+  private Button  mBtnPlus;
+  private Button  mBtnMinus;
   private EditText mETazimuth;
   private DistoXNum mNum;
 
@@ -113,6 +118,11 @@ public class ProjectionDialog extends MyDialog
     mFrom   = from;
     mAzimuth = 0;
     mApp     = mParent.getApp();
+  }
+
+  void updateEditText() 
+  { 
+    mETazimuth.setText( Integer.toString( (int)mAzimuth ) ); 
   }
 
   // -------------------------------------------------------------------
@@ -279,7 +289,11 @@ public class ProjectionDialog extends MyDialog
     mSeekBar   = (SeekBar) findViewById(R.id.seekbar );
     mETazimuth = (EditText) findViewById( R.id.textform );
     mBtnOk     = (Button) findViewById( R.id.btn_ok );
+    mBtnPlus   = (Button) findViewById( R.id.btn_plus );
+    mBtnMinus  = (Button) findViewById( R.id.btn_minus );
     mBtnOk.setOnClickListener( this );
+    mBtnPlus.setOnClickListener( this );
+    mBtnMinus.setOnClickListener( this );
     mZoom = mApp.mScaleFactor;    // canvas zoom
 
     mBorderRight  = mApp.mDisplayWidth * 15 / 16;
@@ -304,7 +318,7 @@ public class ProjectionDialog extends MyDialog
     // ViewGroup vg = mZoomBtnsCtrl.getContainer();
     // switchZoomCtrl( TDSetting.mZoomCtrl );
 
-    // mETazimuth.setText( Integer.toString( mAzimuth ) );
+    updateEditText();
 
     mSeekBar.setOnSeekBarChangeListener( new OnSeekBarChangeListener() {
       public void onProgressChanged( SeekBar seekbar, int progress, boolean fromUser) {
@@ -315,7 +329,7 @@ public class ProjectionDialog extends MyDialog
           seekbar.setProgress( progress - 360 );
         } else {
           computeReferences();
-          mETazimuth.setText( Integer.toString( mAzimuth ) );
+          if ( ! mETazimuth.hasFocus() ) updateEditText();
         }
         // Log.v("DistoX", "set azimuth " + mAzimuth );
       }
@@ -323,46 +337,67 @@ public class ProjectionDialog extends MyDialog
       public void onStopTrackingTouch(SeekBar seekbar) { }
     } );
 
-    mETazimuth.setOnFocusChangeListener( new View.OnFocusChangeListener() {
-      public void onFocusChange( View v, boolean b ) {
-        if ( ! b ) { // focus lost
-          try {
-            setAzimuth( Integer.parseInt( mETazimuth.getText().toString() ) );
-          } catch ( NumberFormatException e ) { }
-        }
+    // mETazimuth.setOnFocusChangeListener( new View.OnFocusChangeListener() {
+    //   public void onFocusChange( View v, boolean b ) {
+    //     if ( ! b ) { // focus lost
+    //       try {
+    //         setAzimuth( Integer.parseInt( mETazimuth.getText().toString() ) );
+    //       } catch ( NumberFormatException e ) { }
+    //     }
+    //   }
+    // } );
+
+    mETazimuth.addTextChangedListener( new TextWatcher() {
+      @Override
+      public void afterTextChanged( Editable e ) { }
+
+      @Override
+      public void beforeTextChanged( CharSequence cs, int start, int cnt, int after ) { }
+
+      @Override
+      public void onTextChanged( CharSequence cs, int start, int before, int cnt ) 
+      {
+        try {
+          int azimuth = Integer.parseInt( mETazimuth.getText().toString() );
+          if ( azimuth < 0 || azimuth > 360 ) azimuth = 0;
+          setAzimuth( azimuth, false );
+          // updateSeekBar();
+          // updateView();
+        } catch ( NumberFormatException e ) { }
       }
     } );
 
-    mETazimuth.setOnKeyListener( new View.OnKeyListener() {
-      public boolean onKey( View v, int code, KeyEvent event )
-      {
-        // Log.v("DistoX", "key code " + code );
-        if ( code == 66 /* KeyEvent.KEYCODE_ENTER */ ) {
-          try {
-            setAzimuth( Integer.parseInt( mETazimuth.getText().toString() ) );
-          } catch ( NumberFormatException e ) { }
-          return true;
-        }
-        return false; 
-      }
-    } );
+    // mETazimuth.setOnKeyListener( new View.OnKeyListener() {
+    //   public boolean onKey( View v, int code, KeyEvent event )
+    //   {
+    //     // Log.v("DistoX", "key code " + code );
+    //     if ( code == 66 /* KeyEvent.KEYCODE_ENTER */ ) {
+    //       try {
+    //         setAzimuth( Integer.parseInt( mETazimuth.getText().toString() ) );
+    //       } catch ( NumberFormatException e ) { }
+    //       return true;
+    //     }
+    //     return false; 
+    //   }
+    // } );
 
     doStart();
   }
 
-  void setAzimuth( int a )
+  void setAzimuth( int a, boolean edit_text )
   {
     mAzimuth = a;
     if ( mAzimuth < 0 || mAzimuth >= 360 ) mAzimuth = 0;
     computeReferences();
     mSeekBar.setProgress( ( mAzimuth < 180 )? 200 + mAzimuth : mAzimuth - 160 );
+    if ( edit_text ) updateEditText();
   }
 
   void setSize( int w, int h )
   {
-    mOffset.x = w/2;
-    mOffset.y = h/2;
-    mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
+    // mOffset.x = w/2;
+    // mOffset.y = h/2;
+    // mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
   }
 
 // ----------------------------------------------------------------------------
@@ -387,6 +422,9 @@ public class ProjectionDialog extends MyDialog
         // Log.v("DistoX", "start " + de + " " + ds + " " + dr + " off " + mOffset.x + " " + mOffset.y + " " + mZoom );
 
         computeReferences();
+        mOffset.x = ( mNum.surveyEmax() + mNum.surveyEmin() )/ 2;
+        mOffset.y = ( mNum.surveySmax() + mNum.surveySmin() )/ 2;
+
         mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
       }
    }
@@ -553,11 +591,15 @@ public class ProjectionDialog extends MyDialog
    public void onClick(View view)
    {
      Button b = (Button)view;
-     mDrawingSurface.stopDrawingThread();
      if ( b == mBtnOk ) {
+       mDrawingSurface.stopDrawingThread();
        mParent.doProjectedProfile( mName, mFrom, mAzimuth );
+       dismiss();
+     } else if ( b == mBtnPlus ) {
+       setAzimuth( mAzimuth + 1, true );
+     } else if ( b == mBtnMinus ) {
+       setAzimuth( mAzimuth - 1, true );
      }
-     dismiss();
    }
 
    @Override

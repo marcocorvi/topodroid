@@ -70,11 +70,11 @@ public class CalibCoeffDialog extends MyDialog
   private String error0;
   private String iter0;
   private byte[] mCoeff;
-  private boolean mSaturated;
+  // private boolean mSaturated;
 
   public CalibCoeffDialog( Context context, TopoDroidApp app,
                            Vector bg, Matrix ag, Vector bm, Matrix am, Vector nl, float[] errors,
-                           float delta, float delta2, float error, long iter, byte[] coeff, boolean saturated )
+                           float delta, float delta2, float error, long iter, byte[] coeff /*, boolean saturated */ )
   {
     super( context, R.string.CalibCoeffDialog );
     mApp     = app;
@@ -102,9 +102,9 @@ public class CalibCoeffDialog extends MyDialog
     iter0   = String.format( mContext.getResources().getString( R.string.calib_iter ), iter );
 
     if ( errors != null ) {
-      mBitmap = makeHistogramBitmap( errors, WIDTH, HEIGHT, 20, 5, 0xff6699ff );
+      mBitmap = makeHistogramBitmap( errors, WIDTH, HEIGHT, 20, 5, TDColor.BLUE );
     }
-    mSaturated = saturated;
+    // mSaturated = saturated;
   }
 
   static Bitmap makeHistogramBitmap( float[] error, int width, int height, int bin, int step, int col )
@@ -159,11 +159,11 @@ public class CalibCoeffDialog extends MyDialog
     }
     if ( 5  <= bin ) {
       x  = ioff + dx * 5;
-      for ( y = 0; y < joff; ++y ) bitmap.setPixel( x, y, 0xffffff00 );
+      for ( y = 0; y < joff; ++y ) bitmap.setPixel( x, y, TDColor.FIXED_YELLOW );
     }
     if ( 10  <= bin ) {
       x  = ioff + dx * 10;
-      for ( y = 0; y < joff; ++y ) bitmap.setPixel( x, y, 0xffff0000 );
+      for ( y = 0; y < joff; ++y ) bitmap.setPixel( x, y, TDColor.FULL_RED );
     }
     for ( int k = 10; ; k += 10 ) {
       y = joff - step * k;
@@ -218,11 +218,11 @@ public class CalibCoeffDialog extends MyDialog
       mTextMaxError.setText( error0 );
       mTextIter.setText( iter0 );
       mButtonWrite.setOnClickListener( this );
-      if ( mSaturated ) {
-        mButtonWrite.setEnabled( false );
-      } else {
+      // if ( mSaturated ) {
+      //   mButtonWrite.setEnabled( false );
+      // } else {
         mButtonWrite.setEnabled( mCoeff != null );
-      }
+      // }
       // mButtonBack  = (Button) findViewById( R.id.button_coeff_back );
       // mButtonBack.setOnClickListener( this );
     } else {

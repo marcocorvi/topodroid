@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import android.content.Context;
 // import android.app.Dialog;
 
-import android.graphics.Color;
+// import android.graphics.Color;
 import android.view.View.OnClickListener;
 
 // import android.widget.RadioButton;
@@ -83,7 +83,7 @@ class ItemSymbol
 
     if ( mUseText ) {
       mTextView = new TextView( context );
-      // mTextView.setBackgroundColor( Color.BLACK );
+      // mTextView.setBackgroundColor( TDColor.BLACK );
       mTextView.setText( mSymbol.getName() );
       ll.addView( mTextView, new LinearLayout.LayoutParams(lh,lw) );
     } else {
@@ -162,11 +162,11 @@ class ItemSymbol
     if ( mUseText ) {
       mCheckBox.setChecked( checked );
     } else {
-      mButton.setBackgroundColor( checked? 0xff444444 /* Color.DKGRAY */ : Color.BLACK ); // was 99333333
+      mButton.setBackgroundColor( checked? TDColor.DARK_GRAY : TDColor.BLACK ); 
       // if ( checked ) {
       //   mButton.setBackgroundDrawable( BrushManager.mSymbolHighlight );
       // } else {
-      //   mButton.setBackgroundColor( Color.BLACK ); 
+      //   mButton.setBackgroundColor( TDColor.BLACK ); 
       // }
     }
   }

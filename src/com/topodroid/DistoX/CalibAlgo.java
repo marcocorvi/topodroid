@@ -54,6 +54,34 @@ public class CalibAlgo
     return new Vector( x/TopoDroidUtil.FV, y/TopoDroidUtil.FV, z/TopoDroidUtil.FV );
   }
 
+  static final double MAX_M_VALUE = 1.99993896;
+
+  // this should never happen with BH algo
+  //
+  boolean hasSaturatedCoeff()
+  {
+    if ( Math.abs( aM.x.x ) >= MAX_M_VALUE ) return true;
+    if ( Math.abs( aM.y.y ) >= MAX_M_VALUE ) return true;
+    if ( Math.abs( aM.z.z ) >= MAX_M_VALUE ) return true;
+    return false;
+  }
+
+  // void checkCoeffOverflow()
+  // {
+  //   double mx = Math.abs( aM.x.x );
+  //   double my = Math.abs( aM.y.y );
+  //   double mz = Math.abs( aM.z.z );
+  //   if ( my > mx ) mx = my;
+  //   if ( mz > mx ) mx = mz;
+  //   if ( mx >= MAX_M_VALUE && mx < 2.01 ) {
+  //     float f = (float)( MAX_M_VALUE / (mx + 0.00000001) );
+  //     aM.x.x *= f;  aM.x.y *= f;  aM.x.z *= f;
+  //     aM.y.x *= f;  aM.y.y *= f;  aM.y.z *= f;
+  //     aM.z.x *= f;  aM.z.y *= f;  aM.z.z *= f;
+  //     bM.x *= f;    bM.y *= f;    bM.z *= f;
+  //   }
+  // }
+
   void EnforceMax2( Vector b, Matrix a )
   {
     double max = Math.abs( b.x );
@@ -69,8 +97,8 @@ public class CalibAlgo
     m = Math.abs( a.z.x ); if ( m > max ) max = m;
     m = Math.abs( a.z.y ); if ( m > max ) max = m;
     m = Math.abs( a.z.z ); if ( m > max ) max = m;
-    if ( max >= 2.0 ) {
-      float m1 = (float)(1.9999/max);
+    if ( max >= MAX_M_VALUE ) {
+      float m1 = (float)(MAX_M_VALUE / (max + 0.00000001) );
       TDLog.Log( TDLog.LOG_CALIB, "EnforceMax2 scale by " + m1 );
       b.x *= m1;
       b.y *= m1;
@@ -140,16 +168,6 @@ public class CalibAlgo
   public Vector GetNL() { return nL; }
 
   // public int nrCoeff() { return mNonLinear ? 52 : 48; }
-
-  static final double MAX_M_VALUE = 1.99993896;
-
-  boolean hasSaturatedCoeff()
-  {
-    if ( Math.abs( aM.x.x ) >= MAX_M_VALUE ) return true;
-    if ( Math.abs( aM.y.y ) >= MAX_M_VALUE ) return true;
-    if ( Math.abs( aM.z.z ) >= MAX_M_VALUE ) return true;
-    return false;
-  }
 
   static protected long roundV( float x )
   {

@@ -399,7 +399,8 @@ public class GMActivity extends Activity
           if ( saturated ) {
             Toast.makeText( this, "WARNING. Saturated calibration coefficients", Toast.LENGTH_SHORT).show();
           }
-          enableWrite( ! saturated );
+          // enableWrite( ! saturated );
+          enableWrite( true );
           Vector bg = mCalibration.GetBG();
           Matrix ag = mCalibration.GetAG();
           Vector bm = mCalibration.GetBM();
@@ -410,7 +411,7 @@ public class GMActivity extends Activity
 
           (new CalibCoeffDialog( this, mApp, bg, ag, bm, am, nL, errors,
                                  mCalibration.Delta(), mCalibration.Delta2(), mCalibration.MaxError(), 
-                                 result, coeff, saturated ) ).show();
+                                 result, coeff /* , saturated */ ) ).show();
         } else if ( result == 0 ) {
           Toast.makeText( this, R.string.few_iter, Toast.LENGTH_SHORT ).show();
           return;
@@ -593,7 +594,7 @@ public class GMActivity extends Activity
     if ( n_saturated > 0 ) {
       Toast toast = Toast.makeText( this, 
         getResources().getQuantityString( R.plurals.calib_saturated_values, n_saturated, n_saturated), Toast.LENGTH_LONG );
-      toast.getView().setBackgroundColor( 0xff993333 );
+      toast.getView().setBackgroundColor( TDColor.BROWN );
       toast.show();
     }
   }
@@ -709,9 +710,9 @@ public class GMActivity extends Activity
   {
     setTitle( mCalibName );
     if ( mBlkStatus == 0 ) {
-      setTitleColor( TDConst.COLOR_NORMAL );
+      setTitleColor( TDColor.NORMAL );
     } else {
-      setTitleColor( TDConst.COLOR_NORMAL2 );
+      setTitleColor( TDColor.NORMAL2 );
     }
   }
 
@@ -737,11 +738,11 @@ public class GMActivity extends Activity
     mButton1[BTN_WRITE].setEnabled( enable && mEnableWrite );
     mButton1[BTN_COVER].setEnabled( enable && mEnableWrite );
     if ( enable ) {
-      setTitleColor( TDConst.COLOR_NORMAL );
+      setTitleColor( TDColor.NORMAL );
       mButton1[BTN_TOGGLE].setBackgroundDrawable( mBMtoggle );
       mButton1[BTN_READ].setBackgroundDrawable( mBMread );
     } else {
-      setTitleColor( TDConst.COLOR_CONNECTED );
+      setTitleColor( TDColor.CONNECTED );
       mButton1[BTN_TOGGLE].setBackgroundDrawable( mBMtoggle_no );
       mButton1[BTN_READ].setBackgroundDrawable( mBMread_no );
     }
@@ -779,7 +780,7 @@ public class GMActivity extends Activity
           Toast.makeText( this, R.string.calib_device_mismatch, Toast.LENGTH_LONG ).show();
         } else {
           enableWrite( false );
-          setTitleColor( TDConst.COLOR_CONNECTED );
+          setTitleColor( TDColor.CONNECTED );
           if ( mAlgo == CalibInfo.ALGO_AUTO ) { 
             mAlgo = mApp.getCalibAlgoFromDevice();
             if ( mAlgo < CalibInfo.ALGO_AUTO ) {
@@ -820,7 +821,7 @@ public class GMActivity extends Activity
       } else if ( b == mButton1[3] ) { // COMPUTE
         if ( mApp.mCID >= 0 ) {
           setTitle( R.string.calib_compute_coeffs );
-          setTitleColor( TDConst.COLOR_COMPUTE );
+          setTitleColor( TDColor.COMPUTE );
           if ( mAlgo == CalibInfo.ALGO_AUTO ) { 
             mAlgo = ( TDSetting.mCalibAlgo != CalibInfo.ALGO_AUTO ) ? TDSetting.mCalibAlgo : CalibInfo.ALGO_LINEAR;
             mApp.updateCalibAlgo( mAlgo );
@@ -850,7 +851,7 @@ public class GMActivity extends Activity
             Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT).show();
           } else {
             setTitle( R.string.calib_write_coeffs );
-            setTitleColor( TDConst.COLOR_CONNECTED );
+            setTitleColor( TDColor.CONNECTED );
 
             byte[] coeff = mCalibration.GetCoeff();
             if ( coeff == null ) {
@@ -870,7 +871,7 @@ public class GMActivity extends Activity
   void computeGroups( long start_id )
   {
     setTitle( R.string.calib_compute_groups );
-    setTitleColor( TDConst.COLOR_COMPUTE );
+    setTitleColor( TDColor.COMPUTE );
     new CalibComputer( this, start_id, CalibComputer.CALIB_COMPUTE_GROUPS ).execute();
   }
 
@@ -882,7 +883,7 @@ public class GMActivity extends Activity
   void resetAndComputeGroups( long start_id )
   {
     setTitle( R.string.calib_compute_groups );
-    setTitleColor( TDConst.COLOR_COMPUTE );
+    setTitleColor( TDColor.COMPUTE );
     new CalibComputer( this, start_id, CalibComputer.CALIB_RESET_AND_COMPUTE_GROUPS ).execute();
   }
 

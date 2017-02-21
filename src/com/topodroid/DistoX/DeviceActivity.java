@@ -386,14 +386,14 @@ public class DeviceActivity extends Activity
       }
     }
     if ( enable ) {
-      setTitleColor( TDConst.COLOR_NORMAL );
+      setTitleColor( TDColor.NORMAL );
       mButton1[IDX_TOGGLE].setBackgroundDrawable( mBMtoggle );
       mButton1[IDX_CALIB].setBackgroundDrawable( mBMcalib );
       if ( TDSetting.mLevelOverNormal ) {
         mButton1[IDX_READ].setBackgroundDrawable( mBMread);
       }
     } else {
-      setTitleColor( TDConst.COLOR_CONNECTED );
+      setTitleColor( TDColor.CONNECTED );
       mButton1[IDX_TOGGLE].setBackgroundDrawable( mBMtoggle_no );
       mButton1[IDX_CALIB].setBackgroundDrawable( mBMcalib_no );
       if ( TDSetting.mLevelOverNormal ) {
@@ -475,7 +475,7 @@ public class DeviceActivity extends Activity
       if ( mDevice == null ) {
         Toast.makeText( this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
       } else {
-        // setTitleColor( TDConst.COLOR_CONNECTED ); // USELESS
+        // setTitleColor( TDColor.CONNECTED ); // USELESS
         if ( mDevice.mType == Device.DISTO_A3 ) {
           new DeviceA3InfoDialog( this, this, mDevice ).show();
         } else if ( mDevice.mType == Device.DISTO_X310 ) {
@@ -483,7 +483,7 @@ public class DeviceActivity extends Activity
         } else {
           TDLog.Error( "Unknown DistoX type " + mDevice.mType );
         }
-        // setTitleColor( TDConst.COLOR_NORMAL );
+        // setTitleColor( TDColor.NORMAL );
       }
 
     }

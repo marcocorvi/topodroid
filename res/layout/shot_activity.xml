@@ -46,7 +46,7 @@
        android:stackFromBottom="true"
        android:transcriptMode="disabled"
        android:textSize="12sp"
-       android:fastScrollEnabled="false"
+       android:fastScrollEnabled="true"
        android:scrollingCache="true"
        android:smoothScrollbar="false"
        android:background="#111"

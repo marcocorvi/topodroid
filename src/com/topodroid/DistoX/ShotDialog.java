@@ -379,7 +379,7 @@ public class ShotDialog extends MyDialog
 
     // if ( ! TopoDroidApp.mLoopClosure ) {
     //   mRBignore.setClickable( false );
-    //   mRBignore.setTextColor( 0xff999999 );
+    //   mRBignore.setTextColor( TDColor.MID_GRAY );
     // }
 
     mButtonPrev = (Button) findViewById(R.id.btn_prev );

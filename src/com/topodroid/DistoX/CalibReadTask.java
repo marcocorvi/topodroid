@@ -75,12 +75,12 @@ class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
       switch ( mParentType ) {
         case PARENT_DEVICE:
           if ( mApp.mDeviceActivityVisible ) {
-            (new CalibCoeffDialog( mActivity, mApp, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0, null, false ) ).show();
+            (new CalibCoeffDialog( mActivity, mApp, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
           }
           break;
         case PARENT_GM:
           if ( mApp.mGMActivityVisible ) {
-            (new CalibCoeffDialog( mActivity, mApp, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0, null, false ) ).show();
+            (new CalibCoeffDialog( mActivity, mApp, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
           }
           break;
       }
