@@ -1,7 +1,9 @@
 symbol point
 name mud
+name-de Schlamm
 name-it fango
 name-pt lama
+name-ru грязь
 th_name u:mud
 orientation no
 color 0xffcc66
