@@ -201,9 +201,10 @@
     <string name="out">out*kint???</string>
     <string name="in">in*bent???</string>
     <!-- UNUSED string name="none">none</string -->
-    <string name="barrier_add">Hide following shots*Következő mérések elrejtése</string>
+    <!-- UNUSED string name="barrier_add">Hide following shots*Következő mérések elrejtése</string -->
+    <!-- TODO string name="hide_from">Hide from</string -->
     <string name="barrier_del">Show following shots*Következő mérések mutatása</string>
-    <string name="hidden_add">Hide previous shots*Előző mérések elrejtése</string>
+    <!-- UNUSED string name="hidden_add">Hide previous shots*Előző mérések elrejtése</string -->
     <string name="hidden_del">Show previous shots*Előző mérések mutatása</string>
     <string name="splays_toggle">Toggle splays display*Mutassa a fix pontokat </string>
     <string name="fixed">fixed*csavarral állandósított</string>

@@ -81,7 +81,7 @@
       <TextView android:id="@+id/barrier_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
-        android:text="@string/barrier_add"
+        android:text="@string/barrier_del"
         />
     </LinearLayout>
 
@@ -104,7 +104,7 @@
       <TextView android:id="@+id/hidden_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
-        android:text="@string/hidden_add"
+        android:text="@string/hidden_del"
         />
     </LinearLayout>
 

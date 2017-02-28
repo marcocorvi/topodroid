@@ -349,8 +349,11 @@ public class ShotWindow extends Activity
     if ( mDataAdapter != null ) {
       mDataAdapter.addDataBlock( blk );
       // FIXME 3.3.0
-      // mApp.assignStations( mDataAdapter.mItems );
-      mApp.assignStations( mDataAdapter.getItemsForAssign() );
+      if ( TDSetting.mBacksightShot || TDSetting.mTripodShot ) {
+        mApp.assignStations( mDataAdapter.mItems );
+      } else {
+        mApp.assignStations( mDataAdapter.getItemsForAssign() );
+      }
       mList.post( new Runnable() {
         @Override public void run() {
           // Log.v("DistoX", "notify data set changed");
@@ -1535,7 +1538,13 @@ public class ShotWindow extends Activity
     // Log.v("DistoX", "renumber shots after " + blk.mLength + " " + blk.mBearing + " " + blk.mClino );
     // NEED TO FORWARD to the APP to change the stations accordingly
  
-    List< DBlock > shots = mApp.mData.selectAllShotsAfter( blk.mId, mApp.mSID, TopoDroidApp.STATUS_NORMAL );
+    List< DBlock > shots;
+    // backsight and tripod seem o be OK
+    // if ( TDSetting.mTripodShot || TDSetting.mBacksightShot ) {
+    //   shots = mApp.mData.selectAllShots( mApp.mSID, TopoDroidApp.STATUS_NORMAL );
+    // } else {
+      shots = mApp.mData.selectAllShotsAfter( blk.mId, mApp.mSID, TopoDroidApp.STATUS_NORMAL );
+    // }
     mApp.assignStationsAfter( blk, shots );
 
     // DEBUG re-assign all the stations

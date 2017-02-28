@@ -54,7 +54,6 @@ public class NumBranch
 
   void addShot( NumShot shot )
   {
-    // TDLog.Log( TDLog.LOG_NUM, "Br add shot(" + shot.from.name + "-" + shot.to.name + ") bdir " + shot.mBranchDir + " sdir " + shot.mDirection );
     shots.add( shot );
     // float d = shot.length();
     // len += d;
@@ -71,7 +70,8 @@ public class NumBranch
       float b = sh.bearing(); // degrees
       float c = sh.clino(); // degrees
       len += d;
-      d *= sh.mDirection * sh.mBranchDir;
+      // d *= sh.mDirection * sh.mBranchDir; // FIXME DIRCETION
+      d *= sh.mBranchDir;
       v -= d * TDMath.sind(c);
       float h0 = d * TDMath.abs( TDMath.cosd(c) );
       s -= h0 * TDMath.cosd(b);
@@ -94,15 +94,16 @@ public class NumBranch
       float h1 =  d * TDMath.abs( TDMath.cosd(c) );
       float s1 = -h1 * TDMath.cosd(b);
       float e1 =  h1 * TDMath.sind(b);
-      float l = d * sh.mDirection * sh.mBranchDir;
+      // float l = d * sh.mDirection * sh.mBranchDir; // FIXME DIRECTION
+      float l = d * sh.mBranchDir;
       e1 += e0*l;
       s1 += s0*l;
       v1 += v0*l;
      
       h1 = TDMath.sqrt( e1*e1 + s1*s1 );
-      b = TDMath.atan2d( e1, -s1 ); // + 90.0f * (1 - sh.mDirection);
+      b = TDMath.atan2d( e1, -s1 ); // + 90.0f * (1 - sh.mDirection); // FIXME PRE-DIRECTION
       if ( b < 0 ) b += 360;
-      c = TDMath.atan2d( -v1, h1 ); // * sh.mDirection;
+      c = TDMath.atan2d( -v1, h1 ); // * sh.mDirection; // FIXME PRE-DIRECTION
       d = TDMath.sqrt( h1*h1 + v1*v1 );
       sh.reset( d, b, c );
     }

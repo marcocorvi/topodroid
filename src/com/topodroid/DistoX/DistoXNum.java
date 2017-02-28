@@ -211,6 +211,22 @@ class DistoXNum
     return st.barrier();
   }
 
+  // for the shot FROM-TO
+  int canBarrierHidden( String from, String to )
+  {
+    int has_shot = hasShot( from, to );
+    if ( has_shot == 0 ) return 0;
+    int ret = 0;
+    if ( has_shot == 1 ) {
+      if ( ! isHidden( from ) )  ret |= 0x02;
+      if ( ! isBarrier( to ) )   ret |= 0x04;
+    } else { // has_shot == -1
+      if ( ! isBarrier( from ) ) ret |= 0x01;
+      if ( ! isHidden( to ) )    ret |= 0x08;
+    }
+    return ret;
+  }
+
   // ================================================================================
   /** create the numerical centerline
    * @param data     list of survey data
@@ -293,6 +309,19 @@ class DistoXNum
       if ( s2.equals( sh.from.name ) && s1.equals( sh.to.name ) ) return sh;
     }
     return null;
+  }
+
+  // return +1 if has shot s1-s2
+  //        -1 if has shot s2-s1
+  //         0 otherwise
+  private int hasShot( String s1, String s2 )
+  {
+    if ( s1 == null || s2 == null ) return 0;
+    for (NumShot sh : mShots ) {
+      if ( s1.equals( sh.from.name ) && s2.equals( sh.to.name ) ) return sh.mDirection;
+      if ( s2.equals( sh.from.name ) && s1.equals( sh.to.name ) ) return -sh.mDirection;
+    }
+    return 0;
   }
 
 
@@ -604,13 +633,14 @@ class DistoXNum
    * @param st    to station
    * @param ts    temp shot
    */
-  private NumShot makeShotFromTmp( NumStation sf, NumStation st, TriShot ts, float anomaly, float mDecl )
+  private NumShot makeShotFromTmp( NumStation sf, NumStation st, TriShot ts, int direction, float anomaly, float mDecl )
   {
     if ( ts.reversed != 1 ) {
       TDLog.Error( "making shot from reversed temp " + sf.name + " " + st.name );
     }
     // Log.v("DistoX", "make shot " + sf.name + "-" + st.name + " blocks " + ts.blocks.size() );
-    NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), 1, anomaly, mDecl );
+    // NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), 1, anomaly, mDecl ); // FIXME DIRECTION
+    NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), direction, anomaly, mDecl );
     ArrayList<DBlock> blks = ts.getBlocks();
     for ( int k = 1; k < blks.size(); ++k ) {
       sh.addBlock( blks.get(k) );
@@ -846,11 +876,11 @@ class DistoXNum
               st1.mDuplicate = true;
               mStations.addStation( st1 );
 
-              sh = makeShotFromTmp( sf, st1, ts, sf.mAnomaly, mDecl );
+              sh = makeShotFromTmp( sf, st1, ts, 1, sf.mAnomaly, mDecl );
               addShotToStations( sh, st1, sf );
             } else { // close loop
               // TDLog.Log( TDLog.LOG_NUM, "close loop");
-              sh = makeShotFromTmp( sf, st, ts, sf.mAnomaly, mDecl ); 
+              sh = makeShotFromTmp( sf, st, ts, 0, sf.mAnomaly, mDecl ); 
               addShotToStations( sh, sf, st );
             }
             addToStats( ts.duplicate, ts.surface, Math.abs(ts.d() ) ); // NOTE Math.abs is not necessary
@@ -877,7 +907,7 @@ class DistoXNum
             addToStats( ts.duplicate, ts.surface, Math.abs(ts.d() ), st.v );
             mStations.addStation( st );
 
-            sh = makeShotFromTmp( sf, st, ts, sf.mAnomaly, mDecl );
+            sh = makeShotFromTmp( sf, st, ts, 1, sf.mAnomaly, mDecl );
             addShotToStations( sh, st, sf );
             ts.used = true;
             repeat = true;
@@ -903,7 +933,7 @@ class DistoXNum
 
           // FIXME is st.mAnomaly OK ?
           // N.B. was new NumShot(st, sf, ts.block, -1, mDecl); // FIXME check -anomaly
-          sh = makeShotFromTmp( sf, st, ts, st.mAnomaly, mDecl );
+          sh = makeShotFromTmp( sf, st, ts, -1, st.mAnomaly, mDecl );
           addShotToStations( sh, sf, st );
           ts.used = true;
           repeat = true;
@@ -938,7 +968,8 @@ class DistoXNum
           float b2 = sh2.bearing() + mDecl;
           if ( s1.mHasCoords && ! s2.mHasCoords ) {
             // reset s2 values from the shot
-            float d = sh2.length() * sh2.mDirection;
+            // float d = sh2.length() * sh2.mDirection; // FIXME DIRECTION
+            float d = sh2.length();
             float v = - d * TDMath.sind( c2 );
             float h =   d * TDMath.cosd( c2 );
             float e =   h * TDMath.sind( b2 );
@@ -952,7 +983,8 @@ class DistoXNum
             // Log.v( TopoDroidApp.TAG, "reset " + s1.name + "->" + s2.name + " " + e + " " + s + " " + v );
           } else if ( s2.mHasCoords && ! s1.mHasCoords ) {
             // reset s1 values from the shot
-            float d = - sh2.length() * sh2.mDirection;
+            // float d = - sh2.length() * sh2.mDirection; // FIXME DIRECTION
+            float d = - sh2.length();
             float v = - d * TDMath.sind( c2 );
             float h =   d * TDMath.cosd( c2 );
             float e =   h * TDMath.sind( b2 );

@@ -40,7 +40,7 @@ public class DrawingStationDialog extends MyDialog
     private TextView mCoords;
     private Button mBtnOK;
     private Button mBtnSet;
-    private Button mBtnBreak;
+    private Button mBtnBarrier;
     private Button mBtnHidden;
     private Button mBtnSplays;
 
@@ -91,7 +91,7 @@ public class DrawingStationDialog extends MyDialog
       mCoords       = (TextView) findViewById(R.id.coords);
       mCoords.setText( mStation.getCoordsString() );
 
-      mBtnBreak  = (Button) findViewById(R.id.btn_break );
+      mBtnBarrier  = (Button) findViewById(R.id.btn_break );
       mBtnHidden = (Button) findViewById(R.id.btn_hidden );
       mBtnSplays = (Button) findViewById(R.id.btn_splays );
       mBtnOK     = (Button) findViewById(R.id.btn_ok);
@@ -109,7 +109,7 @@ public class DrawingStationDialog extends MyDialog
       if ( mParent.isAnySection() ) {
         mBtnOK.setVisibility( View.GONE );
         mBtnSet.setVisibility( View.GONE );
-        mBtnBreak.setVisibility( View.GONE );
+        mBtnBarrier.setVisibility( View.GONE );
         mBtnHidden.setVisibility( View.GONE );
         mBarrierLabel.setVisibility( View.GONE );
         mHiddenLabel.setVisibility( View.GONE );
@@ -134,8 +134,6 @@ public class DrawingStationDialog extends MyDialog
           mBtnOK.setOnClickListener( this );
         }
         mBtnSet.setOnClickListener( this );
-        mBtnBreak.setOnClickListener( this );
-        mBtnHidden.setOnClickListener( this );
         mBtnSplays.setOnClickListener( this );
     
         if ( TDSetting.mLevelOverAdvanced ) {
@@ -198,10 +196,16 @@ public class DrawingStationDialog extends MyDialog
 
         mBtnCancel.setOnClickListener( this );
         if ( mIsBarrier ) {
-          mBarrierLabel.setText( mContext.getResources().getString(R.string.barrier_del) );
+          mBtnBarrier.setOnClickListener( this );
+        } else {
+          mBtnBarrier.setVisibility( View.GONE );
+          mBarrierLabel.setVisibility( View.GONE );
         }
         if ( mIsHidden ) {
-          mHiddenLabel.setText( mContext.getResources().getString(R.string.hidden_del) );
+          mBtnHidden.setOnClickListener( this );
+        } else {
+          mBtnHidden.setVisibility( View.GONE );
+          mHiddenLabel.setVisibility( View.GONE );
         }
       }
     }
@@ -220,7 +224,7 @@ public class DrawingStationDialog extends MyDialog
         /* nothing */
       } else if ( b == mBtnSet ) {
         mParent.setCurrentStationName( mStationName );
-      } else if ( b == mBtnBreak ) {
+      } else if ( b == mBtnBarrier ) {
         mParent.toggleStationBarrier( mStationName, mIsBarrier );
       } else if ( b == mBtnHidden ) {
         mParent.toggleStationHidden( mStationName, mIsHidden );
@@ -256,6 +260,8 @@ public class DrawingStationDialog extends MyDialog
       mParent.openXSection( mStation, mStationName, mParent.getPlotType(), b, c );
       dismiss();
     }
+
+    public void setJpegData( byte[] data ) { }
   
 }
         

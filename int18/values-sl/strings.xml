@@ -204,9 +204,10 @@
     <string name="out">zunaj</string>
     <string name="in">notri</string>
     <!-- UNUSED string name="none">none</string -->
-    <string name="barrier_add">Ovira</string>
+    <!-- UNUSED string name="barrier_add">Ovira</string -->
+    <!-- TODO string name="hide_from">Hide from</string -->
     <string name="barrier_del">Ovira izbriši</string>
-    <string name="hidden_add">Skriji mediano linijo</string>
+    <!-- UNUSED string name="hidden_add">Skriji mediano linijo</string -->
     <string name="hidden_del">Pokaži mediano linijo</string>
     <string name="splays_toggle">Pokaži ali skrij stranske vizure</string>
     <string name="fixed">fiksen</string>

@@ -21,6 +21,7 @@ public class NumShot
   ArrayList<DBlock> blocks;
   int mBranchDir; // branch direction
   int mDirection; // direction of the block (1 same, -1 opposite)
+                  // this is used only to decide between barrier and hidden
   NumBranch branch;
   boolean mUsed;  // whether the shot has been used in the station coords recomputation after loop-closure
   boolean mIgnoreExtend;
@@ -61,8 +62,6 @@ public class NumShot
     mExtend  = (int)(blk.mExtend);
   }
 
-  boolean reversed() { return (mDirection == -1); }
-
   // boolean isRecent( long id ) { return blocks.get(0) != null && blocks.get(0).isRecent( id ); }
 
   void addBlock( DBlock blk )
@@ -81,15 +80,16 @@ public class NumShot
       // mBearing = (mBearing * n  + b ) / (n+1);
       mAvgLeg.add( blk );
     }
-    if ( mDirection == -1 ) {
-      compute( from, to ); // compute the coords of "from" from "to"
-    } else {
+    // FIXME DIRECTION
+    // if ( mDirection == -1 ) {
+    //   compute( from, to ); // compute the coords of "from" from "to"
+    // } else {
       compute( to, from ); // compute the coords of "to" from "from"
-    }
+    // }
   }
 
   // compute the coords of "st" from those of "sf"
-  void compute( NumStation st, NumStation sf )
+  private void compute( NumStation st, NumStation sf )
   {
     float l = length();
     float b = bearing();

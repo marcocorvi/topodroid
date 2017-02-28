@@ -17,4 +17,6 @@ interface IBearingAndClino
   // @param c0 clino
   public void setBearingAndClino( float b0, float c0 );
 
+  public void setJpegData( byte[] data );
+
 }

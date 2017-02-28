@@ -200,9 +200,10 @@
     <string name="out">Fuera</string>
     <string name="in">Dentro</string>
     <!-- UNUSED string name="none">Nada</string -->
-    <string name="barrier_add">¿Quiere dividir dibujo de la poligonal principal?</string>
+    <!-- UNUSED string name="barrier_add">¿Quiere dividir dibujo de la poligonal principal?</string -->
+    <!-- TODO string name="hide_from">Hide from</string -->
     <string name="barrier_del">¿Quiere unir dibujo de la poligonal principal?</string>
-    <string name="hidden_add">Oculta dibujo de la poligonal principal</string>
+    <!-- UNUSED string name="hidden_add">Oculta dibujo de la poligonal principal</string -->
     <string name="hidden_del">Mostrar dibujo de la poligonal principal</string>
     <string name="splays_toggle">Cambiar a tomas laterales</string>
     <string name="fixed">Fijo</string>

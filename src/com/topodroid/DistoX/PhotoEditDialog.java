@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import java.io.IOException;
+
 import android.app.Dialog;
 import android.os.Bundle;
 
@@ -31,6 +33,8 @@ import android.view.KeyEvent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import android.media.ExifInterface;
+
 import android.util.Log;
 
 public class PhotoEditDialog extends MyDialog
@@ -45,6 +49,7 @@ public class PhotoEditDialog extends MyDialog
   private Button   mButtonOK;
   private Button   mButtonDelete;
   // private Button   mButtonCancel;
+  private String mAzimuth;
 
   /**
    * @param context   context
@@ -56,6 +61,14 @@ public class PhotoEditDialog extends MyDialog
     mPhoto  = photo;
     mFilename = filename;
     // TDLog.Log(TDLog.LOG_PHOTO, "PhotoEditDialog " + mFilename);
+    try {
+      ExifInterface exif = new ExifInterface( mFilename );
+      mAzimuth = exif.getAttribute( "GPSImgDirection" );
+      Log.v("DistoX", "azimuth " + ( (mAzimuth == null)? "null" : mAzimuth ) );
+    } catch ( IOException e ) {
+      Log.v("DistoX", "failed exif interface " + mFilename );
+      mAzimuth = null;
+    }
   }
 
 // -------------------------------------------------------------------
@@ -67,10 +80,17 @@ public class PhotoEditDialog extends MyDialog
     initLayout( R.layout.photo_edit_dialog, R.string.title_photo_comment );
 
     mIVimage      = (ImageView) findViewById( R.id.photo_image );
+    TextView azimuth = (TextView) findViewById( R.id.photo_azimuth );
     mETcomment    = (EditText) findViewById( R.id.photo_comment );
     mButtonOK     = (Button) findViewById( R.id.photo_ok );
     mButtonDelete = (Button) findViewById( R.id.photo_delete );
     // mButtonCancel = (Button) findViewById( R.id.photo_cancel );
+
+    if ( mAzimuth != null ) {
+      azimuth.setText( String.format( mContext.getResources().getString( R.string.photo_azimuth ), mAzimuth ) );
+    } else {
+      azimuth.setVisibility( View.GONE );
+    }
 
     // public String mPhoto.mDate;
     if ( mPhoto.mComment != null ) {

@@ -202,9 +202,10 @@
     <string name="out">зовнішній</string>
     <string name="in">внутрішній</string>
     <!-- UNUSED string name="none">none</string -->
-    <string name="barrier_add">Приховати нитку ходу після цього пікету?</string>
+    <!-- UNUSED string name="barrier_add">Приховати нитку ходу після цього пікету?</string -->
+    <!-- TODO string name="hide_from">Hide from</string -->
     <string name="barrier_del">Показати нитку ходу після цього пікету?</string>
-    <string name="hidden_add">Приховати нитку ходу до цього пікету</string>
+    <!-- UNUSED string name="hidden_add">Приховати нитку ходу до цього пікету</string -->
     <string name="hidden_del">Показати нитку ходу до цього пікету</string>
     <string name="splays_toggle">Показати/приховати бок. заміри</string>
     <string name="fixed">фіксований репер</string>

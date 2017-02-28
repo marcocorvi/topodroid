@@ -30,6 +30,8 @@ import android.widget.LinearLayout;
 import android.text.InputType;
 import android.inputmethodservice.KeyboardView;
 
+import android.util.Log;
+
 public class DrawingShotDialog extends MyDialog 
                                implements View.OnClickListener
                                , View.OnLongClickListener
@@ -49,19 +51,28 @@ public class DrawingShotDialog extends MyDialog
   // private RadioButton mRBsurvey;
   private MyCheckBox mRBdup;
   private MyCheckBox mRBsurf;
+  private CheckBox mCBfrom;
+  private CheckBox mCBto;
   // private CheckBox mRBbackshot;
   private Button mRBwalls;
 
   private DrawingWindow mParent;
   private DBlock mBlock;
+  private int mFlag; // can barrier/hidden FROM and TO
+  // 0x01 can barrier FROM
+  // 0x02 can hidden  FROM
+  // 0x04 can barrier TO
+  // 0x08 can hidden  TO
 
   MyKeyboard mKeyboard = null;
 
-  public DrawingShotDialog( Context context, DrawingWindow parent, DrawingPath shot )
+  public DrawingShotDialog( Context context, DrawingWindow parent, DrawingPath shot, int flag )
   {
     super(context, R.string.DrawingShotDialog );
     mParent  = parent;
     mBlock   = shot.mBlock;
+    mFlag    = flag;
+    Log.v("DistoX", "FLAG " + mFlag + " FROM " + mBlock.mFrom + " TO " + mBlock.mTo );
   }
 
   @Override
@@ -96,9 +107,11 @@ public class DrawingShotDialog extends MyDialog
     // mRBsurf = (CheckBox) findViewById( R.id.surface );
     // mRBbackshot  = (CheckBox) findViewById( R.id.backshot );
 
-    LinearLayout layout3 = (LinearLayout) findViewById( R.id.layout3 );
+    LinearLayout layout3  = (LinearLayout) findViewById( R.id.layout3 );
+    LinearLayout layout3b = (LinearLayout) findViewById( R.id.layout3b );
     int size = TopoDroidApp.getScaledSize( mContext );
     layout3.setMinimumHeight( size + 20 );
+    layout3b.setMinimumHeight( size + 20 );
 
     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
       LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
@@ -108,6 +121,27 @@ public class DrawingShotDialog extends MyDialog
     mRBsurf     = new MyCheckBox( mContext, size, R.drawable.iz_surface_ok, R.drawable.iz_surface_no );
     layout3.addView( mRBdup, lp );
     layout3.addView( mRBsurf, lp );
+
+    mCBfrom = null;
+    mCBto = null;
+    boolean hide3b = true;
+    if ( mBlock.type() == DBlock.BLOCK_MAIN_LEG ) {
+      if ( ( mFlag & 0x03 ) != 0 ) { // FROM can be barrier/hidden
+        mCBfrom = new CheckBox( mContext );
+        mCBfrom.setText( mBlock.mFrom );
+        mCBfrom.setChecked( false );
+        layout3b.addView( mCBfrom, lp );
+        hide3b = false;
+      }
+      if ( ( mFlag & 0x0c ) != 0 ) { // TO can be barrier/hidden
+        mCBto   = new CheckBox( mContext );
+        mCBto.setText( mBlock.mTo );
+        mCBto.setChecked( false );
+        layout3b.addView( mCBto, lp );
+        hide3b = false;
+      }
+    }
+    if ( hide3b ) layout3b.setVisibility( View.GONE );
 
     mRBwalls  = (Button) findViewById( R.id.walls );
 
@@ -237,6 +271,21 @@ public class DrawingShotDialog extends MyDialog
     } else if ( b == mBtnOK ) {
       long extend = mBlock.mExtend;
       long flag   = mBlock.mFlag;
+
+      if ( mCBfrom.isChecked() ) {
+        if ( ( mFlag & 0x01 ) == 0x01 ) { // can barrier FROM
+          mParent.toggleStationBarrier( mBlock.mFrom, false );
+        } else if ( ( mFlag & 0x02 ) == 0x02 ) { // can hidden FROM
+          mParent.toggleStationHidden( mBlock.mFrom, false );
+        }
+      }
+      if ( mCBto.isChecked() ) {
+        if ( ( mFlag & 0x04 ) == 0x04 ) { // can barrier TO
+          mParent.toggleStationBarrier( mBlock.mTo, false );
+        } else if ( ( mFlag & 0x08 ) == 0x08 ) { // can hidden TO
+          mParent.toggleStationHidden( mBlock.mTo, false );
+        }
+      }
 
       if ( mRBleft.isChecked() ) { extend = DBlock.EXTEND_LEFT; }
       else if ( mRBvert.isChecked() ) { extend = DBlock.EXTEND_VERT; }

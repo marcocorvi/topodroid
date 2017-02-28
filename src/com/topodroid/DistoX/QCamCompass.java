@@ -43,13 +43,15 @@ public class QCamCompass extends Dialog
   float mBearing;
   float mClino;
   boolean mHasBearingAndClino;
-  ShotNewDialog mShotNewDialog;
+  IBearingAndClino mCallback;
+  boolean mWithBox;
 
-  QCamCompass( Context context, ShotNewDialog dialog )
+  QCamCompass( Context context, IBearingAndClino callback, boolean with_box )
   {
     super( context );
-    mContext = context;
-    mShotNewDialog = dialog;
+    mContext  = context;
+    mCallback = callback;
+    mWithBox  = with_box;
   }
 
   @Override
@@ -73,8 +75,10 @@ public class QCamCompass extends Dialog
     mTVdata = (TextView)findViewById( R.id.data );
     mHasBearingAndClino = false; 
 
-    mBox = new QCamBox( mContext );
-    addContentView( mBox, new LayoutParams( LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT ) );
+    if ( mWithBox ) {
+      mBox = new QCamBox( mContext );
+      addContentView( mBox, new LayoutParams( LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT ) );
+    }
   }
 
   // implements
@@ -89,6 +93,8 @@ public class QCamCompass extends Dialog
     mSurface.takePicture();
   }
 
+  public void setJpegData( byte[] data ) { }
+
   @Override
   public void onClick(View v)
   {
@@ -99,9 +105,9 @@ public class QCamCompass extends Dialog
       return;
     } else if ( b == buttonSave ) {
       if ( mHasBearingAndClino ) {
-        if ( mShotNewDialog != null ) {
-          mShotNewDialog.setBearingAndClino( mBearing, mClino );
-          mShotNewDialog.mJpegData = mSurface.mJpegData;
+        if ( mCallback != null ) {
+          mCallback.setBearingAndClino( mBearing, mClino );
+          mCallback.setJpegData( mSurface.mJpegData );
         }
       }
     } else if ( b == buttonCancel ) {

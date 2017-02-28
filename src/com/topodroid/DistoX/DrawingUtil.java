@@ -15,6 +15,7 @@ import android.graphics.Paint;
 // import android.graphics.Paint.FontMetrics;
 // import android.graphics.PointF;
 import android.graphics.Path;
+import android.graphics.RectF;
 // import android.graphics.Path.Direction;
 
 
@@ -125,6 +126,17 @@ class DrawingUtil
       float y0 = toSceneY( y * TDSetting.mUnitGrid ) - yoff;
       addGridLine( y, x1, x2, y0, y0, surface );
     }
+  }
+
+  static RectF getBoundingBox( DrawingCommandManager plot )
+  {
+    RectF bbox = new RectF( 0, 0, 0, 0 );
+    for ( ICanvasCommand cmd : plot.getCommands() ) {
+      if ( cmd.commandType() != 0 ) continue;
+      DrawingPath p = (DrawingPath)cmd;
+      bbox.union( p );
+    }
+    return bbox;
   }
 
 }

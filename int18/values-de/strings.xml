@@ -206,9 +206,10 @@
     <string name="out">draußen</string>
     <string name="in">innen</string>
     <!-- UNUSED string name="none">kein</string -->
-    <string name="barrier_add">Nachfolgende Messungen ausblenden</string>
+    <!-- UNUSED string name="barrier_add">Nachfolgende Messungen ausblenden</string -->
+    <!-- TODO string name="hide_from">Hide from</string -->
     <string name="barrier_del">Nachfolgende Messungen anzeigen</string>
-    <string name="hidden_add">Vorherige Messungen ausblenden</string>
+    <!-- NO string name="hidden_add">Vorherige Messungen ausblenden</string -->
     <string name="hidden_del">Vorherige Messungen anzeigen</string>
     <string name="splays_toggle">Hilfszüge ein/ausblenden</string>
     <string name="fixed">fixiert</string>

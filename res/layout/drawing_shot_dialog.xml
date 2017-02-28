@@ -117,12 +117,28 @@
     </LinearLayout>
 
     <!-- TODO comment -->
+    <LinearLayout 
+      android:id="@+id/layout3b"
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:layout_below="@id/layout3"
+      android:orientation="horizontal" 
+      >
+      <TextView
+        android:id="@+id/shot_hide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="10dp"
+        android:textSize="14sp"
+        android:text="@string/hide_from"
+      />
+    </LinearLayout>
 
     <LinearLayout 
       android:id="@+id/layout4"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:layout_below="@id/layout3"
+      android:layout_below="@id/layout3b"
       android:orientation="horizontal" 
       android:layout_marginTop="25dip"
       >

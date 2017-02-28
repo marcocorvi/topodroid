@@ -3334,6 +3334,7 @@ public class DrawingWindow extends ItemDrawer
       } else if ( b == mButton3[k3++] ) { // EDIT ITEM PROPERTIES
         SelectionPoint sp = mDrawingSurface.hotItem();
         if ( sp != null ) {
+          int flag = 0;
           switch ( sp.type() ) {
             case DrawingPath.DRAWING_PATH_NAME:
               DrawingStationName sn = (DrawingStationName)(sp.mItem);
@@ -3369,8 +3370,12 @@ public class DrawingWindow extends ItemDrawer
               // mModified = true;
               break;
             case DrawingPath.DRAWING_PATH_FIXED:
+              DrawingPath p = (DrawingPath)(sp.mItem);
+              if ( p != null && p.mBlock != null ) {
+                flag = mNum.canBarrierHidden( p.mBlock.mFrom, p.mBlock.mTo );
+              }
             case DrawingPath.DRAWING_PATH_SPLAY:
-              new DrawingShotDialog( mActivity, this, (DrawingPath)(sp.mItem) ).show();
+              new DrawingShotDialog( mActivity, this, (DrawingPath)(sp.mItem), flag ).show();
               break;
           }
         }
@@ -3567,7 +3572,7 @@ public class DrawingWindow extends ItemDrawer
     // used by SavePlotFileTask
     void doSaveWithExt( long type, final String filename, final String ext, boolean toast )
     {
-      // Log.v("DistoX", "save with ext: " + filename + " ext " + ext );
+      Log.v("DistoX", "save with ext: " + filename + " ext " + ext );
       if ( PlotInfo.isProfile( type ) ) {
         new ExportPlotToFile( mActivity, mDrawingSurface.mCommandManager2, mNum, type, filename, ext, toast ).execute();
       } else if ( type == PlotInfo.PLOT_PLAN ) {

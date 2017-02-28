@@ -202,9 +202,10 @@
 <string name="out">externe</string>
 <string name="in">interne</string>
 <!-- UNUSED string name="none">aucun</string -->
-<string name="barrier_add">Cacher les visées suivantes</string>
+<!-- UNUSED string name="barrier_add">Cacher les visées suivantes</string -->
+    <!-- TODO string name="hide_from">Hide from</string -->
 <string name="barrier_del">Afficher les visées suivantes</string>
-<string name="hidden_add">Cacher les visées precedentes</string>
+<!-- UNUSED string name="hidden_add">Cacher les visées precedentes</string -->
 <string name="hidden_del">Afficher les visées precedentes</string>
 <string name="splays_toggle">Basculer les visées d\'habillage - Splays</string>
 <string name="fixed">fixé</string>

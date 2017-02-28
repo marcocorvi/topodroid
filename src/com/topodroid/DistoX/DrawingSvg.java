@@ -25,7 +25,9 @@ import java.io.PrintWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
-// import android.util.Log;
+import android.graphics.RectF;
+
+import android.util.Log;
 
 class DrawingSvg
 {
@@ -58,43 +60,20 @@ class DrawingSvg
     String wall_group = BrushManager.getLineGroup( BrushManager.mLineLib.mLineWallIndex );
 
     int handle = 0;
-    float xmin=10000f, xmax=-10000f, 
-          ymin=10000f, ymax=-10000f;
-    for ( ICanvasCommand cmd : plot.getCommands() ) {
-      if ( cmd.commandType() != 0 ) continue;
-      DrawingPath p = (DrawingPath)cmd;
-
-      if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
-        DrawingLinePath lp = (DrawingLinePath)p;
-        String group = BrushManager.getLineGroup( lp.lineType() );
-        if ( group != null && group.equals( wall_group ) ) {
-          // ArrayList< LinePoint > pts = lp.mPoints;
-          // for ( LinePoint pt : pts ) 
-          for ( LinePoint pt = lp.mFirst; pt != null; pt = pt.mNext ) {
-            if ( pt.mX < xmin ) xmin = pt.mX;
-            if ( pt.mX > xmax ) xmax = pt.mX;
-            if ( pt.mY < ymin ) ymin = pt.mY;
-            if ( pt.mY > ymax ) ymax = pt.mY;
-          }
-        }
-      } else if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
-        DrawingPointPath pp = (DrawingPointPath)p;
-        if ( pp.cx < xmin ) xmin = pp.cx;
-        if ( pp.cx > xmax ) xmax = pp.cx;
-        if ( pp.cy < ymin ) ymin = pp.cy;
-        if ( pp.cy > ymax ) ymax = pp.cy;
-      } else if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) {
-        DrawingStationPath st = (DrawingStationPath)p;
-        if ( st.cx < xmin ) xmin = st.cx;
-        if ( st.cx > xmax ) xmax = st.cx;
-        if ( st.cy < ymin ) ymin = st.cy;
-        if ( st.cy > ymax ) ymax = st.cy;
-      }
-    }
-    int width = (int)(xmax - xmin) + 200;
-    int height = (int)(ymax - ymin) + 200;
-    float xoff = 100 + xmin;
-    float yoff = 100 + ymin;
+    RectF bbox = DrawingUtil.getBoundingBox( plot );
+    float xmin = bbox.left;
+    float xmax = bbox.right;
+    float ymin = bbox.top;
+    float ymax = bbox.bottom;
+    if ( xmin + 200 > xmax ) { xmin = -100; xmax = 100; }
+    if ( ymin + 200 > ymax ) { ymin = -100; ymax = 100; }
+    float xoff = xmin; // offset
+    float yoff = ymin;
+    int width = (int)(3*(xmax - xmin));
+    int height = (int)(3*(ymax - ymin));
+    xmin -= width/4;   xmax += width/4; // enlarge
+    ymin -= height/4;  ymax += height/4;
+    // Log.v("DistoX", "SVG min " + xmin + " " + ymin + " max " + xmax + " " + ymax + " W " + width + " H " + height );
 
     try {
 
@@ -115,8 +94,7 @@ class DrawingSvg
       out.write( "  </defs>\n");
 
       if ( TDSetting.mSvgInHtml ) { // SVG_IN_HTML
-        out.write( "<g transform=\"translate(" + (int)( 100 + ((xmin < 0)? -xmin : 0) ) + ","
-                   + (int)( 100 + ((ymin < 0)? -ymin : 0) ) + ")\" >\n" );
+        out.write( "<g transform=\"translate(" + (int)(-xmin) + "," + (int)(-ymin) + ")\" >\n" );
       } else {
         out.write( "<g>\n");
       }

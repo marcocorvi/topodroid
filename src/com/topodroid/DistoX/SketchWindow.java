@@ -1731,6 +1731,8 @@ public class SketchWindow extends ItemDrawer
       setMode( SketchDef.MODE_MOVE );
     }
 
+    public void setJpegData( byte[] data ) { }
+
 
   // ----------------------------------------------
   // MENU

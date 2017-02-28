@@ -23,6 +23,8 @@ import java.io.PrintWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
+import android.graphics.RectF;
+
 import android.util.Log;
 
 class DrawingDxf
@@ -387,39 +389,11 @@ class DrawingDxf
     
     float scale = TDSetting.mDxfScale;
     int handle = 0;
-    float xmin=10000f, xmax=-10000f, 
-          ymin=10000f, ymax=-10000f;
-    // compute BBox
-    for ( ICanvasCommand cmd : plot.getCommands() ) {
-      if ( cmd.commandType() != 0 ) continue;
-      DrawingPath p = (DrawingPath)cmd;
-
-      if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
-        DrawingLinePath lp = (DrawingLinePath)p;
-        if ( lp.lineType() == BrushManager.mLineLib.mLineWallIndex ) {
-          // ArrayList< LinePoint > pts = lp.mPoints;
-          // for ( LinePoint pt : pts ) 
-          for ( LinePoint pt = lp.mFirst; pt != null; pt = pt.mNext ) {
-            if ( pt.mX < xmin ) xmin = pt.mX;
-            if ( pt.mX > xmax ) xmax = pt.mX;
-            if ( pt.mY < ymin ) ymin = pt.mY;
-            if ( pt.mY > ymax ) ymax = pt.mY;
-          }
-        }
-      } else if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
-        DrawingPointPath pp = (DrawingPointPath)p;
-        if ( pp.cx < xmin ) xmin = pp.cx;
-        if ( pp.cx > xmax ) xmax = pp.cx;
-        if ( pp.cy < ymin ) ymin = pp.cy;
-        if ( pp.cy > ymax ) ymax = pp.cy;
-      } else if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) {
-        DrawingStationPath st = (DrawingStationPath)p;
-        if ( st.cx < xmin ) xmin = st.cx;
-        if ( st.cx > xmax ) xmax = st.cx;
-        if ( st.cy < ymin ) ymin = st.cy;
-        if ( st.cy > ymax ) ymax = st.cy;
-      }
-    }
+    RectF bbox = DrawingUtil.getBoundingBox( plot );
+    float xmin = bbox.left;
+    float xmax = bbox.right;
+    float ymin = bbox.top;
+    float ymax = bbox.bottom;
     xmin *= scale;
     xmax *= scale;
     ymin *= scale;

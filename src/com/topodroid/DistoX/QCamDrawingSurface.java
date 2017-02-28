@@ -133,6 +133,7 @@ public class QCamDrawingSurface extends SurfaceView
       Camera.Parameters params = mCamera.getParameters();
       params.setFocusMode( Camera.Parameters.FOCUS_MODE_AUTO );
       params.setSceneMode( Camera.Parameters.SCENE_MODE_AUTO );
+      params.setFlashMode( Camera.Parameters.FLASH_MODE_AUTO );
       List< Integer > formats = params.getSupportedPreviewFormats();
       for ( Integer fmt : formats ) {
         if ( fmt.intValue() == ImageFormat.JPEG ) {

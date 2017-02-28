@@ -81,7 +81,7 @@ public class ShotNewDialog extends MyDialog
   private Button   mBtnBack;
   private Button   mBtnSensor;
   private Button   mBtnCamera;
-  byte[] mJpegData; // camera jpeg data
+  private byte[] mJpegData; // camera jpeg data
 
   TimerTask mTimer;
   private MyKeyboard mKeyboard = null;
@@ -97,6 +97,7 @@ public class ShotNewDialog extends MyDialog
     mTimer   = null;
     mJpegData = null;
   }
+
 
   private boolean checkCameraHardware()
   {
@@ -287,10 +288,12 @@ public class ShotNewDialog extends MyDialog
   // implements
   public void setBearingAndClino( float b, float c )
   {
-    Log.v("DistoX", "ShotNewDialog set B " + b + " C " + c );
+    // Log.v("DistoX", "ShotNewDialog set B " + b + " C " + c );
     mETbearing.setText( String.format(Locale.US, "%.1f", b ) );
     mETclino.setText( String.format(Locale.US, "%.1f", c ) );
-  }
+  } 
+
+  public void setJpegData( byte[] data ) { mJpegData = data; }
 
   @Override
   public boolean onLongClick( View v )
@@ -474,7 +477,7 @@ public class ShotNewDialog extends MyDialog
       mTimer = new TimerTask( mContext, this, TimerTask.Y_AXIS );
       mTimer.execute();
     } else if ( b == mBtnCamera && TDSetting.mLevelOverAdvanced ) {
-      new QCamCompass( mContext, this).show();
+      new QCamCompass( mContext, this, true).show();  // true = with_box
     } else if ( b == mBtnBack ) {
       dismiss();
     }

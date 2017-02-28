@@ -202,9 +202,10 @@
     <string name="out">вън</string>
     <string name="in">във</string>
     <!-- UNUSED string name="none">няма</string -->
-    <string name="barrier_add">Скриване на следващи репери</string>
+    <!-- UNUSED string name="barrier_add">Скриване на следващи репери</string -->
+    <!-- TODO string name="hide_from">Hide from</string -->
     <string name="barrier_del">Показване на следващи репери</string>
-    <string name="hidden_add">Скриване на предишни репери</string>
+    <!-- UNUSED string name="hidden_add">Скриване на предишни репери</string -->
     <string name="hidden_del">Показване на предишни репери</string>
     <string name="splays_toggle">Показване/скриване на странични изм.</string>
     <string name="fixed">Фиксиран</string>

@@ -201,9 +201,10 @@
     <string name="out">fora</string>
     <string name="in">dentro</string>
     <!-- UNUSED string name="none">nenhum</string -->
-    <string name="barrier_add">Esconder as visadas seguintes</string>
+    <!-- UNUSED string name="barrier_add">Esconder as visadas seguintes</string -->
+    <!-- TODO string name="hide_from">Hide from</string -->
     <string name="barrier_del">Mostrar as visadas seguintes</string>
-    <string name="hidden_add">Esconder as visadas anteriores</string>
+    <!-- UNUSED string name="hidden_add">Esconder as visadas anteriores</string -->
     <string name="hidden_del">Mostrar as visadas anteriores</string>
     <string name="splays_toggle">Alternar exibição das medidas auxiliares</string>
     <string name="fixed">fixa</string>
