@@ -1103,7 +1103,7 @@
   <!-- UNUSED string name="line_normal">normal</string -->
   <!-- UNUSED string name="line_coarse">gruesa</string -->
 
-    <string name="welcome_title">Bienvenido a TopoDroid 4.0.0</string>
+    <string name="welcome_title">Bienvenido a TopoDroid %1$s</string>
 
 
     <string name="welcome_text">
@@ -1111,7 +1111,7 @@
 \nNo existen garantías: Al utilizar TopoDoid, usted acepta las condiciones de uso. El autor no se hace responsable de las pédidas de datos que puedan ocurrir.
 \n\nVisite http://sites.google.com/site/speleoapps para las aplicaciones y documentos complementarios.
 \nEnvíe sus comentarios, informes de errores, peticiones de características, a marco.corvi@gmail.com.
-\nTraducción al español manuguerreros@gmail.com
+\nTraducción al español Manu Guerrero manuguerreros@gmail.com
 \n
     </string>
 

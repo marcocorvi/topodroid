@@ -201,11 +201,11 @@
     <string name="out">fora</string>
     <string name="in">dentro</string>
     <!-- UNUSED string name="none">nenhum</string -->
-    <!-- UNUSED string name="barrier_add">Esconder as visadas seguintes</string -->
+    <!-- UNUSED string name="barrier_add">Ocultar visadas longe base referência</string -->
     <!-- TODO string name="hide_from">Hide from</string -->
-    <string name="barrier_del">Mostrar as visadas seguintes</string>
-    <!-- UNUSED string name="hidden_add">Esconder as visadas anteriores</string -->
-    <string name="hidden_del">Mostrar as visadas anteriores</string>
+    <string name="barrier_del">Mostrar visadas longe base referência</string>
+    <!-- UNUSED string name="hidden_add">Ocultar visadas até base referência</string -->
+    <string name="hidden_del">Mostrar visadas até base referência</string>
     <string name="splays_toggle">Alternar exibição das medidas auxiliares</string>
     <string name="fixed">fixa</string>
     <string name="painted">pintada</string>
@@ -356,7 +356,7 @@
 
     <string name="make_surface">A superfície existe. Subtituí-la?</string>
 
-    <string name="sketch3d_name">nome</string>
+    <string name="sketch3d_name">Nome</string>
     <string name="sketch3d_new">Novo modelo 3D</string>
     <string name="sketch3d_next">próxima base</string>
     <!-- UNUSED string name="sketch3d_null_name">Croqui 3D sem nome</string -->
@@ -364,7 +364,7 @@
     <!-- UNUSED string name="sketch3d_null_start">Croqui 3D sem base inicial</string -->
     <!-- UNUSED string name="sketch3d_start">base inicial</string -->
 
-    <string name="station">base</string>
+    <string name="station">Base de referência</string>
     <string name="station_ask">Inserir a base no croqui?</string>
     <string name="station_del">Remover a base do croqui?</string>
     <string name="station_set">Continuar a topo a partir deste ponto?</string>
@@ -379,7 +379,7 @@
     <string name="cannot_rename">Não é possível renomear a topo</string>
     <string name="declination">declinação magnética</string>
     <string name="description">descrição</string>
-    <string name="name">nome</string>
+    <string name="name">Nome</string>
     <string name="team">equipe</string>
     <!-- UNUSED string name="toggle_device">Alternar estado de calibração do dispositivo</string -->
     <string name="toggle_failed">Falha ao alternar a DistoX</string>
