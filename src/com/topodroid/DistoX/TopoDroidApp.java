@@ -1195,8 +1195,9 @@ public class TopoDroidApp extends Application
 
   // called also by ShotWindow::updataBlockList
   // this re-assign stations to shots with station(s) already set
+  // the list of stations is ordered by compare
   //
-  public void assignStationsAfter( DBlock blk0, List<DBlock> list )
+  public void assignStationsAfter( DBlock blk0, List<DBlock> list, ArrayList<String> sts )
   { 
     // Log.v("DistoX", "assign stations after " + blk0.Name() + " size " + list.size() );
     // if ( TDSetting.mSurveyStations < 0 ) return;
@@ -1206,18 +1207,18 @@ public class TopoDroidApp extends Application
         Toast.makeText( this, "WARNING TopoRobot policy is very experimental", Toast.LENGTH_SHORT).show();
         trobotmillis = millis;
       }
-      mStationName.assignStationsAfter_TRobot( mData, mSID, blk0, list );
+      mStationName.assignStationsAfter_TRobot( mData, mSID, blk0, list, sts );
       return;
     } 
     if ( TDSetting.mBacksightShot ) {
-      mStationName.assignStationsAfter_Backsight( mData, mSID, blk0, list );
+      mStationName.assignStationsAfter_Backsight( mData, mSID, blk0, list, sts );
       return;
     } 
     if ( TDSetting.mTripodShot ) {
-      mStationName.assignStationsAfter_Tripod( mData, mSID, blk0, list );
+      mStationName.assignStationsAfter_Tripod( mData, mSID, blk0, list, sts );
       return;
     }
-    mStationName.assignStationsAfter_Default( mData, mSID, blk0, list );
+    mStationName.assignStationsAfter_Default( mData, mSID, blk0, list, sts );
   }
 
   // called also by ShotWindow::updataBlockList

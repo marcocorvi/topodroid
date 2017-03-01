@@ -1545,7 +1545,8 @@ public class ShotWindow extends Activity
     // } else {
       shots = mApp.mData.selectAllShotsAfter( blk.mId, mApp.mSID, TopoDroidApp.STATUS_NORMAL );
     // }
-    mApp.assignStationsAfter( blk, shots );
+    ArrayList<String> stations = mApp.mData.selectAllStationsBefore( blk.mId, mApp.mSID, TopoDroidApp.STATUS_NORMAL );
+    mApp.assignStationsAfter( blk, shots, stations );
 
     // DEBUG re-assign all the stations
     // List< DBlock > shots = mApp.mData.selectAllShots( mApp.mSID, TopoDroidApp.STATUS_NORMAL );

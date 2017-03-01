@@ -2125,6 +2125,27 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
+   public ArrayList<String> selectAllStationsBefore( long id, long sid, long status )
+   {
+     ArrayList< String > list = new ArrayList< String >();
+     if ( myDB == null ) return list;
+     Cursor cursor = myDB.query(SHOT_TABLE, new String[] { "fStation", "tStation" },
+                     "id<=? and surveyId=? and status=?",
+                     new String[] { Long.toString(id), Long.toString(sid), Long.toString(status) },
+                     null, null, "id" );
+     if (cursor.moveToFirst()) {
+       do {
+         String f = cursor.getString( 0 );
+         if ( f.length() > 0 ) DistoXStationName.orderInsert( list, f );
+         String t = cursor.getString( 1 );
+         if ( t.length() > 0 ) DistoXStationName.orderInsert( list, t );
+       } while (cursor.moveToNext());
+     }
+     // TDLog.Log( TDLog.LOG_DB, "select All Shots after " + id + " list size " + list.size() );
+     if (cursor != null && !cursor.isClosed()) cursor.close();
+     return list;
+   }
+
    public List<DBlock> selectAllShotsAfter( long id, long sid, long status )
    {
      List< DBlock > list = new ArrayList< DBlock >();

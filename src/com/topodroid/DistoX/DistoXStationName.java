@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import java.util.List;
+import java.util.ArrayList;
 
 // import android.util.Log;
 
@@ -78,10 +79,19 @@ public class DistoXStationName
   public static String increment( String name, List<DBlock> list )
   {
     do {
-      name = DistoXStationName.increment( name ); 
-    } while ( DistoXStationName.listHasName( list, name ) );
+      name = increment( name ); 
+    } while ( listHasName( list, name ) );
     return name;
   }
+
+  public static String increment( String name, ArrayList<String> sts )
+  {
+    do {
+      name = increment( name ); 
+    } while ( orderContains( sts, name ) );
+    return name;
+  }
+
 
   public static String increment( String name )
   {
@@ -147,5 +157,79 @@ public class DistoXStationName
     return ret;
   }
 
+  // check if the ordered list of names contains a name
+  static boolean orderContains( ArrayList< String > a, String s )
+  {
+    int n1 = 0;
+    int n2 = a.size();
+    if ( n2 == 0 ) {
+      return false;
+    }
+    int cmp = s.compareTo( a.get(n1) );
+    if ( cmp == 0 ) {
+      return true;
+    } else if ( cmp < 0 ) {
+      return false;
+    }
+    n2 --;
+    cmp = s.compareTo( a.get(n2) );
+    if ( cmp == 0 ) {
+      return true;
+    } else if ( cmp > 0 ) {
+      return false;
+    }
+    // here a[n1] < s < a[n2]
+    while ( n1+1 < n2 ) {
+      int n0 = (n1+n2)/2;
+      cmp = s.compareTo( a.get(n0) );
+      if ( cmp == 0 ) {
+        return true;
+      } else if ( cmp < 0 ) {
+        n2 = n0;
+      } else if ( cmp > 0 ) {
+        n1 = n0;
+      }
+    }
+    return false;
+  }
+
+  // insert a name in the ordered list of names
+  static void orderInsert( ArrayList< String > a, String s )
+  {
+    int n1 = 0;
+    int n2 = a.size();
+    if ( n2 == 0 ) {
+      a.add( s );
+      return;
+    }
+    int cmp = s.compareTo( a.get(n1) );
+    if ( cmp == 0 ) {
+      return;
+    } else if ( cmp < 0 ) {
+      a.add(0, s); // insert at head
+      return;
+    }
+    n2 --;
+    cmp = s.compareTo( a.get(n2) );
+    if ( cmp == 0 ) {
+      return;
+    } else if ( cmp > 0 ) {
+      a.add( s ); // add at end
+      return;
+    }
+    // here a[n1] < s < a[n2]
+    while ( n1+1 < n2 ) {
+      int n0 = (n1+n2)/2;
+      cmp = s.compareTo( a.get(n0) );
+      if ( cmp == 0 ) {
+        return;
+      } else if ( cmp < 0 ) {
+        n2 = n0;
+      } else if ( cmp > 0 ) {
+        n1 = n0;
+      }
+    }
+    a.add( n2, s ); // add s after a[n1] at pos n2
+  }
 
 }
