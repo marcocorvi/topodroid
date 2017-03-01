@@ -2,11 +2,24 @@
 
 <h4>DistoX firmware</h4>
 
-TopoDroid includes the DistoX2 firmwares v. 2.1, 2.2, 2.3 and 2.4, which are all compatible with hardware 1.0. Through the firmware dialog you can save a copy of the current firmware of your DistoX2, or upload a new firmware file. Before uploading a new firmware TopoDroid checks that it is compatible with the hardware version. Unfortunately there is no sure way to read the firmware version from the file content, so TopoDroid relies on the signature in the file after the bootloader blocks.  The DistoX2 must be booted in "bootloader mode". Refer to the DistoX2 documentation for details.<br>
+TopoDroid includes the DistoX2 firmwares v. 2.1, 2.2, 2.3, 2.4, and 2.5, which are all compatible with hardware 1.0. Through the firmware dialog you can save a copy of the current firmware of your DistoX2, or upload a new firmware file. Before uploading a new firmware TopoDroid checks that it is compatible with the hardware version. Unfortunately there is no sure way to read the firmware version from the file content, so TopoDroid relies on the signature in the file after the bootloader blocks.  The DistoX2 must be booted in "bootloader mode". Refer to the DistoX2 documentation for details.<br>
 <b>WARNING. UPLOADING AN INCOMPATIBLE FIRMWARE MAKES YOUR DistoX UNUSABLE.</b><br><p>
 
 Upon uploading a firmware, TopoDroid displays a message saying how many bytes have been written to the DistoX.
 If these are less than the firmware file size, the upload has failed.<br><p> 
+
+<b>Firmware update procedure</b><br>
+<ol>
+<li>Make sure the DistoX is the selected active DistoX in TopoDroid</li>
+<li>Open the firmware dialog ("FIrmware" menu) and select the firmware file to upload</li>
+<li>Check version of hardware and firmware of your DistoX: make sure laser is switched off (CLR) and press FUNC twice to show the version. You may also check the DistoX firmware and hardware versions with TopoDroid device info dialog.</li>
+<li>Switch off the DistoX, and switch it on in bootloader mode: press PLUS, MINUS and DIST together. 
+The display illumination switches on, but the screen remains empty.</li>
+<li>Upload the new firmware with TopoDroid</li>
+<li>Switch off the DistoX by pressing CLR</li>
+<li>Switch the DistoX on and check the new firmware version.</li>
+</ol>
+<br><p>
 
 <b>Note</b><br>
 The firmware updates are always logged in the TopoDroid log file.<br><p>

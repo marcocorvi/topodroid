@@ -248,11 +248,21 @@ class StationName
     }
   }
 
+
+  private boolean checkBackshot( DBlock blk, float length, float bearing, float clino )
+  {
+    if ( Math.abs( length - blk.mLength ) > TDSetting.mCloseDistance * length ) return false;
+    if ( Math.abs( clino + blk.mClino ) > TDSetting.mCloseDistance * 100 ) return false;
+    if ( ! TDSetting.mMagAnomaly ) {
+      if ( Math.abs( ( bearing < blk.mBearing )? blk.mBearing - bearing - 180 : bearing - blk.mBearing - 180 )
+        > TDSetting.mCloseDistance * 100 ) return false;
+    }
+    return true;
+  }
+
   void assignStationsAfter_Backsight( DataHelper data_helper, long sid, DBlock blk0, List<DBlock> list )
   { 
     // Log.v("DistoX", "Backsight assign stations after " + blk0.mFrom + "-" + blk0.mTo + " Size " + list.size() + " sid " + sid );
-    boolean shot_after_splays = TDSetting.mShotAfterSplays;
-
     boolean increment = true;
     boolean flip = false; // whether to swap leg-stations (backsight backward shot)
     // TDLog.Log( TDLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
@@ -262,10 +272,16 @@ class StationName
     String to   = blk0.mTo;
     String next;
     String station;
+    float fore_length  = 0;
+    float fore_bearing = 0;
+    float fore_clino   = 0;
     if ( DistoXStationName.isLessOrEqual( blk0.mFrom, blk0.mTo ) ) { // forward
       flip    = true;
       station = to;
       next = DistoXStationName.increment( station );
+      fore_length  = blk0.mLength;
+      fore_bearing = blk0.mBearing;
+      fore_clino   = blk0.mClino;
     } else { // backward
       increment = false;
       flip    = false;
@@ -290,7 +306,7 @@ class StationName
       } else if ( blk.mType == DBlock.BLOCK_MAIN_LEG ) {
         if ( blk.mId != blk0.mId ) {
           String p_to;
-          if ( flip ) { // backward
+          if ( flip && checkBackshot( blk, fore_length, fore_bearing, fore_clino ) ) { // backward
             flip = false;
             p_to = oldFrom; 
             from = to;
@@ -307,6 +323,9 @@ class StationName
             p_to = to;
             oldFrom = from;
             station = to;
+            fore_length  = blk.mLength;
+            fore_bearing = blk.mBearing;
+            fore_clino   = blk.mClino;
           }
           blk.setName( from, p_to );
           data_helper.updateShotName( blk.mId, sid, from, p_to, true ); // LEG
@@ -326,6 +345,9 @@ class StationName
     String to   = DistoXStationName.mSecondStation;
     String oldFrom = "empty"; // FIXME
     boolean flip = false; // whether to swap leg-stations (backsight backward shot)
+    float fore_length  = 0;
+    float fore_bearing = 0;
+    float fore_clino   = 0;
 
     String station = ( mCurrentStationName != null )? mCurrentStationName : from;
     // Log.v("DistoX", "assign stations: F <" + from + "> T <" + to + "> st. <" + station + "> Blk size " + list.size() );
@@ -364,7 +386,8 @@ class StationName
               // Log.v("DistoX", "P:" + prev.mId + " " + oldFrom + "-" + from + "-" + to + "-" + station + " f:" + (flip?"y":"n") );
               String prev_from = from;
               String prev_to   = to;
-              if ( flip ) {          // 2 backsight backward shot from--old_from
+              if ( flip && checkBackshot( prev, fore_length, fore_bearing, fore_clino) ) { 
+                                     // 2 backsight backward shot from--old_from
                 prev_to = oldFrom;   // 1
                 station = from;
                 flip = false;
@@ -378,6 +401,11 @@ class StationName
               }
               // Log.v("DistoX", "P: (" + prev_from + "-" + prev_to + ") " + oldFrom + "-" + from + "-" + to + "-" + station + " f:" + (flip?"y":"n") );
               prev.setName( prev_from, prev_to );
+              if ( flip ) { // next shot will try to flip
+                fore_length  = prev.mLength;
+                fore_bearing = prev.mBearing;
+                fore_clino   = prev.mClino;
+              }
               data_helper.updateShotName( prev.mId, sid, prev_from, prev_to, true ); // LEG
               setLegExtend( data_helper, sid, prev );
             }

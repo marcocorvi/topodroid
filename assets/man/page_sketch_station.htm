@@ -5,10 +5,9 @@
 This dialog has these actions:
 <ul>
 <li>make the station "active", ie, continue the survey from this station.</li>
-<li>hide the midline display "after" the station</li>
-<li>hide the midline display "before" the station</li>
+<li>show the hidden midline (if applicable)</li>
 <li>toggle the display of the splay shots at the station</li>
-<li>cross-section buttons (only for stations with one or two legs)</li>
+<li>at-station x-section buttons</li>
 </ul>
 
 
@@ -16,31 +15,35 @@ This dialog has these actions:
 The "active" station is where the next downloaded shots will be attached. When a leg is downloaded (or inserted) the new station becomes the "active" station. By changing the "active" station you can continue surveying from a station in the middle of the survey.<br><p>
 
 <b>Midline hiding</b><br>
-The display of the midline can be limited in a number of ways by editing a station properties ("note" buttons in "edit" mode).
-This is useful when the survey is complicated or goes over itself. In this case you may want to see only a part of the midline.<br><p>
-
-<ul>
-<li>show/hide the splays at the station: with this option the splays at the station are shown event if in general splays are not displayed.</li>
-<li>show/hide midline before the station ("hiding" station): TopoDroid carries out a data reduction for each sketch starting from the sketch origin station. This option hides/shows the piece of midline between the origin station and the station.</li>
-<li>show/hide midline after the station ("barrier" station): this option hides/shows the piece of midline beyond the station.</li>
-</ul>
-
-"Hiding" stations are colored in blue, "barrier" stations in red.<br><p>
-
-Stations beyond a "barrier" station, are not automatically saved as Therion station points. Therefore, by choosing the sketch origin station inside the scrap and marking stations as barrier you can avoid spurious stations in the scrap file.<br><p>
+Hiding parts of the midline is useful when the survey is complicated or goes over itself.
+In this case you may want to see only a part of the midline.
+If a portion of midline behind a station is hidden, the station is shown red or violet.
+They are violet if the hidden part of the midline lies between them and the sketch origin station.
+Otherwise they are red.
+Stations in the part of midline behind a "red" station, are not automatically saved as Therion station points. Therefore, by choosing the sketch origin station inside the scrap and marking stations as barrier you can avoid spurious stations in the scrap file.
+<br>
+The display of the midline can be limited through the property edit dialog of leg shots.
+When a portion of midline starting at the station is hidden, there is a button to revert and show it.<br><p>
 
 <img src="hiding_stations.png" alt="hiding stations"><br><p>
 
 <b>At-station cross-section</b><br>
-Cross sections can be created at stations with one or two legs.<br><p>
+Cross sections can be created at stations.
+X-sections in plan view are in the vertical plane (their plane is determined bygiving the azimuth).
+In profile view, x-section can have an inclination. However when selected through the "stations" checkboxes
+they are vertical if the legs inclination is below a specified value (a setting), otherwise they are
+horizontal.
+<br>
 
-With one leg the cross-section plane is perpendicular to the leg.
-With two it is the bisecant of the angles between the legs.
-The user can select from which side of this plane the cross-section is taken.<br><p>
+If the station has only two legs attached the plane of the cross-section can be inferred by TopoDroid
+(the bisecant of the angle between the two legs, or perpendicular to the leg of there is only one).
+There remains only the ambiguity about from which side
+of the plane the x-section is looked at. This is resolved providing two buttons that specify the direction of 
+view with a pair of stations.
+<br>
 
-Cross-section in plan-view are always vertical.<br><p>
-
-Cross-sections in profile-view are either vertical (if the inclination of the leg(s) is less that a certain value) or hiorizontal (in this case they can be either seen from above or from below).<br><p>
+With the last button the user can pick the x-section direction pointing with the android camera.
+<br><p>
 
 
 </body></html>

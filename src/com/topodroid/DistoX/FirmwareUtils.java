@@ -33,10 +33,10 @@ class FirmwareUtils
     (byte)0x00, (byte)0xf0, (byte)0x30, (byte)0xf8, (byte)0x00, (byte)0x1b, (byte)0x49, (byte)0x1b
   };
 
-  //                                   2.1   2.2   2.3   2.4   2.5
-  // signatures differ in bytes 7- 6  f834  f83a  f990  fa0a  fb7e
-  //                             -12  08d5  08d5  08d5  08d5  08f5
-  //                           17-16  0c40  0c40  0c50  0c30  0c40
+  //                                   2.1   2.2   2.3   2.4   2.5  2.5c
+  // signatures differ in bytes 7- 6  f834  f83a  f990  fa0a  fb7e  fc10
+  //                             -12  08d5  08d5  08d5  08d5  08f5  08d5
+  //                           17-16  0c40  0c40  0c50  0c30  0c40  0c48
 
   // static boolean areCompatible( int hw, int fw )
   // {
@@ -49,7 +49,7 @@ class FirmwareUtils
   // }
 
   // try to guess firmware version reading bytes from the file
-  // return 0 (failure) or one of 21 22 23 24 25
+  // return <= 0 (failure) or one of 21 22 23 24 25 250
   //
   static int readFirmwareFirmware( File fp )
   {
@@ -77,18 +77,17 @@ class FirmwareUtils
         if ( buf[6] == (byte)0x3a && buf[16] == (byte)0x40 && buf[12] == (byte)0xf5 ) {
           return 22;
         }
+        return -200;
       } else if ( buf[7] == (byte)0xf9 ) {
-        if ( buf[6] == (byte)0x90 && buf[16] == (byte)0x50 && buf[12] == (byte)0xf5 ) {
-          return 23;
-        }
+        return ( buf[6] == (byte)0x90 && buf[16] == (byte)0x50 && buf[12] == (byte)0xf5 )? 23 : -230;
       } else if ( buf[7] == (byte)0xfa ) {
-        if ( buf[6] == (byte)0x0a && buf[16] == (byte)0x30 && buf[12] == (byte)0xf5 ) {
-          return 24;
-        }
+        return ( buf[6] == (byte)0x0a && buf[16] == (byte)0x30 && buf[12] == (byte)0xf5 )? 24 : -240;
       } else if ( buf[7] == (byte)0xfb ) {
-        if ( buf[6] == (byte)0x7e && buf[16] == (byte)0x40 && buf[12] == (byte)0xd5 ) {
-          return 25;
-        }
+        return ( buf[6] == (byte)0x7e && buf[16] == (byte)0x40 && buf[12] == (byte)0xd5 )? 25 : -250;
+      } else if ( buf[7] == (byte)0xfc ) {     
+        return ( buf[6] == (byte)0x10 && buf[16] == (byte)0x48 && buf[12] == (byte)0xd5 )? 250 : -2500;
+      } else {
+        return -7;
       }
     } catch ( IOException e ) {
     }
