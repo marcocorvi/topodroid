@@ -203,7 +203,7 @@
     <string name="in">внутренний</string>
     <!-- UNUSED string name="none">none</string -->
     <!-- UNUSED string name="barrier_add">Скрыть нитку хода после этого пикета</string -->
-    <!-- TODO string name="hide_from">Hide from</string -->
+    <string name="hide_from">Скрыть от</string>
     <string name="barrier_del">Показать нитку хода после этого пикета</string>
     <!-- UNUSED string name="hidden_add">Скрыть нитку хода до этого пикета</string -->
     <string name="hidden_del">Показать нитку хода до этого пикета</string>
@@ -565,7 +565,7 @@
     <string name="line_delete">удалить_линию</string>
     <string name="flip_shots">Развернуть пикеты</string>
 
-    <string name="menu_head">Head</string>
+    <string name="menu_head">Начало</string>
     <!-- UNUSED string name="menu_save_th2">сохр th2</string -->
 <!-- END_SKETCH_3D -->    
 
