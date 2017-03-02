@@ -71,6 +71,7 @@ class TDSetting
     "DISTOX_LOOP_CLOSURE_VALUE",  // 27 whether to close loop
     "DISTOX_CHECK_ATTACHED",      // 28
     "DISTOX_PREV_NEXT",         
+    "DISTOX_MAX_SHOT_LENGTH",
 
     "DISTOX_UNIT_LOCATION",       // 29 
     "DISTOX_CRS",                 // 30
@@ -418,6 +419,7 @@ class TDSetting
   static float mAccelerationThr = 1; // acceleration threshold (shot quality)
   static float mMagneticThr     = 1; // magnetic threshold
   static float mDipThr          = 2; // dip threshold
+  static float mMaxShotLength   = 50; // max length of a shot (if larger it is overshoot)
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // WALLS
 
@@ -665,6 +667,7 @@ class TDSetting
     mLoopClosure   = tryInt(   prefs, key[k++], "0" );      
     mCheckAttached = prefs.getBoolean( key[k++], false );   // DISTOX_CHECK_ATTACHED 13
     mPrevNext      = prefs.getBoolean( key[k++], true );    // DISTOX_PREV_NEXT
+    mMaxShotLength = tryFloat( prefs, key[k++], "50"   );   // DISTOX_MAX_SHOT_LENGTH
 
     mUnitLocation  = prefs.getString( key[k++], "ddmmss" ).equals("ddmmss") ? TDConst.DDMMSS  // choice
                                                                             : TDConst.DEGREE;
@@ -918,6 +921,8 @@ class TDSetting
       mCheckAttached = prefs.getBoolean( k, false );
     } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_PREV_NEXT
       mPrevNext = prefs.getBoolean( k, true );
+    } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_MAX_SHOT_LENGTH
+      mMaxShotLength = tryFloat( prefs, k, "50" );  
     } else if ( k.equals( key[ nk++ ] ) ) {
       mUnitLocation  = prefs.getString( k, "ddmmss" ).equals("ddmmss") ? TDConst.DDMMSS
                                                                        : TDConst.DEGREE;
@@ -1296,6 +1301,7 @@ class TDSetting
     //B if ( name.equals( "DISTOX_LOOP_CLOSURE" ) 
     //B if ( name.equals( "DISTOX_CHECK_ATTACHED" )
     //B if ( name.equals( "DISTOX_PREV_NEXT" )
+    if ( name.equals( "DISTOX_MAX_SHOT_LENGTH") ) return parseFloatValue( value, mMaxShotLength, 20 );
 
     //C if ( name.equals( "DISTOX_UNIT_LOCATION" )
     //S if ( name.equals( "DISTOX_CRS" )

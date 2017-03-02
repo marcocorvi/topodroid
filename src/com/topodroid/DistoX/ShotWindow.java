@@ -541,12 +541,13 @@ public class ShotWindow extends Activity
     //   (new CurrentStationDialog( this, this, mApp )).show();
 
     } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // RECOVER
-      List< DBlock > shots = mApp.mData.selectAllShots( mApp.mSID, TopoDroidApp.STATUS_DELETED );
+      List< DBlock > shots1 = mApp.mData.selectAllShots( mApp.mSID, TopoDroidApp.STATUS_DELETED );
+      List< DBlock > shots2 = mApp.mData.selectAllShots( mApp.mSID, TopoDroidApp.STATUS_OVERSHOOT );
       List< PlotInfo > plots     = mApp.mData.selectAllPlots( mApp.mSID, TopoDroidApp.STATUS_DELETED );
-      if ( shots.size() == 0 && plots.size() == 0 ) {
+      if ( shots1.size() == 0 && shots2.size() == 0 && plots.size() == 0 ) {
         Toast.makeText( mActivity, R.string.no_undelete, Toast.LENGTH_SHORT ).show();
       } else {
-        (new UndeleteDialog(mActivity, this, mApp.mData, mApp.mSID, shots, plots ) ).show();
+        (new UndeleteDialog(mActivity, this, mApp.mData, mApp.mSID, shots1, shots2, plots ) ).show();
       }
       // updateDisplay( );
     } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // PHOTO

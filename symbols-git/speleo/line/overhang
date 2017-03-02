@@ -13,7 +13,7 @@ name-fa برآمدگی
 th_name overhang
 group overhang
 color 0xff0066 0xff
-csurvey 2 1 3 12
+csurvey 2 1 3 11
 effect
   moveTo 0 1
   lineTo 12 1

@@ -866,6 +866,9 @@
   <string name="pref_leg_title">Precisión de visual</string>
   <string name="pref_leg_summary">Precisión entre las mediciones de una visual</string>
   <string name="pref_leg_message">Precisión entre las mediciones de una visual</string>
+  <!-- TODO string name="pref_max_shot_title">Maximum shot length</string -->
+  <!-- TODO string name="pref_max_shot_summary">Maximum length of shooting [m]</string -->
+  <!-- TODO string name="pref_max_shot_message">Shots over this length are marked as overshoot</string -->
   <string name="pref_backsight_title">Toma duplicada visual</string>
   <string name="pref_backsight_summary">Se duplican los datos en el diálogo de la toma manual</string>
   <string name="pref_prev_next_title">Añadir botón Ant./Sig.</string>

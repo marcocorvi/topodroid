@@ -13,6 +13,15 @@
        android:inputType="numberDecimal"
        android:defaultValue="0.05" />
 
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_MAX_SHOT_LENGTH"
+       android:title="@string/pref_max_shot_title"
+       android:summary="@string/pref_max_shot_summary"
+       android:dialogTitle="@string/pref_max_shot_title"
+       android:dialogMessage="@string/pref_max_shot_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="50" />
+
     <!-- com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_LEG_SHOTS"
        android:title="@string/pref_leg_shots_title"

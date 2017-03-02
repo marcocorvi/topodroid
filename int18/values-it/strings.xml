@@ -862,6 +862,9 @@
   <string name="pref_leg_title">Tolleranza battute</string>
   <string name="pref_leg_summary">Tolleranza tra tiri di una battuta</string>
   <string name="pref_leg_message">Tolleranza tra tiri di una battuta</string>
+  <!-- TODO string name="pref_max_shot_title">Maximum shot length</string -->
+  <!-- TODO string name="pref_max_shot_summary">Maximum length of shooting [m]</string -->
+  <!-- TODO string name="pref_max_shot_message">Shots over this length are marked as overshoot</string -->
   <string name="pref_backsight_title">Backsight</string>
   <string name="pref_backsight_summary">Campi backsight nel dialogo Nuova Battuta</string>
   <string name="pref_prev_next_title">Pulsanti Prec/Succ</string>

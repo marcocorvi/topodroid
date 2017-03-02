@@ -1009,17 +1009,25 @@ public class DataHelper extends DataSetObservable
                           : s.surface ? DBlock.BLOCK_SURFACE 
                           // : s.backshot ? DBlock.BLOCK_BACKSHOT
                           : 0,
-                          0, 0, // leg, status
-                          0,    // shot_type: parser-shots are not modifiable
+                          0L, // leg
+                          0L, // status
+                          0L, // shot_type: parser-shots are not modifiable
                           s.comment );
       }
     }
     return id;
   }
+
+  public long insertDistoXShot( long sid, long id, double d, double b, double c, double r, long extend,
+                          long status, boolean forward )
+  { // 0L=leg, status, 0L=type DISTOX
+    return insertShot( sid, id, "", "",  d, b, c, r, extend, DBlock.BLOCK_SURVEY, 0L, status, 0L, "", forward );
+  }
+
   
   public long insertShot( long sid, long id, double d, double b, double c, double r, long extend,
-                          int shot_type, boolean forward )
-  {
+                          long shot_type, boolean forward )
+  { // 0L=leg, 0L=status, type 
     return insertShot( sid, id, "", "",  d, b, c, r, extend, DBlock.BLOCK_SURVEY, 0L, 0L, shot_type, "", forward );
   }
 
@@ -1184,7 +1192,7 @@ public class DataHelper extends DataSetObservable
     } catch (SQLiteException e) { logError("transfer shots", e); }
   }
 
-  public long insertShotAt( long sid, long at, double d, double b, double c, double r, long extend, int type, boolean forward )
+  public long insertShotAt( long sid, long at, double d, double b, double c, double r, long extend, long type, boolean forward )
   {
     if ( myDB == null ) return -1L;
     shiftShotsId( sid, at );
@@ -1222,7 +1230,7 @@ public class DataHelper extends DataSetObservable
   // return the new-shot id
   public long insertShot( long sid, long id, String from, String to, 
                           double d, double b, double c, double r, 
-                          long extend, long flag, long leg, long status, int shot_type,
+                          long extend, long flag, long leg, long status, long shot_type,
                           String comment, boolean forward )
   {
     // TDLog.Log( TDLog.LOG_DB, "insertShot <" + id + "> " + from + "-" + to + " extend " + extend );
@@ -3602,10 +3610,10 @@ public class DataHelper extends DataSetObservable
              long leg    = scanline1.longValue( );
              status      = scanline1.longValue( );
              comment     = scanline1.stringValue( );
-             // FIXME N.B. shot_type is not saved
-             // long type = 0; if ( db_version > 21 ) type = longValue( );
+             // FIXME N.B. shot_type is not saved before 22
+             long type = 0; if ( db_version > 21 ) type = scanline1.longValue( );
 
-             insertShot( sid, id, from, to, d, b, c, r, extend, flag, leg, status, 0, comment, false );
+             insertShot( sid, id, from, to, d, b, c, r, extend, flag, leg, status, type, comment, false );
              updateShotAMDR( id, sid, acc, mag, dip, r, false );
              // TDLog.Log( TDLog.LOG_DB, "insertShot " + sid + " " + id + " " + from + " " + to );
            } else if ( table.equals(FIXED_TABLE) ) {
@@ -3804,9 +3812,9 @@ public class DataHelper extends DataSetObservable
              +   " extend INTEGER, "
              +   " flag INTEGER, "
              +   " leg INTEGER, "
-             +   " status INTEGER, "
+             +   " status INTEGER, " // NORMAL DELETED OVERSHOOT
              +   " comment TEXT, "
-             +   " type INTEGER "
+             +   " type INTEGER "    // DISTOX MANUAL
              // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
              // +   " ON DELETE CASCADE "
              +   ")"

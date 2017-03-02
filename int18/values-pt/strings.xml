@@ -857,6 +857,9 @@
   <string name="pref_leg_title">Tolerância visadas</string>
   <string name="pref_leg_summary">Tolerância entre as medições de uma visada</string>
   <string name="pref_leg_message">Tolerância entre as medições de uma visada</string>
+  <!-- TODO string name="pref_max_shot_title">Maximum shot length</string -->
+  <!-- TODO string name="pref_max_shot_summary">Maximum length of shooting [m]</string -->
+  <!-- TODO string name="pref_max_shot_message">Shots over this length are marked as overshoot</string -->
   <string name="pref_backsight_title">Medida contra</string>
   <string name="pref_backsight_summary">Campos de contra azimute e inclinação invertida para inserção manual de medida</string>
   <string name="pref_prev_next_title">Botões Ant/Próx</string>

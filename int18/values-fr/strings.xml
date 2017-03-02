@@ -857,6 +857,9 @@
   <string name="pref_leg_title">Tolérance du cheminement</string>
   <string name="pref_leg_summary">Tolérance le long des visées de cheminement</string>
   <string name="pref_leg_message">Tolérance le long des visées de cheminement</string>
+  <!-- TODO string name="pref_max_shot_title">Maximum shot length</string -->
+  <!-- TODO string name="pref_max_shot_summary">Maximum length of shooting [m]</string -->
+  <!-- TODO string name="pref_max_shot_message">Shots over this length are marked as overshoot</string -->
   <string name="pref_backsight_title">Visée inverse</string>
   <string name="pref_backsight_summary">Afficher les champs de saisie inverse dans la boîte de dialogue de nouvelle visée</string>
   <string name="pref_prev_next_title">Icônes Précédent/Suivant</string>

@@ -529,17 +529,17 @@ class ConnectionHandler extends Handler
 
   public void onInsertShot( long sid, long id, String from, String to, 
                           double d, double b, double c, double r, 
-                          long extend, long flag, long leg, long status, int shot_type, String comment ) 
+                          long extend, long flag, long leg, long status, long shot_type, String comment ) 
   {
     enqueue( DataListener.SHOT_INSERT, 
       String.format(Locale.US, "%d|%d|%s|%s|%.2f|%.1f|%.1f|%.1f|%d|%d|%d|%d|%d|%s|", 
-      (int)sid, (int)id, from, to, d, b, c, r, (int)extend, (int)flag, (int)leg, (int)status, shot_type, comment ) );
+      (int)sid, (int)id, from, to, d, b, c, r, (int)extend, (int)flag, (int)leg, (int)status, (int)shot_type, comment ) );
   }
 
-  public void onInsertShotAt( long sid, long at, double d, double b, double c, double r, long e, int t ) 
+  public void onInsertShotAt( long sid, long at, double d, double b, double c, double r, long e, long t ) 
   {
     enqueue( DataListener.SHOT_INSERTAT, 
-      String.format(Locale.US, "%d|%d||%.2f|%.1f|%.1f|%.1f|%d|%d", (int)sid, (int)at, d, b, c, r, (int)e, t ) );
+      String.format(Locale.US, "%d|%d||%.2f|%.1f|%.1f|%.1f|%d|%d", (int)sid, (int)at, d, b, c, r, (int)e, (int)t ) );
   }
 
   // public void transferShots( long sid, long old_sid, long old_id ) { }

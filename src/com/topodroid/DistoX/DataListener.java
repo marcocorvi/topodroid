@@ -95,11 +95,11 @@ public interface DataListener
 
   public void onInsertShot( long sid, long id, String from, String to, 
                           double d, double b, double c, double r, 
-                          long extend, long flag, long leg, long status, int shot_type, String comment );
+                          long extend, long flag, long leg, long status, long shot_type, String comment );
 
   // @param e extend
   // @param t type
-  public void onInsertShotAt( long sid, long at, double d, double b, double c, double r, long e, int t );
+  public void onInsertShotAt( long sid, long at, double d, double b, double c, double r, long e, long t );
 
   // public void transferShots( long sid, long old_sid, long old_id );
 

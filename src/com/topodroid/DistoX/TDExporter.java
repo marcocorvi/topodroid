@@ -136,7 +136,7 @@ class TDExporter
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
 
-      pw.format("<csurvey version=\"1.04\" id=\"\">\n");
+      pw.format("<csurvey version=\"1.05\" id=\"\">\n");
       pw.format("<!-- %s created by TopoDroid v %s -->\n", TopoDroidUtil.getDateString("yyyy-MM-dd"), TopoDroidApp.VERSION );
 
 // ++++++++++++++++ PROPERTIES

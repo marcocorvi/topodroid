@@ -114,7 +114,8 @@ public class TopoDroidComm
           long extend = TDAzimuth.computeLegExtend( b ); // FIXME-EXTEND
           TDLog.Log( TDLog.LOG_DISTOX, "DATA PACKET " + d + " " + b + " " + c );
           // NOTE type=0 shot is DistoX-type
-          mLastShotId = mApp.mData.insertShot( mApp.mSID, -1L, d, b, c, r, extend, 0, true );
+          long status = ( d > TDSetting.mMaxShotLength )? TopoDroidApp.STATUS_OVERSHOOT : TopoDroidApp.STATUS_NORMAL;
+          mLastShotId = mApp.mData.insertDistoXShot( mApp.mSID, -1L, d, b, c, r, extend, status, true );
           if ( mLister != null ) { // FIXME LISTER sendMessage with mLastShotId only
             Message msg = mLister.obtainMessage( ListerHandler.LISTER_UPDATE );
             Bundle bundle = new Bundle();

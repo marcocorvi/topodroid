@@ -855,6 +855,9 @@
   <string name="pref_leg_title">主线容差</string>
   <string name="pref_leg_summary">主线测量间容差</string>
   <string name="pref_leg_message">主线测量间容差</string>
+  <!-- TODO string name="pref_max_shot_title">Maximum shot length</string -->
+  <!-- TODO string name="pref_max_shot_summary">Maximum length of shooting [m]</string -->
+  <!-- TODO string name="pref_max_shot_message">Shots over this length are marked as overshoot</string -->
   <string name="pref_backsight_title">后测</string>
   <string name="pref_backsight_summary">新测量对话框里的后测字段</string>
   <string name="pref_prev_next_title">上一步/下一步 按钮</string>

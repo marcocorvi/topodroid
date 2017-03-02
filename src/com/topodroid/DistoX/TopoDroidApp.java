@@ -179,6 +179,7 @@ public class TopoDroidApp extends Application
 
   static final int STATUS_NORMAL  = 0;   // item (shot, plot, fixed) status
   static final int STATUS_DELETED = 1;  
+  static final int STATUS_OVERSHOOT = 2;  
 
   String[] DistoXConnectionError;
   BluetoothAdapter mBTAdapter = null;     // BT connection
