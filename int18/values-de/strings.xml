@@ -207,7 +207,7 @@
     <string name="in">innen</string>
     <!-- UNUSED string name="none">kein</string -->
     <!-- UNUSED string name="barrier_add">Nachfolgende Messungen ausblenden</string -->
-    <!-- TODO string name="hide_from">Hide from</string -->
+    <string name="hide_from">Seite ausblenden</string>
     <string name="barrier_del">Nachfolgende Messungen anzeigen</string>
     <!-- NO string name="hidden_add">Vorherige Messungen ausblenden</string -->
     <string name="hidden_del">Vorherige Messungen anzeigen</string>
@@ -883,9 +883,9 @@
   <string name="pref_leg_title">Messzug Toleranz</string>
   <string name="pref_leg_summary">Toleranz zwischen Messungen eines Messzugs</string>
   <string name="pref_leg_message">Toleranz zwischen Messungen eines Messzugs</string>
-  <!-- TODO string name="pref_max_shot_title">Maximum shot length</string -->
-  <!-- TODO string name="pref_max_shot_summary">Maximum length of shooting [m]</string -->
-  <!-- TODO string name="pref_max_shot_message">Shots over this length are marked as overshoot</string -->
+  <string name="pref_max_shot_title">Maximale Messlänge</string>
+  <string name="pref_max_shot_summary">Maximale Messlänge  [m]</string>
+  <string name="pref_max_shot_message">Längere Messungen werden als Fehler behandelt.</string>
   <string name="pref_backsight_title">Rückmessungs-Feld anzeigen</string>
   <string name="pref_backsight_summary">Rückmessungs-Feld im Dialog bei neuem manuellen Messzug anzeigen</string>
   <string name="pref_prev_next_title">Vorherige/Nächste Messtrecke</string>
