@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string>
-    <string name="no_manual">Cannot retrieve user manual from the web*Nem lehet letölteni a kézikönyvet az internetről</string>
+    <string name="no_manual">Nem lehet letölteni a felhasználói kézikönyvet az internetről</string>
 
     <string name="app_name">TopoDroid</string>
-    <string name="double_back">Click BACK again to exit* Nyomd meg vissza gombot újra a kilépéshez</string>
+    <string name="double_back">Nyomd meg vissza gombot újra a kilépéshez</string>
 
     <string name="version_ask">Updating to a new version of TopoDroid.\nDo you want to reinstall drawing tools?*A TopoDroid frissítése.\nSzeretnéd újratelepíteni a rajzeszközöket?</string>
-    <string name="symbols_ask">Install drawing tools v.%1$s?\n(Current v.%2$s)*Telepíted a rajzeszközök következő verzióját v.%1$s?\n(Jelenlegi v.%2$s)</string>
+    <string name="symbols_ask">Telepíted a rajzeszközök következő verzióját v.%1$s?\n(Jelenlegi v.%2$s)</string>
 
     <string name="POINT">POINT*PONT</string>
     <string name="LINE">LINE*VONAL</string>
@@ -25,7 +25,7 @@
     <!-- UNUSED string name="memory_data">DistoX data</string -->
 
     <string name="thp_user">user*felhasználó</string>
-    <string name="thp_label">label*cimke</string>
+    <string name="thp_label">felirat</string>
     <!-- UNUSED string name="thp_danger">danger</string -->
     <string name="thl_user">user*felhasználó</string>
     <string name="thl_wall">wall*fal</string>
@@ -81,7 +81,7 @@
     <string name="non_linear">non-linear*nem lineáris</string>
     <string name="algo_minimum">minimum*minimum</string>
    
-    <string name="device_algo_failed">Algorithm auto-determination failed*Az algoritmus automatikus kiválasztása nem sikerült\nUsing linear algorithm</string>
+    <string name="device_algo_failed">Az algoritmus automatikus kiválasztása nem sikerült\nLineáris eljárás használata</string>
     <string name="device_address">Address %1$s *Cím %1$s</string>
     <string name="device_busy">Device busy*Az eszköz használatban</string>
     <string name="device_illegal_addr">Illegal memory address*Helytelen memória cím</string>
@@ -151,8 +151,8 @@
 
     <string name="illegal_data_value">Illegal data value*Helytelen adat érték</string>
 
-    <string name="label_title">LABEL*CÍMKE</string>
-    <string name="label_text">Enter the label text*Írd be címke feliratot.</string>
+    <string name="label_title">FELIRAT</string>
+    <string name="label_text">Írd be a feliratot.</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
     <string name="h_ellipsoid">H ellipsoid*Ellipszoid magasság</string>
     <string name="h_geoid">H geoid*Geoid magasság</string>
@@ -170,10 +170,10 @@
     <string name="error_length_required">Length required*Hossz szükséges</string>
     <string name="error_clino_required">Clino required*Lejtszög szükséges</string>
     <string name="error_comment_required">Comment required*Megjegyzés szükséges</string>
-    <string name="error_begin_required">Start address required*Kezdő cím szükséges???</string>
+    <string name="error_begin_required">Kezdő hivatkozás szükséges</string>
     <string name="error_declination_number">Declination must be a number*A deklinációt számként kell megadni</string>
-    <string name="error_end_required">Final address required*</string>
-    <string name="error_from_required">First station required</string>
+    <string name="error_end_required">Vépont szükséges</string>
+    <string name="error_from_required">Első mérési pont megadása szükséges</string>
     <string name="error_group_required">Group number required*Csoport szám szükséges</string>
     <string name="error_group_non_integer">Group must be integer number*A csoport számnak egész számnak kell lennie</string>
     <string name="error_alt_required">Altitude required*Magassági adat szükséges</string>
@@ -210,7 +210,7 @@
     <string name="fixed">fixed*csavarral állandósított</string>
     <string name="painted">painted*felfestett</string>
 
-    <string name="bad_cwd">Project name cannot be path*A projekt neve ne egyezhet meg a mappa nevével???</string>
+    <string name="bad_cwd">Projekt neve nem lehet elérési útvonal</string>
     <string name="bad_line">Bad line type*Rossz vonaltípus</string>
     <string name="bad_point">Bad point type*Rossz pont típus</string>
 
