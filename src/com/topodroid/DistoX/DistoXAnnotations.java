@@ -123,6 +123,7 @@ public class DistoXAnnotations extends MyDialog // Activity
     mButtonCancel.setOnClickListener( this );
   }
 
+  @Override
   public void onClick(View v) 
   {
     // When the user clicks, just finish this activity.

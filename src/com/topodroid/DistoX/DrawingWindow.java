@@ -3145,13 +3145,13 @@ public class DrawingWindow extends ItemDrawer
     {
       Button b = (Button)view;
       if ( b == mButton1[ BTN_DOWNLOAD ] ) {
-        mDataDownloader.toggleDownload();
-        setConnectionStatus( mDataDownloader.getStatus() );
         if (   TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI
-            && mDataDownloader.isDownloading() 
+            && ! mDataDownloader.isDownloading() 
             && mApp.mDData.getDevices().size() > 1 ) {
           (new DeviceSelectDialog( this, mApp, mDataDownloader, this )).show();
         } else {
+          mDataDownloader.toggleDownload();
+          setConnectionStatus( mDataDownloader.getStatus() );
           mDataDownloader.doDataDownload( );
         }
       } else if ( b == mButton1[ BTN_PLOT ] ) {

@@ -30,6 +30,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 
 import android.util.Log;
@@ -38,6 +39,7 @@ import android.bluetooth.BluetoothDevice;
 
 public class DeviceSelectDialog extends MyDialog
                                 implements OnItemClickListener
+                                , OnClickListener
 {
   private Context mContext;
   private TopoDroidApp mApp;
@@ -45,6 +47,7 @@ public class DeviceSelectDialog extends MyDialog
   private ILister mLister;
 
   private ListView mList;
+  private Button  mBtnCancel;
 
   // ---------------------------------------------------------------
   DeviceSelectDialog( Context context, TopoDroidApp app, DataDownloader downloader, ILister lister )
@@ -64,6 +67,9 @@ public class DeviceSelectDialog extends MyDialog
  
     // Log.v("DistoX", "device select dialog init layout");
     initLayout( R.layout.device_select_dialog, R.string.title_device_select );
+
+    mBtnCancel = (Button) findViewById( R.id.button_cancel );
+    mBtnCancel.setOnClickListener( this );
 
     mList = (ListView) findViewById(R.id.dev_list);
     mList.setOnItemClickListener( this );
@@ -103,7 +109,19 @@ public class DeviceSelectDialog extends MyDialog
     // String address = vals[2]; // FIXME VirtualDistoX
     mApp.setDevice( address );
     mLister.setTheTitle();
+    mDownloader.toggleDownload();
+    mLister.setConnectionStatus( mDownloader.getStatus() );
     mDownloader.doDataDownload();
+  }
+
+  @Override
+  public void onClick(View v) 
+  {
+    Button b = (Button) v;
+    if ( b == mBtnCancel ) {
+      /* nothing */
+    }
+    dismiss();
   }
 
 }

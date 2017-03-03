@@ -289,7 +289,7 @@ class TDSetting
 
   static int mWaitLaser = 1000;
   static int mWaitShot  = 4000;
-  static int mWaitData  =  250;  // delay between data
+  static int mWaitData  =  100;  // delay between data
   static int mWaitConn  =  500;  // delay waiting a connection
   static int mWaitCommand = 100;
 
@@ -629,7 +629,7 @@ class TDSetting
     mCommRetry      = tryInt( prefs, key[k++], "1" );        // DISTOX_COMM_RETRY
     mWaitLaser      = tryInt( prefs, key[k++], "1000" );     // DISTOX_WAIT_LASER
     mWaitShot       = tryInt( prefs, key[k++], "4000" );     // DISTOX_WAIT_SHOT
-    mWaitData       = tryInt( prefs, key[k++], "250" );      // DISTOX_WAIT_DATA
+    mWaitData       = tryInt( prefs, key[k++], "100" );      // DISTOX_WAIT_DATA
     mWaitConn       = tryInt( prefs, key[k++], "500" );      // DISTOX_WAIT_CONN
     mZ6Workaround   = prefs.getBoolean( key[k++], true  );   // DISTOX_Z6_WORKAROUND
     mConnectionMode = tryInt( prefs, key[k++], "0" );        // DISTOX_CONN_MODE choice: 0, 1, 2
@@ -865,7 +865,7 @@ class TDSetting
     } else if ( k.equals( key[ nk++ ] ) ) {
       mWaitShot       = tryInt( prefs, k, "4000" );  // DISTOX_WAIT_SHOT
     } else if ( k.equals( key[ nk++ ] ) ) {
-      mWaitData       = tryInt( prefs, k, "250" );   // DISTOX_WAIT_DATA
+      mWaitData       = tryInt( prefs, k, "100" );   // DISTOX_WAIT_DATA
     } else if ( k.equals( key[ nk++ ] ) ) {
       mWaitConn       = tryInt( prefs, k, "500" );   // DISTOX_WAIT_CONN
     } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_Z6_WORKAROUND

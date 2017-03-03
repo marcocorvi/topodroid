@@ -143,7 +143,7 @@ class TDExporter
       // FIXME origin = origin of Num
       pw.format("  <properties id=\"\" name=\"\" origin=\"%s\" ", origin ); // prefix
       // pw.format(      "name=\"\" description=\"\" club=\"\" team=\"\" ");
-      pw.format(      "calculatemode=\"1\" calculatetype=\"2\" " );
+      pw.format(      "calculatemode=\"1\" calculatetype=\"2\" calculateversion=\"-1\" " );
       pw.format(      "ringcorrectionmode=\"2\" nordcorrectionmode=\"0\" inversionmode=\"1\" ");
       pw.format(      "designwarpingmode=\"1\" bindcrosssection=\"1\">\n");
       

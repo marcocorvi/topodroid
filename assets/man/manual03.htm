@@ -39,15 +39,16 @@ By default TopoDroid uses the BT address as name for a DistoX. The DistoXes can 
 <h4>DEVICE SETTINGS</h4>
 <ul style="margin-top=0">
 <li><i>Bluetooth</i>: whether to enable, disable, or check on start-up [default "check"]</li>
-<li><i>Data connection</i>: either stay connected to the DistoX to <a href="page_download.htm">download shot data</a> as soon as they are taken, or download the shots in burst, "on-demand". This applies only to data: other DistoX functions use a one-shot query mode [default "on-demand"]</li>
+<li><i>Data connection</i>: either stay connected to the DistoX to <a href="page_download.htm">download shot data</a> as soon as they are taken, or download the shots in burst, "on-demand". The "multi" mode is like "on-demand" mode, but a long-tap of the button lets you switch DistoX. The connection mode applies only to data: other DistoX functions use a one-shot query mode [default "on-demand"]</li>
 <li><i>Auto reconnect</i>: automatically reconnect if the connection is lost in "continuous" data download-mode [default "no"]</li>
 <li><i>Socket</i> type: either normal or "insecure" [default "normal"]</li>
 <li><i>Z6-workaround</i> Fixes a download timeout error on a Z6 phone, and possibly other devices. It is safe to leave this enabled [default "on"]</li>
 <li><i>Connection delay</i>: delay [1/10 sec] before trying to connect to the DistoX [default 0, no delay]</li>
 <li><i>Auto pairing</i>: whether TopoDroid should try to pair with the DistoX selected from a scan [default "no"]</li>
-<li><i>Data pause</i>: pause after one data download [ms]</li>
-<li><i>Laser pause</i>: pause after turning the laser on [ms]</li>
-<li><i>Shot pause</i>: pause after taking a shot [ms]</li>
+<li><i>Data pause</i>: pause after one data download [default 100 ms]</li>
+<li><i>Data ready delay</i>: waiting time for data to get ready [default 500 ms]</li>
+<li><i>Laser pause</i>: pause after turning the laser on [default 1000 ms]</li>
+<li><i>Shot pause</i>: pause after taking a shot [default 4000 ms]</li>
 </ul><br><p>
 
 <a href="page_trouble.htm">DistoX troubleshooting</a><br>

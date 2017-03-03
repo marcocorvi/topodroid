@@ -252,11 +252,21 @@ class StationName
 
   private boolean checkBackshot( DBlock blk, float length, float bearing, float clino )
   {
-    if ( Math.abs( length - blk.mLength ) > TDSetting.mCloseDistance * length ) return false;
-    if ( Math.abs( clino + blk.mClino ) > TDSetting.mCloseDistance * 100 ) return false;
+    float d_thr = TDSetting.mCloseDistance * (blk.mLength+length);
+    if ( Math.abs( length - blk.mLength ) > d_thr ) {
+      // Log.v("DistoX", "backshot check fails on distance " + length + " " + blk.mLength + " thr " + d_thr );
+      return false;
+    }
+    float a_thr = TDSetting.mCloseDistance * 112; // rad2deg * 2 
+    if ( Math.abs( clino + blk.mClino ) > a_thr ) {
+      // Log.v("DistoX", "backshot check fails on clino " + clino + " " + blk.mClino + " thr " + a_thr );
+      return false;
+    }
     if ( ! TDSetting.mMagAnomaly ) {
-      if ( Math.abs( ( bearing < blk.mBearing )? blk.mBearing - bearing - 180 : bearing - blk.mBearing - 180 )
-        > TDSetting.mCloseDistance * 100 ) return false;
+      if ( Math.abs( ( bearing < blk.mBearing )? blk.mBearing - bearing - 180 : bearing - blk.mBearing - 180 ) > a_thr ) {
+        // Log.v("DistoX", "backshot check fails on bearing " + bearing + " " + blk.mBearing + " thr " + a_thr );
+        return false;
+      }
     }
     return true;
   }
@@ -265,7 +275,7 @@ class StationName
   { 
     // Log.v("DistoX", "Backsight assign stations after " + blk0.mFrom + "-" + blk0.mTo + " Size " + list.size() + " sid " + sid );
     boolean increment = true;
-    boolean flip = false; // whether to swap leg-stations (backsight backward shot)
+    // boolean flip = false; // whether to swap leg-stations (backsight backward shot)
     // TDLog.Log( TDLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
 
     DBlock prev = null;
@@ -277,7 +287,7 @@ class StationName
     float fore_bearing = 0;
     float fore_clino   = 0;
     if ( DistoXStationName.isLessOrEqual( blk0.mFrom, blk0.mTo ) ) { // forward
-      flip    = true;
+      // flip    = true;
       station = to;
       next = DistoXStationName.increment( station, sts );
       fore_length  = blk0.mLength;
@@ -285,35 +295,31 @@ class StationName
       fore_clino   = blk0.mClino;
     } else { // backward
       increment = false;
-      flip    = false;
+      // flip    = false;
       station = from;
       to   = DistoXStationName.increment( from );
       next = DistoXStationName.increment( to, sts );
     }
 
     String oldFrom = blk0.mFrom;
-    // int nrLegShots = 0;
-    // Log.v("DistoX", "*    " + oldFrom + " " + from + "-" + to + "-" + next + ":" + station + " flip=" + (flip?"y":"n") );
-
     for ( DBlock blk : list ) {
       if ( blk.mType == DBlock.BLOCK_SPLAY ) {
-        if ( flip ) { 
-          flip = false;
-        }
+        // if ( flip ) { 
+        //   flip = false;
+        // }
         // blk.mFrom = station;
         blk.setName( station, "" );
         data_helper.updateShotName( blk.mId, sid, blk.mFrom, "", true );  // SPLAY
-        // Log.v("DistoX", "S:"+ station + "   " + oldFrom + " " + from + "-" + to + "-" + next + ":" + station + " flip=" + (flip?"y":"n") );
       } else if ( blk.mType == DBlock.BLOCK_MAIN_LEG ) {
         if ( blk.mId != blk0.mId ) {
           String p_to;
-          if ( flip && checkBackshot( blk, fore_length, fore_bearing, fore_clino ) ) { // backward
-            flip = false;
+          if ( /* flip && */ checkBackshot( blk, fore_length, fore_bearing, fore_clino ) ) { // backward
+            // flip = false;
             p_to = oldFrom; 
             from = to;
             station = from;
           } else {  // forward
-            flip = true;
+            // flip = true;
             if ( increment ) {
               from = to;
               to   = next;
@@ -330,7 +336,6 @@ class StationName
           }
           blk.setName( from, p_to );
           data_helper.updateShotName( blk.mId, sid, from, p_to, true ); // LEG
-          // Log.v("DistoX", "L:"+from+"-"+ p_to + " " + oldFrom + " " + from + "-" + to + "-" + next + ":" + station + " flip=" + (flip?"y":"n") );
         }
       }
     }
@@ -345,7 +350,7 @@ class StationName
     String from = DistoXStationName.mInitialStation;
     String to   = DistoXStationName.mSecondStation;
     String oldFrom = "empty"; // FIXME
-    boolean flip = false; // whether to swap leg-stations (backsight backward shot)
+    // boolean flip = false; // whether to swap leg-stations (backsight backward shot)
     float fore_length  = 0;
     float fore_bearing = 0;
     float fore_clino   = 0;
@@ -357,26 +362,18 @@ class StationName
     int nrLegShots = 0;
 
     for ( DBlock blk : list ) {
-      // Log.v("DistoX", blk.mId + " <" + blk.mFrom + "-" + blk.mTo + "> " + oldFrom + "-" + from + "-" + to + "-" + station + " f:" + (flip?"y":"n") );
       if ( blk.mFrom.length() == 0 ) // this implies blk.mTo.length() == 0
       {
-        // Log.v( "DistoX", blk.mId + " EMPTY FROM. prev " + ( (prev==null)? "null" : prev.mId ) );
         if ( prev == null ) {
           prev = blk;
           // blk.mFrom = station;
           blk.setName( station, "" );
           data_helper.updateShotName( blk.mId, sid, blk.mFrom, "", true );  // SPLAY
-          // Log.v( "DistoX", blk.mId + " FROM " + blk.mFrom + " PREV null" );
         } else {
           if ( prev.isRelativeDistance( blk ) ) {
             if ( nrLegShots == 0 ) {
-              // checkCurrentStationName
-              if ( mCurrentStationName != null ) {
-                // if ( forward_shots ) { 
-                  from = mCurrentStationName;
-                // } else if ( survey_stations == 2 ) {
-                //   to = mCurrentStationName;
-                // }
+              if ( mCurrentStationName != null ) { // checkCurrentStationName
+                from = mCurrentStationName;
               }
               nrLegShots = 2; // prev and this shot
             } else {
@@ -384,47 +381,39 @@ class StationName
             }
             if ( nrLegShots == TDSetting.mMinNrLegShots ) {
               mCurrentStationName = null;
-              // Log.v("DistoX", "P:" + prev.mId + " " + oldFrom + "-" + from + "-" + to + "-" + station + " f:" + (flip?"y":"n") );
               String prev_from = from;
               String prev_to   = to;
-              if ( flip && checkBackshot( prev, fore_length, fore_bearing, fore_clino) ) { 
+              if ( /* flip && */ checkBackshot( prev, fore_length, fore_bearing, fore_clino) ) { 
                                      // 2 backsight backward shot from--old_from
                 prev_to = oldFrom;   // 1
                 station = from;
-                flip = false;
+                // flip = false;
               } else {               // 2 backsight forward shot from--to
                 // prev_to = to;     // 3
                 oldFrom = from;      // 2
                 from    = to;        // 3
                 station = to;
                 to   = DistoXStationName.increment( to,list );  // next-shot-to   = increment next-shot-from          
-                flip = true;
-              }
-              // Log.v("DistoX", "P: (" + prev_from + "-" + prev_to + ") " + oldFrom + "-" + from + "-" + to + "-" + station + " f:" + (flip?"y":"n") );
-              prev.setName( prev_from, prev_to );
-              if ( flip ) { // next shot will try to flip
+                // flip = true;
                 fore_length  = prev.mLength;
                 fore_bearing = prev.mBearing;
                 fore_clino   = prev.mClino;
               }
+              prev.setName( prev_from, prev_to );
               data_helper.updateShotName( prev.mId, sid, prev_from, prev_to, true ); // LEG
               setLegExtend( data_helper, sid, prev );
             }
           } else { // distance from prev > "closeness" setting
-            // Log.v("DistoX", "distance > closeness. nr leg-shots " + nrLegShots + " F " + from );
-            if ( nrLegShots == 0 ) {
-              flip = false;
-            } else { // only when coming from a LEG
+            if ( nrLegShots > 0 ) {
               if ( mCurrentStationName == null ) {
                 station = from;
-              // } else {
-              //   station = mCurrentStationName;
-              }
+              } // otherwise station = mCurrentStationName;
+            // } else { // only when coming from a LEG
+            //   flip = false;
             }
             nrLegShots = 0;
             blk.setName( station, "" );
             data_helper.updateShotName( blk.mId, sid, blk.mFrom, "", true ); // SPLAY
-            // Log.v( "DistoX", "far-b " + blk.mId + " <" + blk.mFrom + "> " + oldFrom + "-" + from + "-" + to + "-" + station + " f:" + (flip?"y":"n") );
             prev = blk;
           }
         }
@@ -433,25 +422,27 @@ class StationName
       {
         if ( blk.mTo.length() > 0 ) // FROM non-empty, TO non-empty --> LEG
         {
-          // Log.v("DistoX", blk.mId + " [" + blk.mFrom + "-" + blk.mTo + "] " + oldFrom + "-" + from + "-" + to + "-" + station );
-          if ( blk.mTo.equals( oldFrom ) ) { // this is a backshot
-            flip = false;
-          } else { // this is a foreshot
-            flip = true;
+          if ( ! blk.mTo.equals( oldFrom ) ) { // this is a backshot
+            // flip = true;
             oldFrom = blk.mFrom;
             from    = blk.mTo;
             to      = DistoXStationName.increment( from, list );
             if ( mCurrentStationName == null ) {
               station = blk.mTo;
             } // otherwise station = mCurrentStationName
+            fore_length  = blk.mLength;
+            fore_bearing = blk.mBearing;
+            fore_clino   = blk.mClino;
+          // } else { // this is a foreshot
+          //   flip = false;
           }
-          // Log.v("DistoX", "-> " + oldFrom + "-" + from + "-" + to + "-" + station + " f:" + (flip?"y":"n") );
           nrLegShots = TDSetting.mMinNrLegShots;
         } 
         else // FROM non-empty, TO empty --> SPLAY
         {
-          // Log.v("DistoX", blk.mId + " [" + blk.mFrom + "-.] nr leg shots " + nrLegShots );
-          if ( nrLegShots == 0 ) flip = false; // after a splay shot is fore, but first splay is tentative
+          // if ( nrLegShots == 0 ) {
+          //   flip = false; // after a splay shot is fore, but first splay is tentative
+          // }
           nrLegShots = 0;
         }
         prev = blk;
