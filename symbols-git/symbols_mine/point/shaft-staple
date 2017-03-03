@@ -1,5 +1,6 @@
 symbol point
 name shaft-staple
+name-de Schacht
 name-pt poço_lacrado
 th_name u:shaft-staple
 color 0xcccccc

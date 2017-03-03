@@ -1,5 +1,6 @@
 symbol line
 name drain
+name-de Wasserablauf
 name-pt ralo
 th_name u:drain
 group drain

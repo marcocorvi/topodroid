@@ -1,5 +1,6 @@
 symbol point 
 name ladder
+name-de Leiter
 name-pt escada
 th_name u:ladder
 color 0xcccccc
