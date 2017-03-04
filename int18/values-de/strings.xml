@@ -501,7 +501,7 @@
     <string name="button_view"      >Anzeigen      </string>
 
     <string name="button_write"     >Hochladen</string>
-    <string name="button_xsection"  >Querschnitt</string>
+    <string name="button_xsection"  >Profil</string>
 
     <string name="mode_leg">Messstrecken</string>
     <string name="mode_splay">Hilfszüge</string>
