@@ -858,9 +858,9 @@
   <string name="pref_leg_title">Допустимое расхождение повторных измерений</string>
   <string name="pref_leg_summary">Допустимое расхождение в повторных измерениях между пикетами</string>
   <string name="pref_leg_message">Допустимое расхождение в повторных измерениях между пикетами</string>
-  <!-- TODO string name="pref_max_shot_title">Maximum shot length</string -->
-  <!-- TODO string name="pref_max_shot_summary">Maximum length of shooting [m]</string -->
-  <!-- TODO string name="pref_max_shot_message">Shots over this length are marked as overshoot</string -->
+  <string name="pref_max_shot_title">Максимальная длина замера</string>
+  <string name="pref_max_shot_summary">Максимальная длина измерения [м]</string>
+  <string name="pref_max_shot_message">Замеры, превышающие это значение, будут помечены как слишком длинные</string>
   <string name="pref_backsight_title">Обратный замер</string>
   <string name="pref_backsight_summary">Поле для ввода обратного замера в диалоге ручного ввода замера</string>
   <string name="pref_prev_next_title">Кнопки Пред/След</string>
