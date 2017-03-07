@@ -201,7 +201,7 @@
     <string name="in">Dentro</string>
     <!-- UNUSED string name="none">Nada</string -->
     <!-- UNUSED string name="barrier_add">¿Quiere dividir dibujo de la poligonal principal?</string -->
-    <!-- TODO string name="hide_from">Hide from</string -->
+    <string name="hide_from">Ocultar desde</string>
     <string name="barrier_del">¿Quiere unir dibujo de la poligonal principal?</string>
     <!-- UNUSED string name="hidden_add">Oculta dibujo de la poligonal principal</string -->
     <string name="hidden_del">Mostrar dibujo de la poligonal principal</string>
@@ -285,10 +285,10 @@
     <string name="popup_curve_pt">Segmento curvo</string>
     <string name="popup_remove_pt">Eliminar punto</string>
 
-    <!-- TODO string name="popup_erase_all">Erase all</string -->
-    <!-- TODO string name="popup_erase_point">Erase points</string -->
-    <!-- TODO string name="popup_erase_line">Erase lines</string -->
-    <!-- TODO string name="popup_erase_area">Erase areas</string -->
+    <string name="popup_erase_all">Borrar Todo</string>
+    <string name="popup_erase_point">Borrar puntos</string>
+    <string name="popup_erase_line">Borrar líneas</string>
+    <string name="popup_erase_area">Borrar áreas</string>
 
     <string name="connected_none">No conctado</string>
     <string name="connected_already">Ya esta conectado</string>
@@ -310,7 +310,7 @@
     <!-- UNUSED string name="picture_no_station">Necesitas una estación / nombre para la foto</string -->
     <string name="plot_delete">¿Quiere eliminar dibujo?</string>
     <string name="item_delete">¿Quiere eliminar elemento %1$s?</string>
-    <!-- TODO string name="splay_delete">Delete splay %1$s ?</string -->
+    <string name="splay_delete">¿Quiere eliminar tomas laterales %1$s ?</string>
     <string name="plot_duplicate_name">Nombre de dibujo duplicado</string>
     <!-- UNUSED string name="plot_name">Nombre dibujo</string -->
     <string name="plot_new">Nuevo dibujo</string>
@@ -406,9 +406,9 @@
     <!-- UNUSED string name="zoom_in_out">Zoom aumentar/disminuir</string -->
 
     <string name="survey_info">Info Topografía</string>
-    <!-- TODO string name="stat_stddev_m">M stddev %1$.1f %%</string -->
-    <!-- TODO string name="stat_stddev_g">G stddev %1$.1f %%</string -->
-    <!-- TODO string name="stat_stddev_dip">Dip stddev %1$.1f deg. (promedio %2$.1f deg.)</string -->
+    <string name="stat_stddev_m">M desv. estandar %1$.1f %%</string>
+    <string name="stat_stddev_g">G desv. estandar %1$.1f %%</string>
+    <string name="stat_stddev_dip">Dip desv. estandar %1$.1f deg. (promedio %2$.1f deg.)</string>
     <string name="stat_component">Componentes %1$d</string>
     <string name="stat_depth">Profundidad %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Mediciones duplicadas %1$d %2$.1f %3$s</string>
@@ -631,7 +631,7 @@
     <string name="help_range">Mover una parte de la línea</string>
     <!-- UNUSED string name="help_clear">Borrar selección</string -->
     <string name="help_eraser">Borrar dibujo</string>
-    <!-- TODO string name="help_erase_mode">Eraser type</string -->
+    <string name="help_erase_mode">Tipo de goma de borrar</string>
     <string name="help_previous">Anterior elemento de la selección</string>
     <string name="help_next">Siguiente elemento de la selección</string>
     <string name="help_recover">Recuperar dibujo de copia de seguridad</string>
@@ -686,7 +686,7 @@
 
 
     <string name="title_azimut">Referencia declinación Magnética</string>
-    <!-- TODO string name="title_audio">Audio comment</string -->
+    <string name="title_audio">Comentario de audio</string>
     <string name="title_calib">Calibración</string>
     <string name="title_coverage">Distibución datos Calibración</string>
     <string name="title_coeff">Coeficiente Calibración</string>
@@ -874,9 +874,9 @@
   <string name="pref_leg_title">Precisión de visual</string>
   <string name="pref_leg_summary">Precisión entre las mediciones de una visual</string>
   <string name="pref_leg_message">Precisión entre las mediciones de una visual</string>
-  <!-- TODO string name="pref_max_shot_title">Maximum shot length</string -->
-  <!-- TODO string name="pref_max_shot_summary">Maximum length of shooting [m]</string -->
-  <!-- TODO string name="pref_max_shot_message">Shots over this length are marked as overshoot</string -->
+  <string name="pref_max_shot_title">Longitud de disparo máxima</string>
+  <string name="pref_max_shot_summary">Longitud máxima de disparo [m]</string>
+  <string name="pref_max_shot_message">as tomas sobre esta longitud se marcan como sobrepaso</string>
   <string name="pref_backsight_title">Toma duplicada visual</string>
   <string name="pref_backsight_summary">Se duplican los datos en el diálogo de la toma manual</string>
   <string name="pref_prev_next_title">Añadir botón Ant./Sig.</string>
