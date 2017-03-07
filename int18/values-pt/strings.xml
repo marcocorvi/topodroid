@@ -202,7 +202,7 @@
     <string name="in">dentro</string>
     <!-- UNUSED string name="none">nenhum</string -->
     <!-- UNUSED string name="barrier_add">Ocultar visadas longe base referência</string -->
-    <!-- TODO string name="hide_from">Hide from</string -->
+    <string name="hide_from">Ocultar a partir</string>
     <string name="barrier_del">Mostrar visadas longe base referência</string>
     <!-- UNUSED string name="hidden_add">Ocultar visadas até base referência</string -->
     <string name="hidden_del">Mostrar visadas até base referência</string>
@@ -865,9 +865,9 @@
   <string name="pref_leg_title">Tolerância visadas</string>
   <string name="pref_leg_summary">Tolerância entre as medições de uma visada</string>
   <string name="pref_leg_message">Tolerância entre as medições de uma visada</string>
-  <!-- TODO string name="pref_max_shot_title">Maximum shot length</string -->
-  <!-- TODO string name="pref_max_shot_summary">Maximum length of shooting [m]</string -->
-  <!-- TODO string name="pref_max_shot_message">Shots over this length are marked as overshoot</string -->
+  <string name="pref_max_shot_title">Comprimento máximo visada</string>
+  <string name="pref_max_shot_summary">Comprimento máximo para visadas [m]</string>
+  <string name="pref_max_shot_message">Visadas com comprimento maior do que este serão marcadas como excessivamente longas.</string>
   <string name="pref_backsight_title">Medida contra</string>
   <string name="pref_backsight_summary">Campos de contra azimute e inclinação invertida para inserção manual de medida</string>
   <string name="pref_prev_next_title">Botões Ant/Próx</string>

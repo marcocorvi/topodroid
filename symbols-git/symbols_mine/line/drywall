@@ -1,0 +1,27 @@
+﻿symbol line
+name drywall
+name-it muro_a_secco
+th_name drywall
+group wall
+color 0xff0000 0xff
+width 1
+csurvey 5 4 1 1
+effect
+  moveTo 0 0
+  lineTo 27 0
+  lineTo 27 1
+  lineTo 0 1
+  moveTo 0 8
+  lineTo 27 8
+  lineTo 27 9
+  lineTo 0 9
+  moveTo 5 1
+  lineTo 5 8
+  lineTo 6 8
+  lineTo 6 1
+  moveTo 20 1
+  lineTo 20 8
+  lineTo 21 8
+  lineTo 21 1
+endeffect
+endsymbol
