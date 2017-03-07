@@ -75,9 +75,11 @@ public class OverviewWindow extends ItemDrawer
   private static int izons[] = { 
                         R.drawable.iz_measure,       // 0
                         R.drawable.iz_mode,          // 1
-                        // FIXME_OVER R.drawable.iz_plan,          // 2
+                        R.drawable.iz_continue_no,   // 2
+                        // FIXME_OVER R.drawable.iz_plan,          // 3
                         R.drawable.iz_menu,          // 3
                         R.drawable.iz_measure_on,
+                        R.drawable.iz_continue_join
                       };
   // FIXME_OVER private static int BTN_PLOT = 2;
 
@@ -101,6 +103,14 @@ public class OverviewWindow extends ItemDrawer
   // FIXME_OVER BitmapDrawable mBMplan;
   BitmapDrawable mBMselect;
   BitmapDrawable mBMselectOn;
+  BitmapDrawable mBMcontinueNo;
+  BitmapDrawable mBMcontinueOn;
+
+  private final int IC_SELECT   = 0;
+  private final int IC_CONTINUE = 2;
+
+  private float mDDtotal = 0;
+  private int mTotal = 0;
 
     private TopoDroidApp mApp;
     private DataHelper mData;
@@ -133,6 +143,7 @@ public class OverviewWindow extends ItemDrawer
 
     private int mTouchMode = MODE_MOVE;
     private int mOnMeasure = 0;
+    private int mIsContinue = 0;
 
     private float mSaveX;
     private float mSaveY;
@@ -335,7 +346,7 @@ public class OverviewWindow extends ItemDrawer
     // BUTTON BAR
   
     private Button[] mButton1; // primary
-    private int mNrButton1 = 2;          // main-primary
+    private int mNrButton1 = 3;          // main-primary
     HorizontalListView mListView;
     HorizontalButtonView mButtonView1;
     ListView   mMenu;
@@ -423,12 +434,16 @@ public class OverviewWindow extends ItemDrawer
       mButton1 = new Button[ mNrButton1 ];
       for ( int k=0; k<mNrButton1; ++k ) {
         mButton1[k] = MyButton.getButton( mActivity, this, izons[k] );
-        if ( k == 0 ) 
+        if ( k == 0 ) {
           mBMselect = MyButton.getButtonBackground( mApp, res, izons[k] );
+        } else if ( k == 2 ) {
+          mBMcontinueNo = MyButton.getButtonBackground( mApp, res, izons[k] );
+        }  
         // FIXME_OVER } else if ( k == 2 ) { // IC_PLAN = 2;
         // FIXME_OVER   mBMplan = bm;
       }
-      mBMselectOn = MyButton.getButtonBackground( mApp, res, R.drawable.iz_measure_on );
+      mBMselectOn   = MyButton.getButtonBackground( mApp, res, R.drawable.iz_measure_on );
+      mBMcontinueOn = MyButton.getButtonBackground( mApp, res, R.drawable.iz_continue_join );
       // FIXME_OVER mBMextend  = MyButton.getButtonBackground( mApp, res, izons[IC_EXTEND] ); 
 
       mButtonView1 = new HorizontalButtonView( mButton1 );
@@ -765,11 +780,20 @@ public class OverviewWindow extends ItemDrawer
         mStartY = y_canvas/mZoom - mOffset.y;
         mOnMeasure = 2;
         // add reference point
-        DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null );
-        path.setPaint( BrushManager.highlightPaint );
-        path.makePath( mCirclePath, new Matrix(), mStartX, mStartY );
+        DrawingPath path1 = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null );
+        path1.setPaint( BrushManager.highlightPaint );
+        path1.makePath( mCirclePath, new Matrix(), mStartX, mStartY );
         // Log.v("DistoX", "first ref " + mStartX + " " + mStartY );
-        mOverviewSurface.setFirstReference( path );
+        mOverviewSurface.setFirstReference( path1 );
+        if ( mIsContinue == 1 ) {
+          mTotal = 0;
+          mDDtotal = 0;
+          DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null );
+          path.setPaint( BrushManager.fixedBluePaint );
+          path.makePath( null, new Matrix(), mStartX, mStartY );
+          path.mPath.moveTo( mStartX, mStartY );
+          mOverviewSurface.setSecondReference( path );
+        }
       } else if ( mOnMeasure == 2 ) {
         // FIXME use scene values
         float x = x_canvas/mZoom - mOffset.x;
@@ -792,18 +816,25 @@ public class OverviewWindow extends ItemDrawer
         }
         a *= TDSetting.mUnitAngle;
 
-        String msg = String.format( format, TDMath.sqrt( dx * dx + dy * dy ), dx, dy, a );
-        // pw.format("%.2f DX %.2f DY %.2f Bearing %.1f ", 
-        // mActivity.setTitle( sw.getBuffer().toString() );
-        mActivity.setTitle( msg );
-        // replace target point
-        DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null );
-        path.setPaint( BrushManager.fixedBluePaint );
-        path.makePath( mCrossPath, new Matrix(), x, y );
-        path.mPath.moveTo( mStartX, mStartY );
-        path.mPath.lineTo( x, y );
-        // Log.v("DistoX", "second ref " + x + " " + y );
-        mOverviewSurface.setSecondReference( path );
+        float dd = TDMath.sqrt( dx * dx + dy * dy );
+
+        if ( mIsContinue == 0 ) {
+          mDDtotal = dd;
+          // replace target point
+          DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null );
+          path.setPaint( BrushManager.fixedBluePaint );
+          path.makePath( mCrossPath, new Matrix(), x, y );
+          path.mPath.moveTo( mStartX, mStartY );
+          path.mPath.lineTo( x, y );
+          mOverviewSurface.setSecondReference( path );
+        } else {
+          mDDtotal += dd;
+          mTotal ++;
+          mOverviewSurface.addSecondReference( x, y );
+          mStartX = x;
+          mStartY = y;
+        }
+        mActivity.setTitle( String.format( format, dd, mDDtotal, dx, dy, a ) );
       }
     // ---------------------------------------- MOVE
 
@@ -914,20 +945,31 @@ public class OverviewWindow extends ItemDrawer
       if ( b == mButton1[0] ) { // measure
         if ( mOnMeasure > 0 ) {
           mOnMeasure = 0;
-          mButton1[0].setBackgroundDrawable( mBMselect );
+          mButton1[IC_SELECT].setBackgroundDrawable( mBMselect );
           mOverviewSurface.setFirstReference( null );
           mOverviewSurface.setSecondReference( null );
         } else {
           mOnMeasure = 1;
-          mButton1[0].setBackgroundDrawable( mBMselectOn );
+          mButton1[IC_SELECT].setBackgroundDrawable( mBMselectOn );
+          mDDtotal = 0;
+          mTotal = 0;
+          mOverviewSurface.setSecondReference( null );
         }
       } else if ( b == mButton1[1] ) { // references
         new OverviewModeDialog( mActivity, this, mOverviewSurface ).show();
+      } else if ( b == mButton1[2] ) { // continue
+        setContinue( 1 - mIsContinue );
 
       // FIXME_OVER } else if ( b == mButton1[2] ) { // toggle plan/extended
       // FIXME_OVER   switchPlotType();
       }
     }
+
+  private void setContinue( int c )
+  {
+    mIsContinue = c;
+    mButton1[IC_CONTINUE].setBackgroundDrawable( ( mIsContinue == 0 )? mBMcontinueNo : mBMcontinueOn );
+  }
 
 
   @Override

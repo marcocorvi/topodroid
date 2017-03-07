@@ -260,14 +260,20 @@ class ItemPickerDialog extends MyDialog
     ItemSymbol item = null;
     Symbol[] symbols = null;
     if ( mItemType == Symbol.POINT && mPointAdapter != null ) {
-      item = mPointAdapter.get( mPointAdapter.getSelectedPos() );
+      int pos = mPointAdapter.getSelectedPos();
+      item = mPointAdapter.get( pos );
       symbols = ItemDrawer.mRecentPoint;
+      mPointAdapter.setItemOrientation( pos, angle );
+      // setPointOrientation( pos, angle );
     } else if ( mItemType == Symbol.AREA && mAreaAdapter != null ) {
-      item = mAreaAdapter.get( mAreaAdapter.getSelectedPos() );
+      int pos = mAreaAdapter.getSelectedPos();
+      item = mAreaAdapter.get( pos );
       symbols = ItemDrawer.mRecentArea;
+      mAreaAdapter.setItemOrientation( pos, angle );
+      // setAreaOrientation( pos, angle );
     }
     if ( item != null ) {
-      item.setAngle( angle );
+      // item.setAngle( angle );
       if ( symbols != null ) {
         for ( int k=0; k<TDSetting.mRecentNr; ++k ) {
           Symbol p = symbols[k];
@@ -559,20 +565,33 @@ class ItemPickerDialog extends MyDialog
   //   }
   // }
 
-  void setPointOrientation( int angle )
+  private void setPointOrientation( int pos, int angle )
   {
     if ( mPointAdapter == null ) return;
     if ( /* TDSetting.mLevelOverBasic && */ mItemType == Symbol.POINT ) {
-      // Log.v( TopoDroidApp.TAG, "rotate point " + mSelectedPoint );
-      mPointAdapter.setPointOrientation( mSelectedPoint, angle );
+      mPointAdapter.setItemOrientation( pos, angle );
       // ItemSymbol item = mPointAdapter.getSelectedItem();
       // if ( item != null ) {
-      //   angle -= (int) item.mSymbol.getAngle();
-      //   mPointAdapter.rotatePoint( mSelectedPoint, angle );
+      //   item.setAngle( angle );
+      //   // angle -= (int) item.mSymbol.getAngle();
+      //   // mPointAdapter.rotateItem( pos, angle );
       // }
     }
   }
 
+  private void setAreaOrientation( int pos, int angle )
+  {
+    if ( mAreaAdapter == null ) return;
+    if ( /* TDSetting.mLevelOverBasic && */ mItemType == Symbol.AREA ) {
+      mAreaAdapter.setItemOrientation( pos, angle );
+      // ItemSymbol item = mAreaAdapter.getSelectedItem();
+      // if ( item != null ) {
+      //   item.setAngle( angle );
+      //   // angle -= (int) item.mSymbol.getAngle();
+      //   // mAreaAdapter.rotateItem( pos, angle );
+      // }
+    }
+  }
 
   @Override
   public void onBackPressed ()

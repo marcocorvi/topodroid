@@ -84,10 +84,10 @@ class DrawingUtil
 
   static void addGrid( float xmin, float xmax, float ymin, float ymax, DrawingSurface surface )
   {
-    xmin = (xmin - 10.0f) / TDSetting.mUnitGrid;
-    xmax = (xmax + 10.0f) / TDSetting.mUnitGrid;
-    ymin = (ymin - 10.0f) / TDSetting.mUnitGrid;
-    ymax = (ymax + 10.0f) / TDSetting.mUnitGrid;
+    xmin = (xmin - 100.0f) / TDSetting.mUnitGrid;
+    xmax = (xmax + 100.0f) / TDSetting.mUnitGrid;
+    ymin = (ymin - 100.0f) / TDSetting.mUnitGrid;
+    ymax = (ymax + 100.0f) / TDSetting.mUnitGrid;
     float x1 = toSceneX( xmin );
     float x2 = toSceneX( xmax );
     float y1 = toSceneY( ymin );
@@ -107,10 +107,10 @@ class DrawingUtil
 
   static void addGrid( float xmin, float xmax, float ymin, float ymax, float xoff, float yoff, DrawingSurface surface )
   {
-    xmin = (xmin - 10.0f) / TDSetting.mUnitGrid;
-    xmax = (xmax + 10.0f) / TDSetting.mUnitGrid;
-    ymin = (ymin - 10.0f) / TDSetting.mUnitGrid;
-    ymax = (ymax + 10.0f) / TDSetting.mUnitGrid;
+    xmin = (xmin - 100.0f) / TDSetting.mUnitGrid;
+    xmax = (xmax + 100.0f) / TDSetting.mUnitGrid;
+    ymin = (ymin - 100.0f) / TDSetting.mUnitGrid;
+    ymax = (ymax + 100.0f) / TDSetting.mUnitGrid;
     float x1 = toSceneX( xmin ) - xoff;
     float x2 = toSceneX( xmax ) - xoff;
     float y1 = toSceneY( ymin ) - yoff;

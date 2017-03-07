@@ -237,8 +237,8 @@
     <string name="no_thmanager">ThManager no instalado</string>
     <string name="no_db_viewer">app DB_viewer no instalada</string>
     <string name="no_undelete">No hay medida para recuperar</string>
-    <string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Bearing %4$.1f"</string>
-    <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Clino %4$.1f"</string>
+    <!-- FIXME string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Bearing %4$.1f"</string -->
+    <!-- FIXME string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Clino %4$.1f"</string -->
 
     <string name="menu_3d">Cave3D</string>
     <string name="menu_about">Acerca de..</string>
@@ -285,6 +285,11 @@
     <string name="popup_curve_pt">Segmento curvo</string>
     <string name="popup_remove_pt">Eliminar punto</string>
 
+    <!-- TODO string name="popup_erase_all">Erase all</string -->
+    <!-- TODO string name="popup_erase_point">Erase points</string -->
+    <!-- TODO string name="popup_erase_line">Erase lines</string -->
+    <!-- TODO string name="popup_erase_area">Erase areas</string -->
+
     <string name="connected_none">No conctado</string>
     <string name="connected_already">Ya esta conectado</string>
 
@@ -305,6 +310,7 @@
     <!-- UNUSED string name="picture_no_station">Necesitas una estación / nombre para la foto</string -->
     <string name="plot_delete">¿Quiere eliminar dibujo?</string>
     <string name="item_delete">¿Quiere eliminar elemento %1$s?</string>
+    <!-- TODO string name="splay_delete">Delete splay %1$s ?</string -->
     <string name="plot_duplicate_name">Nombre de dibujo duplicado</string>
     <!-- UNUSED string name="plot_name">Nombre dibujo</string -->
     <string name="plot_new">Nuevo dibujo</string>
@@ -625,6 +631,7 @@
     <string name="help_range">Mover una parte de la línea</string>
     <!-- UNUSED string name="help_clear">Borrar selección</string -->
     <string name="help_eraser">Borrar dibujo</string>
+    <!-- TODO string name="help_erase_mode">Eraser type</string -->
     <string name="help_previous">Anterior elemento de la selección</string>
     <string name="help_next">Siguiente elemento de la selección</string>
     <string name="help_recover">Recuperar dibujo de copia de seguridad</string>
@@ -679,6 +686,7 @@
 
 
     <string name="title_azimut">Referencia declinación Magnética</string>
+    <!-- TODO string name="title_audio">Audio comment</string -->
     <string name="title_calib">Calibración</string>
     <string name="title_coverage">Distibución datos Calibración</string>
     <string name="title_coeff">Coeficiente Calibración</string>

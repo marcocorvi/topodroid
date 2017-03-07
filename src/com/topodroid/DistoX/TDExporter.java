@@ -131,18 +131,23 @@ class TDExporter
     List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
     List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
     List< PlotInfo > plots  = data.selectAllPlots( sid, TopoDroidApp.STATUS_NORMAL );
+    // FIXME TODO_CSURVEY
+    // List< CurrentStation > stations = data.getStations( sid );
+
     try {
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
+      String date = TopoDroidUtil.getDateString( "yyyy-MM-dd" );
 
       pw.format("<csurvey version=\"1.05\" id=\"\">\n");
-      pw.format("<!-- %s created by TopoDroid v %s -->\n", TopoDroidUtil.getDateString("yyyy-MM-dd"), TopoDroidApp.VERSION );
+      pw.format("<!-- %s created by TopoDroid v %s -->\n", date, TopoDroidApp.VERSION );
 
 // ++++++++++++++++ PROPERTIES
       // FIXME origin = origin of Num
       pw.format("  <properties id=\"\" name=\"\" origin=\"%s\" ", origin ); // prefix
-      // pw.format(      "name=\"\" description=\"\" club=\"\" team=\"\" ");
+      // FIXME TODO_CSURVEY
+      // pw.format(      "createdby=\"TopoDroid\" version=\"%s\" date=\"%s\" ", TopoDroid.VERSION, date );
       pw.format(      "calculatemode=\"1\" calculatetype=\"2\" calculateversion=\"-1\" " );
       pw.format(      "ringcorrectionmode=\"2\" nordcorrectionmode=\"0\" inversionmode=\"1\" ");
       pw.format(      "designwarpingmode=\"1\" bindcrosssection=\"1\">\n");

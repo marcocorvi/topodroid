@@ -239,8 +239,8 @@
     <string name="no_thmanager">ThManager не е инсталирана</string>
     <string name="no_db_viewer">Програмата SQliteViewer не е инсталирана</string>
     <string name="no_undelete">Няма елементи за възстановяване</string>
-    <string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Азимут %4$.1f"</string>
-    <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Наклон %4$.1f"</string>
+    <!-- FIXME string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Азимут %4$.1f"</string -->
+    <!-- FIXME string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Наклон %4$.1f"</string -->
 
     <!-- OK string name="menu_3d">3D</string -->
     <string name="menu_about">За програмата</string>
@@ -287,6 +287,11 @@
     <string name="popup_curve_pt">Изглаждане (с Безие)</string>
     <string name="popup_remove_pt">Изтриване на точката</string>
 
+    <!-- TODO string name="popup_erase_all">Erase all</string -->
+    <!-- TODO string name="popup_erase_point">Erase points</string -->
+    <!-- TODO string name="popup_erase_line">Erase lines</string -->
+    <!-- TODO string name="popup_erase_area">Erase areas</string -->
+
     <string name="connected_none">Няма връзка</string>
     <string name="connected_already">Вече има връзка</string>
 
@@ -307,6 +312,7 @@
     <!-- UNUSED string name="picture_no_station">Необходимо е име на репер</string -->
     <string name="plot_delete">Изтриване на скица?</string>
     <string name="item_delete">Изтриване на елемент %1$s ?</string>
+    <!-- TODO string name="splay_delete">Delete splay %1$s ?</string -->
     <string name="plot_duplicate_name">Дублирано име на скица</string>
     <!-- UNUSED string name="plot_name">Име на скица</string -->
     <string name="plot_new">Нова скица</string>
@@ -627,6 +633,7 @@
     <string name="help_range">Преместване на част от линия</string>
     <!-- string name="help_clear">Clear selection</string -->
     <string name="help_eraser">Изтриване на елемент</string>
+    <!-- TODO string name="help_erase_mode">Eraser type</string -->
     <string name="help_previous">Предишен избран елемент</string>
     <string name="help_next">Следващ избран елемент</string>
     <string name="help_recover">Възстановяване на скица от резервно копие</string>
@@ -679,6 +686,7 @@
 
 
     <string name="title_azimut">Разгъване спрямо азим.</string>
+    <!-- TODO string name="title_audio">Audio comment</string -->
     <string name="title_calib">Калибрации</string>
     <string name="title_coverage">Разпределение на данните от калибрацията</string>
     <string name="title_coeff">Коефициенти на калибрацията</string>

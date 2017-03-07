@@ -648,9 +648,6 @@ class StationName
   // WARNING TopoRobot renumbering consider all the shots in a single series
   void assignStationsAfter_TRobot( DataHelper data_helper, long sid, DBlock blk0, List<DBlock> list, ArrayList<String> sts )
   {
-    // Log.v("DistoX", "TRobot assign stations after.  size " + list.size() );
-    boolean increment = true;
-    boolean flip = false; // whether to swap leg-stations (backsight backward shot)
     // TDLog.Log( TDLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
 
     DBlock prev = null;

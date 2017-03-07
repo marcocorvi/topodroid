@@ -71,7 +71,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
 
   int size() { return mItems.size(); }
 
-  // void rotatePoint( int index, int angle )
+  // void rotateItem( int index, int angle )
   // {
   //   for ( ItemSymbol b : mItems ) {
   //     if ( b.mIndex == index ) {
@@ -81,14 +81,11 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
   //   }
   // }
 
-  void setPointOrientation( int index, int angle )
+  void setItemOrientation( int pos, int angle )
   {
-    for ( ItemSymbol b : mItems ) {
-      if ( b.mIndex == index ) {
-        b.setAngle( angle );
-        return;
-      }
-    }
+    // Log.v("DistoX", "adapter pos " + pos + " set angle " + angle );
+    ItemSymbol b = mItems.get( pos );
+    b.setAngle( angle );
   }
 
   void setShowSelected( boolean s ) 
@@ -102,7 +99,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
   // ItemSymbol get( int pos ) { return mItems.get(pos); }
   int getSelectedPos() { return mPos; }
 
-  // ItemSymbol getSelectedItem() { return ( mPos >= 0 && mPos < mItems.size() )? mItems.get(mPos) : null; }
+  ItemSymbol getSelectedItem() { return ( mPos >= 0 && mPos < mItems.size() )? mItems.get(mPos) : null; }
   // public int size() { return mItems.size(); }
 
   // set selected position from the item index

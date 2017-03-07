@@ -215,6 +215,16 @@ public class DrawingSurface extends SurfaceView
   boolean removeLinePoint( DrawingPointLinePath line, LinePoint point, SelectionPoint sp ) 
   { return commandManager.removeLinePoint(line, point, sp); }
 
+  // N.B. this must be called only by plan or profile
+  // p is the path of sp
+  void deleteSplay( DrawingPath p, SelectionPoint sp )
+  {
+    mCommandManager1.deleteSplay( p, sp );
+    if ( mCommandManager2 != null ) {
+      mCommandManager2.deleteSplay( p, sp );
+    }
+  }
+
   void deletePath( DrawingPath path ) 
   { 
     isDrawing = true;
@@ -227,8 +237,8 @@ public class DrawingSurface extends SurfaceView
   void reduceLine( DrawingLinePath line ) { commandManager.reduceLine( line ); }
   void closeLine( DrawingLinePath line ) { commandManager.closeLine( line ); }
 
-  int eraseAt( float x, float y, float zoom, EraseCommand cmd ) 
-  { return commandManager.eraseAt( x, y, zoom, cmd ); }
+  int eraseAt( float x, float y, float zoom, EraseCommand cmd, int erase_mode ) 
+  { return commandManager.eraseAt( x, y, zoom, cmd, erase_mode ); }
   
   void addEraseCommand( EraseCommand cmd )
   {
@@ -377,6 +387,7 @@ public class DrawingSurface extends SurfaceView
 
   public void setSecondReference( DrawingPath path ) { commandManager.setSecondReference( path ); }
 
+  public void addSecondReference( float x, float y ) { commandManager.addSecondReference( x, y ); }
 
   // k : grid type 1, 10, 100
   public void addGridPath( DrawingPath path, int k ) { commandManager.addGrid( path, k ); }

@@ -89,6 +89,7 @@ public class TDPath
   private static String PATH_KML;    //  = PATH_BASE + "kml/";
   private static String PATH_PLT;    //  = PATH_BASE + "plt/";
   private static String APP_FOTO_PATH;   //  = PATH_BASE + "photo/";
+  private static String APP_AUDIO_PATH;   //  = PATH_BASE + "audio/";
   private static String PATH_IMPORT; //  = PATH_BASE + "import/";
   private static String APP_NOTE_PATH;   //  = PATH_BASE + "note/";
   private static String PATH_PNG;    //  = PATH_BASE + "png/";
@@ -213,6 +214,9 @@ public class TDPath
     APP_FOTO_PATH = PATH_BASE + "photo/";
     checkDirs( APP_FOTO_PATH );
 
+    APP_AUDIO_PATH = PATH_BASE + "audio/";
+    checkDirs( APP_AUDIO_PATH );
+
     PATH_IMPORT = PATH_BASE + "import/";
     checkDirs( PATH_IMPORT );
 
@@ -329,6 +333,9 @@ public class TDPath
   static String getJpgDir( String dir ) { return APP_FOTO_PATH + dir; }
   static String getJpgFile( String dir, String name ) { return APP_FOTO_PATH + dir + "/" + name; }
 
+  static String getAudioDir( String dir ) { return APP_AUDIO_PATH + dir; }
+  static String getAudioFile( String dir, String name ) { return APP_AUDIO_PATH + dir + "/" + name; }
+
   static String getSurveyPlotDxfFile( String survey, String name ) { return PATH_DXF + survey + "-" + name + DXF ; }
   static String getSurveyPlotSvgFile( String survey, String name ) { return PATH_SVG + survey + "-" + name + SVG ; }
   static String getSurveyPlotHtmFile( String survey, String name ) { return PATH_SVG + survey + "-" + name + HTML ; }
@@ -437,6 +444,7 @@ public class TDPath
   // static String getSurveyPhotoFile( String survey, String name ) { return APP_FOTO_PATH + survey + "/" + name; }
 
   static String getSurveyPhotoDir( String survey ) { return APP_FOTO_PATH + survey; }
+  static String getSurveyAudioDir( String survey ) { return APP_AUDIO_PATH + survey; }
 
   static String getSurveyJpgFile( String survey, String id )
   {
@@ -445,6 +453,15 @@ public class TDPath
       imagedir.mkdirs();
     }
     return APP_FOTO_PATH + survey + "/" + id + ".jpg";
+  }
+
+  static String getSurveyAudioFile( String survey, String id )
+  {
+    File audiodir = new File( APP_AUDIO_PATH + survey + "/" );
+    if ( ! ( audiodir.exists() ) ) {
+      audiodir.mkdirs();
+    }
+    return APP_AUDIO_PATH + survey + "/" + id + ".wav";
   }
 
   static void checkDirs( String path )

@@ -20,6 +20,7 @@
   <string name="CWDActivity">page_cwd.htm</string>
 
   <string name="AzimuthDialDialog">page_azimuth.htm</string>
+  <string name="AudioDialog">page_audio.htm</string>
   <string name="CalibCoeffDialog">page_calib_coeffs.htm</string>
   <string name="CalibCoverageDialog">page_calib_distrib.htm</string>
   <string name="CalibGMDialog">page_gm.htm</string>

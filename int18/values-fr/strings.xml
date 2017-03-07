@@ -239,8 +239,8 @@
 <string name="no_thmanager">ThManager non installé</string>
 <string name="no_db_viewer">DB_viewer app pas trouvée</string>
 <string name="no_undelete">Aucun élément à récupérer</string>
-<string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Azimuth %4$.1f"</string>
-<string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Clino %4$.1f"</string>
+<!-- FIXME string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Azimuth %4$.1f"</string -->
+<!-- FIXME string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Clino %4$.1f"</string -->
 
 <!-- OK string name="menu_3d">3D</string -->
 <string name="menu_about">A PROPOS</string>
@@ -287,6 +287,11 @@
     <string name="popup_curve_pt">Lisser le segment</string>
     <string name="popup_remove_pt">Supprimer le point</string>
 
+    <!-- TODO string name="popup_erase_all">Erase all</string -->
+    <!-- TODO string name="popup_erase_point">Erase points</string -->
+    <!-- TODO string name="popup_erase_line">Erase lines</string -->
+    <!-- TODO string name="popup_erase_area">Erase areas</string -->
+
     <string name="connected_none">Non connecté</string>
     <string name="connected_already">Déjà Connecté</string>
 
@@ -307,6 +312,7 @@
     <!-- UNUSED string name="picture_no_station">Nom station requis</string -->
     <string name="plot_delete">Supprimer le croquis ?</string>
     <string name="item_delete">Supprimer object %1$s ?</string>
+    <!-- TODO string name="splay_delete">Delete splay %1$s ?</string -->
     <string name="plot_duplicate_name">Dupliquer le nom du relevé</string>
     <!-- UNUSED string name="plot_name">Nom du croquis</string -->
     <string name="plot_new">Nouveau croquis</string>
@@ -625,6 +631,7 @@
     <!-- TODO string name="help_range">Moving a portion of line</string -->
     <!-- UNUSED string name="help_clear">Clear selection</string -->
     <string name="help_eraser">Efface un/des éléments du croquis</string>
+    <!-- TODO string name="help_erase_mode">Eraser type</string -->
     <string name="help_previous">Sélectionne l\'élément précédent dans la sélection</string>
     <string name="help_next">Sélectionne l\'élément suivant dans la sélection</string>
     <string name="help_recover">Récupérer dessin de la sauvegarde</string>
@@ -676,6 +683,7 @@
 
 
     <string name="title_azimut">Référence extension</string>
+    <!-- TODO string name="title_audio">Audio comment</string -->
     <string name="title_calib">Étalonnage</string>
     <string name="title_coverage">Distributions des données d\'étalonnage</string>
     <string name="title_coeff">Coefficients d\'étalonnage</string>

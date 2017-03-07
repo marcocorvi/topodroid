@@ -140,10 +140,10 @@ class ItemSymbol
 
   void setAngle( float angle )
   {
-    // Log.v("DistoX", "item symbol set angle " + angle );
+    // Log.v("DistoX", "item symbol " + mSymbol.getName() + " set angle " + angle );
     if ( mSymbol.setAngle( angle ) ) {
       mButton.resetPath( mSymbol.getPath(), sx, sy );
-      mView.invalidate();
+      mButton.invalidate();
     }
   }
 

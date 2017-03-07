@@ -238,8 +238,8 @@
     <string name="no_thmanager">ThManager non installato</string>
     <string name="no_db_viewer">DB_viewer non installato</string>
     <string name="no_undelete">Nessun oggetto da riprendere</string>
-    <string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Posizione %4$.1f"</string>
-    <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Inclinazione %4$.1f"</string>
+    <!-- FIXME string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Posizione %4$.1f"</string -->
+    <!-- FIXME string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Inclinazione %4$.1f"</string -->
 
     <!-- OK string name="menu_3d">3D</string -->
     <string name="menu_about">INFO</string>
@@ -286,6 +286,11 @@
     <string name="popup_curve_pt">Rendi curvo</string>
     <string name="popup_remove_pt">Elimina punto</string>
 
+    <!-- TODO string name="popup_erase_all">Erase all</string -->
+    <!-- TODO string name="popup_erase_point">Erase points</string -->
+    <!-- TODO string name="popup_erase_line">Erase lines</string -->
+    <!-- TODO string name="popup_erase_area">Erase areas</string -->
+
     <string name="connected_none">Non connesso</string>
     <string name="connected_already">Gia\' connesso</string>
 
@@ -306,6 +311,7 @@
     <!-- UNUSED string name="picture_no_station">Caposaldo o nome mancante</string -->
     <string name="plot_delete">Elimina disegno ?</string>
     <string name="item_delete">Cancellare elemento %1$s ?</string>
+    <!-- TODO string name="splay_delete">Delete splay %1$s ?</string -->
     <string name="plot_duplicate_name">Nome disegno già presente</string>
     <!-- UNUSED string name="plot_name">Nome del disegno</string -->
     <string name="plot_new">Nuovo disegno</string>
@@ -625,6 +631,7 @@
     <string name="help_range">Sposta porzione di linea</string>
     <!-- UNUSED string name="help_clear">Pulisci selezione</string -->
     <string name="help_eraser">Modalità cancella</string>
+    <!-- TODO string name="help_erase_mode">Eraser type</string -->
     <string name="help_previous">Precedente oggetto nella selezione</string>
     <string name="help_next">Prossimo oggetto nella selezione</string>
     <string name="help_recover">Recupera disegno dal backup</string>
@@ -677,6 +684,7 @@
   
 
     <string name="title_azimut">Riferimento Extend</string>
+    <!-- TODO string name="title_audio">Audio comment</string -->
     <string name="title_calib">Calibrazioni</string>
     <string name="title_coverage">Distribuzione dati calibrazione</string>
     <string name="title_coeff">Calibrazione</string>

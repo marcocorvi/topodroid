@@ -239,8 +239,8 @@
     <string name="no_thmanager">ThManager не встановлений</string>
     <string name="no_db_viewer">Додаток перегляду баз даних не найдено</string>
     <string name="no_undelete">Нічого відновлювати</string>
-    <string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Азимут %4$.1f"</string>
-    <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Кут %4$.1f"</string>
+    <!-- FIXME string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Азимут %4$.1f"</string -->
+    <!-- FIXME string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Кут %4$.1f"</string -->
 
     <!-- OK string name="menu_3d">3D</string -->
     <string name="menu_about">Опис</string>
@@ -287,6 +287,11 @@
     <string name="popup_curve_pt">Сгладити сегмент</string>
     <string name="popup_remove_pt">Видалити точку</string>
 
+    <!-- TODO string name="popup_erase_all">Erase all</string -->
+    <!-- TODO string name="popup_erase_point">Erase points</string -->
+    <!-- TODO string name="popup_erase_line">Erase lines</string -->
+    <!-- TODO string name="popup_erase_area">Erase areas</string -->
+
     <string name="connected_none">Не з\'єднано</string>
     <string name="connected_already">Уже з\'єднано</string>
 
@@ -307,6 +312,7 @@
     <!-- UNUSED string name="picture_no_station">Вимагається номер пікета</string -->
     <string name="plot_delete">Видалити абрис ?</string>
     <string name="item_delete">Видалити пункт %1$s ?</string>
+    <!-- TODO string name="splay_delete">Delete splay %1$s ?</string -->
     <string name="plot_duplicate_name">Дублювати назву абрису</string>
     <!-- UNUSED string name="plot_name">Назва абрису</string -->
     <string name="plot_new">Новий абрис</string>
@@ -627,6 +633,7 @@
     <string name="help_range">Помістити сегмент лінії</string>
     <!-- UNUSED string name="help_clear">Очистити вибір</string -->
     <string name="help_eraser">Стерти малюнки</string>
+    <!-- TODO string name="help_erase_mode">Eraser type</string -->
     <string name="help_previous">Попередній вибраний елемент</string>
     <string name="help_next">Наступний елемент у вибірці</string>
     <string name="help_recover">Відновити абрис из бекапу</string>
@@ -679,6 +686,7 @@
 
 
     <string name="title_azimut">Напрям розвідки</string>
+    <!-- TODO string name="title_audio">Audio comment</string -->
     <string name="title_calib">Калібрування</string>
     <string name="title_coverage">Калібрування и розподіл даних</string>
     <string name="title_coeff">Калібрувальні коефіцієнти</string>

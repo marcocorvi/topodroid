@@ -241,8 +241,8 @@
     <string name="no_thmanager">ThManager ni instaliran</string>
     <string name="no_db_viewer">DB_viewer ni instaliran</string>
     <string name="no_undelete">Nobeden objekt za povrnitev</string>
-    <string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Pozicija %4$.1f"</string>
-    <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Naklon %4$.1f"</string>
+    <!-- FIXME string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Pozicija %4$.1f"</string -->
+    <!-- FIXME string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Naklon %4$.1f"</string -->
 
     <!-- OK string name="menu_3d">3D</string -->
     <string name="menu_about">INFO</string>
@@ -289,6 +289,11 @@
     <string name="popup_curve_pt">Prikaži ukrivljeno</string>
     <string name="popup_remove_pt">Odstrani točko</string>
 
+    <!-- TODO string name="popup_erase_all">Erase all</string -->
+    <!-- TODO string name="popup_erase_point">Erase points</string -->
+    <!-- TODO string name="popup_erase_line">Erase lines</string -->
+    <!-- TODO string name="popup_erase_area">Erase areas</string -->
+
     <string name="connected_none">Ni povezano</string>
     <string name="connected_already">Že povezano</string>
 
@@ -309,6 +314,7 @@
     <!-- UNUSED string name="picture_no_station">Caposaldo o nome mancante</string -->
     <string name="plot_delete">Briši skico ?</string>
     <string name="item_delete">Briši element %1$s ?</string>
+    <!-- TODO string name="splay_delete">Delete splay %1$s ?</string -->
     <string name="plot_duplicate_name">Ime skice že prisotno</string>
     <!-- UNUSED string name="plot_name">Nome del disegno</string -->
     <string name="plot_new">Nova skica</string>
@@ -626,6 +632,7 @@
     <!-- TODO string name="help_range">Moving a portion of line</string -->
     <!-- UNUSED string name="help_clear">Pulisci selezione</string -->
     <string name="help_eraser">Način brisanja</string>
+    <!-- TODO string name="help_erase_mode">Eraser type</string -->
     <string name="help_previous">Predhodni objekt izbora</string>
     <string name="help_next">Naslednji objekt izbora</string>
     <string name="help_recover">Privzemi skico iz backup-a</string>
@@ -678,6 +685,7 @@
  
 
     <string name="title_azimut">Referenca Extend</string>
+    <!-- TODO string name="title_audio">Audio comment</string -->
     <string name="title_calib">Kalibracija</string>
     <string name="title_coverage">Razporeditev podatkov kalibracije</string>
     <string name="title_coeff">Kalibracija</string>

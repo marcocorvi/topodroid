@@ -285,6 +285,8 @@ public class DrawingCommandManager
 
   void setSecondReference( DrawingPath path ) { synchronized( mGridStack1 ) { mSecondReference = path; } }
 
+  void addSecondReference( float x, float y ) { synchronized( mGridStack1 ) { mSecondReference.pathAddLineTo(x,y); } }
+
   /* the next index for the ID of the area border
    */
   int getNextAreaIndex()
@@ -414,7 +416,7 @@ public class DrawingCommandManager
    * y    Y scene
    * zoom canvas display zoom
    */
-  int eraseAt( float x, float y, float zoom, EraseCommand eraseCmd ) 
+  int eraseAt( float x, float y, float zoom, EraseCommand eraseCmd, int erase_mode ) 
   {
     SelectionSet sel = new SelectionSet();
     float radius = TDSetting.mCloseCutoff + TDSetting.mEraseness / zoom;
@@ -425,87 +427,93 @@ public class DrawingCommandManager
         for ( SelectionPoint pt : sel.mPoints ) {
           DrawingPath path = pt.mItem;
           if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
-            DrawingLinePath line = (DrawingLinePath)path;
-            // ArrayList< LinePoint > points = line.mPoints;
-            // int size = points.size();
-            LinePoint first = line.mFirst;
-            LinePoint last  = line.mLast;
-            int size = line.size();
-            if ( size <= 2 || ( size == 3 && pt.mPoint == first.mNext ) ) // 2-point line OR erase midpoint of a 3-point line 
-            {
-              ret = 2; 
-              eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
-              mCurrentStack.remove( path );
-              synchronized( mSelection ) {
-                mSelection.removePath( path );
+            if ( erase_mode == DrawingWindow.ERASE_ALL || erase_mode == DrawingWindow.ERASE_LINE ) {
+              DrawingLinePath line = (DrawingLinePath)path;
+              // ArrayList< LinePoint > points = line.mPoints;
+              // int size = points.size();
+              LinePoint first = line.mFirst;
+              LinePoint last  = line.mLast;
+              int size = line.size();
+              if ( size <= 2 || ( size == 3 && pt.mPoint == first.mNext ) ) // 2-point line OR erase midpoint of a 3-point line 
+              {
+                ret = 2; 
+                eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
+                mCurrentStack.remove( path );
+                synchronized( mSelection ) {
+                  mSelection.removePath( path );
+                }
+              } 
+              else if ( pt.mPoint == first ) // erase first point of the multi-point line (2016-05-14)
+              {
+                ret = 3;
+                eraseCmd.addAction( EraseAction.ERASE_MODIFY, path );
+                // LinePoint lp = points.get(0);
+                LinePoint lp = first;
+                doRemoveLinePoint( line, pt.mPoint, pt );
+                synchronized( mSelection ) {
+                  mSelection.removeLinePoint( line, lp ); // index = 0
+                  // mSelection.mPoints.remove( pt );        // index = 1
+                }
+                line.retracePath();
               }
-            } 
-            else if ( pt.mPoint == first ) // erase first point of the multi-point line (2016-05-14)
-            {
-              ret = 3;
-              eraseCmd.addAction( EraseAction.ERASE_MODIFY, path );
-              // LinePoint lp = points.get(0);
-              LinePoint lp = first;
-              doRemoveLinePoint( line, pt.mPoint, pt );
-              synchronized( mSelection ) {
-                mSelection.removeLinePoint( line, lp ); // index = 0
-                // mSelection.mPoints.remove( pt );        // index = 1
+              else if ( pt.mPoint == first.mNext ) // erase second point of the multi-point line
+              {
+                ret = 3;
+                eraseCmd.addAction( EraseAction.ERASE_MODIFY, path );
+                // LinePoint lp = points.get(0);
+                LinePoint lp = first;
+                doRemoveLinePoint( line, lp, null );
+                doRemoveLinePoint( line, pt.mPoint, pt );
+                synchronized( mSelection ) {
+                  mSelection.removeLinePoint( line, lp ); // index = 0
+                  mSelection.mPoints.remove( pt );        // index = 1
+                }
+                line.retracePath();
+              } 
+              else if ( pt.mPoint == last.mPrev ) // erase second-to-last of multi-point line
+              {
+                ret = 4;
+                eraseCmd.addAction( EraseAction.ERASE_MODIFY, path );
+                // LinePoint lp = points.get(size-1);
+                LinePoint lp = last;
+                doRemoveLinePoint( line, lp, null );
+                doRemoveLinePoint( line, pt.mPoint, pt );
+                synchronized( mSelection ) {
+                  mSelection.removeLinePoint( line, lp ); // size -1
+                  mSelection.mPoints.remove( pt );        // size -2
+                }
+                line.retracePath();
+              } else { // erase a point in the middle of multi-point line
+                ret = 5;
+                doSplitLine( line, pt.mPoint, eraseCmd );
+                break; // IMPORTANT break the for-loop
               }
-              line.retracePath();
-            }
-            else if ( pt.mPoint == first.mNext ) // erase second point of the multi-point line
-            {
-              ret = 3;
-              eraseCmd.addAction( EraseAction.ERASE_MODIFY, path );
-              // LinePoint lp = points.get(0);
-              LinePoint lp = first;
-              doRemoveLinePoint( line, lp, null );
-              doRemoveLinePoint( line, pt.mPoint, pt );
-              synchronized( mSelection ) {
-                mSelection.removeLinePoint( line, lp ); // index = 0
-                mSelection.mPoints.remove( pt );        // index = 1
-              }
-              line.retracePath();
-            } 
-            else if ( pt.mPoint == last.mPrev ) // erase second-to-last of multi-point line
-            {
-              ret = 4;
-              eraseCmd.addAction( EraseAction.ERASE_MODIFY, path );
-              // LinePoint lp = points.get(size-1);
-              LinePoint lp = last;
-              doRemoveLinePoint( line, lp, null );
-              doRemoveLinePoint( line, pt.mPoint, pt );
-              synchronized( mSelection ) {
-                mSelection.removeLinePoint( line, lp ); // size -1
-                mSelection.mPoints.remove( pt );        // size -2
-              }
-              line.retracePath();
-            } else { // erase a point in the middle of multi-point line
-              ret = 5;
-              doSplitLine( line, pt.mPoint, eraseCmd );
-              break; // IMPORTANT break the for-loop
             }
           } else if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
-            DrawingAreaPath area = (DrawingAreaPath)path;
-            if ( area.size() <= 3 ) {
-              ret = 6;
+            if ( erase_mode == DrawingWindow.ERASE_ALL || erase_mode == DrawingWindow.ERASE_AREA ) {
+              DrawingAreaPath area = (DrawingAreaPath)path;
+              if ( area.size() <= 3 ) {
+                ret = 6;
+                eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
+                mCurrentStack.remove( path );
+                synchronized( mSelection ) {
+                  mSelection.removePath( path );
+                }
+              } else {
+                ret = 7;
+                eraseCmd.addAction( EraseAction.ERASE_MODIFY, path );
+                doRemoveLinePoint( area, pt.mPoint, pt );
+                area.retracePath();
+              }
+            }
+          } else if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
+            if ( erase_mode == DrawingWindow.ERASE_ALL || erase_mode == DrawingWindow.ERASE_POINT ) {
+              ret = 1;
               eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
               mCurrentStack.remove( path );
               synchronized( mSelection ) {
                 mSelection.removePath( path );
               }
-            } else {
-              ret = 7;
-              eraseCmd.addAction( EraseAction.ERASE_MODIFY, path );
-              doRemoveLinePoint( area, pt.mPoint, pt );
-              area.retracePath();
-            }
-          } else if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
-            ret = 1;
-            eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
-            mCurrentStack.remove( path );
-            synchronized( mSelection ) {
-              mSelection.removePath( path );
             }
           }
         }
@@ -649,6 +657,18 @@ public class DrawingCommandManager
     }
     synchronized( mSelection ) {
       mSelection.removePath( path );
+      clearSelected();
+    }
+  }
+
+  // p is the path of sp
+  void deleteSplay( DrawingPath p, SelectionPoint sp )
+  {
+    synchronized( mSplaysStack ) {
+      mSplaysStack.remove( p );
+    }
+    synchronized( mSelection ) {
+      mSelection.removePoint( sp );
       clearSelected();
     }
   }

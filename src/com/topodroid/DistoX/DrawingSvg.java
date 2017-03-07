@@ -65,18 +65,18 @@ class DrawingSvg
     float xmax = bbox.right;
     float ymin = bbox.top;
     float ymax = bbox.bottom;
-    if ( xmin + 200 > xmax ) { xmin = -100; xmax = 100; }
-    if ( ymin + 200 > ymax ) { ymin = -100; ymax = 100; }
-    float xoff = xmin; // offset
-    float yoff = ymin;
-    int width = (int)(3*(xmax - xmin));
-    int height = (int)(3*(ymax - ymin));
-    xmin -= width/4;   xmax += width/4; // enlarge
-    ymin -= height/4;  ymax += height/4;
-    // Log.v("DistoX", "SVG min " + xmin + " " + ymin + " max " + xmax + " " + ymax + " W " + width + " H " + height );
+    int dx = (int)(xmax - xmin);
+    int dy = (int)(ymax - ymin);
+    if ( dx > 200 ) dx = 200;
+    if ( dy > 200 ) dy = 200;
+    xmin -= dx;  xmax += dx;
+    ymin -= dy;  ymax += dy;
+    float xoff = 0; // xmin; // offset
+    float yoff = 0; // ymin;
+    int width = (int)((xmax - xmin));
+    int height = (int)((ymax - ymin));
 
     try {
-
       if ( TDSetting.mSvgInHtml ) { // SVG_IN_HTML
         out.write("<!DOCTYPE html>\n<html>\n<body>\n");
       }

@@ -149,16 +149,20 @@ public class DrawingPath extends RectF
   // }
 
   /** make the path copying from another path
-   * @param path   the path to copy
+   * @param path   the path to copy or null for an empty path
    * @param m      transform matrix
    * @param off_x  offset X
    * @param off_y  offset Y
    */
   void makePath( Path path, Matrix m, float off_x, float off_y )
   {
-    mPath = new Path( path );
-    mPath.transform( m );
-    mPath.offset( off_x, off_y );
+    if ( path != null ) {
+      mPath = new Path( path );
+      mPath.transform( m );
+      mPath.offset( off_x, off_y );
+    } else {
+      mPath = new Path();
+    }
   }
 
   void makeStraightPath( float x1, float y1, float x2, float y2, float off_x, float off_y )
@@ -167,6 +171,17 @@ public class DrawingPath extends RectF
     mPath.moveTo( x1, y1 );
     mPath.lineTo( x2, y2 );
     mPath.offset( off_x, off_y );
+  }
+
+  void pathAddLineTo( float x, float y )
+  {
+    mPath.lineTo( x, y );
+    mPath.moveTo( x+10, y+10 );
+    mPath.lineTo( x-10, y-10 );
+    mPath.moveTo( x+10, y-10 );
+    mPath.lineTo( x-10, y+10 );
+    mPath.moveTo( x, y );
+    setEndPoints( x1, y1, x, y );
   }
 
   void makeTrianglePath( float x, float y, float r, float off_x, float off_y )

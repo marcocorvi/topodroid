@@ -239,8 +239,8 @@
     <string name="no_thmanager">ThManager app not installed</string>
     <string name="no_db_viewer">DB_viewer app not found</string>
     <string name="no_undelete">No item to recover</string>
-    <string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Bearing %4$.1f"</string>
-    <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Clino %4$.1f"</string>
+    <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Bearing %5$.1f"</string>
+    <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Clino %5$.1f"</string>
 
     <string name="menu_3d">3D</string>
     <string name="menu_about">ABOUT</string>
@@ -287,6 +287,11 @@
     <string name="popup_curve_pt">Smoothen segment</string>
     <string name="popup_remove_pt">Remove point</string>
 
+    <string name="popup_erase_all">Erase all</string>
+    <string name="popup_erase_point">Erase points</string>
+    <string name="popup_erase_line">Erase lines</string>
+    <string name="popup_erase_area">Erase areas</string>
+
     <string name="connected_none">Not connected</string>
     <string name="connected_already">Already connected</string>
 
@@ -308,6 +313,7 @@
     <!-- UNUSED string name="picture_no_station">Station name required</string -->
     <string name="plot_delete">Delete sketch ?</string>
     <string name="item_delete">Delete item %1$s ?</string>
+    <string name="splay_delete">Delete splay %1$s ?</string>
     <string name="plot_duplicate_name">Duplicate sketch name</string>
     <!-- UNUSED string name="plot_name">Sketch name</string -->
     <string name="plot_new">New sketch</string>
@@ -627,7 +633,8 @@
     <string name="help_delete_item">Delete sketch item</string>
     <string name="help_range">Moving a portion of line</string>
     <!-- UNUSED string name="help_clear">Clear selection</string -->
-    <string name="help_eraser">Erasing mode</string>
+    <string name="help_eraser">Erase mode</string>
+    <string name="help_erase_mode">Eraser type</string>
     <string name="help_previous">Previous item in the selection</string>
     <string name="help_next">Next item in the selection</string>
     <string name="help_recover">Reload sketch from backup</string>
@@ -680,6 +687,7 @@
   
 
     <string name="title_azimut">Extend reference</string>
+    <string name="title_audio">Audio comment</string>
     <string name="title_calib">Calibrations</string>
     <string name="title_coverage">Calibration data distribution</string>
     <string name="title_coeff">Calibration coefficients</string>

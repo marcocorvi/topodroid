@@ -237,8 +237,8 @@
     <string name="no_thmanager">ThManager 未安装</string>
     <string name="no_db_viewer">DB_viewer 未发现</string>
     <string name="no_undelete">无还原项目</string>
-    <string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Bearing %4$.1f"</string>
-    <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Clino %4$.1f"</string>
+    <!-- FIXME string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Bearing %4$.1f"</string -->
+    <!-- FIXME string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Clino %4$.1f"</string -->
 
     <string name="menu_3d">3D</string>
     <string name="menu_about">关于</string>
@@ -285,6 +285,11 @@
     <string name="popup_curve_pt">分段平滑</string>
     <string name="popup_remove_pt">删除点</string>
 
+    <!-- TODO string name="popup_erase_all">Erase all</string -->
+    <!-- TODO string name="popup_erase_point">Erase points</string -->
+    <!-- TODO string name="popup_erase_line">Erase lines</string -->
+    <!-- TODO string name="popup_erase_area">Erase areas</string -->
+
     <string name="connected_none">未连接</string>
     <string name="connected_already">已连接</string>
 
@@ -305,6 +310,7 @@
     <!-- UNUSED string name="picture_no_station">需添加照片所在的测点</string -->
     <string name="plot_delete">删除草图 ?</string>
     <string name="item_delete">删除项目 %1$s ?</string>
+    <!-- TODO string name="splay_delete">Delete splay %1$s ?</string -->
     <string name="plot_duplicate_name">复制草图名称</string>
     <!-- UNUSED string name="plot_name">草图名称</string -->
     <string name="plot_new">新建草图</string>
@@ -623,6 +629,7 @@
     <string name="help_range">移动线的某部分</string>
     <!-- UNUSED string name="help_clear">清除选择</string -->
     <string name="help_eraser">简易模式</string>
+    <!-- TODO string name="help_erase_mode">Eraser type</string -->
     <string name="help_previous">已选项目</string>
     <string name="help_next">选项中的下一项目</string>
     <string name="help_recover">从备份中重新载入草图</string>
@@ -675,6 +682,7 @@
   
 
     <string name="title_azimut">延展参照</string>
+    <!-- TODO string name="title_audio">Audio comment</string -->
     <string name="title_calib">校准</string>
     <string name="title_coverage">校准数据分布</string>
     <string name="title_coeff">校准系数</string>

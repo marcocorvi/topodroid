@@ -238,8 +238,8 @@
     <string name="no_thmanager">A Thmanager alkalmazás nincs telepítve</string>
     <string name="no_db_viewer">A DB_viewer alkalmazás nem található</string>
     <string name="no_undelete">Nincs helyreállítható részlet</string>
-    <string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Irány %4$.1f"</string>
-    <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Lejtés %4$.1f</string>
+    <!-- FIXME string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Irány %4$.1f"</string -->
+    <!-- FIXME string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Lejtés %4$.1f</string -->
 
     <string name="menu_3d">3D</string>
     <string name="menu_about">INFO</string>
@@ -286,6 +286,11 @@
     <string name="popup_curve_pt">Szakasz simítása</string>
     <string name="popup_remove_pt">Pont eltávolítása</string>
 
+    <!-- TODO string name="popup_erase_all">Erase all</string -->
+    <!-- TODO string name="popup_erase_point">Erase points</string -->
+    <!-- TODO string name="popup_erase_line">Erase lines</string -->
+    <!-- TODO string name="popup_erase_area">Erase areas</string -->
+
     <string name="connected_none">Nincs kapcsolat</string>
     <string name="connected_already">Már összekapcsolt</string>
 
@@ -306,6 +311,7 @@
     <!-- UNUSED string name="picture_no_station">Station name required</string -->
     <string name="plot_delete">Törlöd a vázlatot?</string>
     <string name="item_delete">Törlöd az %1$s elemet?</string>
+    <!-- TODO string name="splay_delete">Delete splay %1$s ?</string -->
     <string name="plot_duplicate_name">Vázlat nevének megkettőzése</string>
     <!-- UNUSED string name="plot_name">Sketch name</string -->
     <string name="plot_new">Új vázlat</string>
@@ -625,6 +631,7 @@
     <!-- TODO string name="help_range">Moving a portion of line</string -->
     <!-- UNUSED string name="help_clear">Clear selection</string -->
     <string name="help_eraser">Erasing mode*Radír mód</string>
+    <!-- TODO string name="help_erase_mode">Eraser type</string -->
     <string name="help_previous">Previous item in the selection*Előző elem a kiválasztásban</string>
     <string name="help_next">Next item in the selection*Következő elem a kiválasztásban</string>
     <string name="help_recover">Reload sketch from backup*Vázlat újratöltése biztonsági mentésből</string>
@@ -677,6 +684,7 @@
   
 
     <string name="title_azimut">Extend reference*Vonatkozási rendszer???</string>
+    <!-- TODO string name="title_audio">Audio comment</string -->
     <string name="title_calib">Calibrations*Kalibrációk</string>
     <string name="title_coverage">Calibration data distribution*Kalibrációs adatok eloszlása</string>
     <string name="title_coeff">Calibration coefficients*Kalibrációs együttható</string>

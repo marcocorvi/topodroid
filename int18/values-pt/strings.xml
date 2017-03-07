@@ -238,8 +238,8 @@
     <string name="no_thmanager">O aplicativo ThManager não está instalado</string>
     <string name="no_db_viewer">DB_viewer não encontrado</string>
     <string name="no_undelete">Nenhum item a ser restaurado</string>
-    <string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Azimute %4$.1f"</string>
-    <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Inclinação %4$.1f"</string>
+    <!-- FIXME string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Azimute %4$.1f"</string -->
+    <!-- FIXME string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Inclinação %4$.1f"</string -->
 
     <string name="menu_3d">3D</string>
     <string name="menu_about">SOBRE</string>
@@ -286,6 +286,11 @@
     <string name="popup_curve_pt">Suavizar segmento</string>
     <string name="popup_remove_pt">Apagar ponto</string>
 
+    <!-- TODO string name="popup_erase_all">Erase all</string -->
+    <!-- TODO string name="popup_erase_point">Erase points</string -->
+    <!-- TODO string name="popup_erase_line">Erase lines</string -->
+    <!-- TODO string name="popup_erase_area">Erase areas</string -->
+
     <string name="connected_none">Não conectado</string>
     <string name="connected_already">Já conectado</string>
 
@@ -306,6 +311,7 @@
     <!-- UNUSED string name="picture_no_station">Nome da base exigido</string -->
     <string name="plot_delete">Apagar croqui?</string>
     <string name="item_delete">Apagar item %1$s?</string>
+    <!-- TODO string name="splay_delete">Delete splay %1$s ?</string -->
     <string name="plot_duplicate_name">Nome de croqui repetido</string>
     <!-- UNUSED string name="plot_name">Nome do croqui</string -->
     <string name="plot_new">Novo croqui</string>
@@ -625,6 +631,7 @@
     <string name="help_range">Mover uma parte da linha</string>
     <!-- UNUSED string name="help_clear">Deselecionar tudo</string -->
     <string name="help_eraser">Modo APAGAR</string>
+    <!-- TODO string name="help_erase_mode">Eraser type</string -->
     <string name="help_previous">Selecionar objeto anterior</string>
     <string name="help_next">Selecionar próximo objeto</string>
     <string name="help_recover">Recarregar croqui do backup</string>
@@ -677,6 +684,7 @@
   
 
     <string name="title_azimut">Referência para retificar perfil</string>
+    <!-- TODO string name="title_audio">Audio comment</string -->
     <string name="title_calib">Calibrações</string>
     <string name="title_coverage">Distribuição dos dados de calibração</string>
     <string name="title_coeff">Coeficientes de calibração</string>

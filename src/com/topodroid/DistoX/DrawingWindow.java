@@ -98,17 +98,22 @@ public class DrawingWindow extends ItemDrawer
   private static int IC_BLUETOOTH = 4;
   private static int IC_PLAN      = 7;
   private static int IC_DIAL      = 8;
-  private static int IC_MENU      = 18+1;
-  private static int IC_EXTEND    = 18+2;
+  private static int IC_CONTINUE_NO = 12;  // index of continue-no icon
   private static int IC_JOIN      = 15;
   private static int IC_BORDER_NO = 18;
-  private static int IC_JOIN_NO       = 18+3;
-  private static int IC_CONTINUE_NO   = 12;  // index of continue-no icon
-  private static int IC_CONTINUE_CONT = 18+4;     // index of continue icon
-  private static int IC_CONTINUE_JOIN = 18+5;     // index of continue icon
-  private static int IC_ADD           = 18+6;
-  private static int IC_BORDER_OK     = 18+7;
-  private static int IC_BORDER_BOX    = 18+8; 
+  private static int IC_ERASE_ALL = 19; 
+
+  private static int IC_MENU          = 19+1;
+  private static int IC_EXTEND        = 19+2;
+  private static int IC_JOIN_NO       = 19+3;
+  private static int IC_CONTINUE_CONT = 19+4;     // index of continue icon
+  private static int IC_CONTINUE_JOIN = 19+5;     // index of continue icon
+  private static int IC_ADD           = 19+6;
+  private static int IC_BORDER_OK     = 19+7;
+  private static int IC_BORDER_BOX    = 19+8; 
+  private static int IC_ERASE_POINT   = 19+9; 
+  private static int IC_ERASE_LINE    = 19+10; 
+  private static int IC_ERASE_AREA    = 19+11; 
 
   private static int BTN_DOWNLOAD = 3;  // index of mButton1 download button
   private static int BTN_BLUETOOTH = 4; // index of mButton1 bluetooth button
@@ -119,6 +124,8 @@ public class DrawingWindow extends ItemDrawer
   private static int BTN_JOIN = 5;      // index of mButton3 join button
   private static int BTN_REMOVE = 7;    // index of mButton3 remove
   private static int BTN_BORDER = 8;
+
+  private static int BTN_ERASE_MODE = 5; // erase-mode button
 
   // protected static int mEditRadius = 0; 
   private int mDoEditRange = 0; // 0 no, 1 smooth, 2 boxed
@@ -145,14 +152,18 @@ public class DrawingWindow extends ItemDrawer
                         R.drawable.iz_note,          
                         R.drawable.iz_delete,        // 17
                         R.drawable.iz_range_no,      // 18
-                        R.drawable.iz_menu,          // 18+1
-                        R.drawable.iz_extended,      // 18+2
-                        R.drawable.iz_join_no,       // 18+3
-                        R.drawable.iz_continue_cont, // 18+4
-                        R.drawable.iz_continue_join, // 18+5
-                        R.drawable.iz_plus,          // 18+6
-                        R.drawable.iz_range_ok,      // 18+7
-                        R.drawable.iz_range_box,     // 18+8
+                        R.drawable.iz_erase_all,     // 19 ERASE Nr 3
+                        R.drawable.iz_menu,          // 19+1
+                        R.drawable.iz_extended,      // 19+2
+                        R.drawable.iz_join_no,       // 19+3
+                        R.drawable.iz_continue_cont, // 19+4
+                        R.drawable.iz_continue_join, // 19+5
+                        R.drawable.iz_plus,          // 19+6
+                        R.drawable.iz_range_ok,      // 19+7
+                        R.drawable.iz_range_box,     // 19+8
+                        R.drawable.iz_erase_point,   // 19+9
+                        R.drawable.iz_erase_line,    // 19+10
+                        R.drawable.iz_erase_area     // 19+11
                       };
   private static int menus[] = {
                         R.string.menu_switch,
@@ -191,7 +202,8 @@ public class DrawingWindow extends ItemDrawer
                         R.string.help_line_point, 
                         R.string.help_note_plot,
                         R.string.help_delete_item,
-                        R.string.help_range
+                        R.string.help_range,
+                        R.string.help_erase_mode
                       };
   private static int help_menus[] = {
                         R.string.help_plot_switch,
@@ -205,6 +217,15 @@ public class DrawingWindow extends ItemDrawer
                         R.string.help_prefs,
                         R.string.help_help
                       };
+
+  static final int ERASE_ALL   = 0;
+  static final int ERASE_POINT = 1;
+  static final int ERASE_LINE  = 2;
+  static final int ERASE_AREA  = 3;
+  static final int ERASE_MAX   = 4;
+
+  private int mEraseMode = ERASE_ALL;
+
   private TopoDroidApp mApp;
   private DataDownloader mDataDownloader;
   private DataHelper mData;
@@ -231,7 +252,8 @@ public class DrawingWindow extends ItemDrawer
   private Path  mCurrentPath;
 
   // LinearLayout popup_layout = null;
-  PopupWindow mPopupEdit = null;
+  PopupWindow mPopupEdit  = null;
+  PopupWindow mPopupErase = null;
 
   // private boolean canRedo;
   private int mPointCnt; // counter of points in the currently drawing line
@@ -389,7 +411,7 @@ public class DrawingWindow extends ItemDrawer
   private int mNrButton1 = 9;          // main-primary
   private int mNrButton2 = 7;          // draw
   private int mNrButton3 = 9;          // edit
-  private int mNrButton5 = 5;          // erase
+  private int mNrButton5 = 6;          // erase
   private HorizontalButtonView mButtonView1;
   private HorizontalButtonView mButtonView2;
   private HorizontalButtonView mButtonView3;
@@ -417,6 +439,10 @@ public class DrawingWindow extends ItemDrawer
   private BitmapDrawable mBMsplayFront;
   private BitmapDrawable mBMsplayBack;
   private BitmapDrawable mBMsplayBoth;
+  private BitmapDrawable mBMeraseAll;
+  private BitmapDrawable mBMerasePoint;
+  private BitmapDrawable mBMeraseLine;
+  private BitmapDrawable mBMeraseArea;
   private Bitmap mBMdial;
 
   HorizontalListView mListView;
@@ -982,6 +1008,26 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  private void setButtonEraseMode( int erase_mode )
+  {
+    mEraseMode = erase_mode;
+    switch ( mEraseMode ) {
+      case ERASE_ALL:
+        mButton5[ BTN_ERASE_MODE ].setBackgroundDrawable( mBMeraseAll );
+        break;
+      case ERASE_POINT:
+        mButton5[ BTN_ERASE_MODE ].setBackgroundDrawable( mBMerasePoint );
+        break;
+      case ERASE_LINE:
+        mButton5[ BTN_ERASE_MODE ].setBackgroundDrawable( mBMeraseLine );
+        break;
+      case ERASE_AREA:
+        mButton5[ BTN_ERASE_MODE ].setBackgroundDrawable( mBMeraseArea );
+        break;
+    }
+  }
+
+
   // this method is a callback to let other objects tell the activity to use zooms or not
   private void switchZoomCtrl( int ctrl )
   {
@@ -1092,6 +1138,7 @@ public class DrawingWindow extends ItemDrawer
     resetStatus();
     doStart( true );
     updateSplays( mApp.mSplayMode );
+
     mButton1[ BTN_DOWNLOAD ].setVisibility( View.GONE );
     mButton1[ BTN_BLUETOOTH ].setVisibility( View.GONE );
     // mButton1[ BTN_PLOT ].setVisibility( View.GONE );
@@ -1160,6 +1207,11 @@ public class DrawingWindow extends ItemDrawer
       ic = ( k < 3 )? k : off+k;
       mButton5[k] = MyButton.getButton( mActivity, this, ((k==1)? izons_ok[ic] : izons[ic] ) );
     }
+    mBMeraseAll   = MyButton.getButtonBackground( mApp, res, izons[IC_ERASE_ALL] );
+    mBMerasePoint = MyButton.getButtonBackground( mApp, res, izons[IC_ERASE_POINT] );
+    mBMeraseLine  = MyButton.getButtonBackground( mApp, res, izons[IC_ERASE_LINE] );
+    mBMeraseArea  = MyButton.getButtonBackground( mApp, res, izons[IC_ERASE_AREA] );
+    setButtonEraseMode( mEraseMode );
 
     mButtonView1 = new HorizontalButtonView( mButton1 );
     mButtonView2 = new HorizontalButtonView( mButton2 );
@@ -1464,7 +1516,6 @@ public class DrawingWindow extends ItemDrawer
     private void makeSectionReferences( List<DBlock> list )
     {
       // Log.v("DistoX", "Section " + mClino + " " + mAzimuth );
- 
       DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
       float xfrom=0;
       float yfrom=0;
@@ -1751,7 +1802,7 @@ public class DrawingWindow extends ItemDrawer
 
     private void doEraseAt( float x_scene, float y_scene )
     {
-      int ret = mDrawingSurface.eraseAt( x_scene, y_scene, mZoom, mEraseCommand );
+      int ret = mDrawingSurface.eraseAt( x_scene, y_scene, mZoom, mEraseCommand, mEraseMode );
       modified();
     }
 
@@ -1808,6 +1859,12 @@ public class DrawingWindow extends ItemDrawer
         mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
         modified();
       } 
+    }
+
+    private void deleteSplay( DrawingPath p, SelectionPoint sp )
+    {
+      mDrawingSurface.deleteSplay( p, sp ); 
+      mApp.mShotWindow.updateDisplay(); // FIXME ???
     }
 
     void deletePoint( DrawingPointPath point ) 
@@ -2620,18 +2677,8 @@ public class DrawingWindow extends ItemDrawer
         }
       }
       if ( plot != null ) {
-        // Log.v("DistoX", "invoke X section " + plot.name + " <" + plot.start + "> " + plot.azimuth + " " + plot.clino );
-        // Intent drawIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DrawingWindow.class );
-        // drawIntent.putExtra( TDTag.TOPODROID_SURVEY_ID, mApp.mSID );
-        // drawIntent.putExtra( TDTag.TOPODROID_PLOT_NAME, plot.name );
-        // drawIntent.putExtra( TDTag.TOPODROID_PLOT_TYPE, plot.type );
-        // drawIntent.putExtra( TDTag.TOPODROID_PLOT_FROM, plot.start );
-        // drawIntent.putExtra( TDTag.TOPODROID_PLOT_TO,   "" );
-        // drawIntent.putExtra( TDTag.TOPODROID_PLOT_AZIMUTH, plot.azimuth );
-        // drawIntent.putExtra( TDTag.TOPODROID_PLOT_CLINO,   plot.clino );
-        // startActivity( drawIntent );
-
         pushInfo( plot.type, plot.name, plot.start, "", plot.azimuth, plot.clino );
+        zoomFit( mDrawingSurface.getBitmapBounds() );
       }
     }
 
@@ -2815,6 +2862,70 @@ public class DrawingWindow extends ItemDrawer
         default:
           break;
       }
+    }
+
+    /** erase mode popup menu
+     */
+    private void makePopupErase( View b )
+    {
+      if ( mPopupErase != null ) return;
+
+      final Context context = this;
+      LinearLayout popup_layout = new LinearLayout(mActivity);
+      popup_layout.setOrientation(LinearLayout.VERTICAL);
+      int lHeight = LinearLayout.LayoutParams.WRAP_CONTENT;
+      int lWidth = LinearLayout.LayoutParams.WRAP_CONTENT;
+
+      String text = getString(R.string.popup_erase_all);
+      int len = text.length();
+      Button myTextView0 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
+        new View.OnClickListener( ) {
+          public void onClick(View v) {
+            setButtonEraseMode( ERASE_ALL );
+            dismissPopupErase();
+          }
+        } );
+      text = getString(R.string.popup_erase_point);
+      if ( len < text.length() ) len = text.length();
+      Button myTextView1 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
+        new View.OnClickListener( ) {
+          public void onClick(View v) {
+            setButtonEraseMode( ERASE_POINT );
+            dismissPopupErase();
+          }
+        } );
+      text = getString(R.string.popup_erase_line);
+      if ( len < text.length() ) len = text.length();
+      Button myTextView2 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
+        new View.OnClickListener( ) {
+          public void onClick(View v) {
+            setButtonEraseMode( ERASE_LINE );
+            dismissPopupErase();
+          }
+        } );
+      text = getString(R.string.popup_erase_area);
+      if ( len < text.length() ) len = text.length();
+      Button myTextView3 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
+        new View.OnClickListener( ) {
+          public void onClick(View v) {
+            setButtonEraseMode( ERASE_AREA );
+            dismissPopupErase();
+          }
+        } );
+
+      FontMetrics fm = myTextView0.getPaint().getFontMetrics();
+      // Log.v("DistoX", "font metrics TOP " + fm.top + " ASC. " + fm.ascent + " BOT " + fm.bottom + " LEAD " + fm.leading ); 
+      int w = (int)( Math.abs( ( len + 1 ) * fm.ascent ) * 0.7);
+      int h = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.70);
+      // int h1 = (int)( myTextView0.getHeight() * 7 * 1.1 ); this is 0
+      myTextView0.setWidth( w );
+      myTextView1.setWidth( w );
+      myTextView2.setWidth( w );
+      myTextView3.setWidth( w );
+      // Log.v( TopoDroidApp.TAG, "popup width " + w );
+      mPopupErase = new PopupWindow( popup_layout, w, h ); 
+      // mPopupEdit = new PopupWindow( popup_layout, popup_layout.getHeight(), popup_layout.getWidth() );
+      mPopupErase.showAsDropDown(b); 
     }
 
     /** line/area editing
@@ -3013,9 +3124,21 @@ public class DrawingWindow extends ItemDrawer
       return false;
     }
 
+    private boolean dismissPopupErase()
+    {
+      if ( mPopupErase != null ) {
+        mPopupErase.dismiss();
+        mPopupErase = null;
+        return true;
+      }
+      return false;
+    }
+
     private boolean dismissPopups() 
     {
-      return dismissPopupEdit() || CutNPaste.dismissPopupBT();
+      return dismissPopupEdit() 
+          || dismissPopupErase()
+          || CutNPaste.dismissPopupBT();
     }
 
     // -----------------------------------------------------------------------------------------
@@ -3387,7 +3510,7 @@ public class DrawingWindow extends ItemDrawer
           int t = sp.type();
           if ( t == DrawingPath.DRAWING_PATH_POINT ||
                t == DrawingPath.DRAWING_PATH_LINE  ||
-               t == DrawingPath.DRAWING_PATH_AREA ) {
+               t == DrawingPath.DRAWING_PATH_AREA  ) {
             String name = "";
             DrawingPath p = sp.mItem;
             switch ( t ) {
@@ -3402,6 +3525,13 @@ public class DrawingWindow extends ItemDrawer
                 break;
             }
             askDeleteItem( p, t, name );
+          } else if ( t == DrawingPath.DRAWING_PATH_SPLAY ) {
+            if ( PlotInfo.isSketch2D( mType ) ) { 
+              DrawingPath p = sp.mItem;
+              DBlock blk = p.mBlock;
+              mApp.mData.deleteShot( blk.mId, mApp.mSID, true );
+              askDeleteSplay( p, sp, blk );
+            }
           }
         }
       } else if ( b == mButton3[ k3++ ] ) {
@@ -3421,6 +3551,9 @@ public class DrawingWindow extends ItemDrawer
             mButton3[ BTN_BORDER ].setBackgroundDrawable( mBMedit_box );
             break;
         }
+      } else if ( b == mButton5[k5++] ) { // ERASE MODE
+        // pulldown menu to select erase mode
+        makePopupErase( b );
       }
     }
 
@@ -3449,7 +3582,18 @@ public class DrawingWindow extends ItemDrawer
       );
     }
 
-
+    private void askDeleteSplay( final DrawingPath p, final SelectionPoint sp, final DBlock blk )
+    {
+      TopoDroidAlertDialog.makeAlert( mActivity, getResources(), 
+                                String.format( getResources().getString( R.string.splay_delete ), blk.Name() ), 
+        new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick( DialogInterface dialog, int btn ) {
+            deleteSplay( p, sp );
+          }
+        }
+      );
+    }
 
     void makeSectionPhoto( DrawingLinePath line, String id, long type,
                            String from, String to, float azimuth, float clino )
@@ -3506,16 +3650,8 @@ public class DrawingWindow extends ItemDrawer
         pid = mApp.insert2dSection( mApp.mSID, mSectionName, type, from, to, azimuth, clino );
       }
       if ( pid >= 0 ) {
-        // Intent drawIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DrawingWindow.class );
-        // drawIntent.putExtra( TDTag.TOPODROID_SURVEY_ID, mApp.mSID );
-        // drawIntent.putExtra( TDTag.TOPODROID_PLOT_NAME, mSectionName );
-        // drawIntent.putExtra( TDTag.TOPODROID_PLOT_TYPE, type );
-        // drawIntent.putExtra( TDTag.TOPODROID_PLOT_FROM, from );
-        // drawIntent.putExtra( TDTag.TOPODROID_PLOT_TO,   to );
-        // drawIntent.putExtra( TDTag.TOPODROID_PLOT_AZIMUTH, azimuth );
-        // drawIntent.putExtra( TDTag.TOPODROID_PLOT_CLINO, clino );
-        // startActivity( drawIntent );
         pushInfo( type, mSectionName, from, to, azimuth, clino );
+        zoomFit( mDrawingSurface.getBitmapBounds() );
       }
     }
 
@@ -3741,6 +3877,19 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  private void zoomFit( RectF b )
+  {
+    float w = b.right - b.left;
+    float h = b.bottom - b.top;
+    float wZoom = TopoDroidApp.mDisplayWidth  / ( 1 + w );
+    float hZoom = TopoDroidApp.mDisplayHeight / ( 1 + h );
+    mZoom = ( hZoom < wZoom ) ? hZoom : wZoom;
+    mOffset.x = TopoDroidApp.mDisplayWidth  / (2*mZoom) - (b.left + b.right) / 2;
+    mOffset.y = TopoDroidApp.mDisplayHeight / (2*mZoom) - (b.top + b.bottom) / 2;
+    // Log.v("DistoX", "W " + w + " H " + h + " zoom " + mZoom + " X " + mOffset.x + " Y " + mOffset.y );
+    mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
+  }
+
   private void recomputeReferences( float zoom, boolean flag )
   {
     if ( mType == (int)PlotInfo.PLOT_PLAN ) {
@@ -3881,15 +4030,7 @@ public class DrawingWindow extends ItemDrawer
         // FIXME for big sketches this leaves out some bits at the ends
         // maybe should increse the bitmap bounds by a small factor ...
         RectF b = mDrawingSurface.getBitmapBounds();
-        float w = b.right - b.left;
-        float h = b.bottom - b.top;
-        float wZoom = TopoDroidApp.mDisplayWidth  / ( 1 + w );
-        float hZoom = TopoDroidApp.mDisplayHeight / ( 1 + h );
-        mZoom = ( hZoom < wZoom ) ? hZoom : wZoom;
-        mOffset.x = TopoDroidApp.mDisplayWidth  / (2*mZoom) - (b.left + b.right) / 2;
-        mOffset.y = TopoDroidApp.mDisplayHeight / (2*mZoom) - (b.top + b.bottom) / 2;
-        // Log.v("DistoX", "W " + w + " H " + h + " zoom " + mZoom + " X " + mOffset.x + " Y " + mOffset.y );
-        mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
+        zoomFit( b );
       } else if ( TDSetting.mLevelOverBasic && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // RENAME/DELETE
         //   askDelete();
         (new PlotRenameDialog( mActivity, this, mApp )).show();

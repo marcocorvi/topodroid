@@ -532,14 +532,15 @@ class DrawingDxf
           // 2 layer name, 70 flag (64), 62 color code, 6 line type
           int flag = 0;
           int color = 1;
-          ++handle; printLayer( pw2, handle, "LEG",     flag, color, lt_continuous ); ++color;
-          ++handle; printLayer( pw2, handle, "SPLAY",   flag, color, lt_continuous ); ++color;
-          ++handle; printLayer( pw2, handle, "STATION", flag, color, lt_continuous ); ++color;
-          ++handle; printLayer( pw2, handle, "LINE",    flag, color, lt_continuous ); ++color;
-          ++handle; printLayer( pw2, handle, "POINT",   flag, color, lt_continuous ); ++color;
-          ++handle; printLayer( pw2, handle, "AREA",    flag, color, lt_continuous ); ++color;
-          ++handle; printLayer( pw2, handle, "REF",     flag, color, lt_continuous ); ++color;
+          ++handle; printLayer( pw2, handle, "LEG",     flag, color, lt_continuous ); ++color; // red
+          ++handle; printLayer( pw2, handle, "SPLAY",   flag, color, lt_continuous ); ++color; // yellow
+          ++handle; printLayer( pw2, handle, "STATION", flag, color, lt_continuous ); ++color; // green
+          ++handle; printLayer( pw2, handle, "LINE",    flag, color, lt_continuous ); ++color; // cyan
+          ++handle; printLayer( pw2, handle, "POINT",   flag, color, lt_continuous ); ++color; // blue
+          ++handle; printLayer( pw2, handle, "AREA",    flag, color, lt_continuous ); ++color; // magenta
+          ++handle; printLayer( pw2, handle, "REF",     flag, color, lt_continuous ); ++color; // white
           
+          color = 10;
           if ( linelib != null ) { 
             for ( Symbol line : linelib.getSymbols() ) {
               String lname = "L_" + line.getThName().replace(':','-');
@@ -547,6 +548,7 @@ class DrawingDxf
             }
           }
 
+          color = 60;
           if ( arealib != null ) {
             for ( Symbol s : arealib.getSymbols() ) {
               String aname = "A_" + s.getThName().replace(':','-');

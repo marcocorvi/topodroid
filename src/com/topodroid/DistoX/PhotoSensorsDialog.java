@@ -53,6 +53,7 @@ public class PhotoSensorsDialog extends MyDialog
 
   // private MyCheckBox mButtonPlot;
   private MyCheckBox mButtonPhoto;
+  private MyCheckBox mButtonAudio;
   private MyCheckBox mButtonSensor;
   private MyCheckBox mButtonShot;
   private MyCheckBox mButtonSurvey;
@@ -104,6 +105,7 @@ public class PhotoSensorsDialog extends MyDialog
 
     // mButtonPlot   = new MyCheckBox( mContext, size, R.drawable.iz_plot, R.drawable.iz_plot ); 
     mButtonPhoto  = new MyCheckBox( mContext, size, R.drawable.iz_camera, R.drawable.iz_camera ); 
+    mButtonAudio  = new MyCheckBox( mContext, size, R.drawable.iz_audio, R.drawable.iz_audio ); 
     mButtonSensor = new MyCheckBox( mContext, size, R.drawable.iz_sensor, R.drawable.iz_sensor ); 
     mButtonShot   = new MyCheckBox( mContext, size, R.drawable.iz_add_leg, R.drawable.iz_add_leg );
     mButtonSurvey = new MyCheckBox( mContext, size, R.drawable.iz_split, R.drawable.iz_split );
@@ -111,6 +113,7 @@ public class PhotoSensorsDialog extends MyDialog
 
     // layout4.addView( mButtonPlot, lp );
     layout4.addView( mButtonPhoto, lp );
+    layout4.addView( mButtonAudio, lp );
     layout4.addView( mButtonSensor, lp );
     layout4.addView( mButtonShot, lp );
     layout4.addView( mButtonSurvey, lp );
@@ -149,6 +152,7 @@ public class PhotoSensorsDialog extends MyDialog
 
     // mButtonPlot.setOnClickListener( this );
     mButtonPhoto.setOnClickListener( this );
+    mButtonAudio.setOnClickListener( this );
     mButtonSensor.setOnClickListener( this );
     // mButtonExternal.setOnClickListener( this );
     mButtonShot.setOnClickListener( this );
@@ -178,6 +182,9 @@ public class PhotoSensorsDialog extends MyDialog
     //   dismiss();
     } else if ( b == mButtonPhoto ) {       // PHOTO
       mParent.askPhotoComment( );
+      dismiss();
+    } else if ( b == mButtonAudio ) {       // AUDIO
+      mParent.startAudio( mBlk );
       dismiss();
     } else if ( b == mButtonSensor ) { // SENSOIR
       mParent.askSensor( );

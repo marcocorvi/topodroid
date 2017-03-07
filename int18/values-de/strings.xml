@@ -243,8 +243,8 @@
     <string name="no_thmanager">Keine ThManager App</string>
     <string name="no_db_viewer">Keine DB_viewer App</string>
     <string name="no_undelete">Nichts wiederherzustellen</string>
-    <string name="format_measure_plan">Dist %1$.2f Dx %2$.2f Dy %3$.2f Azimut %4$.1f"</string>
-    <string name="format_measure_profile">Dist %1$.2f Dx %2$.2f Dy %3$.2f Neigung %4$.1f"</string>
+    <!-- FIXME string name="format_measure_plan">Dist %1$.2f Dx %2$.2f Dy %3$.2f Azimut %4$.1f"</string -->
+    <!-- FIXME string name="format_measure_profile">Dist %1$.2f Dx %2$.2f Dy %3$.2f Neigung %4$.1f"</string -->
 <!-- MENUS 
  detach: disconnect from the DistoX device
  palette: drawing tools dialog
@@ -296,6 +296,11 @@
     <string name="popup_curve_pt">Linie rund machen</string>
     <string name="popup_remove_pt">Punkt löschen</string>
 
+    <!-- TODO string name="popup_erase_all">Erase all</string -->
+    <!-- TODO string name="popup_erase_point">Erase points</string -->
+    <!-- TODO string name="popup_erase_line">Erase lines</string -->
+    <!-- TODO string name="popup_erase_area">Erase areas</string -->
+
     <string name="connected_none">Nicht verbunden</string>
     <string name="connected_already">Bereits verbunden</string>
     <string name="not_available">Bluetooth nicht verfügbar</string>
@@ -316,6 +321,7 @@
     <!-- UNUSED string name="picture_no_station">Name erforderlich</string -->
     <string name="plot_delete">Skizze löschen?</string>
     <string name="item_delete">Element löschen: %1$s?</string>
+    <!-- TODO string name="splay_delete">Delete splay %1$s ?</string -->
     <string name="plot_duplicate_name">Doppelter Name</string>
     <!-- UNUSED string name="plot_name">Name der Skizze</string -->
     <string name="plot_new">Neue Skizze</string>
@@ -642,6 +648,7 @@
     <string name="help_range">Teillinie verschieben</string>
     <!-- UNUSED string name="help_clear">Die Auswahl löschen</string -->
     <string name="help_eraser">Löschmodus</string>
+    <!-- TODO string name="help_erase_mode">Eraser type</string -->
     <string name="help_previous">Vorheriger Punkt</string>
     <string name="help_next">Nächster Punkt</string>
     <string name="help_recover">Die Skizze wiederherstellen</string>
@@ -696,6 +703,7 @@
 
 <!-- TITLES -->
     <string name="title_azimut">Seitenriss-Azimut</string>
+    <!-- TODO string name="title_audio">Audio comment</string -->
     <string name="title_calib">Kalibrierung</string>
     <string name="title_coverage">Kalibrierungsdaten</string>
     <string name="title_coeff">Kalibrierungs-Koeffizienten</string>

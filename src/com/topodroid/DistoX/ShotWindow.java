@@ -358,6 +358,7 @@ public class ShotWindow extends Activity
         @Override public void run() {
           // Log.v("DistoX", "notify data set changed");
           mDataAdapter.notifyDataSetChanged();
+          mList.scrollTo( 0, mList.getHeight() ); // FIXME LIST_SCROLL
         }
       } );
 
@@ -1578,6 +1579,11 @@ public class ShotWindow extends Activity
   void doProjectedProfile( String name, String start, int azimuth )
   {
     makeNewPlot( name, start, false, azimuth );
+  }
+
+  void startAudio( DBlock blk )
+  {
+    (new AudioDialog( this, mApp, this, blk )).show();
   }
 
 }

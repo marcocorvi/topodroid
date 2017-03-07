@@ -85,7 +85,8 @@ public class FixedAddDialog extends MyDialog
     mNorth = true;
     mEast  = true;
 
-    mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), R.xml.my_keyboard, -1 );
+    mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ),
+                                R.xml.my_keyboard_base, R.xml.my_keyboard_qwerty );
     if ( TDSetting.mKeyboard ) {
       int flag = MyKeyboard.FLAG_POINT_DEGREE;
       if ( TDSetting.mStationNames == 1 ) {
