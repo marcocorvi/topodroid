@@ -962,11 +962,11 @@
   <!-- UNUSED string name="pref_dot_radius_summary">Green dots size</string -->
   <string name="pref_dot_radius_message">Zöld pontok mérete</string>
   <string name="pref_line_thickness_title">Vonalvastagság</string>
-  <string name="pref_line_thickness_summary">Drawing line width*Rajzolt vonal vastagsága</string>
-  <string name="pref_line_thickness_message">Drawing line width*Rajzolt vonal vastagsága</string>
-  <string name="pref_fixed_thickness_title">Survey line width*Poligonvonal vastagsága</string>
-  <string name="pref_fixed_thickness_summary">Survey line width*Poligonvonal vastagsága</string>
-  <string name="pref_fixed_thickness_message">Survey line width*Poligonvonal vastagsága</string>
+  <string name="pref_line_thickness_summary">Rajzolt vonal vastagsága</string>
+  <string name="pref_line_thickness_message">Rajzolt vonal vastagsága</string>
+  <string name="pref_fixed_thickness_title">Poligonvonal vastagsága</string>
+  <string name="pref_fixed_thickness_summary">Poligonvonal vastagsága</string>
+  <string name="pref_fixed_thickness_message">Poligonvonal vastagsága</string>
   <!-- UNUSED string name="pref_device_title">Device</string -->
   <!-- UNUSED string name="pref_device_summary">DistoX address name</string -->
   <!-- UNUSED string name="pref_device_message">DistoX address name</string -->
@@ -1042,33 +1042,33 @@
   <string name="pref_walls_type_title">Kontúr típusa</string>
   <string name="pref_walls_type_summary">Kontúr típusa</string>
   <string name="pref_walls_plan_thr_title">Alaprajzi segédmérés szöge</string>
-  <string name="pref_walls_plan_thr_summary">Maximum splay clino for plan walls*Alaprajzi kontúr rajzához felhasznált legnagyobb lejtésszögű segédmérés</string>
-  <string name="pref_walls_plan_thr_message">Maximum splay clino for plan walls [deg]*Alaprajzi kontúr rajzához felhasznált legnagyobb lejtésszögű segédmérés [deg]</string>
-  <string name="pref_walls_extended_thr_title">Splay profile clino*Oldalnézeti segédmérés szöge</string>
-  <string name="pref_walls_extended_thr_summary">Maximum splay clino for profile walls*Oldalnézeti kontúr rajzához felhasznált legnagyobb lejtésszögű segédmérés</string>
-  <string name="pref_walls_extended_thr_message">Maximum splay clino for profile walls [deg]*Oldalnézeti kontúr rajzához felhasznált legnagyobb lejtésszögű segédmérés</string>
-  <string name="pref_walls_xclose_title">Separation*Felbontás</string>
-  <string name="pref_walls_xclose_summary">Minimum point-separation along the shot*Segédmérések minimális távolsága</string>
-  <string name="pref_walls_xclose_message">Minimum separation of wall points along the shot [m]*Segédmérések minimális távolsága [m]</string>
-  <string name="pref_walls_concave_title">Concavity*Homorúság</string>
-  <string name="pref_walls_concave_summary">Maximum concavity*Maximális homorúság</string>
-  <string name="pref_walls_concave_message">Maximum concavity [percent]*Maximális homorúság [percent]</string>
-  <string name="pref_walls_xstep_title">Step*Osztásköz</string>
-  <string name="pref_walls_xstep_summary">Point separation along the wall*Pontok maximális távolsága a kontúr mentén</string>
-  <string name="pref_walls_xstep_message">Separation of points along the wall [m]*Pontok maximális távolsága a kontúr mentén [m]</string>
+  <string name="pref_walls_plan_thr_summary">Alaprajzi kontúrhoz felhasznált legnagyobb lejtszögű segédmérés</string>
+  <string name="pref_walls_plan_thr_message">Alaprajzi kontúrhoz felhasznált legnagyobb lejtszögű segédmérés [deg]</string>
+  <string name="pref_walls_extended_thr_title">Oldalnézeti segédmérés szöge</string>
+  <string name="pref_walls_extended_thr_summary">Oldalnézet kontúrjához felhasznált legnagyobb lejtésszögű segédmérés</string>
+  <string name="pref_walls_extended_thr_message">Oldalnézet kontúrjához felhasznált legnagyobb lejtésszögű segédmérés [deg]</string>
+  <string name="pref_walls_xclose_title">Felbontás</string>
+  <string name="pref_walls_xclose_summary">Segédpontok maximális felbontása</string>
+  <string name="pref_walls_xclose_message">Segédpontok maximális felbontása [m]</string>
+  <string name="pref_walls_concave_title">Homorúság</string>
+  <string name="pref_walls_concave_summary">Maximális homorúság</string>
+  <string name="pref_walls_concave_message">Maximális homorúság [percent]</string>
+  <string name="pref_walls_xstep_title">Osztásköz</string>
+  <string name="pref_walls_xstep_summary">Pontok maximális távolsága a kontúr mentén</string>
+  <string name="pref_walls_xstep_message">SPontok maximális távolsága a kontúr mentén [m]</string>
 
-  <string name="pref_algo_min_alpha_title">Min-algo alpha*</string>
-  <string name="pref_algo_min_alpha_summary">Min-algo adjustment factor</string>
-  <string name="pref_algo_min_alpha_message">Min-algo adjustment factor (in [0,1])</string>
-  <string name="pref_algo_min_beta_title">Min-algo beta</string>
-  <string name="pref_algo_min_beta_summary">Min-algo M dip weight</string>
-  <string name="pref_algo_min_beta_message">Min-algo M dip weight</string>
+  <string name="pref_algo_min_alpha_title">Min-algo alfa</string>
+  <string name="pref_algo_min_alpha_summary">Min-algo illesztési tényezője</string>
+  <string name="pref_algo_min_alpha_message">Min-algo illesztési tényezője ([0,1])</string>
+  <string name="pref_algo_min_beta_title">Min-algo béta</string>
+  <string name="pref_algo_min_beta_summary">Min-algo M dip súlyozása</string>
+  <string name="pref_algo_min_beta_message">Min-algo M dip súlyozása</string>
   <string name="pref_algo_min_gamma_title">Min-algo gamma</string>
-  <string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x weight</string>
-  <string name="pref_algo_min_gamma_message">Min-algo group G.x M.x weight</string>
+  <string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x súlyozása</string>
+  <string name="pref_algo_min_gamma_message">Min-algo group G.x M.x súlyozása</string>
   <string name="pref_algo_min_delta_title">Min-algo delta</string>
-  <string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string>
-  <string name="pref_algo_min_delta_message">Min-algo group G^M.x weight</string>
+  <string name="pref_algo_min_delta_summary">Min-algo group G^M.x súlyozása</string>
+  <string name="pref_algo_min_delta_message">Min-algo group G^M.x súlyozása</string>
 
   <string name="pref_log_stream_summary">Log output stream*</string>
   <string name="pref_log_stream_title">Log stream*</string>
@@ -1120,11 +1120,11 @@
 \nFelhasználói kézikönyv: MENÜ gomb
 \nDokumentumok: http://sites.google.com/site/speleoapps
 \nHozzászólások, bug bejelentés, új funkció igények: marco.corvi@gmail.com
-\nA magyar fordítás Sűrű Péter munkája.
+\nA magyar fordítás Sűrű Péter munkája. Lektorálták: Pataki Róbert; Nagy András; Köblös Gabriella
 \n
     </string>
 
-  <string name="firmware_title">Firmware Frissítő</string>
+  <string name="firmware_title">Firmware Frissítés</string>
   <string name="firmware_file_title">Firmware Fájlok</string>
   <string name="firmware_text">
 \n[1] Válaszd ki, hogy firmware-t szeretnél feltölteni, vagy az aktuális firmware-ről szeretnél biztonsági másolatot.
