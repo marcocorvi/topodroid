@@ -129,9 +129,9 @@
      <item name="no">Nincs</item>
      <item name="for">Segédpontok, előremérés</item>
      <item name="back">Segédpontok, hátrafelémérés</item>
-     <item name="for2">Forward leg, splays*Előremérés, segédpontok</item>
-     <item name="back2">Backward leg, splays*Hátrafelé mérés, segédpontok</item>
-     <item name="anomaly">Backsight*Visszamérés</item>
+     <item name="for2">Előremérés, segédpontok</item>
+     <item name="back2">Hátrafelé mérés, segédpontok</item>
+     <item name="anomaly">Visszamérés</item>
      <item name="tripod">Háromláb</item>
      <item name="toporobot">TopoRobot</item>
   </string-array>
