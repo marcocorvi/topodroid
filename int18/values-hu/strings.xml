@@ -331,7 +331,7 @@
     <string name="saving_file_failed">Fájl mentése nem sikerült</string>
     <!-- UNUSED string name="scrap_name">sketch name</string -->
     <string name="splay">segédmérés</string>
-    <string name="too_many_leg_intersection">*A szelvényrajz több poligonmérést keresztez</string>
+    <string name="too_many_leg_intersection">A szelvényrajz több poligonmérést keresztez</string>
     <string name="too_many_legs_xsection">Túl sok a poligonmérés a keresztszelvényhez</string>
     <!-- UNUSED string name="converted_tdr2th2">Converted sketches binary files to th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Overwrite th2 sketch files ?</string -->
@@ -406,7 +406,7 @@
     <string name="unzip_fail_td">Kitömörítés nem sikerült: TopoDroid verzió nem megfelelő</string>
     <!-- UNUSED string name="zoom_in_out">Zoom in/out</string -->
 
-    <string name="survey_info">Survey info*Felmérés info</string>
+    <string name="survey_info">Felmérés info</string>
     <string name="stat_stddev_m">M norm. szór. %1$.1f százalék</string>
     <string name="stat_stddev_g">G norm. szór. %1$.1f százalék</string>
     <string name="stat_stddev_dip">Lejtszög norm. szór. %1$.1f fok (átlag %2$.1f fok)</string>
@@ -425,7 +425,7 @@
     <string name="stat_wens">Ny %1$.0f  K %2$.0f  É %3$.0f  D %4$.0f [%5$s]</string>
     <string name="stat_angle_error">Szöghibák %1$.2f ± %2$.2f</string>
     <string name="shot_title">MÉRÉS %1$s - %2$s</string>
-    <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f*L %1$.2f  N %2$.1f  I %3$.1f ???</string>
+    <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f ???</string>
 
     <string name="hide_blank">Nem kapcsolt mérések</string>
     <string name="hide_leg">Ismételt poligonmérések</string>
@@ -456,10 +456,10 @@
     <string name="button_cancel"    >Kilép     </string>
     <!-- TODO string name="button_close"     >Close     </string -->
     <string name="button_convert"   >Átalakít  </string>
-    <string name="button_current"   >Current*Jelenlegi</string>
+    <string name="button_current"   >Jelenlegi???</string>
     <string name="button_delete"    >Töröl     </string>
     <string name="button_eval"      >Kiértékel </string>
-    <string name="button_eval_cal"  >Eval w. calib.*Kiértékel és kalibrál</string>
+    <string name="button_eval_cal"  >Kiértékel és kalibrál???</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
     <!-- UNUSED string name="button_manual"    >Manual    </string -->
@@ -476,12 +476,12 @@
     <string name="button_read"      >Olvas  </string>
     <!-- TODO string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
-    <string name="button_dump"      >Dump      *Biztonsági tár???</string>
+    <string name="button_dump"      >Biztonsági tár???</string>
     <!-- TODO string name="button_replace"   >Replace   </string -->
     <string name="button_reset"     >Újraindít</string>
     <string name="button_left"      >BAL</string>
     <string name="button_right"     >JOBB</string>
-    <string name="button_clear"     >Clear*Kiürít???</string>
+    <string name="button_clear"     >Kiürít???</string>
     <string name="button_save"      >Ment</string>
     <!-- UNUSED string name="button_select"    >Select    </string -->
     <string name="button_store"     >Tárol</string>
@@ -514,14 +514,14 @@
     <string name="btn_import">Importálás</string>
     <string name="btn_install">Telepítés</string>
 
-    <!-- TODO string name="symbol_archeo">Archeo</string -->
-    <!-- TODO string name="symbol_bio">Biology</string -->
-    <!-- TODO string name="symbol_geo">Geology</string -->
-    <!-- TODO string name="symbol_mine">Mining</string -->
-    <!-- TODO string name="symbol_paleo">Paleo</string -->
-    <!-- TODO string name="symbol_speleo">Speleo</string -->
+    <!-- TODO string name="symbol_archeo">Régészet</string -->
+    <!-- TODO string name="symbol_bio">Biológia</string -->
+    <!-- TODO string name="symbol_geo">Geológia</string -->
+    <!-- TODO string name="symbol_mine">Bányászat</string -->
+    <!-- TODO string name="symbol_paleo">Őslénytan</string -->
+    <!-- TODO string name="symbol_speleo">Barlangászat</string -->
 
-    <!-- TODO string name="symbol_reload">Drawing Tools</string -->
+    <!-- TODO string name="symbol_reload">Rajz eszközök</string -->
 
 <!-- FIXME_SKETCH_3D -->    
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
@@ -545,7 +545,7 @@
     <string name="orientation">irány</string>
     <string name="contents">tartalom</string>
     <string name="error_distribution">hiba eloszlás</string>
-    <string name="angle_distribution">angular distribution*szög eloszlás???</string>
+    <string name="angle_distribution">szög eloszlás???</string>
 
     <!-- UNUSED string name="btn_head">head</string -->
     <!-- UNUSED string name="btn_stretch">Stretch</string -->
@@ -613,8 +613,8 @@
     <string name="help_sensor">Mérések párbeszédpanel???</string>
     <string name="help_3d">3D nézőke (Cave3D)</string>
     <string name="help_move">Mozgatás/zoom mód</string>
-    <string name="help_draw">Drawing mode*Rajz mód</string>
-    <string name="help_edit">Editing mode*Szerkesztés mód</string>
+    <string name="help_draw">Rajz mód</string>
+    <string name="help_edit">Szerkesztés mód</string>
     <string name="help_refs">Vázlat referencia kiválasztása???</string>
     <string name="help_rename">Felmérés nevének megváltoztatása</string>
     <string name="help_plot_rename">Vázlat nevének megváltoztatása</string>
@@ -907,7 +907,7 @@
   <string name="pref_bitmap_bgcolor_message">Vázlatokról exportált PNG képek háttérszíne</string>
   <string name="pref_acad_version_title">AutoCAD verzió</string>
   <string name="pref_acad_version_summary">AutoCAD verzió</string>
-  <string name="pref_dxf_scale_title">DXF sketch scale*DXF vázlat méretaránya</string>
+  <string name="pref_dxf_scale_title">DXF vázlat méretaránya</string>
   <string name="pref_dxf_scale_summary">DXF vázlat méretarányának értéke</string>
   <string name="pref_dxf_scale_message">Vázlatról exportált DXF méretarányának értéke</string>
   <string name="pref_dxf_blocks_title">Segédmérés végpontjai DXF-ben</string>
@@ -1070,8 +1070,8 @@
   <string name="pref_algo_min_delta_summary">Min-algo group G^M.x súlyozása</string>
   <string name="pref_algo_min_delta_message">Min-algo group G^M.x súlyozása</string>
 
-  <string name="pref_log_stream_summary">Log output stream*</string>
-  <string name="pref_log_stream_title">Log stream*</string>
+  <string name="pref_log_stream_summary">Log output stream???</string>
+  <string name="pref_log_stream_title">Log stream???</string>
   <string name="pref_log_bt">Bluetooth</string>
   <string name="pref_log_bezier">Bézier görbe</string>
   <string name="pref_log_calib">Kalibráció</string>
