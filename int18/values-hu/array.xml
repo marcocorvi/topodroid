@@ -5,13 +5,13 @@
   <!-- FIXME string-array name="unitGrid">
      <item name="meter">méter</item>
      <item name="yard">yard</item>
-     <item name="two_tf">2 feet</item>
+     <item name="two_tf">2 láb</item>
   </string-array -->
 
   <!-- TODO string-array name="loopClosure">
-     <item name="none">None</item>
-     <item name="normal">Normal</item>
-     <item name="triangles">Triangles</item>
+     <item name="none">Nincs</item>
+     <item name="normal">Normál</item>
+     <item name="triangles">Háromszögek</item>
   </string-array -->
 
   <string-array name="survexEol">
@@ -95,7 +95,7 @@
      <item name="basic">Alap</item>
      <item name="normal">Normál</item>
      <item name="advanced">Haladó</item>
-     <item name="expert">Profi</item>
+     <item name="expert">Szakértő</item>
      <!-- item name="complete">Complete</item -->
   </string-array>
 
@@ -120,15 +120,15 @@
 
   <string-array name="sockType">
      <item name="default">Alapbeállítás</item>
-     <item name="Insecure">Insecure*Nem biztonságos</item>
+     <item name="Insecure">Nem biztonságos</item>
      <!-- item name="Port">Port</item -->
      <!-- item name="InsecurePort">Insecure/Port</item -->
   </string-array>
 
   <string-array name="surveyStations">
      <item name="no">Nincs</item>
-     <item name="for">Splays, forward leg*Segédpontok, előremérés</item>
-     <item name="back">Splays, backward leg*Segédpontok, Hátrafelémérés</item>
+     <item name="for">Segédpontok, előremérés</item>
+     <item name="back">Segédpontok, hátrafelémérés</item>
      <item name="for2">Forward leg, splays*Előremérés, segédpontok</item>
      <item name="back2">Backward leg, splays*Hátrafelé mérés, segédpontok</item>
      <item name="anomaly">Backsight*Visszamérés</item>
@@ -137,16 +137,16 @@
   </string-array>
 
   <string-array name="pickerType">
-     <item name="recent">Most recent*Utoljára használt</item>
-     <item name="list">List*Lista</item>
-     <item name="grid">Grid*Rács</item>
-     <item name="grid3">Triple grid*3D Rács</item>
+     <item name="recent">Utoljára használt</item>
+     <item name="list">Lista</item>
+     <item name="grid">Rács</item>
+     <item name="grid3">3D Rács</item>
   </string-array>
 
   <string-array name="sectionStations">
      <item name="both">Mindkettő</item>
-     <item name="from">Behind*Hátsó</item>
-     <item name="to">In front*Elülső</item>
+     <item name="from">Hátsó</item>
+     <item name="to">Elülső</item>
   </string-array>
 
   <string-array name="recentNr">
@@ -163,9 +163,9 @@
   </string-array -->
 
   <string-array name="deviceBT">
-     <item name="0">Disabled*Kikapcsolt</item>
-     <item name="1">Check on start*Program indításnál ellenőrzés</item>
-     <item name="2">Enabled*Bekapcsolt</item>
+     <item name="0">Kikapcsolt</item>
+     <item name="1">Program indításnál ellenőrzés</item>
+     <item name="2">Bekapcsolt</item>
   </string-array>
 
   <!-- string-array name="exportType">
@@ -209,16 +209,16 @@
   </string-array>
 
   <string-array name="calibAlgo">
-     <item name="auto">Auto*Automatikus</item>
-     <item name="linear">Linear*Lineáris</item>
-     <item name="nonlinear">Non-linear*Nem lineáris</item>
+     <item name="auto">Automatikus</item>
+     <item name="linear">Lineáris</item>
+     <item name="nonlinear">Nem lineáris</item>
      <!-- item name="minimum">Minimum</item -->
   </string-array>
 
   <!-- TODO string-array name="rawCData">
-     <item name="none">None</item>
-     <item name="dec">Decimal</item>
-     <item name="hex">Hex</item>
+     <item name="none">Nincs</item>
+     <item name="dec">Decimális</item>
+     <item name="hex">Hexadecimális</item>
   </string-array -->
 
 </resources>
