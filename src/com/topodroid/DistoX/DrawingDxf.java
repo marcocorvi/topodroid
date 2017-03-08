@@ -21,6 +21,10 @@ import java.util.HashMap;
 import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import android.graphics.RectF;
@@ -32,9 +36,10 @@ class DrawingDxf
   private static final float grad2rad = TDMath.GRAD2RAD;
   private static boolean mVersion13 = false;
 
-  static final float POINT_SCALE = 10.0f;
-  static final float LABEL_SCALE = 4.0f;
-  static final float AXIS_SCALE  = 6.0f;
+  static final float POINT_SCALE   = 10.0f;
+  static final float STATION_SCALE = 6.0f;
+  static final float LABEL_SCALE   = 8.0f;
+  static final float AXIS_SCALE    = 6.0f;
   static final String zero = "0.0";
   static final String one  = "1.0";
   // static final String half = "0.5";
@@ -52,81 +57,86 @@ class DrawingDxf
   static final String AcDbLine     = "AcDbLine";
   static final String AcDbPolyline = "AcDbPolyline";
   static final String AcDbDictionary = "AcDbDictionary";
+
+  static final String EOL = "\r\n";
+  static final String EOL100 = "  100\r\n";
+  static final String EOLSPACE = "\r\n  ";
+  static final String SPACE = "  ";
  
 
   static void writeComment( BufferedWriter out, String comment ) throws IOException
   {
-    out.write( "  999\n" + comment + "\n" );
+    out.write( "  999" + EOL + comment + EOL );
   }
 
   static void writeHex( BufferedWriter out, int code, int handle ) throws IOException // mVersion13
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
-    pw.printf("  %d\n%X\n", code, handle );
+    pw.printf("  %d%s%X%s", code, EOL, handle, EOL );
     out.write( sw.getBuffer().toString() );
   }
 
   static void printHex( PrintWriter pw, int code, int handle ) // mVersion13
   {
-    pw.printf("  %d\n%X\n", code, handle );
+    pw.printf("  %d%s%X%s", code, EOL, handle, EOL );
   }
 
   static void writeAcDb( BufferedWriter out, int hex, String acdb1 ) throws IOException // mVersion13
   {
     if ( hex >= 0 ) writeHex( out, 5, hex );
-    out.write("  100\n" + acdb1 + "\n" );
+    out.write( EOL100 + acdb1 + EOL );
   }
 
   static void writeAcDb( BufferedWriter out, int hex, String acdb1, String acdb2 ) throws IOException // mVersion13
   {
     if ( hex >= 0 ) writeHex( out, 5, hex );
-    out.write("  100\n" + acdb1 + "\n  100\n" + acdb2 + "\n" );
+    out.write( EOL100 + acdb1 + EOL+ EOL100 + acdb2 + EOL );
   }
 
 
   static void printAcDb( PrintWriter pw, int hex, String acdb1 ) // mVersion13
   {
     if ( hex >= 0 ) printHex( pw, 5, hex );
-    pw.printf("  100\n" + acdb1 + "\n" );
+    pw.printf( EOL100 + acdb1 + EOL );
   }
 
   static void printAcDb( PrintWriter pw, int hex, String acdb1, String acdb2 ) // mVersion13
   {
     if ( hex >= 0 ) printHex( pw, 5, hex );
-    pw.printf("  100\n" + acdb1 + "\n  100\n" + acdb2 + "\n" );
+    pw.printf( EOL100 + acdb1 + EOL + EOL100 + acdb2 + EOL );
   }
 
   static void writeString(  BufferedWriter out, int code, String name ) throws IOException
   {
-    out.write( "  " + code + "\n" + name + "\n" );
+    out.write( "  " + code + EOL + name + EOL );
   }
 
   static void printString(  PrintWriter pw, int code, String name )
   {
-    pw.printf("  %d\n%s\n", code, name );
+    pw.printf("  %d%s%s%s", code, EOL, name, EOL );
   }
 
   static void printFloat(  PrintWriter pw, int code, float val )
   {
-    pw.printf(Locale.US, "  %d\n%.2f\n", code, val );
+    pw.printf(Locale.US, "  %d%s%.2f%s", code, EOL, val, EOL );
   }
 
   static void writeInt(  BufferedWriter out, int code, int val ) throws IOException
   {
-    out.write( "  " + code + "\n" + val + "\n" );
+    out.write( SPACE + code + EOL + val + EOL );
   }
 
   static void printInt(  PrintWriter pw, int code, int val )
   {
-    pw.printf( "  %d\n%d\n", code, val );
+    pw.printf( "  %d%s%d%s", code, EOL, val, EOL );
   }
 
   static void writeXY( BufferedWriter out, int x, int y, int base ) throws IOException
   {
     int b10 = 10 + base;
     int b20 = 20 + base;
-    out.write( "  " + b10 + "\n" + x + "\n  " + b20 + "\n" + y + "\n" );
+    out.write( SPACE + b10 + EOL + x + EOLSPACE + b20 + EOL + y + EOL );
   }
 
   static void writeXYZ( BufferedWriter out, int x, int y, int z, int base ) throws IOException
@@ -134,22 +144,24 @@ class DrawingDxf
     int b10 = 10 + base;
     int b20 = 20 + base;
     int b30 = 30 + base;
-    out.write( "  " + b10 + "\n" + x + "\n  " + b20 + "\n" + y + "\n  " + b30 + "\n" + z + "\n" );
+    out.write( SPACE + b10 + EOL + x + EOLSPACE + b20 + EOL + y + EOLSPACE + b30 + EOL + z + EOL );
   }
 
   static void printXY( PrintWriter pw, float x, float y, int base )
   {
-    pw.printf(Locale.US, "  %d\n%.2f\n  %d\n%.2f\n", base+10, x, base+20, y );
+    pw.printf(Locale.US, "  %d%s%.2f%s  %d%s%.2f%s", base+10, EOL, x, EOL, base+20, EOL, y, EOL );
   }
 
   static void printXYZ( PrintWriter pw, float x, float y, float z, int base )
   {
-    pw.printf(Locale.US, "  %d\n%.2f\n  %d\n%.2f\n  %d\n%.2f\n", base+10, x, base+20, y, base+30, z );
+    pw.printf(Locale.US, "  %d%s%.2f%s  %d%s%.2f%s  %d%s%.2f%s",
+       base+10, EOL, x, EOL, base+20, EOL, y, EOL, base+30, EOL, z, EOL );
   }
 
   static void printIntXYZ( PrintWriter pw, int x, int y, int z, int base )
   {
-    pw.printf(Locale.US, "  %d\n%d\n  %d\n%d\n  %d\n%d\n", base+10, x, base+20, y, base+30, z );
+    pw.printf(Locale.US, "  %d%s%d%s  %d%s%d%s  %d%s%d%s",
+       base+10, EOL, x, EOL, base+20, EOL, y, EOL, base+30, EOL, z, EOL );
   }
 
   // -----------------------------------------
@@ -199,7 +211,8 @@ class DrawingDxf
   //   printString( pw, 100, AcDbText );
   // }
 
-  static int  printPolyline( PrintWriter pw, DrawingPointLinePath line, float scale, int handle, String layer, boolean closed )
+  static int  printPolyline( PrintWriter pw, DrawingPointLinePath line, float scale, int handle,
+                             String layer, boolean closed, float xoff, float yoff )
   {
      int close = (closed ? 1 : 0 );
      printString( pw, 0, "POLYLINE" );
@@ -218,7 +231,7 @@ class DrawingDxf
          printInt( pw, 70, 32 ); // flag 32 = 3D polyline vertex
        // }
        printString( pw, 8, layer );
-       printXYZ( pw, p.mX * scale, -p.mY * scale, 0.0f, 0 );
+       printXYZ( pw, (p.mX+xoff) * scale, -(p.mY+yoff) * scale, 0.0f, 0 );
      }
      if ( closed ) {
        printString( pw, 0, "VERTEX" );
@@ -227,16 +240,17 @@ class DrawingDxf
          printInt( pw, 70, 32 ); // flag 32 = 3D polyline vertex
        // }
        printString( pw, 8, layer );
-       printXYZ( pw, line.mFirst.mX * scale, -line.mFirst.mY * scale, 0.0f, 0 );
+       printXYZ( pw, (line.mFirst.mX+xoff) * scale, -(line.mFirst.mY+yoff) * scale, 0.0f, 0 );
      }
-     pw.printf("  0\nSEQEND\n");
+     pw.printf("  0%sSEQEND%s", EOL, EOL );
      // if ( mVersion13 ) {
        ++handle; printHex( pw, 5, handle );
      // }
      return handle;
   }
 
-  static int printLWPolyline( PrintWriter pw, DrawingPointLinePath line, float scale, int handle, String layer, boolean closed )
+  static int printLWPolyline( PrintWriter pw, DrawingPointLinePath line, float scale, int handle, String layer, boolean closed,
+                              float xoff, float yoff )
   {
      int close = (closed ? 1 : 0 );
      printString( pw, 0, "LWPOLYLINE" );
@@ -248,7 +262,7 @@ class DrawingDxf
      printInt( pw, 70, close ); // not closed
      printInt( pw, 90, line.size() ); // nr. of points
      for (LinePoint p = line.mFirst; p != null; p = p.mNext ) { 
-       printXY( pw, p.mX * scale, -p.mY * scale, 0 );
+       printXY( pw, (p.mX+xoff) * scale, -(p.mY+yoff) * scale, 0 );
      }
      return handle;
   }
@@ -265,17 +279,18 @@ class DrawingDxf
     return false;
   }
 
-  static int printSpline( PrintWriter pw5, DrawingPointLinePath line, float scale, int handle, String layer, boolean closed )
+  static int printSpline( PrintWriter pw, DrawingPointLinePath line, float scale, int handle, String layer, boolean closed,
+                          float xoff, float yoff )
   {
-     printString( pw5, 0, "SPLINE" );
-     ++handle; printAcDb( pw5, handle, AcDbEntity, "AcDbSpline" );
-     printString( pw5, 8, layer );
-     printString( pw5, 6, lt_continuous );
-     printFloat( pw5, 48, 1.0f ); // scale 
-     printInt( pw5, 60, 0 ); // visibilty (0: visible, 1: invisible)
-     printInt( pw5, 66, 1 ); // group 1: "entities follow" flag
-     // printInt( pw5, 67, 0 ); // in model space [default]
-     printXYZ( pw5, 0, 0, 1, 200 ); // normal vector
+     printString( pw, 0, "SPLINE" );
+     ++handle; printAcDb( pw, handle, AcDbEntity, "AcDbSpline" );
+     printString( pw, 8, layer );
+     printString( pw, 6, lt_continuous );
+     printFloat( pw, 48, 1.0f ); // scale 
+     printInt( pw, 60, 0 ); // visibilty (0: visible, 1: invisible)
+     printInt( pw, 66, 1 ); // group 1: "entities follow" flag
+     // printInt( pw, 67, 0 ); // in model space [default]
+     printXYZ( pw, 0, 0, 1, 200 ); // normal vector
 
      float xt=0, yt=0;
      int np = 2;
@@ -290,7 +305,7 @@ class DrawingDxf
          yt = pn.mY - p.mY;
        }
        float d = (float)Math.sqrt( xt*xt + yt*yt );
-       printXYZ( pw5, xt/d, -yt/d, 0, 2 );
+       printXYZ( pw, xt/d, -yt/d, 0, 2 );
 
        while ( pn.mNext != null ) {
          p = pn;
@@ -305,80 +320,81 @@ class DrawingDxf
          yt = pn.mY - p.mY;
        }
        d = (float)Math.sqrt( xt*xt + yt*yt );
-       printXYZ( pw5, xt/d, -yt/d, 0, 3 );
+       printXYZ( pw, xt/d, -yt/d, 0, 3 );
      }
 
      int ncp = 4 * np - 4; // np + 3 * (np-1) - 1; // 4 * NP - 4
      int nk  = 3 * np + 2; // ncp + 4 - (np - 2);  // 3 * NP + 2
-     printInt( pw5, 70, 1064 ); // flags 1064 = 1024 + 32 + 8
-     printInt( pw5, 71, 3 );    // degree of the spline
-     printInt( pw5, 72, nk );   // nr. of knots
-     printInt( pw5, 73, ncp );  // nr. of control pts
-     printInt( pw5, 74, np );   // nr. of fit points
-     // printXYZ( pw5, x, y, z, 2 ); // start tangent
-     // printXYZ( pw5, x, y, z, 3 ); // end tangent
+     printInt( pw, 70, 1064 ); // flags 1064 = 1024 + 32 + 8
+     printInt( pw, 71, 3 );    // degree of the spline
+     printInt( pw, 72, nk );   // nr. of knots
+     printInt( pw, 73, ncp );  // nr. of control pts
+     printInt( pw, 74, np );   // nr. of fit points
+     // printXYZ( pw, x, y, z, 2 ); // start tangent
+     // printXYZ( pw, x, y, z, 3 ); // end tangent
      
-     printInt( pw5, 40, 0 );                              // knots: 1 + 3 * NP + 1
+     printInt( pw, 40, 0 );                              // knots: 1 + 3 * NP + 1
      for ( int k=0; k<np; ++k ) {                         // 0 0 0 0 1 1 1 2 2 2 ... N N N N
-       for ( int j=0; j<3; ++j ) printInt( pw5, 40, k );
+       for ( int j=0; j<3; ++j ) printInt( pw, 40, k );
      }
-     printInt( pw5, 40, np-1 );
+     printInt( pw, 40, np-1 );
 
      p = line.mFirst; 
      xt = p.mX;
      yt = p.mY;
-     printXYZ( pw5, p.mX * scale, -p.mY * scale, 0.0f, 0 );         // control points: 1 + 3 * (NP - 1) = 3 NP - 2
+     printXYZ( pw, (p.mX+xoff) * scale, -(p.mY+yoff) * scale, 0.0f, 0 );         // control points: 1 + 3 * (NP - 1) = 3 NP - 2
      for ( p = p.mNext; p != null; p = p.mNext ) { 
        if ( p.has_cp ) {
-         printXYZ( pw5, p.mX1 * scale, -p.mY1 * scale, 0.0f, 0 );
-         printXYZ( pw5, p.mX2 * scale, -p.mY2 * scale, 0.0f, 0 );
+         printXYZ( pw, (p.mX1+xoff) * scale, -(p.mY1+yoff) * scale, 0.0f, 0 );
+         printXYZ( pw, (p.mX2+xoff) * scale, -(p.mY2+yoff) * scale, 0.0f, 0 );
        } else {
-         printXYZ( pw5, xt * scale, -yt * scale, 0.0f, 0 );
-         printXYZ( pw5, p.mX * scale, -p.mY * scale, 0.0f, 0 );
+         printXYZ( pw, (xt+xoff) * scale, -(yt+yoff) * scale, 0.0f, 0 );
+         printXYZ( pw, (p.mX+xoff) * scale, -(p.mY+yoff) * scale, 0.0f, 0 );
        }
-       printXYZ( pw5, p.mX * scale, -p.mY * scale, 0.0f, 0 );
+       printXYZ( pw, (p.mX+xoff) * scale, -(p.mY+yoff) * scale, 0.0f, 0 );
        xt = p.mX;
        yt = p.mY;
      }
      for ( p = line.mFirst; p != null; p = p.mNext ) { 
-       printXYZ( pw5, p.mX * scale, -p.mY * scale, 0.0f, 1 );  // fit points: NP
+       printXYZ( pw, (p.mX+xoff) * scale, -(p.mY+yoff) * scale, 0.0f, 1 );  // fit points: NP
      }
      return handle;
   }
 
-  static int printText( PrintWriter pw5, int handle, String label, float x, float y, float angle, float scale, String layer, String style )
+  static int printText( PrintWriter pw, int handle, String label, float x, float y, float angle, float scale,
+                        String layer, String style, float xoff, float yoff )
   {
     // if ( false && mVersion13 ) { // FIXME TEXT in AC1012
     //   // int idx = 1 + point.mPointType;
-    //   printString( pw5, 0, "INSERT" );
-    //   ++handle; printAcDb( pw5, handle, "AcDbBlockReference" );
-    //   printString( pw5, 8, "POINT" );
-    //   printString( pw5, 2, "P_label" ); // block_name );
-    //   printFloat( pw5, 41, POINT_SCALE );
-    //   printFloat( pw5, 42, POINT_SCALE );
-    //   printFloat( pw5, 50, 360-angle );
-    //   printXYZ( pw5, x, y, 0, 0 );
+    //   printString( pw, 0, "INSERT" );
+    //   ++handle; printAcDb( pw, handle, "AcDbBlockReference" );
+    //   printString( pw, 8, "POINT" );
+    //   printString( pw, 2, "P_label" ); // block_name );
+    //   printFloat( pw, 41, POINT_SCALE );
+    //   printFloat( pw, 42, POINT_SCALE );
+    //   printFloat( pw, 50, 360-angle );
+    //   printXYZ( pw, x, y, 0, 0 );
     // } else {
-      printString( pw5, 0, "TEXT" );
-      // printString( pw5, 2, block );
-      ++handle; printAcDb( pw5, handle, AcDbEntity, AcDbText );
-      printString( pw5, 8, layer );
-      // printString( pw5, 7, my_style ); // style (optional)
-      // pw5.printf("%s\n  0\n", "\"10\"" );
-      printXYZ( pw5, x, y, 0, 0 );
-      // printXYZ( pw5, 0, 0, 1, 1 ); // second alignmenmt (otional)
-      // printXYZ( pw5, 0, 0, 1, 200 ); // extrusion (otional 0 0 1)
-      // printFloat( pw5, 39, 0 );   // thickness (optional 0) 
-      printFloat( pw5, 40, scale );   // height 
-      // printFloat( pw5, 41, 1 );    // scale X (optional 1)
-      printFloat( pw5, 50, angle );    // rotation [deg]
-      printFloat( pw5, 51, 0 );    // oblique angle
-      // printInt( pw5, 71, 0 );  // text generation flag (optional 0)
-      // printFloat( pw5, 72, 0 );    // H-align (optional 0)
-      // printFloat( pw5, 73, 0 );    // V-align
-      printString( pw5, 1, label );
-      printString( pw5, 7, style );
-      printString( pw5, 100, "AcDbText");
+      printString( pw, 0, "TEXT" );
+      // printString( pw, 2, block );
+      ++handle; printAcDb( pw, handle, AcDbEntity, AcDbText );
+      printString( pw, 8, layer );
+      // printString( pw, 7, my_style ); // style (optional)
+      // pw.printf("%s\%s 0%s", "\"10\"", EOL, EOL );
+      printXYZ( pw, x, y, 0, 0 );
+      // printXYZ( pw, 0, 0, 1, 1 ); // second alignmenmt (otional)
+      // printXYZ( pw, 0, 0, 1, 200 ); // extrusion (otional 0 0 1)
+      // printFloat( pw, 39, 0 );   // thickness (optional 0) 
+      printFloat( pw, 40, scale );   // height 
+      // printFloat( pw, 41, 1 );    // scale X (optional 1)
+      printFloat( pw, 50, angle );    // rotation [deg]
+      printFloat( pw, 51, 0 );    // oblique angle
+      // printInt( pw, 71, 0 );  // text generation flag (optional 0)
+      // printFloat( pw, 72, 0 );    // H-align (optional 0)
+      // printFloat( pw, 73, 0 );    // V-align
+      printString( pw, 1, label );
+      printString( pw, 7, style );
+      printString( pw, 100, "AcDbText");
     // }
     return handle;
   }
@@ -388,6 +404,8 @@ class DrawingDxf
     mVersion13 = true; // (TDSetting.mAcadVersion >= 13);
     
     float scale = TDSetting.mDxfScale;
+    float xoff = 0;
+    float yoff = 0;
     int handle = 0;
     RectF bbox = DrawingUtil.getBoundingBox( plot );
     float xmin = bbox.left;
@@ -742,8 +760,8 @@ class DrawingDxf
         {
           StringWriter sw7 = new StringWriter();
           PrintWriter pw7  = new PrintWriter(sw7);
-          handle = printText( pw7, handle, "10", xmin+10*SCALE_FIX+1, -ymax, 0, AXIS_SCALE, "REF", my_style );
-          handle = printText( pw7, handle, "10", xmin, -ymax+10*SCALE_FIX+1, 0, AXIS_SCALE, "REF", my_style );
+          handle = printText( pw7, handle, "10", xmin+10*SCALE_FIX+1, -ymax, 0, AXIS_SCALE, "REF", my_style, xoff, yoff );
+          handle = printText( pw7, handle, "10", xmin, -ymax+10*SCALE_FIX+1, 0, AXIS_SCALE, "REF", my_style, xoff, yoff );
           out.write( sw7.getBuffer().toString() );
         }
         out.flush();
@@ -834,107 +852,44 @@ class DrawingDxf
           if ( path.mType == DrawingPath.DRAWING_PATH_STATION )
           {
             DrawingStationPath st = (DrawingStationPath)path;
-            handle = printText( pw5, handle, st.mName, st.cx * scale, -st.cy * scale, 0, LABEL_SCALE, "STATION", my_style );
+            handle = printText( pw5, handle, st.mName, (st.cx+xoff) * scale, -(st.cy+yoff) * scale,
+                                0, LABEL_SCALE, "STATION", my_style, xoff, yoff );
           } 
           else if ( path.mType == DrawingPath.DRAWING_PATH_LINE )
           {
-            DrawingLinePath line = (DrawingLinePath)path;
-            String layer = "L_" + BrushManager.mLineLib.getSymbolThName( line.lineType() ).replace(':','-');
-            int flag = 0;
-            if ( checkSpline( line ) ) {
-              handle = printSpline( pw5, line, scale, handle, layer, false );
-            } else {
-              // handle = printLWPolyline( pw5, line, scale, handle, layer, false );
-              handle = printPolyline( pw5, line, scale, handle, layer, false );
-            }
+            handle = toDxf( pw5, handle, (DrawingLinePath)path, scale, xoff, yoff );
           } 
           else if ( path.mType == DrawingPath.DRAWING_PATH_AREA )
           {
-            DrawingAreaPath area = (DrawingAreaPath) path;
-            // Log.v("DistoX", "area size " + area.size() );
-            String layer = "A_" + BrushManager.mAreaLib.getSymbolThName( area.areaType() ).replace(':','-');
-            if ( checkSpline( area ) ) {
-              handle = printSpline( pw5, area, scale, handle, layer, true );
-            } else {
-              // handle = printLWPolyline( pw5, line, scale, handle, layer, true );
-              handle = printPolyline( pw5, area, scale, handle, layer, true );
-            }
-            if ( mVersion13 ) {
-              printString( pw5, 0, "HATCH" );    // entity type HATCH
-              ++handle; printAcDb( pw5, handle, AcDbEntity, "AcDbHatch" );
-              // printString( pw5, 8, "AREA" );  // layer (color BYLAYER)
-              printString( pw5, 8, layer );      // layer (color BYLAYER)
-              printString( pw5, 2, "_USER" );    // hatch pattern name
-
-              printXYZ( pw5, 0f, 0f, 0f, 0 );
-              printXYZ( pw5, 0f, 0f, 1f, 200 );  // extrusion direction, default 0,0,1
-              printInt( pw5, 70, 0 );            // 1:solid fill, 0:pattern-fill
-              printInt( pw5, 71, 0 );            // 1:associative 0:non-associative
-              printInt( pw5, 91, 1 );            // nr. boundary paths (loops): 1
-              // boundary data
-                printInt( pw5, 92, 2 );          // flag. 1:external 2:polyline 4:derived 8:text 16:outer
-                printInt( pw5, 72, 0 );          // not-polyline edge type (0: default) 1:line 2:arc 3:ellipse-arec 4:spline
-                                                 // polyline: has-bulge
-                printInt( pw5, 73, 1 );          // is-closed flag
-                printInt( pw5, 93, area.size() ); // nr. of points (not polyline) vertices (polyline)
-                for (LinePoint p = area.mFirst; p != null; p = p.mNext ) { 
-                  printXY( pw5, p.mX * scale, -p.mY * scale, 0 );
-                }
-                // printXY( pw5, area.mFirst.mX * scale, -area.mFirst.mY * scale, 0 );
-                printInt( pw5, 97, 0 );            // nr. source boundary objects
-              printInt( pw5, 75, 0 );            // hatch style: 0:normal, 1:outer, 2:ignore
-              printInt( pw5, 76, 0 );            // hatch pattern type: 0:user, 1:predefined, 2:custom
-              printFloat( pw5, 52, 0f );        // hatch pattern angle (only pattern fill)
-	      printFloat( pw5, 41, 1f );         // hatch pattern scale (only pattern fill)
-              printInt( pw5, 77, 0 );            // hatch pattern double flag (0: not double)
-              printInt( pw5, 78, 1 );            // nr. pattern definition lines
-              // here goes pattern data
-                printFloat( pw5, 53, 45f );        // pattern line angle
-                printFloat( pw5, 43, 0f );         // pattern base point
-                printFloat( pw5, 44, 0f );
-                printFloat( pw5, 45, -3.6f );      // pattern line offset
-                printFloat( pw5, 46, 3.6f );         
-                printInt( pw5, 79, 0 );            // nr. dash length items
-              // // printFloat( pw5, 49, 3f );         // dash length (repeated nr. times)
-
-               printFloat( pw5, 47, 0f );         // pixel size
-               printInt( pw5, 98, 0 );            // nr. seed points
-              // printXYZ( pw5, 0f, 0f, 0f, 0 );
-
-              // 450 451 452 453 460 461 462 and 470 all present or none
-              // printInt( pw5, 450, 0 ); // 0:solid, 1:gradient
-              // printInt( pw5, 451, 0 ); // reserved
-              // printInt( pw5, 452, 1 ); // 1:single color  2:two-color
-              // printInt( pw5, 453, 0 ); // 0:solid, 2:gradient
-              // printFloat( pw5, 460, 0f ); // rotation angle [rad]
-              // printFloat( pw5, 461, 0f ); // gradient definition
-              // printFloat( pw5, 462, 0.5f );  // color tint
-              // printFloat( pw5, 463, 0f ); // reserved
-              // printString( pw5, 470, "LINEAR" );  // default
-            }
+            handle = toDxf( pw5, handle, (DrawingAreaPath)path, scale, xoff, yoff );
           } 
           else if ( path.mType == DrawingPath.DRAWING_PATH_POINT )
           {
-            // FIXME point scale factor is 0.3
             DrawingPointPath point = (DrawingPointPath) path;
-            String block = "P_" + BrushManager.mPointLib.getSymbolThName( point.mPointType ).replace(':','-');
-            if ( point.mPointType == BrushManager.getPointLabelIndex() ) {
-              DrawingLabelPath label = (DrawingLabelPath)point;
-              handle = printText( pw5, handle, label.mText,  point.cx * scale, -point.cy * scale, (float)label.mOrientation,
-                                  LABEL_SCALE, "POINT", my_style );
+            if ( point.mPointType == BrushManager.mPointLib.mPointSectionIndex ) {
+              String scrapfile = point.mOptions.substring( 7 ) + ".tdr";
+              handle = tdrToDxf( pw5, handle, scrapfile, 
+                       scale, point.cx, point.cy, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
             } else {
-              // int idx = 1 + point.mPointType;
-              printString( pw5, 0, "INSERT" );
-              ++handle; printAcDb( pw5, handle, "AcDbBlockReference" );
-              printString( pw5, 8, "POINT" );
-              printString( pw5, 2, block );
-              printFloat( pw5, 41, POINT_SCALE );
-              printFloat( pw5, 42, POINT_SCALE );
-              printFloat( pw5, 50, 360-(float)(point.mOrientation) );
-              printXYZ( pw5, point.cx * scale, -point.cy * scale, 0, 0 );
+              handle = toDxf( pw5, handle, point, scale, xoff, yoff );
             }
           }
           out.write( sw5.getBuffer().toString() );
+          out.flush();
+        }
+        StringWriter sw6 = new StringWriter();
+        PrintWriter pw6  = new PrintWriter(sw6);
+        if ( TDSetting.mAutoStations ) {
+          for ( DrawingStationName name : plot.getStations() ) { // auto-stations
+            handle = toDxf( pw6, handle, name, scale, xoff, yoff );
+          }
+          out.write( sw6.getBuffer().toString() );
+          out.flush();
+        } else {
+          for ( DrawingStationPath st_path : plot.getUserStations() ) { // user-chosen
+            handle = toDxf( pw6, handle, st_path, scale, xoff, yoff );
+          }
+          out.write( sw6.getBuffer().toString() );
           out.flush();
         }
       }
@@ -948,6 +903,165 @@ class DrawingDxf
       // FIXME
       TDLog.Error( "DXF io-exception " + e.toString() );
     }
+  }
+
+  static private int toDxf( PrintWriter pw, int handle, DrawingStationName sn, float scale, float xoff, float yoff )
+  { // FIXME point scale factor is 0.3
+    return printText( pw, handle, sn.mName,  (sn.cx+xoff)*scale, -(sn.cy+yoff)*scale, 0,
+                        STATION_SCALE, "STATION", my_style, xoff, yoff );
+  }
+
+  static private int toDxf( PrintWriter pw, int handle, DrawingStationPath st, float scale, float xoff, float yoff )
+  { // FIXME point scale factor is 0.3
+    return printText( pw, handle, st.mName,  (st.cx+xoff)*scale, -(st.cy+yoff)*scale, 0,
+                        STATION_SCALE, "STATION", my_style, xoff, yoff );
+  }
+
+  static private int toDxf( PrintWriter pw, int handle, DrawingPointPath point, float scale, float xoff, float yoff )
+  { // FIXME point scale factor is 0.3
+    if ( point.mPointType == BrushManager.getPointLabelIndex() ) {
+      DrawingLabelPath label = (DrawingLabelPath)point;
+      return printText( pw, handle, label.mText,  (point.cx+xoff)*scale, -(point.cy+yoff)*scale, (float)label.mOrientation,
+                        LABEL_SCALE, "POINT", my_style, xoff, yoff );
+    }
+
+    String block = "P_" + BrushManager.mPointLib.getSymbolThName( point.mPointType ).replace(':','-');
+    // int idx = 1 + point.mPointType;
+    printString( pw, 0, "INSERT" );
+    ++handle; printAcDb( pw, handle, "AcDbBlockReference" );
+    printString( pw, 8, "POINT" );
+    printString( pw, 2, block );
+    printFloat( pw, 41, POINT_SCALE );
+    printFloat( pw, 42, POINT_SCALE );
+    printFloat( pw, 50, 360-(float)(point.mOrientation) );
+    printXYZ( pw, (point.cx+xoff)*scale, -(point.cy+yoff)*scale, 0, 0 );
+    return handle;
+  }
+
+  static private int toDxf( PrintWriter pw, int handle, DrawingLinePath line, float scale, float xoff, float yoff )
+  {
+    String layer = "L_" + BrushManager.mLineLib.getSymbolThName( line.lineType() ).replace(':','-');
+    int flag = 0;
+    if ( checkSpline( line ) ) {
+      return printSpline( pw, line, scale, handle, layer, false, xoff, yoff );
+    } 
+    // return printLWPolyline( pw5, line, scale, handle, layer, false );
+    return printPolyline( pw, line, scale, handle, layer, false, xoff, yoff );
+  }
+
+  static private int toDxf( PrintWriter pw, int handle, DrawingAreaPath area, float scale, float xoff, float yoff )
+  {
+    // Log.v("DistoX", "area size " + area.size() );
+    String layer = "A_" + BrushManager.mAreaLib.getSymbolThName( area.areaType() ).replace(':','-');
+    if ( checkSpline( area ) ) {
+      handle = printSpline( pw, area, scale, handle, layer, true, xoff, yoff );
+    } else {
+      // handle = printLWPolyline( pw5, line, scale, handle, layer, true );
+      handle = printPolyline( pw, area, scale, handle, layer, true, xoff, yoff );
+    }
+    if ( mVersion13 ) {
+      printString( pw, 0, "HATCH" );    // entity type HATCH
+      ++handle; printAcDb( pw, handle, AcDbEntity, "AcDbHatch" );
+      // printString( pw5, 8, "AREA" );  // layer (color BYLAYER)
+      printString( pw, 8, layer );      // layer (color BYLAYER)
+      printString( pw, 2, "_USER" );    // hatch pattern name
+
+      printXYZ( pw, 0f, 0f, 0f, 0 );
+      printXYZ( pw, 0f, 0f, 1f, 200 );  // extrusion direction, default 0,0,1
+      printInt( pw, 70, 0 );            // 1:solid fill, 0:pattern-fill
+      printInt( pw, 71, 0 );            // 1:associative 0:non-associative
+      printInt( pw, 91, 1 );            // nr. boundary paths (loops): 1
+      // boundary data
+        printInt( pw, 92, 2 );          // flag. 1:external 2:polyline 4:derived 8:text 16:outer
+        printInt( pw, 72, 0 );          // not-polyline edge type (0: default) 1:line 2:arc 3:ellipse-arec 4:spline
+                                         // polyline: has-bulge
+        printInt( pw, 73, 1 );          // is-closed flag
+        printInt( pw, 93, area.size() ); // nr. of points (not polyline) vertices (polyline)
+        for (LinePoint p = area.mFirst; p != null; p = p.mNext ) { 
+          printXY( pw, (p.mX+xoff)*scale, -(p.mY+yoff)*scale, 0 );
+        }
+        // printXY( pw, area.mFirst.mX * scale, -area.mFirst.mY * scale, 0 );
+        printInt( pw, 97, 0 );            // nr. source boundary objects
+      printInt( pw, 75, 0 );            // hatch style: 0:normal, 1:outer, 2:ignore
+      printInt( pw, 76, 0 );            // hatch pattern type: 0:user, 1:predefined, 2:custom
+      printFloat( pw, 52, 0f );        // hatch pattern angle (only pattern fill)
+      printFloat( pw, 41, 1f );         // hatch pattern scale (only pattern fill)
+      printInt( pw, 77, 0 );            // hatch pattern double flag (0: not double)
+      printInt( pw, 78, 1 );            // nr. pattern definition lines
+      // here goes pattern data
+        printFloat( pw, 53, 45f );        // pattern line angle
+        printFloat( pw, 43, 0f );         // pattern base point
+        printFloat( pw, 44, 0f );
+        printFloat( pw, 45, -3.6f );      // pattern line offset
+        printFloat( pw, 46, 3.6f );         
+        printInt( pw, 79, 0 );            // nr. dash length items
+      // // printFloat( pw, 49, 3f );         // dash length (repeated nr. times)
+
+       printFloat( pw, 47, 0f );         // pixel size
+       printInt( pw, 98, 0 );            // nr. seed points
+      // printXYZ( pw, 0f, 0f, 0f, 0 );
+
+      // 450 451 452 453 460 461 462 and 470 all present or none
+      // printInt( pw, 450, 0 ); // 0:solid, 1:gradient
+      // printInt( pw, 451, 0 ); // reserved
+      // printInt( pw, 452, 1 ); // 1:single color  2:two-color
+      // printInt( pw, 453, 0 ); // 0:solid, 2:gradient
+      // printFloat( pw, 460, 0f ); // rotation angle [rad]
+      // printFloat( pw, 461, 0f ); // gradient definition
+      // printFloat( pw, 462, 0.5f );  // color tint
+      // printFloat( pw, 463, 0f ); // reserved
+      // printString( pw, 470, "LINEAR" );  // default
+    }
+    return handle;
+  }
+
+  static private int tdrToDxf( PrintWriter pw, int handle, String scrapfile,
+                               float scale, float dx, float dy, float xoff, float yoff )
+  {
+    try {
+      FileInputStream fis = new FileInputStream( TDPath.getTdrFile( scrapfile ) );
+      BufferedInputStream bfis = new BufferedInputStream( fis );
+      DataInputStream dis = new DataInputStream( bfis );
+      int version = DrawingIO.skipTdrHeader( dis );
+      // Log.v("DistoX", "tdr to svg delta " + dx + " " + dy + " Offset " + xoff + " " + yoff );
+
+      DrawingPath path = null;
+      boolean done = false;
+      while ( ! done ) {
+        int what = dis.read();
+        switch ( what ) {
+          case 'P':
+            path = DrawingPointPath.loadDataStream( version, dis, dx, dy, null );
+            handle = toDxf( pw, handle, (DrawingPointPath)path, scale, xoff, yoff );
+            break;
+          case 'T':
+            path = DrawingLabelPath.loadDataStream( version, dis, dx, dy );
+            handle = toDxf( pw, handle, (DrawingLabelPath)path, scale, xoff, yoff );
+            break;
+          case 'L':
+            path = DrawingLinePath.loadDataStream( version, dis, dx, dy, null );
+            handle = toDxf( pw, handle, (DrawingLinePath)path, scale, xoff, yoff );
+            break;
+          case 'A':
+            path = DrawingAreaPath.loadDataStream( version, dis, dx, dy, null );
+            handle = toDxf( pw, handle, (DrawingAreaPath)path, scale, xoff, yoff );
+            break;
+          case 'U':
+            path = DrawingStationPath.loadDataStream( version, dis ); // consume DrawingStationName data
+            break;
+          case 'X':
+            path = DrawingStationName.loadDataStream( version, dis ); // consume DrawingStationName data
+            break;
+          case 'F':
+            done = true;
+            break;
+        }
+      }
+    } catch ( FileNotFoundException e ) { // this is OK
+    } catch ( IOException e ) {
+      e.printStackTrace();
+    }
+    return handle;
   }
 
 /* SECTION OBJECTS

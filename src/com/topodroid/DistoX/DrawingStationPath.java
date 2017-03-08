@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date jan 2013
  *
- * @brief TopoDroid drawing: station point 
+ * @brief TopoDroid drawing: user-defined station point 
  *        type DRAWING_PATH_STATION
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later

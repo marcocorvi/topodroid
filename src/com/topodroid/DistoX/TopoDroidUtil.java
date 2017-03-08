@@ -86,6 +86,13 @@ public class TopoDroidUtil
     return sdf.format( new Date() );
   }
 
+  static String currentDateTime()
+  {
+    SimpleDateFormat sdf = new SimpleDateFormat( "yyyy.MM.dd-hh:mm", Locale.US );
+    return sdf.format( new Date() );
+  }
+
+
   static String getDateString( String format )
   {
     SimpleDateFormat sdf = new SimpleDateFormat( format, Locale.US );

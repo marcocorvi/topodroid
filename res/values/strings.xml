@@ -685,6 +685,11 @@
     <string name="help_refine_point">Refine surface at point</string>
     <string name="help_refine_triangle">Refine surface al the long sides</string>
   
+    <string name="audio_paused">Paused</string>
+    <string name="audio_playing">Playing</string>
+    <string name="audio_recording">Recording</string>
+    <string name="audio_delete">Delete ?</string>
+    <string name="audio_overwrite">Overwrite ?</string>
 
     <string name="title_azimut">Extend reference</string>
     <string name="title_audio">Audio comment</string>

@@ -357,14 +357,10 @@ public class ShotWindow extends Activity
       mList.post( new Runnable() {
         @Override public void run() {
           // Log.v("DistoX", "notify data set changed");
-          mDataAdapter.notifyDataSetChanged();
-          mList.scrollTo( 0, mList.getHeight() ); // FIXME LIST_SCROLL
+          // mDataAdapter.notifyDataSetChanged();
+          mList.setSelection( mDataAdapter.getCount() - 1 );
         }
       } );
-
-      // Message msg = Message.obtain();
-      // msg.what = MSG_ADD_BLK;
-      // mListItemsHandler.sendMessage( msg );
     }
   }
 
@@ -765,10 +761,6 @@ public class ShotWindow extends Activity
   BitmapDrawable mBMleft;
   BitmapDrawable mBMright;
 
-  // FIXME made static: should not cause problems
-  // private static Handler mListItemsHandler = null;
-  // static final int MSG_ADD_BLK = 1;
-
   // void refreshList()
   // {
   //   Log.v("DistoX", "refresh display" );
@@ -790,18 +782,6 @@ public class ShotWindow extends Activity
     mShowSplay   = new ArrayList< String >();
     // mDataAdapter = new DBlockAdapter( this, this, R.layout.row, new ArrayList<DBlock>() );
     mDataAdapter = new DBlockAdapter( this, this, R.layout.dblock_row, new ArrayList<DBlock>() );
-
-    // mListItemsHandler = new Handler() {
-    //   @Override
-    //   public void handleMessage( Message msg ) {
-    //     switch (msg.what) {
-    //     case MSG_ADD_BLK:
-    //       mDataAdapter.notifyDataSetChanged();
-    //       break;
-    //     }
-    //     super.handleMessage( msg );
-    //   }
-    // };
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
     mButtonSize = mApp.setListViewHeight( mListView );

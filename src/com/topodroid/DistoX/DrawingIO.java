@@ -542,6 +542,48 @@ class DrawingIO
   // stations: U
   // E
 
+  static public int skipTdrHeader( DataInputStream dis )
+  {
+    int what, type, dir;
+    int version = 0;
+    int flag = 0;
+    float x, y;
+    try {
+      for ( int k=0; k<3; ++k ) {
+        what = dis.read(); // 'V'
+        if ( what == 'V' ) {
+          flag |= 0x01;
+          version = dis.readInt();
+        } else if ( what == 'S' ) {
+          flag |= 0x02;
+          String name = dis.readUTF();
+          type = dis.readInt();
+          if ( type == PlotInfo.PLOT_PROFILE ) dir = dis.readInt();
+          String lib = dis.readUTF();
+          lib = dis.readUTF();
+          lib = dis.readUTF();
+        } else if ( what == 'I' ) {
+          flag |= 0x04;
+          x = dis.readFloat();
+          y = dis.readFloat();
+          x = dis.readFloat();
+          y = dis.readFloat();
+          if ( dis.readInt() == 1 ) {
+            x = dis.readFloat();
+            y = dis.readFloat();
+            x = dis.readFloat();
+            y = dis.readFloat();
+          }
+        } else {
+          break;
+        }
+      }
+    } catch ( IOException e ) {
+      e.printStackTrace();
+    } 
+    return (flag == 0x07)? version : 0;
+  }
+
   static public boolean doLoadDataStream( DrawingSurface surface,
                                    String filename,
                                    float dx, float dy,

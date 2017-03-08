@@ -44,8 +44,8 @@ import java.util.HashMap;
 public class DataHelper extends DataSetObservable
 {
 
-  static final String DB_VERSION = "28";
-  static final int DATABASE_VERSION = 28;
+  static final String DB_VERSION = "29";
+  static final int DATABASE_VERSION = 29;
   static final int DATABASE_VERSION_MIN = 21; // was 14
 
   private static final String CONFIG_TABLE = "configs";
@@ -60,6 +60,7 @@ public class DataHelper extends DataSetObservable
   private static final String PHOTO_TABLE  = "photos";
   private static final String SENSOR_TABLE = "sensors";
   private static final String DEVICE_TABLE = "devices";
+  private static final String AUDIO_TABLE  = "audios";
 
   private final static String WHERE_ID          = "id=?";
   private final static String WHERE_SID         = "surveyId=?";
@@ -79,6 +80,7 @@ public class DataHelper extends DataSetObservable
 
   private SQLiteStatement updateConfig = null;
 
+  private SQLiteStatement updateAudioStmt = null;
   private SQLiteStatement updateShotStmt = null;
   private SQLiteStatement updateShotStmtFull = null;
   // private SQLiteStatement updateShotDBCStmt = null;
@@ -433,6 +435,7 @@ public class DataHelper extends DataSetObservable
       // updateShotDBCStmt = myDB.compileStatement( "UPDATE shots SET distance=?, bearing=?, clino=? WHERE surveyId=? AND id=?" );
       updateShotStmtFull   = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, flag=?, leg=?, comment=? WHERE surveyId=? AND id=?" );
       updateShotStmt       = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, flag=?, leg=? WHERE surveyId=? AND id=?" );
+      updateAudioStmt      = myDB.compileStatement( "UPDATE audios SET date=? WHERE surveyId=? AND shotId=?" );
 
       // updateShotNameStmt    = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=? WHERE surveyId=? AND id=?" );
       // updateShotExtendStmt  = myDB.compileStatement( "UPDATE shots SET extend=? WHERE surveyId=? AND id=?" );
@@ -612,6 +615,7 @@ public class DataHelper extends DataSetObservable
     myDB.beginTransaction();
     try {
       myDB.delete( PHOTO_TABLE,   WHERE_SID, clause );
+      myDB.delete( AUDIO_TABLE,   WHERE_SID, clause );
       myDB.delete( PLOT_TABLE,    WHERE_SID, clause );
       myDB.delete( FIXED_TABLE,   WHERE_SID, clause );
       myDB.delete( SHOT_TABLE,    WHERE_SID, clause );
@@ -1172,6 +1176,19 @@ public class DataHelper extends DataSetObservable
           myDB.update( SENSOR_TABLE, vals, WHERE_SID_ID, where );
         }
 
+        AudioInfo audio = getAudio( old_sid, old_id ); // transfer audio
+        if ( audio != null ) {
+          where[1] = Long.toString( audio.shotid );
+          myDB.update( AUDIO_TABLE, vals, WHERE_SID_SHOTID, where );
+          File oldfile = new File( TDPath.getSurveyAudioFile( old_survey.name, Long.toString(audio.shotid) ) );
+          File newfile = new File( TDPath.getSurveyAudioFile( new_survey.name, Long.toString(audio.shotid) ) );
+          if ( oldfile.exists() && ! newfile.exists() ) {
+            oldfile.renameTo( newfile );
+          } else {
+            TDLog.Error( "Survey rename " + old_survey.name + "/" + audio.id + ".wav exists" );
+          }
+        }
+
         List< PhotoInfo > photos = selectPhotoAtShot( old_sid, old_id ); // transfer photos
         for ( PhotoInfo photo : photos ) {
           where[1] = Long.toString( photo.id );
@@ -1470,6 +1487,93 @@ public class DataHelper extends DataSetObservable
       if (cursor != null && !cursor.isClosed()) cursor.close();
     }
     return list;
+  }
+
+
+  public AudioInfo getAudio( long sid, long bid )
+  {
+    if ( myDB == null ) return null;
+    AudioInfo ret = null;
+    Cursor cursor = myDB.query( AUDIO_TABLE,
+       		         new String[] { "id", "date" }, // columns
+                                WHERE_SID_SHOTID, new String[] { Long.toString(sid), Long.toString(bid) },
+                                null, null,  null ); 
+    if (cursor.moveToFirst()) { // update
+      ret = new AudioInfo( sid, 
+                           cursor.getLong(0), // id
+                           bid,
+                           cursor.getString(1)  // date
+                         );
+    }
+    if (cursor != null && !cursor.isClosed()) cursor.close();
+    return ret;
+  }
+
+  public void insertAudio( long sid, long id, long bid, String date )
+  {
+    if ( myDB == null ) return;
+    if ( id == -1L ) id = maxId( AUDIO_TABLE, sid );
+    ContentValues cv = new ContentValues();
+    cv.put( "surveyId", sid );
+    cv.put( "id",       id );
+    cv.put( "shotId",   bid );
+    cv.put( "date",     date );
+    try {
+        myDB.insert( AUDIO_TABLE, null, cv );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } catch ( SQLiteException e ) { logError("insert audio " + sid + "/" + bid, e); }
+  }
+
+  public void setAudio( long sid, long bid, String date )
+  {
+    if ( myDB == null ) return;
+    Cursor cursor = myDB.query( AUDIO_TABLE,
+       		         new String[] { "date" }, // columns
+                                WHERE_SID_SHOTID, new String[] { Long.toString(sid), Long.toString(bid) },
+                                null, null,  null ); 
+    if (cursor.moveToFirst()) { // update
+      updateAudioStmt.bindString( 1, date );
+      updateAudioStmt.bindString( 2, Long.toString(sid) );
+      updateAudioStmt.bindString( 3, Long.toString(bid) );
+      try {
+        updateAudioStmt.execute();
+      } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+      } catch ( SQLiteException e ) { logError("Audio update " + sid + "/" + bid + " " + date, e ); }
+    } else { // insert
+      insertAudio( sid, -1L, bid, date );
+    }
+    if (cursor != null && !cursor.isClosed()) cursor.close();
+  }
+
+  public List< AudioInfo > selectAllAudios( long sid )
+  {
+    List< AudioInfo > list = new ArrayList< AudioInfo >();
+    if ( myDB == null ) return list;
+    Cursor cursor = myDB.query( AUDIO_TABLE,
+       		                new String[] { "id", "shotId", "date" }, // columns
+                                WHERE_SID, new String[] { Long.toString(sid) },
+                                null, null,  null ); 
+    if (cursor.moveToFirst()) {
+      do {
+        list.add( new AudioInfo( sid, 
+                                 cursor.getLong(0), // id
+                                 cursor.getLong(1), // shotId
+                                 cursor.getString(2)  // date
+                               ) );
+      } while (cursor.moveToNext());
+    }
+    // TDLog.Log( TDLog.LOG_DB, "select All Photos list size " + list.size() );
+    if (cursor != null && !cursor.isClosed()) cursor.close();
+    return list;
+  }
+
+  public void deleteAudio( long sid, long bid )
+  {
+    if ( myDB == null ) return;
+    try {
+      myDB.delete( AUDIO_TABLE, WHERE_SID_SHOTID, new String[]{ Long.toString(sid), Long.toString(bid) } );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } catch (SQLiteException e) { logError("photo delete", e); }
   }
 
   public List< PhotoInfo > selectAllPhotos( long sid, long status )
@@ -3308,10 +3412,27 @@ public class DataHelper extends DataSetObservable
        }
        if (cursor != null && !cursor.isClosed()) cursor.close();
 
+       cursor = myDB.query( AUDIO_TABLE, // SELECT ALL AUDIO RECORD
+                            new String[] { "id", "shotId", "date" },
+                            "surveyId=?", new String[] { Long.toString(sid) },
+                            null, null, null );
+       if (cursor.moveToFirst()) {
+         do {
+           pw.format(Locale.US,
+                     "INSERT into %s values( %d, %d, %d, %d, \"%s\", \"%s\", \"%s\" );\n",
+                     AUDIO_TABLE,
+                     sid,
+                     cursor.getLong(0),   // id
+                     cursor.getLong(1),   // shotid
+                     cursor.getString(2) ); // date
+         } while (cursor.moveToNext());
+       }
+       if (cursor != null && !cursor.isClosed()) cursor.close();
+
        cursor = myDB.query( PHOTO_TABLE, // SELECT ALL PHOTO RECORD
-  			           new String[] { "id", "shotId", "status", "title", "date", "comment" },
-                                   "surveyId=?", new String[] { Long.toString(sid) },
-                                   null, null, null );
+  			    new String[] { "id", "shotId", "status", "title", "date", "comment" },
+                            "surveyId=?", new String[] { Long.toString(sid) },
+                            null, null, null );
        if (cursor.moveToFirst()) {
          do {
            pw.format(Locale.US,
@@ -3327,6 +3448,7 @@ public class DataHelper extends DataSetObservable
          } while (cursor.moveToNext());
        }
        if (cursor != null && !cursor.isClosed()) cursor.close();
+
        cursor = myDB.query( PLOT_TABLE, 
                             mPlotFieldsFull,
                             "surveyId=?", new String[] { Long.toString( sid ) },
@@ -3548,7 +3670,15 @@ public class DataHelper extends DataSetObservable
            id = scanline1.longValue( );
            // Log.v("DistoX", "table " + table + " id " + id + " v " + v );
 
-           if ( table.equals(PHOTO_TABLE) ) { // FIXME PHOTO
+           if ( table.equals(AUDIO_TABLE) ) { // FIXME AUDIO
+             shotid  = scanline1.longValue( );
+             date    = scanline1.stringValue( );
+             if ( shotid >= 0 ) {
+               insertAudio( sid, id, shotid, date );
+               // TDLog.Log( TDLog.LOG_DB, "loadFromFile photo " + sid + " " + id + " " + title + " " + name );
+             }
+
+           } else if ( table.equals(PHOTO_TABLE) ) { // FIXME PHOTO
              shotid  = scanline1.longValue( );
              title   = scanline1.stringValue( );
              date    = scanline1.stringValue( );
@@ -3929,6 +4059,15 @@ public class DataHelper extends DataSetObservable
              +   ")"
            );
 
+           db.execSQL( 
+               create_table + AUDIO_TABLE
+             + " ( surveyId INTEGER, "
+             +   " id INTEGER, " // PRIMARY KEY AUTOINCREMENT, "
+             +   " shotId INTEGER, "
+             +   " date TEXT "
+             +   ")"
+           );
+
            // db.execSQL(
            //     " CREATE TRIGGER fk_insert_shot BEFORE "
            //   + " INSERT on " + SHOT_TABLE 
@@ -4000,6 +4139,15 @@ public class DataHelper extends DataSetObservable
            case 27:
              db.execSQL( "ALTER TABLE fixeds ADD COLUMN source INTEGER default 0" );
            case 28:
+             db.execSQL( 
+                 create_table + AUDIO_TABLE
+               + " ( surveyId INTEGER, "
+               +   " id INTEGER, " // PRIMARY KEY AUTOINCREMENT, "
+               +   " shotId INTEGER, "
+               +   " date TEXT "
+               +   ")"
+             );
+           case 29:
              /* current version */
            default:
              break;

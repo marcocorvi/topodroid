@@ -103,6 +103,7 @@ public class DrawingStationDialog extends MyDialog
       mBtnDirect  = (Button) findViewById( R.id.btn_direct );
       mBtnInverse = (Button) findViewById( R.id.btn_inverse );
 
+
       mSensors = false;
       mBearing = 0;
       mClino   = 0;
@@ -179,7 +180,9 @@ public class DrawingStationDialog extends MyDialog
               mBtnDirect.setVisibility( View.GONE );
               mBtnInverse.setVisibility( View.GONE );
             }
-            mBtnXDelete.setText( "android" );
+            mBtnXDelete.setText( "" );
+            mBtnXDelete.setBackgroundDrawable(
+              MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_compass ) );
             mSensors = true;
             mBtnXSection.setBackgroundColor( TDColor.MID_GRAY );
           } else {

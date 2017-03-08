@@ -36,13 +36,19 @@ import android.widget.Toast;
 public class AudioDialog extends MyDialog
                          implements View.OnClickListener
 {
+  private static int ACTION_NONE = 0;
+  private static int ACTION_DELETE = 1;
+  private static int ACTION_OVERWRITE = 2;
+  int mAction = 0;
+
   MediaPlayer   mMP;
   MediaRecorder mMR;
 
   MyStateBox mBtnPlay;
   MyStateBox mBtnRec;
+  MyStateBox mBtnDelete;
 
-  Button mBtnDelete;
+  Button mBtnConfirm;
   Button mBtnClose;
 
   TopoDroidApp mApp;
@@ -52,6 +58,7 @@ public class AudioDialog extends MyDialog
   boolean hasFile;
   boolean canRec;
   boolean canPlay;
+  // AudioInfo mAudio;
 
   AudioDialog( Context ctx, TopoDroidApp app, ShotWindow parent, DBlock blk )
   {
@@ -60,6 +67,7 @@ public class AudioDialog extends MyDialog
     mApp = app;
     mParent = parent;
     mBlk = blk;
+    // mAudio = mApp.mData.getAudio( mApp.mSID, blk.mId );
     mFilepath = TDPath.getSurveyAudioFile( mApp.mySurvey, Long.toString(mBlk.mId) );
     File file = new File( mFilepath );
     hasFile = file.exists();
@@ -87,10 +95,14 @@ public class AudioDialog extends MyDialog
     mBtnRec    = new MyStateBox( mContext, R.drawable.iz_audio_rec, R.drawable.iz_audio_rec_on );
     mBtnPlay   = new MyStateBox( mContext, R.drawable.iz_audio_play_off, R.drawable.iz_audio_play, R.drawable.iz_audio_stop );
     mBtnDelete = new MyStateBox( mContext, R.drawable.iz_delete, R.drawable.iz_delete );
+    mBtnConfirm = new Button( mContext );
 
     mBtnRec.setOnClickListener( this );
     mBtnPlay.setOnClickListener( this );
     mBtnDelete.setOnClickListener( this );
+    mBtnConfirm.setOnClickListener( this );
+    mBtnConfirm.setText( R.string.audio_paused );
+    mAction = ACTION_NONE;
 
     canRec  = true;
     canPlay = hasFile;
@@ -100,6 +112,7 @@ public class AudioDialog extends MyDialog
     layout2.addView( mBtnPlay, lp );
     layout2.addView( mBtnRec, lp );
     layout2.addView( mBtnDelete, lp );
+    layout2.addView( mBtnConfirm, lp );
     layout2.invalidate();
   }
 
@@ -109,11 +122,16 @@ public class AudioDialog extends MyDialog
       MyStateBox b = (MyStateBox)v;
       if ( b == mBtnDelete ) {
         if ( hasFile ) { // delete audio file
-          File file = new File( mFilepath );
-          file.delete();
+          mAction = ACTION_DELETE;
+          mBtnConfirm.setText(  R.string.audio_delete );
+          return;
+          // File file = new File( mFilepath );
+          // file.delete();
           // mApp.mData.dropAudio( mApp.mSID, mBlk.mId );
         }
       } else if ( b == mBtnPlay ) {
+        mAction = ACTION_NONE;
+        mBtnConfirm.setText( R.string.audio_paused );
         if ( canPlay ) {
           int sp = mBtnPlay.getState();
           if ( sp == 2 ) {
@@ -129,13 +147,37 @@ public class AudioDialog extends MyDialog
           if ( sr == 1 ) {
             stopRec();
           } else if ( sr == 0 ) {
-            startRec();
+            if ( hasFile ) {
+              mAction = ACTION_OVERWRITE;
+              mBtnConfirm.setText( R.string.audio_overwrite );
+            } else {
+              startRec();
+            }
           }
         }
         return;
       }
     } catch ( ClassCastException e ) { }
+    if ( mAction > ACTION_NONE ) {
+      try {
+        if ( (Button)v == mBtnConfirm ) {
+          if ( mAction == ACTION_DELETE ) {
+            deleteAudio();
+          } else if ( mAction == ACTION_OVERWRITE ) {
+            startRec();
+            return;
+          }
+        }
+      } catch ( ClassCastException e ) { }
+    }
     dismiss();
+  }
+
+  void deleteAudio()
+  {
+    File file = new File( mFilepath );
+    file.delete();
+    mApp.mData.deleteAudio( mApp.mSID, mBlk.mId );
   }
 
   public void startRec()
@@ -147,9 +189,11 @@ public class AudioDialog extends MyDialog
       mMR.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
       mMR.setOutputFile( mFilepath );
       mMR.prepare();
-      mMR.start();
       canPlay = false;
       mBtnRec.setState( 1 );
+      mAction = ACTION_NONE;
+      mBtnConfirm.setText( R.string.audio_recording );
+      mMR.start();
     } catch ( IllegalStateException e ) {
     } catch ( IOException e ) {
     }
@@ -163,8 +207,11 @@ public class AudioDialog extends MyDialog
       mMR = null;
       mBtnRec.setState( 0 );
       mBtnPlay.setState( 1 );
+      mAction = ACTION_NONE;
+      mBtnConfirm.setText( R.string.audio_paused );
       canPlay = true;
       hasFile = true;
+      mApp.mData.setAudio( mApp.mSID, mBlk.mId, TopoDroidUtil.currentDateTime() );
     } catch ( IllegalStateException e ) {
     } catch ( RuntimeException e ) {
     }
@@ -182,12 +229,15 @@ public class AudioDialog extends MyDialog
           mp.release();
           canRec = true;
           mBtnPlay.setState( 1 );
+          mBtnConfirm.setText(  R.string.audio_paused );
         }
       } );
       mMP.prepare();
-      mMP.start();
       canRec = false;
       mBtnPlay.setState( 2 );
+      mAction = ACTION_NONE;
+      mBtnConfirm.setText(  R.string.audio_playing );
+      mMP.start();
     } catch ( IllegalStateException e ) {
     } catch ( IOException e ) {
     }
@@ -202,6 +252,8 @@ public class AudioDialog extends MyDialog
 	mMP.release();
 	mMP = null;
       }
+      mAction = ACTION_NONE;
+      mBtnConfirm.setText( R.string.audio_paused );
       mBtnPlay.setState( 1 );
     } catch ( IllegalStateException e ) {
     } catch ( RuntimeException e ) {

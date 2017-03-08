@@ -2296,6 +2296,12 @@ public class DrawingCommandManager
 
         if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
           DrawingPointPath pp = (DrawingPointPath)p;
+          // section points are special
+          if ( pp.mPointType == BrushManager.mPointLib.mPointSectionIndex ) {
+            // Log.v("DistoX", "Section point <" + pp.mOptions + ">");
+            // option: -scrap survey-xx#
+            // TODO open file survey-xx#.tdr and convert it to csurvey
+          }
           if ( BrushManager.getPointCsxLayer( pp.mPointType ) != 6 ) continue;
           pp.toCsurvey( pw, cave, branch );
         }

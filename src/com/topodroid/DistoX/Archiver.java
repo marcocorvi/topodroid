@@ -129,11 +129,18 @@ public class Archiver
         addEntry( zos, new File( TDPath.getSurveyJpgFile( survey, Long.toString(pht.id) ) ) );
       }
 
+      List< AudioInfo > audios = app.mData.selectAllAudios( app.mSID );
+      for ( AudioInfo audio : audios ) {
+        addEntry( zos, new File( TDPath.getSurveyAudioFile( survey, Long.toString( audio.shotid ) ) ) );
+      }
+
       addEntry( zos, new File( TDPath.getSurveyCsvFile( survey ) ) );
       addEntry( zos, new File( TDPath.getSurveyCsxFile( survey ) ) );
       addEntry( zos, new File( TDPath.getSurveyCaveFile( survey ) ) );
       addEntry( zos, new File( TDPath.getSurveyDatFile( survey ) ) );
       addEntry( zos, new File( TDPath.getSurveyDxfFile( survey ) ) );
+      addEntry( zos, new File( TDPath.getSurveyGrtFile( survey ) ) );
+      addEntry( zos, new File( TDPath.getSurveyGtxFile( survey ) ) );
       addEntry( zos, new File( TDPath.getSurveyKmlFile( survey ) ) );
       addEntry( zos, new File( TDPath.getSurveyPltFile( survey ) ) );
       addEntry( zos, new File( TDPath.getSurveySrvFile( survey ) ) );
@@ -222,6 +229,10 @@ public class Archiver
               pathname = TDPath.getCavFile( ze.getName() );
             } else if ( ze.getName().endsWith( TDPath.DAT ) ) {
               pathname = TDPath.getDatFile( ze.getName() );
+            } else if ( ze.getName().endsWith( TDPath.GRT ) ) {
+              pathname = TDPath.getGrtFile( ze.getName() );
+            } else if ( ze.getName().endsWith( TDPath.GTX ) ) {
+              pathname = TDPath.getGtxFile( ze.getName() );
             } else if ( ze.getName().endsWith( TDPath.DXF ) ) {
               pathname = TDPath.getDxfFile( ze.getName() );
             } else if ( ze.getName().endsWith( TDPath.KML ) ) {
@@ -254,6 +265,11 @@ public class Archiver
             } else if ( ze.getName().endsWith( TDPath.TXT ) ) {
               pathname = TDPath.getNoteFile( ze.getName() );
 
+            } else if ( ze.getName().endsWith( ".wav" ) ) { // AUDIOS
+              pathname = TDPath.getAudioDir( surveyname );
+              File file = new File( pathname );
+              file.mkdirs();
+              pathname = TDPath.getAudioFile( surveyname, ze.getName() );
             } else if ( ze.getName().endsWith( ".jpg" ) ) { // PHOTOS
               // FIXME need survey dir
               pathname = TDPath.getJpgDir( surveyname );

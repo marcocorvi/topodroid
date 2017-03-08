@@ -8,20 +8,20 @@ width 1
 csurvey 5 4 1 1
 effect
   moveTo 0 0
-  lineTo 27 0
-  lineTo 27 1
+  lineTo 37 0
+  lineTo 37 1
   lineTo 0 1
-  moveTo 0 8
-  lineTo 27 8
-  lineTo 27 9
-  lineTo 0 9
+  moveTo 0 12
+  lineTo 37 12
+  lineTo 37 13
+  lineTo 0 13
   moveTo 5 1
-  lineTo 5 8
-  lineTo 6 8
+  lineTo 5 12
+  lineTo 6 12
   lineTo 6 1
-  moveTo 20 1
-  lineTo 20 8
-  lineTo 21 8
-  lineTo 21 1
+  moveTo 23 1
+  lineTo 23 12
+  lineTo 24 12
+  lineTo 24 1
 endeffect
 endsymbol

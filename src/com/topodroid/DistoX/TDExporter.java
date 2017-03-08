@@ -82,11 +82,12 @@ class TDExporter
      pw.format("    <plot />\n");
   }
 
-  static private void writeCsxLeg( PrintWriter pw, AverageLeg leg )
+  static private void writeCsxLeg( PrintWriter pw, AverageLeg leg, DBlock ref )
   {
     pw.format(Locale.US, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"",
       leg.length(), leg.bearing(), leg.clino()
     );
+    pw.format(Locale.US, " g=\"%.2f\" m=\"%.1f\" dip=\"%.1f\"", ref.mAcceleration, ref.mMagnetic, ref.mDip );
     leg.reset();
   }
 
@@ -147,7 +148,7 @@ class TDExporter
       // FIXME origin = origin of Num
       pw.format("  <properties id=\"\" name=\"\" origin=\"%s\" ", origin ); // prefix
       // FIXME TODO_CSURVEY
-      // pw.format(      "createdby=\"TopoDroid\" version=\"%s\" date=\"%s\" ", TopoDroid.VERSION, date );
+      pw.format(      "creatid=\"TopoDroid\" creatversion=\"%s\" creatdate=\"%s\" ", TopoDroidApp.VERSION, date );
       pw.format(      "calculatemode=\"1\" calculatetype=\"2\" calculateversion=\"-1\" " );
       pw.format(      "ringcorrectionmode=\"2\" nordcorrectionmode=\"0\" inversionmode=\"1\" ");
       pw.format(      "designwarpingmode=\"1\" bindcrosssection=\"1\">\n");
@@ -227,7 +228,7 @@ class TDExporter
 		// if ( bck ) { pw.format(" backshot=\"1\"");   bck = false; }
               }
               // pw.format(" planshowsplayborder=\"1\" profileshowsplayborder=\"1\" ");
-              writeCsxLeg( pw, leg );
+              writeCsxLeg( pw, leg, ref_item );
               pw.format(" l=\"0.0\" r=\"0.0\" u=\"0.0\" d=\"0.0\"");
               if ( com != null && com.length() > 0 ) {
                 pw.format(" note=\"%s\"", com.replaceAll("\"", "") );
@@ -246,6 +247,8 @@ class TDExporter
             if ( extend == -1 ) pw.format(" direction=\"1\"");
             pw.format(Locale.US, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"",
                item.mLength, item.mBearing, item.mClino );
+            pw.format(Locale.US, " g=\"%.1f\" m=\"%.1f\" did=\"%.1f\"",
+               item.mAcceleration, item.mMagnetic, item.mDip );
             pw.format(" l=\"0\" r=\"0\" u=\"0\" d=\"0\"");
             if ( item.mComment != null && item.mComment.length() > 0 ) {
               pw.format(" note=\"%s\"", item.mComment.replaceAll("\"", "") );
@@ -264,7 +267,7 @@ class TDExporter
                 // if ( bck ) { pw.format(" backshot=\"1\"");   bck = false; }
               }
               // pw.format(" planshowsplayborder=\"1\" profileshowsplayborder=\"1\" ");
-              writeCsxLeg( pw, leg );
+              writeCsxLeg( pw, leg, ref_item );
               pw.format(" l=\"0.0\" r=\"0.0\" u=\"0.0\" d=\"0.0\"");
               if ( com != null && com.length() > 0 ) {
                 pw.format(" note=\"%s\"", com.replaceAll("\"", "") );
@@ -283,6 +286,8 @@ class TDExporter
             if ( extend == -1 ) pw.format(" direction=\"1\"");
             pw.format(Locale.US, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"",
                item.mLength, item.mBearing, item.mClino );
+            pw.format(Locale.US, " g=\"%.1f\" m=\"%.1f\" did=\"%.1f\"",
+               item.mAcceleration, item.mMagnetic, item.mDip );
             pw.format(" l=\"0\" r=\"0\" u=\"0\" d=\"0\"");
             if ( item.mComment != null && item.mComment.length() > 0 ) {
               pw.format(" note=\"%s\"", item.mComment.replaceAll("\"", "") );
@@ -298,7 +303,7 @@ class TDExporter
                 if ( sur ) { pw.format(" surface=\"1\"");   sur = false; }
                 // if ( bck ) { pw.format(" backshot=\"1\"");   bck = false; }
               }
-              writeCsxLeg( pw, leg );
+              writeCsxLeg( pw, leg, ref_item );
               pw.format(" l=\"0\" r=\"0\" u=\"0\" d=\"0\"");
               if ( com != null && com.length() > 0 ) {
                 pw.format(" note=\"%s\"", com.replaceAll("\"", "") );
@@ -333,7 +338,7 @@ class TDExporter
            if ( sur ) { pw.format(" surface=\"1\"");   /* sur = false; */ }
            // if ( bck ) { pw.format(" backshot=\"1\"");  /* bck = false; */ }
         }
-        writeCsxLeg( pw, leg );
+        writeCsxLeg( pw, leg, ref_item );
         pw.format(" l=\"0\" r=\"0\" u=\"0\" d=\"0\"");
         if ( com != null && com.length() > 0 ) {
           pw.format(" note=\"%s\"", com.replaceAll("\"", "") );

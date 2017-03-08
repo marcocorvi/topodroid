@@ -23,6 +23,10 @@ import java.util.Locale;
 import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import android.graphics.RectF;
@@ -53,6 +57,16 @@ class DrawingSvg
         TDLog.Error( "SVG grid io-exception " + e.getMessage() );
       }
     }
+  }
+
+  static private String pathToColor( DrawingPath path )
+  {
+    int color = path.color();
+    int red = ( color >> 16 ) & 0xff;
+    int grn = ( color >>  8 ) & 0xff;
+    int blu = ( color       ) & 0xff;
+    if ( red > 0xcc && grn > 0xcc && blu > 0xcc ) return "#cccccc"; // cut-off white
+    return String.format( "#%02x%02x%02x", red, grn, blu );
   }
 
   static void write( BufferedWriter out, DistoXNum num, DrawingCommandManager plot, long type )
@@ -192,75 +206,52 @@ class DrawingSvg
         for ( ICanvasCommand cmd : plot.getCommands() ) {
           if ( cmd.commandType() != 0 ) continue;
           DrawingPath path = (DrawingPath)cmd;
-          int color = path.color();
-          int red = ( color >> 16 ) & 0xff;
-          int grn = ( color >>  8 ) & 0xff;
-          int blu = ( color       ) & 0xff;
-          String color_str = String.format( "#%02x%02x%02x", red, grn, blu );
-          if ( red > 0xcc && grn > 0xcc && blu > 0xcc ) color_str = "#cccccc"; // cut-off white
+          String color_str = pathToColor( path );
           StringWriter sw5 = new StringWriter();
           PrintWriter pw5  = new PrintWriter(sw5);
           if ( path.mType == DrawingPath.DRAWING_PATH_STATION ) {
-            DrawingStationPath st = (DrawingStationPath)path;
-            pw5.format("<text font-size=\"20\" font=\"sans-serif\" fill=\"black\" stroke=\"none\" text-amchor=\"middle\"");
-            pw5.format(Locale.US, " x=\"%.2f\" y=\"%.2f\">", xoff + st.cx, yoff + st.cy );
-            pw5.format("%s</text>\n", st.mName );
+            toSvg( pw5, (DrawingStationPath)path, xoff, yoff );
           } else if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
-            DrawingLinePath line = (DrawingLinePath) path;
-            String th_name = BrushManager.mLineLib.getSymbolThName( line.mLineType ); 
-            pw5.format("  <path stroke=\"%s\" stroke-width=\"2\" fill=\"none\" class=\"%s\"", color_str, th_name );
-            if ( th_name.equals( "arrow" ) ) pw5.format(" marker-end=\"url(#Triangle)\"");
-            else if ( th_name.equals( "section" ) ) pw5.format(" stroke-dasharray=\"5 3 \"");
-            else if ( th_name.equals( "fault" ) ) pw5.format(" stroke-dasharray=\"8 4 \"");
-            else if ( th_name.equals( "floor-meander" ) ) pw5.format(" stroke-dasharray=\"6 2 \"");
-            else if ( th_name.equals( "ceiling-meander" ) ) pw5.format(" stroke-dasharray=\"6 2 \"");
-            pw5.format(" d=\"");
-            LinePoint p = line.mFirst;
-            pw5.format(Locale.US, "M %.2f %.2f", xoff+p.mX, yoff+p.mY );
-            for ( p = p.mNext; p != null; p = p.mNext ) { 
-              pw5.format(Locale.US, " L %.2f %.2f", xoff+p.mX, yoff+p.mY );
-            }
-            pw5.format("\" />\n");
+            toSvg( pw5, (DrawingLinePath)path, color_str, xoff, yoff );
           } else if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
-            DrawingAreaPath area = (DrawingAreaPath) path;
-            pw5.format("  <path stroke=\"black\" stroke-width=\"1\" fill=\"%s\" fill-opacity=\"0.5\" d=\"", color_str );
-            LinePoint p = area.mFirst;
-            pw5.format(Locale.US, "M %.2f %.2f", xoff+p.mX, yoff+p.mY );
-            for ( p = p.mNext; p != null; p = p.mNext ) { 
-              pw5.format(Locale.US, " L %.2f %.2f", xoff+p.mX, yoff+p.mY );
-            }
-            pw5.format(" Z\" />\n");
+            toSvg( pw5, (DrawingAreaPath) path, color_str, xoff, yoff );
           } else if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
-            // FIXME point scale factor is 0.3
-            DrawingPointPath point = (DrawingPointPath) path;
-            int idx = point.mPointType;
-            String name = BrushManager.mPointLib.getSymbolThName( idx );
-            pw5.format("<!-- point %s -->\n", name );
-            if ( name.equals("label") ) {
-              DrawingLabelPath label = (DrawingLabelPath)point;
-              pw5.format(Locale.US, "<text x=\"%.2f\" y=\"%.2f\" ", xoff+point.cx, yoff+point.cy );
-              pw5.format(" style=\"fill:black;stroke:black;stroke-width:0.3\">%s</text>\n", label.mText );
-            // } else if ( name.equals("continuation") ) {
-            //   pw5.format(Locale.US, "<text x=\"%.2f\" y=\"%.2f\" ", xoff+point.cx, yoff+point.cy );
-            //   pw5.format(" style=\"fill:none;stroke:black;stroke-width:0.3\">\?</text>\n" );
-            // } else if ( name.equals("danger") ) {
-            //   pw5.format(Locale.US, "<text x=\"%.2f\" y=\"%.2f\" ", xoff+point.cx, yoff+point.cy );
-            //   pw5.format(" style=\"fill:none;stroke:red;stroke-width:0.3\">!</text>\n" );
+            DrawingPointPath point = (DrawingPointPath)path;
+            if ( point.mPointType == BrushManager.mPointLib.mPointSectionIndex ) {
+              float xx = xoff+point.cx;
+              float yy = yoff+point.cy;
+              pw5.format(Locale.US, "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"3\" ", xx, yy );
+              pw5.format(" style=\"fill:grey;stroke:black;stroke-width:0.3\" />\n");
+
+              // pw5.format(Locale.US, "<g transform=\"translate(%.2f,%.2f)\" >\n", xx, yy );
+              // pw5.format(" style=\"fill:none;stroke:%s;stroke-width:0.1\" >\n", color_str );
+              // Log.v("DistoX", "Section point <" + point.mOptions + "> " + point.cx + " " + point.cy );
+              // option: -scrap survey-xx#
+              String scrapfile = point.mOptions.substring( 7 ) + ".tdr";
+              // TODO open file survey-xx#.tdr and convert it to svg
+              tdrToSvg( pw5, scrapfile, xx, yy, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
+              // pw5.format("</g>\n");
             } else {
-              SymbolPoint sp = (SymbolPoint)BrushManager.mPointLib.getSymbolByIndex( idx );
-              if ( sp != null ) {
-                pw5.format(Locale.US, "<g transform=\"translate(%.2f,%.2f),scale(10),rotate(%.2f)\" \n", 
-                  xoff+point.cx, yoff+point.cy, point.mOrientation );
-                pw5.format(" style=\"fill:none;stroke:%s;stroke-width:0.1\" >\n", color_str );
-                pw5.format("%s\n", sp.mSvg );
-                pw5.format("</g>\n");
-              } else {
-                pw5.format(Locale.US, "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"10\" ", xoff+point.cx, yoff+point.cy );
-                pw5.format(" style=\"fill:none;stroke:black;stroke-width:0.1\" />\n");
-              }
+              toSvg( pw5, point, color_str, xoff, yoff );
             }
           }
           out.write( sw5.getBuffer().toString() );
+          out.flush();
+        }
+        // stations
+        StringWriter sw6 = new StringWriter();
+        PrintWriter pw6  = new PrintWriter(sw6);
+        if ( TDSetting.mAutoStations ) {
+          for ( DrawingStationName name : plot.getStations() ) { // auto-stations
+            toSvg( pw6, name, xoff, yoff );
+          }
+          out.write( sw6.getBuffer().toString() );
+          out.flush();
+        } else {
+          for ( DrawingStationPath st_path : plot.getUserStations() ) { // user-chosen
+            toSvg( pw6, st_path, xoff, yoff );
+          }
+          out.write( sw6.getBuffer().toString() );
           out.flush();
         }
       }
@@ -275,6 +266,129 @@ class DrawingSvg
     } catch ( IOException e ) {
       // FIXME
       TDLog.Error( "SVG io-exception " + e.getMessage() );
+    }
+  }
+
+  static private void toSvg( PrintWriter pw, DrawingStationName name, float xoff, float yoff )
+  {
+    pw.format("<text font-size=\"20\" font=\"sans-serif\" fill=\"violet\" stroke=\"none\" text-amchor=\"middle\"");
+    pw.format(Locale.US, " x=\"%.2f\" y=\"%.2f\">", xoff + name.cx, yoff + name.cy );
+    pw.format("%s</text>\n", name.mName );
+  }
+
+  static private void toSvg( PrintWriter pw, DrawingStationPath st, float xoff, float yoff )
+  {
+    pw.format("<text font-size=\"20\" font=\"sans-serif\" fill=\"black\" stroke=\"none\" text-amchor=\"middle\"");
+    pw.format(Locale.US, " x=\"%.2f\" y=\"%.2f\">", xoff + st.cx, yoff + st.cy );
+    pw.format("%s</text>\n", st.mName );
+  }
+
+  static private void toSvg( PrintWriter pw, DrawingLinePath line, String color, float xoff, float yoff ) 
+  {
+    String th_name = BrushManager.mLineLib.getSymbolThName( line.mLineType ); 
+    pw.format("  <path stroke=\"%s\" stroke-width=\"2\" fill=\"none\" class=\"%s\"", color, th_name );
+    if ( th_name.equals( "arrow" ) ) pw.format(" marker-end=\"url(#Triangle)\"");
+    else if ( th_name.equals( "section" ) ) pw.format(" stroke-dasharray=\"5 3 \"");
+    else if ( th_name.equals( "fault" ) ) pw.format(" stroke-dasharray=\"8 4 \"");
+    else if ( th_name.equals( "floor-meander" ) ) pw.format(" stroke-dasharray=\"6 2 \"");
+    else if ( th_name.equals( "ceiling-meander" ) ) pw.format(" stroke-dasharray=\"6 2 \"");
+    pw.format(" d=\"");
+    LinePoint p = line.mFirst;
+    pw.format(Locale.US, "M %.2f %.2f", xoff+p.mX, yoff+p.mY );
+    for ( p = p.mNext; p != null; p = p.mNext ) { 
+      pw.format(Locale.US, " L %.2f %.2f", xoff+p.mX, yoff+p.mY );
+    }
+    pw.format("\" />\n");
+  }
+
+  static private void toSvg( PrintWriter pw, DrawingAreaPath area, String color, float xoff, float yoff )
+  {
+    pw.format("  <path stroke=\"black\" stroke-width=\"1\" fill=\"%s\" fill-opacity=\"0.5\" d=\"", color );
+    LinePoint p = area.mFirst;
+    pw.format(Locale.US, "M %.2f %.2f", xoff+p.mX, yoff+p.mY );
+    for ( p = p.mNext; p != null; p = p.mNext ) { 
+      pw.format(Locale.US, " L %.2f %.2f", xoff+p.mX, yoff+p.mY );
+    }
+    pw.format(" Z\" />\n");
+  }
+
+  static private void toSvg( PrintWriter pw, DrawingPointPath point, String color, float xoff, float yoff )
+  {
+    // FIXME point scale factor is 0.3
+    int idx = point.mPointType;
+    String name = BrushManager.mPointLib.getSymbolThName( idx );
+    pw.format("<!-- point %s -->\n", name );
+    if ( name.equals("label") ) {
+      DrawingLabelPath label = (DrawingLabelPath)point;
+      pw.format(Locale.US, "<text x=\"%.2f\" y=\"%.2f\" ", xoff+point.cx, yoff+point.cy );
+      pw.format(" style=\"fill:black;stroke:black;stroke-width:0.3\">%s</text>\n", label.mText );
+    // } else if ( name.equals("continuation") ) {
+    //   pw.format(Locale.US, "<text x=\"%.2f\" y=\"%.2f\" ", xoff+point.cx, yoff+point.cy );
+    //   pw.format(" style=\"fill:none;stroke:black;stroke-width:0.3\">\?</text>\n" );
+    // } else if ( name.equals("danger") ) {
+    //   pw.format(Locale.US, "<text x=\"%.2f\" y=\"%.2f\" ", xoff+point.cx, yoff+point.cy );
+    //   pw.format(" style=\"fill:none;stroke:red;stroke-width:0.3\">!</text>\n" );
+    } else if ( idx == BrushManager.mPointLib.mPointSectionIndex ) {
+      /* nothing */
+    } else {
+      SymbolPoint sp = (SymbolPoint)BrushManager.mPointLib.getSymbolByIndex( idx );
+      if ( sp != null ) {
+        pw.format(Locale.US, "<g transform=\"translate(%.2f,%.2f),scale(10),rotate(%.2f)\" \n", 
+          xoff+point.cx, yoff+point.cy, point.mOrientation );
+        pw.format(" style=\"fill:none;stroke:%s;stroke-width:0.1\" >\n", color );
+        pw.format("%s\n", sp.mSvg );
+        pw.format("</g>\n");
+      } else {
+        pw.format(Locale.US, "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"10\" ", xoff+point.cx, yoff+point.cy );
+        pw.format(" style=\"fill:none;stroke:black;stroke-width:0.1\" />\n");
+      }
+    }
+  }
+
+  static private void tdrToSvg( PrintWriter pw, String scrapfile, float dx, float dy, float xoff, float yoff )
+  {
+    try {
+      FileInputStream fis = new FileInputStream( TDPath.getTdrFile( scrapfile ) );
+      BufferedInputStream bfis = new BufferedInputStream( fis );
+      DataInputStream dis = new DataInputStream( bfis );
+      int version = DrawingIO.skipTdrHeader( dis );
+      // Log.v("DistoX", "tdr to svg delta " + dx + " " + dy + " Offset " + xoff + " " + yoff );
+
+      DrawingPath path = null;
+      boolean done = false;
+      while ( ! done ) {
+        int what = dis.read();
+        switch ( what ) {
+          case 'P':
+            path = DrawingPointPath.loadDataStream( version, dis, dx, dy, null );
+            toSvg( pw, (DrawingPointPath)path, pathToColor(path), xoff, yoff );
+            break;
+          case 'T':
+            path = DrawingLabelPath.loadDataStream( version, dis, dx, dy );
+            toSvg( pw, (DrawingLabelPath)path, pathToColor(path), xoff, yoff );
+            break;
+          case 'L':
+            path = DrawingLinePath.loadDataStream( version, dis, dx, dy, null );
+            toSvg( pw, (DrawingLinePath)path, pathToColor(path), xoff, yoff );
+            break;
+          case 'A':
+            path = DrawingAreaPath.loadDataStream( version, dis, dx, dy, null );
+            toSvg( pw, (DrawingAreaPath)path, pathToColor(path), xoff, yoff );
+            break;
+          case 'U':
+            path = DrawingStationPath.loadDataStream( version, dis ); // consume DrawingStationName data
+            break;
+          case 'X':
+            path = DrawingStationName.loadDataStream( version, dis ); // consume DrawingStationName data
+            break;
+          case 'F':
+            done = true;
+            break;
+        }
+      }
+    } catch ( FileNotFoundException e ) { // this is OK
+    } catch ( IOException e ) {
+      e.printStackTrace();
     }
   }
 

@@ -151,7 +151,9 @@ Sketches can be exported as 2D DXF files with layers for each point, line and ar
 <u>Note</u>. Sketch DXF export has been verified with VariCAD; compatibility with AutoCAD is not guaranteed.<br><p>
 
 Settings:<ul style="margin-top=0">
-<li>scale of the DXF</li>
+<li><u>scale</u> of the DXF</li>
+<li><u>Section-point</u>: if section points are automatically added to section lines,
+the section drawing is inserted in the export, at the "section" point</li>
 <!-- li>AutoCAD version (6 or 12)</li -->
 </ul><p>
 
@@ -160,13 +162,17 @@ Sketches can be exported as SVG files.<br><p>
 
 Settings:<ul style="margin-top=0">
 <li>grid added to the export (cell size in the current grid units).</li>
+<li><u>Section-point</u>: if section points are automatically added to section lines,
+the section drawing is inserted in the export, at the "section" point</li>
+<li><u>auto-stations</u>: if enabled all stations are included in the export,
+otherwise only the user-chosen stations are included</li>
 </ul><p>
 
 <b>PNG</b> (.png)<br>
 Image file in PNG format is used only to export sketches.<br><p>
 
 Settings:<ul style="margin-top=0">
-<li>image resolution (1 means that 1 m = 40 pixels).
+<li>image resolution (1 means that 1 m = 40 pixels). The PNG resolution that fits therion th2 export is 5.0.
 If the system does not have enough memory to create the image at the set resolution, TopoDroid uses a smaller resolution until the export succeeds (or it gets so small that the program gives up trying).</li>
 <li>background color. Enter three numbers between 0 (black) and 255 (saturated) for red, green, and blue, respectively.</li>
 </ul><p>
