@@ -650,6 +650,7 @@
     <!-- UNUSED string name="help_clear">Die Auswahl löschen</string -->
     <string name="help_eraser">Löschmodus</string>
     <string name="help_erase_mode">Löschmodus</string>
+    <!-- TODO string name="help_erase_size">Eraser size [S/M/L]</string -->
     <string name="help_previous">Vorheriger Punkt</string>
     <string name="help_next">Nächster Punkt</string>
     <string name="help_recover">Die Skizze wiederherstellen</string>

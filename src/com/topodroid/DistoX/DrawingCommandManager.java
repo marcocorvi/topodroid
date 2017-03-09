@@ -401,6 +401,32 @@ public class DrawingCommandManager
     mCurrentStack.add( cmd );
   }
 
+  private boolean hasEraser = false;
+  private float mEraserX = 0; // canvas coords
+  private float mEraserY = 0;
+  private float mEraserR = 0;
+
+  // set the eraser circle
+  // x, y canvas coords
+  void setEraser( float x, float y, float r )
+  {
+    mEraserX = x;
+    mEraserY = y;
+    mEraserR = r;
+    hasEraser = true;
+  }
+
+  void endEraser() { hasEraser = false; }
+
+  // called only if hasEraser is true
+  private void drawEraser( Canvas canvas )
+  {
+    Path path = new Path();
+    path.addCircle( mEraserX, mEraserY, mEraserR, Path.Direction.CCW );
+    // path.transform( mMatrix );
+    canvas.drawPath( path, BrushManager.highlightPaint2 );
+  }
+
   /** 
    * @return result code:
    *    0  no erasing
@@ -416,11 +442,11 @@ public class DrawingCommandManager
    * y    Y scene
    * zoom canvas display zoom
    */
-  int eraseAt( float x, float y, float zoom, EraseCommand eraseCmd, int erase_mode ) 
+  int eraseAt( float x, float y, float zoom, EraseCommand eraseCmd, int erase_mode, float erase_size ) 
   {
     SelectionSet sel = new SelectionSet();
-    float radius = TDSetting.mCloseCutoff + TDSetting.mEraseness / zoom;
-    mSelection.selectAt( sel, x, y, radius, false, false, false );
+    float erase_radius = TDSetting.mCloseCutoff + erase_size / zoom;
+    mSelection.selectAt( sel, x, y, erase_radius, false, false, false );
     int ret = 0;
     if ( sel.size() > 0 ) {
       synchronized( mCurrentStack ) {
@@ -1471,6 +1497,10 @@ public class DrawingCommandManager
     synchronized( mGridStack1 ) {
       if ( mFirstReference != null )  mFirstReference.draw( canvas, mMatrix, mScale, null );
       if ( mSecondReference != null ) mSecondReference.draw( canvas, mMatrix, mScale, null );
+    }
+
+    if ( hasEraser ) {
+      drawEraser( canvas );
     }
   }
 

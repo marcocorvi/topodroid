@@ -632,6 +632,7 @@
     <!-- UNUSED string name="help_clear">Pulisci selezione</string -->
     <string name="help_eraser">Modalità cancella</string>
     <!-- TODO string name="help_erase_mode">Eraser type</string -->
+    <!-- TODO string name="help_erase_size">Eraser size [S/M/L]</string -->
     <string name="help_previous">Precedente oggetto nella selezione</string>
     <string name="help_next">Prossimo oggetto nella selezione</string>
     <string name="help_recover">Recupera disegno dal backup</string>

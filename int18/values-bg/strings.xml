@@ -634,6 +634,7 @@
     <!-- string name="help_clear">Clear selection</string -->
     <string name="help_eraser">Изтриване на елемент</string>
     <!-- TODO string name="help_erase_mode">Eraser type</string -->
+    <!-- TODO string name="help_erase_size">Eraser size [S/M/L]</string -->
     <string name="help_previous">Предишен избран елемент</string>
     <string name="help_next">Следващ избран елемент</string>
     <string name="help_recover">Възстановяване на скица от резервно копие</string>

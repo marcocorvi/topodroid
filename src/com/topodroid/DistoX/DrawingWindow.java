@@ -102,18 +102,21 @@ public class DrawingWindow extends ItemDrawer
   private static int IC_JOIN      = 15;
   private static int IC_BORDER_NO = 18;
   private static int IC_ERASE_ALL = 19; 
+  private static int IC_MEDIUM    = 20;
 
-  private static int IC_MENU          = 19+1;
-  private static int IC_EXTEND        = 19+2;
-  private static int IC_JOIN_NO       = 19+3;
-  private static int IC_CONTINUE_CONT = 19+4;     // index of continue icon
-  private static int IC_CONTINUE_JOIN = 19+5;     // index of continue icon
-  private static int IC_ADD           = 19+6;
-  private static int IC_BORDER_OK     = 19+7;
-  private static int IC_BORDER_BOX    = 19+8; 
-  private static int IC_ERASE_POINT   = 19+9; 
-  private static int IC_ERASE_LINE    = 19+10; 
-  private static int IC_ERASE_AREA    = 19+11; 
+  private static int IC_MENU          = 20+1;
+  private static int IC_EXTEND        = 20+2;
+  private static int IC_JOIN_NO       = 20+3;
+  private static int IC_CONTINUE_CONT = 20+4;     // index of continue icon
+  private static int IC_CONTINUE_JOIN = 20+5;     // index of continue icon
+  private static int IC_ADD           = 20+6;
+  private static int IC_BORDER_OK     = 20+7;
+  private static int IC_BORDER_BOX    = 20+8; 
+  private static int IC_ERASE_POINT   = 20+9; 
+  private static int IC_ERASE_LINE    = 20+10; 
+  private static int IC_ERASE_AREA    = 20+11; 
+  private static int IC_SMALL         = 20+12;
+  private static int IC_LARGE         = 20+13;
 
   private static int BTN_DOWNLOAD = 3;  // index of mButton1 download button
   private static int BTN_BLUETOOTH = 4; // index of mButton1 bluetooth button
@@ -126,6 +129,14 @@ public class DrawingWindow extends ItemDrawer
   private static int BTN_BORDER = 8;
 
   private static int BTN_ERASE_MODE = 5; // erase-mode button
+  private static int BTN_ERASE_SIZE = 6; // erase-size button
+
+  private final int ERASE_SMALL  = 0;
+  private final int ERASE_MEDIUM = 1;
+  private final int ERASE_LARGE  = 2;
+  private final int ERASE_MAx    = 3;
+  private int mEraseScale = 0;
+  private float mEraseSize = 1.0f * TDSetting.mEraseness;
 
   // protected static int mEditRadius = 0; 
   private int mDoEditRange = 0; // 0 no, 1 smooth, 2 boxed
@@ -152,18 +163,21 @@ public class DrawingWindow extends ItemDrawer
                         R.drawable.iz_note,          
                         R.drawable.iz_delete,        // 17
                         R.drawable.iz_range_no,      // 18
-                        R.drawable.iz_erase_all,     // 19 ERASE Nr 3
-                        R.drawable.iz_menu,          // 19+1
-                        R.drawable.iz_extended,      // 19+2
-                        R.drawable.iz_join_no,       // 19+3
-                        R.drawable.iz_continue_cont, // 19+4
-                        R.drawable.iz_continue_join, // 19+5
-                        R.drawable.iz_plus,          // 19+6
-                        R.drawable.iz_range_ok,      // 19+7
-                        R.drawable.iz_range_box,     // 19+8
-                        R.drawable.iz_erase_point,   // 19+9
-                        R.drawable.iz_erase_line,    // 19+10
-                        R.drawable.iz_erase_area     // 19+11
+                        R.drawable.iz_erase_all,     // 19 ERASE Nr 6
+                        R.drawable.iz_medium,        // 20
+                        R.drawable.iz_menu,          // 20+1
+                        R.drawable.iz_extended,      // 20+2
+                        R.drawable.iz_join_no,       // 20+3
+                        R.drawable.iz_continue_cont, // 20+4
+                        R.drawable.iz_continue_join, // 20+5
+                        R.drawable.iz_plus,          // 20+6
+                        R.drawable.iz_range_ok,      // 20+7
+                        R.drawable.iz_range_box,     // 20+8
+                        R.drawable.iz_erase_point,   // 20+9
+                        R.drawable.iz_erase_line,    // 20+10
+                        R.drawable.iz_erase_area,    // 20+11
+                        R.drawable.iz_small,         // 20+12
+                        R.drawable.iz_large,         // 20+13
                       };
   private static int menus[] = {
                         R.string.menu_switch,
@@ -203,7 +217,8 @@ public class DrawingWindow extends ItemDrawer
                         R.string.help_note_plot,
                         R.string.help_delete_item,
                         R.string.help_range,
-                        R.string.help_erase_mode
+                        R.string.help_erase_mode,
+                        R.string.help_erase_size
                       };
   private static int help_menus[] = {
                         R.string.help_plot_switch,
@@ -411,7 +426,7 @@ public class DrawingWindow extends ItemDrawer
   private int mNrButton1 = 9;          // main-primary
   private int mNrButton2 = 7;          // draw
   private int mNrButton3 = 9;          // edit
-  private int mNrButton5 = 6;          // erase
+  private int mNrButton5 = 7;          // erase
   private HorizontalButtonView mButtonView1;
   private HorizontalButtonView mButtonView2;
   private HorizontalButtonView mButtonView3;
@@ -443,6 +458,9 @@ public class DrawingWindow extends ItemDrawer
   private BitmapDrawable mBMerasePoint;
   private BitmapDrawable mBMeraseLine;
   private BitmapDrawable mBMeraseArea;
+  private BitmapDrawable mBMsmall;
+  private BitmapDrawable mBMmedium;
+  private BitmapDrawable mBMlarge;
   private Bitmap mBMdial;
 
   HorizontalListView mListView;
@@ -1027,6 +1045,24 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  private void setButtonEraseSize( )
+  {
+    mEraseScale = ( mEraseScale + 1 ) % ERASE_MAX;
+    switch ( mEraseScale ) {
+      case 0:
+        mEraseSize = 0.5f * TDSetting.mEraseness;
+        mButton5[ BTN_ERASE_SIZE ].setBackgroundDrawable( mBMsmall );
+        break;
+      case 1:
+        mEraseSize = 1.0f * TDSetting.mEraseness;
+        mButton5[ BTN_ERASE_SIZE ].setBackgroundDrawable( mBMmedium );
+        break;
+      case 2:
+        mEraseSize = 2.0f * TDSetting.mEraseness;
+        mButton5[ BTN_ERASE_SIZE ].setBackgroundDrawable( mBMlarge );
+        break;
+    }
+  }
 
   // this method is a callback to let other objects tell the activity to use zooms or not
   private void switchZoomCtrl( int ctrl )
@@ -1213,6 +1249,11 @@ public class DrawingWindow extends ItemDrawer
     mBMeraseArea  = MyButton.getButtonBackground( mApp, res, izons[IC_ERASE_AREA] );
     setButtonEraseMode( mEraseMode );
 
+    mBMsmall  = MyButton.getButtonBackground( mApp, res, izons[IC_SMALL] );
+    mBMmedium = MyButton.getButtonBackground( mApp, res, izons[IC_MEDIUM] );
+    mBMlarge  = MyButton.getButtonBackground( mApp, res, izons[IC_LARGE] );
+    setButtonEraseSize();
+
     mButtonView1 = new HorizontalButtonView( mButton1 );
     mButtonView2 = new HorizontalButtonView( mButton2 );
     mButtonView3 = new HorizontalButtonView( mButton3 );
@@ -1281,6 +1322,7 @@ public class DrawingWindow extends ItemDrawer
     // HOVER
     mMenu.setOnItemClickListener( this );
 
+    mEraseScale = 0;
     makeButtons( );
 
     if ( ! TDSetting.mLevelOverNormal ) {
@@ -1802,7 +1844,7 @@ public class DrawingWindow extends ItemDrawer
 
     private void doEraseAt( float x_scene, float y_scene )
     {
-      int ret = mDrawingSurface.eraseAt( x_scene, y_scene, mZoom, mEraseCommand, mEraseMode );
+      int ret = mDrawingSurface.eraseAt( x_scene, y_scene, mZoom, mEraseCommand, mEraseMode, mEraseSize );
       modified();
     }
 
@@ -2074,6 +2116,8 @@ public class DrawingWindow extends ItemDrawer
 
       // ---------------------------------------- DOWN
       if (action == MotionEvent.ACTION_DOWN) {
+        mDrawingSurface.endEraser();
+
         // TDLog.Log( TDLog.LOG_PLOT, "DOWN at X " + x_canvas + " [" +mBorderInnerLeft + " " + mBorderInnerRight + "] Y " 
         //                                          + y_canvas + " / " + mBorderBottom );
         if ( y_canvas > mBorderBottom ) {
@@ -2146,6 +2190,7 @@ public class DrawingWindow extends ItemDrawer
         } else if ( mMode == MODE_ERASE ) {
           // Log.v("DistoX", "Erase at " + x_scene + " " + y_scene );
           mEraseCommand =  new EraseCommand();
+          mDrawingSurface.setEraser( x_canvas, y_canvas, mEraseSize );
           doEraseAt( x_scene, y_scene );
         } else if ( mMode == MODE_MOVE ) {
           setTheTitle( );
@@ -2202,6 +2247,7 @@ public class DrawingWindow extends ItemDrawer
             mStartY = y_scene;
             modified();
           } else if ( mMode == MODE_ERASE ) {
+            mDrawingSurface.setEraser( x_canvas, y_canvas, mEraseSize );
             doEraseAt( x_scene, y_scene );
           }
           if ( save ) { // FIXME-000
@@ -2558,6 +2604,7 @@ public class DrawingWindow extends ItemDrawer
             }
             mShiftMove = false;
           } else if ( mMode == MODE_ERASE ) {
+            mDrawingSurface.endEraser();
             if ( mEraseCommand != null && mEraseCommand.size() > 0 ) {
               mEraseCommand.completeCommand();
               mDrawingSurface.addEraseCommand( mEraseCommand );
@@ -3552,8 +3599,9 @@ public class DrawingWindow extends ItemDrawer
             break;
         }
       } else if ( b == mButton5[k5++] ) { // ERASE MODE
-        // pulldown menu to select erase mode
-        makePopupErase( b );
+        makePopupErase( b ); // pulldown menu to select erase mode
+      } else if ( b == mButton5[k5++] ) { // ERASE SIZE
+        setButtonEraseSize(); // toggle erase size
       }
     }
 

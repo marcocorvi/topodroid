@@ -632,6 +632,7 @@
     <!-- UNUSED string name="help_clear">Очистить выбор</string -->
     <string name="help_eraser">Режим стирания</string>
     <string name="help_erase_mode">Тип стираемых элементов</string>
+    <!-- TODO string name="help_erase_size">Eraser size [S/M/L]</string -->
     <string name="help_previous">Предыдущий выбранный элемент</string>
     <string name="help_next">Следующий элемент в выборке</string>
     <string name="help_recover">Восстановить абрис из Бекапа</string>

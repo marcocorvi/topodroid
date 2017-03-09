@@ -237,8 +237,11 @@ public class DrawingSurface extends SurfaceView
   void reduceLine( DrawingLinePath line ) { commandManager.reduceLine( line ); }
   void closeLine( DrawingLinePath line ) { commandManager.closeLine( line ); }
 
-  int eraseAt( float x, float y, float zoom, EraseCommand cmd, int erase_mode ) 
-  { return commandManager.eraseAt( x, y, zoom, cmd, erase_mode ); }
+  void endEraser() { commandManager.endEraser(); }
+  void setEraser( float x, float y, float r ) { commandManager.setEraser(x, y, r); } // canvas x,y, r
+
+  int eraseAt( float x, float y, float zoom, EraseCommand cmd, int erase_mode, float erase_size ) 
+  { return commandManager.eraseAt( x, y, zoom, cmd, erase_mode, erase_size ); }
   
   void addEraseCommand( EraseCommand cmd )
   {

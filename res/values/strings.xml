@@ -635,6 +635,7 @@
     <!-- UNUSED string name="help_clear">Clear selection</string -->
     <string name="help_eraser">Erase mode</string>
     <string name="help_erase_mode">Eraser type</string>
+    <string name="help_erase_size">Eraser size [S/M/L]</string>
     <string name="help_previous">Previous item in the selection</string>
     <string name="help_next">Next item in the selection</string>
     <string name="help_recover">Reload sketch from backup</string>
