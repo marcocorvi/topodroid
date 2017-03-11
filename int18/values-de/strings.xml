@@ -650,7 +650,7 @@
     <!-- UNUSED string name="help_clear">Die Auswahl löschen</string -->
     <string name="help_eraser">Löschmodus</string>
     <string name="help_erase_mode">Löschmodus</string>
-    <!-- TODO string name="help_erase_size">Eraser size [S/M/L]</string -->
+    <string name="help_erase_size">Löschgröße [S/M/L]</string>
     <string name="help_previous">Vorheriger Punkt</string>
     <string name="help_next">Nächster Punkt</string>
     <string name="help_recover">Die Skizze wiederherstellen</string>
@@ -705,7 +705,7 @@
 
 <!-- TITLES -->
     <string name="title_azimut">Seitenriss-Azimut</string>
-    <!-- TODO string name="title_audio">Audio comment</string -->
+    <string name="title_audio">Audio-Kommentar</string>
     <string name="title_calib">Kalibrierung</string>
     <string name="title_coverage">Kalibrierungsdaten</string>
     <string name="title_coeff">Kalibrierungs-Koeffizienten</string>
