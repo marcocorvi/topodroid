@@ -25,7 +25,7 @@
     <!-- UNUSED string name="memory_data">DistoX дані</string -->
 
     <string name="thp_user">користувацький</string>
-    <string name="thp_label">лейбл</string>
+    <string name="thp_label">підпис</string>
     <!-- UNUSED string name="thp_danger">небезпека</string -->
     <string name="thl_user">користувацький</string>
     <string name="thl_wall">стіна</string>
@@ -120,7 +120,7 @@
     <string name="splay_at_to">Л:П:В:Н на наступному пікеті</string>
 
     <string name="few_data">Недостатньо даних</string>
-    <string name="few_iter">Не вдалося виконати ітерацію</string>
+    <string name="few_iter">Помилка: Недостатньо ітерацій</string>
     <string name="few_groups">Недостатньо даних з номером групи</string>
     <!-- UNUSED string name="few_plots">Недостатньо абрисов</string -->
     <string name="few_calibs">Недостатньо каліб. замірів</string>
@@ -203,7 +203,7 @@
     <string name="in">внутрішній</string>
     <!-- UNUSED string name="none">none</string -->
     <!-- UNUSED string name="barrier_add">Приховати нитку ходу після цього пікету?</string -->
-    <!-- TODO string name="hide_from">Hide from</string -->
+    <string name="hide_from">Приховати від</string>
     <string name="barrier_del">Показати нитку ходу після цього пікету?</string>
     <!-- UNUSED string name="hidden_add">Приховати нитку ходу до цього пікету</string -->
     <string name="hidden_del">Показати нитку ходу до цього пікету</string>
@@ -239,8 +239,8 @@
     <string name="no_thmanager">ThManager не встановлений</string>
     <string name="no_db_viewer">Додаток перегляду баз даних не найдено</string>
     <string name="no_undelete">Нічого відновлювати</string>
-    <!-- FIXME string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Азимут %4$.1f"</string -->
-    <!-- FIXME string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Кут %4$.1f"</string -->
+    <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Азимут %5$.1f"</string>
+    <string name="format_measure_profile">>D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Нахил %5$.1f"</string>
 
     <!-- OK string name="menu_3d">3D</string -->
     <string name="menu_about">Опис</string>
@@ -287,10 +287,10 @@
     <string name="popup_curve_pt">Сгладити сегмент</string>
     <string name="popup_remove_pt">Видалити точку</string>
 
-    <!-- TODO string name="popup_erase_all">Erase all</string -->
-    <!-- TODO string name="popup_erase_point">Erase points</string -->
-    <!-- TODO string name="popup_erase_line">Erase lines</string -->
-    <!-- TODO string name="popup_erase_area">Erase areas</string -->
+    <string name="popup_erase_all">Стерти все</string>
+    <string name="popup_erase_point">Стерти точки</string>
+    <string name="popup_erase_line">Стерти лінії</string>
+    <string name="popup_erase_area">Стерти області</string>
 
     <string name="connected_none">Не з\'єднано</string>
     <string name="connected_already">Уже з\'єднано</string>
@@ -312,7 +312,7 @@
     <!-- UNUSED string name="picture_no_station">Вимагається номер пікета</string -->
     <string name="plot_delete">Видалити абрис ?</string>
     <string name="item_delete">Видалити пункт %1$s ?</string>
-    <!-- TODO string name="splay_delete">Delete splay %1$s ?</string -->
+    <string name="splay_delete">Видалити бок. замір %1$s ?</string>
     <string name="plot_duplicate_name">Дублювати назву абрису</string>
     <!-- UNUSED string name="plot_name">Назва абрису</string -->
     <string name="plot_new">Новий абрис</string>
@@ -355,7 +355,7 @@
     <!-- UNUSED string name="shot_compass">азимут</string -->
     <string name="shot_delete">Видалити сегмент ?</string>
     <string name="shot_from">№ ОТ</string>
-    <string name="shot_info">Введіть дані пікета</string>
+    <string name="shot_info">Введіть дані замірів</string>
     <!-- UNUSED string name="shot_length">довжина</string -->
     <string name="shot_note">замітки</string>
     <string name="shot_not_found">Сегмент не знайдений</string>
@@ -374,7 +374,7 @@
 
     <string name="station">пікет</string>
     <string name="station_ask">Додати пікет в абрис?</string>
-    <!-- TODO string name="station_del">Remove station from sketch?</string -->
+    <string name="station_del">Видалити пікет із абриса?</string>
     <string name="station_set">Зробити пікет поточним?</string>
     <!-- UNUSED string name="station_base">пікет прив'язки</string -->
     <!-- UNUSED string name="station_next">наступний пікет</string -->
@@ -393,7 +393,7 @@
     <string name="toggle_failed">Не вдалось перемкнути DistoX</string>
     <string name="toggle_ok">Перемкнути DistoX в режим калібрування</string>
     <string name="undelete_text">Натисніть на елемент щоб відновити</string>
-    <!-- TODO string name="delete_whole_leg">Delete whole leg</string -->
+    <string name="delete_whole_leg">Видалити замір</string>
     <string name="visible_border">видима межа</string>
     <!-- UNUSED string name="vthreshold">верт. поріг</string -->
     <string name="wait_scan">Сканування: чекайте &#8230;</string>
@@ -431,7 +431,7 @@
 
     <string name="hide_blank">Пусті пікети</string>
     <string name="hide_leg">Повторні виміри</string>
-    <string name="hide_ids">ID пікетів</string>
+    <string name="hide_ids">ID замірів</string>
     <string name="hide_splay">Бокові заміри</string>
 
     <string name="plan">ПЛАН</string>
@@ -470,15 +470,15 @@
     <!-- UNUESD string name="button_direction">Азимут/кут</string -->
     <!-- UNUSED string name="button_azimuth">Азимут</string -->
     <string name="button_plot"     >Абрис</string>
-    <!-- TODO string name="button_more"    >More</string -->
-    <!-- TODO string name="button_lrud"    >Add LRUD</string -->
+    <string name="button_more"    >Більше</string>
+    <string name="button_lrud"    >Додати LRUD</string>
     <!-- OK string name="button_ok"        >OK        </string -->
     <string name="button_open"      >Відкр     </string>
     <string name="button_read"      >Зчитати   </string>
-    <!-- TODO string name="button_redo"      >Redo      </string -->
+    <string name="button_redo"      >Повторити      </string>
     <!-- UNUSED string name="button_regroup"   >Перегрупувати   </string -->
     <string name="button_dump"      >Дамп      </string>
-    <!-- TODO string name="button_replace"   >Replace   </string -->
+    <string name="button_replace"   >Заміна   </string>
     <string name="button_reset"     >Скидання     </string>
     <string name="button_left"      >ЛІВО</string>
     <string name="button_right"     >ПРАВО</string>
@@ -500,7 +500,7 @@
     <string name="mode_station">Пікети</string>
     <string name="mode_grid">Сітка</string>
     <string name="mode_fixed">Сдвиг відносно нитки</string>
-    <!-- TODO string name="mode_outline">Outline only</string -->
+    <string name="mode_outline">Тільки контур</string>
 
     <!-- UNUSED string name="remote_title">Пульт дистанційного управління</string -->
     <string name="remote_on">Лазер ВКЛ</string>
@@ -516,14 +516,14 @@
     <string name="btn_import">Імпорт</string>
     <string name="btn_install">Встановити</string>
 
-    <!-- TODO string name="symbol_archeo">Archeo</string -->
-    <!-- TODO string name="symbol_bio">Biology</string -->
-    <!-- TODO string name="symbol_geo">Geology</string -->
-    <!-- TODO string name="symbol_mine">Mining</string -->
-    <!-- TODO string name="symbol_paleo">Paleo</string -->
-    <!-- TODO string name="symbol_speleo">Speleo</string -->
+    <string name="symbol_archeo">Архео.</string>
+    <string name="symbol_bio">Біологія</string>
+    <string name="symbol_geo">Геологія</string>
+    <string name="symbol_mine">Шахти</string>
+    <string name="symbol_paleo">Палео</string>
+    <string name="symbol_speleo">Спелео</string>
 
-    <!-- TODO string name="symbol_reload">Drawing Tools</string -->
+    <string name="symbol_reload">Інструменти Малювання</string>
 
 <!-- FIXME_SKETCH_3D -->
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
@@ -573,7 +573,7 @@
     <string name="line_delete">видалити_лінію</string>
     <string name="flip_shots">Розвернути пікети</string>
 
-    <string name="menu_head">Head</string>
+    <string name="menu_head">Початок</string>
     <!-- UNUSED string name="menu_save_th2">збер th2</string -->
 <!-- END_SKETCH_3D -->
 
@@ -600,7 +600,7 @@
     <string name="help_download">Завантажити дані з DistoX</string>
     <!-- UNUSED string name="help_splay">Автоматично присвоювати номер пікета боковим замірам</string -->
     <string name="help_display">Вибрати режим відображення даних</string>
-    <string name="help_display_calib">Режим показу видалених пікетов</string>
+    <string name="help_display_calib">Показати видалені виміри</string>
     <string name="help_validate">Перевірити калібрування</string>
     <string name="help_overview">Перегляд карти</string>
     <string name="help_plot">Вікно абрисів</string>
@@ -632,9 +632,9 @@
     <string name="help_delete_item">Видалити елемент абрису</string>
     <string name="help_range">Помістити сегмент лінії</string>
     <!-- UNUSED string name="help_clear">Очистити вибір</string -->
-    <string name="help_eraser">Стерти малюнки</string>
-    <!-- TODO string name="help_erase_mode">Eraser type</string -->
-    <!-- TODO string name="help_erase_size">Eraser size [S/M/L]</string -->
+    <string name="help_eraser">Режим стирання</string>
+    <string name="help_erase_mode">Тип cтираних елементів</string>
+    <string name="help_erase_size">Розмір гумки [S/M/L]</string>
     <string name="help_previous">Попередній вибраний елемент</string>
     <string name="help_next">Наступний елемент у вибірці</string>
     <string name="help_recover">Відновити абрис из бекапу</string>
@@ -686,8 +686,8 @@
     <string name="help_refine_triangle">Уточнити поверхню вздовж довгої сторони</string>
 
 
-    <string name="title_azimut">Напрям розвідки</string>
-    <!-- TODO string name="title_audio">Audio comment</string -->
+    <string name="title_azimut">Азимут</string>
+    <string name="title_audio">Аудіо коментар</string>
     <string name="title_calib">Калібрування</string>
     <string name="title_coverage">Калібрування и розподіл даних</string>
     <string name="title_coeff">Калібрувальні коефіцієнти</string>
@@ -770,8 +770,8 @@
   <string name="pref_leg_shots_summary">Мінімальна к-сть повторюваних замірів на відрізку</string>
   <string name="pref_station_prefix_title">Експортувати префікси пікетов</string>
   <string name="pref_station_prefix_summary">Експортувати префікси пікетів для cSurvey</string>
-  <!-- TODO string name="pref_trobot_names_title">TopoRobot station names</string -->
-  <!-- TODO string name="pref_trobot_names_summary">Station names are in TopoRobot style</string -->
+  <string name="pref_trobot_names_title">Номера пікеті TopoRobot</string>
+  <string name="pref_trobot_names_summary">Номера пікетів в стилі TopoRobot</string>
   <string name="pref_ortho_lrud_title">Мін. кут бок. заміру для ЛПВН</string>
   <string name="pref_ortho_lrud_summary">Мін. кут між бок. заміром і вектором для розрахунку ЛПВН при експорті</string>
   <string name="pref_ortho_lrud_message">мін. кут між бок. заміром і вектором для розрахунку ЛПВН</string>
@@ -783,12 +783,12 @@
   <string name="pref_survex_lrud_summary">Додати ЛПВН в при експорті в формат Survex</string>
   <string name="pref_svg_grid_title">SVG сітка</string>
   <string name="pref_svg_grid_summary">Додати сітку в SVG експорт</string>
-  <!-- TODO string name="pref_svg_in_html_title">SVG in HTML</string -->
-  <!-- TODO string name="pref_svg_in_html_summary">Embed SVG export in HTML</string -->
-  <!-- TODO string name="pref_kml_stations_title">KML stations</string -->
-  <!-- TODO string name="pref_kml_stations_summary">Add stations to KML export</string -->
-  <!-- TODO string name="pref_kml_splays_title">KML splays</string -->
-  <!-- TODO string name="pref_kml_splays_summary">Add splays to KML export</string -->
+  <string name="pref_svg_in_html_title">SVG в HTML</string>
+  <string name="pref_svg_in_html_summary">Додати експорт SVG в HTML сторінку</string>
+  <string name="pref_kml_stations_title">Пікети в KML</string>
+  <string name="pref_kml_stations_summary">Додати пікети в KML експорт</string>
+  <string name="pref_kml_splays_title">Бокові заміри в KML</string>
+  <string name="pref_kml_splays_summary">Додати бокові заміри в KML експорт</string>
 
   <string name="pref_sock_type_title">Тип з\'єднання</string>
   <string name="pref_sock_type_summary">Socket створити</string>
@@ -868,9 +868,9 @@
   <string name="pref_leg_title">Допустиме рохходження повторних замірів</string>
   <string name="pref_leg_summary">Допустиме розходження в повторних вимірах між пікетами</string>
   <string name="pref_leg_message">Допустиме розходження в повторних вимірах між пікетами</string>
-  <!-- TODO string name="pref_max_shot_title">Maximum shot length</string -->
-  <!-- TODO string name="pref_max_shot_summary">Maximum length of shooting [m]</string -->
-  <!-- TODO string name="pref_max_shot_message">Shots over this length are marked as overshoot</string -->
+  <string name="pref_max_shot_title">Максимальна довжина заміра</string>
+  <string name="pref_max_shot_summary">Максимальна довжина вимірювання [м]</string>
+  <string name="pref_max_shot_message">Заміри, які перевищують це значення, будуть помічені як занадто довгі</string>
   <string name="pref_backsight_title">зворотний замір</string>
   <string name="pref_backsight_summary">Поле для введення зворотного заміра в диалозі ручного введення заміру</string>
   <string name="pref_prev_next_title">Кнопки Поперед/Наступ</string>
@@ -978,10 +978,10 @@
   <string name="pref_checkBT_summary">Вкл/Викл bluetooth</string>
   <string name="pref_checkAttached_title">Перевірка нитки хода</string>
   <string name="pref_checkAttached_summary">Перевіряти належність пікетов</string>
-  <!-- TODO string name="pref_backup_number_title">Backup number</string -->
-  <!-- TODO string name="pref_backup_number_summary">Number of sketch files backups</string -->
-  <!-- TODO string name="pref_backup_interval_title">Backup interval</string -->
-  <!-- TODO string name="pref_backup_interval_summary">Minimum interval between two backups [s]</string -->
+  <string name="pref_backup_number_title">К-сть резервних копій</string>
+  <string name="pref_backup_number_summary">К-сть резервних копій абрисів</string>
+  <string name="pref_backup_interval_title">Інтервал збереження резервних копій</string>
+  <string name="pref_backup_interval_summary">Мінімальний інтервал між двома резервними копіями [с]</string>
   <!-- UNUSED string name="pref_xtherion_areas_title">Області xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Зберігати області як в xtherion</string -->
   <string name="pref_therion_splays_title">Бокові заміри в Therion</string>
