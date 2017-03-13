@@ -3,7 +3,7 @@ name shale
 name-it scisto
 name-pt xisto
 th_name u:shale
-color 0x99ff00 0xcc
+color 0xcc9966 0xcc
 csurvey 1 48 0 3
 bitmap 40 13
   0000000000000000000000000000000000000000

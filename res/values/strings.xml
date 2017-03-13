@@ -292,6 +292,13 @@
     <string name="popup_erase_line">Erase lines</string>
     <string name="popup_erase_area">Erase areas</string>
 
+    <string name="popup_select_all">Select all</string>
+    <string name="popup_select_point">Select points</string>
+    <string name="popup_select_line">Select lines</string>
+    <string name="popup_select_area">Select areas</string>
+    <string name="popup_select_shot">Select shots</string>
+    <string name="popup_select_station">Select stations</string>
+
     <string name="connected_none">Not connected</string>
     <string name="connected_already">Already connected</string>
 

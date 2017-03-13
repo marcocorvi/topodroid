@@ -39,7 +39,7 @@ import android.util.Log;
 
 class SketchModel
 {
-  private static final float mCloseness = TDSetting.mCloseness;
+  // private static final float mCloseness = TDSetting.mSelectness;
   DistoXNum mNum;
 
   Sketch3dInfo mInfo;
@@ -562,18 +562,18 @@ class SketchModel
 
   }
 
-  public SketchTriangle selectTriangleAt( float x_scene, float y_scene, SketchTriangle tri )
+  public SketchTriangle selectTriangleAt( float x_scene, float y_scene, SketchTriangle tri, float size )
   {
     if ( tri != null ) {
       // try tri first and its ngbhs
       SketchSurface sfc = tri.surface;
-      tri = sfc.selectTriangleAt( x_scene, y_scene, mInfo, tri );
+      tri = sfc.selectTriangleAt( x_scene, y_scene, mInfo, tri, size );
       // sfc.mSelectedTriangle = tri;
     }
     if ( tri == null ) {
       for ( SketchSurface surface : mSurfaces ) {
         if ( surface.isSameShotAs( mInfo ) ) {
-          tri = surface.selectTriangleAt( x_scene, y_scene, mInfo, null );
+          tri = surface.selectTriangleAt( x_scene, y_scene, mInfo, null, size );
           // surface.mSelectedTriangle = tri;
           if ( tri != null ) return tri;
         }
@@ -582,14 +582,14 @@ class SketchModel
     return null;
   }
 
-  public SketchFixedPath selectShotAt( float x, float y ) // (x,y) scene coords, view-mode
+  public SketchFixedPath selectShotAt( float x, float y, float size ) // (x,y) scene coords, view-mode
   {
     float min_dist = SketchDef.MIN_DISTANCE;
     SketchFixedPath ret = null;
     for ( SketchFixedPath p : mFixedStack ) {
       if ( p.mType == DrawingPath.DRAWING_PATH_FIXED ) {
         float d = p.distance( x, y );
-        if ( d < mCloseness && d < min_dist ) { 
+        if ( d < size && d < min_dist ) { 
           min_dist = d;
           ret = p;
         }
@@ -598,7 +598,7 @@ class SketchModel
     return ret;
   }
 
-  public SketchLinePath selectLineAt( float x, float y, float z, int v ) // (x,y,z) world coords, view-mode
+  public SketchLinePath selectLineAt( float x, float y, float z, int v, float size ) // (x,y,z) world coords, view-mode
   {
     float min_dist = SketchDef.MIN_DISTANCE;
     SketchLinePath ret = null;
@@ -606,7 +606,7 @@ class SketchModel
       if ( p0.mType == DrawingPath.DRAWING_PATH_LINE ) {
         SketchLinePath p = (SketchLinePath)p0;
         float d = p.distance( x, y, z );
-        if ( d < mCloseness && d < min_dist ) {
+        if ( d < size && d < min_dist ) {
           min_dist = d;
           ret = p;
         }
@@ -615,13 +615,13 @@ class SketchModel
     return ret;
   }
   
-  public SketchStationName selectStationAt( float x, float y ) // (x,y) scene coords, view-mode
+  public SketchStationName selectStationAt( float x, float y, float size ) // (x,y) scene coords, view-mode
   {
     float min_dist = SketchDef.MIN_DISTANCE;
     SketchStationName ret = null;
     for ( SketchStationName st : mStations ) {
       float d = st.sceneDistance( x, y );
-      if ( d < mCloseness && d < min_dist ) { 
+      if ( d < size && d < min_dist ) { 
         min_dist = d;
         ret = st;
       }

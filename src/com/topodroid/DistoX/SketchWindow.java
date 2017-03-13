@@ -237,6 +237,8 @@ public class SketchWindow extends ItemDrawer
   private SketchModel mModel;
   // private SketchCompassSensor mCompass;
 
+  private float mSelectSize;
+
 
   // ---------------------------------------------------------------------------
   // helper private methods 
@@ -663,6 +665,8 @@ public class SketchWindow extends ItemDrawer
     mCurrentLine  = 0; // BrushManager.mLineLib.mLineWallIndex;
     mCurrentArea  = 0; // BrushManager.AREA_WATER;
 
+    mSelectSize = TDSetting.mSelectness;
+
     // mSectionType = SketchSection.SECTION_NONE;
     // mIsInSection = false;
 
@@ -992,7 +996,7 @@ public class SketchWindow extends ItemDrawer
   // private void doSelectAt( float x_scene, float y_scene )
   // {
   //   // Log.v( "DistoX", "doSelectAt at " + x_scene + " " + y_scene );
-  //   float d0 = TopoDroidApp.mCloseness;
+  //   float d0 = TopoDroidApp.mSelectness;
 
   //   // SketchPointPath point = mSketchSurface.getPointAt( x_scene, y_scene );
   //   // if ( point != null ) {
@@ -1013,14 +1017,14 @@ public class SketchWindow extends ItemDrawer
   //   // }
   // }
 
-  private SketchFixedPath doSelectShotAt( float x_scene, float y_scene )
+  private SketchFixedPath doSelectShotAt( float x_scene, float y_scene, float size )
   {
-    return mModel.selectShotAt( x_scene, y_scene );
+    return mModel.selectShotAt( x_scene, y_scene, size );
   }
 
-  private SketchStationName doSelectStationAt( float x_scene, float y_scene )
+  private SketchStationName doSelectStationAt( float x_scene, float y_scene, float size )
   {
-    return mModel.selectStationAt( x_scene, y_scene );
+    return mModel.selectStationAt( x_scene, y_scene, size );
   }
 
   // private boolean doSelectSectionBasePointAt( float x_scene, float y_scene )
@@ -1028,9 +1032,9 @@ public class SketchWindow extends ItemDrawer
   //   return mModel.selectSectionBasePointAt( x_scene, y_scene );
   // }
 
-  private SketchTriangle doSelectTriangleAt( float x_scene, float y_scene, SketchTriangle tri )
+  private SketchTriangle doSelectTriangleAt( float x_scene, float y_scene, SketchTriangle tri, float size )
   {
-    return mModel.selectTriangleAt( x_scene, y_scene, tri );
+    return mModel.selectTriangleAt( x_scene, y_scene, tri, size );
   }
     
   // --------------------------------------------------------------------------
@@ -1144,7 +1148,7 @@ public class SketchWindow extends ItemDrawer
     }
     dismissPopups();
 
-    float d0 = TDSetting.mCloseCutoff + TDSetting.mCloseness / mInfo.zoom_3d;
+    float d0 = TDSetting.mCloseCutoff + mSelectSize / mInfo.zoom_3d;
 
     MotionEventWrap event = MotionEventWrap.wrap(rawEvent);
     // TDLog.Log( TDLog.LOG_INPUT, "SketchWindow onTouch() " );
@@ -1220,7 +1224,7 @@ public class SketchWindow extends ItemDrawer
         mSaveX = x_canvas;
         mSaveY = y_canvas;
       } else if ( mMode == SketchDef.MODE_STEP ) {
-        SketchFixedPath path = doSelectShotAt( x_scene, y_scene ); 
+        SketchFixedPath path = doSelectShotAt( x_scene, y_scene, mSelectSize ); 
         if ( path == null ) {
           Toast.makeText( mActivity, R.string.shot_not_found, Toast.LENGTH_SHORT ).show();
         } else {
@@ -1336,7 +1340,7 @@ public class SketchWindow extends ItemDrawer
               LinePoint p2 = pts.get(np-1);
               for (LinePoint p : pts ) {
                 // find point on the triangulated surface and add it to the line
-                tri = doSelectTriangleAt( p.mX, p.mY, tri );
+                tri = doSelectTriangleAt( p.mX, p.mY, tri, mSelectSize );
                 if ( tri != null /* && mInfo.isForward( tri ) */ ) {
                   Vector q1 = tri.get3dPoint( p.mX, p.mY );
                   line.addLinePoint( mInfo.east + q1.x, mInfo.south + q1.y, mInfo.vert + q1.z );
@@ -1359,7 +1363,7 @@ public class SketchWindow extends ItemDrawer
           } else { // Symbol.POINT
             if ( Math.abs( x_shift ) < 16 && Math.abs( y_shift ) < 16 ) {
               // Log.v("DistoX", "point get triangle at " + x_scene + " " + y_scene );
-              SketchTriangle tri = doSelectTriangleAt( x_scene, y_scene, null );
+              SketchTriangle tri = doSelectTriangleAt( x_scene, y_scene, null, mSelectSize );
               if ( tri != null /* && mInfo.isForward( tri ) */ ) {
                 Vector p = tri.get3dPoint( x_scene, y_scene );
                 // Log.v("DistoX", "new point " + mCurrentPoint + " at " + p.x + " " + p.y + " " + p.z );
@@ -1409,7 +1413,7 @@ public class SketchWindow extends ItemDrawer
                 // mModel.setEditLine( null );
 
                 LinePoint p1 = mCurrentLinePath.mFirst;
-	        SketchTriangle tri1 = doSelectTriangleAt( p1.mX, p1.mY, null );
+	        SketchTriangle tri1 = doSelectTriangleAt( p1.mX, p1.mY, null, mSelectSize );
                 SketchTriangle tri10 = tri1;
                 Vector w10 = null;
                 Vector w20 = null;
@@ -1426,7 +1430,7 @@ public class SketchWindow extends ItemDrawer
                   PointF border_point = new PointF(0,0);
 
                   for ( LinePoint p2 = p1.mNext; p2 != null; p2 = p2.mNext ) { 
-                    tri2 = doSelectTriangleAt( p2.mX, p2.mY, tri2 );
+                    tri2 = doSelectTriangleAt( p2.mX, p2.mY, tri2, mSelectSize );
                     if ( tri2 != null && tri2 != tri1 ) {
                       int i1 = tri1.i;
                       if ( i1 != tri2.i && i1 != tri2.j && i1 != tri2.k ) i1 = -1;

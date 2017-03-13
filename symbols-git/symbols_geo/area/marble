@@ -3,7 +3,7 @@ name marble
 name-it marmo
 name-pt mármore
 th_name u:marble
-color 0x99ff00 0xcc
+color 0x99cccc 0xcc
 csurvey 1 48 0 3
 orientable
 bitmap 40 30

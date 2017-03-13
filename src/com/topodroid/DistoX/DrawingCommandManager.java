@@ -47,8 +47,6 @@ public class DrawingCommandManager
 {
   private static final int BORDER = 20;
 
-  private static final float mCloseness = TDSetting.mCloseness;
-
   static int mDisplayMode = DisplayMode.DISPLAY_ALL;
   RectF mBBox;
 
@@ -311,15 +309,14 @@ public class DrawingCommandManager
   }
 
   /* Get the station at (x,y)
-   * Return the station inside the square centered at (x,y) of side 2*mCloseness
+   * Return the station inside the square centered at (x,y) of side 2*size
    */
-  DrawingStationName getStationAt( float x, float y ) // x,y canvas coords
+  DrawingStationName getStationAt( float x, float y, float size ) // x,y canvas coords
   {
     // Log.v("DistoX", "get station at " + x + " " + y );
     for ( DrawingStationName st : mStations ) {
       // Log.v("DistoX", "station at " + st.cx + " " + st.cy );
-      if ( Math.abs( x - st.cx ) < TDSetting.mCloseness
-        && Math.abs( y - st.cy ) < TDSetting.mCloseness ) return st;
+      if ( Math.abs( x - st.cx ) < size && Math.abs( y - st.cy ) < size ) return st;
     }
     return null;
   }
@@ -446,14 +443,14 @@ public class DrawingCommandManager
   {
     SelectionSet sel = new SelectionSet();
     float erase_radius = TDSetting.mCloseCutoff + erase_size / zoom;
-    mSelection.selectAt( sel, x, y, erase_radius, false, false, false );
+    mSelection.selectAt( sel, x, y, erase_radius, DrawingWindow.FILTER_ALL, false, false, false );
     int ret = 0;
     if ( sel.size() > 0 ) {
       synchronized( mCurrentStack ) {
         for ( SelectionPoint pt : sel.mPoints ) {
           DrawingPath path = pt.mItem;
           if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
-            if ( erase_mode == DrawingWindow.ERASE_ALL || erase_mode == DrawingWindow.ERASE_LINE ) {
+            if ( erase_mode == DrawingWindow.FILTER_ALL || erase_mode == DrawingWindow.FILTER_LINE ) {
               DrawingLinePath line = (DrawingLinePath)path;
               // ArrayList< LinePoint > points = line.mPoints;
               // int size = points.size();
@@ -516,7 +513,7 @@ public class DrawingCommandManager
               }
             }
           } else if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
-            if ( erase_mode == DrawingWindow.ERASE_ALL || erase_mode == DrawingWindow.ERASE_AREA ) {
+            if ( erase_mode == DrawingWindow.FILTER_ALL || erase_mode == DrawingWindow.FILTER_AREA ) {
               DrawingAreaPath area = (DrawingAreaPath)path;
               if ( area.size() <= 3 ) {
                 ret = 6;
@@ -533,7 +530,7 @@ public class DrawingCommandManager
               }
             }
           } else if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
-            if ( erase_mode == DrawingWindow.ERASE_ALL || erase_mode == DrawingWindow.ERASE_POINT ) {
+            if ( erase_mode == DrawingWindow.FILTER_ALL || erase_mode == DrawingWindow.FILTER_POINT ) {
               ret = 1;
               eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
               mCurrentStack.remove( path );
@@ -1171,12 +1168,12 @@ public class DrawingCommandManager
 
   // line points are scene-coords
   // continuation is checked in canvas-coords: canvas = offset + scene * zoom
-  DrawingLinePath getLineToContinue( LinePoint lp, int type, float zoom )
+  DrawingLinePath getLineToContinue( LinePoint lp, int type, float zoom, float size )
   {
     String group = BrushManager.getLineGroup( type );
     if ( group == null ) return null;
 
-    float delta = 2 * TDSetting.mCloseness / zoom;
+    float delta = 2 * size / zoom;
 
     DrawingLinePath ret = null;
     synchronized( mCurrentStack ) {
@@ -1587,7 +1584,7 @@ public class DrawingCommandManager
     // checkLines();
   }
 
-  boolean setRangeAt( float x, float y, float zoom, int type )
+  boolean setRangeAt( float x, float y, float zoom, int type, float size )
   {
     SelectionPoint sp1 = mSelected.mHotItem;
     if ( sp1 == null ) {
@@ -1600,7 +1597,7 @@ public class DrawingCommandManager
       // mSelected.clear();
       return false;
     }
-    float radius = TDSetting.mCloseCutoff + TDSetting.mCloseness / zoom;
+    float radius = TDSetting.mCloseCutoff + size / zoom;
     SelectionPoint sp2 = null;
     synchronized ( mSelected ) {
       sp2 = mSelection.selectOnItemAt( item, x, y, 4*radius );
@@ -1660,16 +1657,16 @@ public class DrawingCommandManager
   }
 
     
-  public SelectionSet getItemsAt( float x, float y, float zoom )
+  public SelectionSet getItemsAt( float x, float y, float zoom, int mode, float size )
   {
     // Log.v( "DistoX", "getItemAt " + x + " " + y + " zoom " + zoom + " selection pts " + mSelection.mPoints.size() );
-    float radius = TDSetting.mCloseCutoff + TDSetting.mCloseness / zoom;
+    float radius = TDSetting.mCloseCutoff + size/zoom; // TDSetting.mSelectness / zoom;
     boolean legs   = (mDisplayMode & DisplayMode.DISPLAY_LEG) != 0;
     boolean splays = (mDisplayMode & DisplayMode.DISPLAY_SPLAY ) != 0;
     boolean stations = (mDisplayMode & DisplayMode.DISPLAY_STATION ) != 0;
     synchronized ( mSelected ) {
       mSelected.clear();
-      mSelection.selectAt( mSelected, x, y, radius, legs, splays, stations );
+      mSelection.selectAt( mSelected, x, y, radius, mode, legs, splays, stations );
       if ( mSelected.mPoints.size() > 0 ) {
         mSelected.nextHotItem();
       }
@@ -2121,6 +2118,8 @@ public class DrawingCommandManager
   }
 
   SelectionPoint hotItem() { return mSelected.mHotItem; }
+
+  boolean hasSelected() { return mSelected.mPoints.size() > 0; }
 
   void rotateHotItem( float dy )
   { 

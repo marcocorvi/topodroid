@@ -445,9 +445,9 @@ public class DrawingSurface extends SurfaceView
   // @param lp   point
   // @param type line type
   // @param zoom canvas zoom
-  DrawingLinePath getLineToContinue( LinePoint lp, int type, float zoom ) 
+  DrawingLinePath getLineToContinue( LinePoint lp, int type, float zoom, float size ) 
   {
-    return commandManager.getLineToContinue( lp, type, zoom );
+    return commandManager.getLineToContinue( lp, type, zoom, size );
   }
  
   /** add the points of the first line to the second line
@@ -463,13 +463,19 @@ public class DrawingSurface extends SurfaceView
   // public SelectionPoint getShotAt( float x, float y ) { return commandManager.getShotAt( x, y ); }
 
   // x,y canvas coords
-  DrawingStationName getStationAt( float x, float y ) { return commandManager.getStationAt( x, y ); }
+  DrawingStationName getStationAt( float x, float y, float size ) { return commandManager.getStationAt( x, y, size ); }
 
-  SelectionSet getItemsAt( float x, float y, float zoom ) { return commandManager.getItemsAt( x, y, zoom ); }
+  SelectionSet getItemsAt( float x, float y, float zoom, int mode, float size ) 
+  { 
+    return commandManager.getItemsAt( x, y, zoom, mode, size );
+  }
 
   // set line range at the hot-item
   // type = range type
-  boolean setRangeAt( float x, float y, float zoom, int type ) { return commandManager.setRangeAt( x, y, zoom, type ); }
+  boolean setRangeAt( float x, float y, float zoom, int type, float size )
+  {
+    return commandManager.setRangeAt( x, y, zoom, type, size );
+  }
 
   boolean moveHotItemToNearestPoint() { return commandManager.moveHotItemToNearestPoint(); }
   
@@ -478,6 +484,8 @@ public class DrawingSurface extends SurfaceView
   void splitHotItem() { commandManager.splitHotItem(); }
   
   SelectionPoint hotItem() { return commandManager.hotItem(); }
+
+  boolean hasSelected() { return commandManager.hasSelected(); }
 
   // void shiftHotItem( float dx, float dy, float range ) { commandManager.shiftHotItem( dx, dy, range ); }
   void shiftHotItem( float dx, float dy ) { commandManager.shiftHotItem( dx, dy ); }

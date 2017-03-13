@@ -1272,7 +1272,8 @@ class SketchSurface extends SketchShot
   }
 
   // select a triangle that contains the (x,y) scene point
-  SketchTriangle selectTriangleAt( float x, float y, Sketch3dInfo info, SketchTriangle tri )
+  // N.B. size is not used
+  SketchTriangle selectTriangleAt( float x, float y, Sketch3dInfo info, SketchTriangle tri, float size )
   {
     // Log.v("DistoX", "SketchSurface::selectTriangleAt() " + x + " " + y );
     if ( tri != null ) {

@@ -300,21 +300,61 @@ class Selection
     return ret;
   }
 
-  void bucketSelectAt( float x, float y, float radius, SelectionSet sel, boolean legs, boolean splays, boolean stations )
+  void bucketSelectAt( float x, float y, float radius, int mode,
+                       SelectionSet sel, boolean legs, boolean splays, boolean stations )
   {
     // Log.v("DistoX", "bucket select at " + x + " " + y + " R " + radius + " buckets " + mBuckets.size() );
-    for ( SelectionBucket bucket : mBuckets ) {
-      // bucket.dump();
-      if ( bucket.contains( x, y, radius, radius ) ) {
-        for ( SelectionPoint sp : bucket.mPoints ) {
-          if ( !legs && sp.type() == DrawingPath.DRAWING_PATH_FIXED ) continue;
-          if ( !splays && sp.type() == DrawingPath.DRAWING_PATH_SPLAY ) continue;
-          if ( !stations && ( sp.type() == DrawingPath.DRAWING_PATH_STATION || sp.type() == DrawingPath.DRAWING_PATH_NAME ) ) continue;
-       
-          sp.mDistance = sp.distance( x, y );
-          if ( sp.mDistance < radius ) {
-            sel.addPoint( sp );
-            // sp.mBucket.dump();
+    if ( mode == DrawingWindow.FILTER_ALL ) {
+      for ( SelectionBucket bucket : mBuckets ) {
+        if ( bucket.contains( x, y, radius, radius ) ) {
+          for ( SelectionPoint sp : bucket.mPoints ) {
+            if ( !legs && sp.type() == DrawingPath.DRAWING_PATH_FIXED ) continue;
+            if ( !splays && sp.type() == DrawingPath.DRAWING_PATH_SPLAY ) continue;
+            if ( !stations && (    sp.type() == DrawingPath.DRAWING_PATH_STATION 
+                                || sp.type() == DrawingPath.DRAWING_PATH_NAME ) ) continue;
+            sp.mDistance = sp.distance( x, y );
+            if ( sp.mDistance < radius ) sel.addPoint( sp );
+          }
+        }
+      }
+    } else if ( mode == DrawingWindow.FILTER_SHOT ) {
+      if ( ! (legs || splays) ) return;
+      for ( SelectionBucket bucket : mBuckets ) {
+        if ( bucket.contains( x, y, radius, radius ) ) {
+          for ( SelectionPoint sp : bucket.mPoints ) {
+            if ( ( legs && sp.type() == DrawingPath.DRAWING_PATH_FIXED ) ||
+                 ( splays && sp.type() == DrawingPath.DRAWING_PATH_SPLAY ) ) {
+              sp.mDistance = sp.distance( x, y );
+              if ( sp.mDistance < radius ) sel.addPoint( sp );
+            }
+          }
+        }
+      }
+    } else if ( mode == DrawingWindow.FILTER_STATION ) {
+      if ( ! stations ) return;
+      for ( SelectionBucket bucket : mBuckets ) {
+        if ( bucket.contains( x, y, radius, radius ) ) {
+          for ( SelectionPoint sp : bucket.mPoints ) {
+            if (    sp.type() == DrawingPath.DRAWING_PATH_STATION 
+                 || sp.type() == DrawingPath.DRAWING_PATH_NAME ) {
+              sp.mDistance = sp.distance( x, y );
+              if ( sp.mDistance < radius ) sel.addPoint( sp );
+            }
+          }
+        }
+      }
+    } else {
+      int type = -0;
+      if ( mode == DrawingWindow.FILTER_POINT ) { type = DrawingPath.DRAWING_PATH_POINT; }
+      else if ( mode == DrawingWindow.FILTER_LINE ) { type = DrawingPath.DRAWING_PATH_LINE; }
+      else if ( mode == DrawingWindow.FILTER_AREA ) { type = DrawingPath.DRAWING_PATH_AREA; }
+      for ( SelectionBucket bucket : mBuckets ) {
+        if ( bucket.contains( x, y, radius, radius ) ) {
+          for ( SelectionPoint sp : bucket.mPoints ) {
+            if ( sp.type() == type ) {
+              sp.mDistance = sp.distance( x, y );
+              if ( sp.mDistance < radius ) sel.addPoint( sp );
+            }
           }
         }
       }
@@ -326,25 +366,15 @@ class Selection
     return bucketSelectOnItemAt( item, x, y, radius );
   }
 
-  void selectAt( SelectionSet sel, float x, float y, float radius, boolean legs, boolean splays, boolean stations )
+  void selectAt( SelectionSet sel, float x, float y, float radius, int mode, boolean legs, boolean splays, boolean stations )
   {
     // Log.v( "DistoX", "selection select at " + x + " " + y + " pts " + mPoints.size() + " " + legs + " " + splays + " " + stations + " radius " + radius );
 
-    bucketSelectAt( x, y, radius, sel, legs, splays, stations );
+    bucketSelectAt( x, y, radius, mode, sel, legs, splays, stations );
     // Log.v("DistoX", "bucketSelect size " + sel.size() );
 
     if ( sel.size() > 0 ) return;
 
-    // for ( SelectionPoint sp : mPoints ) {
-    //   if ( !legs && sp.type() == DrawingPath.DRAWING_PATH_FIXED ) continue;
-    //   if ( !splays && sp.type() == DrawingPath.DRAWING_PATH_SPLAY ) continue;
-    //   if ( !stations && ( sp.type() == DrawingPath.DRAWING_PATH_STATION || sp.type() == DrawingPath.DRAWING_PATH_NAME ) ) continue;
-    //   sp.mDistance = sp.distance(x, y);
-    //   // Log.v("DistoX", "sp " + sp.name() + " distance " + sp.mDistance );
-    //   if ( sp.mDistance < radius ) {
-    //     sel.addPoint( sp );
-    //   }
-    // }
   }
 
   private SelectionBucket getBucket( float x, float y )

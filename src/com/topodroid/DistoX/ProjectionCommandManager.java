@@ -209,13 +209,12 @@ public class ProjectionCommandManager
     return ret;
   }
 
-  DrawingStationName getStationAt( float x, float y ) // x,y canvas coords
+  DrawingStationName getStationAt( float x, float y, float size ) // x,y canvas coords
   {
     // Log.v("DistoX", "get station at " + x + " " + y );
     for ( DrawingStationName st : mStations ) {
       // Log.v("DistoX", "station at " + st.cx + " " + st.cy );
-      if ( Math.abs( x - st.cx ) < TDSetting.mCloseness
-        && Math.abs( y - st.cy ) < TDSetting.mCloseness ) return st;
+      if ( Math.abs( x - st.cx ) < size && Math.abs( y - st.cy ) < size ) return st;
     }
     return null;
   }

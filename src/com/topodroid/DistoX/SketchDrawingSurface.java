@@ -166,7 +166,8 @@ public class SketchDrawingSurface extends SurfaceView
 
 
     // public boolean hasStationName( String name ) { return commandManager.hasStationName( name ); }
-    // public DrawingStationName  getStationAt( float x, float y ) { return commandManager.getStationAt( x, y ); }
+    // public DrawingStationName  getStationAt( float x, float y, float size ) 
+    // { return commandManager.getStationAt( x, y, size ); }
 
     public void surfaceChanged(SurfaceHolder mHolder, int format, int width,  int height) 
     {
