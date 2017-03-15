@@ -472,8 +472,8 @@ class DrawingIO
         }
       } catch ( FileNotFoundException e ) {
         // this is OK
-      } catch ( IOException e ) {
-        e.printStackTrace();
+      // } catch ( IOException e ) {
+      //   e.printStackTrace();
       }
     }
     // remove repeated names

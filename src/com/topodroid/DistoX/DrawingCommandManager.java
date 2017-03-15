@@ -85,6 +85,9 @@ public class DrawingCommandManager
   List<DrawingStationName> getStations()     { return mStations;     } 
   List<DrawingStationPath> getUserStations() { return mUserStations; }
 
+  int mSelectMode = DrawingWindow.FILTER_ALL;
+  void setSelectMode( int mode ) { mSelectMode = mode; }
+
   /* Check if any line overlaps another of the same type
    * In case of overlap the overlapped line is removed
    */
@@ -1246,6 +1249,35 @@ public class DrawingCommandManager
     boolean grids    = (mDisplayMode & DisplayMode.DISPLAY_GRID    ) != 0;
     boolean outline  = (mDisplayMode & DisplayMode.DISPLAY_OUTLINE ) != 0;
 
+    boolean spoints   = false;
+    boolean slines    = false;
+    boolean sareas    = false;
+    boolean sshots    = false;
+    boolean sstations = false;
+
+    switch (mSelectMode) {
+      case DrawingWindow.FILTER_ALL:
+        sshots = true;
+        sstations = stations;
+        spoints = slines = sareas = true;
+        break;
+      case DrawingWindow.FILTER_POINT:
+        spoints = true;
+        break;
+      case DrawingWindow.FILTER_LINE:
+        slines = true;
+        break;
+      case DrawingWindow.FILTER_AREA:
+        sareas = true;
+        break;
+      case DrawingWindow.FILTER_SHOT:
+        sshots = true;
+        break;
+      case DrawingWindow.FILTER_STATION:
+        sstations = true;
+        break;
+    }
+
     if( grids && mGridStack1 != null ) {
       synchronized( mGridStack1 ) {
         if ( mScale < 1 ) {
@@ -1357,9 +1389,12 @@ public class DrawingCommandManager
           if ( bucket.intersects( mBBox ) ) {
             for ( SelectionPoint pt : bucket.mPoints ) { 
               int type = pt.type();
-              if ( ( type == DrawingPath.DRAWING_PATH_FIXED && ! legs ) 
-                || ( type == DrawingPath.DRAWING_PATH_SPLAY && ! splays )
-                || ( type == DrawingPath.DRAWING_PATH_NAME  && ! stations ) ) continue;
+              if ( ( type == DrawingPath.DRAWING_PATH_POINT && ! spoints ) 
+                || ( type == DrawingPath.DRAWING_PATH_LINE && ! slines ) 
+                || ( type == DrawingPath.DRAWING_PATH_AREA && ! sareas ) 
+                || ( type == DrawingPath.DRAWING_PATH_FIXED && ! (legs && sshots) )
+                || ( type == DrawingPath.DRAWING_PATH_SPLAY && ! (splays && sshots) )
+                || ( type == DrawingPath.DRAWING_PATH_NAME  && ! (sstations) ) ) continue;
               float x, y;
               if ( pt.mPoint != null ) { // line-point
                 x = pt.mPoint.mX;

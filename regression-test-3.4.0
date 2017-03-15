@@ -347,6 +347,10 @@ long tap on splay data
 
 SECONDARY SHOT EDIT DIALOG
 [x] take a photo
+[ ] take audio comment
+[ ] replay audio comment
+[ ] delete audio comment
+[ ] overwrite audio comment
 [x] take a sensor measurement
 [x] add a shot before
     [ ] station hints according to auto-station policy - Apparently I just got the TO BASE value copied to the station field on the new shot. I don think that's exactly whats expected. (Rodrigo)
@@ -427,6 +431,7 @@ SURVEY INFO WINDOWS
 [x] delete the survey: check that all the related files are deleted
     [x] data exports must be deleted
         [x] compass
+        [ ] cSurvey
         [x] PocketTopo
         [x] Polygon
         [x] Survex
@@ -447,7 +452,9 @@ SURVEY INFO WINDOWS
         [ ] csx
         [ ] png
         [ ] dxf
+            [ ] with xsections if section points enables
         [x] svg
+            [ ] with xsections if section points enables
     [x] zip archives are not deleted
 [ ] calibration: enter calibration values for tape, compass, clino:
     [ ] verify that following manually entered shots are affected accordingly 
@@ -591,6 +598,15 @@ triple-grid symbol picker
 [x] two finger zoom
 [x] side drag if enabled (setting)
 [x] zoom comtrols (setting)
+[ ] erase filter
+    [ ] all
+    [ ] point
+    [ ] line
+    [ ] area
+[ ] erase size
+    [ ] Small
+    [ ] Medium
+    [ ] Large
 [x] erase part of a line from the beginning
 [x] erase part of a line from the end
 [x] erase the middle of a line
@@ -602,6 +618,17 @@ triple-grid symbol picker
 
 <edit mode>
 [x] selection
+[ ] select filter
+    [ ] all
+    [ ] point
+    [ ] line
+    [ ] area
+    [ ] shot
+    [ ] station
+[ ] select size
+    [ ] Small
+    [ ] Medium
+    [ ] Large
 [x] drag, zoom, with selection 
 [x] drag, zoom, with no selection 
 [ ] select a point and move it
@@ -627,8 +654,8 @@ triple-grid symbol picker
     [ ] convert to polyline (if bezier)
     [ ] straighten (good for rock-border, but it works also for other types)
     [x] close
-    [x] delete 
-        [x] undo delete
+ [x] delete 
+    [x] undo delete
   - section-line
     [x] the sketch is re-opened
     [ ] the photo is overwritten if retaken
@@ -646,19 +673,27 @@ triple-grid symbol picker
     [ ] extend correction
     [ ] stations change
         [ ] cut-n-paste
+    [ ] splay can be deleted
+    [ ] hide midline display on either sides of a leg
   - station
     [x] select as station to export (visible only if not autostations)
-    [x] hide/show previous centerline
-    [x] hide/show following centerline
+    [x] show hidden centerline
     [ ] set current station: chck next shot is attached to it
     [x] toggle at-station splay display
     [ ] at-station cross-sections
+        [ ] choose direction by leg(s)
+        [ ] choose direction by android
+        [ ] re-open xsection for editing
+        [ ] delete x-section
         [ ] shown as a red tick
 
 OVERVIEW
 [x] check overview from drawing window contains all sketches
 [ ] references in overview
+    [ ] display mode: outline only
 [ ] measure 
+    [ ] from fixed point
+    [ ] polyline 
 [x] settings are the same as for sketch
 [x] help
 [x] close menu

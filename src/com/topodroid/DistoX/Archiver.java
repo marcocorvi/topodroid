@@ -162,8 +162,8 @@ public class Archiver
       ret = true;
     } catch ( FileNotFoundException e ) {
       // FIXME
-    } catch ( IOException e ) {
-      // FIXME
+    // } catch ( IOException e ) {
+    //   // FIXME
     } finally {
       File fp = new File( TDPath.getSqlFile() );
       if ( fp.exists() ) {

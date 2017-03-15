@@ -56,7 +56,6 @@ public class DrawingSurface extends SurfaceView
   static final int DRAWING_SECTION  = 3;
   static final int DRAWING_OVERVIEW = 4;
 
-
   private Boolean _run;
   boolean mSurfaceCreated = false;
   protected DrawThread mDrawThread;
@@ -89,6 +88,12 @@ public class DrawingSurface extends SurfaceView
   { 
     if ( commandManager != null ) mCache.put( fullname, commandManager );
   }
+
+  void setSelectMode( int mode )
+  { 
+    if ( commandManager != null ) commandManager.setSelectMode( mode );
+  }
+
 
   // return true if saved manager can be used
   boolean resetManager( int mode, String fullname )

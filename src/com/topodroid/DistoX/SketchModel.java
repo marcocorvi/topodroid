@@ -1026,8 +1026,8 @@ class SketchModel
       }
     } catch ( FileNotFoundException e ) {
       // this is OK
-    } catch ( IOException e ) {
-      e.printStackTrace();
+    // } catch ( IOException e ) {
+    //   e.printStackTrace();
     }
     // remove repeated names
     // Log.v( "DistoX", "loadTh3 " + filename + " done" );

@@ -112,6 +112,13 @@ public class OverviewWindow extends ItemDrawer
   private float mDDtotal = 0;
   private int mTotal = 0;
 
+  private float mBorderRight      = 4096;
+  private float mBorderLeft       = 0;
+  private float mBorderInnerRight = 4096;
+  private float mBorderInnerLeft  = 0;
+  private float mBorderBottom     = 4096;
+    
+
     private TopoDroidApp mApp;
     private DataHelper mData;
 
@@ -141,9 +148,14 @@ public class OverviewWindow extends ItemDrawer
     public static final int MODE_MOVE = 2;
     public static final int MODE_ZOOM = 4;  
 
+    final static int MEASURE_OFF   = 0;
+    final static int MEASURE_START = 1;
+    final static int MEASURE_ON    = 2;
+    
+
     private int mTouchMode = MODE_MOVE;
-    private int mOnMeasure = 0;
-    private int mIsContinue = 0;
+    private int mOnMeasure = MEASURE_OFF;
+    private boolean mIsContinue = false;
 
     private float mSaveX;
     private float mSaveY;
@@ -459,6 +471,12 @@ public class OverviewWindow extends ItemDrawer
       mZoom         = extras.getFloat( TDTag.TOPODROID_PLOT_ZOOM );
       mType         = (int)extras.getLong( TDTag.TOPODROID_PLOT_TYPE );
 
+      mBorderRight      = mApp.mDisplayWidth * 15 / 16;
+      mBorderLeft       = mApp.mDisplayWidth / 16;
+      mBorderInnerRight = mApp.mDisplayWidth * 3 / 4;
+      mBorderInnerLeft  = mApp.mDisplayWidth / 4;
+      mBorderBottom     = mApp.mDisplayHeight * 7 / 8;
+
       // Log.v("DistoX", "Overview from " + mFrom + " Type " + mType + " Zoom " + mZoom );
 
       // mBezierInterpolator = new BezierInterpolator( );
@@ -736,6 +754,8 @@ public class OverviewWindow extends ItemDrawer
   float oldDist = 0;
   float mStartX = 0;
   float mStartY = 0;
+  float mBaseX = 0;
+  float mBaseY = 0;
 
   public boolean onTouch( View view, MotionEvent rawEvent )
   {
@@ -761,32 +781,58 @@ public class OverviewWindow extends ItemDrawer
     int action = event.getAction() & MotionEvent.ACTION_MASK;
 
     if (action == MotionEvent.ACTION_POINTER_DOWN) {
-      if ( mOnMeasure == 2 ) mOnMeasure = 1;
+      if ( mIsContinue ) {
+        setOnMeasure( MEASURE_OFF );
+      } else {
+        if ( mOnMeasure == MEASURE_ON ) mOnMeasure = MEASURE_START;
+      }
       mTouchMode = MODE_ZOOM;
       oldDist = spacing( event );
       saveEventPoint( event );
     } else if ( action == MotionEvent.ACTION_POINTER_UP) {
-      if ( mOnMeasure == 1 ) mOnMeasure = 2;
+      if ( mIsContinue ) {
+        setOnMeasure( MEASURE_START );
+      } else {
+        if ( mOnMeasure == MEASURE_START ) mOnMeasure = MEASURE_ON;
+      }
       mTouchMode = MODE_MOVE;
       /* nothing */
 
     // ---------------------------------------- DOWN
 
     } else if (action == MotionEvent.ACTION_DOWN) {
+      // check side-drag and zoom controls
+      if ( y_canvas > mBorderBottom ) {
+        if ( mZoomBtnsCtrlOn && x_canvas > mBorderInnerLeft && x_canvas < mBorderInnerRight ) {
+          mTouchMode = MODE_ZOOM;
+          mZoomBtnsCtrl.setVisible( true );
+          // mZoomCtrl.show( );
+          return true;
+        } else if ( TDSetting.mSideDrag ) {
+          mTouchMode = MODE_ZOOM;
+          return true;
+        }
+      } else if ( TDSetting.mSideDrag && ( x_canvas > mBorderRight || x_canvas < mBorderLeft ) ) {
+        mTouchMode = MODE_ZOOM;
+        return true;
+      }
+
       mSaveX = x_canvas; // FIXME-000
       mSaveY = y_canvas;
-      if ( mOnMeasure == 1 ) {
+      if ( mOnMeasure == MEASURE_START ) {
         mStartX = x_canvas/mZoom - mOffset.x;
         mStartY = y_canvas/mZoom - mOffset.y;
-        mOnMeasure = 2;
+        mBaseX = mStartX;
+        mBaseY = mStartY;
+        mOnMeasure = MEASURE_ON;
         // add reference point
         DrawingPath path1 = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null );
         path1.setPaint( BrushManager.highlightPaint );
         path1.makePath( mCirclePath, new Matrix(), mStartX, mStartY );
         // Log.v("DistoX", "first ref " + mStartX + " " + mStartY );
         mOverviewSurface.setFirstReference( path1 );
-        if ( mIsContinue == 1 ) {
-          mTotal = 0;
+        if ( mIsContinue ) {
+          mTotal   = 0;
           mDDtotal = 0;
           DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null );
           path.setPaint( BrushManager.fixedBluePaint );
@@ -794,32 +840,45 @@ public class OverviewWindow extends ItemDrawer
           path.mPath.moveTo( mStartX, mStartY );
           mOverviewSurface.setSecondReference( path );
         }
-      } else if ( mOnMeasure == 2 ) {
+      } else if ( mOnMeasure == MEASURE_ON ) {
         // FIXME use scene values
         float x = x_canvas/mZoom - mOffset.x;
         float y = y_canvas/mZoom - mOffset.y;
+        // segment displacement
         float dx = (  (x - mStartX) / DrawingUtil.SCALE_FIX ) / TDSetting.mUnitGrid;
         float dy = ( -(y - mStartY) / DrawingUtil.SCALE_FIX ) / TDSetting.mUnitGrid;
-        double a = Math.atan2( dx, dy ) * 180 / Math.PI;
-        if ( a < 0 ) a += 360;
+        // total displacement, with respect to base
+        float bx = (  (x - mBaseX) / DrawingUtil.SCALE_FIX ) / TDSetting.mUnitGrid;
+        float by = ( -(y - mBaseY) / DrawingUtil.SCALE_FIX ) / TDSetting.mUnitGrid;
+        // angle with respect to base
+        double ba = Math.atan2( bx, by ) * 180 / Math.PI;
+        if ( ba < 0 ) ba += 360;
 
         String format;
         if ( mType == PlotInfo.PLOT_PLAN ) {
           format = getResources().getString( R.string.format_measure_plan );
         } else {
-          if ( a <= 180 ) {
-            a = 90 - a;
+          if ( ba <= 180 ) {
+            ba = 90 - ba;
           } else {
-            a = a - 270;
+            ba = ba - 270;
           } 
           format = getResources().getString( R.string.format_measure_profile );
         }
-        a *= TDSetting.mUnitAngle;
+        ba *= TDSetting.mUnitAngle;
 
         float dd = TDMath.sqrt( dx * dx + dy * dy );
+        float bb = TDMath.sqrt( bx * bx + by * by );
 
-        if ( mIsContinue == 0 ) {
+        if ( mIsContinue ) {
+          mDDtotal += dd;
+          mTotal   ++;
+          mOverviewSurface.addSecondReference( x, y );
+          mStartX = x;
+          mStartY = y;
+        } else {
           mDDtotal = dd;
+          mTotal   = 1;
           // replace target point
           DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null );
           path.setPaint( BrushManager.fixedBluePaint );
@@ -827,14 +886,8 @@ public class OverviewWindow extends ItemDrawer
           path.mPath.moveTo( mStartX, mStartY );
           path.mPath.lineTo( x, y );
           mOverviewSurface.setSecondReference( path );
-        } else {
-          mDDtotal += dd;
-          mTotal ++;
-          mOverviewSurface.addSecondReference( x, y );
-          mStartX = x;
-          mStartY = y;
         }
-        mActivity.setTitle( String.format( format, dd, mDDtotal, dx, dy, a ) );
+        mActivity.setTitle( String.format( format, bb, mDDtotal, bx, by, ba ) );
       }
     // ---------------------------------------- MOVE
 
@@ -842,7 +895,7 @@ public class OverviewWindow extends ItemDrawer
       if ( mTouchMode == MODE_MOVE) {
         float x_shift = x_canvas - mSaveX; // compute shift
         float y_shift = y_canvas - mSaveY;
-        if ( mOnMeasure == 0 ) {
+        if ( mOnMeasure == MEASURE_OFF ) {
           if ( Math.abs( x_shift ) < 60 && Math.abs( y_shift ) < 60 ) {
             mOffset.x += x_shift / mZoom;                // add shift to offset
             mOffset.y += y_shift / mZoom; 
@@ -875,7 +928,7 @@ public class OverviewWindow extends ItemDrawer
         mTouchMode = MODE_MOVE;
       } else {
         // NOTHING
-        // if ( mOnMeasure == 0 ) {
+        // if ( mOnMeasure == MEASURE_OFF ) {
         //   // float x_shift = x_canvas - mSaveX; // compute shift
         //   // float y_shift = y_canvas - mSaveY;
         // } else {
@@ -923,6 +976,21 @@ public class OverviewWindow extends ItemDrawer
       }
     }
     */
+
+    private void setOnMeasure( int measure )
+    {
+      mOnMeasure = measure;
+      if ( mOnMeasure == MEASURE_OFF ) {
+        mButton1[IC_SELECT].setBackgroundDrawable( mBMselect );
+        mOverviewSurface.setFirstReference( null );
+        mOverviewSurface.setSecondReference( null );
+      } else if ( mOnMeasure == MEASURE_START ) {
+        mButton1[IC_SELECT].setBackgroundDrawable( mBMselectOn );
+        mDDtotal = 0;
+        mTotal = 0;
+        mOverviewSurface.setSecondReference( null );
+      }
+    }
   
     public void onClick(View view)
     {
@@ -943,32 +1011,25 @@ public class OverviewWindow extends ItemDrawer
         return;
       }
       if ( b == mButton1[0] ) { // measure
-        if ( mOnMeasure > 0 ) {
-          mOnMeasure = 0;
-          mButton1[IC_SELECT].setBackgroundDrawable( mBMselect );
-          mOverviewSurface.setFirstReference( null );
-          mOverviewSurface.setSecondReference( null );
+        if ( mOnMeasure == MEASURE_OFF ) {
+          setOnMeasure( MEASURE_START );
         } else {
-          mOnMeasure = 1;
-          mButton1[IC_SELECT].setBackgroundDrawable( mBMselectOn );
-          mDDtotal = 0;
-          mTotal = 0;
-          mOverviewSurface.setSecondReference( null );
+          setOnMeasure( MEASURE_OFF );
         }
       } else if ( b == mButton1[1] ) { // references
         new OverviewModeDialog( mActivity, this, mOverviewSurface ).show();
       } else if ( b == mButton1[2] ) { // continue
-        setContinue( 1 - mIsContinue );
+        toggleIsContinue( );
 
       // FIXME_OVER } else if ( b == mButton1[2] ) { // toggle plan/extended
       // FIXME_OVER   switchPlotType();
       }
     }
 
-  private void setContinue( int c )
+  private void toggleIsContinue( )
   {
-    mIsContinue = c;
-    mButton1[IC_CONTINUE].setBackgroundDrawable( ( mIsContinue == 0 )? mBMcontinueNo : mBMcontinueOn );
+    mIsContinue = ! mIsContinue;
+    mButton1[IC_CONTINUE].setBackgroundDrawable( mIsContinue? mBMcontinueOn : mBMcontinueNo );
   }
 
 

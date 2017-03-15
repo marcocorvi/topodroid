@@ -1111,6 +1111,7 @@ public class DrawingWindow extends ItemDrawer
       }
     } else if ( code == CODE_SELECT ) {
       mSelectMode = filter_mode;
+      mDrawingSurface.setSelectMode( mSelectMode );
       switch ( mSelectMode ) {
         case FILTER_ALL:
           mButton3[ BTN_SELECT_MODE ].setBackgroundDrawable( mBMselectAll );
@@ -1673,6 +1674,8 @@ public class DrawingWindow extends ItemDrawer
         makeSectionReferences( list );
       }
       // TDLog.TimeEnd("do start done");
+
+      mDrawingSurface.setSelectMode( mSelectMode );
     }
 
     private void makeSectionReferences( List<DBlock> list )
