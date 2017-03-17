@@ -300,6 +300,7 @@
     <string name="null_bitmap">Mapa bits nulo</string>
     <string name="photo">Foto</string>
     <string name="photo_comment_prompt">Intro. comentario de foto</string>
+    <!-- TODO string name="photo_azimuth_clino">Azimuth: %1$.1f Clino %2$.1f</string -->
     <!-- UNUSED string name="photo_name">Estación/nombre</string -->
     <!-- UNUSED string name="photo_photo">Toma con foto</string -->
     <!-- UNUSED string name="photo_sensor">Toma con sensor</string -->

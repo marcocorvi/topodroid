@@ -9,7 +9,7 @@
 
     <TextView android:id="@+id/photo_comment_prompt" 
         android:maxLines="1" 
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="10dp"
         android:layout_width="fill_parent"
       	android:ems="25"
         android:layout_height="wrap_content" 
@@ -18,11 +18,18 @@
    		
     <EditText android:id="@+id/photo_comment_comment" 
         android:maxLines="1" 
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="10dp"
         android:layout_width="fill_parent"
       	android:ems="25"
         android:layout_height="wrap_content" 
         android:hint="@string/comment"
+        />
+
+   <CheckBox android:id="@+id/photo_camera" 
+        android:layout_marginTop="10dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:text="@string/photo_camera"
         />
    		
     <LinearLayout 

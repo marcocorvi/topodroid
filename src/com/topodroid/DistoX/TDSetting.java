@@ -315,7 +315,7 @@ class TDSetting
   static boolean isSurveyBackward() { return mSurveyStations>0 && (mSurveyStations%2) == 0; }
 
   // static int mScreenTimeout = 60000; // 60 secs
-  static int mTimerCount       = 10;    // Acc/Mag timer countdown (secs)
+  static int mTimerWait        = 10;    // Acc/Mag timer countdown (secs)
   static int mBeepVolume       = 50;    // beep volume
   static int mCompassReadings  = 4;     // number of compass readings to average
 
@@ -704,7 +704,7 @@ class TDSetting
     mBackupNumber  = tryInt(   prefs, key[k++], "5" );              // DISTOX_BACKUP_NUMBER
     mBackupInterval = tryInt(  prefs, key[k++], "60" );             // DISTOX_BACKUP_INTERVAL
 
-    mTimerCount    = tryInt(   prefs, key[k++], "10" );             // DISTOX_SHOT_TIMER
+    mTimerWait     = tryInt(   prefs, key[k++], "10" );             // DISTOX_SHOT_TIMER
     mBeepVolume    = tryInt(   prefs, key[k++], "50" );             // DISTOX_BEEP_VOLUME
     mMinNrLegShots = tryInt(   prefs, key[k++], "3" );              // DISTOX_LEG_SHOTS choice: 2, 3, 4
 
@@ -1013,7 +1013,7 @@ class TDSetting
       mBackupInterval = tryInt( prefs, k, "60" );    // DISTOX_BACKUP_INTERVAL
 
     } else if ( k.equals( key[ nk++ ] ) ) {
-      mTimerCount       = tryInt( prefs, k, "10" );  // DISTOX_SHOT_TIMER
+      mTimerWait        = tryInt( prefs, k, "10" );  // DISTOX_SHOT_TIMER
     } else if ( k.equals( key[ nk++ ] ) ) {
       mBeepVolume       = tryInt( prefs, k, "50" );  // DISTOX_BEEP_VOLUME
     } else if ( k.equals( key[ nk++ ] ) ) {
@@ -1344,7 +1344,7 @@ class TDSetting
     if ( name.equals( "DISTOX_BACKUP_INTERVAL") ) return parseIntValue( value, mBackupInterval,  5, 600 );
 
     // if ( name.equals( "DISTOX_TEAM" )
-    if ( name.equals( "DISTOX_SHOT_TIMER"     ) ) return parseIntValue( value, mTimerCount, 0 );
+    if ( name.equals( "DISTOX_SHOT_TIMER"     ) ) return parseIntValue( value, mTimerWait, 0 );
     if ( name.equals( "DISTOX_BEEP_VOLUME"    ) ) return parseIntValue( value, mBeepVolume, 10, 100 );
     // if ( name.equals( "DISTOX_LEG_SHOTS" )
 

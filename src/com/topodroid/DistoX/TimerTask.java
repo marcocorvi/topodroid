@@ -37,13 +37,17 @@ public class TimerTask extends AsyncTask<String, Integer, Long >
   IBearingAndClino mParent;
   boolean mRun;
   int mAxis;
+  int mWait;  // secs to wait
+  int mCount; // measures to count
 
-  TimerTask( Context context, IBearingAndClino parent, int axis )
+  TimerTask( Context context, IBearingAndClino parent, int axis, int wait, int count )
   {
     mContext = context;
     mParent  = parent;
     mRun     = true;
     mAxis    = axis;
+    mWait    = wait;
+    mCount   = count;
     // Log.v("DistoX", "Timer Task axis " + axis );
   }
 
@@ -51,13 +55,12 @@ public class TimerTask extends AsyncTask<String, Integer, Long >
   protected Long doInBackground( String... str )
   {
     // Log.v("DistoX", "Timer Task does in background");
-    int count = TDSetting.mTimerCount;
     int duration = 100; // ms
     ToneGenerator toneG = new ToneGenerator( AudioManager.STREAM_ALARM, TDSetting.mBeepVolume );
     long ret = 0;
     mCntAcc = 0;
     mCntMag = 0;
-    for ( int i=0; i<count && mRun; ++i ) {
+    for ( int i=0; i<mWait && mRun; ++i ) {
       toneG.startTone( ToneGenerator.TONE_PROP_BEEP, duration ); 
       try {
         Thread.sleep( 1000 - duration );
@@ -78,7 +81,7 @@ public class TimerTask extends AsyncTask<String, Integer, Long >
       if ( mAcc != null && mMag != null ) {
         sensor_manager.registerListener( this, mAcc, SensorManager.SENSOR_DELAY_NORMAL );
         sensor_manager.registerListener( this, mMag, SensorManager.SENSOR_DELAY_NORMAL );
-        while ( cnt < 100 && ( mCntAcc < 10 || mCntMag < 10 ) ) {
+        while ( cnt < 100 && ( mCntAcc < mCount || mCntMag < mWait ) ) {
           toneG.startTone( ToneGenerator.TONE_PROP_BEEP, duration ); 
           try{
             ++ cnt;
@@ -141,6 +144,9 @@ public class TimerTask extends AsyncTask<String, Integer, Long >
     Vector g = new Vector( mValAcc[0], mValAcc[1], mValAcc[2] );
     Vector m = new Vector( mValMag[0], mValMag[1], mValMag[2] );
     g.normalize();
+
+    int o0 = 0;
+
     m.normalize();
     // Vector e = new Vector( 1.0f, 0.0f, 0.0f );
     Vector w = m.cross( g ); // west
@@ -154,18 +160,22 @@ public class TimerTask extends AsyncTask<String, Integer, Long >
       case -X_AXIS:
         b0 = TDMath.atan2( -w.x, n.x );
         c0 = - TDMath.atan2( g.x, TDMath.sqrt(w.x*w.x+n.x*n.x) );
+        o0 = ((int)(TDMath.atan2d( -g.y, g.z ) + 360)) % 360;
         break;
       case Y_AXIS:
       case -Y_AXIS:
         b0 = TDMath.atan2( -w.y, n.y );
         c0 = - TDMath.atan2( g.y, TDMath.sqrt(w.y*w.y+n.y*n.y) );
+        o0 = ((int)(TDMath.atan2d( -g.z, g.x ) + 360)) % 360;
         break;
       case Z_AXIS:
       case -Z_AXIS:
         b0 = TDMath.atan2( -w.z, n.z );
         c0 = - TDMath.atan2( g.z, TDMath.sqrt(w.z*w.z+n.z*n.z) );
+        o0 = ((int)(TDMath.atan2d( -g.x, g.y ) + 360)) % 360;
         break;
     }
+    if ( o0 < 0 ) o0 += 360;
     if ( mAxis < 0 ) { // opposite of standard android axes
       b0 += TDMath.M_PI;
       c0 = -c0;
@@ -174,7 +184,7 @@ public class TimerTask extends AsyncTask<String, Integer, Long >
     // if ( r0 < 0.0f ) r0 += TDMath.M_2PI;
     b0 = 360 - b0 * 360.0f / TDMath.M_2PI;
     c0 = 0 - c0 * 360.0f / TDMath.M_2PI;
-    mParent.setBearingAndClino( b0, c0 );
+    mParent.setBearingAndClino( b0, c0, o0 );
   }
 
 }

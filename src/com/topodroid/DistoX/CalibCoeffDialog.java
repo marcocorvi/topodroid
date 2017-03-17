@@ -53,7 +53,7 @@ public class CalibCoeffDialog extends MyDialog
   private TextView mTextMaxError;
   private TextView mTextIter;
 
-  private Button   mButtonWrite;
+  private Button mButtonWrite;
   // private Button   mButtonBack;
 
   private String bg0;
@@ -240,7 +240,7 @@ public class CalibCoeffDialog extends MyDialog
   {
     Button b = (Button)v;
     if ( b == mButtonWrite ) {
-      mApp.uploadCalibCoeff( mContext, mCoeff, true );
+      mApp.uploadCalibCoeff( mContext, mCoeff, true, b );
     } else {
       dismiss();
     }

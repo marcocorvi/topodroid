@@ -302,6 +302,7 @@
     <string name="null_bitmap">Не може да бъде създадено изображение. Недостатъчна памет</string>
     <string name="photo">снимка</string>
     <string name="photo_comment_prompt">Въведете коментар към снимката</string>
+    <!-- TODO string name="photo_azimuth_clino">Azimuth: %1$.1f Clino %2$.1f</string -->
     <!-- UNUSED string name="photo_name">репер/име</string -->
     <!-- UNUSED string name="photo_photo">снимка</string -->
     <!-- UNUSED string name="photo_sensor">сензор</string -->

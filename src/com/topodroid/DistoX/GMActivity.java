@@ -857,7 +857,7 @@ public class GMActivity extends Activity
             if ( coeff == null ) {
               Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT).show();
             } else {
-              mApp.uploadCalibCoeff( this, coeff, true );
+              mApp.uploadCalibCoeff( this, coeff, true, b );
             }
             resetTitle( );
           }

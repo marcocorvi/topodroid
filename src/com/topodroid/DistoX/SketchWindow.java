@@ -1728,7 +1728,7 @@ public class SketchWindow extends ItemDrawer
     // ----------------------------------------------------------------
 
     // void setHeading( float heading )
-    public void setBearingAndClino( float heading, float clino )
+    public void setBearingAndClino( float heading, float clino, int orientation )
     {
       mInfo.resetDirection( heading, 0.0f ); // from the side
       // mCompass = null;
@@ -1785,7 +1785,7 @@ public class SketchWindow extends ItemDrawer
       setMode( SketchDef.MODE_MOVE );
       // SensorManager sm = (SensorManager)getSystemService( Context.SENSOR_SERVICE );
       // mCompass = new SketchCompassSensor( mActivity, sm, TDSetting.mCompassReadings );
-      mTimer = new TimerTask( mActivity, this, TimerTask.Y_AXIS );
+      mTimer = new TimerTask( mActivity, this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
       mTimer.execute();
     } else if ( p++ == pos ) { // HELP
       int nn = mNrButton1 + mNrButton2 - 3 + mNrButton3 - 3 + mNrButton4 - 3;

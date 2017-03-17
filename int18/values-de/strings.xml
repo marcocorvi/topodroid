@@ -312,6 +312,7 @@
     <string name="null_bitmap">Null Bitmap [OOM Fehler]</string>
     <string name="photo">Foto</string>
     <string name="photo_comment_prompt">Kommentar</string>
+    <!-- TODO string name="photo_azimuth_clino">Azimuth: %1$.1f Clino %2$.1f</string -->
     <!-- UNUSED string name="photo_name">Messpunkt/Name</string -->
     <!-- UNUSED string name="photo_photo">Foto</string -->
     <!-- UNUSED string name="photo_sensor">Sensoren</string -->

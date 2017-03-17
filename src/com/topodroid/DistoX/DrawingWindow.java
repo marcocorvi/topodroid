@@ -59,7 +59,7 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
+// import android.net.Uri;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -3792,16 +3792,22 @@ public class DrawingWindow extends ItemDrawer
       if ( pid >= 0 ) {
         // imageFile := PHOTO_DIR / surveyId / photoId .jpg
         File imagefile = new File( TDPath.getSurveyJpgFile( mApp.mySurvey, id ) );
-        try {
-          Uri outfileuri = Uri.fromFile( imagefile );
-          Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
-          intent.putExtra( MediaStore.EXTRA_OUTPUT, outfileuri );
-          intent.putExtra( "outputFormat", Bitmap.CompressFormat.JPEG.toString() );
-          // startActivityForResult( intent, TDRequest.CAPTURE_IMAGE_ACTIVITY );
-          mActivity.startActivity( intent );
-        } catch ( ActivityNotFoundException e ) {
-          Toast.makeText( mActivity, R.string.no_capture_app, Toast.LENGTH_SHORT ).show();
-        }
+        // TODO TD_XSECTION_PHOTO
+        new QCamCompass( this,
+                         (new MyBearingAndClino( mApp, imagefile )),
+                         null,
+                         true, false).show();  // true = with_box, false=with_delay
+
+        // try {
+        //   Uri outfileuri = Uri.fromFile( imagefile );
+        //   Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
+        //   intent.putExtra( MediaStore.EXTRA_OUTPUT, outfileuri );
+        //   intent.putExtra( "outputFormat", Bitmap.CompressFormat.JPEG.toString() );
+        //   // startActivityForResult( intent, TDRequest.CAPTURE_IMAGE_ACTIVITY );
+        //   mActivity.startActivity( intent );
+        // } catch ( ActivityNotFoundException e ) {
+        //   Toast.makeText( mActivity, R.string.no_capture_app, Toast.LENGTH_SHORT ).show();
+        // }
       }
     }
 
@@ -4535,7 +4541,7 @@ public class DrawingWindow extends ItemDrawer
             Bundle extras = data.getExtras();
             float b = Float.parseFloat( extras.getString( TDTag.TOPODROID_BEARING ) );
             float c = Float.parseFloat( extras.getString( TDTag.TOPODROID_CLINO ) );
-            mShotNewDialog.setBearingAndClino( b, c );
+            mShotNewDialog.setBearingAndClino( b, c, 0 ); // orientation 0
           } catch ( NumberFormatException e ) { }
         }
         mShotNewDialog = null;
@@ -4544,5 +4550,6 @@ public class DrawingWindow extends ItemDrawer
   }
 
   ShotNewDialog mShotNewDialog = null;
+
 
 }

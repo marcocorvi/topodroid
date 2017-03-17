@@ -28,8 +28,8 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import java.util.Timer;
-import java.util.TimerTask;
+// import java.util.Timer;
+// import java.util.TimerTask;
 
 import android.util.Log;
 

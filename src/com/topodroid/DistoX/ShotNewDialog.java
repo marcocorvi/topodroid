@@ -286,9 +286,9 @@ public class ShotNewDialog extends MyDialog
   }
 
   // implements
-  public void setBearingAndClino( float b, float c )
+  public void setBearingAndClino( float b, float c, int o )
   {
-    // Log.v("DistoX", "ShotNewDialog set B " + b + " C " + c );
+    // Log.v("DistoX", "ShotNewDialog set B " + b + " C " + c + " O " + o );
     mETbearing.setText( String.format(Locale.US, "%.1f", b ) );
     mETclino.setText( String.format(Locale.US, "%.1f", c ) );
   } 
@@ -474,10 +474,10 @@ public class ShotNewDialog extends MyDialog
         dismiss();
       }
     } else if ( b == mBtnSensor ) {
-      mTimer = new TimerTask( mContext, this, TimerTask.Y_AXIS );
+      mTimer = new TimerTask( mContext, this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
       mTimer.execute();
     } else if ( b == mBtnCamera && TDSetting.mLevelOverAdvanced ) {
-      new QCamCompass( mContext, this, true).show();  // true = with_box
+      new QCamCompass( mContext, this, null, true, true).show();  // true = with_box, true=with_delay
     } else if ( b == mBtnBack ) {
       dismiss();
     }

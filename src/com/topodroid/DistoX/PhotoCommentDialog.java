@@ -20,6 +20,7 @@ import android.content.Context;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
+import android.widget.CheckBox;
 
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -35,6 +36,7 @@ public class PhotoCommentDialog extends MyDialog
 
   private EditText mETcomment;     // photo comment
   private Button   mButtonOK;
+  private CheckBox mCamera;        // whether to use camera app
   // private Button   mButtonCancel;
 
   /**
@@ -60,8 +62,9 @@ public class PhotoCommentDialog extends MyDialog
     setContentView(R.layout.photo_comment_dialog);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
-    mETcomment    = (EditText) findViewById(R.id.photo_comment_comment);
-    mButtonOK     = (Button) findViewById(R.id.photo_comment_ok );
+    mETcomment = (EditText) findViewById(R.id.photo_comment_comment);
+    mButtonOK  = (Button) findViewById(R.id.photo_comment_ok );
+    mCamera    = (CheckBox) findViewById(R.id.photo_camera );
     // mButtonCancel = (Button) findViewById(R.id.photo_comment_cancel );
 
     setTitle( R.string.title_photo_comment );
@@ -80,7 +83,7 @@ public class PhotoCommentDialog extends MyDialog
       // TDLog.Log( TDLog.LOG_PHOTO, "set photo comment " + mETcomment.getText().toString() );
       // Log.v( TopoDroidApp.TAG, "set photo comment " + mETcomment.getText().toString() );
       // mParent.insertPhoto( mETcomment.getText().toString() );
-      mParent.doTakePhoto( mETcomment.getText().toString() );
+      mParent.doTakePhoto( mETcomment.getText().toString(), ( mCamera.isChecked() ? 0 : 1 ) );
     }
     dismiss();
   }

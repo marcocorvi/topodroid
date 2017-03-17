@@ -579,11 +579,11 @@ public class ShotWindow extends Activity
 
   void askPhotoComment( )
   {
-    (new PhotoCommentDialog(mActivity, this) ).show();
+    (new PhotoCommentDialog(mActivity, this ) ).show();
   }
 
 
-  void doTakePhoto( String comment )
+  void doTakePhoto( String comment, int camera )
   {
     mComment = comment;
     mPhotoId = mApp.mData.nextPhotoId( mApp.mSID );
@@ -591,14 +591,21 @@ public class ShotWindow extends Activity
     // imageFile := PHOTO_DIR / surveyId / photoId .jpg
     File imagefile = new File( TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString(mPhotoId) ) );
     // TDLog.Log( TDLog.LOG_SHOT, "photo " + imagefile.toString() );
-    try {
-      Uri outfileuri = Uri.fromFile( imagefile );
-      Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
-      intent.putExtra( MediaStore.EXTRA_OUTPUT, outfileuri );
-      intent.putExtra( "outputFormat", Bitmap.CompressFormat.JPEG.toString() );
-      startActivityForResult( intent, TDRequest.CAPTURE_IMAGE_ACTIVITY );
-    } catch ( ActivityNotFoundException e ) {
-      Toast.makeText( mActivity, "No image capture mApp", Toast.LENGTH_SHORT ).show();
+    if ( camera == 1 ) { // TopoDroid camera
+      new QCamCompass( this,
+                       (new MyBearingAndClino( mApp, imagefile)),
+                       this,
+                       false, false).show();  // false = with_box, false=with_delay
+    } else {
+      try {
+        Uri outfileuri = Uri.fromFile( imagefile );
+        Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
+        intent.putExtra( MediaStore.EXTRA_OUTPUT, outfileuri );
+        intent.putExtra( "outputFormat", Bitmap.CompressFormat.JPEG.toString() );
+        startActivityForResult( intent, TDRequest.CAPTURE_IMAGE_ACTIVITY );
+      } catch ( ActivityNotFoundException e ) {
+        Toast.makeText( mActivity, "No image capture mApp", Toast.LENGTH_SHORT ).show();
+      }
     }
   }
 

@@ -302,6 +302,7 @@
     <string name="null_bitmap">null bitmap [OOM error]</string>
     <string name="photo">фото</string>
     <string name="photo_comment_prompt">Введіть коментар до фото</string>
+    <!-- TODO string name="photo_azimuth_clino">Azimuth: %1$.1f Clino %2$.1f</string -->
     <!-- UNUSED string name="photo_name">Пікет/назва</string -->
     <!-- UNUSED string name="photo_photo">фото</string -->
     <!-- UNUSED string name="photo_sensor">датчик</string -->

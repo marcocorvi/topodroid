@@ -751,19 +751,19 @@ public class DeviceActivity extends Activity
     }
   }
 
-  void askCalibReset()
+  void askCalibReset( final Button b )
   {
     TopoDroidAlertDialog.makeAlert( this, getResources(), getResources().getString( R.string.calib_reset ),
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {
-          doCalibReset();
+          doCalibReset( b );
         }
       }
     );
   }
 
-  private void doCalibReset()
+  private void doCalibReset( Button b )
   {
     // Log.v("DistoX", "CALIB RESET");
     if ( mDevice != null ) {
@@ -790,7 +790,7 @@ public class DeviceActivity extends Activity
       coeff[49] = zeroNL;
       coeff[50] = zeroNL;
       coeff[51] = zeroNL;
-      mApp.uploadCalibCoeff( this, coeff, false );
+      mApp.uploadCalibCoeff( this, coeff, false, b );
     }
   }
 

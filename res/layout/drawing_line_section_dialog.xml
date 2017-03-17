@@ -19,15 +19,30 @@
       / -->
 
     <ImageView android:id="@+id/line_image"
-        android:layout_width="fill_parent"
-        android:layout_height="80sp" 
-        android:scaleType="fitCenter"
-        android:contentDescription="@string/photo"
-        />
+      android:layout_width="fill_parent"
+      android:layout_height="80sp" 
+      android:layout_marginTop="10dp"
+      android:scaleType="fitCenter"
+      android:contentDescription="@string/photo"
+      />
+
+    <TextView android:id="@+id/line_azimuth"
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:layout_marginTop="10dp"
+      />
+
+    <TextView android:id="@+id/line_date"
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:layout_marginTop="10dp"
+      />
+
 
     <LinearLayout 
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
+      android:layout_marginTop="15dp"
       android:orientation="horizontal" 
       >
 
@@ -62,7 +77,7 @@
     <!-- LinearLayout 
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:layout_marginTop="25dp"
+      android:layout_marginTop="15dp"
       android:orientation="horizontal" 
       >
       <Button android:id="@+id/button_cancel"

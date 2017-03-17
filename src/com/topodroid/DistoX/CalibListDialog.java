@@ -113,7 +113,7 @@ public class CalibListDialog extends MyDialog
     } else if ( b == mBtnImport ) {
       mParent.openCalibrationImportDialog();
     } else if ( b == mBtnReset ) {
-      mParent.askCalibReset();
+      mParent.askCalibReset( b );
     // } else if ( b == mBtnCancel ) {
     //   /* nothing */
     }

@@ -237,7 +237,7 @@ public class DrawingStationDialog extends MyDialog
         mParent.openXSection( mStation, mStationName, mParent.getPlotType(), mBearing, mClino );
       } else if ( b == mBtnXDelete ) {
         if ( mSensors ) {
-          TimerTask timer = new TimerTask( mContext, this, TimerTask.Y_AXIS );
+          TimerTask timer = new TimerTask( mContext, this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
           timer.execute();
           return;
         } else {
@@ -254,7 +254,7 @@ public class DrawingStationDialog extends MyDialog
       dismiss();
     }
 
-    public void setBearingAndClino( float b, float c )
+    public void setBearingAndClino( float b, float c, int orientation )
     {
       if ( mParent.getPlotType() == PlotInfo.PLOT_PLAN ) {
         c = 0;

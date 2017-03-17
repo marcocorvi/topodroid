@@ -300,6 +300,7 @@
     <string name="null_bitmap">不能新建图片 [OOM error]</string>
     <string name="photo">照片</string>
     <string name="photo_comment_prompt">输入照片说明</string>
+    <!-- TODO string name="photo_azimuth_clino">Azimuth: %1$.1f Clino %2$.1f</string -->
     <!-- UNUSED string name="photo_name">测量点/名称</string -->
     <!-- UNUSED string name="photo_photo">照片</string -->
     <!-- UNUSED string name="photo_sensor">传感器</string -->

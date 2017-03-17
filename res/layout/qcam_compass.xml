@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:textSize="24dp"
             />
-          <LinearLayout
+          <LinearLayout android:id="@+id/layout4"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -32,12 +32,12 @@
             android:layout_gravity="right"
             android:gravity="right"
             >
+<!--
 	    <Button android:id="@+id/buttonClick"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:background="@drawable/button"
               style="@style/button_default"
-              android:text="@string/button_eval"
               android:gravity="right"
               android:layout_marginBottom="15dp"
             />
@@ -46,16 +46,6 @@
 	      android:layout_height="wrap_content"
               android:background="@drawable/button"
               style="@style/button_default"
-              android:text="@string/button_save"
-              android:gravity="right"
-              android:layout_marginBottom="15dp"
-              />
-	    <Button android:id="@+id/buttonRedo"
-              android:layout_width="wrap_content"
-	      android:layout_height="wrap_content"
-              android:background="@drawable/button"
-              style="@style/button_default"
-              android:text="@string/button_redo"
               android:gravity="right"
               android:layout_marginBottom="15dp"
               />
@@ -64,10 +54,10 @@
 	      android:layout_height="wrap_content"
               android:background="@drawable/button"
               style="@style/button_default"
-              android:text="@string/button_cancel"
               android:gravity="right"
               android:layout_marginBottom="15dp"
               />
+-->
           </LinearLayout>
         </LinearLayout>
 

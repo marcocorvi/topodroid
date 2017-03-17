@@ -163,7 +163,7 @@ public class AzimuthDialDialog extends MyDialog
     mSeekBar.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener() {
       public void onProgressChanged( SeekBar seekbar, int progress, boolean fromUser) {
         if ( fromUser ) {
-          setBearingAndClino( (progress+180)%360, 0 );
+          setBearingAndClino( (progress+180)%360, 0, 0 ); // clino 0, orientation 0
         }
       }
       public void onStartTrackingTouch(SeekBar seekbar) { }
@@ -176,7 +176,7 @@ public class AzimuthDialDialog extends MyDialog
     updateEditText();
   }
 
-  public void setBearingAndClino( float b0, float c0 )
+  public void setBearingAndClino( float b0, float c0, int o0 )
   {
     mAzimuth = b0;
     updateView();
@@ -219,7 +219,7 @@ public class AzimuthDialDialog extends MyDialog
       updateView();
       updateEditText();
     } else if ( b == mBTsensor ) {
-      mTimer = new TimerTask( mContext, this, TimerTask.Y_AXIS );
+      mTimer = new TimerTask( mContext, this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
       mTimer.execute();
     } else if ( b == mBTok ) {
       mParent.setRefAzimuth( mAzimuth, 0 );

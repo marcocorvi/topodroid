@@ -27,13 +27,16 @@ import android.graphics.Path;
 import android.graphics.ImageFormat;
 
 import android.hardware.Camera;
+import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.Parameters;
 import android.hardware.Camera.PreviewCallback;
 import android.hardware.Camera.PictureCallback;
 import android.hardware.Camera.ShutterCallback;
+import android.hardware.SensorManager;
 
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+// import android.view.OrientationEventListener;
 
 import android.util.AttributeSet;
 import android.util.Log;
@@ -54,11 +57,51 @@ public class QCamDrawingSurface extends SurfaceView
   int mHeight;           // canvas height
 
   Camera mCamera = null;
+  Camera.Parameters mParameters;
   Camera.PreviewCallback mPreviewCallback;
   Camera.PictureCallback mRaw;
   Camera.PictureCallback mJpeg;
   Camera.ShutterCallback mShutter;
   byte[] mJpegData;
+
+  // MyOrientationListener mOrientationListener = null;
+
+  // class MyOrientationListener extends OrientationEventListener
+  // {
+  //   Camera.Parameters mParams;
+
+  //   MyOrientationListener( Context ctx, Camera.Parameters params ) 
+  //   {
+  //     super(ctx, SensorManager.SENSOR_DELAY_NORMAL );
+  //     mParams = params;
+  //   }
+
+  //   // Called when the orientation of the device has changed.
+  //   // orientation parameter is in degrees, ranging from 0 to 359.
+  //   // orientation is:
+  //   //   0 degrees when the device is oriented in its natural position,
+  //   //   90 degrees when its left side is at the top,
+  //   //  180 degrees when it is upside down,
+  //   //  270 degrees when its right side is to the top.
+  //   //  ORIENTATION_UNKNOWN is returned when the device is close to flat
+  //   //  and the orientation cannot be determined.
+  //   //
+  //   public void onOrientationChanged(int orientation)
+  //   {
+  //     Log.v("DistoX", "on Orientation Change " + orientation );
+  //     if (orientation == OrientationEventListener.ORIENTATION_UNKNOWN) return;
+  //     CameraInfo info = new CameraInfo();
+  //     Camera.getCameraInfo( 0, info );  // cameraId = 0
+  //     orientation = ((orientation + 45) / 90) * 90;
+  //     int rotation = 0;
+  //     // if (info.facing == CameraInfo.CAMERA_FACING_FRONT) {
+  //     //   rotation = (info.orientation - orientation + 360) % 360;
+  //     // } else {  // back-facing camera
+  //       rotation = (info.orientation + orientation) % 360;
+  //     // }
+  //     mParams.setRotation( orientation );
+  //   }
+  // } 
 
   public QCamDrawingSurface(Context context, AttributeSet attrs) 
   {
@@ -76,7 +119,9 @@ public class QCamDrawingSurface extends SurfaceView
     mJpegData = null;
 
     createCallbacks();
+
   }
+
 
   public void surfaceChanged(SurfaceHolder holder, int format, int width,  int height) 
   {
@@ -107,15 +152,21 @@ public class QCamDrawingSurface extends SurfaceView
     close();
   }
 
-  void takePicture()
+  boolean takePicture( int orientation )
   {
+    boolean ret = false;
     if ( mCamera != null ) {
+      mCamera.getParameters().setRotation( orientation );
       mCamera.takePicture( mShutter, mRaw, null, mJpeg);
+      ret = true;
     }
+    mQCam.enableButtons( true );
+    return ret;
   }
 
   public void close()
   {
+    // if ( mOrientationListener != null ) mOrientationListener.disable( );
     if ( mCamera != null ) {
       // Log.v("DistoX", "close qcam" );
       mCamera.stopPreview();
@@ -130,24 +181,25 @@ public class QCamDrawingSurface extends SurfaceView
     close();
     try {
       mCamera = Camera.open();
-      Camera.Parameters params = mCamera.getParameters();
-      params.setFocusMode( Camera.Parameters.FOCUS_MODE_AUTO );
-      params.setSceneMode( Camera.Parameters.SCENE_MODE_AUTO );
-      params.setFlashMode( Camera.Parameters.FLASH_MODE_AUTO );
-      List< Integer > formats = params.getSupportedPreviewFormats();
+      mParameters = mCamera.getParameters();
+      mParameters.setFocusMode( Camera.Parameters.FOCUS_MODE_AUTO );
+      mParameters.setSceneMode( Camera.Parameters.SCENE_MODE_AUTO );
+      mParameters.setFlashMode( Camera.Parameters.FLASH_MODE_AUTO );
+      List< Integer > formats = mParameters.getSupportedPreviewFormats();
       for ( Integer fmt : formats ) {
         if ( fmt.intValue() == ImageFormat.JPEG ) {
           // Log.v("DistoX", "Set preview format JPEG" );
-          params.setPreviewFormat( ImageFormat.JPEG );
+          mParameters.setPreviewFormat( ImageFormat.JPEG );
         }
         // Log.v("DistoX", "QCamPreview formats " + fmt );
       }
-      mCamera.setParameters( params );
+      mCamera.setParameters( mParameters );
       mCamera.setPreviewCallback( mPreviewCallback );
-      int format = params.getPreviewFormat();
+      int format = mParameters.getPreviewFormat();
       // Log.v( "DistoX", "QCamPreview Format " + format );
+      // mOrientationListener = new MyOrientationListener( mContext, mParameters );
 
-      Camera.Size size = params.getPreviewSize();
+      Camera.Size size = mParameters.getPreviewSize();
       // mWidth  = size.width;
       // mHeight = size.height;
       // Log.v( "DistoX", "QCamPreview size " + size.width + " " + size.height );
@@ -157,6 +209,7 @@ public class QCamDrawingSurface extends SurfaceView
       } catch ( IOException e ) {
         TDLog.Error( "cannot set preview display" );
       }
+      // if ( mOrientationListener != null ) mOrientationListener.enable( );
       mCamera.startPreview();
       return true;
     } catch ( RuntimeException e ) { // fail to connect to canera service
@@ -167,12 +220,13 @@ public class QCamDrawingSurface extends SurfaceView
     return false;
   }
 
-  private void start()
+  void start()
   {
     if ( mCamera != null ) {
       try { // start preview with new settings
         mCamera.setDisplayOrientation( 90 );
         mCamera.setPreviewDisplay(mHolder);
+        // if ( mOrientationListener != null ) mOrientationListener.enable( );
         mCamera.startPreview();
       } catch ( Exception e ) {
         TDLog.Error( "Error starting camera preview: " + e.getMessage());
@@ -182,6 +236,7 @@ public class QCamDrawingSurface extends SurfaceView
 
   private void stop()
   {
+    // if ( mOrientationListener != null ) mOrientationListener.disable( );
     if ( mCamera != null ) {
       try { // stop preview before making changes
         mCamera.stopPreview();

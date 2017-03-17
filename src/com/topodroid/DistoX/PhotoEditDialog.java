@@ -40,6 +40,7 @@ import android.util.Log;
 public class PhotoEditDialog extends MyDialog
                              implements View.OnClickListener
 {
+  private TopoDroidApp  mApp;
   private PhotoActivity mParent;
   private PhotoInfo mPhoto;
   private String mFilename;
@@ -49,25 +50,42 @@ public class PhotoEditDialog extends MyDialog
   private Button   mButtonOK;
   private Button   mButtonDelete;
   // private Button   mButtonCancel;
-  private String mAzimuth;
+  private float mAzimuth = 0;
+  private float mClino   = 0;
+  private int mOrientation = 0;
+  private String mDate = "";
 
   /**
    * @param context   context
    */
-  PhotoEditDialog( Context context, PhotoActivity parent, PhotoInfo photo, String filename )
+  PhotoEditDialog( Context context, PhotoActivity parent, TopoDroidApp app, PhotoInfo photo, String filename )
   {
     super( context, R.string.PhotoEditDialog );
     mParent = parent;
+    mApp    = app;
     mPhoto  = photo;
     mFilename = filename;
     // TDLog.Log(TDLog.LOG_PHOTO, "PhotoEditDialog " + mFilename);
+
+    mAzimuth = mClino = 0;
     try {
       ExifInterface exif = new ExifInterface( mFilename );
-      mAzimuth = exif.getAttribute( "GPSImgDirection" );
-      Log.v("DistoX", "azimuth " + ( (mAzimuth == null)? "null" : mAzimuth ) );
+      // mAzimuth = exif.getAttribute( "GPSImgDirection" );
+      mOrientation = exif.getAttributeInt( ExifInterface.TAG_ORIENTATION, 0 );
+      // Log.v("DistoX", "Photo edit orientation " + mOrientation );
+      String b = exif.getAttribute( ExifInterface.TAG_GPS_LONGITUDE );
+      String c = exif.getAttribute( ExifInterface.TAG_GPS_LATITUDE );
+      mDate = exif.getAttribute( ExifInterface.TAG_DATETIME );
+      if ( mDate == null ) mDate = "";
+      if ( b != null && c != null ) {
+        int k = b.indexOf('/');
+        mAzimuth = Integer.parseInt( b.substring(0,k) ) / 100.0f;
+        k = c.indexOf('/');
+        mClino = Integer.parseInt( c.substring(0,k) ) / 100.0f;
+        // Log.v("DistoX", "Long <" + bearing + "> Lat <" + clino + ">" );
+      }
     } catch ( IOException e ) {
       Log.v("DistoX", "failed exif interface " + mFilename );
-      mAzimuth = null;
     }
   }
 
@@ -80,19 +98,15 @@ public class PhotoEditDialog extends MyDialog
     initLayout( R.layout.photo_edit_dialog, R.string.title_photo_comment );
 
     mIVimage      = (ImageView) findViewById( R.id.photo_image );
-    TextView azimuth = (TextView) findViewById( R.id.photo_azimuth );
     mETcomment    = (EditText) findViewById( R.id.photo_comment );
     mButtonOK     = (Button) findViewById( R.id.photo_ok );
     mButtonDelete = (Button) findViewById( R.id.photo_delete );
     // mButtonCancel = (Button) findViewById( R.id.photo_cancel );
 
-    if ( mAzimuth != null ) {
-      azimuth.setText( String.format( mContext.getResources().getString( R.string.photo_azimuth ), mAzimuth ) );
-    } else {
-      azimuth.setVisibility( View.GONE );
-    }
+    ((TextView) findViewById( R.id.photo_azimuth )).setText(
+       String.format( mContext.getResources().getString( R.string.photo_azimuth_clino ), mAzimuth, mClino ) );
+    ((TextView) findViewById( R.id.photo_date )).setText( mDate );
 
-    // public String mPhoto.mDate;
     if ( mPhoto.mComment != null ) {
       mETcomment.setText( mPhoto.mComment );
     }
@@ -117,6 +131,7 @@ public class PhotoEditDialog extends MyDialog
         Bitmap image2 = Bitmap.createScaledBitmap( image, w2, h2, true );
         if ( image2 != null ) {
           mIVimage.setImageBitmap( image2 );
+          MyBearingAndClino.applyOrientation( mIVimage, mOrientation );
           // mIVimage.setHeight( h2 );
           // mIVimage.setWidth( w2 );
           mIVimage.setOnClickListener( this );
@@ -138,17 +153,20 @@ public class PhotoEditDialog extends MyDialog
     // Button b = (Button) v;
     // TDLog.Log(  TDLog.LOG_INPUT, "PhotoEditDialog onClick() " + b.getText().toString() );
 
-    if ( v.getId() == R.id.photo_ok ) {
-      if ( mETcomment.getText() == null ) {
-        mParent.updatePhoto( mPhoto, "" );
-      } else {
-        mParent.updatePhoto( mPhoto, mETcomment.getText().toString() );
-      }
-    } else if ( v.getId() == R.id.photo_delete ) {
-      mParent.dropPhoto( mPhoto );
-    } else if ( v.getId() == R.id.photo_image ) {
-      mParent.viewPhoto( mFilename );
-      return;
+    switch ( v.getId() ) {
+      case R.id.photo_ok:
+        if ( mETcomment.getText() == null ) {
+          mParent.updatePhoto( mPhoto, "" );
+        } else {
+          mParent.updatePhoto( mPhoto, mETcomment.getText().toString() );
+        }
+        break;
+      case R.id.photo_delete:
+        mParent.dropPhoto( mPhoto );
+        break;
+      case R.id.photo_image:
+        mApp.viewPhoto( mContext, mFilename );
+        return;
     }
     dismiss();
   }

@@ -58,12 +58,11 @@ import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
-import android.net.Uri;
 
 public class PhotoActivity extends Activity
                            implements OnItemClickListener, ILister
 {
-  private TopoDroidApp app;
+  private TopoDroidApp mApp;
 
   private ListView mList;
   // private int mListPos = -1;
@@ -107,12 +106,12 @@ public class PhotoActivity extends Activity
   public void updateDisplay( )
   {
     // TDLog.Log( TDLog.LOG_PHOTO, "updateDisplay() status: " + StatusName() + " forcing: " + force_update );
-    DataHelper data = app.mData;
-    if ( data != null && app.mSID >= 0 ) {
-      List< PhotoInfo > list = data.selectAllPhotos( app.mSID, TopoDroidApp.STATUS_NORMAL );
+    DataHelper data = mApp.mData;
+    if ( data != null && mApp.mSID >= 0 ) {
+      List< PhotoInfo > list = data.selectAllPhotos( mApp.mSID, TopoDroidApp.STATUS_NORMAL );
       // TDLog.Log( TDLog.LOG_PHOTO, "update shot list size " + list.size() );
       updatePhotoList( list );
-      setTitle( app.mySurvey );
+      setTitle( mApp.mySurvey );
     // } else {
     //   Toast.makeText( this, R.string.no_survey, Toast.LENGTH_SHORT ).show();
     }
@@ -155,8 +154,8 @@ public class PhotoActivity extends Activity
   public void startPhotoDialog( TextView tv, int pos )
   {
      mSavePhoto = mDataAdapter.get(pos);
-     String filename = TDPath.getSurveyJpgFile( app.mySurvey, Long.toString(mSavePhoto.id) );
-     (new PhotoEditDialog( this, this, mSavePhoto, filename )).show();
+     String filename = TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString(mSavePhoto.id) );
+     (new PhotoEditDialog( this, this, mApp, mSavePhoto, filename )).show();
   }
 
 
@@ -167,7 +166,7 @@ public class PhotoActivity extends Activity
   {
     super.onCreate( savedInstanceState );
     setContentView(R.layout.main_photo);
-    app = (TopoDroidApp) getApplication();
+    mApp = (TopoDroidApp) getApplication();
     mDataAdapter = new PhotoAdapter( this, R.layout.row, new ArrayList< PhotoInfo >() );
 
     mList = (ListView) findViewById(R.id.list);
@@ -180,27 +179,11 @@ public class PhotoActivity extends Activity
 
   // ------------------------------------------------------------------
 
-  public void viewPhoto( String filename )
-  {
-    // Log.v("DistoX", "photo <" + filename + ">" );
-    File file = new File( filename );
-    Uri uri = Uri.fromFile( file );
-    // Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("file://" + filename ) );
-    Intent intent = new Intent(Intent.ACTION_VIEW );
-    intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
-    intent.setDataAndType( uri, "image/jpeg" );
-    try {
-      startActivity( intent );
-    } catch ( ActivityNotFoundException e ) {
-      // gracefully fail without saying anything
-    }
-  }
-
   public void dropPhoto( PhotoInfo photo )
   {
-    app.mData.deletePhoto( photo.sid, photo.id );
+    mApp.mData.deletePhoto( photo.sid, photo.id );
 
-    File imagefile = new File( TDPath.getSurveyJpgFile( app.mySurvey, Long.toString(photo.id) ) );
+    File imagefile = new File( TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString(photo.id) ) );
     imagefile.delete();
 
     updateDisplay( ); // FIXME
@@ -209,8 +192,8 @@ public class PhotoActivity extends Activity
   public void updatePhoto( PhotoInfo photo, String comment )
   {
     // TDLog.Log( TDLog.LOG_PHOTO, "updatePhoto comment " + comment );
-    if ( app.mData.updatePhoto( photo.sid, photo.id, comment ) ) {
-      // if ( app.mListRefresh ) {
+    if ( mApp.mData.updatePhoto( photo.sid, photo.id, comment ) ) {
+      // if ( mApp.mListRefresh ) {
       //   // This works but it refreshes the whole list
       //   mDataAdapter.notifyDataSetChanged();
       // } else {

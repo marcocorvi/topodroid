@@ -36,6 +36,8 @@ import java.util.Locale;
 import java.util.List;
 import java.util.ArrayList;
 // import java.util.Stack;
+
+
 import android.widget.ArrayAdapter;
 
 import android.os.Environment;
@@ -78,6 +80,8 @@ import android.graphics.Point;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+
+import android.net.Uri;
 
 import android.util.Log;
 import android.util.DisplayMetrics;
@@ -697,8 +701,9 @@ public class TopoDroidApp extends Application
 // -----------------------------------------------------------------
 
   // called by GMActivity and by CalibCoeffDialog 
-  void uploadCalibCoeff( Context context, byte[] coeff, boolean check )
+  void uploadCalibCoeff( Context context, byte[] coeff, boolean check, Button b )
   {
+    if ( b != null ) b.setEnabled( false );
     if ( mComm == null || mDevice == null ) {
       Toast.makeText( context, R.string.no_device_address, Toast.LENGTH_SHORT ).show();
     } else if ( check && ! checkCalibrationDeviceMatch() ) {
@@ -708,6 +713,7 @@ public class TopoDroidApp extends Application
     } else {
       Toast.makeText( context, R.string.write_ok, Toast.LENGTH_SHORT).show();
     }
+    if ( b != null ) b.setEnabled( true );
   }
 
   // called by CalibReadTask.onPostExecute
@@ -1891,6 +1897,22 @@ public class TopoDroidApp extends Application
   {
     // FIXME COSURVEY 2d sections are not forwarded
     return mData.insertPlot( sid, -1L, name, type, 0L, from, to, 0, 0, TopoDroidApp.mScaleFactor, azimuth, clino, "", false );
+  }
+
+  public void viewPhoto( Context ctx, String filename )
+  {
+    // Log.v("DistoX", "photo <" + filename + ">" );
+    File file = new File( filename );
+    Uri uri = Uri.fromFile( file );
+    // Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("file://" + filename ) );
+    Intent intent = new Intent(Intent.ACTION_VIEW );
+    intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+    intent.setDataAndType( uri, "image/jpeg" );
+    try {
+      ctx.startActivity( intent );
+    } catch ( ActivityNotFoundException e ) {
+      // gracefully fail without saying anything
+    }
   }
 
   // ---------------------------------------------------------------------

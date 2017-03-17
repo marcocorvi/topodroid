@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import java.io.File;
+import java.io.IOException;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -27,6 +28,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+
+import android.media.ExifInterface;
 
 import android.util.Log;
 
@@ -46,6 +49,7 @@ public class DrawingLineSectionDialog extends MyDialog
   String  mTo;
   float   mAzimuth;
   float   mClino;
+  private int mOrientation = 0;
 
   private Button   mBtnFoto;
   private Button   mBtnDraw;
@@ -54,6 +58,7 @@ public class DrawingLineSectionDialog extends MyDialog
   private ImageView mIVimage;   // photo image
   boolean mHSection;
   boolean mExists;
+  String  mFilename;
   
   public DrawingLineSectionDialog( Context context,
                                    DrawingWindow parent, TopoDroidApp app, boolean h_section, boolean exists, String id,
@@ -69,6 +74,7 @@ public class DrawingLineSectionDialog extends MyDialog
     mTo   = to;
     mAzimuth = azimuth;
     mClino = clino;
+    mFilename = null;
 
     // read section id from the line options
     mId = mLine.getOption( "-id" );
@@ -106,7 +112,9 @@ public class DrawingLineSectionDialog extends MyDialog
     mTVoptions = (TextView) findViewById( R.id.line_options );
     mTVoptions.setText( "ID " + mId );
 
-    mIVimage      = (ImageView) findViewById( R.id.line_image );
+    mIVimage   = (ImageView) findViewById( R.id.line_image );
+    TextView tv_azimuth = (TextView) findViewById( R.id.line_azimuth );
+    TextView tv_date    = (TextView) findViewById( R.id.line_date );
 
     // mReversed = (CheckBox) findViewById( R.id.line_reversed );
     // mReversed.setChecked( mLine.mReversed );
@@ -117,12 +125,31 @@ public class DrawingLineSectionDialog extends MyDialog
     mBtnDraw.setOnClickListener( this );
     mBtnFoto.setOnClickListener( this );
     if ( mPlotInfo != null ) { // check the photo
-      String filename = TDPath.getSurveyJpgFile( mApp.mySurvey, mPlotInfo.name );
-      File imagefile = new File( filename );
+      mFilename = TDPath.getSurveyJpgFile( mApp.mySurvey, mPlotInfo.name );
+      File imagefile = new File( mFilename );
       if ( imagefile.exists() ) {
+        try {
+          ExifInterface exif = new ExifInterface( mFilename );
+          mOrientation = exif.getAttributeInt( ExifInterface.TAG_ORIENTATION, 0 );
+          // mAzimuth = exif.getAttribute( "GPSImgDirection" );
+          String b = exif.getAttribute( ExifInterface.TAG_GPS_LONGITUDE );
+          int k = b.indexOf('/');
+          float bearing = Integer.parseInt( b.substring(0,k) ) / 100.0f;
+          String c = exif.getAttribute( ExifInterface.TAG_GPS_LATITUDE );
+          k = c.indexOf('/');
+          float clino = Integer.parseInt( c.substring(0,k) ) / 100.0f;
+          // Log.v("DistoX", "Long <" + bearing + "> Lat <" + clino + ">" );
+          tv_azimuth.setText(
+            String.format( mContext.getResources().getString( R.string.photo_azimuth_clino ), bearing, clino ) );
+          String date = exif.getAttribute( ExifInterface.TAG_DATETIME );
+          tv_date.setText( (date != null)? date : "" );
+        } catch ( IOException e ) {
+          // should not happen
+        }
+
         BitmapFactory.Options bfo = new BitmapFactory.Options();
         bfo.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile( filename, bfo );
+        BitmapFactory.decodeFile( mFilename, bfo );
         int required_size = TDSetting.mThumbSize;
         int scale = 1;
         while ( bfo.outWidth/scale/2 > required_size || bfo.outHeight/scale/2 > required_size ) {
@@ -130,16 +157,26 @@ public class DrawingLineSectionDialog extends MyDialog
         }
         bfo.inJustDecodeBounds = false;
         bfo.inSampleSize = scale;
-        Bitmap image = BitmapFactory.decodeFile( filename, bfo );
+        Bitmap image = BitmapFactory.decodeFile( mFilename, bfo );
         if ( image != null ) {
           int w2 = image.getWidth() / 8;
           int h2 = image.getHeight() / 8;
           Bitmap image2 = Bitmap.createScaledBitmap( image, w2, h2, true );
-          mIVimage.setImageBitmap( image2 );
-          // mIVimage.setHeight( h2 );
-          // mIVimage.setWidth( w2 );
+          if ( image2 != null ) {
+            mIVimage.setImageBitmap( image2 );
+            MyBearingAndClino.applyOrientation( mIVimage, mOrientation );
+            // mIVimage.setHeight( h2 );
+            // mIVimage.setWidth( w2 );
+            mIVimage.setOnClickListener( this );
+          } else {
+            mIVimage.setVisibility( View.GONE );
+          }
         }
+
         // mBtnFoto.setBackgroundResource( R.drawable.ic_camera_no );
+      } else {
+        tv_azimuth.setVisibility( View.GONE );
+        tv_date.setVisibility( View.GONE );
       }
     }
 
@@ -153,18 +190,24 @@ public class DrawingLineSectionDialog extends MyDialog
 
   public void onClick(View v) 
   {
-    Button b = (Button)v;
     // TDLog.Log( TDLog.LOG_INPUT, "Drawing Line Section Dialog onClick() " + b.getText().toString() );
     long type = mHSection ? PlotInfo.PLOT_H_SECTION : PlotInfo.PLOT_SECTION;
 
-    if ( b == mBtnFoto ) {
-      mParent.makeSectionPhoto( mLine, mId, type, mFrom, mTo, mAzimuth, mClino );
-    } else if ( b == mBtnDraw ) {
-      mParent.makeSectionDraw( mLine, mId, type, mFrom, mTo, mAzimuth, mClino );
-    } else if ( b == mBtnErase ) {
-      mParent.deleteLine( mLine );
-    // } else if ( b == mBtnCancel ) {
-    //   /* nothing */
+    switch ( v.getId() ) {
+      case R.id.button_foto:
+        mParent.makeSectionPhoto( mLine, mId, type, mFrom, mTo, mAzimuth, mClino );
+        break;
+      case R.id.button_draw:
+        mParent.makeSectionDraw( mLine, mId, type, mFrom, mTo, mAzimuth, mClino );
+        break;
+      case R.id.button_erase:
+        mParent.deleteLine( mLine );
+        break;
+      case R.id.line_image:
+        mApp.viewPhoto( mContext, mFilename );
+        break;
+      default: // R.id.button_cancel
+        /* nothing */
     }
     dismiss();
   }
