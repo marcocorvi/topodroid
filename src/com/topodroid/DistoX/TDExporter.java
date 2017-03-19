@@ -1911,7 +1911,7 @@ class TDExporter
       // for all splays
       int number = 0;
       for ( DBlock blk : list ) {
-        if ( blk.mType != DBlock.BLOCK_SPLAY ) continue;
+        if ( ! blk.isSplay() ) continue;
         TRobotPoint pt = trobot.getPoint( blk.mFrom );
         if ( pt == null ) continue;
         ++ number;

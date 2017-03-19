@@ -252,6 +252,7 @@ public class FixedActivity extends Activity
 
   void setDeclination( float decl )
   {
+    // Log.v( "DistoX", "set declination " + decl );
     mApp.mData.updateSurveyDeclination( mApp.mSID, decl, true );
   }
 

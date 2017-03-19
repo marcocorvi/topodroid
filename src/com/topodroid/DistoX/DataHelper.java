@@ -223,8 +223,11 @@ public class DataHelper extends DataSetObservable
      
      block.mExtend  = cursor.getLong(9);
      block.mFlag    = cursor.getLong(10);
-     if ( cursor.getLong(11) == 1 ) {
+     long leg = cursor.getLong(11);
+     if ( leg == 1L ) {
        block.mType = DBlock.BLOCK_SEC_LEG; 
+     } else if ( leg == 2L ) {
+       block.mType = DBlock.BLOCK_X_SPLAY;
      }
      block.mComment = cursor.getString(12);
      block.mShotType = (int)cursor.getLong(13);
@@ -805,6 +808,22 @@ public class DataHelper extends DataSetObservable
     } catch (SQLiteException e ) {
       logError("shot " + id + " leg", e );
     }
+  }
+
+  // FIXME_X_SPLAY
+  public long updateSplayLeg( long id, long sid, boolean forward )
+  {
+    // if ( myDB == null ) return;
+    // get the shot sid/id
+    DBlock blk = selectShot( id, sid );
+    if ( blk.mType == DBlock.BLOCK_SPLAY ) {
+      updateShotLeg( id, sid, 2L, forward );
+      return 2L;
+    } else if ( blk.mType == DBlock.BLOCK_X_SPLAY ) {
+      updateShotLeg( id, sid, 0L, forward );
+      return 0L;
+    }
+    return -1L;
   }
 
   public void updateShotExtend( long id, long sid, long extend, boolean forward )

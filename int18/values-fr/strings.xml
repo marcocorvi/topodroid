@@ -301,6 +301,7 @@
     <!-- UNUSED string name="not_implemented">Pas encore implémenté</string -->
     <string name="null_bitmap">Création image impossible</string>
     <!-- UNUSED string name="photo">photo</string -->
+    <!-- TODO string name="photo_camera">Camera App</string -->
     <string name="photo_comment_prompt">Saisissez un commentaire pour la photo</string>
     <!-- TODO string name="photo_azimuth_clino">Azimuth: %1$.1f Clino %2$.1f</string -->
     <!-- UNUSED string name="photo_name">station/nom</string -->
@@ -475,7 +476,7 @@
     <string name="button_ok"        >OK        </string>
     <string name="button_open"      >Ouvrir    </string>
     <string name="button_read"      >Lecture      </string>
-    <!-- TODO string name="button_redo"      >Redo      </string -->
+    <!-- UNUSED string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >Regrouper   </string -->
     <string name="button_dump"      >Dump     </string>
     <!-- TODO string name="button_replace"   >Replace   </string -->

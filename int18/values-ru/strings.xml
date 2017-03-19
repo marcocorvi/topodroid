@@ -301,6 +301,7 @@
     <!-- UNUSED string name="not_implemented">Пока не реализовано</string -->
     <string name="null_bitmap">null bitmap [OOM error]</string>
     <!-- UNUSED string name="photo">фото</string -->
+    <!-- TODO string name="photo_camera">Camera App</string -->
     <string name="photo_comment_prompt">Введите комментарий к фото</string>
     <!-- TODO string name="photo_azimuth_clino">Azimuth: %1$.1f Clino %2$.1f</string -->
     <!-- UNUSED string name="photo_name">Пикет/название</string -->
@@ -475,7 +476,7 @@
     <!-- OK string name="button_ok"        >OK        </string -->
     <string name="button_open"      >Откр      </string>
     <string name="button_read"      >Считать   </string>
-    <string name="button_redo"      >Повторить      </string>
+    <!-- UNUSED string name="button_redo"      >Повторить      </string -->
     <!-- UNUSED string name="button_regroup"   >Перегруппировать   </string -->
     <string name="button_dump"      >Дамп      </string>
     <string name="button_replace"   >Замена   </string>

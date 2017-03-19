@@ -303,6 +303,7 @@
     <!-- UNUSED string name="not_implemented">Non implementato</string -->
     <string name="null_bitmap">bitmap ni veljavna</string>
     <string name="photo">foto</string>
+    <!-- TODO string name="photo_camera">Camera App</string -->
     <string name="photo_comment_prompt">Piši komentar</string>
     <!-- TODO string name="photo_azimuth_clino">Azimuth: %1$.1f Clino %2$.1f</string -->
     <!-- UNUSED string name="photo_name">caposaldo/nome</string -->
@@ -478,7 +479,7 @@
     <!-- OK string name="button_ok"        >OK        </string -->
     <string name="button_open"      >Odpri      </string>
     <string name="button_read"      >Beri     </string>
-    <!-- TODO string name="button_redo"      >Redo      </string -->
+    <!-- UNUSED string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <!-- TODO string name="button_dump"      >Dump   </string -->
     <!-- TODO string name="button_replace"   >Replace   </string -->

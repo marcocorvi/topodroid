@@ -100,7 +100,7 @@ class StationName
     // Log.v("DistoX", "*    " + oldFrom + " " + from + "-" + back + "-" + next + ":" + station + " flip=" + (flip?"y":"n") );
 
     for ( DBlock blk : list ) {
-      if ( blk.mType == DBlock.BLOCK_SPLAY ) {
+      if ( blk.isSplay() ) {
         if ( flip ) { 
           flip = false;
         }
@@ -303,7 +303,7 @@ class StationName
 
     String oldFrom = blk0.mFrom;
     for ( DBlock blk : list ) {
-      if ( blk.mType == DBlock.BLOCK_SPLAY ) {
+      if ( blk.isSplay() ) {
         // if ( flip ) { 
         //   flip = false;
         // }
@@ -477,7 +477,7 @@ class StationName
 
     // int nrLegShots = 0;
     for ( DBlock blk : list ) {
-      if ( blk.mType == DBlock.BLOCK_SPLAY ) {
+      if ( blk.isSplay() ) {
         // blk.mFrom = station;
         blk.setName( station, "" );
         data_helper.updateShotName( blk.mId, sid, blk.mFrom, "", true );  // SPLAY
@@ -658,7 +658,7 @@ class StationName
 
     // int nrLegShots = 0;
     for ( DBlock blk : list ) {
-      if ( blk.mType == DBlock.BLOCK_SPLAY ) {
+      if ( blk.isSplay() ) {
         // blk.mFrom = station;
         blk.setName( station, "" );
         data_helper.updateShotName( blk.mId, sid, blk.mFrom, "", true );  // SPLAY

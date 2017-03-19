@@ -301,6 +301,7 @@
     <!-- UNUSED string name="not_implemented">Тази функционалност не достъпна все още</string -->
     <string name="null_bitmap">Не може да бъде създадено изображение. Недостатъчна памет</string>
     <string name="photo">снимка</string>
+    <!-- TODO string name="photo_camera">Camera App</string -->
     <string name="photo_comment_prompt">Въведете коментар към снимката</string>
     <!-- TODO string name="photo_azimuth_clino">Azimuth: %1$.1f Clino %2$.1f</string -->
     <!-- UNUSED string name="photo_name">репер/име</string -->
@@ -476,7 +477,7 @@
     <string name="button_ok"        >OK        </string>
     <string name="button_open"      >Отваряне  </string>
     <string name="button_read"      >Четене    </string>
-    <string name="button_redo"      >Redo      </string>
+    <!-- UNUSED string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >Прегрупиране</string -->
     <string name="button_dump"      >Запис     </string>
     <string name="button_replace"   >Подмяна   </string>

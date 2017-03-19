@@ -300,6 +300,7 @@
     <!-- UNUSED string name="not_implemented">Non implementato</string -->
     <string name="null_bitmap">bitmap non valida</string>
     <string name="photo">foto</string>
+    <!-- TODO string name="photo_camera">Camera App</string -->
     <string name="photo_comment_prompt">Scrivi il commento</string>
     <!-- TODO string name="photo_azimuth_clino">Azimuth: %1$.1f Clino %2$.1f</string -->
     <!-- UNUSED string name="photo_name">caposaldo/nome</string -->
@@ -475,7 +476,7 @@
     <string name="button_ok"        >OK        </string>
     <string name="button_open"      >Apri      </string>
     <string name="button_read"      >Leggi     </string>
-    <string name="button_redo"      >Ripeti azione</string>
+    <!-- UNUSED string name="button_redo"      >Ripeti azione</string -->
     <!-- UNUSED string name="button_regroup"   >Raggruppare   </string -->
     <string name="button_dump"      >Scarica   </string>
     <string name="button_replace"   >Sostituisci</string>

@@ -76,12 +76,12 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
         int k1 = k-1;
         for ( ; k1 > 0; --k1 ) {
           DBlock b1 = mItems.get( k1 );
-          if ( b1.mType != DBlock.BLOCK_SPLAY || ! name.equals( b1.mFrom ) ) break;
+          if ( ! b1.isSplay() || ! name.equals( b1.mFrom ) ) break;
         }
         int k2 = k;
         for ( ; k2 < mItems.size(); ++k2 ) {
           DBlock b2 = mItems.get( k2 );
-          if ( b2.mType != DBlock.BLOCK_SPLAY || ! name.equals( b2.mFrom ) ) break;
+          if ( ! b2.isSplay() || ! name.equals( b2.mFrom ) ) break;
         }
         for ( ++k1; k1<k2; ++k1 ) ret.add( mItems.get(k1) );
         break;
@@ -217,7 +217,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       //   tvFrom.setTextColor( col );
       //   tvTo.setTextColor(   col );
       // }
-      tvLength.setTextColor(  col );
+      tvLength.setTextColor( col );
 
       if ( b.isRecent( mParent.secondLastShotId() ) ) {
         tvFrom.setBackgroundColor( TDColor.DARK_GREEN );

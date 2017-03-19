@@ -55,7 +55,7 @@ public class ShotDialog extends MyDialog
   private DBlock mBlk;
   private DBlock mPrevBlk;
   private DBlock mNextBlk;
-  // private int mPos; // item position in the parent' list
+  private int mPos; // item position in the parent' adapter list
 
   private Pattern mPattern; // name pattern
 
@@ -75,6 +75,7 @@ public class ShotDialog extends MyDialog
   private MyCheckBox mCBlegPrev;
   private MyCheckBox mCBlegNext;
   private MyCheckBox mCBallSplay;
+  private MyCheckBox mCBxSplay;
   private MyCheckBox mCBrenumber;
   // private MyCheckBox mCBhighlight;
 
@@ -119,6 +120,7 @@ public class ShotDialog extends MyDialog
   String shot_from;
   String shot_to;
   boolean shot_leg;
+  boolean shot_xsplay;
   // String shot_data;
   String shot_distance;
   String shot_bearing;
@@ -140,13 +142,13 @@ public class ShotDialog extends MyDialog
   private static int flagBearing  = MyKeyboard.FLAG_POINT;
   private static int flagClino    = MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_SIGN;
 
-  public ShotDialog( Context context, ShotWindow parent, /* int pos, */ DBlock blk,
+  public ShotDialog( Context context, ShotWindow parent, int pos, DBlock blk,
                      DBlock prev, DBlock next
                    )
   {
     super( context, R.string.ShotDialog );
     mParent = parent;
-    // mPos = pos;
+    mPos = pos;
     loadDBlock( blk, prev, next );
     // TDLog.Log( TDLog.LOG_SHOT, "Shot Dialog " + blk.toString(true) );
   }
@@ -186,6 +188,7 @@ public class ShotDialog extends MyDialog
     shot_extend  = blk.mExtend;
     shot_flag    = blk.mFlag;
     shot_leg     = blk.mType == DBlock.BLOCK_SEC_LEG;
+    shot_xsplay  = blk.mType == DBlock.BLOCK_X_SPLAY;
     shot_comment = blk.mComment;
 
     // if ( blk.type() != DBlock.BLOCK_MAIN_LEG ) mCBdeleteLeg.setVisibility( View.GONE );
@@ -335,6 +338,11 @@ public class ShotDialog extends MyDialog
     mCBlegPrev   = new MyCheckBox( mContext, size, R.drawable.iz_leg2_ok, R.drawable.iz_leg2_no );
     mCBlegNext   = new MyCheckBox( mContext, size, R.drawable.iz_legnext_ok, R.drawable.iz_legnext_no );
     mCBallSplay  = new MyCheckBox( mContext, size, R.drawable.iz_splays_ok, R.drawable.iz_splays_no );
+    if ( shot_xsplay ) {
+      mCBxSplay    = new MyCheckBox( mContext, size, R.drawable.iz_ysplays_ok, R.drawable.iz_ysplays_no );
+    } else {
+      mCBxSplay    = new MyCheckBox( mContext, size, R.drawable.iz_xsplays_ok, R.drawable.iz_xsplays_no );
+    }
     mCBrenumber  = new MyCheckBox( mContext, size, R.drawable.iz_numbers_ok, R.drawable.iz_numbers_no );
     // mCBhighlight = new MyCheckBox( mContext, size, R.drawable.iz_highlight_ok, R.drawable.iz_highlight_no );
 
@@ -343,6 +351,7 @@ public class ShotDialog extends MyDialog
     layout4.addView( mCBlegPrev, lp );
     layout4.addView( mCBlegNext, lp );
     layout4.addView( mCBallSplay, lp );
+    layout4.addView( mCBxSplay, lp );
     layout4.addView( mCBrenumber );
     // layout4.addView( mCBhighlight );
     layout4.invalidate();
@@ -350,6 +359,7 @@ public class ShotDialog extends MyDialog
     mCBlegPrev.setOnClickListener( this );
     mCBlegNext.setOnClickListener( this );
     mCBallSplay.setOnClickListener( this );
+    mCBxSplay.setOnClickListener( this );
 
     // mBTphoto  = new MyCheckBox( mContext, size, R.drawable.iz_camera, R.drawable.iz_camera ); 
     // mBTsensor = new MyCheckBox( mContext, size, R.drawable.iz_sensor, R.drawable.iz_sensor ); 
@@ -441,16 +451,19 @@ public class ShotDialog extends MyDialog
     // }
 
     boolean all_splay = mCBallSplay.isChecked();
+    boolean x_splay = mCBxSplay.isChecked();
     boolean leg_next  = false;
     if ( mCBlegPrev.isChecked() ) {
       shot_from = "";
-      shot_to = "";
-      shot_leg = true;
+      shot_to   = "";
+      shot_leg  = true;
       all_splay = false;
+      x_splay   = false;
     } else if ( mCBlegNext.isChecked() ) {
       leg_next  = true;
       shot_leg  = false;
       all_splay = false;
+      x_splay   = false;
     } else {
       shot_from = TopoDroidUtil.noSpaces( mETfrom.getText().toString() );
       // if ( shot_from == null ) { shot_from = ""; }
@@ -493,6 +506,7 @@ public class ShotDialog extends MyDialog
       if ( shot_to.length() > 0 ) {
         renumber = mCBrenumber.isChecked();
         all_splay = false;
+        x_splay   = false;
       // } else { // this is useless: replaced by long-tap on shot list 
       //   if ( mCBhighlight.isChecked() ) {
       //     Log.v("DistoX", "parent to highlight " + mBlk.mFrom + " " + mBlk.mTo );
@@ -503,6 +517,8 @@ public class ShotDialog extends MyDialog
 
     if ( all_splay ) {
       mParent.updateSplayShots( shot_from, shot_to, shot_extend, shot_flag, shot_leg, comment, mBlk );
+    } else if ( x_splay ) {
+      mParent.updateSplayLeg( mPos );
     } else {
       // mBlk.setName( shot_from, shot_to ); // done by parent.updateShot
       // if ( shot_leg ) mBlk.mType = DBlock.BLOCK_SEC_LEG; // FIXME maybe not necessary
@@ -555,12 +571,21 @@ public class ShotDialog extends MyDialog
       mCBlegPrev.toggleState();
       if ( mCBlegPrev.isChecked() ) {
         mCBallSplay.setState( false );
+        mCBxSplay.setState( false );
         mCBlegNext.setState( false );
       }
     } else if ( b == mCBallSplay ) {
       // Log.v("DistoX", "CB all_splay clicked ");
       mCBallSplay.toggleState();
       if ( mCBallSplay.isChecked() ) {
+        mCBxSplay.setState( false );
+        mCBlegPrev.setState( false );
+        mCBlegNext.setState( false );
+      }
+    } else if ( b == mCBxSplay ) {
+      mCBxSplay.toggleState();
+      if ( mCBxSplay.isChecked() ) {
+        mCBallSplay.setState( false );
         mCBlegPrev.setState( false );
         mCBlegNext.setState( false );
       }
@@ -569,6 +594,7 @@ public class ShotDialog extends MyDialog
       if ( mCBlegNext.isChecked() ) {
         mCBlegPrev.setState( false );
         mCBallSplay.setState( false );
+        mCBxSplay.setState( false );
       }
     } else if ( b == mRBdup ) {
       mRBdup.toggleState();
@@ -629,6 +655,7 @@ public class ShotDialog extends MyDialog
       saveDBlock();
 
     } else if ( b == mButtonPrev ) {
+      mCBxSplay.setVisibility( View.GONE );
       // shift:
       //               prev -- blk -- next
       // prevOfPrev -- prev -- blk
@@ -644,6 +671,7 @@ public class ShotDialog extends MyDialog
       }
 
     } else if ( b == mButtonNext ) {
+      mCBxSplay.setVisibility( View.GONE );
       // shift:
       //        prev -- blk -- next
       //                blk -- next -- nextOfNext

@@ -316,10 +316,14 @@ public class DrawingPath extends RectF
         canvas.restore();
       }
     } else {
-      if ( mType == DRAWING_PATH_SPLAY 
-           && mBlock != null && mBlock.isRecent( TopoDroidApp.mSecondLastShotId ) 
-           && BrushManager.fixedBluePaint != null ) {
-        canvas.drawPath( path, BrushManager.fixedBluePaint );
+      if (    mType == DRAWING_PATH_SPLAY  // FIXME_X_SPLAY
+           && mBlock != null 
+           && mBlock.isRecent( TopoDroidApp.mSecondLastShotId ) ) {
+        if ( mBlock.mType == DBlock.BLOCK_SPLAY && BrushManager.fixedBluePaint != null ) {
+          canvas.drawPath( path, BrushManager.fixedBluePaint );
+        } else if ( mBlock.mType == DBlock.BLOCK_X_SPLAY && BrushManager.fixedSplay2Paint != null ) {
+          canvas.drawPath( path, BrushManager.fixedSplay2Paint );
+        }
       } else if ( mPaint != null ) {
         canvas.drawPath( path, mPaint );
       }

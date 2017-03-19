@@ -121,7 +121,7 @@ class DistoXNum
   {
     ArrayList< NumSplay > ret = new ArrayList< NumSplay >();
     for ( NumSplay splay : mSplays ) {
-      if ( splay.getBlock().mType == DBlock.BLOCK_SPLAY && st == splay.from ) {
+      if ( splay.getBlock().isSplay() && st == splay.from ) {
         ret.add( splay );
       }
     }
@@ -670,9 +670,11 @@ class DistoXNum
     List<TriSplay> tmpsplays = new ArrayList< TriSplay >();
 
     for ( DBlock blk : data ) {
+      // Log.v("DistoX", "NUM blk type " + blk.mType );
       switch ( blk.type() ) {
 
         case DBlock.BLOCK_SPLAY:
+        case DBlock.BLOCK_X_SPLAY:
           lastLeg = null;  // clear last-leg
           if ( blk.mFrom != null && blk.mFrom.length() > 0 ) { // normal splay
             tmpsplays.add( new TriSplay( blk, blk.mFrom, (int)(blk.mExtend), +1 ) );

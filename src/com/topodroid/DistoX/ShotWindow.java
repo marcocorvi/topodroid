@@ -438,7 +438,7 @@ public class ShotWindow extends Activity
         if ( DBlock.isTypeBlank(t) ) {
           prev = cur;
           if ( mBlank ) continue;
-        } else if ( t == DBlock.BLOCK_SPLAY ) {
+        } else if ( DBlock.isSplay(t) ) {
           prev = null;
           if ( mSplay ) { // do hide splays, except those that are shown.
             // boolean skip = true;
@@ -491,7 +491,7 @@ public class ShotWindow extends Activity
     DBlock nextBlock = null;
     prevBlock = getPreviousLegShot( blk, false );
     nextBlock = getNextLegShot( blk, false );
-    (new ShotDialog( mActivity, this, /* pos, */ blk, prevBlock, nextBlock )).show();
+    (new ShotDialog( mActivity, this, pos, blk, prevBlock, nextBlock )).show();
   }
 
   @Override 
@@ -503,10 +503,30 @@ public class ShotWindow extends Activity
     // TDLog.Log( TDLog.LOG_INPUT, "ShotWindow onItemLongClick id " + id);
     DBlock blk = mDataAdapter.get(pos);
     // onBlockLongClick( blk );
-    if ( blk.mType == DBlock.BLOCK_SPLAY ) {
+    if ( blk.isSplay() ) {
       highlightBlock( blk );
     }
     return true;
+  }
+
+  void updateSplayLeg( int pos ) // pos = mDataAdapter pos
+  {
+    DBlock blk = mDataAdapter.get(pos);
+    for ( ; blk != null; ) {
+      long leg = mApp.mData.updateSplayLeg( blk.mId, mApp.mSID, true );
+      // Log.v("DistoX", "toggle splay type " + pos + " new leg " + leg );
+      if ( leg == 0L ) {
+        blk.mType = DBlock.BLOCK_SPLAY;
+      } else if ( leg == 2L ) {
+        blk.mType = DBlock.BLOCK_X_SPLAY;
+      } else {
+        break;
+      }
+      // if ( blk.mView != null ) blk.mView.invalidate();
+      mDataAdapter.updateBlockView( blk.mId );
+      if ( (--pos) < 0 ) break;
+      blk = mDataAdapter.get(pos);
+    }
   }
 
   // called by ShotDialog "More" button

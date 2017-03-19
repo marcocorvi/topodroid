@@ -311,6 +311,7 @@
     <!-- UNUSED string name="not_implemented">Noch nicht implementiert</string -->
     <string name="null_bitmap">Null Bitmap [OOM Fehler]</string>
     <string name="photo">Foto</string>
+    <!-- TODO string name="photo_camera">Camera App</string -->
     <string name="photo_comment_prompt">Kommentar</string>
     <!-- TODO string name="photo_azimuth_clino">Azimuth: %1$.1f Clino %2$.1f</string -->
     <!-- UNUSED string name="photo_name">Messpunkt/Name</string -->
@@ -492,7 +493,7 @@
     <string name="button_ok"        >OK        </string>
     <string name="button_open"      >Öffnen     </string>
     <string name="button_read"      >Lesen      </string>
-    <string name="button_redo"      >Nochmals      </string>
+    <!-- UNUSED string name="button_redo"      >Nochmals      </string -->
     <!-- UNUSED string name="button_regroup"   >Umgruppieren   </string -->
     <string name="button_dump"      >Lesen</string>
     <string name="button_replace"   >Ersetzen   </string>

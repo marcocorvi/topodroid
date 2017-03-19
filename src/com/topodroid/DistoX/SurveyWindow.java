@@ -274,6 +274,7 @@ public class SurveyWindow extends Activity
       int m = TopoDroidUtil.dateParseMonth( date );
       int d = TopoDroidUtil.dateParseDay( date );
       new DatePickerDialog( mActivity, mDateListener, y, m, d ).show();
+      saveSurvey();
       return;
     }
 
@@ -286,6 +287,7 @@ public class SurveyWindow extends Activity
       do3D();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // GPS
       mActivity.startActivity( new Intent( mActivity, FixedActivity.class ) );
+      // FIXME update declination
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // photo camera
       mActivity.startActivity( new Intent( mActivity, PhotoActivity.class ) );
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // sensors data
@@ -293,12 +295,12 @@ public class SurveyWindow extends Activity
     }
   }
 
-  // @Override
-  // public void onStop()
-  // {
-  //   saveSurvey();
-  //   super.onStop();
-  // }
+  @Override
+  public void onStop()
+  {
+    saveSurvey();
+    super.onStop();
+  }
 
   private void doArchive()
   {
@@ -550,7 +552,7 @@ public class SurveyWindow extends Activity
   {
     switch ( code ) {
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
-        // saveSurvey();
+        // saveSurvey(); 
         super.onBackPressed();
         return true;
       case KeyEvent.KEYCODE_SEARCH:

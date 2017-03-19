@@ -100,6 +100,7 @@ public class BrushManager
   static Paint fixedShotPaint  = null;
   static Paint fixedBluePaint  = null;
   static Paint fixedRedPaint  = null;
+  static Paint fixedGreenPaint  = null;
   static Paint fixedYellowPaint  = null;
   static Paint fixedOrangePaint  = null;
   static Paint fixedSplayPaint = null;
@@ -233,6 +234,13 @@ public class BrushManager
       fixedYellowPaint.setStrokeJoin(Paint.Join.ROUND);
       fixedYellowPaint.setStrokeCap(Paint.Cap.ROUND);
       fixedYellowPaint.setColor( TDColor.FIXED_YELLOW );
+
+      fixedGreenPaint = new Paint();
+      fixedGreenPaint.setDither(true);
+      fixedGreenPaint.setStyle(Paint.Style.STROKE);
+      fixedGreenPaint.setStrokeJoin(Paint.Join.ROUND);
+      fixedGreenPaint.setStrokeCap(Paint.Cap.ROUND);
+      fixedGreenPaint.setColor( TDColor.GREEN );
 
       fixedOrangePaint = new Paint();
       fixedOrangePaint.setDither(true);

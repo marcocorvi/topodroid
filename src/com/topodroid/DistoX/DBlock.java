@@ -60,6 +60,7 @@ public class DBlock
   public static final int BLOCK_SPLAY      = 2;
   public static final int BLOCK_SEC_LEG    = 3; // additional shot of a centerline leg
   public static final int BLOCK_BLANK_LEG  = 4; // blank centerline leg-shot
+  public static final int BLOCK_X_SPLAY    = 5; // FIXME_X_SPLAY cross splay
 
   private static int[] colors = {
     TDColor.LIGHT_PINK,   // blank
@@ -67,6 +68,7 @@ public class DBlock
     TDColor.LIGHT_BLUE,   // splay
     TDColor.LIGHT_GRAY,   // sec. leg
     TDColor.VIOLET,       // blank leg
+    TDColor.GREEN,        // FIXME_X_SPLAY X splay
     TDColor.GREEN
   };
 
@@ -85,6 +87,10 @@ public class DBlock
   static boolean isTypeBlank( int t ) { return t == BLOCK_BLANK || t == BLOCK_BLANK_LEG; }
 
   public int type() { return mType; }
+
+  static boolean isSplay( int t ) { return t == BLOCK_SPLAY || t == BLOCK_X_SPLAY; }
+
+  boolean isSplay() { return mType == BLOCK_SPLAY || mType == BLOCK_X_SPLAY; }
 
   boolean isMagneticBad( )
   {

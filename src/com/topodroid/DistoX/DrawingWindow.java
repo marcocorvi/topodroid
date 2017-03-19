@@ -626,7 +626,9 @@ public class DrawingWindow extends ItemDrawer
     DrawingPath dpath = null;
     if ( splay ) {
       dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
-      if ( blk.mClino > TDSetting.mVertSplay ) {
+      if ( blk.mType == DBlock.BLOCK_X_SPLAY ) {
+        dpath.setPaint( BrushManager.fixedGreenPaint );
+      } else if ( blk.mClino > TDSetting.mVertSplay ) {
         dpath.setPaint( BrushManager.fixedSplay4Paint );
       } else if ( blk.mClino < -TDSetting.mVertSplay ) {
         dpath.setPaint( BrushManager.fixedSplay3Paint );
@@ -1726,7 +1728,7 @@ public class DrawingWindow extends ItemDrawer
         }
 
         for ( DBlock b : list ) {
-          if ( b.mType == DBlock.BLOCK_SPLAY ) continue;
+          if ( b.isSplay() ) continue;
           if ( mFrom.equals( b.mFrom ) && mTo.equals( b.mTo ) ) { // FROM --> TO
             dist = b.mLength;
             blk = b;
@@ -1760,7 +1762,7 @@ public class DrawingWindow extends ItemDrawer
       }
 
       for ( DBlock b : list ) { // repeat for splays
-        if ( b.mType != DBlock.BLOCK_SPLAY ) continue;
+        if ( ! b.isSplay() ) continue;
    
         int splay_station = 3; // could use a boolean
         if ( b.mFrom.equals( mFrom ) ) {
