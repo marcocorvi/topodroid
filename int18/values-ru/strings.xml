@@ -301,7 +301,7 @@
     <!-- UNUSED string name="not_implemented">Пока не реализовано</string -->
     <string name="null_bitmap">null bitmap [OOM error]</string>
     <!-- UNUSED string name="photo">фото</string -->
-    <!-- TODO string name="photo_camera">Camera App</string -->
+    <string name="photo_camera">Приложение камера</string>
     <string name="photo_comment_prompt">Введите комментарий к фото</string>
     <string name="photo_azimuth_clino">Азимут: %1$.1f Наклон: %2$.1f</string>
     <!-- UNUSED string name="photo_name">Пикет/название</string -->
