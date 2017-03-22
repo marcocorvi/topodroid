@@ -300,9 +300,9 @@
     <!-- UNUSED string name="not_implemented">Não implementado</string -->
     <string name="null_bitmap">Impossível criar imagem [OOM error]</string>
     <string name="photo">foto</string>
-    <!-- TODO string name="photo_camera">Camera App</string -->
+    <string name="photo_camera">Câmera Fotográfica</string>
     <string name="photo_comment_prompt">Inserir comentário para a foto</string>
-    <!-- TODO string name="photo_azimuth_clino">Azimuth: %1$.1f Clino %2$.1f</string -->
+    <string name="photo_azimuth_clino">Azimute: %1$.1f Inclinação %2$.1f</string>
     <!-- UNUSED string name="photo_name">base/nome</string -->
     <!-- UNUSED string name="photo_photo">foto</string -->
     <!-- UNUSED string name="photo_sensor">sensor</string -->
