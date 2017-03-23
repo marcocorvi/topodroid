@@ -928,7 +928,7 @@
   <string name="pref_drawing_unit_summary">Pont eszközök méretaránya</string>
   <string name="pref_drawing_unit_message">Pont rajzeszközök méretaránya</string>
   <string name="pref_unscaled_points_title">Pont jelkulcsok nem nagyíthatóak</string>
-  <string name="pref_unscaled_points_summary">A pont ábrázoló jelkulcs elemek nem nagyíthatóak</string>
+  <string name="pref_unscaled_points_summary">A pont tipusú jelkulcs elemek nem nagyíthatóak</string>
   <string name="pref_segment_title">Vonal-pont távolság</string>
   <!-- UNUSED string name="pref_segment_summary">Minimum line-point distance</string -->
   <string name="pref_segment_message">Minimális távolság egy vonalon lévő pontok között</string>
