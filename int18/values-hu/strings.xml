@@ -1006,7 +1006,7 @@
   <string name="pref_zoom_controls_title">Nagyítás</string>
   <string name="pref_zoom_controls_summary">Nagyítás multi-touch-nál </string>
   <string name="pref_side_drag_title">Vonszolás</string>
-  <string name="pref_side_drag_summary">Vonszolás engedélyezése a vázlat nézetben???</string>
+  <string name="pref_side_drag_summary">Vonszolás engedélyezése a vázlat nézetben</string>
   <string name="pref_unit_grid_title">Vázlat rácsegységei</string>
   <string name="pref_unit_grid_summary">Vázlat rácshálójának méretezése</string>
   <string name="pref_recent_nr_title">Utoljára használt eszközök száma</string>
