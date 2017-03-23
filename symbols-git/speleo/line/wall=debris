@@ -9,6 +9,7 @@ name-fa آوار_دیوار
 name-bg стена_чакъл
 name-ru стена_щебень_осадки
 name-ua стіна_щебінь_опади
+name-hu fal_kőtörmelékből
 th_name wall:debris
 group wall
 color 0xff0000 0xff

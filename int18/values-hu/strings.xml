@@ -581,7 +581,7 @@
     <!-- UNUSED string name="help_manual">User manual</string -->
     <string name="help_measure">Távolságmérés</string>
     
-    <!-- TODO string name="help_close">Close window</string -->
+    <!-- TODO string name="help_close">Ablak bezárása</string -->
     <string name="help_coeff">Mutassa a kalibrációs együtthatókat</string>
     <string name="help_continue">Vonal folytatása</string>
     <string name="help_contour">Körvonal szerkesztése</string>
@@ -620,8 +620,8 @@
     <string name="help_refs">Vázlat referencia kiválasztása???</string>
     <string name="help_rename">Felmérés nevének megváltoztatása</string>
     <string name="help_plot_rename">Vázlat nevének megváltoztatása</string>
-    <!-- TODO string name="help_plot_switch">Switch sketch</string -->
-    <string name="help_stats">Felmérési statisztikák párbeszédpanel???</string>
+    <!-- TODO string name="help_plot_switch">Vázlat nézet átváltása???</string -->
+    <string name="help_stats">Felmérési statisztikák párbeszédpanel</string>
     <string name="help_save_plot">Vázlat exportálása</string>
     <!-- UNUSED string name="help_tdr2th2">Convert sketch binary files to th2</string -->
     <string name="help_toggle_plot">Váltás az alaprajzi és oldalnézet között</string>
@@ -633,8 +633,8 @@
     <!-- TODO string name="help_range">Vonalelem mozgatása</string -->
     <!-- UNUSED string name="help_clear">Clear selection</string -->
     <string name="help_eraser">Radír mód</string>
-    <!-- TODO string name="help_erase_mode">Eraser type</string -->
-    <!-- TODO string name="help_erase_size">Eraser size [S/M/L]</string -->
+    <!-- TODO string name="help_erase_mode">Radír típus</string -->
+    <!-- TODO string name="help_erase_size">Radír mérete [S/M/L]</string -->
     <string name="help_previous">Előző elem a kiválasztásban</string>
     <string name="help_next">Következő elem a kiválasztásban</string>
     <string name="help_recover">Vázlat újratöltése biztonsági mentésből</string>
@@ -687,7 +687,7 @@
   
 
     <string name="title_azimut">Vonatkozási rendszer???</string>
-    <!-- TODO string name="title_audio">Audio comment</string -->
+    <!-- TODO string name="title_audio">Hangjegyzet</string -->
     <string name="title_calib">Kalibrációk</string>
     <string name="title_coverage">Kalibrációs adatok eloszlása</string>
     <string name="title_coeff">Kalibrációs együtthatók</string>
@@ -770,8 +770,8 @@
   <string name="pref_leg_shots_summary">Poligon mérések minmális száma poligonhosszanként</string>
   <string name="pref_station_prefix_title">Pontnév előtag cSurvey programhoz</string>
   <string name="pref_station_prefix_summary">cSurvey pontnév előtagok exportálása</string>
-  <!-- TODO string name="pref_trobot_names_title">TopoRobot station names</string -->
-  <!-- TODO string name="pref_trobot_names_summary">Station names are in TopoRobot style</string -->
+  <!-- TODO string name="pref_trobot_names_title">TopoRobot pontnevek</string -->
+  <!-- TODO string name="pref_trobot_names_summary">Pontnevek a TopoRobot program stílusában</string -->
   <string name="pref_ortho_lrud_title">BJFL segédpontok szöge</string>
   <string name="pref_ortho_lrud_summary">A segédmérések és poligonmérések minmális szöge BJFL felmérésnél</string>
   <string name="pref_ortho_lrud_message">Minimális poligon-segédmérés szög BJFL</string>
@@ -781,14 +781,14 @@
   <string name="pref_survex_splay_summary">Poligonpont megadása segéd-mérésekhez survex programban.</string>
   <string name="pref_survex_lrud_title">Survex BJFL</string>
   <string name="pref_survex_lrud_summary">BJFL értékek hozzáadása Survex exportnál</string>
-  <!-- TODO string name="pref_svg_grid_title">SVG grid</string -->
-  <!-- TODO string name="pref_svg_grid_summary">Add grid to SVG export</string -->
-  <!-- TODO string name="pref_svg_in_html_title">SVG in HTML</string -->
-  <!-- TODO string name="pref_svg_in_html_summary">Embed SVG export in HTML</string -->
-  <!-- TODO string name="pref_kml_stations_title">KML stations</string -->
-  <!-- TODO string name="pref_kml_stations_summary">Add stations to KML export</string -->
-  <!-- TODO string name="pref_kml_splays_title">KML splays</string -->
-  <!-- TODO string name="pref_kml_splays_summary">Add splays to KML export</string -->
+  <!-- TODO string name="pref_svg_grid_title">SVG-kép rácshálója</string -->
+  <!-- TODO string name="pref_svg_grid_summary">Rácsháló hozzáadása SVG-képhez</string -->
+  <!-- TODO string name="pref_svg_in_html_title">SVG HTML-ben</string -->
+  <!-- TODO string name="pref_svg_in_html_summary">HTML-be beágyazott SVG-kép exportálása</string -->
+  <!-- TODO string name="pref_kml_stations_title">KML mérési pontokkal</string -->
+  <!-- TODO string name="pref_kml_stations_summary">Mérési pontok hozzáadása KML-fájlhoz</string -->
+  <!-- TODO string name="pref_kml_splays_title">KML segédmérésekkel</string -->
+  <!-- TODO string name="pref_kml_splays_summary">segédmérések hozzáadása KML-fájlhoz</string -->
 
   <string name="pref_sock_type_title">Csatlakozás</string>
   <string name="pref_sock_type_summary">Csatlakozás létrehozása</string>
@@ -867,9 +867,9 @@
   <string name="pref_leg_title">Poligonmérések tűrése</string>
   <string name="pref_leg_summary">Ismételt poligonmérések közötti tűrés</string>
   <string name="pref_leg_message">Ismételt poligonmérések közötti tűrés</string>
-  <!-- TODO string name="pref_max_shot_title">Maximum shot length</string -->
-  <!-- TODO string name="pref_max_shot_summary">Maximum length of shooting [m]</string -->
-  <!-- TODO string name="pref_max_shot_message">Shots over this length are marked as overshoot</string -->
+  <!-- TODO string name="pref_max_shot_title">Maximális poligonmérés hossz</string -->
+  <!-- TODO string name="pref_max_shot_summary">Mérés maximális hossza [m]</string -->
+  <!-- TODO string name="pref_max_shot_message">Az ennél hosszab mérések hibásként lesznek megjelölve</string -->
   <string name="pref_backsight_title">Visszamérés(Irányzék?)</string>
   <string name="pref_backsight_summary">Visszamérés(Irányzék?) mező az új mérés párbeszéd ablakban</string>
   <string name="pref_prev_next_title">Előző/Köv. gombok</string>
@@ -928,7 +928,7 @@
   <string name="pref_drawing_unit_summary">Pont eszközök méretaránya</string>
   <string name="pref_drawing_unit_message">Pont rajzeszközök méretaránya</string>
   <string name="pref_unscaled_points_title">Pont jelkulcsok nem nagyíthatóak</string>
-  <string name="pref_unscaled_points_summary">A pont ábrázoló jelkulcs elemek nem nagyíthatóak</string>
+  <string name="pref_unscaled_points_summary">A pont tipusú jelkulcs elemek nem nagyíthatóak</string>
   <string name="pref_segment_title">Vonal-pont távolság</string>
   <!-- UNUSED string name="pref_segment_summary">Minimum line-point distance</string -->
   <string name="pref_segment_message">Minimális távolság egy vonalon lévő pontok között</string>
@@ -1006,7 +1006,7 @@
   <string name="pref_zoom_controls_title">Nagyítás</string>
   <string name="pref_zoom_controls_summary">Nagyítás multi-touch-nál </string>
   <string name="pref_side_drag_title">Vonszolás</string>
-  <string name="pref_side_drag_summary">Vonszolás engedélyezése a vázlat nézetben???</string>
+  <string name="pref_side_drag_summary">Vonszolás engedélyezése a vázlat nézetben</string>
   <string name="pref_unit_grid_title">Vázlat rácsegységei</string>
   <string name="pref_unit_grid_summary">Vázlat rácshálójának méretezése</string>
   <string name="pref_recent_nr_title">Utoljára használt eszközök száma</string>
