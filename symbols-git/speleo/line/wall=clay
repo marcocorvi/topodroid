@@ -9,6 +9,7 @@ name-fa دیوار_رسی
 name-bg стена_глина
 name-ru стена_в_глине
 name-ua стіна_в_глині
+name-hu fal_agyagból
 th_name wall:clay
 group wall
 color 0xff0000 0xff
