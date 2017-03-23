@@ -700,7 +700,7 @@ public class ShotWindow extends Activity
         ++id;
         DBlock b = mApp.mData.selectShot( id, mApp.mSID );
         if ( b != null && b.type() == DBlock.BLOCK_SEC_LEG ) {
-          mApp.mData.updateShot( id, mApp.mSID, blk.mFrom, blk.mTo, blk.mExtend, blk.mFlag, 0, blk.mComment, true ); // forward = true
+          mApp.mData.updateShot( id, mApp.mSID, blk.mFrom, blk.mTo, blk.getFullExtend(), blk.mFlag, 0, blk.mComment, true ); // forward = true
           mApp.mData.updateShotStatus( id, mApp.mSID, 0, true ); // status normal, forward = true
         }
       }
@@ -1349,7 +1349,7 @@ public class ShotWindow extends Activity
     mDataAdapter.updateBlockView( blk.mId );
   }
 
-  void updateShot( String from, String to, long extend, long flag, boolean leg, String comment, DBlock blk )
+  void updateShot( String from, String to, int extend, long flag, boolean leg, String comment, DBlock blk )
   {
     // TDLog.Log( TDLog.LOG_SHOT, "updateShot From >" + from + "< To >" + to + "< comment " + comment );
     blk.setName( from, to );
@@ -1372,7 +1372,7 @@ public class ShotWindow extends Activity
     DBlock blk3 = mDataAdapter.updateBlockView( blk.mId );
     if ( blk3 != blk && blk3 != null ) {
       blk3.setName( from, to );
-      blk3.mExtend  = extend;
+      blk3.setExtend( extend );
       blk3.mFlag    = flag;
       blk3.mComment = comment;
       // FIXME if ( leg ) blk3.mType = DBlock.BLOCK_SEC_LEG;

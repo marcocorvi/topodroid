@@ -111,7 +111,8 @@ public class TopoDroidComm
           double b = mProto.mBearing;
           double c = mProto.mClino;
           double r = mProto.mRoll;
-          long extend = TDAzimuth.computeLegExtend( b ); // FIXME-EXTEND
+          // extend is unset to start
+          long extend = TDAzimuth.computeLegExtend( b ); // DBlock.EXTEND_UNSET; FIXME-EXTEND 
           TDLog.Log( TDLog.LOG_DISTOX, "DATA PACKET " + d + " " + b + " " + c );
           // NOTE type=0 shot is DistoX-type
           long status = ( d > TDSetting.mMaxShotLength )? TopoDroidApp.STATUS_OVERSHOOT : TopoDroidApp.STATUS_NORMAL;

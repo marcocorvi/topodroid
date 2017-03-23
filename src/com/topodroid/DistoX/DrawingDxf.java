@@ -831,7 +831,7 @@ class DrawingDxf
                 float y = scale * DrawingUtil.toSceneY( f.v );
                 float dv = - blk.mLength * (float)Math.sin( blk.mClino * grad2rad )*SCALE_FIX;
                 printXYZ( pw41, x, -y, 0.0f, 0 );
-                printXYZ( pw41, x+dhs*blk.mExtend, -(y+dv), 0.0f, 1 );
+                printXYZ( pw41, x+dhs*blk.getReducedExtend(), -(y+dv), 0.0f, 1 ); 
               } else if ( type == PlotInfo.PLOT_SECTION ) {
                 // nothing
               }

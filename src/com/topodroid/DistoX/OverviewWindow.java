@@ -75,11 +75,11 @@ public class OverviewWindow extends ItemDrawer
   private static int izons[] = { 
                         R.drawable.iz_measure,       // 0
                         R.drawable.iz_mode,          // 1
-                        R.drawable.iz_continue_no,   // 2
+                        R.drawable.iz_angle,   // 2
                         // FIXME_OVER R.drawable.iz_plan,          // 3
                         R.drawable.iz_menu,          // 3
                         R.drawable.iz_measure_on,
-                        R.drawable.iz_continue_join
+                        R.drawable.iz_polyline
                       };
   // FIXME_OVER private static int BTN_PLOT = 2;
 
@@ -455,7 +455,7 @@ public class OverviewWindow extends ItemDrawer
         // FIXME_OVER   mBMplan = bm;
       }
       mBMselectOn   = MyButton.getButtonBackground( mApp, res, R.drawable.iz_measure_on );
-      mBMcontinueOn = MyButton.getButtonBackground( mApp, res, R.drawable.iz_continue_join );
+      mBMcontinueOn = MyButton.getButtonBackground( mApp, res, R.drawable.iz_polyline );
       // FIXME_OVER mBMextend  = MyButton.getButtonBackground( mApp, res, izons[IC_EXTEND] ); 
 
       mButtonView1 = new HorizontalButtonView( mButton1 );

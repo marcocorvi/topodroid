@@ -148,11 +148,13 @@ The sketch items are distributed on suitable <i>cSurvey</i> layers.<br><p>
 <b>DXF</b> (.dxf)<br>
 Sketches can be exported as 2D DXF files with layers for each point, line and area type in addition to the layers of the data 3D DXF. The sketch items in the 2D DXF lie in the Z=0 plane.<br><p>
 
+Splay shots in the profile view of the SVG and DXF exports may differ from TopoDroid sketch because the DXF export uses only the shot "extend" value, while TopoDroid sketch takes into account the azimuth of the legs at the station.<br><p>
+
 <u>Note</u>. Sketch DXF export has been verified with VariCAD; compatibility with AutoCAD is not guaranteed.<br><p>
 
 Settings:<ul style="margin-top=0">
 <li><u>scale</u> of the DXF</li>
-<li><u>Section-point</u>: if section points are automatically added to section lines,
+<li><u>section-point</u>: if section points are automatically added to section lines,
 the section drawing is inserted in the export, at the "section" point</li>
 <!-- li>AutoCAD version (6 or 12)</li -->
 </ul><p>
@@ -160,9 +162,11 @@ the section drawing is inserted in the export, at the "section" point</li>
 <b>SVG</b> (.svg)<br>
 Sketches can be exported as SVG files.<br><p>
 
+Splay shot may differ from TopoDroid sketch window as described above.<br><p>
+
 Settings:<ul style="margin-top=0">
 <li>grid added to the export (cell size in the current grid units).</li>
-<li><u>Section-point</u>: if section points are automatically added to section lines,
+<li><u>section-point</u>: if section points are automatically added to section lines,
 the section drawing is inserted in the export, at the "section" point</li>
 <li><u>auto-stations</u>: if enabled all stations are included in the export,
 otherwise only the user-chosen stations are included</li>

@@ -128,7 +128,7 @@ public class ShotDialog extends MyDialog
   boolean shot_manual;
 
   String shot_extra;
-  long shot_extend;
+  int  shot_extend;
   long shot_flag;
   String shot_comment;
 
@@ -185,7 +185,7 @@ public class ShotDialog extends MyDialog
     // Log.v("DistoX", "shot is manual " + shot_manual + " length " + shot_distance );
 
     shot_extra   = blk.extraString();
-    shot_extend  = blk.mExtend;
+    shot_extend  = blk.getExtend();
     shot_flag    = blk.mFlag;
     shot_leg     = blk.mType == DBlock.BLOCK_SEC_LEG;
     shot_xsplay  = blk.mType == DBlock.BLOCK_X_SPLAY;
@@ -339,9 +339,9 @@ public class ShotDialog extends MyDialog
     mCBlegNext   = new MyCheckBox( mContext, size, R.drawable.iz_legnext_ok, R.drawable.iz_legnext_no );
     mCBallSplay  = new MyCheckBox( mContext, size, R.drawable.iz_splays_ok, R.drawable.iz_splays_no );
     if ( shot_xsplay ) {
-      mCBxSplay    = new MyCheckBox( mContext, size, R.drawable.iz_ysplays_ok, R.drawable.iz_ysplays_no );
+      mCBxSplay    = new MyCheckBox( mContext, size, R.drawable.iz_xsplays_ok, R.drawable.iz_ysplays_no );
     } else {
-      mCBxSplay    = new MyCheckBox( mContext, size, R.drawable.iz_xsplays_ok, R.drawable.iz_xsplays_no );
+      mCBxSplay    = new MyCheckBox( mContext, size, R.drawable.iz_ysplays_ok, R.drawable.iz_xsplays_no );
     }
     mCBrenumber  = new MyCheckBox( mContext, size, R.drawable.iz_numbers_ok, R.drawable.iz_numbers_no );
     // mCBhighlight = new MyCheckBox( mContext, size, R.drawable.iz_highlight_ok, R.drawable.iz_highlight_no );
@@ -350,9 +350,9 @@ public class ShotDialog extends MyDialog
     layout4.addView( mRBsurf, lp );
     layout4.addView( mCBlegPrev, lp );
     layout4.addView( mCBlegNext, lp );
+    layout4.addView( mCBrenumber );
     layout4.addView( mCBallSplay, lp );
     layout4.addView( mCBxSplay, lp );
-    layout4.addView( mCBrenumber );
     // layout4.addView( mCBhighlight );
     layout4.invalidate();
 
@@ -478,14 +478,14 @@ public class ShotDialog extends MyDialog
     // else if ( mRBback.isChecked() ) { shot_flag = DBlock.BLOCK_BACKSHOT; }
     // else                            { shot_flag = DBlock.BLOCK_SURVEY; }
 
-    shot_extend = mBlk.mExtend;
+    shot_extend = mBlk.getExtend();
     if ( mRBleft.isChecked() )       { shot_extend = DBlock.EXTEND_LEFT; }
     else if ( mRBvert.isChecked() )  { shot_extend = DBlock.EXTEND_VERT; }
     else if ( mRBright.isChecked() ) { shot_extend = DBlock.EXTEND_RIGHT; }
     else                             { shot_extend = DBlock.EXTEND_IGNORE; }
 
     mBlk.mFlag = shot_flag;
-    mBlk.mExtend = shot_extend;
+
     if ( shot_leg ) {
       mBlk.mType = DBlock.BLOCK_SEC_LEG;
     } else if ( leg_next ) {
@@ -495,7 +495,18 @@ public class ShotDialog extends MyDialog
         shot_to   = mBlk.mTo;
       }
     }
-      
+ 
+    int extend = shot_extend;
+    boolean sflen = shot_from.length() > 0;
+    boolean stlen = shot_to.length() > 0;
+    if ( mBlk.getExtend() != shot_extend ) {
+      if ( leg_next || ( sflen && stlen ) ) { // leg
+        mBlk.setExtend( extend );
+      } else if ( ( sflen && ! stlen ) || ( stlen && ! sflen ) ) { // splay
+        extend = shot_extend + DBlock.EXTEND_FVERT;
+        mBlk.setExtend( extend );
+      }
+    }
 
     String comment = mETcomment.getText().toString();
     if ( comment != null ) mBlk.mComment = comment;
@@ -516,13 +527,13 @@ public class ShotDialog extends MyDialog
     }
 
     if ( all_splay ) {
-      mParent.updateSplayShots( shot_from, shot_to, shot_extend, shot_flag, shot_leg, comment, mBlk );
+      mParent.updateSplayShots( shot_from, shot_to, extend, shot_flag, shot_leg, comment, mBlk );
     } else if ( x_splay ) {
       mParent.updateSplayLeg( mPos );
     } else {
       // mBlk.setName( shot_from, shot_to ); // done by parent.updateShot
       // if ( shot_leg ) mBlk.mType = DBlock.BLOCK_SEC_LEG; // FIXME maybe not necessary
-      mParent.updateShot( shot_from, shot_to, shot_extend, shot_flag, shot_leg, comment, mBlk );
+      mParent.updateShot( shot_from, shot_to, extend, shot_flag, shot_leg, comment, mBlk );
     }
     // mParent.scrollTo( mPos );
 
@@ -655,6 +666,7 @@ public class ShotDialog extends MyDialog
       saveDBlock();
 
     } else if ( b == mButtonPrev ) {
+      mCBallSplay.setVisibility( View.GONE );
       mCBxSplay.setVisibility( View.GONE );
       // shift:
       //               prev -- blk -- next
@@ -671,6 +683,7 @@ public class ShotDialog extends MyDialog
       }
 
     } else if ( b == mButtonNext ) {
+      mCBallSplay.setVisibility( View.GONE );
       mCBxSplay.setVisibility( View.GONE );
       // shift:
       //        prev -- blk -- next

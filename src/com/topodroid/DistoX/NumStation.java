@@ -55,7 +55,7 @@ public class NumStation extends NumSurveyPoint
     mLegs = new ArrayList<  NumAzimuth  >();
   }
 
-  NumStation( String id, NumStation from, float d, float b, float c, float extend )
+  NumStation( String id, NumStation from, float d, float b, float c, float extend, boolean has_coords )
   {
     // TDLog.Log( TopoDroiaLog.LOC_NUM, "NumStation cstr " + id + " from " + from + " (extend " + extend + ")" );
     name = id;
@@ -65,7 +65,7 @@ public class NumStation extends NumSurveyPoint
     s = from.s - h0 * TDMath.cosd( b );
     e = from.e + h0 * TDMath.sind( b );
     mDuplicate = false;
-    mHasCoords = true;
+    mHasCoords = has_coords && from.mHasCoords;
     s1 = null;
     s2 = null;
     node = null;
@@ -125,10 +125,16 @@ public class NumStation extends NumSurveyPoint
     // }
   }
 
+  // called by DistoXNum.computeNum for splays
   // @param b bearing [degrees]
   // @param e original splay extend
   float computeExtend( float b, float e )
   {
+    if ( e >= DBlock.EXTEND_UNSET ) { 
+      e -= DBlock.EXTEND_FVERT;
+      return ( e > 1 )? 0 : e;
+    }
+    if ( e > 1 ) e = 0;
     if ( mLegs.size() == 0 ) return e;
     NumAzimuth a1 = mLegs.get(0);
     for (int k=1; k<mLegs.size(); k++ ) {
@@ -144,6 +150,5 @@ public class NumStation extends NumSurveyPoint
     }
     return e;
   }
-        
     
 }

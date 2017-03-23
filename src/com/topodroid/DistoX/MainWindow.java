@@ -114,7 +114,7 @@ public class MainWindow extends Activity
                           R.drawable.iz_disto2b, // iz_disto,
                           R.drawable.iz_plus,
                           R.drawable.iz_import,
-                          R.drawable.iz_tools
+                          R.drawable.iz_palette
                           // FIXME THMANAGER
                           // R.drawable.iz_therion,
                           // R.drawable.iz_database

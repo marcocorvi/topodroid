@@ -958,7 +958,7 @@ public class DrawingWindow extends ItemDrawer
         if  ( ! sh.mIgnoreExtend ) {
           NumStation st1 = sh.from;
           NumStation st2 = sh.to;
-          if ( st1.show() && st2.show() ) {
+          if ( st1.mHasCoords && st2.mHasCoords && st1.show() && st2.show() ) {
             addFixedLine( sh.getFirstBlock(), (float)(st1.h), (float)(st1.v), (float)(st2.h), (float)(st2.v), false, true );
                           // xoff, yoff, false, true );
           }
@@ -966,14 +966,14 @@ public class DrawingWindow extends ItemDrawer
       } 
       for ( NumSplay sp : splays ) {
         NumStation st = sp.from;
-        if ( st.show() ) {
+        if ( st.mHasCoords && st.show() ) {
           addFixedLine( sp.getBlock(), (float)(st.h), (float)(st.v), (float)(sp.h), (float)(sp.v), true, true );
                         // xoff, yoff, true, true );
         }
       }
       List< PlotInfo > xhsections = mData.selectAllPlotsWithType( mApp.mSID, 0, PlotInfo.PLOT_XH_SECTION );
       for ( NumStation st : stations ) {
-        if ( st.show() ) {
+        if ( st.mHasCoords && st.show() ) {
           DrawingStationName dst;
           // dst = mDrawingSurface.addDrawingStationName( st, DrawingUtil.toSceneX(st.h) - xoff,
           //                                                  DrawingUtil.toSceneY(st.v) - yoff, true, xhsections );
@@ -2010,10 +2010,11 @@ public class DrawingWindow extends ItemDrawer
     }
 
     // called only be DrawingShotDialog
-    void updateBlockExtend( DBlock block, long extend )
+    void updateBlockExtend( DBlock block, int extend )
     {
-      if ( block.mExtend == extend ) return;
-      block.mExtend = extend;
+      if ( ! block.isSplay() ) extend -= DBlock.EXTEND_FVERT;
+      if ( block.getExtend() == extend ) return;
+      block.setExtend( extend );
       mData.updateShotExtend( block.mId, mSid, extend, true );
       recomputeProfileReference();
     }
@@ -2609,7 +2610,8 @@ public class DrawingWindow extends ItemDrawer
                               clino = azimuth - 270;
                               extend = -1;
                             }
-                            float dc = (extend == blk.mExtend)? clino - blk.mClino : 180 - clino - blk.mClino ;
+               
+                            float dc = (extend == blk.getExtend())? clino - blk.mClino : 180 - clino - blk.mClino ;
                             dc = TDMath.in360( dc );
                             if ( dc > 90 && dc <= 270 ) { // exchange FROM-TO 
                               azimuth = blk.mBearing + 180; if ( azimuth >= 360 ) azimuth -= 360;
@@ -2618,7 +2620,7 @@ public class DrawingWindow extends ItemDrawer
                             } else {
                               azimuth = blk.mBearing;
                             }
-                            // if ( extend != blk.mExtend ) {
+                            // if ( extend != blk.getExtend() ) {
                             //   azimuth = blk.mBearing + 180; if ( azimuth >= 360 ) azimuth -= 360;
                             // }
                           } else {
@@ -3372,14 +3374,8 @@ public class DrawingWindow extends ItemDrawer
 
     private void flipBlock( DBlock blk )
     {
-      if ( blk != null ) {
-        if ( blk.mExtend == -1 ) {
-          blk.mExtend = 1;
-          mData.updateShotExtend( blk.mId, mSid, blk.mExtend, true );
-        } else if ( blk.mExtend == 1 ) {
-          blk.mExtend = -1;
-          mData.updateShotExtend( blk.mId, mSid, blk.mExtend, true );
-        }
+      if ( blk != null && blk.flipExtend() ) {
+        mData.updateShotExtend( blk.mId, mSid, blk.getFullExtend(), true );
       }
     }
 

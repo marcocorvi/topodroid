@@ -363,11 +363,11 @@ public class ShotNewDialog extends MyDialog
       notDone = false;
       // Log.v( TopoDroidApp.TAG, "data " + distance + " " + bearing + " " + clino );
 
-      long shot_extend = 1;
+      long shot_extend = DBlock.EXTEND_RIGHT; // DBlock.EXTEND_UNSET; // FIXME-EXTEND
       if ( mRadioLeft.isChecked() ) { shot_extend = -1; }
       else if ( mRadioVert.isChecked() ) { shot_extend = 0; }
       else if ( mRadioRight.isChecked() ) { shot_extend = 1; }
-      else { // FIXME-EXTEND let TopoDroid choose
+      else { // let TopoDroid choose
         try {
           shot_extend = TDAzimuth.computeLegExtend( Float.parseFloat(bearing.replace(',','.') ) );
         } catch ( NumberFormatException e ) { }

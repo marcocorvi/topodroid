@@ -944,7 +944,7 @@ class DrawingIO
             } else if ( PlotInfo.isProfile( type ) ) {
               for ( DBlock blk : blks ) {
                 float v = blk.mLength * TDMath.sind( blk.mClino ) * th;
-                float h = blk.mLength * TDMath.cosd( blk.mClino ) * th * blk.mExtend;
+                float h = blk.mLength * TDMath.cosd( blk.mClino ) * th * blk.getReducedExtend();
                 out.write( "line splay\n" );
                 out.write( String.format(Locale.US, "  %.2f %.2f\n  %.2f %.2f\n", x, y, x+h, y+v ) );
                 out.write( "endline\n" );
@@ -954,7 +954,7 @@ class DrawingIO
                 float d = blk.mLength;
                 float b = blk.mBearing;
                 float c = blk.mClino;
-                long  e = blk.mExtend;
+                long  e = blk.getReducedExtend();
               }
             }
           }

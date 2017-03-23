@@ -176,7 +176,7 @@ public class DrawingShotDialog extends MyDialog
       mETto.setText( mBlock.mTo );
       mETcomment.setText( mBlock.mComment );
 
-      switch ( (int)mBlock.mExtend ) {
+      switch ( mBlock.getExtend() ) {
         case DBlock.EXTEND_LEFT:
           mRBleft.setChecked( true );
           break;
@@ -269,17 +269,17 @@ public class DrawingShotDialog extends MyDialog
     } else if ( b == mBtnCancel ) {
       dismiss();
     } else if ( b == mBtnOK ) {
-      long extend = mBlock.mExtend;
-      long flag   = mBlock.mFlag;
+      // int extend = mBlock.getExtend();
+      long flag  = mBlock.mFlag;
 
-      if ( mCBfrom.isChecked() ) {
+      if ( mCBfrom != null && mCBfrom.isChecked() ) {
         if ( ( mFlag & 0x01 ) == 0x01 ) { // can barrier FROM
           mParent.toggleStationBarrier( mBlock.mFrom, false );
         } else if ( ( mFlag & 0x02 ) == 0x02 ) { // can hidden FROM
           mParent.toggleStationHidden( mBlock.mFrom, false );
         }
       }
-      if ( mCBto.isChecked() ) {
+      if ( mCBto != null && mCBto.isChecked() ) {
         if ( ( mFlag & 0x04 ) == 0x04 ) { // can barrier TO
           mParent.toggleStationBarrier( mBlock.mTo, false );
         } else if ( ( mFlag & 0x08 ) == 0x08 ) { // can hidden TO
@@ -287,10 +287,11 @@ public class DrawingShotDialog extends MyDialog
         }
       }
 
-      if ( mRBleft.isChecked() ) { extend = DBlock.EXTEND_LEFT; }
-      else if ( mRBvert.isChecked() ) { extend = DBlock.EXTEND_VERT; }
-      else if ( mRBright.isChecked() ) { extend = DBlock.EXTEND_RIGHT; }
-      else /* if ( mRBignore.isChecked() ) */ { extend = DBlock.EXTEND_IGNORE; }
+      int extend = DBlock.EXTEND_FIGNORE;
+      if ( mRBleft.isChecked() )       { extend = DBlock.EXTEND_FLEFT; }
+      else if ( mRBvert.isChecked() )  { extend = DBlock.EXTEND_FVERT; }
+      else if ( mRBright.isChecked() ) { extend = DBlock.EXTEND_FRIGHT; }
+      // else /* if ( mRBignore.isChecked() ) */ { extend = DBlock.EXTEND_FIGNORE; }
 
       if ( mRBdup.isChecked() ) { flag = DBlock.BLOCK_DUPLICATE; }
       else if ( mRBsurf.isChecked() ) { flag = DBlock.BLOCK_SURFACE; }

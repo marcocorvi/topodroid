@@ -426,8 +426,8 @@ class DistoXNum
   //           mLength += block.mLength;
   //           if ( st != null ) { // close loop
   //             if ( /* TopoDroidApp.mAutoStations || */ TopoDroidApp.mLoopClosure == 0 ) {
-  //               NumStation st1 = new NumStation( block.mTo, sf, block.mLength, block.mBearing+ mDecl , block.mClino, block.mExtend );
-  //               st1.addAzimuth( (block.mBearing+ mDecl +180)%360, -block.mExtend );
+  //               NumStation st1 = new NumStation( block.mTo, sf, block.mLength, block.mBearing+ mDecl , block.mClino, block.getExtend() );
+  //               st1.addAzimuth( (block.mBearing+ mDecl +180)%360, block.getNegExtend() );
   //               st1.mDuplicate = true;
   //               mStations.add( st1 );
   //               lastLeg = new NumShot( sf, st1, block, 1, mDecl );
@@ -450,8 +450,8 @@ class DistoXNum
   //           else
   //           { // add regular from-->to leg' first shot
   //             // FIXME temporary "st" coordinates
-  //             st = new NumStation( block.mTo, sf, block.mLength, block.mBearing+ mDecl , block.mClino, block.mExtend );
-  //             st.addAzimuth( (block.mBearing+ mDecl +180)%360, -(int)block.mExtend );
+  //             st = new NumStation( block.mTo, sf, block.mLength, block.mBearing+ mDecl , block.mClino, block.getExtend() );
+  //             st.addAzimuth( (block.mBearing+ mDecl +180)%360, block.getNegExtend() );
   //             updateBBox( st );
   //             // if ( ts.duplicate ) { // FIXME
   //             //   ++mDupNr;
@@ -468,8 +468,8 @@ class DistoXNum
   //         }
   //         else if ( st != null )
   //         { // sf == null && st != null
-  //           sf = new NumStation( block.mFrom, st, -block.mLength, block.mBearing+ mDecl , block.mClino, block.mExtend );
-  //           sf.addLeg( block.mBearing+ mDecl , (int)block.mExtend );
+  //           sf = new NumStation( block.mFrom, st, -block.mLength, block.mBearing+ mDecl , block.mClino, block.getExtend() );
+  //           sf.addLeg( block.mBearing+ mDecl , block.getExtend() );
   //           updateBBox( sf );
   //           // if ( ts.duplicate ) {
   //           //   ++mDupNr;
@@ -522,7 +522,7 @@ class DistoXNum
   //         sf = getStation( f ); // find station with name "f"
   //         if ( sf != null ) {              // add splay at station
   //           mSplays.add( new NumSplay( sf, rev*block.mLength, block.mBearing+ mDecl , block.mClino,
-  //                                     (int)(block.mExtend), block, mDecl ) );
+  //                                     block.getExtend(), block, mDecl ) );
   //         }
   //       } else {
   //         ret = false;
@@ -677,14 +677,14 @@ class DistoXNum
         case DBlock.BLOCK_X_SPLAY:
           lastLeg = null;  // clear last-leg
           if ( blk.mFrom != null && blk.mFrom.length() > 0 ) { // normal splay
-            tmpsplays.add( new TriSplay( blk, blk.mFrom, (int)(blk.mExtend), +1 ) );
+            tmpsplays.add( new TriSplay( blk, blk.mFrom, blk.getFullExtend(), +1 ) );
           } else if ( blk.mTo != null && blk.mTo.length() > 0 ) { // reversed splay
-            tmpsplays.add( new TriSplay( blk, blk.mTo, (int)(blk.mExtend), -1 ) );
+            tmpsplays.add( new TriSplay( blk, blk.mTo, blk.getFullExtend(), -1 ) );
           }
           break;
 
         case DBlock.BLOCK_MAIN_LEG:
-          lastLeg = new TriShot( blk, blk.mFrom, blk.mTo, (int)(blk.mExtend), +1 );
+          lastLeg = new TriShot( blk, blk.mFrom, blk.mTo, blk.getExtend(), +1 );
           lastLeg.duplicate = ( blk.mFlag == DBlock.BLOCK_DUPLICATE );
           lastLeg.surface   = ( blk.mFlag == DBlock.BLOCK_SURFACE );
           // lastLeg.backshot  = ( blk.mFlag == DBlock.BLOCK_BACKSHOT ); // FIXME
@@ -709,9 +709,10 @@ class DistoXNum
       makeTrilateration( tmpshots );
     }
 
-    // Log.v( TDLog.TAG,
-    //    "DistoXNum::compute tmp-shots " + tmpshots.size() + " tmp-splays " + tmpsplays.size() );
-    // for ( TriShot ts : tmpshots ) ts.Dump();
+    // if ( TDLog.LOG_DEBUG ) {
+    //   Log.v( TDLog.TAG, "DistoXNum::compute tmp-shots " + tmpshots.size() + " tmp-splays " + tmpsplays.size() );
+    //   for ( TriShot ts : tmpshots ) ts.Dump();
+    // }
 
     for ( int i = 0; i < tmpshots.size(); ++i ) {
       TriShot ts0 = tmpshots.get( i );
@@ -785,165 +786,176 @@ class DistoXNum
       mErr2 = (float)Math.sqrt( mErr2/mErr0 - mErr1*mErr1 );
     }
 
-    // Log.v( TDLog.TAG,
-    //    "DistoXNum::compute tmp-shots " + tmpshots.size() + " tmp-splays " + tmpsplays.size() );
-    // for ( TriShot ts : tmpshots ) ts.Dump();
+    // if ( TDLog.LOG_DEBUG ) {
+    //   Log.v( TDLog.TAG, "DistoXNum::compute tmp-shots " + tmpshots.size() + " tmp-splays " + tmpsplays.size() );
+    //   for ( TriShot ts : tmpshots ) ts.Dump();
+    // }
 
     NumStation start_station = new NumStation( start );
     start_station.mHasCoords = true;
-    // TDLog.Log( TDLog.LOG_NUM, "start station " + start );
-    // Log.v( "DistoX", "start station " + start + " shots " + tmpshots.size() );
+
+    // if ( TDLog.LOG_DEBUG ) Log.v( TDLog.TAG, "start station " + start +  " shots " + tmpshots.size() );
 
     NumShot sh;
     mStations.addStation( start_station );
 
-    boolean repeat = true;
-    while ( repeat ) {
-      repeat = false;
-      for ( TriShot ts : tmpshots ) {
-        if ( ts.used || ts.backshot != 0 ) continue;
+    // two-pass data reduction
+    // first-pass all shots with regular extends
+    // second-pass any leftover shot
+    for ( int pass = 0; pass < 2; ++ pass ) {
+      boolean repeat = true;
+      while ( repeat ) {
+        repeat = false;
+        for ( TriShot ts : tmpshots ) {
+          if ( ts.used || ts.backshot != 0 ) continue;
+          if ( pass == 0 && DBlock.getExtend(ts.extend) > 1 ) continue;
 
-        float anomaly = 0;
-        if ( TDSetting.mMagAnomaly ) {
-          // if ( ts.backshot == 0 ) 
-          {
-            // TDLog.Log(TDLog.LOG_NUM, "shot " + ts.from + " " + ts.to + " <" + ts.backshot + ">" );
-            int   nfwd = 1;
-            float bfwd = ts.b();
-            int   nbck = 0;
-            float bbck = 0;
-            for ( TriShot ts1 = ts.sibling; ts1 != null; ts1 = ts1.sibling ) {
-              // TDLog.Log(TDLog.LOG_NUM, "sibling " + ts1.from + " " + ts1.to + " <" + ts1.backshot + ">" );
-              if ( ts1.backshot == 1 ) {
-                if ( ts1.b() > ts.b() + 180 ) {
-                  bfwd += ts1.b() - 360;
-                } else if ( ts.b() > ts1.b() + 180 ) {
-                  bfwd += ts1.b() + 360;
-                } else {
-                  bfwd += ts1.b();
-                }
-                ++ nfwd;
-              } else {
-                if ( nbck > 0 ) {
+          float anomaly = 0;
+          if ( TDSetting.mMagAnomaly ) {
+            // if ( ts.backshot == 0 ) 
+            {
+              // TDLog.Log(TDLog.LOG_NUM, "shot " + ts.from + " " + ts.to + " <" + ts.backshot + ">" );
+              int   nfwd = 1;
+              float bfwd = ts.b();
+              int   nbck = 0;
+              float bbck = 0;
+              for ( TriShot ts1 = ts.sibling; ts1 != null; ts1 = ts1.sibling ) {
+                // TDLog.Log(TDLog.LOG_NUM, "sibling " + ts1.from + " " + ts1.to + " <" + ts1.backshot + ">" );
+                if ( ts1.backshot == 1 ) {
                   if ( ts1.b() > ts.b() + 180 ) {
-                    bbck += ts1.b() - 360;
+                    bfwd += ts1.b() - 360;
                   } else if ( ts.b() > ts1.b() + 180 ) {
-                    bbck += ts1.b() + 360;
+                    bfwd += ts1.b() + 360;
+                  } else {
+                    bfwd += ts1.b();
+                  }
+                  ++ nfwd;
+                } else {
+                  if ( nbck > 0 ) {
+                    if ( ts1.b() > ts.b() + 180 ) {
+                      bbck += ts1.b() - 360;
+                    } else if ( ts.b() > ts1.b() + 180 ) {
+                      bbck += ts1.b() + 360;
+                    } else {
+                      bbck += ts1.b();
+                    }
                   } else {
                     bbck += ts1.b();
                   }
-                } else {
-                  bbck += ts1.b();
+                  ++ nbck;
                 }
-                ++ nbck;
               }
+              if ( nbck > 0 ) {
+                anomaly = bbck/nbck - bfwd/nfwd - 180;
+                if ( anomaly < -180 ) anomaly += 360;
+              }
+
+              // A_north       B_north
+              // |              \
+              // +---------------+
+              // A              B  \
+              //                     \ C
+              // A->B = alpha
+              // B->A = alpha + PI + anomaly     B->A_true = B->A - anomaly
+              // anomaly = B->A - PI - A->B
+              //                                 B->C_true = B->C - anomaly
             }
-            if ( nbck > 0 ) {
-              anomaly = bbck/nbck - bfwd/nfwd - 180;
-              if ( anomaly < -180 ) anomaly += 360;
+          } 
+
+          // try to see if any temp-shot station is on the list of stations
+          NumStation sf = getStation( ts.from );
+          NumStation st = getStation( ts.to );
+          // if ( TDLog.LOG_DEBUG ) {
+          //   Log.v( TDLog.TAG, "using shot " + ts.from + " " + ts.to + " id " + ts.blocks.get(0).mId );
+          //   ts.Dump();
+          //   Log.v( TDLog.TAG, "shot " + ts.from + "-" + ts.to + " stations " +
+          //     ( ( sf == null )? "null" : sf.name ) + " " + (( st == null )? "null" : st.name ) );
+          // }
+
+          boolean has_coords = (DBlock.getExtend(ts.extend) <= 1);
+          int ext = DBlock.getReducedExtend( ts.extend );
+          if ( sf != null ) {
+            sf.addAzimuth( ts.b(), ext );
+
+            if ( st != null ) { // loop-closure
+              if ( /* TDSetting.mAutoStations || */ TDSetting.mLoopClosure == 0 ) { // do not close loop
+                // if ( TDLog.LOG_DEBUG ) Log.v( TDLog.TAG, "do not close loop");
+                // keep loop open: new station( id=ts.to, from=sf, ... )
+                float bearing = ts.b() - sf.mAnomaly;
+                NumStation st1 = new NumStation( ts.to, sf, ts.d(), bearing, ts.c(), ext, has_coords );
+                st1.addAzimuth( (ts.b()+180)%360, -ext );
+                st1.mAnomaly = anomaly;
+                updateBBox( st );
+                st1.mDuplicate = true;
+                mStations.addStation( st1 );
+
+                sh = makeShotFromTmp( sf, st1, ts, 1, sf.mAnomaly, mDecl );
+                addShotToStations( sh, st1, sf );
+              } else { // close loop
+                // if ( TDLog.LOG_DEBUG ) Log.v( TDLog.TAG, "close loop");
+
+                sh = makeShotFromTmp( sf, st, ts, 0, sf.mAnomaly, mDecl ); 
+                addShotToStations( sh, sf, st );
+              }
+              addToStats( ts.duplicate, ts.surface, Math.abs(ts.d() ) ); // NOTE Math.abs is not necessary
+
+              // do close loop also on duplicate shots
+              // need the loop length to compute the fractional closure error
+              float length = shortestPath( sf, st) + Math.abs( ts.d() );  // FIXME length
+              mClosures.add( getClosureError( st, sf, ts.d(), ts.b(), ts.c(), length ) );
+              
+              ts.used = true;
+              repeat = true;
             }
-
-            // A_north       B_north
-            // |              \
-            // +---------------+
-            // A              B  \
-            //                     \ C
-            // A->B = alpha
-            // B->A = alpha + PI + anomaly     B->A_true = B->A - anomaly
-            // anomaly = B->A - PI - A->B
-            //                                 B->C_true = B->C - anomaly
-          }
-        } 
-
-        // try to see if any temp-shot station is on the list of stations
-        NumStation sf = getStation( ts.from );
-        NumStation st = getStation( ts.to );
-        // TDLog.Log( TDLog.LOG_NUM, "using shot " + ts.from + " " + ts.to + " id " + ts.blocks.get(0).mId );
-        // ts.Dump();
-        // Log.v("DistoX", "shot " + ts.from + "-" + ts.to + " stations " +
-        //   ( ( sf == null )? "null" : sf.name ) + " " + (( st == null )? "null" : st.name ) );
-
-        if ( sf != null ) {
-          sf.addAzimuth( ts.b(), ts.extend );
-
-          if ( st != null ) { // loop-closure
-            if ( /* TDSetting.mAutoStations || */ TDSetting.mLoopClosure == 0 ) { // do not close loop
-              // TDLog.Log( TDLog.LOG_NUM, "do not close loop");
-              // keep loop open: new station( id=ts.to, from=sf, ... )
+            else // st null || st isBarrier
+            { // forward shot: from --> to
               float bearing = ts.b() - sf.mAnomaly;
-              NumStation st1 = new NumStation( ts.to, sf, ts.d(), bearing, ts.c(), ts.extend );
-              st1.addAzimuth( (ts.b()+180)%360, -ts.extend );
-              st1.mAnomaly = anomaly;
+              st = new NumStation( ts.to, sf, ts.d(), bearing, ts.c(), ext, has_coords );
+              st.addAzimuth( (ts.b()+180)%360, -ext );
+              st.mAnomaly = anomaly;
               updateBBox( st );
-              st1.mDuplicate = true;
-              mStations.addStation( st1 );
+              addToStats( ts.duplicate, ts.surface, Math.abs(ts.d() ), st.v );
+              mStations.addStation( st );
 
-              sh = makeShotFromTmp( sf, st1, ts, 1, sf.mAnomaly, mDecl );
-              addShotToStations( sh, st1, sf );
-            } else { // close loop
-              // TDLog.Log( TDLog.LOG_NUM, "close loop");
-              sh = makeShotFromTmp( sf, st, ts, 0, sf.mAnomaly, mDecl ); 
-              addShotToStations( sh, sf, st );
+              // if ( TDLog.LOG_DEBUG ) {
+              //   Log.v( TDLog.TAG, "new station F->T id= " + ts.to + " from= " + sf.name + " anomaly " + anomaly + " d " + ts.d() ); 
+              //   Log.v( TDLog.TAG, "  " + st.e + " " + st.s + " : " + st.h + " " + st.v );
+              // }
+
+              sh = makeShotFromTmp( sf, st, ts, 1, sf.mAnomaly, mDecl );
+              addShotToStations( sh, st, sf );
+              ts.used = true;
+              repeat = true;
             }
-            addToStats( ts.duplicate, ts.surface, Math.abs(ts.d() ) ); // NOTE Math.abs is not necessary
+          }
+          else if ( st != null ) 
+          { // sf == null: reversed shot only difference is '-' sign in new NumStation, and the new station is sf
+            // if ( TDLog.LOG_DEBUG ) Log.v( TDLog.TAG, "reversed shot " + ts.from + " " + ts.to + " id " + ts.blocks.get(0).mId );
+            st.addAzimuth( (ts.b()+180)%360, -ext );
+            float bearing = ts.b() - st.mAnomaly;
+            sf = new NumStation( ts.from, st, - ts.d(), bearing, ts.c(), ext, has_coords );
+            sf.addAzimuth( ts.b(), ext );
+            sf.mAnomaly = anomaly; // FIXME
+            // if ( TDLog.LOG_DEBUG ) {
+            //   Log.v( TDLog.TAG, "new station T->F id= " + ts.from + " from= " + st.name + " anomaly " + anomaly ); 
+            //   Log.v( TDLog.TAG, "  " + sf.e + " " + sf.s + " : " + sf.h + " " + sf.v );
+            // }
 
-            // do close loop also on duplicate shots
-            // need the loop length to compute the fractional closure error
-            float length = shortestPath( sf, st) + Math.abs( ts.d() );  // FIXME length
-            mClosures.add( getClosureError( st, sf, ts.d(), ts.b(), ts.c(), length ) );
-            
+            updateBBox( sf );
+            addToStats( ts.duplicate, ts.surface, Math.abs(ts.d() ), sf.v );
+            mStations.addStation( sf );
+
+            // FIXME is st.mAnomaly OK ?
+            // N.B. was new NumShot(st, sf, ts.block, -1, mDecl); // FIXME check -anomaly
+            sh = makeShotFromTmp( sf, st, ts, -1, st.mAnomaly, mDecl );
+            addShotToStations( sh, sf, st );
             ts.used = true;
             repeat = true;
           }
-          else // st null || st isBarrier
-          { // forward shot: from --> to
-            // TDLog.Log( TDLog.LOG_NUM,
-            //                   "new station F->T id= " + ts.to + " from= " + sf.name + " anomaly " + anomaly ); 
-            // Log.v( "DistoX", "new station F->T id= " + ts.to + " from= " + sf.name + " anomaly " + anomaly ); 
-
-            float bearing = ts.b() - sf.mAnomaly;
-            st = new NumStation( ts.to, sf, ts.d(), bearing, ts.c(), ts.extend );
-            st.addAzimuth( (ts.b()+180)%360, -ts.extend );
-            st.mAnomaly = anomaly;
-            updateBBox( st );
-            addToStats( ts.duplicate, ts.surface, Math.abs(ts.d() ), st.v );
-            mStations.addStation( st );
-
-            sh = makeShotFromTmp( sf, st, ts, 1, sf.mAnomaly, mDecl );
-            addShotToStations( sh, st, sf );
-            ts.used = true;
-            repeat = true;
-          }
-        }
-        else if ( st != null ) 
-        { // sf == null: reversed shot only difference is '-' sign in new NumStation, and the new station is sf
-          // TDLog.Log( TDLog.LOG_NUM, "reversed shot " + ts.from + " " + ts.to + " id " + ts.blocks.get(0).mId );
-          st.addAzimuth( (ts.b()+180)%360, -ts.extend );
-          
-          // TDLog.Log( TDLog.LOG_NUM,
-          //                   "new station T->F id= " + ts.from + " from= " + st.name + " anomaly " + anomaly ); 
-          // Log.v("DistoX", "new station T->F id= " + ts.from + " from= " + st.name + " anomaly " + anomaly ); 
-
-          float bearing = ts.b() - st.mAnomaly;
-          sf = new NumStation( ts.from, st, - ts.d(), bearing, ts.c(), ts.extend );
-          sf.addAzimuth( ts.b(), ts.extend );
-          sf.mAnomaly = anomaly; // FIXME
-
-          updateBBox( sf );
-          addToStats( ts.duplicate, ts.surface, Math.abs(ts.d() ), sf.v );
-          mStations.addStation( sf );
-
-          // FIXME is st.mAnomaly OK ?
-          // N.B. was new NumShot(st, sf, ts.block, -1, mDecl); // FIXME check -anomaly
-          sh = makeShotFromTmp( sf, st, ts, -1, st.mAnomaly, mDecl );
-          addShotToStations( sh, sf, st );
-          ts.used = true;
-          repeat = true;
         }
       }
     }
-    // TDLog.Log( TopoDroiaLog.LOG_NUM, "DistoXNum::compute done leg shots ");
-    // Log.v( "DistoX", "DistoXNum::compute done leg shots: stations " + mStations.size() );
+    // if ( TDLog.LOG_DEBUG ) Log.v( TDLog.TAG, "DistoXNum::compute done leg shots, stations  " + mStations.size() );
 
     if ( TDSetting.mLoopClosure == 1 ) {
       // TDLog.Log( TDLog.LOG_NUM, "loop compensation");
@@ -959,7 +971,7 @@ class DistoXNum
       // }
       start_station.mHasCoords = true;
 
-      repeat = true;
+      boolean repeat = true;
       while ( repeat ) {
         repeat = false;
         for ( NumShot sh2 : mShots ) {
@@ -982,7 +994,7 @@ class DistoXNum
             s2.mHasCoords = true;
             sh2.mUsed = true;
             repeat = true;
-            // Log.v( TopoDroidApp.TAG, "reset " + s1.name + "->" + s2.name + " " + e + " " + s + " " + v );
+            // if ( TDLog.LOG_DEBUG )  Log.v( TDLog.TAG, "reset " + s1.name + "->" + s2.name + " " + e + " " + s + " " + v );
           } else if ( s2.mHasCoords && ! s1.mHasCoords ) {
             // reset s1 values from the shot
             // float d = - sh2.length() * sh2.mDirection; // FIXME DIRECTION
@@ -997,7 +1009,7 @@ class DistoXNum
             s1.mHasCoords = true;
             sh2.mUsed = true;
             repeat = true;
-            // Log.v( TopoDroidApp.TAG, "reset " + s1.name + "<-" + s2.name + " " + e + " " + s + " " + v );
+            // if ( TDLog.LOG_DEBUG )  Log.v( TDLog.TAG, "reset " + s1.name + "<-" + s2.name + " " + e + " " + s + " " + v );
           }
           
         }
@@ -1011,7 +1023,7 @@ class DistoXNum
     for ( TriSplay ts : tmpsplays ) {
       NumStation st = getStation( ts.from );
       if ( st != null ) {
-        float extend = st.computeExtend( ts.b( mDecl ), ts.extend ) ;
+        float extend = st.computeExtend( ts.b( mDecl ), ts.extend ); // FIXME-EXTEND
         mSplays.add( new NumSplay( st, ts.d(), ts.b( mDecl ), ts.c(), extend, ts.block, mDecl ) );
       }
     }

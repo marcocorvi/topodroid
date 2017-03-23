@@ -46,7 +46,7 @@ public class NumShot
     from = f;
     to   = t;
     // block = blk;
-    mIgnoreExtend = ( blk.mExtend == DBlock.EXTEND_IGNORE);
+    mIgnoreExtend = ( blk.getExtend() == DBlock.EXTEND_IGNORE);
     mUsed = false;
     mDirection = dir;
     mBranchDir = 0;
@@ -59,7 +59,7 @@ public class NumShot
     mAvgLeg  = new AverageLeg( decl );
     mAvgLeg.set( blk );
     mAnomaly = anomaly;
-    mExtend  = (int)(blk.mExtend);
+    mExtend  = blk.getExtend();
   }
 
   // boolean isRecent( long id ) { return blocks.get(0) != null && blocks.get(0).isRecent( id ); }

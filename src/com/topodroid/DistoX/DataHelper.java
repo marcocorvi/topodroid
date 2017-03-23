@@ -221,7 +221,7 @@ public class DataHelper extends DataSetObservable
      block.mMagnetic     = (float)( cursor.getDouble(7) );
      block.mDip          = (float)( cursor.getDouble(8) );
      
-     block.mExtend  = cursor.getLong(9);
+     block.setExtend( (int)(cursor.getLong(9) ) );
      block.mFlag    = cursor.getLong(10);
      long leg = cursor.getLong(11);
      if ( leg == 1L ) {
@@ -936,7 +936,7 @@ public class DataHelper extends DataSetObservable
       for ( DBlock b : updatelist ) {
         updateShotNameAndExtendStmt.bindString( 1, b.mFrom );
         updateShotNameAndExtendStmt.bindString( 2, b.mTo );
-        updateShotNameAndExtendStmt.bindLong(   3, b.mExtend );
+        updateShotNameAndExtendStmt.bindLong(   3, b.getFullExtend() );
         updateShotNameAndExtendStmt.bindLong(   4, (b.mType == DBlock.BLOCK_SEC_LEG)? 1 : 0 );
         updateShotNameAndExtendStmt.bindLong(   5, sid );
         updateShotNameAndExtendStmt.bindLong(   6, b.mId );
@@ -958,7 +958,7 @@ public class DataHelper extends DataSetObservable
       for ( DataListener listener : mListeners ) {
         for ( DBlock b : updatelist ) {
           listener.onUpdateShotName( b.mId, sid, b.mFrom, b.mTo );
-          listener.onUpdateShotExtend( b.mId, sid, b.mExtend );
+          listener.onUpdateShotExtend( b.mId, sid, b.getFullExtend() );
           listener.onUpdateShotLeg( b.mId, sid, (b.mType == DBlock.BLOCK_SEC_LEG)? 1 : 0 );
         }
       }
