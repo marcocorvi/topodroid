@@ -294,7 +294,7 @@
     
     <string name="popup_select_all">Выбрать все</string>
     <string name="popup_select_point">Выбрать точки</string>
-    <string name="popup_select_line">Выбратьt линии</string>
+    <string name="popup_select_line">Выбрать линии</string>
     <string name="popup_select_area">Выбрать области</string>
     <string name="popup_select_shot">Выбрать замеры</string>
     <string name="popup_select_station">Выбрать пикеты</string>

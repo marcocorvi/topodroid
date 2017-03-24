@@ -4066,11 +4066,11 @@ public class DrawingWindow extends ItemDrawer
   {
     float w = b.right - b.left;
     float h = b.bottom - b.top;
-    float wZoom = TopoDroidApp.mDisplayWidth  / ( 1 + w );
-    float hZoom = TopoDroidApp.mDisplayHeight / ( 1 + h );
+    float wZoom = (float) ( mDrawingSurface.getMeasuredWidth() * 0.9 ) / ( 1 + w );
+    float hZoom = (float) ( ( ( mDrawingSurface.getMeasuredHeight() - mListView.getHeight() ) * 0.9 ) / ( 1 + h ));
     mZoom = ( hZoom < wZoom ) ? hZoom : wZoom;
     mOffset.x = TopoDroidApp.mDisplayWidth  / (2*mZoom) - (b.left + b.right) / 2;
-    mOffset.y = TopoDroidApp.mDisplayHeight / (2*mZoom) - (b.top + b.bottom) / 2;
+    mOffset.y = ( TopoDroidApp.mDisplayHeight + mListView.getHeight() ) / (2*mZoom) - (b.top + b.bottom ) / 2;
     // Log.v("DistoX", "W " + w + " H " + h + " zoom " + mZoom + " X " + mOffset.x + " Y " + mOffset.y );
     mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
   }
