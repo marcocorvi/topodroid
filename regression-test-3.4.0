@@ -2,19 +2,19 @@ TopoDroid Regression Tests
 
 This is an incomplete list of things to check 
 
-[x] install apk over an existing installation and check that it starts
+[ ] install apk over an existing installation and check that it starts
     preserving the user preferences - Checked 4 customized configurations (Rodrigo)
 [ ] install apk without existing installation and check it starts
     with default user preferences values
     check that the directory "topodroid" is properly populated
 
 LANGUAGES
-[x] es [x] fr [x] de [x] it [x] cn [x] bg [x] ru [x] ua [x] sl [x] pt [x] hu
+[ ] es [ ] fr [ ] de [ ] it [ ] cn [ ] bg [ ] ru [ ] ua [ ] sl [ ] pt [ ] hu
 Changed the language setting and confirmed that the language of the configuration windows changed. I can't recognize bg, ru and ua but there are 3 different languages that I don't recognize on the language settings also so I believe they are these 3 ;) (Rodrigo)
 
 MAIN WINDOW
 [ ] activity level
-    [x] buttons presence according to the "activity-level" - So no change on the main window but I believe that's what's expected for this windows in particular (Rodrigo)
+    [ ] buttons presence according to the "activity-level" - So no change on the main window but I believe that's what's expected for this windows in particular (Rodrigo)
     [ ] functionalities enabled by the activity-level
 [ ] verify that the settings display as for the activity level
     [ ] level-0 (basic)
@@ -23,20 +23,20 @@ MAIN WINDOW
     [ ] level-3 (experimental)
     [ ] level-4 (complete)
 
-[x] create a new survey
-[x] set the "team" option and check it appears in the new survey
-[x] set the "initial station" setting and check it appears in the new survey
-    [x] check station cut-n-paste - Tested "station NAME copy-n-paste" (Rodrigo)
-[x] check the survey name is required
-[x] check duplicate name not allowed
+[ ] create a new survey
+[ ] set the "team" option and check it appears in the new survey
+[ ] set the "initial station" setting and check it appears in the new survey
+    [ ] check station cut-n-paste - Tested "station NAME copy-n-paste" (Rodrigo)
+[ ] check the survey name is required
+[ ] check duplicate name not allowed
 
-[x] import th file
-[x] import dat file
-[x] import tro file
-[x] import top file
+[ ] import th file
+[ ] import dat file
+[ ] import tro file
+[ ] import top file
 
-[x] palette button 
-    [x] verify that changes to the global palette affect the drawing tools for the new sketches
+[ ] palette button 
+    [ ] verify that changes to the global palette affect the drawing tools for the new sketches
 
 [ ] symbol-sets menu
     [ ] insert symbol-set and check new symbol appear in the palette
@@ -47,46 +47,46 @@ MAIN WINDOW
     [ ] modification with immediate feedback of the new value on the screen
     [ ] bound enforcing (when applicable)
 
-[x] buttons size. check the button size on all interfaces:
-    [x] main window
-    [x] shot window
-    [x] survey window
-    [x] sketch window
-    [x] overview window
-    [x] device window
-    [x] calib window
-    [x] gm-data window - I don't know what window is that. (Rodrigo)
-[x] text size:
-    [x] main window: survey list
-    [x] shot window: shot data list
-    [x] device window: device list
-    [x] gm-data window: calib data list
+[ ] buttons size. check the button size on all interfaces:
+    [ ] main window
+    [ ] shot window
+    [ ] survey window
+    [ ] sketch window
+    [ ] overview window
+    [ ] device window
+    [ ] calib window
+    [ ] gm-data window - I don't know what window is that. (Rodrigo)
+[ ] text size:
+    [ ] main window: survey list
+    [ ] shot window: shot data list
+    [ ] device window: device list
+    [ ] gm-data window: calib data list
 [ ] language
     [ ] check the supported languages are all listed in the language setting
     [ ] check the unsupported languages are not listed in the language setting
-    [x] check that topodroid uses the selected language
+    [ ] check that topodroid uses the selected language
     [ ] check that if no language is selected it uses the android locale (if available)
     [ ] check that the language strings are properly rendered in every language
-        Buttons:  [ ] es [ ] fr [ ] de [ ] it [ ] cn [ ] bg [ ] ru [ ] ua [ ] sl [x] pt [ ] hu
-        Titles:   [ ] es [ ] fr [ ] de [ ] it [ ] cn [ ] bg [ ] ru [ ] ua [ ] sl [x] pt [ ] hu
-        Messages: [ ] es [ ] fr [ ] de [ ] it [ ] cn [ ] bg [ ] ru [ ] ua [ ] sl [x] pt [ ] hu
-    [x] on changing language the settings are updated to the new language
-[x] current work directory
-    [x] enter a name of non-existing directory: check it is created and properly populated of subdirs
+        Buttons:  [ ] es [ ] fr [ ] de [ ] it [ ] cn [ ] bg [ ] ru [ ] ua [ ] sl [ ] pt [ ] hu
+        Titles:   [ ] es [ ] fr [ ] de [ ] it [ ] cn [ ] bg [ ] ru [ ] ua [ ] sl [ ] pt [ ] hu
+        Messages: [ ] es [ ] fr [ ] de [ ] it [ ] cn [ ] bg [ ] ru [ ] ua [ ] sl [ ] pt [ ] hu
+    [ ] on changing language the settings are updated to the new language
+[ ] current work directory
+    [ ] enter a name of non-existing directory: check it is created and properly populated of subdirs
         this happens also if the cwd is set, the app is shit down, the directory is deleted, the app is restarted
-    [x] enter a name without "topodroid": this must be prepended to the dir name
-    [x] enter a name with prefix "topodroid": this is not prepended to the dir name It works as expected if the prefix is exactly "TOpoDroid" casa sensitive. (Rodrigo)
-    [x] select existing directory
+    [ ] enter a name without "topodroid": this must be prepended to the dir name
+    [ ] enter a name with prefix "topodroid": this is not prepended to the dir name It works as expected if the prefix is exactly "TOpoDroid" casa sensitive. (Rodrigo)
+    [ ] select existing directory
 
 [ ] about menu
     the about menu in custom language must have the name and email of the translator
-    [x] es  [x] fr  [x] de  [x] it  [ ] cn  [ ] bg  [ ] ru  [ ] ua  [ ] sl  [x] pt  [-] hu
+    [ ] es  [ ] fr  [ ] de  [ ] it  [ ] cn  [ ] bg  [ ] ru  [ ] ua  [ ] sl  [ ] pt  [-] hu
 
-[x] help menu: check the quick help strings - Checked on the portuguese translation - Rodrigo
-[x] sections and pages of the user manual and their navigation/organization
+[ ] help menu: check the quick help strings - Checked on the portuguese translation - Rodrigo
+[ ] sections and pages of the user manual and their navigation/organization
 [ ] content of the user-manual sections and pages
-[x] web-link in the user manual
-[x] in each activity/dialog the MENU button opens the help page
+[ ] web-link in the user manual
+[ ] in each activity/dialog the MENU button opens the help page
 [ ] the "index" refers to *all* the subpages
 
 
@@ -94,28 +94,28 @@ DEVICE WINDOW
 [ ] buttons presence according to the "activity-level"
 
 [ ] bluetooth reset button
-[x] calib-mode toggle button (*)
-    [x] X310 first time on, second time off
+[ ] calib-mode toggle button (*)
+    [ ] X310 first time on, second time off
     [ ] A3 toggle according to the current state
-[x] calibration button -> calib-list dialog
+[ ] calibration button -> calib-list dialog
 [ ] memory info button -> memory dialog (*)
-    [x] dump data from disto X310
+    [ ] dump data from disto X310
     [ ] dump data from disto A3
-    [x] save data to file
-        [x] "dump" dir must be automatically created
-[x] calibration coeffs read
+    [ ] save data to file
+        [ ] "dump" dir must be automatically created
+[ ] calibration coeffs read
 [ ] info button (*)
     [ ] X310
     [ ] A3
 
-[x] scan menu: (*)
+[ ] scan menu: (*)
     forget DistoX from android and scan for it (might need a few trials)
-[x] pair menu (*)
+[ ] pair menu (*)
     pair with the DistoX 
-[x] disconnect menu: cancel the selected DistoX
+[ ] disconnect menu: cancel the selected DistoX
 [ ] firmware menu -> firmware dialog
     [ ] read the DistoX firmware to a file: check the file is in "bin" (*) - Tried to download. The DistoX was apparently sending the firmware to Topodroid for more than 10 minutes when I turned the DistoX off and closed Topodroid. (Rodrigo)
-    [x] upload a new firmware to the DistoX (*)
+    [ ] upload a new firmware to the DistoX (*)
 
 [ ] settings menu
     [ ] BT check:
@@ -136,20 +136,20 @@ DEVICE WINDOW
         when found select it, try to use it without pairing it before.
     (backup files are not cleared)
         if set, it should be auto-paired, otherwise a pairing notification
-[x] calibration sub-setting: should open the calib settings
+[ ] calibration sub-setting: should open the calib settings
 
 [ ] help strings
 
 
 CALIBRATION DIALOG
 [ ] import calibration
-    [x] export a calibration in csv, check the file in the ccsv dir
-    [x] delete the calibration: check the tables in device10.sqlite
-    [x] import the csv calib file
-        [x] toast message ok
-        [x] calibration is added to the list
-    [x] import again the csv calib file
-        [x] import fails if calib already exists
+    [ ] export a calibration in csv, check the file in the ccsv dir
+    [ ] delete the calibration: check the tables in device10.sqlite
+    [ ] import the csv calib file
+        [ ] toast message ok
+        [ ] calibration is added to the list
+    [ ] import again the csv calib file
+        [ ] import fails if calib already exists
         NB. it does not import calib if there is already a calib with the same name
         even if assigned to another DistoX
     [ ] reset DistoX calibration coeff
@@ -157,46 +157,46 @@ CALIBRATION DIALOG
 [ ] new calibration
 
 CALIBRATION INFO SCREEN
-[x] enter a name and save: open+read button must become enabled
-    [x] cannot save if name already present
+[ ] enter a name and save: open+read button must become enabled
+    [ ] cannot save if name already present
 [ ] read calib coeff: when empty must be V=0 M=0 NL=0
-[x] open calibration: opens the gm-data window
-[x] select different algo and check its effect
-    [x] select linear, save, go to GMActivity and calibrate
-    [x] select non-linear etc.
-    [x] select minimum etc.
-    [x] select auto ect.
+[ ] open calibration: opens the gm-data window
+[ ] select different algo and check its effect
+    [ ] select linear, save, go to GMActivity and calibrate
+    [ ] select non-linear etc.
+    [ ] select minimum etc.
+    [ ] select auto ect.
 
 CALIB DATA WINDOW
 [ ] data download (only on-demanad mode) (*)
     [ ] the button and the title turn red while downloading
     take a few calibration shots and download them
     take more shots, download them: must be added to the list
-[x] calib-mode toggle (*)
-[x] group assignment
-    [x] the button turn violet while computing
-    [x] assign only numbers to data with "0"
-    [x] "reset" resets all the group numbers (and does not do assignment)
+[ ] calib-mode toggle (*)
+[ ] group assignment
+    [ ] the button turn violet while computing
+    [ ] assign only numbers to data with "0"
+    [ ] "reset" resets all the group numbers (and does not do assignment)
 [ ] calib coeff compute
     [ ] fails if not enough data (<= 16)
     [ ] fails if not enough groups (<= 4)
-    [x] fails if reaches max iteration numnber (set it to a small value to check)
-    [x] the button turn violet while computing
-    [x] the results is displayed: 
-        [x] coeffs, 
-        [x] error-stats,
-        [x] histogram
-[x] angle distribution 
-    [x] enabled only after computing the coeffs
-[x] calib coeff read from distox (*)
+    [ ] fails if reaches max iteration numnber (set it to a small value to check)
+    [ ] the button turn violet while computing
+    [ ] the results is displayed: 
+        [ ] coeffs, 
+        [ ] error-stats,
+        [ ] histogram
+[ ] angle distribution 
+    [ ] enabled only after computing the coeffs
+[ ] calib coeff read from distox (*)
 [ ] calib coeff write to distox (*)
     [ ] enabled only after computing the coeffs
     [ ] write the coeffs just read)
     [ ] read the coeffs to check them
 
-[x] menu display: 
-    [x] delete a data, check it is shown/hidden ("display" menu)
-    [x] undelete the data (tap on it)
+[ ] menu display: 
+    [ ] delete a data, check it is shown/hidden ("display" menu)
+    [ ] undelete the data (tap on it)
 [ ] calib validate: need two good calibrations
     [ ] the results is displayed: 
         [ ] [ ] [ ] histogram
@@ -204,56 +204,56 @@ CALIB DATA WINDOW
 [ ] settings
     [ ] group policy
     [ ] group distance
-    [x] eps: try a large eps (0.1), the calib compute should end with few iterations
-    [x] iterations: try a small value (10) => Too few iteratons
-    [x] raw data:
-        [x]none,
-        [x] dec.
-        [x] hex
+    [ ] eps: try a large eps (0.1), the calib compute should end with few iterations
+    [ ] iterations: try a small value (10) => Too few iteratons
+    [ ] raw data:
+        [ ]none,
+        [ ] dec.
+        [ ] hex
     [ ] algo
         [ ] auto should pick the algo by the device type/firmware
         [ ] linear/non-linear should force the algo
-[x] help strings
+[ ] help strings
 
 SURVEY DATA WINDOW
-[x] check display mode
-[x] display colors: white-leg blue-splay grey-rep.leg
-[x] tap on a station to display its splays
-    [x] tap again to hide them
-[x] selectively display splays of two stations
-[x] select active-station (log-tap): it must turn green
-    [x] download data and check next shot is attached to it (*)
+[ ] check display mode
+[ ] display colors: white-leg blue-splay grey-rep.leg
+[ ] tap on a station to display its splays
+    [ ] tap again to hide them
+[ ] selectively display splays of two stations
+[ ] select active-station (log-tap): it must turn green
+    [ ] download data and check next shot is attached to it (*)
         [ ] with toporobot policy a new "traverse" is started
-    [x] check it is displayed as hint in the manual shot dialog
-    [x] check it is shown in the saved-stations dialog if opened
+    [ ] check it is displayed as hint in the manual shot dialog
+    [ ] check it is shown in the saved-stations dialog if opened
 
 [ ] sketches
-    [x] add a new sketch: dialog (name + ref. station)
-        [x] duplicate sketch name -> error
-        [x] non-existing station -> error
-        [x] origin station is the last one 
-        [x] origin station is the active-station if defined 
+    [ ] add a new sketch: dialog (name + ref. station)
+        [ ] duplicate sketch name -> error
+        [ ] non-existing station -> error
+        [ ] origin station is the last one 
+        [ ] origin station is the active-station if defined 
         [n] check station copy-n-paste
-        [x] select projected profile: orientation dialog
-            [x] OK confirm
-            [x] BACK cancel
-    [x] open existing sketch
-        [x] open with the plan view
-        [x] open with the profile (extended/projected) view
-[x] long-tap open last sketch, with the last view
+        [ ] select projected profile: orientation dialog
+            [ ] OK confirm
+            [ ] BACK cancel
+    [ ] open existing sketch
+        [ ] open with the plan view
+        [ ] open with the profile (extended/projected) view
+[ ] long-tap open last sketch, with the last view
 
 [ ] data download (*)
-    [x] button grey if no DistoX selected
-    [x] on-demand mode
-        [x] button turns red (while connected), blue (non connected)
-    [x] continuous mode without auto-reconnect
-        [x] button turns red (while connected), blue (non connected)
-    [x] continuous mode with auto-reconnect
-        [x] button turns red (while connected), yellow (connecting), blue (non connected)
+    [ ] button grey if no DistoX selected
+    [ ] on-demand mode
+        [ ] button turns red (while connected), blue (non connected)
+    [ ] continuous mode without auto-reconnect
+        [ ] button turns red (while connected), blue (non connected)
+    [ ] continuous mode with auto-reconnect
+        [ ] button turns red (while connected), yellow (connecting), blue (non connected)
     [ ] verify data delay
     [ ] station naming policies
-        [x] splays + forward
-        [x] splays + backward
+        [ ] splays + forward
+        [ ] splays + backward
         [ ] forward + splays
         [ ] backward + splays
         [ ] backward + splays + forward
@@ -267,37 +267,37 @@ SURVEY DATA WINDOW
         [ ] backward + splays + forward
         [ ] tripod
         [ ] toporobot
-    [x] check multi-distox mode (long tap on download button to switch distox)
-        [x] and immediately connect to download
+    [ ] check multi-distox mode (long tap on download button to switch distox)
+        [ ] and immediately connect to download
 
 [ ] bluetooth
     X310 fw >= 3:
-      [x] reset
-      [x] laser on
+      [ ] reset
+      [ ] laser on
       [xl laser off 
-      [x] measure with immediate download
+      [ ] measure with immediate download
       // [ ] measure without download DROPPED
       [ ] verify laser/shot delays
     others
       [ ] reset
-[x] annotations
-    [x] verify consistency with file on filesystem
-    [x] consistency with annotation button of sketch window
-[x] reference extend azimuth
-    [x] if set to left/right (fixed) shot must be extended properly
-    [x] if set to a direction shot must be right (along dir.) left (opposite dir.)
-    [x] reference extend azimuth is maintained switching between shot-list and sketching
-[x] saved stations dialog
-    [x] add a station
-    [x] select a saved station
-    [x] check station cut-n-paste
-    [x] marks (fixed/painted)
+[ ] annotations
+    [ ] verify consistency with file on filesystem
+    [ ] consistency with annotation button of sketch window
+[ ] reference extend azimuth
+    [ ] if set to left/right (fixed) shot must be extended properly
+    [ ] if set to a direction shot must be right (along dir.) left (opposite dir.)
+    [ ] reference extend azimuth is maintained switching between shot-list and sketching
+[ ] saved stations dialog
+    [ ] add a station
+    [ ] select a saved station
+    [ ] check station cut-n-paste
+    [ ] marks (fixed/painted)
 [ ] manual shot
-    [x] enter a new shot manually
-    [x] check from station cut-n-paste
-    [x] check to station cut-n-paste
+    [ ] enter a new shot manually
+    [ ] check from station cut-n-paste
+    [ ] check to station cut-n-paste
     [ ] station hints set by the auto-station policy
-        [x] splays + forward
+        [ ] splays + forward
         [ ] splays + backward
         [ ] forward + splays
         [ ] backward + splays
@@ -305,14 +305,14 @@ SURVEY DATA WINDOW
         [ ] tripod
         [ ] toporobot
     [ ] splays must be inserted according to the station-naming policy
-        [x] splays before for "splays + forward"
+        [ ] splays before for "splays + forward"
         [ ] splays before for "splays + backward"
         [ ] splays after for "forward + splays"
         [ ] splays after for "backward + splays"
         [ ] backsight
         [ ] tripod
         [ ] toporobot
-    [x] backshot fields only if option is set
+    [ ] backshot fields only if option is set
     [ ] if backshot this is inserted as well (before the shot and the splays)
     [ ] if only backshot this is inserted in place of the shot
     [ ] check splays-at-to 
@@ -320,86 +320,87 @@ SURVEY DATA WINDOW
 
 SHOT DIALOGS
 tap a shot data
-[x] if it was a manual shot length/azimuth/clino are editable
-    [x] changes reflected in shot data list
-[x] if it was a DistoX shot length/azimuth/clino are not editable
-[x] check from station cut-n-paste
-[x] check to station cut-n-paste
-[x] "reverse": swap stations
-[x] "<" ">": should navigate in the list of legs
-[x] add comment: 'N' should be appended
-[x] clear a comment: 'N' should disappear
-[x] change extend: should reflect on the item line
+[ ] if it was a manual shot length/azimuth/clino are editable
+    [ ] changes reflected in shot data list
+[ ] if it was a DistoX shot length/azimuth/clino are not editable
+[ ] check from station cut-n-paste
+[ ] check to station cut-n-paste
+[ ] "reverse": swap stations
+[ ] "<" ">": should navigate in the list of legs
+[ ] add comment: 'N' should be appended
+[ ] clear a comment: 'N' should disappear
+[ ] change extend: should reflect on the item line
 [ ] try the buttons
-    [x] duplicate: +
-    [x] surface: -
-    [x] merge into previous leg
-    [x] merge into following leg
-    [x] splay group: all splays of the group with same station should be updated
-    [x] renumber: following shots should be renumbered according to the current station-naming policy
-[x] "ok" saves changes and closes dialog
-[x] "save" saves changes but does not close dialog
-[x] "more" opens secondary dialog
-[x] "cancel" closes dialog
+    [ ] duplicate: +
+    [ ] surface: -
+    [ ] merge into previous leg
+    [ ] merge into following leg
+    [ ] renumber: following shots should be renumbered according to the current station-naming policy
+    [ ] splay group: all splays of the group with same station should be updated
+    [ ] x-splays: splays up to this one become 'X' (shown green)
+[ ] "ok" saves changes and closes dialog
+[ ] "save" saves changes but does not close dialog
+[ ] "more" opens secondary dialog
+[ ] "cancel" closes dialog
 
 long tap on splay data
-[x] opens last sketch with splay station in the middle and splay highlighted
+[ ] opens last sketch with splay station in the middle and splay highlighted
 
 SECONDARY SHOT EDIT DIALOG
-[x] take a photo
+[ ] take a photo
 [ ] take audio comment
 [ ] replay audio comment
 [ ] delete audio comment
 [ ] overwrite audio comment
-[x] take a sensor measurement
-[x] add a shot before
+[ ] take a sensor measurement
+[ ] add a shot before
     [ ] station hints according to auto-station policy - Apparently I just got the TO BASE value copied to the station field on the new shot. I don think that's exactly whats expected. (Rodrigo)
 [+/-] split survey at the shot (the shot is the first of the new survey) - The shot is the first of the new survey on the shot list but it's not the one listed on the "New survey" dialog, on the field under the "Team" field. (Rodrigo)
-[x] "delete" the shot (mark it as "deleted")
-    [x] recover shot
-[x] add LRUD at FROM station
-    [x] check that left/right are to the shot direction
-    [x] check shot list is immediately updated
+[ ] "delete" the shot (mark it as "deleted")
+    [ ] recover shot
+[ ] add LRUD at FROM station
+    [ ] check that left/right are to the shot direction
+    [ ] check shot list is immediately updated
 [ ] add LRUD at TO station
-    [x] not for splays
+    [ ] not for splays
     [ ] check that left/right are to the shot direction
 
-[x] survey info menu
-[x] recover deleted items: the dialog must show
-    [x] deleted shot(s)
-    [x] deleted sketch(es) [only plan/extended, no x-sections]
-    [x] toast message if there is nothing to recover
+[ ] survey info menu
+[ ] recover deleted items: the dialog must show
+    [ ] deleted shot(s)
+    [ ] deleted sketch(es) [only plan/extended, no x-sections]
+    [ ] toast message if there is nothing to recover
 [ ] view photos
-    [x] toast message if there is no photo
-    [x] list photos
-        [x] tapping a photo opens the photo dialog with thumbnail, comment, delete-button
-            [x] change comment
-            [x] view photo (tap thumbnail)
-            [x] delete photo: check file disappear from filesystem
-[x] view sensosrs measurements
-    [x] toast message if there is no sensor measurement
-[x] 3D display
-[x] device window menu
-[x] settings
-[x] help strings
+    [ ] toast message if there is no photo
+    [ ] list photos
+        [ ] tapping a photo opens the photo dialog with thumbnail, comment, delete-button
+            [ ] change comment
+            [ ] view photo (tap thumbnail)
+            [ ] delete photo: check file disappear from filesystem
+[ ] view sensosrs measurements
+    [ ] toast message if there is no sensor measurement
+[ ] 3D display
+[ ] device window menu
+[ ] settings
+[ ] help strings
 
 SURVEY INFO WINDOWS
-[x] check that the "name" is not editable
-[x] change "team"
-[x] change magn. declination
-[x] change description
-[x] date picker
+[ ] check that the "name" is not editable
+[ ] change "team"
+[ ] change magn. declination
+[ ] change description
+[ ] date picker
 
-[x] annotations: should be the same as in shot-window and sketch-window
-[x] info
-[x] 3D display
-[x] gps dialog
-[x] photo list dialog
-[x] sensor list dialog
+[ ] annotations: should be the same as in shot-window and sketch-window
+[ ] info
+[ ] 3D display
+[ ] gps dialog
+[ ] photo list dialog
+[ ] sensor list dialog
 
 [ ] export menu
     export in each format and verify the file appear the respective directory
-    [x] ZIP
+    [ ] ZIP
         [ ] default data export format is updated (if defined)
     [ ] Compass
     [ ] PocketTopo
@@ -407,55 +408,56 @@ SURVEY INFO WINDOWS
     [ ] Grottolf
     [ ] GHTopo
     [ ] Survex
-    [x] Therion
+    [ ] Therion
     [ ] Topo
     [ ] VisualTopo
     [ ] Walls
     [ ] CSV
     [ ] DXF
     [ ] KML
-        [x] fails if no geo-referenced station
+        [ ] fails if no geo-referenced station
     [ ] Track file
-        [x] fails if no geo-referenced station
-[x] check the default data export format is done before the ZIP export and included
+        [ ] fails if no geo-referenced station
+[ ] check the default data export format is done before the ZIP export and included
 [ ] rename the survey: check that all survey data get renamed
     [ ] th2 sketch files 
     [ ] tdr sketch files
     [ ] other sketch files: csx, png, dxf, svg
+    [ ] cross-sections files
+    [ ] audio directory
     [ ] photo directory
     [ ] annotation file
     [ ] records in the database tables
     [ ] other exports: th, csv, cav, cave, dat, dxf, grt, gtx, plt, kml, sxv, svr, top, tro, csx, png, svg
 *** IMPORTANT sketch backups are not renamed
 
-[x] delete the survey: check that all the related files are deleted
-    [x] data exports must be deleted
-        [x] compass
+[ ] delete the survey: check that all the related files are deleted
+    [ ] data exports must be deleted
+        [ ] compass
         [ ] cSurvey
-        [x] PocketTopo
-        [x] Polygon
-        [x] Survex
-        [x] Grottolf
-        [x] GHTopo
-        [x] Therion
-        [x] Topo
-        [x] VisualTopo
-        [x] Walls
-        [x] CSV
-        [x] DXF
+        [ ] PocketTopo
+        [ ] Polygon
+        [ ] Survex
+        [ ] Grottolf
+        [ ] GHTopo
+        [ ] Therion
+        [ ] Topo
+        [ ] VisualTopo
+        [ ] Walls
+        [ ] CSV
+        [ ] DXF
         [ ] KML
         [ ] Track file
-    [x] sketch files and backup must be deleted
-        [x] tdr
+    [ ] sketch files and backup must be deleted
+        [ ] tdr
     [ ] sketch exports must be deleted
-        [x] th2
+        [ ] th2
         [ ] csx
         [ ] png
         [ ] dxf
-            [ ] with xsections if section points enables
-        [x] svg
-            [ ] with xsections if section points enables
-    [x] zip archives are not deleted
+        [ ] svg
+        [ ] svg in html
+    [ ] zip archives are not deleted
 [ ] calibration: enter calibration values for tape, compass, clino:
     [ ] verify that following manually entered shots are affected accordingly 
         the values registered in the db are those entered in the dialog subtracted the calibrations
@@ -464,12 +466,12 @@ SURVEY INFO WINDOWS
 [ ] help strings
 
 GPS DIALOG
-[x] check station cut-n-paste
+[ ] check station cut-n-paste
 [?] check that the GPS/add can be used only after a station has been entered - The "Save" button simply returns to the GPS dialog window with presenting an error nor saving anything. Shouldn't it present and error? Shouldn't there be a "Cancel" button? (Rodrigo)
-[x] if GPS is not enabled a dialog ask to enable it
-[x] the GPS must show the number of satellites, and (when enough) update the position 
-[x] with the GPS position "add" opens a dialog with the same position
-[x] without GPS position the "add" dialog has empty fields
+[ ] if GPS is not enabled a dialog ask to enable it
+[ ] the GPS must show the number of satellites, and (when enough) update the position 
+[ ] with the GPS position "add" opens a dialog with the same position
+[ ] without GPS position the "add" dialog has empty fields
     [ ] check that "W" is like minus, for longitude
     [ ] check that "S" is like minus for latitude
     [ ] check that the altitudes make sense
@@ -494,15 +496,15 @@ Data reduction
 SKETCH WINDOW
 [ ] load/save of (binary) files ("label" and "danger" point)
 [ ] check that the sketch stays in cache
-[x] check the default sketch export format is properly done
+[ ] check the default sketch export format is properly done
 
-[x] with autostations check they are in the th2 files
-[x] without autostations check that a station can be set for export and marked with a triangle
+[ ] with autostations check they are in the th2 files
+[ ] without autostations check that a station can be set for export and marked with a triangle
 
 <move mode>
-[x] drag
-[x] two-finger zoom
-[x] zoom-controls
+[ ] drag
+[ ] two-finger zoom
+[ ] zoom-controls
 [ ] data download
     [ ] on demand mode
     [ ] continuous mode without auto-reconnect
@@ -515,22 +517,22 @@ SKETCH WINDOW
     [ ] measure leg
     [ ] BT reset
 [ ] reference display
-    [x] grid
-        [x] check the three-level grids
-    [x] centerline
-    [x] splays
-    [x] stations (pink)
-        [x] check station textsize setting
-    [x] fix ref two-finger drag
-[x] plan/profile switch 
-[x] extend reference azimuth
+    [ ] grid
+        [ ] check the three-level grids
+    [ ] centerline
+    [ ] splays
+    [ ] stations (pink)
+        [ ] check station textsize setting
+    [ ] fix ref two-finger drag
+[ ] plan/profile switch 
+[ ] extend reference azimuth
     ...
-[x] annotations
+[ ] annotations
 
-[x] profile flip (long-press plot/profile button)
-    [x] only for extended profile view
-    [x] flip shots as well
-    [x] do not flip shots
+[ ] profile flip (long-press plot/profile button)
+    [ ] only for extended profile view
+    [ ] flip shots as well
+    [ ] do not flip shots
 
 [ ] export menu: check the various format 
     [ ] have the toast message
@@ -547,57 +549,57 @@ SKETCH WINDOW
       [ ] [ ] [ ] PNG
       [ ] [ ] [ ] DXF
       [ ] [ ] [ ] SVG
-[x] stats
+[ ] stats
 [ ] reload from backup
 [ ] delete (mark as "deleted")
-[x] palette
-    [x] changes to the palette reflect on the item lists in the picker dialogs
-[x] overview
-[x] settings
-[x] help strings
+[ ] palette
+    [ ] changes to the palette reflect on the item lists in the picker dialogs
+[ ] overview
+[ ] settings
+[ ] help strings
 
 <draw mode>
-[x] draw a line
-[x] change line type
-[x] draw another line
-[x] draw point(s)
-    [x] label dialog
-[x] draw areas(s)
-[x] undo
-[x] redo
-[x] check line-continuation drawing (working within a line-group)
-    [x] with option "join" (verify undo/redo)
-    [x] with option "continue" (verify interaction with undo/redo)
+[ ] draw a line
+[ ] change line type
+[ ] draw another line
+[ ] draw point(s)
+    [ ] label dialog
+[ ] draw areas(s)
+[ ] undo
+[ ] redo
+[ ] check line-continuation drawing (working within a line-group)
+    [ ] with option "join" (verify undo/redo)
+    [ ] with option "continue" (verify interaction with undo/redo)
 
-[x] two finger drag
-[x] two finger zoom
-[x] side-drag (setting)
-[x] zoom controls (setting)
+[ ] two finger drag
+[ ] two finger zoom
+[ ] side-drag (setting)
+[ ] zoom controls (setting)
 
 recent symbol picker
 [ ] tools remain consistent on a per-directory basis
-[x] tap select item
-[x] long tap brings item in front
+[ ] tap select item
+[ ] long tap brings item in front
 [ ] orientation is active iff first point is orientable
 [ ] "-/+" button decrease (tap) increase (long-tap) the scale
 [ ] number of symbols (setting)
 
 list/grid symbol picker
 [ ] selection of item
-[x] tab switch
+[ ] tab switch
 [ ] orientation is active iff first point is orientable
-[x] double-tap is select confirm
-[x] close picks the last selection
+[ ] double-tap is select confirm
+[ ] close picks the last selection
 
 triple-grid symbol picker
-[x] double-tap is select confirm
-[x] close picks the last selection
+[ ] double-tap is select confirm
+[ ] close picks the last selection
 
 <erase mode>
-[x] two finger drag
-[x] two finger zoom
-[x] side drag if enabled (setting)
-[x] zoom comtrols (setting)
+[ ] two finger drag
+[ ] two finger zoom
+[ ] side drag if enabled (setting)
+[ ] zoom comtrols (setting)
 [ ] erase filter
     [ ] all
     [ ] point
@@ -607,17 +609,17 @@ triple-grid symbol picker
     [ ] Small
     [ ] Medium
     [ ] Large
-[x] erase part of a line from the beginning
-[x] erase part of a line from the end
-[x] erase the middle of a line
-[x] erase a point
-[x] erase an area (a piece at at time)
+[ ] erase part of a line from the beginning
+[ ] erase part of a line from the end
+[ ] erase the middle of a line
+[ ] erase a point
+[ ] erase an area (a piece at at time)
 [ ] verify erase radius (= size)
-[x] undo
-[x] redo
+[ ] undo
+[ ] redo
 
 <edit mode>
-[x] selection
+[ ] selection
 [ ] select filter
     [ ] all
     [ ] point
@@ -629,45 +631,47 @@ triple-grid symbol picker
     [ ] Small
     [ ] Medium
     [ ] Large
-[x] drag, zoom, with selection 
-[x] drag, zoom, with no selection 
+[ ] drag, zoom, with selection 
+[ ] drag, zoom, with no selection 
 [ ] select a point and move it
-    [x] check that moving a selected point transfer to the proper bucket:
+    [ ] check that moving a selected point transfer to the proper bucket:
         move the point a lot and it must be "selectable" again
-[x] select a line/area point and change it (possible its CP's)
+[ ] orientable point can be rotated with side-drag
+[ ] line/area point removed with ong-tap on delete button
+[ ] select a line/area point and change it (possible its CP's)
 [ ] select a cluster of points: move among them with '<' '>'
 [ ] pointwise actions
-    [x] snap to nearby point
+    [ ] snap to nearby point
     [ ] snap to nearby line (for areas)
-    [x] duplicate point (then move point off the duplicate: selection stays with prev point) 
-    [x] cut line at point
-    [x] straighten segment (drop CP's)
-    [x] smoothen segment (insert CP's)
-    [x] remove point (line/area)
+    [ ] duplicate point (then move point off the duplicate: selection stays with prev point) 
+    [ ] cut line at point
+    [ ] straighten segment (drop CP's)
+    [ ] smoothen segment (insert CP's)
+    [ ] remove point (line/area)
 [ ] item-wise editing
   - line 
-    [x] line type
-    [x] options
+    [ ] line type
+    [ ] options
     [ ] outline 
-    [x] reverse
-        [x] check consistency of the direction yellow tick
+    [ ] reverse
+        [ ] check consistency of the direction yellow tick
     [ ] convert to polyline (if bezier)
     [ ] straighten (good for rock-border, but it works also for other types)
-    [x] close
- [x] delete 
-    [x] undo delete
+    [ ] close
+ [ ] delete 
+    [ ] undo delete
   - section-line
-    [x] the sketch is re-opened
+    [ ] the sketch is re-opened
     [ ] the photo is overwritten if retaken
     [ ] erase removes files (th2/tdr/photo) and info from the database
     [ ] verify that the section point is inserted (if setting is on)
   - area
-    [x] visible border
+    [ ] visible border
     [ ] orientation (if orientable)
   - point
-    [x] scale
-    [x] orientation (if point is orientable)
-    [x] text (label)
+    [ ] scale
+    [ ] orientation (if point is orientable)
+    [ ] text (label)
     [ ] options
   - leg/splay shot
     [ ] extend correction
@@ -676,10 +680,10 @@ triple-grid symbol picker
     [ ] splay can be deleted
     [ ] hide midline display on either sides of a leg
   - station
-    [x] select as station to export (visible only if not autostations)
-    [x] show hidden centerline
+    [ ] select as station to export (visible only if not autostations)
+    [ ] show hidden centerline
     [ ] set current station: chck next shot is attached to it
-    [x] toggle at-station splay display
+    [ ] toggle at-station splay display
     [ ] at-station cross-sections
         [ ] choose direction by leg(s)
         [ ] choose direction by android
@@ -688,15 +692,15 @@ triple-grid symbol picker
         [ ] shown as a red tick
 
 OVERVIEW
-[x] check overview from drawing window contains all sketches
+[ ] check overview from drawing window contains all sketches
 [ ] references in overview
     [ ] display mode: outline only
 [ ] measure 
     [ ] from fixed point
     [ ] polyline 
-[x] settings are the same as for sketch
-[x] help
-[x] close menu
+[ ] settings are the same as for sketch
+[ ] help
+[ ] close menu
 
 IMPORT-EXPORT
 [ ] check proper treatement of LRUD for compass/vtopo import
@@ -747,6 +751,8 @@ sketch export
     VariCAD BricsCAD
     [ ] [ ] scale
     [ ] [ ] layers
+    [ ] [ ] legs
+    [ ] [ ] splays
     [ ] [ ] splines
     [ ] [ ] labels
     [ ] [ ] points orientation
@@ -766,11 +772,14 @@ SEQUENCE OF OPS
         [ ] survey name
     [ ] check the sqlite file
     [ ] check that the zip contains all the survey data 
-        [ ] csv
         [ ] cav   Topo
         [ ] cave  Polygon
+        [ ] csv
+        [ ] csx
         [ ] dat   Compass
         [ ] dxf
+        [ ] grt   Grottolf
+        [ ] gtx   GHTopo
         [ ] kml
         [ ] plt   OziExplorer
         [ ] srv   Walls
@@ -787,14 +796,17 @@ SEQUENCE OF OPS
         [ ] csx
         [ ] dxf
         [ ] svg
+        [ ] svg in html
     delete the survey
     [ ] check that all the survey files are deleted and the survey data are cancelled from the database
     import from archive and check to have it all
       [ ] data in the database and files
-        [ ] csv
         [ ] cav
         [ ] cave
+        [ ] csv
+        [ ] csx
         [ ] dat
+        [ ] tgx
         [ ] dxf
         [ ] kml
         [ ] plt
@@ -812,6 +824,7 @@ SEQUENCE OF OPS
         [ ] csx
         [ ] dxf
         [ ] svg
+        [ ] svg in html
     import the archive on another android
     [ ] check that the survey has been trasferred to the other android
     [ ] import fails if there is a version mismatch
