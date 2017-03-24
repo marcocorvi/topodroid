@@ -503,7 +503,7 @@ public class ShotDialog extends MyDialog
       if ( leg_next || ( sflen && stlen ) ) { // leg
         mBlk.setExtend( extend );
       } else if ( ( sflen && ! stlen ) || ( stlen && ! sflen ) ) { // splay
-        extend = shot_extend + DBlock.EXTEND_FVERT;
+        // extend = shot_extend + DBlock.EXTEND_FVERT;
         mBlk.setExtend( extend );
       }
     }

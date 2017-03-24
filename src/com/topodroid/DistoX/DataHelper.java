@@ -940,7 +940,7 @@ public class DataHelper extends DataSetObservable
         updateShotNameAndExtendStmt.bindLong(   4, (b.mType == DBlock.BLOCK_SEC_LEG)? 1 : 0 );
         updateShotNameAndExtendStmt.bindLong(   5, sid );
         updateShotNameAndExtendStmt.bindLong(   6, b.mId );
-        // try { 
+        // try {
           updateShotNameAndExtendStmt.execute();
           success = true;
         // } catch ( SQLiteDiskIOException e ) {  handleDiskIOError( e );

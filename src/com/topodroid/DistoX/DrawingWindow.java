@@ -2012,7 +2012,7 @@ public class DrawingWindow extends ItemDrawer
     // called only be DrawingShotDialog
     void updateBlockExtend( DBlock block, int extend )
     {
-      if ( ! block.isSplay() ) extend -= DBlock.EXTEND_FVERT;
+      // if ( ! block.isSplay() ) extend -= DBlock.EXTEND_FVERT;
       if ( block.getExtend() == extend ) return;
       block.setExtend( extend );
       mData.updateShotExtend( block.mId, mSid, extend, true );

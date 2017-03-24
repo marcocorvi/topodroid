@@ -287,11 +287,14 @@ public class DrawingShotDialog extends MyDialog
         }
       }
 
-      int extend = DBlock.EXTEND_FIGNORE;
-      if ( mRBleft.isChecked() )       { extend = DBlock.EXTEND_FLEFT; }
-      else if ( mRBvert.isChecked() )  { extend = DBlock.EXTEND_FVERT; }
-      else if ( mRBright.isChecked() ) { extend = DBlock.EXTEND_FRIGHT; }
-      // else /* if ( mRBignore.isChecked() ) */ { extend = DBlock.EXTEND_FIGNORE; }
+      // int extend = DBlock.EXTEND_FIGNORE;
+      // if ( mRBleft.isChecked() )       { extend = DBlock.EXTEND_FLEFT; }
+      // else if ( mRBvert.isChecked() )  { extend = DBlock.EXTEND_FVERT; }
+      // else if ( mRBright.isChecked() ) { extend = DBlock.EXTEND_FRIGHT; }
+      int extend = DBlock.EXTEND_IGNORE;
+      if ( mRBleft.isChecked() )       { extend = DBlock.EXTEND_LEFT; }
+      else if ( mRBvert.isChecked() )  { extend = DBlock.EXTEND_VERT; }
+      else if ( mRBright.isChecked() ) { extend = DBlock.EXTEND_RIGHT; }
 
       if ( mRBdup.isChecked() ) { flag = DBlock.BLOCK_DUPLICATE; }
       else if ( mRBsurf.isChecked() ) { flag = DBlock.BLOCK_SURFACE; }

@@ -22,7 +22,8 @@ import android.util.Log;
 
 public class DBlock
 {
-  public static final char[] mExtendTag = { '<', '|', '>', ' ', '-', '.', '?', '«', 'I', '»', ' ' };
+  // public static final char[] mExtendTag = { '<', '|', '>', ' ', '-', '.', '?', '«', 'I', '»', ' ' };
+  public static final char[] mExtendTag = { '<', '|', '>', ' ', '-', '.', '?', ' ', ' ', ' ', ' ' };
   public static final int EXTEND_LEFT   = -1;
   public static final int EXTEND_VERT   =  0;
   public static final int EXTEND_RIGHT  = 1;
@@ -31,11 +32,11 @@ public class DBlock
   public static final int EXTEND_START  = 4;
 
   public static final int EXTEND_UNSET  = 5;
-  public static final int EXTEND_FLEFT  = 6; // LEFT = FLEFT - FVERT
-  public static final int EXTEND_FVERT  = 7;
-  public static final int EXTEND_FRIGHT = 8;
-  public static final int EXTEND_FIGNORE = 9; // overload of IGNORE for splays
-  
+  // public static final int EXTEND_FLEFT  = 6; // LEFT = FLEFT - FVERT
+  // public static final int EXTEND_FVERT  = 7;
+  // public static final int EXTEND_FRIGHT = 8;
+  // public static final int EXTEND_FIGNORE = 9; // overload of IGNORE for splays
+
   public static final int EXTEND_NONE   = EXTEND_VERT;
 
   View   mView;
@@ -99,17 +100,20 @@ public class DBlock
 
   boolean isSplay() { return mType == BLOCK_SPLAY || mType == BLOCK_X_SPLAY; }
 
-  static int getExtend( int ext ) { return ( ext < EXTEND_UNSET )? ext : ext - EXTEND_FVERT; }
+  // static int getExtend( int ext ) { return ( ext < EXTEND_UNSET )? ext : ext - EXTEND_FVERT; }
+  static int getExtend( int ext ) { return ext; }
   static int getReducedExtend( int ext ) 
   {
-    if ( ext >= EXTEND_UNSET ) { ext -= EXTEND_FVERT; }
+    // if ( ext >= EXTEND_UNSET ) { ext -= EXTEND_FVERT; }
     return ( ext < 2 )? ext : 0;
   }
 
-  int getExtend() { return ( mExtend < EXTEND_UNSET )? mExtend : mExtend - EXTEND_FVERT; }
+  // int getExtend() { return ( mExtend < EXTEND_UNSET )? mExtend : mExtend - EXTEND_FVERT; }
+  int getExtend() { return mExtend; }
   int getReducedExtend() 
   {
-    int ret = ( mExtend < EXTEND_UNSET )? mExtend : mExtend - EXTEND_FVERT;
+    // int ret = ( mExtend < EXTEND_UNSET )? mExtend : mExtend - EXTEND_FVERT;
+    int ret = mExtend;
     return ( ret < 2 )? ret : 0;
   }
   int getFullExtend() { return mExtend; }
@@ -119,8 +123,8 @@ public class DBlock
     switch ( mExtend ) {
       case EXTEND_LEFT:   mExtend = EXTEND_RIGHT;  return true;
       case EXTEND_RIGHT:  mExtend = EXTEND_LEFT;   return true;
-      case EXTEND_FLEFT:  mExtend = EXTEND_FRIGHT; return true;
-      case EXTEND_FRIGHT: mExtend = EXTEND_FLEFT;  return true;
+      // case EXTEND_FLEFT:  mExtend = EXTEND_FRIGHT; return true;
+      // case EXTEND_FRIGHT: mExtend = EXTEND_FLEFT;  return true;
     }
     return false;
   }
