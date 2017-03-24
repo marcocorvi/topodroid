@@ -158,6 +158,10 @@ public class ParserTherion
     int jLength  = 2;
     int jCompass = 3;
     int jClino   = 4;
+    int jLeft  = -1;
+    int jRight = -1;
+    int jUp    = -1;
+    int jDown  = -1;
 
     Pattern pattern = Pattern.compile( "\\s+" );
 
@@ -266,7 +270,7 @@ public class ParserTherion
                   try {
                     state.mDeclination = Float.parseFloat( vals[j+1] );
                     ++j;
-                    if ( j+1 < vals_len ) { // check for units
+                    if ( j+1 < vals_len ) { // FIXME check for units
                       state.mDeclination *= parseAngleUnit( vals[j+1] );
                       ++j;
                     }
@@ -346,10 +350,18 @@ public class ParserTherion
                 boolean ulen = false;
                 boolean uber = false;
                 boolean ucln = false;
+                boolean uleft  = false;
+                boolean uright = false;
+                boolean uup    = false;
+                boolean udown  = false;
                 for ( int k=1; k<vals_len - 1; ++k ) {
-                  if ( vals[k].equals("length") || vals[k].equals("tape") ) ulen = true;
-                  if ( vals[k].equals("compass") || vals[k].equals("bearing") ) uber = true;
-                  if ( vals[k].equals("clino") || vals[k].equals("gradient") ) ucln = true;
+                  if ( vals[k].equals("length")  || vals[k].equals("tape") )     ulen = true;
+                  if ( vals[k].equals("compass") || vals[k].equals("bearing") )  uber = true;
+                  if ( vals[k].equals("clino")   || vals[k].equals("gradient") ) ucln = true;
+                  if ( vals[k].equals("left") )  uleft = true;
+                  if ( vals[k].equals("right") ) uright = true;
+                  if ( vals[k].equals("up") )    uup = true;
+                  if ( vals[k].equals("down") )  udown = true;
                 }
                 float factor = 1.0f;
                 try {
@@ -357,14 +369,18 @@ public class ParserTherion
                 } catch ( NumberFormatException e ) {
                   TDLog.Debug( "therion parser: units without factor " + line ); // this is OK
                 }
-                if ( ulen ) {
-                  state.mUnitLen = factor * parseLengthUnit( vals[vals_len-1] );
+                if ( ulen || uleft || uright || uup || udown ) {
+                  float len = factor * parseLengthUnit( vals[vals_len-1] );
+                  if ( ulen )   state.mUnitLen   = len;
+                  if ( uleft )  state.mUnitLeft  = len;
+                  if ( uright ) state.mUnitRight = len;
+                  if ( uup )    state.mUnitUp    = len;
+                  if ( udown )  state.mUnitDown  = len;
                 } 
-                if ( uber ) {
-                  state.mUnitBer = factor * parseAngleUnit( vals[vals_len-1] );
-                }
-                if ( ucln ) {
-                  state.mUnitCln = factor * parseAngleUnit( vals[vals_len-1] );
+                if ( uber || ucln ) {
+                  float angle = factor * parseAngleUnit( vals[vals_len-1] );
+                  if ( uber ) state.mUnitBer = angle;
+                  if ( ucln ) state.mUnitCln = angle;
                 }
               } else if ( cmd.equals("sd") ) {
                 // ignore
@@ -528,6 +544,7 @@ public class ParserTherion
                 // data normal from to length compass clino ...
                 if ( vals[1].equals("normal") ) {
                   jFrom = jTo = jLength = jCompass = jClino = -1;
+                  jLeft = jUp = jRight  = jDown = -1;
                   int j0 = 0;
                   for ( int j=2; j < vals_len; ++j ) {
                     if ( vals[j].equals("from") ) {
@@ -540,6 +557,14 @@ public class ParserTherion
                       jCompass = j0; ++j0;
                     } else if ( vals[j].equals("clino") || vals[j].equals("gradient") ) {
                       jClino = j0; ++j0;
+                    } else if ( vals[j].equals("left") ) {
+                      jLeft  = j0; ++j0;
+                    } else if ( vals[j].equals("right") ) {
+                      jRight = j0; ++j0;
+                    } else if ( vals[j].equals("up") ) {
+                      jUp    = j0; ++j0;
+                    } else if ( vals[j].equals("down") ) {
+                      jDown  = j0; ++j0;
                     } else {
                       ++j0;
                     }
@@ -556,6 +581,7 @@ public class ParserTherion
               } else if ( state.in_data && vals_len >= 5 ) {
                 // FIXME
                 try {
+                  int sz = vals.length;
                   String from = vals[jFrom];
                   String to   = vals[jTo];
                   float len  = Float.parseFloat( vals[jLength] );
@@ -569,6 +595,30 @@ public class ParserTherion
                     ber = state.mZeroBer + (ber*state.mUnitBer) / state.mScaleBer;
                   }
                   cln = state.mZeroCln + (cln*state.mUnitCln) / state.mScaleCln;
+
+                  float dist, b;
+                  if ( jLeft >= 0 && jLeft < sz ) {
+                    dist = Float.parseFloat( vals[jLeft] ) * state.mUnitLeft / state.mScaleLeft;
+                    b = ber - 90; if ( b < 0 ) b += 360;
+                    shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, EMPTY,
+                               dist, b, 0, 0.0f, state.mExtend, state.mDuplicate, state.mSurface, false, "" ) );
+                  }
+                  if ( jRight >= 0 && jRight < sz ) {
+                    dist = Float.parseFloat( vals[jRight] ) * state.mUnitRight / state.mScaleRight;
+                    b = ber + 90; if ( b >= 360 ) b -= 360;
+                    shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, EMPTY,
+                               dist, b, 0, 0.0f, state.mExtend, state.mDuplicate, state.mSurface, false, "" ) );
+                  }
+                  if ( jUp >= 0 && jUp < sz ) {
+                    dist = Float.parseFloat( vals[jUp] ) * state.mUnitUp / state.mScaleUp;
+                    shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, EMPTY,
+                               dist, 0, 90, 0.0f, state.mExtend, state.mDuplicate, state.mSurface, false, "" ) );
+                  }
+                  if ( jDown >= 0 && jDown < sz ) {
+                    dist = Float.parseFloat( vals[jDown] ) * state.mUnitDown / state.mScaleDown;
+                    shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, EMPTY,
+                               dist, 0, -90, 0.0f, state.mExtend, state.mDuplicate, state.mSurface, false, "" ) );
+                  }
 
                   // TODO add shot
                   if ( to.equals("-") || to.equals(".") ) { // splay shot

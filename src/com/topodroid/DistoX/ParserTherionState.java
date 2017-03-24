@@ -32,6 +32,10 @@ public class ParserTherionState
   float mScaleLen;
   float mScaleBer;
   float mScaleCln;
+  float mUnitLeft,  mScaleLeft;
+  float mUnitRight, mScaleRight;
+  float mUnitUp,    mScaleUp;
+  float mUnitDown,  mScaleDown;
   float mDeclination;
   boolean mDuplicate;
   boolean mSurface;
@@ -51,6 +55,8 @@ public class ParserTherionState
     mScaleLen = 1.0f;
     mScaleBer = 1.0f;
     mScaleCln = 1.0f;
+    mUnitLeft = mUnitRight = mUnitUp = mUnitDown = 1.0f;
+    mScaleLeft = mScaleRight = mScaleUp = mScaleDown = 1.0f;
     mDeclination= 0.0f;
     mDuplicate = false;
     mSurface   = false;
@@ -79,6 +85,16 @@ public class ParserTherionState
     mScaleLen = state.mScaleLen;
     mScaleBer = state.mScaleBer;
     mScaleCln = state.mScaleCln;
+
+    mUnitLeft   = state.mUnitLeft;
+    mUnitRight  = state.mUnitRight;
+    mUnitUp     = state.mUnitUp;
+    mUnitDown   = state.mUnitDown;
+    mScaleLeft  = state.mScaleLeft;
+    mScaleRight = state.mScaleRight;
+    mScaleUp    = state.mScaleUp;
+    mScaleDown  = state.mScaleDown;
+
     mDeclination= state.mDeclination;
     mDuplicate = state.mDuplicate;
     mSurface   = state.mSurface;
