@@ -178,24 +178,27 @@ class DrawingSvg
 
             StringWriter sw41 = new StringWriter();
             PrintWriter pw41  = new PrintWriter(sw41);
-            // if ( sh.mType == DrawingPath.DRAWING_PATH_SPLAY ) {
-              NumStation f = num.getStation( blk.mFrom );
-              pw41.format("  <path stroke-width=\"1\" stroke=\"grey\" d=\"");
-              float dh = blk.mLength * (float)Math.cos( blk.mClino * grad2rad )*SCALE_FIX;
-              if ( type == PlotInfo.PLOT_PLAN ) {
-                float x = xoff + DrawingUtil.toSceneX( f.e ); 
-                float y = yoff + DrawingUtil.toSceneY( f.s );
-                float de =   dh * (float)Math.sin( blk.mBearing * grad2rad);
-                float ds = - dh * (float)Math.cos( blk.mBearing * grad2rad);
-                pw41.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x + de, (y+ds) );
-              } else if ( PlotInfo.isProfile( type ) ) { // FIXME OK PROFILE
-                float x = xoff + DrawingUtil.toSceneX( f.h );
-                float y = yoff + DrawingUtil.toSceneY( f.v );
-                float dv = - blk.mLength * (float)Math.sin( blk.mClino * grad2rad )*SCALE_FIX;
-                int ext = blk.getReducedExtend();
-                pw41.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x+dh*ext, (y+dv) );
-              }
-            // }
+            // // if ( sh.mType == DrawingPath.DRAWING_PATH_SPLAY ) {
+            //   NumStation f = num.getStation( blk.mFrom );
+            //   pw41.format("  <path stroke-width=\"1\" stroke=\"grey\" d=\"");
+            //   float dh = blk.mLength * (float)Math.cos( blk.mClino * grad2rad )*SCALE_FIX;
+            //   if ( type == PlotInfo.PLOT_PLAN ) {
+            //     float x = xoff + DrawingUtil.toSceneX( f.e ); 
+            //     float y = yoff + DrawingUtil.toSceneY( f.s );
+            //     float de =   dh * (float)Math.sin( blk.mBearing * grad2rad);
+            //     float ds = - dh * (float)Math.cos( blk.mBearing * grad2rad);
+            //     pw41.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x + de, (y+ds) );
+            //   } else if ( PlotInfo.isProfile( type ) ) { // FIXME OK PROFILE
+            //     float x = xoff + DrawingUtil.toSceneX( f.h );
+            //     float y = yoff + DrawingUtil.toSceneY( f.v );
+            //     float dv = - blk.mLength * (float)Math.sin( blk.mClino * grad2rad )*SCALE_FIX;
+            //     int ext = blk.getReducedExtend();
+            //     pw41.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x+dh*ext, (y+dv) );
+            //   }
+            // // }
+            pw41.format("  <path stroke-width=\"1\" stroke=\"grey\" d=\"");
+            pw41.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
+
             out.write( sw41.getBuffer().toString() );
             out.flush();
           }

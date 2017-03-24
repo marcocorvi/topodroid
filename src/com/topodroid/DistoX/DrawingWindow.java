@@ -2265,6 +2265,7 @@ public class DrawingWindow extends ItemDrawer
             DrawingPointPath path = (DrawingPointPath)(sp.mItem);
             if ( BrushManager.isPointOrientable(path.mPointType) ) {
               mTouchMode = MODE_ROTATE;
+              mStartY = y_canvas;
             }
           }
         }
@@ -2387,9 +2388,9 @@ public class DrawingWindow extends ItemDrawer
             mSaveY = y_canvas;
           }
         } else if ( mTouchMode == MODE_ROTATE ) {
-          mDrawingSurface.rotateHotItem( 180 * ( y_scene - mStartY ) / TopoDroidApp.mDisplayHeight );
-          mStartX = x_scene;
-          mStartY = y_scene;
+          mDrawingSurface.rotateHotItem( 180 * ( y_canvas - mStartY ) / TopoDroidApp.mDisplayHeight );
+          mStartX = x_canvas; // x_scene;
+          mStartY = y_canvas; // y_scene;
           modified();
         } else { // mTouchMode == MODE_ZOOM
           float newDist = spacing( event );
