@@ -291,6 +291,13 @@
     <string name="popup_erase_point">Стереть точки</string>
     <string name="popup_erase_line">Стереть линии</string>
     <string name="popup_erase_area">Стереть области</string>
+    
+    <string name="popup_select_all">Выбрать все</string>
+    <string name="popup_select_point">Выбрать точки</string>
+    <string name="popup_select_line">Выбратьt линии</string>
+    <string name="popup_select_area">Выбрать области</string>
+    <string name="popup_select_shot">Выбрать замеры</string>
+    <string name="popup_select_station">Выбрать пикеты</string>
 
     <string name="connected_none">Не соединено</string>
     <string name="connected_already">Уже соединено</string>
