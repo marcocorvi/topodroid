@@ -223,7 +223,9 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
         tvFrom.setBackgroundColor( TDColor.DARK_GREEN );
         tvTo.setBackgroundColor( TDColor.DARK_GREEN );
       } 
-      if ( b.isMagneticBad( ) ) {
+      if ( b.mType == DBlock.BLOCK_MAIN_LEG && b.mLength < TDSetting.mMinLegLength ) {
+        tvLength.setBackgroundColor( TDColor.BROWN );
+      } else if ( b.isMagneticBad( ) ) {
         tvLength.setBackgroundColor( TDColor.DARK_RED );
       } else {
         // tvLength.setBackgroundColor( TDColor.BLACK );

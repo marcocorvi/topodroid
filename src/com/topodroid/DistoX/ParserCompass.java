@@ -20,13 +20,14 @@ import java.util.ArrayList;
 // import java.util.Stack;
 import java.util.regex.Pattern;
 
-// import android.util.Log;
+import android.util.Log;
 
 public class ParserCompass extends ImportParser
 {
   public ParserCompass( String filename, boolean apply_declination ) throws ParserException
   {
     super( apply_declination );
+    // Log.v("DistoX", "Parser Compass <" + filename + ">" );
     readFile( filename );
   }
 

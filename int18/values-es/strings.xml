@@ -591,7 +591,7 @@
     <string name="help_add_topodroid">Crear nueva Topografía/calibración</string>
     <string name="help_import">Importar archivo zip o Therion</string>
     <string name="help_symbol">Activar/desactivar los símbolos de dibujo</string>
-    <!-- UNUSED string name="help_therion">Administrador de aplicación Therion</string -->
+    <string name="help_therion">Administrador de aplicación Therion</string>
     <!-- UNUSED string name="help_database">Aplicación Database viewer(SQliteViewer)</string -->
     <string name="help_prefs">Editar preferencias</string>
     <string name="help_log">Activar/desactivar las opciones de registro</string>
@@ -880,6 +880,9 @@
   <string name="pref_max_shot_title">Longitud de disparo máxima</string>
   <string name="pref_max_shot_summary">Longitud máxima de disparo [m]</string>
   <string name="pref_max_shot_message">as tomas sobre esta longitud se marcan como sobrepaso</string>
+  <!-- TODO string name="pref_min_leg_title">Minimum leg length</string -->
+  <!-- TODO string name="pref_min_leg_summary">Minimum length of legs [m]</string -->
+  <!-- TODO string name="pref_min_leg_message">Legs shorter than the minimum have orange background</string -->
   <string name="pref_backsight_title">Toma duplicada visual</string>
   <string name="pref_backsight_summary">Se duplican los datos en el diálogo de la toma manual</string>
   <string name="pref_prev_next_title">Añadir botón Ant./Sig.</string>

@@ -1231,9 +1231,9 @@ public class TopoDroidApp extends Application
   // called also by ShotWindow::updataBlockList
   // @param list blocks whose stations need to be set in the DB
   //
-  public void assignStations( List<DBlock> list )
+  public void assignStationsAll( List<DBlock> list )
   { 
-    // Log.v("DistoX", "assign stations size " + list.size() + " TRobot " + TDSetting.mTRobotShot );
+    // Log.v("DistoX", "assign stations size " + list.size() );
     // if ( TDSetting.mSurveyStations < 0 ) return;
     if ( TDSetting.mTRobotShot ) {
       long millis = SystemClock.uptimeMillis(); // FIXME TROBOT
@@ -1882,7 +1882,7 @@ public class TopoDroidApp extends Application
 
   long insert2dPlot( long sid , String name, String start, boolean extended, int project )
   {
-    TDLog.Log( TDLog.LOG_PLOT, "new plot " + name + " start " + start );
+    // TDLog.Log( TDLog.LOG_PLOT, "new plot " + name + " start " + start );
     long pid_p = mData.insertPlot( sid, -1L, name+"p",
                  PlotInfo.PLOT_PLAN, 0L, start, "", 0, 0, mScaleFactor, 0, 0, "", true );
     if ( extended ) {

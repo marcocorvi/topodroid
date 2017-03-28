@@ -33,14 +33,21 @@ Station comments and marks (fixed, painted) precede the centerline data.<br><p>
 Fixed points coordinates (longitude latitude and altitude a.s.l.) are exported commented.
 If the point has custom CRS coordinates, these are exported as well, preceded by the CRS name.<br><p>
 
-Furthermore "input" of the th2 files and definitions for a map for each scrap are added at the end, but are commented.
-If the "Therion Maps" setting is enabled the "map" commands are placed before the survey centerline.<br><p>
+Furthermore "input" of the th2 files and definitions for a map for each scrap are added at the end, but are commented.<br><p>
 
+Settings
+<ul>
+<li>"Therion Maps": if enabled the "map" commands are placed before the survey centerline.</li>
+<li>"LRUD" to add LRUD to export</li>
+</ul><p>
+
+Import Therion files must have extension ".th".<br>
 TopoDroid parsing of <i>Therion</i> data syntax is very limited. Basically only data in "normal" form are understood. The Therion data commands "units", "flag", "extend", "mark" and "station" are supported.<br>
 Fixed points ("fix") are parsed but not taken into account as "cs" is not supported.<br><p>
 
 <b>Compass</b> (.dat)<br>
-<i>Compass</i> data file are supported both in input and in export.<br>
+<i>Compass</i> data file are supported both in import and in export.<br>
+Import compass files must have extension either ".dat" or ".DAT".<br>
 Data units are 'feet' and 'degrees'.<br><p>
 
 <b>PocketTopo</b> (.top)<br>
@@ -49,7 +56,8 @@ TopoDroid supports <i>PocketTopo</i> both in import and in export.<br><p>
 The exports contain only the survey data.<br>
 On export station names with alphabetic characters must be converted to integer number. In this case TopoDroid replaces each character with two digits. More precisely 'a' goes to '00', 'b' to '01' and so on, 'A' to '50', 'B' to '51', and so on. Every other character (i.e., non-alphanumeric) goes to '99'.<br><p>
 
-On import, "outline" and "profile" sketches are imported.<br>
+On import, "outline" and "profile" sketches are imported.
+Import PocketTopo files must have extension either ".top" or ".TOP".<br>
 <i>PocketTopo</i> uses only a few colors to differentiate line types.
 Therefore a <a href="page_pt_cmap.htm">map</a> from colors to therion_types is used. The line and point types can be through a setting.<br><p>
 
@@ -83,7 +91,8 @@ Settings:<ul style="margin-top=0">
 
 
 <b>VisualTopo</b> (.tro)<br>
-<i>VisualTopo</i> data file are supported both in input and in export.<br>
+<i>VisualTopo</i> data file are supported both in import and in export.<br>
+Import VisualTopo files must have extension either ".tro" or ".TRO".<br>
 Data units are 'meters' and 'degrees'.<br><p>
 
 <b>Walls</b> (.srv)<br>

@@ -22,6 +22,15 @@
        android:inputType="numberDecimal"
        android:defaultValue="50" />
 
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_MIN_LEG_LENGTH"
+       android:title="@string/pref_min_leg_title"
+       android:summary="@string/pref_min_leg_summary"
+       android:dialogTitle="@string/pref_min_leg_title"
+       android:dialogMessage="@string/pref_min_leg_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="0.5" />
+
     <!-- com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_LEG_SHOTS"
        android:title="@string/pref_leg_shots_title"

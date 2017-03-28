@@ -593,7 +593,7 @@
     <string name="help_add_topodroid">Створити нову зйомку/калібровку</string>
     <string name="help_import">Імпорт zip архіву або файлу зйомки</string>
     <string name="help_symbol">Вкл/Викл інструментів малювання</string>
-    <!-- UNUSED string name="help_therion">Therion менеджер</string -->
+    <string name="help_therion">Therion менеджер</string>
     <!-- UNUSED string name="help_database">Перегляд бази данних (SQliteViewer)</string -->
     <string name="help_prefs">Змінити налаштування</string>
     <string name="help_log">Вкл/Викл налаштування журналу</string>
@@ -873,6 +873,9 @@
   <string name="pref_max_shot_title">Максимальна довжина заміра</string>
   <string name="pref_max_shot_summary">Максимальна довжина вимірювання [м]</string>
   <string name="pref_max_shot_message">Заміри, які перевищують це значення, будуть помічені як занадто довгі</string>
+  <!-- TODO string name="pref_min_leg_title">Minimum leg length</string -->
+  <!-- TODO string name="pref_min_leg_summary">Minimum length of legs [m]</string -->
+  <!-- TODO string name="pref_min_leg_message">Legs shorter than the minimum have orange background</string -->
   <string name="pref_backsight_title">зворотний замір</string>
   <string name="pref_backsight_summary">Поле для введення зворотного заміра в диалозі ручного введення заміру</string>
   <string name="pref_prev_next_title">Кнопки Поперед/Наступ</string>

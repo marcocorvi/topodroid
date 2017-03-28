@@ -93,11 +93,11 @@ import android.util.Log;
 */
 
 public class MainWindow extends Activity
-                               implements OnItemClickListener
-                               , OnItemLongClickListener
-                               , View.OnClickListener
-                               , OnCancelListener
-                               , OnDismissListener
+                        implements OnItemClickListener
+                        , OnItemLongClickListener
+                        , View.OnClickListener
+                        , OnCancelListener
+                        , OnDismissListener
 {
   private TopoDroidApp mApp;
   private Activity mActivity = null;
@@ -114,9 +114,9 @@ public class MainWindow extends Activity
                           R.drawable.iz_disto2b, // iz_disto,
                           R.drawable.iz_plus,
                           R.drawable.iz_import,
-                          R.drawable.iz_palette
+                          R.drawable.iz_palette,
+                          R.drawable.iz_manager,
                           // FIXME THMANAGER
-                          // R.drawable.iz_therion,
                           // R.drawable.iz_database
                           };
 
@@ -132,9 +132,9 @@ public class MainWindow extends Activity
   private static int help_icons[] = { R.string.help_device,
                           R.string.help_add_topodroid,
                           R.string.help_import,
-                          R.string.help_symbol
+                          R.string.help_symbol,
+                          R.string.help_therion,
                           // FIXME THMANAGER
-                          // R.string.help_therion,
                           // R.string.help_database
                           };
   private static int help_menus[] = {
@@ -152,6 +152,8 @@ public class MainWindow extends Activity
   boolean do_check_bt = true;             // one-time bluetooth check sentinel
 
   // -------------------------------------------------------------------
+
+  TopoDroidApp getApp() { return mApp; }
     
   public void updateDisplay( )
   {
@@ -226,14 +228,14 @@ public class MainWindow extends Activity
         (new SymbolEnableDialog( mActivity, mApp )).show();
 
       // FIXME THMANAGER
-      // } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // THERION MANAGER ThManager
-      //   try {
-      //     intent = new Intent( "ThManager.intent.action.Launch" );
-      //     // intent.putExtra( "survey", mApp.getSurveyThFile() );
-      //     startActivity( intent );
-      //   } catch ( ActivityNotFoundException e ) {
-      //     Toast.makeText( mActivity, R.string.no_thmanager, Toast.LENGTH_SHORT ).show();
-      //   }
+      } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // THERION MANAGER ThManager
+        try {
+          intent = new Intent( "ThManager.intent.action.Launch" );
+          // intent.putExtra( "survey", mApp.getSurveyThFile() );
+          startActivity( intent );
+        } catch ( ActivityNotFoundException e ) {
+          Toast.makeText( mActivity, R.string.no_thmanager, Toast.LENGTH_SHORT ).show();
+        }
       // } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // DATABASE
       //   try {
       //     intent = new Intent(Intent.ACTION_VIEW, Uri.parse("file://" + TDPath.getDatabase() ) );
@@ -314,278 +316,36 @@ public class MainWindow extends Activity
 
   // ---------------------------------------------------------------
   // FILE IMPORT
-  
-  // NOTE survey name must be guaranteed not be in the db
-  private class ImportTherionTask extends AsyncTask<String, Integer, Long >
-  {
-    @Override
-    protected Long doInBackground( String... str )
-    {
-      long sid = 0;
-      try {
-        ParserTherion parser = new ParserTherion( str[0], true ); // apply_declination = true
-        ArrayList< ParserShot > shots  = parser.getShots();
-        ArrayList< ParserShot > splays = parser.getSplays();
-        ArrayList< ParserTherion.Station > stations = parser.getStations();
-        ArrayList< ParserTherion.Fix > fixes = parser.getFixes();
-
-        sid = mApp.setSurveyFromName( str[1], false ); // IMPORT TH no forward
-        mApp.mData.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle, false );
-        mApp.mData.updateSurveyDeclination( sid, parser.mDeclination, false );
-        mApp.mData.updateSurveyInitStation( sid, parser.initStation(), false );
-
-        long id = mApp.mData.insertShots( sid, 1, shots ); // start id = 1
-        mApp.mData.insertShots( sid, id, splays );
-
-        // FIXME this suppose CS long-lat, ie, e==long, n==lat
-        // WorldMagneticModel wmm = new WorldMagneticModel( mApp );
-        // for ( ParserTherion.Fix fix : fixes ) {
-        //   // double asl = fix.z;
-        //   double alt = wmm.geoidToEllipsoid( fix.n, fix.e, fix.z );
-        //   mApp.mData.insertFixed( sid, -1L, fix.name, fix.e, fix.n, alt, fix.z, "", 0 );
-        // }
-
-        for ( ParserTherion.Station st : stations ) {
-          mApp.mData.insertStation( sid, st.name, st.comment, st.flag );
-        }
-      } catch ( ParserException e ) {
-        // Toast.makeText(mActivity, R.string.file_parse_fail, Toast.LENGTH_SHORT).show();
-      }
-      return sid;
-    }
-
-    @Override
-    protected void onProgressUpdate(Integer... progress) { }
-
-    @Override
-    protected void onPostExecute(Long result) {
-      setTheTitle( );
-      updateDisplay( );
-    }
-  }
- 
-  private class ImportCompassTask extends AsyncTask<String, Integer, Long >
-  {
-    @Override
-    protected Long doInBackground( String... str )
-    {
-      long sid = 0;
-      try {
-        ParserCompass parser = new ParserCompass( str[0], true ); // apply_declination = true
-        ArrayList< ParserShot > shots  = parser.getShots();
-        ArrayList< ParserShot > splays = parser.getSplays();
-        if ( mApp.mData.hasSurveyName( parser.mName ) ) {
-          return -1L;
-        }
-        sid = mApp.setSurveyFromName( parser.mName, false ); // IMPORT DAT no forward
-        mApp.mData.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle, false );
-        mApp.mData.updateSurveyDeclination( sid, parser.mDeclination, false );
-        mApp.mData.updateSurveyInitStation( sid, parser.initStation(), false );
-
-        long id = mApp.mData.insertShots( sid, 1, shots ); // start id = 1
-        mApp.mData.insertShots( sid, id, splays );
-      } catch ( ParserException e ) {
-        // Toast.makeText(mActivity, R.string.file_parse_fail, Toast.LENGTH_SHORT).show();
-      }
-      return sid;
-    }
-
-    @Override
-    protected void onProgressUpdate(Integer... progress) { }
-
-    @Override
-    protected void onPostExecute(Long result) {
-      setTheTitle( );
-      if ( result >= 0 ) {
-        updateDisplay( );
-      } else {
-        Toast.makeText(mActivity, R.string.import_already, Toast.LENGTH_SHORT).show();
-      }
-    }
-  }
-
-  private class ImportVisualTopoTask extends AsyncTask< String, Integer, Long >
-  {
-    @Override
-    protected Long doInBackground( String... str )
-    {
-      long sid = 0;
-      try {
-        ParserVisualTopo parser = new ParserVisualTopo( str[0], true ); // apply_declination = true
-        ArrayList< ParserShot > shots  = parser.getShots();
-        ArrayList< ParserShot > splays = parser.getSplays();
-        if ( mApp.mData.hasSurveyName( parser.mName ) ) {
-          return -1L;
-        }
-
-        sid = mApp.setSurveyFromName( parser.mName, false );
-        mApp.mData.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle, false );
-        mApp.mData.updateSurveyDeclination( sid, parser.mDeclination, false );
-        mApp.mData.updateSurveyInitStation( sid, parser.initStation(), false );
-
-        long id = mApp.mData.insertShots( sid, 1, shots ); // start id = 1
-        mApp.mData.insertShots( sid, id, splays );
-      } catch ( ParserException e ) {
-        // Toast.makeText(mActivity, R.string.file_parse_fail, Toast.LENGTH_SHORT).show();
-      }
-      return sid;
-    }
-
-    @Override
-    protected void onProgressUpdate(Integer... progress) { }
-
-    @Override
-    protected void onPostExecute(Long result) {
-      setTheTitle( );
-      if ( result >= 0 ) {
-        updateDisplay( );
-      } else {
-        Toast.makeText(mActivity, R.string.import_already, Toast.LENGTH_SHORT).show();
-      }
-    }
-  }
-
-  private class ImportPocketTopoTask extends AsyncTask< String, Integer, Long >
-  {
-    @Override
-    protected Long doInBackground( String... str )
-    {
-      long sid = 0;
-      try {
-        // import PocketTopo (only data for the first trip)
-        ParserPocketTopo parser = new ParserPocketTopo( str[0], str[1], true ); // apply_declination = true
-        ArrayList< ParserShot > shots  = parser.getShots();
-        if ( mApp.mData.hasSurveyName( parser.mName ) ) {
-          return -1L;
-        }
-
-        sid = mApp.setSurveyFromName( parser.mName, false );
-        mApp.mData.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle, false );
-        mApp.mData.updateSurveyDeclination( sid, parser.mDeclination, false );
-        mApp.mData.updateSurveyInitStation( sid, parser.initStation(), false );
-
-        long id = mApp.mData.insertShots( sid, 1, shots ); // start id = 1
-        TDLog.Log( TDLog.LOG_PTOPO, "SID " + sid + " inserted shots. return " + id );
-
-        if ( parser.mStartFrom != null ) {
-          mApp.insert2dPlot( sid, "1", parser.mStartFrom, true, 0 ); // true = plan-extended plot, 0 = proj_dir
-        }
-
-        // DBlock blk = mApp.mData.selectShot( 1, sid );
-        // String plan = parser.mOutline;
-        // String extended = parser.mSideview;
-        // if ( blk != null /* && plan != null || extended != null */ ) {
-        //   // insert plot in DB
-        //   // long pid = 
-        //     mApp.insert2dPlot( sid, "1", blk.mFrom );
-
-        //   if ( plan == null ) plan = "";
-        //   if ( extended == null ) extended = "";
-        //   TDLog.Log( TDLog.LOG_PTOPO, "SID " + sid + " scraps " + plan.length() + " " + extended.length() );
-        //   try {
-        //     FIXME tdr vs. th2
-        //     String filename1 = TDPath.getTh2File( parser.mName + "-1p.th2" );
-        //     TDPath.checkPath( filename1 );
-        //     FileWriter fw1 = new FileWriter( filename1 );
-        //     PrintWriter pw1 = new PrintWriter( fw1 );
-        //     pw1.format("%s", plan );
-        //     
-        //     String filename2 = TDPath.getTh2File( parser.mName + "-1s.th2" );
-        //     TDPath.checkPath( filename2 );
-        //     FileWriter fw2 = new FileWriter( filename2 );
-        //     PrintWriter pw2 = new PrintWriter( fw2 );
-        //     pw2.format("%s", extended );
-
-        //   } catch ( IOException e ) {
-        //     TDLog.Error( "SID " + sid + " scraps IO error " + e );
-        //   }
-        // }
-      } catch ( ParserException e ) {
-        // Toast.makeText(mActivity, R.string.file_parse_fail, Toast.LENGTH_SHORT).show();
-      }
-      return sid;
-    }
-
-    @Override
-    protected void onProgressUpdate(Integer... progress) { }
-
-    @Override
-    protected void onPostExecute(Long result) {
-      setTheTitle( );
-      if ( result >= 0 ) {
-        updateDisplay( );
-      } else {
-        Toast.makeText(mActivity, R.string.import_already, Toast.LENGTH_SHORT).show();
-      }
-    }
-  }
-
-   
-  
-  private class ImportZipTask extends AsyncTask< String, Integer, Long >
-  {
-    MainWindow parent;
-
-    ImportZipTask( MainWindow act ) { parent = act; }
-
-    @Override
-    protected Long doInBackground( String... str )
-    {
-      String filename = str[0];
-      Archiver archiver = new Archiver( mApp );
-      int ret = archiver.unArchive( TDPath.getZipFile( filename ), filename.replace(".zip", ""));
-      return (long)ret;
-    }
-
-    // @Override
-    // protected void onProgressUpdate(Integer... progress) { }
-
-    @Override
-    protected void onPostExecute(Long result) {
-      parent.setTheTitle( );
-      parent.updateDisplay( );
-      if ( result < -4 ) {
-        Toast.makeText( parent, R.string.unzip_fail, Toast.LENGTH_SHORT).show();
-      } else if ( result == -4 ) {
-        Toast.makeText( parent, R.string.unzip_fail_survey, Toast.LENGTH_SHORT).show();
-      } else if ( result == -3 ) {
-        Toast.makeText( parent, R.string.unzip_fail_db, Toast.LENGTH_SHORT).show();
-      } else if ( result == -2 ) {
-        Toast.makeText( parent, R.string.unzip_fail_td, Toast.LENGTH_SHORT).show();
-      } else if ( result == -1 ) {
-        Toast.makeText( parent, R.string.import_already, Toast.LENGTH_SHORT).show();
-      } else {
-        Toast.makeText( parent, R.string.import_zip_ok, Toast.LENGTH_SHORT).show();
-      }
-    }
-  }
 
   void importFile( String filename )
   {
     // FIXME connect-title string
     mActivity.setTitle( R.string.import_title );
     mActivity.setTitleColor( TDColor.CONNECTED );
-    if ( filename.endsWith(".th") ) {
+    if ( filename.endsWith(".th") || filename.endsWith(".TH") ) {
       String filepath = TDPath.getImportFile( filename );
-      String name = filename.replace(".th", "" );
+      String name = filename.replace(".th", "" ).replace(".TH", "");
       if ( mApp.mData.hasSurveyName( name ) ) {
         Toast.makeText(mActivity, R.string.import_already, Toast.LENGTH_SHORT).show();
+        setTheTitle();
         return;
       }
       // Toast.makeText(mActivity, R.string.import_wait, Toast.LENGTH_SHORT).show();
-      new ImportTherionTask().execute( filepath, name );
-    } else if ( filename.endsWith(".dat") ) {
+      new ImportTherionTask( this ).execute( filepath, name );
+    } else if ( filename.endsWith(".dat") || filename.endsWith(".DAT") ) {
       String filepath = TDPath.getImportFile( filename );
-      new ImportCompassTask().execute( filepath );
-    } else if ( filename.endsWith(".top") ) {
+      new ImportCompassTask( this ).execute( filepath );
+    } else if ( filename.endsWith(".top") || filename.endsWith(".TOP") ) {
       String filepath = TDPath.getImportFile( filename );
-      new ImportPocketTopoTask().execute( filepath, filename ); // TODO pass the drawer as arg
-    } else if ( filename.endsWith(".tro") ) {
+      new ImportPocketTopoTask( this ).execute( filepath, filename ); // TODO pass the drawer as arg
+    } else if ( filename.endsWith(".tro") || filename.endsWith(".TRO") ) {
       String filepath = TDPath.getImportFile( filename );
-      new ImportVisualTopoTask().execute( filepath ); 
+      new ImportVisualTopoTask( this ).execute( filepath ); 
     } else if ( filename.endsWith(".zip") ) {
       Toast.makeText(mActivity, R.string.import_zip_wait, Toast.LENGTH_LONG).show();
       new ImportZipTask( this ) .execute( filename );
+    } else {
+      setTheTitle( );
     }
     // FIXME SYNC updateDisplay();
   }
@@ -635,9 +395,13 @@ public class MainWindow extends Activity
     int p = 0;
       Intent intent;
       if ( p++ == pos ) { // PALETTE EXTRA SYMBOLS
+        // BrushManager.makePaths( getResources() );
+        // (new SymbolEnableDialog( mActivity, mApp )).show();
+
         // (new SymbolReload( mActivity, mApp, TDSetting.mLevelOverExperimental )).show();
         (new SymbolReload( mActivity, mApp, TDSetting.mLevelOverAdvanced )).show();
-      } else if ( TDSetting.mLevelOverAdvanced && p++ == pos ) { // LOGS
+      } else 
+      if ( TDSetting.mLevelOverAdvanced && p++ == pos ) { // LOGS
         intent = new Intent( mActivity, TopoDroidPreferences.class );
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_LOG );
         startActivity( intent );
@@ -672,7 +436,7 @@ public class MainWindow extends Activity
     // TDLog.Profile("TDActivity onCreate");
     setContentView(R.layout.topodroid_activity);
     mApp = (TopoDroidApp) getApplication();
-	mActivity = this;
+    mActivity = this;
     mApp.mActivity = this;
 
     // mArrayAdapter = new ArrayAdapter<String>( this, R.layout.message );
@@ -758,7 +522,7 @@ public class MainWindow extends Activity
     setTheTitle();
   }
   
-  int mNrButton1 = 4;
+  int mNrButton1 = 5;
 
   void resetButtonBar()
   {
@@ -766,7 +530,7 @@ public class MainWindow extends Activity
     MyButton.resetCache( /* mApp, */ size );
 
     // FIXME THMANAGER
-    // mNrButton1 = 3 + ( TDSetting.mLevelOverAdvanced ? 2 : 0 );
+    mNrButton1 = 4 + ( TDSetting.mLevelOverAdvanced ? 1 : 0 );
     mButton1 = new Button[mNrButton1];
 
     mImage.setBackgroundDrawable( MyButton.getButtonBackground( mApp, getResources(), R.drawable.iz_menu ) );

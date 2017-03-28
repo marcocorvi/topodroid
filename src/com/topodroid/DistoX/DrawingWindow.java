@@ -1637,7 +1637,7 @@ public class DrawingWindow extends ItemDrawer
 
     // private void doStop()
     // {
-    //   TDLog.Log( TDLog.LOG_PLOT, "doStop type " + mType + " modified " + mModified );
+    //   // TDLog.Log( TDLog.LOG_PLOT, "doStop type " + mType + " modified " + mModified );
     // }
 
 // ----------------------------------------------------------------------------
@@ -1881,7 +1881,7 @@ public class DrawingWindow extends ItemDrawer
 
       // if ( ! mAllSymbols ) {
       //   String msg = missingSymbols.getMessage( getResources() );
-      //   TDLog.Log( TDLog.LOG_PLOT, "Missing " + msg );
+      //   // TDLog.Log( TDLog.LOG_PLOT, "Missing " + msg );
       //   Toast.makeText( mActivity, "Missing symbols \n" + msg, Toast.LENGTH_LONG ).show();
       //   // (new MissingDialog( mActivity, this, msg )).show();
       //   // finish();

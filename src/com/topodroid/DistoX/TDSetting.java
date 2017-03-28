@@ -72,6 +72,7 @@ class TDSetting
     "DISTOX_CHECK_ATTACHED",      // 28
     "DISTOX_PREV_NEXT",         
     "DISTOX_MAX_SHOT_LENGTH",
+    "DISTOX_MIN_LEG_LENGTH",
 
     "DISTOX_UNIT_LOCATION",       // 29 
     "DISTOX_CRS",                 // 30
@@ -420,6 +421,7 @@ class TDSetting
   static float mMagneticThr     = 1; // magnetic threshold
   static float mDipThr          = 2; // dip threshold
   static float mMaxShotLength   = 50; // max length of a shot (if larger it is overshoot)
+  static float mMinLegLength    = 0.5f; // min length of a leg (if shorter it is undershoot)
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // WALLS
 
@@ -668,6 +670,7 @@ class TDSetting
     mCheckAttached = prefs.getBoolean( key[k++], false );   // DISTOX_CHECK_ATTACHED 13
     mPrevNext      = prefs.getBoolean( key[k++], true );    // DISTOX_PREV_NEXT
     mMaxShotLength = tryFloat( prefs, key[k++], "50"   );   // DISTOX_MAX_SHOT_LENGTH
+    mMinLegLength  = tryFloat( prefs, key[k++], "0.5" );    // DISTOX_MIN_LEG_LENGTH
 
     mUnitLocation  = prefs.getString( key[k++], "ddmmss" ).equals("ddmmss") ? TDConst.DDMMSS  // choice
                                                                             : TDConst.DEGREE;
@@ -923,6 +926,8 @@ class TDSetting
       mPrevNext = prefs.getBoolean( k, true );
     } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_MAX_SHOT_LENGTH
       mMaxShotLength = tryFloat( prefs, k, "50" );  
+    } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_MIN_LEG_LENGTH
+      mMinLegLength = tryFloat( prefs, k, "0.5" );  
     } else if ( k.equals( key[ nk++ ] ) ) {
       mUnitLocation  = prefs.getString( k, "ddmmss" ).equals("ddmmss") ? TDConst.DDMMSS
                                                                        : TDConst.DEGREE;
@@ -1302,6 +1307,7 @@ class TDSetting
     //B if ( name.equals( "DISTOX_CHECK_ATTACHED" )
     //B if ( name.equals( "DISTOX_PREV_NEXT" )
     if ( name.equals( "DISTOX_MAX_SHOT_LENGTH") ) return parseFloatValue( value, mMaxShotLength, 20 );
+    if ( name.equals( "DISTOX_MIN_LEG_LENGTH") ) return parseFloatValue( value, mMinLegLength, 0, 5 );
 
     //C if ( name.equals( "DISTOX_UNIT_LOCATION" )
     //S if ( name.equals( "DISTOX_CRS" )

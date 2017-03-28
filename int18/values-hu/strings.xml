@@ -591,7 +591,7 @@
     <string name="help_add_topodroid">Új felmérés/kalibráció létrehozása</string>
     <string name="help_import">ZIP archívum, vagy felmérés importálása</string>
     <string name="help_symbol">Rajzeszközök engedélyezése/tiltása</string>
-    <!-- UNUSED string name="help_therion">Therion manager app</string -->
+    <!-- TODO string name="help_therion">Therion manager app</string -->
     <!-- UNUSED string name="help_database">Database viewer app (SQliteViewer)</string -->
     <string name="help_prefs">Preferenciák szerkesztése</string>
     <string name="help_log">Naplózási beállítások engedélyezése/tiltása</string>
@@ -870,6 +870,9 @@
   <!-- TODO string name="pref_max_shot_title">Maximális poligonmérés hossz</string -->
   <!-- TODO string name="pref_max_shot_summary">Mérés maximális hossza [m]</string -->
   <!-- TODO string name="pref_max_shot_message">Az ennél hosszab mérések hibásként lesznek megjelölve</string -->
+  <!-- TODO string name="pref_min_leg_title">Minimum leg length</string -->
+  <!-- TODO string name="pref_min_leg_summary">Minimum length of legs [m]</string -->
+  <!-- TODO string name="pref_min_leg_message">Legs shorter than the minimum have orange background</string -->
   <string name="pref_backsight_title">Visszamérés(Irányzék?)</string>
   <string name="pref_backsight_summary">Visszamérés(Irányzék?) mező az új mérés párbeszéd ablakban</string>
   <string name="pref_prev_next_title">Előző/Köv. gombok</string>

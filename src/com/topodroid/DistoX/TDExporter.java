@@ -38,20 +38,21 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.HashMap;
 
 import android.util.Log;
 
 class TDExporter
 {
-  // =======================================================================
-  // CSURVEY EXPORT cSurvey
-
-  static String[] therion_extend = { "left", "vertical", "right", "ignore" };
+                                   // -1      0           1        2         3       4
+  static String[] therion_extend = { "left", "vertical", "right", "ignore", "hide", "start", "unset", "left", "vert", "right" };
   static String   therion_flags_duplicate     = "   flags duplicate\n";
   static String   therion_flags_not_duplicate = "   flags not duplicate\n";
   static String   therion_flags_surface       = "   flags surface\n";
   static String   therion_flags_not_surface   = "   flags not surface\n";
 
+  // =======================================================================
+  // CSURVEY EXPORT cSurvey
 
   static private void exportEmptyCsxSketch( PrintWriter pw )
   {
@@ -804,6 +805,10 @@ class TDExporter
 
       long extend = 0;  // current extend
       AverageLeg leg = new AverageLeg(0);
+      HashMap<String, LRUD> lruds = null;
+      if ( TDSetting.mSurvexLRUD ) {
+        lruds = new HashMap<String, LRUD>();
+      }
 
       DBlock ref_item = null;
       boolean duplicate = false;
@@ -851,6 +856,12 @@ class TDExporter
               if ( surface ) {
                 pw.format(therion_flags_not_surface);
                 surface = false;
+              }
+              // write LRUD for ref_item
+              if ( TDSetting.mSurvexLRUD ) {
+                if ( ! lruds.containsKey( ref_item.mFrom ) ) {
+                  lruds.put( ref_item.mFrom, computeLRUD( ref_item, list, true ) );
+                }
               }
               ref_item = null; 
             }
@@ -904,6 +915,15 @@ class TDExporter
         if ( duplicate ) {
           pw.format(therion_flags_not_duplicate);
           // duplicate = false;
+        }
+      }
+
+      if ( TDSetting.mSurvexLRUD ) {
+        pw.format("    units left right up down %s\n", uls );
+        pw.format("    data dimensions station left right up down\n");
+        for ( String station : lruds.keySet() ) {
+          LRUD lrud = lruds.get( station );
+          pw.format("    %s %.2f %.2f %.2f %.2f\n", station, lrud.l * ul, lrud.r * ul, lrud.r * ul, lrud.d * ul );
         }
       }
 

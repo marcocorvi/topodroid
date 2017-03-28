@@ -591,7 +591,7 @@
     <string name="help_add_topodroid">Nuovo rilievo/calibr.</string>
     <string name="help_import">Importa zip o file dati rilievo</string>
     <string name="help_symbol">Attiva/disattiva prototipi grafici</string>
-    <!-- UNUSED string name="help_therion">App Therion manager</string -->
+    <string name="help_therion">App Therion manager</string>
     <!-- UNUSED string name="help_database">App database (SQliteViewer)</string -->
     <string name="help_prefs">Preferenze</string>
     <string name="help_log">Attiva/disattiva opzioni di log</string>
@@ -876,6 +876,9 @@
   <!-- TODO string name="pref_max_shot_title">Maximum shot length</string -->
   <!-- TODO string name="pref_max_shot_summary">Maximum length of shooting [m]</string -->
   <!-- TODO string name="pref_max_shot_message">Shots over this length are marked as overshoot</string -->
+  <!-- TODO string name="pref_min_leg_title">Minimum leg length</string -->
+  <!-- TODO string name="pref_min_leg_summary">Minimum length of legs [m]</string -->
+  <!-- TODO string name="pref_min_leg_message">Legs shorter than the minimum have orange background</string -->
   <string name="pref_backsight_title">Backsight</string>
   <string name="pref_backsight_summary">Campi backsight nel dialogo Nuova Battuta</string>
   <string name="pref_prev_next_title">Pulsanti Prec/Succ</string>

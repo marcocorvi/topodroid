@@ -111,7 +111,7 @@ public class ImportDialog extends MyDialog
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {
     String item = ((TextView) view).getText().toString();
-    // TDLog.Log(  TDLog.LOG_INPUT, "ImportDialog onItemClick() " + item.toString() );
+    TDLog.Log(  TDLog.LOG_INPUT, "ImportDialog onItemClick() <" + item.toString() + ">" );
 
     // hide();
     mList.setOnItemClickListener( null );

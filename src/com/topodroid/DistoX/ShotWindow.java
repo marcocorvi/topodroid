@@ -347,17 +347,19 @@ public class ShotWindow extends Activity
   {
     // Log.v("DistoX", "Shot window update block list: " + blk.mLength + " " + blk.mBearing + " " + blk.mClino );
     if ( mDataAdapter != null ) {
-      mDataAdapter.addDataBlock( blk );
       // FIXME 3.3.0
+      mDataAdapter.addDataBlock( blk );
       if ( TDSetting.mBacksightShot || TDSetting.mTripodShot ) {
-        mApp.assignStations( mDataAdapter.mItems );
+        mApp.assignStationsAll( mDataAdapter.mItems );
       } else {
-        mApp.assignStations( mDataAdapter.getItemsForAssign() );
+        mApp.assignStationsAll( mDataAdapter.getItemsForAssign() );
       }
+      // mApp.mData.getShotName( mApp.mSID, blk );
+
       mList.post( new Runnable() {
         @Override public void run() {
           // Log.v("DistoX", "notify data set changed");
-          // mDataAdapter.notifyDataSetChanged();
+          mDataAdapter.notifyDataSetChanged(); // THIS IS IMPORTANT TO REFRESH THE DATA LIST
           mList.setSelection( mDataAdapter.getCount() - 1 );
         }
       } );
@@ -371,8 +373,7 @@ public class ShotWindow extends Activity
   // called only by updateDisplay
   private void updateShotList( List<DBlock> list, List< PhotoInfo > photos )
   {
-    TDLog.Log( TDLog.LOG_SHOT, "updateShotList shots " + list.size() + " photos " + photos.size() );
-    // Log.v( "DistoX", "update Shot List shots " + list.size() + " photos " + photos.size() );
+    // TDLog.Log( TDLog.LOG_SHOT, "updateShotList shots " + list.size() + " photos " + photos.size() );
     mDataAdapter.clear();
     // mList.setAdapter( mDataAdapter );
     if ( list.size() == 0 ) {
@@ -632,7 +633,7 @@ public class ShotWindow extends Activity
   void askSensor( )
   {
     mSensorId = mApp.mData.nextSensorId( mApp.mSID );
-    TDLog.Log( TDLog.LOG_SENSOR, "sensor " + mSensorId );
+    // TDLog.Log( TDLog.LOG_SENSOR, "sensor " + mSensorId );
     Intent intent = new Intent( mActivity, SensorActivity.class );
     startActivityForResult( intent, TDRequest.SENSOR_ACTIVITY );
   }
@@ -727,7 +728,7 @@ public class ShotWindow extends Activity
   @Override
   protected void onActivityResult( int reqCode, int resCode, Intent data )
   {
-    TDLog.Log( TDLog.LOG_ERR, "on Activity Result: request " + reqCode + " result " + resCode );
+    TDLog.Log( TDLog.LOG_DEBUG, "on Activity Result: request " + reqCode + " result " + resCode );
     switch ( reqCode ) {
       case TDRequest.CAPTURE_IMAGE_ACTIVITY:
         mApp.resetLocale();
@@ -745,7 +746,7 @@ public class ShotWindow extends Activity
           String type  = extras.getString( TDTag.TOPODROID_SENSOR_TYPE );
           String value = extras.getString( TDTag.TOPODROID_SENSOR_VALUE );
           String comment = extras.getString( TDTag.TOPODROID_SENSOR_COMMENT );
-          TDLog.Log( TDLog.LOG_SENSOR, "insert sensor " + type + " " + value + " " + comment );
+          // TDLog.Log( TDLog.LOG_SENSOR, "insert sensor " + type + " " + value + " " + comment );
 
           mApp.mData.insertSensor( mApp.mSID, mSensorId, mShotId, "", 
                                   TopoDroidUtil.currentDate(),

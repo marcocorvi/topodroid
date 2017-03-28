@@ -592,7 +592,7 @@
     <string name="help_add_topodroid">Nov načrt/kalibr.</string>
     <string name="help_import">Uvoz zip ali datoteke dati načrta</string>
     <string name="help_symbol">Aktiviraj/deaktiviraj grafične prototipe</string>
-    <!-- UNUSED string name="help_therion">App Therion manager</string -->
+    <!-- TODO string name="help_therion">App Therion manager</string -->
     <!-- UNUSED string name="help_database">App database (SQliteViewer)</string -->
     <string name="help_prefs">Preference</string>
     <string name="help_log">Aktiviraj/deaktiviraj opcije  log</string>
@@ -872,6 +872,9 @@
   <!-- TODO string name="pref_max_shot_title">Maximum shot length</string -->
   <!-- TODO string name="pref_max_shot_summary">Maximum length of shooting [m]</string -->
   <!-- TODO string name="pref_max_shot_message">Shots over this length are marked as overshoot</string -->
+  <!-- TODO string name="pref_min_leg_title">Minimum leg length</string -->
+  <!-- TODO string name="pref_min_leg_summary">Minimum length of legs [m]</string -->
+  <!-- TODO string name="pref_min_leg_message">Legs shorter than the minimum have orange background</string -->
   <string name="pref_backsight_title">Vzvratn</string>
   <string name="pref_backsight_summary">Vzvratno polje v oknu Nova vizura</string>
   <!-- TODO string name="pref_prev_next_title">Prev/Next buttons</string -->

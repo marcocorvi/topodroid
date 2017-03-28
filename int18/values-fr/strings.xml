@@ -591,7 +591,7 @@
     <string name="help_add_topodroid">Crée un nouveau relevé/étalonnage</string>
     <string name="help_import">Importe une archive Zip ou un fichier Therion</string>
     <string name="help_symbol">Active/désactive des symboles de dessin</string>
-    <!-- UNUSED string name="help_therion">Application Therion manager</string -->
+    <string name="help_therion">Application Therion manager</string>
     <!-- UNUSED string name="help_database">Application Database viewer (SQliteViewer)</string -->
     <string name="help_prefs">Modifie les préférences</string>
     <string name="help_log">Active/désactive les options de journalisation</string>
@@ -871,6 +871,9 @@
   <!-- TODO string name="pref_max_shot_title">Maximum shot length</string -->
   <!-- TODO string name="pref_max_shot_summary">Maximum length of shooting [m]</string -->
   <!-- TODO string name="pref_max_shot_message">Shots over this length are marked as overshoot</string -->
+  <!-- TODO string name="pref_min_leg_title">Minimum leg length</string -->
+  <!-- TODO string name="pref_min_leg_summary">Minimum length of legs [m]</string -->
+  <!-- TODO string name="pref_min_leg_message">Legs shorter than the minimum have orange background</string -->
   <string name="pref_backsight_title">Visée inverse</string>
   <string name="pref_backsight_summary">Afficher les champs de saisie inverse dans la boîte de dialogue de nouvelle visée</string>
   <string name="pref_prev_next_title">Icônes Précédent/Suivant</string>

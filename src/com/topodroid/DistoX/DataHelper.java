@@ -1930,6 +1930,18 @@ public class DataHelper extends DataSetObservable
      return ret;
    }
 
+   // public void getShotName( long sid, DBlock blk )
+   // {
+   //   Cursor cursor = myDB.query( SHOT_TABLE, new String[] { "fStation", "tStation" },
+   //                               WHERE_SID_ID, new String[] { Long.toString(sid), Long.toString(blk.mId) },
+   //                               null, null, null );
+   //   if (cursor.moveToFirst()) {
+   //     blk.mFrom = cursor.getString(0);
+   //     blk.mTo   = cursor.getString(1);
+   //   }
+   //   if (cursor != null && !cursor.isClosed()) cursor.close();
+   // }
+
    public DBlock selectShot( long id, long sid )
    {
      // TDLog.Log( TDLog.LOG_DB, "selectShot " + id + "/" + sid );

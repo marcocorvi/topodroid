@@ -600,7 +600,7 @@
     <string name="help_add_topodroid">Create new survey/calibration</string>
     <string name="help_import">Import zip archive or survey file</string>
     <string name="help_symbol">Enable/disable drawing tools</string>
-    <!-- UNUSED string name="help_therion">Therion manager app</string -->
+    <string name="help_therion">Therion manager app</string>
     <!-- UNUSED string name="help_database">Database viewer app (SQliteViewer)</string -->
     <string name="help_prefs">Edit preferences</string>
     <string name="help_log">Enable/disable logging settings</string>
@@ -793,8 +793,8 @@
   <string name="pref_survex_eol_summary">Survex/Topo line termination</string>
   <string name="pref_survex_splay_title">Survex splays station</string>
   <string name="pref_survex_splay_summary">Add TO station to splays in Survex</string>
-  <string name="pref_survex_lrud_title">Survex LRUD</string>
-  <string name="pref_survex_lrud_summary">Add LRUD to Survex export</string>
+  <string name="pref_survex_lrud_title">Survex/Therion LRUD</string>
+  <string name="pref_survex_lrud_summary">Add LRUD to Survex/Therion export</string>
   <string name="pref_svg_grid_title">SVG grid</string>
   <string name="pref_svg_grid_summary">Add grid to SVG export</string>
   <string name="pref_svg_in_html_title">SVG in HTML</string>
@@ -885,6 +885,9 @@
   <string name="pref_max_shot_title">Maximum shot length</string>
   <string name="pref_max_shot_summary">Maximum length of shooting [m]</string>
   <string name="pref_max_shot_message">Shots over this length are marked as overshoot</string>
+  <string name="pref_min_leg_title">Minimum leg length</string>
+  <string name="pref_min_leg_summary">Minimum length of legs [m]</string>
+  <string name="pref_min_leg_message">Legs shorter than the minimum have orange background</string>
   <string name="pref_backsight_title">Backsight</string>
   <string name="pref_backsight_summary">Backsight fields in the new-shot dialog</string>
   <string name="pref_prev_next_title">Prev/Next buttons</string>

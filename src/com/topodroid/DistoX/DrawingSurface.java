@@ -516,7 +516,7 @@ public class DrawingSurface extends SurfaceView
 
   public void surfaceCreated(SurfaceHolder mHolder) 
   {
-    TDLog.Log( TDLog.LOG_PLOT, "surfaceCreated " );
+    // TDLog.Log( TDLog.LOG_PLOT, "surfaceCreated " );
     if ( mDrawThread == null ) {
       mDrawThread = new DrawThread(mHolder);
     }
@@ -528,7 +528,7 @@ public class DrawingSurface extends SurfaceView
   public void surfaceDestroyed(SurfaceHolder mHolder) 
   {
     mSurfaceCreated = false;
-    TDLog.Log( TDLog.LOG_PLOT, "surfaceDestroyed " );
+    // TDLog.Log( TDLog.LOG_PLOT, "surfaceDestroyed " );
     boolean retry = true;
     mDrawThread.setRunning(false);
     while (retry) {

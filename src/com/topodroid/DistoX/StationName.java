@@ -507,6 +507,7 @@ class StationName
   { 
     // mSecondLastShotId = lastShotId(); // FIXME this probably not needed
     // Log.v("DistoX", "assign stations. size " + list.size() );
+
     int survey_stations = TDSetting.mSurveyStations;
     if ( survey_stations <= 0 ) return;
     boolean forward_shots = ( survey_stations == 1 );
