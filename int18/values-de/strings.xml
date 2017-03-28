@@ -311,9 +311,9 @@
     <!-- UNUSED string name="not_implemented">Noch nicht implementiert</string -->
     <string name="null_bitmap">Null Bitmap [OOM Fehler]</string>
     <string name="photo">Foto</string>
-    <!-- TODO string name="photo_camera">Camera App</string -->
+    <string name="photo_camera">Kamera-App</string>
     <string name="photo_comment_prompt">Kommentar</string>
-    <!-- TODO string name="photo_azimuth_clino">Azimuth: %1$.1f Clino %2$.1f</string -->
+    <string name="photo_azimuth_clino">Azimut: %1$.1f°, Deklination %2$.1f°</string>
     <!-- UNUSED string name="photo_name">Messpunkt/Name</string -->
     <!-- UNUSED string name="photo_photo">Foto</string -->
     <!-- UNUSED string name="photo_sensor">Sensoren</string -->
@@ -444,7 +444,7 @@
      blank: with no station assigned yet
      leg: with both FROM and TO station 
      splay: with only the FROM station or the TO station (usually it's the FROM one)
-     repeated-leg: no station, but values close to immediately preceeding shot which is a leg
+     repeated-leg: no station, but values close to immediately preceding shot which is a leg
                    or a repeated-leg
 -->
     <string name="hide_blank">Hilfszüge ohne Punkte</string>
