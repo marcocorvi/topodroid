@@ -43,6 +43,7 @@ public class TDPath
   final static String PLT = ".plt";
   final static String PNG = ".png";
   final static String SRV = ".srv";
+  final static String SUR = ".sur";
   final static String SVG = ".svg";
   final static String SVX = ".svx";
   final static String TDR = ".tdr";
@@ -94,6 +95,7 @@ public class TDPath
   private static String APP_NOTE_PATH;   //  = PATH_BASE + "note/";
   private static String PATH_PNG;    //  = PATH_BASE + "png/";
   private static String PATH_SRV;    //  = PATH_BASE + "srv/";
+  private static String PATH_SUR;    //  = PATH_BASE + "sur/";
   private static String PATH_SVG;    //  = PATH_BASE + "svg/";
   private static String PATH_SVX;    //  = PATH_BASE + "svx/";
   private static String PATH_TH;     //  = PATH_BASE + "th/";
@@ -159,6 +161,9 @@ public class TDPath
 
     PATH_SRV = PATH_BASE + "srv/";
     // FIXME checkDirs( PATH_SRV );
+
+    PATH_SUR = PATH_BASE + "sur/";
+    // FIXME checkDirs( PATH_SUR );
 
     PATH_SVX = PATH_BASE + "svx/";
     // FIXME checkDirs( PATH_SVX );
@@ -315,6 +320,7 @@ public class TDPath
   static String getKmlFile( String name )    { return PATH_KML + name; }
   static String getPltFile( String name )    { return PATH_PLT + name; }
   static String getSrvFile( String name )    { return PATH_SRV + name; }
+  static String getSurFile( String name )    { return PATH_SUR + name; }
   static String getSvgFile( String name )    { return PATH_SVG + name; }
   static String getSvxFile( String name )    { return PATH_SVX + name; }
   static String getCsvFile( String name )    { return PATH_CSV + name; }
@@ -385,6 +391,7 @@ public class TDPath
   static String getSurveyKmlFile( String survey ) { return getFile( PATH_KML, survey, KML ); }
   static String getSurveyPltFile( String survey ) { return getFile( PATH_PLT, survey, PLT ); }
   static String getSurveySrvFile( String survey ) { return getFile( PATH_SRV, survey, SRV ); }
+  static String getSurveySurFile( String survey ) { return getFile( PATH_SUR, survey, SUR ); }
   static String getSurveySvxFile( String survey ) { return getFile( PATH_SVX, survey, SVX ); }
   static String getSurveyTopFile( String survey ) { return getFile( PATH_TOP, survey, TOP ); }
   static String getSurveyTroFile( String survey ) { return getFile( PATH_TRO, survey, TRO ); }
@@ -512,6 +519,7 @@ public class TDPath
     t = new File( getPltFile( survey + PLT ) ); if ( t.exists() ) t.delete();
     t = new File( getSvxFile( survey + SVX ) ); if ( t.exists() ) t.delete();
     t = new File( getSrvFile( survey + SRV ) ); if ( t.exists() ) t.delete();
+    t = new File( getSurFile( survey + SUR ) ); if ( t.exists() ) t.delete();
     t = new File( getTopFile( survey + TOP ) ); if ( t.exists() ) t.delete();
     t = new File( getTroFile( survey + TRO ) ); if ( t.exists() ) t.delete();
   }

@@ -1820,6 +1820,152 @@ class TDExporter
     }
   }
 
+  // ----------------------------------------------------------------------------------------
+  // WINKARST
+
+  private static void printShotToSur( PrintWriter pw, AverageLeg leg, LRUD lrud, String comment )
+  {
+    if ( TDSetting.mSwapLR ) {
+      pw.format(Locale.US, "%.2f %.1f %.1f %.2f %.2f %.2f %.2f", 
+        leg.length(), leg.bearing(), leg.clino(), lrud.r, lrud.l, lrud.u, lrud.d );
+    } else {
+      pw.format(Locale.US, "%.2f %.1f %.1f %.2f %.2f %.2f %.2f", 
+        leg.length(), leg.bearing(), leg.clino(), lrud.l, lrud.r, lrud.u, lrud.d );
+    }
+    leg.reset();
+    if ( comment != null && comment.length() > 0 ) {
+      pw.format(" %s", comment );
+    }
+    pw.format( "\r\n" );
+  }
+
+  static private void writeSurFromTo( PrintWriter pw, String prefix, String from, String to, boolean duplicate )
+  {
+    if ( duplicate ) {
+      pw.format("X ");
+    } else {
+      pw.format("N ");
+    }
+    if ( TDSetting.mExportStationsPrefix ) {
+      pw.format("%s-%s %s-%s ", prefix, from, prefix, to );
+    } else {
+      pw.format("%s %s ", from, to );
+    }
+  }
+
+  static String exportSurveyAsSur( long sid, DataHelper data, SurveyInfo info, String filename )
+  {
+    // Log.v("DistoX", "export as winkarst: " + filename + " swap LR " + TDSetting.mSwapLR );
+    List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+    try {
+      TDPath.checkPath( filename );
+      FileWriter fw = new FileWriter( filename );
+      PrintWriter pw = new PrintWriter( fw );
+  
+      // FIXME 
+      pw.format("#FILE AUTHOR: TopoDroid v %s\r\n", TopoDroidApp.VERSION );
+      pw.format("#FILE DATE: %s\r\n", TopoDroidUtil.getDateString("MM dd yyyy") );
+      pw.format("\r\n"); 
+      pw.format("#SURVEY NAME: %s\r\n", info.name );
+      String date = info.date;
+      int y = 0;
+      int m = 0;
+      int d = 0;
+      if ( date != null && date.length() == 10 ) {
+        try {
+          y = Integer.parseInt( date.substring(0,4) );
+          m = Integer.parseInt( date.substring(5,7) );
+          d = Integer.parseInt( date.substring(8,10) );
+        } catch ( NumberFormatException e ) {
+          TDLog.Error( "exportSurveyAsDat date parse error " + date );
+        }
+      }
+      pw.format("#SURVEY DATE: %02d %02d %04d\r\n", m, d, y ); // format "MM DD YYYY"
+      if ( info.comment != null ) {
+        pw.format("#COMMENT: %s\r\n", info.comment );
+      }
+
+      if ( info.team != null && info.team.length() > 0 ) {
+        pw.format("#SURVEY TEAM: %s\r\n", info.team );
+      }
+
+      List< FixedInfo > fixeds = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
+      if ( fixeds.size() > 0 ) {
+        pw.format("#DATUM: WGS 84\r\n");
+        for ( FixedInfo fixed : fixeds ) {
+          pw.format(Locale.US, "#CONTROL POINT: %s %.10f E %.10f N %.1f M\r\n",
+            fixed.name, fixed.lng, fixed.lat, fixed.alt );
+        }
+      }
+      pw.format("\r\n" );
+      pw.format(Locale.US, "#DECLINATION: %.4f\r\n", info.declination );
+      pw.format("\r\n" );
+      pw.format("#SHOT STATION STATION LENGTH AZIMUTH VERTICAL LEFT RIGHT UP DOWN COMMENT\r\n" );
+      pw.format("#CODE FROM TO M DEG DEG M M M M\r\n" );
+
+      AverageLeg leg = new AverageLeg(0);
+      DBlock ref_item = null;
+
+      int extra_cnt = 0;
+      boolean in_splay = false;
+      boolean duplicate = false;
+      LRUD lrud;
+
+      for ( DBlock item : list ) {
+        String from = item.mFrom;
+        String to   = item.mTo;
+        if ( from == null || from.length() == 0 ) {
+          if ( to == null || to.length() == 0 ) { // no station: not exported
+            if ( ref_item != null && 
+               ( item.mType == DBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
+              leg.add( item.mLength, item.mBearing, item.mClino );
+            }
+          } else { // only TO station
+            if ( leg.mCnt > 0 && ref_item != null ) {
+              lrud = computeLRUD( ref_item, list, true );
+              writeSurFromTo( pw, info.name, ref_item.mFrom, ref_item.mTo, duplicate );
+              printShotToSur( pw, leg, lrud, ref_item.mComment );
+              duplicate = false;
+              ref_item = null; 
+            }
+          }
+        } else { // with FROM station
+          if ( to == null || to.length() == 0 ) { // splay shot
+            if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
+              lrud = computeLRUD( ref_item, list, true );
+              writeSurFromTo( pw, info.name, ref_item.mFrom, ref_item.mTo, duplicate );
+              printShotToSur( pw, leg, lrud, ref_item.mComment );
+              duplicate = false;
+              ref_item = null; 
+            }
+          } else {
+            if ( leg.mCnt > 0 && ref_item != null ) {
+              lrud = computeLRUD( ref_item, list, true );
+              writeSurFromTo( pw, info.name, ref_item.mFrom, ref_item.mTo, duplicate );
+              printShotToSur( pw, leg, lrud, ref_item.mComment );
+            }
+            ref_item = item;
+            duplicate = ( item.mFlag == DBlock.BLOCK_DUPLICATE );
+            leg.set( item.mLength, item.mBearing, item.mClino );
+          }
+        }
+      }
+      if ( leg.mCnt > 0 && ref_item != null ) {
+        lrud = computeLRUD( ref_item, list, true );
+        writeSurFromTo( pw, info.name, ref_item.mFrom, ref_item.mTo, duplicate );
+        printShotToSur( pw, leg, lrud, ref_item.mComment );
+      }
+      pw.format( "#END\r\n" );
+
+      fw.flush();
+      fw.close();
+      return filename;
+    } catch ( IOException e ) {
+      TDLog.Error( "Failed Compass export: " + e.getMessage() );
+      return null;
+    }
+  }
+
   // =======================================================================
   // GHTOPO EXPORT
 

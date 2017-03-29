@@ -398,7 +398,6 @@ public class MainWindow extends Activity
         // BrushManager.makePaths( getResources() );
         // (new SymbolEnableDialog( mActivity, mApp )).show();
 
-        // (new SymbolReload( mActivity, mApp, TDSetting.mLevelOverExperimental )).show();
         (new SymbolReload( mActivity, mApp, TDSetting.mLevelOverAdvanced )).show();
       } else 
       if ( TDSetting.mLevelOverAdvanced && p++ == pos ) { // LOGS

@@ -489,6 +489,10 @@ public class SurveyWindow extends Activity
           Toast.makeText( this, "WARNING GHTopo export is untested", Toast.LENGTH_SHORT ).show(); // FIXME TROBOT
           filename = mApp.exportSurveyAsGtx();
           break;
+        case TDConst.DISTOX_EXPORT_SUR: // WinKarst
+          Toast.makeText( this, "WARNING WinKarst export is untested", Toast.LENGTH_SHORT ).show(); 
+          filename = mApp.exportSurveyAsSur();
+          break;
 
         case TDConst.DISTOX_EXPORT_TH:
         default:

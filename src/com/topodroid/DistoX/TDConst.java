@@ -38,8 +38,9 @@ class TDConst
   static final int DISTOX_EXPORT_CAV = 17; // Topo
   static final int DISTOX_EXPORT_GRT = 18; // Grottolf
   static final int DISTOX_EXPORT_GTX = 19; // GHTopo
+  static final int DISTOX_EXPORT_SUR = 20; // WinKarst
 
-  static final int DISTOX_EXPORT_ZIP = 20;
+  static final int DISTOX_EXPORT_ZIP = 30;
 
   static final String[] mSurveyExportTypes = { "ZIP", 
     "Compass",
@@ -53,6 +54,7 @@ class TDConst
     "Topo",
     "VisualTopo",
     "Walls", 
+    "WinKarst",
     "CSV",
     "DXF",
     "KML",
@@ -71,6 +73,7 @@ class TDConst
     DISTOX_EXPORT_CAV,
     DISTOX_EXPORT_TRO,
     DISTOX_EXPORT_SRV,
+    DISTOX_EXPORT_SUR,
     DISTOX_EXPORT_CSV,
     DISTOX_EXPORT_DXF,
     DISTOX_EXPORT_KML,
