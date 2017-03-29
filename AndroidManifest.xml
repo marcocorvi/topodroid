@@ -3,7 +3,7 @@
       package="com.topodroid.DistoX"
       android:installLocation="auto"
       android:versionCode="303050"
-      android:versionName="3.3.1t"
+      android:versionName="3.3.2"
     >
     <uses-sdk
        android:minSdkVersion="8"
