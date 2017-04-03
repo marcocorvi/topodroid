@@ -879,9 +879,9 @@
   <string name="pref_max_shot_title">Максимальная длина замера</string>
   <string name="pref_max_shot_summary">Максимальная длина измерения [м]</string>
   <string name="pref_max_shot_message">Замеры, превышающие это значение, будут помечены как слишком длинные</string>
-  <!-- TODO string name="pref_min_leg_title">Minimum leg length</string -->
-  <!-- TODO string name="pref_min_leg_summary">Minimum length of legs [m]</string -->
-  <!-- TODO string name="pref_min_leg_message">Legs shorter than the minimum have orange background</string -->
+  <string name="pref_min_leg_title">Минимальная длина замера</string>
+  <string name="pref_min_leg_summary">Минимальная длина замеров [м]</string>
+  <string name="pref_min_leg_message">Замеры, короче минимальной длинны будут подцвечены оранжевым</string>
   <string name="pref_backsight_title">Обратный замер</string>
   <string name="pref_backsight_summary">Поле для ввода обратного замера в диалоге ручного ввода замера</string>
   <string name="pref_prev_next_title">Кнопки Пред/След</string>

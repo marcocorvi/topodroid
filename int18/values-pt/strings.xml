@@ -591,7 +591,7 @@
     <string name="help_add_topodroid">Criar nova topo/calibração</string>
     <string name="help_import">Importar arquivo zip ou arquivo de topo</string>
     <string name="help_symbol">Habilitar/desabilitar símbolos</string>
-    <!-- TODO string name="help_therion">App Therion manager</string -->
+    <string name="help_therion">App Gerenciador Therion</string>
     <!-- UNUSED string name="help_database">App Visualizador de banco de dados (SQliteViewer)</string -->
     <string name="help_prefs">Editar preferências</string>
     <string name="help_log">Ativar/desativar configurações de log</string>
@@ -870,10 +870,10 @@
   <string name="pref_leg_message">Tolerância entre as medições de uma visada</string>
   <string name="pref_max_shot_title">Comprimento máximo visada</string>
   <string name="pref_max_shot_summary">Comprimento máximo para visadas [m]</string>
-  <string name="pref_max_shot_message">Visadas com comprimento maior do que este serão marcadas como excessivamente longas.</string>
-  <!-- TODO string name="pref_min_leg_title">Minimum leg length</string -->
-  <!-- TODO string name="pref_min_leg_summary">Minimum length of legs [m]</string -->
-  <!-- TODO string name="pref_min_leg_message">Legs shorter than the minimum have orange background</string -->
+  <string name="pref_max_shot_message">Visadas com comprimento maior do que este serão marcadas como excessivamente longas</string>
+  <string name="pref_min_leg_title">Comprimento mínimo visada</string>
+  <string name="pref_min_leg_summary">Comprimeto mínimo de visadas [m]</string>
+  <string name="pref_min_leg_message">Visadas menores que este valor mínimo tem fundo laranja</string>
   <string name="pref_backsight_title">Medida contra</string>
   <string name="pref_backsight_summary">Campos de contra azimute e inclinação invertida para inserção manual de medida</string>
   <string name="pref_prev_next_title">Botões Ant/Próx</string>
@@ -1126,7 +1126,9 @@
 \nPágina principal: botão MENU
 \nDocumentos: http://sites.google.com/site/speleoapps
 \nComentários, relatórios de bug, sugestões de novas funcionalidades: marco.corvi@gmail.com
-\nTradução para o português por Angelo Roncolato (angelo.roncolato.110@gmail.com) e Rodrigo Severo (rodrigo@fabricadeideias.com)
+\nTradução para o português:
+\n  Inicial por Angelo Roncolato (angelo.roncolato.110@gmail.com)
+\n  A partir de 27/01/2017 por Rodrigo Severo (rodrigo@fabricadeideias.com)
 \n
     </string>
 
