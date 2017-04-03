@@ -984,6 +984,7 @@ public class DrawingWindow extends ItemDrawer
       float h1, h2;
       for ( NumShot sh : shots ) {
         if  ( ! sh.mIgnoreExtend ) {
+          // Log.v("DistoX", "shot " + sh.from.name + "-" + sh.to.name + " from " + sh.from.show() + " to " + sh.to.show() );
           NumStation st1 = sh.from;
           NumStation st2 = sh.to;
           if ( st1.show() && st2.show() ) {
@@ -992,6 +993,8 @@ public class DrawingWindow extends ItemDrawer
             // addFixedLine( sh.getFirstBlock(), h1, (float)(st1.v), h2, (float)(st2.v), xoff, yoff, false, true );
             addFixedLine( sh.getFirstBlock(), h1, (float)(st1.v), h2, (float)(st2.v), false, true );
           }
+        // } else {
+        //   Log.v("DistoX", "shot ignore extend " + sh.from.name + "-" + sh.to.name );
         }
       } 
       for ( NumSplay sp : splays ) {
@@ -1011,6 +1014,8 @@ public class DrawingWindow extends ItemDrawer
           // dst = mDrawingSurface.addDrawingStationName( st, DrawingUtil.toSceneX(h1) - xoff,
           //                                                  DrawingUtil.toSceneY(st.v) - yoff, true, xhsections );
           dst = mDrawingSurface.addDrawingStationName( st, DrawingUtil.toSceneX(h1), DrawingUtil.toSceneY(st.v), true, xhsections );
+        // } else {
+        //   Log.v("DistoX", "station not showing " + st.name );
         }
       }
     }
@@ -3893,7 +3898,7 @@ public class DrawingWindow extends ItemDrawer
     // used by SavePlotFileTask
     void doSaveWithExt( long type, final String filename, final String ext, boolean toast )
     {
-      Log.v("DistoX", "save with ext: " + filename + " ext " + ext );
+      // Log.v("DistoX", "save with ext: " + filename + " ext " + ext );
       if ( PlotInfo.isProfile( type ) ) {
         new ExportPlotToFile( mActivity, mDrawingSurface.mCommandManager2, mNum, type, filename, ext, toast ).execute();
       } else if ( type == PlotInfo.PLOT_PLAN ) {
@@ -4093,6 +4098,7 @@ public class DrawingWindow extends ItemDrawer
   public void updateBlockList( DBlock blk ) 
   {
     // Log.v("DistoX", "Drawing window: update Block List block " + blk.mFrom + " - " + blk.mTo ); // DATA_DOWNLOAD
+    mApp.mShotWindow.updateBlockList( blk ); // FIXME-EXTEND
     updateDisplay( /* true, true */ );
   }
 
@@ -4100,6 +4106,7 @@ public class DrawingWindow extends ItemDrawer
   public void updateBlockList( long blk_id )
   {
     // Log.v("DistoX", "Drawing window: update Block List block id " + blk_id ); // DATA_DOWNLOAD
+    mApp.mShotWindow.updateBlockList( blk_id ); // FIXME-EXTEND
     updateDisplay( /* true, true */ );
   }
 

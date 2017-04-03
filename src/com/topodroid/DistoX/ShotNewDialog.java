@@ -447,7 +447,7 @@ public class ShotNewDialog extends MyDialog
       }
       if ( blk != null ) {
         if ( mJpegData != null ) { 
-          Log.v("DistoX", "save Jpeg image size " + mJpegData.length );
+          // Log.v("DistoX", "save Jpeg image size " + mJpegData.length );
           long photo_id = mApp.mData.nextPhotoId( mApp.mSID );
           File imagefile = new File( TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString(photo_id ) ) );
           try {

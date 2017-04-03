@@ -72,6 +72,7 @@ class StationName
     // if ( ! TDSetting.mSplayExtend ) 
     {
       long extend = TDAzimuth.computeLegExtend( blk.mBearing );
+      blk.setExtend( (int)extend );
       data_helper.updateShotExtend( blk.mId, sid, extend, true );
     }
   }
@@ -506,7 +507,7 @@ class StationName
   void assignStations_Default( DataHelper data_helper, long sid, List<DBlock> list )
   { 
     // mSecondLastShotId = lastShotId(); // FIXME this probably not needed
-    // Log.v("DistoX", "assign stations. size " + list.size() );
+    // Log.v("DistoX", "assign stations default. size " + list.size() );
 
     int survey_stations = TDSetting.mSurveyStations;
     if ( survey_stations <= 0 ) return;

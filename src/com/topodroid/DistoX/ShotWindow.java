@@ -345,7 +345,7 @@ public class ShotWindow extends Activity
   @Override
   public void updateBlockList( DBlock blk )
   {
-    // Log.v("DistoX", "Shot window update block list: " + blk.mLength + " " + blk.mBearing + " " + blk.mClino );
+    // Log.v("DistoX", "Shot window update list. blk: " + blk.mId + " " + blk.mLength + " " + blk.mBearing + " " + blk.mClino );
     if ( mDataAdapter != null ) {
       // FIXME 3.3.0
       mDataAdapter.addDataBlock( blk );

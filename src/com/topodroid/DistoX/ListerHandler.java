@@ -15,6 +15,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
 
+import android.util.Log;
+
 public class ListerHandler extends Handler 
 {
   static final String LISTER_DATA_NUMBER    = "LISTER_DATA_NUMBER";
@@ -59,6 +61,7 @@ public class ListerHandler extends Handler
         break;
       case LISTER_UPDATE:
         long blk_id = bundle.getLong( LISTER_DATA_BLOCK_ID );
+        // Log.v("DistoX", "lister message blk id " + blk_id );
         mLister.updateBlockList( blk_id );
         break;
       case LISTER_REF_AZIMUTH:
