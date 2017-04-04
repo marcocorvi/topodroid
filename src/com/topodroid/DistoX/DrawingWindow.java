@@ -983,18 +983,14 @@ public class DrawingWindow extends ItemDrawer
     } else { // if ( type == PlotInfo.PLOT_PROFILE ) 
       float h1, h2;
       for ( NumShot sh : shots ) {
-        if  ( ! sh.mIgnoreExtend ) {
-          // Log.v("DistoX", "shot " + sh.from.name + "-" + sh.to.name + " from " + sh.from.show() + " to " + sh.to.show() );
-          NumStation st1 = sh.from;
-          NumStation st2 = sh.to;
-          if ( st1.show() && st2.show() ) {
-            h1 = (float)( st1.e * cosp + st1.s * sinp );
-            h2 = (float)( st2.e * cosp + st2.s * sinp );
-            // addFixedLine( sh.getFirstBlock(), h1, (float)(st1.v), h2, (float)(st2.v), xoff, yoff, false, true );
-            addFixedLine( sh.getFirstBlock(), h1, (float)(st1.v), h2, (float)(st2.v), false, true );
-          }
-        // } else {
-        //   Log.v("DistoX", "shot ignore extend " + sh.from.name + "-" + sh.to.name );
+        // Log.v("DistoX", "shot " + sh.from.name + "-" + sh.to.name + " from " + sh.from.show() + " to " + sh.to.show() );
+        NumStation st1 = sh.from;
+        NumStation st2 = sh.to;
+        if ( st1.show() && st2.show() ) {
+          h1 = (float)( st1.e * cosp + st1.s * sinp );
+          h2 = (float)( st2.e * cosp + st2.s * sinp );
+          // addFixedLine( sh.getFirstBlock(), h1, (float)(st1.v), h2, (float)(st2.v), xoff, yoff, false, true );
+          addFixedLine( sh.getFirstBlock(), h1, (float)(st1.v), h2, (float)(st2.v), false, true );
         }
       } 
       for ( NumSplay sp : splays ) {
@@ -4098,7 +4094,7 @@ public class DrawingWindow extends ItemDrawer
   public void updateBlockList( DBlock blk ) 
   {
     // Log.v("DistoX", "Drawing window: update Block List block " + blk.mFrom + " - " + blk.mTo ); // DATA_DOWNLOAD
-    mApp.mShotWindow.updateBlockList( blk ); // FIXME-EXTEND
+    // mApp.mShotWindow.updateBlockList( blk ); // FIXME-EXTEND this is not needed
     updateDisplay( /* true, true */ );
   }
 
@@ -4106,7 +4102,7 @@ public class DrawingWindow extends ItemDrawer
   public void updateBlockList( long blk_id )
   {
     // Log.v("DistoX", "Drawing window: update Block List block id " + blk_id ); // DATA_DOWNLOAD
-    mApp.mShotWindow.updateBlockList( blk_id ); // FIXME-EXTEND
+    // mApp.mShotWindow.updateBlockList( blk_id ); // FIXME-EXTEND this is not needed
     updateDisplay( /* true, true */ );
   }
 

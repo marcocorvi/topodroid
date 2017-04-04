@@ -10,12 +10,17 @@ TopoDroid distinguishes four kinds of shots (displayed with different colors):
 <li>[white] "leg" (the first shot of a group of repeated measurements): this shot has both the "From" and the "To" station set</li>
 <li>[grey] "repeated-leg" (the following shots of a group of leg shots): these shots do not need to have the stations set</li>
 </ol><p>
-Furthermore the background color is blueish for the last downloaded shots, and reddish for <a href="page_accuracy.htm">unreliable</a> shots, i.e. shots with "abnormal" field intensities (only DistoX2).<br>
+Background colors:
+<ul>
+<li>blueish (station): last downloaded shots</li>
+<li>reddish (data): <a href="page_accuracy.htm">unreliable</a> shots, i.e. shots with "abnormal" field intensities (only DistoX2)</li>
+<li>orange (data): short leg</li>
+</ul><br>
 <img src="shots_list.png" alt="shots list"/><p>
 
 <h4>ACTIONS</h4>
 <ul style="margin-top:0">
-<li>tap on the shot data opens shot <a href="page_shot_edit1.htm">data edit dialog</a></li>
+<li>tap on the shot data opens the shot <a href="page_shot_edit1.htm">edit dialog</a></li>
 <!--li>tap on a shot clino: shot <a href="page_shot_edit2.htm">secondary actions</a></li-->
 <li>tap on a station: show/hide splays at the station</li>
 <li>long tap on a station: select/deselect the <a href="page_current.htm">"active" station</a></li>
@@ -26,12 +31,11 @@ Furthermore the background color is blueish for the last downloaded shots, and r
 <li>DistoX data <a href="page_download.htm">download</a>. Hidden if no DistoX selected</li>
 <li><a href="page_bluetooth.htm">Bluetooth</a></li>
 <li>Data <a href="page_displaymode.htm">display mode</a></li>
-<li><u>Sketch</u> list dialog. A long tap immediately opens the most recent sketch</li>
+<li><a href="page_plot_list.htm">Sketch</a> list dialog. A long tap immediately opens the most recent sketch</li>
 <li>Survey <a href="page_survey_notes.htm">notes</a></li>
-<li>Add a shot <a href="page_man_data.htm">manually</a></li>
+<li><u>Add</u> <a href="page_man_data.htm">manual</a> shot data dialog</li>
 <li><a href="page_saved_station.htm">saved stations</a></li>
 <li><a href="page_azimuth.htm">extend reference</a></li>
-<li><u>Add</u> <a href="page_man_data.htm">manual</a> shot data dialog</li>
 </ul><br><p>
 
 <h4>Sketch dialog</h4>
@@ -69,14 +73,16 @@ If the 3D modelling is enabled there is also a button to create a new 3D model, 
   <li><i>SHOT DATA</i>
     <ul style="margin-top:0; margin-bottom:0">
     <li><i>Max shot length</i>: longer shots are "overshoots" [default 50 m, min 20 m]</li>
+    <li><i>Min leg length</i>: shorter legs are highlighted with an orange background [default 0.5 m]</li>
     <li><i>Leg tolerance</i>: the angular tolerance (percent) between consecutive shots of a leg [default 0.05, min 0]</li>
     <li><i>Min leg shots</i>: minimum number of close consecutive shots for a leg.[default 2, min 2, max 4]</li>
     <li><i>Splay vertical threshold</i> defines how the <a href="page_azimuth.htm">splay "extend"</a> is set [default 10, min 0, max 90]</li>
     <li><i>Leg vertical threshold</i> (Therion "vthreshold"): the LRUD for manually entered shots are considered West-East-North-South when the shot inclination exceeds the vertical threshold [default 80, min 0, max 90]</li>
-    <li><i>Shot extend</i>: either fixed or relative to the <a href="page_azimuth.htm">extend reference</a> [default ???]</li>
-    <li><i>Loop closure</i> error compensation. It is advisable not to do the compensation, as this allows to see graphically the misclosures, and spot possible survey errors [default "none"]. The special loop compensation based on "triangles" is for <a href="page_trilateration.htm">trilateration</a>.</li>
-    <li><i>Backsight</i> fields in the shot manual input dialog [N] [default "no"]</li>
-    <li><i>Magnetic anomaly</i> compensation. It requires backsight auto-station policy [default "off"]</li>
+    <li><i>Shot extend</i>: either fixed or relative to the <a href="page_azimuth.htm">extend reference</a> [default relative]</li>
+    <li><i>Loop closure</i> error compensation. It is advisable not to do the compensation, as this allows to see graphically the misclosures, and spot possible survey errors [default "none"]. The special loop compensation based on "triangles" is for <a href="page_trilateration.htm">trilateration</a> [E].</li>
+    <li>whether to show <i>prev/next</i> buttons in the shot edit dialog [default yes]</li>
+    <li><i>Backsight</i> fields in the shot manual input dialog [N] [default no]</li>
+    <li><i>Magnetic anomaly</i> compensation. It requires backsight auto-station policy [default off]</li>
     <li><i>Timer</i>: seconds of delay before measuring directions with the Android sensors [default 10, min 0]</li>
     <li><i>Beep volume</i>: timer beep volume [N] [default 50, min 10, max 100]</li>
     </ul>

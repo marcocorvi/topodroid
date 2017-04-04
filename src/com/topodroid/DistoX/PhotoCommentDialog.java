@@ -37,7 +37,7 @@ public class PhotoCommentDialog extends MyDialog
   private EditText mETcomment;     // photo comment
   private Button   mButtonOK;
   private CheckBox mCamera;        // whether to use camera app
-  // private Button   mButtonCancel;
+  private Button   mButtonCancel;
 
   /**
    * @param context   context
@@ -58,32 +58,31 @@ public class PhotoCommentDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
     // TDLog.Log(  TDLog.LOG_PHOTO, "PhotoCommentDialog onCreate" );
-    // Log.v(  TopoDroidApp.TAG, "PhotoCommentDialog onCreate" );
     setContentView(R.layout.photo_comment_dialog);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
     mETcomment = (EditText) findViewById(R.id.photo_comment_comment);
     mButtonOK  = (Button) findViewById(R.id.photo_comment_ok );
+    mButtonCancel = (Button) findViewById(R.id.photo_comment_cancel );
     mCamera    = (CheckBox) findViewById(R.id.photo_camera );
-    // mButtonCancel = (Button) findViewById(R.id.photo_comment_cancel );
 
     setTitle( R.string.title_photo_comment );
 
     mButtonOK.setOnClickListener( this );
-    // mButtonCancel.setOnClickListener( this );
+    mButtonCancel.setOnClickListener( this );
   }
 
   public void onClick(View v) 
   {
     Button b = (Button) v;
     // TDLog.Log(  TDLog.LOG_INPUT, "PhotoCommentDialog onClick() " + b.getText().toString() );
-    // Log.v(  TopoDroidApp.TAG, "PhotoCommentDialog onClick() " + b.getText().toString() );
 
     if ( b == mButtonOK && mETcomment.getText() != null ) {
       // TDLog.Log( TDLog.LOG_PHOTO, "set photo comment " + mETcomment.getText().toString() );
-      // Log.v( TopoDroidApp.TAG, "set photo comment " + mETcomment.getText().toString() );
       // mParent.insertPhoto( mETcomment.getText().toString() );
       mParent.doTakePhoto( mETcomment.getText().toString(), ( mCamera.isChecked() ? 0 : 1 ) );
+    // } else if ( b == mButtonCancel ) {
+      /* nothing */
     }
     dismiss();
   }
