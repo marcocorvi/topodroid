@@ -168,7 +168,7 @@
     <!-- OK string name="line_delete">Удалить линию</string -->
 
     <string name="error_azimuth_required">Требуется азимут</string>
-    <string name="error_length_required">Требуется длинна</string>
+    <string name="error_length_required">Требуется длина</string>
     <string name="error_clino_required">Требуется угол</string>
     <string name="error_comment_required">Требуется комментарий</string>
     <string name="error_begin_required">Требуется начальный адрес</string>
@@ -365,7 +365,7 @@
     <string name="shot_delete">Удалить сегмент ?</string>
     <string name="shot_from">№ ОТ</string>
     <string name="shot_info">Введите данные измерений</string>
-    <!-- UNUSED string name="shot_length">длинна</string -->
+    <!-- UNUSED string name="shot_length">длина</string -->
     <string name="shot_note">заметки</string>
     <string name="shot_not_found">Сегмент не найден</string>
     <string name="shot_reverse">развернуть</string>
@@ -422,20 +422,20 @@
     <string name="stat_stddev_dip">Накл. ст.откл %1$.1f град. (среднее %2$.1f град.)</string>
     <string name="stat_component">Компоненты %1$d</string>
     <string name="stat_depth">Глубина %1$.1f %2$s %3$.1f %4$s"</string>
-    <string name="stat_duplicate">Дублированные пикеты %1$d длинна: %2$.1f %3$s</string>
-    <string name="stat_leg">Отрезки %1$d общая длинна: %2$.1f %3$s</string>
-    <string name="stat_length">Длинна %1$.1f %2$s</string>
+    <string name="stat_duplicate">Дублированные пикеты %1$d длина: %2$.1f %3$s</string>
+    <string name="stat_leg">Отрезки %1$d общая длина: %2$.1f %3$s</string>
+    <string name="stat_length">Длина %1$.1f %2$s</string>
     <string name="stat_loop">Петли %1$d</string>
     <string name="stat_origin">Нулевой пикет: %1$s</string>
     <string name="stat_azimuth">Азимут проекции разреза-развёртки: %1$.1f</string>
     <string name="stat_shot">Пикеты  %1$d,   Дублированные %2$d,   Поверхность %3$d</string>
     <string name="stat_splay">Боковых замеров %1$d</string>
     <string name="stat_station">Пикеты %1$d</string>
-    <string name="stat_surface">Поверхн. пикеты %1$d длинна: %2$.1f %3$s</string>
+    <string name="stat_surface">Поверхн. пикеты %1$d длина: %2$.1f %3$s</string>
     <string name="stat_wens">З %1$.0f  В %2$.0f  С %3$.0f  Ю %4$.0f [%5$s]"</string>
     <string name="stat_angle_error">Угловые ошибки %1$.2f ± %2$.2f"</string>
     <string name="shot_title">ПИКЕТЫ %1$s - %2$s"</string>
-    <string name="shot_data">Длинна %1$.2f  Азимут %2$.1f  Угол %3$.1f"</string>
+    <string name="shot_data">Длина %1$.2f  Азимут %2$.1f  Угол %3$.1f"</string>
 
     <string name="hide_blank">Пустые замеры</string>
     <string name="hide_leg">Повторные измерения</string>
@@ -547,7 +547,7 @@
     <string name="sketch_mode_all">Все пикеты</string>
     <string name="sketch_delete">Удалить 3D модель ?</string>
     <string name="sketch_no_split">Не точно. Уменьшите боковую макс. длинну чтобы уточнить.</string>
-    <string name="length">Длинна [м]</string>
+    <string name="length">Длина [м]</string>
     <string name="azimuth">Азимут [грд]</string>
     <string name="clino">Угол [грд]</string>
 
