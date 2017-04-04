@@ -67,15 +67,19 @@ It may happen that the imported sketch is not aligned with the survey data. In t
 TopoDroid can export survey data in <i>Polygon</i> format. 
 Fixed points are exported as lat-long.<br><p>
 
+<b>GHTopo</b> (.gtx)<br>
+TopoDroid can export survey data in <i>GHTopo</i> format (partially tested).<br><p>
+
 <b>Grottolf</b> (.grt)<br>
-TopoDroid can export survey data in <i>Grottolf</i> format. 
+TopoDroid can export survey data in <i>Grottolf</i> format (untested). 
 If the first station has geographical coordinates these are exported, otherwise local coordinates are used.
 The profile at the stations are computed by projecting the splay shots onto a vertical plane perpendicular to the
 leg.<br><p>
 
 <b>Survex</b> (.svx)<br>
 Survey data can be exported as <i>Survex</i> files.<br>
-Data units are according to the user options.<br>
+Data units are according to the user options.<br><p>
+
 Settings:<ul style="margin-top=0">
 <li>line termination can be either Unix or Windows</li>
 <li>splay shots can be exported with a named TO station (named as the FROM station with a letter appended)</li>
@@ -89,15 +93,17 @@ Settings:<ul style="margin-top=0">
 <li>line termination can be either Unix or Windows</li>
 </ul><p>
 
-
 <b>VisualTopo</b> (.tro)<br>
 <i>VisualTopo</i> data file are supported both in import and in export.<br>
 Import VisualTopo files must have extension either ".tro" or ".TRO".<br>
 Data units are 'meters' and 'degrees'.<br><p>
 
 <b>Walls</b> (.srv)<br>
-Survey data can be exported as <i>Walls</i> files.<br>
+Survey data can be exported as <i>Walls</i> files (partially tested).<br>
 Data units are according to the user options.<br><p>
+
+<b>WinKarst</b> (.sur)<br>
+Survey data can be exported as <i>WinKarst</i> files (untested).<br><p>
 
 <b>PLT</b> (.plt)<br>
 Survey data can be exported as track file (<i>OziExplorer</i>) if you have georeferenced a station.
@@ -175,6 +181,7 @@ Settings:<ul style="margin-top=0">
 the section drawing is inserted in the export, at the "section" point</li>
 <li><u>auto-stations</u>: if enabled all stations are included in the export,
 otherwise only the user-chosen stations are included</li>
+<li><u>SVG in HTML</u>: if checked the svg is embedded in an HTML document</li>
 </ul><p>
 
 <b>PNG</b> (.png)<br>

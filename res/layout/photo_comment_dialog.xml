@@ -46,7 +46,7 @@
         style="@style/button_default"
         android:text="@string/button_ok"
       />
-      <Button android:id="@+id/photo_comment__cancel"
+      <Button android:id="@+id/photo_comment_cancel"
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
           android:layout_marginLeft="10sp" 
