@@ -224,9 +224,9 @@
     <string name="no_device_found">Nem talált eszközt</string>
     <string name="no_gms">Nincsenek kalibrációs adatok.\nTöltsd le az adatokat </string>
     <string name="no_geo_station">Hiba: nincs geolokalizált mérésipont</string>
-    <string name="no_leg_intersection">A szelvény nem keresztez mérést???</string>
+    <string name="no_leg_intersection">A szelvény nem keresztez poligont</string>
     <string name="no_location_data">Nincs hely adat</string>
-    <string name="no_paired_device">Nincs párosított eszköz.\nKeress és párosíts egy DistoX-et???</string>
+    <string name="no_paired_device">Nincs párosított eszköz.\nKeress és párosíts egy DistoX-et</string>
     <string name="no_photos">A felméréshez nincsen fotó</string>
     <string name="no_plots">A felméréshez nincsen vázlat.\nHasználd a Hozzáad gombot, hogy létrehozz egyet</string>
     <string name="no_profile_overview">Nincs áttekintő a vetített szelvényekhez</string>
@@ -620,7 +620,7 @@
     <string name="help_refs">Vázlat referencia kiválasztása</string>
     <string name="help_rename">Felmérés nevének megváltoztatása</string>
     <string name="help_plot_rename">Vázlat nevének megváltoztatása</string>
-    <!-- TODO string name="help_plot_switch">Vázlat nézet átváltása???</string -->
+    <!-- TODO string name="help_plot_switch">Vázlat nézet átváltása</string -->
     <string name="help_stats">Felmérési statisztikák párbeszédpanel</string>
     <string name="help_save_plot">Vázlat exportálása</string>
     <!-- UNUSED string name="help_tdr2th2">Convert sketch binary files to th2</string -->
@@ -686,7 +686,7 @@
     <string name="help_refine_triangle">Felület finomítása a hosszú oldalak mentén</string>
   
 
-    <string name="title_azimut">Vonatkozási rendszer???</string>
+    <string name="title_azimut">Vonatkozási rendszer</string>
     <!-- TODO string name="title_audio">Hangjegyzet</string -->
     <string name="title_calib">Kalibrációk</string>
     <string name="title_coverage">Kalibrációs adatok eloszlása</string>
