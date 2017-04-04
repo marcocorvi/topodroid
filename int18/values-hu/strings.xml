@@ -879,8 +879,8 @@
   <string name="pref_prev_next_summary">Előző/Köv. gombok a mérés párbeszéd ablakban</string>
   <string name="pref_mag_anomaly_title">Mágneses anomália</string>
   <string name="pref_mag_anomaly_summary">Helyi mágneses anomália kiegyenlítése</string>
-  <string name="pref_azimuth_manual_title">Állítható vonatkozási rendszer???</string>
-  <string name="pref_azimuth_manual_summary">Állítható, vagy fix B/J vonatkozási rendszer???</string>
+  <string name="pref_azimuth_manual_title">Állítható vonatkozási rendszer</string>
+  <string name="pref_azimuth_manual_summary">Állítható, vagy fix B/J vonatkozási rendszer</string>
 
   <string name="pref_team_title">Csoport</string>
   <string name="pref_team_summary">Felmérő csoport</string>
@@ -1024,7 +1024,7 @@
   <string name="pref_sketchLineStep_title">Max. oldalhossz</string>
   <string name="pref_sketchLineStep_summary">Háromszög oldalainak maximális hossza </string>
   <string name="pref_sketchLineStep_message">Háromszög oldalainak maximális hossza [m]</string>
-  <string name="pref_sketchBorderStep_title">Határvonal osztásköze???</string>
+  <string name="pref_sketchBorderStep_title">Határvonal osztásköze</string>
   <string name="pref_sketchBorderStep_summary">Távolság a szerkesztővonal pontjai között</string>
   <string name="pref_sketchBorderStep_message">Távolság a szerkesztővonal pontjai között</string>
   <string name="pref_sketchSectionStep_title">Szelvény köz</string>
