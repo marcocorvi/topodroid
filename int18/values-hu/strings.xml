@@ -1076,8 +1076,8 @@
   <string name="pref_algo_min_delta_summary">Min-algo group G^M.x súlyozása</string>
   <string name="pref_algo_min_delta_message">Min-algo group G^M.x súlyozása</string>
 
-  <string name="pref_log_stream_summary">Log output stream???</string>
-  <string name="pref_log_stream_title">Log stream???</string>
+  <string name="pref_log_stream_summary">Naplózás a system log-ba</string>
+  <string name="pref_log_stream_title">Naplózás</string>
   <string name="pref_log_bt">Bluetooth</string>
   <string name="pref_log_bezier">Bézier görbe</string>
   <string name="pref_log_calib">Kalibráció</string>
