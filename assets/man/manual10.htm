@@ -1,38 +1,42 @@
 <html><body>
 <h3>[10] SKETCH DRAWING</h3>
 
-The canvas shows the midline with the splay shots.  It can be moved around dragging it with one (or two) finger(s), zoom in/out with two fingers. It is not possible to rotate the canvas: the plan-view North and the profile-view vertical are upward.<br><p>
+The canvas shows the midline with the splay shots.  It can be moved around dragging it with one (or two) finger(s), zoom in/out with two fingers.
+The plan-view North and the profile-view vertical are upward.
+It is not possible to rotate the canvas.<br><p>
 
-Tap the <u>Draw</u> button: the app goes in <b>draw</b> mode and the button is highlighted with a white border. Now you can draw with your finger (two fingers still move and zoom). With the <u>undo</u> and <u>redo</u> button you cancel the last drawn or deleted objects and put them back again.<br><p>
+Tap the <u>Draw</u> button: the app goes in <b>draw</b> mode and the button is highlighted with a white border. Now you can draw with your finger (two fingers still pan and zoom). With the <u>undo</u> and <u>redo</u> button you cancel the last drawn or deleted objects and put them back again.<br><p>
 
 While in draw mode, the sketch can also be moved by dragging it from the side of the canvas and zoomed with zoom controls if these function have been enabled through the settings. This lets you work with a stylus without the need for two-finger actions.<br><p>
 
-The <u>drawing tool picker</u> button allows you to pick another line style, or an "area" style (a closed region), or iconic symbols. See the <a href="page_tools.htm">drawing tool palette</a>.<br><p>
+With the <a href="page_tools.hm">tool picker</a> button you change the drawing tool: line style, or "area" style (a shaded region), or iconic symbol.<br><p>
 
 <b>Point tools</b><br>
 Point tools are iconic symbols. To add a symbol to the sketch tap the canvas where you want to place it.
-For "label" point you must also enter the label text in the coming dialog.<br><p>
+With "labels" you must also enter the text in the coming dialog.<br><p>
 
 <b>Line tools</b><br>
-Line tools are different line-drawing styles. 
+Line tools are line-drawing styles. 
 Lines have an orientation (when a line is selected, in edit mode, its orientation is shown by a yellow tick pointing to the left).<br><p>
 
 The line thickness is one of the <u>Settings</u>. There are separate options for the centerline/splays and the drawing line thickness.<br><p>
 
 The "section" line is special as it is always made into a straight segment with a short tick showing the direction of view.
-A "section" point is automatically added near the end of the section line. This point as the "scrap" option preset to the line scrap and is deleted when you delete the section line.<br><p>
+A "section" point is automatically added near the end of the section line. This point has the "scrap" option preset to the line scrap and is deleted when you delete the section line.<br><p>
 
 <b>Area tools</b><br>
-Area tools are closed region shaders. To draw an area trace its contour. You do not need to be very precise as TopoDroid will close it.<br>
+Area tools are region shaders. To draw an area trace its contour. You do not need to be very precise as TopoDroid will close it.<br>
 The water area is special because it is "closed horizontally" in the profile sketch and in the cross sections, because the surface of a pond is usually horizontal. To draw a water area (in the profile sketch) trace only the lower bottom line of the pond.<br><p>
 
 <b>Undo, redo, erase and edit</b><br><p>
 
-You can also correct mistakes in the drawing. The <u>Undo</u> button lets you remove the last item. What if you need to erase a line or a symbol that you drew long ago, but do not want to loose all the intermediate work? You have two choices: the <u>Erase</u> and the <u>Edit</u> button.<br><p>
+Drawing mistakes can be corrected. The <u>Undo</u> button removes the last item. To erase a line or a symbol drawn long ago, without loosing all the intermediate work, there are two choices: the <u>Erase</u> mode and the <u>Edit</u> mode.<br><p>
 
-The <u>Eraser</u> is very intuitive: it cancels everything you pass your finger over. It is just like a real eraser on the paper: if you pass it in the middle of a line it erases only the central portion (thus leaving two lines). You can however filter the erasing action to make it erase only items of one class: points, lines, or areas.<br><p>
+The <u>Eraser</u> is very intuitive: it cancels everything you pass your finger over. Just like a real eraser on the paper: if you pass it in the middle of a line it erases only the central portion (thus leaving two lines). However the erasing can be filtered to erase only items of one class: points, lines, or areas.<br><p>
 
-The <u>Edit</u> [A] button is not so intuitive, but it is very powerful, as it allows pointwise editing operations. In this mode all the drawn items are shown as little green dots. You have to select the item to edit by tapping on it. If there are several items close together, they will all be selected (and shown with a pink circle), but only one will be chosen for editing (big green circle). It may not be what you wanted, but never mind: move among the selected point with the <u>Prev</u>-<u>Next</u> button.<br>
+The <u>Edit</u> [A] button is not so intuitive, but it is very powerful, as it allows pointwise editing operations. In this mode all the drawn items are shown as little green dots. To select the item to edit tap on one of its green dots (icons have only one dot). If there are several dots close together, they will all be selected (and shown with a pink circle), but only one will be chosen for editing (big green circle). If it is not what you wanted, move among the selected points with the <u>Prev</u>-<u>Next</u> buttons.<br>
+
+The edit tool can be filtered to select only dots of one class: points, lines, areas, shots, or stations.<br><p>
 
 The size of the green dots and the selection radius are two <u>Settings</u>.<br><p>
 
@@ -49,11 +53,11 @@ The second to the right button applies only to drawing items and has a drop-down
 <ul style="margin-top=0">
 <li><i>Snap to nearby point</i>: move the point to coincide with the closest nearby point (no action if there is no nearby point) [points, lines, areas]</li>
 <li><i>Snap to nearby line</i> move to point to coincide with the closest line point, and replace the pieces of the area border before and after it, with pieces that follow the line path [areas]</li>
-<li><i>Split the point in two</i>, actually duplicating it and inserting a point in the line/area [lines, areas]</li>
-<li><i>Cut the line at the point</i>, thus making two lines [lines]</li>
-<li><i>Straighten the line segment</i> removes the control points [lines, areas]</li>
-<li><i>Smooth the line segment</i> inserts control points. These are put at 1/3 and 2/3 along the segment. Further editing can move them and give any wanted curvature to the segment. [lines, areas]</li>
-<li><i>Remove the line/area point</i> [lines, areas]</li>
+<li><i>duplicate</i> the point [lines, areas]. The new point is inserted "after" the selected point. It is added to the selection set, and you can select to it with the Prev-Next buttons.</li>
+<li><i>Cut</i> the line at the point, thus making two lines [lines]</li>
+<li><i>Straighten</i> the line segment removing the control points [lines, areas]</li>
+<li><i>Smoothen</i> the line segment inserting control points at 1/3 and 2/3 the segment length. Further editing can move them and give any wanted curvature to the segment. [lines, areas]</li>
+<li><i>Remove</i> the line/area point [lines, areas]. The selected line/area point can be removed also with a long-tap on the "delete" button.</li>
 </ul><br><p>
 
 <h4>Range selection modes</h4>
@@ -64,7 +68,7 @@ You select first one endpoint of the range, then the other endpoint.
 
 The range is highlighted orange. Its midpoint gets the big green dot, and it controls how the line range is deformed:
 the points on the range are shifted by an amount that depends on the distance from the midpoint. 
-As a rule of thumb the middle third of the range is moved and the first and last thirds remain almost unchanged.
+The range can have hard or soft bounds. With hard bounds the range is moved as a whole. With soft bounds the points at the ends of the range are moved by an amount proportional to their distance from the end.
 <br><p>
 
 
