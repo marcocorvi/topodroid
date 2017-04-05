@@ -134,10 +134,10 @@
     <string name="file_not_found">Fájl nem található</string>
     <string name="import_calib_ok">Kalibráció importálása sikerült</string>
     <!-- TODO string name="import_calib_no_header">Calib. file: bad header</string -->
-    <!-- TODO string name="import_calib_already">Calib. already exists</string -->
-    <!-- TODO string name="import_calib_mismatch">Calib.-device mismatch</string -->
-    <!-- TODO string name="import_calib_no_data">Calib. file: no data</string -->
-    <!-- TODO string name="import_calib_io_error">Calib. file: read error</string -->
+    <!-- TODO string name="import_calib_already">Kalib. már létezik</string -->
+    <!-- TODO string name="import_calib_mismatch">Kalib.-eszköz nem egyezik</string -->
+    <!-- TODO string name="import_calib_no_data">Kalib. fájl: nincs adat</string -->
+    <!-- TODO string name="import_calib_io_error">Kalib. fájl: olvasási hiba</string -->
     <string name="import_zip_ok">Zip fájl importálása sikerült</string>
     <string name="import_zip_wait">A zip fájl importálása több időt vesz igénybe. Kérem várjon &#8230;</string>
     <!-- UNUSED string name="sketch_saving">Saving sketch &#8230; please wait &#8230;</string -->
