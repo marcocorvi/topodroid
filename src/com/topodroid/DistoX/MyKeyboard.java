@@ -110,7 +110,7 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
   { 
     if ( kbd == null ) return;
     if ( kbd.addFlag( e, flag ) == null ) {
-      // Log.v(TAG, "set listeners for " + e.getText().toString() );
+      // Log.v("DistoX", "set listeners for " + e.getText().toString() + " flag " + flag );
 
       if ( ( flag & FLAG_NOEDIT ) == FLAG_NOEDIT ) {
         e.setBackgroundColor( TDColor.MID_GRAY );

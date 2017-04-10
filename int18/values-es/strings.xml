@@ -44,6 +44,7 @@
     <!-- UNUSED string name="missing_warning">Faltan los siguientes símbolos en el dibujo.\n</string -->
     <string name="failed_snap_to_line">No hay línea cercana al borde</string>
     <string name="failed_snap_to_point">No hay punto cercano al borde</string>
+    <!-- TODO string name="failed_snap_to_splays">No close splay to snap the line to</string -->
 
     <string name="calibration_title">Calibración de instrumentos</string>
     <string name="calibration_length">Cinta</string>
@@ -279,6 +280,7 @@
 
     <string name="popup_join_pt">Unir al punto más cercano</string>
     <string name="popup_snap_ln">Ajustar a la línea más cercana</string>
+    <!-- TODO string name="popup_snap_to_splays">Snap to nearby splays</string -->
     <string name="popup_split_pt">Añadir punto</string>
     <string name="popup_split_ln">Separar línea</string>
     <string name="popup_sharp_pt">Segmento recto</string>

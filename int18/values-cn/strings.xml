@@ -44,6 +44,7 @@
     <!-- UNUSED string name="missing_warning">缺少以下绘图工具.\n</string -->
     <string name="failed_snap_to_line">不能与面边界合并</string>
     <string name="failed_snap_to_point">不能与点合并</string>
+    <!-- TODO string name="failed_snap_to_splays">No close splay to snap the line to</string -->
 
     <string name="calibration_title">设备校准</string>
     <string name="calibration_length">测尺</string>
@@ -279,6 +280,7 @@
 
     <string name="popup_join_pt">接至附近点</string>
     <string name="popup_snap_ln">接至附近线</string>
+    <!-- TODO string name="popup_snap_to_splays">Snap to nearby splays</string -->
     <string name="popup_split_pt">复制点</string>
     <string name="popup_split_ln">在线上的点剪切</string>
     <string name="popup_sharp_pt">分段拉直</string>

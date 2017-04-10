@@ -33,7 +33,7 @@
         android:text="E"
         android:layout_marginRight="10dp"
         />
-      <EditText android:id="@+id/edit_long" 
+      <EditText android:id="@id/edit_long" 
         android:layout_marginTop="2dp"
         android:layout_width="0dp"
         android:layout_weight="60"
@@ -60,7 +60,7 @@
         android:text="N"
         android:layout_marginRight="10dp"
         />
-      <EditText android:id="@+id/edit_lat"
+      <EditText android:id="@id/edit_lat"
         android:layout_marginTop="2dp"
         android:layout_width="0dp"
         android:layout_weight="60"
@@ -88,7 +88,7 @@
         android:text="@string/h_ellipsoid"
         />
       <EditText
-        android:id="@+id/edit_alt"
+        android:id="@id/edit_alt"
         android:layout_width="0dp"
 	android:layout_weight="40"
         android:layout_height="wrap_content" 
@@ -96,7 +96,7 @@
         android:singleLine="true"
         android:hint="@string/h_ellipsoid_hint"
         android:scrollHorizontally="true"
-        android:nextFocusDown="@id/top"
+        android:nextFocusDown="@+id/edit_asl"
         />
   </LinearLayout>
   		
@@ -116,7 +116,7 @@
         android:text="@string/h_geoid"
         />
       <EditText
-        android:id="@+id/edit_asl"
+        android:id="@id/edit_asl"
         android:layout_width="0dp"
 	android:layout_weight="40"
         android:layout_height="wrap_content" 

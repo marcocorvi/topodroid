@@ -44,6 +44,7 @@
     <!-- UNUSED string name="missing_warning">The following drawing tools are missing.\n</string -->
     <string name="failed_snap_to_line">No close line-point to snap the area border to</string>
     <string name="failed_snap_to_point">No close point to snap the point to</string>
+    <string name="failed_snap_to_splays">No close splay to snap the line to</string>
 
     <string name="calibration_title">Instruments calibration</string>
     <string name="calibration_length">Tape</string>
@@ -281,6 +282,7 @@
 
     <string name="popup_join_pt">Snap to nearby point</string>
     <string name="popup_snap_ln">Snap to nearby line</string>
+    <string name="popup_snap_to_splays">Snap to nearby splays</string>
     <string name="popup_split_pt">Duplicate point</string>
     <string name="popup_split_ln">Cut line at point</string>
     <string name="popup_sharp_pt">Straighten segment</string>

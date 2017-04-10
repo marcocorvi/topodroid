@@ -3130,32 +3130,57 @@ public class DrawingWindow extends ItemDrawer
           }
         } );
   
-      // ----- SNAP AREA BORDER TO CLOSE LINE
+      // ----- SNAP LINE to splays AREA BORDER to close line
       //
-      text = getString(R.string.popup_snap_ln);
-      if ( len < text.length() ) len = text.length();
-      Button myTextView1 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
-        new View.OnClickListener( ) {
-          public void onClick(View v) {
-            if ( mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // snap to nearest line
-              switch ( mDrawingSurface.snapHotItemToNearestLine() ) {
-                case 1:  // single point copy
-                case 0:  // normal
-                case -1: // no hot point
-                case -2: // not snapping area border
-                  modified();
-                  break;
-                case -3: // no line close enough
-                  Toast.makeText( context, R.string.failed_snap_to_line, Toast.LENGTH_SHORT ).show();
-                  break;
-                default:
-                  break;
+      Button myTextView1 = null;
+      if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE ) {
+        text = getString( R.string.popup_snap_to_splays );
+        if ( len < text.length() ) len = text.length();
+        myTextView1 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
+          new View.OnClickListener( ) {
+            public void onClick(View v) {
+              if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE ) { // snap to nearest splays
+                switch ( mDrawingSurface.snapHotItemToNearestSplays( TDSetting.mCloseCutoff + 3*mSelectSize / mZoom ) ) {
+                  case 0:  // normal
+                    modified();
+                    break;
+                  case -1:
+                  case -2:
+                  case -3: // no splay close enough
+                    Toast.makeText( context, R.string.failed_snap_to_splays, Toast.LENGTH_SHORT ).show();
+                    break;
+                  default:
+                    break;
+                }
               }
+              dismissPopupEdit();
             }
-            dismissPopupEdit();
-          }
-        } );
-  
+          } );
+      } else {
+        text = getString( R.string.popup_snap_ln );
+        if ( len < text.length() ) len = text.length();
+        myTextView1 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
+          new View.OnClickListener( ) {
+            public void onClick(View v) {
+              if ( mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // snap to nearest line
+                switch ( mDrawingSurface.snapHotItemToNearestLine() ) {
+                  case 1:  // single point copy
+                  case 0:  // normal
+                  case -1: // no hot point
+                  case -2: // not snapping area border
+                    modified();
+                    break;
+                  case -3: // no line close enough
+                    Toast.makeText( context, R.string.failed_snap_to_line, Toast.LENGTH_SHORT ).show();
+                    break;
+                  default:
+                    break;
+                }
+              }
+              dismissPopupEdit();
+            }
+          } );
+      } 
       // ----- SPLIT LINE/AREA POINT IN TWO
       //
       text = getString(R.string.popup_split_pt);

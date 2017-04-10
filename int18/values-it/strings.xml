@@ -44,6 +44,7 @@
     <!-- UNUSED string name="missing_warning">Mancano i seguenti prototipi grafici.\n</string -->
     <string name="failed_snap_to_line">Nessuna linea su cui deformare il bordo area</string>
     <string name="failed_snap_to_point">Nessun punto vicino su cui muovere il punto</string>
+    <!-- TODO string name="failed_snap_to_splays">No close splay to snap the line to</string -->
 
     <string name="calibration_title">Strumenti di calibrazione</string>
     <string name="calibration_length">Fettuccia</string>
@@ -280,6 +281,7 @@
 
     <string name="popup_join_pt">Sposta al punto vicino</string>
     <string name="popup_snap_ln">Segui la linea vicina</string>
+    <!-- TODO string name="popup_snap_to_splays">Snap to nearby splays</string -->
     <string name="popup_split_pt">Sdoppia il punto</string>
     <string name="popup_split_ln">Taglia la linea</string>
     <string name="popup_sharp_pt">Rendi diritto</string>

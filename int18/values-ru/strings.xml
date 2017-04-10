@@ -44,6 +44,7 @@
     <!-- UNUSED string name="missing_warning">Отсутствуют следующие инструменты для рисования.\n</string -->
     <string name="failed_snap_to_line">Отсутствует ближайшая точка-линии для закрепления границы зоны</string>
     <string name="failed_snap_to_point">Отсутствует ближайшая точка для закрепления объекта</string>
+    <!-- TODO string name="failed_snap_to_splays">No close splay to snap the line to</string -->
 
     <string name="calibration_title">Корекция измерений выполненых вручную</string>
     <string name="calibration_length">Рулетка</string>
@@ -281,6 +282,7 @@
 
     <string name="popup_join_pt">Привязать к ближайшей точке</string>
     <string name="popup_snap_ln">Привязать к ближайшей линии</string>
+    <!-- TODO string name="popup_snap_to_splays">Snap to nearby splays</string -->
     <string name="popup_split_pt">Дублировать точку</string>
     <string name="popup_split_ln">Разорвать линию на точке</string>
     <string name="popup_sharp_pt">Спрямить сегмент</string>

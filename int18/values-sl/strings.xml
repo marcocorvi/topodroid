@@ -44,6 +44,7 @@
     <!-- UNUSED string name="missing_warning">Mancano i seguenti prototipi grafici.\n</string -->
     <string name="failed_snap_to_line">Manjkajoča linija za omejitev prostora</string>
     <string name="failed_snap_to_point">Manjkajoča oporna točka</string>
+    <!-- TODO string name="failed_snap_to_splays">No close splay to snap the line to</string -->
 
     <string name="calibration_title">Pripomočki za kalibracijo</string>
     <string name="calibration_length">Dolžina</string>
@@ -283,6 +284,7 @@
 
     <string name="popup_join_pt">Premakni na bližnjo točko</string>
     <string name="popup_snap_ln">Sledi bližnji črti</string>
+    <!-- TODO string name="popup_snap_to_splays">Snap to nearby splays</string -->
     <string name="popup_split_pt">Podvoji točko</string>
     <string name="popup_split_ln">Presekaj črto</string>
     <string name="popup_sharp_pt">Prikaži naravnost</string>

@@ -44,6 +44,7 @@
     <!-- UNUSED string name="missing_warning">Os seguintes símbolos são desconhecidos.\n</string -->
     <string name="failed_snap_to_line">Nenhum ponto de fechamento de linha para atrair a borda da área</string>
     <string name="failed_snap_to_point">Nenhum ponto de fechamento para atrair o ponto</string>
+    <!-- TODO string name="failed_snap_to_splays">No close splay to snap the line to</string -->
 
     <string name="calibration_title">Calibração de instrumentos</string>
     <string name="calibration_length">Trena</string>
@@ -280,6 +281,7 @@
 
     <string name="popup_join_pt">Juntar ao ponto mais próximo</string>
     <string name="popup_snap_ln">Juntar à linha mais próxima</string>
+    <!-- TODO string name="popup_snap_to_splays">Snap to nearby splays</string -->
     <string name="popup_split_pt">Duplicar ponto</string>
     <string name="popup_split_ln">Corta a linha no ponto</string>
     <string name="popup_sharp_pt">Deixar segmento reto</string>

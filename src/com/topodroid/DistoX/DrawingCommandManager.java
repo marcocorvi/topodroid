@@ -1776,7 +1776,124 @@ public class DrawingCommandManager
     }
     return true;
   }
+
+  class NearbySplay
+  {
+    float dx, dy;
+    LinePoint pt; // point
+    float llen, rlen;
+
+    NearbySplay( float xx, float yy, LinePoint lp )
+    {
+      dx = xx;
+      dy = yy;
+      pt = lp;
+    }
+  }
   
+  // return 0 ok
+  //       -1 no hot item
+  //       -2 not line
+  //       -3 no splay
+  int snapHotItemToNearestSplays( float dthr )
+  {
+    SelectionPoint sp = mSelected.mHotItem;
+    if ( sp == null ) return -1;
+    if ( sp.type() != DrawingPath.DRAWING_PATH_LINE ) return -2;
+
+    DrawingPath item = sp.mItem;
+    DrawingLinePath line = (DrawingLinePath)item;
+
+    ArrayList< NearbySplay > splays = new ArrayList< NearbySplay >();
+    for ( DrawingPath fxd : mSplaysStack ) {
+      float x = fxd.x2;
+      float y = fxd.y2;
+      float dmin = dthr;
+      LinePoint lpmin = null;
+      for ( LinePoint lp2 = line.mFirst; lp2 != null; lp2=lp2.mNext ) {
+        float d = lp2.distance( x, y );
+        if ( d < dmin ) {
+          dmin = d;
+          lpmin = lp2;
+        } else if ( lpmin != null ) { // if distances increase after a good min, break
+          splays.add( new NearbySplay( fxd.x2 - lpmin.mX, fxd.y2 - lpmin.mY, lpmin ) );
+          break;
+        }
+      }
+    }
+    // Log.v("DistoX", "Nearby splays " + splays.size() );
+    int ks = splays.size();
+    if ( ks == 0 ) return -3;
+
+    int k = 0; // partition of unity
+    float len = 0.001f;
+    LinePoint lp1 = line.mFirst;
+    float dist[ ] = new float[ line.size() ];
+    int k0 = 0;
+    for ( LinePoint lp2 = line.mFirst; lp2 != null; lp2 = lp2.mNext ) {
+      dist[k0] = lp1.distance( lp2 );
+      len += dist[k0];
+      ++k0;
+
+      int kk = k;
+      for ( ; kk<ks; ++kk ) if ( lp2 == splays.get(kk).pt ) break;
+      if ( kk < ks ) {
+        if ( kk != k ) {
+          NearbySplay nbs = splays.remove( kk );
+          splays.add( k, nbs );
+        }
+        splays.get(k).llen = len;
+        if ( k > 0 ) splays.get( k-1 ).rlen = len;
+        len = 0;
+        ++ k;
+      }
+      lp1 = lp2;
+    }
+    len += 0.001f;
+    splays.get( k-1 ).rlen = len;
+
+    //   |----------*--------*-----
+    //      llen   sp1 rlen
+    //                 llen sp2 rlen
+
+    k0 = 0;
+    int kl = -1;
+    int kr = 0;
+    len = 0;
+    LinePoint lp2 = line.mFirst;
+    NearbySplay spr = null;
+    for ( NearbySplay spl : splays ) {
+      while ( lp2 != spl.pt ) {
+        len += dist[k0];
+        float dx = len/spl.llen * spl.dx;
+        float dy = len/spl.llen * spl.dy;
+        if ( spr != null ) {
+          dx += (1 - len/spr.rlen) * spr.dx;
+          dy += (1 - len/spr.rlen) * spr.dy;
+        }
+        lp2.shiftBy( dx, dy );
+        lp2 = lp2.mNext;
+        ++ k0;
+      }
+      lp2.shiftBy( spl.dx, spl.dy );
+      spr = spl;
+      lp2 = lp2.mNext;
+      ++ k0;
+      len = 0;
+    }
+    while ( lp2 != null ) {
+      len += dist[k0];
+      float dx = (1 - len/spr.rlen) * spr.dx;
+      float dy = (1 - len/spr.rlen) * spr.dy;
+      lp2.shiftBy( dx, dy );
+      lp2 = lp2.mNext;
+      ++ k0;
+    }
+    line.retracePath();
+
+    return 0;
+  }
+
   // return error codes
   //  -1   no selected point
   //  -2   selected point not on area border

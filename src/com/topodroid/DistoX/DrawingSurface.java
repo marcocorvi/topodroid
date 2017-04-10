@@ -485,6 +485,7 @@ public class DrawingSurface extends SurfaceView
   boolean moveHotItemToNearestPoint() { return commandManager.moveHotItemToNearestPoint(); }
   
   int snapHotItemToNearestLine() { return commandManager.snapHotItemToNearestLine(); }
+  int snapHotItemToNearestSplays( float dthr ) { return commandManager.snapHotItemToNearestSplays( dthr ); }
 
   void splitHotItem() { commandManager.splitHotItem(); }
   

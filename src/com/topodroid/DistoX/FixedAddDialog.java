@@ -86,18 +86,17 @@ public class FixedAddDialog extends MyDialog
     mEast  = true;
 
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ),
-                                R.xml.my_keyboard_base, R.xml.my_keyboard_qwerty );
+                                R.xml.my_keyboard, R.xml.my_keyboard_qwerty );
     if ( TDSetting.mKeyboard ) {
-      int flag = MyKeyboard.FLAG_POINT_DEGREE;
       if ( TDSetting.mStationNames == 1 ) {
         MyKeyboard.registerEditText( mKeyboard, mETstation, MyKeyboard.FLAG_POINT );
       } else {
         MyKeyboard.registerEditText( mKeyboard, mETstation, MyKeyboard.FLAG_POINT_LCASE_2ND );
       }
+      MyKeyboard.registerEditText( mKeyboard, mETlng,  MyKeyboard.FLAG_POINT_DEGREE );
+      MyKeyboard.registerEditText( mKeyboard, mETlat,  MyKeyboard.FLAG_POINT_DEGREE );
       MyKeyboard.registerEditText( mKeyboard, mEThell, MyKeyboard.FLAG_POINT  );
       MyKeyboard.registerEditText( mKeyboard, mEThgeo, MyKeyboard.FLAG_POINT  );
-      MyKeyboard.registerEditText( mKeyboard, mETlng,  flag );
-      MyKeyboard.registerEditText( mKeyboard, mETlat,  flag );
     } else {
       mKeyboard.hide();
       mETlng.setInputType(  TDConst.NUMBER_DECIMAL_SIGNED );
