@@ -505,6 +505,7 @@
     <string name="mode_grid">Мащабна мрежа</string>
     <string name="mode_fixed">Преместване на скица</string>
     <string name="mode_outline">Само очертания</string>
+    <!-- TODO string name="mode_scale_ref">Scale reference bar</string -->
 
     <!-- UNUSED string name="remote_title">Дист. управление</string -->
     <string name="remote_on">Вкл. лазер</string>

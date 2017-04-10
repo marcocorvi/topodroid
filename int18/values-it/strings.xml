@@ -504,6 +504,7 @@
     <string name="mode_grid">Griglia</string>
     <string name="mode_fixed">[ Bloccati ]</string>
     <string name="mode_outline">Solo contorno</string>
+    <!-- TODO string name="mode_scale_ref">Scale reference bar</string -->
 
     <!-- UNUSED string name="remote_title">DistoX Remote Control</string -->
     <string name="remote_on">Laser ON</string>

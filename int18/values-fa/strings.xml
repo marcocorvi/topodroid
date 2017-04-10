@@ -501,6 +501,7 @@
     <string name="mode_grid">جدول</string>
     <!-- TODO string name="mode_fixed">Fix refs</string -->
     <!-- TODO string name="mode_outline">Outline only</string -->
+    <!-- TODO string name="mode_scale_ref">Scale reference bar</string -->
 
     <!-- UNUSED string name="remote_title">دستگاه کنترل از راه دور</string -->
     <string name="remote_on">لیزر روشن</string>

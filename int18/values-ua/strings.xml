@@ -505,6 +505,7 @@
     <string name="mode_grid">Сітка</string>
     <string name="mode_fixed">Сдвиг відносно нитки</string>
     <string name="mode_outline">Тільки контур</string>
+    <!-- TODO string name="mode_scale_ref">Scale reference bar</string -->
 
     <!-- UNUSED string name="remote_title">Пульт дистанційного управління</string -->
     <string name="remote_on">Лазер ВКЛ</string>

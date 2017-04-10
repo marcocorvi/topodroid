@@ -14,6 +14,7 @@ package com.topodroid.DistoX;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.PointF;
 import android.graphics.Paint;
@@ -57,6 +58,8 @@ public class DrawingCommandManager
   private List<DrawingPath>    mGridStack1;
   private List<DrawingPath>    mGridStack10;
   private List<DrawingPath>    mGridStack100;
+
+  private DrawingScaleReference mScaleRef; /*[AR] this is the instance of scale reference line*/
 
   List<DrawingPath> GetGrid1()   { return mGridStack1; }
   List<DrawingPath> GetGrid10()  { return mGridStack10; }
@@ -234,6 +237,8 @@ public class DrawingCommandManager
     mSelection    = new Selection();
     mSelected     = new SelectionSet();
     mMaxAreaIndex = 0;
+
+    mScaleRef = new DrawingScaleReference(new Point(20,-20), 0.33f);
   }
 
   // void debug()
@@ -1248,6 +1253,7 @@ public class DrawingCommandManager
     boolean stations = (mDisplayMode & DisplayMode.DISPLAY_STATION ) != 0;
     boolean grids    = (mDisplayMode & DisplayMode.DISPLAY_GRID    ) != 0;
     boolean outline  = (mDisplayMode & DisplayMode.DISPLAY_OUTLINE ) != 0;
+    boolean scaleRef = (mDisplayMode & DisplayMode.DISPLAY_SCALE_REF ) != 0;
 
     boolean spoints   = false;
     boolean slines    = false;
@@ -1302,6 +1308,14 @@ public class DrawingCommandManager
         if ( mNorthLine != null ) mNorthLine.draw( canvas, mMatrix, mScale, mBBox );
       }
     }
+
+    /* [AR] Start */
+    if(scaleRef && (mScaleRef != null)) {
+      synchronized (mScaleRef) {
+        mScaleRef.draw(canvas, zoom);
+      }
+    }
+    /* [AR] End */
 
     if ( legs && mLegsStack != null ) {
       synchronized( mLegsStack ) {
