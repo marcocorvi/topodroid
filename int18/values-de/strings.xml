@@ -611,7 +611,7 @@
     <string name="help_add_topodroid">Neue Vermessung/Kalibrierung starten</string>
     <string name="help_import">Zip oder Datei importieren</string>
     <string name="help_symbol">Zeichenwerkzeuge (de)aktivieren</string>
-    <!-- TODO string name="help_therion">Therion Manager App</string -->
+    <string name="help_therion">Therion Manager App</string>
     <!-- UNUSED string name="help_database">Databanken App (SQliteViewer)</string -->
     <string name="help_prefs">Einstellungen bearbeiten</string>
     <string name="help_log">Logging-Einstellungen aktivieren</string>
@@ -898,11 +898,11 @@
   <string name="pref_leg_summary">Toleranz zwischen Messungen eines Messzugs</string>
   <string name="pref_leg_message">Toleranz zwischen Messungen eines Messzugs</string>
   <string name="pref_max_shot_title">Maximale Messlänge</string>
-  <string name="pref_max_shot_summary">Maximale Messlänge  [m]</string>
+  <string name="pref_max_shot_summary">Maximale Messlänge[m]</string>
   <string name="pref_max_shot_message">Längere Messungen werden als Fehler behandelt.</string>
-  <!-- TODO string name="pref_min_leg_title">Minimum leg length</string -->
-  <!-- TODO string name="pref_min_leg_summary">Minimum length of legs [m]</string -->
-  <!-- TODO string name="pref_min_leg_message">Legs shorter than the minimum have orange background</string -->
+  <string name="pref_min_leg_title">Minimale Messlänge</string>
+  <string name="pref_min_leg_summary">Minimale Messlänge [m]</string>
+  <string name="pref_min_leg_message">Kürzere Messtrecken werden orange dargestellt</string>
   <string name="pref_backsight_title">Rückmessungs-Feld anzeigen</string>
   <string name="pref_backsight_summary">Rückmessungs-Feld im Dialog bei neuem manuellen Messzug anzeigen</string>
   <string name="pref_prev_next_title">Vorherige/Nächste Messtrecke</string>
