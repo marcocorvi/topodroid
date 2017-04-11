@@ -520,6 +520,7 @@
     <string name="mode_grid">Gitter</string>
     <string name="mode_fixed">Fester Rahmen</string>
     <string name="mode_outline">Nur Umriss</string>
+    <!-- TODO string name="mode_scale_ref">Scale reference bar</string -->
 
     <!-- UNUSED string name="remote_title">DistoX Fernbedienung</string -->
     <string name="remote_on">Laser AN</string>

@@ -19,6 +19,7 @@ class DisplayMode
   static final int DISPLAY_STATION = 0x04;
   static final int DISPLAY_GRID    = 0x08;
   static final int DISPLAY_OUTLINE = 0x10; // whether to display only the outline
+  static final int DISPLAY_SCALE_REF = 0x20; // whether to display the scale reference bar on not 
   static final int DISPLAY_SECTION = 0x0d;
   static final int DISPLAY_ALL     = 0x0f;
   // private static final int DISPLAY_MAX     = 4;

@@ -503,6 +503,8 @@
     <string name="mode_station">Mérési pontok</string>
     <string name="mode_grid">Rács</string>
     <string name="mode_fixed">Rögzített referenciapontok</string>
+    <!-- TODO string name="mode_outline">Outline only</string -->
+    <!-- TODO string name="mode_scale_ref">Scale reference bar</string -->
 
     <!-- UNUSED string name="remote_title">Device Remote Control</string -->
     <string name="remote_on">Lézer BE</string>

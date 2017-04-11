@@ -502,6 +502,7 @@
     <string name="mode_grid">Cuadrículas</string>
     <string name="mode_fixed">Desplazar objetos</string>
     <string name="mode_outline">Solo poligonal</string>
+    <!-- TODO string name="mode_scale_ref">Scale reference bar</string -->
 
     <!-- UNUSED string name="remote_title">Control remoto del dispositivo</string -->
     <string name="remote_on">Láser ON</string>

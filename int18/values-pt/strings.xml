@@ -503,6 +503,7 @@
     <string name="mode_grid">Grade</string>
     <string name="mode_fixed">Referências fixas</string>
     <string name="mode_outline">Contorno</string>
+    <!-- TODO string name="mode_scale_ref">Scale reference bar</string -->
 
     <!-- UNUSED string name="remote_title">Controle remoto do dispositivo</string -->
     <string name="remote_on">Ligar laser</string>
