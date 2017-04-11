@@ -512,7 +512,7 @@
     <string name="mode_grid">Сетка</string>
     <string name="mode_fixed">Сдвиг относительно нитки</string>
     <string name="mode_outline">Только контур</string>
-    <!-- TODO string name="mode_scale_ref">Scale reference bar</string -->
+    <string name="mode_scale_ref">Шкала масштаба</string>
 
     <!-- UNUSED string name="remote_title">Пульт дистанционного управления</string -->
     <string name="remote_on">Лазер ВКЛ</string>
