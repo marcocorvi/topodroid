@@ -30,6 +30,7 @@ public class OverviewModeDialog extends MyDialog
     private CheckBox mCBsplay;    // whether to show splays
     private CheckBox mCBstation;  // whether to show stations
     private CheckBox mCBgrid;     // whether to show the grid
+    private CheckBox mCBscaleRef; // whether to show the scalebar
     private CheckBox mCBoutline;  // whether to show the outline only
     // private Button mBtnOK;
     // private Button mBtnBack;
@@ -55,6 +56,7 @@ public class OverviewModeDialog extends MyDialog
       mCBsplay   = (CheckBox) findViewById(R.id.cb_mode_splay);
       mCBstation = (CheckBox) findViewById(R.id.cb_mode_station);
       mCBgrid    = (CheckBox) findViewById(R.id.cb_mode_grid);
+      mCBscaleRef = (CheckBox) findViewById(R.id.cb_mode_scale_ref);
       mCBoutline = (CheckBox) findViewById(R.id.cb_mode_outline);
 
       ((Button) findViewById(R.id.button_ok)).setOnClickListener( this );
@@ -65,6 +67,7 @@ public class OverviewModeDialog extends MyDialog
       mCBoutline.setChecked( (mode & DisplayMode.DISPLAY_OUTLINE) != 0 );
       mCBleg.setChecked(     (mode & DisplayMode.DISPLAY_LEG) != 0 );
       mCBstation.setChecked( (mode & DisplayMode.DISPLAY_STATION) != 0 );
+      mCBscaleRef.setChecked( (mode & DisplayMode.DISPLAY_SCALE_REF) != 0 );
       mCBgrid.setChecked(    (mode & DisplayMode.DISPLAY_GRID) != 0 );
     }
 
@@ -79,6 +82,7 @@ public class OverviewModeDialog extends MyDialog
           if ( mCBleg.isChecked() )     mode |= DisplayMode.DISPLAY_LEG;
           if ( mCBstation.isChecked() ) mode |= DisplayMode.DISPLAY_STATION;
           if ( mCBgrid.isChecked() )    mode |= DisplayMode.DISPLAY_GRID;
+          if ( mCBscaleRef.isChecked() )mode |= DisplayMode.DISPLAY_SCALE_REF;
           // TDLog.Error( "Mode " + mode );
           mSurface.setDisplayMode( mode );
           break;

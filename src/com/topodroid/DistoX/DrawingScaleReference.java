@@ -41,8 +41,9 @@ public class DrawingScaleReference
    * @param widthPercent maximum width of scale reference in percentage of screen width
    *                     (valid value are in range [0.2, 1.0]
    */
-  public DrawingScaleReference(Point loc, float widthPercent) {
-    this(null, loc, widthPercent);
+  public DrawingScaleReference( Point loc, float widthPercent ) 
+  {
+    this( null, loc, widthPercent );
   }
 
   /**
@@ -58,9 +59,11 @@ public class DrawingScaleReference
     if(p == null)
     {
       mPaint = new Paint();
-      mPaint.setColor(0xff33ccff); /* Android Blue */
+      // mPaint.setColor(0xff33ccff); /* Android Blue */
+      mPaint.setColor( TDColor.LIGHT_BLUE );
       mPaint.setStrokeWidth(2);
       mPaint.setTextAlign(Paint.Align.CENTER);
+      mPaint.setTextSize( TDSetting.mStationSize );
     }
 
     if(widthPercent < MIN_WIDTH_PERCENT) mMaxWidthPercent = MIN_WIDTH_PERCENT;
@@ -83,7 +86,7 @@ public class DrawingScaleReference
    * @param paint th new paint to be used. If null, the setting is ignored.
    */
   public void setPaint( Paint paint ) {
-    if(paint != null) {
+    if ( paint != null ) {
       mPaint = paint;
     }
   }

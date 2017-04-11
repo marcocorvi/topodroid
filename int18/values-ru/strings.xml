@@ -18,8 +18,7 @@
     <string name="cut">ВЫРЕЗАТЬ</string>
     <string name="copy">КОПИРОВАТЬ</string>
     <string name="paste">ВСТАВИТЬ</string>
-    <string name="copied">Скопировано %1$s в буфер обмена</string><html>
-<body>
+    <string name="copied">Скопировано %1$s в буфер обмена</string>
 
     <string name="memoryA3">Память DistoX A3</string>
     <string name="memoryX310">Память DistoX X310</string>
