@@ -49,15 +49,15 @@ Once selected an orientable point icons can be rotated with side-drag.<br><p>
 
 <h4>Point-wise edit actions [A]</h4>
 
-The second to the right button applies only to drawing items and has a drop-down menu of advanced editing actions.
+The second to the right button applies only to drawing items and has a drop-down menu of advanced editing actions, for either points [P], or lines [L], or areas [A]
 <ul style="margin-top=0">
-<li><i>Snap to nearby point</i>: move the point to coincide with the closest nearby point (no action if there is no nearby point) [points, lines, areas]</li>
-<li><i>Snap to nearby line</i> move to point to coincide with the closest line point, and replace the pieces of the area border before and after it, with pieces that follow the line path [areas]</li>
-<li><i>duplicate</i> the point [lines, areas]. The new point is inserted "after" the selected point. It is added to the selection set, and you can select to it with the Prev-Next buttons.</li>
-<li><i>Cut</i> the line at the point, thus making two lines [lines]</li>
-<li><i>Straighten</i> the line segment removing the control points [lines, areas]</li>
-<li><i>Smoothen</i> the line segment inserting control points at 1/3 and 2/3 the segment length. Further editing can move them and give any wanted curvature to the segment. [lines, areas]</li>
-<li><i>Remove</i> the line/area point [lines, areas]. The selected line/area point can be removed also with a long-tap on the "delete" button.</li>
+<li><i>Snap to nearby point</i>i [P,L,A]: move the point to coincide with the closest nearby point (no action if there is no nearby point)</li>
+<li><i>Snap to nearby splays/line</i> [L,A]. Lines are deformed to pass through the splay endpoints that are close enough. For areas the point is moved to coincide with the closest line point, and the pieces of the area border before and after it are replaced with pieces of border that follow the line path</li>
+<li><i>duplicate</i> the point [L,A]. The new point is inserted "after" the selected point. It is added to the selection set, and you can select it with the Prev-Next buttons</li>
+<li><i>Cut</i> [L] the line at the point, thus making two lines</li>
+<li><i>Straighten</i> [L,A] the line segment removing the control points</li>
+<li><i>Smoothen</i> [L,A] the line segment inserting control points at 1/3 and 2/3 the segment length. Further editing can move them and give any wanted curvature to the segment</li>
+<li><i>Remove</i> [L,A] the line/area point. The selected line/area point can be removed also with a long-tap on the "delete" button.</li>
 </ul><br><p>
 
 <h4>Range selection modes</h4>
