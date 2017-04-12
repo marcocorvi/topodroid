@@ -42,7 +42,7 @@ class DrawingSvg
     if ( grid != null && grid.size() > 0 ) {
       StringWriter sw = new StringWriter();
       PrintWriter pw  = new PrintWriter(sw);
-      pw.format(Locale.US, "<g style=\"fill:none;stroke-opacity:%.1f;stroke-width=\"1\";stroke:#666666\" >\n", opacity );
+      pw.format(Locale.US, "<g style=\"fill:none;stroke-opacity:%.1f;stroke-width=1;stroke:#666666\" >\n", opacity );
       for ( DrawingPath p : grid ) {
         pw.format(Locale.US, "  <path stroke-width=\"1\" stroke=\"#%s\" d=\"", color );
         pw.format(Locale.US, "M %.2f %.2f",  xoff+p.x1, yoff+p.y1 );
@@ -107,11 +107,7 @@ class DrawingSvg
       out.write( "    </marker>\n"); 
       out.write( "  </defs>\n");
 
-      if ( TDSetting.mSvgInHtml ) { // SVG_IN_HTML
-        out.write( "<g transform=\"translate(" + (int)(-xmin) + "," + (int)(-ymin) + ")\" >\n" );
-      } else {
-        out.write( "<g>\n");
-      }
+      out.write( "<g transform=\"translate(" + (int)(-xmin) + "," + (int)(-ymin) + ")\" >\n" );
 
       // ***** FIXME TODO POINT SYMBOLS
       // {

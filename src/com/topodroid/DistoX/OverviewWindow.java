@@ -290,6 +290,7 @@ public class OverviewWindow extends ItemDrawer
     // FIXME_OVER
     // mOverviewSurface.clearReferences( type );
     mOverviewSurface.setManager( DrawingSurface.DRAWING_OVERVIEW, type ); 
+    mOverviewSurface.addScaleRef( DrawingSurface.DRAWING_OVERVIEW, type );
 
     // float xoff = 0; float yoff = 0;
 

@@ -253,7 +253,21 @@ public class DrawingSurface extends SurfaceView
     isDrawing = true;
     commandManager.addEraseCommand( cmd );
   }
-  
+
+  void addScaleRef( int mode, int type )
+  {
+    switch ( mode ) {
+      case DRAWING_PLAN: 
+        mCommandManager1.addScaleRef();
+        break;
+      case DRAWING_PROFILE:
+        mCommandManager2.addScaleRef();
+        break;
+      default:
+        mCommandManager3.addScaleRef();
+    }
+  }
+
   void clearReferences( int type ) 
   {
     if ( PlotInfo.isProfile( type ) ) {

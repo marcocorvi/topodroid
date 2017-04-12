@@ -23,6 +23,8 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.FloatMath;
 
+import android.util.Log;
+
 public class DrawingScaleReference
 {
   private static final float MIN_WIDTH_PERCENT = 0.2f;
@@ -32,6 +34,9 @@ public class DrawingScaleReference
   private Point mLocation;
   private float mMaxWidthPercent;
   private Paint mPaint;
+  private String mUnits;
+
+  private final static float[] mValues = { 0, 0.01f, 0.05f, 0.1f, 0.5f, 1, 2, 5, 10, 20, 50, 100, 200, 500 };
 
 
   /**
@@ -71,6 +76,8 @@ public class DrawingScaleReference
     else mMaxWidthPercent = widthPercent;
 
     mLocation = loc;
+    mUnits = ( TDSetting.mUnitGrid > 0.99f)? " m" 
+           : ( TDSetting.mUnitGrid > 0.8f)? " y" : " ft";
   }
 
 
@@ -104,35 +111,20 @@ public class DrawingScaleReference
 
       /* Calculate reference scale */
       float referenceLen = canvas.getWidth() * mMaxWidthPercent / canvasUnit;
-      if(referenceLen > 1)
-      {
-        referenceLen = FloatMath.floor(referenceLen);
-      }
-      else if(referenceLen > 0.75f)
-      {
-        referenceLen = 0.75f;
-      }
-      else if(referenceLen > 0.50f)
-      {
-        referenceLen = 0.50f;
-      }
-      else if(referenceLen > 0.25f)
-      {
-        referenceLen = 0.25f;
-      }
-      else if(referenceLen > 0.10f)
-      {
-        referenceLen = 0.10f;
-      }
-      else
-      {
-        referenceLen = 0;
-      }
+      // units 1:m 0.914:y 0.6096:2ft
+      if ( TDSetting.mUnitGrid < 0.8f ) referenceLen *= 2; // using ft instead of 2ft
+      
+      int k = mValues.length - 1;
+      while ( k > 0 && referenceLen < mValues[k] ) --k;
+      referenceLen = mValues[k];
 
       /* Draw reference scale */
-      if(referenceLen != 0)
+      if ( k > 0 ) 
       {
         float canvasLen = canvasUnit * referenceLen;
+        canvasLen *= TDSetting.mUnitGrid;
+        if ( TDSetting.mUnitGrid < 0.8f ) canvasLen /= 2;
+
         float locX = (mLocation.x > 0) ? mLocation.x : canvas.getWidth() + mLocation.x - referenceLen;
         float locY = (mLocation.y > 0) ? mLocation.y : canvas.getHeight() + mLocation.y;
 
@@ -140,10 +132,10 @@ public class DrawingScaleReference
         canvas.drawLine(locX, locY, locX, locY - HEIGHT_BARS, mPaint);
         canvas.drawLine(locX + canvasLen, locY, locX + canvasLen, locY - HEIGHT_BARS, mPaint);
         if(referenceLen < 1) {
-          canvas.drawText(referenceLen + " m", locX + canvasLen / 2, locY - HEIGHT_BARS, mPaint);
+          canvas.drawText(referenceLen + mUnits, locX + canvasLen / 2, locY - HEIGHT_BARS, mPaint);
         }
         else {
-          canvas.drawText((int)referenceLen + " m", locX + canvasLen / 2, locY - HEIGHT_BARS, mPaint);
+          canvas.drawText((int)referenceLen + mUnits, locX + canvasLen / 2, locY - HEIGHT_BARS, mPaint);
         }
       }
     }

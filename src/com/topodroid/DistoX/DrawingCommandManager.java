@@ -48,7 +48,7 @@ public class DrawingCommandManager
 {
   private static final int BORDER = 20;
 
-  static int mDisplayMode = DisplayMode.DISPLAY_ALL;
+  static int mDisplayMode = DisplayMode.DISPLAY_ALL; // this display mode is shared among command managers
   RectF mBBox;
 
   private DrawingPath mNorthLine;
@@ -237,7 +237,10 @@ public class DrawingCommandManager
     mSelection    = new Selection();
     mSelected     = new SelectionSet();
     mMaxAreaIndex = 0;
+  }
 
+  void addScaleRef() 
+  {
     mScaleRef = new DrawingScaleReference(new Point(20,-20), 0.33f);
   }
 
@@ -262,7 +265,9 @@ public class DrawingCommandManager
       mGridStack1.clear();
       mGridStack10.clear();
       mGridStack100.clear();
+      mScaleRef = null;
     }
+
     synchronized( mLegsStack )   { mLegsStack.clear(); }
     synchronized( mSplaysStack ) { mSplaysStack.clear(); }
     synchronized( mStations )    { mStations.clear(); }
@@ -1306,16 +1311,11 @@ public class DrawingCommandManager
           drawingPath.draw( canvas, mMatrix, mScale, mBBox );
         }
         if ( mNorthLine != null ) mNorthLine.draw( canvas, mMatrix, mScale, mBBox );
+        if(scaleRef && (mScaleRef != null)) {
+          mScaleRef.draw(canvas, zoom);
+        }
       }
     }
-
-    /* [AR] Start */
-    if(scaleRef && (mScaleRef != null)) {
-      synchronized (mScaleRef) {
-        mScaleRef.draw(canvas, zoom);
-      }
-    }
-    /* [AR] End */
 
     if ( legs && mLegsStack != null ) {
       synchronized( mLegsStack ) {

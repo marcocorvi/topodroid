@@ -912,10 +912,12 @@ public class DrawingWindow extends ItemDrawer
       mDrawingSurface.setManager( DrawingSurface.DRAWING_PLAN, type );
       DrawingUtil.addGrid( mNum.surveyEmin(), mNum.surveyEmax(), mNum.surveySmin(), mNum.surveySmax(), mDrawingSurface );
                            // xoff, yoff, mDrawingSurface );
+      mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_PLAN, type );
     } else {
       mDrawingSurface.setManager( DrawingSurface.DRAWING_PROFILE, type );
       DrawingUtil.addGrid( mNum.surveyHmin(), mNum.surveyHmax(), mNum.surveyVmin(), mNum.surveyVmax(), mDrawingSurface );
                            // xoff, yoff, mDrawingSurface );
+      mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_PROFILE, type );
       if ( type == PlotInfo.PLOT_PROFILE ) {
         cosp = TDMath.cosd( mPlot2.azimuth );
         sinp = TDMath.sind( mPlot2.azimuth );
@@ -1282,7 +1284,7 @@ public class DrawingWindow extends ItemDrawer
     mAzimuth = azimuth;
     mClino   = clino;
     mSavedMode = mDrawingSurface.getDisplayMode();
-    mDrawingSurface.setDisplayMode( DisplayMode.DISPLAY_SECTION );
+    mDrawingSurface.setDisplayMode( DisplayMode.DISPLAY_SECTION | ( mSavedMode & DisplayMode.DISPLAY_SCALE_REF ) );
     resetStatus();
     doStart( true );
     updateSplays( mApp.mSplayMode );
@@ -1878,6 +1880,7 @@ public class DrawingWindow extends ItemDrawer
         mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null );
         // mAllSymbols =
         mDrawingSurface.modeloadDataStream( filename3b, filename3, missingSymbols );
+        mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)type );
       }
 
       // if ( ! mAllSymbols ) {
