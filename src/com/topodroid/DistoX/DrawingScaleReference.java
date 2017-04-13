@@ -77,7 +77,7 @@ public class DrawingScaleReference
 
     mLocation = loc;
     mUnits = ( TDSetting.mUnitGrid > 0.99f)? " m" 
-           : ( TDSetting.mUnitGrid > 0.8f)? " y" : " ft";
+           : ( TDSetting.mUnitGrid > 0.8f)? " yd" : " ft";
   }
 
 
