@@ -526,6 +526,7 @@
     <string name="symbol_mine">Minerario</string>
     <string name="symbol_paleo">Paleologico</string>
     <string name="symbol_speleo">Speleologico</string>
+    <!-- TODO string name="symbol_extra">Speleo (2)</string -->
 
     <string name="symbol_reload">Strumenti Disegno</string>
 

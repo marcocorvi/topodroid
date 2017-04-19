@@ -542,6 +542,7 @@
     <string name="symbol_mine">Bergbau</string>
     <string name="symbol_paleo">Paläontologie</string>
     <string name="symbol_speleo">Speläologie</string>
+    <!-- TODO string name="symbol_extra">Speleo (2)</string -->
 
     <string name="symbol_reload">Zeichenwerkzeuge</string>
 

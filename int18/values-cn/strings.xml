@@ -524,6 +524,7 @@
     <string name="symbol_mine">采矿学</string>
     <string name="symbol_paleo">古生物学</string>
     <string name="symbol_speleo">洞穴学</string>
+    <!-- TODO string name="symbol_extra">Speleo (2)</string -->
 
     <string name="symbol_reload">绘图工具</string>
 

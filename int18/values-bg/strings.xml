@@ -527,6 +527,7 @@
     <string name="symbol_mine">Минни разр.</string>
     <string name="symbol_paleo">Палео</string>
     <string name="symbol_speleo">Спелео</string>
+    <!-- TODO string name="symbol_extra">Speleo (2)</string -->
 
     <string name="symbol_reload">Символи за рисуване</string>
 

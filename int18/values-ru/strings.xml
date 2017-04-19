@@ -533,6 +533,7 @@
     <string name="symbol_mine">Шахты</string>
     <string name="symbol_paleo">Палео</string>
     <string name="symbol_speleo">Спелео</string>
+    <!-- TODO string name="symbol_extra">Speleo (2)</string -->
 
     <string name="symbol_reload">Инструменты Рисования</string>
 

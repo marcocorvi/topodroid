@@ -526,6 +526,7 @@
     <string name="symbol_mine">Bányászat</string>
     <string name="symbol_paleo">Őslénytan</string>
     <string name="symbol_speleo">Barlangászat</string>
+    <!-- TODO string name="symbol_extra">Speleo (2)</string -->
 
     <string name="symbol_reload">Rajz eszközök</string>
 

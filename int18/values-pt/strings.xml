@@ -525,6 +525,7 @@
     <string name="symbol_mine">Mineração</string>
     <string name="symbol_paleo">Paleologia</string>
     <string name="symbol_speleo">Espeleologia</string>
+    <!-- TODO string name="symbol_extra">Speleo (2)</string -->
 
     <string name="symbol_reload">Símbolos</string>
 
