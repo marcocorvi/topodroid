@@ -1,0 +1,10 @@
+﻿symbol line
+name wall_above
+th_name wall:above
+group wall
+color 0xffe5cc 0x99
+width 1
+csurvey 5 1 2 2
+dash 10 5 3 5
+endsymbol
+

@@ -534,6 +534,7 @@
     <string name="symbol_mine">Mining</string>
     <string name="symbol_paleo">Paleo</string>
     <string name="symbol_speleo">Speleo</string>
+    <string name="symbol_extra">Speleo (2)</string>
 
     <string name="symbol_reload">Drawing Tools</string>
 

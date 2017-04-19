@@ -1,0 +1,16 @@
+﻿symbol line
+name slope_steep
+th_name slope:steep
+group slope
+color 0xff9933 0xff
+csurvey 2 1 3 12
+effect
+  moveTo 0 1
+  lineTo 12 1
+  lineTo 12 0
+  lineTo 9 0
+  lineTo 6 -6
+  lineTo 3 0
+  lineTo 0 0 
+endeffect
+endsymbol

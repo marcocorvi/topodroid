@@ -40,6 +40,7 @@ public class SymbolReload extends MyDialog
   private Button mBtnCancel;
 
   private CheckBox mCBspeleo;
+  private CheckBox mCBextra;
   private CheckBox mCBmine;
   private CheckBox mCBgeo;
   private CheckBox mCBarcheo;
@@ -70,6 +71,7 @@ public class SymbolReload extends MyDialog
     TextView tv = (TextView) findViewById( R.id.symbol_version );
 
     mCBspeleo = (CheckBox) findViewById( R.id.symbol_speleo );
+    mCBextra  = (CheckBox) findViewById( R.id.symbol_extra  );
     mCBmine   = (CheckBox) findViewById( R.id.symbol_mine   );
     mCBgeo    = (CheckBox) findViewById( R.id.symbol_geo    );
     mCBarcheo = (CheckBox) findViewById( R.id.symbol_archeo );
@@ -84,6 +86,7 @@ public class SymbolReload extends MyDialog
     if ( ! mAll ) {
       mCBspeleo.setChecked( true );
       mCBspeleo.setVisibility( View.GONE );
+      mCBextra.setVisibility( View.GONE );
       mCBmine.setVisibility( View.GONE );
       mCBgeo.setVisibility( View.GONE );
       mCBarcheo.setVisibility( View.GONE );
@@ -105,6 +108,7 @@ public class SymbolReload extends MyDialog
     if ( b == mBtnInstall ) {
       mApp.reloadSymbols( false,  // do not clear first 
                           mCBspeleo.isChecked(),
+                          mCBextra.isChecked(),
                           mCBmine.isChecked(),
                           mCBgeo.isChecked(),
                           mCBarcheo.isChecked(),
@@ -113,6 +117,7 @@ public class SymbolReload extends MyDialog
     } else if ( b == mBtnReplace ) {
       mApp.reloadSymbols( true, // clear first
                           mCBspeleo.isChecked(),
+                          mCBextra.isChecked(),
                           mCBmine.isChecked(),
                           mCBgeo.isChecked(),
                           mCBarcheo.isChecked(),

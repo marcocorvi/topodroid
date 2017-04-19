@@ -21,6 +21,15 @@
      android:layout_marginTop="10sp"
      android:text="@string/symbol_speleo"
      />
+
+  <CheckBox android:id="@+id/symbol_extra"
+     android:layout_width="fill_parent" 
+     android:layout_height="wrap_content" 
+     android:layout_marginRight="10sp"
+     android:layout_marginLeft="10sp"
+     android:layout_marginTop="10sp"
+     android:text="@string/symbol_extra"
+     />
           	
   <CheckBox android:id="@+id/symbol_mine"
      android:layout_width="fill_parent" 

@@ -1527,20 +1527,25 @@ public class TopoDroidApp extends Application
     clearSymbolsDir( TDPath.APP_AREA_PATH );
   }  
 
-  void reloadSymbols( boolean clear, boolean speleo, boolean mine, boolean geo, boolean archeo, boolean paleo, boolean bio )
+  void reloadSymbols( boolean clear, 
+                      boolean speleo, boolean extra, boolean mine, boolean geo, boolean archeo, boolean paleo, boolean bio )
   {
     // Log.v("DistoX", "Reload symbols " + speleo + " " + mine + " " + geo + " " + archeo + " " + paleo + " " + bio + " clear " + clear );
+    if ( extra ) speleo = true; // extra implies speleo
+
     if ( clear ) {
-      if (speleo || mine || geo || archeo || paleo || bio ) {
+      if (speleo || mine || geo || archeo || paleo || bio ) { 
         clearSymbols();
       }
     }
     if ( speleo ) installSymbols( R.raw.symbols, true );
+    if ( extra  ) installSymbols( R.raw.symbols_extra,  true );
     if ( mine   ) installSymbols( R.raw.symbols_mine,   true );
     if ( geo    ) installSymbols( R.raw.symbols_geo,    true );
     if ( archeo ) installSymbols( R.raw.symbols_archeo, true );
     if ( paleo  ) installSymbols( R.raw.symbols_paleo,  true );
     if ( bio    ) installSymbols( R.raw.symbols_bio,    true );
+
     mDData.setValue( "symbol_version", SYMBOL_VERSION );
     BrushManager.reloadAllLibraries( getResources() );
     // BrushManager.makePaths( getResources() );
