@@ -257,6 +257,8 @@ public class Archiver
             } else if ( ze.getName().endsWith( TDPath.TDR ) ) {
               pathname = TDPath.getTdrFile( ze.getName() );
 
+            } else if ( ze.getName().endsWith( TDPath.TRB ) ) {
+              pathname = TDPath.getTrbFile( ze.getName() );
             } else if ( ze.getName().endsWith( TDPath.TRO ) ) {
               pathname = TDPath.getTroFile( ze.getName() );
             } else if ( ze.getName().endsWith( TDPath.TOP ) ) {

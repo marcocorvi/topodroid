@@ -145,6 +145,22 @@ public class DistoXStationName
   static int toInt( String name )
   {
     if ( name == null ) return -1;
+    if ( TDSetting.mTRobotShot ) {
+      int pos = name.indexOf( '.' );
+      if ( pos >= 0 ) {
+        int pre = 0;
+        try {
+          pre = Integer.parseInt( name.substring( 0, pos ) );
+        } catch ( NumberFormatException e ) { }
+        try {
+          return pre * 1000 + Integer.parseInt( name.substring( pos+1 ) );
+        } catch ( NumberFormatException e ) { }
+      } else {   
+        try {
+          return Integer.parseInt( name );
+        } catch ( NumberFormatException e ) { }
+      }
+    }
     int ret = 0;
     int len = name.length();
     for ( int k = 0; k < len; ++k ) {

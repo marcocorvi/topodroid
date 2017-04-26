@@ -493,6 +493,10 @@ public class SurveyWindow extends Activity
           Toast.makeText( this, "WARNING WinKarst export is untested", Toast.LENGTH_SHORT ).show(); 
           filename = mApp.exportSurveyAsSur();
           break;
+        case TDConst.DISTOX_EXPORT_TRB: // TopoRobot
+          Toast.makeText( this, "WARNING TopoRobot export is untested", Toast.LENGTH_SHORT ).show(); 
+          filename = mApp.exportSurveyAsTrb();
+          break;
 
         case TDConst.DISTOX_EXPORT_TH:
         default:

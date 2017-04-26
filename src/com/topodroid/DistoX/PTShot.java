@@ -71,6 +71,8 @@ class PTShot
     void setToUndefined()   { _to.setUndef(); }
     void setFrom( int from_id ) { _from.setId( from_id ); }
     void setTo( int to_id )     { _to.setId( to_id ); }
+    boolean setFrom( String from ) { return _from.set( from ); }
+    boolean setTo( String to )     { return _to.set( to ); }
 
     /** get the distance in m */
     float distance() { return (float)(_dist) / 1000.0f; }

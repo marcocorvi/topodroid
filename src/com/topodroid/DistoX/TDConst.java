@@ -39,6 +39,7 @@ class TDConst
   static final int DISTOX_EXPORT_GRT = 18; // Grottolf
   static final int DISTOX_EXPORT_GTX = 19; // GHTopo
   static final int DISTOX_EXPORT_SUR = 20; // WinKarst
+  static final int DISTOX_EXPORT_TRB = 21; // TopoRobot
 
   static final int DISTOX_EXPORT_ZIP = 30;
 
@@ -52,6 +53,7 @@ class TDConst
     "Survex",
     "Therion",
     "Topo",
+    "TopoRobot",
     "VisualTopo",
     "Walls", 
     "WinKarst",
@@ -71,6 +73,7 @@ class TDConst
     DISTOX_EXPORT_SVX,
     DISTOX_EXPORT_TH,
     DISTOX_EXPORT_CAV,
+    DISTOX_EXPORT_TRB,
     DISTOX_EXPORT_TRO,
     DISTOX_EXPORT_SRV,
     DISTOX_EXPORT_SUR,

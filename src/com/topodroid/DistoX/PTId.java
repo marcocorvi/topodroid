@@ -21,7 +21,7 @@ class PTId
 {
   static final int ID_UNDEFINED = 0x80000000;
   static final int ID_NUMBER = 0x80000001;
-  static int ID_COUNT = 0;
+  // static int ID_COUNT = 0;
 
   int _id; //!< id: 0x80000000 undefined, 
                    //!<     < 0        plain number + 0x80000001
@@ -35,14 +35,14 @@ class PTId
 
   int id() { return _id; }  
 
-  void set( String str )
+  boolean set( String str )
   {
-    // TDLog.Log( TDLog.LOG_PTOPO, "PT ID set " + str ); 
     if ( str == null || str.length() == 0 ) {
       setUndef();
-      return;
+      return true;
     }
-    String[] vals = str.split( "." );
+    String[] vals = str.split( "\\." );
+    TDLog.Log( TDLog.LOG_PTOPO, "PT ID set " + str + " vals " + vals.length ); 
     if ( vals.length > 1 ) {
       int major = 0;
       int minor = 0;
@@ -51,6 +51,7 @@ class PTId
         minor = Integer.parseInt( vals[1] );
       } catch ( NumberFormatException e ) {
         TDLog.Error( "PTId::set major/minor parse error " + vals[0] + " " + vals[1] );
+        return false;
       }
       setMajorMinor( major, minor );
     } else {
@@ -59,10 +60,12 @@ class PTId
         setNumber( n + 0x80000001 );
       } catch ( NumberFormatException e ) { // should not happen
         TDLog.Error( "PTId::set setNumber parse error " + str );
-        setNumber( ID_COUNT + 0x80000001 );
-        ++ ID_COUNT;
+        // setNumber( ID_COUNT + 0x80000001 );
+        // ++ ID_COUNT;
+        return false;
       }
     }
+    return true;
   }
 
   void setId( int n ) { setNumber( n + 0x80000001 ); }

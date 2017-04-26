@@ -52,6 +52,7 @@ public class TDPath
   final static String TH3 = ".th3";
   final static String TMP = ".tmp";
   final static String TOP = ".top";
+  final static String TRB = ".trb";
   final static String TRO = ".tro";
   final static String TXT = ".txt";
   final static String ZIP = ".zip";
@@ -104,6 +105,7 @@ public class TDPath
   private static String PATH_TH3;    //  = PATH_BASE + "th3/";
   private static String APP_TMP_PATH;    //  = PATH_BASE + "tmp/";
   private static String PATH_TOP;    //  = PATH_BASE + "top/";
+  private static String PATH_TRB;    //  = PATH_BASE + "trb/";
   private static String PATH_TRO;    //  = PATH_BASE + "tro/";
   private static String PATH_ZIP;    //  = PATH_BASE + "zip/";
   // private static String APP_TLX_PATH ; //  = PATH_BASE + "tlx/";
@@ -209,6 +211,9 @@ public class TDPath
 
     PATH_TRO = PATH_BASE + "tro/";
     // FIXME checkDirs( PATH_TRO );
+
+    PATH_TRB = PATH_BASE + "trb/";
+    // FIXME checkDirs( PATH_TRB );
 
     PATH_PNG = PATH_BASE + "png/";
     // FIXME checkDirs( PATH_PNG );
@@ -327,6 +332,7 @@ public class TDPath
   static String getCsxFile( String name )    { return PATH_CSX + name; }
   static String getDumpFile( String name )   { return PATH_DUMP + name; }
   static String getTopFile( String name )    { return PATH_TOP + name; }
+  static String getTrbFile( String name )    { return PATH_TRB + name; }
   static String getTroFile( String name )    { return PATH_TRO + name; }
   static String getPngFile( String name )    { return PATH_PNG + name; }
 
@@ -394,6 +400,7 @@ public class TDPath
   static String getSurveySurFile( String survey ) { return getFile( PATH_SUR, survey, SUR ); }
   static String getSurveySvxFile( String survey ) { return getFile( PATH_SVX, survey, SVX ); }
   static String getSurveyTopFile( String survey ) { return getFile( PATH_TOP, survey, TOP ); }
+  static String getSurveyTrbFile( String survey ) { return getFile( PATH_TRB, survey, TRB ); }
   static String getSurveyTroFile( String survey ) { return getFile( PATH_TRO, survey, TRO ); }
 
   private static File[] getFiles( String dirname, final String[] ext )
@@ -522,6 +529,7 @@ public class TDPath
     t = new File( getSurFile( survey + SUR ) ); if ( t.exists() ) t.delete();
     t = new File( getTopFile( survey + TOP ) ); if ( t.exists() ) t.delete();
     t = new File( getTroFile( survey + TRO ) ); if ( t.exists() ) t.delete();
+    t = new File( getTrbFile( survey + TRB ) ); if ( t.exists() ) t.delete();
   }
 
   static void rotateBackups( String filename, int rotate ) // filename has suffix BCK_SUFFIX

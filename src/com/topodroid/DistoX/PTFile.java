@@ -467,20 +467,23 @@ class PTFile
                  String comment )
     {
       TDLog.Log( TDLog.LOG_DEBUG,
-                        "PT file add shot " + from + " " + to + " " + distance + " " + azimuth + " " + inclination );
+                 "PT file add shot " + from + " " + to + " " + distance + " " + azimuth + " " + inclination );
       PTShot shot = new PTShot( distance, azimuth, inclination, roll, (extend == -1), trip );
       int id;
       if ( from.length() == 0 || from.equals("-") ) {
         shot.setFromUndefined();
       } else {
-        shot.setFrom( getId( from ) );
+        if ( ! TDSetting.mTRobotShot || ! shot.setFrom( from ) ) {
+          shot.setFrom( getId( from ) );
+        }
       }
       if ( to.length() == 0 || to.equals("-") ) {
         shot.setToUndefined();
       } else {
-        shot.setTo( getId( to ) );
+        if ( ! TDSetting.mTRobotShot || ! shot.setTo( to ) ) {
+          shot.setTo( getId( to ) );
+        }
       }
-
       shot.setComment( comment );
     
       _shots.add( shot );
