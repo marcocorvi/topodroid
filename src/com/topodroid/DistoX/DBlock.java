@@ -309,7 +309,7 @@ public class DBlock
   private void formatComment( PrintWriter pw )
   {
     if ( mComment == null || mComment.length() == 0 ) return;
-    pw.format(" N");
+    pw.format(" %s", mComment);
   }
 
   public String toString( boolean show_id )
@@ -326,8 +326,8 @@ public class DBlock
       mFrom, mTo,
       mLength*ul, mBearing*ua, mClino*ua, mExtendTag[ (int)(mExtend) + 1 ] );
     formatFlag( pw );
+    if ( mWithPhoto ) { pw.format("#"); }
     formatComment( pw );
-    if ( mWithPhoto ) { pw.format(" #"); }
     // TDLog.Log( TDLog.LOG_DATA, sw.getBuffer().toString() );
     return sw.getBuffer().toString();
   }
@@ -338,8 +338,8 @@ public class DBlock
     PrintWriter pw  = new PrintWriter(sw);
     pw.format("[%c]", mExtendTag[ (int)(mExtend) + 1 ] );
     formatFlag( pw );
+    if ( mWithPhoto ) { pw.format("#"); }
     formatComment( pw );
-    if ( mWithPhoto ) { pw.format(" #"); }
     return sw.getBuffer().toString();
   }
 

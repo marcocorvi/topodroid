@@ -79,6 +79,9 @@ public class ShotDialog extends MyDialog
   private MyCheckBox mCBrenumber;
   // private MyCheckBox mCBhighlight;
 
+  HorizontalListView mListView;
+  HorizontalButtonView mButtonView;
+  private Button[] mButton;
 
   private CheckBox mRBleft;
   private CheckBox mRBvert;
@@ -322,10 +325,11 @@ public class ShotDialog extends MyDialog
       // mETup.setInputType( InputType.TYPE_CLASS_NUMBER );
       // mETdown.setInputType( InputType.TYPE_CLASS_NUMBER );
     }
+
+    int size = TopoDroidApp.getScaledSize( mContext );
     
     LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
     // LinearLayout layout9 = (LinearLayout) findViewById( R.id.layout9 );
-    int size = TopoDroidApp.getScaledSize( mContext );
     layout4.setMinimumHeight( size + 20 );
     // layout9.setMinimumHeight( size + 20 );
 
@@ -346,14 +350,31 @@ public class ShotDialog extends MyDialog
     mCBrenumber  = new MyCheckBox( mContext, size, R.drawable.iz_numbers_ok, R.drawable.iz_numbers_no );
     // mCBhighlight = new MyCheckBox( mContext, size, R.drawable.iz_highlight_ok, R.drawable.iz_highlight_no );
 
+    mButton = new Button[7];
+
+    mButton[0] = mRBdup;
+    mButton[1] = mRBsurf;
+    mButton[2] = mCBlegPrev;
+    mButton[3] = mCBlegNext;
+    mButton[4] = mCBrenumber;
+    mButton[5] = mCBallSplay;
+    mButton[6] = mCBxSplay;
+
+    mListView = (HorizontalListView) findViewById(R.id.listview);
+    /* size = */ TopoDroidApp.setListViewHeight( mContext, mListView );
+    mButtonView = new HorizontalButtonView( mButton );
+    mListView.setAdapter( mButtonView.mAdapter );
+
+/*
     layout4.addView( mRBdup, lp );
     layout4.addView( mRBsurf, lp );
     layout4.addView( mCBlegPrev, lp );
     layout4.addView( mCBlegNext, lp );
-    layout4.addView( mCBrenumber );
+    layout4.addView( mCBrenumber, lp );
     layout4.addView( mCBallSplay, lp );
     layout4.addView( mCBxSplay, lp );
     // layout4.addView( mCBhighlight );
+*/
     layout4.invalidate();
 
     mCBlegPrev.setOnClickListener( this );

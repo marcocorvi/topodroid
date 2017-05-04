@@ -1837,22 +1837,6 @@ class TDExporter
 
   private static final int TRB_LINE_LENGTH = 82; 
 
-  private static void prepareTrbData( char[] line, int series, int station, AverageLeg leg, LRUD lrud, int trip, int code )
-  {
-    prepareTrbLine( line, series, station );
-    setTrbFloat( line, leg.length(),  25, 32 );
-    setTrbFloat( line, leg.bearing(), 33, 40 );
-    setTrbFloat( line, leg.clino(),   41, 48 );
-    setTrbFloat( line, lrud.r,        57, 64 );
-    setTrbFloat( line, lrud.l,        49, 56 );
-    setTrbFloat( line, lrud.u,        65, 72 );
-    setTrbFloat( line, lrud.d,        73, 80 );
-    setTrbInt( line, trip, 20, 24 );
-    setTrbInt( line, code, 12, 16 );
-    // Log.v("DistoX", "prepare TRB data " + series + "." + station );
-    leg.reset();
-  }
-
   private static int getTrbSeries( String s )
   {
     int pos = s.indexOf('.');
@@ -1876,76 +1860,6 @@ class TDExporter
     return ret;
   }
 
-  private static void setTrbString( char[] line, String value, int from, int to ) 
-  {
-    // byte[] bytes = value.getBytes();
-    for ( int k = 0; k<value.length() && from <= to; ++from, ++k ) line[from] = value.charAt(k);
-  }
-
-  private static int setTrbInt( char[] line, int value, int from, int to ) 
-  {
-    while ( value > 0 && to >= from ) {
-      line[to] = (char)('0' + (value % 10));
-      value /= 10;
-      -- to;
-    }
-    return to;
-  }
-   
-  private static void setTrbFloat( char[] line, float value, int from, int to ) 
-  {
-    boolean neg = false;
-    if ( value < 0 ) { neg = true; value = -value; }
-    int frac = (int)( value*100 );
-    int high = frac / 100;
-    frac = frac % 100;
-    line[to--] = (char)('0' + (frac % 10));
-    line[to--] = (char)('0' + (frac % 10));
-    line[to--] = '.';
-    to = setTrbInt( line, high, from, to );
-    if ( neg ) {
-      if ( to >= from ) line[to] = '-';
-    }
-  }
-
-
-  private static void prepareTrbLine( char[] line, int code, int st )
-  {
-    int k;
-    for ( k= 0; k<TRB_LINE_LENGTH; ++k ) line[k] = ' ';
-    if ( code < 0 ) {
-      line[5] = '-';
-      line[6] = (char)('0' - code);
-    } else if ( code == 0 ) {
-      line[6] = '0';
-    } else {
-      k = 6;
-      while ( code > 0 && k >= 1 ) {
-        line[k] = (char)('0' + (code%10));
-        code /= 10;
-        --k;
-      }
-    }
-    if ( st < 0 ) {
-      line[11] = '-';
-      line[12] = (char)('0' - st );
-    } else if ( st == 0 ) {
-      line[12] = 0;
-    } else {
-      k = 12; 
-      while ( st > 0 && k >= 7 ) {
-        line[k] = (char)('0' + (st%10));
-        st /= 10;
-        --k;
-      }
-    }
-  }
-  
-  private static void printTrbLine( PrintWriter pw, char[] line )
-  {
-    pw.format("%s\r\n", new String(line) );
-  }
-
   static String exportSurveyAsTrb( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     int trip = 1;
@@ -1962,34 +1876,8 @@ class TDExporter
       pw.format("# TopoDroid v %s\r\n", TopoDroidApp.VERSION );
       pw.format("# %s\r\n", TopoDroidUtil.getDateString("MM dd yyyy") );
 
-      prepareTrbLine( line, -1, code );               // [-1] code
-      printTrbLine( pw, line );
-
-      String date = info.date;
-      int y = 0;
-      int m = 0;
-      int d = 0;
-      if ( date != null && date.length() == 10 ) {    // [-2] trip
-        try {
-          y = Integer.parseInt( date.substring(0,4) );
-          m = Integer.parseInt( date.substring(5,7) );
-          d = Integer.parseInt( date.substring(8,10) );
-          prepareTrbLine( line, -2, trip );
-          setTrbInt( line, y*10000+m*100+d, 25, 33 );
-          if ( info.team != null && info.team.length() > 0 ) {
-            // TODO speleometer 35-47
-            //      speleograph 49-61
-          }
-          printTrbLine( pw, line );
-        } catch ( NumberFormatException e ) {
-          TDLog.Error( "exportSurveyAsDat date parse error " + date );
-        }
-      }
-      if ( info.comment != null ) {                   // [-4] bla-bla
-        prepareTrbLine( line, -4, 0 );
-        setTrbString( line, info.comment, 13, 79 );
-        printTrbLine( pw, line );
-      }
+      //           5 11 15 19 23
+      pw.format("%6d%6d%4d%4d%4d %s\r\n", -6, 1, 1, 1, 1, info.name ); // [-6] cave name
 
       List< FixedInfo > fixeds = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
       if ( fixeds.size() > 0 ) {
@@ -1998,22 +1886,98 @@ class TDExporter
           int pos = fixed.name.indexOf('.');
           int st = (pos < 0)? Integer.parseInt( fixed.name )
                  : Integer.parseInt( fixed.name.substring( pos+1 ) );
-          prepareTrbLine( line, -6, st );            // [-6] entry
-          setTrbString( line, fixed.name, 25, 79 );
-          printTrbLine( pw, line );            
-          prepareTrbLine( line, -5, st );            // [-5] coords
-          setTrbInt( line, (int)(fixed.lng*1.e8), 25, 36 );
-          setTrbInt( line, (int)(fixed.lat*1.e8), 37, 48 );
-          setTrbInt( line, (int)(fixed.alt), 49, 60 );
-          printTrbLine( pw, line );
+          pw.format("%6d%6d%4d%4d%4d%12.2f%12.2f%12.2f%8d%8d\r\n", -5, 1, 1, 1, 1, 
+            fixed.lng, fixed.lat, fixed.alt, 1, st );
+          pw.format("(%5d%6d%4d%4d%4d %s \r\n", -5, 1, 1, 1, 1, fixed.name );
         }
+      } else {
+        pw.format("%6d%6d%4d%4d%4d%12.2f%12.2f%12.2f%8d%8d\r\n", -5, 1, 1, 1, 1, 0.0, 0.0, 0.0, 1, 0 );
       }
       pw.format("\r\n" );
 
+      String date = info.date;
+      int y = 0;
+      int m = 0;
+      int d = 0;
+      if ( date != null && date.length() == 10 ) {    // [-2] trip
+        try {
+          y = Integer.parseInt( date.substring(0,4) ); y = y%100;
+          m = Integer.parseInt( date.substring(5,7) );
+          d = Integer.parseInt( date.substring(8,10) );
+        } catch ( NumberFormatException e ) { }
+      }
+      pw.format("%6d%6d%4d%4d%4d %02d/%02d/%02d\r\n", -4, 1, 1, 1, 1, d, m, y );
+
+      if ( info.comment != null ) {                   // [-4, -3]A bla-bla
+        pw.format("%6d%6d%4d%4d%4d %s\r\n", -3, 1, 1, 1, 1, info.comment );
+      }
+
+      String team = (info.team != null)? info.team : "";
+      if ( team.length() > 26 ) team = team.substring(0,26);
+      pw.format("%6d%6d%4d%4d%4d %02d/%02d/%02d %26s%4d%8.2f%4d%4d\r\n",
+        -2, 1, 1, 1, 1, d, m, y, team, 0, info.declination, 0, 1 );
+
+      //           5 11 15 19 23   31   39   47   55   63   71   79
+      pw.format("%6d%6d%4d%4d%4d%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f\r\n",
+        -1, 1, 1, 1, 1, 360.0, 360.0, 0.05, 0.5, 0.5, 100.0, 0.0 );
+
+      int max_series = 0;
+      for ( DBlock item : list ) {
+        String from = item.mFrom;
+        String to   = item.mTo;
+        if ( from != null && from.length() > 0 && to != null && to.length() > 0 ) { 
+          int srf = getTrbSeries( from );
+          int srt = getTrbSeries( to );
+          if ( srt > max_series ) max_series = srt;
+          if ( srf > max_series ) max_series = srf;
+        }
+      }
+      max_series ++;
+    
+      int nr_st[]    = new int[ max_series ];
+      int start_sr[] = new int[ max_series ];
+      int start_st[] = new int[ max_series ];
+      int end_st[]   = new int[ max_series ];
+      for ( int k=0; k<max_series; ++k ) {
+        nr_st[k] = 0;
+        start_sr[k] = 0;
+        start_st[k] = 0;
+        end_st[k] = 0;
+      }
+     
+      int first_sr = -1;
+      int first_st = -1;
+      int last_sr = -1;
+      int last_st = -1;
+      int nr_pts = 0;
+      for ( DBlock item : list ) {
+        String from = item.mFrom;
+        String to   = item.mTo;
+        if ( from != null && from.length() > 0 && to != null && to.length() > 0 ) { 
+          int srf = getTrbSeries( from );
+          int stf = getTrbStation( from );
+          int srt = getTrbSeries( to );
+          int stt = getTrbStation( to );
+          if ( first_sr < 0 || srf != srt ) {
+            if ( first_sr < 0 ) { first_sr = srf; first_st = stf; }
+            start_sr[srt] = srf;
+            start_st[srt] = stf;
+            nr_st[srt] = 0;
+          }
+          nr_st[srt] ++;
+          end_st[srt] = stt;
+          last_sr = srt;
+          last_st = stt;
+          ++nr_pts;
+        }
+      }
+
+      pw.format("%6d%6d%4d%4d%4d%8d%8d%8d%8d%8d%8d%8d\r\n",
+        1, -1, 1, 1, 1, first_sr, first_st, last_sr, last_st, nr_pts, 1, 0 );
+
       AverageLeg leg = new AverageLeg(0);
       DBlock ref_item = null;
-
-      int series = -1;
+      int series = first_sr;
       // boolean in_splay = false;
       // boolean duplicate = false;
       LRUD lrud;
@@ -2035,28 +1999,43 @@ class TDExporter
             }
           }
         } else { // with FROM station
-          int s = getTrbSeries( item.mFrom );
-          if ( s != series ) {
-            series = s;
-            prepareTrbLine( line, series, -2 );
-            printTrbLine( pw, line );
-          }
+          // int s = getTrbSeries( item.mFrom );
+          // if ( s != series ) {
+          //   series = s;
+          //   pw.format("%6d%6d%4d%4d%4d%8d%8d%8d%8d%8d%8d%8d\r\n",
+          //     s, -1, 1, 1, 1, start_sr[s], start_st[s], s, end_st[s], nr_st[s], 0, 0 );
+          // }
           if ( to == null || to.length() == 0 ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
+              int srt = getTrbSeries( ref_item.mTo );
+              int stt = getTrbStation( ref_item.mTo );
               lrud = computeLRUD( ref_item, list, true );
-              prepareTrbData( line, series, getTrbStation(ref_item.mTo), leg, lrud, trip, code );
-              printTrbLine( pw, line );
+              if ( srt != series ) {
+                series = srt;
+                pw.format("%6d%6d%4d%4d%4d%8d%8d%8d%8d%8d%8d%8d\r\n",
+                  srt, -1, 1, 1, 1, start_sr[srt], start_st[srt], srt, end_st[srt], nr_st[srt], 0, 0 );
+                // if ( series == first_sr ) 
+                if ( stt != 0 ) {
+                  pw.format("%6d%6d%4d%4d%4d%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f\r\n",
+                    srt, 0, 1, 1, 1, 0.0, 0.0, 0.0, lrud.l, lrud.r, lrud.u, lrud.d );
+                }
+              }
+              //           5 11 15 19 23   31   39   47   55   63   71   79
+              pw.format("%6d%6d%4d%4d%4d%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f\r\n",
+                srt, stt, 1, 1, trip, leg.length(), leg.bearing(), leg.clino(), 
+                lrud.l, lrud.r, lrud.u, lrud.d );
+              leg.reset();
               // duplicate = false;
               ref_item = null; 
             }
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {
-              int t = getTrbSeries( ref_item.mTo );
-              if ( t != series ) {
-                series = t;
-                prepareTrbLine( line, series, -2 );
-                printTrbLine( pw, line );
-              }
+              // int srt = getTrbSeries( ref_item.mTo );
+              // if ( srt != series ) {
+              //   series = srt;
+              //   pw.format("%6d%6d%4d%4d%4d%8d%8d%8d%8d%8d%8d%8d\r\n",
+              //     srt, -1, 1, 1, 1, start_sr[srt], start_st[srt], srt, end_st[srt], nr_st[srt], 0, 0 );
+              // }
             }
             ref_item = item;
             // duplicate = ( item.mFlag == DBlock.BLOCK_DUPLICATE );
@@ -2065,9 +2044,15 @@ class TDExporter
         }
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
+        int srt = getTrbSeries( ref_item.mTo );
+        int stt = getTrbStation( ref_item.mTo );
         lrud = computeLRUD( ref_item, list, true );
-        prepareTrbData( line, series, getTrbStation(ref_item.mTo), leg, lrud, trip, code );
-        printTrbLine( pw, line );
+        pw.format("%6d%6d%4d%4d%4d%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f\r\n",
+                srt, stt, 1, 1, trip, leg.length(), leg.bearing(), leg.clino(), 
+                lrud.l, lrud.r, lrud.u, lrud.d );
+        leg.reset();
+        // duplicate = false;
+        ref_item = null; 
       }
       pw.format( "\r\n" );
 

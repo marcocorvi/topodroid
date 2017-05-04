@@ -59,6 +59,10 @@ public class PhotoSensorsDialog extends MyDialog
   private MyCheckBox mButtonSurvey;
   private MyCheckBox mButtonDelete;
 
+  HorizontalListView mListView;
+  HorizontalButtonView mButtonView;
+  private Button[] mButton;
+
   private Button mBtnCancel;
 
   /**
@@ -84,8 +88,9 @@ public class PhotoSensorsDialog extends MyDialog
     setContentView(R.layout.photo_sensor_dialog);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
-    LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
     int size = TopoDroidApp.getScaledSize( mContext );
+
+    LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
     layout4.setMinimumHeight( size + 20 );
     
     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
@@ -111,6 +116,20 @@ public class PhotoSensorsDialog extends MyDialog
     mButtonSurvey = new MyCheckBox( mContext, size, R.drawable.iz_split, R.drawable.iz_split );
     mButtonDelete = new MyCheckBox( mContext, size, R.drawable.iz_delete, R.drawable.iz_delete );
 
+    mButton = new Button[6];
+
+    mButton[0] = mButtonPhoto;
+    mButton[1] = mButtonAudio;
+    mButton[2] = mButtonSensor;
+    mButton[3] = mButtonShot;
+    mButton[4] = mButtonSurvey;
+    mButton[5] = mButtonDelete;
+
+    mListView = (HorizontalListView) findViewById(R.id.listview);
+    /* size = */ TopoDroidApp.setListViewHeight( mContext, mListView );
+    mButtonView = new HorizontalButtonView( mButton );
+    mListView.setAdapter( mButtonView.mAdapter );
+/*
     // layout4.addView( mButtonPlot, lp );
     layout4.addView( mButtonPhoto, lp );
     layout4.addView( mButtonAudio, lp );
@@ -118,7 +137,7 @@ public class PhotoSensorsDialog extends MyDialog
     layout4.addView( mButtonShot, lp );
     layout4.addView( mButtonSurvey, lp );
     layout4.addView( mButtonDelete, lp );
-
+*/
     layout4.invalidate();
 
     mBtnCancel = (Button) findViewById( R.id.button_cancel );

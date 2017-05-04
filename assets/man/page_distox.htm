@@ -1,0 +1,133 @@
+<html>
+<body>
+
+<h4>DistoX Reference Guide</h4>
+
+<i>Here is a summary of the DistoX functions.<br>
+The official user manuals are available at http://paperless.bheeh.ch</i>
+<br><p>
+
+Error codes:<br>
+<ul>
+<li>252: too high temperature</li>
+<li>253: too low temperature</li>
+<li>255: too weak sigmal</li>
+<li>256: too strong sigmal</li>
+<li>257: too much background light</li>
+<li>260: interrupted laser beam</li>
+</ul>
+<br><p>
+
+<ul>
+<li>DIST: power on / start laser / measure</li>
+<li>CLR: cancel current operation, switch laser off</li>
+<li>CLR (2 secs): switch device off</li>
+<li>MEM: memory entries</li>
+<li>REF: toggle distance reference</li>
+</ul>
+<br><p>
+
+<h3>DistoX2 - X310</h3>
+
+<ul>
+<li>TIMER (laser on): start timer (automatic measurement)</li>
+<li>TIMER (laser off): set timer interval (with PLUS/MINUS)</li>
+<li>SMART: extra measure info</li>
+<li>FUNC: device info</li>
+</ul>
+<br><p>
+
+Two seconds:<br>
+<ul>
+<li>DIST (with laser on): measure</li>
+<li>CLR: power off</li>
+<li>CLR+SMART: toggle calib. mode</li>
+<li>CLR+MEM: clear unsent memory</li>
+<li>CLR+FUNC: toggle bluetooth</li>
+<li>CLR+MINUS: locked power off</li>
+<li>REF: front reference</li>
+<li>REF+FUNC: back reference</li>
+<li>REF+PLUS: toggle display light</li>
+<li>REF+MINUS: toggle beep</li>
+<li>MEM: distance units</li>
+<li>MEM+SMART: angle units (deg/grad)</li>
+<li>MEM+FUNC: toggle silent mode</li>
+<li>MEM+MINUS: toggle backsight mode [2.4]</li>
+<li>SMART+MINUS: toggle triple-shot check</li>
+</ul>
+<br><p>
+
+Five seconds:<br>
+<ul>
+<li>FUNC+SMART: battery type</li>
+<li>FUNC+CLR+MEM: factory reset</li>
+<li>DIST+PLUS+MINUS (switching on): bootloader mode</li>
+</ul>
+<br><p>
+
+
+Extra measure info:<br>
+<ol>
+<li>azimuth, H distance, V distance, distance</li>
+<li>roll, dip</li>
+<li>M, G</li>
+<li>on-board accel. raw x,y,z (*)</li>
+<li>separate accel. raw x,y,z (*)</li>
+<li>magnetic raw x,y,z (*)</li>
+</ol>
+<br>
+
+<ol>
+<li>combined accel. x,y,z</li>
+<li>magnetic x,y,z</li>
+<li>on-board accel. x,y,z (*)</li>
+<li>separate accel. x,y,z (*)</li>
+</ol>
+<br><p>
+
+Device info:<br>
+<ol>
+<li>battery</li>
+<li>hw/fw version, serial number</li>
+<li>display light level (1:10)</li>
+<li>endpiece offset (-128:127)</li>
+</ol>
+<br><p>
+
+<h3>DistoX - A3</h3>
+
+<ul>
+<li>AREA: continuous display of azimuth+clino (back ref.) or roll+dip (front ref.)</li>
+<li>AREA (in front ref.)
+<li>AREA*2: firmware version and serial number</li>
+<li>UNITS: toggle display light</li>
+<li>AREA*2+REF*2+CLR: toggle silent mode</li>
+</ul>
+<br><p>
+
+Two seconds:<br>
+<ul>
+<li>UNITS (in back ref.): distance units</li>
+<li>UNITS (in front ref.): cycle angle units / BT</li>
+<li>MEM*10+UNITS: toggle calib. mode</li>
+</ul>
+<br>
+
+Five seconds:<br>
+<ul>
+<li>CLR+PLUS: toggle beep</li>
+</ul>
+<br>
+
+"Angle units / BT" cycle<br>
+<ul>
+<li>compass off, BT off</li>
+<li>compass on (grad), BT off</li>
+<li>compass on (grad), BT on</li>
+<li>compass on (deg), BT off</li>
+<li>compass on (deg), BT on</li>
+</ul>
+<br><p>
+
+</body>
+</html>

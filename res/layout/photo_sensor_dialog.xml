@@ -112,11 +112,18 @@
 
   <LinearLayout android:id="@+id/layout4"
     android:layout_width="fill_parent" 
-    android:layout_height="50sp"
-    android:paddingLeft="10sp"
-    android:paddingRight="10sp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10sp"
+    android:layout_marginBottom="10sp"
     android:orientation="horizontal" 
+    >
+    <com.topodroid.DistoX.HorizontalListView android:id="@+id/listview"
+      android:layout_width="fill_parent"
+      android:layout_marginTop="10sp"
+      android:layout_marginBottom="10sp"
+      android:layout_height="50dp"
     />
+  </LinearLayout>
 
   <CheckBox android:id="@+id/leg"
         android:layout_width="wrap_content"
