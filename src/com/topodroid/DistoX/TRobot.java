@@ -29,14 +29,16 @@ public class TRobot
     mSeries = new ArrayList< TRobotSeries >();
     mPoints = new ArrayList< TRobotPoint  >();
 
-    if ( TDSetting.mTRobotNames && TDSetting.mTRobotShot ) {
-      populateSeries( blks );
-    } else {
+    boolean done = false;
+    if ( TDSetting.mTRobotShot ) {
+      done = populateSeries( blks );
+    }
+    if ( ! done ) {
       buildSeries( blks );
     }
   }
 
-  private void populateSeries( List<DBlock> blks )
+  private boolean populateSeries( List<DBlock> blks )
   {
     TRobotSeries sf, st;
     TRobotPoint pf, pt;
@@ -92,8 +94,12 @@ public class TRobot
         }
       } catch ( NumberFormatException e ) {
         TDLog.Error("TRobot " + e.getMessage() );
+        mSeries.clear();
+        mPoints.clear();
+        return false;
       }   
     }
+    return true;
   }
     
 

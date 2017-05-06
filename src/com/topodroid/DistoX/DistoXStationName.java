@@ -149,9 +149,11 @@ public class DistoXStationName
       int pos = name.indexOf( '.' );
       if ( pos >= 0 ) {
         int pre = 0;
-        try {
-          pre = Integer.parseInt( name.substring( 0, pos ) );
-        } catch ( NumberFormatException e ) { }
+        if ( pos > 0 ) {
+          try {
+            pre = Integer.parseInt( name.substring( 0, pos ) );
+          } catch ( NumberFormatException e ) { }
+        }
         try {
           return pre * 1000 + Integer.parseInt( name.substring( pos+1 ) );
         } catch ( NumberFormatException e ) { }

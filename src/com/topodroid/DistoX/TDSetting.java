@@ -136,7 +136,6 @@ class TDSetting
     "DISTOX_VERT_SPLAY",          // 68 over this splay are shown with dashed line
     "DISTOX_STATION_PREFIX",      // 69 whether to add cave-name prefix to stations (cSurvey/compass)
     "DISTOX_STATION_NAMES",
-    "DISTOX_TROBOT_NAMES",        // station names are TopoRobot
     "DISTOX_ZOOM_CTRL",           // 71
     "DISTOX_SIDE_DRAG",           // 72 whether to enable side-drag
     "DISTOX_DXF_SCALE", 
@@ -217,7 +216,6 @@ class TDSetting
   static float mOrthogonalLRUDCosine = 1;     // cosine of the angle
 
   static boolean mExportStationsPrefix = false;  // whether to prepend cave name to station in cSurvey/compass export
-  static boolean mTRobotNames = false;
 
   // static boolean mXTherionAreas = false;
   static boolean mAutoStations = true; // whether to add stations automatically to scrap therion files
@@ -740,7 +738,6 @@ class TDSetting
     mVertSplay = tryFloat( prefs, key[k++], "50" );               // DISTOX_VERT_SPLAY
     mExportStationsPrefix =  prefs.getBoolean( key[k++], false ); // DISTOX_STATION_PREFIX
     mStationNames = (prefs.getString( key[k++], "alpha").equals("number"))? 1 : 0; // DISTOX_STATION_NAMES
-    mTRobotNames =  prefs.getBoolean( key[k++], false ); // DISTOX_TROBOT_NAMES
 
     // setZoomControls( prefs.getBoolean( key[k++], false ) ); // DISTOX_ZOOM_CONTROLS
     setZoomControls( prefs.getString( key[k++], "1"), app.isMultitouch() ); // DISTOX_ZOOM_CTRL
@@ -1075,8 +1072,6 @@ class TDSetting
       mExportStationsPrefix = prefs.getBoolean( k, false ); // DISTOX_STATION_PREFIX
     } else if ( k.equals( key[ nk++ ] ) ) {
       mStationNames = (prefs.getString( k, "alpha").equals("number"))? 1 : 0; // DISTOX_STATION_NAMES
-    } else if ( k.equals( key[ nk++ ] ) ) {
-      mTRobotNames = prefs.getBoolean( k, false ); // DISTOX_TROBOT_NAMES
     } else if ( k.equals( key[ nk++ ] ) ) {
       // setZoomControls( prefs.getBoolean( k, false ) ); // DISTOX_ZOOM_CONTROLS
       setZoomControls( prefs.getString( k, "1"), app.isMultitouch() ); // DISTOX_ZOOM_CTRL
