@@ -1,5 +1,6 @@
 ﻿symbol line
 name slope_shallow
+name-pt rampa suave
 th_name slope:shallow
 group slope
 color 0xffffcc 0xff
