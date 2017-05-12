@@ -1,6 +1,7 @@
 ﻿symbol line
 name slope_sheer
 name-pt rampa quase vertical
+name-ru склон отвесный
 th_name slope:sheer
 group slope
 color 0xff0000 0xff

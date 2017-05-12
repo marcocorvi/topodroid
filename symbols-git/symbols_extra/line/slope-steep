@@ -1,6 +1,7 @@
 ﻿symbol line
 name slope_steep
 name-pt rampa inclinada
+name-ru склон крутой
 th_name slope:steep
 group slope
 color 0xff9933 0xff
