@@ -2,17 +2,17 @@
 
 <resources>
 
-  <!-- FIXME string-array name="unitGrid">
+  <string-array name="unitGrid">
      <item name="meter">Mètres</item>
      <item name="yard">Yards</item>
-     <item name="two_tf">2 feet</item>
-  </string-array -->
+     <item name="two_tf">2 pieds</item>
+  </string-array>
 
-  <!-- TODO string-array name="loopClosure">
-     <item name="none">None</item>
-     <item name="normal">Normal</item>
+  <string-array name="loopClosure">
+     <item name="none">Aucune</item>
+     <item name="normal">Normale</item>
      <item name="triangles">Triangles</item>
-  </string-array -->
+  </string-array>
 
 
   <string-array name="survexEol">
@@ -94,13 +94,13 @@
   </string-array>
  
 
-  <!-- TODO string-array name="sizeButtons">
+  <string-array name="sizeButtons">
      <item name="small">Petit</item>
      <item name="normal">Normal</item>
-     <item name="medium">Medium</item>
+     <item name="medium">Moyen</item>
      <item name="large">Grand</item>
-     <item name="huge">Huge</item>
-  </string-array -->
+     <item name="huge">Énorme</item>
+  </string-array>
  
 
   <string-array name="logStream">
@@ -109,11 +109,11 @@
   </string-array>
 
 
-  <!-- TODO string-array name="connMode">
-     <item name="batch">À la demande, par lots</item>
+  <string-array name="connMode">
+     <item name="batch">À la demande</item>
      <item name="continuous">Continue</item>
      <item name="multi">Multi</item>
-  </string-array -->
+  </string-array>
  
 
   <!-- UNUSED string-array name="altitudeType">
@@ -211,10 +211,10 @@
      <item name="nonlinear">Non-linéaire</item>
   </string-array>
 
-  <!-- TODO string-array name="rawCData">
-     <item name="none">None</item>
-     <item name="dec">Decimal</item>
-     <item name="hex">Hex</item>
-  </string-array -->
+  <string-array name="rawCData">
+     <item name="none">Aucune</item>
+     <item name="dec">Decimale</item>
+     <item name="hex">Hexa</item>
+  </string-array>
 
 </resources>
