@@ -1,7 +1,7 @@
 ﻿symbol line
 name slope_shallow
 name-pt rampa suave
-name-ru склон пологий
+name-ru склон_пологий
 th_name slope:shallow
 group slope
 color 0xffffcc 0xff
