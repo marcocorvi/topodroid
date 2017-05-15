@@ -1,5 +1,7 @@
 ﻿symbol line
 name wall_above
+name-pt parede acima
+name-ru вышерасположенная_стена
 th_name wall:above
 group wall
 color 0xffe5cc 0x99
