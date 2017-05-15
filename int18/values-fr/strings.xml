@@ -397,6 +397,10 @@
     <string name="toggle_failed">Échec du changement de mode du DistoX</string>
     <string name="toggle_ok">DistoX en mode étalonnage</string>
     <string name="undelete_text">Sélectionner un élément pour le récupérer</string>
+    <!-- TODO string name="undelete_shot">Shots</string -->
+    <!-- TODO string name="undelete_overshoot">Overshoots</string -->
+    <!-- TODO string name="undelete_check">Checks</string -->
+    <!-- TODO string name="undelete_plot">Sketches</string -->
     <!-- TODO string name="delete_whole_leg">Delete whole leg</string -->
     <string name="visible_border">Bordure visible</string>
     <!-- UNUSED string name="vthreshold">Seuil vertical</string -->

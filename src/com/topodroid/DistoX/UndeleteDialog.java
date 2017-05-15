@@ -39,15 +39,21 @@ public class UndeleteDialog extends MyDialog
   ShotWindow mParent;
 
   private Button mBtnCancel;
+  private Button mBtnStatus;
+
   // ArrayAdapter< String >  mArrayAdapter;
   MyStringAdapter mArrayAdapter;
   ListView mList;
-  List< DBlock > mShots1;
-  List< DBlock > mShots2;
+  List< DBlock > mShots1; // deleted
+  List< DBlock > mShots2; // overshoot
+  List< DBlock > mShots3; // check
   List< PlotInfo >     mPlots;
 
+  private int mStatus;
+
   public UndeleteDialog( Context context, ShotWindow parent, DataHelper data, long sid,
-                         List<DBlock> shots1, List<DBlock> shots2, List<PlotInfo> plots )
+                         List<DBlock> shots1, List<DBlock> shots2, List<DBlock> shots3,
+                         List<PlotInfo> plots )
   {
     super( context, R.string.UndeleteDialog );
     mParent = parent;
@@ -55,14 +61,20 @@ public class UndeleteDialog extends MyDialog
     mSID    = sid;
     mShots1 = shots1;
     mShots2 = shots2;
+    mShots3 = shots3;
     mPlots  = plots;
   }
 
   @Override
   public void onClick(View v) 
   {
-    // TDLog.Log( TDLog.LOG_INPUT, "UndeleteDialog onClick()" );
-    dismiss();
+    Button b = (Button)v;
+    if ( b == mBtnStatus ) {
+      incrementStatus( );
+    } else {
+      // TDLog.Log( TDLog.LOG_INPUT, "UndeleteDialog onClick()" );
+      dismiss();
+    }
   }
 
   @Override
@@ -103,23 +115,64 @@ public class UndeleteDialog extends MyDialog
 
     mBtnCancel = (Button) findViewById( R.id.button_cancel );
     mBtnCancel.setOnClickListener( this );
+    mBtnStatus = (Button) findViewById( R.id.button_status );
+    mBtnStatus.setOnClickListener( this );
 
-    for ( DBlock b : mShots1 ) {
-      mArrayAdapter.add( 
-        String.format(Locale.US, "shot %d <%s> %.2f %.1f %.1f", b.mId, b.Name(), b.mLength, b.mBearing, b.mClino ) );
-    }
-    for ( DBlock b : mShots2 ) {
-      mArrayAdapter.add( 
-        String.format(Locale.US, "shot %d <*> %.2f %.1f %.1f", b.mId, b.mLength, b.mBearing, b.mClino ) );
-    }
-    for ( PlotInfo p : mPlots ) {
-      if ( p.type == PlotInfo.PLOT_PLAN ) {
-        mArrayAdapter.add( String.format("plot %d <%s> %s", p.id, p.name, p.getTypeString() ) );
-      // } else { // this is OK extended do not show up in this dialog
-      //   TDLog.Log( TDLog.LOG_PLOT, " plot " + p.id + " <" + p.name + "> " +  p.getTypeString() );
-      }
-    }
-
+    mStatus = 0;
+    incrementStatus();
     setTitle( R.string.undelete_text );
   }
+
+  private void incrementStatus( )
+  {
+    mArrayAdapter.clear();
+    switch ( mStatus ) {
+      case 0:
+        if ( mShots1 != null && mShots1.size() > 0 ) { mStatus = 1; break; }
+      case 1:
+        if ( mShots2 != null && mShots2.size() > 0 ) { mStatus = 2; break; }
+      case 2:
+        if ( mShots3 != null && mShots3.size() > 0 ) { mStatus = 3; break; }
+      case 3:
+        if ( mPlots  != null && mPlots.size() > 0  ) { mStatus = 0; break; }
+      default:
+        if ( mShots1 != null && mShots1.size() > 0 ) { mStatus = 1; break; }
+        if ( mShots2 != null && mShots2.size() > 0 ) { mStatus = 2; break; }
+        if ( mShots3 != null && mShots3.size() > 0 ) { mStatus = 3; break; }
+    }
+    switch ( mStatus ) {
+      case 0:
+        for ( PlotInfo p : mPlots ) {
+          if ( p.type == PlotInfo.PLOT_PLAN ) {
+            mArrayAdapter.add( String.format("plot %d <%s> %s", p.id, p.name, p.getTypeString() ) );
+          // } else { // this is OK extended do not show up in this dialog
+          //   TDLog.Log( TDLog.LOG_PLOT, " plot " + p.id + " <" + p.name + "> " +  p.getTypeString() );
+          }
+        }
+        mBtnStatus.setText( R.string.undelete_plot );
+        break;
+      case TopoDroidApp.STATUS_DELETED:
+        for ( DBlock b : mShots1 ) {
+          mArrayAdapter.add( 
+            String.format(Locale.US, "shot %d <%s> %.2f %.1f %.1f", b.mId, b.Name(), b.mLength, b.mBearing, b.mClino ) );
+        }
+        mBtnStatus.setText( R.string.undelete_shot );
+        break;
+      case TopoDroidApp.STATUS_OVERSHOOT:
+        for ( DBlock b : mShots2 ) {
+          mArrayAdapter.add( 
+            String.format(Locale.US, "shot %d %.2f %.1f %.1f", b.mId, b.mLength, b.mBearing, b.mClino ) );
+        }
+        mBtnStatus.setText( R.string.undelete_overshoot );
+        break;
+      case TopoDroidApp.STATUS_CHECK:
+        for ( DBlock b : mShots3 ) {
+          mArrayAdapter.add( 
+            String.format(Locale.US, "shot %d %.2f %.1f %.1f", b.mId, b.mLength, b.mBearing, b.mClino ) );
+        }
+        mBtnStatus.setText( R.string.undelete_check );
+        break;
+    }
+  }
+
 }

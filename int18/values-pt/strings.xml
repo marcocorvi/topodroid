@@ -395,6 +395,10 @@
     <string name="toggle_failed">Falha ao alternar a DistoX</string>
     <string name="toggle_ok">Estado de calibração da DistoX trocado</string>
     <string name="undelete_text">Toque no item para restaurá-lo</string>
+    <!-- TODO string name="undelete_shot">Shots</string -->
+    <!-- TODO string name="undelete_overshoot">Overshoots</string -->
+    <!-- TODO string name="undelete_check">Checks</string -->
+    <!-- TODO string name="undelete_plot">Sketches</string -->
     <string name="delete_whole_leg">Apague este braço inteiro</string>
     <string name="visible_border">borda visível</string>
     <!-- UNUSED string name="vthreshold">limite vertical</string -->

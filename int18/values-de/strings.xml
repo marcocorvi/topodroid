@@ -407,6 +407,10 @@
     <string name="toggle_failed">Fehler beim Kalibrierungsmodus-Wechsel</string>
     <string name="toggle_ok">Kalibrierungsmodus gewechselt</string>
     <string name="undelete_text">Tippen Sie um wiederherzustellen</string>
+    <!-- TODO string name="undelete_shot">Shots</string -->
+    <!-- TODO string name="undelete_overshoot">Overshoots</string -->
+    <!-- TODO string name="undelete_check">Checks</string -->
+    <!-- TODO string name="undelete_plot">Sketches</string -->
     <string name="delete_whole_leg">Ganze Messstrecke löschen</string>
     <string name="visible_border">Sichtbare Grenze</string>
     <!-- UNUSED string name="vthreshold">Vertikale Schwelle</string -->

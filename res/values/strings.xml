@@ -404,6 +404,10 @@
     <string name="toggle_failed">Failed to toggle DistoX</string>
     <string name="toggle_ok">Toggled DistoX calibration mode</string>
     <string name="undelete_text">Tap item to recover</string>
+    <string name="undelete_shot">Shots</string>
+    <string name="undelete_overshoot">Overshoots</string>
+    <string name="undelete_check">Checks</string>
+    <string name="undelete_plot">Sketches</string>
     <string name="delete_whole_leg">Delete whole leg</string>
     <string name="visible_border">visible border</string>
     <!-- UNUSED string name="vthreshold">vert. threshold</string -->

@@ -10,14 +10,6 @@
         android:layout_height="wrap_content" 
         android:text="@string/undelete_text"
       / -->
-      <ListView android:id="@+id/list_undelete"
-          android:layout_width="fill_parent"
-          android:layout_height="0dp"
-          android:stackFromBottom="true"
-          android:transcriptMode="alwaysScroll"
-          android:layout_weight="1"
-          android:textSize="12sp"
-      />
 
     <LinearLayout 
         android:layout_width="fill_parent"
@@ -26,14 +18,38 @@
         android:orientation="horizontal"
         android:layout_marginTop="25dip"
         android:gravity="left"
-        >
-      <Button android:id="@+id/button_cancel"
+      >
+      <Button android:id="@+id/button_status"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:layout_gravity="right"
+        android:layout_gravity="left"
         android:background="@drawable/button"
         style="@style/button_default"
-        android:text="@string/button_cancel"
-      />  
+        android:text="@string/undelete_shot"
+      />
+      <LinearLayout 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:orientation="horizontal"
+        >
+        <Button android:id="@+id/button_cancel"
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:layout_gravity="right"
+          android:background="@drawable/button"
+          style="@style/button_default"
+          android:text="@string/button_cancel"
+        />  
+      </LinearLayout>
     </LinearLayout>
+
+    <ListView android:id="@+id/list_undelete"
+          android:layout_width="fill_parent"
+          android:layout_height="0dp"
+          android:stackFromBottom="true"
+          android:transcriptMode="alwaysScroll"
+          android:layout_weight="1"
+          android:textSize="12sp"
+    />
   </LinearLayout>

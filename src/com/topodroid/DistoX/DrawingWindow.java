@@ -3736,7 +3736,7 @@ public class DrawingWindow extends ItemDrawer
             if ( PlotInfo.isSketch2D( mType ) ) { 
               DrawingPath p = sp.mItem;
               DBlock blk = p.mBlock;
-              mApp.mData.deleteShot( blk.mId, mApp.mSID, true );
+              mApp.mData.deleteShot( blk.mId, mApp.mSID, TopoDroidApp.STATUS_DELETED, true );
               askDeleteSplay( p, sp, blk );
             }
           }

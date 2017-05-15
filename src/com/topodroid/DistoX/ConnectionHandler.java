@@ -361,7 +361,7 @@ class ConnectionHandler extends Handler
          mApp.mData.updateShotStatus( Integer.parseInt(data[0]), mSID, Integer.parseInt(data[2]), false );
          break;
        case DataListener.SHOT_DELETE:
-         mApp.mData.deleteShot( Integer.parseInt(data[0]), mSID, false );
+         mApp.mData.deleteShot( Integer.parseInt(data[0]), mSID, Integer.parseInt(data[2]), false );
          break;
        case DataListener.SHOT_UNDELETE:
          mApp.mData.undeleteShot( Integer.parseInt(data[0]), mSID, false );
@@ -517,9 +517,9 @@ class ConnectionHandler extends Handler
       String.format(Locale.US, "%d|%d|%.2f|%.2f|%.2f|%.2f|", (int)sid, (int)id, acc, mag, dip, roll ) );
   }
 
-  public void onDeleteShot( long id, long sid )
+  public void onDeleteShot( long id, long sid, int status )
   {
-    enqueue( DataListener.SHOT_DELETE, String.format( "%d|%d|", (int)id, (int)sid ) );
+    enqueue( DataListener.SHOT_DELETE, String.format( "%d|%d|%d|", (int)id, (int)sid, status ) );
   }
 
   public void onUndeleteShot( long id, long sid )

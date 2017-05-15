@@ -397,6 +397,10 @@
     <string name="toggle_failed">Не вдалось перемкнути DistoX</string>
     <string name="toggle_ok">Перемкнути DistoX в режим калібрування</string>
     <string name="undelete_text">Натисніть на елемент щоб відновити</string>
+    <!-- TODO string name="undelete_shot">Shots</string -->
+    <!-- TODO string name="undelete_overshoot">Overshoots</string -->
+    <!-- TODO string name="undelete_check">Checks</string -->
+    <!-- TODO string name="undelete_plot">Sketches</string -->
     <string name="delete_whole_leg">Видалити замір</string>
     <string name="visible_border">видима межа</string>
     <!-- UNUSED string name="vthreshold">верт. поріг</string -->

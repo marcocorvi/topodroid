@@ -396,6 +396,10 @@
     <string name="toggle_failed">Attivazione modo calibrazione fallita</string>
     <string name="toggle_ok">DistoX in modo calibrazione</string>
     <string name="undelete_text">Seleziona oggetto da recuoperare</string>
+    <!-- TODO string name="undelete_shot">Shots</string -->
+    <!-- TODO string name="undelete_overshoot">Overshoots</string -->
+    <!-- TODO string name="undelete_check">Checks</string -->
+    <!-- TODO string name="undelete_plot">Sketches</string -->
     <string name="delete_whole_leg">Cancella l\'intera battuta</string>
     <string name="visible_border">bordo visibile</string>
     <!-- UNUSED string name="vthreshold">soglia vert.</string -->

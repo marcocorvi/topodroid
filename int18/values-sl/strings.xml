@@ -399,6 +399,10 @@
     <string name="toggle_failed">Neuspela aktivacija kalibracije</string>
     <string name="toggle_ok">DistoX v opciji kalibracija</string>
     <string name="undelete_text">Izberi objekt za ponvono uporabo</string>
+    <!-- TODO string name="undelete_shot">Shots</string -->
+    <!-- TODO string name="undelete_overshoot">Overshoots</string -->
+    <!-- TODO string name="undelete_check">Checks</string -->
+    <!-- TODO string name="undelete_plot">Sketches</string -->
     <!-- TODO string name="delete_whole_leg">Delete whole leg</string -->
     <string name="visible_border">Vidni robovi</string>
     <!-- UNUSED string name="vthreshold">soglia vert.</string -->

@@ -395,6 +395,10 @@
     <string name="toggle_failed">Error al alternar DistoX</string>
     <string name="toggle_ok">Alternar a modo de calibración DistoX</string>
     <string name="undelete_text">Pulse sobre la toma a recuperar</string>
+    <!-- TODO string name="undelete_shot">Shots</string -->
+    <!-- TODO string name="undelete_overshoot">Overshoots</string -->
+    <!-- TODO string name="undelete_check">Checks</string -->
+    <!-- TODO string name="undelete_plot">Sketches</string -->
     <string name="delete_whole_leg">Eliminar toda la visual</string>
     <string name="visible_border">Borde visible</string>
     <!-- UNUSED string name="vthreshold">Precisión</string -->

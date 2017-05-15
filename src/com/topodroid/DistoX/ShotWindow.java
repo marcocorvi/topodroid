@@ -561,11 +561,12 @@ public class ShotWindow extends Activity
     } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // RECOVER
       List< DBlock > shots1 = mApp.mData.selectAllShots( mApp.mSID, TopoDroidApp.STATUS_DELETED );
       List< DBlock > shots2 = mApp.mData.selectAllShots( mApp.mSID, TopoDroidApp.STATUS_OVERSHOOT );
+      List< DBlock > shots3 = mApp.mData.selectAllShots( mApp.mSID, TopoDroidApp.STATUS_CHECK );
       List< PlotInfo > plots     = mApp.mData.selectAllPlots( mApp.mSID, TopoDroidApp.STATUS_DELETED );
-      if ( shots1.size() == 0 && shots2.size() == 0 && plots.size() == 0 ) {
+      if ( shots1.size() == 0 && shots2.size() == 0 && shots3.size() == 0 && plots.size() == 0 ) {
         Toast.makeText( mActivity, R.string.no_undelete, Toast.LENGTH_SHORT ).show();
       } else {
-        (new UndeleteDialog(mActivity, this, mApp.mData, mApp.mSID, shots1, shots2, plots ) ).show();
+        (new UndeleteDialog(mActivity, this, mApp.mData, mApp.mSID, shots1, shots2, shots3, plots ) ).show();
       }
       // updateDisplay( );
     } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // PHOTO
@@ -687,15 +688,15 @@ public class ShotWindow extends Activity
     mApp.mActivity.startSplitSurvey( old_sid, old_id ); // SPLIT SURVEY
   }
 
-  void doDeleteShot( long id, DBlock blk, boolean leg )
+  void doDeleteShot( long id, DBlock blk, int status, boolean leg )
   {
-    mApp.mData.deleteShot( id, mApp.mSID, true ); // forward = true
+    mApp.mData.deleteShot( id, mApp.mSID, status, true ); // forward = true
     if ( blk != null && blk.type() == DBlock.BLOCK_MAIN_LEG ) {
-      if ( leg ) { // delete whole leg
+      if ( leg ) {
         for ( ++id; ; ++id ) {
           DBlock b = mApp.mData.selectShot( id, mApp.mSID );
           if ( b == null || b.type() != DBlock.BLOCK_SEC_LEG ) break;
-          mApp.mData.deleteShot( id, mApp.mSID, true ); // forward = true
+          mApp.mData.deleteShot( id, mApp.mSID, status, true ); // forward = true
         }
       } else { // set station to next leg shot
         ++id;
@@ -1250,12 +1251,6 @@ public class ShotWindow extends Activity
   }
 
   // ---------------------------------------------------------------------------------
-
-  // public void dropShot( DBlock blk )
-  // {
-  //   mApp.mData.deleteShot( blk.mId, mApp.mSID );
-  //   updateDisplay( ); // FIXME
-  // }
 
   public DBlock getNextBlankLegShot( DBlock blk )
   {

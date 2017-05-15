@@ -86,7 +86,7 @@ public interface DataListener
   // public void onUpdateShotNameAndExtend( long sid, ArrayList< DBlock > updatelist );
   // FIXME repeatedly call UpdateShotName() and UpdateShotExtend();
 
-  public void onDeleteShot( long id, long sid );
+  public void onDeleteShot( long id, long sid, int status );
 
   public void onUndeleteShot( long hot_id, long sid );
 

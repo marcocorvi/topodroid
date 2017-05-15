@@ -8,7 +8,7 @@ It shows the shot stations and data (length, azimuth, inclination).<br><p>
 
 At an activity level "Basic" or "Normal" this dialog has only a button to <b>Delete</b> the shot.<br><p>
 
-At higher activity levels it has six buttons:<p>
+At higher activity levels it has six or seven buttons:<p>
 <img src="shot_dialog_btn2.png"><p>
 
 <ul>
@@ -17,14 +17,21 @@ At higher activity levels it has six buttons:<p>
 <li><a href="page_sensors.htm">Sensor measurement</a> dialog</li>
 <li><b>Add</b> a shot before this (manually entering the data)</li>
 <li><b>Split</b> the survey at this shot (creating a new survey)</li>
-<li><b>Delete</b> the shot</li>
 </ul>
 <br><p>
 
 The <b>delete</b> button does not remove the shot from the database.
-The shot gets marked as "deleted" and can be later recovered with the "Recovery" dialog.
+The shot gets marked as "deleted" and can be later recovered with the 
+<a href="./page_undelete.htm">Recovery</a> dialog.
 If the shot is the first shot of a leg you can also delete all the shots of the leg, by
-checking the checkbox under the buttons.
+checking the checkbox besides the buttons.
+<br><p>
+
+Leg shots have also a <b>calibration</b> button. This button marks the shot as "calibration-check".
+These shots are not used in the survey, and their data should be taken at different roll angles.
+They are recorded in the database, and are a record of the reliability of the DistoX calibration
+when the survey was done. They can be displayed with the 
+<a href="./page_undelete.htm">Recovery</a> dialog.
 <br><p>
 
 <b>Survey split</b><br>

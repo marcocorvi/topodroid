@@ -396,6 +396,10 @@
     <string name="toggle_failed">Nem sikerült átkapcsolni a DistoX-et</string>
     <string name="toggle_ok">DistoX átkapcsolva kalibrációs üzemmódba</string>
     <string name="undelete_text">Érintse meg az elemet a visszaálításhoz</string>
+    <!-- TODO string name="undelete_shot">Shots</string -->
+    <!-- TODO string name="undelete_overshoot">Overshoots</string -->
+    <!-- TODO string name="undelete_check">Checks</string -->
+    <!-- TODO string name="undelete_plot">Sketches</string -->
     <string name="delete_whole_leg">Mérés törlése</string>
     <string name="visible_border">látható határ</string>
     <!-- UNUSED string name="vthreshold">vert. threshold</string -->

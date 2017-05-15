@@ -46,6 +46,8 @@ public class MyStringAdapter extends BaseAdapter
 
   class Holder { TextView tv; }
 
+  void clear() { mStr.clear(); }
+
   @Override
   public View getView( int pos, View convertView, ViewGroup parent )
   {

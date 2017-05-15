@@ -900,12 +900,12 @@ public class DataHelper extends DataSetObservable
   }
 
 
-  public void deleteShot( long id, long sid, boolean forward ) 
+  public void deleteShot( long id, long sid, int status, boolean forward ) 
   {
     // if ( myDB == null ) return;
-    if ( updateStatus( SHOT_TABLE, id, sid, TopoDroidApp.STATUS_DELETED ) ) {
+    if ( updateStatus( SHOT_TABLE, id, sid, status ) ) {
       if ( forward ) { // synchronized( mListeners )
-        for ( DataListener listener : mListeners ) listener.onDeleteShot( id, sid );
+        for ( DataListener listener : mListeners ) listener.onDeleteShot( id, sid, status );
       }
     }
   }

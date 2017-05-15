@@ -125,14 +125,33 @@
     />
   </LinearLayout>
 
-  <CheckBox android:id="@+id/leg"
+  <LinearLayout android:id="@+id/layout4b"
+    android:layout_below="@id/layout4"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10sp"
+    android:layout_marginBottom="10sp"
+    android:orientation="horizontal" 
+    >
+  <!-- CheckBox android:id="@+id/leg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
       	android:text="@string/delete_whole_leg"
-        />
+        / -->
+  </LinearLayout>
 
+  <LinearLayout android:id="@+id/layout4c"
+    android:layout_below="@id/layout4b"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10sp"
+    android:layout_marginBottom="10sp"
+    android:orientation="horizontal" 
+    >
+  </LinearLayout>
 
   <LinearLayout 
+    android:layout_below="@id/layout4c"
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal" 

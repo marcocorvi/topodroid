@@ -49,7 +49,7 @@ public class PhotoSensorsDialog extends MyDialog
   private EditText mETup;
   private EditText mETdown;
   private Button mBTlrud;
-  private CheckBox mCBleg;
+  private CheckBox mCBleg = null;
 
   // private MyCheckBox mButtonPlot;
   private MyCheckBox mButtonPhoto;
@@ -57,6 +57,7 @@ public class PhotoSensorsDialog extends MyDialog
   private MyCheckBox mButtonSensor;
   private MyCheckBox mButtonShot;
   private MyCheckBox mButtonSurvey;
+  private MyCheckBox mButtonCheck = null;
   private MyCheckBox mButtonDelete;
 
   HorizontalListView mListView;
@@ -105,41 +106,54 @@ public class PhotoSensorsDialog extends MyDialog
     mETdown  = (EditText)findViewById( R.id.shot_down );
     mBTlrud  = (Button)findViewById( R.id.btn_ok );
 
-    mCBleg = (CheckBox) findViewById( R.id.leg );
-    mCBleg.setChecked( false );
-
     // mButtonPlot   = new MyCheckBox( mContext, size, R.drawable.iz_plot, R.drawable.iz_plot ); 
     mButtonPhoto  = new MyCheckBox( mContext, size, R.drawable.iz_camera, R.drawable.iz_camera ); 
     mButtonAudio  = new MyCheckBox( mContext, size, R.drawable.iz_audio, R.drawable.iz_audio ); 
     mButtonSensor = new MyCheckBox( mContext, size, R.drawable.iz_sensor, R.drawable.iz_sensor ); 
     mButtonShot   = new MyCheckBox( mContext, size, R.drawable.iz_add_leg, R.drawable.iz_add_leg );
     mButtonSurvey = new MyCheckBox( mContext, size, R.drawable.iz_split, R.drawable.iz_split );
-    mButtonDelete = new MyCheckBox( mContext, size, R.drawable.iz_delete, R.drawable.iz_delete );
 
-    mButton = new Button[6];
-
-    mButton[0] = mButtonPhoto;
-    mButton[1] = mButtonAudio;
-    mButton[2] = mButtonSensor;
-    mButton[3] = mButtonShot;
-    mButton[4] = mButtonSurvey;
-    mButton[5] = mButtonDelete;
+    int nr_buttons = 5; // ( mBlk.type() == DBlock.BLOCK_MAIN_LEG )? 7 : 6;
+    mButton = new Button[nr_buttons];
+    int pos = 0;
+    mButton[pos++] = mButtonPhoto;
+    mButton[pos++] = mButtonAudio;
+    mButton[pos++] = mButtonSensor;
+    mButton[pos++] = mButtonShot;
+    mButton[pos++] = mButtonSurvey;
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
     /* size = */ TopoDroidApp.setListViewHeight( mContext, mListView );
     mButtonView = new HorizontalButtonView( mButton );
     mListView.setAdapter( mButtonView.mAdapter );
-/*
-    // layout4.addView( mButtonPlot, lp );
-    layout4.addView( mButtonPhoto, lp );
-    layout4.addView( mButtonAudio, lp );
-    layout4.addView( mButtonSensor, lp );
-    layout4.addView( mButtonShot, lp );
-    layout4.addView( mButtonSurvey, lp );
-    layout4.addView( mButtonDelete, lp );
-*/
     layout4.invalidate();
 
+    LinearLayout layout4b = (LinearLayout) findViewById( R.id.layout4b );
+    layout4b.setMinimumHeight( size + 20 );
+
+    mButtonDelete = new MyCheckBox( mContext, size, R.drawable.iz_delete, R.drawable.iz_delete );
+    mButtonDelete.setOnClickListener( this );
+    // mCBleg = (CheckBox) findViewById( R.id.leg ); // delete whole leg
+    layout4b.addView( mButtonDelete );
+    mButtonDelete.setLayoutParams( lp );
+
+    LinearLayout layout4c = (LinearLayout) findViewById( R.id.layout4c );
+    if ( mBlk.type() == DBlock.BLOCK_MAIN_LEG ) {
+      mCBleg = new CheckBox( mContext );
+      mCBleg.setText( R.string.delete_whole_leg );
+      mCBleg.setChecked( false );
+      layout4b.addView( mCBleg );
+      mCBleg.setLayoutParams( lp );
+
+      layout4c.setMinimumHeight( size + 20 );
+      mButtonCheck  = new MyCheckBox( mContext, size, R.drawable.iz_compute, R.drawable.iz_compute );
+      mButtonCheck.setOnClickListener( this );
+      layout4c.addView( mButtonCheck );
+      mButtonCheck.setLayoutParams( lp );
+    } else {
+      layout4c.setVisibility( View.GONE );
+    }
+    
     mBtnCancel = (Button) findViewById( R.id.button_cancel );
     mBtnCancel.setOnClickListener( this );
 
@@ -176,9 +190,7 @@ public class PhotoSensorsDialog extends MyDialog
     // mButtonExternal.setOnClickListener( this );
     mButtonShot.setOnClickListener( this );
     mButtonSurvey.setOnClickListener( this );
-    mButtonDelete.setOnClickListener( this );
 
-    if ( mBlk.type() != DBlock.BLOCK_MAIN_LEG ) mCBleg.setVisibility( View.GONE );
   }
 
   public void onClick(View v) 
@@ -223,12 +235,15 @@ public class PhotoSensorsDialog extends MyDialog
           }
         } );
       // mParent.askSurvey( );
+    } else if ( b == mButtonCheck && mButtonCheck != null ) { // CHECK
+      mParent.doDeleteShot( mBlk.mId, mBlk, TopoDroidApp.STATUS_CHECK, true );
+      dismiss();
     } else if ( b == mButtonDelete ) { // DELETE
       TopoDroidAlertDialog.makeAlert( mParent, mParent.getResources(), R.string.shot_delete,
         new DialogInterface.OnClickListener() {
           @Override
           public void onClick( DialogInterface dialog, int btn ) {
-            mParent.doDeleteShot( mBlk.mId, mBlk, mCBleg.isChecked() );
+            mParent.doDeleteShot( mBlk.mId, mBlk, TopoDroidApp.STATUS_DELETED, (mCBleg != null && mCBleg.isChecked()) );
             dismiss();
           }
         } );

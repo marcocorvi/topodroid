@@ -397,6 +397,10 @@
     <string name="toggle_failed">Грешка при превключване на DistoX</string>
     <string name="toggle_ok">Включен/изключен режим на калибрация на DistoX</string>
     <string name="undelete_text">Изберете какво искате да възстановите</string>
+    <!-- TODO string name="undelete_shot">Shots</string -->
+    <!-- TODO string name="undelete_overshoot">Overshoots</string -->
+    <!-- TODO string name="undelete_check">Checks</string -->
+    <!-- TODO string name="undelete_plot">Sketches</string -->
     <string name="delete_whole_leg">Изтриване на отсечка</string>
     <string name="visible_border">видима граница</string>
     <!-- UNUSED string name="vthreshold">вертикална граница</string -->

@@ -395,6 +395,10 @@
     <string name="toggle_failed">启动DistoX失败</string>
     <string name="toggle_ok">启动 DistoX 校准模式</string>
     <string name="undelete_text">点击项目恢复</string>
+    <!-- TODO string name="undelete_shot">Shots</string -->
+    <!-- TODO string name="undelete_overshoot">Overshoots</string -->
+    <!-- TODO string name="undelete_check">Checks</string -->
+    <!-- TODO string name="undelete_plot">Sketches</string -->
     <!-- TODO string name="delete_whole_leg">Delete whole leg</string -->
     <string name="visible_border">显示边界</string>
     <!-- UNUSED string name="vthreshold">垂直边界</string -->
