@@ -199,10 +199,11 @@ class DrawingDxf
     printInt( pw2, 70, flag );    // layer flag
     printInt( pw2, 62, color );   // layer color
     printString( pw2, 6, linetype ); // linetype name
-    printInt( pw2, 370, -3 );
-    printString( pw2, 390, "F" );
-    printInt( pw2, 347, 46 );
-    printInt( pw2, 348, 0 );
+    printInt( pw2, 330, 2 );       // softpointer id/handle to owner dictionary 
+    printInt( pw2, 370, -3 );      // lineweight enum value
+    printString( pw2, 390, "F" );  // hardpointer id/handle or plotstylename object
+    // printInt( pw2, 347, 46 );
+    // printInt( pw2, 348, 0 );
   }
 
   // static void printEndText( PrintWriter pw, String style )
@@ -449,14 +450,30 @@ class DrawingDxf
         printString( pw1, 9, "$LIMMAX" ); printXY( pw1, 420.0f, 297.0f, 0 );
         out.write( sw1.getBuffer().toString() );
       }
+      writeString( out, 9, "$DIMSCALE" );    writeString( out, 40, "1.0" ); // 
+      writeString( out, 9, "$DIMTXT" );      writeString( out, 40, "2.5" ); // 
+      writeString( out, 9, "$LTSCALE" );     writeInt( out, 40, 1 ); // 
+      writeString( out, 9, "$LIMCHECK" );    writeInt( out, 70, 0 ); // 
+      writeString( out, 9, "$ORTHOMODE" );   writeInt( out, 70, 0 ); // 
+      writeString( out, 9, "$FILLMODE" );    writeInt( out, 70, 1 ); // 
+      writeString( out, 9, "$QTEXTMODE" );   writeInt( out, 70, 0 ); // 
+      writeString( out, 9, "$REGENMODE" );   writeInt( out, 70, 1 ); // 
+      writeString( out, 9, "$MIRRMODE" );    writeInt( out, 70, 0 ); // 
+      writeString( out, 9, "$UNITMODE" );    writeInt( out, 70, 0 ); // 
+
       writeString( out, 9, "$TEXTSIZE" );    writeInt( out, 40, 5 ); // default text size
       writeString( out, 9, "$TEXTSTYLE" );   writeString( out, 7, standard );
+      writeString( out, 9, "$CELTYPE" );     writeString( out, 6, "BYLAYER" ); // 
+      writeString( out, 9, "$CELTSCALE" );   writeInt( out, 40, 1 ); // 
+      writeString( out, 9, "$CECOLOR" );     writeInt( out, 62, 256 ); // 
 
-      writeString( out, 9, "$UNITMODE" );    writeInt( out, 70, 0 ); // 
       writeString( out, 9, "$MEASUREMENT" ); writeInt( out, 70, 1 ); // drawing units 1=metric
       writeString( out, 9, "$INSUNITS" );    writeInt( out, 70, 4 ); // defaulty draing units 0=unitless 4=mm
       writeString( out, 9, "$DIMASSOC" );    writeInt( out, 280, 0 ); // 0=no association
-      
+
+      writeEndSection( out );
+
+      writeSection( out, "CLASSES" );
       writeEndSection( out );
       
       writeSection( out, "TABLES" );
@@ -903,7 +920,7 @@ class DrawingDxf
       }
       writeEndSection( out );
 
-      // handle = writeSectionObjects( out, handle );
+      handle = writeSectionObjects( out, handle );
 
       writeString( out, 0, "EOF" );
       out.flush();
@@ -1072,8 +1089,36 @@ class DrawingDxf
     return handle;
   }
 
-/* SECTION OBJECTS
+// SECTION OBJECTS
+  static int writeSectionObjects( BufferedWriter out, int handle ) throws IOException
+  {
+    writeSection( out, "OBJECTS" );
 
+    StringWriter swx = new StringWriter();
+    PrintWriter pwx  = new PrintWriter(swx);
+
+    printString( pwx, 0, "DICTIONARY" );
+    int saved = ++handle;
+    printAcDb( pwx, handle, AcDbDictionary );
+    // printInt( pwx, 280, 0 );
+    printInt( pwx, 281, 1 );
+    printString( pwx, 3, "ACAD_GROUP" );
+    ++handle; printHex( pwx, 350, handle );
+
+    printString( pwx, 0, "DICTIONARY" );
+    ++handle; printAcDb( pwx, handle, AcDbDictionary );
+    // printInt( pwx, 280, 0 );
+    printInt( pwx, 281, 1 );
+    printHex( pwx, 330, saved );
+
+    out.write( swx.getBuffer().toString() );
+    out.flush();
+
+    writeEndSection( out );
+    return handle;
+  }
+
+/*
   static int writeSectionObjects( BufferedWriter out, int handle ) throws IOException
   {
     writeSection( out, "OBJECTS" );
