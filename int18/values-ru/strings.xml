@@ -404,10 +404,10 @@
     <string name="toggle_failed">Не удалось переключить DistoX</string>
     <string name="toggle_ok">Переключить DistoX в режим калибровки</string>
     <string name="undelete_text">Нажмите на элемент чтобы восстановить</string>
-    <!-- TODO string name="undelete_shot">Shots</string -->
-    <!-- TODO string name="undelete_overshoot">Overshoots</string -->
-    <!-- TODO string name="undelete_check">Checks</string -->
-    <!-- TODO string name="undelete_plot">Sketches</string -->
+    <string name="undelete_shot">Замеры</string>
+    <string name="undelete_overshoot">Сл.длинные замеры</string>
+    <string name="undelete_check">Проверочные</string>
+    <string name="undelete_plot">Абрисы</string>
     <string name="delete_whole_leg">Удалить все замеры</string>
     <string name="visible_border">видимая граница</string>
     <!-- UNUSED string name="vthreshold">верт. порог</string -->
