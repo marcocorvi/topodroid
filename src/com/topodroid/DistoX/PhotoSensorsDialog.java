@@ -144,12 +144,15 @@ public class PhotoSensorsDialog extends MyDialog
       mCBleg.setChecked( false );
       layout4b.addView( mCBleg );
       mCBleg.setLayoutParams( lp );
-
-      layout4c.setMinimumHeight( size + 20 );
-      mButtonCheck  = new MyCheckBox( mContext, size, R.drawable.iz_compute, R.drawable.iz_compute );
-      mButtonCheck.setOnClickListener( this );
-      layout4c.addView( mButtonCheck );
-      mButtonCheck.setLayoutParams( lp );
+      if ( mBlk.mShotType == 0 ) {
+        layout4c.setMinimumHeight( size + 20 );
+        mButtonCheck  = new MyCheckBox( mContext, size, R.drawable.iz_compute, R.drawable.iz_compute );
+        mButtonCheck.setOnClickListener( this );
+        layout4c.addView( mButtonCheck );
+        mButtonCheck.setLayoutParams( lp );
+      } else {
+        layout4c.setVisibility( View.GONE );
+      }
     } else {
       layout4c.setVisibility( View.GONE );
     }
@@ -236,8 +239,14 @@ public class PhotoSensorsDialog extends MyDialog
         } );
       // mParent.askSurvey( );
     } else if ( b == mButtonCheck && mButtonCheck != null ) { // CHECK
-      mParent.doDeleteShot( mBlk.mId, mBlk, TopoDroidApp.STATUS_CHECK, true );
-      dismiss();
+      TopoDroidAlertDialog.makeAlert( mParent, mParent.getResources(), R.string.shot_check,
+        new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick( DialogInterface dialog, int btn ) {
+            mParent.doDeleteShot( mBlk.mId, mBlk, TopoDroidApp.STATUS_CHECK, true );
+            dismiss();
+          }
+        } );
     } else if ( b == mButtonDelete ) { // DELETE
       TopoDroidAlertDialog.makeAlert( mParent, mParent.getResources(), R.string.shot_delete,
         new DialogInterface.OnClickListener() {

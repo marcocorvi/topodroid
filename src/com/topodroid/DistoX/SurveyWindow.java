@@ -79,6 +79,7 @@ public class SurveyWindow extends Activity
                         R.string.menu_rename,
                         R.string.menu_delete,
                         R.string.menu_manual_calibration,
+                        R.string.menu_calib_check,
                         R.string.menu_options,
                         R.string.menu_help
                       };
@@ -97,6 +98,7 @@ public class SurveyWindow extends Activity
                         R.string.help_rename,
                         R.string.help_delete_survey,
                         R.string.help_manual_calibration,
+                        R.string.help_calib_check,
                         R.string.help_prefs,
                         R.string.help_help
                       };
@@ -614,6 +616,13 @@ public class SurveyWindow extends Activity
       askDelete();
     } else if ( p++ == pos ) { // INSTRUMENTS CALIBRATION
       new SurveyCalibrationDialog( mActivity, this ).show();
+    } else if ( p++ == pos ) { // CALIBRATION CHECK SHOTS
+      List< DBlock > shots = mApp.mData.selectAllShots( mApp.mSID, TopoDroidApp.STATUS_CHECK );
+      if ( shots.size() == 0 ) {
+        Toast.makeText( mActivity, R.string.no_calib_check, Toast.LENGTH_SHORT).show();
+      } else {
+        new CalibCheckDialog( mActivity, this, shots ).show();
+      }
     } else if ( p++ == pos ) { // OPTIONS
       Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
       intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SURVEY );

@@ -218,6 +218,7 @@
 
     <string name="no_bt">No Bluetooth</string>
     <string name="no_calib">No calibration</string>
+    <string name="no_calib_check">No calibration-check shot</string>
     <string name="no_calibration">No calibration selected</string>
     <string name="no_capture_app">No image capture app</string>
     <string name="no_cave3d">Cave3D not installed</string>
@@ -249,6 +250,7 @@
     <string name="menu_attach">CONNECT</string>
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
+    <string name="menu_calib_check">CALIBR. CHECK</string>
     <string name="menu_close">CLOSE</string>
     <string name="menu_delete">DELETE</string>
     <string name="menu_detach">DISCONNECT</string>
@@ -365,6 +367,7 @@
     <!-- UNUSED string name="shot_clino">clino</string -->
     <!-- UNUSED string name="shot_compass">compass</string -->
     <string name="shot_delete">Delete shot ?</string>
+    <string name="shot_check">Mark shot as check-shot?</string>
     <string name="shot_from">from</string>
     <string name="shot_info">Enter shot data</string>
     <!-- UNUSED string name="shot_length">length</string -->
@@ -598,6 +601,7 @@
     <!-- UNUSED string name="help_manual">User manual</string -->
     <string name="help_measure">Measure distances</string>
     
+    <string name="help_calib_check">Calibration-check shots</string>
     <string name="help_close">Close window</string>
     <string name="help_coeff">Show calibration coefficients</string>
     <string name="help_continue">Continue drawing a line</string>
@@ -711,6 +715,7 @@
     <string name="title_azimut">Extend reference</string>
     <string name="title_audio">Audio comment</string>
     <string name="title_calib">Calibrations</string>
+    <string name="title_calib_check">Calibration-check shots</string>
     <string name="title_coverage">Calibration data distribution</string>
     <string name="title_coeff">Calibration coefficients</string>
     <string name="title_contour">Contour</string>

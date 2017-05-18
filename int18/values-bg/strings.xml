@@ -218,6 +218,7 @@
 
     <string name="no_bt">Липсва Bluetooth</string>
     <string name="no_calib">Липсва калибрация</string>
+    <!-- TODO string name="no_calib_check">No calibration-check shot</string -->
     <string name="no_calibration">Не е избрана калибрация</string>
     <string name="no_capture_app">Липсва програма за камера</string>
     <string name="no_cave3d">Cave3D не е инсталирана</string>
@@ -249,6 +250,7 @@
     <string name="menu_attach">Свързване</string>
     <!-- UNUSED string name="menu_attached">connected</string -->
     <!-- UNUSED string name="menu_ready">ready</string -->
+    <!-- TODO string name="menu_calib_check">CALIBR. CHECK</string -->
     <string name="menu_close">Затваряне</string>
     <string name="menu_delete">Изтриване</string>
     <string name="menu_detach">Прек. на връзката</string>
@@ -358,6 +360,7 @@
     <!-- string name="shot_clino">clino</string -->
     <!-- string name="shot_compass">compass</string -->
     <string name="shot_delete">Изтриване на измерване?</string>
+    <!-- TODO string name="shot_check">Mark shot as check-shot?</string -->
     <string name="shot_from">от</string>
     <string name="shot_info">Въведете данни за отсечката</string>
     <!-- string name="shot_length">length</string -->
@@ -591,6 +594,7 @@
     <!-- UNUSED string name="help_manual">Ръководство</string -->
     <string name="help_measure">Измерване на разстояния</string>
 
+    <!-- TODO string name="help_calib_check">Calibration-check shots</string -->
     <string name="help_close">Затваряне на прозореца</string>
     <string name="help_coeff">Показване на коеф. на калибрация</string>
     <string name="help_continue">Продължаване на линия</string>
@@ -699,6 +703,7 @@
     <string name="title_azimut">Разгъване спрямо азим.</string>
     <string name="title_audio">Аудио коментар</string>
     <string name="title_calib">Калибрации</string>
+    <!-- TODO string name="title_calib_check">Calibration-check shots</string -->
     <string name="title_coverage">Разпределение на данните от калибрацията</string>
     <string name="title_coeff">Коефициенти на калибрацията</string>
     <!-- NO string name="title_contour">Contour</string -->

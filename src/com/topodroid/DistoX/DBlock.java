@@ -332,6 +332,17 @@ public class DBlock
     return sw.getBuffer().toString();
   }
 
+  public String toShortString( boolean show_id )
+  {
+    float ul = TDSetting.mUnitLength;
+    float ua = TDSetting.mUnitAngle;
+    StringWriter sw = new StringWriter();
+    PrintWriter pw  = new PrintWriter(sw);
+    if ( show_id ) pw.format("%d ", mId );
+    pw.format(Locale.US, "<%s-%s> %.2f %.1f %.1f", mFrom, mTo, mLength*ul, mBearing*ua, mClino*ua );
+    return sw.getBuffer().toString();
+  }
+
   String toNote()
   {
     StringWriter sw = new StringWriter();

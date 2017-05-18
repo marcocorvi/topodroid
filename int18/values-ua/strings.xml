@@ -218,6 +218,7 @@
 
     <string name="no_bt">Нема Bluetooth</string>
     <string name="no_calib">Відсутнє калібрування</string>
+    <!-- TODO string name="no_calib_check">No calibration-check shot</string -->
     <string name="no_calibration">Калібрування не вибране</string>
     <string name="no_capture_app">Відсутній додаток для фото</string>
     <string name="no_cave3d">Cave3D не встановлений</string>
@@ -249,6 +250,7 @@
     <string name="menu_attach">З\'ЄДНАТИ</string>
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
+    <!-- TODO string name="menu_calib_check">CALIBR. CHECK</string -->
     <string name="menu_close">ЗАКРИТИ</string>
     <string name="menu_delete">Видалити</string>
     <string name="menu_detach">Від\'єднати</string>
@@ -358,6 +360,7 @@
     <!-- UNUSED string name="shot_clino">кут</string -->
     <!-- UNUSED string name="shot_compass">азимут</string -->
     <string name="shot_delete">Видалити сегмент ?</string>
+    <!-- TODO string name="shot_check">Mark shot as check-shot?</string -->
     <string name="shot_from">№ ОТ</string>
     <string name="shot_info">Введіть дані замірів</string>
     <!-- UNUSED string name="shot_length">довжина</string -->
@@ -591,6 +594,7 @@
     <!-- UNUSED string name="help_manual">Інструкція</string -->
     <string name="help_measure">Виміряти відстань</string>
 
+    <!-- TODO string name="help_calib_check">Calibration-check shots</string -->
     <string name="help_close">Закрити вікно</string>
     <string name="help_coeff">Показать коэфіцієнти калібрування</string>
     <string name="help_continue">Продовжити малювати лінію</string>
@@ -699,6 +703,7 @@
     <string name="title_azimut">Азимут</string>
     <string name="title_audio">Аудіо коментар</string>
     <string name="title_calib">Калібрування</string>
+    <!-- TODO string name="title_calib_check">Calibration-check shots</string -->
     <string name="title_coverage">Калібрування и розподіл даних</string>
     <string name="title_coeff">Калібрувальні коефіцієнти</string>
     <string name="title_contour">Контур</string>

@@ -217,6 +217,7 @@
 
     <string name="no_bt">Nincs bluetooth</string>
     <string name="no_calib">Nincs kalibráció</string>
+    <!-- TODO string name="no_calib_check">No calibration-check shot</string -->
     <string name="no_calibration">Nincs kalibráció kiválasztva</string>
     <string name="no_capture_app">Nincs app fénykép készítéshez</string>
     <string name="no_cave3d">Cave3D nincs telepítve</string>
@@ -248,6 +249,7 @@
     <string name="menu_attach">KAPCSOL</string>
     <!-- UNUSED string name="menu_attached">ÖSSZEKAPCSOLT</string -->
     <!-- UNUSED string name="menu_ready">KÉSZ</string -->
+    <!-- TODO string name="menu_calib_check">CALIBR. CHECK</string -->
     <string name="menu_close">BEZÁR</string>
     <string name="menu_delete">TÖRÖL</string>
     <string name="menu_detach">SZÉTKAPCSOL</string>
@@ -357,6 +359,7 @@
     <!-- UNUSED string name="shot_clino">clino</string -->
     <!-- UNUSED string name="shot_compass">compass</string -->
     <string name="shot_delete">Törli a mérést?</string>
+    <!-- TODO string name="shot_check">Mark shot as check-shot?</string -->
     <string name="shot_from">Honnan</string>
     <string name="shot_info">Írd be a mérés adatait</string>
     <!-- UNUSED string name="shot_length">length</string -->
@@ -590,6 +593,7 @@
     <!-- UNUSED string name="help_manual">User manual</string -->
     <string name="help_measure">Távolságmérés</string>
     
+    <!-- TODO string name="help_calib_check">Calibration-check shots</string -->
     <string name="help_close">Súgó bezárása</string>
     <string name="help_coeff">Mutassa a kalibrációs együtthatókat</string>
     <string name="help_continue">Vonal folytatása</string>
@@ -698,6 +702,7 @@
     <string name="title_azimut">Vonatkozási rendszer</string>
     <string name="title_audio">Hangjegyzet</string>
     <string name="title_calib">Kalibrációk</string>
+    <!-- TODO string name="title_calib_check">Calibration-check shots</string -->
     <string name="title_coverage">Kalibrációs adatok eloszlása</string>
     <string name="title_coeff">Kalibrációs együtthatók</string>
     <string name="title_contour">Körvonal</string>

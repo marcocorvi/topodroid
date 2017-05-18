@@ -217,6 +217,7 @@
 
     <string name="no_bt">No Bluetooth</string>
     <string name="no_calib">Nessuna calibrazione</string>
+    <!-- TODO string name="no_calib_check">No calibration-check shot</string -->
     <string name="no_calibration">Nessuna calibrazione selezionata</string>
     <string name="no_capture_app">Nessuna app per foto</string>
     <string name="no_cave3d">Cave3D non installato</string>
@@ -248,6 +249,7 @@
     <string name="menu_attach">CONNETTI</string>
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
+    <!-- TODO string name="menu_calib_check">CALIBR. CHECK</string -->
     <string name="menu_close">CHIUDI</string>
     <string name="menu_delete">ELIMINA</string>
     <string name="menu_detach">SCONNETTI</string>
@@ -357,6 +359,7 @@
     <!-- UNUSED string name="shot_clino">clino</string -->
     <!-- UNUSED string name="shot_compass">bussola</string -->
     <string name="shot_delete">Cancellare la misura?</string>
+    <!-- TODO string name="shot_check">Mark shot as check-shot?</string -->
     <string name="shot_from">da</string>
     <string name="shot_info">Scrivi i dati</string>
     <!-- UNUSED string name="shot_length">lunghezza</string -->
@@ -589,6 +592,7 @@
     <!-- UNUSED string name="help_manual">Manuale online</string -->
     <string name="help_measure">Misurare le distanze</string>
     
+    <!-- TODO string name="help_calib_check">Calibration-check shots</string -->
     <string name="help_close">Chiusura finestra</string>
     <string name="help_coeff">Coefficienti della calibrazione</string>
     <string name="help_continue">Continuare il disegno di una linea</string>
@@ -697,6 +701,7 @@
     <string name="title_azimut">Riferimento Extend</string>
     <!-- TODO string name="title_audio">Audio comment</string -->
     <string name="title_calib">Calibrazioni</string>
+    <!-- TODO string name="title_calib_check">Calibration-check shots</string -->
     <string name="title_coverage">Distribuzione dati calibrazione</string>
     <string name="title_coeff">Calibrazione</string>
     <!-- NO string name="title_contour">Contour</string -->

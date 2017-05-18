@@ -216,6 +216,7 @@
 
     <string name="no_bt">蓝牙未启动</string>
     <string name="no_calib">未校准</string>
+    <!-- TODO string name="no_calib_check">No calibration-check shot</string -->
     <string name="no_calibration">无校准选择</string>
     <string name="no_capture_app">无图像捕捉软件</string>
     <string name="no_cave3d">Cave3D 未安装</string>
@@ -247,6 +248,7 @@
     <string name="menu_attach">连接</string>
     <!-- UNUSED string name="menu_attached">连接</string -->
     <!-- UNUSED string name="menu_ready">就绪</string -->
+    <!-- TODO string name="menu_calib_check">CALIBR. CHECK</string -->
     <string name="menu_close">关闭</string>
     <string name="menu_delete">删除</string>
     <string name="menu_detach">断开连接</string>
@@ -356,6 +358,7 @@
     <!-- UNUSED string name="shot_clino">倾角测量</string -->
     <!-- UNUSED string name="shot_compass">方位角测量</string -->
     <string name="shot_delete">删除测量 ?</string>
+    <!-- TODO string name="shot_check">Mark shot as check-shot?</string -->
     <string name="shot_from">来自</string>
     <string name="shot_info">输入测量数据</string>
     <!-- UNUSED string name="shot_length">主线测量</string -->
@@ -587,6 +590,7 @@
     <!-- UNUSED string name="help_manual">用户手册</string -->
     <string name="help_measure">测量距离</string>
     
+    <!-- TODO string name="help_calib_check">Calibration-check shots</string -->
     <string name="help_close">关闭窗口</string>
     <string name="help_coeff">显示校准系数</string>
     <string name="help_continue">继续画线</string>
@@ -695,6 +699,7 @@
     <string name="title_azimut">延展参照</string>
     <!-- TODO string name="title_audio">Audio comment</string -->
     <string name="title_calib">校准</string>
+    <!-- TODO string name="title_calib_check">Calibration-check shots</string -->
     <string name="title_coverage">校准数据分布</string>
     <string name="title_coeff">校准系数</string>
     <string name="title_contour">轮廓</string>

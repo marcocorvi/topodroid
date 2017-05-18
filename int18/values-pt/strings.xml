@@ -217,6 +217,7 @@
 
     <string name="no_bt">Bluetooth indisponível</string>
     <string name="no_calib">Nenhuma calibração</string>
+    <!-- TODO string name="no_calib_check">No calibration-check shot</string -->
     <string name="no_calibration">Nenhuma calibração selecionada</string>
     <string name="no_capture_app">Nenhum aplicativo de captura de imagem</string>
     <string name="no_cave3d">Cave3D não instalado</string>
@@ -248,6 +249,7 @@
     <string name="menu_attach">CONECTAR</string>
     <!-- UNUSED string name="menu_attached">Conectado</string -->
     <!-- UNUSED string name="menu_ready">Pronto</string -->
+    <!-- TODO string name="menu_calib_check">CALIBR. CHECK</string -->
     <string name="menu_close">FECHAR</string>
     <string name="menu_delete">APAGAR</string>
     <string name="menu_detach">DESCONECTAR</string>
@@ -356,6 +358,7 @@
     <!-- UNUSED string name="shot_clino">clinômetro</string -->
     <!-- UNUSED string name="shot_compass">bússola</string -->
     <string name="shot_delete">Apagar visada?</string>
+    <!-- TODO string name="shot_check">Mark shot as check-shot?</string -->
     <string name="shot_from">de</string>
     <string name="shot_info">Inserir medida manualmente</string>
     <!-- UNUSED string name="shot_length">comprimento</string -->
@@ -589,6 +592,7 @@
     <!-- UNUSED string name="help_manual">Manual do usuário</string -->
     <string name="help_measure">Medir distâncias</string>
     
+    <!-- TODO string name="help_calib_check">Calibration-check shots</string -->
     <string name="help_close">Fechar janela</string>
     <string name="help_coeff">Mostrar coeficientes de calibração</string>
     <string name="help_continue">Continuar desenho de uma linha</string>
@@ -697,6 +701,7 @@
     <string name="title_azimut">Referência para retificar perfil</string>
     <string name="title_audio">Áudio comentário</string>
     <string name="title_calib">Calibrações</string>
+    <!-- TODO string name="title_calib_check">Calibration-check shots</string -->
     <string name="title_coverage">Distribuição dos dados de calibração</string>
     <string name="title_coeff">Coeficientes de calibração</string>
     <string name="title_contour">Contorno</string>
