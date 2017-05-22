@@ -218,7 +218,7 @@
 
     <string name="no_bt">Липсва Bluetooth</string>
     <string name="no_calib">Липсва калибрация</string>
-    <!-- TODO string name="no_calib_check">No calibration-check shot</string -->
+    <string name="no_calib_check">Липсва контролно измерване</string>
     <string name="no_calibration">Не е избрана калибрация</string>
     <string name="no_capture_app">Липсва програма за камера</string>
     <string name="no_cave3d">Cave3D не е инсталирана</string>
@@ -250,7 +250,7 @@
     <string name="menu_attach">Свързване</string>
     <!-- UNUSED string name="menu_attached">connected</string -->
     <!-- UNUSED string name="menu_ready">ready</string -->
-    <!-- TODO string name="menu_calib_check">CALIBR. CHECK</string -->
+    <string name="menu_calib_check">Проверка калибрация</string>
     <string name="menu_close">Затваряне</string>
     <string name="menu_delete">Изтриване</string>
     <string name="menu_detach">Прек. на връзката</string>
@@ -266,7 +266,7 @@
     <string name="menu_help">Помощ</string>
     <string name="menu_join_survey">Ко-картиране</string>
     <string name="menu_logs">Лог файлове</string>
-    <string name="menu_manual_calibration">Калибрация</string>
+    <string name="menu_manual_calibration">Калибрация инстр.</string>
     <string name="menu_options">Настройки</string>
     <string name="menu_overview">Общ изглед</string>
     <string name="menu_pair">Сдвояване</string>
@@ -360,7 +360,7 @@
     <!-- string name="shot_clino">clino</string -->
     <!-- string name="shot_compass">compass</string -->
     <string name="shot_delete">Изтриване на измерване?</string>
-    <!-- TODO string name="shot_check">Mark shot as check-shot?</string -->
+    <string name="shot_check">Маркиране като контролно измерване?</string>
     <string name="shot_from">от</string>
     <string name="shot_info">Въведете данни за отсечката</string>
     <!-- string name="shot_length">length</string -->
@@ -400,10 +400,10 @@
     <string name="toggle_failed">Грешка при превключване на DistoX</string>
     <string name="toggle_ok">Включен/изключен режим на калибрация на DistoX</string>
     <string name="undelete_text">Изберете какво искате да възстановите</string>
-    <!-- TODO string name="undelete_shot">Shots</string -->
-    <!-- TODO string name="undelete_overshoot">Overshoots</string -->
-    <!-- TODO string name="undelete_check">Checks</string -->
-    <!-- TODO string name="undelete_plot">Sketches</string -->
+    <string name="undelete_shot">Измервания</string>
+    <string name="undelete_overshoot">Дълги измервания</string>
+    <string name="undelete_check">Проверки</string>
+    <string name="undelete_plot">Скици</string>
     <string name="delete_whole_leg">Изтриване на отсечка</string>
     <string name="visible_border">видима граница</string>
     <!-- UNUSED string name="vthreshold">вертикална граница</string -->
@@ -594,7 +594,7 @@
     <!-- UNUSED string name="help_manual">Ръководство</string -->
     <string name="help_measure">Измерване на разстояния</string>
 
-    <!-- TODO string name="help_calib_check">Calibration-check shots</string -->
+    <string name="help_calib_check">Контролни измервания</string>
     <string name="help_close">Затваряне на прозореца</string>
     <string name="help_coeff">Показване на коеф. на калибрация</string>
     <string name="help_continue">Продължаване на линия</string>
@@ -703,7 +703,7 @@
     <string name="title_azimut">Разгъване спрямо азим.</string>
     <string name="title_audio">Аудио коментар</string>
     <string name="title_calib">Калибрации</string>
-    <!-- TODO string name="title_calib_check">Calibration-check shots</string -->
+    <string name="title_calib_check">Контролни измервания</string>
     <string name="title_coverage">Разпределение на данните от калибрацията</string>
     <string name="title_coeff">Коефициенти на калибрацията</string>
     <!-- NO string name="title_contour">Contour</string -->
@@ -883,10 +883,10 @@
   <string name="pref_leg_title">Толеранс на отсечките</string>
   <string name="pref_leg_summary">Толеранс между измерванията за отсечка на антената</string>
   <string name="pref_leg_message">Толеранс между измерванията за отсечка на антената</string>
-  <string name="pref_max_shot_title">Макс. дължина на измерване</string>
+  <string name="pref_max_shot_title">Макс. дължина на измерване [m]</string>
   <string name="pref_max_shot_summary">Максимално приемлива дължина на измерване [m]</string>
   <string name="pref_max_shot_message">Измервания над тази дължина се маркират като прекалено дълги и вероятно грешни</string>
-  <string name="pref_min_leg_title">Макс. дължина на отсечка</string>
+  <string name="pref_min_leg_title">Мин. дължина на отсечка [m]</string>
   <string name="pref_min_leg_summary">Минимална приемлива дължина на отсечка [m]</string>
   <string name="pref_min_leg_message">Отсечки под тази дължина се маркират като вероятно грешни</string>
   <string name="pref_backsight_title">Обратна отсечка</string>
