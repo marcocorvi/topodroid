@@ -45,7 +45,7 @@
     <!-- UNUSED string name="missing_warning">Les symboles suivants sont manquants.\n</string -->
     <string name="failed_snap_to_line">Pas de ligne à accrocher</string>
     <string name="failed_snap_to_point">Pas de point à accrocher</string>
-    <string name="failed_snap_to_splays">Aucune cheminement assez proche pour attacher la ligne</string>
+    <string name="failed_snap_to_splays">Aucun cheminement assez proche pour attacher la ligne</string>
 
     <string name="calibration_title">Outil de calibrage</string>
     <string name="calibration_length">Mètre</string>
@@ -75,7 +75,7 @@
     <string name="calib_ave_std">Précision : %1$.4f %2$.4f degrés</string>
     <string name="calib_precision">Précision</string>
     <string name="calib_iter">Itérations : %1$d</string>
-    <string name="calib_reset">Réinitialiser l'étalonnage du DistoX ?</string -->
+    <string name="calib_reset">Réinitialiser l\'étalonnage du DistoX ?</string -->
 
     <string name="algorithm">Algorithme:</string>
     <string name="auto">automatique</string>
@@ -135,15 +135,15 @@
 <string name="import_failed">L\'import du fichier a échoué</string>
 <string name="file_not_found">Fichier inexistant</string>
     <string name="import_calib_ok">Étalonnage importé avec succès</string>
-    <string name="import_calib_no_header">Fichier d'étalon.: problème d'entête</string>
+    <string name="import_calib_no_header">Fichier d'étalon.: problème d\'entête</string>
     <string name="import_calib_already">Étalon. déja existant</string>
     <string name="import_calib_mismatch">Étalon. périphérique incorrect</string>
-    <string name="import_calib_no_data">Fichier d'étalon.: aucune données</string>
-    <string name="import_calib_io_error">Fichier d'étalon.: erreur de lecture</string>
+    <string name="import_calib_no_data">Fichier d\'étalon.: aucune données</string>
+    <string name="import_calib_io_error">Fichier d\'étalon.: erreur de lecture</string>
 <string name="import_zip_ok">Fichier zip importé avec succes</string>
 <string name="import_zip_wait">L\'importation du fichier zip peut être longue… Patientez…</string>
 <!-- UNUSED string name="sketch_saving">Exportation de dessin ... Patientez ...</string -->
-<string name="MT_points_none">No Mobile Topographer point</string>
+<string name="MT_points_none">Pas de point Mobile Topographer</string>
 
 
 <!-- UNUSED string name="head_tail">Mémoire : </string -->
@@ -217,7 +217,7 @@
 
 <string name="no_bt">Pas de Bluetooth</string>
 <string name="no_calib">Pas d\'étallonage</string>
-<string name="no_calib_check">Pas de visée de contrôle d'étalonnage</string>
+<string name="no_calib_check">Pas de visée de contrôle d\'étalonnage</string>
 <string name="no_calibration">Aucun étallonage sélectionné</string>
 <string name="no_capture_app">Aucune application de capture d\'image</string>
 <string name="no_cave3d">Cave3D n\'est pas installé</string>
