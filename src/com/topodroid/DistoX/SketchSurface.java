@@ -695,9 +695,9 @@ class SketchSurface extends SketchShot
 
   // SketchTriangle addTriangle3V( Vector v1, Vector v2, Vector v3 )
   // {
-  //   int ka = addVertex( t.mA );
-  //   int kb = addVertex( t.mB );
-  //   int kc = addVertex( t.mC );
+  //   int ka = addVertex( t.mV[0] );
+  //   int kb = addVertex( t.mV[1] );
+  //   int kc = addVertex( t.mV[2] );
   //   addTriangle( ka, kb, kc );
   // }
 
@@ -1057,19 +1057,61 @@ class SketchSurface extends SketchShot
   //   // Log.v("DistoX", "Nr. triangles " + nt );
   // }
 
-  void makeTriangles( Sketch3dInfo info, ConvexHull hull ) 
+  // called by SkecthModel
+  void makeConvexHullTriangles( Sketch3dInfo info, ConvexHull hull ) 
   {
-    Vector unit = info.shotUnit();    // shot unit-vector
+    // Vector unit = info.shotUnit();    // shot unit-vector
     ArrayList< Triangle > tri = hull.mTri;
     ArrayList< Vector > pts = new ArrayList<Vector>();
     for ( Triangle t : tri ) {
       // Triangle has vertces mA mB mC and outgoing normal mN 
-      int ka = addVertex( t.mA );
-      int kb = addVertex( t.mB );
-      int kc = addVertex( t.mC );
+      int ka = addVertex( t.mV[0] );
+      int kb = addVertex( t.mV[1] );
+      int kc = addVertex( t.mV[2] );
       addTriangle( ka, kb, kc );
     }
     computeBorders();
+  }
+
+  void makePowercrustTriangles( Sketch3dInfo info, Powercrust pc )
+  {
+    // Vector unit = info.shotUnit();    // shot unit-vector
+    int np = pc.nrPoles();
+    int[] vtx = new int[np];
+    for ( int n=0; n<np; ++n ) {
+      vtx[n] = addVertex( new Vector( (float)pc.poleX(), (float)pc.poleY(), (float)pc.poleZ() ) );
+      if ( pc.nextPole() == 0 ) break;
+    }
+    int nf = pc.nrFaces();
+    for ( int n=0; n<nf; ++n ) {
+      int sz = pc.faceSize();
+      if ( sz == 3 ) {
+        int ka = vtx[ pc.faceVertex(0) ];
+        int kb = vtx[ pc.faceVertex(1) ];
+        int kc = vtx[ pc.faceVertex(2) ];
+        addTriangle( ka, kb, kc );
+      } else if ( sz > 3 ) {
+        int idx[] = new int[sz];
+        float x = 0;
+        float y = 0;
+        float z = 0;
+        for ( int s=0; s<sz; ++s ) {
+          idx[s] = vtx[ pc.faceVertex( s ) ];
+          SketchVertex v = getVertex( idx[s] );
+          x += v.x;
+          y += v.y;
+          z += v.z;
+        }
+        x /= sz;
+        y /= sz;
+        z /= sz;
+        int idc = addVertex( x, y, z );
+        for ( int s=0; s<sz; ++s ) {
+          addTriangle( idx[s], idx[(s+1)%sz], idc );
+        }
+      }
+      if ( pc.nextFace() == 0 ) break;
+    }
   }
 
   // void makeTriangles( SketchSectionSet ss, Sketch3dInfo info, ArrayList< SketchFixedPath > splays1,

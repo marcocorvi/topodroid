@@ -84,9 +84,9 @@ public class ConvexHull
       for ( Triangle t : tri ) {
         if ( ! t.valid ) continue;
         if ( t.signedDistance( p ) > 0 ) {
-          vp_to_add.add( new VectorPair(t.mA, t.mB ) );
-          vp_to_add.add( new VectorPair(t.mB, t.mC ) );
-          vp_to_add.add( new VectorPair(t.mC, t.mA ) );
+          vp_to_add.add( new VectorPair(t.mV[0], t.mV[1] ) );
+          vp_to_add.add( new VectorPair(t.mV[1], t.mV[2] ) );
+          vp_to_add.add( new VectorPair(t.mV[2], t.mV[0] ) );
           t.valid = false;
         }
       }

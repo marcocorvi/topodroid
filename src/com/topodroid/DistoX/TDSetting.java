@@ -111,6 +111,7 @@ class TDSetting
     "DISTOX_LEG_SHOTS",           // 52 nr. of shots to make a leg
 
     // -------------------- 3D-MODEL PREFERENCES
+    "DISTOX_SKETCH_MODEL_TYPE",   
     "DISTOX_SKETCH_LINE_STEP",    // 53
     "DISTOX_DELTA_EXTRUDE",       // 54
     "DISTOX_COMPASS_READINGS",    // 55
@@ -407,6 +408,7 @@ class TDSetting
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // 3D
+  static int   mSketchModelType = 1;
   static float mSketchSideSize;
   static float mDeltaExtrude;
   // static boolean mSketchUsesSplays; // whether 3D models surfaces use splays
@@ -710,6 +712,7 @@ class TDSetting
     mMinNrLegShots = tryInt(   prefs, key[k++], "3" );              // DISTOX_LEG_SHOTS choice: 2, 3, 4
 
     // ------------------- SKETCH PREFERENCES
+    mSketchModelType = tryInt(  prefs, key[k++], "1" );             // DISTOX_SKETCH_MODEL_TYPE
     mSketchSideSize = tryFloat( prefs, key[k++], "0.5" );           // DISTOX_SKETCH_LINE_STEP
     mDeltaExtrude   = tryFloat( prefs, key[k++], "50"  );           // DISTOX_DELTA_EXTRUDE
     // mSketchUsesSplays  = prefs.getBoolean( key[k++], false );    
@@ -1021,6 +1024,8 @@ class TDSetting
     } else if ( k.equals( key[ nk++ ] ) ) {
       mMinNrLegShots    = tryInt( prefs, k, "3" );   // DISTOX_LEG_SHOTS (choice)
 
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mSketchModelType = tryInt(  prefs, k, "1" );    // DISTOX_SKETCH_MODEL_TYPE
     } else if ( k.equals( key[ nk++ ] ) ) {
       mSketchSideSize = tryFloat( prefs, k, "0.5" );  // 0.5 meter // DISTOX_SKETCH_LINE_STEP
     } else if ( k.equals( key[ nk++ ] ) ) { 
@@ -1349,6 +1354,7 @@ class TDSetting
     if ( name.equals( "DISTOX_BEEP_VOLUME"    ) ) return parseIntValue( value, mBeepVolume, 10, 100 );
     // if ( name.equals( "DISTOX_LEG_SHOTS" )
 
+    //C if ( name.equals( "DISTOX_SKETCH_MODEL_TYPE" )
     if ( name.equals( "DISTOX_SKETCH_LINE_STEP" ) ) return parseFloatValue( value, mSketchSideSize,  0.01f );
     if ( name.equals( "DISTOX_DELTA_EXTRUDE"    ) ) return parseFloatValue( value, mDeltaExtrude,    0.01f );
     if ( name.equals( "DISTOX_COMPASS_READINGS" ) ) return parseIntValue(   value, mCompassReadings, 1 );
@@ -1396,7 +1402,7 @@ class TDSetting
     //B if ( name.equals( "DISTOX_AREA_BORDER" )
     if ( name.equals( "DISTOX_ORTHO_LRUD" ) ) return parseFloatValue( value, mOrthogonalLRUDAngle, 0, 90 );
 
-    // if ( name.equals( "DISTOX_WALLS_TYPE" )
+    //C if ( name.equals( "DISTOX_WALLS_TYPE" )
     if ( name.equals( "DISTOX_WALLS_PLAN_THR"     ) ) return parseFloatValue( value, mWallsPlanThr, 0, 90 );
     if ( name.equals( "DISTOX_WALLS_EXTENDED_THR" ) ) return parseFloatValue( value, mWallsExtendedThr, 0, 90 );
     if ( name.equals( "DISTOX_WALLS_XCLOSE"       ) ) return parseFloatValue( value, mWallsXClose, 0 );

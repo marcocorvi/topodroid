@@ -1893,7 +1893,7 @@ public class SketchWindow extends ItemDrawer
   {
     // FIXME CONVEX HULL SURFACE
     // mModel.makeSurface();
-    mModel.makeConvexSurface();
+    mModel.makeSurface( mModel.SURFACE_CONVEX_HULL );
   }
 
   public void removeSurface( boolean with_sections )

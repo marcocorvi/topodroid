@@ -19,50 +19,41 @@ import java.lang.Math;
 import android.util.Log;
 
 
-public class Triangle
+public class Triangle extends Facet
 {
-  boolean valid;
-  public Vector mA, mB, mC;
-  public Vector mN;   // unit normal
 
   Triangle( Vector a, Vector b, Vector c )
   {
-    valid = true;
-    mA = a;
-    mB = b;
-    mC = c;
-    Vector v1 = mB.minus( mA );
-    Vector v2 = mC.minus( mA );
-    mN = v1.cross( v2 );
-    mN.normalize();
+    super( 3 );
+    mV[0] = a;
+    mV[1] = b;
+    mV[2] = c;
+    computeCenter();
+    computeNormal();
   }
-
-  float signedDistance( Vector p ) { return mN.dot( p.minus(mA) ); }
-
-  boolean isPositive( Vector p ) { return signedDistance(p) > 0.0000001f; }
 
   Triangle[] refineAtCenter()
   {
-    Vector p = mA.plus( mB ).plus( mC ); p.timesEqual( 1.0f/3.0f );
+    Vector p = mV[0].plus( mV[1] ).plus( mV[2] ); p.timesEqual( 1.0f/3.0f );
 
     Triangle[] ret = new Triangle[3];
-    ret[0] = new Triangle( mA, mB, p );
-    ret[1] = new Triangle( mB, mC, p );
-    ret[2] = new Triangle( mC, mA, p );
+    ret[0] = new Triangle( mV[0], mV[1], p );
+    ret[1] = new Triangle( mV[1], mV[2], p );
+    ret[2] = new Triangle( mV[2], mV[0], p );
     return ret;
   }
 
   Triangle[] refineAtSides()
   {
-    Vector a = mB.plus( mC ); a.timesEqual( 0.5f );
-    Vector b = mC.plus( mA ); b.timesEqual( 0.5f );
-    Vector c = mA.plus( mB ); c.timesEqual( 0.5f );
+    Vector a = mV[1].plus( mV[2] ); a.timesEqual( 0.5f );
+    Vector b = mV[2].plus( mV[0] ); b.timesEqual( 0.5f );
+    Vector c = mV[0].plus( mV[1] ); c.timesEqual( 0.5f );
     
     Triangle[] ret = new Triangle[4];
     ret[0] = new Triangle( a, b, c );
-    ret[1] = new Triangle( mA, c, b );
-    ret[2] = new Triangle( mB, a, c );
-    ret[3] = new Triangle( mC, b, a );
+    ret[1] = new Triangle( mV[0], c, b );
+    ret[2] = new Triangle( mV[1], a, c );
+    ret[3] = new Triangle( mV[2], b, a );
     return ret;
   }
 
@@ -71,12 +62,12 @@ public class Triangle
     Triangle[] ret = new Triangle[3];
 
     Vector va=null, vb=null, vc=null;
-    if ( p == mA ) {
-      va = mA;  vb = mB;  vc = mC;
-    } else if ( p == mB ) {
-      va = mB;  vb = mC;  vc = mA;
-    } else if ( p == mC ) {
-      va = mC;  vb = mA;  vc = mB;
+    if ( p == mV[0] ) {
+      va = mV[0];  vb = mV[1];  vc = mV[2];
+    } else if ( p == mV[1] ) {
+      va = mV[1];  vb = mV[2];  vc = mV[0];
+    } else if ( p == mV[2] ) {
+      va = mV[2];  vb = mV[0];  vc = mV[1];
     } else {
       return null;
     }

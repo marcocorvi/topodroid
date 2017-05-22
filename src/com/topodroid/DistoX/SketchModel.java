@@ -42,6 +42,11 @@ class SketchModel
   // private static final float mCloseness = TDSetting.mSelectness;
   DistoXNum mNum;
 
+  final int SURFACE_NONE        = 0;
+  final int SURFACE_CONVEX_HULL = 1;
+  final int SURFACE_POWERCRUST  = 2;
+
+
   Sketch3dInfo mInfo;
   SketchPainter mPainter;
   SketchSurface mCurrentSurface;
@@ -320,7 +325,7 @@ class SketchModel
   //   return mCurrentSurface != null && mCurrentSurface.removeTriangle( t );
   // }
 
-  void makeConvexSurface()
+  void makeSurface( int type )
   {
     NumStation st1 = mInfo.station1;
     NumStation st2 = mInfo.station2;
@@ -328,7 +333,7 @@ class SketchModel
     List<NumSplay> splay2 = mNum.getSplaysAt( st2 );
     // Log.v("DistoX", "splays at 1: " + splay1.size() + " at 2: " + splay2.size() );
     if ( splay1.size() < 2 || splay2.size() < 2 ) {
-      TDLog.Error( "makeConvexSurface too few splays " + splay1.size() + " " + splay2.size() );
+      TDLog.Error( "make Convex Surface too few splays " + splay1.size() + " " + splay2.size() );
       return;
     }
 
@@ -342,9 +347,21 @@ class SketchModel
     Vector v1 = st1.toVector();
     Vector v2 = st2.toVector();
 
-    ConvexHull hull = new ConvexHull( v1, v2, pts );
     mCurrentSurface = new SketchSurface( mInfo.st1, mInfo.st2, mPainter );
-    mCurrentSurface.makeTriangles( mInfo, hull );
+
+    switch ( type ) {
+      case SURFACE_POWERCRUST:
+        Powercrust pc = new Powercrust( v1, v2, pts );
+        pc.compute();
+        mCurrentSurface.makePowercrustTriangles( mInfo, pc );
+        pc.release();
+        break;
+      case SURFACE_CONVEX_HULL:
+      default:
+        ConvexHull hull = new ConvexHull( v1, v2, pts );
+        mCurrentSurface.makeConvexHullTriangles( mInfo, hull );
+        break;
+    }
     mSurfaces.add( mCurrentSurface );
   }
 

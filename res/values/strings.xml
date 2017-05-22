@@ -1064,6 +1064,8 @@
   <string name="pref_sketchCompassReadings_title">Compass readings</string>
   <string name="pref_sketchCompassReadings_summary">Number of readings to average</string>
   <string name="pref_sketchCompassReadings_message">Number of compass readings to average</string>
+  <string name="pref_sketchModelType_title">Model type</string>
+  <string name="pref_sketchModelType_summary">Model wall reconstruction</string>
 
   <string name="pref_unit_length_title">Length units</string>
   <string name="pref_unit_length_summary">Display units for lengths</string>

@@ -9,6 +9,15 @@
        android:defaultValue="false"
      / -->
 
+     <com.topodroid.DistoX.MyListPreference
+       android:key="DISTOX_SKETCH_MODEL_TYPE"
+       android:summary="@string/pref_sketchModelType_summary"
+       android:title="@string/pref_sketchModelType_title"
+       android:defaultValue="0"
+       android:entries="@array/modelType"
+       android:entryValues="@array/modelTypeValue"
+     />
+
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_SKETCH_LINE_STEP"
        android:summary="@string/pref_sketchLineStep_summary"
