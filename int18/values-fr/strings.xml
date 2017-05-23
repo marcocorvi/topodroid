@@ -593,7 +593,7 @@
 
     <string name="help_calib_check">Visées de contrôle étalonnage</string>
     <string name="help_close">Fermer fenêtre</string>
-    <string name="help_coeff">Montrer les coefficients d'étalonnage</string>
+    <string name="help_coeff">Montrer les coefficients d\'étalonnage</string>
     <string name="help_continue">Continuer une ligne</string>
     <string name="help_current_station">Stations enregistrées</string>
     <string name="help_azimuth">Azimuth Référence Etendu</string>
