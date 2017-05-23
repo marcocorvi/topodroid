@@ -434,7 +434,7 @@
     <string name="stat_splay">Странични %1$d</string>
     <string name="stat_station">Репери %1$d</string>
     <string name="stat_surface">Повърхн. отсечки %1$d %2$.1f %3$s</string>
-    <string name="stat_wens">З %1$.0f  И %2$.0f  С %3$.0f  Ю %4$.0f [%5$s]"</string>
+    <string name="stat_wens">З %1$.0f,  И %2$.0f,  С %3$.0f,  Ю %4$.0f [%5$s]"</string>
     <string name="stat_angle_error">Ъглова грешка %1$.2f ± %2$.2f"</string>
     <string name="shot_title">Отсечка %1$s - %2$s"</string>
     <string name="shot_data">Дълж. %1$.2f  Азимут %2$.1f  Наклон %3$.1f"</string>
@@ -629,8 +629,8 @@
     <string name="help_sensor">Сензорни измервания</string>
     <string name="help_3d">3D програма (Cave3D)</string>
     <string name="help_move">Режим на преместване/приближаване</string>
-    <string name="help_draw">Вкл. на режим на скициране</string>
-    <string name="help_edit">Вкл. на режим на редактиране</string>
+    <string name="help_draw">Режим на скициране</string>
+    <string name="help_edit">Режим на редактиране</string>
     <string name="help_refs">Избор на данни, които да се показват</string>
     <string name="help_rename">Преименуване на картировката</string>
     <string name="help_plot_rename">Преименуване на скицата</string>
@@ -640,8 +640,8 @@
     <!-- UNUSED string name="help_tdr2th2">Конвертиране на двоични файлове на скици в th2</string -->
     <string name="help_toggle_plot">Превключване на хор. план/верт. разрез</string>
     <!-- UNUSED string name="help_trash">Изтриване на скица</string -->
-    <string name="help_undo">Изтриване на действие от скицата</string>
-    <string name="help_redo">Възстановяване на действие от скицата</string>
+    <string name="help_undo">Обратно (Undo)</string>
+    <string name="help_redo">Възстановяване (Redo)</string>
     <string name="help_symbol_plot">Избор на елемент за рисуване</string>
     <string name="help_delete_item">Изтриване на елемент от скицата</string>
     <string name="help_range">Преместване на част от линия</string>
