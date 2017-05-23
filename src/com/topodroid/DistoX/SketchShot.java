@@ -48,6 +48,8 @@ class SketchShot
         return ( st1.equals( sh.st1 ) && st2.equals( sh.st2 )) || (st2.equals( sh.st1 ) && st1.equals( sh.st2 ));
       case SketchDef.DISPLAY_ALL:
         return true;
+      case SketchDef.DISPLAY_NONE:
+        return true;
     }
     return false;
   }

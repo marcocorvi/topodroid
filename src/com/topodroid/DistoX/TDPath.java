@@ -47,6 +47,7 @@ public class TDPath
   final static String SVG = ".svg";
   final static String SVX = ".svx";
   final static String TDR = ".tdr";
+  final static String TDR3 = ".tdr3";
   final static String TH  = ".th";
   final static String TH2 = ".th2";
   final static String TH3 = ".th3";
@@ -101,6 +102,7 @@ public class TDPath
   private static String PATH_SVX;    //  = PATH_BASE + "svx/";
   private static String PATH_TH;     //  = PATH_BASE + "th/";
   private static String PATH_TDR;    //  = PATH_BASE + "tdr/";
+  private static String PATH_TDR3;   //  = PATH_BASE + "tdr3/";
   private static String PATH_TH2;    //  = PATH_BASE + "th2/";
   private static String PATH_TH3;    //  = PATH_BASE + "th3/";
   private static String APP_TMP_PATH;    //  = PATH_BASE + "tmp/";
@@ -193,6 +195,9 @@ public class TDPath
 
     PATH_TH3 = PATH_BASE + "th3/";
     checkDirs( PATH_TH3 );
+
+    PATH_TDR3 = PATH_BASE + "tdr3/";
+    checkDirs( PATH_TDR3 );
 
     APP_TMP_PATH = PATH_BASE + "tmp/";
     checkDirs( APP_TMP_PATH );
@@ -300,6 +305,7 @@ public class TDPath
   static String getSymbolSaveFile( String name ) { return APP_SYMBOL_SAVE_PATH + name; }
 
   static boolean hasTdrDir() { return (new File( PATH_TDR )).exists(); }
+  static boolean hasTdr3Dir() { return (new File( PATH_TDR3 )).exists(); }
   static boolean hasTh2Dir() { return (new File( PATH_TH2 )).exists(); }
   static boolean hasTh3Dir() { return (new File( PATH_TH3 )).exists(); }
   static boolean hasPngDir() { return (new File( PATH_PNG )).exists(); }
@@ -312,6 +318,7 @@ public class TDPath
   static String getImportFile( String name ) { return PATH_IMPORT + name; }
   static String getZipFile( String name )    { return PATH_ZIP + name; }
   static String getTdrFile( String name )    { return PATH_TDR + name; }
+  static String getTdr3File( String name )   { return PATH_TDR3 + name; }
   static String getTh2File( String name )    { return PATH_TH2 + name; }
   static String getTh3File( String name )    { return PATH_TH3 + name; }
 
@@ -356,7 +363,8 @@ public class TDPath
   static String getSurveyPlotPngFile( String survey, String name ) { return PATH_PNG + survey + "-" + name + PNG ; }
   static String getSurveyPlotCsxFile( String survey, String name ) { return PATH_CSX + survey + "-" + name + CSX ; }
 
-  static String getSurveySketchFile( String survey, String name ) { return PATH_TH3 + survey + "-" + name + TH3 ; }
+  static String getSurveySketchInFile( String survey, String name ) { return PATH_TH3 + survey + "-" + name + TH3 ; }
+  static String getSurveySketchOutFile( String survey, String name ) { return PATH_TDR3 + survey + "-" + name + TDR3 ; }
 
   private static String getFile( String directory, String name, String ext ) 
   {
@@ -369,6 +377,7 @@ public class TDPath
   static String getSurveyNoteFile( String title ) { return getFile( APP_NOTE_PATH, title, TXT ); }
   static String getTmpFileWithExt( String name ) { return getFile( APP_TMP_PATH, name, TMP ); }
   static String getTdrFileWithExt( String name ) { return getFile( PATH_TDR, name, TDR ); }
+  static String getTdr3FileWithExt( String name ) { return getFile( PATH_TDR3, name, TDR3 ); }
   static String getTh2FileWithExt( String name ) { return getFile( PATH_TH2, name, TH2 ); }
   static String getTh3FileWithExt( String name ) { return getFile( PATH_TH3, name, TH3 ); }
   static String getDxfFileWithExt( String name ) { return getFile( PATH_DXF, name, DXF ); }
@@ -624,6 +633,11 @@ public class TDPath
     if ( hasTh3Dir() ) {
       for ( Sketch3dInfo s : sketches ) {
         File t = new File( getTh3FileWithExt( survey + "-" + s.name + TH3 ) ); if ( t.exists() ) t.delete();
+      }
+    }
+    if ( hasTdr3Dir() ) {
+      for ( Sketch3dInfo s : sketches ) {
+        File t = new File( getTdr3FileWithExt( survey + "-" + s.name + TDR3 ) ); if ( t.exists() ) t.delete();
       }
     }
   }

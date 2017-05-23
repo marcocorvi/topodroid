@@ -29,7 +29,28 @@
           android:layout_height="wrap_content" 
           android:text="@string/sketch_mode_all"
           />
+        <RadioButton android:id="@+id/sketch_mode_none"
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:text="@string/sketch_mode_none"
+          />
     </RadioGroup>
+
+    <CheckBox android:id="@+id/sketch_mode_splays"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="Show splays"
+      />
+
+    <CheckBox android:id="@+id/sketch_mode_foresurface"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="Show fore surface"
+      />
 
     <LinearLayout 
       android:layout_width="fill_parent" 

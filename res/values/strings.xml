@@ -252,6 +252,7 @@
     <!-- UNUSED string name="menu_ready">Ready</string -->
     <string name="menu_calib_check">CALIBR. CHECK</string>
     <string name="menu_close">CLOSE</string>
+    <string name="menu_clear">CLEAR</string>
     <string name="menu_delete">DELETE</string>
     <string name="menu_detach">DISCONNECT</string>
     <string name="menu_display">DISPLAY</string>
@@ -557,7 +558,9 @@
     <string name="sketch_mode_single">Single shot</string>
     <string name="sketch_mode_ngbh">Nearby shots</string>
     <string name="sketch_mode_all">All shots</string>
+    <string name="sketch_mode_none">No surface</string>
     <string name="sketch_delete">Delete 3D model ?</string>
+    <string name="sketch_clear">Clear 3D model ?</string>
     <string name="sketch_no_split">No refinement. Decrease side max. length to refine further.</string>
 
     <string name="length">Length [m]</string>
@@ -696,6 +699,7 @@
     <string name="help_surface">Make surface</string>
     <string name="help_save_model">Export 3D model</string>
     <string name="help_trash_model">Delete 3D model</string>
+    <string name="help_clear_model">Clear 3D model</string>
     <string name="help_head_model">Orient 3D model</string>
     <!-- UNUSED string name="help_erase_model">Erase region</string -->
     <string name="help_cut_model">Cut region</string>

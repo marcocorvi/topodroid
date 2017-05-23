@@ -48,40 +48,45 @@ class SketchPainter
     whitePaint.setStyle(Paint.Style.STROKE);
     whitePaint.setStrokeJoin(Paint.Join.ROUND);
     whitePaint.setStrokeCap(Paint.Cap.ROUND);
+
     redPaint   = new Paint();
     redPaint.setDither(true);
-    redPaint.setColor( 0xccff0000 );
+    redPaint.setColor( 0xffff0000 );
     redPaint.setStyle(Paint.Style.STROKE);
     redPaint.setStrokeJoin(Paint.Join.ROUND);
     redPaint.setStrokeCap(Paint.Cap.ROUND);
     redPaint.setStrokeWidth( 2 );
+
     greenPaint   = new Paint();
     greenPaint.setDither(true);
-    greenPaint.setColor( 0xcc00ff33 );
+    greenPaint.setColor( 0xcc009292 ); // TDColor.GREEN
     greenPaint.setStyle(Paint.Style.STROKE);
     greenPaint.setStrokeJoin(Paint.Join.ROUND);
     greenPaint.setStrokeCap(Paint.Cap.ROUND);
     greenPaint.setStrokeWidth( 2 );
+
     bluePaint   = new Paint();
     bluePaint.setDither(true);
-    bluePaint.setColor( 0xcc0000ff);
+    bluePaint.setColor( 0xcc6db6ff); // TDColor.BLUE
     bluePaint.setStyle(Paint.Style.STROKE);
     bluePaint.setStrokeJoin(Paint.Join.ROUND);
     bluePaint.setStrokeCap(Paint.Cap.ROUND);
     bluePaint.setStrokeWidth( 2 );
+
     blackPaint   = new Paint();
     blackPaint.setDither(true);
-    blackPaint.setColor( 0xff00ffff);
+    blackPaint.setColor( TDColor.LIGHT_BLUE );
     blackPaint.setStyle(Paint.Style.STROKE);
     blackPaint.setStrokeJoin(Paint.Join.ROUND);
     blackPaint.setStrokeCap(Paint.Cap.ROUND);
     blackPaint.setStrokeWidth( 2 );
 
     previewPaint = new Paint();
-    previewPaint.setColor(0xFFC1C1C1);
+    previewPaint.setColor( TDColor.LIGHT_GRAY );
     previewPaint.setStyle(Paint.Style.STROKE);
     previewPaint.setStrokeJoin(Paint.Join.ROUND);
     previewPaint.setStrokeCap(Paint.Cap.ROUND);
+
     // topLinePaint = new Paint();
     // topLinePaint.setColor(0x99cc6633);
     // topLinePaint.setStyle(Paint.Style.STROKE);
@@ -95,7 +100,7 @@ class SketchPainter
     // sideLinePaint.setStrokeCap(Paint.Cap.ROUND);
 
     borderLinePaint = new Paint();
-    borderLinePaint.setColor(0xff0033ff);
+    borderLinePaint.setColor( TDColor.LIGHT_GREEN );
     borderLinePaint.setStyle(Paint.Style.STROKE);
     borderLinePaint.setStrokeJoin(Paint.Join.ROUND);
     borderLinePaint.setStrokeCap(Paint.Cap.ROUND);
@@ -108,16 +113,16 @@ class SketchPainter
 
     surfaceForPaint = new Paint();
     // surfaceForPaint.setColor(0x66666666);
-    surfaceForPaint.setColor(0x33cc6633);
-    surfaceForPaint.setStyle(Paint.Style.FILL);
-    // surfaceForPaint.setStyle(Paint.Style.STROKE);
+    surfaceForPaint.setColor(0x11dbd100); // TDColor.ORANGE
+    // surfaceForPaint.setStyle(Paint.Style.FILL);
+    surfaceForPaint.setStyle(Paint.Style.STROKE);
     surfaceForPaint.setStrokeJoin(Paint.Join.ROUND);
     surfaceForPaint.setStrokeCap(Paint.Cap.ROUND);
 
     surfaceBackPaint = new Paint();
-    surfaceBackPaint.setColor(0x66cc9966);
-    // surfaceBackPaint.setStyle(Paint.Style.FILL);
-    surfaceBackPaint.setStyle(Paint.Style.STROKE);
+    surfaceBackPaint.setColor(0x33924900); // TDColor.BROWN
+    surfaceBackPaint.setStyle(Paint.Style.FILL);
+    // surfaceBackPaint.setStyle(Paint.Style.STROKE);
     surfaceBackPaint.setStrokeJoin(Paint.Join.ROUND);
     surfaceBackPaint.setStrokeCap(Paint.Cap.ROUND);
 

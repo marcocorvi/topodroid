@@ -19,6 +19,9 @@ import android.graphics.Matrix;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+
 import java.util.Locale;
 
 import android.util.Log;
@@ -97,6 +100,21 @@ public class SketchPointPath extends SketchPath
     // toTherionOptions( pw );
     pw.format("\n\n");
     return sw.getBuffer().toString();
+  }
+
+  public void toTdr( BufferedOutputStream bos ) throws IOException
+  {
+    SketchModel.toTdr( bos, (short)1 );
+    SketchModel.toTdr( bos, BrushManager.mPointLib.getSymbolThName(mThType) );
+    SketchModel.toTdr( bos, st1 );
+    SketchModel.toTdr( bos, st2 );
+    SketchModel.toTdr( bos, mXpos, mYpos, mZpos );
+    if ( mOrientation != null ) {
+      SketchModel.toTdr( bos, (byte)1 );
+      SketchModel.toTdr( bos, mOrientation.x, mOrientation.y, mOrientation.z );
+    } else {
+      SketchModel.toTdr( bos, (byte)0 );
+    }
   }
 
   // protected void toTherionOptions( PrintWriter pw )

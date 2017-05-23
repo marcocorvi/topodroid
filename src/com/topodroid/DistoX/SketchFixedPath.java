@@ -48,6 +48,8 @@ public class SketchFixedPath extends SketchPath
     sy = 0;
   }
 
+  boolean isSplay() { return mBlock == null || mBlock.isSplay(); }
+
   /**
    * (x,y,z) world coords referred to the mInfo origin
    */

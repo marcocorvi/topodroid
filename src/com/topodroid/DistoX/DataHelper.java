@@ -1123,8 +1123,8 @@ public class DataHelper extends DataSetObservable
     List< Sketch3dInfo > sketches = selectSketchesAtStation( old_sid, station );
     for ( Sketch3dInfo sketch : sketches ) {
       transferSketch( sid, old_sid, sketch.id );
-      File oldfile = new File( TDPath.getTh3File( old_survey_name + "-" + sketch.name + ".th3" ) );
-      File newfile = new File( TDPath.getTh3File( new_survey_name + "=" + sketch.name + ".th3" ) );
+      File oldfile = new File( TDPath.getTdr3File( old_survey_name + "-" + sketch.name + ".tdr3" ) );
+      File newfile = new File( TDPath.getTdr3File( new_survey_name + "=" + sketch.name + ".tdr3" ) );
       if ( oldfile.exists() && ! newfile.exists() ) {
         oldfile.renameTo( newfile );
       } else {

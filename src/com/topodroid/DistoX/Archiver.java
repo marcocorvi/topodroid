@@ -93,11 +93,11 @@ public class Archiver
 /* FIXME BEGIN SKETCH_3D */
       List< Sketch3dInfo > sketches  = app.mData.selectAllSketches( app.mSID, TopoDroidApp.STATUS_NORMAL );
       for ( Sketch3dInfo skt : sketches ) {
-        addEntry( zos, new File( TDPath.getSurveySketchFile( survey, skt.name ) ) );
+        addEntry( zos, new File( TDPath.getSurveySketchOutFile( survey, skt.name ) ) );
       }
       sketches  = app.mData.selectAllSketches( app.mSID, TopoDroidApp.STATUS_DELETED );
       for ( Sketch3dInfo skt : sketches ) {
-        addEntry( zos, new File( TDPath.getSurveySketchFile( survey, skt.name ) ) );
+        addEntry( zos, new File( TDPath.getSurveySketchOutFile( survey, skt.name ) ) );
       }
 /* END SKETCH_3D */
 
@@ -256,6 +256,8 @@ public class Archiver
               pathname = TDPath.getTh3File( ze.getName() );
             } else if ( ze.getName().endsWith( TDPath.TDR ) ) {
               pathname = TDPath.getTdrFile( ze.getName() );
+            } else if ( ze.getName().endsWith( TDPath.TDR3 ) ) {
+              pathname = TDPath.getTdr3File( ze.getName() );
 
             } else if ( ze.getName().endsWith( TDPath.TRB ) ) {
               pathname = TDPath.getTrbFile( ze.getName() );

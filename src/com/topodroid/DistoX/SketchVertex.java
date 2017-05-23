@@ -12,6 +12,10 @@
 package com.topodroid.DistoX;
 
 import java.io.PrintWriter;
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+
 import java.util.Locale;
 
 class SketchVertex extends Vector
@@ -37,5 +41,17 @@ class SketchVertex extends Vector
   {
     pw.format(Locale.US, "  %d %.4f %.4f %.4f\n", index, x, -y, -z );
   }
+
+  void toTdr( BufferedOutputStream bos )  throws IOException
+  {
+    ByteBuffer b = ByteBuffer.allocate(14); // index, x, y, z
+    // b.putInt(index);
+    b.putShort( (short)(index) );
+    b.putFloat(x);
+    b.putFloat(y);
+    b.putFloat(z);
+    bos.write( b.array() );
+  }
+    
 }
 

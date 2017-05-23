@@ -75,7 +75,7 @@
     <string name="calib_ave_std">Précision : %1$.4f %2$.4f degrés</string>
     <string name="calib_precision">Précision</string>
     <string name="calib_iter">Itérations : %1$d</string>
-    <string name="calib_reset">Réinitialiser l'étalonnage du DistoX ?</string -->
+    <string name="calib_reset">Réinitialiser l\'étalonnage du DistoX ?</string>
 
     <string name="algorithm">Algorithme:</string>
     <string name="auto">automatique</string>
@@ -95,8 +95,8 @@
     <string name="device_code">DistoX code %1$4d</string>
     <string name="device_firmware">Firmware  %1$d.%2$d</string>
     <string name="device_hardware">Hardware  %1$d.%2$d</string>
-    <string name="device_status_angle_grad">Unités d'angle : grade</string>
-    <string name="device_status_angle_degree">Unités d'angle : degré</string>
+    <string name="device_status_angle_grad">Unités d\'angle : grade</string>
+    <string name="device_status_angle_degree">Unités d\'angle : degré</string>
     <string name="device_status_compass_on">Boussole/clino: on</string>
     <string name="device_status_compass_off">Boussole/clino: off</string>
     <string name="device_status_calib">Mode %1$s</string>
@@ -122,7 +122,7 @@
 <string name="splay_at_to">GDHB à la station Vers</string>
 
 <string name="few_data">Pas assez de données</string>
-    <string name="few_iter">Échec de l'itération</string>
+    <string name="few_iter">Échec de l\'itération</string>
     <string name="few_groups">Pas assez de données dans le groupe</string>
 <!-- UNUSED string name="few_plots">Pas assez de Points</string -->
 <string name="few_calibs">Pas assez d\'étalonnage</string>
@@ -135,11 +135,11 @@
 <string name="import_failed">L\'import du fichier a échoué</string>
 <string name="file_not_found">Fichier inexistant</string>
     <string name="import_calib_ok">Étalonnage importé avec succès</string>
-    <string name="import_calib_no_header">Fichier d'étalon.: problème d'entête</string>
+    <string name="import_calib_no_header">Fichier d\'étalon.: problème d\'entête</string>
     <string name="import_calib_already">Étalon. déja existant</string>
     <string name="import_calib_mismatch">Étalon. périphérique incorrect</string>
-    <string name="import_calib_no_data">Fichier d'étalon.: aucune données</string>
-    <string name="import_calib_io_error">Fichier d'étalon.: erreur de lecture</string>
+    <string name="import_calib_no_data">Fichier d\'étalon.: aucune données</string>
+    <string name="import_calib_io_error">Fichier d\'étalon.: erreur de lecture</string>
 <string name="import_zip_ok">Fichier zip importé avec succes</string>
 <string name="import_zip_wait">L\'importation du fichier zip peut être longue… Patientez…</string>
 <!-- UNUSED string name="sketch_saving">Exportation de dessin ... Patientez ...</string -->
@@ -165,7 +165,7 @@
 <string name="longitude_hint">Long. dd:mm:ss.sss</string>
 <string name="loop_closure_errors">Erreurs de bouclage</string>
 <string name="loop_none">Pas de bouclage</string>
-<string name="long_lat">Long-Lat</string>
+<!-- UNUSED string name="long_lat">Long-Lat</string -->
 
 <string name="error_azimuth_required">Azimut nécessaire</string>
 <string name="error_length_required">Longueur nécessaire</string>
@@ -217,7 +217,7 @@
 
 <string name="no_bt">Pas de Bluetooth</string>
 <string name="no_calib">Pas d\'étallonage</string>
-<string name="no_calib_check">Pas de visée de contrôle d'étalonnage</string>
+<string name="no_calib_check">Pas de visée de contrôle d\'étalonnage</string>
 <string name="no_calibration">Aucun étallonage sélectionné</string>
 <string name="no_capture_app">Aucune application de capture d\'image</string>
 <string name="no_cave3d">Cave3D n\'est pas installé</string>
@@ -231,10 +231,10 @@
 <string name="no_paired_device">Aucun périphérique appairé.\nRecherchez et appairez un DistoX</string>
 <string name="no_photos">Le relevé ne contient pas de photo</string>
 <string name="no_plots">Le relevé ne contient pas de croquis.\nUtilisez le bouton Ajouter pour en créer un.</string>
-<string name="no_profile_overview">Pas d'apercu pour les profils projetés</string>
+<string name="no_profile_overview">Pas d\'apercu pour les profils projetés</string>
 <string name="no_proj4">*Proj$* non installé</string>
 <string name="no_sensors">Le relevé n\'a aucune mesure</string>
-<string name="no_sketch">Pas de croquis 3D</string -->
+<string name="no_sketch">Pas de croquis 3D</string>
 <!-- UNUSED string name="no_shots">Le relevé ne contient aucune visées.\n Utilisez le menu Télécharger pour en obtenir.</string -->
 <string name="no_survey">Aucun relevé sélectionné.</string>
 <string name="no_thmanager">ThManager non installé</string>
@@ -434,7 +434,7 @@
     <string name="stat_station">Stations %1$d</string>
     <string name="stat_surface">Surface des visées %1$d %2$.1f %3$s</string>
     <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]"</string>
-    <string name="stat_angle_error">Erreurs d'angle %1$.2f ± %2$.2f</string>
+    <string name="stat_angle_error">Erreurs d\'angle %1$.2f ± %2$.2f</string>
     <string name="shot_title">VISÉE %1$s - %2$s"</string>
     <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f"</string>
 
@@ -510,7 +510,7 @@
     <string name="mode_grid">Grille</string>
     <string name="mode_fixed">Références fixes</string>
     <string name="mode_outline">Bordure ext. uniquement</string>
-    <string name="mode_scale_ref">Barre d'échelle de réf.</string>
+    <string name="mode_scale_ref">Barre d\'échelle de réf.</string>
 
     <!-- UNUSED string name="remote_title">Contrôle à distance</string -->
     <string name="remote_on">Laser ACTIF</string>
@@ -817,8 +817,8 @@
   <string name="pref_wait_shot_summary">Temporisation après la mesure [ms]</string>
   <string name="pref_wait_data_title">Pause données [ms]</string>
   <string name="pref_wait_data_summary">Temporisation après un chargement de données [ms]</string>
-  <string name="pref_wait_conn_title">Délai d'attente préparation données [ms]</string>
-  <string name="pref_wait_conn_summary">Délai d'attente pour la disponibilité des données [ms]</string>
+  <string name="pref_wait_conn_title">Délai d\'attente préparation données [ms]</string>
+  <string name="pref_wait_conn_summary">Délai d\'attente pour la disponibilité des données [ms]</string>
   <string name="pref_conn_mode_title">Mode de connexion</string>
   <string name="pref_conn_mode_summary">Comment connecter le DistoX</string>
   <string name="pref_auto_reconnect_title">Reconnexion automatique</string>
@@ -1076,8 +1076,8 @@
   <string name="pref_walls_xstep_message">Distance minimum entres les points formant une paroi [m]</string>
 
   <string name="pref_algo_min_alpha_title">Min-algo alpha</string>
-  <string name="pref_algo_min_alpha_summary">Min-algo facteur d'ajustment</string>
-  <string name="pref_algo_min_alpha_message">Min-algo facteur d'ajustment (par[0,1])</string>
+  <string name="pref_algo_min_alpha_summary">Min-algo facteur d\'ajustment</string>
+  <string name="pref_algo_min_alpha_message">Min-algo facteur d\'ajustment (par[0,1])</string>
   <string name="pref_algo_min_beta_title">Min-algo beta</string>
   <string name="pref_algo_min_beta_summary">Min-algo M dip weight</string>
   <string name="pref_algo_min_beta_message">Min-algo M dip weight</string>

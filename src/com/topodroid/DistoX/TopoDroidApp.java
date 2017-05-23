@@ -887,8 +887,8 @@ public class TopoDroidApp extends Application
       { // rename sketch files: th3
         List< Sketch3dInfo > sketches = mData.selectAllSketches( sid );
         for ( Sketch3dInfo s : sketches ) {
-          old = new File( TDPath.getSurveySketchFile( mySurvey, s.name ) );
-          nev = new File( TDPath.getSurveySketchFile( name, s.name ) );
+          old = new File( TDPath.getSurveySketchOutFile( mySurvey, s.name ) );
+          nev = new File( TDPath.getSurveySketchOutFile( name, s.name ) );
           if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
         }
       }

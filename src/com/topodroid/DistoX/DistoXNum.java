@@ -128,6 +128,19 @@ class DistoXNum
     return ret;
   }
 
+  // get shots at station st, except shot [st,except]
+  public List<NumShot> getShotsAt( NumStation st, NumStation except )
+  {
+    ArrayList<NumShot> ret = new ArrayList<NumShot>();
+    for ( NumShot shot : mShots ) {
+      if ( ( shot.from == st && shot.to   != except ) 
+        || ( shot.to   == st && shot.from != except ) ) {
+        ret.add( shot );
+      }
+    }
+    return ret;
+  }
+
   /** FIXME there is a problem here:               ,-----B---
    * if the reduction tree has a branch, say 0----A
    *                                               `---C----D

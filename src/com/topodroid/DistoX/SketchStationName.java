@@ -11,6 +11,9 @@
  */
 package com.topodroid.DistoX;
 
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+
 import java.util.Locale;
 
 import android.graphics.Canvas;
@@ -82,4 +85,12 @@ public class SketchStationName extends SketchPath
     return String.format(Locale.US, "point %.2f %.2f %.2f station -name \"%s\"", 
       x*toTherion, -y*toTherion, -z*toTherion, mName );
   }
+
+  public void toTdr( BufferedOutputStream bos ) throws IOException
+  {
+    SketchModel.toTdr( bos, "stat" );
+    SketchModel.toTdr( bos, mName );
+    SketchModel.toTdr( bos, x*toTherion, y*toTherion, z*toTherion );
+  }
+  
 }

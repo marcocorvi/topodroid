@@ -24,6 +24,10 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.io.FileInputStream;
+import java.io.BufferedOutputStream;
+import java.io.BufferedInputStream;
+import java.nio.ByteBuffer;
 
 import android.graphics.Matrix;
 import android.graphics.Canvas;
@@ -46,6 +50,8 @@ class SketchModel
   final int SURFACE_CONVEX_HULL = 1;
   final int SURFACE_POWERCRUST  = 2;
 
+  boolean mDisplaySplays;
+  boolean mDisplayForeSurface;
 
   Sketch3dInfo mInfo;
   SketchPainter mPainter;
@@ -70,7 +76,7 @@ class SketchModel
   SketchUndo mUndo;
   SketchUndo mRedo;
 
-  int mDisplayMode = SketchDef.DISPLAY_NGBH;
+  int mDisplayMode  = SketchDef.DISPLAY_NGBH;
   int mActivityMode = SketchDef.MODE_MOVE;
 
   int cnt;
@@ -104,6 +110,9 @@ class SketchModel
     mUndo = null;
     mRedo = null;
 
+    mDisplaySplays = false;
+    mDisplayForeSurface = false;
+
     mSelection = new Selection();
     mSelected  = new SelectionSet();
 
@@ -117,6 +126,7 @@ class SketchModel
   // void setEditLine( SketchLinePath line ) { mEditLine = line; }
   // void setBorder( ArrayList< PointF > border ) { mBorder = border; }
 
+/* if MODE_EDIT
   int doRefinement( ) 
   {
     if ( mRefines == null || mRefines.size() == 0 ) return 0;
@@ -140,6 +150,7 @@ class SketchModel
     }
     return ret;
   }
+*/
 
   boolean joinSurfacesAtStation( SketchStationName st )
   {
@@ -226,10 +237,11 @@ class SketchModel
   //   mCurrentSurface.computeInnerBorder( (SketchLinePath)path, mInfo );
   // }
 
-  void makeCut( )
-  {
-    if ( mCurrentSurface != null ) mCurrentSurface.makeCut();
-  }
+  // if MODE_EDIT
+  // void makeCut( )
+  // {
+  //   if ( mCurrentSurface != null ) mCurrentSurface.makeCut();
+  // }
 
   // void makeExtrude( ArrayList<Vector> pts )
   // {
@@ -238,12 +250,13 @@ class SketchModel
   //   mBorder3d = null;
   // }
 
-  void makeStretch( ArrayList<Vector> pts )
-  {
-    if ( mBorder3d == null ) return;
-    if ( mCurrentSurface != null ) mCurrentSurface.makeStretch( pts, mBorder3d );
-    mBorder3d = null;
-  }
+  // if MODE_EDIT
+  // void makeStretch( ArrayList<Vector> pts )
+  // {
+  //   if ( mBorder3d == null ) return;
+  //   if ( mCurrentSurface != null ) mCurrentSurface.makeStretch( pts, mBorder3d );
+  //   mBorder3d = null;
+  // }
 
   void removeSurface( boolean with_sections )
   {
@@ -280,6 +293,39 @@ class SketchModel
     mCurrentSurface = null;
   }
 
+  void removeAllSurfaces( )
+  {
+    if ( mJoins != null ) {
+      synchronized( mJoins ) {
+        // final Iterator ij = mJoins.iterator();
+        // while ( ij.hasNext() ) {
+        //   final SketchSurface surface = (SketchSurface) ij.next();
+        //   mJoins.remove( surface ); 
+        // }
+        mJoins.clear();
+      }
+    }
+    synchronized( mSurfaces ) {
+      // final Iterator ix = mSurfaces.iterator();
+      // while ( ix.hasNext() ) {
+      //   final SketchSurface surface = (SketchSurface)ix.next();
+      //   mSurfaces.remove( surface );
+      // }
+      mCurrentSurface = null;
+      mSurfaces.clear();
+    }
+    if ( mPaths != null) {
+      synchronized( mPaths ) {
+        // final Iterator ip = mPaths.iterator();
+        // while ( ip.hasNext() ) {
+        //   final SketchPath path = (SketchPath) ip.next();
+        //   mPaths.remove( path );
+        // }
+        mPaths.clear();
+      }
+    }
+  }
+
   void addPoint( SketchPointPath point ) 
   {
     // points.add( point );
@@ -295,6 +341,7 @@ class SketchModel
     return ( mCurrentSurface == null )? 0 : mCurrentSurface.findTrianglesInside( border );
   }
 
+/* if MODE_EDIT
   int refineToMaxSide( float max_size )
   {
     return ( mCurrentSurface == null )? 0 : mCurrentSurface.refineToMaxSide( max_size );
@@ -319,23 +366,80 @@ class SketchModel
   {
     return mCurrentSurface != null && mCurrentSurface.refineTriangleAtVertex( t, vv, v12, v13, mInfo );
   }
+*/
 
   // boolean removeTriangle( SketchTriangle t )
   // {
   //   return mCurrentSurface != null && mCurrentSurface.removeTriangle( t );
   // }
 
+  
+
   void makeSurface( int type )
   {
     NumStation st1 = mInfo.station1;
     NumStation st2 = mInfo.station2;
-    List<NumSplay> splay1 = mNum.getSplaysAt( st1 );
-    List<NumSplay> splay2 = mNum.getSplaysAt( st2 );
+    NumShot sh0 = mNum.getShot( st1, st2 ); 
+    List<NumSplay> tmp1 = mNum.getSplaysAt( st1 );
+    List<NumSplay> tmp2 = mNum.getSplaysAt( st2 );
+    List<NumShot> shot1 = mNum.getShotsAt( st1, st2 );
+    List<NumShot> shot2 = mNum.getShotsAt( st2, st1 );
     // Log.v("DistoX", "splays at 1: " + splay1.size() + " at 2: " + splay2.size() );
+
+    ArrayList< Vector > vec1 = new ArrayList<Vector>();
+    for ( NumShot sh : shot1 ) {
+      Vector v = ( sh.from == st1 )?
+                 new Vector( sh.to.e - st1.e, sh.to.s - st1.s, sh.to.v - st1.v )
+               : new Vector( sh.from.e - st1.e, sh.from.s - st1.s, sh.from.v - st1.v );
+      float l = v.LengthSquared();
+      v.timesEqual( 1/l );
+      vec1.add( v );
+    }
+    ArrayList< Vector > vec2 = new ArrayList<Vector>();
+    for ( NumShot sh : shot2 ) {
+      Vector v = ( sh.from == st2 )?
+                 new Vector( sh.to.e - st2.e, sh.to.s - st2.s, sh.to.v - st2.v )
+               : new Vector( sh.from.e - st2.e, sh.from.s - st2.s, sh.from.v - st2.v );
+      float l = v.LengthSquared();
+      v.timesEqual( 1/l );
+      vec2.add( v );
+    }
+
+    Vector v0 = new Vector( st2.e - st1.e, st2.s - st1.s, st2.v - st1.v );
+    float l0 = v0.LengthSquared();
+    v0.timesEqual( 1/l0 );
+
+    ArrayList< NumSplay > splays1 = new ArrayList< NumSplay >();
+    ArrayList< NumSplay > splays2 = new ArrayList< NumSplay >();
+    for ( NumSplay sp : tmp1 ) {
+      Vector v = new Vector( sp.e - st1.e, sp.s - st1.s, sp.v - st1.v );
+      float x0 = v.dot( v0 );
+      boolean ok = true;
+      if ( x0 > 1 || x0 < 0 ) {
+        for ( Vector v1 : vec1 ) {
+          if ( v.dot( v1 ) > 0 ) { ok = false; break; }
+        }
+      }
+      if ( ok ) splays1.add( sp );
+    }
+    for ( NumSplay sp : tmp2 ) {
+      Vector v = new Vector( sp.e - st2.e, sp.s - st2.s, sp.v - st2.v );
+      float x0 = v.dot( v0 );
+      boolean ok = true;
+      if ( x0 > 1 || x0 < 0 ) {
+        for ( Vector v2 : vec2 ) {
+          if ( v.dot( v2 ) > 0 ) { ok = false; break; }
+        }
+      }
+      if ( ok ) splays2.add( sp );
+    }
+        
     if ( splay1.size() < 2 || splay2.size() < 2 ) {
       TDLog.Error( "make Convex Surface too few splays " + splay1.size() + " " + splay2.size() );
       return;
     }
+
+
 
     ArrayList< Vector > pts = new ArrayList<Vector>();
     for ( NumSplay sp : splay1 ) {
@@ -444,8 +548,10 @@ class SketchModel
         final Iterator i = mFixedStack.iterator();
         while ( i.hasNext() ) {
           final SketchFixedPath fixed = (SketchFixedPath) i.next();
-          if ( mInfo.isConnectedTo(fixed, mDisplayMode) ) {
-            fixed.draw( canvas, mMatrix, mInfo, mActivityMode );
+          if ( mDisplaySplays || ! fixed.isSplay() ) {
+            if ( mInfo.isConnectedTo(fixed, mDisplayMode) ) {
+              fixed.draw( canvas, mMatrix, mInfo, mActivityMode );
+            }
           }
           //doneHandler.sendEmptyMessage(1);
         }
@@ -463,60 +569,62 @@ class SketchModel
       }
     }
 
-    if ( mSurfaces != null ) {
-      synchronized( mSurfaces ) {
-        final Iterator i = mSurfaces.iterator();
-        while ( i.hasNext() ) {
-          final SketchSurface surface = (SketchSurface) i.next();
-          if ( mInfo.isConnectedTo(surface, mDisplayMode) ) {
-            surface.draw( canvas, mMatrix, mInfo, mActivityMode );
-          }
-        }
-      }
-    }
-
-    if ( mRefines != null && mRefines.size() > 0 ) {
-      synchronized( mRefines ) {
-        Path path = new Path();
-        PointF p = new PointF(0,0);
-        mInfo.worldToSceneOrigin( mRefines.get(mRefines.size()-1).v3, p );
-        path.moveTo( p.x, p.y );
-        for ( SketchRefinement ref : mRefines ) {
-          mInfo.worldToSceneOrigin( ref.v3, p );
-          path.lineTo( p.x, p.y );
-        }
-        // path.close();
-        path.transform( mMatrix );
-        canvas.drawPath( path, mPainter.bluePaint );
-      }
-    }
-
-    if ( mJoins != null ) {
-      synchronized( mJoins ) {
-        final Iterator i = mJoins.iterator();
-        while ( i.hasNext() ) {
-          final SketchSurface surface = (SketchSurface) i.next();
-          if ( mInfo.isConnectedTo(surface, mDisplayMode) ) {
-            surface.draw( canvas, mMatrix, mInfo, mActivityMode );
-          }
-        }
-      }
-    }
-
-    if ( mPaths != null ) {
-      synchronized( mPaths ) {
-        final Iterator i = mPaths.iterator();
-        while ( i.hasNext() ) {
-          final SketchPath path = (SketchPath) i.next();
-          if ( path.mType == DrawingPath.DRAWING_PATH_LINE || path.mType == DrawingPath.DRAWING_PATH_AREA ) {
-            SketchLinePath line = ( SketchLinePath ) path;
-            if ( mInfo.isConnectedTo(line, mDisplayMode) ) {
-              line.draw( canvas, mMatrix, mInfo );
+    if ( mDisplayMode != SketchDef.DISPLAY_NONE ) {
+      if ( mSurfaces != null ) {
+        synchronized( mSurfaces ) {
+          final Iterator i = mSurfaces.iterator();
+          while ( i.hasNext() ) {
+            final SketchSurface surface = (SketchSurface) i.next();
+            if ( mInfo.isConnectedTo(surface, mDisplayMode) ) {
+              surface.draw( canvas, mMatrix, mInfo, mActivityMode, mDisplayForeSurface );
             }
-          } else if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
-            SketchPointPath point = (SketchPointPath) path;
-            if ( mInfo.isConnectedTo(point, mDisplayMode) ) {
-              point.draw( canvas, mMatrix, mInfo );
+          }
+        }
+      }
+
+      if ( mRefines != null && mRefines.size() > 0 ) {
+        synchronized( mRefines ) {
+          Path path = new Path();
+          PointF p = new PointF(0,0);
+          mInfo.worldToSceneOrigin( mRefines.get(mRefines.size()-1).v3, p );
+          path.moveTo( p.x, p.y );
+          for ( SketchRefinement ref : mRefines ) {
+            mInfo.worldToSceneOrigin( ref.v3, p );
+            path.lineTo( p.x, p.y );
+          }
+          // path.close();
+          path.transform( mMatrix );
+          canvas.drawPath( path, mPainter.bluePaint );
+        }
+      }
+
+      if ( mJoins != null ) {
+        synchronized( mJoins ) {
+          final Iterator i = mJoins.iterator();
+          while ( i.hasNext() ) {
+            final SketchSurface surface = (SketchSurface) i.next();
+            if ( mInfo.isConnectedTo(surface, mDisplayMode) ) {
+              surface.draw( canvas, mMatrix, mInfo, mActivityMode, mDisplayForeSurface );
+            }
+          }
+        }
+      }
+
+      if ( mPaths != null ) {
+        synchronized( mPaths ) {
+          final Iterator i = mPaths.iterator();
+          while ( i.hasNext() ) {
+            final SketchPath path = (SketchPath) i.next();
+            if ( path.mType == DrawingPath.DRAWING_PATH_LINE || path.mType == DrawingPath.DRAWING_PATH_AREA ) {
+              SketchLinePath line = ( SketchLinePath ) path;
+              if ( mInfo.isConnectedTo(line, mDisplayMode) ) {
+                line.draw( canvas, mMatrix, mInfo );
+              }
+            } else if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
+              SketchPointPath point = (SketchPointPath) path;
+              if ( mInfo.isConnectedTo(point, mDisplayMode) ) {
+                point.draw( canvas, mMatrix, mInfo );
+              }
             }
           }
         }
@@ -758,7 +866,7 @@ class SketchModel
     String fromStation = null, toStation = null;
     if ( missingSymbols != null ) missingSymbols.resetSymbolLists();
 
-    // Log.v( "DistoX", "loadTh3 " + filename );
+    // Log.v( "DistoX", "load Th3 " + filename );
     BrushManager.resetPointOrientations();
     try {
       FileReader fr = new FileReader( filename );
@@ -962,7 +1070,7 @@ class SketchModel
             }
           }
           if ( th_type == -1 ) {
-            Log.v("DIstoX", "ERROR symbol not found " + vals[k] );
+            Log.v("DistoX", "ERROR symbol not found " + vals[k] );
           }
           
             // TDLog.Log( TDLog.LOG_PLOT, "line type " + vals[1] );
@@ -1038,7 +1146,7 @@ class SketchModel
             }
           // }
         } else {
-          Log.e("DistoX", "loadTh3: unknown line type >" + line + "<" );
+          Log.e("DistoX", "load Th3: unknown line type >" + line + "<" );
         }
       }
     } catch ( FileNotFoundException e ) {
@@ -1047,7 +1155,7 @@ class SketchModel
     //   e.printStackTrace();
     }
     // remove repeated names
-    // Log.v( "DistoX", "loadTh3 " + filename + " done" );
+    // Log.v( "DistoX", "load Th3 " + filename + " done" );
     return (missingSymbols != null )? missingSymbols.isOK() : true;
   }
 
@@ -1085,14 +1193,12 @@ class SketchModel
 
   SketchVertex getVertexAt( float x, float y, float d ) // (x,y) canvas point
   { 
-    if ( mCurrentSurface == null ) return null;
-    return mCurrentSurface.getVertexAt( x, y, d );
+    return ( mCurrentSurface == null )? null : mCurrentSurface.getVertexAt( x, y, d );
   }
 
   SketchVertex getSelectedVertex()
   {
-    if ( mCurrentSurface == null ) return null;
-    return mCurrentSurface.getSelectedVertex();
+    return ( mCurrentSurface == null )? null : mCurrentSurface.getSelectedVertex();
   }
 
   void setSelectedVertex( SketchVertex v )
@@ -1100,10 +1206,250 @@ class SketchModel
     if ( mCurrentSurface != null ) mCurrentSurface.setSelectedVertex( v );
   }
 
-  void refineSurfaceAtSelectedVertex()
+  // if MODE_EDIT
+  // void refineSurfaceAtSelectedVertex()
+  // {
+  //   if ( mCurrentSurface != null ) mCurrentSurface.refineAtSelectedVertex();
+  // }
+
+  public static void toTdr( BufferedOutputStream bos, String s ) throws IOException
   {
-    if ( mCurrentSurface == null ) return;
-    mCurrentSurface.refineAtSelectedVertex();
+    byte[] str = s.getBytes();
+    int len = str.length;
+    bos.write( (byte)(len & 0xff) );
+    bos.write( str, 0, len );
+  }
+
+  public static void toTdr( BufferedOutputStream bos, float x, float y, float z ) throws IOException
+  {
+    ByteBuffer b = ByteBuffer.allocate(12); // e, s, v
+    b.putFloat( x );
+    b.putFloat( y );
+    b.putFloat( z );
+    bos.write( b.array(), 0, 12 );
+  }
+
+  // public static void toTdr( BufferedOutputStream bos, int n ) throws IOException
+  // {
+  //   ByteBuffer b = ByteBuffer.allocate(4); 
+  //   b.putInt( n );
+  //   bos.write( b.array(), 0, 4 );
+  // }
+
+  public static void toTdr( BufferedOutputStream bos, short n ) throws IOException
+  {
+    ByteBuffer b = ByteBuffer.allocate(2); 
+    b.putShort( n );
+    bos.write( b.array(), 0, 2 );
+  }
+
+  public static void toTdr( BufferedOutputStream bos, byte b ) throws IOException
+  {
+    bos.write( b );
+  }
+
+  public void exportTdr( BufferedOutputStream bos, String sketch_name, String proj_name )
+  {
+    // commandManager.exportTherion( out, sketch_name, plot_name );
+    try {
+      toTdr( bos, sketch_name );
+
+      toTdr( bos, (short)(stations.size() ) );
+      for ( NumStation st : stations ) {
+        toTdr( bos, st.name );
+        toTdr( bos, st.e, st.s, st.v );
+      }
+
+      toTdr( bos, (short)(mPaths.size() ) );
+      for (  SketchPath path : mPaths ) {
+        switch ( path.mType ) {
+          case DrawingPath.DRAWING_PATH_LINE:
+          case DrawingPath.DRAWING_PATH_AREA:
+            SketchLinePath line = ( SketchLinePath ) path;
+            {
+              if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
+                toTdr( bos, (short)2 ); // line
+                toTdr( bos, BrushManager.mLineLib.getSymbolName( line.mThType ) );
+              } else {
+                toTdr( bos, (short)3 ); // area
+                toTdr( bos, BrushManager.mAreaLib.getSymbolName( line.mThType ) );
+              }
+              toTdr( bos, line.st1 );
+              toTdr( bos, line.st2 );
+              toTdr( bos, (short)(line.mLine.points.size()) );
+            }
+            for ( Vector pt : line.mLine.points ) {
+              toTdr( bos, pt.x, pt.y, pt.z );
+            }          
+            break;
+          case DrawingPath.DRAWING_PATH_POINT:
+            SketchPointPath point = ( SketchPointPath ) path;
+            point.toTdr( bos );
+            break;
+        }
+      }
+
+      toTdr( bos, (short)(mSurfaces.size()) );
+      for ( SketchSurface surface : mSurfaces ) {
+        surface.toTdr( bos, (short)4 );  // surface
+      }
+
+      toTdr( bos, (short)(mJoins.size()) );
+      for ( SketchSurface surface : mJoins ) {
+        surface.toTdr( bos, (short)5 ); // join
+      }
+    } catch ( IOException e ) {
+      Log.e( "DistoX", e.toString() );
+    }
+  }
+
+  private String fromTdrString( BufferedInputStream bis ) throws IOException
+  {
+    int len = bis.read();
+    byte[] b = new byte[ len ];
+    bis.read( b, 0, len );
+    return new String( b );
+  }
+
+  private int fromTdrShort( BufferedInputStream bis ) throws IOException
+  {
+    byte[] b = new byte[2];
+    bis.read( b, 0, 2 );
+    return ByteBuffer.wrap( b, 0, 2 ).getShort( 0 );
+  }
+
+  private int fromTdrByte( BufferedInputStream bis ) throws IOException
+  {
+    return (int)( bis.read() );
+  }
+
+  private float fromTdrFloat( BufferedInputStream bis ) throws IOException
+  {
+    byte[] b = new byte[4];
+    bis.read( b, 0, 4 );
+    return ByteBuffer.wrap( b, 0, 4 ).getFloat( 0 );
+  }
+
+  private void fromTdrSurface( BufferedInputStream bis, SketchSurface surface ) throws IOException
+  {
+    int nv = fromTdrShort( bis );
+    int nt = fromTdrShort( bis );
+    for ( int k=0; k<nv; ++k ) {
+      int idx = fromTdrShort( bis );
+      float x = fromTdrFloat( bis );
+      float y = fromTdrFloat( bis );
+      float z = fromTdrFloat( bis );
+      surface.addVertex( idx, x, y, z );
+    }
+    for ( int k=0; k<nt; ++k ) {
+      int i1 = fromTdrShort( bis );
+      int i2 = fromTdrShort( bis );
+      int i3 = fromTdrShort( bis );
+      surface.addTriangle( i1, i2, i3 );
+    }
+  }
+
+  public boolean loadTdr3( String filename, SymbolsPalette missingSymbols, SketchPainter painter )
+  {
+    int k, idx, np;
+    float x, y, z;
+    if ( missingSymbols != null ) missingSymbols.resetSymbolLists();
+
+    // Log.v( "DistoX", "load Tdr3 " + filename );
+    BrushManager.resetPointOrientations();
+    try {
+      FileInputStream fis = new FileInputStream( filename );
+      BufferedInputStream bis = new BufferedInputStream( fis );
+
+      // read sketch name
+      String name = fromTdrString( bis );
+
+      // read stations
+      int nst = fromTdrShort( bis );
+      for ( k=0; k<nst; ++k ) { // NumStations
+        String st_name = fromTdrString( bis );
+        float e = fromTdrFloat( bis );
+        float s = fromTdrFloat( bis );
+        float v = fromTdrFloat( bis );
+      }
+
+      // read paths
+      int npt = fromTdrShort( bis );
+      for ( k=0; k<npt; ++k ) { // paths
+        int type = fromTdrShort( bis );
+        String thtype = fromTdrString( bis );
+        String st1 = fromTdrString( bis );
+        String st2 = fromTdrString( bis );
+        if ( type == 1 ) { // point
+          x = fromTdrFloat( bis );
+          y = fromTdrFloat( bis );
+          z = fromTdrFloat( bis );
+          idx = BrushManager.mPointLib.getSymbolIndexByThName( thtype );
+          SketchPointPath pt = null;
+          if ( idx >= 0 && idx < BrushManager.mPointLib.mSymbolNr ) {
+            pt = new SketchPointPath( idx, st1, st2, x, y, z );
+            addPoint( pt );
+          }
+          if ( fromTdrByte( bis ) == 1 ) {
+            x = fromTdrFloat( bis );
+            y = fromTdrFloat( bis );
+            z = fromTdrFloat( bis );
+            if ( pt != null ) pt.setOrientation( new Vector(x,y,z), mInfo );
+          }
+        } else if ( type == 2 ) { // line
+          idx = BrushManager.mLineLib.getSymbolIndexByThName( thtype );
+          SketchLinePath line = new SketchLinePath( DrawingPath.DRAWING_PATH_LINE, idx, st1, st2, painter );
+          np = fromTdrShort( bis );
+          for ( k=0; k<np; ++k ) {
+            x = fromTdrFloat( bis );
+            y = fromTdrFloat( bis );
+            z = fromTdrFloat( bis );
+            line.addLinePoint( x, y, z );
+          }
+          addSketchPath( line );
+        } else if ( type == 3 ) { // area
+          idx = BrushManager.mAreaLib.getSymbolIndexByThName( thtype );
+          SketchLinePath area = new SketchLinePath( DrawingPath.DRAWING_PATH_AREA, idx, st1, st2, painter );
+          np = fromTdrShort( bis );
+          for ( k=0; k<np; ++k ) {
+            x = fromTdrFloat( bis );
+            y = fromTdrFloat( bis );
+            z = fromTdrFloat( bis );
+            area.addLinePoint( x, y, z );
+          }
+          addSketchPath( area );
+        }
+      }
+  
+      int nsf = fromTdrShort( bis ); // surfaces
+      for ( k=0; k<nsf; ++k ) {
+        int what = fromTdrShort( bis ); // must be 4
+        String st1 = fromTdrString( bis );
+        String st2 = fromTdrString( bis );
+        SketchSurface surface = new SketchSurface( st1, st2, painter );
+        if ( st1.equals( mInfo.st1 ) && st2.equals( mInfo.st2 ) ) mCurrentSurface = surface;
+        fromTdrSurface( bis, surface );
+        surface.computeBorders();
+        mSurfaces.add( surface );
+      }
+
+      int njn = fromTdrShort( bis ); // joints
+      for ( k=0; k<njn; ++k ) {
+        int what = fromTdrShort( bis ); // must be 5
+        String st1 = fromTdrString( bis );
+        String st2 = fromTdrString( bis );
+        SketchSurface join = new SketchSurface( st1, st2, painter );
+        fromTdrSurface( bis, join );
+        mJoins.add( join );
+      }
+    } catch ( FileNotFoundException e ) {
+      // this is OK
+    } catch ( IOException e ) {
+      e.printStackTrace();
+    }
+    // remove repeated names
+    // Log.v( "DistoX", "load Tdr3 " + filename + " done" );
+    return (missingSymbols != null )? missingSymbols.isOK() : true;
   }
     
 }

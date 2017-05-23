@@ -26,8 +26,9 @@ class SketchDef
 
     public final static int DISPLAY_NGBH = 0;
     public final static int DISPLAY_SINGLE = 1;
-    public final static int DISPLAY_ALL = 2;
-    public final static int DISPLAY_MAX = 3;
+    public final static int DISPLAY_ALL  = 2;
+    public final static int DISPLAY_NONE = 3;
+    public final static int DISPLAY_MAX  = 4;
 
     public static final int MODE_MOVE    = 0;
     public static final int MODE_DRAW    = 1;

@@ -15,6 +15,10 @@ import android.graphics.PointF;
 
 // import java.io.StringWriter;
 import java.io.PrintWriter;
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -261,5 +265,14 @@ class SketchTriangle
   {
     // pw.format("  %d %d %d %d %d %d \n", i, j, k, sjk, ski, sij );
     pw.format("  %d %d %d\n", i, j, k );
+  }
+
+  void toTdr( BufferedOutputStream bos )  throws IOException
+  {
+    ByteBuffer b = ByteBuffer.allocate(6); // i, j, k
+    b.putShort( (short)(i) );
+    b.putShort( (short)(j) );
+    b.putShort( (short)(k) );
+    bos.write( b.array() );
   }
 }

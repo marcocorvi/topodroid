@@ -21,6 +21,7 @@ import android.content.Context;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.CheckBox;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -29,19 +30,23 @@ import android.widget.Toast;
 public class SketchModeDialog extends MyDialog
                               implements View.OnClickListener
 {
-  private SketchModel mParent;
+  private SketchModel mModel;
 
   private RadioButton mRBsingle;
   private RadioButton mRBngbh;
   private RadioButton mRBall;
+  private RadioButton mRBnone;
+
+  private CheckBox mCBsplays;
+  private CheckBox mCBforesurface;
 
   private Button   mBtnOK;
   // private Button   mBtnCancel;
 
-  public SketchModeDialog( Context context, SketchModel parent )
+  public SketchModeDialog( Context context, SketchModel model )
   {
     super( context, R.string.SketchModeDialog );
-    mParent  = parent;
+    mModel = model;
   }
 
 // -------------------------------------------------------------------
@@ -55,8 +60,9 @@ public class SketchModeDialog extends MyDialog
     mRBsingle  = (RadioButton) findViewById(R.id.sketch_mode_single);
     mRBngbh    = (RadioButton) findViewById(R.id.sketch_mode_ngbh);
     mRBall     = (RadioButton) findViewById(R.id.sketch_mode_all);
+    mRBnone    = (RadioButton) findViewById(R.id.sketch_mode_none);
 
-    switch ( mParent.mDisplayMode ) {
+    switch ( mModel.mDisplayMode ) {
       case SketchDef.DISPLAY_NGBH: 
         mRBngbh.setChecked( true );
         break;
@@ -66,7 +72,16 @@ public class SketchModeDialog extends MyDialog
       case SketchDef.DISPLAY_ALL:
         mRBall.setChecked( true );
         break;
+      case SketchDef.DISPLAY_NONE:
+        mRBnone.setChecked( true );
+        break;
     }
+
+    mCBsplays      = (CheckBox) findViewById( R.id.sketch_mode_splays );
+    mCBforesurface = (CheckBox) findViewById( R.id.sketch_mode_foresurface );
+
+    mCBsplays.setChecked( mModel.mDisplaySplays );
+    mCBforesurface.setChecked( mModel.mDisplayForeSurface );
 
     mBtnOK = (Button) findViewById(R.id.button_ok);
     mBtnOK.setOnClickListener( this );
@@ -80,12 +95,17 @@ public class SketchModeDialog extends MyDialog
     Button b = (Button) v;
     if ( b == mBtnOK ) {
       if ( mRBsingle.isChecked() ) {
-        mParent.mDisplayMode = SketchDef.DISPLAY_SINGLE;
+        mModel.mDisplayMode = SketchDef.DISPLAY_SINGLE;
       } else if ( mRBngbh.isChecked() ) {
-        mParent.mDisplayMode = SketchDef.DISPLAY_NGBH;
+        mModel.mDisplayMode = SketchDef.DISPLAY_NGBH;
       } else if ( mRBall.isChecked() ) {
-        mParent.mDisplayMode = SketchDef.DISPLAY_ALL;
+        mModel.mDisplayMode = SketchDef.DISPLAY_ALL;
+      } else if ( mRBnone.isChecked() ) {
+        mModel.mDisplayMode = SketchDef.DISPLAY_NONE;
       }
+
+      mModel.mDisplaySplays = mCBsplays.isChecked();
+      mModel.mDisplayForeSurface = mCBforesurface.isChecked();
     // } else if ( b == mBtnCancel ) {
     //   /* nothing */
     }
@@ -96,11 +116,11 @@ public class SketchModeDialog extends MyDialog
   // public void onBackPressed ()
   // {
   //   if ( mRBsingle.isChecked() ) {
-  //     mParent.mDisplayMode = SketchDef.DISPLAY_SINGLE;
+  //     mModel.mDisplayMode = SketchDef.DISPLAY_SINGLE;
   //   } else if ( mRBngbh.isChecked() ) {
-  //     mParent.mDisplayMode = SketchDef.DISPLAY_NGBH;
+  //     mModel.mDisplayMode = SketchDef.DISPLAY_NGBH;
   //   } else if ( mRBall.isChecked() ) {
-  //     mParent.mDisplayMode = SketchDef.DISPLAY_ALL;
+  //     mModel.mDisplayMode = SketchDef.DISPLAY_ALL;
   //   }
   //   cancel();
   // }
