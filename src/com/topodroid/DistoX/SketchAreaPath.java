@@ -102,10 +102,12 @@ public class SketchAreaPath extends SketchPath
 
   public void toTdr( BufferedOutputStream bos ) throws IOException
   {
-    SketchModel.toTdr( bos, "bord" );
+    SketchModel.toTdr( bos, (short)3 );
     SketchModel.toTdr( bos, BrushManager.mAreaLib.getSymbolThName( mThType ) );
+    SketchModel.toTdr( bos, st1 );
+    SketchModel.toTdr( bos, st2 );
     // SketchModel.toTdr( bos, mAreaCnt );
-    SketchModel.toTdr( bos, mLine.points.size() );
+    SketchModel.toTdr( bos, (short)(mLine.points.size()) );
     for ( Vector pt : mLine.points ) {
       SketchModel.toTdr( bos, pt.x, pt.y, pt.z);
     }

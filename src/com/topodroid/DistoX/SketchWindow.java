@@ -92,6 +92,8 @@ public class SketchWindow extends ItemDrawer
 {
   static final String TAG = "DistoX";
 
+  private boolean mLoaded = false;
+
   private TopoDroidApp mApp;
   private DataDownloader mDataDownloader;
   private Sketch3dInfo mInfo;
@@ -719,15 +721,10 @@ public class SketchWindow extends ItemDrawer
 
       // // now try to load drawings from therion file
       // SymbolsPalette missingSymbols = new SymbolsPalette();
-      String filename;
-      if ( true ) {
-        filename = TDPath.getTh3FileWithExt( mFullName );
-        // mAllSymbols = 
-          mModel.loadTh3( filename, null /* missingSymbols */, mPainter );
-      } else {
-        filename = TDPath.getTdr3FileWithExt( mFullName );
-        mModel.loadTdr3( filename, null /* missingSymbols */, mPainter );
-      }
+      mLoaded = false;
+      new SketchLoader( this, mModel, mFullName, mPainter ).execute();
+     
+
       // if ( ! mAllSymbols ) {
       //   // FIXME FIXME
       //   String msg = missingSymbols.getMessage( getResources() );
@@ -804,6 +801,12 @@ public class SketchWindow extends ItemDrawer
       mApp.registerLister( this );
     }
   } 
+  
+  void handleSketchLoaderResult( int r )
+  {
+    mLoaded = true;
+    mModel.mDisplayMode = SketchDef.DISPLAY_NGBH;
+  }
 
   // @Override
   // protected synchronized void onStart()
@@ -1291,7 +1294,7 @@ public class SketchWindow extends ItemDrawer
         } else if ( mMode == SketchDef.MODE_MOVE 
                  || ( mMode == SketchDef.MODE_SELECT && ! mMoveSelected ) ) {
           if ( Math.abs( x_shift ) < 20 && Math.abs( y_shift ) < 20 ) {
-            mInfo.rotateBy3d( x_shift/6, -y_shift/6 );
+            mInfo.rotateBy3d( -x_shift/6, y_shift/6 );
             setTheTitle();
             mModel.setTransform( mInfo.xoffset_3d, mInfo.yoffset_3d, mInfo.zoom_3d );
             mSaveX = x_canvas;                 // reset start
@@ -1654,18 +1657,26 @@ public class SketchWindow extends ItemDrawer
     if ( b == mButton1[0] || b == mButton2[0] || /* b == mButton3[0] || */ b == mButton4[0] ) {
       makePopupMode( b ); 
 
-    } else if ( b == mButton1[1] ) { // one
+    } else if ( b == mButton1[1] ) { // ZOOM_ONE
       mInfo.resetDirection(); // azi = 0, clino = 0, and compute triad versors
       resetZoom();
       // doSaveTh3AndReload( ); // save to th3
       // mSketchSurface.isDrawing = true;
     } else if ( b == mButton1[2] ) { // display mode. cycle (NGBH, SINGLE, ALL, NONE)
-      (new SketchModeDialog( mActivity, mModel )).show();
-    } else if ( b == mButton1[3] ) { // surface
-      if ( mModel.mCurrentSurface != null ) {
-        alertMakeSurface( );
+      if ( mLoaded ) {
+        (new SketchModeDialog( mActivity, mModel )).show();
       } else {
-        doMakeSurface( );
+        Toast.makeText( mActivity, R.string.sketch3d_loading, Toast.LENGTH_SHORT ).show();
+      }
+    } else if ( b == mButton1[3] ) { // surface
+      if ( mLoaded ) {
+        if ( mModel.mCurrentSurface != null ) {
+          alertMakeSurface( );
+        } else {
+          doMakeSurface( );
+        }
+      } else {
+        Toast.makeText( mActivity, R.string.sketch3d_loading, Toast.LENGTH_SHORT ).show();
       }
     } else if ( b == mButton1[4] ) { // download
       if ( mApp.mDevice != null ) {
@@ -1790,14 +1801,26 @@ public class SketchWindow extends ItemDrawer
     int p = 0;
     if ( p++ == pos ) { // EXPORT
       // new SketchSaveDialog( mActivity, this ).show();
-      new ExportDialog( mActivity, this, TDConst.mSketchExportTypes, R.string.title_plot_save ).show();
+      if ( mLoaded ) {
+        new ExportDialog( mActivity, this, TDConst.mSketchExportTypes, R.string.title_plot_save ).show();
+      } else {
+        Toast.makeText( mActivity, R.string.sketch3d_loading, Toast.LENGTH_SHORT ).show();
+      }
     } else if ( p++ == pos ) { // PALETTE 
       BrushManager.makePaths( getResources() );
       (new SymbolEnableDialog( mActivity, mApp )).show();
     } else if ( p++ == pos ) { // DELETE
-      askDelete();
+      if ( mLoaded ) {
+        askDelete();
+      } else {
+        Toast.makeText( mActivity, R.string.sketch3d_loading, Toast.LENGTH_SHORT ).show();
+      }
     } else if ( p++ == pos ) { // CLEAR
-      askClear();
+      if ( mLoaded ) {
+        askClear();
+      } else {
+        Toast.makeText( mActivity, R.string.sketch3d_loading, Toast.LENGTH_SHORT ).show();
+      }
     } else if ( p++ == pos ) { // SETTINGS
       Intent optionsIntent = new Intent( mActivity, TopoDroidPreferences.class );
       optionsIntent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SKETCH );

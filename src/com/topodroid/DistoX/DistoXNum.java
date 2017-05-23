@@ -324,6 +324,16 @@ class DistoXNum
     return null;
   }
 
+  NumShot getShot( NumStation st1, NumStation st2 )
+  {
+    if ( st1 == null || st2 == null ) return null;
+    for (NumShot sh : mShots ) {
+      if ( ( st1 == sh.from && st2 == sh.to ) ||
+           ( st2 == sh.from && st1 == sh.to ) ) return sh;
+    }
+    return null;
+  }
+
   // return +1 if has shot s1-s2
   //        -1 if has shot s2-s1
   //         0 otherwise

@@ -76,7 +76,7 @@ class SketchModel
   SketchUndo mUndo;
   SketchUndo mRedo;
 
-  int mDisplayMode  = SketchDef.DISPLAY_NGBH;
+  int mDisplayMode  = SketchDef.DISPLAY_NONE;
   int mActivityMode = SketchDef.MODE_MOVE;
 
   int cnt;
@@ -335,13 +335,13 @@ class SketchModel
     mRedo = null;
   }
 
+/* if MODE_EDIT
   // array of canvas 2d points
   int findTrianglesInside( ArrayList<PointF> border )
   {
     return ( mCurrentSurface == null )? 0 : mCurrentSurface.findTrianglesInside( border );
   }
 
-/* if MODE_EDIT
   int refineToMaxSide( float max_size )
   {
     return ( mCurrentSurface == null )? 0 : mCurrentSurface.refineToMaxSide( max_size );
@@ -379,90 +379,84 @@ class SketchModel
   {
     NumStation st1 = mInfo.station1;
     NumStation st2 = mInfo.station2;
-    NumShot sh0 = mNum.getShot( st1, st2 ); 
+    // NumShot sh0 = mNum.getShot( st1, st2 ); 
     List<NumSplay> tmp1 = mNum.getSplaysAt( st1 );
     List<NumSplay> tmp2 = mNum.getSplaysAt( st2 );
-    List<NumShot> shot1 = mNum.getShotsAt( st1, st2 );
+    List<NumShot> shot1 = mNum.getShotsAt( st1, st2 ); // shots at st1 except [st1,st2]
     List<NumShot> shot2 = mNum.getShotsAt( st2, st1 );
     // Log.v("DistoX", "splays at 1: " + splay1.size() + " at 2: " + splay2.size() );
+
+    Vector v0 = new Vector( st2.e - st1.e, st2.s - st1.s, st2.v - st1.v );
+    float l = v0.LengthSquared();
+    v0.timesEqual( 1/l );
 
     ArrayList< Vector > vec1 = new ArrayList<Vector>();
     for ( NumShot sh : shot1 ) {
       Vector v = ( sh.from == st1 )?
-                 new Vector( sh.to.e - st1.e, sh.to.s - st1.s, sh.to.v - st1.v )
+                 new Vector( sh.to.e   - st1.e, sh.to.s   - st1.s, sh.to.v   - st1.v )
                : new Vector( sh.from.e - st1.e, sh.from.s - st1.s, sh.from.v - st1.v );
-      float l = v.LengthSquared();
+      l = v.LengthSquared();
       v.timesEqual( 1/l );
       vec1.add( v );
     }
     ArrayList< Vector > vec2 = new ArrayList<Vector>();
     for ( NumShot sh : shot2 ) {
       Vector v = ( sh.from == st2 )?
-                 new Vector( sh.to.e - st2.e, sh.to.s - st2.s, sh.to.v - st2.v )
+                 new Vector( sh.to.e   - st2.e, sh.to.s   - st2.s, sh.to.v   - st2.v )
                : new Vector( sh.from.e - st2.e, sh.from.s - st2.s, sh.from.v - st2.v );
-      float l = v.LengthSquared();
+      l = v.LengthSquared();
       v.timesEqual( 1/l );
       vec2.add( v );
     }
 
-    Vector v0 = new Vector( st2.e - st1.e, st2.s - st1.s, st2.v - st1.v );
-    float l0 = v0.LengthSquared();
-    v0.timesEqual( 1/l0 );
-
-    ArrayList< NumSplay > splays1 = new ArrayList< NumSplay >();
-    ArrayList< NumSplay > splays2 = new ArrayList< NumSplay >();
+    ArrayList< Vector > pts = new ArrayList<Vector>();
     for ( NumSplay sp : tmp1 ) {
       Vector v = new Vector( sp.e - st1.e, sp.s - st1.s, sp.v - st1.v );
       float x0 = v.dot( v0 );
       boolean ok = true;
-      if ( x0 > 1 || x0 < 0 ) {
+      if ( x0 < 0 /* || x0 > 1 */ ) { // if v projects before v0
         for ( Vector v1 : vec1 ) {
           if ( v.dot( v1 ) > 0 ) { ok = false; break; }
         }
       }
-      if ( ok ) splays1.add( sp );
+      if ( ok ) {
+        pts.add( sp.toVector() );
+      }
     }
     for ( NumSplay sp : tmp2 ) {
       Vector v = new Vector( sp.e - st2.e, sp.s - st2.s, sp.v - st2.v );
       float x0 = v.dot( v0 );
       boolean ok = true;
-      if ( x0 > 1 || x0 < 0 ) {
+      if ( /* x0 < -1 || */ x0 > 0 ) { // if v projects beyond v0
         for ( Vector v2 : vec2 ) {
           if ( v.dot( v2 ) > 0 ) { ok = false; break; }
         }
       }
-      if ( ok ) splays2.add( sp );
+      if ( ok ) {
+        pts.add( sp.toVector() );
+      }
     }
         
-    if ( splay1.size() < 2 || splay2.size() < 2 ) {
-      TDLog.Error( "make Convex Surface too few splays " + splay1.size() + " " + splay2.size() );
+    if ( pts.size() < 8 ) {
+      TDLog.Error( "make Convex Surface too few splays " + pts.size() );
       return;
     }
 
-
-
-    ArrayList< Vector > pts = new ArrayList<Vector>();
-    for ( NumSplay sp : splay1 ) {
-      pts.add( sp.toVector() );
-    }
-    for ( NumSplay sp : splay2 ) {
-      pts.add( sp.toVector() );
-    }
-    Vector v1 = st1.toVector();
-    Vector v2 = st2.toVector();
+    Vector vt1 = st1.toVector();
+    Vector vt2 = st2.toVector();
 
     mCurrentSurface = new SketchSurface( mInfo.st1, mInfo.st2, mPainter );
 
     switch ( type ) {
       case SURFACE_POWERCRUST:
-        Powercrust pc = new Powercrust( v1, v2, pts );
+        Powercrust pc = new Powercrust( vt1, vt2, pts );
         pc.compute();
         mCurrentSurface.makePowercrustTriangles( mInfo, pc );
         pc.release();
         break;
       case SURFACE_CONVEX_HULL:
       default:
-        ConvexHull hull = new ConvexHull( v1, v2, pts );
+        ConvexHull hull = new ConvexHull( vt1, vt2, pts );
         mCurrentSurface.makeConvexHullTriangles( mInfo, hull );
         break;
     }
@@ -1289,15 +1283,18 @@ class SketchModel
         }
       }
 
+      // Log.v("DistoX", "surfaces " + (short)(mSurfaces.size()) + " joins " + (short)(mJoins.size()) );
+
       toTdr( bos, (short)(mSurfaces.size()) );
       for ( SketchSurface surface : mSurfaces ) {
         surface.toTdr( bos, (short)4 );  // surface
       }
 
       toTdr( bos, (short)(mJoins.size()) );
-      for ( SketchSurface surface : mJoins ) {
-        surface.toTdr( bos, (short)5 ); // join
+      for ( SketchSurface join : mJoins ) {
+        join.toTdr( bos, (short)5 ); // join
       }
+      bos.flush();
     } catch ( IOException e ) {
       Log.e( "DistoX", e.toString() );
     }
@@ -1330,10 +1327,8 @@ class SketchModel
     return ByteBuffer.wrap( b, 0, 4 ).getFloat( 0 );
   }
 
-  private void fromTdrSurface( BufferedInputStream bis, SketchSurface surface ) throws IOException
+  private void fromTdrSurface( BufferedInputStream bis, SketchSurface surface, int nv, int nt ) throws IOException
   {
-    int nv = fromTdrShort( bis );
-    int nt = fromTdrShort( bis );
     for ( int k=0; k<nv; ++k ) {
       int idx = fromTdrShort( bis );
       float x = fromTdrFloat( bis );
@@ -1347,6 +1342,7 @@ class SketchModel
       int i3 = fromTdrShort( bis );
       surface.addTriangle( i1, i2, i3 );
     }
+    // Log.v("DistoX", " V " + nv + "/" + surface.mVertices.size() + " T " + nt + "/" + surface.mTriangles.size() );
   }
 
   public boolean loadTdr3( String filename, SymbolsPalette missingSymbols, SketchPainter painter )
@@ -1366,6 +1362,7 @@ class SketchModel
 
       // read stations
       int nst = fromTdrShort( bis );
+      // Log.v("DistoX", "sketch " + name + " ST " + nst );
       for ( k=0; k<nst; ++k ) { // NumStations
         String st_name = fromTdrString( bis );
         float e = fromTdrFloat( bis );
@@ -1375,6 +1372,7 @@ class SketchModel
 
       // read paths
       int npt = fromTdrShort( bis );
+      // Log.v("DistoX", "Paths " + npt );
       for ( k=0; k<npt; ++k ) { // paths
         int type = fromTdrShort( bis );
         String thtype = fromTdrString( bis );
@@ -1422,24 +1420,31 @@ class SketchModel
       }
   
       int nsf = fromTdrShort( bis ); // surfaces
+      // Log.v("DistoX", "Surfaces " + nsf );
       for ( k=0; k<nsf; ++k ) {
         int what = fromTdrShort( bis ); // must be 4
         String st1 = fromTdrString( bis );
         String st2 = fromTdrString( bis );
-        SketchSurface surface = new SketchSurface( st1, st2, painter );
+        int nv = fromTdrShort( bis );
+        int nt = fromTdrShort( bis );
+        // Log.v("DistoX", "Surface " + st1 + " " + st2 );
+        SketchSurface surface = new SketchSurface( st1, st2, painter, nv, nt );
         if ( st1.equals( mInfo.st1 ) && st2.equals( mInfo.st2 ) ) mCurrentSurface = surface;
-        fromTdrSurface( bis, surface );
+        fromTdrSurface( bis, surface, nv, nt );
         surface.computeBorders();
         mSurfaces.add( surface );
       }
 
       int njn = fromTdrShort( bis ); // joints
+      // Log.v("DistoX", "Joins " + njn );
       for ( k=0; k<njn; ++k ) {
         int what = fromTdrShort( bis ); // must be 5
         String st1 = fromTdrString( bis );
         String st2 = fromTdrString( bis );
-        SketchSurface join = new SketchSurface( st1, st2, painter );
-        fromTdrSurface( bis, join );
+        int nv = fromTdrShort( bis );
+        int nt = fromTdrShort( bis );
+        SketchSurface join = new SketchSurface( st1, st2, painter, nv, nt );
+        fromTdrSurface( bis, join, nv, nt );
         mJoins.add( join );
       }
     } catch ( FileNotFoundException e ) {

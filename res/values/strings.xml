@@ -382,6 +382,7 @@
     <string name="sketch3d_name">name</string>
     <string name="sketch3d_new">New 3D model</string>
     <string name="sketch3d_next">next station</string>
+    <string name="sketch3d_loading">loading model ...</string>
     <!-- UNUSED string name="sketch3d_null_name">Missing 3D sketch name</string -->
     <!-- UNUSED string name="sketch3d_null_next">Missing 3D sketch next station</string -->
     <!-- UNUSED string name="sketch3d_null_start">Missing 3D sketch base station</string -->
