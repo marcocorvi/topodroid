@@ -43,28 +43,28 @@
     <!-- UNUSED string name="missing_symbols">Il manque des symboles.\nEnregistrer tout de même ?</string -->
     <!-- UNUSED string name="missing_title">SYMBOLES MANQUANTS</string -->
     <!-- UNUSED string name="missing_warning">Les symboles suivants sont manquants.\n</string -->
-    <string name="failed_snap_to_line">Pas de ligne à accrocher</string>
-    <string name="failed_snap_to_point">Pas de point à accrocher</string>
+    <string name="failed_snap_to_line">Pas de ligne à attacher</string>
+    <string name="failed_snap_to_point">Pas de point à attacher</string>
     <string name="failed_snap_to_splays">Aucun cheminement assez proche pour attacher la ligne</string>
 
-    <string name="calibration_title">Outil de calibrage</string>
+    <string name="calibration_title">Outil d\'étalonnage</string>
     <string name="calibration_length">Mètre</string>
     <string name="calibration_azimuth">Compas</string>
     <string name="calibration_clino">Clinomètre</string>
 
-    <string name="calib_new">Nouvelle Calibration</string>
-    <string name="calib_exists">Une Calibration existe déjà</string>
-    <string name="calib_delete">Supprimer cette Calibration </string>
-    <string name="calib_device_mismatch">ATTENTION : Calibration et Appareil ne correspondent pas</string>
-    <string name="calib_no_name">Vous devez nommer cette Calibration</string>
+    <string name="calib_new">Nouvel étalonnage</string>
+    <string name="calib_exists">Un étalonnage existe déjà</string>
+    <string name="calib_delete">Supprimer cet étalonnage </string>
+    <string name="calib_device_mismatch">ATTENTION : Étalonnage et Appareil ne correspondent pas</string>
+    <string name="calib_no_name">Vous devez nommer cet étalonnage </string>
     <string name="calib_gm_policy">Politique</string>
-    <string name="calib_gm_undelete">Récupérer ces données de Calibration?</string>
-    <string name="calib_saved">Calibration enregistrée</string>
-    <string name="calib_updated">Calibration mise à jour</string>
-    <string name="calib_compute_groups">Calculs des groupes de données de Calibration…</string>
-    <string name="calib_compute_coeffs">Calculs des coefficients de Calibration…</string>
+    <string name="calib_gm_undelete">Récupérer ces données d\'étalonnage?</string>
+    <string name="calib_saved">Étalonnage enregistrée</string>
+    <string name="calib_updated">Étalonnage mise à jour</string>
+    <string name="calib_compute_groups">Calculs des groupes de données d\'étalonnage…</string>
+    <string name="calib_compute_coeffs">Calculs des coefficients d\'étalonnage…</string>
     <!-- UNUSED string name="calib_read_coeffs">Lecture des coéficients de Calibration ...</string -->
-    <string name="calib_write_coeffs">Écriture des coefficients de Calibration…</string>
+    <string name="calib_write_coeffs">Écriture des coefficients d\'étalonnage…</string>
     <string name="calib_validation">Validation de %1$s vs %2$s</string>
     <!-- UNUSED string name="connect_failed">Echec de la connexion</string -->
     <!-- UNUSED string name="data"> données</string -->
@@ -176,7 +176,7 @@
 <string name="error_end_required">Adresse de fin nécessaire</string>
 <string name="error_from_required">Première station nécessaire</string>
 <string name="error_group_required">Numéro de groupe nécessaire</string>
-<string name="error_group_non_integer">Groupe doit etre un chiffre rond</string>
+<string name="error_group_non_integer">Groupe doit être un chiffre rond</string>
 <string name="error_alt_required">Altitude nécessaire</string>
 <string name="error_invalid_number">Nombre invalide</string>
 <string name="error_lat_required">Latitude nécessaire</string>
@@ -189,7 +189,7 @@
 <string name="error_sensor_required">Capteur nécessaire</string>
 <string name="error_value_required">Valeur nécessaire</string>
 
-<string name="group_title">Définir les Groupes de Données pour la calibration </string>
+<string name="group_title">Définir les Groupes de Données pour l\'étalonnage </string>
 <string name="group_policy_four">Règle : grouper par 4</string>
 <string name="group_policy_sixteen">Règle : 4 groupes de 4, les autres seuls</string>
 <string name="group_policy_distance">Règle : grouper par distance angulaire</string>
@@ -203,10 +203,10 @@
 <string name="in">interne</string>
 <!-- UNUSED string name="none">aucun</string -->
 <!-- UNUSED string name="barrier_add">Cacher les visées suivantes</string -->
-    <string name="hide_from">Masquer depuis from</string>
+    <string name="hide_from">Masquer depuis…</string>
 <string name="barrier_del">Afficher les visées suivantes</string>
 <!-- UNUSED string name="hidden_add">Cacher les visées precedentes</string -->
-<string name="hidden_del">Afficher les visées precedentes</string>
+<string name="hidden_del">Afficher les visées précédentes</string>
 <string name="splays_toggle">Basculer les visées d\'habillage - Splays</string>
 <string name="fixed">fixé</string>
 <string name="painted">dessiné</string>
@@ -216,15 +216,15 @@
 <string name="bad_point">mauvais type de point</string>
 
 <string name="no_bt">Pas de Bluetooth</string>
-<string name="no_calib">Pas d\'étallonage</string>
+<string name="no_calib">Pas d\'étalonnage</string>
 <string name="no_calib_check">Pas de visée de contrôle d\'étalonnage</string>
-<string name="no_calibration">Aucun étallonage sélectionné</string>
+<string name="no_calibration">Aucun étalonnage sélectionné</string>
 <string name="no_capture_app">Aucune application de capture d\'image</string>
 <string name="no_cave3d">Cave3D n\'est pas installé</string>
 <string name="no_db">Pas de base de données</string>
 <string name="no_device_address">Adresse de périphérique non sélectionnée</string>
 <string name="no_device_found">Pas de périphérique trouvé</string>
-<string name="no_gms">La Calibration ne contient pas de données.\nUtiliser le bouton Télécharger</string>
+<string name="no_gms">L\'étalonnage ne contient pas de données.\nUtiliser le bouton Télécharger</string>
 <string name="no_geo_station">Échec : pas de station géolocalisée</string>
 <string name="no_leg_intersection">La ligne de section ne coupe aucune ligne de cheminement</string>
 <string name="no_location_data">Aucune donnée de géolocalisation</string>
@@ -333,12 +333,12 @@
     <!-- UNUSED string name="saved_file_">Fichier enregistré\ </string -->
     <string name="saved_file_1">Fichier enregistré</string>
     <string name="saved_file_2">Fichier enregistré %1$s Échelle %2$.2f</string>
-    <string name="saving_">Enregistrement </string>
+    <string name="saving_">Enregistrement</string>
     <string name="saving_file_failed">Échec de l\'enregistrement du fichier</string>
     <!-- UNUSED string name="scrap_name">Nom du croquis</string -->
-    <string name="splay">*splay*</string>
+    <string name="splay">Visée latéralle</string>
     <string name="too_many_leg_intersection">La ligne de section croise plus d\'une ligne de cheminement.</string>
-    <string name="too_many_legs_xsection">Trop de visées pour X-section</string>
+    <string name="too_many_legs_xsection">Trop de visées pour la section X</string>
     <!-- UNUSED string name="converted_tdr2th2">Fichier de dessin binaire convertis vers th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Écraser le fichier th2 ?</string -->
     <string name="section_area">Zone section : %1$.1f</string>
@@ -371,7 +371,7 @@
     <string name="make_surface">Cette surface existe. La remplacer?</string>
 
     <string name="sketch3d_name">nom</string>
-    <string name="sketch3d_new">Nouveau model 3D</string>
+    <string name="sketch3d_new">Nouveau modèle 3D</string>
     <string name="sketch3d_next">station suivante</string>
     <!-- UNUSED string name="sketch3d_null_name">Missing 3D sketch name</string -->
     <!-- UNUSED string name="sketch3d_null_next">Missing 3D sketch next station</string -->
@@ -469,7 +469,7 @@
     <string name="button_current"   >Courant   </string>
     <string name="button_delete"    >Supprimer    </string>
     <string name="button_eval"      >Évaluation      </string>
-    <string name="button_eval_cal"  >Évaluation avec Calibration</string>
+    <string name="button_eval_cal"  >Évaluation avec étalonnage</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
     <!-- UNUSED string name="button_manual"    >Manuel    </string -->
@@ -533,7 +533,7 @@
     <string name="symbol_paleo">Paléo</string>
     <string name="symbol_speleo">Spéléo</string>
     <string name="symbol_extra">Spéléo (2)</string>
-    <string name="symbol_reload">OUtils de dessin</string>
+    <string name="symbol_reload">Outils de dessin</string>
 
 
 <!-- FIXME_SKETCH_3D -->
@@ -592,8 +592,8 @@
     <string name="help_measure">Mesurer les distances</string>
 
     <string name="help_calib_check">Visées de contrôle étalonnage</string>
-    <string name="help_close">Fermer fenêtre window</string>
-    <string name="help_coeff">Montrer les coefficients de calibration</string>
+    <string name="help_close">Fermer fenêtre</string>
+    <string name="help_coeff">Montrer les coefficients d'étalonnage</string>
     <string name="help_continue">Continuer une ligne</string>
     <string name="help_current_station">Stations enregistrées</string>
     <string name="help_azimuth">Azimuth Référence Etendu</string>
@@ -610,8 +610,8 @@
     <string name="help_download">Télécharge les données</string>
     <!-- UNUSED string name="help_splay">Affecte automatiquement les stations aux visées latérales</string -->
     <string name="help_display">Choisit un mode d\'affichage</string>
-    <string name="help_display_calib">Basculer affichage des Visées supprimées</string>
-    <string name="help_validate">Valider la Calibration</string>
+    <string name="help_display_calib">Basculer affichage des visées supprimées</string>
+    <string name="help_validate">Valider l\'étalonnage</string>
     <string name="help_overview">Résumé d\'activité</string>
     <string name="help_plot">Passe en mode croquis</string>
     <string name="help_note">Modifie les notes du relevé</string>
@@ -639,7 +639,7 @@
     <string name="help_undo">Annule la dernière action</string>
     <string name="help_redo">Rétabli la dernière action</string>
     <string name="help_symbol_plot">Sélectionne le symbole à dessiner</string>
-    <string name="help_delete_item">Supprimer Objet topo</string>
+    <string name="help_delete_item">Supprimer objet topo</string>
     <string name="help_range">Déplacer portion de ligne</string>
     <!-- UNUSED string name="help_clear">Clear selection</string -->
     <string name="help_eraser">Efface un/des éléments du croquis</string>
@@ -656,7 +656,7 @@
     <string name="help_split_line">Split the line into two at the point</string>
     <string name="help_kink">Use a straight line at the point [line/area]</string>
 -->
-    <string name="help_manual_calibration">Manuel de calibration instrument</string>
+    <string name="help_manual_calibration">Étalonnage manuel de l\'instrument</string>
     <string name="help_note_plot">Édite les propriétés de l\'élément dessiné</string>
     <!-- UNUSED string name="help_save">Enregistre les modifications d\'infosdu relevé</string -->
     <string name="help_save_calib">Enregistre les modifications d\'infos d\'étalonnage</string>
@@ -769,7 +769,7 @@
   <string name="pref_export_plot_title">Format export dessins</string>
   <string name="pref_export_plot_summary">Format par défaut d\'exportation des dessins</string>
   <string name="pref_therion_maps_title">Cartes Therion en premier</string>
-  <string name="pref_therion_maps_summary">Export des Cartes Therion avant les données topographiques</string>
+  <string name="pref_therion_maps_summary">Export des cartes Therion avant les données topographiques</string>
   <string name="pref_extra_buttons_title">Niveau d\'utilisation</string>
   <string name="pref_extra_buttons_summary">Active des options supplémentaires</string>
   <string name="pref_size_buttons_title">Taille des boutons</string>
@@ -780,8 +780,8 @@
   <string name="pref_leg_shots_summary">Nombre minimum de visées successives pour identifier un cheminement</string>
   <string name="pref_station_prefix_title">Préfixe station EcSurvey</string>
   <string name="pref_station_prefix_summary">Export préfixe station cSurvey</string>
-  <string name="pref_trobot_names_title">Noms station TopoRobot</string>
-  <string name="pref_trobot_names_summary">Les noms de station son de style TopoRobot</string>
+  <string name="pref_trobot_names_title">Noms stations TopoRobot</string>
+  <string name="pref_trobot_names_summary">Les noms de station sont de style TopoRobot</string>
   <string name="pref_ortho_lrud_title">Angle visée chem. LRUD</string>
   <string name="pref_ortho_lrud_summary">Angle minimum visée de cheminement pour une cheminement LRUD</string>
   <string name="pref_ortho_lrud_message">Angle minimum LRUD</string>
@@ -797,8 +797,8 @@
   <string name="pref_svg_in_html_summary">Embarquer l\'export SVG en HTML</string>
   <string name="pref_kml_stations_title">stations KML</string>
   <string name="pref_kml_stations_summary">Ajouter les stations à l\'export KML</string>
-  <string name="pref_kml_splays_title">Visée latéralles KML</string>
-  <string name="pref_kml_splays_summary">Ajouter les visées latéralles à l\'export KML</string>
+  <string name="pref_kml_splays_title">Visée latérales KML</string>
+  <string name="pref_kml_splays_summary">Ajouter les visées latérales à l\'export KML</string>
 
   <!-- UNUSED string name="pref_csv_length_title">Unité de long. CSV</string -->
   <!-- UNUSED string name="pref_csv_length_summary">Unité de long. export CSV</string -->
@@ -895,7 +895,7 @@
   <string name="pref_azimuth_manual_summary">Définir manuellement les extensions D/G des visées</string>
 
   <string name="pref_team_title">Équipe spéleo</string>
-  <string name="pref_team_summary">Nom équipe de Spéleo</string>
+  <string name="pref_team_summary">Nom équipe de spéleo</string>
   <string name="pref_team_message">Nom équipe de topographie</string>
 
   <string name="pref_ethr_title">Seuil vertical vis. latérales</string>
@@ -1142,6 +1142,7 @@
 \nTraduction initiale de par G. Chardin : guillaume.chardin@gmail.com
 \nMise à jour le 29-11-2015 par F. Martin : frankm@gmail.com
 \nMise à jour le 12-07-2016 par D. Ros : souterweb@free.fr
+\nMise à jour le 23-05-2017 par G. Chardin    
     </string>
 
   <string name="firmware_title">Firmware Updater</string>
