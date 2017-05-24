@@ -84,7 +84,7 @@
    
     <string name="device_algo_failed">Az algoritmus automatikus kiválasztása nem sikerült\nLineáris eljárás használata</string>
     <string name="device_address">Cím %1$s</string>
-    <string name="device_busy">Az eszköz használatban</string>
+    <!-- UNUSED string name="device_busy">Az eszköz használatban</string -->
     <string name="device_illegal_addr">Helytelen memória cím</string>
     <string name="device_info">Eszköz információ</string>
     <string name="device_model_set">Valóban meg akarja változtatni az eszköz típusát?</string>
@@ -426,6 +426,7 @@
     <string name="stat_duplicate">Kettőzött mérés %1$d %2$.1f %3$s</string>
     <string name="stat_leg">Poligonmérések %1$d %2$.1f %3$s</string>
     <string name="stat_length">Hossz  %1$.1f %2$s</string>
+    <!-- TODO string name="stat_projlen">Plan length %1$.1f %2$s</string -->
     <string name="stat_loop">Hurkok %1$d</string>
     <string name="stat_origin">Nulla pont: %1$s</string>
     <string name="stat_azimuth">Oldalnézet vetítési iránya: %1$.1f</string>
@@ -550,7 +551,7 @@
     <string name="sketch_mode_ngbh">Közeli mérések</string>
     <string name="sketch_mode_all">Minden mérés</string>
     <string name="sketch_delete">Törli a 3D modellt?</string>
-    <string name="sketch_no_split">Nem lehet finomítani. Csökkentsd az oldal max. hosszát a további pontosításhoz</string>
+    <!-- UNUSED string name="sketch_no_split">Nem lehet finomítani. Csökkentsd az oldal max. hosszát a további pontosításhoz</string -->
 
     <string name="length">Hossz [m]</string>
     <string name="azimuth">Irányszög [fok]</string>
@@ -690,13 +691,13 @@
     <string name="help_trash_model">3D modell törlése</string>
     <string name="help_head_model">3D modell tájolása</string>
     <!-- UNUSED string name="help_erase_model">Erase region</string -->
-    <string name="help_cut_model">Terület kivágása</string>
-    <string name="help_stretch_model">Terület kiterjesztése</string>
+    <!-- UNUSED string name="help_cut_model">Terület kivágása</string -->
+    <!-- UNUSED string name="help_stretch_model">Terület kiterjesztése</string -->
     <!-- UNUSED string name="help_extrude_model">Extrude region</string -->
-    <string name="help_refine_center">Felület finomítása a háromszögek középpontjában</string>
-    <string name="help_refine_sides">Felület finomítása a háromszögek oldalai mentén</string>
-    <string name="help_refine_point">Felület finomítása adott pontban</string>
-    <string name="help_refine_triangle">Felület finomítása a hosszú oldalak mentén</string>
+    <!-- UNUSED string name="help_refine_center">Felület finomítása a háromszögek középpontjában</string -->
+    <!-- UNUSED string name="help_refine_sides">Felület finomítása a háromszögek oldalai mentén</string -->
+    <!-- UNUSED string name="help_refine_point">Felület finomítása adott pontban</string -->
+    <!-- UNUSED string name="help_refine_triangle">Felület finomítása a hosszú oldalak mentén</string -->
   
 
     <string name="title_azimut">Vonatkozási rendszer</string>

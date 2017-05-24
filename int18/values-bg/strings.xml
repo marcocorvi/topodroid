@@ -84,7 +84,7 @@
 
     <string name="device_algo_failed">Невъзможно автоматично определяне на алгоритъма\nЩе бъде използван линеен</string>
     <string name="device_address">Адрес %1$s</string>
-    <string name="device_busy">Устройството е заето</string>
+    <!-- UNUSED string name="device_busy">Устройството е заето</string -->
     <string name="device_illegal_addr">Грешен адрес в паметта</string>
     <string name="device_info">Информация за устройството</string>
     <string name="device_model_set">Наистина ли искате да промените модела на устройството?</string>
@@ -427,6 +427,7 @@
     <string name="stat_duplicate">Дублирани отсечки %1$d %2$.1f %3$s</string>
     <string name="stat_leg">Отсечки %1$d %2$.1f %3$s</string>
     <string name="stat_length">Дължина %1$.1f %2$s</string>
+    <!-- TODO string name="stat_projlen">Plan length %1$.1f %2$s</string -->
     <string name="stat_loop">Полигони %1$d</string>
     <string name="stat_origin">Начален репер: %1$s</string>
     <string name="stat_azimuth">Азимут на проект. разрез: %1$.1f</string>
@@ -551,7 +552,7 @@
     <string name="sketch_mode_ngbh">Близки отсечки</string>
     <string name="sketch_mode_all">Всички отсечки</string>
     <string name="sketch_delete">Изтриване на 3D модел?</string>
-    <string name="sketch_no_split">Невъзможно изчистване. Намалете макс. дължина на страната за допълнително изчистване.</string>
+    <!-- UNUSED string name="sketch_no_split">Невъзможно изчистване. Намалете макс. дължина на страната за допълнително изчистване.</string -->
 
     <string name="length">Дължина [метри]</string>
     <string name="azimuth">Азимут [градуси]</string>
@@ -691,13 +692,13 @@
     <string name="help_trash_model">Изтриване на 3D модел</string>
     <string name="help_head_model">Ориентиране на 3D модел</string>
     <!-- UNUSED string name="help_erase_model">Изтриване на регион</string -->
-    <string name="help_cut_model">Отрязване на регион</string>
-    <string name="help_stretch_model">Разтягане на регион</string>
+    <!-- UNUSED string name="help_cut_model">Отрязване на регион</string -->
+    <!-- UNUSED string name="help_stretch_model">Разтягане на регион</string -->
     <!-- UNUSED string name="help_extrude_model">Екструд. на регион</string -->
-    <string name="help_refine_center">Изчистване на повърхност в центровете на триъгълниците</string>
-    <string name="help_refine_sides">Изчистване на повърхност в страните на триъгълниците</string>
-    <string name="help_refine_point">Изчистване на повърхност в точка</string>
-    <string name="help_refine_triangle">Изчистване на повърхност в дългите страни</string>
+    <!-- UNUSED string name="help_refine_center">Изчистване на повърхност в центровете на триъгълниците</string -->
+    <!-- UNUSED string name="help_refine_sides">Изчистване на повърхност в страните на триъгълниците</string -->
+    <!-- UNUSED string name="help_refine_point">Изчистване на повърхност в точка</string -->
+    <!-- UNUSED string name="help_refine_triangle">Изчистване на повърхност в дългите страни</string -->
 
 
     <string name="title_azimut">Разгъване спрямо азим.</string>

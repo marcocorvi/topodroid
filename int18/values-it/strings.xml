@@ -84,7 +84,7 @@
    
     <string name="device_algo_failed">Fallita determinazione automatica algoritmo\nUso algoritmo lineare</string>
     <string name="device_address">Indirizzo %1$s</string>
-    <string name="device_busy">Dispositivo occupato</string>
+    <!-- UNUSED string name="device_busy">Dispositivo occupato</string -->
     <string name="device_illegal_addr">Indirizzo di memoria illegale</string>
     <string name="device_info">Dati dispositivo</string>
     <string name="device_model_set">Vuoi davvero cambiare il modello del dispositivo</string>
@@ -426,6 +426,7 @@
     <string name="stat_duplicate">Battute doppie %1$d %2$.1f %3$s</string>
     <string name="stat_leg">Battute %1$d %2$.1f %3$s</string>
     <string name="stat_length">Sviluppo %1$.1f %2$s</string>
+    <!-- TODO string name="stat_projlen">Plan length %1$.1f %2$s</string -->
     <string name="stat_loop">Anelli %1$d</string>
     <string name="stat_origin">Caposaldo zero: %1$s</string>
     <string name="stat_azimuth">Profilo proiezione azimut: %1$.1f</string>
@@ -551,7 +552,7 @@
     <string name="sketch_mode_ngbh">Tiri vicini</string>
     <string name="sketch_mode_all">Tutti i tiri</string>
     <string name="sketch_delete">Cancella modello 3D ?</string>
-    <string name="sketch_no_split">Nessun raffinamento. Diminuire lato max. Lunghezza da raffinare ulteriormente.</string>
+    <!-- UNUSED string name="sketch_no_split">Nessun raffinamento. Diminuire lato max. Lunghezza da raffinare ulteriormente.</string -->
     <string name="length">Lunghezza [m]</string>
     <string name="azimuth">Azimut [deg]</string>
     <string name="clino">Inclinazione [deg]</string>
@@ -689,13 +690,13 @@
     <string name="help_trash_model">Delete 3D model</string>
     <string name="help_head_model">Orient 3D model</string>
     <!-- UNUSED string name="help_erase_model">Erase region</string -->
-    <string name="help_cut_model">Cut region</string>
-    <string name="help_stretch_model">Stretch region</string>
+    <!-- UNUSED string name="help_cut_model">Cut region</string -->
+    <!-- UNUSED string name="help_stretch_model">Stretch region</string -->
     <!-- UNUSED string name="help_extrude_model">Extrude region</string -->
-    <string name="help_refine_center">Refine surface at triangle centers</string>
-    <string name="help_refine_sides">Refine surface at triangle sides</string>
-    <string name="help_refine_point">Refine surface at point</string>
-    <string name="help_refine_triangle">Refine surface al the long sides</string>
+    <!-- UNUSED string name="help_refine_center">Refine surface at triangle centers</string -->
+    <!-- UNUSED string name="help_refine_sides">Refine surface at triangle sides</string -->
+    <!-- UNUSED string name="help_refine_point">Refine surface at point</string -->
+    <!-- UNUSED string name="help_refine_triangle">Refine surface al the long sides</string -->
   
 
     <string name="title_azimut">Riferimento Extend</string>

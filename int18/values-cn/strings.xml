@@ -84,7 +84,7 @@
    
     <string name="device_algo_failed">自动算法失败\n使用线性算法...</string>
     <!-- TODO string name="device_address">Address %1$s</string -->
-    <string name="device_busy">设备忙...</string>
+    <!-- UNUSED string name="device_busy">设备忙...</string -->
     <string name="device_illegal_addr">非法的存储地址</string>
     <string name="device_info">设备信息</string>
     <string name="device_model_set">你是否想要切换设备</string>
@@ -425,6 +425,7 @@
     <string name="stat_duplicate">复制单个测量数据 %1$d %2$.1f %3$s</string>
     <string name="stat_leg">主线 %1$d %2$.1f %3$s</string>
     <string name="stat_length">长度 %1$.1f %2$s</string>
+    <!-- TODO string name="stat_projlen">Plan length %1$.1f %2$s</string -->
     <string name="stat_loop">环测 %1$d</string>
     <string name="stat_origin">零测量点: %1$s</string>
     <!-- TODO string name="stat_azimuth">Profile projection azimuth: %1$.1f</string -->
@@ -548,7 +549,7 @@
     <string name="sketch_mode_ngbh">附近测量</string>
     <string name="sketch_mode_all">所有测量</string>
     <string name="sketch_delete">删除 3D 模式 ?</string>
-    <string name="sketch_no_split">不精细. 减去最大长度提高精度.</string>
+    <!-- UNUSED string name="sketch_no_split">不精细. 减去最大长度提高精度.</string -->
     <string name="length">距离 [米]</string>
     <string name="azimuth">方位角 [deg]</string>
     <string name="clino">倾角 [deg]</string>
@@ -687,13 +688,13 @@
     <string name="help_trash_model">删除3D模型</string>
     <string name="help_head_model">标定 3D 模型</string>
     <!-- UNUSED string name="help_erase_model">擦除区域</string -->
-    <string name="help_cut_model">剪切区域</string>
-    <string name="help_stretch_model">延伸区域</string>
+    <!-- UNUSED string name="help_cut_model">剪切区域</string -->
+    <!-- UNUSED string name="help_stretch_model">延伸区域</string -->
     <!-- UNUSED string name="help_extrude_model">挤压拉伸区域</string -->
-    <string name="help_refine_center">以三角中心改善表面</string>
-    <string name="help_refine_sides">以三角变改善表面</string>
-    <string name="help_refine_point">以点改善表面</string>
-    <string name="help_refine_triangle">以长边改善表面</string>
+    <!-- UNUSED string name="help_refine_center">以三角中心改善表面</string -->
+    <!-- UNUSED string name="help_refine_sides">以三角变改善表面</string -->
+    <!-- UNUSED string name="help_refine_point">以点改善表面</string -->
+    <!-- UNUSED string name="help_refine_triangle">以长边改善表面</string -->
   
 
     <string name="title_azimut">延展参照</string>

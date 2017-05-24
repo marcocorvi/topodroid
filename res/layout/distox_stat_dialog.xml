@@ -58,6 +58,11 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
         />
+    <TextView android:id="@+id/text_stat_projlen"
+        android:layout_marginTop="5sp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        />
     <TextView android:id="@+id/text_stat_wens"
         android:layout_marginTop="5sp"
         android:layout_width="fill_parent"

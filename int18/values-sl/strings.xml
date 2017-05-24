@@ -84,7 +84,7 @@
    
     <!-- FIXME string name="device_algo_failed">Neuspešna definicija automatičnega lgoritma_uporaba linearnega algoritma</string bad chararcter backslash-u  -->
     <!-- TODO string name="device_address">Address %1$s</string -->
-    <string name="device_busy">Aparat zaseden</string>
+    <!-- UNUSED string name="device_busy">Aparat zaseden</string -->
     <string name="device_illegal_addr">Ilegalen naslov spomina naprave</string>
     <string name="device_info">Podatki o napravi</string>
     <string name="device_model_set">Želiš spremeniti model naprave</string>
@@ -429,6 +429,7 @@
     <string name="stat_duplicate">Dvojne vizure %1$d %2$.1f %3$s</string>
     <string name="stat_leg">Vizure %1$d %2$.1f %3$s</string>
     <string name="stat_length">Dolžina %1$.1f %2$s</string>
+    <!-- TODO string name="stat_projlen">Plan length %1$.1f %2$s</string -->
     <string name="stat_loop">Zanke %1$d</string>
     <string name="stat_origin">Merilna točka 0: %1$s</string>
     <!-- TODO string name="stat_azimuth">Profile projection azimuth: %1$.1f</string -->
@@ -553,7 +554,7 @@
     <!-- NO string name="sketch_mode_ngbh">Nearby shots</string -->
     <!-- NO string name="sketch_mode_all">All shots</string -->
     <!-- NO string name="sketch_delete">Delete 3D model ?</string -->
-    <!-- NO string name="sketch_no_split">No refinement. Decrease side max. length to refine further.</string -->
+    <!-- UNUSED string name="sketch_no_split">No refinement. Decrease side max. length to refine further.</string -->
 
     <string name="length">Dolžina [m]</string>
     <string name="azimuth">Azimut [deg]</string>
@@ -690,13 +691,13 @@
     <!-- NO string name="help_trash_model">Delete 3D model</string -->
     <!-- NO string name="help_head_model">Orient 3D model</string -->
     <!-- UNUSED string name="help_erase_model">Erase region</string -->
-    <!-- NO string name="help_cut_model">Cut region</string -->
-    <!-- NO string name="help_stretch_model">Stretch region</string -->
+    <!-- UNUSED string name="help_cut_model">Cut region</string -->
+    <!-- UNUSED string name="help_stretch_model">Stretch region</string -->
     <!-- UNUSED string name="help_extrude_model">Extrude region</string -->
-    <!-- NO string name="help_refine_center">Refine surface at triangle centers</string -->
-    <!-- NO string name="help_refine_sides">Refine surface at triangle sides</string -->
-    <!-- NO string name="help_refine_point">Refine surface at point</string -->
-    <!-- NO string name="help_refine_triangle">Refine surface al the long sides</string -->
+    <!-- UNUSED string name="help_refine_center">Refine surface at triangle centers</string -->
+    <!-- UNUSED string name="help_refine_sides">Refine surface at triangle sides</string -->
+    <!-- UNUSED string name="help_refine_point">Refine surface at point</string -->
+    <!-- UNUSED string name="help_refine_triangle">Refine surface al the long sides</string -->
  
 
     <string name="title_azimut">Referenca Extend</string>

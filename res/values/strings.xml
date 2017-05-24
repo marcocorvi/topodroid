@@ -84,7 +84,7 @@
    
     <string name="device_algo_failed">Algorithm auto-determination failed\nUsing linear algorithm</string>
     <string name="device_address">Address %1$s</string>
-    <string name="device_busy">Device busy</string>
+    <!-- UNUSED string name="device_busy">Device busy</string -->
     <string name="device_illegal_addr">Illegal memory address</string>
     <string name="device_info">Device info</string>
     <string name="device_model_set">Do you really want to change the model of the device</string>
@@ -436,6 +436,7 @@
     <string name="stat_duplicate">Duplicate shots %1$d %2$.1f %3$s</string>
     <string name="stat_leg">Legs %1$d %2$.1f %3$s</string>
     <string name="stat_length">Length %1$.1f %2$s</string>
+    <string name="stat_projlen">Plan length %1$.1f %2$s</string>
     <string name="stat_loop">Loops %1$d</string>
     <string name="stat_origin">Zero station: %1$s</string>
     <string name="stat_azimuth">Profile projection azimuth: %1$.1f</string>
@@ -562,7 +563,7 @@
     <string name="sketch_mode_none">No surface</string>
     <string name="sketch_delete">Delete 3D model ?</string>
     <string name="sketch_clear">Clear 3D model ?</string>
-    <string name="sketch_no_split">No refinement. Decrease side max. length to refine further.</string>
+    <!-- UNUSED string name="sketch_no_split">No refinement. Decrease side max. length to refine further.</string -->
 
     <string name="length">Length [m]</string>
     <string name="azimuth">Azimuth [deg]</string>
@@ -703,13 +704,13 @@
     <string name="help_clear_model">Clear 3D model</string>
     <string name="help_head_model">Orient 3D model</string>
     <!-- UNUSED string name="help_erase_model">Erase region</string -->
-    <string name="help_cut_model">Cut region</string>
-    <string name="help_stretch_model">Stretch region</string>
+    <!-- UNUSED string name="help_cut_model">Cut region</string -->
+    <!-- UNUSED string name="help_stretch_model">Stretch region</string -->
     <!-- UNUSED string name="help_extrude_model">Extrude region</string -->
-    <string name="help_refine_center">Refine surface at triangle centers</string>
-    <string name="help_refine_sides">Refine surface at triangle sides</string>
-    <string name="help_refine_point">Refine surface at point</string>
-    <string name="help_refine_triangle">Refine surface al the long sides</string>
+    <!-- UNUSED string name="help_refine_center">Refine surface at triangle centers</string -->
+    <!-- UNUSED string name="help_refine_sides">Refine surface at triangle sides</string -->
+    <!-- UNUSED string name="help_refine_point">Refine surface at point</string -->
+    <!-- UNUSED string name="help_refine_triangle">Refine surface al the long sides</string -->
   
     <string name="audio_paused">Paused</string>
     <string name="audio_playing">Playing</string>

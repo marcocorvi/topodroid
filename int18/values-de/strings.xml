@@ -84,7 +84,7 @@
 <!-- DistoX DEVICE STUFF -->
     <string name="device_algo_failed">Bestimmung fehlgeschlagen.\nVerwendung von linearem Algorithmus</string>
     <string name="device_address">Adresse %1$s</string>
-    <string name="device_busy">Gerät arbeitet</string>
+    <!-- UNUSED string name="device_busy">Gerät arbeitet</string -->
     <string name="device_illegal_addr">Ungültige Speicheradresse</string>
     <string name="device_info">Geräte-Info</string>
     <string name="device_model_set">Gerätemodell wirklich ändern</string>
@@ -437,6 +437,7 @@
     <string name="stat_duplicate">Doppelmessungen %1$d %2$.1f %3$s</string>
     <string name="stat_leg">Messstrecke %1$d %2$.1f %3$s</string>
     <string name="stat_length">Länge %1$.1f %2$s</string>
+    <!-- TODO string name="stat_projlen">Plan length %1$.1f %2$s</string -->
     <string name="stat_loop">Kreisschlüsse %1$d</string>
     <string name="stat_origin">Ursprungs-Messpunkt: %1$s</string>
     <string name="stat_azimuth">Profilprojektions-Azimut: %1$.1f</string>
@@ -567,7 +568,7 @@
     <!-- NO string name="sketch_mode_ngbh">Nearby shots</string -->
     <!-- NO string name="sketch_mode_all">All shots</string -->
     <!-- NO string name="sketch_delete">Delete 3D model ?</string -->
-    <!-- NO string name="sketch_no_split">No refinement. Decrease side max. length to refine further.</string -->
+    <!-- UNUSED string name="sketch_no_split">No refinement. Decrease side max. length to refine further.</string -->
 
     <!-- TODO string name="length">Length [m]</string -->
     <!-- TODO string name="azimuth">Azimuth [deg]</string -->
@@ -709,13 +710,13 @@
     <string name="help_trash_model">3D-Modell löschen</string>
     <string name="help_head_model">3D-Modell drehen</string>
     <!-- UNUSED string name="help_erase_model">Erase region</string -->
-    <string name="help_cut_model">Region ausschneiden</string>
-    <string name="help_stretch_model">Region zeichnen</string>
+    <!-- UNUSED string name="help_cut_model">Region ausschneiden</string -->
+    <!-- UNUSED string name="help_stretch_model">Region zeichnen</string -->
     <!-- UNUSED string name="help_extrude_model">Extrude region</string -->
-    <string name="help_refine_center">Oberfläche verfeinern im Dreieckszentrum</string>
-    <string name="help_refine_sides">Oberfläche verfeinern an den Rändern</string>
-    <string name="help_refine_point">Oberfläche verfeinern an Punkt</string>
-    <string name="help_refine_triangle">Oberfläche verfeinern an den langen Seiten</string>
+    <!-- UNUSED string name="help_refine_center">Oberfläche verfeinern im Dreieckszentrum</string -->
+    <!-- UNUSED string name="help_refine_sides">Oberfläche verfeinern an den Rändern</string -->
+    <!-- UNUSED string name="help_refine_point">Oberfläche verfeinern an Punkt</string -->
+    <!-- UNUSED string name="help_refine_triangle">Oberfläche verfeinern an den langen Seiten</string -->
 
 <!-- TITLES -->
     <string name="title_azimut">Seitenriss-Azimut</string>

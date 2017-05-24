@@ -43,6 +43,7 @@ public class DistoXStatDialog extends MyDialog
     private TextView mTextOrigin;
     private TextView mTextAzimuth;
     private TextView mTextLength;
+    private TextView mTextProjLen;
     private TextView mTextWENS;
     private TextView mTextZminmax;
     private TextView mTextStations;
@@ -85,6 +86,7 @@ public class DistoXStatDialog extends MyDialog
         mTextOrigin   = (TextView) findViewById(R.id.text_stat_origin);
         mTextAzimuth  = (TextView) findViewById(R.id.text_stat_azimuth);
         mTextLength   = (TextView) findViewById(R.id.text_stat_length);
+        mTextProjLen  = (TextView) findViewById(R.id.text_stat_projlen);
         mTextWENS     = (TextView) findViewById(R.id.text_stat_wens);
         mTextZminmax  = (TextView) findViewById(R.id.text_stat_zminmax);
         mTextStations = (TextView) findViewById(R.id.text_stat_stations);
@@ -138,6 +140,8 @@ public class DistoXStatDialog extends MyDialog
 
         mTextLength.setText( String.format( res.getString(R.string.stat_length),
                              mNum.surveyLength() * unit, unit_str ) );
+        mTextProjLen.setText( String.format( res.getString(R.string.stat_projlen),
+                              mNum.surveyProjLen() * unit, unit_str ) );
         mTextWENS.setText( String.format( res.getString(R.string.stat_wens),
                                           mNum.surveyWest()  * unit,
                                           mNum.surveyEast()  * unit,

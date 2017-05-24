@@ -84,7 +84,7 @@
    
     <string name="device_algo_failed">Determinação automática do algoritmo mal sucedida\nUtilizando algoritmo linear</string>
     <string name="device_address">Endereço %1$s</string>
-    <string name="device_busy">Dispositivo indisponível</string>
+    <!-- UNUSED string name="device_busy">Dispositivo indisponível</string -->
     <string name="device_illegal_addr">Endereço de memória inválido</string>
     <string name="device_info">Tipo de dispositivo</string>
     <string name="device_model_set">Quer realmente mudar o modelo do dispositivo</string>
@@ -425,6 +425,7 @@
     <string name="stat_duplicate">Visadas duplicadas %1$d %2$.1f %3$s</string>
     <string name="stat_leg">Visadas %1$d %2$.1f %3$s</string>
     <string name="stat_length">Comprimento %1$.1f %2$s</string>
+    <!-- TODO string name="stat_projlen">Plan length %1$.1f %2$s</string -->
     <string name="stat_loop">Anéis %1$d</string>
     <string name="stat_origin">Base inicial: %1$s</string>
     <string name="stat_azimuth">Azimute da projeção do perfil: %1$.1f</string>
@@ -549,7 +550,7 @@
     <string name="sketch_mode_ngbh">Visadas vizinhas</string>
     <string name="sketch_mode_all">Todas as visadas</string>
     <string name="sketch_delete">Apagar modelo 3D?</string>
-    <string name="sketch_no_split">Nenhum refinamento. Diminuir lado maior para refinar mais.</string>
+    <!-- UNUSED string name="sketch_no_split">Nenhum refinamento. Diminuir lado maior para refinar mais.</string -->
 
     <string name="length">Comprimento [m]</string>
     <string name="azimuth">Azimute [deg]</string>
@@ -689,13 +690,13 @@
     <string name="help_trash_model">Apagar modelo 3D</string>
     <string name="help_head_model">Orientar modelo 3D</string>
     <!-- UNUSED string name="help_erase_model">Apagar região</string -->
-    <string name="help_cut_model">Cortar região</string>
-    <string name="help_stretch_model">Esticar região</string>
+    <!-- UNUSED string name="help_cut_model">Cortar região</string -->
+    <!-- UNUSED string name="help_stretch_model">Esticar região</string -->
     <!-- UNUSED string name="help_extrude_model">Extrudar região</string -->
-    <string name="help_refine_center">Melhorar superfície nos centros dos triângulos</string>
-    <string name="help_refine_sides">Melhorar superfície nos lados dos triângulon</string>
-    <string name="help_refine_point">Melhorar superfície no ponto</string>
-    <string name="help_refine_triangle">Melhorar superfície nos lados longos</string>
+    <!-- UNUSED string name="help_refine_center">Melhorar superfície nos centros dos triângulos</string -->
+    <!-- UNUSED string name="help_refine_sides">Melhorar superfície nos lados dos triângulon</string -->
+    <!-- UNUSED string name="help_refine_point">Melhorar superfície no ponto</string -->
+    <!-- UNUSED string name="help_refine_triangle">Melhorar superfície nos lados longos</string -->
   
 
     <string name="title_azimut">Referência para retificar perfil</string>

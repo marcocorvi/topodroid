@@ -85,7 +85,7 @@
 
     <string name="device_algo_failed">Échec de détermination automatique de l\'algorithme depuis l\'appareil\n. Utilisation de l\'algorithme linéraire</string>
     <string name="device_address">Addresse %1$s</string>
-    <string name="device_busy">Périphérique occupé</string>
+    <!-- UNUSED string name="device_busy">Périphérique occupé</string -->
     <string name="device_illegal_addr">Adresse mémoire illégale</string>
     <string name="device_info">Informations sur le périphérique</string>
     <string name="device_model_set">Êtes-vous sûr de vouloir changer le modèle du périphérique ?</string>
@@ -426,6 +426,7 @@
     <string name="stat_duplicate">Visées dupliquées %1$d %2$.1f %3$s</string>
     <string name="stat_leg">Cheminements %1$d %2$.1f %3$s</string>
     <string name="stat_length">Longueur %1$.1f %2$s</string>
+    <!-- TODO string name="stat_projlen">Plan length %1$.1f %2$s</string -->
     <string name="stat_loop">Boucle %1$d</string>
     <string name="stat_origin">0 - Station Origine: %1$s</string>
     <string name="stat_azimuth">Azimut du profil projeté : %1$.1f</string>
@@ -549,7 +550,7 @@
     <string name="sketch_mode_ngbh">Points autour</string>
     <string name="sketch_mode_all">Tous les points</string>
     <string name="sketch_delete">Suprimer le model 3D?</string>
-    <string name="sketch_no_split">Aucun épuration. Réduire le côté à la taille maximum pour une épuration ultérieure.</string>
+    <!-- UNUSED string name="sketch_no_split">Aucun épuration. Réduire le côté à la taille maximum pour une épuration ultérieure.</string -->
     <string name="length">Longueur [m]</string>
     <string name="azimuth">Azimut [deg]</string>
     <!-- OK string name="clino">Clino [deg]</string -->
@@ -686,13 +687,13 @@
     <!-- string name="help_trash_model">Delete 3D model</string -->
     <!-- string name="help_head_model">Orient 3D model</string -->
     <!-- string name="help_erase_model">Erase region</string -->
-    <!-- string name="help_cut_model">Cut region</string -->
-    <!-- string name="help_stretch_model">Stretch region</string -->
-    <!-- string name="help_extrude_model">Extrude region</string -->
-    <!-- string name="help_refine_center">Refine surface at triangle centers</string -->
-    <!-- string name="help_refine_sides">Refine surface at triangle sides</string -->
-    <!-- string name="help_refine_point">Refine surface at point</string -->
-    <!-- string name="help_refine_triangle">Refine surface al the long sides</string -->
+    <!-- UNUSED string name="help_cut_model">Cut region</string -->
+    <!-- UNUSED string name="help_stretch_model">Stretch region</string -->
+    <!-- UNUSED string name="help_extrude_model">Extrude region</string -->
+    <!-- UNUSED string name="help_refine_center">Refine surface at triangle centers</string -->
+    <!-- UNUSED string name="help_refine_sides">Refine surface at triangle sides</string -->
+    <!-- UNUSED string name="help_refine_point">Refine surface at point</string -->
+    <!-- UNUSED string name="help_refine_triangle">Refine surface al the long sides</string -->
 
 
     <string name="title_azimut">Référence extension</string>

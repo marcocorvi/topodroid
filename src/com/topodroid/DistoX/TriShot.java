@@ -76,6 +76,11 @@ public class TriShot
     return mAvgLeg.length();
   }
 
+  float h()
+  {
+    return mAvgLeg.length() * TDMath.cosd( mAvgLeg.clino() );
+  }
+
   float b()
   {
     // DBlock blk = blocks.get(0);
