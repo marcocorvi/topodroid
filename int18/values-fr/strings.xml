@@ -860,7 +860,7 @@
   <string name="pref_min_shift_title">Décalage sensibilité</string>
   <string name="pref_min_shift_message">Décalage sensibilité</string>
   <string name="pref_pointing_title">Radius pointage</string>
-  <string name="pref_pointing_message">Radius pointage</string>
+  <string name="pref_pointing_message">Radius de sélection</string>
   <string name="pref_vert_splay_title">Seuil incl. visées latérales pointillés</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Seuil inclinaison visées latérales pointillé</string -->
   <string name="pref_vert_splay_message">Seuil d\'inclinaison des visées latérales pointillés</string>
