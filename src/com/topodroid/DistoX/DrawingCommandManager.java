@@ -88,7 +88,7 @@ public class DrawingCommandManager
   List<DrawingStationName> getStations()     { return mStations;     } 
   List<DrawingStationPath> getUserStations() { return mUserStations; }
 
-  int mSelectMode = DrawingWindow.FILTER_ALL;
+  int mSelectMode = Drawing.FILTER_ALL;
   void setSelectMode( int mode ) { mSelectMode = mode; }
 
   /* Check if any line overlaps another of the same type
@@ -456,14 +456,14 @@ public class DrawingCommandManager
   {
     SelectionSet sel = new SelectionSet();
     float erase_radius = TDSetting.mCloseCutoff + erase_size / zoom;
-    mSelection.selectAt( sel, x, y, erase_radius, DrawingWindow.FILTER_ALL, false, false, false );
+    mSelection.selectAt( sel, x, y, erase_radius, Drawing.FILTER_ALL, false, false, false );
     int ret = 0;
     if ( sel.size() > 0 ) {
       synchronized( mCurrentStack ) {
         for ( SelectionPoint pt : sel.mPoints ) {
           DrawingPath path = pt.mItem;
           if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
-            if ( erase_mode == DrawingWindow.FILTER_ALL || erase_mode == DrawingWindow.FILTER_LINE ) {
+            if ( erase_mode == Drawing.FILTER_ALL || erase_mode == Drawing.FILTER_LINE ) {
               DrawingLinePath line = (DrawingLinePath)path;
               // ArrayList< LinePoint > points = line.mPoints;
               // int size = points.size();
@@ -526,7 +526,7 @@ public class DrawingCommandManager
               }
             }
           } else if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
-            if ( erase_mode == DrawingWindow.FILTER_ALL || erase_mode == DrawingWindow.FILTER_AREA ) {
+            if ( erase_mode == Drawing.FILTER_ALL || erase_mode == Drawing.FILTER_AREA ) {
               DrawingAreaPath area = (DrawingAreaPath)path;
               if ( area.size() <= 3 ) {
                 ret = 6;
@@ -543,7 +543,7 @@ public class DrawingCommandManager
               }
             }
           } else if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
-            if ( erase_mode == DrawingWindow.FILTER_ALL || erase_mode == DrawingWindow.FILTER_POINT ) {
+            if ( erase_mode == Drawing.FILTER_ALL || erase_mode == Drawing.FILTER_POINT ) {
               ret = 1;
               eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
               mCurrentStack.remove( path );
@@ -1267,24 +1267,24 @@ public class DrawingCommandManager
     boolean sstations = false;
 
     switch (mSelectMode) {
-      case DrawingWindow.FILTER_ALL:
+      case Drawing.FILTER_ALL:
         sshots = true;
         sstations = stations;
         spoints = slines = sareas = true;
         break;
-      case DrawingWindow.FILTER_POINT:
+      case Drawing.FILTER_POINT:
         spoints = true;
         break;
-      case DrawingWindow.FILTER_LINE:
+      case Drawing.FILTER_LINE:
         slines = true;
         break;
-      case DrawingWindow.FILTER_AREA:
+      case Drawing.FILTER_AREA:
         sareas = true;
         break;
-      case DrawingWindow.FILTER_SHOT:
+      case Drawing.FILTER_SHOT:
         sshots = true;
         break;
-      case DrawingWindow.FILTER_STATION:
+      case Drawing.FILTER_STATION:
         sstations = true;
         break;
     }
