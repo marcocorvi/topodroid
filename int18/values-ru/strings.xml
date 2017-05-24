@@ -381,6 +381,7 @@
     <string name="sketch3d_name">Название</string>
     <string name="sketch3d_new">Новая 3D модель</string>
     <string name="sketch3d_next">следующий пикет</string>
+	<string name="sketch3d_loading">загрузка модели ...</string>
     <!-- UNUSED string name="sketch3d_null_name">Отсутствует название 3D абриса</string -->
     <!-- UNUSED string name="sketch3d_null_next">Отсутствует следующий пикет 3D абриса</string -->
     <!-- UNUSED string name="sketch3d_null_start">Отсутствует начальный пикет 3D абриса</string -->
