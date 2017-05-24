@@ -42,7 +42,7 @@ public class SketchDrawingSurface extends SurfaceView
   static final String TAG = "DistoX";
 
     private Boolean _run;
-    protected DrawThread thread;
+    protected DrawThread mDrawingThread;
     private Bitmap mBitmap;
     public boolean isDrawing = true;
     public DrawingPath previewPath;
@@ -64,7 +64,7 @@ public class SketchDrawingSurface extends SurfaceView
       mWidth = 0;
       mHeight = 0;
 
-      thread = null;
+      mDrawingThread = null;
       mContext = context;
       mAttrs   = attrs;
       mHolder = getHolder();
@@ -132,10 +132,22 @@ public class SketchDrawingSurface extends SurfaceView
       public void run() 
       {
         while ( _run ) {
-          if ( isDrawing == true ) {
+          if ( isDrawing ) {
             refresh();
           }
         }
+      }
+    }
+
+    void stopDrawing() 
+    {
+      isDrawing = false;
+      if ( mDrawingThread != null ) {
+        mDrawingThread.setRunning( false );
+        try {
+          mDrawingThread.join();
+        } catch ( InterruptedException e ) { }
+        mDrawingThread = null;
       }
     }
 
@@ -176,38 +188,38 @@ public class SketchDrawingSurface extends SurfaceView
 
     void setThreadRunning( boolean running ) 
     {
-      if ( thread != null ) {
+      if ( mDrawingThread != null ) {
         if ( ! _run ) {
-          thread.setRunning(true);
-          thread.start();
+          mDrawingThread.setRunning(true);
+          mDrawingThread.start();
         }
       }
     }
 
     public void surfaceCreated(SurfaceHolder mHolder) 
     {
-      if (thread == null ) {
-        thread = new DrawThread(mHolder);
+      if (mDrawingThread == null ) {
+        mDrawingThread = new DrawThread(mHolder);
       }
       // Log.v("DistoX", "surface created set running true");
-      thread.setRunning(true);
-      thread.start();
+      mDrawingThread.setRunning(true);
+      mDrawingThread.start();
     }
 
     public void surfaceDestroyed(SurfaceHolder mHolder) 
     {
-      if ( thread != null ) {
+      if ( mDrawingThread != null ) {
         boolean retry = true;
-        thread.setRunning(false);
+        mDrawingThread.setRunning(false);
         while (retry) {
           try {
-            thread.join();
+            mDrawingThread.join();
             retry = false;
           } catch (InterruptedException e) {
             // we will try it again and again...
           }
         }
-        thread = null;
+        mDrawingThread = null;
       }
       // Log.v("DistoX", "surface destroyed");
     }

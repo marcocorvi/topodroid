@@ -97,7 +97,9 @@ public class SketchFixedPath extends SketchPath
     }
     path.transform( matrix );
     canvas.drawPath( path, mPaint );
-    if ( activity_mode == SketchDef.MODE_STEP && mStepPaint != null ) {
+    // if ( activity_mode == SketchDef.MODE_STEP && mStepPaint != null ) 
+    if ( activity_mode == SketchDef.MODE_SELECT && mStepPaint != null )
+    {
       float radius = 5 / info.zoom_3d;
       if ( np > 1 ) {
         sx /= np;

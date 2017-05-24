@@ -88,6 +88,7 @@ public class DrawingWindow extends ItemDrawer
                                       , ILister
                                       , IZoomer
                                       , IExporter
+                                      , IFilterClickHandler
 {
   private static int izons_ok[] = { 
                         R.drawable.iz_edit_ok, // 0
@@ -143,10 +144,6 @@ public class DrawingWindow extends ItemDrawer
   private static int BTN_ERASE_MODE = 5; // erase-mode button
   private static int BTN_ERASE_SIZE = 6; // erase-size button
 
-  private final int SCALE_SMALL  = 0;
-  private final int SCALE_MEDIUM = 1;
-  private final int SCALE_LARGE  = 2;
-  private final int SCALE_MAX    = 3;
   private int mEraseScale = 0;
   private int mSelectScale = 0;
 
@@ -255,36 +252,8 @@ public class DrawingWindow extends ItemDrawer
                       };
 
 
-  static int[] mEraseModes = {
-    R.string.popup_erase_all,
-    R.string.popup_erase_point,
-    R.string.popup_erase_line,
-    R.string.popup_erase_area
-   };
-  static int[] mSelectModes = {
-    R.string.popup_select_all,
-    R.string.popup_select_point,
-    R.string.popup_select_line,
-    R.string.popup_select_area,
-    R.string.popup_select_shot,
-    R.string.popup_select_station
-  };
-
-  static final int FILTER_ALL     = 0;
-  static final int FILTER_POINT   = 1;
-  static final int FILTER_LINE    = 2;
-  static final int FILTER_AREA    = 3;
-  static final int FILTER_SHOT    = 4;
-  static final int FILTER_STATION = 5;
-
-  static final int FILTER_ERASE_MAX  = 4;
-  static final int FILTER_SELECT_MAX = 6;
-
-  private int mEraseMode  = FILTER_ALL;
-  private int mSelectMode = FILTER_ALL;
-
-  static final int CODE_SELECT = 1;
-  static final int CODE_ERASE  = 2;
+  private int mEraseMode  = Drawing.FILTER_ALL;
+  private int mSelectMode = Drawing.FILTER_ALL;
 
   private TopoDroidApp mApp;
   private DataDownloader mDataDownloader;
@@ -1070,7 +1039,7 @@ public class DrawingWindow extends ItemDrawer
       mButton3[ BTN_SELECT_PREV ].setBackgroundDrawable( mBMprev );
       mButton3[ BTN_SELECT_NEXT ].setBackgroundDrawable( mBMnext );
     } else {
-      setButtonFilterMode( mSelectMode, CODE_SELECT );
+      setButtonFilterMode( mSelectMode, Drawing.CODE_SELECT );
       setButtonSelectSize( mSelectScale );
     }
   }
@@ -1096,44 +1065,44 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  private void setButtonFilterMode( int filter_mode, int code )
+  public void setButtonFilterMode( int filter_mode, int code )
   {
-    if ( code == CODE_ERASE ) {
+    if ( code == Drawing.CODE_ERASE ) {
       mEraseMode = filter_mode;
       switch ( mEraseMode ) {
-        case FILTER_ALL:
+        case Drawing.FILTER_ALL:
           mButton5[ BTN_ERASE_MODE ].setBackgroundDrawable( mBMeraseAll );
           break;
-        case FILTER_POINT:
+        case Drawing.FILTER_POINT:
           mButton5[ BTN_ERASE_MODE ].setBackgroundDrawable( mBMerasePoint );
           break;
-        case FILTER_LINE:
+        case Drawing.FILTER_LINE:
           mButton5[ BTN_ERASE_MODE ].setBackgroundDrawable( mBMeraseLine );
           break;
-        case FILTER_AREA:
+        case Drawing.FILTER_AREA:
           mButton5[ BTN_ERASE_MODE ].setBackgroundDrawable( mBMeraseArea );
           break;
       }
-    } else if ( code == CODE_SELECT ) {
+    } else if ( code == Drawing.CODE_SELECT ) {
       mSelectMode = filter_mode;
       mDrawingSurface.setSelectMode( mSelectMode );
       switch ( mSelectMode ) {
-        case FILTER_ALL:
+        case Drawing.FILTER_ALL:
           mButton3[ BTN_SELECT_MODE ].setBackgroundDrawable( mBMselectAll );
           break;
-        case FILTER_POINT:
+        case Drawing.FILTER_POINT:
           mButton3[ BTN_SELECT_MODE ].setBackgroundDrawable( mBMselectPoint );
           break;
-        case FILTER_LINE:
+        case Drawing.FILTER_LINE:
           mButton3[ BTN_SELECT_MODE ].setBackgroundDrawable( mBMselectLine );
           break;
-        case FILTER_AREA:
+        case Drawing.FILTER_AREA:
           mButton3[ BTN_SELECT_MODE ].setBackgroundDrawable( mBMselectArea );
           break;
-        case FILTER_SHOT:
+        case Drawing.FILTER_SHOT:
           mButton3[ BTN_SELECT_MODE ].setBackgroundDrawable( mBMselectShot );
           break;
-        case FILTER_STATION:
+        case Drawing.FILTER_STATION:
           mButton3[ BTN_SELECT_MODE ].setBackgroundDrawable( mBMselectStation );
           break;
       }
@@ -1142,17 +1111,17 @@ public class DrawingWindow extends ItemDrawer
 
   private void setButtonEraseSize( int scale )
   {
-    mEraseScale = scale % SCALE_MAX;
+    mEraseScale = scale % Drawing.SCALE_MAX;
     switch ( mEraseScale ) {
-      case SCALE_SMALL:
+      case Drawing.SCALE_SMALL:
         mEraseSize = 0.5f * TDSetting.mEraseness;
         mButton5[ BTN_ERASE_SIZE ].setBackgroundDrawable( mBMsmall );
         break;
-      case SCALE_MEDIUM:
+      case Drawing.SCALE_MEDIUM:
         mEraseSize = 1.0f * TDSetting.mEraseness;
         mButton5[ BTN_ERASE_SIZE ].setBackgroundDrawable( mBMmedium );
         break;
-      case SCALE_LARGE:
+      case Drawing.SCALE_LARGE:
         mEraseSize = 2.0f * TDSetting.mEraseness;
         mButton5[ BTN_ERASE_SIZE ].setBackgroundDrawable( mBMlarge );
         break;
@@ -1161,17 +1130,17 @@ public class DrawingWindow extends ItemDrawer
 
   private void setButtonSelectSize( int scale )
   {
-    mSelectScale = scale % SCALE_MAX;
+    mSelectScale = scale % Drawing.SCALE_MAX;
     switch ( mSelectScale ) {
-      case SCALE_SMALL:
+      case Drawing.SCALE_SMALL:
         mSelectSize = 0.5f * TDSetting.mSelectness;
         mButton3[ BTN_SELECT_NEXT ].setBackgroundDrawable( mBMsmall );
         break;
-      case SCALE_MEDIUM:
+      case Drawing.SCALE_MEDIUM:
         mSelectSize = 1.0f * TDSetting.mSelectness;
         mButton3[ BTN_SELECT_NEXT ].setBackgroundDrawable( mBMmedium );
         break;
-      case SCALE_LARGE:
+      case Drawing.SCALE_LARGE:
         mSelectSize = 2.0f * TDSetting.mSelectness;
         mButton3[ BTN_SELECT_NEXT ].setBackgroundDrawable( mBMlarge );
         break;
@@ -1361,7 +1330,7 @@ public class DrawingWindow extends ItemDrawer
     mBMerasePoint = MyButton.getButtonBackground( mApp, res, izons[IC_ERASE_POINT] );
     mBMeraseLine  = MyButton.getButtonBackground( mApp, res, izons[IC_ERASE_LINE] );
     mBMeraseArea  = MyButton.getButtonBackground( mApp, res, izons[IC_ERASE_AREA] );
-    setButtonFilterMode( mEraseMode, CODE_ERASE );
+    setButtonFilterMode( mEraseMode, Drawing.CODE_ERASE );
 
     mBMprev        = MyButton.getButtonBackground( mApp, res, izons[IC_PREV] );
     mBMnext        = MyButton.getButtonBackground( mApp, res, izons[IC_NEXT] );
@@ -1371,13 +1340,13 @@ public class DrawingWindow extends ItemDrawer
     mBMselectArea  = MyButton.getButtonBackground( mApp, res, izons[IC_SELECT_AREA] );
     mBMselectShot  = MyButton.getButtonBackground( mApp, res, izons[IC_SELECT_SHOT] );
     mBMselectStation=MyButton.getButtonBackground( mApp, res, izons[IC_SELECT_STATION] );
-    setButtonFilterMode( mSelectMode, CODE_SELECT );
+    setButtonFilterMode( mSelectMode, Drawing.CODE_SELECT );
 
     mBMsmall  = MyButton.getButtonBackground( mApp, res, izons[IC_SMALL] );
     mBMmedium = MyButton.getButtonBackground( mApp, res, izons[IC_MEDIUM] );
     mBMlarge  = MyButton.getButtonBackground( mApp, res, izons[IC_LARGE] );
-    setButtonEraseSize( SCALE_MEDIUM );
-    setButtonSelectSize( SCALE_MEDIUM );
+    setButtonEraseSize( Drawing.SCALE_MEDIUM );
+    setButtonSelectSize( Drawing.SCALE_MEDIUM );
 
     mButtonView1 = new HorizontalButtonView( mButton1 );
     mButtonView2 = new HorizontalButtonView( mButton2 );
@@ -3045,26 +3014,6 @@ public class DrawingWindow extends ItemDrawer
       }
     }
 
-    class FilterClickListener implements View.OnClickListener
-    {
-      private int mIndex;
-      private int mCode;
-      private DrawingWindow mParent;
-
-      FilterClickListener( DrawingWindow parent, int i, int c ) 
-      {
-        mParent = parent;
-        mIndex = i;
-        mCode  = c;
-      }
-
-      @Override
-      public void onClick(View v) {
-        mParent.setButtonFilterMode( mIndex, mCode );
-        mParent.dismissPopupFilter();
-      }
-    }
-
     /** erase mode popup menu
      */
     private void makePopupFilter( View b, int[] modes, int nr, final int code )
@@ -3321,7 +3270,7 @@ public class DrawingWindow extends ItemDrawer
       return false;
     }
 
-    private boolean dismissPopupFilter()
+    public boolean dismissPopupFilter()
     {
       if ( mPopupFilter != null ) {
         mPopupFilter.dismiss();
@@ -3641,7 +3590,7 @@ public class DrawingWindow extends ItemDrawer
           if ( mDoEditRange == 0 ) mMode = MODE_SHIFT;
           setButton3Item( (pt != null)? pt.type() : -1 );
         } else {
-          makePopupFilter( b, mSelectModes, 6, CODE_SELECT );
+          makePopupFilter( b, Drawing.mSelectModes, 6, Drawing.CODE_SELECT );
         }
       } else if ( b == mButton3[k3++] ) { // next
         if ( mHasSelected ) {
@@ -3759,7 +3708,7 @@ public class DrawingWindow extends ItemDrawer
             break;
         }
       } else if ( b == mButton5[k5++] ) { // ERASE MODE
-        makePopupFilter( b, mEraseModes, 4, CODE_ERASE ); // pulldown menu to select erase mode
+        makePopupFilter( b, Drawing.mEraseModes, 4, Drawing.CODE_ERASE ); // pulldown menu to select erase mode
       } else if ( b == mButton5[k5++] ) { // ERASE SIZE
         setButtonEraseSize( mEraseScale + 1 ); // toggle erase size
       }
