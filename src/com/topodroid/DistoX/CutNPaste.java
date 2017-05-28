@@ -155,7 +155,7 @@ class CutNPaste
   /** show BT popup under button b
    * @param b button
    */
-  static PopupWindow showPopupBT( final Context context, ILister ilister, final TopoDroidApp app, View b )
+  static PopupWindow showPopupBT( final Context context, ILister ilister, final TopoDroidApp app, View b, boolean gm_data )
   {
     final ListerHandler lister = new ListerHandler( ilister );
     LinearLayout popup_layout  = new LinearLayout( context );
@@ -206,29 +206,44 @@ class CutNPaste
           }
         } );
 
-      // ----- MEASURE ONE SPLAY AND DOWNLOAD IT
+      if ( gm_data ) {
+      // ----- MEASURE ONE CALIB DATA
       //
-      text = res.getString(R.string.popup_do_splay);
+      text = res.getString( R.string.popup_do_gm_data );
       if ( len < text.length() ) len = text.length();
       textview3 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
-            new DeviceX310TakeShot( lister, app, 1 ).execute();
+            new DeviceX310TakeShot( null, app, 1 ).execute();
             dismissPopupBT();
           }
         } );
 
-      // ----- MEASURE ONE LEG AND DOWNLOAD IT
-      //
-      text = res.getString(R.string.popup_do_leg);
-      if ( len < text.length() ) len = text.length();
-      textview4 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
-        new View.OnClickListener( ) {
-          public void onClick(View v) {
-            new DeviceX310TakeShot( lister, app, 3 ).execute();
-            dismissPopupBT();
-          }
-        } );
+      } else {
+        // ----- MEASURE ONE SPLAY AND DOWNLOAD IT
+        //
+        text = res.getString( R.string.popup_do_splay );
+        if ( len < text.length() ) len = text.length();
+        textview3 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+          new View.OnClickListener( ) {
+            public void onClick(View v) {
+              new DeviceX310TakeShot( lister, app, 1 ).execute();
+              dismissPopupBT();
+            }
+          } );
+
+        // ----- MEASURE ONE LEG AND DOWNLOAD IT
+        //
+        text = res.getString(R.string.popup_do_leg);
+        if ( len < text.length() ) len = text.length();
+        textview4 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+          new View.OnClickListener( ) {
+            public void onClick(View v) {
+              new DeviceX310TakeShot( lister, app, TDSetting.mMinNrLegShots ).execute();
+              dismissPopupBT();
+            }
+          } );
+      }
     }
 
     FontMetrics fm = textview0.getPaint().getFontMetrics();
@@ -240,7 +255,7 @@ class CutNPaste
       textview1.setWidth( w );
       textview2.setWidth( w );
       textview3.setWidth( w );
-      textview4.setWidth( w );
+      if ( ! gm_data ) textview4.setWidth( w );
     }
     mPopupBT = new PopupWindow( popup_layout, w, h ); 
     mPopupBT.showAsDropDown(b); 

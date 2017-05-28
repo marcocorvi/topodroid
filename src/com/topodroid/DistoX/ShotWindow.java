@@ -1012,7 +1012,7 @@ public class ShotWindow extends Activity
       if ( TDSetting.mLevelOverAdvanced && mApp.distoType() == Device.DISTO_X310 
 	     && TDSetting.mConnectionMode != TDSetting.CONN_MODE_MULTI
 	  ) {
-        CutNPaste.showPopupBT( mActivity, this, mApp, b );
+        CutNPaste.showPopupBT( mActivity, this, mApp, b, false );
       } else {
         mDataDownloader.setDownload( false );
         mDataDownloader.stopDownloadData();

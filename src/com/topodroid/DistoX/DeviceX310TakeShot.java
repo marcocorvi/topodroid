@@ -19,12 +19,12 @@ class DeviceX310TakeShot extends AsyncTask<Integer, Integer, Integer >
   TopoDroidApp  mApp;
   int mNr;               // number of shots before download
  
-  DeviceX310TakeShot( ListerHandler lister, TopoDroidApp app, int nr ) 
+  DeviceX310TakeShot( ListerHandler lister, TopoDroidApp app, int nr )
   {
     super();
-    mLister = lister; 
-    mApp    = app;
-    mNr     = nr;
+    mLister   = lister; 
+    mApp      = app;
+    mNr       = nr;
   } 
 
   // 0 off
@@ -53,10 +53,10 @@ class DeviceX310TakeShot extends AsyncTask<Integer, Integer, Integer >
   protected void onPostExecute( Integer result ) 
   {
     if ( mLister != null ) {
-      mApp.setX310Laser( 3, mLister );
+      mApp.setX310Laser( 3, mLister ); // 3 = measure and download
       // try { Thread.sleep( TDSetting.mWaitShot ); } catch( InterruptedException e ) { }
     } else {
-      mApp.setX310Laser( 2, null );
+      mApp.setX310Laser( 2, null ); // 2 = measure
       // try { Thread.sleep( TDSetting.mWaitLaser ); } catch( InterruptedException e ) { }
     }
   }

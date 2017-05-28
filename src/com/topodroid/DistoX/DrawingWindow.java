@@ -2006,9 +2006,10 @@ public class DrawingWindow extends ItemDrawer
       } 
     }
 
-    private void deleteSplay( DrawingPath p, SelectionPoint sp )
+    private void deleteSplay( DrawingPath p, SelectionPoint sp, DBlock blk )
     {
       mDrawingSurface.deleteSplay( p, sp ); 
+      mApp.mData.deleteShot( blk.mId, mApp.mSID, TopoDroidApp.STATUS_DELETED, true );
       mApp.mShotWindow.updateDisplay(); // FIXME ???
     }
 
@@ -3392,7 +3393,7 @@ public class DrawingWindow extends ItemDrawer
       if ( TDSetting.mLevelOverAdvanced && mApp.distoType() == Device.DISTO_X310 
 	      && TDSetting.mConnectionMode != TDSetting.CONN_MODE_MULTI
 	  ) {
-        CutNPaste.showPopupBT( mActivity, this, mApp, b );
+        CutNPaste.showPopupBT( mActivity, this, mApp, b, false );
       } else {
         mDataDownloader.setDownload( false );
         mDataDownloader.stopDownloadData();
@@ -3685,8 +3686,9 @@ public class DrawingWindow extends ItemDrawer
             if ( PlotInfo.isSketch2D( mType ) ) { 
               DrawingPath p = sp.mItem;
               DBlock blk = p.mBlock;
-              mApp.mData.deleteShot( blk.mId, mApp.mSID, TopoDroidApp.STATUS_DELETED, true );
-              askDeleteSplay( p, sp, blk );
+              if ( blk != null ) {
+                askDeleteSplay( p, sp, blk );
+              }
             }
           }
         }
@@ -3746,7 +3748,7 @@ public class DrawingWindow extends ItemDrawer
         new DialogInterface.OnClickListener() {
           @Override
           public void onClick( DialogInterface dialog, int btn ) {
-            deleteSplay( p, sp );
+            deleteSplay( p, sp, blk );
           }
         }
       );

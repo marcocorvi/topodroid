@@ -82,23 +82,26 @@ public class GMActivity extends Activity
   // private ConnHandler mHandler;
 
   private static int izons[] = { 
-                        R.drawable.iz_download,
                         R.drawable.iz_toggle,
+                        R.drawable.iz_bt,
+                        R.drawable.iz_download,
                         R.drawable.iz_numbers_no,
                         R.drawable.iz_compute,
                         R.drawable.iz_cover,
                         R.drawable.iz_read,
                         R.drawable.iz_write
                      };
-  final static int BTN_DOWNLOAD = 0;
-  final static int BTN_TOGGLE   = 1;
-  final static int BTN_COVER    = 4;
-  final static int BTN_READ     = 5;
-  final static int BTN_WRITE    = 6;
+  final static int BTN_TOGGLE   = 0;
+  final static int BTN_BT       = 1;
+  final static int BTN_DOWNLOAD = 2;
+  final static int BTN_COVER    = 5;
+  final static int BTN_READ     = 6;
+  final static int BTN_WRITE    = 7;
 
   static int izonsno[] = { 
-                        R.drawable.iz_download_on,
                         R.drawable.iz_toggle_no,
+                        R.drawable.iz_bt_no,
+                        R.drawable.iz_download_on,
                         0,
                         0,
                         R.drawable.iz_cover_no,
@@ -114,8 +117,9 @@ public class GMActivity extends Activity
                      };
 
   static int help_icons[] = { 
-                        R.string.help_download,
                         R.string.help_toggle,
+                        R.string.help_bluetooth,
+                        R.string.help_download,
                         R.string.help_group,
                         R.string.help_compute,
                         R.string.help_cover,
@@ -129,7 +133,7 @@ public class GMActivity extends Activity
                         R.string.help_help
                       };
 
-  final static int mNrButton1 = 7;
+  final static int mNrButton1 = 8;
   private Button[]     mButton1;
   HorizontalListView   mListView;
   HorizontalButtonView mButtonView1;
@@ -151,6 +155,8 @@ public class GMActivity extends Activity
   BitmapDrawable mBMwrite_no;
   BitmapDrawable mBMdownload;
   BitmapDrawable mBMdownload_on;
+  BitmapDrawable mBMbluetooth;
+  BitmapDrawable mBMbluetooth_no;
 
   public void setTheTitle() { }
 
@@ -547,6 +553,8 @@ public class GMActivity extends Activity
       }
     }
     mButton1[BTN_DOWNLOAD].setBackgroundDrawable( mBMdownload );
+    mButton1[BTN_BT].setBackgroundDrawable( mBMbluetooth );
+    mButton1[BTN_BT].setEnabled( true );
   }
     
   @Override
@@ -675,17 +683,19 @@ public class GMActivity extends Activity
     mButton1 = new Button[ mNrButton1 ];
     for ( int k=0; k<mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( this, this, izons[k] );
-      if ( k == BTN_DOWNLOAD )    { mBMdownload = MyButton.getButtonBackground( mApp, res, izons[k] ); }
-      else if ( k == BTN_TOGGLE ) { mBMtoggle   = MyButton.getButtonBackground( mApp, res, izons[k] ); }
-      else if ( k == BTN_COVER )  { mBMcover    = MyButton.getButtonBackground( mApp, res, izons[k] ); }
-      else if ( k == BTN_READ )   { mBMread     = MyButton.getButtonBackground( mApp, res, izons[k] ); }
-      else if ( k == BTN_WRITE )  { mBMwrite    = MyButton.getButtonBackground( mApp, res, izons[k] ); }
     }
-    mBMdownload_on = MyButton.getButtonBackground( mApp, res, izonsno[BTN_DOWNLOAD] );
-    mBMtoggle_no   = MyButton.getButtonBackground( mApp, res, izonsno[BTN_TOGGLE] );
-    mBMcover_no    = MyButton.getButtonBackground( mApp, res, izonsno[BTN_COVER] );
-    mBMread_no     = MyButton.getButtonBackground( mApp, res, izonsno[BTN_READ] );
-    mBMwrite_no    = MyButton.getButtonBackground( mApp, res, izonsno[BTN_WRITE] );
+    mBMdownload     = MyButton.getButtonBackground( mApp, res, izons[BTN_DOWNLOAD] ); 
+    mBMdownload_on  = MyButton.getButtonBackground( mApp, res, izonsno[BTN_DOWNLOAD] );
+    mBMtoggle       = MyButton.getButtonBackground( mApp, res, izons[BTN_TOGGLE] );
+    mBMtoggle_no    = MyButton.getButtonBackground( mApp, res, izonsno[BTN_TOGGLE] );
+    mBMcover        = MyButton.getButtonBackground( mApp, res, izons[BTN_COVER] );
+    mBMcover_no     = MyButton.getButtonBackground( mApp, res, izonsno[BTN_COVER] );
+    mBMread         = MyButton.getButtonBackground( mApp, res, izons[BTN_READ] );
+    mBMread_no      = MyButton.getButtonBackground( mApp, res, izonsno[BTN_READ] );
+    mBMwrite        = MyButton.getButtonBackground( mApp, res, izons[BTN_WRITE] );
+    mBMwrite_no     = MyButton.getButtonBackground( mApp, res, izonsno[BTN_WRITE] );
+    mBMbluetooth    = MyButton.getButtonBackground( mApp, res, izons[BTN_BT] );
+    mBMbluetooth_no = MyButton.getButtonBackground( mApp, res, izonsno[BTN_BT] );
 
     enableWrite( false );
 
@@ -734,16 +744,19 @@ public class GMActivity extends Activity
   public void enableButtons( boolean enable )
   {
     mButton1[BTN_TOGGLE].setEnabled( enable );
+    mButton1[BTN_BT].setEnabled( enable );
     mButton1[BTN_READ].setEnabled( enable );
     mButton1[BTN_WRITE].setEnabled( enable && mEnableWrite );
     mButton1[BTN_COVER].setEnabled( enable && mEnableWrite );
     if ( enable ) {
       setTitleColor( TDColor.NORMAL );
       mButton1[BTN_TOGGLE].setBackgroundDrawable( mBMtoggle );
+      mButton1[BTN_BT].setBackgroundDrawable( mBMbluetooth );
       mButton1[BTN_READ].setBackgroundDrawable( mBMread );
     } else {
       setTitleColor( TDColor.CONNECTED );
       mButton1[BTN_TOGGLE].setBackgroundDrawable( mBMtoggle_no );
+      mButton1[BTN_BT].setBackgroundDrawable( mBMbluetooth_no );
       mButton1[BTN_READ].setBackgroundDrawable( mBMread_no );
     }
     if ( enable && mEnableWrite ) {
@@ -755,118 +768,131 @@ public class GMActivity extends Activity
     }
   }
 
-    public void onClick(View view)
-    {
-      if ( onMenu ) {
-        closeMenu();
-        return;
+  void doBluetooth( Button b )
+  {
+    if ( TDSetting.mLevelOverAdvanced && mApp.distoType() == Device.DISTO_X310 ) {
+      CutNPaste.showPopupBT( this, this, mApp, b, true );
+    } else {
+      mApp.resetComm();
+      Toast.makeText( this, R.string.bt_reset, Toast.LENGTH_SHORT).show();
+    }
+  }
+
+  public void onClick(View view)
+  {
+    if ( onMenu ) {
+      closeMenu();
+      return;
+    }
+
+    Button b = (Button)view;
+
+    if ( b == mImage ) {
+      if ( mMenu.getVisibility() == View.VISIBLE ) {
+        mMenu.setVisibility( View.GONE );
+        onMenu = false;
+      } else {
+        mMenu.setVisibility( View.VISIBLE );
+        onMenu = true;
       }
+      return;
+    }
 
-      Button b = (Button)view;
-
-      if ( b == mImage ) {
-        if ( mMenu.getVisibility() == View.VISIBLE ) {
-          mMenu.setVisibility( View.GONE );
-          onMenu = false;
-        } else {
-          mMenu.setVisibility( View.VISIBLE );
-          onMenu = true;
-        }
-        return;
-      }
-
-      if ( b == mButton1[BTN_DOWNLOAD] ) { // DOWNLOAD
-        if ( ! mApp.checkCalibrationDeviceMatch() ) {
-          Toast.makeText( this, R.string.calib_device_mismatch, Toast.LENGTH_LONG ).show();
-        } else {
-          enableWrite( false );
-          setTitleColor( TDColor.CONNECTED );
-          if ( mAlgo == CalibInfo.ALGO_AUTO ) { 
-            mAlgo = mApp.getCalibAlgoFromDevice();
-            if ( mAlgo < CalibInfo.ALGO_AUTO ) {
-              Toast.makeText( this, R.string.device_algo_failed, Toast.LENGTH_SHORT ).show();
-              mAlgo = CalibInfo.ALGO_LINEAR; 
-            }
-            mApp.updateCalibAlgo( mAlgo );
+    if ( b == mButton1[BTN_TOGGLE] ) { // TOGGLE
+      enableButtons( false );
+      new CalibToggleTask( this, this, mApp ).execute();
+    } else if ( b == mButton1[BTN_BT] ) { // BLUETOOTH
+      doBluetooth( b );
+    } else if ( b == mButton1[BTN_DOWNLOAD] ) { // DOWNLOAD
+      if ( ! mApp.checkCalibrationDeviceMatch() ) {
+        Toast.makeText( this, R.string.calib_device_mismatch, Toast.LENGTH_LONG ).show();
+      } else {
+        enableWrite( false );
+        setTitleColor( TDColor.CONNECTED );
+        if ( mAlgo == CalibInfo.ALGO_AUTO ) { 
+          mAlgo = mApp.getCalibAlgoFromDevice();
+          if ( mAlgo < CalibInfo.ALGO_AUTO ) {
+            Toast.makeText( this, R.string.device_algo_failed, Toast.LENGTH_SHORT ).show();
+            mAlgo = CalibInfo.ALGO_LINEAR; 
           }
-          ListerHandler handler = new ListerHandler( this ); // FIXME LISTER
-          new DataDownloadTask( mApp, handler ).execute();
-          // new DataDownloadTask( mApp, this ).execute();
-          mButton1[ BTN_DOWNLOAD ].setBackgroundDrawable( mBMdownload_on );
+          mApp.updateCalibAlgo( mAlgo );
         }
-      } else if ( b == mButton1[BTN_TOGGLE] ) { // TOGGLE
+        ListerHandler handler = new ListerHandler( this ); // FIXME LISTER
+        new DataDownloadTask( mApp, handler ).execute();
+        // new DataDownloadTask( mApp, this ).execute();
+        mButton1[ BTN_DOWNLOAD ].setBackgroundDrawable( mBMdownload_on );
         enableButtons( false );
-        new CalibToggleTask( this, this, mApp ).execute();
-      } else if ( b == mButton1[2] ) { // GROUP
-        if ( mApp.mCID >= 0 ) {
-          List< CalibCBlock > list = mApp.mDData.selectAllGMs( mApp.mCID, 0 );
-          if ( list.size() >= 16 ) {
-            (new GMGroupsDialog( this, this, 
-              ( TDSetting.mGroupBy == TDSetting.GROUP_BY_DISTANCE )?
-                getResources().getString( R.string.group_policy_distance )
-              : ( TDSetting.mGroupBy == TDSetting.GROUP_BY_FOUR )?
-                getResources().getString( R.string.group_policy_four )
-              : /* TDSetting.GROUP_BY_ONLY_16 */
-                getResources().getString( R.string.group_policy_sixteen ) 
-            )).show();
-            // new CalibComputer( this, -1L, CalibComputer.CALIB_COMPUTE_GROUPS ).execute();
-          } else {
-            resetTitle( );
-            Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();
-          }
+      }
+    } else if ( b == mButton1[2] ) { // GROUP
+      if ( mApp.mCID >= 0 ) {
+        List< CalibCBlock > list = mApp.mDData.selectAllGMs( mApp.mCID, 0 );
+        if ( list.size() >= 16 ) {
+          (new GMGroupsDialog( this, this, 
+            ( TDSetting.mGroupBy == TDSetting.GROUP_BY_DISTANCE )?
+              getResources().getString( R.string.group_policy_distance )
+            : ( TDSetting.mGroupBy == TDSetting.GROUP_BY_FOUR )?
+              getResources().getString( R.string.group_policy_four )
+            : /* TDSetting.GROUP_BY_ONLY_16 */
+              getResources().getString( R.string.group_policy_sixteen ) 
+          )).show();
+          // new CalibComputer( this, -1L, CalibComputer.CALIB_COMPUTE_GROUPS ).execute();
         } else {
           resetTitle( );
-          Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT ).show();
+          Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();
         }
-      } else if ( b == mButton1[3] ) { // COMPUTE
-        if ( mApp.mCID >= 0 ) {
-          setTitle( R.string.calib_compute_coeffs );
-          setTitleColor( TDColor.COMPUTE );
-          if ( mAlgo == CalibInfo.ALGO_AUTO ) { 
-            mAlgo = ( TDSetting.mCalibAlgo != CalibInfo.ALGO_AUTO ) ? TDSetting.mCalibAlgo : CalibInfo.ALGO_LINEAR;
-            mApp.updateCalibAlgo( mAlgo );
-          }
-          new CalibComputer( this, -1L, CalibComputer.CALIB_COMPUTE_CALIB ).execute();
+      } else {
+        resetTitle( );
+        Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT ).show();
+      }
+    } else if ( b == mButton1[3] ) { // COMPUTE
+      if ( mApp.mCID >= 0 ) {
+        setTitle( R.string.calib_compute_coeffs );
+        setTitleColor( TDColor.COMPUTE );
+        if ( mAlgo == CalibInfo.ALGO_AUTO ) { 
+          mAlgo = ( TDSetting.mCalibAlgo != CalibInfo.ALGO_AUTO ) ? TDSetting.mCalibAlgo : CalibInfo.ALGO_LINEAR;
+          mApp.updateCalibAlgo( mAlgo );
+        }
+        new CalibComputer( this, -1L, CalibComputer.CALIB_COMPUTE_CALIB ).execute();
+      } else {
+        Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT ).show();
+      }
+    } else if ( b == mButton1[BTN_COVER] ) { // COVER
+      if ( mCalibration == null ) {
+        Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT ).show();
+      } else {
+        List< CalibCBlock > list = mApp.mDData.selectAllGMs( mApp.mCID, 0 );
+        if ( list.size() >= 16 ) {
+          ( new CalibCoverageDialog( this, list, mCalibration ) ).show();
         } else {
-          Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT ).show();
+          Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();
         }
-      } else if ( b == mButton1[BTN_COVER] ) { // COVER
-        if ( mCalibration == null ) {
-          Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT ).show();
-        } else {
-          List< CalibCBlock > list = mApp.mDData.selectAllGMs( mApp.mCID, 0 );
-          if ( list.size() >= 16 ) {
-            ( new CalibCoverageDialog( this, list, mCalibration ) ).show();
-          } else {
-            Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();
-          }
-        }
-      } else if ( b == mButton1[BTN_READ] ) { // READ
-        enableButtons( false );
-        new CalibReadTask( this, this, mApp, CalibReadTask.PARENT_GM ).execute(); // 
+      }
+    } else if ( b == mButton1[BTN_READ] ) { // READ
+      enableButtons( false );
+      new CalibReadTask( this, this, mApp, CalibReadTask.PARENT_GM ).execute(); // 
 
-      } else if ( b == mButton1[BTN_WRITE] ) { // WRITE
-        // if ( mEnableWrite ) {
-          if ( mCalibration == null ) {
+    } else if ( b == mButton1[BTN_WRITE] ) { // WRITE
+      // if ( mEnableWrite ) {
+        if ( mCalibration == null ) {
+          Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT).show();
+        } else {
+          setTitle( R.string.calib_write_coeffs );
+          setTitleColor( TDColor.CONNECTED );
+
+          byte[] coeff = mCalibration.GetCoeff();
+          if ( coeff == null ) {
             Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT).show();
           } else {
-            setTitle( R.string.calib_write_coeffs );
-            setTitleColor( TDColor.CONNECTED );
-
-            byte[] coeff = mCalibration.GetCoeff();
-            if ( coeff == null ) {
-              Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT).show();
-            } else {
-              mApp.uploadCalibCoeff( this, coeff, true, b );
-            }
-            resetTitle( );
+            mApp.uploadCalibCoeff( this, coeff, true, b );
           }
-        // }
-      // } else if ( b == mButton1[7] ) { // disto
-      //   Intent deviceIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DeviceActivity.class );
-      //   startActivity( deviceIntent );
-      }
+          resetTitle( );
+        }
+      // }
+    // } else if ( b == mButton1[7] ) { // disto
+    //   Intent deviceIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DeviceActivity.class );
+    //   startActivity( deviceIntent );
     }
+  }
 
   void computeGroups( long start_id )
   {

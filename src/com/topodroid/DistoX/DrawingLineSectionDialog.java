@@ -131,13 +131,19 @@ public class DrawingLineSectionDialog extends MyDialog
         try {
           ExifInterface exif = new ExifInterface( mFilename );
           mOrientation = exif.getAttributeInt( ExifInterface.TAG_ORIENTATION, 0 );
+          float bearing = 0;
+          float clino = 0;
           // mAzimuth = exif.getAttribute( "GPSImgDirection" );
           String b = exif.getAttribute( ExifInterface.TAG_GPS_LONGITUDE );
-          int k = b.indexOf('/');
-          float bearing = Integer.parseInt( b.substring(0,k) ) / 100.0f;
+          if ( b != null ) {
+            int k = b.indexOf('/');
+            if ( k > 0 ) bearing = Integer.parseInt( b.substring(0,k) ) / 100.0f;
+          }
           String c = exif.getAttribute( ExifInterface.TAG_GPS_LATITUDE );
-          k = c.indexOf('/');
-          float clino = Integer.parseInt( c.substring(0,k) ) / 100.0f;
+          if ( c != null ) {
+            int k = c.indexOf('/');
+            if ( k > 0 ) clino = Integer.parseInt( c.substring(0,k) ) / 100.0f;
+          }
           // Log.v("DistoX", "Long <" + bearing + "> Lat <" + clino + ">" );
           tv_azimuth.setText(
             String.format( mContext.getResources().getString( R.string.photo_azimuth_clino ), bearing, clino ) );

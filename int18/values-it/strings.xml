@@ -523,6 +523,7 @@
 
     <string name="popup_do_splay">Splay</string>
     <string name="popup_do_leg">Battuta</string>
+    <!-- TODO string name="popup_do_gm_data">Calib. shot</string -->
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Importa</string>

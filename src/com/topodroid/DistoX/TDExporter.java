@@ -88,7 +88,7 @@ class TDExporter
     pw.format(Locale.US, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"",
       leg.length(), leg.bearing(), leg.clino()
     );
-    pw.format(Locale.US, " g=\"%.2f\" m=\"%.1f\" dip=\"%.1f\"", ref.mAcceleration, ref.mMagnetic, ref.mDip );
+    pw.format(Locale.US, " g=\"%.1f\" m=\"%.1f\" dip=\"%.1f\"", ref.mAcceleration, ref.mMagnetic, ref.mDip );
     leg.reset();
   }
 
@@ -133,6 +133,8 @@ class TDExporter
     // }
 
     List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+    List<DBlock> clist = data.selectAllShots( sid, TopoDroidApp.STATUS_CHECK );
+
     List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
     List< PlotInfo > plots  = data.selectAllPlots( sid, TopoDroidApp.STATUS_NORMAL );
     // FIXME TODO_CSURVEY
@@ -205,6 +207,20 @@ class TDExporter
 
 // ++++++++++++++++ SHOTS
       pw.format("  <segments>\n");
+
+      for ( DBlock blk : clist ) { // calib-check shots
+        writeCsxSegment( pw, cave, blk.mFrom, blk.mTo );
+        pw.format(" exclude=\"1\"");
+        pw.format(" calibration=\"1\""); 
+        pw.format(Locale.US, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"",
+                  blk.mLength, blk.mBearing, blk.mClino);
+        pw.format(Locale.US, " g=\"%.1f\" m=\"%.1f\" dip=\"%.1f\"", blk.mAcceleration, blk.mMagnetic, blk.mDip );
+        // pw.format(" l=\"0.0\" r=\"0.0\" u=\"0.0\" d=\"0.0\"");
+        if ( blk.mComment != null && blk.mComment.length() > 0 ) {
+          pw.format(" note=\"%s\"", blk.mComment.replaceAll("\"", "") );
+        }
+        pw.format(" />\n");
+      }
 
       // optional attrs of "segment": id cave branch session
 
@@ -743,6 +759,8 @@ class TDExporter
     // String uas = TDSetting.mUnitAngleStr;
 
     List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+    List<DBlock> clist = data.selectAllShots( sid, TopoDroidApp.STATUS_CHECK );
+
     List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
     List< PlotInfo > plots  = data.selectAllPlots( sid, TopoDroidApp.STATUS_NORMAL );
     List< CurrentStation > stations = data.getStations( sid );
@@ -758,6 +776,20 @@ class TDExporter
         pw.format("    # %s \n", info.comment );
       }
       pw.format("\n");
+
+      if ( clist.size() > 0 ) {
+        pw.format("# calibration-check\n");
+        for ( DBlock blk : clist ) { // calib-check shots
+          pw.format("# %s %s :", blk.mFrom, blk.mTo );
+          pw.format(Locale.US, " %.2f %.1f %.1f", blk.mLength, blk.mBearing, blk.mClino);
+          pw.format(Locale.US, " %.1f %.1f %.1f", blk.mAcceleration, blk.mMagnetic, blk.mDip );
+          if ( blk.mComment != null && blk.mComment.length() > 0 ) {
+            pw.format(" %s", blk.mComment );
+          }
+          pw.format("\n");
+        }
+        pw.format("\n");
+      }
       
       if ( TDSetting.mTherionMaps ) doTherionMaps( pw, info, plots );
 
