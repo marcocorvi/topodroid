@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="303064"
-      android:versionName="3.3.2n"
+      android:versionCode="303065"
+      android:versionName="3.3.2p"
     >
     <uses-sdk
        android:minSdkVersion="8"
@@ -179,13 +179,13 @@
         </receiver -->
 
 
-    <service
+    <!-- service
       android:name="TD_DistoX"
       android:icon="@drawable/icon3"
       android:label="TD_DistoX"
       android:process=":td_distox_process"
       >
-    </service>
+    </service -->
 
     </application>
 </manifest> 
