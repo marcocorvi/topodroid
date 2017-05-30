@@ -531,7 +531,7 @@
 
     <string name="popup_do_splay">Сделать замер</string>
     <string name="popup_do_leg">Сделать три замера</string>
-    <!-- TODO string name="popup_do_gm_data">Calib. shot</string -->
+    <string name="popup_do_gm_data">Проверочн. Калибр.</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Импорт</string>
