@@ -2622,6 +2622,7 @@ public class DrawingWindow extends ItemDrawer
                           String scrap_option = "-scrap " + mApp.mySurvey + "-" + section_id;
                           DrawingPointPath section_pt = new DrawingPointPath( BrushManager.mPointLib.mPointSectionIndex,
                                                                             x5, y5, DrawingPointPath.SCALE_M, 
+                                                                            null, // no text 
                                                                             scrap_option );
                           mDrawingSurface.addDrawingPath( section_pt );
                         }
@@ -2679,12 +2680,12 @@ public class DrawingWindow extends ItemDrawer
             } else { // Symbol.POINT
               if ( ( ! pointerDown ) && Math.abs( x_shift ) < TDSetting.mPointingRadius 
                                      && Math.abs( y_shift ) < TDSetting.mPointingRadius ) {
-                if ( BrushManager.mPointLib.pointHasText(mCurrentPoint) ) {
+                if ( mCurrentPoint == BrushManager.mPointLib.mPointLabelIndex ) {
                   DrawingLabelDialog label = new DrawingLabelDialog( mActivity, this, x_scene, y_scene );
                   label.show();
                 } else {
                   mDrawingSurface.addDrawingPath( 
-                    new DrawingPointPath( mCurrentPoint, x_scene, y_scene, mPointScale, null ) );
+                    new DrawingPointPath( mCurrentPoint, x_scene, y_scene, mPointScale, null, null ) ); // no text, no options
 
                   // undoBtn.setEnabled(true);
                   // redoBtn.setEnabled(false);
@@ -2823,7 +2824,7 @@ public class DrawingWindow extends ItemDrawer
 	  String scrap_option = "-scrap " + mApp.mySurvey + "-" + xsname;
 	  DrawingPointPath section_pt = new DrawingPointPath( BrushManager.mPointLib.mPointSectionIndex,
 							    x5, y5, DrawingPointPath.SCALE_M, 
-							    scrap_option );
+							    null, scrap_option ); // no text
 	  mDrawingSurface.addDrawingPath( section_pt );
         }
       }

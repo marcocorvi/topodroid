@@ -31,13 +31,12 @@ import java.util.Locale;
 public class DrawingLabelPath extends DrawingPointPath
 {
   private static float toTherion = TDConst.TO_THERION;
-  public String mText;
   // private Paint paint;
 
   public DrawingLabelPath( String text, float off_x, float off_y, int scale, String options )
   {
-    super( BrushManager.mPointLib.mPointLabelIndex, off_x, off_y, scale, options );
-    mText = text;
+    super( BrushManager.mPointLib.mPointLabelIndex, off_x, off_y, scale, text, options );
+    // mPointText = text;
     // setPaint( BrushManager.pointPaint[ BrushManager.POINT_LABEL ] );
     // mPaint = BrushManager.pointPaint[ BrushManager.POINT_LABEL ];
     // paint = new Paint();
@@ -48,7 +47,7 @@ public class DrawingLabelPath extends DrawingPointPath
     // paint.setStrokeCap(Paint.Cap.ROUND);
     // paint.setStrokeWidth( WIDTH_CURRENT );
 
-    makeStraightPath( 0, 0, 20*mText.length(), 0, cx, cy );
+    makeStraightPath( 0, 0, 20*mPointText.length(), 0, cx, cy );
   }
 
   static DrawingLabelPath loadDataStream( int version, DataInputStream dis, float x, float y )
@@ -83,8 +82,8 @@ public class DrawingLabelPath extends DrawingPointPath
   public void draw( Canvas canvas, RectF bbox )
   {
     if ( intersects( bbox ) ) {
-      // TDLog.Log( TDLog.LOG_PATH, "Drawing Label Path::draw " + mText );
-      canvas.drawTextOnPath( mText, mPath, 0f, 0f, mPaint );
+      // TDLog.Log( TDLog.LOG_PATH, "Drawing Label Path::draw " + mPointText );
+      canvas.drawTextOnPath( mPointText, mPath, 0f, 0f, mPaint );
     }
   }
 
@@ -92,19 +91,13 @@ public class DrawingLabelPath extends DrawingPointPath
   public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
   {
     if ( intersects( bbox ) ) {
-      // TDLog.Log( TDLog.LOG_PATH, "Drawing Label Path::draw[matrix] " + mText );
+      // TDLog.Log( TDLog.LOG_PATH, "Drawing Label Path::draw[matrix] " + mPointText );
       setTextSize();
       mTransformedPath = new Path( mPath );
       mTransformedPath.transform( matrix );
-      canvas.drawTextOnPath( mText, mTransformedPath, 0f, 0f, mPaint );
+      canvas.drawTextOnPath( mPointText, mTransformedPath, 0f, 0f, mPaint );
     }
   }
-
-  @Override
-  public String getText() { return mText; }
-
-  @Override
-  public void setText( String text ) { mText = text; }
 
   private float fontSize( )
   {
@@ -119,7 +112,7 @@ public class DrawingLabelPath extends DrawingPointPath
 
   private void makeLabelPath( float f )
   {
-    float len = 20 * f * mText.length();
+    float len = 20 * f * mPointText.length();
     float a = (float)(mOrientation) * TDMath.GRAD2RAD;
     float ca = len * TDMath.cos( a );
     float sa = len * TDMath.sin( a );
@@ -166,7 +159,7 @@ public class DrawingLabelPath extends DrawingPointPath
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
-    pw.format(Locale.US, "point %.2f %.2f label -text \"%s\"", cx*toTherion, -cy*toTherion, mText );
+    pw.format(Locale.US, "point %.2f %.2f label -text \"%s\"", cx*toTherion, -cy*toTherion, mPointText );
     toTherionOrientation( pw );
     toTherionOptions( pw );
     pw.format("\n");
@@ -182,7 +175,7 @@ public class DrawingLabelPath extends DrawingPointPath
     // int cat    = 81;
     pw.format("<item layer=\"6\" cave=\"%s\" branch=\"%s\" type=\"8\" category=\"81\" transparency=\"0.00\"",
       cave, branch );
-    pw.format(" text=\"%s\" textrotatemode=\"1\" >\n", mText );
+    pw.format(" text=\"%s\" textrotatemode=\"1\" >\n", mPointText );
     pw.format("  <pen type=\"10\" />\n");
     pw.format("  <brush type=\"7\" />\n");
     float x = DrawingUtil.sceneToWorldX( cx ); // convert to world coords.
@@ -202,7 +195,7 @@ public class DrawingLabelPath extends DrawingPointPath
       // dos.writeUTF( BrushManager.mPointLib.getSymbolThName(mPointType) );
       dos.writeFloat( (float)mOrientation ); // from version 2.7.4e
       dos.writeInt( mScale );
-      dos.writeUTF( ( mText != null )? mText : "" );
+      dos.writeUTF( ( mPointText != null )? mPointText : "" );
       dos.writeUTF( ( mOptions != null )? mOptions : "" );
       // TDLog.Log( TDLog.LOG_PLOT, "T " + " " + cx + " " + cy );
     } catch ( IOException e ) {

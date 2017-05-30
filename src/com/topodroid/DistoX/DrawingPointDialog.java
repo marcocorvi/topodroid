@@ -72,7 +72,8 @@ public class DrawingPointDialog extends MyDialog
 
     setTitle( "POINT " + BrushManager.mPointLib.getSymbolName( mPoint.mPointType ) );
     if ( BrushManager.mPointLib.pointHasText( mPoint.mPointType ) ) {
-      mETtext.setText( mPoint.getText() );
+      String text = mPoint.getPointText();
+      mETtext.setText( (text == null)? "" : text );
     } else {
       mETtext.setEnabled( false );
     }
@@ -110,7 +111,7 @@ public class DrawingPointDialog extends MyDialog
     if ( b == mBtnOk ) {
       if ( mEToptions.getText() != null ) {
         String options = mEToptions.getText().toString().trim();
-        if ( options.length() > 0 ) mPoint.mOptions = options;
+        mPoint.mOptions = options;
       }
       if ( mBtnScaleXS.isChecked() )      mPoint.setScale( DrawingPointPath.SCALE_XS );
       else if ( mBtnScaleS.isChecked() )  mPoint.setScale( DrawingPointPath.SCALE_S  );
@@ -123,7 +124,7 @@ public class DrawingPointDialog extends MyDialog
         // Log.v("DistoX", "Point type " + mPoint.mPointType + " orientation " + mPoint.mOrientation );
       }
       if ( BrushManager.mPointLib.pointHasText( mPoint.mPointType ) ) {
-        mPoint.setText( mETtext.getText().toString().trim() );
+        mPoint.setPointText( mETtext.getText().toString().trim() );
       }
     } else if ( b == mBtnCancel ) {
       // nothing

@@ -50,7 +50,7 @@ public class DrawingStationName extends DrawingPointPath
     super( BrushManager.mPointLib.mPointLabelIndex,
            x, // scene coordinate
            y, 
-           DrawingPointPath.SCALE_M, null );
+           DrawingPointPath.SCALE_M, null, null ); // no text no options
     mType = DRAWING_PATH_NAME; // override DrawingPath.mType
     mStation = null;
     mName = name;
@@ -68,7 +68,7 @@ public class DrawingStationName extends DrawingPointPath
     super( BrushManager.mPointLib.mPointLabelIndex,
            x, // scene coordinate
            y, 
-           DrawingPointPath.SCALE_M, null );
+           DrawingPointPath.SCALE_M, null, null );
     mType = DRAWING_PATH_NAME; // override DrawingPath.mType
     mStation = num_st;
     mName = num_st.name;

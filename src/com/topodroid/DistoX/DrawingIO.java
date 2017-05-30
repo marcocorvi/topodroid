@@ -228,7 +228,7 @@ class DrawingIO
                 if ( label_text != null ) {
                   // "danger" is no longer mapped on a label 
                   // if ( label_text.equals( "!" ) ) {    // "danger" point
-                  //   DrawingPointPath path = new DrawingPointPath( BrushManager.mPointLib.mPointDangerIndex, x, y, scale, options );
+                  //   DrawingPointPath path = new DrawingPointPath( BrushManager.mPointLib.mPointDangerIndex, x, y, scale, text, options );
                   //   surface.addDrawingPath( path );
                   // } else {                             // regular label
                     DrawingLabelPath path = new DrawingLabelPath( label_text, x, y, scale, options );
@@ -241,11 +241,11 @@ class DrawingIO
               } else if ( has_orientation && BrushManager.mPointLib.isSymbolOrientable(ptType) ) {
                 // TDLog.Log( TDLog.LOG_PLOT, "[2] point " + ptType + " has orientation " + orientation );
                 BrushManager.rotateGradPoint( ptType, orientation );
-                DrawingPointPath path = new DrawingPointPath( ptType, x, y, scale, options );
+                DrawingPointPath path = new DrawingPointPath( ptType, x, y, scale, label_text, options );
                 surface.addDrawingPath( path );
                 BrushManager.rotateGradPoint( ptType, -orientation );
               } else {
-                DrawingPointPath path = new DrawingPointPath( ptType, x, y, scale, options );
+                DrawingPointPath path = new DrawingPointPath( ptType, x, y, scale, label_text, options );
                 surface.addDrawingPath( path );
               }
             }

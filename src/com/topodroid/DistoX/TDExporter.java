@@ -1236,13 +1236,13 @@ class TDExporter
             // Log.v("DistoX", "branch shots " + size );
             if ( size > 0 ) {
               if ( do_header ) {
-                pw.format("*data passage station left right up down"); writeSurvexEOL( pw );
                 pw.format("*units left %s", uls );  writeSurvexEOL( pw );
                 pw.format("*units right %s", uls ); writeSurvexEOL( pw );
                 pw.format("*units up %s", uls );    writeSurvexEOL( pw );
                 pw.format("*units down %s", uls );  writeSurvexEOL( pw );
                 do_header = false;
               }
+              pw.format("*data passage station left right up down"); writeSurvexEOL( pw );
               NumShot sh = shots.get(0);
               NumStation s1 = sh.from;
               NumStation s2 = sh.to;

@@ -1570,8 +1570,7 @@ public class SketchWindow extends ItemDrawer
                   path.setOrientation( p1, mInfo );
                 }
                 mModel.addPoint( path );
-                if ( point_lib.pointHasText( mCurrentPoint ) ) {
-                  // TODO text dialog
+                if ( mCurrentPoint == point_lib.mPointLabelIndex ) { // text dialog
                   new DrawingLabelDialog( mActivity, this, x_scene, y_scene ).show();
                 }
               // } else {

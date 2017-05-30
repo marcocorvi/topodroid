@@ -52,25 +52,49 @@ public class DrawingPointPath extends DrawingPath
   int mPointType;
   protected int mScale;       //! symbol scale
   double mOrientation;
+  String mPointText;
 
-  public DrawingPointPath( int type, float x, float y, int scale, String options )
+  // String getTextFromOptions( String options )
+  // {
+  //   if ( options != null ) {
+  //     int len = options.length();
+  //     int pos = options.indexOf("-text");
+  //     if ( pos > 0 ) {
+  //       int start = pos + 5;
+  //       while ( start < len && options.charAt( start ) == ' ' ) ++ start;
+  //       if ( start < len ) {
+  //         int end = start + 1;
+  //         while ( end < len && options.charAt( end ) != ' ' ) ++ end;
+  //         if ( end < len ) {
+  //           mOptions = options.substring(0, start) + options.substring(end);
+  //         } else {
+  //           mOptions = options.substring(0, start);
+  //         }
+  //         if ( options.charAt( start ) == '"' ) start ++;
+  //         if ( options.charAt( end ) == '"' ) end --;
+  //         return options.substring( start, end );
+  //       }
+  //     }
+  //   }
+  //   return null;
+  // }
+
+  public DrawingPointPath( int type, float x, float y, int scale, String text, String options )
   {
     super( DrawingPath.DRAWING_PATH_POINT, null );
     // TDLog.Log( TDLog.LOG_PATH, "Point " + type + " X " + x + " Y " + y );
     mPointType = type;
     setCenter( x, y );
-    mOptions = options;
     mScale   = SCALE_NONE;
     mOrientation = 0.0;
+    mOptions = options;
+    mPointText = text; // getTextFromOptions( options ); // this can also reset mOptions
+
     if ( BrushManager.mPointLib.isSymbolOrientable( type ) ) {
       mOrientation = BrushManager.getPointOrientation(type);
     }
     setPaint( BrushManager.mPointLib.getSymbolPaint( mPointType ) );
-    // if ( ! BrushManager.pointHasText( mPointType ) ) {
-      mScale = scale;
-    // } else {
-    //   mScale = SCALE_M;
-    // }
+    mScale = scale;
     resetPath( 1.0f );
     // Log.v( TopoDroidApp.TAG, "Point cstr " + type + " orientation " + mOrientation );
   }
@@ -80,13 +104,16 @@ public class DrawingPointPath extends DrawingPath
     float ccx, ccy, orientation;
     int   type;
     int   scale;
-    String fname, options;
+    String fname;
+    String options = null;
+    String text = null;
     try {
       ccx = x + dis.readFloat();
       ccy = y + dis.readFloat();
       fname = dis.readUTF( );
       orientation = dis.readFloat();
       scale   = dis.readInt();
+      if ( version >= 303066 ) text = dis.readUTF();
       options = dis.readUTF();
 
       BrushManager.mPointLib.tryLoadMissingPoint( fname );
@@ -96,7 +123,7 @@ public class DrawingPointPath extends DrawingPath
         if ( missingSymbols != null ) missingSymbols.addPointFilename( fname ); 
         type = 0;
       }
-      DrawingPointPath ret = new DrawingPointPath( type, ccx, ccy, scale, options );
+      DrawingPointPath ret = new DrawingPointPath( type, ccx, ccy, scale, text, options );
       ret.setOrientation( orientation );
       return ret;
 
@@ -191,7 +218,7 @@ public class DrawingPointPath extends DrawingPath
   {
     // Log.v("DistoX", "Reset path " + mOrientation + " scale " + mScale );
     Matrix m = new Matrix();
-    if ( ! BrushManager.pointHasText( mPointType ) ) {
+    if ( mPointType != BrushManager.mPointLib.mPointLabelIndex ) {
       if ( BrushManager.mPointLib.isSymbolOrientable( mPointType ) ) {
         m.postRotate( (float)mOrientation );
       }
@@ -230,9 +257,12 @@ public class DrawingPointPath extends DrawingPath
     resetPath( 1.0f );
   }
 
-  public String getText() { return null; }
+  public String getPointText() { return mPointText; }
 
-  public void setText( String text ) { }
+  public void setPointText( String text ) 
+  {
+    mPointText = text;
+  }
 
   public void shiftTo( float x, float y ) // x,y scene coords
   {
@@ -276,6 +306,7 @@ public class DrawingPointPath extends DrawingPath
     pw.format(Locale.US, "point %.2f %.2f %s", cx*toTherion, -cy*toTherion, 
                               BrushManager.mPointLib.getSymbolThName(mPointType) );
     toTherionOrientation( pw );
+    toTherionText( pw );
     toTherionOptions( pw );
     pw.format("\n");
 
@@ -286,6 +317,13 @@ public class DrawingPointPath extends DrawingPath
   {
     if ( mOrientation != 0.0 ) {
       pw.format(Locale.US, " -orientation %.2f", mOrientation);
+    }
+  }
+
+  private void toTherionText( PrintWriter pw )
+  {
+    if ( mPointText != null && mPointText.length() > 0 ) {
+      pw.format(" -text \"%s\"", mPointText );
     }
   }
 
@@ -317,7 +355,8 @@ public class DrawingPointPath extends DrawingPath
       dos.writeUTF( name );
       dos.writeFloat( (float)mOrientation );
       dos.writeInt( mScale );
-      dos.writeUTF( ( mOptions != null )? mOptions : "" );
+      dos.writeUTF( (mPointText != null)? mPointText : "" );
+      dos.writeUTF( (mOptions != null)? mOptions : "" );
       // TDLog.Log( TDLog.LOG_PLOT, "P " + name + " " + cx + " " + cy );
     } catch ( IOException e ) {
       TDLog.Error( "POINT out error " + e.toString() );

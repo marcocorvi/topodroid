@@ -321,7 +321,7 @@ class DrawingSvg
     if ( name.equals("label") ) {
       DrawingLabelPath label = (DrawingLabelPath)point;
       pw.format(Locale.US, "<text x=\"%.2f\" y=\"%.2f\" ", xoff+point.cx, yoff+point.cy );
-      pw.format(" style=\"fill:black;stroke:black;stroke-width:0.3\">%s</text>\n", label.mText );
+      pw.format(" style=\"fill:black;stroke:black;stroke-width:0.3\">%s</text>\n", label.mPointText );
     // } else if ( name.equals("continuation") ) {
     //   pw.format(Locale.US, "<text x=\"%.2f\" y=\"%.2f\" ", xoff+point.cx, yoff+point.cy );
     //   pw.format(" style=\"fill:none;stroke:black;stroke-width:0.3\">\?</text>\n" );
