@@ -265,6 +265,12 @@ public class ShotNewDialog extends MyDialog
     // adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
     // mExtend.setAdapter( adapter );
 
+    // if ( TDAzimuth.mFixedExtend == -1L ) {
+    //   mRadioLeft.setChecked( true );
+    // } else if ( TDAzimuth.mFixedExtend == 1L ) {
+    //   mRadioRight.setChecked( true );
+    // }
+
     mBtnOk.setOnClickListener( this );
     mBtnSave.setOnClickListener( this );
     mBtnBack.setOnClickListener( this );
@@ -372,7 +378,8 @@ public class ShotNewDialog extends MyDialog
       else if ( mRadioRight.isChecked() ) { shot_extend = 1; }
       else { // let TopoDroid choose
         try {
-          shot_extend = TDAzimuth.computeLegExtend( Float.parseFloat(bearing.replace(',','.') ) );
+          float bx = Float.parseFloat( bearing.replace(',','.') );
+          shot_extend = TDAzimuth.computeLegExtend( bx );
         } catch ( NumberFormatException e ) { }
       }
 

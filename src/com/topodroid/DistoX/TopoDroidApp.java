@@ -1823,7 +1823,7 @@ public class TopoDroidApp extends Application
           // String name = from + "-" + to;
           mData.updateShotName( id, mSID, from, to, true );
           // mData.updateShotExtend( id, mSID, extend0, true );
-          mData.updateShotExtend( id, mSID, DBlock.EXTEND_IGNORE, true );
+          // mData.updateShotExtend( id, mSID, DBlock.EXTEND_IGNORE, true ); // FIXME WHY ???
           // FIXME updateDisplay( );
         } else {
           if ( at >= 0L ) {
@@ -1835,7 +1835,7 @@ public class TopoDroidApp extends Application
           // String name = from + "-" + to;
           mData.updateShotName( id, mSID, from, to, true );
           // mData.updateShotExtend( id, mSID, extend0, true ); 
-          mData.updateShotExtend( id, mSID, DBlock.EXTEND_IGNORE, true ); 
+          // mData.updateShotExtend( id, mSID, DBlock.EXTEND_IGNORE, true );  // FIXME WHY ???
           // FIXME updateDisplay( );
 
           addManualSplays( at, splay_station, left, right, up, down, bearing, horizontal );
