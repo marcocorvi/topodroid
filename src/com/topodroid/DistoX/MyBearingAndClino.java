@@ -17,6 +17,9 @@ import java.io.IOException;
 
 import android.widget.ImageView;
 
+import android.graphics.Matrix;
+import android.graphics.Bitmap;
+
 import android.media.ExifInterface;
 
 import android.util.Log;
@@ -79,15 +82,27 @@ class MyBearingAndClino implements IBearingAndClino
   // 6: rotate right
   // 3: rotate 180
   // 8: rotate left
-  static void applyOrientation( ImageView image, int orientation )
+  static void applyOrientation( ImageView image, Bitmap bitmap, int orientation )
   {
+    Bitmap bm = null ;
+    Matrix m = new Matrix();
+    int w = bitmap.getWidth();
+    int h = bitmap.getHeight();
     if ( orientation == 6 ) {
-      image.setRotation(  90 );
+      m.setRotate(  90f, w/2, h/2 );
+      // image.setRotation(  90 ); // requires API level 14
     } else if ( orientation == 3 ) {
-      image.setRotation( 180 );
+      m.setRotate( 180f, w/2, h/2 );
+      // image.setRotation( 180 );
     } else if ( orientation == 8 ) {
-      image.setRotation( 270 );
+      m.setRotate( 270f, w/2, h/2 );
+      // image.setRotation( 270 );
+    } else {
+      image.setImageBitmap( bitmap );
+      return;
     }
+    bm = Bitmap.createBitmap( bitmap, 0, 0, w, h, m, true );
+    image.setImageBitmap( bm );
   }
 
   // jpegexiforient man page has

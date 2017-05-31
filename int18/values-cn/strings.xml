@@ -358,6 +358,7 @@
     <!-- UNUSED string name="shot_clino">倾角测量</string -->
     <!-- UNUSED string name="shot_compass">方位角测量</string -->
     <string name="shot_delete">删除测量 ?</string>
+    <!-- TODO string name="shots_delete">Delete shots ?</string -->
     <!-- TODO string name="shot_check">Mark shot as check-shot?</string -->
     <string name="shot_from">来自</string>
     <string name="shot_info">输入测量数据</string>

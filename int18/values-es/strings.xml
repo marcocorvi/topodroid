@@ -358,6 +358,7 @@
     <!-- UNUSED string name="shot_clino">Clino</string -->
     <!-- UNUSED string name="shot_compass">Brújula</string -->
     <string name="shot_delete">¿Quiere eliminar la toma?</string>
+    <!-- TODO string name="shots_delete">Delete shots ?</string -->
     <!-- TODO string name="shot_check">Mark shot as check-shot?</string -->
     <string name="shot_from">Toma desde</string>
     <string name="shot_info">Introducir datos Toma</string>

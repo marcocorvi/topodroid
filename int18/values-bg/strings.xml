@@ -360,6 +360,7 @@
     <!-- string name="shot_clino">clino</string -->
     <!-- string name="shot_compass">compass</string -->
     <string name="shot_delete">Изтриване на измерване?</string>
+    <!-- TODO string name="shots_delete">Delete shots ?</string -->
     <string name="shot_check">Маркиране като контролно измерване?</string>
     <string name="shot_from">от</string>
     <string name="shot_info">Въведете данни за отсечката</string>

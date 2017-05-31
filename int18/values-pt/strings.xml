@@ -358,6 +358,7 @@
     <!-- UNUSED string name="shot_clino">clinômetro</string -->
     <!-- UNUSED string name="shot_compass">bússola</string -->
     <string name="shot_delete">Apagar visada?</string>
+    <!-- TODO string name="shots_delete">Delete shots ?</string -->
     <!-- TODO string name="shot_check">Mark shot as check-shot?</string -->
     <string name="shot_from">de</string>
     <string name="shot_info">Inserir medida manualmente</string>

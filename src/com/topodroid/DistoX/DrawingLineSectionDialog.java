@@ -169,8 +169,7 @@ public class DrawingLineSectionDialog extends MyDialog
           int h2 = image.getHeight() / 8;
           Bitmap image2 = Bitmap.createScaledBitmap( image, w2, h2, true );
           if ( image2 != null ) {
-            mIVimage.setImageBitmap( image2 );
-            MyBearingAndClino.applyOrientation( mIVimage, mOrientation );
+            MyBearingAndClino.applyOrientation( mIVimage, image2, mOrientation );
             // mIVimage.setHeight( h2 );
             // mIVimage.setWidth( w2 );
             mIVimage.setOnClickListener( this );

@@ -6,14 +6,17 @@ TopoDroid uses it to display the 3D model of the survey.
 When you select 3D menu of the <a href="manual06.htm">Survey Data</a> window, the survey data is saved to a Therion file,
 which is opened in Cave3D displaying the 3D model.<br><p>
 
+The model is shown with a reference grid (blue north, green east) or triplet (pink upward).</br><p>
+
 <h4>BUTTONS</h4>
 <ul style="margin-top:0">
 <li><i>Tilt - Move</i>: green arrow switches the view between rotation and move modes.</li>
 <li><i>Stations</i>: button displays and hides station numbers.</li>
-<li><i>Splays</i>: button will display and hide splay shots. Splays are shown as lines or endpoints.</li>
+<li><i>Splays</i>: button will display and hide splay shots. Splays are shown as lines or as endpoints.</li>
 <li><i>Walls</i>: button will display and hide semitransparent walls triangulated from splay and LRUD endpoints.</li>
+<li><i>Projections</i>: display the plan view built from the wall 3D reconstruction, projected on the grid plane, and/or the profile curtain</li>
 <li><i>Surface</i>: button will display surface.  Works only if ASCII surface data is specified in .th file.</li>
-<li><i>Colour</i>: button will change colourcoding of centreline from all grey to survey and depth.</li>
+<li><i>Color</i>: button will change color-coding of centreline from all grey to survey and depth.</li>
 <li><i>Grid</i>: button will switch between underlying grid or X, Y, Z axis.</li>
 </ul><br><p>
 
@@ -25,7 +28,8 @@ which is opened in Cave3D displaying the 3D model.<br><p>
 <li><i>Ico diagram</i>: displays ICO diagram.</li>
 <li><i>Rose diagram</i>: displays azimuth rose diagram.</li>
 <li><i>Viewpoint</i>: will let you select a point of view.</li>
-<li><i>Reset</i></li>
+<li><i>Reset</i>: center the 3D model in top-view and zoom to fit it in the screen</li>
+<li><i>Wall models</i>: create or clear a wall 3D reconstruction</li>
 <li><i>Options</i></li>
 </ul><br><p>
 
@@ -42,6 +46,11 @@ which is opened in Cave3D displaying the 3D model.<br><p>
   <li><i>Randomize points</i>: Add a small random vector to splays</li>
   <li><i>Stretch walls</i>: Shift wall points by a small quantity along the leg</li>
 </ul><br><p>
+
+<b>Station actions</b><br>
+When the stations are displayed, they can be selected tapping on the station.
+The selected station can be set as origin of the model ("center"), or the distance from 
+another station can be measured.<br><p>
 
 <a href="manual14.htm">&lt; Co-surveying</a>
 

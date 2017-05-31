@@ -17,6 +17,8 @@ import android.graphics.Paint;
 // import android.graphics.Color;
 import android.graphics.Canvas;
 import android.graphics.Path;
+import android.graphics.Rect;
+import android.graphics.Region;
 import android.graphics.Matrix;
 
 import android.widget.Button;
@@ -25,6 +27,7 @@ public class ItemButton extends Button
 {
   private Paint mPaint;
   private Path  mPath;
+  // private Rect  mClip;
 
   public ItemButton( Context context )
   {
@@ -80,13 +83,14 @@ public class ItemButton extends Button
     setMinimumHeight( (int)(30*sy) );
     mPaint = paint;
     resetPath( path, sx, sy );
+    // mClip = new Rect( 0, 0, (int)(40*sx), (int)(30*sy) );
   }
 
   void resetPath( Path path, float sx, float sy )
   {
     mPath = new Path(path);
     Matrix m = new Matrix();
-    m.postScale( sx, sy );
+    m.setScale( sx, sy );
     mPath.transform( m );
     mPath.offset( 20*sx, 15*sy );
   }
@@ -95,6 +99,7 @@ public class ItemButton extends Button
   {
     // draw the button background
     if ( mPath != null ) {
+      // canvas.clipRect( mClip, Region.Op.REPLACE );
       canvas.drawPath( mPath, mPaint );
     }
   }

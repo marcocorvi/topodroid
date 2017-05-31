@@ -65,7 +65,10 @@ class SymbolAdapter extends ArrayAdapter< EnableSymbol >
 
   private class ViewHolder
   { 
-    CheckBox checkBox;
+    CheckBox     mCheckBox;
+    ItemButton   mButton;
+    TextView     mTextView;
+    EnableSymbol mSymbol;
   }
 
   @Override
@@ -76,16 +79,22 @@ class SymbolAdapter extends ArrayAdapter< EnableSymbol >
 
     ViewHolder holder = null; 
     if ( convertView == null ) {
-      convertView = mLayoutInflater.inflate( R.layout.enable_symbol, null );
+      convertView = mLayoutInflater.inflate( R.layout.enable_symbol_x, null );
       holder = new ViewHolder();
-      holder.checkBox = (CheckBox) convertView.findViewById( R.id.enable_symbol_cb );
+      holder.mCheckBox = (CheckBox) convertView.findViewById( R.id.enable_symbol_cb );
+      holder.mButton   = (ItemButton) convertView.findViewById( R.id.enable_symbol_bt );
+      holder.mTextView = (TextView) convertView.findViewById( R.id.enable_symbol_tv );
       convertView.setTag( holder );
     } else {
       holder = (ViewHolder) convertView.getTag();
     }
-    holder.checkBox.setChecked( b.mEnabled );
-    holder.checkBox.setText( b.getName() );
-    holder.checkBox.setOnClickListener( b );
+    holder.mSymbol = b;
+    holder.mCheckBox.setChecked( b.mEnabled );
+    holder.mCheckBox.setOnClickListener( b );
+    // holder.mCheckBox.setText( b.getName() );
+    holder.mTextView.setText( b.getName() );
+    holder.mButton.reset( b.mSymbol.getPaint(), b.mSymbol.getPath(), b.sx, b.sy );
+    convertView.invalidate();
     return convertView;
   }
 

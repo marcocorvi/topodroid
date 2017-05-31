@@ -359,6 +359,7 @@
     <!-- UNUSED string name="shot_clino">clino</string -->
     <!-- UNUSED string name="shot_compass">compass</string -->
     <string name="shot_delete">Supprimer visée ?</string>
+    <!-- TODO string name="shots_delete">Delete shots ?</string -->
     <string name="shot_check">Indiquer la visée comme visé de contrôle ?</string>
     <string name="shot_from">Depuis</string>
     <string name="shot_info">Saisir les infos de visée</string>

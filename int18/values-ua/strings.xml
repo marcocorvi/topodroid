@@ -360,6 +360,7 @@
     <!-- UNUSED string name="shot_clino">кут</string -->
     <!-- UNUSED string name="shot_compass">азимут</string -->
     <string name="shot_delete">Видалити сегмент ?</string>
+    <!-- TODO string name="shots_delete">Delete shots ?</string -->
     <!-- TODO string name="shot_check">Mark shot as check-shot?</string -->
     <string name="shot_from">№ ОТ</string>
     <string name="shot_info">Введіть дані замірів</string>

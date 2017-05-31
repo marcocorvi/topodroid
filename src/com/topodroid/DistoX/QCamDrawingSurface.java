@@ -27,7 +27,7 @@ import android.graphics.Path;
 import android.graphics.ImageFormat;
 
 import android.hardware.Camera;
-import android.hardware.Camera.CameraInfo;
+// import android.hardware.Camera.CameraInfo; // UNUSED
 import android.hardware.Camera.Parameters;
 import android.hardware.Camera.PreviewCallback;
 import android.hardware.Camera.PictureCallback;

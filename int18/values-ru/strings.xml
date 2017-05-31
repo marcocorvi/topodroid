@@ -367,6 +367,7 @@
     <!-- UNUSED string name="shot_clino">угол</string -->
     <!-- UNUSED string name="shot_compass">азимут</string -->
     <string name="shot_delete">Удалить сегмент ?</string>
+    <!-- TODO string name="shots_delete">Delete shots ?</string -->
     <string name="shot_check">Пометить замер как проверочный?</string>
     <string name="shot_from">№ ОТ</string>
     <string name="shot_info">Введите данные измерений</string>

@@ -13,6 +13,7 @@ name-ua продовження
 name-hu folytatás
 th_name continuation
 orientation no
+has_text yes
 color 0xff3333
 csurvey 6 6 80
 path

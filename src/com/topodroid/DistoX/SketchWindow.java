@@ -2191,7 +2191,10 @@ public class SketchWindow extends ItemDrawer
     if ( TDSetting.mSketchModelType == 1 ) {
       mModel.makeSurface( mModel.SURFACE_CONVEX_HULL );
     } else if ( TDSetting.mSketchModelType == 2 ) {
+      Toast.makeText( mActivity, "Powercrust supported only in debug", Toast.LENGTH_SHORT ).show();
+/* if DEBUG
       mModel.makeSurface( mModel.SURFACE_POWERCRUST );
+*/
     }
   }
 

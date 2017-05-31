@@ -169,6 +169,7 @@ public class QCamCompass extends Dialog
         buttonClick.setBackgroundDrawable( mBDcameraRed );
         // buttonClick.setText( mContext.getString( R.string.button_eval ) );
         mSurface.start();
+        enableButtons( true );
       } else {
         int wait  = TDSetting.mTimerWait;
         int count = 10;

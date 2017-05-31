@@ -368,6 +368,7 @@
     <!-- UNUSED string name="shot_clino">clino</string -->
     <!-- UNUSED string name="shot_compass">compass</string -->
     <string name="shot_delete">Delete shot ?</string>
+    <string name="shots_delete">Delete shots ?</string>
     <string name="shot_check">Mark shot as check-shot?</string>
     <string name="shot_from">from</string>
     <string name="shot_info">Enter shot data</string>

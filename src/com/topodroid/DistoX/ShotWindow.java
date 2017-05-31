@@ -126,8 +126,9 @@ public class ShotWindow extends Activity
                       };
 
   private static int izonsF[] = {
-                        R.drawable.iz_back,
-                        R.drawable.iz_forw,
+                        R.drawable.iz_left,
+                        R.drawable.iz_right,
+                        R.drawable.iz_delete,
                         R.drawable.iz_cancel
                       };
 
@@ -184,7 +185,7 @@ public class ShotWindow extends Activity
 
   private RelativeLayout mFooter = null;
   private Button[] mButtonF;
-  private int mNrButtonF = 3;
+  private int mNrButtonF = 4;
 
   public void setRefAzimuth( float azimuth, long fixed_extend )
   {
@@ -1179,11 +1180,59 @@ public class ShotWindow extends Activity
         }
         clearMultiSelect( );
         mList.invalidate();
+      } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // DELETE
+        askMultiDelete();
       } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // CANCEL
         clearMultiSelect( );
         mList.invalidate();
       }
     }
+  }
+
+  private void askMultiDelete()
+  {
+    Resources res = getResources();
+    TopoDroidAlertDialog.makeAlert( mActivity, res, res.getString(R.string.shots_delete),
+      res.getString(R.string.button_ok), 
+      res.getString(R.string.button_cancel),
+      new DialogInterface.OnClickListener() { // ok handler
+        @Override
+        public void onClick( DialogInterface dialog, int btn ) {
+          doMultiDelete();
+        } },
+      new DialogInterface.OnClickListener() { // cancel handler
+        @Override
+        public void onClick( DialogInterface dialog, int btn ) {
+          clearMultiSelect( );
+          mList.invalidate();
+        } }
+    );
+  }
+
+  void doMultiDelete()
+  {
+    for ( DBlock blk : mDataAdapter.mSelect ) {
+      long id = blk.mId;
+      mApp.mData.deleteShot( id, mApp.mSID, TopoDroidApp.STATUS_DELETED, true ); // forward = true
+      if ( blk != null && blk.type() == DBlock.BLOCK_MAIN_LEG ) {
+        if ( mLeg ) {
+          for ( ++id; ; ++id ) {
+            DBlock b = mApp.mData.selectShot( id, mApp.mSID );
+            if ( b == null || b.type() != DBlock.BLOCK_SEC_LEG ) break;
+            mApp.mData.deleteShot( id, mApp.mSID, TopoDroidApp.STATUS_DELETED, true ); // forward = true
+          }
+        } else { // set station to next leg shot
+          ++id;
+          DBlock b = mApp.mData.selectShot( id, mApp.mSID );
+          if ( b != null && b.type() == DBlock.BLOCK_SEC_LEG ) {
+            mApp.mData.updateShot( id, mApp.mSID, blk.mFrom, blk.mTo, blk.getFullExtend(), blk.mFlag, 0, blk.mComment, true ); // forward = true
+            mApp.mData.updateShotStatus( id, mApp.mSID, 0, true ); // status normal, forward = true
+          }
+        }
+      }
+    }
+    clearMultiSelect( );
+    updateDisplay( ); 
   }
 
   // ------------------------------------------------------------------

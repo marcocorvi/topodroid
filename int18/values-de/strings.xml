@@ -370,6 +370,7 @@
     <!-- UNUSED string name="shot_clino">Neigung</string -->
     <!-- UNUSED string name="shot_compass">Azimut</string -->
     <string name="shot_delete">Messung löschen?</string>
+    <!-- TODO string name="shots_delete">Delete shots ?</string -->
     <!-- TODO string name="shot_check">Mark shot as check-shot?</string -->
     <string name="shot_from">von</string>
     <string name="shot_info">Info</string>

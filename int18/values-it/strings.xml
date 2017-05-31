@@ -359,6 +359,7 @@
     <!-- UNUSED string name="shot_clino">clino</string -->
     <!-- UNUSED string name="shot_compass">bussola</string -->
     <string name="shot_delete">Cancellare la misura?</string>
+    <!-- TODO string name="shots_delete">Delete shots ?</string -->
     <!-- TODO string name="shot_check">Mark shot as check-shot?</string -->
     <string name="shot_from">da</string>
     <string name="shot_info">Scrivi i dati</string>
