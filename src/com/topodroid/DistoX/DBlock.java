@@ -42,6 +42,7 @@ public class DBlock
   View   mView;
   int    mPos;     // position in the list
   int    mVisible; // whether is visible in the list
+  boolean mMultiSelected; // whether the block is in multiselect list
 
   long   mId;
   long   mSurveyId;
@@ -148,6 +149,7 @@ public class DBlock
     mView = null; // view is set by the DBlockAdapter
     mPos  = 0;
     mVisible = View.VISIBLE;
+    mMultiSelected = false;
     mId = 0;
     mSurveyId = 0;
     // mName = "";
@@ -174,6 +176,7 @@ public class DBlock
     mView = null; // view is set by the DBlockAdapter
     mPos  = 0;
     mVisible = View.VISIBLE;
+    mMultiSelected = false;
     mId = 0;
     mSurveyId = 0;
     // mName = "";

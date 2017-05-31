@@ -54,10 +54,14 @@ class ItemSymbol
     mIndex = index;
     mSymbol = symbol;
     mUseText = use_text;
+    int pad = 4;
 
     if ( mType == Symbol.POINT ) {
       sx *= 1.5f; // 2.0f;
       sy *= 1.5f; // 2.0f;
+    } else if ( mType == Symbol.LINE ) {
+      sx *= 2.2f;
+      sy *= 1.7f;
     } else { // if ( mType == Symbol.AREA ) 
       sx *= 2.2f;
       sy *= 1.7f;
@@ -78,7 +82,7 @@ class ItemSymbol
     }
     lllp.setMargins(2,1,2,1);
 
-    mButton   = new ItemButton( context, mSymbol.getPaint(), mSymbol.getPath(), sx, sy );
+    mButton   = new ItemButton( context, mSymbol.getPaint(), mSymbol.getPath(), sx, sy, pad );
     ll.addView( mButton, lllp );
 
     if ( mUseText ) {

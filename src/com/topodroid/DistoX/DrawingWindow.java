@@ -2507,6 +2507,11 @@ public class DrawingWindow extends ItemDrawer
                         } 
                         if ( addline ) {
                           lp1.computeUnitNormal();
+                          if ( mSymbol == Symbol.LINE && BrushManager.mLineLib.isClosed( mCurrentLine ) ) {
+                            // mCurrentLine == lp1.mLineType 
+                            lp1.setClosed( true );
+                            lp1.close();
+                          }
                           mDrawingSurface.addDrawingPath( lp1 );
                         }
                       } else { //  mSymbol == Symbol.AREA
@@ -2632,7 +2637,7 @@ public class DrawingWindow extends ItemDrawer
                       } else { // empty path list
                         Toast.makeText( mActivity, R.string.no_leg_intersection, Toast.LENGTH_SHORT ).show(); 
                       }
-                    } else {
+                    } else { // not section line
                       boolean addline= true;
                       if ( mContinueLine > CONT_NO && mCurrentLine != BrushManager.mLineLib.mLineSectionIndex ) {
                         // Log.v( "DistoX", "[N] try to continue line type " + mCurrentLine );
@@ -2656,6 +2661,11 @@ public class DrawingWindow extends ItemDrawer
                       }
                       if ( addline ) {
                         mCurrentLinePath.computeUnitNormal();
+                        if ( mSymbol == Symbol.LINE && BrushManager.mLineLib.isClosed( mCurrentLine ) ) {
+                          // mCurrentLine == mCurrentLinePath.mLineType
+                          mCurrentLinePath.setClosed( true );
+                          mCurrentLinePath.close();
+                        }
                         mDrawingSurface.addDrawingPath( mCurrentLinePath );
                       }
                     }

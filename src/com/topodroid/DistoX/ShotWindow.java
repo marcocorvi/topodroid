@@ -72,6 +72,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.ListView;
@@ -124,6 +125,12 @@ public class ShotWindow extends Activity
                         0
                       };
 
+  private static int izonsF[] = {
+                        R.drawable.iz_back,
+                        R.drawable.iz_forw,
+                        R.drawable.iz_cancel
+                      };
+
   private static int menus[] = {
                         R.string.menu_close,
                         R.string.menu_survey,
@@ -174,6 +181,10 @@ public class ShotWindow extends Activity
   int mButtonSize = 42;
   private Button[] mButton1;
   private int mNrButton1 = 0;
+
+  private RelativeLayout mFooter = null;
+  private Button[] mButtonF;
+  private int mNrButtonF = 3;
 
   public void setRefAzimuth( float azimuth, long fixed_extend )
   {
@@ -464,6 +475,24 @@ public class ShotWindow extends Activity
 
   private boolean mSkipItemClick = false;
 
+  private void multiSelect( int pos )
+  {
+    // if ( ! mDataAdapter.isMultiSelect() ) {
+    //   mFooter.setVisibility( View.VISIBLE );
+    // }
+    if ( mDataAdapter.multiSelect( pos ) ) {
+      mFooter.setVisibility( View.VISIBLE );
+    } else {
+      mFooter.setVisibility( View.GONE );
+    }
+  }
+
+  private void clearMultiSelect( )
+  {
+    mDataAdapter.clearMultiSelect( );
+    mFooter.setVisibility( View.GONE );
+  }
+
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
@@ -477,6 +506,11 @@ public class ShotWindow extends Activity
       return;
     }
     if ( closeMenu() ) return;
+
+    if ( mDataAdapter.isMultiSelect() ) {
+      multiSelect( pos );
+      return;
+    }
 
     // TDLog.Log( TDLog.LOG_INPUT, "ShotWindow onItemClick id " + id);
     DBlock blk = mDataAdapter.get(pos);
@@ -506,6 +540,9 @@ public class ShotWindow extends Activity
     // onBlockLongClick( blk );
     if ( blk.isSplay() ) {
       highlightBlock( blk );
+    } else {
+      // Log.v("DistoX", "multi select " + pos );
+      multiSelect( pos );
     }
     return true;
   }
@@ -769,7 +806,8 @@ public class ShotWindow extends Activity
   // private Button mButtonHelp;
   HorizontalListView mListView;
   HorizontalButtonView mButtonView1;
-  HorizontalButtonView mButtonView2;
+  HorizontalListView mFootList;
+  HorizontalButtonView mFooterView;
   ListView   mMenu = null;
   Button     mImage;
   // HOVER
@@ -813,7 +851,9 @@ public class ShotWindow extends Activity
     mDataAdapter = new DBlockAdapter( this, this, R.layout.dblock_row, new ArrayList<DBlock>() );
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
+    mFootList = (HorizontalListView) findViewById(R.id.footlist);
     mButtonSize = mApp.setListViewHeight( mListView );
+    mButtonSize = mApp.setListViewHeight( mFootList );
 
     Resources res = getResources();
     mNrButton1 = TDSetting.mLevelOverNormal ? 8 : ( TDSetting.mLevelOverBasic ? 6 : 5 );
@@ -838,11 +878,21 @@ public class ShotWindow extends Activity
       mButton1[ BTN_PLOT ].setOnLongClickListener( this );
     }
 
+    mButtonF = new Button[ mNrButtonF ];
+    for ( int k=0; k<mNrButtonF; ++k ) {
+      mButtonF[k] = MyButton.getButton( this, this, izonsF[k] );
+    }
+
     TDAzimuth.resetRefAzimuth( 90 );
     // setRefAzimuthButton( ); // called by mApp.resetRefAzimuth
 
     mButtonView1 = new HorizontalButtonView( mButton1 );
+    mFooterView  = new HorizontalButtonView( mButtonF );
     mListView.setAdapter( mButtonView1.mAdapter );
+    mFootList.setAdapter( mFooterView.mAdapter );
+
+    mFooter = (RelativeLayout)findViewById( R.id.footer );
+    mFooter.setVisibility( View.GONE );
 
     mList = (ListView) findViewById(R.id.list);
     mList.setAdapter( mDataAdapter );
@@ -1071,6 +1121,7 @@ public class ShotWindow extends Activity
       Intent intent;
 
       int k1 = 0;
+      int kf = 0;
       // int k2 = 0;
       if ( k1 < mNrButton1 && b == mButton1[k1++] ) {        // DOWNLOAD
         if ( mApp.mDevice != null ) {
@@ -1114,6 +1165,23 @@ public class ShotWindow extends Activity
             (new AzimuthDialDialog( mActivity, this, TDAzimuth.mRefAzimuth, mBMdial )).show();
           }
         }
+      } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // LEFT
+        for ( DBlock blk : mDataAdapter.mSelect ) {
+          blk.setExtend( DBlock.EXTEND_LEFT );
+          mApp.mData.updateShotExtend( blk.mId, mApp.mSID, DBlock.EXTEND_LEFT, true );
+        }
+        clearMultiSelect( );
+        mList.invalidate();
+      } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // RIGHT
+        for ( DBlock blk : mDataAdapter.mSelect ) {
+          blk.setExtend( DBlock.EXTEND_RIGHT );
+          mApp.mData.updateShotExtend( blk.mId, mApp.mSID, DBlock.EXTEND_RIGHT, true );
+        }
+        clearMultiSelect( );
+        mList.invalidate();
+      } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // CANCEL
+        clearMultiSelect( );
+        mList.invalidate();
       }
     }
   }

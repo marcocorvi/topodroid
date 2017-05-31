@@ -66,6 +66,14 @@ public class ItemButton extends Button
     reset( paint, path, sx, sy );
   }
 
+  public ItemButton(Context context, Paint paint, Path path, float sx, float sy, int pad )
+  {
+    super(context);
+    setBackgroundColor( TDColor.BLACK );
+    setPadding(pad, pad, pad, pad );
+    reset( paint, path, sx, sy );
+  }
+
   public void reset(Paint paint, Path path, float sx, float sy )
   {
     setMinimumWidth( (int)(40*sx) );

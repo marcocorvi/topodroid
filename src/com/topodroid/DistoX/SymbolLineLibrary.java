@@ -51,6 +51,8 @@ class SymbolLineLibrary extends SymbolLibrary
 
   boolean isStyleStraight( int k ) { return ( k < 0 || k >= mSymbolNr )? true : ((SymbolLine)mSymbols.get(k)).mStyleStraight; }
 
+  boolean isClosed( int k ) { return ( k < 0 || k >= mSymbolNr )? false : ((SymbolLine)mSymbols.get(k)).mClosed; }
+
   int getStyleX( int k ) { return ( k < 0 || k >= mSymbolNr )? 1 : ((SymbolLine)mSymbols.get(k)).mStyleX; }
 
   String getLineGroup( int k ) { return ( k < 0 || k >= mSymbolNr )? null : ((SymbolLine)mSymbols.get(k)).mGroup; }

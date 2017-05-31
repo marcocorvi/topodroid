@@ -39,6 +39,7 @@ public class SymbolLine extends Symbol
   boolean mHasEffect;
   Path mPath;
   boolean mStyleStraight;
+  boolean mClosed;
   int mStyleX;            // X times (one out of how many point to use)
   String mGroup;          // group of this line (null if no group)
 
@@ -95,6 +96,7 @@ public class SymbolLine extends Symbol
     mRevPaint = new Paint (mPaint );
     mHasEffect = false;
     mStyleStraight = false;
+    mClosed = false;
     mStyleX = 1;
   }
 
@@ -102,6 +104,7 @@ public class SymbolLine extends Symbol
   {
     super( null, fname );
     mStyleStraight = false;
+    mClosed = false;
     mStyleX = 1;
     readFile( filepath, locale, iso );
     makePath();
@@ -199,6 +202,11 @@ public class SymbolLine extends Symbol
   	    if ( k < s ) {
   	      group = vals[k];
   	    }
+  	  } else if ( vals[k].equals("closed") ) {
+  	    ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	    if ( k < s && vals[k].equals("yes") ) {
+              mClosed = true;
+            }
           } else if ( vals[k].equals("csurvey") ) {
             // syntax: 
             //    csurvey <layer> <type> <category> <pen>
