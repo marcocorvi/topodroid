@@ -222,7 +222,7 @@
 <!-- ERRORS: MISSING SOMETHING -->
     <string name="no_bt">Bluetooth nicht aktiv</string>
     <string name="no_calib">Keine Kalibrierung</string>
-    <!-- TODO string name="no_calib_check">No calibration-check shot</string -->
+    <string name="no_calib_check">Keine Kalibrierungs-Testmessung</string>
     <string name="no_calibration">Keine Kalibrierung gewählt</string>
     <string name="no_capture_app">Keine Kamera-App vorhanden</string>
     <string name="no_cave3d">Cave3D nicht installiert</string>
@@ -260,7 +260,7 @@
     <string name="menu_attach">VERBINDEN</string>
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
-    <!-- TODO string name="menu_calib_check">CALIBR. CHECK</string -->
+    <string name="menu_calib_check">KALIB. TEST</string>
     <string name="menu_close">SCHLIEßEN</string>
     <string name="menu_delete">LÖSCHEN</string>
     <string name="menu_detach">TRENNEN</string>
@@ -371,7 +371,7 @@
     <!-- UNUSED string name="shot_compass">Azimut</string -->
     <string name="shot_delete">Messung löschen?</string>
     <!-- TODO string name="shots_delete">Delete shots ?</string -->
-    <!-- TODO string name="shot_check">Mark shot as check-shot?</string -->
+    <string name="shot_check">Messung als Kalibrierungstest markieren?</string>
     <string name="shot_from">von</string>
     <string name="shot_info">Info</string>
     <!-- UNUSED string name="shot_length">Länge</string -->
@@ -411,10 +411,10 @@
     <string name="toggle_failed">Fehler beim Kalibrierungsmodus-Wechsel</string>
     <string name="toggle_ok">Kalibrierungsmodus gewechselt</string>
     <string name="undelete_text">Tippen Sie um wiederherzustellen</string>
-    <!-- TODO string name="undelete_shot">Shots</string -->
-    <!-- TODO string name="undelete_overshoot">Overshoots</string -->
-    <!-- TODO string name="undelete_check">Checks</string -->
-    <!-- TODO string name="undelete_plot">Sketches</string -->
+    <string name="undelete_shot">Messungen</string>
+    <string name="undelete_overshoot">Zu lange Messungen</string>
+    <string name="undelete_check">Kalibrierungstests</string>
+    <string name="undelete_plot">Skizzen</string>
     <string name="delete_whole_leg">Ganze Messstrecke löschen</string>
     <string name="visible_border">Sichtbare Grenze</string>
     <!-- UNUSED string name="vthreshold">Vertikale Schwelle</string -->
@@ -438,7 +438,7 @@
     <string name="stat_duplicate">Doppelmessungen %1$d %2$.1f %3$s</string>
     <string name="stat_leg">Messstrecke %1$d %2$.1f %3$s</string>
     <string name="stat_length">Länge %1$.1f %2$s</string>
-    <!-- TODO string name="stat_projlen">Plan length %1$.1f %2$s</string -->
+    <string name="stat_projlen">Skizzenlänge %1$.1f %2$s</string>
     <string name="stat_loop">Kreisschlüsse %1$d</string>
     <string name="stat_origin">Ursprungs-Messpunkt: %1$s</string>
     <string name="stat_azimuth">Profilprojektions-Azimut: %1$.1f</string>
@@ -540,7 +540,7 @@
 
     <string name="popup_do_splay">Hilfszug messen</string>
     <string name="popup_do_leg">Messzug messen (n Messungen)</string>
-    <!-- TODO string name="popup_do_gm_data">Calib. shot</string -->
+    <string name="popup_do_gm_data">Testmessung</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Importieren</string>
@@ -613,7 +613,7 @@
     <!-- UNUSED string name="help_manual">Handbuch</string -->
     <string name="help_measure">Entfernungen messen</string>
 
-    <!-- TODO string name="help_calib_check">Calibration-check shots</string -->
+    <string name="help_calib_check">Testmessungen</string>
     <string name="help_close">Fenster schließen</string>
     <string name="help_coeff">Kalibrierungs-Koeffizienten zeigen</string>
     <string name="help_continue">Linien fortsetzen</string>
@@ -724,7 +724,7 @@
     <string name="title_azimut">Seitenriss-Azimut</string>
     <string name="title_audio">Audio-Kommentar</string>
     <string name="title_calib">Kalibrierung</string>
-    <!-- TODO string name="title_calib_check">Calibration-check shots</string -->
+    <string name="title_calib_check">Kalibrierungs-Testmessungen</string>
     <string name="title_coverage">Kalibrierungsdaten</string>
     <string name="title_coeff">Kalibrierungs-Koeffizienten</string>
     <string name="title_contour">Konturen</string>

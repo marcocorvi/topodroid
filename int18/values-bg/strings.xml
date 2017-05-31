@@ -428,7 +428,7 @@
     <string name="stat_duplicate">Дублирани отсечки %1$d %2$.1f %3$s</string>
     <string name="stat_leg">Отсечки %1$d %2$.1f %3$s</string>
     <string name="stat_length">Дължина %1$.1f %2$s</string>
-    <!-- TODO string name="stat_projlen">Plan length %1$.1f %2$s</string -->
+    <string name="stat_projlen">Редуцирана дължина %1$.1f %2$s</string>
     <string name="stat_loop">Полигони %1$d</string>
     <string name="stat_origin">Начален репер: %1$s</string>
     <string name="stat_azimuth">Азимут на проект. разрез: %1$.1f</string>
@@ -525,7 +525,7 @@
 
     <string name="popup_do_splay">Странично измерване</string>
     <string name="popup_do_leg">Отсечка</string>
-    <!-- TODO string name="popup_do_gm_data">Calib. shot</string -->
+    <string name="popup_do_gm_data">Контр. измерване</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Импортиране</string>

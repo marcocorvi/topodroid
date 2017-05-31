@@ -532,7 +532,7 @@
 
     <string name="popup_do_splay">Сделать замер</string>
     <string name="popup_do_leg">Сделать три замера</string>
-    <string name="popup_do_gm_data">Проверочн. Калибр.</string>
+    <string name="popup_do_gm_data">Контроль Калибр.</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Импорт</string>
@@ -603,7 +603,7 @@
     <!-- UNUSED string name="help_manual">Инструкция</string -->
     <string name="help_measure">Измерить расстояния</string>
     
-    <string name="help_calib_check">Замеры проверки-калибровки</string>
+    <string name="help_calib_check">Контрольные замеры</string>
     <string name="help_close">Закрыть Окно</string>
     <string name="help_coeff">Показать коэффициенты калибровки</string>
     <string name="help_continue">Продолжить рисовать линию</string>
@@ -712,7 +712,7 @@
     <string name="title_azimut">Направление развёртки</string>
     <string name="title_audio">Аудио заметка</string>
     <string name="title_calib">Калибровки</string>
-    <string name="title_calib_check">Замеры проверки-калибровки</string>
+    <string name="title_calib_check">Замеры контроля калибровки</string>
     <string name="title_coverage">Калибровка и распределение данных</string>
     <string name="title_coeff">Калибровочные коэффициенты</string>
     <string name="title_contour">Контур</string>
@@ -1135,13 +1135,13 @@
   <!-- UNUSED string name="line_normal">нормальный</string -->
   <!-- UNUSED string name="line_coarse">грубый</string -->
   <!-- UNUSED string name="units_ddmmss">ddmmss</string -->
-  <!-- UNUSED string name="units_dd">degrees</string -->
-  <!-- UNUSED string name="units_grads">grads</string -->
-  <!-- UNUSED string name="units_meters">meters</string -->
-  <!-- UNUSED string name="units_feet">feet</string -->
-  <!-- UNUSED string name="alt_wgs">ellipsoid</string -->
-  <!-- UNUSED string name="alt_ortho">orthometric</string -->
-  <!-- UNUSED string name="splay_extend">estimate splay extend</string -->
+  <!-- UNUSED string name="units_dd">градусы</string -->
+  <!-- UNUSED string name="units_grads">грады</string -->
+  <!-- UNUSED string name="units_meters">метры</string -->
+  <!-- UNUSED string name="units_feet">футы</string -->
+  <!-- UNUSED string name="alt_wgs">элипсоид</string -->
+  <!-- UNUSED string name="alt_ortho">ортометрическая</string -->
+  <!-- UNUSED string name="splay_extend">вычислять развертку сплеев</string -->
 
     <string name="welcome_title">TopoDroid %1$s</string>
 
