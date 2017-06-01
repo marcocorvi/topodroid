@@ -183,7 +183,7 @@ public class ShotWindow extends Activity
   private Button[] mButton1;
   private int mNrButton1 = 0;
 
-  private RelativeLayout mFooter = null;
+  // private RelativeLayout mFooter = null;
   private Button[] mButtonF;
   private int mNrButtonF = 4;
 
@@ -482,16 +482,19 @@ public class ShotWindow extends Activity
     //   mFooter.setVisibility( View.VISIBLE );
     // }
     if ( mDataAdapter.multiSelect( pos ) ) {
-      mFooter.setVisibility( View.VISIBLE );
+      // mFooter.setVisibility( View.VISIBLE );
+      mListView.setAdapter( mFooterView.mAdapter );
     } else {
-      mFooter.setVisibility( View.GONE );
+      // mFooter.setVisibility( View.GONE );
+      mListView.setAdapter( mButtonView1.mAdapter );
     }
   }
 
   private void clearMultiSelect( )
   {
     mDataAdapter.clearMultiSelect( );
-    mFooter.setVisibility( View.GONE );
+    // mFooter.setVisibility( View.GONE );
+    mListView.setAdapter( mButtonView1.mAdapter );
   }
 
   @Override 
@@ -807,7 +810,7 @@ public class ShotWindow extends Activity
   // private Button mButtonHelp;
   HorizontalListView mListView;
   HorizontalButtonView mButtonView1;
-  HorizontalListView mFootList;
+  // HorizontalListView mFootList;
   HorizontalButtonView mFooterView;
   ListView   mMenu = null;
   Button     mImage;
@@ -852,9 +855,9 @@ public class ShotWindow extends Activity
     mDataAdapter = new DBlockAdapter( this, this, R.layout.dblock_row, new ArrayList<DBlock>() );
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
-    mFootList = (HorizontalListView) findViewById(R.id.footlist);
+    // mFootList = (HorizontalListView) findViewById(R.id.footlist);
     mButtonSize = mApp.setListViewHeight( mListView );
-    mButtonSize = mApp.setListViewHeight( mFootList );
+    // mButtonSize = mApp.setListViewHeight( mFootList );
 
     Resources res = getResources();
     mNrButton1 = TDSetting.mLevelOverNormal ? 8 : ( TDSetting.mLevelOverBasic ? 6 : 5 );
@@ -890,10 +893,10 @@ public class ShotWindow extends Activity
     mButtonView1 = new HorizontalButtonView( mButton1 );
     mFooterView  = new HorizontalButtonView( mButtonF );
     mListView.setAdapter( mButtonView1.mAdapter );
-    mFootList.setAdapter( mFooterView.mAdapter );
+    // mFootList.setAdapter( mFooterView.mAdapter );
 
-    mFooter = (RelativeLayout)findViewById( R.id.footer );
-    mFooter.setVisibility( View.GONE );
+    // mFooter = (RelativeLayout)findViewById( R.id.footer );
+    // mFooter.setVisibility( View.GONE );
 
     mList = (ListView) findViewById(R.id.list);
     mList.setAdapter( mDataAdapter );

@@ -33,7 +33,11 @@
     </LinearLayout>
   </RelativeLayout>
 
-  <RelativeLayout android:id="@+id/footer"
+  <!--
+     THIS IS A SECONDARY BUTTON BAR UNDERNEATH THE TOP ONE. 
+     IT CAN BE SHOWN OR HIDDEN AS NEEDED
+  -->
+  <!-- RelativeLayout android:id="@+id/footer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
@@ -49,7 +53,7 @@
         android:layout_height="50dp"
       />
     </LinearLayout>
-  </RelativeLayout>
+  </RelativeLayout -->
 
   <FrameLayout 
     android:layout_width="match_parent" 

@@ -36,6 +36,7 @@ MAIN WINDOW
 [ ] import top file
 
 [ ] palette button 
+    [ ] verify symbols are properly displayed
     [ ] verify that changes to the global palette affect the drawing tools for the new sketches
 
 [ ] symbol-sets menu
@@ -75,7 +76,8 @@ MAIN WINDOW
     [ ] enter a name of non-existing directory: check it is created and properly populated of subdirs
         this happens also if the cwd is set, the app is shit down, the directory is deleted, the app is restarted
     [ ] enter a name without "topodroid": this must be prepended to the dir name
-    [ ] enter a name with prefix "topodroid": this is not prepended to the dir name It works as expected if the prefix is exactly "TOpoDroid" casa sensitive. (Rodrigo)
+    [ ] enter a name with prefix "topodroid": this is not prepended to the dir name
+         [ ] case insensitive
     [ ] select existing directory
 
 [ ] about menu
@@ -172,6 +174,7 @@ CALIB DATA WINDOW
     [ ] the button and the title turn red while downloading
     take a few calibration shots and download them
     take more shots, download them: must be added to the list
+[ ] bluetooth to remote control distox (X310 fw >= 2.3)
 [ ] calib-mode toggle (*)
 [ ] group assignment
     [ ] the button turn violet while computing
@@ -226,6 +229,19 @@ SURVEY DATA WINDOW
         [ ] with toporobot policy a new "traverse" is started
     [ ] check it is displayed as hint in the manual shot dialog
     [ ] check it is shown in the saved-stations dialog if opened
+
+[ ] multi-shot selection initiated by long-tap on other than splay
+    [ ] button bar changes
+    [ ] selected shots have grey background
+    [ ] add/remove shots from selection
+    [ ] data continuous download continues during selection
+    [ ] check button actions
+        [ ] set extend LEFT
+        [ ] set extend RIGHT
+        [ ] delete shots
+            [ ] legs are whole-deleted if sec.leg not shown
+            [ ] otherwise sec.leg are deleted only if selected
+        [ ] cancel selection (return to normal buttons)
 
 [ ] sketches
     [ ] add a new sketch: dialog (name + ref. station)
@@ -348,16 +364,22 @@ long tap on splay data
 
 SECONDARY SHOT EDIT DIALOG
 [ ] take a photo
+    [ ] with topodroid camera
+        [ ] check orientation data in the photo exif (photo dialog)
+    [ ] with a camera app
 [ ] take audio comment
-[ ] replay audio comment
-[ ] delete audio comment
-[ ] overwrite audio comment
+    [ ] replay audio comment
+    [ ] delete audio comment
+    [ ] overwrite audio comment
 [ ] take a sensor measurement
 [ ] add a shot before
-    [ ] station hints according to auto-station policy - Apparently I just got the TO BASE value copied to the station field on the new shot. I don think that's exactly whats expected. (Rodrigo)
-[+/-] split survey at the shot (the shot is the first of the new survey) - The shot is the first of the new survey on the shot list but it's not the one listed on the "New survey" dialog, on the field under the "Team" field. (Rodrigo)
+    [ ] station hints according to auto-station policy 
+[+/-] split survey at the shot (the shot is the first of the new survey) 
+    NOTE The shot is the first of the new survey on the shot list but it's not the one listed on the "New survey" dialog, on the field under the "Team" field. (Rodrigo)
 [ ] "delete" the shot (mark it as "deleted")
+    [ ] whole leg-delete checkbox
     [ ] recover shot
+[ ] calib-check
 [ ] add LRUD at FROM station
     [ ] check that left/right are to the shot direction
     [ ] check shot list is immediately updated
@@ -368,6 +390,8 @@ SECONDARY SHOT EDIT DIALOG
 [ ] survey info menu
 [ ] recover deleted items: the dialog must show
     [ ] deleted shot(s)
+    [ ] overshoots
+    [ ] calib-checks
     [ ] deleted sketch(es) [only plan/extended, no x-sections]
     [ ] toast message if there is nothing to recover
 [ ] view photos
@@ -403,15 +427,19 @@ SURVEY INFO WINDOWS
     [ ] ZIP
         [ ] default data export format is updated (if defined)
     [ ] Compass
+    [ ] cSurvey
+        [ ] with calib-check shots
+    [ ] GHTopo
+    [ ] Grottolf
     [ ] PocketTopo
     [ ] Polygon
-    [ ] Grottolf
-    [ ] GHTopo
     [ ] Survex
     [ ] Therion
     [ ] Topo
+    [ ] TopoRobot
     [ ] VisualTopo
     [ ] Walls
+    [ ] WinKarst
     [ ] CSV
     [ ] DXF
     [ ] KML
@@ -428,26 +456,28 @@ SURVEY INFO WINDOWS
     [ ] photo directory
     [ ] annotation file
     [ ] records in the database tables
-    [ ] other exports: th, csv, cav, cave, dat, dxf, grt, gtx, plt, kml, sxv, svr, top, tro, csx, png, svg
+    [ ] other exports: th, csv, cav, cave, dat, dxf, grt, gtx, plt, kml, sxv, sur, svr, top, trb, tro, csx, png, svg
 *** IMPORTANT sketch backups are not renamed
 
 [ ] delete the survey: check that all the related files are deleted
     [ ] data exports must be deleted
-        [ ] compass
-        [ ] cSurvey
-        [ ] PocketTopo
-        [ ] Polygon
-        [ ] Survex
-        [ ] Grottolf
-        [ ] GHTopo
-        [ ] Therion
-        [ ] Topo
-        [ ] VisualTopo
-        [ ] Walls
-        [ ] CSV
-        [ ] DXF
-        [ ] KML
-        [ ] Track file
+        [ ] dat compass 
+        [ ] csx cSurvey
+        [ ] gtx GHTopo
+        [ ] grt Grottolf
+        [ ] top PocketTopo
+        [ ] cave Polygon
+        [ ] svx Survex
+        [ ] th  Therion
+        [ ] cav Topo
+        [ ] trb TopoRobot
+        [ ] tro VisualTopo
+        [ ] svx Walls
+        [ ] sur WinKarst
+        [ ]     CSV
+        [ ]     DXF
+        [ ]     KML
+        [ ]     Track file
     [ ] sketch files and backup must be deleted
         [ ] tdr
     [ ] sketch exports must be deleted
@@ -462,6 +492,7 @@ SURVEY INFO WINDOWS
     [ ] verify that following manually entered shots are affected accordingly 
         the values registered in the db are those entered in the dialog subtracted the calibrations
         NOTE LRUD are affected only in the angles
+[ ] calib-check shots dialog
 [ ] settings
 [ ] help strings
 
@@ -542,6 +573,8 @@ SKETCH WINDOW
       [ ] [ ] [ ] PNG
       [ ] [ ] [ ] DXF
       [ ] [ ] [ ] SVG
+    [ ] dxf export has x-sections if setting "x-section point" is set
+    [ ] svg export has x-sections if setting "x-section point" is set
 [ ] default export format: check they are exported and there is no toast message
     [ ] are properly exported in either plan, or profile, or x-section
       [ ] [ ] [ ] Therion
@@ -578,6 +611,7 @@ SKETCH WINDOW
 
 recent symbol picker
 [ ] tools remain consistent on a per-directory basis
+[ ] tool icons properly displayed
 [ ] tap select item
 [ ] long tap brings item in front
 [ ] orientation is active iff first point is orientable
@@ -585,6 +619,7 @@ recent symbol picker
 [ ] number of symbols (setting)
 
 list/grid symbol picker
+[ ] tool icons properly displayed
 [ ] selection of item
 [ ] tab switch
 [ ] orientation is active iff first point is orientable
@@ -592,6 +627,7 @@ list/grid symbol picker
 [ ] close picks the last selection
 
 triple-grid symbol picker
+[ ] tool icons properly displayed
 [ ] double-tap is select confirm
 [ ] close picks the last selection
 
@@ -637,7 +673,7 @@ triple-grid symbol picker
     [ ] check that moving a selected point transfer to the proper bucket:
         move the point a lot and it must be "selectable" again
 [ ] orientable point can be rotated with side-drag
-[ ] line/area point removed with ong-tap on delete button
+[ ] line/area point removed with long-tap on delete button
 [ ] select a line/area point and change it (possible its CP's)
 [ ] select a cluster of points: move among them with '<' '>'
 [ ] pointwise actions
@@ -711,14 +747,18 @@ IMPORT-EXPORT
     [ ] "station" command
     [ ] "flag" command
     [ ] "units" are properly handled
+    [ ] "dimension" are ignored
 
 survey data export
 [ ] compass
     [ ] check effect of LRUD-shot angle threshold
+[ ] csurvey
+    [ ] calib-check shots (comments)
 [ ] survex
     [ ] splays with '-' or with "auto-stations"
     [ ] line termination lf/nl or nl
     [ ] "units" agree with user settings
+    [ ] optional LRUD (setting)
 [ ] walls
     [ ] "units" agree with user settings
 [ ] therion
@@ -726,7 +766,9 @@ survey data export
     [ ] "mark" (fixed/painted stations)
     [ ] "station"
     [ ] "units" agree with user settings
+    [ ] calib-check shots (comments)
     [ ] map command before or after centerline (setting)
+    [ ] optional LRUD as "dimension" (setting)
 [ ] vtopo
     [ ] check effect of LRUD-shot angle threshold
     [ ] "Trou" with coords and "Entree" if there is a fixed

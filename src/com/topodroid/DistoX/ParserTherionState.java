@@ -44,6 +44,8 @@ public class ParserTherionState
   String mSuffix;
   int mSurveyLevel;
 
+  int data_type;
+
   public ParserTherionState()
   {
     mUnitLen = 1.0f;
@@ -72,6 +74,7 @@ public class ParserTherionState
     in_scrap = false;
     in_line = false;
     in_area = false;
+    data_type = 0; // DATA_NONE
   }
 
   public ParserTherionState( ParserTherionState state )
@@ -110,6 +113,7 @@ public class ParserTherionState
     in_scrap = state.in_scrap;
     in_line = state.in_line;
     in_area = state.in_area;
+    data_type = state.data_type;
   }
 
 }

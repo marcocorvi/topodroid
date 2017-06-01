@@ -27,6 +27,16 @@ import android.util.Log;
 public class ParserTherion
 {
   final static String EMPTY = "";
+
+  final static int DATA_NONE       = 0;
+  final static int DATA_NORMAL     = 1;
+  final static int DATA_TOPOFIL    = 2;
+  final static int DATA_CARTESIAN  = 3;
+  final static int DATA_CYLPOLAR   = 4;
+  final static int DATA_DIVING     = 5;
+  final static int DATA_DIMENSION  = 6;
+  final static int DATA_NOSURVEY   = 7;
+
   public String mName = null;  // survey name
   public String mDate = null;  // survey date
   public String mTeam = "";
@@ -543,6 +553,7 @@ public class ParserTherion
               } else if ( cmd.equals("data") ) {
                 // data normal from to length compass clino ...
                 if ( vals[1].equals("normal") ) {
+                  state.data_type = DATA_NORMAL;
                   jFrom = jTo = jLength = jCompass = jClino = -1;
                   jLeft = jUp = jRight  = jDown = -1;
                   int j0 = 0;
@@ -571,73 +582,83 @@ public class ParserTherion
                   }
                   state.in_data = (jFrom >= 0) && (jTo >= 0) && (jLength >= 0) && (jCompass >= 0) && (jClino >= 0);
                 // TODO other style syntax
-                // } else if ( vals[1].equals("topofil") ) {
-                // } else if ( vals[1].equals("diving") ) {
-                // } else if ( vals[1].equals("cartesian") ) {
-                // } else if ( vals[1].equals("cylpolar") ) {
-                // } else if ( vals[1].equals("dimensions") ) {
-                // } else if ( vals[1].equals("nosurvey") ) {
+                } else if ( vals[1].equals("topofil") ) {
+                  state.data_type = DATA_TOPOFIL;
+                } else if ( vals[1].equals("diving") ) {
+                  state.data_type = DATA_DIVING;
+                } else if ( vals[1].equals("cartesian") ) {
+                  state.data_type = DATA_CARTESIAN;
+                } else if ( vals[1].equals("cylpolar") ) {
+                  state.data_type = DATA_CYLPOLAR;
+                } else if ( vals[1].equals("dimensions") ) {
+                  state.data_type = DATA_DIMENSION;
+                } else if ( vals[1].equals("nosurvey") ) {
+                  state.data_type = DATA_NOSURVEY;
+                } else {
+                  state.data_type = DATA_NONE;
                 }
               } else if ( state.in_data && vals_len >= 5 ) {
-                // FIXME
-                try {
-                  int sz = vals.length;
-                  String from = vals[jFrom];
-                  String to   = vals[jTo];
-                  float len  = Float.parseFloat( vals[jLength] );
-                  float ber  = Float.parseFloat( vals[jCompass] );
-                  float cln  = Float.parseFloat( vals[jClino] );
+                if ( state.data_type == DATA_NORMAL ) {
+                  try {
+                    int sz = vals.length;
+                    String from = vals[jFrom];
+                    String to   = vals[jTo];
+                    float len  = Float.parseFloat( vals[jLength] );
+                    float ber  = Float.parseFloat( vals[jCompass] );
+                    float cln  = Float.parseFloat( vals[jClino] );
 
-                  len = state.mZeroLen + (len*state.mUnitLen) / state.mScaleLen;
-                  if ( mApplyDeclination ) {
-                    ber = state.mZeroBer + (ber*state.mUnitBer + state.mDeclination) / state.mScaleBer;
-                  } else {
-                    ber = state.mZeroBer + (ber*state.mUnitBer) / state.mScaleBer;
-                  }
-                  cln = state.mZeroCln + (cln*state.mUnitCln) / state.mScaleCln;
+                    len = state.mZeroLen + (len*state.mUnitLen) / state.mScaleLen;
+                    if ( mApplyDeclination ) {
+                      ber = state.mZeroBer + (ber*state.mUnitBer + state.mDeclination) / state.mScaleBer;
+                    } else {
+                      ber = state.mZeroBer + (ber*state.mUnitBer) / state.mScaleBer;
+                    }
+                    cln = state.mZeroCln + (cln*state.mUnitCln) / state.mScaleCln;
 
-                  float dist, b;
-                  if ( jLeft >= 0 && jLeft < sz ) {
-                    dist = Float.parseFloat( vals[jLeft] ) * state.mUnitLeft / state.mScaleLeft;
-                    b = ber - 90; if ( b < 0 ) b += 360;
-                    shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, EMPTY,
-                               dist, b, 0, 0.0f, state.mExtend, state.mDuplicate, state.mSurface, false, "" ) );
-                  }
-                  if ( jRight >= 0 && jRight < sz ) {
-                    dist = Float.parseFloat( vals[jRight] ) * state.mUnitRight / state.mScaleRight;
-                    b = ber + 90; if ( b >= 360 ) b -= 360;
-                    shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, EMPTY,
-                               dist, b, 0, 0.0f, state.mExtend, state.mDuplicate, state.mSurface, false, "" ) );
-                  }
-                  if ( jUp >= 0 && jUp < sz ) {
-                    dist = Float.parseFloat( vals[jUp] ) * state.mUnitUp / state.mScaleUp;
-                    shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, EMPTY,
-                               dist, 0, 90, 0.0f, state.mExtend, state.mDuplicate, state.mSurface, false, "" ) );
-                  }
-                  if ( jDown >= 0 && jDown < sz ) {
-                    dist = Float.parseFloat( vals[jDown] ) * state.mUnitDown / state.mScaleDown;
-                    shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, EMPTY,
-                               dist, 0, -90, 0.0f, state.mExtend, state.mDuplicate, state.mSurface, false, "" ) );
-                  }
+                    float dist, b;
+                    if ( jLeft >= 0 && jLeft < sz ) {
+                      dist = Float.parseFloat( vals[jLeft] ) * state.mUnitLeft / state.mScaleLeft;
+                      b = ber - 90; if ( b < 0 ) b += 360;
+                      shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, EMPTY,
+                                 dist, b, 0, 0.0f, state.mExtend, state.mDuplicate, state.mSurface, false, "" ) );
+                    }
+                    if ( jRight >= 0 && jRight < sz ) {
+                      dist = Float.parseFloat( vals[jRight] ) * state.mUnitRight / state.mScaleRight;
+                      b = ber + 90; if ( b >= 360 ) b -= 360;
+                      shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, EMPTY,
+                                 dist, b, 0, 0.0f, state.mExtend, state.mDuplicate, state.mSurface, false, "" ) );
+                    }
+                    if ( jUp >= 0 && jUp < sz ) {
+                      dist = Float.parseFloat( vals[jUp] ) * state.mUnitUp / state.mScaleUp;
+                      shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, EMPTY,
+                                 dist, 0, 90, 0.0f, state.mExtend, state.mDuplicate, state.mSurface, false, "" ) );
+                    }
+                    if ( jDown >= 0 && jDown < sz ) {
+                      dist = Float.parseFloat( vals[jDown] ) * state.mUnitDown / state.mScaleDown;
+                      shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, EMPTY,
+                                 dist, 0, -90, 0.0f, state.mExtend, state.mDuplicate, state.mSurface, false, "" ) );
+                    }
 
-                  // TODO add shot
-                  if ( to.equals("-") || to.equals(".") ) { // splay shot
-                    // from = from + "@" + path;
-                    // FIXME splays
-                    shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, EMPTY,
-                                          len, ber, cln, 0.0f,
-                                          state.mExtend, state.mDuplicate, state.mSurface, false, "" ) );
-                  } else {
-                    // from = from + "@" + path;
-                    // to   = to + "@" + path;
-                    // Log.v( TopoDroidApp.TAG, "add shot " + from + " -- " + to);
-                    shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, state.mPrefix + to + state.mSuffix,
-                                         len, ber, cln, 0.0f,
-                                         state.mExtend, state.mDuplicate, state.mSurface, false, "" ) );
+                    // TODO add shot
+                    if ( to.equals("-") || to.equals(".") ) { // splay shot
+                      // from = from + "@" + path;
+                      // FIXME splays
+                      shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, EMPTY,
+                                            len, ber, cln, 0.0f,
+                                            state.mExtend, state.mDuplicate, state.mSurface, false, "" ) );
+                    } else {
+                      // from = from + "@" + path;
+                      // to   = to + "@" + path;
+                      // Log.v( TopoDroidApp.TAG, "add shot " + from + " -- " + to);
+                      shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, state.mPrefix + to + state.mSuffix,
+                                           len, ber, cln, 0.0f,
+                                           state.mExtend, state.mDuplicate, state.mSurface, false, "" ) );
+                    }
+                  } catch ( NumberFormatException e ) {
+                    TDLog.Error( "therion parser error: data " + line );
                   }
-                } catch ( NumberFormatException e ) {
-                  TDLog.Error( "therion parser error: data " + line );
                 }
+                // FIXME other data types
               }            
             } else if ( cmd.equals("centerline") || cmd.equals("centreline") ) {
               pushState( state );

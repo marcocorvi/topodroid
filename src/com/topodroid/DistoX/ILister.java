@@ -24,18 +24,27 @@ public interface ILister
    */
   public void refreshDisplay( int nr, boolean toast );
 
-  /** updateBlockList is called by
+  /** 
+   * @param blk data-block from which to update the list
+   *
+   * updateBlockList is called by
    *   - DistoXComm.run()
    *   + updateBlockList( long ) for each class that implements this method
    */
   public void updateBlockList( DBlock blk );
 
-  /** updateBlockList is called by
+  /** 
+   * @param blk_id id (of the data-block) from which to update the list
+   *
+   *  updateBlockList is called by
    *   - ListerHandler.handleMessage LISTER_BLOCK_ID
    */
   public void updateBlockList( long blk_id );
 
-  /** called by
+  /**
+   * @param status   current status ( 0: off,  1: on,  2: wait )A
+   *
+   * called by
    *   - ListerHandler.handleMessage LISTER_STATUS
    *   - TopoDroidApp.notifyStatus() which is called by
    *      - DataDownloader.notifyConnectionStatus()
@@ -48,7 +57,7 @@ public interface ILister
    * ShotWindow: change button[0] background
    * SketchWindow: nothing (TODO)
    */
-  public void setConnectionStatus( int status ); // 0 off, 1 on, 2 wait
+  public void setConnectionStatus( int status ); 
  
   // public void notifyDisconnected();
 

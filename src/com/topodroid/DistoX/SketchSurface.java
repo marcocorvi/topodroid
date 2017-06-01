@@ -1129,6 +1129,7 @@ class SketchSurface extends SketchShot
     computeBorders();
   }
 
+  // POWERCRUST
   void makePowercrustTriangles( Sketch3dInfo info, Powercrust pc )
   {
     // Vector unit = info.shotUnit();    // shot unit-vector

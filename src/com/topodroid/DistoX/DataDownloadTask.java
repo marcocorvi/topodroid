@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date feb 2012
  *
- * @brief TopoDroid one-shot download distoX data
+ * @brief TopoDroid batch data-download task
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -62,7 +62,7 @@ public class DataDownloadTask extends AsyncTask< String, Integer, Integer >
     // TDLog.Log( TDLog.LOG_COMM, "onPostExecute res " + res );
     if ( res != null ) {
       int r = res.intValue();
-      mLister.refreshDisplay( r, true ); 
+      mLister.refreshDisplay( r, true );  // true: toast a message
     }
     mApp.mDataDownloader.setDownload( false );
     mApp.mDataDownloader.notifyConnectionStatus( false );

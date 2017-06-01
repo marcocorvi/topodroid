@@ -395,7 +395,6 @@ public class SketchWindow extends ItemDrawer
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {
-          // doMakeSurfaceDialog( );
           doMakeSurface( );
         }
       }
@@ -2186,15 +2185,14 @@ public class SketchWindow extends ItemDrawer
   
   public void doMakeSurface( )
   {
-    // FIXME CONVEX HULL SURFACE
-    // mModel.makeSurface();
     if ( TDSetting.mSketchModelType == 1 ) {
       mModel.makeSurface( mModel.SURFACE_CONVEX_HULL );
     } else if ( TDSetting.mSketchModelType == 2 ) {
-      Toast.makeText( mActivity, "Powercrust supported only in debug", Toast.LENGTH_SHORT ).show();
-/* if DEBUG
+/* if POWERCRUST */
       mModel.makeSurface( mModel.SURFACE_POWERCRUST );
-*/
+/* else
+      Toast.makeText( mActivity, "Powercrust supported only in debug", Toast.LENGTH_SHORT ).show();
+   endif */
     }
   }
 
@@ -2202,14 +2200,6 @@ public class SketchWindow extends ItemDrawer
   {
     mModel.removeSurface( with_sections );
   }
-
-  // private void doMakeSurfaceDialog( )
-  // {
-  //   // new SketchSurfaceDialog( mSketchSurface.getContext(), this ).show();
-  //   mModel.computeShapeSize();
-  //   new SketchShape( mSketchSurface.getContext(), mModel.mShapeSize, this ).show();
-  // }
-
 
   @Override
   public boolean onSearchRequested()

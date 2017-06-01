@@ -915,8 +915,8 @@
   <string name="pref_prev_next_summary">Prev/Next buttons in the shot dialog</string>
   <string name="pref_mag_anomaly_title">Magnetic Anomaly</string>
   <string name="pref_mag_anomaly_summary">Compensate Local Magnetic Anomaly</string>
-  <string name="pref_azimuth_manual_title">Settable extend reference</string>
-  <string name="pref_azimuth_manual_summary">Settable or fixed extend L/R reference</string>
+  <string name="pref_azimuth_manual_title">Fixed extend reference</string>
+  <string name="pref_azimuth_manual_summary">Fixed R/L or settable extend reference</string>
 
   <string name="pref_team_title">Team</string>
   <string name="pref_team_summary">Surveying team</string>
