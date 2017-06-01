@@ -831,6 +831,7 @@ SEQUENCE OF OPS
         [ ] tro   VisualTopo
     [ ] check that the zip contains the survey notes (txt)
     [ ] check that the zip contains all the survey images (jpg)
+    [ ] check that the zip contains all the survey audio files
     [ ] check that the zip contains all the survey sketches
         [ ] tdr: plan profile and x-sections
         [ ] th2
@@ -842,31 +843,12 @@ SEQUENCE OF OPS
     delete the survey
     [ ] check that all the survey files are deleted and the survey data are cancelled from the database
     import from archive and check to have it all
-      [ ] data in the database and files
-        [ ] cav
-        [ ] cave
-        [ ] csv
-        [ ] csx
-        [ ] dat
-        [ ] tgx
-        [ ] dxf
-        [ ] kml
-        [ ] plt
-        [ ] srv
-        [ ] svx
-        [ ] th
-        [ ] top
-        [ ] tro
+      [ ] data in the database
       [ ] survey notes file (txt)
       [ ] photo directory with jpg files
+      [ ] audio directory with audio files
       [ ] sketch files (including x-sections)
         [ ] tdr: plan profile and x-sections
-        [ ] th2
-        [ ] png
-        [ ] csx
-        [ ] dxf
-        [ ] svg
-        [ ] svg in html
     import the archive on another android
     [ ] check that the survey has been trasferred to the other android
     [ ] import fails if there is a version mismatch

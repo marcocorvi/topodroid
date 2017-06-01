@@ -1036,6 +1036,8 @@
   <string name="pref_zoom_controls_summary">Control de Zoom multitouch</string>
   <string name="pref_side_drag_title">Arrastre lateral</string>
   <string name="pref_side_drag_summary">Habilitar el lado y arrastre en la ventana de dibujo</string>
+  <!-- TODO string name="pref_continue_end_title">Endpoint line-join</string -->
+  <!-- TODO string name="pref_continue_end_summary">Join/continue line using endpoint</string -->
   <string name="pref_unit_grid_title">Unidades de dibujo</string>
   <string name="pref_unit_grid_summary">Tamaño de celda de la cuadrícula del dibujo</string>
   <string name="pref_recent_nr_title">Herramientas utilizadas recientemente</string>

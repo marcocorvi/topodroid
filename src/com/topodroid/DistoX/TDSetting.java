@@ -95,6 +95,7 @@ class TDSetting
     "DISTOX_LINE_ACCURACY",
     "DISTOX_LINE_CORNER",         // 41
     "DISTOX_LINE_STYLE",          // 42
+    "DISTOX_CONTINUE_END",
     "DISTOX_DRAWING_UNIT",        // 43
     "DISTOX_PICKER_TYPE",         // 44
     "DISTOX_HTHRESHOLD",          // UNUSED
@@ -219,8 +220,9 @@ class TDSetting
   static boolean mExportStationsPrefix = false;  // whether to prepend cave name to station in cSurvey/compass export
 
   // static boolean mXTherionAreas = false;
-  static boolean mAutoStations = true; // whether to add stations automatically to scrap therion files
-  static boolean mTherionSplays = true; // whether to add splay segments to auto stations
+  static boolean mAutoStations  = true;  // whether to add stations automatically to scrap therion files
+  static boolean mTherionSplays = true;  // whether to add splay segments to auto stations
+  static boolean mContinueEnd   = false; // whether to try to continue/join lines using endpoint
 
   static float mBitmapScale = 1.5f;
   static float mDxfScale = 1.0f;
@@ -697,6 +699,7 @@ class TDSetting
     mLineAccuracy  = tryFloat( prefs, key[k++], "1" );              // DISTOX_LINE_ACCURACY
     mLineCorner    = tryFloat( prefs, key[k++], "20"  );            // DISTOX_LINE_CORNER
     setLineStyleAndType( prefs.getString( key[k++], LINE_STYLE ) ); // DISTOX_LINE_STYLE
+    mContinueEnd   = prefs.getBoolean( key[k++], false );           // DISTOX_CONTINUE_END
     mUnit          = tryFloat( prefs, key[k++], "1.4" );            // DISTOX_DRAWING_UNIT 
     mPickerType    = tryInt(   prefs, key[k++], "0" );              // DISTOX_PICKER_TYPE choice: 0, 1, 2
     mHThreshold    = tryFloat( prefs, key[k++], "70" );             // DISTOX_HTHRESHOLD
@@ -970,9 +973,11 @@ class TDSetting
       mLineAccuracy = tryFloat( prefs, k, "1" );
     } else if ( k.equals( key[ nk++ ] ) ) {           // DISTOX_LINE_CORNER
       mLineCorner   = tryFloat( prefs, k, "20" );
-    } else if ( k.equals( key[ nk++ ] ) ) {                           // DISTOX_LINE_STYLE
+    } else if ( k.equals( key[ nk++ ] ) ) {                      // DISTOX_LINE_STYLE
       setLineStyleAndType( prefs.getString( k, LINE_STYLE ) );
-    } else if ( k.equals( key[ nk++ ] ) ) {                           // DISTOX_DRAWING_UNIT
+    } else if ( k.equals( key[ nk++ ] ) ) {                      // DISTOX_CONTINUE_END
+      mContinueEnd  = prefs.getBoolean( k, false );        
+    } else if ( k.equals( key[ nk++ ] ) ) {                      // DISTOX_DRAWING_UNIT
       try {
         f = Float.parseFloat( prefs.getString( k, "1.4" ) );
         if ( f > 0 && f != mUnit ) {
@@ -1339,6 +1344,7 @@ class TDSetting
     if ( name.equals( "DISTOX_LINE_ACCURACY"  ) ) return parseFloatValue( value, mLineAccuracy, 0.1f );
     if ( name.equals( "DISTOX_LINE_CORNER"    ) ) return parseFloatValue( value, mLineCorner,   0.1f );
     // if ( name.equals( "DISTOX_LINE_STYLE" ) 
+    // if ( name.equals( "DISTOX_CONTINUE_END" ) 
     // if ( name.equals( "DISTOX_DRAWING_UNIT" )
     // if ( name.equals( "DISTOX_PICKER_TYPE" )
     if ( name.equals( "DISTOX_HTHRESHOLD"     ) ) return parseFloatValue( value, mHThreshold,    0, 90 );

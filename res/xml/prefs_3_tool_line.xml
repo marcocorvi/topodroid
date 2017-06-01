@@ -54,6 +54,13 @@
        android:defaultValue="true"
        />
 
+     <CheckBoxPreference
+       android:key="DISTOX_CONTINUE_END"
+       android:summary="@string/pref_continue_end_summary"
+       android:title="@string/pref_continue_end_title"
+       android:defaultValue="false"
+     />
+
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_LINE_ACCURACY"
        android:title="@string/pref_lineacc_title"

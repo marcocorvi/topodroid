@@ -1029,6 +1029,8 @@
   <string name="pref_zoom_controls_summary">Показване на контролите за приближаване при "мултитъч" екрани</string>
   <string name="pref_side_drag_title">Странично скролиране</string>
   <string name="pref_side_drag_summary">Скролиране с дърпане на страничната част на скицата</string>
+  <!-- TODO string name="pref_continue_end_title">Endpoint line-join</string -->
+  <!-- TODO string name="pref_continue_end_summary">Join/continue line using endpoint</string -->
   <string name="pref_unit_grid_title">Мерни единици на скицата</string>
   <string name="pref_unit_grid_summary">Размер на квадрат от мрежата</string>
   <string name="pref_recent_nr_title">Брой последни инструменти</string>

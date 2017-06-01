@@ -3467,7 +3467,7 @@ public class DataHelper extends DataSetObservable
        if (cursor.moveToFirst()) {
          do {
            pw.format(Locale.US,
-                     "INSERT into %s values( %d, %d, %d, %d, \"%s\", \"%s\", \"%s\" );\n",
+                     "INSERT into %s values( %d, %d, %d, \"%s\" );\n",
                      AUDIO_TABLE,
                      sid,
                      cursor.getLong(0),   // id

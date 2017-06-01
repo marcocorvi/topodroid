@@ -1028,6 +1028,8 @@
   <string name="pref_zoom_controls_summary">Uravnavanje Zoom-a multitouch</string>
   <string name="pref_side_drag_title">Side-drag</string>
   <string name="pref_side_drag_summary">Omogoči side-drag na načrtu</string>
+  <!-- TODO string name="pref_continue_end_title">Endpoint line-join</string -->
+  <!-- TODO string name="pref_continue_end_summary">Join/continue line using endpoint</string -->
   <string name="pref_unit_grid_title">Merska enota skice</string>
   <string name="pref_unit_grid_summary">Dimenzija celic mreže</string>
   <string name="pref_recent_nr_title">Število zadnjih pripomočkov</string>

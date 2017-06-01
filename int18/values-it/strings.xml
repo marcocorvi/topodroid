@@ -1032,6 +1032,8 @@
   <string name="pref_zoom_controls_summary">Regolazioni Zoom su multitouch</string>
   <string name="pref_side_drag_title">Side-drag</string>
   <string name="pref_side_drag_summary">Abilita side-drag sul rilievo</string>
+  <!-- TODO string name="pref_continue_end_title">Endpoint line-join</string -->
+  <!-- TODO string name="pref_continue_end_summary">Join/continue line using endpoint</string -->
   <string name="pref_unit_grid_title">Unità di misura disegno</string>
   <string name="pref_unit_grid_summary">Dimensione celle della griglia</string>
   <string name="pref_recent_nr_title">Numero di strumenti recenti</string>

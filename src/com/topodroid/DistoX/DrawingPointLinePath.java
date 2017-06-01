@@ -79,6 +79,12 @@ public class DrawingPointLinePath extends DrawingPath
     retracePath();
   }
     
+  void moveLastTo( float x, float y )
+  {
+    mLast.mX = x;
+    mLast.mY = y;
+    retracePath();
+  }
 
   @Override
   public void flipXAxis( float z )
