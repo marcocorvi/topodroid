@@ -2,6 +2,7 @@
 name wall_below
 name-pt parede_abaixo
 name-ru нижерасположенная_стена
+name-bg по-ниско_разположена_стена
 th_name wall:below
 group wall
 color 0xcc6600 0x99
