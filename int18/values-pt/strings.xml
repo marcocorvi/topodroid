@@ -217,7 +217,7 @@
 
     <string name="no_bt">Bluetooth indisponível</string>
     <string name="no_calib">Nenhuma calibração</string>
-    <!-- TODO string name="no_calib_check">No calibration-check shot</string -->
+    <string name="no_calib_check">Nenhuma medida de calibração</string>
     <string name="no_calibration">Nenhuma calibração selecionada</string>
     <string name="no_capture_app">Nenhum aplicativo de captura de imagem</string>
     <string name="no_cave3d">Cave3D não instalado</string>
@@ -249,7 +249,7 @@
     <string name="menu_attach">CONECTAR</string>
     <!-- UNUSED string name="menu_attached">Conectado</string -->
     <!-- UNUSED string name="menu_ready">Pronto</string -->
-    <!-- TODO string name="menu_calib_check">CALIBR. CHECK</string -->
+    <string name="menu_calib_check">VERIF. CALIB.</string>
     <string name="menu_close">FECHAR</string>
     <string name="menu_delete">APAGAR</string>
     <string name="menu_detach">DESCONECTAR</string>
@@ -358,8 +358,8 @@
     <!-- UNUSED string name="shot_clino">clinômetro</string -->
     <!-- UNUSED string name="shot_compass">bússola</string -->
     <string name="shot_delete">Apagar visada?</string>
-    <!-- TODO string name="shots_delete">Delete shots ?</string -->
-    <!-- TODO string name="shot_check">Mark shot as check-shot?</string -->
+    <string name="shots_delete">Apagar visadas?</string>
+    <string name="shot_check">Marcar medida como medida de calibração?</string>
     <string name="shot_from">de</string>
     <string name="shot_info">Inserir medida manualmente</string>
     <!-- UNUSED string name="shot_length">comprimento</string -->
@@ -399,10 +399,10 @@
     <string name="toggle_failed">Falha ao alternar a DistoX</string>
     <string name="toggle_ok">Estado de calibração da DistoX trocado</string>
     <string name="undelete_text">Toque no item para restaurá-lo</string>
-    <!-- TODO string name="undelete_shot">Shots</string -->
-    <!-- TODO string name="undelete_overshoot">Overshoots</string -->
-    <!-- TODO string name="undelete_check">Checks</string -->
-    <!-- TODO string name="undelete_plot">Sketches</string -->
+    <string name="undelete_shot">Medidas</string>
+    <string name="undelete_overshoot">Medidas erradas</string>
+    <string name="undelete_check">Verificações</string>
+    <string name="undelete_plot">Croquis</string>
     <string name="delete_whole_leg">Apague este braço inteiro</string>
     <string name="visible_border">borda visível</string>
     <!-- UNUSED string name="vthreshold">limite vertical</string -->
@@ -426,7 +426,7 @@
     <string name="stat_duplicate">Visadas duplicadas %1$d %2$.1f %3$s</string>
     <string name="stat_leg">Visadas %1$d %2$.1f %3$s</string>
     <string name="stat_length">Comprimento %1$.1f %2$s</string>
-    <!-- TODO string name="stat_projlen">Plan length %1$.1f %2$s</string -->
+    <string name="stat_projlen">Comprimento da topo %1$.1f %2$s</string>
     <string name="stat_loop">Anéis %1$d</string>
     <string name="stat_origin">Base inicial: %1$s</string>
     <string name="stat_azimuth">Azimute da projeção do perfil: %1$.1f</string>
@@ -523,7 +523,7 @@
 
     <string name="popup_do_splay">Medida auxiliar</string>
     <string name="popup_do_leg">Visada</string>
-    <!-- TODO string name="popup_do_gm_data">Calib. shot</string -->
+    <string name="popup_do_gm_data">Medida de calibração</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Importar</string>
@@ -595,7 +595,7 @@
     <!-- UNUSED string name="help_manual">Manual do usuário</string -->
     <string name="help_measure">Medir distâncias</string>
     
-    <!-- TODO string name="help_calib_check">Calibration-check shots</string -->
+    <string name="help_calib_check">Medidas de verificação de calibração</string>
     <string name="help_close">Fechar janela</string>
     <string name="help_coeff">Mostrar coeficientes de calibração</string>
     <string name="help_continue">Continuar desenho de uma linha</string>
@@ -704,7 +704,7 @@
     <string name="title_azimut">Referência para retificar perfil</string>
     <string name="title_audio">Áudio comentário</string>
     <string name="title_calib">Calibrações</string>
-    <!-- TODO string name="title_calib_check">Calibration-check shots</string -->
+    <string name="title_calib_check">Medidas de verificação de calibração</string>
     <string name="title_coverage">Distribuição dos dados de calibração</string>
     <string name="title_coeff">Coeficientes de calibração</string>
     <string name="title_contour">Contorno</string>
@@ -1026,8 +1026,8 @@
   <string name="pref_zoom_controls_summary">Controle do zoom em telas multitoque</string>
   <string name="pref_side_drag_title">Arrasto lateral</string>
   <string name="pref_side_drag_summary">Habilitar o arrastamento lateral na área de desenho do croqui</string>
-  <!-- TODO string name="pref_continue_end_title">Endpoint line-join</string -->
-  <!-- TODO string name="pref_continue_end_summary">Join/continue line using endpoint</string -->
+  <string name="pref_continue_end_title">Unir linhas ponto final</string>
+  <string name="pref_continue_end_summary">Unir/continuar linha a partir do último ponto</string>
   <string name="pref_unit_grid_title">Unidades croqui</string>
   <string name="pref_unit_grid_summary">Tamanho dos intervalos na grade do croqui</string>
   <string name="pref_recent_nr_title">Número símbolos recentes</string>
