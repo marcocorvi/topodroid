@@ -1,6 +1,6 @@
 ﻿symbol line
 name wall_below
-name-pt parede abaixo
+name-pt parede_abaixo
 name-ru нижерасположенная_стена
 th_name wall:below
 group wall

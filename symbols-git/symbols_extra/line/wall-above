@@ -1,6 +1,6 @@
 ﻿symbol line
 name wall_above
-name-pt parede acima
+name-pt parede_acima
 name-ru вышерасположенная_стена
 th_name wall:above
 group wall
