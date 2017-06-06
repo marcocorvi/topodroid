@@ -1,6 +1,6 @@
 ﻿symbol line
 name slope_sheer
-name-pt rampa quase vertical
+name-pt rampa_quase_vertical
 name-ru склон_отвесный
 th_name slope:sheer
 group slope
