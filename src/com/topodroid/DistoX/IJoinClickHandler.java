@@ -1,9 +1,9 @@
-/** @file IFilterClickHandler.java
+/** @file IJoinClickHandler.java
  *
  * @author marco corvi
  * @date may 2017
  *
- * @brief TopoDroid filter-click handler interface
+ * @brief TopoDroid join-click handler interface
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -11,8 +11,9 @@
  */
 package com.topodroid.DistoX;
 
-public interface IFilterClickHandler
+public interface IJoinClickHandler
 {
-  void setButtonFilterMode( int filter_mode, int code );
-  boolean dismissPopupFilter();
+  void setButtonJoinMode( int join_mode, int code );
+  boolean dismissPopupJoin();
 }
+

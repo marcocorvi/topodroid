@@ -298,6 +298,19 @@
     <!-- TODO string name="popup_erase_line">Erase lines</string -->
     <!-- TODO string name="popup_erase_area">Erase areas</string -->
 
+    <!-- TODO string name="popup_select_all">Select all</string -->
+    <!-- TODO string name="popup_select_point">Select points</string -->
+    <!-- TODO string name="popup_select_line">Select lines</string -->
+    <!-- TODO string name="popup_select_area">Select areas</string -->
+    <!-- TODO string name="popup_select_shot">Select shots</string -->
+    <!-- TODO string name="popup_select_station">Select stations</string -->
+
+    <!-- TODO string name="popup_cont_none">None</string -->
+    <!-- TODO string name="popup_cont_start">Start point</string -->
+    <!-- TODO string name="popup_cont_end">End point</string -->
+    <!-- TODO string name="popup_cont_both">Both points</string -->
+    <!-- TODO string name="popup_cont_continue">Continue</string -->
+
     <string name="connected_none">Ni povezano</string>
     <string name="connected_already">Že povezano</string>
 
@@ -1028,8 +1041,6 @@
   <string name="pref_zoom_controls_summary">Uravnavanje Zoom-a multitouch</string>
   <string name="pref_side_drag_title">Side-drag</string>
   <string name="pref_side_drag_summary">Omogoči side-drag na načrtu</string>
-  <!-- TODO string name="pref_continue_end_title">Endpoint line-join</string -->
-  <!-- TODO string name="pref_continue_end_summary">Join/continue line using endpoint</string -->
   <string name="pref_unit_grid_title">Merska enota skice</string>
   <string name="pref_unit_grid_summary">Dimenzija celic mreže</string>
   <string name="pref_recent_nr_title">Število zadnjih pripomočkov</string>

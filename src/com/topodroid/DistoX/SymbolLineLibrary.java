@@ -140,11 +140,11 @@ class SymbolLineLibrary extends SymbolLibrary
 
     if ( isSymbolEnabled( fname ) ) return true;
     Symbol symbol = getSymbolByFilename( fname );
+    // APP_SAVE SYMNBOLS
     if ( symbol == null ) {
       // Log.v( TopoDroidApp.TAG, "load missing line " + fname );
       File file = new File( TDPath.APP_SAVE_LINE_PATH + fname );
       if ( ! file.exists() ) return false;
-
       symbol = new SymbolLine( file.getPath(), file.getName(), locale, iso );
       addSymbol( symbol );
     } else {

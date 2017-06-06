@@ -156,11 +156,11 @@ class SymbolPointLibrary extends SymbolLibrary
 
     if ( isSymbolEnabled( fname ) ) return true;
     Symbol symbol = getSymbolByFilename( fname );
+    // APP_SAVE SYMBOLS
     if ( symbol == null ) {
       // Log.v( TopoDroidApp.TAG, "load missing point " + fname );
       File file = new File( TDPath.APP_SAVE_POINT_PATH + fname );
       if ( ! file.exists() ) return false;
-
       symbol = new SymbolPoint( file.getPath(), file.getName(), locale, iso );
       addSymbol( symbol );
     } else {

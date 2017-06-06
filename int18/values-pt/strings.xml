@@ -295,6 +295,19 @@
     <string name="popup_erase_line">Apagar linhas</string>
     <string name="popup_erase_area">Apagar áreas</string>
 
+    <!-- TODO string name="popup_select_all">Select all</string -->
+    <!-- TODO string name="popup_select_point">Select points</string -->
+    <!-- TODO string name="popup_select_line">Select lines</string -->
+    <!-- TODO string name="popup_select_area">Select areas</string -->
+    <!-- TODO string name="popup_select_shot">Select shots</string -->
+    <!-- TODO string name="popup_select_station">Select stations</string -->
+
+    <!-- TODO string name="popup_cont_none">None</string -->
+    <!-- TODO string name="popup_cont_start">Start point</string -->
+    <!-- TODO string name="popup_cont_end">End point</string -->
+    <!-- TODO string name="popup_cont_both">Both points</string -->
+    <!-- TODO string name="popup_cont_continue">Continue</string -->
+
     <string name="connected_none">Não conectado</string>
     <string name="connected_already">Já conectado</string>
 
@@ -1026,8 +1039,6 @@
   <string name="pref_zoom_controls_summary">Controle do zoom em telas multitoque</string>
   <string name="pref_side_drag_title">Arrasto lateral</string>
   <string name="pref_side_drag_summary">Habilitar o arrastamento lateral na área de desenho do croqui</string>
-  <!-- TODO string name="pref_continue_end_title">Endpoint line-join</string -->
-  <!-- TODO string name="pref_continue_end_summary">Join/continue line using endpoint</string -->
   <string name="pref_unit_grid_title">Unidades croqui</string>
   <string name="pref_unit_grid_summary">Tamanho dos intervalos na grade do croqui</string>
   <string name="pref_recent_nr_title">Número símbolos recentes</string>

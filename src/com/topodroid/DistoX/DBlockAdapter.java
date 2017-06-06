@@ -68,13 +68,13 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
           if ( blk.mView != null ) blk.mView.setBackgroundColor( TDColor.GRID );
         }
       } else {
-        // Log.v("DistoX", "start multi select");
         mSelect.add( blk );
         blk.mMultiSelected = true;
         if ( blk.mView != null ) blk.mView.setBackgroundColor( TDColor.GRID );
       }
+    } else {
+      // Log.v("DistoX", "adapter multiselect. null blk. size " + mSelect.size() );
     }
-    // Log.v("DistoX", "adapter multi select " + mSelect.size() );
     return ( mSelect.size() > 0 );
   }
 

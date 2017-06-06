@@ -183,6 +183,7 @@ class SymbolAreaLibrary extends SymbolLibrary
     // if ( locale.equals( "name-es" ) ) iso = "ISO-8859-1";
 
     Symbol symbol = getSymbolByFilename( fname );
+    // APP_SAVE SYMBOLS
     if ( symbol == null ) {
       String filename = TDPath.APP_SAVE_AREA_PATH + fname;
       File file = new File( filename );

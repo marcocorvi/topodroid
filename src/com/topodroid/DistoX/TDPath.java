@@ -251,10 +251,10 @@ public class TDPath
     // FIXME checkDirs( PATH_CCSV );
 
     APP_SYMBOL_PATH  = PATH_DEFAULT + "symbol/";
-    APP_SYMBOL_SAVE_PATH  = APP_SYMBOL_PATH + "save/";
     APP_POINT_PATH  = APP_SYMBOL_PATH + "point/";
     APP_LINE_PATH   = APP_SYMBOL_PATH + "line/";
     APP_AREA_PATH   = APP_SYMBOL_PATH + "area/";
+    APP_SYMBOL_SAVE_PATH  = APP_SYMBOL_PATH + "save/";
     APP_SAVE_POINT_PATH  = APP_SYMBOL_SAVE_PATH + "point/";
     APP_SAVE_LINE_PATH   = APP_SYMBOL_SAVE_PATH + "line/";
     APP_SAVE_AREA_PATH   = APP_SYMBOL_SAVE_PATH + "area/";
@@ -496,10 +496,10 @@ public class TDPath
   static void symbolsCheckDirs()
   {
     checkDirs( APP_SYMBOL_PATH );
-    checkDirs( APP_SYMBOL_SAVE_PATH );
     checkDirs( APP_POINT_PATH );
     checkDirs( APP_LINE_PATH );
     checkDirs( APP_AREA_PATH );
+    checkDirs( APP_SYMBOL_SAVE_PATH );
     checkDirs( APP_SAVE_POINT_PATH );
     checkDirs( APP_SAVE_LINE_PATH );
     checkDirs( APP_SAVE_AREA_PATH );

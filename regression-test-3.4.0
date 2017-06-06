@@ -2,9 +2,9 @@ TopoDroid Regression Tests
 
 This is an incomplete list of things to check 
 
-[ ] install apk over an existing installation and check that it starts
+[x] install apk over an existing installation and check that it starts
     preserving the user preferences - Checked 4 customized configurations (Rodrigo)
-[ ] install apk without existing installation and check it starts
+[x] install apk without existing installation and check it starts
     with default user preferences values
     check that the directory "topodroid" is properly populated
 
@@ -13,43 +13,43 @@ LANGUAGES
 Changed the language setting and confirmed that the language of the configuration windows changed. I can't recognize bg, ru and ua but there are 3 different languages that I don't recognize on the language settings also so I believe they are these 3 ;) (Rodrigo)
 
 MAIN WINDOW
-[ ] activity level
-    [ ] buttons presence according to the "activity-level" - So no change on the main window but I believe that's what's expected for this windows in particular (Rodrigo)
-    [ ] functionalities enabled by the activity-level
+[x] activity level
+    [x] buttons presence according to the "activity-level" - So no change on the main window but I believe that's what's expected for this windows in particular (Rodrigo)
+    [x] functionalities enabled by the activity-level
 [ ] verify that the settings display as for the activity level
-    [ ] level-0 (basic)
+    [x] level-0 (basic)
     [ ] level-1 (normal)
     [ ] level-2 (advanced)
-    [ ] level-3 (experimental)
+    [x] level-3 (experimental)
     [ ] level-4 (complete)
 
-[ ] create a new survey
-[ ] set the "team" option and check it appears in the new survey
-[ ] set the "initial station" setting and check it appears in the new survey
+[x] create a new survey
+[x] set the "team" option and check it appears in the new survey
+[x] set the "initial station" setting and check it appears in the new survey
     [ ] check station cut-n-paste - Tested "station NAME copy-n-paste" (Rodrigo)
-[ ] check the survey name is required
-[ ] check duplicate name not allowed
+[x] check the survey name is required
+[x] check duplicate name not allowed
 
 [ ] import th file
 [ ] import dat file
 [ ] import tro file
 [ ] import top file
 
-[ ] palette button 
-    [ ] verify symbols are properly displayed
+[x] palette button 
+    [x] verify symbols are properly displayed
     [ ] verify that changes to the global palette affect the drawing tools for the new sketches
 
-[ ] symbol-sets menu
-    [ ] insert symbol-set and check new symbol appear in the palette
-    [ ] replace symbol-set and check only new symbol are in the palette
+[x] symbol-sets menu
+    [x] insert symbol-set and check new symbol appear in the palette
+    [x] replace symbol-set and check only new symbol are in the palette
 
 [ ] settings: check the proper navigation in the sub-settings
 [ ] for each setting check:
     [ ] modification with immediate feedback of the new value on the screen
     [ ] bound enforcing (when applicable)
 
-[ ] buttons size. check the button size on all interfaces:
-    [ ] main window
+[x] buttons size. check the button size on all interfaces:
+    [x] main window
     [ ] shot window
     [ ] survey window
     [ ] sketch window
@@ -57,8 +57,8 @@ MAIN WINDOW
     [ ] device window
     [ ] calib window
     [ ] gm-data window - I don't know what window is that. (Rodrigo)
-[ ] text size:
-    [ ] main window: survey list
+[x] text size:
+    [x] main window: survey list
     [ ] shot window: shot data list
     [ ] device window: device list
     [ ] gm-data window: calib data list
@@ -72,41 +72,46 @@ MAIN WINDOW
         Titles:   [ ] es [ ] fr [ ] de [ ] it [ ] cn [ ] bg [ ] ru [ ] ua [ ] sl [ ] pt [ ] hu
         Messages: [ ] es [ ] fr [ ] de [ ] it [ ] cn [ ] bg [ ] ru [ ] ua [ ] sl [ ] pt [ ] hu
     [ ] on changing language the settings are updated to the new language
-[ ] current work directory
+[x] current work directory
     [ ] enter a name of non-existing directory: check it is created and properly populated of subdirs
         this happens also if the cwd is set, the app is shit down, the directory is deleted, the app is restarted
     [ ] enter a name without "topodroid": this must be prepended to the dir name
-    [ ] enter a name with prefix "topodroid": this is not prepended to the dir name
-         [ ] case insensitive
-    [ ] select existing directory
+    [x] enter a name with prefix "topodroid": this is not prepended to the dir name
+         [x] case insensitive
+    [x] select existing directory
 
-[ ] about menu
+[x] about menu
     the about menu in custom language must have the name and email of the translator
     [ ] es  [ ] fr  [ ] de  [ ] it  [ ] cn  [ ] bg  [ ] ru  [ ] ua  [ ] sl  [ ] pt  [-] hu
 
-[ ] help menu: check the quick help strings - Checked on the portuguese translation - Rodrigo
-[ ] sections and pages of the user manual and their navigation/organization
+[x] help menu: check the quick help strings - Checked on the portuguese translation - Rodrigo
+[x] sections and pages of the user manual and their navigation/organization
 [ ] content of the user-manual sections and pages
 [ ] web-link in the user manual
-[ ] in each activity/dialog the MENU button opens the help page
+[x] in each activity/dialog the MENU button opens the help page
 [ ] the "index" refers to *all* the subpages
 
 
 DEVICE WINDOW
-[ ] buttons presence according to the "activity-level"
+[x] buttons presence according to the "activity-level"
 
-[ ] bluetooth reset button
+[x] bluetooth reset button
 [ ] calib-mode toggle button (*)
+    [x] with no device toast message
     [ ] X310 first time on, second time off
     [ ] A3 toggle according to the current state
 [ ] calibration button -> calib-list dialog
+    [x] with no device toast message
 [ ] memory info button -> memory dialog (*)
+    [x] with no device toast message
     [ ] dump data from disto X310
     [ ] dump data from disto A3
     [ ] save data to file
         [ ] "dump" dir must be automatically created
 [ ] calibration coeffs read
+    [x] with no device toast message
 [ ] info button (*)
+    [x] with no device toast message
     [ ] X310
     [ ] A3
 
@@ -114,13 +119,13 @@ DEVICE WINDOW
     forget DistoX from android and scan for it (might need a few trials)
 [ ] pair menu (*)
     pair with the DistoX 
-[ ] disconnect menu: cancel the selected DistoX
-[ ] firmware menu -> firmware dialog
+[x] disconnect menu: cancel the selected DistoX
+[x] firmware menu -> firmware dialog
     [ ] read the DistoX firmware to a file: check the file is in "bin" (*) - Tried to download. The DistoX was apparently sending the firmware to Topodroid for more than 10 minutes when I turned the DistoX off and closed Topodroid. (Rodrigo)
     [ ] upload a new firmware to the DistoX (*)
 
-[ ] settings menu
-    [ ] BT check:
+[x] settings menu
+    [x] BT check:
         [ ] no BT:
         [ ] check BT on start:
     [ ] connection mode
@@ -129,6 +134,7 @@ DEVICE WINDOW
     [ ] auto reconnect
     [ ] socket type
         data download should work with every socket type
+        [x] automatically chosen by the device
     [ ] Z6 workaround
         data download should work with or without it
     [ ] socket delay
@@ -138,9 +144,14 @@ DEVICE WINDOW
         when found select it, try to use it without pairing it before.
     (backup files are not cleared)
         if set, it should be auto-paired, otherwise a pairing notification
-[ ] calibration sub-setting: should open the calib settings
+    [x] delays
+        [ ] data
+        [ ] data ready
+        [ ] laser
+        [ ] shot pause
+[x] calibration sub-setting: should open the calib settings
 
-[ ] help strings
+[x] help strings
 
 
 CALIBRATION DIALOG

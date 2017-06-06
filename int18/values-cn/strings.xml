@@ -294,6 +294,19 @@
     <!-- TODO string name="popup_erase_line">Erase lines</string -->
     <!-- TODO string name="popup_erase_area">Erase areas</string -->
 
+    <!-- TODO string name="popup_select_all">Select all</string -->
+    <!-- TODO string name="popup_select_point">Select points</string -->
+    <!-- TODO string name="popup_select_line">Select lines</string -->
+    <!-- TODO string name="popup_select_area">Select areas</string -->
+    <!-- TODO string name="popup_select_shot">Select shots</string -->
+    <!-- TODO string name="popup_select_station">Select stations</string -->
+
+    <!-- TODO string name="popup_cont_none">None</string -->
+    <!-- TODO string name="popup_cont_start">Start point</string -->
+    <!-- TODO string name="popup_cont_end">End point</string -->
+    <!-- TODO string name="popup_cont_both">Both points</string -->
+    <!-- TODO string name="popup_cont_continue">Continue</string -->
+
     <string name="connected_none">未连接</string>
     <string name="connected_already">已连接</string>
 
@@ -1025,8 +1038,6 @@
   <string name="pref_zoom_controls_summary">多点控制缩放</string>
   <string name="pref_side_drag_title">拖动</string>
   <string name="pref_side_drag_summary">启动草图窗口允许拖动</string>
-  <!-- TODO string name="pref_continue_end_title">Endpoint line-join</string -->
-  <!-- TODO string name="pref_continue_end_summary">Join/continue line using endpoint</string -->
   <string name="pref_unit_grid_title">草图单位</string>
   <string name="pref_unit_grid_summary">草图网格磁村</string>
   <string name="pref_recent_nr_title">最近使用工具数</string>

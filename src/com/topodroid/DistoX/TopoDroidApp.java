@@ -1584,7 +1584,9 @@ public class TopoDroidApp extends Application
           String pathname = TDPath.getSymbolFile( filepath );
           File file = new File( pathname );
           if ( overwrite || ! file.exists() ) {
+            // APP_SAVE SYMBOLS
             if ( file.exists() ) file.renameTo( new File( TDPath.getSymbolSaveFile( filepath ) ) );
+
             TDPath.checkPath( pathname );
             FileOutputStream fout = new FileOutputStream( pathname );
             int c;

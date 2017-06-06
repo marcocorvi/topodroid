@@ -46,4 +46,12 @@ class Drawing
     R.string.popup_select_shot,
     R.string.popup_select_station
   };
+
+  static int[] mJoinModes = {
+    R.string.popup_cont_none,
+    R.string.popup_cont_start,
+    R.string.popup_cont_end,
+    R.string.popup_cont_both,
+    R.string.popup_cont_continue
+  };
 }

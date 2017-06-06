@@ -1794,13 +1794,15 @@ public class DrawingCommandManager
   class NearbySplay
   {
     float dx, dy;
+    float d; // distance from point
     LinePoint pt; // point
     float llen, rlen;
 
-    NearbySplay( float xx, float yy, LinePoint lp )
+    NearbySplay( float xx, float yy, float dd, LinePoint lp )
     {
       dx = xx;
       dy = yy;
+      d  = dd;
       pt = lp;
     }
   }
@@ -1818,6 +1820,7 @@ public class DrawingCommandManager
     DrawingPath item = sp.mItem;
     DrawingLinePath line = (DrawingLinePath)item;
 
+    // nearby splays are the splays that get close enough (dthr) to the line
     ArrayList< NearbySplay > splays = new ArrayList< NearbySplay >();
     for ( DrawingPath fxd : mSplaysStack ) {
       float x = fxd.x2;
@@ -1830,19 +1833,45 @@ public class DrawingCommandManager
           dmin = d;
           lpmin = lp2;
         } else if ( lpmin != null ) { // if distances increase after a good min, break
-          splays.add( new NearbySplay( fxd.x2 - lpmin.mX, fxd.y2 - lpmin.mY, lpmin ) );
+          splays.add( new NearbySplay( fxd.x2 - lpmin.mX, fxd.y2 - lpmin.mY, dmin, lpmin ) );
           break;
         }
       }
     }
-    // Log.v("DistoX", "Nearby splays " + splays.size() );
+    // Log.v("DistoX", "Nearby splays " + splays.size() + " line size " + line.size() );
     int ks = splays.size();
     if ( ks == 0 ) return -3;
+    // check that two splays do not have the same linepoint
+    for ( int k1 = 0; k1 < ks; ) {
+      NearbySplay nbs1 = splays.get( k1 );
+      int dk1 = 1; // increment of k1
+      int k2 = k1+1;
+      while ( k2<ks ) {
+        NearbySplay nbs2 = splays.get( k2 );
+        if ( nbs1.pt == nbs2.pt ) {
+          ks --;
+          if ( nbs1.d <= nbs2.d ) {
+            splays.remove( k2 );
+          } else {
+            splays.remove( k1 );
+            dk1 = 0;
+            break;
+          }
+        } else {
+          k2 ++;
+        }
+      }
+      k1 += dk1;
+    }
+    // Log.v("DistoX", "Nearby splays " + splays.size() + " / " + ks );
 
+    // compute distances between consecutive line points
+    // and order splays following the line path
     int k = 0; // partition of unity
     float len = 0.001f;
     LinePoint lp1 = line.mFirst;
-    float dist[ ] = new float[ line.size() ];
+    int size = line.size();
+    float dist[ ] = new float[ size ]; 
     int k0 = 0;
     for ( LinePoint lp2 = line.mFirst; lp2 != null; lp2 = lp2.mNext ) {
       dist[k0] = lp1.distance( lp2 );
@@ -1850,18 +1879,20 @@ public class DrawingCommandManager
       ++k0;
 
       int kk = k;
-      for ( ; kk<ks; ++kk ) if ( lp2 == splays.get(kk).pt ) break;
-      if ( kk < ks ) {
-        if ( kk != k ) {
-          NearbySplay nbs = splays.remove( kk );
-          splays.add( k, nbs );
+      for ( ; kk<ks; ++kk ) {
+        if ( lp2 == splays.get(kk).pt ) {
+          if ( kk != k ) { // swap splays k <--> kk
+            NearbySplay nbs = splays.remove( kk );
+            splays.add( k, nbs );
+          }
+          splays.get(k).llen = len;
+          if ( k > 0 ) splays.get( k-1 ).rlen = len;
+          len = 0;
+          ++ k;
+          break;
         }
-        splays.get(k).llen = len;
-        if ( k > 0 ) splays.get( k-1 ).rlen = len;
-        len = 0;
-        ++ k;
       }
-      lp1 = lp2;
+      lp1 = lp2; // lp1 = previous point
     }
     len += 0.001f;
     splays.get( k-1 ).rlen = len;
@@ -1875,9 +1906,9 @@ public class DrawingCommandManager
     int kr = 0;
     len = 0;
     LinePoint lp2 = line.mFirst;
-    NearbySplay spr = null;
-    for ( NearbySplay spl : splays ) {
-      while ( lp2 != spl.pt ) {
+    NearbySplay spr = null; // right splay
+    for ( NearbySplay spl : splays ) { // left splay
+      while ( lp2 != spl.pt /* && lp2 != null && k0 < size */ ) { // N.B. lp2 must be non-null and k0 must be < size
         len += dist[k0];
         float dx = len/spl.llen * spl.dx;
         float dy = len/spl.llen * spl.dy;
@@ -1889,13 +1920,16 @@ public class DrawingCommandManager
         lp2 = lp2.mNext;
         ++ k0;
       }
-      lp2.shiftBy( spl.dx, spl.dy );
+      // if ( lp2 == spl.pt ) { // this must be true
+        lp2.shiftBy( spl.dx, spl.dy );
+        lp2 = lp2.mNext;
+      // }
       spr = spl;
-      lp2 = lp2.mNext;
+      // if ( k0 >= size ) break;
       ++ k0;
       len = 0;
     }
-    while ( lp2 != null ) {
+    while ( lp2 != null /* && k0 < size */ ) { // N.B. k0 must be < size
       len += dist[k0];
       float dx = (1 - len/spr.rlen) * spr.dx;
       float dy = (1 - len/spr.rlen) * spr.dy;

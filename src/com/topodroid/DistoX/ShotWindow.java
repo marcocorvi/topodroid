@@ -484,9 +484,11 @@ public class ShotWindow extends Activity
     if ( mDataAdapter.multiSelect( pos ) ) {
       // mFooter.setVisibility( View.VISIBLE );
       mListView.setAdapter( mFooterView.mAdapter );
+      mListView.invalidate();
     } else {
       // mFooter.setVisibility( View.GONE );
       mListView.setAdapter( mButtonView1.mAdapter );
+      mListView.invalidate();
     }
   }
 
@@ -495,6 +497,7 @@ public class ShotWindow extends Activity
     mDataAdapter.clearMultiSelect( );
     // mFooter.setVisibility( View.GONE );
     mListView.setAdapter( mButtonView1.mAdapter );
+    mListView.invalidate();
   }
 
   @Override 

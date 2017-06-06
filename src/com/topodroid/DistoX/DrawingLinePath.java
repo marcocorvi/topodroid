@@ -117,8 +117,8 @@ public class DrawingLinePath extends DrawingPointLinePath
           ret.addPointNoPath( mX, mY );
         }
       }
+      ret.setClosed( closed );
       if ( closed ) {
-        ret.setClosed( closed );
         ret.close();
       }
       ret.retracePath();

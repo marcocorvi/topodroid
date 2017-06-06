@@ -442,6 +442,7 @@ public class DrawingPointLinePath extends DrawingPath
         mPath.lineTo( lp.mX, lp.mY );
       }
     }
+    if ( mClosed ) mPath.close();
     computeUnitNormal();
   }
 
@@ -466,6 +467,7 @@ public class DrawingPointLinePath extends DrawingPath
       lp = prev;
       prev = prev.mPrev;
     }
+    if ( mClosed ) mPath.close();
     computeUnitNormal(); // FIXME 
   }
 

@@ -306,6 +306,19 @@
     <string name="popup_erase_line">Linien löschen</string>
     <string name="popup_erase_area">Flächen löschen</string>
 
+    <!-- TODO string name="popup_select_all">Select all</string -->
+    <!-- TODO string name="popup_select_point">Select points</string -->
+    <!-- TODO string name="popup_select_line">Select lines</string -->
+    <!-- TODO string name="popup_select_area">Select areas</string -->
+    <!-- TODO string name="popup_select_shot">Select shots</string -->
+    <!-- TODO string name="popup_select_station">Select stations</string -->
+
+    <!-- TODO string name="popup_cont_none">None</string -->
+    <!-- TODO string name="popup_cont_start">Start point</string -->
+    <!-- TODO string name="popup_cont_end">End point</string -->
+    <!-- TODO string name="popup_cont_both">Both points</string -->
+    <!-- TODO string name="popup_cont_continue">Continue</string -->
+
     <string name="connected_none">Nicht verbunden</string>
     <string name="connected_already">Bereits verbunden</string>
     <string name="not_available">Bluetooth nicht verfügbar</string>
@@ -1054,8 +1067,6 @@
   <string name="pref_zoom_controls_summary">Zoom-Steuerung auf Multitouch-Geräten</string>
   <string name="pref_side_drag_title">Verschieben beim skizzieren</string>
   <string name="pref_side_drag_summary">Erlaubt das verschieben vom Rand her</string>
-  <!-- TODO string name="pref_continue_end_title">Endpoint line-join</string -->
-  <!-- TODO string name="pref_continue_end_summary">Join/continue line using endpoint</string -->
   <string name="pref_unit_grid_title">Masseinheit Skizzengitter</string>
   <string name="pref_unit_grid_summary">Masseinheit Skizzengitter</string>
   <string name="pref_recent_nr_title">Anzahl der häufigsten Werkzeuge</string>

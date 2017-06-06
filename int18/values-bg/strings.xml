@@ -296,6 +296,19 @@
     <string name="popup_erase_line">Изтрива линии</string>
     <string name="popup_erase_area">Изтрива площи</string>
 
+    <!-- TODO string name="popup_select_all">Select all</string -->
+    <!-- TODO string name="popup_select_point">Select points</string -->
+    <!-- TODO string name="popup_select_line">Select lines</string -->
+    <!-- TODO string name="popup_select_area">Select areas</string -->
+    <!-- TODO string name="popup_select_shot">Select shots</string -->
+    <!-- TODO string name="popup_select_station">Select stations</string -->
+
+    <!-- TODO string name="popup_cont_none">None</string -->
+    <!-- TODO string name="popup_cont_start">Start point</string -->
+    <!-- TODO string name="popup_cont_end">End point</string -->
+    <!-- TODO string name="popup_cont_both">Both points</string -->
+    <!-- TODO string name="popup_cont_continue">Continue</string -->
+
     <string name="connected_none">Няма връзка</string>
     <string name="connected_already">Вече има връзка</string>
 
@@ -1029,8 +1042,6 @@
   <string name="pref_zoom_controls_summary">Показване на контролите за приближаване при "мултитъч" екрани</string>
   <string name="pref_side_drag_title">Странично скролиране</string>
   <string name="pref_side_drag_summary">Скролиране с дърпане на страничната част на скицата</string>
-  <!-- TODO string name="pref_continue_end_title">Endpoint line-join</string -->
-  <!-- TODO string name="pref_continue_end_summary">Join/continue line using endpoint</string -->
   <string name="pref_unit_grid_title">Мерни единици на скицата</string>
   <string name="pref_unit_grid_summary">Размер на квадрат от мрежата</string>
   <string name="pref_recent_nr_title">Брой последни инструменти</string>

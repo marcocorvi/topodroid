@@ -89,6 +89,7 @@ public class DrawingWindow extends ItemDrawer
                                       , IZoomer
                                       , IExporter
                                       , IFilterClickHandler
+                                      , IJoinClickHandler
 {
   private static int izons_ok[] = { 
                         R.drawable.iz_edit_ok, // 0
@@ -99,7 +100,7 @@ public class DrawingWindow extends ItemDrawer
   private static int IC_BLUETOOTH = 4;
   private static int IC_PLAN      = 7;
   private static int IC_DIAL      = 8;
-  private static int IC_CONTINUE_NO = 12;  // index of continue-no icon
+  private static int IC_CONT_NONE = 12;  // index of continue-no icon
   private static int IC_PREV      = 13;
   private static int IC_NEXT      = 14;
   private static int IC_JOIN      = 15;
@@ -110,29 +111,31 @@ public class DrawingWindow extends ItemDrawer
   private static int IC_MENU          = 20+1;
   private static int IC_EXTEND        = 20+2;
   private static int IC_JOIN_NO       = 20+3;
-  private static int IC_CONTINUE_CONT = 20+4;     // index of continue icon
-  private static int IC_CONTINUE_JOIN = 20+5;     // index of continue icon
-  private static int IC_ADD           = 20+6;
-  private static int IC_BORDER_OK     = 20+7;
-  private static int IC_BORDER_BOX    = 20+8; 
-  private static int IC_ERASE_POINT   = 20+9; 
-  private static int IC_ERASE_LINE    = 20+10; 
-  private static int IC_ERASE_AREA    = 20+11; 
-  private static int IC_SMALL         = 20+12;
-  private static int IC_LARGE         = 20+13;
-  private static int IC_SELECT_ALL    = 20+14;
-  private static int IC_SELECT_POINT  = 20+15;
-  private static int IC_SELECT_LINE   = 20+16;
-  private static int IC_SELECT_AREA   = 20+17;
-  private static int IC_SELECT_SHOT   = 20+18;
-  private static int IC_SELECT_STATION= 20+19;
+  private static int IC_CONT_START    = 20+4;     // index of continue icon
+  private static int IC_CONT_END      = 20+5;     // index of continue icon
+  private static int IC_CONT_BOTH     = 20+6;     // index of continue icon
+  private static int IC_CONT_CONTINUE = 20+7;     // index of continue icon
+  private static int IC_ADD           = 20+8;
+  private static int IC_BORDER_OK     = 20+9;
+  private static int IC_BORDER_BOX    = 20+10; 
+  private static int IC_ERASE_POINT   = 20+11; 
+  private static int IC_ERASE_LINE    = 20+12; 
+  private static int IC_ERASE_AREA    = 20+13; 
+  private static int IC_SMALL         = 20+14;
+  private static int IC_LARGE         = 20+15;
+  private static int IC_SELECT_ALL    = 20+16;
+  private static int IC_SELECT_POINT  = 20+17;
+  private static int IC_SELECT_LINE   = 20+18;
+  private static int IC_SELECT_AREA   = 20+19;
+  private static int IC_SELECT_SHOT   = 20+20;
+  private static int IC_SELECT_STATION= 20+21;
 
   private static int BTN_DOWNLOAD = 3;  // index of mButton1 download button
   private static int BTN_BLUETOOTH = 4; // index of mButton1 bluetooth button
   private static int BTN_PLOT = 7;      // index of mButton1 plot button
   private static int BTN_DIAL = 8;      // index of mButton1 azimuth button
 
-  private static int BTN_CONTINUE = 6;  // index of mButton2 continue button
+  private static int BTN_CONT = 6;      // index of mButton2 continue button
   private static int BTN_JOIN = 5;      // index of mButton3 join button
   private static int BTN_REMOVE = 7;    // index of mButton3 remove
   private static int BTN_BORDER = 8;
@@ -168,7 +171,7 @@ public class DrawingWindow extends ItemDrawer
                         R.drawable.iz_undo,          // 9 DRAW Nr 7
                         R.drawable.iz_redo,          // 10
                         R.drawable.iz_tools,         // 11
-                        R.drawable.iz_continue_no,   // 12
+                        R.drawable.iz_cont_none,     // 12
                         R.drawable.iz_back,          // 13 EDIT Nr 8
                         R.drawable.iz_forw,
                         R.drawable.iz_join,
@@ -180,20 +183,22 @@ public class DrawingWindow extends ItemDrawer
                         R.drawable.iz_menu,          // 20+1
                         R.drawable.iz_extended,      // 20+2
                         R.drawable.iz_join_no,       // 20+3
-                        R.drawable.iz_continue_cont, // 20+4
-                        R.drawable.iz_continue_join, // 20+5
-                        R.drawable.iz_plus,          // 20+6
-                        R.drawable.iz_range_ok,      // 20+7
-                        R.drawable.iz_range_box,     // 20+8
-                        R.drawable.iz_erase_point,   // 20+9
-                        R.drawable.iz_erase_line,    // 20+10
-                        R.drawable.iz_erase_area,    // 20+11
-                        R.drawable.iz_small,         // 20+12
-                        R.drawable.iz_large,         // 20+13
-                        R.drawable.iz_select_all,     // all
-                        R.drawable.iz_select_point,   // point
-                        R.drawable.iz_select_line,    // line
-                        R.drawable.iz_select_area,    // area
+                        R.drawable.iz_cont_start,    // 20+4
+                        R.drawable.iz_cont_end,      // 20+5
+                        R.drawable.iz_cont_both,
+                        R.drawable.iz_cont_continue,
+                        R.drawable.iz_plus,          // 20+8
+                        R.drawable.iz_range_ok,      // 20+9
+                        R.drawable.iz_range_box,     // 20+10
+                        R.drawable.iz_erase_point,   // 20+11
+                        R.drawable.iz_erase_line,    // 20+12
+                        R.drawable.iz_erase_area,    // 20+13
+                        R.drawable.iz_small,         // 20+14
+                        R.drawable.iz_large,         // 20+15
+                        R.drawable.iz_select_all,    // all   20+16
+                        R.drawable.iz_select_point,  // point 20+17
+                        R.drawable.iz_select_line,   // line  20+18
+                        R.drawable.iz_select_area,   // area  20+19
                         R.drawable.iz_select_shot,    // shot
                         R.drawable.iz_select_station, // station
                       };
@@ -281,8 +286,9 @@ public class DrawingWindow extends ItemDrawer
   private Path  mCurrentPath;
 
   // LinearLayout popup_layout = null;
-  PopupWindow mPopupEdit  = null;
+  PopupWindow mPopupEdit   = null;
   PopupWindow mPopupFilter = null;
+  PopupWindow mPopupJoin   = null;
 
   // private boolean canRedo;
   private int mPointCnt; // counter of points in the currently drawing line
@@ -316,14 +322,16 @@ public class DrawingWindow extends ItemDrawer
   static final int MODE_ERASE = 6;
   static final int MODE_ROTATE = 7; // selected point rotate
 
-  static final int CONT_NO   = 0;  // no continue
-  static final int CONT_JOIN = 1;  // continue: join to existing line
-  static final int CONT_CONT = 2;  // continue: continue existing line 
-  static final int CONT_MAX  = 3; 
+  static final int CONT_NONE  = 0;  // no continue
+  static final int CONT_START = 1;  // continue: join to existing line
+  static final int CONT_END   = 2;  // continue: join to existing line
+  static final int CONT_BOTH  = 3;  // continue: join to existing line
+  static final int CONT_CONTINUE  = 4;  // continue: continue existing line 
+  static final int CONT_MAX   = 5; 
 
   public int mMode       = MODE_MOVE;
   private int mTouchMode = MODE_MOVE;
-  private int mContinueLine = CONT_NO;
+  private int mContinueLine = CONT_NONE;
   private float mDownX;
   private float mDownY;
   private float mSaveX;
@@ -459,9 +467,11 @@ public class DrawingWindow extends ItemDrawer
   private BitmapDrawable mBMedit_no;
   private BitmapDrawable mBMplan;
   private BitmapDrawable mBMextend;
-  private BitmapDrawable mBMcontinue_no;
-  private BitmapDrawable mBMcontinue_cont;
-  private BitmapDrawable mBMcontinue_join;
+  private BitmapDrawable mBMcont_none;
+  private BitmapDrawable mBMcont_start;
+  private BitmapDrawable mBMcont_end;
+  private BitmapDrawable mBMcont_both;
+  private BitmapDrawable mBMcont_continue;
   private BitmapDrawable mBMadd;
   private BitmapDrawable mBMleft;
   private BitmapDrawable mBMright;
@@ -570,7 +580,7 @@ public class DrawingWindow extends ItemDrawer
   {
     super.lineSelected( k, update_recent );
     if ( mCurrentLine == BrushManager.mLineLib.mLineSectionIndex ) {
-      setButtonContinue( CONT_NO );
+      setButtonContinue( CONT_NONE );
     }
   }
 
@@ -661,7 +671,7 @@ public class DrawingWindow extends ItemDrawer
       }
       // boolean visible = ( mSymbol == Symbol.LINE && mCurrentLine == BrushManager.mLineLib.mLineWallIndex );
       boolean visible = ( mSymbol == Symbol.LINE );
-      mButton2[ BTN_CONTINUE ].setVisibility( visible? View.VISIBLE : View.GONE );
+      mButton2[ BTN_CONT ].setVisibility( visible? View.VISIBLE : View.GONE );
     } else if ( mMode == MODE_MOVE ) {
       sb.append( res.getString( R.string.title_move ) );
     } else if ( mMode == MODE_EDIT ) {
@@ -1048,21 +1058,32 @@ public class DrawingWindow extends ItemDrawer
   {
     mContinueLine = continue_line;
     if ( mSymbol == Symbol.LINE /* && mCurrentLine == BrushManager.mLineLib.mLineWallIndex */ ) {
-      mButton2[ BTN_CONTINUE ].setVisibility( View.VISIBLE );
+      mButton2[ BTN_CONT ].setVisibility( View.VISIBLE );
       switch ( mContinueLine ) {
-        case CONT_NO:
-          mButton2[ BTN_CONTINUE ].setBackgroundDrawable( mBMcontinue_no  );
+        case CONT_NONE:
+          mButton2[ BTN_CONT ].setBackgroundDrawable( mBMcont_none  );
           break;
-        case CONT_JOIN:
-          mButton2[ BTN_CONTINUE ].setBackgroundDrawable( mBMcontinue_join  );
+        case CONT_START:
+          mButton2[ BTN_CONT ].setBackgroundDrawable( mBMcont_start  );
           break;
-        case CONT_CONT:
-          mButton2[ BTN_CONTINUE ].setBackgroundDrawable( mBMcontinue_cont  );
+        case CONT_END:
+          mButton2[ BTN_CONT ].setBackgroundDrawable( mBMcont_end   );
+          break;
+        case CONT_BOTH:
+          mButton2[ BTN_CONT ].setBackgroundDrawable( mBMcont_both  );
+          break;
+        case CONT_CONTINUE:
+          mButton2[ BTN_CONT ].setBackgroundDrawable( mBMcont_continue  );
           break;
       }
     } else {
-      mButton2[ BTN_CONTINUE ].setVisibility( View.GONE );
+      mButton2[ BTN_CONT ].setVisibility( View.GONE );
     }
+  }
+
+  public void setButtonJoinMode( int join_mode, int code )
+  {
+    setButtonContinue( join_mode );
   }
 
   public void setButtonFilterMode( int filter_mode, int code )
@@ -1184,7 +1205,7 @@ public class DrawingWindow extends ItemDrawer
   {
     mSectionName  = null; 
     mShiftDrawing = false;
-    mContinueLine = CONT_NO;
+    mContinueLine = CONT_NONE;
     resetModified();
     setMode( MODE_MOVE );
     mTouchMode    = MODE_MOVE;
@@ -1296,10 +1317,12 @@ public class DrawingWindow extends ItemDrawer
     for ( int k=0; k<mNrButton2; ++k ) {
       ic = ( k < 3 )? k : off+k;
       mButton2[k] = MyButton.getButton( mActivity, this, ((k==0)? izons_ok[ic] : izons[ic]) );
-      if ( ic == IC_CONTINUE_NO ) mBMcontinue_no = MyButton.getButtonBackground( mApp, res, ((k==0)? izons_ok[ic] : izons[ic]));
+      if ( ic == IC_CONT_NONE ) mBMcont_none = MyButton.getButtonBackground( mApp, res, ((k==0)? izons_ok[ic] : izons[ic]));
     }
-    mBMcontinue_cont = MyButton.getButtonBackground( mApp, res, izons[IC_CONTINUE_CONT] );
-    mBMcontinue_join = MyButton.getButtonBackground( mApp, res, izons[IC_CONTINUE_JOIN] );
+    mBMcont_continue  = MyButton.getButtonBackground( mApp, res, izons[IC_CONT_CONTINUE] );
+    mBMcont_start = MyButton.getButtonBackground( mApp, res, izons[IC_CONT_START] );
+    mBMcont_end   = MyButton.getButtonBackground( mApp, res, izons[IC_CONT_END] );
+    mBMcont_both  = MyButton.getButtonBackground( mApp, res, izons[IC_CONT_BOTH] );
 
     mButton3 = new Button[ mNrButton3 ];      // EDIT
     off = (mNrButton1-3) + (mNrButton2-3); 
@@ -1470,7 +1493,7 @@ public class DrawingWindow extends ItemDrawer
     if ( mMoveTo.length() == 0 ) mMoveTo = null;
     mSectionName  = null; // resetStatus
     mShiftDrawing = false;
-    mContinueLine = CONT_NO;
+    mContinueLine = CONT_NONE;
     resetModified();
 
     // if ( PlotInfo.isSection( mType ) ) { 
@@ -1522,7 +1545,7 @@ public class DrawingWindow extends ItemDrawer
       mMoveTo  = null;
       mSectionName  = null; // resetStatus
       mShiftDrawing = false;
-      mContinueLine = CONT_NO;
+      mContinueLine = CONT_NONE;
       resetModified();
 
       doStart( true );
@@ -1621,7 +1644,7 @@ public class DrawingWindow extends ItemDrawer
       mCurrentPoint = ( BrushManager.mPointLib.isSymbolEnabled( "label" ) )? 1 : 0;
       mCurrentLine  = ( BrushManager.mLineLib.isSymbolEnabled( "wall" ) )? 1 : 0;
       mCurrentArea  = ( BrushManager.mAreaLib.isSymbolEnabled( "water" ) )? 1 : 0;
-      setButtonContinue( CONT_NO );
+      setButtonContinue( CONT_NONE );
 
       List<DBlock> list = null;
       if ( PlotInfo.isSection( mType ) ) {
@@ -2178,6 +2201,56 @@ public class DrawingWindow extends ItemDrawer
       }
     }
 
+    private boolean tryToJoin( DrawingLinePath lp1, DrawingLinePath curline )
+    {
+      if ( mContinueLine == CONT_CONTINUE ) {
+        DrawingLinePath line = null;
+        line = mDrawingSurface.getLineToContinue( curline.mFirst, mCurrentLine, mZoom, mSelectSize );
+        if ( line != null && mCurrentLine == line.mLineType ) { // continue line with the current line
+          mDrawingSurface.addLineToLine( curline, line );
+          return false;
+        }
+      // } else if ( mContinueLine == CONT_CONTINUE_END ) {
+      //   DrawingLinePath line = null;
+      //   line = mDrawingSurface.getLineToContinue( curline.mFirst, mCurrentLine, mZoom, mSelectSize );
+      //   if ( line != null && mCurrentLine == line.mLineType ) { // continue line with the current line
+      //     curline.reversePath();
+      //     mDrawingSurface.addLineToLine( curline, line );
+      //     return false;
+      //   }
+      } else {
+        DrawingLinePath line1 = null;
+        DrawingLinePath line2 = null;
+        if ( mContinueLine == CONT_START || mContinueLine == CONT_BOTH ) {
+          line1 = mDrawingSurface.getLineToContinue( curline.mFirst, mCurrentLine, mZoom, mSelectSize );
+        }
+        if ( mContinueLine == CONT_END || mContinueLine == CONT_BOTH ) {
+          line2 = mDrawingSurface.getLineToContinue( curline.mLast, mCurrentLine, mZoom, mSelectSize );
+        }
+        if ( line1 != null ) {
+          float d1 = line1.mFirst.distance( lp1.mFirst );
+          float d2 = line1.mLast.distance( lp1.mFirst );
+          if ( d1 < d2 ) {
+            // line.reversePath();
+            lp1.moveFirstTo( line1.mFirst.mX, line1.mFirst.mY );
+          } else {
+            lp1.moveFirstTo( line1.mLast.mX, line1.mLast.mY );
+          }
+        }
+        if ( line2 != null ) {
+          float d1 = line2.mFirst.distance( lp1.mLast );
+          float d2 = line2.mLast.distance( lp1.mLast );
+          if ( d1 < d2 ) {
+            // line.reversePath();
+            lp1.moveLastTo( line2.mFirst.mX, line2.mFirst.mY );
+          } else {
+            lp1.moveLastTo( line2.mLast.mX, line2.mLast.mY );
+          }
+        }
+      }
+      return true;
+    }
+
     private boolean pointerDown = false;
 
     public boolean onTouch( View view, MotionEvent rawEvent )
@@ -2488,46 +2561,9 @@ public class DrawingWindow extends ItemDrawer
                           lp1.addPoint3(p1.mX, p1.mY, p2.mX, p2.mY, p3.mX, p3.mY );
                         }
                         boolean addline = true;
-                        if ( mContinueLine > CONT_NO && mCurrentLine != BrushManager.mLineLib.mLineSectionIndex ) {
-                          DrawingLinePath line = mDrawingSurface.getLineToContinue( mCurrentLinePath.mFirst, mCurrentLine, mZoom, mSelectSize );
-                          // FIXME continue with endpoint if startpoint fails
-                          if ( line == null ) {
-                            if ( TDSetting.mContinueEnd ) {
-                              line = mDrawingSurface.getLineToContinue( mCurrentLinePath.mLast, mCurrentLine, mZoom, mSelectSize );
-                              if ( line != null ) {
-                                if ( mContinueLine == CONT_CONT && mCurrentLine == line.mLineType ) {
-                                  mCurrentLinePath.reversePath();
-                                  mDrawingSurface.addLineToLine( mCurrentLinePath, line );
-                                  addline = false;
-                                } else {
-                                  float d1 = line.mFirst.distance( lp1.mLast );
-                                  float d2 = line.mLast.distance( lp1.mLast );
-                                  if ( d1 < d2 ) {
-                                    // line.reversePath();
-                                    lp1.moveLastTo( line.mFirst.mX, line.mFirst.mY );
-                                  } else {
-                                    lp1.moveLastTo( line.mLast.mX, line.mLast.mY );
-                                  }
-                                }
-                              }
-                            }
-                          } else {
-                            // Log.v( "DistoX", "[B] line type " + mCurrentLine + " continue " + mContinueLine );
-                            if ( mContinueLine == CONT_CONT && mCurrentLine == line.mLineType ) {
-                              mDrawingSurface.addLineToLine( mCurrentLinePath, line );
-                              addline = false;
-                            } else {
-                              float d1 = line.mFirst.distance( lp1.mFirst );
-                              float d2 = line.mLast.distance( lp1.mFirst );
-                              if ( d1 < d2 ) {
-                                // line.reversePath();
-                                lp1.moveFirstTo( line.mFirst.mX, line.mFirst.mY );
-                              } else {
-                                lp1.moveFirstTo( line.mLast.mX, line.mLast.mY );
-                              }
-                            }
-                          }
-                        } 
+                        if ( mContinueLine > CONT_NONE && mCurrentLine != BrushManager.mLineLib.mLineSectionIndex ) {
+                          addline = tryToJoin( lp1, mCurrentLinePath );
+                        }
                         if ( addline ) {
                           lp1.computeUnitNormal();
                           if ( mSymbol == Symbol.LINE && BrushManager.mLineLib.isClosed( mCurrentLine ) ) {
@@ -2664,45 +2700,8 @@ public class DrawingWindow extends ItemDrawer
                       }
                     } else { // not section line
                       boolean addline= true;
-                      if ( mContinueLine > CONT_NO && mCurrentLine != BrushManager.mLineLib.mLineSectionIndex ) {
-                        // Log.v( "DistoX", "[N] try to continue line type " + mCurrentLine );
-                        DrawingLinePath line = mDrawingSurface.getLineToContinue( mCurrentLinePath.mFirst, mCurrentLine, mZoom, mSelectSize );
-                        if ( line == null ) {
-                          if ( TDSetting.mContinueEnd ) {
-                            line = mDrawingSurface.getLineToContinue( mCurrentLinePath.mLast, mCurrentLine, mZoom, mSelectSize );
-                            if ( line != null ) {
-                              if ( mContinueLine == CONT_CONT && mCurrentLine == line.mLineType ) {
-                                mCurrentLinePath.reversePath();
-                                mDrawingSurface.addLineToLine( mCurrentLinePath, line );
-                                addline = false;
-                              } else {
-                                float d1 = line.mFirst.distance( mCurrentLinePath.mLast );
-                                float d2 = line.mLast.distance( mCurrentLinePath.mLast );
-                                if ( d1 < d2 ) {
-                                  // line.reversePath();
-                                  mCurrentLinePath.moveLastTo( line.mFirst.mX, line.mFirst.mY );
-                                } else {
-                                  mCurrentLinePath.moveLastTo( line.mLast.mX, line.mLast.mY );
-                                }
-                              }
-                            }
-                          }
-                        } else {
-                          // Log.v( "DistoX", "[N] continuing line type " + mCurrentLine );
-                          if ( mContinueLine == CONT_CONT && mCurrentLine == line.mLineType ) {
-                            mDrawingSurface.addLineToLine( mCurrentLinePath, line );
-                            addline = false;
-                          } else {
-                            float d1 = line.mFirst.distance( mCurrentLinePath.mFirst );
-                            float d2 = line.mLast.distance( mCurrentLinePath.mFirst );
-                            if ( d1 < d2 ) {
-                              // line.reversePath();
-                              mCurrentLinePath.moveFirstTo( line.mFirst.mX, line.mFirst.mY );
-                            } else {
-                              mCurrentLinePath.moveFirstTo( line.mLast.mX, line.mLast.mY );
-                            }
-                          }
-                        }
+                      if ( mContinueLine > CONT_NONE && mCurrentLine != BrushManager.mLineLib.mLineSectionIndex ) {
+                        addline = tryToJoin( mCurrentLinePath, mCurrentLinePath );
                       }
                       if ( addline ) {
                         mCurrentLinePath.computeUnitNormal();
@@ -3077,6 +3076,36 @@ public class DrawingWindow extends ItemDrawer
 
     /** erase mode popup menu
      */
+    private void makePopupJoin( View b, int[] modes, int nr, final int code )
+    {
+      if ( mPopupJoin != null ) return;
+
+      final Context context = this;
+      LinearLayout popup_layout = new LinearLayout(mActivity);
+      popup_layout.setOrientation(LinearLayout.VERTICAL);
+      int lHeight = LinearLayout.LayoutParams.WRAP_CONTENT;
+      int lWidth = LinearLayout.LayoutParams.WRAP_CONTENT;
+
+      String text;
+      int len = 0;
+      Button[] tv = new Button[nr];
+      for ( int k=0; k<nr; ++k ) {
+        text = getString( modes[k] );
+        len = ( len < text.length() )? text.length() : len;
+        tv[k] = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight, new JoinClickListener( this, k, code ) );
+      }
+      FontMetrics fm = tv[0].getPaint().getFontMetrics();
+      // Log.v("DistoX", "metrics TOP " + fm.top + " ASC. " + fm.ascent + " BOT " + fm.bottom + " LEAD " + fm.leading ); 
+      int w = (int)( Math.abs( ( len ) * fm.ascent ) * 0.6);
+      int h = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.70);
+      for ( int k=0; k<nr; ++k ) {
+        tv[k].setWidth( w );
+      }
+      // Log.v( TopoDroidApp.TAG, "popup width " + w );
+      mPopupJoin = new PopupWindow( popup_layout, w, h ); 
+      mPopupJoin.showAsDropDown(b); 
+    }
+
     private void makePopupFilter( View b, int[] modes, int nr, final int code )
     {
       if ( mPopupFilter != null ) return;
@@ -3099,7 +3128,7 @@ public class DrawingWindow extends ItemDrawer
         if ( k == 0 ) {
           FontMetrics fm = tv[0].getPaint().getFontMetrics();
           // Log.v("DistoX", "metrics TOP " + fm.top + " ASC. " + fm.ascent + " BOT " + fm.bottom + " LEAD " + fm.leading ); 
-          w = (int)( Math.abs( ( len + 1 ) * fm.ascent ) * 0.7);
+          w = (int)( Math.abs( ( len + 1 ) * fm.ascent ) * 0.6);
           h = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.70);
         }
         tv[k].setWidth( w );
@@ -3305,7 +3334,7 @@ public class DrawingWindow extends ItemDrawer
 
       FontMetrics fm = myTextView0.getPaint().getFontMetrics();
       // Log.v("DistoX", "font metrics TOP " + fm.top + " ASC. " + fm.ascent + " BOT " + fm.bottom + " LEAD " + fm.leading ); 
-      int w = (int)( Math.abs( ( len + 1 ) * fm.ascent ) * 0.7);
+      int w = (int)( Math.abs( ( len + 1 ) * fm.ascent ) * 0.6);
       int h = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.70);
       // int h1 = (int)( myTextView0.getHeight() * 7 * 1.1 ); this is 0
       myTextView0.setWidth( w );
@@ -3341,10 +3370,21 @@ public class DrawingWindow extends ItemDrawer
       return false;
     }
 
+    public boolean dismissPopupJoin()
+    {
+      if ( mPopupJoin != null ) {
+        mPopupJoin.dismiss();
+        mPopupJoin = null;
+        return true;
+      }
+      return false;
+    }
+
     private boolean dismissPopups() 
     {
       return dismissPopupEdit() 
           || dismissPopupFilter()
+          || dismissPopupJoin()
           || CutNPaste.dismissPopupBT();
     }
 
@@ -3640,9 +3680,10 @@ public class DrawingWindow extends ItemDrawer
         } else {
           new ItemPickerDialog(mActivity, this, mType, mSymbol ).show();
         }
-      } else if ( b == mButton2[k2++] ) { //  continueBtn
+      } else if ( b == mButton2[k2++] ) { //  JOIN popup menu
         if ( mSymbol == Symbol.LINE && mCurrentLine != BrushManager.mLineLib.mLineSectionIndex ) {
-          setButtonContinue( (mContinueLine+1) % CONT_MAX );
+          // setButtonContinue( (mContinueLine+1) % CONT_MAX );
+          makePopupJoin( b, Drawing.mJoinModes, 5, 0 );
         }
 
       } else if ( b == mButton3[k3++] ) { // PREV
