@@ -366,6 +366,7 @@
     <!-- UNUSED string name="converted_tdr2th2">Skizzen konvertiert zu th2.</string -->
     <!-- UNUSED string name="convert_tdr2th2">th2 Skizzen überschreiben?</string -->
     <string name="section_area">Fläche: %1$.1f</string>
+    <!-- TODO string name="scrap_outline">Sketch outline</string -->
 
     <!-- UNUSED string name="sensor">Sensor</string -->
     <string name="sensor_gravity">Schwerkraft</string>
@@ -625,6 +626,7 @@
     <string name="help_help">Diese Hilfe</string>
     <!-- UNUSED string name="help_manual">Handbuch</string -->
     <string name="help_measure">Entfernungen messen</string>
+    <!-- TODO string name="help_measure_type">Measuring mode: fixed point or polyline</string -->
 
     <string name="help_calib_check">Testmessungen</string>
     <string name="help_close">Fenster schließen</string>
@@ -769,6 +771,7 @@
     <string name="title_projection">Projiziertes Profil Azimut %1$d</string>
     <string name="title_refs">Elemente Anzeigen</string>
     <string name="title_scraps">Skizzen</string>
+    <!-- TODO string name="title_scraps">Survey sketches</string -->
     <string name="title_select">Auswählen</string>
     <string name="title_shift">Verschieben</string>
     <string name="title_shot_delete">Messung löschen ?</string>

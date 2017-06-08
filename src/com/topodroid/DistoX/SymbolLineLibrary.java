@@ -57,6 +57,8 @@ class SymbolLineLibrary extends SymbolLibrary
 
   String getLineGroup( int k ) { return ( k < 0 || k >= mSymbolNr )? null : ((SymbolLine)mSymbols.get(k)).mGroup; }
 
+  boolean isWall( int k ) { return ( k < 0 || k >= mSymbolNr )? false : ((SymbolLine)mSymbols.get(k)).mGroup.equals( "wall" ); }
+
   Paint getLinePaint( int k, boolean reversed )
   {
     if ( k < 0 || k >= mSymbolNr ) return null;

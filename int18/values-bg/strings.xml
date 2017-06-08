@@ -356,6 +356,7 @@
     <!-- UNUSED string name="converted_tdr2th2">Конвертиране на файлове със скици от двоични в th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Презаписване на съшествуващи th2 файлове?</string -->
     <string name="section_area">Площ на сечение: %1$.1f</string>
+    <!-- TODO string name="scrap_outline">Sketch outline</string -->
 
     <!-- UNUSED string name="sensor">сензор</string -->
     <string name="sensor_gravity">гравитация</string>
@@ -609,6 +610,7 @@
     <string name="help_help">Помощ</string>
     <!-- UNUSED string name="help_manual">Ръководство</string -->
     <string name="help_measure">Измерване на разстояния</string>
+    <!-- TODO string name="help_measure_type">Measuring mode: fixed point or polyline</string -->
 
     <string name="help_calib_check">Контролни измервания</string>
     <string name="help_close">Затваряне на прозореца</string>
@@ -751,6 +753,7 @@
     <string name="title_projection">Азимут на проектиран разрез %1$d</string>
     <string name="title_refs">Показване в скицата на:</string>
     <string name="title_scraps">Скици в картировката</string>
+    <!-- TODO string name="title_scraps">Survey sketches</string -->
     <string name="title_select">Избор</string>
     <string name="title_shift">Изместване</string>
     <string name="title_shot_delete">Изтриване на отсечката?</string>

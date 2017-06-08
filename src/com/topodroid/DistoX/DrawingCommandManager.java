@@ -72,6 +72,7 @@ public class DrawingCommandManager
   private List<ICanvasCommand>     mRedoStack;
   // private List<DrawingPath>     mHighlight;  // highlighted path
   private List<DrawingStationName> mStations;  // survey stations
+  private List<DrawingLinePath>    mScrap;     // scrap outline
   private int mMaxAreaIndex;                   // max index of areas in this plot
 
   private Selection mSelection;
@@ -157,6 +158,8 @@ public class DrawingCommandManager
     }
     synchronized( mLegsStack )   { flipXAxes( mLegsStack ); }
     synchronized( mSplaysStack ) { flipXAxes( mSplaysStack ); }
+    // FIXME 
+    synchronized( mScrap ) { mScrap.clear(); }
  
     synchronized( mStations ) {
       for ( DrawingStationName st : mStations ) {
@@ -228,6 +231,7 @@ public class DrawingCommandManager
     mGridStack100 = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mLegsStack    = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mSplaysStack  = Collections.synchronizedList(new ArrayList<DrawingPath>());
+    mScrap        = Collections.synchronizedList(new ArrayList<DrawingLinePath>());
     mCurrentStack = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
     mUserStations = Collections.synchronizedList( new ArrayList<DrawingStationPath>());
     mRedoStack    = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
@@ -270,6 +274,7 @@ public class DrawingCommandManager
 
     synchronized( mLegsStack )   { mLegsStack.clear(); }
     synchronized( mSplaysStack ) { mSplaysStack.clear(); }
+    synchronized( mScrap       ) { mScrap.clear(); }
     synchronized( mStations )    { mStations.clear(); }
     clearSelected();
     synchronized( mSelection )   { mSelection.clearReferencePoints(); }
@@ -940,6 +945,13 @@ public class DrawingCommandManager
     // checkLines();
   }
 
+  public void addScrapOutlinePath( DrawingLinePath path ) 
+  {
+    synchronized( mScrap ) {
+      mScrap.add( path );
+    }
+  }
+
   public void deleteSectionPoint( String scrap_name, EraseCommand cmd )
   {
     int index = BrushManager.mPointLib.mPointSectionIndex;
@@ -1335,6 +1347,15 @@ public class DrawingCommandManager
           if ( splays || showStationSplays( path, splay_stations ) ) {
             path.draw( canvas, mMatrix, mScale, mBBox );
           }
+        }
+      }
+    }
+    if ( mScrap != null && mScrap.size() > 0 ) {
+      synchronized( mScrap )  {
+        final Iterator i = mScrap.iterator();
+        while ( i.hasNext() ){
+          final DrawingLinePath path = (DrawingLinePath) i.next();
+          path.draw( canvas, mMatrix, mScale, null /* mBBox */ );
         }
       }
     }
@@ -2590,5 +2611,15 @@ public class DrawingCommandManager
     }
     return ret / 2;
   }
+
+  void clearScrapOutline() { synchronized( mScrap ) { mScrap.clear(); } }
+
+  void addScrapDataStream( String tdr, float xdelta, float ydelta )
+  {
+    synchronized( mScrap ) {
+      mScrap.clear();
+    }
+  }
+
 
 }

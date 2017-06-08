@@ -355,6 +355,7 @@
     <!-- UNUSED string name="converted_tdr2th2">Fichier de dessin binaire convertis vers th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Écraser le fichier th2 ?</string -->
     <string name="section_area">Zone section : %1$.1f</string>
+    <!-- TODO string name="scrap_outline">Sketch outline</string -->
 
     <!-- UNUSED string name="sensor">capteur</string -->
     <string name="sensor_gravity">gravité</string>
@@ -606,6 +607,7 @@
     <string name="help_help">Affiche l\'aide</string>
     <!-- UNUSED string name="help_manual">Manuel Utilisateur</string -->
     <string name="help_measure">Mesurer les distances</string>
+    <!-- TODO string name="help_measure_type">Measuring mode: fixed point or polyline</string -->
 
     <string name="help_calib_check">Visées de contrôle étalonnage</string>
     <string name="help_close">Fermer fenêtre</string>
@@ -746,6 +748,7 @@
     <string name="title_projection">Azimut profil projecté %1$d</string>
     <string name="title_refs">Références du dessin</string>
     <string name="title_scraps">Croquis du relevé</string>
+    <!-- TODO string name="title_scraps">Survey sketches</string -->
     <string name="title_select">Sélectionner</string>
     <string name="title_shift">Décaler</string>
     <string name="title_shot_delete">Supprimer la visée ?</string>

@@ -416,6 +416,8 @@ public class DrawingSurface extends SurfaceView
 
   public void addDrawingPath (DrawingPath drawingPath) { commandManager.addCommand(drawingPath); }
 
+  public void addScrapOutlinePath( DrawingLinePath path ) { commandManager.addScrapOutlinePath( path ); }
+
   public void deleteSectionPoint( String scrap_name )
   {
     commandManager.deleteSectionPoint( scrap_name, null ); // null eraseCommand
@@ -763,5 +765,14 @@ public class DrawingSurface extends SurfaceView
     commandManager.deleteSectionPoint( scrap, cmd );
     commandManager.addEraseCommand( cmd );
   }
+  
+  void clearScrapOutline() { commandManager.clearScrapOutline(); }
+
+  void addScrapDataStream( String tdr, float xdelta, float ydelta )
+  {
+    commandManager.clearScrapOutline( );
+    DrawingIO.doLoadOutlineDataStream( this, tdr, xdelta, ydelta );
+  }
+
 
 }

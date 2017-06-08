@@ -31,6 +31,7 @@ public class DrawingModeDialog extends MyDialog
     private CheckBox mCBstation;  // whether to show stations
     private CheckBox mCBgrid;     // whether to show the grid
     private CheckBox mCBfixed;    // whether to show the grid
+    private CheckBox mCBscrap;
 
     private CheckBox mCBscaleRef; // whether to show the scale reference bar
 
@@ -61,6 +62,7 @@ public class DrawingModeDialog extends MyDialog
       mCBfixed   = (CheckBox) findViewById(R.id.cb_mode_fixed);
 
       mCBscaleRef = (CheckBox) findViewById(R.id.cb_mode_scale_ref);
+      mCBscrap = (CheckBox) findViewById(R.id.cb_scrap);
 
       ((Button) findViewById(R.id.button_ok)).setOnClickListener( this );
       ((Button) findViewById(R.id.button_back)).setOnClickListener( this );
@@ -101,6 +103,10 @@ public class DrawingModeDialog extends MyDialog
 
           // TDLog.Error( "Mode " + mode );
           mSurface.setDisplayMode( mode );
+          if ( mCBscrap.isChecked() ) {
+            mParent.scrapOutlineDialog();
+          }
+
           break;
         case R.id.button_back:
           /* nothing */

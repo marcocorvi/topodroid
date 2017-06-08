@@ -92,6 +92,7 @@ public class OverviewWindow extends ItemDrawer
   private static int help_icons[] = { 
                         R.string.help_measure,
                         R.string.help_refs,
+                        R.string.help_measure_type,
                         // FIXME_OVER R.string.help_toggle_plot,
                       };
   private static int help_menus[] = {

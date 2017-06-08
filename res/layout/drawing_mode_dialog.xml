@@ -44,6 +44,14 @@
         android:text="@string/mode_scale_ref"
         android:checked="false" />
 
+    <CheckBox
+        android:id="@+id/cb_scrap"
+        android:layout_marginTop="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/scrap_outline"
+        android:checked="false" />
+
     <CheckBox android:id="@+id/cb_mode_fixed"
         android:layout_marginTop="2dp"
         android:layout_width="wrap_content"

@@ -354,6 +354,7 @@
     <!-- UNUSED string name="converted_tdr2th2">转换草图为二进制文件到 th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">重写th2草图文件?</string -->
     <string name="section_area">切面区域: %1$.1f</string>
+    <!-- TODO string name="scrap_outline">Sketch outline</string -->
 
     <!-- UNUSED string name="sensor">传感器</string -->
     <string name="sensor_gravity">重力传感器</string>
@@ -605,6 +606,7 @@
     <string name="help_help">帮助</string>
     <!-- UNUSED string name="help_manual">用户手册</string -->
     <string name="help_measure">测量距离</string>
+    <!-- TODO string name="help_measure_type">Measuring mode: fixed point or polyline</string -->
     
     <!-- TODO string name="help_calib_check">Calibration-check shots</string -->
     <string name="help_close">关闭窗口</string>
@@ -747,6 +749,7 @@
     <string name="title_projection">投影轮廓方位 %1$d</string>
     <string name="title_refs">参考草图</string>
     <string name="title_scraps">测量草图</string>
+    <!-- TODO string name="title_scraps">Survey sketches</string -->
     <string name="title_select">选择</string>
     <string name="title_shift">转换</string>
     <string name="title_shot_delete">删除测射 ?</string>

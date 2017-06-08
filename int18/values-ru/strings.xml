@@ -356,6 +356,7 @@
     <!-- UNUSED string name="converted_tdr2th2">Конвертировать бинарные файлы абрисов в формат th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Перезаписать абрисы в формате th2 ?</string -->
     <string name="section_area">Площадь сечения: %1$.1f</string>
+    <!-- TODO string name="scrap_outline">Sketch outline</string -->
 
     <!-- UNUSED string name="sensor">датчик</string -->
     <string name="sensor_gravity">ускорение</string>
@@ -608,6 +609,7 @@
     <string name="help_help">Помощь</string>
     <!-- UNUSED string name="help_manual">Инструкция</string -->
     <string name="help_measure">Измерить расстояния</string>
+    <!-- TODO string name="help_measure_type">Measuring mode: fixed point or polyline</string -->
     
     <string name="help_calib_check">Контрольные замеры</string>
     <string name="help_close">Закрыть Окно</string>
@@ -750,6 +752,7 @@
     <string name="title_projection">Проекция разреза на вертикальную плоскость Аз. %1$d</string>
     <string name="title_refs">Вид</string>
     <string name="title_scraps">Абрисы в съёмке</string>
+    <!-- TODO string name="title_scraps">Survey sketches</string -->
     <string name="title_select">Выбрать</string>
     <string name="title_shift">Сдвиг</string>
     <string name="title_shot_delete">Удалить отрезок ?</string>

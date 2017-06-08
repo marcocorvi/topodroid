@@ -357,6 +357,7 @@
     <!-- UNUSED string name="converted_tdr2th2">Converted sketches binary files to th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Overwrite th2 sketch files ?</string -->
     <string name="section_area">Section area: %1$.1f</string>
+    <string name="scrap_outline">Sketch outline</string>
 
     <!-- UNUSED string name="sensor">sensor</string -->
     <string name="sensor_gravity">gravity</string>
@@ -613,6 +614,7 @@
     <string name="help_help">This help</string>
     <!-- UNUSED string name="help_manual">User manual</string -->
     <string name="help_measure">Measure distances</string>
+    <string name="help_measure_type">Measuring mode: fixed point or polyline</string>
     
     <string name="help_calib_check">Calibration-check shots</string>
     <string name="help_close">Close window</string>
@@ -761,6 +763,7 @@
     <string name="title_projection">Projected profile azimuth %1$d</string>
     <string name="title_refs">Sketch References</string>
     <string name="title_scraps">Survey sketches</string>
+    <string name="title_scraps_outline">Sketch outlines</string>
     <string name="title_select">Select</string>
     <string name="title_shift">Shift</string>
     <string name="title_shot_delete">Delete shot ?</string>

@@ -355,6 +355,7 @@
     <!-- UNUSED string name="converted_tdr2th2">Convertito disegno da formato binario a th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Sovrascrivo il file del disegno th2 ?</string -->
     <string name="section_area">Area della sezione: %1$.1f</string>
+    <!-- TODO string name="scrap_outline">Sketch outline</string -->
 
     <!-- UNUSED string name="sensor">sensore</string -->
     <string name="sensor_gravity">gravità</string>
@@ -607,6 +608,7 @@
     <string name="help_help">Questo aiuto</string>
     <!-- UNUSED string name="help_manual">Manuale online</string -->
     <string name="help_measure">Misurare le distanze</string>
+    <!-- TODO string name="help_measure_type">Measuring mode: fixed point or polyline</string -->
     
     <!-- TODO string name="help_calib_check">Calibration-check shots</string -->
     <string name="help_close">Chiusura finestra</string>
@@ -749,6 +751,7 @@
     <string name="title_projection">Proiezione azimutale profilo %1$d</string>
     <string name="title_refs">Riferimenti grafici</string>
     <string name="title_scraps">Disegni</string>
+    <!-- TODO string name="title_scraps">Survey sketches</string -->
     <string name="title_select">Seleziona</string>
     <string name="title_shift">Sposta</string>
     <string name="title_shot_delete">Rimuovi battuta ?</string>

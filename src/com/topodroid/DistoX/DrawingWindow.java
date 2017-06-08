@@ -4633,5 +4633,62 @@ public class DrawingWindow extends ItemDrawer
 
   ShotNewDialog mShotNewDialog = null;
 
+  void scrapOutlineDialog()
+  {
+    if ( mType != PlotInfo.PLOT_PLAN && mType != PlotInfo.PLOT_EXTENDED ) {
+      Log.v("DistoX0", "outline bad scrap type " + mType );
+      return;
+    }
+    String name = ( mType == PlotInfo.PLOT_PLAN )? mPlot1.name : mPlot2.name;
+    List< PlotInfo > plots = mData.selectAllPlotsWithType( mApp.mSID, TopoDroidApp.STATUS_NORMAL, mType );
+    for ( PlotInfo plot : plots ) {
+      if ( plot.name.equals( name ) ) {
+        plots.remove( plot );
+        break;
+      }
+    }
+    if ( plots.size() == 0 ) {
+      Log.v("DistoX0", "outline no other scraps" );
+      return;
+    }
+    if ( mType == PlotInfo.PLOT_PLAN ) {
+      new ScrapOutlineDialog( this, this, mApp, plots ).show();
+    } else { // ( mType == PlotInfo.PLOT_EXTENDED ) 
+      new ScrapOutlineDialog( this, this, mApp, plots ).show();
+    }
+  }
+
+  void addScrap( PlotInfo plot )
+  {
+    mDrawingSurface.clearScrapOutline();
+    if ( mNum == null || plot == null ) {
+      // Log.v("DistoX0", "null num or plot");
+      return;
+    }
+    NumStation st  = mNum.getStation( plot.start );
+    if ( st == null ) {
+      // Log.v("DistoX0", "null plot start station");
+      return;
+    }
+    float xdelta = 0;
+    float ydelta = 0;
+    NumStation st0;
+    if ( mType == PlotInfo.PLOT_PLAN ) {
+      st0 = mNum.getStation( mPlot1.start );
+      xdelta = st.e - st0.e; // FIXME SCALE FACTORS ???
+      ydelta = st.s - st0.s;
+    } else {
+      st0 = mNum.getStation( mPlot2.start );
+      xdelta = st.h - st0.h;
+      ydelta = st.v - st0.v;
+    }
+    xdelta *= DrawingUtil.SCALE_FIX;
+    ydelta *= DrawingUtil.SCALE_FIX;
+
+    String fullName = mApp.mySurvey + "-" + plot.name;
+    String tdr = TDPath.getTdrFileWithExt( fullName );
+    // Log.v("DistoX0", "add outline " + tdr + " delta " + xdelta + " " + ydelta );
+    mDrawingSurface.addScrapDataStream( tdr, xdelta, ydelta );
+  }
 
 }

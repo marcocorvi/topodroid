@@ -356,6 +356,7 @@
     <!-- UNUSED string name="converted_tdr2th2">Конвертувати бінарні файли абрисов в формат th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Перезаписати абриси в форматі th2 ?</string -->
     <string name="section_area">Площа перерізу: %1$.1f</string>
+    <!-- TODO string name="scrap_outline">Sketch outline</string -->
 
     <!-- UNUSED string name="sensor">датчик</string -->
     <string name="sensor_gravity">прискорення</string>
@@ -609,6 +610,7 @@
     <string name="help_help">Допомога</string>
     <!-- UNUSED string name="help_manual">Інструкція</string -->
     <string name="help_measure">Виміряти відстань</string>
+    <!-- TODO string name="help_measure_type">Measuring mode: fixed point or polyline</string -->
 
     <!-- TODO string name="help_calib_check">Calibration-check shots</string -->
     <string name="help_close">Закрити вікно</string>
@@ -751,6 +753,7 @@
     <string name="title_projection">Проекція розрізу на азимут %1$d</string>
     <string name="title_refs">Вид</string>
     <string name="title_scraps">Абриси в зйомці</string>
+    <!-- TODO string name="title_scraps">Survey sketches</string -->
     <string name="title_select">Вибрати</string>
     <string name="title_shift">Зсув</string>
     <string name="title_shot_delete">Видалити відрізок?</string>

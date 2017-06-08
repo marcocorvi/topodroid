@@ -673,6 +673,7 @@ class DrawingIO
               break;
             case 'L':
               path = DrawingLinePath.loadDataStream( version, dis, dx, dy, missingSymbols );
+              // Log.v("DistoX0", "add path ... " + ((DrawingLinePath)path).mFirst.mX + " " + ((DrawingLinePath)path).mFirst.mY );
               break;
             case 'A':
               path = DrawingAreaPath.loadDataStream( version, dis, dx, dy, missingSymbols );
@@ -712,6 +713,110 @@ class DrawingIO
       // Log.v("DistoX", "read: " + sb.toString() );
     }
     return (missingSymbols != null )? missingSymbols.isOK() : true;
+  }
+
+  static public void doLoadOutlineDataStream( DrawingSurface surface,
+                                   String filename,
+                                   float dx, float dy )
+  {
+    int version = 0;
+    boolean in_scrap = false;
+
+    File file = new File( filename );
+    FileInputStream fis = null;
+    DataInputStream dis = null;
+    synchronized( TDPath.mTherionLock ) {
+      try {
+        // CACHE check if filename is in the cache: if so use the cache byte array
+        // ByteArrayOutputStream bos = mTdrCache.get( file.getName() );
+        // if ( bos == null ) {
+          fis = new FileInputStream( filename );
+          BufferedInputStream bfis = new BufferedInputStream( fis );
+          dis = new DataInputStream( bfis );
+        // } else {
+        //   Log.v("DistoX", "cache hit " + filename );
+        //   ByteArrayInputStream bis = new ByteArrayInputStream( bos.toByteArray() );
+        //   dis = new DataInputStream( bis );
+        // }
+        boolean todo = true;
+        while ( todo ) {
+          DrawingLinePath path = null;
+          int what = dis.read();
+          // Log.v("DistoX", "Read " + what );
+          path = null;
+          switch ( what ) {
+            case 'V':
+              version = dis.readInt();
+              // TDLog.Log( TDLog.LOG_PLOT, "TDR version " + version );
+              break;
+            case 'I': // plot info: bounding box
+              {
+                dis.readFloat();
+                dis.readFloat();
+                dis.readFloat();
+                dis.readFloat();
+                if ( dis.readInt() == 1 ) {
+                  dis.readFloat();
+                  dis.readFloat();
+                  dis.readFloat();
+                  dis.readFloat();
+                }
+                // TDLog.Log(TDLog.LOG_PLOT, "TDR bbox " + xmin + "-" + xmax + " " + ymin + "-" + ymax );
+              }
+              break;
+            case 'S':
+              {
+                dis.readUTF();
+                int type = dis.readInt();
+                if ( type == PlotInfo.PLOT_PROFILE ) dis.readInt();
+                // read palettes
+                dis.readUTF();
+                dis.readUTF();
+                dis.readUTF();
+                in_scrap = true;
+              }
+              break;
+            case 'P':
+              DrawingPointPath.loadDataStream( version, dis, dx, dy, null );
+              break;
+            case 'T':
+              DrawingLabelPath.loadDataStream( version, dis, dx, dy );
+              break;
+            case 'L':
+              path = DrawingLinePath.loadDataStream( version, dis, dx, dy, null );
+              break;
+            case 'A':
+              DrawingAreaPath.loadDataStream( version, dis, dx, dy, null );
+              break;
+            case 'U':
+              DrawingStationPath.loadDataStream( version, dis ); // consume DrawingStationName data
+              break;
+            case 'X':
+              DrawingStationName.loadDataStream( version, dis ); // consume DrawingStationName data
+              break;
+            case 'F':
+            case 'E':
+            default:
+              todo = false;
+              // TDLog.Error( "ERROR bad input (1) " + (int)what );
+              break;
+          } 
+          if (    in_scrap && path != null 
+               && ( BrushManager.mLineLib.isWall( path.mLineType ) || path.hasOutline() ) ) {
+            // Log.v("DistoX0", "outline add path ... " + path.mFirst.mX + " " + path.mFirst.mY );
+            path.setPaint( BrushManager.fixedGrid100Paint );
+            surface.addScrapOutlinePath( path );
+          }
+        }
+        dis.close();
+        if ( fis != null ) fis.close();
+      } catch ( FileNotFoundException e ) {
+        // this is OK
+      } catch ( IOException e ) {
+        e.printStackTrace();
+      }
+      // Log.v("DistoX", "read: " + sb.toString() );
+    }
   }
 
   static public void exportDataStream( int type, DataOutputStream dos, String scrap_name, int proj_dir, RectF bbox,
