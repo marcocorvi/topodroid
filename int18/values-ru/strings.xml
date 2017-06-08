@@ -303,11 +303,11 @@
     <string name="popup_select_shot">Выбрать замеры</string>
     <string name="popup_select_station">Выбрать пикеты</string>
 
-    <!-- TODO string name="popup_cont_none">None</string -->
-    <!-- TODO string name="popup_cont_start">Start point</string -->
-    <!-- TODO string name="popup_cont_end">End point</string -->
-    <!-- TODO string name="popup_cont_both">Both points</string -->
-    <!-- TODO string name="popup_cont_continue">Continue</string -->
+    <string name="popup_cont_none">Не соединять</string>
+    <string name="popup_cont_start">Начальная точка</string>
+    <string name="popup_cont_end">Конечная точка</string>
+    <string name="popup_cont_both">Обе точки</string>
+    <string name="popup_cont_continue">Продолжить</string>
 
     <string name="connected_none">Не соединено</string>
     <string name="connected_already">Уже соединено</string>
