@@ -748,7 +748,7 @@
     <string name="title_projection">Azimut profil projecté %1$d</string>
     <string name="title_refs">Références du dessin</string>
     <string name="title_scraps">Croquis du relevé</string>
-    <!-- TODO string name="title_scraps">Survey sketches</string -->
+    <!-- TODO string name="title_scraps_outline">Sketch outline</string -->
     <string name="title_select">Sélectionner</string>
     <string name="title_shift">Décaler</string>
     <string name="title_shot_delete">Supprimer la visée ?</string>

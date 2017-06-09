@@ -753,7 +753,7 @@
     <string name="title_projection">Проекція розрізу на азимут %1$d</string>
     <string name="title_refs">Вид</string>
     <string name="title_scraps">Абриси в зйомці</string>
-    <!-- TODO string name="title_scraps">Survey sketches</string -->
+    <!-- TODO string name="title_scraps_outline">Sketch outline</string -->
     <string name="title_select">Вибрати</string>
     <string name="title_shift">Зсув</string>
     <string name="title_shot_delete">Видалити відрізок?</string>

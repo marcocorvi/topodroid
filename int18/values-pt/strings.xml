@@ -751,7 +751,7 @@
     <string name="title_projection">Azimute do corte projetado %1$d</string>
     <string name="title_refs">Mostrar</string>
     <string name="title_scraps">Croquis da topo</string>
-    <!-- TODO string name="title_scraps">Survey sketches</string -->
+    <!-- TODO string name="title_scraps_outline">Sketch outline</string -->
     <string name="title_select">Selecionar</string>
     <string name="title_shift">Deslocar</string>
     <string name="title_shot_delete">Apagar medida?</string>

@@ -771,7 +771,7 @@
     <string name="title_projection">Projiziertes Profil Azimut %1$d</string>
     <string name="title_refs">Elemente Anzeigen</string>
     <string name="title_scraps">Skizzen</string>
-    <!-- TODO string name="title_scraps">Survey sketches</string -->
+    <!-- TODO string name="title_scraps_outline">Sketch outline</string -->
     <string name="title_select">Auswählen</string>
     <string name="title_shift">Verschieben</string>
     <string name="title_shot_delete">Messung löschen ?</string>

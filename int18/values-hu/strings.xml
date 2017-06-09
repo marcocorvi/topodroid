@@ -752,7 +752,7 @@
     <string name="title_projection">Vetített oldalnézet irányszöge %1$d</string>
     <string name="title_refs">Vázlat hivatkozásai</string>
     <string name="title_scraps">Felmérés vázlatok</string>
-    <!-- TODO string name="title_scraps">Survey sketches</string -->
+    <!-- TODO string name="title_scraps_outline">Sketch outline</string -->
     <string name="title_select">Kiválaszt</string>
     <string name="title_shift">Váltás</string>
     <string name="title_shot_delete">Mérés törlése?</string>

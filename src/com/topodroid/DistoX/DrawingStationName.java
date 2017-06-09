@@ -53,7 +53,7 @@ public class DrawingStationName extends DrawingPointPath
            DrawingPointPath.SCALE_M, null, null ); // no text no options
     mType = DRAWING_PATH_NAME; // override DrawingPath.mType
     mStation = null;
-    mName = name;
+    mName = ( name == null )? "" : name;
     mXSectionType = PlotInfo.PLOT_NULL;
 
     // TDLog.Log( TDLog.LOG_PLOT, "DrawingStationName cstr " + mName + " " + x + " " + y );

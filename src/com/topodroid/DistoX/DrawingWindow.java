@@ -2201,31 +2201,37 @@ public class DrawingWindow extends ItemDrawer
       }
     }
 
-    private boolean tryToJoin( DrawingLinePath lp1, DrawingLinePath curline )
+    // lp1    is the line (being drawn) to modify
+    // lp2    is used to get the line to join/continue
+    // return true is the line lp1 must be added to the sketch
+    private boolean tryToJoin( DrawingLinePath lp1, DrawingLinePath lp2 )
     {
+      if ( lp1 == null ) return false;
+      if ( lp2 == null ) return true;
+
       if ( mContinueLine == CONT_CONTINUE ) {
         DrawingLinePath line = null;
-        line = mDrawingSurface.getLineToContinue( curline.mFirst, mCurrentLine, mZoom, mSelectSize );
+        line = mDrawingSurface.getLineToContinue( lp2.mFirst, mCurrentLine, mZoom, mSelectSize );
         if ( line != null && mCurrentLine == line.mLineType ) { // continue line with the current line
-          mDrawingSurface.addLineToLine( curline, line );
+          mDrawingSurface.addLineToLine( lp2, line );
           return false;
         }
       // } else if ( mContinueLine == CONT_CONTINUE_END ) {
       //   DrawingLinePath line = null;
-      //   line = mDrawingSurface.getLineToContinue( curline.mFirst, mCurrentLine, mZoom, mSelectSize );
+      //   line = mDrawingSurface.getLineToContinue( lp2.mFirst, mCurrentLine, mZoom, mSelectSize );
       //   if ( line != null && mCurrentLine == line.mLineType ) { // continue line with the current line
-      //     curline.reversePath();
-      //     mDrawingSurface.addLineToLine( curline, line );
+      //     lp2.reversePath();
+      //     mDrawingSurface.addLineToLine( lp2, line );
       //     return false;
       //   }
       } else {
         DrawingLinePath line1 = null;
         DrawingLinePath line2 = null;
         if ( mContinueLine == CONT_START || mContinueLine == CONT_BOTH ) {
-          line1 = mDrawingSurface.getLineToContinue( curline.mFirst, mCurrentLine, mZoom, mSelectSize );
+          line1 = mDrawingSurface.getLineToContinue( lp2.mFirst, mCurrentLine, mZoom, mSelectSize );
         }
         if ( mContinueLine == CONT_END || mContinueLine == CONT_BOTH ) {
-          line2 = mDrawingSurface.getLineToContinue( curline.mLast, mCurrentLine, mZoom, mSelectSize );
+          line2 = mDrawingSurface.getLineToContinue( lp2.mLast, mCurrentLine, mZoom, mSelectSize );
         }
         if ( line1 != null ) {
           float d1 = line1.mFirst.distance( lp1.mFirst );
