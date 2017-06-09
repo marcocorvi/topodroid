@@ -749,7 +749,7 @@
     <string name="title_projection">投影轮廓方位 %1$d</string>
     <string name="title_refs">参考草图</string>
     <string name="title_scraps">测量草图</string>
-    <!-- TODO string name="title_scraps">Survey sketches</string -->
+    <!-- TODO string name="title_scraps_outline">Sketch outline</string -->
     <string name="title_select">选择</string>
     <string name="title_shift">转换</string>
     <string name="title_shot_delete">删除测射 ?</string>
