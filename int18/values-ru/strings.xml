@@ -609,7 +609,7 @@
     <string name="help_help">Помощь</string>
     <!-- UNUSED string name="help_manual">Инструкция</string -->
     <string name="help_measure">Измерить расстояния</string>
-    <!-- TODO string name="help_measure_type">Measuring mode: fixed point or polyline</string -->
+    <string name="help_measure_type">Режим измерений: по прямой или ломаной</string>
     
     <string name="help_calib_check">Контрольные замеры</string>
     <string name="help_close">Закрыть Окно</string>
