@@ -2355,7 +2355,7 @@ public class DrawingCommandManager
     synchronized( mSelection ) {
       // SelectionPoint sp = mSelected.shiftHotItem( dx, dy, range );
       SelectionPoint sp = mSelected.shiftHotItem( dx, dy );
-      DrawingPath path = sp.mItem;
+      // DrawingPath path = sp.mItem;
       // if ( path.mType == DrawingPath.DRAWING_PATH_POINT || DrawingWindow.mEditRadius == 0 ) {
       //   mSelection.checkBucket( sp );
       // } else {

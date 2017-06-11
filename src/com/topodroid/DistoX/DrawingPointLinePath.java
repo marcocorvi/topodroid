@@ -433,7 +433,9 @@ public class DrawingPointLinePath extends DrawingPath
     // }
     if ( mSize == 0 ) return;
     mPath = new Path();
-    LinePoint lp = mFirst;
+    LinePoint lp  = mFirst;
+    left = right  = lp.mX;
+    top  = bottom = lp.mY;
     mPath.moveTo( lp.mX, lp.mY );
     for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
       if ( lp.has_cp ) {
@@ -441,6 +443,8 @@ public class DrawingPointLinePath extends DrawingPath
       } else {
         mPath.lineTo( lp.mX, lp.mY );
       }
+      if ( lp.mX < left ) { left = lp.mX; } else if ( lp.mX > right  ) { right  = lp.mX; }
+      if ( lp.mY < top  ) { top  = lp.mY; } else if ( lp.mY > bottom ) { bottom = lp.mY; }
     }
     if ( mClosed ) mPath.close();
     computeUnitNormal();

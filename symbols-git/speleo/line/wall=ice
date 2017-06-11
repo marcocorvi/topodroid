@@ -11,6 +11,7 @@ name-ru стена_во_льду
 name-ua стіна_в_льоду
 name-hu fal_jégből
 th_name wall:ice
+group wall
 color 0xff0000 0xff
 width 1
 csurvey 5 4 1 1

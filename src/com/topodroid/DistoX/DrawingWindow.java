@@ -129,6 +129,8 @@ public class DrawingWindow extends ItemDrawer
   private static int IC_SELECT_AREA   = 20+19;
   private static int IC_SELECT_SHOT   = 20+20;
   private static int IC_SELECT_STATION= 20+21;
+  private static int IC_CONT_OFF      = 20+22;
+
 
   private static int BTN_DOWNLOAD = 3;  // index of mButton1 download button
   private static int BTN_BLUETOOTH = 4; // index of mButton1 bluetooth button
@@ -201,6 +203,7 @@ public class DrawingWindow extends ItemDrawer
                         R.drawable.iz_select_area,   // area  20+19
                         R.drawable.iz_select_shot,    // shot
                         R.drawable.iz_select_station, // station
+                        R.drawable.iz_cont_off,       // cntinuation off
                       };
   private static int menus[] = {
                         R.string.menu_switch,
@@ -322,6 +325,7 @@ public class DrawingWindow extends ItemDrawer
   static final int MODE_ERASE = 6;
   static final int MODE_ROTATE = 7; // selected point rotate
 
+  static final int CONT_OFF   = -1; // continue off
   static final int CONT_NONE  = 0;  // no continue
   static final int CONT_START = 1;  // continue: join to existing line
   static final int CONT_END   = 2;  // continue: join to existing line
@@ -472,6 +476,7 @@ public class DrawingWindow extends ItemDrawer
   private BitmapDrawable mBMcont_end;
   private BitmapDrawable mBMcont_both;
   private BitmapDrawable mBMcont_continue;
+  private BitmapDrawable mBMcont_off;
   private BitmapDrawable mBMadd;
   private BitmapDrawable mBMleft;
   private BitmapDrawable mBMright;
@@ -579,7 +584,9 @@ public class DrawingWindow extends ItemDrawer
   public void lineSelected( int k, boolean update_recent )
   {
     super.lineSelected( k, update_recent );
-    if ( mCurrentLine == BrushManager.mLineLib.mLineSectionIndex ) {
+    if ( BrushManager.mLineLib.getLineGroup( mCurrentLine ) == null ) {
+      setButtonContinue( CONT_OFF );
+    } else {
       setButtonContinue( CONT_NONE );
     }
   }
@@ -1075,6 +1082,8 @@ public class DrawingWindow extends ItemDrawer
         case CONT_CONTINUE:
           mButton2[ BTN_CONT ].setBackgroundDrawable( mBMcont_continue  );
           break;
+        case CONT_OFF:
+          mButton2[ BTN_CONT ].setBackgroundDrawable( mBMcont_off  );
       }
     } else {
       mButton2[ BTN_CONT ].setVisibility( View.GONE );
@@ -1323,6 +1332,7 @@ public class DrawingWindow extends ItemDrawer
     mBMcont_start = MyButton.getButtonBackground( mApp, res, izons[IC_CONT_START] );
     mBMcont_end   = MyButton.getButtonBackground( mApp, res, izons[IC_CONT_END] );
     mBMcont_both  = MyButton.getButtonBackground( mApp, res, izons[IC_CONT_BOTH] );
+    mBMcont_off   = MyButton.getButtonBackground( mApp, res, izons[IC_CONT_OFF] );
 
     mButton3 = new Button[ mNrButton3 ];      // EDIT
     off = (mNrButton1-3) + (mNrButton2-3); 
@@ -3687,7 +3697,7 @@ public class DrawingWindow extends ItemDrawer
           new ItemPickerDialog(mActivity, this, mType, mSymbol ).show();
         }
       } else if ( b == mButton2[k2++] ) { //  JOIN popup menu
-        if ( mSymbol == Symbol.LINE && mCurrentLine != BrushManager.mLineLib.mLineSectionIndex ) {
+        if ( mSymbol == Symbol.LINE && BrushManager.mLineLib.getLineGroup( mCurrentLine ) != null ) {
           // setButtonContinue( (mContinueLine+1) % CONT_MAX );
           makePopupJoin( b, Drawing.mJoinModes, 5, 0 );
         }
