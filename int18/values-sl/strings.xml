@@ -152,6 +152,8 @@
 
     <string name="illegal_data_value">Neustrezni podatki</string>
 
+    <!-- TODO string name="photo_title">PHOTO</string -->
+    <!-- TODO string name="photo_text">Enter photo comment</string -->
     <string name="label_title">TEKST</string>
     <string name="label_text">Piši tekst</string>
     <!-- UNUSED string name="altitude">Alt. </string -->

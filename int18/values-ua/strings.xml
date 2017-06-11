@@ -153,6 +153,8 @@
     <string name="illegal_data_value">Недопустиме значенння</string>
 
     <string name="label_title">ПІДПИС</string>
+    <!-- TODO string name="photo_title">PHOTO</string -->
+    <!-- TODO string name="photo_text">Enter photo comment</string -->
     <string name="label_text">Введіть текст підпису</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
     <string name="h_ellipsoid">H еліпсоїд. </string>

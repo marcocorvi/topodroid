@@ -152,6 +152,8 @@
 
     <string name="illegal_data_value">Dado inválido</string>
 
+    <!-- TODO string name="photo_title">PHOTO</string -->
+    <!-- TODO string name="photo_text">Enter photo comment</string -->
     <string name="label_title">RÓTULO</string>
     <string name="label_text">Inserir o texto do rótulo</string>
     <!-- UNUSED string name="altitude">Alt. </string -->

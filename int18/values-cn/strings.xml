@@ -151,6 +151,8 @@
     <!-- UNUSED string name="pairing_failed">配对失败</string -->
 
     <string name="illegal_data_value">非法数值</string>
+    <!-- TODO string name="photo_title">PHOTO</string -->
+    <!-- TODO string name="photo_text">Enter photo comment</string -->
     <string name="label_title">标签</string>
     <string name="label_text">输入标签文本</string>
     <!-- UNUSED string name="altitude">标高</string -->

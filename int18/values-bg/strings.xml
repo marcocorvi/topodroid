@@ -152,6 +152,8 @@
 
     <string name="illegal_data_value">Невалидни данни</string>
 
+    <!-- TODO string name="photo_title">PHOTO</string -->
+    <!-- TODO string name="photo_text">Enter photo comment</string -->
     <string name="label_title">надпис</string>
     <string name="label_text">Въведете текст за надписа</string>
     <!-- UNUSED string name="altitude">Надм. височина</string -->

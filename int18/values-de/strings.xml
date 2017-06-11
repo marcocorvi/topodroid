@@ -157,6 +157,8 @@
 
     <string name="illegal_data_value">Unzulässiger Datenwert</string>
 <!-- MISC STRINGS -->
+    <!-- TODO string name="photo_title">PHOTO</string -->
+    <!-- TODO string name="photo_text">Enter photo comment</string -->
     <string name="label_title">BESCHRIFTUNG</string>
     <string name="label_text">Geben Sie den Beschriftungstext ein</string>
     <!-- UNUSED string name="altitude">Höhe</string -->

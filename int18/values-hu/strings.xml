@@ -152,6 +152,8 @@
 
     <string name="illegal_data_value">Helytelen adat érték</string>
 
+    <!-- TODO string name="photo_title">PHOTO</string -->
+    <!-- TODO string name="photo_text">Enter photo comment</string -->
     <string name="label_title">FELIRAT</string>
     <string name="label_text">Írd be a feliratot.</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
