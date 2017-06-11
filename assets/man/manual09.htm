@@ -150,9 +150,15 @@ To this aim you tap near the point you want. However if there are several points
 TopoDroid has four line styles. With the normal style [default] the lines are drawn as polylines. With the fine style the polyline segments are shorter, while with the coarse style they are longer. In the fourth style lines are interpolated replacing the segments with cubic Bezier curves. These segments pass through the two endpoints and have two control points used define the curvature.<br><p>
 
 <h4>Line continuation</h4>
-The <u>Continuation</u> button is a 3-state button: "off", "join", "continue". 
-When not "off", a line started close to the end of another line of the same type is considered as its continuation and is
-either attached to that ("join") or added to that ("continue": the modified line is moved on the top of the undo stack).<br><p>
+The <u>Continuation</u> button is a multi-state button.
+<ul>
+<li><i>off</i>: the lines of the current type cannot be joined</li>
+<li><i>no</i>: the current type line will not be joined</li>
+<li><i>start</i>: the current type line will be joined to a line of the same group if its start-point is close to one of that line endpoints</li>
+<li><i>end</i>: the current type line will be joined to a line of the same group by its end-point</li>
+<li><i>both</i>: the current type line will be joined to a line of the same group by both its start and its end-point</li>
+<li><i>continue</i>: the current type line will continue a line of the same group if its start-point is close enough to an endpoint of that line</li>
+</ul>
  
 <b>Warning. If the sketch disappear from the display, switch between plan and profile to force TopoDroid to reload it.</b><br><p>
 

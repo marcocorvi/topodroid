@@ -1,4 +1,4 @@
-/** @file ILabelAdder.java
+/** @file IPhotoInserter.java
  *
  * @author marco corvi
  * @date may 2012
@@ -11,9 +11,8 @@
  */
 package com.topodroid.DistoX;
 
-public interface ILabelAdder
+public interface IPhotoInserter
 {
-  public void addLabel( String text, float x, float y );
+  public void insertPhoto( );
 
-  public void addPhotoPoint( String text, float x, float y );
 }

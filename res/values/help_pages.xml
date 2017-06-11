@@ -41,6 +41,8 @@
   <string name="DistoXAnnotations">page_survey_notes.htm</string>
   <string name="DrawingAreaDialog">page_area_dialog.htm</string>
   <string name="DrawingLabelDialog">page_label_dialog.htm</string>
+  <string name="DrawingPhotoDialog">page_photo_dialog.htm</string>
+  <string name="DrawingPhotoEditDialog">page_photo_edit_dialog.htm</string>
   <string name="DrawingLineDialog">page_line_dialog.htm</string>
   <string name="DrawingLineSectionDialog">manual11.htm</string>
   <string name="DrawingModeDialog">page_drawing_refs.htm</string>

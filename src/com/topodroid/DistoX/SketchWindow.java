@@ -1010,6 +1010,11 @@ public class SketchWindow extends ItemDrawer
     }
   }
 
+  @Override
+  public void addPhotoPoint( String text, float x, float y )
+  {
+    // TODO
+  }
 
   private void addStationName( NumStation st )
   {

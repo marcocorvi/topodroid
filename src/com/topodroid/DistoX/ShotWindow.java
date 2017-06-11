@@ -98,6 +98,7 @@ public class ShotWindow extends Activity
                         , OnLongClickListener
                         , ILister
                         , INewPlot
+                        , IPhotoInserter
 {
   final static int BTN_DOWNLOAD  = 0;
   final static int BTN_BLUETOOTH = 1;
@@ -754,7 +755,7 @@ public class ShotWindow extends Activity
     updateDisplay( ); 
   }
 
-  void insertPhoto( )
+  public void insertPhoto( )
   {
     // long shotid = 0;
     mApp.mData.insertPhoto( mApp.mSID, mPhotoId, mShotId, "", TopoDroidUtil.currentDate(), mComment ); // FIXME TITLE has to go

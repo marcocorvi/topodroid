@@ -886,7 +886,9 @@ public class DrawingCommandManager
 
   DrawingStationPath getUserStation( String name )
   {
-    for ( DrawingStationPath p : mUserStations ) if ( p.mName.equals( name ) ) return p;
+    if ( name != null ) {
+      for ( DrawingStationPath p : mUserStations ) if ( name.equals( p.name() ) ) return p;
+    }
     return null;
   }
 
@@ -2565,12 +2567,12 @@ public class DrawingCommandManager
   // called by DrawingSurface::addDrawingStationName
   public void addStation( DrawingStationName st, boolean selectable )
   {
-    // Log.v("DistoX", "add station " + st.mName + " scene " + st.cx + " " + st.cy + " XSection " + st.mXSectionType );
+    // Log.v("DistoX", "add station " + st.name() + " scene " + st.cx + " " + st.cy + " XSection " + st.mXSectionType );
     synchronized( mStations ) {
       mStations.add( st );
       if ( selectable ) {
         synchronized( mSelection ) {
-          // Log.v( "DistoX", "selection add station " + st.mName );
+          // Log.v( "DistoX", "selection add station " + st.name() );
           mSelection.insertStationName( st );
         }
       }
@@ -2582,7 +2584,7 @@ public class DrawingCommandManager
   void setStationXSections( List<PlotInfo> xsections, long type )
   {
     for ( DrawingStationName st : mStations ) {
-      String name = st.mName;
+      String name = st.name();
       // Log.v( "DistoX", "Station <" + name + ">" );
       for ( PlotInfo plot : xsections ) {
         if ( name.equals( plot.start ) ) {

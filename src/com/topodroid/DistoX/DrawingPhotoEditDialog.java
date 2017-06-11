@@ -1,9 +1,9 @@
-/* @file PhotoEditDialog.java
+/* @file DrawingPhotoEditDialog.java
  *
  * @author marco corvi
- * @date july 2012
+ * @date june 2017
  *
- * @brief TopoDroid photo edit dialog 
+ * @brief TopoDroid drawing photo-item edit dialog 
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -37,37 +37,35 @@ import android.media.ExifInterface;
 
 import android.util.Log;
 
-public class PhotoEditDialog extends MyDialog
+public class DrawingPhotoEditDialog extends MyDialog
                              implements View.OnClickListener
 {
   private TopoDroidApp  mApp;
-  private PhotoActivity mParent;
-  private PhotoInfo mPhoto;
+  private DrawingWindow mParent;
+  private DrawingPhotoPath mPhoto;
   private String mFilename;
 
   private EditText mETcomment;  // photo comment
   private ImageView mIVimage;   // photo image
   private Button   mButtonOK;
-  private Button   mButtonDelete;
+  // private Button   mButtonDelete;
   // private Button   mButtonCancel;
   private float mAzimuth = 0;
   private float mClino   = 0;
   private int mOrientation = 0;
   private String mDate = "";
-  private boolean mAtShot;
 
   /**
    * @param context   context
    */
-  PhotoEditDialog( Context context, PhotoActivity parent, TopoDroidApp app, PhotoInfo photo, String filename )
+  DrawingPhotoEditDialog( Context context, DrawingWindow parent, TopoDroidApp app, DrawingPhotoPath photo )
   {
-    super( context, R.string.PhotoEditDialog );
+    super( context, R.string.DrawingPhotoEditDialog );
     mParent = parent;
     mApp    = app;
     mPhoto  = photo;
-    mFilename = filename;
-    mAtShot   = (mPhoto.shotid >= 0);
-    // TDLog.Log(TDLog.LOG_PHOTO, "PhotoEditDialog " + mFilename);
+    mFilename = TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString(mPhoto.mId) );
+    TDLog.Log(TDLog.LOG_PHOTO, "DrawingPhotoEditDialog " + mFilename);
 
     mAzimuth = mClino = 0;
     try {
@@ -97,20 +95,20 @@ public class PhotoEditDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
     // TDLog.Log( TDLog.LOG_PHOTO, "onCreate" );
-    initLayout( R.layout.photo_edit_dialog, R.string.title_photo_comment );
+    initLayout( R.layout.drawing_photo_edit_dialog, R.string.title_photo_comment );
 
     mIVimage      = (ImageView) findViewById( R.id.photo_image );
     mETcomment    = (EditText) findViewById( R.id.photo_comment );
     mButtonOK     = (Button) findViewById( R.id.photo_ok );
-    mButtonDelete = (Button) findViewById( R.id.photo_delete );
+    // mButtonDelete = (Button) findViewById( R.id.photo_delete );
     // mButtonCancel = (Button) findViewById( R.id.photo_cancel );
 
     ((TextView) findViewById( R.id.photo_azimuth )).setText(
        String.format( mContext.getResources().getString( R.string.photo_azimuth_clino ), mAzimuth, mClino ) );
     ((TextView) findViewById( R.id.photo_date )).setText( mDate );
 
-    if ( mPhoto.mComment != null ) {
-      mETcomment.setText( mPhoto.mComment );
+    if ( mPhoto.mPointText != null ) {
+      mETcomment.setText( mPhoto.mPointText );
     }
     try {
       // public String getSurveyJpgFile( String name )
@@ -145,30 +143,24 @@ public class PhotoEditDialog extends MyDialog
     }
 
     mButtonOK.setOnClickListener( this );
-    if ( mAtShot ) {
-      mButtonDelete.setOnClickListener( this );
-    } else {
-      mButtonDelete.setVisibility( View.GONE );
-    }
+    // mButtonDelete.setOnClickListener( this );
     // mButtonCancel.setOnClickListener( this );
   }
 
   public void onClick(View v) 
   {
     // Button b = (Button) v;
-    // TDLog.Log(  TDLog.LOG_INPUT, "PhotoEditDialog onClick() " + b.getText().toString() );
+    // TDLog.Log(  TDLog.LOG_INPUT, "DrawingPhotoEditDialog onClick() " + b.getText().toString() );
 
     switch ( v.getId() ) {
       case R.id.photo_ok:
-        if ( mETcomment.getText() == null ) {
-          mParent.updatePhoto( mPhoto, "" );
-        } else {
-          mParent.updatePhoto( mPhoto, mETcomment.getText().toString() );
-        }
+        String comment = ( mETcomment.getText() == null )? "" : mETcomment.getText().toString();
+        mPhoto.setPointText( comment );
+        mApp.mData.updatePhoto( mApp.mSID, mPhoto.mId, comment );
         break;
-      case R.id.photo_delete:
-        mParent.dropPhoto( mPhoto );
-        break;
+      // case R.id.photo_delete:
+      //   mParent.dropPhoto( mPhoto );
+      //   break;
       case R.id.photo_image:
         mApp.viewPhoto( mContext, mFilename );
         return;

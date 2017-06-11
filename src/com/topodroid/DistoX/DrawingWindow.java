@@ -90,6 +90,7 @@ public class DrawingWindow extends ItemDrawer
                                       , IExporter
                                       , IFilterClickHandler
                                       , IJoinClickHandler
+                                      , IPhotoInserter
 {
   private static int izons_ok[] = { 
                         R.drawable.iz_edit_ok, // 0
@@ -2049,6 +2050,12 @@ public class DrawingWindow extends ItemDrawer
     void deletePoint( DrawingPointPath point ) 
     {
       mDrawingSurface.deletePath( point ); 
+      if ( point.mPointType == BrushManager.mPointLib.mPointPhotoIndex ) {
+        DrawingPhotoPath photo = (DrawingPhotoPath)point;
+        mApp.mData.deletePhoto( mApp.mSID, photo.mId );
+        File file = new File( TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString( photo.mId ) ) );
+        file.delete();
+      }
       modified();
     }
 
@@ -2755,8 +2762,9 @@ public class DrawingWindow extends ItemDrawer
               if ( ( ! pointerDown ) && Math.abs( x_shift ) < TDSetting.mPointingRadius 
                                      && Math.abs( y_shift ) < TDSetting.mPointingRadius ) {
                 if ( mCurrentPoint == BrushManager.mPointLib.mPointLabelIndex ) {
-                  DrawingLabelDialog label = new DrawingLabelDialog( mActivity, this, x_scene, y_scene );
-                  label.show();
+                  (new DrawingLabelDialog( mActivity, this, x_scene, y_scene )).show();
+                } else if ( mCurrentPoint == BrushManager.mPointLib.mPointPhotoIndex ) {
+                  (new DrawingPhotoDialog( mActivity, this, x_scene, y_scene )).show();
                 } else {
                   mDrawingSurface.addDrawingPath( 
                     new DrawingPointPath( mCurrentPoint, x_scene, y_scene, mPointScale, null, null ) ); // no text, no options
@@ -2820,6 +2828,36 @@ public class DrawingWindow extends ItemDrawer
         mDrawingSurface.addDrawingPath( label_path );
         modified();
       } 
+    }
+
+    String mPhotoComment = null;
+    long mPhotoId = -1L;
+    float mPhotoX, mPhotoY;
+
+    public void insertPhoto( )
+    {
+      mApp.mData.insertPhoto( mApp.mSID, mPhotoId, -1, "", TopoDroidUtil.currentDate(), mPhotoComment ); // FIXME TITLE has to go
+      // FIXME NOTIFY ? no
+      // photo file is "survey/id.jpg"
+      // String filename = mApp.mySurvey + "/" + Long.toString( mPhotoId ) + ".jpg";
+      DrawingPhotoPath photo = new DrawingPhotoPath( mPhotoComment, mPhotoX, mPhotoY, mPointScale, null, mPhotoId );
+      mDrawingSurface.addDrawingPath( photo );
+      modified();
+    }
+
+    public void addPhotoPoint( String comment, float x, float y )
+    {
+      mPhotoComment = (comment == null)? "" : comment;
+      mPhotoId = mApp.mData.nextPhotoId( mApp.mSID );
+      mPhotoX = x;
+      mPhotoY = y;
+      File file = new File( TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString(mPhotoId) ) );
+      // TODO TD_XSECTION_PHOTO
+      new QCamCompass( this,
+                       (new MyBearingAndClino( mApp, file )),
+                       this,
+                       true, false).show();  // true = with_box, false=with_delay
+
     }
 
     void setCurrentStationName( String name ) { mApp.setCurrentStationName( name ); }
@@ -3710,7 +3748,7 @@ public class DrawingWindow extends ItemDrawer
         } else {
           makePopupFilter( b, Drawing.mSelectModes, 6, Drawing.CODE_SELECT );
         }
-      } else if ( b == mButton3[k3++] ) { // next
+      } else if ( b == mButton3[k3++] ) { // NEXT
         if ( mHasSelected ) {
           SelectionPoint pt = mDrawingSurface.nextHotItem( );
           if ( mDoEditRange == 0 ) mMode = MODE_SHIFT;
@@ -3726,7 +3764,7 @@ public class DrawingWindow extends ItemDrawer
           // SelectionPoint sp = mDrawingSurface.hotItem();
           // if ( sp != null && sp.mItem.mType == DrawingPath.DRAWING_PATH_NAME ) {
           //   DrawingStationName sn = (DrawingStationName)(sp.mItem);
-          //   new DrawingBarrierDialog( this, this, sn.mName, mNum.isBarrier( sn.mName ) ).show();
+          //   new DrawingBarrierDialog( this, this, sn.name(), mNum.isBarrier( sn.name() ) ).show();
           // }
         }
       } else if ( b == mButton3[k3++] ) { // EDIT ITEM PROPERTIES
@@ -3736,14 +3774,19 @@ public class DrawingWindow extends ItemDrawer
           switch ( sp.type() ) {
             case DrawingPath.DRAWING_PATH_NAME:
               DrawingStationName sn = (DrawingStationName)(sp.mItem);
-              DrawingStationPath path = mDrawingSurface.getStationPath( sn.mName );
-              boolean barrier = mNum.isBarrier( sn.mName );
-              boolean hidden  = mNum.isHidden( sn.mName );
-              List< DBlock > legs = mData.selectShotsAt( mApp.mSID, sn.mName, true ); // select "independent" legs
+              DrawingStationPath path = mDrawingSurface.getStationPath( sn.name() );
+              boolean barrier = mNum.isBarrier( sn.name() );
+              boolean hidden  = mNum.isHidden( sn.name() );
+              List< DBlock > legs = mData.selectShotsAt( mApp.mSID, sn.name(), true ); // select "independent" legs
               new DrawingStationDialog( mActivity, this, sn, path, barrier, hidden, legs ).show();
               break;
             case DrawingPath.DRAWING_PATH_POINT:
-              new DrawingPointDialog( mActivity, this, (DrawingPointPath)(sp.mItem) ).show();
+              DrawingPointPath point = (DrawingPointPath)(sp.mItem);
+              if ( point.mPointType == BrushManager.mPointLib.mPointPhotoIndex ) {
+                new DrawingPhotoEditDialog( mActivity, this, mApp, (DrawingPhotoPath)point ).show();
+              } else {
+                new DrawingPointDialog( mActivity, this, point ).show();
+              }
               // mModified = true;
               break;
             case DrawingPath.DRAWING_PATH_LINE:

@@ -71,7 +71,7 @@ public class DrawingStationDialog extends MyDialog
       mParent   = parent;
       mStation  = station;
       mPath     = path;
-      mStationName = mStation.mName;
+      mStationName = mStation.name();
       mIsBarrier = is_barrier; 
       mIsHidden  = is_hidden; 
       mBlk       = blk;

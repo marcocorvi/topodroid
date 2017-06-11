@@ -1,0 +1,22 @@
+symbol point
+name photo
+th_name photo
+orientation no
+has_text yes
+color 0xffffff
+csurvey 6 6 80
+path
+  moveTo -5 3
+  lineTo 5 3
+  lineTo 5 -3
+  lineTo 3 -3
+  lineTo 1 -5
+  lineTo -1 -5
+  lineTo -3 -3
+  lineTo -5 -3
+  lineTo -5 3
+  addCircle 0 0 1.5
+endpath
+endsymbol
+
+

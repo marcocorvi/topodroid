@@ -877,7 +877,7 @@ class DrawingDxf
           if ( path.mType == DrawingPath.DRAWING_PATH_STATION )
           {
             DrawingStationPath st = (DrawingStationPath)path;
-            handle = printText( pw5, handle, st.mName, (st.cx+xoff) * scale, -(st.cy+yoff) * scale,
+            handle = printText( pw5, handle, st.name(), (st.cx+xoff) * scale, -(st.cy+yoff) * scale,
                                 0, LABEL_SCALE, "STATION", my_style, xoff, yoff );
           } 
           else if ( path.mType == DrawingPath.DRAWING_PATH_LINE )
@@ -932,13 +932,13 @@ class DrawingDxf
 
   static private int toDxf( PrintWriter pw, int handle, DrawingStationName sn, float scale, float xoff, float yoff )
   { // FIXME point scale factor is 0.3
-    return printText( pw, handle, sn.mName,  (sn.cx+xoff)*scale, -(sn.cy+yoff)*scale, 0,
+    return printText( pw, handle, sn.name(),  (sn.cx+xoff)*scale, -(sn.cy+yoff)*scale, 0,
                         STATION_SCALE, "STATION", my_style, xoff, yoff );
   }
 
   static private int toDxf( PrintWriter pw, int handle, DrawingStationPath st, float scale, float xoff, float yoff )
   { // FIXME point scale factor is 0.3
-    return printText( pw, handle, st.mName,  (st.cx+xoff)*scale, -(st.cy+yoff)*scale, 0,
+    return printText( pw, handle, st.name(),  (st.cx+xoff)*scale, -(st.cy+yoff)*scale, 0,
                         STATION_SCALE, "STATION", my_style, xoff, yoff );
   }
 

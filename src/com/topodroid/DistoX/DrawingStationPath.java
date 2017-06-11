@@ -35,7 +35,7 @@ public class DrawingStationPath extends DrawingPath
 
   // float mXpos, mYpos;         // X-Y station position (scene): use cx, cy
   protected int mScale;       //! symbol scale
-  String mName;               // station name
+  private String mName;               // station name
 
 
   public DrawingStationPath( String name, float x, float y, int scale )
@@ -48,7 +48,7 @@ public class DrawingStationPath extends DrawingPath
     // mYpos = y;
     cx = x;
     cy = y;
-    mName = name;
+    mName = (name == null)? "" : name;
     setBBox( cx-10, cx+10, cy-10, cy+10 );
 
     mScale = DrawingPointPath.SCALE_NONE; // scale
@@ -68,7 +68,7 @@ public class DrawingStationPath extends DrawingPath
     // mYpos = st.cy;
     cx = st.cx;  // st.cx : scene coords
     cy = st.cy;
-    mName = st.mName;
+    mName = st.name(); // N.B. st.name is not null
 
     mScale = DrawingPointPath.SCALE_NONE; // scale
     // mPath = null;
@@ -77,6 +77,8 @@ public class DrawingStationPath extends DrawingPath
     // Log.v( TopoDroidApp.TAG, "Point cstr " + type + " orientation " + mOrientation + " flip " + mFlip );
     setBBox( cx - 1, cx + 1, cy - 1, cy + 1 );
   }
+
+  String name() { return mName; }
 
   void setScale( int scale )
   {

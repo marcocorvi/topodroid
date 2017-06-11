@@ -152,6 +152,8 @@
 
     <string name="illegal_data_value">Illegal data value</string>
 
+    <string name="photo_title">PHOTO</string>
+    <string name="photo_text">Enter photo comment</string>
     <string name="label_title">LABEL</string>
     <string name="label_text">Enter the label text</string>
     <!-- UNUSED string name="altitude">Alt. </string -->

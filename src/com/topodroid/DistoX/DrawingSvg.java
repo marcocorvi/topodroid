@@ -273,14 +273,14 @@ class DrawingSvg
   {
     pw.format("<text font-size=\"20\" font=\"sans-serif\" fill=\"violet\" stroke=\"none\" text-amchor=\"middle\"");
     pw.format(Locale.US, " x=\"%.2f\" y=\"%.2f\">", xoff + name.cx, yoff + name.cy );
-    pw.format("%s</text>\n", name.mName );
+    pw.format("%s</text>\n", name.name() );
   }
 
   static private void toSvg( PrintWriter pw, DrawingStationPath st, float xoff, float yoff )
   {
     pw.format("<text font-size=\"20\" font=\"sans-serif\" fill=\"black\" stroke=\"none\" text-amchor=\"middle\"");
     pw.format(Locale.US, " x=\"%.2f\" y=\"%.2f\">", xoff + st.cx, yoff + st.cy );
-    pw.format("%s</text>\n", st.mName );
+    pw.format("%s</text>\n", st.name() );
   }
 
   static private void toSvg( PrintWriter pw, DrawingLinePath line, String color, float xoff, float yoff ) 

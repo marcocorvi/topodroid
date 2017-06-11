@@ -364,7 +364,7 @@ public class DrawingSurface extends SurfaceView
     }
     if ( xsections != null ) {
       for ( PlotInfo plot : xsections ) {
-        if ( plot.start.equals( st.mName ) ) {
+        if ( plot.start.equals( st.name() ) ) {
           st.setXSection( plot.azimuth, plot.clino, mType );
           break;
         }

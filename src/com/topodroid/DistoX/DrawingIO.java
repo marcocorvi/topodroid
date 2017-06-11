@@ -671,6 +671,9 @@ class DrawingIO
             case 'T':
               path = DrawingLabelPath.loadDataStream( version, dis, dx, dy );
               break;
+            case 'Y':
+              path = DrawingPhotoPath.loadDataStream( version, dis, dx, dy );
+              break;
             case 'L':
               path = DrawingLinePath.loadDataStream( version, dis, dx, dy, missingSymbols );
               // Log.v("DistoX0", "add path ... " + ((DrawingLinePath)path).mFirst.mX + " " + ((DrawingLinePath)path).mFirst.mY );
@@ -869,7 +872,8 @@ class DrawingIO
       if ( TDSetting.mAutoStations ) {
         synchronized( stations ) {
           for ( DrawingStationName st : stations ) {
-            if ( st.mStation != null && st.mStation.barriered() ) continue;
+            NumStation station = st.station();
+            if ( station != null && station.barriered() ) continue;
             if ( bbox.left > st.cx || bbox.right  < st.cx ) continue;
             if ( bbox.top  > st.cy || bbox.bottom < st.cy ) continue;
             st.toDataStream( dos );
@@ -1022,7 +1026,8 @@ class DrawingIO
 
       if ( TDSetting.mAutoStations ) {
         for ( DrawingStationName st : stations ) {
-          if ( st.mStation != null && st.mStation.barriered() ) continue;
+          NumStation station = st.station();
+          if ( station != null && station.barriered() ) continue;
           // FIXME if station is in the convex hull (bbox) of the lines
           if ( bbox.left > st.cx || bbox.right  < st.cx ) continue;
           if ( bbox.top  > st.cy || bbox.bottom < st.cy ) continue;
@@ -1036,7 +1041,7 @@ class DrawingIO
             float x = st.cx * th;
             float y = - st.cy * th;
             th *= DrawingUtil.SCALE_FIX;
-            List< DBlock > blks = dh.selectSplaysAt( sid, st.mName, false );
+            List< DBlock > blks = dh.selectSplaysAt( sid, st.name(), false );
             if ( type == PlotInfo.PLOT_PLAN ) {
               for ( DBlock blk : blks ) {
                 float h = blk.mLength * TDMath.cosd( blk.mClino ) * th;
