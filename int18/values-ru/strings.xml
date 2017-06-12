@@ -151,8 +151,8 @@
     <!-- UNUSED string name="pairing_failed">Не удалось соединить устройства</string -->
 
     <string name="illegal_data_value">Недопустимое значение</string>
-    <!-- TODO string name="photo_title">PHOTO</string -->
-    <!-- TODO string name="photo_text">Enter photo comment</string -->
+    <string name="photo_title">ФОТО</string>
+    <string name="photo_text">Введите коментарий к фото</string>
     <string name="label_title">ПОДПИСЬ</string>
     <string name="label_text">Введите текст подписи</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
