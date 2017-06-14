@@ -1530,9 +1530,16 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
-  public void insertAudio( long sid, long id, long bid, String date )
+  // negative id used for sketch audios
+  // positive id used for blocks audios
+  public long nextAudioNegId( long sid )
   {
-    if ( myDB == null ) return;
+    return minId( AUDIO_TABLE, sid );
+  }
+
+  public long insertAudio( long sid, long id, long bid, String date )
+  {
+    if ( myDB == null ) return -1L;
     if ( id == -1L ) id = maxId( AUDIO_TABLE, sid );
     ContentValues cv = new ContentValues();
     cv.put( "surveyId", sid );
@@ -1543,6 +1550,7 @@ public class DataHelper extends DataSetObservable
         myDB.insert( AUDIO_TABLE, null, cv );
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch ( SQLiteException e ) { logError("insert audio " + sid + "/" + bid, e); }
+    return id;
   }
 
   public void setAudio( long sid, long bid, String date )
@@ -2949,22 +2957,39 @@ public class DataHelper extends DataSetObservable
      return id;
    }
 
-   private long maxId( String table, long sid )
-   {
-     long id = 1;
-     if ( myDB == null ) return 1L;
-     Cursor cursor = myDB.query( table, new String[] { "max(id)" },
-                          "surveyId=?", 
-                          new String[] { Long.toString(sid) },
-                          null, null, null );
-     if (cursor != null ) {
-       if (cursor.moveToFirst() ) {
-         id = 1 + cursor.getLong(0);
-       }
-       if (!cursor.isClosed()) cursor.close();
-     }
-     return id;
-   }
+  private long maxId( String table, long sid )
+  {
+    long id = 1;
+    if ( myDB == null ) return 1L;
+    Cursor cursor = myDB.query( table, new String[] { "max(id)" },
+                         "surveyId=?", 
+                         new String[] { Long.toString(sid) },
+                         null, null, null );
+    if (cursor != null ) {
+      if (cursor.moveToFirst() ) {
+        id = 1 + cursor.getLong(0);
+      }
+      if (!cursor.isClosed()) cursor.close();
+    }
+    return id;
+  }
+
+  private long minId( String table, long sid )
+  {
+    if ( myDB == null ) return -2L;
+    long id = -1L;
+    Cursor cursor = myDB.query( table, new String[] { "min(id)" },
+                         "surveyId=?", 
+                         new String[] { Long.toString(sid) },
+                         null, null, null );
+    if (cursor != null ) {
+      if (cursor.moveToFirst() ) {
+        if ( cursor.getLong(0) < id ) id = cursor.getLong(0);
+      }
+      if (!cursor.isClosed()) cursor.close();
+    }
+    return id - 1L;
+  }
 
   public long getLastShotId( long sid )
   {

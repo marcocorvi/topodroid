@@ -498,6 +498,8 @@ public class DrawingSurface extends SurfaceView
     return commandManager.setRangeAt( x, y, zoom, type, size );
   }
 
+  DrawingAudioPath getAudioPoint( long bid ) { return commandManager.getAudioPoint( bid ); }
+
   boolean moveHotItemToNearestPoint() { return commandManager.moveHotItemToNearestPoint(); }
   
   int snapHotItemToNearestLine() { return commandManager.snapHotItemToNearestLine(); }

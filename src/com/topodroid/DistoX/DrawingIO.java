@@ -674,6 +674,9 @@ class DrawingIO
             case 'Y':
               path = DrawingPhotoPath.loadDataStream( version, dis, dx, dy );
               break;
+            case 'Z':
+              path = DrawingAudioPath.loadDataStream( version, dis, dx, dy );
+              break;
             case 'L':
               path = DrawingLinePath.loadDataStream( version, dis, dx, dy, missingSymbols );
               // Log.v("DistoX0", "add path ... " + ((DrawingLinePath)path).mFirst.mX + " " + ((DrawingLinePath)path).mFirst.mY );

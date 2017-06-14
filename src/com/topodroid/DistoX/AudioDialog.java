@@ -52,26 +52,27 @@ public class AudioDialog extends MyDialog
   Button mBtnClose;
 
   TopoDroidApp mApp;
-  ShotWindow   mParent;
-  DBlock mBlk;
+  IAudioInserter mParent;
+  long mBid;
   String mFilepath;
   boolean hasFile;
   boolean canRec;
   boolean canPlay;
   // AudioInfo mAudio;
 
-  AudioDialog( Context ctx, TopoDroidApp app, ShotWindow parent, DBlock blk )
+  AudioDialog( Context ctx, TopoDroidApp app, IAudioInserter parent, long bid )
   {
     super( ctx, R.string.AudioDialog );
 
     mApp = app;
     mParent = parent;
-    mBlk = blk;
-    // mAudio = mApp.mData.getAudio( mApp.mSID, blk.mId );
-    mFilepath = TDPath.getSurveyAudioFile( mApp.mySurvey, Long.toString(mBlk.mId) );
+    mBid = bid;
+    // mAudio = mApp.mData.getAudio( mApp.mSID, mBid );
+    mFilepath = TDPath.getSurveyAudioFile( mApp.mySurvey, Long.toString(mBid) );
     File file = new File( mFilepath );
     hasFile = file.exists();
   }
+
 
   @Override
   protected void onCreate( Bundle savedInstanceState)
@@ -127,7 +128,7 @@ public class AudioDialog extends MyDialog
           return;
           // File file = new File( mFilepath );
           // file.delete();
-          // mApp.mData.dropAudio( mApp.mSID, mBlk.mId );
+          // mApp.mData.dropAudio( mApp.mSID, mBid );
         }
       } else if ( b == mBtnPlay ) {
         mAction = ACTION_NONE;
@@ -177,12 +178,14 @@ public class AudioDialog extends MyDialog
   {
     File file = new File( mFilepath );
     file.delete();
-    mApp.mData.deleteAudio( mApp.mSID, mBlk.mId );
+    mApp.mData.deleteAudio( mApp.mSID, mBid );
+    if ( mParent != null ) mParent.deletedAudio( mBid );
   }
 
   public void startRec()
   {
     try {
+      if ( mParent != null ) mParent.startRecordAudio( mBid );
       mMR = new MediaRecorder();
       mMR.setAudioSource(MediaRecorder.AudioSource.MIC);
       mMR.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
@@ -211,7 +214,8 @@ public class AudioDialog extends MyDialog
       mBtnConfirm.setText( R.string.audio_paused );
       canPlay = true;
       hasFile = true;
-      mApp.mData.setAudio( mApp.mSID, mBlk.mId, TopoDroidUtil.currentDateTime() );
+      mApp.mData.setAudio( mApp.mSID, mBid, TopoDroidUtil.currentDateTime() );
+      if ( mParent != null ) mParent.stopRecordAudio( mBid );
     } catch ( IllegalStateException e ) {
     } catch ( RuntimeException e ) {
     }

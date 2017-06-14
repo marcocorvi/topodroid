@@ -395,7 +395,7 @@ public class SketchWindow extends ItemDrawer
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {
-          doMakeSurface( );
+          doMakeSurface( true );
         }
       }
     );
@@ -876,7 +876,7 @@ public class SketchWindow extends ItemDrawer
     mInfo.resetDirection(); // azi = 0, clino = 0, and compute triad versors
     resetZoom();
     if ( mModel.mCurrentSurface == null ) {
-      doMakeSurface( );
+      doMakeSurface( false );
     }
 
     mImage = (Button) findViewById( R.id.handle );
@@ -1188,10 +1188,10 @@ public class SketchWindow extends ItemDrawer
 
   private SketchFixedPath doSelectShotAt( float x_scene, float y_scene, float size )
   {
-    if ( mSelectMode == Drawing.FILTER_SHOT ) { 
+    // if ( mSelectMode == Drawing.FILTER_SHOT ) { 
       return mModel.selectShotAt( x_scene, y_scene, size );
-    }
-    return null;
+    // }
+    // return null;
   }
 
   private SketchStationName doSelectStationAt( float x_scene, float y_scene, float size )
@@ -1388,6 +1388,9 @@ public class SketchWindow extends ItemDrawer
               mInfo.st1 = blk.mFrom;
               mInfo.st2 = blk.mTo;
               computeReferenceFrame( false );
+              if ( ! mModel.hasSurface( mInfo.st1, mInfo.st2 ) ) {
+                doMakeSurface( false );
+              }
 
               // mInfo.resetDirection(); // azi = 0, clino = 0, and compute triad versors
               // resetZoom();
@@ -1835,23 +1838,23 @@ public class SketchWindow extends ItemDrawer
       setMode( SketchDef.MODE_SELECT );
 
 // MODE_MOVE 
-    } else if ( b == mButton1[k1++] ) { // display mode. cycle (NGBH, SINGLE, ALL, NONE)
+    } else if ( b == mButton1[k1++] ) { // DISPLAY MODE. cycle (NGBH, SINGLE, ALL, NONE)
       if ( mLoaded ) {
-        (new SketchModeDialog( mActivity, mModel )).show();
+        new SketchModeDialog( mActivity, mModel ).show();
       } else {
         Toast.makeText( mActivity, R.string.sketch3d_loading, Toast.LENGTH_SHORT ).show();
       }
-    } else if ( b == mButton1[k1++] ) { // surface
+    } else if ( b == mButton1[k1++] ) { // SURFACE
       if ( mLoaded ) {
         if ( mModel.mCurrentSurface != null ) {
           alertMakeSurface( );
         } else {
-          doMakeSurface( );
+          doMakeSurface( true );
         }
       } else {
         Toast.makeText( mActivity, R.string.sketch3d_loading, Toast.LENGTH_SHORT ).show();
       }
-    } else if ( b == mButton1[k1++] ) { // download
+    } else if ( b == mButton1[k1++] ) { // DOWNLOAD
       if ( mApp.mDevice != null ) {
         // TODO if there is an empty shot use it, else try to download the data
         //      with the Asynch task that download the data.
@@ -1863,18 +1866,18 @@ public class SketchWindow extends ItemDrawer
       } else {
         Toast.makeText( mActivity, R.string.device_none, Toast.LENGTH_SHORT ).show();
       }
-    } else if ( b == mButton1[k1++] ) { // notes
+    } else if ( b == mButton1[k1++] ) { // NOTES
       (new DistoXAnnotations( mActivity, mData.getSurveyFromId(mSid) )).show();
-    } else if ( b == mButton1[k1++] ) { // info
+    } else if ( b == mButton1[k1++] ) { // INFO
       // float azimuth = -1;
       new DistoXStatDialog( mActivity, mNum, mInfo.start, -1, mData.getSurveyStat( mApp.mSID ) ).show();
 
 // MODE_DRAW
-    } else if ( b == mButton2[k2++] ) { // undo
+    } else if ( b == mButton2[k2++] ) { // UNDO
       mModel.undo();
-    } else if ( b == mButton2[k2++] ) { // redo
+    } else if ( b == mButton2[k2++] ) { // REDO
       mModel.redo();
-    } else if ( b == mButton2[k2++] ) { // palette
+    } else if ( b == mButton2[k2++] ) { // PALETTE
       if ( TDSetting.mPickerType == TDSetting.PICKER_RECENT ) { 
         new ItemRecentDialog(mActivity, this, mType ).show();
       } else {
@@ -1975,22 +1978,6 @@ public class SketchWindow extends ItemDrawer
   //   setMode( ( select != SketchDef.SELECT_NONE )? SketchDef.MODE_EDIT : SketchDef.MODE_MOVE );
   // }
 
-  // ----------------------------------------------------------------
-  // SECTION
-
-  // void setSectionType( int type )
-  // { 
-  //   mModel.setSectionType( type );
-  //   mSectionType = type;
-  // }
-
-  void startSectionDialog()
-  {
-  }
-
-  void addSection()
-  {
-  }
 
     // ----------------------------------------------------------------
 
@@ -2188,23 +2175,22 @@ public class SketchWindow extends ItemDrawer
   //   return null;
   // }
   
-  public void doMakeSurface( )
+  public void doMakeSurface( boolean toast )
   {
     if ( TDSetting.mSketchModelType == 1 ) {
       mModel.makeSurface( mModel.SURFACE_CONVEX_HULL );
     } else if ( TDSetting.mSketchModelType == 2 ) {
-/* if POWERCRUST */
       mModel.makeSurface( mModel.SURFACE_POWERCRUST );
-/* else
-      Toast.makeText( mActivity, "Powercrust supported only in debug", Toast.LENGTH_SHORT ).show();
-   endif */
+    } else if ( toast ) {
+      Toast.makeText( mActivity, "no surface type selected", Toast.LENGTH_SHORT ).show();
     }
   }
 
-  public void removeSurface( boolean with_sections )
-  {
-    mModel.removeSurface( with_sections );
-  }
+  // UNUSED
+  // public void removeCurrentSurface( boolean with_sections )
+  // {
+  //   mModel.removeCurrentSurface( with_sections );
+  // }
 
   @Override
   public boolean onSearchRequested()

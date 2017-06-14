@@ -70,6 +70,10 @@ public class BrushManager
   static Path getPointPath( int i ) { return mPointLib.getPointPath( i ); }
   static Path getPointOrigPath( int i ) { return mPointLib.getPointOrigPath( i ); }
 
+  static boolean isPointLabel( int index ) { return index == mPointLib.mPointLabelIndex; }
+  static boolean isPointPhoto( int index ) { return index == mPointLib.mPointPhotoIndex; }
+  static boolean isPointAudio( int index ) { return index == mPointLib.mPointAudioIndex; }
+
   static int getPointLabelIndex() { return mPointLib.mPointLabelIndex; }
 
   // FIXME AREA_ORIENT

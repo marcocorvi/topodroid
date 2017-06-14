@@ -2563,6 +2563,27 @@ public class DrawingCommandManager
       pw.format("    </layers>\n");
     }
   }
+
+  DrawingAudioPath getAudioPoint( long bid )
+  {
+    synchronized( mCurrentStack ) {
+      final Iterator i = mCurrentStack.iterator();
+      while ( i.hasNext() ){
+        final ICanvasCommand cmd = (ICanvasCommand) i.next();
+        if ( cmd.commandType() == 0 ) {
+          DrawingPath path = (DrawingPath)cmd;
+          if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
+            DrawingPointPath pt = (DrawingPointPath)path;
+            if ( pt.mPointType == BrushManager.mPointLib.mPointAudioIndex ) {
+              DrawingAudioPath audio = (DrawingAudioPath)pt;
+              if ( audio.mId == bid ) return audio;
+            }
+          }
+        }
+      }
+    }
+    return null;
+  }
  
   // called by DrawingSurface::addDrawingStationName
   public void addStation( DrawingStationName st, boolean selectable )

@@ -91,6 +91,7 @@ public class DrawingWindow extends ItemDrawer
                                       , IFilterClickHandler
                                       , IJoinClickHandler
                                       , IPhotoInserter
+                                      , IAudioInserter
 {
   private static int izons_ok[] = { 
                         R.drawable.iz_edit_ok, // 0
@@ -2049,11 +2050,17 @@ public class DrawingWindow extends ItemDrawer
 
     void deletePoint( DrawingPointPath point ) 
     {
+      if ( point == null ) return;
       mDrawingSurface.deletePath( point ); 
-      if ( point.mPointType == BrushManager.mPointLib.mPointPhotoIndex ) {
+      if ( BrushManager.isPointPhoto( point.mPointType ) ) {
         DrawingPhotoPath photo = (DrawingPhotoPath)point;
         mApp.mData.deletePhoto( mApp.mSID, photo.mId );
         File file = new File( TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString( photo.mId ) ) );
+        file.delete();
+      } else if ( BrushManager.isPointAudio( point.mPointType ) ) {
+        DrawingAudioPath audio = (DrawingAudioPath)point;
+        mApp.mData.deleteAudio( mApp.mSID, audio.mId );
+        File file = new File( TDPath.getSurveyAudioFile( mApp.mySurvey, Long.toString( audio.mId ) ) );
         file.delete();
       }
       modified();
@@ -2761,10 +2768,12 @@ public class DrawingWindow extends ItemDrawer
             { // Symbol.POINT
               if ( ( ! pointerDown ) && Math.abs( x_shift ) < TDSetting.mPointingRadius 
                                      && Math.abs( y_shift ) < TDSetting.mPointingRadius ) {
-                if ( mCurrentPoint == BrushManager.mPointLib.mPointLabelIndex ) {
-                  (new DrawingLabelDialog( mActivity, this, x_scene, y_scene )).show();
-                } else if ( mCurrentPoint == BrushManager.mPointLib.mPointPhotoIndex ) {
-                  (new DrawingPhotoDialog( mActivity, this, x_scene, y_scene )).show();
+                if ( BrushManager.isPointLabel( mCurrentPoint ) ) {
+                  new DrawingLabelDialog( mActivity, this, x_scene, y_scene ).show();
+                } else if ( BrushManager.isPointPhoto( mCurrentPoint ) ) {
+                  new DrawingPhotoDialog( mActivity, this, x_scene, y_scene ).show();
+                } else if ( BrushManager.isPointAudio( mCurrentPoint ) ) {
+                  addAudioPoint( x_scene, y_scene );
                 } else {
                   mDrawingSurface.addDrawingPath( 
                     new DrawingPointPath( mCurrentPoint, x_scene, y_scene, mPointScale, null, null ) ); // no text, no options
@@ -2830,34 +2839,67 @@ public class DrawingWindow extends ItemDrawer
       } 
     }
 
-    String mPhotoComment = null;
-    long mPhotoId = -1L;
-    float mPhotoX, mPhotoY;
+    String mMediaComment = null;
+    long  mMediaId = -1L;
+    float mMediaX, mMediaY;
 
     public void insertPhoto( )
     {
-      mApp.mData.insertPhoto( mApp.mSID, mPhotoId, -1, "", TopoDroidUtil.currentDate(), mPhotoComment ); // FIXME TITLE has to go
+      mApp.mData.insertPhoto( mApp.mSID, mMediaId, -1, "", TopoDroidUtil.currentDate(), mMediaComment ); // FIXME TITLE has to go
       // FIXME NOTIFY ? no
       // photo file is "survey/id.jpg"
-      // String filename = mApp.mySurvey + "/" + Long.toString( mPhotoId ) + ".jpg";
-      DrawingPhotoPath photo = new DrawingPhotoPath( mPhotoComment, mPhotoX, mPhotoY, mPointScale, null, mPhotoId );
+      // String filename = mApp.mySurvey + "/" + Long.toString( mMediaId ) + ".jpg";
+      DrawingPhotoPath photo = new DrawingPhotoPath( mMediaComment, mMediaX, mMediaY, mPointScale, null, mMediaId );
       mDrawingSurface.addDrawingPath( photo );
       modified();
     }
 
     public void addPhotoPoint( String comment, float x, float y )
     {
-      mPhotoComment = (comment == null)? "" : comment;
-      mPhotoId = mApp.mData.nextPhotoId( mApp.mSID );
-      mPhotoX = x;
-      mPhotoY = y;
-      File file = new File( TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString(mPhotoId) ) );
+      mMediaComment = (comment == null)? "" : comment;
+      mMediaId = mApp.mData.nextPhotoId( mApp.mSID );
+      mMediaX = x;
+      mMediaY = y;
+      File file = new File( TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString(mMediaId) ) );
       // TODO TD_XSECTION_PHOTO
       new QCamCompass( this,
                        (new MyBearingAndClino( mApp, file )),
                        this,
                        true, false).show();  // true = with_box, false=with_delay
 
+    }
+
+    private void addAudioPoint( float x, float y )
+    {
+      mMediaComment = "";
+      mMediaId = mApp.mData.nextAudioNegId( mApp.mSID );
+      mMediaX = x;
+      mMediaY = y;
+      File file = new File( TDPath.getSurveyAudioFile( mApp.mySurvey, Long.toString(mMediaId) ) );
+      // TODO RECORD AUDIO
+      new AudioDialog( this, mApp, this, mMediaId ).show();
+    }
+
+    public void deletedAudio( long bid )
+    {
+      DrawingAudioPath audio = mDrawingSurface.getAudioPoint( bid );
+      deletePoint( audio ); // if audio == null doesn't do anything
+    }
+
+    public void startRecordAudio( long bid )
+    {
+      // nothing
+    }
+
+    public void stopRecordAudio( long bid )
+    {
+      DrawingAudioPath audio = mDrawingSurface.getAudioPoint( bid );
+      if ( audio == null ) {
+        // assert bid == mMediaId
+        audio = new DrawingAudioPath( mMediaX, mMediaY, mPointScale, null, bid );
+        mDrawingSurface.addDrawingPath( audio );
+        modified();
+      }
     }
 
     void setCurrentStationName( String name ) { mApp.setCurrentStationName( name ); }
@@ -3782,8 +3824,11 @@ public class DrawingWindow extends ItemDrawer
               break;
             case DrawingPath.DRAWING_PATH_POINT:
               DrawingPointPath point = (DrawingPointPath)(sp.mItem);
-              if ( point.mPointType == BrushManager.mPointLib.mPointPhotoIndex ) {
+              if ( BrushManager.isPointPhoto( point.mPointType ) ) {
                 new DrawingPhotoEditDialog( mActivity, this, mApp, (DrawingPhotoPath)point ).show();
+              } else if ( BrushManager.isPointAudio( point.mPointType ) ) {
+                DrawingAudioPath audio = (DrawingAudioPath)point;
+                new AudioDialog( this, mApp, this, audio.mId ).show();
               } else {
                 new DrawingPointDialog( mActivity, this, point ).show();
               }
@@ -4490,6 +4535,9 @@ public class DrawingWindow extends ItemDrawer
 
     String station1 = blk.mFrom;
     String station2 = blk.mTo;
+    float cl = blk.mClino;
+    float br = blk.mBearing;
+
     NumStation st1 = mNum.getStation( station1 );
     NumStation st2 = mNum.getStation( station2 );
     float x0, y0, x1, y1;
@@ -4506,7 +4554,9 @@ public class DrawingWindow extends ItemDrawer
     }
     float x2 = x1 - x0;
     float y2 = y1 - y0;
-    float len = (float)Math.sqrt( x2 * x2 + y2 * y2 );
+    float x22  = x2 * x2;
+    float len2 = x2 * x2 + y2 * y2 + 0.0001f;
+    float len  = (float)Math.sqrt( len2 );
     PointF uu = new PointF( x2 / len, y2 / len );
     PointF vv = new PointF( -uu.y, uu.x );
 
@@ -4516,37 +4566,55 @@ public class DrawingWindow extends ItemDrawer
     ArrayList< PointF > pos = new ArrayList< PointF >(); // positive v
     ArrayList< PointF > neg = new ArrayList< PointF >(); // negative v
     List< NumSplay > splays = mNum.getSplays();
+    float xs=0, ys=0;
     if ( mType == PlotInfo.PLOT_PLAN ) {
       for ( NumSplay sp : splays ) {
-        if ( Math.abs( sp.getBlock().mClino ) < TDSetting.mWallsPlanThr ) {
-          NumStation st = sp.from;
-          if ( st == st1 || st == st2 ) {
-            x2 = (float)(sp.e) - x0;
-            y2 = (float)(sp.s) - y0;
-            float u = x2 * uu.x + y2 * uu.y;
-            float v = x2 * vv.x + y2 * vv.y;
-            if ( v > 0 ) {
-              pos.add( new PointF(u,v) );
-            } else {
-              neg.add( new PointF(u,v) );
-            }
+        NumStation st = sp.from;
+        boolean ok = false;
+        if ( st == st1 ) {
+          if ( Math.abs( sp.getBlock().mClino - cl ) < TDSetting.mWallsPlanThr ) {
+            xs = (float)(sp.e) - x0;
+            ys = (float)(sp.s) - y0;
+            float proj = ( xs*x2 + ys*y2 )/len2;
+            ok = ( proj >= 0 && proj <= 1 );
+          }
+        } else if ( st == st2 ) {
+          if ( Math.abs( sp.getBlock().mClino + cl ) < TDSetting.mWallsPlanThr ) {
+            xs = (float)(sp.e) - x0;
+            ys = (float)(sp.s) - y0;
+            float proj = ( xs*x2 + ys*y2 )/len2;
+            ok = ( proj >= 0 && proj <= 1 );
+          }
+        }
+        if ( ok ) {
+          // xs = (float)(sp.e) - x0;
+          // yv = (float)(sp.s) - y0;
+          float u = xs * uu.x + ys * uu.y;
+          float v = xs * vv.x + ys * vv.y;
+          if ( v > 0 ) {
+            pos.add( new PointF(u,v) );
+          } else {
+            neg.add( new PointF(u,v) );
           }
         }
       }
-    } else {
+    } else { // PLOT_EXTENDED || PLOT_PROFILE
       for ( NumSplay sp : splays ) {
-        if ( Math.abs( sp.getBlock().mClino ) > TDSetting.mWallsExtendedThr ) { // FIXME
-          NumStation st = sp.from;
-          if ( st == st1 || st == st2 ) {
-            x2 = (float)(sp.h) - x0;
-            y2 = (float)(sp.v) - y0;
-            float u = x2 * uu.x + y2 * uu.y;
-            float v = x2 * vv.x + y2 * vv.y;
-            // Log.v("WALL", "Splay " + x2 + " " + y2 + " --> " + u + " " + v);
-            if ( v > 0 ) {
-              pos.add( new PointF(u,v) );
-            } else {
-              neg.add( new PointF(u,v) );
+        NumStation st = sp.from;
+        if ( st == st1 || st == st2 ) {
+          if ( Math.abs( sp.getBlock().mClino ) > TDSetting.mWallsExtendedThr ) { // FIXME
+            xs = (float)(sp.h) - x0;
+            float proj = ( xs*x2 )/ x22;
+            if ( proj >= 0 && proj <= 1 ) {
+              ys = (float)(sp.v) - y0;
+              float u = xs * uu.x + ys * uu.y;
+              float v = xs * vv.x + ys * vv.y;
+              // Log.v("WALL", "Splay " + x2 + " " + y2 + " --> " + u + " " + v);
+              if ( v > 0 ) {
+                pos.add( new PointF(u,v) );
+              } else {
+                neg.add( new PointF(u,v) );
+              }
             }
           }
         }

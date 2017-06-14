@@ -258,69 +258,55 @@ class SketchModel
   //   mBorder3d = null;
   // }
 
-  void removeSurface( boolean with_sections )
-  {
-    if ( mCurrentSurface != null /* && mCurrentSurface.st1.equals( mInfo.station1 ) && mCurrentSurface.st2.equals( mInfo.station2 ) */ ) { 
-      if ( with_sections ) {
-        // remove joins at the endpoints:
-        if ( mJoins != null ) {
-          synchronized( mJoins ) {
-            final Iterator i = mJoins.iterator();
-            while ( i.hasNext() ) {
-              final SketchSurface surface = (SketchSurface) i.next();
-              if ( mInfo.isConnectedTo(mCurrentSurface, SketchDef.DISPLAY_NGBH ) ) {
-                mJoins.remove( surface ); 
-              }
-            }
-          }
-        }
-        // clearSections();
-      }
-      if ( mPaths != null) {
-        synchronized( mPaths ) {
-          final Iterator i = mPaths.iterator();
-          while ( i.hasNext() ) {
-            final SketchPath path = (SketchPath) i.next();
-            if ( path.mSurface == mCurrentSurface ) {
-              mPaths.remove( path );
-            }
-          }
-          // mRedoStack.add( path );
-        }
-      }
-      mSurfaces.remove( mCurrentSurface );
-    }
-    mCurrentSurface = null;
-  }
+// UNUSED
+//   void removeCurrentSurface( boolean with_sections )
+//   {
+//     if ( mCurrentSurface != null /* && mCurrentSurface.st1.equals( mInfo.station1 ) && mCurrentSurface.st2.equals( mInfo.station2 ) */ ) { 
+//       if ( with_sections ) {
+//         // remove joins at the endpoints:
+//         if ( mJoins != null ) {
+//           synchronized( mJoins ) {
+//             final Iterator i = mJoins.iterator();
+//             while ( i.hasNext() ) {
+//               final SketchSurface surface = (SketchSurface) i.next();
+//               if ( mInfo.isConnectedTo(mCurrentSurface, SketchDef.DISPLAY_NGBH ) ) {
+//                 mJoins.remove( surface ); 
+//               }
+//             }
+//           }
+//         }
+//         // clearSections();
+//       }
+//       if ( mPaths != null) {
+//         synchronized( mPaths ) {
+//           final Iterator i = mPaths.iterator();
+//           while ( i.hasNext() ) {
+//             final SketchPath path = (SketchPath) i.next();
+//             if ( path.mSurface == mCurrentSurface ) {
+//               mPaths.remove( path );
+//             }
+//           }
+//           // mRedoStack.add( path );
+//         }
+//       }
+//       mSurfaces.remove( mCurrentSurface );
+//     }
+//     mCurrentSurface = null;
+//   }
 
   void removeAllSurfaces( )
   {
     if ( mJoins != null ) {
       synchronized( mJoins ) {
-        // final Iterator ij = mJoins.iterator();
-        // while ( ij.hasNext() ) {
-        //   final SketchSurface surface = (SketchSurface) ij.next();
-        //   mJoins.remove( surface ); 
-        // }
         mJoins.clear();
       }
     }
     synchronized( mSurfaces ) {
-      // final Iterator ix = mSurfaces.iterator();
-      // while ( ix.hasNext() ) {
-      //   final SketchSurface surface = (SketchSurface)ix.next();
-      //   mSurfaces.remove( surface );
-      // }
       mCurrentSurface = null;
       mSurfaces.clear();
     }
     if ( mPaths != null) {
       synchronized( mPaths ) {
-        // final Iterator ip = mPaths.iterator();
-        // while ( ip.hasNext() ) {
-        //   final SketchPath path = (SketchPath) ip.next();
-        //   mPaths.remove( path );
-        // }
         mPaths.clear();
       }
     }
@@ -379,6 +365,7 @@ class SketchModel
   {
     NumStation st1 = mInfo.station1;
     NumStation st2 = mInfo.station2;
+    // Log.v("DistoX", "make surface at " + st1.name + " " + st2.name );
     // NumShot sh0 = mNum.getShot( st1, st2 ); 
     List<NumSplay> tmp1 = mNum.getSplaysAt( st1 );
     List<NumSplay> tmp2 = mNum.getSplaysAt( st2 );
@@ -460,7 +447,28 @@ class SketchModel
         mCurrentSurface.makeConvexHullTriangles( mInfo, hull );
         break;
     }
+
+    removeSurface( mInfo.st1, mInfo.st2 );
     mSurfaces.add( mCurrentSurface );
+    // Log.v("DistoX", "Nr surface " + mSurfaces.size() );
+  }
+
+  private void removeSurface( String st1, String st2 )
+  {
+    for ( SketchSurface surface : mSurfaces ) {
+      if ( st1.equals( surface.st1 ) && st2.equals( surface.st2 ) ) {
+        mSurfaces.remove( surface );
+        break;
+      }
+    }
+  }
+
+  boolean hasSurface( String st1, String st2 )
+  {
+    for ( SketchSurface surface : mSurfaces ) {
+      if ( st1.equals( surface.st1 ) && st2.equals( surface.st2 ) ) return true;
+    }
+    return false;
   }
 
   void clearReferences()
