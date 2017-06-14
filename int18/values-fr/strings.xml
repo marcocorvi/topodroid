@@ -152,8 +152,8 @@
 <!-- UNUSED string name="pairing_failed">Echec de connexion au DistoX</string -->
 
 <string name="illegal_data_value">Valeur de donnée incorrecte</string>
-    <!-- TODO string name="photo_title">PHOTO</string -->
-    <!-- TODO string name="photo_text">Enter photo comment</string -->
+<string name="photo_title">PHOTO</string>
+<string name="photo_text">Saisir un commentaire</string>
 <string name="label_title">ÉTIQUETTE</string>
 <string name="label_text">Saisissez le texte</string>
 <!-- UNUSED string name="altitude">Alt. </string -->
