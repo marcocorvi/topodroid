@@ -99,8 +99,8 @@ class PTId
   {
     if ( isUndef() ) return new String("-");
     if ( isNumber() ) {
-      // sprintf(tmp, "%d", _id + 0x80000001 ); // FIXME this is the correct form
-      return new String("-");
+      return String.format( "%d", _id + 0x80000001 ); // FIXME this is the correct form
+      // return new String("-");
     }
     return String.format(Locale.US, "%04d.%d", _id>>16, _id & 0xffff );
   }

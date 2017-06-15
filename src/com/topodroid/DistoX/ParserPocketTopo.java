@@ -74,7 +74,7 @@ public class ParserPocketTopo extends ImportParser
     }
 
     int shot_count = ptfile.shotCount();
-    // Log.v("PTDistoX", "PT nr shots " + shot_count );
+    TDLog.Log( TDLog.LOG_PTOPO, "PT shots count " + shot_count );
     int extend = DBlock.EXTEND_NONE;
     int ext_flag = extend;
     // DBlock b     = null;  // temporary block pointer
@@ -94,7 +94,7 @@ public class ParserPocketTopo extends ImportParser
       float ba = shot.azimuth();
       float ca = shot.inclination();
       float ra = shot.roll();
-      // Log.v("PTDistoX", "shot " + from + "-" + to + ": " + da + " " + ba + " " + ca );
+      // Log.v("PTDistoX", "shot <" + from + ">-<" + to + ">: " + da + " " + ba + " " + ca );
       from = from.replaceAll( "^0+", "" );
       to   = to.replaceAll( "^0+", "" );
       if ( from.equals("-") ) from = "";
