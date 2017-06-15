@@ -427,7 +427,8 @@ class TDSetting
 
   static final int WALLS_NONE    = 0;
   static final int WALLS_CONVEX  = 1;
-  static final int WALLS_LAST    = 1; // placeholder
+  static final int WALLS_DLN     = 2;
+  static final int WALLS_LAST    = 2; // placeholder
   static int   mWallsType        = WALLS_NONE;
   static float mWallsPlanThr     = 70;
   static float mWallsExtendedThr = 45;

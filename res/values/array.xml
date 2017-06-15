@@ -36,10 +36,12 @@
   <string-array name="wallsType">
      <item name="none">None</item>
      <item name="convex">Convex</item>
+     <item name="delaunay">Delaunay</item>
   </string-array>
   <string-array name="wallsTypeValue">
      <item name="none">0</item>
      <item name="convex">1</item>
+     <item name="delaunay">2</item>
   </string-array>
 
   <!-- string-array name="acadVersion">

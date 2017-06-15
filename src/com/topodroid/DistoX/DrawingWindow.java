@@ -4563,8 +4563,19 @@ public class DrawingWindow extends ItemDrawer
     // Log.v("DistoX", "X0 " + x0 + " " + y0 + " X1 " + x1 + " " + y1 );
     // Log.v("DistoX", "U " + uu.x + " " + uu.y + " V " + vv.x + " " + vv.y );
 
-    ArrayList< PointF > pos = new ArrayList< PointF >(); // positive v
-    ArrayList< PointF > neg = new ArrayList< PointF >(); // negative v
+    boolean allSplay = ( TDSetting.mWallsType == TDSetting.WALLS_DLN );
+
+    ArrayList< PointF > pos = null;
+    ArrayList< PointF > neg = null;
+    ArrayList< DLNSite > sites = null;
+    if ( TDSetting.mWallsType == TDSetting.WALLS_CONVEX ) {
+      pos = new ArrayList< PointF >(); // positive v
+      neg = new ArrayList< PointF >(); // negative v
+    } else {
+      sites = new ArrayList< DLNSite >();
+      sites.add( new DLNSite( x0, y0 ) );
+      sites.add( new DLNSite( x1, y1 ) );
+    }
     List< NumSplay > splays = mNum.getSplays();
     float xs=0, ys=0;
     if ( mType == PlotInfo.PLOT_PLAN ) {
@@ -4573,55 +4584,91 @@ public class DrawingWindow extends ItemDrawer
         boolean ok = false;
         if ( st == st1 ) {
           if ( Math.abs( sp.getBlock().mClino - cl ) < TDSetting.mWallsPlanThr ) {
-            xs = (float)(sp.e) - x0;
-            ys = (float)(sp.s) - y0;
-            float proj = ( xs*x2 + ys*y2 )/len2;
-            ok = ( proj >= 0 && proj <= 1 );
+            xs = (float)(sp.e);
+            ys = (float)(sp.s);
+            if ( allSplay ) { 
+              ok = true;
+            } else {
+              xs -= x0;
+              ys -= y0;
+              float proj = ( xs*x2 + ys*y2 )/len2;
+              ok = ( proj >= 0 && proj <= 1 );
+            }
           }
         } else if ( st == st2 ) {
           if ( Math.abs( sp.getBlock().mClino + cl ) < TDSetting.mWallsPlanThr ) {
-            xs = (float)(sp.e) - x0;
-            ys = (float)(sp.s) - y0;
-            float proj = ( xs*x2 + ys*y2 )/len2;
-            ok = ( proj >= 0 && proj <= 1 );
+            xs = (float)(sp.e);
+            ys = (float)(sp.s);
+            if ( allSplay ) { 
+              ok = true;
+            } else {
+              xs -= x0;
+              ys -= y0;
+              float proj = ( xs*x2 + ys*y2 )/len2;
+              ok = ( proj >= 0 && proj <= 1 );
+            }
           }
         }
         if ( ok ) {
-          // xs = (float)(sp.e) - x0;
-          // yv = (float)(sp.s) - y0;
-          float u = xs * uu.x + ys * uu.y;
-          float v = xs * vv.x + ys * vv.y;
-          if ( v > 0 ) {
-            pos.add( new PointF(u,v) );
+          if ( allSplay ) {
+            sites.add( new DLNSite( xs, ys ) );
           } else {
-            neg.add( new PointF(u,v) );
+            // xs = (float)(sp.e) - x0;
+            // yv = (float)(sp.s) - y0;
+            float u = xs * uu.x + ys * uu.y;
+            float v = xs * vv.x + ys * vv.y;
+            if ( v > 0 ) {
+              pos.add( new PointF(u,v) );
+            } else {
+              neg.add( new PointF(u,v) );
+            }
           }
-        }
+        } 
       }
     } else { // PLOT_EXTENDED || PLOT_PROFILE
       for ( NumSplay sp : splays ) {
         NumStation st = sp.from;
         if ( st == st1 || st == st2 ) {
+          boolean ok = false;
           if ( Math.abs( sp.getBlock().mClino ) > TDSetting.mWallsExtendedThr ) { // FIXME
-            xs = (float)(sp.h) - x0;
-            float proj = ( xs*x2 )/ x22;
-            if ( proj >= 0 && proj <= 1 ) {
-              ys = (float)(sp.v) - y0;
-              float u = xs * uu.x + ys * uu.y;
-              float v = xs * vv.x + ys * vv.y;
-              // Log.v("WALL", "Splay " + x2 + " " + y2 + " --> " + u + " " + v);
-              if ( v > 0 ) {
-                pos.add( new PointF(u,v) );
+            xs = (float)(sp.h);
+            ys = (float)(sp.v);
+            if ( allSplay ) { 
+              ok = true;
+            } else {
+              xs -= x0;
+              ys -= y0;
+              float proj = ( xs*x2 )/ x22;
+              ok = ( proj >= 0 && proj <= 1 );
+            }
+            if ( ok ) {
+              if ( allSplay ) {
+                sites.add( new DLNSite( xs, ys ) );
               } else {
-                neg.add( new PointF(u,v) );
+                float u = xs * uu.x + ys * uu.y;
+                float v = xs * vv.x + ys * vv.y;
+                // Log.v("WALL", "Splay " + x2 + " " + y2 + " --> " + u + " " + v);
+                if ( allSplay || v > 0 ) {
+                  pos.add( new PointF(u,v) );
+                } else {
+                  neg.add( new PointF(u,v) );
+                }
               }
             }
           }
         }
       }
     }
-    makeWall( pos, x0, y0, x1, y1, len, uu, vv );
-    makeWall( neg, x0, y0, x1, y1, len, uu, vv );
+    // (x0,y0) (x1,y1) are the segment endpoints
+    // len is its length
+    // uu is the unit vector from 0 to 1
+    // vv is the orthogonal unit vector
+    if ( TDSetting.mWallsType == TDSetting.WALLS_CONVEX ) {
+      makeWall( pos, x0, y0, x1, y1, len, uu, vv );
+      makeWall( neg, x0, y0, x1, y1, len, uu, vv );
+    } else if ( TDSetting.mWallsType == TDSetting.WALLS_DLN ) {
+      makeDlnWall( sites, x0, y0, x1, y1, len, uu, vv );
+    }
     modified();
   }
 
@@ -4639,6 +4686,29 @@ public class DrawingWindow extends ItemDrawer
     line.addPoint( xx, yy );
   }
 
+  void makeDlnWall( ArrayList<DLNSite> sites, float x0, float y0, float x1, float y1, float len, PointF uu, PointF vv )
+  {
+    Delaunay delaunay = new Delaunay();
+    delaunay.compute( sites );
+    HullSide hull = delaunay.getBorderHead();
+    DLNSide side = hull.side;
+    float xx = DrawingUtil.toSceneX( side.mP1.mX );
+    float yy = DrawingUtil.toSceneY( side.mP1.mY );
+    DrawingLinePath path = new DrawingLinePath( BrushManager.mLineLib.mLineWallIndex );
+    path.addStartPoint( xx, yy );
+    int size = delaunay.hullSize();
+    for ( int k=0; k<size; ++k ) {
+      float xx2 = DrawingUtil.toSceneX( side.mP2.mX );
+      float yy2 = DrawingUtil.toSceneY( side.mP2.mY );
+      addPointsToLine( path, xx, yy, xx2, yy2 );
+      xx = xx2;
+      yy = yy2;
+      hull = hull.next;
+      side = hull.side;
+    } 
+    path.computeUnitNormal();
+    mDrawingSurface.addDrawingPath( path );
+  }
 
   void makeWall( ArrayList<PointF> pts, float x0, float y0, float x1, float y1, float len, PointF uu, PointF vv )
   {

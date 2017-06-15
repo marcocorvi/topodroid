@@ -12,7 +12,12 @@ A better result can be obtained with the 3D model reconstruction, provided you h
 Project the outline on the horizontal plane for the plan view, and slice a vertical profile curtain for the profile view.
 <br><p>
 
-With auto-walls you tell TopoDroid to draw walls to the right and left of a shots interpolating through the end-points of the splays. You must choose an auto-wall mechanism thru the settings. At the moment there is only one, namely "convex" walls. A polyline is traced connecting the outermost end-points of the splays. To create a wall there must be at least one splay end-point on the side of the shot.<br><p>
+With auto-walls you tell TopoDroid to draw walls to the right and left of a shots interpolating through the end-points of the splays. You must choose an auto-wall mechanism thru the settings.
+At the moment there are two auto-wall algorithms: <i>convex</i> and <i>Delaunay</i>.<br><p>
+
+For the <i>convex</i> walls, a polyline is traced connecting the outermost end-points of the splays. To create a wall there must be at least one splay end-point on the side of the shot. In this case, two wall lines are traced, one on each side of the shot, if possible.<br><p>
+
+The <i>Delaunay</i> wall is based on a Delaunay triangulation of the splay endpoints (plus eigth points "at infinity"), and the associated Voronoi cells. Each splay endpoint is associated to the farthest center of the cells it belongs to. From the cells at infinity a convex hull is build. This is then shrinked with the splay endpoints for which the associated center lies outside the hull. A single closed wall border is traced, usually containing the shot.<br><p>
 
 Auto-walls applies to one shot at a time, and it does not take into account the nearby shots. Therefore it is likely that an auto-wall "enters" the nearby piece of gallery or misses it. You should then edit the auto wall adjusting for these drawbacks, i.e., inserting points for the missing pieces and deleting, or moving, points that fall in the nearby gallery.<br><p>
 
