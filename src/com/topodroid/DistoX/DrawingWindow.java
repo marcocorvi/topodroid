@@ -4688,15 +4688,58 @@ public class DrawingWindow extends ItemDrawer
 
   void makeDlnWall( ArrayList<DLNSite> sites, float x0, float y0, float x1, float y1, float len, PointF uu, PointF vv )
   {
-    Delaunay delaunay = new Delaunay();
-    delaunay.compute( sites );
-    HullSide hull = delaunay.getBorderHead();
+    DLNWall dln_wall = new DLNWall( new BezierPoint(x0,y0), new BezierPoint(x1,y1) );
+    dln_wall.compute( sites );
+    if ( dln_wall.mPosHull.size() > 0 ) {
+      HullSide hpos = dln_wall.mPosHull.get(0);
+      DLNSide side = hpos.side;
+      float xx = DrawingUtil.toSceneX( side.mP1.mX );
+      float yy = DrawingUtil.toSceneY( side.mP1.mY );
+      DrawingLinePath path = new DrawingLinePath( BrushManager.mLineLib.mLineWallIndex );
+      path.addStartPoint( xx, yy );
+      for ( HullSide hp : dln_wall.mPosHull ) {
+        side = hp.side;
+        float xx2 = DrawingUtil.toSceneX( side.mP2.mX );
+        float yy2 = DrawingUtil.toSceneY( side.mP2.mY );
+        addPointsToLine( path, xx, yy, xx2, yy2 );
+        xx = xx2;
+        yy = yy2;
+      } 
+      path.computeUnitNormal();
+      mDrawingSurface.addDrawingPath( path );
+    }
+    if ( dln_wall.mNegHull.size() > 0 ) {
+      HullSide hneg = dln_wall.mNegHull.get(0);
+      DLNSide side = hneg.side;
+      float xx = DrawingUtil.toSceneX( side.mP1.mX );
+      float yy = DrawingUtil.toSceneY( side.mP1.mY );
+      DrawingLinePath path = new DrawingLinePath( BrushManager.mLineLib.mLineWallIndex );
+      path.addStartPoint( xx, yy );
+      for ( HullSide hn : dln_wall.mNegHull ) {
+        side = hn.side;
+        float xx2 = DrawingUtil.toSceneX( side.mP2.mX );
+        float yy2 = DrawingUtil.toSceneY( side.mP2.mY );
+        addPointsToLine( path, xx, yy, xx2, yy2 );
+        xx = xx2;
+        yy = yy2;
+      } 
+      path.computeUnitNormal();
+      mDrawingSurface.addDrawingPath( path );
+    }
+  }
+
+  /*
+  void makeDlnWall( ArrayList<DLNSite> sites, float x0, float y0, float x1, float y1, float len, PointF uu, PointF vv )
+  {
+    DLNWall dln_wall = new DLNWall( new BezierPoint(x0,y0), new BezierPoint(x1,y1) );
+    dln_wall.compute( sites );
+    HullSide hull = dln_wall.getBorderHead();
     DLNSide side = hull.side;
     float xx = DrawingUtil.toSceneX( side.mP1.mX );
     float yy = DrawingUtil.toSceneY( side.mP1.mY );
     DrawingLinePath path = new DrawingLinePath( BrushManager.mLineLib.mLineWallIndex );
     path.addStartPoint( xx, yy );
-    int size = delaunay.hullSize();
+    int size = dln_wall.hullSize();
     for ( int k=0; k<size; ++k ) {
       float xx2 = DrawingUtil.toSceneX( side.mP2.mX );
       float yy2 = DrawingUtil.toSceneY( side.mP2.mY );
@@ -4709,6 +4752,7 @@ public class DrawingWindow extends ItemDrawer
     path.computeUnitNormal();
     mDrawingSurface.addDrawingPath( path );
   }
+  */
 
   void makeWall( ArrayList<PointF> pts, float x0, float y0, float x1, float y1, float len, PointF uu, PointF vv )
   {

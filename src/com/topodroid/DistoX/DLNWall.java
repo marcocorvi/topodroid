@@ -1,4 +1,4 @@
-/** @file Delaunay.java
+/** @file DLNWall.java
  *
  * @author marco corvi
  * @date june 2017
@@ -21,10 +21,24 @@ import java.util.Stack;
 
 import android.util.Log;
 
-class Delaunay
+class DLNWall
 {
   ArrayList< DLNTriangle > mTri;
   ArrayList< HullSide > mHull; // convex hull
+  ArrayList< HullSide > mPosHull;
+  ArrayList< HullSide > mNegHull;
+  BezierPoint P0;
+  BezierPoint P1;
+  BezierPoint P01;
+  float P01len2;
+
+  DLNWall( BezierPoint p0, BezierPoint p1 )
+  {
+    P0 = p0;
+    P1 = p1;
+    P01 = P1.sub( P0 );
+    P01len2 = P01.dot(P01);
+  }
 
   int size() { return mTri.size(); }
 
@@ -37,7 +51,7 @@ class Delaunay
   void compute( List< DLNSite > pts )
   {
     int size = pts.size();
-    // Log.v("DistoX", "Delaunay sites " + size );
+    // Log.v("DistoX", "DLNWall sites " + size );
     // try {
     //   FileWriter fw = new FileWriter( "/sdcard/test.txt" );
     //   PrintWriter pw = new PrintWriter( fw );
@@ -133,7 +147,7 @@ class Delaunay
       doTriangle( t1, p );
       doTriangle( t2, p );
     }
-    // Log.v("DistoX", "Delaunay triangle " + mTri.size() );
+    // Log.v("DistoX", "DLNWall triangle " + mTri.size() );
 
     // compute the convex hull
     ArrayList< DLNSide > tmp = new ArrayList< DLNSide >();
@@ -156,7 +170,7 @@ class Delaunay
         if ( ! t.hasPoint( D  ) && ! t.hasPoint( A  ) ) tmp.add( t.sideOf( DA ) );
       }
     }
-    // Log.v("DistoX", "Delaunay convex hull start " + tmp.size() );
+    // Log.v("DistoX", "DLNWall convex hull start " + tmp.size() );
   
     int sz = tmp.size();
     DLNSide ts = tmp.get(0);
@@ -187,7 +201,7 @@ class Delaunay
     }
     hs1.next = hs0;
     hs0.prev = hs1;
-    // Log.v("DistoX", "Delaunay convex hull done " + mHull.size() );
+    // Log.v("DistoX", "DLNWall convex hull done " + mHull.size() );
   
     // compute sites poles
     for ( DLNSite it : pts ) {
@@ -199,6 +213,7 @@ class Delaunay
     while ( repeat ) {
       repeat = false;
       for ( DLNSite pt : pts ) {
+        if ( pt.polePoint() == null ) continue;
         if ( isInsideHull( pt ) && ! isInsideHull( pt.polePoint() ) ) {
   	    DLNTriangle t1 = pt.poleTriangle();
   	    DLNSide s1 = t1.sideOf( pt );
@@ -223,7 +238,89 @@ class Delaunay
         }
       }
     }
-    // Log.v("DistoX", "Delaunay convex hull final " + mHull.size() );
+    // Log.v("DistoX", "DLNWall convex hull final " + mHull.size() );
+    mPosHull = new ArrayList< HullSide >();
+    mNegHull = new ArrayList< HullSide >();
+
+    HullSide hsp1 = null;
+    HullSide hsn1 = null;
+    int nhp = -1;
+    int nhn = -1;
+    for ( int nh=0; nh < mHull.size(); ++nh ) {
+      HullSide hs = mHull.get(nh);
+      int sng = sign( hs );
+      if ( sng > 0 && hsp1 == null ) {
+        hsp1 = hs.prev;
+        while ( hsp1 != hs && sign(hsp1) > 0 ) hsp1 = hsp1.prev;
+        HullSide hsp2 = hs.next;
+        while ( hsp2 != hs && sign(hsp2) > 0 ) hsp2 = hsp2.next;
+        for ( hsp1=hsp1.next; hsp1 != hsp2; hsp1=hsp1.next ) {
+          mPosHull.add( hsp1 );
+        }
+        if ( hsn1 != null ) break;
+      }
+      if ( sng < 0 && hsn1 == null ) {
+        hsn1 = hs.prev;
+        while ( hsn1 != hs && sign(hsn1) < 0 ) hsn1 = hsn1.prev;
+        HullSide hsn2 = hs.next;
+        while ( hsn2 != hs && sign(hsn2) < 0 ) hsn2 = hsn2.next;
+        for ( hsn1=hsn1.next; hsn1 != hsn2; hsn1=hsn1.next ) {
+          mNegHull.add( hsn1 );
+        }
+        if ( hsp1 != null ) break;
+      }
+    }
+    // Log.v("DistoX", "Hull pos " + mPosHull.size() + " neg " + mNegHull.size() );
+  }
+
+  // void setSitePole( DLNSite site )
+  // {
+  //   for ( DLNTriangle t : mTri ) {
+  //     if ( t.hasPoint( site ) ) {
+  //       site.setPole( t.mCenter, t ); // possibly replace if better
+  //     }
+  //   }
+  // }
+
+  void setSitePole( DLNSite site )
+  {
+    for ( DLNTriangle t : mTri ) {
+      if ( t.hasPoint( site ) ) {
+        if ( ! isIntersection( t.mCenter, site ) ) {
+          site.setPole( t.mCenter, t ); // possibly replace if better
+        }
+      }
+    }
+  }
+
+  boolean isIntersection( BezierPoint q0, BezierPoint q1 )
+  {
+    {
+      float xp = P1.mX - P0.mX;
+      float yp = P1.mY - P0.mY;
+      if ( ( (q0.mX-P0.mX)*yp - (q0.mY-P0.mY)*xp) * ( (q1.mX-P0.mX)*yp - (q1.mY-P0.mY)*xp ) > 0 ) return false;
+    }
+    {
+      float xq = q1.mX - q0.mX;
+      float yq = q1.mY - q0.mY;
+      if ( ( (P0.mX-q0.mX)*yq - (P0.mY-q0.mY)*xq) * ( (P1.mX-q0.mX)*yq - (P1.mY-q0.mY)*xq ) > 0 ) return false;
+    }
+    return true;
+  }
+
+  int sign( HullSide hs )
+  {
+    DLNSide s = hs.side;
+    BezierPoint p1 = s.mP1.sub( P0 );
+    BezierPoint p2 = s.mP2.sub( P0 );
+    float x1 = p1.dot( P01 ) / P01len2;
+    float x2 = p2.dot( P01 ) / P01len2;
+    if ( x1 < -0.1f && x2 < -0.1f ) return 0;
+    if ( x1 >  1.1f && x2 >  1.1f ) return 0;
+    if ( x1 >= -0.1f && x1 <= 1.1f ) {
+      return ( p1.cross(P01) > 0)? 1 : -1;
+    }
+    return ( p2.cross(P01) > 0)? 1 : -1;
   }
 
   // boolean coincide( BezierPoint p1, BezierPoint p2, double eps )
@@ -292,14 +389,6 @@ class Delaunay
     }
   }
 
-  void setSitePole( DLNSite site )
-  {
-    for ( DLNTriangle t : mTri ) {
-      if ( t.hasPoint( site ) ) {
-        site.setPole( t.mCenter, t ); // possibly replace if better
-      }
-    }
-  }
 
   // void consistency( DLNTriangle t )
   // {
