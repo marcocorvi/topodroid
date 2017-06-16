@@ -40,27 +40,27 @@ public class BezierInterpolator
    * d   Digitized points
    * end Index to "left" end of region 
    */
-  private BezierPoint computeLeftTangent( ArrayList<BezierPoint> d, int end)
+  private Point2D computeLeftTangent( ArrayList<Point2D> d, int end)
   {
-    BezierPoint tHat1 = d.get(end+1).sub( d.get(end) );
+    Point2D tHat1 = d.get(end+1).sub( d.get(end) );
     tHat1.normalize();
     return tHat1;
   }
   
   /** end  Index to "right" end of region */
-  private BezierPoint computeRightTangent( ArrayList<BezierPoint> d, int end)
+  private Point2D computeRightTangent( ArrayList<Point2D> d, int end)
   {
-    BezierPoint tHat2 = d.get(end-1).sub( d.get(end) );
+    Point2D tHat2 = d.get(end-1).sub( d.get(end) );
     tHat2.normalize();
     return tHat2;
   }
   
   /** center  Index to point inside region */
-  private BezierPoint computeCenterTangent( ArrayList<BezierPoint> d, int center)
+  private Point2D computeCenterTangent( ArrayList<Point2D> d, int center)
   {
-    BezierPoint V1 = d.get(center-1).sub( d.get(center) );
-    BezierPoint V2 = d.get(center).sub( d.get(center+1) );
-    BezierPoint tHatCenter = new BezierPoint( (V1.mX + V2.mX)/2.0f, (V1.mY + V2.mY)/2.0f );
+    Point2D V1 = d.get(center-1).sub( d.get(center) );
+    Point2D V2 = d.get(center).sub( d.get(center+1) );
+    Point2D tHatCenter = new Point2D( (V1.x + V2.x)/2.0f, (V1.y + V2.y)/2.0f );
     tHatCenter.normalize();
     return tHatCenter;
   }
@@ -80,9 +80,9 @@ public class BezierInterpolator
    * u             Parameter values for region
    * tHat1, tHat2  Unit tangents at endpoints
    */
-  private BezierCurve generateBezier( ArrayList<BezierPoint> d, int first, int last, 
+  private BezierCurve generateBezier( ArrayList<Point2D> d, int first, int last, 
                               float[] u,
-                              BezierPoint tHat1, BezierPoint tHat2 )
+                              Point2D tHat1, Point2D tHat2 )
   {
   
     int nPts = last - first + 1; // nr. of points in sub-curve
@@ -96,21 +96,21 @@ public class BezierInterpolator
     X[1]    = 0.0f;
   
     /* Compute the A's	*/
-    BezierPoint bf = d.get( first );
-    BezierPoint bl = d.get( last );
+    Point2D bf = d.get( first );
+    Point2D bl = d.get( last );
     for (int i = 0; i < nPts; i++) {
       float t  = u[i];
       float t1 = 1.0f - t;
       float b1t = B1(t, t1);
       float b2t = B2(t, t1);
-      BezierPoint b0 = tHat1.times( b1t );
-      BezierPoint b1 = tHat2.times( b2t );
+      Point2D b0 = tHat1.times( b1t );
+      Point2D b1 = tHat2.times( b2t );
       C[0][0] += b0.dot( b0 );
       C[0][1] += b0.dot( b1 );
       C[1][0] = C[0][1]; /*  C[1][0] += b1.dot( b0 );*/	
       C[1][1] += b1.dot( b1 );
   
-      BezierPoint tmp = d.get(first + i).sub(
+      Point2D tmp = d.get(first + i).sub(
         bf.times( B0(t,t1) ).add(
         bf.times( b1t ).add(
   	bl.times( b2t ).add(
@@ -136,8 +136,8 @@ public class BezierInterpolator
     // if ( Float.isNaN( alpha_l ) || Float.isNaN( alpha_r ) ) {
     //   // TDLog.Log( TDLog.LOG_BEZIER, "Npts " + nPts + " alpha " + alpha_l + " " + alpha_r );
     //   for (int i = 0; i < nPts; i++) {
-    //     BezierPoint p = d.get(first + i);
-    //     // TDLog.Log( TDLog.LOG_BEZIER, "Pt " + i + ": " + p.mX + " " + p.mY );
+    //     Point2D p = d.get(first + i);
+    //     // TDLog.Log( TDLog.LOG_BEZIER, "Pt " + i + ": " + p.x + " " + p.y );
     //   }
     // }
   
@@ -182,7 +182,7 @@ public class BezierInterpolator
    * @param first, last  Indices defining region
    */
   private float[]
-  chordLengthParameterize( ArrayList<BezierPoint> d, int first, int last)
+  chordLengthParameterize( ArrayList<Point2D> d, int first, int last)
   {
     int	nPts = last - first + 1;	
     float[] u = new float[ nPts ];
@@ -209,8 +209,8 @@ public class BezierInterpolator
    * @param tHat1, tHat2;	Unit tangent vectors at endpoints
    * @param error;		User-defined error squared
    */
-  private float fitCubic( ArrayList<BezierPoint> d, int first, int last, 
-                          BezierPoint tHat1, BezierPoint tHat2,
+  private float fitCubic( ArrayList<Point2D> d, int first, int last, 
+                          Point2D tHat1, Point2D tHat2,
                           float error )
   {
     int	maxIterations = 4; /*  Max times to try iterating  */
@@ -219,8 +219,8 @@ public class BezierInterpolator
     // float iterationError = error * error; // error below which try iterating
     float iterationError = error * 4.0f; // error below which try iterating
     int nPts = last - first + 1;          // nr. of points in the subset
-    BezierPoint bf = d.get( first );
-    BezierPoint bl = d.get( last );
+    Point2D bf = d.get( first );
+    Point2D bl = d.get( last );
 
     if ( nPts < 2 ) {
       // TDLog.Log( TDLog.LOG_BEZIER, "fitCubic with " + nPts + " points");
@@ -267,7 +267,7 @@ public class BezierInterpolator
   
     /* Fitting failed -- split at max error point and fit recursively */
     int split  = bezCurve.getSplitIndex();
-    BezierPoint tHatCenter = computeCenterTangent( d, split );
+    Point2D tHatCenter = computeCenterTangent( d, split );
     float err1 = fitCubic( d, first, split, tHat1, tHatCenter, error );
     tHatCenter.negate();
     float err2 = fitCubic( d, split, last, tHatCenter, tHat2, error );
@@ -279,7 +279,7 @@ public class BezierInterpolator
     curves.add( curve );
   }
 
-  private ArrayList<Integer> findCorners( ArrayList<BezierPoint> d, int nPts, float len_thr )
+  private ArrayList<Integer> findCorners( ArrayList<Point2D> d, int nPts, float len_thr )
   {
     float len_thr_low = len_thr * 1.6f;
     float len_thr_hgh = len_thr * 2.0f;
@@ -317,8 +317,8 @@ public class BezierInterpolator
       if ( k0 == nPts ) break;
       k2 = nghb[k0];
       if ( k2 == nPts ) break;
-      BezierPoint p1 = d.get(k1); 
-      BezierPoint p2 = d.get(k2);
+      Point2D p1 = d.get(k1); 
+      Point2D p2 = d.get(k2);
       float d0 = p1.distance( p2 );
       if ( d0 < len_thr_low ) {
         if ( ! in_corner ) {
@@ -351,7 +351,7 @@ public class BezierInterpolator
    * nPts	Number of digitized points
    * error	User-defined error squared
    */
-  public float fitCurve( ArrayList<BezierPoint> d, int nPts, float error, float len_thr )
+  public float fitCurve( ArrayList<Point2D> d, int nPts, float error, float len_thr )
   {
     // TDLog.Log( TDLog.LOG_BEZIER, "fitCurve nr. pts " + nPts );
     if ( nPts <= 1 ) return 0.0f;
@@ -363,8 +363,8 @@ public class BezierInterpolator
       int i2 = corners.get(k).intValue(); // nPts-1
       // TDLog.Log( TDLog.LOG_BEZIER, "fitting from " + i1 + " to " + i2 );
       /*  Unit tangent vectors at endpoints */
-      BezierPoint tHat1 = computeLeftTangent( d, i1 );
-      BezierPoint tHat2 = computeRightTangent( d, i2 );
+      Point2D tHat1 = computeLeftTangent( d, i1 );
+      Point2D tHat2 = computeRightTangent( d, i2 );
       float e = fitCubic( d, i1, i2, tHat1, tHat2, error );
       if ( e > err ) err = e;
       i1 = i2;

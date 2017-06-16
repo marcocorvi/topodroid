@@ -17,10 +17,10 @@ class DLNSide
   DLNTriangle triangle;
   DLNSide other; // nearby triangle side
 
-  BezierPoint mP1;
-  BezierPoint mP2;
+  Point2D mP1;
+  Point2D mP2;
 
-  DLNSide( BezierPoint p1, BezierPoint p2, DLNTriangle tri )
+  DLNSide( Point2D p1, Point2D p2, DLNTriangle tri )
   {
     triangle = tri;
     other = null;

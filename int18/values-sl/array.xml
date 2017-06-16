@@ -17,6 +17,7 @@
   <!-- TODO string-array name="wallsType">
      <item name="none">None</item>
      <item name="convex">Convex</item>
+     <item name="delaunay">TODO</item>
   </string-array -->
 
   <!-- TODO string-array name="zoomCtrl">

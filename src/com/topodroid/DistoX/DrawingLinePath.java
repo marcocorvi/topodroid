@@ -92,29 +92,29 @@ public class DrawingLinePath extends DrawingPointLinePath
       // TDLog.Log( TDLog.LOG_PLOT, "L: " + fname + " T " + type + " R" + reversed + " C" + closed + " NP " + npt );
 
       int has_cp;
-      float mX1, mY1, mX2, mY2, mX, mY;
-      mX = x + dis.readFloat();
-      mY = y + dis.readFloat();
+      float x1, y1, x2, y2, x0, y0;
+      x0 = x + dis.readFloat();
+      y0 = y + dis.readFloat();
       has_cp = dis.read(); // this is 0
       if ( has_cp == 1 ) { // consume 4 floats
-        mX1 = x + dis.readFloat();
-        mY1 = y + dis.readFloat();
-        mX2 = x + dis.readFloat();
-        mY2 = y + dis.readFloat();
+        x1 = x + dis.readFloat();
+        y1 = y + dis.readFloat();
+        x2 = x + dis.readFloat();
+        y2 = y + dis.readFloat();
       }
-      ret.addStartPointNoPath( mX, mY );
+      ret.addStartPointNoPath( x0, y0 );
       for ( int k=1; k<npt; ++k ) {
-        mX = x + dis.readFloat();
-        mY = y + dis.readFloat();
+        x0 = x + dis.readFloat();
+        y0 = y + dis.readFloat();
         has_cp = dis.read();
         if ( has_cp == 1 ) {
-          mX1 = x + dis.readFloat();
-          mY1 = y + dis.readFloat();
-          mX2 = x + dis.readFloat();
-          mY2 = y + dis.readFloat();
-          ret.addPoint3NoPath( mX1, mY1, mX2, mY2, mX, mY );
+          x1 = x + dis.readFloat();
+          y1 = y + dis.readFloat();
+          x2 = x + dis.readFloat();
+          y2 = y + dis.readFloat();
+          ret.addPoint3NoPath( x1, y1, x2, y2, x0, y0 );
         } else {
-          ret.addPointNoPath( mX, mY );
+          ret.addPointNoPath( x0, y0 );
         }
       }
       ret.setClosed( closed );
@@ -136,8 +136,8 @@ public class DrawingLinePath extends DrawingPointLinePath
     mDx = mDy = 0;
     if ( mFirst != null && mFirst.mNext != null ) {
       LinePoint second = mFirst.mNext;
-      mDx =   second.mY - mFirst.mY;
-      mDy = - second.mX + mFirst.mX;
+      mDx =   second.y - mFirst.y;
+      mDy = - second.x + mFirst.x;
       float d = ( mDx*mDx + mDy*mDy );
       if ( d > 0 ) {
         d = 1 / (float)Math.sqrt( d );
@@ -170,24 +170,24 @@ public class DrawingLinePath extends DrawingPointLinePath
 
     // LinePoint lp = mPoints.get( 0 );
     LinePoint lp = mFirst;
-    line1.addStartPoint( lp.mX, lp.mY );
+    line1.addStartPoint( lp.x, lp.y );
     // int k;
     // for ( k=1; k<k0; ++ k ) 
     for ( lp=lp.mNext; lp != lp0 && lp != null; lp = lp.mNext ) 
     {
       // lp = mPoints.get(k);
       if ( lp.has_cp ) {
-        line1.addPoint3( lp.mX1, lp.mY1, lp.mX2, lp.mY2, lp.mX, lp.mY );
+        line1.addPoint3( lp.x1, lp.y1, lp.x2, lp.y2, lp.x, lp.y );
       } else {
-        line1.addPoint( lp.mX, lp.mY );
+        line1.addPoint( lp.x, lp.y );
       }
     }
     if ( ! exclude ) {
       // lp = mPoints.get(k); // k == k0
       if ( lp.has_cp ) {
-        line1.addPoint3( lp.mX1, lp.mY1, lp.mX2, lp.mY2, lp.mX, lp.mY );
+        line1.addPoint3( lp.x1, lp.y1, lp.x2, lp.y2, lp.x, lp.y );
       } else {
-        line1.addPoint( lp.mX, lp.mY );
+        line1.addPoint( lp.x, lp.y );
       }
     } else {
       // ++ k;
@@ -197,16 +197,16 @@ public class DrawingLinePath extends DrawingPointLinePath
       }
     }
     if ( lp != null ) {
-      line2.addStartPoint( lp.mX, lp.mY );
+      line2.addStartPoint( lp.x, lp.y );
 
       // for ( ++k; k < mPoints.size(); ++k ) 
       for ( lp=lp.mNext; lp != null; lp = lp.mNext ) 
       {
         // lp = mPoints.get(k);
         if ( lp.has_cp ) {
-          line2.addPoint3( lp.mX1, lp.mY1, lp.mX2, lp.mY2, lp.mX, lp.mY );
+          line2.addPoint3( lp.x1, lp.y1, lp.x2, lp.y2, lp.x, lp.y );
         } else {
-          line2.addPoint( lp.mX, lp.mY );
+          line2.addPoint( lp.x, lp.y );
         }
       }
     }
@@ -264,8 +264,8 @@ public class DrawingLinePath extends DrawingPointLinePath
       LinePoint pt = mFirst; 
       for ( ; pt != null; pt = pt.mNext ) 
       {
-        float x = DrawingUtil.sceneToWorldX( pt.mX );
-        float y = DrawingUtil.sceneToWorldY( pt.mY );
+        float x = DrawingUtil.sceneToWorldX( pt.x );
+        float y = DrawingUtil.sceneToWorldY( pt.y );
         pw.format(Locale.US, "%.2f %.2f ", x, y );
         if ( b ) { pw.format("B "); b = false; }
       }
@@ -273,8 +273,8 @@ public class DrawingLinePath extends DrawingPointLinePath
       LinePoint pt = mLast;
       for ( ; pt != null; pt = pt.mPrev ) 
       {
-        float x = DrawingUtil.sceneToWorldX( pt.mX );
-        float y = DrawingUtil.sceneToWorldY( pt.mY );
+        float x = DrawingUtil.sceneToWorldX( pt.x );
+        float y = DrawingUtil.sceneToWorldY( pt.y );
         pw.format(Locale.US, "%.2f %.2f ", x, y );
         if ( b ) { pw.format("B "); b = false; }
       }

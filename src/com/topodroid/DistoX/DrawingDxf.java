@@ -232,7 +232,7 @@ class DrawingDxf
          printInt( pw, 70, 32 ); // flag 32 = 3D polyline vertex
        // }
        printString( pw, 8, layer );
-       printXYZ( pw, (p.mX+xoff) * scale, -(p.mY+yoff) * scale, 0.0f, 0 );
+       printXYZ( pw, (p.x+xoff) * scale, -(p.y+yoff) * scale, 0.0f, 0 );
      }
      if ( closed ) {
        printString( pw, 0, "VERTEX" );
@@ -241,7 +241,7 @@ class DrawingDxf
          printInt( pw, 70, 32 ); // flag 32 = 3D polyline vertex
        // }
        printString( pw, 8, layer );
-       printXYZ( pw, (line.mFirst.mX+xoff) * scale, -(line.mFirst.mY+yoff) * scale, 0.0f, 0 );
+       printXYZ( pw, (line.mFirst.x+xoff) * scale, -(line.mFirst.y+yoff) * scale, 0.0f, 0 );
      }
      pw.printf("  0%sSEQEND%s", EOL, EOL );
      // if ( mVersion13 ) {
@@ -263,7 +263,7 @@ class DrawingDxf
      printInt( pw, 70, close ); // not closed
      printInt( pw, 90, line.size() ); // nr. of points
      for (LinePoint p = line.mFirst; p != null; p = p.mNext ) { 
-       printXY( pw, (p.mX+xoff) * scale, -(p.mY+yoff) * scale, 0 );
+       printXY( pw, (p.x+xoff) * scale, -(p.y+yoff) * scale, 0 );
      }
      return handle;
   }
@@ -299,11 +299,11 @@ class DrawingDxf
      LinePoint pn = p.mNext;
      if ( pn != null ) {
        if ( pn.has_cp ) {
-         xt = pn.mX1 - p.mX;
-         yt = pn.mY1 - p.mY;
+         xt = pn.x1 - p.x;
+         yt = pn.y1 - p.y;
        } else {
-         xt = pn.mX - p.mX;
-         yt = pn.mY - p.mY;
+         xt = pn.x - p.x;
+         yt = pn.y - p.y;
        }
        float d = (float)Math.sqrt( xt*xt + yt*yt );
        printXYZ( pw, xt/d, -yt/d, 0, 2 );
@@ -314,11 +314,11 @@ class DrawingDxf
          ++np;
        }
        if ( pn.has_cp ) {
-         xt = pn.mX - pn.mX2;
-         yt = pn.mY - pn.mY2;
+         xt = pn.x - pn.x2;
+         yt = pn.y - pn.y2;
        } else {
-         xt = pn.mX - p.mX;
-         yt = pn.mY - p.mY;
+         xt = pn.x - p.x;
+         yt = pn.y - p.y;
        }
        d = (float)Math.sqrt( xt*xt + yt*yt );
        printXYZ( pw, xt/d, -yt/d, 0, 3 );
@@ -341,23 +341,23 @@ class DrawingDxf
      printInt( pw, 40, np-1 );
 
      p = line.mFirst; 
-     xt = p.mX;
-     yt = p.mY;
-     printXYZ( pw, (p.mX+xoff) * scale, -(p.mY+yoff) * scale, 0.0f, 0 );         // control points: 1 + 3 * (NP - 1) = 3 NP - 2
+     xt = p.x;
+     yt = p.y;
+     printXYZ( pw, (p.x+xoff) * scale, -(p.y+yoff) * scale, 0.0f, 0 );         // control points: 1 + 3 * (NP - 1) = 3 NP - 2
      for ( p = p.mNext; p != null; p = p.mNext ) { 
        if ( p.has_cp ) {
-         printXYZ( pw, (p.mX1+xoff) * scale, -(p.mY1+yoff) * scale, 0.0f, 0 );
-         printXYZ( pw, (p.mX2+xoff) * scale, -(p.mY2+yoff) * scale, 0.0f, 0 );
+         printXYZ( pw, (p.x1+xoff) * scale, -(p.y1+yoff) * scale, 0.0f, 0 );
+         printXYZ( pw, (p.x2+xoff) * scale, -(p.y2+yoff) * scale, 0.0f, 0 );
        } else {
          printXYZ( pw, (xt+xoff) * scale, -(yt+yoff) * scale, 0.0f, 0 );
-         printXYZ( pw, (p.mX+xoff) * scale, -(p.mY+yoff) * scale, 0.0f, 0 );
+         printXYZ( pw, (p.x+xoff) * scale, -(p.y+yoff) * scale, 0.0f, 0 );
        }
-       printXYZ( pw, (p.mX+xoff) * scale, -(p.mY+yoff) * scale, 0.0f, 0 );
-       xt = p.mX;
-       yt = p.mY;
+       printXYZ( pw, (p.x+xoff) * scale, -(p.y+yoff) * scale, 0.0f, 0 );
+       xt = p.x;
+       yt = p.y;
      }
      for ( p = line.mFirst; p != null; p = p.mNext ) { 
-       printXYZ( pw, (p.mX+xoff) * scale, -(p.mY+yoff) * scale, 0.0f, 1 );  // fit points: NP
+       printXYZ( pw, (p.x+xoff) * scale, -(p.y+yoff) * scale, 0.0f, 1 );  // fit points: NP
      }
      return handle;
   }
@@ -1003,9 +1003,9 @@ class DrawingDxf
         printInt( pw, 73, 1 );          // is-closed flag
         printInt( pw, 93, area.size() ); // nr. of points (not polyline) vertices (polyline)
         for (LinePoint p = area.mFirst; p != null; p = p.mNext ) { 
-          printXY( pw, (p.mX+xoff)*scale, -(p.mY+yoff)*scale, 0 );
+          printXY( pw, (p.x+xoff)*scale, -(p.y+yoff)*scale, 0 );
         }
-        // printXY( pw, area.mFirst.mX * scale, -area.mFirst.mY * scale, 0 );
+        // printXY( pw, area.mFirst.x * scale, -area.mFirst.y * scale, 0 );
         printInt( pw, 97, 0 );            // nr. source boundary objects
       printInt( pw, 75, 0 );            // hatch style: 0:normal, 1:outer, 2:ignore
       printInt( pw, 76, 0 );            // hatch pattern type: 0:user, 1:predefined, 2:custom

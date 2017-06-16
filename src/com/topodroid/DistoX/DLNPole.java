@@ -14,18 +14,18 @@ package com.topodroid.DistoX;
 
 class DLNPole 
 {
-  BezierPoint mP;
+  Point2D mP;
   DLNTriangle mT;
   float mDist;
 
-  DLNPole( BezierPoint p, DLNTriangle t, float d )
+  DLNPole( Point2D p, DLNTriangle t, float d )
   {
     mP = p;
     mT = t;
     mDist = d;
   }
 
-  void set ( BezierPoint p, DLNTriangle t, float d )
+  void set ( Point2D p, DLNTriangle t, float d )
   {
     mP = p;
     mT = t;

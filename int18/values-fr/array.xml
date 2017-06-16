@@ -24,6 +24,7 @@
   <string-array name="wallsType">
      <item name="none">Aucun</item>
      <item name="convex">Convexe</item>
+     <item name="delaunay">TODO</item>
   </string-array>
 
 

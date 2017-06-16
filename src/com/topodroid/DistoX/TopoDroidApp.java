@@ -152,7 +152,11 @@ public class TopoDroidApp extends Application
   void notifyDisconnected()
   {
     if ( mListerSet.size() > 0 ) {
-      new ReconnectTask( mDataDownloader ).execute();
+      try {
+        new ReconnectTask( mDataDownloader ).execute();
+      } catch ( RuntimeException e ) {
+        TDLog.Error("reconnect error: " + e.getMessage() );
+      }
     }
   }
 

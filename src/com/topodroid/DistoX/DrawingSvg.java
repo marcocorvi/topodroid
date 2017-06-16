@@ -294,9 +294,9 @@ class DrawingSvg
     else if ( th_name.equals( "ceiling-meander" ) ) pw.format(" stroke-dasharray=\"6 2 \"");
     pw.format(" d=\"");
     LinePoint p = line.mFirst;
-    pw.format(Locale.US, "M %.2f %.2f", xoff+p.mX, yoff+p.mY );
+    pw.format(Locale.US, "M %.2f %.2f", xoff+p.x, yoff+p.y );
     for ( p = p.mNext; p != null; p = p.mNext ) { 
-      pw.format(Locale.US, " L %.2f %.2f", xoff+p.mX, yoff+p.mY );
+      pw.format(Locale.US, " L %.2f %.2f", xoff+p.x, yoff+p.y );
     }
     pw.format("\" />\n");
   }
@@ -305,9 +305,9 @@ class DrawingSvg
   {
     pw.format("  <path stroke=\"black\" stroke-width=\"1\" fill=\"%s\" fill-opacity=\"0.5\" d=\"", color );
     LinePoint p = area.mFirst;
-    pw.format(Locale.US, "M %.2f %.2f", xoff+p.mX, yoff+p.mY );
+    pw.format(Locale.US, "M %.2f %.2f", xoff+p.x, yoff+p.y );
     for ( p = p.mNext; p != null; p = p.mNext ) { 
-      pw.format(Locale.US, " L %.2f %.2f", xoff+p.mX, yoff+p.mY );
+      pw.format(Locale.US, " L %.2f %.2f", xoff+p.x, yoff+p.y );
     }
     pw.format(" Z\" />\n");
   }

@@ -19,16 +19,16 @@ import java.util.Locale;
 
 // import android.util.Log;
 
-public class LinePoint extends BezierPoint
+public class LinePoint extends Point2D
 {
   private static final float toTherion = TDConst.TO_THERION;
 
-  // public float mX;
-  // public float mY;
-  float mX1; // first control point (to the right of the previous LinePoint)
-  float mY1;
-  float mX2; // second control point (to the left of this LinePoint)
-  float mY2;
+  // public float x;
+  // public float y;
+  float x1; // first control point (to the right of the previous LinePoint)
+  float y1;
+  float x2; // second control point (to the left of this LinePoint)
+  float y2;
   boolean has_cp;
   LinePoint mPrev;  // previous LinePoint on the line
   LinePoint mNext;  // next LinePoint on the line
@@ -36,48 +36,48 @@ public class LinePoint extends BezierPoint
   void flipXAxis(float z)
   {
     float dx = 2 * DrawingUtil.CENTER_X;
-    mX1 = dx - mX1;
-    mX2 = dx - mX2;
-    mX  = dx - mX;
+    x1 = dx - x1;
+    x2 = dx - x2;
+    x  = dx - x;
   }
 
   void shiftCP1By( float dx, float dy )
   {
-     mX1 += dx;
-     mY1 += dy;
+     x1 += dx;
+     y1 += dy;
   }
 
   void shiftCP2By( float dx, float dy )
   {
-     mX2 += dx;
-     mY2 += dy;
+     x2 += dx;
+     y2 += dy;
   }
 
   void shiftBy( float dx, float dy )
   {
-    mX += dx;
-    mY += dy;
+    x += dx;
+    y += dy;
     if ( has_cp ) {
-      // mX1 += dx;
-      // mY1 += dy;
-      mX2 += dx;
-      mY2 += dy;
+      // x1 += dx;
+      // y1 += dy;
+      x2 += dx;
+      y2 += dy;
     }
     if ( mNext != null && mNext.has_cp ) {
-      mNext.mX1 += dx;
-      mNext.mY1 += dy;
+      mNext.x1 += dx;
+      mNext.y1 += dy;
     }
   }
 
   // make isolated line-point copying coords from another
   public LinePoint( LinePoint lp )
   { 
-    mX  = lp.mX;
-    mY  = lp.mY;
-    mX1 = lp.mX1;
-    mY1 = lp.mY1;
-    mX2 = lp.mX2;
-    mY2 = lp.mY2;
+    x  = lp.x;
+    y  = lp.y;
+    x1 = lp.x1;
+    y1 = lp.y1;
+    x2 = lp.x2;
+    y2 = lp.y2;
     has_cp = false;
     mNext = null;
     mPrev = null;
@@ -85,12 +85,12 @@ public class LinePoint extends BezierPoint
 
   public LinePoint( LinePoint lp, LinePoint prev )
   { 
-    mX  = lp.mX;
-    mY  = lp.mY;
-    mX1 = lp.mX1;
-    mY1 = lp.mY1;
-    mX2 = lp.mX2;
-    mY2 = lp.mY2;
+    x  = lp.x;
+    y  = lp.y;
+    x1 = lp.x1;
+    y1 = lp.y1;
+    x2 = lp.x2;
+    y2 = lp.y2;
     has_cp = lp.has_cp;
     mNext = null;
     if ( prev != null ) prev.mNext = this;
@@ -100,8 +100,8 @@ public class LinePoint extends BezierPoint
   public LinePoint( float x, float y, LinePoint prev )
   {
     super( x, y );
-    // mX = x;
-    // mY = y;
+    // x = x;
+    // y = y;
     has_cp = false;
     mNext = null;
     if ( prev != null ) prev.mNext = this;
@@ -111,12 +111,12 @@ public class LinePoint extends BezierPoint
   public LinePoint( float x1, float y1, float x2, float y2, float x, float y, LinePoint prev )
   {
     super( x, y );
-    // mX  = x;
-    // mY  = y;
-    mX1 = x1;
-    mY1 = y1;
-    mX2 = x2;
-    mY2 = y2;
+    // x  = x;
+    // y  = y;
+    x1 = x1;
+    y1 = y1;
+    x2 = x2;
+    y2 = y2;
     has_cp = true;
     mNext = null;
     if ( prev != null ) prev.mNext = this;
@@ -125,12 +125,12 @@ public class LinePoint extends BezierPoint
 
   float distanceCP1( float x, float y )
   {
-    return (float)Math.sqrt( (x-mX1)*(x-mX1) + (y-mY1)*(y-mY1) );
+    return (float)Math.sqrt( (x-x1)*(x-x1) + (y-y1)*(y-y1) );
   }
 
   float distanceCP2( float x, float y )
   {
-    return (float)Math.sqrt( (x-mX2)*(x-mX2) + (y-mY2)*(y-mY2) );
+    return (float)Math.sqrt( (x-x2)*(x-x2) + (y-y2)*(y-y2) );
   }
 
 
@@ -138,25 +138,25 @@ public class LinePoint extends BezierPoint
   {
     if ( has_cp ) {
       pw.format(Locale.US, "  %.2f %.2f %.2f %.2f %.2f %.2f\n",
-        mX1*toTherion, -mY1*toTherion,
-        mX2*toTherion, -mY2*toTherion,
-        mX*toTherion, -mY*toTherion );
+        x1*toTherion, -y1*toTherion,
+        x2*toTherion, -y2*toTherion,
+        x*toTherion, -y*toTherion );
     } else {
-      pw.format(Locale.US, "  %.2f %.2f\n", mX*toTherion, -mY*toTherion );
+      pw.format(Locale.US, "  %.2f %.2f\n", x*toTherion, -y*toTherion );
     }
   }
 
   void toDataStream( DataOutputStream dos )
   {
     try {
-      dos.writeFloat( mX  );
-      dos.writeFloat( mY  );
+      dos.writeFloat( x  );
+      dos.writeFloat( y  );
       if ( has_cp ) {
         dos.write( 1 );
-        dos.writeFloat( mX1 );
-        dos.writeFloat( mY1 );
-        dos.writeFloat( mX2 );
-        dos.writeFloat( mY2 );
+        dos.writeFloat( x1 );
+        dos.writeFloat( y1 );
+        dos.writeFloat( x2 );
+        dos.writeFloat( y2 );
       } else {
         dos.write( 0 );
       }

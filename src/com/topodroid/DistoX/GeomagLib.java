@@ -153,7 +153,12 @@ class GeomagLib
       elements.GV = elements.Decl + location.lambda;
     } else {
       MagUTMParams UTMParameters = MAG_GetTransverseMercator(location );
-      elements.GV = elements.Decl - UTMParameters.ConvergenceOfMeridians;
+      if ( UTMParameters != null ) {
+        elements.GV = elements.Decl - UTMParameters.ConvergenceOfMeridians;
+      } else {
+        TDLog.Error("Null UTM params");
+        elements.GV = elements.Decl;
+      }
     }
   } 
 
@@ -214,6 +219,8 @@ class GeomagLib
     double Phi    = MagUtil.DEG2RAD * geodetic.phi;
 
     MagUTMParams utm0 = MAG_GetUTMParameters( Phi, Lambda );
+    if ( utm0 == null ) return null; // out of UTM range
+
     double K0 = 0.9996;
     double falseN = 0;
     double falseE = 500000;

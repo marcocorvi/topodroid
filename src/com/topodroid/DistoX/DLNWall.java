@@ -27,12 +27,12 @@ class DLNWall
   ArrayList< HullSide > mHull; // convex hull
   ArrayList< HullSide > mPosHull;
   ArrayList< HullSide > mNegHull;
-  BezierPoint P0;
-  BezierPoint P1;
-  BezierPoint P01;
+  Point2D P0;
+  Point2D P1;
+  Point2D P01;
   float P01len2;
 
-  DLNWall( BezierPoint p0, BezierPoint p1 )
+  DLNWall( Point2D p0, Point2D p1 )
   {
     P0 = p0;
     P1 = p1;
@@ -56,7 +56,7 @@ class DLNWall
     //   FileWriter fw = new FileWriter( "/sdcard/test.txt" );
     //   PrintWriter pw = new PrintWriter( fw );
     //   for ( DLNSite s : pts ) {
-    //     pw.format("%.4f %.2f\n", s.mX, s.mY );
+    //     pw.format("%.4f %.2f\n", s.x, s.y );
     //   }
     //   pw.flush();
     //   fw.close();
@@ -66,29 +66,29 @@ class DLNWall
     mHull = new ArrayList< HullSide >();
 
     // bbox of points
-    BezierPoint p0 = pts.get(0);
-    BezierPoint min = new BezierPoint( p0 );
-    BezierPoint max = new BezierPoint( p0 );
-    for ( BezierPoint p : pts ) {
-      if ( p.mX < min.mX )      { min.mX = p.mX; }
-      else if ( p.mX > max.mX ) { max.mX = p.mX; }
-      if ( p.mY < min.mY )      { min.mY = p.mY; }
-      else if ( p.mY > max.mY ) { max.mY = p.mY; }
+    Point2D p0 = pts.get(0);
+    Point2D min = new Point2D( p0 );
+    Point2D max = new Point2D( p0 );
+    for ( Point2D p : pts ) {
+      if ( p.x < min.x )      { min.x = p.x; }
+      else if ( p.x > max.x ) { max.x = p.x; }
+      if ( p.y < min.y )      { min.y = p.y; }
+      else if ( p.y > max.y ) { max.y = p.y; }
     }
-    BezierPoint c = new BezierPoint( (min.mX+max.mX)/2, (min.mY+max.mY)/2 ); // center
-    float S0 = max.mX - min.mX;
-    float s  = max.mY - min.mY; if ( s > S0 ) S0 = s;
-    // Log.v("DistoX", "center " + c.mX + " " + c.mY + " side " + S0 );
+    Point2D c = new Point2D( (min.x+max.x)/2, (min.y+max.y)/2 ); // center
+    float S0 = max.x - min.x;
+    float s  = max.y - min.y; if ( s > S0 ) S0 = s;
+    // Log.v("DistoX", "center " + c.x + " " + c.y + " side " + S0 );
     s = 10*S0;
-    BezierPoint A = new BezierPoint( c.mX-s, c.mY-s );
-    BezierPoint B = new BezierPoint( c.mX-s, c.mY+s );
-    BezierPoint C = new BezierPoint( c.mX+s, c.mY+s );
-    BezierPoint D = new BezierPoint( c.mX+s, c.mY-s );
+    Point2D A = new Point2D( c.x-s, c.y-s );
+    Point2D B = new Point2D( c.x-s, c.y+s );
+    Point2D C = new Point2D( c.x+s, c.y+s );
+    Point2D D = new Point2D( c.x+s, c.y-s );
     s *= 1.4142f;
-    BezierPoint AB = new BezierPoint( c.mX-s, c.mY   );
-    BezierPoint CD = new BezierPoint( c.mX+s, c.mY   );
-    BezierPoint BC = new BezierPoint( c.mX,   c.mY+s );
-    BezierPoint DA = new BezierPoint( c.mX,   c.mY-s );
+    Point2D AB = new Point2D( c.x-s, c.y   );
+    Point2D CD = new Point2D( c.x+s, c.y   );
+    Point2D BC = new Point2D( c.x,   c.y+s );
+    Point2D DA = new Point2D( c.x,   c.y-s );
     
     DLNTriangle tAB1 = new DLNTriangle( p0, A,  AB );
     DLNTriangle tAB2 = new DLNTriangle( p0, AB, B  );
@@ -118,7 +118,7 @@ class DLNWall
     // consistency();
   
     for ( int j=1; j<size; ++j ) {
-      BezierPoint p = pts.get(j);
+      Point2D p = pts.get(j);
       // get the triangle p belongs to
       DLNTriangle tri = null;
       for ( DLNTriangle t : mTri ) {
@@ -174,13 +174,13 @@ class DLNWall
   
     int sz = tmp.size();
     DLNSide ts = tmp.get(0);
-    BezierPoint p1 = ts.mP1;
-    BezierPoint p2 = ts.mP2; 
+    Point2D p1 = ts.mP1;
+    Point2D p2 = ts.mP2; 
     HullSide hs0 = new HullSide( ts );
     HullSide hs1 = hs0;
     mHull.add( hs0 );
     while ( p2 != p1 ) {
-      BezierPoint p3 = p2;
+      Point2D p3 = p2;
       for ( int j=0; j<sz; ++j ) {
         DLNSide tt = tmp.get(j);
         // if ( coincide( tt.mP1, p2, 0.0001 ) ) 
@@ -195,7 +195,7 @@ class DLNWall
         }
       }
       if ( p3 == p2 ) {
-        TDLog.Error("failed next at " + p2.mX + " " + p2.mY );
+        TDLog.Error("failed next at " + p2.x + " " + p2.y );
         break;
       }
     }
@@ -293,17 +293,17 @@ class DLNWall
     }
   }
 
-  boolean isIntersection( BezierPoint q0, BezierPoint q1 )
+  boolean isIntersection( Point2D q0, Point2D q1 )
   {
     {
-      float xp = P1.mX - P0.mX;
-      float yp = P1.mY - P0.mY;
-      if ( ( (q0.mX-P0.mX)*yp - (q0.mY-P0.mY)*xp) * ( (q1.mX-P0.mX)*yp - (q1.mY-P0.mY)*xp ) > 0 ) return false;
+      float xp = P1.x - P0.x;
+      float yp = P1.y - P0.y;
+      if ( ( (q0.x-P0.x)*yp - (q0.y-P0.y)*xp) * ( (q1.x-P0.x)*yp - (q1.y-P0.y)*xp ) > 0 ) return false;
     }
     {
-      float xq = q1.mX - q0.mX;
-      float yq = q1.mY - q0.mY;
-      if ( ( (P0.mX-q0.mX)*yq - (P0.mY-q0.mY)*xq) * ( (P1.mX-q0.mX)*yq - (P1.mY-q0.mY)*xq ) > 0 ) return false;
+      float xq = q1.x - q0.x;
+      float yq = q1.y - q0.y;
+      if ( ( (P0.x-q0.x)*yq - (P0.y-q0.y)*xq) * ( (P1.x-q0.x)*yq - (P1.y-q0.y)*xq ) > 0 ) return false;
     }
     return true;
   }
@@ -311,8 +311,8 @@ class DLNWall
   int sign( HullSide hs )
   {
     DLNSide s = hs.side;
-    BezierPoint p1 = s.mP1.sub( P0 );
-    BezierPoint p2 = s.mP2.sub( P0 );
+    Point2D p1 = s.mP1.sub( P0 );
+    Point2D p2 = s.mP2.sub( P0 );
     float x1 = p1.dot( P01 ) / P01len2;
     float x2 = p2.dot( P01 ) / P01len2;
     if ( x1 < -0.1f && x2 < -0.1f ) return 0;
@@ -323,14 +323,14 @@ class DLNWall
     return ( p2.cross(P01) > 0)? 1 : -1;
   }
 
-  // boolean coincide( BezierPoint p1, BezierPoint p2, double eps )
+  // boolean coincide( Point2D p1, Point2D p2, double eps )
   // {
-  //   if ( Math.abs( p1.mX - p2.mX ) > eps ) return false;
-  //   if ( Math.abs( p1.mY - p2.mY ) > eps ) return false;
+  //   if ( Math.abs( p1.x - p2.x ) > eps ) return false;
+  //   if ( Math.abs( p1.y - p2.y ) > eps ) return false;
   //   return true;
   // }
 
-  void doTriangle( DLNTriangle t0, BezierPoint p )
+  void doTriangle( DLNTriangle t0, Point2D p )
   {
     Stack< DLNTriangle > stack = new Stack< DLNTriangle >();
     stack.add( t0 );
@@ -340,15 +340,15 @@ class DLNWall
     // consistency();
   }
 
-  boolean isInsideHull( BezierPoint p )
+  boolean isInsideHull( Point2D p )
   {
     double a = 0;
     for ( HullSide it : mHull ) {
       DLNSide s = it.side;
-      double x1 = p.mX - s.mP1.mX;
-      double y1 = p.mY - s.mP1.mY;
-      double x2 = p.mX - s.mP2.mX;
-      double y2 = p.mY - s.mP2.mY;
+      double x1 = p.x - s.mP1.x;
+      double y1 = p.y - s.mP1.y;
+      double x2 = p.x - s.mP2.x;
+      double y2 = p.y - s.mP2.y;
       double d1 = Math.sqrt( x1*x1 + y1*y1 ); x1 /= d1; y1 /= d1;
       double d2 = Math.sqrt( x2*x2 + y2*y2 ); x2 /= d2; y2 /= d2;
       double sa = x2*y1 - y2*x1;
@@ -359,18 +359,18 @@ class DLNWall
   }
   
   
-  void handleTriangle( Stack< DLNTriangle > stack, BezierPoint p1 )
+  void handleTriangle( Stack< DLNTriangle > stack, Point2D p1 )
   {
     DLNTriangle t1 = stack.pop();
     DLNSide s1 = t1.sideOf( p1 );
     DLNSide s2 = s1.other;
     if ( s2 == null ) return;
     DLNTriangle t2 = s2.triangle;
-    BezierPoint p2 = t2.pointOf( s2 );
-    BezierPoint c2 = t2.mCenter;
+    Point2D p2 = t2.pointOf( s2 );
+    Point2D c2 = t2.mCenter;
     if ( c2.distance( p1 ) < t2.mRadius ) {
-      BezierPoint pa = t1.nextPoint( p1 );
-      BezierPoint pb = t1.prevPoint( p1 );
+      Point2D pa = t1.nextPoint( p1 );
+      Point2D pb = t1.prevPoint( p1 );
       // assert( pa == t2.prevPoint( p2 ) );
       // assert( pb == t2.nextPoint( p2 ) );
       DLNTriangle ta = new DLNTriangle( pa, p2, p1 );
@@ -395,9 +395,9 @@ class DLNWall
   //   DLNSide s0 = t.side(0);
   //   DLNSide s1 = t.side(1);
   //   DLNSide s2 = t.side(2);
-  //   BezierPoint p0 = t.point(0);
-  //   BezierPoint p1 = t.point(1);
-  //   BezierPoint p2 = t.point(2);
+  //   Point2D p0 = t.point(0);
+  //   Point2D p1 = t.point(1);
+  //   Point2D p2 = t.point(2);
   //   assert( p0 == t.pointOf(s0) );
   //   assert( p1 == t.pointOf(s1) );
   //   assert( p2 == t.pointOf(s2) );
@@ -419,7 +419,7 @@ class DLNWall
   //   Side * s00 = s0.other; assert( s00 == NULL || s00.other == s0 );
   //   Side * s11 = s1.other; assert( s11 == NULL || s11.other == s1 );
   //   Side * s22 = s2.other; assert( s22 == NULL || s22.other == s2 );
-  //   BezierPoint c = t.mCenter;
+  //   Point2D c = t.mCenter;
   //   double r2 = t->mRadius;
   //   assert( Math.fabs(c.distance( p0 ) - r2) < 0.01 );
   //   assert( Math.fabs(c.distance( p1 ) - r2) < 0.01 );

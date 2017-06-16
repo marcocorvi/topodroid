@@ -14,17 +14,17 @@ package com.topodroid.DistoX;
 
 class DLNTriangle
 {
-  BezierPoint mP0;
-  BezierPoint mP1;
-  BezierPoint mP2;
+  Point2D mP0;
+  Point2D mP1;
+  Point2D mP2;
   DLNSide mS0; // opposite side of P0, ie, [P1,P2]
   DLNSide mS1;
   DLNSide mS2;
-  BezierPoint mCenter;
+  Point2D mCenter;
   float mRadius; // square radius
   float x10, y10, x21, y21, x02, y02;
 
-  DLNTriangle( BezierPoint p0, BezierPoint p1, BezierPoint p2 )
+  DLNTriangle( Point2D p0, Point2D p1, Point2D p2 )
   {
     mP0 = p0;
     mP1 = p1;
@@ -35,7 +35,7 @@ class DLNTriangle
     computeCenterAndRadius();
   }
 
-  boolean hasPoint( BezierPoint p ) 
+  boolean hasPoint( Point2D p ) 
   {
     return ( p == mP0 ) || ( p == mP1 ) || ( p == mP2 );
   }
@@ -56,7 +56,7 @@ class DLNTriangle
     return null;
   }
 
-  BezierPoint nextPoint( BezierPoint p ) 
+  Point2D nextPoint( Point2D p ) 
   {
     if ( p == mP0 ) return mP1;
     if ( p == mP1 ) return mP2;
@@ -64,7 +64,7 @@ class DLNTriangle
     return null;
   }
 
-  BezierPoint prevPoint( BezierPoint p ) 
+  Point2D prevPoint( Point2D p ) 
   {
     if ( p == mP0 ) return mP2;
     if ( p == mP1 ) return mP0;
@@ -72,7 +72,7 @@ class DLNTriangle
     return null;
   }
 
-  DLNSide sideOf( BezierPoint p )
+  DLNSide sideOf( Point2D p )
   {
     if ( p == mP0 ) return mS0;
     if ( p == mP1 ) return mS1;
@@ -80,7 +80,7 @@ class DLNTriangle
     return null;
   }
 
-  BezierPoint pointOf( DLNSide s ) 
+  Point2D pointOf( DLNSide s ) 
   {
     if ( s == mS0 ) return mP0;
     if ( s == mS1 ) return mP1;
@@ -88,7 +88,7 @@ class DLNTriangle
     return null;
   }
 
-  BezierPoint point( int k ) 
+  Point2D point( int k ) 
   {
     if ( k == 0 ) return mP0;
     if ( k == 1 ) return mP1;
@@ -97,11 +97,11 @@ class DLNTriangle
   }
 
   // axes are righthanded Y-X
-  boolean contains( BezierPoint p )
+  boolean contains( Point2D p )
   {
-    if ( y10*(p.mX-mP0.mX) - x10*(p.mY-mP0.mY) < 0 ) return false;
-    if ( y21*(p.mX-mP1.mX) - x21*(p.mY-mP1.mY) < 0 ) return false;
-    if ( y02*(p.mX-mP2.mX) - x02*(p.mY-mP2.mY) < 0 ) return false;
+    if ( y10*(p.x-mP0.x) - x10*(p.y-mP0.y) < 0 ) return false;
+    if ( y21*(p.x-mP1.x) - x21*(p.y-mP1.y) < 0 ) return false;
+    if ( y02*(p.x-mP2.x) - x02*(p.y-mP2.y) < 0 ) return false;
     return true;
   }
     
@@ -116,25 +116,25 @@ class DLNTriangle
   // x10 s + x20 t = - y21
   void computeCenterAndRadius()
   {
-    x10 = mP1.mX - mP0.mX;
-    y10 = mP1.mY - mP0.mY;
-    float x20 = mP2.mX - mP0.mX;
-    float y20 = mP2.mY - mP0.mY;
+    x10 = mP1.x - mP0.x;
+    y10 = mP1.y - mP0.y;
+    float x20 = mP2.x - mP0.x;
+    float y20 = mP2.y - mP0.y;
     x02 = -x20;
     y02 = -y20;
-    x21 = mP2.mX - mP1.mX;
-    y21 = mP2.mY - mP1.mY;
+    x21 = mP2.x - mP1.x;
+    y21 = mP2.y - mP1.y;
 
     float det = y10*x20 - y20*x10;
     float s =   (x20*x21 + y20*y21)/det;
     // float t = - (x10*x21 + y10*y21)/det;
     // assert( fabs(s*y10 + t*y20 - x21) < 0.01 );
     // assert( fabs(s*x10 + t*x20 + y21) < 0.01 );
-    // assert( fabs(mP0.mX + mP1.mX + s * ( mP1.mY - mP0.mY ) - (mP0.mX + mP2.mX - t * ( mP2.mY - mP0.mY ))) < 0.01 );
-    // assert( fabs(mP0.mY + mP1.mY - s * ( mP1.mX - mP0.mX ) - (mP0.mY + mP2.mY + t * ( mP2.mX - mP0.mX ))) < 0.01 );
+    // assert( fabs(mP0.x + mP1.x + s * ( mP1.y - mP0.y ) - (mP0.x + mP2.x - t * ( mP2.y - mP0.y ))) < 0.01 );
+    // assert( fabs(mP0.y + mP1.y - s * ( mP1.x - mP0.x ) - (mP0.y + mP2.y + t * ( mP2.x - mP0.x ))) < 0.01 );
 
-    mCenter = new BezierPoint( (mP0.mX + mP1.mX + s * ( mP1.mY - mP0.mY ))/2,
-                               (mP0.mY + mP1.mY - s * ( mP1.mX - mP0.mX ))/2 );
+    mCenter = new Point2D( (mP0.x + mP1.x + s * ( mP1.y - mP0.y ))/2,
+                               (mP0.y + mP1.y - s * ( mP1.x - mP0.x ))/2 );
     mRadius = mCenter.distance( mP0 );
     // assert( fabs( mRadius - mCenter.distance( mP1 )) < 0.01 );
     // assert( fabs( mRadius - mCenter.distance( mP2 )) < 0.01 );

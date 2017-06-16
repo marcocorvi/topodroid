@@ -2262,9 +2262,9 @@ public class DrawingWindow extends ItemDrawer
           float d2 = line1.mLast.distance( lp1.mFirst );
           if ( d1 < d2 ) {
             // line.reversePath();
-            lp1.moveFirstTo( line1.mFirst.mX, line1.mFirst.mY );
+            lp1.moveFirstTo( line1.mFirst.x, line1.mFirst.y );
           } else {
-            lp1.moveFirstTo( line1.mLast.mX, line1.mLast.mY );
+            lp1.moveFirstTo( line1.mLast.x, line1.mLast.y );
           }
         }
         if ( line2 != null ) {
@@ -2272,9 +2272,9 @@ public class DrawingWindow extends ItemDrawer
           float d2 = line2.mLast.distance( lp1.mLast );
           if ( d1 < d2 ) {
             // line.reversePath();
-            lp1.moveLastTo( line2.mFirst.mX, line2.mFirst.mY );
+            lp1.moveLastTo( line2.mFirst.x, line2.mFirst.y );
           } else {
-            lp1.moveLastTo( line2.mLast.mX, line2.mLast.mY );
+            lp1.moveLastTo( line2.mLast.x, line2.mLast.y );
           }
         }
       }
@@ -2522,26 +2522,26 @@ public class DrawingWindow extends ItemDrawer
                 }
               } else if ( mSymbol == Symbol.AREA ) {
                 // Log.v("DistoX",
-                //       "DX " + (x_scene - mCurrentAreaPath.mFirst.mX) + " DY " + (y_scene - mCurrentAreaPath.mFirst.mY ) );
+                //       "DX " + (x_scene - mCurrentAreaPath.mFirst.x) + " DY " + (y_scene - mCurrentAreaPath.mFirst.y ) );
                 if (    PlotInfo.isVertical( mType )
                      && BrushManager.mAreaLib.isCloseHorizontal( mCurrentArea ) 
-                     && Math.abs( x_scene - mCurrentAreaPath.mFirst.mX ) > 20  // 20 == 1.0 meter
-                     && Math.abs( y_scene - mCurrentAreaPath.mFirst.mY ) < 10  // 10 == 0.5 meter
+                     && Math.abs( x_scene - mCurrentAreaPath.mFirst.x ) > 20  // 20 == 1.0 meter
+                     && Math.abs( y_scene - mCurrentAreaPath.mFirst.y ) < 10  // 10 == 0.5 meter
                   ) {
                   LinePoint lp = mCurrentAreaPath.mFirst; 
-                  float yy = lp.mY;
+                  float yy = lp.y;
                   mCurrentAreaPath.addPoint( x_scene, yy-0.001f );
                   DrawingAreaPath area = new DrawingAreaPath( mCurrentAreaPath.mAreaType,
                                                               mCurrentAreaPath.mAreaCnt, 
                                                               mCurrentAreaPath.mPrefix, 
                                                               TDSetting.mAreaBorder );
-                  area.addStartPoint( lp.mX, lp.mY );
+                  area.addStartPoint( lp.x, lp.y );
                   for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
-                    if ( lp.mY <= yy ) {
-                      area.addPoint( lp.mX, yy );
+                    if ( lp.y <= yy ) {
+                      area.addPoint( lp.x, yy );
                       break;
                     } else {
-                      area.addPoint( lp.mX, lp.mY );
+                      area.addPoint( lp.x, lp.y );
                     }
                   }
                   mCurrentAreaPath = area;
@@ -2561,16 +2561,16 @@ public class DrawingWindow extends ItemDrawer
                   int nPts = (mSymbol == Symbol.LINE )? mCurrentLinePath.size() 
                                                       : mCurrentAreaPath.size() ;
                   if ( nPts > 1 ) {
-                    ArrayList< BezierPoint > pts = new ArrayList< BezierPoint >(); // [ nPts ];
+                    ArrayList< Point2D > pts = new ArrayList< Point2D >(); // [ nPts ];
                     // ArrayList< LinePoint > lp = 
                     //   (mSymbol == Symbol.LINE )? mCurrentLinePath.mPoints : mCurrentAreaPath.mPoints ;
                     // for (int k=0; k<nPts; ++k ) {
-                    //   pts.add( new BezierPoint( lp.get(k).mX, lp.get(k).mY ) );
+                    //   pts.add( new Point2D( lp.get(k).x, lp.get(k).y ) );
                     // }
                     LinePoint lp = (mSymbol == Symbol.LINE )? mCurrentLinePath.mFirst 
                                                             : mCurrentAreaPath.mFirst;
                     for ( ; lp != null; lp = lp.mNext ) {
-                      pts.add( new BezierPoint( lp.mX, lp.mY ) );
+                      pts.add( new Point2D( lp.x, lp.y ) );
                     }
 
                     mBezierInterpolator.fitCurve( pts, nPts, TDSetting.mLineAccuracy, TDSetting.mLineCorner );
@@ -2579,16 +2579,16 @@ public class DrawingWindow extends ItemDrawer
                     // TDLog.Log( TDLog.LOG_PLOT, " Bezier size " + k0 );
                     if ( k0 > 0 ) {
                       BezierCurve c = curves.get(0);
-                      BezierPoint p0 = c.getPoint(0);
+                      Point2D p0 = c.getPoint(0);
                       if ( mSymbol == Symbol.LINE ) {
                         DrawingLinePath lp1 = new DrawingLinePath( mCurrentLine );
-                        lp1.addStartPoint( p0.mX, p0.mY );
+                        lp1.addStartPoint( p0.x, p0.y );
                         for (int k=0; k<k0; ++k) {
                           c = curves.get(k);
-                          BezierPoint p1 = c.getPoint(1);
-                          BezierPoint p2 = c.getPoint(2);
-                          BezierPoint p3 = c.getPoint(3);
-                          lp1.addPoint3(p1.mX, p1.mY, p2.mX, p2.mY, p3.mX, p3.mY );
+                          Point2D p1 = c.getPoint(1);
+                          Point2D p2 = c.getPoint(2);
+                          Point2D p3 = c.getPoint(3);
+                          lp1.addPoint3(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y );
                         }
                         boolean addline = true;
                         if ( mContinueLine > CONT_NONE && mCurrentLine != BrushManager.mLineLib.mLineSectionIndex ) {
@@ -2606,13 +2606,13 @@ public class DrawingWindow extends ItemDrawer
                       } else { //  mSymbol == Symbol.AREA
                         DrawingAreaPath ap = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(),
                           mName+"-a", TDSetting.mAreaBorder ); 
-                        ap.addStartPoint( p0.mX, p0.mY );
+                        ap.addStartPoint( p0.x, p0.y );
                         for (int k=0; k<k0; ++k) {
                           c = curves.get(k);
-                          BezierPoint p1 = c.getPoint(1);
-                          BezierPoint p2 = c.getPoint(2);
-                          BezierPoint p3 = c.getPoint(3);
-                          ap.addPoint3(p1.mX, p1.mY, p2.mX, p2.mY, p3.mX, p3.mY );
+                          Point2D p1 = c.getPoint(1);
+                          Point2D p2 = c.getPoint(2);
+                          Point2D p3 = c.getPoint(3);
+                          ap.addPoint3(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y );
                         }
                         ap.close();
                         ap.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
@@ -2643,7 +2643,7 @@ public class DrawingWindow extends ItemDrawer
                       //
                       LinePoint l2 = mCurrentLinePath.mFirst; // .mNext;
                       LinePoint l1 = l2.mNext;
-                      // Log.v("DistoX", "section line L1 " + l1.mX + " " + l1.mY + " L2 " + l2.mX + " " + l2.mY );
+                      // Log.v("DistoX", "section line L1 " + l1.x + " " + l1.y + " L2 " + l2.x + " " + l2.y );
 
                       List< DrawingPath > paths = mDrawingSurface.getIntersectionShot( l1, l2 );
                       if ( paths.size() > 0 ) {
@@ -2653,7 +2653,7 @@ public class DrawingWindow extends ItemDrawer
                         String to   = "-1";
                         float clino = 0;
 
-                        float azimuth = 90 + (float)(Math.atan2( l2.mX-l1.mX, -l2.mY+l1.mY ) * TDMath.RAD2GRAD );
+                        float azimuth = 90 + (float)(Math.atan2( l2.x-l1.x, -l2.y+l1.y ) * TDMath.RAD2GRAD );
                         azimuth = TDMath.in360( azimuth );
 
                         DBlock blk = null;
@@ -2664,7 +2664,7 @@ public class DrawingWindow extends ItemDrawer
                           DrawingPath p = paths.get(0);
                           blk = p.mBlock;
                           Float result = Float.valueOf(0);
-                          p.intersect( l1.mX, l1.mY, l2.mX, l2.mY, result );
+                          p.intersect( l1.x, l1.y, l2.x, l2.y, result );
                           intersection = result.floatValue();
                           // p.log();
                         }
@@ -2703,7 +2703,7 @@ public class DrawingWindow extends ItemDrawer
                             }
                           }
                         } else { // null block
-                          azimuth = 90 + (float)(Math.atan2( l2.mX-l1.mX, -l2.mY+l1.mY ) * TDMath.RAD2GRAD );
+                          azimuth = 90 + (float)(Math.atan2( l2.x-l1.x, -l2.y+l1.y ) * TDMath.RAD2GRAD );
                           azimuth = TDMath.in360( azimuth );
                         }
                         // Log.v("DistoX", "new section " + from + " - " + to );
@@ -2713,8 +2713,8 @@ public class DrawingWindow extends ItemDrawer
                         mDrawingSurface.addDrawingPath( mCurrentLinePath );
 
                         if ( TDSetting.mAutoSectionPt && section_id != null ) {
-                          float x5 = mCurrentLinePath.mLast.mX + mCurrentLinePath.mDx * 20; 
-                          float y5 = mCurrentLinePath.mLast.mY + mCurrentLinePath.mDy * 20; 
+                          float x5 = mCurrentLinePath.mLast.x + mCurrentLinePath.mDx * 20; 
+                          float y5 = mCurrentLinePath.mLast.y + mCurrentLinePath.mDy * 20; 
                           String scrap_option = "-scrap " + mApp.mySurvey + "-" + section_id;
                           DrawingPointPath section_pt = new DrawingPointPath( BrushManager.mPointLib.mPointSectionIndex,
                                                                             x5, y5, DrawingPointPath.SCALE_M, 
@@ -3387,13 +3387,13 @@ public class DrawingWindow extends ItemDrawer
                 LinePoint lp0 = sp.mPoint;
                 LinePoint lp2 = lp0.mPrev; 
                 if ( ! lp0.has_cp && lp2 != null ) {
-                  float dx = (lp0.mX - lp2.mX)/3;
-                  float dy = (lp0.mY - lp2.mY)/3;
+                  float dx = (lp0.x - lp2.x)/3;
+                  float dy = (lp0.y - lp2.y)/3;
                   if ( Math.abs(dx) > 0.01 || Math.abs(dy) > 0.01 ) {
-                    lp0.mX1 = lp2.mX + dx;
-                    lp0.mY1 = lp2.mY + dy;
-                    lp0.mX2 = lp0.mX - dx;
-                    lp0.mY2 = lp0.mY - dy;
+                    lp0.x1 = lp2.x + dx;
+                    lp0.y1 = lp2.y + dy;
+                    lp0.x2 = lp0.x - dx;
+                    lp0.y2 = lp0.y - dy;
                     lp0.has_cp = true;
                     DrawingPointLinePath line = (DrawingPointLinePath)sp.mItem;
                     line.retracePath();
@@ -4688,19 +4688,19 @@ public class DrawingWindow extends ItemDrawer
 
   void makeDlnWall( ArrayList<DLNSite> sites, float x0, float y0, float x1, float y1, float len, PointF uu, PointF vv )
   {
-    DLNWall dln_wall = new DLNWall( new BezierPoint(x0,y0), new BezierPoint(x1,y1) );
+    DLNWall dln_wall = new DLNWall( new Point2D(x0,y0), new Point2D(x1,y1) );
     dln_wall.compute( sites );
     if ( dln_wall.mPosHull.size() > 0 ) {
       HullSide hpos = dln_wall.mPosHull.get(0);
       DLNSide side = hpos.side;
-      float xx = DrawingUtil.toSceneX( side.mP1.mX );
-      float yy = DrawingUtil.toSceneY( side.mP1.mY );
+      float xx = DrawingUtil.toSceneX( side.mP1.x );
+      float yy = DrawingUtil.toSceneY( side.mP1.y );
       DrawingLinePath path = new DrawingLinePath( BrushManager.mLineLib.mLineWallIndex );
       path.addStartPoint( xx, yy );
       for ( HullSide hp : dln_wall.mPosHull ) {
         side = hp.side;
-        float xx2 = DrawingUtil.toSceneX( side.mP2.mX );
-        float yy2 = DrawingUtil.toSceneY( side.mP2.mY );
+        float xx2 = DrawingUtil.toSceneX( side.mP2.x );
+        float yy2 = DrawingUtil.toSceneY( side.mP2.y );
         addPointsToLine( path, xx, yy, xx2, yy2 );
         xx = xx2;
         yy = yy2;
@@ -4711,14 +4711,14 @@ public class DrawingWindow extends ItemDrawer
     if ( dln_wall.mNegHull.size() > 0 ) {
       HullSide hneg = dln_wall.mNegHull.get(0);
       DLNSide side = hneg.side;
-      float xx = DrawingUtil.toSceneX( side.mP1.mX );
-      float yy = DrawingUtil.toSceneY( side.mP1.mY );
+      float xx = DrawingUtil.toSceneX( side.mP1.x );
+      float yy = DrawingUtil.toSceneY( side.mP1.y );
       DrawingLinePath path = new DrawingLinePath( BrushManager.mLineLib.mLineWallIndex );
       path.addStartPoint( xx, yy );
       for ( HullSide hn : dln_wall.mNegHull ) {
         side = hn.side;
-        float xx2 = DrawingUtil.toSceneX( side.mP2.mX );
-        float yy2 = DrawingUtil.toSceneY( side.mP2.mY );
+        float xx2 = DrawingUtil.toSceneX( side.mP2.x );
+        float yy2 = DrawingUtil.toSceneY( side.mP2.y );
         addPointsToLine( path, xx, yy, xx2, yy2 );
         xx = xx2;
         yy = yy2;
@@ -4731,18 +4731,18 @@ public class DrawingWindow extends ItemDrawer
   /*
   void makeDlnWall( ArrayList<DLNSite> sites, float x0, float y0, float x1, float y1, float len, PointF uu, PointF vv )
   {
-    DLNWall dln_wall = new DLNWall( new BezierPoint(x0,y0), new BezierPoint(x1,y1) );
+    DLNWall dln_wall = new DLNWall( new Point2D(x0,y0), new Point2D(x1,y1) );
     dln_wall.compute( sites );
     HullSide hull = dln_wall.getBorderHead();
     DLNSide side = hull.side;
-    float xx = DrawingUtil.toSceneX( side.mP1.mX );
-    float yy = DrawingUtil.toSceneY( side.mP1.mY );
+    float xx = DrawingUtil.toSceneX( side.mP1.x );
+    float yy = DrawingUtil.toSceneY( side.mP1.y );
     DrawingLinePath path = new DrawingLinePath( BrushManager.mLineLib.mLineWallIndex );
     path.addStartPoint( xx, yy );
     int size = dln_wall.hullSize();
     for ( int k=0; k<size; ++k ) {
-      float xx2 = DrawingUtil.toSceneX( side.mP2.mX );
-      float yy2 = DrawingUtil.toSceneY( side.mP2.mY );
+      float xx2 = DrawingUtil.toSceneX( side.mP2.x );
+      float yy2 = DrawingUtil.toSceneY( side.mP2.y );
       addPointsToLine( path, xx, yy, xx2, yy2 );
       xx = xx2;
       yy = yy2;

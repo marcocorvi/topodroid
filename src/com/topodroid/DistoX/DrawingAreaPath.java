@@ -122,31 +122,31 @@ public class DrawingAreaPath extends DrawingPointLinePath
       // setPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
 
       int has_cp;
-      float mX1, mY1, mX2, mY2, mX, mY;
-      mX = x + dis.readFloat( );
-      mY = y + dis.readFloat( );
+      float x1, y1, x2, y2, x0, y0;
+      x0 = x + dis.readFloat( );
+      y0 = y + dis.readFloat( );
       has_cp = dis.read();
       if ( has_cp == 1 ) { // consume 4 floats
-        mX1 = x + dis.readFloat();
-        mY1 = y + dis.readFloat();
-        mX2 = x + dis.readFloat();
-        mY2 = y + dis.readFloat();
+        x1 = x + dis.readFloat();
+        y1 = y + dis.readFloat();
+        x2 = x + dis.readFloat();
+        y2 = y + dis.readFloat();
       }
-      ret.addStartPoint( mX, mY );
-      // Log.v("DistoX", "A start " + mX + " " + mY );
+      ret.addStartPoint( x0, y0 );
+      // Log.v("DistoX", "A start " + x + " " + y );
       for ( int k=1; k<npt; ++k ) {
-        mX = x + dis.readFloat();
-        mY = y + dis.readFloat();
+        x0 = x + dis.readFloat();
+        y0 = y + dis.readFloat();
         has_cp = dis.read();
-        // Log.v("DistoX", "A point " + mX + " " + mY + " " + has_cp );
+        // Log.v("DistoX", "A point " + x + " " + y + " " + has_cp );
         if ( has_cp == 1 ) {
-          mX1 = x + dis.readFloat();
-          mY1 = y + dis.readFloat();
-          mX2 = x + dis.readFloat();
-          mY2 = y + dis.readFloat();
-          ret.addPoint3( mX1, mY1, mX2, mY2, mX, mY );
+          x1 = x + dis.readFloat();
+          y1 = y + dis.readFloat();
+          x2 = x + dis.readFloat();
+          y2 = y + dis.readFloat();
+          ret.addPoint3( x1, y1, x2, y2, x0, y0 );
         } else {
-          ret.addPoint( mX, mY );
+          ret.addPoint( x0, y0 );
         }
       }
       ret.retracePath();
@@ -231,10 +231,10 @@ public class DrawingAreaPath extends DrawingPointLinePath
     {
       pt.toTherion( pw );
     }
-    // if ( TDSetting.mXTherionAreas ) // NOTE xtherion needs an extra point 
+    // if ( TDSetting.xTherionAreas ) // NOTE xtherion needs an extra point 
     {
-      float dx = mLast.mX - mFirst.mX;
-      float dy = mLast.mY - mFirst.mY;
+      float dx = mLast.x - mFirst.x;
+      float dy = mLast.y - mFirst.y;
       if ( dx*dx + dy*dy > 1.0e-7 ) {
         mFirst.toTherion( pw );
       }
@@ -269,8 +269,8 @@ public class DrawingAreaPath extends DrawingPointLinePath
     // for ( LinePoint pt : mPoints ) 
     for ( LinePoint pt = mFirst; pt != null; pt = pt.mNext ) 
     {
-      float x = DrawingUtil.sceneToWorldX( pt.mX );
-      float y = DrawingUtil.sceneToWorldY( pt.mY );
+      float x = DrawingUtil.sceneToWorldX( pt.x );
+      float y = DrawingUtil.sceneToWorldY( pt.y );
       pw.format(Locale.US, "%.2f %.2f ", x, y );
       if ( b ) { pw.format("B "); b = false; }
     }

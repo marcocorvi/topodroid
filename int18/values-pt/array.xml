@@ -20,6 +20,7 @@
   <string-array name="wallsType">
      <item name="none">Nenhum</item>
      <item name="convex">Convexo</item>
+     <item name="delaunay">TODO</item>
   </string-array>
   <!-- string-array name="acadVersion">
      <item name="9">AutoCAD 6</item>

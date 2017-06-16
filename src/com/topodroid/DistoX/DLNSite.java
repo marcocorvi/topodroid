@@ -12,7 +12,7 @@
 package com.topodroid.DistoX;
 
 
-class DLNSite  extends BezierPoint
+class DLNSite  extends Point2D
 {
   private DLNPole mPole;
 
@@ -23,7 +23,7 @@ class DLNSite  extends BezierPoint
   }
 
   // p = center of t
-  void setPole( BezierPoint p, DLNTriangle t ) 
+  void setPole( Point2D p, DLNTriangle t ) 
   {
     float d = distance( p );
     if ( mPole.mT == null || d > mPole.mDist ) {
@@ -33,6 +33,6 @@ class DLNSite  extends BezierPoint
 
   float poleDistance() { return mPole.mDist; }
   DLNTriangle poleTriangle() { return mPole.mT; }
-  BezierPoint polePoint() { return mPole.mP; }
+  Point2D polePoint() { return mPole.mP; }
   
 }

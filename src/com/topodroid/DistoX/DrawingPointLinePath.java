@@ -51,7 +51,7 @@ public class DrawingPointLinePath extends DrawingPath
     int ret = 0;
     for (LinePoint l1 = mFirst; l1 != null; l1=l1.mNext ) {
       for ( LinePoint l2 = other.mFirst; l2 != null; l2 = l2.mNext ) {
-        if ( Math.abs( l1.mX - l2.mX ) < 0.001f && Math.abs( l1.mY - l2.mY ) < 0.001f ) {
+        if ( Math.abs( l1.x - l2.x ) < 0.001f && Math.abs( l1.y - l2.y ) < 0.001f ) {
           ++ ret;
           break;
         }
@@ -66,7 +66,7 @@ public class DrawingPointLinePath extends DrawingPath
   //   for (LinePoint l1 = mFirst; l1 != null; l1=l1.mNext ) {
   //     // if ( k < 2 || k > mSize-2 ) 
   //     {
-  //       Log.v("DistoX", k + ": " + l1.mX + " " + l1.mY );
+  //       Log.v("DistoX", k + ": " + l1.x + " " + l1.y );
   //     }
   //     ++k;
   //   }
@@ -74,15 +74,15 @@ public class DrawingPointLinePath extends DrawingPath
 
   void moveFirstTo( float x, float y )
   {
-    mFirst.mX = x;
-    mFirst.mY = y;
+    mFirst.x = x;
+    mFirst.y = y;
     retracePath();
   }
     
   void moveLastTo( float x, float y )
   {
-    mLast.mX = x;
-    mLast.mY = y;
+    mLast.x = x;
+    mLast.y = y;
     retracePath();
   }
 
@@ -106,14 +106,14 @@ public class DrawingPointLinePath extends DrawingPath
     mSize = 1;
     for ( LinePoint p = mFirst.mNext; p != null; p = p.mNext ) {
       if ( p == mFirst ) break;
-      // Log.v( "DistoX", "[>] " + p.mX + " " + p.mY );
+      // Log.v( "DistoX", "[>] " + p.x + " " + p.y );
       if ( ++ mSize > 100 ) break;;
     }
     // CHECK;
     int size = 1;
     for ( LinePoint p = mLast.mPrev; p != null; p = p.mPrev ) {
       if ( p == mLast ) break;
-      // Log.v( "DistoX", "[<] " + p.mX + " " + p.mY );
+      // Log.v( "DistoX", "[<] " + p.x + " " + p.y );
       if ( ++ size > 100 ) break;;
     }
     if ( size != mSize ) {
@@ -140,8 +140,8 @@ public class DrawingPointLinePath extends DrawingPath
   boolean isPathClosed() 
   {
     if ( mSize < 2 ) return false;
-    float dx = (mFirst.mX - mLast.mX)/3;
-    float dy = (mFirst.mY - mLast.mY)/3;
+    float dx = (mFirst.x - mLast.x)/3;
+    float dy = (mFirst.y - mLast.y)/3;
     return ( dx*dx + dy*dy < 1.0e-7 );
   }
 
@@ -199,10 +199,10 @@ public class DrawingPointLinePath extends DrawingPath
       LinePoint pt = mFirst.mNext;
       while ( pt != mLast ) {
         LinePoint next = pt.mNext; // pt.mNext != null because pt < mLast
-        float x1 = pt.mX - prev.mX;
-        float y1 = pt.mY - prev.mY;
-        float x2 = next.mX - pt.mX;
-        float y2 = next.mY - pt.mY;
+        float x1 = pt.x - prev.x;
+        float y1 = pt.y - prev.y;
+        float x2 = next.x - pt.x;
+        float y2 = next.y - pt.y;
         float cos = (x1*x2 + y1*y2)/(float)Math.sqrt((x1*x1+y1*y1)*(x2*x2+y2*y2));
         if ( cos >= 0.7 ) {
           prev.mNext = next;
@@ -222,17 +222,17 @@ public class DrawingPointLinePath extends DrawingPath
   void makeClose( )
   {
     if ( mSize > 2 ) {
-      float dx = (mFirst.mX - mLast.mX)/3;
-      float dy = (mFirst.mY - mLast.mY)/3;
+      float dx = (mFirst.x - mLast.x)/3;
+      float dy = (mFirst.y - mLast.y)/3;
       if ( dx*dx + dy*dy > 1.0e-7 ) {
         if ( mLast.has_cp ) {
-          mLast.mX1 += dx;
-          mLast.mY1 += dy;
-          mLast.mX2 += dx*2;
-          mLast.mY2 += dy*2;
+          mLast.x1 += dx;
+          mLast.y1 += dy;
+          mLast.x2 += dx*2;
+          mLast.y2 += dy*2;
         }
-        mLast.mX = mFirst.mX;
-        mLast.mY = mFirst.mY;
+        mLast.x = mFirst.x;
+        mLast.y = mFirst.y;
         retracePath();
       }
     }    
@@ -266,22 +266,22 @@ public class DrawingPointLinePath extends DrawingPath
 
     clear();
     if ( with_arrow ) {
-      float dy =   first.mX - last.mX;
-      float dx = - first.mY + last.mY;
+      float dy =   first.x - last.x;
+      float dx = - first.y + last.y;
       float d = dx*dx + dy*dy;
       if ( d > 0.00001f ) {
         d = TDSetting.mArrowLength * TDSetting.mUnit / (float)Math.sqrt( d );
         dx *= d;
         dy *= d;
-        addStartPoint( first.mX+dx, first.mY+dy );
-        addPoint( first.mX, first.mY );
+        addStartPoint( first.x+dx, first.y+dy );
+        addPoint( first.x, first.y );
       } else {
-        addStartPoint( first.mX, first.mY );
+        addStartPoint( first.x, first.y );
       }
     } else {
-      addStartPoint( first.mX, first.mY );
+      addStartPoint( first.x, first.y );
     }
-    addPoint( last.mX, last.mY );
+    addPoint( last.x, last.y );
     if ( with_arrow ) {
       mDx = mDy = 0;
     } else {
@@ -370,12 +370,12 @@ public class DrawingPointLinePath extends DrawingPath
   {
     if ( line.mSize ==  0 ) return;
     LinePoint lp = line.mFirst;
-    addPoint( lp.mX, lp.mY );
+    addPoint( lp.x, lp.y );
     for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
       if ( lp.has_cp ) {
-        addPoint3( lp.mX1, lp.mY1, lp.mX2, lp.mY2, lp.mX, lp.mY );
+        addPoint3( lp.x1, lp.y1, lp.x2, lp.y2, lp.x, lp.y );
       } else {
-        addPoint( lp.mX, lp.mY );
+        addPoint( lp.x, lp.y );
       }
     }
     // computeUnitNormal();
@@ -388,13 +388,13 @@ public class DrawingPointLinePath extends DrawingPath
     int size = pts.size();
     if ( size <= 1 ) return;
     LinePoint lp = pts.get(0);
-    addStartPoint( lp.mX, lp.mY );
+    addStartPoint( lp.x, lp.y );
     for ( int k=1; k<size; ++k ) {
       lp = pts.get(k);
       if ( lp.has_cp ) {
-        addPoint3( lp.mX1, lp.mY1, lp.mX2, lp.mY2, lp.mX, lp.mY );
+        addPoint3( lp.x1, lp.y1, lp.x2, lp.y2, lp.x, lp.y );
       } else {
-        addPoint( lp.mX, lp.mY );
+        addPoint( lp.x, lp.y );
       }
     }
     computeUnitNormal();
@@ -422,29 +422,29 @@ public class DrawingPointLinePath extends DrawingPath
     // if ( size == 0 ) return;
     // mPath = new Path();
     // LinePoint lp = mPoints.get(0);
-    // mPath.moveTo( lp.mX, lp.mY );
+    // mPath.moveTo( lp.x, lp.y );
     // for ( int k=1; k<size; ++k ) {
     //   lp = mPoints.get(k);
     //   if ( lp.has_cp ) {
-    //     mPath.cubicTo( lp.mX1, lp.mY1, lp.mX2, lp.mY2, lp.mX, lp.mY );
+    //     mPath.cubicTo( lp.x1, lp.y1, lp.x2, lp.y2, lp.x, lp.y );
     //   } else {
-    //     mPath.lineTo( lp.mX, lp.mY );
+    //     mPath.lineTo( lp.x, lp.y );
     //   }
     // }
     if ( mSize == 0 ) return;
     mPath = new Path();
     LinePoint lp  = mFirst;
-    left = right  = lp.mX;
-    top  = bottom = lp.mY;
-    mPath.moveTo( lp.mX, lp.mY );
+    left = right  = lp.x;
+    top  = bottom = lp.y;
+    mPath.moveTo( lp.x, lp.y );
     for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
       if ( lp.has_cp ) {
-        mPath.cubicTo( lp.mX1, lp.mY1, lp.mX2, lp.mY2, lp.mX, lp.mY );
+        mPath.cubicTo( lp.x1, lp.y1, lp.x2, lp.y2, lp.x, lp.y );
       } else {
-        mPath.lineTo( lp.mX, lp.mY );
+        mPath.lineTo( lp.x, lp.y );
       }
-      if ( lp.mX < left ) { left = lp.mX; } else if ( lp.mX > right  ) { right  = lp.mX; }
-      if ( lp.mY < top  ) { top  = lp.mY; } else if ( lp.mY > bottom ) { bottom = lp.mY; }
+      if ( lp.x < left ) { left = lp.x; } else if ( lp.x > right  ) { right  = lp.x; }
+      if ( lp.y < top  ) { top  = lp.y; } else if ( lp.y > bottom ) { bottom = lp.y; }
     }
     if ( mClosed ) mPath.close();
     computeUnitNormal();
@@ -460,13 +460,13 @@ public class DrawingPointLinePath extends DrawingPath
     // mFirst = null;
     // mLast  = null;
     LinePoint lp = ll;
-    addStartPoint( lp.mX, lp.mY );
+    addStartPoint( lp.x, lp.y );
     LinePoint prev = lp.mPrev;
     while ( prev != null ) {
       if ( lp.has_cp ) {
-        addPoint3( lp.mX2, lp.mY2, lp.mX1, lp.mY1, prev.mX, prev.mY );
+        addPoint3( lp.x2, lp.y2, lp.x1, lp.y1, prev.x, prev.y );
       } else {
-        addPoint( prev.mX, prev.mY );
+        addPoint( prev.x, prev.y );
       }
       lp = prev;
       prev = prev.mPrev;
@@ -483,8 +483,8 @@ public class DrawingPointLinePath extends DrawingPath
     // for ( LinePoint pt : mPoints ) 
     for ( LinePoint pt=mFirst; pt != null; pt = pt.mNext ) 
     {
-      float dx = x - pt.mX;
-      float dy = y - pt.mY;
+      float dx = x - pt.x;
+      float dy = y - pt.y;
       float d2 = dx*dx + dy*dy;
       if ( d2 < dist ) dist = d2;
     }
@@ -509,7 +509,7 @@ public class DrawingPointLinePath extends DrawingPath
   //   // path.addCircle( 0, 0, 1, Path.Direction.CCW );
   //   // for ( LinePoint lp : mPoints ) {
   //   //   Path path1 = new Path( path );
-  //   //   path1.offset( lp.mX, lp.mY );
+  //   //   path1.offset( lp.x, lp.y );
   //   //   canvas.drawPath( path1, BrushManager.highlightPaint );
   //   // }
   // }
@@ -522,7 +522,7 @@ public class DrawingPointLinePath extends DrawingPath
   //   // path.addCircle( 0, 0, 1, Path.Direction.CCW );
   //   // for ( LinePoint lp : mPoints ) {
   //   //   Path path1 = new Path( path );
-  //   //   path1.offset( lp.mX, lp.mY );
+  //   //   path1.offset( lp.x, lp.y );
   //   //   path1.transform( matrix );
   //   //   canvas.drawPath( path1, BrushManager.highlightPaint );
   //   // }

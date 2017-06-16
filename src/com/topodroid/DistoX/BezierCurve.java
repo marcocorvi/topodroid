@@ -16,38 +16,38 @@ import java.util.ArrayList;
 
 class BezierCurve
 {
-  private BezierPoint c[];      // control points of the cubic spline
-  private BezierPoint Vtemp[];  // work vector of four points
+  private Point2D c[];      // control points of the cubic spline
+  private Point2D Vtemp[];  // work vector of four points
   private int splitIndex;       // Point of split (criteria: maximum error)	
 
   public BezierCurve()
   {
-    c = new BezierPoint[4];
-    Vtemp = new BezierPoint[4];
+    c = new Point2D[4];
+    Vtemp = new Point2D[4];
     for (int i=0; i<4; ++i ) {
-      c[i] = new BezierPoint();
-      Vtemp[i] = new BezierPoint();
+      c[i] = new Point2D();
+      Vtemp[i] = new Point2D();
     }
     splitIndex = -1;
   }
 
-  public BezierCurve( BezierPoint c0, BezierPoint c1, BezierPoint c2, BezierPoint c3 )
+  public BezierCurve( Point2D c0, Point2D c1, Point2D c2, Point2D c3 )
   {
-    c = new BezierPoint[4];
-    Vtemp = new BezierPoint[4];
-    c[0] = new BezierPoint( c0 );
-    c[1] = new BezierPoint( c1 );
-    c[2] = new BezierPoint( c2 );
-    c[3] = new BezierPoint( c3 );
+    c = new Point2D[4];
+    Vtemp = new Point2D[4];
+    c[0] = new Point2D( c0 );
+    c[1] = new Point2D( c1 );
+    c[2] = new Point2D( c2 );
+    c[3] = new Point2D( c3 );
     for (int i=0; i<4; ++i ) {
-      Vtemp[i] = new BezierPoint();
+      Vtemp[i] = new Point2D();
     }
     splitIndex = -1;
   }
 
   // control points
-  public void setPoint(int k, BezierPoint p ) { c[k].set(p); }
-  public BezierPoint getPoint( int k ) { return c[k]; }
+  public void setPoint(int k, Point2D p ) { c[k].set(p); }
+  public Point2D getPoint( int k ) { return c[k]; }
 
   public int getSplitIndex() { return splitIndex; }
 
@@ -57,13 +57,13 @@ class BezierCurve
       bezCurve;	  Fitted Bezier curve		
       u;		  Parameterization of points	
   */
-  public float computeMaxError( ArrayList<BezierPoint> d, int first, int last, float[] u )
+  public float computeMaxError( ArrayList<Point2D> d, int first, int last, float[] u )
   {
     splitIndex = (last - first + 1)/2;
     float maxDist = 0.0f;
     for (int i = first + 1; i < last; i++) {
-      BezierPoint P = evaluate( u[i-first] );
-      BezierPoint v = P.sub( d.get(i) ); // vector from point to curve
+      Point2D P = evaluate( u[i-first] );
+      Point2D v = P.sub( d.get(i) ); // vector from point to curve
       float dist = v.squareLength();
       if ( dist >= maxDist ) {
         maxDist = dist;
@@ -81,7 +81,7 @@ class BezierCurve
    * @param u           Current parameter values
    * @param bezCurve    Current fitted curve
    */
-  public void reparameterize( ArrayList<BezierPoint> d, int first, int last, float[] u )
+  public void reparameterize( ArrayList<Point2D> d, int first, int last, float[] u )
   {
     // int nPts = last-first+1;
     // float[] uPrime = new float[ nPts ]; /*  New parameter values	*/
@@ -97,9 +97,9 @@ class BezierCurve
    * degree  The degree of the bezier curve
    * t       Parametric value to find point for	
    */
-  public BezierPoint evaluate( float t ) { return evaluate(3, c, t ); }
+  public Point2D evaluate( float t ) { return evaluate(3, c, t ); }
 
-  private BezierPoint evaluate( int degree, BezierPoint[] V, float t )
+  private Point2D evaluate( int degree, Point2D[] V, float t )
   {
     float t1 = 1.0f - t;
     for (int i = 0; i <= degree; i++) { // copy array
@@ -107,8 +107,8 @@ class BezierCurve
     }
     for (int i = 1; i <= degree; i++) {	// triangle computation
       for (int j = 0; j <= degree-i; j++) {
-        Vtemp[j].mX = t1 * Vtemp[j].mX + t * Vtemp[j+1].mX;
-        Vtemp[j].mY = t1 * Vtemp[j].mY + t * Vtemp[j+1].mY;
+        Vtemp[j].x = t1 * Vtemp[j].x + t * Vtemp[j+1].x;
+        Vtemp[j].y = t1 * Vtemp[j].y + t * Vtemp[j+1].y;
       }
     }
     return Vtemp[0];
@@ -118,10 +118,10 @@ class BezierCurve
       P	Digitized point		
       u	Parameter value for "P"	
    */
-  private float findRootNewtonRaphson( BezierPoint P, float u)
+  private float findRootNewtonRaphson( Point2D P, float u)
   {
-    BezierPoint Q1[] = new BezierPoint[3]; // Q'
-    BezierPoint Q2[] = new BezierPoint[2]; // Q"
+    Point2D Q1[] = new Point2D[3]; // Q'
+    Point2D Q2[] = new Point2D[2]; // Q"
     
     /* Generate control vertices for Q'	*/
     for (int i = 0; i < 3; i++) {
@@ -133,14 +133,14 @@ class BezierCurve
       Q2[i] = Q1[i+1].sub( Q1[i] ).times( 2.0f );
     }
     
-    BezierPoint Q_u  = evaluate(u);        // Compute Q(u)
-    BezierPoint Q1_u = evaluate(2, Q1, u); // Q'(u)
-    BezierPoint Q2_u = evaluate(1, Q2, u); // Q"(u)
+    Point2D Q_u  = evaluate(u);        // Compute Q(u)
+    Point2D Q1_u = evaluate(2, Q1, u); // Q'(u)
+    Point2D Q2_u = evaluate(1, Q2, u); // Q"(u)
     
     /* Compute f(u)/f'(u) */
-    float num = (Q_u.mX - P.mX) * (Q1_u.mX) + (Q_u.mY - P.mY) * (Q1_u.mY);
-    float den = (Q1_u.mX)       * (Q1_u.mX) + (Q1_u.mY)       * (Q1_u.mY) 
-              + (Q_u.mX - P.mX) * (Q2_u.mX) + (Q_u.mY - P.mY) * (Q2_u.mY);
+    float num = (Q_u.x - P.x) * (Q1_u.x) + (Q_u.y - P.y) * (Q1_u.y);
+    float den = (Q1_u.x)      * (Q1_u.x) + (Q1_u.y)      * (Q1_u.y) 
+              + (Q_u.x - P.x) * (Q2_u.x) + (Q_u.y - P.y) * (Q2_u.y);
     
     /* u = u - f(u)/f'(u) improved u */
     return u - num / den;

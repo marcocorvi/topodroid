@@ -103,7 +103,7 @@ class Selection
     mPoints.add( sp );
     sp.setBucket( getBucket( sp.X(), sp.Y() ) );
 
-    // Log.v("DistoX", "Selection insert path point " + pt.mX + " " + pt.mY );
+    // Log.v("DistoX", "Selection insert path point " + pt.x + " " + pt.y );
     // sp.mBucket.dump();
     return sp;
   }
@@ -170,7 +170,7 @@ class Selection
     sp.setBucket( getBucket( sp.X(), sp.Y() ) );
 
     // if ( pt != null ) {
-    //   Log.v("DistoX", "insert item path type " + path.mType + " pt " + pt.mX + " " + pt.mY );
+    //   Log.v("DistoX", "insert item path type " + path.mType + " pt " + pt.x + " " + pt.y );
     // } else {
     //   Log.v("DistoX", "insert item path type " + path.mType + " null pt ");
     // }
@@ -265,8 +265,8 @@ class Selection
     // }
     // return null;
     // FIXED use buckets
-    float x0 = lp.mX;
-    float y0 = lp.mY;
+    float x0 = lp.x;
+    float y0 = lp.y;
     for ( SelectionBucket bucket : mBuckets ) {
       if ( bucket.contains( x0, y0, 10f, 10f ) ) {
         final Iterator jt = bucket.mPoints.iterator();

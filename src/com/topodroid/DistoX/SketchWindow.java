@@ -1537,9 +1537,9 @@ public class SketchWindow extends ItemDrawer
               LinePoint p2 = pts.get(np-1);
               for (LinePoint p : pts ) {
                 // find point on the triangulated surface and add it to the line
-                tri = doSelectTriangleAt( p.mX, p.mY, tri, mSelectSize );
+                tri = doSelectTriangleAt( p.x, p.y, tri, mSelectSize );
                 if ( tri != null /* && mInfo.isForward( tri ) */ ) {
-                  Vector q1 = tri.get3dPoint( p.mX, p.mY );
+                  Vector q1 = tri.get3dPoint( p.x, p.y );
                   line.addLinePoint( mInfo.east + q1.x, mInfo.south + q1.y, mInfo.vert + q1.z );
                 }                  
               }
@@ -1547,7 +1547,7 @@ public class SketchWindow extends ItemDrawer
               if ( mSymbol == Symbol.LINE ) {
                 p1 = pts.get(0);
                 p2 = pts.get(pts.size()-1);
-                float len = TDMath.sqrt( (p2.mX-p1.mX)*(p2.mX-p1.mX) + (p2.mY-p1.mY)*(p2.mY-p1.mY) );
+                float len = TDMath.sqrt( (p2.x-p1.x)*(p2.x-p1.x) + (p2.y-p1.y)*(p2.y-p1.y) );
                 if ( len < SketchDef.CLOSE_GAP ) {
                   line.close();
                 }
@@ -1609,7 +1609,7 @@ public class SketchWindow extends ItemDrawer
         //         // mModel.setEditLine( null );
 
         //         LinePoint p1 = mCurrentLinePath.mFirst;
-	//         SketchTriangle tri1 = doSelectTriangleAt( p1.mX, p1.mY, null, mSelectSize );
+	//         SketchTriangle tri1 = doSelectTriangleAt( p1.x, p1.y, null, mSelectSize );
         //         SketchTriangle tri10 = tri1;
         //         Vector w10 = null;
         //         Vector w20 = null;
@@ -1626,7 +1626,7 @@ public class SketchWindow extends ItemDrawer
         //           PointF border_point = new PointF(0,0);
 
         //           for ( LinePoint p2 = p1.mNext; p2 != null; p2 = p2.mNext ) { 
-        //             tri2 = doSelectTriangleAt( p2.mX, p2.mY, tri2, mSelectSize );
+        //             tri2 = doSelectTriangleAt( p2.x, p2.y, tri2, mSelectSize );
         //             if ( tri2 != null && tri2 != tri1 ) {
         //               int i1 = tri1.i;
         //               if ( i1 != tri2.i && i1 != tri2.j && i1 != tri2.k ) i1 = -1;
@@ -1639,13 +1639,13 @@ public class SketchWindow extends ItemDrawer
         //                   w1 = tri1.v1;
         //                   w2 = tri1.v2;
         //                   // intersect p1--p2 with tri2.p1--tri2.p2
-        //                   float t = Geometry2D.intersect( p1, p2, tri1.p1, tri1.p2, border_point );
+        //                   float t = Point2D.intersect( p1, p2, tri1.p1, tri1.p2, border_point );
         //                   // w12 = addPointToEditLine( edit_line, w1, w2, t );
         //                   w12 = makeEditLinePoint( w1, w2, t );
         //                 } else if ( k1 >= 0 ) { // side v3--v1
         //                   w1 = tri1.v3;
         //                   w2 = tri1.v1;
-        //                   float t = Geometry2D.intersect( p1, p2, tri1.p3, tri1.p1, border_point );
+        //                   float t = Point2D.intersect( p1, p2, tri1.p3, tri1.p1, border_point );
         //                   // w12 = addPointToEditLine( edit_line, w1, w2, t );
         //                   w12 = makeEditLinePoint( w1, w2, t );
         //                 } else { // vertex v1
@@ -1660,7 +1660,7 @@ public class SketchWindow extends ItemDrawer
         //                 if ( k1 >= 0 ) { // side v2--v3
         //                   w1 = tri1.v2;
         //                   w2 = tri1.v3;
-        //                   float t = Geometry2D.intersect( p1, p2, tri1.p2, tri1.p3, border_point );
+        //                   float t = Point2D.intersect( p1, p2, tri1.p2, tri1.p3, border_point );
         //                   // w12 = addPointToEditLine( edit_line, w1, w2, t );
         //                   w12 = makeEditLinePoint( w1, w2, t );
         //                 } else { // vertex v2
@@ -1740,12 +1740,12 @@ public class SketchWindow extends ItemDrawer
         //         ArrayList<Vector> pts = new ArrayList<Vector>();
 
         //         LinePoint p1 = mCurrentLinePath.mFirst;
-        //         float x = mInfo.canvasToSceneX( p1.mX );
-        //         float y = mInfo.canvasToSceneY( p1.mY );
+        //         float x = mInfo.canvasToSceneX( p1.x );
+        //         float y = mInfo.canvasToSceneY( p1.y );
         //         pts.add( mInfo.sceneToWorld( x, y ) );
         //         for ( LinePoint p2 = p1.mNext; p2 != null; p2 = p2.mNext ) {
-        //           x = mInfo.canvasToSceneX( p2.mX );
-        //           y = mInfo.canvasToSceneY( p2.mY );
+        //           x = mInfo.canvasToSceneX( p2.x );
+        //           y = mInfo.canvasToSceneY( p2.y );
         //           pts.add( mInfo.sceneToWorld( x, y ) );
         //         }
 

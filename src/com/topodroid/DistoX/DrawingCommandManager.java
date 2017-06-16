@@ -318,7 +318,7 @@ public class DrawingCommandManager
     List< DrawingPath > ret = new ArrayList< DrawingPath >();
     for ( DrawingPath p : mLegsStack ) {
       if ( p.mType == DrawingPath.DRAWING_PATH_FIXED ) {
-        if ( p.intersect( p1.mX, p1.mY, p2.mX, p2.mY, null ) ) {
+        if ( p.intersect( p1.x, p1.y, p2.x, p2.y, null ) ) {
           ret.add( p );
         }
       }
@@ -596,7 +596,7 @@ public class DrawingCommandManager
       }
     } else {
       // FIXME 
-      // TDLog.Error( "FAILED splitAt " + lp.mX + " " + lp.mY );
+      // TDLog.Error( "FAILED splitAt " + lp.x + " " + lp.y );
       // line.dump();
     }
     // checkLines();
@@ -934,7 +934,7 @@ public class DrawingCommandManager
     // if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
     //   DrawingLinePath line = (DrawingLinePath)path;
     //   LinePoint lp = line.mFirst;
-    //   Log.v("PTDistoX", "add path. size " + line.size() + " start " + lp.mX + " " + lp.mY );
+    //   Log.v("PTDistoX", "add path. size " + line.size() + " start " + lp.x + " " + lp.y );
     // }
     
     synchronized( mCurrentStack ) {
@@ -1398,8 +1398,8 @@ public class DrawingCommandManager
                 if ( line.mLineType == BrushManager.mLineLib.mLineSectionIndex ) { // add tick to section-lines
                   LinePoint lp = line.mFirst;
                   Path path1 = new Path();
-                  path1.moveTo( lp.mX, lp.mY );
-                  path1.lineTo( lp.mX+line.mDx*10, lp.mY+line.mDy*10 );
+                  path1.moveTo( lp.x, lp.y );
+                  path1.lineTo( lp.x+line.mDx*10, lp.y+line.mDy*10 );
                   path1.transform( mMatrix );
                   canvas.drawPath( path1, BrushManager.mStationSymbol.mPaint );
                 }
@@ -1434,8 +1434,8 @@ public class DrawingCommandManager
                 || ( type == DrawingPath.DRAWING_PATH_NAME  && ! (sstations) ) ) continue;
               float x, y;
               if ( pt.mPoint != null ) { // line-point
-                x = pt.mPoint.mX;
-                y = pt.mPoint.mY;
+                x = pt.mPoint.x;
+                y = pt.mPoint.y;
               } else {  
                 x = pt.mItem.cx;
                 y = pt.mItem.cy;
@@ -1450,8 +1450,8 @@ public class DrawingCommandManager
         // for ( SelectionPoint pt : mSelection.mPoints ) { // FIXME SELECTION
         //   float x, y;
         //   if ( pt.mPoint != null ) { // line-point
-        //     x = pt.mPoint.mX;
-        //     y = pt.mPoint.mY;
+        //     x = pt.mPoint.x;
+        //     y = pt.mPoint.y;
         //   } else {  
         //     x = pt.mItem.cx;
         //     y = pt.mItem.cy;
@@ -1476,8 +1476,8 @@ public class DrawingCommandManager
             LinePoint lp2 = sp.mLP2;
 
             if ( lp != null ) { // line-point
-              x = lp.mX;
-              y = lp.mY;
+              x = lp.x;
+              y = lp.y;
             } else {
               x = item.cx;
               y = item.cy;
@@ -1488,11 +1488,11 @@ public class DrawingCommandManager
             canvas.drawPath( path, BrushManager.highlightPaint2 );
             if ( lp != null && lp.has_cp ) {
               path = new Path();
-              path.moveTo( lp.mX1, lp.mY1 );
-              path.lineTo( lp.mX2, lp.mY2 );
+              path.moveTo( lp.x1, lp.y1 );
+              path.lineTo( lp.x2, lp.y2 );
               path.lineTo( x, y );
-              path.addCircle( lp.mX1, lp.mY1, radius/2, Path.Direction.CCW );
-              path.addCircle( lp.mX2, lp.mY2, radius/2, Path.Direction.CCW );
+              path.addCircle( lp.x1, lp.y1, radius/2, Path.Direction.CCW );
+              path.addCircle( lp.x2, lp.y2, radius/2, Path.Direction.CCW );
               path.transform( mMatrix );
               canvas.drawPath( path, BrushManager.highlightPaint3 );
             }
@@ -1506,25 +1506,25 @@ public class DrawingCommandManager
                 lpn = lp2;
               }
               path = new Path();
-              path.moveTo( lp.mX+line.mDx*10, lp.mY+line.mDy*10 );
-              path.lineTo( lp.mX, lp.mY );
+              path.moveTo( lp.x+line.mDx*10, lp.y+line.mDy*10 );
+              path.lineTo( lp.x, lp.y );
               for ( lp = lp.mNext; lp != lpn && lp != null; lp = lp.mNext ) {
                 if ( lp.has_cp ) {
-                  path.cubicTo( lp.mX1, lp.mY1, lp.mX2, lp.mY2, lp.mX, lp.mY );
+                  path.cubicTo( lp.x1, lp.y1, lp.x2, lp.y2, lp.x, lp.y );
                 } else {
-                  path.lineTo( lp.mX, lp.mY );
+                  path.lineTo( lp.x, lp.y );
                 }
               }
               path.transform( mMatrix );
               canvas.drawPath( path, paint );
               if ( lp != lp2 ) {
                 path = new Path();
-                path.moveTo( lp.mX, lp.mY );
+                path.moveTo( lp.x, lp.y );
                 for ( lp = lp.mNext; lp != lp2 && lp != null; lp = lp.mNext ) {
                   if ( lp.has_cp ) {
-                    path.cubicTo( lp.mX1, lp.mY1, lp.mX2, lp.mY2, lp.mX, lp.mY );
+                    path.cubicTo( lp.x1, lp.y1, lp.x2, lp.y2, lp.x, lp.y );
                   } else {
-                    path.lineTo( lp.mX, lp.mY );
+                    path.lineTo( lp.x, lp.y );
                   }
                 }
                 path.transform( mMatrix );
@@ -1532,12 +1532,12 @@ public class DrawingCommandManager
               }
               if ( lp != null && lp.mNext != null ) {
                 path = new Path();
-                path.moveTo( lp.mX, lp.mY );
+                path.moveTo( lp.x, lp.y );
                 for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
                   if ( lp.has_cp ) {
-                    path.cubicTo( lp.mX1, lp.mY1, lp.mX2, lp.mY2, lp.mX, lp.mY );
+                    path.cubicTo( lp.x1, lp.y1, lp.x2, lp.y2, lp.x, lp.y );
                   } else {
-                    path.lineTo( lp.mX, lp.mY );
+                    path.lineTo( lp.x, lp.y );
                   }
                 }
                 path.transform( mMatrix );
@@ -1549,8 +1549,8 @@ public class DrawingCommandManager
           for ( SelectionPoint pt : mSelected.mPoints ) {
             float x, y;
             if ( pt.mPoint != null ) { // line-point
-              x = pt.mPoint.mX;
-              y = pt.mPoint.mY;
+              x = pt.mPoint.x;
+              y = pt.mPoint.y;
             } else {
               x = pt.mItem.cx;
               y = pt.mItem.cy;
@@ -1753,8 +1753,8 @@ public class DrawingCommandManager
     if ( sp.type() != DrawingPath.DRAWING_PATH_LINE && sp.type() != DrawingPath.DRAWING_PATH_AREA ) return;
     LinePoint lp = sp.mPoint;
     if ( lp == null ) return;
-    float x = lp.mX;
-    float y = lp.mY;
+    float x = lp.x;
+    float y = lp.y;
     DrawingPointLinePath line = (DrawingPointLinePath)sp.mItem;
     LinePoint p1 = line.insertPointAfter( x, y, lp );
     SelectionPoint sp1 = null;
@@ -1770,16 +1770,16 @@ public class DrawingCommandManager
 
   private float project( LinePoint q, LinePoint p0, LinePoint p1 )
   {
-    float x01 = p1.mX - p0.mX;
-    float y01 = p1.mY - p0.mY;
-    return ((q.mX-p0.mX)*x01 + (q.mY-p0.mY)*y01) / ( x01*x01 + y01*y01 );
+    float x01 = p1.x - p0.x;
+    float y01 = p1.y - p0.y;
+    return ((q.x-p0.x)*x01 + (q.y-p0.y)*y01) / ( x01*x01 + y01*y01 );
   }
     
   private float distance( LinePoint q, LinePoint p0, LinePoint p1 )
   {
-    float x01 = p1.mX - p0.mX;
-    float y01 = p1.mY - p0.mY;
-    return TDMath.abs( (q.mX-p0.mX)*y01 - (q.mY-p0.mY)*x01 ) / TDMath.sqrt( x01*x01 + y01*y01 );
+    float x01 = p1.x - p0.x;
+    float y01 = p1.y - p0.y;
+    return TDMath.abs( (q.x-p0.x)*y01 - (q.y-p0.y)*x01 ) / TDMath.sqrt( x01*x01 + y01*y01 );
   }
     
       
@@ -1793,8 +1793,8 @@ public class DrawingCommandManager
       x = sp.mItem.cx;
       y = sp.mItem.cy;
     } else if ( sp.type() == DrawingPath.DRAWING_PATH_LINE || sp.type() == DrawingPath.DRAWING_PATH_AREA ) {
-      x = sp.mPoint.mX;
-      y = sp.mPoint.mY;
+      x = sp.mPoint.x;
+      y = sp.mPoint.y;
     } else {
       return false;
     }
@@ -1802,8 +1802,8 @@ public class DrawingCommandManager
 
     if ( spmin != null ) {
       if ( spmin.type() == DrawingPath.DRAWING_PATH_LINE || spmin.type() == DrawingPath.DRAWING_PATH_AREA ) {
-        x = spmin.mPoint.mX - x;
-        y = spmin.mPoint.mY - y;
+        x = spmin.mPoint.x - x;
+        y = spmin.mPoint.y - y;
       } else {
         x = spmin.mItem.cx - x;
         y = spmin.mItem.cy - y;
@@ -1856,7 +1856,7 @@ public class DrawingCommandManager
           dmin = d;
           lpmin = lp2;
         } else if ( lpmin != null ) { // if distances increase after a good min, break
-          splays.add( new NearbySplay( fxd.x2 - lpmin.mX, fxd.y2 - lpmin.mY, dmin, lpmin ) );
+          splays.add( new NearbySplay( fxd.x2 - lpmin.x, fxd.y2 - lpmin.y, dmin, lpmin ) );
           break;
         }
       }
@@ -1998,8 +1998,8 @@ public class DrawingCommandManager
     LinePoint q1 = area.next( q0 );
     LinePoint q2 = area.prev( q0 );
 
-    float x = q0.mX;
-    float y = q0.mY;
+    float x = q0.x;
+    float y = q0.y;
     float thr = 10f;
     float dmin = thr; // require a minimum distance
     DrawingPointLinePath lmin = null;
@@ -2039,10 +2039,10 @@ public class DrawingCommandManager
     
     // if ( TDLog.LOG_DEBUG ) { // ===== FIRST SET OF LOGS
     //   TDLog.Debug( "snap to line");
-    //   for ( LinePoint pt = lmin.mFirst; pt!=null; pt=pt.mNext ) TDLog.Debug( pt.mX + " " + pt.mY );
+    //   for ( LinePoint pt = lmin.mFirst; pt!=null; pt=pt.mNext ) TDLog.Debug( pt.x + " " + pt.y );
     //   TDLog.Debug( "snap area");
-    //   for ( LinePoint pt = area.mFirst; pt!=null; pt=pt.mNext ) TDLog.Debug( pt.mX + " " + pt.mY );
-    //   TDLog.Debug( "snap qq0= " + q0.mX + " " + q0.mY + " to pp0= " + pp0.mX + " " + pp0.mY );
+    //   for ( LinePoint pt = area.mFirst; pt!=null; pt=pt.mNext ) TDLog.Debug( pt.x + " " + pt.y );
+    //   TDLog.Debug( "snap qq0= " + q0.x + " " + q0.y + " to pp0= " + pp0.x + " " + pp0.y );
     // }
 
     int ret = 0; // return code
@@ -2062,13 +2062,13 @@ public class DrawingCommandManager
     int step = 1;
     // if ( kk1 >= 0 ) 
     if ( pp1 != null ) { 
-      // TDLog.Debug( "snap pp1 " + pp1.mX + " " + pp1.mY + " FOLLOW LINE FORWARD" );
+      // TDLog.Debug( "snap pp1 " + pp1.x + " " + pp1.y + " FOLLOW LINE FORWARD" );
       // pp1  = pts1.get( kk1 );
       // pp10 = pts1.get( kk0 );
       pp10 = pp0;
       // if ( kk2 >= 0 ) 
       if ( pp2 != null ) {
-        // TDLog.Debug( "snap pp2 " + pp2.mX + " " + pp2.mY );
+        // TDLog.Debug( "snap pp2 " + pp2.x + " " + pp2.y );
         // pp2  = pts1.get( kk2 ); 
         // pp20 = pts1.get( kk0 ); 
         pp20 = pp0;
@@ -2076,63 +2076,63 @@ public class DrawingCommandManager
       if ( pp1.distance( q1 ) < pp1.distance( q2 ) ) {
         qq1  = q1; // follow border forward
         qq10 = q0;
-        // TDLog.Debug( "snap qq1 " + qq1.mX + " " + qq1.mY + " follow border forward" );
+        // TDLog.Debug( "snap qq1 " + qq1.x + " " + qq1.y + " follow border forward" );
         if ( pp2 != null ) {
           qq2  = q2;
           qq20 = q0;
-          // TDLog.Debug( "snap qq2 " + qq2.mX + " " + qq2.mY );
+          // TDLog.Debug( "snap qq2 " + qq2.x + " " + qq2.y );
         }
       } else {
         reverse = true;
         qq1  = q2; // follow border backward
         qq10 = q0;
-        // TDLog.Debug( "snap reverse qq1 " + qq1.mX + " " + qq1.mY + " follow border backward" );
+        // TDLog.Debug( "snap reverse qq1 " + qq1.x + " " + qq1.y + " follow border backward" );
         if ( pp2 != null ) {
           qq2 = q1;
           qq20 = q0;
-          // TDLog.Debug( "snap qq2 " + qq2.mX + " " + qq2.mY + " follow forward");
+          // TDLog.Debug( "snap qq2 " + qq2.x + " " + qq2.y + " follow forward");
         }
       }
     } else if ( pp2 != null ) { // pp10 is null
       // pp2  = pts1.get( kk2 ); 
       // pp20 = pts1.get( kk0 ); 
       pp20 = pp0;
-      // TDLog.Debug( "snap pp1 null pp2 " + pp2.mX + " " + pp2.mY + " FOLLOW LINE BACKWARD" );
+      // TDLog.Debug( "snap pp1 null pp2 " + pp2.x + " " + pp2.y + " FOLLOW LINE BACKWARD" );
       if ( pp2.distance( q2 ) < pp2.distance( q1 ) ) {
         qq2 = q2;
         qq20 = q0;
-        // TDLog.Debug( "snap qq2 " + qq2.mX + " " + qq2.mY + " follow border backward" );
+        // TDLog.Debug( "snap qq2 " + qq2.x + " " + qq2.y + " follow border backward" );
       } else {
         reverse = true;
         qq2 = q1;
         qq20 = q0;
-        // TDLog.Debug( "snap reverse qq2 " + qq2.mX + " " + qq2.mY + " follow border forward" );
+        // TDLog.Debug( "snap reverse qq2 " + qq2.x + " " + qq2.y + " follow border forward" );
       }
     } else {  // pp10 and pp20 are null: nothing to follow
       // copy pp0 to q0
-      q0.mX = pp0.mX;
-      q0.mY = pp0.mY;
+      q0.x = pp0.x;
+      q0.y = pp0.y;
       ret = 1;
     }
 
     if ( qq1 != null ) {
-      // TDLog.Debug( "qq1 not null " + qq1.mX + " " + qq1.mY + " reverse " + reverse );
+      // TDLog.Debug( "qq1 not null " + qq1.x + " " + qq1.y + " reverse " + reverse );
       // follow line pp10 --> pp1 --> ... using step 1
       // with border qq10 --> qq1 --> ... using step delta1
 
       for (int c=0; c<cmax; ++c) { // try to move qq1 forward
-        TDLog.Debug( "snap at qq1 " + qq1.mX + " " + qq1.mY );
+        TDLog.Debug( "snap at qq1 " + qq1.x + " " + qq1.y );
         float s = project( qq1, pp10, pp1 );
         while ( s > 1.0 ) {
           pp10 = pp1;
-          // TDLog.Debug( "snap follow pp10 " + pp10.mX + " " + pp10.mY );
+          // TDLog.Debug( "snap follow pp10 " + pp10.x + " " + pp10.y );
           pp1  = lmin.next( pp1 );
           if ( pp1 == null ) {
-            // TDLog.Debug( "snap end of line pp1 null, pp10 " + pp10.mX + " " + pp10.mY );
+            // TDLog.Debug( "snap end of line pp1 null, pp10 " + pp10.x + " " + pp10.y );
             break;
           }
           if ( pp1 == pp0 ) {
-            // TDLog.Debug( "snap pp1 == pp0, pp10 " + pp10.mX + " " + pp10.mY );
+            // TDLog.Debug( "snap pp1 == pp0, pp10 " + pp10.x + " " + pp10.y );
             break;
           }
           s = project( qq1, pp10, pp1 );
@@ -2152,26 +2152,26 @@ public class DrawingCommandManager
       qq10 = q0; // FIXME
     }
     // if ( qq10 != null && pp10 != null ) {
-    //   TDLog.Debug( "QQ10 " + qq10.mX + " " + qq10.mY + " PP10 " + pp10.mX + " " + pp10.mY );
+    //   TDLog.Debug( "QQ10 " + qq10.x + " " + qq10.y + " PP10 " + pp10.x + " " + pp10.y );
     // }
 
     if ( qq2 != null ) {
-      // TDLog.Debug( "qq2 not null: " + qq2.mX + " " + qq2.mY + " reverse " + reverse );
+      // TDLog.Debug( "qq2 not null: " + qq2.x + " " + qq2.y + " reverse " + reverse );
       // follow line pp20 --> pp2 --> ... using step size1-1
       // with border qq20 --> qq2 --> ... using step delta2
       for (int c=0; c < cmax; ++c) { // try to move qq2 backward
-        // TDLog.Debug( "snap at qq2 " + qq2.mX + " " + qq2.mY );
+        // TDLog.Debug( "snap at qq2 " + qq2.x + " " + qq2.y );
         float s = project( qq2, pp20, pp2 );
         while ( s > 1.0 ) {
           pp20 = pp2;
-          // TDLog.Debug( "snap s>1, follow pp20 " + pp20.mX + " " + pp20.mY );
+          // TDLog.Debug( "snap s>1, follow pp20 " + pp20.x + " " + pp20.y );
           pp2 = lmin.prev( pp2 );
           if ( pp2 == null ) {
-            // TDLog.Debug( "snap end of line pp2 null, pp20 " + pp20.mX + " " + pp20.mY );
+            // TDLog.Debug( "snap end of line pp2 null, pp20 " + pp20.x + " " + pp20.y );
             break;
           }
           if ( pp2 == pp0 ) {
-            // TDLog.Debug( "snap pp2 == pp0, pp20 " + pp20.mX + " " + pp20.mY );
+            // TDLog.Debug( "snap pp2 == pp0, pp20 " + pp20.x + " " + pp20.y );
             break;
           }
           s = project( qq2, pp20, pp2 );
@@ -2191,13 +2191,13 @@ public class DrawingCommandManager
       qq20 = q0; // FIXME
     }
     // if ( qq20 != null && pp20 != null ) {
-    //   TDLog.Debug( "QQ20 " + qq20.mX + " " + qq20.mY + " PP20 " + pp20.mX + " " + pp20.mY );
+    //   TDLog.Debug( "QQ20 " + qq20.x + " " + qq20.y + " PP20 " + pp20.x + " " + pp20.y );
     // }
 
     if ( qq20 == qq10 || (reverse && pp10 == null) || (!reverse && pp20 == null) ) {
       // should not happen, anyways copy pp0 to q0
-      q0.mX = pp0.mX;
-      q0.mY = pp0.mY;
+      q0.x = pp0.x;
+      q0.y = pp0.y;
       ret = 2;
     }
 
@@ -2218,7 +2218,7 @@ public class DrawingCommandManager
           area.mFirst = null; // ( reverse )? qq10 : qq20;
           // TDLog.Debug( "snap setting area FIRST null ");
         } else {
-          // TDLog.Debug( "snap start prev " + prev.mX + " " + prev.mY );
+          // TDLog.Debug( "snap start prev " + prev.x + " " + prev.y );
           LinePoint q = prev;
           while ( prev != null && prev != next ) {
             q = prev;
@@ -2229,14 +2229,14 @@ public class DrawingCommandManager
             q.mPrev.mNext = null;
             q.mPrev = null;
           }
-          // TDLog.Debug( "snap setting area FIRST " + area.mFirst.mX + " " + area.mFirst.mY );
+          // TDLog.Debug( "snap setting area FIRST " + area.mFirst.x + " " + area.mFirst.y );
         }
 
         if ( next == null ) {
           area.mLast = null; // ( reverse )? qq20 : qq10;
           // TDLog.Debug( "snap setting area LAST null ");
         } else {
-          // TDLog.Debug( "snap start next " + next.mX + " " + next.mY );
+          // TDLog.Debug( "snap start next " + next.x + " " + next.y );
           LinePoint q = next;
           while ( next != null && next != prev ) {
             q = next;
@@ -2247,7 +2247,7 @@ public class DrawingCommandManager
             q.mNext.mPrev = null;
             q.mNext = null;
           }
-          // TDLog.Debug( "snap setting area LAST " + area.mLast.mX + " " + area.mLast.mY );
+          // TDLog.Debug( "snap setting area LAST " + area.mLast.x + " " + area.mLast.y );
         }
 
         next = (reverse)? qq20 : qq10;
@@ -2257,32 +2257,32 @@ public class DrawingCommandManager
           LinePoint q = qq10.mPrev;
           LinePoint p = pp10;
           if ( q != null ) {
-            // TDLog.Debug( "snap attach at " + q.mX + " " + q.mY );
+            // TDLog.Debug( "snap attach at " + q.x + " " + q.y );
           } else {
             // TDLog.Debug( "snap restart area ");
           }
-          q = new LinePoint( p.mX, p.mY, q );
-          // TDLog.Debug( "snap first new point " + q.mX + " " + q.mY );
+          q = new LinePoint( p.x, p.y, q );
+          // TDLog.Debug( "snap first new point " + q.x + " " + q.y );
           if ( p != pp20 ) {
             p = p.mPrev;
             if ( area.mFirst == null ) area.mFirst = q;
             for ( ; p != null && p != pp20; p = p.mPrev ) {
               if ( p.has_cp && p != pp10 ) {
                 LinePoint pp = p.mNext;
-                q = new LinePoint( pp.mX2, pp.mY2, pp.mX1, pp.mY1, p.mX, p.mY, q );
+                q = new LinePoint( pp.x2, pp.y2, pp.x1, pp.y1, p.x, p.y, q );
               } else {
-                q = new LinePoint( p.mX, p.mY, q );
+                q = new LinePoint( p.x, p.y, q );
               }
-              // TDLog.Debug( "snap new point " + q.mX + " " + q.mY );
+              // TDLog.Debug( "snap new point " + q.x + " " + q.y );
             }
             if ( p != null ) { // FIXME add last point
               if ( p.has_cp ) {
                 LinePoint pp = p.mNext;
-                q = new LinePoint( pp.mX2, pp.mY2, pp.mX1, pp.mY1, p.mX, p.mY, q );
+                q = new LinePoint( pp.x2, pp.y2, pp.x1, pp.y1, p.x, p.y, q );
               } else {
-                q = new LinePoint( p.mX, p.mY, q );
+                q = new LinePoint( p.x, p.y, q );
               }
-              // TDLog.Debug( "snap last new point " + q.mX + " " + q.mY );
+              // TDLog.Debug( "snap last new point " + q.x + " " + q.y );
             }
           }
           q.mNext = next;
@@ -2297,22 +2297,22 @@ public class DrawingCommandManager
           LinePoint q = qq20.mPrev;
           LinePoint p = pp20;
           if ( q != null ) {
-            // TDLog.Debug( "snap attach at " + q.mX + " " + q.mY );
+            // TDLog.Debug( "snap attach at " + q.x + " " + q.y );
           } else {
             // TDLog.Debug( "snap restart area ");
           }
-          q = new LinePoint( p.mX, p.mY, q );
-          // TDLog.Debug( "snap first new point " + q.mX + " " + q.mY );
+          q = new LinePoint( p.x, p.y, q );
+          // TDLog.Debug( "snap first new point " + q.x + " " + q.y );
           if ( p != pp10 ) {
             p = p.mNext;
             if ( area.mFirst == null ) area.mFirst = q;
             for ( ; p != null && p != pp10; p = p.mNext ) {
               q = new LinePoint( p, q );
-              // TDLog.Debug( "snap new point " + q.mX + " " + q.mY );
+              // TDLog.Debug( "snap new point " + q.x + " " + q.y );
             }
             // if ( p != null ) { // FIXME not add "last" point
             //   q = new LinePoint( p, q );
-            //   TDLog.Debug( "snap last new point " + q.mX + " " + q.mY );
+            //   TDLog.Debug( "snap last new point " + q.x + " " + q.y );
             // }
           }
           q.mNext = next;
@@ -2527,8 +2527,8 @@ public class DrawingCommandManager
         //   ArrayList< LinePoint > pts = lp.mPoints;
         //   boolean b = true;
         //   for ( LinePoint pt : pts ) {
-        //     float x = DrawingWindow.sceneToWorldX( pt.mX );
-        //     float y = DrawingWindow.sceneToWorldY( pt.mY );
+        //     float x = DrawingWindow.sceneToWorldX( pt.x );
+        //     float y = DrawingWindow.sceneToWorldY( pt.y );
         //     pw.format(Locale.US, "%.2f %.2f ", x, y );
         //     if ( b ) { pw.format("B "); b = false; }
         //   }
@@ -2628,7 +2628,7 @@ public class DrawingCommandManager
       LinePoint pt = lp.mFirst;
       while ( pt != lp.mLast ) {
         LinePoint pn = pt.mNext;
-        ret += pt.mY * pn.mX - pt.mX * pn.mY;
+        ret += pt.y * pn.x - pt.x * pn.y;
         pt = pn;
       }
     }

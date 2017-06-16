@@ -16,10 +16,10 @@ package com.topodroid.DistoX;
 class SelectionPoint
 {
   // scene coord (x, y )
-  // for DrawingStationName (x,y) = st.(mX,mY)
+  // for DrawingStationName (x,y) = st.(x,y)
   // for DrawingPath        (x,y) = (cx,cy)
-  // for DrawingStationPath (x,y) = path.(mXpos,mYpos)
-  // for DrawingPointPath   (x,y) = path.(mXpos,mYpos)
+  // for DrawingStationPath (x,y) = path.(xpos,ypos)
+  // for DrawingPointPath   (x,y) = path.(xpos,ypos)
   // for DrawingLinePath    (x.y) = midpoint between each two line points
   // for DrawingAreaPath    (x,y) = midpoint between each two border points
 
@@ -69,8 +69,8 @@ class SelectionPoint
   }
 
 
-  float X() { return ( mPoint != null )? mPoint.mX : mItem.cx; }
-  float Y() { return ( mPoint != null )? mPoint.mY : mItem.cy; }
+  float X() { return ( mPoint != null )? mPoint.x : mItem.cx; }
+  float Y() { return ( mPoint != null )? mPoint.y : mItem.cy; }
 
   // distance from a scene point (xx, yy)
   float distance( float xx, float yy )

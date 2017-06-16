@@ -27,14 +27,14 @@ class Geometry2D
   //
   // @param pt point of intersection [out]
   //
-  static float intersect( LinePoint p1, LinePoint p2, PointF q1, PointF q2, PointF pt )
+  static float intersect( PointF p1, PointF p2, PointF q1, PointF q2, PointF pt )
   {
-     float a = p2.mX - p1.mX;
+     float a = p2.x - p1.x;
      float b = q1.x - q2.x;
-     float c = p2.mY - p1.mY;
+     float c = p2.y - p1.y;
      float d = q1.y - q2.y;
-     float e = q1.x - p1.mX;
-     float f = q1.y - p1.mY;
+     float e = q1.x - p1.x;
+     float f = q1.y - p1.y;
      float det = a * d - b * c;
      float t = ( -c * e + a * f ) / det;
      if ( pt != null ) {

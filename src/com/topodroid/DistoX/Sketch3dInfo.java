@@ -321,7 +321,7 @@ Nx=(-ca,-sa,0) | ,'
     return new Vector( nxx * x + nyx * y, nxy * x + nyy * y, nxz * x + nyz * y );
   }
 
-  Vector sceneToWorld( LinePoint p ) { return sceneToWorld( p.mX, p.mY ); }
+  Vector sceneToWorld( LinePoint p ) { return sceneToWorld( p.x, p.y ); }
 
   Vector sceneToWorld( PointF p ) { return sceneToWorld( p.x, p.y ); }
 
