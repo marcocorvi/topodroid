@@ -640,9 +640,9 @@ class DistoXNum
       if ( cl.nrStations() > 2 ) {
         Trilateration trilateration = new Trilateration( cl );
         // use trilateration.points and legs
-        for ( TrilaterationLeg leg : trilateration.legs ) {
-          TrilaterationPoint p1 = leg.pi;
-          TrilaterationPoint p2 = leg.pj;
+        for ( TriLeg leg : trilateration.legs ) {
+          TriPoint p1 = leg.pi;
+          TriPoint p2 = leg.pj;
           // compute azimuth (p2-p1)
           double dx = p2.x - p1.x; // east
           double dy = p2.y - p1.y; // north

@@ -8,6 +8,16 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
+ *
+ * points along a line: 
+ *                                       ,---- possible CP of next
+ *    ...----prev-----C1----C2----P----...----next----...
+ *                   \______________/
+ *                      LinePoint         
+ *
+ * 2016-06-16
+ * control points coords renamed from mX1 to x1, etc.
+ * following similar renaming for coords of Point2D (ie. BezierPoint)
  */
 package com.topodroid.DistoX;
 
@@ -23,15 +33,12 @@ public class LinePoint extends Point2D
 {
   private static final float toTherion = TDConst.TO_THERION;
 
-  // public float x;
-  // public float y;
-  float x1; // first control point (to the right of the previous LinePoint)
-  float y1;
-  float x2; // second control point (to the left of this LinePoint)
-  float y2;
-  boolean has_cp;
-  LinePoint mPrev;  // previous LinePoint on the line
-  LinePoint mNext;  // next LinePoint on the line
+  // public float x, y; // inherited from PointF
+  float x1, y1;    // first control point (to the right of the previous LinePoint)
+  float x2, y2;    // second control point (to the left of this LinePoint)
+  boolean has_cp;  // whether the line-point has CPs or not
+  LinePoint mPrev; // previous LinePoint on the line
+  LinePoint mNext; // next LinePoint on the line
 
   void flipXAxis(float z)
   {

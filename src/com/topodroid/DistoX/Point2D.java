@@ -8,6 +8,8 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
+ * 2017-06-16
+ * renamed from BezierPoint and inherited coords from android.graphics.PointF
  */
 package com.topodroid.DistoX;
 

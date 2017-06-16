@@ -1,4 +1,4 @@
-/* @file TrilaterationLeg.java
+/* @file TriLeg.java
  *
  * @author marco corvi
  * @date nov 2016
@@ -11,16 +11,16 @@
  */
 package com.topodroid.DistoX;
 
-class TrilaterationLeg
+class TriLeg
 {
   TriShot shot;
   double d; // distance [m]
   double a; // angle [degrees]
   boolean used; // work flag
-  TrilaterationPoint pi;
-  TrilaterationPoint pj;
+  TriPoint pi;
+  TriPoint pj;
   
-  TrilaterationLeg( TriShot sh, TrilaterationPoint p1, TrilaterationPoint p2 )
+  TriLeg( TriShot sh, TriPoint p1, TriPoint p2 )
   {
     shot = sh;
     d = sh.length() * Math.cos( sh.clino() * Math.PI / 180.0 );

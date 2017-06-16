@@ -1,4 +1,4 @@
-/* @file TrilaterationPoint.java
+/* @file TriPoint.java
  *
  * @author marco corvi
  * @date nov 2016
@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
   
-class TrilaterationPoint
+class TriPoint
 {
   String name;
   // int n;       // nr legs with this point
@@ -19,7 +19,7 @@ class TrilaterationPoint
   double dx, dy; // coords variations
   boolean used;    // work flag
 
-  TrilaterationPoint( String n )
+  TriPoint( String n )
   { 
     name = n;
     x = y = dx = dy = 0;
