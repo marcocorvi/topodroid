@@ -102,6 +102,7 @@ public class DrawingLinePath extends DrawingPointLinePath
         x2 = x + dis.readFloat();
         y2 = y + dis.readFloat();
       }
+      // Log.v("DistoX", "line add start pt " + x0 + " " + y0 );
       ret.addStartPointNoPath( x0, y0 );
       for ( int k=1; k<npt; ++k ) {
         x0 = x + dis.readFloat();
@@ -112,8 +113,10 @@ public class DrawingLinePath extends DrawingPointLinePath
           y1 = y + dis.readFloat();
           x2 = x + dis.readFloat();
           y2 = y + dis.readFloat();
+          // Log.v("DistoX", "line add pt " + x0 + " " + y0 + " " + x1 + " " + y1 + " " + x2 + " " + y2 );
           ret.addPoint3NoPath( x1, y1, x2, y2, x0, y0 );
         } else {
+          // Log.v("DistoX", "line add pt " + x0 + " " + y0 );
           ret.addPointNoPath( x0, y0 );
         }
       }

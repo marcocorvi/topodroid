@@ -1731,8 +1731,8 @@ public class DrawingCommandManager
     
   public SelectionSet getItemsAt( float x, float y, float zoom, int mode, float size )
   {
-    // Log.v( "DistoX", "getItemAt " + x + " " + y + " zoom " + zoom + " selection pts " + mSelection.mPoints.size() );
     float radius = TDSetting.mCloseCutoff + size/zoom; // TDSetting.mSelectness / zoom;
+    // Log.v( "DistoX", "getItemAt " + x + " " + y + " zoom " + zoom + " mode " + mode + " size " + size + " " + radius );
     boolean legs   = (mDisplayMode & DisplayMode.DISPLAY_LEG) != 0;
     boolean splays = (mDisplayMode & DisplayMode.DISPLAY_SPLAY ) != 0;
     boolean stations = (mDisplayMode & DisplayMode.DISPLAY_STATION ) != 0;
@@ -1740,6 +1740,7 @@ public class DrawingCommandManager
       mSelected.clear();
       mSelection.selectAt( mSelected, x, y, radius, mode, legs, splays, stations );
       if ( mSelected.mPoints.size() > 0 ) {
+        // Log.v("DistoX", "seleceted " + mSelected.mPoints.size() + " points " );
         mSelected.nextHotItem();
       }
     }

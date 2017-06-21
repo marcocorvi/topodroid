@@ -313,7 +313,10 @@ class Selection
             if ( !stations && (    sp.type() == DrawingPath.DRAWING_PATH_STATION 
                                 || sp.type() == DrawingPath.DRAWING_PATH_NAME ) ) continue;
             sp.mDistance = sp.distance( x, y );
-            if ( sp.mDistance < radius ) sel.addPoint( sp );
+            if ( sp.mDistance < radius ) {
+              // Log.v("DistoX", "pt " + sp.mPoint.x + " " + sp.mPoint.y + " dist " + sp.mDistance );
+              sel.addPoint( sp );
+            }
           }
         }
       }

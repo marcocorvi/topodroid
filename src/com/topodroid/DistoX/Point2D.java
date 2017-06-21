@@ -15,11 +15,12 @@ package com.topodroid.DistoX;
 
 import android.graphics.PointF;
 
-class Point2D extends PointF
+class Point2D // extends PointF
 {
   // from PointF
-  // public float x;  // X coord
-  // public float y;  // Y coord
+  public float x;  // X coord
+  public float y;  // Y coord
+
 
   Point2D( )
   {
@@ -46,8 +47,8 @@ class Point2D extends PointF
   }
 
   // use PointF implementation
-  // void set( float x0, float y0 ) { x = x0; y = y0; }
-  // void negate() { x = -x; y = -y; }; 
+  void set( float x0, float y0 ) { x = x0; y = y0; }
+  void negate() { x = -x; y = -y; }; 
 
   Point2D times( float t ) { return new Point2D( x*t, y*t ); }             // this * t
 
@@ -74,11 +75,11 @@ class Point2D extends PointF
   }
 
   // use PointF implemenetation (Euclidean length)
-  // float length() 
-  // { 
-  //   float l2 = x*x + y*y;
-  //   return ( l2 > 0 )? (float)Math.sqrt( l2 ) : 0;
-  // }
+  float length() 
+  { 
+    float l2 = x*x + y*y;
+    return ( l2 > 0 )? (float)Math.sqrt( l2 ) : 0;
+  }
 
   float squareLength() { return x*x + y*y; }
 
@@ -90,10 +91,10 @@ class Point2D extends PointF
     return ( d > 0 )? (float)Math.sqrt(d) : 0;
   }
 
-  float distance( float x, float y )
+  float distance( float x0, float y0 )
   { 
-    float dx = x - x;
-    float dy = y - y;
+    float dx = x - x0;
+    float dy = y - y0;
     float d = dx*dx + dy*dy;
     return ( d > 0 )? (float)Math.sqrt(d) : 0;
   }
@@ -109,4 +110,35 @@ class Point2D extends PointF
       y = 0.0f;
     }
   }
+
+  /*
+  // intersection of two lines in the plane (was Geometry2D.java)
+  // x = p1.x + s ( p2.x - p1.x ) = q1.x + t ( q2.x - q1.x )
+  // y = p1.y + s ( p2.y - p1.y ) = q1.y + t ( q2.y - q1.y )
+  //
+  //  a s + b t = e
+  //  c s + d t = f
+  // inverse:
+  //   s =  d  -b  *  e  / det
+  //   t   -c   a     f
+  //
+  // @param pt point of intersection [out]
+  //
+  static float intersect( PointF p1, PointF p2, PointF q1, PointF q2, PointF pt )
+  {
+     float a = p2.x - p1.x;
+     float b = q1.x - q2.x;
+     float c = p2.y - p1.y;
+     float d = q1.y - q2.y;
+     float e = q1.x - p1.x;
+     float f = q1.y - p1.y;
+     float det = a * d - b * c;
+     float t = ( -c * e + a * f ) / det;
+     if ( pt != null ) {
+       pt.x = (1-t) * q1.x + t * q2.x;
+       pt.y = (1-t) * q1.y + t * q2.y;
+     }
+     return t;
+  }
+  */
 }

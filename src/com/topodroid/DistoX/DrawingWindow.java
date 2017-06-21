@@ -4877,7 +4877,7 @@ public class DrawingWindow extends ItemDrawer
   void scrapOutlineDialog()
   {
     if ( mType != PlotInfo.PLOT_PLAN && mType != PlotInfo.PLOT_EXTENDED ) {
-      Log.v("DistoX0", "outline bad scrap type " + mType );
+      TDLog.Error( "outline bad scrap type " + mType );
       return;
     }
     String name = ( mType == PlotInfo.PLOT_PLAN )? mPlot1.name : mPlot2.name;
@@ -4889,7 +4889,7 @@ public class DrawingWindow extends ItemDrawer
       }
     }
     if ( plots.size() == 0 ) {
-      Log.v("DistoX0", "outline no other scraps" );
+      TDLog.Error( "outline no other scraps" );
       return;
     }
     if ( mType == PlotInfo.PLOT_PLAN ) {

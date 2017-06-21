@@ -27,7 +27,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Locale;
 
-// import android.util.Log;
+import android.util.Log;
 
 public class LinePoint extends Point2D
 {
@@ -104,40 +104,40 @@ public class LinePoint extends Point2D
     mPrev = prev;
   }
   
-  public LinePoint( float x, float y, LinePoint prev )
+  public LinePoint( float x0, float y0, LinePoint prev )
   {
-    super( x, y );
-    // x = x;
-    // y = y;
+    super( x0, y0 );
+    // x = x0;
+    // y = y0;
     has_cp = false;
     mNext = null;
     if ( prev != null ) prev.mNext = this;
     mPrev = prev;
   }
 
-  public LinePoint( float x1, float y1, float x2, float y2, float x, float y, LinePoint prev )
+  public LinePoint( float x10, float y10, float x20, float y20, float x0, float y0, LinePoint prev )
   {
-    super( x, y );
-    // x  = x;
-    // y  = y;
-    x1 = x1;
-    y1 = y1;
-    x2 = x2;
-    y2 = y2;
+    super( x0, y0 );
+    // x  = x0;
+    // y  = y0;
+    x1 = x10;
+    y1 = y10;
+    x2 = x20;
+    y2 = y20;
     has_cp = true;
     mNext = null;
     if ( prev != null ) prev.mNext = this;
     mPrev = prev;
   }
 
-  float distanceCP1( float x, float y )
+  float distanceCP1( float x0, float y0 )
   {
-    return (float)Math.sqrt( (x-x1)*(x-x1) + (y-y1)*(y-y1) );
+    return (float)Math.sqrt( (x0-x1)*(x0-x1) + (y0-y1)*(y0-y1) );
   }
 
-  float distanceCP2( float x, float y )
+  float distanceCP2( float x0, float y0 )
   {
-    return (float)Math.sqrt( (x-x2)*(x-x2) + (y-y2)*(y-y2) );
+    return (float)Math.sqrt( (x0-x2)*(x0-x2) + (y0-y2)*(y0-y2) );
   }
 
 
@@ -147,7 +147,7 @@ public class LinePoint extends Point2D
       pw.format(Locale.US, "  %.2f %.2f %.2f %.2f %.2f %.2f\n",
         x1*toTherion, -y1*toTherion,
         x2*toTherion, -y2*toTherion,
-        x*toTherion, -y*toTherion );
+        x*toTherion,  -y*toTherion );
     } else {
       pw.format(Locale.US, "  %.2f %.2f\n", x*toTherion, -y*toTherion );
     }
@@ -164,7 +164,9 @@ public class LinePoint extends Point2D
         dos.writeFloat( y1 );
         dos.writeFloat( x2 );
         dos.writeFloat( y2 );
+        // Log.v("DistoX", "Pt " + x + " " + y + " " + x1 + " " + y1 + " " + x2 + " " + y2 );
       } else {
+        // Log.v("DistoX", "Pt " + x + " " + y );
         dos.write( 0 );
       }
     } catch ( IOException e ) { }
