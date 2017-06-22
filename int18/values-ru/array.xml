@@ -17,7 +17,7 @@
   <string-array name="wallsType">
      <item name="none">Нет</item>
      <item name="convex">Выпуклые</item>
-     <item name="delaunay">TODO</item>
+     <item name="delaunay">Делоне</item>
   </string-array>
 
   <string-array name="zoomCtrl">
