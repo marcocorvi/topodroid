@@ -84,11 +84,13 @@ public class DBlock
   public static final int BLOCK_SURVEY     = 0; // flags
   public static final int BLOCK_SURFACE    = 1;
   public static final int BLOCK_DUPLICATE  = 2;
-  // public static final int BLOCK_BACKSHOT   = 3;
+  public static final int BLOCK_COMMENTED  = 3;
+  // public static final int BLOCK_BACKSHOT   = 4;
 
   public boolean isSurvey() { return mFlag == BLOCK_SURVEY; }
   public boolean isSurface() { return mFlag == BLOCK_SURFACE; }
   public boolean isDuplicate() { return mFlag == BLOCK_DUPLICATE; }
+  public boolean isCommented() { return mFlag == BLOCK_COMMENTED; }
   // public boolean isBackshot() { return mFlag == BLOCK_BACKSHOT; }
 
   void setTypeBlankLeg( ) { if ( mType == BLOCK_BLANK ) mType = BLOCK_BLANK_LEG; }
@@ -304,6 +306,8 @@ public class DBlock
       pw.format( "*" );
     } else if ( mFlag == BLOCK_SURFACE ) {
       pw.format( "-" );
+    // } else if ( mFlag == BLOCK_COMMENTED ) {
+    //   pw.format( "^" );
     // } else if ( mFlag == BLOCK_BACKSHOT ) {
     //   pw.format( "+" );
     }

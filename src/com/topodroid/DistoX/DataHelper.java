@@ -1008,6 +1008,7 @@ public class DataHelper extends DataSetObservable
         ih.bind( extendCol, s.extend );
         ih.bind( flagCol, s.duplicate ? DBlock.BLOCK_DUPLICATE 
                         : s.surface ? DBlock.BLOCK_SURFACE 
+                        // : s.commented ? DBlock.BLOCK_COMMENTED // ParserShots are not "commented"
                         // : s.backshot ? DBlock.BLOCK_BACKSHOT
                         : 0 );
         ih.bind( legCol, 0 );
@@ -1032,6 +1033,7 @@ public class DataHelper extends DataSetObservable
         listener.onInsertShot( sid, id, s.from, s.to, s.len, s.ber, s.cln, s.rol, s.extend, 
                           s.duplicate ? DBlock.BLOCK_DUPLICATE    // flag
                           : s.surface ? DBlock.BLOCK_SURFACE 
+                          // : s.commented ? DBlock.BLOCK_COMMENTED 
                           // : s.backshot ? DBlock.BLOCK_BACKSHOT
                           : 0,
                           0L, // leg

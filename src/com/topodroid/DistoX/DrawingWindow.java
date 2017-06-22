@@ -607,6 +607,22 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.setNorthPath( dpath );
   }
 
+  private void setSplayPaint( DrawingPath path, DBlock blk )
+  {
+    if ( blk.isCommented() ) {
+      path.setPaint( BrushManager.fixedSplay0Paint );
+    } else if ( blk.mType == DBlock.BLOCK_X_SPLAY ) {
+      path.setPaint( BrushManager.fixedGreenPaint );
+    } else if ( blk.mClino > TDSetting.mVertSplay ) {
+      path.setPaint( BrushManager.fixedSplay4Paint );
+    } else if ( blk.mClino < -TDSetting.mVertSplay ) {
+      path.setPaint( BrushManager.fixedSplay3Paint );
+    } else {
+      path.setPaint( BrushManager.fixedSplayPaint );
+    }
+  }
+      
+
   private void addFixedLine( DBlock blk, float x1, float y1, float x2, float y2,
                              // float xoff, float yoff, 
                              boolean splay, boolean selectable )
@@ -614,16 +630,7 @@ public class DrawingWindow extends ItemDrawer
     DrawingPath dpath = null;
     if ( splay ) {
       dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
-      if ( blk.mType == DBlock.BLOCK_X_SPLAY ) {
-        dpath.setPaint( BrushManager.fixedGreenPaint );
-      } else if ( blk.mClino > TDSetting.mVertSplay ) {
-        dpath.setPaint( BrushManager.fixedSplay4Paint );
-      } else if ( blk.mClino < -TDSetting.mVertSplay ) {
-        dpath.setPaint( BrushManager.fixedSplay3Paint );
-      } else {
-        dpath.setPaint( BrushManager.fixedSplayPaint );
-      }
-      
+      setSplayPaint( dpath, blk );
       if ( mApp.getHighlightedSplayId() == blk.mId ) { dpath.setPaint( BrushManager.errorPaint ); }
     } else {
       dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );
@@ -2010,10 +2017,11 @@ public class DrawingWindow extends ItemDrawer
       mData.updateShotComment( block.mId, mSid, comment, true ); // true = forward
     }
     
-    void updateBlockFlag( DBlock block, long flag )
+    void updateBlockFlag( DBlock block, long flag, DrawingPath shot )
     {
       if ( block.mFlag == flag ) return;
       block.mFlag = flag;
+      setSplayPaint( shot, block ); // really necessary only if flag || mFlag is BLOCK_COMMENTED
       mData.updateShotFlag( block.mId, mSid, flag, true );
     }
 

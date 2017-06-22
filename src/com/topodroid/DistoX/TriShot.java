@@ -27,6 +27,7 @@ public class TriShot
                         // this is checked only in makeShotFromTmp to detect errors
   public boolean duplicate;
   public boolean surface;
+  public boolean commented;
   public int     backshot; // 0 forward, +1 sibling forward, -1 sibling backshot
   public TriShot sibling;  // sibling shot with same stations
   public ArrayList<DBlock> blocks;
@@ -42,6 +43,7 @@ public class TriShot
     reversed = r;
     duplicate = false;
     surface   = false;
+    commented = false;
     backshot  = 0;
     sibling = null;
     blocks = new ArrayList<DBlock>();

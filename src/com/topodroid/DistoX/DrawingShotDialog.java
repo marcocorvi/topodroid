@@ -51,6 +51,7 @@ public class DrawingShotDialog extends MyDialog
   // private RadioButton mRBsurvey;
   private MyCheckBox mRBdup;
   private MyCheckBox mRBsurf;
+  private MyCheckBox mRBcmtd;
   private CheckBox mCBfrom;
   private CheckBox mCBto;
   // private CheckBox mRBbackshot;
@@ -58,6 +59,7 @@ public class DrawingShotDialog extends MyDialog
 
   private DrawingWindow mParent;
   private DBlock mBlock;
+  private DrawingPath mPath;
   private int mFlag; // can barrier/hidden FROM and TO
   // 0x01 can barrier FROM
   // 0x02 can hidden  FROM
@@ -71,6 +73,7 @@ public class DrawingShotDialog extends MyDialog
     super(context, R.string.DrawingShotDialog );
     mParent  = parent;
     mBlock   = shot.mBlock;
+    mPath    = shot;
     mFlag    = flag;
     Log.v("DistoX", "FLAG " + mFlag + " FROM " + mBlock.mFrom + " TO " + mBlock.mTo );
   }
@@ -119,8 +122,10 @@ public class DrawingShotDialog extends MyDialog
 
     mRBdup      = new MyCheckBox( mContext, size, R.drawable.iz_dup_ok, R.drawable.iz_dup_no );
     mRBsurf     = new MyCheckBox( mContext, size, R.drawable.iz_surface_ok, R.drawable.iz_surface_no );
-    layout3.addView( mRBdup, lp );
+    mRBcmtd     = new MyCheckBox( mContext, size, R.drawable.iz_comment_ok, R.drawable.iz_comment_no );
+    layout3.addView( mRBdup,  lp );
     layout3.addView( mRBsurf, lp );
+    layout3.addView( mRBcmtd, lp );
 
     mCBfrom = null;
     mCBto = null;
@@ -158,6 +163,7 @@ public class DrawingShotDialog extends MyDialog
 
     mRBdup.setOnClickListener( this );
     mRBsurf.setOnClickListener( this );
+    mRBcmtd.setOnClickListener( this );
     // mRBbackshot.setOnClickListener( this );
     if ( TDSetting.mWallsType != TDSetting.WALLS_NONE 
       && TDSetting.mLevelOverAdvanced 
@@ -199,6 +205,9 @@ public class DrawingShotDialog extends MyDialog
           break;
         case DBlock.BLOCK_SURFACE:
           mRBsurf.setChecked( true );
+          break;
+        case DBlock.BLOCK_COMMENTED:
+          mRBcmtd.setChecked( true );
           break;
         // case DBlock.BLOCK_BACKSHOT:
         //   mRBbackshot.setChecked( true );
@@ -252,11 +261,19 @@ public class DrawingShotDialog extends MyDialog
       mRBdup.toggleState();
       if ( mRBdup.isChecked() ) {
         mRBsurf.setState( false );
+        mRBcmtd.setState( false );
       }
     } else if ( b == mRBsurf ) {
       mRBsurf.toggleState();
       if ( mRBsurf.isChecked() ) {
         mRBdup.setState( false );
+        mRBcmtd.setState( false );
+      }
+    } else if ( b == mRBcmtd ) {
+      mRBcmtd.toggleState();
+      if ( mRBcmtd.isChecked() ) {
+        mRBdup.setState( false );
+        mRBsurf.setState( false );
       }
     // } else if ( b == mRBbackshot ) {
     //   mRBdup.setChecked( false );
@@ -298,11 +315,12 @@ public class DrawingShotDialog extends MyDialog
 
       if ( mRBdup.isChecked() ) { flag = DBlock.BLOCK_DUPLICATE; }
       else if ( mRBsurf.isChecked() ) { flag = DBlock.BLOCK_SURFACE; }
+      else if ( mRBcmtd.isChecked() ) { flag = DBlock.BLOCK_COMMENTED; }
       // else if ( mRBbackshot.isChecked() ) { flag = DBlock.BLOCK_BACKSHOT; }
       else /* if ( mRBsurvey.isChecked() ) */ { flag = DBlock.BLOCK_SURVEY; }
 
       mParent.updateBlockExtend( mBlock, extend ); // equal extend checked by the method
-      mParent.updateBlockFlag( mBlock,flag ); // equal flag is checked by the method
+      mParent.updateBlockFlag( mBlock, flag, mPath ); // equal flag is checked by the method
 
       String from = mETfrom.getText().toString().trim();
       String to   = mETto.getText().toString().trim();

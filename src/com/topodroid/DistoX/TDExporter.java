@@ -228,6 +228,7 @@ class TDExporter
       long extend = 0;      // current extend
       boolean dup = false;  // duplicate
       boolean sur = false;  // surface
+      boolean cmt = false;  // commented
       // boolean bck = false;  // backshot
       String com = null;    // comment
       String f="", t="";          // from to stations
@@ -250,10 +251,11 @@ class TDExporter
               writeCsxSegment( pw, cave, f, t ); // branch prefix
 
               if ( extend == -1 ) pw.format(" direction=\"1\"");
-              if ( dup || sur /* || bck */ ) {
+              if ( dup || sur || cmt /* || bck */ ) {
                 pw.format(" exclude=\"1\"");
                 if ( dup ) { pw.format(" duplicate=\"1\""); dup = false; }
                 if ( sur ) { pw.format(" surface=\"1\"");   sur = false; }
+                if ( cmt ) { pw.format(" commented=\"1\"");   cmt = false; }
 		// if ( bck ) { pw.format(" backshot=\"1\"");   bck = false; }
               }
               // pw.format(" planshowsplayborder=\"1\" profileshowsplayborder=\"1\" ");
@@ -287,10 +289,11 @@ class TDExporter
             if ( leg.mCnt > 0 && ref_item != null ) { // finish writing previous leg shot
               writeCsxSegment( pw, cave, f, t ); // branch prefix
               if ( extend == -1 ) pw.format(" direction=\"1\"");
-              if ( dup || sur /* || bck */ ) {
+              if ( dup || sur || cmt /* || bck */ ) {
                 pw.format(" exclude=\"1\"");
                 if ( dup ) { pw.format(" duplicate=\"1\""); dup = false; }
                 if ( sur ) { pw.format(" surface=\"1\"");   sur = false; }
+                if ( cmt ) { pw.format(" commented=\"1\""); cmt = false; }
                 // if ( bck ) { pw.format(" backshot=\"1\"");   bck = false; }
               }
               // pw.format(" planshowsplayborder=\"1\" profileshowsplayborder=\"1\" ");
@@ -322,10 +325,11 @@ class TDExporter
             if ( leg.mCnt > 0 && ref_item != null ) {
               writeCsxSegment( pw, cave, f, t ); // branch prefix
               if ( extend == -1 ) pw.format(" direction=\"1\"");
-              if ( dup || sur /* || bck */ ) {
+              if ( dup || sur || cmt /* || bck */ ) {
                 pw.format(" exclude=\"1\"");
                 if ( dup ) { pw.format(" duplicate=\"1\""); dup = false; }
                 if ( sur ) { pw.format(" surface=\"1\"");   sur = false; }
+                if ( cmt ) { pw.format(" commented=\"1\""); cmt = false; }
                 // if ( bck ) { pw.format(" backshot=\"1\"");   bck = false; }
               }
               writeCsxLeg( pw, leg, ref_item );
@@ -342,6 +346,8 @@ class TDExporter
               dup = true;
             } else if ( item.mFlag == DBlock.BLOCK_SURFACE ) {
               sur = true;
+            } else if ( item.mFlag == DBlock.BLOCK_COMMENTED ) {
+              cmt = true;
             // } else if ( item.mFlag == DBlock.BLOCK_BACKSHOT ) {
             //   bck = true;
             }
@@ -355,10 +361,11 @@ class TDExporter
       if ( leg.mCnt > 0 && ref_item != null ) {
         writeCsxSegment( pw, cave, f, t ); // branch prefix
         if ( extend == -1 ) pw.format(" direction=\"1\"");
-        if ( dup || sur /* || bck */ ) {
+        if ( dup || sur || cmt /* || bck */ ) {
            pw.format(" exclude=\"1\"");
-           if ( dup ) { pw.format(" duplicate=\"1\""); /* dup = false; */ }
-           if ( sur ) { pw.format(" surface=\"1\"");   /* sur = false; */ }
+           if ( dup ) { pw.format(" duplicate=\"1\"");  /* dup = false; */ }
+           if ( sur ) { pw.format(" surface=\"1\"");    /* sur = false; */ }
+           if ( cmt ) { pw.format(" commented=\"1\""); /* cmt = false; */ }
            // if ( bck ) { pw.format(" backshot=\"1\"");  /* bck = false; */ }
         }
         writeCsxLeg( pw, leg, ref_item );
@@ -407,6 +414,7 @@ class TDExporter
 
   // =======================================================================
   // KML export
+  // shot flags are ignored
 
   static float EARTH_RADIUS1 = (float)(6378137 * Math.PI / 180.0f); // semimajor axis [m]
   static float EARTH_RADIUS2 = (float)(6356752 * Math.PI / 180.0f);
@@ -468,7 +476,7 @@ class TDExporter
     // now write the KML
     try {
       TDPath.checkPath( filename );
-      FileWriter fw = new FileWriter( filename );
+      FileWriter fw  = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
 
       pw.format("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
@@ -581,6 +589,7 @@ class TDExporter
 
   // -------------------------------------------------------------------
   // TRACK FILE OZIEXPLORER
+  // shot flags are ignored
 
   static String exportSurveyAsPlt( long sid, DataHelper data, SurveyInfo info, String filename )
   {
@@ -643,6 +652,7 @@ class TDExporter
 
   // =======================================================================
   // POCKETTOPO EXPORT PocketTopo
+  // shot flags are ignored
 
   static String exportSurveyAsTop( long sid, DataHelper data, SurveyInfo info, DrawingWindow sketch, String origin, String filename )
   {
@@ -719,6 +729,7 @@ class TDExporter
   }
   // =======================================================================
   // THERION EXPORT Therion
+  // shot flags are used
 
   static private void writeThLeg( PrintWriter pw, AverageLeg leg, float ul, float ua )
   {
@@ -745,6 +756,15 @@ class TDExporter
       }
     }
     pw.format("\n");
+  }
+
+  static private void writeThStations( PrintWriter pw, String from, String to, boolean cmtd )
+  {
+    if ( cmtd ) {
+      pw.format("#   %s %s ", from, to );
+    } else {
+      pw.format("    %s %s ", from, to );
+    }
   }
 
   static String exportSurveyAsTh( long sid, DataHelper data, SurveyInfo info, String filename )
@@ -886,7 +906,7 @@ class TDExporter
               extend = item.getExtend();
               pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
             }
-            pw.format("    - %s ", to );
+            writeThStations( pw, "-", to, item.isCommented() );
             pw.format(Locale.US, "%.2f %.1f %.1f\n", item.mLength * ul, item.mBearing * ua, item.mClino * ua );
           }
         } else { // with FROM station
@@ -916,7 +936,7 @@ class TDExporter
               extend = item.getExtend();
               pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
             }
-            pw.format("    %s - ", from ); // write splay shot
+            writeThStations( pw, from, "-", item.isCommented() );
             pw.format(Locale.US, "%.2f %.1f %.1f\n", item.mLength * ul, item.mBearing * ua, item.mClino * ua );
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {
@@ -941,6 +961,7 @@ class TDExporter
             } else if ( item.mFlag == DBlock.BLOCK_SURFACE ) {
               pw.format(therion_flags_surface);
               surface = true;
+            // } else if ( item.mFlag == DBlock.BLOCK_COMMENTED ) { // handled already
             // } else if ( item.mFlag == DBlock.BLOCK_BACKSHOT ) {
             //   pw.format(therion_flags_duplicate);
             //   duplicate = true;
@@ -948,7 +969,7 @@ class TDExporter
             if ( item.mComment != null && item.mComment.length() > 0 ) {
               pw.format("  # %s\n", item.mComment );
             }
-            pw.format("    %s %s ", from, to );
+            writeThStations( pw, from, to, item.isCommented() );
             leg.set( item.mLength, item.mBearing, item.mClino );
           }
         }
@@ -991,6 +1012,7 @@ class TDExporter
 
   // -----------------------------------------------------------------------
   /** SURVEX EXPORT 
+   * shot flags are used
    *
    * The following format is used to export the centerline data in survex
    *
@@ -1054,7 +1076,11 @@ class TDExporter
 
   static void writeSurvexSplay( PrintWriter pw, String from, String to, DBlock blk, float ul, float ua )
   {
-    pw.format(Locale.US, "  %s %s %.2f %.1f %.1f", from, to, blk.mLength * ul, blk.mBearing * ua, blk.mClino * ua );
+    if ( blk.isCommented() ) {
+      pw.format(Locale.US, "; %s %s %.2f %.1f %.1f", from, to, blk.mLength * ul, blk.mBearing * ua, blk.mClino * ua );
+    } else {
+      pw.format(Locale.US, "  %s %s %.2f %.1f %.1f", from, to, blk.mLength * ul, blk.mBearing * ua, blk.mClino * ua );
+    }
     if ( blk.mComment != null && blk.mComment.length() > 0 ) {
       pw.format(" ; %s", blk.mComment );
     }
@@ -1118,9 +1144,10 @@ class TDExporter
       writeSurvexLine( pw, "  *flags not splay");
       writeSurvexLine( pw, "  *data normal from to tape compass clino");
       
-      boolean first = true;
+      boolean first = true; // first-pass
+      // first pass legs, second pass splays
       // for ( int k=0; k<2; ++k ) 
-      { // first pass legs, second pass splays
+      {
         if ( ! first ) {
           writeSurvexEOL(pw);
           writeSurvexLine(pw, "  *flags splay");
@@ -1199,7 +1226,13 @@ class TDExporter
                 if ( first ) writeSurvexLine(pw, survex_flags_duplicate);
                 duplicate = true;
               }
-              if ( first ) pw.format("    %s %s ", from, to );
+              if ( first ) {
+                if ( item.isCommented() ) {
+                  pw.format(";   %s %s ", from, to );
+                } else {
+                  pw.format("    %s %s ", from, to );
+                }
+              }
               leg.set( item.mLength, item.mBearing, item.mClino );
             }
           }
@@ -1341,6 +1374,7 @@ class TDExporter
 
   // -----------------------------------------------------------------------
   /** CSV COMMA-SEPARATED VALUES EXPORT 
+   *  shot flags are used
    *  NOTE declination exported in comment only in CSV
    *
    */
@@ -1349,6 +1383,23 @@ class TDExporter
     pw.format(Locale.US, ",%.2f,%.1f,%.1f", 
       leg.length() * ul, leg.bearing() * ua, leg.clino() * ua );
     leg.reset();
+  }
+
+  static private void writeCsvFlag( PrintWriter pw, boolean dup, boolean cmtd )
+  {
+    if ( dup ) {
+      if ( cmtd ) {
+        pw.format(",LC\n");
+      } else {
+        pw.format(",L\n");
+      }
+    } else {
+      if ( cmtd ) {
+        pw.format(",C\n");
+      } else {
+        pw.format("\n");
+      }
+    }
   }
 
   static String exportSurveyAsCsv( long sid, DataHelper data, SurveyInfo info, String filename )
@@ -1392,11 +1443,8 @@ class TDExporter
           } else { // only TO station
             if ( leg.mCnt > 0 && ref_item != null ) {
               writeCsvLeg( pw, leg, ul, ua );
-              if ( duplicate ) {
-                pw.format(",L");
-                duplicate = false;
-              }
-              pw.format("\n");
+              writeCsvFlag( pw, duplicate, ref_item.isCommented() );
+              duplicate = false;
               ref_item = null; 
             }
             // if ( ref_item != null && ref_item.mComment != null && ref_item.mComment.length() > 0 ) {
@@ -1406,8 +1454,10 @@ class TDExporter
             if ( ! splays ) {
               splays = true;
             }
-            pw.format(Locale.US, "-,%s@%s,%.2f,%.1f,%.1f\n", to, info.name,
-              item.mLength * ul, item.mBearing * ua, item.mClino * ua );
+            pw.format(Locale.US, "-,%s@%s,%.2f,%.1f,%.1f",
+                      to, info.name, item.mLength * ul, item.mBearing * ua, item.mClino * ua );
+            writeCsvFlag( pw, false, item.isCommented() );
+
             // if ( item.mComment != null && item.mComment.length() > 0 ) {
             //   pw.format(",\"%s\"\n", item.mComment );
             // }
@@ -1416,11 +1466,8 @@ class TDExporter
           if ( to == null || to.length() == 0 ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
               writeCsvLeg( pw, leg, ul, ua );
-              if ( duplicate ) {
-                pw.format(",L");
-                duplicate = false;
-              }
-              pw.format("\n");
+              writeCsvFlag( pw, duplicate, ref_item.isCommented() );
+              duplicate = false;
               ref_item = null; 
             }
             // if ( ref_item != null && ref_item.mComment != null && ref_item.mComment.length() > 0 ) {
@@ -1430,19 +1477,17 @@ class TDExporter
             if ( ! splays ) {
               splays = true;
             }
-            pw.format(Locale.US, "%s@%s,-,%.2f,%.1f,%.1f\n", from, info.name,
-              item.mLength * ul, item.mBearing * ua, item.mClino * ua );
+            pw.format(Locale.US, "%s@%s,-,%.2f,%.1f,%.1f",
+                      from, info.name, item.mLength * ul, item.mBearing * ua, item.mClino * ua );
+            writeCsvFlag( pw, false, item.isCommented() );
             // if ( item.mComment != null && item.mComment.length() > 0 ) {
             //   pw.format(",\"%s\"\n", item.mComment );
             // }
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {
               writeCsvLeg( pw, leg, ul, ua );
-              if ( duplicate ) {
-                pw.format(",L");
-                duplicate = false;
-              }
-              pw.format("\n");
+              writeCsvFlag( pw, duplicate, ref_item.isCommented() );
+              duplicate = false;
               // n = 0;
             }
             if ( splays ) {
@@ -1459,11 +1504,8 @@ class TDExporter
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
         writeCsvLeg( pw, leg, ul, ua );
-        if ( duplicate ) {
-          pw.format(",L");
-          // duplicate = false;
-        }
-        pw.format("\n");
+        writeCsvFlag( pw, duplicate, ref_item.isCommented() );
+        // duplicate = false;
       }
       fw.flush();
       fw.close();
@@ -1476,6 +1518,7 @@ class TDExporter
 
   // -----------------------------------------------------------------------
   // TOPOLINUX EXPORT 
+  // commented flag not supported 
 
   // public String exportSurveyAsTlx( long sid, DataHelper data, SurveyInfo info, String filename ) // FIXME args
   // {
@@ -1608,6 +1651,7 @@ class TDExporter
 
   // -----------------------------------------------------------------------
   // COMPASS EXPORT 
+  // commented flag not supported
 
   static private LRUDprofile computeLRUDprofile( DBlock b, List<DBlock> list, boolean at_from )
   {
@@ -1866,6 +1910,7 @@ class TDExporter
 
   // ----------------------------------------------------------------------------------------
   // TOPOROBOT
+  // commented flag not supported
 
   private static final int TRB_LINE_LENGTH = 82; 
 
@@ -2099,6 +2144,7 @@ class TDExporter
 
   // ----------------------------------------------------------------------------------------
   // WINKARST
+  // commented flag not supported
 
   private static void printShotToSur( PrintWriter pw, AverageLeg leg, LRUD lrud, String comment )
   {
@@ -2245,6 +2291,7 @@ class TDExporter
 
   // =======================================================================
   // GHTOPO EXPORT
+  // commented flag supported for splays
 
   // one of 6 14 31 83 115 164 211
   static int randomColor()
@@ -2352,11 +2399,18 @@ class TDExporter
         TRobotPoint pt = trobot.getPoint( blk.mFrom );
         if ( pt == null ) continue;
         ++ number;
-        // Log.v("DistoX", "TRobot splay " + blk.mFrom + " nr " + number + " Pt " + pt.mSeries.mNumber + "." + pt.mNumber );
-        pw.format(Locale.US, "    <AntennaShot Az=\"%.2f\" Code=\"1\" Incl=\"%.2f\" Trip=\"1\" Label=\"\" PtDep=\"%d\" ",
-          blk.mBearing, blk.mClino, pt.mNumber );
-        pw.format(Locale.US, "Length=\"%.3f\" Numero=\"%d\" SerDep=\"%d\" Network=\"1\" Secteur=\"1\" Comments=\"%s\" />\n",
-          blk.mLength, number, pt.mSeries.mNumber, blk.mComment );
+        if ( blk.isCommented() ) {
+          pw.format(Locale.US, "    <!-- AntennaShot Az=\"%.2f\" Code=\"1\" Incl=\"%.2f\" Trip=\"1\" Label=\"\" PtDep=\"%d\" ",
+            blk.mBearing, blk.mClino, pt.mNumber );
+          pw.format(Locale.US, "Length=\"%.3f\" Numero=\"%d\" SerDep=\"%d\" Network=\"1\" Secteur=\"1\" Comments=\"%s\" / -->\n",
+            blk.mLength, number, pt.mSeries.mNumber, blk.mComment );
+        } else {
+          // Log.v("DistoX", "TRobot splay " + blk.mFrom + " nr " + number + " Pt " + pt.mSeries.mNumber + "." + pt.mNumber );
+          pw.format(Locale.US, "    <AntennaShot Az=\"%.2f\" Code=\"1\" Incl=\"%.2f\" Trip=\"1\" Label=\"\" PtDep=\"%d\" ",
+            blk.mBearing, blk.mClino, pt.mNumber );
+          pw.format(Locale.US, "Length=\"%.3f\" Numero=\"%d\" SerDep=\"%d\" Network=\"1\" Secteur=\"1\" Comments=\"%s\" />\n",
+            blk.mLength, number, pt.mSeries.mNumber, blk.mComment );
+        }
       }
       pw.format("  </AntennaShots>\n");
       pw.format("</GHTopo>\n");
@@ -2373,6 +2427,7 @@ class TDExporter
 
   // =======================================================================
   // GROTTOLF EXPORT
+  // commented flag supported for legs
 
   // write RLDU and the cross-section points
   static private void writeGrtProfile( PrintWriter pw, LRUDprofile lrud )
@@ -2389,6 +2444,7 @@ class TDExporter
                                    DBlock item, List<DBlock> list )
   {
     LRUDprofile lrud = null;
+    if ( item.isCommented() ) pw.format("; ");
     if ( first ) {
       pw.format(Locale.US, "%s %s 0.000 0.000 0.000 ", fr, fr );
       lrud = computeLRUDprofile( item, list, true );
@@ -2497,6 +2553,24 @@ class TDExporter
     pw.format(Locale.US, "%.2f\t%.1f\t%.1f", leg.length() * ul, leg.bearing() * ua, leg.clino() * ua );
     leg.reset();
   }
+
+  static private void writeSrvStations( PrintWriter pw, String from, String to, boolean cmtd )
+  {
+    if ( cmtd ) {
+      pw.format("; %s\t%s\t", from, to );
+    } else {
+      pw.format("%s\t%s\t", from, to );
+    }
+  }
+
+  static private void writeSrvComment( PrintWriter pw, String cmt )
+  {
+    if ( cmt != null && cmt.length() > 0 ) {
+      pw.format("\t; %s\n", cmt );
+    } else {
+      pw.format("\n");
+    }
+  }
  
   static String exportSurveyAsSrv( long sid, DataHelper data, SurveyInfo info, String filename )
   {
@@ -2577,11 +2651,7 @@ class TDExporter
           } else { // only TO station
             if ( leg.mCnt > 0 && ref_item != null ) {
               writeSrvLeg( pw, leg, ul, ua );
-              if ( ref_item.mComment != null && ref_item.mComment.length() > 0 ) {
-                pw.format("\t; %s\n", ref_item.mComment );
-              } else {
-                pw.format("\n");
-              }
+              writeSrvComment( pw, ref_item.mComment );
               if ( duplicate ) {
                 // FIXME pw.format(therion_flags_not_duplicate);
                 duplicate = false;
@@ -2596,23 +2666,15 @@ class TDExporter
             //   extend = item.getExtend();
             //   //  FIXME pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
             // }
-            pw.format("-\t%s\t", to );
+            writeSrvStations( pw, "-", to, item.isCommented() );
             pw.format(Locale.US, "%.2f\t%.1f\t%.1f", item.mLength*ul, item.mBearing*ua, item.mClino*ua );
-            if ( item.mComment != null && item.mComment.length() > 0 ) {
-              pw.format("\t; %s\n", item.mComment );
-            } else {
-              pw.format("\n");
-            }
+            writeSrvComment( pw, item.mComment );
           }
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // finish writing previous leg shot
               writeSrvLeg( pw, leg, ul, ua );
-              if ( ref_item.mComment != null && ref_item.mComment.length() > 0 ) {
-                pw.format("\t; %s\n", ref_item.mComment );
-              } else {
-                pw.format("\n");
-              }
+              writeSrvComment( pw, ref_item.mComment );
               if ( duplicate ) {
                 // FIXME pw.format(therion_flags_not_duplicate);
                 duplicate = false;
@@ -2627,21 +2689,13 @@ class TDExporter
             //   extend = item.getExtend();
             //   // FIXME pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
             // }
-            pw.format("%s\t-\t", from ); // write splay shot
+            writeSrvStations( pw, from, "-", item.isCommented() );
             pw.format(Locale.US, "%.2f\t%.1f\t%.1f", item.mLength*ul, item.mBearing*ua, item.mClino*ua );
-            if ( item.mComment != null && item.mComment.length() > 0 ) {
-              pw.format("\t; %s\n", item.mComment );
-            } else {
-              pw.format("\n");
-            }
+            writeSrvComment( pw, item.mComment );
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {
               writeSrvLeg( pw, leg, ul, ua );
-              if ( ref_item.mComment != null && ref_item.mComment.length() > 0 ) {
-                pw.format("\t; %s\n", ref_item.mComment );
-              } else {
-                pw.format("\n");
-              }
+              writeSrvComment( pw, ref_item.mComment );
               if ( duplicate ) {
                 // FIXME pw.format(therion_flags_not_duplicate);
                 duplicate = false;
@@ -2662,14 +2716,12 @@ class TDExporter
             } else if ( item.mFlag == DBlock.BLOCK_SURFACE ) {
               // FIXME pw.format(therion_flags_surface);
               surface = true;
+            // } else if ( item.mFlag == DBlock.BLOCK_COMMENTED ) {
+            //   ...
             // } else if ( item.mFlag == DBlock.BLOCK_BACKSHOT ) {
-            //   // FIXME pw.format(therion_flags_duplicte);
-            //   duplicate = true;
+            //   ...
             }
-            if ( item.mComment != null && item.mComment.length() > 0 ) {
-              pw.format("\t; %s\n", item.mComment );
-            }
-            pw.format("%s\t%s\t", from, to );
+            writeSrvStations( pw, from, to, item.isCommented() );
             leg.set( item.mLength, item.mBearing, item.mClino );
           }
         }
@@ -2677,11 +2729,7 @@ class TDExporter
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
         writeSrvLeg( pw, leg, ul, ua );
-        if ( ref_item.mComment != null && ref_item.mComment.length() > 0 ) {
-          pw.format("\t; %s\n", ref_item.mComment );
-        } else {
-          pw.format("\n");
-        }
+        writeSrvComment( pw, ref_item.mComment );
         if ( duplicate ) {
           // pw.format(therion_flags_not_duplicate);
           // duplicate = false;
@@ -2707,11 +2755,15 @@ class TDExporter
       pw.format("#end_duplicate%s", eol);
     } else if ( old_flag == DBlock.BLOCK_SURFACE ) {
       pw.format("#end_surface%s", eol);
+    } else if ( old_flag == DBlock.BLOCK_COMMENTED ) {
+      // pw.format("#end_commented%s", eol);
     }
     if ( new_flag == DBlock.BLOCK_DUPLICATE ) {
       pw.format("#duplicate%s", eol);
     } else if ( new_flag == DBlock.BLOCK_SURFACE ) {
       pw.format("#surface%s", eol);
+    } else if ( new_flag == DBlock.BLOCK_COMMENTED ) {
+      // pw.format("#commented%s", eol);
     }
     return new_flag;
   }
@@ -2728,6 +2780,7 @@ class TDExporter
         }
       }
     }
+    if ( item.isCommented() ) pw.format("%% ");
     pw.format(Locale.US, "%s\t%s\t%.2f\t%.1f\t%.1f", item.mFrom, item.mTo, leg.length(), leg.bearing(), leg.clino() );
     if ( item.mComment != null ) {
       pw.format("\t;\t%s%s", item.mComment, eol );
@@ -2740,6 +2793,7 @@ class TDExporter
   private static void printSplayToCav( PrintWriter pw, DBlock blk, String eol )
   {
     // if ( duplicate ) pw.format("#duplicate%s", eol);
+    if ( blk.isCommented() ) pw.format("%% ");
     pw.format(Locale.US, "%s\t-\t%.2f\t%.1f\t%.1f", blk.mFrom, blk.mLength, blk.mBearing, blk.mClino );
     if ( blk.mComment != null ) {
       pw.format("\t;\t%s%s", blk.mComment, eol );
@@ -2880,6 +2934,7 @@ class TDExporter
 
   // =======================================================================
   // POLYGON EXPORT 
+  // shot flags are not supported
 
   private static void printShotToPlg( PrintWriter pw, AverageLeg leg, LRUD lrud, boolean duplicate, String comment )
   {
@@ -3035,6 +3090,7 @@ class TDExporter
   // -----------------------------------------------------------------------
   // DXF EXPORT 
   // NOTE declination is taken into account in DXF export (used to compute num)
+  // shot flags are not supported
 
   static String exportSurveyAsDxf( long sid, DataHelper data, SurveyInfo info, DistoXNum num, String filename )
   {
@@ -3179,6 +3235,7 @@ class TDExporter
   // VISUALTOPO EXPORT 
   // FIXME photos
   // FIXME not sure declination written in the right place
+  // shot flags are not supported
 
   /**
    * @param pw     writer

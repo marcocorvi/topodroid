@@ -108,6 +108,7 @@ public class BrushManager
   static Paint fixedYellowPaint  = null;
   static Paint fixedOrangePaint  = null;
   static Paint fixedSplayPaint = null;
+  static Paint fixedSplay0Paint = null;  // commented splay
   static Paint fixedSplay2Paint = null;  // cross-section splay2 (at viewed station)
   static Paint fixedSplay3Paint = null;  // dash splay
   static Paint fixedSplay4Paint = null;  // dot splay
@@ -253,19 +254,26 @@ public class BrushManager
       fixedOrangePaint.setStrokeCap(Paint.Cap.ROUND);
       fixedOrangePaint.setColor( TDColor.FIXED_ORANGE );
 
-      fixedSplayPaint = new Paint();
+      fixedSplayPaint = new Paint();  // normal splay
       fixedSplayPaint.setDither(true);
       fixedSplayPaint.setStyle(Paint.Style.STROKE);
       fixedSplayPaint.setStrokeJoin(Paint.Join.ROUND);
       fixedSplayPaint.setStrokeCap(Paint.Cap.ROUND);
-      fixedSplayPaint.setColor( TDColor.DARK_GRAY );
+      fixedSplayPaint.setColor( TDColor.LIGHT_BLUE );
 
-      fixedSplay2Paint = new Paint();
+      fixedSplay0Paint = new Paint(); // commented splay
+      fixedSplay0Paint.setDither(true);
+      fixedSplay0Paint.setStyle(Paint.Style.STROKE);
+      fixedSplay0Paint.setStrokeJoin(Paint.Join.ROUND);
+      fixedSplay0Paint.setStrokeCap(Paint.Cap.ROUND);
+      fixedSplay0Paint.setColor( TDColor.VERYDARK_GRAY );
+
+      fixedSplay2Paint = new Paint(); // X-splay
       fixedSplay2Paint.setDither(true);
       fixedSplay2Paint.setStyle(Paint.Style.STROKE);
       fixedSplay2Paint.setStrokeJoin(Paint.Join.ROUND);
       fixedSplay2Paint.setStrokeCap(Paint.Cap.ROUND);
-      fixedSplay2Paint.setColor( TDColor.LIGHT_BLUE );
+      fixedSplay2Paint.setColor( TDColor.GREEN );
 
       fixedSplay3Paint = new Paint();
       fixedSplay3Paint.setDither(true);

@@ -522,11 +522,13 @@ public class ShotWindow extends Activity
 
     // TDLog.Log( TDLog.LOG_INPUT, "ShotWindow onItemClick id " + id);
     DBlock blk = mDataAdapter.get(pos);
+    Log.v( "DistoX", "ShotWindow onItemClick id " + id + " pos " + pos + " blk " + blk.mFrom + " " + blk.mTo );
     onBlockClick( blk, pos );
   }
 
   void onBlockClick( DBlock blk, int pos )
   {
+    Log.v("DistoX", "on block click: on_open " + mOnOpenDialog );
     if ( mOnOpenDialog ) return;
     mOnOpenDialog = true;
     mShotPos = pos;

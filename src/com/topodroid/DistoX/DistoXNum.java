@@ -470,6 +470,9 @@ class DistoXNum
   //             // if ( block.mFlag == DBlock.BLOCK_SURFACE ) { // FIXME
   //             //   ++mSurfNr;
   //             // }
+  //             // if ( block.mFlag == DBlock.BLOCK_COMMENTED ) { // FIXME
+  //             //   ++mCmtdNr;
+  //             // }
   //             // do close loop also on duplicate shots
   //             // need the loop length to compute the fractional closure error
   //             float length = shortestPath( sf, st) + block.mLength;
@@ -715,6 +718,7 @@ class DistoXNum
           lastLeg = new TriShot( blk, blk.mFrom, blk.mTo, blk.getExtend(), +1 );
           lastLeg.duplicate = ( blk.mFlag == DBlock.BLOCK_DUPLICATE );
           lastLeg.surface   = ( blk.mFlag == DBlock.BLOCK_SURFACE );
+          lastLeg.commented = ( blk.mFlag == DBlock.BLOCK_COMMENTED );
           // lastLeg.backshot  = ( blk.mFlag == DBlock.BLOCK_BACKSHOT ); // FIXME
           tmpshots.add( lastLeg );
           break;
