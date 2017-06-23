@@ -157,8 +157,8 @@
 
     <string name="illegal_data_value">Unzulässiger Datenwert</string>
 <!-- MISC STRINGS -->
-    <!-- TODO string name="photo_title">PHOTO</string -->
-    <!-- TODO string name="photo_text">Enter photo comment</string -->
+    <string name="photo_title">FOTO</string>
+    <string name="photo_text">Foto-Kommentar eingeben</string>
     <string name="label_title">BESCHRIFTUNG</string>
     <string name="label_text">Geben Sie den Beschriftungstext ein</string>
     <!-- UNUSED string name="altitude">Höhe</string -->
@@ -308,18 +308,18 @@
     <string name="popup_erase_line">Linien löschen</string>
     <string name="popup_erase_area">Flächen löschen</string>
 
-    <!-- TODO string name="popup_select_all">Select all</string -->
-    <!-- TODO string name="popup_select_point">Select points</string -->
-    <!-- TODO string name="popup_select_line">Select lines</string -->
-    <!-- TODO string name="popup_select_area">Select areas</string -->
-    <!-- TODO string name="popup_select_shot">Select shots</string -->
-    <!-- TODO string name="popup_select_station">Select stations</string -->
+    <string name="popup_select_all">Alle auswählen</string>
+    <string name="popup_select_point">Punkte auswählen</string>
+    <string name="popup_select_line">Linien auswählen</string>
+    <string name="popup_select_area">Flächen auswählen</string>
+    <string name="popup_select_shot">Messlinien auswählen</string>
+    <string name="popup_select_station">Messpunkte auswählen</string>
 
-    <!-- TODO string name="popup_cont_none">None</string -->
-    <!-- TODO string name="popup_cont_start">Start point</string -->
-    <!-- TODO string name="popup_cont_end">End point</string -->
-    <!-- TODO string name="popup_cont_both">Both points</string -->
-    <!-- TODO string name="popup_cont_continue">Continue</string -->
+    <string name="popup_cont_none">Keine</string>
+    <string name="popup_cont_start">Startpunkt</string>
+    <string name="popup_cont_end">Endpunkt</string>
+    <string name="popup_cont_both">Start- und Endpunkt</string>
+    <string name="popup_cont_continue">Fortsetzen</string>
 
     <string name="connected_none">Nicht verbunden</string>
     <string name="connected_already">Bereits verbunden</string>
@@ -368,7 +368,7 @@
     <!-- UNUSED string name="converted_tdr2th2">Skizzen konvertiert zu th2.</string -->
     <!-- UNUSED string name="convert_tdr2th2">th2 Skizzen überschreiben?</string -->
     <string name="section_area">Fläche: %1$.1f</string>
-    <!-- TODO string name="scrap_outline">Sketch outline</string -->
+    <string name="scrap_outline">Skizzenumriss</string>
 
     <!-- UNUSED string name="sensor">Sensor</string -->
     <string name="sensor_gravity">Schwerkraft</string>
@@ -386,7 +386,7 @@
     <!-- UNUSED string name="shot_clino">Neigung</string -->
     <!-- UNUSED string name="shot_compass">Azimut</string -->
     <string name="shot_delete">Messung löschen?</string>
-    <!-- TODO string name="shots_delete">Delete shots ?</string -->
+    <string name="shots_delete">Messungen löschen?</string>
     <string name="shot_check">Messung als Kalibrierungstest markieren?</string>
     <string name="shot_from">von</string>
     <string name="shot_info">Info</string>
@@ -628,7 +628,7 @@
     <string name="help_help">Diese Hilfe</string>
     <!-- UNUSED string name="help_manual">Handbuch</string -->
     <string name="help_measure">Entfernungen messen</string>
-    <!-- TODO string name="help_measure_type">Measuring mode: fixed point or polyline</string -->
+    <string name="help_measure_type">Messmodus: Fixpunkt oder Polygonzug</string>
 
     <string name="help_calib_check">Testmessungen</string>
     <string name="help_close">Fenster schließen</string>
@@ -773,7 +773,7 @@
     <string name="title_projection">Projiziertes Profil Azimut %1$d</string>
     <string name="title_refs">Elemente Anzeigen</string>
     <string name="title_scraps">Skizzen</string>
-    <!-- TODO string name="title_scraps_outline">Sketch outline</string -->
+    <string name="title_scraps_outline">Skizzenumriss</string>
     <string name="title_select">Auswählen</string>
     <string name="title_shift">Verschieben</string>
     <string name="title_shot_delete">Messung löschen ?</string>
