@@ -152,8 +152,8 @@
 
     <string name="illegal_data_value">Dado inválido</string>
 
-    <!-- TODO string name="photo_title">PHOTO</string -->
-    <!-- TODO string name="photo_text">Enter photo comment</string -->
+    <string name="photo_title">FOTO</string>
+    <string name="photo_text">Entre comentário para foto</string>
     <string name="label_title">RÓTULO</string>
     <string name="label_text">Inserir o texto do rótulo</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
@@ -297,18 +297,18 @@
     <string name="popup_erase_line">Apagar linhas</string>
     <string name="popup_erase_area">Apagar áreas</string>
 
-    <!-- TODO string name="popup_select_all">Select all</string -->
-    <!-- TODO string name="popup_select_point">Select points</string -->
-    <!-- TODO string name="popup_select_line">Select lines</string -->
-    <!-- TODO string name="popup_select_area">Select areas</string -->
-    <!-- TODO string name="popup_select_shot">Select shots</string -->
-    <!-- TODO string name="popup_select_station">Select stations</string -->
+    <string name="popup_select_all">Selecione tudo</string>
+    <string name="popup_select_point">Selecione pontos</string>
+    <string name="popup_select_line">Selecione linhas</string>
+    <string name="popup_select_area">Selecione áreas</string>
+    <string name="popup_select_shot">Selecione medidas</string>
+    <string name="popup_select_station">Selecione bases</string>
 
-    <!-- TODO string name="popup_cont_none">None</string -->
-    <!-- TODO string name="popup_cont_start">Start point</string -->
-    <!-- TODO string name="popup_cont_end">End point</string -->
-    <!-- TODO string name="popup_cont_both">Both points</string -->
-    <!-- TODO string name="popup_cont_continue">Continue</string -->
+    <string name="popup_cont_none">Nada</string>
+    <string name="popup_cont_start">Ponto inicial</string>
+    <string name="popup_cont_end">Ponto final</string>
+    <string name="popup_cont_both">Ambos pontos</string>
+    <string name="popup_cont_continue">Continuar</string>
 
     <string name="connected_none">Não conectado</string>
     <string name="connected_already">Já conectado</string>
@@ -356,7 +356,7 @@
     <!-- UNUSED string name="converted_tdr2th2">Arquivos binários dos croquis convertidos para th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Sobrescrever arquivos de croqui th2?</string -->
     <string name="section_area">Área do corte: %1$.1f</string>
-    <!-- TODO string name="scrap_outline">Sketch outline</string -->
+    <string name="scrap_outline">Contorno do croqui</string>
 
     <!-- UNUSED string name="sensor">sensor</string -->
     <string name="sensor_gravity">gravidade</string>
@@ -610,7 +610,7 @@
     <string name="help_help">Esta ajuda</string>
     <!-- UNUSED string name="help_manual">Manual do usuário</string -->
     <string name="help_measure">Medir distâncias</string>
-    <!-- TODO string name="help_measure_type">Measuring mode: fixed point or polyline</string -->
+    <string name="help_measure_type">Modo de medição: ponto fixo ou linha com diversos pontos</string>
     
     <string name="help_calib_check">Medidas de verificação de calibração</string>
     <string name="help_close">Fechar janela</string>
@@ -753,7 +753,7 @@
     <string name="title_projection">Azimute do corte projetado %1$d</string>
     <string name="title_refs">Mostrar</string>
     <string name="title_scraps">Croquis da topo</string>
-    <!-- TODO string name="title_scraps_outline">Sketch outline</string -->
+    <string name="title_scraps_outline">Contorno do croqui</string>
     <string name="title_select">Selecionar</string>
     <string name="title_shift">Deslocar</string>
     <string name="title_shot_delete">Apagar medida?</string>
