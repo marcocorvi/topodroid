@@ -2,7 +2,7 @@ symbol
 name trench-tomb
 name-it fossa_tombale
 name-pt fossa_coletiva
-th_name u:trench-tomb
+th_name u:trench_tomb
 color 0xffff33
 csurvey 0 0 0
 path

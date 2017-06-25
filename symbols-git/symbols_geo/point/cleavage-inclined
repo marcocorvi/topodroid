@@ -1,7 +1,7 @@
 symbol point
 name cleavage-inclined
 name-pt clivagem_oblíqua
-th_name u:cleavage-inclined
+th_name u:cleavage_inclined
 color 0xcccc99
 csurvey 0 0 0 
 orientation yes

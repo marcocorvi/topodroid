@@ -2,7 +2,7 @@ symbol point
 name strata-overturned
 name-it strati_rovesciati
 name-pt estrato_invertido
-th_name u:strata-overturned
+th_name u:strata_overturned
 color 0xcccccc
 csurvey 0 0 0
 orientation yes

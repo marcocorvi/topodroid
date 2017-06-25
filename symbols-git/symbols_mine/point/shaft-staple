@@ -2,7 +2,7 @@ symbol point
 name shaft-staple
 name-de Schacht
 name-pt poço_lacrado
-th_name u:shaft-staple
+th_name u:shaft_staple
 color 0xcccccc
 csurvey 0 0 0
 path
