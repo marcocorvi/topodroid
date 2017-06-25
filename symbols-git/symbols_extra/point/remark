@@ -1,7 +1,7 @@
 ﻿symbol point
 name remark
 name-pt observação
-th_name remark
+th_name u:remark
 orientation no
 has_text yes
 color 0xcccccc

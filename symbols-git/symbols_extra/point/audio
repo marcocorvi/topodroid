@@ -1,7 +1,7 @@
 symbol audio
 name audio
 name-pt áudio
-th_name audio
+th_name u:audio
 orientation no
 has_text no
 color 0xffffff

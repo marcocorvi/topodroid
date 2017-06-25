@@ -1,7 +1,7 @@
 symbol point
 name photo
 name-pt foto
-th_name photo
+th_name u:photo
 orientation no
 has_text yes
 color 0xffffff
