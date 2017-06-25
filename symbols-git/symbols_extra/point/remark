@@ -1,5 +1,6 @@
 ﻿symbol point
 name remark
+name-pt observação
 th_name remark
 orientation no
 has_text yes

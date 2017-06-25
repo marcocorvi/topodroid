@@ -1,5 +1,6 @@
 symbol point
 name photo
+name-pt foto
 th_name photo
 orientation no
 has_text yes
