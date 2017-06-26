@@ -2,7 +2,7 @@
 name remark
 name-pt observação
 th_name u:remark
-orientation yes
+orientation no
 has_text yes
 color 0xcccccc
 csurvey 6 6 80
