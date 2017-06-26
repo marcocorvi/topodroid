@@ -1,7 +1,8 @@
 ﻿symbol point
 name remark
-th_name remark
-orientation no
+name-pt observação
+th_name u:remark
+orientation yes
 has_text yes
 color 0xcccccc
 csurvey 6 6 80

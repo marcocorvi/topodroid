@@ -2,7 +2,7 @@ symbol point
 name bar-hole
 name-it buca_pontaia
 name-pt buraco_viga
-th_name u:bar-hole
+th_name u:bar_hole
 color 0x66ffcc
 csurvey 0 0 0
 path

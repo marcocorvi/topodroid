@@ -1,7 +1,7 @@
 symbol point
 name cleavage-vertical
 name-pt clivagem_vertical
-th_name u:cleavage-vertical
+th_name u:cleavage_vertical
 color 0xcccc99
 csurvey 0 0 0 
 orientation yes

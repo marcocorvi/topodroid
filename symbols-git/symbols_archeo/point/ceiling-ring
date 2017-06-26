@@ -2,7 +2,7 @@ symbol point
 name ceiling-ring
 name-it anello_a_soffitto
 name_pt anel_teto
-th_name u:ceiling-ring
+th_name u:ceiling_ring
 color 0xcccccc
 csurvey 0 0 0
 path

@@ -2,7 +2,7 @@ symbol point
 name joint-vertical
 name-it giunto_verticale
 name-pt diaclase_vertical
-th_name u:joint-vertical
+th_name u:joint_vertical
 color 0xcccc99
 csurvey 0 0 0
 orientation yes

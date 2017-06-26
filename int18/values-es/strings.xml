@@ -44,7 +44,7 @@
     <!-- UNUSED string name="missing_warning">Faltan los siguientes símbolos en el dibujo.\n</string -->
     <string name="failed_snap_to_line">No hay línea cercana al borde</string>
     <string name="failed_snap_to_point">No hay punto cercano al borde</string>
-    <!-- TODO string name="failed_snap_to_splays">No close splay to snap the line to</string -->
+    <string name="failed_snap_to_splays">No se puede cerrar la línea</string>
 
     <string name="calibration_title">Calibración de instrumentos</string>
     <string name="calibration_length">Cinta</string>
@@ -151,8 +151,8 @@
     <!-- UNUSED string name="pairing_failed">Falló en el emparejamiento</string -->
 
     <string name="illegal_data_value">Valores de datos no válidos</string>
-    <!-- TODO string name="photo_title">PHOTO</string -->
-    <!-- TODO string name="photo_text">Enter photo comment</string -->
+    <string name="photo_title">FOTO</string>
+    <string name="photo_text">Introducir comentario de foto</string>
     <string name="label_title">Texto</string>
     <string name="label_text">Introducir texto en la etiqueta</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
@@ -218,7 +218,7 @@
 
     <string name="no_bt">No hay Bluetooth</string>
     <string name="no_calib">No hay calibración</string>
-    <!-- TODO string name="no_calib_check">No calibration-check shot</string -->
+    <string name="no_calib_check">Ninguna toma de calibración</string>
     <string name="no_calibration">Calibración no seleccionada</string>
     <string name="no_capture_app">No hay aplicación para capturar imagen</string>
     <string name="no_cave3d">Cave3D No instalado</string>
@@ -250,7 +250,7 @@
     <string name="menu_attach">Conectar</string>
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
-    <!-- TODO string name="menu_calib_check">CALIBR. CHECK</string -->
+    <string name="menu_calib_check">Verificar calibración</string>
     <string name="menu_close">Cerrar</string>
     <string name="menu_delete">Eliminar</string>
     <string name="menu_detach">Desconectar</string>
@@ -284,7 +284,7 @@
 
     <string name="popup_join_pt">Unir al punto más cercano</string>
     <string name="popup_snap_ln">Ajustar a la línea más cercana</string>
-    <!-- TODO string name="popup_snap_to_splays">Snap to nearby splays</string -->
+    <string name="popup_snap_to_splays">Ajustar a anchuras cercanas</string>
     <string name="popup_split_pt">Añadir punto</string>
     <string name="popup_split_ln">Separar línea</string>
     <string name="popup_sharp_pt">Segmento recto</string>
@@ -296,18 +296,17 @@
     <string name="popup_erase_line">Borrar líneas</string>
     <string name="popup_erase_area">Borrar áreas</string>
 
-    <!-- TODO string name="popup_select_all">Select all</string -->
-    <!-- TODO string name="popup_select_point">Select points</string -->
-    <!-- TODO string name="popup_select_line">Select lines</string -->
-    <!-- TODO string name="popup_select_area">Select areas</string -->
-    <!-- TODO string name="popup_select_shot">Select shots</string -->
-    <!-- TODO string name="popup_select_station">Select stations</string -->
-
-    <!-- TODO string name="popup_cont_none">None</string -->
-    <!-- TODO string name="popup_cont_start">Start point</string -->
-    <!-- TODO string name="popup_cont_end">End point</string -->
-    <!-- TODO string name="popup_cont_both">Both points</string -->
-    <!-- TODO string name="popup_cont_continue">Continue</string -->
+    <string name="popup_select_all">Seleccionar todo</string>
+    <string name="popup_select_point">Seleccionar puntos</string>
+    <string name="popup_select_line">Seleccionar líneas</string>
+    <string name="popup_select_area">Seleccionar áreas</string>
+    <string name="popup_select_shot">Seleccionar tomas</string>
+    <string name="popup_select_station">Seleccionar estación</string>
+    <string name="popup_cont_none">Nada</string>
+    <string name="popup_cont_start">Inicio de punto</string>
+    <string name="popup_cont_end">final de punto</string>
+    <string name="popup_cont_both">Varios puntos</string>
+    <string name="popup_cont_continue">Continuar</string>
 
     <string name="connected_none">No conctado</string>
     <string name="connected_already">Ya esta conectado</string>
@@ -318,7 +317,7 @@
     <!-- UNUSED string name="not_implemented">No implantado</string -->
     <string name="null_bitmap">Mapa bits nulo</string>
     <string name="photo">Foto</string>
-    <!-- TODO string name="photo_camera">Camera App</string -->
+    <string name="photo_camera">Aplicación de cámara</string>
     <string name="photo_comment_prompt">Intro. comentario de foto</string>
     <string name="photo_azimuth_clino">Azimut: %1$.1f Clino %2$.1f</string>
     <!-- UNUSED string name="photo_name">Estación/nombre</string -->
@@ -356,7 +355,7 @@
     <!-- UNUSED string name="converted_tdr2th2">Archivos binarios de dibujo convertidos a Th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">¿Sobrescribir archivos de dibujo Th2?</string -->
     <string name="section_area">Sección de área: %1$.1f</string>
-    <!-- TODO string name="scrap_outline">Sketch outline</string -->
+    <string name="scrap_outline">Dibujo de topografía</string>
 
     <!-- UNUSED string name="sensor">Sensor</string -->
     <string name="sensor_gravity">Gravedad</string>
@@ -375,8 +374,8 @@
     <!-- UNUSED string name="shot_clino">Clino</string -->
     <!-- UNUSED string name="shot_compass">Brújula</string -->
     <string name="shot_delete">¿Quiere eliminar la toma?</string>
-    <!-- TODO string name="shots_delete">Delete shots ?</string -->
-    <!-- TODO string name="shot_check">Mark shot as check-shot?</string -->
+    <string name="shots_delete">¿Eliminar tomas?</string>
+    <string name="shot_check">¿Marcar como una toma?</string>
     <string name="shot_from">Toma desde</string>
     <string name="shot_info">Introducir datos Toma</string>
     <!-- UNUSED string name="shot_length">Longitud de la toma</string -->
@@ -416,10 +415,10 @@
     <string name="toggle_failed">Error al alternar DistoX</string>
     <string name="toggle_ok">Alternar a modo de calibración DistoX</string>
     <string name="undelete_text">Pulse sobre la toma a recuperar</string>
-    <!-- TODO string name="undelete_shot">Shots</string -->
-    <!-- TODO string name="undelete_overshoot">Overshoots</string -->
-    <!-- TODO string name="undelete_check">Checks</string -->
-    <!-- TODO string name="undelete_plot">Sketches</string -->
+    <string name="undelete_shot">Toma</string>
+    <string name="undelete_overshoot">Exceso</string>
+    <string name="undelete_check">Verificar</string>
+    <string name="undelete_plot">Dibujos</string>
     <string name="delete_whole_leg">Eliminar toda la visual</string>
     <string name="visible_border">Borde visible</string>
     <!-- UNUSED string name="vthreshold">Precisión</string -->
@@ -443,7 +442,7 @@
     <string name="stat_duplicate">Mediciones duplicadas %1$d %2$.1f %3$s</string>
     <string name="stat_leg">Visual %1$d %2$.1f %3$s</string>
     <string name="stat_length">Desarrollo %1$.1f %2$s</string>
-    <!-- TODO string name="stat_projlen">Plan length %1$.1f %2$s</string -->
+    <string name="stat_projlen">Longitud de la planta %1$.1f %2$s</string>
     <string name="stat_loop">Bucle %1$d</string>
     <string name="stat_origin">Estación cero: %1$s</string>
     <string name="stat_azimuth">Perfil proyección Brújula: %1$.1f</string>
@@ -528,7 +527,7 @@
     <string name="mode_grid">Cuadrículas</string>
     <string name="mode_fixed">Desplazar objetos</string>
     <string name="mode_outline">Solo poligonal</string>
-    <!-- TODO string name="mode_scale_ref">Scale reference bar</string -->
+    <string name="mode_scale_ref">Barra de referencia de escala</string>
 
     <!-- UNUSED string name="remote_title">Control remoto del dispositivo</string -->
     <string name="remote_on">Láser ON</string>
@@ -539,7 +538,7 @@
 
     <string name="popup_do_splay">Tomas laterales</string>
     <string name="popup_do_leg">Tomas principales</string>
-    <!-- TODO string name="popup_do_gm_data">Calib. shot</string -->
+    <string name="popup_do_gm_data">Toma calib.</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Importar</string>
@@ -551,7 +550,7 @@
     <string name="symbol_mine">Minería</string>
     <string name="symbol_paleo">Paleontología</string>
     <string name="symbol_speleo">Espeleo</string>
-    <!-- TODO string name="symbol_extra">Speleo (2)</string -->
+    <string name="symbol_extra">Espeleo (2)</string>
 
     <string name="symbol_reload">Herramientas dibujo</string>
 
@@ -606,14 +605,14 @@
     <string name="help_help">Ayuda</string>
     <!-- UNUSED string name="help_manual">Manual online</string -->
     <string name="help_measure">Medir distancias</string>
-    <!-- TODO string name="help_measure_type">Measuring mode: fixed point or polyline</string -->
+    <string name="help_measure_type">Modo de medición: punto fijo o polilínea</string>
     
     <string name="no_shot_between_stations">No hay tomas entre estaciones</string>
     <string name="few_line_points">La línea tiene muy pocos puntos</string>
     <string name="line_delete">Eliminar línea</string>
     <string name="flip_shots">Tomas contínuas</string>
 
-    <!-- TODO string name="help_calib_check">Calibration-check shots</string -->
+    <string name="help_calib_check">Calibración: compruebe las tomas</string>
     <string name="help_close">Cerrar ventana</string>
     <string name="help_coeff">Mostrar coeficientes de calibración</string>
     <string name="help_continue">Continuar el dibujo de una línea</string>
@@ -724,7 +723,7 @@
     <string name="title_azimut">Referencia declinación Magnética</string>
     <string name="title_audio">Comentario de audio</string>
     <string name="title_calib">Calibración</string>
-    <!-- TODO string name="title_calib_check">Calibration-check shots</string -->
+    <string name="title_calib_check">Calibración: compruebe las tomas</string>
     <string name="title_coverage">Distibución datos Calibración</string>
     <string name="title_coeff">Coeficiente Calibración</string>
     <string name="title_contour">Contorno</string>
@@ -756,7 +755,7 @@
     <string name="title_projection">Perfil de proyeccción de brújula %1$d</string>
     <string name="title_refs">Referencias de dibujo</string>
     <string name="title_scraps">Dibujo</string>
-    <!-- TODO string name="title_scraps_outline">Sketch outline</string -->
+    <string name="title_scraps_outline">Esquema del dibujo</string>
     <string name="title_select">Seleccionar</string>
     <string name="title_shift">Cambio</string>
     <string name="title_shot_delete">¿Quiere eliminar toma?</string>
@@ -914,10 +913,10 @@
   <string name="pref_leg_message">Precisión entre las mediciones de una visual</string>
   <string name="pref_max_shot_title">Longitud de disparo máxima</string>
   <string name="pref_max_shot_summary">Longitud máxima de disparo [m]</string>
-  <string name="pref_max_shot_message">as tomas sobre esta longitud se marcan como sobrepaso</string>
-  <!-- TODO string name="pref_min_leg_title">Minimum leg length</string -->
-  <!-- TODO string name="pref_min_leg_summary">Minimum length of legs [m]</string -->
-  <!-- TODO string name="pref_min_leg_message">Legs shorter than the minimum have orange background</string -->
+  <string name="pref_max_shot_message">Las tomas sobre esta longitud se marcan como sobrepaso</string>
+  <string name="pref_min_leg_title">Longitud mínima de la toma</string>
+  <string name="pref_min_leg_summary">Minima longitud de la toma [m]</string>
+  <string name="pref_min_leg_message">Las tomas más cortas que el mínimo, tienen fondo naranja</string>
   <string name="pref_backsight_title">Toma duplicada visual</string>
   <string name="pref_backsight_summary">Se duplican los datos en el diálogo de la toma manual</string>
   <string name="pref_prev_next_title">Añadir botón Ant./Sig.</string>
