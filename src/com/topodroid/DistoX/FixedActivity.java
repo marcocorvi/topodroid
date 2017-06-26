@@ -97,6 +97,9 @@ public class FixedActivity extends Activity
   HorizontalListView mListView;
   HorizontalButtonView mButtonView1;
 
+
+  private boolean hasGps = false;
+
   // ListView   mMenu;
   // Button     mImage;
   // // ArrayAdapter< String > mMenuAdapter;
@@ -120,6 +123,8 @@ public class FixedActivity extends Activity
     mApp = (TopoDroidApp)getApplication();
     mContext = this;
 
+    hasGps = FeatureChecker.checkLocation( mContext );
+
     // Bundle extras = getIntent().getExtras();
     // if ( extras != null ) {
     // }
@@ -129,10 +134,11 @@ public class FixedActivity extends Activity
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
     int size = mApp.setListViewHeight( mListView );
-    mNrButton1 = 3;
+    mNrButton1 = (hasGps)? 3 : 2;
     mButton1 = new Button[ mNrButton1 ];
+    int kz = (hasGps)? 0 : 1; // index of izons
     for ( int k=0; k<mNrButton1; ++k ) {
-      mButton1[k] = MyButton.getButton( this, this, izons[k] );
+      mButton1[k] = MyButton.getButton( this, this, izons[kz++] );
     }
     mButtonView1 = new HorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );
@@ -203,7 +209,7 @@ public class FixedActivity extends Activity
     Button b = (Button) v;
 
     int k = 0;
-    if ( b == mButton1[k++] ) { // GPS
+    if ( hasGps && b == mButton1[k++] ) { // GPS
       final LocationManager lm = (LocationManager)getSystemService( Context.LOCATION_SERVICE );
       if ( ! lm.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
         TopoDroidAlertDialog.makeAlert( this, getResources(), getResources().getString( R.string.ask_gps_service ),

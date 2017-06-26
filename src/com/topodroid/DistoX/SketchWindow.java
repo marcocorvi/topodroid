@@ -17,7 +17,6 @@ import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.content.pm.PackageManager;
 import android.content.pm.ActivityInfo;
 
 import android.graphics.Bitmap;
@@ -772,7 +771,7 @@ public class SketchWindow extends ItemDrawer
     // mSketchSurface.setOnLongClickListener(this);
     // mSketchSurface.setBuiltInZoomControls(true);
 
-    BrushManager.makePaths( getResources() );
+    BrushManager.makePaths( mApp, getResources() );
 
     mData        = mApp.mData; // new DataHelper( this ); 
     Bundle extras = getIntent().getExtras();
@@ -2027,7 +2026,7 @@ public class SketchWindow extends ItemDrawer
         Toast.makeText( mActivity, R.string.sketch3d_loading, Toast.LENGTH_SHORT ).show();
       }
     } else if ( p++ == pos ) { // PALETTE 
-      BrushManager.makePaths( getResources() );
+      BrushManager.makePaths( mApp, getResources() );
       (new SymbolEnableDialog( mActivity, mApp )).show();
     } else if ( p++ == pos ) { // ZOOM ONE
       mInfo.resetDirection(); // azi = 0, clino = 0, and compute triad versors

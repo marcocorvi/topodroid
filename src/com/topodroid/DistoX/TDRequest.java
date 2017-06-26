@@ -13,11 +13,12 @@ package com.topodroid.DistoX;
 
 class TDRequest
 {
-  static final int SENSOR_ACTIVITY   = 1;
+  static final int SENSOR_ACTIVITY_SHOTWINDOW   = 1;
   static final int REQUEST_ENABLE_BT = 2;
-  static final int INFO_ACTIVITY     = 3;
+  static final int INFO_ACTIVITY_SHOTWINDOW     = 3;
   // private static final int EXTERNAL_ACTIVITY = 4;
-  static final int REQUEST_DEVICE    = 5;
-  static final int QCAM_COMPASS      = 6;
-  static final int CAPTURE_IMAGE_ACTIVITY = 100;
+  static final int REQUEST_DEVICE    = 5; 
+  // static final int QCAM_COMPASS_DRAWWINDOW  = 6;
+  static final int CAPTURE_IMAGE_SHOTWINDOW = 100;
+  static final int CAPTURE_IMAGE_DRAWWINDOW = 101;
 }

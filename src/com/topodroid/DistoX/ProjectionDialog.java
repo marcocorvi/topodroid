@@ -14,7 +14,6 @@ package com.topodroid.DistoX;
 import android.app.Dialog;
 import android.content.Context;
 // import android.content.res.Resources;
-// import android.content.pm.PackageManager;
 
 import android.graphics.Paint;
 import android.graphics.Paint.FontMetrics;
@@ -283,7 +282,7 @@ public class ProjectionDialog extends MyDialog
     // int width = dm widthPixels;
     int width = mContext.getResources().getDisplayMetrics().widthPixels;
 
-    // mIsNotMultitouch = ! getPackageManager().hasSystemFeature( PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH );
+    // mIsNotMultitouch = ! FeatureChecker.checkMultitouch( this );
 
     setContentView( R.layout.projection_dialog );
     mSeekBar   = (SeekBar) findViewById(R.id.seekbar );

@@ -415,6 +415,7 @@ public class ShotDialog extends MyDialog
 
     mRBdup.setOnClickListener( this );
     mRBsurf.setOnClickListener( this );
+    mRBcmtd.setOnClickListener( this );
 
     mButtonReverse.setOnClickListener( this );
 
@@ -576,49 +577,43 @@ public class ShotDialog extends MyDialog
 
     } else if ( b == mCBlegPrev ) {
       // Log.v("DistoX", "CB leg clicked ");
-      mCBlegPrev.toggleState();
-      if ( mCBlegPrev.isChecked() ) {
+      if ( mCBlegPrev.toggleState() ) {
         mCBallSplay.setState( false );
         mCBxSplay.setState( false );
         mCBlegNext.setState( false );
       }
     } else if ( b == mCBallSplay ) {
       // Log.v("DistoX", "CB all_splay clicked ");
-      mCBallSplay.toggleState();
-      if ( mCBallSplay.isChecked() ) {
+      if ( mCBallSplay.toggleState() ) {
         mCBxSplay.setState( false );
         mCBlegPrev.setState( false );
         mCBlegNext.setState( false );
       }
     } else if ( b == mCBxSplay ) {
-      mCBxSplay.toggleState();
-      if ( mCBxSplay.isChecked() ) {
+      if ( mCBxSplay.toggleState() ) {
         mCBallSplay.setState( false );
         mCBlegPrev.setState( false );
         mCBlegNext.setState( false );
       }
     } else if ( b == mCBlegNext ) {
-      mCBlegNext.toggleState();
-      if ( mCBlegNext.isChecked() ) {
+      if ( mCBlegNext.toggleState() ) {
         mCBlegPrev.setState( false );
         mCBallSplay.setState( false );
         mCBxSplay.setState( false );
       }
+
     } else if ( b == mRBdup ) {
-      mRBdup.toggleState();
-      if ( mRBdup.isChecked() ) {
+      if ( mRBdup.toggleState() ) {
         mRBsurf.setState( false );
         mRBcmtd.setState( false );
       }
     } else if ( b == mRBsurf ) {
-      mRBsurf.toggleState();
-      if ( mRBsurf.isChecked() ) {
+      if ( mRBsurf.toggleState() ) {
         mRBdup.setState( false );
         mRBcmtd.setState( false );
       }
     } else if ( b == mRBcmtd ) {
-      mRBcmtd.toggleState();
-      if ( mRBcmtd.isChecked() ) {
+      if ( mRBcmtd.toggleState() ) {
         mRBdup.setState( false );
         mRBsurf.setState( false );
       }

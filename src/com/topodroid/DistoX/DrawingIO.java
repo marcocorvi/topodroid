@@ -1190,5 +1190,99 @@ class DrawingIO
       }
     }
   }
+  
+  static public void exportCsxXSection( PrintWriter pw, String filename, String bind, String survey, String cave, String branch )
+  {
+    File file = new File( filename );
+    if ( ! file.exists() ) return;
+    int version = 0;
+    boolean in_scrap = false;
+    String name = "";
+    int type = 0;
+    String points = "";
+    String lines  = "";
+    String areas  = "";
+
+    // synchronized( TDPath.mTherionLock ) 
+    {
+      try {
+        FileInputStream fis = new FileInputStream( file );
+        DataInputStream dis = new DataInputStream( fis );
+        boolean todo = true;
+        while ( todo ) {
+          int what = dis.read();
+          switch ( what ) {
+            case 'V':
+              version = dis.readInt();
+              break;
+            case 'I': // plot info: bounding box
+              {
+                dis.readFloat();
+                dis.readFloat();
+                dis.readFloat();
+                dis.readFloat();
+                if ( dis.readInt() == 1 ) {
+                  dis.readFloat();
+                  dis.readFloat();
+                  dis.readFloat();
+                  dis.readFloat();
+                }
+                in_scrap = true;
+              }
+              break;
+            case 'S':
+              {
+                name = dis.readUTF();
+                type = dis.readInt();
+                if ( ! PlotInfo.isAnySection( type ) ) {
+                  dis.close();
+                  fis.close();
+                  return;
+                }
+                // project_dir = dis.readInt();
+                // read palettes
+                dis.readUTF();
+                dis.readUTF();
+                dis.readUTF();
+              }
+              break;
+            case 'P':
+              ( DrawingPointPath.loadDataStream( version, dis, 0, 0, null )).toCsurvey(pw, survey, cave, branch, bind );
+              break;
+            case 'T':
+              ( DrawingLabelPath.loadDataStream( version, dis, 0, 0 )).toCsurvey(pw, survey, cave, branch, bind );
+              break;
+            case 'L':
+              ( DrawingLinePath.loadDataStream( version, dis, 0, 0, null )).toCsurvey(pw, survey, cave, branch, bind );
+              break;
+            case 'A':
+              ( DrawingAreaPath.loadDataStream( version, dis, 0, 0, null )).toCsurvey(pw, survey, cave, branch, bind );
+              break;
+            case 'U':
+              DrawingStationPath.loadDataStream( version, dis );
+              break;
+            case 'X':
+              // NOTE need to check XSection ??? STATION_XSECTION
+              DrawingStationName.loadDataStream( version, dis );
+              break;
+            case 'F':
+            case 'E':
+              todo = false;
+              break;
+            default:
+              todo = false;
+              TDLog.Error( "ERROR bad input (2) " + (int)what );
+              break;
+          } 
+        }
+        dis.close();
+        fis.close();
+      } catch ( FileNotFoundException e ) {
+        // this is OK
+      } catch ( IOException e ) {
+        e.printStackTrace();
+      }
+    }
+  }
 
 }

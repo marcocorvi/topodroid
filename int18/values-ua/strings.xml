@@ -372,6 +372,7 @@
     <string name="sensor_type">тип</string>
     <string name="sensor_value">значення</string>
     <string name="sensor_comment">коментар</string>
+    <!-- TODO string name="insufficient_data">insufficient sensor data</string -->
 
     <!-- UNUSED string name="shot_clino">кут</string -->
     <!-- UNUSED string name="shot_compass">азимут</string -->

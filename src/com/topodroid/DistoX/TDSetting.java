@@ -744,7 +744,7 @@ class TDSetting
     mStationNames = (prefs.getString( key[k++], "alpha").equals("number"))? 1 : 0; // DISTOX_STATION_NAMES
 
     // setZoomControls( prefs.getBoolean( key[k++], false ) ); // DISTOX_ZOOM_CONTROLS
-    setZoomControls( prefs.getString( key[k++], "1"), app.isMultitouch() ); // DISTOX_ZOOM_CTRL
+    setZoomControls( prefs.getString( key[k++], "1"), FeatureChecker.checkMultitouch(app) ); // DISTOX_ZOOM_CTRL
     mSideDrag = prefs.getBoolean( key[k++], false );          // DISTOX_SIDE_DRAG
 
     mDxfScale    = tryFloat( prefs, key[k++], "1.0" );        // DISTOX_DXF_SCALE
@@ -978,7 +978,7 @@ class TDSetting
         f = Float.parseFloat( prefs.getString( k, "1.4" ) );
         if ( f > 0 && f != mUnit ) {
           mUnit = f;
-          BrushManager.reloadPointLibrary( app.getResources() );
+          BrushManager.reloadPointLibrary( app, app.getResources() );
         }
       } catch ( NumberFormatException e ) { }
     } else if ( k.equals( key[ nk++ ] ) ) {                          // DISTOX_PICKER_TYPE
@@ -1080,7 +1080,7 @@ class TDSetting
       mStationNames = (prefs.getString( k, "alpha").equals("number"))? 1 : 0; // DISTOX_STATION_NAMES
     } else if ( k.equals( key[ nk++ ] ) ) {
       // setZoomControls( prefs.getBoolean( k, false ) ); // DISTOX_ZOOM_CONTROLS
-      setZoomControls( prefs.getString( k, "1"), app.isMultitouch() ); // DISTOX_ZOOM_CTRL
+      setZoomControls( prefs.getString( k, "1"), FeatureChecker.checkMultitouch(app) ); // DISTOX_ZOOM_CTRL
     } else if ( k.equals( key[ nk++ ] ) ) {
       mSideDrag = prefs.getBoolean( k, false ); // DISTOX_SIDE_DRAG
     } else if ( k.equals( key[ nk++ ] ) ) {

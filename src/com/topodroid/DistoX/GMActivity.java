@@ -94,6 +94,8 @@ public class GMActivity extends Activity
   final static int BTN_TOGGLE   = 0;
   final static int BTN_BT       = 1;
   final static int BTN_DOWNLOAD = 2;
+  final static int BTN_GROUP    = 3;
+  final static int BTN_COMPUTE  = 4;
   final static int BTN_COVER    = 5;
   final static int BTN_READ     = 6;
   final static int BTN_WRITE    = 7;
@@ -823,7 +825,7 @@ public class GMActivity extends Activity
         mButton1[ BTN_DOWNLOAD ].setBackgroundDrawable( mBMdownload_on );
         enableButtons( false );
       }
-    } else if ( b == mButton1[2] ) { // GROUP
+    } else if ( b == mButton1[BTN_GROUP] ) { // GROUP
       if ( mApp.mCID >= 0 ) {
         List< CalibCBlock > list = mApp.mDData.selectAllGMs( mApp.mCID, 0 );
         if ( list.size() >= 16 ) {
@@ -844,7 +846,7 @@ public class GMActivity extends Activity
         resetTitle( );
         Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT ).show();
       }
-    } else if ( b == mButton1[3] ) { // COMPUTE
+    } else if ( b == mButton1[BTN_COMPUTE] ) { // COMPUTE
       if ( mApp.mCID >= 0 ) {
         setTitle( R.string.calib_compute_coeffs );
         setTitleColor( TDColor.COMPUTE );
@@ -888,7 +890,7 @@ public class GMActivity extends Activity
           resetTitle( );
         }
       // }
-    // } else if ( b == mButton1[7] ) { // disto
+    // } else if ( b == mButton1[BTN_DISTO] ) { // disto
     //   Intent deviceIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DeviceActivity.class );
     //   startActivity( deviceIntent );
     }

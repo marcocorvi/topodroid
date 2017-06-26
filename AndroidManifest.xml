@@ -2,17 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="304003"
-      android:versionName="3.4.0c"
+      android:versionCode="304004"
+      android:versionName="3.4.0d"
     >
     <uses-sdk
        android:minSdkVersion="8"
        android:targetSdkVersion="8"
     />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!-- uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" / -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <!-- uses-permission android:name="android.permission.DISABLE_KEYGUARD"/ -->
@@ -21,10 +22,16 @@
     <!-- uses-permission android:name="android.permission.DEVICE_POWER"/ -->
     <!-- uses-permission android:name="android.permission.WAKE_LOCK"/ -->
 
-    <uses-permission android:name="android.permission.CAMERA" />
+<!--
+    <uses-feature android:name="android.hardware.bluetooth" />
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
-
+    <uses-feature android:name="android.hardware.location" />
+    <uses-feature android:name="android.hardware.location.gps" />
+    <uses-feature android:name="android.hardware.microphone" />
+    <uses-feature android:name="android.hardware.touchscreen" />
+    <uses-feature android:name="android.hardware.screen.portrait" />
+-->
 
     <application
           android:name=".TopoDroidApp"

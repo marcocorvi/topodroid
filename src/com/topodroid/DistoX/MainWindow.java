@@ -224,7 +224,7 @@ public class MainWindow extends Activity
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // IMPORT
         (new ImportDialog( mActivity, this, mApp )).show();
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // PALETTE
-        BrushManager.makePaths( getResources() );
+        BrushManager.makePaths( mApp, getResources() );
         (new SymbolEnableDialog( mActivity, mApp )).show();
 
       // FIXME THMANAGER
@@ -508,7 +508,7 @@ public class MainWindow extends Activity
       public void run() {
         mApp.startupStep2();
         Resources res = getResources();
-        BrushManager.reloadPointLibrary( res ); // reload symbols
+        BrushManager.reloadPointLibrary( mApp, res ); // reload symbols
         BrushManager.reloadLineLibrary( res );
         BrushManager.reloadAreaLibrary( res );
         BrushManager.doMakePaths( );

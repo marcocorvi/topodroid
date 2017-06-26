@@ -20,7 +20,9 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 
-import android.util.Log;
+import android.widget.Toast;
+
+// import android.util.Log;
 
 public class TimerTask extends AsyncTask<String, Integer, Long >
                        implements SensorEventListener
@@ -72,7 +74,7 @@ public class TimerTask extends AsyncTask<String, Integer, Long >
       }
     }
     if ( mRun ) {
-      int cnt = 0;
+      int cnt = 3*mCount;
       mValAcc[0] = 0; mValAcc[1] = 0; mValAcc[2] = 0;
       mValMag[0] = 0; mValMag[1] = 0; mValMag[2] = 0;
       SensorManager sensor_manager = (SensorManager)mContext.getSystemService( Context.SENSOR_SERVICE );
@@ -81,10 +83,10 @@ public class TimerTask extends AsyncTask<String, Integer, Long >
       if ( mAcc != null && mMag != null ) {
         sensor_manager.registerListener( this, mAcc, SensorManager.SENSOR_DELAY_NORMAL );
         sensor_manager.registerListener( this, mMag, SensorManager.SENSOR_DELAY_NORMAL );
-        while ( cnt < 100 && ( mCntAcc < mCount || mCntMag < mWait ) ) {
+        while ( cnt > 0 && ( mCntAcc < mCount || mCntMag < mCount ) ) {
           toneG.startTone( ToneGenerator.TONE_PROP_BEEP, duration ); 
           try{
-            ++ cnt;
+            -- cnt;
             Thread.sleep( 100 );
           } catch ( InterruptedException e ) {
           }
@@ -103,7 +105,7 @@ public class TimerTask extends AsyncTask<String, Integer, Long >
   @Override
   protected void onPostExecute(Long result) 
   {
-    // Log.v("DistoX", "Timer Task on post exec");
+    // Log.v("DistoX", "Timer Task on post exec. Acc " + mCntAcc + " Mag " + mCntMag );
     if ( mCntAcc > 0 && mCntMag > 0 && mRun ) {
       mValAcc[0] /= mCntAcc;
       mValAcc[1] /= mCntAcc;
@@ -112,6 +114,8 @@ public class TimerTask extends AsyncTask<String, Integer, Long >
       mValMag[1] /= mCntMag;
       mValMag[2] /= mCntMag;
       computeBearingAndClino();
+    } else {
+      Toast.makeText(mContext, R.string.insufficient_data, Toast.LENGTH_SHORT ).show();
     }
   }
 

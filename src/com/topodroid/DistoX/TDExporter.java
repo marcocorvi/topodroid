@@ -28,6 +28,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FileOutputStream;
 import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.BufferedInputStream;
 import java.io.PrintWriter;
 import java.io.IOException;
 
@@ -41,6 +43,7 @@ import java.util.Locale;
 import java.util.HashMap;
 
 import android.util.Log;
+import android.util.Base64;
 
 class TDExporter
 {
@@ -50,6 +53,29 @@ class TDExporter
   static String   therion_flags_not_duplicate = "   flags not duplicate\n";
   static String   therion_flags_surface       = "   flags surface\n";
   static String   therion_flags_not_surface   = "   flags not surface\n";
+
+
+  static byte[] readFileBytes( File file )
+  {
+    int len = (int)file.length();
+    if ( len > 0 ) {
+      byte[] buf = new byte[ len ];
+      int read = 0;
+      try {
+        FileInputStream fis = new FileInputStream( file );
+        BufferedInputStream bis = new BufferedInputStream( fis );
+        while ( read < len ) {
+          read += bis.read( buf, read, len-read );
+        }
+        if ( bis != null ) bis.close();
+        if ( fis != null ) fis.close();
+      } catch ( IOException e ) {
+        // TODO
+      }
+      if ( read == len ) return buf;
+    }
+    return null;
+  }
 
   // =======================================================================
   // CSURVEY EXPORT cSurvey
@@ -93,9 +119,10 @@ class TDExporter
   }
 
   // segments have only the attribute "cave", no attribute "branch"
-  static private void writeCsxSegment( PrintWriter pw, String cave, String f, String t )
+  static private void writeCsxSegment( PrintWriter pw, long id, String cave, String f, String t )
   {
-    pw.format("<segment id=\"\" cave=\"%s\" from=\"%s\" to=\"%s\"", cave, f, t );
+    // Log.v("DistoX", "segment " + id + " cave " + cave + " " + f + " - " + t ); 
+    pw.format("<segment id=\"%d\" cave=\"%s\" from=\"%s\" to=\"%s\"", (int)id, cave, f, t );
   }
 
   static private void writeCsxTSplaySegment( PrintWriter pw, String cave, String t, int cnt, boolean xsplay )
@@ -110,12 +137,46 @@ class TDExporter
     if ( xsplay ) pw.format(" cut=\"1\"");
   }
 
+  static private void writeCsxShotAttachments( PrintWriter pw, DataHelper data, String survey, long sid, DBlock blk )
+  {
+    long bid = blk.mId;
+    AudioInfo audio = data.getAudio( sid, bid );
+    List< PhotoInfo > photos = data.selectPhotoAtShot( sid, bid );
+    if ( audio == null && photos.size() == 0 ) return;
+    pw.format("      <attachments>\n");
+    if ( audio != null ) {
+      Log.v("DistoX", "audio " + audio.id + " " + audio.shotid + " blk " + bid );
+      File audiofile = new File( TDPath.getSurveyAudioFile( survey, Long.toString(bid) ) );
+      if ( audiofile.exists() ) {
+        byte[] buf = readFileBytes( audiofile );
+        if ( buf != null ) {
+          pw.format(
+            "        <attachment data=\"%s\" dataformat=\"0\" name=\"\" note=\"\" type=\"audio/wav\" />\n",
+            Base64.encodeToString( buf, Base64.NO_WRAP ) );
+        }
+      }
+    }
+    String photodir = TDPath.getSurveyPhotoDir( survey );
+    for ( PhotoInfo photo : photos ) {
+      File photofile = new File( TDPath.getSurveyJpgFile( survey, Long.toString(photo.id) ) );
+      if ( photofile.exists() ) {
+        byte[] buf = readFileBytes( photofile );
+        if ( buf != null ) {
+          pw.format(
+            "        <attachment data=\"%s\" dataformat=\"0\" name=\"\" note=\"%s\" type=\"image/jpg\" />\n",
+            Base64.encodeToString( buf, Base64.NO_WRAP ), photo.mComment );
+        }
+      }
+    }
+    pw.format("      </attachments>\n");
+  }
 
   static String exportSurveyAsCsx( long sid, DataHelper data, SurveyInfo info, DrawingWindow sketch,
                                    String origin, String filename )
   {
     // Log.v("DistoX", "export as csurvey: " + filename );
     String cave = info.name.toUpperCase();
+    String survey = info.name;
 
     // String prefix = "";
     String branch = "";
@@ -136,7 +197,7 @@ class TDExporter
     List<DBlock> clist = data.selectAllShots( sid, TopoDroidApp.STATUS_CHECK );
 
     List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
-    List< PlotInfo > plots  = data.selectAllPlots( sid, TopoDroidApp.STATUS_NORMAL );
+    // List< PlotInfo > plots  = data.selectAllPlots( sid, TopoDroidApp.STATUS_NORMAL );
     // FIXME TODO_CSURVEY
     // List< CurrentStation > stations = data.getStations( sid );
 
@@ -156,7 +217,7 @@ class TDExporter
       PrintWriter pw = new PrintWriter( fw );
       String date = TopoDroidUtil.getDateString( "yyyy-MM-dd" );
 
-      pw.format("<csurvey version=\"1.05\" id=\"\">\n");
+      pw.format("<csurvey version=\"1.07\" id=\"\">\n");
       pw.format("<!-- %s created by TopoDroid v %s -->\n", date, TopoDroidApp.VERSION );
 
 // ++++++++++++++++ PROPERTIES
@@ -209,17 +270,19 @@ class TDExporter
       pw.format("  <segments>\n");
 
       for ( DBlock blk : clist ) { // calib-check shots
-        writeCsxSegment( pw, cave, blk.mFrom, blk.mTo );
+        writeCsxSegment( pw, blk.mId, cave, blk.mFrom, blk.mTo );
         pw.format(" exclude=\"1\"");
         pw.format(" calibration=\"1\""); 
         pw.format(Locale.US, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"",
-                  blk.mLength, blk.mBearing, blk.mClino);
+                             blk.mLength, blk.mBearing, blk.mClino);
         pw.format(Locale.US, " g=\"%.1f\" m=\"%.1f\" dip=\"%.1f\"", blk.mAcceleration, blk.mMagnetic, blk.mDip );
         // pw.format(" l=\"0.0\" r=\"0.0\" u=\"0.0\" d=\"0.0\"");
         if ( blk.mComment != null && blk.mComment.length() > 0 ) {
           pw.format(" note=\"%s\"", blk.mComment.replaceAll("\"", "") );
         }
-        pw.format(" />\n");
+        pw.format(" >\n");
+        writeCsxShotAttachments( pw, data, survey, sid, blk );
+        pw.format("    </segment>\n");
       }
 
       // optional attrs of "segment": id cave branch session
@@ -228,7 +291,6 @@ class TDExporter
       long extend = 0;      // current extend
       boolean dup = false;  // duplicate
       boolean sur = false;  // surface
-      boolean cmt = false;  // commented
       // boolean bck = false;  // backshot
       String com = null;    // comment
       String f="", t="";          // from to stations
@@ -248,24 +310,26 @@ class TDExporter
             }
           } else { // only TO station
             if ( leg.mCnt > 0 && ref_item != null ) {
-              writeCsxSegment( pw, cave, f, t ); // branch prefix
+              writeCsxSegment( pw, ref_item.mId, cave, f, t ); // branch prefix
 
               if ( extend == -1 ) pw.format(" direction=\"1\"");
-              if ( dup || sur || cmt /* || bck */ ) {
+              if ( dup || sur /* || bck */ ) {
                 pw.format(" exclude=\"1\"");
                 if ( dup ) { pw.format(" duplicate=\"1\""); dup = false; }
                 if ( sur ) { pw.format(" surface=\"1\"");   sur = false; }
-                if ( cmt ) { pw.format(" commented=\"1\"");   cmt = false; }
 		// if ( bck ) { pw.format(" backshot=\"1\"");   bck = false; }
               }
               // pw.format(" planshowsplayborder=\"1\" profileshowsplayborder=\"1\" ");
+              if ( ref_item.isCommented() ) pw.format(" commented=\"1\"");
               writeCsxLeg( pw, leg, ref_item );
               pw.format(" l=\"0.0\" r=\"0.0\" u=\"0.0\" d=\"0.0\"");
               if ( com != null && com.length() > 0 ) {
                 pw.format(" note=\"%s\"", com.replaceAll("\"", "") );
                 com = null;
               }
-              pw.format(" />\n");
+              pw.format(" >\n");
+              writeCsxShotAttachments( pw, data, survey, sid, ref_item );
+              pw.format("    </segment>\n");
               ref_item = null; 
             }
 
@@ -273,37 +337,42 @@ class TDExporter
             writeCsxTSplaySegment( pw, cave, to, cntSplay, item.isXSplay() ); // branch prefix
             ++ cntSplay;
             pw.format(" splay=\"1\" exclude=\"1\"");
+            if ( item.isCommented() ) pw.format(" commented=\"1\"");
             if ( extend == -1 ) pw.format(" direction=\"1\"");
             pw.format(Locale.US, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"",
-               item.mLength, item.mBearing, item.mClino );
+                                 item.mLength, item.mBearing, item.mClino );
             pw.format(Locale.US, " g=\"%.1f\" m=\"%.1f\" dip=\"%.1f\"",
-               item.mAcceleration, item.mMagnetic, item.mDip );
+                                 item.mAcceleration, item.mMagnetic, item.mDip );
             pw.format(" l=\"0\" r=\"0\" u=\"0\" d=\"0\"");
             if ( item.mComment != null && item.mComment.length() > 0 ) {
               pw.format(" note=\"%s\"", item.mComment.replaceAll("\"", "") );
             }
-            pw.format(" />\n");
+            pw.format(" >\n");
+            writeCsxShotAttachments( pw, data, survey, sid, item );
+            pw.format("    </segment>\n");
           }
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // ONLY FROM STATION : splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // finish writing previous leg shot
-              writeCsxSegment( pw, cave, f, t ); // branch prefix
+              writeCsxSegment( pw, ref_item.mId, cave, f, t ); // branch prefix
               if ( extend == -1 ) pw.format(" direction=\"1\"");
-              if ( dup || sur || cmt /* || bck */ ) {
+              if ( dup || sur /* || bck */ ) {
                 pw.format(" exclude=\"1\"");
                 if ( dup ) { pw.format(" duplicate=\"1\""); dup = false; }
                 if ( sur ) { pw.format(" surface=\"1\"");   sur = false; }
-                if ( cmt ) { pw.format(" commented=\"1\""); cmt = false; }
                 // if ( bck ) { pw.format(" backshot=\"1\"");   bck = false; }
               }
               // pw.format(" planshowsplayborder=\"1\" profileshowsplayborder=\"1\" ");
+              if ( ref_item.isCommented() ) pw.format(" commented=\"1\"");
               writeCsxLeg( pw, leg, ref_item );
               pw.format(" l=\"0.0\" r=\"0.0\" u=\"0.0\" d=\"0.0\"");
               if ( com != null && com.length() > 0 ) {
                 pw.format(" note=\"%s\"", com.replaceAll("\"", "") );
                 com = null;
               }
-              pw.format(" />\n");
+              pw.format(" >\n");
+              writeCsxShotAttachments( pw, data, survey, sid, ref_item );
+              pw.format("    </segment>\n");
               ref_item = null; 
             }
 
@@ -311,34 +380,39 @@ class TDExporter
             writeCsxFSplaySegment( pw, cave, from, cntSplay, item.isXSplay() ); // branch prefix
             ++cntSplay;
             pw.format(" splay=\"1\" exclude=\"1\"");
+            if ( item.isCommented() ) pw.format(" commented=\"1\"");
             if ( extend == -1 ) pw.format(" direction=\"1\"");
             pw.format(Locale.US, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"",
-               item.mLength, item.mBearing, item.mClino );
+                                 item.mLength, item.mBearing, item.mClino );
             pw.format(Locale.US, " g=\"%.1f\" m=\"%.1f\" dip=\"%.1f\"",
-               item.mAcceleration, item.mMagnetic, item.mDip );
+                                 item.mAcceleration, item.mMagnetic, item.mDip );
             pw.format(" l=\"0\" r=\"0\" u=\"0\" d=\"0\"");
             if ( item.mComment != null && item.mComment.length() > 0 ) {
               pw.format(" note=\"%s\"", item.mComment.replaceAll("\"", "") );
             }
-            pw.format(" />\n");
+            pw.format(" >\n");
+            writeCsxShotAttachments( pw, data, survey, sid, item );
+            pw.format("    </segment>\n");
           } else { // BOTH FROM AND TO STATIONS
             if ( leg.mCnt > 0 && ref_item != null ) {
-              writeCsxSegment( pw, cave, f, t ); // branch prefix
+              writeCsxSegment( pw, ref_item.mId, cave, f, t ); // branch prefix
               if ( extend == -1 ) pw.format(" direction=\"1\"");
-              if ( dup || sur || cmt /* || bck */ ) {
+              if ( dup || sur /* || bck */ ) {
                 pw.format(" exclude=\"1\"");
                 if ( dup ) { pw.format(" duplicate=\"1\""); dup = false; }
                 if ( sur ) { pw.format(" surface=\"1\"");   sur = false; }
-                if ( cmt ) { pw.format(" commented=\"1\""); cmt = false; }
                 // if ( bck ) { pw.format(" backshot=\"1\"");   bck = false; }
               }
+              if ( ref_item.isCommented() ) pw.format(" commented=\"1\"");
               writeCsxLeg( pw, leg, ref_item );
               pw.format(" l=\"0\" r=\"0\" u=\"0\" d=\"0\"");
               if ( com != null && com.length() > 0 ) {
                 pw.format(" note=\"%s\"", com.replaceAll("\"", "") );
                 com = null;
               }
-              pw.format(" />\n");
+              pw.format(" >\n");
+              writeCsxShotAttachments( pw, data, survey, sid, ref_item );
+              pw.format("    </segment>\n");
             }
             ref_item = item;
             extend = item.getExtend();
@@ -346,8 +420,8 @@ class TDExporter
               dup = true;
             } else if ( item.mFlag == DBlock.BLOCK_SURFACE ) {
               sur = true;
-            } else if ( item.mFlag == DBlock.BLOCK_COMMENTED ) {
-              cmt = true;
+            // } else if ( item.mFlag == DBlock.BLOCK_COMMENTED ) {
+            //   ...
             // } else if ( item.mFlag == DBlock.BLOCK_BACKSHOT ) {
             //   bck = true;
             }
@@ -359,22 +433,24 @@ class TDExporter
         }
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
-        writeCsxSegment( pw, cave, f, t ); // branch prefix
+        writeCsxSegment( pw, ref_item.mId, cave, f, t ); // branch prefix
         if ( extend == -1 ) pw.format(" direction=\"1\"");
-        if ( dup || sur || cmt /* || bck */ ) {
+        if ( dup || sur /* || bck */ ) {
            pw.format(" exclude=\"1\"");
            if ( dup ) { pw.format(" duplicate=\"1\"");  /* dup = false; */ }
            if ( sur ) { pw.format(" surface=\"1\"");    /* sur = false; */ }
-           if ( cmt ) { pw.format(" commented=\"1\""); /* cmt = false; */ }
            // if ( bck ) { pw.format(" backshot=\"1\"");  /* bck = false; */ }
         }
+        if ( ref_item.isCommented() ) pw.format(" commented=\"1\"");
         writeCsxLeg( pw, leg, ref_item );
         pw.format(" l=\"0\" r=\"0\" u=\"0\" d=\"0\"");
         if ( com != null && com.length() > 0 ) {
           pw.format(" note=\"%s\"", com.replaceAll("\"", "") );
           // com = null;
         }
-        pw.format(" />\n");
+        pw.format(" >\n");
+        writeCsxShotAttachments( pw, data, survey, sid, ref_item );
+        pw.format("    </segment>\n");
       }
       pw.format("  </segments>\n");
 
@@ -383,8 +459,9 @@ class TDExporter
       if ( fixed.size() > 0 ) {
         for ( FixedInfo fix : fixed ) {
           pw.format("     <trigpoint name=\"%s\" labelsymbol=\"0\" >\n", fix.name );
-          pw.format(Locale.US, "       <coordinate latv=\"%.7f\" longv=\"%.7f\" altv=\"%.2f\" lat=\"%.7f N\" long=\"%.7f E\" format=\"dd.ddddddd N\" alt=\"%.2f\" />\n",
-             fix.lat, fix.lng, fix.asl, fix.lat, fix.lng, fix.asl );
+          pw.format(Locale.US, 
+                    "       <coordinate latv=\"%.7f\" longv=\"%.7f\" altv=\"%.2f\" lat=\"%.7f N\" long=\"%.7f E\" format=\"dd.ddddddd N\" alt=\"%.2f\" />\n",
+                    fix.lat, fix.lng, fix.asl, fix.lat, fix.lng, fix.asl );
           pw.format("     </trigpoint>\n");
         }
       }
@@ -392,7 +469,7 @@ class TDExporter
 
       // ============= SKETCHES
       if ( sketch != null ) {
-        sketch.exportAsCsx( pw, cave, branch );
+        sketch.exportAsCsx( pw, survey, cave, branch );
       } else {
         pw.format("  <plan>\n");
         exportEmptyCsxSketch( pw );
@@ -455,7 +532,6 @@ class TDExporter
     }
     for ( NumSplay sp : num.getSplays() ) {
       sp.s = lat - sp.s * s_radius;
-      sp.e = lng + sp.e * e_radius;
       sp.v = (asl - sp.v) * asl_factor;
     }
     return num;
@@ -988,7 +1064,9 @@ class TDExporter
         pw.format("    data dimensions station left right up down\n");
         for ( String station : lruds.keySet() ) {
           LRUD lrud = lruds.get( station );
-          pw.format("    %s %.2f %.2f %.2f %.2f\n", station, lrud.l * ul, lrud.r * ul, lrud.r * ul, lrud.d * ul );
+          pw.format(Locale.US, 
+                    "    %s %.2f %.2f %.2f %.2f\n",
+                    station, lrud.l * ul, lrud.r * ul, lrud.r * ul, lrud.d * ul );
         }
       }
 

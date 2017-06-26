@@ -37,7 +37,7 @@
           android:layout_marginLeft="10sp" 
           android:background="@drawable/button"
           style="@style/button_default"
-          android:text="@string/button_cancel"
+          android:text="@string/button_close"
       />
     </LinearLayout>
    					  

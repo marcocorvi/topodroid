@@ -601,7 +601,7 @@ public class ShotWindow extends Activity
       intent.putExtra( TDTag.TOPODROID_SURVEY,  0 ); // mustOpen 
       intent.putExtra( TDTag.TOPODROID_OLDSID, -1 ); // old_sid 
       intent.putExtra( TDTag.TOPODROID_OLDID,  -1 ); // old_id 
-      startActivityForResult( intent, TDRequest.INFO_ACTIVITY );
+      startActivityForResult( intent, TDRequest.INFO_ACTIVITY_SHOTWINDOW );
     // } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // CURRENT STATION
     //   (new CurrentStationDialog( this, this, mApp )).show();
 
@@ -671,7 +671,7 @@ public class ShotWindow extends Activity
         Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
         intent.putExtra( MediaStore.EXTRA_OUTPUT, outfileuri );
         intent.putExtra( "outputFormat", Bitmap.CompressFormat.JPEG.toString() );
-        startActivityForResult( intent, TDRequest.CAPTURE_IMAGE_ACTIVITY );
+        startActivityForResult( intent, TDRequest.CAPTURE_IMAGE_SHOTWINDOW );
       } catch ( ActivityNotFoundException e ) {
         Toast.makeText( mActivity, "No image capture mApp", Toast.LENGTH_SHORT ).show();
       }
@@ -683,7 +683,7 @@ public class ShotWindow extends Activity
     mSensorId = mApp.mData.nextSensorId( mApp.mSID );
     // TDLog.Log( TDLog.LOG_SENSOR, "sensor " + mSensorId );
     Intent intent = new Intent( mActivity, SensorActivity.class );
-    startActivityForResult( intent, TDRequest.SENSOR_ACTIVITY );
+    startActivityForResult( intent, TDRequest.SENSOR_ACTIVITY_SHOTWINDOW );
   }
 
   // void askExternal( )
@@ -778,7 +778,7 @@ public class ShotWindow extends Activity
   {
     TDLog.Log( TDLog.LOG_DEBUG, "on Activity Result: request " + reqCode + " result " + resCode );
     switch ( reqCode ) {
-      case TDRequest.CAPTURE_IMAGE_ACTIVITY:
+      case TDRequest.CAPTURE_IMAGE_SHOTWINDOW:
         mApp.resetLocale();
         if ( resCode == Activity.RESULT_OK ) { // RESULT_OK = -1 (0xffffffff)
           // (new PhotoCommentDialog(this, this) ).show();
@@ -787,7 +787,7 @@ public class ShotWindow extends Activity
           // mApp.mData.deletePhoto( mApp.mSID, mPhotoId );
         }
         break;
-      case TDRequest.SENSOR_ACTIVITY:
+      case TDRequest.SENSOR_ACTIVITY_SHOTWINDOW:
       // case TDRequest.EXTERNAL_ACTIVITY:
         if ( resCode == Activity.RESULT_OK ) {
           Bundle extras = data.getExtras();
@@ -804,7 +804,7 @@ public class ShotWindow extends Activity
           // FIXME NOTIFY ? no
         }
         break;
-      case TDRequest.INFO_ACTIVITY:
+      case TDRequest.INFO_ACTIVITY_SHOTWINDOW:
         if ( resCode == Activity.RESULT_OK ) {
           finish();
         }

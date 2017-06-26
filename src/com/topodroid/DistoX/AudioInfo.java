@@ -14,7 +14,7 @@ package com.topodroid.DistoX;
 class AudioInfo
 {
   public long sid;       // survey id
-  public long id;        // photo id
+  public long id;        // audio id
   public long shotid;    // shot id
   public String mDate;
 
@@ -26,7 +26,7 @@ class AudioInfo
     mDate = dt;
   }
 
-  // String getPhotoName() 
+  // String getAudioName() 
   // {
   //   return String.format( "%d-%03d", sid, id );
   // }

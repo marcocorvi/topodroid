@@ -371,6 +371,7 @@
     <string name="sensor_type">típus</string>
     <string name="sensor_value">érték</string>
     <string name="sensor_comment">megjegyzés</string>
+    <!-- TODO string name="insufficient_data">insufficient sensor data</string -->
 
     <!-- UNUSED string name="shot_clino">clino</string -->
     <!-- UNUSED string name="shot_compass">compass</string -->

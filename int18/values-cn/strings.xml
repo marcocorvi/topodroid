@@ -370,6 +370,7 @@
     <string name="sensor_type">传感器类型</string>
     <string name="sensor_value">传感器值</string>
     <string name="sensor_comment">传感器注释</string>
+    <!-- TODO string name="insufficient_data">insufficient sensor data</string -->
 
     <!-- UNUSED string name="shot_clino">倾角测量</string -->
     <!-- UNUSED string name="shot_compass">方位角测量</string -->

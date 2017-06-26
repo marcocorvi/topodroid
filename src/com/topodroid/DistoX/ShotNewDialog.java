@@ -27,7 +27,6 @@ import android.widget.RadioButton;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 
 import android.text.InputType;
 import android.inputmethodservice.KeyboardView;
@@ -80,10 +79,11 @@ public class ShotNewDialog extends MyDialog
   private Button   mBtnSave;
   private Button   mBtnBack;
   private Button   mBtnSensor;
-  private Button   mBtnCamera;
+  private Button   mBtnCamera = null;
   private byte[] mJpegData; // camera jpeg data
 
   private static boolean mLRUDatTo = false;
+  private boolean hasPhoto = false;
 
   TimerTask mTimer;
   private MyKeyboard mKeyboard = null;
@@ -98,13 +98,10 @@ public class ShotNewDialog extends MyDialog
     mAt      = at;
     mTimer   = null;
     mJpegData = null;
+    hasPhoto = FeatureChecker.checkCamera( app );
   }
 
 
-  private boolean checkCameraHardware()
-  {
-    return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
-  }
 
 // -------------------------------------------------------------------
   @Override
@@ -237,7 +234,7 @@ public class ShotNewDialog extends MyDialog
     mBtnSensor.setLayoutParams( params );
     mBtnSensor.setOnClickListener( this );
 
-    if ( TDSetting.mLevelOverAdvanced && checkCameraHardware() ) {
+    if ( TDSetting.mLevelOverAdvanced && hasPhoto ) {
       
       mBtnCamera = new MyCheckBox( mContext, size, R.drawable.iz_camera, R.drawable.iz_camera ); 
       layout4.addView( mBtnCamera );
@@ -487,8 +484,8 @@ public class ShotNewDialog extends MyDialog
     } else if ( b == mBtnSensor ) {
       mTimer = new TimerTask( mContext, this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
       mTimer.execute();
-    } else if ( b == mBtnCamera && TDSetting.mLevelOverAdvanced ) {
-      new QCamCompass( mContext, this, null, true, true).show();  // true = with_box, true=with_delay
+    } else if ( hasPhoto && b == mBtnCamera && TDSetting.mLevelOverAdvanced ) {
+      new QCamCompass( mContext, this, null, true, true).show();  // null inserter, with_box, with_delay
     } else if ( b == mBtnBack ) {
       dismiss();
     }

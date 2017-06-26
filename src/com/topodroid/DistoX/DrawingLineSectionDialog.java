@@ -59,6 +59,7 @@ public class DrawingLineSectionDialog extends MyDialog
   boolean mHSection;
   boolean mExists;
   String  mFilename;
+  private boolean hasPhoto;
   
   public DrawingLineSectionDialog( Context context,
                                    DrawingWindow parent, TopoDroidApp app, boolean h_section, boolean exists, String id,
@@ -75,6 +76,7 @@ public class DrawingLineSectionDialog extends MyDialog
     mAzimuth = azimuth;
     mClino = clino;
     mFilename = null;
+    hasPhoto = FeatureChecker.checkCamera( context );
 
     // read section id from the line options
     mId = mLine.getOption( "-id" );
@@ -112,18 +114,21 @@ public class DrawingLineSectionDialog extends MyDialog
     mTVoptions = (TextView) findViewById( R.id.line_options );
     mTVoptions.setText( "ID " + mId );
 
-    mIVimage   = (ImageView) findViewById( R.id.line_image );
     TextView tv_azimuth = (TextView) findViewById( R.id.line_azimuth );
     TextView tv_date    = (TextView) findViewById( R.id.line_date );
 
     // mReversed = (CheckBox) findViewById( R.id.line_reversed );
     // mReversed.setChecked( mLine.mReversed );
 
+    mIVimage = (ImageView) findViewById( R.id.line_image );
     mBtnFoto = (Button) findViewById( R.id.button_foto );
+    if ( hasPhoto ) {
+      mBtnFoto.setOnClickListener( this );
+    } else {
+      mBtnFoto.setVisibility( View.GONE );
+    }
     mBtnDraw = (Button) findViewById( R.id.button_draw );
-
     mBtnDraw.setOnClickListener( this );
-    mBtnFoto.setOnClickListener( this );
     if ( mPlotInfo != null ) { // check the photo
       mFilename = TDPath.getSurveyJpgFile( mApp.mySurvey, mPlotInfo.name );
       File imagefile = new File( mFilename );

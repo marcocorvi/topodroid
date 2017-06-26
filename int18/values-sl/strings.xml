@@ -374,6 +374,7 @@
     <string name="sensor_type">tip</string>
     <string name="sensor_value">vrednost</string>
     <string name="sensor_comment">komentar</string>
+    <!-- TODO string name="insufficient_data">insufficient sensor data</string -->
 
     <!-- UNUSED string name="shot_clino">clino</string -->
     <!-- UNUSED string name="shot_compass">bussola</string -->

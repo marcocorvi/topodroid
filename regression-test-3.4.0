@@ -3,7 +3,7 @@ TopoDroid Regression Tests
 This is an incomplete list of things to check 
 
 [x] install apk over an existing installation and check that it starts
-    preserving the user preferences - Checked 4 customized configurations (Rodrigo)
+    preserving the user preferences
 [x] install apk without existing installation and check it starts
     with default user preferences values
     check that the directory "topodroid" is properly populated
@@ -14,13 +14,13 @@ Changed the language setting and confirmed that the language of the configuratio
 
 MAIN WINDOW
 [x] activity level
-    [x] buttons presence according to the "activity-level" - So no change on the main window but I believe that's what's expected for this windows in particular (Rodrigo)
-    [x] functionalities enabled by the activity-level
-[ ] verify that the settings display as for the activity level
-    [x] level-0 (basic)
+    [x] buttons presence according to the "activity-level" 
+    [ ] functionalities enabled by the activity-level
+[x] verify that the settings display as for the activity level
+    [ ] level-0 (basic)
     [ ] level-1 (normal)
     [ ] level-2 (advanced)
-    [x] level-3 (experimental)
+    [ ] level-3 (experimental)
     [ ] level-4 (complete)
 
 [x] create a new survey
@@ -30,10 +30,11 @@ MAIN WINDOW
 [x] check the survey name is required
 [x] check duplicate name not allowed
 
-[ ] import th file
-[ ] import dat file
-[ ] import tro file
-[ ] import top file
+[x] import th file
+[x] import dat file
+[x] import tro file
+[x] import top file
+[x] cannot import already existing survey
 
 [x] palette button 
     [x] verify symbols are properly displayed
@@ -57,8 +58,8 @@ MAIN WINDOW
     [ ] device window
     [ ] calib window
     [ ] gm-data window - I don't know what window is that. (Rodrigo)
-[x] text size:
-    [x] main window: survey list
+[ ] text size:
+    [ ] main window: survey list
     [ ] shot window: shot data list
     [ ] device window: device list
     [ ] gm-data window: calib data list
@@ -76,56 +77,57 @@ MAIN WINDOW
     [ ] enter a name of non-existing directory: check it is created and properly populated of subdirs
         this happens also if the cwd is set, the app is shit down, the directory is deleted, the app is restarted
     [ ] enter a name without "topodroid": this must be prepended to the dir name
-    [x] enter a name with prefix "topodroid": this is not prepended to the dir name
-         [x] case insensitive
+    [ ] enter a name with prefix "topodroid": this is not prepended to the dir name
+         [ ] case insensitive
     [x] select existing directory
 
 [x] about menu
     the about menu in custom language must have the name and email of the translator
     [ ] es  [ ] fr  [ ] de  [ ] it  [ ] cn  [ ] bg  [ ] ru  [ ] ua  [ ] sl  [ ] pt  [-] hu
 
-[x] help menu: check the quick help strings - Checked on the portuguese translation - Rodrigo
-[x] sections and pages of the user manual and their navigation/organization
-[ ] content of the user-manual sections and pages
+[x] help menu: check the quick help strings
+[ ] sections and pages of the user manual and their navigation/organization
+[~] content of the user-manual sections and pages
 [ ] web-link in the user manual
-[x] in each activity/dialog the MENU button opens the help page
-[ ] the "index" refers to *all* the subpages
+[ ] in each activity/dialog the MENU button opens the help page
+[x] the "index" refers to *all* the subpages
 
 
 DEVICE WINDOW
-[x] buttons presence according to the "activity-level"
+[ ] buttons presence according to the "activity-level"
 
 [x] bluetooth reset button
 [ ] calib-mode toggle button (*)
     [x] with no device toast message
-    [ ] X310 first time on, second time off
+    [x] with distox off, failed
+    [x] X310 first time on, second time off
     [ ] A3 toggle according to the current state
-[ ] calibration button -> calib-list dialog
+[x] calibration button -> calib-list dialog
     [x] with no device toast message
-[ ] memory info button -> memory dialog (*)
+[x] memory info button -> memory dialog (*)
     [x] with no device toast message
-    [ ] dump data from disto X310
+    [x] dump data from disto X310
     [ ] dump data from disto A3
     [ ] save data to file
         [ ] "dump" dir must be automatically created
-[ ] calibration coeffs read
+[x] calibration coeffs read
     [x] with no device toast message
-[ ] info button (*)
+[x] info button (*)
     [x] with no device toast message
-    [ ] X310
+    [x] X310
     [ ] A3
 
 [ ] scan menu: (*)
     forget DistoX from android and scan for it (might need a few trials)
 [ ] pair menu (*)
     pair with the DistoX 
-[x] disconnect menu: cancel the selected DistoX
-[x] firmware menu -> firmware dialog
+[ ] disconnect menu: cancel the selected DistoX
+[ ] firmware menu -> firmware dialog
     [ ] read the DistoX firmware to a file: check the file is in "bin" (*) - Tried to download. The DistoX was apparently sending the firmware to Topodroid for more than 10 minutes when I turned the DistoX off and closed Topodroid. (Rodrigo)
     [ ] upload a new firmware to the DistoX (*)
 
-[x] settings menu
-    [x] BT check:
+[ ] settings menu
+    [ ] BT check:
         [ ] no BT:
         [ ] check BT on start:
     [ ] connection mode
@@ -134,7 +136,7 @@ DEVICE WINDOW
     [ ] auto reconnect
     [ ] socket type
         data download should work with every socket type
-        [x] automatically chosen by the device
+        [ ] automatically chosen by the device
     [ ] Z6 workaround
         data download should work with or without it
     [ ] socket delay
@@ -144,14 +146,14 @@ DEVICE WINDOW
         when found select it, try to use it without pairing it before.
     (backup files are not cleared)
         if set, it should be auto-paired, otherwise a pairing notification
-    [x] delays
+    [ ] delays
         [ ] data
         [ ] data ready
         [ ] laser
         [ ] shot pause
-[x] calibration sub-setting: should open the calib settings
+[ ] calibration sub-setting: should open the calib settings
 
-[x] help strings
+[ ] help strings
 
 
 CALIBRATION DIALOG
@@ -230,21 +232,21 @@ CALIB DATA WINDOW
 [ ] help strings
 
 SURVEY DATA WINDOW
-[ ] check display mode
-[ ] display colors: white-leg blue-splay grey-rep.leg
-[ ] tap on a station to display its splays
-    [ ] tap again to hide them
+[x] check display mode
+[x] display colors: white-leg blue-splay grey-rep.leg
+[x] tap on a station to display its splays
+    [x] tap again to hide them
 [ ] selectively display splays of two stations
-[ ] select active-station (log-tap): it must turn green
-    [ ] download data and check next shot is attached to it (*)
+[x] select active-station (log-tap): it must turn green
+    [x] download data and check next shot is attached to it (*)
         [ ] with toporobot policy a new "traverse" is started
-    [ ] check it is displayed as hint in the manual shot dialog
-    [ ] check it is shown in the saved-stations dialog if opened
+    [x] check it is displayed as hint in the manual shot dialog
+    [x] check it is shown in the saved-stations dialog if opened
 
-[ ] multi-shot selection initiated by long-tap on other than splay
-    [ ] button bar changes
-    [ ] selected shots have grey background
-    [ ] add/remove shots from selection
+[x] multi-shot selection initiated by long-tap on other than splay
+    [x] button bar changes
+    [x] selected shots have grey background
+    [x] add/remove shots from selection
     [ ] data continuous download continues during selection
     [ ] check button actions
         [ ] set extend LEFT
@@ -255,31 +257,31 @@ SURVEY DATA WINDOW
         [ ] cancel selection (return to normal buttons)
 
 [ ] sketches
-    [ ] add a new sketch: dialog (name + ref. station)
-        [ ] duplicate sketch name -> error
-        [ ] non-existing station -> error
-        [ ] origin station is the last one 
-        [ ] origin station is the active-station if defined 
-        [n] check station copy-n-paste
-        [ ] select projected profile: orientation dialog
+    [x] add a new sketch: dialog (name + ref. station)
+        [x] duplicate sketch name -> error
+        [x] non-existing station -> error
+        [x] origin station is the last one 
+        [x] origin station is the active-station if defined 
+        [ ] check station copy-n-paste
+        [x] select projected profile: orientation dialog
             [ ] OK confirm
-            [ ] BACK cancel
-    [ ] open existing sketch
-        [ ] open with the plan view
-        [ ] open with the profile (extended/projected) view
-[ ] long-tap open last sketch, with the last view
+            [x] BACK cancel
+    [x] open existing sketch
+        [x] open with the plan view
+        [x] open with the profile (extended/projected) view
+[x] long-tap open last sketch, with the last view
 
 [ ] data download (*)
-    [ ] button grey if no DistoX selected
-    [ ] on-demand mode
-        [ ] button turns red (while connected), blue (non connected)
+    [x] button grey if no DistoX selected
+    [x] on-demand mode
+        [x] button turns red (while connected), blue (non connected)
     [ ] continuous mode without auto-reconnect
         [ ] button turns red (while connected), blue (non connected)
     [ ] continuous mode with auto-reconnect
         [ ] button turns red (while connected), yellow (connecting), blue (non connected)
-    [ ] verify data delay
+    [x] verify data delay
     [ ] station naming policies
-        [ ] splays + forward
+        [x] splays + forward
         [ ] splays + backward
         [ ] forward + splays
         [ ] backward + splays
@@ -299,17 +301,17 @@ SURVEY DATA WINDOW
 
 [ ] bluetooth
     X310 fw >= 3:
-      [ ] reset
-      [ ] laser on
+      [x] reset
+      [x] laser on
       [xl laser off 
       [ ] measure with immediate download
       // [ ] measure without download DROPPED
       [ ] verify laser/shot delays
     others
       [ ] reset
-[ ] annotations
+[x] annotations
     [ ] verify consistency with file on filesystem
-    [ ] consistency with annotation button of sketch window
+    [x] consistency with annotation button of sketch window
 [ ] reference extend azimuth
     [ ] if set to left/right (fixed) shot must be extended properly
     [ ] if set to a direction shot must be right (along dir.) left (opposite dir.)
@@ -320,7 +322,7 @@ SURVEY DATA WINDOW
     [ ] check station cut-n-paste
     [ ] marks (fixed/painted)
 [ ] manual shot
-    [ ] enter a new shot manually
+    [x] enter a new shot manually
     [ ] check from station cut-n-paste
     [ ] check to station cut-n-paste
     [ ] station hints set by the auto-station policy
@@ -347,28 +349,29 @@ SURVEY DATA WINDOW
 
 SHOT DIALOGS
 tap a shot data
-[ ] if it was a manual shot length/azimuth/clino are editable
-    [ ] changes reflected in shot data list
+[x] if it was a manual shot length/azimuth/clino are editable
+    [x] changes reflected in shot data list
 [ ] if it was a DistoX shot length/azimuth/clino are not editable
 [ ] check from station cut-n-paste
 [ ] check to station cut-n-paste
 [ ] "reverse": swap stations
 [ ] "<" ">": should navigate in the list of legs
-[ ] add comment: 'N' should be appended
-[ ] clear a comment: 'N' should disappear
+[x] add comment: 'comment' should be appended
+[x] clear a comment: 'comment' should disappear
 [ ] change extend: should reflect on the item line
 [ ] try the buttons
-    [ ] duplicate: +
-    [ ] surface: -
-    [ ] merge into previous leg
-    [ ] merge into following leg
+    [x] duplicate: +
+    [x] surface: -
+    [x] commented (gray backgr.)
+    [x] merge into previous leg
+    [x] merge into following leg
     [ ] renumber: following shots should be renumbered according to the current station-naming policy
-    [ ] splay group: all splays of the group with same station should be updated
+    [x] splay group: all splays of the group with same station should be updated
     [ ] x-splays: splays up to this one become 'X' (shown green)
 [ ] "ok" saves changes and closes dialog
 [ ] "save" saves changes but does not close dialog
-[ ] "more" opens secondary dialog
-[ ] "cancel" closes dialog
+[x] "more" opens secondary dialog
+[x] "cancel" closes dialog
 
 long tap on splay data
 [ ] opens last sketch with splay station in the middle and splay highlighted
@@ -619,6 +622,11 @@ SKETCH WINDOW
 [ ] two finger zoom
 [ ] side-drag (setting)
 [ ] zoom controls (setting)
+
+[ ] special point items
+    [ ] remark
+    [ ] photo
+    [ ] audio
 
 recent symbol picker
 [ ] tools remain consistent on a per-directory basis

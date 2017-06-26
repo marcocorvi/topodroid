@@ -257,11 +257,6 @@ public class TopoDroidApp extends Application
     return (int)( 42 * context.getResources().getSystem().getDisplayMetrics().density );
   }
 
-  boolean isMultitouch()
-  {
-    return getPackageManager().hasSystemFeature( PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH );
-  }
-
   // ------------------------------------------------------------
 
   static float mAccelerationMean = 0.0f;
@@ -685,7 +680,7 @@ public class TopoDroidApp extends Application
     resetLocale();
     Resources res = getResources();
     if ( load_symbols ) {
-      BrushManager.reloadPointLibrary( res ); // reload symbols
+      BrushManager.reloadPointLibrary( this, res ); // reload symbols
       BrushManager.reloadLineLibrary( res );
       BrushManager.reloadAreaLibrary( res );
     }
@@ -1563,7 +1558,7 @@ public class TopoDroidApp extends Application
     if ( bio    ) installSymbols( R.raw.symbols_bio,    true );
 
     mDData.setValue( "symbol_version", SYMBOL_VERSION );
-    BrushManager.reloadAllLibraries( getResources() );
+    BrushManager.reloadAllLibraries( this, getResources() );
     // BrushManager.makePaths( getResources() );
   }
 

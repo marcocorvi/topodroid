@@ -88,9 +88,10 @@ public class MyCheckBox extends CompoundButton
   @Override
   public boolean isChecked() { return mState; }
 
-  public void toggleState()
+  public boolean toggleState()
   {
     setState( ! mState );
+    return mState;
   }
 
   public void setState( boolean state )

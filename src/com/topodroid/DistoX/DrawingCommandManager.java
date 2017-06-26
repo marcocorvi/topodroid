@@ -2430,7 +2430,8 @@ public class DrawingCommandManager
     DrawingIO.exportDataStream( type, dos, scrap_name, proj_dir, bbox, mNorthLine, mCurrentStack, mUserStations, mStations );
   }
 
-  void exportAsCsx( PrintWriter pw, String cave, String branch )
+  void exportAsCsx( PrintWriter pw, String survey, String cave, String branch,
+                    List<PlotInfo> all_sections, List<PlotInfo> sections )
   {
     synchronized( mCurrentStack ) {
       pw.format("    <layers>\n");
@@ -2450,7 +2451,7 @@ public class DrawingCommandManager
         if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
           DrawingAreaPath ap = (DrawingAreaPath)p;
           if ( BrushManager.getAreaCsxLayer( ap.mAreaType ) != 1 ) continue;
-          ap.toCsurvey( pw, cave, branch );
+          ap.toCsurvey( pw, survey, cave, branch, null ); // bind=null
         }
       }
       pw.format("        </items>\n");
@@ -2466,11 +2467,11 @@ public class DrawingCommandManager
         if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
           DrawingLinePath lp = (DrawingLinePath)p;
           if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 2 ) continue;
-          lp.toCsurvey( pw, cave, branch );
+          lp.toCsurvey( pw, survey, cave, branch, null ); // bind=null
         } else if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
           DrawingAreaPath ap = (DrawingAreaPath)p;
           if ( BrushManager.getAreaCsxLayer( ap.mAreaType ) != 2 ) continue;
-          ap.toCsurvey( pw, cave, branch );
+          ap.toCsurvey( pw, survey, cave, branch, null ); // bind=null
         } 
       }
       pw.format("        </items>\n");
@@ -2486,7 +2487,7 @@ public class DrawingCommandManager
 	if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
 	  DrawingLinePath lp = (DrawingLinePath)p;
 	  if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 3 ) continue;
-	  lp.toCsurvey( pw, cave, branch );
+	  lp.toCsurvey( pw, survey, cave, branch, null ); // bind=null
         }
       }
       pw.format("        </items>\n");
@@ -2502,7 +2503,7 @@ public class DrawingCommandManager
         if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
           DrawingLinePath lp = (DrawingLinePath)p;
           if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 4 ) continue;
-          lp.toCsurvey( pw, cave, branch );
+          lp.toCsurvey( pw, survey, cave, branch, null ); // bind=null
         }
       }
       pw.format("        </items>\n");
@@ -2518,7 +2519,7 @@ public class DrawingCommandManager
         if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
           DrawingLinePath lp = (DrawingLinePath)p;
           if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 5 ) continue;
-          lp.toCsurvey( pw, cave, branch );
+          lp.toCsurvey( pw, survey, cave, branch, null ); // bind=null
         }
         // if ( lp.lineType() == BrushManager.mLineLib.mLineWallIndex ) {
         //   // linetype: 0 line, 1 spline, 2 bezier
@@ -2554,9 +2555,42 @@ public class DrawingCommandManager
             // Log.v("DistoX", "Section point <" + pp.mOptions + ">");
             // option: -scrap survey-xx#
             // TODO open file survey-xx#.tdr and convert it to csurvey
+            PlotInfo section = null;
+            String[] vals = pp.mOptions.split(" ");
+            int k0 = vals.length;
+            for ( int k = 0; k < k0; ++k ) {
+              if ( vals[k].equals("-scrap") ) {
+                for ( ++k; k < k0; ++k ) {
+                  if ( vals[k].length() > 0 ) break;
+                }
+                if ( k < k0 ) {
+                  for ( PlotInfo s : all_sections ) {
+                    if ( vals[k].endsWith( s.name ) ) {
+                      // String name = survey + "-" + s.name; // scrap filename
+                      sections.add(s);
+                      section = s;
+                      break;
+                    }
+                  }
+                }
+              }
+            }
+            if ( section != null ) {
+              // special toCsurvey for cross-section points
+              float x = DrawingUtil.sceneToWorldX( pp.cx ); // convert to world coords.
+              float y = DrawingUtil.sceneToWorldY( pp.cy );
+              pw.format("  <item layer=\"6\" cave=\"%s\" type=\"9\" category=\"96\" direction=\"0\"", cave );
+              pw.format(" text=\"\" textdistance=\"0\" crosswidth=\"0\" crossheight=\"0\"");
+              // pw.format(" segment=\"%s\"", "undefined" );
+              pw.format(Locale.US, " azimuth=\"%.2f\" clino=\"%.2f\" id=\"%s\">\n",
+                section.azimuth, section.clino, section.name );
+              pw.format(Locale.US, " <points data=\"%.2f %.2f\", />\n", x, y );
+              pw.format("    <font type=\"4\" />\n");
+              pw.format("  </item>\n");
+            }
           }
           if ( BrushManager.getPointCsxLayer( pp.mPointType ) != 6 ) continue;
-          pp.toCsurvey( pw, cave, branch );
+          pp.toCsurvey( pw, survey, cave, branch, null ); // bind=null
         }
       }
       pw.format("        </items>\n");

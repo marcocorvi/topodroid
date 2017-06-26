@@ -17,6 +17,7 @@ import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.Matrix;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.DataInputStream;
@@ -24,7 +25,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Locale;
 
-import android.util.Log;
+// import android.util.Log;
+import android.util.Base64;
 
 /**
  */
@@ -92,22 +94,28 @@ public class DrawingAudioPath extends DrawingPointPath
   }
 
   @Override
-  public void toCsurvey( PrintWriter pw, String cave, String branch )
+  public void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind )
   { 
-    // int size = mScale - SCALE_XS;
-    // int layer  = 6;
-    // int type   = 8;
-    // int cat    = 81;
-    pw.format("<item layer=\"6\" cave=\"%s\" branch=\"%s\" type=\"8\" category=\"81\" transparency=\"0.00\"",
-      cave, branch );
-    pw.format(" text=\"%s\" textrotatemode=\"1\" >\n", ((mPointText==null)?"":mPointText) );
-    pw.format("  <pen type=\"10\" />\n");
-    pw.format("  <brush type=\"7\" />\n");
-    float x = DrawingUtil.sceneToWorldX( cx ); // convert to world coords.
-    float y = DrawingUtil.sceneToWorldY( cy );
-    pw.format(Locale.US, " <points data=\"%.2f %.2f \" />\n", x, y );
-    pw.format("  <font type=\"0\" />\n");
-    pw.format("</item>\n");
+    // Log.v("DistoX", "audio point " + mId + " survey " + survey );
+    File audiofile = new File( TDPath.getSurveyAudioFile( survey, Long.toString( mId ) ) );
+    if ( audiofile.exists() ) {
+      byte[] buf = TDExporter.readFileBytes( audiofile );
+      if ( buf != null ) {
+        pw.format("<item layer=\"6\" cave=\"%s\" branch=\"%s\" type=\"12\" category=\"80\" transparency=\"0.00\"",
+          cave, branch );
+        pw.format(" text=\"%s\" textrotatemode=\"1\" >\n", ((mPointText==null)?"":mPointText) );
+        if ( bind != null ) pw.format(" bind=\"%s\"", bind );
+        // pw.format("  <pen type=\"10\" />\n");
+        // pw.format("  <brush type=\"7\" />\n");
+        pw.format(" <attachmenmt data=\"%s\" name=\"\" note=\"\" type=\"audio/wav\" />\n", 
+          Base64.encodeToString( buf, Base64.NO_WRAP ) );
+        float x = DrawingUtil.sceneToWorldX( cx ); // convert to world coords.
+        float y = DrawingUtil.sceneToWorldY( cy );
+        pw.format(Locale.US, " <points data=\"%.2f %.2f \" />\n", x, y );
+        // pw.format("  <font type=\"0\" />\n");
+        pw.format("</item>\n");
+      }
+    }
   }
 
   @Override

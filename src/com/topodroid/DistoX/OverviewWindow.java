@@ -16,7 +16,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.content.pm.PackageManager;
 
 import android.util.TypedValue;
 
@@ -427,7 +426,8 @@ public class OverviewWindow extends ItemDrawer
 
       setContentView(R.layout.overview_activity);
       mApp = (TopoDroidApp)getApplication();
-	  mActivity = this;
+      mActivity = this;
+      Resources res = getResources();
       // mZoom = mApp.mScaleFactor;    // canvas zoom
 
       mDisplayCenter = new PointF(mApp.mDisplayWidth  / 2, mApp.mDisplayHeight / 2);
@@ -444,7 +444,6 @@ public class OverviewWindow extends ItemDrawer
       mListView = (HorizontalListView) findViewById(R.id.listview);
       int size = mApp.setListViewHeight( mListView );
 
-      Resources res = getResources();
       mButton1 = new Button[ mNrButton1 ];
       for ( int k=0; k<mNrButton1; ++k ) {
         mButton1[k] = MyButton.getButton( mActivity, this, izons[k] );
@@ -463,7 +462,7 @@ public class OverviewWindow extends ItemDrawer
       mButtonView1 = new HorizontalButtonView( mButton1 );
       mListView.setAdapter( mButtonView1.mAdapter );
 
-      BrushManager.makePaths( getResources() );
+      BrushManager.makePaths( mApp, res );
       setTheTitle();
 
       mData         = mApp.mData; // new DataHelper( this ); 

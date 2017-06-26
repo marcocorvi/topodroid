@@ -167,7 +167,7 @@ public class DrawingLabelPath extends DrawingPointPath
   }
 
   @Override
-  public void toCsurvey( PrintWriter pw, String cave, String branch )
+  public void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind )
   { 
     // int size = mScale - SCALE_XS;
     // int layer  = 6;
@@ -175,6 +175,7 @@ public class DrawingLabelPath extends DrawingPointPath
     // int cat    = 81;
     pw.format("<item layer=\"6\" cave=\"%s\" branch=\"%s\" type=\"8\" category=\"81\" transparency=\"0.00\"",
       cave, branch );
+    if ( bind != null ) pw.format( " bind=\"%s\"", bind );
     pw.format(" text=\"%s\" textrotatemode=\"1\" >\n", mPointText );
     pw.format("  <pen type=\"10\" />\n");
     pw.format("  <brush type=\"7\" />\n");

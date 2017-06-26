@@ -17,7 +17,6 @@ import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.content.pm.PackageManager;
 
 import android.graphics.Paint;
 import android.graphics.Paint.FontMetrics;
@@ -59,7 +58,8 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-// import android.net.Uri;
+
+import android.net.Uri;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -1416,7 +1416,7 @@ public class DrawingWindow extends ItemDrawer
     // int width = dm widthPixels;
     int width = getResources().getDisplayMetrics().widthPixels;
 
-    // mIsNotMultitouch = ! getPackageManager().hasSystemFeature( PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH );
+    // mIsNotMultitouch = ! FeatureChecker.checkMultitouch( this );
 
     setContentView(R.layout.drawing_activity);
     mDataDownloader = mApp.mDataDownloader; // new DataDownloader( this, mApp );
@@ -1486,7 +1486,7 @@ public class DrawingWindow extends ItemDrawer
     // redoBtn.setEnabled(false);
     // undoBtn.setEnabled(false); // let undo always be there
 
-    BrushManager.makePaths( getResources() );
+    BrushManager.makePaths( mApp, getResources() );
     setTheTitle();
 
     // mBezierInterpolator = new BezierInterpolator( );
@@ -2862,19 +2862,39 @@ public class DrawingWindow extends ItemDrawer
       modified();
     }
 
+    private void doTakePhoto( File imagefile, boolean insert )
+    {
+      if ( FeatureChecker.checkCamera( mApp ) ) { // hasPhoto
+        new QCamCompass( this,
+              	         (new MyBearingAndClino( mApp, imagefile )),
+          	         ( insert ? this : null), // ImageInserter
+          	         true, false).show();  // true = with_box, false=with_delay
+      } else {
+        try {
+          Uri outfileuri = Uri.fromFile( imagefile );
+          Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
+          intent.putExtra( MediaStore.EXTRA_OUTPUT, outfileuri );
+          intent.putExtra( "outputFormat", Bitmap.CompressFormat.JPEG.toString() );
+          if ( insert ) {
+            mActivity.startActivityForResult( intent, TDRequest.CAPTURE_IMAGE_DRAWWINDOW );
+          } else {
+            mActivity.startActivity( intent );
+          }
+        } catch ( ActivityNotFoundException e ) {
+          Toast.makeText( mActivity, R.string.no_capture_app, Toast.LENGTH_SHORT ).show();
+        }
+      }
+    }
+
     public void addPhotoPoint( String comment, float x, float y )
     {
       mMediaComment = (comment == null)? "" : comment;
       mMediaId = mApp.mData.nextPhotoId( mApp.mSID );
       mMediaX = x;
       mMediaY = y;
-      File file = new File( TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString(mMediaId) ) );
+      File imagefile = new File( TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString(mMediaId) ) );
       // TODO TD_XSECTION_PHOTO
-      new QCamCompass( this,
-                       (new MyBearingAndClino( mApp, file )),
-                       this,
-                       true, false).show();  // true = with_box, false=with_delay
-
+      doTakePhoto( imagefile, true ); // with inserter
     }
 
     private void addAudioPoint( float x, float y )
@@ -3985,21 +4005,7 @@ public class DrawingWindow extends ItemDrawer
         // imageFile := PHOTO_DIR / surveyId / photoId .jpg
         File imagefile = new File( TDPath.getSurveyJpgFile( mApp.mySurvey, id ) );
         // TODO TD_XSECTION_PHOTO
-        new QCamCompass( this,
-                         (new MyBearingAndClino( mApp, imagefile )),
-                         null,
-                         true, false).show();  // true = with_box, false=with_delay
-
-        // try {
-        //   Uri outfileuri = Uri.fromFile( imagefile );
-        //   Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
-        //   intent.putExtra( MediaStore.EXTRA_OUTPUT, outfileuri );
-        //   intent.putExtra( "outputFormat", Bitmap.CompressFormat.JPEG.toString() );
-        //   // startActivityForResult( intent, TDRequest.CAPTURE_IMAGE_ACTIVITY );
-        //   mActivity.startActivity( intent );
-        // } catch ( ActivityNotFoundException e ) {
-        //   Toast.makeText( mActivity, R.string.no_capture_app, Toast.LENGTH_SHORT ).show();
-        // }
+        doTakePhoto( imagefile, false ); // without inserter
       }
     }
 
@@ -4415,7 +4421,7 @@ public class DrawingWindow extends ItemDrawer
         //   askDelete();
         (new PlotRenameDialog( mActivity, this, mApp )).show();
       } else if ( p++ == pos ) { // PALETTE
-        BrushManager.makePaths( getResources() );
+        BrushManager.makePaths( mApp, getResources() );
         (new SymbolEnableDialog( mActivity, mApp )).show();
       } else if ( PlotInfo.isSketch2D( mType ) && p++ == pos ) { // OVERVIEW
         if ( mType == PlotInfo.PLOT_PROFILE ) {
@@ -4499,17 +4505,43 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
   }
 
-  void exportAsCsx( PrintWriter pw, String cave, String branch )
+  void exportAsCsx( PrintWriter pw, String survey, String cave, String branch )
   {
     // Log.v("DistoX", "export as CSX <<" + cave + ">>" );
+    List< PlotInfo > all_sections = mData.selectAllPlotsSection( mSid, TopoDroidApp.STATUS_NORMAL );
     pw.format("  <plan>\n");
-    mDrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_PLAN, cave, branch );
+    ArrayList< PlotInfo > sections1 = new ArrayList< PlotInfo >();
+    mDrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_PLAN, survey, cave, branch, all_sections, sections1 );
     pw.format("    <plot />\n");
+    pw.format("    <crosssections>\n");
+    for ( PlotInfo section1 : sections1 ) {
+      pw.format("    <crosssection id=\"%s\" design=\"0\" crosssection=\"%s\">\n", section1.name, section1.name );
+      exportCsxXSection( pw, section1, survey, cave, branch );
+      pw.format("    </crosssection>\n" );
+    }
+    pw.format("    </crosssections>\n");
     pw.format("  </plan>\n");
+
     pw.format("  <profile>\n");
-    mDrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_EXTENDED, cave, branch ); 
+    ArrayList< PlotInfo > sections2 = new ArrayList< PlotInfo >();
+    mDrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_EXTENDED, survey, cave, branch, all_sections, sections2 ); 
     pw.format("    <plot />\n");
+    pw.format("    <crosssections>\n");
+    for ( PlotInfo section2 : sections2 ) {
+      pw.format("    <crosssection id=\"%s\" design=\"1\" crosssection=\"%s\">\n", section2.name, section2.name );
+      exportCsxXSection( pw, section2, survey, cave, branch );
+      pw.format("    </crosssection>\n" );
+    }
+    pw.format("    </crosssections>\n");
     pw.format("  </profile>\n");
+  }
+
+  private void exportCsxXSection( PrintWriter pw, PlotInfo section, String survey, String cave, String branch )
+  {
+    // String name = section.name; // binding name
+    // open xsection file
+    String filename = TDPath.getSurveyPlotTdrFile( survey, section.name );
+    DrawingIO.exportCsxXSection( pw, filename, section.name, survey, cave, branch );
   }
 
   public void setConnectionStatus( int status )
@@ -4866,16 +4898,21 @@ public class DrawingWindow extends ItemDrawer
   protected void onActivityResult( int reqCode, int resCode, Intent data )
   {
     switch ( reqCode ) {
-      case TDRequest.QCAM_COMPASS:
+      // case TDRequest.QCAM_COMPASS_DRAWWINDOW: // not used
+      //   if ( resCode == Activity.RESULT_OK ) {
+      //     try {
+      //       Bundle extras = data.getExtras();
+      //       float b = Float.parseFloat( extras.getString( TDTag.TOPODROID_BEARING ) );
+      //       float c = Float.parseFloat( extras.getString( TDTag.TOPODROID_CLINO ) );
+      //       mShotNewDialog.setBearingAndClino( b, c, 0 ); // orientation 0
+      //     } catch ( NumberFormatException e ) { }
+      //   }
+      //   mShotNewDialog = null;
+      //   break;
+      case TDRequest.CAPTURE_IMAGE_DRAWWINDOW:
         if ( resCode == Activity.RESULT_OK ) {
-          try {
-            Bundle extras = data.getExtras();
-            float b = Float.parseFloat( extras.getString( TDTag.TOPODROID_BEARING ) );
-            float c = Float.parseFloat( extras.getString( TDTag.TOPODROID_CLINO ) );
-            mShotNewDialog.setBearingAndClino( b, c, 0 ); // orientation 0
-          } catch ( NumberFormatException e ) { }
+          insertPhoto();
         }
-        mShotNewDialog = null;
         break;
     }
   }

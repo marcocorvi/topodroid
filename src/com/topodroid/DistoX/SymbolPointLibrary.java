@@ -18,6 +18,8 @@ import java.io.File;
 
 import android.graphics.Paint;
 import android.graphics.Path;
+
+import android.content.Context;
 import android.content.res.Resources;
 
 import android.util.Log;
@@ -36,7 +38,7 @@ class SymbolPointLibrary extends SymbolLibrary
   // int mPointDangerIndex;
   int mPointSectionIndex;
 
-  SymbolPointLibrary( Resources res )
+  SymbolPointLibrary( Context ctx, Resources res )
   {
     super( "p_" );
     mPointUserIndex   = 0;
@@ -46,7 +48,7 @@ class SymbolPointLibrary extends SymbolLibrary
     // mPointDangerIndex = -1;
     mPointSectionIndex = -1;
     loadSystemPoints( res );
-    loadUserPoints();
+    loadUserPoints( ctx );
     makeEnabledList();
   }
 
@@ -110,7 +112,7 @@ class SymbolPointLibrary extends SymbolLibrary
     addSymbol( symbol );
   }
 
-  void loadUserPoints()
+  void loadUserPoints( Context ctx )
   {
     String locale = "name-" + TopoDroidApp.mLocale.toString().substring(0,2);
     // String iso = "ISO-8859-1";
@@ -124,9 +126,13 @@ class SymbolPointLibrary extends SymbolLibrary
       int systemNr = mSymbols.size();
       File[] files = dir.listFiles();
       for ( File file : files ) {
-        SymbolPoint symbol = new SymbolPoint( file.getPath(), file.getName(), locale, iso );
+        String fname = file.getName();
+        if ( fname.equals("photo") && ! FeatureChecker.checkCamera( ctx ) ) continue;
+        if ( fname.equals("audio") && ! FeatureChecker.checkMicrophone( ctx ) ) continue;
+
+        SymbolPoint symbol = new SymbolPoint( file.getPath(), fname, locale, iso );
         if ( symbol.mThName == null ) {
-          TDLog.Error( "point with null ThName " + file.getName() );
+          TDLog.Error( "point with null ThName " + fname );
           continue;
         }
         if ( ! hasSymbolByFilename( symbol.mThName ) ) {
@@ -190,7 +196,6 @@ class SymbolPointLibrary extends SymbolLibrary
     // mPointDangerIndex  = getSymbolIndexByThName( "danger" );
     mPointSectionIndex = getSymbolIndexByThName( "section" ); 
   }
-
 
   void makeEnabledListFromPalette( SymbolsPalette palette )
   {

@@ -1644,7 +1644,7 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
-  private List< PhotoInfo > selectPhotoAtShot( long sid, long shotid )
+  List< PhotoInfo > selectPhotoAtShot( long sid, long shotid )
   {
     List< PhotoInfo > list = new ArrayList< PhotoInfo >();
     if ( myDB == null ) return list;
@@ -1856,6 +1856,14 @@ public class DataHelper extends DataSetObservable
      return doSelectAllPlots( sid, 
                               "surveyId=? and status=? and type=?",
                               new String[] { Long.toString(sid), Long.toString(status), Long.toString(type) }
+     );
+   }
+
+   public List< PlotInfo > selectAllPlotsSection( long sid, long status )
+   {
+     return doSelectAllPlots( sid, 
+                              "surveyId=? and status=? and ( type=0 or type=3 or type=5 or type=7 )",
+                              new String[] { Long.toString(sid), Long.toString(status) }
      );
    }
 

@@ -33,7 +33,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorEvent;
 import android.hardware.SensorManager;
 
-import android.util.Log;
+// import android.util.Log;
 
 
 public class SensorActivity extends Activity
@@ -193,6 +193,7 @@ public class SensorActivity extends Activity
     if ( mSensorType != -1 ) {
       for ( Sensor s : mSensor ) {
         if ( s.getType() == mSensorType ) {
+          // Log.v("DistoX", "register sensor type " + mSensorType );
           mSensorManager.registerListener(mListener, s, SensorManager.SENSOR_DELAY_NORMAL);
         }
       }
@@ -207,7 +208,7 @@ public class SensorActivity extends Activity
       if ( event.sensor.getType() == mSensorType ) {
         // TDLog.Log( TDLog.LOG_SENSOR,
         //   "sensorChanged (" + evenmt.values[0] + ", " + evenmt.values[1] + ", " + evenmt.values[2] + ")");
-        if ( mFirst ) Log.v("DistoX", "sensor changed first " + event.values[0] );
+        // if ( mFirst ) Log.v("DistoX", "sensor changed first " + event.values[0] );
         String value = "";
         switch ( mSensorType ) {
           case Sensor.TYPE_LIGHT:
@@ -250,6 +251,7 @@ public class SensorActivity extends Activity
     public void onAccuracyChanged( Sensor sensor, int accuracy )
     {
       // TODO Auto-generated method stub
+      // Log.v("DistoX", "sensor accuracy changed");
       mFirst = true;
       mAlpha = 0.8f;
     }

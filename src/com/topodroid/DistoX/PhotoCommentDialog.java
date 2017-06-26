@@ -38,6 +38,7 @@ public class PhotoCommentDialog extends MyDialog
   private Button   mButtonOK;
   private CheckBox mCamera;        // whether to use camera app
   private Button   mButtonCancel;
+  private boolean  hasPhoto;
 
   /**
    * @param context   context
@@ -57,6 +58,8 @@ public class PhotoCommentDialog extends MyDialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
+
+    hasPhoto = FeatureChecker.checkCamera( mContext );
     // TDLog.Log(  TDLog.LOG_PHOTO, "PhotoCommentDialog onCreate" );
     setContentView(R.layout.photo_comment_dialog);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
@@ -65,6 +68,9 @@ public class PhotoCommentDialog extends MyDialog
     mButtonOK  = (Button) findViewById(R.id.photo_comment_ok );
     mButtonCancel = (Button) findViewById(R.id.photo_comment_cancel );
     mCamera    = (CheckBox) findViewById(R.id.photo_camera );
+    if ( ! hasPhoto ) {
+      mCamera.setVisibility( View.GONE );
+    }
 
     setTitle( R.string.title_photo_comment );
 
@@ -80,7 +86,9 @@ public class PhotoCommentDialog extends MyDialog
     if ( b == mButtonOK && mETcomment.getText() != null ) {
       // TDLog.Log( TDLog.LOG_PHOTO, "set photo comment " + mETcomment.getText().toString() );
       // mParent.insertPhoto( mETcomment.getText().toString() );
-      mParent.doTakePhoto( mETcomment.getText().toString(), ( mCamera.isChecked() ? 0 : 1 ) );
+      int camera = 0;
+      if ( hasPhoto && ! mCamera.isChecked() ) camera = 1;
+      mParent.doTakePhoto( mETcomment.getText().toString(), camera );
     // } else if ( b == mButtonCancel ) {
       /* nothing */
     }

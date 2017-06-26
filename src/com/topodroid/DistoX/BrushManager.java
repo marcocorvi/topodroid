@@ -23,6 +23,7 @@ import android.graphics.BitmapShader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.Shader.TileMode;
 
+import android.content.Context;
 import android.content.res.Resources;
 
 // import android.util.Log;
@@ -127,7 +128,7 @@ public class BrushManager
   // ===========================================================================
   static boolean mReloadSymbols = true; // whether to reload symbols
 
-  static void makePaths( Resources res )
+  static void makePaths( Context ctx, Resources res )
   {
     if ( mStationSymbol == null ) {
       mStationSymbol = new SymbolPoint( "station", "station", "station", 0xffff6633, 
@@ -137,28 +138,28 @@ public class BrushManager
     //   mSymbolHighlight = MyButton.getButtonBackground( mApp, res, R.drawable.symbol_highlight );
     // }
 
-    if ( mPointLib == null ) mPointLib = new SymbolPointLibrary( res );
+    if ( mPointLib == null ) mPointLib = new SymbolPointLibrary( ctx, res );
     if ( mLineLib == null ) mLineLib = new SymbolLineLibrary( res );
     if ( mAreaLib == null ) mAreaLib = new SymbolAreaLibrary( res );
 
     if ( mReloadSymbols ) {
-      mPointLib.loadUserPoints();
+      mPointLib.loadUserPoints( ctx );
       mLineLib.loadUserLines();
       mAreaLib.loadUserAreas();
       mReloadSymbols = false;
     }
   }
 
-  static void reloadAllLibraries( Resources res ) 
+  static void reloadAllLibraries( Context ctx, Resources res ) 
   {
-    reloadPointLibrary( res );
+    reloadPointLibrary( ctx, res );
     reloadLineLibrary( res );
     reloadAreaLibrary( res );
   }
 
-  static void reloadPointLibrary( Resources res )
+  static void reloadPointLibrary( Context ctx, Resources res )
   {
-    mPointLib = new SymbolPointLibrary( res );
+    mPointLib = new SymbolPointLibrary( ctx, res );
     // mPointLib.loadUserPoints();
   }
 

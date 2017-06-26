@@ -373,6 +373,7 @@
     <string name="sensor_type">type</string>
     <string name="sensor_value">value</string>
     <string name="sensor_comment">comment</string>
+    <string name="insufficient_data">insufficient sensor data</string>
 
     <!-- UNUSED string name="shot_clino">clino</string -->
     <!-- UNUSED string name="shot_compass">compass</string -->
