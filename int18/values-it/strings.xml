@@ -44,7 +44,7 @@
     <!-- UNUSED string name="missing_warning">Mancano i seguenti prototipi grafici.\n</string -->
     <string name="failed_snap_to_line">Nessuna linea su cui deformare il bordo area</string>
     <string name="failed_snap_to_point">Nessun punto vicino su cui muovere il punto</string>
-    <!-- TODO string name="failed_snap_to_splays">No close splay to snap the line to</string -->
+    <string name="failed_snap_to_splays">Nessun splay vicino su cui agganciare il bordo</string>
 
     <string name="calibration_title">Strumenti di calibrazione</string>
     <string name="calibration_length">Fettuccia</string>
@@ -152,8 +152,8 @@
 
     <string name="illegal_data_value">Dati non corretti</string>
 
-    <!-- TODO string name="photo_title">PHOTO</string -->
-    <!-- TODO string name="photo_text">Enter photo comment</string -->
+    <string name="photo_title">FOTO</string>
+    <string name="photo_text">Inserisci commento</string>
     <string name="label_title">TESTO</string>
     <string name="label_text">Scrivi il testo</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
@@ -205,7 +205,7 @@
     <string name="in">in</string>
     <!-- UNUSED string name="none">none</string -->
     <!-- UNUSED string name="barrier_add">Interruzione restituzione?</string -->
-    <!-- TODO string name="hide_from">Hide from</string -->
+    <string name="hide_from">Nascondi da</string>
     <string name="barrier_del">Continuazione restituzione?</string>
     <!-- UNUSED string name="hidden_add">Nascondi la linea mediana</string -->
     <string name="hidden_del">Mostra la linea mediana</string>
@@ -219,7 +219,7 @@
 
     <string name="no_bt">No Bluetooth</string>
     <string name="no_calib">Nessuna calibrazione</string>
-    <!-- TODO string name="no_calib_check">No calibration-check shot</string -->
+    <string name="no_calib_check">Nessun tiro di controllo calibrazione</string>
     <string name="no_calibration">Nessuna calibrazione selezionata</string>
     <string name="no_capture_app">Nessuna app per foto</string>
     <string name="no_cave3d">Cave3D non installato</string>
@@ -242,8 +242,8 @@
     <string name="no_thmanager">ThManager non installato</string>
     <string name="no_db_viewer">DB_viewer non installato</string>
     <string name="no_undelete">Nessun oggetto da riprendere</string>
-    <!-- FIXME string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Posizione %4$.1f"</string -->
-    <!-- FIXME string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Inclinazione %4$.1f"</string -->
+    <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Posizione %5$.1f"</string>
+    <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Inclinazione %5$.1f"</string>
 
     <!-- OK string name="menu_3d">3D</string -->
     <string name="menu_about">INFO</string>
@@ -251,7 +251,7 @@
     <string name="menu_attach">CONNETTI</string>
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
-    <!-- TODO string name="menu_calib_check">CALIBR. CHECK</string -->
+    <string name="menu_calib_check">VERIFICA CALIBR.</string>
     <string name="menu_close">CHIUDI</string>
     <string name="menu_delete">ELIMINA</string>
     <string name="menu_detach">SCONNETTI</string>
@@ -285,30 +285,30 @@
 
     <string name="popup_join_pt">Sposta al punto vicino</string>
     <string name="popup_snap_ln">Segui la linea vicina</string>
-    <!-- TODO string name="popup_snap_to_splays">Snap to nearby splays</string -->
+    <string name="popup_snap_to_splays">Collega agli splay vicini</string>
     <string name="popup_split_pt">Sdoppia il punto</string>
     <string name="popup_split_ln">Taglia la linea</string>
     <string name="popup_sharp_pt">Rendi diritto</string>
     <string name="popup_curve_pt">Rendi curvo</string>
     <string name="popup_remove_pt">Elimina punto</string>
 
-    <!-- TODO string name="popup_erase_all">Erase all</string -->
-    <!-- TODO string name="popup_erase_point">Erase points</string -->
-    <!-- TODO string name="popup_erase_line">Erase lines</string -->
-    <!-- TODO string name="popup_erase_area">Erase areas</string -->
+    <string name="popup_erase_all">Cancella tutto</string>
+    <string name="popup_erase_point">Cancella punti</string>
+    <string name="popup_erase_line">Cancella linee</string>
+    <string name="popup_erase_area">Cancella aree</string>
 
-    <!-- TODO string name="popup_select_all">Select all</string -->
-    <!-- TODO string name="popup_select_point">Select points</string -->
-    <!-- TODO string name="popup_select_line">Select lines</string -->
-    <!-- TODO string name="popup_select_area">Select areas</string -->
-    <!-- TODO string name="popup_select_shot">Select shots</string -->
-    <!-- TODO string name="popup_select_station">Select stations</string -->
+    <string name="popup_select_all">Seleziona tutto</string>
+    <string name="popup_select_point">Seleziona punti</string>
+    <string name="popup_select_line">Seleziona linee</string>
+    <string name="popup_select_area">Seleziona aree</string>
+    <string name="popup_select_shot">Seleziona tiri</string>
+    <string name="popup_select_station">Seleziona caposaldi</string>
 
-    <!-- TODO string name="popup_cont_none">None</string -->
-    <!-- TODO string name="popup_cont_start">Start point</string -->
-    <!-- TODO string name="popup_cont_end">End point</string -->
-    <!-- TODO string name="popup_cont_both">Both points</string -->
-    <!-- TODO string name="popup_cont_continue">Continue</string -->
+    <string name="popup_cont_none">Nessuno</string>
+    <string name="popup_cont_start">Punto inizio</string>
+    <string name="popup_cont_end">Punto fine</string>
+    <string name="popup_cont_both">Entrambi i punti</string>
+    <string name="popup_cont_continue">Continua</string>
 
     <string name="connected_none">Non connesso</string>
     <string name="connected_already">Gia\' connesso</string>
@@ -319,9 +319,9 @@
     <!-- UNUSED string name="not_implemented">Non implementato</string -->
     <string name="null_bitmap">bitmap non valida</string>
     <string name="photo">foto</string>
-    <!-- TODO string name="photo_camera">Camera App</string -->
+    <string name="photo_camera">App per foto</string>
     <string name="photo_comment_prompt">Scrivi il commento</string>
-    <!-- TODO string name="photo_azimuth_clino">Azimuth: %1$.1f Clino %2$.1f</string -->
+    <string name="photo_azimuth_clino">Azimut: %1$.1f Inclinazione %2$.1f</string>
     <!-- UNUSED string name="photo_name">caposaldo/nome</string -->
     <!-- UNUSED string name="photo_photo">foto</string -->
     <!-- UNUSED string name="photo_sensor">sensore</string -->
@@ -332,7 +332,7 @@
     <!-- UNUSED string name="picture_no_station">Caposaldo o nome mancante</string -->
     <string name="plot_delete">Elimina disegno ?</string>
     <string name="item_delete">Cancellare elemento %1$s ?</string>
-    <!-- TODO string name="splay_delete">Delete splay %1$s ?</string -->
+    <string name="splay_delete">Cancello splay %1$s ?</string>
     <string name="plot_duplicate_name">Nome disegno già presente</string>
     <!-- UNUSED string name="plot_name">Nome del disegno</string -->
     <string name="plot_new">Nuovo disegno</string>
@@ -357,7 +357,7 @@
     <!-- UNUSED string name="converted_tdr2th2">Convertito disegno da formato binario a th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Sovrascrivo il file del disegno th2 ?</string -->
     <string name="section_area">Area della sezione: %1$.1f</string>
-    <!-- TODO string name="scrap_outline">Sketch outline</string -->
+    <string name="scrap_outline">Contorno del disegno</string>
 
     <!-- UNUSED string name="sensor">sensore</string -->
     <string name="sensor_gravity">gravità</string>
@@ -371,13 +371,13 @@
     <string name="sensor_type">tipo</string>
     <string name="sensor_value">valore</string>
     <string name="sensor_comment">commento</string>
-    <!-- TODO string name="insufficient_data">insufficient sensor data</string -->
+    <string name="insufficient_data">Dati sensore insufficienti</string>
 
     <!-- UNUSED string name="shot_clino">clino</string -->
     <!-- UNUSED string name="shot_compass">bussola</string -->
     <string name="shot_delete">Cancellare la misura?</string>
-    <!-- TODO string name="shots_delete">Delete shots ?</string -->
-    <!-- TODO string name="shot_check">Mark shot as check-shot?</string -->
+    <string name="shots_delete">Cancello il tiro?</string>
+    <string name="shot_check">Marco il tiro come di controllo?</string>
     <string name="shot_from">da</string>
     <string name="shot_info">Scrivi i dati</string>
     <!-- UNUSED string name="shot_length">lunghezza</string -->
@@ -398,7 +398,7 @@
 
     <string name="station">caposaldo</string>
     <string name="station_ask">Inserisci caposaldo ?</string>
-    <!-- TODO string name="station_del">Remove station from sketch?</string -->
+    <string name="station_del">Rimuovo caposaldo dal disegno?</string>
     <string name="station_set">Prosegui rilievo da qui?</string>
     <!-- UNUSED string name="station_base">caposaldo di riferimento</string -->
     <!-- UNUSED string name="station_next">prossimo caposaldo</string -->
@@ -417,10 +417,10 @@
     <string name="toggle_failed">Attivazione modo calibrazione fallita</string>
     <string name="toggle_ok">DistoX in modo calibrazione</string>
     <string name="undelete_text">Seleziona oggetto da recuoperare</string>
-    <!-- TODO string name="undelete_shot">Shots</string -->
-    <!-- TODO string name="undelete_overshoot">Overshoots</string -->
-    <!-- TODO string name="undelete_check">Checks</string -->
-    <!-- TODO string name="undelete_plot">Sketches</string -->
+    <string name="undelete_shot">Tiri</string>
+    <string name="undelete_overshoot">Tiri troppo lunghi</string>
+    <string name="undelete_check">Controlli</string>
+    <string name="undelete_plot">Disegni</string>
     <string name="delete_whole_leg">Cancella l\'intera battuta</string>
     <string name="visible_border">bordo visibile</string>
     <!-- UNUSED string name="vthreshold">soglia vert.</string -->
@@ -444,7 +444,7 @@
     <string name="stat_duplicate">Battute doppie %1$d %2$.1f %3$s</string>
     <string name="stat_leg">Battute %1$d %2$.1f %3$s</string>
     <string name="stat_length">Sviluppo %1$.1f %2$s</string>
-    <!-- TODO string name="stat_projlen">Plan length %1$.1f %2$s</string -->
+    <string name="stat_projlen">Lunghezza piano %1$.1f %2$s</string>
     <string name="stat_loop">Anelli %1$d</string>
     <string name="stat_origin">Caposaldo zero: %1$s</string>
     <string name="stat_azimuth">Profilo proiezione azimut: %1$.1f</string>
@@ -499,8 +499,8 @@
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Disegno</string>
-    <!-- TODO string name="button_more"    >More</string -->
-    <!-- TODO string name="button_lrud"    >Add LRUD</string -->
+    <string name="button_more"    >Altro</string>
+    <string name="button_lrud"    >Aggiungi LRUD</string>
     <string name="button_ok"        >OK        </string>
     <string name="button_open"      >Apri      </string>
     <string name="button_read"      >Leggi     </string>
@@ -530,7 +530,7 @@
     <string name="mode_grid">Griglia</string>
     <string name="mode_fixed">[ Bloccati ]</string>
     <string name="mode_outline">Solo contorno</string>
-    <!-- TODO string name="mode_scale_ref">Scale reference bar</string -->
+    <string name="mode_scale_ref">Scala barra di riferimento</string>
 
     <!-- UNUSED string name="remote_title">DistoX Remote Control</string -->
     <string name="remote_on">Laser ON</string>
@@ -541,7 +541,7 @@
 
     <string name="popup_do_splay">Splay</string>
     <string name="popup_do_leg">Battuta</string>
-    <!-- TODO string name="popup_do_gm_data">Calib. shot</string -->
+    <string name="popup_do_gm_data">Tiro di calib.</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Importa</string>
@@ -553,7 +553,7 @@
     <string name="symbol_mine">Minerario</string>
     <string name="symbol_paleo">Paleologico</string>
     <string name="symbol_speleo">Speleologico</string>
-    <!-- TODO string name="symbol_extra">Speleo (2)</string -->
+    <string name="symbol_extra">Speleo (2)</string>
 
     <string name="symbol_reload">Strumenti Disegno</string>
 
@@ -611,9 +611,9 @@
     <string name="help_help">Questo aiuto</string>
     <!-- UNUSED string name="help_manual">Manuale online</string -->
     <string name="help_measure">Misurare le distanze</string>
-    <!-- TODO string name="help_measure_type">Measuring mode: fixed point or polyline</string -->
+    <string name="help_measure_type">Metodo misura: punti fissi o polilinea</string>
     
-    <!-- TODO string name="help_calib_check">Calibration-check shots</string -->
+    <string name="help_calib_check">Tiri di controllo calib.</string>
     <string name="help_close">Chiusura finestra</string>
     <string name="help_coeff">Coefficienti della calibrazione</string>
     <string name="help_continue">Continuare il disegno di una linea</string>
@@ -666,8 +666,8 @@
     <string name="help_range">Sposta porzione di linea</string>
     <!-- UNUSED string name="help_clear">Pulisci selezione</string -->
     <string name="help_eraser">Modalità cancella</string>
-    <!-- TODO string name="help_erase_mode">Eraser type</string -->
-    <!-- TODO string name="help_erase_size">Eraser size [S/M/L]</string -->
+    <string name="help_erase_mode">Tipo di cancellino</string>
+    <string name="help_erase_size">Misura cancellino [S/M/L]</string>
     <string name="help_previous">Precedente oggetto nella selezione</string>
     <string name="help_next">Prossimo oggetto nella selezione</string>
     <string name="help_recover">Recupera disegno dal backup</string>
@@ -720,9 +720,9 @@
   
 
     <string name="title_azimut">Riferimento Extend</string>
-    <!-- TODO string name="title_audio">Audio comment</string -->
+    <string name="title_audio">Commento audio</string>
     <string name="title_calib">Calibrazioni</string>
-    <!-- TODO string name="title_calib_check">Calibration-check shots</string -->
+    <string name="title_calib_check">Tiri di controllo calib.</string>
     <string name="title_coverage">Distribuzione dati calibrazione</string>
     <string name="title_coeff">Calibrazione</string>
     <!-- NO string name="title_contour">Contour</string -->
@@ -754,7 +754,7 @@
     <string name="title_projection">Proiezione azimutale profilo %1$d</string>
     <string name="title_refs">Riferimenti grafici</string>
     <string name="title_scraps">Disegni</string>
-    <!-- TODO string name="title_scraps_outline">Sketch outline</string -->
+    <string name="title_scraps_outline">Contorno disegno</string>
     <string name="title_select">Seleziona</string>
     <string name="title_shift">Sposta</string>
     <string name="title_shot_delete">Rimuovi battuta ?</string>
@@ -810,8 +810,8 @@
   <string name="pref_leg_shots_summary">Minimo numero di misure per tiro di poligonale</string>
   <string name="pref_station_prefix_title">Esporta il prefisso dei caposaldi</string>
   <string name="pref_station_prefix_summary">Esporta in cSurvey il prefisso dei caposaldi</string>
-  <!-- TODO string name="pref_trobot_names_title">TopoRobot station names</string -->
-  <!-- TODO string name="pref_trobot_names_summary">Station names are in TopoRobot style</string -->
+  <string name="pref_trobot_names_title">Nomi capisaldi TopoRobot</string>
+  <string name="pref_trobot_names_summary">I nomi capisaldi sono in stile TopoRobot</string>
   <string name="pref_ortho_lrud_title">Angolo di splay di tipo LRUD</string>
   <string name="pref_ortho_lrud_summary">Minimo angolo tra splay e battuta per uno splay di tipo LRUD</string>
   <string name="pref_ortho_lrud_message">LRUD: minimo angolo splay-battuta</string>
@@ -912,12 +912,12 @@
   <string name="pref_leg_title">Tolleranza battute</string>
   <string name="pref_leg_summary">Tolleranza tra tiri di una battuta</string>
   <string name="pref_leg_message">Tolleranza tra tiri di una battuta</string>
-  <!-- TODO string name="pref_max_shot_title">Maximum shot length</string -->
-  <!-- TODO string name="pref_max_shot_summary">Maximum length of shooting [m]</string -->
-  <!-- TODO string name="pref_max_shot_message">Shots over this length are marked as overshoot</string -->
-  <!-- TODO string name="pref_min_leg_title">Minimum leg length</string -->
-  <!-- TODO string name="pref_min_leg_summary">Minimum length of legs [m]</string -->
-  <!-- TODO string name="pref_min_leg_message">Legs shorter than the minimum have orange background</string -->
+  <string name="pref_max_shot_title">Massima lunghezza tiro</string>
+  <string name="pref_max_shot_summary">Massima lunghezza tiro [m]</string>
+  <string name="pref_max_shot_message">I tiri oltre questa lunghezza sono marcati come fuori-misura</string>
+  <string name="pref_min_leg_title">Minima lunghezza battuta</string>
+  <string name="pref_min_leg_summary">Minima lunghezza battuta [m]</string>
+  <string name="pref_min_leg_message">Battute meno lunghe del minimo hanno uno sfondo arancio</string>
   <string name="pref_backsight_title">Backsight</string>
   <string name="pref_backsight_summary">Campi backsight nel dialogo Nuova Battuta</string>
   <string name="pref_prev_next_title">Pulsanti Prec/Succ</string>

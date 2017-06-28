@@ -382,7 +382,7 @@
     <string name="sensor_type">Art</string>
     <string name="sensor_value">Messung</string>
     <string name="sensor_comment">Notizen</string>
-    <!-- TODO string name="insufficient_data">insufficient sensor data</string -->
+    <string name="insufficient_data">Nicht genügend Sensordaten</string>
 
     <!-- UNUSED string name="shot_clino">Neigung</string -->
     <!-- UNUSED string name="shot_compass">Azimut</string -->
