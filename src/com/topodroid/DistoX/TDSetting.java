@@ -104,6 +104,7 @@ class TDSetting
     "DISTOX_AUTO_SECTION_PT",     // 49
     "DISTOX_BACKUP_NUMBER",
     "DISTOX_BACKUP_INTERVAL",
+    "DISTOX_SHARED_XSECTIONS",
 
     // -------------------- LASER PREFERENCES
     "DISTOX_SHOT_TIMER",          // 50 // bearing-clino timer
@@ -397,6 +398,7 @@ class TDSetting
   static boolean mAutoSectionPt = false;
   static int   mBackupNumber   = 5;
   static int   mBackupInterval = 60;
+  static boolean mSharedXSections = false; // default value
   static float mDotRadius      = 5;
   static float mArrowLength    = 8;
 
@@ -707,6 +709,7 @@ class TDSetting
     mAutoSectionPt = prefs.getBoolean( key[k++], false );           // DISTOX_AUTO_SECTION_PT
     mBackupNumber  = tryInt(   prefs, key[k++], "5" );              // DISTOX_BACKUP_NUMBER
     mBackupInterval = tryInt(  prefs, key[k++], "60" );             // DISTOX_BACKUP_INTERVAL
+    mSharedXSections = prefs.getBoolean( key[k++], false );         // DISTOX_SHARED_XSECTIONS
 
     mTimerWait     = tryInt(   prefs, key[k++], "10" );             // DISTOX_SHOT_TIMER
     mBeepVolume    = tryInt(   prefs, key[k++], "50" );             // DISTOX_BEEP_VOLUME
@@ -1017,6 +1020,9 @@ class TDSetting
       mBackupNumber  = tryInt( prefs, k, "5" );      // DISTOX_BACKUP_NUMBER
     } else if ( k.equals( key[ nk++ ] ) ) {
       mBackupInterval = tryInt( prefs, k, "60" );    // DISTOX_BACKUP_INTERVAL
+    
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mSharedXSections  = prefs.getBoolean( k, false ); // DISTOX_SHARED_XSECTIONS
 
     } else if ( k.equals( key[ nk++ ] ) ) {
       mTimerWait        = tryInt( prefs, k, "10" );  // DISTOX_SHOT_TIMER
@@ -1349,6 +1355,7 @@ class TDSetting
 
     if ( name.equals( "DISTOX_BACKUP_NUMBER"  ) ) return parseIntValue( value, mBackupNumber,    4, 10 );
     if ( name.equals( "DISTOX_BACKUP_INTERVAL") ) return parseIntValue( value, mBackupInterval,  5, 600 );
+    // if ( name.equals( "DISTOX_SHARED_XSECTIONS") ) 
 
     // if ( name.equals( "DISTOX_TEAM" )
     if ( name.equals( "DISTOX_SHOT_TIMER"     ) ) return parseIntValue( value, mTimerWait, 0 );

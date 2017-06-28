@@ -36,7 +36,8 @@ public interface DataListener
 
   public void onUpdateSurveyName( long id, String name );
 
-  public void onUpdateSurveyInfo( long id, String date, String team, double decl, String comment, String station );
+  public void onUpdateSurveyInfo( long id, String date, String team, double decl,
+                                  String comment, String station, int xsections );
 
   public void onUpdateSurveyDayAndComment( long id, String date, String comment );
 

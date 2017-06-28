@@ -888,6 +888,10 @@
   <string name="pref_vert_splay_title">Наклонени измервания с пунктир</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Странични измервания с по-голям наклон са с пунктир в плана</string -->
   <string name="pref_vert_splay_message">Странични измервания с по-голям наклон са с пунктир в плана</string>
+  <!-- TODO string name="pref_shared_xsections_title">Shared x-sections</string -->
+  <!-- TODO string name="pref_shared_xsections_summary">At-station x-sections shared among sketches</string -->
+  <!-- TODO string name="xsections_shared">Shared X-sections</string -->
+  <!-- TODO string name="xsections_private">Private X-sections</string -->
 
 
   <string name="pref_survey_stations_title">Репери</string>

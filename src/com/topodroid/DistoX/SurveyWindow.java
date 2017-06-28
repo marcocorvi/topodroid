@@ -113,6 +113,7 @@ public class SurveyWindow extends Activity
   private EditText mEditTeam;
   private EditText mEditDecl;
   private EditText mEditComment;
+  private TextView mTVxsections;
 
   MyDateSetListener mDateListener;
 
@@ -127,6 +128,7 @@ public class SurveyWindow extends Activity
   ArrayAdapter< String > mMenuAdapter;
   boolean onMenu;
   String mInitStation = null;
+  int mXSections;
 
   TopoDroidApp mApp;
   private boolean mustOpen;
@@ -153,6 +155,7 @@ public class SurveyWindow extends Activity
     SurveyInfo info = mApp.getSurveyInfo();
     mTextName.setText( info.name );
     mInitStation = info.initStation;
+    mXSections   = info.xsections;
 
     mEditDate.setText( info.date );
     if ( info.comment != null && info.comment.length() > 0 ) {
@@ -166,6 +169,8 @@ public class SurveyWindow extends Activity
       mEditTeam.setHint( R.string.team );
     }
     setDeclination( info.declination );
+
+    mTVxsections.setText( (mXSections == SurveyInfo.XSECTION_SHARED)? R.string.xsections_shared : R.string.xsections_private );
     return true;
   }
 
@@ -198,6 +203,7 @@ public class SurveyWindow extends Activity
     mEditTeam    = (EditText) findViewById(R.id.survey_team);
     mEditDecl    = (EditText) findViewById(R.id.survey_decl);
     mEditComment = (EditText) findViewById(R.id.survey_comment);
+    mTVxsections = (TextView) findViewById(R.id.survey_xsections);
 
     mDateListener = new MyDateSetListener( mEditDate );
     mEditDate.setOnClickListener( this );
@@ -414,7 +420,7 @@ public class SurveyWindow extends Activity
     if ( comment != null ) { comment = comment.trim(); } else { comment = ""; }
 
     // TDLog.Log( TDLog.LOG_SURVEY, "INSERT survey id " + id + " date " + date + " name " + name + " comment " + comment );
-    mApp.mData.updateSurveyInfo( mApp.mSID, date, team, decl, comment, mInitStation, true );
+    mApp.mData.updateSurveyInfo( mApp.mSID, date, team, decl, comment, mInitStation, mXSections, true );
   }
 
   public void doExport( String type )

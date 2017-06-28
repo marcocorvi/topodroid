@@ -49,6 +49,13 @@
        android:defaultValue="200"
      / -->
 
+     <CheckBoxPreference
+       android:key="DISTOX_SHARED_XSECTIONS"
+       android:summary="@string/pref_shared_xsections_summary"
+       android:title="@string/pref_shared_xsections_title"
+       android:defaultValue="false"
+       />
+
     <Preference
        android:key="DISTOX_SHOT_UNITS_SCREEN"
        android:title="@string/pref_shot_units_title"

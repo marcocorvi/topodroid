@@ -44,7 +44,7 @@ MAIN WINDOW
     [x] insert symbol-set and check new symbol appear in the palette
     [x] replace symbol-set and check only new symbol are in the palette
 
-[ ] settings: check the proper navigation in the sub-settings
+[x] settings: check the proper navigation in the sub-settings
 [ ] for each setting check:
     [ ] modification with immediate feedback of the new value on the screen
     [ ] bound enforcing (when applicable)
@@ -58,8 +58,8 @@ MAIN WINDOW
     [ ] device window
     [ ] calib window
     [ ] gm-data window - I don't know what window is that. (Rodrigo)
-[ ] text size:
-    [ ] main window: survey list
+[x] text size:
+    [x] main window: survey list
     [ ] shot window: shot data list
     [ ] device window: device list
     [ ] gm-data window: calib data list
@@ -160,9 +160,9 @@ CALIBRATION DIALOG
 [ ] import calibration
     [ ] export a calibration in csv, check the file in the ccsv dir
     [ ] delete the calibration: check the tables in device10.sqlite
-    [ ] import the csv calib file
-        [ ] toast message ok
-        [ ] calibration is added to the list
+    [x] import the csv calib file
+        [x] toast message ok
+        [x] calibration is added to the list
     [ ] import again the csv calib file
         [ ] import fails if calib already exists
         NB. it does not import calib if there is already a calib with the same name
@@ -183,26 +183,26 @@ CALIBRATION INFO SCREEN
     [ ] select auto ect.
 
 CALIB DATA WINDOW
+[ ] calib-mode toggle (*)
 [ ] data download (only on-demanad mode) (*)
     [ ] the button and the title turn red while downloading
     take a few calibration shots and download them
     take more shots, download them: must be added to the list
-[ ] bluetooth to remote control distox (X310 fw >= 2.3)
-[ ] calib-mode toggle (*)
-[ ] group assignment
+[x] bluetooth to remote control distox (X310 fw >= 2.3)
+[x] group assignment
     [ ] the button turn violet while computing
     [ ] assign only numbers to data with "0"
     [ ] "reset" resets all the group numbers (and does not do assignment)
-[ ] calib coeff compute
-    [ ] fails if not enough data (<= 16)
+[x] calib coeff compute
+    [x] fails if not enough data (<= 16)
     [ ] fails if not enough groups (<= 4)
     [ ] fails if reaches max iteration numnber (set it to a small value to check)
     [ ] the button turn violet while computing
-    [ ] the results is displayed: 
-        [ ] coeffs, 
-        [ ] error-stats,
-        [ ] histogram
-[ ] angle distribution 
+    [x] the results is displayed: 
+        [x] coeffs, 
+        [x] error-stats,
+        [x] histogram
+[x] angle distribution 
     [ ] enabled only after computing the coeffs
 [ ] calib coeff read from distox (*)
 [ ] calib coeff write to distox (*)
@@ -229,7 +229,7 @@ CALIB DATA WINDOW
     [ ] algo
         [ ] auto should pick the algo by the device type/firmware
         [ ] linear/non-linear should force the algo
-[ ] help strings
+[x] help strings
 
 SURVEY DATA WINDOW
 [x] check display mode
@@ -316,16 +316,16 @@ SURVEY DATA WINDOW
     [ ] if set to left/right (fixed) shot must be extended properly
     [ ] if set to a direction shot must be right (along dir.) left (opposite dir.)
     [ ] reference extend azimuth is maintained switching between shot-list and sketching
-[ ] saved stations dialog
+[x] saved stations dialog
     [ ] add a station
     [ ] select a saved station
     [ ] check station cut-n-paste
     [ ] marks (fixed/painted)
-[ ] manual shot
+[x] manual shot
     [x] enter a new shot manually
     [ ] check from station cut-n-paste
     [ ] check to station cut-n-paste
-    [ ] station hints set by the auto-station policy
+    [x] station hints set by the auto-station policy
         [ ] splays + forward
         [ ] splays + backward
         [ ] forward + splays
@@ -345,17 +345,17 @@ SURVEY DATA WINDOW
     [ ] if backshot this is inserted as well (before the shot and the splays)
     [ ] if only backshot this is inserted in place of the shot
     [ ] check splays-at-to 
-    [ ] compass-button reads azimuth and clino
+    [x] compass-button reads azimuth and clino
 
 SHOT DIALOGS
 tap a shot data
 [x] if it was a manual shot length/azimuth/clino are editable
     [x] changes reflected in shot data list
-[ ] if it was a DistoX shot length/azimuth/clino are not editable
+[x] if it was a DistoX shot length/azimuth/clino are not editable
 [ ] check from station cut-n-paste
 [ ] check to station cut-n-paste
-[ ] "reverse": swap stations
-[ ] "<" ">": should navigate in the list of legs
+[x] "reverse": swap stations
+[x] "<" ">": should navigate in the list of legs
 [x] add comment: 'comment' should be appended
 [x] clear a comment: 'comment' should disappear
 [ ] change extend: should reflect on the item line
@@ -368,8 +368,8 @@ tap a shot data
     [ ] renumber: following shots should be renumbered according to the current station-naming policy
     [x] splay group: all splays of the group with same station should be updated
     [ ] x-splays: splays up to this one become 'X' (shown green)
-[ ] "ok" saves changes and closes dialog
-[ ] "save" saves changes but does not close dialog
+[x] "ok" saves changes and closes dialog
+[x] "save" saves changes but does not close dialog
 [x] "more" opens secondary dialog
 [x] "cancel" closes dialog
 
@@ -388,8 +388,9 @@ SECONDARY SHOT EDIT DIALOG
 [ ] take a sensor measurement
 [ ] add a shot before
     [ ] station hints according to auto-station policy 
-[+/-] split survey at the shot (the shot is the first of the new survey) 
-    NOTE The shot is the first of the new survey on the shot list but it's not the one listed on the "New survey" dialog, on the field under the "Team" field. (Rodrigo)
+[ ] split survey at the shot (the shot is the first of the new survey) 
+    NOTE The shot is the first of the new survey on the shot list but it's not the one listed on
+         the "New survey" dialog, on the field under the "Team" field. (Rodrigo)
 [ ] "delete" the shot (mark it as "deleted")
     [ ] whole leg-delete checkbox
     [ ] recover shot
@@ -408,19 +409,19 @@ SECONDARY SHOT EDIT DIALOG
     [ ] calib-checks
     [ ] deleted sketch(es) [only plan/extended, no x-sections]
     [ ] toast message if there is nothing to recover
-[ ] view photos
+[x] view photos
     [ ] toast message if there is no photo
-    [ ] list photos
-        [ ] tapping a photo opens the photo dialog with thumbnail, comment, delete-button
+    [x] list photos
+        [x] tapping a photo opens the photo dialog with thumbnail, comment, delete-button
             [ ] change comment
-            [ ] view photo (tap thumbnail)
+            [x] view photo (tap thumbnail)
             [ ] delete photo: check file disappear from filesystem
-[ ] view sensosrs measurements
-    [ ] toast message if there is no sensor measurement
-[ ] 3D display
+[x] view sensosrs measurements
+    [x] toast message if there is no sensor measurement
+[x] 3D display
 [ ] device window menu
-[ ] settings
-[ ] help strings
+[x] settings
+[x] help strings
 
 SURVEY INFO WINDOWS
 [ ] check that the "name" is not editable
@@ -429,14 +430,14 @@ SURVEY INFO WINDOWS
 [ ] change description
 [ ] date picker
 
-[ ] annotations: should be the same as in shot-window and sketch-window
+[x] annotations: should be the same as in shot-window and sketch-window
 [ ] info
-[ ] 3D display
-[ ] gps dialog
-[ ] photo list dialog
-[ ] sensor list dialog
+[x] 3D display
+[x] gps dialog
+[x] photo list dialog
+[x] sensor list dialog
 
-[ ] export menu
+[x] export menu
     export in each format and verify the file appear the respective directory
     [ ] ZIP
         [ ] default data export format is updated (if defined)
@@ -473,7 +474,7 @@ SURVEY INFO WINDOWS
     [ ] other exports: th, csv, cav, cave, dat, dxf, grt, gtx, plt, kml, sxv, sur, svr, top, trb, tro, csx, png, svg
 *** IMPORTANT sketch backups are not renamed
 
-[ ] delete the survey: check that all the related files are deleted
+[x] delete the survey: check that all the related files are deleted
     [ ] data exports must be deleted
         [ ] dat compass 
         [ ] csx cSurvey
@@ -508,7 +509,7 @@ SURVEY INFO WINDOWS
         NOTE LRUD are affected only in the angles
 [ ] calib-check shots dialog
 [ ] settings
-[ ] help strings
+[x] help strings
 
 GPS DIALOG
 [ ] check station cut-n-paste
@@ -547,9 +548,9 @@ SKETCH WINDOW
 [ ] without autostations check that a station can be set for export and marked with a triangle
 
 <move mode>
-[ ] drag
-[ ] two-finger zoom
-[ ] zoom-controls
+[x] drag
+[x] two-finger zoom
+[x] zoom-controls
 [ ] data download
     [ ] on demand mode
     [ ] continuous mode without auto-reconnect
@@ -568,8 +569,9 @@ SKETCH WINDOW
     [ ] splays
     [ ] stations (pink)
         [ ] check station textsize setting
+    [ ] scrap outline
     [ ] fix ref two-finger drag
-[ ] plan/profile switch 
+[x] plan/profile switch 
 [ ] extend reference azimuth
     ...
 [ ] annotations
@@ -579,11 +581,13 @@ SKETCH WINDOW
     [ ] flip shots as well
     [ ] do not flip shots
 
-[ ] export menu: check the various format 
+[x] export menu: check the various format 
     [ ] have the toast message
     [ ] are properly exported in either plan, or profile, or x-section
       [ ] [ ] [ ] Therion
-      [ ] [ ] [ ] cSurvey
+      [x] [x] [ ] cSurvey
+        [x] photo export
+        [x] audio export
       [ ] [ ] [ ] PNG
       [ ] [ ] [ ] DXF
       [ ] [ ] [ ] SVG
@@ -599,14 +603,14 @@ SKETCH WINDOW
 [ ] stats
 [ ] reload from backup
 [ ] delete (mark as "deleted")
-[ ] palette
-    [ ] changes to the palette reflect on the item lists in the picker dialogs
-[ ] overview
+[x] palette
+    [x] changes to the palette reflect on the item lists in the picker dialogs
+[x] overview opens overview window
 [ ] settings
 [ ] help strings
 
 <draw mode>
-[ ] draw a line
+[x] draw a line
 [ ] change line type
 [ ] draw another line
 [ ] draw point(s)
@@ -625,8 +629,8 @@ SKETCH WINDOW
 
 [ ] special point items
     [ ] remark
-    [ ] photo
-    [ ] audio
+    [x] photo
+    [x] audio
 
 recent symbol picker
 [ ] tools remain consistent on a per-directory basis
@@ -691,6 +695,9 @@ triple-grid symbol picker
 [ ] select a point and move it
     [ ] check that moving a selected point transfer to the proper bucket:
         move the point a lot and it must be "selectable" again
+[ ] select a piece of a line and move it
+    [ ] sharp-edges
+    [ ] smooth-edges
 [ ] orientable point can be rotated with side-drag
 [ ] line/area point removed with long-tap on delete button
 [ ] select a line/area point and change it (possible its CP's)
@@ -733,13 +740,15 @@ triple-grid symbol picker
     [ ] stations change
         [ ] cut-n-paste
     [ ] splay can be deleted
+    [ ] splay can be commented (become gray)
     [ ] hide midline display on either sides of a leg
   - station
     [ ] select as station to export (visible only if not autostations)
     [ ] show hidden centerline
     [ ] set current station: chck next shot is attached to it
     [ ] toggle at-station splay display
-    [ ] at-station cross-sections
+    [x] at-station cross-sections
+        [x] shared vs private according to the setting
         [ ] choose direction by leg(s)
         [ ] choose direction by android
         [ ] re-open xsection for editing
@@ -805,7 +814,8 @@ sketch export
 [ ] therion
     // [ ] xtherion areas DROPPED
     [ ] auto-stations or user-selected stations
-    [ ] splays in th2 (if option enabled)
+    [x] splays in th2 (if option enabled)
+        [ ] limited to the bbox
 [ ] csurvey (plan profile in one file)
     [ ] with/without survey prefix to stations
 [ ] dxf 2D

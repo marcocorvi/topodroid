@@ -13,11 +13,15 @@ package com.topodroid.DistoX;
 
 class SurveyInfo
 {
-  public long id;
-  public String name;
-  public String date;
-  public String team;
-  public float  declination;
-  public String comment;
-  public String initStation;
+  final static int XSECTION_SHARED  = 0;
+  final static int XSECTION_PRIVATE = 1;
+
+  long id;
+  String name;
+  String date;
+  String team;
+  float  declination;
+  String comment;
+  String initStation;
+  int xsections; // 0: shared, 1: private
 }

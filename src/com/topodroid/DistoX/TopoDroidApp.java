@@ -116,6 +116,7 @@ public class TopoDroidApp extends Application
   public static float mScaleFactor   = 1.0f;
   public static float mDisplayWidth  = 200f;
   public static float mDisplayHeight = 320f;
+  static boolean mXSections = false;       // current value of mSharedXSections
 
   static boolean isTracing = false;
 
@@ -972,6 +973,7 @@ public class TopoDroidApp extends Application
           mSurveyWindow.setTheTitle();
           mSurveyWindow.updateDisplay();
         }
+        mXSections = ( SurveyInfo.XSECTION_SHARED == mData.getSurveyXSections( mSID ) );
       }
       return mSID;
     }
@@ -1924,10 +1926,15 @@ public class TopoDroidApp extends Application
     return pid_p;
   }
   
-  long insert2dSection( long sid, String name, long type, String from, String to, float azimuth, float clino )
+  // @param azimuth clino : projected profile azimuth / section plane direction 
+  // @param parent parent plot name
+  // NOTE field "hide" is overloaded for x_sections with the parent plot name
+  long insert2dSection( long sid, String name, long type, String from, String to, float azimuth, float clino, String parent )
   {
     // FIXME COSURVEY 2d sections are not forwarded
-    return mData.insertPlot( sid, -1L, name, type, 0L, from, to, 0, 0, TopoDroidApp.mScaleFactor, azimuth, clino, "", false );
+    // 0 0 mScaleFactor : offset and zoom
+    String hide = ( parent == null )? "" : parent;
+    return mData.insertPlot( sid, -1L, name, type, 0L, from, to, 0, 0, TopoDroidApp.mScaleFactor, azimuth, clino, hide, false );
   }
 
   public void viewPhoto( Context ctx, String filename )

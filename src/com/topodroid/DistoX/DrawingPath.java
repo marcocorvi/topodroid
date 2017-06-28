@@ -85,6 +85,7 @@ public class DrawingPath extends RectF
 
   void setBBox( float x1, float x2, float y1, float y2 )
   {
+    // assert( x1 <= x2 ) && assert( y1 <= y2 )
     left   = x1;
     right  = x2;
     top    = y1;

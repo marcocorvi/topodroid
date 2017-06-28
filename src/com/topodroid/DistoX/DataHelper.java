@@ -44,8 +44,8 @@ import java.util.HashMap;
 public class DataHelper extends DataSetObservable
 {
 
-  static final String DB_VERSION = "29";
-  static final int DATABASE_VERSION = 29;
+  static final String DB_VERSION = "30";
+  static final int DATABASE_VERSION = 30;
   static final int DATABASE_VERSION_MIN = 21; // was 14
 
   private static final String CONFIG_TABLE = "configs";
@@ -251,6 +251,29 @@ public class DataHelper extends DataSetObservable
     if ( cursor != null ) {
       if (cursor.moveToFirst()) {
         ret = cursor.getString(0);
+      }
+      if ( ! cursor.isClosed() ) cursor.close();
+    }
+    return ret;
+  }
+
+  // at-station xsextions type
+  //   0 : shared
+  //   1 : private
+  public int getSurveyXSections( long id )
+  {
+    int ret = 0;
+    if ( myDB == null ) return ret;
+    Cursor cursor = myDB.query( SURVEY_TABLE,
+			        new String[] { "xsections" },
+                                "id=? ", 
+                                new String[] { Long.toString(id) },
+                                null,  // groupBy
+                                null,  // having
+                                null ); // order by
+    if ( cursor != null ) {
+      if (cursor.moveToFirst()) {
+        ret = (int)cursor.getLong(0);
       }
       if ( ! cursor.isClosed() ) cursor.close();
     }
@@ -525,7 +548,7 @@ public class DataHelper extends DataSetObservable
   }
 
   public void updateSurveyInfo( long id, String date, String team, double decl, String comment,
-                                String init_station, boolean forward )
+                                String init_station, int xsections, boolean forward )
   {
     ContentValues vals = new ContentValues();
     vals.put( "day", date );
@@ -533,11 +556,12 @@ public class DataHelper extends DataSetObservable
     vals.put( "declination", decl );
     vals.put( "comment", ((comment != null)? comment : "") );
     vals.put( "init_station", ((init_station != null)? init_station : "") );
+    vals.put( "xsections", xsections );
     try {
       myDB.update( SURVEY_TABLE, vals, "id=?", new String[]{ Long.toString(id) } );
       if ( forward ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) {
-          listener.onUpdateSurveyInfo( id, date, team, decl, comment, init_station );
+          listener.onUpdateSurveyInfo( id, date, team, decl, comment, init_station, xsections );
         }
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -1859,6 +1883,16 @@ public class DataHelper extends DataSetObservable
      );
    }
 
+   // NEW X_SECTIONS hide = parent plot
+   public List< PlotInfo > selectAllPlotSectionsWithType( long sid, long status, long type, String parent )
+   {
+     return doSelectAllPlots( sid, 
+                              "surveyId=? and status=? and type=? and hide=?",
+                              new String[] { Long.toString(sid), Long.toString(status), Long.toString(type), parent }
+     );
+   }
+
+
    public List< PlotInfo > selectAllPlotsSection( long sid, long status )
    {
      return doSelectAllPlots( sid, 
@@ -2374,7 +2408,7 @@ public class DataHelper extends DataSetObservable
      SurveyInfo info = null;
      if ( myDB == null ) return null;
      Cursor cursor = myDB.query( SURVEY_TABLE,
-                                new String[] { "name", "day", "team", "declination", "comment", "init_station" }, // columns
+                                new String[] { "name", "day", "team", "declination", "comment", "init_station", "xsections" }, // columns
                                 WHERE_ID, new String[] { Long.toString(sid) },
                                 null, null, "name" );
      if (cursor.moveToFirst()) {
@@ -2386,6 +2420,7 @@ public class DataHelper extends DataSetObservable
        info.declination = (float)(cursor.getDouble( 3 ));
        info.comment = cursor.getString( 4 );
        info.initStation = cursor.getString( 5 );
+       info.xsections = (int)cursor.getLong( 6 );
      }
      if (cursor != null && !cursor.isClosed()) cursor.close();
      return info;
@@ -2656,6 +2691,23 @@ public class DataHelper extends DataSetObservable
        Cursor cursor = myDB.query( PLOT_TABLE, mPlotFields,
                  WHERE_SID_NAME,
                  new String[] { Long.toString(sid), name },
+                 null, null, null );
+       if (cursor != null ) {
+         if (cursor.moveToFirst() ) plot = makePlotInfo( sid, cursor );
+         if (!cursor.isClosed()) cursor.close();
+       }
+     }
+     return plot;
+   }
+ 
+   // NEW X_SECTIONS
+   public PlotInfo getPlotSectionInfo( long sid, String name, String parent )
+   {
+     PlotInfo plot = null;
+     if ( myDB != null && name != null ) {
+       Cursor cursor = myDB.query( PLOT_TABLE, mPlotFields,
+                 "surveyId=? AND name=? AND hide=?",
+                 new String[] { Long.toString(sid), name, parent },
                  null, null, null );
        if (cursor != null ) {
          if (cursor.moveToFirst() ) plot = makePlotInfo( sid, cursor );
@@ -3206,8 +3258,6 @@ public class DataHelper extends DataSetObservable
 
    public String getSurveyFromId( long sid ) { return getNameFromId( SURVEY_TABLE, sid ); }
 
-
-
    public String getSurveyDate( long sid ) { return getSurveyFieldAsString( sid, "day" ); }
 
    public String getSurveyComment( long sid ) { return getSurveyFieldAsString( sid, "comment" ); }
@@ -3475,13 +3525,13 @@ public class DataHelper extends DataSetObservable
        FileWriter fw = new FileWriter( filename );
        PrintWriter pw = new PrintWriter( fw );
        Cursor cursor = myDB.query( SURVEY_TABLE, 
-                            new String[] { "name", "day", "team", "declination", "comment", "init_station" },
+                            new String[] { "name", "day", "team", "declination", "comment", "init_station", "xsections" },
                             "id=?", new String[] { Long.toString( sid ) },
                             null, null, null );
        if (cursor.moveToFirst()) {
          do {
            pw.format(Locale.US,
-                     "INSERT into %s values( %d, \"%s\", \"%s\", \"%s\", %.4f, \"%s\", \"%s\" );\n",
+                     "INSERT into %s values( %d, \"%s\", \"%s\", \"%s\", %.4f, \"%s\", \"%s\", %d );\n",
                      SURVEY_TABLE,
                      sid,
                      cursor.getString(0),
@@ -3489,7 +3539,8 @@ public class DataHelper extends DataSetObservable
                      cursor.getString(2),
                      cursor.getDouble(3),     // declination
                      cursor.getString(4),     // comment
-                     cursor.getString(5)      // init_station
+                     cursor.getString(5),     // init_station
+                     (int)cursor.getLong(6)   // xstation
            );
          } while (cursor.moveToNext());
        }
@@ -3735,9 +3786,11 @@ public class DataHelper extends DataSetObservable
          double decl   = 0; if ( db_version > 14 ) scanline0.doubleValue( );
          comment       = scanline0.stringValue( );
          String init_station = "0"; if ( db_version > 22) init_station = scanline0.stringValue( );
+         int xsections = SurveyInfo.XSECTION_SHARED; // old at-sationx-sections were "shared"
+         if ( db_version > 29) xsections = (int)( scanline0.longValue( ) );
 
          sid = setSurvey( name, false );
-         updateSurveyInfo( sid, day, team, decl, comment, init_station, false );
+         updateSurveyInfo( sid, day, team, decl, comment, init_station, xsections, false );
          while ( (line = br.readLine()) != null ) {
            TDLog.Log( TDLog.LOG_DB, "loadFromFile: " + line );
            vals = line.split(" ", 4);
@@ -4231,6 +4284,8 @@ public class DataHelper extends DataSetObservable
                +   ")"
              );
            case 29:
+             db.execSQL( "ALTER TABLE surveys ADD COLUMN xsections INTEGER default 0" );
+           case 30:
              /* current version */
            default:
              break;

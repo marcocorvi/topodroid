@@ -43,13 +43,13 @@
      android:paddingBottom="3sp">
 
     <LinearLayout 
-      android:layout_width="fill_parent" 
+      android:layout_width="match_parent" 
       android:layout_height="fill_parent"
       android:orientation="vertical"
       >
    					  
     <EditText android:id="@+id/survey_name" 
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
       	android:ems="25"
         android:layout_height="wrap_content" 
         android:singleLine="true"
@@ -61,7 +61,7 @@
    		
     <Button android:id="@+id/survey_date" 
         android:maxLines="1" 
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
       	android:ems="25"
         android:layout_height="wrap_content" 
         android:layout_marginTop="4sp"
@@ -69,7 +69,7 @@
     />
    		
     <EditText android:id="@+id/survey_team" 
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
       	android:ems="25"
         android:layout_height="wrap_content" 
         android:singleLine="true"
@@ -81,7 +81,7 @@
     />
    		
     <EditText android:id="@+id/survey_decl" 
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
       	android:ems="25"
         android:layout_height="wrap_content" 
         android:singleLine="true"
@@ -91,8 +91,8 @@
         android:scrollHorizontally="true"
     />
 
-    <EditText android:id="@+id/survey_comment" 
-        android:layout_width="wrap_content"
+      <EditText android:id="@+id/survey_comment" 
+        android:layout_width="match_parent"
       	android:ems="25"
         android:layout_height="wrap_content" 
         android:singleLine="true"
@@ -101,7 +101,17 @@
         android:layout_marginBottom="4sp"
         android:scrollHorizontally="true"
         android:inputType="text"
-    />
+      />
+
+      <TextView android:id="@+id/survey_xsections" 
+        android:layout_width="match_parent"
+      	android:ems="25"
+        android:layout_height="wrap_content" 
+        android:singleLine="true"
+        android:text=" "
+        android:layout_marginTop="4sp"
+        android:layout_marginBottom="4sp"
+      />
 
     </LinearLayout>
 

@@ -886,6 +886,10 @@
   <string name="pref_vert_splay_title">Seuil incl. visées latérales pointillés</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Seuil inclinaison visées latérales pointillé</string -->
   <string name="pref_vert_splay_message">Seuil d\'inclinaison des visées latérales pointillés</string>
+  <!-- TODO string name="pref_shared_xsections_title">Shared x-sections</string -->
+  <!-- TODO string name="pref_shared_xsections_summary">At-station x-sections shared among sketches</string -->
+  <!-- TODO string name="xsections_shared">Shared X-sections</string -->
+  <!-- TODO string name="xsections_private">Private X-sections</string -->
   <string name="pref_survey_stations_title">Stations du relevé</string>
   <string name="pref_survey_stations_summary">Stations automatiques</string>
   <string name="pref_accel_thr_title">Tolérance de l\'accélération</string>

@@ -1019,9 +1019,13 @@ class DrawingIO
         StringWriter sw = new StringWriter();
         PrintWriter pw  = new PrintWriter(sw);
         for ( DrawingPath splay : splays ) {
-          pw.format("line u:splay -visibility off\n");
-          pw.format( Locale.US, "  %.2f %.2f\n  %.2f %.2f\n", splay.x1*th, -splay.y1*th, splay.x2*th, -splay.y2*th );
-          pw.format("endline\n");
+          // if ( bbox.left > splay.right  || bbox.right  < splay.left ) continue;
+          // if ( bbox.top  > splay.bottom || bbox.bottom < splay.top  ) continue;
+          if ( splay.intersects( bbox ) ) {
+            pw.format("line u:splay -visibility off\n");
+            pw.format( Locale.US, "  %.2f %.2f\n  %.2f %.2f\n", splay.x1*th, -splay.y1*th, splay.x2*th, -splay.y2*th );
+            pw.format("endline\n");
+          }
         }
         out.write( sw.toString() );
         out.newLine();

@@ -27,6 +27,7 @@ import android.content.Context;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 // import android.util.Log;
@@ -49,6 +50,7 @@ public class SurveyNewDialog extends MyDialog
   private EditText mEditDecl;
   private EditText mEditStation;
   private EditText mEditComment;
+  private CheckBox mCBxsections;
 
   MyDateSetListener mDateListener;
 
@@ -85,6 +87,8 @@ public class SurveyNewDialog extends MyDialog
     mEditStation = (EditText) findViewById(R.id.survey_station);
     mEditDecl    = (EditText) findViewById(R.id.survey_decl);
     mEditComment = (EditText) findViewById(R.id.survey_comment);
+    mCBxsections = (CheckBox) findViewById(R.id.survey_xsections);
+    mCBxsections.setChecked( TDSetting.mSharedXSections );
 
     mDateListener = new MyDateSetListener( mEditDate );
     mEditDate.setOnClickListener( this );
@@ -201,8 +205,11 @@ public class SurveyNewDialog extends MyDialog
     if ( team != null ) { team = team.trim(); } else { team = ""; }
     if ( comment != null ) { comment = comment.trim(); } else { comment = ""; }
 
+    int xsections = mCBxsections.isChecked() ? SurveyInfo.XSECTION_PRIVATE
+                                             : SurveyInfo.XSECTION_SHARED;
+
     mApp.setSurveyFromName( name, true ); // save survey name: tell app to set it into the database
-    mApp.mData.updateSurveyInfo( mApp.mSID, date, team, decl, comment, init_station, true );
+    mApp.mData.updateSurveyInfo( mApp.mSID, date, team, decl, comment, init_station, xsections, true );
 
     if ( mOldSid >= 0L && mOldId >= 0L ) {  // SPLIT_SURVEY
       mApp.mData.transferShots( mApp.mSID, mOldSid, mOldId );

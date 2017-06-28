@@ -886,6 +886,10 @@
   <string name="pref_vert_splay_title">Limite med. aux. tracejadas</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Medidas auxiliares acima desta inclinação serão tracejadas</string -->
   <string name="pref_vert_splay_message">Medidas auxiliares acima dessa inclinação serão tracejadas</string>
+  <!-- TODO string name="pref_shared_xsections_title">Shared x-sections</string -->
+  <!-- TODO string name="pref_shared_xsections_summary">At-station x-sections shared among sketches</string -->
+  <!-- TODO string name="xsections_shared">Shared X-sections</string -->
+  <!-- TODO string name="xsections_private">Private X-sections</string -->
 
 
   <string name="pref_survey_stations_title">Regras para bases</string>

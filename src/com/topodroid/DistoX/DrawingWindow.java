@@ -890,11 +890,11 @@ public class DrawingWindow extends ItemDrawer
   }
 
   // this is called only for PLAN / PROFILE
-  private void computeReferences( int type,
+  private void computeReferences( int type, String name,
                                   // float xoff, float yoff,
                                   float zoom, boolean can_toast )
   {
-    // Log.v("DistoX", "computeReferences() zoom " + zoom );
+    // Log.v("DistoX", "compute references() zoom " + zoom );
     if ( ! PlotInfo.isSketch2D( type ) ) return;
     mDrawingSurface.clearReferences( type );
 
@@ -941,7 +941,9 @@ public class DrawingWindow extends ItemDrawer
           }
         }
       }
-      List< PlotInfo > xsections = mData.selectAllPlotsWithType( mApp.mSID, 0, PlotInfo.PLOT_X_SECTION );
+      List< PlotInfo > xsections = mApp.mXSections ?
+                                   mData.selectAllPlotsWithType( mApp.mSID, 0, PlotInfo.PLOT_X_SECTION )
+                                 : mData.selectAllPlotSectionsWithType( mApp.mSID, 0, PlotInfo.PLOT_X_SECTION, name );
       for ( NumStation st : stations ) {
         if ( st.show() ) {
           DrawingStationName dst;
@@ -968,7 +970,9 @@ public class DrawingWindow extends ItemDrawer
                         // xoff, yoff, true, true );
         }
       }
-      List< PlotInfo > xhsections = mData.selectAllPlotsWithType( mApp.mSID, 0, PlotInfo.PLOT_XH_SECTION );
+      List< PlotInfo > xhsections = mApp.mXSections ?
+                                    mData.selectAllPlotsWithType( mApp.mSID, 0, PlotInfo.PLOT_XH_SECTION )
+                                  : mData.selectAllPlotSectionsWithType( mApp.mSID, 0, PlotInfo.PLOT_XH_SECTION, name );
       for ( NumStation st : stations ) {
         if ( st.mHasCoords && st.show() ) {
           DrawingStationName dst;
@@ -999,7 +1003,9 @@ public class DrawingWindow extends ItemDrawer
           addFixedLine( sp.getBlock(), h1, (float)(st.v), h2, (float)(sp.v), true, true );
         }
       }
-      List< PlotInfo > xhsections = mData.selectAllPlotsWithType( mApp.mSID, 0, PlotInfo.PLOT_XH_SECTION );
+      List< PlotInfo > xhsections = mApp.mXSections ?
+                                    mData.selectAllPlotsWithType( mApp.mSID, 0, PlotInfo.PLOT_XH_SECTION )
+                                  : mData.selectAllPlotSectionsWithType( mApp.mSID, 0, PlotInfo.PLOT_XH_SECTION, name );
       for ( NumStation st : stations ) {
         if ( st.show() ) {
           DrawingStationName dst;
@@ -1875,13 +1881,15 @@ public class DrawingWindow extends ItemDrawer
           mDrawingSurface.addManagerToCache( mFullName2 );
         }
         
-        List<PlotInfo> xsection_plan = mData.selectAllPlotsWithType( mApp.mSID, 0, PlotInfo.PLOT_X_SECTION );
-        List<PlotInfo> xsection_ext  = mData.selectAllPlotsWithType( mApp.mSID, 0, PlotInfo.PLOT_XH_SECTION );
+        List<PlotInfo> xsection_plan = mApp.mXSections ?
+                                       mData.selectAllPlotsWithType( mApp.mSID, 0, PlotInfo.PLOT_X_SECTION )
+                                     : mData.selectAllPlotSectionsWithType( mApp.mSID, 0, PlotInfo.PLOT_X_SECTION, mName );
+        List<PlotInfo> xsection_ext  = mApp.mXSections ?
+                                       mData.selectAllPlotsWithType( mApp.mSID, 0, PlotInfo.PLOT_XH_SECTION )
+                                     : mData.selectAllPlotSectionsWithType( mApp.mSID, 0, PlotInfo.PLOT_XH_SECTION, mName );
 
-        // computeReferences( mPlot2.type, mOffset.x, mOffset.y, mZoom, true );
-        // computeReferences( mPlot1.type, mOffset.x, mOffset.y, mZoom, true );
-        computeReferences( mPlot2.type, mZoom, true );
-        computeReferences( mPlot1.type, mZoom, true );
+        computeReferences( mPlot2.type, mPlot2.name, mZoom, true );
+        computeReferences( mPlot1.type, mPlot1.name, mZoom, true );
 
         doMoveTo();
 
@@ -2042,8 +2050,7 @@ public class DrawingWindow extends ItemDrawer
       if ( mType == PlotInfo.PLOT_EXTENDED ) { 
         List<DBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
         mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl ); 
-        // computeReferences( (int)mType, 0.0f, 0.0f, mApp.mScaleFactor, true );
-        computeReferences( (int)mType, mApp.mScaleFactor, true );
+        computeReferences( (int)mType, mName, mApp.mScaleFactor, true );
         mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
         modified();
       } 
@@ -2967,8 +2974,11 @@ public class DrawingWindow extends ItemDrawer
 
     // X-SECTION AT A STATION
     // @param name station name
+    // @param type this plot type
+    // @param azimuth clino  section plane direction
     void openXSection( DrawingStationName st, String name, long type, float azimuth, float clino )
     {
+      // parent plot name = mName
       long xtype = -1;
       String xsname = null;
       if ( type == PlotInfo.PLOT_PLAN ) {
@@ -2981,7 +2991,9 @@ public class DrawingWindow extends ItemDrawer
         return;
       }
 
-      PlotInfo plot = mData.getPlotInfo( mApp.mSID, xsname );
+      PlotInfo plot = mApp.mXSections ?
+                      mData.getPlotInfo( mApp.mSID, xsname )
+                    : mData.getPlotSectionInfo( mApp.mSID, xsname, mName );
       if ( plot == null  ) { // if there does not exist xsection xs-name create it
         // Toast.makeText( mActivity, R.string.too_many_legs_xsection, Toast.LENGTH_SHORT ).show();
         if ( azimuth >= 360 ) azimuth -= 360;
@@ -2994,8 +3006,13 @@ public class DrawingWindow extends ItemDrawer
         }
         // Log.v("DistoX", "new X section azimuth " + azimuth + " clino " + clino );
 
-        long pid = mApp.insert2dSection( mApp.mSID, xsname, xtype, name, "", azimuth, clino );
-        plot = mData.getPlotInfo( mApp.mSID, xsname );
+        if ( mApp.mXSections ) {
+          long pid = mApp.insert2dSection( mApp.mSID, xsname, xtype, name, "", azimuth, clino, null );
+          plot = mData.getPlotInfo( mApp.mSID, xsname );
+        } else {
+          long pid = mApp.insert2dSection( mApp.mSID, xsname, xtype, name, "", azimuth, clino, mName );
+          plot = mData.getPlotSectionInfo( mApp.mSID, xsname, mName );
+        }
 
         // add x-section to station-name
 
@@ -3545,8 +3562,7 @@ public class DrawingWindow extends ItemDrawer
       mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMextend );
       mDrawingSurface.setManager( DrawingSurface.DRAWING_PROFILE, (int)mType );
       if ( compute ) {
-        // computeReferences( mPlot2.type, 0.0f, 0.0f, mApp.mScaleFactor, true );
-        computeReferences( mPlot2.type, mApp.mScaleFactor, true );
+        computeReferences( mPlot2.type, mPlot2.name, mApp.mScaleFactor, true );
       }
       resetReference( mPlot2 );
       if ( mApp.mShotWindow != null ) {
@@ -3565,8 +3581,7 @@ public class DrawingWindow extends ItemDrawer
       mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMplan );
       mDrawingSurface.setManager( DrawingSurface.DRAWING_PLAN, (int)mType );
       if ( compute ) {
-        // computeReferences( mPlot1.type, 0.0f, 0.0f, mApp.mScaleFactor, true );
-        computeReferences( mPlot1.type, mApp.mScaleFactor, true );
+        computeReferences( mPlot1.type, mPlot1.name, mApp.mScaleFactor, true );
       }
       resetReference( mPlot1 );
       if ( mApp.mShotWindow != null ) {
@@ -3999,7 +4014,7 @@ public class DrawingWindow extends ItemDrawer
       long pid = mApp.mData.getPlotId( mApp.mSID, mSectionName );
 
       if ( pid < 0 ) { 
-        pid = mApp.insert2dSection( mApp.mSID, mSectionName, type, from, to, azimuth, clino );
+        pid = mApp.insert2dSection( mApp.mSID, mSectionName, type, from, to, azimuth, clino, null );
       }
       if ( pid >= 0 ) {
         // imageFile := PHOTO_DIR / surveyId / photoId .jpg
@@ -4031,7 +4046,7 @@ public class DrawingWindow extends ItemDrawer
       if ( pid < 0 ) { 
         // pid = mApp.mData.insertPlot( mApp.mSID, -1L, mSectionName, type, 0L, from, to, 
         //                              0, 0, TopoDroidApp.mScaleFactor, azimuth, clino, false ); // forward or not ?
-        pid = mApp.insert2dSection( mApp.mSID, mSectionName, type, from, to, azimuth, clino );
+        pid = mApp.insert2dSection( mApp.mSID, mSectionName, type, from, to, azimuth, clino, null );
       }
       if ( pid >= 0 ) {
         pushInfo( type, mSectionName, from, to, azimuth, clino );
@@ -4188,16 +4203,12 @@ public class DrawingWindow extends ItemDrawer
     mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl );
     // doMoveTo();
     if ( mType == (int)PlotInfo.PLOT_PLAN ) {
-      // computeReferences( mPlot2.type, 0.0f, 0.0f, mApp.mScaleFactor, true );
-      // computeReferences( mPlot1.type, 0.0f, 0.0f, mApp.mScaleFactor, true );
-      computeReferences( mPlot2.type, mApp.mScaleFactor, true );
-      computeReferences( mPlot1.type, mApp.mScaleFactor, true );
+      computeReferences( mPlot2.type, mPlot2.name, mApp.mScaleFactor, true );
+      computeReferences( mPlot1.type, mPlot1.name, mApp.mScaleFactor, true );
       if ( reset ) resetReference( mPlot1 );
     } else if ( PlotInfo.isProfile( mType ) ) {
-      // computeReferences( mPlot1.type, 0.0f, 0.0f, mApp.mScaleFactor, true );
-      // computeReferences( mPlot2.type, 0.0f, 0.0f, mApp.mScaleFactor, true );
-      computeReferences( mPlot1.type, mApp.mScaleFactor, true );
-      computeReferences( mPlot2.type, mApp.mScaleFactor, true );
+      computeReferences( mPlot1.type, mPlot1.name, mApp.mScaleFactor, true );
+      computeReferences( mPlot2.type, mPlot2.name, mApp.mScaleFactor, true );
       if ( reset ) resetReference( mPlot2 );
     }
   }
@@ -4228,10 +4239,9 @@ public class DrawingWindow extends ItemDrawer
       // List<DBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
       // mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl );
       // // doMoveTo();
-      // // computeReferences( (int)mType, 0.0f, 0.0f, mApp.mScaleFactor, false );
-      // computeReferences( (int)mPlot1.type, 0.0f, 0.0f, mApp.mScaleFactor, false );
+      // computeReferences( (int)mPlot1.type, mPlot1.name 0.0f, 0.0f, mApp.mScaleFactor, false );
       // if ( mPlot2 != null ) {
-      //   computeReferences( (int)mPlot2.type, 0.0f, 0.0f, mApp.mScaleFactor, false );
+      //   computeReferences( (int)mPlot2.type, mPlot2.name 0.0f, 0.0f, mApp.mScaleFactor, false );
       // }
     // }
     if ( mType != (int)PlotInfo.PLOT_PLAN && ! PlotInfo.isProfile( mType ) ) {
@@ -4242,18 +4252,14 @@ public class DrawingWindow extends ItemDrawer
       recomputeReferences( mApp.mScaleFactor, false );
       // if ( mType == (int)PlotInfo.PLOT_PLAN ) {
       //   if ( mPlot2 != null ) {
-      //     // computeReferences( (int)mPlot2.type, 0.0f, 0.0f, mApp.mScaleFactor, false );
-      //     computeReferences( (int)mPlot2.type, mApp.mScaleFactor, false );
+      //     computeReferences( (int)mPlot2.type, mPlot2.name, mApp.mScaleFactor, false );
       //   }
-      //   // computeReferences( (int)mPlot1.type, 0.0f, 0.0f, mApp.mScaleFactor, false );
-      //   computeReferences( (int)mPlot1.type, mApp.mScaleFactor, false );
+      //   computeReferences( (int)mPlot1.type, mPlot1.name, mApp.mScaleFactor, false );
       //   // resetReference( mPlot1 ); // DATA_DOWNLOAD
       // } else if ( PlotInfo.isProfile( mType ) ) {
-      //   // computeReferences( (int)mPlot1.type, 0.0f, 0.0f, mApp.mScaleFactor, false );
-      //   computeReferences( (int)mPlot1.type, mApp.mScaleFactor, false );
+      //   computeReferences( (int)mPlot1.type, mPlot1.name, mApp.mScaleFactor, false );
       //   if ( mPlot2 != null ) {
-      //     // computeReferences( (int)mPlot2.type, 0.0f, 0.0f, mApp.mScaleFactor, false );
-      //     computeReferences( (int)mPlot2.type, mApp.mScaleFactor, false );
+      //     computeReferences( (int)mPlot2.type, mPlot2.name, mApp.mScaleFactor, false );
       //   }
       //   // resetReference( mPlot2 ); // DATA_DOWNLOAD
       // } else {
@@ -4277,14 +4283,11 @@ public class DrawingWindow extends ItemDrawer
   private void recomputeReferences( float zoom, boolean flag )
   {
     if ( mType == (int)PlotInfo.PLOT_PLAN ) {
-      // if ( mPlot2 != null ) computeReferences( mPlot2.type, 0, 0, zoom, flag );
-      if ( mPlot2 != null ) computeReferences( mPlot2.type, zoom, flag );
+      if ( mPlot2 != null ) computeReferences( mPlot2.type, mPlot2.name, zoom, flag );
     } else if ( PlotInfo.isProfile( mType ) ) {
-      // computeReferences( mPlot1.type, 0, 0, zoom, flag );
-      computeReferences( mPlot1.type, zoom, flag );
+      computeReferences( mPlot1.type, mPlot1.name, zoom, flag );
     }
-    // computeReferences( (int)mType, 0, 0, zoom, flag );
-    computeReferences( (int)mType, zoom, flag );
+    computeReferences( (int)mType, mName, zoom, flag );
   }
 
   // forward adding data to the ShotWindow
