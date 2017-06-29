@@ -151,7 +151,7 @@ class TDExporter
         byte[] buf = readFileBytes( audiofile );
         if ( buf != null ) {
           pw.format(
-            "        <attachment data=\"%s\" dataformat=\"0\" name=\"\" note=\"\" type=\"audio/wav\" />\n",
+            "        <attachment dataformat=\"0\" data=\"%s\" name=\"\" note=\"\" type=\"audio/x-wav\" />\n",
             Base64.encodeToString( buf, Base64.NO_WRAP ) );
         }
       }
@@ -163,7 +163,7 @@ class TDExporter
         byte[] buf = readFileBytes( photofile );
         if ( buf != null ) {
           pw.format(
-            "        <attachment data=\"%s\" dataformat=\"0\" name=\"\" note=\"%s\" type=\"image/jpg\" />\n",
+            "        <attachment dataformat=\"0\" data=\"%s\" name=\"\" note=\"%s\" type=\"image/jpeg\" />\n",
             Base64.encodeToString( buf, Base64.NO_WRAP ), photo.mComment );
         }
       }
@@ -281,7 +281,7 @@ class TDExporter
           pw.format(" note=\"%s\"", blk.mComment.replaceAll("\"", "") );
         }
         pw.format(" >\n");
-        writeCsxShotAttachments( pw, data, survey, sid, blk );
+        // writeCsxShotAttachments( pw, data, survey, sid, blk ); // calib-check shots have no attachment
         pw.format("    </segment>\n");
       }
 

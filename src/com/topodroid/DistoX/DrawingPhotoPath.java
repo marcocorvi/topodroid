@@ -110,8 +110,10 @@ public class DrawingPhotoPath extends DrawingPointPath
         pw.format(" text=\"%s\" textrotatemode=\"1\" >\n", ((mPointText==null)?"":mPointText) );
         // pw.format("  <pen type=\"10\" />\n");
         // pw.format("  <brush type=\"7\" />\n");
-        pw.format(" <attachmenmt data=\"%s\" name=\"\" note=\"\" type=\"image/jpg\" />\n", 
-          Base64.encodeToString( buf, Base64.NO_WRAP ) );
+        pw.format(" <attachment dataformat=\"0\" data=\"%s\" name=\"\" note=\"%s\" type=\"image/jpeg\" />\n", 
+          Base64.encodeToString( buf, Base64.NO_WRAP ),
+          ((mPointText==null)?"":mPointText)
+        );
         float x = DrawingUtil.sceneToWorldX( cx ); // convert to world coords.
         float y = DrawingUtil.sceneToWorldY( cy );
         pw.format(Locale.US, " <points data=\"%.2f %.2f \" />\n", x, y );

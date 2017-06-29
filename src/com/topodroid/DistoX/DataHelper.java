@@ -4058,7 +4058,8 @@ public class DataHelper extends DataSetObservable
              +   " team TEXT, "
              +   " comment TEXT, "
              +   " declination REAL, "
-             +   " init_station TEXT "
+             +   " init_station TEXT, "
+             +   " xsections INTEGER "
              +   ")"
            );
 

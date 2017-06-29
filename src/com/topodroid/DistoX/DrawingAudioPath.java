@@ -107,7 +107,7 @@ public class DrawingAudioPath extends DrawingPointPath
         if ( bind != null ) pw.format(" bind=\"%s\"", bind );
         // pw.format("  <pen type=\"10\" />\n");
         // pw.format("  <brush type=\"7\" />\n");
-        pw.format(" <attachmenmt data=\"%s\" name=\"\" note=\"\" type=\"audio/wav\" />\n", 
+        pw.format(" <attachment dataformat\"0\" data=\"%s\" name=\"\" note=\"\" type=\"audio/x-wav\" />\n", 
           Base64.encodeToString( buf, Base64.NO_WRAP ) );
         float x = DrawingUtil.sceneToWorldX( cx ); // convert to world coords.
         float y = DrawingUtil.sceneToWorldY( cy );
