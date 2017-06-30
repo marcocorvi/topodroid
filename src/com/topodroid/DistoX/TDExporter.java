@@ -121,18 +121,20 @@ class TDExporter
   // segments have only the attribute "cave", no attribute "branch"
   static private void writeCsxSegment( PrintWriter pw, long id, String cave, String f, String t )
   {
-    // Log.v("DistoX", "segment " + id + " cave " + cave + " " + f + " - " + t ); 
+    // TDLog.Log( TDLog.LOG_CSURVEY, "shot segment " + id + " cave " + cave + " " + f + " - " + t ); 
     pw.format("<segment id=\"%d\" cave=\"%s\" from=\"%s\" to=\"%s\"", (int)id, cave, f, t );
   }
 
   static private void writeCsxTSplaySegment( PrintWriter pw, String cave, String t, int cnt, boolean xsplay )
   {
+    // TDLog.Log( TDLog.LOG_CSURVEY, "T-splay segment cave " + cave + " " + t + " " + cnt ); 
     pw.format("<segment id=\"\" cave=\"%s\" from=\"%s(%d)\" to=\"%s\"", cave, t, cnt, t );
     if ( xsplay ) pw.format(" cut=\"1\"");
   }
 
   static private void writeCsxFSplaySegment( PrintWriter pw, String cave, String f, int cnt, boolean xsplay )
   {
+    // TDLog.Log( TDLog.LOG_CSURVEY, "F-splay segment cave " + cave + " " + f + " " + cnt ); 
     pw.format("<segment id=\"\" cave=\"%s\" from=\"%s\" to=\"%s(%d)\"", cave, f, f, cnt );
     if ( xsplay ) pw.format(" cut=\"1\"");
   }
@@ -293,7 +295,7 @@ class TDExporter
       boolean sur = false;  // surface
       // boolean bck = false;  // backshot
       String com = null;    // comment
-      String f="", t="";          // from to stations
+      String f="", t="";    // from to stations
       DBlock ref_item = null;
       // float l=0.0f, b=0.0f, c=0.0f, b0=0.0f;
       // int n = 0;
@@ -416,17 +418,17 @@ class TDExporter
             }
             ref_item = item;
             extend = item.getExtend();
-            if ( item.mFlag == DBlock.BLOCK_DUPLICATE ) {
+            if ( item.isDuplicate() ) {
               dup = true;
-            } else if ( item.mFlag == DBlock.BLOCK_SURFACE ) {
+            } else if ( item.isSurface() ) {
               sur = true;
-            // } else if ( item.mFlag == DBlock.BLOCK_COMMENTED ) {
+            // } else if ( item.isCommented() ) {
             //   ...
-            // } else if ( item.mFlag == DBlock.BLOCK_BACKSHOT ) {
+            // } else if ( item.isBackshot() ) {
             //   bck = true;
             }
-            f = from;
-            t = to;
+            f = (from!=null)? from : "";
+            t = (to!=null)?   to   : "";
             leg.set( item.mLength, item.mBearing, item.mClino );
             com = item.mComment;
           }
@@ -1031,14 +1033,14 @@ class TDExporter
               extend = item.getExtend();
               pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
             }
-            if ( item.mFlag == DBlock.BLOCK_DUPLICATE ) {
+            if ( item.isDuplicate() ) {
               pw.format(therion_flags_duplicate);
               duplicate = true;
-            } else if ( item.mFlag == DBlock.BLOCK_SURFACE ) {
+            } else if ( item.isSurface() ) {
               pw.format(therion_flags_surface);
               surface = true;
-            // } else if ( item.mFlag == DBlock.BLOCK_COMMENTED ) { // handled already
-            // } else if ( item.mFlag == DBlock.BLOCK_BACKSHOT ) {
+            // } else if ( item.isCommented() ) { // handled already
+            // } else if ( item.isBackshot() ) {
             //   pw.format(therion_flags_duplicate);
             //   duplicate = true;
             }
@@ -1300,7 +1302,7 @@ class TDExporter
                 splays = false;
               }
               ref_item = item;
-              if ( item.mFlag == DBlock.BLOCK_DUPLICATE ) {
+              if ( item.isDuplicate() ) {
                 if ( first ) writeSurvexLine(pw, survex_flags_duplicate);
                 duplicate = true;
               }
@@ -1572,7 +1574,7 @@ class TDExporter
               splays = false;
             }
             ref_item = item;
-            if ( item.mFlag == DBlock.BLOCK_DUPLICATE ) {
+            if ( item.isDuplicate() ) {
               duplicate = true;
             }
             pw.format("%s@%s,%s@%s", from, info.name, to, info.name );
@@ -1647,7 +1649,7 @@ class TDExporter
   //           b = item.mBearing;
   //           c = item.mClino;
   //           extend = item.getExtend();
-  //           flag   = (int) item.mFlag;
+  //           flag   = (int) item.getFlag();
   //           l0[0] = item.mLength;
   //           b0[0] = item.mBearing;
   //           c0[0] = item.mClino;
@@ -1668,7 +1670,7 @@ class TDExporter
   //           // item.Comment()
   //           pw.format("    \"%s\" \"\" ", from );
   //           pw.format(Locale.US, "%.2f %.1f %.1f %.1f %d %d 1\n",
-  //             item.mLength, item.mBearing, item.mClino, item.mRoll, item.getExtend(), item.mFlag );
+  //             item.mLength, item.mBearing, item.mClino, item.mRoll, item.getExtend(), item.getFlag() );
   //         }
   //       } else { // from.isEmpty()
   //         if ( to != null && to.length() > 0 ) {
@@ -1687,7 +1689,7 @@ class TDExporter
   //           // item.Comment()
   //           pw.format("    \"\" \"%s\" ", to );
   //           pw.format(Locale.US, "%.2f %.1f %.1f %.1f %d %d 1\n",
-  //             item.mLength, item.mBearing, item.mClino, item.mRoll, item.getExtend(), item.mFlag );
+  //             item.mLength, item.mBearing, item.mClino, item.mRoll, item.getExtend(), item.getFlag() );
   //         } else {
   //           // not exported
   //           if ( ref_item != null &&
@@ -1965,7 +1967,7 @@ class TDExporter
               printShotToDat( pw, leg, lrud, duplicate, ref_item.mComment );
             }
             ref_item = item;
-            duplicate = ( item.mFlag == DBlock.BLOCK_DUPLICATE );
+            duplicate = item.isDuplicate();
             leg.set( item.mLength, item.mBearing, item.mClino );
           }
         }
@@ -2193,7 +2195,7 @@ class TDExporter
               // }
             }
             ref_item = item;
-            // duplicate = ( item.mFlag == DBlock.BLOCK_DUPLICATE );
+            // duplicate = item.isDuplicate();
             leg.set( item.mLength, item.mBearing, item.mClino );
           }
         }
@@ -2346,7 +2348,7 @@ class TDExporter
               printShotToSur( pw, leg, lrud, ref_item.mComment );
             }
             ref_item = item;
-            duplicate = ( item.mFlag == DBlock.BLOCK_DUPLICATE );
+            duplicate = item.isDuplicate();
             leg.set( item.mLength, item.mBearing, item.mClino );
           }
         }
@@ -2788,15 +2790,15 @@ class TDExporter
             //   extend = item.getExtend();
             //   // FIXME pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
             // }
-            if ( item.mFlag == DBlock.BLOCK_DUPLICATE ) {
+            if ( item.isDuplicate() ) {
               // FIXME pw.format(therion_flags_duplicate);
               duplicate = true;
-            } else if ( item.mFlag == DBlock.BLOCK_SURFACE ) {
+            } else if ( item.isSurface() ) {
               // FIXME pw.format(therion_flags_surface);
               surface = true;
-            // } else if ( item.mFlag == DBlock.BLOCK_COMMENTED ) {
+            // } else if ( item.isCommented() ) {
             //   ...
-            // } else if ( item.mFlag == DBlock.BLOCK_BACKSHOT ) {
+            // } else if ( item.isBackshot() ) {
             //   ...
             }
             writeSrvStations( pw, from, to, item.isCommented() );
@@ -2829,19 +2831,19 @@ class TDExporter
   private static long printFlagToCav( PrintWriter pw, long old_flag, long new_flag, String eol )
   {
     if ( old_flag == new_flag ) return old_flag;
-    if ( old_flag == DBlock.BLOCK_DUPLICATE ) {
+    if ( DBlock.isDuplicate(old_flag) ) {
       pw.format("#end_duplicate%s", eol);
-    } else if ( old_flag == DBlock.BLOCK_SURFACE ) {
+    } else if ( DBlock.isSurface(old_flag) ) {
       pw.format("#end_surface%s", eol);
-    } else if ( old_flag == DBlock.BLOCK_COMMENTED ) {
-      // pw.format("#end_commented%s", eol);
+    // } else if ( DBlock.isCommented(old_flag) ) {
+    //   pw.format("#end_commented%s", eol);
     }
-    if ( new_flag == DBlock.BLOCK_DUPLICATE ) {
+    if ( DBlock.isDuplicate(new_flag) ) {
       pw.format("#duplicate%s", eol);
-    } else if ( new_flag == DBlock.BLOCK_SURFACE ) {
+    } else if ( DBlock.isSurface(new_flag) ) {
       pw.format("#surface%s", eol);
-    } else if ( new_flag == DBlock.BLOCK_COMMENTED ) {
-      // pw.format("#commented%s", eol);
+    // } else if ( DBlock.isCommented(new_flag) ) {
+    //   pw.format("#commented%s", eol);
     }
     return new_flag;
   }
@@ -2965,7 +2967,7 @@ class TDExporter
             }
           } else { // only TO station
             if ( leg.mCnt > 0 && ref_item != null ) {
-              flag = printFlagToCav( pw, flag, ref_item.mFlag, eol );
+              flag = printFlagToCav( pw, flag, ref_item.getFlag(), eol );
               printShotToCav( pw, leg, ref_item, eol, ents );
               ref_item = null; 
             }
@@ -2975,7 +2977,7 @@ class TDExporter
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
-              flag = printFlagToCav( pw, flag, ref_item.mFlag, eol );
+              flag = printFlagToCav( pw, flag, ref_item.getFlag(), eol );
               printShotToCav( pw, leg, ref_item, eol, ents );
               ref_item = null; 
             }
@@ -2983,7 +2985,7 @@ class TDExporter
             printSplayToCav( pw, item, eol );
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {
-              flag = printFlagToCav( pw, flag, ref_item.mFlag, eol );
+              flag = printFlagToCav( pw, flag, ref_item.getFlag(), eol );
               printShotToCav( pw, leg, ref_item, eol, ents );
             }
             ref_item = item;
@@ -2993,10 +2995,10 @@ class TDExporter
         }
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
-        flag = printFlagToCav( pw, flag, ref_item.mFlag, eol );
+        flag = printFlagToCav( pw, flag, ref_item.getFlag(), eol );
         printShotToCav( pw, leg, ref_item, eol, ents );
       }      
-      flag = printFlagToCav( pw, flag, 0, eol );
+      flag = printFlagToCav( pw, flag, DBlock.BLOCK_SURVEY, eol );
       pw.format( "%s", eol );
       pw.format("#end_declination%s", eol);
       pw.format("#end_survey%s", eol);
@@ -3139,7 +3141,7 @@ class TDExporter
               printShotToPlg( pw, leg, lrud, duplicate, ref_item.mComment );
             }
             ref_item = item;
-            duplicate = ( item.mFlag == DBlock.BLOCK_DUPLICATE );
+            duplicate = item.isDuplicate();
             leg.set( item.mLength, item.mBearing, item.mClino );
           }
         }
@@ -3428,7 +3430,7 @@ class TDExporter
               printShotToTro( pw, ref_item, leg, lrud );
             }
             ref_item = item;
-            duplicate = ( item.mFlag == DBlock.BLOCK_DUPLICATE );
+            duplicate = item.isDuplicate();
             // Log.v( TAG, "first data " + item.mLength + " " + item.mBearing + " " + item.mClino );
             leg.set( item.mLength, item.mBearing, item.mClino );
           }

@@ -467,10 +467,10 @@ class DistoXNum
   //             // if ( ts.duplicate ) { // FIXME
   //             //   ++mDupNr;
   //             // } 
-  //             // if ( block.mFlag == DBlock.BLOCK_SURFACE ) { // FIXME
+  //             // if ( block.isSurface() ) { // FIXME
   //             //   ++mSurfNr;
   //             // }
-  //             // if ( block.mFlag == DBlock.BLOCK_COMMENTED ) { // FIXME
+  //             // if ( block.isCommented() ) { // FIXME
   //             //   ++mCmtdNr;
   //             // }
   //             // do close loop also on duplicate shots
@@ -716,10 +716,10 @@ class DistoXNum
 
         case DBlock.BLOCK_MAIN_LEG:
           lastLeg = new TriShot( blk, blk.mFrom, blk.mTo, blk.getExtend(), +1 );
-          lastLeg.duplicate = ( blk.mFlag == DBlock.BLOCK_DUPLICATE );
-          lastLeg.surface   = ( blk.mFlag == DBlock.BLOCK_SURFACE );
-          lastLeg.commented = ( blk.mFlag == DBlock.BLOCK_COMMENTED );
-          // lastLeg.backshot  = ( blk.mFlag == DBlock.BLOCK_BACKSHOT ); // FIXME
+          lastLeg.duplicate = ( blk.isDuplicate() );
+          lastLeg.surface   = ( blk.isSurface() );
+          lastLeg.commented = ( blk.isCommented() );
+          // lastLeg.backshot  = ( blk.isBackshot() ); // FIXME
           tmpshots.add( lastLeg );
           break;
 

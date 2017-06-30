@@ -222,7 +222,7 @@ public class DataHelper extends DataSetObservable
      block.mDip          = (float)( cursor.getDouble(8) );
      
      block.setExtend( (int)(cursor.getLong(9) ) );
-     block.mFlag    = cursor.getLong(10);
+     block.resetFlag( cursor.getLong(10) );
      long leg = cursor.getLong(11);
      if ( leg == 1L ) {
        block.mType = DBlock.BLOCK_SEC_LEG; 

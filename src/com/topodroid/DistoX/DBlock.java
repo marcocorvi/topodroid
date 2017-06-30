@@ -58,7 +58,7 @@ public class DBlock
   float mDip;
   String mComment;
   private int mExtend;
-  long   mFlag;     
+  private long mFlag;     
   int    mType;   
   int mShotType;  // 0: DistoX, 1: manual
   boolean mWithPhoto;
@@ -81,17 +81,35 @@ public class DBlock
     TDColor.GREEN
   };
 
-  public static final int BLOCK_SURVEY     = 0; // flags
-  public static final int BLOCK_SURFACE    = 1;
-  public static final int BLOCK_DUPLICATE  = 2;
-  public static final int BLOCK_COMMENTED  = 3;
-  // public static final int BLOCK_BACKSHOT   = 4;
+  public static final long BLOCK_SURVEY     =  0; // flags
+  public static final long BLOCK_SURFACE    =  1;
+  public static final long BLOCK_DUPLICATE  =  2;
+  public static final long BLOCK_COMMENTED  =  4;
+  public static final long BLOCK_NO_PLAN    =  8;
+  public static final long BLOCK_NO_PROFILE = 16;
+  // public static final long BLOCK_BACKSHOT   = 32;
 
-  public boolean isSurvey() { return mFlag == BLOCK_SURVEY; }
-  public boolean isSurface() { return mFlag == BLOCK_SURFACE; }
-  public boolean isDuplicate() { return mFlag == BLOCK_DUPLICATE; }
-  public boolean isCommented() { return mFlag == BLOCK_COMMENTED; }
-  // public boolean isBackshot() { return mFlag == BLOCK_BACKSHOT; }
+  boolean isSurvey() { return mFlag == BLOCK_SURVEY; }
+  boolean isSurface()   { return (mFlag & BLOCK_SURFACE)    == BLOCK_SURFACE; }
+  boolean isDuplicate() { return (mFlag & BLOCK_DUPLICATE)  == BLOCK_DUPLICATE; }
+  boolean isCommented() { return (mFlag & BLOCK_COMMENTED)  == BLOCK_COMMENTED; }
+  boolean isNoPlan()    { return (mFlag & BLOCK_NO_PLAN)    == BLOCK_NO_PLAN; }
+  boolean isNoProfile() { return (mFlag & BLOCK_NO_PROFILE) == BLOCK_NO_PROFILE; }
+  // public boolean isBackshot() { return (mFlag & BLOCK_BACKSHOT) == BLOCK_BACKSHOT; }
+
+  static boolean isSurvey(int flag) { return flag == BLOCK_SURVEY; }
+  static boolean isSurface(long flag)   { return (flag & BLOCK_SURFACE)    == BLOCK_SURFACE; }
+  static boolean isDuplicate(long flag) { return (flag & BLOCK_DUPLICATE)  == BLOCK_DUPLICATE; }
+  static boolean isCommented(long flag) { return (flag & BLOCK_COMMENTED)  == BLOCK_COMMENTED; }
+  static boolean isNoPlan(long flag)    { return (flag & BLOCK_NO_PLAN)    == BLOCK_NO_PLAN; }
+  static boolean isNoProfile(long flag) { return (flag & BLOCK_NO_PROFILE) == BLOCK_NO_PROFILE; }
+  // static public boolean isBackshot(int flag) { return (flag & BLOCK_BACKSHOT) == BLOCK_BACKSHOT; }
+
+  void resetFlag() { mFlag = BLOCK_SURVEY; }
+  void resetFlag( long flag ) { mFlag = flag; }
+  void setFlag( long flag ) { mFlag |= flag; }
+  void clearFlag( long flag ) { mFlag &= ~flag; }
+  long getFlag() { return mFlag; }
 
   void setTypeBlankLeg( ) { if ( mType == BLOCK_BLANK ) mType = BLOCK_BLANK_LEG; }
   boolean isTypeBlank() { return mType == BLOCK_BLANK || mType == BLOCK_BLANK_LEG; }
@@ -302,14 +320,20 @@ public class DBlock
   
   private void formatFlag( PrintWriter pw )
   {
-    if ( mFlag == BLOCK_DUPLICATE ) {
-      pw.format( "*" );
-    } else if ( mFlag == BLOCK_SURFACE ) {
-      pw.format( "-" );
-    // } else if ( mFlag == BLOCK_COMMENTED ) {
+    if ( isNoPlan() ) {
+      pw.format("]_");
+    } else if ( isNoProfile() ) {
+      pw.format("]~");
+    } else if ( isDuplicate() ) {
+      pw.format( "]*" );
+    } else if ( isSurface() ) {
+      pw.format( "]-" );
+    // } else if ( isCommented() ) {
     //   pw.format( "^" );
-    // } else if ( mFlag == BLOCK_BACKSHOT ) {
+    // } else if ( isBackshot() ) {
     //   pw.format( "+" );
+    } else {
+      pw.format("]");
     }
   }
 
@@ -329,7 +353,7 @@ public class DBlock
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
     if ( show_id ) pw.format("%d ", mId );
-    pw.format(Locale.US, "<%s-%s> %.2f %.1f %.1f [%c]",
+    pw.format(Locale.US, "<%s-%s> %.2f %.1f %.1f [%c",
       mFrom, mTo,
       mLength*ul, mBearing*ua, mClino*ua, mExtendTag[ (int)(mExtend) + 1 ] );
     formatFlag( pw );
@@ -354,7 +378,7 @@ public class DBlock
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
-    pw.format("[%c]", mExtendTag[ (int)(mExtend) + 1 ] );
+    pw.format("[%c", mExtendTag[ (int)(mExtend) + 1 ] );
     formatFlag( pw );
     if ( mWithPhoto ) { pw.format("#"); }
     formatComment( pw );

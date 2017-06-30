@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date may 2012
  *
- * @brief TopoDroid audio dialog to register a comment for a shot
+ * @brief TopoDroid multistate button
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.

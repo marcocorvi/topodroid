@@ -196,22 +196,16 @@ public class DrawingShotDialog extends MyDialog
         //   mRBignore.setChecked( true );
         //   break;
       }
-      switch ( (int)mBlock.mFlag ) {
-        // case DBlock.BLOCK_SURVEY:
-        //   mRBsurvey.setChecked( true );
-        //   break;
-        case DBlock.BLOCK_DUPLICATE:
-          mRBdup.setChecked( true );
-          break;
-        case DBlock.BLOCK_SURFACE:
-          mRBsurf.setChecked( true );
-          break;
-        case DBlock.BLOCK_COMMENTED:
-          mRBcmtd.setChecked( true );
-          break;
-        // case DBlock.BLOCK_BACKSHOT:
-        //   mRBbackshot.setChecked( true );
-        //   break;
+      // if ( mBlock.isSurvey() ) {
+      //   mRBsurvey.setChecked( true );
+      if ( mBlock.isDuplicate() ) {
+        mRBdup.setChecked( true );
+      } else if ( mBlock.isSurface() ) {
+        mRBsurf.setChecked( true );
+      } else if ( mBlock.isCommented() ) {
+        mRBcmtd.setChecked( true );
+      // } else if ( mBlock.isBackshot() ) {
+      //   mRBbackshot.setChecked( true );
       }
     }
     setTitle( String.format( mContext.getResources().getString( R.string.shot_title ), mBlock.mFrom, mBlock.mTo ) );
@@ -286,8 +280,6 @@ public class DrawingShotDialog extends MyDialog
     } else if ( b == mBtnCancel ) {
       dismiss();
     } else if ( b == mBtnOK ) {
-      // int extend = mBlock.getExtend();
-      long flag  = mBlock.mFlag;
 
       if ( mCBfrom != null && mCBfrom.isChecked() ) {
         if ( ( mFlag & 0x01 ) == 0x01 ) { // can barrier FROM
@@ -304,6 +296,7 @@ public class DrawingShotDialog extends MyDialog
         }
       }
 
+      // int extend = mBlock.getExtend();
       // int extend = DBlock.EXTEND_FIGNORE;
       // if ( mRBleft.isChecked() )       { extend = DBlock.EXTEND_FLEFT; }
       // else if ( mRBvert.isChecked() )  { extend = DBlock.EXTEND_FVERT; }
@@ -313,7 +306,8 @@ public class DrawingShotDialog extends MyDialog
       else if ( mRBvert.isChecked() )  { extend = DBlock.EXTEND_VERT; }
       else if ( mRBright.isChecked() ) { extend = DBlock.EXTEND_RIGHT; }
 
-      if ( mRBdup.isChecked() ) { flag = DBlock.BLOCK_DUPLICATE; }
+      long flag  = mBlock.getFlag();
+      if ( mRBdup.isChecked() )       { flag = DBlock.BLOCK_DUPLICATE; }
       else if ( mRBsurf.isChecked() ) { flag = DBlock.BLOCK_SURFACE; }
       else if ( mRBcmtd.isChecked() ) { flag = DBlock.BLOCK_COMMENTED; }
       // else if ( mRBbackshot.isChecked() ) { flag = DBlock.BLOCK_BACKSHOT; }

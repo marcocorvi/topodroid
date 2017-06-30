@@ -936,8 +936,11 @@ public class DrawingWindow extends ItemDrawer
         if ( Math.abs( sp.getBlock().mClino ) < TDSetting.mSplayVertThrs ) {
           NumStation st = sp.from;
           if ( st.show() ) {
-            addFixedLine( sp.getBlock(), (float)(st.e), (float)(st.s), (float)(sp.e), (float)(sp.s), true, true );
+            DBlock blk = sp.getBlock();
+            if ( ! blk.isNoPlan() ) {
+              addFixedLine( blk, (float)(st.e), (float)(st.s), (float)(sp.e), (float)(sp.s), true, true );
                           // xoff, yoff, true, true );
+            }
           }
         }
       }
@@ -966,8 +969,11 @@ public class DrawingWindow extends ItemDrawer
       for ( NumSplay sp : splays ) {
         NumStation st = sp.from;
         if ( st.mHasCoords && st.show() ) {
-          addFixedLine( sp.getBlock(), (float)(st.h), (float)(st.v), (float)(sp.h), (float)(sp.v), true, true );
+          DBlock blk = sp.getBlock();
+          if ( ! blk.isNoProfile() ) {
+            addFixedLine( blk, (float)(st.h), (float)(st.v), (float)(sp.h), (float)(sp.v), true, true );
                         // xoff, yoff, true, true );
+          }
         }
       }
       List< PlotInfo > xhsections = mApp.mXSections ?
@@ -997,10 +1003,13 @@ public class DrawingWindow extends ItemDrawer
       for ( NumSplay sp : splays ) {
         NumStation st = sp.from;
         if ( st.show() ) {
-          h1 = (float)( st.e * cosp + st.s * sinp );
-          h2 = (float)( sp.e * cosp + sp.s * sinp );
-          // addFixedLine( sp.getBlock(), h1, (float)(st.v), h2, (float)(sp.v), xoff, yoff, true, true );
-          addFixedLine( sp.getBlock(), h1, (float)(st.v), h2, (float)(sp.v), true, true );
+          DBlock blk = sp.getBlock();
+          if ( ! blk.isNoProfile() ) {
+            h1 = (float)( st.e * cosp + st.s * sinp );
+            h2 = (float)( sp.e * cosp + sp.s * sinp );
+            // addFixedLine( sp.getBlock(), h1, (float)(st.v), h2, (float)(sp.v), xoff, yoff, true, true );
+            addFixedLine( blk, h1, (float)(st.v), h2, (float)(sp.v), true, true );
+          }
         }
       }
       List< PlotInfo > xhsections = mApp.mXSections ?
@@ -2027,8 +2036,8 @@ public class DrawingWindow extends ItemDrawer
     
     void updateBlockFlag( DBlock block, long flag, DrawingPath shot )
     {
-      if ( block.mFlag == flag ) return;
-      block.mFlag = flag;
+      if ( block.getFlag() == flag ) return;
+      block.resetFlag( flag );
       setSplayPaint( shot, block ); // really necessary only if flag || mFlag is BLOCK_COMMENTED
       mData.updateShotFlag( block.mId, mSid, flag, true );
     }

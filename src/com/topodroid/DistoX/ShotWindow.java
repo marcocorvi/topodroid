@@ -522,13 +522,13 @@ public class ShotWindow extends Activity
 
     // TDLog.Log( TDLog.LOG_INPUT, "ShotWindow onItemClick id " + id);
     DBlock blk = mDataAdapter.get(pos);
-    Log.v( "DistoX", "ShotWindow onItemClick id " + id + " pos " + pos + " blk " + blk.mFrom + " " + blk.mTo );
+    // Log.v( "DistoX", "ShotWindow onItemClick id " + id + " pos " + pos + " blk " + blk.mFrom + " " + blk.mTo );
     onBlockClick( blk, pos );
   }
 
   void onBlockClick( DBlock blk, int pos )
   {
-    Log.v("DistoX", "on block click: on_open " + mOnOpenDialog );
+    // Log.v("DistoX", "on block click: on_open " + mOnOpenDialog );
     if ( mOnOpenDialog ) return;
     mOnOpenDialog = true;
     mShotPos = pos;
@@ -749,7 +749,7 @@ public class ShotWindow extends Activity
         ++id;
         DBlock b = mApp.mData.selectShot( id, mApp.mSID );
         if ( b != null && b.type() == DBlock.BLOCK_SEC_LEG ) {
-          mApp.mData.updateShot( id, mApp.mSID, blk.mFrom, blk.mTo, blk.getFullExtend(), blk.mFlag, 0, blk.mComment, true ); // forward = true
+          mApp.mData.updateShot( id, mApp.mSID, blk.mFrom, blk.mTo, blk.getFullExtend(), blk.getFlag(), 0, blk.mComment, true ); // forward = true
           mApp.mData.updateShotStatus( id, mApp.mSID, 0, true ); // status normal, forward = true
         }
       }
@@ -1234,7 +1234,7 @@ public class ShotWindow extends Activity
           ++id;
           DBlock b = mApp.mData.selectShot( id, mApp.mSID );
           if ( b != null && b.type() == DBlock.BLOCK_SEC_LEG ) {
-            mApp.mData.updateShot( id, mApp.mSID, blk.mFrom, blk.mTo, blk.getFullExtend(), blk.mFlag, 0, blk.mComment, true ); // forward = true
+            mApp.mData.updateShot( id, mApp.mSID, blk.mFrom, blk.mTo, blk.getFullExtend(), blk.getFlag(), 0, blk.mComment, true ); // forward = true
             mApp.mData.updateShotStatus( id, mApp.mSID, 0, true ); // status normal, forward = true
           }
         }
@@ -1495,7 +1495,7 @@ public class ShotWindow extends Activity
     if ( blk3 != blk && blk3 != null ) {
       blk3.setName( from, to );
       blk3.setExtend( extend );
-      blk3.mFlag    = flag;
+      blk3.resetFlag( flag );
       blk3.mComment = comment;
       // FIXME if ( leg ) blk3.mType = DBlock.BLOCK_SEC_LEG;
       mDataAdapter.updateBlockView( blk3.mId );
