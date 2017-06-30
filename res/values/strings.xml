@@ -94,6 +94,7 @@
     <string name="device_code">DistoX code %1$4d</string>
     <string name="device_firmware">Firmware  %1$d.%2$d</string>
     <string name="device_hardware">Hardware  %1$d.%2$d</string>
+    <string name="device_memory">Memory  %1$02x.%2$02x</string>
     <string name="device_status_angle_grad">Angle units: grad</string>
     <string name="device_status_angle_degree">Angle units: degree</string>
     <string name="device_status_compass_on">Compass/clino: on</string>

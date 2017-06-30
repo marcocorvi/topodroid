@@ -73,13 +73,13 @@ public class ShotDialog extends MyDialog
   private MyCheckBox mRBdup;
   private MyCheckBox mRBsurf;
   private MyCheckBox mRBcmtd;
-  private MyStateBox mRBsplay;
+  private MyStateBox mRBsplay = null;
 
   private MyCheckBox mCBlegPrev;
   private MyCheckBox mCBlegNext;
   private MyCheckBox mCBrenumber;
   private MyCheckBox mCBallSplay;
-  private MyCheckBox mCBxSplay;
+  private MyCheckBox mCBxSplay = null;
   // private MyCheckBox mCBhighlight;
 
   HorizontalListView mListView;
@@ -230,8 +230,10 @@ public class ShotDialog extends MyDialog
     if ( DBlock.isDuplicate(shot_flag) )      { mRBdup.setChecked( true ); }
     else if ( DBlock.isSurface(shot_flag) )   { mRBsurf.setChecked( true ); }
     else if ( DBlock.isCommented(shot_flag) ) { mRBcmtd.setChecked( true ); }
-    else if ( DBlock.isNoProfile(shot_flag) ) { mRBsplay.setState( 1 ); }
-    else if ( DBlock.isNoPlan(shot_flag) )    { mRBsplay.setState( 2 ); }
+    else if ( TDSetting.mLevelOverAdvanced ) {
+      if ( DBlock.isNoProfile(shot_flag) )   { mRBsplay.setState( 1 ); }
+      else if ( DBlock.isNoPlan(shot_flag) ) { mRBsplay.setState( 2 ); }
+    }
     // else if ( DBlock.isBackshot(shot_flag) ) { mRBback.setChecked( true ); }
 
     mCBlegPrev.setChecked( shot_leg );
@@ -346,19 +348,25 @@ public class ShotDialog extends MyDialog
     mRBdup       = new MyCheckBox( mContext, size, R.drawable.iz_dup_ok, R.drawable.iz_dup_no );
     mRBsurf      = new MyCheckBox( mContext, size, R.drawable.iz_surface_ok, R.drawable.iz_surface_no );
     mRBcmtd      = new MyCheckBox( mContext, size, R.drawable.iz_comment_ok, R.drawable.iz_comment_no );
-    mRBsplay     = new MyStateBox( mContext, R.drawable.iz_plan_profile, R.drawable.iz_plan, R.drawable.iz_extended );
     mCBlegPrev   = new MyCheckBox( mContext, size, R.drawable.iz_leg2_ok, R.drawable.iz_leg2_no );
     mCBlegNext   = new MyCheckBox( mContext, size, R.drawable.iz_legnext_ok, R.drawable.iz_legnext_no );
-    mCBallSplay  = new MyCheckBox( mContext, size, R.drawable.iz_splays_ok, R.drawable.iz_splays_no );
-    if ( shot_xsplay ) {
-      mCBxSplay    = new MyCheckBox( mContext, size, R.drawable.iz_xsplays_ok, R.drawable.iz_ysplays_no );
-    } else {
-      mCBxSplay    = new MyCheckBox( mContext, size, R.drawable.iz_ysplays_ok, R.drawable.iz_xsplays_no );
-    }
     mCBrenumber  = new MyCheckBox( mContext, size, R.drawable.iz_numbers_ok, R.drawable.iz_numbers_no );
+    mCBallSplay  = new MyCheckBox( mContext, size, R.drawable.iz_splays_ok, R.drawable.iz_splays_no );
+
+    if ( TDSetting.mLevelOverAdvanced ) {
+      if ( shot_xsplay ) {
+        mCBxSplay    = new MyCheckBox( mContext, size, R.drawable.iz_xsplays_ok, R.drawable.iz_ysplays_no );
+      } else {
+        mCBxSplay    = new MyCheckBox( mContext, size, R.drawable.iz_ysplays_ok, R.drawable.iz_xsplays_no );
+      }
+      mRBsplay     = new MyStateBox( mContext, R.drawable.iz_plan_profile, R.drawable.iz_plan, R.drawable.iz_extended );
+      mCBxSplay.setOnClickListener( this );
+      mRBsplay.setOnClickListener( this );
+    }
     // mCBhighlight = new MyCheckBox( mContext, size, R.drawable.iz_highlight_ok, R.drawable.iz_highlight_no );
 
-    mButton = new Button[9];
+    int nr_buttons = TDSetting.mLevelOverAdvanced ? 9 : 7;
+    mButton = new Button[nr_buttons];
 
     mButton[0] = mRBdup;
     mButton[1] = mRBsurf;
@@ -367,8 +375,10 @@ public class ShotDialog extends MyDialog
     mButton[4] = mCBlegNext;
     mButton[5] = mCBrenumber;
     mButton[6] = mCBallSplay;
-    mButton[7] = mCBxSplay;
-    mButton[8] = mRBsplay;
+    if ( TDSetting.mLevelOverAdvanced ) {
+      mButton[7] = mCBxSplay;
+      mButton[8] = mRBsplay;
+    }
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
     /* size = */ TopoDroidApp.setListViewHeight( mContext, mListView );
@@ -380,7 +390,6 @@ public class ShotDialog extends MyDialog
     mCBlegPrev.setOnClickListener( this );
     mCBlegNext.setOnClickListener( this );
     mCBallSplay.setOnClickListener( this );
-    mCBxSplay.setOnClickListener( this );
 
     mButtonReverse = (Button)  findViewById(R.id.shot_reverse );
 
@@ -422,7 +431,6 @@ public class ShotDialog extends MyDialog
     mRBdup.setOnClickListener( this );
     mRBsurf.setOnClickListener( this );
     mRBcmtd.setOnClickListener( this );
-    mRBsplay.setOnClickListener( this );
 
     mButtonReverse.setOnClickListener( this );
 
@@ -455,7 +463,7 @@ public class ShotDialog extends MyDialog
     // }
 
     boolean all_splay = mCBallSplay.isChecked();
-    boolean x_splay = mCBxSplay.isChecked();
+    boolean x_splay = TDSetting.mLevelOverAdvanced? mCBxSplay.isChecked() : false;
     boolean leg_next  = false;
     if ( mCBlegPrev.isChecked() ) {
       shot_from = "";
@@ -480,8 +488,10 @@ public class ShotDialog extends MyDialog
     if ( mRBdup.isChecked() )       { shot_flag = DBlock.BLOCK_DUPLICATE; }
     else if ( mRBsurf.isChecked() ) { shot_flag = DBlock.BLOCK_SURFACE; }
     else if ( mRBcmtd.isChecked() ) { shot_flag = DBlock.BLOCK_COMMENTED; }
-    else if ( mRBsplay.getState() == 1 ) { shot_flag = DBlock.BLOCK_NO_PROFILE; }
-    else if ( mRBsplay.getState() == 2 ) { shot_flag = DBlock.BLOCK_NO_PLAN; }
+    else if ( TDSetting.mLevelOverAdvanced ) {
+      if ( mRBsplay.getState() == 1 )      { shot_flag = DBlock.BLOCK_NO_PROFILE; }
+      else if ( mRBsplay.getState() == 2 ) { shot_flag = DBlock.BLOCK_NO_PLAN; }
+    }
     // else if ( mRBback.isChecked() ) { shot_flag = DBlock.BLOCK_BACKSHOT; }
     // else                            { shot_flag = DBlock.BLOCK_SURVEY; }
 
@@ -588,17 +598,17 @@ public class ShotDialog extends MyDialog
       // Log.v("DistoX", "CB leg clicked ");
       if ( mCBlegPrev.toggleState() ) {
         mCBallSplay.setState( false );
-        mCBxSplay.setState( false );
+        if ( TDSetting.mLevelOverAdvanced ) mCBxSplay.setState( false );
         mCBlegNext.setState( false );
       }
     } else if ( b == mCBallSplay ) {
       // Log.v("DistoX", "CB all_splay clicked ");
       if ( mCBallSplay.toggleState() ) {
-        mCBxSplay.setState( false );
+        if ( TDSetting.mLevelOverAdvanced ) mCBxSplay.setState( false );
         mCBlegPrev.setState( false );
         mCBlegNext.setState( false );
       }
-    } else if ( b == mCBxSplay ) {
+    } else if ( TDSetting.mLevelOverAdvanced && b == mCBxSplay ) {
       if ( mCBxSplay.toggleState() ) {
         mCBallSplay.setState( false );
         mCBlegPrev.setState( false );
@@ -608,28 +618,28 @@ public class ShotDialog extends MyDialog
       if ( mCBlegNext.toggleState() ) {
         mCBlegPrev.setState( false );
         mCBallSplay.setState( false );
-        mCBxSplay.setState( false );
+        if ( TDSetting.mLevelOverAdvanced ) mCBxSplay.setState( false );
       }
 
     } else if ( b == mRBdup ) {
       if ( mRBdup.toggleState() ) {
         mRBsurf.setState( false );
         mRBcmtd.setState( false );
-        mRBsplay.setState( 0 );
+        if ( TDSetting.mLevelOverAdvanced ) mRBsplay.setState( 0 );
       }
     } else if ( b == mRBsurf ) {
       if ( mRBsurf.toggleState() ) {
         mRBdup.setState( false );
         mRBcmtd.setState( false );
-        mRBsplay.setState( 0 );
+        if ( TDSetting.mLevelOverAdvanced ) mRBsplay.setState( 0 );
       }
     } else if ( b == mRBcmtd ) {
       if ( mRBcmtd.toggleState() ) {
         mRBdup.setState( false );
         mRBsurf.setState( false );
-        mRBsplay.setState( 0 );
+        if ( TDSetting.mLevelOverAdvanced ) mRBsplay.setState( 0 );
       }
-    } else if ( b == mRBsplay ) {
+    } else if ( TDSetting.mLevelOverAdvanced && b == mRBsplay ) {
       mRBsplay.setState( ( mRBsplay.getState() + 1 ) % 3 );
       if ( mRBsplay.getState() > 0 ) {
         mRBdup.setState( false );
@@ -686,7 +696,7 @@ public class ShotDialog extends MyDialog
 
     } else if ( b == mButtonPrev ) {
       mCBallSplay.setVisibility( View.GONE );
-      mCBxSplay.setVisibility( View.GONE );
+      if ( TDSetting.mLevelOverAdvanced ) mCBxSplay.setVisibility( View.GONE );
       // shift:
       //               prev -- blk -- next
       // prevOfPrev -- prev -- blk
@@ -703,7 +713,7 @@ public class ShotDialog extends MyDialog
 
     } else if ( b == mButtonNext ) {
       mCBallSplay.setVisibility( View.GONE );
-      mCBxSplay.setVisibility( View.GONE );
+      if ( TDSetting.mLevelOverAdvanced ) mCBxSplay.setVisibility( View.GONE );
       // shift:
       //        prev -- blk -- next
       //                blk -- next -- nextOfNext

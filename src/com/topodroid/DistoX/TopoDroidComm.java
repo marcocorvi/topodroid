@@ -34,7 +34,8 @@ public class TopoDroidComm
 
   protected boolean mBTConnected;
 
-  protected static final byte CALIB_BIT = (byte)0x08;
+  protected static final byte CALIB_BIT  = (byte)0x08; // X1 calib bit
+  protected static final byte CALIB_BIT2 = (byte)0x20; // X2 calib bit
   public byte[] mCoeff;
 
 // -----------------------------------------------------------
