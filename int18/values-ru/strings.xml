@@ -888,10 +888,10 @@
   <string name="pref_vert_splay_title">Порог угла бок. замеров пунктиром</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Порог угла бок. замеров показанных пунктиром</string -->
   <string name="pref_vert_splay_message">Порог угла бок. замеров показанных пунктиром в плане</string>
-  <!-- TODO string name="pref_shared_xsections_title">Shared x-sections</string -->
-  <!-- TODO string name="pref_shared_xsections_summary">At-station x-sections shared among sketches</string -->
-  <!-- TODO string name="xsections_shared">Shared X-sections</string -->
-  <!-- TODO string name="xsections_private">Private X-sections</string -->
+  <string name="pref_shared_xsections_title">Общий поперечный разрез</string>
+  <string name="pref_shared_xsections_summary">Поперечные разреы на пикете общие для плана и разреза</string>
+  <string name="xsections_shared">Общие поперечные разреы</string>
+  <string name="xsections_private">НЕОбщие поперечные разрезы</string>
   <!-- UNUSED string name="pref_list_refresh_title">Обновить список</string -->
   <!-- UNUSED string name="pref_list_refresh_summary">Принудительно обновить список</string -->
   <string name="pref_survey_stations_title">Настройки авто-нумерации пикетов</string>
