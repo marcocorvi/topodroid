@@ -70,13 +70,16 @@ public class DrawingModeDialog extends MyDialog
       int mode = mSurface.getDisplayMode();
       if ( mParent != null && mParent.isAnySection() ) {
         mCBsplay.setVisibility( View.GONE );
+        mCBfixed.setVisibility( View.GONE );
+        mCBscrap.setVisibility( View.GONE );
       } else {
         mCBsplay.setChecked(   (mode & DisplayMode.DISPLAY_SPLAY) != 0 );
-        if ( mParent != null && TDSetting.mLevelOverNormal ) {
+        if ( mParent != null && TDSetting.mLevelOverAdvanced ) {
           mCBfixed.setChecked( mParent.mShiftDrawing );
         } else {
           mCBfixed.setVisibility( View.GONE );
         }
+        if ( ! TDSetting.mLevelOverNormal ) mCBscrap.setVisibility( View.GONE );
       }
       mCBleg.setChecked(     (mode & DisplayMode.DISPLAY_LEG) != 0 );
       mCBstation.setChecked( (mode & DisplayMode.DISPLAY_STATION) != 0 );
@@ -92,7 +95,7 @@ public class DrawingModeDialog extends MyDialog
           int mode = DisplayMode.DISPLAY_NONE;
           if ( mParent != null && ! mParent.isAnySection() ) {
             if ( mCBsplay.isChecked() )   mode |= DisplayMode.DISPLAY_SPLAY;
-            if ( mParent != null && TDSetting.mLevelOverNormal ) {
+            if ( mParent != null && TDSetting.mLevelOverAdvanced ) {
               mParent.mShiftDrawing = mCBfixed.isChecked();
             }
           }
@@ -103,7 +106,7 @@ public class DrawingModeDialog extends MyDialog
 
           // TDLog.Error( "Mode " + mode );
           mSurface.setDisplayMode( mode );
-          if ( mCBscrap.isChecked() ) {
+          if ( TDSetting.mLevelOverNormal && mCBscrap.isChecked() ) {
             mParent.scrapOutlineDialog();
           }
 

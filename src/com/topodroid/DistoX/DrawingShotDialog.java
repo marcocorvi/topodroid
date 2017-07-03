@@ -49,11 +49,11 @@ public class DrawingShotDialog extends MyDialog
   // private RadioButton mRBignore;
 
   // private RadioButton mRBsurvey;
-  private MyCheckBox mRBdup;
-  private MyCheckBox mRBsurf;
-  private MyCheckBox mRBcmtd;
-  private CheckBox mCBfrom;
-  private CheckBox mCBto;
+  private MyCheckBox mRBdup  = null;
+  private MyCheckBox mRBsurf = null;
+  private MyCheckBox mRBcmtd = null;
+  private CheckBox mCBfrom   = null;
+  private CheckBox mCBto     = null;
   // private CheckBox mRBbackshot;
   private Button mRBwalls;
 
@@ -120,30 +120,37 @@ public class DrawingShotDialog extends MyDialog
       LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
     lp.setMargins( 0, 10, 20, 10 );
 
-    mRBdup      = new MyCheckBox( mContext, size, R.drawable.iz_dup_ok, R.drawable.iz_dup_no );
-    mRBsurf     = new MyCheckBox( mContext, size, R.drawable.iz_surface_ok, R.drawable.iz_surface_no );
-    mRBcmtd     = new MyCheckBox( mContext, size, R.drawable.iz_comment_ok, R.drawable.iz_comment_no );
-    layout3.addView( mRBdup,  lp );
-    layout3.addView( mRBsurf, lp );
-    layout3.addView( mRBcmtd, lp );
+    if ( TDSetting.mLevelOverNormal ) {
+      mRBdup      = new MyCheckBox( mContext, size, R.drawable.iz_dup_ok, R.drawable.iz_dup_no );
+      mRBsurf     = new MyCheckBox( mContext, size, R.drawable.iz_surface_ok, R.drawable.iz_surface_no );
+      mRBcmtd     = new MyCheckBox( mContext, size, R.drawable.iz_comment_ok, R.drawable.iz_comment_no );
+      layout3.addView( mRBdup,  lp );
+      layout3.addView( mRBsurf, lp );
+      layout3.addView( mRBcmtd, lp );
+      mRBdup.setOnClickListener( this );
+      mRBsurf.setOnClickListener( this );
+      mRBcmtd.setOnClickListener( this );
+    } else {
+      layout3.setVisibility( View.GONE );
+    }
 
-    mCBfrom = null;
-    mCBto = null;
     boolean hide3b = true;
-    if ( mBlock.type() == DBlock.BLOCK_MAIN_LEG ) {
-      if ( ( mFlag & 0x03 ) != 0 ) { // FROM can be barrier/hidden
-        mCBfrom = new CheckBox( mContext );
-        mCBfrom.setText( mBlock.mFrom );
-        mCBfrom.setChecked( false );
-        layout3b.addView( mCBfrom, lp );
-        hide3b = false;
-      }
-      if ( ( mFlag & 0x0c ) != 0 ) { // TO can be barrier/hidden
-        mCBto   = new CheckBox( mContext );
-        mCBto.setText( mBlock.mTo );
-        mCBto.setChecked( false );
-        layout3b.addView( mCBto, lp );
-        hide3b = false;
+    if ( TDSetting.mLevelOverAdvanced ) {
+      if ( mBlock.type() == DBlock.BLOCK_MAIN_LEG ) {
+        if ( ( mFlag & 0x03 ) != 0 ) { // FROM can be barrier/hidden
+          mCBfrom = new CheckBox( mContext );
+          mCBfrom.setText( mBlock.mFrom );
+          mCBfrom.setChecked( false );
+          layout3b.addView( mCBfrom, lp );
+          hide3b = false;
+        }
+        if ( ( mFlag & 0x0c ) != 0 ) { // TO can be barrier/hidden
+          mCBto   = new CheckBox( mContext );
+          mCBto.setText( mBlock.mTo );
+          mCBto.setChecked( false );
+          layout3b.addView( mCBto, lp );
+          hide3b = false;
+        }
       }
     }
     if ( hide3b ) layout3b.setVisibility( View.GONE );
@@ -161,9 +168,6 @@ public class DrawingShotDialog extends MyDialog
     mRBvert.setOnClickListener( this );
     mRBright.setOnClickListener( this );
 
-    mRBdup.setOnClickListener( this );
-    mRBsurf.setOnClickListener( this );
-    mRBcmtd.setOnClickListener( this );
     // mRBbackshot.setOnClickListener( this );
     if ( TDSetting.mWallsType != TDSetting.WALLS_NONE 
       && TDSetting.mLevelOverAdvanced 
@@ -198,14 +202,16 @@ public class DrawingShotDialog extends MyDialog
       }
       // if ( mBlock.isSurvey() ) {
       //   mRBsurvey.setChecked( true );
-      if ( mBlock.isDuplicate() ) {
-        mRBdup.setChecked( true );
-      } else if ( mBlock.isSurface() ) {
-        mRBsurf.setChecked( true );
-      } else if ( mBlock.isCommented() ) {
-        mRBcmtd.setChecked( true );
-      // } else if ( mBlock.isBackshot() ) {
-      //   mRBbackshot.setChecked( true );
+      if ( TDSetting.mLevelOverNormal ) {
+        if ( mBlock.isDuplicate() ) {
+          mRBdup.setChecked( true );
+        } else if ( mBlock.isSurface() ) {
+          mRBsurf.setChecked( true );
+        } else if ( mBlock.isCommented() ) {
+          mRBcmtd.setChecked( true );
+        // } else if ( mBlock.isBackshot() ) {
+        //   mRBbackshot.setChecked( true );
+        }
       }
     }
     setTitle( String.format( mContext.getResources().getString( R.string.shot_title ), mBlock.mFrom, mBlock.mTo ) );
@@ -251,19 +257,19 @@ public class DrawingShotDialog extends MyDialog
       mRBleft.setChecked( false );
       mRBvert.setChecked( false );
 
-    } else if ( b == mRBdup ) {
+    } else if ( TDSetting.mLevelOverNormal && b == mRBdup ) {
       mRBdup.toggleState();
       if ( mRBdup.isChecked() ) {
         mRBsurf.setState( false );
         mRBcmtd.setState( false );
       }
-    } else if ( b == mRBsurf ) {
+    } else if ( TDSetting.mLevelOverNormal && b == mRBsurf ) {
       mRBsurf.toggleState();
       if ( mRBsurf.isChecked() ) {
         mRBdup.setState( false );
         mRBcmtd.setState( false );
       }
-    } else if ( b == mRBcmtd ) {
+    } else if ( TDSetting.mLevelOverNormal && b == mRBcmtd ) {
       mRBcmtd.toggleState();
       if ( mRBcmtd.isChecked() ) {
         mRBdup.setState( false );
@@ -281,40 +287,39 @@ public class DrawingShotDialog extends MyDialog
       dismiss();
     } else if ( b == mBtnOK ) {
 
-      if ( mCBfrom != null && mCBfrom.isChecked() ) {
-        if ( ( mFlag & 0x01 ) == 0x01 ) { // can barrier FROM
-          mParent.toggleStationBarrier( mBlock.mFrom, false );
-        } else if ( ( mFlag & 0x02 ) == 0x02 ) { // can hidden FROM
-          mParent.toggleStationHidden( mBlock.mFrom, false );
+      if ( TDSetting.mLevelOverAdvanced ) {
+        if ( mCBfrom != null && mCBfrom.isChecked() ) {
+          if ( ( mFlag & 0x01 ) == 0x01 ) { // can barrier FROM
+            mParent.toggleStationBarrier( mBlock.mFrom, false );
+          } else if ( ( mFlag & 0x02 ) == 0x02 ) { // can hidden FROM
+            mParent.toggleStationHidden( mBlock.mFrom, false );
+          }
         }
-      }
-      if ( mCBto != null && mCBto.isChecked() ) {
-        if ( ( mFlag & 0x04 ) == 0x04 ) { // can barrier TO
-          mParent.toggleStationBarrier( mBlock.mTo, false );
-        } else if ( ( mFlag & 0x08 ) == 0x08 ) { // can hidden TO
-          mParent.toggleStationHidden( mBlock.mTo, false );
+        if ( mCBto != null && mCBto.isChecked() ) {
+          if ( ( mFlag & 0x04 ) == 0x04 ) { // can barrier TO
+            mParent.toggleStationBarrier( mBlock.mTo, false );
+          } else if ( ( mFlag & 0x08 ) == 0x08 ) { // can hidden TO
+            mParent.toggleStationHidden( mBlock.mTo, false );
+          }
         }
       }
 
       // int extend = mBlock.getExtend();
-      // int extend = DBlock.EXTEND_FIGNORE;
-      // if ( mRBleft.isChecked() )       { extend = DBlock.EXTEND_FLEFT; }
-      // else if ( mRBvert.isChecked() )  { extend = DBlock.EXTEND_FVERT; }
-      // else if ( mRBright.isChecked() ) { extend = DBlock.EXTEND_FRIGHT; }
       int extend = DBlock.EXTEND_IGNORE;
       if ( mRBleft.isChecked() )       { extend = DBlock.EXTEND_LEFT; }
       else if ( mRBvert.isChecked() )  { extend = DBlock.EXTEND_VERT; }
       else if ( mRBright.isChecked() ) { extend = DBlock.EXTEND_RIGHT; }
-
-      long flag  = mBlock.getFlag();
-      if ( mRBdup.isChecked() )       { flag = DBlock.BLOCK_DUPLICATE; }
-      else if ( mRBsurf.isChecked() ) { flag = DBlock.BLOCK_SURFACE; }
-      else if ( mRBcmtd.isChecked() ) { flag = DBlock.BLOCK_COMMENTED; }
-      // else if ( mRBbackshot.isChecked() ) { flag = DBlock.BLOCK_BACKSHOT; }
-      else /* if ( mRBsurvey.isChecked() ) */ { flag = DBlock.BLOCK_SURVEY; }
-
       mParent.updateBlockExtend( mBlock, extend ); // equal extend checked by the method
-      mParent.updateBlockFlag( mBlock, flag, mPath ); // equal flag is checked by the method
+
+      if ( TDSetting.mLevelOverNormal ) {
+        long flag  = mBlock.getFlag();
+        if ( mRBdup.isChecked() )       { flag = DBlock.BLOCK_DUPLICATE; }
+        else if ( mRBsurf.isChecked() ) { flag = DBlock.BLOCK_SURFACE; }
+        else if ( mRBcmtd.isChecked() ) { flag = DBlock.BLOCK_COMMENTED; }
+        // else if ( mRBbackshot.isChecked() ) { flag = DBlock.BLOCK_BACKSHOT; }
+        else /* if ( mRBsurvey.isChecked() ) */ { flag = DBlock.BLOCK_SURVEY; }
+        mParent.updateBlockFlag( mBlock, flag, mPath ); // equal flag is checked by the method
+      }
 
       String from = mETfrom.getText().toString().trim();
       String to   = mETto.getText().toString().trim();

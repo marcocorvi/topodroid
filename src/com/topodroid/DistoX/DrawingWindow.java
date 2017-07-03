@@ -137,12 +137,12 @@ public class DrawingWindow extends ItemDrawer
   private static int BTN_DOWNLOAD = 3;  // index of mButton1 download button
   private static int BTN_BLUETOOTH = 4; // index of mButton1 bluetooth button
   private static int BTN_PLOT = 7;      // index of mButton1 plot button
-  private static int BTN_DIAL = 8;      // index of mButton1 azimuth button
+  private static int BTN_DIAL = 8;      // index of mButton1 azimuth button (level > normal)
 
-  private static int BTN_CONT = 6;      // index of mButton2 continue button
+  private static int BTN_CONT = 6;      // index of mButton2 continue button (level > normal)
   private static int BTN_JOIN = 5;      // index of mButton3 join button
   private static int BTN_REMOVE = 7;    // index of mButton3 remove
-  private static int BTN_BORDER = 8;
+  private static int BTN_BORDER = 8;    // line border-editing (leve > advanced)
 
   private static int BTN_SELECT_MODE = 3; // select-mode button
   private static int BTN_SELECT_PREV = 3; // select-mode button
@@ -166,24 +166,29 @@ public class DrawingWindow extends ItemDrawer
                         R.drawable.iz_edit,          // 0
                         R.drawable.iz_eraser,
                         R.drawable.iz_select,
-                        R.drawable.iz_download,      // 3 MOVE Nr 9
+
+                        R.drawable.iz_download,      // 3 MOVE Nr 3+6
                         R.drawable.iz_bt,
                         R.drawable.iz_mode,          // 5
                         R.drawable.iz_note,          // 6
                         R.drawable.iz_plan,          // 7
                         R.drawable.iz_dial,          // 8
-                        R.drawable.iz_undo,          // 9 DRAW Nr 7
+
+                        R.drawable.iz_undo,          // 9 DRAW Nr 3+4
                         R.drawable.iz_redo,          // 10
                         R.drawable.iz_tools,         // 11
                         R.drawable.iz_cont_none,     // 12
-                        R.drawable.iz_back,          // 13 EDIT Nr 8
+
+                        R.drawable.iz_back,          // 13 EDIT Nr 3+6
                         R.drawable.iz_forw,
                         R.drawable.iz_join,
                         R.drawable.iz_note,          
                         R.drawable.iz_delete,        // 17
                         R.drawable.iz_range_no,      // 18
-                        R.drawable.iz_erase_all,     // 19 ERASE Nr 6
+
+                        R.drawable.iz_erase_all,     // 19 ERASE Nr 3+2
                         R.drawable.iz_medium,        // 20
+
                         R.drawable.iz_menu,          // 20+1
                         R.drawable.iz_extended,      // 20+2
                         R.drawable.iz_join_no,       // 20+3
@@ -452,10 +457,14 @@ public class DrawingWindow extends ItemDrawer
   private Button[] mButton2; // draw
   private Button[] mButton3; // edit
   private Button[] mButton5; // eraser
-  private int mNrButton1 = 9;          // main-primary
-  private int mNrButton2 = 7;          // draw
-  private int mNrButton3 = 9;          // edit
-  private int mNrButton5 = 7;          // erase
+  static final int NR_BUTTON1 = 9;
+  static final int NR_BUTTON2 = 7;
+  static final int NR_BUTTON3 = 9;
+  static final int NR_BUTTON5 = 7;
+  private int mNrButton1 = NR_BUTTON1; // main-primary [8: if level <= normal]
+  private int mNrButton2 = NR_BUTTON2; // draw
+  private int mNrButton3 = NR_BUTTON3; // edit [8 if level <= advanced]
+  private int mNrButton5 = NR_BUTTON5; // erase
   private HorizontalButtonView mButtonView1;
   private HorizontalButtonView mButtonView2;
   private HorizontalButtonView mButtonView3;
@@ -468,9 +477,9 @@ public class DrawingWindow extends ItemDrawer
   private BitmapDrawable mBMdownload_wait;
   private BitmapDrawable mBMjoin;
   private BitmapDrawable mBMjoin_no;
-  private BitmapDrawable mBMedit_box;
-  private BitmapDrawable mBMedit_ok;
-  private BitmapDrawable mBMedit_no;
+  private BitmapDrawable mBMedit_box = null;
+  private BitmapDrawable mBMedit_ok  = null;
+  private BitmapDrawable mBMedit_no  = null;
   private BitmapDrawable mBMplan;
   private BitmapDrawable mBMextend;
   private BitmapDrawable mBMcont_none;
@@ -586,10 +595,12 @@ public class DrawingWindow extends ItemDrawer
   public void lineSelected( int k, boolean update_recent )
   {
     super.lineSelected( k, update_recent );
-    if ( BrushManager.mLineLib.getLineGroup( mCurrentLine ) == null ) {
-      setButtonContinue( CONT_OFF );
-    } else {
-      setButtonContinue( CONT_NONE );
+    if ( TDSetting.mLevelOverNormal ) {
+      if ( BrushManager.mLineLib.getLineGroup( mCurrentLine ) == null ) {
+        setButtonContinue( CONT_OFF );
+      } else {
+        setButtonContinue( CONT_NONE );
+      }
     }
   }
 
@@ -687,7 +698,9 @@ public class DrawingWindow extends ItemDrawer
       }
       // boolean visible = ( mSymbol == Symbol.LINE && mCurrentLine == BrushManager.mLineLib.mLineWallIndex );
       boolean visible = ( mSymbol == Symbol.LINE );
-      mButton2[ BTN_CONT ].setVisibility( visible? View.VISIBLE : View.GONE );
+      if ( TDSetting.mLevelOverNormal ) {
+        mButton2[ BTN_CONT ].setVisibility( visible? View.VISIBLE : View.GONE );
+      }
     } else if ( mMode == MODE_MOVE ) {
       sb.append( res.getString( R.string.title_move ) );
     } else if ( mMode == MODE_EDIT ) {
@@ -1044,6 +1057,8 @@ public class DrawingWindow extends ItemDrawer
   {
     TDAzimuth.mFixedExtend = fixed_extend;
     TDAzimuth.mRefAzimuth = azimuth;
+    if ( ! TDSetting.mLevelOverNormal ) return;
+
     if ( TDAzimuth.mFixedExtend == 0 ) {
       android.graphics.Matrix m = new android.graphics.Matrix();
       m.postRotate( azimuth - 90 );
@@ -1085,6 +1100,7 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  // must be called only if mLevelOverNormal
   private void setButtonContinue( int continue_line )
   {
     mContinueLine = continue_line;
@@ -1116,7 +1132,7 @@ public class DrawingWindow extends ItemDrawer
 
   public void setButtonJoinMode( int join_mode, int code )
   {
-    setButtonContinue( join_mode );
+    if ( TDSetting.mLevelOverNormal ) setButtonContinue( join_mode );
   }
 
   public void setButtonFilterMode( int filter_mode, int code )
@@ -1264,7 +1280,7 @@ public class DrawingWindow extends ItemDrawer
     mButton1[ BTN_BLUETOOTH ].setVisibility( View.VISIBLE );
     // mButton1[ BTN_PLOT ].setVisibility( View.VISIBLE );
     mButton1[BTN_PLOT].setOnLongClickListener( this );
-    mButton1[ BTN_DIAL ].setVisibility( View.VISIBLE );
+    if ( TDSetting.mLevelOverNormal ) mButton1[ BTN_DIAL ].setVisibility( View.VISIBLE );
   }
 
   private void updateSplays( int mode )
@@ -1316,12 +1332,13 @@ public class DrawingWindow extends ItemDrawer
     mButton1[ BTN_BLUETOOTH ].setVisibility( View.GONE );
     // mButton1[ BTN_PLOT ].setVisibility( View.GONE );
     mButton1[BTN_PLOT].setOnLongClickListener( null );
-    mButton1[ BTN_DIAL ].setVisibility( View.GONE );
+    if ( TDSetting.mLevelOverNormal ) mButton1[ BTN_DIAL ].setVisibility( View.GONE );
   }
 
   private void makeButtons( )
   {
     Resources res = getResources();
+    if ( ! TDSetting.mLevelOverNormal ) -- mNrButton1;
     mButton1 = new Button[ mNrButton1 ]; // MOVE
     int off = 0;
     int ic = 0;
@@ -1345,8 +1362,9 @@ public class DrawingWindow extends ItemDrawer
     mBMsplayBack     = MyButton.getButtonBackground( mApp, res, R.drawable.iz_splay_back );
     mBMsplayBoth     = MyButton.getButtonBackground( mApp, res, R.drawable.iz_splay_both );
 
+    if ( ! TDSetting.mLevelOverNormal ) -- mNrButton2;
     mButton2 = new Button[ mNrButton2 ]; // DRAW
-    off = (mNrButton1 - 3); 
+    off = (NR_BUTTON1 - 3); 
     for ( int k=0; k<mNrButton2; ++k ) {
       ic = ( k < 3 )? k : off+k;
       mButton2[k] = MyButton.getButton( mActivity, this, ((k==0)? izons_ok[ic] : izons[ic]) );
@@ -1358,24 +1376,25 @@ public class DrawingWindow extends ItemDrawer
     mBMcont_both  = MyButton.getButtonBackground( mApp, res, izons[IC_CONT_BOTH] );
     mBMcont_off   = MyButton.getButtonBackground( mApp, res, izons[IC_CONT_OFF] );
 
+    if ( ! TDSetting.mLevelOverAdvanced ) -- mNrButton3;
     mButton3 = new Button[ mNrButton3 ];      // EDIT
-    off = (mNrButton1-3) + (mNrButton2-3); 
+    off = (NR_BUTTON1 - 3) + (NR_BUTTON2 - 3); 
     for ( int k=0; k<mNrButton3; ++k ) {
       ic = ( k < 3 )? k : off+k;
       mButton3[k] = MyButton.getButton( mActivity, this, ((k==2)? izons_ok[ic] : izons[ic]) );
       if ( ic == IC_JOIN ) 
         mBMjoin = MyButton.getButtonBackground( mApp, res, ((k==2)? izons_ok[ic] : izons[ic]) );
     }
-    // mButton3[ BTN_BORDER ] = new Button( this );
-    mButton3[ BTN_BORDER ].setPadding(4,4,4,4);
-    // mButton3[ BTN_BORDER ].setOnClickListener( this );
-    mButton3[ BTN_BORDER ].setTextColor( 0xffffffff );
-    // mButton3[ BTN_BORDER ].setText( Integer.toString( mEditRadius ) );
+    if ( TDSetting.mLevelOverAdvanced ) {
+      mButton3[ BTN_BORDER ].setPadding(4,4,4,4);
+      mButton3[ BTN_BORDER ].setTextColor( 0xffffffff );
+      mBMedit_box= MyButton.getButtonBackground( mApp, res, izons[IC_BORDER_BOX] );
+      mBMedit_ok = MyButton.getButtonBackground( mApp, res, izons[IC_BORDER_OK] ); 
+      mBMedit_no = MyButton.getButtonBackground( mApp, res, izons[IC_BORDER_NO] );
+    }
     mBMjoin_no = MyButton.getButtonBackground( mApp, res, izons[IC_JOIN_NO] );
     mBMadd     = MyButton.getButtonBackground( mApp, res, izons[IC_ADD] );
-    mBMedit_box= MyButton.getButtonBackground( mApp, res, izons[IC_BORDER_BOX] );
-    mBMedit_ok = MyButton.getButtonBackground( mApp, res, izons[IC_BORDER_OK] ); 
-    mBMedit_no = MyButton.getButtonBackground( mApp, res, izons[IC_BORDER_NO] );
+
 
     mButton5 = new Button[ mNrButton5 ];    // ERASE
     off = 9 - 3; // (mNrButton1-3) + (mNrButton2-3) + (mNrButton3-3);
@@ -1491,6 +1510,8 @@ public class DrawingWindow extends ItemDrawer
       mButton1[BTN_DOWNLOAD].setOnLongClickListener( this );
       mButton1[BTN_PLOT].setOnLongClickListener( this );
       mButton3[BTN_REMOVE].setOnLongClickListener( this );
+    }
+    if ( TDSetting.mLevelOverAdvanced ) {
       mButton3[BTN_BORDER].setOnLongClickListener( this );
     }
  
@@ -1678,7 +1699,8 @@ public class DrawingWindow extends ItemDrawer
       mCurrentPoint = ( BrushManager.mPointLib.isSymbolEnabled( "label" ) )? 1 : 0;
       mCurrentLine  = ( BrushManager.mLineLib.isSymbolEnabled( "wall" ) )? 1 : 0;
       mCurrentArea  = ( BrushManager.mAreaLib.isSymbolEnabled( "water" ) )? 1 : 0;
-      setButtonContinue( CONT_NONE );
+      mContinueLine = CONT_NONE;
+      if ( TDSetting.mLevelOverNormal ) setButtonContinue( CONT_NONE );
 
       List<DBlock> list = null;
       if ( PlotInfo.isSection( mType ) ) {
@@ -1978,7 +2000,7 @@ public class DrawingWindow extends ItemDrawer
     {
       // Log.v("DistoX", "select at: edit-range " + mDoEditRange + " mode " + mMode );
       if ( mMode == MODE_EDIT ) {
-        if ( mDoEditRange > 0 ) {
+        if ( TDSetting.mLevelOverAdvanced && mDoEditRange > 0 ) {
           // mDoEditRange = false;
           // mButton3[ BTN_BORDER ].setBackgroundDrawable( mBMedit_no );
           if ( mDrawingSurface.setRangeAt( x_scene, y_scene, mZoom, mDoEditRange, size ) ) {
@@ -3712,10 +3734,6 @@ public class DrawingWindow extends ItemDrawer
         Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_PLOT_EDIT );
         mActivity.startActivity( intent );
-      // } else if ( b == mButton3[ BTN_BORDER ] ) {
-      //   mDoEditRange = ( mDoEditRange + 1 ) % 3;
-      //   mEditRadius += 2;
-      //   mButton3[ BTN_BORDER ].setText( Integer.toString( mEditRadius ) );
       }
       return true;
     }
@@ -3801,7 +3819,7 @@ public class DrawingWindow extends ItemDrawer
         } else if ( PlotInfo.isXSection( mType ) ) {
           updateSplays( (mApp.mSplayMode + 2)%4 );
         }
-      } else if ( b == mButton1[k1++] ) { //  AZIMUTH
+      } else if ( TDSetting.mLevelOverNormal && b == mButton1[k1++] ) { //  AZIMUTH
         if ( PlotInfo.isSketch2D( mType ) ) { 
           if ( TDSetting.mAzimuthManual ) {
             setRefAzimuth( 0, - TDAzimuth.mFixedExtend );
@@ -3828,7 +3846,7 @@ public class DrawingWindow extends ItemDrawer
         } else {
           new ItemPickerDialog(mActivity, this, mType, mSymbol ).show();
         }
-      } else if ( b == mButton2[k2++] ) { //  JOIN popup menu
+      } else if ( TDSetting.mLevelOverNormal && b == mButton2[k2++] ) { //  CONT continuation popup menu
         if ( mSymbol == Symbol.LINE && BrushManager.mLineLib.getLineGroup( mCurrentLine ) != null ) {
           // setButtonContinue( (mContinueLine+1) % CONT_MAX );
           makePopupJoin( b, Drawing.mJoinModes, 5, 0 );
@@ -3949,11 +3967,7 @@ public class DrawingWindow extends ItemDrawer
             }
           }
         }
-      } else if ( b == mButton3[ k3++ ] ) { // RANGE EDIT
-        // if ( mEditRadius > 0 ) {
-        //   mEditRadius --;
-        //   mButton3[ BTN_BORDER ].setText( Integer.toString( mEditRadius ) );
-        // }
+      } else if ( TDSetting.mLevelOverAdvanced && b == mButton3[ k3++ ] ) { // RANGE EDIT
         mDoEditRange = ( mDoEditRange + 1 ) % 3;
         switch ( mDoEditRange ) {
           case 0:
@@ -3966,6 +3980,7 @@ public class DrawingWindow extends ItemDrawer
             mButton3[ BTN_BORDER ].setBackgroundDrawable( mBMedit_box );
             break;
         }
+
       } else if ( b == mButton5[k5++] ) { // ERASE MODE
         makePopupFilter( b, Drawing.mEraseModes, 4, Drawing.CODE_ERASE ); // pulldown menu to select erase mode
       } else if ( b == mButton5[k5++] ) { // ERASE SIZE
@@ -4367,9 +4382,11 @@ public class DrawingWindow extends ItemDrawer
     } else {
       mMenuAdapter.add( res.getString( menus[2] ) );  // INFO
     }
-    mMenuAdapter.add( res.getString( menus[3] ) );  // RELOAD
-    mMenuAdapter.add( res.getString( menus[4] ) );  // ZOOM_FIT
-    if ( TDSetting.mLevelOverBasic && PlotInfo.isSketch2D( type ) ) {
+    if ( TDSetting.mLevelOverNormal ) {
+      mMenuAdapter.add( res.getString( menus[3] ) );  // RELOAD
+      mMenuAdapter.add( res.getString( menus[4] ) );  // ZOOM_FIT
+    }
+    if ( TDSetting.mLevelOverAdvanced && PlotInfo.isSketch2D( type ) ) {
       mMenuAdapter.add( res.getString( menus[5] ) ); // RENAME/DELETE
     }
     mMenuAdapter.add( res.getString( menus[6] ) ); // PALETTE
@@ -4416,7 +4433,8 @@ public class DrawingWindow extends ItemDrawer
           String msg = String.format( res.getString( R.string.section_area ), area );
           TopoDroidAlertDialog.makeAlert( mActivity, res, msg, R.string.button_ok, -1, null, null );
         }
-      } else if ( p++ == pos ) { // RECOVER RELOAD
+
+      } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // RECOVER RELOAD
         if ( PlotInfo.isProfile( mType ) ) {
           ( new PlotRecoverDialog( mActivity, this, mFullName2, mType ) ).show();
         } else if ( mType == PlotInfo.PLOT_PLAN ) {
@@ -4424,14 +4442,16 @@ public class DrawingWindow extends ItemDrawer
         } else {
           ( new PlotRecoverDialog( mActivity, this, mFullName3, mType ) ).show();
         }
-      } else if ( p++ == pos ) { // ZOOM_FIT
+      } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // ZOOM_FIT
         // FIXME for big sketches this leaves out some bits at the ends
         // maybe should increse the bitmap bounds by a small factor ...
         RectF b = mDrawingSurface.getBitmapBounds();
         zoomFit( b );
-      } else if ( TDSetting.mLevelOverBasic && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // RENAME/DELETE
+
+      } else if ( TDSetting.mLevelOverAdvanced && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // RENAME/DELETE
         //   askDelete();
         (new PlotRenameDialog( mActivity, this, mApp )).show();
+
       } else if ( p++ == pos ) { // PALETTE
         BrushManager.makePaths( mApp, getResources() );
         (new SymbolEnableDialog( mActivity, mApp )).show();
@@ -4455,7 +4475,7 @@ public class DrawingWindow extends ItemDrawer
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_PLOT );
         mActivity.startActivity( intent );
       } else if ( p++ == pos ) { // HELP
-        int nn = mNrButton1 + mNrButton2 - 3 + mNrButton5 - 5 + ( TDSetting.mLevelOverBasic? mNrButton3 - 3: 0 );
+        int nn = NR_BUTTON1 + NR_BUTTON2 - 3 + NR_BUTTON5 - 5 + ( TDSetting.mLevelOverBasic? mNrButton3 - 3: 0 );
         // Log.v("DistoX", "Help menu, nn " + nn );
         (new HelpDialog(mActivity, izons, menus, help_icons, help_menus, nn, help_menus.length ) ).show();
       }
