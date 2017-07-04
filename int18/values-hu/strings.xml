@@ -507,6 +507,7 @@
     <!-- UNUSED string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Biztonsági tár</string>
+    <!-- TODO string name="button_rename"    >Rename    </string -->
     <string name="button_replace"   >Cserél   </string>
     <string name="button_reset"     >Visszaállít</string>
     <string name="button_left"      >BAL</string>
@@ -514,6 +515,7 @@
     <string name="button_clear"     >Töröl</string>
     <string name="button_save"      >Ment</string>
     <!-- UNUSED string name="button_select"    >Select    </string -->
+    <!-- TODO string name="button_split"     >Split     </string -->
     <string name="button_store"     >Tárol</string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
@@ -760,6 +762,7 @@
     <string name="title_shift">Váltás</string>
     <string name="title_shot_delete">Mérés törlése?</string>
     <string name="title_sensor_edit">Szenzor</string>
+    <!-- TODO string name="title_split">Sketch split</string -->
 
     <string name="title_stats">Statisztikák</string>
     <string name="title_step">Lépés</string>

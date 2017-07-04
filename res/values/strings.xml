@@ -511,6 +511,7 @@
     <!-- UNUSED string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Dump      </string>
+    <string name="button_rename"    >Rename    </string>
     <string name="button_replace"   >Replace   </string>
     <string name="button_reset"     >Reset     </string>
     <string name="button_left"      >LEFT</string>
@@ -518,6 +519,7 @@
     <string name="button_clear"     >Clear     </string>
     <string name="button_save"      >Save      </string>
     <!-- UNUSED string name="button_select"    >Select    </string -->
+    <string name="button_split"     >Split     </string>
     <string name="button_store"     >Store     </string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
@@ -772,6 +774,7 @@
     <string name="title_shift">Shift</string>
     <string name="title_shot_delete">Delete shot ?</string>
     <string name="title_sensor_edit">Sensor</string>
+    <string name="title_split">Sketch split</string>
 
     <string name="title_stats">Statistics</string>
     <string name="title_step">Step</string>

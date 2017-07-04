@@ -68,6 +68,7 @@
      <item name="normal">Normale</item>
      <item name="advanced">Avanzato</item>
      <item name="expert">Esperto</item>
+     <item name="tester">Tester</item>
      <!-- item name="complete">Completo</item -->
   </string-array>
 

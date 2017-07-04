@@ -16,6 +16,15 @@
        android:inputType="text"
        />
 
+    <EditText
+       android:id="@+id/et_station" 
+       android:layout_width="match_parent" 
+       android:layout_height="wrap_content"
+       android:layout_marginTop="10dp" 
+       android:singleLine="true"
+       android:inputType="text"
+       />
+
     <LinearLayout 
        android:layout_width="wrap_content" 
        android:layout_height="wrap_content"
@@ -24,13 +33,22 @@
        android:layout_marginTop="10dp" 
        >
 
-      <Button android:id="@+id/btn_ok"
+      <Button android:id="@+id/btn_rename"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
         android:layout_marginRight="15dp" 
         android:background="@drawable/button"
         style="@style/button_default"
-        android:text="@string/button_ok"
+        android:text="@string/button_rename"
+        />
+
+      <Button android:id="@+id/btn_split"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="15dp" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_split"
         />
 
       <Button android:id="@+id/btn_delete"

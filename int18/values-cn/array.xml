@@ -74,6 +74,7 @@
      <item name="normal">正常模式</item>
      <item name="advanced">高级模式</item>
      <item name="expert">开发模式</item>
+     <item name="tester">Tester</item>
      <!-- item name="complete">完全模式</item -->
   </string-array>
 

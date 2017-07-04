@@ -13,6 +13,8 @@ package com.topodroid.DistoX;
 
 import java.io.File;
 
+import java.util.List;
+
 import android.content.Intent;
 import android.content.Context;
 
@@ -32,6 +34,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   private TopoDroidApp mApp;
   private DrawingWindow mParent;
   private DrawingSurface mSurface;
+  private List<DrawingPath> mPaths;
   private String mFullName;
   private int mType;    // plot type
   private int mProjDir;
@@ -39,20 +42,39 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   private int mRotate;  // nr. backups to rotate
 
   public SavePlotFileTask( Context context, DrawingWindow parent, Handler handler,
-                          TopoDroidApp app, DrawingSurface surface, 
-                          String fullname, long type, int proj_dir, int suffix, int rotate )
+                           TopoDroidApp app, DrawingSurface surface, 
+                           String fullname, long type, int proj_dir, int suffix, int rotate )
   {
      mContext  = context;
      mParent   = parent;
      mHandler  = handler;
      mApp      = app;
      mSurface  = surface;
+     mPaths    = null;
      mFullName = fullname;
      mType     = (int)type;
      mProjDir  = proj_dir;
      mSuffix   = suffix;
      mRotate   = rotate;
      if ( mRotate > TDPath.NR_BACKUP ) mRotate = TDPath.NR_BACKUP;
+     // TDLog.Log( TDLog.LOG_PLOT, "Save Plot File Task " + mFullName + " type " + mType );
+  }
+
+  public SavePlotFileTask( Context context, DrawingWindow parent, Handler handler,
+                           TopoDroidApp app, List<DrawingPath> paths,
+                           String fullname, long type, int proj_dir )
+  {
+     mContext  = context;
+     mParent   = parent;
+     mHandler  = handler;
+     mApp      = app;
+     mSurface  = null;
+     mPaths    = paths;
+     mFullName = fullname;
+     mType     = (int)type;
+     mProjDir  = proj_dir;
+     mSuffix   = PlotSave.CREATE;
+     mRotate   = 0;
      // TDLog.Log( TDLog.LOG_PLOT, "Save Plot File Task " + mFullName + " type " + mType );
   }
 
@@ -110,7 +132,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         String filename = TDPath.getTdrFileWithExt( mFullName ) + TDPath.BCK_SUFFIX;
 
         // Log.v("DistoX", "rotate backups " + filename );
-        TDPath.rotateBackups( filename, mRotate );
+        TDPath.rotateBackups( filename, mRotate ); // does not do anything if mRotate <= 0
 
         long now  = System.currentTimeMillis();
         long time = now - 600000; // ten minutes before now
@@ -127,7 +149,11 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         String tempname1 = TDPath.getTmpFileWithExt( Integer.toString(mSuffix) + Long.toString(now) );
         File file1 = new File( tempname1 );
         // TDLog.Log( TDLog.LOG_PLOT, "saving binary " + mFullName );
-        DrawingIO.exportDataStream( mSurface, mType, file1, mFullName, mProjDir );
+        if ( mSuffix == PlotSave.CREATE ) {
+          DrawingIO.exportDataStream( mPaths, mType, file1, mFullName, mProjDir );
+        } else {
+          DrawingIO.exportDataStream( mSurface, mType, file1, mFullName, mProjDir );
+        }
 
         if ( isCancelled() ) {
           TDLog.Error( "binary save cancelled " + mFullName );
@@ -136,7 +162,8 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         } else {
           // TDLog.Log( TDLog.LOG_PLOT, "save binary completed" + mFullName );
           String filename1 = TDPath.getTdrFileWithExt( mFullName );
-          (new File( filename1 )).renameTo( new File( filename1 + TDPath.BCK_SUFFIX ) );
+          File file0 = new File( filename1 );
+          if ( file0.exists() ) file0.renameTo( new File( filename1 + TDPath.BCK_SUFFIX ) );
           file1.renameTo( new File( filename1 ) );
         }
       }

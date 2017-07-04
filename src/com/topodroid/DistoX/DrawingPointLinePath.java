@@ -60,6 +60,11 @@ public class DrawingPointLinePath extends DrawingPath
     return ret;
   }
 
+  @Override
+  float getX() { return (left+right)/2; }
+
+  @Override
+  float getY() { return (top+bottom)/2; }
   // void dump() // DEBUG
   // {
   //   int k=0;

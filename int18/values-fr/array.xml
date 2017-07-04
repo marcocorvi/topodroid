@@ -91,6 +91,7 @@
      <item name="normal">Normal</item>
      <item name="advanced">Avancé</item>
      <item name="expert">Expérimental</item>
+     <item name="tester">Tester</item>
      <!-- item name="complete">Complete</item -->
   </string-array>
  

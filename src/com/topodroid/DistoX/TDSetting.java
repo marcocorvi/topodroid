@@ -190,16 +190,18 @@ class TDSetting
   // prefs default values
   static String  mDefaultTeam = "";
 
-  static final int LEVEL_BASIC        = 0;
-  static final int LEVEL_NORMAL       = 1;
-  static final int LEVEL_ADVANCED     = 2;
-  static final int LEVEL_EXPERIMENTAL = 3;
-  static final int LEVEL_COMPLETE     = 4;
+  static final int LEVEL_BASIC    = 0;
+  static final int LEVEL_NORMAL   = 1;
+  static final int LEVEL_ADVANCED = 2;
+  static final int LEVEL_EXPERT   = 3;
+  static final int LEVEL_TESTER   = 4;
+  static final int LEVEL_COMPLETE = 5;
   static int mActivityLevel = 1;
-  static boolean mLevelOverBasic        = true;
-  static boolean mLevelOverNormal       = false;
-  static boolean mLevelOverAdvanced     = false;
-  static boolean mLevelOverExperimental = false;
+  static boolean mLevelOverBasic    = true;
+  static boolean mLevelOverNormal   = false;
+  static boolean mLevelOverAdvanced = false;
+  static boolean mLevelOverExpert   = false;
+  static boolean mLevelOverTester   = false;
 
   static int mSizeButtons     = 42;      // action bar buttons scale (either 1 or 2)
   static int mTextSize        = 16;     // list text size 
@@ -791,19 +793,20 @@ class TDSetting
 
   static private void setActivityBooleans( Context ctx )
   {
-    mLevelOverBasic        = mActivityLevel > LEVEL_BASIC;
-    mLevelOverNormal       = mActivityLevel > LEVEL_NORMAL;
-    mLevelOverAdvanced     = mActivityLevel > LEVEL_ADVANCED;
-    mLevelOverExperimental = mActivityLevel > LEVEL_EXPERIMENTAL;
-    if ( mLevelOverAdvanced ) {
+    mLevelOverBasic    = mActivityLevel > LEVEL_BASIC;
+    mLevelOverNormal   = mActivityLevel > LEVEL_NORMAL;
+    mLevelOverAdvanced = mActivityLevel > LEVEL_ADVANCED;
+    mLevelOverExpert   = mActivityLevel > LEVEL_EXPERT;
+    // mLevelOverTester  = mActivityLevel > LEVEL_TESTER;
+    if ( mLevelOverExpert ) {
       String android_id = Secure.getString( ctx.getContentResolver(), Secure.ANDROID_ID );
       // Log.v("DistoX", "android_id <" + android_id + ">");
       if ( // "e5582eda21cafac3".equals( android_id ) || // Nexus-4
            "8c894b79b6dce351".equals( android_id ) ) {   // Samsung Note-3
-        mLevelOverExperimental = true;
+        mLevelOverTester = true;
       }
     }
-    if ( ! mLevelOverAdvanced ) {
+    if ( ! mLevelOverExpert ) {
       mMagAnomaly = false;
     }
   }

@@ -94,7 +94,7 @@ public class TopoDroidPreferences extends PreferenceActivity
 
     if (mPrefCategory == PREF_CATEGORY_ALL ) { mApp.mPrefActivity = this; }
 
-    if ( TDSetting.mLevelOverExperimental ) {
+    if ( TDSetting.mLevelOverTester ) {
       switch ( mPrefCategory ) {
       case PREF_CATEGORY_SURVEY:
         addPreferencesFromResource(R.xml.prefs_3_survey);
@@ -156,7 +156,7 @@ public class TopoDroidPreferences extends PreferenceActivity
         addPreferencesFromResource(R.xml.prefs_4);
         break;
       }
-    } else if ( TDSetting.mLevelOverAdvanced ) { // ----------------- EXPERIMENTAL
+    } else if ( TDSetting.mLevelOverExpert ) { // ----------------- DEVELOP
       switch ( mPrefCategory ) {
       case PREF_CATEGORY_SURVEY:
         addPreferencesFromResource(R.xml.prefs_3_survey);
@@ -215,6 +215,66 @@ public class TopoDroidPreferences extends PreferenceActivity
         addPreferencesFromResource(R.xml.prefs_3);
         break;
       }
+    } else if ( TDSetting.mLevelOverAdvanced ) { // ----------------- EXPERT
+      switch ( mPrefCategory ) {
+      case PREF_CATEGORY_SURVEY:
+        addPreferencesFromResource(R.xml.prefs_3_survey);
+        break;
+      case PREF_CATEGORY_PLOT:
+        addPreferencesFromResource(R.xml.prefs_3_plot);
+        // TODO handle ZOOM_CONTROLS separatedly
+        break;
+      case PREF_CATEGORY_CALIB:
+        addPreferencesFromResource(R.xml.prefs_3_calib);
+        break;
+      case PREF_CATEGORY_DEVICE:
+        addPreferencesFromResource(R.xml.prefs_3_device);
+        linkPreference( "DISTOX_CALIB_PREF", PREF_CATEGORY_CALIB );
+        break;
+      case PREF_CATEGORY_IMPORT_EXPORT:
+        addPreferencesFromResource(R.xml.prefs_3_export);
+        break;
+      case PREF_SHOT_DATA:
+        addPreferencesFromResource(R.xml.prefs_3_shot_data);
+        break;
+      case PREF_SHOT_UNITS:
+        addPreferencesFromResource(R.xml.prefs_3_shot_units);
+        break;
+      case PREF_ACCURACY:
+        addPreferencesFromResource(R.xml.prefs_3_accuracy);
+        break;
+      case PREF_LOCATION:
+        addPreferencesFromResource(R.xml.prefs_3_location);
+        break;
+      case PREF_PLOT_SCREEN:
+        addPreferencesFromResource(R.xml.prefs_3_plot_screen);
+        break;
+      case PREF_TOOL_LINE:
+        addPreferencesFromResource(R.xml.prefs_3_tool_line);
+        break;
+      case PREF_TOOL_POINT:
+        addPreferencesFromResource(R.xml.prefs_3_tool_point);
+        break;
+      case PREF_PLOT_WALLS:
+        addPreferencesFromResource(R.xml.prefs_3_plot_walls);
+        break;
+      case PREF_PLOT_DRAW:
+        addPreferencesFromResource(R.xml.prefs_plot_draw);
+        break;
+      case PREF_PLOT_ERASE:
+        addPreferencesFromResource(R.xml.prefs_plot_erase);
+        break;
+      case PREF_PLOT_EDIT:
+        addPreferencesFromResource(R.xml.prefs_plot_edit);
+        break;
+      case PREF_CATEGORY_LOG:
+        addPreferencesFromResource(R.xml.prefs_log);
+        break;
+      default:
+        addPreferencesFromResource(R.xml.prefs_3);
+        break;
+      }
+
     } else if ( TDSetting.mLevelOverNormal ) { // ---------------- ADVANCED
       switch ( mPrefCategory ) {
       case PREF_CATEGORY_SURVEY:
@@ -437,7 +497,7 @@ public class TopoDroidPreferences extends PreferenceActivity
       linkPreference( "DISTOX_PLOT_SCREEN", PREF_PLOT_SCREEN );
       linkPreference( "DISTOX_TOOL_LINE",   PREF_TOOL_LINE );
       linkPreference( "DISTOX_TOOL_POINT",  PREF_TOOL_POINT );
-      // if ( TDSetting.mLevelOverAdvanced ) 
+      // if ( TDSetting.mLevelOverExpert ) 
         linkPreference( "DISTOX_PLOT_WALLS",  PREF_PLOT_WALLS );
     }
 

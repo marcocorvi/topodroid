@@ -57,7 +57,7 @@ public class DrawingPath extends RectF
   // private int dir; // 0 x1 < x2, 1 y1 < y2, 2 x2 < x1, 3 y2 < y1
   DBlock mBlock;
 
-  float cx, cy; // midpoint scene coords
+  protected float cx, cy; // midpoint scene coords
   // RectF mBBox;   // path boundig box (scene coords)
 
   DrawingPath( int type, DBlock blk )
@@ -82,6 +82,9 @@ public class DrawingPath extends RectF
   {
     return type >= DrawingPath.DRAWING_PATH_STATION && type < DrawingPath.DRAWING_PATH_NAME;
   }
+
+  float getX() { return cx; }
+  float getY() { return cy; }
 
   void setBBox( float x1, float x2, float y1, float y2 )
   {

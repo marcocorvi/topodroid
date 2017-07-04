@@ -211,6 +211,7 @@
      <item name="normal">Normal</item>
      <item name="advanced">Advanced</item>
      <item name="expert">Expert</item>
+     <item name="tester">Tester</item>
      <!-- item name="complete">Complete</item -->
   </string-array>
   <string-array name="extraButtonsValue">
@@ -218,7 +219,8 @@
      <item name="normal">1</item>
      <item name="advanced">2</item>
      <item name="expert">3</item>
-     <!-- item name="complete">4</item -->
+     <item name="tester">4</item>
+     <!-- item name="complete">5</item -->
   </string-array>
 
   <string-array name="sizeButtons">

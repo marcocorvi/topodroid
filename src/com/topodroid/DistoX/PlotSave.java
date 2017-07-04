@@ -20,5 +20,6 @@ class PlotSave
   final static int TOGGLE   = 4; 
   final static int MODIFIED = 5; 
   final static int OVERVIEW = 6; 
+  final static int CREATE   = 7; 
 
 };

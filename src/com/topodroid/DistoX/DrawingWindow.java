@@ -331,6 +331,7 @@ public class DrawingWindow extends ItemDrawer
   static final int MODE_SHIFT = 5; // change point symbol position
   static final int MODE_ERASE = 6;
   static final int MODE_ROTATE = 7; // selected point rotate
+  static final int MODE_SPLIT = 8;  // split the plot
 
   static final int CONT_OFF   = -1; // continue off
   static final int CONT_NONE  = 0;  // no continue
@@ -381,6 +382,16 @@ public class DrawingWindow extends ItemDrawer
     return "";
   }
 
+  String getPlotStation()
+  {
+    if ( PlotInfo.isProfile( mType ) ) {
+      return mPlot2.start;
+    } else if ( mType == PlotInfo.PLOT_PLAN ) { 
+      return mPlot1.start;
+    }
+    return mPlot3.start; // FIXME or should it be null ?
+  }
+
   void renamePlot( String name ) 
   {
     if ( name == null || name.length() == 0 ) {
@@ -417,6 +428,46 @@ public class DrawingWindow extends ItemDrawer
       }
     }
   }
+
+  String mSplitName;
+  DrawingStationName mSplitStation;
+  ArrayList< PointF > mSplitBorder = null;
+
+  // here we are guaranteed that "name" can be used for a new plot name
+  // and the survey has station "station"
+  void splitPlot( String name, String station ) 
+  {
+    // get the DrawingStation of station
+    mSplitName = name;
+    mSplitStation = mDrawingSurface.getStation( station );
+    if ( mSplitStation != null ) {
+      if ( mSplitBorder == null ) {
+        mSplitBorder = new ArrayList< PointF >();
+      } else {
+        mSplitBorder.clear();
+      }
+      mMode = MODE_SPLIT;
+      mTouchMode = MODE_MOVE;
+    } else {
+      Toast.makeText(mActivity, "Missing station " + station, Toast.LENGTH_SHORT ).show();
+    }
+  }
+
+  void doSplitPlot( ) 
+  {
+    boolean extended = (mPlot2.type == PlotInfo.PLOT_EXTENDED);
+    int azimuth = (int)mPlot2.azimuth; 
+    long pid = mApp.insert2dPlot( mApp.mSID, mSplitName, mSplitStation.name(), extended, azimuth );
+    String name = mSplitName + ( ( mType == PlotInfo.PLOT_PLAN )? "p" : "s" );
+    String fullname = mApp.mySurvey + "-" + name;
+    // PlotInfo plot = mApp.mData.getPlotInfo( mApp.mSID, name );
+    List<DrawingPath> paths = mDrawingSurface.splitPlot( name, mSplitStation, mSplitBorder );
+    (new SavePlotFileTask( mActivity, this, null, mApp, paths, fullname, mType, azimuth ) ).execute();
+    // TODO
+    // [1] create the database record
+    // [2] save the Tdr for the new plot and remove the items from the commandManager
+  }
+
 
   private PlotInfo mPlot1;
   private PlotInfo mPlot2;
@@ -709,6 +760,8 @@ public class DrawingWindow extends ItemDrawer
       sb.append( res.getString( R.string.title_shift ) );
     } else if ( mMode == MODE_ERASE ) {
       sb.append( res.getString( R.string.title_erase ) );
+    } else if ( mMode == MODE_SPLIT ) {
+      sb.append( res.getString( R.string.title_split ) );
     }
     if ( ! mDrawingSurface.isSelectable() ) {
       sb.append( mActivity.getTitle() + " [!s]" );
@@ -1376,7 +1429,7 @@ public class DrawingWindow extends ItemDrawer
     mBMcont_both  = MyButton.getButtonBackground( mApp, res, izons[IC_CONT_BOTH] );
     mBMcont_off   = MyButton.getButtonBackground( mApp, res, izons[IC_CONT_OFF] );
 
-    if ( ! TDSetting.mLevelOverAdvanced ) -- mNrButton3;
+    if ( ! TDSetting.mLevelOverExpert ) -- mNrButton3;
     mButton3 = new Button[ mNrButton3 ];      // EDIT
     off = (NR_BUTTON1 - 3) + (NR_BUTTON2 - 3); 
     for ( int k=0; k<mNrButton3; ++k ) {
@@ -1385,7 +1438,7 @@ public class DrawingWindow extends ItemDrawer
       if ( ic == IC_JOIN ) 
         mBMjoin = MyButton.getButtonBackground( mApp, res, ((k==2)? izons_ok[ic] : izons[ic]) );
     }
-    if ( TDSetting.mLevelOverAdvanced ) {
+    if ( TDSetting.mLevelOverExpert ) {
       mButton3[ BTN_BORDER ].setPadding(4,4,4,4);
       mButton3[ BTN_BORDER ].setTextColor( 0xffffffff );
       mBMedit_box= MyButton.getButtonBackground( mApp, res, izons[IC_BORDER_BOX] );
@@ -1502,17 +1555,16 @@ public class DrawingWindow extends ItemDrawer
       mButton3[2].setVisibility( View.GONE );
       mButton5[2].setVisibility( View.GONE );
     } else {
-      mButton3[2].setOnLongClickListener( this );
-    }
-    mButton2[0].setOnLongClickListener( this );
-    mButton5[1].setOnLongClickListener( this );
-    if ( TDSetting.mLevelOverBasic ) {
-      mButton1[BTN_DOWNLOAD].setOnLongClickListener( this );
-      mButton1[BTN_PLOT].setOnLongClickListener( this );
-      mButton3[BTN_REMOVE].setOnLongClickListener( this );
+      mButton3[2].setOnLongClickListener( this ); // options
+      mButton2[0].setOnLongClickListener( this );
+      mButton5[1].setOnLongClickListener( this );
     }
     if ( TDSetting.mLevelOverAdvanced ) {
-      mButton3[BTN_BORDER].setOnLongClickListener( this );
+      mButton1[BTN_DOWNLOAD].setOnLongClickListener( this );
+    }
+    if ( TDSetting.mLevelOverBasic ) {
+      mButton1[BTN_PLOT].setOnLongClickListener( this );
+      mButton3[BTN_REMOVE].setOnLongClickListener( this );
     }
  
     setConnectionStatus( mDataDownloader.getStatus() );
@@ -2000,7 +2052,7 @@ public class DrawingWindow extends ItemDrawer
     {
       // Log.v("DistoX", "select at: edit-range " + mDoEditRange + " mode " + mMode );
       if ( mMode == MODE_EDIT ) {
-        if ( TDSetting.mLevelOverAdvanced && mDoEditRange > 0 ) {
+        if ( TDSetting.mLevelOverExpert && mDoEditRange > 0 ) {
           // mDoEditRange = false;
           // mButton3[ BTN_BORDER ].setBackgroundDrawable( mBMedit_no );
           if ( mDrawingSurface.setRangeAt( x_scene, y_scene, mZoom, mDoEditRange, size ) ) {
@@ -2413,6 +2465,23 @@ public class DrawingWindow extends ItemDrawer
           }
           mSaveX = x_canvas; // FIXME-000
           mSaveY = y_canvas;
+
+        } else if ( mMode == MODE_MOVE ) {
+          setTheTitle( );
+          mSaveX = x_canvas; // FIXME-000
+          mSaveY = y_canvas;
+          mDownX = x_canvas;
+          mDownY = y_canvas;
+          return false;
+
+        } else if ( mMode == MODE_ERASE ) {
+          // Log.v("DistoX", "Erase at " + x_scene + " " + y_scene );
+          if ( mTouchMode == MODE_MOVE ) {
+            mEraseCommand =  new EraseCommand();
+            mDrawingSurface.setEraser( x_canvas, y_canvas, mEraseSize );
+            doEraseAt( x_scene, y_scene );
+          }
+
         } else if ( mMode == MODE_EDIT ) {
           mStartX = x_canvas;
           mStartY = y_canvas;
@@ -2425,11 +2494,11 @@ public class DrawingWindow extends ItemDrawer
           mSaveX = x_canvas;
           mSaveY = y_canvas;
           // return false;
+
         } else if ( mMode == MODE_SHIFT ) {
           mShiftMove = true; // whether to move canvas in point-shift mode
           mStartX = x_canvas;
           mStartY = y_canvas;
-
           SelectionPoint pt = mDrawingSurface.hotItem();
           if ( pt != null ) {
             if ( pt.distance( x_scene, y_scene ) < d0 ) {
@@ -2441,20 +2510,12 @@ public class DrawingWindow extends ItemDrawer
           mSaveX = x_canvas; // FIXME-000
           mSaveY = y_canvas;
           // return false;
-        } else if ( mMode == MODE_ERASE ) {
-          // Log.v("DistoX", "Erase at " + x_scene + " " + y_scene );
-          if ( mTouchMode == MODE_MOVE ) {
-            mEraseCommand =  new EraseCommand();
-            mDrawingSurface.setEraser( x_canvas, y_canvas, mEraseSize );
-            doEraseAt( x_scene, y_scene );
-          }
-        } else if ( mMode == MODE_MOVE ) {
-          setTheTitle( );
-          mSaveX = x_canvas; // FIXME-000
+
+        } else if ( mMode == MODE_SPLIT ) {
+          mCurrentBrush.mouseDown( mDrawingSurface.previewPath.mPath, x_canvas, y_canvas );
+          mSplitBorder.add( new PointF( x_scene, y_scene ) );
+          mSaveX = x_canvas; 
           mSaveY = y_canvas;
-          mDownX = x_canvas;
-          mDownY = y_canvas;
-          return false;
         }
 
       // ---------------------------------------- MOVE
@@ -2505,6 +2566,13 @@ public class DrawingWindow extends ItemDrawer
           } else if ( mMode == MODE_ERASE ) {
             mDrawingSurface.setEraser( x_canvas, y_canvas, mEraseSize );
             doEraseAt( x_scene, y_scene );
+          } else if ( mMode == MODE_SPLIT ) {
+            if ( ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2 ) {
+              mCurrentBrush.mouseMove( mDrawingSurface.previewPath.mPath, x_canvas, y_canvas );
+              mSplitBorder.add( new PointF( x_scene, y_scene ) );
+            } else {
+              save = false;
+            }
           }
           if ( save ) { // FIXME-000
             mSaveX = x_canvas; 
@@ -2854,6 +2922,11 @@ public class DrawingWindow extends ItemDrawer
               mDrawingSurface.addEraseCommand( mEraseCommand );
               mEraseCommand = null;
             }
+          } else if ( mMode == MODE_SPLIT ) {
+            mDrawingSurface.clearPreviewPath();
+            mSplitBorder.add( new PointF( x_scene, y_scene ) );
+            doSplitPlot();
+            setMode( MODE_MOVE );
           } else { // MODE_MOVE 
 /* FIXME for the moment do not create X-Sections
             if ( Math.abs(x_canvas - mDownX) < 10 && Math.abs(y_canvas - mDownY) < 10 ) {
@@ -3660,7 +3733,7 @@ public class DrawingWindow extends ItemDrawer
   {
     if ( ! mDataDownloader.isDownloading() ) {
 	// FIXME
-      if ( TDSetting.mLevelOverAdvanced && mApp.distoType() == Device.DISTO_X310 
+      if ( TDSetting.mLevelOverExpert && mApp.distoType() == Device.DISTO_X310 
 	      && TDSetting.mConnectionMode != TDSetting.CONN_MODE_MULTI
 	  ) {
         CutNPaste.showPopupBT( mActivity, this, mApp, b, false );
@@ -3678,7 +3751,7 @@ public class DrawingWindow extends ItemDrawer
     public boolean onLongClick( View view ) 
     {
       Button b = (Button)view;
-      if ( b == mButton1[ BTN_DOWNLOAD ] ) {
+      if ( TDSetting.mLevelOverAdvanced && b == mButton1[ BTN_DOWNLOAD ] ) {
         if (   TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI
             && ! mDataDownloader.isDownloading() 
             && mApp.mDData.getDevices().size() > 1 ) {
@@ -3688,13 +3761,13 @@ public class DrawingWindow extends ItemDrawer
           setConnectionStatus( mDataDownloader.getStatus() );
           mDataDownloader.doDataDownload( );
         }
-      } else if ( b == mButton1[ BTN_PLOT ] ) {
+      } else if ( TDSetting.mLevelOverBasic && b == mButton1[ BTN_PLOT ] ) {
         if ( mType == PlotInfo.PLOT_EXTENDED ) {
           new DrawingProfileFlipDialog( mActivity, this ).show();
         } else {
           return false; // not consumed
         }
-      } else if ( b == mButton3[ BTN_REMOVE ] ) {
+      } else if ( TDSetting.mLevelOverBasic && b == mButton3[ BTN_REMOVE ] ) {
         SelectionPoint sp = mDrawingSurface.hotItem();
         if ( sp != null ) {
           int t = sp.type();
@@ -3722,15 +3795,15 @@ public class DrawingWindow extends ItemDrawer
             }
           }
         }
-      } else if ( b == mButton2[0] ) { // drawing properties
+      } else if ( TDSetting.mLevelOverNormal && b == mButton2[0] ) { // drawing properties
         Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_PLOT_DRAW );
         mActivity.startActivity( intent );
-      } else if ( b == mButton5[1] ) { // erase properties
+      } else if ( TDSetting.mLevelOverNormal && b == mButton5[1] ) { // erase properties
         Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_PLOT_ERASE );
         mActivity.startActivity( intent );
-      } else if ( b == mButton3[2] ) { // edit properties
+      } else if ( TDSetting.mLevelOverNormal && b == mButton3[2] ) { // edit properties
         Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_PLOT_EDIT );
         mActivity.startActivity( intent );
@@ -3967,7 +4040,7 @@ public class DrawingWindow extends ItemDrawer
             }
           }
         }
-      } else if ( TDSetting.mLevelOverAdvanced && b == mButton3[ k3++ ] ) { // RANGE EDIT
+      } else if ( TDSetting.mLevelOverExpert && b == mButton3[ k3++ ] ) { // RANGE EDIT
         mDoEditRange = ( mDoEditRange + 1 ) % 3;
         switch ( mDoEditRange ) {
           case 0:

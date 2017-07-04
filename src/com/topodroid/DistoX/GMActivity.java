@@ -193,7 +193,7 @@ public class GMActivity extends Activity
         // mCalibration.setAlgorith( mAlgo == 2 ); // CALIB_AUTO_NON_LINEAR
         break;
       case CalibInfo.ALGO_MINIMUM:
-        if ( TDSetting.mLevelOverExperimental ) {
+        if ( TDSetting.mLevelOverTester ) {
           mCalibration = new CalibAlgoMin( 0, false );
           break;
         }
@@ -259,7 +259,7 @@ public class GMActivity extends Activity
         calib1 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr ), true );
         break;
       case CalibInfo.ALGO_MINIMUM:
-        if ( TDSetting.mLevelOverExperimental ) {
+        if ( TDSetting.mLevelOverTester ) {
           calib1 = new CalibAlgoMin( CalibAlgo.stringToCoeff( coeffStr ), false );
           break;
         }
@@ -278,7 +278,7 @@ public class GMActivity extends Activity
         calib0 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr ), true );
         break;
       case CalibInfo.ALGO_MINIMUM:
-        if ( TDSetting.mLevelOverExperimental ) {
+        if ( TDSetting.mLevelOverTester ) {
           calib0 = new CalibAlgoMin( CalibAlgo.stringToCoeff( coeffStr ), false );
           break;
         }
@@ -1046,9 +1046,11 @@ public class GMActivity extends Activity
     // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
     mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
 
-    for ( int k=0; k<4; ++k ) {
-      mMenuAdapter.add( res.getString( menus[k] ) );
-    }
+    mMenuAdapter.add( res.getString( menus[0] ) );
+    if ( TDSetting.mLevelOverAdvanced ) mMenuAdapter.add( res.getString( menus[1] ) );
+    mMenuAdapter.add( res.getString( menus[2] ) );
+    mMenuAdapter.add( res.getString( menus[3] ) );
+    
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
   }
@@ -1068,7 +1070,7 @@ public class GMActivity extends Activity
     if ( p++ == pos ) { // DISPLAY
       mBlkStatus = 1 - mBlkStatus;       // 0 --> 1;  1 --> 0
       updateDisplay( );
-    } else if ( p++ == pos ) { // VALIDATE
+    } else if ( TDSetting.mLevelOverAdvanced && p++ == pos ) { // VALIDATE
       List< String > list = mApp.mDData.selectDeviceCalibs( mApp.mDevice.mAddress );
       for ( String str : list ) {
         int len = str.indexOf(' ');

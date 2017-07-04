@@ -74,6 +74,7 @@
      <item name="normal">Нормални</item>
      <item name="advanced">Пълни</item>
      <item name="expert">Експертни</item>
+     <item name="tester">Tester</item>
      <!-- item name="complete">Complete</item -->
   </string-array>
 

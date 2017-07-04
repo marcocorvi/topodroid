@@ -170,7 +170,7 @@ public class DrawingShotDialog extends MyDialog
 
     // mRBbackshot.setOnClickListener( this );
     if ( TDSetting.mWallsType != TDSetting.WALLS_NONE 
-      && TDSetting.mLevelOverAdvanced 
+      && TDSetting.mLevelOverExpert 
       && mBlock.mType == DBlock.BLOCK_MAIN_LEG
       && ( PlotInfo.isSketch2D( mParent.getPlotType() ) ) ) {
       mRBwalls.setOnClickListener( this );
@@ -279,7 +279,7 @@ public class DrawingShotDialog extends MyDialog
     //   mRBdup.setChecked( false );
     //   mRBsurf.setChecked( false );
 
-    } else if ( b == mRBwalls ) {
+    } else if ( TDSetting.mLevelOverExpert && b == mRBwalls ) {
       mParent.drawWallsAt( mBlock );
       dismiss();
 

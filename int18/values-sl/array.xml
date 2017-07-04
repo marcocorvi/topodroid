@@ -67,7 +67,8 @@
      <item name="basic">Osnovno</item>
      <item name="normal">Normalno</item>
      <item name="advanced">Napredno</item>
-     <item name="experimental">Eksperimentalno</item>
+     <item name="expert">Eksperimentalno</item>
+     <item name="tester">Tester</item>
   </string-array -->
 
   <!-- TODO string-array name="sizeButtons">

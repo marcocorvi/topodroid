@@ -69,6 +69,7 @@
      <item name="normal">Нормальный</item>
      <item name="advanced">Продвинутый</item>
      <item name="expert">Экспертный</item>
+     <item name="tester">Tester</item>
      <!-- item name="complete">Полный</item -->
   </string-array>
 

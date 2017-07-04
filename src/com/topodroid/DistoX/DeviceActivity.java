@@ -273,7 +273,7 @@ public class DeviceActivity extends Activity
     // TDLog.Debug("device activity update list" );
     // mList.setAdapter( mArrayAdapter );
     mArrayAdapter.clear();
-    if ( TDSetting.mLevelOverExperimental ) { // FIXME VirtualDistoX
+    if ( TDSetting.mLevelOverTester ) { // FIXME VirtualDistoX
       mArrayAdapter.add( "X000" );
     }
     if ( mApp.mBTAdapter != null ) {
@@ -707,7 +707,7 @@ public class DeviceActivity extends Activity
     mMenuAdapter.add( res.getString( menus[5] ) );
     // mMenuAdapter.add( res.getString( menus[6] ) ); // SERVER
     // CALIB_RESET
-    // if ( TDSetting.mLevelOverAdvanced ) mMenuAdapter.add( res.getString( menus[6] ) );
+    // if ( TDSetting.mLevelOverTester ) mMenuAdapter.add( res.getString( menus[6] ) );
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
   }
@@ -746,7 +746,7 @@ public class DeviceActivity extends Activity
       startActivity( intent );
     } else if ( p++ == pos ) { // HELP
       (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length ) ).show();
-    // } else if ( TDSetting.mLevelOverAdvanced && p++ == pos ) { // CALIB_RESET
+    // } else if ( TDSetting.mLevelOverTester && p++ == pos ) { // CALIB_RESET
     //   doCalibReset();
     }
   }

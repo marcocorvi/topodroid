@@ -508,6 +508,7 @@
     <!-- UNUSED string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >Прегрупиране</string -->
     <string name="button_dump"      >Запис     </string>
+    <!-- TODO string name="button_rename"    >Rename    </string -->
     <string name="button_replace"   >Подмяна   </string>
     <string name="button_reset"     >Нулиране   </string>
     <string name="button_left"      >Наляво</string>
@@ -515,6 +516,7 @@
     <string name="button_clear"     >Изчистване</string>
     <string name="button_save"      >Запис     </string>
     <!-- UNUSED string name="button_select"    >Избор     </string -->
+    <!-- TODO string name="button_split"     >Split     </string -->
     <string name="button_store"     >Съхраняване</string>
     <!-- UNUSED string name="button_start"     >Старт     </string -->
     <!-- UNUSED string name="button_stop"      >Стоп      </string -->
@@ -761,6 +763,7 @@
     <string name="title_shift">Изместване</string>
     <string name="title_shot_delete">Изтриване на отсечката?</string>
     <string name="title_sensor_edit">Сензор</string>
+    <!-- TODO string name="title_split">Sketch split</string -->
 
     <string name="title_stats">Статистика</string>
     <!-- NO string name="title_step">Step</string -->

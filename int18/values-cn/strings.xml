@@ -505,6 +505,7 @@
     <!-- UNUSED string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >重组   </string -->
     <string name="button_dump"      >删除     </string>
+    <!-- TODO string name="button_rename"    >Rename    </string -->
     <!-- TODO string name="button_replace"   >Replace   </string -->
     <string name="button_reset"     >重置     </string>
     <string name="button_left"      >左</string>
@@ -512,6 +513,7 @@
     <string name="button_clear"     >清除     </string>
     <string name="button_save"      >保存      </string>
     <!-- UNUSED string name="button_select"    >选择    </string -->
+    <!-- TODO string name="button_split"     >Split     </string -->
     <string name="button_store"     >存储     </string>
     <!-- UNUSED string name="button_start"     >开始</string -->
     <!-- UNUSED string name="button_stop"      >停止</string -->
@@ -757,6 +759,7 @@
     <string name="title_shift">转换</string>
     <string name="title_shot_delete">删除测射 ?</string>
     <string name="title_sensor_edit">传感器</string>
+    <!-- TODO string name="title_split">Sketch split</string -->
 
     <string name="title_stats">统计</string>
     <!-- NO string name="title_step">Step</string -->

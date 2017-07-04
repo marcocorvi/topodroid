@@ -339,6 +339,14 @@ public class DrawingCommandManager
     return null;
   }
 
+  DrawingStationName getStation( String name ) 
+  {
+    for ( DrawingStationName st : mStations ) {
+      if ( name.equals( st.name() ) ) return st;
+    }
+    return null;
+  }
+
   void setDisplayPoints( boolean display ) { mDisplayPoints = display; }
 
   boolean isSelectable() { return mSelection != null; }
@@ -701,6 +709,50 @@ public class DrawingCommandManager
       clearSelected();
     }
   }
+  
+  boolean isInside( float x, float y, ArrayList<PointF> b )
+  {
+    int n = b.size();
+    PointF p = b.get( n-1 );
+    float x1 = x - p.x;
+    float y1 = y - p.y;
+    float z1 = x1*x1 + y1*y1;
+    if ( z1 > 0 ) { z1 = (float)Math.sqrt(z1); x1 /= z1; y1 /= z1; }
+    double angle = 0;
+    for ( PointF q : b ) {
+      float x2 = x - q.x;
+      float y2 = y - q.y;
+      float z2 = x2*x2 + y2*y2;
+      if ( z2 > 0 ) { z2 = (float)Math.sqrt(z2); x2 /= z2; y2 /= z2; }
+      angle += Math.asin( x2*y1 - y2*x1 );
+      x1 = x2;
+      y1 = y2;
+    }
+    return Math.abs( angle ) > 3.28; 
+  }
+
+  List<DrawingPath> splitPlot( String name, DrawingStationName sn, ArrayList< PointF > border ) 
+  {
+    ArrayList<DrawingPath> paths = new ArrayList<DrawingPath>();
+    synchronized( mCurrentStack ) {
+      final Iterator i = mCurrentStack.iterator();
+      while ( i.hasNext() ){
+        final ICanvasCommand c = (ICanvasCommand) i.next();
+        if ( c.commandType() == 0 ) {
+          DrawingPath p = (DrawingPath)c;
+          if ( isInside( p.getX(), p.getY(), border ) ) {
+            paths.add(p);
+          }
+        }
+      }
+      for ( DrawingPath pp : paths ) {
+        mCurrentStack.remove( pp );
+        mSelection.removePath( pp );
+      }
+    }
+    return paths;
+  }
+    
 
   // p is the path of sp
   void deleteSplay( DrawingPath p, SelectionPoint sp )

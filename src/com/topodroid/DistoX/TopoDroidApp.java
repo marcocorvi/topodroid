@@ -622,14 +622,14 @@ public class TopoDroidApp extends Application
     }
 
     // ***** CHECK SPECIAL EXPERIMENTAL FEATURES
-    if ( TDSetting.mLevelOverExperimental ) {
+    if ( TDSetting.mLevelOverTester ) {
       String value = mDData.getValue("sketches");
       mSketches =  value != null 
                 && value.equals("on")
                 && getPackageManager().hasSystemFeature( PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH );
     }
 
-    if ( TDSetting.mLevelOverAdvanced ) {
+    if ( TDSetting.mLevelOverExpert ) {
       String value = mDData.getValue("cosurvey");
       mCosurvey =  value != null && value.equals("on");
       setCoSurvey( false );

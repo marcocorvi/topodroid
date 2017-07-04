@@ -504,6 +504,7 @@
     <!-- UNUSED string name="button_redo"      >Rehacer    </string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Enviar    </string>
+    <!-- TODO string name="button_rename"    >Rename    </string -->
     <string name="button_replace"   >Remplazar   </string>
     <string name="button_reset"     >Resetear  </string>
     <string name="button_left"      >Izquierdo</string>
@@ -511,6 +512,7 @@
     <string name="button_clear"     >Borrar     </string>
     <string name="button_save"      >Guardar   </string>
     <!-- UNUSED string name="button_select"    >Seleccionar </string -->
+    <!-- TODO string name="button_split"     >Split     </string -->
     <string name="button_store"     >Recibir   </string>
     <!-- UNUSED string name="button_start"     >Inicio</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
@@ -760,6 +762,7 @@
     <string name="title_shift">Cambio</string>
     <string name="title_shot_delete">¿Quiere eliminar toma?</string>
     <string name="title_sensor_edit">Sensor</string>
+    <!-- TODO string name="title_split">Sketch split</string -->
 
     <!-- UNUSED string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
     <!-- UNUSED string name="title_sketch_edit">Edición Superficie 3D</string -->

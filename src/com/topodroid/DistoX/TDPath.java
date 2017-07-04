@@ -543,6 +543,7 @@ public class TDPath
 
   static void rotateBackups( String filename, int rotate ) // filename has suffix BCK_SUFFIX
   {
+    if ( rotate <= 0 ) return;
     File file2;
     File file1;
     for ( int i=rotate-1; i>0; --i ) { 

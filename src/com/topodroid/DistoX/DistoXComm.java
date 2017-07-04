@@ -497,16 +497,9 @@ public class DistoXComm extends TopoDroidComm
    * @note called within connectSocket()
    * nothing to read (only write) --> no AsyncTask
    */
-  private boolean setX310CalibMode( boolean turn_on )
+  private boolean setCalibMode( boolean turn_on )
   {
-    boolean ret = false;
-    if ( turn_on ) {
-      ret = sendCommand( 0x31 ); // TOGGLE CALIB ON 
-    } else { 
-      ret = sendCommand( 0x30 ); // TOGGLE CALIB OFF
-    }
-    // TDLog.Log( TDLog.LOG_COMM, "set X310 CalibMode ret " + ret );
-    return ret;
+    return sendCommand( turn_on? 0x31 : 0x30 ); 
   }
 
   /** Toggle device calibration mode
@@ -530,33 +523,46 @@ public class DistoXComm extends TopoDroidComm
           result = mProtocol.readMemory( 0x8000 ); // TODO TEST THIS
           if ( result == null ) { 
             TDLog.Error( "toggle Calib Mode A3 failed read 8000" );
-            destroySocket( );
-            return false;
-          }
-          // TDLog.Log( TDLog.LOG_COMM, "toggle Calib Mode A3 result " + result[0] );
-          if ( (result[0] & CALIB_BIT) == 0 ) {
-            ret = mProtocol.sendCommand( (byte)0x31 );  // TOGGLE CALIB ON
           } else {
-            ret = mProtocol.sendCommand( (byte)0x30 );  // TOGGLE CALIB OFF
+            ret = setCalibMode( ( (result[0] & CALIB_BIT) == 0 ) );
+            // if ( (result[0] & CALIB_BIT) == 0 ) {
+            //   ret = mProtocol.sendCommand( (byte)0x31 );  // TOGGLE CALIB ON
+            // } else {
+            //   ret = mProtocol.sendCommand( (byte)0x30 );  // TOGGLE CALIB OFF
+            // }
           }
           break;
         case Device.DISTO_X310:
-          if ( true ) {
+          if ( false ) {
             mCalibMode = ! mCalibMode;
             // TDLog.Log( TDLog.LOG_COMM, "toggle Calib Mode X310 setX310CalibMode " + mCalibMode );
-            ret = setX310CalibMode( mCalibMode );
+            ret = setCalibMode( mCalibMode );
           } else {
-            /* TODO TEST THIS */
-            result = mProtocol.readMemory( 0xc044 );
-            if ( result == null ) { 
-              TDLog.Error( "toggle Calib Mode X310 failed read C044" );
-              destroySocket( );
-              return false;
-            }
-            if ( (result[0] & CALIB_BIT2) == 0 ) {
-              ret = mProtocol.sendCommand( (byte)0x31 );  // TOGGLE CALIB ON
+            // read firmware
+            byte[] fw = mProtocol.readMemory( 0xe000 );
+            if ( fw == null ) {
+              TDLog.Error( "toggle Calib Mode X310 failed read E000" );
             } else {
-              ret = mProtocol.sendCommand( (byte)0x30 );  // TOGGLE CALIB OFF
+              Log.v("DistoX", "firmware " + fw[0] + " " + fw[1] );
+              switch ( fw[1] ) {
+                case 0:
+                case 1:
+                case 2:
+                  result = mProtocol.readMemory( 0xc006 );
+                  break;
+                case 3:
+                  result = mProtocol.readMemory( 0xc034 );
+                  break;
+                case 4:
+                case 5:
+                  result = mProtocol.readMemory( 0xc044 );
+                  break;
+              }
+              if ( result == null ) { 
+                TDLog.Error( "toggle Calib Mode X310 failed read C044" );
+              } else {
+                ret = setCalibMode( ( (result[0] & CALIB_BIT2) == 0 ) );
+              }
             }
           }
           break;

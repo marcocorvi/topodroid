@@ -293,6 +293,11 @@ public class DrawingSurface extends SurfaceView
   //   }
   // };
 
+  synchronized void clearPreviewPath()
+  {
+    previewPath = null;
+  }
+ 
   void refreshSurface()
   {
     // if ( mZoomer != null ) mZoomer.checkZoomBtnsCtrl();
@@ -312,6 +317,12 @@ public class DrawingSurface extends SurfaceView
         mHolder.unlockCanvasAndPost( canvas );
       }
     }
+  }
+
+
+  List<DrawingPath> splitPlot( String name, DrawingStationName sn, ArrayList< PointF > border )
+  {
+    return commandManager.splitPlot( name, sn, border );
   }
 
 
@@ -485,6 +496,8 @@ public class DrawingSurface extends SurfaceView
 
   // x,y canvas coords
   DrawingStationName getStationAt( float x, float y, float size ) { return commandManager.getStationAt( x, y, size ); }
+
+  DrawingStationName getStation( String name ) { return commandManager.getStation( name ); }
 
   SelectionSet getItemsAt( float x, float y, float zoom, int mode, float size ) 
   { 

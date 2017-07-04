@@ -505,6 +505,7 @@
     <!-- UNUSED string name="button_redo"      >Refazer   </string -->
     <!-- UNUSED string name="button_regroup"   >Reagrupar   </string -->
     <string name="button_dump"      >Baixar    </string>
+    <!-- TODO string name="button_rename"    >Rename    </string -->
     <string name="button_replace"   >Substituir</string>
     <string name="button_reset"     >Reiniciar </string>
     <string name="button_left"      >ESQUERDA</string>
@@ -513,6 +514,7 @@
     <string name="button_clear"     >Limpar    </string>
     <string name="button_save"      >Salvar    </string>
     <!-- UNUSED string name="button_select"    >Selecionar    </string -->
+    <!-- TODO string name="button_split"     >Split     </string -->
     <string name="button_store"     >Armazenar </string>
     <!-- UNUSED string name="button_start"     >Iniciar</string -->
     <!-- UNUSED string name="button_stop"      >Parar</string -->
@@ -759,6 +761,7 @@
     <string name="title_shift">Deslocar</string>
     <string name="title_shot_delete">Apagar medida?</string>
     <string name="title_sensor_edit">Sensor</string>
+    <!-- TODO string name="title_split">Sketch split</string -->
 
     <string name="title_stats">Estatísticas</string>
     <string name="title_step">Passo</string>

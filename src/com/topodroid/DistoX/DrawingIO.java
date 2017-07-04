@@ -528,6 +528,42 @@ class DrawingIO
     }
   }
 
+  static public void exportDataStream( List<DrawingPath> paths, int type, File file, String fullname, int proj_dir )
+  {
+    try {
+      FileOutputStream fos = new FileOutputStream( file );
+
+      // ByteArrayOutputStream bos = new ByteArrayOutputStream( 4096 );
+      BufferedOutputStream bfos = new BufferedOutputStream( fos );
+      DataOutputStream dos = new DataOutputStream( bfos );
+
+      float xmin=1000000f, xmax=-1000000f, 
+            ymin=1000000f, ymax=-1000000f;
+      for ( DrawingPath p : paths ) {
+        if ( p.left   < xmin ) xmin = p.left;
+        if ( p.right  > xmax ) xmax = p.right;
+        if ( p.top    < ymin ) ymin = p.top;
+        if ( p.bottom > ymax ) ymax = p.bottom;
+      }
+      RectF bbox = new RectF( xmin, ymin, xmax, ymax );
+
+      exportDataStream( type, dos, fullname, proj_dir, bbox, paths );
+
+      dos.close();
+
+      // CACHE add filename/bos.toByteArray to cache
+      // mTdrCache.put( fullname + ".tdr", bos );
+      // byte[] bytes = bos.toByteArray();
+      // fos.write( bytes, 0, bos.size() );
+
+      fos.close();
+    } catch ( FileNotFoundException e ) {
+      TDLog.Error( "Export Data file: " + e.getMessage() );
+    } catch ( IOException e ) {
+      TDLog.Error( "Export Data i/o: " + e.getMessage() );
+    }
+  }
+
   // tdr files CACHE
   // no need to use a cache: buffering streams is as fast as reading from file
   // and requires less management overhead
@@ -825,7 +861,62 @@ class DrawingIO
     }
   }
 
-  static public void exportDataStream( int type, DataOutputStream dos, String scrap_name, int proj_dir, RectF bbox,
+  static private void exportDataStream( int type, DataOutputStream dos, String scrap_name, int proj_dir,
+                                        RectF bbox, List<DrawingPath> paths )
+  {
+    try { 
+      dos.write( 'V' ); // version
+      dos.writeInt( TopoDroidApp.VERSION_CODE );
+      dos.write( 'S' );
+      dos.writeUTF( scrap_name );
+      dos.writeInt( type );
+      if ( type == PlotInfo.PLOT_PROFILE ) dos.writeInt( proj_dir );
+      BrushManager.mPointLib.toDataStream( dos );
+      BrushManager.mLineLib.toDataStream( dos );
+      BrushManager.mAreaLib.toDataStream( dos );
+
+      dos.write('I');
+      dos.writeFloat( bbox.left );
+      dos.writeFloat( bbox.top );
+      dos.writeFloat( bbox.right );
+      dos.writeFloat( bbox.bottom );
+      dos.writeInt( 0 ); // null north
+
+      for ( DrawingPath p : paths ) {
+        if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) continue; // safety check: should not happen
+        p.toDataStream( dos );
+      }
+      // synchronized( userstations ) { // user stations are always exported to data stream
+      //   for ( DrawingStationPath sp : userstations ) {
+      //     sp.toDataStream( dos );
+      //   }
+      // }
+      dos.write('F'); // final: bbox and autostations (reading can skip all that follows)
+
+      // if ( TDSetting.mAutoStations ) {
+      //   synchronized( stations ) {
+      //     for ( DrawingStationName st : stations ) {
+      //       NumStation station = st.station();
+      //       if ( station != null && station.barriered() ) continue;
+      //       if ( bbox.left > st.cx || bbox.right  < st.cx ) continue;
+      //       if ( bbox.top  > st.cy || bbox.bottom < st.cy ) continue;
+      //       st.toDataStream( dos );
+      //     }
+      //   }
+      // }
+
+      dos.write('E'); // end
+    } catch ( IOException e ) {
+      e.printStackTrace();
+    }
+  }
+
+  static public void exportDataStream( 
+      int type,
+      DataOutputStream dos,
+      String scrap_name,
+      int proj_dir,
+      RectF bbox,
       DrawingPath north,
       List<ICanvasCommand> cstack,
       List<DrawingStationPath> userstations,

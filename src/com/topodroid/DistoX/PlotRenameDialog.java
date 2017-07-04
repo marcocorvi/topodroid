@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date nov 2011
  *
- * @brief TopoDroid survey Rename dialog
+ * @brief TopoDroid survey Rename / Delete dialog
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -30,9 +30,11 @@ public class PlotRenameDialog extends MyDialog
                               implements View.OnClickListener
 {
   private EditText mEtName;
-  private Button   mBtnOK;
+  private EditText mEtStation;
+  private Button   mBtnRename;
   private Button   mBtnBack;
   private Button   mBtnDelete;
+  private Button   mBtnSplit;
 
   private DrawingWindow mParent;
   private TopoDroidApp mApp;
@@ -52,16 +54,25 @@ public class PlotRenameDialog extends MyDialog
 
     setContentView(R.layout.plot_rename_dialog);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
-    mBtnOK     = (Button) findViewById(R.id.btn_ok );
-    mBtnBack   = (Button) findViewById(R.id.btn_back );
+    mBtnRename = (Button) findViewById(R.id.btn_rename );
     mBtnDelete = (Button) findViewById(R.id.btn_delete );
-
-    mBtnOK.setOnClickListener( this );
-    mBtnBack.setOnClickListener( this );
-    mBtnDelete.setOnClickListener( this );
+    mBtnSplit  = (Button) findViewById(R.id.btn_split );
+    mBtnBack   = (Button) findViewById(R.id.btn_back );
 
     mEtName = (EditText) findViewById( R.id.et_name );
+    mEtStation = (EditText) findViewById( R.id.et_station );
     mEtName.setText( mParent.getPlotName( ) );
+    mEtStation.setText( mParent.getPlotStation( ) );
+
+    mBtnRename.setOnClickListener( this );
+    mBtnBack.setOnClickListener( this );
+    if ( TDSetting.mLevelOverExpert ) {
+      mBtnSplit.setOnClickListener( this );
+      mEtStation.setInputType( android.text.InputType.TYPE_NULL );
+    } else {
+      mBtnSplit.setVisibility( View.GONE );
+      mEtStation.setInputType( android.text.InputType.TYPE_NULL );
+    }
 
     setTitle( R.string.title_plot_rename );
   }
@@ -71,12 +82,34 @@ public class PlotRenameDialog extends MyDialog
     // When the user clicks, just finish this activity.
     // onPause will be called, and we save our data there.
     Button b = (Button) v;
-    if ( b == mBtnOK ) {
+    INewPlot maker = mApp.mShotWindow;
+
+    if ( b == mBtnRename ) {
+      String name = mEtName.getText().toString();
+      if ( maker.hasSurveyPlot( name ) ) {
+        String error = mContext.getResources().getString( R.string.plot_duplicate_name );
+        mEtName.setError( error );
+        return;
+      }
       mParent.renamePlot( mEtName.getText().toString() );
     } else if ( b == mBtnBack ) {
       /* nothing */
     } else if ( b == mBtnDelete ) {
       mParent.askDelete();
+    } else if ( b == mBtnSplit ) {
+      String name = mEtName.getText().toString();
+      if ( maker.hasSurveyPlot( name ) ) {
+        String error = mContext.getResources().getString( R.string.plot_duplicate_name );
+        mEtName.setError( error );
+        return;
+      }
+      String station = mEtStation.getText().toString();
+      if ( ! maker.hasSurveyStation( station ) ) {
+        String error = mContext.getResources().getString( R.string.error_station_non_existing );
+        mEtStation.setError( error );
+        return;
+      }
+      mParent.splitPlot( name, station );
     }
     dismiss();
   }

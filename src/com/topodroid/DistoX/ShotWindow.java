@@ -1069,7 +1069,8 @@ public class ShotWindow extends Activity
   void doBluetooth( Button b )
   {
     if ( ! mDataDownloader.isDownloading() ) {
-      if ( TDSetting.mLevelOverAdvanced && mApp.distoType() == Device.DISTO_X310 
+      if ( TDSetting.mLevelOverAdvanced
+             && mApp.distoType() == Device.DISTO_X310 
 	     && TDSetting.mConnectionMode != TDSetting.CONN_MODE_MULTI
 	  ) {
         CutNPaste.showPopupBT( mActivity, this, mApp, b, false );

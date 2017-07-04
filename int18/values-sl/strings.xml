@@ -510,6 +510,7 @@
     <!-- UNUSED string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <!-- TODO string name="button_dump"      >Dump   </string -->
+    <!-- TODO string name="button_rename"    >Rename    </string -->
     <!-- TODO string name="button_replace"   >Replace   </string -->
     <string name="button_reset"     >Resetiraj   </string>
     <string name="button_left"      >LEVO</string>
@@ -517,6 +518,7 @@
     <string name="button_clear"     >Briši  </string>
     <string name="button_save"      >Shrani     </string>
     <!-- UNUSED string name="button_select"    >Seleziona </string -->
+    <!-- TODO string name="button_split"     >Split     </string -->
     <string name="button_store"     >Piši    </string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
@@ -760,6 +762,7 @@
     <!-- TODO string name="title_select">Select</string -->
     <string name="title_shot_delete">Odstrani vizuro</string>
     <string name="title_sensor_edit">Senzor</string>
+    <!-- TODO string name="title_split">Sketch split</string -->
 
     <string name="title_stats">Statististika</string>
     <!-- TODO string name="title_step">Step</string -->

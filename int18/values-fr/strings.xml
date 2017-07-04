@@ -506,6 +506,7 @@
     <!-- UNUSED string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >Regrouper   </string -->
     <string name="button_dump"      >Dump     </string>
+    <!-- TODO string name="button_rename"    >Rename    </string -->
     <string name="button_replace"   >Remplacer   </string>
     <string name="button_reset"     >Reset      </string>
     <string name="button_left"      >GAUCHE</string>
@@ -513,6 +514,7 @@
     <string name="button_clear"     >EFFACER     </string>
     <string name="button_save"      >ENREGISTRER      </string>
     <!-- UNUSED string name="button_select"    >Sélectionner    </string -->
+    <!-- TODO string name="button_split"     >Split     </string -->
     <string name="button_store"     >STOCKER     </string>
     <!-- UNUSED string name="button_start"     >DEMARRER</string -->
     <!-- UNUSED string name="button_stop"      >ARRETER</string -->
@@ -756,6 +758,7 @@
     <string name="title_shift">Décaler</string>
     <string name="title_shot_delete">Supprimer la visée ?</string>
     <string name="title_sensor_edit">Capteur</string>
+    <!-- TODO string name="title_split">Sketch split</string -->
 
     <string name="title_stats">Statistiques</string>
     <string name="title_step">Étape</string>

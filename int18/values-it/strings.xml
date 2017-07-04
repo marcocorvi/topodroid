@@ -507,6 +507,7 @@
     <!-- UNUSED string name="button_redo"      >Ripeti azione</string -->
     <!-- UNUSED string name="button_regroup"   >Raggruppare   </string -->
     <string name="button_dump"      >Scarica   </string>
+    <!-- TODO string name="button_rename"    >Rename    </string -->
     <string name="button_replace"   >Sostituisci</string>
     <string name="button_reset"     >Resetta   </string>
     <string name="button_left"      >SINISTRA</string>
@@ -514,6 +515,7 @@
     <string name="button_clear"     >Cancella  </string>
     <string name="button_save"      >Salva     </string>
     <!-- UNUSED string name="button_select"    >Seleziona </string -->
+    <!-- TODO string name="button_split"     >Split     </string -->
     <string name="button_store"     >Scrivi    </string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
@@ -759,6 +761,7 @@
     <string name="title_shift">Sposta</string>
     <string name="title_shot_delete">Rimuovi battuta ?</string>
     <string name="title_sensor_edit">Sensore</string>
+    <!-- TODO string name="title_split">Sketch split</string -->
 
     <!-- NO string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
     <!-- NO string name="title_sketch_edit">Edit 3D surface</string -->

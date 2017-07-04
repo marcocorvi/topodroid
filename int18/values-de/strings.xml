@@ -524,6 +524,7 @@
     <!-- UNUSED string name="button_redo"      >Nochmals      </string -->
     <!-- UNUSED string name="button_regroup"   >Umgruppieren   </string -->
     <string name="button_dump"      >Lesen</string>
+    <!-- TODO string name="button_rename"    >Rename    </string -->
     <string name="button_replace"   >Ersetzen   </string>
     <string name="button_reset"     >Zurücksetzen</string>
     <string name="button_left"      >LINKS</string>
@@ -531,6 +532,7 @@
     <string name="button_clear"     >Entfernen</string>
     <string name="button_save"      >Speichern</string>
     <!-- UNUSED string name="button_select"    >Wählen     </string -->
+    <!-- TODO string name="button_split"     >Split     </string -->
     <string name="button_store"     >Speichern</string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
@@ -779,6 +781,7 @@
     <string name="title_shift">Verschieben</string>
     <string name="title_shot_delete">Messung löschen ?</string>
     <string name="title_sensor_edit">Sensordaten</string>
+    <!-- TODO string name="title_split">Sketch split</string -->
 
 <!-- SKETCH_3D titles -->
     <!-- NO string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
