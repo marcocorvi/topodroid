@@ -96,17 +96,17 @@ public class VirtualDistoXComm extends TopoDroidComm
   {
     // Log.v("DistoX", "VD comm toggleCalibMode");
     boolean ret = false;
-    if ( createSocket() ) {
-      byte[] result = new byte[4];
-      if ( mProtocol.read8000( result ) ) { 
-        if ( (result[0] & CALIB_BIT) == 0 ) {
-          ret = mProtocol.sendCommand( (byte)0x31 );  // TOGGLE CALIB ON
-        } else {
-          ret = mProtocol.sendCommand( (byte)0x30 );  // TOGGLE CALIB OFF
-        }
-      }
-      destroySocket();
-    }
+    // if ( createSocket() ) {
+    //   byte[] result = new byte[4];
+    //   if ( mProtocol.read8000( result ) ) { 
+    //     if ( DeviceA3Details.isNotCalibMode( result[0] ) ) {
+    //       ret = mProtocol.sendCommand( (byte)0x31 );  // TOGGLE CALIB ON
+    //     } else {
+    //       ret = mProtocol.sendCommand( (byte)0x30 );  // TOGGLE CALIB OFF
+    //     }
+    //   }
+    //   destroySocket();
+    // }
     return ret;
   }
 
@@ -114,10 +114,10 @@ public class VirtualDistoXComm extends TopoDroidComm
   {
     // Log.v("DistoX", "VD comm writeCoeff");
     boolean ret = false;
-    if ( createSocket() ) {
-      ret = mProtocol.writeCalibration( mCoeff );
-      destroySocket();
-    }
+    // if ( createSocket() ) {
+    //   ret = mProtocol.writeCalibration( mCoeff );
+    //   destroySocket();
+    // }
     return ret;
   }
 
@@ -126,10 +126,10 @@ public class VirtualDistoXComm extends TopoDroidComm
   {
     // Log.v("DistoX", "VD comm readCoeff");
     boolean ret = false;
-    if ( createSocket() ) {
-      ret = mProtocol.readCalibration( coeff );
-      destroySocket();
-    }
+    // if ( createSocket() ) {
+    //   ret = mProtocol.readCalibration( coeff );
+    //   destroySocket();
+    // }
     return ret;
   }
 
@@ -160,7 +160,6 @@ public class VirtualDistoXComm extends TopoDroidComm
     cancelRfcommThread();
     destroySocket();
   }
-
 
   private boolean createSocket( )
   {

@@ -57,6 +57,7 @@ class TDSetting
     "DISTOX_AUTO_PAIR",           // 15
     "DISTOX_SOCKET_DELAY",        // 16
     "DISTOX_AUTO_RECONNECT",      // 17
+    "DISTOX_HEAD_TAIL",
 
     // ------------------- SURVEY PREFERENCES
     "DISTOX_CLOSE_DISTANCE",      // 18
@@ -272,6 +273,7 @@ class TDSetting
   static boolean mZ6Workaround  = true;
 
   static boolean mAutoReconnect = false;
+  static boolean mHeadTail      = false; // whether to use readHeadTail to download the data
   static boolean mAutoPair      = true;
   static int mConnectSocketDelay = 0; // wait time if not paired [0.1 sec]
 
@@ -642,7 +644,8 @@ class TDSetting
     mConnectionMode = tryInt( prefs, key[k++], "0" );        // DISTOX_CONN_MODE choice: 0, 1, 2
     mAutoPair       = prefs.getBoolean( key[ k++ ], true );  // DISTOX_AUTO_PAIR
     mConnectSocketDelay = tryInt(prefs, key[ k++ ], "0" );   // DISTOX_SOCKET_DELAY
-    mAutoReconnect     = prefs.getBoolean( key[k++], false ); // DISTOX_AUTO_RECONNECT
+    mAutoReconnect  = prefs.getBoolean( key[k++], false ); // DISTOX_AUTO_RECONNECT
+    mHeadTail       = prefs.getBoolean( key[k++], false ); // DISTOX_HEAD_TAIL
 
     // ------------------- SURVEY PREFERENCES
     mCloseDistance = tryFloat( prefs, key[k++], "0.05" ); // DISTOX_CLOSE_DISTANCE
@@ -889,6 +892,8 @@ class TDSetting
       mConnectSocketDelay = tryInt(prefs, k, "0" );  
     } else if ( k.equals( key[ nk++ ] ) ) {
       mAutoReconnect = prefs.getBoolean( k, false ); // DISTOX_AUTO_RECONNECT
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mHeadTail = prefs.getBoolean( k, false );      // DISTOX_HEAD_TAIL
   
 
     } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_CLOSE_DISTANCE
@@ -1372,6 +1377,7 @@ class TDSetting
 
     //B if ( name.equals( "DISTOX_SPLAY_EXTEND" )
     //B if ( name.equals( "DISTOX_AUTO_RECONNECT" )
+    //B if ( name.equals( "DISTOX_HEAD_TAIL" )
     if ( name.equals( "DISTOX_BITMAP_SCALE"     ) ) return parseFloatValue( value, mBitmapScale,    0.5f, 10f );
     if ( name.equals( "DISTOX_THUMBNAIL"        ) ) return parseIntValue(   value, mThumbSize,      80,   400 );
     if ( name.equals( "DISTOX_DOT_RADIUS"       ) ) return parseFloatValue( value, mDotRadius,      1,    100 );

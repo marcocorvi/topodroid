@@ -49,7 +49,7 @@ public class DistoXProtocol
   private Socket  mSocket = null;
   private DataInputStream  mIn;
   private DataOutputStream mOut;
-  private byte[] mHeadTailA3;  // head/tail for Protocol A3
+  // private byte[] mHeadTailA3;  // head/tail for Protocol A3
   private byte[] mAddr8000;
   private byte[] mAddress;   // request-reply address
   private byte[] mRequestBuffer;   // request buffer
@@ -169,10 +169,10 @@ public class DistoXProtocol
     // mDistoX = distox;
     mSeqBit = (byte)0xff;
 
-    mHeadTailA3 = new byte[3];   // to read head/tail for Protocol A3
-    mHeadTailA3[0] = 0x38;
-    mHeadTailA3[1] = 0x20;       // address 0xC020
-    mHeadTailA3[2] = (byte)0xC0;
+    // mHeadTailA3 = new byte[3];   // to read head/tail for Protocol A3
+    // mHeadTailA3[0] = 0x38;
+    // mHeadTailA3[1] = 0x20;       // address 0xC020
+    // mHeadTailA3[2] = (byte)0xC0;
 
     mAddr8000 = new byte[3];
     mAddr8000[0] = 0x38;
@@ -391,18 +391,26 @@ public class DistoXProtocol
     return true;
   }
 
-/* NOT USED
-  public int readToReadA3() // number of data-packet to read
+  public int readToRead( byte[] command, boolean a3 ) // number of data-packet to read
   {
+    int ret = 0;
     try {
-      mOut.write( mHeadTailA3, 0, 3 );
+      mOut.write( command, 0, 3 );
       mIn.readFully( mBuffer, 0, 8 );
       if ( mBuffer[0] != (byte)( 0x38 ) ) { return DISTOX_ERR_HEADTAIL; }
-      if ( mBuffer[1] != mHeadTailA3[1] ) { return DISTOX_ERR_HEADTAIL; }
-      if ( mBuffer[2] != mHeadTailA3[2] ) { return DISTOX_ERR_HEADTAIL; }
+      if ( mBuffer[1] != command[1] ) { return DISTOX_ERR_HEADTAIL; }
+      if ( mBuffer[2] != command[2] ) { return DISTOX_ERR_HEADTAIL; }
       int head = MemoryOctet.toInt( mBuffer[4], mBuffer[3] );
       int tail = MemoryOctet.toInt( mBuffer[6], mBuffer[5] );
-      int ret = ( head >= tail )? (head-tail)/8 : ((0x8000 - tail) + head)/8; 
+      if ( a3 ) {
+        ret = ( head >= tail )? (head-tail)/8 : ((DeviceA3Details.MAX_ADDRESS_A3 - tail) + head)/8; 
+      } else {
+        // head = head segment index
+        // tail = tail packet index
+        int hp = 2 * head; // head packet index
+        ret = ( hp >= tail )? (hp - tail) : (hp + (DeviceX310Details.MAX_INDEX_X310 - tail) );
+        // ret can be odd
+      }
 
       // DEBUG
       if ( TDLog.LOG_PROTO ) {
@@ -420,7 +428,6 @@ public class DistoXProtocol
       return DISTOX_ERR_HEADTAIL_IO;
     }
   }
-*/
 
   public boolean swapHotBit( int addr ) // only A3
   {
@@ -472,26 +479,26 @@ public class DistoXProtocol
     return true;
   }
 
-  // FIXME this is specific to DistoA3 (DistoX v.1)
-  public String readHeadTailA3( int[] head_tail )
+  // @param command head-tail command with the memory address of head-tail words
+  public String readHeadTail( byte[] command, int[] head_tail )
   {
     try {
-      mOut.write( mHeadTailA3, 0, 3 );
+      mOut.write( command, 0, 3 );
       mIn.readFully( mBuffer, 0, 8 );
       if ( mBuffer[0] != (byte)( 0x38 ) ) { return null; }
-      if ( mBuffer[1] != mHeadTailA3[1] ) { return null; }
-      if ( mBuffer[2] != mHeadTailA3[2] ) { return null; }
-      // TODO value of mHeadTailA3 in byte[3-7]
+      if ( mBuffer[1] != command[1] ) { return null; }
+      if ( mBuffer[2] != command[2] ) { return null; }
+      // TODO value of Head-Tail in byte[3-7]
       head_tail[0] = MemoryOctet.toInt( mBuffer[4], mBuffer[3] );
       head_tail[1] = MemoryOctet.toInt( mBuffer[6], mBuffer[5] );
       String res = String.format("%02x%02x-%02x%02x", mBuffer[4], mBuffer[3], mBuffer[6], mBuffer[5] );
-      // TDLog.Log( TDLog.LOG_PROTO, "readHeadTail " + res );
+      // TDLog.Log( TDLog.LOG_PROTO, "read Head Tail " + res );
       return res;
     } catch ( EOFException e ) {
-      TDLog.Error( "readHeadTail read() EOF failed" );
+      TDLog.Error( "read Head Tail read() EOF failed" );
       return null;
     } catch (IOException e ) {
-      TDLog.Error( "readHeadTail read() IO failed" );
+      TDLog.Error( "read Head Tail read() IO failed" );
       return null;
     }
   }

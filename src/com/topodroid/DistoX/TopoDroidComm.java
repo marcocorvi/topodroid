@@ -34,8 +34,6 @@ public class TopoDroidComm
 
   protected boolean mBTConnected;
 
-  protected static final byte CALIB_BIT  = (byte)0x08; // X1 calib bit
-  protected static final byte CALIB_BIT2 = (byte)0x20; // X2 calib bit
   public byte[] mCoeff;
 
 // -----------------------------------------------------------
@@ -185,7 +183,7 @@ public class TopoDroidComm
             // mTail = (int)( reply[2] | ( (int)(reply[3]) << 8 ) );
           }
         } else if ( res == DistoXProtocol.DISTOX_PACKET_VECTOR ) {
-          // ++nReadPackets;  // vector packet do not count
+          ++nReadPackets;  // vector packet do count
           double acc  = mProto.mAcceleration;
           double mag  = mProto.mMagnetic;
           double dip  = mProto.mDip;
@@ -303,7 +301,7 @@ public class TopoDroidComm
 
   public boolean readCoeff( String address, byte[] coeff ) { return false; }
 
-  public String readHeadTail( String address, int[] head_tail ) { return null; }
+  public String readHeadTail( String address, byte[] command, int[] head_tail ) { return null; }
   
   public int readX310Memory( String address, int from, int to, List< MemoryOctet > memory ) { return -1; }
 

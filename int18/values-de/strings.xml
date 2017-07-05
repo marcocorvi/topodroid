@@ -130,6 +130,7 @@
     <string name="few_groups">Zu wenige Gruppen</string>
     <!-- UNUSED string name="few_plots">Nicht genügend Skizzen</string -->
     <string name="few_calibs">Nicht genügend Kalibrierungen</string>
+    <!-- TODO string name="getting_info">Getting DistoX info ...</string -->
 <!-- IMPORTING A SURVEY or A ZIP -->
     <string name="calib_import_title">Kalibrierung importieren</string>
     <string name="import_title">Daten Importieren</string>

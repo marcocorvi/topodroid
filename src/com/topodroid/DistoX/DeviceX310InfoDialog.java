@@ -19,6 +19,7 @@ import android.content.Intent;
 import android.content.DialogInterface;
 // import android.content.DialogInterface.OnCancelListener;
 // import android.content.DialogInterface.OnDismissListener;
+import android.content.res.Resources;
 
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -57,6 +58,8 @@ class DeviceX310InfoDialog extends MyDialog
     setContentView( R.layout.device_x310_info_dialog );
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
+    Resources res = mParent.getResources();
+
     mRBa3   = (RadioButton) findViewById( R.id.rb_a3 );
     mRBx310 = (RadioButton) findViewById( R.id.rb_x310 );
     // mRBa3.setChecked( false );
@@ -67,10 +70,10 @@ class DeviceX310InfoDialog extends MyDialog
     tv_firmware = (TextView) findViewById( R.id.tv_firmware );
     tv_hardware = (TextView) findViewById( R.id.tv_hardware );
 
-    setTitle( mParent.getResources().getString( R.string.device_info ) );
+    setTitle( res.getString( R.string.device_info ) );
 
-    tv_address.setText( String.format( mParent.getResources().getString( R.string.device_address ), mDevice.mAddress ) );
-    // tv_code.setText( "" );
+    tv_address.setText( String.format( res.getString( R.string.device_address ), mDevice.mAddress ) );
+    tv_code.setText( res.getString( R.string.getting_info ) );
     // tv_firmware.setText( "" );
     // tv_hardware.setText( "" );
     mParent.readX310Info( this );

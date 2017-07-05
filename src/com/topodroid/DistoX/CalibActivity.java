@@ -108,8 +108,8 @@ public class CalibActivity extends Activity
 
   private void setButtons( )
   {
-    mButton1[1].setEnabled( isSaved );   // open
-    if ( 2 < mNrButton1 ) mButton1[2].setEnabled( isSaved ); // coeff (read)
+    mButton1[1].setEnabled( isSaved );   // OPEN
+    if ( 2 < mNrButton1 ) mButton1[2].setEnabled( isSaved ); // COEFF_READ
     if ( isSaved ) {
       mButton1[1].setBackgroundDrawable( mBMopen );
       if ( 2 < mNrButton1 ) {
@@ -426,7 +426,7 @@ public class CalibActivity extends Activity
     // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
     mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
 
-    mMenuAdapter.add( res.getString( menus[0] ) );
+    if ( TDSetting.mLevelOverNormal ) mMenuAdapter.add( res.getString( menus[0] ) );
     if ( TDSetting.mLevelOverBasic  ) mMenuAdapter.add( res.getString( menus[1] ) );
     mMenuAdapter.add( res.getString( menus[2] ) );
     mMenuAdapter.add( res.getString( menus[3] ) );
@@ -447,19 +447,22 @@ public class CalibActivity extends Activity
     closeMenu();
     // Toast.makeText(this, item.toString(), Toast.LENGTH_SHORT).show();
     int p = 0;
-    if ( p++ == pos ) { // EXPORT
+    if ( TDSetting.mLevelOverNormal && p++ == pos ) { // EXPORT
       if ( mApp.myCalib != null ) {
         // new CalibExportDialog( this, this ).show();
         new ExportDialog( this, this, TDConst.mCalibExportTypes, R.string.title_calib_export ).show();
       }
+
     } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // DELETE 
       if ( mApp.myCalib != null ) {
         askDelete();
       }
+
     } else if ( p++ == pos ) { // OPTIONS
       Intent intent = new Intent( this, TopoDroidPreferences.class );
       intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_CALIB );
       startActivity( intent );
+
     } else if ( p++ == pos ) { // HELP
       (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, menus.length ) ).show();
     }

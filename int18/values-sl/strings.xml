@@ -125,6 +125,7 @@
     <!-- TODO string name="few_groups">Not enough data with group</string -->
     <!-- UNUSED string name="few_plots">Troppo pochi disegni</string -->
     <string name="few_calibs">Pomankljiva kalibracija</string>
+    <!-- TODO string name="getting_info">Getting DistoX info ...</string -->
 
     <string name="calib_import_title">Uvozi kalibracijo</string>
     <string name="import_title">Uvozi datoteko</string>

@@ -125,6 +125,7 @@
     <string name="few_groups">No hay suficientes datos del grupo</string>
     <!-- UNUSED string name="few_plots">No hay suficientes dibujos</string -->
     <string name="few_calibs">No hay suficientes calibraciones</string>
+    <!-- TODO string name="getting_info">Getting DistoX info ...</string -->
 
     <string name="calib_import_title">Importar calibración</string>
     <string name="import_title">Importar archivo</string>

@@ -129,6 +129,7 @@ class DeviceA3MemoryDialog extends MyDialog
   //   return ret;
   // }
 
+  // user inputs index, then converted to address multiplying by 8 
   @Override
   public void onClick( View view )
   {
@@ -186,7 +187,7 @@ class DeviceA3MemoryDialog extends MyDialog
         mParent.readA3Memory( this, ht, dumpfile );
         break;
       case R.id.button_read:
-        mParent.readDeviceHeadTail( ht );
+        mParent.readDeviceHeadTail( DeviceA3Details.HeadTail, ht );
         setText( mTVrhead, mTVrtail, ht );
         mETfrom.setText( mTVstail.getText() );
         mETto.setText( mTVrtail.getText() );
@@ -227,6 +228,7 @@ class DeviceA3MemoryDialog extends MyDialog
     }
   }
 
+  // @param ht[] head-tail addresses
   void askReset( final int ht[] )
   {
     TopoDroidAlertDialog.makeAlert( mContext, mParent.getResources(), R.string.ask_reset,

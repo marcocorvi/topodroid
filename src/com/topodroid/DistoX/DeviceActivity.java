@@ -84,9 +84,9 @@ public class DeviceActivity extends Activity
                         R.drawable.iz_bt,
                         R.drawable.iz_toggle,
                         R.drawable.iz_compute,
-                        R.drawable.iz_sdcard,
+                        R.drawable.iz_info,
                         R.drawable.iz_read,
-                        R.drawable.iz_info
+                        R.drawable.iz_sdcard
                      };
 
   BitmapDrawable mBMtoggle;
@@ -98,7 +98,9 @@ public class DeviceActivity extends Activity
 
   final int IDX_TOGGLE = 1;
   final int IDX_CALIB  = 2;
+  final int IDX_INFO   = 3;
   final int IDX_READ   = 4;
+  final int IDX_MEMORY = 5;
 
   private static int menus[] = {
                         R.string.menu_scan,
@@ -114,9 +116,9 @@ public class DeviceActivity extends Activity
                         R.string.help_bluetooth,
                         R.string.help_toggle,
                         R.string.title_calib,
-                        R.string.help_sdcard,
+                        R.string.help_info_device,
                         R.string.help_read,
-                        R.string.help_info_device
+                        R.string.help_sdcard
                         // R.string.help_remote
                      };
   private static int help_menus[] = {
@@ -224,21 +226,28 @@ public class DeviceActivity extends Activity
     int size = mApp.setListViewHeight( mListView );
 
     Resources res = getResources();
-    mNrButton1 = TDSetting.mLevelOverNormal ? 6 : 3;
+    mNrButton1 = 3;
+    if ( TDSetting.mLevelOverNormal ) mNrButton1 += 2; // CALIB-READ INFO
+    if ( TDSetting.mLevelOverAdvanced ) mNrButton1 += 1; // MEMORY
     mButton1 = new Button[ mNrButton1 ];
+
+    // int k=0; 
+    // mButton1[k++] = MyButton.getButton( this, this, izons[0] );
+    // mButton1[k++] = MyButton.getButton( this, this, izons[1] );
+    // mButton1[k++] = MyButton.getButton( this, this, izons[2] );
+    // if ( TDSetting.mLevelOverNormal   ) mButton1[k++] = MyButton.getButton( this, this, izons[3] ); // INFO
+    // if ( TDSetting.mLevelOverNormal   ) mButton1[k++] = MyButton.getButton( this, this, izons[4] ); // CALIB_READ
+    // if ( TDSetting.mLevelOverAdvanced ) mButton1[k++] = MyButton.getButton( this, this, izons[5] ); // MEMORY
     for ( int k=0; k<mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( this, this, izons[k] );
-      if ( k == IDX_TOGGLE ) {
-        mBMtoggle    = MyButton.getButtonBackground( mApp, res, izons[k] );
-        mBMtoggle_no = MyButton.getButtonBackground( mApp, res, izonsno[k] );
-      } else if ( k == IDX_CALIB ) {
-        mBMcalib    = MyButton.getButtonBackground( mApp, res, izons[k] );
-        mBMcalib_no = MyButton.getButtonBackground( mApp, res, izonsno[k] );
-      } else if ( k == IDX_READ ) {
-        mBMread    = MyButton.getButtonBackground( mApp, res, izons[k] );
-        mBMread_no = MyButton.getButtonBackground( mApp, res, izonsno[k] );
-      }
     }
+
+    mBMtoggle    = MyButton.getButtonBackground( mApp, res, izons[IDX_TOGGLE] );
+    mBMtoggle_no = MyButton.getButtonBackground( mApp, res, izonsno[IDX_TOGGLE] );
+    mBMcalib    = MyButton.getButtonBackground( mApp, res, izons[IDX_CALIB] );
+    mBMcalib_no = MyButton.getButtonBackground( mApp, res, izonsno[IDX_CALIB] );
+    mBMread    = MyButton.getButtonBackground( mApp, res, izons[IDX_READ] );
+    mBMread_no = MyButton.getButtonBackground( mApp, res, izonsno[IDX_READ] );
 
     mButtonView1 = new HorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );
@@ -451,27 +460,7 @@ public class DeviceActivity extends Activity
         (new CalibListDialog( this, this, mApp )).show();
       }
 
-    } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // DISTOX MEMORY
-      if ( mDevice == null ) { // mAddress.length() < 1 ) {
-        Toast.makeText( this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
-      } else {
-        if ( mDevice.mType == Device.DISTO_A3 ) {
-          new DeviceA3MemoryDialog( this, this ).show();
-        } else if ( mDevice.mType == Device.DISTO_X310 ) {
-          new DeviceX310MemoryDialog( this, this ).show();
-        } else {
-          Toast.makeText( this, "Unknown DistoX type " + mDevice.mType, Toast.LENGTH_SHORT).show();
-        }
-      }
-    } else if ( k < mNrButton1 && b == mButton1[k++] ) {   // CALIBRATION COEFFS READ
-      if ( mDevice == null ) { // mAddress.length() < 1 ) {
-        Toast.makeText( this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
-      } else {
-        enableButtons( false );
-        new CalibReadTask( this, this, mApp, CalibReadTask.PARENT_DEVICE ).execute();
-      }
-
-    } else if ( k < mNrButton1 && b == mButton1[k++] ) {    // INFO
+    } else if ( k < mNrButton1 && b == mButton1[k++] ) {    // INFO mLevelOverNormal
       if ( mDevice == null ) {
         Toast.makeText( this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
       } else {
@@ -484,6 +473,27 @@ public class DeviceActivity extends Activity
           TDLog.Error( "Unknown DistoX type " + mDevice.mType );
         }
         // setTitleColor( TDColor.NORMAL );
+      }
+
+    } else if ( k < mNrButton1 && b == mButton1[k++] ) {   // CALIB_READ mLevelOverNormal
+      if ( mDevice == null ) { // mAddress.length() < 1 ) {
+        Toast.makeText( this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
+      } else {
+        enableButtons( false );
+        new CalibReadTask( this, this, mApp, CalibReadTask.PARENT_DEVICE ).execute();
+      }
+
+    } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // DISTOX MEMORY mLevelOverAdvanced
+      if ( mDevice == null ) { // mAddress.length() < 1 ) {
+        Toast.makeText( this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
+      } else {
+        if ( mDevice.mType == Device.DISTO_A3 ) {
+          new DeviceA3MemoryDialog( this, this ).show();
+        } else if ( mDevice.mType == Device.DISTO_X310 ) {
+          new DeviceX310MemoryDialog( this, this ).show();
+        } else {
+          Toast.makeText( this, "Unknown DistoX type " + mDevice.mType, Toast.LENGTH_SHORT).show();
+        }
       }
 
     }
@@ -517,10 +527,10 @@ public class DeviceActivity extends Activity
 
   // -----------------------------------------------------------------------------
 
-  boolean readDeviceHeadTail( int[] head_tail )
+  boolean readDeviceHeadTail( byte[] command, int[] head_tail )
   {
     // TDLog.Log( TDLog.LOG_DEVICE, "onClick mBtnHeadTail. Is connected " + mApp.isConnected() );
-    String ht = mApp.readHeadTail( mDevice.mAddress, head_tail );
+    String ht = mApp.readHeadTail( mDevice.mAddress, command, head_tail );
     if ( ht == null ) {
       Toast.makeText( this, R.string.head_tail_failed, Toast.LENGTH_SHORT).show();
       return false;
@@ -563,14 +573,17 @@ public class DeviceActivity extends Activity
     ( new InfoReadA3Task( mApp, dialog, mDevice.mAddress ) ).execute();
   }
 
+  // @param head_tail indices
   void readX310Memory( IMemoryDialog dialog, int[] head_tail, String dumpfile )
   {
     ( new MemoryReadTask( mApp, dialog, Device.DISTO_X310, mDevice.mAddress, head_tail, dumpfile ) ).execute();
   }
-
+ 
+  // @param head_tail addresses
   void readA3Memory( IMemoryDialog dialog, int[] head_tail, String dumpfile )
   {
-    if ( head_tail[0] < 0 || head_tail[0] >= 0x8000 || head_tail[1] < 0 || head_tail[1] >= 0x8000 ) {
+    if (    head_tail[0] < 0 || head_tail[0] >= DeviceA3Details.MAX_ADDRESS_A3 
+         || head_tail[1] < 0 || head_tail[1] >= DeviceA3Details.MAX_ADDRESS_A3 ) {
       Toast.makeText(this, R.string.device_illegal_addr, Toast.LENGTH_SHORT).show();
       return;
     }
@@ -699,10 +712,10 @@ public class DeviceActivity extends Activity
     // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
     mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
 
-    mMenuAdapter.add( res.getString( menus[0] ) );
-    mMenuAdapter.add( res.getString( menus[1] ) );
-    if ( TDSetting.mLevelOverBasic ) mMenuAdapter.add( res.getString( menus[2] ) );
-    if ( TDSetting.mLevelOverNormal ) mMenuAdapter.add( res.getString( menus[3] ) );
+    if ( TDSetting.mLevelOverBasic    ) mMenuAdapter.add( res.getString( menus[0] ) );
+    if ( TDSetting.mLevelOverBasic    ) mMenuAdapter.add( res.getString( menus[1] ) );
+    if ( TDSetting.mLevelOverNormal   ) mMenuAdapter.add( res.getString( menus[2] ) );
+    if ( TDSetting.mLevelOverAdvanced ) mMenuAdapter.add( res.getString( menus[3] ) );
     mMenuAdapter.add( res.getString( menus[4] ) );
     mMenuAdapter.add( res.getString( menus[5] ) );
     // mMenuAdapter.add( res.getString( menus[6] ) ); // SERVER
@@ -724,22 +737,26 @@ public class DeviceActivity extends Activity
   {
     closeMenu();
     int p = 0;
-    if ( p++ == pos ) { // SCAN
+    if ( TDSetting.mLevelOverBasic && p++ == pos ) { // SCAN
       Intent scanIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DeviceList.class );
       scanIntent.putExtra( TDTag.TOPODROID_DEVICE_ACTION, DeviceList.DEVICE_SCAN );
       startActivityForResult( scanIntent, TDRequest.REQUEST_DEVICE );
       Toast.makeText(this, R.string.wait_scan, Toast.LENGTH_LONG).show();
-    } else if ( p++ == pos ) { // PAIR
+
+    } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // PAIR
       pairDevice();
-    } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // DETACH
+
+    } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // DETACH
       detachDevice();
-    } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // FIRMWARE
+
+    } else if ( TDSetting.mLevelOverAdvanced && p++ == pos ) { // FIRMWARE
       if ( TDSetting.mCommType != 0 ) {
         Toast.makeText( this, "Connection mode must be \"on-demand\"", Toast.LENGTH_LONG).show();
       } else {
         mApp.resetComm();
         (new FirmwareDialog( this, this, mApp )).show();
       }
+
     } else if ( p++ == pos ) { // OPTIONS
       Intent intent = new Intent( this, TopoDroidPreferences.class );
       intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_DEVICE );

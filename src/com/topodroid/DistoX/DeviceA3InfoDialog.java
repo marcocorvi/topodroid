@@ -19,6 +19,7 @@ import android.content.Intent;
 import android.content.DialogInterface;
 // import android.content.DialogInterface.OnCancelListener;
 // import android.content.DialogInterface.OnDismissListener;
+import android.content.res.Resources;
 
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -60,6 +61,8 @@ class DeviceA3InfoDialog extends MyDialog
     setContentView( R.layout.device_a3_info_dialog );
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
+    Resources res = mParent.getResources();
+
     mRBa3   = (RadioButton) findViewById( R.id.rb_a3 );
     mRBx310 = (RadioButton) findViewById( R.id.rb_x310 );
     mRBa3.setChecked( true );
@@ -72,11 +75,11 @@ class DeviceA3InfoDialog extends MyDialog
     tv_statusCalib   = (TextView) findViewById( R.id.tv_status_calib );
     tv_statusSilent  = (TextView) findViewById( R.id.tv_status_silent );
 
-    setTitle( mParent.getResources().getString( R.string.device_info ) );
+    setTitle( res.getString( R.string.device_info ) );
 
-    tv_address.setText( String.format( mParent.getResources().getString( R.string.device_address ), mDevice.mAddress ) );
+    tv_address.setText( String.format( res.getString( R.string.device_address ), mDevice.mAddress ) );
 
-    // tv_serial.setText( "" );
+    tv_serial.setText( res.getString( R.string.getting_info ) );
     // tv_statusAngle.setText(   "" );
     // tv_statusCompass.setText( "" );
     // tv_statusCalib.setText(   "" );

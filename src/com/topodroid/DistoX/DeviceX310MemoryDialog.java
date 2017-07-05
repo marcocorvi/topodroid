@@ -54,17 +54,6 @@ class DeviceX310MemoryDialog extends MyDialog
     mParent = parent;
   }
 
-  int index2addr( int index )
-  {
-    int addr = 0;
-    while ( index >= 56 ) {
-      index -= 56;
-      addr += 0x400;
-    }
-    addr += 18 * index;
-    return addr;
-  }
-
   @Override
   public void onCreate( Bundle bundle )
   {
@@ -100,7 +89,6 @@ class DeviceX310MemoryDialog extends MyDialog
     mList.invalidate();
   }
 
-  static final int MAX_ADDRESS_X310 = 1064;
 
   @Override
   public void onClick( View view )
@@ -136,7 +124,7 @@ class DeviceX310MemoryDialog extends MyDialog
           return;
         }
         if ( ht[0] < 0 ) ht[0] = 0;
-        if ( ht[1] > MAX_ADDRESS_X310 )  ht[1] = MAX_ADDRESS_X310;
+        if ( ht[1] > DeviceX310Details.MAX_INDEX_X310 )  ht[1] = DeviceX310Details.MAX_INDEX_X310;
         if ( ht[0] < ht[1] ) {
           String file = null;
           if ( mETdumpfile.getText() != null ) file = mETdumpfile.getText().toString();

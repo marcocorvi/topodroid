@@ -56,9 +56,6 @@ public class DistoXComm extends TopoDroidComm
   private BluetoothSocket mBTSocket;
   private String mAddress;
 
-  // private static final byte CALIB_BIT = (byte)0x08;
-  // public byte[] mCoeff;
-
 // -----------------------------------------------------------
 // Bluetooth receiver
 
@@ -520,12 +517,12 @@ public class DistoXComm extends TopoDroidComm
         case Device.DISTO_A3:
           // byte[] result = new byte[4];
           // if ( ! mProtocol.read8000( result ) ) { // FIXME ASYNC
-          result = mProtocol.readMemory( 0x8000 ); // TODO TEST THIS
+          result = mProtocol.readMemory( DeviceA3Details.mStatusAddress ); // TODO TEST THIS
           if ( result == null ) { 
             TDLog.Error( "toggle Calib Mode A3 failed read 8000" );
           } else {
-            ret = setCalibMode( ( (result[0] & CALIB_BIT) == 0 ) );
-            // if ( (result[0] & CALIB_BIT) == 0 ) {
+            ret = setCalibMode( DeviceA3Details.isNotCalibMode( result[0] ) );
+            // if ( DeviceA3Details.isNotCalibMode( result[0] ) ) {
             //   ret = mProtocol.sendCommand( (byte)0x31 );  // TOGGLE CALIB ON
             // } else {
             //   ret = mProtocol.sendCommand( (byte)0x30 );  // TOGGLE CALIB OFF
@@ -533,35 +530,21 @@ public class DistoXComm extends TopoDroidComm
           }
           break;
         case Device.DISTO_X310:
-          if ( false ) {
-            mCalibMode = ! mCalibMode;
-            // TDLog.Log( TDLog.LOG_COMM, "toggle Calib Mode X310 setX310CalibMode " + mCalibMode );
-            ret = setCalibMode( mCalibMode );
+          byte[] fw = mProtocol.readMemory( DeviceX310Details.mFirmwareAddress ); // read firmware
+          if ( fw == null ) {
+            TDLog.Error( "toggle Calib Mode X310 failed read E000" );
           } else {
-            // read firmware
-            byte[] fw = mProtocol.readMemory( 0xe000 );
-            if ( fw == null ) {
-              TDLog.Error( "toggle Calib Mode X310 failed read E000" );
+            // Log.v("DistoX", "firmware " + fw[0] + " " + fw[1] );
+            if ( fw[1] > 5 ) {
+              mCalibMode = ! mCalibMode;
+              // TDLog.Log( TDLog.LOG_COMM, "toggle Calib Mode X310 setX310CalibMode " + mCalibMode );
+              ret = setCalibMode( mCalibMode );
             } else {
-              Log.v("DistoX", "firmware " + fw[0] + " " + fw[1] );
-              switch ( fw[1] ) {
-                case 0:
-                case 1:
-                case 2:
-                  result = mProtocol.readMemory( 0xc006 );
-                  break;
-                case 3:
-                  result = mProtocol.readMemory( 0xc034 );
-                  break;
-                case 4:
-                case 5:
-                  result = mProtocol.readMemory( 0xc044 );
-                  break;
-              }
+              result = mProtocol.readMemory( DeviceX310Details.mStatusAddress[ fw[1] ] );
               if ( result == null ) { 
-                TDLog.Error( "toggle Calib Mode X310 failed read C044" );
+                TDLog.Error( "toggle Calib Mode X310 failed read status word" ); // C044
               } else {
-                ret = setCalibMode( ( (result[0] & CALIB_BIT2) == 0 ) );
+                ret = setCalibMode( DeviceX310Details.isNotCalibMode( result[0] ) );
               }
             }
           }
@@ -609,15 +592,15 @@ public class DistoXComm extends TopoDroidComm
     return ret;
   }
 
-  public String readHeadTail( String address, int[] head_tail )
+  public String readHeadTail( String address, byte[] command, int[] head_tail )
   {
     String res = null;
     if ( mApp.distoType() == Device.DISTO_A3 ) {
       if ( ! checkRfcommThreadNull( "read HeadTail: address " + address ) ) return null;
       if ( connectSocket( address ) ) {
-        res = mProtocol.readHeadTailA3( head_tail );
+        res = mProtocol.readHeadTail( command, head_tail );
         // FIXME ASYNC new CommandThread( mProtocol, READ_HEAD_TAIL, haed_tail ); NOTE int[] instead of byte[]
-        // TDLog.Log( TDLog.LOG_COMM, "readHeadTail() result " + res );
+        // TDLog.Log( TDLog.LOG_COMM, "read Head Tail() result " + res );
       }
       destroySocket( );
     }
@@ -654,7 +637,7 @@ public class DistoXComm extends TopoDroidComm
     from &= 0x7ff8;
     to   &= 0xfff8;
     if ( from >= 0x8000 ) from = 0;
-    if ( to >= 0x8000 ) to &= 0x8000;
+    if ( to >= 0x8000 )   to   = 0x8000;
     int n = 0;
     if ( from < to ) {
       if ( connectSocket( address ) ) {
@@ -689,7 +672,7 @@ public class DistoXComm extends TopoDroidComm
     from &= 0x7ff8;
     to   &= 0xfff8;
     if ( from >= 0x8000 ) from = 0;
-    if ( to >= 0x8000 ) to &= 0x8000;
+    if ( to >= 0x8000 )   to   = 0x8000;
 
     int n = 0;
     if ( from != to ) {
@@ -747,36 +730,37 @@ public class DistoXComm extends TopoDroidComm
     
     int ret = -1; // failure
     if ( connectSocket( address ) ) {
-      // if ( mApp.distoType() == Device.DISTO_A3 ) {
-      //   int prev_read = -1;
-      //   int to_read = mProtocol.readToReadA3();
-      //   TDLog.Log( TDLog.LOG_COMM, "download data: A3 to-read " + to_read );
-      //   if ( to_read <= 0 ) {
-      //     ret = to_read;
-      //   } else {
-      //     // FIXME asyncTask ?
-      //     // nReadPackets = 0; // done in RfcommThread cstr
-      //     startRfcommThread( to_read, lister );
-      //     while ( mRfcommThread != null && nReadPackets < to_read ) {
-      //       if ( nReadPackets != prev_read ) {
-      //         TDLog.Log( TDLog.LOG_COMM, "download data: A3 read " + nReadPackets + " / " + to_read );
-      //         prev_read = nReadPackets;
-      //       }
-      //       try { Thread.sleep( 100 ); } catch ( InterruptedException e ) { }
-      //     }
-      //     TDLog.Log( TDLog.LOG_COMM, "download done: A3 read " + nReadPackets );
-      //   }
-      // } else if ( mApp.distoType() == Device.DISTO_X310 ) {
+      if ( TDSetting.mHeadTail ) {
+        boolean a3 = ( mApp.distoType() == Device.DISTO_A3 );
+        byte[] command = ( a3 ? DeviceA3Details.HeadTail : DeviceX310Details.HeadTail );
+        int prev_read = -1;
+        int to_read = mProtocol.readToRead( command, a3 );
+        TDLog.Log( TDLog.LOG_COMM, "download data: A3 to-read " + to_read );
+        if ( to_read <= 0 ) {
+          ret = to_read;
+        } else {
+          // FIXME asyncTask ?
+          // nReadPackets = 0; // done in RfcommThread cstr
+          startRfcommThread( to_read, lister );
+          while ( mRfcommThread != null && nReadPackets < to_read ) {
+            if ( nReadPackets != prev_read ) {
+              TDLog.Log( TDLog.LOG_COMM, "download data: A3 read " + nReadPackets + " / " + to_read );
+              prev_read = nReadPackets;
+            }
+            try { Thread.sleep( 100 ); } catch ( InterruptedException e ) { }
+          }
+          TDLog.Log( TDLog.LOG_COMM, "download done: A3 read " + nReadPackets );
+          ret = nReadPackets;
+        }
+      } else {
         startRfcommThread( -1, lister );
         while ( mRfcommThread != null ) {
           try { Thread.sleep( 100 ); } catch ( InterruptedException e ) { }
         }
         // TDLog.Log( TDLog.LOG_COMM, "download done: read " + nReadPackets );
-      // } else {
-      //   TDLog.Error( "download data: unknown DistoType " + mApp.distoType() );
-      // }
-      // cancelRfcommThread(); // called by closeSocket() which is called by destroySocket()
-      ret = nReadPackets;
+        // cancelRfcommThread(); // called by closeSocket() which is called by destroySocket()
+        ret = nReadPackets;
+      }
     } else {
       TDLog.Error( "download data: fail to connect socket");
     }

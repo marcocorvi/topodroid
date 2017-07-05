@@ -361,37 +361,37 @@ public class ShotDialog extends MyDialog
     mCBrenumber  = new MyCheckBox( mContext, size, R.drawable.iz_numbers_ok, R.drawable.iz_numbers_no );
     mCBallSplay  = new MyCheckBox( mContext, size, R.drawable.iz_splays_ok, R.drawable.iz_splays_no );
 
-    if ( TDSetting.mLevelOverExpert ) {
+    if ( TDSetting.mLevelOverAdvanced ) {
       if ( shot_xsplay ) {
-        mCBxSplay    = new MyCheckBox( mContext, size, R.drawable.iz_xsplays_ok, R.drawable.iz_ysplays_no );
+        mCBxSplay = new MyCheckBox( mContext, size, R.drawable.iz_xsplays_ok, R.drawable.iz_ysplays_no );
       } else {
-        mCBxSplay    = new MyCheckBox( mContext, size, R.drawable.iz_ysplays_ok, R.drawable.iz_xsplays_no );
+        mCBxSplay = new MyCheckBox( mContext, size, R.drawable.iz_ysplays_ok, R.drawable.iz_xsplays_no );
       }
-      mRBsplay     = new MyStateBox( mContext, R.drawable.iz_plan_profile, R.drawable.iz_plan, R.drawable.iz_extended );
       mCBxSplay.setOnClickListener( this );
+    }
+  
+    if ( TDSetting.mLevelOverExpert ) {
+      mRBsplay = new MyStateBox( mContext, R.drawable.iz_plan_profile, R.drawable.iz_plan, R.drawable.iz_extended );
       mRBsplay.setOnClickListener( this );
     }
     // mCBhighlight = new MyCheckBox( mContext, size, R.drawable.iz_highlight_ok, R.drawable.iz_highlight_no );
 
     int nr_buttons = 4;
     if ( TDSetting.mLevelOverNormal   ) nr_buttons += 3;
-    if ( TDSetting.mLevelOverExpert ) nr_buttons += 2;
+    if ( TDSetting.mLevelOverAdvanced ) nr_buttons += 1;
+    if ( TDSetting.mLevelOverExpert   ) nr_buttons += 1;
     mButton = new Button[nr_buttons];
 
     int k = 0;
-    if ( TDSetting.mLevelOverNormal ) {
-      mButton[k++] = mRBdup;
-      mButton[k++] = mRBsurf;
-      mButton[k++] = mRBcmtd;
-    }
+    if ( mRBdup  != null ) mButton[k++] = mRBdup;
+    if ( mRBsurf != null ) mButton[k++] = mRBsurf;
+    if ( mRBcmtd != null ) mButton[k++] = mRBcmtd;
     mButton[k++] = mCBlegPrev;
     mButton[k++] = mCBlegNext;
     mButton[k++] = mCBrenumber;
     mButton[k++] = mCBallSplay;
-    if ( TDSetting.mLevelOverExpert ) {
-      mButton[k++] = mCBxSplay;
-      mButton[k++] = mRBsplay;
-    }
+    if ( mCBxSplay != null ) mButton[k++] = mCBxSplay;
+    if ( mRBsplay  != null ) mButton[k++] = mRBsplay;
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
     /* size = */ TopoDroidApp.setListViewHeight( mContext, mListView );
@@ -473,7 +473,7 @@ public class ShotDialog extends MyDialog
     // }
 
     boolean all_splay = mCBallSplay.isChecked();
-    boolean x_splay = TDSetting.mLevelOverExpert? mCBxSplay.isChecked() : false;
+    boolean x_splay = (mCBxSplay != null)? mCBxSplay.isChecked() : false;
     boolean leg_next  = false;
     if ( mCBlegPrev.isChecked() ) {
       shot_from = "";
@@ -610,17 +610,17 @@ public class ShotDialog extends MyDialog
       // Log.v("DistoX", "CB leg clicked ");
       if ( mCBlegPrev.toggleState() ) {
         mCBallSplay.setState( false );
-        if ( TDSetting.mLevelOverExpert ) mCBxSplay.setState( false );
+        if ( mCBxSplay != null ) mCBxSplay.setState( false );
         mCBlegNext.setState( false );
       }
     } else if ( b == mCBallSplay ) {
       // Log.v("DistoX", "CB all_splay clicked ");
       if ( mCBallSplay.toggleState() ) {
-        if ( TDSetting.mLevelOverExpert ) mCBxSplay.setState( false );
+        if ( mCBxSplay != null ) mCBxSplay.setState( false );
         mCBlegPrev.setState( false );
         mCBlegNext.setState( false );
       }
-    } else if ( TDSetting.mLevelOverExpert && b == mCBxSplay ) {
+    } else if ( mCBxSplay != null && b == mCBxSplay ) {
       if ( mCBxSplay.toggleState() ) {
         mCBallSplay.setState( false );
         mCBlegPrev.setState( false );
@@ -630,7 +630,7 @@ public class ShotDialog extends MyDialog
       if ( mCBlegNext.toggleState() ) {
         mCBlegPrev.setState( false );
         mCBallSplay.setState( false );
-        if ( TDSetting.mLevelOverExpert ) mCBxSplay.setState( false );
+        if ( mCBxSplay != null ) mCBxSplay.setState( false );
       }
 
     } else if ( TDSetting.mLevelOverNormal && b == mRBdup ) {
@@ -678,7 +678,7 @@ public class ShotDialog extends MyDialog
 
     } else if ( b == mButtonPrev ) {
       mCBallSplay.setVisibility( View.GONE );
-      if ( TDSetting.mLevelOverExpert ) mCBxSplay.setVisibility( View.GONE );
+      if ( mCBxSplay != null ) mCBxSplay.setVisibility( View.GONE );
       // shift:
       //               prev -- blk -- next
       // prevOfPrev -- prev -- blk
@@ -695,7 +695,7 @@ public class ShotDialog extends MyDialog
 
     } else if ( b == mButtonNext ) {
       mCBallSplay.setVisibility( View.GONE );
-      if ( TDSetting.mLevelOverExpert ) mCBxSplay.setVisibility( View.GONE );
+      if ( mCBxSplay != null ) mCBxSplay.setVisibility( View.GONE );
       // shift:
       //        prev -- blk -- next
       //                blk -- next -- nextOfNext

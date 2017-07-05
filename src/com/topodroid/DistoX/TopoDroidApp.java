@@ -470,23 +470,25 @@ public class TopoDroidApp extends Application
     ret = readMemory( address, 0xe000 );
     if ( ret == null ) return null;
     info.mFirmware = String.format( getResources().getString( R.string.device_firmware ), ret[0], ret[1] );
+    // int fw0 = ret[0]; // this is always 2
+    int fw1 = ret[1]; // firmware 2.X
 
     ret = readMemory( address, 0xe004 );
     if ( ret == null ) return null;
     info.mHardware = String.format( getResources().getString( R.string.device_hardware ), ret[0], ret[1] );
 
-    ret = readMemory( address, 0xc044 );
-    if ( ret != null ) {
-      Log.v("DistoX", "X310 info C044 " + 
-        String.format( getResources().getString( R.string.device_memory ), ret[0], ret[1] ) );
-    }
+    // ret = readMemory( address, 0xc044 );
+    // if ( ret != null ) {
+    //   Log.v("DistoX", "X310 info C044 " + 
+    //     String.format( getResources().getString( R.string.device_memory ), ret[0], ret[1] ) );
+    // }
 
     return info;
   }
 
-  String readHeadTail( String address, int[] head_tail )
+  String readHeadTail( String address, byte[] command, int[] head_tail )
   {
-    return mComm.readHeadTail( address, head_tail );
+    return mComm.readHeadTail( address, command, head_tail );
   }
 
   int swapHotBit( String address, int from, int to ) 

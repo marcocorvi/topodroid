@@ -288,6 +288,7 @@ public class ShotWindow extends Activity
         updateDisplay( );
       }
       if ( toast ) {
+        if ( mApp.mDevice.mType == Device.DISTO_X310 ) nr /= 2;
         Toast.makeText( mActivity, getResources().getQuantityString(R.plurals.read_data, nr, nr ), Toast.LENGTH_SHORT ).show();
         // Toast.makeText( mActivity, " read_data: " + nr, Toast.LENGTH_SHORT ).show();
       }

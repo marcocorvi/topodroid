@@ -592,9 +592,15 @@ public class SurveyWindow extends Activity
     // mMenuAdapter = new MyMenuAdapter( mActivity, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
     mMenuAdapter = new ArrayAdapter<String>(mActivity, R.layout.menu );
 
-    for ( int k = 0; k < menus.length; ++k ) {
-      mMenuAdapter.add( res.getString( menus[k] ) );
-    }
+    mMenuAdapter.add( res.getString( menus[0] ) );
+    mMenuAdapter.add( res.getString( menus[1] ) );
+    if ( TDSetting.mLevelOverExpert   ) mMenuAdapter.add( res.getString( menus[2] ) );
+    if ( TDSetting.mLevelOverNormal   ) mMenuAdapter.add( res.getString( menus[3] ) );
+    if ( TDSetting.mLevelOverAdvanced ) mMenuAdapter.add( res.getString( menus[4] ) );
+    if ( TDSetting.mLevelOverAdvanced ) mMenuAdapter.add( res.getString( menus[5] ) );
+    mMenuAdapter.add( res.getString( menus[6] ) );
+    mMenuAdapter.add( res.getString( menus[7] ) );
+
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
   }
@@ -616,13 +622,13 @@ public class SurveyWindow extends Activity
       super.onBackPressed();
     } else if ( p++ == pos ) { // EXPORT
       new ExportDialog( mActivity, this, TDConst.mSurveyExportTypes, R.string.title_survey_export ).show();
-    } else if ( p++ == pos ) { // RENAME
+    } else if ( TDSetting.mLevelOverExpert && p++ == pos ) { // RENAME
       new SurveyRenameDialog( mActivity, this ).show();
-    } else if ( p++ == pos ) { // DELETE
+    } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // DELETE
       askDelete();
-    } else if ( p++ == pos ) { // INSTRUMENTS CALIBRATION
+    } else if ( TDSetting.mLevelOverAdvanced && p++ == pos ) { // INSTRUMENTS CALIBRATION
       new SurveyCalibrationDialog( mActivity, this ).show();
-    } else if ( p++ == pos ) { // CALIBRATION CHECK SHOTS
+    } else if ( TDSetting.mLevelOverAdvanced && p++ == pos ) { // CALIBRATION CHECK SHOTS
       List< DBlock > shots = mApp.mData.selectAllShots( mApp.mSID, TopoDroidApp.STATUS_CHECK );
       if ( shots.size() == 0 ) {
         Toast.makeText( mActivity, R.string.no_calib_check, Toast.LENGTH_SHORT).show();

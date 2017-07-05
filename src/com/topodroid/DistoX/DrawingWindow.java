@@ -4319,6 +4319,7 @@ public class DrawingWindow extends ItemDrawer
         doComputeReferences( false );
       }
       if ( toast ) {
+        if ( mApp.mDevice.mType == Device.DISTO_X310 ) nr /= 2;
         Toast.makeText( mActivity, getResources().getQuantityString(R.plurals.read_data, nr, nr ), Toast.LENGTH_SHORT ).show();
       }
     } else if ( nr < 0 ) {
@@ -4463,7 +4464,7 @@ public class DrawingWindow extends ItemDrawer
       mMenuAdapter.add( res.getString( menus[5] ) ); // RENAME/DELETE
     }
     mMenuAdapter.add( res.getString( menus[6] ) ); // PALETTE
-    if ( PlotInfo.isSketch2D( type ) ) {
+    if ( TDSetting.mLevelOverBasic && PlotInfo.isSketch2D( type ) ) {
       mMenuAdapter.add( res.getString( menus[7] ) ); // OVERVIEW
     }
     mMenuAdapter.add( res.getString( menus[8] ) ); // OPTIONS
@@ -4486,7 +4487,11 @@ public class DrawingWindow extends ItemDrawer
       int p = 0;
       if ( p++ == pos ) {
         if ( PlotInfo.isSketch2D( mType ) ) { // SWITCH/CLOSE
-          new PlotListDialog( mActivity, null, mApp, this ).show();
+          if ( TDSetting.mLevelOverNormal ) {
+            new PlotListDialog( mActivity, null, mApp, this ).show();
+          } else {
+            super.onBackPressed();
+          }
         } else { // CLOSE
           super.onBackPressed();
         }
@@ -4528,7 +4533,8 @@ public class DrawingWindow extends ItemDrawer
       } else if ( p++ == pos ) { // PALETTE
         BrushManager.makePaths( mApp, getResources() );
         (new SymbolEnableDialog( mActivity, mApp )).show();
-      } else if ( PlotInfo.isSketch2D( mType ) && p++ == pos ) { // OVERVIEW
+
+      } else if ( TDSetting.mLevelOverBasic && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // OVERVIEW
         if ( mType == PlotInfo.PLOT_PROFILE ) {
           Toast.makeText( mActivity, R.string.no_profile_overview, Toast.LENGTH_SHORT ).show();
         } else {

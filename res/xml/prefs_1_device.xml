@@ -46,6 +46,13 @@
        android:defaultValue="false"
      />
 
+     <CheckBoxPreference
+       android:key="DISTOX_HEAD_TAIL"
+       android:summary="@string/pref_head_tail_summary"
+       android:title="@string/pref_head_tail_title"
+       android:defaultValue="false"
+     />
+
      <com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_SOCK_TYPE"
        android:summary="@string/pref_sock_type_summary"

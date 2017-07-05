@@ -126,6 +126,7 @@
     <string name="few_groups">Not enough data with group</string>
     <!-- UNUSED string name="few_plots">Not enough sketches</string -->
     <string name="few_calibs">Not enough calibrations</string>
+    <string name="getting_info">Getting DistoX info ...</string>
 
     <string name="calib_import_title">Calibration import</string>
     <string name="import_title">Survey import</string>
@@ -863,6 +864,8 @@
   <string name="pref_auto_reconnect_summary">Reconnect when connection is lost</string>
   <string name="pref_auto_pair_title">Auto pairing</string>
   <string name="pref_auto_pair_summary">Pair with device after scan</string>
+  <string name="pref_head_tail_title">Read Head/Tail</string>
+  <string name="pref_head_tail_summary">To know the number of data to download</string>
   <string name="pref_socket_delay_title">Connection delay</string>
   <string name="pref_socket_delay_summary">Connection delay to allow pairing [0.1 sec]</string>
   <string name="pref_socket_delay_dialogtitle">Connection delay on pairing</string>

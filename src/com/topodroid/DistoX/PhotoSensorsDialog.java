@@ -58,9 +58,10 @@ public class PhotoSensorsDialog extends MyDialog
   private MyCheckBox mButtonAudio = null;
   private MyCheckBox mButtonSensor;
   private MyCheckBox mButtonShot;
-  private MyCheckBox mButtonSurvey;
-  private MyCheckBox mButtonCheck = null;
+  private MyCheckBox mButtonSurvey = null;
+
   private MyCheckBox mButtonDelete;
+  private MyCheckBox mButtonCheck = null;
 
   HorizontalListView mListView;
   HorizontalButtonView mButtonView;
@@ -114,13 +115,19 @@ public class PhotoSensorsDialog extends MyDialog
     // mButtonPlot   = new MyCheckBox( mContext, size, R.drawable.iz_plot, R.drawable.iz_plot ); 
     mButtonPhoto  = new MyCheckBox( mContext, size, R.drawable.iz_camera, R.drawable.iz_camera ); 
     if ( hasAudio ) {
-      mButtonAudio  = new MyCheckBox( mContext, size, R.drawable.iz_audio, R.drawable.iz_audio ); 
+      mButtonAudio = new MyCheckBox( mContext, size, R.drawable.iz_audio, R.drawable.iz_audio ); 
+      mButtonAudio.setOnClickListener( this );
     } else {
-      nr_buttons --;
+      -- nr_buttons;
     }
     mButtonSensor = new MyCheckBox( mContext, size, R.drawable.iz_sensor, R.drawable.iz_sensor ); 
     mButtonShot   = new MyCheckBox( mContext, size, R.drawable.iz_add_leg, R.drawable.iz_add_leg );
-    mButtonSurvey = new MyCheckBox( mContext, size, R.drawable.iz_split, R.drawable.iz_split );
+    if ( TDSetting.mLevelOverAdvanced ) {
+      mButtonSurvey = new MyCheckBox( mContext, size, R.drawable.iz_split, R.drawable.iz_split );
+      mButtonSurvey.setOnClickListener( this );
+    } else {
+      -- nr_buttons;
+    }
 
     mButton = new Button[nr_buttons];
     int pos = 0;
@@ -128,7 +135,7 @@ public class PhotoSensorsDialog extends MyDialog
     if ( hasAudio ) mButton[pos++] = mButtonAudio;
     mButton[pos++] = mButtonSensor;
     mButton[pos++] = mButtonShot;
-    mButton[pos++] = mButtonSurvey;
+    if ( mButtonSurvey != null ) mButton[pos++] = mButtonSurvey;
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
     /* size = */ TopoDroidApp.setListViewHeight( mContext, mListView );
@@ -152,7 +159,7 @@ public class PhotoSensorsDialog extends MyDialog
       mCBleg.setChecked( false );
       layout4b.addView( mCBleg );
       mCBleg.setLayoutParams( lp );
-      if ( mBlk.mShotType == 0 ) {
+      if ( TDSetting.mLevelOverAdvanced && mBlk.mShotType == 0 ) {
         layout4c.setMinimumHeight( size + 20 );
         mButtonCheck  = new MyCheckBox( mContext, size, R.drawable.iz_compute, R.drawable.iz_compute );
         mButtonCheck.setOnClickListener( this );
@@ -196,11 +203,9 @@ public class PhotoSensorsDialog extends MyDialog
 
     // mButtonPlot.setOnClickListener( this );
     mButtonPhoto.setOnClickListener( this );
-    if ( hasAudio ) mButtonAudio.setOnClickListener( this );
     mButtonSensor.setOnClickListener( this );
     // mButtonExternal.setOnClickListener( this );
     mButtonShot.setOnClickListener( this );
-    mButtonSurvey.setOnClickListener( this );
 
   }
 
@@ -236,7 +241,7 @@ public class PhotoSensorsDialog extends MyDialog
     } else if ( b == mButtonShot ) {  // INSERT SHOT
       mParent.insertShotAt( mBlk );
       dismiss();
-    } else if ( b == mButtonSurvey ) { // SPLIT
+    } else if ( mButtonSurvey != null && b == mButtonSurvey ) { // SPLIT
       TopoDroidAlertDialog.makeAlert( mParent, mParent.getResources(), R.string.survey_split,
         new DialogInterface.OnClickListener() {
           @Override
@@ -246,7 +251,7 @@ public class PhotoSensorsDialog extends MyDialog
           }
         } );
       // mParent.askSurvey( );
-    } else if ( b == mButtonCheck && mButtonCheck != null ) { // CHECK
+    } else if ( mButtonCheck != null && b == mButtonCheck ) { // CHECK
       TopoDroidAlertDialog.makeAlert( mParent, mParent.getResources(), R.string.shot_check,
         new DialogInterface.OnClickListener() {
           @Override

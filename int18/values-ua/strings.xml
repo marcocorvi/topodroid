@@ -125,6 +125,7 @@
     <string name="few_groups">Недостатньо даних з номером групи</string>
     <!-- UNUSED string name="few_plots">Недостатньо абрисов</string -->
     <string name="few_calibs">Недостатньо каліб. замірів</string>
+    <!-- TODO string name="getting_info">Getting DistoX info ...</string -->
 
     <string name="calib_import_title">Імпорт калібрування</string>
     <string name="import_title">Імпорт файлу</string>

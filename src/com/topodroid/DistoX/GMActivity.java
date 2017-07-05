@@ -135,7 +135,7 @@ public class GMActivity extends Activity
                         R.string.help_help
                       };
 
-  final static int mNrButton1 = 8;
+  static int mNrButton1 = 0;
   private Button[]     mButton1;
   HorizontalListView   mListView;
   HorizontalButtonView mButtonView1;
@@ -149,12 +149,12 @@ public class GMActivity extends Activity
 
   BitmapDrawable mBMtoggle;
   BitmapDrawable mBMtoggle_no;
-  BitmapDrawable mBMcover;
-  BitmapDrawable mBMcover_no;
-  BitmapDrawable mBMread;
-  BitmapDrawable mBMread_no;
-  BitmapDrawable mBMwrite;
-  BitmapDrawable mBMwrite_no;
+  BitmapDrawable mBMcover    = null;
+  BitmapDrawable mBMcover_no = null;
+  BitmapDrawable mBMread     = null;
+  BitmapDrawable mBMread_no  = null;
+  BitmapDrawable mBMwrite    = null;
+  BitmapDrawable mBMwrite_no = null;
   BitmapDrawable mBMdownload;
   BitmapDrawable mBMdownload_on;
   BitmapDrawable mBMbluetooth;
@@ -555,8 +555,10 @@ public class GMActivity extends Activity
       }
     }
     mButton1[BTN_DOWNLOAD].setBackgroundDrawable( mBMdownload );
-    mButton1[BTN_BT].setBackgroundDrawable( mBMbluetooth );
-    mButton1[BTN_BT].setEnabled( true );
+    // mButton1[BTN_BT].setBackgroundDrawable( mBMbluetooth );
+    // mButton1[BTN_BT].setEnabled( true );
+    // mButton1[BTN_TOGGLE].setEnabled( true );
+    enableButtons( true );
   }
     
   @Override
@@ -681,6 +683,9 @@ public class GMActivity extends Activity
     mListView = (HorizontalListView) findViewById(R.id.listview);
     int size = mApp.setListViewHeight( mListView );
 
+    mNrButton1 = 5;
+    if ( TDSetting.mLevelOverBasic  ) mNrButton1 += 1; // COVER
+    if ( TDSetting.mLevelOverNormal ) mNrButton1 += 2; // READ WRITE
     Resources res = getResources();
     mButton1 = new Button[ mNrButton1 ];
     for ( int k=0; k<mNrButton1; ++k ) {
@@ -688,16 +693,20 @@ public class GMActivity extends Activity
     }
     mBMdownload     = MyButton.getButtonBackground( mApp, res, izons[BTN_DOWNLOAD] ); 
     mBMdownload_on  = MyButton.getButtonBackground( mApp, res, izonsno[BTN_DOWNLOAD] );
-    mBMtoggle       = MyButton.getButtonBackground( mApp, res, izons[BTN_TOGGLE] );
-    mBMtoggle_no    = MyButton.getButtonBackground( mApp, res, izonsno[BTN_TOGGLE] );
-    mBMcover        = MyButton.getButtonBackground( mApp, res, izons[BTN_COVER] );
-    mBMcover_no     = MyButton.getButtonBackground( mApp, res, izonsno[BTN_COVER] );
-    mBMread         = MyButton.getButtonBackground( mApp, res, izons[BTN_READ] );
-    mBMread_no      = MyButton.getButtonBackground( mApp, res, izonsno[BTN_READ] );
-    mBMwrite        = MyButton.getButtonBackground( mApp, res, izons[BTN_WRITE] );
-    mBMwrite_no     = MyButton.getButtonBackground( mApp, res, izonsno[BTN_WRITE] );
     mBMbluetooth    = MyButton.getButtonBackground( mApp, res, izons[BTN_BT] );
     mBMbluetooth_no = MyButton.getButtonBackground( mApp, res, izonsno[BTN_BT] );
+    mBMtoggle       = MyButton.getButtonBackground( mApp, res, izons[BTN_TOGGLE] );
+    mBMtoggle_no    = MyButton.getButtonBackground( mApp, res, izonsno[BTN_TOGGLE] );
+    if ( TDSetting.mLevelOverBasic ) {
+      mBMcover        = MyButton.getButtonBackground( mApp, res, izons[BTN_COVER] );
+      mBMcover_no     = MyButton.getButtonBackground( mApp, res, izonsno[BTN_COVER] );
+    }
+    if ( TDSetting.mLevelOverNormal ) {
+      mBMread         = MyButton.getButtonBackground( mApp, res, izons[BTN_READ] );
+      mBMread_no      = MyButton.getButtonBackground( mApp, res, izonsno[BTN_READ] );
+      mBMwrite        = MyButton.getButtonBackground( mApp, res, izons[BTN_WRITE] );
+      mBMwrite_no     = MyButton.getButtonBackground( mApp, res, izonsno[BTN_WRITE] );
+    }
 
     enableWrite( false );
 
@@ -731,42 +740,41 @@ public class GMActivity extends Activity
   private void enableWrite( boolean enable ) 
   {
     mEnableWrite = enable;
-    mButton1[BTN_COVER].setEnabled( enable );
-    mButton1[BTN_WRITE].setEnabled( enable );
-    if ( enable ) {
-      mButton1[BTN_COVER].setBackgroundDrawable( mBMcover );
-      mButton1[BTN_WRITE].setBackgroundDrawable( mBMwrite );
-    } else {
-      mButton1[BTN_COVER].setBackgroundDrawable( mBMcover_no );
-      mButton1[BTN_WRITE].setBackgroundDrawable( mBMwrite_no );
+    if ( TDSetting.mLevelOverBasic ) {
+      mButton1[BTN_COVER].setEnabled( enable );
+      mButton1[BTN_COVER].setBackgroundDrawable( ( enable ? mBMcover : mBMcover_no ) );
+    }
+    if ( TDSetting.mLevelOverNormal ) {
+      mButton1[BTN_WRITE].setEnabled( enable );
+      mButton1[BTN_WRITE].setBackgroundDrawable( ( enable ? mBMwrite : mBMwrite_no ) );
     }
   }
 
   @Override
   public void enableButtons( boolean enable )
   {
+    boolean enable2 = enable && mEnableWrite;
+
     mButton1[BTN_TOGGLE].setEnabled( enable );
     mButton1[BTN_BT].setEnabled( enable );
-    mButton1[BTN_READ].setEnabled( enable );
-    mButton1[BTN_WRITE].setEnabled( enable && mEnableWrite );
-    mButton1[BTN_COVER].setEnabled( enable && mEnableWrite );
+    if ( TDSetting.mLevelOverBasic ) {
+      mButton1[BTN_COVER].setEnabled( enable2 );
+      mButton1[BTN_COVER].setBackgroundDrawable( ( enable2 ? mBMcover : mBMcover_no ) );
+    }
+    if ( TDSetting.mLevelOverNormal ) {
+      mButton1[BTN_READ].setEnabled( enable );
+      mButton1[BTN_READ].setBackgroundDrawable( ( enable ? mBMread : mBMread_no ) );
+      mButton1[BTN_WRITE].setEnabled( enable2 );
+      mButton1[BTN_WRITE].setBackgroundDrawable( ( enable2 ? mBMwrite : mBMwrite_no ) );
+    }
     if ( enable ) {
       setTitleColor( TDColor.NORMAL );
       mButton1[BTN_TOGGLE].setBackgroundDrawable( mBMtoggle );
       mButton1[BTN_BT].setBackgroundDrawable( mBMbluetooth );
-      mButton1[BTN_READ].setBackgroundDrawable( mBMread );
     } else {
       setTitleColor( TDColor.CONNECTED );
       mButton1[BTN_TOGGLE].setBackgroundDrawable( mBMtoggle_no );
       mButton1[BTN_BT].setBackgroundDrawable( mBMbluetooth_no );
-      mButton1[BTN_READ].setBackgroundDrawable( mBMread_no );
-    }
-    if ( enable && mEnableWrite ) {
-      mButton1[BTN_COVER].setBackgroundDrawable( mBMcover );
-      mButton1[BTN_WRITE].setBackgroundDrawable( mBMwrite );
-    } else {
-      mButton1[BTN_COVER].setBackgroundDrawable( mBMcover_no );
-      mButton1[BTN_WRITE].setBackgroundDrawable( mBMwrite_no );
     }
   }
 
@@ -803,8 +811,10 @@ public class GMActivity extends Activity
     if ( b == mButton1[BTN_TOGGLE] ) { // TOGGLE
       enableButtons( false );
       new CalibToggleTask( this, this, mApp ).execute();
+
     } else if ( b == mButton1[BTN_BT] ) { // BLUETOOTH
       doBluetooth( b );
+
     } else if ( b == mButton1[BTN_DOWNLOAD] ) { // DOWNLOAD
       if ( ! mApp.checkCalibrationDeviceMatch() ) {
         Toast.makeText( this, R.string.calib_device_mismatch, Toast.LENGTH_LONG ).show();
@@ -825,6 +835,7 @@ public class GMActivity extends Activity
         mButton1[ BTN_DOWNLOAD ].setBackgroundDrawable( mBMdownload_on );
         enableButtons( false );
       }
+
     } else if ( b == mButton1[BTN_GROUP] ) { // GROUP
       if ( mApp.mCID >= 0 ) {
         List< CalibCBlock > list = mApp.mDData.selectAllGMs( mApp.mCID, 0 );
@@ -846,6 +857,7 @@ public class GMActivity extends Activity
         resetTitle( );
         Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT ).show();
       }
+
     } else if ( b == mButton1[BTN_COMPUTE] ) { // COMPUTE
       if ( mApp.mCID >= 0 ) {
         setTitle( R.string.calib_compute_coeffs );
@@ -858,7 +870,8 @@ public class GMActivity extends Activity
       } else {
         Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT ).show();
       }
-    } else if ( b == mButton1[BTN_COVER] ) { // COVER
+
+    } else if ( TDSetting.mLevelOverBasic && b == mButton1[BTN_COVER] ) { // COVER
       if ( mCalibration == null ) {
         Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT ).show();
       } else {
@@ -869,11 +882,12 @@ public class GMActivity extends Activity
           Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();
         }
       }
-    } else if ( b == mButton1[BTN_READ] ) { // READ
+
+    } else if ( TDSetting.mLevelOverNormal && b == mButton1[BTN_READ] ) { // READ
       enableButtons( false );
       new CalibReadTask( this, this, mApp, CalibReadTask.PARENT_GM ).execute(); // 
 
-    } else if ( b == mButton1[BTN_WRITE] ) { // WRITE
+    } else if (TDSetting.mLevelOverNormal &&  b == mButton1[BTN_WRITE] ) { // WRITE
       // if ( mEnableWrite ) {
         if ( mCalibration == null ) {
           Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT).show();
