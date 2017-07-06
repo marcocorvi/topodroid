@@ -524,7 +524,7 @@
     <!-- UNUSED string name="button_redo"      >Nochmals      </string -->
     <!-- UNUSED string name="button_regroup"   >Umgruppieren   </string -->
     <string name="button_dump"      >Lesen</string>
-    <!-- TODO string name="button_rename"    >Rename    </string -->
+    <string name="button_rename"    >Umbenennen    </string>
     <string name="button_replace"   >Ersetzen   </string>
     <string name="button_reset"     >Zurücksetzen</string>
     <string name="button_left"      >LINKS</string>
@@ -532,7 +532,7 @@
     <string name="button_clear"     >Entfernen</string>
     <string name="button_save"      >Speichern</string>
     <!-- UNUSED string name="button_select"    >Wählen     </string -->
-    <!-- TODO string name="button_split"     >Split     </string -->
+    <string name="button_split"     >Aufteilen     </string>
     <string name="button_store"     >Speichern</string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
@@ -781,7 +781,7 @@
     <string name="title_shift">Verschieben</string>
     <string name="title_shot_delete">Messung löschen ?</string>
     <string name="title_sensor_edit">Sensordaten</string>
-    <!-- TODO string name="title_split">Sketch split</string -->
+    <string name="title_split">Skizze aufteilen</string>
 
 <!-- SKETCH_3D titles -->
     <!-- NO string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
@@ -916,10 +916,10 @@
   <string name="pref_vert_splay_title">Neigung für gestrichelte Linien</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string -->
   <string name="pref_vert_splay_message">Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string>
-  <!-- TODO string name="pref_shared_xsections_title">Shared x-sections</string -->
-  <!-- TODO string name="pref_shared_xsections_summary">At-station x-sections shared among sketches</string -->
-  <!-- TODO string name="xsections_shared">Shared X-sections</string -->
-  <!-- TODO string name="xsections_private">Private X-sections</string -->
+  <string name="pref_shared_xsections_title">Querschnitt Sichtabrkeit</string>
+  <string name="pref_shared_xsections_summary">Querschnitte nur auf einer oder auf allen Skizzen</string>
+  <string name="xsections_shared">Auf allen Skizzen</string>
+  <string name="xsections_private">Nur auf einer Skizze</string>
 
 
   <string name="pref_survey_stations_title">Strategie Vermessung</string>
