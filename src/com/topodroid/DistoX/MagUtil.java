@@ -45,9 +45,9 @@ class MagUtil
   static final double WMM_UNCERTAINTY_D_OFFSET = 0.24;
   static final double WMM_UNCERTAINTY_D_COEF = 5432;
 
-  static final double M_PI = Math.PI;
-  static final double RAD2DEG = 180.0/M_PI;
-  static final double DEG2RAD = M_PI/180.0;
+  // static final double M_PI = Math.PI;
+  // static final double RAD2DEG = 180.0/M_PI;
+  // static final double DEG2RAD = M_PI/180.0;
 
   static final double MAG_PS_MIN_LAT_DEGREE  = -55; /* Minimum Latitude for  Polar Stereographic projection in degrees   */
   static final double MAG_PS_MAX_LAT_DEGREE  =  55; /* Maximum Latitude for Polar Stereographic projection in degrees     */

@@ -209,7 +209,7 @@ public class DrawingPointLinePath extends DrawingPath
         float x2 = next.x - pt.x;
         float y2 = next.y - pt.y;
         float cos = (x1*x2 + y1*y2)/(float)Math.sqrt((x1*x1+y1*y1)*(x2*x2+y2*y2));
-        if ( cos >= 0.7 ) {
+        if ( cos >= TDSetting.mReduceCosine ) {
           prev.mNext = next;
           next.mPrev = prev; 
         } else {

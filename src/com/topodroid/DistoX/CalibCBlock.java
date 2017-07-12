@@ -17,8 +17,6 @@ import java.util.Locale;
 
 public class CalibCBlock
 {
-  private static final float grad2rad = TDMath.GRAD2RAD;
-
   private static int[] colors = { // 0xffcccccc, 0xffffcccc, 0xffccccff 
     TDColor.LIGHT_GRAY,
     TDColor.LIGHT_PINK,
@@ -67,13 +65,13 @@ public class CalibCBlock
   public boolean isFarFrom( float b0, float c0, float thr )
   {
     computeBearingAndClino();
-    float c = c0 * grad2rad;
-    float b = b0 * grad2rad;
+    float c = c0 * TDMath.DEG2RAD;
+    float b = b0 * TDMath.DEG2RAD;
     Vector v1 = new Vector( (float)Math.cos(c) * (float)Math.cos(b), 
                             (float)Math.cos(c) * (float)Math.sin(b),
                             (float)Math.sin(c) );
-    c = mClino   * grad2rad; 
-    b = mBearing * grad2rad;
+    c = mClino   * TDMath.DEG2RAD; 
+    b = mBearing * TDMath.DEG2RAD;
     Vector v2 = new Vector( (float)Math.cos(c) * (float)Math.cos(b), 
                             (float)Math.cos(c) * (float)Math.sin(b),
                             (float)Math.sin(c) );
@@ -151,9 +149,9 @@ public class CalibCBlock
     mRoll    =   TDMath.atan2( g.y, g.z );
     if ( mBearing < 0.0f ) mBearing += TDMath.M_2PI;
     if ( mRoll < 0.0f ) mRoll += TDMath.M_2PI;
-    mClino   *= TDMath.RAD2GRAD;
-    mBearing *= TDMath.RAD2GRAD;
-    mRoll    *= TDMath.RAD2GRAD;
+    mClino   *= TDMath.RAD2DEG;
+    mBearing *= TDMath.RAD2DEG;
+    mRoll    *= TDMath.RAD2DEG;
   }
 
   public String toString()
@@ -164,7 +162,7 @@ public class CalibCBlock
     PrintWriter pw  = new PrintWriter(sw);
     computeBearingAndClino();
     pw.format(Locale.US, "%d <%d> %5.1f %5.1f %5.1f %6.4f",
-      mId, mGroup, mBearing*ua, mClino*ua, mRoll*ua, mError*TDMath.RAD2GRAD );
+      mId, mGroup, mBearing*ua, mClino*ua, mRoll*ua, mError*TDMath.RAD2DEG );
     if ( TDSetting.mRawCData == 1 ) {
       pw.format( "  %d %d %d  %d %d %d", gx, gy, gz, mx, my, mz );
     } else if ( TDSetting.mRawCData == 2 ) {

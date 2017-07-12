@@ -30,87 +30,88 @@ class TDSetting
 
   static final String[] key = { // prefs keys
     // ------------------------- PRIMARY PREFS
-    "DISTOX_EXTRA_BUTTONS",       //  0 TODO move to general options
-    "DISTOX_SIZE_BUTTONS",        // "DISTOX_BUTTON_SIZE",         //  1
-    "DISTOX_TEXT_SIZE",           //  2
-    "DISTOX_MKEYBOARD",           //  3
-    "DISTOX_TEAM",                //  4
-    "DISTOX_COSURVEY",            //  5
-    "DISTOX_INIT_STATION",        //  6 default initial station for sketches
-    "DISTOX_AZIMUTH_MANUAL",      //  7
+    "DISTOX_EXTRA_BUTTONS",       // Activity Level
+    "DISTOX_SIZE_BUTTONS",        // size of buttons (S, N, M, L, XL)
+    "DISTOX_TEXT_SIZE",           // size of tetx [pt]
+    "DISTOX_MKEYBOARD",           // whether to use TopoDroid keypads
+    "DISTOX_TEAM",                // default team
+    "DISTOX_COSURVEY",            // whether to enable co-surveying
+    "DISTOX_INIT_STATION",        // default initial station name
+    "DISTOX_AZIMUTH_MANUAL",      // whether the "extend" is fixed L or R, selected by hand 
 
-    "DISTOX_DEVICE",              //  8 N.B. indexKeyDeviceName - USED by TopoDroidApp to store the device
-    "DISTOX_BLUETOOTH",           //  9
+    "DISTOX_DEVICE",              // N.B. indexKeyDeviceName - USED by TopoDroidApp to store the device
+    "DISTOX_BLUETOOTH",           // whether to check bluetooth on start
 
-    "DISTOX_LOCALE",              // 10
-    "DISTOX_CWD",                 // 11 CWD must be the last of primary preferences
+    "DISTOX_LOCALE",              // language
+    "DISTOX_CWD",                 // CWD must be the last of primary preferences
 
     // ----------------------- DEVICE PREFERNCES 
-    "DISTOX_SOCK_TYPE",           // 11
-    "DISTOX_COMM_RETRY",          // 12
-    "DISTOX_WAIT_LASER",
-    "DISTOX_WAIT_SHOT",
-    "DISTOX_WAIT_DATA",
-    "DISTOX_WAIT_CONN",
-    "DISTOX_Z6_WORKAROUND",       // 13
-    "DISTOX_CONN_MODE",           // 14
-    "DISTOX_AUTO_PAIR",           // 15
-    "DISTOX_SOCKET_DELAY",        // 16
-    "DISTOX_AUTO_RECONNECT",      // 17
-    "DISTOX_HEAD_TAIL",
+    "DISTOX_SOCK_TYPE",           // socket type
+    "DISTOX_COMM_RETRY",          // number of socket connection attempts
+    "DISTOX_WAIT_LASER",          // msec wait after command "laser ON"
+    "DISTOX_WAIT_SHOT",           // msec wait after command "take shot"
+    "DISTOX_WAIT_DATA",           // msec wait after a data/vector packet
+    "DISTOX_WAIT_CONN",           // msec wait after getting "NO PACKET"
+    "DISTOX_Z6_WORKAROUND",       // whether to enable Z6 workaround
+    "DISTOX_CONN_MODE",           // data download mode [on-demand, continuous]
+    "DISTOX_AUTO_PAIR",           // whether to auto-pair the discovered DistoX
+    "DISTOX_SOCKET_DELAY",        // delay before a socket-connection attempt
+    "DISTOX_AUTO_RECONNECT",      // whether to try to reconnect if DistoX is lost [continuos mode]
+    "DISTOX_HEAD_TAIL",           // whether to read head-tail to get the number of packets to download
 
     // ------------------- SURVEY PREFERENCES
-    "DISTOX_CLOSE_DISTANCE",      // 18
-    "DISTOX_EXTEND_THR2",         // 19
-    "DISTOX_VTHRESHOLD",          // 20 LRUD vertical threshold
-    "DISTOX_SURVEY_STATION",      // 21 DISTOX_SURVEY_STATIONS must not be used
-    "DISTOX_UNIT_LENGTH",         // 22
-    "DISTOX_UNIT_ANGLE",          // 23
-    "DISTOX_ACCEL_PERCENT",           // 24 shot quality thresholds
-    "DISTOX_MAG_PERCENT",
-    "DISTOX_DIP_THR",             // 26
-    "DISTOX_LOOP_CLOSURE_VALUE",  // 27 whether to close loop
-    "DISTOX_CHECK_ATTACHED",      // 28
-    "DISTOX_PREV_NEXT",         
-    "DISTOX_MAX_SHOT_LENGTH",
-    "DISTOX_MIN_LEG_LENGTH",
+    "DISTOX_CLOSE_DISTANCE",      // tolerance among leg shots [%]
+    "DISTOX_EXTEND_THR2",         // half angle around 90 where splays have "vert" extend
+    "DISTOX_VTHRESHOLD",          // if shot clino is above, LRUD are horizontal
+    "DISTOX_SURVEY_STATION",      // DISTOX_SURVEY_STATIONS must not be used
+    "DISTOX_UNIT_LENGTH",         // units of lengths [m, y, ft]
+    "DISTOX_UNIT_ANGLE",          // units of angles [deg, grad]
+    "DISTOX_ACCEL_PERCENT",       // shot quality G threshold [%]
+    "DISTOX_MAG_PERCENT",         // shot quality M threhsold [%]
+    "DISTOX_DIP_THR",             // shot qualoity dip threshold [deg]
+    "DISTOX_LOOP_CLOSURE_VALUE",  // whether to close loop
+    "DISTOX_CHECK_ATTACHED",      // whether to check all shots are connected
+    "DISTOX_PREV_NEXT",           // whether to put "prev-next" arrows in shot edit dialog
+    "DISTOX_MAX_SHOT_LENGTH",     // maximum length of a shot data
+    "DISTOX_MIN_LEG_LENGTH",      // minimum length of a shot data
 
-    "DISTOX_UNIT_LOCATION",       // 29 
-    "DISTOX_CRS",                 // 30
+    "DISTOX_UNIT_LOCATION",       // units of location [ddmmss dec.deg]
+    "DISTOX_CRS",                 // default C.R.S.
      
     // -------------------- CALIB PREFERENCES
-    "DISTOX_GROUP_BY",            // 31
-    "DISTOX_GROUP_DISTANCE",      // 32
-    "DISTOX_CALIB_EPS",           // 33
-    "DISTOX_CALIB_MAX_IT",        // 34
-    "DISTOX_RAW_CDATA",           // 35
-    "DISTOX_CALIB_ALGO",          // 36
+    "DISTOX_GROUP_BY",            // calib data grouping policy
+    "DISTOX_GROUP_DISTANCE",      // calib data grouping by the distance threshold
+    "DISTOX_CALIB_EPS",           // calib computation param EPS
+    "DISTOX_CALIB_MAX_IT",        // calib computation maximun number of iterations
+    "DISTOX_RAW_CDATA",           // whether to display also raw calib data
+    "DISTOX_CALIB_ALGO",          // calib algo [auto, linear, non-linear]
 
     // -------------------- SKETCH PREFERENCES
-    "DISTOX_AUTO_STATIONS",       // 37
-    "DISTOX_CLOSENESS",           // 38
-    "DISTOX_ERASENESS",           // 38
-    "DISTOX_MIN_SHIFT",          
-    "DISTOX_POINTING",
-    "DISTOX_LINE_SEGMENT",
-    "DISTOX_LINE_ACCURACY",
-    "DISTOX_LINE_CORNER",         // 41
-    "DISTOX_LINE_STYLE",          // 42
-    "DISTOX_DRAWING_UNIT",        // 43
-    "DISTOX_PICKER_TYPE",         // 44
-    "DISTOX_HTHRESHOLD",          // UNUSED
-    "DISTOX_STATION_SIZE",        // 46
-    "DISTOX_LABEL_SIZE",          // 47
-    "DISTOX_LINE_THICKNESS",      // 48
-    "DISTOX_AUTO_SECTION_PT",     // 49
-    "DISTOX_BACKUP_NUMBER",
-    "DISTOX_BACKUP_INTERVAL",
-    "DISTOX_SHARED_XSECTIONS",
+    "DISTOX_AUTO_STATIONS",      // whether to add stations to thetion th2 exports
+    "DISTOX_CLOSENESS",          // "select" radius
+    "DISTOX_ERASENESS",          // "erase" radius
+    "DISTOX_MIN_SHIFT",          // maximum amount for a shift (to avoid jumps)
+    "DISTOX_POINTING",           // "size" of a "point touch" (max distance between down and up)
+    "DISTOX_LINE_SEGMENT",       // minimum distance between consecutive points on a line
+    "DISTOX_LINE_ACCURACY",      // Bezier interpolator param:
+    "DISTOX_LINE_CORNER",        // Bezier interpolator param:
+    "DISTOX_LINE_STYLE",         // line style: 0 bezier, 1 fine, 2 normal, 3 coarse
+    "DISTOX_DRAWING_UNIT",       // plot unit
+    "DISTOX_PICKER_TYPE",        // tool picker: most-recent, list, grid, triple-grid
+    "DISTOX_HTHRESHOLD",         // if clino is over thr, H_SECTION is horizontal (has north arrow)
+    "DISTOX_STATION_SIZE",       // size of station names [pt]
+    "DISTOX_LABEL_SIZE",         // size of labels [pt]
+    "DISTOX_LINE_THICKNESS",     // thickness of normal lines (walls are twice)
+    "DISTOX_AUTO_SECTION_PT",    // whther to add section point when tracing a section line
+    "DISTOX_BACKUP_NUMBER",      // number of plot backups
+    "DISTOX_BACKUP_INTERVAL",    // minimum interval between plot backups [60 s]
+    "DISTOX_SHARED_XSECTIONS",   // whether at-station X-sections are shared among plots
+    // "DISTOX_PLOT_CACHE",
 
     // -------------------- LASER PREFERENCES
-    "DISTOX_SHOT_TIMER",          // 50 // bearing-clino timer
-    "DISTOX_BEEP_VOLUME",         // 51
-    "DISTOX_LEG_SHOTS",           // 52 nr. of shots to make a leg
+    "DISTOX_SHOT_TIMER",         // bearing-clino timer [1/10 s]
+    "DISTOX_BEEP_VOLUME",        // bearing-clino beep volume [%]
+    "DISTOX_LEG_SHOTS",          // nr. of shots to make a leg [2, 3, 4]
 
     // -------------------- 3D-MODEL PREFERENCES
     "DISTOX_SKETCH_MODEL_TYPE",   
@@ -119,61 +120,62 @@ class TDSetting
     "DISTOX_COMPASS_READINGS",    // 55
 
     // -------------------- IMPORT-EXPORT PREFERENCES
-    "DISTOX_SPLAY_EXTEND",        // 56 whether to set extend to splay shots
-    "DISTOX_BITMAP_SCALE",        // 57
-    "DISTOX_THUMBNAIL",           // 58
-    "DISTOX_DOT_RADIUS",          // 59
-    "DISTOX_FIXED_THICKNESS",     // 60
-    "DISTOX_ARROW_LENGTH",        // 61
-    "DISTOX_EXPORT_SHOTS",        // 62
-    "DISTOX_EXPORT_PLOT",        // 63
-    "DISTOX_THERION_MAPS",
-    "DISTOX_SVG_GRID",           // export grid in SVG 
-    "DISTOX_SVG_IN_HTML",
-    "DISTOX_KML_STATIONS",     
-    "DISTOX_KML_SPLAYS",
+    "DISTOX_SPLAY_EXTEND",       // whether to set L/R extend to LRUD splay shots (Compass, VTopo import)
+    "DISTOX_BITMAP_SCALE",       // default bitmap scale
+    "DISTOX_THUMBNAIL",          // size of photo thumbnails
+    "DISTOX_DOT_RADIUS",         // radius of green dots
+    "DISTOX_FIXED_THICKNESS",    // thickness of fixed lines
+    "DISTOX_ARROW_LENGTH",       // length of the tick at the first line-point (when applicable)
+    "DISTOX_EXPORT_SHOTS",       // default data export
+    "DISTOX_EXPORT_PLOT",        // default plot export
+    "DISTOX_THERION_MAPS",       // whether to put map commands before centerline in therion
+    "DISTOX_SVG_GRID",           // whether to export grid in SVG 
+    "DISTOX_SVG_IN_HTML",        // whether to export SVG embedded in HTML
+    "DISTOX_KML_STATIONS",       // whether to add station points to KML export
+    "DISTOX_KML_SPLAYS",         // whether to add splay lines to KML export
 
-    "DISTOX_SPLAY_VERT_THRS",     // 64 over mSplayVertThrs splays are not displayed in plan view
-    "DISTOX_BACKSIGHT",           // 65
-    "DISTOX_MAG_ANOMALY",         // 66 whether to compensate magnetic anomaly
-    "DISTOX_VERT_SPLAY",          // 68 over this splay are shown with dashed line
-    "DISTOX_STATION_PREFIX",      // 69 whether to add cave-name prefix to stations (cSurvey/compass)
-    "DISTOX_STATION_NAMES",
-    "DISTOX_ZOOM_CTRL",           // 71
-    "DISTOX_SIDE_DRAG",           // 72 whether to enable side-drag
-    "DISTOX_DXF_SCALE", 
+    "DISTOX_SPLAY_VERT_THRS",    // splays with clino over mSplayVertThrs are not displayed in plan view
+    "DISTOX_BACKSIGHT",          // whether to add backsight fields in manual shot input dialog
+    "DISTOX_MAG_ANOMALY",        // whether to compensate magnetic anomaly
+    "DISTOX_VERT_SPLAY",         // splays with clino over this are shown with dashed line
+    "DISTOX_STATION_PREFIX",     // whether to add cave-name prefix to stations (cSurvey/Compass export)
+    "DISTOX_STATION_NAMES",      // station names: 0 alphanumeric, 1 numbers
+    "DISTOX_ZOOM_CTRL",          // whether to have zoom-ctrl (no, temp., always)
+    "DISTOX_SIDE_DRAG",          // whether to enable side-drag
+    "DISTOX_DXF_SCALE",          // default DXF scale (export)
     // "DISTOX_ACAD_VERSION",
-    "DISTOX_BITMAP_BGCOLOR",      // 75
-    "DISTOX_SURVEX_EOL",          // 76 survex end of line
-    "DISTOX_SURVEX_SPLAY",
-    "DISTOX_SURVEX_LRUD",         // 78
-    "DISTOX_SWAP_LR",             // swap Left-Right in compass export
-    "DISTOX_UNSCALED_POINTS",     // 79 unscaled drawing point items
-    "DISTOX_UNIT_GRID",           // 80
-    // "DISTOX_XTHERION_AREAS",      // 81 save areas a-la xtherion
-    "DISTOX_THERION_SPLAYS",
-    "DISTOX_RECENT_NR",           // 82 number of most recent items (item picker)
-    "DISTOX_AREA_BORDER",         // 83 area border visibility
-    "DISTOX_ORTHO_LRUD",          // 86 orthogonal LRUD ( >=1 disable, min 0 )
+    "DISTOX_BITMAP_BGCOLOR",     // bitmap background color [RGB]
+    "DISTOX_SURVEX_EOL",         // survex end of line [either Linux or Windows]
+    "DISTOX_SURVEX_SPLAY",       // whether to name endpoint of splays in Survex export
+    "DISTOX_SURVEX_LRUD",        // whether to add LRUD to Survex export
+    "DISTOX_SWAP_LR",            // whether to swap Left-Right in Compass export
+    "DISTOX_UNSCALED_POINTS",    // whether drawing point items should stay unscaled when zooming
+    "DISTOX_UNIT_GRID",          // plot grid unit [m, y, 2ft]
+    // "DISTOX_XTHERION_AREAS",  // save areas a-la xtherion
+    "DISTOX_THERION_SPLAYS",     // whether to add u:splay lines to Therion th2 export
+    "DISTOX_RECENT_NR",          // number of most recent items (item picker)
+    "DISTOX_AREA_BORDER",        // area border visibility
+    "DISTOX_ORTHO_LRUD",         // orthogonal LRUD ( >=1 disable, min 0 )
+    "DISTOX_REDUCE_ANGLE",       // "rock" reducing lines: maximal angle
     // "DISTOX_SECTION_STATIONS",    //
 
     "DISTOX_WALLS_TYPE",          // 87
-    "DISTOX_WALLS_PLAN_THR",      // 88
-    "DISTOX_WALLS_EXTENDED_THR",  // 89
-    "DISTOX_WALLS_XCLOSE",        // 90
-    "DISTOX_WALLS_XSTEP",         // 91
-    "DISTOX_WALLS_CONCAVE",       // 92
+    "DISTOX_WALLS_PLAN_THR",      // clino threshold for splays to contrinute to walls in plan view
+    "DISTOX_WALLS_EXTENDED_THR",  // clino threshold for splays to contribute to walls in profile view
+    "DISTOX_WALLS_XCLOSE",        // 
+    "DISTOX_WALLS_XSTEP",         // 
+    "DISTOX_WALLS_CONCAVE",       // allowed "concavity"
 
-    "DISTOX_DXF_BLOCKS", // DISTOX_DXF_BLOCKS
+    "DISTOX_DXF_BLOCKS",          // whether to export point items as Blocks in DXF export
 
     // "DISTOX_SKETCH_USES_SPLAYS",  // 
     // "DISTOX_SKETCH_BERDER_STEP",
     // "DISTOX_SKETCH_SECTION_STEP", // 
 
-    "DISTOX_ALGO_MIN_ALPHA",
-    "DISTOX_ALGO_MIN_BETA",
-    "DISTOX_ALGO_MIN_GAMMA",
-    "DISTOX_ALGO_MIN_DELTA",
+    "DISTOX_ALGO_MIN_ALPHA",      // min-algo params: alpha
+    "DISTOX_ALGO_MIN_BETA",       //                  beta
+    "DISTOX_ALGO_MIN_GAMMA",      //                  gamma
+    "DISTOX_ALGO_MIN_DELTA",      //                  delta
 
   };
 
@@ -359,6 +361,9 @@ class TDSetting
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // SKETCH DRAWING
 
+  static float mReduceAngle  = 45;    // minimal angle between segments of "straightened" lines
+  static float mReduceCosine = 0.7f;  // cosine of mReduceAngle
+
   // static boolean mZoomControls = false;
   static int mZoomCtrl = 1;
   static boolean mSideDrag = false;
@@ -403,6 +408,7 @@ class TDSetting
   static int   mBackupNumber   = 5;
   static int   mBackupInterval = 60;
   static boolean mSharedXSections = false; // default value
+  // static boolean mPlotCache       = true;  // default value
   static float mDotRadius      = 5;
   static float mArrowLength    = 8;
 
@@ -652,7 +658,7 @@ class TDSetting
     mExtendThr     = tryFloat( prefs, key[k++], "10"   ); // DISTOX_EXTEND_THR2
     mVThreshold    = tryFloat( prefs, key[k++], "80"   ); // DISTOX_VTHRESHOLD
 
-    parseSurveyStations( prefs.getString( key[k++], "1" ) ); // DISTOX_SURVEY_STATIONS 
+    parseSurveyStations( prefs.getString( key[k++], "1" ) ); // DISTOX_SURVEY_STATIONS
 
     if ( prefs.getString( key[k++], UNIT_LENGTH ).equals(UNIT_LENGTH) ) {
       mUnitLength = 1.0f;
@@ -715,6 +721,7 @@ class TDSetting
     mBackupNumber  = tryInt(   prefs, key[k++], "5" );              // DISTOX_BACKUP_NUMBER
     mBackupInterval = tryInt(  prefs, key[k++], "60" );             // DISTOX_BACKUP_INTERVAL
     mSharedXSections = prefs.getBoolean( key[k++], false );         // DISTOX_SHARED_XSECTIONS
+    // mPlotCache       = prefs.getBoolean( key[k++], true  );         // DISTOX_PLOT_CACHE
 
     mTimerWait     = tryInt(   prefs, key[k++], "10" );             // DISTOX_SHOT_TIMER
     mBeepVolume    = tryInt(   prefs, key[k++], "50" );             // DISTOX_BEEP_VOLUME
@@ -774,6 +781,9 @@ class TDSetting
     mAreaBorder = prefs.getBoolean( key[k++], true );         // DISTOX_AREA_BORDER
 
     mOrthogonalLRUDAngle  = tryFloat( prefs, key[k++], "0");  // DISTOX_ORTHO_LRUD
+    mReduceAngle          = tryFloat( prefs, key[k++], "45"); // DISTOX_REDUCE_ANGLE
+    mReduceCosine = (float)Math.cos( mReduceAngle * TDMath.DEG2RAD );
+
     mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
     mOrthogonalLRUD       = ( mOrthogonalLRUDAngle < 0.000001f ); 
 
@@ -1031,6 +1041,8 @@ class TDSetting
     
     } else if ( k.equals( key[ nk++ ] ) ) {
       mSharedXSections  = prefs.getBoolean( k, false ); // DISTOX_SHARED_XSECTIONS
+    // } else if ( k.equals( key[ nk++ ] ) ) {
+    //   mPlotCache        = prefs.getBoolean( k, true  ); // DISTOX_PLOT_CACHE
 
     } else if ( k.equals( key[ nk++ ] ) ) {
       mTimerWait        = tryInt( prefs, k, "10" );  // DISTOX_SHOT_TIMER
@@ -1131,6 +1143,9 @@ class TDSetting
       mOrthogonalLRUDAngle  = tryFloat( prefs, k, "0");
       mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
       mOrthogonalLRUD       = ( mOrthogonalLRUDAngle < 0.000001f ); 
+    } else if ( k.equals( key[ nk++ ] ) ) {       // DISTOX_REDUCE_ANGLE
+      mReduceAngle  = tryFloat( prefs, k, "45");
+      mReduceCosine = (float)Math.cos( mReduceAngle * TDMath.DEG2RAD );
 
     // } else if ( k.equals( key[ nk++ ] ) ) {       // DISTOX_SECTION_STATIONS
     //   mSectionStations = tryInt( prefs, k, "3");
@@ -1364,6 +1379,7 @@ class TDSetting
     if ( name.equals( "DISTOX_BACKUP_NUMBER"  ) ) return parseIntValue( value, mBackupNumber,    4, 10 );
     if ( name.equals( "DISTOX_BACKUP_INTERVAL") ) return parseIntValue( value, mBackupInterval,  5, 600 );
     // if ( name.equals( "DISTOX_SHARED_XSECTIONS") ) 
+    // if ( name.equals( "DISTOX_PLOT_CACHE") ) 
 
     // if ( name.equals( "DISTOX_TEAM" )
     if ( name.equals( "DISTOX_SHOT_TIMER"     ) ) return parseIntValue( value, mTimerWait, 0 );
@@ -1418,6 +1434,7 @@ class TDSetting
     //C if ( name.equals( "DISTOX_RECENT_NR" )
     //B if ( name.equals( "DISTOX_AREA_BORDER" )
     if ( name.equals( "DISTOX_ORTHO_LRUD" ) ) return parseFloatValue( value, mOrthogonalLRUDAngle, 0, 90 );
+    if ( name.equals( "DISTOX_REDUCE_ANGLE" ) ) return parseFloatValue( value, mReduceAngle, 0, 90 );
 
     //C if ( name.equals( "DISTOX_WALLS_TYPE" )
     if ( name.equals( "DISTOX_WALLS_PLAN_THR"     ) ) return parseFloatValue( value, mWallsPlanThr, 0, 90 );

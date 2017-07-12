@@ -115,7 +115,7 @@ public class DistoXStatDialog extends MyDialog
         mTextComponent.setText( String.format( res.getString(R.string.stat_component), mStat.countComponent ) );
 
         mTextAngleErr.setText( String.format( res.getString(R.string.stat_angle_error), 
-            mNum.angleErrorMean() * TDMath.RAD2GRAD, mNum.angleErrorStddev() * TDMath.RAD2GRAD ) );
+            mNum.angleErrorMean() * TDMath.RAD2DEG, mNum.angleErrorStddev() * TDMath.RAD2DEG ) );
 
    
         // mList.setOnItemClickListener( this );

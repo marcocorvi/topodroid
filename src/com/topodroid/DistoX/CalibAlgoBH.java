@@ -371,9 +371,9 @@ public class CalibAlgoBH extends CalibAlgo
     }
     mDelta  = mDelta / cnt;
     mDelta2 = (float)Math.sqrt(mDelta2/cnt - mDelta*mDelta);
-    mDelta    *= TDMath.RAD2GRAD; // convert avg and std0-dev from radians to degrees
-    mDelta2   *= TDMath.RAD2GRAD;
-    mMaxError *= TDMath.RAD2GRAD;
+    mDelta    *= TDMath.RAD2DEG; // convert avg and std0-dev from radians to degrees
+    mDelta2   *= TDMath.RAD2DEG;
+    mMaxError *= TDMath.RAD2DEG;
     // Log.v("DistoX", "Delta " + mDelta + " " + mDelta2 + " cnt " + cnt + " max " + mMaxError );
 
     EnforceMax2( bG, aG );

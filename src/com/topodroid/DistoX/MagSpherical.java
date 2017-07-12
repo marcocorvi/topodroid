@@ -35,8 +35,8 @@ class MagSpherical
   
   MagVector toCartesian( )
   {
-    double radphi    = phig   * MagUtil.RAD2DEG;
-    double radlambda = lambda * MagUtil.RAD2DEG;
+    double radphi    = phig   * TDMath.RAD2DEG;
+    double radlambda = lambda * TDMath.RAD2DEG;
     return new MagVector(
       r * Math.cos(radphi) * Math.cos(radlambda),
       r * Math.cos(radphi) * Math.sin(radlambda),

@@ -523,8 +523,8 @@ class SymbolPoint extends Symbol
             DrawingDxf.printXYZ( pw, cx*dxfScale, -cy*dxfScale, 0.0f, 0 );
             DrawingDxf.printFloat( pw, 40, r*dxfScale );
             DrawingDxf.printString( pw, 100, "AcDbArc" );
-            DrawingDxf.printFloat( pw, 50, a1 * TDMath.RAD2GRAD );
-            DrawingDxf.printFloat( pw, 51, a2 * TDMath.RAD2GRAD );
+            DrawingDxf.printFloat( pw, 50, a1 * TDMath.RAD2DEG );
+            DrawingDxf.printFloat( pw, 51, a2 * TDMath.RAD2DEG );
     
             x00 = x2 * dxfScale;
             y00 = y2 * dxfScale;
@@ -608,7 +608,7 @@ class SymbolPoint extends Symbol
             //           (x0+x1)/2*dxfScale, -(y0+y1)/2*dxfScale, 0.0f,                 // CENTER
             //           x1*dxfScale, -(y0+y1)/2*dxfScale, 0.0f,                        // ENDPOINT OF MAJOR AXIS
             //           (y1-y0)/(x1-x0),                                              // RATIO MINOR/MAJOR
-            //           x2*TDMath.GRAD2RAD, (x2+y2)*TDMath.GRAD2RAD );  // START and END PARAMS
+            //           x2*TDMath.DEG2RAD, (x2+y2)*TDMath.DEG2RAD );  // START and END PARAMS
             DrawingDxf.printString( pw, 0, "ARC" );
             DrawingDxf.printString( pw, 8, "POINT" );
             DrawingDxf.printAcDb(pw, -1, "AcDbEntity", "AcDbCircle" );

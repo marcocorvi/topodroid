@@ -1792,8 +1792,8 @@ public class DrawingWindow extends ItemDrawer
       float xto=0;
       float yto=0;
       // normal, horizontal and cross-product
-      float mc = mClino   * TDMath.GRAD2RAD;
-      float ma = mAzimuth * TDMath.GRAD2RAD;
+      float mc = mClino   * TDMath.DEG2RAD;
+      float ma = mAzimuth * TDMath.DEG2RAD;
       float X0 = (float)Math.cos( mc ) * (float)Math.cos( ma );  // X = North
       float Y0 = (float)Math.cos( mc ) * (float)Math.sin( ma );  // Y = East
       float Z0 = (float)Math.sin( mc );                        // Z = Up
@@ -1843,8 +1843,8 @@ public class DrawingWindow extends ItemDrawer
           }
         }
         if ( blk != null ) {
-          float bc = blk.mClino * TDMath.GRAD2RAD;
-          float bb = blk.mBearing * TDMath.GRAD2RAD;
+          float bc = blk.mClino * TDMath.DEG2RAD;
+          float bb = blk.mBearing * TDMath.DEG2RAD;
           float X = (float)Math.cos( bc ) * (float)Math.cos( bb );
           float Y = (float)Math.cos( bc ) * (float)Math.sin( bb );
           float Z = (float)Math.sin( bc );
@@ -1879,8 +1879,8 @@ public class DrawingWindow extends ItemDrawer
         }
 
         float d = b.mLength;
-        float bc = b.mClino * TDMath.GRAD2RAD;
-        float bb = b.mBearing * TDMath.GRAD2RAD;
+        float bc = b.mClino * TDMath.DEG2RAD;
+        float bb = b.mBearing * TDMath.DEG2RAD;
         float X = (float)Math.cos( bc ) * (float)Math.cos( bb ); // North
         float Y = (float)Math.cos( bc ) * (float)Math.sin( bb ); // East
         float Z = (float)Math.sin( bc );                       // Up
@@ -2767,7 +2767,7 @@ public class DrawingWindow extends ItemDrawer
                         String to   = "-1";
                         float clino = 0;
 
-                        float azimuth = 90 + (float)(Math.atan2( l2.x-l1.x, -l2.y+l1.y ) * TDMath.RAD2GRAD );
+                        float azimuth = 90 + (float)(Math.atan2( l2.x-l1.x, -l2.y+l1.y ) * TDMath.RAD2DEG );
                         azimuth = TDMath.in360( azimuth );
 
                         DBlock blk = null;
@@ -2817,7 +2817,7 @@ public class DrawingWindow extends ItemDrawer
                             }
                           }
                         } else { // null block
-                          azimuth = 90 + (float)(Math.atan2( l2.x-l1.x, -l2.y+l1.y ) * TDMath.RAD2GRAD );
+                          azimuth = 90 + (float)(Math.atan2( l2.x-l1.x, -l2.y+l1.y ) * TDMath.RAD2DEG );
                           azimuth = TDMath.in360( azimuth );
                         }
                         // Log.v("DistoX", "new section " + from + " - " + to );

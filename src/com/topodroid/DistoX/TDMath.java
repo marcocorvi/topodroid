@@ -22,18 +22,18 @@ public class TDMath
   static final float M_PI2 = M_PI/2;        // Math.PI/2
   static final float M_PI4 = M_PI/4;        // Math.PI/4
   static final float M_PI8 = M_PI/8;        // Math.PI/8
-  static final float RAD2GRAD = (180.0f/M_PI);
-  static final float GRAD2RAD = (M_PI/180.0f);
+  static final float RAD2DEG = (180.0f/M_PI);
+  static final float DEG2RAD = (M_PI/180.0f);
 
   static float abs( float x )   { return (float)( Math.abs(x) ); }
   static float cos( float x )   { return (float)Math.cos( x ); }
-  static float cosd( float xd ) { return (float)Math.cos( xd * GRAD2RAD ); }
+  static float cosd( float xd ) { return (float)Math.cos( xd * DEG2RAD ); }
   static float sin( float x )   { return (float)Math.sin( x ); }
-  static float sind( float xd ) { return (float)Math.sin( xd * GRAD2RAD ); }
+  static float sind( float xd ) { return (float)Math.sin( xd * DEG2RAD ); }
   static float atan2( float y, float x ) { return (float)( Math.atan2( y, x ) ); }
-  static float atan2d( float y, float x ) { return (float)( RAD2GRAD * Math.atan2( y, x ) ); }
+  static float atan2d( float y, float x ) { return (float)( RAD2DEG * Math.atan2( y, x ) ); }
   static float acos( float x )   { return (float)( Math.acos( x ) ); }
-  static float acosd( float x )  { return (float)( RAD2GRAD * Math.acos( x ) ); }
+  static float acosd( float x )  { return (float)( RAD2DEG * Math.acos( x ) ); }
   static float sqrt( float x )   { return (float)Math.sqrt( x ); }
 
   static float in360( float f )
@@ -50,7 +50,7 @@ public class TDMath
     return f;
   }
 
-  static float degree2slope( float deg ) { return (float)(100 * Math.tan( deg * GRAD2RAD ) ); }
-  static float slope2degree( float slp ) { return (float)( Math.atan( slp/100 ) * RAD2GRAD ); }
+  static float degree2slope( float deg ) { return (float)(100 * Math.tan( deg * DEG2RAD ) ); }
+  static float slope2degree( float slp ) { return (float)( Math.atan( slp/100 ) * RAD2DEG ); }
 
 }

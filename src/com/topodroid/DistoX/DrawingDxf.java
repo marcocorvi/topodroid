@@ -33,7 +33,6 @@ import android.util.Log;
 
 class DrawingDxf
 {
-  private static final float grad2rad = TDMath.GRAD2RAD;
   private static boolean mVersion13 = false;
 
   static final float POINT_SCALE   = 10.0f;
@@ -835,18 +834,18 @@ class DrawingDxf
             //   printString( pw41, 8, "SPLAY" );
             //   // printInt( pw41, 39, 1 );         // line thickness
 
-            //   float dhs = scale * blk.mLength * (float)Math.cos( blk.mClino * grad2rad )*SCALE_FIX; // scaled dh
+            //   float dhs = scale * blk.mLength * (float)Math.cos( blk.mClino * TDMath.DEG2RAD )*SCALE_FIX; // scaled dh
             //   if ( type == PlotInfo.PLOT_PLAN ) {
             //     float x = scale * DrawingUtil.toSceneX( f.e );
             //     float y = scale * DrawingUtil.toSceneY( f.s );
-            //     float de =   dhs * (float)Math.sin( blk.mBearing * grad2rad);
-            //     float ds = - dhs * (float)Math.cos( blk.mBearing * grad2rad);
+            //     float de =   dhs * (float)Math.sin( blk.mBearing * TDMath.DEG2RAD);
+            //     float ds = - dhs * (float)Math.cos( blk.mBearing * TDMath.DEG2RAD);
             //     printXYZ( pw41, x, -y, 0.0f, 0 );
             //     printXYZ( pw41, x + de, -(y+ds), 0.0f, 1 );
             //   } else if ( PlotInfo.isProfile( type ) ) {
             //     float x = scale * DrawingUtil.toSceneX( f.h );
             //     float y = scale * DrawingUtil.toSceneY( f.v );
-            //     float dv = - blk.mLength * (float)Math.sin( blk.mClino * grad2rad )*SCALE_FIX;
+            //     float dv = - blk.mLength * (float)Math.sin( blk.mClino * TDMath.DEG2RAD )*SCALE_FIX;
             //     printXYZ( pw41, x, -y, 0.0f, 0 );
             //     printXYZ( pw41, x+dhs*blk.getReducedExtend(), -(y+dv), 0.0f, 1 ); 
             //   } else if ( type == PlotInfo.PLOT_SECTION ) {

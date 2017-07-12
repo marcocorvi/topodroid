@@ -35,8 +35,6 @@ import android.util.Log;
 
 class DrawingSvg
 {
-  private static final float grad2rad = TDMath.GRAD2RAD;
-
   private static void printSvgGrid( BufferedWriter out, List<DrawingPath> grid, String color, float opacity, float xoff, float yoff )
   {
     if ( grid != null && grid.size() > 0 ) {
@@ -177,17 +175,17 @@ class DrawingSvg
             // // if ( sh.mType == DrawingPath.DRAWING_PATH_SPLAY ) {
             //   NumStation f = num.getStation( blk.mFrom );
             //   pw41.format("  <path stroke-width=\"1\" stroke=\"grey\" d=\"");
-            //   float dh = blk.mLength * (float)Math.cos( blk.mClino * grad2rad )*SCALE_FIX;
+            //   float dh = blk.mLength * (float)Math.cos( blk.mClino * TDMath.DEG2RAD )*SCALE_FIX;
             //   if ( type == PlotInfo.PLOT_PLAN ) {
             //     float x = xoff + DrawingUtil.toSceneX( f.e ); 
             //     float y = yoff + DrawingUtil.toSceneY( f.s );
-            //     float de =   dh * (float)Math.sin( blk.mBearing * grad2rad);
-            //     float ds = - dh * (float)Math.cos( blk.mBearing * grad2rad);
+            //     float de =   dh * (float)Math.sin( blk.mBearing * TDMath.DEG2RAD);
+            //     float ds = - dh * (float)Math.cos( blk.mBearing * TDMath.DEG2RAD);
             //     pw41.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x + de, (y+ds) );
             //   } else if ( PlotInfo.isProfile( type ) ) { // FIXME OK PROFILE
             //     float x = xoff + DrawingUtil.toSceneX( f.h );
             //     float y = yoff + DrawingUtil.toSceneY( f.v );
-            //     float dv = - blk.mLength * (float)Math.sin( blk.mClino * grad2rad )*SCALE_FIX;
+            //     float dv = - blk.mLength * (float)Math.sin( blk.mClino * TDMath.DEG2RAD )*SCALE_FIX;
             //     int ext = blk.getReducedExtend();
             //     pw41.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x+dh*ext, (y+dv) );
             //   }

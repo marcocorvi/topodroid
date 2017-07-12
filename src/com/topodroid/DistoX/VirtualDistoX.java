@@ -383,10 +383,10 @@ public class VirtualDistoX
     Vector vn = ve.cross( vg );
 
     float xg = vg.x; // (1,0,0) * vg
-    float clino = (float)( Math.acos( xg ) ) * TDMath.RAD2GRAD;
+    float clino = (float)( Math.acos( xg ) ) * TDMath.RAD2DEG;
     if ( clino > 90 ) clino -= 180;
     Vector vh = new Vector( 1-xg*vg.x, 0-xg*vg.y, 0-xg*vg.z ); // X - (X*G) G = proj of X on E-N plane
-    float azimuth = (float)( Math.atan2( vh.dot(ve), vh.dot(vn) ) ) * TDMath.RAD2GRAD;
+    float azimuth = (float)( Math.atan2( vh.dot(ve), vh.dot(vn) ) ) * TDMath.RAD2DEG;
     if ( azimuth < 0 ) azimuth += 360;
     int ia = (int)(azimuth * 0x8000 / 180.0f);
     int ic = ( clino >= 0 )? (int)(clino * 0x4000 / 90.0f) : (int)(0x10000 + clino * 0x4000 / 90.0f);

@@ -60,7 +60,7 @@ public class CalibAlgoMin extends CalibAlgo
   {
     Vector g = bG.plus( aG.timesV( gs ) );
     g.normalize();
-    return (float)Math.acos( g.x ) * TDMath.RAD2GRAD;
+    return (float)Math.acos( g.x ) * TDMath.RAD2DEG;
   }
 
   float azimuth( Vector gs, Vector ms )
@@ -73,7 +73,7 @@ public class CalibAlgoMin extends CalibAlgo
     m.normalize();
     float gm = g.dot( m );
  
-    return (float)Math.acos( (gx*gm - m.x)/Math.sqrt((1-gx*gx)*(1-gm*gm)) ) * TDMath.RAD2GRAD;
+    return (float)Math.acos( (gx*gm - m.x)/Math.sqrt((1-gx*gx)*(1-gm*gm)) ) * TDMath.RAD2DEG;
 
     // Vector e = g ^ m;
     // Vector n = e ^ g;
@@ -739,9 +739,9 @@ public class CalibAlgoMin extends CalibAlgo
       mDelta  = mDelta / cnt;
       mDelta2 = (float)Math.sqrt(mDelta2/cnt - mDelta*mDelta);
     }
-    mDelta    *= TDMath.RAD2GRAD; // convert avg and std0-dev from radians to degrees
-    mDelta2   *= TDMath.RAD2GRAD;
-    mMaxError *= TDMath.RAD2GRAD;
+    mDelta    *= TDMath.RAD2DEG; // convert avg and std0-dev from radians to degrees
+    mDelta2   *= TDMath.RAD2DEG;
+    mMaxError *= TDMath.RAD2DEG;
     // Log.v("DistoX", "Delta " + mDelta + " " + mDelta2 + " cnt " + cnt + " max " + mMaxError );
 
     EnforceMax2( bG, aG );

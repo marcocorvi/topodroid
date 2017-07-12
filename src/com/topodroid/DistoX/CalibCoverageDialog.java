@@ -146,7 +146,7 @@ public class CalibCoverageDialog extends MyDialog
 
     angles = new Direction [ t_dim ];
     for (int k = 0; k<19; ++k ){
-      float clino = clino_angles[k] * TDMath.GRAD2RAD;
+      float clino = clino_angles[k] * TDMath.DEG2RAD;
       for (int j=t_offset[k]; j<t_offset[k]+t_size[k]; ++j ) {
         angles[j] = new Direction(
                       TDMath.M_PI + ( TDMath.M_2PI * (j - t_offset[k]) ) / t_size[k],
@@ -196,8 +196,8 @@ public class CalibCoverageDialog extends MyDialog
       } else {
         b.computeBearingAndClino( transform );
       }
-      float compass = b.mBearing * TDMath.GRAD2RAD;
-      float clino   = b.mClino   * TDMath.GRAD2RAD;
+      float compass = b.mBearing * TDMath.DEG2RAD;
+      float clino   = b.mClino   * TDMath.DEG2RAD;
       if ( b.mGroup == old_grp ) {
         if ( cnt_avg > 0 && Math.abs( compass - compass_avg / cnt_avg ) > 1.5f * TDMath.M_PI ) {
           if ( compass > TDMath.M_PI ) {

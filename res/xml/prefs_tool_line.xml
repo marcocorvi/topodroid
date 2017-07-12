@@ -5,36 +5,33 @@
 
 <!-- TOOL SCREEN -->
 
-     <!-- com.topodroid.DistoX.MyEditPreference
+     <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_LINE_THICKNESS"
        android:title="@string/pref_line_thickness_title"
        android:summary="@string/pref_line_thickness_summary"
        android:dialogTitle="@string/pref_line_thickness_title"
        android:dialogMessage="@string/pref_line_thickness_message"
        android:inputType="numberDecimal"
-       android:defaultValue="1"
-     / -->
+       android:defaultValue="1" />
 
-     <!-- com.topodroid.DistoX.MyListPreference
+     <com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_LINE_STYLE"
        android:summary="@string/pref_linestyle_summary"
        android:title="@string/pref_linestyle_title"
        android:defaultValue="2"
        android:entries="@array/lineStyle"
-       android:entryValues="@array/lineStyleValue"
-     / -->
+       android:entryValues="@array/lineStyleValue" />
 
-     <!-- com.topodroid.DistoX.MyEditPreference
+     <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_LINE_SEGMENT"
        android:title="@string/pref_segment_title"
        android:summary="@string/pref_segment_message"
        android:dialogTitle="@string/pref_segment_title"
        android:dialogMessage="@string/pref_segment_message"
        android:inputType="number"
-       android:defaultValue="10"
-     / -->
+       android:defaultValue="10" />
 
-     <!-- com.topodroid.DistoX.MyEditPreference
+     <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_ARROW_LENGTH"
        android:title="@string/pref_arrow_length_title"
        android:summary="@string/pref_arrow_length_message"
@@ -42,9 +39,9 @@
        android:dialogMessage="@string/pref_arrow_length_message"
        android:inputType="numberDecimal"
        android:defaultValue="8"
-     / -->
+     />
 
-     <!-- com.topodroid.DistoX.MyEditPreference
+     <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_REDUCE_ANGLE"
        android:title="@string/pref_reduce_angle_title"
        android:summary="@string/pref_reduce_angle_summary"
@@ -52,40 +49,38 @@
        android:dialogMessage="@string/pref_reduce_angle_message"
        android:inputType="numberDecimal"
        android:defaultValue="45"
-     / -->
+     />
 
-     <!-- CheckBoxPreference
+     <CheckBoxPreference
        android:key="DISTOX_AUTO_SECTION_PT"
        android:summary="@string/pref_auto_section_pt_summary"
        android:title="@string/pref_auto_section_pt_title"
        android:defaultValue="true"
-       / -->
+       />
 
-     <!-- CheckBoxPreference
+     <CheckBoxPreference
        android:key="DISTOX_AREA_BORDER"
        android:summary="@string/pref_area_border_summary"
        android:title="@string/pref_area_border_title"
        android:defaultValue="true"
-       / -->
+       />
 
-     <!-- com.topodroid.DistoX.MyEditPreference
+     <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_LINE_ACCURACY"
        android:title="@string/pref_lineacc_title"
        android:summary="@string/pref_lineacc_summary"
        android:dialogTitle="@string/pref_lineacc_title"
        android:dialogMessage="@string/pref_lineacc_message"
        android:inputType="numberDecimal"
-       android:defaultValue="1.0"
-     / -->
+       android:defaultValue="1.0" />
 
-     <!-- com.topodroid.DistoX.MyEditPreference
+     <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_LINE_CORNER"
        android:title="@string/pref_linecorner_title"
        android:summary="@string/pref_linecorner_summary"
        android:dialogTitle="@string/pref_linecorner_title"
        android:dialogMessage="@string/pref_linecorner_message"
        android:inputType="numberDecimal"
-       android:defaultValue="20.0"
-     / -->
+       android:defaultValue="20.0" />
 
 </PreferenceScreen>

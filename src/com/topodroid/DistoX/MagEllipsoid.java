@@ -74,16 +74,16 @@ class MagEllipsoid
     double t = Math.sqrt( g*g  + (f - v*g)/(2.0*g - e) ) - g;
   
     double rlat = Math.atan( (a*(1.0 - t*t)) / (2.0*modified_b*t) );
-    ret.phi = MagUtil.RAD2DEG * rlat;
+	    ret.phi = TDMath.RAD2DEG * rlat;
           
     /* 5.0 compute height above ellipsoid */
     ret.HeightAboveEllipsoid = (r - a*t) * Math.cos(rlat) + (V.z - modified_b) * Math.sin(rlat);
   
     /* 6.0 compute longitude east of Greenwich */
     double zlong = Math.atan2( V.y, V.x );
-    if ( zlong < 0.0 ) zlong= zlong + 2 * MagUtil.M_PI;
+    if ( zlong < 0.0 ) zlong= zlong + 2 * TDMath.M_PI;
   
-    ret.lambda = MagUtil.RAD2DEG * zlong;
+    ret.lambda = TDMath.RAD2DEG * zlong;
     while(ret.lambda > 180) ret.lambda-=360;
     return ret;
   }
@@ -100,8 +100,8 @@ class MagEllipsoid
   /** Eq. 7 p. 8 */
   MagSpherical geodeticToSpherical( MagGeodetic geodetic )
   {
-    double CosLat = Math.cos( MagUtil.DEG2RAD * geodetic.phi );
-    double SinLat = Math.sin( MagUtil.DEG2RAD * geodetic.phi );
+    double CosLat = Math.cos( TDMath.DEG2RAD * geodetic.phi );
+    double SinLat = Math.sin( TDMath.DEG2RAD * geodetic.phi );
     double rc = a / Math.sqrt(1.0 - epssq * SinLat * SinLat);
 
     double xp = (rc + geodetic.HeightAboveEllipsoid) * CosLat;
@@ -109,7 +109,7 @@ class MagEllipsoid
     double r = Math.sqrt(xp * xp + zp * zp);
     return new MagSpherical( 
       geodetic.lambda,                        // lambda: longitude 
-      MagUtil.RAD2DEG * ( Math.asin(zp / r)), // phig: geocentric latitude 
+      TDMath.RAD2DEG * ( Math.asin(zp / r)), // phig: geocentric latitude 
       r );
   }
 

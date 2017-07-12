@@ -113,7 +113,7 @@ public class DrawingLabelPath extends DrawingPointPath
   private void makeLabelPath( float f )
   {
     float len = 20 * f * mPointText.length();
-    float a = (float)(mOrientation) * TDMath.GRAD2RAD;
+    float a = (float)(mOrientation) * TDMath.DEG2RAD;
     float ca = len * TDMath.cos( a );
     float sa = len * TDMath.sin( a );
     makeStraightPath( 0, 0, ca, sa, cx, cy );

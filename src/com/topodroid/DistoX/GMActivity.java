@@ -296,10 +296,10 @@ public class GMActivity extends Activity
     double std0 = Math.sqrt( calib0.getStatError2() / calib0.getStatCount() - ave0 * ave0 + 1e-8 );
     double ave1 = calib1.getStatError() / calib1.getStatCount();
     double std1 = Math.sqrt( calib1.getStatError2() / calib1.getStatCount() - ave1 * ave1 + 1e-8 );
-    ave0 *= TDMath.RAD2GRAD;
-    std0 *= TDMath.RAD2GRAD;
-    ave1 *= TDMath.RAD2GRAD;
-    std1 *= TDMath.RAD2GRAD;
+    ave0 *= TDMath.RAD2DEG;
+    std0 *= TDMath.RAD2DEG;
+    ave1 *= TDMath.RAD2DEG;
+    std1 *= TDMath.RAD2DEG;
 
     list.addAll( list1 );
     size = list.size();
@@ -322,9 +322,9 @@ public class GMActivity extends Activity
     }
     err1 /= size;
     err2 = Math.sqrt( err2/size - err1 * err1 );
-    err1 *= TDMath.RAD2GRAD;
-    err2 *= TDMath.RAD2GRAD;
-    errmax *= TDMath.RAD2GRAD;
+    err1 *= TDMath.RAD2DEG;
+    err2 *= TDMath.RAD2DEG;
+    errmax *= TDMath.RAD2DEG;
     new CalibValidateResultDialog( this, errors0, errors1, errors,
                                    ave0, std0, ave1, std1, err1, err2, errmax, name, mApp.myCalib ).show();
   }

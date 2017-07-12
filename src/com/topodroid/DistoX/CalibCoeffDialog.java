@@ -119,7 +119,7 @@ public class CalibCoeffDialog extends MyDialog
     for ( int k=0; k<bin; ++k ) hist[k] = 0;
     if ( error != null ) {
       for ( int k=0; k < error.length; ++ k ) {
-        int i = (int)( error[k]*10*TDMath.RAD2GRAD );
+        int i = (int)( error[k]*10*TDMath.RAD2DEG );
         if ( i < bin && i >= 0 ) ++ hist[i];
       }
     }

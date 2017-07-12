@@ -133,8 +133,8 @@ class GeomagLib
     elems.Z = result.z;
     elems.H = Math.sqrt(result.x * result.x + result.y * result.y); // horiz magn. fld strength
     elems.F = Math.sqrt(elems.H * elems.H + result.z * result.z); // magn. fld strength
-    elems.Decl = MagUtil.RAD2DEG*( Math.atan2(elems.Y, elems.X) ); // angle Magn. Fld and North (pos. east)
-    elems.Incl = MagUtil.RAD2DEG*( Math.atan2(elems.Z, elems.H) ); // angle Magn. Fld and horiz plan (pos. down)
+    elems.Decl = TDMath.RAD2DEG*( Math.atan2(elems.Y, elems.X) ); // angle Magn. Fld and North (pos. east)
+    elems.Incl = TDMath.RAD2DEG*( Math.atan2(elems.Z, elems.H) ); // angle Magn. Fld and horiz plan (pos. down)
     return elems;
   } /*MAG_CalculateGeoMagneticElements */
 
@@ -170,8 +170,8 @@ class GeomagLib
     ret.Z = grad.z;
     ret.H = (ret.X * elems.X + ret.Y * elems.Y) / elems.H;
     ret.F = (ret.X * elems.X + ret.Y * elems.Y + ret.Z * elems.Z) / elems.F;
-    ret.Decl = MagUtil.RAD2DEG * (elems.X * ret.Y - elems.Y * ret.X) / (elems.H * elems.H);
-    ret.Incl = MagUtil.RAD2DEG * (elems.H * ret.Z - elems.Z * ret.H) / (elems.F * elems.F);
+    ret.Decl = TDMath.RAD2DEG * (elems.X * ret.Y - elems.Y * ret.X) / (elems.H * elems.H);
+    ret.Incl = TDMath.RAD2DEG * (elems.H * ret.Z - elems.Z * ret.H) / (elems.F * elems.F);
     ret.GV = ret.Decl;
     return ret;
   }
@@ -186,8 +186,8 @@ class GeomagLib
     elems.Zdot = var.z;
     elems.Hdot = (elems.X * elems.Xdot + elems.Y * elems.Ydot) / elems.H; /* See equation 19 in the WMM technical report */
     elems.Fdot = (elems.X * elems.Xdot + elems.Y * elems.Ydot + elems.Z * elems.Zdot) / elems.F;
-    elems.Decldot = MagUtil.RAD2DEG * (elems.X * elems.Ydot - elems.Y * elems.Xdot) / (elems.H * elems.H);
-    elems.Incldot = MagUtil.RAD2DEG * (elems.H * elems.Zdot - elems.Z * elems.Hdot) / (elems.F * elems.F);
+    elems.Decldot = TDMath.RAD2DEG * (elems.X * elems.Ydot - elems.Y * elems.Xdot) / (elems.H * elems.H);
+    elems.Incldot = TDMath.RAD2DEG * (elems.H * elems.Zdot - elems.Z * elems.Hdot) / (elems.F * elems.F);
     elems.GVdot = elems.Decldot;
   } /*MAG_CalculateSecularVariationElements*/
 
@@ -195,12 +195,12 @@ class GeomagLib
   {
     MagElement errors = new MagElement(); 
     /*errors.Decl, errors.Incl, errors.F are all assumed to exist*/
-    double cos2D = Math.cos( MagUtil.DEG2RAD*B.Decl) * Math.cos( MagUtil.DEG2RAD*B.Decl);
-    double cos2I = Math.cos( MagUtil.DEG2RAD*B.Incl) * Math.cos( MagUtil.DEG2RAD*B.Incl);
-    double sin2D = Math.sin( MagUtil.DEG2RAD*B.Decl) * Math.sin( MagUtil.DEG2RAD*B.Decl);
-    double sin2I = Math.sin( MagUtil.DEG2RAD*B.Incl) * Math.sin( MagUtil.DEG2RAD*B.Incl);
-    double eD = MagUtil.DEG2RAD * errors.Decl;
-    double eI = MagUtil.DEG2RAD * errors.Incl;
+    double cos2D = Math.cos( TDMath.DEG2RAD*B.Decl) * Math.cos( TDMath.DEG2RAD*B.Decl);
+    double cos2I = Math.cos( TDMath.DEG2RAD*B.Incl) * Math.cos( TDMath.DEG2RAD*B.Incl);
+    double sin2D = Math.sin( TDMath.DEG2RAD*B.Decl) * Math.sin( TDMath.DEG2RAD*B.Decl);
+    double sin2I = Math.sin( TDMath.DEG2RAD*B.Incl) * Math.sin( TDMath.DEG2RAD*B.Incl);
+    double eD = TDMath.DEG2RAD * errors.Decl;
+    double eI = TDMath.DEG2RAD * errors.Incl;
     double EDSq = eD*eD;
     double EISq = eI*eI;
     errors.X = Math.sqrt(cos2D*cos2I*errors.F*errors.F+B.F*B.F*sin2D*cos2I*EDSq+B.F*B.F*cos2D*sin2I*EISq);
@@ -215,8 +215,8 @@ class GeomagLib
   MagUTMParams MAG_GetTransverseMercator(MagGeodetic geodetic )
   {
     /*   Get the map projection  parameters */
-    double Lambda = MagUtil.DEG2RAD * geodetic.lambda;
-    double Phi    = MagUtil.DEG2RAD * geodetic.phi;
+    double Lambda = TDMath.DEG2RAD * geodetic.lambda;
+    double Phi    = TDMath.DEG2RAD * geodetic.phi;
 
     MagUTMParams utm0 = MAG_GetUTMParameters( Phi, Lambda );
     if ( utm0 == null ) return null; // out of UTM range
@@ -260,21 +260,21 @@ class GeomagLib
    */
   MagUTMParams  MAG_GetUTMParameters(double Latitude, double Longitude )
   {
-    if ( (Latitude < MagUtil.DEG2RAD*MagUtil.MAG_UTM_MIN_LAT_DEGREE)
-      || (Latitude > MagUtil.DEG2RAD*MagUtil.MAG_UTM_MAX_LAT_DEGREE) ) {
+    if ( (Latitude < TDMath.DEG2RAD*MagUtil.MAG_UTM_MIN_LAT_DEGREE)
+      || (Latitude > TDMath.DEG2RAD*MagUtil.MAG_UTM_MAX_LAT_DEGREE) ) {
       /* Latitude out of range */
       return null;
     }
-    if ((Longitude < - MagUtil.M_PI) || (Longitude > (2 * MagUtil.M_PI))) {
+    if ((Longitude < - TDMath.M_PI) || (Longitude > (2 * TDMath.M_PI))) {
       /* Longitude out of range */
       return null;
     }
 
-    if (Longitude < 0) Longitude += (2 * MagUtil.M_PI) + 1.0e-10;
-    long Lat_Degrees  = (long) (Latitude  * MagUtil.RAD2DEG );
-    long Long_Degrees = (long) (Longitude * MagUtil.RAD2DEG );
-    long temp_zone = (Longitude < MagUtil.M_PI )? (long) (31 + ((Longitude * MagUtil.RAD2DEG ) / 6.0))
-                                        : (long) (((Longitude * MagUtil.RAD2DEG ) / 6.0) - 29);
+    if (Longitude < 0) Longitude += (2 * TDMath.M_PI) + 1.0e-10;
+    long Lat_Degrees  = (long) (Latitude  * TDMath.RAD2DEG );
+    long Long_Degrees = (long) (Longitude * TDMath.RAD2DEG );
+    long temp_zone = (Longitude < TDMath.M_PI )? (long) (31 + ((Longitude * TDMath.RAD2DEG ) / 6.0))
+                                        : (long) (((Longitude * TDMath.RAD2DEG ) / 6.0) - 29);
     if (temp_zone > 60) temp_zone = 1;
     /* UTM special cases */
     if((Lat_Degrees > 55) && (Lat_Degrees < 64) && (Long_Degrees > -1) && (Long_Degrees < 3)) temp_zone = 31;
@@ -299,7 +299,7 @@ class GeomagLib
 	     MagVector MagneticResultsSph )
   {
     /* Difference between the spherical and Geodetic latitudes */
-    double Psi = MagUtil.DEG2RAD * (spherical.phig - geodetic.phi);
+    double Psi = TDMath.DEG2RAD * (spherical.phig - geodetic.phi);
 
     /* Rotate spherical field components to the Geodetic system */
     return new MagVector(
@@ -346,7 +346,7 @@ class GeomagLib
        It is unnecessary to find the (-Pi, Pi] equivalent of the result.
        Compute its cosine and sine.
      */
-    double Lam = Lambda - (utm0.CentralMeridian * MagUtil.DEG2RAD);
+    double Lam = Lambda - (utm0.CentralMeridian * TDMath.DEG2RAD);
     double CLam = Math.cos(Lam); // Longitude
     double SLam = Math.sin(Lam);
     double CPhi = Math.cos(Phi); // Latitude 
@@ -442,7 +442,7 @@ class GeomagLib
       /*    Combined square roots  */
       double comroo = Math.sqrt((1 - Epssq * SPhi * SPhi) * denom2 * (sig1 * sig1 + sig2 * sig2));
       utm.PointScale = K0R4oa * 2 * denom * comroo;
-      utm.ConvergenceOfMeridians = MagUtil.RAD2DEG * ( Math.atan2(SChi * SLam, CLam) + Math.atan2(sig2, sig1) );
+      utm.ConvergenceOfMeridians = TDMath.RAD2DEG * ( Math.atan2(SChi * SLam, CLam) + Math.atan2(sig2, sig1) );
     }
     return utm;
   }
@@ -461,7 +461,7 @@ class GeomagLib
    */
   MagLegendre associatedLegendreFunction(MagSpherical spherical, int nMax )
   {
-    double sin_phi = Math.sin( MagUtil.DEG2RAD * spherical.phig ); // sin  (geocentric latitude)
+    double sin_phi = Math.sin( TDMath.DEG2RAD * spherical.phig ); // sin  (geocentric latitude)
 
     if (nMax <= 16 || (1 - Math.abs(sin_phi)) < 1.0e-10 ) { // If nMax is less tha 16 or at the poles
       return MAG_PcupLow( sin_phi, nMax );
@@ -489,8 +489,8 @@ class GeomagLib
   MagHarmonic sphericalHarmonicVariables( MagEllipsoid ellip, MagSpherical spherical, int nMax )
   {
     MagHarmonic vars = new MagHarmonic( nMax );
-    double cos_lambda = Math.cos(MagUtil.DEG2RAD * spherical.lambda);
-    double sin_lambda = Math.sin(MagUtil.DEG2RAD * spherical.lambda);
+    double cos_lambda = Math.cos(TDMath.DEG2RAD * spherical.lambda);
+    double sin_lambda = Math.sin(TDMath.DEG2RAD * spherical.lambda);
     /* for n = 0 ... model_order, compute (Radius of Earth / Spherical radius r)^(n+2)
        for n  1..nMax-1 (this is much faster than calling pow MAX_N+1 times).      */
     vars.RelativeRadiusPower[0] = (ellip.re / spherical.r) * (ellip.re / spherical.r);
@@ -551,7 +551,7 @@ class GeomagLib
                     * (double) (m) * legendre. dPcup[index] * (1/spherical.r);
         }
     }
-    double cos_phi = Math.cos( MagUtil.DEG2RAD * spherical.phig );
+    double cos_phi = Math.cos( TDMath.DEG2RAD * spherical.phig );
     if ( Math.abs(cos_phi) > 1.0e-10 ) {
         grad.y = grad.y / (cos_phi * cos_phi);
         grad.x = grad.x / (cos_phi);
@@ -793,7 +793,7 @@ class GeomagLib
                     * legendre.dPcup[index];
         }
     }
-    double cos_phi = Math.cos( MagUtil.DEG2RAD * spherical.phig );
+    double cos_phi = Math.cos( TDMath.DEG2RAD * spherical.phig );
     if ( Math.abs(cos_phi) > 1.0e-10) {
         ret.y = ret.y / cos_phi;
     } else {
@@ -814,7 +814,7 @@ class GeomagLib
     PcupS[0] = 1;
     double schmidtQuasiNorm1 = 1.0;
     res.y = 0.0;
-    double sin_phi = Math.sin( MagUtil.DEG2RAD * spherical.phig );
+    double sin_phi = Math.sin( TDMath.DEG2RAD * spherical.phig );
     for ( int n = 1; n <= model.nMaxSecVar; n++) {
         int index = (n * (n + 1) / 2 + 1);
         double schmidtQuasiNorm2 = schmidtQuasiNorm1 * (double) (2 * n - 1) / (double) n;
@@ -881,7 +881,7 @@ class GeomagLib
         }
     }
 
-    double cos_phi = Math.cos( MagUtil.DEG2RAD * spherical.phig );
+    double cos_phi = Math.cos( TDMath.DEG2RAD * spherical.phig );
     if ( Math.abs(cos_phi) > 1.0e-10) {
         ret.y = ret.y / cos_phi;
     } else {
@@ -907,7 +907,7 @@ class GeomagLib
     PcupS[0] = 1;
     double schmidtQuasiNorm1 = 1.0;
     res.y = 0.0;
-    double sin_phi = Math.sin( MagUtil.DEG2RAD * spherical.phig );
+    double sin_phi = Math.sin( TDMath.DEG2RAD * spherical.phig );
     for ( int n = 1; n <= model.nMax; n++) {
         /*Compute the ration between the Gauss-normalized associated Legendre
           functions and the Schmidt quasi-normalized version. This is equivalent to
