@@ -125,7 +125,7 @@
     <string name="few_groups">Недостаточно данных с номером группы</string>
     <!-- UNUSED string name="few_plots">Недостаточно абрисов</string -->
     <string name="few_calibs">Недостаточно калиб. замеров</string>
-    <!-- TODO string name="getting_info">Getting DistoX info ...</string -->
+    <string name="getting_info">Получение информации о DistoX...</string>
 
     <string name="calib_import_title">Импорт калибровки</string>
     <string name="import_title">Импорт файла</string>
@@ -763,7 +763,7 @@
     <string name="title_shift">Сдвиг</string>
     <string name="title_shot_delete">Удалить отрезок ?</string>
     <string name="title_sensor_edit">Сенсор</string>
-    <!-- TODO string name="title_split">Sketch split</string -->
+    <string name="title_split">Разделить абрис</string>
 
     <string name="title_stats">Статистика</string>
     <string name="title_step">Шаг</string>
