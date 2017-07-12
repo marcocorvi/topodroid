@@ -68,16 +68,20 @@ class Scanline
     long ret = -1;
     int next_pos = nextCommaOrSpace( );
     // TDLog.Log( TDLog.LOG_DB, "longValue " + pos + " " + next_pos + " " + len + " <" + val.substring(pos,next_pos) + ">" );
-    String toParse = val.substring( pos, next_pos ); // N.B. next_pos >= pos --> toParse != null
-    if ( ! toParse.equals("\"null\"") ) {
-      try {
-        ret = Long.parseLong( val.substring( pos, next_pos ) );
-      } catch ( NumberFormatException e ) {
-        TDLog.Error( "longValue error: " + val.substring( pos, next_pos ) );
+    if ( pos < next_pos ) {
+      String toParse = val.substring( pos, next_pos ); // N.B. next_pos >= pos --> toParse != null
+      if ( ! toParse.equals("\"null\"") ) {
+        try {
+          ret = Long.parseLong( val.substring( pos, next_pos ) );
+        } catch ( NumberFormatException e ) {
+          TDLog.Error( "longValue error: " + val.substring( pos, next_pos ) );
+        }
       }
+      pos = next_pos;
+      skipCommaAndSpaces( );
+    } else {
+      TDLog.Error( "longValue pos error: " + val + " " + pos + " " + next_pos );
     }
-    pos = next_pos;
-    skipCommaAndSpaces( );
     return ret;
   }
 
@@ -85,14 +89,18 @@ class Scanline
   {
     int next_pos = nextCommaOrSpace( );
     double ret = 0.0;
-    try {
-      ret = Double.parseDouble( val.substring(pos, next_pos ) );
-      // TDLog.Log( TDLog.LOG_DB, "doubleValue " + pos + " " + next_pos + " " + len + " <" + val.substring(pos,next_pos) + ">" );
-    } catch ( NumberFormatException e ) {
-      TDLog.Error( "doubleValue error: " + val.substring(pos, next_pos) );
+    if ( pos < next_pos ) {
+      try {
+        ret = Double.parseDouble( val.substring(pos, next_pos ) );
+        // TDLog.Log( TDLog.LOG_DB, "doubleValue " + pos + " " + next_pos + " " + len + " <" + val.substring(pos,next_pos) + ">" );
+      } catch ( NumberFormatException e ) {
+        TDLog.Error( "doubleValue error: " + val.substring(pos, next_pos) );
+      }
+      pos = next_pos;
+      skipCommaAndSpaces( );
+    } else {
+      TDLog.Error( "doubleValue pos error: " + val + " " + pos + " " + next_pos );
     }
-    pos = next_pos;
-    skipCommaAndSpaces( );
     return ret;
   }
 

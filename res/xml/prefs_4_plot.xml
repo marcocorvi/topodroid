@@ -85,11 +85,11 @@
        android:textColor="#ff9966ff"
        />
 
-    <!-- Preference
+    <Preference
        android:key="DISTOX_PLOT_WALLS"
        android:title="@string/pref_plot_walls_title"
        android:textColor="#ff9966ff"
-       / -->
+       />
 
 
 </PreferenceScreen>

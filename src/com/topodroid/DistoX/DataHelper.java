@@ -641,8 +641,9 @@ public class DataHelper extends DataSetObservable
     if ( myDB == null ) return;
     String[] clause = new String[]{ Long.toString( sid ) };
 
-    myDB.beginTransaction();
     try {
+      myDB.setLockingEnabled( false );
+      myDB.beginTransaction();
       myDB.delete( PHOTO_TABLE,   WHERE_SID, clause );
       myDB.delete( AUDIO_TABLE,   WHERE_SID, clause );
       myDB.delete( PLOT_TABLE,    WHERE_SID, clause );
@@ -651,10 +652,11 @@ public class DataHelper extends DataSetObservable
       myDB.delete( STATION_TABLE, WHERE_SID, clause );
       myDB.delete( SURVEY_TABLE, "id=?", clause );
       myDB.setTransactionSuccessful();
+      myDB.endTransaction();
     } catch ( SQLiteDiskIOException e ) {  handleDiskIOError( e );
     } catch ( SQLiteException e ) { logError("survey delete", e);
     } finally {
-      myDB.endTransaction();
+      myDB.setLockingEnabled( true );
     }
   }
   
@@ -971,10 +973,10 @@ public class DataHelper extends DataSetObservable
         // } catch (SQLiteException e ) { logError("shots name+ext ", e); }
       }
       myDB.setTransactionSuccessful();
+      myDB.endTransaction();
     } catch ( SQLiteDiskIOException e ) {  handleDiskIOError( e );
     } catch (SQLiteException e ) { logError("shots name+ext ", e); 
     } finally {
-      myDB.endTransaction();
       myDB.setLockingEnabled( true );
       // myDB.execSQL("PRAGMA synchronous=NORMAL");
     }
@@ -1043,11 +1045,11 @@ public class DataHelper extends DataSetObservable
         ++id;
       }
       myDB.setTransactionSuccessful();
+      myDB.endTransaction();
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch (SQLiteException e ) { logError("parser shot insert", e);
     } finally {
-      ih.close();
-      myDB.endTransaction();
+      ih.close(); // FIXME this was before endTransaction
       myDB.setLockingEnabled( true );
       // myDB.execSQL("PRAGMA synchronous=NORMAL");
     }
@@ -2466,15 +2468,18 @@ public class DataHelper extends DataSetObservable
        return null;
      }
      String value = null;
-     Cursor cursor = myDB.query( CONFIG_TABLE,
-                                 new String[] { "value" }, // columns
-                                 "key = ?", new String[] { key },
-                                 null, null, null );
-     if ( cursor != null ) {
-       if (cursor.moveToFirst()) {
+     Cursor cursor = null;
+     try {
+       cursor = myDB.query( CONFIG_TABLE,
+                            new String[] { "value" }, // columns
+                            "key = ?", new String[] { key },
+                            null, null, null );
+       if ( cursor != null && cursor.moveToFirst() ) {
          value = cursor.getString( 0 );
        }
-       if ( ! cursor.isClosed()) cursor.close();
+     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+     } finally {
+       if ( cursor != null && ! cursor.isClosed()) cursor.close();
      }
      return value;
    }
@@ -4037,9 +4042,9 @@ public class DataHelper extends DataSetObservable
 
       private void createTables( SQLiteDatabase db )
       {
-         db.setLockingEnabled( false );
-         db.beginTransaction();
          try {
+           db.setLockingEnabled( false );
+           db.beginTransaction();
            db.execSQL( 
                create_table + CONFIG_TABLE
              + " ( key TEXT NOT NULL,"
@@ -4224,10 +4229,10 @@ public class DataHelper extends DataSetObservable
            // );
 
            db.setTransactionSuccessful();
+           db.endTransaction();
          // } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
          } catch ( SQLException e ) { TDLog.Error( "createTables exception: " + e.getMessage() );
          } finally {
-           db.endTransaction();
            db.setLockingEnabled( true );
          }
       }

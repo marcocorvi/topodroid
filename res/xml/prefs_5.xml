@@ -82,6 +82,11 @@
      />
 
   <Preference
+     android:key="DISTOX_SKETCH_PREF"
+     android:title="@string/pref_cat_sketch"
+     />
+
+  <Preference
      android:key="DISTOX_DEVICE_PREF"
      android:title="@string/pref_cat_device"
      />

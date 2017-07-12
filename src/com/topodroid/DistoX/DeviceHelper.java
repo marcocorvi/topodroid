@@ -234,488 +234,496 @@ public class DeviceHelper extends DataSetObservable
   // SELECT STATEMENTS
 
 
-   public void resetAllGMs( long cid, long start_id )
-   {
-     if ( resetAllGMStmt == null )
-        resetAllGMStmt = myDB.compileStatement( "UPDATE gms SET grp=0, error=0 WHERE calibId=? AND id>? AND status=0" );
-        // resetAllGMStmt = myDB.compileStatement( "UPDATE gms SET grp=0, error=0 WHERE calibId=? AND id>?" );
-     resetAllGMStmt.bindLong( 1, cid );
-     resetAllGMStmt.bindLong( 2, start_id );
-     try {
-       resetAllGMStmt.execute();
-     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-     } catch (SQLiteException e ) { logError( "reset GM " + cid + "/" + start_id, e ); }
-   }
+  public void resetAllGMs( long cid, long start_id )
+  {
+    if ( resetAllGMStmt == null )
+       resetAllGMStmt = myDB.compileStatement( "UPDATE gms SET grp=0, error=0 WHERE calibId=? AND id>? AND status=0" );
+       // resetAllGMStmt = myDB.compileStatement( "UPDATE gms SET grp=0, error=0 WHERE calibId=? AND id>?" );
+    resetAllGMStmt.bindLong( 1, cid );
+    resetAllGMStmt.bindLong( 2, start_id );
+    try {
+      resetAllGMStmt.execute();
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } catch (SQLiteException e ) { logError( "reset GM " + cid + "/" + start_id, e ); }
+  }
 
-   public List<CalibCBlock> selectAllGMs( long cid, int status )
-   {
-     List< CalibCBlock > list = new ArrayList< CalibCBlock >();
-     // if ( myDB == null ) return list;
-     Cursor cursor = myDB.query(GM_TABLE,
-                                new String[] { "id", "gx", "gy", "gz", "mx", "my", "mz", "grp", "error", "status" }, // columns
-                                "calibId=?",
-                                new String[] { Long.toString(cid) },
-                                null,  // groupBy
-                                null,  // having
-                                "id" ); // order by
-     if (cursor.moveToFirst()) {
-       do {
-         if ( status >= (int)cursor.getLong(9) ) { // status == 0 --> only good shots
-                                                   // status == 1 --> all shots
-           CalibCBlock block = new CalibCBlock();
-           block.setId( cursor.getLong(0), cid );
-           block.setData( 
-             cursor.getLong(1),
-             cursor.getLong(2),
-             cursor.getLong(3),
-             cursor.getLong(4),
-             cursor.getLong(5),
-             cursor.getLong(6) );
-           block.setGroup( cursor.getLong(7) );
-           block.setError( (float)( cursor.getDouble(8) ) );
-           block.setStatus( cursor.getLong(9) );
-           list.add( block );
-         }
-       } while (cursor.moveToNext());
-     }
-     if (cursor != null && !cursor.isClosed()) cursor.close();
-    
-     return list;
-   }
+  public List<CalibCBlock> selectAllGMs( long cid, int status )
+  {
+    List< CalibCBlock > list = new ArrayList< CalibCBlock >();
+    // if ( myDB == null ) return list;
+    Cursor cursor = null;
+    try {
+      cursor = myDB.query(GM_TABLE,
+                          new String[] { "id", "gx", "gy", "gz", "mx", "my", "mz", "grp", "error", "status" }, // columns
+                          "calibId=?",
+                          new String[] { Long.toString(cid) },
+                          null, null, "id" );
+      if ( cursor != null && cursor.moveToFirst()) {
+        do {
+          if ( status >= (int)cursor.getLong(9) ) { // status == 0 --> only good shots
+                                                    // status == 1 --> all shots
+            CalibCBlock block = new CalibCBlock();
+            block.setId( cursor.getLong(0), cid );
+            block.setData( 
+              cursor.getLong(1),
+              cursor.getLong(2),
+              cursor.getLong(3),
+              cursor.getLong(4),
+              cursor.getLong(5),
+              cursor.getLong(6) );
+            block.setGroup( cursor.getLong(7) );
+            block.setError( (float)( cursor.getDouble(8) ) );
+            block.setStatus( cursor.getLong(9) );
+            list.add( block );
+          }
+        } while (cursor.moveToNext());
+      }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
+    return list;
+  }
 
-   public CalibCBlock selectGM( long id, long cid )
-   {
-     CalibCBlock block = null;
-     // if ( myDB == null ) return null;
-     Cursor cursor = myDB.query(GM_TABLE,
-                                new String[] { "id", "gx", "gy", "gz", "mx", "my", "mz", "grp", "error", "status" }, // columns
-                                "calibId=? and id=?", 
-                                new String[] { Long.toString(cid), Long.toString(id) },
-                                null,  // groupBy
-                                null,  // having
-                                null ); // order by
-     if (cursor.moveToFirst()) {
-       block = new CalibCBlock();
-       block.setId( cursor.getLong(0), cid );
-       block.setData( 
-         cursor.getLong(1),
-         cursor.getLong(2),
-         cursor.getLong(3),
-         cursor.getLong(4),
-         cursor.getLong(5),
-         cursor.getLong(6) );
-       block.setGroup( cursor.getLong(7) );
-       block.setError( (float)( cursor.getDouble(8) ) );
-       block.setStatus( cursor.getLong(9) );
-     }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
-     return block;
-   }
+  public CalibCBlock selectGM( long id, long cid )
+  {
+    CalibCBlock block = null;
+    // if ( myDB == null ) return null;
+    Cursor cursor = null;
+    try { 
+      cursor = myDB.query(GM_TABLE,
+                               new String[] { "id", "gx", "gy", "gz", "mx", "my", "mz", "grp", "error", "status" }, // columns
+                               "calibId=? and id=?", 
+                               new String[] { Long.toString(cid), Long.toString(id) },
+                               null,  // groupBy
+                               null,  // having
+                               null ); // order by
+      if ( cursor != null && cursor.moveToFirst()) {
+        block = new CalibCBlock();
+        block.setId( cursor.getLong(0), cid );
+        block.setData( 
+          cursor.getLong(1),
+          cursor.getLong(2),
+          cursor.getLong(3),
+          cursor.getLong(4),
+          cursor.getLong(5),
+          cursor.getLong(6) );
+        block.setGroup( cursor.getLong(7) );
+        block.setError( (float)( cursor.getDouble(8) ) );
+        block.setStatus( cursor.getLong(9) );
+      }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
+    return block;
+  }
 
 
-   public int selectCalibAlgo( long cid )
-   {
-     int algo = CalibInfo.ALGO_AUTO; // default 
-     // if ( myDB == null ) return 0;
-     Cursor cursor = myDB.query( CALIB_TABLE,
-                                new String[] { "algo" }, // columns
-                                "id=?",
-                                new String[] { Long.toString(cid) },
-                                null,  // groupBy
-                                null,  // having
-                                null ); // order by
-     if (cursor.moveToFirst()) {
-       algo = (int)cursor.getLong( 0 );
-     }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
-     return algo;
-   }
+  public int selectCalibAlgo( long cid )
+  {
+    int algo = CalibInfo.ALGO_AUTO; // default 
+    // if ( myDB == null ) return 0;
+    Cursor cursor = null;
+    try {
+      cursor = myDB.query( CALIB_TABLE,
+                            new String[] { "algo" }, // columns
+                            "id=?",
+                            new String[] { Long.toString(cid) },
+                            null, null, null ); 
+      if ( cursor != null && cursor.moveToFirst()) {
+        algo = (int)cursor.getLong( 0 );
+      }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
+    return algo;
+  }
 
-   public long getCalibCID( String name, String device )
-   {
-     long id = -1L;
-     Cursor cursor = myDB.query( CALIB_TABLE,
-                                new String[] { "id" }, // columns
-                                "name=? and device=?",
-                                new String[] { name, device },
-                                null,  // groupBy
-                                null,  // having
-                                null ); // order by
-     if (cursor.moveToFirst()) {
-       id = cursor.getLong( 0 );
-     }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
-     return id;
-   }
+  public long getCalibCID( String name, String device )
+  {
+    long id = -1L;
+    Cursor cursor = null;
+    try {
+      cursor = myDB.query( CALIB_TABLE,
+                           new String[] { "id" }, // columns
+                           "name=? and device=?",
+                           new String[] { name, device },
+                           null, null, null );
+      if (cursor != null && cursor.moveToFirst()) {
+        id = cursor.getLong( 0 );
+      }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
+    return id;
+  }
  
-   public CalibInfo selectCalibInfo( long cid )
-   {
-     CalibInfo info = null;
-     // if ( myDB == null ) return null;
-     Cursor cursor = myDB.query( CALIB_TABLE,
-                                new String[] { "name", "day", "device", "comment", "algo" }, // columns
-                                "id=?",
-                                new String[] { Long.toString(cid) },
-                                null,  // groupBy
-                                null,  // having
-                                null ); // order by
-     if (cursor.moveToFirst()) {
-       info = new CalibInfo( 
-               cid,
-               cursor.getString( 0 ),
-               cursor.getString( 1 ),
-               cursor.getString( 2 ),
-               cursor.getString( 3 ),
-               (int)cursor.getLong( 4 ) );
-     }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
-     return info;
-   }
+  public CalibInfo selectCalibInfo( long cid )
+  {
+    CalibInfo info = null;
+    // if ( myDB == null ) return null;
+    Cursor cursor = null;
+    try {
+      cursor = myDB.query( CALIB_TABLE,
+                           new String[] { "name", "day", "device", "comment", "algo" }, // columns
+                           "id=?",
+                           new String[] { Long.toString(cid) },
+                           null, null, null ); 
+      if ( cursor != null && cursor.moveToFirst()) {
+        info = new CalibInfo( 
+                cid,
+                cursor.getString( 0 ),
+                cursor.getString( 1 ),
+                cursor.getString( 2 ),
+                cursor.getString( 3 ),
+                (int)cursor.getLong( 4 ) );
+      }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
+    return info;
+  }
 
-   public void selectCalibError( long cid, CalibResult res )
-   {
-     // if ( myDB == null ) return;
-     Cursor cursor = myDB.query( CALIB_TABLE,
-                                new String[] { "error", "max_error", "iterations", "stddev" }, // columns
-                                "id=?",
-                                new String[] { Long.toString(cid) },
-                                null,  // groupBy
-                                null,  // having
-                                null ); // order by
-     if (cursor.moveToFirst()) {
-       // Log.v( "DistoX", "select calib error " + cursor.getString(0) + " " + cursor.getString(1) + " " + cursor.getString(2) );
-       try {
-         String str = cursor.getString(0);
-         if ( str != null ) res.error = Float.parseFloat( str );
-         str = cursor.getString(1);
-         if ( str != null ) res.max_error = Float.parseFloat( str );
-         str = cursor.getString(2);
-         if ( str != null ) res.iterations = Integer.parseInt( str );
-         str = cursor.getString(3);
-         if ( str != null ) res.stddev = Float.parseFloat( str );
-       } catch ( NumberFormatException e ) {
-         TDLog.Error( "selectCalibError parse Float error: calib ID " + cid );
-       }
-     }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
-   }
+  public void selectCalibError( long cid, CalibResult res )
+  {
+    // if ( myDB == null ) return;
+    Cursor cursor = null;
+    try {
+      cursor = myDB.query( CALIB_TABLE,
+                           new String[] { "error", "max_error", "iterations", "stddev" }, // columns
+                           "id=?",
+                           new String[] { Long.toString(cid) },
+                           null, null, null );
+      if ( cursor != null && cursor.moveToFirst()) {
+        // Log.v( "DistoX", "select calib error " + cursor.getString(0) + " " + cursor.getString(1) + " " + cursor.getString(2) );
+        try {
+          String str = cursor.getString(0);
+          if ( str != null ) res.error = Float.parseFloat( str );
+          str = cursor.getString(1);
+          if ( str != null ) res.max_error = Float.parseFloat( str );
+          str = cursor.getString(2);
+          if ( str != null ) res.iterations = Integer.parseInt( str );
+          str = cursor.getString(3);
+          if ( str != null ) res.stddev = Float.parseFloat( str );
+        } catch ( NumberFormatException e ) {
+          TDLog.Error( "selectCalibError parse Float error: calib ID " + cid );
+        }
+      }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
+  }
 
-   public String selectCalibCoeff( long cid )
-   {
-     String coeff = null;
-     // if ( myDB == null ) return null;
-     Cursor cursor = myDB.query( CALIB_TABLE,
-                                new String[] { "coeff" }, // columns
-                                "id=?",
-                                new String[] { Long.toString(cid) },
-                                null,  // groupBy
-                                null,  // having
-                                null ); // order by
-     if (cursor.moveToFirst()) {
-       coeff = cursor.getString( 0 );
-     }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
-     return coeff;
-   }
-    
-   // ----------------------------------------------------------------------
-   // SELECT: LIST SURVEY / CABIL NAMES
+  public String selectCalibCoeff( long cid )
+  {
+    String coeff = null;
+    // if ( myDB == null ) return null;
+    Cursor cursor = null;
+    try {
+      cursor = myDB.query( CALIB_TABLE,
+                           new String[] { "coeff" }, // columns
+                           "id=?",
+                           new String[] { Long.toString(cid) },
+                           null, null, null );
+      if ( cursor != null && cursor.moveToFirst()) {
+        coeff = cursor.getString( 0 );
+      }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
+    return coeff;
+  }
+   
+  // ----------------------------------------------------------------------
+  // SELECT: LIST SURVEY / CABIL NAMES
 
-   private List<String> selectAllNames( String table )
-   {
-     TDLog.Log( TDLog.LOG_DB, "selectAllNames table " + table );
+  private List<String> selectAllNames( String table )
+  {
+    TDLog.Log( TDLog.LOG_DB, "selectAllNames table " + table );
 
-     List< String > list = new ArrayList< String >();
-     // if ( myDB == null ) return list;
-     Cursor cursor = myDB.query( table,
-                                new String[] { "name" }, // columns
-                                null, null, null, null, "name" );
-     if (cursor.moveToFirst()) {
-       do {
-         list.add( cursor.getString(0) );
-       } while (cursor.moveToNext());
-     }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
-     TDLog.Log( TDLog.LOG_DB, "found " + list.size() + " names " );
-     return list;
-   }
+    List< String > list = new ArrayList< String >();
+    // if ( myDB == null ) return list;
+    Cursor cursor = null;
+    try {
+      cursor = myDB.query( table,
+                           new String[] { "name" }, // columns
+                           null, null, null, null, "name" );
+      if (cursor.moveToFirst()) {
+        do {
+          list.add( cursor.getString(0) );
+        } while (cursor.moveToNext());
+      }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
+    TDLog.Log( TDLog.LOG_DB, "found " + list.size() + " names " );
+    return list;
+  }
 
-   public List<String> selectAllCalibs() { return selectAllNames( CALIB_TABLE ); }
+  public List<String> selectAllCalibs() { return selectAllNames( CALIB_TABLE ); }
 
-   public List<String> selectDeviceCalibs( String device ) 
-   {
-     List<String> ret = new ArrayList<String>();
-     Cursor cursor = myDB.query( CALIB_TABLE,
-                                new String[] { "name", "day" }, // columns
-                                "device=?",
-                                new String[] { device },
-                                null,  // groupBy
-                                null,  // having
-                                null );
-     if (cursor != null ) {
-       if ( cursor.moveToFirst() ) {
-         do {
-           ret.add( cursor.getString(0) + " - " + cursor.getString(1) );
-         } while (cursor.moveToNext());
-       }
-       if ( !cursor.isClosed()) cursor.close();
-     }
-     return ret;
-   }
+  public List<String> selectDeviceCalibs( String device ) 
+  {
+    List<String> ret = new ArrayList<String>();
+    Cursor cursor = null;
+    try {
+      cursor = myDB.query( CALIB_TABLE,
+                           new String[] { "name", "day" }, // columns
+                           "device=?",
+                           new String[] { device },
+                           null, null, null );
+      if (cursor != null && cursor.moveToFirst() ) {
+        do {
+          ret.add( cursor.getString(0) + " - " + cursor.getString(1) );
+        } while (cursor.moveToNext());
+      }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
+    return ret;
+  }
 
-   public List<CalibInfo> selectDeviceCalibsInfo( String device ) 
-   {
-     List<CalibInfo> ret = new ArrayList<CalibInfo>();
-     Cursor cursor = myDB.query( CALIB_TABLE,
-                                new String[] { "id", "name", "day", "comment", "algo" }, // columns
-                                "device=?",
-                                new String[] { device },
-                                null,  // groupBy
-                                null,  // having
-                                null );
-     if (cursor != null ) {
-       if ( cursor.moveToFirst() ) {
-         do {
-           ret.add( new CalibInfo(
-             cursor.getLong(0),
-             cursor.getString(1),
-             cursor.getString(2),
-             device,
-             cursor.getString(3),
-             (int)cursor.getLong(4) ) );
-         } while (cursor.moveToNext());
-       }
-       if ( !cursor.isClosed()) cursor.close();
-     }
-     return ret;
-   }
+  public List<CalibInfo> selectDeviceCalibsInfo( String device ) 
+  {
+    List<CalibInfo> ret = new ArrayList<CalibInfo>();
+    Cursor cursor = null;
+    try {
+      cursor = myDB.query( CALIB_TABLE,
+                           new String[] { "id", "name", "day", "comment", "algo" }, // columns
+                           "device=?",
+                           new String[] { device },
+                           null, null, null );
+      if (cursor != null && cursor.moveToFirst() ) {
+        do {
+          ret.add( new CalibInfo(
+            cursor.getLong(0),
+            cursor.getString(1),
+            cursor.getString(2),
+            device,
+            cursor.getString(3),
+            (int)cursor.getLong(4) ) );
+        } while (cursor.moveToNext());
+      }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
+    return ret;
+  }
 
-   // ----------------------------------------------------------------------
-   // CONFIG DATA
+  // ----------------------------------------------------------------------
+  // CONFIG DATA
 
-   public String getValue( String key )
-   {
-     if ( myDB == null ) {
-       TDLog.Error( "DeviceHelper::getValue null DB");
-       return null;
-     }
-     if ( key == null || key.length() == 0 ) {
-       TDLog.Error( "DeviceHelper::getValue null key");
-       return null;
-     }
-     String value = null;
-     Cursor cursor = myDB.query( CONFIG_TABLE,
-                                 new String[] { "value" }, // columns
-                                 "key = ?", new String[] { key },
-                                 null, null, null );
-     if ( cursor != null ) {
-       if (cursor.moveToFirst()) {
-         value = cursor.getString( 0 );
-       }
-       if ( ! cursor.isClosed()) cursor.close();
-     }
-     return value;
-   }
+  public String getValue( String key )
+  {
+    if ( myDB == null ) {
+      TDLog.Error( "DeviceHelper::getValue null DB");
+      return null;
+    }
+    if ( key == null || key.length() == 0 ) {
+      TDLog.Error( "DeviceHelper::getValue null key");
+      return null;
+    }
+    String value = null;
+    Cursor cursor = null;
+    try {
+      cursor = myDB.query( CONFIG_TABLE,
+                           new String[] { "value" }, // columns
+                           "key = ?", new String[] { key },
+                           null, null, null );
+      if ( cursor != null && cursor.moveToFirst()) {
+        value = cursor.getString( 0 );
+      }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
+    return value;
+  }
 
-   public void setValue( String key, String value )
-   {
-     if ( myDB == null ) {
-       TDLog.Error( "DeviceHelper::setValue null DB");
-       return;
-     }
-     if ( key == null || key.length() == 0 ) {
-       TDLog.Error( "DeviceHelper::setValue null key");
-       return;
-     }
-     if ( value == null || value.length() == 0 ) {
-       TDLog.Error( "DeviceHelper::setValue null value");
-       return;
-     }
+  public void setValue( String key, String value )
+  {
+    if ( myDB == null ) {
+      TDLog.Error( "DeviceHelper::setValue null DB");
+      return;
+    }
+    if ( key == null || key.length() == 0 ) {
+      TDLog.Error( "DeviceHelper::setValue null key");
+      return;
+    }
+    if ( value == null || value.length() == 0 ) {
+      TDLog.Error( "DeviceHelper::setValue null value");
+      return;
+    }
 
-     Cursor cursor = myDB.query( CONFIG_TABLE,
-                                new String[] { "value" }, // columns
-                                "key = ?", new String[] { key },
-                                null, null, null );
-     if ( cursor != null ) {
-       if (cursor.moveToFirst()) {
-         updateConfig.bindString( 1, value );
-         updateConfig.bindString( 2, key );
-         try {
-           updateConfig.execute();
-         } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-         } catch (SQLiteException e ) { logError( "update config " + key + "=" + value, e ); }
-       } else {
-         ContentValues cv = new ContentValues();
-         cv.put( "key",     key );
-         cv.put( "value",   value );
-         myDB.insert( CONFIG_TABLE, null, cv );
-       }
-       if ( ! cursor.isClosed()) cursor.close();
-     }
-   }
+    Cursor cursor = null;
+    try {
+      cursor = myDB.query( CONFIG_TABLE,
+                           new String[] { "value" }, // columns
+                           "key = ?", new String[] { key },
+                           null, null, null );
+      if ( cursor != null ) {
+        if (cursor.moveToFirst()) {
+          updateConfig.bindString( 1, value );
+          updateConfig.bindString( 2, key );
+          try {
+            updateConfig.execute();
+          } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+          } catch (SQLiteException e ) { logError( "update config " + key + "=" + value, e ); }
+        } else {
+          ContentValues cv = new ContentValues();
+          cv.put( "key",     key );
+          cv.put( "value",   value );
+          myDB.insert( CONFIG_TABLE, null, cv );
+        }
+      }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
+  }
 
-   // ----------------------------------------------------------------------
-   // symbols
+  // ----------------------------------------------------------------------
+  // symbols
 
-   void setSymbolEnabled( String name, boolean enabled ) { setValue( name, enabled? "1" : "0" ); }
+  void setSymbolEnabled( String name, boolean enabled ) { setValue( name, enabled? "1" : "0" ); }
 
-   boolean isSymbolEnabled( String name )
-   { 
-     String enabled = getValue( name );
-     if ( enabled != null ) {
-       return enabled.equals("1");
-     }
-     if ( myDB != null ) {
-       ContentValues cv = new ContentValues();
-       cv.put( "key",     name );
-       cv.put( "value",   "1" );     // symbols are enabled by default
-       try {
-         myDB.insert( CONFIG_TABLE, null, cv );
-       } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-       } catch (SQLiteException e ) { logError( "symbol enable " + name, e ); }
-     }
-     return true;
-   }
+  boolean isSymbolEnabled( String name )
+  { 
+    String enabled = getValue( name );
+    if ( enabled != null ) {
+      return enabled.equals("1");
+    }
+    if ( myDB != null ) {
+      ContentValues cv = new ContentValues();
+      cv.put( "key",     name );
+      cv.put( "value",   "1" );     // symbols are enabled by default
+      try {
+        myDB.insert( CONFIG_TABLE, null, cv );
+      } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+      } catch (SQLiteException e ) { logError( "symbol enable " + name, e ); }
+    }
+    return true;
+  }
 
-   // ----------------------------------------------------------------------
-   /* Set the current survey/calib name.
-    * If the survey/calib name does not exists a new record is inserted in the table
-    */
+  // ----------------------------------------------------------------------
+  /* Set the current survey/calib name.
+   * If the survey/calib name does not exists a new record is inserted in the table
+   */
 
-   private String getNameFromId( String table, long id )
-   {
-     String ret = null;
-     // if ( myDB == null ) return null;
-     Cursor cursor = myDB.query( table, new String[] { "name" },
-                          "id=?", new String[] { Long.toString(id) },
-                          null, null, null );
-     if (cursor != null ) {
-       if (cursor.moveToFirst() ) {
-         ret = cursor.getString(0);
-       }
-       if ( ! cursor.isClosed()) cursor.close();
-     }
-     return ret;
-   }
+  private String getNameFromId( String table, long id )
+  {
+    String ret = null;
+    // if ( myDB == null ) return null;
+    Cursor cursor = null;
+    try {
+      cursor = myDB.query( table, new String[] { "name" },
+                           "id=?", new String[] { Long.toString(id) },
+                           null, null, null );
+      if (cursor != null && cursor.moveToFirst() ) {
+        ret = cursor.getString(0);
+      }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
+    return ret;
+  }
 
-   private long getIdFromName( String table, String name ) 
-   {
-     long id = -1;
-     // if ( myDB == null ) { return -2; }
-     Cursor cursor = myDB.query( table, new String[] { "id" },
-                                 "name = ?", new String[] { name },
-                                 null, null, null );
-     if (cursor != null ) {
-       if (cursor.moveToFirst() ) {
-         id = cursor.getLong(0);
-       }
-       if ( ! cursor.isClosed()) cursor.close();
-     }
-     return id;
-   }
+  private long getIdFromName( String table, String name ) 
+  {
+    long id = -1;
+    // if ( myDB == null ) { return -2; }
+    Cursor cursor = null;
+    try {
+      cursor = myDB.query( table, new String[] { "id" },
+                           "name = ?", new String[] { name },
+                           null, null, null );
+      if (cursor != null && cursor.moveToFirst() ) {
+        id = cursor.getLong(0);
+      }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
+    return id;
+  }
 
-   // this must be called when the calib name is not yet in the db
-   long insertCalibInfo( String name, String date, String device, String comment, long algo )
-   {
-     if ( hasCalibName( name ) ) return -1L;
-     long id = 1;
-     Cursor cursor = myDB.query( "calibs", new String[] { "max(id)" }, null, null, null, null, null );
-     if (cursor.moveToFirst() ) {
-       id = 1 + cursor.getLong(0);
-     }
-     if ( ! cursor.isClosed()) cursor.close();
+  // this must be called when the calib name is not yet in the db
+  long insertCalibInfo( String name, String date, String device, String comment, long algo )
+  {
+    if ( hasCalibName( name ) ) return -1L;
+    long id = 1;
+    Cursor cursor = null;
+    try {
+      cursor = myDB.query( "calibs", new String[] { "max(id)" }, null, null, null, null, null );
+      if ( cursor != null && cursor.moveToFirst() ) {
+        id = 1 + cursor.getLong(0);
+      }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
 
-     ContentValues cv = new ContentValues();
-     cv.put( "id",      id );
-     cv.put( "name",    name );
-     cv.put( "day",     date );
-     cv.put( "device",  device );
-     cv.put( "comment", comment );
-     cv.put( "algo",    algo );
-     try {
-       myDB.insert( "calibs", null, cv );
-     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-     } catch (SQLiteException e ) { logError( "insert calib info", e ); }
-     myNextCId = 0;
-     return id;
-   }
+    ContentValues cv = new ContentValues();
+    cv.put( "id",      id );
+    cv.put( "name",    name );
+    cv.put( "day",     date );
+    cv.put( "device",  device );
+    cv.put( "comment", comment );
+    cv.put( "algo",    algo );
+    try {
+      myDB.insert( "calibs", null, cv );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } catch (SQLiteException e ) { logError( "insert calib info", e ); }
+    myNextCId = 0;
+    return id;
+  }
 
-   // used only by setCalib
-   private long setCalibName( String name ) 
-   {
-     long id = -1;
-     // if ( myDB == null ) { return 0; }
-     // TDLog.Log( TDLog.LOG_DB, "set Calib Name >" + name + "< table " + table );
-     Cursor cursor = myDB.query( CALIB_TABLE, new String[] { "id" },
-                                 "name = ?", new String[] { name },
-                                 null, null, null );
-     if (cursor.moveToFirst() ) {
-       id = cursor.getLong(0);
-       if (cursor != null && !cursor.isClosed()) { cursor.close(); }
-     } else {
-       if (cursor != null && !cursor.isClosed()) { cursor.close(); }
-       // SELECT max(id) FROM table
-       cursor = myDB.query( CALIB_TABLE, new String[] { "max(id)" },
-                            null, null, null, null, null );
-       if (cursor.moveToFirst() ) {
-         id = 1 + cursor.getLong(0);
-       } else {
-         id = 1;
-       }
-       if (cursor != null && !cursor.isClosed()) { cursor.close(); }
-       // INSERT INTO table VALUES( id, name, "", "" )
-       ContentValues cv = new ContentValues();
-       cv.put( "id",      id );
-       cv.put( "name",    name );
-       cv.put( "day",     "" );
-       cv.put( "comment", "" );
-       try {
-         myDB.insert( CALIB_TABLE, null, cv );
-       } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-       } catch (SQLiteException e ) { logError( "set calib name" + name, e ); }
-     }
-     return id;
-   }
+  // used only by setCalib
+  private long setCalibName( String name ) 
+  {
+    long id = -1;
+    // if ( myDB == null ) { return 0; }
+    // TDLog.Log( TDLog.LOG_DB, "set Calib Name >" + name + "< table " + table );
+    Cursor cursor = null;
+    try {
+      cursor = myDB.query( CALIB_TABLE, new String[] { "id" },
+                           "name = ?", new String[] { name },
+                           null, null, null );
+      if ( cursor != null && cursor.moveToFirst() ) {
+        id = cursor.getLong(0);
+        if (cursor != null && !cursor.isClosed()) { cursor.close(); cursor = null; }
+      } else {
+        if (cursor != null && !cursor.isClosed()) { cursor.close(); cursor = null; }
+        // SELECT max(id) FROM table
+        cursor = myDB.query( CALIB_TABLE, new String[] { "max(id)" },
+                             null, null, null, null, null );
+        if (cursor != null && cursor.moveToFirst() ) {
+          id = 1 + cursor.getLong(0);
+        } else {
+          id = 1;
+        }
+        if (cursor != null && !cursor.isClosed()) { cursor.close(); cursor = null; }
+        // INSERT INTO table VALUES( id, name, "", "" )
+        ContentValues cv = new ContentValues();
+        cv.put( "id",      id );
+        cv.put( "name",    name );
+        cv.put( "day",     "" );
+        cv.put( "comment", "" );
+        myDB.insert( CALIB_TABLE, null, cv );
+      }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } catch (SQLiteException e ) { logError( "set calib name" + name, e ); 
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
+    return id;
+  }
 
-   private long maxId( String table, long sid )
-   {
-     long id = 1;
-     // if ( myDB == null ) return 1L;
-     Cursor cursor = myDB.query( table, new String[] { "max(id)" },
-                          "surveyId=?", 
-                          new String[] { Long.toString(sid) },
-                          null, null, null );
-     if (cursor != null ) {
-       if (cursor.moveToFirst() ) {
-         id = 1 + cursor.getLong(0);
-       }
-       if (!cursor.isClosed()) cursor.close();
-     }
-     return id;
-   }
+  private long maxId( String table, long sid )
+  {
+    long id = 1;
+    // if ( myDB == null ) return 1L;
+    Cursor cursor = null;
+    try {
+      cursor = myDB.query( table, new String[] { "max(id)" },
+                         "surveyId=?", 
+                         new String[] { Long.toString(sid) },
+                         null, null, null );
+      if (cursor != null && cursor.moveToFirst() ) {
+        id = 1 + cursor.getLong(0);
+      }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
+    return id;
+  }
 
   public ArrayList< Device > getDevices( ) 
   {
     ArrayList<Device> ret = new ArrayList<Device>();
     // if ( myDB == null ) return ret;
-    Cursor cursor = myDB.query( DEVICE_TABLE, new String[] { "address", "model", "head", "tail", "name", "nickname" }, 
+    Cursor cursor = null;
+    try {
+      cursor = myDB.query( DEVICE_TABLE, new String[] { "address", "model", "head", "tail", "name", "nickname" }, 
                                 null, null, null, null, null );
-    if (cursor != null ) {
-      if ( cursor.moveToFirst() ) {
+      if (cursor != null && cursor.moveToFirst() ) {
         do {
           ret.add( new Device( cursor.getString(0), 
                                cursor.getString(1),
@@ -726,8 +734,8 @@ public class DeviceHelper extends DataSetObservable
                   ) );
         } while (cursor.moveToNext());
       }
-      if ( !cursor.isClosed()) cursor.close();
-    }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
     return ret;
   }
 
@@ -746,10 +754,11 @@ public class DeviceHelper extends DataSetObservable
   {
     if ( myDB == null ) return null;
     Device ret = null;
-    Cursor cursor = myDB.query( DEVICE_TABLE, new String[] { "address", "model", "head", "tail", "name", "nickname" }, 
+    Cursor cursor = null;
+    try {
+      cursor = myDB.query( DEVICE_TABLE, new String[] { "address", "model", "head", "tail", "name", "nickname" }, 
                                 "nickname=?", new String[] { nickname }, null, null, null );
-    if (cursor != null ) {
-      if ( cursor.moveToFirst() ) {
+      if (cursor != null && cursor.moveToFirst() ) {
         ret = new Device( cursor.getString(0), 
                           cursor.getString(1),
                           (int)cursor.getLong(2),
@@ -758,8 +767,8 @@ public class DeviceHelper extends DataSetObservable
                           cursor.getString(5)
                         );
       }
-      if (!cursor.isClosed()) cursor.close();
-    }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
     return ret;
   }
 
@@ -767,10 +776,11 @@ public class DeviceHelper extends DataSetObservable
   {
     if ( myDB == null ) return null;
     Device ret = null;
-    Cursor cursor = myDB.query( DEVICE_TABLE, new String[] { "address", "model", "head", "tail", "name", "nickname" }, 
+    Cursor cursor = null;
+    try {
+      cursor = myDB.query( DEVICE_TABLE, new String[] { "address", "model", "head", "tail", "name", "nickname" }, 
                                 "address=?", new String[] { addr }, null, null, null );
-    if (cursor != null ) {
-      if ( cursor.moveToFirst() ) {
+      if (cursor != null && cursor.moveToFirst() ) {
         ret = new Device( cursor.getString(0), 
                           cursor.getString(1),
                           (int)cursor.getLong(2),
@@ -779,8 +789,8 @@ public class DeviceHelper extends DataSetObservable
                           cursor.getString(5)
                         );
       }
-      if (!cursor.isClosed()) cursor.close();
-    }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
     return ret;
   }
 
@@ -788,16 +798,17 @@ public class DeviceHelper extends DataSetObservable
   { 
     int ret = 0;
     // if ( myDB == null ) return 0;
-    Cursor cursor = myDB.query( DEVICE_TABLE, new String[] { "tail" },
+    Cursor cursor = null;
+    try {
+      cursor = myDB.query( DEVICE_TABLE, new String[] { "tail" },
                          "address=?", 
                          new String[] { address },
                          null, null, null );
-    if (cursor != null ) {
-      if (cursor.moveToFirst() ) {
+      if (cursor != null && cursor.moveToFirst() ) {
         ret = (int)( cursor.getLong(0) );
       }
-      if (!cursor.isClosed()) cursor.close();
-    }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
     return ret;
   }
 
@@ -805,18 +816,19 @@ public class DeviceHelper extends DataSetObservable
   {
     boolean ret = false;
     // if ( myDB == null ) return false;
-    Cursor cursor = myDB.query( DEVICE_TABLE, new String[] { "head", "tail" },
+    Cursor cursor = null;
+    try {
+      cursor = myDB.query( DEVICE_TABLE, new String[] { "head", "tail" },
                          "address=?", 
                          new String[] { address },
                          null, null, null );
-    if (cursor != null ) {
-      if (cursor.moveToFirst() ) {
+      if (cursor != null && cursor.moveToFirst() ) {
         head_tail[0] = (int)( cursor.getLong(0) );
         head_tail[1] = (int)( cursor.getLong(1) );
         ret = true;
       }
-      if (!cursor.isClosed()) cursor.close();
-    }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
     return ret;
   }
 
@@ -824,29 +836,30 @@ public class DeviceHelper extends DataSetObservable
   {
     boolean ret = true;
     // if ( myDB == null ) return false;
-    Cursor cursor = myDB.query( DEVICE_TABLE, new String[] { "model" },
+    Cursor cursor = null;
+    try {
+      cursor = myDB.query( DEVICE_TABLE, new String[] { "model" },
                          "address=?", 
                          new String[] { address },
                          null, null, null );
-    if ( cursor != null ) {
-      if (cursor.moveToFirst() ) {
-        // TODO address already in the database: check model
-        ret = false;
-      } else {
-        ContentValues cv = new ContentValues();
-        cv.put( "address", address );
-        cv.put( "model",   model );
-        cv.put( "head",    0 );
-        cv.put( "tail",    0 );
-        cv.put( "name",    name );
-        cv.put( "nickname", "" );  // FIXME empty nickname
-        try {
+      if ( cursor != null ) {
+        if (cursor.moveToFirst() ) {
+          // TODO address already in the database: check model
+          ret = false;
+        } else {
+          ContentValues cv = new ContentValues();
+          cv.put( "address", address );
+          cv.put( "model",   model );
+          cv.put( "head",    0 );
+          cv.put( "tail",    0 );
+          cv.put( "name",    name );
+          cv.put( "nickname", "" );  // FIXME empty nickname
           myDB.insert( DEVICE_TABLE, null, cv );
-        } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-        } catch (SQLiteException e ) { logError( "insert device", e ); }
+        }
       }
-      if (!cursor.isClosed()) cursor.close(); 
-    }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } catch (SQLiteException e ) { logError( "insert device", e ); 
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
     return ret;
   }
 
@@ -894,47 +907,51 @@ public class DeviceHelper extends DataSetObservable
     boolean ret = false;
     if ( updateDeviceHeadTailStmt == null )
         updateDeviceHeadTailStmt = myDB.compileStatement( "UPDATE devices set head=?, tail=? WHERE address=?" );
-    Cursor cursor = myDB.query( DEVICE_TABLE, new String[] { "head" },
+    Cursor cursor = null;
+    try {
+      cursor = myDB.query( DEVICE_TABLE, new String[] { "head" },
                          "address=?", 
                          new String[] { address },
                          null, null, null );
-    if (cursor != null ) {
-      if (cursor.moveToFirst() ) {
-        // Log.v(TopoDroidApp.TAG, "update Head Tail " + address + " " + head_tail[0] + " " + head_tail[1] );
-        long head = head_tail[0];
-        long tail = head_tail[1];
-        updateDeviceHeadTailStmt.bindLong( 1, head );
-        updateDeviceHeadTailStmt.bindLong( 2, tail );
-        updateDeviceHeadTailStmt.bindString( 3, address );
-        try { updateDeviceHeadTailStmt.execute();
-        } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-        } catch (SQLiteException e ) { logError( "update device H-T", e ); }
-        ret = true;
-      } else {
-        // insertDeviceHeadTail( address, "DistoX", head_tail, name ); // FIXME name ?
+      if (cursor != null ) {
+        if (cursor.moveToFirst() ) {
+          // Log.v(TopoDroidApp.TAG, "update Head Tail " + address + " " + head_tail[0] + " " + head_tail[1] );
+          long head = head_tail[0];
+          long tail = head_tail[1];
+          updateDeviceHeadTailStmt.bindLong( 1, head );
+          updateDeviceHeadTailStmt.bindLong( 2, tail );
+          updateDeviceHeadTailStmt.bindString( 3, address );
+          try { updateDeviceHeadTailStmt.execute();
+          } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+          } catch (SQLiteException e ) { logError( "update device H-T", e ); }
+          ret = true;
+        } else {
+          // insertDeviceHeadTail( address, "DistoX", head_tail, name ); // FIXME name ?
+        }
       }
-      if (!cursor.isClosed()) cursor.close();
-    }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
     return ret;
   }
 
 
-   public boolean hasCalibName( String name )  { return hasName( name, CALIB_TABLE ); }
+  public boolean hasCalibName( String name )  { return hasName( name, CALIB_TABLE ); }
 
-   private boolean hasName( String name, String table )
-   {
-     boolean ret = false;
-     // if ( myDB == null ) return ret;
-     Cursor cursor = myDB.query( table, new String[] { "id" },
+  private boolean hasName( String name, String table )
+  {
+    boolean ret = false;
+    // if ( myDB == null ) return ret;
+    Cursor cursor = null;
+    try {
+      cursor = myDB.query( table, new String[] { "id" },
                           "name=?", 
                           new String[] { name },
                           null, null, null );
-     if (cursor != null) {
-       if (cursor.moveToFirst() ) {
+      if (cursor != null && cursor.moveToFirst() ) {
          ret = true;
-       }
-       if (!cursor.isClosed()) cursor.close();
-     }
+      }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
      return ret;
    }
 
@@ -1008,13 +1025,16 @@ public class DeviceHelper extends DataSetObservable
      myNextCId = 0;
      // if ( myDB == null ) return 0L;
      long cid = setCalibName( calib );
-     Cursor cursor = myDB.query( GM_TABLE, new String[] { "max(id)" },
+     Cursor cursor = null;
+     try {
+       cursor = myDB.query( GM_TABLE, new String[] { "max(id)" },
                           "calibId=?", new String[] { Long.toString(cid) },
                           null, null, null );
-     if (cursor.moveToFirst() ) {
-       myNextCId = cursor.getLong(0);
-     }
-     if (cursor != null && !cursor.isClosed()) { cursor.close(); }
+       if (cursor != null && cursor.moveToFirst() ) {
+         myNextCId = cursor.getLong(0);
+       }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
      return cid;
    }
 
@@ -1177,8 +1197,7 @@ public class DeviceHelper extends DataSetObservable
 
 
            db.setTransactionSuccessful();
-         } catch ( SQLException e ) {
-           TDLog.Error( "createTables exception " + e.toString() );
+         } catch ( SQLException e ) { TDLog.Error( "createTables exception " + e.toString() );
          } finally {
            db.endTransaction();
            db.setLockingEnabled( true );
