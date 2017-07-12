@@ -509,7 +509,7 @@
     <!-- UNUSED string name="button_redo"      >Повторить      </string -->
     <!-- UNUSED string name="button_regroup"   >Перегруппировать   </string -->
     <string name="button_dump"      >Дамп      </string>
-    <!-- TODO string name="button_rename"    >Rename    </string -->
+    <string name="button_rename"    >Переименовать    </string>
     <string name="button_replace"   >Замена   </string>
     <string name="button_reset"     >Сброс     </string>
     <string name="button_left"      >ЛЕВО</string>
@@ -517,7 +517,7 @@
     <string name="button_clear"     >Очистить  </string>
     <string name="button_save"      >Сохр.     </string>
     <!-- UNUSED string name="button_select"    >Выбрать   </string -->
-    <!-- TODO string name="button_split"     >Split     </string -->
+    <string name="button_split"     >Разделить     </string>
     <string name="button_store"     >Записать   </string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
@@ -545,7 +545,7 @@
 
     <string name="popup_do_splay">Сделать замер</string>
     <string name="popup_do_leg">Сделать три замера</string>
-    <string name="popup_do_gm_data">Контроль Калибр.</string>
+    <string name="popup_do_gm_data">Калибр. замер</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Импорт</string>
