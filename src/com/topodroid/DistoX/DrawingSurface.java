@@ -22,6 +22,9 @@ import android.view.View;
 
 import android.view.MotionEvent;
 
+import android.graphics.Path;
+import android.graphics.Paint;
+
 import java.util.ArrayList;
 import java.util.TreeSet;
 import java.util.Collections;
@@ -56,12 +59,12 @@ public class DrawingSurface extends SurfaceView
   static final int DRAWING_SECTION  = 3;
   static final int DRAWING_OVERVIEW = 4;
 
-  private Boolean _run;
-  boolean mSurfaceCreated = false;
   protected DrawThread mDrawThread;
+
+  boolean mSurfaceCreated = false;
   public boolean isDrawing = true;
-  public DrawingPath previewPath;
-  private SurfaceHolder mHolder; // canvas holder
+  private DrawingPath mPreviewPath;
+  // private SurfaceHolder mHolder; // canvas holder
   private Context mContext;
   private IZoomer mZoomer = null;
   private AttributeSet mAttrs;
@@ -169,8 +172,9 @@ public class DrawingSurface extends SurfaceView
     mDrawThread = null;
     mContext = context;
     mAttrs   = attrs;
-    mHolder = getHolder();
-    mHolder.addCallback(this);
+    // mHolder = getHolder();
+    // mHolder.addCallback(this);
+    getHolder().addCallback(this);
     // mCommandManager1 = new DrawingCommandManager();
     // mCommandManager2 = new DrawingCommandManager();
     commandManager = mCommandManager3;
@@ -293,28 +297,38 @@ public class DrawingSurface extends SurfaceView
   //   }
   // };
 
-  synchronized void clearPreviewPath()
+  // called by DrawingWindow on split
+  synchronized void clearPreviewPath() { mPreviewPath = null; }
+
+  synchronized void resetPreviewPath() { if ( mPreviewPath != null ) mPreviewPath.mPath = new Path(); }
+
+  synchronized void makePreviewPath( int type, Paint paint ) // type = kind of the path
   {
-    previewPath = null;
+    mPreviewPath = new DrawingPath( type, null );
+    mPreviewPath.mPath = new Path();
+    mPreviewPath.setPaint( paint );
   }
+
+  Path getPreviewPath() { return (mPreviewPath != null)? mPreviewPath.mPath : null; }
+
  
-  void refreshSurface()
+  void refresh( SurfaceHolder holder )
   {
     // if ( mZoomer != null ) mZoomer.checkZoomBtnsCtrl();
     Canvas canvas = null;
     try {
-      canvas = mHolder.lockCanvas();
+      canvas = holder.lockCanvas();
       // canvas.drawColor(0, PorterDuff.Mode.CLEAR);
       if ( canvas != null ) {
         mWidth  = canvas.getWidth();
         mHeight = canvas.getHeight();
         canvas.drawColor(0, PorterDuff.Mode.CLEAR);
         commandManager.executeAll( canvas, mZoomer.zoom(), mSplayStations );
-        if ( previewPath != null ) previewPath.draw(canvas, null);
+        if ( mPreviewPath != null ) mPreviewPath.draw(canvas, null);
       }
     } finally {
       if ( canvas != null ) {
-        mHolder.unlockCanvasAndPost( canvas );
+        holder.unlockCanvasAndPost( canvas );
       }
     }
   }
@@ -330,31 +344,38 @@ public class DrawingSurface extends SurfaceView
 
   class DrawThread extends  Thread
   {
-    private SurfaceHolder mSurfaceHolder;
+    private volatile SurfaceHolder mHolder;
+    private volatile boolean mRunning;
 
-    public DrawThread(SurfaceHolder surfaceHolder)
+    public DrawThread(SurfaceHolder holder)
     {
-      mSurfaceHolder = surfaceHolder;
+      TDLog.Log( TDLog.LOG_PLOT, "draw thread cstr");
+      mHolder = holder;
     }
 
-    public void setRunning(boolean run)
+    public void setHolder( SurfaceHolder holder )
     {
-      _run = run;
+      TDLog.Log( TDLog.LOG_PLOT, "draw thread set holder " + ( ( holder == null )? "null" : "non-null" ) );
+      mHolder = holder;
     }
+
+    public void setRunning( boolean run ) { mRunning = run; }
 
     @Override
     public void run() 
     {
-      while ( _run ) {
-        if ( isDrawing == true ) {
-          refreshSurface();
+      TDLog.Log( TDLog.LOG_PLOT, "draw thread run");
+      mRunning = true;
+      while ( mRunning ) {
+        if ( isDrawing && mHolder != null ) {
+          refresh( mHolder );
+          Thread.yield();
+          try { Thread.sleep(10); } catch ( InterruptedException e ) { }
         } else {
-          try {
-            // Log.v( TopoDroidApp.TAG, "drawing thread sleeps ..." );
-            sleep(100);
-          } catch ( InterruptedException e ) { }
+          try { Thread.sleep(100); } catch ( InterruptedException e ) { }
         }
       }
+      TDLog.Log( TDLog.LOG_PLOT, "draw thread exit");
     }
   }
 
@@ -539,30 +560,34 @@ public class DrawingSurface extends SurfaceView
 
   // ---------------------------------------------------------------------
 
-  public void surfaceChanged(SurfaceHolder mHolder, int format, int width,  int height) 
+  public void surfaceChanged( SurfaceHolder holder, int format, int width,  int height) 
   {
-    // TDLog.Log( TDLog.LOG_PLOT, "surfaceChanged " );
+    TDLog.Log( TDLog.LOG_PLOT, "surfaceChanged " );
     // TODO Auto-generated method stub
+    mDrawThread.setHolder( holder );
   }
 
 
-  public void surfaceCreated(SurfaceHolder mHolder) 
+  public void surfaceCreated( SurfaceHolder holder ) 
   {
-    // TDLog.Log( TDLog.LOG_PLOT, "surfaceCreated " );
+    TDLog.Log( TDLog.LOG_PLOT, "surfaceCreated " );
     if ( mDrawThread == null ) {
-      mDrawThread = new DrawThread(mHolder);
+      mDrawThread = new DrawThread(holder);
+    } else {
+      mDrawThread.setHolder( holder );
     }
-    mDrawThread.setRunning(true);
+    // mDrawThread.setRunning(true); // not necessary: done by start
     mDrawThread.start();
     mSurfaceCreated = true;
   }
 
-  public void surfaceDestroyed(SurfaceHolder mHolder) 
+  public void surfaceDestroyed( SurfaceHolder holder ) 
   {
     mSurfaceCreated = false;
-    // TDLog.Log( TDLog.LOG_PLOT, "surfaceDestroyed " );
-    boolean retry = true;
+    TDLog.Log( TDLog.LOG_PLOT, "surfaceDestroyed " );
+    // mDrawThread.setHolder( null );
     mDrawThread.setRunning(false);
+    boolean retry = true;
     while (retry) {
       try {
         mDrawThread.join();

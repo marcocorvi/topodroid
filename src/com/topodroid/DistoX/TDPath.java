@@ -112,7 +112,7 @@ public class TDPath
   private static String PATH_ZIP;    //  = PATH_BASE + "zip/";
   // private static String APP_TLX_PATH ; //  = PATH_BASE + "tlx/";
 
-  static String mTherionLock = new String("Therion Lock");
+  final static Object mTherionLock = new Object();
 
   static String getDatabase() { return getDirFile( "distox14.sqlite" ); }
   static String getDeviceDatabase() { return PATH_DEFAULT + "device10.sqlite"; }

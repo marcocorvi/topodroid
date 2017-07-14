@@ -7,7 +7,7 @@
  * 
  * FixedPath path is a straight line between the two endpoints
  * GridPath paths are also straight lines
- * previewPath path is a line with "many" points
+ * PreviewPath path is a line with "many" points
  *
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later

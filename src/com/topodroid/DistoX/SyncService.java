@@ -37,18 +37,18 @@ public class SyncService
     private TopoDroidApp mApp;
 
     private final BluetoothAdapter mAdapter;
-    private BluetoothDevice mRemoteDevice;
-    private final Handler   mHandler;
-    private AcceptThread    mAcceptThread;
-    private ConnectingThread   mConnectingThread;
-    private ConnectedThread mConnectedThread;
+    private BluetoothDevice  mRemoteDevice;
+    private final Handler    mHandler;
+    private AcceptThread     mAcceptThread;
+    private ConnectingThread mConnectingThread;
+    private ConnectedThread  mConnectedThread;
 
-    private int mConnectState; // NONE --> CONNECTING --> CONNECTED --> NONE
-    private int mAcceptState;  // NONE --> LISTEN --> NONE
+    private volatile int mConnectState; // NONE --> CONNECTING --> CONNECTED --> NONE
+    private volatile int mAcceptState;  // NONE --> LISTEN --> NONE
 
     private int mType;   // the service type. either server (LISTEN) or client (CONNECTING)
-    private boolean mConnectRun;
-    private boolean mAcceptRun;
+    private volatile boolean mConnectRun;
+    private volatile boolean mAcceptRun;
 
     // Constants that indicate the current connection state
     public static final int STATE_NONE = 0;       // we're doing nothing

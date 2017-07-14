@@ -28,7 +28,6 @@ import android.os.Parcelable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.AsyncTask;
 import android.os.Debug;
 
 // import android.os.SystemClock;
@@ -198,6 +197,7 @@ public class ShotWindow extends Activity
   public void setRefAzimuthButton()
   {
     if ( ! TDSetting.mLevelOverNormal ) return;
+    if ( BTN_AZIMUTH >= mButton1.length ) return;
     if ( TDAzimuth.mFixedExtend == 0 ) {
       android.graphics.Matrix m = new android.graphics.Matrix();
       m.postRotate( TDAzimuth.mRefAzimuth - 90 );

@@ -46,7 +46,6 @@ import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
 import android.os.Debug;
-import android.os.AsyncTask;
 import android.os.SystemClock; // FIXME TROBOT
 
 import android.app.Application;

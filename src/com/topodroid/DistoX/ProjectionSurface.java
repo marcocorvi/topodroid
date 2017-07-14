@@ -40,7 +40,7 @@ public class ProjectionSurface extends SurfaceView
 {
     boolean mSurfaceCreated = false;
     protected DrawThread mDrawThread;
-    public boolean isDrawing = true;
+    private volatile boolean isDrawing = true;
     private SurfaceHolder mHolder = null; // canvas holder
     private Context mContext;
     // private IZoomer mZoomer = null;
@@ -117,19 +117,19 @@ public class ProjectionSurface extends SurfaceView
 
     class DrawThread extends  Thread
     {
-      private boolean mRun;
+      private volatile boolean mRunning;
       private SurfaceHolder mSurfaceHolder;
 
       public DrawThread(SurfaceHolder holder) { mSurfaceHolder = holder; }
 
-      public void stopRunning() { mRun = false; }
+      public void stopRunning() { mRunning = false; }
 
       @Override
       public void run() 
       {
         // Log.v("DistoX", "drawing thread run");
-        mRun = true;
-        while ( mRun ) {
+        mRunning = true;
+        while ( mRunning ) {
           if ( isDrawing == true ) {
             refreshSurface( mSurfaceHolder );
           } else {

@@ -35,7 +35,7 @@ import android.util.Log;
 
 public class VirtualDistoX 
 {
-  boolean mBound = false; // single client at once
+  private boolean mBound = false; // single client at once
 
   private SharedPreferences mSharedPrefs; // to store calibration coeffs
   private Vector bG = null; // calibration coeffs
@@ -114,9 +114,9 @@ public class VirtualDistoX
   } 
 
   // TODO a thread handling I/O
-  boolean mIOWaitAck = false;
-  boolean mCmdDone   = false;
-  boolean mDataDone  = false;
+  volatile boolean mIOWaitAck = false;
+  volatile boolean mCmdDone   = false;
+  volatile boolean mDataDone  = false;
   Thread mCmdThread  = null;
   Thread mDataThread = null;
 

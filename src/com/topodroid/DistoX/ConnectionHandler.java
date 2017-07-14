@@ -41,7 +41,7 @@ class ConnectionHandler extends Handler
    TopoDroidApp mApp;
    BluetoothDevice mDevice;
    boolean mClient;   // whether this TopoDroid initiated the connection
-   boolean mRun;
+   volatile boolean mRun;
 
    SendThread mSendThread;
 

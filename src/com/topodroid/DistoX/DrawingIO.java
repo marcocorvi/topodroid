@@ -76,6 +76,7 @@ class DrawingIO
     // TDLog.Log( TDLog.LOG_PLOT, "after reset 0: " + BrushManager.mOrientation[0]
     //                      + " 7: " + BrushManager.mOrientation[7] );
 
+    Log.v("DistoX", "drawing I/O load therion " + filename );
     synchronized( TDPath.mTherionLock ) {
       try {
         FileReader fr = new FileReader( filename );
@@ -638,6 +639,8 @@ class DrawingIO
     File file = new File( filename );
     FileInputStream fis = null;
     DataInputStream dis = null;
+
+    Log.v("DistoX", "drawing I/O load stream " + filename );
     synchronized( TDPath.mTherionLock ) {
       try {
         // CACHE check if filename is in the cache: if so use the cache byte array
@@ -767,6 +770,8 @@ class DrawingIO
     File file = new File( filename );
     FileInputStream fis = null;
     DataInputStream dis = null;
+
+    Log.v("DistoX", "drawing I/O load outline stream " + filename );
     synchronized( TDPath.mTherionLock ) {
       try {
         // CACHE check if filename is in the cache: if so use the cache byte array

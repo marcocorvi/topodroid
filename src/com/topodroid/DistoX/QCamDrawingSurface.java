@@ -112,14 +112,11 @@ public class QCamDrawingSurface extends SurfaceView
     mHolder.addCallback(this);
     mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS); // required on android < 3.0
 
-    // mDrawThread = null;
-
     mQCam = null;
     mCamera   = null;
     mJpegData = null;
 
     createCallbacks();
-
   }
 
 

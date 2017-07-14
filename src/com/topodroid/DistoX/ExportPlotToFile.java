@@ -21,6 +21,8 @@ import android.os.Message;
 
 import android.widget.Toast;
 
+import android.util.Log;
+
 class ExportPlotToFile extends AsyncTask<Void,Void,Boolean> 
 {
     private Context mContext;
@@ -35,19 +37,21 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     public ExportPlotToFile( Context context, DrawingCommandManager command,
                          DistoXNum num, long type, String name, String ext, boolean toast )
     {
-       // FIXME assert( ext != null );
-       mContext  = context;
-       mCommand  = command;
-       mNum      = num;
-       mType     = type;
-       mFullName = name;
-       mExt      = ext;
-       mToast    = toast;
+      // Log.v("DistoX", "export plot to file cstr. " + name );
+      // FIXME assert( ext != null );
+      mContext  = context;
+      mCommand  = command;
+      mNum      = num;
+      mType     = type;
+      mFullName = name;
+      mExt      = ext;
+      mToast    = toast;
     }
 
     @Override
     protected Boolean doInBackground(Void... arg0)
     {
+      // Log.v("DistoX", "export plot to file in bkgr. ext " + mExt );
       try {
         if ( mExt.equals("dxf") ) {
           filename = TDPath.getDxfFileWithExt( mFullName );
@@ -79,6 +83,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     @Override
     protected void onPostExecute(Boolean bool) 
     {
+      // Log.v("DistoX", "export plot to file post exec");
       super.onPostExecute(bool);
       if ( mToast ) {
         if ( bool ) {

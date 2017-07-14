@@ -20,6 +20,9 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 
+import android.graphics.Path;
+import android.graphics.Paint;
+
 import java.util.ArrayList;
 import java.util.TreeSet;
 import java.util.Collections;
@@ -41,12 +44,11 @@ public class SketchDrawingSurface extends SurfaceView
 {
   static final String TAG = "DistoX";
 
-    private Boolean _run;
     protected DrawThread mDrawingThread;
     private Bitmap mBitmap;
     public boolean isDrawing = true;
-    public DrawingPath previewPath;
-    private SurfaceHolder mHolder; // canvas holder
+    public DrawingPath mPreviewPath;
+    // private SurfaceHolder mHolder; // canvas holder
     private Context mContext;
     private AttributeSet mAttrs;
     private int mWidth;            // canvas width
@@ -67,21 +69,35 @@ public class SketchDrawingSurface extends SurfaceView
       mDrawingThread = null;
       mContext = context;
       mAttrs   = attrs;
-      mHolder = getHolder();
-      mHolder.addCallback(this);
+      // mHolder = getHolder();
+      // mHolder.addCallback(this);
+      getHolder().addCallback(this);
+
       // commandManager = new DrawingCommandManager();
     }
+
+  // these four methods are the same as in DrawingSurface
+  Path getPreviewPath() { return (mPreviewPath != null)? mPreviewPath.mPath : null; }
+  // synchronized void clearPreviewPath() { mPreviewPath = null; }
+  synchronized void resetPreviewPath() { if ( mPreviewPath != null ) mPreviewPath.mPath = new Path(); }
+  synchronized void makePreviewPath( int type, Paint paint ) // type = kind of the path
+  {
+    mPreviewPath = new DrawingPath( type, null );
+    mPreviewPath.mPath = new Path();
+    mPreviewPath.setPaint( paint );
+  }
 
     // public void setDisplayMode( int mode ) { commandManager.setDisplayMode(mode); }
     // public int getDisplayMode( ) { return commandManager.getDisplayMode(); }
 
     void setModel( SketchModel model ) { mModel = model; }
 
-    void refresh()
+    void refresh( SurfaceHolder holder )
     {
+      // if ( holder == null ) return; // guaranteed
       Canvas canvas = null;
       try {
-        canvas = mHolder.lockCanvas();
+        canvas = holder.lockCanvas();
         if ( mBitmap == null ) {
           mBitmap = Bitmap.createBitmap (1, 1, Bitmap.Config.ARGB_8888);
         }
@@ -94,14 +110,14 @@ public class SketchDrawingSurface extends SurfaceView
 
         // commandManager.executeAll( c, previewDoneHandler );
         mModel.executeAll( c, null /* previewDoneHandler */ ); // handler is not used
-        if ( previewPath != null ) {
-          previewPath.draw(c, null);
+        if ( mPreviewPath != null ) {
+          mPreviewPath.draw(c, null);
         }
       
         canvas.drawBitmap (mBitmap, 0, 0, null);
       } finally {
         if ( canvas != null ) {
-          mHolder.unlockCanvasAndPost( canvas );
+          holder.unlockCanvasAndPost( canvas );
         }
       }
     }
@@ -116,24 +132,27 @@ public class SketchDrawingSurface extends SurfaceView
 
     class DrawThread extends  Thread
     {
-      private SurfaceHolder mSurfaceHolder;
+      private SurfaceHolder mHolder;
+      private volatile boolean mRunning = false;
 
-      public DrawThread(SurfaceHolder surfaceHolder)
+      public DrawThread(SurfaceHolder holder)
       {
-        mSurfaceHolder = surfaceHolder;
+        mHolder = holder;
       }
 
-      public void setRunning(boolean run)
-      {
-        _run = run;
-      }
+      public void setRunning(boolean run) { mRunning = run; }
+
+      public boolean running() { return mRunning; }
 
       @Override
       public void run() 
       {
-        while ( _run ) {
-          if ( isDrawing ) {
-            refresh();
+        mRunning = true;
+        while ( mRunning ) {
+          if ( isDrawing && mHolder != null ) {
+            refresh( mHolder );
+          } else {
+            try { Thread.sleep(100); } catch (InterruptedException e) { }
           }
         }
       }
@@ -181,7 +200,7 @@ public class SketchDrawingSurface extends SurfaceView
     // public DrawingStationName  getStationAt( float x, float y, float size ) 
     // { return commandManager.getStationAt( x, y, size ); }
 
-    public void surfaceChanged(SurfaceHolder mHolder, int format, int width,  int height) 
+    public void surfaceChanged(SurfaceHolder holder, int format, int width,  int height) 
     {
       mBitmap =  Bitmap.createBitmap (width, height, Bitmap.Config.ARGB_8888);;
     }
@@ -189,28 +208,28 @@ public class SketchDrawingSurface extends SurfaceView
     void setThreadRunning( boolean running ) 
     {
       if ( mDrawingThread != null ) {
-        if ( ! _run ) {
-          mDrawingThread.setRunning(true);
+        if ( ! mDrawingThread.running() ) {
+          // mDrawingThread.setRunning(true); // not necessary
           mDrawingThread.start();
         }
       }
     }
 
-    public void surfaceCreated(SurfaceHolder mHolder) 
+    public void surfaceCreated(SurfaceHolder holder) 
     {
       if (mDrawingThread == null ) {
-        mDrawingThread = new DrawThread(mHolder);
+        mDrawingThread = new DrawThread(holder);
       }
       // Log.v("DistoX", "surface created set running true");
-      mDrawingThread.setRunning(true);
+      // mDrawingThread.setRunning(true); // not necessary, done in run()
       mDrawingThread.start();
     }
 
-    public void surfaceDestroyed(SurfaceHolder mHolder) 
+    public void surfaceDestroyed(SurfaceHolder holder) 
     {
       if ( mDrawingThread != null ) {
-        boolean retry = true;
         mDrawingThread.setRunning(false);
+        boolean retry = true;
         while (retry) {
           try {
             mDrawingThread.join();

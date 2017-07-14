@@ -38,17 +38,19 @@ import java.util.Random;
 public class MyButton
 {
   static int mSize = 42;
+  private final static boolean USE_CACHE = true;
 
   static Random rand = new Random();
 
   // CACHE : using a cache for the BitmapDrawing does not dramatically improve perfoormanaces
-  // static SparseArray<BitmapDrawable> mBitmapCache = new SparseArray<BitmapDrawable>();
+  static SparseArray<BitmapDrawable> mBitmapCache = USE_CACHE ? new SparseArray<BitmapDrawable>()
+                                                              : null;
 
   // called with context = mApp
   static void resetCache( /* Context context, */ int size )
   {
     mSize    = size;
-    // mBitmapCache.clear();
+    if ( USE_CACHE ) mBitmapCache.clear();
   }
 
   static Button getButton( Context ctx, OnClickListener click, int res_id )
@@ -62,14 +64,15 @@ public class MyButton
 
   static BitmapDrawable getButtonBackground( Context ctx, Resources res, int res_id )
   {
-    BitmapDrawable ret = null;
-    // ret = mBitmapCache.get( res_id );
+    BitmapDrawable ret = USE_CACHE ? mBitmapCache.get( res_id )
+                                   : null;
     if ( ret == null ) {    
+      // Log.v("DistoX", "My Button cache fail " + res_id );
       try {
         Bitmap bm1 = BitmapFactory.decodeResource( res, res_id );
         Bitmap bmx = Bitmap.createScaledBitmap( bm1, mSize, mSize, false );
         ret = new BitmapDrawable( res, bmx );
-        // mBitmapCache.append( res_id, ret );
+        if ( USE_CACHE ) mBitmapCache.append( res_id, ret );
       } catch ( OutOfMemoryError err ) {
         TDLog.Error("out of memory: " + err.getMessage() );
         Toast toast = Toast.makeText( ctx, "WARNING. Out Of Memroy", Toast.LENGTH_LONG );
@@ -82,6 +85,8 @@ public class MyButton
         // } catch ( IOException e ) {
         // }
       }
+    // } else {
+      // Log.v("DistoX", "My Button cache hit " + res_id );
     }
     return ret;
   }

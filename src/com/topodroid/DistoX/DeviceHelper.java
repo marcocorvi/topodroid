@@ -132,7 +132,7 @@ public class DeviceHelper extends DataSetObservable
 
   private void handleDiskIOError( SQLiteDiskIOException e )
   {
-    Log.e("DistoX", "DB disk error " + e.getMessage() );
+    TDLog.Error("DB disk error " + e.getMessage() );
     TopoDroidApp.mActivity.runOnUiThread( new Runnable() {
       public void run() {
         Toast toast = Toast.makeText( mContext, "Critical failure: Disk i/o error", Toast.LENGTH_LONG );

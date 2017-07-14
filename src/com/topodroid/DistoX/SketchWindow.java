@@ -764,9 +764,7 @@ public class SketchWindow extends ItemDrawer
     // mIsInSection = false;
 
     mSketchSurface = (SketchDrawingSurface) findViewById(R.id.sketchSurface);
-    mSketchSurface.previewPath = new DrawingPath( DrawingPath.DRAWING_PATH_LINE, null );
-    mSketchSurface.previewPath.mPath = new Path();
-    mSketchSurface.previewPath.setPaint( mPainter.previewPaint );
+    mSketchSurface.makePreviewPath( DrawingPath.DRAWING_PATH_LINE, DrawingWindow.getPreviewPaint() );
     mSketchSurface.setOnTouchListener(this);
     // mSketchSurface.setOnLongClickListener(this);
     // mSketchSurface.setBuiltInZoomControls(true);
@@ -803,15 +801,14 @@ public class SketchWindow extends ItemDrawer
       new SketchLoader( this, mModel, mFullName, mPainter ).execute();
      
 
-      // if ( ! mAllSymbols ) {
-      //   // FIXME FIXME
+      // if ( ! mAllSymbols ) { // FIXME FIXME
       //   String msg = missingSymbols.getMessage( getResources() );
       //   (new MissingDialog( mActivity, msg )).show();
       // }
 
       setSurfaceTransform( 0, 0 );
       // mSketchSurface.refresh(); // do not do this --> segfault
-      mSketchSurface.setThreadRunning( true );
+      mSketchSurface.setThreadRunning( true ); // FIXME necessary ?
     }
 
     // setSymbolButton();
@@ -1361,7 +1358,7 @@ public class SketchWindow extends ItemDrawer
           // mSketchSurface.isDrawing = true;
           mCurrentLinePath = new DrawingLinePath( mCurrentLine );
           mCurrentLinePath.addStartPoint( x_scene, y_scene );
-          mCurrentBrush.mouseDown( mSketchSurface.previewPath.mPath, x_canvas, y_canvas );
+          mCurrentBrush.mouseDown( mSketchSurface.getPreviewPath(), x_canvas, y_canvas );
         } else { // Symbol.POINT
           mSaveX = x_canvas;
           mSaveY = y_canvas;
@@ -1462,7 +1459,7 @@ public class SketchWindow extends ItemDrawer
               mCurrentLinePath.addPoint( x_scene, y_scene );
               mSaveX = x_canvas;                 // reset start
               mSaveY = y_canvas;
-              mCurrentBrush.mouseMove( mSketchSurface.previewPath.mPath, x_canvas, y_canvas );
+              mCurrentBrush.mouseMove( mSketchSurface.getPreviewPath(), x_canvas, y_canvas );
             }
           }
         } else if ( mMode == SketchDef.MODE_MOVE 
@@ -1516,8 +1513,9 @@ public class SketchWindow extends ItemDrawer
         {
           // normal draw
           if ( mSymbol == Symbol.LINE || mSymbol == Symbol.AREA ) {
-            mCurrentBrush.mouseUp( mSketchSurface.previewPath.mPath, x_canvas, y_canvas );
-            mSketchSurface.previewPath.mPath = new Path();
+            mCurrentBrush.mouseUp( mSketchSurface.getPreviewPath(), x_canvas, y_canvas );
+            mSketchSurface.resetPreviewPath();
+
             if ( x_shift*x_shift + y_shift*y_shift > TDSetting.mLineSegment2 ) {
               mCurrentLinePath.addPoint( x_scene, y_scene );
             }
@@ -1590,8 +1588,9 @@ public class SketchWindow extends ItemDrawer
         // {
 
         //   if ( mSymbol == Symbol.LINE /* || mSymbol == Symbol.AREA */ ) {
-        //     mCurrentBrush.mouseUp( mSketchSurface.previewPath.mPath, x_canvas, y_canvas );
-        //     mSketchSurface.previewPath.mPath = new Path();
+        //     mCurrentBrush.mouseUp( mSketchSurface.getPreviewPath(), x_canvas, y_canvas );
+        //     mSketchSurface.resetPreviewPath();
+        //
         //     if ( Math.sqrt( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment || (mPointCnt % TDSetting.mLineType) > 0 ) {
         //       mCurrentLinePath.addPoint( x_scene, y_scene );
         //     }

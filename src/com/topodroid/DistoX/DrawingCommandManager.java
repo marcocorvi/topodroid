@@ -1113,7 +1113,6 @@ public class DrawingCommandManager
     c.drawColor( TDSetting.mBitmapBgcolor );
 
     // commandManager.execute All(c,previewDoneHandler);
-    // previewPath.draw(c);
     c.drawBitmap (bitmap, 0, 0, null);
 
     Matrix mat = new Matrix();

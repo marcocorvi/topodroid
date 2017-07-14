@@ -25,7 +25,6 @@ import android.graphics.RectF;
 import android.graphics.Path;
 import android.graphics.Path.Direction;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -1111,6 +1110,7 @@ public class DrawingWindow extends ItemDrawer
     TDAzimuth.mFixedExtend = fixed_extend;
     TDAzimuth.mRefAzimuth = azimuth;
     if ( ! TDSetting.mLevelOverNormal ) return;
+    if ( BTN_DIAL >= mButton1.length ) return;
 
     if ( TDAzimuth.mFixedExtend == 0 ) {
       android.graphics.Matrix m = new android.graphics.Matrix();
@@ -1333,7 +1333,7 @@ public class DrawingWindow extends ItemDrawer
     mButton1[ BTN_BLUETOOTH ].setVisibility( View.VISIBLE );
     // mButton1[ BTN_PLOT ].setVisibility( View.VISIBLE );
     mButton1[BTN_PLOT].setOnLongClickListener( this );
-    if ( TDSetting.mLevelOverNormal ) mButton1[ BTN_DIAL ].setVisibility( View.VISIBLE );
+    if ( TDSetting.mLevelOverNormal && BTN_DIAL < mButton1.length ) mButton1[ BTN_DIAL ].setVisibility( View.VISIBLE );
   }
 
   private void updateSplays( int mode )
@@ -1385,7 +1385,7 @@ public class DrawingWindow extends ItemDrawer
     mButton1[ BTN_BLUETOOTH ].setVisibility( View.GONE );
     // mButton1[ BTN_PLOT ].setVisibility( View.GONE );
     mButton1[BTN_PLOT].setOnLongClickListener( null );
-    if ( TDSetting.mLevelOverNormal ) mButton1[ BTN_DIAL ].setVisibility( View.GONE );
+    if ( TDSetting.mLevelOverNormal && BTN_DIAL < mButton1.length ) mButton1[ BTN_DIAL ].setVisibility( View.GONE );
   }
 
   private void makeButtons( )
@@ -1439,8 +1439,10 @@ public class DrawingWindow extends ItemDrawer
         mBMjoin = MyButton.getButtonBackground( mApp, res, ((k==2)? izons_ok[ic] : izons[ic]) );
     }
     if ( TDSetting.mLevelOverExpert ) {
-      mButton3[ BTN_BORDER ].setPadding(4,4,4,4);
-      mButton3[ BTN_BORDER ].setTextColor( 0xffffffff );
+      if ( BTN_BORDER < mButton3.length ) {
+        mButton3[ BTN_BORDER ].setPadding(4,4,4,4);
+        mButton3[ BTN_BORDER ].setTextColor( 0xffffffff );
+      }
       mBMedit_box= MyButton.getButtonBackground( mApp, res, izons[IC_BORDER_BOX] );
       mBMedit_ok = MyButton.getButtonBackground( mApp, res, izons[IC_BORDER_OK] ); 
       mBMedit_no = MyButton.getButtonBackground( mApp, res, izons[IC_BORDER_NO] );
@@ -1521,9 +1523,7 @@ public class DrawingWindow extends ItemDrawer
 
     mDrawingSurface = (DrawingSurface) findViewById(R.id.drawingSurface);
     mDrawingSurface.setZoomer( this );
-    mDrawingSurface.previewPath = new DrawingPath( DrawingPath.DRAWING_PATH_LINE, null );
-    mDrawingSurface.previewPath.mPath = new Path();
-    mDrawingSurface.previewPath.setPaint( getPreviewPaint() );
+    mDrawingSurface.makePreviewPath( DrawingPath.DRAWING_PATH_LINE, DrawingWindow.getPreviewPaint() );
     mDrawingSurface.setOnTouchListener(this);
     // mDrawingSurface.setOnLongClickListener(this);
     // mDrawingSurface.setBuiltInZoomControls(true);
@@ -1563,8 +1563,8 @@ public class DrawingWindow extends ItemDrawer
       mButton1[BTN_DOWNLOAD].setOnLongClickListener( this );
     }
     if ( TDSetting.mLevelOverBasic ) {
-      mButton1[BTN_PLOT].setOnLongClickListener( this );
-      mButton3[BTN_REMOVE].setOnLongClickListener( this );
+      if ( BTN_PLOT   < mButton1.length ) mButton1[BTN_PLOT].setOnLongClickListener( this );
+      if ( BTN_REMOVE < mButton3.length ) mButton3[BTN_REMOVE].setOnLongClickListener( this );
     }
  
     setConnectionStatus( mDataDownloader.getStatus() );
@@ -1666,8 +1666,10 @@ public class DrawingWindow extends ItemDrawer
       mApp.resetLocale();
       // Log.v("DistoX", "Drawing Activity onResume " + ((mDataDownloader!=null)?"with DataDownloader":"") );
       doResume();
-      if ( mDataDownloader != null ) mDataDownloader.onResume();
-      setConnectionStatus( mDataDownloader.getStatus() );
+      if ( mDataDownloader != null ) {
+        mDataDownloader.onResume();
+        setConnectionStatus( mDataDownloader.getStatus() );
+      }
       // TDLog.TimeEnd( "drawing activity ready" );
     }
 
@@ -2034,19 +2036,22 @@ public class DrawingWindow extends ItemDrawer
      mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
    }
 
-    static private Paint previewPaint = null;
-    static private Paint getPreviewPaint()
-    {
-      if ( previewPaint == null ) {
-        previewPaint = new Paint();
-        previewPaint.setColor(0xFFC1C1C1);
-        previewPaint.setStyle(Paint.Style.STROKE);
-        previewPaint.setStrokeJoin(Paint.Join.ROUND);
-        previewPaint.setStrokeCap(Paint.Cap.ROUND);
-        previewPaint.setStrokeWidth( BrushManager.WIDTH_PREVIEW );
-      }
-      return previewPaint;
-    }
+   // ----------------------------------------------------
+   // previewPaint is not thread safe, but it is ok if two threads make two preview paints
+   // eventually only one remains
+   static private Paint previewPaint = null;
+   static public  Paint getPreviewPaint()
+   {
+     if ( previewPaint != null ) return previewPaint;
+     Paint paint = new Paint();
+     paint.setColor(0xFFC1C1C1);
+     paint.setStyle(Paint.Style.STROKE);
+     paint.setStrokeJoin(Paint.Join.ROUND);
+     paint.setStrokeCap(Paint.Cap.ROUND);
+     paint.setStrokeWidth( BrushManager.WIDTH_PREVIEW );
+     previewPaint = paint;
+     return paint;
+   }
 
     private void doSelectAt( float x_scene, float y_scene, float size )
     {
@@ -2451,14 +2456,14 @@ public class DrawingWindow extends ItemDrawer
           if ( mSymbol == Symbol.LINE ) {
             mCurrentLinePath = new DrawingLinePath( mCurrentLine );
             mCurrentLinePath.addStartPoint( x_scene, y_scene );
-            mCurrentBrush.mouseDown( mDrawingSurface.previewPath.mPath, x_canvas, y_canvas );
+            mCurrentBrush.mouseDown( mDrawingSurface.getPreviewPath(), x_canvas, y_canvas );
           } else if ( mSymbol == Symbol.AREA ) {
             // TDLog.Log( TDLog.LOG_PLOT, "onTouch ACTION_DOWN area type " + mCurrentArea );
             mCurrentAreaPath = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(),
               mName+"-a", TDSetting.mAreaBorder );
             mCurrentAreaPath.addStartPoint( x_scene, y_scene );
             // Log.v("DistoX", "start area start " + x_scene + " " + y_scene );
-            mCurrentBrush.mouseDown( mDrawingSurface.previewPath.mPath, x_canvas, y_canvas );
+            mCurrentBrush.mouseDown( mDrawingSurface.getPreviewPath(), x_canvas, y_canvas );
           } else { // Symbol.POINT
             // mSaveX = x_canvas; // FIXME-000
             // mSaveY = y_canvas;
@@ -2512,7 +2517,7 @@ public class DrawingWindow extends ItemDrawer
           // return false;
 
         } else if ( mMode == MODE_SPLIT ) {
-          mCurrentBrush.mouseDown( mDrawingSurface.previewPath.mPath, x_canvas, y_canvas );
+          mCurrentBrush.mouseDown( mDrawingSurface.getPreviewPath(), x_canvas, y_canvas );
           mSplitBorder.add( new PointF( x_scene, y_scene ) );
           mSaveX = x_canvas; 
           mSaveY = y_canvas;
@@ -2534,7 +2539,7 @@ public class DrawingWindow extends ItemDrawer
                 if ( ++mPointCnt % mLinePointStep == 0 ) {
                   if ( mCurrentLinePath != null ) mCurrentLinePath.addPoint( x_scene, y_scene );
                 }
-                mCurrentBrush.mouseMove( mDrawingSurface.previewPath.mPath, x_canvas, y_canvas );
+                mCurrentBrush.mouseMove( mDrawingSurface.getPreviewPath(), x_canvas, y_canvas );
               } else {
                 save = false;
               }
@@ -2544,7 +2549,7 @@ public class DrawingWindow extends ItemDrawer
                   mCurrentAreaPath.addPoint( x_scene, y_scene );
                   // Log.v("DistoX", "start area add " + x_scene + " " + y_scene );
                 }
-                mCurrentBrush.mouseMove( mDrawingSurface.previewPath.mPath, x_canvas, y_canvas );
+                mCurrentBrush.mouseMove( mDrawingSurface.getPreviewPath(), x_canvas, y_canvas );
               } else {
                 save = false;
               }
@@ -2568,7 +2573,7 @@ public class DrawingWindow extends ItemDrawer
             doEraseAt( x_scene, y_scene );
           } else if ( mMode == MODE_SPLIT ) {
             if ( ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2 ) {
-              mCurrentBrush.mouseMove( mDrawingSurface.previewPath.mPath, x_canvas, y_canvas );
+              mCurrentBrush.mouseMove( mDrawingSurface.getPreviewPath(), x_canvas, y_canvas );
               mSplitBorder.add( new PointF( x_scene, y_scene ) );
             } else {
               save = false;
@@ -2626,8 +2631,8 @@ public class DrawingWindow extends ItemDrawer
           if ( mMode == MODE_DRAW ) {
             if ( mSymbol == Symbol.LINE || mSymbol == Symbol.AREA ) {
 
-              mCurrentBrush.mouseUp( mDrawingSurface.previewPath.mPath, x_canvas, y_canvas );
-              mDrawingSurface.previewPath.mPath = new Path();
+              mCurrentBrush.mouseUp( mDrawingSurface.getPreviewPath(), x_canvas, y_canvas );
+              mDrawingSurface.resetPreviewPath();
 
               if ( mSymbol == Symbol.LINE ) {
                 if (    ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2
@@ -4042,18 +4047,19 @@ public class DrawingWindow extends ItemDrawer
         }
       } else if ( TDSetting.mLevelOverExpert && b == mButton3[ k3++ ] ) { // RANGE EDIT
         mDoEditRange = ( mDoEditRange + 1 ) % 3;
-        switch ( mDoEditRange ) {
-          case 0:
-            mButton3[ BTN_BORDER ].setBackgroundDrawable( mBMedit_no );
-            break;
-          case 1:
-            mButton3[ BTN_BORDER ].setBackgroundDrawable( mBMedit_ok );
-            break;
-          case 2:
-            mButton3[ BTN_BORDER ].setBackgroundDrawable( mBMedit_box );
-            break;
+        if ( BTN_BORDER < mButton3.length ) {
+          switch ( mDoEditRange ) {
+            case 0:
+              mButton3[ BTN_BORDER ].setBackgroundDrawable( mBMedit_no );
+              break;
+            case 1:
+              mButton3[ BTN_BORDER ].setBackgroundDrawable( mBMedit_ok );
+              break;
+            case 2:
+              mButton3[ BTN_BORDER ].setBackgroundDrawable( mBMedit_box );
+              break;
+          }
         }
-
       } else if ( b == mButton5[k5++] ) { // ERASE MODE
         makePopupFilter( b, Drawing.mEraseModes, 4, Drawing.CODE_ERASE ); // pulldown menu to select erase mode
       } else if ( b == mButton5[k5++] ) { // ERASE SIZE

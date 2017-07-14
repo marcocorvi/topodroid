@@ -395,6 +395,7 @@ public class GMActivity extends Activity
 
   void handleComputeCalibResult( int job, int result )
   {
+    if ( ! mApp.mGMActivityVisible ) return;
     switch ( job ) {
       case CalibComputer.CALIB_COMPUTE_CALIB:
         resetTitle( );
@@ -924,6 +925,7 @@ public class GMActivity extends Activity
 
   void resetAndComputeGroups( long start_id )
   {
+    // if ( ! mApp.mGMActivityVisible ) return;
     setTitle( R.string.calib_compute_groups );
     setTitleColor( TDColor.COMPUTE );
     new CalibComputer( this, start_id, CalibComputer.CALIB_RESET_AND_COMPUTE_GROUPS ).execute();
@@ -966,17 +968,19 @@ public class GMActivity extends Activity
   }
 
 
-  // @Override
-  // public synchronized void onStop()
-  // { 
-  //   super.onStop();
-  // }
+  @Override
+  public synchronized void onStop()
+  { 
+    super.onStop();
+    // Log.v("DistoX", "GM Activity stop");
+  }
 
-  // @Override
-  // public synchronized void onDestroy() 
-  // {
-  //   super.onDestroy();
-  // }
+  @Override
+  public synchronized void onDestroy() 
+  {
+    super.onDestroy();
+    // Log.v("DistoX", "GM Activity destroy");
+  }
 
   // ------------------------------------------------------------------
 

@@ -38,7 +38,6 @@ import android.os.IBinder;
 
 // import android.os.Parcelable;
 import android.os.ParcelUuid;
-// import android.os.AsyncTask;
 
 import android.content.Context;
 import android.content.Intent;

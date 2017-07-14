@@ -50,13 +50,13 @@ public class TimerTask extends AsyncTask<String, Integer, Long >
     mAxis    = axis;
     mWait    = wait;
     mCount   = count;
-    // Log.v("DistoX", "Timer Task axis " + axis );
+    // Log.v("DistoX", "timer task axis " + axis );
   }
 
   @Override
   protected Long doInBackground( String... str )
   {
-    // Log.v("DistoX", "Timer Task does in background");
+    // Log.v("DistoX", "timer task in bkgr");
     int duration = 100; // ms
     ToneGenerator toneG = new ToneGenerator( AudioManager.STREAM_ALARM, TDSetting.mBeepVolume );
     long ret = 0;
@@ -94,6 +94,7 @@ public class TimerTask extends AsyncTask<String, Integer, Long >
         sensor_manager.unregisterListener( this );
       }
     }
+    // Log.v("DistoX", "timer task bkgr done");
     return ret;
   }
 
@@ -105,7 +106,7 @@ public class TimerTask extends AsyncTask<String, Integer, Long >
   @Override
   protected void onPostExecute(Long result) 
   {
-    // Log.v("DistoX", "Timer Task on post exec. Acc " + mCntAcc + " Mag " + mCntMag );
+    // Log.v("DistoX", "timer task post exec. Acc " + mCntAcc + " Mag " + mCntMag );
     if ( mCntAcc > 0 && mCntMag > 0 && mRun ) {
       mValAcc[0] /= mCntAcc;
       mValAcc[1] /= mCntAcc;

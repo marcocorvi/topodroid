@@ -38,12 +38,9 @@ public class TopoDroidComm
 
 // -----------------------------------------------------------
 
-  protected int nReadPackets;
-  protected boolean doWork = true;
+  protected volatile int nReadPackets;
 
   public boolean isConnected() { return mBTConnected; }
-
-  // public void stopDoWork( ) { doWork = false; }
 
   protected class RfcommThread extends Thread
   {
@@ -52,6 +49,8 @@ public class TopoDroidComm
     // private ILister mLister;
     private Handler mLister; // FIXME LISTER
     private long mLastShotId;   // last shot id
+
+    private volatile boolean doWork = true;
 
     void cancelWork()
     {
@@ -65,10 +64,10 @@ public class TopoDroidComm
      */
     public RfcommThread( DistoXProtocol protocol, int to_read, Handler /* ILister */ lister ) // FIXME LISTER
     {
-      nReadPackets = 0; // reset nr of read packets
       toRead = to_read;
       mProto = protocol;
       mLister = lister;
+      nReadPackets = 0; // reset nr of read packets
       // mLastShotId = 0;
       // TDLog.Log( TDLog.LOG_COMM, "RFcommThread cstr ToRead " + toRead );
     }

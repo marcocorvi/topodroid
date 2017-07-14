@@ -29,6 +29,7 @@ public class DataDownloadTask extends AsyncTask< String, Integer, Integer >
   DataDownloadTask( TopoDroidApp app, ListerHandler /* ILister */ lister ) // FIXME LISTER
   {
     // TDLog.Error( "DataDownloadTask cstr" );
+    // Log.v("DistoX", "data download task cstr");
     mApp = app;
     mLister = lister;
   }
@@ -67,10 +68,13 @@ public class DataDownloadTask extends AsyncTask< String, Integer, Integer >
     mApp.mDataDownloader.setDownload( false );
     mApp.mDataDownloader.notifyConnectionStatus( false );
     unlock();
+    // Log.v("DistoX", "data download task post exec");
   }
 
   private synchronized boolean lock()
   {
+    // Log.v("DistoX", "data download task lock: running is " 
+    //               + ( (running == null )? "null" : (running == this)? "this" : "other") );
     if ( running != null ) return false;
     running = this;
     return true;
@@ -78,6 +82,8 @@ public class DataDownloadTask extends AsyncTask< String, Integer, Integer >
 
   private synchronized void unlock()
   {
+    // Log.v("DistoX", "data download task unlock: running is " 
+    //               + ( (running == null )? "null" : (running == this)? "this" : "other") );
     if ( running == this ) running = null;
   }
 
