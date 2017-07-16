@@ -41,40 +41,44 @@ import android.util.Log;
  */
 public class SketchDrawingSurface extends SurfaceView
                                   implements SurfaceHolder.Callback
+                                  , IDrawingSurface
 {
   static final String TAG = "DistoX";
 
-    protected DrawThread mDrawingThread;
-    private Bitmap mBitmap;
-    public boolean isDrawing = true;
-    public DrawingPath mPreviewPath;
-    // private SurfaceHolder mHolder; // canvas holder
-    private Context mContext;
-    private AttributeSet mAttrs;
-    private int mWidth;            // canvas width
-    private int mHeight;           // canvas height
+  protected DrawThread mDrawThread;
+  private Bitmap mBitmap;
+  public volatile boolean isDrawing = true;
+  public DrawingPath mPreviewPath;
+  // private SurfaceHolder mHolder; // canvas holder
+  private Context mContext;
+  private AttributeSet mAttrs;
+  private int mWidth;            // canvas width
+  private int mHeight;           // canvas height
 
-    // private DrawingCommandManager commandManager;
-    private SketchModel mModel;
+  // private DrawingCommandManager commandManager;
+  private SketchModel mModel;
 
-    public int width()  { return mWidth; }
-    public int height() { return mHeight; }
+  public int width()  { return mWidth; }
+  public int height() { return mHeight; }
 
-    public SketchDrawingSurface(Context context, AttributeSet attrs) 
-    {
-      super(context, attrs);
-      mWidth = 0;
-      mHeight = 0;
+  public boolean isDrawing() { return isDrawing; }
 
-      mDrawingThread = null;
-      mContext = context;
-      mAttrs   = attrs;
-      // mHolder = getHolder();
-      // mHolder.addCallback(this);
-      getHolder().addCallback(this);
 
-      // commandManager = new DrawingCommandManager();
-    }
+  public SketchDrawingSurface(Context context, AttributeSet attrs) 
+  {
+    super(context, attrs);
+    mWidth = 0;
+    mHeight = 0;
+
+    mDrawThread = null;
+    mContext = context;
+    mAttrs   = attrs;
+    // mHolder = getHolder();
+    // mHolder.addCallback(this);
+    getHolder().addCallback(this);
+
+    // commandManager = new DrawingCommandManager();
+  }
 
   // these four methods are the same as in DrawingSurface
   Path getPreviewPath() { return (mPreviewPath != null)? mPreviewPath.mPath : null; }
@@ -87,160 +91,133 @@ public class SketchDrawingSurface extends SurfaceView
     mPreviewPath.setPaint( paint );
   }
 
-    // public void setDisplayMode( int mode ) { commandManager.setDisplayMode(mode); }
-    // public int getDisplayMode( ) { return commandManager.getDisplayMode(); }
+  // public void setDisplayMode( int mode ) { commandManager.setDisplayMode(mode); }
+  // public int getDisplayMode( ) { return commandManager.getDisplayMode(); }
 
-    void setModel( SketchModel model ) { mModel = model; }
+  void setModel( SketchModel model ) { mModel = model; }
 
-    void refresh( SurfaceHolder holder )
-    {
-      // if ( holder == null ) return; // guaranteed
-      Canvas canvas = null;
+  // @implement IDrawingSurface
+  public void refresh( SurfaceHolder holder )
+  {
+    // if ( holder == null ) return; // guaranteed
+    Canvas canvas = null;
+    try {
+      canvas = holder.lockCanvas();
+      if ( mBitmap == null ) {
+        mBitmap = Bitmap.createBitmap (1, 1, Bitmap.Config.ARGB_8888);
+      }
+      final Canvas c = new Canvas (mBitmap);
+      mWidth  = c.getWidth();
+      mHeight = c.getHeight();
+
+      c.drawColor(0, PorterDuff.Mode.CLEAR);
+      canvas.drawColor(0, PorterDuff.Mode.CLEAR);
+
+      // commandManager.executeAll( c, previewDoneHandler );
+      mModel.executeAll( c, null /* previewDoneHandler */ ); // handler is not used
+      if ( mPreviewPath != null ) {
+        mPreviewPath.draw(c, null);
+      }
+    
+      canvas.drawBitmap (mBitmap, 0, 0, null);
+    } finally {
+      if ( canvas != null ) {
+        holder.unlockCanvasAndPost( canvas );
+      }
+    }
+  }
+
+  // private Handler previewDoneHandler = new Handler()
+  // {
+  //   @Override
+  //   public void handleMessage(Message msg) {
+  //     this.isDrawing = false;
+  //   }
+  // };
+
+  void stopDrawing() 
+  {
+    if ( mDrawThread != null ) {
+      this.isDrawing = false;
+      mDrawThread.setRunning( false );
       try {
-        canvas = holder.lockCanvas();
-        if ( mBitmap == null ) {
-          mBitmap = Bitmap.createBitmap (1, 1, Bitmap.Config.ARGB_8888);
-        }
-        final Canvas c = new Canvas (mBitmap);
-        mWidth  = c.getWidth();
-        mHeight = c.getHeight();
+        mDrawThread.join();
+      } catch ( InterruptedException e ) { }
+      mDrawThread = null;
+    }
+  }
 
-        c.drawColor(0, PorterDuff.Mode.CLEAR);
-        canvas.drawColor(0, PorterDuff.Mode.CLEAR);
+  // (x,y,z) world coords.
+  // public SketchStationName addStation( String name, float x, float y, float z )
+  // {
+  //   SketchStationName st = new SketchStationName(name, x, y, z );
+  //   st.mPaint = BrushManager.fixedStationPaint;
+  //   mModel.addFixedStation( st );
+  //   return st;
+  // }
 
-        // commandManager.executeAll( c, previewDoneHandler );
-        mModel.executeAll( c, null /* previewDoneHandler */ ); // handler is not used
-        if ( mPreviewPath != null ) {
-          mPreviewPath.draw(c, null);
-        }
-      
-        canvas.drawBitmap (mBitmap, 0, 0, null);
-      } finally {
-        if ( canvas != null ) {
-          holder.unlockCanvasAndPost( canvas );
-        }
+  public void clearReferences() 
+  { 
+    // commandManager.clearReferences();
+    if ( mModel != null ) {
+      mModel.clearReferences();
+    }
+  }
+
+  public void undo()
+  {
+    this.isDrawing = true;
+    mModel.undo();
+  }
+
+  // public boolean hasMoreUndo() { return commandManager.hasMoreUndo(); }
+
+
+  // public boolean hasStationName( String name ) { return commandManager.hasStationName( name ); }
+  // public DrawingStationName  getStationAt( float x, float y, float size ) 
+  // { return commandManager.getStationAt( x, y, size ); }
+
+  public void surfaceChanged(SurfaceHolder holder, int format, int width,  int height) 
+  {
+    mBitmap =  Bitmap.createBitmap (width, height, Bitmap.Config.ARGB_8888);;
+  }
+
+  void setThreadRunning( boolean running ) 
+  {
+    if ( mDrawThread != null ) {
+      if ( ! mDrawThread.isRunning() ) {
+        // mDrawThread.setRunning(true); // not necessary
+        mDrawThread.start();
       }
     }
+  }
 
-    // private Handler previewDoneHandler = new Handler()
-    // {
-    //   @Override
-    //   public void handleMessage(Message msg) {
-    //     isDrawing = false;
-    //   }
-    // };
-
-    class DrawThread extends  Thread
-    {
-      private SurfaceHolder mHolder;
-      private volatile boolean mRunning = false;
-
-      public DrawThread(SurfaceHolder holder)
-      {
-        mHolder = holder;
-      }
-
-      public void setRunning(boolean run) { mRunning = run; }
-
-      public boolean running() { return mRunning; }
-
-      @Override
-      public void run() 
-      {
-        mRunning = true;
-        while ( mRunning ) {
-          if ( isDrawing && mHolder != null ) {
-            refresh( mHolder );
-          } else {
-            try { Thread.sleep(100); } catch (InterruptedException e) { }
-          }
-        }
-      }
+  public void surfaceCreated(SurfaceHolder holder) 
+  {
+    if (mDrawThread == null ) {
+      mDrawThread = new DrawThread(this, holder);
     }
+    // Log.v("DistoX", "surface created set running true");
+    // mDrawThread.setRunning(true); // not necessary, done in run()
+    mDrawThread.start();
+  }
 
-    void stopDrawing() 
-    {
-      isDrawing = false;
-      if ( mDrawingThread != null ) {
-        mDrawingThread.setRunning( false );
+  public void surfaceDestroyed(SurfaceHolder holder) 
+  {
+    if ( mDrawThread != null ) {
+      mDrawThread.setRunning(false);
+      boolean retry = true;
+      while (retry) {
         try {
-          mDrawingThread.join();
-        } catch ( InterruptedException e ) { }
-        mDrawingThread = null;
-      }
-    }
-
-    // (x,y,z) world coords.
-    // public SketchStationName addStation( String name, float x, float y, float z )
-    // {
-    //   SketchStationName st = new SketchStationName(name, x, y, z );
-    //   st.mPaint = BrushManager.fixedStationPaint;
-    //   mModel.addFixedStation( st );
-    //   return st;
-    // }
-
-    public void clearReferences() 
-    { 
-      // commandManager.clearReferences();
-      if ( mModel != null ) {
-        mModel.clearReferences();
-      }
-    }
-
-    public void undo()
-    {
-      isDrawing = true;
-      mModel.undo();
-    }
-
-    // public boolean hasMoreUndo() { return commandManager.hasMoreUndo(); }
-
-
-    // public boolean hasStationName( String name ) { return commandManager.hasStationName( name ); }
-    // public DrawingStationName  getStationAt( float x, float y, float size ) 
-    // { return commandManager.getStationAt( x, y, size ); }
-
-    public void surfaceChanged(SurfaceHolder holder, int format, int width,  int height) 
-    {
-      mBitmap =  Bitmap.createBitmap (width, height, Bitmap.Config.ARGB_8888);;
-    }
-
-    void setThreadRunning( boolean running ) 
-    {
-      if ( mDrawingThread != null ) {
-        if ( ! mDrawingThread.running() ) {
-          // mDrawingThread.setRunning(true); // not necessary
-          mDrawingThread.start();
+          mDrawThread.join();
+          retry = false;
+        } catch (InterruptedException e) {
+          // we will try it again and again...
         }
       }
+      mDrawThread = null;
     }
-
-    public void surfaceCreated(SurfaceHolder holder) 
-    {
-      if (mDrawingThread == null ) {
-        mDrawingThread = new DrawThread(holder);
-      }
-      // Log.v("DistoX", "surface created set running true");
-      // mDrawingThread.setRunning(true); // not necessary, done in run()
-      mDrawingThread.start();
-    }
-
-    public void surfaceDestroyed(SurfaceHolder holder) 
-    {
-      if ( mDrawingThread != null ) {
-        mDrawingThread.setRunning(false);
-        boolean retry = true;
-        while (retry) {
-          try {
-            mDrawingThread.join();
-            retry = false;
-          } catch (InterruptedException e) {
-            // we will try it again and again...
-          }
-        }
-        mDrawingThread = null;
-      }
-      // Log.v("DistoX", "surface destroyed");
-    }
+    // Log.v("DistoX", "surface destroyed");
+  }
 
 }

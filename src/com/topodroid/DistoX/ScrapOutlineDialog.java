@@ -74,7 +74,7 @@ public class ScrapOutlineDialog extends MyDialog
 
     mBtnBack = (Button) findViewById(R.id.btn_back);
     mBtnBack.setOnClickListener( this );
-    mBtnClear = (Button) findViewById(R.id.btn_back);
+    mBtnClear = (Button) findViewById(R.id.btn_clear);
     mBtnClear.setOnClickListener( this );
 
     updateList();

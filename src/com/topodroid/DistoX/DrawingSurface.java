@@ -53,6 +53,7 @@ import android.util.Log;
  */
 public class DrawingSurface extends SurfaceView
                             implements SurfaceHolder.Callback
+                            , IDrawingSurface
 {
   static final int DRAWING_PLAN     = 1;
   static final int DRAWING_PROFILE  = 2;
@@ -62,7 +63,7 @@ public class DrawingSurface extends SurfaceView
   protected DrawThread mDrawThread;
 
   boolean mSurfaceCreated = false;
-  public boolean isDrawing = true;
+  public volatile boolean isDrawing = true;
   private DrawingPath mPreviewPath;
   // private SurfaceHolder mHolder; // canvas holder
   private Context mContext;
@@ -79,6 +80,8 @@ public class DrawingSurface extends SurfaceView
   static DrawingCommandManager mCommandManager3 = null; 
 
   ArrayList< String > mSplayStations; // stations where to show splays
+
+  public boolean isDrawing() { return isDrawing; }
 
   // -----------------------------------------------------
   // MANAGER CACHE
@@ -312,7 +315,7 @@ public class DrawingSurface extends SurfaceView
   Path getPreviewPath() { return (mPreviewPath != null)? mPreviewPath.mPath : null; }
 
  
-  void refresh( SurfaceHolder holder )
+  public void refresh( SurfaceHolder holder )
   {
     // if ( mZoomer != null ) mZoomer.checkZoomBtnsCtrl();
     Canvas canvas = null;
@@ -341,43 +344,6 @@ public class DrawingSurface extends SurfaceView
 
 
   // void clearDrawing() { commandManager.clearDrawing(); }
-
-  class DrawThread extends  Thread
-  {
-    private volatile SurfaceHolder mHolder;
-    private volatile boolean mRunning;
-
-    public DrawThread(SurfaceHolder holder)
-    {
-      TDLog.Log( TDLog.LOG_PLOT, "draw thread cstr");
-      mHolder = holder;
-    }
-
-    public void setHolder( SurfaceHolder holder )
-    {
-      TDLog.Log( TDLog.LOG_PLOT, "draw thread set holder " + ( ( holder == null )? "null" : "non-null" ) );
-      mHolder = holder;
-    }
-
-    public void setRunning( boolean run ) { mRunning = run; }
-
-    @Override
-    public void run() 
-    {
-      TDLog.Log( TDLog.LOG_PLOT, "draw thread run");
-      mRunning = true;
-      while ( mRunning ) {
-        if ( isDrawing && mHolder != null ) {
-          refresh( mHolder );
-          Thread.yield();
-          try { Thread.sleep(10); } catch ( InterruptedException e ) { }
-        } else {
-          try { Thread.sleep(100); } catch ( InterruptedException e ) { }
-        }
-      }
-      TDLog.Log( TDLog.LOG_PLOT, "draw thread exit");
-    }
-  }
 
   // called by DrawingWindow::computeReference
   public DrawingStationName addDrawingStationName ( NumStation num_st, float x, float y, boolean selectable, List<PlotInfo> xsections )
@@ -562,7 +528,7 @@ public class DrawingSurface extends SurfaceView
 
   public void surfaceChanged( SurfaceHolder holder, int format, int width,  int height) 
   {
-    TDLog.Log( TDLog.LOG_PLOT, "surfaceChanged " );
+    // TDLog.Log( TDLog.LOG_PLOT, "surfaceChanged " );
     // TODO Auto-generated method stub
     mDrawThread.setHolder( holder );
   }
@@ -570,21 +536,22 @@ public class DrawingSurface extends SurfaceView
 
   public void surfaceCreated( SurfaceHolder holder ) 
   {
-    TDLog.Log( TDLog.LOG_PLOT, "surfaceCreated " );
+    // TDLog.Log( TDLog.LOG_PLOT, "surfaceCreated " );
     if ( mDrawThread == null ) {
-      mDrawThread = new DrawThread(holder);
+      mDrawThread = new DrawThread(this, holder);
     } else {
       mDrawThread.setHolder( holder );
     }
     // mDrawThread.setRunning(true); // not necessary: done by start
     mDrawThread.start();
+    isDrawing = true;
     mSurfaceCreated = true;
   }
 
   public void surfaceDestroyed( SurfaceHolder holder ) 
   {
     mSurfaceCreated = false;
-    TDLog.Log( TDLog.LOG_PLOT, "surfaceDestroyed " );
+    // TDLog.Log( TDLog.LOG_PLOT, "surfaceDestroyed " );
     // mDrawThread.setHolder( null );
     mDrawThread.setRunning(false);
     boolean retry = true;

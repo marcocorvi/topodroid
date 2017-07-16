@@ -140,6 +140,21 @@ public class LinePoint extends Point2D
     return (float)Math.sqrt( (x0-x2)*(x0-x2) + (y0-y2)*(y0-y2) );
   }
 
+  // return line abscissa of the projection of this point on the line P0-P1
+  float orthoProject( LinePoint p0, LinePoint p1 )
+  {
+    float x01 = p1.x - p0.x;
+    float y01 = p1.y - p0.y;
+    return ((x-p0.x)*x01 + (y-p0.y)*y01) / ( x01*x01 + y01*y01 );
+  }
+    
+  // return orthogonal distance of this point on the line P0-P1
+  float orthoDistance( LinePoint p0, LinePoint p1 )
+  {
+    float x01 = p1.x - p0.x;
+    float y01 = p1.y - p0.y;
+    return TDMath.abs( (x-p0.x)*y01 - (y-p0.y)*x01 ) / TDMath.sqrt( x01*x01 + y01*y01 );
+  }
 
   public void toTherion( PrintWriter pw )
   {

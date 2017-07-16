@@ -49,21 +49,17 @@ public class DrawingCommandManager
   private static final int BORDER = 20;
 
   static int mDisplayMode = DisplayMode.DISPLAY_ALL; // this display mode is shared among command managers
-  RectF mBBox;
+  private RectF mBBox;
 
   private DrawingPath mNorthLine;
-  DrawingPath mFirstReference;
-  DrawingPath mSecondReference;
+  private DrawingPath mFirstReference;
+  private DrawingPath mSecondReference;
 
   private List<DrawingPath>    mGridStack1;
   private List<DrawingPath>    mGridStack10;
   private List<DrawingPath>    mGridStack100;
 
   private DrawingScaleReference mScaleRef; /*[AR] this is the instance of scale reference line*/
-
-  List<DrawingPath> GetGrid1()   { return mGridStack1; }
-  List<DrawingPath> GetGrid10()  { return mGridStack10; }
-  List<DrawingPath> GetGrid100() { return mGridStack100; }
 
   private List<DrawingPath>        mLegsStack;
   private List<DrawingPath>        mSplaysStack;
@@ -82,15 +78,30 @@ public class DrawingCommandManager
   private Matrix mMatrix;
   private float  mScale; // current zoom: value of 1 pl in scene space
 
-  DrawingPath              getNorth()        { return mNorthLine;    }
-  List<DrawingPath>        getLegs()         { return mLegsStack;    }
-  List<DrawingPath>        getSplays()       { return mSplaysStack;  }
+  // DrawingPath              getNorth()        { return mNorthLine;    }
   List<ICanvasCommand>     getCommands()     { return mCurrentStack; }
+
+  // accessors used by DrawingDxf and DrawingSvg
+  List<DrawingPath>        getLegs()         { return mLegsStack;    } 
+  List<DrawingPath>        getSplays()       { return mSplaysStack;  }
   List<DrawingStationName> getStations()     { return mStations;     } 
   List<DrawingStationPath> getUserStations() { return mUserStations; }
 
-  int mSelectMode = Drawing.FILTER_ALL;
+  // accessor for DrawingSvg
+  List<DrawingPath> getGrid1()   { return mGridStack1; }
+  List<DrawingPath> getGrid10()  { return mGridStack10; }
+  List<DrawingPath> getGrid100() { return mGridStack100; }
+
+  private int mSelectMode = Drawing.FILTER_ALL;
   void setSelectMode( int mode ) { mSelectMode = mode; }
+
+  private boolean hasEraser = false;
+  private float mEraserX = 0; // eraser (x,y) canvas coords
+  private float mEraserY = 0;
+  private float mEraserR = 0; // eraser radius
+
+  public void setDisplayMode( int mode ) { mDisplayMode = mode; }
+  public int getDisplayMode( ) { return mDisplayMode; }
 
   /* Check if any line overlaps another of the same type
    * In case of overlap the overlapped line is removed
@@ -233,7 +244,7 @@ public class DrawingCommandManager
     mSplaysStack  = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mScrap        = Collections.synchronizedList(new ArrayList<DrawingLinePath>());
     mCurrentStack = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
-    mUserStations = Collections.synchronizedList( new ArrayList<DrawingStationPath>());
+    mUserStations = Collections.synchronizedList(new ArrayList<DrawingStationPath>());
     mRedoStack    = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
     // mHighlight = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mStations     = Collections.synchronizedList(new ArrayList<DrawingStationName>());
@@ -423,11 +434,6 @@ public class DrawingCommandManager
   {
     mCurrentStack.add( cmd );
   }
-
-  private boolean hasEraser = false;
-  private float mEraserX = 0; // canvas coords
-  private float mEraserY = 0;
-  private float mEraserR = 0;
 
   // set the eraser circle
   // x, y canvas coords
@@ -833,9 +839,6 @@ public class DrawingCommandManager
 
   // ooooooooooooooooooooooooooooooooooooooooooooooooooooo
 
-  public void setDisplayMode( int mode ) { mDisplayMode = mode; }
-  public int getDisplayMode( ) { return mDisplayMode; }
-
   // void setBounds( float x1, float x2, float y1, float y2 )
   // {
   //   mSelection = new Selection();
@@ -999,13 +1002,6 @@ public class DrawingCommandManager
     // checkLines();
   }
 
-  public void addScrapOutlinePath( DrawingLinePath path ) 
-  {
-    synchronized( mScrap ) {
-      mScrap.add( path );
-    }
-  }
-
   public void deleteSectionPoint( String scrap_name, EraseCommand cmd )
   {
     int index = BrushManager.mPointLib.mPointSectionIndex;
@@ -1078,7 +1074,7 @@ public class DrawingCommandManager
   public Bitmap getBitmap()
   {
     RectF bounds = getBitmapBounds();
-    // TDLog.Log(  TDLog.LOG_PLOT, "getBitmap Bounds " + bounds.left + " " + bounds.top + " " + bounds.right + " " + bounds.bottom );
+    // TDLog.Log( TDLog.LOG_PLOT, "getBitmap Bounds " + bounds.left + " " + bounds.top + " " + bounds.right + " " + bounds.bottom );
     mBitmapScale = TDSetting.mBitmapScale;
 
     int width  = (int)((bounds.right - bounds.left + 2 * BORDER) );
@@ -1179,11 +1175,10 @@ public class DrawingCommandManager
     return bitmap;
   }
 
-  static final String actionName[] = { "remove", "insert", "modify" };
+  // static final String actionName[] = { "remove", "insert", "modify" }; // DEBUG LOG
 
   public void undo ()
   {
-
     final int length = currentStackLength();
     if ( length > 0) {
       final ICanvasCommand cmd = mCurrentStack.get(  length - 1  );
@@ -1820,20 +1815,19 @@ public class DrawingCommandManager
     }
   }
 
-  private float project( LinePoint q, LinePoint p0, LinePoint p1 )
-  {
-    float x01 = p1.x - p0.x;
-    float y01 = p1.y - p0.y;
-    return ((q.x-p0.x)*x01 + (q.y-p0.y)*y01) / ( x01*x01 + y01*y01 );
-  }
-    
-  private float distance( LinePoint q, LinePoint p0, LinePoint p1 )
-  {
-    float x01 = p1.x - p0.x;
-    float y01 = p1.y - p0.y;
-    return TDMath.abs( (q.x-p0.x)*y01 - (q.y-p0.y)*x01 ) / TDMath.sqrt( x01*x01 + y01*y01 );
-  }
-    
+  // moved to methods of LinePoint
+  // private float orthoProject( LinePoint q, LinePoint p0, LinePoint p1 )
+  // {
+  //   float x01 = p1.x - p0.x;
+  //   float y01 = p1.y - p0.y;
+  //   return ((q.x-p0.x)*x01 + (q.y-p0.y)*y01) / ( x01*x01 + y01*y01 );
+  // }
+  // private float orthoDistance( LinePoint q, LinePoint p0, LinePoint p1 )
+  // {
+  //   float x01 = p1.x - p0.x;
+  //   float y01 = p1.y - p0.y;
+  //   return TDMath.abs( (q.x-p0.x)*y01 - (q.y-p0.y)*x01 ) / TDMath.sqrt( x01*x01 + y01*y01 );
+  // }
       
   boolean moveHotItemToNearestPoint()
   {
@@ -1868,9 +1862,9 @@ public class DrawingCommandManager
 
   class NearbySplay
   {
-    float dx, dy;
-    float d; // distance from point
-    LinePoint pt; // point
+    final float dx, dy;
+    final float d; // distance from point
+    final LinePoint pt; // point
     float llen, rlen;
 
     NearbySplay( float xx, float yy, float dd, LinePoint lp )
@@ -2173,8 +2167,8 @@ public class DrawingCommandManager
       // with border qq10 --> qq1 --> ... using step delta1
 
       for (int c=0; c<cmax; ++c) { // try to move qq1 forward
-        TDLog.Debug( "snap at qq1 " + qq1.x + " " + qq1.y );
-        float s = project( qq1, pp10, pp1 );
+        // TDLog.Debug( "snap at qq1 " + qq1.x + " " + qq1.y );
+        float s = qq1.orthoProject( pp10, pp1 );
         while ( s > 1.0 ) {
           pp10 = pp1;
           // TDLog.Debug( "snap follow pp10 " + pp10.x + " " + pp10.y );
@@ -2187,10 +2181,10 @@ public class DrawingCommandManager
             // TDLog.Debug( "snap pp1 == pp0, pp10 " + pp10.x + " " + pp10.y );
             break;
           }
-          s = project( qq1, pp10, pp1 );
+          s = qq1.orthoProject( pp10, pp1 );
         }
         if ( pp1 == null ) break;
-        float d1 = distance( qq1, pp10, pp1 );
+        float d1 = qq1.orthoDistance( pp10, pp1 );
         // TDLog.Debug( "distance d1 " + d1 + " s " + s );
 
         if ( s < 0.0f ) break;
@@ -2213,7 +2207,7 @@ public class DrawingCommandManager
       // with border qq20 --> qq2 --> ... using step delta2
       for (int c=0; c < cmax; ++c) { // try to move qq2 backward
         // TDLog.Debug( "snap at qq2 " + qq2.x + " " + qq2.y );
-        float s = project( qq2, pp20, pp2 );
+        float s = qq2.orthoProject( pp20, pp2 );
         while ( s > 1.0 ) {
           pp20 = pp2;
           // TDLog.Debug( "snap s>1, follow pp20 " + pp20.x + " " + pp20.y );
@@ -2226,10 +2220,10 @@ public class DrawingCommandManager
             // TDLog.Debug( "snap pp2 == pp0, pp20 " + pp20.x + " " + pp20.y );
             break;
           }
-          s = project( qq2, pp20, pp2 );
+          s = qq2.orthoProject( pp20, pp2 );
         }
         if ( pp2 == null ) break;
-        float d2 = distance( qq2, pp20, pp2 );
+        float d2 = qq2.orthoDistance( pp20, pp2 );
         // TDLog.Debug( "distance qq2-P_line " + d2 + " s " + s );
 
         if ( s < 0.0f ) break;
@@ -2723,12 +2717,20 @@ public class DrawingCommandManager
 
   void clearScrapOutline() { synchronized( mScrap ) { mScrap.clear(); } }
 
-  void addScrapDataStream( String tdr, float xdelta, float ydelta )
+
+  public void addScrapOutlinePath( DrawingLinePath path ) 
   {
     synchronized( mScrap ) {
-      mScrap.clear();
+      mScrap.add( path );
     }
   }
+
+  // void addScrapDataStream( String tdr, float xdelta, float ydelta )
+  // {
+  //   synchronized( mScrap ) {
+  //     mScrap.clear();
+  //   }
+  // }
 
 
 }

@@ -132,9 +132,9 @@ class DrawingSvg
         // centerline data
         if ( PlotInfo.isSketch2D( type ) ) { 
           if ( TDSetting.mSvgGrid ) {
-            printSvgGrid( out, plot.GetGrid1(),   "999999", 0.4f, xoff, yoff );
-            printSvgGrid( out, plot.GetGrid10(),  "666666", 0.6f, xoff, yoff );
-            printSvgGrid( out, plot.GetGrid100(), "333333", 0.8f, xoff, yoff );
+            printSvgGrid( out, plot.getGrid1(),   "999999", 0.4f, xoff, yoff );
+            printSvgGrid( out, plot.getGrid10(),  "666666", 0.6f, xoff, yoff );
+            printSvgGrid( out, plot.getGrid100(), "333333", 0.8f, xoff, yoff );
           }
           // FIXME OK PROFILE
           out.write("<g style=\"fill:none;stroke-opacity:0.6;stroke:red\" >\n");

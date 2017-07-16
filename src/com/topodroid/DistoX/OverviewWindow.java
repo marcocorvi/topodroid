@@ -614,7 +614,7 @@ public class OverviewWindow extends ItemDrawer
 
         // now try to load drawings from therion file
         String fullName = mApp.mySurvey + "-" + plot.name;
-        TDLog.Log( TDLog.LOG_DEBUG, "load th2 file " + fullName );
+        // TDLog.Log( TDLog.LOG_DEBUG, "load th2 file " + fullName );
 
         String th2 = TDPath.getTh2FileWithExt( fullName );
         // if ( TDSetting.mBinaryTh2 ) { // TDR BINARY

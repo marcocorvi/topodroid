@@ -1624,6 +1624,8 @@ public class DrawingWindow extends ItemDrawer
     if ( mDataDownloader != null ) {
       mApp.registerLister( this );
     } 
+
+    // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on create done");
   }
 
   // ==============================================================
@@ -1671,6 +1673,7 @@ public class DrawingWindow extends ItemDrawer
         setConnectionStatus( mDataDownloader.getStatus() );
       }
       // TDLog.TimeEnd( "drawing activity ready" );
+      // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on resume done");
     }
 
     @Override
@@ -1679,6 +1682,7 @@ public class DrawingWindow extends ItemDrawer
       // Log.v("DistoX", "Drawing Activity onPause " + ((mDataDownloader!=null)?"with DataDownloader":"") );
       doPause();
       super.onPause();
+      // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on pause done");
     }
 
     @Override
@@ -1687,6 +1691,7 @@ public class DrawingWindow extends ItemDrawer
       super.onStart();
       // Log.v("DistoX", "Drawing Activity onStart " + ((mDataDownloader!=null)?"with DataDownloader":"") );
       loadRecentSymbols( mApp.mData );
+      // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on start done");
     }
 
     @Override
@@ -1696,6 +1701,7 @@ public class DrawingWindow extends ItemDrawer
       // Log.v("DistoX", "Drawing Activity onStop ");
       saveRecentSymbols( mApp.mData );
       // doStop();
+      // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on stop done");
     }
 
     @Override
@@ -1710,6 +1716,7 @@ public class DrawingWindow extends ItemDrawer
       //   mDataDownloader.onStop();
       //   mApp.disconnectRemoteDevice( false );
       // }
+      // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on destroy done");
     }
 
     private void doResume()

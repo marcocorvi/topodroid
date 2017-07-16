@@ -55,8 +55,8 @@ public class PlotRenameDialog extends MyDialog
     setContentView(R.layout.plot_rename_dialog);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
     mBtnRename = (Button) findViewById(R.id.btn_rename );
-    mBtnDelete = (Button) findViewById(R.id.btn_delete );
     mBtnSplit  = (Button) findViewById(R.id.btn_split );
+    mBtnDelete = (Button) findViewById(R.id.btn_delete );
     mBtnBack   = (Button) findViewById(R.id.btn_back );
 
     mEtName = (EditText) findViewById( R.id.et_name );
@@ -66,6 +66,7 @@ public class PlotRenameDialog extends MyDialog
 
     mBtnRename.setOnClickListener( this );
     mBtnBack.setOnClickListener( this );
+    mBtnDelete.setOnClickListener( this );
     if ( TDSetting.mLevelOverExpert ) {
       mBtnSplit.setOnClickListener( this );
       mEtStation.setInputType( android.text.InputType.TYPE_NULL );

@@ -35,15 +35,14 @@ class ConnectionHandler extends Handler
    private byte mSendCounter;  // send counter
    private byte mRecvCounter;  // recv counter must be equal to the peer send counter
                        // it is increased after the ack
-   byte mAck[]; // ACK buffer
+   private byte mAck[]; // ACK buffer
    // ConcurrentLinkedQueue< byte[] > mBufferQueue;
-   ConnectionQueue mBufferQueue;
-   TopoDroidApp mApp;
-   BluetoothDevice mDevice;
-   boolean mClient;   // whether this TopoDroid initiated the connection
-   volatile boolean mRun;
+   private ConnectionQueue mBufferQueue;
+   private TopoDroidApp mApp;
+   private BluetoothDevice mDevice;
+   private boolean mClient;   // whether this TopoDroid initiated the connection
 
-   SendThread mSendThread;
+   private SendThread mSendThread;
 
    ConnectionHandler( TopoDroidApp app )
    {
@@ -57,7 +56,6 @@ class ConnectionHandler extends Handler
      mSyncService = new SyncService( mApp, this );
      mDevice = null;
      mClient = false;
-     mRun = false;
      mSendThread = null;
    }
 
@@ -122,8 +120,8 @@ class ConnectionHandler extends Handler
    {
      TDLog.Log( TDLog.LOG_SYNC, "ConnectionHandler connect() " + device.getName() );
      if ( mDevice != device ) {
-       mRun = false;
        if ( mSendThread != null ) {
+         mSendThread.setRunning( false );
          try {
            mSendThread.join();
          } catch ( InterruptedException e ) { }
@@ -196,16 +194,16 @@ class ConnectionHandler extends Handler
    void startSendThread()
    {
      TDLog.Log( TDLog.LOG_SYNC, "ConnectionHandler startSendThread()");
-     mRun = true;
      mSendThread = new SendThread( mBufferQueue );
+     // mSendThread.setRunning( true );
      mSendThread.start();
    }
 
    void stopSendThread()
    {
      TDLog.Log( TDLog.LOG_SYNC, "ConnectionHandler stopSendThread()");
-     mRun = false;
      if ( mSendThread != null ) {
+       mSendThread.setRunning( false );
        try {
          mSendThread.join();
        } catch ( InterruptedException e ) { }
@@ -607,13 +605,16 @@ class ConnectionHandler extends Handler
   private class SendThread extends Thread
   {
     // final ConcurrentLinkedQueue<byte[]> mQueue;
-    final ConnectionQueue mQueue;
+    final private ConnectionQueue mQueue;
+    private volatile boolean mRunning;
 
     // SendThread( ConcurrentLinkedQueue<byte[]> queue ) 
     SendThread( ConnectionQueue queue ) 
     {
       mQueue = queue;
     }
+
+    void setRunning( boolean running ) { mRunning = running; }
   
     @Override
     public void run()
@@ -621,38 +622,37 @@ class ConnectionHandler extends Handler
       int cnt = 0;
       byte lastByte = (byte)0xff;
       // Log.v( "DistoX", "SendThread running ...");
-      while( mRun ) {
-        try {
-          while ( mRun && mQueue.isEmpty() ) Thread.sleep( SLEEP_EMPTY );
-          if ( mRun ) {
-            // byte buffer[] = mQueue.peek();
-            // write( buffer );
-            ConnectionQueueItem item = mQueue.peek();
-            if ( item != null ) {
-              byte[] buffer = item.mData;
-              if ( buffer[0] == lastByte ) {
+      while( mRunning ) {
+        while ( mRunning && mQueue.isEmpty() ) {
+          try { Thread.sleep( SLEEP_EMPTY ); } catch ( InterruptedException e ) { }
+        }
+        if ( mRunning ) {
+          // byte buffer[] = mQueue.peek();
+          // write( buffer );
+          ConnectionQueueItem item = mQueue.peek();
+          if ( item != null ) {
+            byte[] buffer = item.mData;
+            if ( buffer[0] == lastByte ) {
+              ++ cnt;
+            }
+            TDLog.Log( TDLog.LOG_SYNC, "lastByte " + lastByte + " cnt " + cnt );
+            if ( cnt > 4 ) {
+              // bail-out
+              disconnect( mDevice );
+            } else {
+              lastByte = buffer[0];
+              TDLog.Log( TDLog.LOG_SYNC, "data write <" + buffer[0] + "|" + buffer[1] + ">" );
+              if ( writeBytes( item.mData ) ) {
+                cnt = 0;
+              } else {
                 ++ cnt;
               }
-              TDLog.Log( TDLog.LOG_SYNC, "lastByte " + lastByte + " cnt " + cnt );
-              if ( cnt > 4 ) {
-                // bail-out
-                disconnect( mDevice );
-              } else {
-                lastByte = buffer[0];
-                TDLog.Log( TDLog.LOG_SYNC, "data write <" + buffer[0] + "|" + buffer[1] + ">" );
-                if ( writeBytes( item.mData ) ) {
-                  cnt = 0;
-                } else {
-                  ++ cnt;
-                }
-              }
             }
-            Thread.sleep( SLEEP_DEQUE );   
           }
-        } catch ( InterruptedException e ) {
+          try { Thread.sleep( SLEEP_DEQUE ); } catch ( InterruptedException e ) { }
         }
       }
-      TDLog.Log( TDLog.LOG_SYNC, "SendThread exiting");
+      TDLog.Log( TDLog.LOG_SYNC, "Send Thread exiting");
     }
   }
 
