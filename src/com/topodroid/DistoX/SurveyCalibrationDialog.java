@@ -25,6 +25,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
+import android.widget.CheckBox;
 
 class SurveyCalibrationDialog extends MyDialog
                        implements View.OnClickListener
@@ -34,15 +35,16 @@ class SurveyCalibrationDialog extends MyDialog
   private EditText mETclino;
   private Button mBTok;
   private Button mBTback;
+  private CheckBox mCBlrud;
 
   SurveyWindow mParent;
-  TopoDroidApp mApp;
+  // TopoDroidApp mApp; // not used
 
   SurveyCalibrationDialog( Context context, SurveyWindow parent )
   {
     super( context, R.string.SurveyCalibrationDialog );
     mParent = parent;
-    mApp    = mParent.mApp;
+    // mApp    = mParent.mApp;
   }
 
 
@@ -57,9 +59,12 @@ class SurveyCalibrationDialog extends MyDialog
     mETlength  = (EditText) findViewById( R.id.et_length );
     mETazimuth = (EditText) findViewById( R.id.et_azimuth );
     mETclino   = (EditText) findViewById( R.id.et_clino );
-    mETlength.setText(  Float.toString( mApp.mManualCalibrationLength ) );
-    mETazimuth.setText( Float.toString( mApp.mManualCalibrationAzimuth ) );
-    mETclino.setText(   Float.toString( mApp.mManualCalibrationClino ) );
+    mETlength.setText(  Float.toString( ManualCalibration.mLength ) );
+    mETazimuth.setText( Float.toString( ManualCalibration.mAzimuth ) );
+    mETclino.setText(   Float.toString( ManualCalibration.mClino ) );
+
+    mCBlrud   = (CheckBox) findViewById( R.id.cb_lrud );
+    mCBlrud.setChecked( ManualCalibration.mLRUD );
 
     setTitle( mParent.getResources().getString( R.string.calibration_title ) );
 
@@ -67,7 +72,6 @@ class SurveyCalibrationDialog extends MyDialog
     mBTok.setOnClickListener( this );
     mBTback = (Button) findViewById( R.id.button_back );
     mBTback.setOnClickListener( this );
-
   }
 
   @Override
@@ -77,19 +81,21 @@ class SurveyCalibrationDialog extends MyDialog
     if ( b == mBTok ) {
       if ( mETlength.getText() != null ) {
         try {
-          mApp.mManualCalibrationLength = Float.parseFloat( mETlength.getText().toString() );
+          ManualCalibration.mLength = Float.parseFloat( mETlength.getText().toString() );
         } catch ( NumberFormatException e ) { }
       }
       if ( mETazimuth.getText() != null ) {
         try {
-          mApp.mManualCalibrationAzimuth = Float.parseFloat( mETazimuth.getText().toString() );
+          ManualCalibration.mAzimuth = Float.parseFloat( mETazimuth.getText().toString() );
         } catch ( NumberFormatException e ) { }
       }
       if ( mETclino.getText() != null ) {
         try {
-          mApp.mManualCalibrationClino = Float.parseFloat( mETclino.getText().toString() );
+          ManualCalibration.mClino = Float.parseFloat( mETclino.getText().toString() );
         } catch ( NumberFormatException e ) { }
       }
+      ManualCalibration.mLRUD = mCBlrud.isChecked();
+
     } else if ( b == mBTback ) {
       /* nothing */
     }

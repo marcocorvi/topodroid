@@ -119,23 +119,24 @@ public class TopoDroidApp extends Application
 
   static boolean isTracing = false;
 
-  static float mManualCalibrationLength  = 0; // calibration of manually inputed data: length
-  static float mManualCalibrationAzimuth = 0;
-  static float mManualCalibrationClino   = 0;
+  // static float mManualCalibrationLength  = 0; // calibration of manually inputed data: length
+  // static float mManualCalibrationAzimuth = 0;
+  // static float mManualCalibrationClino   = 0;
+  // static boolean mManualCalibrationLRUD  = false;
+
+  // static private void resetManualCalibrations() 
+  // {
+  //   mManualCalibrationLength  = 0; 
+  //   mManualCalibrationAzimuth = 0;
+  //   mManualCalibrationClino   = 0;
+  //   mManualCalibrationLRUD    = false;
+  // }
 
   DBlock mHighlightedSplay = null;
   void setHighlightedSplay( DBlock blk ) { mHighlightedSplay = blk; }
   long getHighlightedSplayId( ) { return (mHighlightedSplay == null)? -1 : mHighlightedSplay.mId; }
   int mSplayMode = 2; // cross-section splay display mode
   
-
-  static private void resetManualCalibrations() 
-  {
-    mManualCalibrationLength  = 0; 
-    mManualCalibrationAzimuth = 0;
-    mManualCalibrationClino   = 0;
-  }
-
   // ----------------------------------------------------------------------
   // data lister
   // ListerSet mListerSet;
@@ -959,7 +960,8 @@ public class TopoDroidApp extends Application
     mSID = -1;       // no survey by default
     mySurvey = null;
     clearCurrentStations();
-    resetManualCalibrations();
+    // resetManualCalibrations();
+    ManualCalibration.reset();
 
     if ( survey != null && mData != null ) {
       // Log.v( "DistoX", "set SurveyFromName <" + survey + "> forward " + forward );
@@ -1669,6 +1671,7 @@ public class TopoDroidApp extends Application
   {
     long id;
     long extend = 0L;
+    float calib = ManualCalibration.mLRUD ? ManualCalibration.mLength / TDSetting.mUnitLength : 0;
     if ( left != null && left.length() > 0 ) {
       float l = -1.0f;
       try {
@@ -1676,6 +1679,8 @@ public class TopoDroidApp extends Application
       } catch ( NumberFormatException e ) {
         TDLog.Error( "manual-shot parse error: left " + left );
       }
+      l -= calib;
+      
       if ( l >= 0.0f ) {
         if ( horizontal ) { // WENS
           extend = TDAzimuth.computeSplayExtend( 270 );
@@ -1707,6 +1712,7 @@ public class TopoDroidApp extends Application
       } catch ( NumberFormatException e ) {
         TDLog.Error( "manual-shot parse error: right " + right );
       }
+      r -= calib;
       if ( r >= 0.0f ) {
         if ( horizontal ) { // WENS
           extend = TDAzimuth.computeSplayExtend( 90 );
@@ -1737,7 +1743,8 @@ public class TopoDroidApp extends Application
       } catch ( NumberFormatException e ) {
         TDLog.Error( "manual-shot parse error: up " + up );
       }
-      if ( u >= 0.0f ) {
+      u -= calib;
+      if ( u >= 0.0f ) {  
         if ( horizontal ) {
           if ( at >= 0L ) {
             id = mData.insertShotAt( mSID, at, u, 0.0f, 0.0f, 0.0f, 0L, 1, true );
@@ -1763,6 +1770,7 @@ public class TopoDroidApp extends Application
       } catch ( NumberFormatException e ) {
         TDLog.Error( "manual-shot parse error: down " + down );
       }
+      d -= calib;
       if ( d >= 0.0f ) {
         if ( horizontal ) {
           if ( at >= 0L ) {
@@ -1800,9 +1808,10 @@ public class TopoDroidApp extends Application
     DBlock ret = null;
     long id;
 
-    distance = (distance - mManualCalibrationLength)  / TDSetting.mUnitLength;
-    clino    = (clino    - mManualCalibrationClino)   / TDSetting.mUnitAngle;
+    distance = (distance - ManualCalibration.mLength)  / TDSetting.mUnitLength;
+    clino    = (clino    - ManualCalibration.mClino)   / TDSetting.mUnitAngle;
     float b  = bearing / TDSetting.mUnitAngle;
+
 
     if ( ( distance < 0.0f ) ||
          ( clino < -90.0f || clino > 90.0f ) ||
@@ -1810,7 +1819,7 @@ public class TopoDroidApp extends Application
       Toast.makeText( this, R.string.illegal_data_value, Toast.LENGTH_SHORT ).show();
       return null;
     }
-    bearing = (bearing  - mManualCalibrationAzimuth) / TDSetting.mUnitAngle;
+    bearing = (bearing  - ManualCalibration.mAzimuth) / TDSetting.mUnitAngle;
     while ( bearing >= 360 ) bearing -= 360;
     while ( bearing <    0 ) bearing += 360;
 

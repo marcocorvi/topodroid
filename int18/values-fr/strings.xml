@@ -120,6 +120,7 @@
 <string name="extend_vert">Vert.</string>
 <!-- UNUSED string name="external_prompt">Saisir mesure</string -->
 <string name="splay_at_to">GDHB à la station Vers</string>
+    <!-- TODO string name="lrud">LRUD</string -->
 
 <string name="few_data">Pas assez de données</string>
     <string name="few_iter">Échec de l\'itération</string>

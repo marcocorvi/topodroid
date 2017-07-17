@@ -59,6 +59,17 @@
       />
     </LinearLayout>
 
+    <LinearLayout
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:paddingBottom="10dp">
+      <CheckBox android:id="@+id/cb_lrud"
+         android:layout_width="200dp"
+         android:layout_height="wrap_content" 
+         android:ems="25"
+         android:text="@string/lrud"
+      />
+    </LinearLayout>
 
     <LinearLayout 
         android:layout_width="fill_parent"

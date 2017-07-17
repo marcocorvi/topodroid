@@ -421,6 +421,7 @@ public class DrawingWindow extends ItemDrawer
 
         mFullName1 = fullName1;
         mFullName2 = fullName2;
+        mApp.mShotWindow.setRecentPlot( name, mType );
       } else {
         Toast.makeText( mActivity, R.string.plot_duplicate_name, Toast.LENGTH_SHORT ).show();
         // Log.v("DistoX", "plot name already exists");
@@ -3283,6 +3284,7 @@ public class DrawingWindow extends ItemDrawer
     {
       mData.deletePlot( mPid1, mSid );
       if ( mPid2 >= 0 ) mData.deletePlot( mPid2, mSid );
+      mApp.mShotWindow.setRecentPlot( null, 0 );
       finish();
     }
 

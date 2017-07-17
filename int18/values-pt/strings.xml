@@ -119,6 +119,7 @@
     <string name="extend_vert">Vertical</string>
     <!-- UNUSED string name="external_prompt">Inserir medição</string -->
     <string name="splay_at_to">Dados EDTC na base PARA</string>
+    <!-- TODO string name="lrud">LRUD</string -->
 
     <string name="few_data">Não há dados suficientes</string>
     <string name="few_iter">Falha: excesso de iterações</string>

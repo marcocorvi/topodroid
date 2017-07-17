@@ -15,6 +15,8 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.content.Context;
 
+import android.widget.Toast;
+
 // import android.util.Log;
 
 class InfoReadX310Task extends AsyncTask<Void, Integer, Boolean>
@@ -49,6 +51,8 @@ class InfoReadX310Task extends AsyncTask<Void, Integer, Boolean>
   {
     if ( result && mDialog != null ) {
       mDialog.updateInfo( mInfo );
+    } else {
+      Toast.makeText( mApp, R.string.read_failed, Toast.LENGTH_SHORT ).show();
     }
   }
 

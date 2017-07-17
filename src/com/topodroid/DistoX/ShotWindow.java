@@ -1106,6 +1106,9 @@ public class ShotWindow extends Activity
     } else if ( b == mButton1[ BTN_PLOT ] ) {
       if ( mRecentPlot != null ) {
         startExistingPlot( mRecentPlot, mRecentPlotType, null );
+      } else {
+        // onClick( view ); // fall back to onClick
+        new PlotListDialog( mActivity, this, mApp, null ).show();
       }
     }
     return true;
@@ -1183,14 +1186,15 @@ public class ShotWindow extends Activity
           mApp.mData.updateShotExtend( blk.mId, mApp.mSID, DBlock.EXTEND_LEFT, true );
         }
         clearMultiSelect( );
-        mList.invalidate();
+        updateDisplay();
       } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // RIGHT
         for ( DBlock blk : mDataAdapter.mSelect ) {
           blk.setExtend( DBlock.EXTEND_RIGHT );
           mApp.mData.updateShotExtend( blk.mId, mApp.mSID, DBlock.EXTEND_RIGHT, true );
         }
         clearMultiSelect( );
-        mList.invalidate();
+        updateDisplay();
+        // mList.invalidate(); // NOTE not enough to see the change in the list immediately
       } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // DELETE
         askMultiDelete();
       } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // CANCEL
@@ -1325,19 +1329,24 @@ public class ShotWindow extends Activity
   }
 /* END SKETCH_3D */
 
+  void setRecentPlot( String name, long type )
+  {
+    mRecentPlot     = name;
+    mRecentPlotType = type;
+  }
+
   public void startExistingPlot( String name, long type, String station ) // name = plot/sketch3d name
   {
     // TDLog.Log( TDLog.LOG_SHOT, "start Existing Plot \"" + name + "\" type " + type + " sid " + mApp.mSID );
     if ( type != PlotInfo.PLOT_SKETCH_3D ) {
       PlotInfo plot1 =  mApp.mData.getPlotInfo( mApp.mSID, name+"p" );
       if ( plot1 != null ) {
-        mRecentPlot     = name;
-        mRecentPlotType = type;
+        setRecentPlot( name, type );
         PlotInfo plot2 =  mApp.mData.getPlotInfo( mApp.mSID, name+"s" );
         startDrawingWindow( plot1.start, plot1.name, plot1.id, plot2.name, plot2.id, type, station );
         return;
       } else {
-        mRecentPlot = null;
+        setRecentPlot( null, 0L );
       }
 /* FIXME BEGIN SKETCH_3D */
     } else {
