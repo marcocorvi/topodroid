@@ -308,14 +308,11 @@ public class CalibAlgo
   static byte[] stringToCoeff( String cs )
   {
     byte[] coeff = new byte[ 52 ]; // N.B. return 52 calib coeff
+    coeff[48] = coeff[49] = coeff[50] = coeff[51] = (byte)(0xff); // default values
     if ( cs == null ) {
-      for ( int k=0; k<52; ++k ) coeff[k] = (byte)(0);
+      for ( int k=0; k<48; ++k ) coeff[k] = (byte)(0);
     } else {
       int kk = cs.length();
-      coeff[48] = (byte)( 0xff ); // default values if the string is only 48 bytes
-      coeff[49] = (byte)( 0xff );
-      coeff[50] = (byte)( 0xff );
-      coeff[51] = (byte)( 0xff );
       for ( int k=0; k<kk; ++k ) coeff[k] = (byte)( cs.charAt(k) );
       // Log.v( "DistoX", "string to coeff " + coeff[48] + " " + coeff[49] + " " + coeff[50] + " " + coeff[51] );
     }

@@ -260,17 +260,17 @@ public class CalibActivity extends Activity
     }
 
     int k = 0;
-    if ( k < mNrButton1 && b == mButton1[k++] ) {
+    if ( k < mNrButton1 && b == mButton1[k++] ) { // SAVE
       doSave();
-    } else if ( k < mNrButton1 && b == mButton1[k++] ) {
+    } else if ( k < mNrButton1 && b == mButton1[k++] ) { // OPEN GM
       if ( ! mApp.checkCalibrationDeviceMatch() ) {
         // FIXME use alert dialog
         Toast.makeText( this, R.string.calib_device_mismatch, Toast.LENGTH_LONG ).show();
       }
       doOpen();
-    // } else if ( k < mNrButton1 && b == mButton1[k++] ) { // export
+    // } else if ( k < mNrButton1 && b == mButton1[k++] ) { // EXPORT
     //   new CalibExportDialog( this, this ).show();
-    } else if ( k < mNrButton1 && b == mButton1[k++] ) {
+    } else if ( k < mNrButton1 && b == mButton1[k++] ) { // COEFF
       showCoeffs();
     // } else if ( k < mNrButton1 && b == mButton1[k++] ) {
     //   askDelete();
