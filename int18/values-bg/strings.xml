@@ -126,7 +126,7 @@
     <string name="few_groups">Недостатъчно групи</string>
     <!-- UNUSED string name="few_plots">Няма достатъчно скици</string -->
     <string name="few_calibs">Няма достатъчно калибрации</string>
-    <!-- TODO string name="getting_info">Getting DistoX info ...</string -->
+    <string name="getting_info">Прочитане на DistoX инфо...</string>
 
     <string name="calib_import_title">Импортиране на калибрация</string>
     <string name="import_title">Импортиране на файл</string>
@@ -154,8 +154,8 @@
 
     <string name="illegal_data_value">Невалидни данни</string>
 
-    <!-- TODO string name="photo_title">PHOTO</string -->
-    <!-- TODO string name="photo_text">Enter photo comment</string -->
+    <string name="photo_title">Снимка</string>
+    <string name="photo_text">Въведете коментар за снимката</string>
     <string name="label_title">надпис</string>
     <string name="label_text">Въведете текст за надписа</string>
     <!-- UNUSED string name="altitude">Надм. височина</string -->
@@ -300,18 +300,18 @@
     <string name="popup_erase_line">Изтрива линии</string>
     <string name="popup_erase_area">Изтрива площи</string>
 
-    <!-- TODO string name="popup_select_all">Select all</string -->
-    <!-- TODO string name="popup_select_point">Select points</string -->
-    <!-- TODO string name="popup_select_line">Select lines</string -->
-    <!-- TODO string name="popup_select_area">Select areas</string -->
-    <!-- TODO string name="popup_select_shot">Select shots</string -->
-    <!-- TODO string name="popup_select_station">Select stations</string -->
+    <string name="popup_select_all">Избери всичко</string>
+    <string name="popup_select_point">Избери точки</string>
+    <string name="popup_select_line">Избери линии</string>
+    <string name="popup_select_area">Избери площи</string>
+    <string name="popup_select_shot">Избери отсечки</string>
+    <string name="popup_select_station">Избери репери</string>
 
-    <!-- TODO string name="popup_cont_none">None</string -->
-    <!-- TODO string name="popup_cont_start">Start point</string -->
-    <!-- TODO string name="popup_cont_end">End point</string -->
-    <!-- TODO string name="popup_cont_both">Both points</string -->
-    <!-- TODO string name="popup_cont_continue">Continue</string -->
+    <string name="popup_cont_none">Без свързване</string>
+    <string name="popup_cont_start">Начална точка</string>
+    <string name="popup_cont_end">Крайна точка</string>
+    <string name="popup_cont_both">Двете точки</string>
+    <string name="popup_cont_continue">Продължаване</string>
 
     <string name="connected_none">Няма връзка</string>
     <string name="connected_already">Вече има връзка</string>
@@ -360,7 +360,7 @@
     <!-- UNUSED string name="converted_tdr2th2">Конвертиране на файлове със скици от двоични в th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Презаписване на съшествуващи th2 файлове?</string -->
     <string name="section_area">Площ на сечение: %1$.1f</string>
-    <!-- TODO string name="scrap_outline">Sketch outline</string -->
+    <string name="scrap_outline">Очертание на скицата</string>
 
     <!-- UNUSED string name="sensor">сензор</string -->
     <string name="sensor_gravity">гравитация</string>
@@ -374,12 +374,12 @@
     <string name="sensor_type">тип</string>
     <string name="sensor_value">стойност</string>
     <string name="sensor_comment">коментар</string>
-    <!-- TODO string name="insufficient_data">insufficient sensor data</string -->
+    <string name="insufficient_data">недостатъчни данни от сензора</string>
 
     <!-- string name="shot_clino">clino</string -->
     <!-- string name="shot_compass">compass</string -->
     <string name="shot_delete">Изтриване на измерване?</string>
-    <!-- TODO string name="shots_delete">Delete shots ?</string -->
+    <string name="shots_delete">Изтриване на измерванията?</string>
     <string name="shot_check">Маркиране като контролно измерване?</string>
     <string name="shot_from">от</string>
     <string name="shot_info">Въведете данни за отсечката</string>
@@ -510,7 +510,7 @@
     <!-- UNUSED string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >Прегрупиране</string -->
     <string name="button_dump"      >Запис     </string>
-    <!-- TODO string name="button_rename"    >Rename    </string -->
+    <string name="button_rename"    >Преименуване</string>
     <string name="button_replace"   >Подмяна   </string>
     <string name="button_reset"     >Нулиране   </string>
     <string name="button_left"      >Наляво</string>
@@ -518,7 +518,7 @@
     <string name="button_clear"     >Изчистване</string>
     <string name="button_save"      >Запис     </string>
     <!-- UNUSED string name="button_select"    >Избор     </string -->
-    <!-- TODO string name="button_split"     >Split     </string -->
+    <string name="button_split"     >Разделяне</string>
     <string name="button_store"     >Съхраняване</string>
     <!-- UNUSED string name="button_start"     >Старт     </string -->
     <!-- UNUSED string name="button_stop"      >Стоп      </string -->
@@ -617,7 +617,7 @@
     <string name="help_help">Помощ</string>
     <!-- UNUSED string name="help_manual">Ръководство</string -->
     <string name="help_measure">Измерване на разстояния</string>
-    <!-- TODO string name="help_measure_type">Measuring mode: fixed point or polyline</string -->
+    <string name="help_measure_type">Режим измерване: фиксирана точка или поли-линия</string>
 
     <string name="help_calib_check">Контролни измервания</string>
     <string name="help_close">Затваряне на прозореца</string>
@@ -760,12 +760,12 @@
     <string name="title_projection">Азимут на проектиран разрез %1$d</string>
     <string name="title_refs">Показване в скицата на:</string>
     <string name="title_scraps">Скици в картировката</string>
-    <!-- TODO string name="title_scraps_outline">Sketch outline</string -->
+    <string name="title_scraps_outline">Очертание на скица</string>
     <string name="title_select">Избор</string>
     <string name="title_shift">Изместване</string>
     <string name="title_shot_delete">Изтриване на отсечката?</string>
     <string name="title_sensor_edit">Сензор</string>
-    <!-- TODO string name="title_split">Sketch split</string -->
+    <string name="title_split">Разделяне на скица</string>
 
     <string name="title_stats">Статистика</string>
     <!-- NO string name="title_step">Step</string -->
@@ -893,10 +893,10 @@
   <string name="pref_vert_splay_title">Наклонени измервания с пунктир</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Странични измервания с по-голям наклон са с пунктир в плана</string -->
   <string name="pref_vert_splay_message">Странични измервания с по-голям наклон са с пунктир в плана</string>
-  <!-- TODO string name="pref_shared_xsections_title">Shared x-sections</string -->
-  <!-- TODO string name="pref_shared_xsections_summary">At-station x-sections shared among sketches</string -->
-  <!-- TODO string name="xsections_shared">Shared X-sections</string -->
-  <!-- TODO string name="xsections_private">Private X-sections</string -->
+  <string name="pref_shared_xsections_title">Споделение сечения в репери</string>
+  <string name="pref_shared_xsections_summary">Сеченията в реперите са споделени между скиците</string>
+  <string name="xsections_shared">Споделение сечения в репери</string>
+  <string name="xsections_private">Индивидуални сечения в репери</string>
 
 
   <string name="pref_survey_stations_title">Репери</string>
