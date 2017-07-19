@@ -34,7 +34,7 @@
 
     <string name="make_walls">Стены</string>
     <string name="missing_station">Отсутствует пикет</string>
-    <!-- TODO string name="station_not_found">Station not found</string -->
+    <string name="station_not_found">Пикет не обнаружен</string>
     <!-- UNUSED string name="missing_area">ОБЛАСТЬ</string -->
     <!-- UNUSED string name="missing_hint">Пожалуйста, подключите недостающие инструменты, либо установите их.</string -->
     <!-- UNUSED string name="missing_line">ЛИНИЯ</string -->
@@ -214,7 +214,7 @@
     <!-- UNUSED string name="hidden_add">Скрыть нитку хода до этого пикета</string -->
     <string name="hidden_del">Показать нитку хода до этого пикета</string>
     <string name="splays_toggle">Показать/скрыть бок. замеры</string>
-    <!-- TODO string name="splays">splays</string -->
+    <string name="splays">бок. замеры</string>
     <string name="fixed">фиксированный репер</string>
     <string name="painted">нарисованный</string>
 
@@ -520,7 +520,7 @@
     <string name="button_clear"     >Очистить  </string>
     <string name="button_save"      >Сохр.     </string>
     <!-- UNUSED string name="button_select"    >Выбрать   </string -->
-    <!-- TODO string name="button_search"    >Search    </string -->
+    <string name="button_search"    >Поиск    </string>
     <string name="button_split"     >Разделить     </string>
     <string name="button_store"     >Записать   </string>
     <!-- UNUSED string name="button_start"     >Start</string -->
@@ -662,7 +662,7 @@
     <string name="help_rename">Изменить название съёмки</string>
     <string name="help_plot_rename">Переименовать/Удалить абрис</string>
     <string name="help_plot_switch">Переключить абрис</string>
-    <!-- TODO string name="help_search">Station search</string -->
+    <string name="help_search">Поиск пикета</string>
     <string name="help_stats">Инструмент статистики по съёмке</string>
     <string name="help_save_plot">Экспорт абрисов</string>
     <!-- UNUSED string name="help_tdr2th2">Конвертировать бинарные файлы абрисов в формат th2</string -->
@@ -737,7 +737,7 @@
     <string name="title_contour">Контур</string>
     <!-- UNUSED string name="title_coord">Введите координаты точки:</string -->
     <string name="title_current_station">Сохраненные пикеты</string>
-    <!-- TODO string name="title_station_search">Enter station</string -->
+    <string name="title_station_search">Введите номер пикета</string>
     <string name="title_device">Устройства DistoX</string>
     <string name="title_device_select">Выберите прибор DistoX</string>
     <string name="title_discover">Поиск устройств DistoX &#8230; подождите</string>
