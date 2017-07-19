@@ -52,6 +52,24 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     mViews = new ArrayList< View >();
   }
 
+  int[] searchStation( String name, boolean splays )
+  {
+    if ( name == null || name.length() == 0 ) return null;
+    ArrayList<Integer> res = new ArrayList<Integer>();
+    for ( int pos=0; pos < mItems.size(); ++pos ) {
+      DBlock blk = mItems.get( pos );
+      if ( blk.isSplay() && splays && name.equals( blk.mFrom ) ) {
+        res.add( new Integer(pos) );
+      } else if ( blk.isLeg() && ( name.equals( blk.mFrom ) || name.equals( blk.mTo ) ) ) {
+        res.add( new Integer(pos) );
+      }
+    }
+    if ( res.size() == 0 ) return null;
+    int[] ret = new int[ res.size() ];
+    for ( int k=0; k<res.size(); ++k ) ret[k] = res.get(k).intValue();
+    return ret;
+  }
+    
   boolean isMultiSelect() { return ( mSelect.size() > 0 ); }
 
   boolean multiSelect(int pos ) 

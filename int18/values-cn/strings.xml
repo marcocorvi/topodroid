@@ -34,6 +34,7 @@
 
     <string name="make_walls">洞道边界</string>
     <string name="missing_station">请输入测量点</string>
+    <!-- TODO string name="station_not_found">Station not found</string -->
     <!-- UNUSED string name="missing_area">面图例</string -->
     <!-- UNUSED string name="missing_hint">请启用或者安装缺少的工具</string -->
     <!-- UNUSED string name="missing_line">线图例</string -->
@@ -211,6 +212,7 @@
     <!-- UNUSED string name="hidden_add">隐藏之前的测量</string -->
     <string name="hidden_del">显示之前的测量</string>
     <string name="splays_toggle">辐线测量显示开关</string>
+    <!-- TODO string name="splays">splays</string -->
     <!-- TODO string name="fixed">fixed</string -->
     <!-- TODO string name="painted">painted</string -->
 
@@ -515,6 +517,7 @@
     <string name="button_clear"     >清除     </string>
     <string name="button_save"      >保存      </string>
     <!-- UNUSED string name="button_select"    >选择    </string -->
+    <!-- TODO string name="button_search"    >Search    </string -->
     <!-- TODO string name="button_split"     >Split     </string -->
     <string name="button_store"     >存储     </string>
     <!-- UNUSED string name="button_start"     >开始</string -->
@@ -656,6 +659,7 @@
     <string name="help_rename">修改测量名称</string>
     <string name="help_plot_rename">重命名/删除草图</string>
     <string name="help_plot_switch">切换草图</string>
+    <!-- TODO string name="help_search">Station search</string -->
     <string name="help_stats">测量点对话框</string>
     <string name="help_save_plot">输出草图</string>
     <!-- UNUSED string name="help_tdr2th2">转换二进制草图文件到th2</string -->
@@ -730,6 +734,7 @@
     <string name="title_contour">轮廓</string>
     <!-- UNUSED string name="title_coord">输入点坐标:</string -->
     <string name="title_current_station">保存测量点</string>
+    <!-- TODO string name="title_station_search">Enter station</string -->
     <string name="title_device">DistoX 设备</string>
     <string name="title_device_select">选择DistoX设备</string>
     <string name="title_discover">扫码DistoX设备...请稍后</string>

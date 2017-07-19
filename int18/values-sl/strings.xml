@@ -34,6 +34,7 @@
 
     <string name="make_walls">Stena</string>
     <string name="missing_station">Manjkajoča merilna točka</string>
+    <!-- TODO string name="station_not_found">Station not found</string -->
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Installa i prototipi grafici con TdSymbol</string -->
     <!-- UNUSED string name="missing_line">LINEA</string -->
@@ -215,6 +216,7 @@
     <!-- UNUSED string name="hidden_add">Skriji mediano linijo</string -->
     <string name="hidden_del">Pokaži mediano linijo</string>
     <string name="splays_toggle">Pokaži ali skrij stranske vizure</string>
+    <!-- TODO string name="splays">splays</string -->
     <string name="fixed">fiksen</string>
     <string name="painted">barvast</string>
 
@@ -520,6 +522,7 @@
     <string name="button_clear"     >Briši  </string>
     <string name="button_save"      >Shrani     </string>
     <!-- UNUSED string name="button_select"    >Seleziona </string -->
+    <!-- TODO string name="button_search"    >Search    </string -->
     <!-- TODO string name="button_split"     >Split     </string -->
     <string name="button_store"     >Piši    </string>
     <!-- UNUSED string name="button_start"     >Start</string -->
@@ -659,6 +662,7 @@
     <string name="help_rename">Spremeni ime načrta</string>
     <!-- TODO string name="help_plot_rename">Rename/Delete sketch</string -->
     <!-- TODO string name="help_plot_switch">Switch sketch</string -->
+    <!-- TODO string name="help_search">Station search</string -->
     <string name="help_stats">Statistika načrta</string>
     <string name="help_save_plot">Izvozi skico</string>
     <!-- UNUSED string name="help_tdr2th2">Pretvorba formata skice iz binarega v th2</string -->
@@ -733,6 +737,7 @@
     <!-- TODO string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Inserisci le coordinate del punto:</string -->
     <string name="title_current_station">Shranjene merilne točke</string>
+    <!-- TODO string name="title_station_search">Enter station</string -->
     <string name="title_device">Naprave DistoX</string>
     <!-- TODO string name="title_device_select">Select DistoX device</string -->
     <string name="title_discover">Išči naprave DistoX &#8230; počakaj</string>

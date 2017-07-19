@@ -34,6 +34,7 @@
 
     <string name="make_walls">Стени</string>
     <string name="missing_station">Липсващ репер</string>
+    <!-- TODO string name="station_not_found">Station not found</string -->
     <!-- UNUSED string name="missing_area">Площ</string -->
     <!-- UNUSED string name="missing_hint">Разрешете липсващите символи или ги инсталирайте</string -->
     <!-- UNUSED string name="missing_line">Линия</string -->
@@ -213,6 +214,7 @@
     <!-- UNUSED string name="hidden_add">Скриване на предишни репери</string -->
     <string name="hidden_del">Показване на предишни репери</string>
     <string name="splays_toggle">Показване/скриване на странични изм.</string>
+    <!-- TODO string name="splays">splays</string -->
     <string name="fixed">Фиксиран</string>
     <string name="painted">Боядисан</string>
 
@@ -518,6 +520,7 @@
     <string name="button_clear"     >Изчистване</string>
     <string name="button_save"      >Запис     </string>
     <!-- UNUSED string name="button_select"    >Избор     </string -->
+    <!-- TODO string name="button_search"    >Search    </string -->
     <string name="button_split"     >Разделяне</string>
     <string name="button_store"     >Съхраняване</string>
     <!-- UNUSED string name="button_start"     >Старт     </string -->
@@ -660,6 +663,7 @@
     <string name="help_rename">Преименуване на картировката</string>
     <string name="help_plot_rename">Преименуване на скицата</string>
     <string name="help_plot_switch">Превключване на друга скица</string>
+    <!-- TODO string name="help_search">Station search</string -->
     <string name="help_stats">Статистика за картировката</string>
     <string name="help_save_plot">Експортиране на скица</string>
     <!-- UNUSED string name="help_tdr2th2">Конвертиране на двоични файлове на скици в th2</string -->
@@ -734,6 +738,7 @@
     <!-- NO string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Въведете координати на точката:</string -->
     <string name="title_current_station">Записани репери</string>
+    <!-- TODO string name="title_station_search">Enter station</string -->
     <string name="title_device">DistoX устройства</string>
     <string name="title_device_select">Изберете DistoX</string>
     <string name="title_discover">Сканиране за DistoX устройства…</string>

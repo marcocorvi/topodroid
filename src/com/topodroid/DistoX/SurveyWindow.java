@@ -627,7 +627,7 @@ public class SurveyWindow extends Activity
     } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // DELETE
       askDelete();
     } else if ( TDSetting.mLevelOverAdvanced && p++ == pos ) { // INSTRUMENTS CALIBRATION
-      new SurveyCalibrationDialog( mActivity, this ).show();
+      new SurveyCalibrationDialog( mActivity, mApp ).show();
     } else if ( TDSetting.mLevelOverAdvanced && p++ == pos ) { // CALIBRATION CHECK SHOTS
       List< DBlock > shots = mApp.mData.selectAllShots( mApp.mSID, TopoDroidApp.STATUS_CHECK );
       if ( shots.size() == 0 ) {

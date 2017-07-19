@@ -34,6 +34,7 @@
 
     <string name="make_walls">Стіни</string>
     <string name="missing_station">Відсутній пікет</string>
+    <!-- TODO string name="station_not_found">Station not found</string -->
     <!-- UNUSED string name="missing_area">ОБЛАСТЬ</string -->
     <!-- UNUSED string name="missing_hint">Будь ласка, підключіть відсутні інструменти, або встановіть їх.</string -->
     <!-- UNUSED string name="missing_line">ЛІНІЯ</string -->
@@ -213,6 +214,7 @@
     <!-- UNUSED string name="hidden_add">Приховати нитку ходу до цього пікету</string -->
     <string name="hidden_del">Показати нитку ходу до цього пікету</string>
     <string name="splays_toggle">Показати/приховати бок. заміри</string>
+    <!-- TODO string name="splays">splays</string -->
     <string name="fixed">фіксований репер</string>
     <string name="painted">нарисованний</string>
 
@@ -518,6 +520,7 @@
     <string name="button_clear"     >Очистити  </string>
     <string name="button_save"      >Збер.     </string>
     <!-- UNUSED string name="button_select"    >Вибрати   </string -->
+    <!-- TODO string name="button_search"    >Search    </string -->
     <!-- TODO string name="button_split"     >Split     </string -->
     <string name="button_store"     >Записати   </string>
     <!-- UNUSED string name="button_start"     >Start</string -->
@@ -660,6 +663,7 @@
     <string name="help_rename">Змінити назву зйомки</string>
     <string name="help_plot_rename">Перейменувати/Видалити абрис</string>
     <string name="help_plot_switch">Переключити абрис</string>
+    <!-- TODO string name="help_search">Station search</string -->
     <string name="help_stats">Інструмент статистики по зйомці</string>
     <string name="help_save_plot">Экспорт абрисів</string>
     <!-- UNUSED string name="help_tdr2th2">Конвертувати бінарні файли абрисів в формат th2</string -->
@@ -734,6 +738,7 @@
     <string name="title_contour">Контур</string>
     <!-- UNUSED string name="title_coord">Введіть координати точки:</string -->
     <string name="title_current_station">Збережені пікети</string>
+    <!-- TODO string name="title_station_search">Enter station</string -->
     <string name="title_device">Прилади DistoX</string>
     <string name="title_device_select">Виберіть прилад DistoX</string>
     <string name="title_discover">Пошук приладів DistoX &#8230; почекайте</string>

@@ -31,6 +31,7 @@
   <string name="CalibValidateResultDialog">page_validation.htm</string>
   <string name="ConnectDialog">page_connect.htm</string>
   <string name="CurrentStationDialog">page_saved_station.htm</string>
+  <string name="StationSearchDialog">page_station_search.htm</string>
   <string name="DeviceA3InfoDialog">page_a3_info.htm</string>
   <string name="DeviceA3MemoryDialog">page_memory.htm</string>
   <string name="DeviceNameDialog">page_device_name.htm</string>

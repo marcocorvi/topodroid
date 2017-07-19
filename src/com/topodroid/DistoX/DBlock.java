@@ -119,8 +119,9 @@ public class DBlock
 
   static boolean isSplay( int t ) { return t == BLOCK_SPLAY || t == BLOCK_X_SPLAY; }
 
-  boolean isSplay() { return mType == BLOCK_SPLAY || mType == BLOCK_X_SPLAY; }
+  boolean isSplay()  { return mType == BLOCK_SPLAY || mType == BLOCK_X_SPLAY; }
   boolean isXSplay() { return mType == BLOCK_X_SPLAY; }
+  boolean isLeg()    { return mType == BLOCK_MAIN_LEG; }
 
   // static int getExtend( int ext ) { return ( ext < EXTEND_UNSET )? ext : ext - EXTEND_FVERT; }
   static int getExtend( int ext ) { return ext; }

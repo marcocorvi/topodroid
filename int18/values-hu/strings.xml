@@ -34,6 +34,7 @@
 
     <string name="make_walls">Falak</string>
     <string name="missing_station">Hiányzó mérési pont</string>
+    <!-- TODO string name="station_not_found">Station not found</string -->
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->
     <!-- UNUSED string name="missing_line">LINE</string -->
@@ -212,6 +213,7 @@
     <!-- UNUSED string name="hidden_add">Előző mérések elrejtése</string -->
     <string name="hidden_del">Előző mérések mutatása</string>
     <string name="splays_toggle">Mutassa a fix pontokat </string>
+    <!-- TODO string name="splays">splays</string -->
     <string name="fixed">csavarral állandósított</string>
     <string name="painted">felfestett</string>
 
@@ -517,6 +519,7 @@
     <string name="button_clear"     >Töröl</string>
     <string name="button_save"      >Ment</string>
     <!-- UNUSED string name="button_select"    >Select    </string -->
+    <!-- TODO string name="button_search"    >Search    </string -->
     <!-- TODO string name="button_split"     >Split     </string -->
     <string name="button_store"     >Tárol</string>
     <!-- UNUSED string name="button_start"     >Start</string -->
@@ -659,6 +662,7 @@
     <string name="help_rename">Felmérés nevének megváltoztatása</string>
     <string name="help_plot_rename">Vázlat nevének megváltoztatása</string>
     <string name="help_plot_switch">Vázlat nézet átváltása</string>
+    <!-- TODO string name="help_search">Station search</string -->
     <string name="help_stats">Felmérési statisztikák párbeszédpanel</string>
     <string name="help_save_plot">Vázlat exportálása</string>
     <!-- UNUSED string name="help_tdr2th2">Convert sketch binary files to th2</string -->
@@ -733,6 +737,7 @@
     <string name="title_contour">Körvonal</string>
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Elmentett mérési pontok</string>
+    <!-- TODO string name="title_station_search">Enter station</string -->
     <string name="title_device">DistoX-ek</string>
     <string name="title_device_select">Válaszd ki a DistoX-et</string>
     <string name="title_discover">DistoX eszközök keresése &#8230; várj!</string>

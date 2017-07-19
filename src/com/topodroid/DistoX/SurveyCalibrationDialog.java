@@ -37,14 +37,12 @@ class SurveyCalibrationDialog extends MyDialog
   private Button mBTback;
   private CheckBox mCBlrud;
 
-  SurveyWindow mParent;
-  // TopoDroidApp mApp; // not used
+  TopoDroidApp mApp; 
 
-  SurveyCalibrationDialog( Context context, SurveyWindow parent )
+  SurveyCalibrationDialog( Context context, TopoDroidApp app )
   {
     super( context, R.string.SurveyCalibrationDialog );
-    mParent = parent;
-    // mApp    = mParent.mApp;
+    mApp    = app;
   }
 
 
@@ -66,7 +64,7 @@ class SurveyCalibrationDialog extends MyDialog
     mCBlrud   = (CheckBox) findViewById( R.id.cb_lrud );
     mCBlrud.setChecked( ManualCalibration.mLRUD );
 
-    setTitle( mParent.getResources().getString( R.string.calibration_title ) );
+    setTitle( mApp.getResources().getString( R.string.calibration_title ) );
 
     mBTok = (Button) findViewById( R.id.button_ok );
     mBTok.setOnClickListener( this );

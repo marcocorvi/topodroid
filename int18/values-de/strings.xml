@@ -34,6 +34,7 @@
 
     <string name="make_walls">Wände</string>
     <string name="missing_station">Kein Messpunkt</string>
+    <!-- TODO string name="station_not_found">Station not found</string -->
     <!-- UNUSED string name="missing_area">FLÄCHE</string -->
     <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->
     <!-- UNUSED string name="missing_line">LINIE</string -->
@@ -217,6 +218,7 @@
     <!-- NO string name="hidden_add">Vorherige Messungen ausblenden</string -->
     <string name="hidden_del">Vorherige Messungen anzeigen</string>
     <string name="splays_toggle">Hilfszüge ein/ausblenden</string>
+    <!-- TODO string name="splays">splays</string -->
     <string name="fixed">fixiert</string>
     <string name="painted">gezeichnet</string>
 
@@ -534,6 +536,7 @@
     <string name="button_clear"     >Entfernen</string>
     <string name="button_save"      >Speichern</string>
     <!-- UNUSED string name="button_select"    >Wählen     </string -->
+    <!-- TODO string name="button_search"    >Search    </string -->
     <string name="button_split"     >Aufteilen     </string>
     <string name="button_store"     >Speichern</string>
     <!-- UNUSED string name="button_start"     >Start</string -->
@@ -676,6 +679,7 @@
     <string name="help_rename">Ändere Vermessungsname</string>
     <string name="help_plot_rename">Skizze umbenennen/löschen</string>
     <string name="help_plot_switch">Skizze wechseln</string>
+    <!-- TODO string name="help_search">Station search</string -->
     <string name="help_stats">Vermessungs-Statistiken</string>
     <string name="help_save_plot">Die Skizze speichern</string>
     <!-- UNUSED string name="help_tdr2th2">Erstelle th2 Dateien der Skizzen</string -->
@@ -752,6 +756,7 @@
     <string name="title_contour">Konturen</string>
     <!-- UNUSED string name="title_coord">Gib die Punkt-Koordinaten ein:</string -->
     <string name="title_current_station">Gespeicherte Messpunkte</string>
+    <!-- TODO string name="title_station_search">Enter station</string -->
     <string name="title_device">DistoX Geräte</string>
     <string name="title_device_select">DistoX Gerät auswählen</string>
     <string name="title_discover">DistoX Geräte suchen&#8230;</string>

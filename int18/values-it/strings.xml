@@ -34,6 +34,7 @@
 
     <string name="make_walls">Pareti</string>
     <string name="missing_station">Caposaldo assente</string>
+    <!-- TODO string name="station_not_found">Station not found</string -->
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Installa i prototipi grafici con TdSymbol</string -->
     <!-- UNUSED string name="missing_line">LINEA</string -->
@@ -212,6 +213,7 @@
     <!-- UNUSED string name="hidden_add">Nascondi la linea mediana</string -->
     <string name="hidden_del">Mostra la linea mediana</string>
     <string name="splays_toggle">Mostra o Nascondi gli splay</string>
+    <!-- TODO string name="splays">splays</string -->
     <string name="fixed">fisso</string>
     <string name="painted">colorato</string>
 
@@ -517,6 +519,7 @@
     <string name="button_clear"     >Cancella  </string>
     <string name="button_save"      >Salva     </string>
     <!-- UNUSED string name="button_select"    >Seleziona </string -->
+    <!-- TODO string name="button_search"    >Search    </string -->
     <!-- TODO string name="button_split"     >Split     </string -->
     <string name="button_store"     >Scrivi    </string>
     <!-- UNUSED string name="button_start"     >Start</string -->
@@ -658,6 +661,7 @@
     <string name="help_rename">Modifica il nome del rilievo</string>
     <string name="help_plot_rename">Rinomina/Cancella disegno</string>
     <string name="help_plot_switch">Scambia disegno</string>
+    <!-- TODO string name="help_search">Station search</string -->
     <string name="help_stats">Statistiche rilievo</string>
     <string name="help_save_plot">Esporta disegno</string>
     <!-- UNUSED string name="help_tdr2th2">Conversione formato disegno da binario a th2</string -->
@@ -732,6 +736,7 @@
     <!-- NO string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Inserisci le coordinate del punto:</string -->
     <string name="title_current_station">Capisaldi salvati</string>
+    <!-- TODO string name="title_station_search">Enter station</string -->
     <string name="title_device">Dispositivi DistoX</string>
     <string name="title_device_select">Seleziona DistoX</string>
     <string name="title_discover">Ricerca DistoX &#8230; attendi</string>

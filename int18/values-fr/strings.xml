@@ -35,6 +35,7 @@
 
     <string name="make_walls">Parois</string>
     <string name="missing_station">Station manquante</string>
+    <!-- TODO string name="station_not_found">Station not found</string -->
     <!-- UNUSED string name="missing_area">ZONE</string -->
     <!-- UNUSED string name="missing_hint">Merci d\'installer les symboles avec TdSymbol</string -->
     <!-- UNUSED string name="missing_line">LIGNE</string -->
@@ -212,6 +213,7 @@
 <!-- UNUSED string name="hidden_add">Cacher les visées precedentes</string -->
 <string name="hidden_del">Afficher les visées précédentes</string>
 <string name="splays_toggle">Basculer les visées d\'habillage - Splays</string>
+    <!-- TODO string name="splays">splays</string -->
 <string name="fixed">fixé</string>
 <string name="painted">dessiné</string>
 
@@ -516,6 +518,7 @@
     <string name="button_clear"     >EFFACER     </string>
     <string name="button_save"      >ENREGISTRER      </string>
     <!-- UNUSED string name="button_select"    >Sélectionner    </string -->
+    <!-- TODO string name="button_search"    >Search    </string -->
     <!-- TODO string name="button_split"     >Split     </string -->
     <string name="button_store"     >STOCKER     </string>
     <!-- UNUSED string name="button_start"     >DEMARRER</string -->
@@ -656,6 +659,7 @@
     <string name="help_rename">Change le nom de la topographie</string>
     <string name="help_plot_rename">Renommer/suppr croquis</string>
     <string name="help_plot_switch">Changer de croquis</string>
+    <!-- TODO string name="help_search">Station search</string -->
     <string name="help_stats">Statistiques du relevé</string>
     <string name="help_save_plot">Exporte le croquis</string>
     <!-- UNUSED string name="help_tdr2th2">Converti dessin vers format th2</string -->
@@ -729,6 +733,7 @@
     <string name="title_contour">Contour</string>
     <!-- UNUSED string name="title_coord">Entrer les Coordonnées du point</string -->
     <string name="title_current_station">Stations sauvegardées</string>
+    <!-- TODO string name="title_station_search">Enter station</string -->
     <string name="title_device">Périphériques DistoX</string>
     <string name="title_device_select">Sélectionner le DistoX</string>
     <string name="title_discover">Recherche de nouveaux DistoX… Patientez</string>

@@ -34,6 +34,7 @@
 
     <string name="make_walls">Walls</string>
     <string name="missing_station">Missing station</string>
+    <string name="station_not_found">Station not found</string>
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->
     <!-- UNUSED string name="missing_line">LINE</string -->
@@ -214,6 +215,7 @@
     <!-- UNUSED string name="hidden_add">Hide previous shots</string -->
     <string name="hidden_del">Show previous shots</string>
     <string name="splays_toggle">Toggle splays display</string>
+    <string name="splays">splays</string>
     <string name="fixed">fixed</string>
     <string name="painted">painted</string>
 
@@ -521,6 +523,7 @@
     <string name="button_clear"     >Clear     </string>
     <string name="button_save"      >Save      </string>
     <!-- UNUSED string name="button_select"    >Select    </string -->
+    <string name="button_search"    >Search    </string>
     <string name="button_split"     >Split     </string>
     <string name="button_store"     >Store     </string>
     <!-- UNUSED string name="button_start"     >Start</string -->
@@ -665,6 +668,7 @@
     <string name="help_rename">Change survey name</string>
     <string name="help_plot_rename">Rename/Delete sketch</string>
     <string name="help_plot_switch">Switch sketch</string>
+    <string name="help_search">Station search</string>
     <string name="help_stats">Survey statistics dialog</string>
     <string name="help_save_plot">Export sketch</string>
     <!-- UNUSED string name="help_tdr2th2">Convert sketch binary files to th2</string -->
@@ -745,6 +749,7 @@
     <string name="title_contour">Contour</string>
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Saved stations</string>
+    <string name="title_station_search">Enter station</string>
     <string name="title_device">DistoX devices</string>
     <string name="title_device_select">Select DistoX device</string>
     <string name="title_discover">Scanning for DistoX devices &#8230; wait</string>

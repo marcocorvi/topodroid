@@ -34,6 +34,7 @@
 
     <string name="make_walls">Paredes</string>
     <string name="missing_station">Base inexistente</string>
+    <!-- TODO string name="station_not_found">Station not found</string -->
     <!-- UNUSED string name="missing_area">ÁREA</string -->
     <!-- UNUSED string name="missing_hint">Habilite ou instale os símbolos que estão faltando</string -->
     <!-- UNUSED string name="missing_line">LINHA</string -->
@@ -212,6 +213,7 @@
     <!-- UNUSED string name="hidden_add">Ocultar visadas até base referência</string -->
     <string name="hidden_del">Mostrar visadas até base referência</string>
     <string name="splays_toggle">Alternar exibição das medidas auxiliares</string>
+    <!-- TODO string name="splays">splays</string -->
     <string name="fixed">fixa</string>
     <string name="painted">pintada</string>
 
@@ -516,6 +518,7 @@
     <string name="button_clear"     >Limpar    </string>
     <string name="button_save"      >Salvar    </string>
     <!-- UNUSED string name="button_select"    >Selecionar    </string -->
+    <!-- TODO string name="button_search"    >Search    </string -->
     <!-- TODO string name="button_split"     >Split     </string -->
     <string name="button_store"     >Armazenar </string>
     <!-- UNUSED string name="button_start"     >Iniciar</string -->
@@ -658,6 +661,7 @@
     <string name="help_rename">Mudar nome da topo</string>
     <string name="help_plot_rename">Renomear/apagar croqui</string>
     <string name="help_plot_switch">Trocar croqui</string>
+    <!-- TODO string name="help_search">Station search</string -->
     <string name="help_stats">Estatísticas da topo</string>
     <string name="help_save_plot">Exportar croqui</string>
     <!-- UNUSED string name="help_tdr2th2">Converter arquivos binários do croqui em th2</string -->
@@ -732,6 +736,7 @@
     <string name="title_contour">Contorno</string>
     <!-- UNUSED string name="title_coord">Inserir as coordenadas do ponto:</string -->
     <string name="title_current_station">Base gravadas</string>
+    <!-- TODO string name="title_station_search">Enter station</string -->
     <string name="title_device">Dispositivos DistoX</string>
     <string name="title_device_select">Selecionar o dispositivo DistoX</string>
     <string name="title_discover">Procurando dispositivos DistoX &#8230; Aguardar</string>

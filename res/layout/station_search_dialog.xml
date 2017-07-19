@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  >
+  <LinearLayout android:id="@+id/layout1"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+    >
+    <EditText android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:inputType="text"
+        android:layout_marginTop="10dp"
+    />
+    <CheckBox android:id="@+id/splays"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="@string/splays"
+        android:layout_marginTop="10dp"
+    />
+
+    <LinearLayout android:id="@+id/layout1"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/splays"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+      >
+      <Button android:id="@+id/btn_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button"
+        android:layout_marginRight="10dp"
+        style="@style/button_default"
+        android:layout_gravity="right"
+        android:text="@string/button_search"
+        android:singleLine="true"
+      />
+      <Button android:id="@+id/btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button"
+        android:layout_marginRight="10dp"
+        style="@style/button_default"
+        android:layout_gravity="right"
+        android:text="@string/button_cancel"
+        android:singleLine="true"
+      />
+    </LinearLayout>
+  </LinearLayout>
+
+  <android.inputmethodservice.KeyboardView
+    android:id="@+id/keyboardview"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:gravity="bottom"
+    android:visibility="gone"
+  />
+
+</RelativeLayout>

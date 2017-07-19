@@ -102,7 +102,9 @@ public class ShotWindow extends Activity
   final static int BTN_DOWNLOAD  = 0;
   final static int BTN_BLUETOOTH = 1;
   final static int BTN_PLOT      = 3;
+  final static int BTN_MANUAL    = 5;
   final static int BTN_AZIMUTH   = 7;
+  final static int BTN_SEARCH    = 8;
 
   private static int izons[] = {
                         R.drawable.iz_download,
@@ -112,7 +114,8 @@ public class ShotWindow extends Activity
                         R.drawable.iz_note,
                         R.drawable.iz_plus,
                         R.drawable.iz_station,
-                        R.drawable.iz_dial
+                        R.drawable.iz_dial,
+                        R.drawable.iz_search
                       };
 
   private static int izonsno[] = {
@@ -153,6 +156,7 @@ public class ShotWindow extends Activity
                           R.string.help_add_shot,
                           R.string.help_current_station,
                           R.string.help_azimuth,
+                          R.string.help_search,
                         };
    private static int help_menus[] = {
                           R.string.help_close,
@@ -186,6 +190,8 @@ public class ShotWindow extends Activity
   // private RelativeLayout mFooter = null;
   private Button[] mButtonF;
   private int mNrButtonF = 4;
+
+  private StationSearch mSearch;
 
   public void setRefAzimuth( float azimuth, long fixed_extend )
   {
@@ -867,7 +873,9 @@ public class ShotWindow extends Activity
     // mButtonSize = mApp.setListViewHeight( mFootList );
 
     Resources res = getResources();
-    mNrButton1 = TDSetting.mLevelOverNormal ? 8 : ( TDSetting.mLevelOverBasic ? 6 : 5 );
+    mNrButton1 = TDSetting.mLevelOverExpert ? 9
+               : TDSetting.mLevelOverNormal ? 8
+               : TDSetting.mLevelOverBasic ?  6 : 5;
     mButton1 = new Button[ mNrButton1 ];
     for ( int k=0; k<mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( this, this, izons[k] );
@@ -887,6 +895,10 @@ public class ShotWindow extends Activity
     if ( TDSetting.mLevelOverBasic ) {
       mButton1[ BTN_DOWNLOAD ].setOnLongClickListener( this );
       mButton1[ BTN_PLOT ].setOnLongClickListener( this );
+      mButton1[ BTN_MANUAL ].setOnLongClickListener( this );
+      if ( TDSetting.mLevelOverExpert ) {
+        mButton1[ BTN_SEARCH ].setOnLongClickListener( this );
+      }
     }
 
     mButtonF = new Button[ mNrButtonF ];
@@ -936,6 +948,8 @@ public class ShotWindow extends Activity
     if ( mDataDownloader != null ) {
       mApp.registerLister( this );
     }
+
+    mSearch = new StationSearch();
   }
 
   // void enableSketchButton( boolean enabled )
@@ -1110,9 +1124,36 @@ public class ShotWindow extends Activity
         // onClick( view ); // fall back to onClick
         new PlotListDialog( mActivity, this, mApp, null ).show();
       }
+    } else if ( b == mButton1[ BTN_MANUAL ] ) {
+      new SurveyCalibrationDialog( mActivity, mApp ).show();
+    } else if ( b == mButton1[ BTN_SEARCH ] ) { // next search pos
+      jumpToPos( mSearch.nextPos() );
     }
     return true;
   } 
+
+  void searchStation( String name, boolean splays )
+  {
+    mSearch.set( name, mDataAdapter.searchStation( name, splays ) );
+    if ( ! jumpToPos( mSearch.nextPos() ) ) {
+      Toast.makeText( mActivity, R.string.station_not_found, Toast.LENGTH_SHORT).show();
+    }
+  }
+
+  boolean jumpToPos( final int pos ) 
+  {
+    if ( pos < 0 ) return false;
+    mList.post( new Runnable() {
+      @Override
+      public void run() {
+        mList.setSelection( pos );
+        View v = mList.getChildAt( pos );
+        if ( v != null ) v.requestFocus();
+      }
+    } );
+    return true;
+  }
+   
 
   @Override 
   public void onClick(View view)
@@ -1180,6 +1221,9 @@ public class ShotWindow extends Activity
             (new AzimuthDialDialog( mActivity, this, TDAzimuth.mRefAzimuth, mBMdial )).show();
           }
         }
+      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // SEARCH
+        new StationSearchDialog( mActivity, this, mSearch.getName() ).show();
+
       } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // LEFT
         for ( DBlock blk : mDataAdapter.mSelect ) {
           blk.setExtend( DBlock.EXTEND_LEFT );

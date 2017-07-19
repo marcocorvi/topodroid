@@ -34,6 +34,7 @@
 
     <string name="make_walls">Paredes</string>
     <string name="missing_station">Falta Estación</string>
+    <!-- TODO string name="station_not_found">Station not found</string -->
     <!-- UNUSED string name="missing_area">Área</string -->
     <!-- UNUSED string name="missing_hint">Por favor, instale los símbolos con TdSymbol</string -->
     <!-- UNUSED string name="missing_line">Línea</string -->
@@ -211,6 +212,7 @@
     <!-- UNUSED string name="hidden_add">Oculta dibujo de la poligonal principal</string -->
     <string name="hidden_del">Mostrar dibujo de la poligonal principal</string>
     <string name="splays_toggle">Cambiar a tomas laterales</string>
+    <!-- TODO string name="splays">splays</string -->
     <string name="fixed">Fijo</string>
     <string name="painted">Dibujado</string>
 
@@ -514,6 +516,7 @@
     <string name="button_clear"     >Borrar     </string>
     <string name="button_save"      >Guardar   </string>
     <!-- UNUSED string name="button_select"    >Seleccionar </string -->
+    <!-- TODO string name="button_search"    >Search    </string -->
     <!-- TODO string name="button_split"     >Split     </string -->
     <string name="button_store"     >Recibir   </string>
     <!-- UNUSED string name="button_start"     >Inicio</string -->
@@ -657,6 +660,7 @@
     <string name="help_rename">Cambio nombre topografía</string>
     <string name="help_plot_rename">Eliminar/Renombrar dibujo</string>
     <string name="help_plot_switch">Activación dibujo</string>
+    <!-- TODO string name="help_search">Station search</string -->
     <string name="help_stats">Estadísticas de Topografía</string>
     <string name="help_save_plot">Exportar dibujo</string>
     <!-- UNUSED string name="help_tdr2th2">Convertir archivos binarios de dibujo a th2</string -->
@@ -733,6 +737,7 @@
     <string name="title_contour">Contorno</string>
     <!-- UNUSED string name="title_coord">Introduzca las coordenadas del punto:</string -->
     <string name="title_current_station">Última estación guardada</string>
+    <!-- TODO string name="title_station_search">Enter station</string -->
     <string name="title_device">Dispositivo DistoX</string>
     <string name="title_device_select">Select DistoX device</string>
     <string name="title_discover">Buscar dispositivos DistoX &#8230; espere</string>
