@@ -256,7 +256,7 @@ public class PhotoSensorsDialog extends MyDialog
         new DialogInterface.OnClickListener() {
           @Override
           public void onClick( DialogInterface dialog, int btn ) {
-            mParent.doDeleteShot( mBlk.mId, mBlk, TopoDroidApp.STATUS_CHECK, true );
+            mParent.doDeleteShot( mBlk.mId, mBlk, TDStatus.CHECK, true );
             dismiss();
           }
         } );
@@ -265,7 +265,7 @@ public class PhotoSensorsDialog extends MyDialog
         new DialogInterface.OnClickListener() {
           @Override
           public void onClick( DialogInterface dialog, int btn ) {
-            mParent.doDeleteShot( mBlk.mId, mBlk, TopoDroidApp.STATUS_DELETED, (mCBleg != null && mCBleg.isChecked()) );
+            mParent.doDeleteShot( mBlk.mId, mBlk, TDStatus.DELETED, (mCBleg != null && mCBleg.isChecked()) );
             dismiss();
           }
         } );

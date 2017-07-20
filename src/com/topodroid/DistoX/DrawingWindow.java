@@ -1771,7 +1771,7 @@ public class DrawingWindow extends ItemDrawer
         // N.B. mTo can be null
         list = mData.selectShotsAt( mSid, mFrom, false ); // select only splays
       } else {
-        list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
+        list = mData.selectAllShots( mSid, TDStatus.NORMAL );
       }
 
       // TDLog.TimeEnd( "before load" );
@@ -2144,7 +2144,7 @@ public class DrawingWindow extends ItemDrawer
     private void recomputeProfileReference()
     {
       if ( mType == PlotInfo.PLOT_EXTENDED ) { 
-        List<DBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
+        List<DBlock> list = mData.selectAllShots( mSid, TDStatus.NORMAL );
         mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl ); 
         computeReferences( (int)mType, mName, mApp.mScaleFactor, true );
         mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
@@ -2155,7 +2155,7 @@ public class DrawingWindow extends ItemDrawer
     private void deleteSplay( DrawingPath p, SelectionPoint sp, DBlock blk )
     {
       mDrawingSurface.deleteSplay( p, sp ); 
-      mApp.mData.deleteShot( blk.mId, mApp.mSID, TopoDroidApp.STATUS_DELETED, true );
+      mApp.mData.deleteShot( blk.mId, mApp.mSID, TDStatus.DELETED, true );
       mApp.mShotWindow.updateDisplay(); // FIXME ???
     }
 
@@ -4311,7 +4311,7 @@ public class DrawingWindow extends ItemDrawer
   private void doComputeReferences( boolean reset )
   {
     // Log.v("DistoX", "doComputeReferences() type " + mType );
-    List<DBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
+    List<DBlock> list = mData.selectAllShots( mSid, TDStatus.NORMAL );
     mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl );
     // doMoveTo();
     if ( mType == (int)PlotInfo.PLOT_PLAN ) {
@@ -4349,7 +4349,7 @@ public class DrawingWindow extends ItemDrawer
   {
     // Log.v("DistoX", "updateDisplay() type " + mType + " reference " + reference );
     // if ( compute ) {
-      // List<DBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
+      // List<DBlock> list = mData.selectAllShots( mSid, TDStatus.NORMAL );
       // mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl );
       // // doMoveTo();
       // computeReferences( (int)mPlot1.type, mPlot1.name 0.0f, 0.0f, mApp.mScaleFactor, false );
@@ -4360,7 +4360,7 @@ public class DrawingWindow extends ItemDrawer
     if ( mType != (int)PlotInfo.PLOT_PLAN && ! PlotInfo.isProfile( mType ) ) {
       resetReference( mPlot3 );
     } else {
-      List<DBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
+      List<DBlock> list = mData.selectAllShots( mSid, TDStatus.NORMAL );
       mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl );
       recomputeReferences( mApp.mScaleFactor, false );
       // if ( mType == (int)PlotInfo.PLOT_PLAN ) {
@@ -4623,7 +4623,7 @@ public class DrawingWindow extends ItemDrawer
       mDrawingSurface.modeloadDataStream( tdr, th2, null );
       mDrawingSurface.addManagerToCache( mFullName2 );
       setPlotType3( );
-      makeSectionReferences( mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL ) );
+      makeSectionReferences( mData.selectAllShots( mSid, TDStatus.NORMAL ) );
     }
     mOffset.x = x;
     mOffset.y = y;
@@ -4634,7 +4634,7 @@ public class DrawingWindow extends ItemDrawer
   void exportAsCsx( PrintWriter pw, String survey, String cave, String branch )
   {
     // Log.v("DistoX", "export as CSX <<" + cave + ">>" );
-    List< PlotInfo > all_sections = mData.selectAllPlotsSection( mSid, TopoDroidApp.STATUS_NORMAL );
+    List< PlotInfo > all_sections = mData.selectAllPlotsSection( mSid, TDStatus.NORMAL );
     pw.format("  <plan>\n");
     ArrayList< PlotInfo > sections1 = new ArrayList< PlotInfo >();
     mDrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_PLAN, survey, cave, branch, all_sections, sections1 );
@@ -5052,7 +5052,7 @@ public class DrawingWindow extends ItemDrawer
       return;
     }
     String name = ( mType == PlotInfo.PLOT_PLAN )? mPlot1.name : mPlot2.name;
-    List< PlotInfo > plots = mData.selectAllPlotsWithType( mApp.mSID, TopoDroidApp.STATUS_NORMAL, mType );
+    List< PlotInfo > plots = mData.selectAllPlotsWithType( mApp.mSID, TDStatus.NORMAL, mType );
     for ( PlotInfo plot : plots ) {
       if ( plot.name.equals( name ) ) {
         plots.remove( plot );

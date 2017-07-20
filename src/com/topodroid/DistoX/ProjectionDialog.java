@@ -403,7 +403,7 @@ public class ProjectionDialog extends MyDialog
 
     private void doStart()
     {
-      mList = mApp.mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
+      mList = mApp.mData.selectAllShots( mSid, TDStatus.NORMAL );
       if ( mList.size() == 0 ) {
         dismiss();
         Toast.makeText( mContext, R.string.few_data, Toast.LENGTH_SHORT ).show();

@@ -312,10 +312,10 @@ public class ShotWindow extends Activity
     highlightBlock( null );
     DataHelper data = mApp.mData;
     if ( data != null && mApp.mSID >= 0 ) {
-      List<DBlock> list = data.selectAllShots( mApp.mSID, TopoDroidApp.STATUS_NORMAL );
+      List<DBlock> list = data.selectAllShots( mApp.mSID, TDStatus.NORMAL );
       if ( list.size() > 4 ) computeMeans( list );
 
-      List< PhotoInfo > photos = data.selectAllPhotos( mApp.mSID, TopoDroidApp.STATUS_NORMAL );
+      List< PhotoInfo > photos = data.selectAllPhotos( mApp.mSID, TDStatus.NORMAL );
       // TDLog.Log( TDLog.LOG_SHOT, "update Display() shot list size " + list.size() );
       // Log.v( TopoDroidApp.TAG, "update Display() shot list size " + list.size() );
       updateShotList( list, photos );
@@ -613,10 +613,10 @@ public class ShotWindow extends Activity
     //   (new CurrentStationDialog( this, this, mApp )).show();
 
     } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // RECOVER
-      List< DBlock > shots1 = mApp.mData.selectAllShots( mApp.mSID, TopoDroidApp.STATUS_DELETED );
-      List< DBlock > shots2 = mApp.mData.selectAllShots( mApp.mSID, TopoDroidApp.STATUS_OVERSHOOT );
-      List< DBlock > shots3 = mApp.mData.selectAllShots( mApp.mSID, TopoDroidApp.STATUS_CHECK );
-      List< PlotInfo > plots     = mApp.mData.selectAllPlots( mApp.mSID, TopoDroidApp.STATUS_DELETED );
+      List< DBlock > shots1 = mApp.mData.selectAllShots( mApp.mSID, TDStatus.DELETED );
+      List< DBlock > shots2 = mApp.mData.selectAllShots( mApp.mSID, TDStatus.OVERSHOOT );
+      List< DBlock > shots3 = mApp.mData.selectAllShots( mApp.mSID, TDStatus.CHECK );
+      List< PlotInfo > plots     = mApp.mData.selectAllPlots( mApp.mSID, TDStatus.DELETED );
       if ( shots1.size() == 0 && shots2.size() == 0 && shots3.size() == 0 && plots.size() == 0 ) {
         Toast.makeText( mActivity, R.string.no_undelete, Toast.LENGTH_SHORT ).show();
       } else {
@@ -929,7 +929,7 @@ public class ShotWindow extends Activity
 
     // restoreInstanceFromData();
     // mLastExtend = mApp.mData.getLastShotId( mApp.mSID );
-    List<DBlock> list = mApp.mData.selectAllShots( mApp.mSID, TopoDroidApp.STATUS_NORMAL );
+    List<DBlock> list = mApp.mData.selectAllShots( mApp.mSID, TDStatus.NORMAL );
     // mSecondLastShotId = mApp.lastShotId( );
 
     mImage = (Button) findViewById( R.id.handle );
@@ -1272,13 +1272,13 @@ public class ShotWindow extends Activity
   {
     for ( DBlock blk : mDataAdapter.mSelect ) {
       long id = blk.mId;
-      mApp.mData.deleteShot( id, mApp.mSID, TopoDroidApp.STATUS_DELETED, true ); // forward = true
+      mApp.mData.deleteShot( id, mApp.mSID, TDStatus.DELETED, true ); // forward = true
       if ( blk != null && blk.type() == DBlock.BLOCK_MAIN_LEG ) {
         if ( mLeg ) {
           for ( ++id; ; ++id ) {
             DBlock b = mApp.mData.selectShot( id, mApp.mSID );
             if ( b == null || b.type() != DBlock.BLOCK_SEC_LEG ) break;
-            mApp.mData.deleteShot( id, mApp.mSID, TopoDroidApp.STATUS_DELETED, true ); // forward = true
+            mApp.mData.deleteShot( id, mApp.mSID, TDStatus.DELETED, true ); // forward = true
           }
         } else { // set station to next leg shot
           ++id;
@@ -1727,15 +1727,15 @@ public class ShotWindow extends Activity
     List< DBlock > shots;
     // backsight and tripod seem o be OK
     // if ( TDSetting.mTripodShot || TDSetting.mBacksightShot ) {
-    //   shots = mApp.mData.selectAllShots( mApp.mSID, TopoDroidApp.STATUS_NORMAL );
+    //   shots = mApp.mData.selectAllShots( mApp.mSID, TDStatus.NORMAL );
     // } else {
-      shots = mApp.mData.selectAllShotsAfter( blk.mId, mApp.mSID, TopoDroidApp.STATUS_NORMAL );
+      shots = mApp.mData.selectAllShotsAfter( blk.mId, mApp.mSID, TDStatus.NORMAL );
     // }
-    ArrayList<String> stations = mApp.mData.selectAllStationsBefore( blk.mId, mApp.mSID, TopoDroidApp.STATUS_NORMAL );
+    ArrayList<String> stations = mApp.mData.selectAllStationsBefore( blk.mId, mApp.mSID, TDStatus.NORMAL );
     mApp.assignStationsAfter( blk, shots, stations );
 
     // DEBUG re-assign all the stations
-    // List< DBlock > shots = mApp.mData.selectAllShots( mApp.mSID, TopoDroidApp.STATUS_NORMAL );
+    // List< DBlock > shots = mApp.mData.selectAllShots( mApp.mSID, TDStatus.NORMAL );
     // mApp.assign Stations( shots );
 
     updateDisplay();

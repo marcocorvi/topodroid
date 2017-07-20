@@ -459,7 +459,7 @@ public class SurveyWindow extends Activity
           filename = mApp.exportSurveyAsCsv();
           break;
         case TDConst.DISTOX_EXPORT_DXF:
-          List<DBlock> list = mApp.mData.selectAllShots( mApp.mSID, TopoDroidApp.STATUS_NORMAL );
+          List<DBlock> list = mApp.mData.selectAllShots( mApp.mSID, TDStatus.NORMAL );
           DBlock blk = list.get( 0 );
           if ( blk != null ) {
             // Log.v( TopoDroidApp.TAG, "DISTOX_EXPORT_DXF from " + blk.mFrom );
@@ -629,7 +629,7 @@ public class SurveyWindow extends Activity
     } else if ( TDSetting.mLevelOverAdvanced && p++ == pos ) { // INSTRUMENTS CALIBRATION
       new SurveyCalibrationDialog( mActivity, mApp ).show();
     } else if ( TDSetting.mLevelOverAdvanced && p++ == pos ) { // CALIBRATION CHECK SHOTS
-      List< DBlock > shots = mApp.mData.selectAllShots( mApp.mSID, TopoDroidApp.STATUS_CHECK );
+      List< DBlock > shots = mApp.mData.selectAllShots( mApp.mSID, TDStatus.CHECK );
       if ( shots.size() == 0 ) {
         Toast.makeText( mActivity, R.string.no_calib_check, Toast.LENGTH_SHORT).show();
       } else {

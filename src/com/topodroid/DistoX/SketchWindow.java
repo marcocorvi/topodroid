@@ -785,7 +785,7 @@ public class SketchWindow extends ItemDrawer
     mInfo.xcenter = mApp.mDisplayWidth/2;
     mInfo.ycenter = mApp.mDisplayHeight/2;
 
-    List<DBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
+    List<DBlock> list = mData.selectAllShots( mSid, TDStatus.NORMAL );
     if ( list.size() == 0 ) {
       Toast.makeText( mActivity, R.string.few_data, Toast.LENGTH_SHORT ).show();
       finish();
@@ -2248,7 +2248,7 @@ public class SketchWindow extends ItemDrawer
     mActivity.setTitleColor( TDColor.NORMAL );
     if ( nr >= 0 ) {
       if ( nr > 0 ) {
-        List<DBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
+        List<DBlock> list = mData.selectAllShots( mSid, TDStatus.NORMAL );
         recreateNum( list );
       }
       Toast.makeText( mActivity, getResources().getQuantityString(R.plurals.read_data, nr, nr ), Toast.LENGTH_SHORT ).show();

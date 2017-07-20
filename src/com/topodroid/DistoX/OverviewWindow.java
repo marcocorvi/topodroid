@@ -549,8 +549,8 @@ public class OverviewWindow extends ItemDrawer
     private void doStart()
     {
       // TDLog.Log( TDLog.LOG_PLOT, "do Start " + mName1 + " " + mName2 );
-      // mBlockList = mData.selectAllLegShots( mSid, TopoDroidApp.STATUS_NORMAL );
-      mBlockList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
+      // mBlockList = mData.selectAllLegShots( mSid, TDStatus.NORMAL );
+      mBlockList = mData.selectAllShots( mSid, TDStatus.NORMAL );
       if ( mBlockList.size() == 0 ) {
         Toast.makeText( mActivity, R.string.few_data, Toast.LENGTH_SHORT ).show();
         finish();
@@ -563,7 +563,7 @@ public class OverviewWindow extends ItemDrawer
 
     private void loadFiles( long type )
     {
-      List<PlotInfo> plots = mApp.mData.selectAllPlotsWithType( mSid, TopoDroidApp.STATUS_NORMAL, type );
+      List<PlotInfo> plots = mApp.mData.selectAllPlotsWithType( mSid, TDStatus.NORMAL, type );
 
       // Log.v( "DistoX", "Overview plots " + plots.size() );
 

@@ -43,7 +43,7 @@ class StationName
   private String getLastStationName( DataHelper data_helper, long sid )
   {
     DBlock last = null;
-    List<DBlock> list = data_helper.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+    List<DBlock> list = data_helper.selectAllShots( sid, TDStatus.NORMAL );
     for ( DBlock blk : list ) {
       if ( blk.mFrom != null && blk.mFrom.length() > 0 ) { last = blk; }
     }

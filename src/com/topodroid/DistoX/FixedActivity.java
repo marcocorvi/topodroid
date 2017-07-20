@@ -160,7 +160,7 @@ public class FixedActivity extends Activity
 
   public void refreshList()
   {
-    List< FixedInfo > fxds = mApp.mData.selectAllFixed( mApp.mSID, TopoDroidApp.STATUS_NORMAL );
+    List< FixedInfo > fxds = mApp.mData.selectAllFixed( mApp.mSID, TDStatus.NORMAL );
     mFixedAdapter = new FixedAdapter( mContext, R.layout.message, fxds );
     mList.setAdapter( mFixedAdapter );
   }
@@ -252,7 +252,7 @@ public class FixedActivity extends Activity
 
   public void dropFixed( FixedInfo fxd )
   {
-    mApp.mData.updateFixedStatus( fxd.id, mApp.mSID, TopoDroidApp.STATUS_DELETED );
+    mApp.mData.updateFixedStatus( fxd.id, mApp.mSID, TDStatus.DELETED );
     refreshList();
   }
 

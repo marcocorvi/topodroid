@@ -151,21 +151,21 @@ public class UndeleteDialog extends MyDialog
         }
         mBtnStatus.setText( R.string.undelete_plot );
         break;
-      case TopoDroidApp.STATUS_DELETED:
+      case TDStatus.DELETED:
         for ( DBlock b : mShots1 ) {
           mArrayAdapter.add( 
             String.format(Locale.US, "shot %d <%s> %.2f %.1f %.1f", b.mId, b.Name(), b.mLength, b.mBearing, b.mClino ) );
         }
         mBtnStatus.setText( R.string.undelete_shot );
         break;
-      case TopoDroidApp.STATUS_OVERSHOOT:
+      case TDStatus.OVERSHOOT:
         for ( DBlock b : mShots2 ) {
           mArrayAdapter.add( 
             String.format(Locale.US, "shot %d %.2f %.1f %.1f", b.mId, b.mLength, b.mBearing, b.mClino ) );
         }
         mBtnStatus.setText( R.string.undelete_overshoot );
         break;
-      case TopoDroidApp.STATUS_CHECK:
+      case TDStatus.CHECK:
         for ( DBlock b : mShots3 ) {
           mArrayAdapter.add( 
             String.format(Locale.US, "shot %d %.2f %.1f %.1f", b.mId, b.mLength, b.mBearing, b.mClino ) );

@@ -86,7 +86,7 @@ public class ShotDeleteDialog extends MyDialog
     Button b = (Button) v;
     // TDLog.Log(  TDLog.LOG_INPUT, "PhotoiSensorDialog onClick() " + b.getText().toString() );
     if ( b == mButtonDelete ) {
-      mParent.doDeleteShot( mBlk.mId, mBlk, TopoDroidApp.STATUS_DELETED, mCBleg.isChecked() );
+      mParent.doDeleteShot( mBlk.mId, mBlk, TDStatus.DELETED, mCBleg.isChecked() );
     // } else if ( b == mButtonCancel ) {
     //   /* nothing */
     }

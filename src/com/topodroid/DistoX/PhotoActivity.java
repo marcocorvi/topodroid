@@ -108,7 +108,7 @@ public class PhotoActivity extends Activity
     // TDLog.Log( TDLog.LOG_PHOTO, "updateDisplay() status: " + StatusName() + " forcing: " + force_update );
     DataHelper data = mApp.mData;
     if ( data != null && mApp.mSID >= 0 ) {
-      List< PhotoInfo > list = data.selectAllPhotos( mApp.mSID, TopoDroidApp.STATUS_NORMAL );
+      List< PhotoInfo > list = data.selectAllPhotos( mApp.mSID, TDStatus.NORMAL );
       // TDLog.Log( TDLog.LOG_PHOTO, "update shot list size " + list.size() );
       updatePhotoList( list );
       setTitle( mApp.mySurvey );

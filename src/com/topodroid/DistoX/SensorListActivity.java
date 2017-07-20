@@ -84,7 +84,7 @@ public class SensorListActivity extends Activity
     // TDLog.Log( TDLog.LOG_SENSOR, "updateDisplay() status: " + StatusName() + " forcing: " + force_update );
     DataHelper data = app.mData;
     if ( data != null && app.mSID >= 0 ) {
-      List< SensorInfo > list = data.selectAllSensors( app.mSID, TopoDroidApp.STATUS_NORMAL );
+      List< SensorInfo > list = data.selectAllSensors( app.mSID, TDStatus.NORMAL );
       // TDLog.Log( TDLog.LOG_PHOTO, "update shot list size " + list.size() );
       updateSensorList( list );
       setTitle( app.mySurvey );

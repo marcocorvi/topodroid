@@ -195,11 +195,11 @@ class TDExporter
     //   }
     // }
 
-    List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
-    List<DBlock> clist = data.selectAllShots( sid, TopoDroidApp.STATUS_CHECK );
+    List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+    List<DBlock> clist = data.selectAllShots( sid, TDStatus.CHECK );
 
-    List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
-    // List< PlotInfo > plots  = data.selectAllPlots( sid, TopoDroidApp.STATUS_NORMAL );
+    List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
+    // List< PlotInfo > plots  = data.selectAllPlots( sid, TDStatus.NORMAL );
     // FIXME TODO_CSURVEY
     // List< CurrentStation > stations = data.getStations( sid );
 
@@ -755,7 +755,7 @@ class TDExporter
       TDLog.Error( "exportSurveyAsTop date parse error " + info.date );
     }
 
-    List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+    List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
     long extend = 0;  // current extend
 
     DBlock ref_item = null;
@@ -856,11 +856,11 @@ class TDExporter
     // String uls = TDSetting.mUnitLengthStr;
     // String uas = TDSetting.mUnitAngleStr;
 
-    List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
-    List<DBlock> clist = data.selectAllShots( sid, TopoDroidApp.STATUS_CHECK );
+    List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+    List<DBlock> clist = data.selectAllShots( sid, TDStatus.CHECK );
 
-    List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
-    List< PlotInfo > plots  = data.selectAllPlots( sid, TopoDroidApp.STATUS_NORMAL );
+    List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
+    List< PlotInfo > plots  = data.selectAllPlots( sid, TDStatus.NORMAL );
     List< CurrentStation > stations = data.getStations( sid );
     try {
       TDPath.checkPath( filename );
@@ -1177,8 +1177,8 @@ class TDExporter
     String uls = ( ul < 1.01f )? "meters"  : "feet"; // FIXME
     String uas = ( ua < 1.01f )? "degrees" : "grads";
 
-    List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
-    List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
+    List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+    List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
     List<DBlock> st_blk = new ArrayList<DBlock>(); // blocks with from station (for LRUD)
 
     // float decl = info.declination; // DECLINATION not used
@@ -1485,8 +1485,8 @@ class TDExporter
   static String exportSurveyAsCsv( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     // Log.v("DistoX", "export as CSV: " + filename );
-    List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
-    // List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
+    List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+    // List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
     float ul = TDSetting.mUnitLength;
     float ua = TDSetting.mUnitAngle;
     String uls = ( ul < 1.01f )? "meters"  : "feet"; // FIXME
@@ -1607,7 +1607,7 @@ class TDExporter
   //     dir.mkdirs();
   //   }
   //   String filename = TopoDroidApp.APP_TLX_PATH + info.name + ".tlx";
-  //   List<DBlock> list = mData.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+  //   List<DBlock> list = mData.selectAllShots( sid, TDStatus.NORMAL );
   //   try {
   //     TDPath.checkPath( filename );
   //     FileWriter fw = new FileWriter( filename );
@@ -1883,7 +1883,7 @@ class TDExporter
   static String exportSurveyAsDat( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     // Log.v("DistoX", "export as compass: " + filename + " swap LR " + TDSetting.mSwapLR );
-    List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+    List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
     try {
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
@@ -2021,7 +2021,7 @@ class TDExporter
   {
     int trip = 1;
     int code = 1;
-    List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+    List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
     // Log.v("DistoX", "export as TopoRobot: " + filename + " data " + list.size() );
     char[] line = new char[ TRB_LINE_LENGTH ];
     try {
@@ -2036,7 +2036,7 @@ class TDExporter
       //           5 11 15 19 23
       pw.format("%6d%6d%4d%4d%4d %s\r\n", -6, 1, 1, 1, 1, info.name ); // [-6] cave name
 
-      List< FixedInfo > fixeds = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
+      List< FixedInfo > fixeds = data.selectAllFixed( sid, TDStatus.NORMAL );
       if ( fixeds.size() > 0 ) {
         for ( FixedInfo fixed : fixeds ) {
           // get TR-station from fixed name
@@ -2259,7 +2259,7 @@ class TDExporter
   static String exportSurveyAsSur( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     // Log.v("DistoX", "export as winkarst: " + filename + " swap LR " + TDSetting.mSwapLR );
-    List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+    List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
     try {
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
@@ -2292,7 +2292,7 @@ class TDExporter
         pw.format("#SURVEY TEAM: %s\r\n", info.team );
       }
 
-      List< FixedInfo > fixeds = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
+      List< FixedInfo > fixeds = data.selectAllFixed( sid, TDStatus.NORMAL );
       if ( fixeds.size() > 0 ) {
         pw.format("#DATUM: WGS 84\r\n");
         for ( FixedInfo fixed : fixeds ) {
@@ -2393,11 +2393,11 @@ class TDExporter
                 TopoDroidUtil.getDateString("yyyy/MM/dd"), TopoDroidApp.VERSION );
       pw.format("  </General>\n");
 
-      List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+      List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
       TRobot trobot = new TRobot( list );
       // trobot.dump(); // DEBUG
 
-      List< FixedInfo > fixeds = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
+      List< FixedInfo > fixeds = data.selectAllFixed( sid, TDStatus.NORMAL );
       if ( fixeds.size() > 0 ) {
         pw.format("  <Entrances>\n");
         int ce = 0;
@@ -2561,9 +2561,9 @@ class TDExporter
       pw.format("; %s created by TopoDroid v %s \n", TopoDroidUtil.getDateString("yyyy/MM/dd"), TopoDroidApp.VERSION );
       pw.format(Locale.US, "360.00 360.00 %.2f 1.00\n", info.declination ); // degrees degrees decl. meters
 
-      List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
+      List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
       boolean first = true; // first station
-      List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+      List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
       // int extend = 1;
       AverageLeg leg = new AverageLeg(0);
       DBlock ref_item = null;
@@ -2691,7 +2691,7 @@ class TDExporter
         pw.format("; TEAM %s\r\n", info.team );
       }
 
-      List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
+      List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
       if ( fixed.size() > 0 ) {
         for ( FixedInfo fix : fixed ) {
           pw.format("#Fix %s", fix.name );
@@ -2713,7 +2713,7 @@ class TDExporter
 
       pw.format("#Units %s A=%s\n", uls, uas );
 
-      List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+      List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
       // int extend = 1;
       AverageLeg leg = new AverageLeg(0);
       DBlock ref_item = null;
@@ -2932,7 +2932,7 @@ class TDExporter
 
       pw.format(Locale.US, "#declination[%.1f]%s", info.declination, eol );
       
-      List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
+      List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
       if ( fixed.size() > 0 ) {
         ents = new ArrayList< String >();
         for ( FixedInfo fix : fixed ) {
@@ -2947,7 +2947,7 @@ class TDExporter
       pw.format("#from_to%s", eol);
       pw.format("#R0%s", eol);
 
-      List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+      List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
       AverageLeg leg = new AverageLeg(0);
       DBlock ref_item = null;
 
@@ -3082,7 +3082,7 @@ class TDExporter
       //   pw.format("; %s\n", info.comment );
       // }
 
-      List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
+      List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
       if ( fixed.size() > 0 ) {
         for ( FixedInfo fix : fixed ) {
           pw.format("Fix point: %s\n", fix.name );
@@ -3097,7 +3097,7 @@ class TDExporter
       pw.format("Survey data\n");
       pw.format("From\tTo\tLength\tAzimuth\tVertical\tLabel\tLeft\tRight\tUp\tDown\tNote\n");
 
-      List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+      List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
 
       AverageLeg leg = new AverageLeg(0);
       DBlock ref_item = null;
@@ -3357,8 +3357,8 @@ class TDExporter
   static String exportSurveyAsTro( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     // Log.v("DistoX", "export as visualtopo: " + filename );
-    List<DBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
-    List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
+    List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+    List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
     try {
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );

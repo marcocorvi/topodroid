@@ -120,11 +120,11 @@ public class PlotListDialog extends MyDialog
 
       Resources res = mApp.getResources();
 
-      List< PlotInfo > list = mApp.mData.selectAllPlots( mApp.mSID, TopoDroidApp.STATUS_NORMAL ); 
+      List< PlotInfo > list = mApp.mData.selectAllPlots( mApp.mSID, TDStatus.NORMAL ); 
       List< Sketch3dInfo > slist = null;
       // FIXME_SKETCH_3D
         if ( mApp.mSketches ) {
-          slist = mApp.mData.selectAllSketches( mApp.mSID, TopoDroidApp.STATUS_NORMAL );
+          slist = mApp.mData.selectAllSketches( mApp.mSID, TDStatus.NORMAL );
         }
       // END_SKETCH_3D //
       if ( list.size() == 0 && ( slist == null || slist.size() == 0 ) ) {

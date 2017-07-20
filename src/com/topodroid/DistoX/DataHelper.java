@@ -153,12 +153,10 @@ public class DataHelper extends DataSetObservable
 
   public SQLiteDatabase getDb() { return myDB; }
 
-  private String STATUS_NORMAL_STR;
 
   public DataHelper( Context context, ArrayList<DataListener> listeners )
   {
     mContext = context;
-    STATUS_NORMAL_STR = Long.toString( TopoDroidApp.STATUS_NORMAL );
     mShotFields = new String[] { 
          "id", "fStation", "tStation", "distance", "bearing",
          "clino", "acceleration", "magnetic", "dip", "extend",
@@ -939,7 +937,7 @@ public class DataHelper extends DataSetObservable
   public void undeleteShot( long id, long sid, boolean forward ) 
   {
     // if ( myDB == null ) return;
-    if ( updateStatus( SHOT_TABLE, id, sid, TopoDroidApp.STATUS_NORMAL ) ) {
+    if ( updateStatus( SHOT_TABLE, id, sid, TDStatus.NORMAL ) ) {
       if ( forward ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUndeleteShot( id, sid );
       }
@@ -1278,7 +1276,7 @@ public class DataHelper extends DataSetObservable
     cv.put( "extend",   extend );
     cv.put( "flag",     DBlock.BLOCK_SURVEY ); // flag );
     cv.put( "leg",      LEG_NORMAL ); // leg );
-    cv.put( "status",   TopoDroidApp.STATUS_NORMAL ); // status );
+    cv.put( "status",   TDStatus.NORMAL ); // status );
     cv.put( "comment",  "" ); // comment );
     cv.put( "type",     type ); 
     try { 
@@ -1423,7 +1421,7 @@ public class DataHelper extends DataSetObservable
   {
     // TDLog.Log( TDLog.LOG_DB, "deletePlot: " + pid + "/" + sid );
     if ( myDB == null ) return;
-    updateStatus( PLOT_TABLE, pid, sid, TopoDroidApp.STATUS_DELETED );
+    updateStatus( PLOT_TABLE, pid, sid, TDStatus.DELETED );
   }
 
   // THIS REALLY DROPS THE RECORD FROM THE TABLE
@@ -1440,7 +1438,7 @@ public class DataHelper extends DataSetObservable
   {
     // TDLog.Log( TDLog.LOG_DB, "undeletePlot: " + pid + "/" + sid );
     if ( myDB == null ) return;
-    updateStatus( PLOT_TABLE, pid, sid, TopoDroidApp.STATUS_NORMAL );
+    updateStatus( PLOT_TABLE, pid, sid, TDStatus.NORMAL );
     // get plot type 
     Cursor cursor = myDB.query( PLOT_TABLE,
        		         new String[] { "type" }, // columns
@@ -1448,7 +1446,7 @@ public class DataHelper extends DataSetObservable
                                 new String[] { Long.toString(sid), Long.toString(pid) },
                                 null, null, null );
     if ( cursor.moveToFirst() && cursor.getLong(0) == PlotInfo.PLOT_PLAN ) {
-      updateStatus( PLOT_TABLE, pid+1, sid, TopoDroidApp.STATUS_NORMAL );
+      updateStatus( PLOT_TABLE, pid+1, sid, TDStatus.NORMAL );
     }
     if (cursor != null && !cursor.isClosed()) cursor.close();
   }
@@ -2150,7 +2148,7 @@ public class DataHelper extends DataSetObservable
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
                      "surveyId=? and status=? and ( ( fStation=? and tStation=? ) or ( fStation=? and tStation=? ) )",
-                     new String[] { Long.toString(sid), STATUS_NORMAL_STR, st1, st2, st2, st1 },
+                     new String[] { Long.toString(sid), TDStatus.NORMAL_STR, st1, st2, st2, st1 },
                      null, null, "id" );
      if (cursor.moveToFirst()) {
        do {
@@ -2169,7 +2167,7 @@ public class DataHelper extends DataSetObservable
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
                      "surveyId=? and status=? and id>?",
-                     new String[] { Long.toString(sid), STATUS_NORMAL_STR, Long.toString(id) },
+                     new String[] { Long.toString(sid), TDStatus.NORMAL_STR, Long.toString(id) },
                      null, null, "id" );
      if (cursor.moveToFirst()) {
        do {
@@ -2191,7 +2189,7 @@ public class DataHelper extends DataSetObservable
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
                      "surveyId=? and status=? and (fStation=? or tStation=?)",
-                     new String[] { Long.toString(sid), STATUS_NORMAL_STR, station, station },
+                     new String[] { Long.toString(sid), TDStatus.NORMAL_STR, station, station },
                      null, null, "id" );
      if (cursor.moveToFirst()) {
        do {
@@ -2235,7 +2233,7 @@ public class DataHelper extends DataSetObservable
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
                      "surveyId=? and status=? and (fStation=? or tStation=?)",
-                     new String[] { Long.toString(sid), STATUS_NORMAL_STR, station, station },
+                     new String[] { Long.toString(sid), TDStatus.NORMAL_STR, station, station },
                      null, null, "id" );
      if (cursor.moveToFirst()) {
        do {
@@ -2262,7 +2260,7 @@ public class DataHelper extends DataSetObservable
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query( SHOT_TABLE, mShotFields,
        "surveyId=? and status=? and ( fStation=? or tStation=? or fStation=? or tStation=? )",
-       new String[] { Long.toString(sid), STATUS_NORMAL_STR, station1, station2, station2, station1 },
+       new String[] { Long.toString(sid), TDStatus.NORMAL_STR, station1, station2, station2, station1 },
        null, null, "id" );
      if (cursor.moveToFirst()) {
        do {
@@ -2286,7 +2284,7 @@ public class DataHelper extends DataSetObservable
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
                      "surveyId=? and status=? and fStation=?", 
-                     new String[] { Long.toString(sid), STATUS_NORMAL_STR, station },
+                     new String[] { Long.toString(sid), TDStatus.NORMAL_STR, station },
                      null, null, "id" );
      if (cursor.moveToFirst()) {
        do {
@@ -2308,7 +2306,7 @@ public class DataHelper extends DataSetObservable
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
                      "surveyId=? and status=? and tStation=?", 
-                     new String[] { Long.toString(sid), STATUS_NORMAL_STR, station },
+                     new String[] { Long.toString(sid), TDStatus.NORMAL_STR, station },
                      null, null, "id" );
      if (cursor.moveToFirst()) {
        do {
@@ -2775,7 +2773,7 @@ public class DataHelper extends DataSetObservable
      cv.put( "surveyId",  sid );
      cv.put( "id",        id );
      cv.put( "shotId",    shotid );
-     cv.put( "status",    TopoDroidApp.STATUS_NORMAL );
+     cv.put( "status",    TDStatus.NORMAL );
      cv.put( "title",     title );
      cv.put( "date",      date );
      cv.put( "comment",   (comment == null)? "" : comment );
@@ -2831,7 +2829,7 @@ public class DataHelper extends DataSetObservable
      cv.put( "surveyId",  sid );
      cv.put( "id",        id );
      cv.put( "shotId",    shotid );
-     cv.put( "status",    TopoDroidApp.STATUS_NORMAL );
+     cv.put( "status",    TDStatus.NORMAL );
      cv.put( "title",     title );
      cv.put( "date",      date );
      cv.put( "comment",   (comment == null)? "" : comment );
@@ -2852,7 +2850,7 @@ public class DataHelper extends DataSetObservable
    public void deleteSensor( long sid, long id )
    {
      if ( myDB == null ) return;
-     updateStatus( SENSOR_TABLE, id, sid, TopoDroidApp.STATUS_DELETED );
+     updateStatus( SENSOR_TABLE, id, sid, TDStatus.DELETED );
    }
 
    public boolean updateSensor( long sid, long id, String comment )
@@ -3075,7 +3073,7 @@ public class DataHelper extends DataSetObservable
     if ( myDB == null ) return ret;
     Cursor cursor = myDB.query( FIXED_TABLE, 
                             new String[] { "id" },
-                            "surveyId=? and station=? and status=0",  // 0 == TopoDroidApp.STATUS_NORMAL
+                            "surveyId=? and station=? and status=0",  // 0 == TDStatus.NORMAL
                             new String[] { Long.toString( sid ), station },
                             null, null, null );
     if (cursor != null ) {
@@ -3101,7 +3099,7 @@ public class DataHelper extends DataSetObservable
     if ( myDB == null ) return ret;
     Cursor cursor = myDB.query( FIXED_TABLE, 
                             new String[] { "id" },
-                            "surveyId=? and station=? and status=0",  // 0 == TopoDroidApp.STATUS_NORMAL
+                            "surveyId=? and station=? and status=0",  // 0 == TDStatus.NORMAL
                             new String[] { Long.toString( sid ), station },
                             null, null, null );
     if (cursor != null ) {
@@ -3324,7 +3322,7 @@ public class DataHelper extends DataSetObservable
   public void deleteSketch( long sketch_id, long sid )
   {
     if ( myDB == null ) return;
-    updateStatus( SKETCH_TABLE, sketch_id, sid, TopoDroidApp.STATUS_DELETED );
+    updateStatus( SKETCH_TABLE, sketch_id, sid, TDStatus.DELETED );
     // if ( deleteSketchStmt == null )
     //   deleteSketchStmt = myDB.compileStatement( "UPDATE sketches set status=1 WHERE surveyId=? AND id=?" );
     // deleteSketchStmt.bindLong( 1, sid );

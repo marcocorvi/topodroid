@@ -634,7 +634,7 @@ public class GMActivity extends Activity
     // TDLog.Log(  TDLog.LOG_INPUT, "GMActivity onItemClick() " + item.toString() );
 
     // if ( value.equals( getResources().getString( R.string.back_to_calib ) ) ) {
-    //   setStatus( STATUS_CALIB );
+    //   setStatus( TDStatus.CALIB );
     //   updateDisplay( );
     //   return;
     // }
@@ -996,7 +996,7 @@ public class GMActivity extends Activity
   //   long id = setCalibFromName( name );
   //   if ( id > 0 ) {
   //     mApp.mDData.updateCalibDayAndComment( id, date, comment );
-  //     setStatus( STATUS_GM );
+  //     setStatus( TDStatus.GM );
   //     // updateDisplay( );
   //   }
   // }

@@ -186,11 +186,6 @@ public class TopoDroidApp extends Application
   private SharedPreferences mPrefs;
   // FIXME INSTALL_SYMBOL boolean askSymbolUpdate = false; // by default do not ask
 
-  static final int STATUS_NORMAL    = 0;   // item (shot, plot, fixed) status
-  static final int STATUS_DELETED   = 1;  
-  static final int STATUS_OVERSHOOT = 2;  
-  static final int STATUS_CHECK     = 3;  
-
   String[] DistoXConnectionError;
   BluetoothAdapter mBTAdapter = null;     // BT connection
   private TopoDroidComm mComm = null;        // BT communication
@@ -1192,7 +1187,7 @@ public class TopoDroidApp extends Application
       // FIXME BATCH
       // if ( ret > 0 && TDSetting.mSurveyStations > 0 ) {
       //   // FIXME TODO select only shots after the last leg shots
-      //   List<DBlock> list = mData.selectAllShots( mSID, STATUS_NORMAL );
+      //   List<DBlock> list = mData.selectAllShots( mSID, TDStataus.NORMAL );
       //   assign Stations( list );
       // }
     }

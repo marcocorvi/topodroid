@@ -91,17 +91,17 @@ public class Archiver
       zos = new ZipOutputStream( new BufferedOutputStream( new FileOutputStream( zipname ) ) );
 
 /* FIXME BEGIN SKETCH_3D */
-      List< Sketch3dInfo > sketches  = app.mData.selectAllSketches( app.mSID, TopoDroidApp.STATUS_NORMAL );
+      List< Sketch3dInfo > sketches  = app.mData.selectAllSketches( app.mSID, TDStatus.NORMAL );
       for ( Sketch3dInfo skt : sketches ) {
         addEntry( zos, new File( TDPath.getSurveySketchOutFile( survey, skt.name ) ) );
       }
-      sketches  = app.mData.selectAllSketches( app.mSID, TopoDroidApp.STATUS_DELETED );
+      sketches  = app.mData.selectAllSketches( app.mSID, TDStatus.DELETED );
       for ( Sketch3dInfo skt : sketches ) {
         addEntry( zos, new File( TDPath.getSurveySketchOutFile( survey, skt.name ) ) );
       }
 /* END SKETCH_3D */
 
-      List< PlotInfo > plots  = app.mData.selectAllPlots( app.mSID, TopoDroidApp.STATUS_NORMAL );
+      List< PlotInfo > plots  = app.mData.selectAllPlots( app.mSID, TDStatus.NORMAL );
       for ( PlotInfo plt : plots ) {
         addEntry( zos, new File( TDPath.getSurveyPlotTh2File( survey, plt.name ) ) );
         addEntry( zos, new File( TDPath.getSurveyPlotTdrFile( survey, plt.name ) ) );
@@ -114,17 +114,17 @@ public class Archiver
         }
       }
 
-      plots  = app.mData.selectAllPlots( app.mSID, TopoDroidApp.STATUS_DELETED );
+      plots  = app.mData.selectAllPlots( app.mSID, TDStatus.DELETED );
       for ( PlotInfo plt : plots ) {
         addEntry( zos, new File( TDPath.getSurveyPlotTdrFile( survey, plt.name ) ) );
       }
 
-      List< PhotoInfo > photos = app.mData.selectAllPhotos( app.mSID, TopoDroidApp.STATUS_NORMAL );
+      List< PhotoInfo > photos = app.mData.selectAllPhotos( app.mSID, TDStatus.NORMAL );
       for ( PhotoInfo pht : photos ) {
         addEntry( zos, new File( TDPath.getSurveyJpgFile( survey, Long.toString(pht.id) ) ) );
       }
 
-      photos = app.mData.selectAllPhotos( app.mSID, TopoDroidApp.STATUS_DELETED );
+      photos = app.mData.selectAllPhotos( app.mSID, TDStatus.DELETED );
       for ( PhotoInfo pht : photos ) {
         addEntry( zos, new File( TDPath.getSurveyJpgFile( survey, Long.toString(pht.id) ) ) );
       }
