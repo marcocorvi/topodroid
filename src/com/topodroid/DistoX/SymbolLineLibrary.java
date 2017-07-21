@@ -59,6 +59,8 @@ class SymbolLineLibrary extends SymbolLibrary
 
   boolean isWall( int k ) { return ( k < 0 || k >= mSymbolNr )? false : "wall".equals(((SymbolLine)mSymbols.get(k)).mGroup); }
 
+  boolean hasEffect( int k ) { return ( k < 0  || k >= mSymbolNr )? false : ((SymbolLine)mSymbols.get(k)).mHasEffect; }
+
   Paint getLinePaint( int k, boolean reversed )
   {
     if ( k < 0 || k >= mSymbolNr ) return null;

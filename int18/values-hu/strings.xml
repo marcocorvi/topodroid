@@ -611,6 +611,8 @@
     <string name="few_line_points">A vonalnak túl kevés pontja van</string>
     <string name="line_delete">vonal_törlése</string>
     <string name="flip_shots">Mérések_megfordítása </string>
+    <!-- TODO string name="split_nothing">Nothing to split</string -->
+    <!-- TODO string name="copy_items">Copy items</string -->
 
     <string name="menu_head">FEJLÉC</string>
     <!-- UNUSED string name="menu_save_th2">SAVE TH2</string -->
@@ -831,6 +833,8 @@
   <string name="pref_svg_grid_summary">Rácsháló hozzáadása SVG-képhez</string>
   <string name="pref_svg_in_html_title">SVG HTML-ben</string>
   <string name="pref_svg_in_html_summary">HTML-be beágyazott SVG-kép exportálása</string>
+  <!-- TODO string name="pref_svg_line_dir_title">SVG line orientation</string -->
+  <!-- TODO string name="pref_svg_line_dir_summary">Add line orientation-ticks to SVG export</string -->
   <string name="pref_kml_stations_title">KML mérési pontokkal</string>
   <string name="pref_kml_stations_summary">Mérési pontok hozzáadása KML-fájlhoz</string>
   <string name="pref_kml_splays_title">KML segédmérésekkel</string>

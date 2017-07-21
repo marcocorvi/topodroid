@@ -300,9 +300,9 @@ public class DrawingSurface extends SurfaceView
   //   }
   // };
 
-  // called by DrawingWindow on split
-  synchronized void clearPreviewPath() { mPreviewPath = null; }
+  // synchronized void clearPreviewPath() { mPreviewPath = null; }
 
+  // also called by DrawingWindow on split
   synchronized void resetPreviewPath() { if ( mPreviewPath != null ) mPreviewPath.mPath = new Path(); }
 
   synchronized void makePreviewPath( int type, Paint paint ) // type = kind of the path
@@ -337,9 +337,9 @@ public class DrawingSurface extends SurfaceView
   }
 
 
-  List<DrawingPath> splitPlot( String name, DrawingStationName sn, ArrayList< PointF > border )
+  List<DrawingPath> splitPlot( ArrayList< PointF > border, boolean remove )
   {
-    return commandManager.splitPlot( name, sn, border );
+    return commandManager.splitPlot( border, remove );
   }
 
 

@@ -130,6 +130,7 @@ class TDSetting
     "DISTOX_EXPORT_PLOT",        // default plot export
     "DISTOX_THERION_MAPS",       // whether to put map commands before centerline in therion
     "DISTOX_SVG_GRID",           // whether to export grid in SVG 
+    "DISTOX_SVG_LINE_DIR",       // whether to add line orientation ticks in SVG export
     "DISTOX_SVG_IN_HTML",        // whether to export SVG embedded in HTML
     "DISTOX_KML_STATIONS",       // whether to add station points to KML export
     "DISTOX_KML_SPLAYS",         // whether to add splay lines to KML export
@@ -313,6 +314,7 @@ class TDSetting
   static boolean mTherionMaps   = false;
   static boolean mSvgGrid       = false;
   static boolean mSvgInHtml     = false;
+  static boolean mSvgLineDirection = false;
   static boolean mKmlStations   = true;
   static boolean mKmlSplays     = false;
 
@@ -341,7 +343,10 @@ class TDSetting
   static int     mStationNames  = 0;        // type of station names (0: alpha, 1: number)
 
 
-  static int mLoopClosure = 0;      // loop closure: 0 none, 1 normal, 3 triangles
+  static final int LOOP_NONE      = 0;
+  static final int LOOP_CYCLES    = 1;
+  static final int LOOP_TRIANGLES = 3;
+  static int mLoopClosure = LOOP_NONE;      // loop closure: 0 none, 1 normal, 3 triangles
   
   static final  String UNIT_LENGTH         = "meters";
   static final  String UNIT_ANGLE          = "degrees";
@@ -585,6 +590,16 @@ class TDSetting
   //   return i;
   // }
 
+  static private void setLoopClosure( int loop_closure )
+  {
+    mLoopClosure = loop_closure;
+    if ( mLoopClosure == LOOP_CYCLES ) {
+      if ( ! mLevelOverAdvanced ) mLoopClosure = LOOP_NONE;
+    } else if ( mLoopClosure == LOOP_TRIANGLES ) {
+      if ( ! mLevelOverExpert ) mLoopClosure = LOOP_NONE;
+    }
+  }
+
   static private int getSizeButtons( int size )
   {
     switch ( size ) {
@@ -679,8 +694,8 @@ class TDSetting
     mMagneticThr     = tryFloat( prefs, key[k++], "1" );  // DISTOX_MAG_PERCENT
     mDipThr          = tryFloat( prefs, key[k++], "2"   );  // DISTOX_DIP_THR
 
-    // mLoopClosure   = prefs.getBoolean( key[k++], false );   // DISTOX_LOOP_CLOSURE
-    mLoopClosure   = tryInt(   prefs, key[k++], "0" );      
+    setLoopClosure( tryInt(   prefs, key[k++], "0" ) );     // DISTOX_LOOP_CLOSURE_VALUE
+
     mCheckAttached = prefs.getBoolean( key[k++], false );   // DISTOX_CHECK_ATTACHED 13
     mPrevNext      = prefs.getBoolean( key[k++], true );    // DISTOX_PREV_NEXT
     mMaxShotLength = tryFloat( prefs, key[k++], "50"   );   // DISTOX_MAX_SHOT_LENGTH
@@ -746,6 +761,7 @@ class TDSetting
     mExportPlotFormat  = tryInt(   prefs, key[k++], "-1" );   // DISTOX_EXPORT_PLOT choice: 14, 2, 11, 12, 13
     mTherionMaps       = prefs.getBoolean( key[k++], false ); // DISTOX_THERION_MAPS
     mSvgGrid           = prefs.getBoolean( key[k++], false ); // DISTOX_SVG_GRID
+    mSvgLineDirection  = prefs.getBoolean( key[k++], false ); // DISTOX_SVG_LINE_DIR
     mSvgInHtml         = prefs.getBoolean( key[k++], false ); // DISTOX_SVG_IN_HTML
     mKmlStations       = prefs.getBoolean( key[k++], true );  // DISTOX_KML_STATIONS
     mKmlSplays         = prefs.getBoolean( key[k++], false ); // DISTOX_KML_SPLAYS
@@ -939,9 +955,8 @@ class TDSetting
     } else if ( k.equals( key[ nk++ ] ) ) {
       mDipThr          = tryFloat( prefs, k, "2" );      // DISTOX_DIP_THR
   
-    } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_LOOP_CLOSURE
-      // mLoopClosure   = prefs.getBoolean( k, false );
-      mLoopClosure   = tryInt( prefs, k, "0" );      
+    } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_LOOP_CLOSURE_VALUE
+      setLoopClosure( tryInt( prefs, k, "0" ) );
     } else if ( k.equals( key[ nk++ ] ) ) {
       mCheckAttached = prefs.getBoolean( k, false );
     } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_PREV_NEXT
@@ -1085,6 +1100,8 @@ class TDSetting
       mTherionMaps = prefs.getBoolean( k, false );   // DISTOX_THERION_MAPS
     } else if ( k.equals( key[ nk++ ] ) ) { 
       mSvgGrid = prefs.getBoolean( k, false );       // DISTOX_SVG_GRID
+    } else if ( k.equals( key[ nk++ ] ) ) { 
+      mSvgLineDirection = prefs.getBoolean( k, false ); // DISTOX_SVG_LINE_DIR
     } else if ( k.equals( key[ nk++ ] ) ) { 
       mSvgInHtml = prefs.getBoolean( k, false );     // DISTOX_SVG_IN_HTML
     } else if ( k.equals( key[ nk++ ] ) ) { 
@@ -1333,7 +1350,7 @@ class TDSetting
     if ( name.equals( "DISTOX_ACCEL_PERCENT"  ) ) return parseFloatValue( value, mAccelerationThr, 0 );
     if ( name.equals( "DISTOX_MAG_PERCENT"    ) ) return parseFloatValue( value, mMagneticThr, 0 );
     if ( name.equals( "DISTOX_DIP_THR"        ) ) return parseFloatValue( value, mDipThr, 0 );
-    //B if ( name.equals( "DISTOX_LOOP_CLOSURE" ) 
+    //B if ( name.equals( "DISTOX_LOOP_CLOSURE_VALUE" ) 
     //B if ( name.equals( "DISTOX_CHECK_ATTACHED" )
     //B if ( name.equals( "DISTOX_PREV_NEXT" )
     if ( name.equals( "DISTOX_MAX_SHOT_LENGTH") ) return parseFloatValue( value, mMaxShotLength, 20 );
@@ -1403,6 +1420,7 @@ class TDSetting
     //C if ( name.equals( "DISTOX_EXPORT_PLOT" )
     //B if ( name.equals( "DISTOX_THERION_MAPS" )
     //B if ( name.equals( "DISTOX_SVG_GRID" )
+    //B if ( name.equals( "DISTOX_SVG_LINE_DIR" )
     //B if ( name.equals( "DISTOX_SVG_IN_HTML" )
     //B if ( name.equals( "DISTOX_KML_STATIONS" )
     //B if ( name.equals( "DISTOX_KML_SPLAYS" )

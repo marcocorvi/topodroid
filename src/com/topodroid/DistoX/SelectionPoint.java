@@ -23,17 +23,30 @@ class SelectionPoint
   // for DrawingLinePath    (x.y) = midpoint between each two line points
   // for DrawingAreaPath    (x,y) = midpoint between each two border points
 
-  float mDistance;
   DrawingPath mItem;
   LinePoint   mPoint;
-  private int mMin; // whether to shift the point (0) or a CP (1 or 2)
   SelectionBucket mBucket = null;
 
-  int mRangeType; // range shift type
-  LinePoint mLP1 = null; // range shift
+  private float mDistance; // distance from input (X,Y)
+  private int mMin;        // whether to shift the point (0) or a CP (1 or 2)
+
+  private int mRangeType; // range shift type
+  LinePoint mLP1 = null;  // range shift endpoints
   LinePoint mLP2 = null;
-  float mD1;
-  float mD2;
+  private float mD1;      // range shift endpoint distances
+  private float mD2;
+  
+  void setRangeTypeAndPoints( int type, LinePoint lp1, LinePoint lp2, float d1, float d2 )
+  {
+    mRangeType = type;
+    mLP1 = lp1;
+    mLP2 = lp2;
+    mD1  = d1;
+    mD2  = d2;
+  }
+
+  void setDistance( float d ) { mDistance = d; }
+  float getDistance() { return mDistance; }
 
   int type() { return mItem.mType; }
   // DRAWING_PATH_FIXED   = 0; // leg
@@ -73,6 +86,7 @@ class SelectionPoint
   float Y() { return ( mPoint != null )? mPoint.y : mItem.cy; }
 
   // distance from a scene point (xx, yy)
+  // as side effect set mDistance to the result
   float distance( float xx, float yy )
   {
     mMin = 0; // index of the point that has achived the min distance
@@ -82,22 +96,34 @@ class SelectionPoint
         float d1 = mPoint.distanceCP1( xx, yy );
         float d2 = mPoint.distanceCP2( xx, yy );
         if ( d <= d1 ) {
-          if ( d <= d2 ) {
-            return d;
-          } 
-          mMin = 2;
-          return d2;
+          if ( d <= d2 ) { // d < d1 and d < d2
+            mDistance = d;
+            // return d;
+          } else {         // d2 < d < d1
+            mMin = 2;
+            mDistance = d2;
+            // return d2;
+          }
+        } else {           // d1 < d and d1 < d2
+          if ( d1 < d2 ) {
+            mMin = 1;
+            mDistance = d1;
+            // return d1;
+          } else {         // d2 < d1 < d
+            mMin = 2;
+            mDistance = d2;
+            // return d2;
+          }
         }
-        if ( d1 < d2 ) {
-          mMin = 1;
-          return d1;
-        }
-        mMin = 2;
-        return d2;
+      } else {
+        mDistance = d;
+        // return d;
       }
-      return d;
+    } else {
+      mDistance = mItem.distanceToPoint( xx, yy );
+      // return mItem.distanceToPoint( xx, yy );
     }
-    return mItem.distanceToPoint( xx, yy );
+    return mDistance;
   }
 
   boolean rotateBy( float dy )

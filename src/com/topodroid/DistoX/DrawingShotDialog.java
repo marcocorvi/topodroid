@@ -157,7 +157,7 @@ public class DrawingShotDialog extends MyDialog
 
     mRBwalls  = (Button) findViewById( R.id.walls );
 
-    // if ( ! TopoDroidApp.mLoopClosure ) {
+    // if ( TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) {
     //   mRBignore.setClickable( false );
     //   mRBignore.setTextColor( TDColor.MID_GRAY );
     // }

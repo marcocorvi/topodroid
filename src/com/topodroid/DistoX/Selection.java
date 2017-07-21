@@ -154,7 +154,7 @@ class Selection
   {
     // Log.v("DistoX", "Selection reset distances" );
     for ( SelectionPoint pt : mPoints ) {
-      pt.mDistance = 0.0f;
+      pt.setDistance( 0.0f );
     }
   }
 
@@ -312,9 +312,8 @@ class Selection
             if ( !splays && sp.type() == DrawingPath.DRAWING_PATH_SPLAY ) continue;
             if ( !stations && (    sp.type() == DrawingPath.DRAWING_PATH_STATION 
                                 || sp.type() == DrawingPath.DRAWING_PATH_NAME ) ) continue;
-            sp.mDistance = sp.distance( x, y );
-            if ( sp.mDistance < radius ) {
-              // Log.v("DistoX", "pt " + sp.mPoint.x + " " + sp.mPoint.y + " dist " + sp.mDistance );
+            if ( sp.distance( x, y ) < radius ) {
+              // Log.v("DistoX", "pt " + sp.mPoint.x + " " + sp.mPoint.y + " dist " + sp.getDistance() );
               sel.addPoint( sp );
             }
           }
@@ -327,8 +326,7 @@ class Selection
           for ( SelectionPoint sp : bucket.mPoints ) {
             if ( ( legs && sp.type() == DrawingPath.DRAWING_PATH_FIXED ) ||
                  ( splays && sp.type() == DrawingPath.DRAWING_PATH_SPLAY ) ) {
-              sp.mDistance = sp.distance( x, y );
-              if ( sp.mDistance < radius ) sel.addPoint( sp );
+              if ( sp.distance( x, y ) < radius ) sel.addPoint( sp );
             }
           }
         }
@@ -340,8 +338,7 @@ class Selection
           for ( SelectionPoint sp : bucket.mPoints ) {
             if (    sp.type() == DrawingPath.DRAWING_PATH_STATION 
                  || sp.type() == DrawingPath.DRAWING_PATH_NAME ) {
-              sp.mDistance = sp.distance( x, y );
-              if ( sp.mDistance < radius ) sel.addPoint( sp );
+              if ( sp.distance( x, y ) < radius ) sel.addPoint( sp );
             }
           }
         }
@@ -355,8 +352,7 @@ class Selection
         if ( bucket.contains( x, y, radius, radius ) ) {
           for ( SelectionPoint sp : bucket.mPoints ) {
             if ( sp.type() == type ) {
-              sp.mDistance = sp.distance( x, y );
-              if ( sp.mDistance < radius ) sel.addPoint( sp );
+              if ( sp.distance( x, y ) < radius ) sel.addPoint( sp );
             }
           }
         }

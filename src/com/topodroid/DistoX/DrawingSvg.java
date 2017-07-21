@@ -199,6 +199,23 @@ class DrawingSvg
           out.write("</g>\n");
         }
 
+        if ( TDSetting.mSvgLineDirection ) {
+          StringWriter swD = new StringWriter();
+          PrintWriter pwD  = new PrintWriter(swD);
+          pwD.format("<marker id=\"dir\", viewBox=\"0 0 10 30\"  orient=\"auto\"");
+          pwD.format(" markerUnits=\"strokeWidth\" markerWidth=\"4\" refX=\"0\" refY=\"30\"");
+          pwD.format(" markerHeight=\"30\" stroke=\"#cccc3a\" stroke-width=\"4\" fill=\"none\" >\n");
+          pwD.format("  <line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"30\" />\n" );
+          pwD.format("</marker>\n");
+          pwD.format("<marker id=\"rev\", viewBox=\"0 0 10 30\"  orient=\"auto\"");
+          pwD.format(" markerUnits=\"strokeWidth\" markerWidth=\"4\" refX=\"0\" refY=\"0\"");
+          pwD.format(" markerHeight=\"30\" stroke=\"#cccc3a\" stroke-width=\"4\" fill=\"none\" >\n");
+          pwD.format("  <line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"30\" />\n" );
+          pwD.format("</marker>\n");
+          out.write( swD.getBuffer().toString() );
+          out.flush();
+        }
+
         // FIXME station scale is 0.3
         float POINT_SCALE = 10.0f;
         for ( ICanvasCommand cmd : plot.getCommands() ) {
@@ -296,7 +313,17 @@ class DrawingSvg
     for ( p = p.mNext; p != null; p = p.mNext ) { 
       pw.format(Locale.US, " L %.2f %.2f", xoff+p.x, yoff+p.y );
     }
-    pw.format("\" />\n");
+    pw.format("\"");
+    if ( TDSetting.mSvgLineDirection ) {
+      if ( BrushManager.mLineLib.hasEffect( line.mLineType ) ) {
+        if ( line.isReversed() ) {
+          pw.format("\" marker-start=\"url(#rev)\" />\n");
+        } else {
+          pw.format("\" marker-start=\"url(#dir)\" />\n");
+        }
+      }
+    } 
+    pw.format(" />\n");
   }
 
   static private void toSvg( PrintWriter pw, DrawingAreaPath area, String color, float xoff, float yoff )

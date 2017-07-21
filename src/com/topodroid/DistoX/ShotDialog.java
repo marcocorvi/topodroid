@@ -411,7 +411,7 @@ public class ShotDialog extends MyDialog
     mRBright  = (CheckBox) findViewById(R.id.right );
     // mRBignore = (CheckBox) findViewById(R.id.ignore );
 
-    // if ( ! TopoDroidApp.mLoopClosure ) {
+    // if ( TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) {
     //   mRBignore.setClickable( false );
     //   mRBignore.setTextColor( TDColor.MID_GRAY );
     // }

@@ -610,6 +610,8 @@
     <string name="few_line_points">A linha possui quantidade insuficiente de pontos</string>
     <string name="line_delete">apagar_linha</string>
     <string name="flip_shots">Virar visadas</string>
+    <!-- TODO string name="split_nothing">Nothing to split</string -->
+    <!-- TODO string name="copy_items">Copy items</string -->
 
     <string name="menu_head">CABEÇALHO</string>
     <!-- UNUSED string name="menu_save_th2">SALVAR TH2</string -->
@@ -830,6 +832,8 @@
   <string name="pref_svg_grid_summary">Incluir grade no arquivo SVG exportado</string>
   <string name="pref_svg_in_html_title">SVG em HTML</string>
   <string name="pref_svg_in_html_summary">Incorporar arquivo SVG exportado em HTML</string>
+  <!-- TODO string name="pref_svg_line_dir_title">SVG line orientation</string -->
+  <!-- TODO string name="pref_svg_line_dir_summary">Add line orientation-ticks to SVG export</string -->
   <string name="pref_kml_stations_title">Bases KML</string>
   <string name="pref_kml_stations_summary">Incluir bases ao arquivo de exportação KML</string>
   <string name="pref_kml_splays_title">Medidas auxiliares KML</string>

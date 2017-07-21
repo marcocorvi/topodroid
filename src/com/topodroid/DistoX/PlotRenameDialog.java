@@ -20,6 +20,7 @@ import android.content.Context;
 
 import android.widget.EditText;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.view.View;
 // import android.view.View.OnKeyListener;
 // import android.view.KeyEvent;
@@ -35,6 +36,7 @@ public class PlotRenameDialog extends MyDialog
   private Button   mBtnBack;
   private Button   mBtnDelete;
   private Button   mBtnSplit;
+  private CheckBox mCBcopy;
 
   private DrawingWindow mParent;
   private TopoDroidApp mApp;
@@ -58,6 +60,7 @@ public class PlotRenameDialog extends MyDialog
     mBtnSplit  = (Button) findViewById(R.id.btn_split );
     mBtnDelete = (Button) findViewById(R.id.btn_delete );
     mBtnBack   = (Button) findViewById(R.id.btn_back );
+    mCBcopy    = (CheckBox) findViewById( R.id.cb_copy );
 
     mEtName = (EditText) findViewById( R.id.et_name );
     mEtStation = (EditText) findViewById( R.id.et_station );
@@ -71,6 +74,7 @@ public class PlotRenameDialog extends MyDialog
       mBtnSplit.setOnClickListener( this );
       mEtStation.setInputType( android.text.InputType.TYPE_NULL );
     } else {
+      mCBcopy.setVisibility( View.GONE );
       mBtnSplit.setVisibility( View.GONE );
       mEtStation.setInputType( android.text.InputType.TYPE_NULL );
     }
@@ -110,7 +114,7 @@ public class PlotRenameDialog extends MyDialog
         mEtStation.setError( error );
         return;
       }
-      mParent.splitPlot( name, station );
+      mParent.splitPlot( name, station, ! mCBcopy.isChecked() ); // not mCBcopy == remove
     }
     dismiss();
   }

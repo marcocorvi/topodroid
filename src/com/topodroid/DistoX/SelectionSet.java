@@ -97,7 +97,7 @@ class SelectionSet
         for ( int k2 = k1+1; k2 < size; ++k2 ) {
           SelectionPoint p1 = mPoints.get(k1);
           SelectionPoint p2 = mPoints.get(k2);
-          if ( p1.mDistance > p2.mDistance ) {
+          if ( p1.getDistance() > p2.getDistance() ) {
             mPoints.set( k1, p2 ); 
             mPoints.set( k2, p1 );
           }

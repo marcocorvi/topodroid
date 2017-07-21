@@ -432,14 +432,16 @@ public class DrawingWindow extends ItemDrawer
   String mSplitName;
   DrawingStationName mSplitStation;
   ArrayList< PointF > mSplitBorder = null;
+  boolean mSplitRemove;
 
   // here we are guaranteed that "name" can be used for a new plot name
   // and the survey has station "station"
-  void splitPlot( String name, String station ) 
+  void splitPlot( String name, String station, boolean remove ) 
   {
     // get the DrawingStation of station
     mSplitName = name;
     mSplitStation = mDrawingSurface.getStation( station );
+    mSplitRemove  = remove;
     if ( mSplitStation != null ) {
       if ( mSplitBorder == null ) {
         mSplitBorder = new ArrayList< PointF >();
@@ -453,21 +455,29 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  void doSplitPlot( ) 
+  // remove: whether to remove the paths from the current plot
+  private void doSplitPlot( )
   {
+    if ( mSplitBorder.size() <= 3 ) { // too few points: nothing to split
+      Toast.makeText( mActivity, R.string.split_nothing, Toast.LENGTH_SHORT ).show();
+      return;
+    }
+    List<DrawingPath> paths = mDrawingSurface.splitPlot( mSplitBorder, mSplitRemove );
+    if ( paths.size() == 0 ) { // nothing to split
+      Toast.makeText( mActivity, R.string.split_nothing, Toast.LENGTH_SHORT ).show();
+      return;
+    }
     boolean extended = (mPlot2.type == PlotInfo.PLOT_EXTENDED);
     int azimuth = (int)mPlot2.azimuth; 
     long pid = mApp.insert2dPlot( mApp.mSID, mSplitName, mSplitStation.name(), extended, azimuth );
     String name = mSplitName + ( ( mType == PlotInfo.PLOT_PLAN )? "p" : "s" );
     String fullname = mApp.mySurvey + "-" + name;
     // PlotInfo plot = mApp.mData.getPlotInfo( mApp.mSID, name );
-    List<DrawingPath> paths = mDrawingSurface.splitPlot( name, mSplitStation, mSplitBorder );
     (new SavePlotFileTask( mActivity, this, null, mApp, paths, fullname, mType, azimuth ) ).execute();
     // TODO
     // [1] create the database record
     // [2] save the Tdr for the new plot and remove the items from the commandManager
   }
-
 
   private PlotInfo mPlot1;
   private PlotInfo mPlot2;
@@ -2936,9 +2946,9 @@ public class DrawingWindow extends ItemDrawer
               mEraseCommand = null;
             }
           } else if ( mMode == MODE_SPLIT ) {
-            mDrawingSurface.clearPreviewPath();
+            mDrawingSurface.resetPreviewPath();
             mSplitBorder.add( new PointF( x_scene, y_scene ) );
-            doSplitPlot();
+            doSplitPlot( );
             setMode( MODE_MOVE );
           } else { // MODE_MOVE 
 /* FIXME for the moment do not create X-Sections

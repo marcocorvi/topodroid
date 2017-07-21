@@ -36,7 +36,7 @@ public class SymbolLine extends Symbol
   String mName;       // local name
   Paint  mPaint;      // forward paint
   Paint  mRevPaint;   // reverse paint
-  boolean mHasEffect;
+  boolean mHasEffect; // whether the line paint has path-effect
   Path mPath;
   boolean mStyleStraight;
   boolean mClosed;
@@ -79,6 +79,7 @@ public class SymbolLine extends Symbol
     init( name, group, color, width );
     mPaint.setPathEffect( effect_dir );
     mRevPaint.setPathEffect( effect_rev );
+    mHasEffect = true;
     makePath();
   }
 

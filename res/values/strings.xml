@@ -443,6 +443,7 @@
     <string name="unzip_fail_td">Failed: TopoDroid version mismatch</string>
     <!-- UNUSED string name="zoom_in_out">Zoom in/out</string -->
 
+
     <string name="survey_info">Survey info</string>
     <string name="stat_stddev_m">M stddev %1$.1f %%</string>
     <string name="stat_stddev_g">G stddev %1$.1f %%</string>
@@ -617,6 +618,8 @@
     <string name="few_line_points">Line has too few points</string>
     <string name="line_delete">line_delete</string>
     <string name="flip_shots">Flip shots</string>
+    <string name="split_nothing">Nothing to split</string>
+    <string name="copy_items">Copy items</string>
 
     <string name="menu_head">HEAD</string>
     <!-- UNUSED string name="menu_save_th2">SAVE TH2</string -->
@@ -844,6 +847,8 @@
   <string name="pref_svg_grid_summary">Add grid to SVG export</string>
   <string name="pref_svg_in_html_title">SVG in HTML</string>
   <string name="pref_svg_in_html_summary">Embed SVG export in HTML</string>
+  <string name="pref_svg_line_dir_title">SVG line orientation</string>
+  <string name="pref_svg_line_dir_summary">Add line orientation-ticks to SVG export</string>
   <string name="pref_kml_stations_title">KML stations</string>
   <string name="pref_kml_stations_summary">Add stations to KML export</string>
   <string name="pref_kml_splays_title">KML splays</string>

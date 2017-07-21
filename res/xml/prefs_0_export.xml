@@ -115,6 +115,13 @@
      / -->
 
    <!-- CheckBoxPreference
+       android:key="DISTOX_SVG_LINE_DIR"
+       android:summary="@string/pref_svg_line_dir_summary"
+       android:title="@string/pref_svg_line_dir_title"
+       android:defaultValue="false"
+     / -->
+
+   <!-- CheckBoxPreference
        android:key="DISTOX_SVG_IN_HTML"
        android:summary="@string/pref_svg_in_html_summary"
        android:title="@string/pref_svg_in_html_title"

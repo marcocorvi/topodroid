@@ -453,7 +453,7 @@ class DistoXNum
   //         if ( sf != null ) {
   //           mLength += block.mLength;
   //           if ( st != null ) { // close loop
-  //             if ( /* TopoDroidApp.mAutoStations || */ TopoDroidApp.mLoopClosure == 0 ) {
+  //             if ( /* TopoDroidApp.mAutoStations || */ TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) {
   //               NumStation st1 = new NumStation( block.mTo, sf, block.mLength, block.mBearing+ mDecl , block.mClino, block.getExtend() );
   //               st1.addAzimuth( (block.mBearing+ mDecl +180)%360, block.getNegExtend() );
   //               st1.mDuplicate = true;
@@ -737,7 +737,7 @@ class DistoXNum
       }
     }
 
-    if ( TDSetting.mLoopClosure == 3 ) {
+    if ( TDSetting.mLoopClosure == TDSetting.LOOP_TRIANGLES ) {
       makeTrilateration( tmpshots );
     }
 
@@ -910,7 +910,7 @@ class DistoXNum
             sf.addAzimuth( ts.b(), ext );
 
             if ( st != null ) { // loop-closure
-              if ( /* TDSetting.mAutoStations || */ TDSetting.mLoopClosure == 0 ) { // do not close loop
+              if ( /* TDSetting.mAutoStations || */ TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) { // do not close loop
                 // if ( TDLog.LOG_DEBUG ) Log.v( TDLog.TAG, "do not close loop");
                 // keep loop open: new station( id=ts.to, from=sf, ... )
                 float bearing = ts.b() - sf.mAnomaly;
@@ -989,7 +989,7 @@ class DistoXNum
     }
     // if ( TDLog.LOG_DEBUG ) Log.v( TDLog.TAG, "DistoXNum::compute done leg shots, stations  " + mStations.size() );
 
-    if ( TDSetting.mLoopClosure == 1 ) {
+    if ( TDSetting.mLoopClosure == TDSetting.LOOP_CYCLES ) {
       // TDLog.Log( TDLog.LOG_NUM, "loop compensation");
       doLoopCompensation( mNodes, mShots );
   

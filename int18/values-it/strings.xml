@@ -610,6 +610,8 @@
     <string name="few_line_points">La linea ha troppo pochi punti</string>
     <string name="line_delete">Elimina linea</string>
     <string name="flip_shots">Capovolgi battute</string>
+    <!-- TODO string name="split_nothing">Nothing to split</string -->
+    <!-- TODO string name="copy_items">Copy items</string -->
 
     <string name="menu_head">CIMA</string>
     <!-- UNUSED string name="menu_save_th2">SAVE TH2</string -->
@@ -835,6 +837,8 @@
   <string name="pref_svg_grid_summary">Aggiungi griglia alla export SVG</string>
   <string name="pref_svg_in_html_title">SVG nell\'HTML</string>
   <string name="pref_svg_in_html_summary">Inserire SVG export in HTML</string>
+  <!-- TODO string name="pref_svg_line_dir_title">SVG line orientation</string -->
+  <!-- TODO string name="pref_svg_line_dir_summary">Add line orientation-ticks to SVG export</string -->
   <string name="pref_kml_stations_title">Capisaldi KML</string>
   <string name="pref_kml_stations_summary">Capisaldi nell\'export KML</string>
   <string name="pref_kml_splays_title">Splays KML</string>

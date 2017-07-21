@@ -737,7 +737,7 @@ public class DrawingCommandManager
     return Math.abs( angle ) > 3.28; 
   }
 
-  List<DrawingPath> splitPlot( String name, DrawingStationName sn, ArrayList< PointF > border ) 
+  List<DrawingPath> splitPlot( ArrayList< PointF > border, boolean remove ) 
   {
     ArrayList<DrawingPath> paths = new ArrayList<DrawingPath>();
     synchronized( mCurrentStack ) {
@@ -751,9 +751,11 @@ public class DrawingCommandManager
           }
         }
       }
-      for ( DrawingPath pp : paths ) {
-        mCurrentStack.remove( pp );
-        mSelection.removePath( pp );
+      if ( remove ) {
+        for ( DrawingPath pp : paths ) {
+          mCurrentStack.remove( pp );
+          mSelection.removePath( pp );
+        }
       }
     }
     return paths;
@@ -1761,11 +1763,7 @@ public class DrawingCommandManager
      
     // now make the range sp1 -- sp2 and the hotItem the midpoint
     SelectionPoint sp = mSelection.getSelectionPoint( lp0 ); 
-    sp.mLP1 = lp1;
-    sp.mLP2 = lp2;
-    sp.mD1 = d1;
-    sp.mD2 = d2;
-    sp.mRangeType = type;
+    sp.setRangeTypeAndPoints( type, lp1, lp2, d1, d2 );
 
     mSelected.clear();
     mSelected.addPoint( sp );

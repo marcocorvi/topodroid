@@ -618,6 +618,8 @@
     <string name="few_line_points">La línea tiene muy pocos puntos</string>
     <string name="line_delete">Eliminar línea</string>
     <string name="flip_shots">Tomas contínuas</string>
+    <!-- TODO string name="split_nothing">Nothing to split</string -->
+    <!-- TODO string name="copy_items">Copy items</string -->
 
     <string name="help_calib_check">Calibración: compruebe las tomas</string>
     <string name="help_close">Cerrar ventana</string>
@@ -838,6 +840,8 @@
   <string name="pref_svg_grid_summary">Añadir una parrilla a la exportación SVG</string>
   <string name="pref_svg_in_html_title">SVG en HTML</string>
   <string name="pref_svg_in_html_summary">Incorpore la exportación de SVG en HTML</string>
+  <!-- TODO string name="pref_svg_line_dir_title">SVG line orientation</string -->
+  <!-- TODO string name="pref_svg_line_dir_summary">Add line orientation-ticks to SVG export</string -->
   <string name="pref_kml_stations_title">Estaciones en KML</string>
   <string name="pref_kml_stations_summary">Añadir estaciones a la exportación de KML</string>
   <string name="pref_kml_splays_title">Tomas laterales en KML</string>
