@@ -521,6 +521,7 @@
     <string name="button_save"      >Запис     </string>
     <!-- UNUSED string name="button_select"    >Избор     </string -->
     <!-- TODO string name="button_search"    >Search    </string -->
+    <!-- TODO string name="button_merge"     >Merge     </string -->
     <string name="button_split"     >Разделяне</string>
     <string name="button_store"     >Съхраняване</string>
     <!-- UNUSED string name="button_start"     >Старт     </string -->
@@ -762,6 +763,7 @@
     <string name="title_photo">Снимки/Измервания</string>
     <string name="title_photo_comment">Коментар за снимка</string>
     <string name="title_plot_save">Запис на скица като</string>
+    <!-- TODO string name="title_plot_merge">Merge-in sketch</string -->
     <string name="title_plot_reload">Препрочитане на скица</string>
     <string name="title_profile_flip">Обръщане на разреза?</string>
     <string name="title_projection">Азимут на проектиран разрез %1$d</string>

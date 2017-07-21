@@ -455,6 +455,47 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  void mergePlot()
+  {
+    List<PlotInfo> plots = mApp.mData.selectAllPlotsWithType( mApp.mSID, TDStatus.NORMAL, mType );
+    if ( plots.size() <= 1 ) { // nothing to merge in
+      return;
+    }
+    for ( PlotInfo plt : plots ) {
+      if ( plt.name.equals( mName ) ) {
+        plots.remove( plt );
+        break;
+      }
+    }
+    new PlotMergeDialog( mActivity, this, plots ).show();
+  }
+
+  // called anly with mType PLOT_PLAN or PLOT_EXTENDED
+  void doMergePlot( PlotInfo plt )
+  {
+    if ( plt.type != mType ) return;
+    NumStation st1 = mNum.getStation( plt.start );
+    NumStation st0 = mNum.mStartStation; // start-station has always coords (0,0)
+    if ( st1 == null || st0 == null ) return;
+
+    float xdelta = 0.0f;
+    float ydelta = 0.0f;
+    if ( mType == PlotInfo.PLOT_PLAN ) {
+      xdelta = st1.e - st0.e; // FIXME SCALE FACTORS ???
+      ydelta = st1.s - st0.s;
+    } else if ( mType == PlotInfo.PLOT_EXTENDED ) {
+      xdelta = st1.h - st0.h;
+      ydelta = st1.v - st0.v;
+    } else {
+      return;
+    }
+    xdelta *= DrawingUtil.SCALE_FIX;
+    ydelta *= DrawingUtil.SCALE_FIX;
+    String fullName = mApp.mySurvey + "-" + plt.name;
+    String tdr = TDPath.getTdrFileWithExt( fullName );
+    boolean ret = mDrawingSurface.addloadDataStream( tdr, null, xdelta, ydelta, null );
+  }
+
   // remove: whether to remove the paths from the current plot
   private void doSplitPlot( )
   {

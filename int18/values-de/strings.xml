@@ -537,6 +537,7 @@
     <string name="button_save"      >Speichern</string>
     <!-- UNUSED string name="button_select"    >Wählen     </string -->
     <!-- TODO string name="button_search"    >Search    </string -->
+    <!-- TODO string name="button_merge"     >Merge     </string -->
     <string name="button_split"     >Aufteilen     </string>
     <string name="button_store"     >Speichern</string>
     <!-- UNUSED string name="button_start"     >Start</string -->
@@ -780,6 +781,7 @@
     <string name="title_photo">Foto/Messungen</string>
     <string name="title_photo_comment">Foto Kommentar</string>
     <string name="title_plot_save">Skizze Speichern als</string>
+    <!-- TODO string name="title_plot_merge">Merge-in sketch</string -->
     <string name="title_plot_reload">Skizzenbackup wiederherstellen</string>
     <string name="title_profile_flip">Seitenansicht spiegeln?</string>
     <string name="title_projection">Projiziertes Profil Azimut %1$d</string>

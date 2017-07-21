@@ -33,6 +33,14 @@
        android:layout_marginTop="10dp" 
        >
 
+      <Button android:id="@+id/btn_merge"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="15dp" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_merge"
+        />
 
       <Button android:id="@+id/btn_split"
         android:layout_width="wrap_content" 

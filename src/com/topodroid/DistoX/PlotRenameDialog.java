@@ -36,6 +36,7 @@ public class PlotRenameDialog extends MyDialog
   private Button   mBtnBack;
   private Button   mBtnDelete;
   private Button   mBtnSplit;
+  private Button   mBtnMerge;
   private CheckBox mCBcopy;
 
   private DrawingWindow mParent;
@@ -58,6 +59,7 @@ public class PlotRenameDialog extends MyDialog
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
     mBtnRename = (Button) findViewById(R.id.btn_rename );
     mBtnSplit  = (Button) findViewById(R.id.btn_split );
+    mBtnMerge  = (Button) findViewById(R.id.btn_merge );
     mBtnDelete = (Button) findViewById(R.id.btn_delete );
     mBtnBack   = (Button) findViewById(R.id.btn_back );
     mCBcopy    = (CheckBox) findViewById( R.id.cb_copy );
@@ -71,11 +73,13 @@ public class PlotRenameDialog extends MyDialog
     mBtnBack.setOnClickListener( this );
     mBtnDelete.setOnClickListener( this );
     if ( TDSetting.mLevelOverExpert ) {
+      mBtnMerge.setOnClickListener( this );
       mBtnSplit.setOnClickListener( this );
       mEtStation.setInputType( android.text.InputType.TYPE_NULL );
     } else {
       mCBcopy.setVisibility( View.GONE );
       mBtnSplit.setVisibility( View.GONE );
+      mBtnMerge.setVisibility( View.GONE );
       mEtStation.setInputType( android.text.InputType.TYPE_NULL );
     }
 
@@ -115,6 +119,8 @@ public class PlotRenameDialog extends MyDialog
         return;
       }
       mParent.splitPlot( name, station, ! mCBcopy.isChecked() ); // not mCBcopy == remove
+    } else if ( b == mBtnMerge ) {
+      mParent.mergePlot();
     }
     dismiss();
   }

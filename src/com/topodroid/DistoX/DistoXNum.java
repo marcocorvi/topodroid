@@ -20,6 +20,8 @@ import android.util.Log;
 
 class DistoXNum
 {
+  NumStation mStartStation; 
+
   /* bounding box */
   private float mSmin; // south
   private float mSmax;
@@ -686,6 +688,7 @@ class DistoXNum
   {
     resetBBox();
     resetStats();
+    mStartStation = null;
 
     // long millis_start = System.currentTimeMillis();
     
@@ -823,13 +826,13 @@ class DistoXNum
     //   for ( TriShot ts : tmpshots ) ts.Dump();
     // }
 
-    NumStation start_station = new NumStation( start );
-    start_station.mHasCoords = true;
+    mStartStation = new NumStation( start );
+    mStartStation.mHasCoords = true;
 
     // if ( TDLog.LOG_DEBUG ) Log.v( TDLog.TAG, "start station " + start +  " shots " + tmpshots.size() );
 
     NumShot sh;
-    mStations.addStation( start_station );
+    mStations.addStation( mStartStation );
 
     // two-pass data reduction
     // first-pass all shots with regular extends
@@ -1001,7 +1004,7 @@ class DistoXNum
       // for ( NumStation st : mStations ) { // mark stations as unset
       //   st.mHasCoords = false;
       // }
-      start_station.mHasCoords = true;
+      mStartStation.mHasCoords = true;
 
       boolean repeat = true;
       while ( repeat ) {

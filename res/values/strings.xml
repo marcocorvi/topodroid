@@ -525,6 +525,7 @@
     <string name="button_save"      >Save      </string>
     <!-- UNUSED string name="button_select"    >Select    </string -->
     <string name="button_search"    >Search    </string>
+    <string name="button_merge"     >Merge     </string>
     <string name="button_split"     >Split     </string>
     <string name="button_store"     >Store     </string>
     <!-- UNUSED string name="button_start"     >Start</string -->
@@ -774,6 +775,7 @@
     <string name="title_photo">Photo/Measurements</string>
     <string name="title_photo_comment">Photo comment</string>
     <string name="title_plot_save">Export sketch</string>
+    <string name="title_plot_merge">Merge-in sketch</string>
     <string name="title_plot_reload">Reload sketch</string>
     <string name="title_profile_flip">Flip profile sketch ?</string>
     <string name="title_projection">Projected profile azimuth %1$d</string>

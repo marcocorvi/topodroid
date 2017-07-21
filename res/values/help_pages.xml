@@ -67,6 +67,7 @@
   <string name="PhotoEditDialog">page_photo_edit.htm</string>
   <string name="PhotoSensorsDialog">page_shot_edit2.htm</string>
   <string name="PlotListDialog">page_plot_list.htm</string>
+  <string name="PlotMergeDialog">page_plot_merge.htm</string>
   <string name="PlotNewDialog">page_new_plot.htm</string>
   <string name="PlotRecoverDialog">page_backup.htm</string>
   <string name="PlotRenameDialog">page_plot_rename.htm</string>

@@ -518,6 +518,7 @@
     <string name="button_save"      >保存      </string>
     <!-- UNUSED string name="button_select"    >选择    </string -->
     <!-- TODO string name="button_search"    >Search    </string -->
+    <!-- TODO string name="button_merge"     >Merge     </string -->
     <!-- TODO string name="button_split"     >Split     </string -->
     <string name="button_store"     >存储     </string>
     <!-- UNUSED string name="button_start"     >开始</string -->
@@ -758,6 +759,7 @@
     <string name="title_photo">照片/测量</string>
     <string name="title_photo_comment">照片注释</string>
     <string name="title_plot_save">输出草图</string>
+    <!-- TODO string name="title_plot_merge">Merge-in sketch</string -->
     <string name="title_plot_reload">重装草图</string>
     <string name="title_profile_flip">剖面草图 ?</string>
     <string name="title_projection">投影轮廓方位 %1$d</string>

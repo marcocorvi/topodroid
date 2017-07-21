@@ -46,6 +46,7 @@ public class SymbolsPalette
     mPaletteArea.clear();
   }
 
+  // N.B. TreeSet.add adds the type if it is not already present
   void addPointFilename( String type ) { mPalettePoint.add( type ); }
 
   void addLineFilename( String type ) { mPaletteLine.add( type ); }

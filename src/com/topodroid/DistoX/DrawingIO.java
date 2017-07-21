@@ -637,6 +637,8 @@ class DrawingIO
     float north_x1, north_y1, north_x2, north_y2;
 
     File file = new File( filename );
+    if ( ! file.exists() ) return false;
+
     FileInputStream fis = null;
     DataInputStream dis = null;
 
