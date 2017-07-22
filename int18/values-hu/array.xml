@@ -22,7 +22,7 @@
   <string-array name="wallsType">
      <item name="none">Nincs</item>
      <item name="convex">Konvex</item>
-     <item name="delaunay">TODO</item>
+     <item name="delaunay">delaunay</item>
   </string-array>
 
   <!-- string-array name="acadVersion">
@@ -97,7 +97,7 @@
      <item name="normal">Normál</item>
      <item name="advanced">Haladó</item>
      <item name="expert">Szakértő</item>
-     <item name="tester">Tester</item>
+     <item name="tester">Teszter</item>
      <!-- item name="complete">Complete</item -->
   </string-array>
 
@@ -124,7 +124,7 @@
      <item name="default">Alapbeállítás</item>
      <item name="Insecure">Nem biztonságos</item>
      <!-- item name="Port">Port</item -->
-     <!-- item name="InsecurePort">Insecure/Port</item -->
+     <!-- item name="InsecurePort">Nem biztonságos Port</item -->
   </string-array>
 
   <string-array name="surveyStations">
@@ -159,7 +159,7 @@
   </string-array>
 
   <!-- string-array name="deviceType">
-     <item name="none">None</item>
+     <item name="none">Nincs</item>
      <item name="A3">A3</item>
      <item name="X310">X310</item>
   </string-array -->
