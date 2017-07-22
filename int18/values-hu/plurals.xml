@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <plurals name="calib_saturated_values">
-    <item quantity="one">WARNING. One saturated data??? </item>
-    <item quantity="other" >WARNING. %1$d saturated data???</item>
+    <item quantity="one">FIGYELEM. Egy telített adat </item>
+    <item quantity="other" >FIGYELEM. %1$d telített adat</item>
   </plurals>
   <plurals name="read_data">
     <item quantity="zero">Nincs letöltött adat</item>
