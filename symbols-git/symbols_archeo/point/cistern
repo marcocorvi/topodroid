@@ -2,6 +2,7 @@ symbol point
 name cistern
 name-it cisterna
 name-pt cisterna
+name-hu ciszterna
 th_name u:cistern
 color 0x66ccff
 csurvey 0 0 0
