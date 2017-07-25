@@ -132,7 +132,6 @@ public class DrawingWindow extends ItemDrawer
   private static int IC_SELECT_STATION= 20+21;
   private static int IC_CONT_OFF      = 20+22;
 
-
   private static int BTN_DOWNLOAD = 3;  // index of mButton1 download button
   private static int BTN_BLUETOOTH = 4; // index of mButton1 bluetooth button
   private static int BTN_PLOT = 7;      // index of mButton1 plot button
@@ -149,17 +148,6 @@ public class DrawingWindow extends ItemDrawer
 
   private static int BTN_ERASE_MODE = 5; // erase-mode button
   private static int BTN_ERASE_SIZE = 6; // erase-size button
-
-  private int mEraseScale = 0;
-  private int mSelectScale = 0;
-
-  private float mEraseSize  = 1.0f * TDSetting.mEraseness;
-  private float mSelectSize = 1.0f * TDSetting.mSelectness;
-
-  // protected static int mEditRadius = 0; 
-  private int mDoEditRange = 0; // 0 no, 1 smooth, 2 boxed
-
-  private View mZoomView;
 
   private static int izons[] = { 
                         R.drawable.iz_edit,          // 0
@@ -266,8 +254,6 @@ public class DrawingWindow extends ItemDrawer
                       };
 
 
-  private int mEraseMode  = Drawing.FILTER_ALL;
-  private int mSelectMode = Drawing.FILTER_ALL;
 
   private TopoDroidApp mApp;
   private DataDownloader mDataDownloader;
@@ -278,9 +264,6 @@ public class DrawingWindow extends ItemDrawer
 
   private DistoXNum mNum;
   private float mDecl;
-
-  // 0: no bezier, plain path
-  // 1: bezier interpolator
 
   private String mSectionName;
   private String mMoveTo; // station of highlighted splay
@@ -299,10 +282,26 @@ public class DrawingWindow extends ItemDrawer
   PopupWindow mPopupFilter = null;
   PopupWindow mPopupJoin   = null;
 
+  ShotNewDialog mShotNewDialog = null;
+
   // private boolean canRedo;
   private int mPointCnt; // counter of points in the currently drawing line
 
   // private boolean mIsNotMultitouch;
+
+
+  // ERASE - EDIT mode and size
+  private int mEraseMode  = Drawing.FILTER_ALL;
+  private int mSelectMode = Drawing.FILTER_ALL;
+
+  private int mEraseScale = 0;
+  private int mSelectScale = 0;
+
+  private float mEraseSize  = 1.0f * TDSetting.mEraseness;
+  private float mSelectSize = 1.0f * TDSetting.mSelectness;
+
+  // protected static int mEditRadius = 0; 
+  private int mDoEditRange = 0; // 0 no, 1 smooth, 2 boxed
 
   private boolean mEditMove;    // whether moving the selected point
   private boolean mShiftMove;   // whether to move the canvas in point-shift mode
@@ -313,16 +312,18 @@ public class DrawingWindow extends ItemDrawer
   private boolean mHasSelected = false;
   private boolean inLinePoint = false;
 
+  // ZOOM
+  static final float ZOOM_INC = 1.4f;
+  static final float ZOOM_DEC = 1.0f/ZOOM_INC;
   ZoomButtonsController mZoomBtnsCtrl = null;
   boolean mZoomBtnsCtrlOn = false;
   // FIXME ZOOM_CTRL ZoomControls mZoomCtrl = null;
   // ZoomButton mZoomOut;
   // ZoomButton mZoomIn;
   private float oldDist;  // zoom pointer-sapcing
+  private View mZoomView;
 
-  static final float ZOOM_INC = 1.4f;
-  static final float ZOOM_DEC = 1.0f/ZOOM_INC;
-
+  // window mode
   static final int MODE_DRAW  = 1;
   static final int MODE_MOVE  = 2;
   static final int MODE_EDIT  = 3;
@@ -332,6 +333,7 @@ public class DrawingWindow extends ItemDrawer
   static final int MODE_ROTATE = 7; // selected point rotate
   static final int MODE_SPLIT = 8;  // split the plot
 
+  // line join-continue
   static final int CONT_OFF   = -1; // continue off
   static final int CONT_NONE  = 0;  // no continue
   static final int CONT_START = 1;  // continue: join to existing line
@@ -367,162 +369,11 @@ public class DrawingWindow extends ItemDrawer
   String mFullName2;
   String mFullName3;
 
-  String getName() { return (mName != null)? mName : ""; }
-
-  String getPlotName() 
-  {
-    if ( PlotInfo.isAnySection( mType ) ) {
-      return mName3;
-    } else if ( PlotInfo.isProfile( mType ) ) {
-      return mName2.substring(0, mName2.length()-1);
-    } else if ( mType == PlotInfo.PLOT_PLAN ) { 
-      return mName1.substring(0, mName1.length()-1);
-    }
-    return "";
-  }
-
-  String getPlotStation()
-  {
-    if ( PlotInfo.isProfile( mType ) ) {
-      return mPlot2.start;
-    } else if ( mType == PlotInfo.PLOT_PLAN ) { 
-      return mPlot1.start;
-    }
-    return mPlot3.start; // FIXME or should it be null ?
-  }
-
-  void renamePlot( String name ) 
-  {
-    if ( name == null || name.length() == 0 ) {
-      return;
-    }
-    if ( PlotInfo.isAnySection( mType ) ) {
-      TDLog.Error("X-Sections rename not implemented");
-    } else if ( PlotInfo.isProfile( mType ) || mType == PlotInfo.PLOT_PLAN ) { 
-      String name1 = name + "p";
-      String name2 = name + "s";
-      // Log.v("DistoX", "rename plot to: " + name1 + " " + name2 );
-      // check if plot name name2 exists
-      if ( mApp.mData.getPlotInfo( mApp.mSID, name2 ) == null &&
-           mApp.mData.getPlotInfo( mApp.mSID, name1 ) == null ) {
-        mApp.mData.updatePlotName( mApp.mSID, mPid1, name1 );
-        mApp.mData.updatePlotName( mApp.mSID, mPid2, name2 );
-        mName1 = name1;
-        mName2 = name2;
-        mPlot1.name = name1;
-        mPlot2.name = name2;
-        mName = ( PlotInfo.isProfile( mType ) )?  mName2 : mName1;
-        // rename files
-        String fullName1 = mApp.mySurvey + "-" + mName1;
-        String fullName2 = mApp.mySurvey + "-" + mName2;
-
-        TDPath.renamePlotFiles( mFullName1, fullName1 );
-        TDPath.renamePlotFiles( mFullName2, fullName2 );
-
-        mFullName1 = fullName1;
-        mFullName2 = fullName2;
-        mApp.mShotWindow.setRecentPlot( name, mType );
-      } else {
-        Toast.makeText( mActivity, R.string.plot_duplicate_name, Toast.LENGTH_SHORT ).show();
-        // Log.v("DistoX", "plot name already exists");
-      }
-    }
-  }
-
-  String mSplitName;
-  DrawingStationName mSplitStation;
-  ArrayList< PointF > mSplitBorder = null;
-  boolean mSplitRemove;
-
-  // here we are guaranteed that "name" can be used for a new plot name
-  // and the survey has station "station"
-  void splitPlot( String name, String station, boolean remove ) 
-  {
-    // get the DrawingStation of station
-    mSplitName = name;
-    mSplitStation = mDrawingSurface.getStation( station );
-    mSplitRemove  = remove;
-    if ( mSplitStation != null ) {
-      if ( mSplitBorder == null ) {
-        mSplitBorder = new ArrayList< PointF >();
-      } else {
-        mSplitBorder.clear();
-      }
-      mMode = MODE_SPLIT;
-      mTouchMode = MODE_MOVE;
-    } else {
-      Toast.makeText(mActivity, "Missing station " + station, Toast.LENGTH_SHORT ).show();
-    }
-  }
-
-  void mergePlot()
-  {
-    List<PlotInfo> plots = mApp.mData.selectAllPlotsWithType( mApp.mSID, TDStatus.NORMAL, mType );
-    if ( plots.size() <= 1 ) { // nothing to merge in
-      return;
-    }
-    for ( PlotInfo plt : plots ) {
-      if ( plt.name.equals( mName ) ) {
-        plots.remove( plt );
-        break;
-      }
-    }
-    new PlotMergeDialog( mActivity, this, plots ).show();
-  }
-
-  // called anly with mType PLOT_PLAN or PLOT_EXTENDED
-  void doMergePlot( PlotInfo plt )
-  {
-    if ( plt.type != mType ) return;
-    NumStation st1 = mNum.getStation( plt.start );
-    NumStation st0 = mNum.mStartStation; // start-station has always coords (0,0)
-    if ( st1 == null || st0 == null ) return;
-
-    float xdelta = 0.0f;
-    float ydelta = 0.0f;
-    if ( mType == PlotInfo.PLOT_PLAN ) {
-      xdelta = st1.e - st0.e; // FIXME SCALE FACTORS ???
-      ydelta = st1.s - st0.s;
-    } else if ( mType == PlotInfo.PLOT_EXTENDED ) {
-      xdelta = st1.h - st0.h;
-      ydelta = st1.v - st0.v;
-    } else {
-      return;
-    }
-    xdelta *= DrawingUtil.SCALE_FIX;
-    ydelta *= DrawingUtil.SCALE_FIX;
-    String fullName = mApp.mySurvey + "-" + plt.name;
-    String tdr = TDPath.getTdrFileWithExt( fullName );
-    boolean ret = mDrawingSurface.addloadDataStream( tdr, null, xdelta, ydelta, null );
-  }
-
-  // remove: whether to remove the paths from the current plot
-  private void doSplitPlot( )
-  {
-    if ( mSplitBorder.size() <= 3 ) { // too few points: nothing to split
-      Toast.makeText( mActivity, R.string.split_nothing, Toast.LENGTH_SHORT ).show();
-      return;
-    }
-    List<DrawingPath> paths = mDrawingSurface.splitPlot( mSplitBorder, mSplitRemove );
-    if ( paths.size() == 0 ) { // nothing to split
-      Toast.makeText( mActivity, R.string.split_nothing, Toast.LENGTH_SHORT ).show();
-      return;
-    }
-    boolean extended = (mPlot2.type == PlotInfo.PLOT_EXTENDED);
-    int azimuth = (int)mPlot2.azimuth; 
-    long pid = mApp.insert2dPlot( mApp.mSID, mSplitName, mSplitStation.name(), extended, azimuth );
-    String name = mSplitName + ( ( mType == PlotInfo.PLOT_PLAN )? "p" : "s" );
-    String fullname = mApp.mySurvey + "-" + name;
-    // PlotInfo plot = mApp.mData.getPlotInfo( mApp.mSID, name );
-    (new SavePlotFileTask( mActivity, this, null, mApp, paths, fullname, mType, azimuth ) ).execute();
-    // TODO
-    // [1] create the database record
-    // [2] save the Tdr for the new plot and remove the items from the commandManager
-  }
-
   private PlotInfo mPlot1;
   private PlotInfo mPlot2;
   private PlotInfo mPlot3;
+  private PlotInfo mOutlinePlot1 = null;
+  private PlotInfo mOutlinePlot2 = null;
 
   private long mSid;  // survey id
   private long mPid1; // plot id
@@ -541,15 +392,18 @@ public class DrawingWindow extends ItemDrawer
   private boolean mModified; // whether the sketch has been modified 
   private long mBackupTime;  // last time of backup
 
-  long getPlotType()   { return mType; }
-  boolean isAnySection() { return PlotInfo.isAnySection( mType ); }
-
   private float mBorderRight      = 4096;
   private float mBorderLeft       = 0;
   private float mBorderInnerRight = 4096;
   private float mBorderInnerLeft  = 0;
   private float mBorderBottom     = 4096;
     
+  // PLOT SPLIT
+  String mSplitName;
+  DrawingStationName mSplitStation;
+  ArrayList< PointF > mSplitBorder = null;
+  boolean mSplitRemove;
+
   // ----------------------------------------------------------------
   // BUTTONS and MENU
 
@@ -623,6 +477,75 @@ public class DrawingWindow extends ItemDrawer
   boolean onMenu;
 
   private int mNrSaveTh2Task = 0;
+
+  // ----------------------------------------------------------
+  // PLOT NAME(S)
+
+  String getName() { return (mName != null)? mName : ""; }
+
+  String getPlotName() 
+  {
+    if ( PlotInfo.isAnySection( mType ) ) {
+      return mName3;
+    } else if ( PlotInfo.isProfile( mType ) ) {
+      return mName2.substring(0, mName2.length()-1);
+    } else if ( mType == PlotInfo.PLOT_PLAN ) { 
+      return mName1.substring(0, mName1.length()-1);
+    }
+    return "";
+  }
+
+  String getPlotStation()
+  {
+    if ( PlotInfo.isProfile( mType ) ) {
+      return mPlot2.start;
+    } else if ( mType == PlotInfo.PLOT_PLAN ) { 
+      return mPlot1.start;
+    }
+    return mPlot3.start; // FIXME or should it be null ?
+  }
+
+  void renamePlot( String name ) 
+  {
+    if ( name == null || name.length() == 0 ) {
+      return;
+    }
+    if ( PlotInfo.isAnySection( mType ) ) {
+      TDLog.Error("X-Sections rename not implemented");
+    } else if ( PlotInfo.isProfile( mType ) || mType == PlotInfo.PLOT_PLAN ) { 
+      String name1 = name + "p";
+      String name2 = name + "s";
+      // Log.v("DistoX", "rename plot to: " + name1 + " " + name2 );
+      // check if plot name name2 exists
+      if ( mApp.mData.getPlotInfo( mApp.mSID, name2 ) == null &&
+           mApp.mData.getPlotInfo( mApp.mSID, name1 ) == null ) {
+        mApp.mData.updatePlotName( mApp.mSID, mPid1, name1 );
+        mApp.mData.updatePlotName( mApp.mSID, mPid2, name2 );
+        mName1 = name1;
+        mName2 = name2;
+        mPlot1.name = name1;
+        mPlot2.name = name2;
+        mName = ( PlotInfo.isProfile( mType ) )?  mName2 : mName1;
+        // rename files
+        String fullName1 = mApp.mySurvey + "-" + mName1;
+        String fullName2 = mApp.mySurvey + "-" + mName2;
+
+        TDPath.renamePlotFiles( mFullName1, fullName1 );
+        TDPath.renamePlotFiles( mFullName2, fullName2 );
+
+        mFullName1 = fullName1;
+        mFullName2 = fullName2;
+        mApp.mShotWindow.setRecentPlot( name, mType );
+      } else {
+        Toast.makeText( mActivity, R.string.plot_duplicate_name, Toast.LENGTH_SHORT ).show();
+        // Log.v("DistoX", "plot name already exists");
+      }
+    }
+  }
+
+  long getPlotType()   { return mType; }
+
+  boolean isAnySection() { return PlotInfo.isAnySection( mType ); }
 
   // ----------------------------------------------------------------
 
@@ -1743,6 +1666,8 @@ public class DrawingWindow extends ItemDrawer
       super.onStart();
       // Log.v("DistoX", "Drawing Activity onStart " + ((mDataDownloader!=null)?"with DataDownloader":"") );
       loadRecentSymbols( mApp.mData );
+       mOutlinePlot1 = null;
+       mOutlinePlot2 = null;
       // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on start done");
     }
 
@@ -4454,6 +4379,9 @@ public class DrawingWindow extends ItemDrawer
     computeReferences( (int)mType, mName, zoom, flag );
   }
 
+  @Override
+  public void updateBlockList( CalibCBlock blk ) { }
+  
   // forward adding data to the ShotWindow
   @Override
   public void updateBlockList( DBlock blk ) 
@@ -5094,7 +5022,9 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  ShotNewDialog mShotNewDialog = null;
+
+  // ------------------------------------------------------------------
+  // SCRAP OUTLINE 
 
   void scrapOutlineDialog()
   {
@@ -5137,13 +5067,17 @@ public class DrawingWindow extends ItemDrawer
     float ydelta = 0;
     NumStation st0;
     if ( mType == PlotInfo.PLOT_PLAN ) {
+      mOutlinePlot1 = plot;
       st0 = mNum.getStation( mPlot1.start );
       xdelta = st.e - st0.e; // FIXME SCALE FACTORS ???
       ydelta = st.s - st0.s;
-    } else {
+    } else if ( mType == PlotInfo.PLOT_EXTENDED ) {
+      mOutlinePlot2 = plot;
       st0 = mNum.getStation( mPlot2.start );
       xdelta = st.h - st0.h;
       ydelta = st.v - st0.v;
+    } else {
+      return;
     }
     xdelta *= DrawingUtil.SCALE_FIX;
     ydelta *= DrawingUtil.SCALE_FIX;
@@ -5152,6 +5086,109 @@ public class DrawingWindow extends ItemDrawer
     String tdr = TDPath.getTdrFileWithExt( fullName );
     // Log.v("DistoX0", "add outline " + tdr + " delta " + xdelta + " " + ydelta );
     mDrawingSurface.addScrapDataStream( tdr, xdelta, ydelta );
+  }
+
+  // ------------------------------------------------------------------
+  // SPLIT AND MERGE
+  // here we are guaranteed that "name" can be used for a new plot name
+  // and the survey has station "station"
+  void splitPlot( String name, String station, boolean remove ) 
+  {
+    // get the DrawingStation of station
+    mSplitName = name;
+    mSplitStation = mDrawingSurface.getStation( station );
+    mSplitRemove  = remove;
+    if ( mSplitStation != null ) {
+      if ( mSplitBorder == null ) {
+        mSplitBorder = new ArrayList< PointF >();
+      } else {
+        mSplitBorder.clear();
+      }
+      mMode = MODE_SPLIT;
+      mTouchMode = MODE_MOVE;
+    } else {
+      Toast.makeText(mActivity, "Missing station " + station, Toast.LENGTH_SHORT ).show();
+    }
+  }
+
+  void mergeOutlineScrap()
+  {
+    if ( mType == PlotInfo.PLOT_PLAN ) {
+      if ( mOutlinePlot1 == null ) return;
+      mDrawingSurface.clearScrapOutline();
+      doMergePlot( mOutlinePlot1 );
+      mOutlinePlot1 = null;
+    } else if ( mType == PlotInfo.PLOT_EXTENDED ) {
+      if ( mOutlinePlot2 == null ) return;
+      mDrawingSurface.clearScrapOutline();
+      doMergePlot( mOutlinePlot2 );
+      mOutlinePlot2 = null;
+    }
+  }
+
+  void mergePlot()
+  {
+    List<PlotInfo> plots = mApp.mData.selectAllPlotsWithType( mApp.mSID, TDStatus.NORMAL, mType );
+    if ( plots.size() <= 1 ) { // nothing to merge in
+      return;
+    }
+    for ( PlotInfo plt : plots ) {
+      if ( plt.name.equals( mName ) ) {
+        plots.remove( plt );
+        break;
+      }
+    }
+    new PlotMergeDialog( mActivity, this, plots ).show();
+  }
+
+  // called anly with mType PLOT_PLAN or PLOT_EXTENDED
+  void doMergePlot( PlotInfo plt )
+  {
+    if ( plt.type != mType ) return;
+    NumStation st1 = mNum.getStation( plt.start );
+    NumStation st0 = mNum.mStartStation; // start-station has always coords (0,0)
+    if ( st1 == null || st0 == null ) return;
+
+    float xdelta = 0.0f;
+    float ydelta = 0.0f;
+    if ( mType == PlotInfo.PLOT_PLAN ) {
+      xdelta = st1.e - st0.e; // FIXME SCALE FACTORS ???
+      ydelta = st1.s - st0.s;
+    } else if ( mType == PlotInfo.PLOT_EXTENDED ) {
+      xdelta = st1.h - st0.h;
+      ydelta = st1.v - st0.v;
+    } else {
+      return;
+    }
+    xdelta *= DrawingUtil.SCALE_FIX;
+    ydelta *= DrawingUtil.SCALE_FIX;
+    String fullName = mApp.mySurvey + "-" + plt.name;
+    String tdr = TDPath.getTdrFileWithExt( fullName );
+    boolean ret = mDrawingSurface.addloadDataStream( tdr, null, xdelta, ydelta, null );
+  }
+
+  // remove: whether to remove the paths from the current plot
+  private void doSplitPlot( )
+  {
+    if ( mSplitBorder.size() <= 3 ) { // too few points: nothing to split
+      Toast.makeText( mActivity, R.string.split_nothing, Toast.LENGTH_SHORT ).show();
+      return;
+    }
+    List<DrawingPath> paths = mDrawingSurface.splitPlot( mSplitBorder, mSplitRemove );
+    if ( paths.size() == 0 ) { // nothing to split
+      Toast.makeText( mActivity, R.string.split_nothing, Toast.LENGTH_SHORT ).show();
+      return;
+    }
+    boolean extended = (mPlot2.type == PlotInfo.PLOT_EXTENDED);
+    int azimuth = (int)mPlot2.azimuth; 
+    long pid = mApp.insert2dPlot( mApp.mSID, mSplitName, mSplitStation.name(), extended, azimuth );
+    String name = mSplitName + ( ( mType == PlotInfo.PLOT_PLAN )? "p" : "s" );
+    String fullname = mApp.mySurvey + "-" + name;
+    // PlotInfo plot = mApp.mData.getPlotInfo( mApp.mSID, name );
+    (new SavePlotFileTask( mActivity, this, null, mApp, paths, fullname, mType, azimuth ) ).execute();
+    // TODO
+    // [1] create the database record
+    // [2] save the Tdr for the new plot and remove the items from the commandManager
   }
 
 }

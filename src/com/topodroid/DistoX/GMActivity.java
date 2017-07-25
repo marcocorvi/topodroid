@@ -563,10 +563,19 @@ public class GMActivity extends Activity
   }
     
   @Override
+  public void updateBlockList( CalibCBlock blk ) 
+  { 
+    if ( blk != null ) mDataAdapter.add( blk );
+  }
+  
+  @Override
   public void updateBlockList( DBlock blk ) { }
 
   @Override
-  public void updateBlockList( long blk_id ) { }
+  public void updateBlockList( long blk_id ) 
+  {
+    updateBlockList( mApp.mDData.selectGM( blk_id, mApp.mCID ) );
+  }
 
   @Override
   public void setRefAzimuth( float azimuth, long fixed_extend ) { }

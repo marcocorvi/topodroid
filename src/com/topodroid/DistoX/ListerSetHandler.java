@@ -68,21 +68,21 @@ public class ListerSetHandler extends ListerHandler
 
     Bundle bundle = msg.getData();
     switch ( msg.what ) {
-      case ListerHandler.LISTER_REFRESH:
-        int nr = bundle.getInt( ListerHandler.LISTER_DATA_NUMBER );
+      case Lister.REFRESH:
+        int nr = bundle.getInt( Lister.NUMBER );
         for ( ILister lister : mListers ) lister.refreshDisplay( nr, false );
         break;
-      case ListerHandler.LISTER_STATUS:
-        int status = bundle.getInt( ListerHandler.LISTER_DATA_STATUS );
+      case Lister.STATUS:
+        int status = bundle.getInt( Lister.STATE );
         for ( ILister lister : mListers ) lister.setConnectionStatus( status );
         break;
-      case ListerHandler.LISTER_UPDATE:
-        long blk_id = bundle.getLong( ListerHandler.LISTER_DATA_BLOCK_ID );
+      case Lister.UPDATE:
+        long blk_id = bundle.getLong( Lister.BLOCK_ID );
         for ( ILister lister : mListers ) lister.updateBlockList( blk_id );
         break;
-      case ListerHandler.LISTER_REF_AZIMUTH:
-        float azimuth =  bundle.getFloat( ListerHandler.LISTER_DATA_AZIMUTH );
-        long fixed_extend = bundle.getLong( ListerHandler.LISTER_DATA_FIXED_EXTEND );
+      case Lister.REF_AZIMUTH:
+        float azimuth =  bundle.getFloat( Lister.AZIMUTH );
+        long fixed_extend = bundle.getLong( Lister.FIXED_EXTEND );
         for ( ILister lister : mListers ) lister.setRefAzimuth( azimuth, fixed_extend );
         break;
     }

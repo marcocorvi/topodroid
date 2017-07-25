@@ -537,7 +537,7 @@ public class DataHelper extends DataSetObservable
     vals.put("name", name );
     try {
       myDB.update( SURVEY_TABLE, vals, "id=?", new String[]{ Long.toString(id) } );
-      if ( forward ) { // synchronized( mListeners )
+      if ( forward && mListeners != null ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateSurveyName( id, name );
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -557,7 +557,7 @@ public class DataHelper extends DataSetObservable
     vals.put( "xsections", xsections );
     try {
       myDB.update( SURVEY_TABLE, vals, "id=?", new String[]{ Long.toString(id) } );
-      if ( forward ) { // synchronized( mListeners )
+      if ( forward && mListeners != null ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) {
           listener.onUpdateSurveyInfo( id, date, team, decl, comment, init_station, xsections );
         }
@@ -585,7 +585,7 @@ public class DataHelper extends DataSetObservable
     vals.put( "comment", (comment != null)? comment : "" );
     try {
       myDB.update( SURVEY_TABLE, vals, "id=?", new String[]{ Long.toString(id) } );
-      if ( forward ) { // synchronized( mListeners )
+      if ( forward && mListeners != null ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateSurveyDayAndComment( id, date, comment );
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -599,7 +599,7 @@ public class DataHelper extends DataSetObservable
     vals.put( "team", team );
     try {
       myDB.update( SURVEY_TABLE, vals, "id=?", new String[]{ Long.toString(id) } );
-      if ( forward ) { // synchronized( mListeners )
+      if ( forward && mListeners != null ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateSurveyTeam( id, team );
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -612,7 +612,7 @@ public class DataHelper extends DataSetObservable
     vals.put( "init_station", station );
     try {
       myDB.update( SURVEY_TABLE, vals, "id=?", new String[]{ Long.toString(id) } );
-      if ( forward ) { // synchronized( mListeners )
+      if ( forward && mListeners != null ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateSurveyInitStation( id, station );
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -624,7 +624,7 @@ public class DataHelper extends DataSetObservable
     vals.put( "declination", decl );
     try { 
       myDB.update( SURVEY_TABLE, vals, "id=?", new String[]{ Long.toString(id) } );
-      if ( forward ) { // synchronized( mListeners )
+      if ( forward && mListeners != null ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateSurveyDeclination( id, decl );
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -692,7 +692,7 @@ public class DataHelper extends DataSetObservable
                d, b, c, sid, id );
     try {
       myDB.execSQL( sw.toString() );
-      if ( forward ) { // synchronized( mListeners )
+      if ( forward && mListeners != null ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateShotDBC( id, sid, d, b, c );
       }
     } catch ( SQLiteDiskIOException e ) {  handleDiskIOError( e );
@@ -761,7 +761,7 @@ public class DataHelper extends DataSetObservable
       } catch ( SQLiteException e ) { logError("Shot update " + fStation + " " + tStation, e ); }
     }
 
-    if ( success && forward ) { // synchronized( mListeners )
+    if ( success && forward && mListeners != null ) { // synchronized( mListeners )
       for ( DataListener listener : mListeners ) {
         listener.onUpdateShot( id, sid, fStation, tStation, extend, flag, leg, comment );
       }
@@ -809,7 +809,7 @@ public class DataHelper extends DataSetObservable
                fStation, tStation, sid, id );
     try {
       myDB.execSQL( sw.toString() );
-      if ( forward ) { // synchronized( mListeners )
+      if ( forward && mListeners != null ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateShotName( id, sid, fStation, tStation );
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -824,7 +824,7 @@ public class DataHelper extends DataSetObservable
     pw.format( Locale.US, "UPDATE shots SET leg=%d WHERE surveyId=%d AND id=%d", leg, sid, id );
     try {
       myDB.execSQL( sw.toString() );
-      if ( forward ) { // synchronized( mListeners )
+      if ( forward && mListeners != null ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateShotLeg( id, sid, leg );
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -859,7 +859,7 @@ public class DataHelper extends DataSetObservable
     pw.format( Locale.US, "UPDATE shots SET extend=%d WHERE surveyId=%d AND id=%d", extend, sid, id );
     try {
       myDB.execSQL( sw.toString() );
-      if ( forward ) { // synchronized( mListeners )
+      if ( forward && mListeners != null ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateShotExtend( id, sid, extend );
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -873,7 +873,7 @@ public class DataHelper extends DataSetObservable
     pw.format( Locale.US, "UPDATE shots SET flag=%d WHERE surveyId=%d AND id=%d", flag, sid, id );
     try {
       myDB.execSQL( sw.toString() );
-      if ( forward ) { // synchronized( mListeners )
+      if ( forward && mListeners != null ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateShotFlag( id, sid, flag );
       }
     } catch ( SQLiteDiskIOException e ) {  handleDiskIOError( e );
@@ -889,7 +889,7 @@ public class DataHelper extends DataSetObservable
     pw.format( Locale.US, "UPDATE shots SET comment=\"%s\" WHERE surveyId=%d AND id=%d", comment, sid, id );
     try {
       myDB.execSQL( sw.toString() );
-      if ( forward ) { // synchronized( mListeners )
+      if ( forward && mListeners != null ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateShotComment( id, sid, comment );
       }
     } catch ( SQLiteDiskIOException e ) {  handleDiskIOError( e );
@@ -903,7 +903,7 @@ public class DataHelper extends DataSetObservable
     pw.format( Locale.US, "UPDATE shots SET status=%d WHERE surveyId=%d AND id=%d", status, sid, id );
     try {
       myDB.execSQL( sw.toString() );
-      if ( forward ) { // synchronized( mListeners )
+      if ( forward && mListeners != null ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateShotStatus( id, sid, status );
       }
     } catch ( SQLiteDiskIOException e ) {  handleDiskIOError( e );
@@ -928,7 +928,7 @@ public class DataHelper extends DataSetObservable
   {
     // if ( myDB == null ) return;
     if ( updateStatus( SHOT_TABLE, id, sid, status ) ) {
-      if ( forward ) { // synchronized( mListeners )
+      if ( forward && mListeners != null ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onDeleteShot( id, sid, status );
       }
     }
@@ -938,7 +938,7 @@ public class DataHelper extends DataSetObservable
   {
     // if ( myDB == null ) return;
     if ( updateStatus( SHOT_TABLE, id, sid, TDStatus.NORMAL ) ) {
-      if ( forward ) { // synchronized( mListeners )
+      if ( forward && mListeners != null ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUndeleteShot( id, sid );
       }
     }
@@ -978,7 +978,7 @@ public class DataHelper extends DataSetObservable
       myDB.setLockingEnabled( true );
       // myDB.execSQL("PRAGMA synchronous=NORMAL");
     }
-    if ( success ) { // synchronized( mListeners )
+    if ( success && mListeners != null ) { // synchronized( mListeners )
       for ( DataListener listener : mListeners ) {
         for ( DBlock b : updatelist ) {
           listener.onUpdateShotName( b.mId, sid, b.mFrom, b.mTo );
@@ -1051,19 +1051,21 @@ public class DataHelper extends DataSetObservable
       myDB.setLockingEnabled( true );
       // myDB.execSQL("PRAGMA synchronous=NORMAL");
     }
-    // synchronized( mListeners )
-    for ( DataListener listener : mListeners ) {
-      for ( ParserShot s : shots ) {
-        listener.onInsertShot( sid, id, s.from, s.to, s.len, s.ber, s.cln, s.rol, s.extend, 
-                          s.duplicate ? DBlock.BLOCK_DUPLICATE    // flag
-                          : s.surface ? DBlock.BLOCK_SURFACE 
-                          // : s.commented ? DBlock.BLOCK_COMMENTED 
-                          // : s.backshot ? DBlock.BLOCK_BACKSHOT
-                          : 0,
-                          0L, // leg
-                          0L, // status
-                          0L, // shot_type: parser-shots are not modifiable
-                          s.comment );
+    if ( mListeners != null ) {
+      // synchronized( mListeners )
+      for ( DataListener listener : mListeners ) {
+        for ( ParserShot s : shots ) {
+          listener.onInsertShot( sid, id, s.from, s.to, s.len, s.ber, s.cln, s.rol, s.extend, 
+                            s.duplicate ? DBlock.BLOCK_DUPLICATE    // flag
+                            : s.surface ? DBlock.BLOCK_SURFACE 
+                            // : s.commented ? DBlock.BLOCK_COMMENTED 
+                            // : s.backshot ? DBlock.BLOCK_BACKSHOT
+                            : 0,
+                            0L, // leg
+                            0L, // status
+                            0L, // shot_type: parser-shots are not modifiable
+                            s.comment );
+        }
       }
     }
     return id;
@@ -1105,7 +1107,7 @@ public class DataHelper extends DataSetObservable
     updateShotAMDRStmt.bindLong( 6, id );
     try { 
       updateShotAMDRStmt.execute(); 
-      if ( forward ) { // synchronized( mListeners )
+      if ( forward && mListeners != null ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateShotAMDR( sid, id, acc, mag, dip, r );
       }
     }
@@ -1281,7 +1283,7 @@ public class DataHelper extends DataSetObservable
     cv.put( "type",     type ); 
     try { 
       myDB.insert( SHOT_TABLE, null, cv ); 
-      if ( forward ) { // synchronized( mListeners )
+      if ( forward && mListeners != null ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) {
           listener.onInsertShotAt( sid, at, d, b, c, r, extend, DBlock.BLOCK_SURVEY );
         }
@@ -1325,7 +1327,7 @@ public class DataHelper extends DataSetObservable
     cv.put( "type",     shot_type );
     try {
       myDB.insert( SHOT_TABLE, null, cv );
-      if ( forward ) { // synchronized( mListeners )
+      if ( forward && mListeners != null ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) {
           listener.onInsertShot( sid,  id, from, to, d, b, c, r, extend, flag, leg, status, shot_type, comment );
         }
@@ -3012,7 +3014,7 @@ public class DataHelper extends DataSetObservable
      cv.put( "hide",     hide );
      try {
        myDB.insert( PLOT_TABLE, null, cv );
-       if ( forward ) { // synchronized( mListeners )
+       if ( forward && mListeners != null ) { // synchronized( mListeners )
          for ( DataListener listener : mListeners ) {
            listener.onInsertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide );
          }
@@ -3253,7 +3255,7 @@ public class DataHelper extends DataSetObservable
      if (cursor != null && !cursor.isClosed()) cursor.close();
 
      // TDLog.Log( TDLog.LOG_DB, "setSurvey " + name + " forward " + forward + " listeners " + mListeners.size() );
-     if ( forward ) { // synchronized( mListeners )
+     if ( forward && mListeners != null ) { // synchronized( mListeners )
        for ( DataListener listener : mListeners ) listener.onSetSurvey( sid, name );
      }
      return sid;

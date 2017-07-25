@@ -20,7 +20,7 @@ public interface ILister
    * refreshDisplay is called by
    *   - DataDownloadTask.onPostExecute
    *   - ShotNewDialog.onClick
-   *   - ListerHandler.handleMessage LISTER_REFRESH
+   *   - ListerHandler.handleMessage Lister.REFRESH
    */
   public void refreshDisplay( int nr, boolean toast );
 
@@ -33,11 +33,13 @@ public interface ILister
    */
   public void updateBlockList( DBlock blk );
 
+  public void updateBlockList( CalibCBlock blk );
+
   /** 
    * @param blk_id id (of the data-block) from which to update the list
    *
    *  updateBlockList is called by
-   *   - ListerHandler.handleMessage LISTER_BLOCK_ID
+   *   - ListerHandler.handleMessage Lister.BLOCK_ID
    */
   public void updateBlockList( long blk_id );
 
@@ -45,7 +47,7 @@ public interface ILister
    * @param status   current status ( 0: off,  1: on,  2: wait )A
    *
    * called by
-   *   - ListerHandler.handleMessage LISTER_STATUS
+   *   - ListerHandler.handleMessage Lister.STATE
    *   - TopoDroidApp.notifyStatus() which is called by
    *      - DataDownloader.notifyConnectionStatus()
    *      - DistoXComm.onReceive()
@@ -63,7 +65,7 @@ public interface ILister
 
   /** called by 
    *   - AzimuthDialog
-   *   - ListerHandler.handleMessage LISTER_REF_AZIMUTH <-- not necessary
+   *   - ListerHandler.handleMessage Lister.REF_AZIMUTH <-- not necessary
    * 
    * implemented
    * DrawingWindow

@@ -2227,6 +2227,9 @@ public class SketchWindow extends ItemDrawer
   @Override
   public void setRefAzimuth( float azimuth, long fixed_extend ) { }
   
+  @Override
+  public void updateBlockList( CalibCBlock blk ) { }
+
   // forward to the ShotWindow
   @Override
   public void updateBlockList( DBlock blk )

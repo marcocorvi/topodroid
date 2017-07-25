@@ -69,7 +69,7 @@ public class TopoDroidComm
       mLister = lister;
       nReadPackets = 0; // reset nr of read packets
       // mLastShotId = 0;
-      // TDLog.Log( TDLog.LOG_COMM, "RFcommThread cstr ToRead " + toRead );
+      // TDLog.Log( TDLog.LOG_COMM, "RFcomm thread cstr ToRead " + toRead );
     }
 
     public void run()
@@ -116,9 +116,9 @@ public class TopoDroidComm
           long status = ( d > TDSetting.mMaxShotLength )? TDStatus.OVERSHOOT : TDStatus.NORMAL;
           mLastShotId = mApp.mData.insertDistoXShot( mApp.mSID, -1L, d, b, c, r, DBlock.EXTEND_IGNORE, status, true );
           if ( mLister != null ) { // FIXME LISTER sendMessage with mLastShotId only
-            Message msg = mLister.obtainMessage( ListerHandler.LISTER_UPDATE );
+            Message msg = mLister.obtainMessage( Lister.UPDATE );
             Bundle bundle = new Bundle();
-            bundle.putLong( ListerHandler.LISTER_DATA_BLOCK_ID, mLastShotId );
+            bundle.putLong( Lister.BLOCK_ID, mLastShotId );
             msg.setData(bundle);
             mLister.sendMessage(msg);
             if ( mApp.distoType() == Device.DISTO_A3 && TDSetting.mWaitData > 10 ) {
@@ -146,7 +146,14 @@ public class TopoDroidComm
           // get G and M from mProto and save them to store
           TDLog.Log( TDLog.LOG_PROTO, "save G " + mProto.mGX + " " + mProto.mGY + " " + mProto.mGZ + 
                             " M " + mProto.mMX + " " + mProto.mMY + " " + mProto.mMZ );
-          mApp.mDData.insertGM( mApp.mCID, mProto.mGX, mProto.mGY, mProto.mGZ, mProto.mMX, mProto.mMY, mProto.mMZ );
+          long cblk = mApp.mDData.insertGM( mApp.mCID, mProto.mGX, mProto.mGY, mProto.mGZ, mProto.mMX, mProto.mMY, mProto.mMZ );
+          if ( mLister != null ) {
+            Message msg = mLister.obtainMessage( Lister.UPDATE );
+            Bundle bundle = new Bundle();
+            bundle.putLong( Lister.BLOCK_ID, cblk );
+            msg.setData(bundle);
+            mLister.sendMessage(msg);
+          }
           if ( ! hasG ) {
             TDLog.Error( "data without G packet " + nReadPackets );
             TopoDroidApp.mActivity.runOnUiThread( new Runnable() {

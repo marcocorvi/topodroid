@@ -19,17 +19,6 @@ import android.util.Log;
 
 public class ListerHandler extends Handler 
 {
-  static final String LISTER_DATA_NUMBER    = "LISTER_DATA_NUMBER";
-  static final String LISTER_DATA_STATUS    = "LISTER_DATA_STATUS";
-  static final String LISTER_DATA_BLOCK_ID  = "LISTER_DATA_BLOCK_ID";
-  static final String LISTER_DATA_AZIMUTH   = "LISTER_DATA_AZIMUTH";
-  static final String LISTER_DATA_FIXED_EXTEND  = "LISTER_DATA_FIXED_EXTEND";
-
-  static final int LISTER_REFRESH = 1;
-  static final int LISTER_UPDATE  = 2;
-  static final int LISTER_STATUS  = 3;
-  static final int LISTER_REF_AZIMUTH = 4;
-
   ILister mLister = null;
 
   // default cstr
@@ -51,22 +40,22 @@ public class ListerHandler extends Handler
     if ( mLister == null ) return;
     Bundle bundle = msg.getData();
     switch ( msg.what ) {
-      case LISTER_REFRESH:
-        int nr = bundle.getInt( LISTER_DATA_NUMBER );
+      case Lister.REFRESH:
+        int nr = bundle.getInt( Lister.NUMBER );
         mLister.refreshDisplay( nr, false );
         break;
-      case LISTER_STATUS:
-        int status = bundle.getInt( LISTER_DATA_STATUS );
+      case Lister.STATUS:
+        int status = bundle.getInt( Lister.STATE );
         mLister.setConnectionStatus( status );
         break;
-      case LISTER_UPDATE:
-        long blk_id = bundle.getLong( LISTER_DATA_BLOCK_ID );
+      case Lister.UPDATE:
+        long blk_id = bundle.getLong( Lister.BLOCK_ID );
         // Log.v("DistoX", "lister message blk id " + blk_id );
         mLister.updateBlockList( blk_id );
         break;
-      case LISTER_REF_AZIMUTH:
-        float azimuth =  bundle.getFloat( LISTER_DATA_AZIMUTH );
-        long fixed_extend = bundle.getLong( LISTER_DATA_FIXED_EXTEND );
+      case Lister.REF_AZIMUTH:
+        float azimuth =  bundle.getFloat( Lister.AZIMUTH );
+        long fixed_extend = bundle.getLong( Lister.FIXED_EXTEND );
         mLister.setRefAzimuth( azimuth, fixed_extend );
         break;
     }

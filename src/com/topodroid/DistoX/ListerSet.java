@@ -53,6 +53,11 @@ public class ListerSet implements ILister
     for ( ILister lister : mLister ) lister.updateBlockList( blk );
   }
 
+  public void updateBlockList( CalibCBlock cblk ) 
+  {
+    for ( ILister lister : mLister ) lister.updateBlockList( cblk );
+  }
+
   public void setConnectionStatus( int status )
   {
     // TDLog.Error( "Lister set conn. status " + size() + " " + status );

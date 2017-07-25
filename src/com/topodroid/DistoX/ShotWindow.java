@@ -363,6 +363,9 @@ public class ShotWindow extends Activity
   }
 
   @Override
+  public void updateBlockList( CalibCBlock blk ) { }
+ 
+  @Override
   public void updateBlockList( DBlock blk )
   {
     // Log.v("DistoX", "Shot window update list. blk: " + blk.mId + " " + blk.mLength + " " + blk.mBearing + " " + blk.mClino );

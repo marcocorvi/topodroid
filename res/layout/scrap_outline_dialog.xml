@@ -22,6 +22,14 @@
     android:layout_marginBottom="10sp"
     android:orientation="horizontal"
     >
+    <Button android:id="@+id/btn_merge"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:layout_marginRight="20sp"
+      android:background="@drawable/button"
+      style="@style/button_default"
+      android:text="@string/button_merge"
+    />
     <Button android:id="@+id/btn_clear"
       android:layout_width="wrap_content"
       android:layout_height="match_parent"
