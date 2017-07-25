@@ -34,7 +34,7 @@
 
     <string name="make_walls">Falak</string>
     <string name="missing_station">Hiányzó mérési pont</string>
-    <string name="station_not_found">Mérési pont nem található</string -->
+    <string name="station_not_found">Mérési pont nem található</string>
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->
     <!-- UNUSED string name="missing_line">LINE</string -->
@@ -45,7 +45,7 @@
     <!-- UNUSED string name="missing_warning">The following drawing tools are missing.\n</string -->
     <string name="failed_snap_to_line">Nincs közeli vonal-pont, melyhez a terület határa illeszthető</string>
     <string name="failed_snap_to_point">Nincs közeli pont, amihez a pont illeszthető</string>
-    <string name="failed_snap_to_splays">Nincs közeli segédpont, amihez a vonal illeszthető</string -->
+    <string name="failed_snap_to_splays">Nincs közeli segédpont, amihez a vonal illeszthető</string>
 
     <string name="calibration_title">Eszközök kalibrálása</string>
     <string name="calibration_length">Mérőszalag</string>
@@ -120,14 +120,14 @@
     <string name="extend_vert">Vertikális</string>
     <!-- UNUSED string name="external_prompt">Enter measurement</string -->
     <string name="splay_at_to">BJFL a mérési pontnál</string>
-    <string name="lrud">BJFL</string -->
+    <string name="lrud">BJFL</string>
 
     <string name="few_data">Nincs elegendő adat</string>
     <string name="few_iter">Iteráció nem sikerült</string>
     <string name="few_groups">Nincs elegendő csoportosítható adat</string>
     <!-- UNUSED string name="few_plots">Not enough sketches</string -->
     <string name="few_calibs">Nincs elegendő kalibráció</string>
-    <string name="getting_info">DistoX információk letöltése ...</string -->
+    <string name="getting_info">DistoX információk letöltése ...</string>
 
     <string name="calib_import_title">Kalibráció importálása</string>
     <string name="import_title">Felmérés importálása</string>
@@ -137,7 +137,7 @@
     <string name="import_failed">Fájl importálása nem sikerült</string>
     <string name="file_not_found">Fájl nem található</string>
     <string name="import_calib_ok">Kalibráció importálása sikerült</string>
-    <string name="import_calib_no_header">Kalibr. fájl: hibás fejléc</string -->
+    <string name="import_calib_no_header">Kalibr. fájl: hibás fejléc</string>
     <string name="import_calib_already">Kalib. már létezik</string>
     <string name="import_calib_mismatch">Kalib.-eszköz nem egyezik</string>
     <string name="import_calib_no_data">Kalib. fájl: nincs adat</string>
@@ -155,8 +155,8 @@
 
     <string name="illegal_data_value">Helytelen adat érték</string>
 
-    <string name="photo_title">FÉNYKÉP</string -->
-    <string name="photo_text">Írd be a fénykép jegyzetét</string -->
+    <string name="photo_title">FÉNYKÉP</string>
+    <string name="photo_text">Írd be a fénykép jegyzetét</string>
     <string name="label_title">FELIRAT</string>
     <string name="label_text">Írd be a feliratot.</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
@@ -201,7 +201,7 @@
     <string name="group_reset">Újra csoportosítás</string>
 
     <!-- UNUSED string name="scale">scale</string -->
-    <string name="reversed">megfordított</string -->
+    <string name="reversed">megfordított</string>
     <string name="options">beállítások</string>
     <string name="outline">körvonal</string>
     <string name="out">kint</string>
@@ -213,7 +213,7 @@
     <!-- UNUSED string name="hidden_add">Előző mérések elrejtése</string -->
     <string name="hidden_del">Előző mérések mutatása</string>
     <string name="splays_toggle">Mutassa a fix pontokat </string>
-    <string name="splays">segédpontok</string -->
+    <string name="splays">segédpontok</string>
     <string name="fixed">csavarral állandósított</string>
     <string name="painted">felfestett</string>
 
@@ -223,7 +223,7 @@
 
     <string name="no_bt">Nincs bluetooth</string>
     <string name="no_calib">Nincs kalibráció</string>
-    <string name="no_calib_check">Nincs kalibrációt ell. mérés</string -->
+    <string name="no_calib_check">Nincs kalibrációt ell. mérés</string>
     <string name="no_calibration">Nincs kalibráció kiválasztva</string>
     <string name="no_capture_app">Nincs app fénykép készítéshez</string>
     <string name="no_cave3d">Cave3D nincs telepítve</string>
@@ -255,7 +255,7 @@
     <string name="menu_attach">KAPCSOL</string>
     <!-- UNUSED string name="menu_attached">ÖSSZEKAPCSOLT</string -->
     <!-- UNUSED string name="menu_ready">KÉSZ</string -->
-    <string name="menu_calib_check">KALIBR. ELLENŐRZÉS</string -->
+    <string name="menu_calib_check">KALIBR. ELLENŐRZÉS</string>
     <string name="menu_close">BEZÁR</string>
     <string name="menu_delete">TÖRÖL</string>
     <string name="menu_detach">SZÉTKAPCSOL</string>
@@ -289,7 +289,7 @@
 
     <string name="popup_join_pt">Ugrás a legközelebbi pontra</string>
     <string name="popup_snap_ln">Ugrás a legközelebbi vonalra</string>
-    <string name="popup_snap_to_splays">Ugrás a legközelebbi segédpontra</string -->
+    <string name="popup_snap_to_splays">Ugrás a legközelebbi segédpontra</string>
     <string name="popup_split_pt">Pont duplázása</string>
     <string name="popup_split_ln">Vonal elmetszése pontnál</string>
     <string name="popup_sharp_pt">Szakasz kiegyenesítése</string>
@@ -301,18 +301,18 @@
     <string name="popup_erase_line">Vonalak törlése</string>
     <string name="popup_erase_area">Területek törlése</string>
 
-    <string name="popup_select_all">Összes kijelölése</string -->
-    <string name="popup_select_point">Pontok kijelölése</string -->
-    <string name="popup_select_line">Vonalak kijelölése</string -->
-    <string name="popup_select_area">Területek kijelölése</string -->
-    <string name="popup_select_shot">Mérések kijelölése/string -->
-    <string name="popup_select_station">Fixpontok kijelölése</string -->
+    <string name="popup_select_all">Összes kijelölése</string>
+    <string name="popup_select_point">Pontok kijelölése</string>
+    <string name="popup_select_line">Vonalak kijelölése</string>
+    <string name="popup_select_area">Területek kijelölése</string>
+    <string name="popup_select_shot">Mérések kijelölése</string>
+    <string name="popup_select_station">Fixpontok kijelölése</string>
 
-    <string name="popup_cont_none">Nincs</string -->
-    <string name="popup_cont_start">Kezdőpont</string -->
-    <string name="popup_cont_end">Végpont</string -->
-    <string name="popup_cont_both">Mindkét pont</string -->
-    <string name="popup_cont_continue">Folytat</string -->
+    <string name="popup_cont_none">Nincs</string>
+    <string name="popup_cont_start">Kezdőpont</string>
+    <string name="popup_cont_end">Végpont</string>
+    <string name="popup_cont_both">Mindkét pont</string>
+    <string name="popup_cont_continue">Folytat</string>
 
     <string name="connected_none">Nincs kapcsolat</string>
     <string name="connected_already">Már összekapcsolt</string>
@@ -361,7 +361,7 @@
     <!-- UNUSED string name="converted_tdr2th2">Converted sketches binary files to th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Overwrite th2 sketch files ?</string -->
     <string name="section_area">A keresztszelvény területe: %1$.1f</string>
-    <string name="scrap_outline">Körvonal vázlat létrehozása</string -->
+    <string name="scrap_outline">Körvonal vázlat létrehozása</string>
 
     <!-- UNUSED string name="sensor">sensor</string -->
     <string name="sensor_gravity">gravitációs szenzor</string>
@@ -375,13 +375,13 @@
     <string name="sensor_type">típus</string>
     <string name="sensor_value">érték</string>
     <string name="sensor_comment">megjegyzés</string>
-    <string name="insufficient_data">kevés szenzor adat</string -->
+    <string name="insufficient_data">kevés szenzor adat</string>
 
     <!-- UNUSED string name="shot_clino">clino</string -->
     <!-- UNUSED string name="shot_compass">compass</string -->
     <string name="shot_delete">Törli a mérést?</string>
-    <string name="shots_delete">Törli a méréseket ?</string -->
-    <string name="shot_check">Mérés megjelölése ellenőrző mérésként</string -->
+    <string name="shots_delete">Törli a méréseket ?</string>
+    <string name="shot_check">Mérés megjelölése ellenőrző mérésként</string>
     <string name="shot_from">Honnan</string>
     <string name="shot_info">Írd be a mérés adatait</string>
     <!-- UNUSED string name="shot_length">length</string -->
@@ -421,10 +421,10 @@
     <string name="toggle_failed">Nem sikerült átkapcsolni a DistoX-et</string>
     <string name="toggle_ok">DistoX átkapcsolva kalibrációs üzemmódba</string>
     <string name="undelete_text">Érintse meg az elemet a visszaálításhoz</string>
-    <string name="undelete_shot">Mérések</string -->
-    <string name="undelete_overshoot">Túlmérések</string -->
-    <string name="undelete_check">Ellenőrző mérések</string -->
-    <string name="undelete_plot">Vázlatok</string -->
+    <string name="undelete_shot">Mérések</string>
+    <string name="undelete_overshoot">Túlmérések</string>
+    <string name="undelete_check">Ellenőrző mérések</string>
+    <string name="undelete_plot">Vázlatok</string>
     <string name="delete_whole_leg">Mérés törlése</string>
     <string name="visible_border">látható határ</string>
     <!-- UNUSED string name="vthreshold">vert. threshold</string -->
@@ -448,7 +448,7 @@
     <string name="stat_duplicate">Kettőzött mérés %1$d %2$.1f %3$s</string>
     <string name="stat_leg">Poligonmérések %1$d %2$.1f %3$s</string>
     <string name="stat_length">Hossz  %1$.1f %2$s</string>
-    <string name="stat_projlen">Vízszintes vetület %1$.1f %2$s</string -->
+    <string name="stat_projlen">Vízszintes vetület %1$.1f %2$s</string>
     <string name="stat_loop">Hurkok %1$d</string>
     <string name="stat_origin">Nulla pont: %1$s</string>
     <string name="stat_azimuth">Oldalnézet vetítési iránya: %1$.1f</string>
@@ -511,7 +511,7 @@
     <!-- UNUSED string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Biztonsági tár</string>
-    <string name="button_rename"    >Átnevez    </string -->
+    <string name="button_rename"    >Átnevez    </string>
     <string name="button_replace"   >Cserél   </string>
     <string name="button_reset"     >Visszaállít</string>
     <string name="button_left"      >BAL</string>
@@ -519,9 +519,9 @@
     <string name="button_clear"     >Töröl</string>
     <string name="button_save"      >Ment</string>
     <!-- UNUSED string name="button_select"    >Select    </string -->
-    <string name="button_search"    >Keres    </string -->
-    <string name="button_merge"     >Egyesít     </string -->
-    <string name="button_split"     >Megoszt     </string -->
+    <string name="button_search"    >Keres    </string>
+    <string name="button_merge"     >Egyesít     </string>
+    <string name="button_split"     >Megoszt     </string>
     <string name="button_store"     >Tárol</string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
@@ -537,8 +537,8 @@
     <string name="mode_station">Mérési pontok</string>
     <string name="mode_grid">Rács</string>
     <string name="mode_fixed">Rögzített referenciapontok</string>
-    <string name="mode_outline">Csak körvonal</string -->
-    <string name="mode_scale_ref">Vonalas lépték</string -->
+    <string name="mode_outline">Csak körvonal</string>
+    <string name="mode_scale_ref">Vonalas lépték</string>
 
     <!-- UNUSED string name="remote_title">Device Remote Control</string -->
     <string name="remote_on">Lézer BE</string>
@@ -549,7 +549,7 @@
 
     <string name="popup_do_splay">Segéd mérés</string>
     <string name="popup_do_leg">Poligon mérések</string>
-    <string name="popup_do_gm_data">Kalibr. mérés</string -->
+    <string name="popup_do_gm_data">Kalibr. mérés</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Importálás</string>
@@ -561,7 +561,7 @@
     <string name="symbol_mine">Bányászat</string>
     <string name="symbol_paleo">Őslénytan</string>
     <string name="symbol_speleo">Barlangászat</string>
-    <string name="symbol_extra">Barlangászat (2)</string -->
+    <string name="symbol_extra">Barlangászat (2)</string>
 
     <string name="symbol_reload">Rajz eszközök</string>
 
@@ -612,8 +612,8 @@
     <string name="few_line_points">A vonalnak túl kevés pontja van</string>
     <string name="line_delete">vonal_törlése</string>
     <string name="flip_shots">Mérések_megfordítása </string>
-    <string name="split_nothing">Nem megosztható</string -->
-    <string name="copy_items">Tételek másolása</string -->
+    <string name="split_nothing">Nem megosztható</string>
+    <string name="copy_items">Tételek másolása</string>
 
     <string name="menu_head">FEJLÉC</string>
     <!-- UNUSED string name="menu_save_th2">SAVE TH2</string -->
@@ -622,9 +622,9 @@
     <string name="help_help">Ez a súgó</string>
     <!-- UNUSED string name="help_manual">User manual</string -->
     <string name="help_measure">Távolságmérés</string>
-    <string name="help_measure_type">Mérési mód: fix pont vagy vonallánc</string -->
+    <string name="help_measure_type">Mérési mód: fix pont vagy vonallánc</string>
     
-    <string name="help_calib_check">Kalibr. ell. mérések</string -->
+    <string name="help_calib_check">Kalibr. ell. mérések</string>
     <string name="help_close">Súgó bezárása</string>
     <string name="help_coeff">Mutassa a kalibrációs együtthatókat</string>
     <string name="help_continue">Vonal folytatása</string>
@@ -665,7 +665,7 @@
     <string name="help_rename">Felmérés nevének megváltoztatása</string>
     <string name="help_plot_rename">Vázlat nevének megváltoztatása</string>
     <string name="help_plot_switch">Vázlat nézet átváltása</string>
-    <string name="help_search">Mérési pont keresése</string -->
+    <string name="help_search">Mérési pont keresése</string>
     <string name="help_stats">Felmérési statisztikák párbeszédpanel</string>
     <string name="help_save_plot">Vázlat exportálása</string>
     <!-- UNUSED string name="help_tdr2th2">Convert sketch binary files to th2</string -->
@@ -686,10 +686,10 @@
     <string name="help_zoom_fit">Vázlat képernyőméretre igazítása</string>
    
     <string name="help_line_point">Vonal műveletek: egyesítés, felosztás, vágás, törlés</string>
-    <string name="help_to_point">A kijelölt pont átmozgatása a legközelebbi pontba</string>
-    <string name="help_split_point">Pont kétfelé osztása [vonal/terület]</string>
-    <string name="help_split_line">Vonal kétfelé osztása adott pontnál</string>
-    <string name="help_kink">Egyenes vonal felvétele a pontból [vonal/terület]</string>
+    <!-- UNUSED string name="help_to_point">A kijelölt pont átmozgatása a legközelebbi pontba</string -->
+    <!-- UNUSED string name="help_split_point">Pont kétfelé osztása [vonal/terület]</string -->
+    <!-- UNUSED string name="help_split_line">Vonal kétfelé osztása adott pontnál</string -->
+    <!-- UNUSED string name="help_kink">Egyenes vonal felvétele a pontból [vonal/terület]</string -->
     <string name="help_manual_calibration">Kézi eszközök kalibrálása</string>
     <string name="help_note_plot">A kiválasztott vázlat-elem tulajdonságainak szerkesztése</string>
     <!-- UNUSED string name="help_save">Save changes to survey info</string -->
@@ -732,13 +732,13 @@
     <string name="title_azimut">Vonatkozási rendszer</string>
     <string name="title_audio">Hangjegyzet</string>
     <string name="title_calib">Kalibrációk</string>
-    <string name="title_calib_check">Kalir. ell. mérések</string -->
+    <string name="title_calib_check">Kalir. ell. mérések</string>
     <string name="title_coverage">Kalibrációs adatok eloszlása</string>
     <string name="title_coeff">Kalibrációs együtthatók</string>
     <string name="title_contour">Körvonal</string>
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Elmentett mérési pontok</string>
-    <string name="title_station_search">Mérési pont beírása</string -->
+    <string name="title_station_search">Mérési pont beírása</string>
     <string name="title_device">DistoX-ek</string>
     <string name="title_device_select">Válaszd ki a DistoX-et</string>
     <string name="title_discover">DistoX eszközök keresése &#8230; várj!</string>
@@ -760,18 +760,18 @@
     <string name="title_photo">Fénykép/Méretek</string>
     <string name="title_photo_comment">Fénykép magyarázat</string>
     <string name="title_plot_save">Vázlat exportálása</string>
-    <string name="title_plot_merge">Vázlatban egyesít</string -->
+    <string name="title_plot_merge">Vázlatban egyesít</string>
     <string name="title_plot_reload">Vázlat újratöltése</string>
     <string name="title_profile_flip">Nézeti vázlat 180 fokos forgatása</string>
     <string name="title_projection">Vetített oldalnézet irányszöge %1$d</string>
     <string name="title_refs">Vázlat hivatkozásai</string>
     <string name="title_scraps">Felmérés vázlatok</string>
-    <string name="title_scraps_outline">Körvonal felvázolása</string -->
+    <string name="title_scraps_outline">Körvonal felvázolása</string>
     <string name="title_select">Kiválaszt</string>
     <string name="title_shift">Váltás</string>
     <string name="title_shot_delete">Mérés törlése?</string>
     <string name="title_sensor_edit">Szenzor</string>
-    <string name="title_split">Vázlat megosztása</string -->
+    <string name="title_split">Vázlat megosztása</string>
 
     <string name="title_stats">Statisztikák</string>
     <string name="title_step">Lépés</string>
@@ -833,8 +833,8 @@
   <string name="pref_svg_grid_summary">Rácsháló hozzáadása SVG-képhez</string>
   <string name="pref_svg_in_html_title">SVG HTML-ben</string>
   <string name="pref_svg_in_html_summary">HTML-be beágyazott SVG-kép exportálása</string>
-  <string name="pref_svg_line_dir_title">SVG vonal irány</string -->
-  <string name="pref_svg_line_dir_summary">Vonal irány jelző tüskék hozzáadása SVG exportálásnál/string -->
+  <string name="pref_svg_line_dir_title">SVG vonal irány</string>
+  <string name="pref_svg_line_dir_summary">Vonal irány jelző tüskék hozzáadása SVG exportálásnál</string>
   <string name="pref_kml_stations_title">KML mérési pontokkal</string>
   <string name="pref_kml_stations_summary">Mérési pontok hozzáadása KML-fájlhoz</string>
   <string name="pref_kml_splays_title">KML segédmérésekkel</string>
@@ -854,8 +854,8 @@
   <string name="pref_wait_shot_summary">Szünet mérés után [ms]</string>
   <string name="pref_wait_data_title">Adat szünet [ms]</string>
   <string name="pref_wait_data_summary">Szünet adatletöltés után [ms]</string>
-  <string name="pref_wait_conn_title">Szünet adatok készenléte után [ms]</string -->
-  <string name="pref_wait_conn_summary">Várakozás az adatok elkészültére [ms]</string -->
+  <string name="pref_wait_conn_title">Szünet adatok készenléte után [ms]</string>
+  <string name="pref_wait_conn_summary">Várakozás az adatok elkészültére [ms]</string>
   <string name="pref_conn_mode_title">Adatkapcsolat típusa</string>
   <string name="pref_conn_mode_summary">A DistoX-el való kapcsolat típusa</string>
   <string name="pref_auto_reconnect_title">Automatikus újrakapcsolódás</string>
@@ -901,10 +901,10 @@
   <string name="pref_vert_splay_title">Segédmérések megszaggatásának lejtszög küszöbértéke</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Splay over this inclination are dashed</string -->
   <string name="pref_vert_splay_message">Ennél nagyobb lejtszögű segédmérések szaggatott vonallal jelöltek</string>
-  <string name="pref_shared_xsections_title">Megosztott keresztszelvények</string -->
-  <string name="pref_shared_xsections_summary">Az adott mérési pont keresztszelvényei több vázlatban közösek</string -->
-  <string name="xsections_shared">Megosztott keresztszelvények</string -->
-  <string name="xsections_private">Saját keresztszelvények</string -->
+  <string name="pref_shared_xsections_title">Megosztott keresztszelvények</string>
+  <string name="pref_shared_xsections_summary">Az adott mérési pont keresztszelvényei több vázlatban közösek</string>
+  <string name="xsections_shared">Megosztott keresztszelvények</string>
+  <string name="xsections_private">Saját keresztszelvények</string>
 
 
   <string name="pref_survey_stations_title">Pontelnevezési szabályok</string>
