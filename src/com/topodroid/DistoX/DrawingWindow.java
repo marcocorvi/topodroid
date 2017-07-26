@@ -620,7 +620,7 @@ public class DrawingWindow extends ItemDrawer
   public void lineSelected( int k, boolean update_recent )
   {
     super.lineSelected( k, update_recent );
-    if ( TDSetting.mLevelOverNormal ) {
+    if ( TDLevel.overNormal ) {
       if ( BrushManager.mLineLib.getLineGroup( mCurrentLine ) == null ) {
         setButtonContinue( CONT_OFF );
       } else {
@@ -672,7 +672,7 @@ public class DrawingWindow extends ItemDrawer
       dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );
       if ( blk.isMultiBad() ) {
         dpath.setPaint( BrushManager.fixedOrangePaint );
-      } else if ( blk.isMagneticBad() ) {
+      } else if ( DistoXAccuracy.isBlockMagneticBad( blk ) ) {
         dpath.setPaint( BrushManager.fixedRedPaint );
       } else if ( TDSetting.isConnectionModeBatch() && blk.isRecent( mApp.mSecondLastShotId ) ) {
         dpath.setPaint( BrushManager.fixedBluePaint );
@@ -723,7 +723,7 @@ public class DrawingWindow extends ItemDrawer
       }
       // boolean visible = ( mSymbol == Symbol.LINE && mCurrentLine == BrushManager.mLineLib.mLineWallIndex );
       boolean visible = ( mSymbol == Symbol.LINE );
-      if ( TDSetting.mLevelOverNormal ) {
+      if ( TDLevel.overNormal ) {
         mButton2[ BTN_CONT ].setVisibility( visible? View.VISIBLE : View.GONE );
       }
     } else if ( mMode == MODE_MOVE ) {
@@ -1084,7 +1084,7 @@ public class DrawingWindow extends ItemDrawer
   {
     TDAzimuth.mFixedExtend = fixed_extend;
     TDAzimuth.mRefAzimuth = azimuth;
-    if ( ! TDSetting.mLevelOverNormal ) return;
+    if ( ! TDLevel.overNormal ) return;
     if ( BTN_DIAL >= mButton1.length ) return;
 
     if ( TDAzimuth.mFixedExtend == 0 ) {
@@ -1128,7 +1128,7 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  // must be called only if mLevelOverNormal
+  // must be called only if TDLevel.overNormal
   private void setButtonContinue( int continue_line )
   {
     mContinueLine = continue_line;
@@ -1160,7 +1160,7 @@ public class DrawingWindow extends ItemDrawer
 
   public void setButtonJoinMode( int join_mode, int code )
   {
-    if ( TDSetting.mLevelOverNormal ) setButtonContinue( join_mode );
+    if ( TDLevel.overNormal ) setButtonContinue( join_mode );
   }
 
   public void setButtonFilterMode( int filter_mode, int code )
@@ -1308,7 +1308,7 @@ public class DrawingWindow extends ItemDrawer
     mButton1[ BTN_BLUETOOTH ].setVisibility( View.VISIBLE );
     // mButton1[ BTN_PLOT ].setVisibility( View.VISIBLE );
     mButton1[BTN_PLOT].setOnLongClickListener( this );
-    if ( TDSetting.mLevelOverNormal && BTN_DIAL < mButton1.length ) mButton1[ BTN_DIAL ].setVisibility( View.VISIBLE );
+    if ( TDLevel.overNormal && BTN_DIAL < mButton1.length ) mButton1[ BTN_DIAL ].setVisibility( View.VISIBLE );
   }
 
   private void updateSplays( int mode )
@@ -1360,13 +1360,13 @@ public class DrawingWindow extends ItemDrawer
     mButton1[ BTN_BLUETOOTH ].setVisibility( View.GONE );
     // mButton1[ BTN_PLOT ].setVisibility( View.GONE );
     mButton1[BTN_PLOT].setOnLongClickListener( null );
-    if ( TDSetting.mLevelOverNormal && BTN_DIAL < mButton1.length ) mButton1[ BTN_DIAL ].setVisibility( View.GONE );
+    if ( TDLevel.overNormal && BTN_DIAL < mButton1.length ) mButton1[ BTN_DIAL ].setVisibility( View.GONE );
   }
 
   private void makeButtons( )
   {
     Resources res = getResources();
-    if ( ! TDSetting.mLevelOverNormal ) -- mNrButton1;
+    if ( ! TDLevel.overNormal ) -- mNrButton1;
     mButton1 = new Button[ mNrButton1 ]; // MOVE
     int off = 0;
     int ic = 0;
@@ -1390,7 +1390,7 @@ public class DrawingWindow extends ItemDrawer
     mBMsplayBack     = MyButton.getButtonBackground( mApp, res, R.drawable.iz_splay_back );
     mBMsplayBoth     = MyButton.getButtonBackground( mApp, res, R.drawable.iz_splay_both );
 
-    if ( ! TDSetting.mLevelOverNormal ) -- mNrButton2;
+    if ( ! TDLevel.overNormal ) -- mNrButton2;
     mButton2 = new Button[ mNrButton2 ]; // DRAW
     off = (NR_BUTTON1 - 3); 
     for ( int k=0; k<mNrButton2; ++k ) {
@@ -1404,7 +1404,7 @@ public class DrawingWindow extends ItemDrawer
     mBMcont_both  = MyButton.getButtonBackground( mApp, res, izons[IC_CONT_BOTH] );
     mBMcont_off   = MyButton.getButtonBackground( mApp, res, izons[IC_CONT_OFF] );
 
-    if ( ! TDSetting.mLevelOverExpert ) -- mNrButton3;
+    if ( ! TDLevel.overExpert ) -- mNrButton3;
     mButton3 = new Button[ mNrButton3 ];      // EDIT
     off = (NR_BUTTON1 - 3) + (NR_BUTTON2 - 3); 
     for ( int k=0; k<mNrButton3; ++k ) {
@@ -1413,7 +1413,7 @@ public class DrawingWindow extends ItemDrawer
       if ( ic == IC_JOIN ) 
         mBMjoin = MyButton.getButtonBackground( mApp, res, ((k==2)? izons_ok[ic] : izons[ic]) );
     }
-    if ( TDSetting.mLevelOverExpert ) {
+    if ( TDLevel.overExpert ) {
       if ( BTN_BORDER < mButton3.length ) {
         mButton3[ BTN_BORDER ].setPadding(4,4,4,4);
         mButton3[ BTN_BORDER ].setTextColor( 0xffffffff );
@@ -1524,7 +1524,7 @@ public class DrawingWindow extends ItemDrawer
     // mSelectScale = 0;
     makeButtons( );
 
-    if ( ! TDSetting.mLevelOverNormal ) {
+    if ( ! TDLevel.overNormal ) {
       mButton1[2].setVisibility( View.GONE );
       mButton2[2].setVisibility( View.GONE );
       mButton3[2].setVisibility( View.GONE );
@@ -1534,10 +1534,10 @@ public class DrawingWindow extends ItemDrawer
       mButton2[0].setOnLongClickListener( this );
       mButton5[1].setOnLongClickListener( this );
     }
-    if ( TDSetting.mLevelOverAdvanced ) {
+    if ( TDLevel.overAdvanced ) {
       mButton1[BTN_DOWNLOAD].setOnLongClickListener( this );
     }
-    if ( TDSetting.mLevelOverBasic ) {
+    if ( TDLevel.overBasic ) {
       if ( BTN_PLOT   < mButton1.length ) mButton1[BTN_PLOT].setOnLongClickListener( this );
       if ( BTN_REMOVE < mButton3.length ) mButton3[BTN_REMOVE].setOnLongClickListener( this );
     }
@@ -1738,7 +1738,7 @@ public class DrawingWindow extends ItemDrawer
       mCurrentLine  = ( BrushManager.mLineLib.isSymbolEnabled( "wall" ) )? 1 : 0;
       mCurrentArea  = ( BrushManager.mAreaLib.isSymbolEnabled( "water" ) )? 1 : 0;
       mContinueLine = CONT_NONE;
-      if ( TDSetting.mLevelOverNormal ) setButtonContinue( CONT_NONE );
+      if ( TDLevel.overNormal ) setButtonContinue( CONT_NONE );
 
       List<DBlock> list = null;
       if ( PlotInfo.isSection( mType ) ) {
@@ -2041,7 +2041,7 @@ public class DrawingWindow extends ItemDrawer
     {
       // Log.v("DistoX", "select at: edit-range " + mDoEditRange + " mode " + mMode );
       if ( mMode == MODE_EDIT ) {
-        if ( TDSetting.mLevelOverExpert && mDoEditRange > 0 ) {
+        if ( TDLevel.overExpert && mDoEditRange > 0 ) {
           // mDoEditRange = false;
           // mButton3[ BTN_BORDER ].setBackgroundDrawable( mBMedit_no );
           if ( mDrawingSurface.setRangeAt( x_scene, y_scene, mZoom, mDoEditRange, size ) ) {
@@ -2584,7 +2584,7 @@ public class DrawingWindow extends ItemDrawer
           if ( mMode == MODE_MOVE && mShiftDrawing ) {
             float x_shift = x_canvas - mSaveX; // compute shift
             float y_shift = y_canvas - mSaveY;
-            if ( TDSetting.mLevelOverNormal ) {
+            if ( TDLevel.overNormal ) {
               if ( Math.abs( x_shift ) < TDSetting.mMinShift && Math.abs( y_shift ) < TDSetting.mMinShift ) {
                 mDrawingSurface.shiftDrawing( x_shift/mZoom, y_shift/mZoom );
                 modified();
@@ -3723,7 +3723,7 @@ public class DrawingWindow extends ItemDrawer
   {
     if ( ! mDataDownloader.isDownloading() ) {
 	// FIXME
-      if ( TDSetting.mLevelOverExpert && mApp.distoType() == Device.DISTO_X310 
+      if ( TDLevel.overExpert && mApp.distoType() == Device.DISTO_X310 
 	      && TDSetting.mConnectionMode != TDSetting.CONN_MODE_MULTI
 	  ) {
         CutNPaste.showPopupBT( mActivity, this, mApp, b, false );
@@ -3741,7 +3741,7 @@ public class DrawingWindow extends ItemDrawer
     public boolean onLongClick( View view ) 
     {
       Button b = (Button)view;
-      if ( TDSetting.mLevelOverAdvanced && b == mButton1[ BTN_DOWNLOAD ] ) {
+      if ( TDLevel.overAdvanced && b == mButton1[ BTN_DOWNLOAD ] ) {
         if (   TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI
             && ! mDataDownloader.isDownloading() 
             && mApp.mDData.getDevices().size() > 1 ) {
@@ -3751,13 +3751,13 @@ public class DrawingWindow extends ItemDrawer
           setConnectionStatus( mDataDownloader.getStatus() );
           mDataDownloader.doDataDownload( );
         }
-      } else if ( TDSetting.mLevelOverBasic && b == mButton1[ BTN_PLOT ] ) {
+      } else if ( TDLevel.overBasic && b == mButton1[ BTN_PLOT ] ) {
         if ( mType == PlotInfo.PLOT_EXTENDED ) {
           new DrawingProfileFlipDialog( mActivity, this ).show();
         } else {
           return false; // not consumed
         }
-      } else if ( TDSetting.mLevelOverBasic && b == mButton3[ BTN_REMOVE ] ) {
+      } else if ( TDLevel.overBasic && b == mButton3[ BTN_REMOVE ] ) {
         SelectionPoint sp = mDrawingSurface.hotItem();
         if ( sp != null ) {
           int t = sp.type();
@@ -3785,15 +3785,15 @@ public class DrawingWindow extends ItemDrawer
             }
           }
         }
-      } else if ( TDSetting.mLevelOverNormal && b == mButton2[0] ) { // drawing properties
+      } else if ( TDLevel.overNormal && b == mButton2[0] ) { // drawing properties
         Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_PLOT_DRAW );
         mActivity.startActivity( intent );
-      } else if ( TDSetting.mLevelOverNormal && b == mButton5[1] ) { // erase properties
+      } else if ( TDLevel.overNormal && b == mButton5[1] ) { // erase properties
         Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_PLOT_ERASE );
         mActivity.startActivity( intent );
-      } else if ( TDSetting.mLevelOverNormal && b == mButton3[2] ) { // edit properties
+      } else if ( TDLevel.overNormal && b == mButton3[2] ) { // edit properties
         Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_PLOT_EDIT );
         mActivity.startActivity( intent );
@@ -3845,7 +3845,7 @@ public class DrawingWindow extends ItemDrawer
         setMode( MODE_ERASE );
         mListView.invalidate();
       } else if ( b == mButton1[2] || b == mButton2[2] || b == mButton5[2] ) { // 2 --> EDIT
-        if ( TDSetting.mLevelOverBasic ) {
+        if ( TDLevel.overBasic ) {
           setMode( MODE_EDIT );
         }
       
@@ -3882,7 +3882,7 @@ public class DrawingWindow extends ItemDrawer
         } else if ( PlotInfo.isXSection( mType ) ) {
           updateSplays( (mApp.mSplayMode + 2)%4 );
         }
-      } else if ( TDSetting.mLevelOverNormal && b == mButton1[k1++] ) { //  AZIMUTH
+      } else if ( TDLevel.overNormal && b == mButton1[k1++] ) { //  AZIMUTH
         if ( PlotInfo.isSketch2D( mType ) ) { 
           if ( TDSetting.mAzimuthManual ) {
             setRefAzimuth( 0, - TDAzimuth.mFixedExtend );
@@ -3909,7 +3909,7 @@ public class DrawingWindow extends ItemDrawer
         } else {
           new ItemPickerDialog(mActivity, this, mType, mSymbol ).show();
         }
-      } else if ( TDSetting.mLevelOverNormal && b == mButton2[k2++] ) { //  CONT continuation popup menu
+      } else if ( TDLevel.overNormal && b == mButton2[k2++] ) { //  CONT continuation popup menu
         if ( mSymbol == Symbol.LINE && BrushManager.mLineLib.getLineGroup( mCurrentLine ) != null ) {
           // setButtonContinue( (mContinueLine+1) % CONT_MAX );
           makePopupJoin( b, Drawing.mJoinModes, 5, 0 );
@@ -4030,7 +4030,7 @@ public class DrawingWindow extends ItemDrawer
             }
           }
         }
-      } else if ( TDSetting.mLevelOverExpert && b == mButton3[ k3++ ] ) { // RANGE EDIT
+      } else if ( TDLevel.overExpert && b == mButton3[ k3++ ] ) { // RANGE EDIT
         mDoEditRange = ( mDoEditRange + 1 ) % 3;
         if ( BTN_BORDER < mButton3.length ) {
           switch ( mDoEditRange ) {
@@ -4450,15 +4450,15 @@ public class DrawingWindow extends ItemDrawer
     } else {
       mMenuAdapter.add( res.getString( menus[2] ) );  // INFO
     }
-    if ( TDSetting.mLevelOverNormal ) {
+    if ( TDLevel.overNormal ) {
       mMenuAdapter.add( res.getString( menus[3] ) );  // RELOAD
       mMenuAdapter.add( res.getString( menus[4] ) );  // ZOOM_FIT
     }
-    if ( TDSetting.mLevelOverAdvanced && PlotInfo.isSketch2D( type ) ) {
+    if ( TDLevel.overAdvanced && PlotInfo.isSketch2D( type ) ) {
       mMenuAdapter.add( res.getString( menus[5] ) ); // RENAME/DELETE
     }
     mMenuAdapter.add( res.getString( menus[6] ) ); // PALETTE
-    if ( TDSetting.mLevelOverBasic && PlotInfo.isSketch2D( type ) ) {
+    if ( TDLevel.overBasic && PlotInfo.isSketch2D( type ) ) {
       mMenuAdapter.add( res.getString( menus[7] ) ); // OVERVIEW
     }
     mMenuAdapter.add( res.getString( menus[8] ) ); // OPTIONS
@@ -4481,7 +4481,7 @@ public class DrawingWindow extends ItemDrawer
       int p = 0;
       if ( p++ == pos ) {
         if ( PlotInfo.isSketch2D( mType ) ) { // SWITCH/CLOSE
-          if ( TDSetting.mLevelOverNormal ) {
+          if ( TDLevel.overNormal ) {
             new PlotListDialog( mActivity, null, mApp, this ).show();
           } else {
             super.onBackPressed();
@@ -4506,7 +4506,7 @@ public class DrawingWindow extends ItemDrawer
           TopoDroidAlertDialog.makeAlert( mActivity, res, msg, R.string.button_ok, -1, null, null );
         }
 
-      } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // RECOVER RELOAD
+      } else if ( TDLevel.overNormal && p++ == pos ) { // RECOVER RELOAD
         if ( PlotInfo.isProfile( mType ) ) {
           ( new PlotRecoverDialog( mActivity, this, mFullName2, mType ) ).show();
         } else if ( mType == PlotInfo.PLOT_PLAN ) {
@@ -4514,13 +4514,13 @@ public class DrawingWindow extends ItemDrawer
         } else {
           ( new PlotRecoverDialog( mActivity, this, mFullName3, mType ) ).show();
         }
-      } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // ZOOM_FIT
+      } else if ( TDLevel.overNormal && p++ == pos ) { // ZOOM_FIT
         // FIXME for big sketches this leaves out some bits at the ends
         // maybe should increse the bitmap bounds by a small factor ...
         RectF b = mDrawingSurface.getBitmapBounds();
         zoomFit( b );
 
-      } else if ( TDSetting.mLevelOverAdvanced && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // RENAME/DELETE
+      } else if ( TDLevel.overAdvanced && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // RENAME/DELETE
         //   askDelete();
         (new PlotRenameDialog( mActivity, this, mApp )).show();
 
@@ -4528,7 +4528,7 @@ public class DrawingWindow extends ItemDrawer
         BrushManager.makePaths( mApp, getResources() );
         (new SymbolEnableDialog( mActivity, mApp )).show();
 
-      } else if ( TDSetting.mLevelOverBasic && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // OVERVIEW
+      } else if ( TDLevel.overBasic && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // OVERVIEW
         if ( mType == PlotInfo.PLOT_PROFILE ) {
           Toast.makeText( mActivity, R.string.no_profile_overview, Toast.LENGTH_SHORT ).show();
         } else {
@@ -4548,7 +4548,7 @@ public class DrawingWindow extends ItemDrawer
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_PLOT );
         mActivity.startActivity( intent );
       } else if ( p++ == pos ) { // HELP
-        int nn = NR_BUTTON1 + NR_BUTTON2 - 3 + NR_BUTTON5 - 5 + ( TDSetting.mLevelOverBasic? mNrButton3 - 3: 0 );
+        int nn = NR_BUTTON1 + NR_BUTTON2 - 3 + NR_BUTTON5 - 5 + ( TDLevel.overBasic? mNrButton3 - 3: 0 );
         // Log.v("DistoX", "Help menu, nn " + nn );
         (new HelpDialog(mActivity, izons, menus, help_icons, help_menus, nn, help_menus.length ) ).show();
       }

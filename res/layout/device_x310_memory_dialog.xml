@@ -62,7 +62,7 @@
     android:layout_height="fill_parent"
     android:stackFromBottom="true"
     android:transcriptMode="alwaysScroll"
-    android:textSize="12sp"
+    android:textSize="@dimen/textsize"
   />  
 
 </LinearLayout>

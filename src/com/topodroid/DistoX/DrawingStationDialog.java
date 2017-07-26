@@ -137,7 +137,7 @@ public class DrawingStationDialog extends MyDialog
         mBtnSet.setOnClickListener( this );
         mBtnSplays.setOnClickListener( this );
     
-        if ( TDSetting.mLevelOverAdvanced ) {
+        if ( TDLevel.overAdvanced ) {
           mBtnXDelete.setOnClickListener( this );
 
           if ( mStation.mXSectionType == PlotInfo.PLOT_NULL ) {

@@ -4,11 +4,13 @@
   android:layout_height="match_parent"
   >
   <ListView android:id="@+id/list"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:stackFromBottom="true"
-          android:transcriptMode="alwaysScroll"
-          android:textSize="12sp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:stackFromBottom="true"
+    android:transcriptMode="alwaysScroll"
+    android:textSize="@dimen/textsize"
+    android:divider="@color/divider"
+    android:dividerHeight="2dp"
   />  
 </RelativeLayout>
 

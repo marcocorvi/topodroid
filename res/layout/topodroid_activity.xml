@@ -70,13 +70,15 @@
    </LinearLayout -->
 
    <ListView android:id="@+id/td_list"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:stackFromBottom="false"
-          android:transcriptMode="alwaysScroll"
-          android:paddingTop="25dp"
-          android:textSize="12sp"
-          android:background="#111"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:stackFromBottom="false"
+      android:transcriptMode="alwaysScroll"
+      android:paddingTop="25dp"
+      android:textSize="@dimen/textsize"
+      android:divider="@color/divider"
+      android:dividerHeight="2dp"
+      android:background="#111"
     />  
 
 

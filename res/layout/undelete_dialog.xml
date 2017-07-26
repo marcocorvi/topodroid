@@ -45,11 +45,13 @@
     </LinearLayout>
 
     <ListView android:id="@+id/list_undelete"
-          android:layout_width="fill_parent"
-          android:layout_height="0dp"
-          android:stackFromBottom="true"
-          android:transcriptMode="alwaysScroll"
-          android:layout_weight="1"
-          android:textSize="12sp"
+      android:layout_width="fill_parent"
+      android:layout_height="0dp"
+      android:stackFromBottom="true"
+      android:transcriptMode="alwaysScroll"
+      android:layout_weight="1"
+      android:textSize="@dimen/textsize"
+      android:divider="@color/divider"
+      android:dividerHeight="2dp"
     />
   </LinearLayout>

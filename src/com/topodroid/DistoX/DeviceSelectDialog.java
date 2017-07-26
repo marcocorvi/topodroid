@@ -82,7 +82,7 @@ public class DeviceSelectDialog extends MyDialog
   {
     ListItemAdapter array_adapter = new ListItemAdapter( mContext, R.layout.message );
     // mArrayAdapter.clear();
-    if ( TDSetting.mLevelOverTester ) { // FIXME VirtualDistoX
+    if ( TDLevel.overTester ) { // FIXME VirtualDistoX
       array_adapter.add( "X000" );
     }
     ArrayList<Device> devices = mApp.mDData.getDevices();

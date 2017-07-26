@@ -228,7 +228,7 @@ class ItemRecentDialog extends MyDialog
   // void rotatePoint( int angle )
   // {
   //   if ( mPointAdapter == null ) return;
-  //   if ( TDSetting.mLevelOverBasic && mItemType == Symbol.POINT ) {
+  //   if ( TDLevel.overBasic && mItemType == Symbol.POINT ) {
   //     // Log.v( TopoDroidApp.TAG, "rotate point " + mParent.mCurrentPoint );
   //     mPointAdapter.rotatePoint( mParent.mCurrentPoint, angle );
   //   }

@@ -139,7 +139,7 @@ public class DataHelper extends DataSetObservable
 
   private String[] mSketchFields; // select sketch fields
 
-  private ArrayList<DataListener> mListeners;
+  private DataListenerSet mListeners;
 
   private static String[] mFixedFields = { 
     "id", "station", "longitude", "latitude", "altitude", "altimetric", "comment", "status", "source",
@@ -154,7 +154,7 @@ public class DataHelper extends DataSetObservable
   public SQLiteDatabase getDb() { return myDB; }
 
 
-  public DataHelper( Context context, ArrayList<DataListener> listeners )
+  public DataHelper( Context context, DataListenerSet listeners )
   {
     mContext = context;
     mShotFields = new String[] { 
@@ -538,7 +538,7 @@ public class DataHelper extends DataSetObservable
     try {
       myDB.update( SURVEY_TABLE, vals, "id=?", new String[]{ Long.toString(id) } );
       if ( forward && mListeners != null ) { // synchronized( mListeners )
-        for ( DataListener listener : mListeners ) listener.onUpdateSurveyName( id, name );
+        mListeners.onUpdateSurveyName( id, name );
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch ( SQLiteException e) { logError("survey rename " + name, e ); }
@@ -558,9 +558,7 @@ public class DataHelper extends DataSetObservable
     try {
       myDB.update( SURVEY_TABLE, vals, "id=?", new String[]{ Long.toString(id) } );
       if ( forward && mListeners != null ) { // synchronized( mListeners )
-        for ( DataListener listener : mListeners ) {
-          listener.onUpdateSurveyInfo( id, date, team, decl, comment, init_station, xsections );
-        }
+        mListeners.onUpdateSurveyInfo( id, date, team, decl, comment, init_station, xsections );
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch ( SQLiteException e) { logError("survey info", e ); }
@@ -586,7 +584,7 @@ public class DataHelper extends DataSetObservable
     try {
       myDB.update( SURVEY_TABLE, vals, "id=?", new String[]{ Long.toString(id) } );
       if ( forward && mListeners != null ) { // synchronized( mListeners )
-        for ( DataListener listener : mListeners ) listener.onUpdateSurveyDayAndComment( id, date, comment );
+        mListeners.onUpdateSurveyDayAndComment( id, date, comment );
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch ( SQLiteException e) { logError("survey day+cmt ", e ); }
@@ -600,7 +598,7 @@ public class DataHelper extends DataSetObservable
     try {
       myDB.update( SURVEY_TABLE, vals, "id=?", new String[]{ Long.toString(id) } );
       if ( forward && mListeners != null ) { // synchronized( mListeners )
-        for ( DataListener listener : mListeners ) listener.onUpdateSurveyTeam( id, team );
+        mListeners.onUpdateSurveyTeam( id, team );
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch ( SQLiteException e) { logError("survey team ", e ); }
@@ -613,7 +611,7 @@ public class DataHelper extends DataSetObservable
     try {
       myDB.update( SURVEY_TABLE, vals, "id=?", new String[]{ Long.toString(id) } );
       if ( forward && mListeners != null ) { // synchronized( mListeners )
-        for ( DataListener listener : mListeners ) listener.onUpdateSurveyInitStation( id, station );
+        mListeners.onUpdateSurveyInitStation( id, station );
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch ( SQLiteException e) { logError("survey init_station", e ); }
@@ -625,7 +623,7 @@ public class DataHelper extends DataSetObservable
     try { 
       myDB.update( SURVEY_TABLE, vals, "id=?", new String[]{ Long.toString(id) } );
       if ( forward && mListeners != null ) { // synchronized( mListeners )
-        for ( DataListener listener : mListeners ) listener.onUpdateSurveyDeclination( id, decl );
+        mListeners.onUpdateSurveyDeclination( id, decl );
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch ( SQLiteException e ) { logError("survey decl", e ); }
@@ -693,7 +691,7 @@ public class DataHelper extends DataSetObservable
     try {
       myDB.execSQL( sw.toString() );
       if ( forward && mListeners != null ) { // synchronized( mListeners )
-        for ( DataListener listener : mListeners ) listener.onUpdateShotDBC( id, sid, d, b, c );
+        mListeners.onUpdateShotDBC( id, sid, d, b, c );
       }
     } catch ( SQLiteDiskIOException e ) {  handleDiskIOError( e );
       Log.e( "DistoX", "shot " + id + " DBC: " + d + " " + b + " " + c, e );
@@ -762,9 +760,7 @@ public class DataHelper extends DataSetObservable
     }
 
     if ( success && forward && mListeners != null ) { // synchronized( mListeners )
-      for ( DataListener listener : mListeners ) {
-        listener.onUpdateShot( id, sid, fStation, tStation, extend, flag, leg, comment );
-      }
+      mListeners.onUpdateShot( id, sid, fStation, tStation, extend, flag, leg, comment );
     }
     return 0;
   }
@@ -810,7 +806,7 @@ public class DataHelper extends DataSetObservable
     try {
       myDB.execSQL( sw.toString() );
       if ( forward && mListeners != null ) { // synchronized( mListeners )
-        for ( DataListener listener : mListeners ) listener.onUpdateShotName( id, sid, fStation, tStation );
+        mListeners.onUpdateShotName( id, sid, fStation, tStation );
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch ( SQLiteException e ) { logError("shot " + id + " name " + fStation + " " + tStation, e ); }
@@ -825,7 +821,7 @@ public class DataHelper extends DataSetObservable
     try {
       myDB.execSQL( sw.toString() );
       if ( forward && mListeners != null ) { // synchronized( mListeners )
-        for ( DataListener listener : mListeners ) listener.onUpdateShotLeg( id, sid, leg );
+        mListeners.onUpdateShotLeg( id, sid, leg );
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
       Log.e( "DistoX", e.getMessage() );
@@ -860,7 +856,7 @@ public class DataHelper extends DataSetObservable
     try {
       myDB.execSQL( sw.toString() );
       if ( forward && mListeners != null ) { // synchronized( mListeners )
-        for ( DataListener listener : mListeners ) listener.onUpdateShotExtend( id, sid, extend );
+        mListeners.onUpdateShotExtend( id, sid, extend );
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch (SQLiteException e ) { logError("shot " + id + " ext", e ); }
@@ -874,7 +870,7 @@ public class DataHelper extends DataSetObservable
     try {
       myDB.execSQL( sw.toString() );
       if ( forward && mListeners != null ) { // synchronized( mListeners )
-        for ( DataListener listener : mListeners ) listener.onUpdateShotFlag( id, sid, flag );
+        mListeners.onUpdateShotFlag( id, sid, flag );
       }
     } catch ( SQLiteDiskIOException e ) {  handleDiskIOError( e );
     } catch (SQLiteException e) { logError("shot " + id + " flag", e ); }
@@ -890,7 +886,7 @@ public class DataHelper extends DataSetObservable
     try {
       myDB.execSQL( sw.toString() );
       if ( forward && mListeners != null ) { // synchronized( mListeners )
-        for ( DataListener listener : mListeners ) listener.onUpdateShotComment( id, sid, comment );
+        mListeners.onUpdateShotComment( id, sid, comment );
       }
     } catch ( SQLiteDiskIOException e ) {  handleDiskIOError( e );
     } catch ( SQLiteException e ) { logError("shot " + id + " cmt", e ); }
@@ -904,7 +900,7 @@ public class DataHelper extends DataSetObservable
     try {
       myDB.execSQL( sw.toString() );
       if ( forward && mListeners != null ) { // synchronized( mListeners )
-        for ( DataListener listener : mListeners ) listener.onUpdateShotStatus( id, sid, status );
+        mListeners.onUpdateShotStatus( id, sid, status );
       }
     } catch ( SQLiteDiskIOException e ) {  handleDiskIOError( e );
     } catch ( SQLiteException e ) { logError("shot " + id + " cmt", e ); }
@@ -929,7 +925,7 @@ public class DataHelper extends DataSetObservable
     // if ( myDB == null ) return;
     if ( updateStatus( SHOT_TABLE, id, sid, status ) ) {
       if ( forward && mListeners != null ) { // synchronized( mListeners )
-        for ( DataListener listener : mListeners ) listener.onDeleteShot( id, sid, status );
+        mListeners.onDeleteShot( id, sid, status );
       }
     }
   }
@@ -939,7 +935,7 @@ public class DataHelper extends DataSetObservable
     // if ( myDB == null ) return;
     if ( updateStatus( SHOT_TABLE, id, sid, TDStatus.NORMAL ) ) {
       if ( forward && mListeners != null ) { // synchronized( mListeners )
-        for ( DataListener listener : mListeners ) listener.onUndeleteShot( id, sid );
+        mListeners.onUndeleteShot( id, sid );
       }
     }
   }
@@ -979,12 +975,10 @@ public class DataHelper extends DataSetObservable
       // myDB.execSQL("PRAGMA synchronous=NORMAL");
     }
     if ( success && mListeners != null ) { // synchronized( mListeners )
-      for ( DataListener listener : mListeners ) {
-        for ( DBlock b : updatelist ) {
-          listener.onUpdateShotName( b.mId, sid, b.mFrom, b.mTo );
-          listener.onUpdateShotExtend( b.mId, sid, b.getFullExtend() );
-          listener.onUpdateShotLeg( b.mId, sid, (b.mType == DBlock.BLOCK_SEC_LEG)? 1 : 0 );
-        }
+      for ( DBlock b : updatelist ) {
+        mListeners.onUpdateShotName( b.mId, sid, b.mFrom, b.mTo );
+        mListeners.onUpdateShotExtend( b.mId, sid, b.getFullExtend() );
+        mListeners.onUpdateShotLeg( b.mId, sid, (b.mType == DBlock.BLOCK_SEC_LEG)? 1 : 0 );
       }
     }
   }
@@ -1053,9 +1047,8 @@ public class DataHelper extends DataSetObservable
     }
     if ( mListeners != null ) {
       // synchronized( mListeners )
-      for ( DataListener listener : mListeners ) {
-        for ( ParserShot s : shots ) {
-          listener.onInsertShot( sid, id, s.from, s.to, s.len, s.ber, s.cln, s.rol, s.extend, 
+      for ( ParserShot s : shots ) {
+        mListeners.onInsertShot( sid, id, s.from, s.to, s.len, s.ber, s.cln, s.rol, s.extend, 
                             s.duplicate ? DBlock.BLOCK_DUPLICATE    // flag
                             : s.surface ? DBlock.BLOCK_SURFACE 
                             // : s.commented ? DBlock.BLOCK_COMMENTED 
@@ -1065,7 +1058,6 @@ public class DataHelper extends DataSetObservable
                             0L, // status
                             0L, // shot_type: parser-shots are not modifiable
                             s.comment );
-        }
       }
     }
     return id;
@@ -1108,7 +1100,7 @@ public class DataHelper extends DataSetObservable
     try { 
       updateShotAMDRStmt.execute(); 
       if ( forward && mListeners != null ) { // synchronized( mListeners )
-        for ( DataListener listener : mListeners ) listener.onUpdateShotAMDR( sid, id, acc, mag, dip, r );
+        mListeners.onUpdateShotAMDR( sid, id, acc, mag, dip, r );
       }
     }
     catch ( SQLiteDiskIOException e ) { handleDiskIOError( e ); }
@@ -1284,9 +1276,7 @@ public class DataHelper extends DataSetObservable
     try { 
       myDB.insert( SHOT_TABLE, null, cv ); 
       if ( forward && mListeners != null ) { // synchronized( mListeners )
-        for ( DataListener listener : mListeners ) {
-          listener.onInsertShotAt( sid, at, d, b, c, r, extend, DBlock.BLOCK_SURVEY );
-        }
+        mListeners.onInsertShotAt( sid, at, d, b, c, r, extend, DBlock.BLOCK_SURVEY );
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch (SQLiteException e) { logError("insert at " + d + " " + b + " " + c, e ); }
@@ -1328,9 +1318,7 @@ public class DataHelper extends DataSetObservable
     try {
       myDB.insert( SHOT_TABLE, null, cv );
       if ( forward && mListeners != null ) { // synchronized( mListeners )
-        for ( DataListener listener : mListeners ) {
-          listener.onInsertShot( sid,  id, from, to, d, b, c, r, extend, flag, leg, status, shot_type, comment );
-        }
+        mListeners.onInsertShot( sid,  id, from, to, d, b, c, r, extend, flag, leg, status, shot_type, comment );
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch (SQLiteException e) { logError("insert " + from + "/" + to + " " + d + " " + b + " " + c, e); }
@@ -3015,9 +3003,7 @@ public class DataHelper extends DataSetObservable
      try {
        myDB.insert( PLOT_TABLE, null, cv );
        if ( forward && mListeners != null ) { // synchronized( mListeners )
-         for ( DataListener listener : mListeners ) {
-           listener.onInsertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide );
-         }
+         mListeners.onInsertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide );
        }
      } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
      } catch ( SQLiteException e ) { logError("plot insert", e); }
@@ -3256,7 +3242,7 @@ public class DataHelper extends DataSetObservable
 
      // TDLog.Log( TDLog.LOG_DB, "setSurvey " + name + " forward " + forward + " listeners " + mListeners.size() );
      if ( forward && mListeners != null ) { // synchronized( mListeners )
-       for ( DataListener listener : mListeners ) listener.onSetSurvey( sid, name );
+       mListeners.onSetSurvey( sid, name );
      }
      return sid;
    }

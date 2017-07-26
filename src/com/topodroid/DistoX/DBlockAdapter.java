@@ -241,7 +241,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       tvFrom.setOnClickListener( toggle );
       tvTo.setOnClickListener( toggle );
 
-      if ( TDSetting.mLevelOverBasic ) {
+      if ( TDLevel.overBasic ) {
         tvFrom.setOnLongClickListener( listener );
         tvTo.setOnLongClickListener( listener );
       }
@@ -284,7 +284,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
         tvLength.setBackgroundColor( TDColor.VERYDARK_GRAY );
       } else if ( b.mType == DBlock.BLOCK_MAIN_LEG && b.mLength < TDSetting.mMinLegLength ) {
         tvLength.setBackgroundColor( TDColor.BROWN );
-      } else if ( b.isMagneticBad( ) ) {
+      } else if ( DistoXAccuracy.isBlockMagneticBad( b ) ) {
         tvLength.setBackgroundColor( TDColor.DARK_RED );
       } else {
         tvLength.setBackgroundColor( TDColor.BLACK );
@@ -389,7 +389,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
 
   public boolean onLongClick( View view ) 
   {
-    if ( TDSetting.mLevelOverNormal ) {
+    if ( TDLevel.overNormal ) {
       TextView tv = (TextView) view;
       if ( tv != null ) {
         String st = tv.getText().toString();

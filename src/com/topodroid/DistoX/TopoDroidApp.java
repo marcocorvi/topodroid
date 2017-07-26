@@ -164,22 +164,13 @@ public class TopoDroidApp extends Application
 
   // ----------------------------------------------------------------------
   // DataListener (co-surveying)
-  private ArrayList< DataListener > mDataListeners;
+  private DataListenerSet mDataListeners;
 
   // synchronized( mDataListener )
-  void registerDataListener( DataListener listener )
-  {
-    for ( DataListener l : mDataListeners ) {
-      if ( l == listener ) return;
-    }
-    mDataListeners.add( listener );
-  }
+  void registerDataListener( DataListener listener ) { mDataListeners.registerDataListener( listener ); }
 
   // synchronized( mDataListener )
-  void unregisterDataListener( DataListener listener )
-  {
-    mDataListeners.remove( listener );
-  }
+  void unregisterDataListener( DataListener listener ) { mDataListeners.unregisterDataListener( listener ); }
 
   // -----------------------------------------------------
 
@@ -254,37 +245,8 @@ public class TopoDroidApp extends Application
   }
 
   // ------------------------------------------------------------
-
-  static float mAccelerationMean = 0.0f;
-  static float mMagneticMean     = 0.0f;
-  static float mDipMean          = 0.0f;
-
-  static float deltaAcc( float acc )
-  {
-    if ( mAccelerationMean > 0 ) return TDMath.abs( 100*(acc - mAccelerationMean)/mAccelerationMean ); 
-    return 0;
-  }
-
-  static float deltaMag( float mag )
-  {
-    if ( mMagneticMean > 0 ) return TDMath.abs( 100*(mag - mMagneticMean)/mMagneticMean );
-    return 0;
-  }
-
-  static float deltaDip( float dip ) { return TDMath.abs( dip - mDipMean ); }
-
-  static boolean isBlockMagneticBad( float acc, float mag, float dip )
-  {
-    return deltaMag( mag ) > TDSetting.mMagneticThr
-        || deltaAcc( acc ) > TDSetting.mAccelerationThr
-        || deltaDip( dip ) > TDSetting.mDipThr
-    ;
-  }
-
-  // ------------------------------------------------------------
   // CONSTS
   // private static final byte char0C = 0x0c;
-
 
   // ---------------------------------------------------------------
   // ConnListener
@@ -575,7 +537,7 @@ public class TopoDroidApp extends Application
     TDPath.setPaths( mCWD );
 
     // TDLog.Profile("TDApp DB");
-    mDataListeners = new ArrayList< DataListener >( );
+    mDataListeners = new DataListenerSet( );
     // ***** DATABASE MUST COME BEFORE PREFERENCES
     mData  = new DataHelper( this, mDataListeners );
     mDData = new DeviceHelper( this, null ); 
@@ -619,14 +581,14 @@ public class TopoDroidApp extends Application
     }
 
     // ***** CHECK SPECIAL EXPERIMENTAL FEATURES
-    if ( TDSetting.mLevelOverTester ) {
+    if ( TDLevel.overTester ) {
       String value = mDData.getValue("sketches");
       mSketches =  value != null 
                 && value.equals("on")
                 && getPackageManager().hasSystemFeature( PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH );
     }
 
-    if ( TDSetting.mLevelOverExpert ) {
+    if ( TDLevel.overExpert ) {
       String value = mDData.getValue("cosurvey");
       mCosurvey =  value != null && value.equals("on");
       setCoSurvey( false );

@@ -78,7 +78,7 @@ public class ScrapOutlineDialog extends MyDialog
     mBtnClear = (Button) findViewById(R.id.btn_clear);
     mBtnClear.setOnClickListener( this );
     mBtnMerge = (Button) findViewById(R.id.btn_merge);
-    if ( TDSetting.mLevelOverExpert ) {
+    if ( TDLevel.overExpert ) {
       mBtnMerge.setOnClickListener( this );
     } else {
       mBtnMerge.setVisibility( View.GONE );

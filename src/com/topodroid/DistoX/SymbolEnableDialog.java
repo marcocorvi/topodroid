@@ -89,14 +89,14 @@ class SymbolEnableDialog extends MyDialog
     mBTarea  = (Button) findViewById(R.id.symbol_area );
 
     // mBTreload = (Button) findViewById(R.id.symbol_reload );
-    // if ( TDSetting.mLevelOverNormal ) {
+    // if ( TDLevel.overNormal ) {
     //   mBTreload.setOnClickListener( this );
     // } else {
     //   mBTreload.setVisibility( View.GONE );
     // }
  
     mBTline.setOnClickListener( this );
-    if ( TDSetting.mLevelOverBasic ) {
+    if ( TDLevel.overBasic ) {
       mBTpoint.setOnClickListener( this );
       mBTarea.setOnClickListener( this );
     }
@@ -114,7 +114,7 @@ class SymbolEnableDialog extends MyDialog
     mLineAdapter  = new SymbolAdapter( mContext, R.layout.symbol, new ArrayList<EnableSymbol>() );
     mAreaAdapter  = new SymbolAdapter( mContext, R.layout.symbol, new ArrayList<EnableSymbol>() );
 
-    if ( TDSetting.mLevelOverBasic ) {
+    if ( TDLevel.overBasic ) {
       SymbolPointLibrary point_lib = BrushManager.mPointLib;
       if ( point_lib == null ) return false;
       int np = point_lib.mSymbolNr;
@@ -130,7 +130,7 @@ class SymbolEnableDialog extends MyDialog
       mLineAdapter.add( new EnableSymbol( mContext, Symbol.LINE, j, line_lib.getSymbolByIndex( j ) ) );
     }
 
-    if ( TDSetting.mLevelOverBasic ) {
+    if ( TDLevel.overBasic ) {
       SymbolAreaLibrary area_lib   = BrushManager.mAreaLib;
       if ( area_lib == null ) return false;
       int na = area_lib.mSymbolNr;
@@ -148,7 +148,7 @@ class SymbolEnableDialog extends MyDialog
     // Log.v( TopoDroidApp.TAG, "SymbolEnableDialog ... updateList type " + mType );
     switch ( mType ) {
       case Symbol.POINT:
-        if ( TDSetting.mLevelOverBasic ) {
+        if ( TDLevel.overBasic ) {
           mList.setAdapter( mPointAdapter );
           mBTpoint.getBackground().setColorFilter( TDColor.LIGHT_BLUE, PorterDuff.Mode.LIGHTEN );
           mBTline.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
@@ -162,7 +162,7 @@ class SymbolEnableDialog extends MyDialog
         mBTarea.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
         break;
       case Symbol.AREA:
-        if ( TDSetting.mLevelOverBasic ) {
+        if ( TDLevel.overBasic ) {
           mList.setAdapter( mAreaAdapter );
           mBTpoint.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
           mBTline.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
@@ -180,13 +180,13 @@ class SymbolEnableDialog extends MyDialog
     int type = -1;
     switch (view.getId()) {
       case R.id.symbol_point:
-        if ( TDSetting.mLevelOverBasic ) type = Symbol.POINT;
+        if ( TDLevel.overBasic ) type = Symbol.POINT;
         break;
       case R.id.symbol_line:
         type = Symbol.LINE;
         break;
       case R.id.symbol_area:
-        if ( TDSetting.mLevelOverBasic ) type = Symbol.AREA;
+        if ( TDLevel.overBasic ) type = Symbol.AREA;
         break;
       // case R.id.symbol_reload:
       //   String old_version = mApp.mDData.getValue( "symbol_version" );
@@ -223,7 +223,7 @@ class SymbolEnableDialog extends MyDialog
 
   void saveSymbols()
   {
-    if ( TDSetting.mLevelOverBasic ) {
+    if ( TDLevel.overBasic ) {
       mPointAdapter.updateSymbols( "p_" );
       SymbolPointLibrary point_lib = BrushManager.mPointLib;
       if ( point_lib != null ) point_lib.makeEnabledList();
@@ -233,7 +233,7 @@ class SymbolEnableDialog extends MyDialog
     SymbolLineLibrary line_lib   = BrushManager.mLineLib;
     if ( line_lib  != null ) line_lib.makeEnabledList();
 
-    if ( TDSetting.mLevelOverBasic ) {
+    if ( TDLevel.overBasic ) {
       mAreaAdapter.updateSymbols( "a_" );
       SymbolAreaLibrary area_lib   = BrushManager.mAreaLib;
       if ( area_lib  != null ) area_lib.makeEnabledList();

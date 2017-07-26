@@ -221,8 +221,8 @@ public class SurveyWindow extends Activity
     int size = mApp.setListViewHeight( mListView );
 
     Resources res = getResources();
-    mNrButton1 = TDSetting.mLevelOverNormal ? 6 
-               : TDSetting.mLevelOverBasic ? 3 : 2;
+    mNrButton1 = TDLevel.overNormal ? 6 
+               : TDLevel.overBasic ? 3 : 2;
     mButton1 = new Button[ mNrButton1 ];
     for ( int k=0; k<mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( mActivity, this, izons[k] );
@@ -594,10 +594,10 @@ public class SurveyWindow extends Activity
 
     mMenuAdapter.add( res.getString( menus[0] ) );
     mMenuAdapter.add( res.getString( menus[1] ) );
-    if ( TDSetting.mLevelOverExpert   ) mMenuAdapter.add( res.getString( menus[2] ) );
-    if ( TDSetting.mLevelOverNormal   ) mMenuAdapter.add( res.getString( menus[3] ) );
-    if ( TDSetting.mLevelOverAdvanced ) mMenuAdapter.add( res.getString( menus[4] ) );
-    if ( TDSetting.mLevelOverAdvanced ) mMenuAdapter.add( res.getString( menus[5] ) );
+    if ( TDLevel.overExpert   ) mMenuAdapter.add( res.getString( menus[2] ) );
+    if ( TDLevel.overNormal   ) mMenuAdapter.add( res.getString( menus[3] ) );
+    if ( TDLevel.overAdvanced ) mMenuAdapter.add( res.getString( menus[4] ) );
+    if ( TDLevel.overAdvanced ) mMenuAdapter.add( res.getString( menus[5] ) );
     mMenuAdapter.add( res.getString( menus[6] ) );
     mMenuAdapter.add( res.getString( menus[7] ) );
 
@@ -622,13 +622,13 @@ public class SurveyWindow extends Activity
       super.onBackPressed();
     } else if ( p++ == pos ) { // EXPORT
       new ExportDialog( mActivity, this, TDConst.mSurveyExportTypes, R.string.title_survey_export ).show();
-    } else if ( TDSetting.mLevelOverExpert && p++ == pos ) { // RENAME
+    } else if ( TDLevel.overExpert && p++ == pos ) { // RENAME
       new SurveyRenameDialog( mActivity, this ).show();
-    } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // DELETE
+    } else if ( TDLevel.overNormal && p++ == pos ) { // DELETE
       askDelete();
-    } else if ( TDSetting.mLevelOverAdvanced && p++ == pos ) { // INSTRUMENTS CALIBRATION
+    } else if ( TDLevel.overAdvanced && p++ == pos ) { // INSTRUMENTS CALIBRATION
       new SurveyCalibrationDialog( mActivity, mApp ).show();
-    } else if ( TDSetting.mLevelOverAdvanced && p++ == pos ) { // CALIBRATION CHECK SHOTS
+    } else if ( TDLevel.overAdvanced && p++ == pos ) { // CALIBRATION CHECK SHOTS
       List< DBlock > shots = mApp.mData.selectAllShots( mApp.mSID, TDStatus.CHECK );
       if ( shots.size() == 0 ) {
         Toast.makeText( mActivity, R.string.no_calib_check, Toast.LENGTH_SHORT).show();

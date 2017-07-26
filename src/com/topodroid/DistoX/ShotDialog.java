@@ -227,11 +227,11 @@ public class ShotDialog extends MyDialog
     }
    
     // if ( DBlock.isSurvey(shot_flag) ) { mRBreg.setChecked( true ); }
-    if ( TDSetting.mLevelOverNormal ) {
+    if ( TDLevel.overNormal ) {
       if ( DBlock.isDuplicate(shot_flag) )      { mRBdup.setChecked( true ); }
       else if ( DBlock.isSurface(shot_flag) )   { mRBsurf.setChecked( true ); }
       else if ( DBlock.isCommented(shot_flag) ) { mRBcmtd.setChecked( true ); }
-      else if ( TDSetting.mLevelOverExpert ) {
+      else if ( TDLevel.overExpert ) {
         if ( DBlock.isNoProfile(shot_flag) )   { mRBsplay.setState( 1 ); }
         else if ( DBlock.isNoPlan(shot_flag) ) { mRBsplay.setState( 2 ); }
       }
@@ -347,7 +347,7 @@ public class ShotDialog extends MyDialog
       LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
     lp.setMargins( 0, 10, 20, 10 );
 
-    if ( TDSetting.mLevelOverNormal ) {
+    if ( TDLevel.overNormal ) {
       mRBdup       = new MyCheckBox( mContext, size, R.drawable.iz_dup_ok, R.drawable.iz_dup_no );
       mRBsurf      = new MyCheckBox( mContext, size, R.drawable.iz_surface_ok, R.drawable.iz_surface_no );
       mRBcmtd      = new MyCheckBox( mContext, size, R.drawable.iz_comment_ok, R.drawable.iz_comment_no );
@@ -361,7 +361,7 @@ public class ShotDialog extends MyDialog
     mCBrenumber  = new MyCheckBox( mContext, size, R.drawable.iz_numbers_ok, R.drawable.iz_numbers_no );
     mCBallSplay  = new MyCheckBox( mContext, size, R.drawable.iz_splays_ok, R.drawable.iz_splays_no );
 
-    if ( TDSetting.mLevelOverAdvanced ) {
+    if ( TDLevel.overAdvanced ) {
       if ( shot_xsplay ) {
         mCBxSplay = new MyCheckBox( mContext, size, R.drawable.iz_xsplays_ok, R.drawable.iz_ysplays_no );
       } else {
@@ -370,16 +370,16 @@ public class ShotDialog extends MyDialog
       mCBxSplay.setOnClickListener( this );
     }
   
-    if ( TDSetting.mLevelOverExpert ) {
+    if ( TDLevel.overExpert ) {
       mRBsplay = new MyStateBox( mContext, R.drawable.iz_plan_profile, R.drawable.iz_plan, R.drawable.iz_extended );
       mRBsplay.setOnClickListener( this );
     }
     // mCBhighlight = new MyCheckBox( mContext, size, R.drawable.iz_highlight_ok, R.drawable.iz_highlight_no );
 
     int nr_buttons = 4;
-    if ( TDSetting.mLevelOverNormal   ) nr_buttons += 3;
-    if ( TDSetting.mLevelOverAdvanced ) nr_buttons += 1;
-    if ( TDSetting.mLevelOverExpert   ) nr_buttons += 1;
+    if ( TDLevel.overNormal   ) nr_buttons += 3;
+    if ( TDLevel.overAdvanced ) nr_buttons += 1;
+    if ( TDLevel.overExpert   ) nr_buttons += 1;
     mButton = new Button[nr_buttons];
 
     int k = 0;
@@ -495,11 +495,11 @@ public class ShotDialog extends MyDialog
     }
 
     shot_flag = DBlock.BLOCK_SURVEY;
-    if ( TDSetting.mLevelOverNormal ) {
+    if ( TDLevel.overNormal ) {
       if ( mRBdup.isChecked() )       { shot_flag = DBlock.BLOCK_DUPLICATE; }
       else if ( mRBsurf.isChecked() ) { shot_flag = DBlock.BLOCK_SURFACE; }
       else if ( mRBcmtd.isChecked() ) { shot_flag = DBlock.BLOCK_COMMENTED; }
-      else if ( TDSetting.mLevelOverExpert ) {
+      else if ( TDLevel.overExpert ) {
         if ( mRBsplay.getState() == 1 )      { shot_flag = DBlock.BLOCK_NO_PROFILE; }
         else if ( mRBsplay.getState() == 2 ) { shot_flag = DBlock.BLOCK_NO_PLAN; }
       }
@@ -633,25 +633,25 @@ public class ShotDialog extends MyDialog
         if ( mCBxSplay != null ) mCBxSplay.setState( false );
       }
 
-    } else if ( TDSetting.mLevelOverNormal && b == mRBdup ) {
+    } else if ( TDLevel.overNormal && b == mRBdup ) {
       if ( mRBdup.toggleState() ) {
         mRBsurf.setState( false );
         mRBcmtd.setState( false );
-        if ( TDSetting.mLevelOverExpert ) mRBsplay.setState( 0 );
+        if ( TDLevel.overExpert ) mRBsplay.setState( 0 );
       }
-    } else if ( TDSetting.mLevelOverNormal && b == mRBsurf ) {
+    } else if ( TDLevel.overNormal && b == mRBsurf ) {
       if ( mRBsurf.toggleState() ) {
         mRBdup.setState( false );
         mRBcmtd.setState( false );
-        if ( TDSetting.mLevelOverExpert ) mRBsplay.setState( 0 );
+        if ( TDLevel.overExpert ) mRBsplay.setState( 0 );
       }
-    } else if ( TDSetting.mLevelOverNormal && b == mRBcmtd ) {
+    } else if ( TDLevel.overNormal && b == mRBcmtd ) {
       if ( mRBcmtd.toggleState() ) {
         mRBdup.setState( false );
         mRBsurf.setState( false );
-        if ( TDSetting.mLevelOverExpert ) mRBsplay.setState( 0 );
+        if ( TDLevel.overExpert ) mRBsplay.setState( 0 );
       }
-    } else if ( TDSetting.mLevelOverExpert && b == mRBsplay ) {
+    } else if ( TDLevel.overExpert && b == mRBsplay ) {
       mRBsplay.setState( ( mRBsplay.getState() + 1 ) % 3 );
       if ( mRBsplay.getState() > 0 ) {
         mRBdup.setState( false );

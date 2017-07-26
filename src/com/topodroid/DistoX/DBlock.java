@@ -152,16 +152,9 @@ public class DBlock
     return false;
   }
 
-  boolean isMagneticBad( )
-  {
-    if ( mAcceleration == 0.0f || mMagnetic == 0.0f ) return false;
-    return TopoDroidApp.isBlockMagneticBad( mAcceleration, mMagnetic, mDip );
-  }
-
   boolean isRecent( long id ) { return mId >= id; }
 
   boolean isMultiBad() { return mMultiBad; }
-
 
   // used by PocketTopo parser only
   public DBlock( String f, String t, float d, float b, float c, float r, int e, int type, int shot_type )
@@ -408,12 +401,12 @@ public class DBlock
     return String.format(Locale.US, "%.1f", mClino * TDSetting.mUnitAngle );
   }
 
-  public String extraString()
+  public String extraString( )
   {
     return String.format(Locale.US, "A %.1f  M %.1f  D %.1f", 
-      TopoDroidApp.deltaAcc( mAcceleration ), 
-      TopoDroidApp.deltaMag( mMagnetic ), 
-      TopoDroidApp.deltaDip( mDip ) * TDSetting.mUnitAngle
+      DistoXAccuracy.deltaAcc( mAcceleration ), 
+      DistoXAccuracy.deltaMag( mMagnetic ), 
+      DistoXAccuracy.deltaDip( mDip ) * TDSetting.mUnitAngle
     );
   }
 

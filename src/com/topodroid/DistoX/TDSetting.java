@@ -13,7 +13,6 @@ package com.topodroid.DistoX;
 
 import android.os.Build;
 import android.content.Context;
-import android.provider.Settings.Secure;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -193,19 +192,6 @@ class TDSetting
 
   // prefs default values
   static String  mDefaultTeam = "";
-
-  static final int LEVEL_BASIC    = 0;
-  static final int LEVEL_NORMAL   = 1;
-  static final int LEVEL_ADVANCED = 2;
-  static final int LEVEL_EXPERT   = 3;
-  static final int LEVEL_TESTER   = 4;
-  static final int LEVEL_COMPLETE = 5;
-  static int mActivityLevel = 1;
-  static boolean mLevelOverBasic    = true;
-  static boolean mLevelOverNormal   = false;
-  static boolean mLevelOverAdvanced = false;
-  static boolean mLevelOverExpert   = false;
-  static boolean mLevelOverTester   = false;
 
   static int mSizeButtons     = 42;      // action bar buttons scale (either 1 or 2)
   static int mTextSize        = 16;     // list text size 
@@ -594,9 +580,9 @@ class TDSetting
   {
     mLoopClosure = loop_closure;
     if ( mLoopClosure == LOOP_CYCLES ) {
-      if ( ! mLevelOverAdvanced ) mLoopClosure = LOOP_NONE;
+      if ( ! TDLevel.overAdvanced ) mLoopClosure = LOOP_NONE;
     } else if ( mLoopClosure == LOOP_TRIANGLES ) {
-      if ( ! mLevelOverExpert ) mLoopClosure = LOOP_NONE;
+      if ( ! TDLevel.overExpert ) mLoopClosure = LOOP_NONE;
     }
   }
 
@@ -617,8 +603,8 @@ class TDSetting
     // ------------------- GENERAL PREFERENCES
     int k = 0;
 
-    mActivityLevel = Integer.parseInt( prefs.getString( key[k++], "1" ) ); // DISTOX_EXTRA_BUTTONS choice: 0, 1, 2, 3
-    setActivityBooleans( app );
+    int level = Integer.parseInt( prefs.getString( key[k++], "1" ) ); // DISTOX_EXTRA_BUTTONS choice: 0, 1, 2, 3
+    setActivityBooleans( app, level );
 
     mSizeButtons = getSizeButtons( tryInt( prefs, key[k++], "1" ) ); // choice: 1, 2, 3, 4  // DISTOX_BUTTON_SIZE
     mTextSize    = tryInt( prefs, key[k++], "16" );                // DISTOX_TEXT_SIZE
@@ -820,22 +806,10 @@ class TDSetting
     mAlgoMinDelta     = tryFloat( prefs, key[k++], "1.0" );   // DISTOX_ALGO_MIN_DELTA
   }
 
-  static private void setActivityBooleans( Context ctx )
+  static private void setActivityBooleans( Context ctx, int level )
   {
-    mLevelOverBasic    = mActivityLevel > LEVEL_BASIC;
-    mLevelOverNormal   = mActivityLevel > LEVEL_NORMAL;
-    mLevelOverAdvanced = mActivityLevel > LEVEL_ADVANCED;
-    mLevelOverExpert   = mActivityLevel > LEVEL_EXPERT;
-    // mLevelOverTester  = mActivityLevel > LEVEL_TESTER;
-    if ( mLevelOverExpert ) {
-      String android_id = Secure.getString( ctx.getContentResolver(), Secure.ANDROID_ID );
-      // Log.v("DistoX", "android_id <" + android_id + ">");
-      if ( // "e5582eda21cafac3".equals( android_id ) || // Nexus-4
-           "8c894b79b6dce351".equals( android_id ) ) {   // Samsung Note-3
-        mLevelOverTester = true;
-      }
-    }
-    if ( ! mLevelOverExpert ) {
+    TDLevel.setLevel( ctx, level );
+    if ( ! TDLevel.overExpert ) {
       mMagAnomaly = false;
     }
   }
@@ -850,9 +824,8 @@ class TDSetting
     // ---------------- PRIMARY PREFERENCES ---------------------------
     if ( k.equals( key[ nk++ ] ) ) {                     // DISTOX_EXTRA_BUTTONS
       int level = tryInt( prefs, k, "1" );
-      if ( level != mActivityLevel ) {
-        mActivityLevel = level;
-        setActivityBooleans( app );
+      if ( level != TDLevel.mLevel ) {
+        setActivityBooleans( app, level );
         if ( main_window != null ) {
           main_window.resetButtonBar();
           main_window.setMenuAdapter( app.getResources() );

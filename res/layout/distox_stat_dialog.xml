@@ -106,7 +106,9 @@
         android:layout_height="0dp"
         android:transcriptMode="alwaysScroll"
         android:layout_weight="1"
-        android:textSize="12sp"
+        android:textSize="@dimen/textsize"
+        android:divider="@color/divider"
+        android:dividerHeight="2dp"
         />  
 
     <LinearLayout 

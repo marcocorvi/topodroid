@@ -90,7 +90,7 @@ public class PlotNewDialog extends MyDialog
     //   }
     // } );
          
-    if ( ! TDSetting.mLevelOverAdvanced ) {
+    if ( ! TDLevel.overAdvanced ) {
       LinearLayout layout3 = (LinearLayout) findViewById( R.id.layout3 );
       layout3.setVisibility( View.GONE );
     }
@@ -173,7 +173,7 @@ public class PlotNewDialog extends MyDialog
 
       boolean extended = true;
       // int project = 0;
-      if ( TDSetting.mLevelOverAdvanced ) {
+      if ( TDLevel.overAdvanced ) {
         extended = mCBextended.isChecked();
         // if ( ! extended ) {
         //   try {

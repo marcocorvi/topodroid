@@ -123,7 +123,9 @@
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:transcriptMode="alwaysScroll"
-        android:textSize="12sp"
+        android:textSize="@dimen/textsize"
+        android:divider="@color/divider"
+        android:dividerHeight="2dp"
         />  
 
 

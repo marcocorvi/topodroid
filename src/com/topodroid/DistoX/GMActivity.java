@@ -193,7 +193,7 @@ public class GMActivity extends Activity
         // mCalibration.setAlgorith( mAlgo == 2 ); // CALIB_AUTO_NON_LINEAR
         break;
       case CalibInfo.ALGO_MINIMUM:
-        if ( TDSetting.mLevelOverTester ) {
+        if ( TDLevel.overTester ) {
           mCalibration = new CalibAlgoMin( 0, false );
           break;
         }
@@ -259,7 +259,7 @@ public class GMActivity extends Activity
         calib1 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr ), true );
         break;
       case CalibInfo.ALGO_MINIMUM:
-        if ( TDSetting.mLevelOverTester ) {
+        if ( TDLevel.overTester ) {
           calib1 = new CalibAlgoMin( CalibAlgo.stringToCoeff( coeffStr ), false );
           break;
         }
@@ -278,7 +278,7 @@ public class GMActivity extends Activity
         calib0 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr ), true );
         break;
       case CalibInfo.ALGO_MINIMUM:
-        if ( TDSetting.mLevelOverTester ) {
+        if ( TDLevel.overTester ) {
           calib0 = new CalibAlgoMin( CalibAlgo.stringToCoeff( coeffStr ), false );
           break;
         }
@@ -694,8 +694,8 @@ public class GMActivity extends Activity
     int size = mApp.setListViewHeight( mListView );
 
     mNrButton1 = 5;
-    if ( TDSetting.mLevelOverBasic  ) mNrButton1 += 1; // COVER
-    if ( TDSetting.mLevelOverNormal ) mNrButton1 += 2; // READ WRITE
+    if ( TDLevel.overBasic  ) mNrButton1 += 1; // COVER
+    if ( TDLevel.overNormal ) mNrButton1 += 2; // READ WRITE
     Resources res = getResources();
     mButton1 = new Button[ mNrButton1 ];
     for ( int k=0; k<mNrButton1; ++k ) {
@@ -707,11 +707,11 @@ public class GMActivity extends Activity
     mBMbluetooth_no = MyButton.getButtonBackground( mApp, res, izonsno[BTN_BT] );
     mBMtoggle       = MyButton.getButtonBackground( mApp, res, izons[BTN_TOGGLE] );
     mBMtoggle_no    = MyButton.getButtonBackground( mApp, res, izonsno[BTN_TOGGLE] );
-    if ( TDSetting.mLevelOverBasic ) {
+    if ( TDLevel.overBasic ) {
       mBMcover        = MyButton.getButtonBackground( mApp, res, izons[BTN_COVER] );
       mBMcover_no     = MyButton.getButtonBackground( mApp, res, izonsno[BTN_COVER] );
     }
-    if ( TDSetting.mLevelOverNormal ) {
+    if ( TDLevel.overNormal ) {
       mBMread         = MyButton.getButtonBackground( mApp, res, izons[BTN_READ] );
       mBMread_no      = MyButton.getButtonBackground( mApp, res, izonsno[BTN_READ] );
       mBMwrite        = MyButton.getButtonBackground( mApp, res, izons[BTN_WRITE] );
@@ -750,11 +750,11 @@ public class GMActivity extends Activity
   private void enableWrite( boolean enable ) 
   {
     mEnableWrite = enable;
-    if ( TDSetting.mLevelOverBasic ) {
+    if ( TDLevel.overBasic ) {
       mButton1[BTN_COVER].setEnabled( enable );
       mButton1[BTN_COVER].setBackgroundDrawable( ( enable ? mBMcover : mBMcover_no ) );
     }
-    if ( TDSetting.mLevelOverNormal ) {
+    if ( TDLevel.overNormal ) {
       mButton1[BTN_WRITE].setEnabled( enable );
       mButton1[BTN_WRITE].setBackgroundDrawable( ( enable ? mBMwrite : mBMwrite_no ) );
     }
@@ -767,11 +767,11 @@ public class GMActivity extends Activity
 
     mButton1[BTN_TOGGLE].setEnabled( enable );
     mButton1[BTN_BT].setEnabled( enable );
-    if ( TDSetting.mLevelOverBasic ) {
+    if ( TDLevel.overBasic ) {
       mButton1[BTN_COVER].setEnabled( enable2 );
       mButton1[BTN_COVER].setBackgroundDrawable( ( enable2 ? mBMcover : mBMcover_no ) );
     }
-    if ( TDSetting.mLevelOverNormal ) {
+    if ( TDLevel.overNormal ) {
       mButton1[BTN_READ].setEnabled( enable );
       mButton1[BTN_READ].setBackgroundDrawable( ( enable ? mBMread : mBMread_no ) );
       mButton1[BTN_WRITE].setEnabled( enable2 );
@@ -790,7 +790,7 @@ public class GMActivity extends Activity
 
   void doBluetooth( Button b )
   {
-    if ( TDSetting.mLevelOverAdvanced && mApp.distoType() == Device.DISTO_X310 ) {
+    if ( TDLevel.overAdvanced && mApp.distoType() == Device.DISTO_X310 ) {
       CutNPaste.showPopupBT( this, this, mApp, b, true );
     } else {
       mApp.resetComm();
@@ -881,7 +881,7 @@ public class GMActivity extends Activity
         Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT ).show();
       }
 
-    } else if ( TDSetting.mLevelOverBasic && b == mButton1[BTN_COVER] ) { // COVER
+    } else if ( TDLevel.overBasic && b == mButton1[BTN_COVER] ) { // COVER
       if ( mCalibration == null ) {
         Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT ).show();
       } else {
@@ -893,11 +893,11 @@ public class GMActivity extends Activity
         }
       }
 
-    } else if ( TDSetting.mLevelOverNormal && b == mButton1[BTN_READ] ) { // READ
+    } else if ( TDLevel.overNormal && b == mButton1[BTN_READ] ) { // READ
       enableButtons( false );
       new CalibReadTask( this, this, mApp, CalibReadTask.PARENT_GM ).execute(); // 
 
-    } else if (TDSetting.mLevelOverNormal &&  b == mButton1[BTN_WRITE] ) { // WRITE
+    } else if (TDLevel.overNormal &&  b == mButton1[BTN_WRITE] ) { // WRITE
       // if ( mEnableWrite ) {
         if ( mCalibration == null ) {
           Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT).show();
@@ -1074,7 +1074,7 @@ public class GMActivity extends Activity
     mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
 
     mMenuAdapter.add( res.getString( menus[0] ) );
-    if ( TDSetting.mLevelOverAdvanced ) mMenuAdapter.add( res.getString( menus[1] ) );
+    if ( TDLevel.overAdvanced ) mMenuAdapter.add( res.getString( menus[1] ) );
     mMenuAdapter.add( res.getString( menus[2] ) );
     mMenuAdapter.add( res.getString( menus[3] ) );
     
@@ -1097,7 +1097,7 @@ public class GMActivity extends Activity
     if ( p++ == pos ) { // DISPLAY
       mBlkStatus = 1 - mBlkStatus;       // 0 --> 1;  1 --> 0
       updateDisplay( );
-    } else if ( TDSetting.mLevelOverAdvanced && p++ == pos ) { // VALIDATE
+    } else if ( TDLevel.overAdvanced && p++ == pos ) { // VALIDATE
       List< String > list = mApp.mDData.selectDeviceCalibs( mApp.mDevice.mAddress );
       for ( String str : list ) {
         int len = str.indexOf(' ');

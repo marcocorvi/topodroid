@@ -68,10 +68,12 @@
       android:layout_height="match_parent"
       android:stackFromBottom="true"
       android:transcriptMode="disabled"
-      android:textSize="12sp"
+      android:textSize="@dimen/textsize"
       android:fastScrollEnabled="true"
       android:scrollingCache="true"
       android:smoothScrollbar="false"
+      android:divider="@color/divider"
+      android:dividerHeight="2dp"
       android:background="#111"
     />  
     <!--

@@ -10,14 +10,16 @@
         android:layout_height="0dp"
         android:transcriptMode="alwaysScroll"
         android:layout_weight="1"
-        android:textSize="12sp"
+        android:textSize="@dimen/textsize"
         android:layout_marginBottom="10sp"
+        android:divider="@color/divider"
+        android:dividerHeight="2dp"
         />  
 
       <TextView android:id="@+id/file"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
-          android:textSize="14sp"
+          android:textSize="@dimen/textsizebig"
       />
 
   </LinearLayout>

@@ -9,7 +9,7 @@
   <!-- TextView android:id="@+id/shot_data"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
-        android:textSize="18sp"
+        android:textSize="@dimen/textsizebig"
         android:text="@string/shot_info"
         / -->
   
@@ -23,7 +23,7 @@
       android:layout_width="0sp"
       android:layout_weight="30"
       android:layout_height="wrap_content" 
-      android:textSize="18sp"
+      android:textSize="@dimen/textsizebig"
       android:layout_marginRight="10sp"
       android:nextFocusDown="@+id/shot_bearing"
       android:singleLine="true"
@@ -33,7 +33,7 @@
       android:layout_width="0sp"
       android:layout_weight="30"
       android:layout_height="wrap_content" 
-      android:textSize="18sp"
+      android:textSize="@dimen/textsizebig"
       android:layout_marginRight="10sp"
       android:nextFocusDown="@+id/shot_clino"
       android:singleLine="true"
@@ -43,7 +43,7 @@
       android:layout_width="0sp"
       android:layout_weight="30"
       android:layout_height="wrap_content" 
-      android:textSize="18sp"
+      android:textSize="@dimen/textsizebig"
       android:nextFocusDown="@+id/shot_from"
       android:singleLine="true"
       android:inputType="numberDecimal|numberSigned"
@@ -54,7 +54,7 @@
     android:layout_below="@id/layout1"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content" 
-    android:textSize="18sp"
+    android:textSize="@dimen/textsizebig"
     android:text="@string/shot_info"
     />
 

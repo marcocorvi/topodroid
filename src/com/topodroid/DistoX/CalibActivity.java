@@ -156,7 +156,7 @@ public class CalibActivity extends Activity
     mCBAlgoNonLinear = (RadioButton) findViewById( R.id.calib_algo_non_linear );
     mCBAlgoMinimum   = (RadioButton) findViewById( R.id.calib_algo_minimum );
 
-    if ( ! TDSetting.mLevelOverTester ) {
+    if ( ! TDLevel.overTester ) {
       mCBAlgoMinimum.setVisibility( View.GONE );
     }
 
@@ -164,7 +164,7 @@ public class CalibActivity extends Activity
     int size = mApp.setListViewHeight( mListView );
 
     Resources res = getResources();
-    mNrButton1 = 2 + ( TDSetting.mLevelOverNormal? 1 : 0 );
+    mNrButton1 = 2 + ( TDLevel.overNormal? 1 : 0 );
     mButton1 = new Button[ mNrButton1 ];
     for ( int k=0; k<mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( this, this, izons[k] );
@@ -426,8 +426,8 @@ public class CalibActivity extends Activity
     // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
     mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
 
-    if ( TDSetting.mLevelOverNormal ) mMenuAdapter.add( res.getString( menus[0] ) );
-    if ( TDSetting.mLevelOverBasic  ) mMenuAdapter.add( res.getString( menus[1] ) );
+    if ( TDLevel.overNormal ) mMenuAdapter.add( res.getString( menus[0] ) );
+    if ( TDLevel.overBasic  ) mMenuAdapter.add( res.getString( menus[1] ) );
     mMenuAdapter.add( res.getString( menus[2] ) );
     mMenuAdapter.add( res.getString( menus[3] ) );
     mMenu.setAdapter( mMenuAdapter );
@@ -447,13 +447,13 @@ public class CalibActivity extends Activity
     closeMenu();
     // Toast.makeText(this, item.toString(), Toast.LENGTH_SHORT).show();
     int p = 0;
-    if ( TDSetting.mLevelOverNormal && p++ == pos ) { // EXPORT
+    if ( TDLevel.overNormal && p++ == pos ) { // EXPORT
       if ( mApp.myCalib != null ) {
         // new CalibExportDialog( this, this ).show();
         new ExportDialog( this, this, TDConst.mCalibExportTypes, R.string.title_calib_export ).show();
       }
 
-    } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // DELETE 
+    } else if ( TDLevel.overBasic && p++ == pos ) { // DELETE 
       if ( mApp.myCalib != null ) {
         askDelete();
       }

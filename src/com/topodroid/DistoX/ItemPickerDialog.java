@@ -338,7 +338,7 @@ class ItemPickerDialog extends MyDialog
         
   private void createAdapters( boolean use_text )
   {
-    // if ( TDSetting.mLevelOverBasic ) 
+    // if ( TDLevel.overBasic ) 
     {
       mPointAdapter = new ItemAdapter( mContext, this, Symbol.POINT, 
                                        R.layout.item, new ArrayList<ItemSymbol>() );
@@ -361,7 +361,7 @@ class ItemPickerDialog extends MyDialog
       }
     }
 
-    // if ( TDSetting.mLevelOverBasic )
+    // if ( TDLevel.overBasic )
     {
       mAreaAdapter  = new ItemAdapter( mContext, this, Symbol.AREA,
                                        R.layout.item, new ArrayList<ItemSymbol>() );
@@ -384,7 +384,7 @@ class ItemPickerDialog extends MyDialog
     if ( TDSetting.mPickerType != TDSetting.PICKER_GRID_3 ) {
       switch ( mItemType ) {
         case Symbol.POINT:
-          // if ( TDSetting.mLevelOverBasic )
+          // if ( TDLevel.overBasic )
           {
             mAdapter = mPointAdapter;
             mBTpoint.getBackground().setColorFilter( TDColor.LIGHT_BLUE, PorterDuff.Mode.LIGHTEN );
@@ -402,7 +402,7 @@ class ItemPickerDialog extends MyDialog
           mSeekBar.setVisibility( View.INVISIBLE );
           break;
         case Symbol.AREA:
-          // if ( TDSetting.mLevelOverBasic )
+          // if ( TDLevel.overBasic )
           {
             mAdapter = mAreaAdapter;
             mBTpoint.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
@@ -489,7 +489,7 @@ class ItemPickerDialog extends MyDialog
     ItemSymbol is;
     switch ( type ) {
       case Symbol.POINT: 
-        if ( mPointAdapter != null /* && TDSetting.mLevelOverBasic */ ) {
+        if ( mPointAdapter != null /* && TDLevel.overBasic */ ) {
           is = mPointAdapter.get( index );
           // Log.v( TDLog.TAG, "set TypeAndItem type point pos " + index + " index " + is.mIndex );
           mSelectedPoint = is.mIndex;
@@ -510,7 +510,7 @@ class ItemPickerDialog extends MyDialog
         }
         break;
       case Symbol.AREA: 
-        if ( mAreaAdapter != null /* && TDSetting.mLevelOverBasic */ ) {
+        if ( mAreaAdapter != null /* && TDLevel.overBasic */ ) {
           // mAreaPos = index;
           is = mAreaAdapter.get( index );
           // Log.v( TDLog.TAG, "set TypeAndItem type area pos " + index + " index " + is.mIndex );
@@ -530,7 +530,7 @@ class ItemPickerDialog extends MyDialog
   {
     switch ( mItemType ) {
       case Symbol.POINT: 
-        // if ( TDSetting.mLevelOverBasic ) 
+        // if ( TDLevel.overBasic ) 
         {
           // mParent.pointSelected( mSelectedPoint, false );
           // mSeekBar.setEnabled( BrushManager.mPointLib.isPointOrientable( mSelectedPoint ) );
@@ -545,7 +545,7 @@ class ItemPickerDialog extends MyDialog
         if ( mLineAdapter != null ) setTypeAndItem( mItemType, mLineAdapter.getSelectedPos() );
         break;
       case Symbol.AREA: 
-        // if ( TDSetting.mLevelOverBasic ) 
+        // if ( TDLevel.overBasic ) 
         {
           // mParent.areaSelected( mSelectedArea, false );
           if ( mAreaAdapter != null ) setTypeAndItem( mItemType, mAreaAdapter.getSelectedPos() );
@@ -559,7 +559,7 @@ class ItemPickerDialog extends MyDialog
   // void rotatePoint( int angle )
   // {
   //   if ( mPointAdapter == null ) return;
-  //   if ( TDSetting.mLevelOverBasic && mItemType == Symbol.POINT ) {
+  //   if ( TDLevel.overBasic && mItemType == Symbol.POINT ) {
   //     // Log.v( TopoDroidApp.TAG, "rotate point " + mSelectedPoint );
   //     mPointAdapter.rotatePoint( mSelectedPoint, angle );
   //   }
@@ -568,7 +568,7 @@ class ItemPickerDialog extends MyDialog
   private void setPointOrientation( int pos, int angle )
   {
     if ( mPointAdapter == null ) return;
-    if ( /* TDSetting.mLevelOverBasic && */ mItemType == Symbol.POINT ) {
+    if ( /* TDLevel.overBasic && */ mItemType == Symbol.POINT ) {
       mPointAdapter.setItemOrientation( pos, angle );
       // ItemSymbol item = mPointAdapter.getSelectedItem();
       // if ( item != null ) {
@@ -582,7 +582,7 @@ class ItemPickerDialog extends MyDialog
   private void setAreaOrientation( int pos, int angle )
   {
     if ( mAreaAdapter == null ) return;
-    if ( /* TDSetting.mLevelOverBasic && */ mItemType == Symbol.AREA ) {
+    if ( /* TDLevel.overBasic && */ mItemType == Symbol.AREA ) {
       mAreaAdapter.setItemOrientation( pos, angle );
       // ItemSymbol item = mAreaAdapter.getSelectedItem();
       // if ( item != null ) {
@@ -605,7 +605,7 @@ class ItemPickerDialog extends MyDialog
   {
     switch ( mItemType ) {
       case Symbol.POINT: 
-        // if ( TDSetting.mLevelOverBasic )
+        // if ( TDLevel.overBasic )
         {
           // Log.v("DistoX", "selected point " + mSelectedPoint );
           mParent.pointSelected( mSelectedPoint, true );
@@ -616,7 +616,7 @@ class ItemPickerDialog extends MyDialog
         mParent.lineSelected( mSelectedLine, true ); 
         break;
       case Symbol.AREA: 
-        // if ( TDSetting.mLevelOverBasic )
+        // if ( TDLevel.overBasic )
         {
           // Log.v("DistoX", "selected area " + mSelectedArea );
           mParent.areaSelected( mSelectedArea, true );
@@ -631,7 +631,7 @@ class ItemPickerDialog extends MyDialog
     // Log.v("DistoX", "ItemPicker onClick()" );
     switch (view.getId()) {
       case R.id.item_point:
-        // if ( TDSetting.mLevelOverBasic )
+        // if ( TDLevel.overBasic )
         {
           if ( mItemType != Symbol.POINT ) {
             mItemType = Symbol.POINT;
@@ -650,7 +650,7 @@ class ItemPickerDialog extends MyDialog
         }
         break;
       case R.id.item_area:
-        // if ( TDSetting.mLevelOverBasic )
+        // if ( TDLevel.overBasic )
         {
           if ( mItemType != Symbol.AREA ) {
             mItemType = Symbol.AREA;

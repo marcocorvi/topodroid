@@ -5,4 +5,11 @@
   <dimen name="activity_vertical_margin">16dp</dimen>
   <dimen name="nav_drawer_width">260dp</dimen>
 -->
+  <dimen name="size">14sp</dimen>
+  <dimen name="sizeplus">16sp</dimen>
+
+  <dimen name="textsize">14sp</dimen>
+  <dimen name="textsizehead">16sp</dimen>
+  <dimen name="textsizebig">18sp</dimen>
+  <dimen name="textsizehuge">24sp</dimen>
 </resources>

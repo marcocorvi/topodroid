@@ -234,7 +234,7 @@ public class ShotNewDialog extends MyDialog
     mBtnSensor.setLayoutParams( params );
     mBtnSensor.setOnClickListener( this );
 
-    if ( TDSetting.mLevelOverAdvanced && hasPhoto ) {
+    if ( TDLevel.overAdvanced && hasPhoto ) {
       
       mBtnCamera = new MyCheckBox( mContext, size, R.drawable.iz_camera, R.drawable.iz_camera ); 
       layout4.addView( mBtnCamera );
@@ -484,7 +484,7 @@ public class ShotNewDialog extends MyDialog
     } else if ( b == mBtnSensor ) {
       mTimer = new TimerTask( mContext, this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
       mTimer.execute();
-    } else if ( hasPhoto && b == mBtnCamera && TDSetting.mLevelOverAdvanced ) {
+    } else if ( hasPhoto && b == mBtnCamera && TDLevel.overAdvanced ) {
       new QCamCompass( mContext, this, null, true, true).show();  // null inserter, with_box, with_delay
     } else if ( b == mBtnBack ) {
       dismiss();

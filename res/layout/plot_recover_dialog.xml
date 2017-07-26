@@ -10,7 +10,7 @@
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
-      android:textSize="18sp"
+      android:textSize="@dimen/textsizebig"
       />
 
    <ListView android:id="@+id/th2_list"
@@ -20,7 +20,7 @@
           android:transcriptMode="alwaysScroll"
           android:layout_weight="1"
           android:paddingTop="25sp"
-          android:textSize="14sp"
+          android:textSize="@dimen/textsize"
     />  
 
    <LinearLayout 

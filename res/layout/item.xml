@@ -7,18 +7,18 @@
   <CheckBox 
     android:id="@+id/item_radio"
     android:layout_width="60sp"
-    android:layout_height="14sp"
+    android:layout_height="@dimen/sizeplus"
     />
   <Button 
     android:id="@+id/item_button"
     android:layout_width="60sp"
-    android:layout_height="14sp"
+    android:layout_height="@dimen/sizeplus"
     />
   <TextView 
     android:id="@+id/item_text"
     android:layout_width="60sp"
-    android:layout_height="14sp"
-    android:textSize="12sp"
+    android:layout_height="@dimen/sizeplus"
+    android:textSize="@dimen/textsize"
     android:typeface="monospace"
     android:layout_marginLeft="6sp"
     />

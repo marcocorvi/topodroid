@@ -170,9 +170,9 @@ public class ShotWindow extends Activity
                           R.string.help_help
                       };
 
-  private TopoDroidApp mApp;
+  private TopoDroidApp   mApp;
+  private Activity       mActivity;
   private DataDownloader mDataDownloader;
-  private Activity mActivity;
 
   boolean mSplay = true;  //!< whether to hide splay shots
   boolean mLeg   = true;  //!< whether to hide leg extra shots
@@ -202,7 +202,7 @@ public class ShotWindow extends Activity
 
   public void setRefAzimuthButton()
   {
-    if ( ! TDSetting.mLevelOverNormal ) return;
+    if ( ! TDLevel.overNormal ) return;
     if ( BTN_AZIMUTH >= mButton1.length ) return;
     if ( TDAzimuth.mFixedExtend == 0 ) {
       android.graphics.Matrix m = new android.graphics.Matrix();
@@ -258,32 +258,6 @@ public class ShotWindow extends Activity
   //   return mApp.mData.getNextStationName( mApp.mSID );
   // }
 
-  private void computeMeans( List<DBlock> list )
-  {
-    TopoDroidApp.mAccelerationMean = 0.0f;
-    TopoDroidApp.mMagneticMean     = 0.0f;
-    TopoDroidApp.mDipMean          = 0.0f;
-    int size = list.size();
-    if ( size > 0 ) {
-      int cnt = 0;
-      for ( DBlock blk : list ) {
-        if ( blk.mAcceleration > 10.0 ) {
-          TopoDroidApp.mAccelerationMean += blk.mAcceleration;
-          TopoDroidApp.mMagneticMean     += blk.mMagnetic;
-          TopoDroidApp.mDipMean          += blk.mDip;
-          ++ cnt;
-        }
-      }
-      if ( cnt > 0 ) {
-        TopoDroidApp.mAccelerationMean /= cnt;
-        TopoDroidApp.mMagneticMean     /= cnt;
-        TopoDroidApp.mDipMean          /= cnt;
-      }
-      // Log.v( TopoDroidApp.TAG, "Acc " + TopoDroidApp.mAccelerationMean + " Mag " + TopoDroidApp.mMagneticMean 
-      //                          + " Dip " + TopoDroidApp.mDipMean );
-    }
-  }
-
   @Override
   public void refreshDisplay( int nr, boolean toast ) 
   {
@@ -313,7 +287,7 @@ public class ShotWindow extends Activity
     DataHelper data = mApp.mData;
     if ( data != null && mApp.mSID >= 0 ) {
       List<DBlock> list = data.selectAllShots( mApp.mSID, TDStatus.NORMAL );
-      if ( list.size() > 4 ) computeMeans( list );
+      if ( list.size() > 4 ) DistoXAccuracy.addBlocks( list );
 
       List< PhotoInfo > photos = data.selectAllPhotos( mApp.mSID, TDStatus.NORMAL );
       // TDLog.Log( TDLog.LOG_SHOT, "update Display() shot list size " + list.size() );
@@ -372,6 +346,7 @@ public class ShotWindow extends Activity
     if ( mDataAdapter != null ) {
       // FIXME 3.3.0
       mDataAdapter.addDataBlock( blk );
+      DistoXAccuracy.addBlock( blk );
       if ( TDSetting.mBacksightShot || TDSetting.mTripodShot ) {
         mApp.assignStationsAll( mDataAdapter.mItems );
       } else {
@@ -591,7 +566,7 @@ public class ShotWindow extends Activity
   void onBlockLongClick( DBlock blk )
   {
     mShotId = blk.mId;
-    if ( TDSetting.mLevelOverNormal ) {
+    if ( TDLevel.overNormal ) {
       (new PhotoSensorsDialog(mActivity, this, blk ) ).show();
     } else {
       (new ShotDeleteDialog( mActivity, this, blk ) ).show();
@@ -612,10 +587,10 @@ public class ShotWindow extends Activity
       intent.putExtra( TDTag.TOPODROID_OLDSID, -1 ); // old_sid 
       intent.putExtra( TDTag.TOPODROID_OLDID,  -1 ); // old_id 
       startActivityForResult( intent, TDRequest.INFO_ACTIVITY_SHOTWINDOW );
-    // } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // CURRENT STATION
+    // } else if ( TDLevel.overBasic && p++ == pos ) { // CURRENT STATION
     //   (new CurrentStationDialog( this, this, mApp )).show();
 
-    } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // RECOVER
+    } else if ( TDLevel.overBasic && p++ == pos ) { // RECOVER
       List< DBlock > shots1 = mApp.mData.selectAllShots( mApp.mSID, TDStatus.DELETED );
       List< DBlock > shots2 = mApp.mData.selectAllShots( mApp.mSID, TDStatus.OVERSHOOT );
       List< DBlock > shots3 = mApp.mData.selectAllShots( mApp.mSID, TDStatus.CHECK );
@@ -626,11 +601,11 @@ public class ShotWindow extends Activity
         (new UndeleteDialog(mActivity, this, mApp.mData, mApp.mSID, shots1, shots2, shots3, plots ) ).show();
       }
       // updateDisplay( );
-    } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // PHOTO
+    } else if ( TDLevel.overNormal && p++ == pos ) { // PHOTO
       mActivity.startActivity( new Intent( mActivity, PhotoActivity.class ) );
-    } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // SENSORS
+    } else if ( TDLevel.overNormal && p++ == pos ) { // SENSORS
       mActivity.startActivity( new Intent( mActivity, SensorListActivity.class ) );
-    } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // 3D
+    } else if ( TDLevel.overBasic && p++ == pos ) { // 3D
       if ( mApp.exportSurveyAsTh() != null ) { // make sure to have survey exported as therion
         try {
           Intent intent = new Intent( "Cave3D.intent.action.Launch" );
@@ -640,7 +615,7 @@ public class ShotWindow extends Activity
           Toast.makeText( mActivity, R.string.no_cave3d, Toast.LENGTH_SHORT ).show();
         }
       }
-    } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // DEVICE
+    } else if ( TDLevel.overNormal && p++ == pos ) { // DEVICE
       if ( mApp.mBTAdapter.isEnabled() ) {
         mActivity.startActivity( new Intent( Intent.ACTION_VIEW ).setClass( mActivity, DeviceActivity.class ) );
       }
@@ -649,7 +624,7 @@ public class ShotWindow extends Activity
       intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SURVEY );
       mActivity.startActivity( intent );
     } else if ( p++ == pos ) { // HELP
-      // int nn = mNrButton1; //  + ( TopoDroidApp.mLevelOverNormal ?  mNrButton2 : 0 );
+      // int nn = mNrButton1; //  + ( TDLevel.overNormal ?  mNrButton2 : 0 );
       (new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, menus.length ) ).show();
     }
   }
@@ -876,9 +851,9 @@ public class ShotWindow extends Activity
     // mButtonSize = mApp.setListViewHeight( mFootList );
 
     Resources res = getResources();
-    mNrButton1 = TDSetting.mLevelOverExpert ? 9
-               : TDSetting.mLevelOverNormal ? 8
-               : TDSetting.mLevelOverBasic ?  6 : 5;
+    mNrButton1 = TDLevel.overExpert ? 9
+               : TDLevel.overNormal ? 8
+               : TDLevel.overBasic ?  6 : 5;
     mButton1 = new Button[ mNrButton1 ];
     for ( int k=0; k<mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( this, this, izons[k] );
@@ -895,11 +870,11 @@ public class ShotWindow extends Activity
     mBMright         = MyButton.getButtonBackground( mApp, res, R.drawable.iz_right );
     mBMbluetooth_no  = MyButton.getButtonBackground( mApp, res, R.drawable.iz_bt_no );
 
-    if ( TDSetting.mLevelOverBasic ) {
+    if ( TDLevel.overBasic ) {
       mButton1[ BTN_DOWNLOAD ].setOnLongClickListener( this );
       mButton1[ BTN_PLOT ].setOnLongClickListener( this );
       mButton1[ BTN_MANUAL ].setOnLongClickListener( this );
-      if ( TDSetting.mLevelOverExpert ) {
+      if ( TDLevel.overExpert ) {
         mButton1[ BTN_SEARCH ].setOnLongClickListener( this );
       }
     }
@@ -1087,7 +1062,7 @@ public class ShotWindow extends Activity
   void doBluetooth( Button b )
   {
     if ( ! mDataDownloader.isDownloading() ) {
-      if ( TDSetting.mLevelOverAdvanced
+      if ( TDLevel.overAdvanced
              && mApp.distoType() == Device.DISTO_X310 
 	     && TDSetting.mConnectionMode != TDSetting.CONN_MODE_MULTI
 	  ) {
@@ -1202,14 +1177,14 @@ public class ShotWindow extends Activity
         }
 
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // ADD MANUAL SHOT
-        if ( TDSetting.mLevelOverBasic ) {
+        if ( TDLevel.overBasic ) {
           // mSecondLastShotId = mApp.lastShotId( );
           DBlock last_blk = mApp.mData.selectLastLegShot( mApp.mSID );
           // Log.v( "DistoX", "last blk: " + last_blk.toString() );
           (new ShotNewDialog( mActivity, mApp, this, last_blk, -1L )).show();
         }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // STATIONS
-        if ( TDSetting.mLevelOverNormal ) {
+        if ( TDLevel.overNormal ) {
           (new CurrentStationDialog( mActivity, this, mApp )).show();
           // ArrayList<DBlock> list = numberSplays(); // SPLAYS splays numbering no longer active
           // if ( list != null && list.size() > 0 ) {
@@ -1217,7 +1192,7 @@ public class ShotWindow extends Activity
           // }
         }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // AZIMUTH
-        if ( TDSetting.mLevelOverNormal ) {
+        if ( TDLevel.overNormal ) {
           if ( TDSetting.mAzimuthManual ) {
             setRefAzimuth( 0, - TDAzimuth.mFixedExtend );
           } else {
@@ -1647,11 +1622,11 @@ public class ShotWindow extends Activity
 
     mMenuAdapter.add( res.getString( menus[k++] ) );                                      // menu_survey
     mMenuAdapter.add( res.getString( menus[k++] ) );                                      // menu_close
-    if ( TDSetting.mLevelOverBasic  ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_recover
-    if ( TDSetting.mLevelOverNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_photo  
-    if ( TDSetting.mLevelOverNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_sensor
-    if ( TDSetting.mLevelOverBasic  ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_3d
-    if ( TDSetting.mLevelOverNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_distox
+    if ( TDLevel.overBasic  ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_recover
+    if ( TDLevel.overNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_photo  
+    if ( TDLevel.overNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_sensor
+    if ( TDLevel.overBasic  ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_3d
+    if ( TDLevel.overNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_distox
     mMenuAdapter.add( res.getString( menus[k++] ) );  // menu_options
     mMenuAdapter.add( res.getString( menus[k++] ) );  // menu_help
     mMenu.setAdapter( mMenuAdapter );

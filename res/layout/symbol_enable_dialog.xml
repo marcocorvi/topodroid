@@ -14,19 +14,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/POINT"
-                android:textSize="14sp"
+                android:textSize="@dimen/textsizehead"
         />
         <Button android:id="@+id/symbol_line"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/LINE"
-                android:textSize="14sp"
+                android:textSize="@dimen/textsizehead"
         />
         <Button android:id="@+id/symbol_area"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/AREA"
-                android:textSize="14sp"
+                android:textSize="@dimen/textsizehead"
         />
         <!-- LinearLayout 
           android:layout_width="fill_parent"

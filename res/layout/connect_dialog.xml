@@ -94,7 +94,7 @@
           android:stackFromBottom="true"
           android:transcriptMode="alwaysScroll"
           android:layout_weight="1"
-          android:textSize="12sp"
+          android:textSize="@dimen/textsize"
   />  
 
 

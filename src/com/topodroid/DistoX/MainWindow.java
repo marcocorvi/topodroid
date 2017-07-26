@@ -370,9 +370,9 @@ public class MainWindow extends Activity
     // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
     mMenuAdapter = new ArrayAdapter<String>(mActivity, R.layout.menu );
 
-    if ( TDSetting.mLevelOverNormal )   mMenuAdapter.add( res.getString( menus[0] ) ); // PALETTE
-    if ( TDSetting.mLevelOverAdvanced ) mMenuAdapter.add( res.getString( menus[1] ) ); // LOGS
-    if ( TDSetting.mLevelOverExpert && mApp.mCosurvey ) mMenuAdapter.add( res.getString( menus[2] ) ); // CO-SURVEY
+    if ( TDLevel.overNormal )   mMenuAdapter.add( res.getString( menus[0] ) ); // PALETTE
+    if ( TDLevel.overAdvanced ) mMenuAdapter.add( res.getString( menus[1] ) ); // LOGS
+    if ( TDLevel.overExpert && mApp.mCosurvey ) mMenuAdapter.add( res.getString( menus[2] ) ); // CO-SURVEY
     mMenuAdapter.add( res.getString( menus[3] ) ); // ABOUT
     mMenuAdapter.add( res.getString( menus[4] ) ); // SETTINGS
     mMenuAdapter.add( res.getString( menus[5] ) ); // HELP
@@ -394,18 +394,18 @@ public class MainWindow extends Activity
     // Toast.makeText(mActivity, item.toString(), Toast.LENGTH_SHORT).show();
     int p = 0;
       Intent intent;
-      if ( TDSetting.mLevelOverNormal && p++ == pos ) { // PALETTE EXTRA SYMBOLS
+      if ( TDLevel.overNormal && p++ == pos ) { // PALETTE EXTRA SYMBOLS
         // BrushManager.makePaths( getResources() );
         // (new SymbolEnableDialog( mActivity, mApp )).show();
 
-        (new SymbolReload( mActivity, mApp, TDSetting.mLevelOverExpert )).show();
+        (new SymbolReload( mActivity, mApp, TDLevel.overExpert )).show();
       } else 
-      if ( TDSetting.mLevelOverAdvanced && p++ == pos ) { // LOGS
+      if ( TDLevel.overAdvanced && p++ == pos ) { // LOGS
         intent = new Intent( mActivity, TopoDroidPreferences.class );
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_LOG );
         startActivity( intent );
       } else {  
-        if ( TDSetting.mLevelOverExpert && mApp.mCosurvey && p++ == pos ) {  // CO-SURVEY
+        if ( TDLevel.overExpert && mApp.mCosurvey && p++ == pos ) {  // CO-SURVEY
           (new ConnectDialog( mActivity, mApp )).show();
         } else { 
           if ( p++ == pos ) { // ABOUT
@@ -530,7 +530,7 @@ public class MainWindow extends Activity
 
     // FIXME THMANAGER
     mNrButton1 = 4;
-    if ( TDSetting.mLevelOverExpert ) mNrButton1 ++; // TH MANAGER
+    if ( TDLevel.overExpert ) mNrButton1 ++; // TH MANAGER
     mButton1 = new Button[mNrButton1];
 
     mImage.setBackgroundDrawable( MyButton.getButtonBackground( mApp, getResources(), R.drawable.iz_menu ) );

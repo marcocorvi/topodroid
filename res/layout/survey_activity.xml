@@ -53,8 +53,8 @@
       	android:ems="25"
         android:layout_height="wrap_content" 
         android:singleLine="true"
-        android:layout_marginTop="12sp"
-        android:layout_marginBottom="4sp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="4dp"
         android:scrollHorizontally="true"
         android:editable="false"
         /> <!-- android:inputType="none" -->
@@ -64,8 +64,8 @@
         android:layout_width="match_parent"
       	android:ems="25"
         android:layout_height="wrap_content" 
-        android:layout_marginTop="4sp"
-        android:layout_marginBottom="4sp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
     />
    		
     <EditText android:id="@+id/survey_team" 
@@ -74,8 +74,8 @@
         android:layout_height="wrap_content" 
         android:singleLine="true"
         android:hint="@string/team"
-        android:layout_marginTop="4sp"
-        android:layout_marginBottom="4sp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
         android:scrollHorizontally="true"
         android:inputType="text"
     />
@@ -85,8 +85,8 @@
       	android:ems="25"
         android:layout_height="wrap_content" 
         android:singleLine="true"
-        android:layout_marginTop="4sp"
-        android:layout_marginBottom="4sp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
         android:inputType="numberDecimal|numberSigned"
         android:scrollHorizontally="true"
     />
@@ -97,8 +97,8 @@
         android:layout_height="wrap_content" 
         android:singleLine="true"
         android:hint="@string/description"
-        android:layout_marginTop="4sp"
-        android:layout_marginBottom="4sp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
         android:scrollHorizontally="true"
         android:inputType="text"
       />
@@ -109,14 +109,14 @@
         android:layout_height="wrap_content" 
         android:singleLine="true"
         android:text=" "
-        android:layout_marginTop="4sp"
-        android:layout_marginBottom="4sp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
       />
 
     </LinearLayout>
 
     <ListView android:id="@+id/menu"
-      android:layout_width="150sp"
+      android:layout_width="150dp"
       android:layout_height="wrap_content"
       android:choiceMode="singleChoice"
       android:divider="@android:color/transparent"

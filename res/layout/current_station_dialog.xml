@@ -116,13 +116,15 @@
   </LinearLayout>
 
   <ListView 
-       android:id="@+id/list"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_below="@id/layout2"
-       android:stackFromBottom="false"
-       android:transcriptMode="alwaysScroll"
-       android:textSize="12sp"
+    android:id="@+id/list"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/layout2"
+    android:stackFromBottom="false"
+    android:transcriptMode="alwaysScroll"
+    android:textSize="@dimen/textsize"
+    android:divider="@color/divider"
+    android:dividerHeight="2dp"
   />  
 
   <android.inputmethodservice.KeyboardView

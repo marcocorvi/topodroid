@@ -183,7 +183,7 @@ public class DeviceActivity extends Activity
 
   // private void setButtonRemote( )
   // {
-  //   if ( TDSetting.mLevelOverNormal ) {
+  //   if ( TDLevel.overNormal ) {
   //     if ( mDevice != null && mDevice.mType == Device.DISTO_X310 ) {
   //       mButton1[ indexButtonRemote ].setEnabled( true );
   //       mButton1[ indexButtonRemote ].setBackgroundResource( icons00[ indexButtonRemote ] );
@@ -226,17 +226,17 @@ public class DeviceActivity extends Activity
 
     Resources res = getResources();
     mNrButton1 = 3;
-    if ( TDSetting.mLevelOverNormal ) mNrButton1 += 2; // CALIB-READ INFO
-    if ( TDSetting.mLevelOverAdvanced ) mNrButton1 += 1; // MEMORY
+    if ( TDLevel.overNormal ) mNrButton1 += 2; // CALIB-READ INFO
+    if ( TDLevel.overAdvanced ) mNrButton1 += 1; // MEMORY
     mButton1 = new Button[ mNrButton1 ];
 
     // int k=0; 
     // mButton1[k++] = MyButton.getButton( this, this, izons[0] );
     // mButton1[k++] = MyButton.getButton( this, this, izons[1] );
     // mButton1[k++] = MyButton.getButton( this, this, izons[2] );
-    // if ( TDSetting.mLevelOverNormal   ) mButton1[k++] = MyButton.getButton( this, this, izons[3] ); // INFO
-    // if ( TDSetting.mLevelOverNormal   ) mButton1[k++] = MyButton.getButton( this, this, izons[4] ); // CALIB_READ
-    // if ( TDSetting.mLevelOverAdvanced ) mButton1[k++] = MyButton.getButton( this, this, izons[5] ); // MEMORY
+    // if ( TDLevel.overNormal   ) mButton1[k++] = MyButton.getButton( this, this, izons[3] ); // INFO
+    // if ( TDLevel.overNormal   ) mButton1[k++] = MyButton.getButton( this, this, izons[4] ); // CALIB_READ
+    // if ( TDLevel.overAdvanced ) mButton1[k++] = MyButton.getButton( this, this, izons[5] ); // MEMORY
     for ( int k=0; k<mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( this, this, izons[k] );
     }
@@ -281,7 +281,7 @@ public class DeviceActivity extends Activity
     // TDLog.Debug("device activity update list" );
     // mList.setAdapter( mArrayAdapter );
     mArrayAdapter.clear();
-    if ( TDSetting.mLevelOverTester ) { // FIXME VirtualDistoX
+    if ( TDLevel.overTester ) { // FIXME VirtualDistoX
       mArrayAdapter.add( "X000" );
     }
     if ( mApp.mBTAdapter != null ) {
@@ -388,7 +388,7 @@ public class DeviceActivity extends Activity
   public void enableButtons( boolean enable ) 
   {
     mButton1[1].setEnabled( enable );
-    if ( TDSetting.mLevelOverNormal ) {
+    if ( TDLevel.overNormal ) {
       for ( int k=2; k<mNrButton1; ++k ) {
         mButton1[k].setEnabled( enable );
       }
@@ -397,14 +397,14 @@ public class DeviceActivity extends Activity
       setTitleColor( TDColor.NORMAL );
       mButton1[IDX_TOGGLE].setBackgroundDrawable( mBMtoggle );
       mButton1[IDX_CALIB].setBackgroundDrawable( mBMcalib );
-      if ( TDSetting.mLevelOverNormal ) {
+      if ( TDLevel.overNormal ) {
         mButton1[IDX_READ].setBackgroundDrawable( mBMread);
       }
     } else {
       setTitleColor( TDColor.CONNECTED );
       mButton1[IDX_TOGGLE].setBackgroundDrawable( mBMtoggle_no );
       mButton1[IDX_CALIB].setBackgroundDrawable( mBMcalib_no );
-      if ( TDSetting.mLevelOverNormal ) {
+      if ( TDLevel.overNormal ) {
         mButton1[IDX_READ].setBackgroundDrawable( mBMread_no );
       }
     }
@@ -459,7 +459,7 @@ public class DeviceActivity extends Activity
         (new CalibListDialog( this, this, mApp )).show();
       }
 
-    } else if ( k < mNrButton1 && b == mButton1[k++] ) {    // INFO mLevelOverNormal
+    } else if ( k < mNrButton1 && b == mButton1[k++] ) {    // INFO TDLevel.overNormal
       if ( mDevice == null ) {
         Toast.makeText( this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
       } else {
@@ -474,7 +474,7 @@ public class DeviceActivity extends Activity
         // setTitleColor( TDColor.NORMAL );
       }
 
-    } else if ( k < mNrButton1 && b == mButton1[k++] ) {   // CALIB_READ mLevelOverNormal
+    } else if ( k < mNrButton1 && b == mButton1[k++] ) {   // CALIB_READ TDLevel.overNormal
       if ( mDevice == null ) { // mAddress.length() < 1 ) {
         Toast.makeText( this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
       } else {
@@ -482,7 +482,7 @@ public class DeviceActivity extends Activity
         new CalibReadTask( this, this, mApp, CalibReadTask.PARENT_DEVICE ).execute();
       }
 
-    } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // DISTOX MEMORY mLevelOverAdvanced
+    } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // DISTOX MEMORY TDLevel.overAdvanced
       if ( mDevice == null ) { // mAddress.length() < 1 ) {
         Toast.makeText( this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
       } else {
@@ -711,15 +711,15 @@ public class DeviceActivity extends Activity
     // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
     mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
 
-    if ( TDSetting.mLevelOverBasic    ) mMenuAdapter.add( res.getString( menus[0] ) );
-    if ( TDSetting.mLevelOverBasic    ) mMenuAdapter.add( res.getString( menus[1] ) );
-    if ( TDSetting.mLevelOverNormal   ) mMenuAdapter.add( res.getString( menus[2] ) );
-    if ( TDSetting.mLevelOverAdvanced ) mMenuAdapter.add( res.getString( menus[3] ) );
+    if ( TDLevel.overBasic    ) mMenuAdapter.add( res.getString( menus[0] ) );
+    if ( TDLevel.overBasic    ) mMenuAdapter.add( res.getString( menus[1] ) );
+    if ( TDLevel.overNormal   ) mMenuAdapter.add( res.getString( menus[2] ) );
+    if ( TDLevel.overAdvanced ) mMenuAdapter.add( res.getString( menus[3] ) );
     mMenuAdapter.add( res.getString( menus[4] ) );
     mMenuAdapter.add( res.getString( menus[5] ) );
     // mMenuAdapter.add( res.getString( menus[6] ) ); // SERVER
     // CALIB_RESET
-    // if ( TDSetting.mLevelOverTester ) mMenuAdapter.add( res.getString( menus[6] ) );
+    // if ( TDLevel.overTester ) mMenuAdapter.add( res.getString( menus[6] ) );
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
   }
@@ -736,19 +736,19 @@ public class DeviceActivity extends Activity
   {
     closeMenu();
     int p = 0;
-    if ( TDSetting.mLevelOverBasic && p++ == pos ) { // SCAN
+    if ( TDLevel.overBasic && p++ == pos ) { // SCAN
       Intent scanIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DeviceList.class );
       scanIntent.putExtra( TDTag.TOPODROID_DEVICE_ACTION, DeviceList.DEVICE_SCAN );
       startActivityForResult( scanIntent, TDRequest.REQUEST_DEVICE );
       Toast.makeText(this, R.string.wait_scan, Toast.LENGTH_LONG).show();
 
-    } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // PAIR
+    } else if ( TDLevel.overBasic && p++ == pos ) { // PAIR
       pairDevice();
 
-    } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // DETACH
+    } else if ( TDLevel.overNormal && p++ == pos ) { // DETACH
       detachDevice();
 
-    } else if ( TDSetting.mLevelOverAdvanced && p++ == pos ) { // FIRMWARE
+    } else if ( TDLevel.overAdvanced && p++ == pos ) { // FIRMWARE
       if ( TDSetting.mCommType != 0 ) {
         Toast.makeText( this, "Connection mode must be \"on-demand\"", Toast.LENGTH_LONG).show();
       } else {
@@ -762,7 +762,7 @@ public class DeviceActivity extends Activity
       startActivity( intent );
     } else if ( p++ == pos ) { // HELP
       (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length ) ).show();
-    // } else if ( TDSetting.mLevelOverTester && p++ == pos ) { // CALIB_RESET
+    // } else if ( TDLevel.overTester && p++ == pos ) { // CALIB_RESET
     //   doCalibReset();
     }
   }

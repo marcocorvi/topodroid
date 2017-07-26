@@ -122,7 +122,7 @@ public class PhotoSensorsDialog extends MyDialog
     }
     mButtonSensor = new MyCheckBox( mContext, size, R.drawable.iz_sensor, R.drawable.iz_sensor ); 
     mButtonShot   = new MyCheckBox( mContext, size, R.drawable.iz_add_leg, R.drawable.iz_add_leg );
-    if ( TDSetting.mLevelOverAdvanced ) {
+    if ( TDLevel.overAdvanced ) {
       mButtonSurvey = new MyCheckBox( mContext, size, R.drawable.iz_split, R.drawable.iz_split );
       mButtonSurvey.setOnClickListener( this );
     } else {
@@ -159,7 +159,7 @@ public class PhotoSensorsDialog extends MyDialog
       mCBleg.setChecked( false );
       layout4b.addView( mCBleg );
       mCBleg.setLayoutParams( lp );
-      if ( TDSetting.mLevelOverAdvanced && mBlk.mShotType == 0 ) {
+      if ( TDLevel.overAdvanced && mBlk.mShotType == 0 ) {
         layout4c.setMinimumHeight( size + 20 );
         mButtonCheck  = new MyCheckBox( mContext, size, R.drawable.iz_compute, R.drawable.iz_compute );
         mButtonCheck.setOnClickListener( this );

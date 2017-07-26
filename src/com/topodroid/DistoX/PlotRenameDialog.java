@@ -72,7 +72,7 @@ public class PlotRenameDialog extends MyDialog
     mBtnRename.setOnClickListener( this );
     mBtnBack.setOnClickListener( this );
     mBtnDelete.setOnClickListener( this );
-    if ( TDSetting.mLevelOverExpert ) {
+    if ( TDLevel.overExpert ) {
       // mBtnMerge.setOnClickListener( this );
       mBtnSplit.setOnClickListener( this );
       mEtStation.setInputType( android.text.InputType.TYPE_NULL );

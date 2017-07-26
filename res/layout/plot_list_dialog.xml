@@ -43,8 +43,10 @@
     android:stackFromBottom="false"
     android:transcriptMode="alwaysScroll"
     android:layout_weight="1"
-    android:textSize="12sp"
+    android:textSize="@dimen/textsize"
     android:numColumns="2"
+    android:divider="@color/divider"
+    android:dividerHeight="2dp"
   />  
 
   <LinearLayout 

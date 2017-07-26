@@ -18,7 +18,7 @@
     android:id="@+id/symbol_text"
     android:layout_width="60dip"
     android:layout_height="14dip"
-    android:textSize="12sp"
+    android:textSize="@dimen/textsize"
     android:typeface="monospace"
     android:layout_marginLeft="6dip"
     />

@@ -8,6 +8,7 @@
     <!-- color name="bg_grey">#ff999999</color -->
     <!-- color name="bg_white">#ffffffff</color -->
     <color name="textdelete">#ffcc0000</color>
+    <color name="divider">#ff444444</color>
 
 <!-- MATERIAL
     <color name="colorPrimary">#33ccff</color>
