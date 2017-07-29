@@ -521,7 +521,7 @@
     <string name="button_save"      >Сохр.     </string>
     <!-- UNUSED string name="button_select"    >Выбрать   </string -->
     <string name="button_search"    >Поиск    </string>
-    <!-- TODO string name="button_merge"     >Merge     </string -->
+    <string name="button_merge"     >Объединить     </string>
     <string name="button_split"     >Разделить     </string>
     <string name="button_store"     >Записать   </string>
     <!-- UNUSED string name="button_start"     >Start</string -->
@@ -612,8 +612,8 @@
     <string name="few_line_points">Слишком мало точек в линии</string>
     <string name="line_delete">удалить_линию</string>
     <string name="flip_shots">Развернуть пикеты</string>
-    <!-- TODO string name="split_nothing">Nothing to split</string -->
-    <!-- TODO string name="copy_items">Copy items</string -->
+    <string name="split_nothing">Нечего разделять</string>
+    <string name="copy_items">Копировать объекты</string>
 
     <string name="menu_head">Начало</string>
     <!-- UNUSED string name="menu_save_th2">сохр th2</string -->
@@ -762,7 +762,7 @@
     <string name="title_photo">Фото/Измерения</string>
     <string name="title_photo_comment">Описание Фото</string>
     <string name="title_plot_save">Сохранить абрис как</string>
-    <!-- TODO string name="title_plot_merge">Merge-in sketch</string -->
+    <string name="title_plot_merge">Присоединить к абрису</string>
     <string name="title_plot_reload">Перезагрузить абрис</string>
     <string name="title_profile_flip">Развернуть разрез ?</string>
     <string name="title_projection">Проекция разреза на вертикальную плоскость Аз. %1$d</string>
@@ -836,8 +836,8 @@
   <string name="pref_svg_grid_summary">Добавить сетку в SVG экспорт</string>
   <string name="pref_svg_in_html_title">SVG в HTML</string>
   <string name="pref_svg_in_html_summary">Встроить экспорт SVG в HTML страницу</string>
-  <!-- TODO string name="pref_svg_line_dir_title">SVG line orientation</string -->
-  <!-- TODO string name="pref_svg_line_dir_summary">Add line orientation-ticks to SVG export</string -->
+  <string name="pref_svg_line_dir_title">Ориентирование линий в SVG</string>
+  <string name="pref_svg_line_dir_summary">Добавить штрихи направления линии в SVG экспорт</string>
   <string name="pref_kml_stations_title">Пикеты в KML</string>
   <string name="pref_kml_stations_summary">Добавить пикеты в экспорт KML</string>
   <string name="pref_kml_splays_title">Бок. замеры в KML</string>
