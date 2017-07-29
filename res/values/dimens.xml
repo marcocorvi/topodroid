@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="default_textsize">16</string>
+  <string name="default_buttonsize">3</string>
+
 <!-- MATERIAL
   <dimen name="activity_horizontal_margin">16dp</dimen>
   <dimen name="activity_vertical_margin">16dp</dimen>
@@ -12,4 +15,23 @@
   <dimen name="textsizehead">16sp</dimen>
   <dimen name="textsizebig">18sp</dimen>
   <dimen name="textsizehuge">24sp</dimen>
+
+  <dimen name="padding">2dp</dimen>
+  <dimen name="paddingh">6dp</dimen>
+  <dimen name="paddingv">3dp</dimen>
+  <dimen name="paddingmedium">5dp</dimen>
+  <dimen name="paddingbig">10dp</dimen>
+
+  <dimen name="marginh">15dp</dimen>
+  <dimen name="marginv">10dp</dimen>
+  <dimen name="marginvbig">25dp</dimen>
+
+  <dimen name="margintiny">2dp</dimen>
+  <dimen name="marginsmall">5dp</dimen>
+  <dimen name="marginnormal">10dp</dimen>
+  <dimen name="marginhuge">40dp</dimen>
+
+  <dimen name="dividersmall">2dp</dimen>
+  <dimen name="divider">5dp</dimen>
+  <dimen name="dividerbig">10dp</dimen>
 </resources>

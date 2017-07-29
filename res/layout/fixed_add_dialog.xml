@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:id="@+id/top"
-    android:layout_width="match_parent" 
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="0dp"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    >
+  android:id="@+id/top"
+  android:layout_width="match_parent" 
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  android:padding="0dp"
+  android:focusable="true"
+  android:focusableInTouchMode="true"
+  >
   <EditText android:id="@+id/edit_name" 
-        android:layout_marginTop="2dp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        android:hint="@string/station"
-        android:singleLine="true"
-        android:nextFocusDown="@+id/edit_long"
-      	android:ems="25"
-     />
+    style="@style/edit_text"
+    android:layout_marginTop="@dimen/margintiny"
+    android:layout_width="fill_parent"
+    android:hint="@string/station"
+    android:nextFocusDown="@+id/edit_long"
+  />
 
   <LinearLayout android:id="@+id/layout1"
       android:layout_below="@id/edit_name"
@@ -25,23 +23,20 @@
       android:orientation="horizontal"
       >
       <Button android:id="@+id/button_EW"
+        style="@style/button_default"
         android:layout_width="wrap_content" 
         android:layout_weight="20"
         android:layout_height="wrap_content" 
-        android:background="@drawable/button"
-        style="@style/button_default"
         android:text="E"
         android:layout_marginRight="10dp"
         />
       <EditText android:id="@id/edit_long" 
-        android:layout_marginTop="2dp"
+        style="@style/edit_text"
+        android:layout_marginTop="@dimen/margintiny"
         android:layout_width="0dp"
         android:layout_weight="60"
-        android:layout_height="wrap_content" 
         android:hint="@string/longitude_hint"
-        android:singleLine="true"
         android:nextFocusDown="@+id/edit_lat"
-      	android:ems="25"
         />
   </LinearLayout>
 
@@ -52,21 +47,18 @@
       android:orientation="horizontal"
       >
       <Button android:id="@+id/button_NS"
+        style="@style/button_default"
         android:layout_width="wrap_content" 
         android:layout_weight="20"
         android:layout_height="wrap_content" 
-        android:background="@drawable/button"
-        style="@style/button_default"
         android:text="N"
         android:layout_marginRight="10dp"
         />
       <EditText android:id="@id/edit_lat"
-        android:layout_marginTop="2dp"
+        style="@style/edit_text"
+        android:layout_marginTop="@dimen/margintiny"
         android:layout_width="0dp"
         android:layout_weight="60"
-        android:layout_height="wrap_content" 
-      	android:ems="25"
-        android:singleLine="true"
         android:hint="@string/latitude_hint"
         android:nextFocusDown="@+id/edit_alt"
         />
@@ -83,17 +75,14 @@
         android:layout_width="0dp" 
         android:layout_weight="40"
         android:layout_height="wrap_content" 
-        android:layout_marginRight="10dp" 
+        android:layout_marginRight="@dimen/marginh"
         android:layout_gravity="left"
         android:text="@string/h_ellipsoid"
         />
-      <EditText
-        android:id="@id/edit_alt"
+      <EditText android:id="@id/edit_alt"
+        style="@style/edit_text"
         android:layout_width="0dp"
 	android:layout_weight="40"
-        android:layout_height="wrap_content" 
-      	android:ems="25"
-        android:singleLine="true"
         android:hint="@string/h_ellipsoid_hint"
         android:scrollHorizontally="true"
         android:nextFocusDown="@+id/edit_asl"
@@ -111,12 +100,11 @@
         android:layout_width="0dp" 
         android:layout_weight="40"
         android:layout_height="wrap_content" 
-        android:layout_marginRight="10dp" 
+        android:layout_marginRight="@dimen/marginh"
         android:layout_gravity="left"
         android:text="@string/h_geoid"
         />
-      <EditText
-        android:id="@id/edit_asl"
+      <EditText android:id="@id/edit_asl"
         android:layout_width="0dp"
 	android:layout_weight="40"
         android:layout_height="wrap_content" 
@@ -129,14 +117,12 @@
   </LinearLayout>
 
   <EditText android:id="@id/edit_comment" 
+      style="@style/edit_text"
       android:layout_below="@id/layout3b"
-      android:layout_marginTop="2dp"
+      android:layout_marginTop="@dimen/margintiny"
       android:layout_width="fill_parent"
-      android:layout_height="wrap_content" 
       android:hint="@string/comment"
-      android:singleLine="true"
       android:nextFocusDown="@id/top"
-      android:ems="25"
   />
 
   <LinearLayout android:id="@+id/layout4"
@@ -144,21 +130,19 @@
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
-      android:layout_marginTop="25dip"
+      android:layout_marginTop="@dimen/marginvbig"
       >
       <Button android:id="@+id/button_view"
+        style="@style/button_default"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:background="@drawable/button"
-        style="@style/button_default"
         android:text="@string/button_view"
         />
       <Button android:id="@+id/button_proj4"
+        style="@style/button_default"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:background="@drawable/button"
-        android:layout_marginLeft="10dp"
-        style="@style/button_default"
+        android:layout_marginLeft="@dimen/marginh"
         android:text="Proj4"
         />
       <LinearLayout 
@@ -167,25 +151,16 @@
         android:gravity="right"
         >
       <Button android:id="@+id/button_ok"
+        style="@style/button_default"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:background="@drawable/button"
-        style="@style/button_default"
         android:text="@string/button_save"
         />
       </LinearLayout>
   </LinearLayout>
 
-  <android.inputmethodservice.KeyboardView
-    android:id="@+id/keyboardview"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:layout_centerHorizontal="true"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:gravity="bottom"
-    android:visibility="gone"
+  <android.inputmethodservice.KeyboardView android:id="@+id/keyboardview"
+    style="@style/keyboard"
   />
 
 </RelativeLayout>

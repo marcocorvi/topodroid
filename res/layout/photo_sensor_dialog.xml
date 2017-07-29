@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:layout_width="match_parent" 
-    android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:paddingLeft="6sp"
-    android:paddingRight="6sp"
-    android:paddingBottom="3sp">
+  style="@style/base_padding"
+  android:layout_width="match_parent" 
+  android:layout_height="fill_parent"
+  android:orientation="vertical"
+  >
 
   <LinearLayout android:id="@+id/layout5"
     android:layout_width="wrap_content" 
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_marginBottom="10sp"
+    android:layout_marginBottom="@dimen/marginv"
     >
     <TextView android:id="@+id/photo_shot_stations" 
       android:maxLines="1" 
-      android:layout_marginBottom="5sp"
+      android:layout_marginBottom="@dimen/marginsmall"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content" 
       android:ems="25"
@@ -32,14 +31,13 @@
   <LinearLayout android:id="@+id/layout5a"
     android:layout_width="fill_parent" 
     android:layout_height="50sp"
-    android:layout_marginLeft="10sp"
-    android:layout_marginRight="10sp"
+    android:layout_marginLeft="@dimen/marginh"
+    android:layout_marginRight="@dimen/marginh"
     android:orientation="horizontal" 
     >
     <Button android:id="@+id/btn_ok"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:background="@drawable/button"
       style="@style/button_default"
       android:text="@string/button_lrud"
       android:singleLine="true"
@@ -66,7 +64,7 @@
     android:layout_height="50sp"
     android:paddingLeft="10sp"
     android:paddingRight="10sp"
-    android:layout_marginBottom="10sp"
+    android:layout_marginBottom="@dimen/marginv"
     android:orientation="horizontal" 
     >
     <EditText android:id="@+id/shot_left" 
@@ -113,14 +111,14 @@
   <LinearLayout android:id="@+id/layout4"
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
-    android:layout_marginTop="10sp"
-    android:layout_marginBottom="10sp"
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_marginBottom="@dimen/marginv"
     android:orientation="horizontal" 
     >
     <com.topodroid.DistoX.HorizontalListView android:id="@+id/listview"
       android:layout_width="fill_parent"
-      android:layout_marginTop="10sp"
-      android:layout_marginBottom="10sp"
+      android:layout_marginTop="@dimen/marginv"
+      android:layout_marginBottom="@dimen/marginv"
       android:layout_height="50dp"
     />
   </LinearLayout>
@@ -129,8 +127,8 @@
     android:layout_below="@id/layout4"
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
-    android:layout_marginTop="10sp"
-    android:layout_marginBottom="10sp"
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_marginBottom="@dimen/marginv"
     android:orientation="horizontal" 
     >
   <!-- CheckBox android:id="@+id/leg"
@@ -144,26 +142,24 @@
     android:layout_below="@id/layout4b"
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
-    android:layout_marginTop="10sp"
-    android:layout_marginBottom="10sp"
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_marginBottom="@dimen/marginv"
     android:orientation="horizontal" 
     >
   </LinearLayout>
 
-  <LinearLayout 
-    android:layout_below="@id/layout4c"
+  <LinearLayout android:layout_below="@id/layout4c"
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal" 
+    android:layout_gravity="right"
     android:gravity="right"
-    android:layout_marginTop="25sp" 
+    android:layout_marginTop="@dimen/marginvbig"
     >
     <Button android:id="@+id/button_cancel"
+      style="@style/button_default"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:layout_marginLeft="10sp" 
-      android:background="@drawable/button"
-      style="@style/button_default"
       android:text="@string/button_cancel"
     />
   </LinearLayout>

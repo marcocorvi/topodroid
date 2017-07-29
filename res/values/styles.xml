@@ -49,6 +49,99 @@
        <item name="android:paddingRight">10dp</item>
        <item name="android:paddingTop">5dp</item>
        <item name="android:paddingBottom">5dp</item>
+       <item name="android:background">@drawable/button</item>
+    </style>
+
+    <style name="menu_default">
+       <item name="android:divider">@android:color/transparent</item>
+       <item name="android:dividerHeight">@dimen/dividerbig</item>
+       <item name="android:background">#111</item>
+       <item name="android:orientation">vertical</item>
+       <item name="android:layout_gravity">right</item>
+       <item name="android:gravity">right</item>
+       <item name="android:choiceMode">singleChoice</item>
+       <item name="android:layout_width">150sp</item>
+       <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="list_top">
+       <item name="android:stackFromBottom">false</item>
+       <item name="android:textSize">@dimen/textsize</item>
+       <item name="android:transcriptMode">alwaysScroll</item>
+       <item name="android:divider">@color/divider</item>
+       <item name="android:dividerHeight">@dimen/dividersmall</item>
+    </style>
+
+    <style name="list_bottom">
+       <item name="android:stackFromBottom">true</item>
+       <item name="android:textSize">@dimen/textsize</item>
+       <item name="android:transcriptMode">alwaysScroll</item>
+       <item name="android:divider">@color/divider</item>
+       <item name="android:dividerHeight">@dimen/dividersmall</item>
+    </style>
+
+    <style name="list_help">
+       <item name="android:layout_width">fill_parent</item>
+       <item name="android:layout_height">fill_parent</item>
+       <item name="android:stackFromBottom">false</item>
+       <item name="android:transcriptMode">alwaysScroll</item>
+    </style>
+
+    <style name="list_data">
+       <item name="android:stackFromBottom">true</item>
+       <item name="android:textSize">@dimen/textsize</item>
+       <item name="android:transcriptMode">disabled</item>
+       <item name="android:divider">@color/divider</item>
+       <item name="android:dividerHeight">@dimen/dividersmall</item>
+       <item name="android:fastScrollEnabled">true</item>
+       <item name="android:scrollingCache">true</item>
+       <item name="android:smoothScrollbar">false</item>
+       <item name="android:background">#111</item>
+    </style>
+
+    <style name="edit_number">
+      	<item name="android:ems">25</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:inputType">number</item>
+    </style>
+
+    <style name="edit_decimal">
+      	<item name="android:ems">25</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:inputType">numberDecimal</item>
+    </style>
+
+    <style name="edit_signeddecimal">
+      	<item name="android:ems">25</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:inputType">numberDecimal|numberSigned</item>
+    </style>
+
+    <style name="edit_text">
+      	<item name="android:ems">25</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:inputType">text</item>
+    </style>
+
+    <style name="keyboard">
+      <item name="android:layout_width">fill_parent</item>
+      <item name="android:layout_height">wrap_content</item>
+      <item name="android:layout_alignParentBottom">true</item>
+      <item name="android:layout_centerHorizontal">true</item>
+      <item name="android:focusable">true</item>
+      <item name="android:focusableInTouchMode">true</item>
+      <item name="android:gravity">bottom</item>
+      <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="base_padding">
+      <item name="android:paddingLeft">@dimen/paddingh</item>
+      <item name="android:paddingRight">@dimen/paddingh</item>
+      <item name="android:paddingBottom">@dimen/paddingv</item>
     </style>
 
 </resources>

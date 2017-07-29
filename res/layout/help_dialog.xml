@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content"
-     android:orientation="vertical"
-     >
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  >
 
-    <ListView android:id="@+id/help_list"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:stackFromBottom="false"
-        android:transcriptMode="alwaysScroll"
-    />  
+  <ListView android:id="@+id/help_list"
+    style="@style/list_help"
+  />  
 
-    <Button android:id="@+id/button_manual"
-      android:layout_width="42sp"
-      android:layout_height="42sp"
-      android:background="@drawable/ic_manual"
-      android:layout_gravity="right"
-      android:gravity="right"
-    />
+  <Button android:id="@+id/button_manual"
+    android:layout_width="42sp"
+    android:layout_height="42sp"
+    android:background="@drawable/ic_manual"
+    android:layout_gravity="right"
+    android:gravity="right"
+  />
 
 </FrameLayout>
 

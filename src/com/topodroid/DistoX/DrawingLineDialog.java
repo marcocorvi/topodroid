@@ -105,7 +105,7 @@ public class DrawingLineDialog extends MyDialog
     mBtnOk.setOnClickListener( this );
     mBtnCancel.setOnClickListener( this );
 
-    int size = TopoDroidApp.getScaledSize( mContext );
+    int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
     mReversed = new MyCheckBox( mContext, size, R.drawable.iz_reverse_ok, R.drawable.iz_reverse_no );
     mBtnSharp = new MyCheckBox( mContext, size, R.drawable.iz_sharp_ok, R.drawable.iz_sharp_no );
     mBtnRock  = new MyCheckBox( mContext, size, R.drawable.iz_rock_ok,  R.drawable.iz_rock_no  );

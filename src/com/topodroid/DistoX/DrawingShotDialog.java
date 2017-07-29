@@ -112,7 +112,7 @@ public class DrawingShotDialog extends MyDialog
 
     LinearLayout layout3  = (LinearLayout) findViewById( R.id.layout3 );
     LinearLayout layout3b = (LinearLayout) findViewById( R.id.layout3b );
-    int size = TopoDroidApp.getScaledSize( mContext );
+    int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
     layout3.setMinimumHeight( size + 20 );
     layout3b.setMinimumHeight( size + 20 );
 

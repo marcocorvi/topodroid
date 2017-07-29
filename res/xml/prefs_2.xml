@@ -13,7 +13,7 @@
        android:summary="@string/pref_text_size_summary"
        android:dialogTitle="@string/pref_text_size_title"
        android:dialogMessage="@string/pref_text_size_message"
-       android:defaultValue="16"
+       android:defaultValue="@string/default_textsize"
        android:inputType="number"
        />
 
@@ -21,7 +21,7 @@
        android:key="DISTOX_SIZE_BUTTONS"
        android:title="@string/pref_size_buttons_title"
        android:summary="@string/pref_size_buttons_summary"
-       android:defaultValue="1"
+       android:defaultValue="@string/default_buttonsize"
        android:entries="@array/sizeButtons"
        android:entryValues="@array/sizeButtonsValue"
        />

@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-      android:orientation="vertical"
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  >
 
-      <ListView android:id="@+id/list"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:transcriptMode="alwaysScroll"
-        android:layout_weight="1"
-        android:textSize="@dimen/textsize"
-        android:layout_marginBottom="10sp"
-        android:divider="@color/divider"
-        android:dividerHeight="2dp"
-        />  
+  <ListView android:id="@+id/list"
+    style="@style/list_top"
+    android:layout_width="fill_parent"
+    android:layout_height="0dp"
+    android:transcriptMode="alwaysScroll"
+    android:layout_weight="1"
+    android:layout_marginBottom="@dimen/marginv"
+    />  
 
-      <TextView android:id="@+id/file"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:textSize="@dimen/textsizebig"
-      />
+  <TextView android:id="@+id/file"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:textSize="@dimen/textsizebig"
+  />
 
-  </LinearLayout>
+</LinearLayout>
 

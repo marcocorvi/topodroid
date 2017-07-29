@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    style="@style/base_padding"
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingLeft="6dp"
-    android:paddingRight="6dp"
-    android:paddingBottom="3dp">
+    >
 
     <LinearLayout android:id="@+id/layout2"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content"
-      android:layout_marginTop="10dp"
+      android:layout_marginTop="@dimen/marginv"
       android:orientation="horizontal" 
       >
     </LinearLayout>
@@ -19,14 +18,14 @@
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
+      android:layout_gravity="right"
       android:gravity="right"
-      android:layout_marginTop="25sp" 
+      android:layout_marginTop="@dimen/marginvbig" 
       >
       <!-- Button android:id="@+id/audio_delete"
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
-          android:layout_marginLeft="10sp" 
-          android:background="@drawable/button"
+          android:layout_marginRight="@dimen/marginh" 
           style="@style/button_default"
           android:text="@string/button_delete"
       / -->
@@ -34,8 +33,6 @@
       <Button android:id="@+id/audio_close"
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
-          android:layout_marginLeft="10sp" 
-          android:background="@drawable/button"
           style="@style/button_default"
           android:text="@string/button_close"
       />

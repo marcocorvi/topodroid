@@ -5,5 +5,5 @@
     android:layout_height="wrap_content"
     android:textSize="@dimen/textsize"
     android:typeface="monospace"
-    android:padding="5dp"
+    android:padding="@dimen/paddingmedium"
 />

@@ -139,7 +139,7 @@ public class AzimuthDialDialog extends MyDialog
     } );
 
     LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
-    int size = TopoDroidApp.getScaledSize( mContext );
+    int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
     layout4.setMinimumHeight( size + 20 );
 
     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 

@@ -6,29 +6,25 @@
     >
    
   <ListView android:id="@+id/list"
+    style="@style/list_top"
     android:layout_width="match_parent"
     android:layout_height="0dp"
-    android:stackFromBottom="false"
-    android:transcriptMode="alwaysScroll"
     android:layout_weight="1"
-    android:textSize="@dimen/textsize"
-    android:divider="@color/divider"
-    android:dividerHeight="2dp"
   />  
 
   <LinearLayout 
-         android:layout_width="fill_parent" 
-         android:layout_height="wrap_content"
-         android:layout_marginTop="25dip"
-         android:layout_gravity="left"
-         >
-      <Button android:id="@+id/button_cancel"
-            android:layout_width="wrap_content" 
-            android:layout_height="wrap_content" 
-            android:background="@drawable/button"
-            style="@style/button_default"
-            android:text="@string/button_cancel"
-      />
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/marginvbig"
+    android:layout_gravity="right"
+    android:gravity="right"
+    >
+    <Button android:id="@+id/button_cancel"
+      style="@style/button_default"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:text="@string/button_cancel"
+    />
   </LinearLayout>
 
 </LinearLayout>

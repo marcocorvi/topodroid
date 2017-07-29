@@ -34,7 +34,7 @@ class DeviceNameDialog extends MyDialog
   private TextView mTVname;
   private EditText mETnickname;
   private Button mBTok;
-  // private Button mBTback;
+  private Button mBTback;
 
   DeviceActivity mParent;
   Device mDevice;
@@ -71,8 +71,8 @@ class DeviceNameDialog extends MyDialog
 
     mBTok = (Button) findViewById( R.id.button_ok );
     mBTok.setOnClickListener( this );
-    // mBTback = (Button) findViewById( R.id.button_cancel );
-    // mBTback.setOnClickListener( this );
+    mBTback = (Button) findViewById( R.id.button_cancel );
+    mBTback.setOnClickListener( this );
 
   }
 
@@ -85,7 +85,8 @@ class DeviceNameDialog extends MyDialog
         String nickname = mETnickname.getText().toString();
         mParent.setDeviceName( mDevice, nickname );
       }
-    // } else if ( b == mBTback ) {
+    } else if ( b == mBTback ) {
+      /* nothing */
     }
     dismiss();
   }

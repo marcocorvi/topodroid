@@ -1,47 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingLeft="6dp"
-    android:paddingRight="6dp"
-    android:paddingBottom="3dp">
-   					  
+  style="@style/base_padding"
+  android:layout_width="fill_parent" 
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  >
 
     <TextView android:id="@+id/stat_leg"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="@dimen/margintiny"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
         />
     <TextView android:id="@+id/stat_duplicate"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="@dimen/margintiny"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
         />
     <TextView android:id="@+id/stat_surface"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="@dimen/margintiny"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
         />
     <TextView android:id="@+id/stat_splay"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="@dimen/margintiny"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
         />
     <TextView android:id="@+id/stat_station"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="@dimen/margintiny"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
         />
 
     <TextView android:id="@+id/stat_loop"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/marginv"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
         />
 
     <TextView android:id="@+id/stat_component"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/marginv"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
         />
@@ -50,18 +48,18 @@
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal"
-      android:layout_marginTop="10dp"
+      android:layout_marginTop="@dimen/marginv"
       >
       <ImageView android:id="@+id/histogramG"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="@dimen/margintiny"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="5dip"
+        android:layout_marginBottom="@dimen/marginsmall"
         android:contentDescription="@string/error_distribution"
         />
       <TextView android:id="@+id/stat_stddev_g"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/marginv"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
         />
@@ -73,15 +71,15 @@
       android:orientation="horizontal"
       >
       <ImageView android:id="@+id/histogramM"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="@dimen/margintiny"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="5dip"
+        android:layout_marginBottom="@dimen/marginsmall"
         android:contentDescription="@string/error_distribution"
         />
       <TextView android:id="@+id/stat_stddev_m"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/marginv"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
         />
@@ -93,32 +91,32 @@
       android:orientation="horizontal"
       >
       <ImageView android:id="@+id/histogramD"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="@dimen/margintiny"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="5dip"
+        android:layout_marginBottom="@dimen/marginsmall"
         android:contentDescription="@string/error_distribution"
-        />
+      />
       <TextView android:id="@+id/stat_stddev_dip"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/marginv"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
-        />
+      />
     </LinearLayout>
 
     <LinearLayout 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp" 
-        >
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="right"
+      android:gravity="right"
+      android:orientation="horizontal"
+      android:layout_marginTop="@dimen/marginv"
+      >
       <Button android:id="@+id/btn_back"
+        style="@style/button_default"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:background="@drawable/button"
-        style="@style/button_default"
         android:text="@string/button_back"
         />
     </LinearLayout>

@@ -11,7 +11,7 @@
     android:textSize="@dimen/textsize"
     android:singleLine="true"
     android:typeface="monospace"
-    android:padding="1dp"
+    android:padding="@dimen/padding"
     android:gravity="left"
   />
 
@@ -23,7 +23,7 @@
     android:singleLine="true"
     android:textSize="@dimen/textsize"
     android:typeface="monospace"
-    android:padding="1dp"
+    android:padding="@dimen/padding"
     android:gravity="right"
   />
 
@@ -35,19 +35,19 @@
     android:singleLine="true"
     android:textSize="@dimen/textsize"
     android:typeface="monospace"
-    android:padding="1dp"
+    android:padding="@dimen/padding"
     android:gravity="right"
   />
 
   <TextView 
     android:id="@+id/length"
     android:layout_weight="340"
-    android:layout_width="0dip"
+    android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:textSize="@dimen/textsize"
     android:singleLine="true"
     android:typeface="monospace"
-    android:padding="1dp"
+    android:padding="@dimen/padding"
     android:gravity="left"
   />
 

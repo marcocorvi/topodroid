@@ -83,7 +83,7 @@ public class AudioDialog extends MyDialog
     setTitle( R.string.title_audio );
 
     LinearLayout layout2 = (LinearLayout) findViewById( R.id.layout2 );
-    int size = TopoDroidApp.getScaledSize( mContext );
+    int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
     layout2.setMinimumHeight( size + 20 );
     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
       LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );

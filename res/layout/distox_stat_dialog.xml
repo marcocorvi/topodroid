@@ -1,130 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:layout_width="fill_parent" 
+  style="@style/base_padding"
+  android:layout_width="fill_parent" 
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  >
+
+  <TextView android:id="@+id/stat_leg"
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+  />
+  <TextView android:id="@+id/stat_duplicate"
+    android:layout_marginTop="@dimen/marginsmall"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+  />
+  <TextView android:id="@+id/stat_surface"
+    android:layout_marginTop="@dimen/marginsmall"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+  />
+  <TextView android:id="@+id/stat_splay"
+    android:layout_marginTop="@dimen/marginsmall"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+  />
+  <TextView android:id="@+id/stat_station"
+    android:layout_marginTop="@dimen/marginsmall"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+  />
+  <TextView android:id="@+id/stat_loop"
+    android:layout_marginTop="@dimen/marginsmall"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+  />
+  <TextView android:id="@+id/stat_component"
+    android:layout_marginTop="@dimen/marginsmall"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+  />
+  <TextView android:id="@+id/text_stat_origin"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    android:layout_marginTop="@dimen/marginv"
+  />
+  <TextView android:id="@+id/text_stat_azimuth"
+    android:layout_marginTop="@dimen/marginsmall"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+  />
+  <TextView android:id="@+id/text_stat_length"
+    android:layout_marginTop="@dimen/marginsmall"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+  />
+  <TextView android:id="@+id/text_stat_projlen"
+    android:layout_marginTop="@dimen/marginsmall"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+  />
+  <TextView android:id="@+id/text_stat_wens"
+    android:layout_marginTop="@dimen/marginsmall"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+  />
+  <TextView android:id="@+id/text_stat_zminmax"
+    android:layout_marginTop="@dimen/marginsmall"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+  />
+  <TextView android:id="@+id/text_stat_stations"
+    android:layout_marginTop="@dimen/marginsmall"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+  />
+  <TextView android:id="@+id/text_stat_shots"
+    android:layout_marginTop="@dimen/marginsmall"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+  />
+  <TextView android:id="@+id/text_stat_splays"
+    android:layout_marginTop="@dimen/marginsmall"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+  />
+  <TextView android:id="@+id/text_stat_angle_error"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    android:layout_marginTop="@dimen/marginsmall"
+  />
+  <TextView android:id="@+id/text_stat_loops"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    android:text="@string/loop_closure_errors"
+    android:layout_marginTop="@dimen/marginsmall"
+  />
+  <ListView android:id="@+id/list"
+    style="@style/list_top"
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_width="fill_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+  />  
+
+  <LinearLayout 
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingLeft="6sp"
-    android:paddingRight="6sp"
-    android:paddingBottom="3sp">
-
-    <TextView android:id="@+id/stat_leg"
-        android:layout_marginTop="10sp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        />
-    <TextView android:id="@+id/stat_duplicate"
-        android:layout_marginTop="5sp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        />
-    <TextView android:id="@+id/stat_surface"
-        android:layout_marginTop="5sp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        />
-    <TextView android:id="@+id/stat_splay"
-        android:layout_marginTop="5sp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        />
-    <TextView android:id="@+id/stat_station"
-        android:layout_marginTop="5sp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        />
-    <TextView android:id="@+id/stat_loop"
-        android:layout_marginTop="5sp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        />
-    <TextView android:id="@+id/stat_component"
-        android:layout_marginTop="5sp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        />
-   					  
-    <TextView android:id="@+id/text_stat_origin"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        android:layout_marginTop="20sp" 
-        />
-    <TextView android:id="@+id/text_stat_azimuth"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        android:layout_marginTop="20sp" 
-        />
-    <TextView android:id="@+id/text_stat_length"
-        android:layout_marginTop="5sp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        />
-    <TextView android:id="@+id/text_stat_projlen"
-        android:layout_marginTop="5sp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        />
-    <TextView android:id="@+id/text_stat_wens"
-        android:layout_marginTop="5sp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        />
-    <TextView android:id="@+id/text_stat_zminmax"
-        android:layout_marginTop="5sp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        />
-    <TextView android:id="@+id/text_stat_stations"
-        android:layout_marginTop="5sp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        />
-    <TextView android:id="@+id/text_stat_shots"
-        android:layout_marginTop="5sp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        />
-    <TextView android:id="@+id/text_stat_splays"
-        android:layout_marginTop="5sp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        />
-
-    <TextView android:id="@+id/text_stat_angle_error"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        android:layout_marginTop="20sp" 
-        />
-
-    <TextView android:id="@+id/text_stat_loops"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        android:text="@string/loop_closure_errors"
-        android:layout_marginTop="10sp"
-        />
-    <ListView android:id="@+id/list"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:transcriptMode="alwaysScroll"
-        android:layout_weight="1"
-        android:textSize="@dimen/textsize"
-        android:divider="@color/divider"
-        android:dividerHeight="2dp"
-        />  
-
-    <LinearLayout 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp" 
-        >
-      <Button android:id="@+id/btn_back"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:background="@drawable/button"
-        style="@style/button_default"
-        android:text="@string/button_back"
-        />
-    </LinearLayout>
+    android:orientation="horizontal"
+    android:layout_marginTop="@dimen/marginvbig"
+    android:layout_gravity="right"
+    android:gravity="right"
+    >
+    <Button android:id="@+id/btn_back"
+      style="@style/button_default"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:text="@string/button_back"
+      />
+  </LinearLayout>
 
 </LinearLayout>

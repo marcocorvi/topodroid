@@ -30,6 +30,7 @@ class GMGroupsDialog extends MyDialog
 
   private Button mBtnReset;
   private Button mBtnOK;
+  private Button mBtnCancel;
 
   private String mPolicy;
 
@@ -47,10 +48,12 @@ class GMGroupsDialog extends MyDialog
 
     initLayout( R.layout.gm_groups_dialog, R.string.group_title );
     
-    mBtnOK = (Button) findViewById( R.id.group_ok );
-    mBtnReset = (Button) findViewById( R.id.group_reset );
+    mBtnOK     = (Button) findViewById( R.id.group_ok );
+    mBtnReset  = (Button) findViewById( R.id.group_reset );
+    mBtnCancel = (Button) findViewById( R.id.group_cancel );
     mBtnOK.setOnClickListener( this );
     mBtnReset.setOnClickListener( this );
+    mBtnCancel.setOnClickListener( this );
     
     TextView policy = (TextView) findViewById( R.id.group_policy );
     policy.setText( mPolicy );
@@ -64,6 +67,8 @@ class GMGroupsDialog extends MyDialog
       mParent.computeGroups( -1L );
     } else if ( b == mBtnReset ) {
       mParent.resetGroups( -1L );
+    } else if ( b == mBtnCancel ) {
+      /* nothing */
     }
     dismiss();
   }

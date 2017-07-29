@@ -1,42 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingLeft="6dp"
-    android:paddingRight="6dp"
-    android:paddingBottom="3dp">
+  style="@style/base_padding"
+  android:layout_width="fill_parent" 
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  >
 
-    <EditText
-       android:id="@+id/et_name" 
+    <EditText android:id="@+id/et_name" 
+       style="@style/edit_text"
        android:layout_width="match_parent" 
-       android:layout_height="wrap_content"
-       android:layout_marginTop="10dp" 
-       android:singleLine="true"
-       android:inputType="text"
+       android:layout_marginTop="@dimen/marginv"
        />
 
     <LinearLayout 
        android:layout_width="wrap_content" 
        android:layout_height="wrap_content"
        android:layout_gravity="right"
+       android:gravity="right"
        android:orientation="horizontal"
-       android:layout_marginTop="20dp" 
+       android:layout_marginTop="@dimen/marginv"
        >
 
       <Button android:id="@+id/btn_ok"
+        style="@style/button_default"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:layout_marginRight="10dp" 
-        android:background="@drawable/button"
-        style="@style/button_default"
+        android:layout_marginRight="@dimen/marginh"
         android:text="@string/button_ok"
         />
       <Button android:id="@+id/btn_back"
+        style="@style/button_default"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:background="@drawable/button"
-        style="@style/button_default"
         android:text="@string/button_cancel"
         />
 
@@ -48,13 +43,12 @@
        android:layout_height="wrap_content"
        android:orientation="horizontal"
        android:layout_gravity="left"
-       android:layout_marginTop="25dip"
+       android:layout_marginTop="@dimen/marginvbig"
        >
       <Button android:id="@+id/button_cancel"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:layout_marginRight="10dp" 
-        android:background="@drawable/button"
+        android:layout_marginRight="@dimen/marginh"
         style="@style/button_default"
         android:text="@string/button_cancel"
         />

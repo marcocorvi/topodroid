@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  >
 
   <LinearLayout android:id="@+id/layout0"
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-      >
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    >
 
-     <EditText android:id="@+id/name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="30"
-        android:singleLine="true"
-        android:inputType="text"
-     />
-     <CheckBox android:id="@+id/button_fixed"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="35"
-        android:singleLine="true"
-        android:text="@string/fixed"
-     />
-     <CheckBox android:id="@+id/button_painted"
-	android:layout_width="0dp"
-	android:layout_height="wrap_content"
-	android:layout_weight="35"
-	android:singleLine="true"
-	android:text="@string/painted"
-     />
+    <EditText android:id="@+id/name"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="30"
+      android:singleLine="true"
+      android:inputType="text"
+    />
+    <CheckBox android:id="@+id/button_fixed"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="35"
+      android:singleLine="true"
+      android:text="@string/fixed"
+    />
+    <CheckBox android:id="@+id/button_painted"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="35"
+      android:singleLine="true"
+      android:text="@string/painted"
+    />
   </LinearLayout>
 
   <EditText android:id="@+id/comment"
@@ -43,100 +43,79 @@
   />
 
   <LinearLayout android:id="@+id/layout1"
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/comment"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="10dp"
-      >
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/comment"
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_marginBottom="@dimen/marginv"
+    android:layout_gravity="right"
+    android:gravity="right"
+    >
 
-      <Button android:id="@+id/button_clear"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="25"
-        android:background="@drawable/button"
-        style="@style/button_default"
-        android:layout_gravity="right"
-        android:text="@string/button_clear"
-        android:singleLine="true"
-      />
+    <Button android:id="@+id/button_clear"
+      style="@style/button_default"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="25"
+      android:text="@string/button_clear"
+      android:layout_marginRight="@dimen/marginh"
+    />
 
-      <Button android:id="@+id/button_push"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="25"
-        android:background="@drawable/button"
-        style="@style/button_default"
-        android:layout_gravity="right"
-        android:text="@string/button_save"
-        android:singleLine="true"
-      />
+    <Button android:id="@+id/button_push"
+      style="@style/button_default"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="25"
+      android:text="@string/button_save"
+      android:layout_marginRight="@dimen/marginh"
+    />
 
-      <Button android:id="@+id/button_pop"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="25"
-        android:background="@drawable/button"
-        style="@style/button_default"
-        android:text="@string/button_delete"
-        android:layout_gravity="right"
-        android:singleLine="true"
-      />
+    <Button android:id="@+id/button_pop"
+      style="@style/button_default"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="25"
+      android:text="@string/button_delete"
+    />
   </LinearLayout>
 
   <LinearLayout android:id="@+id/layout2"
-        android:layout_below="@id/layout1"
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="10dp"
-        android:layout_gravity="right"
-      >
+    android:layout_below="@id/layout1"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_marginBottom="@dimen/marginv"
+    android:layout_gravity="right"
+    android:gravity="right"
+    >
 
-      <Button android:id="@+id/button_current"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button"
-        style="@style/button_default"
-        android:text="@string/button_current"
-        android:singleLine="true"
-      />
+    <Button android:id="@+id/button_current"
+      style="@style/button_default"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/button_current"
+      android:layout_marginRight="@dimen/marginh"
+    />
 
-      <Button android:id="@+id/button_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dip"
-        android:background="@drawable/button"
-        style="@style/button_default"
-        android:text="@string/button_cancel"
-        android:singleLine="true"
-      />
+    <Button android:id="@+id/button_cancel"
+      style="@style/button_default"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/button_cancel"
+    />
   </LinearLayout>
 
-  <ListView 
-    android:id="@+id/list"
+  <ListView android:id="@+id/list"
+    style="@style/list_top"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@id/layout2"
-    android:stackFromBottom="false"
-    android:transcriptMode="alwaysScroll"
-    android:textSize="@dimen/textsize"
-    android:divider="@color/divider"
-    android:dividerHeight="2dp"
   />  
 
-  <android.inputmethodservice.KeyboardView
-    android:id="@+id/keyboardview"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:layout_centerHorizontal="true"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:gravity="bottom"
-    android:visibility="gone"
+  <android.inputmethodservice.KeyboardView android:id="@+id/keyboardview"
+    style="@style/keyboard"
   />
 
 </RelativeLayout>

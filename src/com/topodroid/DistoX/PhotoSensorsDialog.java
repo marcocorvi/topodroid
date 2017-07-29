@@ -92,7 +92,7 @@ public class PhotoSensorsDialog extends MyDialog
     setContentView(R.layout.photo_sensor_dialog);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
-    int size = TopoDroidApp.getScaledSize( mContext );
+    int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
 
     hasAudio = FeatureChecker.checkMicrophone( mContext );
 

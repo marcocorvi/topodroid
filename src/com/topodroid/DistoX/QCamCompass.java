@@ -107,7 +107,7 @@ public class QCamCompass extends Dialog
     // buttonSave   = (Button) findViewById(R.id.buttonSave);
     // buttonCancel = (Button) findViewById(R.id.buttonQuit);
 
-    int size = TopoDroidApp.getScaledSize( mContext );
+    int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
     buttonClick  = MyButton.getButton( mContext, this, R.drawable.iz_camera_red );
     buttonSave   = MyButton.getButton( mContext, this, R.drawable.iz_save_off );
     buttonCancel = MyButton.getButton( mContext, this, R.drawable.iz_cancel );

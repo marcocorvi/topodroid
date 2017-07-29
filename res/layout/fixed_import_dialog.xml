@@ -4,122 +4,105 @@
     android:layout_width="match_parent" 
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="0dp"
     android:focusable="true"
     android:focusableInTouchMode="true"
+    android:padding="0dp"
     >
-<LinearLayout 
-  android:orientation="vertical"
-  android:layout_width="fill_parent"
-  android:layout_height="wrap_content"
-  >
-  <EditText android:id="@+id/station" 
-        android:layout_marginTop="2dp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        android:hint="@string/station"
-        android:singleLine="true"
-        android:nextFocusDown="@+id/comment"
-      	android:ems="25"
-     />
-  <EditText android:id="@+id/comment" 
-        android:layout_marginTop="10dp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        android:hint="@string/comment"
-        android:singleLine="true"
-      	android:ems="25"
-     />
-
-  <LinearLayout android:id="@+id/layout0"
-    android:orientation="horizontal"
+  <LinearLayout 
+    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
     >
-    <TextView 
+    <EditText android:id="@+id/station" 
+      android:layout_marginTop="@dimen/margintiny"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content" 
+      android:hint="@string/station"
+      android:singleLine="true"
+      android:nextFocusDown="@+id/comment"
+      android:ems="25"
+    />
+    <EditText android:id="@+id/comment" 
+      android:layout_marginTop="10dp"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content" 
+      android:hint="@string/comment"
+      android:singleLine="true"
+      android:ems="25"
+    />
+    <LinearLayout android:id="@+id/layout0"
+      android:orientation="horizontal"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/marginv"
+      >
+      <TextView 
           android:id="@+id/tv_lng"
-          android:layout_marginBottom="10dp"
+          android:layout_marginBottom="@dimen/marginv"
           android:layout_width="0dp"
           android:layout_weight="40"
           android:layout_height="wrap_content"
           android:text=" "
-    />
-    <TextView 
+      />
+      <TextView 
           android:id="@+id/tv_lat"
-          android:layout_marginBottom="10dp"
+          android:layout_marginBottom="@dimen/marginv"
           android:layout_width="0dp"
           android:layout_weight="40"
           android:layout_height="wrap_content"
           android:text=" "
-    />
-    <TextView 
+      />
+      <TextView 
           android:id="@+id/tv_alt"
-          android:layout_marginBottom="10dp"
+          android:layout_marginBottom="@dimen/marginv"
           android:layout_width="0dp"
           android:layout_weight="20"
           android:layout_height="wrap_content"
           android:text=" "
-    />
-    <TextView 
+      />
+      <TextView 
           android:id="@+id/tv_asl"
-          android:layout_marginBottom="10dp"
+          android:layout_marginBottom="@dimen/marginv"
           android:layout_width="0dp"
           android:layout_weight="20"
           android:layout_height="wrap_content"
           android:text=" "
-    />
-  </LinearLayout>
+      />
+    </LinearLayout>
 
-  <LinearLayout android:id="@+id/layout4"
+    <LinearLayout android:id="@+id/layout4"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
-      android:layout_marginTop="25dip"
+      android:layout_marginTop="@dimen/marginvbig"
+      android:layout_gravity="right" 
+      android:gravity="right" 
       >
       <Button android:id="@+id/btn_view"
+        style="@style/button_default"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:background="@drawable/button"
-        style="@style/button_default"
         android:text="@string/button_view"
-        />
-      <LinearLayout 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        >
+        android:layout_marginRight="@dimen/marginh"
+      />
       <Button android:id="@+id/btn_ok"
+        style="@style/button_default"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:background="@drawable/button"
-        style="@style/button_default"
         android:text="@string/button_save"
-        />
-      </LinearLayout>
-  </LinearLayout>
+      />
+    </LinearLayout>
       
   <ListView android:id="@+id/list"
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:transcriptMode="alwaysScroll"
-        android:textSize="@dimen/textsize"
-        android:divider="@color/divider"
-        android:dividerHeight="2dp"
+    style="@style/list_top"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
   />  
    					  
 </LinearLayout>
 
-  <android.inputmethodservice.KeyboardView
-    android:id="@+id/keyboardview"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:layout_centerHorizontal="true"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:gravity="bottom"
-    android:visibility="gone"
+  <android.inputmethodservice.KeyboardView android:id="@+id/keyboardview"
+    style="@style/keyboard"
   />
 
 </RelativeLayout>

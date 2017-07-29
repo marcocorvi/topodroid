@@ -336,7 +336,7 @@ public class ShotDialog extends MyDialog
       // mETdown.setInputType( InputType.TYPE_CLASS_NUMBER );
     }
 
-    int size = TopoDroidApp.getScaledSize( mContext );
+    int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
     
     LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
     // LinearLayout layout9 = (LinearLayout) findViewById( R.id.layout9 );

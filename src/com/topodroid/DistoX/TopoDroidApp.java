@@ -212,6 +212,11 @@ public class TopoDroidApp extends Application
   // -------------------------------------------------------------------------------------
   // static SIZE methods
 
+  float getDisplayDensity( )
+  {
+    return getResources().getSystem().getDisplayMetrics().density;
+  }
+
   static float getDisplayDensity( Context context )
   {
     return context.getResources().getSystem().getDisplayMetrics().density;
@@ -224,25 +229,26 @@ public class TopoDroidApp extends Application
 
   static int setListViewHeight( Context context, HorizontalListView listView )
   {
-    int size = getScaledSize( context );
+    // int size = getScaledSize( context );
     if ( listView != null ) {
       LayoutParams params = listView.getLayoutParams();
-      params.height = size + 10;
+      params.height = TDSetting.mSizeButtons + 10;
       listView.setLayoutParams( params );
     }
-    return size;
+    return TDSetting.mSizeButtons;
   }
 
-  // default button size
-  static int getScaledSize( Context context )
-  {
-    return (int)( TDSetting.mSizeButtons * context.getResources().getSystem().getDisplayMetrics().density );
-  }
+  // UNUSED default button size
+  // static int getScaledSize( Context context )
+  // {
+  //   return (int)( TDSetting.mSizeButtons * context.getResources().getSystem().getDisplayMetrics().density );
+  // }
 
-  static int getDefaultSize( Context context )
-  {
-    return (int)( 42 * context.getResources().getSystem().getDisplayMetrics().density );
-  }
+  // UNUSED was called by HelpEntry
+  // static int getDefaultSize( Context context )
+  // {
+  //   return (int)( 42 * context.getResources().getSystem().getDisplayMetrics().density );
+  // }
 
   // ------------------------------------------------------------
   // CONSTS

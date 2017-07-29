@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-   
-    <CheckBox android:id="@+id/shots"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="true"
-        android:text="@string/flip_shots"
-    />
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  >
+ 
+  <CheckBox android:id="@+id/shots"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:checked="true"
+    android:text="@string/flip_shots"
+  />
 
-
-    <Button android:id="@+id/button_ok"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:background="@drawable/button"
-        style="@style/button_default"
-        android:text="@string/button_ok"
-        android:layout_gravity="right"
-    />
-
+  <Button android:id="@+id/button_ok"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    style="@style/button_default"
+    android:text="@string/button_ok"
+    android:layout_gravity="right"
+  />
 
 </LinearLayout>

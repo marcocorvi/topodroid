@@ -1,74 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:layout_width="fill_parent" 
+  style="@style/base_padding"
+  android:layout_width="fill_parent" 
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  >
+      				  
+  <TextView android:id="@+id/photo_name"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+    android:textSize="@dimen/textsizebig"
+  />
+
+  <ImageView android:id="@+id/photo_image"
+    android:layout_width="fill_parent"
+    android:layout_height="80sp" 
+    android:scaleType="fitCenter"
+    android:contentDescription="@string/photo"
+  />
+      				  
+  <TextView android:id="@+id/photo_azimuth" 
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+  />
+
+  <TextView android:id="@+id/photo_date" 
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+  />
+
+
+  <EditText android:id="@+id/photo_comment" 
+    style="@style/edit_text"
+    android:layout_marginTop="@dimen/margintiny"
+    android:layout_width="fill_parent"
+    android:hint="@string/comment"
+    android:scrollHorizontally="true"
+  />
+
+  <LinearLayout 
+    android:layout_width="wrap_content" 
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingLeft="6dp"
-    android:paddingRight="6dp"
-    android:paddingBottom="3dp">
-   					  
-    <TextView android:id="@+id/photo_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:textSize="@dimen/textsizebig"
-        />
-
-    <ImageView android:id="@+id/photo_image"
-        android:layout_width="fill_parent"
-        android:layout_height="80sp" 
-        android:scaleType="fitCenter"
-        android:contentDescription="@string/photo"
-        />
-   					  
-    <TextView android:id="@+id/photo_azimuth" 
-        android:layout_marginTop="10dp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        />
-
-    <TextView android:id="@+id/photo_date" 
-        android:layout_marginTop="10dp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        />
-
-
-    <EditText android:id="@+id/photo_comment" 
-        android:layout_marginTop="2dp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        android:singleLine="true"
-        android:hint="@string/comment"
-        android:scrollHorizontally="true" />
-
-    <LinearLayout 
-      android:layout_width="wrap_content" 
+    android:orientation="horizontal"
+    android:layout_marginTop="@dimen/marginvbig"
+    android:layout_gravity="right"
+    android:gravity="right"
+    >
+    <Button android:id="@+id/photo_delete"
+      style="@style/button_default"
       android:layout_height="wrap_content"
-      android:orientation="horizontal"
-      android:layout_marginTop="25dip"
-      >
-        <Button android:id="@+id/photo_delete"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:background="@drawable/button"
-                style="@style/button_default"
-                android:textColor="@color/textdelete"
-                android:text="@string/button_delete"
-        />
-        <LinearLayout 
-          android:layout_width="fill_parent" 
-          android:layout_height="wrap_content"
-          android:layout_gravity="right"
-          android:orientation="horizontal"
-        >
-        <Button android:id="@+id/photo_ok"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:background="@drawable/button"
-                style="@style/button_default"
-                android:text="@string/button_save"
-        />
-        </LinearLayout>
-    </LinearLayout>
+      android:layout_width="wrap_content"
+      android:textColor="@color/textdelete"
+      android:text="@string/button_delete"
+      android:layout_marginRight="@dimen/marginh"
+    />
+    <Button android:id="@+id/photo_ok"
+      style="@style/button_default"
+      android:layout_height="wrap_content"
+      android:layout_width="wrap_content"
+      android:text="@string/button_save"
+    />
+  </LinearLayout>
 
 </LinearLayout>

@@ -7,6 +7,6 @@
     android:textColor="@color/menu_foreground"
     android:singleLine="true"
     android:typeface="monospace"
-    android:padding="5dp"
+    android:padding="@dimen/paddingmedium"
     android:background="@color/menu_background"
 />

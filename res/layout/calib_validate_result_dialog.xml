@@ -1,69 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:layout_width="wrap_content" 
+  style="@style/base_padding"
+  android:layout_width="wrap_content" 
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  >
+ 					  
+
+  <ImageView android:id="@+id/histogram0"
+    android:layout_marginTop="@dimen/margintiny"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingLeft="6dp"
-    android:paddingRight="6dp"
-    android:paddingBottom="3dp">
-   					  
+    android:layout_gravity="center"
+    android:layout_marginBottom="@dimen/marginsmall"
+    android:contentDescription="@string/error_distribution"
+  />
+  <TextView android:id="@+id/avestd0"
+    android:layout_marginTop="@dimen/margintiny"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+  />
 
-    <ImageView android:id="@+id/histogram0"
-        android:layout_marginTop="2dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="5dip"
-        android:contentDescription="@string/error_distribution"
-        />
-    <TextView android:id="@+id/avestd0"
-        android:layout_marginTop="2dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        />
+  <ImageView android:id="@+id/histogram1"
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginBottom="@dimen/marginsmall"
+    android:contentDescription="@string/error_distribution"
+  />
+  <TextView android:id="@+id/avestd1"
+    android:layout_marginTop="@dimen/margintiny"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+  />
 
-    <ImageView android:id="@+id/histogram1"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="5dip"
-        android:contentDescription="@string/error_distribution"
-        />
-    <TextView android:id="@+id/avestd1"
-        android:layout_marginTop="2dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        />
-
-    <ImageView android:id="@+id/histogram2"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="5dip"
-        android:contentDescription="@string/error_distribution"
-        />
-    <TextView 
-        android:layout_marginTop="2dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:text="@string/calib_precision"
-        />
-    <TextView android:id="@+id/error1"
-        android:layout_marginTop="6dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        />
-    <TextView android:id="@+id/error2"
-        android:layout_marginTop="4dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        />
-    <TextView android:id="@+id/error_max"
-        android:layout_marginTop="4dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        />
+  <ImageView android:id="@+id/histogram2"
+    android:layout_marginTop="@dimen/marginsmall"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginBottom="@dimen/marginsmall"
+    android:contentDescription="@string/error_distribution"
+  />
+  <TextView 
+    android:layout_marginTop="@dimen/marginsmall"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+    android:text="@string/calib_precision"
+  />
+  <TextView android:id="@+id/error1"
+    android:layout_marginTop="@dimen/marginsmall"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+  />
+  <TextView android:id="@+id/error2"
+    android:layout_marginTop="@dimen/marginsmall"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+  />
+  <TextView android:id="@+id/error_max"
+    android:layout_marginTop="@dimen/marginsmall"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+  />
 
 </LinearLayout>

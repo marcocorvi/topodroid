@@ -220,7 +220,7 @@ public class ShotNewDialog extends MyDialog
     mBtnBack  = (Button) findViewById(R.id.button_cancel_name );
 
     LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
-    int size = TopoDroidApp.getScaledSize( mContext );
+    int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
     layout4.setMinimumHeight( size + 10 );
 
     // LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 

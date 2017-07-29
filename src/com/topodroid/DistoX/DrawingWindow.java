@@ -253,7 +253,11 @@ public class DrawingWindow extends ItemDrawer
                         R.string.help_help
                       };
 
-
+  private final static int DISMISS_NONE   = 0;
+  private final static int DISMISS_EDIT   = 1;
+  private final static int DISMISS_FILTER = 2;
+  private final static int DISMISS_JOIN   = 3;
+  private final static int DISMISS_BT     = 4;
 
   private TopoDroidApp mApp;
   private DataDownloader mDataDownloader;
@@ -779,7 +783,7 @@ public class DrawingWindow extends ItemDrawer
   @Override
   public void onBackPressed () // askClose
   {
-    if ( dismissPopups() ) return;
+    if ( dismissPopups() != DISMISS_NONE ) return;
     if ( PlotInfo.isAnySection( mType ) ) {
       mModified = true; // force saving
       startSaveTdrTask( mType, PlotSave.SAVE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP );
@@ -3311,9 +3315,9 @@ public class DrawingWindow extends ItemDrawer
 
     /** erase mode popup menu
      */
-    private void makePopupJoin( View b, int[] modes, int nr, final int code )
+    private void makePopupJoin( View b, int[] modes, int nr, final int code, int dismiss )
     {
-      if ( mPopupJoin != null ) return;
+      if ( dismiss == DISMISS_JOIN ) return;
 
       final Context context = this;
       LinearLayout popup_layout = new LinearLayout(mActivity);
@@ -3341,9 +3345,9 @@ public class DrawingWindow extends ItemDrawer
       mPopupJoin.showAsDropDown(b); 
     }
 
-    private void makePopupFilter( View b, int[] modes, int nr, final int code )
+    private void makePopupFilter( View b, int[] modes, int nr, final int code, int dismiss )
     {
-      if ( mPopupFilter != null ) return;
+      if ( dismiss == DISMISS_FILTER ) return;
 
       final Context context = this;
       LinearLayout popup_layout = new LinearLayout(mActivity);
@@ -3377,9 +3381,9 @@ public class DrawingWindow extends ItemDrawer
     /** line/area editing
      * @param b button
      */
-    private void makePopupEdit( View b )
+    private void makePopupEdit( View b, int dismiss )
     {
-      if ( mPopupEdit != null ) return;
+      if ( dismiss == DISMISS_EDIT ) return;
 
       final Context context = this;
       LinearLayout popup_layout = new LinearLayout(mActivity);
@@ -3615,12 +3619,13 @@ public class DrawingWindow extends ItemDrawer
       return false;
     }
 
-    private boolean dismissPopups() 
+    private int dismissPopups() 
     {
-      return dismissPopupEdit() 
-          || dismissPopupFilter()
-          || dismissPopupJoin()
-          || CutNPaste.dismissPopupBT();
+      if ( dismissPopupEdit() )         return DISMISS_EDIT;
+      if ( dismissPopupFilter() )       return DISMISS_FILTER;
+      if ( dismissPopupJoin() )         return DISMISS_JOIN;
+      if ( CutNPaste.dismissPopupBT() ) return DISMISS_BT;
+      return DISMISS_NONE;
     }
 
     // -----------------------------------------------------------------------------------------
@@ -3719,8 +3724,9 @@ public class DrawingWindow extends ItemDrawer
 
 
   // this is the same as in ShotWindow
-  void doBluetooth( Button b )
+  void doBluetooth( Button b, int dismiss )
   {
+    if ( dismiss == DISMISS_BT ) return;
     if ( ! mDataDownloader.isDownloading() ) {
 	// FIXME
       if ( TDLevel.overExpert && mApp.distoType() == Device.DISTO_X310 
@@ -3818,7 +3824,7 @@ public class DrawingWindow extends ItemDrawer
       }
       // TDLog.Log( TDLog.LOG_INPUT, "DrawingWindow onClick() " + view.toString() );
       // TDLog.Log( TDLog.LOG_PLOT, "DrawingWindow onClick() point " + mCurrentPoint + " symbol " + mSymbol );
-      dismissPopups();
+      int dismiss = dismissPopups();
 
       Button b = (Button)view;
       if ( b == mImage ) {
@@ -3865,7 +3871,7 @@ public class DrawingWindow extends ItemDrawer
           mDataDownloader.doDataDownload( );
         }
       } else if ( b == mButton1[k1++] ) { // BLUETOOTH
-        doBluetooth( b );
+        doBluetooth( b, dismiss );
       } else if ( b == mButton1[k1++] ) { // DISPLAY MODE 
         new DrawingModeDialog( mActivity, this, mDrawingSurface ).show();
 
@@ -3912,7 +3918,7 @@ public class DrawingWindow extends ItemDrawer
       } else if ( TDLevel.overNormal && b == mButton2[k2++] ) { //  CONT continuation popup menu
         if ( mSymbol == Symbol.LINE && BrushManager.mLineLib.getLineGroup( mCurrentLine ) != null ) {
           // setButtonContinue( (mContinueLine+1) % CONT_MAX );
-          makePopupJoin( b, Drawing.mJoinModes, 5, 0 );
+          makePopupJoin( b, Drawing.mJoinModes, 5, 0, dismiss );
         }
 
       } else if ( b == mButton3[k3++] ) { // PREV
@@ -3921,7 +3927,7 @@ public class DrawingWindow extends ItemDrawer
           if ( mDoEditRange == 0 ) mMode = MODE_SHIFT;
           setButton3Item( (pt != null)? pt.type() : -1 );
         } else {
-          makePopupFilter( b, Drawing.mSelectModes, 6, Drawing.CODE_SELECT );
+          makePopupFilter( b, Drawing.mSelectModes, 6, Drawing.CODE_SELECT, dismiss );
         }
       } else if ( b == mButton3[k3++] ) { // NEXT
         if ( mHasSelected ) {
@@ -3934,7 +3940,7 @@ public class DrawingWindow extends ItemDrawer
       } else if ( b == mButton3[k3++] ) { // ITEM/POINT EDITING: move, split, remove, etc.
         // Log.v( TopoDroidApp.TAG, "Button3[5] inLinePoint " + inLinePoint );
         if ( inLinePoint ) {
-          makePopupEdit( b );
+          makePopupEdit( b, dismiss );
         } else {
           // SelectionPoint sp = mDrawingSurface.hotItem();
           // if ( sp != null && sp.mItem.mType == DrawingPath.DRAWING_PATH_NAME ) {
@@ -4046,7 +4052,7 @@ public class DrawingWindow extends ItemDrawer
           }
         }
       } else if ( b == mButton5[k5++] ) { // ERASE MODE
-        makePopupFilter( b, Drawing.mEraseModes, 4, Drawing.CODE_ERASE ); // pulldown menu to select erase mode
+        makePopupFilter( b, Drawing.mEraseModes, 4, Drawing.CODE_ERASE, dismiss ); // pulldown menu to select erase mode
       } else if ( b == mButton5[k5++] ) { // ERASE SIZE
         setButtonEraseSize( mEraseScale + 1 ); // toggle erase size
       }

@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:layout_width="wrap_content" 
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingLeft="6dp"
-    android:paddingRight="6dp"
-    android:paddingBottom="3dp">
+  style="@style/base_padding"
+  android:layout_width="wrap_content" 
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  >
    					  
     <EditText android:id="@+id/edit_sketch3d_name" 
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="@dimen/margintiny"
         android:layout_width="wrap_content"
       	android:ems="25"
         android:layout_height="wrap_content" 
@@ -23,7 +22,7 @@
        >
 
       <EditText android:id="@+id/edit_sketch3d_start"
-         android:layout_marginTop="2dp"
+         android:layout_marginTop="@dimen/margintiny"
          android:layout_width="150dp"
          android:layout_height="wrap_content" 
       	 android:ems="25"
@@ -32,7 +31,7 @@
          android:scrollHorizontally="true" />
 
       <EditText android:id="@+id/edit_sketch3d_next"
-         android:layout_marginTop="2dp"
+         android:layout_marginTop="@dimen/margintiny"
          android:layout_width="150dp"
          android:layout_height="wrap_content" 
       	 android:ems="25"
@@ -47,14 +46,14 @@
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
-      android:layout_marginTop="25dip"
+      android:layout_marginTop="@dimen/marginvbig"
+      android:layout_gravity="right"
       android:gravity="right"
     >
     <Button android:id="@+id/button_ok"
+        style="@style/button_default"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:background="@drawable/button"
-        style="@style/button_default"
         android:text="@string/button_ok"
     />
     </LinearLayout>

@@ -14,14 +14,14 @@
         android:layout_height="wrap_content"
         android:singleLine="true"
         android:inputType="text"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/marginv"
     />
     <CheckBox android:id="@+id/splays"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:singleLine="true"
         android:text="@string/splays"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/marginv"
     />
 
     <LinearLayout android:id="@+id/layout1"
@@ -33,38 +33,23 @@
         android:layout_marginBottom="10dp"
       >
       <Button android:id="@+id/btn_search"
+        style="@style/button_default"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/button"
-        android:layout_marginRight="10dp"
-        style="@style/button_default"
-        android:layout_gravity="right"
+        android:layout_marginRight="@dimen/marginh"
         android:text="@string/button_search"
-        android:singleLine="true"
       />
       <Button android:id="@+id/btn_cancel"
+        style="@style/button_default"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/button"
-        android:layout_marginRight="10dp"
-        style="@style/button_default"
-        android:layout_gravity="right"
         android:text="@string/button_cancel"
-        android:singleLine="true"
       />
     </LinearLayout>
   </LinearLayout>
 
-  <android.inputmethodservice.KeyboardView
-    android:id="@+id/keyboardview"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:layout_centerHorizontal="true"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:gravity="bottom"
-    android:visibility="gone"
+  <android.inputmethodservice.KeyboardView android:id="@+id/keyboardview"
+    style="@style/keyboard"
   />
 
 </RelativeLayout>

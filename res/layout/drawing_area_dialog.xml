@@ -1,80 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:layout_width="fill_parent" 
-    android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:paddingLeft="6dp"
-    android:paddingRight="6dp"
-    android:paddingBottom="3dp">
+  style="@style/base_padding"
+  android:layout_width="fill_parent" 
+  android:layout_height="fill_parent"
+  android:orientation="vertical"
+  >
    					  
-    <!-- TextView android:id="@+id/area_type"
-      android:layout_marginBottom="2dp"
-      android:layout_width="fill_parent" 
-      android:layout_height="wrap_content"
-      / -->
+  <!-- TextView android:id="@+id/area_type"
+    android:layout_marginBottom="@dimen/margintiny"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    / -->
 
-    <!-- EditText android:id="@+id/area_options"
-      android:layout_width="fill_parent" 
-      android:layout_height="wrap_content"
-      android:hint="@string/options"
-      / -->
+  <!-- EditText android:id="@+id/area_options"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:hint="@string/options"
+    / -->
 
-    <CheckBox android:id="@+id/area_visible"
-      android:layout_width="fill_parent" 
-      android:layout_height="wrap_content"
-      android:text="@string/visible_border"
-      />
+  <CheckBox android:id="@+id/area_visible"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:text="@string/visible_border"
+  />
 
-    <LinearLayout 
-        android:layout_width="fill_parent" 
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="6dp"
-        android:paddingRight="6dp"
-        android:paddingBottom="10dp">
-      <ImageView android:id="@+id/image"
-         android:layout_width="wrap_content" 
-         android:layout_height="wrap_content" 
-         android:singleLine="true"
-         android:paddingLeft="15dp"
-         android:paddingRight="15dp"
-         android:contentDescription="@string/orientation"
-      />
-      <SeekBar android:id="@+id/seekbar"
-         android:layout_width="fill_parent"
-         android:layout_height="20dp" 
-         android:max="360"
-         android:background="#666666"
-         android:progressDrawable="@drawable/progress2"
-      />
-    </LinearLayout>
+  <LinearLayout 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+    <ImageView android:id="@+id/image"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:singleLine="true"
+      android:paddingLeft="@dimen/paddingh"
+      android:paddingRight="@dimen/paddingh"
+      android:contentDescription="@string/orientation"
+    />
+    <SeekBar android:id="@+id/seekbar"
+      android:layout_width="fill_parent"
+      android:layout_height="20dp" 
+      android:max="360"
+      android:background="#666666"
+      android:progressDrawable="@drawable/progress2"
+    />
+  </LinearLayout>
 
-    <LinearLayout 
-      android:layout_width="fill_parent" 
-      android:layout_height="wrap_content"
-      android:layout_gravity="right"
-      android:gravity="right"
-      android:orientation="horizontal" 
-      android:layout_marginTop="25dip"
-      >
-      <Button android:id="@+id/button_ok"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_marginRight="10dp"
-        android:background="@drawable/button"
-        style="@style/button_default"
-        android:text="@string/button_save"
-      />
-      <Button android:id="@+id/button_cancel"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_marginRight="5dp"
-        android:background="@drawable/button"
-        style="@style/button_default"
-        android:text="@string/button_cancel"
-      />
-
-
-    </LinearLayout>
+  <LinearLayout 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:layout_gravity="right"
+    android:gravity="right"
+    android:orientation="horizontal" 
+    android:layout_marginTop="@dimen/marginvbig"
+    >
+    <Button android:id="@+id/button_ok"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:layout_marginRight="@dimen/marginh"
+      style="@style/button_default"
+      android:text="@string/button_save"
+    />
+    <Button android:id="@+id/button_cancel"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      style="@style/button_default"
+      android:text="@string/button_cancel"
+    />
+  </LinearLayout>
 
 </LinearLayout>

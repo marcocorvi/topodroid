@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:layout_width="wrap_content" 
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingLeft="6dp"
-    android:paddingRight="6dp"
-    android:paddingBottom="3dp">
+  style="@style/base_padding"
+  android:layout_width="wrap_content" 
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  >
    					  
     <TextView android:id="@+id/coords"
         android:layout_width="fill_parent"
@@ -20,11 +19,10 @@
       >
 
       <Button android:id="@+id/btn_ok"
+        style="@style/button_default"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:layout_marginRight="10dp"
-        android:background="@drawable/button"
-        style="@style/button_default"
+        android:layout_marginRight="@dimen/marginh"
         android:text="@string/button_ok"
       />
 
@@ -39,15 +37,14 @@
     <LinearLayout 
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:layout_marginBottom="10dp"
+      android:layout_marginBottom="@dimen/marginv"
       android:orientation="horizontal" 
       >
 
       <Button android:id="@+id/btn_set"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:layout_marginRight="10dp"
-        android:background="@drawable/button"
+        android:layout_marginRight="@dimen/marginh"
         style="@style/button_default"
         android:text="@string/button_ok"
       />
@@ -64,15 +61,14 @@
     <LinearLayout 
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:layout_marginBottom="10dp"
+      android:layout_marginTop="@dimen/marginv"
       android:orientation="horizontal" 
       >
 
       <Button android:id="@+id/btn_break"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:layout_marginRight="10dp"
-        android:background="@drawable/button"
+        android:layout_marginTop="@dimen/marginv"
         style="@style/button_default"
         android:text="@string/button_ok"
       />
@@ -88,7 +84,7 @@
     <LinearLayout 
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:layout_marginBottom="10dp"
+      android:layout_marginBottom="@dimen/marginh"
       android:orientation="horizontal" 
       >
 
@@ -96,7 +92,6 @@
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
         android:layout_marginRight="10dp"
-        android:background="@drawable/button"
         style="@style/button_default"
         android:text="@string/button_ok"
       />
@@ -111,15 +106,14 @@
     <LinearLayout 
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:layout_marginBottom="10dp"
+      android:layout_marginTop="@dimen/marginv"
       android:orientation="horizontal" 
       >
 
       <Button android:id="@+id/btn_splays"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:layout_marginRight="10dp"
-        android:background="@drawable/button"
+        android:layout_marginRight="@dimen/marginh"
         style="@style/button_default"
         android:text="@string/button_ok"
       />
@@ -134,38 +128,34 @@
     <LinearLayout android:id="@+id/layout_xsection"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:layout_marginBottom="10dp"
+      android:layout_marginTop="@dimen/marginv"
       android:orientation="horizontal" 
       >
 
       <Button android:id="@+id/btn_xsection"
+        style="@style/button_default"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="@dimen/marginh"
         android:text="@string/button_xsection"
-        android:background="@drawable/button"
-        style="@style/button_default"
       />
 
       <Button android:id="@+id/btn_direct"
+        style="@style/button_default"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:layout_marginRight="10dp"
-        android:background="@drawable/button"
-        style="@style/button_default"
+        android:layout_marginRight="@dimen/marginh"
       />
       <Button android:id="@+id/btn_inverse"
+        style="@style/button_default"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:layout_marginRight="10dp"
-        android:background="@drawable/button"
-        style="@style/button_default"
+        android:layout_marginRight="@dimen/marginh"
       />
       <Button android:id="@+id/btn_xdelete"
+        style="@style/button_default"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:background="@drawable/button"
-        style="@style/button_default"
         android:text="@string/button_delete"
       />
 
@@ -177,12 +167,11 @@
       android:layout_gravity="right"
       android:gravity="right"
       android:orientation="horizontal" 
-      android:layout_marginTop="25dp" 
+      android:layout_marginTop="@dimen/marginv"
       >
       <Button android:id="@+id/btn_cancel"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:background="@drawable/button"
         style="@style/button_default"
         android:text="@string/button_cancel"
         />

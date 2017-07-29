@@ -51,7 +51,7 @@ public class CalibGMDialog extends MyDialog
   private Button   mButtonOK;
   private Button   mButtonDelete;
   private MyCheckBox mCBregroup;
-  // private Button   mButtonCancel;
+  private Button   mButtonCancel;
 
   private MyKeyboard mKeyboard = null;
 
@@ -84,7 +84,7 @@ public class CalibGMDialog extends MyDialog
     mETname = (EditText) findViewById(R.id.gm_name);
 
     LinearLayout layout2 = (LinearLayout) findViewById( R.id.layout2 );
-    int size = TopoDroidApp.getScaledSize( mContext );
+    int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
     layout2.setMinimumHeight( size + 20 );
     
     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
@@ -106,10 +106,10 @@ public class CalibGMDialog extends MyDialog
     // mCBregroup.setLayoutParams( params );
     
     mButtonOK     = (Button) findViewById(R.id.gm_ok );
+    mButtonCancel = (Button) findViewById(R.id.gm_cancel );
     // mButtonDelete = (Button) findViewById(R.id.gm_delete );
     // mCBregroup = (CheckBox) findViewById(R.id.gm_regroup );
     // mCBregroup.setChecked( false );
-    // // mButtonCancel = (Button) findViewById(R.id.gm_cancel );
 
     mETbearing.setText( String.format( "%.1f", mBlk.mBearing ) );
     mETclino.setText( String.format( "%.1f", mBlk.mClino ) );
@@ -119,7 +119,7 @@ public class CalibGMDialog extends MyDialog
     mETname.setHint( Long.toString( mBlk.mGroup ) );
     mButtonOK.setOnClickListener( this );
     mButtonDelete.setOnClickListener( this );
-    // mButtonCancel.setOnClickListener( this );
+    mButtonCancel.setOnClickListener( this );
 
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), R.xml.my_keyboard_base_sign, -1 );
     if ( TDSetting.mKeyboard ) {
@@ -158,8 +158,8 @@ public class CalibGMDialog extends MyDialog
       }
     } else if ( b == mButtonDelete ) {
       mParent.deleteGM( true );
-    // } else if ( b == mButtonCancel ) {
-    //   /* nothing */
+    } else if ( b == mButtonCancel ) {
+      /* nothing */
     }
     dismiss();
   }

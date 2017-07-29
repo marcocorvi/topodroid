@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:id="@+id/top"
-    android:layout_width="match_parent" 
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:paddingLeft="6dp"
-    android:paddingRight="6dp"
-    android:paddingBottom="3dp">
+  android:id="@+id/top"
+  style="@style/base_padding"
+  android:layout_width="match_parent" 
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  android:focusable="true"
+  android:focusableInTouchMode="true"
+  >
 
 
     <!-- TextView android:id="@+id/shot_info" 
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="@dimen/marginv"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/shot_info"
@@ -53,7 +52,7 @@
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:layout_below="@id/layout1"
-      android:layout_marginTop="10dp"
+      android:layout_marginTop="@dimen/marginv"
       android:orientation="horizontal" 
       >
       <EditText android:id="@+id/shot_distance" 
@@ -88,7 +87,7 @@
         android:layout_width="0dp"
         android:layout_weight="10"
         android:layout_height="wrap_content" 
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="@dimen/marginh"
         android:text="&gt;"
         />
     </LinearLayout>
@@ -98,7 +97,7 @@
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:layout_below="@id/layout2"
-      android:layout_marginTop="10dp"
+      android:layout_marginTop="@dimen/marginv"
       android:orientation="horizontal" 
       >
       <EditText android:id="@+id/shot_backdistance" 
@@ -131,7 +130,7 @@
         android:layout_width="0dp"
         android:layout_weight="10"
         android:layout_height="wrap_content" 
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="@dimen/marginh"
         android:text="&lt;"
         />
     </LinearLayout>
@@ -141,7 +140,7 @@
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:layout_below="@id/shot_backsight"
-      android:layout_marginTop="10dp"
+      android:layout_marginTop="@dimen/marginv"
       android:orientation="horizontal" 
       >
       <EditText android:id="@id/shot_left" 
@@ -187,7 +186,7 @@
       android:layout_below="@id/layout3"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content"
-      android:layout_marginTop="10dp"
+      android:layout_marginTop="@dimen/marginv"
       android:orientation="horizontal" 
       >
       <RadioButton 
@@ -223,13 +222,12 @@
       android:layout_below="@id/radio5"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content"
-      android:layout_marginTop="10dp"
+      android:layout_marginTop="@dimen/marginv"
       android:orientation="horizontal" 
       >
       <!== Button android:id="@+id/button_sensor"
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
-          android:background="@drawable/button"
           style="@style/button_default"
           android:text="@string/button_direction"
           / ==>
@@ -237,7 +235,7 @@
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
           android:background="@drawable/iz_sensor"
-          android:layout_marginRight="10dp"
+          android:layout_marginRight="@dimen/marginh"
           />
 
       <CheckBox android:id="@+id/splay_at_to"
@@ -252,53 +250,40 @@
           android:layout_width="wrap_content"
           android:prompt="@string/extend"/ -->
 
-    <LinearLayout 
-      android:id="@+id/layout6"
+    <LinearLayout android:id="@+id/layout6"
       android:layout_below="@id/layout4"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
-      android:layout_marginTop="25dip"
+      android:layout_marginTop="@dimen/marginvbig"
       android:layout_gravity="right"
+      android:gravity="right"
       >
-
       <Button android:id="@+id/button_ok_shot_name"
+        style="@style/button_default"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:background="@drawable/button"
-        style="@style/button_default"
+        android:layout_marginRight="@dimen/marginh"
         android:text="@string/button_ok"
       />
-   		
       <Button android:id="@+id/button_save_shot_name"
+        style="@style/button_default"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:layout_marginLeft="10dp"
-        android:background="@drawable/button"
-        style="@style/button_default"
+        android:layout_marginRight="@dimen/marginh"
         android:text="@string/button_save"
       />
       <Button android:id="@+id/button_cancel_name"
+        style="@style/button_default"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:layout_marginLeft="10dp"
-        android:background="@drawable/button"
-        style="@style/button_default"
         android:text="@string/button_cancel"
       />
   </LinearLayout>
    					  
 
-  <android.inputmethodservice.KeyboardView
-    android:id="@+id/keyboardview"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:layout_centerHorizontal="true"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:gravity="bottom"
-    android:visibility="gone"
+  <android.inputmethodservice.KeyboardView android:id="@+id/keyboardview"
+    style="@style/keyboard"
   />
 
    		

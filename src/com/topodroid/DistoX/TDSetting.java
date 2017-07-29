@@ -21,6 +21,14 @@ import android.util.Log;
 
 class TDSetting
 {
+  static String defaultTextSize = "16";
+  static String defaultButtonSize = "1";
+
+  static void setTextSize( TopoDroidApp app, int ts )
+  {
+    float ds = app.getDisplayDensity() / 3.0f;
+    mTextSize = (int)( ( ds * ts ) );
+  }
 
   // ---------------------------------------------------------
   // PREFERENCES KEYS
@@ -193,9 +201,10 @@ class TDSetting
   // prefs default values
   static String  mDefaultTeam = "";
 
-  static int mSizeButtons     = 42;      // action bar buttons scale (either 1 or 2)
-  static int mTextSize        = 16;     // list text size 
-  static boolean mKeyboard    = true;
+  static int mSizeBtns     = 0;      // action bar buttons scale (either 1 or 2)
+  static int mSizeButtons;
+  static int mTextSize     = 16;     // list text size 
+  static boolean mKeyboard = true;
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   // IMPORT EXPORT
@@ -586,28 +595,38 @@ class TDSetting
     }
   }
 
-  static private int getSizeButtons( int size )
+  static private boolean setSizeButtons( TopoDroidApp app, int size )
   {
+    int sz = mSizeBtns;
     switch ( size ) {
-      case 0: return 36; // small
-      case 1: return 42; // normal
-      case 3: return 48; // medium
-      case 4: return 64; // large
-      case 2: return 84; // huge
+      case 0: sz = 36; break; // small
+      case 1: sz = 42; break; // normal
+      case 3: sz = 48; break; // medium
+      case 4: sz = 64; break; // large
+      case 2: sz = 84; break; // huge
     }
-    return mSizeButtons;
+    if ( sz != mSizeBtns ) {
+      mSizeBtns = sz;
+      mSizeButtons = (int)( mSizeBtns * app.getDisplayDensity() * 0.86f );
+      // Log.v("DistoX", "Size " + size + " Btns " + mSizeBtns + " " + mSizeButtons );
+      return true;
+    }
+    return false;
   }
 
   static void loadPrimaryPreferences( TopoDroidApp app, SharedPreferences prefs )
   {
+    defaultTextSize   = app.getResources().getString( R.string.default_textsize );
+    defaultButtonSize = app.getResources().getString( R.string.default_buttonsize );
+
     // ------------------- GENERAL PREFERENCES
     int k = 0;
 
     int level = Integer.parseInt( prefs.getString( key[k++], "1" ) ); // DISTOX_EXTRA_BUTTONS choice: 0, 1, 2, 3
     setActivityBooleans( app, level );
 
-    mSizeButtons = getSizeButtons( tryInt( prefs, key[k++], "1" ) ); // choice: 1, 2, 3, 4  // DISTOX_BUTTON_SIZE
-    mTextSize    = tryInt( prefs, key[k++], "16" );                // DISTOX_TEXT_SIZE
+    setSizeButtons( app, tryInt( prefs, key[k++], defaultButtonSize ) ); // DISTOX_SIZE_BUTTONS
+    setTextSize( app, tryInt( prefs, key[k++], defaultTextSize ) );// DISTOX_TEXT_SIZE
     mKeyboard    = prefs.getBoolean( key[k++], true );             // DISTOX_MKEYBOARD
     mDefaultTeam = prefs.getString( key[k++], "" );                // DISTOX_TEAM
     boolean co_survey = prefs.getBoolean( key[k++], false );       // DISTOX_COSURVEY 
@@ -831,14 +850,12 @@ class TDSetting
           main_window.setMenuAdapter( app.getResources() );
         }  
       }
-    } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_BUTTON_SIZE
-      int size = getSizeButtons( tryInt( prefs, k, "1" ) );
-      if ( size != mSizeButtons ) {
-        mSizeButtons = size;
+    } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_SIZE_BUTTONS
+      if ( setSizeButtons( app, tryInt( prefs, k, defaultButtonSize ) ) ) {
         if ( main_window != null ) main_window.resetButtonBar();
       }
     } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_TEXT_SIZE
-      mTextSize = tryInt( prefs, k, "16" );
+      setTextSize( app, tryInt( prefs, k, defaultTextSize ) );
   
     } else if ( k.equals( key[ nk++ ] ) ) {
       mKeyboard = prefs.getBoolean( k, true );           // DISTOX_MKEYBOARD

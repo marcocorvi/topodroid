@@ -1,143 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-      android:orientation="vertical"
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  >
+  <LinearLayout 
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    >
+    <Button android:id="@+id/item_point"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/POINT"
+      android:textSize="@dimen/textsizehead"
+    />
+    <Button android:id="@+id/item_line"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/LINE"
+      android:textSize="@dimen/textsizehead"
+    />
+    <Button android:id="@+id/item_area"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/AREA"
+      android:textSize="@dimen/textsizehead"
+    />
+    <LinearLayout 
       android:layout_width="fill_parent"
-      android:layout_height="fill_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:gravity="right"
       >
-      <LinearLayout 
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-      >
-        <Button android:id="@+id/item_point"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/POINT"
-                android:textSize="@dimen/textsizehead"
-        />
-        <Button android:id="@+id/item_line"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/LINE"
-                android:textSize="@dimen/textsizehead"
-        />
-        <Button android:id="@+id/item_area"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/AREA"
-                android:textSize="@dimen/textsizehead"
-        />
-        <LinearLayout 
-          android:layout_width="fill_parent"
-          android:layout_height="wrap_content"
-          android:orientation="horizontal"
-          android:gravity="right"
-          >
-          <!-- Button android:id="@+id/item_left"
-            android:layout_width="wrap_content" 
-            android:layout_height="wrap_content" 
-            android:layout_marginRight="10sp"
-            android:layout_marginTop="10sp"
-            android:background="@drawable/ic_undo"
-          / -->
-          <!-- Button android:id="@+id/item_right"
-            android:layout_width="wrap_content" 
-            android:layout_height="wrap_content" 
-            android:layout_marginRight="10sp"
-            android:layout_marginTop="10sp"
-            android:background="@drawable/ic_redo"
-          / -->
-          <SeekBar android:id="@+id/seekbar"
-             android:layout_width="fill_parent"
-             android:layout_height="20sp" 
-             android:max="360"
-             android:background="#666666"
-             android:progressDrawable="@drawable/progress2"
-          />
-        </LinearLayout>
+      <!-- Button android:id="@+id/item_left"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginTop="@dimen/marginv"
+        android:background="@drawable/ic_undo"
+      / -->
+      <!-- Button android:id="@+id/item_right"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginTop="@dimen/marginv"
+        android:background="@drawable/ic_redo"
+      / -->
+      <SeekBar android:id="@+id/seekbar"
+         android:layout_width="fill_parent"
+         android:layout_height="20sp" 
+         android:max="360"
+         android:background="#666666"
+         android:progressDrawable="@drawable/progress2"
+      />
+    </LinearLayout>
 
-      </LinearLayout>
+  </LinearLayout>
 
-      <LinearLayout android:id="@+id/layout2"
-        android:layout_width="fill_parent"
+  <LinearLayout android:id="@+id/layout2"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_marginBottom="@dimen/marginv"
+    android:layout_marginRight="@dimen/marginh"
+    android:layout_marginLeft="@dimen/marginh"
+    android:orientation="horizontal"
+  >
+    <Button android:id="@+id/size"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15sp"
-        android:layout_marginBottom="15sp"
-        android:layout_marginRight="10sp"
-        android:layout_marginLeft="10sp"
-        android:orientation="horizontal"
-      >
-        <Button android:id="@+id/size"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10sp"
-            android:background="@drawable/button"
-            style="@style/button_default"
-            android:text="-/+"
-        />
+        android:layout_marginRight="@dimen/marginh"
+        style="@style/button_default"
+        android:text="-/+"
+    />
 <!--
-            android:layout_weight="10"
-          <com.topodroid.DistoX.ItemButton android:id="@+id/recent0"
-            android:layout_width="0sp" 
-            android:layout_height="wrap_content" 
-            android:layout_weight="20"
-            android:layout_marginRight="10sp"
-          />
-          <com.topodroid.DistoX.ItemButton android:id="@+id/recent1"
-            android:layout_width="0sp" 
-            android:layout_height="wrap_content" 
-            android:layout_weight="20"
-            android:layout_marginRight="10sp"
-          />
-          <com.topodroid.DistoX.ItemButton android:id="@+id/recent2"
-            android:layout_width="0sp" 
-            android:layout_height="wrap_content" 
-            android:layout_weight="20"
-            android:layout_marginRight="10sp"
-          />
-          <com.topodroid.DistoX.ItemButton android:id="@+id/recent3"
-            android:layout_width="0sp" 
-            android:layout_height="wrap_content" 
-            android:layout_weight="20"
-          />
+        android:layout_weight="10"
+      <com.topodroid.DistoX.ItemButton android:id="@+id/recent0"
+        android:layout_width="0sp" 
+        android:layout_height="wrap_content" 
+        android:layout_weight="20"
+        android:layout_marginRight="@dimen/marginh"
+      />
+      <com.topodroid.DistoX.ItemButton android:id="@+id/recent1"
+        android:layout_width="0sp" 
+        android:layout_height="wrap_content" 
+        android:layout_weight="20"
+        android:layout_marginRight="@dimen/marginh"
+      />
+      <com.topodroid.DistoX.ItemButton android:id="@+id/recent2"
+        android:layout_width="0sp" 
+        android:layout_height="wrap_content" 
+        android:layout_weight="20"
+        android:layout_marginRight="@dimen/marginh"
+      />
+      <com.topodroid.DistoX.ItemButton android:id="@+id/recent3"
+        android:layout_width="0sp" 
+        android:layout_height="wrap_content" 
+        android:layout_weight="20"
+      />
 -->
-      </LinearLayout>
+  </LinearLayout>
 
-      <GridView android:id="@+id/item_grid"
-          android:layout_width="fill_parent"
-          android:layout_height="0dp"
-          android:transcriptMode="alwaysScroll"
-          android:layout_weight="1"
-          android:background="#111"
-          android:numColumns="auto_fit"
-          android:gravity="center"
-          android:stretchMode="columnWidth"
-          android:columnWidth="80sp"
-      />
+  <GridView android:id="@+id/item_grid"
+      android:layout_width="fill_parent"
+      android:layout_height="0dp"
+      android:transcriptMode="alwaysScroll"
+      android:layout_weight="1"
+      android:background="#111"
+      android:numColumns="auto_fit"
+      android:gravity="center"
+      android:stretchMode="columnWidth"
+      android:columnWidth="80sp"
+  />
 
-      <GridView android:id="@+id/item_grid_line"
-          android:layout_width="fill_parent"
-          android:layout_height="0dp"
-          android:transcriptMode="alwaysScroll"
-          android:layout_weight="1"
-          android:background="#111"
-          android:numColumns="auto_fit"
-          android:gravity="center"
-          android:stretchMode="columnWidth"
-          android:columnWidth="80sp"
-      />
+  <GridView android:id="@+id/item_grid_line"
+      android:layout_width="fill_parent"
+      android:layout_height="0dp"
+      android:transcriptMode="alwaysScroll"
+      android:layout_weight="1"
+      android:background="#111"
+      android:numColumns="auto_fit"
+      android:gravity="center"
+      android:stretchMode="columnWidth"
+      android:columnWidth="80sp"
+  />
 
-      <GridView android:id="@+id/item_grid_area"
-          android:layout_width="fill_parent"
-          android:layout_height="0dp"
-          android:transcriptMode="alwaysScroll"
-          android:layout_weight="1"
-          android:background="#111"
-          android:numColumns="auto_fit"
-          android:gravity="center"
-          android:stretchMode="columnWidth"
-          android:columnWidth="80sp"
-      />
+  <GridView android:id="@+id/item_grid_area"
+      android:layout_width="fill_parent"
+      android:layout_height="0dp"
+      android:transcriptMode="alwaysScroll"
+      android:layout_weight="1"
+      android:background="#111"
+      android:numColumns="auto_fit"
+      android:gravity="center"
+      android:stretchMode="columnWidth"
+      android:columnWidth="80sp"
+  />
 
   </LinearLayout>
 

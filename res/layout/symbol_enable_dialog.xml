@@ -8,7 +8,7 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10sp"
+        android:layout_marginTop="@dimen/marginv"
       >
         <Button android:id="@+id/symbol_point"
                 android:layout_width="wrap_content"
@@ -38,25 +38,25 @@
           <!-- Button android:id="@+id/symbol_reload"
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
-            android:background="@drawable/button"
             style="@style/button_default"
             android:text="@string/btn_install"
-            android:layout_marginTop="10sp"
+            android:layout_marginRight="@dimen/marginh"
+            android:layout_marginTop="@dimen/marginv"
           / -->
 
           <!-- Button android:id="@+id/symbol_sync"
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
-            android:layout_marginRight="10sp"
-            android:layout_marginTop="10sp"
+            android:layout_marginRight="@dimen/marginh"
+            android:layout_marginTop="@dimen/marginv"
             android:background="@drawable/ic_download"
           / -->
 
           <!-- Button android:id="@+id/symbol_cancel"
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
-            android:layout_marginRight="10sp"
-            android:layout_marginTop="10sp"
+            android:layout_marginRight="@dimen/marginh"
+            android:layout_marginTop="@dimen/marginv"
             android:background="@drawable/ic_cancel"
           / -->
 
@@ -64,10 +64,9 @@
 
       </LinearLayout>
       <ListView android:id="@+id/symbol_list"
+          style="@style/list_top"
           android:layout_width="fill_parent"
           android:layout_height="0dp"
-          android:stackFromBottom="false"
-          android:transcriptMode="alwaysScroll"
           android:layout_weight="1"
           android:background="#111"
       />  

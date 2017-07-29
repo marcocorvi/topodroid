@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    style="@style/base_padding"
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingLeft="6dp"
-    android:paddingRight="6dp"
-    android:paddingBottom="3dp">
+    >
 
     <Button
       android:id="@+id/btn_azimuth"
       android:layout_width="96dp"
       android:layout_height="96dp"
       android:layout_gravity="center"
-      android:background="@drawable/iz_dial"
       style="@style/button_default"
-      android:layout_marginTop="10dp"
+      android:layout_marginTop="@dimen/marginv"
       />
 
     <SeekBar android:id="@+id/seekbar"
@@ -24,66 +22,57 @@
       android:max="360"
       android:background="#666666"
       android:progressDrawable="@drawable/progress2"
-      android:layout_marginTop="10dp"
+      android:layout_marginTop="@dimen/marginv"
     />
 
     <LinearLayout android:id="@+id/layout4"
+      android:orientation="horizontal" 
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content"
-      android:layout_marginTop="10dp"
-      android:orientation="horizontal" 
+      android:layout_marginTop="@dimen/marginv"
       >
       <EditText android:id="@+id/et_azimuth"
-          android:layout_width="100dp" 
-          android:layout_height="wrap_content" 
-          android:layout_marginRight="10dp"
-          android:singleLine="true"
-          android:inputType="number"
-          android:imeOptions="actionDone"
+        style="@style/edit_number"
+        android:layout_width="100dp" 
+        android:layout_marginRight="@dimen/marginh"
+        android:imeOptions="actionDone"
       />    
       <!-- Button android:id="@+id/btn_sensor"
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content" 
-          android:background="@drawable/button"
-          style="@style/button_default"
-          android:text="@string/button_azimuth"
-          / -->
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        style="@style/button_default"
+        android:text="@string/button_azimuth"
+        / -->
     </LinearLayout>
 
     <LinearLayout android:id="@+id/layout5"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
-      android:layout_marginTop="25dip"
+      android:layout_marginTop="@dimen/marginvbig"
       >
       <Button android:id="@+id/btn_left"
+        style="@style/button_default"
         android:layout_width="0dp" 
         android:layout_height="wrap_content" 
         android:layout_weight="25"
-        android:background="@drawable/button"
-        style="@style/button_default"
         android:text="@string/button_left"
-        android:layout_marginRight="20dp"
-        android:singleLine="true"
+        android:layout_marginRight="@dimen/marginh"
       />
       <Button android:id="@+id/btn_ok"
+        style="@style/button_default"
         android:layout_width="0dp" 
         android:layout_height="wrap_content" 
         android:layout_weight="25"
-        android:background="@drawable/button"
-        style="@style/button_default"
         android:text="@string/button_ok"
-        android:singleLine="true"
+        android:layout_marginRight="@dimen/marginh"
       />
       <Button android:id="@+id/btn_right"
+        style="@style/button_default"
         android:layout_width="0dp" 
         android:layout_height="wrap_content" 
         android:layout_weight="25"
-        android:background="@drawable/button"
-        style="@style/button_default"
         android:text="@string/button_right"
-        android:layout_marginLeft="20dp"
-        android:singleLine="true"
       />
     </LinearLayout>
    					  
@@ -91,16 +80,15 @@
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
+      android:layout_gravity="right"
       android:gravity="right"
-      android:layout_marginTop="25sp" 
+      android:layout_marginTop="@dimen/marginvbig"
       >
       <Button android:id="@+id/button_cancel"
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content" 
-          android:layout_marginLeft="10sp" 
-          android:background="@drawable/button"
-          style="@style/button_default"
-          android:text="@string/button_cancel"
+        style="@style/button_default"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:text="@string/button_cancel"
       />
     </LinearLayout>
    					  

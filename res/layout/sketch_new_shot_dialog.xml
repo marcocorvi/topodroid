@@ -74,35 +74,25 @@
       android:text="@string/splay"
       />
 
-    <LinearLayout 
-      android:id="@+id/layout3"
+    <LinearLayout android:id="@+id/layout3"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:layout_below="@id/cb_splay"
       android:orientation="horizontal"
-      android:layout_marginTop="25dip"
+      android:layout_marginTop="@dimen/marginvbig"
+      android:layout_gravity="right"
       android:gravity="right"
       >
       <Button android:id="@+id/btn_ok"
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content" 
-          android:singleLine="true"
-          android:paddingLeft="15dp"
-          android:paddingRight="15dp"
-          android:text="@string/button_ok"
+        style="@style/button_default"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:text="@string/button_ok"
       />
     </LinearLayout>
 
-  <android.inputmethodservice.KeyboardView
-    android:id="@+id/keyboardview"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:layout_centerHorizontal="true"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:gravity="bottom"
-    android:visibility="gone"
+  <android.inputmethodservice.KeyboardView android:id="@+id/keyboardview"
+    style="@style/keyboard"
   />
 
 </RelativeLayout>

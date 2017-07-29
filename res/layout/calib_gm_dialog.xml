@@ -1,98 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:layout_width="match_parent" 
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="0dp"
-    >
+  android:layout_width="match_parent" 
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  >
 
   <LinearLayout 
-      android:id="@+id/layout1"
-      android:layout_width="fill_parent" 
-      android:layout_height="wrap_content"
-      android:layout_marginTop="30dp"
-      android:orientation="horizontal"
-      >
+    android:id="@+id/layout1"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/marginvbig"
+    android:orientation="horizontal"
+    >
     <EditText android:id="@+id/gm_bearing"
-        android:layout_width="0dp"
-        android:layout_weight="30"
-        android:layout_height="wrap_content" 
-        android:textSize="@dimen/textsizebig"
-        android:layout_marginRight="10dp"
-        android:inputType="numberDecimal"
-        android:singleLine="true"
-        />
+      style="@style/edit_decimal"
+      android:layout_width="0dp"
+      android:layout_weight="30"
+      android:textSize="@dimen/textsizebig"
+      android:layout_marginRight="@dimen/marginh"
+    />
     <EditText android:id="@+id/gm_clino"
-        android:layout_width="0dp"
-        android:layout_weight="30"
-        android:layout_height="wrap_content" 
-        android:textSize="@dimen/textsizebig"
-        android:layout_marginRight="10dp"
-        android:inputType="numberDecimal|numberSigned"
-        android:singleLine="true"
-        />
+      style="@style/edit_signeddecimal"
+      android:layout_width="0dp"
+      android:layout_weight="30"
+      android:textSize="@dimen/textsizebig"
+      android:layout_marginRight="@dimen/marginh"
+    />
     <EditText android:id="@+id/gm_roll"
-        android:layout_width="0dp"
-        android:layout_weight="30"
-        android:layout_height="wrap_content" 
-        android:textSize="@dimen/textsizebig"
-        android:inputType="numberDecimal"
-        android:singleLine="true"
-        />
+      style="@style/edit_decimal"
+      android:layout_width="0dp"
+      android:layout_weight="30"
+      android:textSize="@dimen/textsizebig"
+    />
   </LinearLayout>
 
   <TextView android:id="@+id/gm_error"
-        android:layout_below="@id/layout1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        android:textSize="@dimen/textsizebig"
-        />
+    android:layout_below="@id/layout1"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    android:textSize="@dimen/textsizebig"
+    android:layout_marginTop="@dimen/margintiny"
+  />
    					  
   <EditText android:id="@+id/gm_name" 
-        android:layout_below="@id/gm_error"
-        android:maxLines="1" 
-        android:layout_marginTop="2dp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        android:inputType="number"
-        />
+    style="@style/edit_number"
+    android:layout_below="@id/gm_error"
+    android:maxLines="1" 
+    android:layout_width="fill_parent"
+    android:layout_marginTop="@dimen/margintiny"
+  />
    		
   <LinearLayout android:id="@+id/layout2"
-      android:layout_below="@id/gm_name"
-      android:layout_width="fill_parent" 
-      android:layout_height="wrap_content"
-      android:orientation="horizontal" 
-      android:layout_marginTop="40dp" 
-      >
+    android:layout_below="@id/gm_name"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" 
+    android:layout_marginTop="@dimen/marginhuge" 
+    >
   </LinearLayout>
 
   <LinearLayout android:id="@+id/layout3"
-      android:layout_below="@id/layout2"
-      android:layout_width="fill_parent" 
-      android:layout_height="wrap_content"
-      android:orientation="horizontal" 
-      android:layout_marginTop="40dp" 
-      android:gravity="right"
-      >
-      <Button android:id="@+id/gm_ok"
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content" 
-          android:text="@string/button_save"
-          android:background="@drawable/button"
-          style="@style/button_default"
-      />
+    android:layout_below="@id/layout2"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" 
+    android:layout_marginTop="@dimen/marginvbig" 
+    android:layout_gravity="right"
+    android:gravity="right"
+    >
+    <Button android:id="@+id/gm_ok"
+      style="@style/button_default"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:text="@string/button_save"
+      android:layout_marginRight="@dimen/marginh" 
+    />
+    <Button android:id="@+id/gm_cancel"
+      style="@style/button_default"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:text="@string/button_cancel"
+    />
   </LinearLayout>
 
-  <android.inputmethodservice.KeyboardView
-    android:id="@+id/keyboardview"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:layout_centerHorizontal="true"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:gravity="bottom"
-    android:visibility="gone"
+  <android.inputmethodservice.KeyboardView android:id="@+id/keyboardview"
+    style="@style/keyboard"
   />
 
 </RelativeLayout>
