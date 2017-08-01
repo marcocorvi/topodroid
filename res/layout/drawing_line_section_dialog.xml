@@ -35,6 +35,13 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/marginv"
   />
+  
+  <EditText android:id="@+id/line_nick"
+    style="@style/edit_text"
+    android:layout_width="fill_parent" 
+    android:layout_marginTop="@dimen/marginv"
+    android:hint="@string/section_name"
+  />
 
   <LinearLayout 
     android:layout_width="fill_parent" 

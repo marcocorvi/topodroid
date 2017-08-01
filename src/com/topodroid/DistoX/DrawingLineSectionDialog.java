@@ -47,6 +47,7 @@ public class DrawingLineSectionDialog extends MyDialog
   PlotInfo mPlotInfo;
   String  mFrom;
   String  mTo;
+  String  mNick;
   float   mAzimuth;
   float   mClino;
   private int mOrientation = 0;
@@ -55,6 +56,7 @@ public class DrawingLineSectionDialog extends MyDialog
   private Button   mBtnDraw;
   private Button   mBtnErase;
   // private Button   mBtnCancel;
+  private EditText mETnick;
   private ImageView mIVimage;   // photo image
   boolean mHSection;
   boolean mExists;
@@ -73,6 +75,7 @@ public class DrawingLineSectionDialog extends MyDialog
     mLine = line;
     mFrom = from;
     mTo   = to;
+    mNick = null;
     mAzimuth = azimuth;
     mClino = clino;
     mFilename = null;
@@ -93,6 +96,7 @@ public class DrawingLineSectionDialog extends MyDialog
       if ( mPlotInfo != null ) { // extra careful
         mFrom     = mPlotInfo.start;
         mTo       = mPlotInfo.view;
+        mNick     = mPlotInfo.hide;
         mAzimuth  = mPlotInfo.azimuth;
         mClino    = mPlotInfo.clino;
         mHSection = (mPlotInfo.type == PlotInfo.PLOT_H_SECTION);
@@ -116,6 +120,11 @@ public class DrawingLineSectionDialog extends MyDialog
 
     TextView tv_azimuth = (TextView) findViewById( R.id.line_azimuth );
     TextView tv_date    = (TextView) findViewById( R.id.line_date );
+
+    mETnick = (EditText) findViewById( R.id.line_nick );
+    if ( mNick != null && mNick.length() > 0 ) {
+      mETnick.setText( mNick );
+    }
 
     // mReversed = (CheckBox) findViewById( R.id.line_reversed );
     // mReversed.setChecked( mLine.mReversed );
@@ -202,13 +211,14 @@ public class DrawingLineSectionDialog extends MyDialog
   {
     // TDLog.Log( TDLog.LOG_INPUT, "Drawing Line Section Dialog onClick() " + b.getText().toString() );
     long type = mHSection ? PlotInfo.PLOT_H_SECTION : PlotInfo.PLOT_SECTION;
+    mNick = ( mETnick.getText() != null )? mETnick.getText().toString() : "";
 
     switch ( v.getId() ) {
       case R.id.button_foto:
-        mParent.makeSectionPhoto( mLine, mId, type, mFrom, mTo, mAzimuth, mClino );
+        mParent.makeSectionPhoto( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino );
         break;
       case R.id.button_draw:
-        mParent.makeSectionDraw( mLine, mId, type, mFrom, mTo, mAzimuth, mClino );
+        mParent.makeSectionDraw( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino );
         break;
       case R.id.button_erase:
         mParent.deleteLine( mLine );

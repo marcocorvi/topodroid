@@ -4096,20 +4096,26 @@ public class DrawingWindow extends ItemDrawer
       );
     }
 
-    void makeSectionPhoto( DrawingLinePath line, String id, long type,
-                           String from, String to, float azimuth, float clino )
+    private long prepareSection( String id, long type,
+                                 String from, String to, String nick, float azimuth, float clino )
     {
       mCurrentLine = BrushManager.mLineLib.mLineWallIndex;
       if ( ! BrushManager.mLineLib.isSymbolEnabled( "wall" ) ) mCurrentLine = 0;
       setTheTitle();
 
-      if ( id == null || id.length() == 0 ) return;
+      if ( id == null || id.length() == 0 ) return -1;
       mSectionName = id;
       long pid = mApp.mData.getPlotId( mApp.mSID, mSectionName );
-
       if ( pid < 0 ) { 
-        pid = mApp.insert2dSection( mApp.mSID, mSectionName, type, from, to, azimuth, clino, null );
+        pid = mApp.insert2dSection( mApp.mSID, mSectionName, type, from, to, azimuth, clino, nick );
       }
+      return pid;
+    }
+
+    void makeSectionPhoto( DrawingLinePath line, String id, long type,
+                           String from, String to, String nick, float azimuth, float clino )
+    {
+      long pid = prepareSection( id, type, from, to, nick, azimuth, clino );
       if ( pid >= 0 ) {
         // imageFile := PHOTO_DIR / surveyId / photoId .jpg
         File imagefile = new File( TDPath.getSurveyJpgFile( mApp.mySurvey, id ) );
@@ -4125,23 +4131,11 @@ public class DrawingWindow extends ItemDrawer
     // @param to     to station
     // @param azimuth
     // @param clino
-    void makeSectionDraw( DrawingLinePath line, String id, long type, String from, String to, float azimuth, float clino )
+    void makeSectionDraw( DrawingLinePath line, String id, long type, String from, String to, String nick,
+                          float azimuth, float clino )
     {
       // Log.v("DistoX", "make section: " + id + " <" + from + "-" + to + "> azimuth " + azimuth + " clino " + clino );
-
-      mCurrentLine = BrushManager.mLineLib.mLineWallIndex;
-      if ( ! BrushManager.mLineLib.isSymbolEnabled( "wall" ) ) mCurrentLine = 0;
-      setTheTitle();
-
-      if ( id == null || id.length() == 0 ) return;
-      mSectionName = id;
-      long pid = mApp.mData.getPlotId( mApp.mSID, mSectionName );
-
-      if ( pid < 0 ) { 
-        // pid = mApp.mData.insertPlot( mApp.mSID, -1L, mSectionName, type, 0L, from, to, 
-        //                              0, 0, TopoDroidApp.mScaleFactor, azimuth, clino, false ); // forward or not ?
-        pid = mApp.insert2dSection( mApp.mSID, mSectionName, type, from, to, azimuth, clino, null );
-      }
+      long pid = prepareSection( id, type, from, to, nick, azimuth, clino );
       if ( pid >= 0 ) {
         pushInfo( type, mSectionName, from, to, azimuth, clino );
         zoomFit( mDrawingSurface.getBitmapBounds() );
@@ -4620,31 +4614,31 @@ public class DrawingWindow extends ItemDrawer
   {
     // Log.v("DistoX", "export as CSX <<" + cave + ">>" );
     List< PlotInfo > all_sections = mData.selectAllPlotsSection( mSid, TDStatus.NORMAL );
+    ArrayList< PlotInfo > sections1 = new ArrayList< PlotInfo >(); // plan xsections
+    ArrayList< PlotInfo > sections2 = new ArrayList< PlotInfo >(); // profile xsections
+
     pw.format("  <plan>\n");
-    ArrayList< PlotInfo > sections1 = new ArrayList< PlotInfo >();
     mDrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_PLAN, survey, cave, branch, all_sections, sections1 );
     pw.format("    <plot />\n");
+    pw.format("  </plan>\n");
+    
+    pw.format("  <profile>\n");
+    mDrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_EXTENDED, survey, cave, branch, all_sections, sections2 ); 
+    pw.format("    <plot />\n");
+    pw.format("  </profile>\n");
+
     pw.format("    <crosssections>\n");
     for ( PlotInfo section1 : sections1 ) {
-      pw.format("    <crosssection id=\"%s\" design=\"0\" crosssection=\"%s\">\n", section1.name, section1.name );
+      pw.format("    <crosssection id=\"%s\" design=\"0\" crosssection=\"%d\">\n", section1.name, section1.csxIndex );
       exportCsxXSection( pw, section1, survey, cave, branch );
       pw.format("    </crosssection>\n" );
     }
-    pw.format("    </crosssections>\n");
-    pw.format("  </plan>\n");
-
-    pw.format("  <profile>\n");
-    ArrayList< PlotInfo > sections2 = new ArrayList< PlotInfo >();
-    mDrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_EXTENDED, survey, cave, branch, all_sections, sections2 ); 
-    pw.format("    <plot />\n");
-    pw.format("    <crosssections>\n");
     for ( PlotInfo section2 : sections2 ) {
-      pw.format("    <crosssection id=\"%s\" design=\"1\" crosssection=\"%s\">\n", section2.name, section2.name );
+      pw.format("    <crosssection id=\"%s\" design=\"1\" crosssection=\"%d\">\n", section2.name, section2.csxIndex );
       exportCsxXSection( pw, section2, survey, cave, branch );
       pw.format("    </crosssection>\n" );
     }
     pw.format("    </crosssections>\n");
-    pw.format("  </profile>\n");
   }
 
   private void exportCsxXSection( PrintWriter pw, PlotInfo section, String survey, String cave, String branch )
@@ -4652,7 +4646,7 @@ public class DrawingWindow extends ItemDrawer
     // String name = section.name; // binding name
     // open xsection file
     String filename = TDPath.getSurveyPlotTdrFile( survey, section.name );
-    DrawingIO.exportCsxXSection( pw, filename, section.name, survey, cave, branch );
+    DrawingIO.doExportCsxXSection( pw, filename, survey, cave, branch, section.name ); // bind=section.name
   }
 
   public void setConnectionStatus( int status )

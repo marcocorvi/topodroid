@@ -362,6 +362,7 @@
     <!-- UNUSED string name="converted_tdr2th2">Конвертировать бинарные файлы абрисов в формат th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Перезаписать абрисы в формате th2 ?</string -->
     <string name="section_area">Площадь сечения: %1$.1f</string>
+    <!-- TODO string name="section_name">section name</string -->
     <string name="scrap_outline">Контуры другого абриса</string>
 
     <!-- UNUSED string name="sensor">датчик</string -->

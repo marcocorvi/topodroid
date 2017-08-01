@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.io.EOFException;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -1293,7 +1294,8 @@ class DrawingIO
     }
   }
   
-  static public void exportCsxXSection( PrintWriter pw, String filename, String bind, String survey, String cave, String branch )
+  static public void doExportCsxXSection( PrintWriter pw, String filename,
+                                          String survey, String cave, String branch, String bind )
   {
     File file = new File( filename );
     if ( ! file.exists() ) return;
@@ -1304,6 +1306,8 @@ class DrawingIO
     String points = "";
     String lines  = "";
     String areas  = "";
+
+    ArrayList<DrawingPath> paths = new ArrayList<DrawingPath>();
 
     // synchronized( TDPath.mTherionLock ) 
     {
@@ -1349,16 +1353,20 @@ class DrawingIO
               }
               break;
             case 'P':
-              ( DrawingPointPath.loadDataStream( version, dis, 0, 0, null )).toCsurvey(pw, survey, cave, branch, bind );
+              // ( DrawingPointPath.loadDataStream( version, dis, 0, 0, null )).toCsurvey(pw, survey, cave, branch, bind );
+              paths.add( DrawingPointPath.loadDataStream( version, dis, 0, 0, null ) );
               break;
             case 'T':
-              ( DrawingLabelPath.loadDataStream( version, dis, 0, 0 )).toCsurvey(pw, survey, cave, branch, bind );
+              // ( DrawingLabelPath.loadDataStream( version, dis, 0, 0 )).toCsurvey(pw, survey, cave, branch, bind );
+              paths.add( DrawingLabelPath.loadDataStream( version, dis, 0, 0 ) );
               break;
             case 'L':
-              ( DrawingLinePath.loadDataStream( version, dis, 0, 0, null )).toCsurvey(pw, survey, cave, branch, bind );
+              // ( DrawingLinePath.loadDataStream( version, dis, 0, 0, null )).toCsurvey(pw, survey, cave, branch, bind );
+              paths.add( DrawingLinePath.loadDataStream( version, dis, 0, 0, null ) );
               break;
             case 'A':
-              ( DrawingAreaPath.loadDataStream( version, dis, 0, 0, null )).toCsurvey(pw, survey, cave, branch, bind );
+              // ( DrawingAreaPath.loadDataStream( version, dis, 0, 0, null )).toCsurvey(pw, survey, cave, branch, bind );
+              paths.add( DrawingAreaPath.loadDataStream( version, dis, 0, 0, null ) );
               break;
             case 'U':
               DrawingStationPath.loadDataStream( version, dis );
@@ -1385,6 +1393,162 @@ class DrawingIO
         e.printStackTrace();
       }
     }
+    doExportAsCsx( pw, survey, cave, branch, bind, paths, null, null ); // all_sections=null, sections=null
+  }
+
+  static void doExportAsCsx( PrintWriter pw, String survey, String cave, String branch, String bind,
+                           List<DrawingPath> paths, List< PlotInfo > all_sections, List< PlotInfo > sections )
+  {
+    int csxIndex = 0;
+    pw.format("    <layers>\n");
+
+    // LAYER 0: images and sketches
+    pw.format("      <layer name=\"Base\" type=\"0\">\n");
+    pw.format("         <items>\n");
+    pw.format("         </items>\n");
+    pw.format("      </layer>\n");
+
+    // LAYER 1: soil areas
+    pw.format("      <layer name=\"Soil\" type=\"1\">\n");
+    pw.format("        <items>\n");
+    for ( DrawingPath p : paths ) {
+      if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
+        DrawingAreaPath ap = (DrawingAreaPath)p;
+        if ( BrushManager.getAreaCsxLayer( ap.mAreaType ) != 1 ) continue;
+        ap.toCsurvey( pw, survey, cave, branch, bind ); 
+      }
+    }
+    pw.format("        </items>\n");
+    pw.format("      </layer>\n");
+
+    // LAYER 2: 
+    pw.format("      <layer name=\"Water and floor morphologies\" type=\"2\">\n");
+    pw.format("        <items>\n");
+    for ( DrawingPath p : paths ) {
+      if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
+        DrawingLinePath lp = (DrawingLinePath)p;
+        if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 2 ) continue;
+        lp.toCsurvey( pw, survey, cave, branch, bind );
+      } else if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
+        DrawingAreaPath ap = (DrawingAreaPath)p;
+        if ( BrushManager.getAreaCsxLayer( ap.mAreaType ) != 2 ) continue;
+        ap.toCsurvey( pw, survey, cave, branch, bind ); 
+      } 
+    }
+    pw.format("        </items>\n");
+    pw.format("      </layer>\n");
+
+    // LAYER 3
+    pw.format("      <layer name=\"Rocks and concretions\" type=\"3\">\n");
+    pw.format("        <items>\n");
+    for ( DrawingPath p : paths ) {
+      if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
+        DrawingLinePath lp = (DrawingLinePath)p;
+        if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 3 ) continue;
+        lp.toCsurvey( pw, survey, cave, branch, bind );
+      }
+    }
+    pw.format("        </items>\n");
+    pw.format("      </layer>\n");
+
+    // LAYER 4
+    pw.format("      <layer name=\"Ceiling morphologies\" type=\"4\">\n");
+    pw.format("        <items>\n");
+    for ( DrawingPath p : paths ) {
+      if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
+        DrawingLinePath lp = (DrawingLinePath)p;
+        if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 4 ) continue;
+        lp.toCsurvey( pw, survey, cave, branch, bind );
+      }
+    }
+    pw.format("        </items>\n");
+    pw.format("      </layer>\n");
+
+    // LAYER 5:
+    pw.format("      <layer name=\"Borders\" type=\"5\">\n");
+    pw.format("        <items>\n");
+    for ( DrawingPath p : paths ) {
+      if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
+        DrawingLinePath lp = (DrawingLinePath)p;
+        if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 5 ) continue;
+        lp.toCsurvey( pw, survey, cave, branch, bind );
+      }
+      // if ( lp.lineType() == BrushManager.mLineLib.mLineWallIndex ) {
+      //   // linetype: 0 line, 1 spline, 2 bezier
+      //   pw.format("          <item layer=\"5\" name=\"\" type=\"4\" category=\"1\" linetype=\"0\" mergemode=\"0\">\n");
+      //   pw.format("            <pen type=\"1\" />\n");
+      //   pw.format("            <points data=\"");
+      //   ArrayList< LinePoint > pts = lp.mPoints;
+      //   boolean b = true;
+      //   for ( LinePoint pt : pts ) {
+      //     float x = DrawingWindow.sceneToWorldX( pt.x );
+      //     float y = DrawingWindow.sceneToWorldY( pt.y );
+      //     pw.format(Locale.US, "%.2f %.2f ", x, y );
+      //     if ( b ) { pw.format("B "); b = false; }
+      //   }
+      //   pw.format("\" />\n");
+      //   pw.format("          </item>\n");
+      // }
+    }
+    pw.format("        </items>\n");
+    pw.format("      </layer>\n");
+
+    // LAYER 6: signs and texts
+    pw.format("      <layer name=\"Signs\" type=\"6\">\n");
+    pw.format("        <items>\n");
+    for ( DrawingPath p : paths ) {
+      if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
+        DrawingPointPath pp = (DrawingPointPath)p;
+        // section points are special
+        if ( all_sections != null && pp.mPointType == BrushManager.mPointLib.mPointSectionIndex ) {
+          // Log.v("DistoX", "Section point <" + pp.mOptions + ">");
+          // option: -scrap survey-xx#
+          PlotInfo section = null;
+          String[] vals = pp.mOptions.split(" ");
+          int k0 = vals.length;
+          for ( int k = 0; k < k0; ++k ) {
+            if ( vals[k].equals("-scrap") ) {
+              for ( ++k; k < k0; ++k ) {
+                if ( vals[k].length() > 0 ) break;
+              }
+              if ( k < k0 ) {
+                for ( PlotInfo s : all_sections ) {
+                  if ( vals[k].endsWith( s.name ) ) {
+                    // String name = survey + "-" + s.name; // scrap filename
+                    section = s;
+                    section.csxIndex = csxIndex;
+                    if ( sections != null ) sections.add( section );
+                    break;
+                  }
+                }
+              }
+            }
+          }
+          if ( section != null ) {
+            // special toCsurvey for cross-section points
+            float x = DrawingUtil.sceneToWorldX( pp.cx ); // convert to world coords.
+            float y = DrawingUtil.sceneToWorldY( pp.cy );
+            String text = ( section.hide == null || section.hide.length() == 0 )? section.name : section.hide;
+            pw.format("  <item layer=\"6\" cave=\"%s\" type=\"9\" category=\"96\" direction=\"0\"", cave );
+            pw.format(" text=\"%s\" textdistance=\"2\" crosswidth=\"4\" crossheight=\"4\" name=\"%s\" ",
+              text, section.name );
+              // crosssection=\"%d\" ", section.csxIndex );
+            // pw.format(" segment=\"%s\"", "undefined" );
+            pw.format(Locale.US, "splayborderprojectionangle=\"%.2f\" splayborderprojectionvangle=\"%.2f\" id=\"%d\">\n",
+              section.azimuth, section.clino, section.csxIndex );
+            pw.format(Locale.US, "<points data=\"%.2f %.2f \" />\n", x, y );
+            pw.format("    <font type=\"4\" />\n");
+            pw.format("  </item>\n");
+          }
+        }
+        if ( BrushManager.getPointCsxLayer( pp.mPointType ) != 6 ) continue;
+        pp.toCsurvey( pw, survey, cave, branch, bind );
+        ++ csxIndex;
+      }
+    }
+    pw.format("        </items>\n");
+    pw.format("      </layer>\n");
+    pw.format("    </layers>\n");
   }
 
 }

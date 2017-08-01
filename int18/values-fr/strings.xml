@@ -361,6 +361,7 @@
     <!-- UNUSED string name="converted_tdr2th2">Fichier de dessin binaire convertis vers th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Écraser le fichier th2 ?</string -->
     <string name="section_area">Zone section : %1$.1f</string>
+    <!-- TODO string name="section_name">section name</string -->
     <!-- TODO string name="scrap_outline">Sketch outline</string -->
 
     <!-- UNUSED string name="sensor">capteur</string -->

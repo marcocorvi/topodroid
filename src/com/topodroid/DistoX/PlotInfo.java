@@ -42,6 +42,7 @@ class PlotInfo
   public float zoom;    // display zoom
   public float azimuth; // vertical cross-section azimuth / profile projection azimuth
   public float clino;   // inclination (0 for plan cross-sections)
+  public int csxIndex = -1;  // numerical index for cSurvey xsection exports
 
   static boolean isVertical( long type ) 
   {

@@ -360,6 +360,7 @@
     <!-- UNUSED string name="converted_tdr2th2">转换草图为二进制文件到 th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">重写th2草图文件?</string -->
     <string name="section_area">切面区域: %1$.1f</string>
+    <!-- TODO string name="section_name">section name</string -->
     <!-- TODO string name="scrap_outline">Sketch outline</string -->
 
     <!-- UNUSED string name="sensor">传感器</string -->

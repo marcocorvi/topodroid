@@ -372,6 +372,7 @@
     <!-- UNUSED string name="converted_tdr2th2">Skizzen konvertiert zu th2.</string -->
     <!-- UNUSED string name="convert_tdr2th2">th2 Skizzen überschreiben?</string -->
     <string name="section_area">Fläche: %1$.1f</string>
+    <!-- TODO string name="section_name">section name</string -->
     <string name="scrap_outline">Skizzenumriss</string>
 
     <!-- UNUSED string name="sensor">Sensor</string -->

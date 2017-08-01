@@ -366,6 +366,7 @@
     <!-- UNUSED string name="converted_tdr2th2">Pretvorjena skice iz binarnega formata v th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Pretvori  skico iz binarnega formata v th2</string -->
     <string name="section_area">Površina preseka: %1$.1f</string>
+    <!-- TODO string name="section_name">section name</string -->
     <!-- TODO string name="scrap_outline">Sketch outline</string -->
 
     <!-- UNUSED string name="sensor">sensore</string -->
