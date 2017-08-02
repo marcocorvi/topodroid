@@ -95,6 +95,8 @@ public class TopoDroidApp extends Application
 {
   String mCWD;  // current work directory
 
+  static final String EMPTY = "";
+
   static String SYMBOL_VERSION = "35";
   static String VERSION = "0.0.0"; 
   static int VERSION_CODE = 0;
@@ -606,7 +608,7 @@ public class TopoDroidApp extends Application
     }
 
     // TDLog.Profile("TDApp device etc.");
-    mDevice = mDData.getDevice( mPrefs.getString( TDSetting.keyDeviceName(), "" ) );
+    mDevice = mDData.getDevice( mPrefs.getString( TDSetting.keyDeviceName(), EMPTY ) );
 
     DistoXConnectionError = new String[5];
     DistoXConnectionError[0] = getResources().getString( R.string.distox_err_ok );
@@ -637,7 +639,7 @@ public class TopoDroidApp extends Application
   void resetLocale()
   {
     // Log.v("DistoX", "reset locale to " + mLocaleStr );
-    // mLocale = (mLocaleStr.equals(""))? Locale.getDefault() : new Locale( mLocaleStr );
+    // mLocale = (mLocaleStr.equals(EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
     Resources res = getResources();
     DisplayMetrics dm = res.getDisplayMetrics();
     Configuration conf = res.getConfiguration();
@@ -648,7 +650,7 @@ public class TopoDroidApp extends Application
   void setLocale( String locale, boolean load_symbols )
   {
     mLocaleStr = locale;
-    mLocale = (mLocaleStr.equals(""))? Locale.getDefault() : new Locale( mLocaleStr );
+    mLocale = (mLocaleStr.equals(EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
     resetLocale();
     Resources res = getResources();
     if ( load_symbols ) {
@@ -1121,7 +1123,7 @@ public class TopoDroidApp extends Application
     if ( address == null ) {
       if ( mVirtualDistoX != null ) mVirtualDistoX.stopServer( this );
       mDevice = null;
-      address = "";
+      address = EMPTY;
     } else if ( address.equals( Device.ZERO_ADDRESS )  ) {
       if ( mVirtualDistoX != null ) mVirtualDistoX.startServer( this );
       boolean create = ( mDevice == null || ! address.equals( mDevice.mAddress ) );
@@ -1665,7 +1667,7 @@ public class TopoDroidApp extends Application
             id = mData.insertShot( mSID, -1L, l, b, 0.0f, 0.0f, extend, 1, true );
           }
         }
-        mData.updateShotName( id, mSID, splay_station, "", true );
+        mData.updateShotName( id, mSID, splay_station, EMPTY, true );
       }
     } 
     if ( right != null && right.length() > 0 ) {
@@ -1696,7 +1698,7 @@ public class TopoDroidApp extends Application
             id = mData.insertShot( mSID, -1L, r, b, 0.0f, 0.0f, extend, 1, true );
           }
         }
-        mData.updateShotName( id, mSID, splay_station, "", true );
+        mData.updateShotName( id, mSID, splay_station, EMPTY, true );
       }
     }
     if ( up != null && up.length() > 0 ) {
@@ -1723,7 +1725,7 @@ public class TopoDroidApp extends Application
             id = mData.insertShot( mSID, -1L, u, 0.0f, 90.0f, 0.0f, 0L, 1, true );
           }
         }
-        mData.updateShotName( id, mSID, splay_station, "", true );
+        mData.updateShotName( id, mSID, splay_station, EMPTY, true );
       }
     }
     if ( down != null && down.length() > 0 ) {
@@ -1750,7 +1752,7 @@ public class TopoDroidApp extends Application
             id = mData.insertShot( mSID, -1L, d, 0.0f, -90.0f, 0.0f, 0L, 1, true );
           }
         }
-        mData.updateShotName( id, mSID, splay_station, "", true );
+        mData.updateShotName( id, mSID, splay_station, EMPTY, true );
       }
     }
     return at;
@@ -1894,13 +1896,13 @@ public class TopoDroidApp extends Application
   {
     // TDLog.Log( TDLog.LOG_PLOT, "new plot " + name + " start " + start );
     long pid_p = mData.insertPlot( sid, -1L, name+"p",
-                 PlotInfo.PLOT_PLAN, 0L, start, "", 0, 0, mScaleFactor, 0, 0, "", true );
+                 PlotInfo.PLOT_PLAN, 0L, start, EMPTY, 0, 0, mScaleFactor, 0, 0, EMPTY, EMPTY, true );
     if ( extended ) {
       long pid_s = mData.insertPlot( sid, -1L, name+"s",
-                   PlotInfo.PLOT_EXTENDED, 0L, start, "", 0, 0, mScaleFactor, 0, 0, "", true );
+                   PlotInfo.PLOT_EXTENDED, 0L, start, EMPTY, 0, 0, mScaleFactor, 0, 0, EMPTY, EMPTY, true );
     } else {
       long pid_s = mData.insertPlot( sid, -1L, name+"s",
-                   PlotInfo.PLOT_PROFILE, 0L, start, "", 0, 0, mScaleFactor, project, 0, "", true );
+                   PlotInfo.PLOT_PROFILE, 0L, start, EMPTY, 0, 0, mScaleFactor, project, 0, EMPTY, EMPTY, true );
     }
     return pid_p;
   }
@@ -1908,12 +1910,14 @@ public class TopoDroidApp extends Application
   // @param azimuth clino : projected profile azimuth / section plane direction 
   // @param parent parent plot name
   // NOTE field "hide" is overloaded for x_sections with the parent plot name
-  long insert2dSection( long sid, String name, long type, String from, String to, float azimuth, float clino, String parent )
+  long insert2dSection( long sid, String name, long type, String from, String to, float azimuth, float clino,
+                        String parent, String nickname )
   {
     // FIXME COSURVEY 2d sections are not forwarded
     // 0 0 mScaleFactor : offset and zoom
-    String hide = ( parent == null )? "" : parent;
-    return mData.insertPlot( sid, -1L, name, type, 0L, from, to, 0, 0, TopoDroidApp.mScaleFactor, azimuth, clino, hide, false );
+    String hide = ( parent == null )? EMPTY : parent;
+    String nick = ( nickname == null )? EMPTY : nickname;
+    return mData.insertPlot( sid, -1L, name, type, 0L, from, to, 0, 0, TopoDroidApp.mScaleFactor, azimuth, clino, hide, nick, false );
   }
 
   public void viewPhoto( Context ctx, String filename )
@@ -1982,7 +1986,7 @@ public class TopoDroidApp extends Application
 
   String getConnectionStateTitleStr()
   {
-    return ( mSyncConn == null )? "" : mSyncConn.getConnectionStateTitleStr();
+    return ( mSyncConn == null )? EMPTY : mSyncConn.getConnectionStateTitleStr();
   }
 
   void connStateChanged()

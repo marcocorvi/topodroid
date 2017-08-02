@@ -125,6 +125,12 @@
         />
     </LinearLayout>
 
+    <EditText android:id="@+id/nick"
+      style="@style/edit_text"
+      android:layout_width="fill_parent" 
+      android:hint="@string/section_name"
+    />
+
     <LinearLayout android:id="@+id/layout_xsection"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"

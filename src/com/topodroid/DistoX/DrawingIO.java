@@ -77,7 +77,7 @@ class DrawingIO
     // TDLog.Log( TDLog.LOG_PLOT, "after reset 0: " + BrushManager.mOrientation[0]
     //                      + " 7: " + BrushManager.mOrientation[7] );
 
-    Log.v("DistoX", "drawing I/O load therion " + filename );
+    // Log.v("DistoX", "drawing I/O load therion " + filename );
     synchronized( TDPath.mTherionLock ) {
       try {
         FileReader fr = new FileReader( filename );
@@ -643,7 +643,7 @@ class DrawingIO
     FileInputStream fis = null;
     DataInputStream dis = null;
 
-    Log.v("DistoX", "drawing I/O load stream " + filename );
+    // Log.v("DistoX", "drawing I/O load stream " + filename );
     synchronized( TDPath.mTherionLock ) {
       try {
         // CACHE check if filename is in the cache: if so use the cache byte array
@@ -774,7 +774,7 @@ class DrawingIO
     FileInputStream fis = null;
     DataInputStream dis = null;
 
-    Log.v("DistoX", "drawing I/O load outline stream " + filename );
+    // Log.v("DistoX", "drawing I/O load outline stream " + filename );
     synchronized( TDPath.mTherionLock ) {
       try {
         // CACHE check if filename is in the cache: if so use the cache byte array
@@ -1397,7 +1397,7 @@ class DrawingIO
   }
 
   static void doExportAsCsx( PrintWriter pw, String survey, String cave, String branch, String bind,
-                           List<DrawingPath> paths, List< PlotInfo > all_sections, List< PlotInfo > sections )
+                             List<DrawingPath> paths, List< PlotInfo > all_sections, List< PlotInfo > sections )
   {
     int csxIndex = 0;
     pw.format("    <layers>\n");
@@ -1497,54 +1497,63 @@ class DrawingIO
     pw.format("      <layer name=\"Signs\" type=\"6\">\n");
     pw.format("        <items>\n");
     for ( DrawingPath p : paths ) {
-      if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
-        DrawingPointPath pp = (DrawingPointPath)p;
-        // section points are special
-        if ( all_sections != null && pp.mPointType == BrushManager.mPointLib.mPointSectionIndex ) {
-          // Log.v("DistoX", "Section point <" + pp.mOptions + ">");
-          // option: -scrap survey-xx#
-          PlotInfo section = null;
-          String[] vals = pp.mOptions.split(" ");
-          int k0 = vals.length;
-          for ( int k = 0; k < k0; ++k ) {
-            if ( vals[k].equals("-scrap") ) {
-              for ( ++k; k < k0; ++k ) {
-                if ( vals[k].length() > 0 ) break;
-              }
-              if ( k < k0 ) {
-                for ( PlotInfo s : all_sections ) {
-                  if ( vals[k].endsWith( s.name ) ) {
-                    // String name = survey + "-" + s.name; // scrap filename
-                    section = s;
-                    section.csxIndex = csxIndex;
-                    if ( sections != null ) sections.add( section );
-                    break;
-                  }
+      if ( p.mType != DrawingPath.DRAWING_PATH_POINT ) continue;
+      DrawingPointPath pp = (DrawingPointPath)p;
+      if ( BrushManager.getPointCsxLayer( pp.mPointType ) != 6 ) continue;
+
+      // section points are special
+      if ( all_sections != null && pp.mPointType == BrushManager.mPointLib.mPointSectionIndex ) {
+        // Log.v("DistoX", "Section point <" + pp.mOptions + ">");
+        // option: -scrap survey-xx#
+        PlotInfo section = null;
+        String[] vals = pp.mOptions.split(" ");
+        int k0 = vals.length;
+        for ( int k = 0; k < k0; ++k ) {
+          if ( vals[k].equals("-scrap") ) {
+            for ( ++k; k < k0; ++k ) {
+              if ( vals[k].length() > 0 ) break;
+            }
+            if ( k < k0 ) {
+              for ( PlotInfo s : all_sections ) {
+                if ( vals[k].endsWith( s.name ) ) {
+                  // String name = survey + "-" + s.name; // scrap filename
+                  section = s;
+                  section.csxIndex = csxIndex;
+                  if ( sections != null ) sections.add( section );
+                  break;
                 }
               }
             }
           }
-          if ( section != null ) {
-            // special toCsurvey for cross-section points
-            float x = DrawingUtil.sceneToWorldX( pp.cx ); // convert to world coords.
-            float y = DrawingUtil.sceneToWorldY( pp.cy );
-            String text = ( section.hide == null || section.hide.length() == 0 )? section.name : section.hide;
-            pw.format("  <item layer=\"6\" cave=\"%s\" type=\"9\" category=\"96\" direction=\"0\"", cave );
-            pw.format(" text=\"%s\" textdistance=\"2\" crosswidth=\"4\" crossheight=\"4\" name=\"%s\" ",
-              text, section.name );
-              // crosssection=\"%d\" ", section.csxIndex );
-            // pw.format(" segment=\"%s\"", "undefined" );
-            pw.format(Locale.US, "splayborderprojectionangle=\"%.2f\" splayborderprojectionvangle=\"%.2f\" id=\"%d\">\n",
-              section.azimuth, section.clino, section.csxIndex );
-            pw.format(Locale.US, "<points data=\"%.2f %.2f \" />\n", x, y );
-            pw.format("    <font type=\"4\" />\n");
-            pw.format("  </item>\n");
-          }
         }
-        if ( BrushManager.getPointCsxLayer( pp.mPointType ) != 6 ) continue;
+        if ( section != null ) {
+          // Log.v("DistoX", "section " + section.name + " " + section.nick );
+          // special toCsurvey for cross-section points
+          float x = DrawingUtil.sceneToWorldX( pp.cx ); // convert to world coords.
+          float y = DrawingUtil.sceneToWorldY( pp.cy );
+          String text = ( section.nick == null || section.nick.length() == 0 )? section.name : section.nick;
+          pw.format("  <item layer=\"6\" cave=\"%s\" branch=\"%s\" type=\"9\" category=\"96\" direction=\"0\" ", cave, branch );
+          pw.format("text=\"%s\" textdistance=\"2\" crosswidth=\"4\" crossheight=\"4\" name=\"%s\" ", text, section.name );
+          // pw.format("crosssection=\"%d\" ", section.csxIndex );
+          if ( section.name.startsWith("xs-") || section.name.startsWith("xh-") ) {
+            pw.format("station=\"%s\" ", section.name.substring(3) ); // == section.start
+          } else {
+            pw.format("stationfrom=\"%s\" stationto=\"%s\" ", section.start, section.view );
+          }
+          // pw.format(" segment=\"%s\"", "undefined" );
+          pw.format(Locale.US, "splayborderprojectionangle=\"%.2f\" splayborderprojectionvangle=\"%.2f\" id=\"%d\">\n",
+            section.azimuth, section.clino, section.csxIndex );
+          pw.format(Locale.US, "<points data=\"%.2f %.2f \" />\n", x, y );
+          pw.format("    <font type=\"4\" />\n");
+          pw.format("  </item>\n");
+        } else {
+          // Log.v("DistoX", "section not found");
+        }
+      } else {
         pp.toCsurvey( pw, survey, cave, branch, bind );
-        ++ csxIndex;
       }
+      ++ csxIndex;
+      
     }
     pw.format("        </items>\n");
     pw.format("      </layer>\n");

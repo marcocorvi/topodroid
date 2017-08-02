@@ -119,23 +119,23 @@ class TDExporter
   }
 
   // segments have only the attribute "cave", no attribute "branch"
-  static private void writeCsxSegment( PrintWriter pw, long id, String cave, String f, String t )
+  static private void writeCsxSegment( PrintWriter pw, long id, String cave, String branch, String f, String t )
   {
     // TDLog.Log( TDLog.LOG_CSURVEY, "shot segment " + id + " cave " + cave + " " + f + " - " + t ); 
-    pw.format("<segment id=\"%d\" cave=\"%s\" from=\"%s\" to=\"%s\"", (int)id, cave, f, t );
+    pw.format("<segment id=\"%d\" cave=\"%s\" branch=\"%s\" from=\"%s\" to=\"%s\"", (int)id, cave, branch, f, t );
   }
 
-  static private void writeCsxTSplaySegment( PrintWriter pw, String cave, String t, int cnt, boolean xsplay )
+  static private void writeCsxTSplaySegment( PrintWriter pw, String cave, String branch, String t, int cnt, boolean xsplay )
   {
     // TDLog.Log( TDLog.LOG_CSURVEY, "T-splay segment cave " + cave + " " + t + " " + cnt ); 
-    pw.format("<segment id=\"\" cave=\"%s\" from=\"%s(%d)\" to=\"%s\"", cave, t, cnt, t );
+    pw.format("<segment id=\"\" cave=\"%s\" branch=\"%s\" from=\"%s(%d)\" to=\"%s\"", cave, branch, t, cnt, t );
     if ( xsplay ) pw.format(" cut=\"1\"");
   }
 
-  static private void writeCsxFSplaySegment( PrintWriter pw, String cave, String f, int cnt, boolean xsplay )
+  static private void writeCsxFSplaySegment( PrintWriter pw, String cave, String branch, String f, int cnt, boolean xsplay )
   {
     // TDLog.Log( TDLog.LOG_CSURVEY, "F-splay segment cave " + cave + " " + f + " " + cnt ); 
-    pw.format("<segment id=\"\" cave=\"%s\" from=\"%s\" to=\"%s(%d)\"", cave, f, f, cnt );
+    pw.format("<segment id=\"\" cave=\"%s\" branch=\"%s\" from=\"%s\" to=\"%s(%d)\"", cave, branch, f, f, cnt );
     if ( xsplay ) pw.format(" cut=\"1\"");
   }
 
@@ -272,7 +272,7 @@ class TDExporter
       pw.format("  <segments>\n");
 
       for ( DBlock blk : clist ) { // calib-check shots
-        writeCsxSegment( pw, blk.mId, cave, blk.mFrom, blk.mTo );
+        writeCsxSegment( pw, blk.mId, cave, branch, blk.mFrom, blk.mTo );
         pw.format(" exclude=\"1\"");
         pw.format(" calibration=\"1\""); 
         pw.format(Locale.US, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"",
@@ -312,7 +312,7 @@ class TDExporter
             }
           } else { // only TO station
             if ( leg.mCnt > 0 && ref_item != null ) {
-              writeCsxSegment( pw, ref_item.mId, cave, f, t ); // branch prefix
+              writeCsxSegment( pw, ref_item.mId, cave, branch, f, t ); // branch prefix
 
               if ( extend == -1 ) pw.format(" direction=\"1\"");
               if ( dup || sur /* || bck */ ) {
@@ -336,7 +336,7 @@ class TDExporter
             }
 
             extend = item.getExtend();
-            writeCsxTSplaySegment( pw, cave, to, cntSplay, item.isXSplay() ); // branch prefix
+            writeCsxTSplaySegment( pw, cave, branch, to, cntSplay, item.isXSplay() ); // branch prefix
             ++ cntSplay;
             pw.format(" splay=\"1\" exclude=\"1\"");
             if ( item.isCommented() ) pw.format(" commented=\"1\"");
@@ -356,7 +356,7 @@ class TDExporter
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // ONLY FROM STATION : splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // finish writing previous leg shot
-              writeCsxSegment( pw, ref_item.mId, cave, f, t ); // branch prefix
+              writeCsxSegment( pw, ref_item.mId, cave, branch, f, t ); // branch prefix
               if ( extend == -1 ) pw.format(" direction=\"1\"");
               if ( dup || sur /* || bck */ ) {
                 pw.format(" exclude=\"1\"");
@@ -379,7 +379,7 @@ class TDExporter
             }
 
             extend = item.getExtend();
-            writeCsxFSplaySegment( pw, cave, from, cntSplay, item.isXSplay() ); // branch prefix
+            writeCsxFSplaySegment( pw, cave, branch, from, cntSplay, item.isXSplay() ); // branch prefix
             ++cntSplay;
             pw.format(" splay=\"1\" exclude=\"1\"");
             if ( item.isCommented() ) pw.format(" commented=\"1\"");
@@ -397,7 +397,7 @@ class TDExporter
             pw.format("    </segment>\n");
           } else { // BOTH FROM AND TO STATIONS
             if ( leg.mCnt > 0 && ref_item != null ) {
-              writeCsxSegment( pw, ref_item.mId, cave, f, t ); // branch prefix
+              writeCsxSegment( pw, ref_item.mId, cave, branch, f, t ); // branch prefix
               if ( extend == -1 ) pw.format(" direction=\"1\"");
               if ( dup || sur /* || bck */ ) {
                 pw.format(" exclude=\"1\"");
@@ -435,7 +435,7 @@ class TDExporter
         }
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
-        writeCsxSegment( pw, ref_item.mId, cave, f, t ); // branch prefix
+        writeCsxSegment( pw, ref_item.mId, cave, branch, f, t ); // branch prefix
         if ( extend == -1 ) pw.format(" direction=\"1\"");
         if ( dup || sur /* || bck */ ) {
            pw.format(" exclude=\"1\"");

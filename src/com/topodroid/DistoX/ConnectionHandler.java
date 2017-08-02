@@ -395,7 +395,7 @@ class ConnectionHandler extends Handler
            Integer.parseInt(data[4]),
            data[5], data[6], Double.parseDouble(data[7]), Double.parseDouble(data[8]),
            Double.parseDouble(data[9]), Double.parseDouble(data[10]), Double.parseDouble(data[11]),
-           data[12], false ); 
+           data[12], data[13], false ); 
          break;
        case DataListener.PLOT_UPDATE:
          break;

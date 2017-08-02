@@ -28,6 +28,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.EditText;
 
 
 public class DrawingStationDialog extends MyDialog 
@@ -44,6 +45,7 @@ public class DrawingStationDialog extends MyDialog
     private Button mBtnHidden;
     private Button mBtnSplays;
 
+    private EditText mETnick;
     private Button mBtnXSection;
     private Button mBtnXDelete;
     private Button mBtnDirect;
@@ -102,7 +104,7 @@ public class DrawingStationDialog extends MyDialog
       mBtnXDelete   = (Button) findViewById(R.id.btn_xdelete );  // delete / sensors
       mBtnDirect  = (Button) findViewById( R.id.btn_direct );
       mBtnInverse = (Button) findViewById( R.id.btn_inverse );
-
+      mETnick = (EditText) findViewById( R.id.nick );
 
       mSensors = false;
       mBearing = 0;
@@ -118,6 +120,7 @@ public class DrawingStationDialog extends MyDialog
         ((TextView)findViewById(R.id.station_set)).setVisibility( View.GONE );
         mBtnSplays.setOnClickListener( this );
 
+        mETnick.setVisibility( View.GONE );
         mBtnXSection.setVisibility( View.GONE );
         mBtnXDelete.setVisibility( View.GONE );
         mBtnDirect.setVisibility( View.GONE );
@@ -186,6 +189,7 @@ public class DrawingStationDialog extends MyDialog
             mSensors = true;
             mBtnXSection.setBackgroundColor( TDColor.MID_GRAY );
           } else {
+            mETnick.setText( mParent.getXSectionNick( mStationName, mParent.getPlotType() ) );
             mBtnXSection.setOnClickListener( this );
             mBtnDirect.setVisibility( View.GONE );
             mBtnInverse.setVisibility( View.GONE );
@@ -217,6 +221,7 @@ public class DrawingStationDialog extends MyDialog
     {
       // TDLog.Log( TDLog.LOG_INPUT, "Drawing Station Dialog onClick() " + view.toString() );
       Button b = (Button)view;
+      String nick = (mETnick.getText() != null)? mETnick.getText().toString() : "";
       if ( b == mBtnOK ) {
         if ( mPath == null ) {
           mParent.addStationPoint( mStation );
@@ -234,7 +239,7 @@ public class DrawingStationDialog extends MyDialog
       } else if ( b == mBtnSplays ) {
         mParent.toggleStationSplays( mStationName );
       } else if ( b == mBtnXSection ) {
-        mParent.openXSection( mStation, mStationName, mParent.getPlotType(), mBearing, mClino );
+        mParent.openXSection( mStation, mStationName, mParent.getPlotType(), mBearing, mClino, nick );
       } else if ( b == mBtnXDelete ) {
         if ( mSensors ) {
           TimerTask timer = new TimerTask( mContext, this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
@@ -244,23 +249,24 @@ public class DrawingStationDialog extends MyDialog
           mParent.deleteXSection( mStation, mStationName, mParent.getPlotType() );
         }
       } else if ( b == mBtnDirect ) {
-        mParent.openXSection( mStation, mStationName, mParent.getPlotType(), mBearing, mClino );
+        mParent.openXSection( mStation, mStationName, mParent.getPlotType(), mBearing, mClino, nick );
       } else if ( b == mBtnInverse ) {
         mBearing += 180;
         if ( mBearing >= 360 ) mBearing -= 360;
         mClino = -mClino;
-        mParent.openXSection( mStation, mStationName, mParent.getPlotType(), mBearing, mClino );
+        mParent.openXSection( mStation, mStationName, mParent.getPlotType(), mBearing, mClino, nick );
       }
       dismiss();
     }
 
     public void setBearingAndClino( float b, float c, int orientation )
     {
+      String nick = (mETnick.getText() != null)? mETnick.getText().toString() : "";
       if ( mParent.getPlotType() == PlotInfo.PLOT_PLAN ) {
         c = 0;
       } else { // PlotInfo.isProfile( type )
       }
-      mParent.openXSection( mStation, mStationName, mParent.getPlotType(), b, c );
+      mParent.openXSection( mStation, mStationName, mParent.getPlotType(), b, c, nick );
       dismiss();
     }
 

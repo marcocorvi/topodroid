@@ -44,8 +44,8 @@ import java.util.HashMap;
 public class DataHelper extends DataSetObservable
 {
 
-  static final String DB_VERSION = "30";
-  static final int DATABASE_VERSION = 30;
+  static final String DB_VERSION = "31";
+  static final int DATABASE_VERSION = 31;
   static final int DATABASE_VERSION_MIN = 21; // was 14
 
   private static final String CONFIG_TABLE = "configs";
@@ -101,6 +101,7 @@ public class DataHelper extends DataSetObservable
   private SQLiteStatement updatePlotHideStmt = null;
   private SQLiteStatement updatePlotNameStmt = null;
   private SQLiteStatement updatePlotAzimuthClinoStmt = null;
+  private SQLiteStatement updatePlotNickStmt = null;
 
 // FIXME_SKETCH_3D
   private SQLiteStatement updateSketchStmt = null;
@@ -133,9 +134,9 @@ public class DataHelper extends DataSetObservable
   private String[] mShotFields; // select shot fields
 
   static private String[] mPlotFieldsFull =
-    { "id", "name", "type", "status", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide" };
+    { "id", "name", "type", "status", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide", "nick" };
   static private String[] mPlotFields =
-    { "id", "name", "type", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide" };
+    { "id", "name", "type", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide", "nick" };
 
   private String[] mSketchFields; // select sketch fields
 
@@ -479,6 +480,7 @@ public class DataHelper extends DataSetObservable
       updatePlotHideStmt = myDB.compileStatement( "UPDATE plots set hide=? WHERE surveyId=? AND id=?" );
       updatePlotNameStmt = myDB.compileStatement( "UPDATE plots set name=? WHERE surveyId=? AND id=?" );
       updatePlotAzimuthClinoStmt = myDB.compileStatement( "UPDATE plots set azimuth=?, clino=? WHERE surveyId=? AND id=?" );
+      updatePlotNickStmt = myDB.compileStatement( "UPDATE plots set nick=? WHERE surveyId=? AND id=?" );
       // dropPlotStmt    = myDB.compileStatement( "DELETE FROM plots WHERE surveyId=? AND id=?" );
 
       updateSketchStmt = myDB.compileStatement( "UPDATE sketches set st1=?, st2=?, xoffsettop=?, yoffsettop=?, zoomtop=?, xoffsetside=?, yoffsetside=?, zoomside=?, xoffset3d=?, yoffset3d=?, zoom3d=?, east=?, south=?, vert=?, azimuth=?, clino=? WHERE surveyId=? AND id=?" );
@@ -1351,10 +1353,31 @@ public class DataHelper extends DataSetObservable
     // try { updatePlotStmt.execute(); } catch (SQLiteException e) { logError("plot update", e); }
   }
  
+  public void updatePlotNick( long pid, long sid, String nick )
+  {
+    if ( myDB == null ) return;
+    // TDLog.Log( TDLog.LOG_DB, "update PlotView: " + pid + "/" + sid + " view " + view );
+    if ( nick == null ) nick = "";
+    // StringWriter sw = new StringWriter();
+    // PrintWriter  pw = new PrintWriter( sw );
+    // pw.format( Locale.US, "UPDATE plots set view=\"%s\" WHERE surveyId=%d AND id=%d", view, sid, pid );
+    // myDB.execSQL( sw.toString() );
+
+    if ( updatePlotNickStmt == null ) {
+      updatePlotNickStmt = myDB.compileStatement( "UPDATE plots set nick=? WHERE surveyId=? AND id=?" );
+    }
+    updatePlotNickStmt.bindString( 1, nick );
+    updatePlotNickStmt.bindLong( 2, sid );
+    updatePlotNickStmt.bindLong( 3, pid );
+    try {
+      updatePlotNickStmt.execute();
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } catch (SQLiteException e) { logError("plot nick", e); }
+  }
+ 
   public void updatePlotView( long pid, long sid, String view )
   {
-   
- if ( myDB == null ) return;
+    if ( myDB == null ) return;
     // TDLog.Log( TDLog.LOG_DB, "update PlotView: " + pid + "/" + sid + " view " + view );
     if ( view == null ) view = "";
     // StringWriter sw = new StringWriter();
@@ -1373,7 +1396,7 @@ public class DataHelper extends DataSetObservable
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch (SQLiteException e) { logError("plot view", e); }
   }
-   
+
   public void updatePlotHide( long pid, long sid, String hide )
   {
     if ( myDB == null ) return;
@@ -1829,6 +1852,7 @@ public class DataHelper extends DataSetObservable
      plot.azimuth = (float)(cursor.getDouble(8));
      plot.clino   = (float)(cursor.getDouble(9));
      plot.hide    = cursor.getString(10);
+     plot.nick    = cursor.getString(11);
      return plot;
    }
 
@@ -2978,9 +3002,9 @@ public class DataHelper extends DataSetObservable
 
    public long insertPlot( long sid, long id, String name, long type, long status, String start, String view,
                            double xoffset, double yoffset, double zoom, double azimuth, double clino,
-                           String hide, boolean forward )
+                           String hide, String nick, boolean forward )
    {
-     // Log.v( TopoDroidApp.TAG, "insertPlot " + name + " start " + start + " azimuth " + azimuth );
+     // Log.v( TopoDroidApp.TAG, "insert plot " + name + " start " + start + " azimuth " + azimuth );
      if ( myDB == null ) return -1L;
      long ret = getPlotId( sid, name );
      if ( ret >= 0 ) return -1;
@@ -3000,6 +3024,7 @@ public class DataHelper extends DataSetObservable
      cv.put( "azimuth",  azimuth );
      cv.put( "clino",    clino );
      cv.put( "hide",     hide );
+     cv.put( "nick",     nick );
      try {
        myDB.insert( PLOT_TABLE, null, cv );
        if ( forward && mListeners != null ) { // synchronized( mListeners )
@@ -3581,22 +3606,23 @@ public class DataHelper extends DataSetObservable
        if (cursor.moveToFirst()) {
          do {
            pw.format(Locale.US,
-                     "INSERT into %s values( %d, %d, \"%s\", %d, %d, \"%s\", \"%s\", %.2f, %.2f, %.2f, %.2f, %.2f, \"%s\" );\n",
-                     PLOT_TABLE,
-                     sid,
-                     cursor.getLong(0),
-                     cursor.getString(1),
-                     cursor.getLong(2),
-                     cursor.getLong(3),
-                     cursor.getString(4),
-                     cursor.getString(5),
-                     cursor.getDouble(6),
-                     cursor.getDouble(7),
-                     cursor.getDouble(8),
-                     cursor.getDouble(9),
-                     cursor.getDouble(10),
-                     cursor.getString(11)
-                    );
+             "INSERT into %s values( %d, %d, \"%s\", %d, %d, \"%s\", \"%s\", %.2f, %.2f, %.2f, %.2f, %.2f, \"%s\", \"%s\" );\n",
+             PLOT_TABLE,
+             sid,
+             cursor.getLong(0),
+             cursor.getString(1),
+             cursor.getLong(2),
+             cursor.getLong(3),
+             cursor.getString(4),
+             cursor.getString(5),
+             cursor.getDouble(6),
+             cursor.getDouble(7),
+             cursor.getDouble(8),
+             cursor.getDouble(9),
+             cursor.getDouble(10),
+             cursor.getString(11),
+             cursor.getString(12)
+           );
          } while (cursor.moveToNext());
        }
        if (cursor != null && !cursor.isClosed()) cursor.close();
@@ -3826,7 +3852,8 @@ public class DataHelper extends DataSetObservable
              double azimuth = scanline1.doubleValue( );
              double clino = ( db_version > 20 )? scanline1.doubleValue( ) : 0;
              String hide  = ( db_version > 24 )? scanline1.stringValue( ) : "";
-             insertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, false );
+             String nick  = ( db_version > 30 )? scanline1.stringValue( ) : "";
+             insertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, false );
              // TDLog.Log( TDLog.LOG_DB, "loadFromFile plot " + sid + " " + id + " " + start + " " + name );
    
 /* FIXME BEGIN SKETCH_3D */
@@ -4123,7 +4150,8 @@ public class DataHelper extends DataSetObservable
              +   " zoom REAL, "
              +   " azimuth REAL, "
              +   " clino REAL, "
-             +   " hide TEXT "
+             +   " hide TEXT, "
+             +   " nick TEXT "
              // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
              // +   " ON DELETE CASCADE "
              +   ")"
@@ -4278,6 +4306,8 @@ public class DataHelper extends DataSetObservable
            case 29:
              db.execSQL( "ALTER TABLE surveys ADD COLUMN xsections INTEGER default 0" );
            case 30:
+             db.execSQL( "ALTER TABLE plots ADD COLUMN nick TEXT default \"\"" );
+           case 31:
              /* current version */
            default:
              break;

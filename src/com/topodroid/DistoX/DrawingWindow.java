@@ -3069,11 +3069,32 @@ public class DrawingWindow extends ItemDrawer
       mDrawingSurface.deleteSectionPoint( scrap_name ); // this section-point delete cannot be undone
     }
 
+    String getXSectionNick( String name, long type )
+    {
+      // parent plot name = mName
+      long xtype = -1;
+      String xsname = null;
+      if ( type == PlotInfo.PLOT_PLAN ) {
+        xsname = "xs-" + name;
+        xtype = PlotInfo.PLOT_X_SECTION;
+      } else if ( PlotInfo.isProfile( type ) ) {
+        xsname = "xh-" + name;
+        xtype = PlotInfo.PLOT_XH_SECTION;
+      } else {
+        return "";
+      }
+      PlotInfo plot = mApp.mXSections ?
+                      mData.getPlotInfo( mApp.mSID, xsname )
+                    : mData.getPlotSectionInfo( mApp.mSID, xsname, mName );
+      if ( plot == null ) return "";
+      return plot.nick;
+    }
+
     // X-SECTION AT A STATION
     // @param name station name
     // @param type this plot type
     // @param azimuth clino  section plane direction
-    void openXSection( DrawingStationName st, String name, long type, float azimuth, float clino )
+    void openXSection( DrawingStationName st, String name, long type, float azimuth, float clino, String nick )
     {
       // parent plot name = mName
       long xtype = -1;
@@ -3091,6 +3112,7 @@ public class DrawingWindow extends ItemDrawer
       PlotInfo plot = mApp.mXSections ?
                       mData.getPlotInfo( mApp.mSID, xsname )
                     : mData.getPlotSectionInfo( mApp.mSID, xsname, mName );
+
       if ( plot == null  ) { // if there does not exist xsection xs-name create it
         // Toast.makeText( mActivity, R.string.too_many_legs_xsection, Toast.LENGTH_SHORT ).show();
         if ( azimuth >= 360 ) azimuth -= 360;
@@ -3104,10 +3126,10 @@ public class DrawingWindow extends ItemDrawer
         // Log.v("DistoX", "new X section azimuth " + azimuth + " clino " + clino );
 
         if ( mApp.mXSections ) {
-          long pid = mApp.insert2dSection( mApp.mSID, xsname, xtype, name, "", azimuth, clino, null );
+          long pid = mApp.insert2dSection( mApp.mSID, xsname, xtype, name, "", azimuth, clino, null, nick );
           plot = mData.getPlotInfo( mApp.mSID, xsname );
         } else {
-          long pid = mApp.insert2dSection( mApp.mSID, xsname, xtype, name, "", azimuth, clino, mName );
+          long pid = mApp.insert2dSection( mApp.mSID, xsname, xtype, name, "", azimuth, clino, mName, nick );
           plot = mData.getPlotSectionInfo( mApp.mSID, xsname, mName );
         }
 
@@ -3122,6 +3144,10 @@ public class DrawingWindow extends ItemDrawer
 							    x5, y5, DrawingPointPath.SCALE_M, 
 							    null, scrap_option ); // no text
 	  mDrawingSurface.addDrawingPath( section_pt );
+        }
+      } else {
+        if ( ! plot.nick.equals( nick ) ) {
+          mData.updatePlotNick( plot.id, mSid, nick );
         }
       }
       if ( plot != null ) {
@@ -4107,7 +4133,14 @@ public class DrawingWindow extends ItemDrawer
       mSectionName = id;
       long pid = mApp.mData.getPlotId( mApp.mSID, mSectionName );
       if ( pid < 0 ) { 
-        pid = mApp.insert2dSection( mApp.mSID, mSectionName, type, from, to, azimuth, clino, nick );
+        // pid = mApp.insert2dSection( mApp.mSID, mSectionName, type, from, to, azimuth, clino, nick );
+        if ( mApp.mXSections ) {
+          pid = mApp.insert2dSection( mApp.mSID, mSectionName, type, from, to, azimuth, clino, null, nick );
+          // plot = mData.getPlotInfo( mApp.mSID, xsname );
+        } else {
+          pid = mApp.insert2dSection( mApp.mSID, mSectionName, type, from, to, azimuth, clino, mName, nick );
+          // plot = mData.getPlotSectionInfo( mApp.mSID, xsname, mName );
+        }
       }
       return pid;
     }

@@ -96,7 +96,7 @@ public class DrawingLineSectionDialog extends MyDialog
       if ( mPlotInfo != null ) { // extra careful
         mFrom     = mPlotInfo.start;
         mTo       = mPlotInfo.view;
-        mNick     = mPlotInfo.hide;
+        mNick     = mPlotInfo.nick;
         mAzimuth  = mPlotInfo.azimuth;
         mClino    = mPlotInfo.clino;
         mHSection = (mPlotInfo.type == PlotInfo.PLOT_H_SECTION);
