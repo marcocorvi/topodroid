@@ -349,7 +349,11 @@ public class DrawingPath extends RectF
 
   // public void undoCommand() { // TODO this would be changed later }
 
-  public void computeBounds( RectF bound, boolean b ) { mPath.computeBounds( bound, b ); }
+  public void computeBounds( RectF bound, boolean b ) 
+  { 
+    mPath.computeBounds( bound, b );
+    // Log.v("DistoX", "bounds " + bound.left + " " + bound.top + " " + bound.right + " " + bound.bottom );
+  }
 
   // public void transform( Matrix matrix ) { mPath.transform( matrix ); }
 

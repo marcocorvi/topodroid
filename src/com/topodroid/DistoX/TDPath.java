@@ -622,6 +622,7 @@ public class TDPath
       filename = getSurveyPlotTdrFile( survey, p.name );
       t = new File( filename ); if ( t.exists() ) t.delete();
       deleteBackups( filename + BCK_SUFFIX );
+      t = new File( getSurveyPlotCsxFile( survey, p.name ) ); if ( t.exists() ) t.delete();
       t = new File( getSurveyPlotPngFile( survey, p.name ) ); if ( t.exists() ) t.delete();
       t = new File( getSurveyPlotDxfFile( survey, p.name ) ); if ( t.exists() ) t.delete();
       t = new File( getSurveyPlotSvgFile( survey, p.name ) ); if ( t.exists() ) t.delete();

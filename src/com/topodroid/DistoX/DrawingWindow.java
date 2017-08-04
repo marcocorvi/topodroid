@@ -4396,8 +4396,9 @@ public class DrawingWindow extends ItemDrawer
     float wZoom = (float) ( mDrawingSurface.getMeasuredWidth() * 0.9 ) / ( 1 + w );
     float hZoom = (float) ( ( ( mDrawingSurface.getMeasuredHeight() - mListView.getHeight() ) * 0.9 ) / ( 1 + h ));
     mZoom = ( hZoom < wZoom ) ? hZoom : wZoom;
-    mOffset.x = TopoDroidApp.mDisplayWidth  / (2*mZoom) - (b.left + b.right) / 2;
-    mOffset.y = ( TopoDroidApp.mDisplayHeight + mListView.getHeight() ) / (2*mZoom) - (b.top + b.bottom ) / 2;
+    if ( mZoom < 0.1f ) mZoom = 0.1f;
+    mOffset.x = ( TopoDroidApp.mDisplayWidth - DrawingUtil.CENTER_X )/(2*mZoom) - (b.left + b.right)/2;
+    mOffset.y = ( TopoDroidApp.mDisplayHeight + mListView.getHeight() - DrawingUtil.CENTER_Y )/(2*mZoom) - (b.top + b.bottom)/2;
     // Log.v("DistoX", "W " + w + " H " + h + " zoom " + mZoom + " X " + mOffset.x + " Y " + mOffset.y );
     mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
   }

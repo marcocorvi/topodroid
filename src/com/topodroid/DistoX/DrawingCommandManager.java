@@ -1029,18 +1029,30 @@ public class DrawingCommandManager
     }
   }
 
+  private void union( RectF b0, RectF b1 )
+  {
+    if ( b0.left   > b1.left   ) b0.left   = b1.left;
+    if ( b0.right  < b1.right  ) b0.right  = b1.right;
+    if ( b0.top    > b1.top    ) b0.top    = b1.top;
+    if ( b0.bottom < b1.bottom ) b0.bottom = b1.bottom;
+  }
+
   // called by DrawingSurface.getBitmap()
   public RectF getBitmapBounds()
   {
-    RectF bounds = new RectF();
+    // Log.v("DistoX", "get bitmap bounds. splays " + mSplaysStack.size() 
+    //               + " legs " + mLegsStack.size() 
+    //               + " cmds " + mCurrentStack.size() );
+    RectF bounds = new RectF(-1,-1,1,1);
     RectF b = new RectF();
     if( mSplaysStack != null ) { 
       synchronized( mSplaysStack ) {
         final Iterator i = mSplaysStack.iterator();
         while ( i.hasNext() ){
           final DrawingPath drawingPath = (DrawingPath) i.next();
-          drawingPath.mPath.computeBounds( b, true );
-          bounds.union( b );
+          drawingPath.computeBounds( b, true );
+          // bounds.union( b );
+          union( bounds, b );
         }
       }
     }
@@ -1049,8 +1061,9 @@ public class DrawingCommandManager
         final Iterator i = mLegsStack.iterator();
         while ( i.hasNext() ){
           final DrawingPath drawingPath = (DrawingPath) i.next();
-          drawingPath.mPath.computeBounds( b, true );
-          bounds.union( b );
+          drawingPath.computeBounds( b, true );
+          // bounds.union( b );
+          union( bounds, b );
         }
       }
     }
@@ -1061,10 +1074,12 @@ public class DrawingCommandManager
         while ( i.hasNext() ){
           final ICanvasCommand cmd = (ICanvasCommand) i.next();
           cmd.computeBounds( b, true );
-          bounds.union( b );
+          // bounds.union( b );
+          union( bounds, b );
         }
       }
     }
+    // Log.v("DistoX", "bounds " + bounds.left + " " + bounds.top + " " + bounds.right + " " + bounds.bottom );
     return bounds;
   }
 
