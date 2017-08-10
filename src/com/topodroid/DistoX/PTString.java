@@ -51,12 +51,14 @@ class PTString
         shift += 7;
       } while ( (b & 0x80) != 0 );
 
-      byte[] chars = new byte[ len + 1 ];
       if ( len > 0 ) {
+        byte[] chars = new byte[ len + 1 ];
         fs.read( chars, 0, len );
+        chars[len] = (byte)0;
+        _str = new String( chars );
+      } else {
+        _str = "";
       }
-      chars[len] = (byte)0;
-      _str = new String( chars );
     } catch ( IOException e ) {
     }
   }

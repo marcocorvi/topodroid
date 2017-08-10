@@ -136,7 +136,10 @@ class FixedInfo extends MagLatLong
 
   static double string2double( String str )
   {
+    if ( str == null ) return -1111.0;
     str = str.trim();                  // drop initial and final spaces
+    if ( str.length() == 0 ) return -1111.0;
+
     str = str.replace( " ", ":" );     // replace separators
     str = str.replace( "°", ":" );     
     str = str.replace( "'", ":" );     
@@ -155,6 +158,21 @@ class FixedInfo extends MagLatLong
       TDLog.Error( "string2double parse error: " + str );
     }
     return -1111.0; // more neg than -1000
+  }        
+
+  static double string2real( String str )
+  {
+    if ( str == null ) return 0;
+    str = str.trim();  // drop initial and final spaces
+    if ( str.length() == 0 ) return 0;
+    str = str.replace( "/", "." );
+    str = str.replace( ",", "." );
+    try {
+      return Double.parseDouble( str );
+    } catch (NumberFormatException e ) {
+      TDLog.Error( "string2real parse error: " + str );
+    }
+    return 0;
   }        
 
 }

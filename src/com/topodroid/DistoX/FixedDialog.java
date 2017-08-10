@@ -233,8 +233,8 @@ public class FixedDialog extends MyDialog
       if ( editable ) {
         double lat = FixedInfo.string2double( mTVlat.getText().toString() );
         double lng = FixedInfo.string2double( mTVlng.getText().toString() );
-        double alt = Double.parseDouble( mTValt.getText().toString() );
-        double asl = Double.parseDouble( mTVasl.getText().toString() );
+        double alt = FixedInfo.string2real( mTValt.getText().toString() );
+        double asl = FixedInfo.string2real( mTVasl.getText().toString() );
         if ( lat != mFxd.lat || lng != mFxd.lng || alt != mFxd.alt || asl != mFxd.asl ) {
           mParent.updateFixedData( mFxd, lng, lat, alt, asl );
         }
