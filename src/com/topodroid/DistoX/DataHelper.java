@@ -741,11 +741,19 @@ public class DataHelper extends DataSetObservable
       updateShotStmtFull.bindString( 6, comment );
       updateShotStmtFull.bindLong(   7, sid );     // WHERE
       updateShotStmtFull.bindLong(   8, id );
-      try {
-        updateShotStmtFull.execute();
-        success = true;
-      } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-      } catch ( SQLiteException e ) { logError("Shot updateC " + fStation + " " + tStation, e ); }
+      for ( int k=0; k<3 && ! success; ++k ) {
+        try {
+          updateShotStmtFull.execute();
+          success = true;
+        } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+        } catch ( SQLiteException e ) { 
+          logError("Shot updateC sqlite error " + fStation + " " + tStation, e ); 
+          try { Thread.sleep(50); } catch (InterruptedException ee ) { } 
+        } catch ( IllegalStateException e ) {
+          TDLog.Error("Shot updateC illegal state " + fStation + " " + tStation ); 
+          try { Thread.sleep(50); } catch (InterruptedException ee ) { } 
+        }
+      }
     } else {
       updateShotStmt.bindString( 1, fStation );
       updateShotStmt.bindString( 2, tStation );
@@ -754,11 +762,19 @@ public class DataHelper extends DataSetObservable
       updateShotStmt.bindLong(   5, leg );
       updateShotStmt.bindLong(   6, sid );
       updateShotStmt.bindLong(   7, id );
-      try {
-        updateShotStmt.execute();
-        success = true;
-      } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-      } catch ( SQLiteException e ) { logError("Shot update " + fStation + " " + tStation, e ); }
+      for ( int k=0; k<3 && ! success; ++k ) {
+        try {
+          updateShotStmt.execute();
+          success = true;
+        } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+        } catch ( SQLiteException e ) {
+          logError("Shot update sqlite error " + fStation + " " + tStation, e );
+          try { Thread.sleep(50); } catch (InterruptedException ee ) { } 
+        } catch ( IllegalStateException e ) {
+          TDLog.Error("Shot update illegal state " + fStation + " " + tStation ); 
+          try { Thread.sleep(50); } catch (InterruptedException ee ) { } 
+        }
+      }
     }
 
     if ( success && forward && mListeners != null ) { // synchronized( mListeners )
