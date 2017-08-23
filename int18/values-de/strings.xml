@@ -34,7 +34,7 @@
 
     <string name="make_walls">Wände</string>
     <string name="missing_station">Kein Messpunkt</string>
-    <!-- TODO string name="station_not_found">Station not found</string -->
+    <string name="station_not_found">Messpunkt nicht gefunden</string>
     <!-- UNUSED string name="missing_area">FLÄCHE</string -->
     <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->
     <!-- UNUSED string name="missing_line">LINIE</string -->
@@ -218,7 +218,7 @@
     <!-- NO string name="hidden_add">Vorherige Messungen ausblenden</string -->
     <string name="hidden_del">Vorherige Messungen anzeigen</string>
     <string name="splays_toggle">Hilfszüge ein/ausblenden</string>
-    <!-- TODO string name="splays">splays</string -->
+    <string name="splays">Hilfszüge</string>
     <string name="fixed">fixiert</string>
     <string name="painted">gezeichnet</string>
 
@@ -372,7 +372,7 @@
     <!-- UNUSED string name="converted_tdr2th2">Skizzen konvertiert zu th2.</string -->
     <!-- UNUSED string name="convert_tdr2th2">th2 Skizzen überschreiben?</string -->
     <string name="section_area">Fläche: %1$.1f</string>
-    <!-- TODO string name="section_name">section name</string -->
+    <string name="section_name">Name</string>
     <string name="scrap_outline">Skizzenumriss</string>
 
     <!-- UNUSED string name="sensor">Sensor</string -->
@@ -537,8 +537,8 @@
     <string name="button_clear"     >Entfernen</string>
     <string name="button_save"      >Speichern</string>
     <!-- UNUSED string name="button_select"    >Wählen     </string -->
-    <!-- TODO string name="button_search"    >Search    </string -->
-    <!-- TODO string name="button_merge"     >Merge     </string -->
+    <string name="button_search"    >Suche    </string>
+    <string name="button_merge"     >Zusammenführen     </string>
     <string name="button_split"     >Aufteilen     </string>
     <string name="button_store"     >Speichern</string>
     <!-- UNUSED string name="button_start"     >Start</string -->
@@ -630,8 +630,8 @@
     <string name="few_line_points">Line has too few points</string>
     <string name="line_delete">line_delete</string>
     <string name="flip_shots">Flip shots</string>
-    <!-- TODO string name="split_nothing">Nothing to split</string -->
-    <!-- TODO string name="copy_items">Copy items</string -->
+    <string name="split_nothing">Nichts aufzuteilen</string>
+    <string name="copy_items">Kopieren</string>
 
     <string name="menu_head">HEAD</string>
     <!-- UNUSED string name="menu_save_th2">SAVE TH2</string -->
@@ -683,7 +683,7 @@
     <string name="help_rename">Ändere Vermessungsname</string>
     <string name="help_plot_rename">Skizze umbenennen/löschen</string>
     <string name="help_plot_switch">Skizze wechseln</string>
-    <!-- TODO string name="help_search">Station search</string -->
+    <string name="help_search">Suche Messpunkt</string>
     <string name="help_stats">Vermessungs-Statistiken</string>
     <string name="help_save_plot">Die Skizze speichern</string>
     <!-- UNUSED string name="help_tdr2th2">Erstelle th2 Dateien der Skizzen</string -->
@@ -760,7 +760,7 @@
     <string name="title_contour">Konturen</string>
     <!-- UNUSED string name="title_coord">Gib die Punkt-Koordinaten ein:</string -->
     <string name="title_current_station">Gespeicherte Messpunkte</string>
-    <!-- TODO string name="title_station_search">Enter station</string -->
+    <string name="title_station_search">Messpunkt eingeben</string>
     <string name="title_device">DistoX Geräte</string>
     <string name="title_device_select">DistoX Gerät auswählen</string>
     <string name="title_discover">DistoX Geräte suchen&#8230;</string>
@@ -781,8 +781,8 @@
     <string name="title_note">Notizen</string>
     <string name="title_photo">Foto/Messungen</string>
     <string name="title_photo_comment">Foto Kommentar</string>
-    <string name="title_plot_save">Skizze Speichern als</string>
-    <!-- TODO string name="title_plot_merge">Merge-in sketch</string -->
+    <string name="title_plot_save">Skizze speichern als</string>
+    <string name="title_plot_merge">Skizze einfügen</string>
     <string name="title_plot_reload">Skizzenbackup wiederherstellen</string>
     <string name="title_profile_flip">Seitenansicht spiegeln?</string>
     <string name="title_projection">Projiziertes Profil Azimut %1$d</string>
@@ -862,8 +862,8 @@
   <string name="pref_svg_grid_summary">Gitter zu SVG hinzufügen</string>
   <string name="pref_svg_in_html_title">SVG in HTML</string>
   <string name="pref_svg_in_html_summary">SVG export in HTML einbetten</string>
-  <!-- TODO string name="pref_svg_line_dir_title">SVG line orientation</string -->
-  <!-- TODO string name="pref_svg_line_dir_summary">Add line orientation-ticks to SVG export</string -->
+  <string name="pref_svg_line_dir_title">SVG Ausrichtungslinie</string>
+  <string name="pref_svg_line_dir_summary">Ausrichtungslinienpfeile in SVG Export</string>
   <string name="pref_kml_stations_title">KML Stationen</string>
   <string name="pref_kml_stations_summary">Stationen zu KML Export hinzufügen</string>
   <string name="pref_kml_splays_title">KML Hilfslinien</string>
@@ -930,7 +930,7 @@
   <string name="pref_vert_splay_title">Neigung für gestrichelte Linien</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string -->
   <string name="pref_vert_splay_message">Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string>
-  <string name="pref_shared_xsections_title">Querschnitt Sichtabrkeit</string>
+  <string name="pref_shared_xsections_title">Querschnitt Sichtbarkeit</string>
   <string name="pref_shared_xsections_summary">Querschnitte nur auf einer oder auf allen Skizzen</string>
   <string name="xsections_shared">Auf allen Skizzen</string>
   <string name="xsections_private">Nur auf einer Skizze</string>
