@@ -1,5 +1,6 @@
 symbol point
 name passage-height
+name-ru высота-хода
 th_name passage-height
 orientation no
 has_value yes
