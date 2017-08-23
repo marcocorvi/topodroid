@@ -71,7 +71,7 @@ public class DrawingPointDialog extends MyDialog
     mETtext    = (EditText) findViewById( R.id.point_text );
 
     setTitle( "POINT " + BrushManager.mPointLib.getSymbolName( mPoint.mPointType ) );
-    if ( BrushManager.mPointLib.pointHasText( mPoint.mPointType ) ) {
+    if ( BrushManager.mPointLib.pointHasTextOrValue( mPoint.mPointType ) ) {
       String text = mPoint.getPointText();
       mETtext.setText( (text == null)? "" : text );
     } else {
@@ -123,7 +123,7 @@ public class DrawingPointDialog extends MyDialog
         mPoint.setOrientation( mOrientationWidget.mOrient );
         // Log.v("DistoX", "Point type " + mPoint.mPointType + " orientation " + mPoint.mOrientation );
       }
-      if ( BrushManager.mPointLib.pointHasText( mPoint.mPointType ) ) {
+      if ( BrushManager.mPointLib.pointHasTextOrValue( mPoint.mPointType ) ) {
         mPoint.setPointText( mETtext.getText().toString().trim() );
       }
     } else if ( b == mBtnCancel ) {

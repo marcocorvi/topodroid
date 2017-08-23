@@ -43,7 +43,7 @@ class SymbolPoint extends Symbol
   public String mDxf;
   public String mSvg;
 
-  boolean mHasText;         // whether the point has a text
+  int mHasText;         // whether the point has a text (1), value (2), or none (0)
   boolean mOrientable;
   double mOrientation;      // orientation [degrees]
   // SymbolPointBasic mPoint1; // basic point
@@ -87,7 +87,7 @@ class SymbolPoint extends Symbol
   {
     super( null, fname );
     mOrientable = false;
-    mHasText = false;
+    mHasText = 0;
     mOrientation = 0.0;
     readFile( pathname, locale, iso );
   }
@@ -106,11 +106,11 @@ class SymbolPoint extends Symbol
     mOrigPath = new Path( mPath );
     
     mOrientable = orientable;
-    mHasText = false;
+    mHasText = 0;
     mOrientation = 0.0;
   }
 
-  SymbolPoint( String n1, String tn1, String fname, int c1, String path, boolean orientable, boolean has_text )
+  SymbolPoint( String n1, String tn1, String fname, int c1, String path, boolean orientable, int has_text )
   {
     super( tn1, fname ); // FIXME fname
     mName = n1;
@@ -215,7 +215,16 @@ class SymbolPoint extends Symbol
             if ( cnt == 0 ) {
               ++k; while ( k < s && vals[k].length() == 0 ) ++k;
               if ( k < s ) {
-                mHasText = ( vals[k].equals("yes") || vals[k].equals("1") );
+                mHasText = ( vals[k].equals("yes") || vals[k].equals("1") )? 1 : 0;
+                if ( vals[k].equals("2") ) mHasText = 2;
+              }
+            }
+          } else if ( vals[k].equals("has_value") ) {
+            if ( cnt == 0 ) {
+              ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+              if ( k < s ) {
+                mHasText = ( vals[k].equals("yes") || vals[k].equals("1") )? 2 : 0;
+                if ( vals[k].equals("1") ) mHasText = 1;
               }
             }
           } else if ( vals[k].equals("style") ) {

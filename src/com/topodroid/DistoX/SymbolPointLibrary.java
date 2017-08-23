@@ -52,7 +52,10 @@ class SymbolPointLibrary extends SymbolLibrary
     makeEnabledList();
   }
 
-  boolean pointHasText( int k ) { return ( k < 0 || k >= mSymbolNr )? false : ((SymbolPoint)mSymbols.get(k)).mHasText; }
+  boolean pointHasText( int k ) { return ( k < 0 || k >= mSymbolNr )? false : ((SymbolPoint)mSymbols.get(k)).mHasText == 1; }
+  boolean pointHasValue( int k ) { return ( k < 0 || k >= mSymbolNr )? false : ((SymbolPoint)mSymbols.get(k)).mHasText == 2; }
+  boolean pointHasTextOrValue( int k )
+  { return ( k < 0 || k >= mSymbolNr )? false : ((SymbolPoint)mSymbols.get(k)).mHasText > 0; }
 
   double getPointOrientation( int k )
   { return ( k < 0 || k >= mSymbolNr )? 0.0 : ((SymbolPoint)mSymbols.get(k)).mOrientation; }
@@ -97,15 +100,15 @@ class SymbolPointLibrary extends SymbolLibrary
     SymbolPoint symbol;
     // Log.v(  TopoDroidApp.TAG, "SymbolPointLibrary::loadSystemPoints()" );
 
-    mPointUserIndex = mSymbols.size();
-    symbol = new SymbolPoint( res.getString(R.string.thp_user), "u:user", "user", 0xffffffff, p_user, false, false );
+    mPointUserIndex = mSymbols.size(); // 0 = no-text, no-value
+    symbol = new SymbolPoint( res.getString(R.string.thp_user), "u:user", "user", 0xffffffff, p_user, false, 0 );
     symbol.mCsxLayer = 6;
     symbol.mCsxType  = 8;
     symbol.mCsxCategory = 81;
     addSymbol( symbol );
 
-    mPointLabelIndex = mSymbols.size();
-    symbol = new SymbolPoint( res.getString(R.string.thp_label), "label", "label", 0xffffffff, p_label, true, true );
+    mPointLabelIndex = mSymbols.size(); // 1 = text
+    symbol = new SymbolPoint( res.getString(R.string.thp_label), "label", "label", 0xffffffff, p_label, true, 1 );
     symbol.mCsxLayer = 6;
     symbol.mCsxType  = 8;
     symbol.mCsxCategory = 81;

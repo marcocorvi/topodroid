@@ -306,7 +306,7 @@ public class DrawingPointPath extends DrawingPath
     String th_name = BrushManager.mPointLib.getSymbolThName(mPointType);
     pw.format(Locale.US, "point %.2f %.2f %s", cx*toTherion, -cy*toTherion, th_name );
     toTherionOrientation( pw );
-    toTherionText( pw, th_name );
+    toTherionTextOrValue( pw );
     toTherionOptions( pw );
     pw.format("\n");
 
@@ -320,13 +320,13 @@ public class DrawingPointPath extends DrawingPath
     }
   }
 
-  private void toTherionText( PrintWriter pw, String th_name )
+  private void toTherionTextOrValue( PrintWriter pw )
   {
     if ( mPointText != null && mPointText.length() > 0 ) {
-      if ( "passage-height".equals( th_name ) ) {
-        pw.format(" -value \"%s\"", mPointText );
-      } else { // "label" "remark"
+      if ( BrushManager.mPointLib.pointHasText(mPointType) ) { // label, remark
         pw.format(" -text \"%s\"", mPointText );
+      } else if ( BrushManager.mPointLib.pointHasValue(mPointType) ) { // passage-height
+        pw.format(" -value %s", mPointText );
       }
     }
   }

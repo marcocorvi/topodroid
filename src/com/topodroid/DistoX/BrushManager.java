@@ -46,6 +46,8 @@ public class BrushManager
   static String getPointName( int idx ) { return mPointLib.getSymbolName( idx ); }
 
   static boolean pointHasText( int index ) { return mPointLib.pointHasText( index ); }
+  static boolean pointHasValue( int index ) { return mPointLib.pointHasValue( index ); }
+  static boolean pointHasTextOrValue( int index ) { return mPointLib.pointHasTextOrValue( index ); }
 
   static int getPointCsxLayer( int index ) { return mPointLib.pointCsxLayer( index ); }
   static int getPointCsxType( int index ) { return mPointLib.pointCsxType( index ); }
