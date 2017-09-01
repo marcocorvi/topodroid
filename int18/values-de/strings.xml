@@ -424,6 +424,8 @@
     <string name="survey_delete">Vermessung löschen?</string>
     <string name="survey_split">Vermessung teilen?</string>
     <string name="survey_not_attached">WARNUNG: Unverbundene Messungen</string>
+    <!-- TODO string name="survey_not_extend">WARNING: unset shot extends</string -->
+    <!-- TODO string name="survey_not_attached_extend">WARNING: unattached shots and unset extends</string -->
     <string name="cannot_rename">Kann Vermessung nicht umbenennen</string>
     <string name="declination">Magnetische Deklination</string>
     <string name="description">Beschreibung</string>
@@ -1064,6 +1066,8 @@
   <string name="pref_checkBT_summary">Bluetooth (de)aktivieren</string>
   <string name="pref_checkAttached_title">Messlinien-Check</string>
   <string name="pref_checkAttached_summary">Prüfe ob alle Messpunkte verbunden sind</string>
+  <!-- TODO string name="pref_checkExtend_title">Leg extend check</string -->
+  <!-- TODO string name="pref_checkExtend_summary">Check if leg extends are set</string -->
   <string name="pref_backup_number_title">Anzahl Backups</string>
   <string name="pref_backup_number_summary">Anzahl Skizzenbackups</string>
   <string name="pref_backup_interval_title">Backup Intervall</string>

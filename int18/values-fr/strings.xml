@@ -413,6 +413,8 @@
     <string name="survey_delete">Supprimer le relevé?</string>
     <string name="survey_split">Diviser le relevé?</string>
     <string name ="survey_not_attached">ATTENTION: visées non rattachées</string>
+    <!-- TODO string name="survey_not_extend">WARNING: unset shot extends</string -->
+    <!-- TODO string name="survey_not_attached_extend">WARNING: unattached shots and unset extends</string -->
     <string name="cannot_rename">Impossible de renommer le relevé</string>
     <string name="declination">Déclinaison magnétique</string>
     <string name="description">description</string>
@@ -1035,6 +1037,8 @@
   <string name="pref_checkBT_summary">Activer/désactiver Bluetooth</string>
   <string name="pref_checkAttached_title">Vérification du cheminement</string>
   <string name="pref_checkAttached_summary">Vérifier si les stations sont reliées</string>
+  <!-- TODO string name="pref_checkExtend_title">Leg extend check</string -->
+  <!-- TODO string name="pref_checkExtend_summary">Check if leg extends are set</string -->
   <string name="pref_backup_number_title">Nbre de Sauvegardes</string>
   <string name="pref_backup_number_summary">Nombre de sauvegarde de croquis</string>
   <string name="pref_backup_interval_title">Intervalle sauvegarde</string>

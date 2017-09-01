@@ -1072,8 +1072,16 @@ public class DrawingWindow extends ItemDrawer
       }
     }
 
-    if ( (! mNum.surveyAttached) && TDSetting.mCheckAttached && can_toast ) {
-      Toast.makeText( mActivity, R.string.survey_not_attached, Toast.LENGTH_SHORT ).show();
+    if ( can_toast ) {
+      if ( (! mNum.surveyAttached) && TDSetting.mCheckAttached ) {
+        if ( (! mNum.surveyExtend) && TDSetting.mCheckExtend && type == PlotInfo.PLOT_EXTENDED ) {
+          Toast.makeText( mActivity, R.string.survey_not_attached_extend, Toast.LENGTH_SHORT ).show();
+        } else {
+          Toast.makeText( mActivity, R.string.survey_not_attached, Toast.LENGTH_SHORT ).show();
+        }
+      } else if ( (! mNum.surveyExtend) && TDSetting.mCheckExtend && type == PlotInfo.PLOT_EXTENDED ) {
+        Toast.makeText( mActivity, R.string.survey_not_extend, Toast.LENGTH_SHORT ).show();
+      }
     }
   }
 

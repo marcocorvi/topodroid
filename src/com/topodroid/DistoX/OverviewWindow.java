@@ -349,6 +349,7 @@ public class OverviewWindow extends ItemDrawer
       }
     }
 
+    // FIXME mCheckExtend
     // if ( (! mNum.surveyAttached) && TDSetting.mCheckAttached ) {
     //   Toast.makeText( mActivity, R.string.survey_not_attached, Toast.LENGTH_SHORT ).show();
     // }

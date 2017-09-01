@@ -118,6 +118,7 @@ class DistoXNum
   public float angleErrorStddev() { return mErr2; } // radians
 
   public boolean surveyAttached; //!< whether the survey is attached
+  public boolean surveyExtend;
 
   public List<NumStation> getStations() { return mStations.getStations(); }
   public List<NumShot>    getShots()    { return mShots; }
@@ -257,6 +258,7 @@ class DistoXNum
   DistoXNum( List<DBlock> data, String start, String view, String hide, float decl )
   {
     mDecl = decl;
+    surveyExtend   = true;
     surveyAttached = computeNum( data, start );
     setStationsHide( hide );
     setStationsBarr( view );
@@ -723,6 +725,7 @@ class DistoXNum
           lastLeg.surface   = ( blk.isSurface() );
           lastLeg.commented = ( blk.isCommented() );
           // lastLeg.backshot  = ( blk.isBackshot() ); // FIXME
+          if ( blk.getExtend() > 1 ) surveyExtend = false;
           tmpshots.add( lastLeg );
           break;
 

@@ -412,6 +412,8 @@
     <string name="survey_delete">Apagar a topo?</string>
     <string name="survey_split">Dividir a topo?</string>
     <string name="survey_not_attached">ATENÇÃO: visadas desconectadas</string>
+    <!-- TODO string name="survey_not_extend">WARNING: unset shot extends</string -->
+    <!-- TODO string name="survey_not_attached_extend">WARNING: unattached shots and unset extends</string -->
     <string name="cannot_rename">Não é possível renomear a topo</string>
     <string name="declination">declinação magnética</string>
     <string name="description">descrição</string>
@@ -1036,6 +1038,8 @@
   <string name="pref_checkBT_summary">Habilitar verificação do Bluetooth na abertura do aplicativo</string>
   <string name="pref_checkAttached_title">Verificação linha de trena</string>
   <string name="pref_checkAttached_summary">Verificar se as bases estão conectadas</string>
+  <!-- TODO string name="pref_checkExtend_title">Leg extend check</string -->
+  <!-- TODO string name="pref_checkExtend_summary">Check if leg extends are set</string -->
   <string name="pref_backup_number_title">Quantidade backup</string>
   <string name="pref_backup_number_summary">Quantidade de backups do croqui</string>
   <string name="pref_backup_interval_title">Intervalos backup</string>

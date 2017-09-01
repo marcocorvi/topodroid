@@ -52,6 +52,13 @@
        android:defaultValue="false"
      / -->
 
+     <!-- CheckBoxPreference
+       android:key="DISTOX_CHECK_EXTEND"
+       android:summary="@string/pref_checkExtend_summary"
+       android:title="@string/pref_checkExtend_title"
+       android:defaultValue="true"
+     / -->
+
      <!-- com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_BACKUP_NUMBER"
        android:summary="@string/pref_backup_number_summary"

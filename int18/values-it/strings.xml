@@ -413,6 +413,8 @@
     <string name="survey_delete">Elimina rilievo?</string>
     <string name="survey_split">Dividi rilievo?</string>
     <string name="survey_not_attached">ATTENZIONE: dati scollegati</string>
+    <!-- TODO string name="survey_not_extend">WARNING: unset shot extends</string -->
+    <!-- TODO string name="survey_not_attached_extend">WARNING: unattached shots and unset extends</string -->
     <string name="cannot_rename">Rinomina rilievo non riuscita</string>
     <string name="declination">decl. magn.</string>
     <string name="description">descrizione</string>
@@ -1042,6 +1044,8 @@
   <string name="pref_checkBT_summary">Attiva/disattiva bluetooth</string>
   <string name="pref_checkAttached_title">Controllo poligonale</string>
   <string name="pref_checkAttached_summary">Controlla se ci sono capisaldi scollegati</string>
+  <!-- TODO string name="pref_checkExtend_title">Leg extend check</string -->
+  <!-- TODO string name="pref_checkExtend_summary">Check if leg extends are set</string -->
   <string name="pref_backup_number_title">Numero Backup</string>
   <string name="pref_backup_number_summary">Numero di backup di sketch file</string>
   <string name="pref_backup_interval_title">Intervallo di backup</string>

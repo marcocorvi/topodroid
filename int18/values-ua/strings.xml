@@ -414,6 +414,8 @@
     <string name="survey_delete">Видалити зйомку?</string>
     <string name="survey_split">Розірвати зйомку ?</string>
     <string name="survey_not_attached">УВАГА: неасоційований пікет</string>
+    <!-- TODO string name="survey_not_extend">WARNING: unset shot extends</string -->
+    <!-- TODO string name="survey_not_attached_extend">WARNING: unattached shots and unset extends</string -->
     <string name="cannot_rename">Не можу перйменувати зйомку</string>
     <string name="declination">Магн. схилення.</string>
     <string name="description">опис</string>
@@ -1039,6 +1041,8 @@
   <string name="pref_checkBT_summary">Вкл/Викл bluetooth</string>
   <string name="pref_checkAttached_title">Перевірка нитки хода</string>
   <string name="pref_checkAttached_summary">Перевіряти належність пікетов</string>
+  <!-- TODO string name="pref_checkExtend_title">Leg extend check</string -->
+  <!-- TODO string name="pref_checkExtend_summary">Check if leg extends are set</string -->
   <string name="pref_backup_number_title">К-сть резервних копій</string>
   <string name="pref_backup_number_summary">К-сть резервних копій абрисів</string>
   <string name="pref_backup_interval_title">Інтервал збереження резервних копій</string>

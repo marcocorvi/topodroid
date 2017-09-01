@@ -78,6 +78,7 @@ class TDSetting
     "DISTOX_DIP_THR",             // shot qualoity dip threshold [deg]
     "DISTOX_LOOP_CLOSURE_VALUE",  // whether to close loop
     "DISTOX_CHECK_ATTACHED",      // whether to check all shots are connected
+    "DISTOX_CHECK_EXTEND",        // whether leg extends are all set
     "DISTOX_PREV_NEXT",           // whether to put "prev-next" arrows in shot edit dialog
     "DISTOX_MAX_SHOT_LENGTH",     // maximum length of a shot data
     "DISTOX_MIN_LEG_LENGTH",      // minimum length of a shot data
@@ -297,6 +298,7 @@ class TDSetting
   static int mWaitCommand = 100;
 
   static boolean mCheckAttached = false;    // whether to check is there are shots non-attached
+  static boolean mCheckExtend   = true;
   static boolean mPrevNext = true;    // whether to display prev-next buttons in shot dialog
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -701,7 +703,8 @@ class TDSetting
 
     setLoopClosure( tryInt(   prefs, key[k++], "0" ) );     // DISTOX_LOOP_CLOSURE_VALUE
 
-    mCheckAttached = prefs.getBoolean( key[k++], false );   // DISTOX_CHECK_ATTACHED 13
+    mCheckAttached = prefs.getBoolean( key[k++], false );   // DISTOX_CHECK_ATTACHED
+    mCheckExtend   = prefs.getBoolean( key[k++], true  );   // DISTOX_CHECK_EXTEND
     mPrevNext      = prefs.getBoolean( key[k++], true );    // DISTOX_PREV_NEXT
     mMaxShotLength = tryFloat( prefs, key[k++], "50"   );   // DISTOX_MAX_SHOT_LENGTH
     mMinLegLength  = tryFloat( prefs, key[k++], "0.5" );    // DISTOX_MIN_LEG_LENGTH
@@ -949,6 +952,8 @@ class TDSetting
       setLoopClosure( tryInt( prefs, k, "0" ) );
     } else if ( k.equals( key[ nk++ ] ) ) {
       mCheckAttached = prefs.getBoolean( k, false );
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mCheckExtend   = prefs.getBoolean( k, true );
     } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_PREV_NEXT
       mPrevNext = prefs.getBoolean( k, true );
     } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_MAX_SHOT_LENGTH
@@ -1342,6 +1347,7 @@ class TDSetting
     if ( name.equals( "DISTOX_DIP_THR"        ) ) return parseFloatValue( value, mDipThr, 0 );
     //B if ( name.equals( "DISTOX_LOOP_CLOSURE_VALUE" ) 
     //B if ( name.equals( "DISTOX_CHECK_ATTACHED" )
+    //B if ( name.equals( "DISTOX_CHECK_EXTEND" )
     //B if ( name.equals( "DISTOX_PREV_NEXT" )
     if ( name.equals( "DISTOX_MAX_SHOT_LENGTH") ) return parseFloatValue( value, mMaxShotLength, 20 );
     if ( name.equals( "DISTOX_MIN_LEG_LENGTH") ) return parseFloatValue( value, mMinLegLength, 0, 5 );

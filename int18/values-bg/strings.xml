@@ -414,6 +414,8 @@
     <string name="survey_delete">Изтриване на картировката?</string>
     <string name="survey_split">Разделяне на картировката?</string>
     <string name="survey_not_attached">ВНИМАНИЕ: някои отсечки не са свързани</string>
+    <!-- TODO string name="survey_not_extend">WARNING: unset shot extends</string -->
+    <!-- TODO string name="survey_not_attached_extend">WARNING: unattached shots and unset extends</string -->
     <string name="cannot_rename">Не може да се преименува картировката</string>
     <string name="declination">Магн. деклинация</string>
     <string name="description">описание</string>
@@ -1039,6 +1041,8 @@
   <string name="pref_checkBT_summary">Разрешаване/забраняване на Bluetooth</string>
   <string name="pref_checkAttached_title">Проверка на антена</string>
   <string name="pref_checkAttached_summary">Проверка дали всички репери са свързани</string>
+  <!-- TODO string name="pref_checkExtend_title">Leg extend check</string -->
+  <!-- TODO string name="pref_checkExtend_summary">Check if leg extends are set</string -->
   <string name="pref_backup_number_title">Брой архиви</string>
   <string name="pref_backup_number_summary">Брой резервни архиви на скица</string>
   <string name="pref_backup_interval_title">Интервал на архивиране</string>

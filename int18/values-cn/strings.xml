@@ -412,6 +412,8 @@
     <string name="survey_delete">删除测量 ?</string>
     <string name="survey_split">拆分测量 ?</string>
     <string name="survey_not_attached">警告: 独立测量数据</string>
+    <!-- TODO string name="survey_not_extend">WARNING: unset shot extends</string -->
+    <!-- TODO string name="survey_not_attached_extend">WARNING: unattached shots and unset extends</string -->
     <string name="cannot_rename">不能重命名</string>
     <string name="declination">磁偏角.</string>
     <string name="description">描述</string>
@@ -1035,6 +1037,8 @@
   <string name="pref_checkBT_summary">启用/停用 蓝牙</string>
   <string name="pref_checkAttached_title">中间线检查</string>
   <string name="pref_checkAttached_summary">检测如果测量点相连接</string>
+  <!-- TODO string name="pref_checkExtend_title">Leg extend check</string -->
+  <!-- TODO string name="pref_checkExtend_summary">Check if leg extends are set</string -->
   <string name="pref_backup_number_title">备份数字</string>
   <string name="pref_backup_number_summary">草图文件数字备份</string>
   <string name="pref_backup_interval_title">备份间隔</string>

@@ -418,6 +418,8 @@
     <string name="survey_delete">Odstrani načrt</string>
     <string name="survey_split">Razdeli načrt</string>
     <string name="survey_not_attached">POZOR: nepovezani podatki</string>
+    <!-- TODO string name="survey_not_extend">WARNING: unset shot extends</string -->
+    <!-- TODO string name="survey_not_attached_extend">WARNING: unattached shots and unset extends</string -->
     <string name="cannot_rename">Neuspešno preimenovanje načrta</string>
     <string name="declination">magn. dekl.</string>
     <string name="description">Opis</string>
@@ -1038,6 +1040,8 @@
   <string name="pref_checkBT_summary">Aktiviraj/deaktiviraj  bluetooth</string>
   <string name="pref_checkAttached_title">Preveri poligon</string>
   <string name="pref_checkAttached_summary">Preveri če so merilne točke nepovezane</string>
+  <!-- TODO string name="pref_checkExtend_title">Leg extend check</string -->
+  <!-- TODO string name="pref_checkExtend_summary">Check if leg extends are set</string -->
   <!-- TODO string name="pref_backup_number_title">Backup number</string -->
   <!-- TODO string name="pref_backup_number_summary">Number of sketch files backups</string -->
   <!-- TODO string name="pref_backup_interval_title">Backup interval</string -->

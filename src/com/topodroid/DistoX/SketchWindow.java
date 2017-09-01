@@ -1126,6 +1126,7 @@ public class SketchWindow extends ItemDrawer
   {
     // mSketchSurface.clearReferences();
     mNum = new DistoXNum( list, mInfo.start, null, null, mDecl ); // FIXME null: no barrier no hiding
+    // N.B. mCheckExtend does not metter for 3D
     if ( (! mNum.surveyAttached) && TDSetting.mCheckAttached ) {
       Toast.makeText( mActivity, R.string.survey_not_attached, Toast.LENGTH_SHORT ).show();
     }
