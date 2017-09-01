@@ -34,7 +34,7 @@
 
     <string name="make_walls">Paredes</string>
     <string name="missing_station">Base inexistente</string>
-    <!-- TODO string name="station_not_found">Station not found</string -->
+    <string name="station_not_found">Base não encontrada</string>
     <!-- UNUSED string name="missing_area">ÁREA</string -->
     <!-- UNUSED string name="missing_hint">Habilite ou instale os símbolos que estão faltando</string -->
     <!-- UNUSED string name="missing_line">LINHA</string -->
@@ -120,14 +120,14 @@
     <string name="extend_vert">Vertical</string>
     <!-- UNUSED string name="external_prompt">Inserir medição</string -->
     <string name="splay_at_to">Dados EDTC na base PARA</string>
-    <!-- TODO string name="lrud">LRUD</string -->
+    <string name="lrud">EDTB</string>
 
     <string name="few_data">Não há dados suficientes</string>
     <string name="few_iter">Falha: excesso de iterações</string>
     <string name="few_groups">Não há dados suficientes para os grupos</string>
     <!-- UNUSED string name="few_plots">Esboços não suficientes</string -->
     <string name="few_calibs">Calibrações insuficientes</string>
-    <!-- TODO string name="getting_info">Getting DistoX info ...</string -->
+    <string name="getting_info">Obtendo informações da DistoX ...</string>
 
     <string name="calib_import_title">Importar calibração</string>
     <string name="import_title">Importar topo</string>
@@ -213,7 +213,7 @@
     <!-- UNUSED string name="hidden_add">Ocultar visadas até base referência</string -->
     <string name="hidden_del">Mostrar visadas até base referência</string>
     <string name="splays_toggle">Alternar exibição das medidas auxiliares</string>
-    <!-- TODO string name="splays">splays</string -->
+    <string name="splays">medidas auxiliares</string>
     <string name="fixed">fixa</string>
     <string name="painted">pintada</string>
 
@@ -360,7 +360,7 @@
     <!-- UNUSED string name="converted_tdr2th2">Arquivos binários dos croquis convertidos para th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Sobrescrever arquivos de croqui th2?</string -->
     <string name="section_area">Área do corte: %1$.1f</string>
-    <!-- TODO string name="section_name">section name</string -->
+    <string name="section_name">nome do corte</string>
     <string name="scrap_outline">Contorno do croqui</string>
 
     <!-- UNUSED string name="sensor">sensor</string -->
@@ -510,7 +510,7 @@
     <!-- UNUSED string name="button_redo"      >Refazer   </string -->
     <!-- UNUSED string name="button_regroup"   >Reagrupar   </string -->
     <string name="button_dump"      >Baixar    </string>
-    <!-- TODO string name="button_rename"    >Rename    </string -->
+    <string name="button_rename"    >Renomear  </string>
     <string name="button_replace"   >Substituir</string>
     <string name="button_reset"     >Reiniciar </string>
     <string name="button_left"      >ESQUERDA</string>
@@ -519,9 +519,9 @@
     <string name="button_clear"     >Limpar    </string>
     <string name="button_save"      >Salvar    </string>
     <!-- UNUSED string name="button_select"    >Selecionar    </string -->
-    <!-- TODO string name="button_search"    >Search    </string -->
-    <!-- TODO string name="button_merge"     >Merge     </string -->
-    <!-- TODO string name="button_split"     >Split     </string -->
+    <string name="button_search"    >Pesquisar </string>
+    <string name="button_merge"     >Mesclar   </string>
+    <string name="button_split"     >Dividir   </string>
     <string name="button_store"     >Armazenar </string>
     <!-- UNUSED string name="button_start"     >Iniciar</string -->
     <!-- UNUSED string name="button_stop"      >Parar</string -->
@@ -612,8 +612,8 @@
     <string name="few_line_points">A linha possui quantidade insuficiente de pontos</string>
     <string name="line_delete">apagar_linha</string>
     <string name="flip_shots">Virar visadas</string>
-    <!-- TODO string name="split_nothing">Nothing to split</string -->
-    <!-- TODO string name="copy_items">Copy items</string -->
+    <string name="split_nothing">Nada a ser dividido</string>
+    <string name="copy_items">Copiar itens</string>
 
     <string name="menu_head">CABEÇALHO</string>
     <!-- UNUSED string name="menu_save_th2">SALVAR TH2</string -->
@@ -665,7 +665,7 @@
     <string name="help_rename">Mudar nome da topo</string>
     <string name="help_plot_rename">Renomear/apagar croqui</string>
     <string name="help_plot_switch">Trocar croqui</string>
-    <!-- TODO string name="help_search">Station search</string -->
+    <string name="help_search">Pesquisar base</string>
     <string name="help_stats">Estatísticas da topo</string>
     <string name="help_save_plot">Exportar croqui</string>
     <!-- UNUSED string name="help_tdr2th2">Converter arquivos binários do croqui em th2</string -->
@@ -740,7 +740,7 @@
     <string name="title_contour">Contorno</string>
     <!-- UNUSED string name="title_coord">Inserir as coordenadas do ponto:</string -->
     <string name="title_current_station">Base gravadas</string>
-    <!-- TODO string name="title_station_search">Enter station</string -->
+    <string name="title_station_search">Entre base</string>
     <string name="title_device">Dispositivos DistoX</string>
     <string name="title_device_select">Selecionar o dispositivo DistoX</string>
     <string name="title_discover">Procurando dispositivos DistoX &#8230; Aguardar</string>
@@ -762,7 +762,7 @@
     <string name="title_photo">Foto/Medições</string>
     <string name="title_photo_comment">Comentário da foto</string>
     <string name="title_plot_save">Exportar croqui</string>
-    <!-- TODO string name="title_plot_merge">Merge-in sketch</string -->
+    <string name="title_plot_merge">Mesclar croqui</string>
     <string name="title_plot_reload">Recarregar croqui</string>
     <string name="title_profile_flip">Virar o corte?</string>
     <string name="title_projection">Azimute do corte projetado %1$d</string>
@@ -773,7 +773,7 @@
     <string name="title_shift">Deslocar</string>
     <string name="title_shot_delete">Apagar medida?</string>
     <string name="title_sensor_edit">Sensor</string>
-    <!-- TODO string name="title_split">Sketch split</string -->
+    <string name="title_split">Dividir croqui</string>
 
     <string name="title_stats">Estatísticas</string>
     <string name="title_step">Passo</string>
@@ -835,8 +835,8 @@
   <string name="pref_svg_grid_summary">Incluir grade no arquivo SVG exportado</string>
   <string name="pref_svg_in_html_title">SVG em HTML</string>
   <string name="pref_svg_in_html_summary">Incorporar arquivo SVG exportado em HTML</string>
-  <!-- TODO string name="pref_svg_line_dir_title">SVG line orientation</string -->
-  <!-- TODO string name="pref_svg_line_dir_summary">Add line orientation-ticks to SVG export</string -->
+  <string name="pref_svg_line_dir_title">Orientação das linhas SVG</string>
+  <string name="pref_svg_line_dir_summary">Incluir indicadores de orientação de linha na exportação SVG</string>
   <string name="pref_kml_stations_title">Bases KML</string>
   <string name="pref_kml_stations_summary">Incluir bases ao arquivo de exportação KML</string>
   <string name="pref_kml_splays_title">Medidas auxiliares KML</string>
@@ -903,10 +903,10 @@
   <string name="pref_vert_splay_title">Limite med. aux. tracejadas</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Medidas auxiliares acima desta inclinação serão tracejadas</string -->
   <string name="pref_vert_splay_message">Medidas auxiliares acima dessa inclinação serão tracejadas</string>
-  <!-- TODO string name="pref_shared_xsections_title">Shared x-sections</string -->
-  <!-- TODO string name="pref_shared_xsections_summary">At-station x-sections shared among sketches</string -->
-  <!-- TODO string name="xsections_shared">Shared X-sections</string -->
-  <!-- TODO string name="xsections_private">Private X-sections</string -->
+  <string name="pref_shared_xsections_title">Cortes X compartilhados</string>
+  <string name="pref_shared_xsections_summary">Cortes X em bases compartilhados entre croquis</string>
+  <string name="xsections_shared">Cortes X compartilhados</string>
+  <string name="xsections_private">Cortes X não compartilhados</string>
 
 
   <string name="pref_survey_stations_title">Regras para bases</string>
