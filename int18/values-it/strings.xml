@@ -34,7 +34,7 @@
 
     <string name="make_walls">Pareti</string>
     <string name="missing_station">Caposaldo assente</string>
-    <!-- TODO string name="station_not_found">Station not found</string -->
+    <string name="station_not_found">Caposaldo non trovato</string>
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Installa i prototipi grafici con TdSymbol</string -->
     <!-- UNUSED string name="missing_line">LINEA</string -->
@@ -120,14 +120,14 @@
     <string name="extend_vert">Vert.</string>
     <!-- UNUSED string name="external_prompt">Scrivi i dati</string -->
     <string name="splay_at_to">LRUD al caposaldo di arrivo</string>
-    <!-- TODO string name="lrud">LRUD</string -->
+    <!-- OKFT string name="lrud">LRUD</string -->
 
     <string name="few_data">Dati insufficienti</string>
     <string name="few_iter">Iterazione fallita</string>
     <string name="few_groups">Dati con gruppi non sufficienti</string>
     <!-- UNUSED string name="few_plots">Troppo pochi disegni</string -->
     <string name="few_calibs">Calibrazioni non sufficienti</string>
-    <!-- TODO string name="getting_info">Getting DistoX info ...</string -->
+    <string name="getting_info">Scarico info dal DistoX...</string>
 
     <string name="calib_import_title">Importa calibrazione</string>
     <string name="import_title">Importazione file</string>
@@ -213,7 +213,7 @@
     <!-- UNUSED string name="hidden_add">Nascondi la linea mediana</string -->
     <string name="hidden_del">Mostra la linea mediana</string>
     <string name="splays_toggle">Mostra o Nascondi gli splay</string>
-    <!-- TODO string name="splays">splays</string -->
+    <string name="splays">splay</string>
     <string name="fixed">fisso</string>
     <string name="painted">colorato</string>
 
@@ -361,7 +361,7 @@
     <!-- UNUSED string name="converted_tdr2th2">Convertito disegno da formato binario a th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Sovrascrivo il file del disegno th2 ?</string -->
     <string name="section_area">Area della sezione: %1$.1f</string>
-    <!-- TODO string name="section_name">section name</string -->
+    <string name="section_name">Nome sezione</string>
     <string name="scrap_outline">Contorno del disegno</string>
 
     <!-- UNUSED string name="sensor">sensore</string -->
@@ -514,7 +514,7 @@
     <!-- UNUSED string name="button_redo"      >Ripeti azione</string -->
     <!-- UNUSED string name="button_regroup"   >Raggruppare   </string -->
     <string name="button_dump"      >Scarica   </string>
-    <!-- TODO string name="button_rename"    >Rename    </string -->
+    <string name="button_rename"    >Rinomina    </string>
     <string name="button_replace"   >Sostituisci</string>
     <string name="button_reset"     >Resetta   </string>
     <string name="button_left"      >SINISTRA</string>
@@ -522,9 +522,9 @@
     <string name="button_clear"     >Cancella  </string>
     <string name="button_save"      >Salva     </string>
     <!-- UNUSED string name="button_select"    >Seleziona </string -->
-    <!-- TODO string name="button_search"    >Search    </string -->
-    <!-- TODO string name="button_merge"     >Merge     </string -->
-    <!-- TODO string name="button_split"     >Split     </string -->
+    <string name="button_search"    >Cerca     </string>
+    <string name="button_merge"     >Unisci    </string>
+    <string name="button_split"     >Dividi    </string>
     <string name="button_store"     >Scrivi    </string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
@@ -614,8 +614,8 @@
     <string name="few_line_points">La linea ha troppo pochi punti</string>
     <string name="line_delete">Elimina linea</string>
     <string name="flip_shots">Capovolgi battute</string>
-    <!-- TODO string name="split_nothing">Nothing to split</string -->
-    <!-- TODO string name="copy_items">Copy items</string -->
+    <string name="split_nothing">Nulla da dividere</string>
+    <string name="copy_items">Copia elemento</string>
 
     <string name="menu_head">CIMA</string>
     <!-- UNUSED string name="menu_save_th2">SAVE TH2</string -->
@@ -667,7 +667,7 @@
     <string name="help_rename">Modifica il nome del rilievo</string>
     <string name="help_plot_rename">Rinomina/Cancella disegno</string>
     <string name="help_plot_switch">Scambia disegno</string>
-    <!-- TODO string name="help_search">Station search</string -->
+    <string name="help_search">Cerca caposaldo</string>
     <string name="help_stats">Statistiche rilievo</string>
     <string name="help_save_plot">Esporta disegno</string>
     <!-- UNUSED string name="help_tdr2th2">Conversione formato disegno da binario a th2</string -->
@@ -742,7 +742,7 @@
     <!-- NO string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Inserisci le coordinate del punto:</string -->
     <string name="title_current_station">Capisaldi salvati</string>
-    <!-- TODO string name="title_station_search">Enter station</string -->
+    <string name="title_station_search">Caposaldo:</string>
     <string name="title_device">Dispositivi DistoX</string>
     <string name="title_device_select">Seleziona DistoX</string>
     <string name="title_discover">Ricerca DistoX &#8230; attendi</string>
@@ -764,7 +764,7 @@
     <string name="title_photo">Foto/Misurazione</string>
     <string name="title_photo_comment">Commento foto</string>
     <string name="title_plot_save">Salva disegno come </string>
-    <!-- TODO string name="title_plot_merge">Merge-in sketch</string -->
+    <string name="title_plot_merge">Fondere disegno</string>
     <string name="title_plot_reload">Ricarica disegno</string>
     <string name="title_profile_flip">Capovolgo il profilo del disegno?</string>
     <string name="title_projection">Proiezione azimutale profilo %1$d</string>
@@ -775,7 +775,7 @@
     <string name="title_shift">Sposta</string>
     <string name="title_shot_delete">Rimuovi battuta ?</string>
     <string name="title_sensor_edit">Sensore</string>
-    <!-- TODO string name="title_split">Sketch split</string -->
+    <string name="title_split">Divisione disegno</string>
 
     <!-- NO string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
     <!-- NO string name="title_sketch_edit">Edit 3D surface</string -->
@@ -842,8 +842,8 @@
   <string name="pref_svg_grid_summary">Aggiungi griglia alla export SVG</string>
   <string name="pref_svg_in_html_title">SVG nell\'HTML</string>
   <string name="pref_svg_in_html_summary">Inserire SVG export in HTML</string>
-  <!-- TODO string name="pref_svg_line_dir_title">SVG line orientation</string -->
-  <!-- TODO string name="pref_svg_line_dir_summary">Add line orientation-ticks to SVG export</string -->
+  <string name="pref_svg_line_dir_title">Orientamento linea SVG</string>
+  <string name="pref_svg_line_dir_summary">Aggiungi spunte orientamento linea alla export SVG</string>
   <string name="pref_kml_stations_title">Capisaldi KML</string>
   <string name="pref_kml_stations_summary">Capisaldi nell\'export KML</string>
   <string name="pref_kml_splays_title">Splays KML</string>
@@ -910,10 +910,10 @@
   <string name="pref_vert_splay_title">Soglia splay tratteggiati</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Soglia clino splay tratteggiati</string -->
   <string name="pref_vert_splay_message">Soglia clino splay tratteggiati</string>
-  <!-- TODO string name="pref_shared_xsections_title">Shared x-sections</string -->
-  <!-- TODO string name="pref_shared_xsections_summary">At-station x-sections shared among sketches</string -->
-  <!-- TODO string name="xsections_shared">Shared X-sections</string -->
-  <!-- TODO string name="xsections_private">Private X-sections</string -->
+  <string name="pref_shared_xsections_title">X-section condivise</string>
+  <string name="pref_shared_xsections_summary">X-section al caposaldo condivisa tra i disegni</string>
+  <string name="xsections_shared">X-section condivise</string>
+  <string name="xsections_private">X-section private</string>
 
 
   <string name="pref_survey_stations_title">Capisaldi rilievo</string>

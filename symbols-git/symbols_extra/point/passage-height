@@ -1,5 +1,7 @@
 symbol point
 name passage-height
+name-pt altura_do_conduto
+name-ru высота-хода
 th_name passage-height
 orientation no
 has_value yes
@@ -15,4 +17,3 @@ path
   lineTo  3  5
 endpath
 endsymbol
-
