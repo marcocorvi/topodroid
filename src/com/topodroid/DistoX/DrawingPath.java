@@ -253,7 +253,7 @@ public class DrawingPath extends RectF
   }
 
 
-  // DrawingPath by deafult does not shift
+  // DrawingPath by default does not shift
   void shiftBy( float dx, float dy ) { }
 
   // by default does not rotate (return false)
@@ -369,12 +369,6 @@ public class DrawingPath extends RectF
       mOptions = mOptions + " " + option;
     }
   }
-
-  // String[] getOptions() 
-  // {
-  //   if ( mOptions == null ) return new String[0];
-  //   return mOptions.split(" ");
-  // }
 
   // key must be not null and start with '-'
   String getOption( String key )

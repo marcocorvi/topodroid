@@ -335,10 +335,18 @@ public class DistoXComm extends TopoDroidComm
           mProtocol = new DistoXProtocol( in, out, mApp.mDevice );
           mAddress = address;
         } catch ( IOException e ) {
+          TDLog.Error( "socket stream error " + e.getMessage() );
           mAddress = null;
+          try {
+            mBTSocket.close();
+          } catch ( IOException ee ) { 
+            TDLog.Error( "close Socket IO " + ee.getMessage() );
+          }
+          mBTSocket = null;
         }
-      } else {
-        TDLog.Error( "create Socket fail");
+      }
+      if ( mBTSocket == null ) {
+        TDLog.Error( "create Socket failure");
         if ( mProtocol != null ) mProtocol.closeIOstreams();
         mProtocol = null;
         mAddress = null;

@@ -531,6 +531,7 @@
 
     <string name="button_write"     >Enviar calibración a distoX</string>
     <string name="button_xsection"  >X-Sección</string>
+    <!-- TODO string name="xsection">X-Section</string -->
 
     <string name="mode_leg">Visuales</string>
     <string name="mode_splay">Laterales</string>

@@ -30,6 +30,8 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.EditText;
 
+import android.util.Log;
+
 
 public class DrawingStationDialog extends MyDialog 
                                   implements View.OnClickListener
@@ -77,6 +79,7 @@ public class DrawingStationDialog extends MyDialog
       mIsBarrier = is_barrier; 
       mIsHidden  = is_hidden; 
       mBlk       = blk;
+      // Log.v("DistoX", "STATION " + station.name() + " " + station.cx + " " + station.cy );
     }
 
     @Override

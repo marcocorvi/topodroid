@@ -550,6 +550,7 @@
 
     <string name="button_write"     >Hochladen</string>
     <string name="button_xsection"  >Profil</string>
+    <!-- TODO string name="xsection">X-Section</string -->
 
     <string name="mode_leg">Messstrecken</string>
     <string name="mode_splay">Hilfszüge</string>

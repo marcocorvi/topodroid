@@ -25,6 +25,8 @@ import android.os.Handler;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 // import java.util.Locale;
 import java.util.Collections;
 import java.util.ArrayList;
@@ -69,6 +71,7 @@ public class DrawingCommandManager
   // private List<DrawingPath>     mHighlight;  // highlighted path
   private List<DrawingStationName> mStations;  // survey stations
   private List<DrawingLinePath>    mScrap;     // scrap outline
+  private List<DrawingOutlinePath> mXSections; // xsections outlines
   private int mMaxAreaIndex;                   // max index of areas in this plot
 
   private Selection mSelection;
@@ -171,6 +174,7 @@ public class DrawingCommandManager
     synchronized( mSplaysStack ) { flipXAxes( mSplaysStack ); }
     // FIXME 
     synchronized( mScrap ) { mScrap.clear(); }
+    synchronized( mXSections ) { mXSections.clear(); }
  
     synchronized( mStations ) {
       for ( DrawingStationName st : mStations ) {
@@ -243,6 +247,7 @@ public class DrawingCommandManager
     mLegsStack    = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mSplaysStack  = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mScrap        = Collections.synchronizedList(new ArrayList<DrawingLinePath>());
+    mXSections    = Collections.synchronizedList(new ArrayList<DrawingOutlinePath>());
     mCurrentStack = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
     mUserStations = Collections.synchronizedList(new ArrayList<DrawingStationPath>());
     mRedoStack    = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
@@ -286,6 +291,7 @@ public class DrawingCommandManager
     synchronized( mLegsStack )   { mLegsStack.clear(); }
     synchronized( mSplaysStack ) { mSplaysStack.clear(); }
     synchronized( mScrap       ) { mScrap.clear(); }
+    synchronized( mXSections   ) { mXSections.clear(); }
     synchronized( mStations )    { mStations.clear(); }
     clearSelected();
     synchronized( mSelection )   { mSelection.clearReferencePoints(); }
@@ -1014,14 +1020,19 @@ public class DrawingCommandManager
           if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
             DrawingPointPath dpp = (DrawingPointPath) path;
             if ( dpp.mPointType == index ) {
-              String vals[] = dpp.mOptions.split(" ");
-              int len = vals.length;
-              for ( int k = 0; k < len; ++k ) {
-                if ( scrap_name.equals( vals[k] ) ) {
-                  deletePath( path, cmd );
-                  return;
-                }
+              // FIXME GET_OPTION
+              if ( scrap_name.equals( dpp.getOption( "-scrap" ) ) ) {
+                deletePath( path, cmd );
+                return;
               }
+              // String vals[] = dpp.mOptions.split(" ");
+              // int len = vals.length;
+              // for ( int k = 0; k < len; ++k ) {
+              //   if ( scrap_name.equals( vals[k] ) ) {
+              //     deletePath( path, cmd );
+              //     return;
+              //   }
+              // }
             }
           }
         }
@@ -1421,6 +1432,15 @@ public class DrawingCommandManager
         while ( i.hasNext() ){
           final DrawingLinePath path = (DrawingLinePath) i.next();
           path.draw( canvas, mMatrix, mScale, null /* mBBox */ );
+        }
+      }
+    }
+    if ( mXSections != null && mXSections.size() > 0 ) {
+      synchronized( mXSections )  {
+        final Iterator i = mXSections.iterator();
+        while ( i.hasNext() ){
+          final DrawingOutlinePath path = (DrawingOutlinePath) i.next();
+          path.mPath.draw( canvas, mMatrix, mScale, null /* mBBox */ );
         }
       }
     }
@@ -2416,12 +2436,16 @@ public class DrawingCommandManager
     synchronized( mSelection ) {
       // SelectionPoint sp = mSelected.shiftHotItem( dx, dy, range );
       SelectionPoint sp = mSelected.shiftHotItem( dx, dy );
-      // DrawingPath path = sp.mItem;
-      // if ( path.mType == DrawingPath.DRAWING_PATH_POINT || DrawingWindow.mEditRadius == 0 ) {
-      //   mSelection.checkBucket( sp );
-      // } else {
-      //   mSelection.rebucketLinePath( (DrawingPointLinePath)path );
-      // }
+      DrawingPath path = sp.mItem;
+      if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
+        DrawingPointPath pt = (DrawingPointPath)path;
+        if ( pt.mPointType == BrushManager.mPointLib.mPointSectionIndex ) {
+          String scrap_name = pt.getOption( "-scrap" );
+          if ( scrap_name != null ) {
+            shiftXSectionOutline( scrap_name, dx, dy );
+          }
+        }
+      }
       mSelection.checkBucket( sp );
     }
   }
@@ -2571,8 +2595,8 @@ public class DrawingCommandManager
     return ret / 2;
   }
 
-  void clearScrapOutline() { synchronized( mScrap ) { mScrap.clear(); } }
 
+  void clearScrapOutline() { synchronized( mScrap ) { mScrap.clear(); } }
 
   public void addScrapOutlinePath( DrawingLinePath path ) 
   {
@@ -2587,6 +2611,53 @@ public class DrawingCommandManager
   //     mScrap.clear();
   //   }
   // }
+
+  void clearXSectionsOutline() { synchronized( mXSections ) { mXSections.clear(); } }
+
+  boolean hasXSectionOutline( String name ) 
+  { 
+    if ( mXSections == null || mXSections.size() == 0 ) return false;
+    synchronized( mXSections )  {
+      final Iterator i = mXSections.iterator();
+      while ( i.hasNext() ){
+        final DrawingOutlinePath path = (DrawingOutlinePath) i.next();
+        if ( path.isScrap( name ) ) return true;
+      }
+    }
+    return false;
+  }
+
+  void addXSectionOutlinePath( DrawingOutlinePath path )
+  {
+    synchronized( mXSections ) {
+      mXSections.add( path );
+    }
+  }
+
+  void clearXSectionOutline( String name )
+  {
+    List<DrawingOutlinePath> xsections = Collections.synchronizedList(new ArrayList<DrawingOutlinePath>());
+    synchronized( mXSections ) {
+      final Iterator i = mXSections.iterator();
+      while ( i.hasNext() ) {
+        final DrawingOutlinePath path = (DrawingOutlinePath) i.next();
+        if ( ! path.isScrap( name ) ) xsections.add( path );
+      }
+      mXSections.clear(); // not necessary
+    }
+    mXSections = xsections;
+  }
+
+  void shiftXSectionOutline( String name, float dx, float dy )
+  {
+    synchronized( mXSections ) {
+      final Iterator i = mXSections.iterator();
+      while ( i.hasNext() ) {
+        final DrawingOutlinePath path = (DrawingOutlinePath) i.next();
+        if ( path.isScrap( name ) ) path.mPath.shiftBy( dx, dy );
+      }
+    }
+  }
 
 
 }

@@ -534,6 +534,7 @@
 
     <string name="button_write"     >Installa</string>
     <string name="button_xsection"  >Cross-Section</string>
+    <!-- TODO string name="xsection">X-Section</string -->
 
     <string name="mode_leg">Battute</string>
     <string name="mode_splay">Splay</string>

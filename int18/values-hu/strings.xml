@@ -534,6 +534,7 @@
 
     <string name="button_write"     >Feltölt</string>
     <string name="button_xsection"  >Keresztszelvény</string>
+    <!-- TODO string name="xsection">X-Section</string -->
 
     <string name="mode_leg">Poligonmérések</string>
     <string name="mode_splay">Segédmérések</string>

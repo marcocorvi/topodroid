@@ -535,6 +535,7 @@
 
     <string name="button_write"     >Передать в Disto</string>
     <string name="button_xsection"  >Сечение</string>
+    <!-- TODO string name="xsection">X-Section</string -->
 
     <string name="mode_leg">Нитка хода</string>
     <string name="mode_splay">Бок. замеры</string>

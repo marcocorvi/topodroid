@@ -109,6 +109,13 @@
     android:paddingBottom="10dp"
   />
 
+  <CheckBox android:id="@+id/point_xsection"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:text="@string/xsection"
+    android:layout_marginTop="@dimen/marginv"
+  />
+
   <LinearLayout 
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
@@ -117,6 +124,13 @@
     android:layout_gravity="right"
     android:gravity="right"
     >
+    <Button android:id="@+id/button_draw"
+      style="@style/button_default"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:layout_marginRight="@dimen/marginh"
+      android:text="@string/button_plot"
+    />
     <Button android:id="@+id/button_ok"
       style="@style/button_default"
       android:layout_width="wrap_content" 

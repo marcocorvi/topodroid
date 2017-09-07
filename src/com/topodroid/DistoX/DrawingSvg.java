@@ -242,9 +242,15 @@ class DrawingSvg
               // pw5.format(" style=\"fill:none;stroke:%s;stroke-width:0.1\" >\n", color_str );
               // Log.v("DistoX", "Section point <" + point.mOptions + "> " + point.cx + " " + point.cy );
               // option: -scrap survey-xx#
-              String scrapfile = point.mOptions.substring( 7 ) + ".tdr";
-              // TODO open file survey-xx#.tdr and convert it to svg
-              tdrToSvg( pw5, scrapfile, xx, yy, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
+              // FIXME GET_OPTION
+              String scrapname = point.getOption("-scrap");
+              if ( scrapname != null ) {
+                String scrapfile = scrapname + ".tdr";
+                // String scrapfile = point.mOptions.substring( 7 ) + ".tdr";
+
+                // TODO open file survey-xx#.tdr and convert it to svg
+                tdrToSvg( pw5, scrapfile, xx, yy, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
+              }
               // pw5.format("</g>\n");
             } else {
               toSvg( pw5, point, color_str, xoff, yoff );

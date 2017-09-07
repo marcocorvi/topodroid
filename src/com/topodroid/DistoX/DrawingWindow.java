@@ -4165,20 +4165,32 @@ public class DrawingWindow extends ItemDrawer
       }
     }
 
-    // @param line   "section" line
-    // @param id     section ID
-    // @param type   either PLOT_SECTION or PLOT_H_SECTION
-    // @param from   from station
-    // @param to     to station
-    // @param azimuth
-    // @param clino
+    // @param line    "section" line
+    // @param id      section ID, eg "xx0"
+    // @param type    either PLOT_SECTION or PLOT_H_SECTION
+    // @param from    from station, eg "1"
+    // @param to      to station, eg "2"
+    // @param azimuth section azimuth
+    // @param clino   section clino
     void makeSectionDraw( DrawingLinePath line, String id, long type, String from, String to, String nick,
                           float azimuth, float clino )
     {
       // Log.v("DistoX", "make section: " + id + " <" + from + "-" + to + "> azimuth " + azimuth + " clino " + clino );
       long pid = prepareSection( id, type, from, to, nick, azimuth, clino );
       if ( pid >= 0 ) {
+        // Log.v("DistoX", "push info: " + type + " <" + mSectionName + ">" );
         pushInfo( type, mSectionName, from, to, azimuth, clino );
+        zoomFit( mDrawingSurface.getBitmapBounds() );
+      }
+    }
+
+    void openSectionDraw( String scrapname )
+    { 
+      // remove survey name from scrap name
+      String name = scrapname.replace( mApp.mySurvey + "-", "" );
+      PlotInfo pi = mData.getPlotInfo( mApp.mSID, name );
+      if ( pi != null ) {
+        pushInfo( pi.type, pi.name, pi.start, pi.view, pi.azimuth, pi.clino );
         zoomFit( mDrawingSurface.getBitmapBounds() );
       }
     }
@@ -5231,6 +5243,18 @@ public class DrawingWindow extends ItemDrawer
     // TODO
     // [1] create the database record
     // [2] save the Tdr for the new plot and remove the items from the commandManager
+  }
+
+  boolean hasXSectionOutline( String name ) { return mDrawingSurface.hasXSectionOutline( name ); }
+
+  void setXSectionOutline( String name, boolean on_off, float x, float y )
+  { 
+    mDrawingSurface.clearXSectionOutline( name );
+    if ( on_off ) {
+      String tdr = TDPath.getTdrFileWithExt( name );
+      // Log.v("DistoX", "XSECTION set " + name + " " + x + " " + y );
+      mDrawingSurface.setXSectionOutline( name, tdr, x-DrawingUtil.CENTER_X, y-DrawingUtil.CENTER_Y );
+    }
   }
 
 }

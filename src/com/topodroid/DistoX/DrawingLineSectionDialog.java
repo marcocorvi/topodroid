@@ -83,8 +83,6 @@ public class DrawingLineSectionDialog extends MyDialog
 
     // read section id from the line options
     mId = mLine.getOption( "-id" );
-    // Log.v("DistoX", "Line Section Dialog: id " + ((mId!=null)? mId : "null") 
-    //               + " arg " + ((id!=null)? id : "null") + " exists " + mExists + " options " + line.mOptions );
     if ( mId == null ) {  // line does not have ID yet 
       mId = id;
       // mLine.addOption( "-id " + mId );

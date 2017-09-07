@@ -765,7 +765,7 @@ class DrawingIO
 
   static public void doLoadOutlineDataStream( DrawingSurface surface,
                                    String filename,
-                                   float dx, float dy )
+                                   float dx, float dy, String name )
   {
     int version = 0;
     boolean in_scrap = false;
@@ -855,7 +855,11 @@ class DrawingIO
                && ( BrushManager.mLineLib.isWall( path.mLineType ) || path.hasOutline() ) ) {
             // Log.v("DistoX0", "outline add path ... " + path.mFirst.mX + " " + path.mFirst.mY );
             path.setPaint( BrushManager.fixedGrid100Paint );
-            surface.addScrapOutlinePath( path );
+            if ( name != null ) { // xsection outline
+              surface.addXSectionOutlinePath( new DrawingOutlinePath( name, path ) );
+            } else {
+              surface.addScrapOutlinePath( path );
+            }
           }
         }
         dis.close();
@@ -1506,26 +1510,41 @@ class DrawingIO
         // Log.v("DistoX", "Section point <" + pp.mOptions + ">");
         // option: -scrap survey-xx#
         PlotInfo section = null;
-        String[] vals = pp.mOptions.split(" ");
-        int k0 = vals.length;
-        for ( int k = 0; k < k0; ++k ) {
-          if ( vals[k].equals("-scrap") ) {
-            for ( ++k; k < k0; ++k ) {
-              if ( vals[k].length() > 0 ) break;
-            }
-            if ( k < k0 ) {
-              for ( PlotInfo s : all_sections ) {
-                if ( vals[k].endsWith( s.name ) ) {
-                  // String name = survey + "-" + s.name; // scrap filename
-                  section = s;
-                  section.csxIndex = csxIndex;
-                  if ( sections != null ) sections.add( section );
-                  break;
-                }
-              }
+
+        // FIXME GET_OPTION
+        String scrap_name = pp.getOption( "-scrap" );
+        if ( scrap_name != null ) {
+          for ( PlotInfo s : all_sections ) {
+            if ( scrap_name.endsWith( s.name ) ) {
+              // String name = survey + "-" + s.name; // scrap filename
+              section = s;
+              section.csxIndex = csxIndex;
+              if ( sections != null ) sections.add( section );
+              break;
             }
           }
         }
+        // String[] vals = pp.mOptions.split(" ");
+        // int k0 = vals.length;
+        // for ( int k = 0; k < k0; ++k ) {
+        //   if ( vals[k].equals("-scrap") ) {
+        //     for ( ++k; k < k0; ++k ) {
+        //       if ( vals[k].length() > 0 ) break;
+        //     }
+        //     if ( k < k0 ) {
+        //       for ( PlotInfo s : all_sections ) {
+        //         if ( vals[k].endsWith( s.name ) ) {
+        //           // String name = survey + "-" + s.name; // scrap filename
+        //           section = s;
+        //           section.csxIndex = csxIndex;
+        //           if ( sections != null ) sections.add( section );
+        //           break;
+        //         }
+        //       }
+        //     }
+        //   }
+        // }
+
         if ( section != null ) {
           // Log.v("DistoX", "section " + section.name + " " + section.nick );
           // special toCsurvey for cross-section points

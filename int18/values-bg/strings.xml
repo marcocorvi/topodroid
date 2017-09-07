@@ -535,6 +535,7 @@
 
     <string name="button_write"     >Качване</string>
     <string name="button_xsection"  >Сечение</string>
+    <!-- TODO string name="xsection">X-Section</string -->
 
     <string name="mode_leg">Отсечки</string>
     <string name="mode_splay">Странични</string>

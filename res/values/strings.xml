@@ -539,6 +539,7 @@
 
     <string name="button_write"     >Upload</string>
     <string name="button_xsection"  >X-Section</string>
+    <string name="xsection">X-Section</string>
 
     <string name="mode_leg">Legs</string>
     <string name="mode_splay">Splays</string>

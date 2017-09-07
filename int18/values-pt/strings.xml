@@ -533,6 +533,7 @@
 
     <string name="button_write"     >Enviar</string>
     <string name="button_xsection"  >Corte X</string>
+    <!-- TODO string name="xsection">X-Section</string -->
 
     <string name="mode_leg">Visadas</string>
     <string name="mode_splay">Medidas auxiliares</string>

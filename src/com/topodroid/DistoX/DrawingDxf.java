@@ -891,9 +891,14 @@ class DrawingDxf
           {
             DrawingPointPath point = (DrawingPointPath) path;
             if ( point.mPointType == BrushManager.mPointLib.mPointSectionIndex ) {
-              String scrapfile = point.mOptions.substring( 7 ) + ".tdr";
-              handle = tdrToDxf( pw5, handle, scrapfile, 
-                       scale, point.cx, point.cy, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
+              // FIOXME GET_OPTION
+              // String scrapfile = point.mOptions.substring( 7 ) + ".tdr";
+              String scrapname = point.getOption( "-scrap" );
+              if ( scrapname != null ) {
+                String scrapfile = scrapname + ".tdr";
+                handle = tdrToDxf( pw5, handle, scrapfile, 
+                         scale, point.cx, point.cy, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
+              }
             } else {
               handle = toDxf( pw5, handle, point, scale, xoff, yoff );
             }

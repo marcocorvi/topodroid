@@ -58,7 +58,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      mRotate   = rotate;
      if ( mRotate > TDPath.NR_BACKUP ) mRotate = TDPath.NR_BACKUP;
      // TDLog.Log( TDLog.LOG_PLOT, "Save Plot File Task " + mFullName + " type " + mType );
-     Log.v( "DistoX", "save plot file task [1] " + mFullName + " type " + mType );
+     // Log.v( "DistoX", "save plot file task [1] " + mFullName + " type " + mType );
   }
 
   public SavePlotFileTask( Context context, DrawingWindow parent, Handler handler,
@@ -77,7 +77,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      mSuffix   = PlotSave.CREATE;
      mRotate   = 0;
      // TDLog.Log( TDLog.LOG_PLOT, "Save Plot File Task " + mFullName + " type " + mType );
-     Log.v( "DistoX", "save plot file task [2] " + mFullName + " type " + mType );
+     // Log.v( "DistoX", "save plot file task [2] " + mFullName + " type " + mType );
   }
 
   @Override
@@ -87,7 +87,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
     boolean ret2 = true;
     // boolean do_binary = (TDSetting.mBinaryTh2 && mSuffix != PlotSave.EXPORT ); // TDR BINARY
 
-    Log.v( "DistoX", "save plot file task bkgr start");
+    // Log.v( "DistoX", "save plot file task bkgr start");
     synchronized( TDPath.mTherionLock ) {
       // Log.v("DistoX", "save scrap files " + mFullName + " suffix " + mSuffix );
 
@@ -171,7 +171,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         }
       }
     }
-    Log.v( "DistoX", "save plot file task bkgr done");
+    // Log.v( "DistoX", "save plot file task bkgr done");
     return ret1 && ret2;
   }
 
@@ -179,7 +179,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   protected void onPostExecute(Boolean bool)
   {
     super.onPostExecute(bool);
-    Log.v( "DistoX", "save plot file task post exec");
+    // Log.v( "DistoX", "save plot file task post exec");
     if ( mHandler != null ) {
       mHandler.sendEmptyMessage( bool? 661 : 660 );
     }

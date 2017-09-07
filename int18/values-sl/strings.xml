@@ -539,6 +539,7 @@
 
     <string name="button_write"     >Instaliraj</string>
     <string name="button_xsection"  >Presek</string>
+    <!-- TODO string name="xsection">X-Section</string -->
 
     <string name="mode_leg">Meritve</string>
     <string name="mode_splay">Stranske merittve</string>

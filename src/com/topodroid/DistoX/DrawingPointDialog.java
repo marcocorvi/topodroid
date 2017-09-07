@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.ImageView;
+import android.widget.CheckBox;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
@@ -45,10 +46,16 @@ public class DrawingPointDialog extends MyDialog
   private RadioButton mBtnScaleL;
   private RadioButton mBtnScaleXL;
 
+  private CheckBox mCBxsection;
+  private Button   mBTdraw;
+  private boolean  mHasXSectionOutline;
+
   private OrientationWidget mOrientationWidget;
  
   private Button   mBtnOk;
   private Button   mBtnCancel;
+
+  private String mXSectionName;
 
   public DrawingPointDialog( Context context, DrawingWindow parent, DrawingPointPath point )
   {
@@ -56,6 +63,8 @@ public class DrawingPointDialog extends MyDialog
     mParent = parent;
     mPoint  = point;
     mOrientable = BrushManager.mPointLib.isSymbolOrientable( mPoint.mPointType );
+    mXSectionName = null;
+    mHasXSectionOutline = false;
   }
 
 // -------------------------------------------------------------------
@@ -70,6 +79,9 @@ public class DrawingPointDialog extends MyDialog
     mEToptions = (EditText) findViewById( R.id.point_options );
     mETtext    = (EditText) findViewById( R.id.point_text );
 
+    mCBxsection = (CheckBox) findViewById( R.id.point_xsection );
+    mBTdraw     = (Button) findViewById( R.id.button_draw );
+
     setTitle( "POINT " + BrushManager.mPointLib.getSymbolName( mPoint.mPointType ) );
     if ( BrushManager.mPointLib.pointHasTextOrValue( mPoint.mPointType ) ) {
       String text = mPoint.getPointText();
@@ -82,6 +94,29 @@ public class DrawingPointDialog extends MyDialog
 
     if ( mPoint.mOptions != null ) {
       mEToptions.setText( mPoint.mOptions );
+    }
+
+    if ( mPoint.mPointType == BrushManager.mPointLib.mPointSectionIndex ) {
+      // FIXME GET_OPTION
+      mXSectionName = mPoint.getOption("-scrap");
+      // String[] vals = mPoint.mOptions.split(" ");
+      // for ( int k = 0; k < vals.length; ++k ) {
+      //   if ( vals[k].equals("-scrap") ) {
+      //     for ( ++k; k < vals.length; ++k ) {
+      //       if ( vals[k].length() > 0 ) break;
+      //     }
+      //     if ( k < vals.length ) mXSectionName = vals[k];
+      //   }
+      // }
+      if ( mXSectionName != null ) {
+        mHasXSectionOutline = mParent.hasXSectionOutline( mXSectionName );
+        mCBxsection.setChecked( mHasXSectionOutline );
+        mBTdraw.setOnClickListener( this );
+      }
+    } else {
+      mCBxsection.setChecked( false );
+      mCBxsection.setVisibility( View.GONE );
+      mBTdraw.setVisibility( View.GONE );
     }
 
     mBtnScaleXS = (RadioButton) findViewById( R.id.point_scale_xs );
@@ -119,6 +154,12 @@ public class DrawingPointDialog extends MyDialog
       else if ( mBtnScaleL.isChecked() )  mPoint.setScale( DrawingPointPath.SCALE_L  );
       else if ( mBtnScaleXL.isChecked() ) mPoint.setScale( DrawingPointPath.SCALE_XL );
 
+      if ( mXSectionName != null ) {
+        if ( mHasXSectionOutline != mCBxsection.isChecked() ) {
+          mParent.setXSectionOutline( mXSectionName, mCBxsection.isChecked(), mPoint.cx, mPoint.cy );
+        }
+      }
+
       if ( mOrientable ) {
         mPoint.setOrientation( mOrientationWidget.mOrient );
         // Log.v("DistoX", "Point type " + mPoint.mPointType + " orientation " + mPoint.mOrientation );
@@ -126,6 +167,8 @@ public class DrawingPointDialog extends MyDialog
       if ( BrushManager.mPointLib.pointHasTextOrValue( mPoint.mPointType ) ) {
         mPoint.setPointText( mETtext.getText().toString().trim() );
       }
+    } else if ( b == mBTdraw ) {
+      mParent.openSectionDraw( mXSectionName );
     } else if ( b == mBtnCancel ) {
       // nothing
     }

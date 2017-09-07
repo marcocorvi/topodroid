@@ -533,6 +533,7 @@
 
     <string name="button_write"     >Uploader</string>
     <string name="button_xsection"  >X-Section</string>
+    <!-- TODO string name="xsection">X-Section</string -->
 
     <string name="mode_leg">Cheminements</string>
     <string name="mode_splay">Visées latérales</string>

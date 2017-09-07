@@ -77,6 +77,23 @@ public class DrawingPointLinePath extends DrawingPath
   //   }
   // }
 
+  @Override
+  void shiftBy( float dx, float dy )
+  {
+    left   += dx;
+    right  += dx;
+    top    += dy;
+    bottom += dy;
+    x1 += dx;
+    y1 += dy;
+    x2 += dx;
+    y2 += dy;
+    cx += dx;
+    cy += dy;
+    for ( LinePoint lp = mFirst; lp != null; lp = lp.mNext ) lp.shiftBy( dx, dy );
+    retracePath();
+  }
+
   void moveFirstTo( float x, float y )
   {
     mFirst.x = x;

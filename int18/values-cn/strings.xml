@@ -532,6 +532,7 @@
 
     <string name="button_write"     >上传</string>
     <string name="button_xsection"  >X-截面</string>
+    <!-- TODO string name="xsection">X-Section</string -->
 
     <string name="mode_leg">主线</string>
     <string name="mode_splay">侧线</string>
