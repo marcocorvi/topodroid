@@ -414,9 +414,9 @@
     <!-- UNUSED string name="survey_date">ггг.мм.дд</string -->
     <string name="survey_delete">Удалить съёмку?</string>
     <string name="survey_split">Разорвать съёмку ?</string>
-    <string name="survey_not_attached">ВНИМАНИЕ: неасоциированный пикет</string>
-    <!-- TODO string name="survey_not_extend">WARNING: unset shot extends</string -->
-    <!-- TODO string name="survey_not_attached_extend">WARNING: unattached shots and unset extends</string -->
+    <string name="survey_not_attached">ВНИМАНИЕ: не соединенный пикет</string>
+    <string name="survey_not_extend">ВНИМАНИЕ: замеры без направления развертки</string>
+    <string name="survey_not_attached_extend">ВНИМАНИЕ: не соединенный пикет и замеры без направления развертки</string>
     <string name="cannot_rename">Не могу перименовать съёмку</string>
     <string name="declination">Магн. скл.</string>
     <string name="description">описание</string>
@@ -535,7 +535,7 @@
 
     <string name="button_write"     >Передать в Disto</string>
     <string name="button_xsection"  >Сечение</string>
-    <!-- TODO string name="xsection">X-Section</string -->
+    <string name="xsection">Сечение</string>
 
     <string name="mode_leg">Нитка хода</string>
     <string name="mode_splay">Бок. замеры</string>
