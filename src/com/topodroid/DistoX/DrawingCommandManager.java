@@ -235,6 +235,37 @@ public class DrawingCommandManager
     }
   }
 
+  /* Scale the drawing
+   * scale the drawing by z
+   */
+  void scaleDrawing( float z )
+  {
+    // if ( mStations != null ) {
+    //   synchronized( mStations ) {
+    //     for ( DrawingStationName st : mStations ) {
+    //       st.shiftBy( x, y );
+    //     }
+    //   }
+    // }
+    Matrix m = new Matrix();
+    m.postScale(z,z);
+
+    if ( mCurrentStack != null ){
+      synchronized( mCurrentStack ) {
+        final Iterator i = mCurrentStack.iterator();
+        while ( i.hasNext() ){
+          final ICanvasCommand cmd = (ICanvasCommand) i.next();
+          cmd.scalePathBy( z, m );
+        }
+      }
+    }
+    if ( mSelection != null ) {
+      synchronized( mSelection ) {
+        mSelection.scaleSelectionBy( z, m );
+      }
+    }
+  }
+
   public DrawingCommandManager()
   {
     mBBox = new RectF();

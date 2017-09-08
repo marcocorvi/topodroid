@@ -2381,6 +2381,7 @@ public class DrawingWindow extends ItemDrawer
     }
 
     private boolean pointerDown = false;
+    private boolean threePointers = false;
 
     public boolean onTouch( View view, MotionEvent rawEvent )
     {
@@ -2398,6 +2399,7 @@ public class DrawingWindow extends ItemDrawer
       int id = 0;
 
       if (action == MotionEvent.ACTION_POINTER_DOWN) {
+        threePointers = (event.getPointerCount() >= 3);
         mTouchMode = MODE_ZOOM;
         oldDist = spacing( event );
         saveEventPoint( event );
@@ -2405,6 +2407,7 @@ public class DrawingWindow extends ItemDrawer
         return true;
       } else if ( action == MotionEvent.ACTION_POINTER_UP) {
         int np = event.getPointerCount();
+        threePointers = (np > 3);
         if ( np > 2 ) return true;
         mTouchMode = MODE_MOVE;
         id = 1 - ((act & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT);
@@ -2586,13 +2589,8 @@ public class DrawingWindow extends ItemDrawer
           modified();
         } else { // mTouchMode == MODE_ZOOM
           float newDist = spacing( event );
-          if ( newDist > 16.0f && oldDist > 16.0f ) {
-            float factor = newDist/oldDist;
-            if ( factor > 0.05f && factor < 4.0f ) {
-              changeZoom( factor );
-              oldDist = newDist;
-            }
-          }
+          float factor = ( newDist > 16.0f && oldDist > 16.0f )? newDist/oldDist : 0 ;
+
           if ( mMode == MODE_MOVE && mShiftDrawing ) {
             float x_shift = x_canvas - mSaveX; // compute shift
             float y_shift = y_canvas - mSaveY;
@@ -2604,9 +2602,21 @@ public class DrawingWindow extends ItemDrawer
             // } else {
             //   moveCanvas( x_shift, y_shift );
             }
+            if ( factor > 0.05f && factor < 4.0f ) {
+              if ( threePointers ) {
+                mDrawingSurface.scaleDrawing( 1+(factor-1)*0.01f );
+              } else {
+                changeZoom( factor );
+                oldDist = newDist;
+              }
+            }
             mSaveX = x_canvas;
             mSaveY = y_canvas;
           } else {
+            if ( factor > 0.05f && factor < 4.0f ) {
+              changeZoom( factor );
+              oldDist = newDist;
+            }
             shiftByEvent( event );
           }
         }

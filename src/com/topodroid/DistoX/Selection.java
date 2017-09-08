@@ -18,6 +18,8 @@ import java.util.Iterator;
 
 import android.util.Log;
 
+import android.graphics.Matrix;
+
 class Selection
 {
   final static int BSIZE = 100; // bucket size factor
@@ -39,6 +41,27 @@ class Selection
         || t == DrawingPath.DRAWING_PATH_LINE
         || t == DrawingPath.DRAWING_PATH_AREA ) {
         sp.shiftSelectionBy(x, y);
+        float x1 = sp.X();
+        float y1 = sp.Y();
+        if ( sp.mBucket != null ) {
+          if ( ! sp.mBucket.contains( x1, y1 ) ) {
+            sp.setBucket( getBucket( x1, y1 ) );
+          }
+        } else {
+          sp.setBucket( getBucket( x1, y1 ) );
+        }
+      }
+    }
+  }
+
+  void scaleSelectionBy( float z, Matrix m )
+  {
+    for ( SelectionPoint sp : mPoints ) {
+      int t = sp.type();
+      if ( t == DrawingPath.DRAWING_PATH_POINT
+        || t == DrawingPath.DRAWING_PATH_LINE
+        || t == DrawingPath.DRAWING_PATH_AREA ) {
+        sp.scaleSelectionBy( z, m );
         float x1 = sp.X();
         float y1 = sp.Y();
         if ( sp.mBucket != null ) {

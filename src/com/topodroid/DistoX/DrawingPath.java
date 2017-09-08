@@ -253,8 +253,10 @@ public class DrawingPath extends RectF
   }
 
 
-  // DrawingPath by default does not shift
+  // DrawingPath by default does not shift nor scale
   void shiftBy( float dx, float dy ) { }
+
+  void scaleBy( float z, Matrix m ) { }
 
   // by default does not rotate (return false)
   boolean rotateBy( float dy ) { return false; }
@@ -273,6 +275,22 @@ public class DrawingPath extends RectF
     top    += dy;
     bottom += dy;
   }
+
+  public void scalePathBy( float z, Matrix m )
+  {
+    x1 *= z;
+    y1 *= z;
+    x2 *= z;
+    y2 *= z;
+    cx *= z;
+    cy *= z;
+    mPath.transform( m );
+    left   *= z;
+    right  *= z;
+    top    *= z;
+    bottom *= z;
+  }
+
 
   // this is used only by the Selection 
   float distanceToPoint( float x, float y )

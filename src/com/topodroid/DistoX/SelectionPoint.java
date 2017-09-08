@@ -13,6 +13,8 @@ package com.topodroid.DistoX;
 
 // import android.util.Log;
 
+import android.graphics.Matrix;
+
 class SelectionPoint
 {
   // scene coord (x, y )
@@ -224,6 +226,22 @@ class SelectionPoint
       item.retracePath();
     } else if ( mItem.mType == DrawingPath.DRAWING_PATH_POINT ) {
       mItem.shiftBy( dx, dy );
+    }
+  }
+
+  void scaleSelectionBy( float z, Matrix m )
+  {
+    if ( mPoint != null ) {
+      // switch ( mMin ) {
+      //  case 1 : mPoint.shiftCP1By( dx, dy ); break;
+      //  case 2 : mPoint.shiftCP2By( dx, dy ); break;
+      //  default: mPoint.shiftBy( dx, dy ); break;
+      // }
+      mPoint.scaleBy( z, m );
+      DrawingPointLinePath item = (DrawingPointLinePath)mItem;
+      item.retracePath();
+    } else if ( mItem.mType == DrawingPath.DRAWING_PATH_POINT ) {
+      mItem.scaleBy( z, m );
     }
   }
  

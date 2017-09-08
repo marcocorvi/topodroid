@@ -173,6 +173,18 @@ public class DrawingPointPath extends DrawingPath
   }
 
   @Override
+  void scaleBy( float z, Matrix m )
+  {
+    cx *= z;
+    cy *= z;
+    mPath.transform( m );
+    left   *= z;
+    right  *= z;
+    top    *= z;
+    bottom *= z;
+  }
+
+  @Override
   public void shiftPathBy( float dx, float dy ) 
   {
     // x1 += dx;
@@ -186,6 +198,23 @@ public class DrawingPointPath extends DrawingPath
     // right  += dx;
     // top    += dy;
     // bottom += dy;
+  }
+
+  // FIXME SCALE
+  @Override
+  public void scalePathBy( float z, Matrix m )
+  {
+    // x1 *= z;
+    // y1 *= z;
+    // x2 *= z;
+    // y2 *= z;
+    // cx *= z;
+    // cy *= z;
+    // mPath.transform( m );
+    // left   *= z;
+    // right  *= z;
+    // top    *= z;
+    // bottom *= z;
   }
 
 

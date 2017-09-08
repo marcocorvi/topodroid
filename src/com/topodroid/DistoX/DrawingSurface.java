@@ -527,6 +527,8 @@ public class DrawingSurface extends SurfaceView
 
   void shiftDrawing( float x, float y ) { commandManager.shiftDrawing( x, y ); }
 
+  void scaleDrawing( float z ) { commandManager.scaleDrawing( z ); }
+
   // ---------------------------------------------------------------------
 
   public void surfaceChanged( SurfaceHolder holder, int format, int width,  int height) 

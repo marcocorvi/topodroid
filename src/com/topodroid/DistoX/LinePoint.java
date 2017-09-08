@@ -27,6 +27,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Locale;
 
+import android.graphics.Matrix;
+
 import android.util.Log;
 
 public class LinePoint extends Point2D
@@ -73,6 +75,22 @@ public class LinePoint extends Point2D
     if ( mNext != null && mNext.has_cp ) {
       mNext.x1 += dx;
       mNext.y1 += dy;
+    }
+  }
+
+  void scaleBy( float z, Matrix m )
+  {
+    x *= z;
+    y *= z;
+    if ( has_cp ) {
+      // x1 *= z;
+      // y1 *= z;
+      x2 *= z;
+      y2 *= z;
+    }
+    if ( mNext != null && mNext.has_cp ) {
+      mNext.x1 *= z;
+      mNext.y1 *= z;
     }
   }
 
