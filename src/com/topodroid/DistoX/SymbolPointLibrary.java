@@ -194,10 +194,15 @@ class SymbolPointLibrary extends SymbolLibrary
     super.makeEnabledList();
     mPointUserIndex    = getSymbolIndexByThName( "user" );
     mPointLabelIndex   = getSymbolIndexByThName( "label" );
-    mPointPhotoIndex   = getSymbolIndexByThName( "photo" );
-    mPointAudioIndex   = getSymbolIndexByThName( "audio" );
+    mPointPhotoIndex   = getSymbolIndexByThName( "u:photo" );
+    mPointAudioIndex   = getSymbolIndexByThName( "u:audio" );
     // mPointDangerIndex  = getSymbolIndexByThName( "danger" );
     mPointSectionIndex = getSymbolIndexByThName( "section" ); 
+
+    // Log.v("DistoX", "Pt label " + mPointLabelIndex 
+    //                 + " photo " + mPointPhotoIndex
+    //                 + " audio " + mPointAudioIndex
+    //                 + " section " + mPointSectionIndex );
   }
 
   void makeEnabledListFromPalette( SymbolsPalette palette )

@@ -2151,6 +2151,7 @@ public class DrawingWindow extends ItemDrawer
     {
       if ( point == null ) return;
       mDrawingSurface.deletePath( point ); 
+      // Log.v("DistoX", "delete point type " + point.mPointType );
       if ( BrushManager.isPointPhoto( point.mPointType ) ) {
         DrawingPhotoPath photo = (DrawingPhotoPath)point;
         mApp.mData.deletePhoto( mApp.mSID, photo.mId );
@@ -2893,6 +2894,7 @@ public class DrawingWindow extends ItemDrawer
             { // Symbol.POINT
               if ( ( ! pointerDown ) && Math.abs( x_shift ) < TDSetting.mPointingRadius 
                                      && Math.abs( y_shift ) < TDSetting.mPointingRadius ) {
+                // Log.v("DistoX", "insert point type " + mCurrentPoint );
                 if ( BrushManager.isPointLabel( mCurrentPoint ) ) {
                   new DrawingLabelDialog( mActivity, this, x_scene, y_scene ).show();
                 } else if ( BrushManager.isPointPhoto( mCurrentPoint ) ) {
@@ -4007,6 +4009,7 @@ public class DrawingWindow extends ItemDrawer
               break;
             case DrawingPath.DRAWING_PATH_POINT:
               DrawingPointPath point = (DrawingPointPath)(sp.mItem);
+              // Log.v("DistoX", "edit point type " + point.mPointType );
               if ( BrushManager.isPointPhoto( point.mPointType ) ) {
                 new DrawingPhotoEditDialog( mActivity, this, mApp, (DrawingPhotoPath)point ).show();
               } else if ( BrushManager.isPointAudio( point.mPointType ) ) {

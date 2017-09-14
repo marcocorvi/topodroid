@@ -96,6 +96,7 @@ class DistoXNum
   // FIXME make mStations a hashmap (key station name)
   // private ArrayList<NumStation> mStations;
   NumStationSet mStations;
+  private ArrayList<NumStation> mClosureStations;
   private ArrayList<NumShot>    mShots;
   private ArrayList<NumSplay>   mSplays;
   private ArrayList<String>     mClosures;
@@ -121,6 +122,7 @@ class DistoXNum
   public boolean surveyExtend;
 
   public List<NumStation> getStations() { return mStations.getStations(); }
+  public List<NumStation> getClosureStations() { return mClosureStations; }
   public List<NumShot>    getShots()    { return mShots; }
   public List<NumSplay>   getSplays()   { return mSplays; }
   public List<String>     getClosures() { return mClosures; }
@@ -459,9 +461,9 @@ class DistoXNum
   //           if ( st != null ) { // close loop
   //             if ( /* TopoDroidApp.mAutoStations || */ TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) {
   //               NumStation st1 = new NumStation( block.mTo, sf, block.mLength, block.mBearing+ mDecl , block.mClino, block.getExtend() );
+  //               mStations.add( st1 );
   //               st1.addAzimuth( (block.mBearing+ mDecl +180)%360, block.getNegExtend() );
   //               st1.mDuplicate = true;
-  //               mStations.add( st1 );
   //               lastLeg = new NumShot( sf, st1, block, 1, mDecl );
   //               addShotToStations( lastLeg, st1, sf );
   //             } else { // loop-closure
@@ -486,6 +488,7 @@ class DistoXNum
   //           { // add regular from-->to leg' first shot
   //             // FIXME temporary "st" coordinates
   //             st = new NumStation( block.mTo, sf, block.mLength, block.mBearing+ mDecl , block.mClino, block.getExtend() );
+  //             mStations.add( st );
   //             st.addAzimuth( (block.mBearing+ mDecl +180)%360, block.getNegExtend() );
   //             updateBBox( st );
   //             // if ( ts.duplicate ) { // FIXME
@@ -496,7 +499,6 @@ class DistoXNum
   //             mLength += block.mLength;
   //             if ( st.v < mZmin ) { mZmin = st.v; }
   //             if ( st.v > mZmax ) { mZmax = st.v; }
-  //             mStations.add( st );
   //             lastLeg = new NumShot( sf, st, block, 1, mDecl );
   //             addShotToStations( lastLeg, st, sf );
   //           }
@@ -504,6 +506,7 @@ class DistoXNum
   //         else if ( st != null )
   //         { // sf == null && st != null
   //           sf = new NumStation( block.mFrom, st, -block.mLength, block.mBearing+ mDecl , block.mClino, block.getExtend() );
+  //           mStations.add( sf );
   //           sf.addLeg( block.mBearing+ mDecl , block.getExtend() );
   //           updateBBox( sf );
   //           // if ( ts.duplicate ) {
@@ -514,7 +517,6 @@ class DistoXNum
   //           mLength += block.mLength;
   //           if ( sf.v < mZmin ) { mZmin = sf.v; }
   //           if ( sf.v > mZmax ) { mZmax = sf.v; }
-  //           mStations.add( sf );
   //           addShotToStations( new NumShot( st, sf, block, -1), sf, st, mDecl );
   //         }
   //         else 
@@ -696,6 +698,7 @@ class DistoXNum
     
     // mStations = new ArrayList< NumStation >();
     mStations = new NumStationSet();
+    mClosureStations = new ArrayList< NumStation >();
     mShots    = new ArrayList< NumShot >();
     mSplays   = new ArrayList< NumSplay >();
     mClosures = new ArrayList< String >();
@@ -831,11 +834,11 @@ class DistoXNum
 
     mStartStation = new NumStation( start );
     mStartStation.mHasCoords = true;
+    mStations.addStation( mStartStation );
 
     // if ( TDLog.LOG_DEBUG ) Log.v( TDLog.TAG, "start station " + start +  " shots " + tmpshots.size() );
 
     NumShot sh;
-    mStations.addStation( mStartStation );
 
     // two-pass data reduction
     // first-pass all shots with regular extends
@@ -921,14 +924,16 @@ class DistoXNum
                 // keep loop open: new station( id=ts.to, from=sf, ... )
                 float bearing = ts.b() - sf.mAnomaly;
                 NumStation st1 = new NumStation( ts.to, sf, ts.d(), bearing, ts.c(), ext, has_coords );
+                if ( ! mStations.addStation( st1 ) ) mClosureStations.add( st1 );
+
                 st1.addAzimuth( (ts.b()+180)%360, -ext );
                 st1.mAnomaly = anomaly;
-                updateBBox( st );
+                updateBBox( st1 );
                 st1.mDuplicate = true;
-                mStations.addStation( st1 );
 
                 sh = makeShotFromTmp( sf, st1, ts, 1, sf.mAnomaly, mDecl );
                 addShotToStations( sh, st1, sf );
+                // Log.v("DistoX", "open loop at " + ts.to + " " + st.e + " " + st1.e + " " + st.s + " " + st1.s );
               } else { // close loop
                 // if ( TDLog.LOG_DEBUG ) Log.v( TDLog.TAG, "close loop");
 
@@ -949,11 +954,12 @@ class DistoXNum
             { // forward shot: from --> to
               float bearing = ts.b() - sf.mAnomaly;
               st = new NumStation( ts.to, sf, ts.d(), bearing, ts.c(), ext, has_coords );
+              if ( ! mStations.addStation( st ) ) mClosureStations.add( st );
+
               st.addAzimuth( (ts.b()+180)%360, -ext );
               st.mAnomaly = anomaly;
               updateBBox( st );
               addToStats( ts.duplicate, ts.surface, Math.abs(ts.d()), ts.h(), st.v );
-              mStations.addStation( st );
 
               // if ( TDLog.LOG_DEBUG ) {
               //   Log.v( TDLog.TAG, "new station F->T id= " + ts.to + " from= " + sf.name + " anomaly " + anomaly + " d " + ts.d() ); 
@@ -972,6 +978,8 @@ class DistoXNum
             st.addAzimuth( (ts.b()+180)%360, -ext );
             float bearing = ts.b() - st.mAnomaly;
             sf = new NumStation( ts.from, st, - ts.d(), bearing, ts.c(), ext, has_coords );
+            if ( ! mStations.addStation( sf ) ) mClosureStations.add( sf );
+
             sf.addAzimuth( ts.b(), ext );
             sf.mAnomaly = anomaly; // FIXME
             // if ( TDLog.LOG_DEBUG ) {
@@ -981,7 +989,6 @@ class DistoXNum
 
             updateBBox( sf );
             addToStats( ts.duplicate, ts.surface, Math.abs(ts.d() ), ts.h(), sf.v );
-            mStations.addStation( sf );
 
             // FIXME is st.mAnomaly OK ?
             // N.B. was new NumShot(st, sf, ts.block, -1, mDecl); // FIXME check -anomaly

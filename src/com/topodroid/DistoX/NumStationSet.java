@@ -194,7 +194,9 @@ class NumStationSet
           } else {
             n0 = n0.left;
           }
-        } else if ( c > 0 ) {
+        } else if ( c > 0 
+                  //  || ( c == 0 && TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) 
+                  ) {
           if ( n0.right == null ) {
             n0.right = n;
             n.parent = n0;
@@ -202,7 +204,7 @@ class NumStationSet
           } else {
             n0 = n0.right;
           }
-        } else {
+        } else { 
           // Log.v("DistoX", "Double insertion of station " + v.name );
           ret = false;
           break;

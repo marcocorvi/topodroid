@@ -147,7 +147,7 @@ class TDExporter
     if ( audio == null && photos.size() == 0 ) return;
     pw.format("      <attachments>\n");
     if ( audio != null ) {
-      Log.v("DistoX", "audio " + audio.id + " " + audio.shotid + " blk " + bid );
+      // Log.v("DistoX", "audio " + audio.id + " " + audio.shotid + " blk " + bid );
       File audiofile = new File( TDPath.getSurveyAudioFile( survey, Long.toString(bid) ) );
       if ( audiofile.exists() ) {
         byte[] buf = readFileBytes( audiofile );
@@ -527,10 +527,17 @@ class TDExporter
     s_radius = 1 / s_radius;
     e_radius = 1 / e_radius;
 
+    // Log.v("DistoX", "st cnt " + NumStation.cnt + " size " + num.getStations().size() );
+
     for ( NumStation st : num.getStations() ) {
       st.s = lat - st.s * s_radius;
       st.e = lng + st.e * e_radius;
       st.v = (asl - st.v) * asl_factor;
+    }
+    for ( NumStation cst : num.getClosureStations() ) {
+      cst.s = lat - cst.s * s_radius;
+      cst.e = lng + cst.e * e_radius;
+      cst.v = (asl - cst.v) * asl_factor;
     }
     for ( NumSplay sp : num.getSplays() ) {
       sp.s = lat - sp.s * s_radius;
@@ -607,6 +614,7 @@ class TDExporter
           pw.format("  <name>%s</name>\n", st.name );
           pw.format("  <styleUrl>#station</styleUrl>\n");
           pw.format("  <MultiGeometry>\n");
+          pw.format("    <altitudeMode>absolute</altitudeMode>\n");
             pw.format("  <Point id=\"%s\">\n", st.name );
             pw.format(Locale.US, "    <coordinates>%f,%f,%f</coordinates>\n", st.e, st.s, st.v );
             pw.format("  </Point>\n");
