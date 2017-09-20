@@ -1042,8 +1042,8 @@
   <string name="pref_checkBT_summary">Вкл/Выкл bluetooth</string>
   <string name="pref_checkAttached_title">Проверка нитки хода</string>
   <string name="pref_checkAttached_summary">Проверять принадлежность пикетов</string>
-  <!-- TODO string name="pref_checkExtend_title">Leg extend check</string -->
-  <!-- TODO string name="pref_checkExtend_summary">Check if leg extends are set</string -->
+  <string name="pref_checkExtend_title">Проверка развертки замеров</string>
+  <string name="pref_checkExtend_summary">Проверить выставлено ли направление развертки замеров</string>
   <string name="pref_backup_number_title">Кол-во резервных копий</string>
   <string name="pref_backup_number_summary">Количество резервных копий абрисов</string>
   <string name="pref_backup_interval_title">Интервал сохранения</string>
