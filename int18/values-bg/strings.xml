@@ -600,7 +600,7 @@
     <!-- UNUSED string name="btn_erase">Изтриване</string -->
     <!-- UNUSED string name="btn_cut">cut</string -->
     <!-- UNUSED string name="btn_vertical">Вертикално</string -->
-    <!-- UNUSED string name="btn_horizontal">Хоризонтално</string -->
+    <string name="btn_horizontal">Хоризонтално</string>
 
     <!-- select buttin labels -->
     <!-- UNUSED string name="btn_section">Сечение</string -->

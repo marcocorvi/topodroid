@@ -1041,7 +1041,7 @@ public class DrawingCommandManager
     // checkLines();
   }
 
-  public void deleteSectionPoint( String scrap_name, EraseCommand cmd )
+  public boolean deleteSectionPoint( String scrap_name, EraseCommand cmd )
   {
     int index = BrushManager.mPointLib.mPointSectionIndex;
     synchronized( mCurrentStack ) {
@@ -1054,7 +1054,7 @@ public class DrawingCommandManager
               // FIXME GET_OPTION
               if ( scrap_name.equals( dpp.getOption( "-scrap" ) ) ) {
                 deletePath( path, cmd );
-                return;
+                return true;
               }
               // String vals[] = dpp.mOptions.split(" ");
               // int len = vals.length;
@@ -1069,6 +1069,7 @@ public class DrawingCommandManager
         }
       }
     }
+    return false;
   }
 
   private void union( RectF b0, RectF b1 )

@@ -76,6 +76,7 @@ public class BrushManager
   static boolean isPointLabel( int index ) { return index == mPointLib.mPointLabelIndex; }
   static boolean isPointPhoto( int index ) { return index == mPointLib.mPointPhotoIndex; }
   static boolean isPointAudio( int index ) { return index == mPointLib.mPointAudioIndex; }
+  static boolean isPointSection( int index ) { return index == mPointLib.mPointSectionIndex; }
 
   static int getPointLabelIndex() { return mPointLib.mPointLabelIndex; }
 

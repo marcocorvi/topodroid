@@ -2162,6 +2162,8 @@ public class DrawingWindow extends ItemDrawer
         mApp.mData.deleteAudio( mApp.mSID, audio.mId );
         File file = new File( TDPath.getSurveyAudioFile( mApp.mySurvey, Long.toString( audio.mId ) ) );
         file.delete();
+      } else if ( BrushManager.isPointSection( point.mPointType ) ) {
+        mDrawingSurface.clearXSectionOutline( point.getOption( "-scrap" ) );
       }
       modified();
     }
@@ -2182,22 +2184,25 @@ public class DrawingWindow extends ItemDrawer
     }
 
 
-    // @param name  section-line name 
+    // @param xs_id      section-line id 
+    // @param scrap_name xsection scrap_name = survey_name + "-" + xsection_id
     void deleteLine( DrawingLinePath line ) 
     { 
       if ( line.mLineType == BrushManager.mLineLib.mLineSectionIndex ) {
-        String name = line.getOption( "-id" );
-        String scrap = mApp.mySurvey + "-" + name;
-        mDrawingSurface.deleteSectionLine( line, scrap );
-        TDPath.deletePlotFileWithBackups( TDPath.getTh2File( scrap + ".th2" ) );
-        TDPath.deletePlotFileWithBackups( TDPath.getTdrFile( scrap + ".tdr" ) );
-        TDPath.deleteFile( TDPath.getJpgFile( mApp.mySurvey, name + ".jpg" ) );
+        String xs_id = line.getOption( "-id" );
+        String scrap_name = mApp.mySurvey + "-" + xs_id;
+        mDrawingSurface.deleteSectionLine( line, scrap_name );
+        TDPath.deletePlotFileWithBackups( TDPath.getTh2File( scrap_name + ".th2" ) );
+        TDPath.deletePlotFileWithBackups( TDPath.getTdrFile( scrap_name + ".tdr" ) );
+        TDPath.deleteFile( TDPath.getJpgFile( mApp.mySurvey, xs_id + ".jpg" ) );
+
+        deleteSectionPoint( xs_id ); // delete section point and possibly clear section outline
        
-        PlotInfo plot = mData.getPlotInfo( mApp.mSID, name );
+        PlotInfo plot = mData.getPlotInfo( mApp.mSID, xs_id );
         if ( plot != null ) {
           mData.dropPlot( plot.id, mApp.mSID );
         } else {
-          TDLog.Error("No plot NAME " + name + " SID " + mApp.mSID + " in database" );
+          TDLog.Error("No plot NAME " + xs_id + " SID " + mApp.mSID + " in database" );
         }
       } else {
         mDrawingSurface.deletePath( line );
@@ -2772,33 +2777,30 @@ public class DrawingWindow extends ItemDrawer
                       // Log.v("DistoX", "section line L1 " + l1.x + " " + l1.y + " L2 " + l2.x + " " + l2.y );
 
                       List< DrawingPath > paths = mDrawingSurface.getIntersectionShot( l1, l2 );
+                      int nr_legs = paths.size() ; // 0 no-leg, 1 ok, 2 too many legs
+                      String from = "-1";
+                      String to   = "-1";
+                      float azimuth = 0;
+                      float clino = 0;
                       if ( paths.size() > 0 ) {
                         mCurrentLinePath.computeUnitNormal();
 
-                        String from = "-1";
-                        String to   = "-1";
-                        float clino = 0;
-
-                        float azimuth = 90 + (float)(Math.atan2( l2.x-l1.x, -l2.y+l1.y ) * TDMath.RAD2DEG );
+                        // orientation of the section-line
+                        azimuth = 90 + (float)(Math.atan2( l2.x-l1.x, -l2.y+l1.y ) * TDMath.RAD2DEG );
                         azimuth = TDMath.in360( azimuth );
 
-                        DBlock blk = null;
-                        float intersection = 0;
-                        if ( paths.size() > 1 ) {
-                          Toast.makeText( mActivity, R.string.too_many_leg_intersection, Toast.LENGTH_SHORT ).show();
-                        } else {
+                        if ( nr_legs == 1 ) {
                           DrawingPath p = paths.get(0);
-                          blk = p.mBlock;
-                          Float result = Float.valueOf(0);
-                          p.intersect( l1.x, l1.y, l2.x, l2.y, result );
-                          intersection = result.floatValue();
-                          // p.log();
-                        }
+                          DBlock blk = p.mBlock;
 
-                        if ( blk != null ) {
+                          // Float result = Float.valueOf(0);
+                          // p.intersect( l1.x, l1.y, l2.x, l2.y, result );
+                          // float intersection = result.floatValue();
+                          // // p.log();
+
                           from = blk.mFrom;
                           to   = blk.mTo;
-                          if ( h_section ) {
+                          if ( h_section ) { // xsection in profile view
                             int extend = 1;
                             if ( azimuth < 180 ) {
                               clino = 90 - azimuth;
@@ -2820,7 +2822,7 @@ public class DrawingWindow extends ItemDrawer
                             // if ( extend != blk.getExtend() ) {
                             //   azimuth = blk.mBearing + 180; if ( azimuth >= 360 ) azimuth -= 360;
                             // }
-                          } else {
+                          } else { // xsection in plan view ( clino = 0 )
                             float da = azimuth - blk.mBearing;
                             da = TDMath.in360( da );
                             if ( da > 90 && da <= 270 ) { // exchange FROM-TO 
@@ -2828,12 +2830,22 @@ public class DrawingWindow extends ItemDrawer
                               to   = blk.mFrom;
                             }
                           }
-                        } else { // null block
-                          azimuth = 90 + (float)(Math.atan2( l2.x-l1.x, -l2.y+l1.y ) * TDMath.RAD2DEG );
-                          azimuth = TDMath.in360( azimuth );
+                        } else if ( nr_legs > 1 ) { // many legs
+                          // Toast.makeText( mActivity, R.string.too_many_leg_intersection, Toast.LENGTH_SHORT ).show();
+                          if ( h_section ) { // xsection in profile view
+                            // nothing 
+                          } else {
+                            nr_legs = 1; // ok
+                            azimuth = 90 + (float)(Math.atan2( l2.x-l1.x, -l2.y+l1.y ) * TDMath.RAD2DEG );
+                            azimuth = TDMath.in360( azimuth );
+                          }
                         }
-                        // Log.v("DistoX", "new section " + from + " - " + to );
-                        // cross-section does not exists yet
+                      }
+                      // Log.v("DistoX", "new section " + from + " - " + to );
+                      // cross-section does not exists yet
+                      if ( nr_legs == 0 ) {
+                        Toast.makeText( mActivity, R.string.no_leg_intersection, Toast.LENGTH_SHORT ).show(); 
+                      } else if ( nr_legs == 1 ) {
                         String section_id = mData.getNextSectionId( mApp.mSID );
                         mCurrentLinePath.addOption( "-id " + section_id );
                         mDrawingSurface.addDrawingPath( mCurrentLinePath );
@@ -2843,16 +2855,16 @@ public class DrawingWindow extends ItemDrawer
                           float y5 = mCurrentLinePath.mLast.y + mCurrentLinePath.mDy * 20; 
                           String scrap_option = "-scrap " + mApp.mySurvey + "-" + section_id;
                           DrawingPointPath section_pt = new DrawingPointPath( BrushManager.mPointLib.mPointSectionIndex,
-                                                                            x5, y5, DrawingPointPath.SCALE_M, 
-                                                                            null, // no text 
-                                                                            scrap_option );
+                                                                          x5, y5, DrawingPointPath.SCALE_M, 
+                                                                          null, // no text 
+                                                                          scrap_option );
                           mDrawingSurface.addDrawingPath( section_pt );
                         }
 
                         new DrawingLineSectionDialog( mActivity, this, mApp, h_section, false, section_id, mCurrentLinePath, from, to, azimuth, clino ).show();
 
-                      } else { // empty path list
-                        Toast.makeText( mActivity, R.string.no_leg_intersection, Toast.LENGTH_SHORT ).show(); 
+                      } else { // many legs in profile view
+                        Toast.makeText( mActivity, R.string.too_many_leg_intersection, Toast.LENGTH_SHORT ).show(); 
                       }
                     } else { // not section line
                       boolean addline= true;
@@ -2986,11 +2998,17 @@ public class DrawingWindow extends ItemDrawer
       modified();
     }
 
-    private void doTakePhoto( File imagefile, boolean insert )
+    public void notifyAzimuthClino( long pid, float azimuth, float clino )
+    {
+      mApp.mData.updatePlotAzimuthClino( mApp.mSID, pid, azimuth, clino );
+    }
+
+    private void doTakePhoto( File imagefile, boolean insert, long pid )
     {
       if ( FeatureChecker.checkCamera( mApp ) ) { // hasPhoto
         new QCamCompass( this,
               	         (new MyBearingAndClino( mApp, imagefile )),
+                         this, pid, // non-negative if notify azimuth/clino
           	         ( insert ? this : null), // ImageInserter
           	         true, false).show();  // true = with_box, false=with_delay
       } else {
@@ -3018,7 +3036,7 @@ public class DrawingWindow extends ItemDrawer
       mMediaY = y;
       File imagefile = new File( TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString(mMediaId) ) );
       // TODO TD_XSECTION_PHOTO
-      doTakePhoto( imagefile, true ); // with inserter
+      doTakePhoto( imagefile, true, -1L ); // with inserter, no pid
     }
 
     private void addAudioPoint( float x, float y )
@@ -3056,101 +3074,119 @@ public class DrawingWindow extends ItemDrawer
 
     void setCurrentStationName( String name ) { mApp.setCurrentStationName( name ); }
 
+    // delete at-station xsection
     void deleteXSection( DrawingStationName st, String name, long type ) 
     {
       long xtype = -1;
-      String xsname = null;
+      String xs_id = null; // xsection_id eg, xs-2 (xsection at station 2)
       if ( type == PlotInfo.PLOT_PLAN ) {
-        xsname = "xs-" + name;
+        xs_id = "xs-" + name;
         xtype = PlotInfo.PLOT_X_SECTION;
       } else if ( PlotInfo.isProfile( type ) ) {
-        xsname = "xh-" + name;
+        xs_id = "xh-" + name;
         xtype = PlotInfo.PLOT_XH_SECTION;
       } else {
         return;
       }
 
       st.resetXSection();
-      mData.deletePlotByName( xsname, mApp.mSID );
+      mData.deletePlotByName( xs_id, mApp.mSID );
       // drop the files
-      File tdr = new File( TDPath.getSurveyPlotTdrFile( mApp.mySurvey, xsname ) );
+      File tdr = new File( TDPath.getSurveyPlotTdrFile( mApp.mySurvey, xs_id ) );
       if ( tdr.exists() ) tdr.delete(); 
-      File th2 = new File( TDPath.getSurveyPlotTh2File( mApp.mySurvey, xsname ) );
+      File th2 = new File( TDPath.getSurveyPlotTh2File( mApp.mySurvey, xs_id ) );
       if ( th2.exists() ) th2.delete(); 
       // TODO delete backup files
 
-      deleteSectionPoint( xsname ); 
+      deleteSectionPoint( xs_id ); 
     }
 
-    private void deleteSectionPoint( String sn )
+    // delete section point and possibly the xsection outline
+    private void deleteSectionPoint( String xs_id )
     {
-      if ( sn == null ) return;
-      String scrap_name = mApp.mySurvey + "-" + sn;
-      mDrawingSurface.deleteSectionPoint( scrap_name ); // this section-point delete cannot be undone
+      if ( xs_id == null ) return;
+      String scrap_name = mApp.mySurvey + "-" + xs_id;
+      mDrawingSurface.deleteSectionPoint( scrap_name );   // this section-point delete cannot be undone
+      mDrawingSurface.clearXSectionOutline( scrap_name ); // clear outline if any
     }
 
     String getXSectionNick( String name, long type )
     {
-      // parent plot name = mName
+      // parent name = mName
       long xtype = -1;
-      String xsname = null;
+      String xs_id = null;
       if ( type == PlotInfo.PLOT_PLAN ) {
-        xsname = "xs-" + name;
+        xs_id = "xs-" + name;
         xtype = PlotInfo.PLOT_X_SECTION;
       } else if ( PlotInfo.isProfile( type ) ) {
-        xsname = "xh-" + name;
+        xs_id = "xh-" + name;
         xtype = PlotInfo.PLOT_XH_SECTION;
       } else {
         return "";
       }
       PlotInfo plot = mApp.mXSections ?
-                      mData.getPlotInfo( mApp.mSID, xsname )
-                    : mData.getPlotSectionInfo( mApp.mSID, xsname, mName );
+                      mData.getPlotInfo( mApp.mSID, xs_id )
+                    : mData.getPlotSectionInfo( mApp.mSID, xs_id, mName );
       if ( plot == null ) return "";
       return plot.nick;
     }
 
-    // X-SECTION AT A STATION
+    // X-SECTION at station B where A--B--C
     // @param name station name
-    // @param type this plot type
+    // @param type type of the plot where the x-section is defined
     // @param azimuth clino  section plane direction
-    void openXSection( DrawingStationName st, String name, long type, float azimuth, float clino, String nick )
+    //        direct: azimuth = average azimuth of AB and BC
+    //                clino   = average clino of AB and BC 
+    //        inverse opposite
+    //
+    // if plot type = PLAN
+    //    clino = 0
+    //
+    // if plot type = PROFILE
+    //    clino = -90, 0, +90  according to horiz
+    //
+    void openXSection( DrawingStationName st, String name, long type,
+                       float azimuth, float clino, boolean horiz, String nick )
     {
       // parent plot name = mName
       long xtype = -1;
-      String xsname = null;
+      String xs_id = null;
       if ( type == PlotInfo.PLOT_PLAN ) {
-        xsname = "xs-" + name;
+        xs_id = "xs-" + name;
         xtype = PlotInfo.PLOT_X_SECTION;
       } else if ( PlotInfo.isProfile( type ) ) {
-        xsname = "xh-" + name;
+        xs_id = "xh-" + name;
         xtype = PlotInfo.PLOT_XH_SECTION;
       } else {
         return;
       }
 
       PlotInfo plot = mApp.mXSections ?
-                      mData.getPlotInfo( mApp.mSID, xsname )
-                    : mData.getPlotSectionInfo( mApp.mSID, xsname, mName );
+                      mData.getPlotInfo( mApp.mSID, xs_id )
+                    : mData.getPlotSectionInfo( mApp.mSID, xs_id, mName );
 
       if ( plot == null  ) { // if there does not exist xsection xs-name create it
         // Toast.makeText( mActivity, R.string.too_many_legs_xsection, Toast.LENGTH_SHORT ).show();
         if ( azimuth >= 360 ) azimuth -= 360;
 
         if ( PlotInfo.isProfile( type ) ) {
-          clino = ( clino >  TDSetting.mVertSplay )?  90
-                : ( clino < -TDSetting.mVertSplay )? -90 : 0;
+          if ( horiz ) {
+            clino = ( clino > 0 ) ? 90 : -90;
+          } else {
+            clino = 0;
+          }
+          // clino = ( clino >  TDSetting.mVertSplay )?  90 : ( clino < -TDSetting.mVertSplay )? -90 : 0;
         } else { // type == PlotInfo.PLOT_PLAN
           clino = 0;
         }
         // Log.v("DistoX", "new X section azimuth " + azimuth + " clino " + clino );
 
         if ( mApp.mXSections ) {
-          long pid = mApp.insert2dSection( mApp.mSID, xsname, xtype, name, "", azimuth, clino, null, nick );
-          plot = mData.getPlotInfo( mApp.mSID, xsname );
+          long pid = mApp.insert2dSection( mApp.mSID, xs_id, xtype, name, "", azimuth, clino, null, nick );
+          plot = mData.getPlotInfo( mApp.mSID, xs_id );
         } else {
-          long pid = mApp.insert2dSection( mApp.mSID, xsname, xtype, name, "", azimuth, clino, mName, nick );
-          plot = mData.getPlotSectionInfo( mApp.mSID, xsname, mName );
+          long pid = mApp.insert2dSection( mApp.mSID, xs_id, xtype, name, "", azimuth, clino, mName, nick );
+          plot = mData.getPlotSectionInfo( mApp.mSID, xs_id, mName );
         }
 
         // add x-section to station-name
@@ -3159,7 +3195,7 @@ public class DrawingWindow extends ItemDrawer
         if ( TDSetting.mAutoSectionPt ) { // insert section point
           float x5 = st.getXSectionX( 4 ); // FIXME offset
           float y5 = st.getXSectionY( 4 );
-	  String scrap_option = "-scrap " + mApp.mySurvey + "-" + xsname;
+	  String scrap_option = "-scrap " + mApp.mySurvey + "-" + xs_id;
 	  DrawingPointPath section_pt = new DrawingPointPath( BrushManager.mPointLib.mPointSectionIndex,
 							    x5, y5, DrawingPointPath.SCALE_M, 
 							    null, scrap_option ); // no text
@@ -4143,7 +4179,8 @@ public class DrawingWindow extends ItemDrawer
       );
     }
 
-    private long prepareSection( String id, long type,
+
+    private long prepareXSection( String id, long type,
                                  String from, String to, String nick, float azimuth, float clino )
     {
       mCurrentLine = BrushManager.mLineLib.mLineWallIndex;
@@ -4157,27 +4194,28 @@ public class DrawingWindow extends ItemDrawer
         // pid = mApp.insert2dSection( mApp.mSID, mSectionName, type, from, to, azimuth, clino, nick );
         if ( mApp.mXSections ) {
           pid = mApp.insert2dSection( mApp.mSID, mSectionName, type, from, to, azimuth, clino, null, nick );
-          // plot = mData.getPlotInfo( mApp.mSID, xsname );
+          // plot = mData.getPlotInfo( mApp.mSID, xs_id );
         } else {
           pid = mApp.insert2dSection( mApp.mSID, mSectionName, type, from, to, azimuth, clino, mName, nick );
-          // plot = mData.getPlotSectionInfo( mApp.mSID, xsname, mName );
+          // plot = mData.getPlotSectionInfo( mApp.mSID, xs_id, mName );
         }
       }
       return pid;
     }
 
-    void makeSectionPhoto( DrawingLinePath line, String id, long type,
+    void makePhotoXSection( DrawingLinePath line, String id, long type,
                            String from, String to, String nick, float azimuth, float clino )
     {
-      long pid = prepareSection( id, type, from, to, nick, azimuth, clino );
+      long pid = prepareXSection( id, type, from, to, nick, azimuth, clino );
       if ( pid >= 0 ) {
         // imageFile := PHOTO_DIR / surveyId / photoId .jpg
         File imagefile = new File( TDPath.getSurveyJpgFile( mApp.mySurvey, id ) );
         // TODO TD_XSECTION_PHOTO
-        doTakePhoto( imagefile, false ); // without inserter
+        doTakePhoto( imagefile, false, pid ); // without inserter
       }
     }
 
+    // X-Section from a section-line
     // @param line    "section" line
     // @param id      section ID, eg "xx0"
     // @param type    either PLOT_SECTION or PLOT_H_SECTION
@@ -4185,11 +4223,11 @@ public class DrawingWindow extends ItemDrawer
     // @param to      to station, eg "2"
     // @param azimuth section azimuth
     // @param clino   section clino
-    void makeSectionDraw( DrawingLinePath line, String id, long type, String from, String to, String nick,
+    void makePlotXSection( DrawingLinePath line, String id, long type, String from, String to, String nick,
                           float azimuth, float clino )
     {
       // Log.v("DistoX", "make section: " + id + " <" + from + "-" + to + "> azimuth " + azimuth + " clino " + clino );
-      long pid = prepareSection( id, type, from, to, nick, azimuth, clino );
+      long pid = prepareXSection( id, type, from, to, nick, azimuth, clino );
       if ( pid >= 0 ) {
         // Log.v("DistoX", "push info: " + type + " <" + mSectionName + ">" );
         pushInfo( type, mSectionName, from, to, azimuth, clino );
@@ -5258,6 +5296,9 @@ public class DrawingWindow extends ItemDrawer
     // [2] save the Tdr for the new plot and remove the items from the commandManager
   }
 
+
+  // @param name xsection scrap_name = survey_name + "-" + xsection_id
+  //                      tdr_path = tdr_dir + scrap_name + ".tdr"
   boolean hasXSectionOutline( String name ) { return mDrawingSurface.hasXSectionOutline( name ); }
 
   void setXSectionOutline( String name, boolean on_off, float x, float y )
@@ -5269,5 +5310,6 @@ public class DrawingWindow extends ItemDrawer
       mDrawingSurface.setXSectionOutline( name, tdr, x-DrawingUtil.CENTER_X, y-DrawingUtil.CENTER_Y );
     }
   }
+
 
 }

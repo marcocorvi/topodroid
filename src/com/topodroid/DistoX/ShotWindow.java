@@ -648,6 +648,7 @@ public class ShotWindow extends Activity
     if ( camera == 1 ) { // TopoDroid camera
       new QCamCompass( this,
                        (new MyBearingAndClino( mApp, imagefile)),
+                       null, -1L, // drawer, pid
                        this,
                        false, false).show();  // false = with_box, false=with_delay
     } else {

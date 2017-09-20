@@ -606,7 +606,7 @@
     <!-- UNUSED string name="btn_erase">erase</string -->
     <!-- UNUSED string name="btn_cut">cut</string -->
     <!-- UNUSED string name="btn_vertical">Vertical</string -->
-    <!-- UNUSED string name="btn_horizontal">Horizontal</string -->
+    <string name="btn_horizontal">Horizontal</string>
 
     <!-- select buttin labels -->
     <!-- UNUSED string name="btn_section">Section</string -->

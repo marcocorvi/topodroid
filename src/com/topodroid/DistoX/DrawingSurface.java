@@ -419,9 +419,10 @@ public class DrawingSurface extends SurfaceView
   public void addXSectionOutlinePath( DrawingOutlinePath path )
   { commandManager.addXSectionOutlinePath( path ); }
 
-  public void deleteSectionPoint( String scrap_name )
+  // return true if point has been deleted
+  public boolean deleteSectionPoint( String scrap_name )
   {
-    commandManager.deleteSectionPoint( scrap_name, null ); // null eraseCommand
+    return commandManager.deleteSectionPoint( scrap_name, null ); // null eraseCommand
   }
   
   // void setBounds( float x1, float x2, float y1, float y2 ) { commandManager.setBounds( x1, x2, y1, y2 ); }
@@ -787,13 +788,17 @@ public class DrawingSurface extends SurfaceView
     DrawingIO.doLoadOutlineDataStream( this, tdr, xdelta, ydelta, null );
   }
 
+  // @param name xsection scrap name ( survey_name + "-" + xsection_id )
   boolean hasXSectionOutline( String name ) { return commandManager.hasXSectionOutline( name ); }
 
+  // @param name xsection scrap name ( survey_name + "-" + xsection_id )
+  // @param tdr  xsection tdr pathname
   void setXSectionOutline( String name, String tdr, float xdelta, float ydelta )
   {
     DrawingIO.doLoadOutlineDataStream( this, tdr, xdelta, ydelta, name );
   }
 
+  // @param name xsection scrap name ( survey_name + "-" + xsection_id )
   void clearXSectionOutline( String name )
   {
     commandManager.clearXSectionOutline( name );

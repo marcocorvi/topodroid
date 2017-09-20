@@ -596,7 +596,7 @@
     <!-- UNUSED string name="btn_erase">擦除</string -->
     <!-- UNUSED string name="btn_cut">剪切</string -->
     <!-- UNUSED string name="btn_vertical">垂直</string -->
-    <!-- UNUSED string name="btn_horizontal">水平</string -->
+    <string name="btn_horizontal">水平</string>
 
     <!-- select buttin labels -->
     <!-- UNUSED string name="btn_section">截面</string -->

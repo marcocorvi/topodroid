@@ -597,7 +597,7 @@
     <!-- string name="btn_erase">erase</string -->
     <!-- string name="btn_cut">cut</string -->
     <!-- string name="btn_vertical">Vertical</string -->
-    <!-- string name="btn_horizontal">Horizontal</string -->
+    <!-- TODO string name="btn_horizontal">Horizontal</string -->
 
     <!-- select button labels -->
     <!-- UNUSED string name="btn_section">Section</string -->

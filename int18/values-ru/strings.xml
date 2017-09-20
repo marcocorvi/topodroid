@@ -599,7 +599,7 @@
     <!-- UNUSED string name="btn_erase">Стереть</string -->
     <!-- UNUSED string name="btn_cut">Вырезать</string -->
     <!-- UNUSED string name="btn_vertical">Вертикальный</string -->
-    <!-- UNUSED string name="btn_horizontal">Горизонтальный</string -->
+    <string name="btn_horizontal">Горизонтальный</string>
 
     <!-- select button labels -->
     <!-- UNUSED string name="btn_section">Сечение</string -->

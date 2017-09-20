@@ -600,7 +600,7 @@
     <!-- UNUSED string name="btn_erase">Стерети</string -->
     <!-- UNUSED string name="btn_cut">Вирізати</string -->
     <!-- UNUSED string name="btn_vertical">Вертикальний</string -->
-    <!-- UNUSED string name="btn_horizontal">Горизонтальний</string -->
+    <string name="btn_horizontal">Горизонтальний</string>
 
     <!-- select button labels -->
     <!-- UNUSED string name="btn_section">Переріз</string -->

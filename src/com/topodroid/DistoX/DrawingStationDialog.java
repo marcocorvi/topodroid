@@ -52,6 +52,7 @@ public class DrawingStationDialog extends MyDialog
     private Button mBtnXDelete;
     private Button mBtnDirect;
     private Button mBtnInverse;
+    private CheckBox mCBhorizontal;
 
     private Button mBtnCancel;
 
@@ -104,6 +105,7 @@ public class DrawingStationDialog extends MyDialog
       mBtnCancel = (Button) findViewById(R.id.btn_cancel);
 
       mBtnXSection  = (Button) findViewById(R.id.btn_xsection );
+      mCBhorizontal  = (CheckBox) findViewById(R.id.cb_horizontal );
       mBtnXDelete   = (Button) findViewById(R.id.btn_xdelete );  // delete / sensors
       mBtnDirect  = (Button) findViewById( R.id.btn_direct );
       mBtnInverse = (Button) findViewById( R.id.btn_inverse );
@@ -125,6 +127,7 @@ public class DrawingStationDialog extends MyDialog
 
         mETnick.setVisibility( View.GONE );
         mBtnXSection.setVisibility( View.GONE );
+        mCBhorizontal.setVisibility( View.GONE );
         mBtnXDelete.setVisibility( View.GONE );
         mBtnDirect.setVisibility( View.GONE );
         mBtnInverse.setVisibility( View.GONE );
@@ -157,27 +160,47 @@ public class DrawingStationDialog extends MyDialog
               inverse = leg0.mTo   + ">" + leg0.mFrom;
               cb = true;
               mBearing = leg0.mBearing; 
-              mClino   = leg0.mClino;
+              mClino   = leg0.mClino; // later reset to 0 if PLAN
             } else if ( leg_size == 2 ) {
               DBlock leg0 = mBlk.get(0);
               DBlock leg1 = mBlk.get(1);
               float b0 = leg0.mBearing;
               float b1 = leg1.mBearing;
+              float c0 = leg0.mClino;
+              float c1 = leg1.mClino;
+
+              String from = leg0.mFrom;
+              if ( from.equals( mStationName ) ) {
+                from = leg0.mTo;
+                b0 += 180; if ( b0 >= 360 ) b0 -= 360;
+                c0 = -c0;
+              }
+              String to = leg1.mTo;
+              if ( to.equals( mStationName ) ) {
+                to = leg0.mFrom;
+                b1 += 180; if ( b1 >= 360 ) b1 -= 360;
+                c1 = -c1;
+              }
+
               mBearing = (b1 + b0)/2;
               if ( Math.abs( b1 - b0 ) > 180 ) {
-                mBearing += 180;
+                mBearing += 180; // like adding 360 to b1
                 if ( mBearing >= 360 ) mBearing -= 360;
               }
-              mClino = ( leg0.mClino + leg1.mClino ) / 2;
-              String from = leg0.mFrom;
-              if ( from.equals( mStationName ) ) from = leg0.mTo;
-              String to = leg1.mTo;
-              if ( to.equals( mStationName ) ) to = leg0.mFrom;
+              mClino = ( c0 + c1 ) / 2; // later reset to 0 if PLAN
+
               direct = from + ">" + to; // skip mStationName in the middle
               inverse = to + ">" + from;
               cb = true;
             }
-            if ( cb ) {
+            if ( mParent.getPlotType() == PlotInfo.PLOT_PLAN ) {
+              mClino = 0;
+              mCBhorizontal.setVisibility( View.GONE );
+            } else {
+              mCBhorizontal.setChecked( false );
+            }
+
+            if ( cb ) { // leg_size == 1 or 2
               mBtnDirect.setText( direct );
               mBtnInverse.setText( inverse );
               mBtnDirect.setOnClickListener( this );
@@ -194,11 +217,13 @@ public class DrawingStationDialog extends MyDialog
           } else {
             mETnick.setText( mParent.getXSectionNick( mStationName, mParent.getPlotType() ) );
             mBtnXSection.setOnClickListener( this );
+            mCBhorizontal.setVisibility( View.GONE );
             mBtnDirect.setVisibility( View.GONE );
             mBtnInverse.setVisibility( View.GONE );
           } 
         } else {
           mBtnXSection.setVisibility( View.GONE );
+          mCBhorizontal.setVisibility( View.GONE );
           mBtnXDelete.setVisibility( View.GONE );
           mBtnDirect.setVisibility( View.GONE );
           mBtnInverse.setVisibility( View.GONE );
@@ -224,6 +249,7 @@ public class DrawingStationDialog extends MyDialog
     {
       // TDLog.Log( TDLog.LOG_INPUT, "Drawing Station Dialog onClick() " + view.toString() );
       Button b = (Button)view;
+
       String nick = (mETnick.getText() != null)? mETnick.getText().toString() : "";
       if ( b == mBtnOK ) {
         if ( mPath == null ) {
@@ -242,7 +268,8 @@ public class DrawingStationDialog extends MyDialog
       } else if ( b == mBtnSplays ) {
         mParent.toggleStationSplays( mStationName );
       } else if ( b == mBtnXSection ) {
-        mParent.openXSection( mStation, mStationName, mParent.getPlotType(), mBearing, mClino, nick );
+        mParent.openXSection( mStation, mStationName, mParent.getPlotType(),
+            mBearing, mClino, false, nick );
       } else if ( b == mBtnXDelete ) {
         if ( mSensors ) {
           TimerTask timer = new TimerTask( mContext, this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
@@ -252,12 +279,14 @@ public class DrawingStationDialog extends MyDialog
           mParent.deleteXSection( mStation, mStationName, mParent.getPlotType() );
         }
       } else if ( b == mBtnDirect ) {
-        mParent.openXSection( mStation, mStationName, mParent.getPlotType(), mBearing, mClino, nick );
+        mParent.openXSection( mStation, mStationName, mParent.getPlotType(),
+             mBearing, mClino, mCBhorizontal.isChecked(), nick );
       } else if ( b == mBtnInverse ) {
         mBearing += 180;
         if ( mBearing >= 360 ) mBearing -= 360;
         mClino = -mClino;
-        mParent.openXSection( mStation, mStationName, mParent.getPlotType(), mBearing, mClino, nick );
+        mParent.openXSection( mStation, mStationName, mParent.getPlotType(),
+              mBearing, mClino,  mCBhorizontal.isChecked(), nick );
       }
       dismiss();
     }
@@ -269,7 +298,8 @@ public class DrawingStationDialog extends MyDialog
         c = 0;
       } else { // PlotInfo.isProfile( type )
       }
-      mParent.openXSection( mStation, mStationName, mParent.getPlotType(), b, c, nick );
+      mParent.openXSection( mStation, mStationName, mParent.getPlotType(),
+          b, c, mCBhorizontal.isChecked(), nick );
       dismiss();
     }
 

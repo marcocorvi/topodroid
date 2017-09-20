@@ -213,10 +213,10 @@ public class DrawingLineSectionDialog extends MyDialog
 
     switch ( v.getId() ) {
       case R.id.button_foto:
-        mParent.makeSectionPhoto( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino );
+        mParent.makePhotoXSection( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino );
         break;
       case R.id.button_draw:
-        mParent.makeSectionDraw( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino );
+        mParent.makePlotXSection( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino );
         break;
       case R.id.button_erase:
         mParent.deleteLine( mLine );

@@ -46,7 +46,7 @@ public class DrawingPointDialog extends MyDialog
   private RadioButton mBtnScaleL;
   private RadioButton mBtnScaleXL;
 
-  private CheckBox mCBxsection;
+  private CheckBox mCBxsection; // to display xsection outline
   private Button   mBTdraw;
   private boolean  mHasXSectionOutline;
 
