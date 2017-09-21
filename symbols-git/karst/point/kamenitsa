@@ -1,0 +1,13 @@
+symbol point
+name kamenitsa
+th_name u:kamenitsa
+orientation no
+color 0x999999
+csurvey 6 6 80
+path
+  moveTo -8 0
+  lineTo -5 0
+  cubicTo -2 4 2 4 5 0
+  lineTo 8 0
+endpath
+endsymbol

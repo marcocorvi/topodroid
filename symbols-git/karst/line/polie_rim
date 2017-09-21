@@ -1,0 +1,18 @@
+symbol line
+name polie_rim
+th_name u:polie_rim
+style straight x0
+color 0xcc9966 0xff
+width 8
+csurvey 5 1 2 2
+effect
+  moveTo 0 0
+  lineTo 10 0
+  lineTo 10 -8
+  lineTo 20 -8
+  lineTo 20 0
+  lineTo 30 0
+  lineTo 30 1
+  lineTo 0 1
+endeffect
+endsymbol

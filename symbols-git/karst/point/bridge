@@ -1,0 +1,15 @@
+symbol point
+name bridge
+th_name u:bridge
+orientation no
+color 0xffffff
+csurvey 6 6 80
+path
+  moveTo -7 2
+  lineTo -4 2
+  cubicTo -4 -5 4 -5 4 2
+  lineTo 7 2
+  moveTo -4 2
+  cubicTo -4 -2 4 -2 4 2
+endpath
+endsymbol

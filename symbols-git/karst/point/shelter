@@ -1,0 +1,13 @@
+symbol point
+name shelter
+th_name u:shelter
+orientation no
+color 0xffffff
+csurvey 6 6 80
+path
+  moveTo -7 2
+  lineTo -4 2
+  cubicTo -4 -5 4 -5 4 2
+  lineTo 7 2
+endpath
+endsymbol
