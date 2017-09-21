@@ -563,7 +563,7 @@
     <string name="symbol_archeo">Архео.</string>
     <string name="symbol_bio">Биология</string>
     <string name="symbol_geo">Геология</string>
-    <!-- TODO string name="symbol_karst">Karst</string -->
+    <string name="symbol_karst">Карст</string>
     <string name="symbol_mine">Шахты</string>
     <string name="symbol_paleo">Палео</string>
     <string name="symbol_speleo">Спелео</string>
@@ -754,8 +754,8 @@
     <string name="title_draw_line">ЛИНИЯ %1$s</string>
     <string name="title_draw_point">ТОЧКА %1$s</string>
     <string name="title_edit">Редактировать</string>
-    <!-- TODO string name="title_edit_user_station">Edit user station </string -->
-    <!-- TODO string name="title_edit_station">Edit station </string -->
+    <string name="title_edit_user_station">Редактировать пользовательский пикет </string>
+    <string name="title_edit_station">Редактировать пикет </string>
     <string name="title_erase">Удалить</string>
     <string name="title_fixed">Гео-привязанные точки</string>
     <string name="title_fixed_edit">Редактировать привязку</string>
