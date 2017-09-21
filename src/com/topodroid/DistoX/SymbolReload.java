@@ -46,6 +46,7 @@ public class SymbolReload extends MyDialog
   private CheckBox mCBarcheo;
   private CheckBox mCBpaleo;
   private CheckBox mCBbio;
+  private CheckBox mCBkarst;
 
   private boolean mAll;
 
@@ -77,6 +78,7 @@ public class SymbolReload extends MyDialog
     mCBarcheo = (CheckBox) findViewById( R.id.symbol_archeo );
     mCBpaleo  = (CheckBox) findViewById( R.id.symbol_paleo  );
     mCBbio    = (CheckBox) findViewById( R.id.symbol_bio    );
+    mCBkarst  = (CheckBox) findViewById( R.id.symbol_karst  );
 
     mBtnCancel  = (Button) findViewById( R.id.button_cancel );
     mBtnInstall = (Button) findViewById( R.id.button_add );
@@ -92,6 +94,7 @@ public class SymbolReload extends MyDialog
       mCBarcheo.setVisibility( View.GONE );
       mCBpaleo.setVisibility( View.GONE );
       mCBbio.setVisibility( View.GONE );
+      mCBkarst.setVisibility( View.GONE );
       mBtnInstall.setVisibility( View.GONE );
       String version = mApp.mDData.getValue( "symbol_version" );
       tv.setText( String.format( mApp.getResources().getString(R.string.symbols_ask), TopoDroidApp.SYMBOL_VERSION, version ) );
@@ -113,7 +116,9 @@ public class SymbolReload extends MyDialog
                           mCBgeo.isChecked(),
                           mCBarcheo.isChecked(),
                           mCBpaleo.isChecked(),
-                          mCBbio.isChecked() );
+                          mCBbio.isChecked(),
+                          mCBkarst.isChecked()
+                        );
     } else if ( b == mBtnReplace ) {
       mApp.reloadSymbols( true, // clear first
                           mCBspeleo.isChecked(),
@@ -122,7 +127,9 @@ public class SymbolReload extends MyDialog
                           mCBgeo.isChecked(),
                           mCBarcheo.isChecked(),
                           mCBpaleo.isChecked(),
-                          mCBbio.isChecked() );
+                          mCBbio.isChecked(),
+                          mCBkarst.isChecked()
+                        );
     }
     dismiss();
   }

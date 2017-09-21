@@ -562,6 +562,7 @@
     <string name="symbol_archeo">Archeologico</string>
     <string name="symbol_bio">Biologico</string>
     <string name="symbol_geo">Geologico</string>
+    <!-- TODO string name="symbol_karst">Karst</string -->
     <string name="symbol_mine">Minerario</string>
     <string name="symbol_paleo">Paleologico</string>
     <string name="symbol_speleo">Speleologico</string>
@@ -752,6 +753,8 @@
     <string name="title_draw_line">LINEA %1$s</string>
     <string name="title_draw_point">PUNTO %1$s</string>
     <string name="title_edit">Edita</string>
+    <!-- TODO string name="title_edit_user_station">Edit user station </string -->
+    <!-- TODO string name="title_edit_station">Edit station </string -->
     <string name="title_erase">Cancella</string>
     <string name="title_fixed">Punti fissi</string>
     <string name="title_fixed_edit">Modifica posizione</string>

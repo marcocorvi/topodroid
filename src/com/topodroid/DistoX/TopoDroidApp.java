@@ -1515,7 +1515,8 @@ public class TopoDroidApp extends Application
   }  
 
   void reloadSymbols( boolean clear, 
-                      boolean speleo, boolean extra, boolean mine, boolean geo, boolean archeo, boolean paleo, boolean bio )
+                      boolean speleo, boolean extra, boolean mine, boolean geo, boolean archeo, boolean paleo,
+                      boolean bio,    boolean karst )
   {
     // Log.v("DistoX", "Reload symbols " + speleo + " " + mine + " " + geo + " " + archeo + " " + paleo + " " + bio + " clear " + clear );
     if ( extra ) speleo = true; // extra implies speleo
@@ -1532,6 +1533,7 @@ public class TopoDroidApp extends Application
     if ( archeo ) installSymbols( R.raw.symbols_archeo, true );
     if ( paleo  ) installSymbols( R.raw.symbols_paleo,  true );
     if ( bio    ) installSymbols( R.raw.symbols_bio,    true );
+    if ( karst  ) installSymbols( R.raw.symbols_karst,  true );
 
     mDData.setValue( "symbol_version", SYMBOL_VERSION );
     BrushManager.reloadAllLibraries( this, getResources() );

@@ -30,5 +30,6 @@ zip ../res/raw/symbols_bio.zip ./symbols_bio/point/* ./symbols_bio/line/* ./symb
 zip ../res/raw/symbols_geo.zip ./symbols_geo/point/* ./symbols_geo/line/* ./symbols_geo/area/*
 zip ../res/raw/symbols_paleo.zip ./symbols_paleo/point/* ./symbols_paleo/line/* ./symbols_paleo/area/*
 zip ../res/raw/symbols_mine.zip ./symbols_mine/point/* ./symbols_mine/line/* ./symbols_mine/area/*
+zip ../res/raw/symbols_karst.zip ./symbols_karst/point/* ./symbols_karst/line/* ./symbols_karst/area/*
 zip ../res/raw/symbols_extra.zip ./symbols_extra/point/* ./symbols_extra/line/* ./symbols_extra/area/*
 

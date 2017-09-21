@@ -1113,20 +1113,48 @@ public class DrawingWindow extends ItemDrawer
   }
 
   // set the button3 by the type of the hot-item
-  private void setButton3Item( int type )
+  private void setButton3Item( SelectionPoint pt )
   {
-    mHotItemType = type;
-    if ( //   type == DrawingPath.DRAWING_PATH_POINT ||
-         type == DrawingPath.DRAWING_PATH_LINE ||
-         type == DrawingPath.DRAWING_PATH_AREA 
-         // type == DrawingPath.DRAWING_PATH_STATION 
-       ) {
-      inLinePoint = true;
-      mButton3[ BTN_JOIN ].setBackgroundDrawable( mBMjoin );
-    } else {
-      inLinePoint = false;
-      mButton3[ BTN_JOIN ].setBackgroundDrawable( mBMjoin_no );
+    mHotItemType = -1;
+    inLinePoint  = false;
+    BitmapDrawable bm = mBMjoin_no;
+    String title = getResources().getString( R.string.title_edit );
+    if ( pt != null ) {
+      DrawingPath item = pt.mItem;
+      mHotItemType = pt.type();
+      switch ( mHotItemType ) {
+        case DrawingPath.DRAWING_PATH_FIXED:
+          mActivity.setTitle( title + " " + item.mBlock.mFrom + "=" + item.mBlock.mTo );
+          break;
+        case DrawingPath.DRAWING_PATH_SPLAY:
+          mActivity.setTitle( title + " " + item.mBlock.mFrom + "-." );
+          break;
+        case DrawingPath.DRAWING_PATH_POINT:
+          mActivity.setTitle( title + " " + BrushManager.mPointLib.getSymbolName( ((DrawingPointPath)item).mPointType ) );
+          break;
+        case DrawingPath.DRAWING_PATH_LINE:
+          mActivity.setTitle( title + " " + BrushManager.mLineLib.getSymbolName( ((DrawingLinePath)item).mLineType ) );
+          inLinePoint = true;
+          bm = mBMjoin;
+          break;
+        case DrawingPath.DRAWING_PATH_AREA:
+          mActivity.setTitle( title + " " + BrushManager.mAreaLib.getSymbolName( ((DrawingAreaPath)item).mAreaType ) );
+          inLinePoint = true;
+          bm = mBMjoin;
+          break;
+        case DrawingPath.DRAWING_PATH_STATION:
+          title = getResources().getString( R.string.title_edit_user_station );
+          mActivity.setTitle( title + ((DrawingStationPath)item).name() );
+          break;
+        case DrawingPath.DRAWING_PATH_NAME:
+          title = getResources().getString( R.string.title_edit_station );
+          mActivity.setTitle( title + ((DrawingStationName)item).name() );
+          break;
+        default:
+          mActivity.setTitle( title );
+      }
     }
+    mButton3[ BTN_JOIN ].setBackgroundDrawable( bm );
   }
 
   private void setButton3PrevNext( )
@@ -2071,9 +2099,9 @@ public class DrawingWindow extends ItemDrawer
           if ( mDoEditRange == 0 ) {
             mMode = MODE_SHIFT;
           }
-          setButton3Item( selection.mHotItem.type() );
+          setButton3Item( selection.mHotItem );
         } else {
-          setButton3Item( -1 );
+          setButton3Item( null );
         }
       } 
     }
@@ -3788,15 +3816,12 @@ public class DrawingWindow extends ItemDrawer
       if ( flip_shots ) {
         DBlock blk;
         for ( NumShot sh : mNum.getShots() ) {
-          NumStation st1 = sh.from;
-          NumStation st2 = sh.to;
-          if ( st1.unbarriered() && st1.unbarriered() ) {
+          if ( sh.from.show() && sh.to.show() ) {
             flipBlock( sh.getFirstBlock() );
           }
         }
         for ( NumSplay sp : mNum.getSplays() ) {
-          NumStation st = sp.from;
-          if ( st.unbarriered() ) {
+          if ( sp.from.show() ) {
             flipBlock( sp.getBlock() );
           }
         }
@@ -3895,7 +3920,7 @@ public class DrawingWindow extends ItemDrawer
       mDrawingSurface.clearSelected();
       mMode = MODE_EDIT;
       setButton3PrevNext();
-      setButton3Item( -1 );
+      setButton3Item( null );
     }
 
     public void onClick(View view)
@@ -4007,7 +4032,7 @@ public class DrawingWindow extends ItemDrawer
         if ( mHasSelected ) {
           SelectionPoint pt = mDrawingSurface.prevHotItem( );
           if ( mDoEditRange == 0 ) mMode = MODE_SHIFT;
-          setButton3Item( (pt != null)? pt.type() : -1 );
+          setButton3Item( pt );
         } else {
           makePopupFilter( b, Drawing.mSelectModes, 6, Drawing.CODE_SELECT, dismiss );
         }
@@ -4015,7 +4040,7 @@ public class DrawingWindow extends ItemDrawer
         if ( mHasSelected ) {
           SelectionPoint pt = mDrawingSurface.nextHotItem( );
           if ( mDoEditRange == 0 ) mMode = MODE_SHIFT;
-          setButton3Item( (pt != null)? pt.type() : -1 );
+          setButton3Item( pt );
         } else {
           setButtonSelectSize( mSelectScale + 1 ); // toggle select size
         }

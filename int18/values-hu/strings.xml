@@ -562,6 +562,7 @@
     <string name="symbol_archeo">Régészet</string>
     <string name="symbol_bio">Biológia</string>
     <string name="symbol_geo">Geológia</string>
+    <!-- TODO string name="symbol_karst">Karst</string -->
     <string name="symbol_mine">Bányászat</string>
     <string name="symbol_paleo">Őslénytan</string>
     <string name="symbol_speleo">Barlangászat</string>
@@ -751,6 +752,8 @@
     <string name="title_draw_line">VONAL %1$s</string>
     <string name="title_draw_point">PONT %1$s</string>
     <string name="title_edit">Szerkesztés</string>
+    <!-- TODO string name="title_edit_user_station">Edit user station </string -->
+    <!-- TODO string name="title_edit_station">Edit station </string -->
     <string name="title_erase">Radír</string>
     <string name="title_fixed">Helymeghatározások</string>
     <string name="title_fixed_edit">Helymeghatározás szerkesztése</string>

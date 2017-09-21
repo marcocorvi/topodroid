@@ -567,6 +567,7 @@
     <string name="symbol_archeo">Archeo</string>
     <string name="symbol_bio">Biology</string>
     <string name="symbol_geo">Geology</string>
+    <string name="symbol_karst">Karst</string>
     <string name="symbol_mine">Mining</string>
     <string name="symbol_paleo">Paleo</string>
     <string name="symbol_speleo">Speleo</string>
@@ -766,6 +767,8 @@
     <string name="title_draw_line">LINE %1$s</string>
     <string name="title_draw_point">POINT %1$s</string>
     <string name="title_edit">Edit</string>
+    <string name="title_edit_user_station">Edit user station </string>
+    <string name="title_edit_station">Edit station </string>
     <string name="title_erase">Erase</string>
     <string name="title_fixed">Locations</string>
     <string name="title_fixed_edit">Location edit</string>

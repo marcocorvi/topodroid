@@ -560,6 +560,7 @@
     <string name="symbol_archeo">考古学</string>
     <string name="symbol_bio">生物学</string>
     <string name="symbol_geo">地质学</string>
+    <!-- TODO string name="symbol_karst">Karst</string -->
     <string name="symbol_mine">采矿学</string>
     <string name="symbol_paleo">古生物学</string>
     <string name="symbol_speleo">洞穴学</string>
@@ -750,6 +751,8 @@
     <string name="title_draw_line">线图例 %1$s</string>
     <string name="title_draw_point">点图例 %1$s</string>
     <string name="title_edit">编辑</string>
+    <!-- TODO string name="title_edit_user_station">Edit user station </string -->
+    <!-- TODO string name="title_edit_station">Edit station </string -->
     <string name="title_erase">擦除</string>
     <string name="title_fixed">位置</string>
     <string name="title_fixed_edit">位置编辑t</string>

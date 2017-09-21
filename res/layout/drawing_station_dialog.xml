@@ -1,87 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
   style="@style/base_padding"
-  android:layout_width="wrap_content" 
+  android:layout_width="fill_parent" 
   android:layout_height="wrap_content"
   android:orientation="vertical"
   >
    					  
-    <TextView android:id="@+id/coords"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        />
+  <TextView android:id="@+id/coords"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+  />
 
-    <LinearLayout 
-      android:layout_width="fill_parent" 
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="10dp"
-      android:orientation="horizontal" 
-      >
+  <LinearLayout 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:orientation="horizontal" 
+    >
 
-      <Button android:id="@+id/btn_ok"
-        style="@style/button_default"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_marginRight="@dimen/marginh"
-        android:text="@string/button_ok"
-      />
+    <Button android:id="@+id/btn_ok"
+      style="@style/button_default"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:layout_marginRight="@dimen/marginh"
+      android:text="@string/button_ok"
+    />
 
-      <TextView android:id="@+id/station_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:text="@string/station_ask"
-      />
+    <TextView android:id="@+id/station_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" 
+      android:text="@string/station_ask"
+    />
    					  
-    </LinearLayout>
+  </LinearLayout>
 
-    <LinearLayout 
-      android:layout_width="fill_parent" 
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="@dimen/marginv"
-      android:orientation="horizontal" 
-      >
+  <LinearLayout 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/marginv"
+    android:orientation="horizontal" 
+    >
 
-      <Button android:id="@+id/btn_set"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_marginRight="@dimen/marginh"
-        style="@style/button_default"
-        android:text="@string/button_ok"
-      />
-      <!--  android:background="@drawable/ic_gps" -->
+    <Button android:id="@+id/btn_set"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:layout_marginRight="@dimen/marginh"
+      style="@style/button_default"
+      android:text="@string/button_ok"
+    />
+    <!--  android:background="@drawable/ic_gps" -->
 
-      <TextView android:id="@+id/station_set"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:text="@string/station_set"
-      />
+    <TextView android:id="@+id/station_set"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" 
+      android:text="@string/station_set"
+    />
+  </LinearLayout>
 
-    </LinearLayout>
+  <LinearLayout 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/marginv"
+    android:orientation="horizontal" 
+    >
 
-    <LinearLayout 
-      android:layout_width="fill_parent" 
-      android:layout_height="wrap_content"
+    <Button android:id="@+id/btn_break"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
       android:layout_marginTop="@dimen/marginv"
-      android:orientation="horizontal" 
-      >
+      style="@style/button_default"
+      android:text="@string/button_ok"
+    />
+    <!-- android:background="@drawable/ic_save" -->
 
-      <Button android:id="@+id/btn_break"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_marginTop="@dimen/marginv"
-        style="@style/button_default"
-        android:text="@string/button_ok"
+    <TextView android:id="@+id/barrier_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" 
+      android:text="@string/barrier_del"
       />
-      <!-- android:background="@drawable/ic_save" -->
+  </LinearLayout>
 
-      <TextView android:id="@+id/barrier_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:text="@string/barrier_del"
-        />
-    </LinearLayout>
-
-    <LinearLayout 
+  <LinearLayout 
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/marginh"
@@ -101,9 +100,9 @@
         android:layout_height="wrap_content" 
         android:text="@string/hidden_del"
         />
-    </LinearLayout>
+  </LinearLayout>
 
-    <LinearLayout 
+  <LinearLayout 
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/marginv"

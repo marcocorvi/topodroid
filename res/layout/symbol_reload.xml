@@ -75,7 +75,15 @@
     android:layout_marginTop="@dimen/marginv"
     android:text="@string/symbol_bio"
   />
-          	
+
+  <CheckBox android:id="@+id/symbol_karst"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:layout_marginRight="@dimen/marginh"
+    android:layout_marginLeft="@dimen/marginh"
+    android:layout_marginTop="@dimen/marginv"
+    android:text="@string/symbol_karst"
+  />
           	
   <LinearLayout 
     android:orientation="horizontal"

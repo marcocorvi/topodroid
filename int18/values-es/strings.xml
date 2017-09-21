@@ -559,6 +559,7 @@
     <string name="symbol_archeo">Arqueología</string>
     <string name="symbol_bio">Biología</string>
     <string name="symbol_geo">Geología</string>
+    <!-- TODO string name="symbol_karst">Karst</string -->
     <string name="symbol_mine">Minería</string>
     <string name="symbol_paleo">Paleontología</string>
     <string name="symbol_speleo">Espeleo</string>
@@ -753,6 +754,8 @@
     <string name="title_draw_line">Línea %1$s</string>
     <string name="title_draw_point">Punto %1$s</string>
     <string name="title_edit">Editar</string>
+    <!-- TODO string name="title_edit_user_station">Edit user station </string -->
+    <!-- TODO string name="title_edit_station">Edit station </string -->
     <string name="title_erase">Borrar</string>
     <string name="title_fixed">Fijar puntos</string>
     <string name="title_fixed_edit">Punto de edición</string>

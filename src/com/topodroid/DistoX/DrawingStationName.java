@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date nov 2011
  *
- * @brief TopoDroid drawing station name (reference station names)
+ * @brief TopoDroid drawing station name from survey data reduction (reference station names)
  *        type: DRAWING_PATH_NAME
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
