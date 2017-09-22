@@ -1,5 +1,6 @@
 symbol line
 name doline_pit
+name-ru какстовый_провал
 th_name u:doline_pit
 group doline
 color 0x66cc33 0xff

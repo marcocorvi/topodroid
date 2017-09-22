@@ -1,5 +1,6 @@
 symbol line
 name doline
+name-ru карстовая_воронка
 th_name u:doline
 group doline
 color 0x66cc33 0xff

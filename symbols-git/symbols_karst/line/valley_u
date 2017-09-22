@@ -1,5 +1,6 @@
 symbol line
 name valley_u
+name-ru долина_ю
 th_name u:valley_u
 group valley
 color 0x999999 0xff

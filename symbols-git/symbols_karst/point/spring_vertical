@@ -1,5 +1,6 @@
 symbol point
 name spring_vertical
+name-ru источник_вертикальный
 th_name u:spring_vertical
 orientation no
 color 0x3399ff

@@ -1,5 +1,6 @@
 symbol point
 name spring_captured
+name-ru источник_водозабор
 th_name u:spring_captured
 orientation no
 color 0x3399ff
