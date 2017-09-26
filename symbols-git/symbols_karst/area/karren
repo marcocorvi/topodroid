@@ -1,5 +1,6 @@
 symbol area
 name karren
+name-ru карры
 th_name u:karren
 color 0xff9966 0xcc
 orientable

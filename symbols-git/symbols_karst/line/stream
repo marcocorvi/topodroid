@@ -1,5 +1,6 @@
 symbol line
 name stream
+name-ru ручей
 th_name u:stream
 style straight x0
 color 0x3399ff 0xff

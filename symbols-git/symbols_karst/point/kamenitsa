@@ -1,5 +1,6 @@
 symbol point
 name kamenitsa
+name-ru каменица
 th_name u:kamenitsa
 orientation no
 color 0x999999

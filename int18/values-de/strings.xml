@@ -396,7 +396,7 @@
     <string name="shots_delete">Messungen löschen?</string>
     <string name="shot_check">Messung als Kalibrierungstest markieren?</string>
     <string name="shot_from">von</string>
-    <string name="shot_info">Info</string>
+    <string name="shot_info">Manuelle Messung erfassen</string>
     <!-- UNUSED string name="shot_length">Länge</string -->
     <string name="shot_note">Notizen</string>
     <string name="shot_not_found">nicht gefunden</string>
@@ -425,8 +425,8 @@
     <string name="survey_delete">Vermessung löschen?</string>
     <string name="survey_split">Vermessung teilen?</string>
     <string name="survey_not_attached">WARNUNG: Unverbundene Messungen</string>
-    <!-- TODO string name="survey_not_extend">WARNING: unset shot extends</string -->
-    <!-- TODO string name="survey_not_attached_extend">WARNING: unattached shots and unset extends</string -->
+    <string name="survey_not_extend">WARNUNG: Nicht definierte LRUD Werte</string>
+    <string name="survey_not_attached_extend">WARNUNG: Nicht verbundene Messungen</string>
     <string name="cannot_rename">Kann Vermessung nicht umbenennen</string>
     <string name="declination">Magnetische Deklination</string>
     <string name="description">Beschreibung</string>
@@ -551,7 +551,7 @@
 
     <string name="button_write"     >Hochladen</string>
     <string name="button_xsection"  >Profil</string>
-    <!-- TODO string name="xsection">X-Section</string -->
+    <string name="xsection">Querschnitt</string>
 
     <string name="mode_leg">Messstrecken</string>
     <string name="mode_splay">Hilfszüge</string>
@@ -579,7 +579,7 @@
     <string name="symbol_archeo">Archäologie</string>
     <string name="symbol_bio">Biologie</string>
     <string name="symbol_geo">Geologie</string>
-    <!-- TODO string name="symbol_karst">Karst</string -->
+    <string name="symbol_karst">Karst</string>
     <string name="symbol_mine">Bergbau</string>
     <string name="symbol_paleo">Paläontologie</string>
     <string name="symbol_speleo">Speläologie</string>
@@ -618,7 +618,7 @@
     <!-- UNUSED string name="btn_erase">erase</string -->
     <!-- UNUSED string name="btn_cut">cut</string -->
     <!-- UNUSED string name="btn_vertical">Vertical</string -->
-    <!-- TODO string name="btn_horizontal">Horizontal</string -->
+    <string name="btn_horizontal">Horizontal</string>
 
     <!-- select button labels -->
     <!-- UNUSED string name="btn_section">Section</string -->
@@ -774,9 +774,9 @@
     <string name="title_draw_area">FLÄCHE %1$s</string>
     <string name="title_draw_line">LINIE %1$s</string>
     <string name="title_draw_point">PUNKT %1$s</string>
-    <string name="title_edit">Bearbeiten</string>
-    <!-- TODO string name="title_edit_user_station">Edit user station </string -->
-    <!-- TODO string name="title_edit_station">Edit station </string -->
+    <string name="title_edit">Element:</string>
+    <string name="title_edit_user_station">Benutzer-Messpunkt</string>
+    <string name="title_edit_station">Messpunkt</string>
     <string name="title_erase">Löschen</string>
     <string name="title_fixed">Fixpunkte</string>
     <string name="title_fixed_edit">Fixpunkt bearbeiten</string>
@@ -1072,8 +1072,8 @@
   <string name="pref_checkBT_summary">Bluetooth (de)aktivieren</string>
   <string name="pref_checkAttached_title">Messlinien-Check</string>
   <string name="pref_checkAttached_summary">Prüfe ob alle Messpunkte verbunden sind</string>
-  <!-- TODO string name="pref_checkExtend_title">Leg extend check</string -->
-  <!-- TODO string name="pref_checkExtend_summary">Check if leg extends are set</string -->
+  <string name="pref_checkExtend_title">Messlinien LRUD Check</string>
+  <string name="pref_checkExtend_summary">Prüfe ob alle Messlinien LRUD haben</string>
   <string name="pref_backup_number_title">Anzahl Backups</string>
   <string name="pref_backup_number_summary">Anzahl Skizzenbackups</string>
   <string name="pref_backup_interval_title">Backup Intervall</string>

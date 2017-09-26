@@ -1,5 +1,6 @@
 symbol line
 name nivokarstic_niche
+name-ru корозионно_нивальная_ниша
 th_name u:nivokarstic_niche
 group nivokarstic_niche
 color 0xcccccc 0xff

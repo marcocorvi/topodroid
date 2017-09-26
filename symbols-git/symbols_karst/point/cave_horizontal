@@ -1,5 +1,6 @@
 symbol point
 name cave_horizontal
+name-ru пещера_горизонтальная
 th_name u:cave_horizontal
 orientation no
 color 0xffcc66

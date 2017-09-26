@@ -1,5 +1,6 @@
 symbol line
 name doline_slope
+name-ru склон_воронки
 th_name u:doline_slope
 group doline
 color 0x66cc33 0xff

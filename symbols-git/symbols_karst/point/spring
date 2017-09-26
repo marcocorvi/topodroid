@@ -1,5 +1,6 @@
 symbol point
 name spring
+name-ru источник
 th_name u:spring
 orientation no
 color 0x3399ff
