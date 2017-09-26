@@ -395,7 +395,7 @@
     <string name="shots_delete">Messungen löschen?</string>
     <string name="shot_check">Messung als Kalibrierungstest markieren?</string>
     <string name="shot_from">von</string>
-    <string name="shot_info">Info</string>
+    <string name="shot_info">Manuelle Messung erfassen</string>
     <!-- UNUSED string name="shot_length">Länge</string -->
     <string name="shot_note">Notizen</string>
     <string name="shot_not_found">nicht gefunden</string>
