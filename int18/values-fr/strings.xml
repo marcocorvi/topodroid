@@ -680,6 +680,7 @@
     <string name="help_range">Déplacer portion de ligne</string>
     <!-- UNUSED string name="help_clear">Clear selection</string -->
     <string name="help_eraser">Efface un/des éléments du croquis</string>
+    <!-- TODO string name="help_select_mode">Selection tool</string -->
     <string name="help_erase_mode">Type de gomme</string>
     <string name="help_erase_size">Taille de gomme [S/M/L]</string>
     <string name="help_previous">Sélectionne l\'élément précédent dans la sélection</string>

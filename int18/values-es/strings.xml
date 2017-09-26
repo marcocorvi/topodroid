@@ -681,6 +681,7 @@
     <string name="help_range">Mover una parte de la línea</string>
     <!-- UNUSED string name="help_clear">Borrar selección</string -->
     <string name="help_eraser">Borrar dibujo</string>
+    <!-- TODO string name="help_select_mode">Selection tool</string -->
     <string name="help_erase_mode">Tipo de goma de borrar</string>
     <string name="help_erase_size">Tamaño goma de borrar [S/M/L]</string>
     <string name="help_previous">Anterior elemento de la selección</string>

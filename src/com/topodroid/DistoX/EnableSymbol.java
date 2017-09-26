@@ -44,6 +44,8 @@ class EnableSymbol implements View.OnClickListener
     return mEnabled != mSymbol.isEnabled();
   }
 
+  void setEnabled( boolean enabled ) { mEnabled = enabled; }
+
   // CheckBox     mCheckBox = null;
   // // ItemButton   mButton   = null;
   // TextView     mTextView = null;

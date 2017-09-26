@@ -130,6 +130,7 @@ public class ShotWindow extends Activity
 
   private static int izonsF[] = {
                         R.drawable.iz_left,
+                        R.drawable.iz_flip,
                         R.drawable.iz_right,
                         R.drawable.iz_delete,
                         R.drawable.iz_cancel
@@ -189,7 +190,7 @@ public class ShotWindow extends Activity
 
   // private RelativeLayout mFooter = null;
   private Button[] mButtonF;
-  private int mNrButtonF = 4;
+  private int mNrButtonF = 5;
 
   private StationSearch mSearch;
 
@@ -1207,6 +1208,14 @@ public class ShotWindow extends Activity
         for ( DBlock blk : mDataAdapter.mSelect ) {
           blk.setExtend( DBlock.EXTEND_LEFT );
           mApp.mData.updateShotExtend( blk.mId, mApp.mSID, DBlock.EXTEND_LEFT, true );
+        }
+        clearMultiSelect( );
+        updateDisplay();
+      } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // FLIP
+        for ( DBlock blk : mDataAdapter.mSelect ) {
+          if ( blk.flipExtend() ) {
+            mApp.mData.updateShotExtend( blk.mId, mApp.mSID, blk.getExtend(), true );
+          }
         }
         clearMultiSelect( );
         updateDisplay();

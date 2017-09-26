@@ -102,6 +102,8 @@ class SymbolAdapter extends ArrayAdapter< EnableSymbol >
 
   void updateSymbols( String prefix )
   {
+    if ( mItems.size() > 0 ) mItems.get(0).setEnabled( true ); // user symbols are always enabled
+
     for ( EnableSymbol symbol : mItems ) {
       if ( symbol.MustSave() ) {
         symbol.mSymbol.setEnabled( symbol.mEnabled );

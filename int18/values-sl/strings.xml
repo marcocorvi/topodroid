@@ -683,7 +683,8 @@
     <!-- TODO string name="help_range">Moving a portion of line</string -->
     <!-- UNUSED string name="help_clear">Pulisci selezione</string -->
     <string name="help_eraser">Način brisanja</string>
-    <!-- TODO string name="help_erase_mode">Eraser type</string -->
+    <!-- TODO string name="help_select_mode">Selection tool</string -->
+    <!-- TODO string name="help_erase_mode">Eraser tool</string -->
     <!-- TODO string name="help_erase_size">Eraser size [S/M/L]</string -->
     <string name="help_previous">Predhodni objekt izbora</string>
     <string name="help_next">Naslednji objekt izbora</string>

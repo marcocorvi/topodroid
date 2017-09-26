@@ -606,8 +606,8 @@
     <!-- UNUSED string name="btn_extrude">Extrude</string -->
     <!-- UNUSED string name="btn_erase">erase</string -->
     <!-- UNUSED string name="btn_cut">cut</string -->
-    <!-- UNUSED string name="btn_vertical">Vertical</string -->
-    <string name="btn_horizontal">Horizontal</string>
+    <!-- UNUSED string name="btn_vertical">Vert.</string -->
+    <string name="btn_horizontal">Horiz.</string>
 
     <!-- select buttin labels -->
     <!-- UNUSED string name="btn_section">Section</string -->
@@ -690,8 +690,9 @@
     <string name="help_range">Moving a portion of line</string>
     <!-- UNUSED string name="help_clear">Clear selection</string -->
     <string name="help_eraser">Erase mode</string>
-    <string name="help_erase_mode">Eraser type</string>
-    <string name="help_erase_size">Eraser size [S/M/L]</string>
+    <string name="help_select_mode">Selection tool</string>
+    <string name="help_erase_mode">Eraser tool</string>
+    <string name="help_erase_size">Select/Erase size [S/M/L]</string>
     <string name="help_previous">Previous item in the selection</string>
     <string name="help_next">Next item in the selection</string>
     <string name="help_recover">Reload sketch from backup</string>

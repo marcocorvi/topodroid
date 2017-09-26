@@ -682,6 +682,7 @@
     <string name="help_range">Sposta porzione di linea</string>
     <!-- UNUSED string name="help_clear">Pulisci selezione</string -->
     <string name="help_eraser">Modalità cancella</string>
+    <!-- TODO string name="help_select_mode">Selection tool</string -->
     <string name="help_erase_mode">Tipo di cancellino</string>
     <string name="help_erase_size">Misura cancellino [S/M/L]</string>
     <string name="help_previous">Precedente oggetto nella selezione</string>

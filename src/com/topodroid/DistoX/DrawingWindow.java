@@ -106,31 +106,31 @@ public class DrawingWindow extends ItemDrawer
   private static int IC_NEXT      = 14;
   private static int IC_JOIN      = 15;
   private static int IC_BORDER_NO = 18;
-  private static int IC_ERASE_ALL = 19; 
-  private static int IC_MEDIUM    = 20;
+  private static int IC_ERASE_ALL = 20; 
+  private static int IC_MEDIUM    = 21;
 
-  private static int IC_MENU          = 20+1;
-  private static int IC_EXTEND        = 20+2;
-  private static int IC_JOIN_NO       = 20+3;
-  private static int IC_CONT_START    = 20+4;     // index of continue icon
-  private static int IC_CONT_END      = 20+5;     // index of continue icon
-  private static int IC_CONT_BOTH     = 20+6;     // index of continue icon
-  private static int IC_CONT_CONTINUE = 20+7;     // index of continue icon
-  private static int IC_ADD           = 20+8;
-  private static int IC_BORDER_OK     = 20+9;
-  private static int IC_BORDER_BOX    = 20+10; 
-  private static int IC_ERASE_POINT   = 20+11; 
-  private static int IC_ERASE_LINE    = 20+12; 
-  private static int IC_ERASE_AREA    = 20+13; 
-  private static int IC_SMALL         = 20+14;
-  private static int IC_LARGE         = 20+15;
-  private static int IC_SELECT_ALL    = 20+16;
-  private static int IC_SELECT_POINT  = 20+17;
-  private static int IC_SELECT_LINE   = 20+18;
-  private static int IC_SELECT_AREA   = 20+19;
-  private static int IC_SELECT_SHOT   = 20+20;
-  private static int IC_SELECT_STATION= 20+21;
-  private static int IC_CONT_OFF      = 20+22;
+  private static int IC_MENU          = 21+1;
+  private static int IC_EXTEND        = 21+2;
+  private static int IC_JOIN_NO       = 21+3;
+  private static int IC_CONT_START    = 21+4;     // index of continue icon
+  private static int IC_CONT_END      = 21+5;     // index of continue icon
+  private static int IC_CONT_BOTH     = 21+6;     // index of continue icon
+  private static int IC_CONT_CONTINUE = 21+7;     // index of continue icon
+  private static int IC_ADD           = 21+8;
+  private static int IC_BORDER_OK     = 21+9;
+  private static int IC_BORDER_BOX    = 21+10; 
+  private static int IC_ERASE_POINT   = 21+11; 
+  private static int IC_ERASE_LINE    = 21+12; 
+  private static int IC_ERASE_AREA    = 21+13; 
+  private static int IC_SMALL         = 21+14;
+  private static int IC_LARGE         = 21+15;
+  private static int IC_SELECT_ALL    = 21+16;
+  private static int IC_SELECT_POINT  = 21+17;
+  private static int IC_SELECT_LINE   = 21+18;
+  private static int IC_SELECT_AREA   = 21+19;
+  private static int IC_SELECT_SHOT   = 21+20;
+  private static int IC_SELECT_STATION= 21+21;
+  private static int IC_CONT_OFF      = 21+22;
 
   private static int BTN_DOWNLOAD = 3;  // index of mButton1 download button
   private static int BTN_BLUETOOTH = 4; // index of mButton1 bluetooth button
@@ -173,31 +173,32 @@ public class DrawingWindow extends ItemDrawer
                         R.drawable.iz_delete,        // 17
                         R.drawable.iz_range_no,      // 18
 
-                        R.drawable.iz_erase_all,     // 19 ERASE Nr 3+2
-                        R.drawable.iz_medium,        // 20
+                        R.drawable.iz_select_all,    // only for help
+                        R.drawable.iz_erase_all,     // 20 ERASE Nr 3+2
+                        R.drawable.iz_medium,        // 21
 
-                        R.drawable.iz_menu,          // 20+1
-                        R.drawable.iz_extended,      // 20+2
-                        R.drawable.iz_join_no,       // 20+3
-                        R.drawable.iz_cont_start,    // 20+4
-                        R.drawable.iz_cont_end,      // 20+5
+                        R.drawable.iz_menu,          // 21+1
+                        R.drawable.iz_extended,      // 21+2
+                        R.drawable.iz_join_no,       // 21+3
+                        R.drawable.iz_cont_start,    // 21+4
+                        R.drawable.iz_cont_end,      // 21+5
                         R.drawable.iz_cont_both,
                         R.drawable.iz_cont_continue,
-                        R.drawable.iz_plus,          // 20+8
-                        R.drawable.iz_range_ok,      // 20+9
-                        R.drawable.iz_range_box,     // 20+10
-                        R.drawable.iz_erase_point,   // 20+11
-                        R.drawable.iz_erase_line,    // 20+12
-                        R.drawable.iz_erase_area,    // 20+13
-                        R.drawable.iz_small,         // 20+14
-                        R.drawable.iz_large,         // 20+15
-                        R.drawable.iz_select_all,    // all   20+16
-                        R.drawable.iz_select_point,  // point 20+17
-                        R.drawable.iz_select_line,   // line  20+18
-                        R.drawable.iz_select_area,   // area  20+19
-                        R.drawable.iz_select_shot,    // shot
-                        R.drawable.iz_select_station, // station
-                        R.drawable.iz_cont_off,       // cntinuation off
+                        R.drawable.iz_plus,           // 21+8
+                        R.drawable.iz_range_ok,       // 21+9
+                        R.drawable.iz_range_box,      // 21+10
+                        R.drawable.iz_erase_point,    // 21+11
+                        R.drawable.iz_erase_line,     // 21+12
+                        R.drawable.iz_erase_area,     // 21+13
+                        R.drawable.iz_small,          // 21+14
+                        R.drawable.iz_large,          // 21+15
+                        R.drawable.iz_select_all,     // 21+16 all
+                        R.drawable.iz_select_point,   // 21+17 point
+                        R.drawable.iz_select_line,    // 21+18 line
+                        R.drawable.iz_select_area,    // 21+19 area
+                        R.drawable.iz_select_shot,    // 21+20 shot
+                        R.drawable.iz_select_station, // 21+21 station
+                        R.drawable.iz_cont_off,       // 21+22 continuation off
                       };
   private static int menus[] = {
                         R.string.menu_switch,
@@ -237,6 +238,7 @@ public class DrawingWindow extends ItemDrawer
                         R.string.help_note_plot,
                         R.string.help_delete_item,
                         R.string.help_range,
+                        R.string.help_select_mode,
                         R.string.help_erase_mode,
                         R.string.help_erase_size
                       };
@@ -1115,13 +1117,12 @@ public class DrawingWindow extends ItemDrawer
   // set the button3 by the type of the hot-item
   private void setButton3Item( SelectionPoint pt )
   {
-    mHotItemType = -1;
     inLinePoint  = false;
     BitmapDrawable bm = mBMjoin_no;
     String title = getResources().getString( R.string.title_edit );
     if ( pt != null ) {
-      DrawingPath item = pt.mItem;
       mHotItemType = pt.type();
+      DrawingPath item = pt.mItem;
       switch ( mHotItemType ) {
         case DrawingPath.DRAWING_PATH_FIXED:
           mActivity.setTitle( title + " " + item.mBlock.mFrom + "=" + item.mBlock.mTo );
@@ -1144,15 +1145,18 @@ public class DrawingWindow extends ItemDrawer
           break;
         case DrawingPath.DRAWING_PATH_STATION:
           title = getResources().getString( R.string.title_edit_user_station );
-          mActivity.setTitle( title + ((DrawingStationPath)item).name() );
+          mActivity.setTitle( title + " " + ((DrawingStationPath)item).name() );
           break;
         case DrawingPath.DRAWING_PATH_NAME:
           title = getResources().getString( R.string.title_edit_station );
-          mActivity.setTitle( title + ((DrawingStationName)item).name() );
+          mActivity.setTitle( title + " " + ((DrawingStationName)item).name() );
           break;
         default:
           mActivity.setTitle( title );
       }
+    } else {
+      mHotItemType = -1;
+      mActivity.setTitle( title );
     }
     mButton3[ BTN_JOIN ].setBackgroundDrawable( bm );
   }
@@ -3413,6 +3417,7 @@ public class DrawingWindow extends ItemDrawer
           mListView.invalidate();
           break;
         case MODE_EDIT:
+          clearSelected();
           setTheTitle();
           mDrawingSurface.setDisplayPoints( true );
           mListView.setAdapter( mButtonView3.mAdapter );
@@ -4678,7 +4683,8 @@ public class DrawingWindow extends ItemDrawer
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_PLOT );
         mActivity.startActivity( intent );
       } else if ( p++ == pos ) { // HELP
-        int nn = NR_BUTTON1 + NR_BUTTON2 - 3 + NR_BUTTON5 - 5 + ( TDLevel.overBasic? mNrButton3 - 3: 0 );
+        // 1 for select-tool
+        int nn = 1 + NR_BUTTON1 + NR_BUTTON2 - 3 + NR_BUTTON5 - 5 + ( TDLevel.overBasic? mNrButton3 - 3: 0 );
         // Log.v("DistoX", "Help menu, nn " + nn );
         (new HelpDialog(mActivity, izons, menus, help_icons, help_menus, nn, help_menus.length ) ).show();
       }

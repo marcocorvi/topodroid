@@ -683,6 +683,7 @@
     <string name="help_range">Vonalelem mozgatása</string>
     <!-- UNUSED string name="help_clear">Clear selection</string -->
     <string name="help_eraser">Radír mód</string>
+    <!-- TODO string name="help_select_mode">Selection tool</string -->
     <string name="help_erase_mode">Radír típus</string>
     <string name="help_erase_size">Radír mérete [S/M/L]</string>
     <string name="help_previous">Előző elem a kiválasztásban</string>

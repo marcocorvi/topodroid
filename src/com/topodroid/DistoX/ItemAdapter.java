@@ -116,7 +116,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
       }
     }
     if ( mPos == -1 ) {
-      mPos = ( mItems.size() > 1 )? 1 : 0;
+      mPos = ( mItems.size() > 1 )? 1 : 0; // user symbols cannot be disabled: are always present
       mItems.get( mPos ).setChecked( true );
     }
   }

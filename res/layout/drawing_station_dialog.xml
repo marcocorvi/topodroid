@@ -146,7 +146,6 @@
       >
 
       <CheckBox android:id="@+id/cb_horizontal"
-        style="@style/button_default"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
         android:layout_marginRight="@dimen/marginh"
