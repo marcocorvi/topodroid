@@ -188,6 +188,7 @@
     <string name="error_lat_required">Необходима геогр. широчина</string>
     <string name="error_long_required">Необходима геогр. дължина</string>
     <string name="error_name_required">Необходимо име</string>
+    <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Необходим репер</string>
     <!-- UNUSED string name="error_station_already_fixed">Репера вече има координати</string -->
     <string name="error_station_required">Необходим репер</string>

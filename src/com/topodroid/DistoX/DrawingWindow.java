@@ -2993,7 +2993,7 @@ public class DrawingWindow extends ItemDrawer
                 if ( sn != null ) {
                   boolean barrier = mNum.isBarrier( sn.mName );
                   boolean hidden  = mNum.isHidden( sn.mName );
-                  // new DrawingStationDialog( mActivity, this, sn, barrier, hidden ).show();
+                  // new DrawingStationDialog( mActivity, this, sn, barrier, hidden, mApp.mXSections ).show();
                   openXSection( sn, sn.mName, mType );
                 }
               }
@@ -3142,29 +3142,37 @@ public class DrawingWindow extends ItemDrawer
       mDrawingSurface.clearXSectionOutline( scrap_name ); // clear outline if any
     }
 
-    String getXSectionNick( String name, long type )
+    // st_name = station name
+    // type = parent type
+    String getXSectionNick( String st_name, long type )
     {
       // parent name = mName
-      long xtype = -1;
+      // long xtype = -1;
       String xs_id = null;
       if ( type == PlotInfo.PLOT_PLAN ) {
-        xs_id = "xs-" + name;
-        xtype = PlotInfo.PLOT_X_SECTION;
+        xs_id = "xs-" + st_name;
+        // xtype = PlotInfo.PLOT_X_SECTION;
       } else if ( PlotInfo.isProfile( type ) ) {
-        xs_id = "xh-" + name;
-        xtype = PlotInfo.PLOT_XH_SECTION;
+        xs_id = "xh-" + st_name;
+        // xtype = PlotInfo.PLOT_XH_SECTION;
       } else {
         return "";
       }
+      if ( ! mApp.mXSections ) xs_id = xs_id + "-" + mName;
+
       PlotInfo plot = mApp.mXSections ?
                       mData.getPlotInfo( mApp.mSID, xs_id )
                     : mData.getPlotSectionInfo( mApp.mSID, xs_id, mName );
-      if ( plot == null ) return "";
+      if ( plot == null ) {
+        // Log.v("DistoXX", "null plot info for " + xs_id + " mName " + mName );
+        return "";
+      }
+      // Log.v("DistoXX", "plot info for " + xs_id + " mName " + mName + " nick <" + plot.nick + ">" );
       return plot.nick;
     }
 
     // X-SECTION at station B where A--B--C
-    // @param name station name
+    // @param st_name station name
     // @param type type of the plot where the x-section is defined
     // @param azimuth clino  section plane direction
     //        direct: azimuth = average azimuth of AB and BC
@@ -3177,21 +3185,24 @@ public class DrawingWindow extends ItemDrawer
     // if plot type = PROFILE
     //    clino = -90, 0, +90  according to horiz
     //
-    void openXSection( DrawingStationName st, String name, long type,
+    void openXSection( DrawingStationName st, String st_name, long type,
                        float azimuth, float clino, boolean horiz, String nick )
     {
+      // Log.v("DistoXX", "XSection nick <" + nick + "> st_name <" + st_name + "> plot " + mName );
       // parent plot name = mName
       long xtype = -1;
       String xs_id = null;
       if ( type == PlotInfo.PLOT_PLAN ) {
-        xs_id = "xs-" + name;
+        xs_id = "xs-" + st_name;
         xtype = PlotInfo.PLOT_X_SECTION;
       } else if ( PlotInfo.isProfile( type ) ) {
-        xs_id = "xh-" + name;
+        xs_id = "xh-" + st_name;
         xtype = PlotInfo.PLOT_XH_SECTION;
       } else {
         return;
       }
+
+      if ( ! mApp.mXSections ) xs_id = xs_id + "-" + mName;
 
       PlotInfo plot = mApp.mXSections ?
                       mData.getPlotInfo( mApp.mSID, xs_id )
@@ -3211,13 +3222,13 @@ public class DrawingWindow extends ItemDrawer
         } else { // type == PlotInfo.PLOT_PLAN
           clino = 0;
         }
-        // Log.v("DistoX", "new X section azimuth " + azimuth + " clino " + clino );
+        // Log.v("DistoXX", "new at-station X-section " + xs_id + " st_name " + st_name + " nick <" + nick + ">" );
 
         if ( mApp.mXSections ) {
-          long pid = mApp.insert2dSection( mApp.mSID, xs_id, xtype, name, "", azimuth, clino, null, nick );
+          long pid = mApp.insert2dSection( mApp.mSID, xs_id, xtype, st_name, "", azimuth, clino, null, nick );
           plot = mData.getPlotInfo( mApp.mSID, xs_id );
         } else {
-          long pid = mApp.insert2dSection( mApp.mSID, xs_id, xtype, name, "", azimuth, clino, mName, nick );
+          long pid = mApp.insert2dSection( mApp.mSID, xs_id, xtype, st_name, "", azimuth, clino, mName, nick );
           plot = mData.getPlotSectionInfo( mApp.mSID, xs_id, mName );
         }
 
@@ -3244,15 +3255,15 @@ public class DrawingWindow extends ItemDrawer
       }
     }
 
-    void toggleStationSplays( String name )
+    void toggleStationSplays( String st_name )
     {
-      mDrawingSurface.toggleStationSplays( name );
+      mDrawingSurface.toggleStationSplays( st_name );
     }
 
-    void toggleStationHidden( String name, boolean is_hidden )
+    void toggleStationHidden( String st_name, boolean is_hidden )
     {
       String hide = mPlot1.hide.trim();
-      // Log.v("DistoX", "toggle station " + name + " hidden " + is_hidden + " hide: <" + hide + ">" );
+      // Log.v("DistoX", "toggle station " + st_name + " hidden " + is_hidden + " hide: <" + hide + ">" );
       String new_hide = "";
       boolean add = false;
       boolean drop = false;
@@ -3264,7 +3275,7 @@ public class DrawingWindow extends ItemDrawer
         int k = 0;
         for (; k < hidden.length; ++k ) {
           if ( hidden[k].length() > 0 ) {
-            if ( hidden[k].equals( name ) ) { // N.B. hidden[k] != null
+            if ( hidden[k].equals( st_name ) ) { // N.B. hidden[k] != null
               drop = true;
             } else {
               new_hide = new_hide + " " + hidden[k];
@@ -3278,11 +3289,11 @@ public class DrawingWindow extends ItemDrawer
 
       if ( add && ! is_hidden ) {
         if ( hide == null || hide.length() == 0 ) {
-          hide = name;
+          hide = st_name;
         } else {
-          hide = hide + " " + name;
+          hide = hide + " " + st_name;
         }
-        // Log.v( "DistoX", "addStationHidden " + name + " hide <" + hide + ">" );
+        // Log.v( "DistoX", "addStationHidden " + st_name + " hide <" + hide + ">" );
         mData.updatePlotHide( mPid1, mSid, hide );
         mData.updatePlotHide( mPid2, mSid, hide );
         mPlot1.hide = hide;
@@ -3294,21 +3305,21 @@ public class DrawingWindow extends ItemDrawer
         mPlot1.hide = new_hide;
         mPlot2.hide = new_hide;
         h = -1; // un-hide
-        // Log.v( "DistoX", "dropStationHidden " + name + " hide <" + new_hide + ">" );
+        // Log.v( "DistoX", "dropStationHidden " + st_name + " hide <" + new_hide + ">" );
       }
       // Log.v("DistoX", "toggle station hidden: hide <" + hide + "> H " + h );
 
       if ( h != 0 ) {
-        mNum.setStationHidden( name, h );
+        mNum.setStationHidden( st_name, h );
         recomputeReferences( mZoom, false );
       }
     }
-    //  mNum.setStationHidden( name, (hidden? -1 : +1) ); // if hidden un-hide(-1), else hide(+1)
+    //  mNum.setStationHidden( st_name, (hidden? -1 : +1) ); // if hidden un-hide(-1), else hide(+1)
 
-    void toggleStationBarrier( String name, boolean is_barrier ) 
+    void toggleStationBarrier( String st_name, boolean is_barrier ) 
     {
       String view = mPlot1.view.trim();
-      // Log.v("DistoX", "toggle station " + name + " barrier " + is_barrier + " view: <" + view + ">" );
+      // Log.v("DistoX", "toggle station " + st_name + " barrier " + is_barrier + " view: <" + view + ">" );
       String new_view = "";
       boolean add = false;
       boolean drop = false;
@@ -3320,7 +3331,7 @@ public class DrawingWindow extends ItemDrawer
         int k = 0;
         for (; k < barrier.length; ++k ) {
           if ( barrier[k].length() > 0 ) {
-            if ( barrier[k].equals( name ) ) { // N.B. barrier[k] != null
+            if ( barrier[k].equals( st_name ) ) { // N.B. barrier[k] != null
               drop = true;
             } else {
               new_view = new_view + " " + barrier[k];
@@ -3334,11 +3345,11 @@ public class DrawingWindow extends ItemDrawer
 
       if ( add && ! is_barrier ) {
         if ( view == null || view.length() == 0 ) {
-          view = name;
+          view = st_name;
         } else {
-          view = view + " " + name;
+          view = view + " " + st_name;
         }
-        // Log.v( "DistoX", "addStationBarrier " + name + " view <" + view + ">" );
+        // Log.v( "DistoX", "addStationBarrier " + st_name + " view <" + view + ">" );
         mData.updatePlotView( mPid1, mSid, view );
         mData.updatePlotView( mPid2, mSid, view );
         mPlot1.view = view;
@@ -3354,7 +3365,7 @@ public class DrawingWindow extends ItemDrawer
       // Log.v("DistoX", "toggle station barrier: view <" + view + "> H " + h );
 
       if ( h != 0 ) {
-        mNum.setStationBarrier( name, h );
+        mNum.setStationBarrier( st_name, h );
         recomputeReferences( mZoom, false );
       }
     }
@@ -4071,7 +4082,7 @@ public class DrawingWindow extends ItemDrawer
               boolean barrier = mNum.isBarrier( sn.name() );
               boolean hidden  = mNum.isHidden( sn.name() );
               List< DBlock > legs = mData.selectShotsAt( mApp.mSID, sn.name(), true ); // select "independent" legs
-              new DrawingStationDialog( mActivity, this, sn, path, barrier, hidden, legs ).show();
+              new DrawingStationDialog( mActivity, this, sn, path, barrier, hidden, mApp.mXSections, legs ).show();
               break;
             case DrawingPath.DRAWING_PATH_POINT:
               DrawingPointPath point = (DrawingPointPath)(sp.mItem);

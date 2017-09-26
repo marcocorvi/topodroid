@@ -26,15 +26,15 @@ When the midline beyond the station is hidden, there is a button to revert and s
 
 <img src="hiding_stations.png" alt="hiding stations"><br><p>
 
-<b>At-station cross-section</b><br>
-Cross sections can be created at stations.
-X-sections in plan view are in the vertical plane (their plane is determined bygiving the azimuth).
+<b>At-station x-section</b><br>
+X-sections can be created at stations.
+In plan view they are in the vertical plane (their plane is determined by the azimuth).
 In profile view, x-section can have an inclination. However when selected through the "stations" checkboxes
 they are vertical if the legs inclination is below a specified value (a setting), otherwise they are
 horizontal.
 <br>
 
-If the station has only two legs attached the plane of the cross-section can be inferred by TopoDroid
+If the station has only two legs attached the plane of the x-section can be inferred by TopoDroid
 (the bisecant of the angle between the two legs, or perpendicular to the leg of there is only one).
 There remains only the ambiguity about from which side
 of the plane the x-section is looked at. This is resolved providing two buttons that specify the direction of 
@@ -44,16 +44,23 @@ view with a pair of stations.
 With the last button the user can pick the x-section direction pointing with the android camera.
 <br><p>
 
-At-station cross-sections can be "private" to the sketch in which they have been defined or shared
+At-station x-sections can be "private" to the sketch in which they have been defined or shared
 among all the sketches. In the latter case, in all the sketches the edit dialog of the station opens
-the same cross-section. In the former case, an at-station cross-section is re-opened only thru
+the same x-section. In the former case, an at-station x-section is re-opened only thru
 the station edit dialog in the sketch where it has been defined.<br><p>
 
-In either case the cross-section is exported only in the sketch that contains the section point,
+In either case the x-section is exported only in the sketch that contains the section point,
 ie, in the sketch where is has been defined.<br><p>
 
-The choice between "private" and "shared" at-station cross-sections is made when the survey is created
-and cannot be modified afterward.<br><p>
+The choice between "private" and "shared" at-station x-sections is made when the survey is created
+and cannot be modified afterward. When at-station x-sections are private, you may enter a nickname to
+distinguish x-sections at the same station in different sketches.
+<br><p>
+
+The name of an at-station x-section in the plan view is composed of the "survey_name", "xs", the "station_name"
+and, if the x-sections are private, the "sketch_name". For example, "survey-xs-0-1p".
+The name of an at-station x-section in the profile view has "xh" instead of "xs".
+<br><p>
 
 
 </body></html>

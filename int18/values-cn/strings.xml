@@ -186,6 +186,7 @@
     <string name="error_lat_required">需输入纬度</string>
     <string name="error_long_required">需输入经度</string>
     <string name="error_name_required">需输入名称</string>
+    <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">需输入参考测点</string>
     <!-- UNUSED string name="error_station_already_fixed">测点已有坐标</string -->
     <string name="error_station_required">需输入测点</string>

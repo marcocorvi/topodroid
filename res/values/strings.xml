@@ -189,6 +189,7 @@
     <string name="error_lat_required">Latitude required</string>
     <string name="error_long_required">Longitude required</string>
     <string name="error_name_required">Name required</string>
+    <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Reference station required</string>
     <!-- UNUSED string name="error_station_already_fixed">Station already with coordinates</string -->
     <string name="error_station_required">Station required</string>

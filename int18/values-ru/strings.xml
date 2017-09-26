@@ -188,6 +188,7 @@
     <string name="error_lat_required">Требуется широта</string>
     <string name="error_long_required">Требуется долгота</string>
     <string name="error_name_required">Требуется название</string>
+    <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Требуется привязка к пикету</string>
     <!-- UNUSED string name="error_station_already_fixed">Пикет уже имеет координаты</string -->
     <string name="error_station_required">Требуется пикет</string>

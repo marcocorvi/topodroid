@@ -192,6 +192,7 @@
     <string name="error_lat_required">Breite erforderlich</string>
     <string name="error_long_required">Länge erforderlich</string>
     <string name="error_name_required">Name erforderlich</string>
+    <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Referenzmesspunkt erforderlich</string>
     <!-- UNUSED string name="error_station_already_fixed">Dauerhafter Messpunkt</string -->
     <string name="error_station_required">Messpunkt erforderlich</string>

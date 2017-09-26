@@ -64,13 +64,14 @@ public class DrawingStationDialog extends MyDialog
     private boolean mIsBarrier;
     private boolean mIsHidden;
     private boolean mSensors;
+    private boolean mGlobalXSections;
     private float mBearing;
     private float mClino;
     private List<DBlock> mBlk;
 
     public DrawingStationDialog( Context context, DrawingWindow parent, DrawingStationName station,
                                  DrawingStationPath path,
-                                 boolean is_barrier, boolean is_hidden, List<DBlock> blk )
+                                 boolean is_barrier, boolean is_hidden, boolean global_xsections, List<DBlock> blk )
     {
       super( context, R.string.DrawingStationDialog );
       mParent   = parent;
@@ -79,8 +80,8 @@ public class DrawingStationDialog extends MyDialog
       mStationName = mStation.name();
       mIsBarrier = is_barrier; 
       mIsHidden  = is_hidden; 
+      mGlobalXSections = global_xsections;
       mBlk       = blk;
-      // Log.v("DistoX", "STATION " + station.name() + " " + station.cx + " " + station.cy );
     }
 
     @Override
@@ -214,14 +215,25 @@ public class DrawingStationDialog extends MyDialog
               MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_compass ) );
             mSensors = true;
             mBtnXSection.setBackgroundColor( TDColor.MID_GRAY );
+            if ( mGlobalXSections ) {
+              mETnick.setVisibility( View.GONE );
+            }
           } else {
-            mETnick.setText( mParent.getXSectionNick( mStationName, mParent.getPlotType() ) );
+            if ( mGlobalXSections ) {
+              mETnick.setVisibility( View.GONE );
+            } else {
+              String nick = mParent.getXSectionNick( mStationName, mParent.getPlotType() );
+              mETnick.setText( nick );
+              mETnick.setFocusable( false );
+              // Log.v("DistoXX", "Station " + mStationName + " nick <" + nick + ">" );
+            }
             mBtnXSection.setOnClickListener( this );
             mCBhorizontal.setVisibility( View.GONE );
             mBtnDirect.setVisibility( View.GONE );
             mBtnInverse.setVisibility( View.GONE );
           } 
         } else {
+          mETnick.setVisibility( View.GONE );
           mBtnXSection.setVisibility( View.GONE );
           mCBhorizontal.setVisibility( View.GONE );
           mBtnXDelete.setVisibility( View.GONE );
@@ -250,7 +262,8 @@ public class DrawingStationDialog extends MyDialog
       // TDLog.Log( TDLog.LOG_INPUT, "Drawing Station Dialog onClick() " + view.toString() );
       Button b = (Button)view;
 
-      String nick = (mETnick.getText() != null)? mETnick.getText().toString() : "";
+      String nick = "";
+
       if ( b == mBtnOK ) {
         if ( mPath == null ) {
           mParent.addStationPoint( mStation );
@@ -268,8 +281,14 @@ public class DrawingStationDialog extends MyDialog
       } else if ( b == mBtnSplays ) {
         mParent.toggleStationSplays( mStationName );
       } else if ( b == mBtnXSection ) {
-        mParent.openXSection( mStation, mStationName, mParent.getPlotType(),
-            mBearing, mClino, false, nick );
+        if ( ! mGlobalXSections ) {
+          nick = (mETnick.getText() != null)? mETnick.getText().toString() : "";
+          // if ( nick.length() == 0 ) {
+          //   mETnick.setError( mContext.getResources().getString( R.string.error_nick_required ) );
+          //   return;
+          // }
+        }
+        mParent.openXSection( mStation, mStationName, mParent.getPlotType(), mBearing, mClino, false, nick );
       } else if ( b == mBtnXDelete ) {
         if ( mSensors ) {
           TimerTask timer = new TimerTask( mContext, this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
@@ -279,27 +298,45 @@ public class DrawingStationDialog extends MyDialog
           mParent.deleteXSection( mStation, mStationName, mParent.getPlotType() );
         }
       } else if ( b == mBtnDirect ) {
-        mParent.openXSection( mStation, mStationName, mParent.getPlotType(),
-             mBearing, mClino, mCBhorizontal.isChecked(), nick );
+        if ( ! mGlobalXSections ) {
+          nick = (mETnick.getText() != null)? mETnick.getText().toString() : "";
+          // if ( nick.length() == 0 ) {
+          //   mETnick.setError( mContext.getResources().getString( R.string.error_nick_required ) );
+          //   return;
+          // }
+        }
+        mParent.openXSection( mStation, mStationName, mParent.getPlotType(), mBearing, mClino, mCBhorizontal.isChecked(), nick );
       } else if ( b == mBtnInverse ) {
+        if ( ! mGlobalXSections ) {
+          nick = (mETnick.getText() != null)? mETnick.getText().toString() : "";
+          // if ( nick.length() == 0 ) {
+          //   mETnick.setError( mContext.getResources().getString( R.string.error_nick_required ) );
+          //   return;
+          // }
+        }
         mBearing += 180;
         if ( mBearing >= 360 ) mBearing -= 360;
         mClino = -mClino;
-        mParent.openXSection( mStation, mStationName, mParent.getPlotType(),
-              mBearing, mClino,  mCBhorizontal.isChecked(), nick );
+        mParent.openXSection( mStation, mStationName, mParent.getPlotType(), mBearing, mClino, mCBhorizontal.isChecked(), nick );
       }
       dismiss();
     }
 
     public void setBearingAndClino( float b, float c, int orientation )
     {
-      String nick = (mETnick.getText() != null)? mETnick.getText().toString() : "";
+      String nick = "";
+      if ( ! mGlobalXSections ) {
+        nick = (mETnick.getText() != null)? mETnick.getText().toString() : "";
+        // if ( nick.length() == 0 ) {
+        //   mETnick.setError( mContext.getResources().getString( R.string.error_nick_required ) );
+        //   return;
+        // }
+      }
       if ( mParent.getPlotType() == PlotInfo.PLOT_PLAN ) {
         c = 0;
       } else { // PlotInfo.isProfile( type )
       }
-      mParent.openXSection( mStation, mStationName, mParent.getPlotType(),
-          b, c, mCBhorizontal.isChecked(), nick );
+      mParent.openXSection( mStation, mStationName, mParent.getPlotType(), b, c, mCBhorizontal.isChecked(), nick );
       dismiss();
     }
 

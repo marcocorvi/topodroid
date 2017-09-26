@@ -186,6 +186,7 @@
     <string name="error_lat_required">Se requiere Latitud</string>
     <string name="error_long_required">Se requiere Longitud</string>
     <string name="error_name_required">Introducir nombre</string>
+    <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Introducir referencia de estación</string>
     <!-- UNUSED string name="error_station_already_fixed">La estación ya tiene coordenadas</string -->
     <string name="error_station_required">Introducir estación</string>

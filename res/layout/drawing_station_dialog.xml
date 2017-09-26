@@ -124,34 +124,37 @@
         />
     </LinearLayout>
 
-    <EditText android:id="@+id/nick"
-      style="@style/edit_text"
-      android:layout_width="fill_parent" 
-      android:hint="@string/section_name"
-    />
-
-    <Button android:id="@+id/btn_xsection"
-      style="@style/button_default"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
-      android:layout_marginTop="@dimen/marginv"
-      android:text="@string/button_xsection"
-    />
-
     <LinearLayout android:id="@+id/layout_xsection"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/marginv"
       android:orientation="horizontal" 
       >
+      <Button android:id="@+id/btn_xsection"
+        style="@style/button_default"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:text="@string/button_xsection"
+      />
+      <EditText android:id="@+id/nick"
+        style="@style/edit_text"
+        android:layout_width="fill_parent" 
+        android:hint="@string/section_name"
+      />
+    </LinearLayout>
 
+    <LinearLayout android:id="@+id/layout_xsection_data"
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/marginv"
+      android:orientation="horizontal" 
+      >
       <CheckBox android:id="@+id/cb_horizontal"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
         android:layout_marginRight="@dimen/marginh"
         android:text="@string/btn_horizontal"
       />
-
       <Button android:id="@+id/btn_direct"
         style="@style/button_default"
         android:layout_width="wrap_content" 
@@ -170,7 +173,6 @@
         android:layout_height="wrap_content" 
         android:text="@string/button_delete"
       />
-
     </LinearLayout>
 
     <LinearLayout 

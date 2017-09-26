@@ -3,7 +3,7 @@
 
 The Sketch button of the "Shot data" window opens the dialog with the list of sketches, besides the "New Sketch" button. Tap on this button to create a new survey sketch.<br><p>
 
-Each sketch is made of two sketch files: one for the plan view, the other for the profile view (either extended or projected). Cross sections have only one file. A new sketch is opened in the plan view. Afterwards the sketch dialog shows two columns, one for the plan, the other for the profile view, and you can choose which one to open from.<br><p>
+Each sketch is made of two sketch files: one for the plan view, the other for the profile view (either extended or projected). X-sections have only one file. A new sketch is opened in the plan view. Afterwards the sketch dialog shows two columns, one for the plan, the other for the profile view, and you can choose which one to open from.<br><p>
 
 The plan view displays the projection on the horizontal plane of midline and splay shots. Splays above a certain inclination are shown as dashed lines. For example, for the plan view in figure, the splays in the light region are projected on the vertical plane of shot 1-2, those in the dark region on the vertical plane of 0-1.<br><p>  
 
@@ -71,7 +71,7 @@ The <b>edit</b> [A] mode has, besides the green buttons:
 When there are selected items the first two buttons become <u>previous/next</u> navigation buttons in the set
 of the selected items.<br><p>
 
-The buttons are somewhat different for cross-section sketches.
+The buttons are somewhat different for x-section sketches.
 In the <b>move</b> mode the buttons "download", "bluetooth", "switch", and azimuth", are not shown, but there
 is a button to select which splay to show. It cycles thru four states: "both", "viewed station", "behind station", "none".
 Accordingly, the drawing references dialog has no box for the splays.
@@ -82,7 +82,7 @@ Accordingly, the drawing references dialog has no box for the splays.
 <h4>MENUS</h4>
 <ul style="margin-top=0">
 <li><u>Export</u>: the sketch can be <a href="page_plot_export.htm">exported</a> as <i>Therion</i> 2D file(s), <i>cSurvey</i> (a single file), PNG (two files), DXF (two files), and SVG (two files).</li>
-<li><a href="page_stat2.htm">Statistics</a>. For cross-sections this is just the section area.</li>
+<li><a href="page_stat2.htm">Statistics</a>. For x-sections this is just the section area.</li>
 <li><u>Reload</u> the sketch from a <a href="page_backup.htm">backup copy</a>.</li>
 <li><u>Zoom</u> the sketch to fit into the display.</li>
 <li><u>Switch</u> to another sketch.</li>
@@ -112,7 +112,7 @@ Accordingly, the drawing references dialog has no box for the splays.
     <ul style="margin-top:0; margin-bottom:0">
     <li>Line <i>tracing style</i>: fine, normal, coarse, or "bezier" (interpolated-curve)</li>
     <li>Line <i>thickness</i></li>
-    <li><i>Direction tick length</i> for cross-section lines [default 5 px]</li>
+    <li><i>Direction tick length</i> for x-section lines [default 5 px]</li>
     <li>Line <i>point spacing</i>: distance between line points in normal style [default 5 px] </li>
     <li><i>Bezier accuracy</i> determines the number of base points in the interpolating curve. The smaller the more points. The default value is 1.0.</li>
     <li><i>Bezier corner</i>. Even an interpolated line should have corners, when there is a sharp turn at a point. Small values (0.2) make the corner sharper. Large values (20.0) make them rounded.</li>
@@ -122,7 +122,7 @@ Accordingly, the drawing references dialog has no box for the splays.
     <ul style="margin-top:0; margin-bottom:0">
   <li><i>Splay plan-view threshold</i>: splay shots with inclination above this threshold are hidden in the plan-view</li>
   <li><i>Splay dash threshold</i>: splay shots with inclination above this threshold are drawn with a dashed line</li>
-  <li><i>Cross-section H-threshold</i>: the inclination angle above which a cross-section is horizontal. (Below it cross-section are vertical).</li>
+  <li><i>X-section H-threshold</i>: the inclination angle above which a x-section is horizontal. (Below it x-section are vertical).</li>
     <li>Survey line <i>thickness</i> (midline/splay)</li>
     <li>Station name <i>text size</i> [default 18 pt] [N]</li>
     <li>Size of <i>green dots</i> displayed in <b>edit</b> mode [default 5 px] [A]</li>
