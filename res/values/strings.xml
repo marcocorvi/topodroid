@@ -365,7 +365,7 @@
     <!-- UNUSED string name="converted_tdr2th2">Converted sketches binary files to th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Overwrite th2 sketch files ?</string -->
     <string name="section_area">Section area: %1$.1f</string>
-    <string name="section_name">section name</string>
+    <string name="section_name">section comment</string>
     <string name="scrap_outline">Sketch outline</string>
 
     <!-- UNUSED string name="sensor">sensor</string -->

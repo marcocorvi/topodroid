@@ -360,7 +360,7 @@
     <!-- UNUSED string name="converted_tdr2th2">Archivos binarios de dibujo convertidos a Th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">¿Sobrescribir archivos de dibujo Th2?</string -->
     <string name="section_area">Sección de área: %1$.1f</string>
-    <!-- TODO string name="section_name">section name</string -->
+    <!-- TODO string name="section_name">section comment</string -->
     <string name="scrap_outline">Dibujo de topografía</string>
 
     <!-- UNUSED string name="sensor">Sensor</string -->

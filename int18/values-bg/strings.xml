@@ -363,7 +363,7 @@
     <!-- UNUSED string name="converted_tdr2th2">Конвертиране на файлове със скици от двоични в th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Презаписване на съшествуващи th2 файлове?</string -->
     <string name="section_area">Площ на сечение: %1$.1f</string>
-    <!-- TODO string name="section_name">section name</string -->
+    <!-- TODO string name="section_name">section comment</string -->
     <string name="scrap_outline">Очертание на скицата</string>
 
     <!-- UNUSED string name="sensor">сензор</string -->

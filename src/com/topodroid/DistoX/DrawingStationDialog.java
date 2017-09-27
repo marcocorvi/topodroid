@@ -215,16 +215,17 @@ public class DrawingStationDialog extends MyDialog
               MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_compass ) );
             mSensors = true;
             mBtnXSection.setBackgroundColor( TDColor.MID_GRAY );
-            if ( mGlobalXSections ) {
-              mETnick.setVisibility( View.GONE );
-            }
+            // if ( mGlobalXSections ) {
+            //   mETnick.setVisibility( View.GONE );
+            // }
           } else {
-            if ( mGlobalXSections ) {
-              mETnick.setVisibility( View.GONE );
-            } else {
-              String nick = mParent.getXSectionNick( mStationName, mParent.getPlotType() );
+            // if ( mGlobalXSections ) {
+            //   mETnick.setVisibility( View.GONE );
+            // } else
+            String nick = mParent.getXSectionNick( mStationName, mParent.getPlotType() );
+            if ( nick != null ) {
               mETnick.setText( nick );
-              mETnick.setFocusable( false );
+              // mETnick.setFocusable( false ); 
               // Log.v("DistoXX", "Station " + mStationName + " nick <" + nick + ">" );
             }
             mBtnXSection.setOnClickListener( this );
@@ -232,7 +233,7 @@ public class DrawingStationDialog extends MyDialog
             mBtnDirect.setVisibility( View.GONE );
             mBtnInverse.setVisibility( View.GONE );
           } 
-        } else {
+        } else { // level <= advanced
           mETnick.setVisibility( View.GONE );
           mBtnXSection.setVisibility( View.GONE );
           mCBhorizontal.setVisibility( View.GONE );
@@ -263,7 +264,6 @@ public class DrawingStationDialog extends MyDialog
       Button b = (Button)view;
 
       String nick = "";
-
       if ( b == mBtnOK ) {
         if ( mPath == null ) {
           mParent.addStationPoint( mStation );
@@ -281,13 +281,11 @@ public class DrawingStationDialog extends MyDialog
       } else if ( b == mBtnSplays ) {
         mParent.toggleStationSplays( mStationName );
       } else if ( b == mBtnXSection ) {
-        if ( ! mGlobalXSections ) {
-          nick = (mETnick.getText() != null)? mETnick.getText().toString() : "";
-          // if ( nick.length() == 0 ) {
-          //   mETnick.setError( mContext.getResources().getString( R.string.error_nick_required ) );
-          //   return;
-          // }
-        }
+        nick = (mETnick.getText() != null)? mETnick.getText().toString() : null;
+        // if ( nick.length() == 0 ) {
+        //   mETnick.setError( mContext.getResources().getString( R.string.error_nick_required ) );
+        //   return;
+        // }
         mParent.openXSection( mStation, mStationName, mParent.getPlotType(), mBearing, mClino, false, nick );
       } else if ( b == mBtnXDelete ) {
         if ( mSensors ) {
@@ -298,26 +296,22 @@ public class DrawingStationDialog extends MyDialog
           mParent.deleteXSection( mStation, mStationName, mParent.getPlotType() );
         }
       } else if ( b == mBtnDirect ) {
-        if ( ! mGlobalXSections ) {
-          nick = (mETnick.getText() != null)? mETnick.getText().toString() : "";
-          // if ( nick.length() == 0 ) {
-          //   mETnick.setError( mContext.getResources().getString( R.string.error_nick_required ) );
-          //   return;
-          // }
-        }
-        mParent.openXSection( mStation, mStationName, mParent.getPlotType(), mBearing, mClino, mCBhorizontal.isChecked(), nick );
+        nick = (mETnick.getText() != null)? mETnick.getText().toString() : "";
+        // if ( nick.length() == 0 ) {
+        //   mETnick.setError( mContext.getResources().getString( R.string.error_nick_required ) );
+        //   return;
+        // }
+        mParent.openXSection( mStation, mStationName, mParent.getPlotType(), mBearing, mClino, mCBhorizontal.isChecked(), nick);
       } else if ( b == mBtnInverse ) {
-        if ( ! mGlobalXSections ) {
-          nick = (mETnick.getText() != null)? mETnick.getText().toString() : "";
-          // if ( nick.length() == 0 ) {
-          //   mETnick.setError( mContext.getResources().getString( R.string.error_nick_required ) );
-          //   return;
-          // }
-        }
+        nick = (mETnick.getText() != null)? mETnick.getText().toString() : "";
+        // if ( nick.length() == 0 ) {
+        //   mETnick.setError( mContext.getResources().getString( R.string.error_nick_required ) );
+        //   return;
+        // }
         mBearing += 180;
         if ( mBearing >= 360 ) mBearing -= 360;
         mClino = -mClino;
-        mParent.openXSection( mStation, mStationName, mParent.getPlotType(), mBearing, mClino, mCBhorizontal.isChecked(), nick );
+        mParent.openXSection( mStation, mStationName, mParent.getPlotType(), mBearing, mClino, mCBhorizontal.isChecked(), nick);
       }
       dismiss();
     }
@@ -325,13 +319,11 @@ public class DrawingStationDialog extends MyDialog
     public void setBearingAndClino( float b, float c, int orientation )
     {
       String nick = "";
-      if ( ! mGlobalXSections ) {
-        nick = (mETnick.getText() != null)? mETnick.getText().toString() : "";
-        // if ( nick.length() == 0 ) {
-        //   mETnick.setError( mContext.getResources().getString( R.string.error_nick_required ) );
-        //   return;
-        // }
-      }
+      nick = (mETnick.getText() != null)? mETnick.getText().toString() : "";
+      // if ( nick.length() == 0 ) {
+      //   mETnick.setError( mContext.getResources().getString( R.string.error_nick_required ) );
+      //   return;
+      // }
       if ( mParent.getPlotType() == PlotInfo.PLOT_PLAN ) {
         c = 0;
       } else { // PlotInfo.isProfile( type )

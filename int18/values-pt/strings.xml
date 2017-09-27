@@ -361,7 +361,7 @@
     <!-- UNUSED string name="converted_tdr2th2">Arquivos binários dos croquis convertidos para th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Sobrescrever arquivos de croqui th2?</string -->
     <string name="section_area">Área do corte: %1$.1f</string>
-    <string name="section_name">nome do corte</string>
+    <!-- TODO string name="section_name">section comment</string -->
     <string name="scrap_outline">Contorno do croqui</string>
 
     <!-- UNUSED string name="sensor">sensor</string -->

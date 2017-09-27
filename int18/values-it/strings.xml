@@ -362,7 +362,7 @@
     <!-- UNUSED string name="converted_tdr2th2">Convertito disegno da formato binario a th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Sovrascrivo il file del disegno th2 ?</string -->
     <string name="section_area">Area della sezione: %1$.1f</string>
-    <string name="section_name">Nome sezione</string>
+    <string name="section_name">Nota sezione</string>
     <string name="scrap_outline">Contorno del disegno</string>
 
     <!-- UNUSED string name="sensor">sensore</string -->

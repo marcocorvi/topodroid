@@ -3142,33 +3142,36 @@ public class DrawingWindow extends ItemDrawer
       mDrawingSurface.clearXSectionOutline( scrap_name ); // clear outline if any
     }
 
+    private long getXSectionType( long type )
+    {
+      if ( type == PlotInfo.PLOT_PLAN ) return PlotInfo.PLOT_X_SECTION;
+      if ( PlotInfo.isProfile( type ) ) return PlotInfo.PLOT_XH_SECTION;
+      return PlotInfo.PLOT_NULL;
+    }
+
+    private String getXSectionName( String st_name, long type )
+    {
+      if ( type == PlotInfo.PLOT_PLAN ) return "xs-" + st_name;
+      if ( PlotInfo.isProfile( type ) ) return "xh-" + st_name;
+      return null;
+    }
+
     // st_name = station name
     // type = parent type
     String getXSectionNick( String st_name, long type )
     {
       // parent name = mName
-      // long xtype = -1;
-      String xs_id = null;
-      if ( type == PlotInfo.PLOT_PLAN ) {
-        xs_id = "xs-" + st_name;
-        // xtype = PlotInfo.PLOT_X_SECTION;
-      } else if ( PlotInfo.isProfile( type ) ) {
-        xs_id = "xh-" + st_name;
-        // xtype = PlotInfo.PLOT_XH_SECTION;
-      } else {
-        return "";
-      }
+      String xs_id = getXSectionName( st_name, type );
+      if ( xs_id == null ) return "";
       if ( ! mApp.mXSections ) xs_id = xs_id + "-" + mName;
+
+      // Log.v("DistoXX", "xsection nick for <" + xs_id + ">" );
 
       PlotInfo plot = mApp.mXSections ?
                       mData.getPlotInfo( mApp.mSID, xs_id )
                     : mData.getPlotSectionInfo( mApp.mSID, xs_id, mName );
-      if ( plot == null ) {
-        // Log.v("DistoXX", "null plot info for " + xs_id + " mName " + mName );
-        return "";
-      }
-      // Log.v("DistoXX", "plot info for " + xs_id + " mName " + mName + " nick <" + plot.nick + ">" );
-      return plot.nick;
+      if ( plot != null ) return plot.nick;
+      return null;
     }
 
     // X-SECTION at station B where A--B--C
@@ -3190,19 +3193,12 @@ public class DrawingWindow extends ItemDrawer
     {
       // Log.v("DistoXX", "XSection nick <" + nick + "> st_name <" + st_name + "> plot " + mName );
       // parent plot name = mName
-      long xtype = -1;
-      String xs_id = null;
-      if ( type == PlotInfo.PLOT_PLAN ) {
-        xs_id = "xs-" + st_name;
-        xtype = PlotInfo.PLOT_X_SECTION;
-      } else if ( PlotInfo.isProfile( type ) ) {
-        xs_id = "xh-" + st_name;
-        xtype = PlotInfo.PLOT_XH_SECTION;
-      } else {
-        return;
-      }
-
+      String xs_id = getXSectionName( st_name, type );
+      if ( xs_id == null ) return;
       if ( ! mApp.mXSections ) xs_id = xs_id + "-" + mName;
+      long xtype = getXSectionType( type );
+
+      // Log.v("DistoXX", "open xsection <" + xs_id + ">" );
 
       PlotInfo plot = mApp.mXSections ?
                       mData.getPlotInfo( mApp.mSID, xs_id )
@@ -3245,13 +3241,20 @@ public class DrawingWindow extends ItemDrawer
 	  mDrawingSurface.addDrawingPath( section_pt );
         }
       } else {
-        if ( ! plot.nick.equals( nick ) ) {
-          mData.updatePlotNick( plot.id, mSid, nick );
-        }
+        updatePlotNick( plot, nick );
       }
       if ( plot != null ) {
         pushInfo( plot.type, plot.name, plot.start, "", plot.azimuth, plot.clino );
         zoomFit( mDrawingSurface.getBitmapBounds() );
+      }
+    }
+
+    // update section-line x-section nick
+    // also at-station
+    void updatePlotNick( PlotInfo plot, String nick )
+    {
+      if ( nick != null && ! nick.equals( plot.nick ) ) {
+        mData.updatePlotNick( plot.id, mSid, nick );
       }
     }
 
@@ -4232,6 +4235,7 @@ public class DrawingWindow extends ItemDrawer
       mSectionName = id;
       long pid = mApp.mData.getPlotId( mApp.mSID, mSectionName );
       if ( pid < 0 ) { 
+        // Log.v("DistoXX", "prepare xsection <" + mSectionName + "> nick <" + nick + ">" );
         // pid = mApp.insert2dSection( mApp.mSID, mSectionName, type, from, to, azimuth, clino, nick );
         if ( mApp.mXSections ) {
           pid = mApp.insert2dSection( mApp.mSID, mSectionName, type, from, to, azimuth, clino, null, nick );

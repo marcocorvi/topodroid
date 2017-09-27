@@ -19,6 +19,7 @@ import android.os.Bundle;
 
 import android.content.Context;
 
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
@@ -52,9 +53,15 @@ public class DrawingLineSectionDialog extends MyDialog
   float   mClino;
   private int mOrientation = 0;
 
-  private Button   mBtnFoto;
-  private Button   mBtnDraw;
-  private Button   mBtnErase;
+  // private Button   mBtnFoto;
+  // private Button   mBtnDraw;
+  // private Button   mBtnErase;
+  // private Button   mBtnSave;
+  private MyCheckBox mBtnFoto  = null;
+  private MyCheckBox mBtnDraw  = null;
+  private MyCheckBox mBtnErase = null;
+  private MyCheckBox mBtnSave  = null;
+
   // private Button   mBtnCancel;
   private EditText mETnick;
   private ImageView mIVimage;   // photo image
@@ -127,15 +134,34 @@ public class DrawingLineSectionDialog extends MyDialog
     // mReversed = (CheckBox) findViewById( R.id.line_reversed );
     // mReversed.setChecked( mLine.mReversed );
 
+    int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
+    LinearLayout button_list = (LinearLayout)findViewById( R.id.button_list );
+    button_list.setMinimumHeight( size + 20 );
+    LinearLayout.LayoutParams lp;
+    // lp = new LinearLayout.LayoutParams( LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
+    // lp.setMargins( 0, 10, 20, 10 );
+
     mIVimage = (ImageView) findViewById( R.id.line_image );
-    mBtnFoto = (Button) findViewById( R.id.button_foto );
+    // mBtnFoto = (Button) findViewById( R.id.button_foto );
     if ( hasPhoto ) {
+      mBtnFoto = new MyCheckBox( mContext, size, R.drawable.iz_camera, R.drawable.iz_camera ); 
+      button_list.addView( mBtnFoto );
+      lp = (LinearLayout.LayoutParams) mBtnFoto.getLayoutParams();
+      lp.setMargins( 0, -10, 40, 10 );
+      mBtnFoto.setLayoutParams( lp );
       mBtnFoto.setOnClickListener( this );
     } else {
-      mBtnFoto.setVisibility( View.GONE );
+      // mBtnFoto.setVisibility( View.GONE );
     }
-    mBtnDraw = (Button) findViewById( R.id.button_draw );
+
+    // mBtnDraw = (Button) findViewById( R.id.button_draw );
+    mBtnDraw = new MyCheckBox( mContext, size, R.drawable.iz_plot, R.drawable.iz_plot );
+    button_list.addView( mBtnDraw );
+    lp = (LinearLayout.LayoutParams) mBtnDraw.getLayoutParams();
+    lp.setMargins( 0, -10, 40, 10 );
+    mBtnDraw.setLayoutParams( lp );
     mBtnDraw.setOnClickListener( this );
+
     if ( mPlotInfo != null ) { // check the photo
       mFilename = TDPath.getSurveyJpgFile( mApp.mySurvey, mPlotInfo.name );
       File imagefile = new File( mFilename );
@@ -197,10 +223,22 @@ public class DrawingLineSectionDialog extends MyDialog
       }
     }
 
-    mBtnErase = (Button) findViewById( R.id.button_erase );
+    // mBtnErase = (Button) findViewById( R.id.button_erase );
+    mBtnErase = new MyCheckBox( mContext, size, R.drawable.iz_delete, R.drawable.iz_delete );
+    button_list.addView( mBtnErase );
+    lp = (LinearLayout.LayoutParams) mBtnErase.getLayoutParams();
+    lp.setMargins( 0, -10, 40, 10 );
+    mBtnErase.setLayoutParams( lp );
     mBtnErase.setOnClickListener( this );
-    if ( mExists ) mBtnErase.setTextColor( 0xffff0000 );
+    // if ( mExists ) mBtnErase.setTextColor( 0xffff0000 );
 
+    // mBtnSave = (Button) findViewById( R.id.button_save );
+    mBtnSave = new MyCheckBox( mContext, size, R.drawable.iz_save, R.drawable.iz_save );
+    button_list.addView( mBtnSave );
+    lp = (LinearLayout.LayoutParams) mBtnSave.getLayoutParams();
+    lp.setMargins( 0, -10, 40, 10 );
+    mBtnSave.setLayoutParams( lp );
+    mBtnSave.setOnClickListener( this );
     // mBtnCancel = (Button) findViewById( R.id.button_cancel );
     // mBtnCancel.setOnClickListener( this );
   }
@@ -208,25 +246,43 @@ public class DrawingLineSectionDialog extends MyDialog
   public void onClick(View v) 
   {
     // TDLog.Log( TDLog.LOG_INPUT, "Drawing Line Section Dialog onClick() " + b.getText().toString() );
-    long type = mHSection ? PlotInfo.PLOT_H_SECTION : PlotInfo.PLOT_SECTION;
-    mNick = ( mETnick.getText() != null )? mETnick.getText().toString() : "";
 
-    switch ( v.getId() ) {
-      case R.id.button_foto:
+    if ( v.getId() == R.id.line_image ) {
+      mApp.viewPhoto( mContext, mFilename );
+    } else {
+      long type = mHSection ? PlotInfo.PLOT_H_SECTION : PlotInfo.PLOT_SECTION;
+      mNick = ( mETnick.getText() != null )? mETnick.getText().toString() : "";
+      MyCheckBox cb = (MyCheckBox)v;
+      if ( cb == mBtnFoto ) {
         mParent.makePhotoXSection( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino );
-        break;
-      case R.id.button_draw:
+      } else if ( cb == mBtnDraw ) {
         mParent.makePlotXSection( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino );
-        break;
-      case R.id.button_erase:
+      } else if ( cb == mBtnErase ) {
         mParent.deleteLine( mLine );
-        break;
-      case R.id.line_image:
-        mApp.viewPhoto( mContext, mFilename );
-        break;
-      default: // R.id.button_cancel
-        /* nothing */
+      } else if ( cb == mBtnSave ) {
+        mParent.updatePlotNick( mPlotInfo, mNick );
+      }
     }
+
+    // switch ( v.getId() ) {
+    //   case R.id.button_foto:
+    //     mParent.makePhotoXSection( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino );
+    //     break;
+    //   case R.id.button_draw:
+    //     mParent.makePlotXSection( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino );
+    //     break;
+    //   case R.id.button_erase:
+    //     mParent.deleteLine( mLine );
+    //     break;
+    //   case R.id.button_save:
+    //     mParent.updatePlotNick( mPlotInfo, mNick );
+    //     break;
+    //   case R.id.line_image:
+    //     mApp.viewPhoto( mContext, mFilename );
+    //     break;
+    //   default: // R.id.button_cancel
+    //     /* nothing */
+    // }
     dismiss();
   }
 

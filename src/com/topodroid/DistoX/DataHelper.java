@@ -2734,6 +2734,8 @@ public class DataHelper extends DataSetObservable
    }
  
    // NEW X_SECTIONS
+   // this is for at-station private x-sections
+   // the name of the parent plot is stored in the "hide" field
    public PlotInfo getPlotSectionInfo( long sid, String name, String parent )
    {
      PlotInfo plot = null;
@@ -3021,6 +3023,7 @@ public class DataHelper extends DataSetObservable
                            String hide, String nick, boolean forward )
    {
      // Log.v( TopoDroidApp.TAG, "insert plot " + name + " start " + start + " azimuth " + azimuth );
+     // Log.v("DistoXX", "insert plot <" + name + "> hide <" + hide + "> nick <" + nick + ">" );
      if ( myDB == null ) return -1L;
      long ret = getPlotId( sid, name );
      if ( ret >= 0 ) return -1;

@@ -43,12 +43,13 @@
     android:hint="@string/section_name"
   />
 
-  <LinearLayout 
+  <LinearLayout android:id="@+id/button_list"
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal" 
     android:layout_marginTop="@dimen/marginv"
     >
+<!--
     <Button android:id="@+id/button_foto"
       style="@style/button_default"
       android:layout_width="wrap_content" 
@@ -63,13 +64,20 @@
       android:layout_marginRight="@dimen/marginh"
       android:text="@string/button_plot"
     />
-
     <Button android:id="@+id/button_erase"
       style="@style/button_default"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
+      android:layout_marginRight="@dimen/marginh"
       android:text="@string/button_delete"
     />
+    <Button android:id="@+id/button_save"
+      style="@style/button_default"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content"
+      android:text="@string/button_save"
+    />
+-->
   </LinearLayout>
 
   <!-- LinearLayout 
