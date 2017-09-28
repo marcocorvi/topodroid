@@ -1914,8 +1914,16 @@ public class DataHelper extends DataSetObservable
    }
 
    // NEW X_SECTIONS hide = parent plot
+   // @param parent   parent plot name (null if shared xsections)
+   //
    public List< PlotInfo > selectAllPlotSectionsWithType( long sid, long status, long type, String parent )
    {
+     if ( parent == null ) {
+       return doSelectAllPlots( sid, 
+                              "surveyId=? and status=? and type=?",
+                              new String[] { Long.toString(sid), Long.toString(status), Long.toString(type) }
+       );
+     }
      return doSelectAllPlots( sid, 
                               "surveyId=? and status=? and type=? and hide=?",
                               new String[] { Long.toString(sid), Long.toString(status), Long.toString(type), parent }
@@ -2736,21 +2744,21 @@ public class DataHelper extends DataSetObservable
    // NEW X_SECTIONS
    // this is for at-station private x-sections
    // the name of the parent plot is stored in the "hide" field
-   public PlotInfo getPlotSectionInfo( long sid, String name, String parent )
-   {
-     PlotInfo plot = null;
-     if ( myDB != null && name != null ) {
-       Cursor cursor = myDB.query( PLOT_TABLE, mPlotFields,
-                 "surveyId=? AND name=? AND hide=?",
-                 new String[] { Long.toString(sid), name, parent },
-                 null, null, null );
-       if (cursor != null ) {
-         if (cursor.moveToFirst() ) plot = makePlotInfo( sid, cursor );
-         if (!cursor.isClosed()) cursor.close();
-       }
-     }
-     return plot;
-   }
+   // public PlotInfo getPlotSectionInfo( long sid, String name, String parent )
+   // {
+   //   PlotInfo plot = null;
+   //   if ( myDB != null && name != null ) {
+   //     Cursor cursor = myDB.query( PLOT_TABLE, mPlotFields,
+   //               "surveyId=? AND name=? AND hide=?",
+   //               new String[] { Long.toString(sid), name, parent },
+   //               null, null, null );
+   //     if (cursor != null ) {
+   //       if (cursor.moveToFirst() ) plot = makePlotInfo( sid, cursor );
+   //       if (!cursor.isClosed()) cursor.close();
+   //     }
+   //   }
+   //   return plot;
+   // }
 
    long getPlotId( long sid, String name )
    {

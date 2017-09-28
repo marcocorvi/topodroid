@@ -25,7 +25,7 @@ class PlotInfo
   public static final long PLOT_EXTENDED   = 2;
   public static final long PLOT_H_SECTION  = 3; // leave the place but do not use
   public static final long PLOT_PHOTO      = 4;
-  public static final long PLOT_SECTION    = 5;
+  public static final long PLOT_SECTION    = 5; // section-line cross-section
   public static final long PLOT_SKETCH_3D  = 6;
   public static final long PLOT_XH_SECTION = 7; // X-H_sectiuon at a station (defined in EXT plot)
   public static final long PLOT_PROFILE    = 8; // projected profile
@@ -46,18 +46,31 @@ class PlotInfo
   public int csxIndex = -1;  // numerical index for cSurvey xsection exports
 
   static boolean isVertical( long type ) 
-  {
-    return ( type == PLOT_EXTENDED || type == PLOT_PROFILE || type == PLOT_SECTION || type == PLOT_X_SECTION );
-  }
+  { return ( type == PLOT_EXTENDED || type == PLOT_PROFILE || type == PLOT_SECTION || type == PLOT_X_SECTION ); }
 
   static boolean isSection( long t )  { return t == PLOT_SECTION   || t == PLOT_H_SECTION; }
   static boolean isXSection( long t ) { return t == PLOT_X_SECTION || t == PLOT_XH_SECTION; }
-  static boolean isAnySection( long t ) { return t == PLOT_SECTION   || t == PLOT_H_SECTION 
-                                             || t == PLOT_X_SECTION || t == PLOT_XH_SECTION; }
+  static boolean isAnySection( long t ) { return t == PLOT_SECTION || t == PLOT_H_SECTION 
+                                            || t == PLOT_X_SECTION || t == PLOT_XH_SECTION; }
   static boolean isPhoto( long t )    { return t == PLOT_PHOTO; }
+  static boolean isAnySectionOrPhoto( long t )
+  { return t == PLOT_SECTION || t == PLOT_H_SECTION || t == PLOT_X_SECTION || t == PLOT_XH_SECTION || t == PLOT_PHOTO; }
+
   static boolean isSketch2D( long t ) { return t == PLOT_PLAN || t == PLOT_EXTENDED || t == PLOT_PROFILE; }
-  static boolean isProfile( long t )  { return t == PLOT_EXTENDED || t == PLOT_PROFILE; }
+  static boolean isProfile(  long t ) { return t == PLOT_EXTENDED || t == PLOT_PROFILE; }
+  static boolean isExtended( long t ) { return t == PLOT_EXTENDED; }
+  static boolean isProjeted( long t ) { return t == PLOT_PROFILE; }
+  static boolean isPlan(     long t ) { return t == PLOT_PLAN; }
+
   static boolean isSketch3D( long t ) { return t == PLOT_SKETCH_3D; }
+
+  boolean isSectionPrivate() { return isAnySectionOrPhoto(type) && hide != null && hide.length() > 0; }
+  boolean isSectionShared() { return isAnySectionOrPhoto(type) && ( hide == null || hide.length() == 0 ); }
+  String getSectionParent() 
+  {
+    if ( ! isAnySectionOrPhoto(type) ) return null;
+    return hide;
+  }
 
   // public static final String[] plotType = {
   //   "X-SECTION",  // vertical cross section

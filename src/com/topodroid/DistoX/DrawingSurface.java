@@ -346,7 +346,11 @@ public class DrawingSurface extends SurfaceView
   // void clearDrawing() { commandManager.clearDrawing(); }
 
   // called by DrawingWindow::computeReference
-  public DrawingStationName addDrawingStationName ( NumStation num_st, float x, float y, boolean selectable, List<PlotInfo> xsections )
+  // @param parent     name of the parent plot
+  // @param num_st     station
+  // @param selectable whether the station is selectable
+  // @param xsections  list of survey xsections
+  public DrawingStationName addDrawingStationName ( String parent, NumStation num_st, float x, float y, boolean selectable, List<PlotInfo> xsections )
   {
     // TDLog.Log( TDLog.LOG_PLOT, "add Drawing Station Name " + num_st.name + " " + x + " " + y );
     // FIXME STATION_XSECTION
@@ -363,7 +367,9 @@ public class DrawingSurface extends SurfaceView
     if ( xsections != null ) {
       for ( PlotInfo plot : xsections ) {
         if ( plot.start.equals( st.name() ) ) {
-          st.setXSection( plot.azimuth, plot.clino, mType );
+          // if ( plot.isXSectionShared() || parent.equals(plot.getXSectionParent()) ) { 
+            st.setXSection( plot.azimuth, plot.clino, mType );
+          // }
           break;
         }
       }

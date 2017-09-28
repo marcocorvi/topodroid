@@ -969,6 +969,8 @@ public class DrawingWindow extends ItemDrawer
     List< NumShot > shots       = mNum.getShots();
     List< NumSplay > splays     = mNum.getSplays();
 
+    String parent = (mApp.mXSections? null : name);
+
     if ( type == PlotInfo.PLOT_PLAN ) {
       for ( NumShot sh : shots ) {
         NumStation st1 = sh.from;
@@ -990,15 +992,14 @@ public class DrawingWindow extends ItemDrawer
           }
         }
       }
-      List< PlotInfo > xsections = mApp.mXSections ?
-                                   mData.selectAllPlotsWithType( mApp.mSID, 0, PlotInfo.PLOT_X_SECTION )
-                                 : mData.selectAllPlotSectionsWithType( mApp.mSID, 0, PlotInfo.PLOT_X_SECTION, name );
+      // N.B. this is where mXSections is necessary: to decide which xsections to check for stations
+      //      could use PlotInfo.isXSectionPrivate and PlotInfo.getXSectionParent
+      List< PlotInfo > xsections = mData.selectAllPlotSectionsWithType( mApp.mSID, 0, PlotInfo.PLOT_X_SECTION, parent );
       for ( NumStation st : stations ) {
         if ( st.show() ) {
           DrawingStationName dst;
-          // dst = mDrawingSurface.addDrawingStationName( st, DrawingUtil.toSceneX(st.e) - xoff,
-          //                                                  DrawingUtil.toSceneY(st.s) - yoff, true, xsections );
-          dst = mDrawingSurface.addDrawingStationName( st, DrawingUtil.toSceneX(st.e), DrawingUtil.toSceneY(st.s), true, xsections );
+          dst = mDrawingSurface.addDrawingStationName( name, st, DrawingUtil.toSceneX(st.e), DrawingUtil.toSceneY(st.s),
+                                                       true, xsections );
         }
       }
     } else if ( type == PlotInfo.PLOT_EXTENDED ) {
@@ -1022,15 +1023,12 @@ public class DrawingWindow extends ItemDrawer
           }
         }
       }
-      List< PlotInfo > xhsections = mApp.mXSections ?
-                                    mData.selectAllPlotsWithType( mApp.mSID, 0, PlotInfo.PLOT_XH_SECTION )
-                                  : mData.selectAllPlotSectionsWithType( mApp.mSID, 0, PlotInfo.PLOT_XH_SECTION, name );
+      List< PlotInfo > xhsections = mData.selectAllPlotSectionsWithType( mApp.mSID, 0, PlotInfo.PLOT_XH_SECTION, parent );
       for ( NumStation st : stations ) {
         if ( st.mHasCoords && st.show() ) {
           DrawingStationName dst;
-          // dst = mDrawingSurface.addDrawingStationName( st, DrawingUtil.toSceneX(st.h) - xoff,
-          //                                                  DrawingUtil.toSceneY(st.v) - yoff, true, xhsections );
-          dst = mDrawingSurface.addDrawingStationName( st, DrawingUtil.toSceneX(st.h), DrawingUtil.toSceneY(st.v), true, xhsections );
+          dst = mDrawingSurface.addDrawingStationName( name, st, DrawingUtil.toSceneX(st.h), DrawingUtil.toSceneY(st.v),
+                                                       true, xhsections );
         }
       }
     } else { // if ( type == PlotInfo.PLOT_PROFILE ) 
@@ -1058,16 +1056,13 @@ public class DrawingWindow extends ItemDrawer
           }
         }
       }
-      List< PlotInfo > xhsections = mApp.mXSections ?
-                                    mData.selectAllPlotsWithType( mApp.mSID, 0, PlotInfo.PLOT_XH_SECTION )
-                                  : mData.selectAllPlotSectionsWithType( mApp.mSID, 0, PlotInfo.PLOT_XH_SECTION, name );
+      List< PlotInfo > xhsections = mData.selectAllPlotSectionsWithType( mApp.mSID, 0, PlotInfo.PLOT_XH_SECTION, parent );
       for ( NumStation st : stations ) {
         if ( st.show() ) {
           DrawingStationName dst;
           h1 = (float)( st.e * cosp + st.s * sinp );
-          // dst = mDrawingSurface.addDrawingStationName( st, DrawingUtil.toSceneX(h1) - xoff,
-          //                                                  DrawingUtil.toSceneY(st.v) - yoff, true, xhsections );
-          dst = mDrawingSurface.addDrawingStationName( st, DrawingUtil.toSceneX(h1), DrawingUtil.toSceneY(st.v), true, xhsections );
+          dst = mDrawingSurface.addDrawingStationName( name, st, DrawingUtil.toSceneX(h1), DrawingUtil.toSceneY(st.v),
+                                                       true, xhsections );
         // } else {
         //   Log.v("DistoX", "station not showing " + st.name );
         }
@@ -1994,12 +1989,9 @@ public class DrawingWindow extends ItemDrawer
           mDrawingSurface.addManagerToCache( mFullName2 );
         }
         
-        List<PlotInfo> xsection_plan = mApp.mXSections ?
-                                       mData.selectAllPlotsWithType( mApp.mSID, 0, PlotInfo.PLOT_X_SECTION )
-                                     : mData.selectAllPlotSectionsWithType( mApp.mSID, 0, PlotInfo.PLOT_X_SECTION, mName );
-        List<PlotInfo> xsection_ext  = mApp.mXSections ?
-                                       mData.selectAllPlotsWithType( mApp.mSID, 0, PlotInfo.PLOT_XH_SECTION )
-                                     : mData.selectAllPlotSectionsWithType( mApp.mSID, 0, PlotInfo.PLOT_XH_SECTION, mName );
+        String parent = (mApp.mXSections? null : mName);
+        List<PlotInfo> xsection_plan = mData.selectAllPlotSectionsWithType( mApp.mSID, 0, PlotInfo.PLOT_X_SECTION,  parent );
+        List<PlotInfo> xsection_ext  = mData.selectAllPlotSectionsWithType( mApp.mSID, 0, PlotInfo.PLOT_XH_SECTION, parent );
 
         computeReferences( mPlot2.type, mPlot2.name, mZoom, true );
         computeReferences( mPlot1.type, mPlot1.name, mZoom, true );
@@ -3167,9 +3159,7 @@ public class DrawingWindow extends ItemDrawer
 
       // Log.v("DistoXX", "xsection nick for <" + xs_id + ">" );
 
-      PlotInfo plot = mApp.mXSections ?
-                      mData.getPlotInfo( mApp.mSID, xs_id )
-                    : mData.getPlotSectionInfo( mApp.mSID, xs_id, mName );
+      PlotInfo plot = mData.getPlotInfo( mApp.mSID, xs_id );
       if ( plot != null ) return plot.nick;
       return null;
     }
@@ -3200,9 +3190,7 @@ public class DrawingWindow extends ItemDrawer
 
       // Log.v("DistoXX", "open xsection <" + xs_id + ">" );
 
-      PlotInfo plot = mApp.mXSections ?
-                      mData.getPlotInfo( mApp.mSID, xs_id )
-                    : mData.getPlotSectionInfo( mApp.mSID, xs_id, mName );
+      PlotInfo plot = mData.getPlotInfo( mApp.mSID, xs_id );
 
       if ( plot == null  ) { // if there does not exist xsection xs-name create it
         // Toast.makeText( mActivity, R.string.too_many_legs_xsection, Toast.LENGTH_SHORT ).show();
@@ -3220,13 +3208,8 @@ public class DrawingWindow extends ItemDrawer
         }
         // Log.v("DistoXX", "new at-station X-section " + xs_id + " st_name " + st_name + " nick <" + nick + ">" );
 
-        if ( mApp.mXSections ) {
-          long pid = mApp.insert2dSection( mApp.mSID, xs_id, xtype, st_name, "", azimuth, clino, null, nick );
-          plot = mData.getPlotInfo( mApp.mSID, xs_id );
-        } else {
-          long pid = mApp.insert2dSection( mApp.mSID, xs_id, xtype, st_name, "", azimuth, clino, mName, nick );
-          plot = mData.getPlotSectionInfo( mApp.mSID, xs_id, mName );
-        }
+        mApp.insert2dSection( mApp.mSID, xs_id, xtype, st_name, "", azimuth, clino, (mApp.mXSections? null : mName), nick );
+        plot = mData.getPlotInfo( mApp.mSID, xs_id );
 
         // add x-section to station-name
 
@@ -4236,14 +4219,8 @@ public class DrawingWindow extends ItemDrawer
       long pid = mApp.mData.getPlotId( mApp.mSID, mSectionName );
       if ( pid < 0 ) { 
         // Log.v("DistoXX", "prepare xsection <" + mSectionName + "> nick <" + nick + ">" );
-        // pid = mApp.insert2dSection( mApp.mSID, mSectionName, type, from, to, azimuth, clino, nick );
-        if ( mApp.mXSections ) {
-          pid = mApp.insert2dSection( mApp.mSID, mSectionName, type, from, to, azimuth, clino, null, nick );
-          // plot = mData.getPlotInfo( mApp.mSID, xs_id );
-        } else {
-          pid = mApp.insert2dSection( mApp.mSID, mSectionName, type, from, to, azimuth, clino, mName, nick );
-          // plot = mData.getPlotSectionInfo( mApp.mSID, xs_id, mName );
-        }
+        pid = mApp.insert2dSection( mApp.mSID, mSectionName, type, from, to, azimuth, clino, 
+                                    ( mApp.mXSections? null : mName), nick );
       }
       return pid;
     }
