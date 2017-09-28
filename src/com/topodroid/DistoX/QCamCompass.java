@@ -37,8 +37,8 @@ public class QCamCompass extends Dialog
                                   , IBearingAndClino
 {
   Context mContext;
-  DrawingWindow mDrawer;
-  long mPid;
+  // DrawingWindow mDrawer;
+  // long mPid;
 
   IPhotoInserter mInserter;
   QCamDrawingSurface mSurface;
@@ -64,14 +64,14 @@ public class QCamCompass extends Dialog
   boolean mHasShot;
 
   QCamCompass( Context context, IBearingAndClino callback, 
-               DrawingWindow drawer, long pid, 
+               // DrawingWindow drawer, long pid, 
                IPhotoInserter inserter, boolean with_box, boolean with_delay )
   {
     super( context );
     mContext   = context;
     mCallback  = callback;
-    mDrawer    = drawer;
-    mPid       = pid;
+    // mDrawer    = drawer;
+    // mPid       = pid;
     mInserter  = inserter;
     mWithBox   = with_box;
     mWithDelay = with_delay;
@@ -206,7 +206,7 @@ public class QCamCompass extends Dialog
 
     if ( mHasSaved ) {
       if ( mInserter != null ) mInserter.insertPhoto();
-      if ( mDrawer   != null ) mDrawer.notifyAzimuthClino( mPid, mBearing, mClino );
+      // if ( mDrawer   != null ) mDrawer.notifyAzimuthClino( mPid, mBearing, mClino );
     }
     dismiss();
   }

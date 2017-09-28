@@ -485,8 +485,8 @@ public class ShotNewDialog extends MyDialog
       mTimer = new TimerTask( mContext, this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
       mTimer.execute();
     } else if ( hasPhoto && b == mBtnCamera && TDLevel.overAdvanced ) {
-      new QCamCompass( mContext, this, null, -1L, null, true, true).show();
-                       // null drawer, -1 pid
+      new QCamCompass( mContext, this, /* null, -1L, */ null, true, true).show();
+                       // null drawer, -1 pid // DO NOT USE THIS
                        // null inserter, with_box, with_delay
     } else if ( b == mBtnBack ) {
       dismiss();

@@ -3022,17 +3022,20 @@ public class DrawingWindow extends ItemDrawer
       modified();
     }
 
-    public void notifyAzimuthClino( long pid, float azimuth, float clino )
-    {
-      mApp.mData.updatePlotAzimuthClino( mApp.mSID, pid, azimuth, clino );
-    }
+    // NOTE this was used to let QCamCompass tell the DrawingWindow the photo azimuth/clino
+    //      but it messes up the azimuth/clino set by the section line
+    //      DO NOT USE IT
+    // public void notifyAzimuthClino( long pid, float azimuth, float clino )
+    // {
+    //   mApp.mData.updatePlotAzimuthClino( mApp.mSID, pid, azimuth, clino );
+    // }
 
     private void doTakePhoto( File imagefile, boolean insert, long pid )
     {
       if ( FeatureChecker.checkCamera( mApp ) ) { // hasPhoto
         new QCamCompass( this,
               	         (new MyBearingAndClino( mApp, imagefile )),
-                         this, pid, // non-negative if notify azimuth/clino
+                         // this, pid, // pid non-negative if notify azimuth/clino // DO NOT USE THIS
           	         ( insert ? this : null), // ImageInserter
           	         true, false).show();  // true = with_box, false=with_delay
       } else {

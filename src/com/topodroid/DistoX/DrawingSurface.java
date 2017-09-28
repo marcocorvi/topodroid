@@ -364,7 +364,7 @@ public class DrawingSurface extends SurfaceView
     } else {
       st.setPaint( BrushManager.fixedStationPaint );
     }
-    if ( xsections != null ) {
+    if ( xsections != null && parent != null ) {
       for ( PlotInfo plot : xsections ) {
         if ( plot.start.equals( st.name() ) ) {
           // if ( plot.isXSectionShared() || parent.equals(plot.getXSectionParent()) ) { 
