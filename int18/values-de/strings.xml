@@ -373,7 +373,7 @@
     <!-- UNUSED string name="converted_tdr2th2">Skizzen konvertiert zu th2.</string -->
     <!-- UNUSED string name="convert_tdr2th2">th2 Skizzen überschreiben?</string -->
     <string name="section_area">Fläche: %1$.1f</string>
-    <!-- TODO string name="section_name">section comment</string -->
+    <string name="section_name">Querschnitt Kommentar</string>
     <string name="scrap_outline">Skizzenumriss</string>
 
     <!-- UNUSED string name="sensor">Sensor</string -->
@@ -701,7 +701,7 @@
     <string name="help_range">Teillinie verschieben</string>
     <!-- UNUSED string name="help_clear">Die Auswahl löschen</string -->
     <string name="help_eraser">Löschmodus</string>
-    <!-- TODO string name="help_select_mode">Selection tool</string -->
+    <string name="help_select_mode">Auswahlmodus</string>
     <string name="help_erase_mode">Löschmodus</string>
     <string name="help_erase_size">Löschgröße [S/M/L]</string>
     <string name="help_previous">Vorheriger Punkt</string>
