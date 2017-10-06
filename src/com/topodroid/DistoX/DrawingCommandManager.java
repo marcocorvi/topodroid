@@ -349,7 +349,12 @@ public class DrawingCommandManager
 
   void setSecondReference( DrawingPath path ) { synchronized( mGridStack1 ) { mSecondReference = path; } }
 
-  void addSecondReference( float x, float y ) { synchronized( mGridStack1 ) { mSecondReference.pathAddLineTo(x,y); } }
+  void addSecondReference( float x, float y ) 
+  {
+    synchronized( mGridStack1 ) { 
+      if ( mSecondReference != null ) mSecondReference.pathAddLineTo(x,y); 
+    }
+  }
 
   /* the next index for the ID of the area border
    */
@@ -507,6 +512,8 @@ public class DrawingCommandManager
    * x    X scene
    * y    Y scene
    * zoom canvas display zoom
+   *
+   * N.B. mSelection cannot be null here
    */
   int eraseAt( float x, float y, float zoom, EraseCommand eraseCmd, int erase_mode, float erase_size ) 
   {

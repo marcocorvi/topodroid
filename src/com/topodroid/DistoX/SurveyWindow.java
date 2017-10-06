@@ -460,8 +460,8 @@ public class SurveyWindow extends Activity
           break;
         case TDConst.DISTOX_EXPORT_DXF:
           List<DBlock> list = mApp.mData.selectAllShots( mApp.mSID, TDStatus.NORMAL );
-          DBlock blk = list.get( 0 );
-          if ( blk != null ) {
+          if ( list.size() > 0 ) {
+            DBlock blk = list.get( 0 );
             // Log.v( TopoDroidApp.TAG, "DISTOX_EXPORT_DXF from " + blk.mFrom );
             float decl = mApp.mData.getSurveyDeclination( mApp.mSID );
             DistoXNum num = new DistoXNum( list, blk.mFrom, null, null, decl );
