@@ -81,9 +81,13 @@ public class PhotoEditDialog extends MyDialog
       if ( mDate == null ) mDate = "";
       if ( b != null && c != null ) {
         int k = b.indexOf('/');
-        mAzimuth = Integer.parseInt( b.substring(0,k) ) / 100.0f;
+	if ( k >= 0 ) {
+          try { mAzimuth = Integer.parseInt( b.substring(0,k) ) / 100.0f; } catch ( NumberFormatException e ) { }
+	}
         k = c.indexOf('/');
-        mClino = Integer.parseInt( c.substring(0,k) ) / 100.0f;
+	if ( k >= 0 ) {
+          try { mClino = Integer.parseInt( c.substring(0,k) ) / 100.0f; } catch ( NumberFormatException e ) { }
+	}
         // Log.v("DistoX", "Long <" + bearing + "> Lat <" + clino + ">" );
       }
     } catch ( IOException e ) {
