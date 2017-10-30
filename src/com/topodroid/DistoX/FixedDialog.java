@@ -231,10 +231,10 @@ public class FixedDialog extends MyDialog
       mParent.updateFixedNameComment( mFxd, station, comment );
 
       if ( editable ) {
-        double lat = FixedInfo.string2double( mTVlat.getText().toString() );
-        double lng = FixedInfo.string2double( mTVlng.getText().toString() );
-        double alt = FixedInfo.string2real( mTValt.getText().toString() );
-        double asl = FixedInfo.string2real( mTVasl.getText().toString() );
+        double lat = FixedInfo.string2double( mTVlat.getText() );
+        double lng = FixedInfo.string2double( mTVlng.getText() );
+        double alt = FixedInfo.string2real( mTValt.getText() );
+        double asl = FixedInfo.string2real( mTVasl.getText() );
         if ( lat != mFxd.lat || lng != mFxd.lng || alt != mFxd.alt || asl != mFxd.asl ) {
           mParent.updateFixedData( mFxd, lng, lat, alt, asl );
         }

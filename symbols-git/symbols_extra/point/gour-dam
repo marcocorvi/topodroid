@@ -1,0 +1,19 @@
+encoding  utf-8
+symbol point
+name gour-dam
+name-de Sinterbecken
+name-es gour_seco
+name-it gour
+name-pt travertino
+name-ru гур
+name-ua гур
+name-hu mésztufagát
+th_name rimstone-dam
+orientation yes
+color 0xff9933
+csurvey 6 6 80
+path
+  arcTo -4 -4 4 4 0 180
+endpath
+endsymbol
+

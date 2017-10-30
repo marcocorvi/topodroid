@@ -1,35 +1,28 @@
-#!/bin/sh
+#!/bin/bash
 #
+base="/home/programs/android-sdk/samples/android-8/topodroid/"
 
-cd symbols-git/speleo
-for i in point/* ; do
-  cp $i ../../symbols/$i
-done
-for i in area/* ; do
-  cp $i ../../symbols/$i
-done
+function makezip {
+  cd $base/symbols-git/$1
+  pwd
+  mkdir -p $base/$1/point $base/$1/line $base/$1/area
+  for i in point/* line/* area/* ; do
+    j=`echo $i | sed -e "s/=/:/"`
+    cp $i $base/$1/$j
+  done
+  cd $base
+  zip res/raw/$2.zip ./$1/point/* ./$1/line/* ./$1/area/*
+  rm -rf $base/$1
+}
 
-for i in line/arrow line/border line/ceiling-meander line/chimney line/contour line/fault line/floor-meander line/overhang line/pit line/rock-border line/section line/slope line/water ; do
-  cp $i ../../symbols/$i
-done
+cd $base
 
-cp line/wall=blocks ../../symbols/line/wall:blocks 
-cp line/wall=clay ../../symbols/line/wall:clay
-cp line/wall=debris ../../symbols/line/wall:debris
-cp line/wall=ice ../../symbols/line/wall:ice
-cp line/wall=presumed ../../symbols/line/wall:presumed
-cp line/wall=sand ../../symbols/line/wall:sand
-
-cd ../../
-
-zip symbols.zip ./symbols/point/* ./symbols/line/* ./symbols/area/*
-
-cd symbols-git
-zip ../res/raw/symbols_archeo.zip ./symbols_archeo/point/* ./symbols_archeo/line/* ./symbols_archeo/area/*
-zip ../res/raw/symbols_bio.zip ./symbols_bio/point/* ./symbols_bio/line/* ./symbols_bio/area/*
-zip ../res/raw/symbols_geo.zip ./symbols_geo/point/* ./symbols_geo/line/* ./symbols_geo/area/*
-zip ../res/raw/symbols_paleo.zip ./symbols_paleo/point/* ./symbols_paleo/line/* ./symbols_paleo/area/*
-zip ../res/raw/symbols_mine.zip ./symbols_mine/point/* ./symbols_mine/line/* ./symbols_mine/area/*
-zip ../res/raw/symbols_karst.zip ./symbols_karst/point/* ./symbols_karst/line/* ./symbols_karst/area/*
-zip ../res/raw/symbols_extra.zip ./symbols_extra/point/* ./symbols_extra/line/* ./symbols_extra/area/*
+makezip symbols_speleo symbols_speleo
+makezip symbols_archeo symbols_archeo
+makezip symbols_bio symbols_bio
+makezip symbols_geo symbols_geo
+makezip symbols_paleo symbols_paleo
+makezip symbols_mine symbols_mine
+makezip symbols_extra symbols_extra
+makezip symbols_karst symbols_karst
 

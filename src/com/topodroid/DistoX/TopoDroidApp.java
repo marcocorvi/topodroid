@@ -1468,7 +1468,7 @@ public class TopoDroidApp extends Application
   //   }
   //   if ( install ) {
   //     deleteObsoleteSymbols();
-  //     InputStream is = getResources().openRawResource( R.raw.symbols );
+  //     InputStream is = getResources().openRawResource( R.raw.symbols_speleo );
   //     symbolsUncompress( is, overwrite );
   //   }
   //   mDData.setValue( "symbol_version", SYMBOL_VERSION );
@@ -1477,7 +1477,7 @@ public class TopoDroidApp extends Application
   void installSymbols( boolean overwrite )
   {
     deleteObsoleteSymbols();
-    installSymbols( R.raw.symbols, overwrite );
+    installSymbols( R.raw.symbols_speleo, overwrite );
     mDData.setValue( "symbol_version", SYMBOL_VERSION );
   }
 
@@ -1526,7 +1526,7 @@ public class TopoDroidApp extends Application
         clearSymbols();
       }
     }
-    if ( speleo ) installSymbols( R.raw.symbols, true );
+    if ( speleo ) installSymbols( R.raw.symbols_speleo, true );
     if ( extra  ) installSymbols( R.raw.symbols_extra,  true );
     if ( mine   ) installSymbols( R.raw.symbols_mine,   true );
     if ( geo    ) installSymbols( R.raw.symbols_geo,    true );

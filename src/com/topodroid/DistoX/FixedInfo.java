@@ -133,6 +133,11 @@ class FixedInfo extends MagLatLong
     return String.format(Locale.US, "%.6f", x );
   }
 
+  static double string2double( CharSequence txt )
+  {
+    if ( txt == null ) return -1111;
+    return string2double( txt.toString() );
+  }
 
   static double string2double( String str )
   {
@@ -159,6 +164,12 @@ class FixedInfo extends MagLatLong
     }
     return -1111.0; // more neg than -1000
   }        
+
+  static double string2real( CharSequence txt )
+  {
+    if ( txt == null ) return 0;
+    return string2real( txt.toString() );
+  }
 
   static double string2real( String str )
   {

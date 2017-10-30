@@ -1,0 +1,17 @@
+encoding  utf-8
+symbol point
+name camp
+name-es campamento
+th_name camp
+orientation no
+color 0xffffff
+csurvey 6 6 80
+path
+  moveTo 0 -4
+  lineTo 4 4
+  lineTo -4 4
+  lineTo 0 -4
+  lineTo 0 4
+endpath
+endsymbol
+

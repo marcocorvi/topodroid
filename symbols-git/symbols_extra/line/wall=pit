@@ -1,0 +1,23 @@
+encoding  utf-8
+symbol line
+name wall-pit
+name-es Pozo_entrada
+th_name wall:pit
+group wall
+color 0xff0000 0xff
+effect
+  moveTo 0 1
+  lineTo 12 1
+  lineTo 12 0
+  lineTo 9 0
+  lineTo 6 -6
+  lineTo 3 0
+  lineTo 0 0
+  lineTo 0 4
+  lineTo 12 4
+  lineTo 12 7
+  lineTo 0 7
+  lineTo 0 3 
+endeffect
+endsymbol
+

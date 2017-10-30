@@ -1,9 +1,10 @@
 ﻿symbol line
 name wall_below
+name-es pared_galeria_inferior
 name-pt parede_abaixo
 name-ru нижерасположенная_стена
 name-bg по-ниско_разположена_стена
-th_name wall:below
+th_name wall:underlying
 group wall
 color 0xcc6600 0x99
 width 1

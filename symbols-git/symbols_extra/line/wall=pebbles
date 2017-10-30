@@ -1,0 +1,23 @@
+encoding  utf-8
+symbol line
+name wall_pebbles
+name-es pared_cantos_rodados
+th_name wall:pebbles
+group wall
+color 0xff0000 0xff
+width 1
+effect
+  moveTo 0 0
+  lineTo 4 2
+  lineTo 8 2
+  lineTo 12 0
+  lineTo 15 0
+  lineTo 15 -2
+  lineTo 12 -2
+  lineTo 8 -4
+  lineTo 4 -4
+  lineTo 0 -2
+  lineTo 0 0
+endeffect
+endsymbol
+

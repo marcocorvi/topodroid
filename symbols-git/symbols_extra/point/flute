@@ -12,15 +12,14 @@ name-ua флейта
 name-fa شیار
 name-hu hullámkagyló
 th_name flute
-orientation no
-color 0x6666ff
+orientation yes
+color 0x6699ff
 csurvey 6 6 80
 path
-  moveTo -6 0
-  lineTo 6 0
-  moveTo -3 0 
-  cubicTo -3 -1.5 -1.5 -3 0 -3
-  cubicTo 1.5 -3 3 -1.5 3 0
+  moveTo -3 0
+  cubicTo -2 4 2 4 3 0
+  moveTo 6 0
+  lineTo -6 0
 endpath
 endsymbol
 

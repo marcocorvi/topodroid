@@ -1,0 +1,34 @@
+encoding  utf-8
+symbol line
+name water-flow-intermittent
+name-cn 水流
+name-es curso_temporal
+name-pt fluxo_de_água
+name-it flusso_d'acqua
+name-fr circulation_d'eau
+name-de Gerinne
+name-ru водоток
+name-bg течаща_вода
+name-ua водотік
+name-fa جریان_آب
+name-hu vízfolyás
+th_name water-flow:intermittent
+group water-flow
+color 0xff9933
+width 1
+csurvey 2 3 64 2
+dash 14 7
+effect
+  moveTo 0 0
+  lineTo 13 0
+  lineTo 10 3
+  lineTo 11 3
+  lineTo 14 0
+  lineTo 14 -1
+  lineTo 11 -4
+  lineTo 10 -4
+  lineTo 13 -1
+  lineTo 0 -1
+endeffect 
+endsymbol
+

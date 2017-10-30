@@ -1,0 +1,18 @@
+symbol point
+name anastomosis
+name-es anastomosis
+th_name anastomosis
+orientation no
+color 0x6666ff
+csurvey 6 6 80
+path
+  moveTo -6 4
+  lineTo -4 5
+  lineTo 0 -5
+  lineTo 2 -4 
+  moveTo -2 4
+  lineTo 0 5
+  lineTo 4 -5
+  lineTo 6 -4
+endpath
+endsymbol

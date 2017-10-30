@@ -1,0 +1,18 @@
+symbol point
+name gour-pool
+name-de Sinterbecken
+name-it gour
+name-pt travertino
+name-ru гур
+name-ua гур
+name-hu mésztufagát
+th_name rimstone-pool
+orientation yes
+color 0x6699ff
+csurvey 6 6 80
+path
+  arcTo -8 -4 0 4 0 180
+  arcTo 0 -4 8 4 0 180 
+endpath
+endsymbol
+

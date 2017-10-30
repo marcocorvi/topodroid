@@ -208,6 +208,11 @@ public class SurveyWindow extends Activity
     mDateListener = new MyDateSetListener( mEditDate );
     mEditDate.setOnClickListener( this );
 
+    // mTextName.setEditable( false );
+    mTextName.setKeyListener( null );
+    mTextName.setClickable( false );
+    mTextName.setFocusable( false );
+
     if ( ! updateDisplay() ) {
       TDLog.Error( "opening non-existent survey" );
       setResult( RESULT_CANCELED );
