@@ -899,6 +899,8 @@
   <string name="pref_auto_reconnect_summary">Wiederverbindung nach Verbindungsverlust</string>
   <string name="pref_auto_pair_title">Automatische Verbindung</string>
   <string name="pref_auto_pair_summary">Automatische Verbindung nach dem scannen</string>
+  <!-- TODO string name="pref_head_tail_title">Number of new data</string -->
+  <!-- TODO string name="pref_head_tail_summary">Get the number of data before downloading them</string -->
   <string name="pref_socket_delay_title">Verbindungsverzögerung</string>
   <string name="pref_socket_delay_summary">Verzögerung vor dem verbinden [0.1 sek]</string>
   <string name="pref_socket_delay_dialogtitle">Verzögerung beim verbinden</string>

@@ -1,0 +1,30 @@
+﻿symbol point
+name water-flow
+name-cn 水流
+name-es curso_activo
+name-pt fluxo_de_água
+name-it flusso_d'acqua
+name-fr circulation_d'eau
+name-de Gerinne
+name-fa جریان_آب
+name-ru водоток
+name-bg течаща_вода
+name-ua водотік
+name-sl vodotok
+name-hu vízfolyás
+th_name water-flow
+orientation yes
+color 0x6699ff
+csurvey 6 6 80
+path
+  moveTo 0 3
+  cubicTo -1 3 -1 0 0 0
+  cubicTo 1 0 1 -3 0 -3
+  cubicTo -1 -3 -1 -6 0 -6
+  cubicTo 1 -6 1.5 -6.5 1.5 -7.5
+  cubicTo 1.5 -8.5 0 -9 0 -10
+  lineTo 4 -6
+  moveTo 0 -10
+  lineTo -4 -6
+endpath
+endsymbol

@@ -873,6 +873,8 @@
   <string name="pref_auto_reconnect_summary">Po prekinitvi ponovna povezava z DistoX</string>
   <string name="pref_auto_pair_title">Samodejno pridruževanje</string>
   <string name="pref_auto_pair_summary">Pridruženje z DistoX po iskanju naprav</string>
+  <!-- TODO string name="pref_head_tail_title">Number of new data</string -->
+  <!-- TODO string name="pref_head_tail_summary">Get the number of data before downloading them</string -->
   <string name="pref_socket_delay_title">Zamik povezave</string>
   <string name="pref_socket_delay_summary">Zamik povezave zaradi pridruženja [0.1 sec]</string>
   <string name="pref_socket_delay_dialogtitle">Zamik povezave med pridruženjem</string>

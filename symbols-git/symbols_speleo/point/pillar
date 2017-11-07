@@ -1,0 +1,28 @@
+﻿symbol point
+name pillar
+name-cn 石柱
+name-es columna
+name-pt coluna
+name-it colonna
+name-fr pilier
+name-de Säule
+name-fa ستون
+name-ru колонна
+name-bg сталактон
+name-ua колона
+name-hu oszlop
+th_name pillar
+orientation no
+color 0xccff66
+csurvey 6 6 80
+path
+  moveTo -3 -7
+  lineTo 0 -4
+  lineTo 0 4
+  lineTo -3 7
+  moveTo 0 4
+  lineTo 3 7
+  moveTo 0 -4
+  lineTo 3 -7
+endpath
+endsymbol

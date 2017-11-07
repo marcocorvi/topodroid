@@ -1,0 +1,24 @@
+﻿symbol point
+name narrow-end
+name-cn 狭窄末端
+name-es gatera
+name-pt fim_estreito
+name-it termine
+name-fa پایان_باریک
+name-fr passage_impénétrable
+name-de Schmale_Engstelle
+name-ru узкий_ход
+name-bg непроходимо_стеснение
+name-ua вузький_хід
+name-hu elszűkülő_folytatás
+th_name narrow-end
+orientation no
+color 0xff6666
+csurvey 6 6 80
+path
+  moveTo -2 -6
+  lineTo -2 6
+  moveTo 2 -6
+  lineTo 2 6
+endpath
+endsymbol

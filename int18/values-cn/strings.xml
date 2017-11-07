@@ -870,6 +870,8 @@
   <string name="pref_auto_reconnect_summary">连接断开时自动再连接</string>
   <string name="pref_auto_pair_title">自动配对</string>
   <string name="pref_auto_pair_summary">扫描后配对设备</string>
+  <!-- TODO string name="pref_head_tail_title">Number of new data</string -->
+  <!-- TODO string name="pref_head_tail_summary">Get the number of data before downloading them</string -->
   <string name="pref_socket_delay_title">连接延时</string>
   <string name="pref_socket_delay_summary">准许配对延时 [0.1 秒]</string>
   <string name="pref_socket_delay_dialogtitle">配对连接延时</string>

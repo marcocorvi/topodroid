@@ -1,0 +1,25 @@
+﻿symbol point
+name gradient
+name-cn 坡向
+name-es pendiente
+name-pt gradiente
+name-it pendenza
+name-fr pente
+name-de Gefälle
+name-ru уклон
+name-bg наклон
+name-fa شیب
+name-ua нахил
+name-hu lejtő
+th_name gradient
+orientation yes
+color 0x33ff66
+csurvey 6 6 80
+path
+  moveTo 0 8
+  lineTo 0 -4
+  lineTo -2 -2
+  lineTo 2 -2
+  lineTo 0 -4
+endpath
+endsymbol

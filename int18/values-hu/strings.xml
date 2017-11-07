@@ -871,6 +871,8 @@
   <string name="pref_auto_reconnect_summary">Újrakapcsolódás, ha a kapcsolat megszakad</string>
   <string name="pref_auto_pair_title">Atomatikus párosítás</string>
   <string name="pref_auto_pair_summary">Párosítás a talált eszközzel</string>
+  <!-- TODO string name="pref_head_tail_title">Number of new data</string -->
+  <!-- TODO string name="pref_head_tail_summary">Get the number of data before downloading them</string -->
   <string name="pref_socket_delay_title">Kapcsolódási késleltetés</string>
   <string name="pref_socket_delay_summary">Kapcsolódási késleltetés a párosításhoz [0.1 sec]</string>
   <string name="pref_socket_delay_dialogtitle">Kapcsolódási késleltetés párosításnál</string>

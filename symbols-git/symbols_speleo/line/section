@@ -1,0 +1,19 @@
+﻿symbol line
+name section
+name-cn 截面
+name-es sección
+name-pt corte
+name-it sezione
+name-fr section
+name-de Schnitt
+name-ru сечение
+name-bg сечение
+name-ua переріз
+name-fa بخش
+name-hu szelvény
+th_name section
+color 0xffffff 0x99
+width 1
+csurvey 6 9 96 3
+dash 5 10
+endsymbol

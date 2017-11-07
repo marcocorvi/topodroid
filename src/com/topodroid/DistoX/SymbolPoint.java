@@ -156,6 +156,7 @@ class SymbolPoint extends Symbol
    *      name NAME
    *      th_name THERION_NAME
    *      has_text yes | NO
+   *      has_value yes | NO
    *      orientation yes | NO
    *      color 0xHHHHHH_COLOR
    *      style fill | STROKE 

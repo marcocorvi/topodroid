@@ -1,0 +1,27 @@
+﻿symbol point
+name debris
+name-cn 碎石
+name-es pedrera
+name-pt escombros
+name-it detrito
+name-fr débris
+name-fa آوار
+name-de Schutt
+name-ru щебень
+name-ua щебінь
+name-bg чакъл
+name-hu törmelék
+th_name debris
+orientation no
+color 0xffcc66
+csurvey 6 6 80
+path
+  moveTo 0 0
+  lineTo 4 1
+  lineTo 2 -3
+  lineTo 0 0
+  lineTo -4 0
+  lineTo -2 -4
+  lineTo 0 0
+endpath
+endsymbol

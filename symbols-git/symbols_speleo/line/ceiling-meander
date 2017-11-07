@@ -1,0 +1,38 @@
+﻿symbol line
+name ceiling-meander
+name-cn 天沟
+name-es techo_meandro
+name-pt meandro_de_teto
+name-it meandro_a_soffitto
+name-fr méandre_au_plafond
+name-de Deckenmäander
+name-ru меандр_в_потолке
+name-bg меандър_в_тавана
+name-ua меандр_в_стелі
+name-fa سقف_پر_پیچ_خم
+name-hu mennyezeti_csatorna
+th_name ceiling-meander
+group ceiling-meander
+color 0xcc00cc 0xff
+width 1
+csurvey 4 1 3 22
+dash 15 5
+effect
+  moveTo 0 2
+  lineTo 4 2
+  lineTo 4 6
+  lineTo 5 6
+  lineTo 5 2
+  lineTo 9 2
+  lineTo 9 1
+  lineTo 0 1
+  moveTo 0 -2 
+  lineTo 4 -2
+  lineTo 4 -6
+  lineTo 5 -6
+  lineTo 5 -2
+  lineTo 9 -2
+  lineTo 9 -1
+  lineTo 0 -1
+endeffect
+endsymbol

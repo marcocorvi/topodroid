@@ -1,0 +1,26 @@
+﻿symbol point
+name snow
+name-cn 雪
+name-es nieve
+name-pt neve
+name-it neve
+name-fa برف
+name-fr neige
+name-de Schnee
+name-ru снег
+name-bg сняг
+name-ua сніг
+name-hu hó
+th_name snow
+orientation no
+color 0xffffff
+csurvey 6 6 80
+path
+  moveTo 0 -5
+  lineTo 0 5
+  moveTo -4 -3
+  lineTo 4 3
+  moveTo -4 3
+  lineTo 4 -3
+endpath
+endsymbol

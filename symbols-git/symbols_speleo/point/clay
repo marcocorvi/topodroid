@@ -1,0 +1,26 @@
+﻿symbol point
+name clay
+name-cn 黏土
+name-es arcilla
+name-pt lama/argila
+name-it argilla
+name-fr argile
+name-de Lehm
+name-fa خاک_رس
+name-ru глина
+name-bg глина
+name-ua глина
+name-hu agyag
+th_name clay
+orientation no
+color 0xffcc66
+csurvey 6 6 80
+path
+  moveTo -6 -2
+  lineTo -1 -2
+  moveTo 2 -2
+  lineTo 7 -2
+  moveTo -3 2
+  lineTo 3 2  
+endpath
+endsymbol

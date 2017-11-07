@@ -1,0 +1,20 @@
+﻿symbol line
+name rock-border
+name-cn 岩石边界
+name-es borde_roca
+name-pt borda_rocha
+name-it masso
+name-fr bordure_rocheuse
+name-de Felsenumriss
+name-ru контур_глыбы
+name-ua кромка_глиби
+name-bg контур_на_камък
+name-fa مرز_سنگی
+name-hu szikla_határa
+th_name rock-border
+closed yes
+style straight x2
+color 0x66ffcc 0xff
+width 1
+csurvey 3 1 3 2
+endsymbol

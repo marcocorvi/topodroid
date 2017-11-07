@@ -872,6 +872,8 @@
   <string name="pref_auto_reconnect_summary">Reconectar automaticamente quando a conexão for perdida</string>
   <string name="pref_auto_pair_title">Pareamento automático</string>
   <string name="pref_auto_pair_summary">Parear com o dispositivo após a busca</string>
+  <!-- TODO string name="pref_head_tail_title">Number of new data</string -->
+  <!-- TODO string name="pref_head_tail_summary">Get the number of data before downloading them</string -->
   <string name="pref_socket_delay_title">Atraso conexão</string>
   <string name="pref_socket_delay_summary">Tempo de espera da conexão para permitir o pareamento [0.1 sec]</string>
   <string name="pref_socket_delay_dialogtitle">Atraso da conexão durante o pareamento</string>

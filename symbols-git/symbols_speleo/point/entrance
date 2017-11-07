@@ -1,0 +1,24 @@
+﻿symbol point
+name entrance
+name-cn 洞口
+name-es entrada
+name-pt entrada
+name-it ingresso
+name-fr entrée
+name-fa مدخل_ورودی
+name-de Eingang
+name-ru вход
+name-bg вход
+name-ua вхід
+name-hu bejárat
+th_name entrance
+orientation yes
+color 0xff3333
+csurvey 6 6 80
+path
+  moveTo 0 -6
+  lineTo -3 3
+  lineTo 3 3
+  lineTo 0 -6
+endpath
+endsymbol

@@ -1,0 +1,32 @@
+﻿symbol point
+name sand
+name-cn 砂
+name-es arena
+name-pt areia
+name-it sabbia
+name-fr sable
+name-fa شن
+name-de Sand
+name-ru песок
+name-bg пясък
+name-ua пісок
+name-hu homok
+th_name sand
+orientation no
+color 0xffcc66
+csurvey 6 6 80
+path
+  moveTo -7 3 
+  lineTo -6 3
+  lineTo -6.5 2
+  lineTo -7 3
+  moveTo 7 3
+  lineTo 6 3
+  lineTo 6.5 2
+  lineTo 7 3
+  moveTo -0.5 -3
+  lineTo  0.5 -3
+  lineTo 0 -4
+  lineTo -0.5 -3
+endpath
+endsymbol

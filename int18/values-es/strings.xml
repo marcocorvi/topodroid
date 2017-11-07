@@ -880,6 +880,8 @@
   <string name="pref_auto_reconnect_summary">Vuelva a conectar si se pierde la conexión</string>
   <string name="pref_auto_pair_title">Emparejamiento automático</string>
   <string name="pref_auto_pair_summary">Dispositivo emparejado</string>
+  <!-- TODO string name="pref_head_tail_title">Number of new data</string -->
+  <!-- TODO string name="pref_head_tail_summary">Get the number of data before downloading them</string -->
   <string name="pref_socket_delay_title">Retardo en la conexión</string>
   <string name="pref_socket_delay_summary">La conexión tarda mucho para emparejarse [0.1 sec]</string>
   <string name="pref_socket_delay_dialogtitle">La conexión tarda mucho para emparejarse</string>

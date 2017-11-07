@@ -1,0 +1,24 @@
+symbol point
+name water-drip
+name-de Wassertropfen
+name-it stillicidio
+name-pt gotejamento
+name-ru водокап
+name-uа потік_води
+name-hu csepegés
+th_name u:water_drip
+orientation no
+color 0x6699ff
+csurvey 6 6 80
+path
+  moveTo 0 -8
+  lineTo 0 -4
+  moveTo 0 -2
+  lineTo 0 2
+  moveTo 0 4
+  lineTo 0 8
+  lineTo 4 4
+  moveTo 0 8
+  lineTo -4 4
+endpath
+endsymbol

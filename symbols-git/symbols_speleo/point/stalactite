@@ -1,0 +1,25 @@
+﻿symbol point
+name stalactite
+name-cn 石钟乳
+name-es estalactita
+name-pt estalactite
+name-it stalattite
+name-fr stalactite
+name-de Stalaktit
+name-fa چکنده
+name-ru сталактит
+name-bg сталактит
+name-ua сталактит
+name-hu függőcseppkő
+th_name stalactite
+orientation no
+color 0xccff66
+csurvey 6 6 80
+path
+  moveTo -4 -4
+  lineTo 0 0
+  lineTo 4 -4
+  moveTo 0 0
+  lineTo 0 6
+endpath
+endsymbol

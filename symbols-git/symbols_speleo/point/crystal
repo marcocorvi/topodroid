@@ -1,0 +1,28 @@
+﻿symbol point
+name crystal
+name-cn 方解石花
+name-es cristal
+name-pt cristal
+name-it cristallo
+name-fr minéralisation_remarquable
+name-de Kristall
+name-fa کریستال
+name-ru кристаллы
+name-bg кристал
+name-ua кристал
+name-hu kristály
+th_name crystal
+orientation no
+color 0xcccccc
+csurvey 6 6 80
+path
+  moveTo -5 0
+  lineTo 5 0
+  moveTo 0 -5
+  lineTo 0 5
+  lineTo 5 0
+  lineTo 0 -5
+  lineTo -5 0
+  lineTo 0 5
+endpath
+endsymbol
