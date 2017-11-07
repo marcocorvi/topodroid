@@ -363,7 +363,7 @@
     <!-- UNUSED string name="converted_tdr2th2">Конвертировать бинарные файлы абрисов в формат th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Перезаписать абрисы в формате th2 ?</string -->
     <string name="section_area">Площадь сечения: %1$.1f</string>
-    <!-- TODO string name="section_name">section comment</string -->
+    <string name="section_name">Комментарий сечения</string>
     <string name="scrap_outline">Контуры другого абриса</string>
 
     <!-- UNUSED string name="sensor">датчик</string -->
@@ -874,8 +874,8 @@
   <string name="pref_auto_reconnect_summary">Переподключиться при потере соединения с DistoX</string>
   <string name="pref_auto_pair_title">Автоматическое сопряжение</string>
   <string name="pref_auto_pair_summary">Сопряжение устройства после сканирования</string>
-  <!-- TODO string name="pref_head_tail_title">Number of new data</string -->
-  <!-- TODO string name="pref_head_tail_summary">Get the number of data before downloading them</string -->
+  <string name="pref_head_tail_title">Кол-во новых замеров</string>
+  <string name="pref_head_tail_summary">Выяснить кол-во новых измерений перед их скачиванием</string>
   <string name="pref_socket_delay_title">Задержка подключения</string>
   <string name="pref_socket_delay_summary">Задержка подключения при сопряжении [0.1 сек]</string>
   <string name="pref_socket_delay_dialogtitle">Задержка подключения при сопряжении</string>
