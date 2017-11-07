@@ -530,7 +530,7 @@
     <string name="button_store"     >Записать   </string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
-    <string name="button_upload"    >Выгрузить  </string>
+    <string name="button_upload"    >Загрузить  </string>
     <string name="button_view"      >Просмотр   </string>
 
 
