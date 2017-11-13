@@ -414,8 +414,8 @@
     <string name="survey_delete">Elimina rilievo?</string>
     <string name="survey_split">Dividi rilievo?</string>
     <string name="survey_not_attached">ATTENZIONE: dati scollegati</string>
-    <!-- TODO string name="survey_not_extend">WARNING: unset shot extends</string -->
-    <!-- TODO string name="survey_not_attached_extend">WARNING: unattached shots and unset extends</string -->
+    <string name="survey_not_extend">WARNING: extend disabilitati</string>
+    <string name="survey_not_attached_extend">WARNING: tiri non collegati ed extend disabilitati</string>
     <string name="cannot_rename">Rinomina rilievo non riuscita</string>
     <string name="declination">decl. magn.</string>
     <string name="description">descrizione</string>
@@ -534,8 +534,8 @@
 
 
     <string name="button_write"     >Installa</string>
-    <string name="button_xsection"  >Cross-Section</string>
-    <!-- TODO string name="xsection">X-Section</string -->
+    <string name="button_xsection"  >Sezione trasversale</string>
+    <string name="xsection">Sezione trasversale</string>
 
     <string name="mode_leg">Battute</string>
     <string name="mode_splay">Splay</string>
@@ -563,7 +563,7 @@
     <string name="symbol_archeo">Archeologico</string>
     <string name="symbol_bio">Biologico</string>
     <string name="symbol_geo">Geologico</string>
-    <!-- TODO string name="symbol_karst">Karst</string -->
+    <string name="symbol_karst">Carsico</string>
     <string name="symbol_mine">Minerario</string>
     <string name="symbol_paleo">Paleologico</string>
     <string name="symbol_speleo">Speleologico</string>
@@ -601,7 +601,7 @@
     <!-- UNUSED string name="btn_erase">erase</string -->
     <!-- UNUSED string name="btn_cut">cut</string -->
     <!-- UNUSED string name="btn_vertical">Vertical</string -->
-    <!-- TODO string name="btn_horizontal">Horizontal</string -->
+    <string name="btn_horizontal">Orizontale</string>
 
     <!-- UNUSED string name="btn_section">Section</string -->
     <!-- UNUSED string name="btn_step">Step</string -->
@@ -683,7 +683,7 @@
     <string name="help_range">Sposta porzione di linea</string>
     <!-- UNUSED string name="help_clear">Pulisci selezione</string -->
     <string name="help_eraser">Modalità cancella</string>
-    <!-- TODO string name="help_select_mode">Selection tool</string -->
+    <string name="help_select_mode">Strumento Selezione</string>
     <string name="help_erase_mode">Tipo di cancellino</string>
     <string name="help_erase_size">Misura cancellino [S/M/L]</string>
     <string name="help_previous">Precedente oggetto nella selezione</string>
@@ -755,8 +755,8 @@
     <string name="title_draw_line">LINEA %1$s</string>
     <string name="title_draw_point">PUNTO %1$s</string>
     <string name="title_edit">Edita</string>
-    <!-- TODO string name="title_edit_user_station">Edit user station </string -->
-    <!-- TODO string name="title_edit_station">Edit station </string -->
+    <string name="title_edit_user_station">Modifica caposaldo utente</string>
+    <string name="title_edit_station">Modifica caposaldo </string>
     <string name="title_erase">Cancella</string>
     <string name="title_fixed">Punti fissi</string>
     <string name="title_fixed_edit">Modifica posizione</string>
@@ -877,8 +877,8 @@
   <string name="pref_auto_reconnect_summary">Riconnetti al DistoX quando viene persa</string>
   <string name="pref_auto_pair_title">Associazione automatica</string>
   <string name="pref_auto_pair_summary">Associazione a DistoX dopo ricerca dispositivi</string>
-  <!-- TODO string name="pref_head_tail_title">Number of new data</string -->
-  <!-- TODO string name="pref_head_tail_summary">Get the number of data before downloading them</string -->
+  <string name="pref_head_tail_title">Numero di nuovi dati</string>
+  <string name="pref_head_tail_summary">Ottieni il numero di dati prima di scaricarli</string>
   <string name="pref_socket_delay_title">Ritardo di connessione</string>
   <string name="pref_socket_delay_summary">Ritardo di connessione per permettere la associazione [0.1 sec]</string>
   <string name="pref_socket_delay_dialogtitle">Ritardo di connessione durante la associazione</string>
@@ -1052,8 +1052,8 @@
   <string name="pref_checkBT_summary">Attiva/disattiva bluetooth</string>
   <string name="pref_checkAttached_title">Controllo poligonale</string>
   <string name="pref_checkAttached_summary">Controlla se ci sono capisaldi scollegati</string>
-  <!-- TODO string name="pref_checkExtend_title">Leg extend check</string -->
-  <!-- TODO string name="pref_checkExtend_summary">Check if leg extends are set</string -->
+  <string name="pref_checkExtend_title">Controllo extend battuta</string>
+  <string name="pref_checkExtend_summary">Controlla se gli extend di battuta sono impostati</string>
   <string name="pref_backup_number_title">Numero Backup</string>
   <string name="pref_backup_number_summary">Numero di backup di sketch file</string>
   <string name="pref_backup_interval_title">Intervallo di backup</string>
