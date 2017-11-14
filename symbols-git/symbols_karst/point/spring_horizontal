@@ -1,5 +1,6 @@
 symbol point
 name spring_horizontal
+name-pt nascente_horizontal
 name-ru источник_горизонтальный
 th_name u:spring_horizontal
 orientation no

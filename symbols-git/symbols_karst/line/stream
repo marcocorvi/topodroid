@@ -1,5 +1,6 @@
 symbol line
 name stream
+name-pt corrente
 name-ru ручей
 th_name u:stream
 style straight x0
