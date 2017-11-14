@@ -233,12 +233,14 @@ public class DrawingLineSectionDialog extends MyDialog
     // if ( mExists ) mBtnErase.setTextColor( 0xffff0000 );
 
     // mBtnSave = (Button) findViewById( R.id.button_save );
-    mBtnSave = new MyCheckBox( mContext, size, R.drawable.iz_save, R.drawable.iz_save );
-    button_list.addView( mBtnSave );
-    lp = (LinearLayout.LayoutParams) mBtnSave.getLayoutParams();
-    lp.setMargins( 0, -10, 40, 10 );
-    mBtnSave.setLayoutParams( lp );
-    mBtnSave.setOnClickListener( this );
+    if ( mPlotInfo != null ) {
+      mBtnSave = new MyCheckBox( mContext, size, R.drawable.iz_save, R.drawable.iz_save );
+      button_list.addView( mBtnSave );
+      lp = (LinearLayout.LayoutParams) mBtnSave.getLayoutParams();
+      lp.setMargins( 0, -10, 40, 10 );
+      mBtnSave.setLayoutParams( lp );
+      mBtnSave.setOnClickListener( this );
+    }
     // mBtnCancel = (Button) findViewById( R.id.button_cancel );
     // mBtnCancel.setOnClickListener( this );
   }
@@ -260,6 +262,7 @@ public class DrawingLineSectionDialog extends MyDialog
       } else if ( cb == mBtnErase ) {
         mParent.deleteLine( mLine );
       } else if ( cb == mBtnSave ) {
+	if ( mPlotInfo == null ) return;
         mParent.updatePlotNick( mPlotInfo, mNick );
       }
     }

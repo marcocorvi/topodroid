@@ -3239,7 +3239,8 @@ public class DrawingWindow extends ItemDrawer
     // also at-station
     void updatePlotNick( PlotInfo plot, String nick )
     {
-      if ( nick != null && ! nick.equals( plot.nick ) ) {
+      if ( nick == null || plot == null ) return;
+      if ( ! nick.equals( plot.nick ) ) {
         mData.updatePlotNick( plot.id, mSid, nick );
       }
     }

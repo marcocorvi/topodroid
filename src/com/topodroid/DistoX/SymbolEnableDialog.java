@@ -14,6 +14,8 @@ package com.topodroid.DistoX;
 import java.util.ArrayList;
 
 import android.os.Bundle;
+import android.os.AsyncTask;
+
 import android.app.Dialog;
 import android.app.Activity;
 import android.content.Context;
@@ -217,27 +219,45 @@ class SymbolEnableDialog extends MyDialog
 
   public void onBackPressed()
   {
-    saveSymbols();
+    new SaveSymbols( mPointAdapter, mLineAdapter, mAreaAdapter ).execute();
     dismiss();
   }
 
-  void saveSymbols()
+  private class SaveSymbols extends AsyncTask< Void, Void, Void >
   {
-    if ( TDLevel.overBasic ) {
-      mPointAdapter.updateSymbols( "p_" );
-      SymbolPointLibrary point_lib = BrushManager.mPointLib;
-      if ( point_lib != null ) point_lib.makeEnabledList();
+    SymbolAdapter mPtAdapter;
+    SymbolAdapter mLnAdapter;
+    SymbolAdapter mArAdapter;
+
+    SaveSymbols( SymbolAdapter pt_adapter, SymbolAdapter ln_adapter, SymbolAdapter ar_adapter )
+    {
+      mPtAdapter = pt_adapter;
+      mLnAdapter = ln_adapter;
+      mArAdapter = ar_adapter;
     }
 
-    mLineAdapter.updateSymbols( "l_" );
-    SymbolLineLibrary line_lib   = BrushManager.mLineLib;
-    if ( line_lib  != null ) line_lib.makeEnabledList();
+    protected Void doInBackground( Void ... v )
+    { 
+      if ( TDLevel.overBasic ) {
+        mPtAdapter.updateSymbols( "p_" );
+        SymbolPointLibrary point_lib = BrushManager.mPointLib;
+        if ( point_lib != null ) point_lib.makeEnabledList();
+      }
 
-    if ( TDLevel.overBasic ) {
-      mAreaAdapter.updateSymbols( "a_" );
-      SymbolAreaLibrary area_lib   = BrushManager.mAreaLib;
-      if ( area_lib  != null ) area_lib.makeEnabledList();
+      mLnAdapter.updateSymbols( "l_" );
+      SymbolLineLibrary line_lib   = BrushManager.mLineLib;
+      if ( line_lib  != null ) line_lib.makeEnabledList();
+
+      if ( TDLevel.overBasic ) {
+        mArAdapter.updateSymbols( "a_" );
+        SymbolAreaLibrary area_lib   = BrushManager.mAreaLib;
+        if ( area_lib  != null ) area_lib.makeEnabledList();
+      }
+      return null;
     }
+
+    // protected void onProgressUpdate() { }
+    // protected void onPostExecute( Void result ) { }
   }
 }
 
