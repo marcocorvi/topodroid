@@ -1,5 +1,6 @@
 symbol point
 name shelter
+name-pt abrigo
 name-ru укрытие
 th_name u:shelter
 orientation no

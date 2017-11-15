@@ -1,5 +1,6 @@
 symbol point
 name cone_hill
+name-pt elevação_cônica
 name-ru конусный_холм
 th_name u:cone_hill
 orientation no

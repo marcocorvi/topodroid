@@ -361,7 +361,7 @@
     <!-- UNUSED string name="converted_tdr2th2">Arquivos binários dos croquis convertidos para th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Sobrescrever arquivos de croqui th2?</string -->
     <string name="section_area">Área do corte: %1$.1f</string>
-    <!-- TODO string name="section_name">section comment</string -->
+    <string name="section_name">comentário de seção</string>
     <string name="scrap_outline">Contorno do croqui</string>
 
     <!-- UNUSED string name="sensor">sensor</string -->
@@ -413,8 +413,8 @@
     <string name="survey_delete">Apagar a topo?</string>
     <string name="survey_split">Dividir a topo?</string>
     <string name="survey_not_attached">ATENÇÃO: visadas desconectadas</string>
-    <!-- TODO string name="survey_not_extend">WARNING: unset shot extends</string -->
-    <!-- TODO string name="survey_not_attached_extend">WARNING: unattached shots and unset extends</string -->
+    <string name="survey_not_extend">ATENÇÃO: visadas sem medidas auxiliares</string>
+    <string name="survey_not_attached_extend">ATENÇÃO: visadas desconectadas e sem medidas auxiliares</string>
     <string name="cannot_rename">Não é possível renomear a topo</string>
     <string name="declination">declinação magnética</string>
     <string name="description">descrição</string>
@@ -534,7 +534,7 @@
 
     <string name="button_write"     >Enviar</string>
     <string name="button_xsection"  >Corte X</string>
-    <!-- TODO string name="xsection">X-Section</string -->
+    <string name="xsection">Corte X</string>
 
     <string name="mode_leg">Visadas</string>
     <string name="mode_splay">Medidas auxiliares</string>
@@ -562,7 +562,7 @@
     <string name="symbol_archeo">Arqueologia</string>
     <string name="symbol_bio">Biologia</string>
     <string name="symbol_geo">Geologia</string>
-    <!-- TODO string name="symbol_karst">Karst</string -->
+    <string name="symbol_karst">Carste</string>
     <string name="symbol_mine">Mineração</string>
     <string name="symbol_paleo">Paleologia</string>
     <string name="symbol_speleo">Espeleologia</string>
@@ -600,7 +600,7 @@
     <!-- UNUSED string name="btn_erase">Apagar</string -->
     <!-- UNUSED string name="btn_cut">Cortar</string -->
     <!-- UNUSED string name="btn_vertical">Vertical</string -->
-    <!-- TODO string name="btn_horizontal">Horizontal</string -->
+    <string name="btn_horizontal">Horizontal</string>
 
     <!-- select buttin labels -->
     <!-- UNUSED string name="btn_section">Corte</string -->
@@ -683,7 +683,7 @@
     <string name="help_range">Mover uma parte da linha</string>
     <!-- UNUSED string name="help_clear">Deselecionar tudo</string -->
     <string name="help_eraser">Modo APAGAR</string>
-    <!-- TODO string name="help_select_mode">Selection tool</string -->
+    <string name="help_select_mode">Ferramenta de seleção</string>
     <string name="help_erase_mode">Tipo de borracha</string>
     <string name="help_erase_size">Tamamho da borracha [P/M/G]</string>
     <string name="help_previous">Selecionar objeto anterior</string>
@@ -755,8 +755,8 @@
     <string name="title_draw_line">LINHA %1$s</string>
     <string name="title_draw_point">PONTO %1$s</string>
     <string name="title_edit">Editar</string>
-    <!-- TODO string name="title_edit_user_station">Edit user station </string -->
-    <!-- TODO string name="title_edit_station">Edit station </string -->
+    <string name="title_edit_user_station">Alterar base do usuário </string>
+    <string name="title_edit_station">Alterar base </string>
     <string name="title_erase">Apagar</string>
     <string name="title_fixed">Localizações</string>
     <string name="title_fixed_edit">Editar coordenadas</string>
@@ -872,8 +872,8 @@
   <string name="pref_auto_reconnect_summary">Reconectar automaticamente quando a conexão for perdida</string>
   <string name="pref_auto_pair_title">Pareamento automático</string>
   <string name="pref_auto_pair_summary">Parear com o dispositivo após a busca</string>
-  <!-- TODO string name="pref_head_tail_title">Number of new data</string -->
-  <!-- TODO string name="pref_head_tail_summary">Get the number of data before downloading them</string -->
+  <string name="pref_head_tail_title">Quantidade de dados novos</string>
+  <string name="pref_head_tail_summary">Obtenha a quantidade de novos dados antes de baixá-los</string>
   <string name="pref_socket_delay_title">Atraso conexão</string>
   <string name="pref_socket_delay_summary">Tempo de espera da conexão para permitir o pareamento [0.1 sec]</string>
   <string name="pref_socket_delay_dialogtitle">Atraso da conexão durante o pareamento</string>
@@ -1046,8 +1046,8 @@
   <string name="pref_checkBT_summary">Habilitar verificação do Bluetooth na abertura do aplicativo</string>
   <string name="pref_checkAttached_title">Verificação linha de trena</string>
   <string name="pref_checkAttached_summary">Verificar se as bases estão conectadas</string>
-  <!-- TODO string name="pref_checkExtend_title">Leg extend check</string -->
-  <!-- TODO string name="pref_checkExtend_summary">Check if leg extends are set</string -->
+  <string name="pref_checkExtend_title">Verificar medidas auxiliares de visada</string>
+  <string name="pref_checkExtend_summary">Verificar se a visada tem medidas auxiliares definidas</string>
   <string name="pref_backup_number_title">Quantidade backup</string>
   <string name="pref_backup_number_summary">Quantidade de backups do croqui</string>
   <string name="pref_backup_interval_title">Intervalos backup</string>

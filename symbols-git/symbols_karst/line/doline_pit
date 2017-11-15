@@ -1,5 +1,6 @@
 symbol line
 name doline_pit
+name-pt poço_de_dolina
 name-ru какстовый_провал
 th_name u:doline_pit
 group doline

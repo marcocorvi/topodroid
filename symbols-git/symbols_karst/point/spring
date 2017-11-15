@@ -1,5 +1,6 @@
 symbol point
 name spring
+name-pt nascente
 name-ru источник
 th_name u:spring
 orientation no
