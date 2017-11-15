@@ -30,7 +30,7 @@ public class BezierInterpolator
 
   public BezierInterpolator()
   {
-    curves = new ArrayList< BezierCurve >();
+    curves = new ArrayList<>();
     C = new float[2][2];
     X = new float[2];
   }
@@ -306,7 +306,7 @@ public class BezierInterpolator
       nghb[k1] = k2;
     }
 
-    ArrayList<Integer> corners = new ArrayList<Integer>();
+    ArrayList<Integer> corners = new ArrayList<>();
     corners.add( Integer.valueOf(0) );
     int kc = 0;
     int kgap = 0;

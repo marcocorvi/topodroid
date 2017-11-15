@@ -57,7 +57,7 @@ public class CalibValidateListDialog extends MyDialog
     setContentView(R.layout.calib_validate_list_dialog );
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
-    mArrayAdapter = new ArrayAdapter<String>( mContext, R.layout.message );
+    mArrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
 
     mList = (ListView) findViewById(R.id.list);
     mList.setAdapter( mArrayAdapter );

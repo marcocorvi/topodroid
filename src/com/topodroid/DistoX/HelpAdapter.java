@@ -40,7 +40,7 @@ class HelpAdapter extends ArrayAdapter< HelpEntry >
     if ( items != null ) {
       mItems = items;
     } else {
-      mItems = new ArrayList< HelpEntry >();
+      mItems = new ArrayList<>();
     }
   }
 

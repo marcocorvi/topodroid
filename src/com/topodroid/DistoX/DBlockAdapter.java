@@ -47,15 +47,15 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     mContext = ctx;
     mParent  = parent;
     mItems   = items;
-    mSelect  = new ArrayList< DBlock >();
+    mSelect  = new ArrayList<>();
     mLayoutInflater = (LayoutInflater)ctx.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-    mViews = new ArrayList< View >();
+    mViews = new ArrayList<>();
   }
 
   int[] searchStation( String name, boolean splays )
   {
     if ( name == null || name.length() == 0 ) return null;
-    ArrayList<Integer> res = new ArrayList<Integer>();
+    ArrayList<Integer> res = new ArrayList<>();
     for ( int pos=0; pos < mItems.size(); ++pos ) {
       DBlock blk = mItems.get( pos );
       if ( blk.isSplay() && splays && name.equals( blk.mFrom ) ) {
@@ -125,7 +125,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
    */
   ArrayList< DBlock > getSplaysAtId( long id, String name )
   {
-    ArrayList< DBlock > ret = new ArrayList< DBlock >();
+    ArrayList< DBlock > ret = new ArrayList<>();
     for ( int k = 0; k < mItems.size(); ++k ) {
       DBlock b = mItems.get( k );
       if ( b.mId == id ) {
@@ -184,7 +184,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
 
   ArrayList< DBlock > getItemsForAssign()
   {
-    ArrayList< DBlock > ret = new ArrayList<DBlock>();
+    ArrayList< DBlock > ret = new ArrayList<>();
     int size = mItems.size();
     int k = size-1;
     for ( ; k > 0; --k ) {
@@ -284,7 +284,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
         tvLength.setBackgroundColor( TDColor.VERYDARK_GRAY );
       } else if ( b.mType == DBlock.BLOCK_MAIN_LEG && b.mLength < TDSetting.mMinLegLength ) {
         tvLength.setBackgroundColor( TDColor.BROWN );
-      } else if ( DistoXAccuracy.isBlockMagneticBad( b ) ) {
+      } else if ( mParent.isBlockMagneticBad( b ) ) {
         tvLength.setBackgroundColor( TDColor.DARK_RED );
       } else {
         tvLength.setBackgroundColor( TDColor.BLACK );

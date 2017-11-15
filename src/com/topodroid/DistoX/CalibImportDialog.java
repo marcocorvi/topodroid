@@ -60,7 +60,7 @@ public class CalibImportDialog extends MyDialog
 
     initLayout( R.layout.import_dialog, R.string.calib_import_title );
 
-    mArrayAdapter = new ArrayAdapter<String>( mContext, R.layout.message );
+    mArrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
     mList = (ListView) findViewById(R.id.list);
     mList.setOnItemClickListener( this );
     mList.setDividerHeight( 2 );
@@ -71,7 +71,7 @@ public class CalibImportDialog extends MyDialog
     // setTitleColor( 0x006d6df6 );
 
     File[] files = TDPath.getCalibFiles();
-    ArrayList<String> names = new ArrayList<String>();
+    ArrayList<String> names = new ArrayList<>();
     if ( files != null ) {
       for ( File f : files ) { 
         names.add( f.getName() );

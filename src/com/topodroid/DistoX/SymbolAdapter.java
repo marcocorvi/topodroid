@@ -44,7 +44,7 @@ class SymbolAdapter extends ArrayAdapter< EnableSymbol >
     if ( items != null ) {
       mItems = items;
     } else {
-      mItems = new ArrayList< EnableSymbol >();
+      mItems = new ArrayList<>();
     }
   }
 

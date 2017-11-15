@@ -75,7 +75,7 @@ public class DrawingLineDialog extends MyDialog
 
     mETtype = (Spinner) findViewById( R.id.line_type );
     // mETtype.setText( BrushManager.mLineLib.getSymbolThName( mLine.mLineType ) );
-    ArrayAdapter adapter = new ArrayAdapter<String>( mContext, R.layout.menu, BrushManager.mLineLib.getSymbolNames() );
+    ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, BrushManager.mLineLib.getSymbolNames() );
     mETtype.setAdapter( adapter );
     mETtype.setSelection( mType );
     mETtype.setOnItemSelectedListener( this );

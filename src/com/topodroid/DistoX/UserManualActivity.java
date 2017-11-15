@@ -111,7 +111,7 @@ public class UserManualActivity extends Activity
     mImage.setOnClickListener( this );
     mList = (ListView) findViewById( R.id.content );
 
-    ArrayAdapter< String > adapter = new ArrayAdapter<String>(this, R.layout.message );
+    ArrayAdapter< String > adapter = new ArrayAdapter<>(this, R.layout.message );
     adapter.add("Preface");        // manual00
     adapter.add("1. Introducion");
     adapter.add("2. Main window");      // manual04

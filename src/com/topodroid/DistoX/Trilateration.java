@@ -37,8 +37,8 @@ class Trilateration
 
   Trilateration( TriCluster cl )
   {
-    legs   = new ArrayList<TriLeg>();
-    points = new ArrayList<TriPoint>();
+    legs   = new ArrayList<>();
+    points = new ArrayList<>();
 
     // populate
     for ( String n : cl.stations ) {

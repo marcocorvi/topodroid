@@ -1486,7 +1486,7 @@ public class DataHelper extends DataSetObservable
 
   public List< SensorInfo > selectAllSensors( long sid, long status )
   {
-    List< SensorInfo > list = new ArrayList< SensorInfo >();
+    List< SensorInfo > list = new ArrayList<>();
     if ( myDB == null ) return list;
     Cursor cursor = myDB.query( SENSOR_TABLE,
        		         new String[] { "id", "shotId", "title", "date", "comment", "type", "value" }, // columns
@@ -1526,7 +1526,7 @@ public class DataHelper extends DataSetObservable
 
   private List< SensorInfo > selectSensorsAtShot( long sid, long shotid )
   {
-    List< SensorInfo > list = new ArrayList< SensorInfo >();
+    List< SensorInfo > list = new ArrayList<>();
     if ( myDB == null ) return list;
     Cursor cursor = myDB.query( SENSOR_TABLE,
        		         new String[] { "id", "shotId", "title", "date", "comment", "type", "value" }, // columns
@@ -1631,7 +1631,7 @@ public class DataHelper extends DataSetObservable
 
   public List< AudioInfo > selectAllAudios( long sid )
   {
-    List< AudioInfo > list = new ArrayList< AudioInfo >();
+    List< AudioInfo > list = new ArrayList<>();
     if ( myDB == null ) return list;
     Cursor cursor = myDB.query( AUDIO_TABLE,
        		                new String[] { "id", "shotId", "date" }, // columns
@@ -1662,7 +1662,7 @@ public class DataHelper extends DataSetObservable
 
   public List< PhotoInfo > selectAllPhotos( long sid, long status )
   {
-    List< PhotoInfo > list = new ArrayList< PhotoInfo >();
+    List< PhotoInfo > list = new ArrayList<>();
     if ( myDB == null ) return list;
     Cursor cursor = myDB.query( PHOTO_TABLE,
        		         new String[] { "id", "shotId", "title", "date", "comment" }, // columns
@@ -1699,7 +1699,7 @@ public class DataHelper extends DataSetObservable
 
   List< PhotoInfo > selectPhotoAtShot( long sid, long shotid )
   {
-    List< PhotoInfo > list = new ArrayList< PhotoInfo >();
+    List< PhotoInfo > list = new ArrayList<>();
     if ( myDB == null ) return list;
     Cursor cursor = myDB.query( PHOTO_TABLE,
                                 new String[] { "id", "shotId", "title", "date", "comment" }, // columns
@@ -1735,7 +1735,7 @@ public class DataHelper extends DataSetObservable
 
   public List< FixedInfo > selectAllFixed( long sid, int status )
   {
-    List<  FixedInfo  > list = new ArrayList<  FixedInfo  >();
+    List< FixedInfo > list = new ArrayList<>();
     if ( myDB == null ) return list;
     Cursor cursor = myDB.query( FIXED_TABLE,
                                 mFixedFields,
@@ -1766,7 +1766,7 @@ public class DataHelper extends DataSetObservable
 
    private List< FixedInfo > selectFixedAtStation( long sid, String name )
    {
-     List<  FixedInfo  > list = new ArrayList<  FixedInfo  >();
+     List< FixedInfo > list = new ArrayList<>();
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query( FIXED_TABLE,
                                  mFixedFields,
@@ -1875,7 +1875,7 @@ public class DataHelper extends DataSetObservable
 
    private List< PlotInfo > doSelectAllPlots( long sid, String where_str, String[] where )
    {
-     List<  PlotInfo  > list = new ArrayList<  PlotInfo  >();
+     List< PlotInfo > list = new ArrayList<>();
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query( PLOT_TABLE, mPlotFields, where_str, where, null, null, "id" );
      if (cursor.moveToFirst()) {
@@ -2182,7 +2182,7 @@ public class DataHelper extends DataSetObservable
 
    public List<DBlock> selectShotsBetweenStations( long sid, String st1, String st2, long status )
    {
-     List< DBlock > list = new ArrayList< DBlock >();
+     List< DBlock > list = new ArrayList<>();
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
                      "surveyId=? and status=? and ( ( fStation=? and tStation=? ) or ( fStation=? and tStation=? ) )",
@@ -2201,7 +2201,7 @@ public class DataHelper extends DataSetObservable
 
    public List<DBlock> selectShotsAfterId( long sid, long id , long status )
    {
-     List< DBlock > list = new ArrayList< DBlock >();
+     List< DBlock > list = new ArrayList<>();
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
                      "surveyId=? and status=? and id>?",
@@ -2222,7 +2222,7 @@ public class DataHelper extends DataSetObservable
    // in the case of legs, select only "independent" legs (one for each neighbor station)
    public List<DBlock> selectShotsAt( long sid, String station, boolean leg )
    {
-     List< DBlock > list = new ArrayList< DBlock >();
+     List< DBlock > list = new ArrayList<>();
      if ( station == null || station.length() == 0 ) return list;
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
@@ -2266,7 +2266,7 @@ public class DataHelper extends DataSetObservable
 
    public List<DBlock> selectSplaysAt( long sid, String station, boolean leg )
    {
-     List< DBlock > list = new ArrayList< DBlock >();
+     List< DBlock > list = new ArrayList<>();
      if ( station == null || station.length() == 0 ) return list;
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
@@ -2292,7 +2292,7 @@ public class DataHelper extends DataSetObservable
    {
      if ( station2 == null ) return selectAllShotsAtStation( sid, station1 );
 
-     List< DBlock > list = new ArrayList< DBlock >();
+     List< DBlock > list = new ArrayList<>();
      if ( station1 == null ) return list;
 
      if ( myDB == null ) return list;
@@ -2316,7 +2316,7 @@ public class DataHelper extends DataSetObservable
 
    public List<DBlock> selectAllShotsAtStation( long sid, String station )
    {
-     List< DBlock > list = new ArrayList< DBlock >();
+     List< DBlock > list = new ArrayList<>();
      if ( station == null ) return list;
 
      if ( myDB == null ) return list;
@@ -2340,7 +2340,7 @@ public class DataHelper extends DataSetObservable
 
    public List<DBlock> selectAllShotsToStation( long sid, String station )
    {
-     List< DBlock > list = new ArrayList< DBlock >();
+     List< DBlock > list = new ArrayList<>();
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
                      "surveyId=? and status=? and tStation=?", 
@@ -2362,7 +2362,7 @@ public class DataHelper extends DataSetObservable
 
    public ArrayList<String> selectAllStationsBefore( long id, long sid, long status )
    {
-     ArrayList< String > list = new ArrayList< String >();
+     ArrayList< String > list = new ArrayList<>();
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, new String[] { "fStation", "tStation" },
                      "id<=? and surveyId=? and status=?",
@@ -2383,7 +2383,7 @@ public class DataHelper extends DataSetObservable
 
    public List<DBlock> selectAllShotsAfter( long id, long sid, long status )
    {
-     List< DBlock > list = new ArrayList< DBlock >();
+     List< DBlock > list = new ArrayList<>();
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
                      "id>=? and surveyId=? and status=?",
@@ -2403,7 +2403,7 @@ public class DataHelper extends DataSetObservable
 
    public List<DBlock> selectAllShots( long sid, long status )
    {
-     List< DBlock > list = new ArrayList< DBlock >();
+     List< DBlock > list = new ArrayList<>();
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
                      WHERE_SID_STATUS, new String[]{ Long.toString(sid), Long.toString(status) },
@@ -2422,7 +2422,7 @@ public class DataHelper extends DataSetObservable
 
    public List<DBlock> selectAllLegShots( long sid, long status )
    {
-     List< DBlock > list = new ArrayList< DBlock >();
+     List< DBlock > list = new ArrayList<>();
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
                      WHERE_SID_STATUS, new String[]{ Long.toString(sid), Long.toString(status) },
@@ -2470,7 +2470,7 @@ public class DataHelper extends DataSetObservable
    {
      // TDLog.Log( TDLog.LOG_DB, "selectAllNames table " + table );
 
-     List< String > list = new ArrayList< String >();
+     List< String > list = new ArrayList<>();
      if ( myDB == null ) return list;
      try {
        Cursor cursor = myDB.query( table,
@@ -3372,7 +3372,7 @@ public class DataHelper extends DataSetObservable
 
    private List< Sketch3dInfo > doSelectAllSketches( long sid, String where_str, String[] where )
    {
-     List<  Sketch3dInfo  > list = new ArrayList<  Sketch3dInfo  >();
+     List< Sketch3dInfo > list = new ArrayList<>();
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query( SKETCH_TABLE, mSketchFields,
                                  where_str, where,
@@ -4026,7 +4026,7 @@ public class DataHelper extends DataSetObservable
 
    ArrayList< CurrentStation > getStations( long sid )
    {
-     ArrayList< CurrentStation > ret = new ArrayList< CurrentStation >();
+     ArrayList< CurrentStation > ret = new ArrayList<>();
      if ( myDB == null ) return ret;
      Cursor cursor = myDB.query( STATION_TABLE, 
                             new String[] { "name", "comment", "flag" },

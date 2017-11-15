@@ -131,7 +131,7 @@ public class PlotRecoverDialog extends MyDialog
 
   private void updateList()
   {
-    mAdapter = new ArrayAdapter<String>( mContext, R.layout.message );
+    mAdapter = new ArrayAdapter<>( mContext, R.layout.message );
 
     // if ( TDSetting.mBinaryTh2 ) { // TDR BINARY
       populateAdapter( TDPath.getTdrFileWithExt( mFilename ), ".tdr" );

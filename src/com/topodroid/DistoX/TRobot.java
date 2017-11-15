@@ -26,8 +26,8 @@ public class TRobot
 
   TRobot( List< DBlock > blks )
   {
-    mSeries = new ArrayList< TRobotSeries >();
-    mPoints = new ArrayList< TRobotPoint  >();
+    mSeries = new ArrayList<>();
+    mPoints = new ArrayList<>();
 
     boolean done = false;
     if ( TDSetting.mTRobotShot ) {
@@ -106,7 +106,7 @@ public class TRobot
   private void buildSeries( List<DBlock> blks )
   {
     int mSrCnt = 0;
-    ArrayList< DBlock > repeat = new ArrayList<DBlock>();
+    ArrayList< DBlock > repeat = new ArrayList<>();
     for ( DBlock blk : blks ) {
       if ( blk.mType == DBlock.BLOCK_MAIN_LEG ) repeat.add( blk );
     }

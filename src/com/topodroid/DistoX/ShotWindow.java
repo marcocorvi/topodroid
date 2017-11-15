@@ -174,6 +174,7 @@ public class ShotWindow extends Activity
   private TopoDroidApp   mApp;
   private Activity       mActivity;
   private DataDownloader mDataDownloader;
+  DistoXAccuracy mDistoXAccuracy;
 
   boolean mSplay = true;  //!< whether to hide splay shots
   boolean mLeg   = true;  //!< whether to hide leg extra shots
@@ -288,7 +289,8 @@ public class ShotWindow extends Activity
     DataHelper data = mApp.mData;
     if ( data != null && mApp.mSID >= 0 ) {
       List<DBlock> list = data.selectAllShots( mApp.mSID, TDStatus.NORMAL );
-      if ( list.size() > 4 ) DistoXAccuracy.addBlocks( list );
+      mDistoXAccuracy = new DistoXAccuracy( list ); 
+      // if ( list.size() > 4 ) DistoXAccuracy.setBlocks( list );
 
       List< PhotoInfo > photos = data.selectAllPhotos( mApp.mSID, TDStatus.NORMAL );
       // TDLog.Log( TDLog.LOG_SHOT, "update Display() shot list size " + list.size() );
@@ -300,6 +302,8 @@ public class ShotWindow extends Activity
       Toast.makeText( mActivity, R.string.no_survey, Toast.LENGTH_SHORT ).show();
     }
   }
+
+  boolean isBlockMagneticBad( DBlock blk ) { return mDistoXAccuracy.isBlockMagneticBad( blk ); }
 
   public void setTheTitle()
   {
@@ -347,7 +351,7 @@ public class ShotWindow extends Activity
     if ( mDataAdapter != null ) {
       // FIXME 3.3.0
       mDataAdapter.addDataBlock( blk );
-      DistoXAccuracy.addBlock( blk );
+      mDistoXAccuracy.addBlock( blk );
       if ( TDSetting.mBacksightShot || TDSetting.mTripodShot ) {
         mApp.assignStationsAll( mDataAdapter.mItems );
       } else {
@@ -842,8 +846,9 @@ public class ShotWindow extends Activity
     mDataDownloader = mApp.mDataDownloader; // new DataDownloader( this, mApp );
     mActivity = this;
     mOnOpenDialog = false;
+    mDistoXAccuracy = new DistoXAccuracy( ); 
 
-    mShowSplay   = new ArrayList< String >();
+    mShowSplay   = new ArrayList<>();
     // mDataAdapter = new DBlockAdapter( this, this, R.layout.row, new ArrayList<DBlock>() );
     mDataAdapter = new DBlockAdapter( this, this, R.layout.dblock_row, new ArrayList<DBlock>() );
 
@@ -1628,7 +1633,7 @@ public class ShotWindow extends Activity
     int k = 0;
     // HOVER
     // mMenuAdapter = new MyMenuAdapter( mActivity, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
-    mMenuAdapter = new ArrayAdapter<String>(mActivity, R.layout.menu );
+    mMenuAdapter = new ArrayAdapter<>(mActivity, R.layout.menu );
 
     mMenuAdapter.add( res.getString( menus[k++] ) );                                      // menu_survey
     mMenuAdapter.add( res.getString( menus[k++] ) );                                      // menu_close

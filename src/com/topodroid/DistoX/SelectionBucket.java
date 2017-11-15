@@ -31,7 +31,7 @@ class SelectionBucket
     y0 = _y0;
     x1 = _x1;
     y1 = _y1;
-    mPoints = new ArrayList< SelectionPoint >();
+    mPoints = new ArrayList<>();
   }
 
   // check if this bucket intersect a rectangle ( _x0 < _x1 and _y0 < _y1 )

@@ -59,7 +59,7 @@ public class FirmwareFileDialog extends MyDialog
 
     initLayout( R.layout.firmware_file_dialog, R.string.firmware_file_title );
 
-    mArrayAdapter = new ArrayAdapter<String>( mContext, R.layout.message );
+    mArrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
 
     mList = (ListView) findViewById( R.id.list );
     mList.setOnItemClickListener( this );
@@ -70,7 +70,7 @@ public class FirmwareFileDialog extends MyDialog
     // setTitleColor( 0x006d6df6 );
 
     File[] files = TDPath.getBinFiles();
-    ArrayList<String> names = new ArrayList<String>();
+    ArrayList<String> names = new ArrayList<>();
     if ( files != null ) {
       for ( File f : files ) { 
         names.add( f.getName() );

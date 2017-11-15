@@ -65,7 +65,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
         item.setOnClickListener( this );
       }
     } else {
-      mItems = new ArrayList< ItemSymbol >();
+      mItems = new ArrayList<>();
     }
   }
 

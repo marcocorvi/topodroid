@@ -20,7 +20,7 @@ class SketchBorder
 
   SketchBorder()
   {
-    sides = new ArrayList<SketchSide>();
+    sides = new ArrayList<>();
     mCenter = null;
   }
 

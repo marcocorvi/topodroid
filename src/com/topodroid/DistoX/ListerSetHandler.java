@@ -25,7 +25,7 @@ public class ListerSetHandler extends ListerHandler
 
   ListerSetHandler()
   {
-    mListers = new ArrayList< ILister >();
+    mListers = new ArrayList<>();
   }
 
   int size() { return mListers.size(); }

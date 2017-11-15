@@ -46,7 +46,7 @@ public class TriShot
     commented = false;
     backshot  = 0;
     sibling = null;
-    blocks = new ArrayList<DBlock>();
+    blocks = new ArrayList<>();
     blocks.add( blk );
     mAvgLeg = new AverageLeg( 0.0f ); // temporary shot do not consider declination
     mAvgLeg.set( blk );

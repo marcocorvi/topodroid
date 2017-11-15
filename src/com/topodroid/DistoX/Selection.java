@@ -29,8 +29,8 @@ class Selection
 
   Selection( )
   {
-    mPoints  = new ArrayList< SelectionPoint >();
-    mBuckets = new ArrayList< SelectionBucket >();
+    mPoints  = new ArrayList<>();
+    mBuckets = new ArrayList<>();
   }
 
   void shiftSelectionBy( float x, float y )

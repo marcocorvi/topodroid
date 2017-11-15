@@ -28,7 +28,7 @@ class PTPolygonElement extends PTElement
     {
       super( ID_POLYGON_ELEMENT );
       // _point_count = 0;
-      _points = new ArrayList<PTPoint>();
+      _points = new ArrayList<>();
       _color = 0;
     }
 

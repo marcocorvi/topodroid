@@ -65,7 +65,7 @@ public class ScrapOutlineDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.scrap_outline_dialog );
-    mArrayAdapter = new ArrayAdapter<String>( mContext, R.layout.message );
+    mArrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
     // mArrayAdapter = new ListItemAdapter( mContext, R.layout.message );
 
     mList = (ListView) findViewById(R.id.list);

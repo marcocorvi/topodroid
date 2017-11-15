@@ -368,7 +368,7 @@ public class DrawingCommandManager
    */
   List< DrawingPath > getIntersectionShot( LinePoint p1, LinePoint p2 )
   {
-    List< DrawingPath > ret = new ArrayList< DrawingPath >();
+    List< DrawingPath > ret = new ArrayList<>();
     for ( DrawingPath p : mLegsStack ) {
       if ( p.mType == DrawingPath.DRAWING_PATH_FIXED ) {
         if ( p.intersect( p1.x, p1.y, p2.x, p2.y, null ) ) {
@@ -783,7 +783,7 @@ public class DrawingCommandManager
 
   List<DrawingPath> splitPlot( ArrayList< PointF > border, boolean remove ) 
   {
-    ArrayList<DrawingPath> paths = new ArrayList<DrawingPath>();
+    ArrayList<DrawingPath> paths = new ArrayList<>();
     synchronized( mCurrentStack ) {
       final Iterator i = mCurrentStack.iterator();
       while ( i.hasNext() ){
@@ -830,7 +830,7 @@ public class DrawingCommandManager
     synchronized( mCurrentStack ) {
       int index = BrushManager.mPointLib.mPointSectionIndex;
       if ( index >= 0 ) {
-        ArrayList<DrawingPath> todo = new ArrayList<DrawingPath>();
+        ArrayList<DrawingPath> todo = new ArrayList<>();
         final Iterator i = mCurrentStack.iterator();
         while ( i.hasNext() ){
           final ICanvasCommand c = (ICanvasCommand) i.next();
@@ -1962,7 +1962,7 @@ public class DrawingCommandManager
     DrawingLinePath line = (DrawingLinePath)item;
 
     // nearby splays are the splays that get close enough (dthr) to the line
-    ArrayList< NearbySplay > splays = new ArrayList< NearbySplay >();
+    ArrayList< NearbySplay > splays = new ArrayList<>();
     for ( DrawingPath fxd : mSplaysStack ) {
       float x = fxd.x2;
       float y = fxd.y2;
@@ -2554,7 +2554,7 @@ public class DrawingCommandManager
   void exportAsCsx( PrintWriter pw, String survey, String cave, String branch,
                     List<PlotInfo> all_sections, List<PlotInfo> sections )
   {
-    ArrayList< DrawingPath > paths = new ArrayList< DrawingPath >();
+    ArrayList< DrawingPath > paths = new ArrayList<>();
     synchronized( mCurrentStack ) {
       for ( ICanvasCommand cmd : mCurrentStack ) {
         if ( cmd.commandType() == 0 ) paths.add( (DrawingPath) cmd );

@@ -249,7 +249,7 @@ public class DeviceHelper extends DataSetObservable
 
   public List<CalibCBlock> selectAllGMs( long cid, int status )
   {
-    List< CalibCBlock > list = new ArrayList< CalibCBlock >();
+    List< CalibCBlock > list = new ArrayList<>();
     // if ( myDB == null ) return list;
     Cursor cursor = null;
     try {
@@ -433,7 +433,7 @@ public class DeviceHelper extends DataSetObservable
   {
     TDLog.Log( TDLog.LOG_DB, "selectAllNames table " + table );
 
-    List< String > list = new ArrayList< String >();
+    List< String > list = new ArrayList<>();
     // if ( myDB == null ) return list;
     Cursor cursor = null;
     try {
@@ -455,7 +455,7 @@ public class DeviceHelper extends DataSetObservable
 
   public List<String> selectDeviceCalibs( String device ) 
   {
-    List<String> ret = new ArrayList<String>();
+    List<String> ret = new ArrayList<>();
     Cursor cursor = null;
     try {
       cursor = myDB.query( CALIB_TABLE,
@@ -475,7 +475,7 @@ public class DeviceHelper extends DataSetObservable
 
   public List<CalibInfo> selectDeviceCalibsInfo( String device ) 
   {
-    List<CalibInfo> ret = new ArrayList<CalibInfo>();
+    List<CalibInfo> ret = new ArrayList<>();
     Cursor cursor = null;
     try {
       cursor = myDB.query( CALIB_TABLE,
@@ -717,7 +717,7 @@ public class DeviceHelper extends DataSetObservable
 
   public ArrayList< Device > getDevices( ) 
   {
-    ArrayList<Device> ret = new ArrayList<Device>();
+    ArrayList<Device> ret = new ArrayList<>();
     // if ( myDB == null ) return ret;
     Cursor cursor = null;
     try {

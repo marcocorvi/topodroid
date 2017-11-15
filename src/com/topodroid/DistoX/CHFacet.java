@@ -1,4 +1,4 @@
-/** @filke Facet.java
+/** @filke CHFacet.java
  *
  * @author marco corvi
  * @date may 2017
@@ -19,7 +19,7 @@ import java.lang.Math;
 import android.util.Log;
 
 
-public class Facet
+public class CHFacet
 {
   boolean valid;
   int    nr; // number of vectors
@@ -29,7 +29,7 @@ public class Facet
   private boolean hasCenter;
   private boolean hasNormal;
 
-  Facet( int n )
+  CHFacet( int n )
   {
     valid = true;
     nr = n;
@@ -40,11 +40,13 @@ public class Facet
     hasNormal = false;
   }
 
-  void setVertex( int k, Vector v ) 
+  boolean setVertex( int k, Vector v ) 
   { 
+    if ( k < 0 || k >= nr ) return false;
     mV[k] = v;
     hasCenter = false;
     hasNormal = false;
+    return true;
   }
 
   void computeCenter()
@@ -83,39 +85,39 @@ public class Facet
 
   boolean isPositive( Vector p ) { return signedDistance(p) > 0.0000001f; }
 
-  Triangle[] refineAtCenter()
+  CHTriangle[] refineAtCenter()
   {
-    Triangle[] ret = new Triangle[nr];
+    CHTriangle[] ret = new CHTriangle[nr];
     Vector v1 = mV[nr-1].minus( mCenter );
     for ( int n=0; n<nr; ++n ) {
       Vector v2 = mV[n].minus( mCenter );
-      ret[n] = new Triangle( v1, v2, mCenter );
+      ret[n] = new CHTriangle( v1, v2, mCenter );
       v1 = v2;
     }
     return ret;
   }
 
-  Triangle[] refineAtSides()
+  CHTriangle[] refineAtSides()
   {
 /*
     Vector a = mB.plus( mC ); a.timesEqual( 0.5f );
     Vector b = mC.plus( mA ); b.timesEqual( 0.5f );
     Vector c = mA.plus( mB ); c.timesEqual( 0.5f );
     
-    Triangle[] ret = new Triangle[4];
-    ret[0] = new Triangle( a, b, c );
-    ret[1] = new Triangle( mA, c, b );
-    ret[2] = new Triangle( mB, a, c );
-    ret[3] = new Triangle( mC, b, a );
+    CHTriangle[] ret = new CHTriangle[4];
+    ret[0] = new CHTriangle( a, b, c );
+    ret[1] = new CHTriangle( mA, c, b );
+    ret[2] = new CHTriangle( mB, a, c );
+    ret[3] = new CHTriangle( mC, b, a );
     return ret;
 */
     return null;
   }
 
-  Triangle[] refineAtVertex( Vector p )
+  CHTriangle[] refineAtVertex( Vector p )
   {
 /*
-    Triangle[] ret = new Triangle[3];
+    CHTriangle[] ret = new CHTriangle[3];
 
     Vector va=null, vb=null, vc=null;
     if ( p == mA ) {
@@ -131,13 +133,13 @@ public class Facet
     Vector b = vc.plus( va ); b.timesEqual( 0.5f );
     Vector c = va.plus( vb ); c.timesEqual( 0.5f );
 
-    ret[0] = new Triangle( va, c, b );
+    ret[0] = new CHTriangle( va, c, b );
     if ( va.distance( vb ) > va.distance( vc ) ) {
-      ret[1] = new Triangle( vb, b, c );
-      ret[2] = new Triangle( vb, vc, b );
+      ret[1] = new CHTriangle( vb, b, c );
+      ret[2] = new CHTriangle( vb, vc, b );
     } else {
-      ret[1] = new Triangle( vc, b, c );
-      ret[2] = new Triangle( vb, vc, c );
+      ret[1] = new CHTriangle( vc, b, c );
+      ret[2] = new CHTriangle( vb, vc, c );
     }
     return ret;
 */

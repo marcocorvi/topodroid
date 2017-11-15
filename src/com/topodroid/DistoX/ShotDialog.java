@@ -190,7 +190,7 @@ public class ShotDialog extends MyDialog
 
     // Log.v("DistoX", "shot is manual " + shot_manual + " length " + shot_distance );
 
-    shot_extra   = blk.extraString();
+    shot_extra   = blk.extraString( mParent.mDistoXAccuracy );
     shot_extend  = blk.getExtend();
     shot_flag    = blk.getFlag();
     shot_leg     = blk.mType == DBlock.BLOCK_SEC_LEG;

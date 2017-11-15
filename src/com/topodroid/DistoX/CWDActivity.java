@@ -79,7 +79,7 @@ public class CWDActivity extends Activity
   public void updateDisplay( )
   {
     File[] dirs = TDPath.getTopoDroidFiles();
-    ArrayAdapter<String> adapter = new ArrayAdapter<String>( this, R.layout.menu );
+    ArrayAdapter<String> adapter = new ArrayAdapter<>( this, R.layout.menu );
     for ( File item : dirs ) {
       adapter.add( item.getName() );
     }

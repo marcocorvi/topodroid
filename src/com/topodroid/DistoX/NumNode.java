@@ -29,10 +29,10 @@ public class NumNode
   {
     type = t;
     station = st;
-    shots    = new ArrayList<NumShot>();
+    shots    = new ArrayList<>();
     shots.add( st.s1 ); // and set first two shots
     shots.add( st.s2 );
-    branches = new ArrayList<NumBranch>();
+    branches = new ArrayList<>();
     use = 0;
     e = st.e;
     s = st.s;

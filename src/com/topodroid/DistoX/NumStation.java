@@ -52,7 +52,7 @@ public class NumStation extends NumSurveyPoint
     mHidden  = 0;
     mBarrierAndHidden = false;
     mParent  = null;
-    mLegs = new ArrayList<  NumAzimuth  >();
+    mLegs = new ArrayList<>();
   }
 
   NumStation( String id, NumStation from, float d, float b, float c, float extend, boolean has_coords )
@@ -75,7 +75,7 @@ public class NumStation extends NumSurveyPoint
     mHidden  = 0;
     mBarrierAndHidden = false;
     mParent  = from;
-    mLegs = new ArrayList<  NumAzimuth  >();
+    mLegs = new ArrayList<>();
     // Log.v( "DistoX", "NumStation cstr " + id + " extend " + extend + " H " + h + " V " + v );
   }
 
@@ -99,7 +99,7 @@ public class NumStation extends NumSurveyPoint
     int sz= mLegs.size();
     if ( sz == 0 ) return;
 
-    ArrayList< NumAzimuth > temp = new ArrayList< NumAzimuth >();
+    ArrayList< NumAzimuth > temp = new ArrayList<>();
     NumAzimuth a1 = mLegs.get( 0 );
     NumAzimuth a3 = mLegs.get( sz-1 );
     float azimuth = (a1.mAzimuth + a3.mAzimuth + 360)/2; 

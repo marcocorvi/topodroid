@@ -17,12 +17,23 @@ import java.util.List;
 
 class DistoXAccuracy
 {
-  static private float mAccelerationMean = 0.0f;
-  static private float mMagneticMean     = 0.0f;
-  static private float mDipMean          = 0.0f;
-  static private int   mCount = 0;
+  private float mAccelerationMean = 0.0f;
+  private float mMagneticMean     = 0.0f;
+  private float mDipMean          = 0.0f;
+  private int   mCount = 0;
 
-  static void reset()
+  DistoXAccuracy()
+  {
+    reset();
+  }
+
+  DistoXAccuracy( List<DBlock> blks )
+  {
+    reset();
+    setBlocks( blks );
+  }
+
+  private void reset()
   {
     mAccelerationMean = 0.0f;
     mMagneticMean     = 0.0f;
@@ -31,9 +42,8 @@ class DistoXAccuracy
   }
 
   // reset the means with a list of blocks
-  static void addBlocks( List<DBlock> blks ) 
+  private void setBlocks( List<DBlock> blks ) 
   {
-    reset();
     if ( blks == null || blks.size() == 0 ) return;
     for ( DBlock blk : blks ) {
       if ( blk.mAcceleration > 10.0 ) { 
@@ -51,7 +61,7 @@ class DistoXAccuracy
   } 
 
   // add a block to the existing means
-  static void addBlock( DBlock blk ) 
+  void addBlock( DBlock blk ) 
   {
     if ( blk == null || blk.mAcceleration < 10.0 ) return;
     mAccelerationMean = mAccelerationMean * mCount + blk.mAcceleration;
@@ -65,21 +75,21 @@ class DistoXAccuracy
     }
   } 
 
-  static float deltaAcc( float acc )
+  float deltaAcc( float acc )
   {
     if ( mAccelerationMean > 0 ) return TDMath.abs( 100*(acc - mAccelerationMean)/mAccelerationMean ); 
     return 0;
   }
 
-  static float deltaMag( float mag )
+  float deltaMag( float mag )
   {
     if ( mMagneticMean > 0 ) return TDMath.abs( 100*(mag - mMagneticMean)/mMagneticMean );
     return 0;
   }
 
-  static float deltaDip( float dip ) { return TDMath.abs( dip - mDipMean ); }
+  float deltaDip( float dip ) { return TDMath.abs( dip - mDipMean ); }
 
-  static boolean isBlockMagneticBad( DBlock blk )
+  boolean isBlockMagneticBad( DBlock blk )
   {
     if ( blk.mAcceleration < 10.0f || blk.mMagnetic < 10.0f ) return false;
     return deltaMag( blk.mMagnetic ) > TDSetting.mMagneticThr

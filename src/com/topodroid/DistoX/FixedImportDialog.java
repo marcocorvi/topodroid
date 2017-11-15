@@ -86,7 +86,7 @@ public class FixedImportDialog extends MyDialog
 
     initLayout( R.layout.fixed_import_dialog, R.string.title_fixed_import );
 
-    mArrayAdapter = new ArrayAdapter<String>( mContext, R.layout.message );
+    mArrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
     mList = (ListView) findViewById(R.id.list);
     mList.setOnItemClickListener( this );
     mList.setDividerHeight( 2 );

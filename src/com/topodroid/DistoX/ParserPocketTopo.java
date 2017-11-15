@@ -84,7 +84,7 @@ public class ParserPocketTopo extends ImportParser
     String from_prev = "";
     String to_prev   = "";
     // Pattern pattern = Pattern.compile( "0+" );
-    // ArrayList< DBlock > data = new ArrayList< DBlock >();
+    // ArrayList< DBlock > data = new ArrayList<>();
 
     for ( int s=0; s < shot_count; ++s ) {
       PTShot shot = ptfile.getShot(s);

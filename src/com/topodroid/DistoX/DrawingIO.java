@@ -1311,7 +1311,7 @@ class DrawingIO
     String lines  = "";
     String areas  = "";
 
-    ArrayList<DrawingPath> paths = new ArrayList<DrawingPath>();
+    ArrayList<DrawingPath> paths = new ArrayList<>();
 
     // synchronized( TDPath.mTherionLock ) 
     {

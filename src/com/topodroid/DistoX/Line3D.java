@@ -22,7 +22,7 @@ class Line3D
 
   Line3D()
   {
-    points = new ArrayList< Vector >();
+    points = new ArrayList<>();
   }
 
   void addPoint( float x, float y, float z )

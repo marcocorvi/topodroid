@@ -181,7 +181,7 @@ public class DrawingSurface extends SurfaceView
     // mCommandManager1 = new DrawingCommandManager();
     // mCommandManager2 = new DrawingCommandManager();
     commandManager = mCommandManager3;
-    mSplayStations = new ArrayList<String>();
+    mSplayStations = new ArrayList<>();
   }
 
   // -------------------------------------------------------------------

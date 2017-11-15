@@ -90,7 +90,7 @@ class DeviceA3MemoryDialog extends MyDialog
     mBtnDump.setOnClickListener( this );
     // mBtnBack.setOnClickListener( this );
     
-    mArrayAdapter = new ArrayAdapter<String>( mParent, R.layout.message );
+    mArrayAdapter = new ArrayAdapter<>( mParent, R.layout.message );
     mList = (ListView) findViewById(R.id.list_memory);
     mList.setAdapter( mArrayAdapter );
     // mList.setOnItemClickListener( this );

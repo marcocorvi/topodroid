@@ -1187,7 +1187,7 @@ class TDExporter
 
     List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
     List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
-    List<DBlock> st_blk = new ArrayList<DBlock>(); // blocks with from station (for LRUD)
+    List<DBlock> st_blk = new ArrayList<>(); // blocks with from station (for LRUD)
 
     // float decl = info.declination; // DECLINATION not used
     try {
@@ -1351,7 +1351,7 @@ class TDExporter
           //               + " branches " + branches.size() );
 
           for ( NumBranch branch : branches ) {
-            // ArrayList<String> stations = new ArrayList<String>();
+            // ArrayList<String> stations = new ArrayList<>();
             ArrayList<NumShot> shots = branch.shots;
             int size = shots.size();
             // Log.v("DistoX", "branch shots " + size );
@@ -2942,7 +2942,7 @@ class TDExporter
       
       List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
       if ( fixed.size() > 0 ) {
-        ents = new ArrayList< String >();
+        ents = new ArrayList<>();
         for ( FixedInfo fix : fixed ) {
           ents.add( fix.name );
           pw.format(";\t#point\tPoint%s\t", fix.name );

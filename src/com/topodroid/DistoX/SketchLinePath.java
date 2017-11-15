@@ -58,7 +58,7 @@ public class SketchLinePath extends SketchPath
     // mReversed = false;
     mOptions  = null;
     mLine = new Line3D();
-    mPts3D = new ArrayList< Vector >();
+    mPts3D = new ArrayList<>();
 
     if ( path_type == DrawingPath.DRAWING_PATH_LINE ) {
       mPaint = painter.greenPaint;

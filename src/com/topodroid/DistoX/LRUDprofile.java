@@ -34,7 +34,7 @@ class LRUDprofile extends LRUD
   {
     super();
     bearing = b;
-    data    = new ArrayList<Profile>();
+    data    = new ArrayList<>();
   }
 
   float getClino( int k )    { return data.get(k).clino; }

@@ -368,7 +368,7 @@ public class MainWindow extends Activity
   {
     // HOVER
     // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
-    mMenuAdapter = new ArrayAdapter<String>(mActivity, R.layout.menu );
+    mMenuAdapter = new ArrayAdapter<>(mActivity, R.layout.menu );
 
     if ( TDLevel.overNormal )   mMenuAdapter.add( res.getString( menus[0] ) ); // PALETTE
     if ( TDLevel.overAdvanced ) mMenuAdapter.add( res.getString( menus[1] ) ); // LOGS
@@ -438,7 +438,7 @@ public class MainWindow extends Activity
     mActivity = this;
     mApp.mActivity = this;
 
-    // mArrayAdapter = new ArrayAdapter<String>( this, R.layout.message );
+    // mArrayAdapter = new ArrayAdapter<>( this, R.layout.message );
     mArrayAdapter = new ListItemAdapter( this, R.layout.message );
 
     mLayout = (LinearLayout) findViewById( R.id.td_layout );

@@ -23,7 +23,7 @@ class SelectionSet
 
   SelectionSet()
   {
-    mPoints = new ArrayList< SelectionPoint >();
+    mPoints = new ArrayList<>();
     reset();
   }
 

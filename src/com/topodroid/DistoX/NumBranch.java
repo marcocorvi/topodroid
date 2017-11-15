@@ -44,7 +44,7 @@ public class NumBranch
     type = t;
     n1 = n;
     n2 = null;
-    shots = new ArrayList<NumShot>();
+    shots = new ArrayList<>();
     use = 0;
     e = 0.0f;
     s = 0.0f;

@@ -31,7 +31,7 @@ public class MyStringAdapter extends BaseAdapter
   {
     mContext = context;
     mResId   = res_id;
-    mStr     = new ArrayList<String>();
+    mStr     = new ArrayList<>();
   }
 
   @Override public int getCount() { return mStr.size(); }

@@ -87,7 +87,7 @@ public class SensorActivity extends Activity
     mETvalue = ( EditText ) findViewById( R.id.sensor_value );
     mETcomment = ( EditText ) findViewById( R.id.sensor_comment );
 
-    mSensor = new ArrayList< Sensor >();
+    mSensor = new ArrayList<>();
 
     mRBExtern.setOnClickListener( this );
 

@@ -45,7 +45,7 @@ public class EraseAction // implements ICanvasCommand
     mNewPoints = null;
     if ( mPath.mType == DrawingPath.DRAWING_PATH_LINE || mPath.mType == DrawingPath.DRAWING_PATH_AREA ) {
       DrawingPointLinePath line = (DrawingPointLinePath)mPath;
-      mOldPoints = new ArrayList< LinePoint >();
+      mOldPoints = new ArrayList<>();
       setPoints( mOldPoints, line );
     } else {
       mOldPoints = null;
@@ -63,7 +63,7 @@ public class EraseAction // implements ICanvasCommand
 
   void completeAction()
   {
-    mNewPoints = new ArrayList< LinePoint >();
+    mNewPoints = new ArrayList<>();
     DrawingPointLinePath line = (DrawingPointLinePath)mPath;
     setPoints( mNewPoints, line );
   }

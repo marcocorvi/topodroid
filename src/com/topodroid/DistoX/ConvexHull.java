@@ -27,7 +27,7 @@ public class ConvexHull
   private Vector mZ;
 
   ArrayList< Vector > mPts; // other points
-  ArrayList< Triangle > mTri;
+  ArrayList< CHTriangle > mTri;
 
   private class VectorPair
   {
@@ -71,17 +71,17 @@ public class ConvexHull
 
     // first two triangles mV1-mV2-pmax mV2-mV1-p[0] 
     // use temporary triangle array
-    ArrayList<Triangle> tri = new ArrayList< Triangle >();
+    ArrayList<CHTriangle> tri = new ArrayList<>();
     Vector p = (Vector) mPts.get(0);
-    tri.add( new Triangle( mV1, mV2, p ) );
-    tri.add( new Triangle( mV2, mV1, p ) );
+    tri.add( new CHTriangle( mV1, mV2, p ) );
+    tri.add( new CHTriangle( mV2, mV1, p ) );
 
-    ArrayList< VectorPair > vp_to_add = new ArrayList< VectorPair >();
+    ArrayList< VectorPair > vp_to_add = new ArrayList<>();
     for ( int h = 1; h<mPts.size(); ++h ) {
       p = (Vector) mPts.get(h);
      
       vp_to_add.clear();
-      for ( Triangle t : tri ) {
+      for ( CHTriangle t : tri ) {
         if ( ! t.valid ) continue;
         if ( t.signedDistance( p ) > 0 ) {
           vp_to_add.add( new VectorPair(t.mV[0], t.mV[1] ) );
@@ -104,12 +104,12 @@ public class ConvexHull
       }
       for ( VectorPair vp : vp_to_add ) { // ***** add new triangles
         if ( vp.valid ) {
-          tri.add( new Triangle( vp.mV1, vp.mV2, p ) );
+          tri.add( new CHTriangle( vp.mV1, vp.mV2, p ) );
         }
       }
     }
-    mTri = new ArrayList<Triangle>(); // definitive triangle array list
-    for ( Triangle t : tri ) {
+    mTri = new ArrayList<>(); // definitive triangle array list
+    for ( CHTriangle t : tri ) {
       if ( t.valid ) mTri.add( t ) ;
     }
   }

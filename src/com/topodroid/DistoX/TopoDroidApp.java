@@ -603,7 +603,7 @@ public class TopoDroidApp extends Application
       setBooleanPreference( "DISTOX_COSURVEY", false );
       if ( mCosurvey ) {
         mSyncConn = new ConnectionHandler( this );
-        mConnListener = new ArrayList< Handler >();
+        mConnListener = new ArrayList<>();
       }
     }
 

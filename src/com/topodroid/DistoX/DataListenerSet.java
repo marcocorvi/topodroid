@@ -19,7 +19,7 @@ class DataListenerSet
 
   DataListenerSet()
   {
-    mListeners = new ArrayList< DataListener >();
+    mListeners = new ArrayList<>();
   }
 
   // synchronized( mDataListener )

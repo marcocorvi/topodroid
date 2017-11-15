@@ -39,7 +39,7 @@ class SymbolLibrary
   { 
     mPrefix = prefix;
     mRoot = null;
-    mSymbols = new ArrayList< Symbol >();
+    mSymbols = new ArrayList<>();
   }
 
   int size() { return mSymbolNr; }
@@ -140,7 +140,7 @@ class SymbolLibrary
 
   ArrayList<String> getSymbolNames()
   {
-    ArrayList<String> ret = new ArrayList<String>();
+    ArrayList<String> ret = new ArrayList<>();
     for ( Symbol s : mSymbols ) ret.add( s.getName() );
     return ret;
   }

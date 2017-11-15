@@ -1,4 +1,4 @@
-/** @file HullSide.java
+/** @file DLNSideList.java
  *
  * @author marco corvi
  * @date june 2017
@@ -12,13 +12,13 @@
 package com.topodroid.DistoX;
 
 
-class HullSide
+class DLNSideList
 {
   DLNSide side;
-  HullSide next;
-  HullSide prev;
+  DLNSideList next;
+  DLNSideList prev;
 
-  HullSide( DLNSide s ) 
+  DLNSideList( DLNSide s ) 
   { 
     side = s;
     next = null;

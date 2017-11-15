@@ -53,8 +53,8 @@ public class DeviceList extends Activity
     setContentView(R.layout.device_list);
     mApp = (TopoDroidApp) getApplication();
 
-    mArrayAdapter = new ArrayAdapter<String>( this, R.layout.message );
-    // mDataAdapter = new ArrayAdapter<String>( this, R.layout.data );
+    mArrayAdapter = new ArrayAdapter<>( this, R.layout.message );
+    // mDataAdapter = new ArrayAdapter<>( this, R.layout.data );
 
     mList = (ListView) findViewById(R.id.list);
     mList.setAdapter( mArrayAdapter );

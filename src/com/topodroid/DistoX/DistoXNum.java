@@ -129,7 +129,7 @@ class DistoXNum
 
   public List<NumSplay>   getSplaysAt( NumStation st ) 
   {
-    ArrayList< NumSplay > ret = new ArrayList< NumSplay >();
+    ArrayList< NumSplay > ret = new ArrayList<>();
     for ( NumSplay splay : mSplays ) {
       if ( splay.getBlock().isSplay() && st == splay.from ) {
         ret.add( splay );
@@ -141,7 +141,7 @@ class DistoXNum
   // get shots at station st, except shot [st,except]
   public List<NumShot> getShotsAt( NumStation st, NumStation except )
   {
-    ArrayList<NumShot> ret = new ArrayList<NumShot>();
+    ArrayList<NumShot> ret = new ArrayList<>();
     for ( NumShot shot : mShots ) {
       if ( ( shot.from == st && shot.to   != except ) 
         || ( shot.to   == st && shot.from != except ) ) {
@@ -576,7 +576,7 @@ class DistoXNum
    */
   void makeTrilateration( List<TriShot> shots )
   {
-    ArrayList<TriCluster> clusters = new ArrayList<TriCluster>();
+    ArrayList<TriCluster> clusters = new ArrayList<>();
     for ( TriShot sh : shots ) sh.cluster = null;
     boolean repeat = true;
     while ( repeat ) {
@@ -696,17 +696,17 @@ class DistoXNum
 
     // long millis_start = System.currentTimeMillis();
     
-    // mStations = new ArrayList< NumStation >();
+    // mStations = new ArrayList<>();
     mStations = new NumStationSet();
-    mClosureStations = new ArrayList< NumStation >();
-    mShots    = new ArrayList< NumShot >();
-    mSplays   = new ArrayList< NumSplay >();
-    mClosures = new ArrayList< String >();
-    mNodes    = new ArrayList< NumNode >();
+    mClosureStations = new ArrayList<>();
+    mShots    = new ArrayList<>();
+    mSplays   = new ArrayList<>();
+    mClosures = new ArrayList<>();
+    mNodes    = new ArrayList<>();
 
     TriShot lastLeg = null;
-    List<TriShot> tmpshots  = new ArrayList< TriShot >();
-    List<TriSplay> tmpsplays = new ArrayList< TriSplay >();
+    List<TriShot> tmpshots   = new ArrayList<>();
+    List<TriSplay> tmpsplays = new ArrayList<>();
 
     for ( DBlock blk : data ) {
       // Log.v("DistoX", "NUM blk type " + blk.mType );
@@ -1243,7 +1243,7 @@ class DistoXNum
   // good for a single line without crosses
   private ArrayList<NumShot> followShot( NumBranch br, NumStation st, boolean after )
   {
-    ArrayList<NumShot> ret = new ArrayList<NumShot>();
+    ArrayList<NumShot> ret = new ArrayList<>();
     boolean found = true;
     while ( found ) {
       found = false;
@@ -1282,7 +1282,7 @@ class DistoXNum
     // for ( NumNode nd : nodes ) {
     //   Log.v("DistoX", "node " + nd.station.name + " branches " + nd.branches.size() );
     // }
-    ArrayList< NumBranch > branches = new ArrayList<NumBranch>();
+    ArrayList< NumBranch > branches = new ArrayList<>();
     if ( nodes.size() > 0 ) {
       for ( NumNode node : nodes ) {
         for ( NumShot shot : node.shots ) {
@@ -1412,11 +1412,11 @@ class DistoXNum
   {
     ArrayList<NumBranch> branches = makeBranches( nodes, false );
 
-    ArrayList< NumBranch > singleBranches = new ArrayList<NumBranch>();
+    ArrayList< NumBranch > singleBranches = new ArrayList<>();
     makeSingleLoops( singleBranches, shots ); // check all shots without branch
     compensateSingleLoops( singleBranches );
 
-    ArrayList<NumCycle> cycles = new ArrayList<NumCycle>();
+    ArrayList<NumCycle> cycles = new ArrayList<>();
     makeCycles( cycles, branches );
 
     for ( NumBranch branch : branches ) { // compute branches and cycles errors
@@ -1427,7 +1427,7 @@ class DistoXNum
       // TDLog.Log( TDLog.LOG_NUM, "cycle error " + cycle.e + " " + cycle.s + " " + cycle.v ); 
     }
 
-    ArrayList<NumCycle> indep_cycles = new ArrayList<NumCycle>(); // independent cycles
+    ArrayList<NumCycle> indep_cycles = new ArrayList<>(); // independent cycles
     for ( NumCycle cycle : cycles ) {
       if ( ! cycle.isBranchCovered( indep_cycles ) ) {
         indep_cycles.add( cycle );

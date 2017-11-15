@@ -21,7 +21,7 @@ public class ListerSet implements ILister
 
   ListerSet()
   {
-    mLister = new ArrayList< ILister >();
+    mLister = new ArrayList<>();
   }
 
   int size() { return mLister.size(); }

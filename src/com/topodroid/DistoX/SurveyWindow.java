@@ -219,8 +219,8 @@ public class SurveyWindow extends Activity
       finish();
     }
 
-    // mFixed = new ArrayList< FixedInfo >();
-    // mPhoto = new ArrayList< PhotoInfo >();
+    // mFixed = new ArrayList<>();
+    // mPhoto = new ArrayList<>();
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
     int size = mApp.setListViewHeight( mListView );
@@ -595,7 +595,7 @@ public class SurveyWindow extends Activity
   {
     // HOVER
     // mMenuAdapter = new MyMenuAdapter( mActivity, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
-    mMenuAdapter = new ArrayAdapter<String>(mActivity, R.layout.menu );
+    mMenuAdapter = new ArrayAdapter<>(mActivity, R.layout.menu );
 
     mMenuAdapter.add( res.getString( menus[0] ) );
     mMenuAdapter.add( res.getString( menus[1] ) );

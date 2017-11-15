@@ -28,7 +28,7 @@ public class TRobotSeries
   {
     mNumber = nr;
     mPtCnt  = 0;
-    mPoints = new ArrayList< TRobotPoint >();
+    mPoints = new ArrayList<>();
     mBegin  = pt;
     mEnd    = pt;
   }

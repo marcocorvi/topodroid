@@ -75,7 +75,7 @@ public class PlotListDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.plot_list_dialog );
-    mArrayAdapter = new ArrayAdapter<String>( mContext, R.layout.message );
+    mArrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
     // mArrayAdapter = new ListItemAdapter( mContext, R.layout.message );
 
     mList = (GridView) findViewById(R.id.list);

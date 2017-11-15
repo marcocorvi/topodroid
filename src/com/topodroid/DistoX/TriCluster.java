@@ -20,8 +20,8 @@ public class TriCluster
 
   TriCluster() 
   {
-    shots = new ArrayList<TriShot>();
-    stations = new ArrayList<String>();
+    shots    = new ArrayList<>();
+    stations = new ArrayList<>();
   }
 
   int nrShots() { return shots.size(); }

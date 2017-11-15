@@ -1,4 +1,4 @@
-/** @filke Triangle.java
+/** @filke CHTriangle.java
  *
  * @author marco corvi
  * @date nov 2014
@@ -19,10 +19,10 @@ import java.lang.Math;
 import android.util.Log;
 
 
-public class Triangle extends Facet
+public class CHTriangle extends CHFacet
 {
 
-  Triangle( Vector a, Vector b, Vector c )
+  CHTriangle( Vector a, Vector b, Vector c )
   {
     super( 3 );
     mV[0] = a;
@@ -32,34 +32,34 @@ public class Triangle extends Facet
     computeNormal();
   }
 
-  Triangle[] refineAtCenter()
+  CHTriangle[] refineAtCenter()
   {
     Vector p = mV[0].plus( mV[1] ).plus( mV[2] ); p.timesEqual( 1.0f/3.0f );
 
-    Triangle[] ret = new Triangle[3];
-    ret[0] = new Triangle( mV[0], mV[1], p );
-    ret[1] = new Triangle( mV[1], mV[2], p );
-    ret[2] = new Triangle( mV[2], mV[0], p );
+    CHTriangle[] ret = new CHTriangle[3];
+    ret[0] = new CHTriangle( mV[0], mV[1], p );
+    ret[1] = new CHTriangle( mV[1], mV[2], p );
+    ret[2] = new CHTriangle( mV[2], mV[0], p );
     return ret;
   }
 
-  Triangle[] refineAtSides()
+  CHTriangle[] refineAtSides()
   {
     Vector a = mV[1].plus( mV[2] ); a.timesEqual( 0.5f );
     Vector b = mV[2].plus( mV[0] ); b.timesEqual( 0.5f );
     Vector c = mV[0].plus( mV[1] ); c.timesEqual( 0.5f );
     
-    Triangle[] ret = new Triangle[4];
-    ret[0] = new Triangle( a, b, c );
-    ret[1] = new Triangle( mV[0], c, b );
-    ret[2] = new Triangle( mV[1], a, c );
-    ret[3] = new Triangle( mV[2], b, a );
+    CHTriangle[] ret = new CHTriangle[4];
+    ret[0] = new CHTriangle( a, b, c );
+    ret[1] = new CHTriangle( mV[0], c, b );
+    ret[2] = new CHTriangle( mV[1], a, c );
+    ret[3] = new CHTriangle( mV[2], b, a );
     return ret;
   }
 
-  Triangle[] refineAtVertex( Vector p )
+  CHTriangle[] refineAtVertex( Vector p )
   {
-    Triangle[] ret = new Triangle[3];
+    CHTriangle[] ret = new CHTriangle[3];
 
     Vector va=null, vb=null, vc=null;
     if ( p == mV[0] ) {
@@ -75,13 +75,13 @@ public class Triangle extends Facet
     Vector b = vc.plus( va ); b.timesEqual( 0.5f );
     Vector c = va.plus( vb ); c.timesEqual( 0.5f );
 
-    ret[0] = new Triangle( va, c, b );
+    ret[0] = new CHTriangle( va, c, b );
     if ( va.distance( vb ) > va.distance( vc ) ) {
-      ret[1] = new Triangle( vb, b, c );
-      ret[2] = new Triangle( vb, vc, b );
+      ret[1] = new CHTriangle( vb, b, c );
+      ret[2] = new CHTriangle( vb, vc, b );
     } else {
-      ret[1] = new Triangle( vc, b, c );
-      ret[2] = new Triangle( vb, vc, c );
+      ret[1] = new CHTriangle( vc, b, c );
+      ret[2] = new CHTriangle( vb, vc, c );
     }
     return ret;
   }

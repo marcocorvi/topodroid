@@ -424,7 +424,7 @@ public class CalibActivity extends Activity
   {
     // HOVER
     // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
-    mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
+    mMenuAdapter = new ArrayAdapter<>(this, R.layout.menu );
 
     if ( TDLevel.overNormal ) mMenuAdapter.add( res.getString( menus[0] ) );
     if ( TDLevel.overBasic  ) mMenuAdapter.add( res.getString( menus[1] ) );

@@ -24,9 +24,9 @@ import android.util.Log;
 class DLNWall
 {
   ArrayList< DLNTriangle > mTri;
-  ArrayList< HullSide > mHull; // convex hull
-  ArrayList< HullSide > mPosHull;
-  ArrayList< HullSide > mNegHull;
+  ArrayList< DLNSideList > mHull; // convex hull
+  ArrayList< DLNSideList > mPosHull;
+  ArrayList< DLNSideList > mNegHull;
   Point2D P0;
   Point2D P1;
   Point2D P01;
@@ -44,7 +44,7 @@ class DLNWall
 
   DLNTriangle getTriangle( int k ) { return mTri.get(k); }
 
-  HullSide getBorderHead() { return mHull.get(0); }
+  DLNSideList getBorderHead() { return mHull.get(0); }
 
   int hullSize() { return mHull.size(); }
 
@@ -62,8 +62,8 @@ class DLNWall
     //   fw.close();
     // } catch ( IOException e ) { }
 
-    mTri = new ArrayList< DLNTriangle >();
-    mHull = new ArrayList< HullSide >();
+    mTri  = new ArrayList<>();
+    mHull = new ArrayList<>();
 
     // bbox of points
     Point2D p0 = pts.get(0);
@@ -150,7 +150,7 @@ class DLNWall
     // Log.v("DistoX", "DLNWall triangle " + mTri.size() );
 
     // compute the convex hull
-    ArrayList< DLNSide > tmp = new ArrayList< DLNSide >();
+    ArrayList< DLNSide > tmp = new ArrayList<>();
     for ( DLNTriangle t : mTri ) {
       if ( t.hasPoint( A ) )       { 
         if ( ! t.hasPoint( DA ) && ! t.hasPoint( AB ) ) tmp.add( t.sideOf( A  ) ); 
@@ -176,8 +176,8 @@ class DLNWall
     DLNSide ts = tmp.get(0);
     Point2D p1 = ts.mP1;
     Point2D p2 = ts.mP2; 
-    HullSide hs0 = new HullSide( ts );
-    HullSide hs1 = hs0;
+    DLNSideList hs0 = new DLNSideList( ts );
+    DLNSideList hs1 = hs0;
     mHull.add( hs0 );
     while ( p2 != p1 ) {
       Point2D p3 = p2;
@@ -185,7 +185,7 @@ class DLNWall
         DLNSide tt = tmp.get(j);
         // if ( coincide( tt.mP1, p2, 0.0001 ) ) 
         if ( tt.mP1 == p2 ) {
-          HullSide hs2 = new HullSide( tt );
+          DLNSideList hs2 = new DLNSideList( tt );
   	  hs1.next = hs2;
   	  hs2.prev = hs1;
           mHull.add( hs2 );
@@ -217,14 +217,14 @@ class DLNWall
         if ( isInsideHull( pt ) && ! isInsideHull( pt.polePoint() ) ) {
   	    DLNTriangle t1 = pt.poleTriangle();
   	    DLNSide s1 = t1.sideOf( pt );
-  	    for ( HullSide hs9 : mHull ) {
+  	    for ( DLNSideList hs9 : mHull ) {
   	      DLNSide s0 = hs9.side;
   	      if ( s1.other == s0 ) {
   	        DLNSide s2 = t1.nextSide( s1 );
   	        DLNSide s3 = t1.nextSide( s2 );
   	        mHull.remove( hs9 );
-  	        HullSide hs2 = new HullSide( s2 );
-  	        HullSide hs3 = new HullSide( s3 );
+  	        DLNSideList hs2 = new DLNSideList( s2 );
+  	        DLNSideList hs3 = new DLNSideList( s3 );
   	        hs2.next = hs3;       hs3.prev = hs2;
   	        hs9.prev.next = hs2; hs2.prev = hs9.prev;
   	        hs9.next.prev = hs3; hs3.next = hs9.next;
@@ -239,20 +239,20 @@ class DLNWall
       }
     }
     // Log.v("DistoX", "DLNWall convex hull final " + mHull.size() );
-    mPosHull = new ArrayList< HullSide >();
-    mNegHull = new ArrayList< HullSide >();
+    mPosHull = new ArrayList<>();
+    mNegHull = new ArrayList<>();
 
-    HullSide hsp1 = null;
-    HullSide hsn1 = null;
+    DLNSideList hsp1 = null;
+    DLNSideList hsn1 = null;
     int nhp = -1;
     int nhn = -1;
     for ( int nh=0; nh < mHull.size(); ++nh ) {
-      HullSide hs = mHull.get(nh);
+      DLNSideList hs = mHull.get(nh);
       int sng = sign( hs );
       if ( sng > 0 && hsp1 == null ) {
         hsp1 = hs.prev;
         while ( hsp1 != hs && sign(hsp1) > 0 ) hsp1 = hsp1.prev;
-        HullSide hsp2 = hs.next;
+        DLNSideList hsp2 = hs.next;
         while ( hsp2 != hs && sign(hsp2) > 0 ) hsp2 = hsp2.next;
         for ( hsp1=hsp1.next; hsp1 != hsp2; hsp1=hsp1.next ) {
           mPosHull.add( hsp1 );
@@ -262,7 +262,7 @@ class DLNWall
       if ( sng < 0 && hsn1 == null ) {
         hsn1 = hs.prev;
         while ( hsn1 != hs && sign(hsn1) < 0 ) hsn1 = hsn1.prev;
-        HullSide hsn2 = hs.next;
+        DLNSideList hsn2 = hs.next;
         while ( hsn2 != hs && sign(hsn2) < 0 ) hsn2 = hsn2.next;
         for ( hsn1=hsn1.next; hsn1 != hsn2; hsn1=hsn1.next ) {
           mNegHull.add( hsn1 );
@@ -308,7 +308,7 @@ class DLNWall
     return true;
   }
 
-  int sign( HullSide hs )
+  int sign( DLNSideList hs )
   {
     DLNSide s = hs.side;
     Point2D p1 = s.mP1.sub( P0 );
@@ -343,7 +343,7 @@ class DLNWall
   boolean isInsideHull( Point2D p )
   {
     double a = 0;
-    for ( HullSide it : mHull ) {
+    for ( DLNSideList it : mHull ) {
       DLNSide s = it.side;
       double x1 = p.x - s.mP1.x;
       double y1 = p.y - s.mP1.y;

@@ -69,7 +69,7 @@ public class CalibCheckDialog extends MyDialog
     hist1 = (ImageView) findViewById( R.id.histogram1 );
     hist2 = (ImageView) findViewById( R.id.histogram2 );
 
-    mArrayAdapter = new ArrayAdapter<String>( mContext, R.layout.message );
+    mArrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
 
     mList = (ListView) findViewById(R.id.list);
     mList.setAdapter( mArrayAdapter );

@@ -144,7 +144,7 @@ class NumStationSet
   NumStationSet() 
   { 
     mRoot = null;
-    mStations = new ArrayList< NumStation >();
+    mStations = new ArrayList<>();
   }
 
   void setShortestPath( float p ) 

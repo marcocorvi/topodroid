@@ -44,7 +44,7 @@ class MemoryReadTask extends AsyncTask<Void, Integer, Integer>
     mAddress  = address;
     mHT       = ht;
     mDumpfile = dumpfile;
-    mMemory   = new ArrayList< MemoryOctet >();
+    mMemory   = new ArrayList<>();
   }
 
   @Override

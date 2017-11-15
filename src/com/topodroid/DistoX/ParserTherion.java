@@ -113,10 +113,10 @@ public class ParserTherion
 
   public ParserTherion( String filename, boolean apply_declination ) throws ParserException
   {
-    fixes    = new ArrayList< Fix >();
-    stations = new ArrayList< Station >();
-    shots    = new ArrayList< ParserShot >();
-    splays   = new ArrayList< ParserShot >();
+    fixes    = new ArrayList<>();
+    stations = new ArrayList<>();
+    shots    = new ArrayList<>();
+    splays   = new ArrayList<>();
     mStates  = new Stack< ParserTherionState >();
     mApplyDeclination = apply_declination;
     ParserTherionState state = new ParserTherionState();

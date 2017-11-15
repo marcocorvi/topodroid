@@ -1071,7 +1071,7 @@ public class OverviewWindow extends ItemDrawer
   {
     // HOVER
     // mMenuAdapter = new MyMenuAdapter( mActivity, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
-    mMenuAdapter = new ArrayAdapter<String>(mActivity, R.layout.menu );
+    mMenuAdapter = new ArrayAdapter<>(mActivity, R.layout.menu );
 
     mMenuAdapter.add( res.getString( menus[0] ) );
     mMenuAdapter.add( res.getString( menus[1] ) );

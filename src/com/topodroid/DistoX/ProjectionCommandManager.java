@@ -177,10 +177,10 @@ public class ProjectionCommandManager
     mGridStack1   = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mGridStack10  = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mGridStack100 = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    mLegsStack   = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    mSplaysStack   = Collections.synchronizedList(new ArrayList<DrawingPath>());
+    mLegsStack    = Collections.synchronizedList(new ArrayList<DrawingPath>());
+    mSplaysStack  = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mCurrentStack = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
-    mUserStations = Collections.synchronizedList( new ArrayList<DrawingStationPath>());
+    mUserStations = Collections.synchronizedList(new ArrayList<DrawingStationPath>());
     mRedoStack    = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
     // mHighlight    = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mStations     = Collections.synchronizedList(new ArrayList<DrawingStationName>());
@@ -198,7 +198,7 @@ public class ProjectionCommandManager
 
   List< DrawingPath > getIntersectionShot( LinePoint p1, LinePoint p2 )
   {
-    List< DrawingPath > ret = new ArrayList< DrawingPath >();
+    List< DrawingPath > ret = new ArrayList<>();
     for ( DrawingPath p : mLegsStack ) {
       if ( p.mType == DrawingPath.DRAWING_PATH_FIXED ) {
         if ( p.intersect( p1.x, p1.y, p2.x, p2.y, null ) ) {

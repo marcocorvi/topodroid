@@ -251,7 +251,7 @@ public class DeviceActivity extends Activity
     mButtonView1 = new HorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );
 
-    // mArrayAdapter = new ArrayAdapter<String>( this, R.layout.message );
+    // mArrayAdapter = new ArrayAdapter<>( this, R.layout.message );
     mArrayAdapter = new ListItemAdapter( this, R.layout.message );
     mList = (ListView) findViewById(R.id.dev_list);
     mList.setAdapter( mArrayAdapter );
@@ -709,7 +709,7 @@ public class DeviceActivity extends Activity
   {
     // HOVER
     // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
-    mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
+    mMenuAdapter = new ArrayAdapter<>(this, R.layout.menu );
 
     if ( TDLevel.overBasic    ) mMenuAdapter.add( res.getString( menus[0] ) );
     if ( TDLevel.overBasic    ) mMenuAdapter.add( res.getString( menus[1] ) );

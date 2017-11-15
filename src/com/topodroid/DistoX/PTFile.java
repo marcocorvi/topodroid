@@ -229,9 +229,9 @@ class PTFile
     {
       stationsId = new HashMap<String,Integer>();  // indices of stations (for TopoDroid export)
 
-      _trips = new ArrayList< PTTrip >();
-      _shots = new ArrayList< PTShot >();
-      _references = new ArrayList< PTReference >();
+      _trips = new ArrayList<>();
+      _shots = new ArrayList<>();
+      _references = new ArrayList<>();
       _overview = new PTMapping();
       _outline  = new PTDrawing();
       _sideview = new PTDrawing();

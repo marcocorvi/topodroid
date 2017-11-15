@@ -995,7 +995,7 @@ public class GMActivity extends Activity
 
   // public int downloadDataBatch()
   // {
-  //   ArrayList<ILister> listers = new ArrayList<ILister>();
+  //   ArrayList<ILister> listers = new ArrayList<>();
   //   listers.add( this );
   //   return mApp.downloadDataBatch( this );
   // }
@@ -1071,7 +1071,7 @@ public class GMActivity extends Activity
   {
     // HOVER
     // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
-    mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
+    mMenuAdapter = new ArrayAdapter<>(this, R.layout.menu );
 
     mMenuAdapter.add( res.getString( menus[0] ) );
     if ( TDLevel.overAdvanced ) mMenuAdapter.add( res.getString( menus[1] ) );

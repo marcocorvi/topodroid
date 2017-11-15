@@ -26,7 +26,7 @@ class PTDrawing
     PTDrawing()
     { 
       _mapping = new PTMapping();
-      _elements = new ArrayList< PTElement >();
+      _elements = new ArrayList<>();
     }
 
     // PTDrawing( PTDrawing drawing )

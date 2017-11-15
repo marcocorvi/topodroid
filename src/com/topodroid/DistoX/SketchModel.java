@@ -95,8 +95,8 @@ class SketchModel
     mCurrentSurface = null;
     setNum( num );
 
-    mPaths       = Collections.synchronizedList( new ArrayList< SketchPath >() );
-    // points      = Collections.synchronizedList( new ArrayList< SketchPointPath >() );
+    mPaths       = Collections.synchronizedList(new ArrayList<SketchPath>() );
+    // points    = Collections.synchronizedList(new ArrayList<>() );
     mFixedStack  = Collections.synchronizedList(new ArrayList<SketchFixedPath>());
     mStations    = Collections.synchronizedList(new ArrayList<SketchStationName>());
     mSurfaces    = Collections.synchronizedList(new ArrayList<SketchSurface>());
@@ -131,8 +131,8 @@ class SketchModel
   {
     if ( mRefines == null || mRefines.size() == 0 ) return 0;
     int ret = 0;
-    ArrayList< PointF > border = new ArrayList< PointF >();
-    mBorder3d = new ArrayList< Vector >();
+    ArrayList< PointF > border = new ArrayList<>();
+    mBorder3d = new ArrayList<>();
     synchronized( mRefines ) {
       PointF p = new PointF(0,0);
       mInfo.worldToSceneOrigin( mRefines.get(0).v2, p );
@@ -186,7 +186,7 @@ class SketchModel
   //   //   sections.getSection(1).reverseLine();
   //   // }
 
-  //   ArrayList< SketchFixedPath > splays1 = new ArrayList< SketchFixedPath >();
+  //   ArrayList< SketchFixedPath > splays1 = new ArrayList<>();
   //   if ( TopoDroidApp.mSketchUsesSplays ) {
   //     for ( SketchFixedPath p : mFixedStack ) {
   //       if ( p.mType == DrawingPath.DRAWING_PATH_SPLAY ) {
@@ -377,7 +377,7 @@ class SketchModel
     float l = v0.LengthSquared();
     v0.timesEqual( 1/l );
 
-    ArrayList< Vector > vec1 = new ArrayList<Vector>();
+    ArrayList< Vector > vec1 = new ArrayList<>();
     for ( NumShot sh : shot1 ) {
       Vector v = ( sh.from == st1 )?
                  new Vector( sh.to.e   - st1.e, sh.to.s   - st1.s, sh.to.v   - st1.v )
@@ -386,7 +386,7 @@ class SketchModel
       v.timesEqual( 1/l );
       vec1.add( v );
     }
-    ArrayList< Vector > vec2 = new ArrayList<Vector>();
+    ArrayList< Vector > vec2 = new ArrayList<>();
     for ( NumShot sh : shot2 ) {
       Vector v = ( sh.from == st2 )?
                  new Vector( sh.to.e   - st2.e, sh.to.s   - st2.s, sh.to.v   - st2.v )
@@ -396,7 +396,7 @@ class SketchModel
       vec2.add( v );
     }
 
-    ArrayList< Vector > pts = new ArrayList<Vector>();
+    ArrayList< Vector > pts = new ArrayList<>();
     for ( NumSplay sp : tmp1 ) {
       Vector v = new Vector( sp.e - st1.e, sp.s - st1.s, sp.v - st1.v );
       float x0 = v.dot( v0 );

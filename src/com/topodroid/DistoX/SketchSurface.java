@@ -75,14 +75,14 @@ class SketchSurface extends SketchShot
   SketchSurface( String s1, String s2, SketchPainter painter )
   {
     super( s1, s2 );
-    mVertices   = new SparseArray< SketchVertex >();
-    mCorners    = new SparseArray< PointF >();
-    mTriangles  = new ArrayList< SketchTriangle >();
-    mSides      = new SparseArray<SketchSide>();
-    mBorders    = new ArrayList< SketchBorder >();
+    mVertices   = new SparseArray<>();
+    mCorners    = new SparseArray<>();
+    mTriangles  = new ArrayList<>();
+    mSides      = new SparseArray<>();
+    mBorders    = new ArrayList<>();
 /* if MODE_EDIT
-    mInsideTriangles = new ArrayList< SketchTriangle >();
-    mInsideVertices  = new ArrayList< SketchVertex >();
+    mInsideTriangles = new ArrayList<>();
+    mInsideVertices  = new ArrayList<>();
 */
     mPainter    = painter;
     mSelectedVertex = null;
@@ -92,14 +92,14 @@ class SketchSurface extends SketchShot
   SketchSurface( String s1, String s2, SketchPainter painter, int nv, int nt )
   {
     super( s1, s2 );
-    mVertices   = new SparseArray< SketchVertex >(nv);
-    mCorners    = new SparseArray< PointF >();
-    mTriangles  = new ArrayList< SketchTriangle >(nt);
-    mSides      = new SparseArray<SketchSide>();
-    mBorders    = new ArrayList< SketchBorder >();
+    mVertices   = new SparseArray<>(nv);
+    mCorners    = new SparseArray<>();
+    mTriangles  = new ArrayList<>(nt);
+    mSides      = new SparseArray<>();
+    mBorders    = new ArrayList<>();
 /* if MODE_EDIT
-    mInsideTriangles = new ArrayList< SketchTriangle >();
-    mInsideVertices  = new ArrayList< SketchVertex >();
+    mInsideTriangles = new ArrayList<>();
+    mInsideVertices  = new ArrayList<>();
 */
     mPainter    = painter;
     mSelectedVertex = null;
@@ -131,8 +131,8 @@ class SketchSurface extends SketchShot
   synchronized void refineAtCenters()
   {
     ArrayList< SketchTriangle > triangles = mTriangles;
-    mTriangles = new ArrayList< SketchTriangle >();
-    // ArrayList< SketchBorder > bborders   = new ArrayList< SketchBorder >();
+    mTriangles = new ArrayList<>();
+    // ArrayList< SketchBorder > bborders   = new ArrayList<>();
 
     for ( SketchTriangle t : triangles ) {
       int h = addVertex( t.center );
@@ -145,8 +145,8 @@ class SketchSurface extends SketchShot
   synchronized void refineAtSides()
   {
     ArrayList< SketchTriangle > triangles = mTriangles;
-    mTriangles = new ArrayList< SketchTriangle >();
-    // ArrayList< SketchBorder > bborders   = new ArrayList< SketchBorder >();
+    mTriangles = new ArrayList<>();
+    // ArrayList< SketchBorder > bborders   = new ArrayList<>();
 
     for ( SketchTriangle t : triangles ) {
       Vector v1 = new Vector( (t.v2.x+t.v3.x)/2, (t.v2.y+t.v3.y)/2, (t.v2.z+t.v3.z)/2 );
@@ -169,7 +169,7 @@ class SketchSurface extends SketchShot
       return;
     }
     ArrayList< SketchTriangle > triangles = mTriangles;
-    mTriangles = new ArrayList< SketchTriangle >();
+    mTriangles = new ArrayList<>();
     for ( SketchTriangle t : triangles ) {
       refineTriangleAtVertex( t, mSelectedVertex, 0.5f, 0.5f, true );
     }
@@ -473,7 +473,7 @@ class SketchSurface extends SketchShot
         // Log.v("DistoX", "split " + split + " size " + size );
       }
     }
-    ArrayList< SketchTriangle > triangles = new ArrayList< SketchTriangle >();
+    ArrayList< SketchTriangle > triangles = new ArrayList<>();
     for ( SketchTriangle t : mTriangles ) {
       if ( ! t.splitted ) triangles.add( t );
     }
@@ -486,7 +486,7 @@ class SketchSurface extends SketchShot
   synchronized void makeCut( )
   {
     // remove inside triangles
-    // ArrayList< SketchVertex > outerVertices = new ArrayList<SketchVertex>();
+    // ArrayList< SketchVertex > outerVertices = new ArrayList<>();
     // int ntin = 0;
     // for ( SketchTriangle t : mTriangles ) {
     //   if ( ! t.inside ) {
@@ -502,8 +502,8 @@ class SketchSurface extends SketchShot
     
 
     ArrayList<SketchTriangle> triangles = mTriangles;
-    mVertices   = new SparseArray< SketchVertex >();
-    mTriangles  = new ArrayList< SketchTriangle >();
+    mVertices   = new SparseArray<>();
+    mTriangles  = new ArrayList<>();
     synchronized( mTriangles ) {
       for ( SketchTriangle t : triangles ) {
         if ( ! t.inside ) {
@@ -598,7 +598,7 @@ class SketchSurface extends SketchShot
   void computeBorders() 
   {
     computeSides( );
-    ArrayList< SketchSide > tmp = new ArrayList<SketchSide>();
+    ArrayList< SketchSide > tmp = new ArrayList<>();
     // for ( SketchSide s : mSides ) {
     //   if ( s.t2 == null ) { tmp.add( s ); }
     // }
@@ -1117,10 +1117,10 @@ class SketchSurface extends SketchShot
   void makeConvexHullTriangles( Sketch3dInfo info, ConvexHull hull ) 
   {
     // Vector unit = info.shotUnit();    // shot unit-vector
-    ArrayList< Triangle > tri = hull.mTri;
-    ArrayList< Vector > pts = new ArrayList<Vector>();
-    for ( Triangle t : tri ) {
-      // Triangle has vertces mA mB mC and outgoing normal mN 
+    ArrayList<CHTriangle> tri = hull.mTri;
+    ArrayList<Vector> pts = new ArrayList<>();
+    for ( CHTriangle t : tri ) {
+      // CHTriangle has vertces mA mB mC and outgoing normal mN 
       int ka = addVertex( t.mV[0] );
       int kb = addVertex( t.mV[1] );
       int kc = addVertex( t.mV[2] );

@@ -124,7 +124,7 @@ public class DistoXStatDialog extends MyDialog
           ((TextView)findViewById( R.id.text_stat_loops )).setText( R.string.loop_none );
         } else {
           mList = (ListView) findViewById(R.id.list);
-          mList.setAdapter( new ArrayAdapter<String>( mContext, R.layout.row, cls ) );
+          mList.setAdapter( new ArrayAdapter<>( mContext, R.layout.row, cls ) );
         }
 
         mBtnBack = (Button) findViewById(R.id.btn_back);

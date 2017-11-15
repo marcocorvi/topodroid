@@ -678,7 +678,7 @@ public class DrawingWindow extends ItemDrawer
       dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );
       if ( blk.isMultiBad() ) {
         dpath.setPaint( BrushManager.fixedOrangePaint );
-      } else if ( DistoXAccuracy.isBlockMagneticBad( blk ) ) {
+      } else if ( mApp.mShotWindow.mDistoXAccuracy.isBlockMagneticBad( blk ) ) {
         dpath.setPaint( BrushManager.fixedRedPaint );
       } else if ( TDSetting.isConnectionModeBatch() && blk.isRecent( mApp.mSecondLastShotId ) ) {
         dpath.setPaint( BrushManager.fixedBluePaint );
@@ -2716,7 +2716,7 @@ public class DrawingWindow extends ItemDrawer
                   int nPts = (mSymbol == Symbol.LINE )? mCurrentLinePath.size() 
                                                       : mCurrentAreaPath.size() ;
                   if ( nPts > 1 ) {
-                    ArrayList< Point2D > pts = new ArrayList< Point2D >(); // [ nPts ];
+                    ArrayList< Point2D > pts = new ArrayList<>(); // [ nPts ];
                     // ArrayList< LinePoint > lp = 
                     //   (mSymbol == Symbol.LINE )? mCurrentLinePath.mPoints : mCurrentAreaPath.mPoints ;
                     // for (int k=0; k<nPts; ++k ) {
@@ -4566,7 +4566,7 @@ public class DrawingWindow extends ItemDrawer
 
   private void setMenuAdapter( Resources res, long type )
   {
-    mMenuAdapter = new ArrayAdapter<String>(mActivity, R.layout.menu );
+    mMenuAdapter = new ArrayAdapter<>(mActivity, R.layout.menu );
     // HOVER
     // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
 
@@ -4746,8 +4746,8 @@ public class DrawingWindow extends ItemDrawer
   {
     // Log.v("DistoX", "export as CSX <<" + cave + ">>" );
     List< PlotInfo > all_sections = mData.selectAllPlotsSection( mSid, TDStatus.NORMAL );
-    ArrayList< PlotInfo > sections1 = new ArrayList< PlotInfo >(); // plan xsections
-    ArrayList< PlotInfo > sections2 = new ArrayList< PlotInfo >(); // profile xsections
+    ArrayList< PlotInfo > sections1 = new ArrayList<>(); // plan xsections
+    ArrayList< PlotInfo > sections2 = new ArrayList<>(); // profile xsections
 
     pw.format("  <plan>\n");
     mDrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_PLAN, survey, cave, branch, all_sections, sections1 );
@@ -4846,10 +4846,10 @@ public class DrawingWindow extends ItemDrawer
     ArrayList< PointF > neg = null;
     ArrayList< DLNSite > sites = null;
     if ( TDSetting.mWallsType == TDSetting.WALLS_CONVEX ) {
-      pos = new ArrayList< PointF >(); // positive v
-      neg = new ArrayList< PointF >(); // negative v
+      pos = new ArrayList<>(); // positive v
+      neg = new ArrayList<>(); // negative v
     } else {
-      sites = new ArrayList< DLNSite >();
+      sites = new ArrayList<>();
       sites.add( new DLNSite( x0, y0 ) );
       sites.add( new DLNSite( x1, y1 ) );
     }
@@ -4968,13 +4968,13 @@ public class DrawingWindow extends ItemDrawer
     DLNWall dln_wall = new DLNWall( new Point2D(x0,y0), new Point2D(x1,y1) );
     dln_wall.compute( sites );
     if ( dln_wall.mPosHull.size() > 0 ) {
-      HullSide hpos = dln_wall.mPosHull.get(0);
+      DLNSideList hpos = dln_wall.mPosHull.get(0);
       DLNSide side = hpos.side;
       float xx = DrawingUtil.toSceneX( side.mP1.x );
       float yy = DrawingUtil.toSceneY( side.mP1.y );
       DrawingLinePath path = new DrawingLinePath( BrushManager.mLineLib.mLineWallIndex );
       path.addStartPoint( xx, yy );
-      for ( HullSide hp : dln_wall.mPosHull ) {
+      for ( DLNSideList hp : dln_wall.mPosHull ) {
         side = hp.side;
         float xx2 = DrawingUtil.toSceneX( side.mP2.x );
         float yy2 = DrawingUtil.toSceneY( side.mP2.y );
@@ -4986,13 +4986,13 @@ public class DrawingWindow extends ItemDrawer
       mDrawingSurface.addDrawingPath( path );
     }
     if ( dln_wall.mNegHull.size() > 0 ) {
-      HullSide hneg = dln_wall.mNegHull.get(0);
+      DLNSideList hneg = dln_wall.mNegHull.get(0);
       DLNSide side = hneg.side;
       float xx = DrawingUtil.toSceneX( side.mP1.x );
       float yy = DrawingUtil.toSceneY( side.mP1.y );
       DrawingLinePath path = new DrawingLinePath( BrushManager.mLineLib.mLineWallIndex );
       path.addStartPoint( xx, yy );
-      for ( HullSide hn : dln_wall.mNegHull ) {
+      for ( DLNSideList hn : dln_wall.mNegHull ) {
         side = hn.side;
         float xx2 = DrawingUtil.toSceneX( side.mP2.x );
         float yy2 = DrawingUtil.toSceneY( side.mP2.y );
@@ -5010,7 +5010,7 @@ public class DrawingWindow extends ItemDrawer
   {
     DLNWall dln_wall = new DLNWall( new Point2D(x0,y0), new Point2D(x1,y1) );
     dln_wall.compute( sites );
-    HullSide hull = dln_wall.getBorderHead();
+    DLNSideList hull = dln_wall.getBorderHead();
     DLNSide side = hull.side;
     float xx = DrawingUtil.toSceneX( side.mP1.x );
     float yy = DrawingUtil.toSceneY( side.mP1.y );
@@ -5232,7 +5232,7 @@ public class DrawingWindow extends ItemDrawer
     mSplitRemove  = remove;
     if ( mSplitStation != null ) {
       if ( mSplitBorder == null ) {
-        mSplitBorder = new ArrayList< PointF >();
+        mSplitBorder = new ArrayList<>();
       } else {
         mSplitBorder.clear();
       }

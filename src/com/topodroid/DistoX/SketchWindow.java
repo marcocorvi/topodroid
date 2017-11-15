@@ -1527,7 +1527,7 @@ public class SketchWindow extends ItemDrawer
               } else if ( mSymbol == Symbol.AREA ) {
                 line = new SketchLinePath( DrawingPath.DRAWING_PATH_AREA, mCurrentArea, mInfo.st1, mInfo.st2, mPainter );
               }
-              ArrayList< LinePoint > pts = new ArrayList< LinePoint >();
+              ArrayList< LinePoint > pts = new ArrayList<>();
               for ( LinePoint p = mCurrentLinePath.mFirst; p != null; p = p.mNext ) { pts.add( p ); }
               SketchTriangle tri = null;
               int np = pts.size();
@@ -1615,8 +1615,8 @@ public class SketchWindow extends ItemDrawer
         //         Vector w120 = null;
 
         //         if ( tri1 != null /* && mInfo.isForward( tri1 ) */ ) {
-        //           ArrayList< SketchRefinement > refines = new ArrayList<SketchRefinement>();
-        //           // ArrayList< PointF > border = new ArrayList< PointF >();
+        //           ArrayList< SketchRefinement > refines = new ArrayList<>();
+        //           // ArrayList< PointF > border = new ArrayList<>();
         //           SketchTriangle tri2 = tri1;
         //           SketchVertex u1 = null, u2 = null; // previous side of tri2
         //           SketchVertex w1 = null, w2 = null; // current side of tri2
@@ -1736,7 +1736,7 @@ public class SketchWindow extends ItemDrawer
         //         }
         //       } else if ( mEdit == SketchDef.EDIT_STRETCH /* || mEdit == SketchDef.EDIT_EXTRUDE */ ) {
         //         // TODO convert mCurrentLinePath (DrawingLinePath) to 3D line
-        //         ArrayList<Vector> pts = new ArrayList<Vector>();
+        //         ArrayList<Vector> pts = new ArrayList<>();
 
         //         LinePoint p1 = mCurrentLinePath.mFirst;
         //         float x = mInfo.canvasToSceneX( p1.x );
@@ -1998,7 +1998,7 @@ public class SketchWindow extends ItemDrawer
   {
     // HOVER
     // mMenuAdapter = new MyMenuAdapter( mActivity, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
-    mMenuAdapter = new ArrayAdapter<String>(mActivity, R.layout.menu );
+    mMenuAdapter = new ArrayAdapter<>(mActivity, R.layout.menu );
     for ( int k=0; k<menus.length; ++k ) {
       mMenuAdapter.add( res.getString( menus[k] ) );
     }

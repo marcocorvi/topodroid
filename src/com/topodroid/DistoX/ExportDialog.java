@@ -61,7 +61,7 @@ public class ExportDialog extends MyDialog
 
     Spinner spin = (Spinner)findViewById( R.id.spin );
     spin.setOnItemSelectedListener( this );
-    ArrayAdapter adapter = new ArrayAdapter<String>( mContext, R.layout.menu, mTypes );
+    ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, mTypes );
     spin.setAdapter( adapter );
 
     mBtnOk = (Button) findViewById(R.id.button_ok );

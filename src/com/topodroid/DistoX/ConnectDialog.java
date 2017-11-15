@@ -110,7 +110,7 @@ public class ConnectDialog extends MyDialog
       mTVstate.setText( mApp.getConnectionStateStr() );
     }
 
-    // mArrayAdapter = new ArrayAdapter<String>( this, R.layout.message );
+    // mArrayAdapter = new ArrayAdapter<>( this, R.layout.message );
     mArrayAdapter = new ListItemAdapter( mContext, R.layout.message );
     mList = (ListView) findViewById(R.id.dev_list);
     mList.setAdapter( mArrayAdapter );

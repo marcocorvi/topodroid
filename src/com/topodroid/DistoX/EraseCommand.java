@@ -31,7 +31,7 @@ public class EraseCommand implements ICanvasCommand
 
   EraseCommand( )
   {
-    mActions = new ArrayList< EraseAction >();
+    mActions = new ArrayList<>();
   }
 
   // return true if action has been dropped

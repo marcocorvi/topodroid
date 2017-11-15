@@ -51,7 +51,7 @@ public class NumShot
     mDirection = dir;
     mBranchDir = 0;
     branch = null;
-    blocks = new ArrayList<DBlock>();
+    blocks = new ArrayList<>();
     blocks.add( blk );
     // mLength  = blk.mLength;
     // mBearing = blk.mBearing;
