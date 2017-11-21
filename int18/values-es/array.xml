@@ -17,7 +17,7 @@
   <string-array name="wallsType">
      <item name="none">Nada</item>
      <item name="convex">Convexa</item>
-     <item name="delaunay">TODO</item>
+     <item name="delaunay">Todo</item>
   </string-array>
 
   <string-array name="zoomCtrl">
@@ -68,7 +68,7 @@
      <item name="normal">Normal</item>
      <item name="advanced">Avanzado</item>
      <item name="expert">Experto</item>
-     <item name="tester">Tester</item>
+     <item name="tester">Test</item>
   </string-array>
 
   <string-array name="sizeButtons">
