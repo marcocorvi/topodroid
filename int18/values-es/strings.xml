@@ -1055,8 +1055,8 @@
   <string name="pref_checkBT_summary">Bluetooth encendido/apagado </string>
   <string name="pref_checkAttached_title">Verificar poligonal</string>
   <string name="pref_checkAttached_summary">Compruebe si se adjunta la estación</string>
-  <!-- TODO string name="pref_checkExtend_title">Leg extend check</string -->
-  <!-- TODO string name="pref_checkExtend_summary">Check if leg extends are set</string -->
+  <string name="pref_checkExtend_title">Control de la extensión</string>
+  <string name="pref_checkExtend_summary">Verifique si se extienden las mediciones</string>
   <string name="pref_backup_number_title">Número de copias de seguridad</string>
   <string name="pref_backup_number_summary">Número de copias de seguridad de los archivos de dibujo</string>
   <string name="pref_backup_interval_title">Intervalo de copia de seguridad</string>
