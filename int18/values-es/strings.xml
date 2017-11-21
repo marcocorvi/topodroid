@@ -34,7 +34,7 @@
 
     <string name="make_walls">Paredes</string>
     <string name="missing_station">Falta Estación</string>
-    <!-- TODO string name="station_not_found">Station not found</string -->
+    <string name="station_not_found">Estación no encontrada</string>
     <!-- UNUSED string name="missing_area">Área</string -->
     <!-- UNUSED string name="missing_hint">Por favor, instale los símbolos con TdSymbol</string -->
     <!-- UNUSED string name="missing_line">Línea</string -->
@@ -120,14 +120,14 @@
     <string name="extend_vert">Vert.</string>
     <!-- UNUSED string name="external_prompt">Introducir medición</string -->
     <string name="splay_at_to">LRUD en la estación</string>
-    <!-- TODO string name="lrud">LRUD</string -->
+    <string name="lrud">LRUD</string>
 
     <string name="few_data">No hay suficientes datos</string>
     <string name="few_iter">Interacción fallida</string>
     <string name="few_groups">No hay suficientes datos del grupo</string>
     <!-- UNUSED string name="few_plots">No hay suficientes dibujos</string -->
     <string name="few_calibs">No hay suficientes calibraciones</string>
-    <!-- TODO string name="getting_info">Getting DistoX info ...</string -->
+    <string name="getting_info">Obteniendo información DistoX ...</string>
 
     <string name="calib_import_title">Importar calibración</string>
     <string name="import_title">Importar archivo</string>
@@ -213,7 +213,7 @@
     <!-- UNUSED string name="hidden_add">Oculta dibujo de la poligonal principal</string -->
     <string name="hidden_del">Mostrar dibujo de la poligonal principal</string>
     <string name="splays_toggle">Cambiar a tomas laterales</string>
-    <!-- TODO string name="splays">splays</string -->
+    <string name="splays">Tomas laterales</string>
     <string name="fixed">Fijo</string>
     <string name="painted">Dibujado</string>
 
@@ -375,7 +375,7 @@
     <string name="sensor_type">Tipo</string>
     <string name="sensor_value">Valor</string>
     <string name="sensor_comment">Commentario</string>
-    <!-- TODO string name="insufficient_data">insufficient sensor data</string -->
+    <string name="insufficient_data">Datos insuficientes del sensor</string>
 
     <!-- UNUSED string name="shot_clino">Clino</string -->
     <!-- UNUSED string name="shot_compass">Brújula</string -->
@@ -412,8 +412,8 @@
     <string name="survey_delete">¿Quiere eliminar la topografía?</string>
     <string name="survey_split">¿Quiere dividir la topografía?</string>
     <string name="survey_not_attached">ADVERTENCIA: Medidas no insertadas</string>
-    <!-- TODO string name="survey_not_extend">WARNING: unset shot extends</string -->
-    <!-- TODO string name="survey_not_attached_extend">WARNING: unattached shots and unset extends</string -->
+    <string name="survey_not_extend">ADVERTENCIA: la toma desvinculada sin extensión</string>
+    <string name="survey_not_attached_extend">ADVERTENCIA: Tomas no conectadas y desvinculadas</string>
     <string name="cannot_rename">No se puede cambiar el nombre de la topografía</string>
     <string name="declination">Declinación magnética </string>
     <string name="description">Descripción</string>
@@ -512,7 +512,7 @@
     <!-- UNUSED string name="button_redo"      >Rehacer    </string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Enviar    </string>
-    <!-- TODO string name="button_rename"    >Rename    </string -->
+    <string name="button_rename"    >Renombrar   </string>
     <string name="button_replace"   >Remplazar   </string>
     <string name="button_reset"     >Resetear  </string>
     <string name="button_left"      >Izquierdo</string>
@@ -520,9 +520,9 @@
     <string name="button_clear"     >Borrar     </string>
     <string name="button_save"      >Guardar   </string>
     <!-- UNUSED string name="button_select"    >Seleccionar </string -->
-    <!-- TODO string name="button_search"    >Search    </string -->
-    <!-- TODO string name="button_merge"     >Merge     </string -->
-    <!-- TODO string name="button_split"     >Split     </string -->
+    <string name="button_search"    >Buscar    </string>
+    <string name="button_merge"     >Unir     </string>
+    <string name="button_split"     >Dividir     </string>
     <string name="button_store"     >Recibir   </string>
     <!-- UNUSED string name="button_start"     >Inicio</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
@@ -532,7 +532,7 @@
 
     <string name="button_write"     >Enviar calibración a distoX</string>
     <string name="button_xsection"  >X-Sección</string>
-    <!-- TODO string name="xsection">X-Section</string -->
+    <string name="xsection">X-Sección</string>
 
     <string name="mode_leg">Visuales</string>
     <string name="mode_splay">Laterales</string>
@@ -560,7 +560,7 @@
     <string name="symbol_archeo">Arqueología</string>
     <string name="symbol_bio">Biología</string>
     <string name="symbol_geo">Geología</string>
-    <!-- TODO string name="symbol_karst">Karst</string -->
+    <string name="symbol_karst">Karst</string>
     <string name="symbol_mine">Minería</string>
     <string name="symbol_paleo">Paleontología</string>
     <string name="symbol_speleo">Espeleo</string>
@@ -598,7 +598,7 @@
     <!-- UNUSED string name="btn_erase">erase</string -->
     <!-- UNUSED string name="btn_cut">cut</string -->
     <!-- UNUSED string name="btn_vertical">Vertical</string -->
-    <!-- TODO string name="btn_horizontal">Horizontal</string -->
+    <string name="btn_horizontal">Horizontal</string>
 
     <!-- select buttin labels -->
     <!-- UNUSED string name="btn_section">Section</string -->
@@ -625,8 +625,8 @@
     <string name="few_line_points">La línea tiene muy pocos puntos</string>
     <string name="line_delete">Eliminar línea</string>
     <string name="flip_shots">Tomas contínuas</string>
-    <!-- TODO string name="split_nothing">Nothing to split</string -->
-    <!-- TODO string name="copy_items">Copy items</string -->
+    <string name="split_nothing">Nada para dividir</string>
+    <string name="copy_items">Copiar elementos</string>
 
     <string name="help_calib_check">Calibración: compruebe las tomas</string>
     <string name="help_close">Cerrar ventana</string>
@@ -669,7 +669,7 @@
     <string name="help_rename">Cambio nombre topografía</string>
     <string name="help_plot_rename">Eliminar/Renombrar dibujo</string>
     <string name="help_plot_switch">Activación dibujo</string>
-    <!-- TODO string name="help_search">Station search</string -->
+    <string name="help_search">Búsqueda de estación</string>
     <string name="help_stats">Estadísticas de Topografía</string>
     <string name="help_save_plot">Exportar dibujo</string>
     <!-- UNUSED string name="help_tdr2th2">Convertir archivos binarios de dibujo a th2</string -->
@@ -682,7 +682,7 @@
     <string name="help_range">Mover una parte de la línea</string>
     <!-- UNUSED string name="help_clear">Borrar selección</string -->
     <string name="help_eraser">Borrar dibujo</string>
-    <!-- TODO string name="help_select_mode">Selection tool</string -->
+    <string name="help_select_mode">Herramienta de selección</string>
     <string name="help_erase_mode">Tipo de goma de borrar</string>
     <string name="help_erase_size">Tamaño goma de borrar [S/M/L]</string>
     <string name="help_previous">Anterior elemento de la selección</string>
@@ -747,7 +747,7 @@
     <string name="title_contour">Contorno</string>
     <!-- UNUSED string name="title_coord">Introduzca las coordenadas del punto:</string -->
     <string name="title_current_station">Última estación guardada</string>
-    <!-- TODO string name="title_station_search">Enter station</string -->
+    <string name="title_station_search">Indicar estación</string>
     <string name="title_device">Dispositivo DistoX</string>
     <string name="title_device_select">Select DistoX device</string>
     <string name="title_discover">Buscar dispositivos DistoX &#8230; espere</string>
@@ -756,8 +756,8 @@
     <string name="title_draw_line">Línea %1$s</string>
     <string name="title_draw_point">Punto %1$s</string>
     <string name="title_edit">Editar</string>
-    <!-- TODO string name="title_edit_user_station">Edit user station </string -->
-    <!-- TODO string name="title_edit_station">Edit station </string -->
+    <string name="title_edit_user_station">Editar estación de usuario</string>
+    <string name="title_edit_station">Editar estación</string>
     <string name="title_erase">Borrar</string>
     <string name="title_fixed">Fijar puntos</string>
     <string name="title_fixed_edit">Punto de edición</string>
@@ -771,7 +771,7 @@
     <string name="title_photo">Foto/Medidas</string>
     <string name="title_photo_comment">Comentario Foto</string>
     <string name="title_plot_save">Guardar dibujo como</string>
-    <!-- TODO string name="title_plot_merge">Merge-in sketch</string -->
+    <string name="title_plot_merge">Combinar dibujo</string -->
     <string name="title_plot_reload">Actualizar dibujo</string>
     <string name="title_profile_flip">¿Quiere cambiar a alzado del dibujo?</string>
     <string name="title_projection">Perfil de proyeccción de brújula %1$d</string>
@@ -782,7 +782,7 @@
     <string name="title_shift">Cambio</string>
     <string name="title_shot_delete">¿Quiere eliminar toma?</string>
     <string name="title_sensor_edit">Sensor</string>
-    <!-- TODO string name="title_split">Sketch split</string -->
+    <string name="title_split">Dividir dibujo</string>
 
     <!-- UNUSED string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
     <!-- UNUSED string name="title_sketch_edit">Edición Superficie 3D</string -->
