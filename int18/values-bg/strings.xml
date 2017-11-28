@@ -34,7 +34,7 @@
 
     <string name="make_walls">Стени</string>
     <string name="missing_station">Липсващ репер</string>
-    <!-- TODO string name="station_not_found">Station not found</string -->
+    <string name="station_not_found">Реперът не е намерен</string>
     <!-- UNUSED string name="missing_area">Площ</string -->
     <!-- UNUSED string name="missing_hint">Разрешете липсващите символи или ги инсталирайте</string -->
     <!-- UNUSED string name="missing_line">Линия</string -->
@@ -120,7 +120,7 @@
     <string name="extend_vert">Вертикално</string>
     <!-- UNUSED string name="external_prompt">Въведете измервания</string -->
     <string name="splay_at_to">"&lt;,&gt;,Г,Д" в репер "ДО"</string>
-    <!-- TODO string name="lrud">LRUD</string -->
+    <string name=lrud">"&lt;,&gt;,Г,Д</string>
 
     <string name="few_data">Няма достатъчно данни</string>
     <string name="few_iter">Невъзможни итерации</string>
@@ -215,7 +215,7 @@
     <!-- UNUSED string name="hidden_add">Скриване на предишни репери</string -->
     <string name="hidden_del">Показване на предишни репери</string>
     <string name="splays_toggle">Показване/скриване на странични изм.</string>
-    <!-- TODO string name="splays">splays</string -->
+    <string name="splays">Странични изм.</string>
     <string name="fixed">Фиксиран</string>
     <string name="painted">Боядисан</string>
 
@@ -363,7 +363,7 @@
     <!-- UNUSED string name="converted_tdr2th2">Конвертиране на файлове със скици от двоични в th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Презаписване на съшествуващи th2 файлове?</string -->
     <string name="section_area">Площ на сечение: %1$.1f</string>
-    <!-- TODO string name="section_name">section comment</string -->
+    <string name="section_name">Коментар към сечение</string>
     <string name="scrap_outline">Очертание на скицата</string>
 
     <!-- UNUSED string name="sensor">сензор</string -->
@@ -415,8 +415,8 @@
     <string name="survey_delete">Изтриване на картировката?</string>
     <string name="survey_split">Разделяне на картировката?</string>
     <string name="survey_not_attached">ВНИМАНИЕ: някои отсечки не са свързани</string>
-    <!-- TODO string name="survey_not_extend">WARNING: unset shot extends</string -->
-    <!-- TODO string name="survey_not_attached_extend">WARNING: unattached shots and unset extends</string -->
+    <string name="survey_not_extend">Внимание: отсечката не е разгъната</string>
+    <string name="survey_not_attached_extend">Внимание: Някои отсечки не са прикачени или разгънати</string>
     <string name="cannot_rename">Не може да се преименува картировката</string>
     <string name="declination">Магн. деклинация</string>
     <string name="description">описание</string>
@@ -524,8 +524,8 @@
     <string name="button_clear"     >Изчистване</string>
     <string name="button_save"      >Запис     </string>
     <!-- UNUSED string name="button_select"    >Избор     </string -->
-    <!-- TODO string name="button_search"    >Search    </string -->
-    <!-- TODO string name="button_merge"     >Merge     </string -->
+    <string name="button_search"    >Търсене   </string>
+    <string name="button_merge"     >Сливане   </string>
     <string name="button_split"     >Разделяне</string>
     <string name="button_store"     >Съхраняване</string>
     <!-- UNUSED string name="button_start"     >Старт     </string -->
@@ -536,7 +536,7 @@
 
     <string name="button_write"     >Качване</string>
     <string name="button_xsection"  >Сечение</string>
-    <!-- TODO string name="xsection">X-Section</string -->
+    <string name="xsection">Сечение</string>
 
     <string name="mode_leg">Отсечки</string>
     <string name="mode_splay">Странични</string>
@@ -564,7 +564,7 @@
     <string name="symbol_archeo">Археология</string>
     <string name="symbol_bio">Биология</string>
     <string name="symbol_geo">Геология</string>
-    <!-- TODO string name="symbol_karst">Karst</string -->
+    <string name="symbol_karst">Карст</string>
     <string name="symbol_mine">Минни разр.</string>
     <string name="symbol_paleo">Палео</string>
     <string name="symbol_speleo">Спелео</string>
@@ -619,8 +619,8 @@
     <string name="few_line_points">Линията има твърде малко точки</string>
     <string name="line_delete">Изтр. на линия</string>
     <string name="flip_shots">Обръщане на отсечките</string>
-    <!-- TODO string name="split_nothing">Nothing to split</string -->
-    <!-- TODO string name="copy_items">Copy items</string -->
+    <string name="split_nothing">Няма какво да се раздели</string>
+    <string name="copy_items">Копиране на елементи</string>
 
     <string name="menu_head">Начало</string>
     <!-- UNUSED string name="menu_save_th2">Запис на TH2</string -->
@@ -672,7 +672,7 @@
     <string name="help_rename">Преименуване на картировката</string>
     <string name="help_plot_rename">Преименуване на скицата</string>
     <string name="help_plot_switch">Превключване на друга скица</string>
-    <!-- TODO string name="help_search">Station search</string -->
+    <string name="help_search">Търсене на репер</string>
     <string name="help_stats">Статистика за картировката</string>
     <string name="help_save_plot">Експортиране на скица</string>
     <!-- UNUSED string name="help_tdr2th2">Конвертиране на двоични файлове на скици в th2</string -->
@@ -685,7 +685,7 @@
     <string name="help_range">Преместване на част от линия</string>
     <!-- string name="help_clear">Clear selection</string -->
     <string name="help_eraser">Изтриване на елемент</string>
-    <!-- TODO string name="help_select_mode">Selection tool</string -->
+    <string name="help_select_mode">Инструмент за избиране</string>
     <string name="help_erase_mode">Тип изтриване</string>
     <string name="help_erase_size">Размер на гумата [S/M/L]</string>
     <string name="help_previous">Предишен избран елемент</string>
@@ -748,7 +748,7 @@
     <!-- NO string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Въведете координати на точката:</string -->
     <string name="title_current_station">Записани репери</string>
-    <!-- TODO string name="title_station_search">Enter station</string -->
+    <string name="title_station_search">Въведете репер</string>
     <string name="title_device">DistoX устройства</string>
     <string name="title_device_select">Изберете DistoX</string>
     <string name="title_discover">Сканиране за DistoX устройства…</string>
@@ -757,8 +757,8 @@
     <string name="title_draw_line">Линия %1$s</string>
     <string name="title_draw_point">Точка %1$s</string>
     <string name="title_edit">Редакция</string>
-    <!-- TODO string name="title_edit_user_station">Edit user station </string -->
-    <!-- TODO string name="title_edit_station">Edit station </string -->
+    <string name="title_edit_user_station">Редактиране на (user) репер</string>
+    <string name="title_edit_station">Редактиране на репер</string>
     <string name="title_erase">Изтриване</string>
     <string name="title_fixed">Фиксирани репери</string>
     <string name="title_fixed_edit">Редактиране на позиция</string>
@@ -772,7 +772,7 @@
     <string name="title_photo">Снимки/Измервания</string>
     <string name="title_photo_comment">Коментар за снимка</string>
     <string name="title_plot_save">Запис на скица като</string>
-    <!-- TODO string name="title_plot_merge">Merge-in sketch</string -->
+    <string name="title_plot_merge">Сливане на скици</string>
     <string name="title_plot_reload">Препрочитане на скица</string>
     <string name="title_profile_flip">Обръщане на разреза?</string>
     <string name="title_projection">Азимут на проектиран разрез %1$d</string>
@@ -847,8 +847,8 @@
   <string name="pref_svg_grid_summary">Добавяне на мрежа в SVG експорт</string>
   <string name="pref_svg_in_html_title">SVG в HTML</string>
   <string name="pref_svg_in_html_summary">Вмъкване на SVG експорт в HTML</string>
-  <!-- TODO string name="pref_svg_line_dir_title">SVG line orientation</string -->
-  <!-- TODO string name="pref_svg_line_dir_summary">Add line orientation-ticks to SVG export</string -->
+  <string name="pref_svg_line_dir_title">Ориентация на SVG линия</string>
+  <string name="pref_svg_line_dir_summary">Добавяне на помощни черти за ориантация на линия в SVG експорт</string>
   <string name="pref_kml_stations_title">KML репери</string>
   <string name="pref_kml_stations_summary">Добавяне на реперите в KML експорт</string>
   <string name="pref_kml_splays_title">KML странични измервания</string>
@@ -876,8 +876,8 @@
   <string name="pref_auto_reconnect_summary">Автоматично свързване при загуба на връзката</string>
   <string name="pref_auto_pair_title">Автоматично сдвояване</string>
   <string name="pref_auto_pair_summary">Сдвояване с DistoX след сканиране</string>
-  <!-- TODO string name="pref_head_tail_title">Number of new data</string -->
-  <!-- TODO string name="pref_head_tail_summary">Get the number of data before downloading them</string -->
+  <string name="pref_head_tail_title">Брой измервания при сваляне</string>
+  <string name="pref_head_tail_summary">Проверка на броя измервания преди тяхното сваляне</string>
   <string name="pref_socket_delay_title">Изчакване преди сдвояване</string>
   <string name="pref_socket_delay_summary">Изчакване преди опит за сдвояване [0.1 сек]</string>
   <string name="pref_socket_delay_dialogtitle">Изчакване преди сдвояване</string>
@@ -1051,8 +1051,8 @@
   <string name="pref_checkBT_summary">Разрешаване/забраняване на Bluetooth</string>
   <string name="pref_checkAttached_title">Проверка на антена</string>
   <string name="pref_checkAttached_summary">Проверка дали всички репери са свързани</string>
-  <!-- TODO string name="pref_checkExtend_title">Leg extend check</string -->
-  <!-- TODO string name="pref_checkExtend_summary">Check if leg extends are set</string -->
+  <string name="pref_checkExtend_title">Проверка на разгъване</string>
+  <string name="pref_checkExtend_summary">Проверка дали всички отсечки са разгънати</string>
   <string name="pref_backup_number_title">Брой архиви</string>
   <string name="pref_backup_number_summary">Брой резервни архиви на скица</string>
   <string name="pref_backup_interval_title">Интервал на архивиране</string>

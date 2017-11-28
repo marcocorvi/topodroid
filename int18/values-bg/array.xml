@@ -74,7 +74,7 @@
      <item name="normal">Нормални</item>
      <item name="advanced">Пълни</item>
      <item name="expert">Експертни</item>
-     <item name="tester">Tester</item>
+     <item name="tester">Тестови</item>
      <!-- item name="complete">Complete</item -->
   </string-array>
 
@@ -114,7 +114,7 @@
      <item name="for2">Права отсечка, странични</item>
      <item name="back2">Обратна отсечка, странични</item>
      <item name="anomaly">Обратна отсечка, странични, права</item>
-     <item name="tripod">Tripod</item>
+     <item name="tripod">Статив</item>
      <item name="toporobot">TopoRobot</item>
   </string-array>
 
