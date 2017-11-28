@@ -93,10 +93,10 @@ public class FixedAddDialog extends MyDialog
       } else {
         MyKeyboard.registerEditText( mKeyboard, mETstation, MyKeyboard.FLAG_POINT_LCASE_2ND );
       }
-      MyKeyboard.registerEditText( mKeyboard, mETlng,  MyKeyboard.FLAG_POINT_DEGREE );
-      MyKeyboard.registerEditText( mKeyboard, mETlat,  MyKeyboard.FLAG_POINT_DEGREE );
-      MyKeyboard.registerEditText( mKeyboard, mEThell, MyKeyboard.FLAG_POINT  );
-      MyKeyboard.registerEditText( mKeyboard, mEThgeo, MyKeyboard.FLAG_POINT  );
+      MyKeyboard.registerEditText( mKeyboard, mETlng,  MyKeyboard.FLAG_POINT_SIGN_DEGREE );
+      MyKeyboard.registerEditText( mKeyboard, mETlat,  MyKeyboard.FLAG_POINT_SIGN_DEGREE );
+      MyKeyboard.registerEditText( mKeyboard, mEThell, MyKeyboard.FLAG_POINT_SIGN  );
+      MyKeyboard.registerEditText( mKeyboard, mEThgeo, MyKeyboard.FLAG_POINT_SIGN  );
     } else {
       mKeyboard.hide();
       mETlng.setInputType(  TDConst.NUMBER_DECIMAL_SIGNED );
