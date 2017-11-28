@@ -632,6 +632,24 @@
     <!-- UNUSED string name="menu_save_th2">SAVE TH2</string -->
 <!-- END_SKETCH_3D -->    
 
+    <string name="man_preface">Preface</string>
+    <string name="man_intro">1. Introduction</string>
+    <string name="man_main">2. Main window</string>
+    <string name="man_device">3. Device window</string>
+    <string name="man_calib">4. Calibration window</string>
+    <string name="man_gm">5. Calibration data</string>
+    <string name="man_survey">6. Survey data</string>
+    <string name="man_shot">7. Shot list</string>
+    <string name="man_info">8. Survey info</string>
+    <string name="man_sketch">9. Sketch window</string>
+    <string name="man_draw">10. Sketch drawing</string>
+    <string name="man_xsection">11. Cross-sections</string>
+    <string name="man_overview">12. Overview window</string>
+    <string name="man_export">13. Import/export</string>
+    <string name="man_threed">14. 3D viewer</string>
+    <string name="man_index">15. Index</string>
+    <string name="man_website">* Website</string>
+
     <string name="help_help">This help</string>
     <!-- UNUSED string name="help_manual">User manual</string -->
     <string name="help_measure">Measure distances</string>

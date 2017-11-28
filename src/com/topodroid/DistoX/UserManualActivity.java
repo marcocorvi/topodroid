@@ -116,23 +116,23 @@ public class UserManualActivity extends Activity
     mList = (ListView) findViewById( R.id.content );
 
     ArrayAdapter< String > adapter = new ArrayAdapter<>(this, R.layout.message );
-    adapter.add("Preface");        // manual00
-    adapter.add("1. Introducion");
-    adapter.add("2. Main window");      // manual04
-    adapter.add("3. Device window");
-    adapter.add("4. Calibration window");
-    adapter.add("5. Calibration data");
-    adapter.add("6. Survey data");
-    adapter.add("7. Shot list");
-    adapter.add("8. Survey info");    // manual09
-    adapter.add("9. Sketch window");
-    adapter.add("10. Sketch drawing");
-    adapter.add("11. Cross-sections");
-    adapter.add("12. Overview window");
-    adapter.add("13. Import/Export");
-    adapter.add("14. 3D viewer");
-    adapter.add("15. Index");
-    adapter.add("* Website");
+    adapter.add( getResources().getString( R.string.man_preface ) );
+    adapter.add( getResources().getString( R.string.man_intro ) );
+    adapter.add( getResources().getString( R.string.man_main ) );
+    adapter.add( getResources().getString( R.string.man_device ) );
+    adapter.add( getResources().getString( R.string.man_calib ) );
+    adapter.add( getResources().getString( R.string.man_gm ) );
+    adapter.add( getResources().getString( R.string.man_survey ) );
+    adapter.add( getResources().getString( R.string.man_shot ) );
+    adapter.add( getResources().getString( R.string.man_info ) );
+    adapter.add( getResources().getString( R.string.man_sketch ) );
+    adapter.add( getResources().getString( R.string.man_draw ) );
+    adapter.add( getResources().getString( R.string.man_xsection ) );
+    adapter.add( getResources().getString( R.string.man_overview ) );
+    adapter.add( getResources().getString( R.string.man_export ) );
+    adapter.add( getResources().getString( R.string.man_threed ) );
+    adapter.add( getResources().getString( R.string.man_index ) );
+    adapter.add( getResources().getString( R.string.man_website ) );
  
     mList.setAdapter( adapter );
     mList.setVisibility( View.GONE );
