@@ -771,7 +771,7 @@
     <string name="title_photo">Foto/Medidas</string>
     <string name="title_photo_comment">Comentario Foto</string>
     <string name="title_plot_save">Guardar dibujo como</string>
-    <string name="title_plot_merge">Combinar dibujo</string -->
+    <string name="title_plot_merge">Combinar dibujo</string>
     <string name="title_plot_reload">Actualizar dibujo</string>
     <string name="title_profile_flip">¿Quiere cambiar a alzado del dibujo?</string>
     <string name="title_projection">Perfil de proyeccción de brújula %1$d</string>

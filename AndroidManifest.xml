@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="304044"
-      android:versionName="3.4.3n"
+      android:versionCode="304045"
+      android:versionName="3.4.3o"
     >
     <uses-sdk
        android:minSdkVersion="8"
