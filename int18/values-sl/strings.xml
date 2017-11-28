@@ -811,6 +811,8 @@
   <!-- UNUSED string name="pref_bootloader_summary">Bootloader abilitiato</string -->
   <string name="pref_mkeyboard_title">Tipkovnica</string>
   <string name="pref_mkeyboard_summary">Vključi/Izključi personalizirano tipkovnico</string>
+  <!-- TODO string name="pref_local_help_title">Translated manual</string -->
+  <!-- TODO string name="pref_local_help_summary">Enable translated manual</string -->
   <!-- OK string name="pref_cosurvey_title">Co-surveying</string -->
   <string name="pref_cosurvey_summary">Aktiviraj/deaktiviraj možnost so-mejenja</string>
   <string name="pref_export_shots_title">Format izvoženi podatkov</string>

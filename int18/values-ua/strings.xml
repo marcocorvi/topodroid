@@ -812,6 +812,8 @@
   <!-- UNUSED string name="pref_bootloader_summary">Вкл завантажувач</string -->
   <string name="pref_mkeyboard_title">Клавіатура</string>
   <string name="pref_mkeyboard_summary">Вкл/Викл сторонні клавіатури </string>
+  <!-- TODO string name="pref_local_help_title">Translated manual</string -->
+  <!-- TODO string name="pref_local_help_summary">Enable translated manual</string -->
   <string name="pref_cosurvey_title">Спільна зйомка</string>
   <string name="pref_cosurvey_summary">Вкл/Викл спільну зйомку</string>
   <string name="pref_export_shots_title">Формат експорту даних</string>

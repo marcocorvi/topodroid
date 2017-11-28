@@ -825,6 +825,8 @@
   <!-- UNUSED string name="pref_bootloader_summary">Enable bootloader</string -->
   <string name="pref_mkeyboard_title">Keyboard</string>
   <string name="pref_mkeyboard_summary">Enable custom keyboards</string>
+  <string name="pref_local_help_title">Translated manual</string>
+  <string name="pref_local_help_summary">Enable translated manual</string>
   <string name="pref_cosurvey_title">Co-surveying service</string>
   <string name="pref_cosurvey_summary">Enable co-surveying service</string>
   <string name="pref_export_shots_title">Default data export</string>

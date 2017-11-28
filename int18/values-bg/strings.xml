@@ -812,6 +812,8 @@
   <!-- UNUSED string name="pref_bootloader_summary">Разрешаване на инсталирането на фърмуер</string -->
   <string name="pref_mkeyboard_title">Собствена клавиатура</string>
   <string name="pref_mkeyboard_summary">Използване на Topodroid клавиатурни подредби</string>
+  <!-- TODO string name="pref_local_help_title">Translated manual</string -->
+  <!-- TODO string name="pref_local_help_summary">Enable translated manual</string -->
   <string name="pref_cosurvey_title">Ко-картиране</string>
   <string name="pref_cosurvey_summary">Разрешаване на едновременно картиране</string>
   <string name="pref_export_shots_title">Експортиране на измервания</string>

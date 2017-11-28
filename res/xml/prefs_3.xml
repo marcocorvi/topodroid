@@ -42,6 +42,13 @@
        android:defaultValue="true"
        />
 
+  <CheckBoxPreference
+       android:key="DISTOX_LOCAL_HELP"
+       android:summary="@string/pref_local_help_summary"
+       android:title="@string/pref_local_help_title"
+       android:defaultValue="true"
+       />
+
   <!-- CheckBoxPreference
        android:key="DISTOX_BOOTLOADER"
        android:summary="@string/pref_bootloader_summary"

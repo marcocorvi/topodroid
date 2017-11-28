@@ -33,7 +33,7 @@ class TDSetting
   // ---------------------------------------------------------
   // PREFERENCES KEYS
 
-  final static int NR_PRIMARY_PREFS = 12;
+  final static int NR_PRIMARY_PREFS = 13;
 
   static final String[] key = { // prefs keys
     // ------------------------- PRIMARY PREFS
@@ -42,6 +42,7 @@ class TDSetting
     "DISTOX_TEXT_SIZE",           // size of tetx [pt]
     "DISTOX_MKEYBOARD",           // whether to use TopoDroid keypads
     "DISTOX_TEAM",                // default team
+    "DISTOX_LOCAL_HELP",          // enable local man pages
     "DISTOX_COSURVEY",            // whether to enable co-surveying
     "DISTOX_INIT_STATION",        // default initial station name
     "DISTOX_AZIMUTH_MANUAL",      // whether the "extend" is fixed L or R, selected by hand 
@@ -206,6 +207,7 @@ class TDSetting
   static int mSizeButtons;
   static int mTextSize     = 16;     // list text size 
   static boolean mKeyboard = true;
+  static boolean mLocalManPages = true;
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   // IMPORT EXPORT
@@ -631,6 +633,7 @@ class TDSetting
     setTextSize( app, tryInt( prefs, key[k++], defaultTextSize ) );// DISTOX_TEXT_SIZE
     mKeyboard    = prefs.getBoolean( key[k++], true );             // DISTOX_MKEYBOARD
     mDefaultTeam = prefs.getString( key[k++], "" );                // DISTOX_TEAM
+    mLocalManPages = prefs.getBoolean( key[k++], true );           // DISTOX_LOCAL_HELP
     boolean co_survey = prefs.getBoolean( key[k++], false );       // DISTOX_COSURVEY 
 
     mInitStation = prefs.getString( key[k++], "0" ).replaceAll("\\s+", "");  // DISTOX_INIT_STATION 
@@ -864,6 +867,8 @@ class TDSetting
       mKeyboard = prefs.getBoolean( k, true );           // DISTOX_MKEYBOARD
     } else if ( k.equals( key[ nk++ ] ) ) {
       mDefaultTeam     = prefs.getString( k, "" );       // DISTOX_TEAM
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mLocalManPages = prefs.getBoolean( k, true );           // DISTOX_LOCAL_HELP
     } else if ( k.equals( key[ nk++ ] ) ) {
       boolean co_survey = prefs.getBoolean( k, false );  // DISTOX_COSURVEY
       if ( co_survey != app.mCoSurveyServer ) {
@@ -1395,6 +1400,7 @@ class TDSetting
     // if ( name.equals( "DISTOX_PLOT_CACHE") ) 
 
     // if ( name.equals( "DISTOX_TEAM" )
+    // if ( name.equals( "DISTOX_LOCAL_HELP" )
     if ( name.equals( "DISTOX_SHOT_TIMER"     ) ) return parseIntValue( value, mTimerWait, 0 );
     if ( name.equals( "DISTOX_BEEP_VOLUME"    ) ) return parseIntValue( value, mBeepVolume, 10, 100 );
     // if ( name.equals( "DISTOX_LEG_SHOTS" )

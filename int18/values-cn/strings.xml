@@ -808,6 +808,8 @@
   <!-- UNUSED string name="pref_bootloader_summary">启用/停用 引导程序</string -->
   <string name="pref_mkeyboard_title">键盘</string>
   <string name="pref_mkeyboard_summary">启用/停用 习惯键盘</string>
+  <!-- TODO string name="pref_local_help_title">Translated manual</string -->
+  <!-- TODO string name="pref_local_help_summary">Enable translated manual</string -->
   <string name="pref_cosurvey_title">联合测量服务</string>
   <string name="pref_cosurvey_summary">启用/停用 联合测量服务</string>
   <string name="pref_export_shots_title">默认数据导出</string>

@@ -810,6 +810,8 @@
   <!-- UNUSED string name="pref_bootloader_summary">Ativar bootloader</string -->
   <string name="pref_mkeyboard_title">Teclado</string>
   <string name="pref_mkeyboard_summary">Habilitar teclados customizados</string>
+  <!-- TODO string name="pref_local_help_title">Translated manual</string -->
+  <!-- TODO string name="pref_local_help_summary">Enable translated manual</string -->
   <string name="pref_cosurvey_title">Topo colaborativa</string>
   <string name="pref_cosurvey_summary">Habilitar topo colaborativa</string>
   <string name="pref_export_shots_title">Exportação padrão de dados</string>

@@ -38,19 +38,6 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
   private int mType;
   private boolean mShowSelected;
 
-
-  /** get the item at a certain position in the list of symbols 
-   */
-  ItemSymbol get( int k )
-  { 
-    // Log.v("DistoX", "ItemAdapter get item at " + k + " of " + mItems.size() );
-    return ( k < mItems.size() ) ? mItems.get(k) : null ;
-  }
-
-  // void doRecent( SymbolInterface symbol ) 
-  // {
-  // }
-
   public ItemAdapter( Context ctx, IItemPicker parent, int type, int id, ArrayList< ItemSymbol > items )
   {
     super( ctx, id, items );
@@ -80,27 +67,27 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
   //     }
   //   }
   // }
+  
+  private boolean isValid( int p ) { return p >= 0 && p < mItems.size(); }
 
-  void setItemOrientation( int pos, int angle )
-  {
-    // Log.v("DistoX", "adapter pos " + pos + " set angle " + angle );
-    ItemSymbol b = mItems.get( pos );
-    b.setAngle( angle );
-  }
+  void setItemOrientation( int pos, int angle ) { if ( isValid(pos) ) { mItems.get( pos ).setAngle( angle ); } }
 
   void setShowSelected( boolean s ) 
   { 
     mShowSelected = s;
-    if ( mPos >= 0 ) {
+    if ( isValid(mPos) ) {
       mItems.get( mPos ).setChecked( mShowSelected );
     }
   }
 
+  // get the item at a certain position in the list of symbols 
+  ItemSymbol get( int k ) { return ( k < mItems.size() ) ? mItems.get(k) : null ; }
+
   // ItemSymbol get( int pos ) { return mItems.get(pos); }
+  
   int getSelectedPos() { return mPos; }
 
-  ItemSymbol getSelectedItem() { return ( mPos >= 0 && mPos < mItems.size() )? mItems.get(mPos) : null; }
-  // public int size() { return mItems.size(); }
+  ItemSymbol getSelectedItem() { return ( isValid(mPos) )? mItems.get(mPos) : null; }
 
   // set selected position from the item index
   void setSelectedItem( int index )
@@ -158,8 +145,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
   public View getView( int pos, View convertView, ViewGroup parent )
   {
     ItemSymbol b = mItems.get( pos );
-    if ( b == null ) return convertView;
-    return b.mView;
+    return ( b == null )? convertView : b.mView;
   }
 
   @Override

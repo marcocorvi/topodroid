@@ -2540,22 +2540,24 @@ public class DataHelper extends DataSetObservable
                                 "key = ?", new String[] { key },
                                 null, null, null );
      if ( cursor != null ) {
-       if (cursor.moveToFirst()) {
-         updateConfig.bindString( 1, value );
-         updateConfig.bindString( 2, key );
-         try {
-           updateConfig.execute();
-         } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-         } catch (SQLiteException e ) { logError( "config update " + key + " " + value, e ); }
-       } else {
-         ContentValues cv = new ContentValues();
-         cv.put( "key",     key );
-         cv.put( "value",   value );
-         try {
-           myDB.insert( CONFIG_TABLE, null, cv );
-         } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-         } catch ( SQLiteException e ) { logError("config insert " + key + " " + value, e ); }
-       }
+       try {
+         if (cursor.moveToFirst()) {
+           updateConfig.bindString( 1, value );
+           updateConfig.bindString( 2, key );
+           try {
+             updateConfig.execute();
+           } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+           } catch (SQLiteException e ) { logError( "config update " + key + " " + value, e ); }
+         } else {
+           ContentValues cv = new ContentValues();
+           cv.put( "key",     key );
+           cv.put( "value",   value );
+           try {
+             myDB.insert( CONFIG_TABLE, null, cv );
+           } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+           } catch ( SQLiteException e ) { logError("config insert " + key + " " + value, e ); }
+         }
+       } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e ); }
        if ( ! cursor.isClosed()) cursor.close();
      }
    }

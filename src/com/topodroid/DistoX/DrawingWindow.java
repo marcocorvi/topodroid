@@ -2810,8 +2810,7 @@ public class DrawingWindow extends ItemDrawer
                         mCurrentLinePath.computeUnitNormal();
 
                         // orientation of the section-line
-                        azimuth = 90 + (float)(Math.atan2( l2.x-l1.x, -l2.y+l1.y ) * TDMath.RAD2DEG );
-                        azimuth = TDMath.in360( azimuth );
+                        azimuth = TDMath.in360( 90 + (float)(Math.atan2( l2.x-l1.x, -l2.y+l1.y ) * TDMath.RAD2DEG ) );
 
                         if ( nr_legs == 1 ) {
                           DrawingPath p = paths.get(0);
@@ -2834,8 +2833,7 @@ public class DrawingWindow extends ItemDrawer
                               extend = -1;
                             }
                
-                            float dc = (extend == blk.getExtend())? clino - blk.mClino : 180 - clino - blk.mClino ;
-                            dc = TDMath.in360( dc );
+                            float dc = TDMath.in360( (extend == blk.getExtend())? clino - blk.mClino : 180 - clino - blk.mClino );
                             if ( dc > 90 && dc <= 270 ) { // exchange FROM-TO 
                               azimuth = blk.mBearing + 180; if ( azimuth >= 360 ) azimuth -= 360;
                               from = blk.mTo;
@@ -2847,8 +2845,7 @@ public class DrawingWindow extends ItemDrawer
                             //   azimuth = blk.mBearing + 180; if ( azimuth >= 360 ) azimuth -= 360;
                             // }
                           } else { // xsection in plan view ( clino = 0 )
-                            float da = azimuth - blk.mBearing;
-                            da = TDMath.in360( da );
+                            float da = TDMath.in360( azimuth - blk.mBearing );
                             if ( da > 90 && da <= 270 ) { // exchange FROM-TO 
                               from = blk.mTo;
                               to   = blk.mFrom;
@@ -2860,8 +2857,8 @@ public class DrawingWindow extends ItemDrawer
                             // nothing 
                           } else {
                             nr_legs = 1; // ok
-                            azimuth = 90 + (float)(Math.atan2( l2.x-l1.x, -l2.y+l1.y ) * TDMath.RAD2DEG );
-                            azimuth = TDMath.in360( azimuth );
+			    // these have already been computed before the if-test
+                            // azimuth = TDMath.in360( 90 + (float)(Math.atan2( l2.x-l1.x, -l2.y+l1.y ) * TDMath.RAD2DEG ) );
                           }
                         }
                       }
