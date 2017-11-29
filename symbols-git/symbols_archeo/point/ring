@@ -1,6 +1,7 @@
 symbol point
 name ring
 name-it anello
+name-es anillo
 name-pt anel
 th_name u:ring
 color 0xcccccc
