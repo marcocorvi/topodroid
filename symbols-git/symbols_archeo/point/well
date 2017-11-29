@@ -1,6 +1,7 @@
 symbol point
 name well
 name-it pozzo_idrico
+name-es pozo_de_agua
 name-pt cacimba
 th_name u:well
 color 0x66ccff
