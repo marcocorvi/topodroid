@@ -1,6 +1,7 @@
 symbol point
 name pillar
 name-it pilastro
+name-es columna
 name-pt pilar
 th_name u:pillar
 color 0xcccccc
