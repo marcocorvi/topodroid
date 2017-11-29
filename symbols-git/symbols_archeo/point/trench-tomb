@@ -1,6 +1,7 @@
 symbol
 name trench-tomb
 name-it fossa_tombale
+name-es fosa_coletiva
 name-pt fossa_coletiva
 th_name u:trench_tomb
 color 0xffff33
