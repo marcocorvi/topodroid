@@ -1,6 +1,7 @@
 symbol point
 name water-work
 name-it opera_idraulica
+name-es trabajo_hidráulico
 name-pt trabalho_hidráulico
 th_name u:water_work
 color 0x66ccff
