@@ -1,6 +1,7 @@
 symbol point
 name ventilation-shaft
 name-it camino_di_ventilazione
+name-es chimenea_ventilación
 name-pt poço_ventilação
 th_name u:ventilation_shaft
 color 0xff6699
