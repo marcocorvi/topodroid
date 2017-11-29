@@ -1,6 +1,7 @@
 symbol point
 name wood
 name-it legno
+name-es madera
 name-pt madeira
 th_name u:wood
 color 0xcc9966
