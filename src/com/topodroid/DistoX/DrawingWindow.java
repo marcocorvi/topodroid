@@ -1007,8 +1007,9 @@ public class DrawingWindow extends ItemDrawer
         if  ( ! sh.mIgnoreExtend ) {
           NumStation st1 = sh.from;
           NumStation st2 = sh.to;
-          if ( st1.mHasCoords && st2.mHasCoords && st1.show() && st2.show() ) {
-            addFixedLine( sh.getFirstBlock(), (float)(st1.h), (float)(st1.v), (float)(st2.h), (float)(st2.v), false, true );
+	  DBlock blk = sh.getFirstBlock();
+          if ( blk != null && st1.mHasCoords && st2.mHasCoords && st1.show() && st2.show() ) {
+            addFixedLine( blk, (float)(st1.h), (float)(st1.v), (float)(st2.h), (float)(st2.v), false, true );
                           // xoff, yoff, false, true );
           }
         }
