@@ -1,5 +1,6 @@
 ﻿symbol line
 name slope_shallow
+name-es pendiente_suave
 name-pt rampa_suave
 name-ru склон_пологий
 th_name slope:shallow
