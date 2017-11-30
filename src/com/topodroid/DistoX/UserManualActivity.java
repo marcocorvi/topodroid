@@ -57,7 +57,7 @@ public class UserManualActivity extends Activity
     ++mCloseOnBack;
     // String filepath = TDPath.getManFile( filename );
     // mTVtext.loadUrl( filepath );
-    String page = "/sdcard/TopoDroid/man/" + filename;
+    String page = TDPath.getManFile( filename );
     if ( ! ( TDSetting.mLocalManPages && (new File(page)).exists() ) ) {
       page = "/android_asset/man/" + filename;
     }

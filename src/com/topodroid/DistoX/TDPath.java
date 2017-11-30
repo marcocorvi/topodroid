@@ -67,9 +67,9 @@ public class TDPath
   private static String PATH_DEFAULT = EXTERNAL_STORAGE_PATH + "/TopoDroid/";
   private static String PATH_BASE = PATH_DEFAULT;
 
-  private static String PATH_BIN    = PATH_DEFAULT + "bin/";    // Firmwares  
-  private static String PATH_CCSV   = PATH_DEFAULT + "ccsv/";  // calib CSV text
-  // private static String PATH_MAN = PATH_DEFAULT + "man/"; // User Manual
+  private static String PATH_BIN  = PATH_DEFAULT + "bin/";    // Firmwares  
+  private static String PATH_CCSV = PATH_DEFAULT + "ccsv/";  // calib CSV text
+  private static String PATH_MAN  = PATH_DEFAULT + "man/"; // User Manual
 
   static String APP_SYMBOL_PATH = PATH_DEFAULT + "symbol/";
   static String APP_POINT_PATH  = APP_SYMBOL_PATH + "point/";
@@ -345,7 +345,7 @@ public class TDPath
 
   static String getBinFile( String name )    { return PATH_BIN + name; }
   static String getCCsvFile( String name )   { return PATH_CCSV + name; }
-  // static String getManFile( String name )    { return PATH_MAN + name; }
+  static String getManFile( String name )    { return PATH_MAN + name; }
 
   static String getNoteFile( String name )   { return APP_NOTE_PATH + name; }
 
