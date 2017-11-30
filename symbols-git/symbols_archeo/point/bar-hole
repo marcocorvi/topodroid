@@ -1,6 +1,7 @@
 symbol point
 name bar-hole
 name-it buca_pontaia
+name-es agujero
 name-pt buraco_viga
 name-hu cölöplyuk
 th_name u:bar_hole
