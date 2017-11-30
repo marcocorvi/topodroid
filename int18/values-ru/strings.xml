@@ -625,23 +625,23 @@
     <!-- UNUSED string name="menu_save_th2">сохр th2</string -->
 <!-- END_SKETCH_3D -->    
 
-    <!-- TODO string name="man_preface">Preface</string -->
-    <!-- TODO string name="man_intro">1. Introduction</string -->
-    <!-- TODO string name="man_main">2. Main window</string -->
-    <!-- TODO string name="man_device">3. Device window</string -->
-    <!-- TODO string name="man_calib">4. Calibration window</string -->
-    <!-- TODO string name="man_gm">5. Calibration data</string -->
-    <!-- TODO string name="man_survey">6. Survey data</string -->
-    <!-- TODO string name="man_shot">7. Shot list</string -->
-    <!-- TODO string name="man_info">8. Survey info</string -->
-    <!-- TODO string name="man_sketch">9. Sketch window</string -->
-    <!-- TODO string name="man_draw">10. Sketch drawing</string -->
-    <!-- TODO string name="man_xsection">11. Cross-sections</string -->
-    <!-- TODO string name="man_overview">12. Overview window</string -->
-    <!-- TODO string name="man_export">13. Import/export</string -->
-    <!-- TODO string name="man_threed">14. 3D viewer</string -->
-    <!-- TODO string name="man_index">15. Index</string -->
-    <!-- TODO string name="man_website">* Website</string -->
+    <string name="man_preface">Предисловие</string>
+    <string name="man_intro">1. Введение</string>
+    <string name="man_main">2. Главное окно</string>
+    <string name="man_device">3. Окно устройств</string>
+    <string name="man_calib">4. Окно калибровки</string>
+    <string name="man_gm">5. Данные калибровки</string>
+    <string name="man_survey">6. Данные съёмки</string>
+    <string name="man_shot">7. Список пикетов</string>
+    <string name="man_info">8. Информация о съёмке</string>
+    <string name="man_sketch">9. Окно абрисов</string>
+    <string name="man_draw">10. Рисование абрисов</string>
+    <string name="man_xsection">11. Поперечные сечения</string>
+    <string name="man_overview">12. Окно обзора</string>
+    <string name="man_export">13. Импорт-Экспорт</string>
+    <string name="man_threed">14. Просмотр в 3D</string>
+    <string name="man_index">15. Индекс</string>
+    <string name="man_website">* Website</string>
 
     <string name="help_help">Помощь</string>
     <!-- UNUSED string name="help_manual">Инструкция</string -->

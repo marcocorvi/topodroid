@@ -1,6 +1,7 @@
 symbol point
 name pit
 name-it pozzo
+name- pozo
 name-pt poço
 th_name u:pit
 color 0xff6699

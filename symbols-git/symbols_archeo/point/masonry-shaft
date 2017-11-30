@@ -1,6 +1,7 @@
 symbol point
 name masonry-shaft
 name-it pozzo_in_muratura
+name-es hueco_de_obra
 name-pt poço_alvenaria
 th_name u:masonry_shaft
 color 0xff6699

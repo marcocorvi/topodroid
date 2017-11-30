@@ -1,6 +1,7 @@
 symbol point
 name qanat-shaft
 name-it pozzo_per_qanat
+name-es eje_pozo
 name-pt poço_qanat
 th_name u:qanat_shaft
 color 0xff6699

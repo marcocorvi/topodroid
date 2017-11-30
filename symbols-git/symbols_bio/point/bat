@@ -1,5 +1,6 @@
 symbol point
 name bat
+name-es murciélago
 name-pt morcego
 th_name u:bat
 color 0xffcc33

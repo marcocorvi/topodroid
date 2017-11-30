@@ -1,6 +1,7 @@
 symbol point
 name notch
 name-it incastro
+name-es muesca
 name-pt entalhe
 th_name u:notch
 color 0x33ffcc

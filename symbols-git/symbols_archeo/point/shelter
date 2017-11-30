@@ -1,6 +1,7 @@
 symbol point
 name shelter
 name-it riparo
+name-es abrigo
 name-pt abrigo
 th_name u:shelter
 color 0xffffff

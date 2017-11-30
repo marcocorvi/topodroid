@@ -1,6 +1,7 @@
 symbol point
 name hole
 name-it buco
+name-es agujero
 name-pt buraco
 th_name u:hole
 color 0x66ffcc

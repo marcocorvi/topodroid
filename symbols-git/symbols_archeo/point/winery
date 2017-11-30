@@ -1,6 +1,7 @@
 symbol point
 name winery
 name-it cantina
+name-es bodega
 name-pt adega
 th_name u:winery
 color 0x9933ff

@@ -1,6 +1,7 @@
 symbol point
 name cut-pillar
 name-it pilastro_tronco
+name-es base_columna
 name-pt base_pilar
 th_name u:cut_pillar
 color 0xcccccc

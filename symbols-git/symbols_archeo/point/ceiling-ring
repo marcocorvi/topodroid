@@ -1,6 +1,7 @@
 symbol point
 name ceiling-ring
 name-it anello_a_soffitto
+name-es anillo_de_techo
 name_pt anel_teto
 th_name u:ceiling_ring
 color 0xcccccc
