@@ -1,6 +1,7 @@
 ﻿symbol point
 name remark
 name-pt observação
+name-es observación
 th_name u:remark
 orientation no
 has_text yes
