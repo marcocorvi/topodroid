@@ -1,6 +1,7 @@
 symbol area
 name agglomerate
 name-pt aglomerado
+name-es aglomerado
 th_name u:agglomerate
 color 0x99ff00 0xcc
 csurvey 1 48 0 3
