@@ -1,6 +1,7 @@
 symbol point
 name clay
 name-it argilla
+name-es arcilla
 name-pt lama/argila
 th_name u:clay
 color 0xff9933
