@@ -1,6 +1,7 @@
 symbol area
 name gneiss
 name-it gneiss
+name-es gneis
 name-pt gnaisse
 th_name u:gneiss
 color 0xcc6666 0xcc
