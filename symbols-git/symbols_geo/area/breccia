@@ -1,6 +1,7 @@
 symbol area
 name breccia
 name-pt brecha
+name-es brecha
 th_name u:breccia
 color 0x99ff00 0xcc
 csurvey 1 48 0 3
