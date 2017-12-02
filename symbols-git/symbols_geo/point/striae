@@ -1,6 +1,7 @@
 symbol point
 name striae
 name-it strie
+name-es estria
 name-pt estria
 th_name u:striae
 color 0xcccc99
