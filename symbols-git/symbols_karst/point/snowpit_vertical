@@ -1,6 +1,7 @@
 symbol point
 name snowpit_vertical
 name-pt poço_de_neve_vertical
+name-es pozo_de_nieve_vertical
 name-ru снежный_колодец
 th_name u:snowpit_vertical
 orientation no
