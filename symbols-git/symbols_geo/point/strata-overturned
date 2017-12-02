@@ -1,6 +1,7 @@
 symbol point
 name strata-overturned
 name-it strati_rovesciati
+name-es estrato_invertido
 name-pt estrato_invertido
 th_name u:strata_overturned
 color 0xcccccc
