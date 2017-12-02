@@ -1,7 +1,7 @@
 symbol point
 name cave_horizontal
 name-pt caverna_horizontal
-name-es cueva_horizontal
+name-es cueva
 name-ru пещера_горизонтальная
 th_name u:cave_horizontal
 orientation no
