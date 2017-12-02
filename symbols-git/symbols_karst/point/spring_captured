@@ -1,6 +1,7 @@
 symbol point
 name spring_captured
 name-pt nascente_confinada
+name-es manatial_confinado
 name-ru источник_водозабор
 th_name u:spring_captured
 orientation no
