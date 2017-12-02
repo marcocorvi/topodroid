@@ -1,6 +1,7 @@
 symbol point
 name ore
 name-pt minério
+name-es mineral
 th_name u:ore
 color 0x66ff99
 csurvey 0 0 0
