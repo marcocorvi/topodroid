@@ -1,6 +1,7 @@
 symbol point
 name lineation-inclined
 name-pt lineação_oblíqua
+name-es lineación inclinada
 th_name u:lineation_inclined
 color 0xffffff
 csurvey 0 0 0
