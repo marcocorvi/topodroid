@@ -1,6 +1,7 @@
 symbol point
 name bridge
 name-pt ponte
+name-es puente
 name-ru мост
 th_name u:bridge
 orientation no
