@@ -1,6 +1,7 @@
 symbol point
 name gravel
 name-it ghiaia
+name-es grava
 name-pt cascalho
 th_name u:gravel
 color 0xcc9966
