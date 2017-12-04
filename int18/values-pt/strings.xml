@@ -624,23 +624,23 @@
     <!-- UNUSED string name="menu_save_th2">SALVAR TH2</string -->
 <!-- END_SKETCH_3D -->    
 
-    <!-- TODO string name="man_preface">Preface</string -->
-    <!-- TODO string name="man_intro">1. Introduction</string -->
-    <!-- TODO string name="man_main">2. Main window</string -->
-    <!-- TODO string name="man_device">3. Device window</string -->
-    <!-- TODO string name="man_calib">4. Calibration window</string -->
-    <!-- TODO string name="man_gm">5. Calibration data</string -->
-    <!-- TODO string name="man_survey">6. Survey data</string -->
-    <!-- TODO string name="man_shot">7. Shot list</string -->
-    <!-- TODO string name="man_info">8. Survey info</string -->
-    <!-- TODO string name="man_sketch">9. Sketch window</string -->
-    <!-- TODO string name="man_draw">10. Sketch drawing</string -->
-    <!-- TODO string name="man_xsection">11. Cross-sections</string -->
-    <!-- TODO string name="man_overview">12. Overview window</string -->
-    <!-- TODO string name="man_export">13. Import/export</string -->
-    <!-- TODO string name="man_threed">14. 3D viewer</string -->
-    <!-- TODO string name="man_index">15. Index</string -->
-    <!-- TODO string name="man_website">* Website</string -->
+    <string name="man_preface">Prefácio</string>
+    <string name="man_intro">1. Introdução</string>
+    <string name="man_main">2. Tela principal</string>
+    <string name="man_device">3. Tela Dispositivos</string>
+    <string name="man_calib">4. Tela Calibração</string>
+    <string name="man_gm">5. Informação de calibração</string>
+    <string name="man_survey">6. Dados da topografia</string>
+    <string name="man_shot">7. Lista de visadas</string>
+    <string name="man_info">8. Informaçãos sobre a topografia</string>
+    <string name="man_sketch">9. Tela Croqui</string>
+    <string name="man_draw">10. Desenhando croquis</string>
+    <string name="man_xsection">11. Seções</string>
+    <string name="man_overview">12. Tela Visão Geral</string>
+    <string name="man_export">13. Importar/exportar</string>
+    <string name="man_threed">14. Visualizador 3D</string>
+    <string name="man_index">15. Índice</string>
+    <string name="man_website">* Site</string>
 
     <string name="help_help">Esta ajuda</string>
     <!-- UNUSED string name="help_manual">Manual do usuário</string -->
@@ -828,8 +828,8 @@
   <!-- UNUSED string name="pref_bootloader_summary">Ativar bootloader</string -->
   <string name="pref_mkeyboard_title">Teclado</string>
   <string name="pref_mkeyboard_summary">Habilitar teclados customizados</string>
-  <!-- TODO string name="pref_local_help_title">Translated manual</string -->
-  <!-- TODO string name="pref_local_help_summary">Enable translated manual</string -->
+  <string name="pref_local_help_title">Manual traduzido</string>
+  <string name="pref_local_help_summary">Habilitar manual traduzido</string>
   <string name="pref_cosurvey_title">Topo colaborativa</string>
   <string name="pref_cosurvey_summary">Habilitar topo colaborativa</string>
   <string name="pref_export_shots_title">Exportação padrão de dados</string>
