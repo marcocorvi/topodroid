@@ -1,6 +1,7 @@
 ﻿symbol point
 name gypsum-flower
 name-es flores_de_yeso
+name-pt flor_de_calcita
 th_name gypsum-flower
 orientation no
 color 0xffffff

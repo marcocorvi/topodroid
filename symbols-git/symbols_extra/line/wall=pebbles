@@ -2,6 +2,7 @@ encoding  utf-8
 symbol line
 name wall_pebbles
 name-es pared_cantos_rodados
+name-pt parede_seixos
 th_name wall:pebbles
 group wall
 color 0xff0000 0xff
