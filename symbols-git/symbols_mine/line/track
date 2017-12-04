@@ -2,6 +2,7 @@ symbol line
 name track
 name-de Schienen
 name-pt trilha
+name-es camino
 th_name u:track
 group track
 color 0xcccccc 

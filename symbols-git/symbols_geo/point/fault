@@ -1,6 +1,7 @@
 symbol point
 name fault
 name-it faglia
+name-es falla
 name-pt falha
 th_name u:fault
 color 0xff6666

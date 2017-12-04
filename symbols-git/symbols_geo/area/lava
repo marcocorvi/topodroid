@@ -1,6 +1,7 @@
 symbol area
 name lava
 name-it lava
+name-es lava
 name-pt lava
 th_name u:lava
 color 0xff6666 0xcc

@@ -1,6 +1,7 @@
 symbol point
 name strata-horizontal
 name-it strati_orizzontali
+name-es estrato_horizontal
 name-pt estrato_horizontal
 th_name u:strata_horizontal
 color 0xcccccc

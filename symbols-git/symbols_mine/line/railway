@@ -2,6 +2,7 @@ symbol line
 name railway
 name-de Eisenbahn
 name-pt trilho
+name-es rail_vagoneta
 th_name u:railway
 group railway
 color 0xcccccc 

@@ -1,6 +1,7 @@
 symbol point
 name fossil
 name-pt fóssil
+name-es fósil
 name-it fossile
 th_name u:fossil
 color 0x33ff66

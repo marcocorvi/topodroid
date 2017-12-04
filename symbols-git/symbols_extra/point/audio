@@ -1,6 +1,7 @@
 symbol audio
 name audio
 name-pt áudio
+name-es áudio
 th_name u:audio
 orientation no
 has_text no

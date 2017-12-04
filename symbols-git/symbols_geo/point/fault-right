@@ -1,6 +1,7 @@
 symbol point
 name fault-right
 name-it faglia_destra
+name-es falla_derecha
 name-pt falha_direita
 th_name u:fault-right
 color 0xff6666

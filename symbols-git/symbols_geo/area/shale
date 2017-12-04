@@ -1,6 +1,7 @@
 symbol area
 name shale
 name-it scisto
+name-es esquisto
 name-pt xisto
 th_name u:shale
 color 0xcc9966 0xcc

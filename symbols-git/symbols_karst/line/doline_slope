@@ -1,6 +1,7 @@
 symbol line
 name doline_slope
 name-pt rampa_de_dolina
+name-es rampa_de_dolina
 name-ru склон_воронки
 th_name u:doline_slope
 group doline

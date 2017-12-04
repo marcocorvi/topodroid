@@ -1,6 +1,7 @@
 symbol area
 name sandstone
 name-it arenaria
+name-es arenisca
 name-pt arenito
 th_name u:sandstone
 color 0xcc9933 0xcc
