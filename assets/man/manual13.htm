@@ -164,6 +164,7 @@ The conversion from Therion to binary is "automatic" when you open a sketch: if 
 
 <b>cSurvey</b> (.csx)<br>
 These exports contain both the plan and profile sketches, as well as the survey data.
+When "section" points are define the section drawings are added at the point.<br>
 
 The cSurvey "cave" attribute is set with the survey name, and the "branch" attribute with the sketch name.
 The midline legs and splays and the sketch items share these attributes.<br><p>
@@ -222,7 +223,7 @@ If the system does not have enough memory to create the image at the set resolut
 <li><b>Therion</b> <i>u:splays</i> lines in Therion scraps [yes]</li>
 <li><b>cSurvey/Compass</b> <i>survey prefix</i> to the stations [no]</li>
 <li><b>Compass/TopoRobot/WinKarst/Polygon/VisualTopo</b> minimum <i>splay-leg angle</i> for LRUD computation [0.0] This is also used in <b>Survex/Therion</b> if LRUD are required.</li>
-<li><b>Compass swap LR</i>: Swap L and R on Compass export.</li>
+<li><b>Compass swap LR</b>: Swap L and R on Compass export.</li>
 <li><b>Survex/Topo</b> <i>line termination</i>: either Unix or Windows [Unix]</li>
 <li><b>Survex</b> export with <i>named splay</i> TO stations [no]</li>
 <li><b>Survex/Therion</b> export with <i>LRUD</i> lines [no]</li>
