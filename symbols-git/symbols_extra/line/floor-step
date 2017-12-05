@@ -2,6 +2,7 @@ encoding  utf-8
 symbol line
 name floor-steo
 name-es resalte
+name-pt degrau_chão
 th_name floor-step
 color 0x33cc66 0xff
 width 8

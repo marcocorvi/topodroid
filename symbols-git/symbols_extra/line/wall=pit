@@ -2,6 +2,7 @@ encoding  utf-8
 symbol line
 name wall-pit
 name-es pozo_pared
+name-pt parede_poço
 th_name wall:pit
 group wall
 color 0xff0000 0xff

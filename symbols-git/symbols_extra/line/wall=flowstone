@@ -2,6 +2,7 @@ encoding  utf-8
 symbol line
 name wall_flowstone
 name-es pared_de_colada
+name-pt parece_escorrimento
 th_name wall:flowstone
 group wall
 color 0xff0000 0xff

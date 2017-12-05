@@ -2,6 +2,7 @@ encoding  utf-8
 symbol point
 name camp
 name-es campamento
+name-pt acampamento
 th_name camp
 orientation no
 color 0xffffff
