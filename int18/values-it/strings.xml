@@ -938,6 +938,8 @@
   <string name="pref_vert_splay_title">Soglia splay tratteggiati</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Soglia clino splay tratteggiati</string -->
   <string name="pref_vert_splay_message">Soglia clino splay tratteggiati</string>
+  <!-- TODO string name="pref_data_backup_title">Data auto-export</string -->
+  <!-- TODO string name="pref_data_backup_summary">Automatic data export (need default format)</string -->
   <string name="pref_shared_xsections_title">X-section condivise</string>
   <string name="pref_shared_xsections_summary">X-section al caposaldo condivisa tra i disegni</string>
   <string name="xsections_shared">X-section condivise</string>

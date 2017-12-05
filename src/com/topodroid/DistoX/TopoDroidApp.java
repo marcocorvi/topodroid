@@ -2082,5 +2082,95 @@ public class TopoDroidApp extends Application
       registerReceiver( mPairingRequest, filter );
     }
   }
+  
+  void doExportData( int exportType, boolean warn )
+  {
+    if ( exportType < 0 ) return;
+    if ( mSID < 0 ) {
+      if ( warn ) {
+        Toast.makeText( this, R.string.no_survey, Toast.LENGTH_SHORT).show();
+      }
+    } else {
+      String filename = null;
+      switch ( exportType ) {
+        // case TDConst.DISTOX_EXPORT_TLX:
+        //   filename = exportSurveyAsTlx();
+        //   break;
+        case TDConst.DISTOX_EXPORT_DAT:
+          filename = exportSurveyAsDat();
+          break;
+        case TDConst.DISTOX_EXPORT_SVX:
+          filename = exportSurveyAsSvx();
+          break;
+        case TDConst.DISTOX_EXPORT_TRO:
+          filename = exportSurveyAsTro();
+          break;
+        case TDConst.DISTOX_EXPORT_CSV:
+          filename = exportSurveyAsCsv();
+          break;
+        case TDConst.DISTOX_EXPORT_DXF:
+          List<DBlock> list = mData.selectAllShots( mSID, TDStatus.NORMAL );
+          if ( list.size() > 0 ) {
+            DBlock blk = list.get( 0 );
+            // Log.v( TopoDroidApp.TAG, "DISTOX_EXPORT_DXF from " + blk.mFrom );
+            float decl = mData.getSurveyDeclination( mSID );
+            DistoXNum num = new DistoXNum( list, blk.mFrom, null, null, decl );
+            filename = exportSurveyAsDxf( num );
+          }
+          break;
+        case TDConst.DISTOX_EXPORT_KML: // KML
+          filename = exportSurveyAsKml( ); // can return ""
+          break;
+        case TDConst.DISTOX_EXPORT_PLT: // Track file
+          filename = exportSurveyAsPlt( ); // can return ""
+          break;
+        case TDConst.DISTOX_EXPORT_CSX: // cSurvey
+          filename = exportSurveyAsCsx( null, null );
+          break;
+        case TDConst.DISTOX_EXPORT_TOP: // PocketTopo
+          filename = exportSurveyAsTop( null, null );
+          break;
+        case TDConst.DISTOX_EXPORT_SRV: // Walls
+          filename = exportSurveyAsSrv();
+          break;
+        case TDConst.DISTOX_EXPORT_PLG: // Polygon
+          filename = exportSurveyAsPlg();
+          break;
+        case TDConst.DISTOX_EXPORT_CAV: // Topo
+          filename = exportSurveyAsCav();
+          break;
+        case TDConst.DISTOX_EXPORT_GRT: // Grottolf
+          Toast.makeText( this, "WARNING Grottolf export is untested", Toast.LENGTH_SHORT ).show(); 
+          filename = exportSurveyAsGrt();
+          break;
+        case TDConst.DISTOX_EXPORT_GTX: // GHTopo
+          Toast.makeText( this, "WARNING GHTopo export is untested", Toast.LENGTH_SHORT ).show(); // FIXME TROBOT
+          filename = exportSurveyAsGtx();
+          break;
+        case TDConst.DISTOX_EXPORT_SUR: // WinKarst
+          Toast.makeText( this, "WARNING WinKarst export is untested", Toast.LENGTH_SHORT ).show(); 
+          filename = exportSurveyAsSur();
+          break;
+        case TDConst.DISTOX_EXPORT_TRB: // TopoRobot
+          Toast.makeText( this, "WARNING TopoRobot export is untested", Toast.LENGTH_SHORT ).show(); 
+          filename = exportSurveyAsTrb();
+          break;
+
+        case TDConst.DISTOX_EXPORT_TH:
+        default:
+          filename = exportSurveyAsTh();
+          break;
+      }
+      if ( warn ) { 
+        if ( filename == null ) {
+          Toast.makeText( this, R.string.saving_file_failed, Toast.LENGTH_SHORT).show();
+        } else if ( filename.length() == 0 ) {
+          Toast.makeText( this, R.string.no_geo_station, Toast.LENGTH_SHORT).show();
+        } else {
+          Toast.makeText( this, mActivity.getString(R.string.saving_) + filename, Toast.LENGTH_SHORT).show();
+        }
+      }
+    }
+  }
 
 }

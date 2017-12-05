@@ -941,6 +941,8 @@
   <string name="pref_vert_splay_title">Límite de trazos del borde</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Límite de trazos del borde</string -->
   <string name="pref_vert_splay_message">Límite de trazos del borde</string>
+  <!-- TODO string name="pref_data_backup_title">Data auto-export</string -->
+  <!-- TODO string name="pref_data_backup_summary">Automatic data export (need default format)</string -->
   <string name="pref_shared_xsections_title">Secciones x compartidas</string>
   <string name="pref_shared_xsections_summary">At-estación x-secciones compartidas entre dibujos</string>
   <string name="xsections_shared">Secciones-X compartidas</string>

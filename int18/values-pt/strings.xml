@@ -933,6 +933,8 @@
   <string name="pref_vert_splay_title">Limite med. aux. tracejadas</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Medidas auxiliares acima desta inclinação serão tracejadas</string -->
   <string name="pref_vert_splay_message">Medidas auxiliares acima dessa inclinação serão tracejadas</string>
+  <!-- TODO string name="pref_data_backup_title">Data auto-export</string -->
+  <!-- TODO string name="pref_data_backup_summary">Automatic data export (need default format)</string -->
   <string name="pref_shared_xsections_title">Cortes X compartilhados</string>
   <string name="pref_shared_xsections_summary">Cortes X em bases compartilhados entre croquis</string>
   <string name="xsections_shared">Cortes X compartilhados</string>

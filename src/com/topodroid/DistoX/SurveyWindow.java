@@ -319,9 +319,7 @@ public class SurveyWindow extends Activity
   {
     while ( ! mApp.mEnableZip ) Thread.yield();
 
-    if ( TDSetting.mExportShotsFormat >= 0 ) {
-      doExport( TDSetting.mExportShotsFormat, false );
-    }
+    mApp.doExportData( TDSetting.mExportShotsFormat, false );
     Archiver archiver = new Archiver( mApp );
     if ( archiver.archive( ) ) {
       String msg = getResources().getString( R.string.zip_saved ) + " " + archiver.zipname;
@@ -435,96 +433,7 @@ public class SurveyWindow extends Activity
     if ( index == TDConst.DISTOX_EXPORT_ZIP ) {
       doArchive();
     } else if ( index >= 0 ) {
-      doExport( index, true );
-    }
-  }
-  
-  private void doExport( int exportType, boolean warn )
-  {
-    if ( mApp.mSID < 0 ) {
-      if ( warn ) {
-        Toast.makeText( mActivity, R.string.no_survey, Toast.LENGTH_SHORT).show();
-      }
-    } else {
-      String filename = null;
-      switch ( exportType ) {
-        // case TDConst.DISTOX_EXPORT_TLX:
-        //   filename = mApp.exportSurveyAsTlx();
-        //   break;
-        case TDConst.DISTOX_EXPORT_DAT:
-          filename = mApp.exportSurveyAsDat();
-          break;
-        case TDConst.DISTOX_EXPORT_SVX:
-          filename = mApp.exportSurveyAsSvx();
-          break;
-        case TDConst.DISTOX_EXPORT_TRO:
-          filename = mApp.exportSurveyAsTro();
-          break;
-        case TDConst.DISTOX_EXPORT_CSV:
-          filename = mApp.exportSurveyAsCsv();
-          break;
-        case TDConst.DISTOX_EXPORT_DXF:
-          List<DBlock> list = mApp.mData.selectAllShots( mApp.mSID, TDStatus.NORMAL );
-          if ( list.size() > 0 ) {
-            DBlock blk = list.get( 0 );
-            // Log.v( TopoDroidApp.TAG, "DISTOX_EXPORT_DXF from " + blk.mFrom );
-            float decl = mApp.mData.getSurveyDeclination( mApp.mSID );
-            DistoXNum num = new DistoXNum( list, blk.mFrom, null, null, decl );
-            filename = mApp.exportSurveyAsDxf( num );
-          }
-          break;
-        case TDConst.DISTOX_EXPORT_KML: // KML
-          filename = mApp.exportSurveyAsKml( ); // can return ""
-          break;
-        case TDConst.DISTOX_EXPORT_PLT: // Track file
-          filename = mApp.exportSurveyAsPlt( ); // can return ""
-          break;
-        case TDConst.DISTOX_EXPORT_CSX: // cSurvey
-          filename = mApp.exportSurveyAsCsx( null, null );
-          break;
-        case TDConst.DISTOX_EXPORT_TOP: // PocketTopo
-          filename = mApp.exportSurveyAsTop( null, null );
-          break;
-        case TDConst.DISTOX_EXPORT_SRV: // Walls
-          filename = mApp.exportSurveyAsSrv();
-          break;
-        case TDConst.DISTOX_EXPORT_PLG: // Polygon
-          filename = mApp.exportSurveyAsPlg();
-          break;
-        case TDConst.DISTOX_EXPORT_CAV: // Topo
-          filename = mApp.exportSurveyAsCav();
-          break;
-        case TDConst.DISTOX_EXPORT_GRT: // Grottolf
-          Toast.makeText( this, "WARNING Grottolf export is untested", Toast.LENGTH_SHORT ).show(); 
-          filename = mApp.exportSurveyAsGrt();
-          break;
-        case TDConst.DISTOX_EXPORT_GTX: // GHTopo
-          Toast.makeText( this, "WARNING GHTopo export is untested", Toast.LENGTH_SHORT ).show(); // FIXME TROBOT
-          filename = mApp.exportSurveyAsGtx();
-          break;
-        case TDConst.DISTOX_EXPORT_SUR: // WinKarst
-          Toast.makeText( this, "WARNING WinKarst export is untested", Toast.LENGTH_SHORT ).show(); 
-          filename = mApp.exportSurveyAsSur();
-          break;
-        case TDConst.DISTOX_EXPORT_TRB: // TopoRobot
-          Toast.makeText( this, "WARNING TopoRobot export is untested", Toast.LENGTH_SHORT ).show(); 
-          filename = mApp.exportSurveyAsTrb();
-          break;
-
-        case TDConst.DISTOX_EXPORT_TH:
-        default:
-          filename = mApp.exportSurveyAsTh();
-          break;
-      }
-      if ( warn ) { 
-        if ( filename == null ) {
-          Toast.makeText( mActivity, R.string.saving_file_failed, Toast.LENGTH_SHORT).show();
-        } else if ( filename.length() == 0 ) {
-          Toast.makeText( mActivity, R.string.no_geo_station, Toast.LENGTH_SHORT).show();
-        } else {
-          Toast.makeText( mActivity, mActivity.getString(R.string.saving_) + filename, Toast.LENGTH_SHORT).show();
-        }
-      }
+      mApp.doExportData( index, true );
     }
   }
 

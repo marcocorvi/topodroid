@@ -3362,6 +3362,29 @@ class TDExporter
     return true;
   }
 
+  static private boolean printSplayToTro( PrintWriter pw, DBlock item, boolean direct )
+  {
+    if ( item == null ) return false;
+    // Log.v( TAG, "shot " + item.mFrom + "-" + item.mTo + " " + l/n + " " + b + " " + c/n );
+    if ( direct ) {
+      pw.format("%s * ", item.mFrom );
+      pw.format(Locale.US, "%.2f %.1f %.1f * * * * N I", item.mLength, item.mBearing, item.mClino );
+    } else {
+      float b = item.mBearing + 180;
+      if ( b >= 360 ) b -= 360;
+      pw.format("%s * ", item.mTo );
+      pw.format(Locale.US, "%.2f %.1f %.1f * * * * N I", item.mLength, b, - item.mClino );
+    }
+    // if ( duplicate ) {
+    //   // pw.format(" #|L#");
+    // }
+    if ( item.mComment != null && item.mComment.length() > 0 ) {
+      pw.format(" ;%s", item.mComment );
+    }
+    pw.format("\r\n");
+    return true;
+  }
+
   static String exportSurveyAsTro( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     // Log.v("DistoX", "export as visualtopo: " + filename );
@@ -3417,6 +3440,7 @@ class TDExporter
               duplicate = false;
               ref_item = null; 
             }
+	    printSplayToTro( pw, item, false );
           }
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // splay shot
@@ -3429,6 +3453,7 @@ class TDExporter
               duplicate = false;
               ref_item = null; 
             }
+	    printSplayToTro( pw, item, true );
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {
               if ( ! started ) {

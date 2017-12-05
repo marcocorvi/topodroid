@@ -935,6 +935,8 @@
   <string name="pref_vert_splay_title">Наклонени измервания с пунктир</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Странични измервания с по-голям наклон са с пунктир в плана</string -->
   <string name="pref_vert_splay_message">Странични измервания с по-голям наклон са с пунктир в плана</string>
+  <!-- TODO string name="pref_data_backup_title">Data auto-export</string -->
+  <!-- TODO string name="pref_data_backup_summary">Automatic data export (need default format)</string -->
   <string name="pref_shared_xsections_title">Споделение сечения в репери</string>
   <string name="pref_shared_xsections_summary">Сеченията в реперите са споделени между скиците</string>
   <string name="xsections_shared">Споделение сечения в репери</string>

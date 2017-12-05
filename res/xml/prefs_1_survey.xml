@@ -50,7 +50,14 @@
      / -->
 
      <CheckBoxPreference
-       android:key="DISTOX_XSECTIONS"
+       android:key="DISTOX_DATA_BACKUP"
+       android:summary="@string/pref_data_backup_summary"
+       android:title="@string/pref_data_backup_title"
+       android:defaultValue="false"
+       />
+
+     <CheckBoxPreference
+       android:key="DISTOX_SHARED_XSECTIONS"
        android:summary="@string/pref_shared_xsections_summary"
        android:title="@string/pref_shared_xsections_title"
        android:defaultValue="false"

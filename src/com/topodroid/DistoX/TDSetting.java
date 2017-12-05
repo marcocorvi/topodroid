@@ -72,6 +72,7 @@ class TDSetting
     "DISTOX_EXTEND_THR2",         // half angle around 90 where splays have "vert" extend
     "DISTOX_VTHRESHOLD",          // if shot clino is above, LRUD are horizontal
     "DISTOX_SURVEY_STATION",      // DISTOX_SURVEY_STATIONS must not be used
+    "DISTOX_DATA_BACKUP",         //
     "DISTOX_UNIT_LENGTH",         // units of lengths [m, y, ft]
     "DISTOX_UNIT_ANGLE",          // units of angles [deg, grad]
     "DISTOX_ACCEL_PERCENT",       // shot quality G threshold [%]
@@ -307,6 +308,7 @@ class TDSetting
   // SHOTS
   static float mVThreshold = 80f;   // verticality threshold (LRUD)
   static float mHThreshold;         // horizontal plot threshold
+  static boolean mDataBackup = false; // whether to export data when shotwindow is closed
 
   static int mExportShotsFormat = -1; // DISTOX_EXPORT_NONE
   static int mExportPlotFormat  = -1; // DISTOX_EXPORT_NONE
@@ -684,6 +686,7 @@ class TDSetting
     mVThreshold    = tryFloat( prefs, key[k++], "80"   ); // DISTOX_VTHRESHOLD
 
     parseSurveyStations( prefs.getString( key[k++], "1" ) ); // DISTOX_SURVEY_STATIONS
+    mDataBackup    = prefs.getBoolean( key[k++], false ); // DISTOX_DATA_BACKUP
 
     if ( prefs.getString( key[k++], UNIT_LENGTH ).equals(UNIT_LENGTH) ) {
       mUnitLength = 1.0f;
@@ -928,6 +931,8 @@ class TDSetting
       mVThreshold    = tryFloat( prefs, k, "80" );   // DISTOX_VTHRESHOLD
     } else if ( k.equals( key[ nk++ ] ) ) {
       parseSurveyStations( prefs.getString( k, "1" ) ); // DISTOX_SURVEY_STATION
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mDataBackup = prefs.getBoolean( k, false );      // DISTOX_DATA_BACKUP
     } else if ( k.equals( key[ nk++ ] ) ) {
       if ( prefs.getString( k, UNIT_LENGTH ).equals(UNIT_LENGTH) ) {
         mUnitLength = 1.0f;
@@ -1345,6 +1350,7 @@ class TDSetting
     if ( name.equals( "DISTOX_EXTEND_THR2"    ) ) return parseFloatValue( value, mExtendThr, 0, 90 );
     if ( name.equals( "DISTOX_VTHRESHOLD"     ) ) return parseFloatValue( value, mVThreshold, 0, 90 );
     //C if ( name.equals( "DISTOX_SURVEY_STATION" ) 
+    //B if ( name.equals( "DISTOX_DATA_BACKUP" ) 
     //C if ( name.equals( "DISTOX_UNIT_LENGTH" )
     //C if ( name.equals( "DISTOX_UNIT_ANGLE" )
     if ( name.equals( "DISTOX_ACCEL_PERCENT"  ) ) return parseFloatValue( value, mAccelerationThr, 0 );

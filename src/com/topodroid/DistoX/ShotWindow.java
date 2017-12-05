@@ -584,6 +584,9 @@ public class ShotWindow extends Activity
     closeMenu();
     int p = 0;
     if ( p++ == pos ) { // CLOSE
+      if ( TDSetting.mDataBackup ) {
+        mApp.doExportData( TDSetting.mExportShotsFormat, false ); // try_save
+      }
       super.onBackPressed();
 
     } else if ( p++ == pos ) { // SURVEY ACTIVITY
@@ -709,13 +712,16 @@ public class ShotWindow extends Activity
   //       }
   //   } );
   // }
-
+  
   void doSplitSurvey()
   {
     long old_sid = mApp.mSID;
     long old_id  = mShotId;
     // Log.v( TopoDroidApp.TAG, "split survey " + old_sid + " " + old_id );
     if ( mApp.mShotWindow != null ) {
+      if ( TDSetting.mDataBackup ) {
+        mApp.doExportData( TDSetting.mExportShotsFormat, false ); // try_save
+      }
       mApp.mShotWindow.finish();
       mApp.mShotWindow = null;
     }
@@ -797,6 +803,9 @@ public class ShotWindow extends Activity
         break;
       case TDRequest.INFO_ACTIVITY_SHOTWINDOW:
         if ( resCode == Activity.RESULT_OK ) {
+          if ( TDSetting.mDataBackup ) {
+            mApp.doExportData( TDSetting.mExportShotsFormat, false ); // try_save
+	  }
           finish();
         }
         break;
@@ -1033,6 +1042,9 @@ public class ShotWindow extends Activity
       if ( doubleBackToast != null ) doubleBackToast.cancel();
       doubleBackToast = null;
       DrawingSurface.clearCache();
+      if ( TDSetting.mDataBackup ) {
+        mApp.doExportData( TDSetting.mExportShotsFormat, false ); // try_save
+      }
       super.onBackPressed();
       return;
     }

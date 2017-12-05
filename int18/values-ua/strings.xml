@@ -935,6 +935,8 @@
   <string name="pref_vert_splay_title">Поріг кута бок. замірів пунктиром</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Порог кута бок. замірів показаних пунктиром</string -->
   <string name="pref_vert_splay_message">Поріг кута бок. замірів показаних пунктиром в плані</string>
+  <!-- TODO string name="pref_data_backup_title">Data auto-export</string -->
+  <!-- TODO string name="pref_data_backup_summary">Automatic data export (need default format)</string -->
   <!-- TODO string name="pref_shared_xsections_title">Shared x-sections</string -->
   <!-- TODO string name="pref_shared_xsections_summary">At-station x-sections shared among sketches</string -->
   <!-- TODO string name="xsections_shared">Shared X-sections</string -->

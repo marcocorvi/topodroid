@@ -960,6 +960,8 @@
   <string name="pref_vert_splay_title">Neigung für gestrichelte Linien</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string -->
   <string name="pref_vert_splay_message">Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string>
+  <!-- TODO string name="pref_data_backup_title">Data auto-export</string -->
+  <!-- TODO string name="pref_data_backup_summary">Automatic data export (need default format)</string -->
   <string name="pref_shared_xsections_title">Querschnitt Sichtbarkeit</string>
   <string name="pref_shared_xsections_summary">Querschnitte nur auf einer oder auf allen Skizzen</string>
   <string name="xsections_shared">Auf allen Skizzen</string>
