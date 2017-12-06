@@ -1,6 +1,7 @@
 symbol point
 name crustacean
 name-pt crustáceo
+name-es crustáceo
 th_name u:crustacean
 color 0xff9900
 csurvey 0 0 0
