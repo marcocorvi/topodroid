@@ -45,6 +45,7 @@ public class DBlock
   boolean mMultiSelected; // whether the block is in multiselect list
 
   long   mId;
+  long   mTime;
   long   mSurveyId;
   // private String mName;
   String mFrom;    // N.B. mfrom and mTo must be not null
@@ -152,7 +153,7 @@ public class DBlock
     return false;
   }
 
-  boolean isRecent( long id ) { return mId >= id; }
+  boolean isRecent( long id, long time ) { return mId >= id && (time-mTime)<10L; }
 
   boolean isMultiBad() { return mMultiBad; }
 
@@ -165,6 +166,7 @@ public class DBlock
     mVisible = View.VISIBLE;
     mMultiSelected = false;
     mId = 0;
+    mTime = 0;
     mSurveyId = 0;
     // mName = "";
     mFrom = f;
@@ -192,6 +194,7 @@ public class DBlock
     mVisible = View.VISIBLE;
     mMultiSelected = false;
     mId = 0;
+    mTime = 0;
     mSurveyId = 0;
     // mName = "";
     mFrom = "";

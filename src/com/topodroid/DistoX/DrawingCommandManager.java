@@ -366,13 +366,15 @@ public class DrawingCommandManager
 
   /* return the list of shots that intesect the segment (p1--p2)
    */
-  List< DrawingPath > getIntersectionShot( LinePoint p1, LinePoint p2 )
+  List< DrawingPathIntersection > getIntersectionShot( LinePoint p1, LinePoint p2 )
   {
-    List< DrawingPath > ret = new ArrayList<>();
+    List< DrawingPathIntersection > ret = new ArrayList<>();
+    Float pt = new Float( 0 );
     for ( DrawingPath p : mLegsStack ) {
       if ( p.mType == DrawingPath.DRAWING_PATH_FIXED ) {
-        if ( p.intersect( p1.x, p1.y, p2.x, p2.y, null ) ) {
-          ret.add( p );
+        float t = p.intersectSegment( p1.x, p1.y, p2.x, p2.y );
+        if ( t >= 0 && t <= 1 ) {
+          ret.add( new DrawingPathIntersection( p, t ) );
         }
       }
     }
@@ -918,7 +920,8 @@ public class DrawingCommandManager
         while ( i.hasNext() ){
           final DrawingPath path = (DrawingPath) i.next();
           if ( path.mBlock == null || ( ! path.mBlock.mMultiBad ) ) {
-            path.setPaint( paint );
+            // path.setPaint( paint );
+            DrawingWindow.setSplayPaint( path, path.mBlock );
           }
         }
       }

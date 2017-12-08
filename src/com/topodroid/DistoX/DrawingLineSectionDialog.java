@@ -69,10 +69,11 @@ public class DrawingLineSectionDialog extends MyDialog
   boolean mExists;
   String  mFilename;
   private boolean hasPhoto;
+  float mTT; // intersection abscissa
   
   public DrawingLineSectionDialog( Context context,
                                    DrawingWindow parent, TopoDroidApp app, boolean h_section, boolean exists, String id,
-                                   DrawingLinePath line, String from, String to, float azimuth, float clino )
+                                   DrawingLinePath line, String from, String to, float azimuth, float clino, float tt0 )
   {
     super( context, R.string.DrawingLineSectionDialog );
     mParent = parent;
@@ -85,6 +86,7 @@ public class DrawingLineSectionDialog extends MyDialog
     mNick = null;
     mAzimuth = azimuth;
     mClino = clino;
+    mTT = tt0;
     mFilename = null;
     hasPhoto = FeatureChecker.checkCamera( context );
 
@@ -258,7 +260,7 @@ public class DrawingLineSectionDialog extends MyDialog
       if ( cb == mBtnFoto ) {
         mParent.makePhotoXSection( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino );
       } else if ( cb == mBtnDraw ) {
-        mParent.makePlotXSection( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino );
+        mParent.makePlotXSection( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino, mTT );
       } else if ( cb == mBtnErase ) {
         mParent.deleteLine( mLine );
       } else if ( cb == mBtnSave ) {

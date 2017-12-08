@@ -62,8 +62,6 @@ public class NumShot
     mExtend  = blk.getExtend();
   }
 
-  // boolean isRecent( long id ) { return blocks.get(0) != null && blocks.get(0).isRecent( id ); }
-
   void addBlock( DBlock blk )
   {
     int n = blocks.size();

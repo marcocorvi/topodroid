@@ -202,7 +202,7 @@ public class DrawingSurface extends SurfaceView
   //   commandManager.setScaleBar(x0,y0);
   // }
   
-  List< DrawingPath > getIntersectionShot( LinePoint p1, LinePoint p2 )
+  List< DrawingPathIntersection > getIntersectionShot( LinePoint p1, LinePoint p2 )
   {
     return commandManager.getIntersectionShot(p1, p2);
   }
@@ -341,7 +341,6 @@ public class DrawingSurface extends SurfaceView
   {
     return commandManager.splitPlot( border, remove );
   }
-
 
   // void clearDrawing() { commandManager.clearDrawing(); }
 

@@ -649,7 +649,7 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.setNorthPath( dpath );
   }
 
-  private void setSplayPaint( DrawingPath path, DBlock blk )
+  static void setSplayPaint( DrawingPath path, DBlock blk )
   {
     if ( blk.isCommented() ) {
       path.setPaint( BrushManager.fixedSplay0Paint );
@@ -680,7 +680,7 @@ public class DrawingWindow extends ItemDrawer
         dpath.setPaint( BrushManager.fixedOrangePaint );
       } else if ( mApp.mShotWindow.mDistoXAccuracy.isBlockMagneticBad( blk ) ) {
         dpath.setPaint( BrushManager.fixedRedPaint );
-      } else if ( TDSetting.isConnectionModeBatch() && blk.isRecent( mApp.mSecondLastShotId ) ) {
+      } else if ( TDSetting.isConnectionModeBatch() && blk.isRecent( mApp.mSecondLastShotId, System.currentTimeMillis()/1000 ) ) {
         dpath.setPaint( BrushManager.fixedBluePaint );
       } else {
         dpath.setPaint( BrushManager.fixedShotPaint );
@@ -790,7 +790,7 @@ public class DrawingWindow extends ItemDrawer
       mModified = true; // force saving
       startSaveTdrTask( mType, PlotSave.SAVE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP );
       popInfo();
-      doStart( false );
+      doStart( false, -1 );
     } else {
       if ( doubleBack ) {
         if ( doubleBackToast != null ) doubleBackToast.cancel();
@@ -1379,9 +1379,9 @@ public class DrawingWindow extends ItemDrawer
   }
 
 
-  private void pushInfo( long type, String name, String from, String to, float azimuth, float clino )
+  private void pushInfo( long type, String name, String from, String to, float azimuth, float clino, float tt )
   {
-    // Log.v("DistoX", "push " + type + " " + name + " from " + from + " " + to + " A " + azimuth + " C " + clino );
+    // Log.v("DistoX", "push info " + type + " " + name + " from " + from + " " + to + " A " + azimuth + " C " + clino + " TT " + tt );
     mSavedType = mType;
     mName = mName3 = name;
     mFullName3 = mApp.mySurvey + "-" + mName;
@@ -1393,7 +1393,7 @@ public class DrawingWindow extends ItemDrawer
     mSavedMode = mDrawingSurface.getDisplayMode();
     mDrawingSurface.setDisplayMode( DisplayMode.DISPLAY_SECTION | ( mSavedMode & DisplayMode.DISPLAY_SCALE_REF ) );
     resetStatus();
-    doStart( true );
+    doStart( true, tt );
     updateSplays( mApp.mSplayMode );
 
     mButton1[ BTN_DOWNLOAD ].setVisibility( View.GONE );
@@ -1631,7 +1631,7 @@ public class DrawingWindow extends ItemDrawer
 
     // TDLog.TimeEnd( "on create" );
 
-    doStart( true );
+    doStart( true, -1 );
 
     setMenuAdapter( getResources(), mType );
     closeMenu();
@@ -1672,7 +1672,7 @@ public class DrawingWindow extends ItemDrawer
       mContinueLine = CONT_NONE;
       resetModified();
 
-      doStart( true );
+      doStart( true, -1 );
     }
   }
 
@@ -1770,9 +1770,10 @@ public class DrawingWindow extends ItemDrawer
 
 // ----------------------------------------------------------------------------
 
-    private void doStart( boolean do_load )
+    // tt used only by leg x-sections when created to insert leg intersection point
+    private void doStart( boolean do_load, float tt )
     {
-      // Log.v("DistoX", "doStart()" );
+      // Log.v("DistoX", "do start() tt " + tt );
       // TDLog.Log( TDLog.LOG_PLOT, "do Start() " + mName1 + " " + mName2 );
       mCurrentPoint = ( BrushManager.mPointLib.isSymbolEnabled( "label" ) )? 1 : 0;
       mCurrentLine  = ( BrushManager.mLineLib.isSymbolEnabled( "wall" ) )? 1 : 0;
@@ -1802,14 +1803,14 @@ public class DrawingWindow extends ItemDrawer
       // X_SECTION, XH_SECTION: mFrom != null, mTo == null, splays only 
 
       if ( PlotInfo.isAnySection( mType ) ) {
-        makeSectionReferences( list );
+        makeSectionReferences( list, tt );
       }
       // TDLog.TimeEnd("do start done");
 
       mDrawingSurface.setSelectMode( mSelectMode );
     }
 
-    private void makeSectionReferences( List<DBlock> list )
+    private void makeSectionReferences( List<DBlock> list, float tt )
     {
       // Log.v("DistoX", "Section " + mClino + " " + mAzimuth );
       DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
@@ -1885,6 +1886,15 @@ public class DrawingWindow extends ItemDrawer
           addFixedLine( blk, xfrom, yfrom, xto, yto, false, false ); // not-splay, not-selecteable
           mDrawingSurface.addDrawingStationName( mFrom, DrawingUtil.toSceneX(xfrom), DrawingUtil.toSceneY(yfrom) );
           mDrawingSurface.addDrawingStationName( mTo, DrawingUtil.toSceneX(xto), DrawingUtil.toSceneY(yto) );
+	  if ( tt >= 0 ) {
+	    float xtt = xfrom + tt * ( xto - xfrom );
+	    float ytt = yfrom + tt * ( yto - yfrom );
+	    // Log.v("DistoX", "TT " + tt + " " + xtt + " " + xfrom + " " + xto );
+	    // point index 0 = user
+            DrawingPath point = new DrawingPointPath( 0, DrawingUtil.toSceneX(xtt), DrawingUtil.toSceneY(ytt),
+			                              DrawingPointPath.SCALE_XS, null, null ); // no text, no options
+	    mDrawingSurface.addDrawingPath( point );
+          }
         }
       } else { // if ( PlotInfo.isXSection( mType ) ) 
         mDrawingSurface.addDrawingStationName( mFrom, DrawingUtil.toSceneX(xfrom), DrawingUtil.toSceneY(yfrom) );
@@ -2801,12 +2811,13 @@ public class DrawingWindow extends ItemDrawer
                       LinePoint l1 = l2.mNext;
                       // Log.v("DistoX", "section line L1 " + l1.x + " " + l1.y + " L2 " + l2.x + " " + l2.y );
 
-                      List< DrawingPath > paths = mDrawingSurface.getIntersectionShot( l1, l2 );
+                      List< DrawingPathIntersection > paths = mDrawingSurface.getIntersectionShot( l1, l2 );
                       int nr_legs = paths.size() ; // 0 no-leg, 1 ok, 2 too many legs
                       String from = "-1";
                       String to   = "-1";
                       float azimuth = 0;
                       float clino = 0;
+		      float tt = -1;
                       if ( paths.size() > 0 ) {
                         mCurrentLinePath.computeUnitNormal();
 
@@ -2814,7 +2825,10 @@ public class DrawingWindow extends ItemDrawer
                         azimuth = TDMath.in360( 90 + (float)(Math.atan2( l2.x-l1.x, -l2.y+l1.y ) * TDMath.RAD2DEG ) );
 
                         if ( nr_legs == 1 ) {
-                          DrawingPath p = paths.get(0);
+                          DrawingPathIntersection pi = paths.get(0);
+                          DrawingPath p = pi.path;
+			  tt = pi.tt;
+			  // Log.v("DistoX", "assign tt " + tt );
                           DBlock blk = p.mBlock;
 
                           // Float result = Float.valueOf(0);
@@ -2839,6 +2853,7 @@ public class DrawingWindow extends ItemDrawer
                               azimuth = blk.mBearing + 180; if ( azimuth >= 360 ) azimuth -= 360;
                               from = blk.mTo;
                               to   = blk.mFrom;
+			      tt   = 1 - tt;
                             } else {
                               azimuth = blk.mBearing;
                             }
@@ -2850,6 +2865,7 @@ public class DrawingWindow extends ItemDrawer
                             if ( da > 90 && da <= 270 ) { // exchange FROM-TO 
                               from = blk.mTo;
                               to   = blk.mFrom;
+			      tt   = 1 - tt;
                             }
                           }
                         } else if ( nr_legs > 1 ) { // many legs
@@ -2883,7 +2899,8 @@ public class DrawingWindow extends ItemDrawer
                           mDrawingSurface.addDrawingPath( section_pt );
                         }
 
-                        new DrawingLineSectionDialog( mActivity, this, mApp, h_section, false, section_id, mCurrentLinePath, from, to, azimuth, clino ).show();
+			Log.v("DistoX", "line section dialog TT " + tt );
+                        new DrawingLineSectionDialog( mActivity, this, mApp, h_section, false, section_id, mCurrentLinePath, from, to, azimuth, clino, tt ).show();
 
                       } else { // many legs in profile view
                         Toast.makeText( mActivity, R.string.too_many_leg_intersection, Toast.LENGTH_SHORT ).show(); 
@@ -3228,7 +3245,7 @@ public class DrawingWindow extends ItemDrawer
         updatePlotNick( plot, nick );
       }
       if ( plot != null ) {
-        pushInfo( plot.type, plot.name, plot.start, "", plot.azimuth, plot.clino );
+        pushInfo( plot.type, plot.name, plot.start, "", plot.azimuth, plot.clino, -1 );
         zoomFit( mDrawingSurface.getBitmapBounds() );
       }
     }
@@ -4093,7 +4110,7 @@ public class DrawingWindow extends ItemDrawer
                 boolean h_section = PlotInfo.isProfile( mType ); // not really necessary
                 String id = line.getOption( "-id" );
                 if ( id != null ) {
-                  new DrawingLineSectionDialog( mActivity, this, mApp, h_section, true, id, line, null, null, 0, 0 ).show();
+                  new DrawingLineSectionDialog( mActivity, this, mApp, h_section, true, id, line, null, null, 0, 0, -1 ).show();
                 } else {
                   TDLog.Error("edit section line with null id" );
                 }
@@ -4247,14 +4264,15 @@ public class DrawingWindow extends ItemDrawer
     // @param to      to station, eg "2"
     // @param azimuth section azimuth
     // @param clino   section clino
+    // @param tt      intersection abscissa
     void makePlotXSection( DrawingLinePath line, String id, long type, String from, String to, String nick,
-                          float azimuth, float clino )
+                          float azimuth, float clino, float tt )
     {
-      // Log.v("DistoX", "make section: " + id + " <" + from + "-" + to + "> azimuth " + azimuth + " clino " + clino );
+      // Log.v("DistoX", "make section: " + id + " <" + from + "-" + to + "> azimuth " + azimuth + " clino " + clino + " tt " + tt );
       long pid = prepareXSection( id, type, from, to, nick, azimuth, clino );
       if ( pid >= 0 ) {
-        // Log.v("DistoX", "push info: " + type + " <" + mSectionName + ">" );
-        pushInfo( type, mSectionName, from, to, azimuth, clino );
+        // Log.v("DistoX", "push info: " + type + " <" + mSectionName + "> TT " + tt );
+        pushInfo( type, mSectionName, from, to, azimuth, clino, tt );
         zoomFit( mDrawingSurface.getBitmapBounds() );
       }
     }
@@ -4265,7 +4283,7 @@ public class DrawingWindow extends ItemDrawer
       String name = scrapname.replace( mApp.mySurvey + "-", "" );
       PlotInfo pi = mData.getPlotInfo( mApp.mSID, name );
       if ( pi != null ) {
-        pushInfo( pi.type, pi.name, pi.start, pi.view, pi.azimuth, pi.clino );
+        pushInfo( pi.type, pi.name, pi.start, pi.view, pi.azimuth, pi.clino, -1 );
         zoomFit( mDrawingSurface.getBitmapBounds() );
       }
     }
@@ -4725,14 +4743,14 @@ public class DrawingWindow extends ItemDrawer
       mDrawingSurface.resetManager( DrawingSurface.DRAWING_PROFILE, null );
       mDrawingSurface.modeloadDataStream( tdr, th2, null );
       mDrawingSurface.addManagerToCache( mFullName2 );
-      // TODO now switch to extended view FIXME-VIEW
+      // now switch to extended view FIXME-VIEW
       setPlotType2( true );
     } else {
       mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null );
       mDrawingSurface.modeloadDataStream( tdr, th2, null );
       mDrawingSurface.addManagerToCache( mFullName2 );
       setPlotType3( );
-      makeSectionReferences( mData.selectAllShots( mSid, TDStatus.NORMAL ) );
+      makeSectionReferences( mData.selectAllShots( mSid, TDStatus.NORMAL ), -1 );
     }
     mOffset.x = x;
     mOffset.y = y;

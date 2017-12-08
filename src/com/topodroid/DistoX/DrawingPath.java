@@ -243,13 +243,14 @@ public class DrawingPath extends RectF
   // t   | -(y20-y10)  +(x20-x10) | | x10 - x1 |
   // s   | -(y2-y1)    +(x2-x1)   | | y10 - y1 |
   //
-  boolean intersect( float x10, float y10, float x20, float y20, Float result )
+  float intersectSegment( float x10, float y10, float x20, float y20 )
   {
     float det = -(x2-x1)*(y20-y10) + (x20-x10)*(y2-y1);
     float t = ( -(y20-y10)*(x10 - x1) + (x20-x10)*(y10 - y1) )/det;
     float s = ( -(y2-y1)*(x10 - x1) + (x2-x1)*(y10 - y1) )/det;
-    if ( result != null ) result = t;
-    return ( t > 0.0f && t < 1.0f && s > 0.0f && s < 1.0f );
+    // Log.v("DistoX", "intersection tt "+ t );
+    if ( t > 0.0f && t < 1.0f && s > 0.0f && s < 1.0f ) return t;
+    return -1;
   }
 
 
@@ -340,7 +341,7 @@ public class DrawingPath extends RectF
     } else {
       if (    mType == DRAWING_PATH_SPLAY  // FIXME_X_SPLAY
            && mBlock != null 
-           && mBlock.isRecent( TopoDroidApp.mSecondLastShotId ) ) {
+           && mBlock.isRecent( TopoDroidApp.mSecondLastShotId, System.currentTimeMillis()/1000 ) ) {
         if ( mBlock.mType == DBlock.BLOCK_SPLAY && BrushManager.fixedBluePaint != null ) {
           canvas.drawPath( path, BrushManager.fixedBluePaint );
         } else if ( mBlock.mType == DBlock.BLOCK_X_SPLAY && BrushManager.fixedSplay2Paint != null ) {

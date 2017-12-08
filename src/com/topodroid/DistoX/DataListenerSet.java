@@ -104,18 +104,18 @@ class DataListenerSet
   // public void onInsertShots( long sid, long id, ArrayList< ParserShot > shots )
   // FIXME repeatedly call InsertShot()
 
-  public void onInsertShot( long sid, long id, String from, String to, 
+  public void onInsertShot( long sid, long id, long millis, String from, String to, 
                             double d, double b, double c, double r, 
                             long extend, long flag, long leg, long status, long shot_type, String comment )
   {
     for ( DataListener l : mListeners )
-      l.onInsertShot( sid, id, from, to, d, b, c, r, extend, flag, leg, status, shot_type, comment );
+      l.onInsertShot( sid, id, millis, from, to, d, b, c, r, extend, flag, leg, status, shot_type, comment );
   }
 
   // @param e extend
   // @param t type
-  public void onInsertShotAt( long sid, long at, double d, double b, double c, double r, long e, long t )
-  { for ( DataListener l : mListeners ) l.onInsertShotAt( sid, at, d, b, c, r, e, t ); }
+  public void onInsertShotAt( long sid, long at, long millis, double d, double b, double c, double r, long e, long t )
+  { for ( DataListener l : mListeners ) l.onInsertShotAt( sid, at, millis, d, b, c, r, e, t ); }
 
   // public void transferShots( long sid, long old_sid, long old_id );
 

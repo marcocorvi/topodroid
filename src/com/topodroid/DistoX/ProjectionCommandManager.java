@@ -201,7 +201,7 @@ public class ProjectionCommandManager
     List< DrawingPath > ret = new ArrayList<>();
     for ( DrawingPath p : mLegsStack ) {
       if ( p.mType == DrawingPath.DRAWING_PATH_FIXED ) {
-        if ( p.intersect( p1.x, p1.y, p2.x, p2.y, null ) ) {
+        if ( p.intersectSegment( p1.x, p1.y, p2.x, p2.y ) >= 0 ) {
           ret.add( p );
         }
       }
