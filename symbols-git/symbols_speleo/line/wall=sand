@@ -11,8 +11,7 @@ name-ua стіна_пісок
 name-fa شن
 name-hu fal_homok
 th_name wall:sand
-group 
-wall
+group wall
 color 0xff0000 0xff
 width 1
 csurvey 5 4 1 1
