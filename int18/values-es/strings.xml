@@ -1098,8 +1098,8 @@
   <string name="pref_LRExtend_title">Ampliación izq./drch. estimada</string>
   <string name="pref_LRExtend_summary">Ampliación L/R estimada (Compass/VisualTopo import)</string>
 
-  <string name="pref_picker_type_title">Selector de símbolos</string>
-  <string name="pref_picker_type_summary">Tipo de selector de símbolos</string>
+  <string name="pref_picker_type_title">Selector de simbología</string>
+  <string name="pref_picker_type_summary">Tipo de selector de simbología</string>
   <string name="pref_section_stations_title">X-Sección estaciones</string>
   <string name="pref_section_stations_summary">X-Estaciones de la sección de referencia</string>
   <string name="pref_station_size_title">Tamaño de la etiqueta de la estación</string>
