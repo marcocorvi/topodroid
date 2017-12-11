@@ -1311,13 +1311,13 @@ public class ShotWindow extends Activity
     return mApp.mData.hasSurveyStation( mApp.mSID, start );
   }
 
-  public void makeNewPlot( String name, String start, boolean extended, int project )
+  public void makeNewPlot( String name, String start, boolean extended, int project, boolean landscape )
   {
-    long mPIDp = mApp.insert2dPlot( mApp.mSID, name, start, extended, project );
+    long mPIDp = mApp.insert2dPlot( mApp.mSID, name, start, extended, project, landscape );
 
     if ( mPIDp >= 0 ) {
       long mPIDs = mPIDp + 1L; // FIXME !!! this is true but not guaranteed
-      startDrawingWindow( start, name+"p", mPIDp, name+"s", mPIDs, PlotInfo.PLOT_PLAN, start );
+      startDrawingWindow( start, name+"p", mPIDp, name+"s", mPIDs, PlotInfo.PLOT_PLAN, start, landscape );
     // } else {
     //   Toast.makeText( mActivity, R.string.plot_duplicate_name, Toast.LENGTH_LONG).show();
     }
@@ -1392,7 +1392,7 @@ public class ShotWindow extends Activity
       if ( plot1 != null ) {
         setRecentPlot( name, type );
         PlotInfo plot2 =  mApp.mData.getPlotInfo( mApp.mSID, name+"s" );
-        startDrawingWindow( plot1.start, plot1.name, plot1.id, plot2.name, plot2.id, type, station );
+        startDrawingWindow( plot1.start, plot1.name, plot1.id, plot2.name, plot2.id, type, station, plot1.isLandscape() );
         return;
       } else {
         setRecentPlot( null, 0L );
@@ -1410,7 +1410,7 @@ public class ShotWindow extends Activity
   }
 
   private void startDrawingWindow( String start, String plot1_name, long plot1_id,
-                                                   String plot2_name, long plot2_id, long type, String station )
+                                   String plot2_name, long plot2_id, long type, String station, boolean landscape )
   {
     if ( mApp.mSID < 0 || plot1_id < 0 || plot2_id < 0 ) {
       Toast.makeText( mActivity, R.string.no_survey, Toast.LENGTH_SHORT ).show();
@@ -1430,6 +1430,7 @@ public class ShotWindow extends Activity
     drawIntent.putExtra( TDTag.TOPODROID_PLOT_AZIMUTH, 0.0f );
     drawIntent.putExtra( TDTag.TOPODROID_PLOT_CLINO, 0.0f );
     drawIntent.putExtra( TDTag.TOPODROID_PLOT_MOVE_TO, ((station==null)? "" : station) );
+    drawIntent.putExtra( TDTag.TOPODROID_PLOT_LANDSCAPE, landscape );
     // drawIntent.putExtra( TDTag.TOPODROID_PLOT_ID, plot1_id ); // not necessary
     // drawIntent.putExtra( TDTag.TOPODROID_PLOT_ID2, plot2_id ); // not necessary
 
@@ -1533,7 +1534,8 @@ public class ShotWindow extends Activity
 
   void updateShot( String from, String to, int extend, long flag, boolean leg, String comment, DBlock blk )
   {
-    // TDLog.Log( TDLog.LOG_SHOT, "updateShot From >" + from + "< To >" + to + "< comment " + comment );
+    // TDLog.Log( TDLog.LOG_SHOT, "update Shot From >" + from + "< To >" + to + "< comment " + comment );
+    // Log.v( "DistoX", "update Shot From >" + from + "< To >" + to + "< comment " + comment );
     blk.setName( from, to );
 
     int ret = mApp.mData.updateShot( blk.mId, mApp.mSID, from, to, extend, flag, leg?1:0, comment, true );
@@ -1760,14 +1762,14 @@ public class ShotWindow extends Activity
   }
 
   // ------------------------------------------------------------------
-  public void doProjectionDialog( String name, String start )
+  public void doProjectionDialog( String name, String start, boolean landscape )
   {
-    new ProjectionDialog( mActivity, this, mApp.mSID, name, start ).show();
+    new ProjectionDialog( mActivity, this, mApp.mSID, name, start, landscape ).show();
   }
 
-  void doProjectedProfile( String name, String start, int azimuth )
+  void doProjectedProfile( String name, String start, int azimuth, boolean landscape )
   {
-    makeNewPlot( name, start, false, azimuth );
+    makeNewPlot( name, start, false, azimuth, landscape );
   }
 
   void startAudio( DBlock blk )

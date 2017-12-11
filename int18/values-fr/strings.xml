@@ -476,6 +476,7 @@
     <string name="extended_profile">Profil étendu</string>
     <!-- UNUSED string name="v_section">SECTION V</string -->
     <string name="h_section">SECTION H</string>
+    <!-- TODO string name="landscape">landscape</string -->
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Échec de lecture de la mémoire du DistoX</string>
@@ -850,6 +851,12 @@
   <string name="pref_ortho_lrud_title">Angle visée chem. LRUD</string>
   <string name="pref_ortho_lrud_summary">Angle minimum visée de cheminement pour une cheminement LRUD</string>
   <string name="pref_ortho_lrud_message">Angle minimum LRUD</string>
+  <!-- TODO string name="pref_lrud_vertical_title">UD min splay clino</string -->
+  <!-- TODO string name="pref_lrud_vertical_summary">LRUD up/down minimum splay clino</string -->
+  <!-- TODO string name="pref_lrud_vertical_message">LRUD up/down minimum splay clino</string -->
+  <!-- TODO string name="pref_lrud_horizontal_title">LR max splay clino</string -->
+  <!-- TODO string name="pref_lrud_horizontal_summary">LRUD left/right maximum splay clino</string -->
+  <!-- TODO string name="pref_lrud_horizontal_message">LRUD left/right maximum splay clino</string -->
   <string name="pref_survex_eol_title">Caract. de fin de ligne Survex</string>
   <string name="pref_survex_eol_summary">Caractère de fin de ligne Survex</string>
   <string name="pref_survex_splay_title">Stations de cheminement Survex</string>

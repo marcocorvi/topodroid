@@ -482,6 +482,7 @@
     <!-- TODO string name="extended_profile">Extended profile</string -->
     <!-- UNUSED string name="v_section">SEZIONE VERT.</string -->
     <string name="h_section">HORIZONTALEN PRESEK</string>
+    <!-- TODO string name="landscape">landscape</string -->
 
     <!-- OK string name="distox_err_ok">OK</string -->
     <string name="distox_err_headtail">Neuspešno branje spomina DistoX</string>
@@ -854,6 +855,12 @@
   <string name="pref_ortho_lrud_title">Kot stranskih vizur  LRUD</string>
   <string name="pref_ortho_lrud_summary">Minimalen kot stranske vizure in  vizure  LRUD</string>
   <string name="pref_ortho_lrud_message">LRUD:minimalen kot stranske vizure in vizure</string>
+  <!-- TODO string name="pref_lrud_vertical_title">UD min splay clino</string -->
+  <!-- TODO string name="pref_lrud_vertical_summary">LRUD up/down minimum splay clino</string -->
+  <!-- TODO string name="pref_lrud_vertical_message">LRUD up/down minimum splay clino</string -->
+  <!-- TODO string name="pref_lrud_horizontal_title">LR max splay clino</string -->
+  <!-- TODO string name="pref_lrud_horizontal_summary">LRUD left/right maximum splay clino</string -->
+  <!-- TODO string name="pref_lrud_horizontal_message">LRUD left/right maximum splay clino</string -->
   <string name="pref_survex_eol_title">Survex zaključek linije</string>
   <string name="pref_survex_eol_summary">Survex - zaključek linije</string>
   <string name="pref_survex_splay_title">Survex - točke stranskih vizur</string>

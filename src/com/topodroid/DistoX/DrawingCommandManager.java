@@ -2555,14 +2555,14 @@ public class DrawingCommandManager
   }
 
   void exportAsCsx( PrintWriter pw, String survey, String cave, String branch,
-                    List<PlotInfo> all_sections, List<PlotInfo> sections )
+                    List<PlotInfo> all_sections, List<PlotInfo> sections, DrawingUtil drawingUtil )
   {
     ArrayList< DrawingPath > paths = new ArrayList<>();
     synchronized( mCurrentStack ) {
       for ( ICanvasCommand cmd : mCurrentStack ) {
         if ( cmd.commandType() == 0 ) paths.add( (DrawingPath) cmd );
       }
-      DrawingIO.doExportAsCsx( pw, survey, cave, branch, null, paths, all_sections, sections ); // bind=null
+      DrawingIO.doExportAsCsx( pw, survey, cave, branch, null, paths, all_sections, sections, drawingUtil ); // bind=null
     }
   }
 
@@ -2699,6 +2699,17 @@ public class DrawingCommandManager
         if ( path.isScrap( name ) ) path.mPath.shiftBy( dx, dy );
       }
     }
+  }
+
+  RectF getBoundingBox( )
+  {
+    RectF bbox = new RectF( 0, 0, 0, 0 );
+    for ( ICanvasCommand cmd : getCommands() ) {
+      if ( cmd.commandType() != 0 ) continue;
+      DrawingPath p = (DrawingPath)cmd;
+      bbox.union( p );
+    }
+    return bbox;
   }
 
 

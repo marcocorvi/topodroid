@@ -360,7 +360,7 @@ public class DrawingPath extends RectF
 
   void toDataStream( DataOutputStream dos ) { TDLog.Error( "ERROR DrawingPath toDataStream executed"); }
 
-  public void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind ) { }
+  public void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil ) { }
 
   // ICanvasCommand interface
   //

@@ -475,6 +475,7 @@
     <string name="profile">项目.</string>
     <!-- UNUSED string name="v_section">V-截面</string -->
     <string name="h_section">H-截面</string>
+    <!-- TODO string name="landscape">landscape</string -->
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">DistoX存储读取失败</string>
@@ -851,6 +852,12 @@
   <string name="pref_ortho_lrud_title">LRUD 侧线的角度</string>
   <string name="pref_ortho_lrud_summary">每组LRUD侧线与主线的最小测量角度</string>
   <string name="pref_ortho_lrud_message">LRUD最小的侧线主线角度</string>
+  <!-- TODO string name="pref_lrud_vertical_title">UD min splay clino</string -->
+  <!-- TODO string name="pref_lrud_vertical_summary">LRUD up/down minimum splay clino</string -->
+  <!-- TODO string name="pref_lrud_vertical_message">LRUD up/down minimum splay clino</string -->
+  <!-- TODO string name="pref_lrud_horizontal_title">LR max splay clino</string -->
+  <!-- TODO string name="pref_lrud_horizontal_summary">LRUD left/right maximum splay clino</string -->
+  <!-- TODO string name="pref_lrud_horizontal_message">LRUD left/right maximum splay clino</string -->
   <string name="pref_survex_eol_title">Survex/Topo 线终端</string>
   <string name="pref_survex_eol_summary">Survex/Topo 线终端</string>
   <string name="pref_survex_splay_title">Survex 侧线测量点</string>

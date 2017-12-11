@@ -27,6 +27,7 @@ class TDTag
   public static final String TOPODROID_PLOT_MOVE_TO = "plot_move_to";
   public static final String TOPODROID_PLOT_XOFF    = "plot_xoff";
   public static final String TOPODROID_PLOT_YOFF    = "plot_yoff";
+  public static final String TOPODROID_PLOT_LANDSCAPE = "plot_landscape";
   public static final String TOPODROID_HELP_PAGE    = "help_page";
 
   // FIXME_SKETCH_3D

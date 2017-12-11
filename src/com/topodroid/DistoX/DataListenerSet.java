@@ -125,9 +125,10 @@ class DataListenerSet
   // PLOTS Aand SKETCHES
 
   public void onInsertPlot( long sid, long id, String name, long type, long status, String start, String view,
-                            double xoff, double yoff, double zoom, double azimuth, double clino, String hide )
+                            double xoff, double yoff, double zoom, double azimuth, double clino, String hide,
+		            String nick, int orientation )
   { for ( DataListener l : mListeners )
-      l.onInsertPlot( sid, id, name, type, status, start, view, xoff, yoff, zoom, azimuth, clino, hide );
+      l.onInsertPlot( sid, id, name, type, status, start, view, xoff, yoff, zoom, azimuth, clino, hide, nick, orientation );
   }
 
   // public void updatePlot( long plot_id, long survey_id, double xoffset, double yoffset, double zoom );

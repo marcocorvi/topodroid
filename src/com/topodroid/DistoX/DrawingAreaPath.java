@@ -251,7 +251,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
   }
 
   @Override
-  public void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind )
+  public void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil )
   {
     int layer  = BrushManager.getAreaCsxLayer( mAreaType );
     int type   = 3;
@@ -271,8 +271,8 @@ public class DrawingAreaPath extends DrawingPointLinePath
     // for ( LinePoint pt : mPoints ) 
     for ( LinePoint pt = mFirst; pt != null; pt = pt.mNext ) 
     {
-      float x = DrawingUtil.sceneToWorldX( pt.x );
-      float y = DrawingUtil.sceneToWorldY( pt.y );
+      float x = mDrawingUtil.sceneToWorldX( pt.x, pt.y );
+      float y = mDrawingUtil.sceneToWorldY( pt.x, pt.y );
       pw.format(Locale.US, "%.2f %.2f ", x, y );
       if ( b ) { pw.format("B "); b = false; }
     }

@@ -131,6 +131,8 @@ class TDSetting
 
     // -------------------- IMPORT-EXPORT PREFERENCES
     "DISTOX_SPLAY_EXTEND",       // whether to set L/R extend to LRUD splay shots (Compass, VTopo import)
+    "DISTOX_LRUD_VERTICAL",
+    "DISTOX_LRUD_HORIZONTAL",
     "DISTOX_BITMAP_SCALE",       // default bitmap scale
     "DISTOX_THUMBNAIL",          // size of photo thumbnails
     "DISTOX_DOT_RADIUS",         // radius of green dots
@@ -213,6 +215,8 @@ class TDSetting
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   // IMPORT EXPORT
   static boolean mLRExtend           = true;   // whether to extend LR or not (Compass/VisualTopo input)
+  static float   mLRUDvertical       = 45;     // vertical splay for LRUD 
+  static float   mLRUDhorizontal     = 45;     // horizontal splay for LRUD
 
   static String mSurvexEol           = "\n";
   static boolean mSurvexSplay        = false;
@@ -653,12 +657,6 @@ class TDSetting
     // TDLog.Profile("locale");
     app.setLocale( prefs.getString( key[k++], "" ), false );              // DISTOX_LOCALE
 
-    // String cwd = prefs.getString( key[k++], "TopoDroid" );
-    // if ( ! cwd.equals( mCWD ) ) {
-    //   mCWD = cwd;
-    //   TDPath.setPaths( mCWD );
-    //   mData.openDatabase();
-    // }
   }
 
   static void loadSecondaryPreferences( TopoDroidApp app, SharedPreferences prefs )
@@ -766,6 +764,9 @@ class TDSetting
 
     mCompassReadings   = tryInt(   prefs, key[k++], "4" );    // DISTOX_COMPASS_READING 
     mLRExtend          = prefs.getBoolean( key[k++], true );  // DISTOX_SPLAY_EXTEND
+    mLRUDvertical      = tryFloat( prefs, key[k++], "0" );   // DISTOX_LRUD_VERTICAL
+    mLRUDhorizontal    = tryFloat( prefs, key[k++], "90" );   // DISTOX_LRUD_HORIZONTAL
+
     mBitmapScale       = tryFloat( prefs, key[k++], "1.5" );  // DISTOX_BITMAP_SCALE 
     mThumbSize         = tryInt(   prefs, key[k++], "200" );  // DISTOX_THUMBNAIL
     mDotRadius         = tryFloat( prefs, key[k++], "5"   );  // DISTOX_DOT_RADIUS
@@ -893,7 +894,7 @@ class TDSetting
     } else if ( k.equals( key[ nk++ ] ) ) {     // DISTOX_LOCALE
       app.setLocale( prefs.getString( k, "" ), true );
     } else if ( k.equals( key[ nk++ ] ) ) {     // DISTOX_CWD
-      app.setCWD( prefs.getString( k, "TopoDroid" ) );
+      app.setCWD( prefs.getString( k, "TopoDroid" ), prefs.getString( "DISTOX_CBD", TDPath.PATH_BASEDIR ) );
 
     // ---------------- SECOINDARY PREFERENCES ---------------------------
     } else if ( k.equals( key[ nk++ ] ) ) {
@@ -1081,6 +1082,11 @@ class TDSetting
       mCompassReadings = tryInt( prefs, k, "4" );     // DISTOX_COMPASS_READINGS
     } else if ( k.equals( key[ nk++ ] ) ) {
       mLRExtend = prefs.getBoolean( k, true );        // DISTOX_SPLAY_EXTEND
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mLRUDvertical = tryFloat( prefs, k, "0" );     // DISTOX_LRUD_VERTICAL
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mLRUDhorizontal = tryFloat( prefs, k, "90" );   // DISTOX_LRUD_HORIZONTAL
+
     } else if ( k.equals( key[ nk++ ] ) ) {
       mBitmapScale = tryFloat( prefs, k, "1.5" );     // DISTOX_BITMAP_SCALE
     } else if ( k.equals( key[ nk++ ] ) ) {
@@ -1417,6 +1423,9 @@ class TDSetting
     if ( name.equals( "DISTOX_COMPASS_READINGS" ) ) return parseIntValue(   value, mCompassReadings, 1 );
 
     //B if ( name.equals( "DISTOX_SPLAY_EXTEND" )
+    if ( name.equals( "DISTOX_LRUD_VERTICAL"    ) ) return parseFloatValue( value, mLRUDvertical,    0f, 90f );
+    if ( name.equals( "DISTOX_LRUD_HORIZONTAL"  ) ) return parseFloatValue( value, mLRUDhorizontal,  0f, 90f );
+
     //B if ( name.equals( "DISTOX_AUTO_RECONNECT" )
     //B if ( name.equals( "DISTOX_HEAD_TAIL" )
     if ( name.equals( "DISTOX_BITMAP_SCALE"     ) ) return parseFloatValue( value, mBitmapScale,    0.5f, 10f );

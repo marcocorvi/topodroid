@@ -17,17 +17,16 @@ color 0xffcc66
 csurvey 6 6 80
 path
   moveTo -7 4
+  lineTo 6 6
   lineTo 8 5
   lineTo 7 -5
   lineTo -5 -6
   lineTo -7 -4
   lineTo -7 4
-  lineTo -6 2
-  lineTo -5 -2
-  lineTo -4 -4
-  lineTo 5 -3
+  lineTo 2 -1
+  lineTo 8 5
+  moveTo -7 -4
+  lineTo 2 -1
   lineTo 7 -5 
-  moveTo -4 -4
-  lineTo -5 -6
 endpath
 endsymbol

@@ -338,11 +338,13 @@ public class TopoDroidPreferences extends PreferenceActivity
     Bundle extras = (intent != null)? intent.getExtras() : null;
     switch ( request ) {
       case REQUEST_CWD:
-        if ( extras != null ) {
+        if ( result == RESULT_OK && extras != null ) {
           String cwd = extras.getString( TDTag.TOPODROID_CWD );
           mCwdPreference.setSummary( cwd );
           // Log.v("DistoX", "got CWD " + cwd );
-        }
+        } else if ( result == RESULT_CANCELED ) {
+	  TDLog.Error("could not set CWD");
+	}
         break;
       case REQUEST_PLOT_SCREEN:
       case REQUEST_TOOL_SCREEN:

@@ -121,6 +121,7 @@ public class OverviewWindow extends ItemDrawer
 
     private TopoDroidApp mApp;
     private DataHelper mData;
+    private DrawingUtil mDrawingUtil;
 
     long getSID() { return mApp.mSID; }
     String getSurvey() { return mApp.mySurvey; }
@@ -256,8 +257,8 @@ public class OverviewWindow extends ItemDrawer
         dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );
         dpath.setPaint( BrushManager.fixedShotPaint );
       }
-      // DrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
-      DrawingUtil.makePath( dpath, x1, y1, x2, y2 );
+      // mDrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
+      mDrawingUtil.makePath( dpath, x1, y1, x2, y2 );
       mOverviewSurface.addFixedPath( dpath, splay, false ); // false: non-selectable
     }
 
@@ -295,10 +296,10 @@ public class OverviewWindow extends ItemDrawer
     // float xoff = 0; float yoff = 0;
 
     if ( type == PlotInfo.PLOT_PLAN ) {
-      DrawingUtil.addGrid( mNum.surveyEmin(), mNum.surveyEmax(), mNum.surveySmin(), mNum.surveySmax(), mOverviewSurface );
+      mDrawingUtil.addGrid( mNum.surveyEmin(), mNum.surveyEmax(), mNum.surveySmin(), mNum.surveySmax(), mOverviewSurface );
                            // xoff, yoff, mOverviewSurface );
     } else {
-      DrawingUtil.addGrid( mNum.surveyHmin(), mNum.surveyHmax(), mNum.surveyVmin(), mNum.surveyVmax(), mOverviewSurface );
+      mDrawingUtil.addGrid( mNum.surveyHmin(), mNum.surveyHmax(), mNum.surveyVmin(), mNum.surveyVmax(), mOverviewSurface );
                            // xoff, yoff, mOverviewSurface );
     }
 
@@ -323,9 +324,9 @@ public class OverviewWindow extends ItemDrawer
       }
       for ( NumStation st : stations ) {
         DrawingStationName dst;
-        // dst = mOverviewSurface.addDrawingStationName( null, st, DrawingUtil.toSceneX(st.e) - xoff,
-        //                                                   DrawingUtil.toSceneY(st.s) - yoff, true, null );
-        dst = mOverviewSurface.addDrawingStationName( null, st, DrawingUtil.toSceneX(st.e), DrawingUtil.toSceneY(st.s), true, null );
+        // dst = mOverviewSurface.addDrawingStationName( null, st, mDrawingUtil.toSceneX(st.e,st.s) - xoff,
+        //                                                   mDrawingUtil.toSceneY(st.e,st.s) - yoff, true, null );
+        dst = mOverviewSurface.addDrawingStationName( null, st, mDrawingUtil.toSceneX(st.e,st.s), mDrawingUtil.toSceneY(st.e,st.s), true, null );
       }
     } else { // if ( PlotInfo.isProfile( type ) // FIXME OK PROFILE
       for ( NumShot sh : shots ) {
@@ -343,9 +344,9 @@ public class OverviewWindow extends ItemDrawer
       }
       for ( NumStation st : stations ) {
         DrawingStationName dst;
-        // dst = mOverviewSurface.addDrawingStationName( null, st, DrawingUtil.toSceneX(st.h) - xoff,
-        //                                                   DrawingUtil.toSceneY(st.v) - yoff, true, null );
-        dst = mOverviewSurface.addDrawingStationName( null, st, DrawingUtil.toSceneX(st.h), DrawingUtil.toSceneY(st.v), true, null );
+        // dst = mOverviewSurface.addDrawingStationName( null, st, mDrawingUtil.toSceneX(st.h,st.v) - xoff,
+        //                                                   mDrawingUtil.toSceneY(st.h,st.v) - yoff, true, null );
+        dst = mOverviewSurface.addDrawingStationName( null, st, mDrawingUtil.toSceneX(st.h,st.v), mDrawingUtil.toSceneY(st.h,st.v), true, null );
       }
     }
 
@@ -410,6 +411,8 @@ public class OverviewWindow extends ItemDrawer
     public void onCreate(Bundle savedInstanceState) 
     {
       super.onCreate(savedInstanceState);
+
+      mDrawingUtil = new DrawingUtilPortrait();
 
       mCrossPath = new Path();
       mCrossPath.moveTo(10,10);
@@ -609,8 +612,8 @@ public class OverviewWindow extends ItemDrawer
             ydelta = st.v - mStartStation.v;
           }
         }
-        xdelta *= DrawingUtil.SCALE_FIX;
-        ydelta *= DrawingUtil.SCALE_FIX;
+        xdelta *= mDrawingUtil.SCALE_FIX;
+        ydelta *= mDrawingUtil.SCALE_FIX;
         // Log.v( "DistoX", " delta " + xdelta + " " + ydelta );
 
         // now try to load drawings from therion file
@@ -772,7 +775,7 @@ public class OverviewWindow extends ItemDrawer
     float y_canvas = event.getY();
     // Log.v("DistoX", "touch canvas " + x_canvas + " " + y_canvas ); 
 
-    if ( mZoomBtnsCtrlOn && y_canvas > DrawingUtil.CENTER_Y*2-20 ) {
+    if ( mZoomBtnsCtrlOn && y_canvas > mDrawingUtil.CENTER_Y*2-20 ) {
       mZoomBtnsCtrl.setVisible( true );
       // mZoomCtrl.show( );
     }
@@ -847,11 +850,11 @@ public class OverviewWindow extends ItemDrawer
         float x = x_canvas/mZoom - mOffset.x;
         float y = y_canvas/mZoom - mOffset.y;
         // segment displacement
-        float dx = (  (x - mStartX) / DrawingUtil.SCALE_FIX ) / TDSetting.mUnitGrid;
-        float dy = ( -(y - mStartY) / DrawingUtil.SCALE_FIX ) / TDSetting.mUnitGrid;
+        float dx = (  (x - mStartX) / mDrawingUtil.SCALE_FIX ) / TDSetting.mUnitGrid;
+        float dy = ( -(y - mStartY) / mDrawingUtil.SCALE_FIX ) / TDSetting.mUnitGrid;
         // total displacement, with respect to base
-        float bx = (  (x - mBaseX) / DrawingUtil.SCALE_FIX ) / TDSetting.mUnitGrid;
-        float by = ( -(y - mBaseY) / DrawingUtil.SCALE_FIX ) / TDSetting.mUnitGrid;
+        float bx = (  (x - mBaseX) / mDrawingUtil.SCALE_FIX ) / TDSetting.mUnitGrid;
+        float by = ( -(y - mBaseY) / mDrawingUtil.SCALE_FIX ) / TDSetting.mUnitGrid;
         // angle with respect to base
         double ba = Math.atan2( bx, by ) * 180 / Math.PI;
         if ( ba < 0 ) ba += 360;

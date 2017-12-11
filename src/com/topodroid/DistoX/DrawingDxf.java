@@ -399,7 +399,7 @@ class DrawingDxf
     return handle;
   }
 
-  static void write( BufferedWriter out, DistoXNum num, DrawingCommandManager plot, long type )
+  static void write( BufferedWriter out, DistoXNum num, DrawingCommandManager plot, long type, DrawingUtil mDrawingUtil )
   {
     mVersion13 = true; // (TDSetting.mAcadVersion >= 13);
     
@@ -407,7 +407,7 @@ class DrawingDxf
     float xoff = 0;
     float yoff = 0;
     int handle = 0;
-    RectF bbox = DrawingUtil.getBoundingBox( plot );
+    RectF bbox = plot.getBoundingBox( );
     float xmin = bbox.left;
     float xmax = bbox.right;
     float ymin = bbox.top;
@@ -748,7 +748,7 @@ class DrawingDxf
 
       writeSection( out, "ENTITIES" );
       {
-        float SCALE_FIX = DrawingUtil.SCALE_FIX;
+        float SCALE_FIX = mDrawingUtil.SCALE_FIX;
 
         // reference
         {
@@ -800,17 +800,17 @@ class DrawingDxf
               // printInt( pw4, 39, 2 );         // line thickness
 
               if ( type == PlotInfo.PLOT_PLAN ) {
-                float x0 = scale *( xoff + DrawingUtil.toSceneX( f.e ) );
-                float y0 = scale *( yoff + DrawingUtil.toSceneY( f.s ) );
-                float x1 = scale *( xoff + DrawingUtil.toSceneX( t.e ) );
-                float y1 = scale *( yoff + DrawingUtil.toSceneY( t.s ) );
+                float x0 = scale *( xoff + mDrawingUtil.toSceneX( f.e, f.s ) );
+                float y0 = scale *( yoff + mDrawingUtil.toSceneY( f.e, f.s ) );
+                float x1 = scale *( xoff + mDrawingUtil.toSceneX( t.e, t.s ) );
+                float y1 = scale *( yoff + mDrawingUtil.toSceneY( t.e, t.s ) );
                 printXYZ( pw4, x0, -y0, 0.0f, 0 );
                 printXYZ( pw4, x1, -y1, 0.0f, 1 );
               } else if ( PlotInfo.isProfile( type ) ) {
-                float x0 = scale *( xoff + DrawingUtil.toSceneX( f.h ) );
-                float y0 = scale *( yoff + DrawingUtil.toSceneY( f.v ) );
-                float x1 = scale *( xoff + DrawingUtil.toSceneX( t.h ) );
-                float y1 = scale *( yoff + DrawingUtil.toSceneY( t.v ) );
+                float x0 = scale *( xoff + mDrawingUtil.toSceneX( f.h, f.v ) );
+                float y0 = scale *( yoff + mDrawingUtil.toSceneY( f.h, f.v ) );
+                float x1 = scale *( xoff + mDrawingUtil.toSceneX( t.h, t.v ) );
+                float y1 = scale *( yoff + mDrawingUtil.toSceneY( t.h, t.v ) );
                 printXYZ( pw4, x0, -y0, 0.0f, 0 );
                 printXYZ( pw4, x1, -y1, 0.0f, 1 );
               } else if ( type == PlotInfo.PLOT_SECTION ) {
@@ -836,15 +836,15 @@ class DrawingDxf
 
             //   float dhs = scale * blk.mLength * (float)Math.cos( blk.mClino * TDMath.DEG2RAD )*SCALE_FIX; // scaled dh
             //   if ( type == PlotInfo.PLOT_PLAN ) {
-            //     float x = scale * DrawingUtil.toSceneX( f.e );
-            //     float y = scale * DrawingUtil.toSceneY( f.s );
+            //     float x = scale * mDrawingUtil.toSceneX( f.e, f.s );
+            //     float y = scale * mDrawingUtil.toSceneY( f.e, f.s );
             //     float de =   dhs * (float)Math.sin( blk.mBearing * TDMath.DEG2RAD);
             //     float ds = - dhs * (float)Math.cos( blk.mBearing * TDMath.DEG2RAD);
             //     printXYZ( pw41, x, -y, 0.0f, 0 );
             //     printXYZ( pw41, x + de, -(y+ds), 0.0f, 1 );
             //   } else if ( PlotInfo.isProfile( type ) ) {
-            //     float x = scale * DrawingUtil.toSceneX( f.h );
-            //     float y = scale * DrawingUtil.toSceneY( f.v );
+            //     float x = scale * mDrawingUtil.toSceneX( f.h, f.v );
+            //     float y = scale * mDrawingUtil.toSceneY( f.h, f.v );
             //     float dv = - blk.mLength * (float)Math.sin( blk.mClino * TDMath.DEG2RAD )*SCALE_FIX;
             //     printXYZ( pw41, x, -y, 0.0f, 0 );
             //     printXYZ( pw41, x+dhs*blk.getReducedExtend(), -(y+dv), 0.0f, 1 ); 
@@ -897,7 +897,7 @@ class DrawingDxf
               if ( scrapname != null ) {
                 String scrapfile = scrapname + ".tdr";
                 handle = tdrToDxf( pw5, handle, scrapfile, 
-                         scale, point.cx, point.cy, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
+                         scale, point.cx, point.cy, -mDrawingUtil.CENTER_X, -mDrawingUtil.CENTER_Y );
               }
             } else {
               handle = toDxf( pw5, handle, point, scale, xoff, yoff );

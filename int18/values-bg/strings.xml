@@ -478,6 +478,7 @@
     <string name="extended_profile">Разгънат разрез</string>
     <!-- UNUSED string name="v_section">Верт. сечение</string -->
     <string name="h_section">Хор. сечение</string>
+    <!-- TODO string name="landscape">landscape</string -->
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Грешка при четене от паметта на DistoX</string>
@@ -937,6 +938,12 @@
   <string name="pref_vert_splay_message">Странични измервания с по-голям наклон са с пунктир в плана</string>
   <!-- TODO string name="pref_data_backup_title">Data auto-export</string -->
   <!-- TODO string name="pref_data_backup_summary">Automatic data export (need default format)</string -->
+  <!-- TODO string name="pref_lrud_vertical_title">UD min splay clino</string -->
+  <!-- TODO string name="pref_lrud_vertical_summary">LRUD up/down minimum splay clino</string -->
+  <!-- TODO string name="pref_lrud_vertical_message">LRUD up/down minimum splay clino</string -->
+  <!-- TODO string name="pref_lrud_horizontal_title">LR max splay clino</string -->
+  <!-- TODO string name="pref_lrud_horizontal_summary">LRUD left/right maximum splay clino</string -->
+  <!-- TODO string name="pref_lrud_horizontal_message">LRUD left/right maximum splay clino</string -->
   <string name="pref_shared_xsections_title">Споделение сечения в репери</string>
   <string name="pref_shared_xsections_summary">Сеченията в реперите са споделени между скиците</string>
   <string name="xsections_shared">Споделение сечения в репери</string>

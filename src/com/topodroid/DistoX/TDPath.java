@@ -64,8 +64,9 @@ public class TDPath
   // PATHS
 
   static String EXTERNAL_STORAGE_PATH = Environment.getExternalStorageDirectory().getAbsolutePath(); // app base path
-  private static String PATH_DEFAULT = EXTERNAL_STORAGE_PATH + "/TopoDroid/";
-  private static String PATH_BASE = PATH_DEFAULT;
+  static String PATH_BASEDIR  = EXTERNAL_STORAGE_PATH;
+  private static String PATH_DEFAULT  = EXTERNAL_STORAGE_PATH + "/TopoDroid/";
+  private static String PATH_BASE     = PATH_BASEDIR + "/TopoDroid/";
 
   private static String PATH_BIN  = PATH_DEFAULT + "bin/";    // Firmwares  
   private static String PATH_CCSV = PATH_DEFAULT + "ccsv/";  // calib CSV text
@@ -117,21 +118,26 @@ public class TDPath
   static String getDatabase() { return getDirFile( "distox14.sqlite" ); }
   static String getDeviceDatabase() { return PATH_DEFAULT + "device10.sqlite"; }
   
-  static void checkBasePath( String path )
+  static boolean checkBasePath( String path )
   {
-    String cwd = EXTERNAL_STORAGE_PATH + "/" + path;
+    String cwd = PATH_BASEDIR + "/" + path;
     File dir = new File( cwd );
     if ( ! dir.exists() ) dir.mkdir();
+    return dir.exists() && dir.isDirectory() && dir.canWrite();
   }
 
   // FIXME BASEPATH 
   // remove comments when ready to swicth to new Android app path system
   //
-  static void setPaths( String path )
+  static void setPaths( String path, String base )
   {
     File dir = null;
+    if ( base != null ) {
+      dir = new File( base );
+      if ( dir.exists() && dir.canWrite() ) PATH_BASEDIR = base;
+    }
     if ( path != null ) {
-      String cwd = EXTERNAL_STORAGE_PATH + "/" + path;
+      String cwd = PATH_BASEDIR + "/" + path;
       dir = new File( cwd );
       if ( ! dir.exists() ) dir.mkdirs();
       if ( dir.isDirectory() && dir.canWrite() ) PATH_BASE = cwd + "/";

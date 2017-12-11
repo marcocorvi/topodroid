@@ -394,7 +394,7 @@ class ConnectionHandler extends Handler
            Integer.parseInt(data[4]),
            data[5], data[6], Double.parseDouble(data[7]), Double.parseDouble(data[8]),
            Double.parseDouble(data[9]), Double.parseDouble(data[10]), Double.parseDouble(data[11]),
-           data[12], data[13], false ); 
+           data[12], data[13], Integer.parseInt(data[14]), false ); 
          break;
        case DataListener.PLOT_UPDATE:
          break;
@@ -551,11 +551,11 @@ class ConnectionHandler extends Handler
 
   public void onInsertPlot( long sid, long id, String name, long type, long status, String start, String view,
                             double xoffset, double yoffset, double zoom, double azimuth, double clino,
-                            String hide ) 
+                            String hide, String nick, int orientation )
   {
     enqueue( DataListener.PLOT_INSERT, 
-      String.format(Locale.US, "%d|%d|%s|%d|%d|%s|%s|%.2f|%.2f|%.2f|%.2f|%.2f|%s|",
-      (int)sid, (int)id, name, (int)type, (int)status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide ) );
+      String.format(Locale.US, "%d|%d|%s|%d|%d|%s|%s|%.2f|%.2f|%.2f|%.2f|%.2f|%s|%s|%d|",
+      (int)sid, (int)id, name, (int)type, (int)status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation ) );
   }
 
   // public void updatePlot( long plot_id, long survey_id, double xoffset, double yoffset, double zoom ) { }

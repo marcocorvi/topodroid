@@ -51,11 +51,13 @@ public class CWDActivity extends Activity
 
   private ListView mList;
   private EditText mETcwd;
+  private EditText mETcbd;
   private Button mBtnOK;
 
   private void setPreference()
   {
-    String dir_name = mETcwd.getText().toString();
+    String dir_name  = mETcwd.getText().toString();
+    String base_name = TDLevel.overExpert ? mETcbd.getText().toString() : mApp.mCBD ;
     if ( dir_name == null ) return;
     dir_name.trim();
     if ( dir_name.length() == 0 ) return;
@@ -68,12 +70,17 @@ public class CWDActivity extends Activity
     } else { 
       dir_name = "TopoDroid" + dir_name.substring(9);
     }
-    TDPath.checkBasePath( dir_name );
-    // Log.v("DistoX", "dir name <" + dir_name + ">" );
-    mApp.setCWDPreference( dir_name );
-    Intent intent = new Intent();
-    intent.putExtra( TDTag.TOPODROID_CWD, dir_name );
-    setResult( RESULT_OK, intent );
+    if ( base_name == null || base_name.length() == 0 ) base_name = TDPath.PATH_BASEDIR;
+
+    if ( TDPath.checkBasePath( dir_name ) ) {
+      Log.v("DistoX", "dir name <" + dir_name + "> base dir <" + base_name + ">" );
+      mApp.setCWDPreference( dir_name, base_name );
+      Intent intent = new Intent();
+      intent.putExtra( TDTag.TOPODROID_CWD, dir_name );
+      setResult( RESULT_OK, intent );
+    } else {
+      setResult( RESULT_CANCELED );
+    }
   }
     
   public void updateDisplay( )
@@ -88,6 +95,11 @@ public class CWDActivity extends Activity
     mList.setDividerHeight( 2 );
 
     mETcwd.setText( mApp.mCWD );
+    if ( TDLevel.overExpert ) {
+      mETcbd.setText( mApp.mCBD );
+    } else{
+      mETcbd.setVisibility( View.GONE );
+    }
   }
 
   // ---------------------------------------------------------------
@@ -121,6 +133,7 @@ public class CWDActivity extends Activity
 
     mList = (ListView) findViewById( R.id.cwd_list );
     mETcwd = (EditText) findViewById( R.id.cwd_text );
+    mETcbd = (EditText) findViewById( R.id.cbd_text );
     mBtnOK = (Button) findViewById( R.id.button_ok );
     
     mBtnOK.setOnClickListener( this );

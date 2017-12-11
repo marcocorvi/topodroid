@@ -94,6 +94,7 @@ public class TopoDroidApp extends Application
                           implements OnSharedPreferenceChangeListener
 {
   String mCWD;  // current work directory
+  String mCBD;  // current base directory
 
   static final String EMPTY = "";
 
@@ -542,7 +543,8 @@ public class TopoDroidApp extends Application
 
     // TDLog.Profile("TDApp cwd");
     mCWD = mPrefs.getString( "DISTOX_CWD", "TopoDroid" );
-    TDPath.setPaths( mCWD );
+    mCBD = mPrefs.getString( "DISTOX_CBD", TDPath.PATH_BASEDIR );
+    TDPath.setPaths( mCWD, mCBD );
 
     // TDLog.Profile("TDApp DB");
     mDataListeners = new DataListenerSet( );
@@ -662,12 +664,15 @@ public class TopoDroidApp extends Application
     if ( mPrefActivity != null ) mPrefActivity.reloadPreferences();
   }
 
-  void setCWD( String cwd )
+  void setCWD( String cwd, String cbd )
   {
-    if ( cwd == null || cwd.length() == 0 || cwd.equals( mCWD ) ) return;
+    if ( cwd == null || cwd.length() == 0 ) cwd = mCWD;
+    if ( cbd == null || cbd.length() == 0 ) cbd = mCBD;
+    if ( cbd.equals( mCBD ) && cwd.equals( mCWD ) ) return;
     mData.closeDatabase();
+    mCBD = cbd;
     mCWD = cwd;
-    TDPath.setPaths( mCWD );
+    TDPath.setPaths( mCWD, mCBD );
     mData.openDatabase();
     if ( mActivity != null ) mActivity.setTheTitle( );
   }
@@ -1020,16 +1025,17 @@ public class TopoDroidApp extends Application
     }
   }
 
-  void setCWDPreference( String cwd )
+  void setCWDPreference( String cwd, String cbd )
   { 
-    if ( mCWD.equals( cwd ) ) return;
+    if ( mCWD.equals( cwd ) && mCBD.equals( cbd ) ) return;
     // Log.v("DistoX", "setCWDPreference " + cwd );
     if ( mPrefs != null ) {
       Editor editor = mPrefs.edit();
       editor.putString( "DISTOX_CWD", cwd ); 
+      editor.putString( "DISTOX_CBD", cbd ); 
       editor.commit();
     }
-    setCWD( cwd ); 
+    setCWD( cwd, cbd ); 
   }
 
   void setPtCmapPreference( String cmap )
@@ -1896,17 +1902,18 @@ public class TopoDroidApp extends Application
 
   // ----------------------------------------------------------------------
 
-  long insert2dPlot( long sid , String name, String start, boolean extended, int project )
+  long insert2dPlot( long sid , String name, String start, boolean extended, int project, boolean landscape )
   {
+    int landscapeTag = landscape ? PlotInfo.ORIENTATION_LANDSCAPE : PlotInfo.ORIENTATION_PORTRAIT ;
     // TDLog.Log( TDLog.LOG_PLOT, "new plot " + name + " start " + start );
     long pid_p = mData.insertPlot( sid, -1L, name+"p",
-                 PlotInfo.PLOT_PLAN, 0L, start, EMPTY, 0, 0, mScaleFactor, 0, 0, EMPTY, EMPTY, true );
+                 PlotInfo.PLOT_PLAN, 0L, start, EMPTY, 0, 0, mScaleFactor, 0, 0, EMPTY, EMPTY, landscapeTag, true );
     if ( extended ) {
       long pid_s = mData.insertPlot( sid, -1L, name+"s",
-                   PlotInfo.PLOT_EXTENDED, 0L, start, EMPTY, 0, 0, mScaleFactor, 0, 0, EMPTY, EMPTY, true );
+                   PlotInfo.PLOT_EXTENDED, 0L, start, EMPTY, 0, 0, mScaleFactor, 0, 0, EMPTY, EMPTY, landscapeTag, true );
     } else {
       long pid_s = mData.insertPlot( sid, -1L, name+"s",
-                   PlotInfo.PLOT_PROFILE, 0L, start, EMPTY, 0, 0, mScaleFactor, project, 0, EMPTY, EMPTY, true );
+                   PlotInfo.PLOT_PROFILE, 0L, start, EMPTY, 0, 0, mScaleFactor, project, 0, EMPTY, EMPTY, landscapeTag, true );
     }
     return pid_p;
   }
@@ -1915,13 +1922,14 @@ public class TopoDroidApp extends Application
   // @param parent parent plot name
   // NOTE field "hide" is overloaded for x_sections with the parent plot name
   long insert2dSection( long sid, String name, long type, String from, String to, float azimuth, float clino,
-                        String parent, String nickname )
+                        String parent, String nickname, boolean landscape )
   {
     // FIXME COSURVEY 2d sections are not forwarded
     // 0 0 mScaleFactor : offset and zoom
+    int landscapeTag = landscape ? PlotInfo.ORIENTATION_LANDSCAPE : PlotInfo.ORIENTATION_PORTRAIT ;
     String hide = ( parent == null )? EMPTY : parent;
     String nick = ( nickname == null )? EMPTY : nickname;
-    return mData.insertPlot( sid, -1L, name, type, 0L, from, to, 0, 0, TopoDroidApp.mScaleFactor, azimuth, clino, hide, nick, false );
+    return mData.insertPlot( sid, -1L, name, type, 0L, from, to, 0, 0, TopoDroidApp.mScaleFactor, azimuth, clino, hide, nick, landscapeTag, false );
   }
 
   public void viewPhoto( Context ctx, String filename )

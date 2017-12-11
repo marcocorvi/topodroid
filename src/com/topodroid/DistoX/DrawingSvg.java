@@ -67,12 +67,12 @@ class DrawingSvg
     return String.format( "#%02x%02x%02x", red, grn, blu );
   }
 
-  static void write( BufferedWriter out, DistoXNum num, DrawingCommandManager plot, long type )
+  static void write( BufferedWriter out, DistoXNum num, DrawingCommandManager plot, long type, DrawingUtil mDrawingUtil )
   {
     String wall_group = BrushManager.getLineGroup( BrushManager.mLineLib.mLineWallIndex );
 
     int handle = 0;
-    RectF bbox = DrawingUtil.getBoundingBox( plot );
+    RectF bbox = plot.getBoundingBox( );
     float xmin = bbox.left;
     float xmax = bbox.right;
     float ymin = bbox.top;
@@ -127,7 +127,7 @@ class DrawingSvg
       // }
       
       {
-        float SCALE_FIX = DrawingUtil.SCALE_FIX;
+        float SCALE_FIX = mDrawingUtil.SCALE_FIX;
 
         // centerline data
         if ( PlotInfo.isSketch2D( type ) ) { 
@@ -150,16 +150,16 @@ class DrawingSvg
  
               pw4.format("  <path stroke-width=\"1\" stroke=\"black\" d=\"");
               if ( type == PlotInfo.PLOT_PLAN ) {
-                float x  = xoff + DrawingUtil.toSceneX( f.e ); 
-                float y  = yoff + DrawingUtil.toSceneY( f.s );
-                float x1 = xoff + DrawingUtil.toSceneX( t.e );
-                float y1 = yoff + DrawingUtil.toSceneY( t.s );
+                float x  = xoff + mDrawingUtil.toSceneX( f.e, f.s ); 
+                float y  = yoff + mDrawingUtil.toSceneY( f.e, f.s );
+                float x1 = xoff + mDrawingUtil.toSceneX( t.e, t.s );
+                float y1 = yoff + mDrawingUtil.toSceneY( t.e, t.s );
                 pw4.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x1, y1 );
               } else if ( PlotInfo.isProfile( type ) ) { // FIXME OK PROFILE
-                float x  = xoff + DrawingUtil.toSceneX( f.h );
-                float y  = yoff + DrawingUtil.toSceneY( f.v );
-                float x1 = xoff + DrawingUtil.toSceneX( t.h );
-                float y1 = yoff + DrawingUtil.toSceneY( t.v );
+                float x  = xoff + mDrawingUtil.toSceneX( f.h, f.v );
+                float y  = yoff + mDrawingUtil.toSceneY( f.h, f.v );
+                float x1 = xoff + mDrawingUtil.toSceneX( t.h, t.v );
+                float y1 = yoff + mDrawingUtil.toSceneY( t.h, t.v );
                 pw4.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x1, y1 );
               }
             // }
@@ -177,14 +177,14 @@ class DrawingSvg
             //   pw41.format("  <path stroke-width=\"1\" stroke=\"grey\" d=\"");
             //   float dh = blk.mLength * (float)Math.cos( blk.mClino * TDMath.DEG2RAD )*SCALE_FIX;
             //   if ( type == PlotInfo.PLOT_PLAN ) {
-            //     float x = xoff + DrawingUtil.toSceneX( f.e ); 
-            //     float y = yoff + DrawingUtil.toSceneY( f.s );
+            //     float x = xoff + mDrawingUtil.toSceneX( f.e, f.s ); 
+            //     float y = yoff + mDrawingUtil.toSceneY( f.e, f.s );
             //     float de =   dh * (float)Math.sin( blk.mBearing * TDMath.DEG2RAD);
             //     float ds = - dh * (float)Math.cos( blk.mBearing * TDMath.DEG2RAD);
             //     pw41.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x + de, (y+ds) );
             //   } else if ( PlotInfo.isProfile( type ) ) { // FIXME OK PROFILE
-            //     float x = xoff + DrawingUtil.toSceneX( f.h );
-            //     float y = yoff + DrawingUtil.toSceneY( f.v );
+            //     float x = xoff + mDrawingUtil.toSceneX( f.h, f.v );
+            //     float y = yoff + mDrawingUtil.toSceneY( f.h, f.v );
             //     float dv = - blk.mLength * (float)Math.sin( blk.mClino * TDMath.DEG2RAD )*SCALE_FIX;
             //     int ext = blk.getReducedExtend();
             //     pw41.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x+dh*ext, (y+dv) );
@@ -249,7 +249,7 @@ class DrawingSvg
                 // String scrapfile = point.mOptions.substring( 7 ) + ".tdr";
 
                 // TODO open file survey-xx#.tdr and convert it to svg
-                tdrToSvg( pw5, scrapfile, xx, yy, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
+                tdrToSvg( pw5, scrapfile, xx, yy, -mDrawingUtil.CENTER_X, -mDrawingUtil.CENTER_Y );
               }
               // pw5.format("</g>\n");
             } else {

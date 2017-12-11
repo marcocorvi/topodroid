@@ -25,6 +25,7 @@
 package com.topodroid.DistoX;
 
 import java.io.File;
+import java.io.StringWriter;
 import java.io.FileWriter;
 import java.io.FileOutputStream;
 import java.io.BufferedWriter;
@@ -1820,6 +1821,11 @@ class TDExporter
 
         // skip splays too close to shot direction // FIXME setting
         // this test aims to use only splays that are "orthogonal" to the shot
+	// 
+	// FIXME considering only the angle splay-leg may be not enough
+	//       should split the case for LR and UD
+	//       [1] LR must be almost horizontal: |clino| < threshold
+	//       [2] UD must be vertical: |clino| > threshold
         if ( TDSetting.mOrthogonalLRUD ) {
           float cbb1 = sc*sc0*(sb*sb0 + cb*cb0) + cc*cc0; // cosine of angle between block and item
           if ( Math.abs( cbb1 ) > TDSetting.mOrthogonalLRUDCosine ) continue; 
@@ -1828,12 +1834,14 @@ class TDExporter
         float z1 = len * sc;
         float n1 = len * cc * cb;
         float e1 = len * cc * sb;
-        if ( z1 > 0.0 ) { if ( z1 > lrud.u ) lrud.u = z1; }
-        else            { if ( -z1 > lrud.d ) lrud.d = -z1; }
-
-        float rl = e1 * n0 - n1 * e0;
-        if ( rl > 0.0 ) { if ( rl > lrud.r ) lrud.r = rl; }
-        else            { if ( -rl > lrud.l ) lrud.l = -rl; }
+	if ( Math.abs( item.mClino ) > TDSetting.mLRUDvertical ) {
+          if ( z1 > 0.0 ) { if ( z1 > lrud.u ) lrud.u = z1; }
+          else            { if ( -z1 > lrud.d ) lrud.d = -z1; }
+        } else if ( Math.abs( item.mClino ) < TDSetting.mLRUDhorizontal ) {
+          float rl = e1 * n0 - n1 * e0;
+          if ( rl > 0.0 ) { if ( rl > lrud.r ) lrud.r = rl; }
+          else            { if ( -rl > lrud.l ) lrud.l = -rl; }
+	}
       }
     }
     // Log.v("DistoX", "<" + b.mFrom + "-" + b.mTo + "> at " + station + ": " + lrud.l + " " + lrud.r );
@@ -3230,6 +3238,7 @@ class TDExporter
           out.printf("0\nLAYER\n2\nSTATION\n70\n%d\n62\n%d\n6\n%s\n", flag, 3, style );
           out.printf("0\nLAYER\n2\nREF\n70\n%d\n62\n%d\n6\n%s\n",     flag, 4, style );
           out.printf("0\nLAYER\n2\nPOINT\n70\n%d\n62\n%d\n6\n%s\n",   flag, 5, style );
+          out.printf("0\nLAYER\n2\nXSPLAY\n70\n%d\n62\n%d\n6\n%s\n",  flag, 6, style );
         out.printf("0\nENDTAB\n");
 
         out.printf("0\nTABLE\n2\nSTYLE\n70\n0\n");
@@ -3288,7 +3297,12 @@ class TDExporter
 
         for ( NumSplay sh : num.getSplays() ) {
           NumStation f = sh.from;
-          out.printf("0\nLINE\n8\nSPLAY\n");
+	  DBlock blk = sh.getBlock();
+          if ( blk.isXSplay() ) {
+            out.printf("0\nLINE\n8\nXSPLAY\n");
+          } else {
+            out.printf("0\nLINE\n8\nSPLAY\n");
+	  }
           out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", f.e, -f.s, -f.v );
           out.printf(Locale.US, "11\n%.2f\n21\n%.2f\n31\n%.2f\n", sh.e, -sh.s, -sh.v );
           if ( TDSetting.mDxfBlocks ) {
@@ -3336,7 +3350,7 @@ class TDExporter
     if ( item == null ) return false;
     LRUD lrud = computeLRUD( item, list, true );
     pw.format(Locale.US, "%s %s 0.00 0.00 0.00 ", item.mFrom, item.mFrom );
-    pw.format(Locale.US, "%.2f %.2f %.2f %.2f N I", lrud.l, lrud.r, lrud.u, lrud.d );
+    pw.format(Locale.US, "%.2f %.2f %.2f %.2f N I *", lrud.l, lrud.r, lrud.u, lrud.d );
     if ( item.mComment != null && item.mComment.length() > 0 ) {
       pw.format(" ;%s", item.mComment );
     }
@@ -3351,7 +3365,7 @@ class TDExporter
     pw.format("%s %s ", item.mFrom, item.mTo );
     pw.format(Locale.US, "%.2f %.1f %.1f ", leg.length(), leg.bearing(), leg.clino() );
     leg.reset();
-    pw.format(Locale.US, "%.2f %.2f %.2f %.2f N I", lrud.l, lrud.r, lrud.u, lrud.d );
+    pw.format(Locale.US, "%.2f %.2f %.2f %.2f N I *", lrud.l, lrud.r, lrud.u, lrud.d );
     // if ( duplicate ) {
     //   // pw.format(" #|L#");
     // }
@@ -3368,13 +3382,14 @@ class TDExporter
     // Log.v( TAG, "shot " + item.mFrom + "-" + item.mTo + " " + l/n + " " + b + " " + c/n );
     if ( direct ) {
       pw.format("%s * ", item.mFrom );
-      pw.format(Locale.US, "%.2f %.1f %.1f * * * * N I", item.mLength, item.mBearing, item.mClino );
+      pw.format(Locale.US, "%.2f %.1f %.1f * * * * N E", item.mLength, item.mBearing, item.mClino );
     } else {
       float b = item.mBearing + 180;
       if ( b >= 360 ) b -= 360;
       pw.format("%s * ", item.mTo );
-      pw.format(Locale.US, "%.2f %.1f %.1f * * * * N I", item.mLength, b, - item.mClino );
+      pw.format(Locale.US, "%.2f %.1f %.1f * * * * N E", item.mLength, b, - item.mClino );
     }
+    pw.format( (item.isCommented() ? " D" : " M" ) );
     // if ( duplicate ) {
     //   // pw.format(" #|L#");
     // }
@@ -3394,6 +3409,9 @@ class TDExporter
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
+
+      StringWriter sw = new StringWriter();
+      PrintWriter  psw = new PrintWriter( sw );
   
       pw.format("Version 5.02\r\n\r\n");
       pw.format("; %s created by TopoDroid v %s\r\n\r\n", TopoDroidUtil.getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
@@ -3435,12 +3453,15 @@ class TDExporter
               if ( ! started ) {
                 started = printStartShotToTro( pw, ref_item, list );
               }
+	      pw.format( sw.toString() );
+              sw = new StringWriter();
+              psw = new PrintWriter( sw );
               lrud = computeLRUD( ref_item, list, false );
               printShotToTro( pw, ref_item, leg, lrud );
               duplicate = false;
               ref_item = null; 
             }
-	    printSplayToTro( pw, item, false );
+	    printSplayToTro( psw, item, false );
           }
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // splay shot
@@ -3448,17 +3469,23 @@ class TDExporter
               if ( ! started ) {
                 started = printStartShotToTro( pw, ref_item, list );
               }
+	      pw.format( sw.toString() );
+              sw = new StringWriter();
+              psw = new PrintWriter( sw );
               lrud = computeLRUD( ref_item, list, false );
               printShotToTro( pw, ref_item, leg, lrud );
               duplicate = false;
               ref_item = null; 
             }
-	    printSplayToTro( pw, item, true );
+	    printSplayToTro( psw, item, true );
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {
               if ( ! started ) {
                 started = printStartShotToTro( pw, ref_item, list );
               }
+	      pw.format( sw.toString() );
+              sw = new StringWriter();
+              psw = new PrintWriter( sw );
               lrud = computeLRUD( ref_item, list, false );
               printShotToTro( pw, ref_item, leg, lrud );
             }
@@ -3473,8 +3500,11 @@ class TDExporter
         if ( ! started ) {
           started = printStartShotToTro( pw, ref_item, list );
         }
+	pw.format( sw.toString() );
         lrud = computeLRUD( ref_item, list, false );
         printShotToTro( pw, ref_item, leg, lrud );
+      } else {
+	pw.format( sw.toString() );
       }
 
       fw.flush();

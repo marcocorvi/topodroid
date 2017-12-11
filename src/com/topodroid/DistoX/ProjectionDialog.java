@@ -69,6 +69,7 @@ public class ProjectionDialog extends MyDialog
 
   private TopoDroidApp mApp;
   private ShotWindow mParent;
+  private DrawingUtil mDrawingUtil;
 
   private ProjectionSurface mDrawingSurface;
   private SeekBar mSeekBar;
@@ -98,6 +99,7 @@ public class ProjectionDialog extends MyDialog
   private String mName;
   private String mFrom;
   private int  mAzimuth = 0;
+  private boolean mLandscape;
 
   private float mBorderRight      = 4096;
   private float mBorderLeft       = 0;
@@ -108,15 +110,17 @@ public class ProjectionDialog extends MyDialog
   List<DBlock> mList = null;
 
 
-  public ProjectionDialog( Context context, ShotWindow parent, long sid, String name, String from )
+  public ProjectionDialog( Context context, ShotWindow parent, long sid, String name, String from, boolean landscape )
   {
     super( context, R.string.ProjectionDialog ); // FIXME
     mParent = parent;
+    mDrawingUtil = new DrawingUtilPortrait();
     mSid    = sid;
     mName   = name;
     mFrom   = from;
     mAzimuth = 0;
     mApp     = mParent.getApp();
+    mLandscape = landscape;
   }
 
   void updateEditText() 
@@ -181,7 +185,7 @@ public class ProjectionDialog extends MyDialog
       dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );
       dpath.setPaint( BrushManager.labelPaint );
     }
-    // DrawingUtil.makePath( dpath, x1, y1, x2, y2, mOffset.x, mOffset.y );
+    // mDrawingUtil.makePath( dpath, x1, y1, x2, y2, mOffset.x, mOffset.y );
     dpath.mPath = new Path();
     dpath.mPath.moveTo( x1, y1 );
     dpath.mPath.lineTo( x2, y2 );
@@ -209,27 +213,37 @@ public class ProjectionDialog extends MyDialog
       NumStation st1 = sh.from;
       NumStation st2 = sh.to;
       if ( st1.show() && st2.show() ) {
-        h1 = DrawingUtil.toSceneX( (float)( st1.e * cosp + st1.s * sinp ) ); // - dx;
-        h2 = DrawingUtil.toSceneX( (float)( st2.e * cosp + st2.s * sinp ) ); // - dx;
-        v1 = DrawingUtil.toSceneY( (float)( st1.v ) ); // - dy;
-        v2 = DrawingUtil.toSceneY( (float)( st2.v ) ); // - dy;
+	float x1 = (float)( st1.e * cosp + st1.s * sinp ); // - dx;
+	float x2 = (float)( st2.e * cosp + st2.s * sinp ); // - dx;
+	float y1 =(float)( st1.v ); // - dy;
+	float y2 = (float)( st2.v ); // - dy;
+        h1 = mDrawingUtil.toSceneX( x1, y1 );
+        h2 = mDrawingUtil.toSceneX( x2, y2 );
+        v1 = mDrawingUtil.toSceneY( x1, y1 );
+        v2 = mDrawingUtil.toSceneY( x2, y2 );
         addFixedLine( sh.getFirstBlock(), h1, v1, h2, v2, false );
       }
     } 
     for ( NumSplay sp : splays ) {
       NumStation st = sp.from;
       if ( st.show() ) {
-        h1 = DrawingUtil.toSceneX( (float)( st.e * cosp + st.s * sinp ) ); // - dx;
-        h2 = DrawingUtil.toSceneX( (float)( sp.e * cosp + sp.s * sinp ) ); // - dx;
-        v1 = DrawingUtil.toSceneY( (float)( st.v ) ); // - dy;
-        v2 = DrawingUtil.toSceneY( (float)( sp.v ) ); // - dy;
+	float x1 = (float)( st.e * cosp + st.s * sinp ); // - dx;
+	float x2 = (float)( sp.e * cosp + sp.s * sinp ); // - dx;
+	float y1 = (float)( st.v ); // - dy;
+	float y2 = (float)( sp.v ); // - dy;
+        h1 = mDrawingUtil.toSceneX( x1, y1 );
+        h2 = mDrawingUtil.toSceneX( x2, y2 );
+        v1 = mDrawingUtil.toSceneY( x1, y1 );
+        v2 = mDrawingUtil.toSceneY( x2, y2 );
         addFixedLine( sp.getBlock(), h1, v1, h2, v2, true );
       }
     }
     for ( NumStation st : stations ) {
       if ( st.show() ) {
-        h1 = DrawingUtil.toSceneX( (float)( st.e * cosp + st.s * sinp ) ); // - dx;
-        v1 = DrawingUtil.toSceneY( (float)( st.v ) ); // - dy;
+	float x1 = (float)( st.e * cosp + st.s * sinp ); // - dx;
+	float y1 = (float)( st.v ); // - dy;
+        h1 = mDrawingUtil.toSceneX( x1, y1 );
+        v1 = mDrawingUtil.toSceneY( x1, y1 );
         mDrawingSurface.addDrawingStationName( st, h1, v1 );
       }
     }
@@ -416,8 +430,8 @@ public class ProjectionDialog extends MyDialog
         float ds = - mNum.surveySmin();
         if ( mNum.surveySmax() > ds ) ds = mNum.surveySmax();
         mZoom *= 2 / (float)Math.sqrt( de*de + ds*ds );
-        // mOffset.x = 2 * mDisplayCenter.x; // + (mNum.surveyEmax() + mNum.surveyEmin()) * DrawingUtil.SCALE_FIX/2;
-        // mOffset.y = 2 * mDisplayCenter.y; // - (mNum.surveySmax() + mNum.surveySmin()) * DrawingUtil.SCALE_FIX/2;
+        // mOffset.x = 2 * mDisplayCenter.x; // + (mNum.surveyEmax() + mNum.surveyEmin()) * mDrawingUtil.SCALE_FIX/2;
+        // mOffset.y = 2 * mDisplayCenter.y; // - (mNum.surveySmax() + mNum.surveySmin()) * mDrawingUtil.SCALE_FIX/2;
         // Log.v("DistoX", "start " + de + " " + ds + " " + dr + " off " + mOffset.x + " " + mOffset.y + " " + mZoom );
 
         computeReferences();
@@ -592,7 +606,7 @@ public class ProjectionDialog extends MyDialog
      Button b = (Button)view;
      if ( b == mBtnOk ) {
        mDrawingSurface.stopDrawingThread();
-       mParent.doProjectedProfile( mName, mFrom, mAzimuth );
+       mParent.doProjectedProfile( mName, mFrom, mAzimuth, mLandscape );
        dismiss();
      } else if ( b == mBtnPlus ) {
        setAzimuth( mAzimuth + 1, true );

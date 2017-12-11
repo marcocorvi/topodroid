@@ -1299,7 +1299,7 @@ class DrawingIO
   }
   
   static public void doExportCsxXSection( PrintWriter pw, String filename,
-                                          String survey, String cave, String branch, String bind )
+                                          String survey, String cave, String branch, String bind, DrawingUtil drawingUtil )
   {
     File file = new File( filename );
     if ( ! file.exists() ) return;
@@ -1397,11 +1397,12 @@ class DrawingIO
         e.printStackTrace();
       }
     }
-    doExportAsCsx( pw, survey, cave, branch, bind, paths, null, null ); // all_sections=null, sections=null
+    doExportAsCsx( pw, survey, cave, branch, bind, paths, null, null, drawingUtil ); // all_sections=null, sections=null
   }
 
   static void doExportAsCsx( PrintWriter pw, String survey, String cave, String branch, String bind,
-                             List<DrawingPath> paths, List< PlotInfo > all_sections, List< PlotInfo > sections )
+                             List<DrawingPath> paths, List< PlotInfo > all_sections, List< PlotInfo > sections,
+			     DrawingUtil mDrawingUtil )
   {
     int csxIndex = 0;
     pw.format("    <layers>\n");
@@ -1419,7 +1420,7 @@ class DrawingIO
       if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
         DrawingAreaPath ap = (DrawingAreaPath)p;
         if ( BrushManager.getAreaCsxLayer( ap.mAreaType ) != 1 ) continue;
-        ap.toCsurvey( pw, survey, cave, branch, bind ); 
+        ap.toCsurvey( pw, survey, cave, branch, bind, mDrawingUtil ); 
       }
     }
     pw.format("        </items>\n");
@@ -1432,11 +1433,11 @@ class DrawingIO
       if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
         DrawingLinePath lp = (DrawingLinePath)p;
         if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 2 ) continue;
-        lp.toCsurvey( pw, survey, cave, branch, bind );
+        lp.toCsurvey( pw, survey, cave, branch, bind, mDrawingUtil );
       } else if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
         DrawingAreaPath ap = (DrawingAreaPath)p;
         if ( BrushManager.getAreaCsxLayer( ap.mAreaType ) != 2 ) continue;
-        ap.toCsurvey( pw, survey, cave, branch, bind ); 
+        ap.toCsurvey( pw, survey, cave, branch, bind, mDrawingUtil ); 
       } 
     }
     pw.format("        </items>\n");
@@ -1449,7 +1450,7 @@ class DrawingIO
       if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
         DrawingLinePath lp = (DrawingLinePath)p;
         if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 3 ) continue;
-        lp.toCsurvey( pw, survey, cave, branch, bind );
+        lp.toCsurvey( pw, survey, cave, branch, bind, mDrawingUtil );
       }
     }
     pw.format("        </items>\n");
@@ -1462,7 +1463,7 @@ class DrawingIO
       if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
         DrawingLinePath lp = (DrawingLinePath)p;
         if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 4 ) continue;
-        lp.toCsurvey( pw, survey, cave, branch, bind );
+        lp.toCsurvey( pw, survey, cave, branch, bind, mDrawingUtil );
       }
     }
     pw.format("        </items>\n");
@@ -1475,7 +1476,7 @@ class DrawingIO
       if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
         DrawingLinePath lp = (DrawingLinePath)p;
         if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 5 ) continue;
-        lp.toCsurvey( pw, survey, cave, branch, bind );
+        lp.toCsurvey( pw, survey, cave, branch, bind, mDrawingUtil );
       }
       // if ( lp.lineType() == BrushManager.mLineLib.mLineWallIndex ) {
       //   // linetype: 0 line, 1 spline, 2 bezier
@@ -1548,8 +1549,8 @@ class DrawingIO
         if ( section != null ) {
           // Log.v("DistoX", "section " + section.name + " " + section.nick );
           // special toCsurvey for cross-section points
-          float x = DrawingUtil.sceneToWorldX( pp.cx ); // convert to world coords.
-          float y = DrawingUtil.sceneToWorldY( pp.cy );
+          float x = mDrawingUtil.sceneToWorldX( pp.cx, pp.cy ); // convert to world coords.
+          float y = mDrawingUtil.sceneToWorldY( pp.cx, pp.cy );
           String text = ( section.nick == null || section.nick.length() == 0 )? section.name : section.nick;
           pw.format("  <item layer=\"6\" cave=\"%s\" branch=\"%s\" type=\"9\" category=\"96\" direction=\"0\" ", cave, branch );
           pw.format("text=\"%s\" textdistance=\"2\" crosswidth=\"4\" crossheight=\"4\" name=\"%s\" ", text, section.name );
@@ -1569,7 +1570,7 @@ class DrawingIO
           // Log.v("DistoX", "section not found");
         }
       } else {
-        pp.toCsurvey( pw, survey, cave, branch, bind );
+        pp.toCsurvey( pw, survey, cave, branch, bind, mDrawingUtil );
       }
       ++ csxIndex;
       

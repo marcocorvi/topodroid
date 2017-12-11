@@ -30,6 +30,9 @@ class PlotInfo
   public static final long PLOT_XH_SECTION = 7; // X-H_sectiuon at a station (defined in EXT plot)
   public static final long PLOT_PROFILE    = 8; // projected profile
 
+  final static int ORIENTATION_PORTRAIT  = 0;
+  final static int ORIENTATION_LANDSCAPE = 1;
+
   public long surveyId; // survey id
   public long id;       // plot id
   public String name;   // name of the plot
@@ -44,6 +47,10 @@ class PlotInfo
   public float azimuth; // vertical cross-section azimuth / profile projection azimuth
   public float clino;   // inclination (0 for plan cross-sections)
   public int csxIndex = -1;  // numerical index for cSurvey xsection exports
+  public int orientation = ORIENTATION_PORTRAIT;
+
+  boolean isPortrait()  { return orientation == ORIENTATION_PORTRAIT; }
+  boolean isLandscape() { return orientation == ORIENTATION_LANDSCAPE; }
 
   static boolean isVertical( long type ) 
   { return ( type == PLOT_EXTENDED || type == PLOT_PROFILE || type == PLOT_SECTION || type == PLOT_X_SECTION ); }

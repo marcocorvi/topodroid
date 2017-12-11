@@ -77,6 +77,24 @@
        android:inputType="numberDecimal"
        android:defaultValue="0" / -->
 
+  <!-- com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_LRUD_VERTICAL"
+       android:title="@string/pref_lrud_vertical_title"
+       android:summary="@string/pref_lrud_vertical_summary"
+       android:dialogTitle="@string/pref_lrud_vertical_title"
+       android:dialogMessage="@string/pref_lrud_vertical_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="0" / -->
+
+  <!-- com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_LRUD_HORIZONTAL"
+       android:title="@string/pref_lrud_horizontal_title"
+       android:summary="@string/pref_lrud_horizontal_summary"
+       android:dialogTitle="@string/pref_lrud_horizontal_title"
+       android:dialogMessage="@string/pref_lrud_horizontal_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="90" / -->
+
    <!-- CheckBoxPreference
        android:key="DISTOX_SWAP_LR"
        android:summary="@string/pref_swapLR_summary"

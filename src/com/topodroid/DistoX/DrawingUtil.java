@@ -15,7 +15,6 @@ import android.graphics.Paint;
 // import android.graphics.Paint.FontMetrics;
 // import android.graphics.PointF;
 import android.graphics.Path;
-import android.graphics.RectF;
 // import android.graphics.Path.Direction;
 
 
@@ -27,32 +26,31 @@ class DrawingUtil
 
   // private static final PointF mCenter = new PointF( CENTER_X, CENTER_Y );
 
-  static float toSceneX( float x ) { return CENTER_X + x * SCALE_FIX; }
-  static float toSceneY( float y ) { return CENTER_Y + y * SCALE_FIX; }
+  float toSceneX( float x, float y ) { return x; } // CENTER_X + x * SCALE_FIX; }
+  float toSceneY( float x, float y ) { return y; } // CENTER_Y + y * SCALE_FIX; }
 
-  static float sceneToWorldX( float x ) { return (x - CENTER_X)/SCALE_FIX; }
-  static float sceneToWorldY( float y ) { return (y - CENTER_Y)/SCALE_FIX; }
-
+  float sceneToWorldX( float x, float y ) { return x; } // (x - CENTER_X)/SCALE_FIX; }
+  float sceneToWorldY( float x, float y ) { return y; } // (y - CENTER_Y)/SCALE_FIX; }
     
-  static void makePath( DrawingPath dpath, float x1, float y1, float x2, float y2 )
+  void makePath( DrawingPath dpath, float xx1, float yy1, float xx2, float yy2 )
   {
     dpath.mPath = new Path();
-    x1 = toSceneX( x1 );
-    y1 = toSceneY( y1 );
-    x2 = toSceneX( x2 );
-    y2 = toSceneY( y2 );
+    float x1 = toSceneX( xx1, yy1 );
+    float y1 = toSceneY( xx1, yy1 );
+    float x2 = toSceneX( xx2, yy2 );
+    float y2 = toSceneY( xx2, yy2 );
     dpath.setEndPoints( x1, y1, x2, y2 ); // this sets the midpoint only
     dpath.mPath.moveTo( x1, y1 );
     dpath.mPath.lineTo( x2, y2 );
   }
 
-  static void makePath( DrawingPath dpath, float x1, float y1, float x2, float y2, float xoff, float yoff )
+  void makePath( DrawingPath dpath, float xx1, float yy1, float xx2, float yy2, float xoff, float yoff )
   {
     dpath.mPath = new Path();
-    x1 = toSceneX( x1 );
-    y1 = toSceneY( y1 );
-    x2 = toSceneX( x2 );
-    y2 = toSceneY( y2 );
+    float x1 = toSceneX( xx1, yy1 );
+    float y1 = toSceneY( xx1, yy1 );
+    float x2 = toSceneX( xx2, yy2 );
+    float y2 = toSceneY( xx2, yy2 );
     dpath.setEndPoints( x1, y1, x2, y2 ); // this sets the midpoint only
     dpath.mPath.moveTo( x1 - xoff, y1 - yoff );
     dpath.mPath.lineTo( x2 - xoff, y2 - yoff );
@@ -82,61 +80,50 @@ class DrawingUtil
     surface.addGridPath( dpath, k );
   }
 
-  static void addGrid( float xmin, float xmax, float ymin, float ymax, DrawingSurface surface )
+  void addGrid( float xmin, float xmax, float ymin, float ymax, DrawingSurface surface )
   {
     xmin = (xmin - 100.0f) / TDSetting.mUnitGrid;
     xmax = (xmax + 100.0f) / TDSetting.mUnitGrid;
     ymin = (ymin - 100.0f) / TDSetting.mUnitGrid;
     ymax = (ymax + 100.0f) / TDSetting.mUnitGrid;
-    float x1 = toSceneX( xmin );
-    float x2 = toSceneX( xmax );
-    float y1 = toSceneY( ymin );
-    float y2 = toSceneY( ymax );
+    float x1 = toSceneX( xmin, ymin );
+    float x2 = toSceneX( xmax, ymax );
+    float y1 = toSceneY( xmin, ymin );
+    float y2 = toSceneY( ymin, ymax );
     // mDrawingSurface.setBounds( toSceneX( xmin ), toSceneX( xmax ), toSceneY( ymin ), toSceneY( ymax ) );
 
     DrawingPath dpath = null;
     for ( int x = Math.round(xmin); x <= xmax; x += 1 ) {
-      float x0 = toSceneX( x * TDSetting.mUnitGrid );
+      float x0 = toSceneX( x * TDSetting.mUnitGrid, x * TDSetting.mUnitGrid );
       addGridLine( x, x0, x0, y1, y2, surface );
     }
     for ( int y = Math.round(ymin); y <= ymax; y += 1 ) {
-      float y0 = toSceneY( y * TDSetting.mUnitGrid );
+      float y0 = toSceneY( y * TDSetting.mUnitGrid, y * TDSetting.mUnitGrid );
       addGridLine( y, x1, x2, y0, y0, surface );
     }
   }
 
-  static void addGrid( float xmin, float xmax, float ymin, float ymax, float xoff, float yoff, DrawingSurface surface )
+  void addGrid( float xmin, float xmax, float ymin, float ymax, float xoff, float yoff, DrawingSurface surface )
   {
     xmin = (xmin - 100.0f) / TDSetting.mUnitGrid;
     xmax = (xmax + 100.0f) / TDSetting.mUnitGrid;
     ymin = (ymin - 100.0f) / TDSetting.mUnitGrid;
     ymax = (ymax + 100.0f) / TDSetting.mUnitGrid;
-    float x1 = toSceneX( xmin ) - xoff;
-    float x2 = toSceneX( xmax ) - xoff;
-    float y1 = toSceneY( ymin ) - yoff;
-    float y2 = toSceneY( ymax ) - yoff;
+    float x1 = toSceneX( xmin, ymin ) - xoff;
+    float x2 = toSceneX( xmax, ymax ) - xoff;
+    float y1 = toSceneY( xmin, ymin ) - yoff;
+    float y2 = toSceneY( xmax, ymax ) - yoff;
     // mDrawingSurface.setBounds( toSceneX( xmin ), toSceneX( xmax ), toSceneY( ymin ), toSceneY( ymax ) );
 
     DrawingPath dpath = null;
     for ( int x = Math.round(xmin); x <= xmax; x += 1 ) {
-      float x0 = toSceneX( x * TDSetting.mUnitGrid ) - xoff;
+      float x0 = toSceneX( x * TDSetting.mUnitGrid, x * TDSetting.mUnitGrid ) - xoff;
       addGridLine( x, x0, x0, y1, y2, surface );
     }
     for ( int y = Math.round(ymin); y <= ymax; y += 1 ) {
-      float y0 = toSceneY( y * TDSetting.mUnitGrid ) - yoff;
+      float y0 = toSceneY( y * TDSetting.mUnitGrid, y * TDSetting.mUnitGrid ) - yoff;
       addGridLine( y, x1, x2, y0, y0, surface );
     }
-  }
-
-  static RectF getBoundingBox( DrawingCommandManager plot )
-  {
-    RectF bbox = new RectF( 0, 0, 0, 0 );
-    for ( ICanvasCommand cmd : plot.getCommands() ) {
-      if ( cmd.commandType() != 0 ) continue;
-      DrawingPath p = (DrawingPath)cmd;
-      bbox.union( p );
-    }
-    return bbox;
   }
 
 }
