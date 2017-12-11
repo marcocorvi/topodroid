@@ -7,7 +7,7 @@
     <string name="double_back">Haga doble click para salir</string>
 
     <string name="version_ask">Usted va a actualizar a una nueva versión de topodroid.\n¿Quiere volver a instalar los elementos de dibujo?</string>
-    <string name="symbols_ask">¿Quiere instalar herramientas de dibujo v.%1$s?\n(Actualiza v.%2$s)</string>
+    <string name="symbols_ask">¿Quiere instalar simbologías para el croquis v.%1$s?\n(Actualiza v.%2$s)</string>
 
     <string name="POINT">Punto</string>
     <string name="LINE">Línea</string>
@@ -209,9 +209,9 @@
     <!-- UNUSED string name="none">Nada</string -->
     <!-- UNUSED string name="barrier_add">¿Quiere dividir dibujo de la poligonal principal?</string -->
     <string name="hide_from">Ocultar desde</string>
-    <string name="barrier_del">¿Quiere unir dibujo de la poligonal principal?</string>
+    <string name="barrier_del">¿Quiere unir el croquis de la poligonal principal?</string>
     <!-- UNUSED string name="hidden_add">Oculta dibujo de la poligonal principal</string -->
-    <string name="hidden_del">Mostrar dibujo de la poligonal principal</string>
+    <string name="hidden_del">Mostrar el croquis de la poligonal principal</string>
     <string name="splays_toggle">Cambiar a tomas laterales</string>
     <string name="splays">Tomas laterales</string>
     <string name="fixed">Fijo</string>
@@ -236,7 +236,7 @@
     <string name="no_location_data">Sin datos de calibración</string>
     <string name="no_paired_device">Dispositivo no emparejado.\nEscanee y empareje DistoX</string>
     <string name="no_photos">Topografía sin foto</string>
-    <string name="no_plots">Topografía sin dibujos.\nPulse el botón para añadir uno</string>
+    <string name="no_plots">Topografía sin croquis.\nPulse el botón para añadir uno</string>
     <string name="no_profile_overview">Hay descripción para perfiles de proyectos</string>
     <string name="no_proj4">Proj4 no instalado</string>
     <string name="no_sensors">Topografía sin mediciones</string>
@@ -275,7 +275,7 @@
     <string name="menu_options">Opciones</string>
     <string name="menu_overview">Medir distancia</string>
     <string name="menu_pair">Emparejar</string>
-    <string name="menu_palette">Paleta</string>
+    <string name="menu_palette">Simbología</string>
     <string name="menu_photo">Tomas con foto</string>
     <string name="menu_sensor">Tomas con sensor</string>
     <string name="menu_scan">Escanear</string>
@@ -333,13 +333,13 @@
     <!-- UNUSED string name="photo_shot">Añadir toma</string -->
     <!-- UNUSED string name="photo_survey">Dividir topografía</string -->
     <!-- UNUSED string name="picture_no_station">Necesitas una estación / nombre para la foto</string -->
-    <string name="plot_delete">¿Quiere eliminar dibujo?</string>
+    <string name="plot_delete">¿Quiere eliminar el croquis?</string>
     <string name="item_delete">¿Quiere eliminar elemento %1$s?</string>
     <string name="splay_delete">¿Quiere eliminar tomas laterales %1$s ?</string>
-    <string name="plot_duplicate_name">Nombre de dibujo duplicado</string>
+    <string name="plot_duplicate_name">Nombre de croquis duplicado</string>
     <!-- UNUSED string name="plot_name">Nombre dibujo</string -->
-    <string name="plot_new">Nuevo dibujo</string>
-    <string name="plot_not_found">No hay dibujo</string>
+    <string name="plot_new">Nuevo croquis</string>
+    <string name="plot_not_found">No hay croquis</string>
     <!-- UNUSED string name="plot_null_name">Falta nombre dibujo</string -->
     <!-- UNUSED string name="plot_null_start">Falta base estación</string -->
     <!-- UNUSED string name="plot_recover">¿Actualizar copia de seguridad de la topografía?</string -->
@@ -361,7 +361,7 @@
     <!-- UNUSED string name="convert_tdr2th2">¿Sobrescribir archivos de dibujo Th2?</string -->
     <string name="section_area">Sección de área: %1$.1f</string>
     <string name="section_name">comentario de la sección</string>
-    <string name="scrap_outline">Dibujo de topografía</string>
+    <string name="scrap_outline">Contornos de otros croquis</string>
 
     <!-- UNUSED string name="sensor">Sensor</string -->
     <string name="sensor_gravity">Gravedad</string>
@@ -625,7 +625,7 @@
     <string name="man_survey">6. Datos de la Pantalla </string>
     <string name="man_shot">7. Lista de Tomas </string>
     <string name="man_info">8. Información de la Pantalla </string>
-    <string name="man_sketch">9. Pantalla de boceto </string>
+    <string name="man_sketch">9. Pantalla de croquis </string>
     <string name="man_draw">10. Dibujo de topografía </string>
     <string name="man_xsection">11. Secciones transversales </string>
     <string name="man_overview">12. Pantalla de descripción general </string>
@@ -636,7 +636,7 @@
 
     <string name="help_help">Ayuda</string>
     <!-- UNUSED string name="help_manual">Manual online</string -->
-    <string name="help_measure">Medir distancias</string>
+    <string name="help_measure">Vista general</string>
     <string name="help_measure_type">Modo de medición: punto fijo o polilínea</string>
     
     <string name="no_shot_between_stations">No hay tomas entre estaciones</string>
@@ -838,7 +838,7 @@
   <string name="pref_mkeyboard_summary">Activar/Desactivar los teclados personalizados</string>
   <string name="pref_local_help_title">Traducción del Manual</string>
   <string name="pref_local_help_summary">Activar la traducción del Manual</string>
-  <string name="pref_cosurvey_title">Topografía compartida</string>
+  <string name="pref_cosurvey_title">Cosurvey</string>
   <string name="pref_cosurvey_summary">Activar/Desactivar topografías compartidas</string>
   <string name="pref_export_shots_title">Formato de exportación de datos</string>
   <string name="pref_export_shots_summary">Formato de exportación de datos por defecto</string>
@@ -941,8 +941,8 @@
   <string name="pref_vert_splay_title">Límite de trazos del borde</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Límite de trazos del borde</string -->
   <string name="pref_vert_splay_message">Límite de trazos del borde</string>
-  <!-- TODO string name="pref_data_backup_title">Data auto-export</string -->
-  <!-- TODO string name="pref_data_backup_summary">Automatic data export (need default format)</string -->
+  <string name="pref_data_backup_title">Autoexportación de datos</string>
+  <string name="pref_data_backup_summary">Exportación automática de datos (necesita formato predeterminado)</string>
   <string name="pref_shared_xsections_title">Secciones x compartidas</string>
   <string name="pref_shared_xsections_summary">At-estación x-secciones compartidas entre dibujos</string>
   <string name="xsections_shared">Secciones-X compartidas</string>
