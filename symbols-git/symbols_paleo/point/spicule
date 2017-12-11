@@ -1,6 +1,7 @@
 symbol point
 name spicule
 name-pt espícula
+name-es espícula
 th_name u:spicule
 color 0xffffff
 csurvey 0 0 0

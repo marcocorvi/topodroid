@@ -1,6 +1,7 @@
 symbol point
 name fern
 name-pt samambaia
+name-es samambaia
 th_name u:fern
 color 0x33ff66
 csurvey 0 0 0

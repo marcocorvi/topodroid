@@ -942,8 +942,8 @@
   <string name="pref_vert_splay_title">Порог угла бок. замеров пунктиром</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Порог угла бок. замеров показанных пунктиром</string -->
   <string name="pref_vert_splay_message">Порог угла бок. замеров показанных пунктиром в плане</string>
-  <!-- TODO string name="pref_data_backup_title">Data auto-export</string -->
-  <!-- TODO string name="pref_data_backup_summary">Automatic data export (need default format)</string -->
+  <string name="pref_data_backup_title">Авто-экспорт данных/string>
+  <string name="pref_data_backup_summary">Автоматический экспорт данных (требуется установить формат по умолчанию)</string>
   <string name="pref_shared_xsections_title">Общий поперечный разрез</string>
   <string name="pref_shared_xsections_summary">Поперечные разреы на пикете общие для плана и разреза</string>
   <string name="xsections_shared">Общие поперечные разреы</string>
