@@ -218,6 +218,8 @@
     <string name="fixed">fixa</string>
     <string name="painted">pintada</string>
 
+    <!-- TODO string name="empty_cwd">Empty project name</string -->
+    <!-- TODO string name="bad_cbd">Base directory inexistent or not writable</string -->
     <string name="bad_cwd">O nome do projeto não pode incluir um diretório</string>
     <string name="bad_line">Tipo de linha inválido</string>
     <string name="bad_point">Tipo de ponto inválido</string>

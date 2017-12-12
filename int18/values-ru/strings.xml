@@ -219,6 +219,8 @@
     <string name="fixed">фиксированный репер</string>
     <string name="painted">нарисованный</string>
 
+    <!-- TODO string name="empty_cwd">Empty project name</string -->
+    <!-- TODO string name="bad_cbd">Base directory inexistent or not writable</string -->
     <string name="bad_cwd">Название проекта не может совпадать с путем к папке</string>
     <string name="bad_line">Недопустимый тип линии</string>
     <string name="bad_point">Недопустимый тип точки</string>
@@ -942,7 +944,7 @@
   <string name="pref_vert_splay_title">Порог угла бок. замеров пунктиром</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Порог угла бок. замеров показанных пунктиром</string -->
   <string name="pref_vert_splay_message">Порог угла бок. замеров показанных пунктиром в плане</string>
-  <string name="pref_data_backup_title">Авто-экспорт данных/string>
+  <string name="pref_data_backup_title">Авто-экспорт данных</string>
   <string name="pref_data_backup_summary">Автоматический экспорт данных (требуется установить формат по умолчанию)</string>
   <string name="pref_shared_xsections_title">Общий поперечный разрез</string>
   <string name="pref_shared_xsections_summary">Поперечные разреы на пикете общие для плана и разреза</string>

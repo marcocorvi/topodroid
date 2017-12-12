@@ -54,26 +54,45 @@ public class CWDActivity extends Activity
   private EditText mETcbd;
   private Button mBtnOK;
 
-  private void setPreference()
+  private boolean setPreference()
   {
     String dir_name  = mETcwd.getText().toString();
     String base_name = TDLevel.overExpert ? mETcbd.getText().toString() : mApp.mCBD ;
-    if ( dir_name == null ) return;
-    dir_name.trim();
-    if ( dir_name.length() == 0 ) return;
+    if ( base_name == null ) {
+      base_name = TDPath.PATH_BASEDIR;
+    } else {
+      base_name.trim();
+      if ( base_name.length() == 0 ) base_name = TDPath.PATH_BASEDIR;
+    }
+    // make sure base_dir exists and is writable
+    File base_dir = new File( base_name );
+    if ( ! ( base_dir.exists() && base_dir.canWrite() ) ) {
+      Toast.makeText( this, R.string.bad_cbd, Toast.LENGTH_SHORT ).show();
+      return false;
+    }
+
+    if ( dir_name == null ) {
+      Toast.makeText( this, R.string.empty_cwd, Toast.LENGTH_SHORT ).show();
+      return false;
+    } else {
+      dir_name.trim();
+      if ( dir_name.length() == 0 ) {
+        Toast.makeText( this, R.string.empty_cwd, Toast.LENGTH_SHORT ).show();
+	return false;
+      }
+    }
     if ( dir_name.indexOf("/") >= 0 ) {
       Toast.makeText( this, R.string.bad_cwd, Toast.LENGTH_SHORT ).show();
-      return;
+      return false;
     }
     if ( ! dir_name.toUpperCase().startsWith( "TOPODROID" ) ) {
       dir_name = "TopoDroid-" + dir_name;
     } else { 
       dir_name = "TopoDroid" + dir_name.substring(9);
     }
-    if ( base_name == null || base_name.length() == 0 ) base_name = TDPath.PATH_BASEDIR;
 
     if ( TDPath.checkBasePath( dir_name ) ) {
-      Log.v("DistoX", "dir name <" + dir_name + "> base dir <" + base_name + ">" );
+      // Log.v("DistoX", "dir name <" + dir_name + "> base dir <" + base_name + ">" );
       mApp.setCWDPreference( dir_name, base_name );
       Intent intent = new Intent();
       intent.putExtra( TDTag.TOPODROID_CWD, dir_name );
@@ -81,6 +100,7 @@ public class CWDActivity extends Activity
     } else {
       setResult( RESULT_CANCELED );
     }
+    return true;
   }
     
   public void updateDisplay( )
@@ -117,9 +137,9 @@ public class CWDActivity extends Activity
   {
     Button b = (Button)v;
     if ( b == mBtnOK ) {
-      setPreference();
-      finish();
+      if ( setPreference() ) finish();
     }
+    finish();
   }
   
   @Override

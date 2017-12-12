@@ -223,6 +223,8 @@
     <string name="fixed">fiksen</string>
     <string name="painted">barvast</string>
 
+    <!-- TODO string name="empty_cwd">Empty project name</string -->
+    <!-- TODO string name="bad_cbd">Base directory inexistent or not writable</string -->
     <string name="bad_cwd">Ime projekta ne more vsebovati direktorija</string>
     <string name="bad_line">Napačna  črta</string>
     <string name="bad_point">Napačna  točka</string>

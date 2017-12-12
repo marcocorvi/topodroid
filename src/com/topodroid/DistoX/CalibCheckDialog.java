@@ -91,10 +91,10 @@ public class CalibCheckDialog extends MyDialog
     int len = str.indexOf(" ");
     int id = Integer.parseInt( str.substring(0, len) );
     DBlock blk = null;
-    float x=0, y=0, z=0;
-    int n1 = 0;
-    int k = 0;
-    int k1 = 0;
+    float x=0, y=0, z=0; // vector sum of the data in the leg
+    int n1 = 0;          // number of data in the leg
+    int k1 = 0;          // index of the leg
+    int k  = 0;
     for ( DBlock b : mShots ) {
       if ( b.mId == id ) {
         if ( b.type() == DBlock.BLOCK_MAIN_LEG ) {
@@ -123,12 +123,12 @@ public class CalibCheckDialog extends MyDialog
       ++k;
     }
     if ( blk != null ) {
-      Vector v0 = new Vector( x, y, z );
-      float l0 = v0.Length();
+      Vector v0 = new Vector( x, y, z ); // unit vector along the leg
+      float l0 = v0.Length();            // length of leg vector
       v0.normalize();
       boolean in_leg = false;
-      int n2 = 0;
-      int k2 = 0;
+      int n2 = 0; // number of data in the opposite leg
+      int k2 = 0; // index of the opposite leg
       k = 0;
       for ( DBlock b : mShots ) {
         if ( ! in_leg ) {
@@ -146,7 +146,7 @@ public class CalibCheckDialog extends MyDialog
         }
         ++k;
       }
-      float errors1[] = new float[n1]; // radians
+      float errors1[] = new float[n1]; // angle differences between data in leg and leg average [radians]
       for ( k = 0; k<n1; ++k ) {
         DBlock b = mShots.get( k1 + k );
         float h = b.mLength * TDMath.cosd( b.mClino );
@@ -165,9 +165,9 @@ public class CalibCheckDialog extends MyDialog
             bb = mShots.get( k2 + kk );
             h = bb.mLength * TDMath.cosd( bb.mClino );
             Vector w2 = new Vector( h * TDMath.sind( bb.mBearing ), h * TDMath.cosd( bb.mBearing ), bb.mLength * TDMath.sind( bb.mClino ) );
-            w2.plusEqual( w1 );
-            w2.minusEqual( v0.times( v0.dot(w2) ) );
-            errors2[k*n2+kk] = w2.Length() / l0;
+            w2.plusEqual( w1 );                      // W1 + W2
+            w2.minusEqual( v0.times( v0.dot(w2) ) ); // (W1+W2) - V0 [ V0 * (W1+W2) ] part orthogonal to V0
+            errors2[k*n2+kk] = w2.Length() / l0;     // angle difference
           }
         }
         hist2.setImageBitmap( CalibCoeffDialog.makeHistogramBitmap( errors2, 400, 100, 40, 10, TDColor.LIGHT_GRAY ) );
