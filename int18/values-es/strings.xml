@@ -567,7 +567,7 @@
     <string name="symbol_mine">Minería</string>
     <string name="symbol_paleo">Paleontología</string>
     <string name="symbol_speleo">Espeleo</string>
-    <string name="symbol_extra">Espeleo (2)</string>
+    <string name="symbol_extra">Espeleo(2) </string>
 
     <string name="symbol_reload">Herramientas dibujo</string>
 
@@ -680,13 +680,13 @@
     <string name="help_info_shot">Estadísticas de topografía</string>
     <string name="help_survey_info">Información topografía</string>
     <string name="help_undelete">Recuperar datos eliminados</string>
-    <string name="help_photo">Opciones de Fotos</string>
-    <string name="help_sensor">Opciones de medidas</string>
+    <string name="help_photo">Ajustes de Fotos</string>
+    <string name="help_sensor">Ajustes de medidas</string>
     <string name="help_3d">Visualizar en 3D(Cave3D)</string>
     <string name="help_move">Modo Mover/zoom</string>
     <string name="help_draw">Seleccinar herramienta de dibujo</string>
     <string name="help_edit">Seleccionar modo de edición</string>
-    <string name="help_refs">Opciones de visualización del dibujo</string>
+    <string name="help_refs">Ajustes de visualización del dibujo</string>
     <string name="help_rename">Cambio nombre topografía</string>
     <string name="help_plot_rename">Eliminar/Renombrar dibujo</string>
     <string name="help_plot_switch">Activación dibujo</string>
@@ -821,13 +821,13 @@
     <string name="title_calib_export">Exportar topografía como&#8230;</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-  <string name="pref_cat_survey">Opciones de topografía</string>
-  <string name="pref_cat_drawing">Opciones de dibujo</string>
+  <string name="pref_cat_survey">Ajustes de topografía</string>
+  <string name="pref_cat_drawing">Ajustes de dibujo</string>
   <string name="pref_cat_import_export">Importar/Exportar</string>
-  <string name="pref_cat_calib">Opciones de calibración</string>
-  <string name="pref_cat_device">Opciones de distoX</string>
+  <string name="pref_cat_calib">Ajustes de calibración</string>
+  <string name="pref_cat_device">Ajustes de distoX</string>
   <!-- NO string name="pref_cat_sketch">Opciones de dibujo</string -->
-  <string name="pref_cat_log">Opciones de dibujo</string>
+  <string name="pref_cat_log">Ajustes de dibujo</string>
 
 
   <string name="pref_locale_title">Idioma</string>
@@ -923,7 +923,7 @@
   <!-- UNUSED string name="pref_gps_averaging_title">Promedio GPS</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Uso promedio GPS</string -->
 
-  <string name="pref_plot_screen_title">Opciones de pantalla de dibujo</string>
+  <string name="pref_plot_screen_title">Opciones de pantalla de croquis</string>
   <string name="pref_tool_line_title">Opciones de línea</string>
   <string name="pref_tool_point_title">Opciones de Puntos</string>
   <string name="pref_location_title">Opciones de ubicación</string>
