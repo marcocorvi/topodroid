@@ -219,8 +219,8 @@
     <string name="fixed">фиксированный репер</string>
     <string name="painted">нарисованный</string>
 
-    <!-- TODO string name="empty_cwd">Empty project name</string -->
-    <!-- TODO string name="bad_cbd">Base directory inexistent or not writable</string -->
+    <string name="empty_cwd">Название проекта не задано</string>
+    <string name="bad_cbd">Базовая директория отсутствует либо не доступна для записи</string>
     <string name="bad_cwd">Название проекта не может совпадать с путем к папке</string>
     <string name="bad_line">Недопустимый тип линии</string>
     <string name="bad_point">Недопустимый тип точки</string>
@@ -480,7 +480,7 @@
     <string name="profile">РАЗРЕЗ-ПРОЕКЦИЯ</string>
     <!-- UNUSED string name="v_section">Верт-СЕЧЕНИЕ</string -->
     <string name="h_section">Гор-СЕЧЕНИЕ</string>
-    <!-- TODO string name="landscape">landscape</string -->
+    <string name="landscape">альбомная</string>
 
     <!-- OK string name="distox_err_ok">OK</string -->
     <string name="distox_err_headtail">Ошибка чтения памяти DistoX</string>
@@ -858,12 +858,12 @@
   <string name="pref_ortho_lrud_title">Мин. угол бок. замера для ЛПВН</string>
   <string name="pref_ortho_lrud_summary">Минимальный угол между бок. замером и вектором для расчета ЛПВН при экспорте</string>
   <string name="pref_ortho_lrud_message">Мин. угол между бок. замером и вектором для расчета ЛПВН </string>
-  <!-- TODO string name="pref_lrud_vertical_title">UD min splay clino</string -->
-  <!-- TODO string name="pref_lrud_vertical_summary">LRUD up/down minimum splay clino</string -->
-  <!-- TODO string name="pref_lrud_vertical_message">LRUD up/down minimum splay clino</string -->
-  <!-- TODO string name="pref_lrud_horizontal_title">LR max splay clino</string -->
-  <!-- TODO string name="pref_lrud_horizontal_summary">LRUD left/right maximum splay clino</string -->
-  <!-- TODO string name="pref_lrud_horizontal_message">LRUD left/right maximum splay clino</string -->
+  <string name="pref_lrud_vertical_title">ВН мин. наклон боковых замеров</string>
+  <string name="pref_lrud_vertical_summary">ЛПВН вверх/вниз  минимальный наклон боковых замеров</string>
+  <string name="pref_lrud_vertical_message">ЛПВН вверх/вниз  минимальный наклон боковых замеров</string>
+  <string name="pref_lrud_horizontal_title">ЛП макс. наклон боковых замеров</string>
+  <string name="pref_lrud_horizontal_summary">ЛПВН лево/право максимальный наклон боковых замеров</string>
+  <string name="pref_lrud_horizontal_message">ЛПВН лево/право максимальный наклон боковых замеров</string>
   <string name="pref_survex_eol_title">Окончание строки для Survex/Topo</string>
   <string name="pref_survex_eol_summary">Формат окончания строки Survex/Topo</string>
   <string name="pref_survex_splay_title">Конечный пикет луча Survex</string>
