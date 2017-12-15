@@ -341,7 +341,7 @@
     <string name="plot_delete">Удалить абрис ?</string>
     <string name="item_delete">Удалить пункт %1$s ?</string>
     <string name="splay_delete">Удалить бок. замер %1$s ?</string>
-    <string name="plot_duplicate_name">Дублировать название абриса</string>
+    <string name="plot_duplicate_name">Абрис с таким названием уже существует</string>
     <!-- UNUSED string name="plot_name">Название абриса</string -->
     <string name="plot_new">Новый абрис</string>
     <string name="plot_not_found">Абрис не обнаружен</string>
