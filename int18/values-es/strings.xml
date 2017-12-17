@@ -983,7 +983,7 @@
   <string name="pref_backsight_summary">Se duplican los datos en el diálogo de la toma manual</string>
   <string name="pref_prev_next_title">Añadir botón Ant./Sig.</string>
   <string name="pref_prev_next_summary">Añade un botón Anterior/Sguiente en diálogo de toma</string>
-  <string name="pref_mag_anomaly_title">Declinación magnética</string>
+  <string name="pref_mag_anomaly_title">Compensación magnética</string>
   <string name="pref_mag_anomaly_summary">Compensar declinación magnética local</string>
   <string name="pref_azimuth_manual_title">Toma extendida</string>
   <string name="pref_azimuth_manual_summary">fijas o con relación a la referencia extendida</string>
