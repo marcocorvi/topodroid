@@ -872,10 +872,10 @@
   <!-- TODO string name="pref_lrud_horizontal_message">LRUD left/right maximum splay clino</string -->
   <string name="pref_survex_eol_title">Terminación de línea Survex/Topo</string>
   <string name="pref_survex_eol_summary">Terminación de línea Survex/Topo</string>
-  <string name="pref_survex_splay_title">Estación toma lateral Survex</string>
-  <string name="pref_survex_splay_summary">Añadir a la estación toma lateral en Survex</string>
+  <string name="pref_survex_splay_title">Estación toma radial Survex</string>
+  <string name="pref_survex_splay_summary">Añadir a la estación toma radial en Survex</string>
   <string name="pref_survex_lrud_title">LRUD Survex</string>
-  <string name="pref_survex_lrud_summary">Añadir toma lateral a exportación Survex</string>
+  <string name="pref_survex_lrud_summary">Añadir toma radial a exportación Survex</string>
   <string name="pref_svg_grid_title">SVG parrilla</string>
   <string name="pref_svg_grid_summary">Añadir una parrilla a la exportación SVG</string>
   <string name="pref_svg_in_html_title">SVG en HTML</string>
@@ -884,8 +884,8 @@
   <string name="pref_svg_line_dir_summary">Agregue flecha de orientación a la exportación de SVG</string>
   <string name="pref_kml_stations_title">Estaciones en KML</string>
   <string name="pref_kml_stations_summary">Añadir estaciones a la exportación de KML</string>
-  <string name="pref_kml_splays_title">Tomas laterales en KML</string>
-  <string name="pref_kml_splays_summary">Añadir tomas laterales a la exportación de KML</string>
+  <string name="pref_kml_splays_title">Tomas radiales en KML</string>
+  <string name="pref_kml_splays_summary">Añadir tomas radiales a la exportación de KML</string>
 
   <string name="pref_sock_type_title">Emparejar</string>
   <string name="pref_sock_type_summary">Crear emparejamiento</string>
@@ -923,12 +923,12 @@
   <!-- UNUSED string name="pref_gps_averaging_title">Promedio GPS</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Uso promedio GPS</string -->
 
-  <string name="pref_plot_screen_title">Opciones de pantalla de croquis</string>
-  <string name="pref_tool_line_title">Opciones de línea</string>
-  <string name="pref_tool_point_title">Opciones de Puntos</string>
-  <string name="pref_location_title">Opciones de ubicación</string>
-  <string name="pref_accuracy_title">Opciones de medición</string>
-  <string name="pref_shot_data_title">Opciones de visuales</string>
+  <string name="pref_plot_screen_title">Ajustes de pantalla de croquis</string>
+  <string name="pref_tool_line_title">Ajustes de línea</string>
+  <string name="pref_tool_point_title">Ajustes de Puntos</string>
+  <string name="pref_location_title">Ajustes de ubicación</string>
+  <string name="pref_accuracy_title">Ajustes de medición</string>
+  <string name="pref_shot_data_title">Ajustes de visuales</string>
   <string name="pref_shot_units_title">Unidades de medida</string>
   <string name="pref_cwd_title">Directorio principal</string>
   <!-- UNUSED string name="pref_cwd_summary">Directorio principal TopoDroid</string -->
@@ -973,9 +973,9 @@
   <string name="pref_leg_title">Precisión de visual</string>
   <string name="pref_leg_summary">Precisión entre las mediciones de una visual</string>
   <string name="pref_leg_message">Precisión entre las mediciones de una visual</string>
-  <string name="pref_max_shot_title">Longitud de disparo máxima</string>
-  <string name="pref_max_shot_summary">Longitud máxima de disparo [m]</string>
-  <string name="pref_max_shot_message">Las tomas sobre esta longitud se marcan como sobrepaso</string>
+  <string name="pref_max_shot_title">Longitud máxima de la toma</string>
+  <string name="pref_max_shot_summary">Máxima longitud que debe alcanzar la toma [m]</string>
+  <string name="pref_max_shot_message">Las tomas mas grandes de esta longitud se marcan como sobrepaso</string>
   <string name="pref_min_leg_title">Longitud mínima de la toma</string>
   <string name="pref_min_leg_summary">Minima longitud de la toma [m]</string>
   <string name="pref_min_leg_message">Las tomas más cortas que el mínimo, tienen fondo naranja</string>
