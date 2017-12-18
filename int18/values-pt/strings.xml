@@ -184,9 +184,11 @@
     <string name="error_group_non_integer">O grupo deve ser um número inteiro</string>
     <string name="error_alt_required">Altitude exigida</string>
     <string name="error_invalid_number">Número inválido</string>
+    <!-- TODO string name="error_invalid_name">Invalid name</string -->
     <string name="error_lat_required">Latitude exigida</string>
     <string name="error_long_required">Longitude exigida</string>
     <string name="error_name_required">Nome exigido</string>
+    <!-- TODO string name="error_dir_exists">Directory already exists</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Estação de referência exigida</string>
     <!-- UNUSED string name="error_station_already_fixed">Base já tem coordenadas</string -->
@@ -218,6 +220,8 @@
     <string name="fixed">fixa</string>
     <string name="painted">pintada</string>
 
+    <!-- TODO string name="cbd_title">Base directory</string -->
+    <!-- TODO string name="cwd">TopoDroid project directory</string -->
     <!-- TODO string name="empty_cwd">Empty project name</string -->
     <!-- TODO string name="bad_cbd">Base directory inexistent or not writable</string -->
     <string name="bad_cwd">O nome do projeto não pode incluir um diretório</string>
@@ -493,7 +497,9 @@
     <string name="button_add"       >Novo       </string>
     <string name="button_back"      >Voltar     </string>
     <string name="button_cancel"    >Cancelar   </string>
+    <!-- TODO string name="button_change"    >Change    </string -->
     <string name="button_close"     >Fechar     </string>
+    <!-- TODO string name="button_create"    >Create    </string -->
     <string name="button_convert"   >Converter  </string>
     <string name="button_current"   >Atual      </string>
     <string name="button_delete"    >Apagar     </string>
@@ -1196,6 +1202,7 @@
   <string name="pref_log_input">Entrada pelo usuário</string>
   <string name="pref_log_loc">Localização</string>
   <string name="pref_log_num">Redução de dados</string>
+  <!-- TODO string name="pref_log_path">File paths</string -->
   <string name="pref_log_photo">Foto</string>
   <string name="pref_log_plot">Croquis</string>
   <string name="pref_log_proto">Protocolo DistoX</string>

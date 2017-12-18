@@ -184,9 +184,11 @@
 <string name="error_group_non_integer">Groupe doit être un chiffre rond</string>
 <string name="error_alt_required">Altitude nécessaire</string>
 <string name="error_invalid_number">Nombre invalide</string>
+    <!-- TODO string name="error_invalid_name">Invalid name</string -->
 <string name="error_lat_required">Latitude nécessaire</string>
 <string name="error_long_required">Longitude nécessaire</string>
 <string name="error_name_required">Nom nécessaire</string>
+    <!-- TODO string name="error_dir_exists">Directory already exists</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
 <string name="error_start_required">Station de référence nécessaire</string>
 <!-- UNUSED string name="error_station_already_fixed">cette Station a deja des coordonées</string -->
@@ -218,6 +220,8 @@
 <string name="fixed">fixé</string>
 <string name="painted">dessiné</string>
 
+    <!-- TODO string name="cbd_title">Base directory</string -->
+    <!-- TODO string name="cwd">TopoDroid project directory</string -->
     <!-- TODO string name="empty_cwd">Empty project name</string -->
     <!-- TODO string name="bad_cbd">Base directory inexistent or not writable</string -->
 <string name="bad_cwd">Le nom du projet ne peut être son chemin</string>
@@ -494,7 +498,9 @@
     <string name="button_add"       >Ajouter       </string>
     <string name="button_back"      >Retour     </string>
     <string name="button_cancel"    >Annuler    </string>
+    <!-- TODO string name="button_change"    >Change    </string -->
     <string name="button_close"     >Fermer     </string>
+    <!-- TODO string name="button_create"    >Create    </string -->
     <string name="button_convert"   >Convertir   </string>
     <string name="button_current"   >Courant   </string>
     <string name="button_delete"    >Supprimer    </string>
@@ -1196,6 +1202,7 @@
   <string name="pref_log_input">Entrées utilisateur</string>
   <string name="pref_log_loc">Géocalisation</string>
   <string name="pref_log_num">Réduction données</string>
+  <!-- TODO string name="pref_log_path">File paths</string -->
   <string name="pref_log_photo">Photo</string>
   <string name="pref_log_plot">Points</string>
   <string name="pref_log_proto">Protocole</string>

@@ -185,9 +185,11 @@
     <string name="error_group_non_integer">Номер группы должен быть целым числом</string>
     <string name="error_alt_required">Требуется высота над уровнем моря</string>
     <string name="error_invalid_number">Недопустимое значение</string>
+    <!-- TODO string name="error_invalid_name">Invalid name</string -->
     <string name="error_lat_required">Требуется широта</string>
     <string name="error_long_required">Требуется долгота</string>
     <string name="error_name_required">Требуется название</string>
+    <!-- TODO string name="error_dir_exists">Directory already exists</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Требуется привязка к пикету</string>
     <!-- UNUSED string name="error_station_already_fixed">Пикет уже имеет координаты</string -->
@@ -219,6 +221,8 @@
     <string name="fixed">фиксированный репер</string>
     <string name="painted">нарисованный</string>
 
+    <!-- TODO string name="cbd_title">Base directory</string -->
+    <!-- TODO string name="cwd">TopoDroid project directory</string -->
     <string name="empty_cwd">Название проекта не задано</string>
     <string name="bad_cbd">Базовая директория отсутствует либо не доступна для записи</string>
     <string name="bad_cwd">Название проекта не может совпадать с путем к папке</string>
@@ -496,7 +500,9 @@
     <string name="button_add"       >Добавить  </string>
     <string name="button_back"      >Назад     </string>
     <string name="button_cancel"    >Отмена    </string>
+    <!-- TODO string name="button_change"    >Change    </string -->
     <string name="button_close"     >Закрыть   </string>
+    <!-- TODO string name="button_create"    >Create    </string -->
     <string name="button_convert"   >Конвертир.</string>
     <string name="button_current"   >Текущий   </string>
     <string name="button_delete"    >Удалить   </string>
@@ -1198,6 +1204,7 @@
   <string name="pref_log_input">Входные данные</string>
   <string name="pref_log_loc">Местоположение</string>
   <string name="pref_log_num">Сжатие данных</string>
+  <!-- TODO string name="pref_log_path">File paths</string -->
   <string name="pref_log_photo">Фото</string>
   <string name="pref_log_plot">Абрисы</string>
   <string name="pref_log_proto">Протокол DistoX</string>

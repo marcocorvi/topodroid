@@ -189,9 +189,11 @@
     <string name="error_group_non_integer">Skupina mora biti celo število</string>
     <string name="error_alt_required">Manjkajoča višina</string>
     <string name="error_invalid_number">Manjkajoča vrednost</string>
+    <!-- TODO string name="error_invalid_name">Invalid name</string -->
     <string name="error_lat_required">Manjkajoča širina</string>
     <string name="error_long_required">Manjkajoča dolžina</string>
     <string name="error_name_required">Manjkajoča ime</string>
+    <!-- TODO string name="error_dir_exists">Directory already exists</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Manjkajoča ref točka</string>
     <!-- UNUSED string name="error_station_already_fixed">Caposaldo già con coordinate</string -->
@@ -223,6 +225,8 @@
     <string name="fixed">fiksen</string>
     <string name="painted">barvast</string>
 
+    <!-- TODO string name="cbd_title">Base directory</string -->
+    <!-- TODO string name="cwd">TopoDroid project directory</string -->
     <!-- TODO string name="empty_cwd">Empty project name</string -->
     <!-- TODO string name="bad_cbd">Base directory inexistent or not writable</string -->
     <string name="bad_cwd">Ime projekta ne more vsebovati direktorija</string>
@@ -500,7 +504,9 @@
     <!-- TODO string name="button_add">Insert  </string -->
     <string name="button_back"      >Nazaj  </string>
     <string name="button_cancel"    >Briši   </string>
+    <!-- TODO string name="button_change"    >Change    </string -->
     <!-- TODO string name="button_close">Close     </string -->
+    <!-- TODO string name="button_create"    >Create    </string -->
     <string name="button_convert"   >Pretvori </string>
     <string name="button_current"   >Trenuten   </string>
     <string name="button_delete"    >Odstrani   </string>
@@ -1198,6 +1204,7 @@
   <string name="pref_log_input">Vnos uporabnika</string>
   <string name="pref_log_loc">Pozicija GPS</string>
   <string name="pref_log_num">Pomanjšanje poligona</string>
+  <!-- TODO string name="pref_log_path">File paths</string -->
   <string name="pref_log_photo">Foto</string>
   <string name="pref_log_plot">Skice</string>
   <string name="pref_log_proto">Protokol DistoX</string>

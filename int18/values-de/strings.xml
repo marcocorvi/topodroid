@@ -189,9 +189,11 @@
     <string name="error_group_non_integer">Gruppennummer muss eine ganze Zahl sein</string>
     <string name="error_alt_required">Höhe erforderlich</string>
     <string name="error_invalid_number">Ungültige Anzahl</string>
+    <!-- TODO string name="error_invalid_name">Invalid name</string -->
     <string name="error_lat_required">Breite erforderlich</string>
     <string name="error_long_required">Länge erforderlich</string>
     <string name="error_name_required">Name erforderlich</string>
+    <!-- TODO string name="error_dir_exists">Directory already exists</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Referenzmesspunkt erforderlich</string>
     <!-- UNUSED string name="error_station_already_fixed">Dauerhafter Messpunkt</string -->
@@ -223,6 +225,8 @@
     <string name="fixed">fixiert</string>
     <string name="painted">gezeichnet</string>
 
+    <!-- TODO string name="cbd_title">Base directory</string -->
+    <!-- TODO string name="cwd">TopoDroid project directory</string -->
     <!-- TODO string name="empty_cwd">Empty project name</string -->
     <!-- TODO string name="bad_cbd">Base directory inexistent or not writable</string -->
     <string name="bad_cwd">Der Projektname kann nicht der Pfad sein</string>
@@ -512,7 +516,9 @@
     <string name="button_add"       >Erstellen       </string>
     <string name="button_back"      >Zurück    </string>
     <string name="button_cancel"    >Abbrechen </string>
+    <!-- TODO string name="button_change"    >Change    </string -->
     <string name="button_close"     >Schließen     </string>
+    <!-- TODO string name="button_create"    >Create    </string -->
     <string name="button_convert"   >Konvertieren </string>
     <string name="button_current"   >Hier fortsetzen   </string>
     <string name="button_delete"    >Löschen    </string>
@@ -1224,6 +1230,7 @@
   <string name="pref_log_input">Benutzereingaben</string>
   <string name="pref_log_loc">Position</string>
   <string name="pref_log_num">Daten Reduktion</string>
+  <!-- TODO string name="pref_log_path">File paths</string -->
   <string name="pref_log_photo">Foto</string>
   <string name="pref_log_plot">Skizzen</string>
   <string name="pref_log_proto">DistoX Protokoll</string>

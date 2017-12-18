@@ -183,9 +183,11 @@
     <string name="error_group_non_integer">组编号必须是整数</string>
     <string name="error_alt_required">需输入标度</string>
     <string name="error_invalid_number">无效数字</string>
+    <!-- TODO string name="error_invalid_name">Invalid name</string -->
     <string name="error_lat_required">需输入纬度</string>
     <string name="error_long_required">需输入经度</string>
     <string name="error_name_required">需输入名称</string>
+    <!-- TODO string name="error_dir_exists">Directory already exists</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">需输入参考测点</string>
     <!-- UNUSED string name="error_station_already_fixed">测点已有坐标</string -->
@@ -217,6 +219,8 @@
     <!-- TODO string name="fixed">fixed</string -->
     <!-- TODO string name="painted">painted</string -->
 
+    <!-- TODO string name="cbd_title">Base directory</string -->
+    <!-- TODO string name="cwd">TopoDroid project directory</string -->
     <!-- TODO string name="empty_cwd">Empty project name</string -->
     <!-- TODO string name="bad_cbd">Base directory inexistent or not writable</string -->
     <string name="bad_cwd">项目名称不能作为路径</string>
@@ -493,7 +497,9 @@
     <string name="button_add"       >添加       </string>
     <string name="button_back"      >返回      </string>
     <string name="button_cancel"    >退出    </string>
+    <!-- TODO string name="button_change"    >Change    </string -->
     <!-- TODO string name="button_close"     >Close     </string -->
+    <!-- TODO string name="button_create"    >Create    </string -->
     <string name="button_convert"   >转换   </string>
     <!-- TODO string name="button_current"   >Current   </string -->
     <string name="button_delete"    >删除    </string>
@@ -1198,6 +1204,7 @@
   <string name="pref_log_input">用户输入</string>
   <string name="pref_log_loc">位置坐标</string>
   <string name="pref_log_num">数据压缩</string>
+  <!-- TODO string name="pref_log_path">File paths</string -->
   <string name="pref_log_photo">照片</string>
   <string name="pref_log_plot">草图</string>
   <string name="pref_log_proto">DistoX 协议</string>

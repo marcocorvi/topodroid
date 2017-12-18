@@ -184,9 +184,11 @@
     <string name="error_group_non_integer">A csoport számnak egész számnak kell lennie</string>
     <string name="error_alt_required">Magassági adat szükséges</string>
     <string name="error_invalid_number">Érvénytelen szám</string>
+    <!-- TODO string name="error_invalid_name">Invalid name</string -->
     <string name="error_lat_required">Szélességi adat szükséges</string>
     <string name="error_long_required">Hosszúsági adat szükséges</string>
     <string name="error_name_required">Név szükséges</string>
+    <!-- TODO string name="error_dir_exists">Directory already exists</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Referencia állomás szükséges</string>
     <!-- UNUSED string name="error_station_already_fixed">Station already with coordinates</string -->
@@ -218,6 +220,8 @@
     <string name="fixed">csavarral állandósított</string>
     <string name="painted">felfestett</string>
 
+    <!-- TODO string name="cbd_title">Base directory</string -->
+    <!-- TODO string name="cwd">TopoDroid project directory</string -->
     <!-- TODO string name="empty_cwd">Empty project name</string -->
     <!-- TODO string name="bad_cbd">Base directory inexistent or not writable</string -->
     <string name="bad_cwd">Projekt neve nem lehet elérési útvonal</string>
@@ -495,7 +499,9 @@
     <string name="button_add"       >Hozzáad       </string>
     <string name="button_back"      >Vissza    </string>
     <string name="button_cancel"    >Kilép     </string>
+    <!-- TODO string name="button_change"    >Change    </string -->
     <string name="button_close"     >Bezár     </string>
+    <!-- TODO string name="button_create"    >Create    </string -->
     <string name="button_convert"   >Átalakít  </string>
     <string name="button_current"   >Jelenlegi</string>
     <string name="button_delete"    >Töröl     </string>
@@ -1195,6 +1201,7 @@
   <string name="pref_log_input">Felhasználói adatbevitel</string>
   <string name="pref_log_loc">Helyszín</string>
   <string name="pref_log_num">Adat redukció</string>
+  <!-- TODO string name="pref_log_path">File paths</string -->
   <string name="pref_log_photo">Fotó</string>
   <string name="pref_log_plot">Vázlatok</string>
   <string name="pref_log_proto">DistoX protokol</string>

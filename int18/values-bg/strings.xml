@@ -185,9 +185,11 @@
     <string name="error_group_non_integer">Номерът на група трябва да е цяло число</string>
     <string name="error_alt_required">Необходима височина</string>
     <string name="error_invalid_number">Невалидно число</string>
+    <!-- TODO string name="error_invalid_name">Invalid name</string -->
     <string name="error_lat_required">Необходима геогр. широчина</string>
     <string name="error_long_required">Необходима геогр. дължина</string>
     <string name="error_name_required">Необходимо име</string>
+    <!-- TODO string name="error_dir_exists">Directory already exists</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Необходим репер</string>
     <!-- UNUSED string name="error_station_already_fixed">Репера вече има координати</string -->
@@ -219,6 +221,8 @@
     <string name="fixed">Фиксиран</string>
     <string name="painted">Боядисан</string>
 
+    <!-- TODO string name="cbd_title">Base directory</string -->
+    <!-- TODO string name="cwd">TopoDroid project directory</string -->
     <!-- TODO string name="empty_cwd">Empty project name</string -->
     <!-- TODO string name="bad_cbd">Base directory inexistent or not writable</string -->
     <string name="bad_cwd">Името на проекта не може да бъде директория</string>
@@ -496,7 +500,9 @@
     <string name="button_add"       >Добавяне  </string>
     <string name="button_back"      >Обратно   </string>
     <string name="button_cancel"    >Отказ     </string>
+    <!-- TODO string name="button_change"    >Change    </string -->
     <string name="button_close"     >Затваряне </string>
+    <!-- TODO string name="button_create"    >Create    </string -->
     <string name="button_convert"   >Конверт.  </string>
     <string name="button_current"   >Направи текущ</string>
     <string name="button_delete"    >Изтриване </string>
@@ -1199,6 +1205,7 @@
   <string name="pref_log_input">Входни данни</string>
   <string name="pref_log_loc">Местоположение</string>
   <string name="pref_log_num">Редуциране на данни</string>
+  <!-- TODO string name="pref_log_path">File paths</string -->
   <string name="pref_log_photo">Снимки</string>
   <string name="pref_log_plot">Скици</string>
   <string name="pref_log_proto">DistoX протокол</string>
