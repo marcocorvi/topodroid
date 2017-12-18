@@ -80,6 +80,7 @@ public class DrawingCommandManager
 
   private Matrix mMatrix;
   private float  mScale; // current zoom: value of 1 pl in scene space
+  private boolean mLandscape = false;
 
   // DrawingPath              getNorth()        { return mNorthLine;    }
   List<ICanvasCommand>     getCommands()     { return mCurrentStack; }
@@ -433,16 +434,25 @@ public class DrawingCommandManager
   /* Set the transform matrix for the canvas rendering of the drawing
    * The matrix is diag(s*dx, s*dy)
    */
-  public void setTransform( float dx, float dy, float s )
+  public void setTransform( float dx, float dy, float s, boolean landscape )
   {
+    mLandscape = landscape;
+    mScale  = 1 / s;
     mMatrix = new Matrix();
+    if ( landscape ) {
+      mMatrix.postRotate(-90,0,0);
+      mBBox.left   = - mScale * TopoDroidApp.mDisplayHeight + dy;      // scene coords
+      mBBox.right  =   dy; 
+      mBBox.top    = - dx;
+      mBBox.bottom =   mScale * TopoDroidApp.mDisplayWidth - dx;
+    } else {
+      mBBox.left   = - dx;      // scene coords
+      mBBox.right  = mScale * TopoDroidApp.mDisplayWidth - dx; 
+      mBBox.top    = - dy;
+      mBBox.bottom = mScale * TopoDroidApp.mDisplayHeight - dy;
+    }
     mMatrix.postTranslate( dx, dy );
     mMatrix.postScale( s, s );
-    mScale  = 1 / s;
-    mBBox.left   = - dx;      // scene coords
-    mBBox.right  = mScale * TopoDroidApp.mDisplayWidth - dx; 
-    mBBox.top    = - dy;
-    mBBox.bottom = mScale * TopoDroidApp.mDisplayHeight - dy;
 
     synchronized ( mCurrentStack ) {
       final Iterator i = mCurrentStack.iterator();
@@ -450,6 +460,7 @@ public class DrawingCommandManager
         final ICanvasCommand c = (ICanvasCommand) i.next();
         if ( c.commandType() == 0 ) {
           DrawingPath path = (DrawingPath)c;
+	  path.mLandscape = landscape;
           if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
             DrawingAreaPath area = (DrawingAreaPath)path;
             area.shiftShaderBy( dx, dy, s );
@@ -1442,7 +1453,7 @@ public class DrawingCommandManager
         }
         if ( mNorthLine != null ) mNorthLine.draw( canvas, mMatrix, mScale, mBBox );
         if(scaleRef && (mScaleRef != null)) {
-          mScaleRef.draw(canvas, zoom);
+          mScaleRef.draw(canvas, zoom, mLandscape);
         }
       }
     }
@@ -2711,6 +2722,5 @@ public class DrawingCommandManager
     }
     return bbox;
   }
-
 
 }

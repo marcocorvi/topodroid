@@ -531,6 +531,9 @@
     <!-- UNUSED string name="button_stop"      >Stop</string -->
     <string name="button_upload"    >Cargar    </string>
     <string name="button_view"      >Ver       </string>
+    <!-- TODO string name="button_zoomfit"   >Zoom fit  </string -->
+    <!-- TODO string name="button_landscape" >Landscape </string -->
+    <!-- TODO string name="button_portrait"  >Portrait  </string -->
 
 
     <string name="button_write"     >Enviar calibración a distoX</string>
@@ -818,6 +821,7 @@
     <string name="title_survey_export">Exportar topografías</string>
     <string name="title_survey_rename">Renombrar topografía como&#8230;</string>
     <string name="title_plot_rename">Cambiar el nombre topografía</string>
+    <!-- TODO string name="title_plot_zoomfit">Zoom fit / Orientation</string -->
     <string name="title_calib_export">Exportar topografía como&#8230;</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 

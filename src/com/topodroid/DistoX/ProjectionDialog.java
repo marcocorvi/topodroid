@@ -99,7 +99,6 @@ public class ProjectionDialog extends MyDialog
   private String mName;
   private String mFrom;
   private int  mAzimuth = 0;
-  private boolean mLandscape;
 
   private float mBorderRight      = 4096;
   private float mBorderLeft       = 0;
@@ -110,7 +109,7 @@ public class ProjectionDialog extends MyDialog
   List<DBlock> mList = null;
 
 
-  public ProjectionDialog( Context context, ShotWindow parent, long sid, String name, String from, boolean landscape )
+  public ProjectionDialog( Context context, ShotWindow parent, long sid, String name, String from )
   {
     super( context, R.string.ProjectionDialog ); // FIXME
     mParent = parent;
@@ -120,7 +119,6 @@ public class ProjectionDialog extends MyDialog
     mFrom   = from;
     mAzimuth = 0;
     mApp     = mParent.getApp();
-    mLandscape = landscape;
   }
 
   void updateEditText() 
@@ -606,7 +604,7 @@ public class ProjectionDialog extends MyDialog
      Button b = (Button)view;
      if ( b == mBtnOk ) {
        mDrawingSurface.stopDrawingThread();
-       mParent.doProjectedProfile( mName, mFrom, mAzimuth, mLandscape );
+       mParent.doProjectedProfile( mName, mFrom, mAzimuth );
        dismiss();
      } else if ( b == mBtnPlus ) {
        setAzimuth( mAzimuth + 1, true );

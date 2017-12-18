@@ -1311,13 +1311,13 @@ public class ShotWindow extends Activity
     return mApp.mData.hasSurveyStation( mApp.mSID, start );
   }
 
-  public void makeNewPlot( String name, String start, boolean extended, int project, boolean landscape )
+  public void makeNewPlot( String name, String start, boolean extended, int project )
   {
-    long mPIDp = mApp.insert2dPlot( mApp.mSID, name, start, extended, project, landscape );
+    long mPIDp = mApp.insert2dPlot( mApp.mSID, name, start, extended, project );
 
     if ( mPIDp >= 0 ) {
       long mPIDs = mPIDp + 1L; // FIXME !!! this is true but not guaranteed
-      startDrawingWindow( start, name+"p", mPIDp, name+"s", mPIDs, PlotInfo.PLOT_PLAN, start, landscape );
+      startDrawingWindow( start, name+"p", mPIDp, name+"s", mPIDs, PlotInfo.PLOT_PLAN, start, false ); // default no-landscape
     // } else {
     //   Toast.makeText( mActivity, R.string.plot_duplicate_name, Toast.LENGTH_LONG).show();
     }
@@ -1762,14 +1762,14 @@ public class ShotWindow extends Activity
   }
 
   // ------------------------------------------------------------------
-  public void doProjectionDialog( String name, String start, boolean landscape )
+  public void doProjectionDialog( String name, String start )
   {
-    new ProjectionDialog( mActivity, this, mApp.mSID, name, start, landscape ).show();
+    new ProjectionDialog( mActivity, this, mApp.mSID, name, start ).show();
   }
 
-  void doProjectedProfile( String name, String start, int azimuth, boolean landscape )
+  void doProjectedProfile( String name, String start, int azimuth )
   {
-    makeNewPlot( name, start, false, azimuth, landscape );
+    makeNewPlot( name, start, false, azimuth );
   }
 
   void startAudio( DBlock blk )

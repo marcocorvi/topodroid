@@ -534,6 +534,9 @@
     <!-- UNUSED string name="button_stop"      >Stop</string -->
     <string name="button_upload"    >Feltölt</string>
     <string name="button_view"      >Megtekint</string>
+    <!-- TODO string name="button_zoomfit"   >Zoom fit  </string -->
+    <!-- TODO string name="button_landscape" >Landscape </string -->
+    <!-- TODO string name="button_portrait"  >Portrait  </string -->
 
 
     <string name="button_write"     >Feltölt</string>
@@ -810,6 +813,7 @@
     <string name="title_survey_export">felmérés exportálása</string>
     <string name="title_survey_rename">Felmérés átnevezése</string>
     <string name="title_plot_rename">Vázlat átnevezése</string>
+    <!-- TODO string name="title_plot_zoomfit">Zoom fit / Orientation</string -->
     <string name="title_calib_export">Kalibráció exportálása</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 

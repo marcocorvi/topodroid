@@ -177,7 +177,7 @@ public class SymbolLine extends Symbol
       BufferedReader br = new BufferedReader( new InputStreamReader( fr, iso ) );
       String line;
       while ( (line = br.readLine()) != null ) {
-        line.trim();
+        line = line.trim();
         String[] vals = line.split(" ");
         int s = vals.length;
         for (int k=0; k<s; ++k ) {
@@ -302,7 +302,7 @@ public class SymbolLine extends Symbol
             // path_rev.moveTo(0,0);
             boolean moved_to = false;
             while ( (line = br.readLine() ) != null ) {
-              line.trim();
+              line = line.trim();
               vals = line.split(" ");
               s = vals.length;
               k = 0;

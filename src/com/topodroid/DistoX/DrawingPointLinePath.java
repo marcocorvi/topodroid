@@ -112,9 +112,7 @@ public class DrawingPointLinePath extends DrawingPath
   public void flipXAxis( float z )
   {
     super.flipXAxis(z);
-    for ( LinePoint lp = mFirst; lp != null; lp = lp.mNext ) {
-      lp.flipXAxis(z);
-    }
+    for ( LinePoint lp = mFirst; lp != null; lp = lp.mNext ) lp.flipXAxis(z);
     retracePath();
   }
 
@@ -143,6 +141,13 @@ public class DrawingPointLinePath extends DrawingPath
       // throw new Exception("size mismatch");
     }
   }
+
+  void landscapeToPortrait()
+  {
+    for ( LinePoint lp = mFirst; lp != null; lp = lp.mNext ) lp.landscapeToPortrait();
+    retracePath();
+  }
+
 
   public DrawingPointLinePath( int path_type, boolean visible, boolean closed )
   {

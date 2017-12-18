@@ -100,6 +100,7 @@ public class DataHelper extends DataSetObservable
   private SQLiteStatement updatePlotViewStmt = null;
   private SQLiteStatement updatePlotHideStmt = null;
   private SQLiteStatement updatePlotNameStmt = null;
+  private SQLiteStatement updatePlotOrientationStmt = null;
   private SQLiteStatement updatePlotAzimuthClinoStmt = null;
   private SQLiteStatement updatePlotNickStmt = null;
 
@@ -480,6 +481,7 @@ public class DataHelper extends DataSetObservable
       updatePlotViewStmt = myDB.compileStatement( "UPDATE plots set view=? WHERE surveyId=? AND id=?" );
       updatePlotHideStmt = myDB.compileStatement( "UPDATE plots set hide=? WHERE surveyId=? AND id=?" );
       updatePlotNameStmt = myDB.compileStatement( "UPDATE plots set name=? WHERE surveyId=? AND id=?" );
+      updatePlotOrientationStmt = myDB.compileStatement( "UPDATE plots set orientation=? WHERE surveyId=? AND id=?" );
       updatePlotAzimuthClinoStmt = myDB.compileStatement( "UPDATE plots set azimuth=?, clino=? WHERE surveyId=? AND id=?" );
       updatePlotNickStmt = myDB.compileStatement( "UPDATE plots set nick=? WHERE surveyId=? AND id=?" );
       // dropPlotStmt    = myDB.compileStatement( "DELETE FROM plots WHERE surveyId=? AND id=?" );
@@ -538,15 +540,16 @@ public class DataHelper extends DataSetObservable
   {
     ContentValues vals = new ContentValues();
     vals.put("name", name );
-    myDB.beginTransaction();
     try {
+      myDB.beginTransaction();
       myDB.update( SURVEY_TABLE, vals, "id=?", new String[]{ Long.toString(id) } );
       myDB.setTransactionSuccessful();
       if ( forward && mListeners != null ) { // synchronized( mListeners )
         mListeners.onUpdateSurveyName( id, name );
       }
-    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } catch ( SQLiteException e) { logError("survey rename " + name, e ); 
+    } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
+    } catch ( SQLiteException e1 )       { logError("survey rename " + name, e1 ); 
+    // } catch ( IllegalStateException e2 ) { logError("survey rename", e2 );
     } finally { myDB.endTransaction(); }
     return true;
   }
@@ -562,15 +565,16 @@ public class DataHelper extends DataSetObservable
     vals.put( "init_station", ((init_station != null)? init_station : "") );
     vals.put( "xsections", xsections );
 
-    myDB.beginTransaction();
     try {
+      myDB.beginTransaction();
       myDB.update( SURVEY_TABLE, vals, "id=?", new String[]{ Long.toString(id) } );
       myDB.setTransactionSuccessful();
       if ( forward && mListeners != null ) { // synchronized( mListeners )
         mListeners.onUpdateSurveyInfo( id, date, team, decl, comment, init_station, xsections );
       }
-    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } catch ( SQLiteException e) { logError("survey info", e ); 
+    } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
+    } catch ( SQLiteException e1 )       { logError("survey info", e1 ); 
+    // } catch ( IllegalStateException e2 ) { logError("survey info", e2 );
     } finally { myDB.endTransaction(); }
   }
 
@@ -587,13 +591,14 @@ public class DataHelper extends DataSetObservable
   private boolean doUpdateSurvey( long id, ContentValues vals, String msg )
   {
     boolean ret = false;
-    myDB.beginTransaction();
     try {
+      myDB.beginTransaction();
       myDB.update( SURVEY_TABLE, vals, "id=?", new String[]{ Long.toString(id) } );
       myDB.setTransactionSuccessful();
       ret = true;
-    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } catch ( SQLiteException e) { logError(msg, e); 
+    } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
+    } catch ( SQLiteException e1 )       { logError(msg, e1 ); 
+    // } catch ( IllegalStateException e2 ) { logError(msg, e2 );
     } finally { myDB.endTransaction(); }
     return ret;
   }
@@ -601,13 +606,14 @@ public class DataHelper extends DataSetObservable
   private boolean doUpdate( String table, ContentValues vals, long sid, long id, String msg )
   {
     boolean ret = false;
-    myDB.beginTransaction();
     try {
+      myDB.beginTransaction();
       myDB.update( table, vals, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
       myDB.setTransactionSuccessful();
       ret = true;
-    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } catch (SQLiteException e) { logError(msg, e );
+    } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
+    } catch ( SQLiteException e1 )       { logError(msg, e1 );
+    // } catch ( IllegalStateException e2 ) { logError(msg, e2 );
     } finally { myDB.endTransaction(); }
     return ret;
   }
@@ -615,13 +621,14 @@ public class DataHelper extends DataSetObservable
   private boolean doInsert( String table, ContentValues cv, String msg )
   {
     boolean ret = false;
-    myDB.beginTransaction();
     try { 
+      myDB.beginTransaction();
       myDB.insert( table, null, cv ); 
       myDB.setTransactionSuccessful();
       ret = true;
-    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } catch (SQLiteException e) { logError(msg, e ); 
+    } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
+    } catch ( SQLiteException e1 )       { logError(msg, e1 ); 
+    // } catch ( IllegalStateException e2 ) { logError(msg, e2 );
     } finally { myDB.endTransaction(); }
     return ret;
   }
@@ -629,13 +636,14 @@ public class DataHelper extends DataSetObservable
   private boolean doExecSQL( StringWriter sw, String msg )
   {
     boolean ret = false;
-    myDB.beginTransaction();
     try {
+      myDB.beginTransaction();
       myDB.execSQL( sw.toString() );
       myDB.setTransactionSuccessful();
       ret = true;
-    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } catch (SQLiteException e ) { logError(msg + " error ", e );
+    } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
+    } catch ( SQLiteException e1 )       { logError(msg, e1 );
+    // } catch ( IllegalStateException e2 ) { logError(msg, e2 );
     } finally { myDB.endTransaction(); }
     return ret;
   }
@@ -647,13 +655,14 @@ public class DataHelper extends DataSetObservable
     boolean ret = false;
     ContentValues vals = new ContentValues();
     vals.put( "status", status );
-    myDB.beginTransaction();
     try {
+      myDB.beginTransaction();
       myDB.update( table, vals, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
       myDB.setTransactionSuccessful();
       ret = true;
-    } catch ( SQLiteDiskIOException e ) {  handleDiskIOError( e );
-    } catch (SQLiteException e) { logError(table + " " + id + " status ", e ); 
+    } catch ( SQLiteDiskIOException e )  {  handleDiskIOError( e );
+    } catch (SQLiteException e1 )        { logError(table + " update " + id, e1 ); 
+    // } catch ( IllegalStateException e2 ) { logError(table + " update " + id, e2 );
     } finally { myDB.endTransaction(); }
     return ret;
   }
@@ -661,14 +670,15 @@ public class DataHelper extends DataSetObservable
   private boolean doStatement( SQLiteStatement stmt, String msg )
   {
     boolean ret = false;
-    myDB.beginTransaction();
     try {
+      myDB.beginTransaction();
       stmt.execute();
       myDB.setTransactionSuccessful();
       ret = true;
-    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } catch (SQLiteException e) { logError(msg, e); 
+    } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
+    } catch ( SQLiteException e1 )       { logError(msg, e1 ); 
     } finally { myDB.endTransaction(); }
+    // } catch ( IllegalStateException e2 ) { logError(msg, e2 ); 
     return ret;
   }
 
@@ -816,8 +826,8 @@ public class DataHelper extends DataSetObservable
     // } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e ); }
 
     if ( tStation == null ) tStation = "";
-    myDB.beginTransaction();
     try {
+      myDB.beginTransaction();
       if ( comment != null ) {
         updateShotStmtFull.bindString( 1, fStation );
         updateShotStmtFull.bindString( 2, tStation );
@@ -842,12 +852,9 @@ public class DataHelper extends DataSetObservable
       }
       myDB.setTransactionSuccessful();
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } catch ( SQLiteException e ) {
-      logError("Shot update sqlite error " + fStation + " " + tStation, e );
+    } catch ( SQLiteException e ) { logError("Shot update sqlite error " + fStation + " " + tStation, e );
       // try { Thread.sleep(50); } catch (InterruptedException ee ) { } 
-    } catch ( IllegalStateException e ) {
-      TDLog.Error("Shot update illegal state " + fStation + " " + tStation ); 
-      // try { Thread.sleep(50); } catch (InterruptedException ee ) { } 
+    // } catch ( IllegalStateException e2 ) { logError("Shot update sqlite error " + fStation + " " + tStation, e2 );
     } finally {
       myDB.endTransaction();
     }
@@ -1418,9 +1425,9 @@ public class DataHelper extends DataSetObservable
     // try { updatePlotStmt.execute(); } catch (SQLiteException e) { logError("plot update", e); }
   }
  
-  public void updatePlotNick( long pid, long sid, String nick )
+  public boolean updatePlotNick( long pid, long sid, String nick )
   {
-    if ( myDB == null ) return;
+    if ( myDB == null ) return false;
     // TDLog.Log( TDLog.LOG_DB, "update PlotView: " + pid + "/" + sid + " view " + view );
     if ( nick == null ) nick = "";
     // StringWriter sw = new StringWriter();
@@ -1434,12 +1441,12 @@ public class DataHelper extends DataSetObservable
     updatePlotNickStmt.bindString( 1, nick );
     updatePlotNickStmt.bindLong( 2, sid );
     updatePlotNickStmt.bindLong( 3, pid );
-    doStatement( updatePlotNickStmt, "plot nick" );
+    return doStatement( updatePlotNickStmt, "plot nick" );
   }
  
-  public void updatePlotView( long pid, long sid, String view )
+  public boolean updatePlotView( long pid, long sid, String view )
   {
-    if ( myDB == null ) return;
+    if ( myDB == null ) return false;
     // TDLog.Log( TDLog.LOG_DB, "update PlotView: " + pid + "/" + sid + " view " + view );
     if ( view == null ) view = "";
     // StringWriter sw = new StringWriter();
@@ -1453,12 +1460,12 @@ public class DataHelper extends DataSetObservable
     updatePlotViewStmt.bindString( 1, view );
     updatePlotViewStmt.bindLong( 2, sid );
     updatePlotViewStmt.bindLong( 3, pid );
-    doStatement( updatePlotViewStmt, "plot view" );
+    return doStatement( updatePlotViewStmt, "plot view" );
   }
 
-  public void updatePlotHide( long pid, long sid, String hide )
+  public boolean updatePlotHide( long pid, long sid, String hide )
   {
-    if ( myDB == null ) return;
+    if ( myDB == null ) return false;
     // TDLog.Log( TDLog.LOG_DB, "update PlotHide: " + pid + "/" + sid + " hide " + hide );
     if ( hide == null ) hide = "";
     // StringWriter sw = new StringWriter();
@@ -1472,7 +1479,7 @@ public class DataHelper extends DataSetObservable
     updatePlotHideStmt.bindString( 1, hide );
     updatePlotHideStmt.bindLong( 2, sid );
     updatePlotHideStmt.bindLong( 3, pid );
-    doStatement( updatePlotHideStmt, "plot hide" );
+    return doStatement( updatePlotHideStmt, "plot hide" );
   }
    
   /** DROP is a real record delete from the database table
@@ -1651,9 +1658,10 @@ public class DataHelper extends DataSetObservable
     return id;
   }
 
-  public void setAudio( long sid, long bid, String date )
+  public boolean setAudio( long sid, long bid, String date )
   {
-    if ( myDB == null ) return;
+    boolean ret = false;
+    if ( myDB == null ) return false;
     Cursor cursor = myDB.query( AUDIO_TABLE,
        		         new String[] { "date" }, // columns
                                 WHERE_SID_SHOTID, new String[] { Long.toString(sid), Long.toString(bid) },
@@ -1662,11 +1670,12 @@ public class DataHelper extends DataSetObservable
       updateAudioStmt.bindString( 1, date );
       updateAudioStmt.bindString( 2, Long.toString(sid) );
       updateAudioStmt.bindString( 3, Long.toString(bid) );
-      doStatement( updateAudioStmt, "audio update" );
+      ret = doStatement( updateAudioStmt, "audio update" );
     } else { // insert
-      insertAudio( sid, -1L, bid, date );
+      ret = ( insertAudio( sid, -1L, bid, date ) >= 0 );
     }
     if (cursor != null && !cursor.isClosed()) cursor.close();
+    return ret;
   }
 
   public List< AudioInfo > selectAllAudios( long sid )
@@ -1949,7 +1958,16 @@ public class DataHelper extends DataSetObservable
    public List< PlotInfo > selectAllPlotsWithType( long sid, long status, long type )
    {
      return doSelectAllPlots( sid, 
-                              "surveyId=? and status=? and type=?",
+                              "surveyId=? and status=? and type=? ",
+                              new String[] { Long.toString(sid), Long.toString(status), Long.toString(type) }
+     );
+   }
+
+
+   public List< PlotInfo > selectAllPlotsWithType( long sid, long status, long type, boolean landscape )
+   {
+     return doSelectAllPlots( sid, 
+                              "surveyId=? and status=? and type=? and orientation=" + (landscape? 1 : 0),
                               new String[] { Long.toString(sid), Long.toString(status), Long.toString(type) }
      );
    }
@@ -2105,7 +2123,9 @@ public class DataHelper extends DataSetObservable
      DBlock block = null;
      if (cursor.moveToFirst()) {
        do {
-         if ( cursor.getString(0).length() > 0 && cursor.getString(1).length() > 0 ) {
+	 String str0 = cursor.getString(0);
+	 String str1 = cursor.getString(1);
+         if ( str0 != null && str1 != null && str0.length() > 0 && str1.length() > 0 ) {
            block = new DBlock();
            fillBlock( sid, block, cursor );
          }  
@@ -2736,7 +2756,7 @@ public class DataHelper extends DataSetObservable
      return prefix + Integer.toString(max);
    }
 
-   public void updatePlotName( long sid, long pid, String name )
+   public boolean updatePlotName( long sid, long pid, String name )
    {
      if ( updatePlotNameStmt == null ) {
        updatePlotNameStmt = myDB.compileStatement( "UPDATE plots set name=? WHERE surveyId=? AND id=?" );
@@ -2744,10 +2764,21 @@ public class DataHelper extends DataSetObservable
      updatePlotNameStmt.bindString( 1, name );
      updatePlotNameStmt.bindLong( 2, sid );
      updatePlotNameStmt.bindLong( 3, pid );
-     doStatement( updatePlotNameStmt, "plot name" );
+     return doStatement( updatePlotNameStmt, "plot name" );
    }
 
-   public void updatePlotAzimuthClino( long sid, long pid, float b, float c )
+   public boolean updatePlotOrientation( long sid, long pid, int orient )
+   {
+     if ( updatePlotOrientationStmt == null ) {
+       updatePlotOrientationStmt = myDB.compileStatement( "UPDATE plots set orientation=? WHERE surveyId=? AND id=?" );
+     }
+     updatePlotOrientationStmt.bindLong( 1, orient );
+     updatePlotOrientationStmt.bindLong( 2, sid );
+     updatePlotOrientationStmt.bindLong( 3, pid );
+     return doStatement( updatePlotOrientationStmt, "plot orientation" );
+   }
+
+   public boolean updatePlotAzimuthClino( long sid, long pid, float b, float c )
    {
      if ( updatePlotAzimuthClinoStmt == null ) {
        updatePlotAzimuthClinoStmt = myDB.compileStatement( "UPDATE plots set azimuth=?, clino=? WHERE surveyId=? AND id=?" );
@@ -2756,7 +2787,7 @@ public class DataHelper extends DataSetObservable
      updatePlotAzimuthClinoStmt.bindDouble( 2, c );
      updatePlotAzimuthClinoStmt.bindLong( 3, sid );
      updatePlotAzimuthClinoStmt.bindLong( 4, pid );
-     doStatement( updatePlotAzimuthClinoStmt, "plot azi+clino" );
+     return doStatement( updatePlotAzimuthClinoStmt, "plot azi+clino" );
    }
  
    public PlotInfo getPlotInfo( long sid, String name )
@@ -3341,14 +3372,14 @@ public class DataHelper extends DataSetObservable
 // -------------------------------------------------------------------------------
 // SKETCH_3D
 /* FIXME BEGIN SKETCH_3D */
-  public void updateSketch( long sketch_id, long sid, 
+  public boolean updateSketch( long sketch_id, long sid, 
                             String st1, String st2,
                             double xofftop, double yofftop, double zoomtop,
                             double xoffside, double yoffside, double zoomside,
                             double xoff3d, double yoff3d, double zoom3d,
                             double east, double south, double vert, double azimuth, double clino )
   {
-    if ( myDB == null ) return;
+    if ( myDB == null ) return false;
     if ( updateSketchStmt == null ) {
       updateSketchStmt = myDB.compileStatement( "UPDATE sketches set st1=?, st2=?, xoffsettop=?, yoffsettop=?, zoomtop=?, xoffsetside=?, yoffsetside=?, zoomside=?, xoffset3d=?, yoffset3d=?, zoom3d=?, east=?, south=?, vert=?, azimuth=?, clino=? WHERE surveyId=? AND id=?" );
     }
@@ -3370,7 +3401,7 @@ public class DataHelper extends DataSetObservable
     updateSketchStmt.bindDouble(16, clino );
     updateSketchStmt.bindLong( 17, sid );
     updateSketchStmt.bindLong( 18, sketch_id );
-    doStatement( updateSketchStmt, "sketch" );
+    return doStatement( updateSketchStmt, "sketch" );
   }
   
   public void deleteSketch( long sketch_id, long sid )
@@ -3981,9 +4012,10 @@ public class DataHelper extends DataSetObservable
    }
 
    // ----------------------------------------------------------------------
-   void insertStation( long sid, String name, String comment, long flag )
+   boolean insertStation( long sid, String name, String comment, long flag )
    {
-     if ( myDB == null ) return;
+     if ( myDB == null ) return false;
+     boolean ret = false;
      if ( comment == null ) comment = "";
      Cursor cursor = myDB.query( STATION_TABLE, 
                             new String[] { "name", "comment", "flag" },
@@ -4003,16 +4035,17 @@ public class DataHelper extends DataSetObservable
        updateStationCommentStmt.bindLong(   2, flag );
        updateStationCommentStmt.bindLong(   3, sid );
        updateStationCommentStmt.bindString( 4, name );
-       doStatement( updateStationCommentStmt, "station update" );
+       ret = doStatement( updateStationCommentStmt, "station update" );
      } else {
        ContentValues cv = new ContentValues();
        cv.put( "surveyId",  sid );
        cv.put( "name",      name );
        cv.put( "comment",   (comment == null)? "" : comment );
        cv.put( "flag",      flag );
-       doInsert( STATION_TABLE, cv, "station insert" );
+       ret = doInsert( STATION_TABLE, cv, "station insert" );
      }
      if (cursor != null && !cursor.isClosed()) cursor.close();
+     return ret;
    }
 
    CurrentStation getStation( long sid, String name )

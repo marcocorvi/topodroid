@@ -35,6 +35,13 @@ import android.util.Log;
 
 class DrawingSvg
 {
+  // FIXME station scale is 0.3
+  static final float STROKE_WIDTH = 0.3f;
+  static final int POINT_SCALE  = 10;
+  static final int POINT_RADIUS = 10;
+  static final int RADIUS = 3;
+  // float SCALE_FIX = mDrawingUtil.SCALE_FIX; // 20.0f
+
   private static void printSvgGrid( BufferedWriter out, List<DrawingPath> grid, String color, float opacity, float xoff, float yoff )
   {
     if ( grid != null && grid.size() > 0 ) {
@@ -127,7 +134,6 @@ class DrawingSvg
       // }
       
       {
-        float SCALE_FIX = mDrawingUtil.SCALE_FIX;
 
         // centerline data
         if ( PlotInfo.isSketch2D( type ) ) { 
@@ -216,8 +222,6 @@ class DrawingSvg
           out.flush();
         }
 
-        // FIXME station scale is 0.3
-        float POINT_SCALE = 10.0f;
         for ( ICanvasCommand cmd : plot.getCommands() ) {
           if ( cmd.commandType() != 0 ) continue;
           DrawingPath path = (DrawingPath)cmd;
@@ -235,8 +239,8 @@ class DrawingSvg
             if ( point.mPointType == BrushManager.mPointLib.mPointSectionIndex ) {
               float xx = xoff+point.cx;
               float yy = yoff+point.cy;
-              pw5.format(Locale.US, "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"3\" ", xx, yy );
-              pw5.format(" style=\"fill:grey;stroke:black;stroke-width:0.3\" />\n");
+              pw5.format(Locale.US, "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"%d\" ", xx, yy, RADIUS );
+              pw5.format(" style=\"fill:grey;stroke:black;stroke-width:%.1f\" />\n", STROKE_WIDTH );
 
               // pw5.format(Locale.US, "<g transform=\"translate(%.2f,%.2f)\" >\n", xx, yy );
               // pw5.format(" style=\"fill:none;stroke:%s;stroke-width:0.1\" >\n", color_str );
@@ -345,32 +349,31 @@ class DrawingSvg
 
   static private void toSvg( PrintWriter pw, DrawingPointPath point, String color, float xoff, float yoff )
   {
-    // FIXME point scale factor is 0.3
     int idx = point.mPointType;
     String name = BrushManager.mPointLib.getSymbolThName( idx );
     pw.format("<!-- point %s -->\n", name );
     if ( name.equals("label") ) {
       DrawingLabelPath label = (DrawingLabelPath)point;
       pw.format(Locale.US, "<text x=\"%.2f\" y=\"%.2f\" ", xoff+point.cx, yoff+point.cy );
-      pw.format(" style=\"fill:black;stroke:black;stroke-width:0.3\">%s</text>\n", label.mPointText );
+      pw.format(" style=\"fill:black;stroke:black;stroke-width:%.1f\">%s</text>\n", STROKE_WIDTH, label.mPointText );
     // } else if ( name.equals("continuation") ) {
     //   pw.format(Locale.US, "<text x=\"%.2f\" y=\"%.2f\" ", xoff+point.cx, yoff+point.cy );
-    //   pw.format(" style=\"fill:none;stroke:black;stroke-width:0.3\">\?</text>\n" );
+    //   pw.format(" style=\"fill:none;stroke:black;stroke-width:%.1f\">\?</text>\n", STROKE_WIDTH );
     // } else if ( name.equals("danger") ) {
     //   pw.format(Locale.US, "<text x=\"%.2f\" y=\"%.2f\" ", xoff+point.cx, yoff+point.cy );
-    //   pw.format(" style=\"fill:none;stroke:red;stroke-width:0.3\">!</text>\n" );
+    //   pw.format(" style=\"fill:none;stroke:red;stroke-width:%.1f\">!</text>\n", STROKE_WIDTH );
     } else if ( idx == BrushManager.mPointLib.mPointSectionIndex ) {
       /* nothing */
     } else {
       SymbolPoint sp = (SymbolPoint)BrushManager.mPointLib.getSymbolByIndex( idx );
       if ( sp != null ) {
-        pw.format(Locale.US, "<g transform=\"translate(%.2f,%.2f),scale(10),rotate(%.2f)\" \n", 
-          xoff+point.cx, yoff+point.cy, point.mOrientation );
+        pw.format(Locale.US, "<g transform=\"translate(%.2f,%.2f),scale(%d),rotate(%.2f)\" \n", 
+          xoff+point.cx, yoff+point.cy, POINT_SCALE, point.mOrientation );
         pw.format(" style=\"fill:none;stroke:%s;stroke-width:0.1\" >\n", color );
         pw.format("%s\n", sp.mSvg );
         pw.format("</g>\n");
       } else {
-        pw.format(Locale.US, "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"10\" ", xoff+point.cx, yoff+point.cy );
+        pw.format(Locale.US, "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"%d\" ", xoff+point.cx, yoff+point.cy, POINT_RADIUS );
         pw.format(" style=\"fill:none;stroke:black;stroke-width:0.1\" />\n");
       }
     }

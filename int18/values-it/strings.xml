@@ -534,6 +534,9 @@
     <!-- UNUSED string name="button_stop"      >Stop</string -->
     <!-- OK string name="button_upload"    >Upload   </string -->
     <string name="button_view"      >Visualizza      </string>
+    <!-- TODO string name="button_zoomfit"   >Zoom fit  </string -->
+    <!-- TODO string name="button_landscape" >Landscape </string -->
+    <!-- TODO string name="button_portrait"  >Portrait  </string -->
 
 
     <string name="button_write"     >Installa</string>
@@ -816,6 +819,7 @@
     <string name="title_survey_export">Esporta rilievo come </string>
     <string name="title_survey_rename">Renomina rilievo</string>
     <string name="title_plot_rename">Rinomina disegno</string>
+    <!-- TODO string name="title_plot_zoomfit">Zoom fit / Orientation</string -->
     <string name="title_calib_export">Esporta calibrazione come </string>
     <!-- OK ENGLISH string name="title_zoom">Zoom</string -->
 

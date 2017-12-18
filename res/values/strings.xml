@@ -186,9 +186,11 @@
     <string name="error_group_non_integer">Group must be integer number</string>
     <string name="error_alt_required">Altitude required</string>
     <string name="error_invalid_number">Invalid number</string>
+    <string name="error_invalid_name">Invalid name</string>
     <string name="error_lat_required">Latitude required</string>
     <string name="error_long_required">Longitude required</string>
     <string name="error_name_required">Name required</string>
+    <string name="error_dir_exists">Directory already exists</string>
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Reference station required</string>
     <!-- UNUSED string name="error_station_already_fixed">Station already with coordinates</string -->
@@ -220,6 +222,8 @@
     <string name="fixed">fixed</string>
     <string name="painted">painted</string>
 
+    <string name="cbd_title">Base directory</string>
+    <string name="cwd">TopoDroid project directory</string>
     <string name="empty_cwd">Empty project name</string>
     <string name="bad_cbd">Base directory inexistent or not writable</string>
     <string name="bad_cwd">Project name cannot be path</string>
@@ -500,7 +504,9 @@
     <string name="button_add"       >Add       </string>
     <string name="button_back"      >Back      </string>
     <string name="button_cancel"    >Cancel    </string>
+    <string name="button_change"    >Change    </string>
     <string name="button_close"     >Close     </string>
+    <string name="button_create"    >Create    </string>
     <string name="button_convert"   >Convert   </string>
     <string name="button_current"   >Active    </string>
     <string name="button_delete"    >Delete    </string>
@@ -539,6 +545,9 @@
     <!-- UNUSED string name="button_stop"      >Stop</string -->
     <string name="button_upload"    >Upload    </string>
     <string name="button_view"      >View      </string>
+    <string name="button_zoomfit"   >Zoom fit  </string>
+    <string name="button_landscape" >Landscape </string>
+    <string name="button_portrait"  >Portrait  </string>
 
 
     <string name="button_write"     >Upload</string>
@@ -825,6 +834,7 @@
     <string name="title_survey_export">Export survey</string>
     <string name="title_survey_rename">Rename survey</string>
     <string name="title_plot_rename">Rename sketch</string>
+    <string name="title_plot_zoomfit">Zoom fit / Orientation</string>
     <string name="title_calib_export">Export calibration</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
@@ -1213,6 +1223,7 @@
   <string name="pref_log_input">User input</string>
   <string name="pref_log_loc">Location</string>
   <string name="pref_log_num">Data reduction</string>
+  <string name="pref_log_path">File paths</string>
   <string name="pref_log_photo">Photo</string>
   <string name="pref_log_plot">Sketches</string>
   <string name="pref_log_proto">DistoX protocol</string>

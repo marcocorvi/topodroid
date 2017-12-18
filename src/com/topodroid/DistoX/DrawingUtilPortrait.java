@@ -28,4 +28,7 @@ class DrawingUtilPortrait extends DrawingUtil
   float sceneToWorldX( float x, float y ) { return (x - CENTER_X)/SCALE_FIX; }
   float sceneToWorldY( float x, float y ) { return (y - CENTER_Y)/SCALE_FIX; }
     
+  int toBoundX( float x, float y ) { return Math.round(x); } 
+  int toBoundY( float x, float y ) { return Math.round(y); }
+
 }

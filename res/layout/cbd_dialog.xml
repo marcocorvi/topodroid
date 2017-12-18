@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  >
+
+  <TextView android:id="@+id/cbd"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/marginv"
+    />
+
+  <LinearLayout 
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/marginv"
+    >
+
+    <Button android:id="@+id/button_ok"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      style="@style/button_default"
+      android:text="@string/button_ok"
+    />
+
+    <Button android:id="@+id/button_cancel"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      style="@style/button_default"
+      android:text="@string/button_cancel"
+    />
+  </LinearLayout>
+
+  <LinearLayout 
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/marginv"
+    >
+
+    <Button android:id="@+id/button_create"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      style="@style/button_default"
+      android:text="@string/button_create"
+    />
+
+    <EditText android:id="@+id/subdir"
+      android:layout_width="fill_parent"
+      android:layout_height="match_parent"
+      android:textSize="@dimen/textsizebig"
+      android:inputType="text"
+    />
+  </LinearLayout>
+
+  <ListView android:id="@+id/list"
+      style="@style/list_top"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+    />  
+
+  <!-- LinearLayout 
+         android:layout_width="fill_parent" 
+         android:layout_height="wrap_content"
+         android:layout_marginTop="@dimen/marginvbig"
+         android:layout_gravity="left"
+         >
+      <Button android:id="@+id/button_cancel"
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            style="@style/button_default"
+            android:text="@string/button_cancel"
+      />
+  </LinearLayout -->
+
+</LinearLayout>

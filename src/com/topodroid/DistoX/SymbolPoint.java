@@ -183,7 +183,7 @@ class SymbolPoint extends Symbol
       String line;
       line = br.readLine();
       while ( line != null ) {
-        line.trim();
+        line = line.trim();
         String[] vals = line.split(" ");
         int s = vals.length;
         for (int k=0; k<s; ++k ) {

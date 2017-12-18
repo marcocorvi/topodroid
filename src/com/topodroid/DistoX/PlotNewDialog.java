@@ -47,7 +47,6 @@ public class PlotNewDialog extends MyDialog
   private Button   mBtnOK;
   private Button   mBtnBack;
   private CheckBox mCBextended;
-  private CheckBox mCBlandscape;
   private int mIndex;
   private MyKeyboard mKeyboard = null;
 
@@ -84,9 +83,6 @@ public class PlotNewDialog extends MyDialog
     mBtnBack.setOnClickListener( this );
     mCBextended = (CheckBox)findViewById( R.id.button_extended );
     mCBextended.setChecked( true );
-    mCBlandscape = (CheckBox)findViewById( R.id.button_landscape );
-    mCBlandscape.setChecked( false );
-    if ( ! TDLevel.overExpert ) mCBlandscape.setVisibility( View.GONE );
 
     // mEditProject.setVisibility( View.INVISIBLE );
     // mCBextended.setOnClickListener( new View.OnClickListener() {
@@ -186,12 +182,11 @@ public class PlotNewDialog extends MyDialog
         //   } catch ( NumberFormatException e ) {  }
         // }
       }
-      boolean landscape = TDLevel.overExpert ? mCBlandscape.isChecked() : false;
 
       if ( extended ) {
-        mMaker.makeNewPlot( name, start, extended, 0, landscape );
+        mMaker.makeNewPlot( name, start, extended, 0 );
       } else {
-        mMaker.doProjectionDialog( name, start, landscape );
+        mMaker.doProjectionDialog( name, start );
       }
     } else if ( b == mBtnBack ) {
       /* nothing */

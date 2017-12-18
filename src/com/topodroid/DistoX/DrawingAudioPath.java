@@ -81,7 +81,7 @@ public class DrawingAudioPath extends DrawingPointPath
   }
 
   @Override
-  public String toTherion()
+  public String toTherion( )
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);

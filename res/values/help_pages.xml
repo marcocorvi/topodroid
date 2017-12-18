@@ -18,6 +18,7 @@
   <string name="DrawingWindow">manual09.htm</string>
   <string name="OverviewWindow">manual12.htm</string>
   <string name="CWDActivity">page_cwd.htm</string>
+  <string name="CBDdialog">page_cwd.htm</string>
 
   <string name="AzimuthDialDialog">page_azimuth.htm</string>
   <string name="AudioDialog">page_audio.htm</string>
@@ -71,6 +72,7 @@
   <string name="PlotNewDialog">page_new_plot.htm</string>
   <string name="PlotRecoverDialog">page_backup.htm</string>
   <string name="PlotRenameDialog">page_plot_rename.htm</string>
+  <string name="PlotZoomFitDialog">page_plot_zoomfit.htm</string>
   <string name="ProjectionDialog">page_projection.htm</string>
   <string name="ScrapOutlineDialog">page_scrap_outline.htm</string>
   <string name="SensorEditDialog">page_sensors_edit.htm</string>

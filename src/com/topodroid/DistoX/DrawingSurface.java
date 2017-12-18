@@ -217,9 +217,9 @@ public class DrawingSurface extends SurfaceView
    *  X -> (x+dx)*s = x*s + dx*s
    *  Y -> (y+dy)*s = y*s + dy*s
    */
-  public void setTransform( float dx, float dy, float s )
+  public void setTransform( float dx, float dy, float s, boolean landscape )
   {
-    commandManager.setTransform( dx, dy, s );
+    commandManager.setTransform( dx, dy, s, landscape );
   }
 
   void splitLine( DrawingLinePath line, LinePoint lp ) { commandManager.splitLine( line, lp ); }
@@ -584,9 +584,9 @@ public class DrawingSurface extends SurfaceView
     if ( PlotInfo.isProfile( type ) ) {
       mCommandManager2.exportTherion( /* dh, sid, */ type, out, sketch_name, plot_name, proj_dir );
     } else if ( type == PlotInfo.PLOT_PLAN ) {
-      mCommandManager1.exportTherion( /* dh, sid, */ type, out, sketch_name, plot_name, proj_dir );
+      mCommandManager1.exportTherion( /* dh, sid, */ type, out, sketch_name, plot_name, 0 );
     } else {
-      mCommandManager3.exportTherion( /* dh, sid, */ type, out, sketch_name, plot_name, proj_dir );
+      mCommandManager3.exportTherion( /* dh, sid, */ type, out, sketch_name, plot_name, 0 );
     }
   }
 
@@ -808,6 +808,5 @@ public class DrawingSurface extends SurfaceView
   {
     commandManager.clearXSectionOutline( name );
   }
-
 
 }

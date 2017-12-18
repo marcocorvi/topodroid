@@ -551,6 +551,9 @@
     <!-- UNUSED string name="button_stop"      >Stop</string -->
     <string name="button_upload"    >Schreiben</string>
     <string name="button_view"      >Anzeigen      </string>
+    <!-- TODO string name="button_zoomfit"   >Zoom fit  </string -->
+    <!-- TODO string name="button_landscape" >Landscape </string -->
+    <!-- TODO string name="button_portrait"  >Portrait  </string -->
 
     <string name="button_write"     >Hochladen</string>
     <string name="button_xsection"  >Profil</string>
@@ -838,6 +841,7 @@
     <string name="title_survey_export">Vermessung speichern als</string>
     <string name="title_survey_rename">Benenne Vermessung um in</string>
     <string name="title_plot_rename">Skizze umbenennen</string>
+    <!-- TODO string name="title_plot_zoomfit">Zoom fit / Orientation</string -->
     <string name="title_calib_export">Kalibrierung speichern als</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 <!-- PREFERENCES STRINGS CAN BE LEFT UNTRANSLATED FOR NOW -->

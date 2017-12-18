@@ -246,7 +246,7 @@ public class DrawingLinePath extends DrawingPointLinePath
     mLineType = type;
     setPaint( BrushManager.mLineLib.getLinePaint( mLineType, mReversed ) );
   }
-
+  
   @Override
   public void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil )
   {
@@ -289,7 +289,7 @@ public class DrawingLinePath extends DrawingPointLinePath
   }
 
   @Override
-  public String toTherion()
+  public String toTherion( )
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
@@ -333,7 +333,7 @@ public class DrawingLinePath extends DrawingPointLinePath
   }
 
   @Override
-  void toDataStream( DataOutputStream dos ) 
+  void toDataStream( DataOutputStream dos )
   {
     String name = BrushManager.mLineLib.getSymbolThName( mLineType );
     try {

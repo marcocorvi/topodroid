@@ -84,15 +84,13 @@ public class ParserCompass extends ImportParser
             } catch ( NumberFormatException e ) { }
             if ( vals.length >= 6 ) {
               int com = line.indexOf("COMMENT:");
-              mComment = line.substring( com+8 );
-              mComment.trim();
+              mComment = line.substring( com+8 ).trim();
             }
           }
         } else if ( line.startsWith("SURVEY TEAM") ) {
           String team = nextLine( br );
           if ( mTeam.length() == 0 ) {
-            mTeam = team;
-            mTeam.trim();
+            mTeam = team.trim();
           }
         } else if ( line.startsWith("DECLINATION") ) {
           String[] vals = splitLine(line); // line.split( "\\s+" );

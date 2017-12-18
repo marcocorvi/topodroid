@@ -42,6 +42,14 @@ public class LinePoint extends Point2D
   LinePoint mPrev; // previous LinePoint on the line
   LinePoint mNext; // next LinePoint on the line
 
+  void landscapeToPortrait()
+  {
+    float t;
+    t = x;  x = -y;  y = t;
+    t =x1;  x1=-y1;  y1= t;
+    t =x2;  x2=-y2;  y2= t;
+  }
+
   void flipXAxis(float z)
   {
     float dx = 2 * DrawingUtil.CENTER_X;
@@ -176,14 +184,14 @@ public class LinePoint extends Point2D
 
   public void toTherion( PrintWriter pw )
   {
-    if ( has_cp ) {
-      pw.format(Locale.US, "  %.2f %.2f %.2f %.2f %.2f %.2f\n",
-        x1*toTherion, -y1*toTherion,
-        x2*toTherion, -y2*toTherion,
-        x*toTherion,  -y*toTherion );
-    } else {
-      pw.format(Locale.US, "  %.2f %.2f\n", x*toTherion, -y*toTherion );
-    }
+      if ( has_cp ) {
+        pw.format(Locale.US, "  %.2f %.2f %.2f %.2f %.2f %.2f\n",
+          x1*toTherion, -y1*toTherion,
+          x2*toTherion, -y2*toTherion,
+          x*toTherion,  -y*toTherion );
+      } else {
+        pw.format(Locale.US, "  %.2f %.2f\n", x*toTherion, -y*toTherion );
+      }
   }
 
   void toDataStream( DataOutputStream dos )

@@ -51,22 +51,38 @@ public class CWDActivity extends Activity
 
   private ListView mList;
   private EditText mETcwd;
-  private EditText mETcbd;
+  private TextView mTVcbd;
   private Button mBtnOK;
+  private Button mBtnChange;
+  private Button mBtnCancel;
+  private LinearLayout mLayoutcbd;
+  
+  private String mBaseName;
+
+  void setBasename( String basename ) 
+  { 
+    mBaseName = basename;
+    updateDisplay();
+  }
 
   private boolean setPreference()
   {
     String dir_name  = mETcwd.getText().toString();
-    String base_name = TDLevel.overExpert ? mETcbd.getText().toString() : mApp.mCBD ;
+    String base_name = TDLevel.overExpert ? mBaseName : mApp.mCBD ;
     if ( base_name == null ) {
       base_name = TDPath.PATH_BASEDIR;
     } else {
-      base_name.trim();
+      base_name = base_name.trim();
       if ( base_name.length() == 0 ) base_name = TDPath.PATH_BASEDIR;
     }
     // make sure base_dir exists and is writable
     File base_dir = new File( base_name );
-    if ( ! ( base_dir.exists() && base_dir.canWrite() ) ) {
+    try {
+      if ( ! ( base_dir.exists() && base_dir.canWrite() ) ) {
+        Toast.makeText( this, R.string.bad_cbd, Toast.LENGTH_SHORT ).show();
+        return false;
+      }
+    } catch ( SecurityException e ) { 
       Toast.makeText( this, R.string.bad_cbd, Toast.LENGTH_SHORT ).show();
       return false;
     }
@@ -75,7 +91,7 @@ public class CWDActivity extends Activity
       Toast.makeText( this, R.string.empty_cwd, Toast.LENGTH_SHORT ).show();
       return false;
     } else {
-      dir_name.trim();
+      dir_name = dir_name.trim();
       if ( dir_name.length() == 0 ) {
         Toast.makeText( this, R.string.empty_cwd, Toast.LENGTH_SHORT ).show();
 	return false;
@@ -91,8 +107,8 @@ public class CWDActivity extends Activity
       dir_name = "TopoDroid" + dir_name.substring(9);
     }
 
-    if ( TDPath.checkBasePath( dir_name ) ) {
-      // Log.v("DistoX", "dir name <" + dir_name + "> base dir <" + base_name + ">" );
+    if ( TDPath.checkBasePath( dir_name, base_name ) ) {
+      TDLog.Log( TDLog.LOG_PATH, "dir name <" + dir_name + "> base dir <" + base_name + ">" );
       mApp.setCWDPreference( dir_name, base_name );
       Intent intent = new Intent();
       intent.putExtra( TDTag.TOPODROID_CWD, dir_name );
@@ -105,7 +121,7 @@ public class CWDActivity extends Activity
     
   public void updateDisplay( )
   {
-    File[] dirs = TDPath.getTopoDroidFiles();
+    File[] dirs = TDPath.getTopoDroidFiles( mBaseName );
     ArrayAdapter<String> adapter = new ArrayAdapter<>( this, R.layout.menu );
     for ( File item : dirs ) {
       adapter.add( item.getName() );
@@ -116,9 +132,9 @@ public class CWDActivity extends Activity
 
     mETcwd.setText( mApp.mCWD );
     if ( TDLevel.overExpert ) {
-      mETcbd.setText( mApp.mCBD );
+      mTVcbd.setText( mBaseName );
     } else{
-      mETcbd.setVisibility( View.GONE );
+      mLayoutcbd.setVisibility( View.GONE );
     }
   }
 
@@ -137,9 +153,13 @@ public class CWDActivity extends Activity
   {
     Button b = (Button)v;
     if ( b == mBtnOK ) {
-      if ( setPreference() ) finish();
+      setPreference();
+      finish();
+    } else if ( b == mBtnCancel ) {
+      finish();
+    } else if ( b == mBtnChange ) {
+      new CBDdialog( this, this, mBaseName ).show();
     }
-    finish();
   }
   
   @Override
@@ -148,16 +168,26 @@ public class CWDActivity extends Activity
     super.onCreate( b );
     setContentView(R.layout.cwd_activity);
     mApp = (TopoDroidApp) getApplication();
+    mBaseName = mApp.mCBD;
 
     getWindow().setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN );
 
+    mLayoutcbd = (LinearLayout)findViewById( R.id.layout_cbd );
+
     mList = (ListView) findViewById( R.id.cwd_list );
     mETcwd = (EditText) findViewById( R.id.cwd_text );
-    mETcbd = (EditText) findViewById( R.id.cbd_text );
+    mTVcbd = (TextView) findViewById( R.id.cbd_text );
     mBtnOK = (Button) findViewById( R.id.button_ok );
-    
     mBtnOK.setOnClickListener( this );
+    mBtnCancel = (Button) findViewById( R.id.button_cancel );
+    mBtnCancel.setOnClickListener( this );
+    if ( TDLevel.overExpert ) {
+      mBtnChange = (Button) findViewById( R.id.button_change );
+      mBtnChange.setOnClickListener( this );
+    }
     updateDisplay();
+
+    setTitle( R.string.cwd );
   }
 
   // @Override

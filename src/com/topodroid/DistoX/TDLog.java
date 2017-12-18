@@ -88,6 +88,7 @@ class TDLog
     "DISTOX_LOG_SURVEY",
     "DISTOX_LOG_NUM",             // +17
     "DISTOX_LOG_THERION",
+    "DISTOX_LOG_PATH",
     "DISTOX_LOG_PLOT",            // +19
     "DISTOX_LOG_BEZIER",
     "DISTOX_LOG_CSURVEY",         // +21
@@ -206,6 +207,7 @@ class TDLog
     LOG_SURVEY  = prefs.getBoolean( log_key[lk++], false );
     LOG_NUM     = prefs.getBoolean( log_key[lk++], false );
     LOG_THERION = prefs.getBoolean( log_key[lk++], false );
+    LOG_PATH    = prefs.getBoolean( log_key[lk++], false );
     LOG_PLOT    = prefs.getBoolean( log_key[lk++], false );
     LOG_BEZIER  = prefs.getBoolean( log_key[lk++], false );
     LOG_CSURVEY = prefs.getBoolean( log_key[lk++], false );
@@ -259,6 +261,8 @@ class TDLog
       LOG_NUM = sp.getBoolean( k, false );
     } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_THERION"
       LOG_THERION = sp.getBoolean( k, false );
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_PATH"
+      LOG_PATH = sp.getBoolean( k, false );
     } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_PLOT"
       LOG_PLOT = sp.getBoolean( k, false );
     } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_BEZIER"

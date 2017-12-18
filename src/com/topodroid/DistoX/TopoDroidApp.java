@@ -669,6 +669,7 @@ public class TopoDroidApp extends Application
     if ( cwd == null || cwd.length() == 0 ) cwd = mCWD;
     if ( cbd == null || cbd.length() == 0 ) cbd = mCBD;
     if ( cbd.equals( mCBD ) && cwd.equals( mCWD ) ) return;
+    TDLog.Log( TDLog.LOG_PATH, "set cwd " + cwd + " " + cbd );
     mData.closeDatabase();
     mCBD = cbd;
     mCWD = cwd;
@@ -1902,18 +1903,18 @@ public class TopoDroidApp extends Application
 
   // ----------------------------------------------------------------------
 
-  long insert2dPlot( long sid , String name, String start, boolean extended, int project, boolean landscape )
+  long insert2dPlot( long sid , String name, String start, boolean extended, int project )
   {
-    int landscapeTag = landscape ? PlotInfo.ORIENTATION_LANDSCAPE : PlotInfo.ORIENTATION_PORTRAIT ;
+    // PlotInfo.ORIENTATION_PORTRAIT = 0
     // TDLog.Log( TDLog.LOG_PLOT, "new plot " + name + " start " + start );
     long pid_p = mData.insertPlot( sid, -1L, name+"p",
-                 PlotInfo.PLOT_PLAN, 0L, start, EMPTY, 0, 0, mScaleFactor, 0, 0, EMPTY, EMPTY, landscapeTag, true );
+                 PlotInfo.PLOT_PLAN, 0L, start, EMPTY, 0, 0, mScaleFactor, 0, 0, EMPTY, EMPTY, 0, true );
     if ( extended ) {
       long pid_s = mData.insertPlot( sid, -1L, name+"s",
-                   PlotInfo.PLOT_EXTENDED, 0L, start, EMPTY, 0, 0, mScaleFactor, 0, 0, EMPTY, EMPTY, landscapeTag, true );
+                   PlotInfo.PLOT_EXTENDED, 0L, start, EMPTY, 0, 0, mScaleFactor, 0, 0, EMPTY, EMPTY, 0, true );
     } else {
       long pid_s = mData.insertPlot( sid, -1L, name+"s",
-                   PlotInfo.PLOT_PROFILE, 0L, start, EMPTY, 0, 0, mScaleFactor, project, 0, EMPTY, EMPTY, landscapeTag, true );
+                   PlotInfo.PLOT_PROFILE, 0L, start, EMPTY, 0, 0, mScaleFactor, project, 0, EMPTY, EMPTY, 0, true );
     }
     return pid_p;
   }
@@ -1922,14 +1923,13 @@ public class TopoDroidApp extends Application
   // @param parent parent plot name
   // NOTE field "hide" is overloaded for x_sections with the parent plot name
   long insert2dSection( long sid, String name, long type, String from, String to, float azimuth, float clino,
-                        String parent, String nickname, boolean landscape )
+                        String parent, String nickname )
   {
     // FIXME COSURVEY 2d sections are not forwarded
     // 0 0 mScaleFactor : offset and zoom
-    int landscapeTag = landscape ? PlotInfo.ORIENTATION_LANDSCAPE : PlotInfo.ORIENTATION_PORTRAIT ;
     String hide = ( parent == null )? EMPTY : parent;
     String nick = ( nickname == null )? EMPTY : nickname;
-    return mData.insertPlot( sid, -1L, name, type, 0L, from, to, 0, 0, TopoDroidApp.mScaleFactor, azimuth, clino, hide, nick, landscapeTag, false );
+    return mData.insertPlot( sid, -1L, name, type, 0L, from, to, 0, 0, TopoDroidApp.mScaleFactor, azimuth, clino, hide, nick, 0, false );
   }
 
   public void viewPhoto( Context ctx, String filename )

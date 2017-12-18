@@ -94,6 +94,11 @@ public class DrawingLabelPath extends DrawingPointPath
       // TDLog.Log( TDLog.LOG_PATH, "Drawing Label Path::draw[matrix] " + mPointText );
       setTextSize();
       mTransformedPath = new Path( mPath );
+      if ( mLandscape ) {
+        Matrix rot = new Matrix();
+	rot.postRotate( 90, cx, cy );
+        mTransformedPath.transform( rot );
+      }
       mTransformedPath.transform( matrix );
       canvas.drawTextOnPath( mPointText, mTransformedPath, 0f, 0f, mPaint );
     }
@@ -155,7 +160,7 @@ public class DrawingLabelPath extends DrawingPointPath
   }
 
   @Override
-  public String toTherion()
+  public String toTherion( )
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);

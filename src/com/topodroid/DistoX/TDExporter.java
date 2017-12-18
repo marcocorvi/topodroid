@@ -3596,8 +3596,7 @@ class TDExporter
                     long my = Long.parseLong( vals[5] );
                     long mz = Long.parseLong( vals[6] );
                     long gid = data.insertGM( cid, gx, gy, gz, mx, my, mz );
-                    String grp = vals[7];
-                    grp.trim();
+                    String grp = vals[7].trim();
                     data.updateGMName( gid, cid, grp );
                   } catch ( NumberFormatException e ) { }
                 }

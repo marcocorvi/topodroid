@@ -77,7 +77,8 @@ public class DrawingScaleReference
 
     mLocation = loc;
     mUnits = ( TDSetting.mUnitGrid > 0.99f)? " m" 
-           : ( TDSetting.mUnitGrid > 0.8f)? " yd" : " ft";
+           : ( TDSetting.mUnitGrid > 0.8f)? " yd"
+           : ( TDSetting.mUnitGrid > 0.2f)? " ft" : " dm";
   }
 
 
@@ -103,16 +104,21 @@ public class DrawingScaleReference
    * @param canvas canvas to draw in
    * @param zoom zoom factor used
      */
-  public void draw( Canvas canvas, float zoom )
+  public void draw( Canvas canvas, float zoom, boolean landscape )
   {
-    if(canvas != null)
+    if (canvas != null)
     {
       float canvasUnit = DrawingUtil.SCALE_FIX * zoom; /* Length of 1 unit at zoom */
+
+      float arrowlen = canvas.getWidth() / 10;
+      float arrowtip = arrowlen / 5;
+
 
       /* Calculate reference scale */
       float referenceLen = canvas.getWidth() * mMaxWidthPercent / canvasUnit;
       // units 1:m 0.914:y 0.6096:2ft
-      if ( TDSetting.mUnitGrid < 0.8f ) referenceLen *= 2; // using ft instead of 2ft
+      if ( TDSetting.mUnitGrid < 0.2f )      { referenceLen *= 10; } // using m instead of dm
+      else if ( TDSetting.mUnitGrid < 0.8f ) { referenceLen *=  2; } // using ft instead of 2ft
       
       int k = mValues.length - 1;
       while ( k > 0 && referenceLen < mValues[k] ) --k;
@@ -123,7 +129,8 @@ public class DrawingScaleReference
       {
         float canvasLen = canvasUnit * referenceLen;
         canvasLen *= TDSetting.mUnitGrid;
-        if ( TDSetting.mUnitGrid < 0.8f ) canvasLen /= 2;
+        if ( TDSetting.mUnitGrid < 0.2f ) { } // using m instead of dm
+	else if ( TDSetting.mUnitGrid < 0.8f ) canvasLen /= 2;
 
         float locX = (mLocation.x > 0) ? mLocation.x : canvas.getWidth() + mLocation.x - referenceLen;
         float locY = (mLocation.y > 0) ? mLocation.y : canvas.getHeight() + mLocation.y;
@@ -133,10 +140,23 @@ public class DrawingScaleReference
         canvas.drawLine(locX + canvasLen, locY, locX + canvasLen, locY - HEIGHT_BARS, mPaint);
         if(referenceLen < 1) {
           canvas.drawText(referenceLen + mUnits, locX + canvasLen / 2, locY - HEIGHT_BARS, mPaint);
-        }
-        else {
+        } else {
           canvas.drawText((int)referenceLen + mUnits, locX + canvasLen / 2, locY - HEIGHT_BARS, mPaint);
         }
+
+	if ( landscape ) {
+	  float x = locX + arrowlen;
+          float y = locY - 8 * HEIGHT_BARS;	  
+          canvas.drawLine( x, y, x - arrowlen, y, mPaint);
+          canvas.drawLine( x-arrowlen+arrowtip, y-arrowtip, x - arrowlen, y, mPaint);
+          canvas.drawLine( x-arrowlen+arrowtip, y+arrowtip, x - arrowlen, y, mPaint);
+	} else {
+	  float x = locX;
+          float y = locY - 4 * HEIGHT_BARS;	  
+          canvas.drawLine( x, y, x, y - arrowlen, mPaint);
+          canvas.drawLine( x-arrowtip, y-arrowlen+arrowtip, x, y - arrowlen, mPaint);
+          canvas.drawLine( x+arrowtip, y-arrowlen+arrowtip, x, y - arrowlen, mPaint);
+	}
       }
     }
   }

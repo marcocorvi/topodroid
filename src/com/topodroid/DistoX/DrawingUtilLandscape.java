@@ -17,7 +17,6 @@ import android.graphics.Paint;
 import android.graphics.Path;
 // import android.graphics.Path.Direction;
 
-
 class DrawingUtilLandscape extends DrawingUtil
 {
   // private static final PointF mCenter = new PointF( CENTER_X, CENTER_Y );
@@ -25,7 +24,10 @@ class DrawingUtilLandscape extends DrawingUtil
   float toSceneX( float x, float y ) { return CENTER_Y + y * SCALE_FIX; }
   float toSceneY( float x, float y ) { return -(CENTER_X + x * SCALE_FIX); }
 
-  float sceneToWorldX( float x, float y ) { return (-y - CENTER_Y)/SCALE_FIX; }
-  float sceneToWorldY( float x, float y ) { return ( x - CENTER_X)/SCALE_FIX; }
+  float sceneToWorldX( float x, float y ) { return (-y - CENTER_X)/SCALE_FIX; }
+  float sceneToWorldY( float x, float y ) { return ( x - CENTER_Y)/SCALE_FIX; }
     
+  int toBoundX( float x, float y ) { return  Math.round(y); } 
+  int toBoundY( float x, float y ) { return -Math.round(x); }
+
 }

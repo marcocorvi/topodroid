@@ -56,6 +56,7 @@ public class DrawingPath extends RectF
   float x1, y1, x2, y2; // endpoint scene coords  (not private just to write the scrap scale using mNorthLine )
   // private int dir; // 0 x1 < x2, 1 y1 < y2, 2 x2 < x1, 3 y2 < y1
   DBlock mBlock;
+  boolean mLandscape;
 
   protected float cx, cy; // midpoint scene coords
   // RectF mBBox;   // path boundig box (scene coords)
@@ -71,6 +72,7 @@ public class DrawingPath extends RectF
     // x1 = y1 = 0.0f;
     // x2 = y2 = 1.0f;
     // dx = dy = 1.0f;
+    mLandscape = false;
   }
 
   static boolean isReferenceType( int type ) 
@@ -356,7 +358,7 @@ public class DrawingPath extends RectF
 
   public void setOrientation( double angle ) { }
 
-  public String toTherion() { return new String("FIXME"); }
+  public String toTherion( ) { return new String("FIXME"); }
 
   void toDataStream( DataOutputStream dos ) { TDLog.Error( "ERROR DrawingPath toDataStream executed"); }
 

@@ -227,6 +227,11 @@ public class DrawingPointPath extends DrawingPath
         resetPath( 4 * scale );
       }
       mTransformedPath = new Path( mPath );
+      if ( mLandscape && ! BrushManager.isPointOrientable( mPointType ) ) {
+	Matrix rot = new Matrix();
+	rot.postRotate( 90, cx, cy );
+	mTransformedPath.transform( rot );
+      }
       mTransformedPath.transform( matrix );
       drawPath( mTransformedPath, canvas );
     }
@@ -327,7 +332,7 @@ public class DrawingPointPath extends DrawingPath
   }
 
   @Override
-  public String toTherion()
+  public String toTherion( )
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);

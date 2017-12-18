@@ -97,7 +97,7 @@ public class ParserVisualTopo extends ImportParser
         if ( pos >= 0 ) {
           comment = (pos+1<line.length())? line.substring( pos+1 ) : "";
           line    = line.substring( 0, pos );
-          comment.trim();
+          comment = comment.trim();
         } else {
           comment = "";
         }

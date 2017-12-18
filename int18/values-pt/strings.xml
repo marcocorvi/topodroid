@@ -533,6 +533,9 @@
     <!-- UNUSED string name="button_stop"      >Parar</string -->
     <string name="button_upload"    >Enviar     </string>
     <string name="button_view"      >Ver no mapa</string>
+    <!-- TODO string name="button_zoomfit"   >Zoom fit  </string -->
+    <!-- TODO string name="button_landscape" >Landscape </string -->
+    <!-- TODO string name="button_portrait"  >Portrait  </string -->
 
 
     <string name="button_write"     >Enviar</string>
@@ -811,6 +814,7 @@
     <string name="title_survey_export">Exportar topo</string>
     <string name="title_survey_rename">Renomear topo</string>
     <string name="title_plot_rename">Renomear croqui</string>
+    <!-- TODO string name="title_plot_zoomfit">Zoom fit / Orientation</string -->
     <string name="title_calib_export">Exportar calibração</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 

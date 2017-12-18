@@ -533,6 +533,9 @@
     <!-- UNUSED string name="button_stop"      >ARRETER</string -->
     <string name="button_upload"    >UPLOAD   </string>
     <string name="button_view">Vue</string>
+    <!-- TODO string name="button_zoomfit"   >Zoom fit  </string -->
+    <!-- TODO string name="button_landscape" >Landscape </string -->
+    <!-- TODO string name="button_portrait"  >Portrait  </string -->
 
 
     <string name="button_write"     >Uploader</string>
@@ -808,6 +811,7 @@
     <string name="title_survey_export">Exporter le relevé sous</string>
     <string name="title_survey_rename">Renommer le relevé sous</string>
     <string name="title_plot_rename">Renommer croquis</string>
+    <!-- TODO string name="title_plot_zoomfit">Zoom fit / Orientation</string -->
     <string name="title_calib_export">Exporter la calibration sous</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 

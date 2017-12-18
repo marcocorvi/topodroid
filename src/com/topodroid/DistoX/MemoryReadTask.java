@@ -80,7 +80,7 @@ class MemoryReadTask extends AsyncTask<Void, Integer, Integer>
   private void writeMemoryDumpToFile( String dumpfile, ArrayList< MemoryOctet > memory )
   {
     if ( dumpfile == null ) return;
-    dumpfile.trim();
+    dumpfile = dumpfile.trim();
     if ( dumpfile.length() == 0 ) return;
     try { 
       String dumppath = TDPath.getDumpFile( dumpfile );

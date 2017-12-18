@@ -63,24 +63,8 @@
 
     </LinearLayout>
 
-    <LinearLayout android:id="@+id/layout3"
-      android:layout_below="@id/layout2"
-      android:layout_width="fill_parent" 
-      android:layout_height="wrap_content"
-      android:orientation="horizontal" 
-      android:layout_marginTop="@dimen/marginvbig"
-      android:gravity="right"
-      >
-      <CheckBox android:id="@+id/button_landscape"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content" 
-        android:layout_weight="50"
-        android:text="@string/landscape"
-      />
-    </LinearLayout>
-
     <LinearLayout android:id="@+id/layout4"
-      android:layout_below="@id/layout3"
+      android:layout_below="@id/layout2"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 

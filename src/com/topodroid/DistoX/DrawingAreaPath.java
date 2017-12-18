@@ -122,7 +122,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
       // setPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
 
       int has_cp;
-      float x1, y1, x2, y2, x0, y0;
+      float x1, y1, x2, y2, x0, y0, t;
       x0 = x + dis.readFloat( );
       y0 = y + dis.readFloat( );
       has_cp = dis.read();
@@ -218,7 +218,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
   }
 
   @Override
-  public String toTherion()
+  public String toTherion( )
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
@@ -297,7 +297,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
   }
 
   @Override
-  void toDataStream( DataOutputStream dos ) 
+  void toDataStream( DataOutputStream dos )
   {
     String name = BrushManager.mAreaLib.getSymbolThName( mAreaType );
     try {

@@ -535,7 +535,9 @@
     <!-- UNUSED string name="button_stop"      >Stop</string -->
     <string name="button_upload"    >Вигрузити  </string>
     <string name="button_view"      >Перегляд   </string>
-
+    <!-- TODO string name="button_zoomfit"   >Zoom fit  </string -->
+    <!-- TODO string name="button_landscape" >Landscape </string -->
+    <!-- TODO string name="button_portrait"  >Portrait  </string -->
 
     <string name="button_write"     >Передати в Disto</string>
     <string name="button_xsection"  >Переріз</string>
@@ -813,6 +815,7 @@
     <string name="title_survey_export">Експорт зйомки як</string>
     <string name="title_survey_rename">Переименовать зйомку</string>
     <string name="title_plot_rename">Перейменувати абрис</string>
+    <!-- TODO string name="title_plot_zoomfit">Zoom fit / Orientation</string -->
     <string name="title_calib_export">Експорт калібрування як</string>
     <!-- UNUSED string name="title_zoom">Зум</string -->
 

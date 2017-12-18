@@ -164,8 +164,9 @@ public class OverviewWindow extends ItemDrawer
     private PointF mDisplayCenter;
     private float mZoom  = 1.0f;
 
-    private long mSid;  // survey id
-    private long mType;  // current plot type
+    private long mSid;     // survey id
+    private long mType;    // current plot type
+    private boolean mLandscape;
     private String mFrom;
     private PlotInfo mPlot1;
 
@@ -191,7 +192,7 @@ public class OverviewWindow extends ItemDrawer
       // Log.v( TopoDroidApp.TAG, "zoom " + mZoom );
       mOffset.x -= mDisplayCenter.x*(1/zoom-1/mZoom);
       mOffset.y -= mDisplayCenter.y*(1/zoom-1/mZoom);
-      mOverviewSurface.setTransform( mOffset.x, mOffset.y, mZoom );
+      mOverviewSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
       // mOverviewSurface.refresh();
       // mZoomCtrl.hide();
       // mZoomBtnsCtrl.setVisible( false );
@@ -221,7 +222,7 @@ public class OverviewWindow extends ItemDrawer
     //     
     //   // TDLog.Log(TDLog.LOG_PLOT, "zoom one to " + mZoom );
     //     
-    //   mOverviewSurface.setTransform( mOffset.x, mOffset.y, mZoom );
+    //   mOverviewSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
     //   // mOverviewSurface.refresh();
     // }
 
@@ -412,8 +413,6 @@ public class OverviewWindow extends ItemDrawer
     {
       super.onCreate(savedInstanceState);
 
-      mDrawingUtil = new DrawingUtilPortrait();
-
       mCrossPath = new Path();
       mCrossPath.moveTo(10,10);
       mCrossPath.lineTo(-10,-10);
@@ -475,6 +474,9 @@ public class OverviewWindow extends ItemDrawer
       mFrom         = extras.getString( TDTag.TOPODROID_PLOT_FROM );
       mZoom         = extras.getFloat( TDTag.TOPODROID_PLOT_ZOOM );
       mType         = (int)extras.getLong( TDTag.TOPODROID_PLOT_TYPE );
+      mLandscape    = extras.getBoolean( TDTag.TOPODROID_PLOT_LANDSCAPE );
+      // mDrawingUtil = mLandscape ? (new DrawingUtilLandscape()) : (new DrawingUtilPortrait());
+      mDrawingUtil = new DrawingUtilPortrait();
 
       mBorderRight      = mApp.mDisplayWidth * 15 / 16;
       mBorderLeft       = mApp.mDisplayWidth / 16;
@@ -500,7 +502,7 @@ public class OverviewWindow extends ItemDrawer
 
       mOffset.x   += extras.getFloat( TDTag.TOPODROID_PLOT_XOFF );
       mOffset.y   += extras.getFloat( TDTag.TOPODROID_PLOT_YOFF );
-      mOverviewSurface.setTransform( mOffset.x, mOffset.y, mZoom );
+      mOverviewSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
     }
 
     @Override
@@ -567,6 +569,7 @@ public class OverviewWindow extends ItemDrawer
 
     private void loadFiles( long type )
     {
+      // List<PlotInfo> plots = mApp.mData.selectAllPlotsWithType( mSid, TDStatus.NORMAL, type, landscape );
       List<PlotInfo> plots = mApp.mData.selectAllPlotsWithType( mSid, TDStatus.NORMAL, type );
 
       // Log.v( "DistoX", "Overview plots " + plots.size() );
@@ -657,7 +660,7 @@ public class OverviewWindow extends ItemDrawer
    //   mOffset.y = plot.yoffset; 
    //   mZoom     = plot.zoom;    
    //   // Log.v("DistoX", "reset ref " + mOffset.x + " " + mOffset.y + " " + mZoom );
-   //   mOverviewSurface.setTransform( mOffset.x, mOffset.y, mZoom );
+   //   mOverviewSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
    //   // mOverviewSurface.refresh();
    // }
 
@@ -740,7 +743,7 @@ public class OverviewWindow extends ItemDrawer
     if ( Math.abs( x_shift ) < 60 && Math.abs( y_shift ) < 60 ) {
       mOffset.x += x_shift / mZoom;                // add shift to offset
       mOffset.y += y_shift / mZoom; 
-      mOverviewSurface.setTransform( mOffset.x, mOffset.y, mZoom );
+      mOverviewSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
     }
 
   }
@@ -750,7 +753,7 @@ public class OverviewWindow extends ItemDrawer
     if ( Math.abs( x_shift ) < 60 && Math.abs( y_shift ) < 60 ) {
       mOffset.x += x_shift / mZoom;                // add shift to offset
       mOffset.y += y_shift / mZoom; 
-      mOverviewSurface.setTransform( mOffset.x, mOffset.y, mZoom );
+      mOverviewSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
       // mOverviewSurface.refresh();
     }
   }
@@ -904,7 +907,7 @@ public class OverviewWindow extends ItemDrawer
           if ( Math.abs( x_shift ) < 60 && Math.abs( y_shift ) < 60 ) {
             mOffset.x += x_shift / mZoom;                // add shift to offset
             mOffset.y += y_shift / mZoom; 
-            mOverviewSurface.setTransform( mOffset.x, mOffset.y, mZoom );
+            mOverviewSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
           }
           mSaveX = x_canvas; 
           mSaveY = y_canvas;

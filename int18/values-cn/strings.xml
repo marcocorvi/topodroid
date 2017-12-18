@@ -532,6 +532,9 @@
     <!-- UNUSED string name="button_stop"      >停止</string -->
     <string name="button_upload"    >上传    </string>
     <string name="button_view"      >查看      </string>
+    <!-- TODO string name="button_zoomfit"   >Zoom fit  </string -->
+    <!-- TODO string name="button_landscape" >Landscape </string -->
+    <!-- TODO string name="button_portrait"  >Portrait  </string -->
 
 
     <string name="button_write"     >上传</string>
@@ -809,6 +812,7 @@
     <string name="title_survey_export">测量输出</string>
     <string name="title_survey_rename">重命名测量</string>
     <string name="title_plot_rename">重命名草图</string>
+    <!-- TODO string name="title_plot_zoomfit">Zoom fit / Orientation</string -->
     <string name="title_calib_export">输出校准</string>
     <!-- UNUSED string name="title_zoom">缩放</string -->
 

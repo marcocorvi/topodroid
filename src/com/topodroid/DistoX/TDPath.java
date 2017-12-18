@@ -118,12 +118,19 @@ public class TDPath
   static String getDatabase() { return getDirFile( "distox14.sqlite" ); }
   static String getDeviceDatabase() { return PATH_DEFAULT + "device10.sqlite"; }
   
-  static boolean checkBasePath( String path )
+  // when this is called basedir exists and is writable
+  static boolean checkBasePath( String path, String basedir )
   {
+    PATH_BASEDIR = basedir;
     String cwd = PATH_BASEDIR + "/" + path;
+    TDLog.Log( TDLog.LOG_PATH, "base path " + PATH_BASEDIR );
     File dir = new File( cwd );
     if ( ! dir.exists() ) dir.mkdir();
-    return dir.exists() && dir.isDirectory() && dir.canWrite();
+    boolean ret = false;
+    try {
+      ret = dir.exists() && dir.isDirectory() && dir.canWrite();
+    } catch ( SecurityException e ) { }
+    return ret;
   }
 
   // FIXME BASEPATH 
@@ -134,14 +141,20 @@ public class TDPath
     File dir = null;
     if ( base != null ) {
       dir = new File( base );
-      if ( dir.exists() && dir.canWrite() ) PATH_BASEDIR = base;
+      try {
+        if ( dir.exists() && dir.canWrite() ) PATH_BASEDIR = base;
+      } catch ( SecurityException e ) { }
     }
+    TDLog.Log( TDLog.LOG_PATH, "set paths. path basedir " + PATH_BASEDIR );
     if ( path != null ) {
       String cwd = PATH_BASEDIR + "/" + path;
       dir = new File( cwd );
-      if ( ! dir.exists() ) dir.mkdirs();
-      if ( dir.isDirectory() && dir.canWrite() ) PATH_BASE = cwd + "/";
+      try {
+        if ( ! dir.exists() ) dir.mkdirs();
+        if ( dir.isDirectory() && dir.canWrite() ) PATH_BASE = cwd + "/";
+      } catch ( SecurityException e ) { }
     }
+    TDLog.Log( TDLog.LOG_PATH, "set paths. path base " + PATH_BASE );
     dir = new File( PATH_BASE );
     if ( ! dir.exists() ) {
       if ( ! dir.mkdir() ) {
@@ -439,9 +452,9 @@ public class TDPath
 
   static File[] getCalibFiles() { return getFiles( PATH_CCSV, new String[] {""} ); }
 
-  static File[] getTopoDroidFiles( )
+  static File[] getTopoDroidFiles( String basename )
   {
-    File dir = new File( EXTERNAL_STORAGE_PATH );
+    File dir = new File( basename );
     return dir.listFiles( new FileFilter() {
       public boolean accept( File pathname ) { 
         if ( ! pathname.isDirectory() ) return false;

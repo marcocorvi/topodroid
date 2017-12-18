@@ -535,6 +535,9 @@
     <!-- UNUSED string name="button_stop"      >Стоп      </string -->
     <string name="button_upload"    >Качване   </string>
     <string name="button_view"      >Преглед   </string>
+    <!-- TODO string name="button_zoomfit"   >Zoom fit  </string -->
+    <!-- TODO string name="button_landscape" >Landscape </string -->
+    <!-- TODO string name="button_portrait"  >Portrait  </string -->
 
 
     <string name="button_write"     >Качване</string>
@@ -813,6 +816,7 @@
     <string name="title_survey_export">Експортиране на картировка като</string>
     <string name="title_survey_rename">Преименуване като</string>
     <string name="title_plot_rename">Преименуване на скица</string>
+    <!-- TODO string name="title_plot_zoomfit">Zoom fit / Orientation</string -->
     <string name="title_calib_export">Експортиране на калибрация като</string>
     <!-- string name="title_zoom">Приближаване</string -->
 
