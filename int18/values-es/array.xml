@@ -180,7 +180,7 @@
   <string-array name="rawCData">
      <item name="none">Nada</item>
      <item name="dec">Decimal</item>
-     <item name="hex">Hex</item>
+     <item name="hex">hexadecimales</item>
   </string-array>
 
 </resources>

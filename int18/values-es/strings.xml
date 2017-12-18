@@ -274,7 +274,7 @@
     <string name="menu_join_survey">Unir topografías</string>
     <string name="menu_logs">Registros</string>
     <string name="menu_manual_calibration">Calibración</string>
-    <string name="menu_options">Opciones</string>
+    <string name="menu_options">Ajustes</string>
     <string name="menu_overview">Medir distancia</string>
     <string name="menu_pair">Emparejar</string>
     <string name="menu_palette">Simbología</string>
@@ -570,7 +570,7 @@
     <string name="symbol_mine">Minería</string>
     <string name="symbol_paleo">Paleontología</string>
     <string name="symbol_speleo">Espeleo</string>
-    <string name="symbol_extra">Espeleo (2)</string>
+    <string name="symbol_extra">Espeleo(2) </string>
 
     <string name="symbol_reload">Herramientas dibujo</string>
 
@@ -683,13 +683,13 @@
     <string name="help_info_shot">Estadísticas de topografía</string>
     <string name="help_survey_info">Información topografía</string>
     <string name="help_undelete">Recuperar datos eliminados</string>
-    <string name="help_photo">Opciones de Fotos</string>
-    <string name="help_sensor">Opciones de medidas</string>
+    <string name="help_photo">Ajustes de Fotos</string>
+    <string name="help_sensor">Ajustes de medidas</string>
     <string name="help_3d">Visualizar en 3D(Cave3D)</string>
     <string name="help_move">Modo Mover/zoom</string>
     <string name="help_draw">Seleccinar herramienta de dibujo</string>
     <string name="help_edit">Seleccionar modo de edición</string>
-    <string name="help_refs">Opciones de visualización del dibujo</string>
+    <string name="help_refs">Ajustes de visualización del dibujo</string>
     <string name="help_rename">Cambio nombre topografía</string>
     <string name="help_plot_rename">Eliminar/Renombrar dibujo</string>
     <string name="help_plot_switch">Activación dibujo</string>
@@ -825,13 +825,13 @@
     <string name="title_calib_export">Exportar topografía como&#8230;</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-  <string name="pref_cat_survey">Opciones de topografía</string>
-  <string name="pref_cat_drawing">Opciones de dibujo</string>
+  <string name="pref_cat_survey">Ajustes de topografía</string>
+  <string name="pref_cat_drawing">Ajustes de dibujo</string>
   <string name="pref_cat_import_export">Importar/Exportar</string>
-  <string name="pref_cat_calib">Opciones de calibración</string>
-  <string name="pref_cat_device">Opciones de distoX</string>
+  <string name="pref_cat_calib">Ajustes de calibración</string>
+  <string name="pref_cat_device">Ajustes de distoX</string>
   <!-- NO string name="pref_cat_sketch">Opciones de dibujo</string -->
-  <string name="pref_cat_log">Opciones de dibujo</string>
+  <string name="pref_cat_log">Ajustes de dibujo</string>
 
 
   <string name="pref_locale_title">Idioma</string>
@@ -876,10 +876,10 @@
   <!-- TODO string name="pref_lrud_horizontal_message">LRUD left/right maximum splay clino</string -->
   <string name="pref_survex_eol_title">Terminación de línea Survex/Topo</string>
   <string name="pref_survex_eol_summary">Terminación de línea Survex/Topo</string>
-  <string name="pref_survex_splay_title">Estación toma lateral Survex</string>
-  <string name="pref_survex_splay_summary">Añadir a la estación toma lateral en Survex</string>
+  <string name="pref_survex_splay_title">Estación toma radial Survex</string>
+  <string name="pref_survex_splay_summary">Añadir a la estación toma radial en Survex</string>
   <string name="pref_survex_lrud_title">LRUD Survex</string>
-  <string name="pref_survex_lrud_summary">Añadir toma lateral a exportación Survex</string>
+  <string name="pref_survex_lrud_summary">Añadir toma radial a exportación Survex</string>
   <string name="pref_svg_grid_title">SVG parrilla</string>
   <string name="pref_svg_grid_summary">Añadir una parrilla a la exportación SVG</string>
   <string name="pref_svg_in_html_title">SVG en HTML</string>
@@ -888,8 +888,8 @@
   <string name="pref_svg_line_dir_summary">Agregue flecha de orientación a la exportación de SVG</string>
   <string name="pref_kml_stations_title">Estaciones en KML</string>
   <string name="pref_kml_stations_summary">Añadir estaciones a la exportación de KML</string>
-  <string name="pref_kml_splays_title">Tomas laterales en KML</string>
-  <string name="pref_kml_splays_summary">Añadir tomas laterales a la exportación de KML</string>
+  <string name="pref_kml_splays_title">Tomas radiales en KML</string>
+  <string name="pref_kml_splays_summary">Añadir tomas radiales a la exportación de KML</string>
 
   <string name="pref_sock_type_title">Emparejar</string>
   <string name="pref_sock_type_summary">Crear emparejamiento</string>
@@ -899,13 +899,13 @@
   <!-- UNUSED string name="pref_comm_retry_summary">Reintentar comunicación</string -->
   <!-- UNUSED string name="pref_comm_retry_dialogtitle">Números de intentos de comunicación</string -->
   <!-- UNUSED string name="pref_comm_retry_message">Números de intentos de comunicación</string -->
-  <string name="pref_wait_laser_title">Espera después de láser [ms]</string>
-  <string name="pref_wait_laser_summary">Retardo de espera después de girar el láser [ms]</string>
-  <string name="pref_wait_shot_title">Espere tras el disparo [ms]</string>
-  <string name="pref_wait_shot_summary">Retardo de espera después de la medición [ms]</string>
+  <string name="pref_wait_laser_title">Tiempo de espera de láser [ms]</string>
+  <string name="pref_wait_laser_summary">el tiempo de espera después de girar el láser [ms]</string>
+  <string name="pref_wait_shot_title">Tiempo de espera de disparo [ms]</string>
+  <string name="pref_wait_shot_summary">el tiempo de espera después de tomar una medida [ms]</string>
   <string name="pref_wait_data_title">Pausa de datos [ms]</string>
-  <string name="pref_wait_data_summary">Pausa después de descarga de datos [ms]</string>
-  <string name="pref_wait_conn_title">Retardo de espera de datos [ms]</string>
+  <string name="pref_wait_data_summary">pausa después de una descarga de datos [predeterminado 100 ms]</string>
+  <string name="pref_wait_conn_title">Tiempo de espera de datos [ms]</string>
   <string name="pref_wait_conn_summary">Retraso en espera de que los datos estén listos [ms]</string>
   <string name="pref_conn_mode_title">Modo Conexión</string>
   <string name="pref_conn_mode_summary">Modo conexión con DistoX</string>
@@ -927,12 +927,12 @@
   <!-- UNUSED string name="pref_gps_averaging_title">Promedio GPS</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Uso promedio GPS</string -->
 
-  <string name="pref_plot_screen_title">Opciones de pantalla de dibujo</string>
-  <string name="pref_tool_line_title">Opciones de línea</string>
-  <string name="pref_tool_point_title">Opciones de Puntos</string>
-  <string name="pref_location_title">Opciones de ubicación</string>
-  <string name="pref_accuracy_title">Opciones de medición</string>
-  <string name="pref_shot_data_title">Opciones de visuales</string>
+  <string name="pref_plot_screen_title">Ajustes de pantalla de croquis</string>
+  <string name="pref_tool_line_title">Ajustes de línea</string>
+  <string name="pref_tool_point_title">Ajustes de Puntos</string>
+  <string name="pref_location_title">Ajustes de ubicación</string>
+  <string name="pref_accuracy_title">Ajustes de medición</string>
+  <string name="pref_shot_data_title">Ajustes de visuales</string>
   <string name="pref_shot_units_title">Unidades de medida</string>
   <string name="pref_cwd_title">Directorio principal</string>
   <!-- UNUSED string name="pref_cwd_summary">Directorio principal TopoDroid</string -->
@@ -977,9 +977,9 @@
   <string name="pref_leg_title">Precisión de visual</string>
   <string name="pref_leg_summary">Precisión entre las mediciones de una visual</string>
   <string name="pref_leg_message">Precisión entre las mediciones de una visual</string>
-  <string name="pref_max_shot_title">Longitud de disparo máxima</string>
-  <string name="pref_max_shot_summary">Longitud máxima de disparo [m]</string>
-  <string name="pref_max_shot_message">Las tomas sobre esta longitud se marcan como sobrepaso</string>
+  <string name="pref_max_shot_title">Longitud máxima de la toma</string>
+  <string name="pref_max_shot_summary">Máxima longitud que debe alcanzar la toma [m]</string>
+  <string name="pref_max_shot_message">Las tomas mas grandes de esta longitud se marcan como sobrepaso</string>
   <string name="pref_min_leg_title">Longitud mínima de la toma</string>
   <string name="pref_min_leg_summary">Minima longitud de la toma [m]</string>
   <string name="pref_min_leg_message">Las tomas más cortas que el mínimo, tienen fondo naranja</string>
@@ -987,7 +987,7 @@
   <string name="pref_backsight_summary">Se duplican los datos en el diálogo de la toma manual</string>
   <string name="pref_prev_next_title">Añadir botón Ant./Sig.</string>
   <string name="pref_prev_next_summary">Añade un botón Anterior/Sguiente en diálogo de toma</string>
-  <string name="pref_mag_anomaly_title">Declinación magnética</string>
+  <string name="pref_mag_anomaly_title">Compensación magnética</string>
   <string name="pref_mag_anomaly_summary">Compensar declinación magnética local</string>
   <string name="pref_azimuth_manual_title">Toma extendida</string>
   <string name="pref_azimuth_manual_summary">fijas o con relación a la referencia extendida</string>
