@@ -316,7 +316,7 @@
     <string name="popup_cont_none">Nada</string>
     <string name="popup_cont_start">Inicio de punto</string>
     <string name="popup_cont_end">final de punto</string>
-    <string name="popup_cont_both">Varios puntos</string>
+    <string name="popup_cont_both">Ambos puntos</string>
     <string name="popup_cont_continue">Continuar</string>
 
     <string name="connected_none">No conctado</string>
