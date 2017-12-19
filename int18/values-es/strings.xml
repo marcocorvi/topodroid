@@ -1056,7 +1056,7 @@
   <string name="pref_lineacc_title">Precisión Bezier</string>
   <string name="pref_lineacc_summary">Precisión Bezier interpolación cúbica</string>
   <string name="pref_lineacc_message">Precisión Bezier interpolación cúbica</string>
-  <string name="pref_linecorner_title">Ángulo Bezier</string>
+  <string name="pref_linecorner_title">Esquina Bezier</string>
   <string name="pref_linecorner_summary">Límite de la ángulo de línea Bezier</string>
   <string name="pref_linecorner_message">Detección del límite del ángulo de línea Bezier</string>
   <string name="pref_calib_algo_title">Algoritmo</string>
