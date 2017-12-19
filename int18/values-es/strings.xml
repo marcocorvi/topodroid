@@ -1162,18 +1162,18 @@
   <string name="pref_unit_location_title">Unidades de Posicionamiento</string>
   <string name="pref_unit_location_summary">Visualizar unidades de Posicionamiento</string>
 
-  <string name="pref_plot_walls_title">Paredes automáticas</string>
+  <string name="pref_plot_walls_title">Ajustes paredes automáticas</string>
   <string name="pref_walls_type_title">Tipo de pared</string>
   <string name="pref_walls_type_summary">Tipo de paredes</string>
-  <string name="pref_walls_plan_thr_title">inclinación tomas laterales</string>
-  <string name="pref_walls_plan_thr_summary">Máxima inclinación para tomas laterales, paredes lisas</string>
-  <string name="pref_walls_plan_thr_message">Máxima inclinación para tomas laterales, paredes lisas [deg]</string>
-  <string name="pref_walls_extended_thr_title">Perfil inclinación de tomas laterales</string>
-  <string name="pref_walls_extended_thr_summary">Máxima inclinación para tomas laterales, perfil paredes</string>
-  <string name="pref_walls_extended_thr_message">Máxima inclinación para tomas laterales, perfil paredes [grad.]</string>
+  <string name="pref_walls_plan_thr_title">Inclinación tomas radiales lisas</string>
+  <string name="pref_walls_plan_thr_summary">Máxima inclinación para tomas radiales, paredes lisas</string>
+  <string name="pref_walls_plan_thr_message">Máxima inclinación para tomas radiales, paredes lisas [deg]</string>
+  <string name="pref_walls_extended_thr_title">Inclinación de tomas radiales paredes</string>
+  <string name="pref_walls_extended_thr_summary">Máxima inclinación para tomas radiales, perfil paredes</string>
+  <string name="pref_walls_extended_thr_message">Máxima inclinación para tomas radiales, perfil paredes [grad.]</string>
   <string name="pref_walls_xclose_title">Separación</string>
   <string name="pref_walls_xclose_summary">Punto de separación mínima a lo largo de la toma</string>
-  <string name="pref_walls_xclose_message">Separación mínima de puntos de pared a lo largo del tiro [m]</string>
+  <string name="pref_walls_xclose_message">Separación mínima de puntos de pared a lo largo de una toma [m]</string>
   <string name="pref_walls_concave_title">Concavidad</string>
   <string name="pref_walls_concave_summary">Concavidad máxima</string>
   <string name="pref_walls_concave_message">Concavidad máxima [porciento]</string>
