@@ -968,7 +968,7 @@
   <string name="xsections_private">Secciones-X privadas</string>
 
 
-  <string name="pref_survey_stations_title">Sentido de las estaciones topográficas</string>
+  <string name="pref_survey_stations_title">Definición de estaciones y visuales</string>
   <string name="pref_survey_stations_summary">Estaciones topográficas automáticas</string>
   <string name="pref_accel_thr_title">Precisión Aceleración</string>
   <string name="pref_accel_thr_summary">Precisión sobre las mediciones aceleración</string>
