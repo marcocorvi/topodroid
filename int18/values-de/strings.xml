@@ -189,11 +189,11 @@
     <string name="error_group_non_integer">Gruppennummer muss eine ganze Zahl sein</string>
     <string name="error_alt_required">Höhe erforderlich</string>
     <string name="error_invalid_number">Ungültige Anzahl</string>
-    <!-- TODO string name="error_invalid_name">Invalid name</string -->
+    <string name="error_invalid_name">Ungültiger Name</string>
     <string name="error_lat_required">Breite erforderlich</string>
     <string name="error_long_required">Länge erforderlich</string>
     <string name="error_name_required">Name erforderlich</string>
-    <!-- TODO string name="error_dir_exists">Directory already exists</string -->
+    <string name="error_dir_exists">Verzeichnis existiert bereits</string>
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Referenzmesspunkt erforderlich</string>
     <!-- UNUSED string name="error_station_already_fixed">Dauerhafter Messpunkt</string -->
@@ -225,10 +225,10 @@
     <string name="fixed">fixiert</string>
     <string name="painted">gezeichnet</string>
 
-    <!-- TODO string name="cbd_title">Base directory</string -->
-    <!-- TODO string name="cwd">TopoDroid project directory</string -->
-    <!-- TODO string name="empty_cwd">Empty project name</string -->
-    <!-- TODO string name="bad_cbd">Base directory inexistent or not writable</string -->
+    <string name="cbd_title">Basisverzeichnis</string>
+    <string name="cwd">TopoDroid Projektverzeichnis</string>
+    <string name="empty_cwd">Leerer Projektname</string>
+    <string name="bad_cbd">Basisverzeichnis existiert nicht oder nicht beschreibbar</string>
     <string name="bad_cwd">Der Projektname kann nicht der Pfad sein</string>
     <string name="bad_line">Ungültiger Linientyp</string>
     <string name="bad_point">Ungültiger Punkttyp</string>
@@ -500,7 +500,7 @@
     <string name="extended_profile">Erweitertes Profil</string>
     <!-- UNUSED string name="v_section">V-PROFIL</string -->
     <string name="h_section">H-PROFIL</string>
-    <!-- TODO string name="landscape">landscape</string -->
+    <string name="landscape">Querformat</string>
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Verbindungsfehler mit DistoX</string>
@@ -516,9 +516,9 @@
     <string name="button_add"       >Erstellen       </string>
     <string name="button_back"      >Zurück    </string>
     <string name="button_cancel"    >Abbrechen </string>
-    <!-- TODO string name="button_change"    >Change    </string -->
+    <string name="button_change"    >Ändern    </string>
     <string name="button_close"     >Schließen     </string>
-    <!-- TODO string name="button_create"    >Create    </string -->
+    <string name="button_create"    >Erstellen    </string>
     <string name="button_convert"   >Konvertieren </string>
     <string name="button_current"   >Hier fortsetzen   </string>
     <string name="button_delete"    >Löschen    </string>
@@ -557,9 +557,9 @@
     <!-- UNUSED string name="button_stop"      >Stop</string -->
     <string name="button_upload"    >Schreiben</string>
     <string name="button_view"      >Anzeigen      </string>
-    <!-- TODO string name="button_zoomfit"   >Zoom fit  </string -->
-    <!-- TODO string name="button_landscape" >Landscape </string -->
-    <!-- TODO string name="button_portrait"  >Portrait  </string -->
+    <string name="button_zoomfit"   >Grösse anpassen  </string>
+    <string name="button_landscape" >Querformat </string>
+    <string name="button_portrait"  >Hochformat  </string>
 
     <string name="button_write"     >Hochladen</string>
     <string name="button_xsection"  >Profil</string>
@@ -847,7 +847,7 @@
     <string name="title_survey_export">Vermessung speichern als</string>
     <string name="title_survey_rename">Benenne Vermessung um in</string>
     <string name="title_plot_rename">Skizze umbenennen</string>
-    <!-- TODO string name="title_plot_zoomfit">Zoom fit / Orientation</string -->
+    <string name="title_plot_zoomfit">Grösse anpassen / Ausrichtung</string>
     <string name="title_calib_export">Kalibrierung speichern als</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 <!-- PREFERENCES STRINGS CAN BE LEFT UNTRANSLATED FOR NOW -->
@@ -893,12 +893,12 @@
   <string name="pref_ortho_lrud_title">Min. Winkel für LRUD in Export</string>
   <string name="pref_ortho_lrud_summary">Minimaler Hilfszug-Winkel für LRUD</string>
   <string name="pref_ortho_lrud_message">Minimaler Hilfszug-Winkel für LRUD</string>
-  <!-- TODO string name="pref_lrud_vertical_title">UD min splay clino</string -->
-  <!-- TODO string name="pref_lrud_vertical_summary">LRUD up/down minimum splay clino</string -->
-  <!-- TODO string name="pref_lrud_vertical_message">LRUD up/down minimum splay clino</string -->
-  <!-- TODO string name="pref_lrud_horizontal_title">LR max splay clino</string -->
-  <!-- TODO string name="pref_lrud_horizontal_summary">LRUD left/right maximum splay clino</string -->
-  <!-- TODO string name="pref_lrud_horizontal_message">LRUD left/right maximum splay clino</string -->
+  <string name="pref_lrud_vertical_title">Minimaler Hilfszug-Winkel für UD</string>
+  <string name="pref_lrud_vertical_summary">LRUD-Ermittlung: Minimaler vertikaler Winkel für UD</string>
+  <string name="pref_lrud_vertical_message">LRUD-Ermittlung: Minimaler vertikaler Winkel für UD</string>
+  <string name="pref_lrud_horizontal_title">Maximaler Hilfszug-Winkel für LR</string>
+  <string name="pref_lrud_horizontal_summary">LRUD-Ermittlung: Maximaler vertikaler Winkel für LR</string>
+  <string name="pref_lrud_horizontal_message">LRUD-Ermittlung: Maximaler vertikaler Winkel für LR</string>
   <string name="pref_survex_eol_title">Survex/Topo Zeilenumbruch</string>
   <string name="pref_survex_eol_summary">Survex/Topo Zeilenumbruch</string>
   <string name="pref_survex_splay_title">Survex Hilfszug-Zielstationen</string>
@@ -981,8 +981,8 @@
   <string name="pref_vert_splay_message">Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string>
   <!-- TODO string name="pref_section_splay_title">Splay dash angle threshold</string -->
   <!-- TODO string name="pref_section_splay_message">Over this angle with the section plane, splays are dashed</string -->
-  <!-- TODO string name="pref_data_backup_title">Data auto-export</string -->
-  <!-- TODO string name="pref_data_backup_summary">Automatic data export (need default format)</string -->
+  <string name="pref_data_backup_title">Automatischer Datenexport</string>
+  <string name="pref_data_backup_summary">Automatischer Datenexport beim Verlassen (benötigt ein Standard Exportformat)</string>
   <string name="pref_shared_xsections_title">Querschnitt Sichtbarkeit</string>
   <string name="pref_shared_xsections_summary">Querschnitte nur auf einer oder auf allen Skizzen</string>
   <string name="xsections_shared">Auf allen Skizzen</string>
@@ -1232,7 +1232,7 @@
   <string name="pref_log_input">Benutzereingaben</string>
   <string name="pref_log_loc">Position</string>
   <string name="pref_log_num">Daten Reduktion</string>
-  <!-- TODO string name="pref_log_path">File paths</string -->
+  <string name="pref_log_path">Dateipfade</string>
   <string name="pref_log_photo">Foto</string>
   <string name="pref_log_plot">Skizzen</string>
   <string name="pref_log_proto">DistoX Protokoll</string>
