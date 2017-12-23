@@ -89,6 +89,16 @@
      / -->
 
      <!-- com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_SECTION_SPLAY"
+       android:title="@string/pref_section_splay_title"
+       android:summary="@string/pref_section_splay_message"
+       android:dialogTitle="@string/pref_section_splay_title"
+       android:dialogMessage="@string/pref_section_splay_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="60"
+     / -->
+
+     <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_HTHRESHOLD"
        android:title="@string/pref_hthr_title"
        android:summary="@string/pref_hthr_summary"

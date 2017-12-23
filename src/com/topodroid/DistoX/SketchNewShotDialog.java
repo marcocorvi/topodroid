@@ -152,6 +152,8 @@ public class SketchNewShotDialog extends MyDialog
 
   public void onClick(View v) 
   {
+    MyKeyboard.close( mKeyboard );
+
     // When the user clicks, just finish this activity.
     // onPause will be called, and we save our data there.
 
@@ -198,12 +200,7 @@ public class SketchNewShotDialog extends MyDialog
   @Override
   public void onBackPressed()
   {
-    if ( TDSetting.mKeyboard ) {
-      if ( mKeyboard.isVisible() ) {
-        mKeyboard.hide();
-        return;
-      }
-    }
+    if ( MyKeyboard.close( mKeyboard ) ) return;
     dismiss();
   }
 

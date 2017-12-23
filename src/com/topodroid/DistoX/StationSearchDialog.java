@@ -103,6 +103,7 @@ public class StationSearchDialog extends MyDialog
   public void onClick(View v) 
   {
     if ( CutNPaste.dismissPopup() ) return;
+    MyKeyboard.close( mKeyboard );
 
     // TDLog.Log(  TDLog.LOG_INPUT, "StationSearchDialog onClick() " );
     Button b = (Button) v;
@@ -125,13 +126,7 @@ public class StationSearchDialog extends MyDialog
   public void onBackPressed()
   {
     if ( CutNPaste.dismissPopup() ) return;
-
-    if ( TDSetting.mKeyboard ) {
-      if ( mKeyboard.isVisible() ) {
-        mKeyboard.hide();
-        return;
-      }
-    }
+    if ( MyKeyboard.close( mKeyboard ) ) return;
     dismiss();
   }
 

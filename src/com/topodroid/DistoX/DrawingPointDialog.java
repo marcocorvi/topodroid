@@ -55,7 +55,7 @@ public class DrawingPointDialog extends MyDialog
   private Button   mBtnOk;
   private Button   mBtnCancel;
 
-  private String mXSectionName;
+  private String mXSectionName; // full section name = scrap-name
 
   public DrawingPointDialog( Context context, DrawingWindow parent, DrawingPointPath point )
   {
@@ -97,8 +97,10 @@ public class DrawingPointDialog extends MyDialog
     }
 
     if ( mPoint.mPointType == BrushManager.mPointLib.mPointSectionIndex ) {
-      // FIXME GET_OPTION
-      mXSectionName = mPoint.getOption("-scrap");
+      // FIXME SECTION_RENAME
+      // scrap option contains only section nickname (no survey prefix)
+      mXSectionName = mPoint.getOption("-scrap"); 
+
       // String[] vals = mPoint.mOptions.split(" ");
       // for ( int k = 0; k < vals.length; ++k ) {
       //   if ( vals[k].equals("-scrap") ) {
@@ -109,6 +111,8 @@ public class DrawingPointDialog extends MyDialog
       //   }
       // }
       if ( mXSectionName != null ) {
+	// FIXME SECTION_RENAME
+	// mXSectionName = mApp.mSurvey + "-" + mXSectionName;
         mHasXSectionOutline = mParent.hasXSectionOutline( mXSectionName );
         mCBxsection.setChecked( mHasXSectionOutline );
         mBTdraw.setOnClickListener( this );

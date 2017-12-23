@@ -54,6 +54,21 @@ public class DrawingPointPath extends DrawingPath
   double mOrientation;
   String mPointText;
 
+  // FIXME SECTION_RENAME
+  DrawingPointPath fixScrap( String survey_name )
+  {
+    if ( survey_name != null && mPointType == BrushManager.mPointLib.mPointSectionIndex ) {
+      String scrap = mOptions.replace("-scrap ", "");
+      if ( ! scrap.startsWith(survey_name) ) {
+        int pos = scrap.lastIndexOf('-');
+        scrap = survey_name + "-" + scrap.substring(pos+1);
+      }
+      mOptions = "-scrap " + scrap;
+    }
+    return this;
+  }
+
+
   // String getTextFromOptions( String options )
   // {
   //   if ( options != null ) {
@@ -123,6 +138,12 @@ public class DrawingPointPath extends DrawingPath
         if ( missingSymbols != null ) missingSymbols.addPointFilename( fname ); 
         type = 0;
       }
+      // FIXME SECTION_RENAME
+      // if ( type == BrushManager.mPointLib.mPointSectionIndex ) {
+      //   String scrap = options.replace("-scrap ", "");
+      //   scrap = scrap.replace( mApp.mSurvey + "-", "" ); // remove survey name from options
+      //   option = "-scrap " + scrap;
+      // }
       DrawingPointPath ret = new DrawingPointPath( type, ccx, ccy, scale, text, options );
       ret.setOrientation( orientation );
       return ret;
@@ -340,6 +361,8 @@ public class DrawingPointPath extends DrawingPath
     String th_name = BrushManager.mPointLib.getSymbolThName(mPointType);
     pw.format(Locale.US, "point %.2f %.2f %s", cx*toTherion, -cy*toTherion, th_name );
     toTherionOrientation( pw );
+    // FIXME SECTION_RENAME
+    // if ( mPointType != BrushManager.mPointLib.mPointSectionIndex )
     toTherionTextOrValue( pw );
     toTherionOptions( pw );
     pw.format("\n");
@@ -376,10 +399,15 @@ public class DrawingPointPath extends DrawingPath
       //   case SCALE_XL: pw.format( " -scale xl" ); break;
       // }
     }
-
-    if ( mOptions != null && mOptions.length() > 0 ) {
-      pw.format(" %s", mOptions );
-    }
+    // FIXME SECTION_RENAME
+    // if ( type == BrushManager.mPointLib.mPointSectionIndex ) {
+    //   String scrap = mOptions.replace("-scrap ", "" );
+    //   pw.format(" -scrap %s-%s", mApp.mSurvey, scrap );
+    // } else {
+      if ( mOptions != null && mOptions.length() > 0 ) {
+        pw.format(" %s", mOptions );
+      }
+    // }
   }
 
   @Override

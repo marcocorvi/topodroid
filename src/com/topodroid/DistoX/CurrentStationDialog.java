@@ -174,6 +174,7 @@ public class CurrentStationDialog extends MyDialog
   public void onClick(View v) 
   {
     CutNPaste.dismissPopup();
+    MyKeyboard.close( mKeyboard );
 
     // TDLog.Log(  TDLog.LOG_INPUT, "CurrentStationDialog onClick() " );
     Button b = (Button) v;
@@ -257,13 +258,7 @@ public class CurrentStationDialog extends MyDialog
   public void onBackPressed()
   {
     if ( CutNPaste.dismissPopup() ) return;
-
-    if ( TDSetting.mKeyboard ) {
-      if ( mKeyboard.isVisible() ) {
-        mKeyboard.hide();
-        return;
-      }
-    }
+    if ( MyKeyboard.close( mKeyboard ) ) return;
     dismiss();
   }
 

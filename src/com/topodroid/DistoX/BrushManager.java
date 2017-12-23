@@ -116,6 +116,8 @@ public class BrushManager
   static Paint fixedSplay2Paint = null;  // cross-section splay2 (at viewed station)
   static Paint fixedSplay3Paint = null;  // dash splay
   static Paint fixedSplay4Paint = null;  // dot splay
+  static Paint fixedSplay23Paint = null;  // blue dash splay
+  static Paint fixedSplay24Paint = null;  // blue dot splay
   static Paint fixedGridPaint  = null;
   static Paint fixedGrid10Paint  = null;
   static Paint fixedGrid100Paint  = null;
@@ -277,7 +279,7 @@ public class BrushManager
       fixedSplay2Paint.setStyle(Paint.Style.STROKE);
       fixedSplay2Paint.setStrokeJoin(Paint.Join.ROUND);
       fixedSplay2Paint.setStrokeCap(Paint.Cap.ROUND);
-      fixedSplay2Paint.setColor( TDColor.GREEN );
+      fixedSplay2Paint.setColor( TDColor.BLUE );
 
       fixedSplay3Paint = new Paint();
       fixedSplay3Paint.setDither(true);
@@ -291,6 +293,14 @@ public class BrushManager
       DashPathEffect dash3 = new DashPathEffect( x, 0 );
       fixedSplay3Paint.setPathEffect( dash3 );
 
+      fixedSplay23Paint = new Paint();
+      fixedSplay23Paint.setDither(true);
+      fixedSplay23Paint.setStyle(Paint.Style.STROKE);
+      fixedSplay23Paint.setStrokeJoin(Paint.Join.ROUND);
+      fixedSplay23Paint.setStrokeCap(Paint.Cap.ROUND);
+      fixedSplay23Paint.setColor( TDColor.BLUE );
+      fixedSplay23Paint.setPathEffect( dash3 );
+
       fixedSplay4Paint = new Paint();
       fixedSplay4Paint.setDither(true);
       fixedSplay4Paint.setStyle(Paint.Style.STROKE);
@@ -302,6 +312,14 @@ public class BrushManager
       x[1] =  8; 
       DashPathEffect dash4 = new DashPathEffect( x, 0 );
       fixedSplay4Paint.setPathEffect( dash4 );
+
+      fixedSplay24Paint = new Paint();
+      fixedSplay24Paint.setDither(true);
+      fixedSplay24Paint.setStyle(Paint.Style.STROKE);
+      fixedSplay24Paint.setStrokeJoin(Paint.Join.ROUND);
+      fixedSplay24Paint.setStrokeCap(Paint.Cap.ROUND);
+      fixedSplay24Paint.setColor( TDColor.BLUE );
+      fixedSplay24Paint.setPathEffect( dash4 );
 
       fixedGridPaint = new Paint();
       fixedGridPaint.setDither(true);

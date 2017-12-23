@@ -952,6 +952,8 @@
   <string name="pref_vert_splay_title">Seuil incl. visées latérales pointillés</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Seuil inclinaison visées latérales pointillé</string -->
   <string name="pref_vert_splay_message">Seuil d\'inclinaison des visées latérales pointillés</string>
+  <!-- TODO string name="pref_section_splay_title">Splay dash angle threshold</string -->
+  <!-- TODO string name="pref_section_splay_message">Over this angle with the section plane, splays are dashed</string -->
   <!-- TODO string name="pref_data_backup_title">Data auto-export</string -->
   <!-- TODO string name="pref_data_backup_summary">Automatic data export (need default format)</string -->
   <!-- TODO string name="pref_shared_xsections_title">Shared x-sections</string -->

@@ -317,6 +317,7 @@ public class ShotNewDialog extends MyDialog
       mTimer = null;
     }
     CutNPaste.dismissPopup();
+    MyKeyboard.close( mKeyboard );
 
     Button b = (Button) v;
     String val;
@@ -501,12 +502,7 @@ public class ShotNewDialog extends MyDialog
       mTimer = null;
     }
     if ( CutNPaste.dismissPopup() ) return;
-    if ( TDSetting.mKeyboard ) {
-      if ( mKeyboard.isVisible() ) {
-        mKeyboard.hide();
-        return;
-      }
-    }
+    if ( MyKeyboard.close( mKeyboard ) ) return;
     dismiss();
   }
 

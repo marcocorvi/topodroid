@@ -341,6 +341,9 @@ public class MainWindow extends Activity
     } else if ( filename.endsWith(".tro") || filename.endsWith(".TRO") ) {
       String filepath = TDPath.getImportFile( filename );
       new ImportVisualTopoTask( this ).execute( filepath ); 
+    } else if ( filename.endsWith(".csn") || filename.endsWith(".CSN") ) { // CaveSniper text file
+      String filepath = TDPath.getImportFile( filename );
+      new ImportCaveSniperTask( this ).execute( filepath ); 
     } else if ( filename.endsWith(".zip") ) {
       Toast.makeText(mActivity, R.string.import_zip_wait, Toast.LENGTH_LONG).show();
       new ImportZipTask( this ) .execute( filename );

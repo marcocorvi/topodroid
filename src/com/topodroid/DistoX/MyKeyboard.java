@@ -135,6 +135,8 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
               kbd.setEditText( null );
             }
           } else {
+	    EditText et = (EditText)v;
+	    if ( et != null ) clearCursor( et );
             // e.setBackgroundResource( android.R.drawable.edit_text );
             kbd.setEditText( null );
           }
@@ -256,11 +258,34 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
         return false;
       }
       switchKeyboard( flag );
+      setCursor( e );
       return true;
     } else {
       hide();
     }
     return false;
+  }
+
+  static private void setCursor( EditText e )
+  {
+    if ( e == null ) return;
+    Editable cs = e.getText();
+    int len = cs.length();
+    if ( len == 0 || cs.charAt(len-1) != CHAR_CURSOR ) {
+      cs.append( CHAR_CURSOR );
+    }
+  }
+
+  void clearCursor( ) { clearCursor( mEdit ); }
+
+  static private void clearCursor( EditText e )
+  {
+    if ( e == null ) return;
+    Editable cs = e.getText();
+    int len = cs.length();
+    if ( len > 0 && cs.charAt(len-1) == CHAR_CURSOR ) {
+      cs.delete( len-1, len );
+    }
   }
 
 
@@ -276,6 +301,10 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
   final static char CHAR_DEGREE     = (char)176;
   final static char CHAR_MINUTE     = (char)39;
   final static char CHAR_POINT      = (char)46;
+  final static char CHAR_CURSOR     = (char)95; // 95 underscore, 124 vert bar, 63 question mark 166 broken vert bar
+  final static String STR_DEGREE  = Character.toString( CHAR_DEGREE );
+  final static String STR_MINUTE  = Character.toString( CHAR_MINUTE );
+  final static String STR_POINT   = Character.toString( CHAR_POINT  );
 
 
   @Override
@@ -296,6 +325,7 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
     } else if ( mEdit != null ) {
       Editable editable = mEdit.getText() ; 
       int len = editable.length();
+      if ( len > 0 && editable.charAt(len-1) == CHAR_CURSOR ) --len;
       if ( keyCode == -5 /* Keyboard.KEYCODE_DELETE */ ) {
         // Log.v( TAG, "Keycode " + keyCode + " DELETE len " + len + " text " + editable.toString());
         if ( len > 0 ) {
@@ -320,7 +350,8 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
             char ch = editable.charAt(k);
             if ( ch == CHAR_MINUTE || ch == CHAR_POINT || ch == CHAR_DEGREE ) { ok = false; break; }
           }
-          if ( ok ) editable.append( CHAR_DEGREE );
+          // if ( ok ) editable.append( CHAR_DEGREE );
+          if ( ok ) editable.insert( len, STR_DEGREE );
         }
       } else if ( keyCode == 39 ) { // minute
         if ( hasDegree && len > 0 ) {
@@ -329,7 +360,8 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
             char ch = editable.charAt(k);
             if ( ch == CHAR_MINUTE || ch == CHAR_POINT ) { ok = false; break; }
           }
-          if ( ok ) editable.append( CHAR_MINUTE );
+          // if ( ok ) editable.append( CHAR_MINUTE );
+          if ( ok ) editable.insert( len, STR_MINUTE );
         }
       } else if ( keyCode == 46 ) { // point
         if ( hasPoint ) {
@@ -338,7 +370,8 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
             char ch = editable.charAt(k);
             if ( ch == CHAR_POINT ) { ok = false; break; }
           }
-          if ( ok ) editable.append( CHAR_POINT );
+          // if ( ok ) editable.append( CHAR_POINT );
+          if ( ok ) editable.insert( len, STR_POINT );
         }
       } else {
         // Log.v( TAG, "Keycode " + keyCode + " APPEND text " + editable.toString());
@@ -348,8 +381,10 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
             ch += 32;
           }
         }
-        editable.append( Character.toString(ch) ); 
+        // editable.append( Character.toString(ch) ); 
+        editable.insert( len, Character.toString(ch) ); 
       }
+      // editable.cursorAt( editable.length() );
       // setTitle( editable.toString() );
     } else {
       // Log.d( TAG, "Keycode " + keyCode );
@@ -477,5 +512,17 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
       }
     }
   }
+
+  static boolean close( MyKeyboard kbd )
+  {
+    if ( kbd == null ) return false;
+    kbd.clearCursor();
+    if ( kbd.isVisible() ) {
+      kbd.hide();
+      return true;
+    }
+    return false;
+  }
+
 }
 

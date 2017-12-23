@@ -697,12 +697,35 @@ public class DrawingWindow extends ItemDrawer
   }
 
   // used for splays in x-sections
-  private void addFixedSectionSplay( DBlock blk, float x1, float y1, float x2, float y2,
+  private void addFixedSectionSplay( DBlock blk, float x1, float y1, float x2, float y2, float a,
                                      // float xoff, float yoff, 
                                      boolean blue )
   {
+	  Log.v("DistoX", "Section splay angle " + a + " " + TDSetting.mVertSplay );
     DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
-    dpath.setPaint( blue? BrushManager.fixedSplay2Paint : BrushManager.fixedSplayPaint );
+    if ( blue ) {
+      if ( blk.mType == DBlock.BLOCK_X_SPLAY ) {
+        dpath.setPaint( BrushManager.fixedGreenPaint );
+      } else if ( a > TDSetting.mSectionSplay ) {
+        dpath.setPaint( BrushManager.fixedSplay24Paint );
+      } else if ( a < -TDSetting.mSectionSplay ) {
+        dpath.setPaint( BrushManager.fixedSplay23Paint );
+      } else {
+        dpath.setPaint( BrushManager.fixedSplay2Paint );
+      }
+    } else {
+      if ( blk.mType == DBlock.BLOCK_X_SPLAY ) {
+        dpath.setPaint( BrushManager.fixedGreenPaint );
+      } else if ( a > TDSetting.mSectionSplay ) {
+        dpath.setPaint( BrushManager.fixedSplay4Paint );
+      } else if ( a < -TDSetting.mSectionSplay ) {
+        dpath.setPaint( BrushManager.fixedSplay3Paint );
+      } else {
+        dpath.setPaint( BrushManager.fixedSplayPaint );
+      }
+    }
+    // dpath.setPaint( blue? BrushManager.fixedSplay2Paint : BrushManager.fixedSplayPaint );
+
     // mDrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
     mDrawingUtil.makePath( dpath, x1, y1, x2, y2 );
     mDrawingSurface.addFixedPath( dpath, true, false ); // true SPLAY false SELECTABLE
@@ -1945,6 +1968,9 @@ public class DrawingWindow extends ItemDrawer
       float Z = (float)Math.sin( bc );                       // Up
       float x =  d * (float)(X1 * X + Y1 * Y + Z1 * Z);
       float y = -d * (float)(X2 * X + Y2 * Y + Z2 * Z);
+      float a = (float)(Math.acos(X0 * X + Y0 * Y + Z0 * Z) * TDMath.RAD2DEG); // cos-angle with the normal
+      if ( a > 90 ) a = 180 - a;
+      
       if ( mType == PlotInfo.PLOT_H_SECTION ) { // Rotate as NORTH is upward
         float xx = -yn * x + xn * y;
         y = -xn * x - yn * y;
@@ -1954,10 +1980,10 @@ public class DrawingWindow extends ItemDrawer
       if ( splay_station == 1 ) {
         // N.B. this must be guaranteed for X_SECTION
         // addFixedSectionSplay( b, xfrom, yfrom, xfrom+x, yfrom+y, 0, 0, false );
-        addFixedSectionSplay( b, xfrom, yfrom, xfrom+x, yfrom+y, false );
+        addFixedSectionSplay( b, xfrom, yfrom, xfrom+x, yfrom+y, a, false );
       } else { // if ( splay_station == 2
         // addFixedSectionSplay( b, xto, yto, xto+x, yto+y, 0, 0, true );
-        addFixedSectionSplay( b, xto, yto, xto+x, yto+y, true );
+        addFixedSectionSplay( b, xto, yto, xto+x, yto+y, a, true );
       }
     }
     // mDrawingSurface.setScaleBar( mCenter.x, mCenter.y ); // (90,160) center of the drawing
@@ -2942,7 +2968,7 @@ public class DrawingWindow extends ItemDrawer
                           float x5 = mCurrentLinePath.mLast.x + mCurrentLinePath.mDx * 20; 
                           float y5 = mCurrentLinePath.mLast.y + mCurrentLinePath.mDy * 20; 
 			  // FIXME if ( mLandscape ) { float t=x5; x5=-y5; y5=t; }
-                          String scrap_option = "-scrap " + mApp.mySurvey + "-" + section_id;
+                          String scrap_option = "-scrap " /* + mApp.mySurvey + "-" */ + section_id;
                           DrawingPointPath section_pt = new DrawingPointPath( BrushManager.mPointLib.mPointSectionIndex,
                                                                           x5, y5, DrawingPointPath.SCALE_M, 
                                                                           null, // no text 
@@ -3306,7 +3332,7 @@ public class DrawingWindow extends ItemDrawer
           float x5 = st.getXSectionX( 4 ); // FIXME offset
           float y5 = st.getXSectionY( 4 );
 	  if ( mLandscape ) { float t=x5; x5=-y5; y5=t; }
-	  String scrap_option = "-scrap " + mApp.mySurvey + "-" + xs_id;
+	  String scrap_option = "-scrap " /* + mApp.mySurvey + "-" */ + xs_id;
 	  DrawingPointPath section_pt = new DrawingPointPath( BrushManager.mPointLib.mPointSectionIndex,
 							    x5, y5, DrawingPointPath.SCALE_M, 
 							    null, scrap_option ); // no text
@@ -4347,10 +4373,12 @@ public class DrawingWindow extends ItemDrawer
       }
     }
 
+    // name can be the scrap-name or the section-name (plot name)
     void openSectionDraw( String scrapname )
     { 
-      // remove survey name from scrap name
+      // remove survey name from scrap-name (if necessary)
       String name = scrapname.replace( mApp.mySurvey + "-", "" );
+
       PlotInfo pi = mData.getPlotInfo( mApp.mSID, name );
       if ( pi != null ) {
         pushInfo( pi.type, pi.name, pi.start, pi.view, pi.azimuth, pi.clino, -1 );
@@ -4583,7 +4611,7 @@ public class DrawingWindow extends ItemDrawer
       float hZoom = (float) ( ( ( mDrawingSurface.getMeasuredHeight() - mListView.getHeight() ) * 0.9 ) / ( 1 + h ));
       mZoom = ( hZoom < wZoom ) ? hZoom : wZoom;
       if ( mZoom < 0.1f ) mZoom = 0.1f;
-      mOffset.y = ( TopoDroidApp.mDisplayHeight + mListView.getHeight() - mDrawingUtil.CENTER_Y )/(2*mZoom) - lr;
+      mOffset.y = ( TopoDroidApp.mDisplayHeight + mListView.getHeight() - mDrawingUtil.CENTER_Y )/(2*mZoom) + lr;
       mOffset.x = ( TopoDroidApp.mDisplayWidth - mDrawingUtil.CENTER_X )/(2*mZoom) - tb;
     } else {
       float w = b.right - b.left;
@@ -5474,6 +5502,5 @@ public class DrawingWindow extends ItemDrawer
       mDrawingSurface.setXSectionOutline( name, tdr, x-mDrawingUtil.CENTER_X, y-mDrawingUtil.CENTER_Y );
     }
   }
-
 
 }

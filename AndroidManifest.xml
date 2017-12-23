@@ -2,13 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="304059"
-      android:versionName="3.4.4c"
+      android:versionCode="304061"
+      android:versionName="3.4.4e"
     >
     <uses-sdk
        android:minSdkVersion="8"
        android:targetSdkVersion="8"
     />
+<!-- android:targetSdkVersion="8" -->
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />

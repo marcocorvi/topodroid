@@ -95,7 +95,8 @@ public class CBDdialog extends MyDialog
         if ( pathname.getName().startsWith(".") ) return false;
         if ( pathname.getName().toUpperCase().startsWith("TOPODROID") ) return false;
         try {
-          if ( pathname.isDirectory() /* && pathname.canWrite() */ ) return true;
+	  // canExecute() is API-9
+          if ( pathname.isDirectory() && pathname.canRead() ) return true;
 	} catch ( SecurityException e ) { }
         return false;
       }

@@ -150,7 +150,8 @@ class TDSetting
     "DISTOX_SPLAY_VERT_THRS",    // splays with clino over mSplayVertThrs are not displayed in plan view
     "DISTOX_BACKSIGHT",          // whether to add backsight fields in manual shot input dialog
     "DISTOX_MAG_ANOMALY",        // whether to compensate magnetic anomaly
-    "DISTOX_VERT_SPLAY",         // splays with clino over this are shown with dashed line
+    "DISTOX_VERT_SPLAY",         // splays with clino over this are shown with dashed/dotted line
+    "DISTOX_SECTION_SPLAY",      // splays with angle over this are shown with dashed/dotted line
     "DISTOX_STATION_PREFIX",     // whether to add cave-name prefix to stations (cSurvey/Compass export)
     "DISTOX_STATION_NAMES",      // station names: 0 alphanumeric, 1 numbers
     "DISTOX_ZOOM_CTRL",          // whether to have zoom-ctrl (no, temp., always)
@@ -345,6 +346,7 @@ class TDSetting
   static float   mSplayVertThrs = 80;
   static boolean mAzimuthManual = false;    // whether to manually set extend / or use reference azimuth
   static float   mVertSplay     = 50;
+  static float   mSectionSplay  = 60;
   static int     mStationNames  = 0;        // type of station names (0: alpha, 1: number)
 
 
@@ -786,6 +788,7 @@ class TDSetting
     setMagAnomaly(   prefs.getBoolean( key[k++], false ) ); // DISTOX_MAG_ANOMALY
 
     mVertSplay = tryFloat( prefs, key[k++], "50" );               // DISTOX_VERT_SPLAY
+    mSectionSplay = tryFloat( prefs, key[k++], "60" );            // DISTOX_SECTION_SPLAY
     mExportStationsPrefix =  prefs.getBoolean( key[k++], false ); // DISTOX_STATION_PREFIX
     mStationNames = (prefs.getString( key[k++], "alpha").equals("number"))? 1 : 0; // DISTOX_STATION_NAMES
 
@@ -1129,6 +1132,8 @@ class TDSetting
     } else if ( k.equals( key[ nk++ ] ) ) {
       mVertSplay = tryFloat( prefs, k, "50" );
     } else if ( k.equals( key[ nk++ ] ) ) {
+      mSectionSplay = tryFloat( prefs, k, "60" );
+    } else if ( k.equals( key[ nk++ ] ) ) {
       mExportStationsPrefix = prefs.getBoolean( k, false ); // DISTOX_STATION_PREFIX
     } else if ( k.equals( key[ nk++ ] ) ) {
       mStationNames = (prefs.getString( k, "alpha").equals("number"))? 1 : 0; // DISTOX_STATION_NAMES
@@ -1447,6 +1452,7 @@ class TDSetting
     //B if ( name.equals( "DISTOX_Z6_WORKAROUND" )
     //B if ( name.equals( "DISTOX_MAG_ANOMALY" )
     if ( name.equals( "DISTOX_VERT_SPLAY"       ) ) return parseFloatValue( value, mVertSplay, 0, 91 );
+    if ( name.equals( "DISTOX_SECTION_SPLAY"    ) ) return parseFloatValue( value, mSectionSplay, 0, 91 );
     //B if ( name.equals( "DISTOX_STATION_PREFIX" )
     //C if ( name.equals( "DISTOX_STATION_NAMES" )
     //B if ( name.equals( "DISTOX_TROBOT_NAMES" )

@@ -7,13 +7,24 @@ Each sketch is made of two sketch files: one for the plan view, the other for th
 
 The plan view displays the projection on the horizontal plane of midline and splay shots. Splays above a certain inclination are shown as dashed lines.<br><p>
 
-The extended profile view displays the midline with the shots drawn left or right, or vertical, according to their "extend". Splays are projected on the vertical plane of the shot that is closest in azimuth.
+The extended profile view displays the midline with the shots drawn left or right, or vertical, according to their "extend". Splays are projected on the vertical plane of the shot that is closest in azimuth, unless the user has set a given "extend" through the shot edit dialog.
 For example, for the plan view in figure, the splays in the light region are projected on the vertical plane of shot 1-2, those in the dark region on the vertical plane of 0-1.<br><p>  
 
 The projected profile view displays the midline and the splays projected in the vertical plane perpendicular to the projection azimuth.<br><p>
 
 
 <img src="splay_extend.png"><br><p>
+
+<b>Splays</b><br>
+Splays are displayed with continuous or dashed line and with different colors.<br>
+In <b>plan</b> view if the inclination of the splay is over a maximum, the splay is not drawn.<br>
+The splay display is turned off if the shot is marked for no-display in plan or profile view.<br>
+A "commented" splay is dark gray. X-splays are green.
+Otherwise the splay is gray and, if the clino is above a threshold, it is dashed (positive clino) or dotted (negative clino).<br><p>
+
+For <b>x-sections</b> the x-splays are green, the others are blue (or light blue), and dashed (or dotted) if the splay
+angle with the section plane is over a threshold.<br><p>
+
 
 
 The sketch window has four modes:

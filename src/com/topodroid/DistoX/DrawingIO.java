@@ -643,6 +643,19 @@ class DrawingIO
     FileInputStream fis = null;
     DataInputStream dis = null;
 
+    // FIXME SECTION_RENAME
+    int pos = filename.lastIndexOf('/');
+    String survey_name = null;
+    if ( pos >= 0 ) {
+      survey_name = filename.substring(pos+1);
+    } else {
+      survey_name = filename;
+    }
+    if ( survey_name != null ) {
+      pos = survey_name.indexOf('-');
+      if ( pos > 0 ) survey_name = survey_name.substring(0, pos);
+    }
+
     // Log.v("DistoX", "drawing I/O load stream " + filename );
     synchronized( TDPath.mTherionLock ) {
       try {
@@ -708,7 +721,8 @@ class DrawingIO
               }
               break;
             case 'P':
-              path = DrawingPointPath.loadDataStream( version, dis, dx, dy, missingSymbols );
+	      // FIXME SECTION_RENAME
+              path = DrawingPointPath.loadDataStream( version, dis, dx, dy, missingSymbols ).fixScrap( survey_name );
               break;
             case 'T':
               path = DrawingLabelPath.loadDataStream( version, dis, dx, dy );

@@ -286,6 +286,7 @@ public class DrawingShotDialog extends MyDialog
     } else if ( b == mBtnCancel ) {
       dismiss();
     } else if ( b == mBtnOK ) {
+      MyKeyboard.close( mKeyboard );
 
       if ( TDLevel.overAdvanced ) {
         if ( mCBfrom != null && mCBfrom.isChecked() ) {
@@ -342,12 +343,7 @@ public class DrawingShotDialog extends MyDialog
   public void onBackPressed()
   {
     if ( CutNPaste.dismissPopup() ) return;
-    if ( TDSetting.mKeyboard ) {
-      if ( mKeyboard.isVisible() ) {
-        mKeyboard.hide();
-        return;
-      }
-    }
+    if ( MyKeyboard.close( mKeyboard ) ) return;
     dismiss();
   }
 

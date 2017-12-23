@@ -91,11 +91,6 @@ public class PlotNewDialog extends MyDialog
     //   }
     // } );
          
-    if ( ! TDLevel.overAdvanced ) {
-      LinearLayout layout3 = (LinearLayout) findViewById( R.id.layout3 );
-      layout3.setVisibility( View.GONE );
-    }
-
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), 
                                 R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
     if ( TDSetting.mKeyboard ) {
@@ -125,6 +120,7 @@ public class PlotNewDialog extends MyDialog
   public void onClick(View v) 
   {
     CutNPaste.dismissPopup();
+    MyKeyboard.close( mKeyboard );
 
     // When the user clicks, just finish this activity.
     // onPause will be called, and we save our data there.
@@ -198,13 +194,7 @@ public class PlotNewDialog extends MyDialog
   public void onBackPressed()
   {
     if ( CutNPaste.dismissPopup() ) return;
-
-    if ( TDSetting.mKeyboard ) {
-      if ( mKeyboard.isVisible() ) {
-        mKeyboard.hide();
-        return;
-      }
-    }
+    if ( MyKeyboard.close( mKeyboard ) ) return;
     dismiss();
   }
 }

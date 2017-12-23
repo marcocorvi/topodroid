@@ -198,9 +198,7 @@ public class FixedDialog extends MyDialog
 
   public void onClick(View v) 
   {
-    if ( TDSetting.mKeyboard && mKeyboard.isVisible() ) {
-      mKeyboard.hide();
-    }
+    MyKeyboard.close( mKeyboard );
 
     Button b = (Button) v;
     // TDLog.Log( TDLog.LOG_INPUT, "FixedDialog onClick() button " + b.getText().toString() );
@@ -258,12 +256,7 @@ public class FixedDialog extends MyDialog
   @Override
   public void onBackPressed()
   {
-    if ( TDSetting.mKeyboard ) {
-      if ( mKeyboard.isVisible() ) {
-        mKeyboard.hide();
-        return;
-      }
-    }
+    if ( MyKeyboard.close( mKeyboard ) ) return;
     dismiss();
   }
 

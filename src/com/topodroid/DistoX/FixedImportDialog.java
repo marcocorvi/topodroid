@@ -206,9 +206,7 @@ public class FixedImportDialog extends MyDialog
   public void onClick( View v ) 
   {
     if ( CutNPaste.dismissPopup() ) return;
-    if ( TDSetting.mKeyboard && mKeyboard.isVisible() ) {
-      mKeyboard.hide();
-    }
+    MyKeyboard.close( mKeyboard );
 
     Button b = (Button)v;
 

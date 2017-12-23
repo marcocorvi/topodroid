@@ -593,6 +593,8 @@ public class ShotDialog extends MyDialog
   public void onClick(View v) 
   {
     CutNPaste.dismissPopup();
+    MyKeyboard.close( mKeyboard );
+
     Button b = (Button) v;
     // TDLog.Log( TDLog.LOG_INPUT, "ShotDialog onClick button " + b.getText().toString() );
 
@@ -661,19 +663,15 @@ public class ShotDialog extends MyDialog
 
     } else if ( b == mButtonBack ) {
       CutNPaste.dismissPopup();
-      closeKeyboard();
       dismiss();
     } else if ( b == mButtonMore ) {
       CutNPaste.dismissPopup();
-      closeKeyboard();
       dismiss();
       mParent.onBlockLongClick( mBlk );
     } else if ( b == mButtonOK ) { // OK and SAVE close the keyboard
-      closeKeyboard();
       saveDBlock();
       dismiss();
     } else if ( b == mButtonSave ) {
-      closeKeyboard();
       saveDBlock();
 
     } else if ( b == mButtonPrev ) {
@@ -731,19 +729,8 @@ public class ShotDialog extends MyDialog
   public void onBackPressed()
   {
     if ( CutNPaste.dismissPopup() ) return;
-    if ( closeKeyboard() ) return;
+    if ( MyKeyboard.close( mKeyboard ) ) return;
     dismiss();
-  }
-
-  private boolean closeKeyboard()
-  {
-    if ( TDSetting.mKeyboard ) {
-      if ( mKeyboard.isVisible() ) {
-        mKeyboard.hide();
-        return true;
-      }
-    }
-    return false;
   }
 
 }

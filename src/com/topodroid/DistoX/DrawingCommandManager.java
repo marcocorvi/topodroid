@@ -440,18 +440,19 @@ public class DrawingCommandManager
     mScale  = 1 / s;
     mMatrix = new Matrix();
     if ( landscape ) {
-      mMatrix.postRotate(-90,0,0);
       mBBox.left   = - mScale * TopoDroidApp.mDisplayHeight + dy;      // scene coords
       mBBox.right  =   dy; 
       mBBox.top    = - dx;
       mBBox.bottom =   mScale * TopoDroidApp.mDisplayWidth - dx;
+      mMatrix.postRotate(-90,0,0);
+      mMatrix.postTranslate( dx, dy );
     } else {
       mBBox.left   = - dx;      // scene coords
       mBBox.right  = mScale * TopoDroidApp.mDisplayWidth - dx; 
       mBBox.top    = - dy;
       mBBox.bottom = mScale * TopoDroidApp.mDisplayHeight - dy;
+      mMatrix.postTranslate( dx, dy );
     }
-    mMatrix.postTranslate( dx, dy );
     mMatrix.postScale( s, s );
 
     synchronized ( mCurrentStack ) {

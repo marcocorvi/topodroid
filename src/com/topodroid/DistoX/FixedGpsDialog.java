@@ -207,9 +207,7 @@ public class FixedGpsDialog extends MyDialog
   public void onClick(View v) 
   {
     if ( CutNPaste.dismissPopup() ) return;
-    if ( TDSetting.mKeyboard && mKeyboard.isVisible() ) {
-      mKeyboard.hide();
-    }
+    MyKeyboard.close( mKeyboard );
 
     boolean do_toast = false;
     Button b = (Button) v;
@@ -346,13 +344,7 @@ public class FixedGpsDialog extends MyDialog
   public void onBackPressed()
   {
     if ( CutNPaste.dismissPopup() ) return;
-
-    if ( TDSetting.mKeyboard ) {
-      if ( mKeyboard.isVisible() ) {
-        mKeyboard.hide();
-        return;
-      }
-    }
+    if ( MyKeyboard.close( mKeyboard ) ) return;
     if ( mLocating ) {
       locManager.removeUpdates( this );
       locManager.removeGpsStatusListener( this );

@@ -137,6 +137,7 @@ public class CalibGMDialog extends MyDialog
     Button b = (Button) v;
     // TDLog.Log( TDLog.LOG_INPUT, "GM dialog onClick button " + b.getText().toString() );
     if ( b == mButtonOK ) {
+      MyKeyboard.close( mKeyboard );
       String name = mETname.getText().toString();
       if ( name == null || name.length() == 0 ) {
         name = mETname.getHint().toString();

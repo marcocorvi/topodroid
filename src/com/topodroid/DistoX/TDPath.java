@@ -31,6 +31,7 @@ public class TDPath
   final static int NR_BACKUP = 5;
   final static String BCK_SUFFIX = ".bck";
 
+  final static String CSN = ".csn";  // CaveSniper
   final static String CSV = ".csv";
   final static String CSX = ".csx";
   final static String CAVE = ".cave";
@@ -477,7 +478,7 @@ public class TDPath
 
   static File[] getImportFiles() 
   { 
-    return getFiles( PATH_IMPORT, new String[] { TH, TOP, DAT, TRO } );
+    return getFiles( PATH_IMPORT, new String[] { TH, TOP, DAT, TRO, CSN } );
   }
 
   static File[] getZipFiles() { return getFiles( PATH_ZIP, new String[] { ZIP } ); }
