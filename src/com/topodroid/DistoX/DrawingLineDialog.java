@@ -38,6 +38,7 @@ public class DrawingLineDialog extends MyDialog
   private DrawingWindow mParent;
   private LinePoint mPoint;
   private int mType;
+  private int mTypeSection;
 
   private Spinner mETtype;
   private EditText mEToptions;
@@ -61,6 +62,7 @@ public class DrawingLineDialog extends MyDialog
     mLine  = line;
     mPoint = lp;
     mType  = mLine.mLineType;
+    mTypeSection = BrushManager.mLineLib.mLineSectionIndex;
   }
 
 // -------------------------------------------------------------------
@@ -76,8 +78,10 @@ public class DrawingLineDialog extends MyDialog
     mETtype = (Spinner) findViewById( R.id.line_type );
     // mETtype.setText( BrushManager.mLineLib.getSymbolThName( mLine.mLineType ) );
     ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, BrushManager.mLineLib.getSymbolNames() );
+    String section = BrushManager.mLineLib.getSymbolName( mTypeSection );
+    if ( section != null ) adapter.remove(section );
     mETtype.setAdapter( adapter );
-    mETtype.setSelection( mType );
+    mETtype.setSelection( ( mType < mTypeSection )? mType : mType-1 );
     mETtype.setOnItemSelectedListener( this );
 
     mEToptions = (EditText) findViewById( R.id.line_options );
@@ -125,7 +129,11 @@ public class DrawingLineDialog extends MyDialog
   }
 
   @Override
-  public void onItemSelected( AdapterView av, View v, int pos, long id ) { mType = pos; }
+  public void onItemSelected( AdapterView av, View v, int pos, long id ) 
+  { 
+    mType = ( pos >= mTypeSection )? pos+1 : pos;
+    // av.setSelection( pos );
+  }
 
   @Override
   public void onNothingSelected( AdapterView av ) { mType = mLine.mLineType; }
@@ -144,7 +152,7 @@ public class DrawingLineDialog extends MyDialog
       return;
     
     } else if ( b == mBtnOk ) {
-      if ( mType != mLine.mLineType ) mLine.setLineType( mType );
+      if ( mType != mLine.mLineType && mType != mTypeSection ) mLine.setLineType( mType );
 
       if ( mEToptions.getText() != null ) {
         String options = mEToptions.getText().toString().trim();

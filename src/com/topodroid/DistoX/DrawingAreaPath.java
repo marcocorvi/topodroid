@@ -95,6 +95,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
     }
   }
 
+
   static DrawingAreaPath loadDataStream( int version, DataInputStream dis, float x, float y, SymbolsPalette missingSymbols )
   {
     int type, cnt;
@@ -163,6 +164,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
     mAreaType = t;
     if ( mAreaType < BrushManager.mAreaLib.mSymbolNr ) {
       setPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
+      // FIXME shader ?
     }
   }
 

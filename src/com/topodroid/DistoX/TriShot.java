@@ -115,11 +115,11 @@ public class TriShot
     return reversed * mAvgLeg.clino(); 
   }
 
-  void Dump()
-  {
-    Log.v( TDLog.TAG, "Shot " + from + "-" + to + " " + d() + " " + b() + " " + c() );
-    for ( DBlock b : blocks ) {
-      Log.v( TDLog.TAG, b.mLength + " " + b.mBearing + " " + b.mClino );
-    }
-  }
+  // void Dump()
+  // {
+  //   // Log.v( TDLog.TAG, "Shot " + from + "-" + to + " " + d() + " " + b() + " " + c() );
+  //   // for ( DBlock b : blocks ) {
+  //   //   // Log.v( TDLog.TAG, b.mLength + " " + b.mBearing + " " + b.mClino );
+  //   // }
+  // }
 }

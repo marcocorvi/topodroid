@@ -122,7 +122,7 @@ public class DrawingLinePath extends DrawingPointLinePath
       }
       ret.setClosed( closed );
       if ( closed ) {
-        ret.close();
+        ret.closePath();
       }
       ret.retracePath();
       return ret;
@@ -321,10 +321,12 @@ public class DrawingLinePath extends DrawingPointLinePath
     // for ( LinePoint pt : mPoints ) 
     LinePoint pt = mFirst; 
     // if ( mLineType == BrushManager.mLineLib.mLineSectionIndex && size() > 2 ) pt = pt.mNext; // skip first point (tick)
-    for ( ; pt != null; pt = pt.mNext ) 
-    {
+    for ( ; pt != null; pt = pt.mNext ) {
       pt.toTherion( pw );
     }
+    // if ( isClosed() ) { // insert start point again if closed
+    //   mFirst.toTherion( pw );
+    // }
     if ( mLineType == BrushManager.mLineLib.mLineSlopeIndex ) {
       pw.format("  l-size 40\n");
     }

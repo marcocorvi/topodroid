@@ -57,7 +57,7 @@ public class EraseAction // implements ICanvasCommand
     if ( mPath.mType == DrawingPath.DRAWING_PATH_LINE || mPath.mType == DrawingPath.DRAWING_PATH_AREA ) {
       DrawingPointLinePath line = (DrawingPointLinePath)mPath;
       line.resetPath( old ? mOldPoints : mNewPoints );
-      if ( mPath.mType == DrawingPath.DRAWING_PATH_AREA ) line.close();
+      if ( mPath.mType == DrawingPath.DRAWING_PATH_AREA ) line.closePath();
     }
   }
 

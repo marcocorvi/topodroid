@@ -5,12 +5,12 @@
   android:layout_height="fill_parent"
   >
    
-  <Button android:id="@+id/button_zoomfit"
+  <!-- Button android:id="@+id/button_zoomfit"
     style="@style/button_default"
     android:layout_width="wrap_content" 
     android:layout_height="wrap_content" 
     android:text="@string/button_zoomfit"
-    />
+    / -->
 
   <LinearLayout
     android:orientation="horizontal"

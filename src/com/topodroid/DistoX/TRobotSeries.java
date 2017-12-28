@@ -44,9 +44,9 @@ public class TRobotSeries
     mPoints.add( pt );
   }
 
-  void dump()
-  {
-    Log.v("DistoX", "Series " + mNumber + " (Pts " + mPtCnt + ") start " + mBegin.mSeries.mNumber + "." + mBegin.mNumber );
-    for ( TRobotPoint pt : mPoints ) pt.dump();
-  }
+  // void dump()
+  // {
+    // Log.v("DistoX", "Series " + mNumber + " (Pts " + mPtCnt + ") start " + mBegin.mSeries.mNumber + "." + mBegin.mNumber );
+    // for ( TRobotPoint pt : mPoints ) pt.dump();
+  // }
 }

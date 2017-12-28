@@ -32,8 +32,8 @@ public class TRobotPoint
     mForward = false;
   }
 
-  void dump()
-  {
-    Log.v("DistoX", "P " + mSeries.mNumber + "." + mNumber + " <" + mName + ">" );
-  }
+  // void dump()
+  // {
+    // Log.v("DistoX", "P " + mSeries.mNumber + "." + mNumber + " <" + mName + ">" );
+  // }
 }

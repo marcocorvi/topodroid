@@ -52,6 +52,7 @@ public class DrawingCommandManager
 
   static int mDisplayMode = DisplayMode.DISPLAY_ALL; // this display mode is shared among command managers
   private RectF mBBox;
+  boolean mIsExtended = false;
 
   private DrawingPath mNorthLine;
   private DrawingPath mFirstReference;
@@ -269,6 +270,7 @@ public class DrawingCommandManager
 
   public DrawingCommandManager()
   {
+    mIsExtended  = false;
     mBBox = new RectF();
     mNorthLine       = null;
     mFirstReference  = null;
@@ -1633,7 +1635,7 @@ public class DrawingCommandManager
               path.transform( mMatrix );
               canvas.drawPath( path, BrushManager.highlightPaint3 );
             }
-            if ( item.mType == DrawingPath.DRAWING_PATH_LINE ) {
+	    if ( item.mType == DrawingPath.DRAWING_PATH_LINE ) {
               Paint paint = BrushManager.fixedYellowPaint;
               DrawingLinePath line = (DrawingLinePath) item;
               lp = line.mFirst;
@@ -1680,6 +1682,12 @@ public class DrawingCommandManager
                 path.transform( mMatrix );
                 canvas.drawPath( path, BrushManager.fixedYellowPaint );
               }
+	    } else if ( TDLevel.overExpert && mIsExtended && item.mType == DrawingPath.DRAWING_PATH_FIXED ) {
+              path = new Path();
+	      path.moveTo( x-TDSetting.mMinShift, y );
+	      path.lineTo( x+TDSetting.mMinShift, y );
+              path.transform( mMatrix );
+              canvas.drawPath( path, BrushManager.fixedYellowPaint );
             }
           }
           radius = radius/3; // 2/zoom;

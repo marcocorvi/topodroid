@@ -518,7 +518,7 @@ public class DrawingPointLinePath extends DrawingPath
     return (dist > 0 )? TDMath.sqrt(dist) : 0;
   }
 
-  public void close() 
+  public void closePath() 
   {
     mPath.close();
     // Log.v( TopoDroidApp.TAG, "area close path" );

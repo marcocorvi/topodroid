@@ -584,7 +584,7 @@ public class OverviewWindow extends ItemDrawer
 
       NumStation mStartStation = null;
 
-      mOverviewSurface.resetManager( DrawingSurface.DRAWING_OVERVIEW, null );
+      mOverviewSurface.resetManager( DrawingSurface.DRAWING_OVERVIEW, null, false ); // is_extended = false
 
       for ( int k=0; k<plots.size(); ++k ) {
         PlotInfo plot = plots.get(k);

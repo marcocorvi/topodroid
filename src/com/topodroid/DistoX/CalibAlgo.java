@@ -132,18 +132,18 @@ public class CalibAlgo
 
   // void dump()
   // {
-  //   Log.v("DistoX", String.format("G %8.4f %8.4f %8.4f", bG.x, bG.y, bG.z ) );
-  //   Log.v("DistoX", "aG " + aG.x.x + " " + aG.x.y + " " + aG.x.z );
-  //   Log.v("DistoX", "   " + aG.y.x + " " + aG.y.y + " " + aG.y.z );
-  //   Log.v("DistoX", "   " + aG.z.x + " " + aG.z.y + " " + aG.z.z );
+  //   // Log.v("DistoX", String.format("G %8.4f %8.4f %8.4f", bG.x, bG.y, bG.z ) );
+  //   // Log.v("DistoX", "aG " + aG.x.x + " " + aG.x.y + " " + aG.x.z );
+  //   // Log.v("DistoX", "   " + aG.y.x + " " + aG.y.y + " " + aG.y.z );
+  //   // Log.v("DistoX", "   " + aG.z.x + " " + aG.z.y + " " + aG.z.z );
   //
-  //   Log.v("DistoX", String.format("M %8.4f %8.4f %8.4f", bM.x, bM.y, bM.z ) );
-  //   
-  //   Log.v("DistoX", "aM " + aM.x.x + " " + aM.x.y + " " + aM.x.z );
-  //   Log.v("DistoX", "   " + aM.y.x + " " + aM.y.y + " " + aM.y.z );
-  //   Log.v("DistoX", "   " + aM.z.x + " " + aM.z.y + " " + aM.z.z );
+  //   // Log.v("DistoX", String.format("M %8.4f %8.4f %8.4f", bM.x, bM.y, bM.z ) );
+  //   // 
+  //   // Log.v("DistoX", "aM " + aM.x.x + " " + aM.x.y + " " + aM.x.z );
+  //   // Log.v("DistoX", "   " + aM.y.x + " " + aM.y.y + " " + aM.y.z );
+  //   // Log.v("DistoX", "   " + aM.z.x + " " + aM.z.y + " " + aM.z.z );
   //
-  //   Log.v("DistoX", String.format("NL %8.4f %8.4f %8.4f", nL.x, nL.y, nL.z ) );
+  //   // Log.v("DistoX", String.format("NL %8.4f %8.4f %8.4f", nL.x, nL.y, nL.z ) );
   // }
 
   public CalibAlgo( int N, boolean nonLinear )
@@ -294,15 +294,15 @@ public class CalibAlgo
 
   // static void logCoeff( byte[] coeff )  // DEBUG METHOD
   // {
-  //   Log.v( "DistoX", coeff[ 0] + " " + coeff[ 1] + " " + coeff[ 2] + " " + coeff[ 3] + " " + coeff[ 4] + " " + coeff[ 5] );
-  //   Log.v( "DistoX", coeff[ 6] + " " + coeff[ 7] + " " + coeff[ 8] + " " + coeff[ 9] + " " + coeff[10] + " " + coeff[11] );
-  //   Log.v( "DistoX", coeff[12] + " " + coeff[13] + " " + coeff[14] + " " + coeff[15] + " " + coeff[16] + " " + coeff[17] );
-  //   Log.v( "DistoX", coeff[18] + " " + coeff[19] + " " + coeff[20] + " " + coeff[15] + " " + coeff[16] + " " + coeff[17] );
-  //   Log.v( "DistoX", coeff[24] + " " + coeff[25] + " " + coeff[26] + " " + coeff[27] + " " + coeff[28] + " " + coeff[29] );
-  //   Log.v( "DistoX", coeff[30] + " " + coeff[31] + " " + coeff[32] + " " + coeff[33] + " " + coeff[34] + " " + coeff[35] );
-  //   Log.v( "DistoX", coeff[36] + " " + coeff[37] + " " + coeff[38] + " " + coeff[39] + " " + coeff[40] + " " + coeff[41] );
-  //   Log.v( "DistoX", coeff[42] + " " + coeff[43] + " " + coeff[44] + " " + coeff[45] + " " + coeff[46] + " " + coeff[47] );
-  //   Log.v( "DistoX", coeff[48] + " " + coeff[49] + " " + coeff[50] + " " + coeff[51] );
+  //   // Log.v( "DistoX", coeff[ 0] + " " + coeff[ 1] + " " + coeff[ 2] + " " + coeff[ 3] + " " + coeff[ 4] + " " + coeff[ 5] );
+  //   // Log.v( "DistoX", coeff[ 6] + " " + coeff[ 7] + " " + coeff[ 8] + " " + coeff[ 9] + " " + coeff[10] + " " + coeff[11] );
+  //   // Log.v( "DistoX", coeff[12] + " " + coeff[13] + " " + coeff[14] + " " + coeff[15] + " " + coeff[16] + " " + coeff[17] );
+  //   // Log.v( "DistoX", coeff[18] + " " + coeff[19] + " " + coeff[20] + " " + coeff[15] + " " + coeff[16] + " " + coeff[17] );
+  //   // Log.v( "DistoX", coeff[24] + " " + coeff[25] + " " + coeff[26] + " " + coeff[27] + " " + coeff[28] + " " + coeff[29] );
+  //   // Log.v( "DistoX", coeff[30] + " " + coeff[31] + " " + coeff[32] + " " + coeff[33] + " " + coeff[34] + " " + coeff[35] );
+  //   // Log.v( "DistoX", coeff[36] + " " + coeff[37] + " " + coeff[38] + " " + coeff[39] + " " + coeff[40] + " " + coeff[41] );
+  //   // Log.v( "DistoX", coeff[42] + " " + coeff[43] + " " + coeff[44] + " " + coeff[45] + " " + coeff[46] + " " + coeff[47] );
+  //   // Log.v( "DistoX", coeff[48] + " " + coeff[49] + " " + coeff[50] + " " + coeff[51] );
   // }
 
   static byte[] stringToCoeff( String cs )
@@ -635,7 +635,7 @@ public class CalibAlgo
   // must be overridden
   public void addStatErrors( Vector g1[], Vector m1[], float[] errors ) 
   {
-    Log.v("DistoX", "calib algo add error stats");
+    TDLog.Error("calib algo add error stats not overridden");
   }
 
   // must be overridden

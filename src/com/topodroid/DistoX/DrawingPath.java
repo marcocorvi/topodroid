@@ -75,6 +75,11 @@ public class DrawingPath extends RectF
     mLandscape = false;
   }
 
+  // boolean isDeletable( ) 
+  // {
+  //   return mType >= DRAWING_PATH_STATION && mType <= DRAWING_PATH_AREA; 
+  // }
+
   static boolean isReferenceType( int type ) 
   {
     return type < DrawingPath.DRAWING_PATH_STATION || type >= DrawingPath.DRAWING_PATH_NAME;

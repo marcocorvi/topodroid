@@ -19,24 +19,30 @@ import android.content.Context;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.CheckBox;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
 public class DrawingAreaDialog extends MyDialog
-                               implements View.OnClickListener
+                               implements View.OnClickListener, AdapterView.OnItemSelectedListener
 {
   private DrawingAreaPath mArea;
   private DrawingWindow mParent;
   private boolean mOrientable;
 
   private CheckBox mCBvisible;
+  private Spinner mETtype;
+  private int mType;
 
   private OrientationWidget mOrientationWidget; 
 
-  private Button   mBtnOk;
+  private Button mBtnOk;
   private Button mBtnCancel;
 
   public DrawingAreaDialog( Context context, DrawingWindow parent, DrawingAreaPath line )
@@ -44,7 +50,8 @@ public class DrawingAreaDialog extends MyDialog
     super( context, R.string.DrawingAreaDialog );
     mParent = parent;
     mArea = line;
-    mOrientable = BrushManager.mAreaLib.isSymbolOrientable( mArea.mAreaType );
+    mType  = mArea.mAreaType;
+    mOrientable = BrushManager.mAreaLib.isSymbolOrientable( mType );
   }
 
 // -------------------------------------------------------------------
@@ -58,6 +65,13 @@ public class DrawingAreaDialog extends MyDialog
 
     mOrientationWidget = new OrientationWidget( this, mOrientable, mArea.mOrientation );
 
+    mETtype = (Spinner) findViewById( R.id.area_type );
+    ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, BrushManager.mAreaLib.getSymbolNames() );
+    mETtype.setAdapter( adapter );
+    mETtype.setSelection( mType );
+    mETtype.setOnItemSelectedListener( this );
+
+
     mCBvisible = (CheckBox) findViewById( R.id.area_visible );
     mCBvisible.setChecked( mArea.isVisible() );
 
@@ -69,12 +83,21 @@ public class DrawingAreaDialog extends MyDialog
     mBtnCancel.setOnClickListener( this );
   }
 
+  @Override
+  public void onItemSelected( AdapterView av, View v, int pos, long id ) { mType = pos; }
+
+  @Override
+  public void onNothingSelected( AdapterView av ) { mType = mArea.mAreaType; }
+
+
   public void onClick(View v) 
   {
     Button b = (Button)v;
     // TDLog.Log( TDLog.LOG_INPUT, "DrawingAreaDialog onClick() " + b.getText().toString() );
 
     if ( b == mBtnOk ) {
+      if ( mType != mArea.mAreaType ) mArea.setAreaType( mType );
+
       mArea.setVisible( mCBvisible.isChecked() );
       if ( mOrientable ) {
         mArea.setOrientation( mOrientationWidget.mOrient );

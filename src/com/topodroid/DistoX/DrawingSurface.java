@@ -102,7 +102,7 @@ public class DrawingSurface extends SurfaceView
 
 
   // return true if saved manager can be used
-  boolean resetManager( int mode, String fullname )
+  boolean resetManager( int mode, String fullname, boolean is_extended )
   {
     boolean ret = false;
     DrawingCommandManager manager = null;
@@ -123,6 +123,7 @@ public class DrawingSurface extends SurfaceView
       if ( fullname != null ) manager = mCache.get( fullname );
       if ( manager == null ) {
         mCommandManager2 = new DrawingCommandManager();
+	if ( is_extended ) mCommandManager2.mIsExtended = true;
       } else {
         mCommandManager2 = manager;
         mCommandManager2.setDisplayPoints( false );

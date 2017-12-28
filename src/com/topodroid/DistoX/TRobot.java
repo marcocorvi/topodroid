@@ -189,12 +189,12 @@ public class TRobot
     return null;
   }
 
-  void dump()
-  {
-    Log.v("DistoX", "TRobot S: " + mSeries.size() + " P: " + mPoints.size() );
-    for ( TRobotSeries series : mSeries ) series.dump();
-    Log.v("DistoX", "Points");
-    for (TRobotPoint pt : mPoints ) pt.dump();
-  }
+  // void dump()
+  // {
+    // Log.v("DistoX", "TRobot S: " + mSeries.size() + " P: " + mPoints.size() );
+    // for ( TRobotSeries series : mSeries ) series.dump();
+    // Log.v("DistoX", "Points");
+    // for (TRobotPoint pt : mPoints ) pt.dump();
+  // }
 
 }

@@ -91,7 +91,7 @@ public class PhotoEditDialog extends MyDialog
         // Log.v("DistoX", "Long <" + bearing + "> Lat <" + clino + ">" );
       }
     } catch ( IOException e ) {
-      Log.v("DistoX", "failed exif interface " + mFilename );
+      TDLog.Error("failed exif interface " + mFilename );
     }
   }
 

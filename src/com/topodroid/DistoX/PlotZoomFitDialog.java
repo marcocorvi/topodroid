@@ -34,6 +34,8 @@ public class PlotZoomFitDialog extends MyDialog
                                implements OnClickListener
 {
   private DrawingWindow mParent;
+  private Button mBtnPortrait;
+  private Button mBtnLandscape;
 
   public PlotZoomFitDialog( Context context, DrawingWindow parent )
   {
@@ -48,10 +50,17 @@ public class PlotZoomFitDialog extends MyDialog
     setContentView(R.layout.plot_zoomfit_dialog );
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
-    ((Button) findViewById( R.id.button_zoomfit )).setOnClickListener( this );
-    ((Button) findViewById( R.id.button_portrait )).setOnClickListener( this );
-    ((Button) findViewById( R.id.button_landscape )).setOnClickListener( this );
+    // ((Button) findViewById( R.id.button_zoomfit )).setOnClickListener( this );
+    mBtnPortrait  = (Button) findViewById( R.id.button_portrait );
+    mBtnLandscape = (Button) findViewById( R.id.button_landscape );
     ((Button) findViewById( R.id.button_cancel )).setOnClickListener( this );
+    mBtnPortrait.setOnClickListener( this );
+    mBtnLandscape.setOnClickListener( this );
+    if ( mParent.isLandscape() ) {
+      mBtnLandscape.setText( R.string.button_zoomfit );
+    } else {
+      mBtnPortrait.setText( R.string.button_zoomfit );
+    }
 
     setTitle( R.string.title_plot_zoomfit );
   }
@@ -61,9 +70,10 @@ public class PlotZoomFitDialog extends MyDialog
   @Override 
   public void onClick( View v ) 
   {
-    if ( v.getId() == R.id.button_zoomfit ) {
-      mParent.doZoomFit();
-    } else if ( v.getId() == R.id.button_portrait ) {
+    // if ( v.getId() == R.id.button_zoomfit ) {
+    //   mParent.doZoomFit();
+    // } else
+    if ( v.getId() == R.id.button_portrait ) {
       mParent.setOrientation( PlotInfo.ORIENTATION_PORTRAIT );
     } else if ( v.getId() == R.id.button_landscape ) {
       mParent.setOrientation( PlotInfo.ORIENTATION_LANDSCAPE );
