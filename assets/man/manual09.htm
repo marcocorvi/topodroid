@@ -122,12 +122,12 @@ Accordingly, the drawing references dialog has no box for the splays.
     </ul>
   <li><i>LINE TOOLS</i>
     <ul style="margin-top:0; margin-bottom:0">
-    <li>Line <i>tracing style</i>: fine, normal, coarse, or "bezier" (interpolated-curve)</li>
+    <li>Line <i>tracing style</i>: fine, normal, coarse, or "splines" (interpolated-curve)</li>
     <li>Line <i>thickness</i></li>
     <li><i>Direction tick length</i> for x-section lines [default 5 px]</li>
     <li>Line <i>point spacing</i>: distance between line points in normal style [default 5 px] </li>
-    <li><i>Bezier accuracy</i> determines the number of base points in the interpolating curve. The smaller the more points. The default value is 1.0.</li>
-    <li><i>Bezier corner</i>. Even an interpolated line should have corners, when there is a sharp turn at a point. Small values (0.2) make the corner sharper. Large values (20.0) make them rounded.</li>
+    <li><i>Bezier accuracy</i> determines the number of base points in the interpolating spline. The smaller the more points. The default value is 1.0.</li>
+    <li><i>Bezier corner</i>. Even a spline should have corners, when there is a sharp turn at a point. Small values (0.2) make the corner sharper. Large values (20.0) make them rounded.</li>
     </ul>
   </li>
   <li><i>SKETCH ITEMS</i>
@@ -159,7 +159,8 @@ To do some editing you must select a point: either a point item, a line/area poi
 To this aim you tap near the point you want. However if there are several points close where you tap, they are all selected, but only one of them is actively being edited. You change the "active" point among the selected set with the <u>Previous</u> and <u>Next</u> buttons.<br><p>
 
 <h4>Line style</h4>
-TopoDroid has four line styles. With the normal style [default] the lines are drawn as polylines. With the fine style the polyline segments are shorter, while with the coarse style they are longer. In the fourth style lines are interpolated replacing the segments with cubic Bezier curves. These segments pass through the two endpoints and have two control points used define the curvature.<br><p>
+TopoDroid has four line styles. With the normal style [default] the lines are drawn as polylines. With the fine style the polyline segments are shorter, while with the coarse style they are longer. In the fourth style lines are interpolated replacing the segments with cubic Bezier curves (splines). These segments pass through the two endpoints and have two control points used define the curvature.
+If you export the drawing in DXF with AutoCAD version 6 do not use splines because they get exported as polylines.<br><p>
 
 <h4>Line continuation</h4>
 The <u>Continuation</u> button is a multi-state button.

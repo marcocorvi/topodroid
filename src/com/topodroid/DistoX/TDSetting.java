@@ -157,7 +157,7 @@ class TDSetting
     "DISTOX_ZOOM_CTRL",          // whether to have zoom-ctrl (no, temp., always)
     "DISTOX_SIDE_DRAG",          // whether to enable side-drag
     "DISTOX_DXF_SCALE",          // default DXF scale (export)
-    // "DISTOX_ACAD_VERSION",
+    "DISTOX_ACAD_VERSION",
     "DISTOX_BITMAP_BGCOLOR",     // bitmap background color [RGB]
     "DISTOX_SURVEX_EOL",         // survex end of line [either Linux or Windows]
     "DISTOX_SURVEX_SPLAY",       // whether to name endpoint of splays in Survex export
@@ -797,7 +797,7 @@ class TDSetting
     mSideDrag = prefs.getBoolean( key[k++], false );          // DISTOX_SIDE_DRAG
 
     mDxfScale    = tryFloat( prefs, key[k++], "1.0" );        // DISTOX_DXF_SCALE
-    // mAcadVersion = tryInt(   prefs, key[k++], "13" );          // DISTOX_ACAD_VERSION choice: 9, 13
+    mAcadVersion = tryInt(   prefs, key[k++], "13" );         // DISTOX_ACAD_VERSION choice: 9, 13
 
     setBitmapBgcolor( prefs.getString( key[k++], "0 0 0" ) ); // DISTOX_BITMAP_BGCOLOR
 
@@ -1144,10 +1144,10 @@ class TDSetting
       mSideDrag = prefs.getBoolean( k, false ); // DISTOX_SIDE_DRAG
     } else if ( k.equals( key[ nk++ ] ) ) {
       mDxfScale = tryFloat( prefs, k, "1" );   // DISTOX_DXF_SCALE
-    // } else if ( k.equals( key[ nk++ ] ) ) {
-    //   try {
-    //     mAcadVersion = Integer.parseInt( prefs.getString( k, "13") ); // DISTOX_ACAD_VERSION
-    //   } catch ( NumberFormatException e) { }
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      try {
+        mAcadVersion = Integer.parseInt( prefs.getString( k, "13") ); // DISTOX_ACAD_VERSION
+      } catch ( NumberFormatException e) { }
     } else if ( k.equals( key[ nk++ ] ) ) {
       setBitmapBgcolor( prefs.getString( k, "0 0 0" ) ); // DISTOX_BITMAP_BGCOLOR
     } else if ( k.equals( key[ nk++ ] ) ) {

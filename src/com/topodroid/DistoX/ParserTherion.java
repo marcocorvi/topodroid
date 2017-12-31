@@ -508,7 +508,7 @@ public class ParserTherion
                       to = vals[j]; // + "@" + path;
                     }
                     shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, state.mPrefix + to + state.mSuffix,
-                                         0.0f, 0.0f, 0.0f, 0.0f, 0, true, false, false, "" ) );
+                                         0.0f, 0.0f, 0.0f, 0.0f, 0, 0, true, false, false, "" ) );
                   }
                 }
               } else if ( cmd.startsWith("explo") ) { // explo-date explo-team
@@ -620,23 +620,23 @@ public class ParserTherion
                       dist = Float.parseFloat( vals[jLeft] ) * state.mUnitLeft / state.mScaleLeft;
                       b = ber - 90; if ( b < 0 ) b += 360;
                       shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, EMPTY,
-                                 dist, b, 0, 0.0f, state.mExtend, state.mDuplicate, state.mSurface, false, "" ) );
+                                 dist, b, 0, 0.0f, state.mExtend, 2, state.mDuplicate, state.mSurface, false, "" ) );
                     }
                     if ( jRight >= 0 && jRight < sz ) {
                       dist = Float.parseFloat( vals[jRight] ) * state.mUnitRight / state.mScaleRight;
                       b = ber + 90; if ( b >= 360 ) b -= 360;
                       shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, EMPTY,
-                                 dist, b, 0, 0.0f, state.mExtend, state.mDuplicate, state.mSurface, false, "" ) );
+                                 dist, b, 0, 0.0f, state.mExtend, 2, state.mDuplicate, state.mSurface, false, "" ) );
                     }
                     if ( jUp >= 0 && jUp < sz ) {
                       dist = Float.parseFloat( vals[jUp] ) * state.mUnitUp / state.mScaleUp;
                       shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, EMPTY,
-                                 dist, 0, 90, 0.0f, state.mExtend, state.mDuplicate, state.mSurface, false, "" ) );
+                                 dist, 0, 90, 0.0f, state.mExtend, 2, state.mDuplicate, state.mSurface, false, "" ) );
                     }
                     if ( jDown >= 0 && jDown < sz ) {
                       dist = Float.parseFloat( vals[jDown] ) * state.mUnitDown / state.mScaleDown;
                       shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, EMPTY,
-                                 dist, 0, -90, 0.0f, state.mExtend, state.mDuplicate, state.mSurface, false, "" ) );
+                                 dist, 0, -90, 0.0f, state.mExtend, 2, state.mDuplicate, state.mSurface, false, "" ) );
                     }
 
                     // TODO add shot
@@ -645,14 +645,14 @@ public class ParserTherion
                       // FIXME splays
                       shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, EMPTY,
                                             len, ber, cln, 0.0f,
-                                            state.mExtend, state.mDuplicate, state.mSurface, false, "" ) );
+                                            state.mExtend, 0, state.mDuplicate, state.mSurface, false, "" ) );
                     } else {
                       // from = from + "@" + path;
                       // to   = to + "@" + path;
                       // Log.v( TopoDroidApp.TAG, "add shot " + from + " -- " + to);
                       shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, state.mPrefix + to + state.mSuffix,
                                            len, ber, cln, 0.0f,
-                                           state.mExtend, state.mDuplicate, state.mSurface, false, "" ) );
+                                           state.mExtend, 0, state.mDuplicate, state.mSurface, false, "" ) );
                     }
                   } catch ( NumberFormatException e ) {
                     TDLog.Error( "therion parser error: data " + line );

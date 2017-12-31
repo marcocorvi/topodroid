@@ -193,13 +193,13 @@
        android:defaultValue="true"
      />
 
-  <!-- com.topodroid.DistoX.MyListPreference
+  <com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_ACAD_VERSION"
        android:title="@string/pref_acad_version_title"
        android:summary="@string/pref_acad_version_summary"
        android:defaultValue="13"
        android:entries="@array/acadVersion"
        android:entryValues="@array/acadVersionValue"
-       / -->
+       />
 
 </PreferenceScreen>

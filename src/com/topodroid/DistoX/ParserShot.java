@@ -18,12 +18,13 @@ class ParserShot
     String to;
     float len, ber, cln, rol;
     int extend;
+    int leg;
     boolean duplicate;
     boolean surface;
     boolean backshot;
     String comment;
 
-    public ParserShot( String f, String t, float l, float b, float c, float r, int e,
+    public ParserShot( String f, String t, float l, float b, float c, float r, int ex, int lg,
                        boolean d, boolean s, boolean bs, String cmnt )
     {
       from = f;
@@ -32,7 +33,8 @@ class ParserShot
       ber = b;
       cln = c;
       rol = r;
-      extend = e;
+      extend = ex;
+      leg    = lg;
       duplicate = d;
       surface = s;
       backshot = bs;

@@ -911,6 +911,7 @@ public class DataHelper extends DataSetObservable
     } finally { myDB.endTransaction(); }
   }
 
+  // "leg" flag: 0 splay, 1 leg, 2 x-splay
   public void updateShotLeg( long id, long sid, long leg, boolean forward )
   {
     // if ( myDB == null ) return;
@@ -1110,10 +1111,10 @@ public class DataHelper extends DataSetObservable
                         // : s.commented ? DBlock.BLOCK_COMMENTED // ParserShots are not "commented"
                         // : s.backshot ? DBlock.BLOCK_BACKSHOT
                         : 0 );
-        ih.bind( legCol, 0 );
+        ih.bind( legCol, s.leg );
         ih.bind( statusCol, 0 );
         ih.bind( commentCol, s.comment );
-        ih.bind( typeCol, 0 );
+        ih.bind( typeCol, 0 ); // parser shot are not-modifiable
         ih.bind( millisCol, millis );
         ih.execute();
         ++id;
@@ -1136,7 +1137,7 @@ public class DataHelper extends DataSetObservable
                             // : s.commented ? DBlock.BLOCK_COMMENTED 
                             // : s.backshot ? DBlock.BLOCK_BACKSHOT
                             : 0,
-                            0L, // leg
+                            s.leg, // leg
                             0L, // status
                             0L, // shot_type: parser-shots are not modifiable
                             s.comment );

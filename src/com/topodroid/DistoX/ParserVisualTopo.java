@@ -208,7 +208,7 @@ public class ParserVisualTopo extends ImportParser
                       extend = (int)TDAzimuth.computeSplayExtend( ber );
                     }
                     // FIXME splays
-                    shots.add( new ParserShot( station, EMPTY, mLeft, ber, 0.0f, 0.0f, extend, false, false, false, "" ) );
+                    shots.add( new ParserShot( station, EMPTY, mLeft, ber, 0.0f, 0.0f, extend, 2, false, false, false, "" ) );
                 }
                 if ( mRight > 0 ) {
                     float ber = mBearing + 180 - 90 * dirw;
@@ -217,20 +217,20 @@ public class ParserVisualTopo extends ImportParser
                       extend = (int)TDAzimuth.computeSplayExtend( ber );
                     }
                     // FIXME splays
-                    shots.add( new ParserShot( station, EMPTY, mRight, ber, 0.0f, 0.0f, -extend, false, false, false, "" ) );
+                    shots.add( new ParserShot( station, EMPTY, mRight, ber, 0.0f, 0.0f, -extend, 2, false, false, false, "" ) );
                 } 
                 if ( mUp > 0 ) {
                     // FIXME splays
-                    shots.add( new ParserShot( station, EMPTY, mUp, 0.0f, 90.0f, 0.0f, 0, false, false, false, "" ) );
+                    shots.add( new ParserShot( station, EMPTY, mUp, 0.0f, 90.0f, 0.0f, 0, 2, false, false, false, "" ) );
                 }
                 if ( mDown > 0 ) {
                     // FIXME splays
-                    shots.add( new ParserShot( station, EMPTY, mDown, 0.0f, -90.0f, 0.0f, 0, false, false, false, "" ) );
+                    shots.add( new ParserShot( station, EMPTY, mDown, 0.0f, -90.0f, 0.0f, 0, 2, false, false, false, "" ) );
                 }
                 
                 extend = ( mBearing < 90 || mBearing > 270 )? 1 : -1;
                 shots.add( new ParserShot( mFrom, mTo, mLength, mBearing, mClino, 0.0f,
-                                           shot_extend, duplicate, surface, backshot, comment ) );
+                                           shot_extend, 0, duplicate, surface, backshot, comment ) );
               } catch ( NumberFormatException e ) {
                 TDLog.Error( "ERROR " + mLineCnt + ": " + line + " " + e.getMessage() );
               }

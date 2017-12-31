@@ -121,7 +121,7 @@ public class ParserPocketTopo extends ImportParser
           ext_flag = DBlock.EXTEND_NONE;
         }
       }
-      shots.add( new ParserShot( from, to,  da, ba, ca, ra, extend, false, false, false,
+      shots.add( new ParserShot( from, to,  da, ba, ca, ra, extend, 0, false, false, false,
                                  shot.hasComment()? shot.comment() : "" ) );
       if ( mStartFrom == null && from.length() > 0 && to.length() > 0 ) {
         mStartFrom = from;

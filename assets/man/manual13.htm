@@ -2,6 +2,9 @@
 <h3>[13] IMPORT EXPORT </h3>
 When you are done, export the survey in your favourite format and make a zip archive. The zip archive is the a complete backup of your survey, and its exports. You can use it to transfer the survey to another android.<br><p>
 
+On import from file formats that have LRUD values, these are converted to x-splays (shown in green).
+This applies to import of Compass, VisualTopo, and Therion.<br><p>
+
 <b>Warning</b><br>
 The zip archive contains the command to restore the survey data and other informations in the database.
 Zip import fails if the zip has a database version that is too old or is newer than the one in TopoDroid.<br><p>
@@ -28,7 +31,8 @@ mean sea level [m].<br><p>
 Survey data are exported in <i>Therion</i> format, using the data "normal" form.<br>
 Data units are according to the user options.<br>
 The team names are listed but the command is commented.<br>
-Station comments and marks (fixed, painted) precede the centerline data.<br><p>
+Station comments and marks (fixed, painted) precede the centerline data.<br>
+X-splays are exported with station "-" (dash), the others with station "." (dot).<br><p>
 
 Fixed points coordinates (longitude latitude and altitude a.s.l.) are exported commented.
 If the point has custom CRS coordinates, these are exported as well, preceded by the CRS name.<br><p>
@@ -184,7 +188,7 @@ Settings:<ul style="margin-top=0">
 <li><u>section-point</u>: if section points are automatically added to section lines,
 the section drawing is inserted in the export, at the "section" point</li>
 <li><u>splay endpoints</u></li>
-<!-- li>AutoCAD version (6 or 12)</li -->
+<li>AutoCAD version (6 or 12)</li>
 </ul><p>
 
 <b>SVG</b> (.svg)<br>
@@ -241,8 +245,9 @@ If the system does not have enough memory to create the image at the set resolut
 <li><b>PNG</b> <i>background color</i>: you can set the background color of PNG images by specifying the RGB values (three integers between 0 and 255).</li>
 <li><b>DXF</b> sketch export <i>scale</i> [1.0]</li>
 <li><b>DXF</b> export with <i>splay endpoints</i> [no]</li>
-<!--li><i>DXF AutoCAD version</i> for the DXF export: either 6 (AutoCAD R9) or 12 (AutoCAD R13). In version 6 DXF export bezier curves are replaced by polylines. Version 12 DXF export uses splines, but is still buggy.</li-->
-</ul><br><p>
+<li><i>DXF AutoCAD version</i> for the DXF export: either 6 (AutoCAD R9) or 12 (AutoCAD R13). In version 6 DXF export bezier curves are replaced by polylines and areas do not have hatches. Version 12 DXF export uses splines and hatches, but is still buggy.</li>
+</ul>
+<br><p>
 
 
 <a href="page_finalmap.htm">The final map</a><br>

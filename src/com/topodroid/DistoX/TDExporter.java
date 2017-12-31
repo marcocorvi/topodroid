@@ -993,7 +993,7 @@ class TDExporter
               extend = item.getExtend();
               pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
             }
-            writeThStations( pw, "-", to, item.isCommented() );
+            writeThStations( pw, ( item.isXSplay() ? "-" : "." ), to, item.isCommented() );
             pw.format(Locale.US, "%.2f %.1f %.1f\n", item.mLength * ul, item.mBearing * ua, item.mClino * ua );
           }
         } else { // with FROM station
@@ -1023,7 +1023,7 @@ class TDExporter
               extend = item.getExtend();
               pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
             }
-            writeThStations( pw, from, "-", item.isCommented() );
+            writeThStations( pw, from, ( item.isXSplay() ? "-" : "." ), item.isCommented() );
             pw.format(Locale.US, "%.2f %.1f %.1f\n", item.mLength * ul, item.mBearing * ua, item.mClino * ua );
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {
