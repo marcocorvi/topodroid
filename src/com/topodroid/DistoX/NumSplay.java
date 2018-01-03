@@ -16,6 +16,7 @@ public class NumSplay extends NumSurveyPoint
   public NumStation from;
   private DBlock block;
   float mDecl;
+  float mExtend;
 
   DBlock getBlock() { return block; }
 
@@ -29,5 +30,6 @@ public class NumSplay extends NumSurveyPoint
     e = from.e + h0 * TDMath.sind( b + decl );
     block = blk;
     mDecl = decl;
+    mExtend = extend;
   }
 }

@@ -5,8 +5,6 @@ The Sketch button of the "Shot data" window opens the dialog with the list of sk
 
 Each sketch is made of two sketch files: one for the plan view, the other for the profile view (either extended or projected). X-sections have only one file. A new sketch is opened in the plan view. Afterwards the sketch dialog shows two columns, one for the plan, the other for the profile view, and you can choose which one to open from.<br><p>
 
-The plan view displays the projection on the horizontal plane of midline and splay shots. Splays above a certain inclination are shown as dashed lines.<br><p>
-
 The extended profile view displays the midline with the shots drawn left or right, or vertical, according to their "extend". Splays are projected on the vertical plane of the shot that is closest in azimuth, unless the user has set a given "extend" through the shot edit dialog.
 For example, for the plan view in figure, the splays in the light region are projected on the vertical plane of shot 1-2, those in the dark region on the vertical plane of 0-1.<br><p>  
 
@@ -16,13 +14,17 @@ The projected profile view displays the midline and the splays projected in the 
 <img src="splay_extend.png"><br><p>
 
 <b>Splays</b><br>
-Splays are displayed with continuous or dashed line and with different colors.<br>
+Splays are displayed with continuous or dashed/dotted line and with different colors.<br>
 In <b>plan</b> view if the inclination of the splay is over a maximum, the splay is not drawn.<br>
 The splay display is turned off if the shot is marked for no-display in plan or profile view.<br>
 A "commented" splay is dark gray. X-splays are green.
-Otherwise the splay is gray and, if the clino is above a threshold, it is dashed (positive clino) or dotted (negative clino).<br><p>
+Otherwise the splay is gray.<br><p>
 
-For <b>x-sections</b> the x-splays are green, the others are blue (or light blue), and dashed (or dotted) if the splay
+In plan view if the splay clino is above a threshold, it is dashed (positive clino) or dotted (negative clino).<br><p>
+
+In profile view the splay is dashed/dotted if the angle with the "closest" leg in azimuth is above a threshold.<br><p>
+
+For x-sections the x-splays are green, the others are blue (or light blue), and dashed (or dotted) if the splay
 angle with the section plane is over a threshold.<br><p>
 
 
@@ -133,7 +135,7 @@ Accordingly, the drawing references dialog has no box for the splays.
   <li><i>SKETCH ITEMS</i>
     <ul style="margin-top:0; margin-bottom:0">
   <li><i>Splay plan-view threshold</i>: splay shots with inclination above this threshold are hidden in the plan-view</li>
-  <li><i>Splay dash threshold</i>: splay shots with inclination above this threshold are drawn with a dashed line</li>
+  <li><i>Splay dash threshold</i>: splay shots with inclination above this threshold are drawn with a dashed line in plan view</li>
   <li><i>X-section H-threshold</i>: the inclination angle above which a x-section is horizontal. (Below it x-section are vertical).</li>
     <li>Survey line <i>thickness</i> (midline/splay)</li>
     <li>Station name <i>text size</i> [default 18 pt] [N]</li>
@@ -173,10 +175,10 @@ The <u>Continuation</u> button is a multi-state button.
 <li><i>continue</i>: the current type line will continue a line of the same group if its start-point is close enough to an endpoint of that line</li>
 </ul>
 
-<h4>Portrait/Landscape orientation</h4>
-In portrait orientation the North and the Vertical are upward in plan and profile view, respectively.
-In lanscape orientation they are leftward so that the East is upward in plan view and the Right is upward in profile view.<br>
-In landscape orientation the iconic symbols are rotated so that they appear natural holding the device in portrait mode.<br>
+<h4>Portrait/Landscape presentation</h4>
+In portrait presentation the North and the Vertical are upward in plan and profile view, respectively.
+In landscape presentation they are leftward so that the East is upward in plan view and the Right is upward in profile view.<br>
+In landscape presentation the iconic symbols are rotated so that they appear natural holding the device in portrait mode.<br>
 The sketches are always saved and exported with the North and the vertical upward.<br><p>
  
 <b>Warning. If the sketch disappear from the display, switch between plan and profile to force TopoDroid to refresh it.</b><br><p>

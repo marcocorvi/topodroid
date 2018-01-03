@@ -356,7 +356,7 @@
     <!-- UNUSED string name="plot_recover">Reload sketch from backup?</string -->
     <string name="plot_start">Origin station</string>
     <!-- UNUSED string name="plot_view">Viewed station</string -->
-    <!-- UNUSED string name="read_fail_with_code">Read failure: error code </string -->
+    <string name="read_fail_with_code">Read failure: error code </string>
     <string name="read_failed">Failed DistoX-read</string>
     <!-- UNUSED string name="reading_file_failed">Failed file-read</string -->
 
