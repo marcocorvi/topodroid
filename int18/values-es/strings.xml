@@ -341,7 +341,7 @@
     <!-- UNUSED string name="picture_no_station">Necesitas una estación / nombre para la foto</string -->
     <string name="plot_delete">¿Quiere eliminar el croquis?</string>
     <string name="item_delete">¿Quiere eliminar elemento %1$s?</string>
-    <string name="splay_delete">¿Quiere eliminar tomas laterales %1$s ?</string>
+    <string name="splay_delete">¿Quiere eliminar tomas radiales %1$s ?</string>
     <string name="plot_duplicate_name">Nombre de croquis duplicado</string>
     <!-- UNUSED string name="plot_name">Nombre dibujo</string -->
     <string name="plot_new">Nuevo croquis</string>
@@ -386,7 +386,7 @@
     <!-- UNUSED string name="shot_clino">Clino</string -->
     <!-- UNUSED string name="shot_compass">Brújula</string -->
     <string name="shot_delete">¿Quiere eliminar la toma?</string>
-    <string name="shots_delete">¿Eliminar tomas?</string>
+    <string name="shots_delete">¿Quiere eliminar las tomas?</string>
     <string name="shot_check">¿Marcar como una toma?</string>
     <string name="shot_from">Toma desde</string>
     <string name="shot_info">Introducir datos Toma</string>
@@ -469,10 +469,10 @@
     <string name="shot_title">Toma %1$s - %2$s"</string>
     <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f"</string>
 
-    <string name="hide_blank">Mediciones en blanco</string>
-    <string name="hide_leg">Mediciones repetidas</string>
-    <string name="hide_ids">Enumeración de toma</string>
-    <string name="hide_splay">Tomas Laterales</string>
+    <string name="hide_blank">Visualizar tomas en blanco</string>
+    <string name="hide_leg">Visualizar tomas repetidas</string>
+    <string name="hide_ids">Visualizar enumeración de las tomas</string>
+    <string name="hide_splay">Visualizar las tomas radiales</string>
 
     <string name="plan">Planta</string>
     <string name="extended">Alzado</string>
@@ -543,11 +543,11 @@
 
 
     <string name="button_write"     >Enviar calibración a distoX</string>
-    <string name="button_xsection"  >X-Sección</string>
-    <string name="xsection">X-Sección</string>
+    <string name="button_xsection"  >Secciones</string>
+    <string name="xsection">Secciones</string>
 
     <string name="mode_leg">Visuales</string>
-    <string name="mode_splay">Laterales</string>
+    <string name="mode_splay">Radiales</string>
     <string name="mode_station">Estaciones</string>
     <string name="mode_grid">Cuadrículas</string>
     <string name="mode_fixed">Desplazar objetos</string>
@@ -561,7 +561,7 @@
     <string name="remote_reset">Resetear BT</string>
     <!-- UNUSED string name="download">Descarga</string -->
 
-    <string name="popup_do_splay">Tomas laterales</string>
+    <string name="popup_do_splay">Tomas radiales</string>
     <string name="popup_do_leg">Tomas principales</string>
     <string name="popup_do_gm_data">Toma calib.</string>
 
@@ -576,7 +576,7 @@
     <string name="symbol_mine">Minería</string>
     <string name="symbol_paleo">Paleontología</string>
     <string name="symbol_speleo">Espeleo</string>
-    <string name="symbol_extra">Espeleo(2) </string>
+    <string name="symbol_extra">Espeleo(2)</string>
 
     <string name="symbol_reload">Herramientas dibujo</string>
 
@@ -642,7 +642,7 @@
     <string name="man_xsection">11. Secciones transversales </string>
     <string name="man_overview">12. Pantalla de descripción general </string>
     <string name="man_export">13.  Importar / exportar </string>
-    <string name="man_threed">14. 3D viewer</string>
+    <string name="man_threed">14. Visor Cave3D </string>
     <string name="man_index">15. Índice </string>
     <string name="man_website">* Sitio web </string>
 
@@ -707,7 +707,7 @@
     <!-- UNUSED string name="help_trash">Eliminar dibujo</string -->
     <string name="help_undo">Deshacer última acción de dibujo</string>
     <string name="help_redo">Rehacer última acción de dibujo</string>
-    <string name="help_symbol_plot">Seleccionar el símbolos</string>
+    <string name="help_symbol_plot">Seleccionar los símbolos</string>
     <string name="help_delete_item">Eliminar símbolos del dibujo</string>
     <string name="help_range">Mover una parte de la línea</string>
     <!-- UNUSED string name="help_clear">Borrar selección</string -->
@@ -803,14 +803,14 @@
     <string name="title_plot_save">Guardar dibujo como</string>
     <string name="title_plot_merge">Combinar dibujo</string>
     <string name="title_plot_reload">Actualizar dibujo</string>
-    <string name="title_profile_flip">¿Quiere cambiar a alzado del dibujo?</string>
+    <string name="title_profile_flip">¿Quiere cambiar al alzado del dibujo?</string>
     <string name="title_projection">Perfil de proyeccción de brújula %1$d</string>
     <string name="title_refs">Referencias de dibujo</string>
     <string name="title_scraps">Dibujo</string>
     <string name="title_scraps_outline">Esquema del dibujo</string>
     <string name="title_select">Seleccionar</string>
     <string name="title_shift">Cambio</string>
-    <string name="title_shot_delete">¿Quiere eliminar toma?</string>
+    <string name="title_shot_delete">¿Quiere eliminar la toma?</string>
     <string name="title_sensor_edit">Sensor</string>
     <string name="title_split">Dividir dibujo</string>
 
@@ -872,8 +872,8 @@
   <string name="pref_trobot_names_title">TopoRobot Nombres de estaciones</string>
   <string name="pref_trobot_names_summary">Los nombres de las estaciones están en el estilo TopoRobot</string>
   <string name="pref_ortho_lrud_title">LRUD ángulo de apertura</string>
-  <string name="pref_ortho_lrud_summary">Ángulo tomas laterales</string>
-  <string name="pref_ortho_lrud_message">Ángulo mínimo de tomas laterales</string>
+  <string name="pref_ortho_lrud_summary">Ángulo tomas radiales</string>
+  <string name="pref_ortho_lrud_message">Ángulo mínimo de tomas radiales</string>
   <string name="pref_lrud_vertical_title">UD inclinación mínima de toma radial</string>
   <string name="pref_lrud_vertical_summary">LRUD arriba/abajo, inclinación mínima de toma radial</string>
   <string name="pref_lrud_vertical_message">LRUD arriba/abajo, inclinación mínima de toma radial</string>
@@ -1118,7 +1118,7 @@
   <string name="pref_backup_interval_summary">Intervalo mínimo entre dos copias de seguridad [s]</string>
   <!-- UNUSED string name="pref_xtherion_areas_title">Áreas Xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Guardar áreas a xtherion</string -->
-  <string name="pref_therion_splays_title">Anchuras therion</string>
+  <string name="pref_therion_splays_title">Radiales therion</string>
   <string name="pref_therion_splays_summary">Añadir líneas en la pantalla de archivo Th2</string>
   <string name="pref_autoStations_title">Estaciones automáticas</string>
   <string name="pref_autoStations_summary">Añadir estación automáticamente</string>
@@ -1151,8 +1151,8 @@
   <string name="pref_auto_section_pt_title">Punto de sección</string>
   <string name="pref_auto_section_pt_summary">Añadir punto de la sección a las líneas de sección</string>
 
-  <string name="pref_sketchUsesSplays_title">Tomas laterales en el dibujo</string>
-  <string name="pref_sketchUsesSplays_summary">Utilizar tomas laterales en el dibujo</string>
+  <string name="pref_sketchUsesSplays_title">Tomas radiales en el dibujo</string>
+  <string name="pref_sketchUsesSplays_summary">Utilizar tomas radiales en el dibujo</string>
   <string name="pref_sketchLineStep_title">Paso de la línea</string>
   <string name="pref_sketchLineStep_summary">Distancia entre puntos de la línea</string>
   <string name="pref_sketchLineStep_message">Distancia entre puntos de la línea</string>
