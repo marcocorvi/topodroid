@@ -3154,6 +3154,7 @@ public class DrawingWindow extends ItemDrawer
       if ( label != null && label.length() > 0 ) {
 	if ( mLandscape ) { float t=x; x=-y; y=t; }
         DrawingLabelPath label_path = new DrawingLabelPath( label, x, y, mPointScale, null );
+	label_path.mLandscape = mLandscape;
         mDrawingSurface.addDrawingPath( label_path );
         modified();
       } 
@@ -3170,6 +3171,7 @@ public class DrawingWindow extends ItemDrawer
       // photo file is "survey/id.jpg"
       // String filename = mApp.mySurvey + "/" + Long.toString( mMediaId ) + ".jpg";
       DrawingPhotoPath photo = new DrawingPhotoPath( mMediaComment, mMediaX, mMediaY, mPointScale, null, mMediaId );
+      photo.mLandscape = mLandscape;
       mDrawingSurface.addDrawingPath( photo );
       modified();
     }
@@ -3256,6 +3258,7 @@ public class DrawingWindow extends ItemDrawer
       if ( audio == null ) {
         // assert bid == mMediaId
         audio = new DrawingAudioPath( mMediaX, mMediaY, mPointScale, null, bid );
+	audio.mLandscape = mLandscape;
         mDrawingSurface.addDrawingPath( audio );
         modified();
       }

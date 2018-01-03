@@ -144,6 +144,13 @@ class TDSetting
     "DISTOX_SVG_GRID",           // whether to export grid in SVG 
     "DISTOX_SVG_LINE_DIR",       // whether to add line orientation ticks in SVG export
     "DISTOX_SVG_IN_HTML",        // whether to export SVG embedded in HTML
+    "DISTOX_SVG_POINT_STROKE",
+    "DISTOX_SVG_LABEL_STROKE",
+    "DISTOX_SVG_LINE_STROKE",
+    "DISTOX_SVG_GRID_STROKE",
+    "DISTOX_SVG_SHOT_STROKE",
+    "DISTOX_SVG_LINEDIR_STROKE",
+
     "DISTOX_KML_STATIONS",       // whether to add station points to KML export
     "DISTOX_KML_SPLAYS",         // whether to add splay lines to KML export
 
@@ -429,6 +436,13 @@ class TDSetting
 
   static boolean mUnscaledPoints = false;
   static boolean mAreaBorder     = true;
+
+  static float mSvgPointStroke   = 0.1f;
+  static float mSvgLabelStroke   = 0.3f;
+  static float mSvgLineStroke    = 0.5f;
+  static float mSvgLineDirStroke = 2f;
+  static float mSvgGridStroke    = 0.5f;
+  static float mSvgShotStroke    = 0.5f;
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // 3D
@@ -780,6 +794,13 @@ class TDSetting
     mSvgGrid           = prefs.getBoolean( key[k++], false ); // DISTOX_SVG_GRID
     mSvgLineDirection  = prefs.getBoolean( key[k++], false ); // DISTOX_SVG_LINE_DIR
     mSvgInHtml         = prefs.getBoolean( key[k++], false ); // DISTOX_SVG_IN_HTML
+    mSvgPointStroke    = tryFloat( prefs, key[k++], "0.1" );  // DISTOX_SVG_POINT_STROKE
+    mSvgLabelStroke    = tryFloat( prefs, key[k++], "0.3" );  // DISTOX_SVG_LABEL_STROKE
+    mSvgLineStroke     = tryFloat( prefs, key[k++], "0.5" );  // DISTOX_SVG_LINE_STROKE
+    mSvgGridStroke     = tryFloat( prefs, key[k++], "0.5" );  // DISTOX_SVG_GRID_STROKE
+    mSvgShotStroke     = tryFloat( prefs, key[k++], "0.5" );  // DISTOX_SVG_SHOT_STROKE
+    mSvgLineDirStroke  = tryFloat( prefs, key[k++], "2.9" );  // DISTOX_SVG_LINEDIR_STROKE
+
     mKmlStations       = prefs.getBoolean( key[k++], true );  // DISTOX_KML_STATIONS
     mKmlSplays         = prefs.getBoolean( key[k++], false ); // DISTOX_KML_SPLAYS
     mSplayVertThrs     = tryFloat( prefs, key[k++], "80"  );  // DISTOX_SPLAY_VERT_THRS
@@ -1119,6 +1140,19 @@ class TDSetting
     } else if ( k.equals( key[ nk++ ] ) ) { 
       mSvgInHtml = prefs.getBoolean( k, false );     // DISTOX_SVG_IN_HTML
     } else if ( k.equals( key[ nk++ ] ) ) { 
+      mSvgPointStroke    = tryFloat( prefs, k, "0.1" );  // DISTOX_SVG_POINT_STROKE
+    } else if ( k.equals( key[ nk++ ] ) ) { 
+      mSvgLabelStroke    = tryFloat( prefs, k, "0.3" );  // DISTOX_SVG_LABEL_STROKE
+    } else if ( k.equals( key[ nk++ ] ) ) { 
+      mSvgLineStroke     = tryFloat( prefs, k, "0.5" );  // DISTOX_SVG_LINE_STROKE
+    } else if ( k.equals( key[ nk++ ] ) ) { 
+      mSvgGridStroke     = tryFloat( prefs, k, "0.5" );  // DISTOX_SVG_GRID_STROKE
+    } else if ( k.equals( key[ nk++ ] ) ) { 
+      mSvgShotStroke     = tryFloat( prefs, k, "0.5" );  // DISTOX_SVG_SHOT_STROKE
+    } else if ( k.equals( key[ nk++ ] ) ) { 
+      mSvgLineDirStroke  = tryFloat( prefs, k, "2.0" );  // DISTOX_SVG_LINEDIR_STROKE
+
+    } else if ( k.equals( key[ nk++ ] ) ) { 
       mKmlStations = prefs.getBoolean( k, true );    // DISTOX_KML_STATIONS
     } else if ( k.equals( key[ nk++ ] ) ) { 
       mKmlSplays = prefs.getBoolean( k, false );     // DISTOX_KML_SPLAYS
@@ -1444,6 +1478,12 @@ class TDSetting
     //B if ( name.equals( "DISTOX_SVG_GRID" )
     //B if ( name.equals( "DISTOX_SVG_LINE_DIR" )
     //B if ( name.equals( "DISTOX_SVG_IN_HTML" )
+    if ( name.equals( "DISTOX_SVG_POINT_STROKE" ) ) return parseFloatValue( value, mSvgPointStroke,   0.01f );
+    if ( name.equals( "DISTOX_SVG_LABEL_STROKE" ) ) return parseFloatValue( value, mSvgLabelStroke,   0.01f );
+    if ( name.equals( "DISTOX_SVG_LINE_STROKE"  ) ) return parseFloatValue( value, mSvgLineStroke,    0.01f );
+    if ( name.equals( "DISTOX_SVG_GRID_STROKE"  ) ) return parseFloatValue( value, mSvgGridStroke,    0.01f );
+    if ( name.equals( "DISTOX_SVG_SHOT_STROKE"  ) ) return parseFloatValue( value, mSvgShotStroke,    0.01f );
+    if ( name.equals( "DISTOX_SVG_LINEDIR_STROKE" ) ) return parseFloatValue( value, mSvgLineDirStroke, 0.01f );
     //B if ( name.equals( "DISTOX_KML_STATIONS" )
     //B if ( name.equals( "DISTOX_KML_SPLAYS" )
 

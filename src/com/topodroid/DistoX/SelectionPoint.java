@@ -179,6 +179,7 @@ class SelectionPoint
                 lp.shiftBy( d*dx, d*dy );
                 lp0 = lp;
               }
+	      mD2 = d0;
             } else {
               for ( LinePoint lp = mPoint.mNext; lp != mLP2 && lp != null; lp=lp.mNext ) {
                 lp.shiftBy( dx, dy );
@@ -198,6 +199,7 @@ class SelectionPoint
                 lp.shiftBy( d*dx, d*dy );
                 lp0 = lp;
               }
+	      mD1 = d0;
             } else {
               for ( LinePoint lp = mPoint.mPrev; lp != mLP1 && lp != null; lp=lp.mPrev ) {
                 lp.shiftBy( dx, dy );

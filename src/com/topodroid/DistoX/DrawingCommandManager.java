@@ -1851,9 +1851,10 @@ public class DrawingCommandManager
       lp0 = lp;
     }
     LinePoint lp4 = lp0;
-    for ( LinePoint lp3 = lp0.mNext; lp3 != lp2 && lp3 != null; lp3=lp3.mNext) {
+    for ( LinePoint lp3 = lp0.mNext; lp3 != null; lp3=lp3.mNext) {
       ++ c2;
       d2 += lp4.distance( lp3 );
+      if ( lp3 == lp2 ) break;
       lp4 = lp3;
     }
     // Log.v("DistoX", "set range d1 " + d1 + " d2 " + d2 + " C " + cnt + " " + c1 + " " + c2 );
