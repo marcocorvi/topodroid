@@ -111,7 +111,7 @@ public class SymbolLine extends Symbol
     makePath();
   }
 
-  void makePath()
+  private void makePath()
   {
     mPath = new Path();
     mPath.moveTo(-50, 0 );
@@ -170,6 +170,7 @@ public class SymbolLine extends Symbol
     PathDashPathEffect effect = null;
     PathDashPathEffect rev_effect = null;
     float xmin=0, xmax=0;
+    float ymin=0, ymax=0;
 
     try {
       // FileReader fr = new FileReader( filename );
@@ -320,6 +321,7 @@ public class SymbolLine extends Symbol
                         xmin = xmax = x;
                         moved_to = true;
                       }
+		      if ( y > ymax ) { ymax = y; } else if ( y < ymin ) { ymin = y; }
   	              // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	              // if ( k < s ) {
   	              //   float x = Float.parseFloat( vals[k] ) * unit;
@@ -344,6 +346,7 @@ public class SymbolLine extends Symbol
                     path_dir.lineTo( x, y );
                     path_rev.lineTo( x, -y );
                     if ( x < xmin ) xmin = x; else if ( x > xmax ) xmax = x;
+		    if ( y > ymax ) { ymax = y; } else if ( y < ymin ) { ymin = y; }
 
   	            // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	            // if ( k < s ) {
@@ -373,6 +376,9 @@ public class SymbolLine extends Symbol
                     if ( x1 < xmin ) xmin = x1; else if ( x1 > xmax ) xmax = x1;
                     if ( x2 < xmin ) xmin = x2; else if ( x2 > xmax ) xmax = x2;
                     if ( x3 < xmin ) xmin = x3; else if ( x3 > xmax ) xmax = x3;
+		    if ( y1 > ymax ) { ymax = y1; } else if ( y1 < ymin ) { ymin = y1; }
+		    if ( y2 > ymax ) { ymax = y2; } else if ( y2 < ymin ) { ymin = y2; }
+		    if ( y3 > ymax ) { ymax = y3; } else if ( y3 < ymin ) { ymin = y3; }
 
   	            // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	            // if ( k < s ) {
@@ -416,6 +422,7 @@ public class SymbolLine extends Symbol
                     path_rev.addCircle( x, -y, r, Path.Direction.CCW );
                     if ( x-r < xmin ) xmin = x-r;
                     if ( x+r > xmax ) xmax = x+r;
+		    if ( y+r > ymax ) { ymax = y+r; } else if ( y-r < ymin ) { ymin = y-r; }
                   } catch ( NumberFormatException e ) {
                     TDLog.Error( filename + " parse lineTo point error: " + line );
                   }
@@ -461,8 +468,9 @@ public class SymbolLine extends Symbol
               //   mPaint.setStrokeWidth( width * TDSetting.mLineThickness );
               //   mRevPaint.setStrokeWidth( width * TDSetting.mLineThickness );
               }
-              mPaint.setStrokeWidth( width * TDSetting.mLineThickness );
-              mRevPaint.setStrokeWidth( width * TDSetting.mLineThickness );
+	      float dy = ymax - ymin + 1;
+              mPaint.setStrokeWidth( dy * width * TDSetting.mLineThickness );
+              mRevPaint.setStrokeWidth( dy * width * TDSetting.mLineThickness );
   	    }
           }
         }

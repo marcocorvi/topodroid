@@ -2371,810 +2371,822 @@ public class DrawingWindow extends ItemDrawer
       modified();
     }
 
-    private void dumpEvent( MotionEventWrap ev )
-    {
-      String name[] = { "DOWN", "UP", "MOVE", "CANCEL", "OUTSIDE", "PTR_DOWN", "PTR_UP", "7?", "8?", "9?" };
-      StringBuilder sb = new StringBuilder();
-      int action = ev.getAction();
-      int actionCode = action & MotionEvent.ACTION_MASK;
-      sb.append( "Event action_").append( name[actionCode] );
-      if ( actionCode == MotionEvent.ACTION_POINTER_DOWN || actionCode == MotionEvent.ACTION_POINTER_UP ) {
-        sb.append( "(pid " ).append( action>>MotionEvent.ACTION_POINTER_ID_SHIFT ).append( ")" );
-      }
-      sb.append( " [" );
-      for (int i=0; i<ev.getPointerCount(); ++i ) {
-        sb.append( "#" ).append( i );
-        sb.append( "(pid " ).append( ev.getPointerId(i) ).append( ")=" ).append( (int)(ev.getX(i)) ).append( "." ).append( (int)(ev.getY(i)) );
-        if ( i+1 < ev.getPointerCount() ) sb.append( ":" );
-      }
-      sb.append( "]" );
-      // TDLog.Log(TDLog.LOG_PLOT, sb.toString() );
+  // ----------------------------------------------------------------
+
+  private void dumpEvent( MotionEventWrap ev )
+  {
+    String name[] = { "DOWN", "UP", "MOVE", "CANCEL", "OUTSIDE", "PTR_DOWN", "PTR_UP", "7?", "8?", "9?" };
+    StringBuilder sb = new StringBuilder();
+    int action = ev.getAction();
+    int actionCode = action & MotionEvent.ACTION_MASK;
+    sb.append( "Event action_").append( name[actionCode] );
+    if ( actionCode == MotionEvent.ACTION_POINTER_DOWN || actionCode == MotionEvent.ACTION_POINTER_UP ) {
+      sb.append( "(pid " ).append( action>>MotionEvent.ACTION_POINTER_ID_SHIFT ).append( ")" );
     }
-    
-
-    float spacing( MotionEventWrap ev )
-    {
-      int np = ev.getPointerCount();
-      if ( np < 2 ) return 0.0f;
-      float x = ev.getX(1) - ev.getX(0);
-      float y = ev.getY(1) - ev.getY(0);
-      return (float)Math.sqrt(x*x + y*y);
+    sb.append( " [" );
+    for (int i=0; i<ev.getPointerCount(); ++i ) {
+      sb.append( "#" ).append( i );
+      sb.append( "(pid " ).append( ev.getPointerId(i) ).append( ")=" ).append( (int)(ev.getX(i)) ).append( "." ).append( (int)(ev.getY(i)) );
+      if ( i+1 < ev.getPointerCount() ) sb.append( ":" );
     }
+    sb.append( "]" );
+    // TDLog.Log(TDLog.LOG_PLOT, sb.toString() );
+  }
+  
 
-    void saveEventPoint( MotionEventWrap ev )
-    {
-      int np = ev.getPointerCount();
-      if ( np >= 1 ) {
-        mSave0X = ev.getX(0);
-        mSave0Y = ev.getY(0);
-        if ( np >= 2 ) {
-          mSave1X = ev.getX(1);
-          mSave1Y = ev.getY(1);
-        } else {
-          mSave1X = mSave0X;
-          mSave1Y = mSave0Y;
-        } 
-      }
-    }
+  float spacing( MotionEventWrap ev )
+  {
+    int np = ev.getPointerCount();
+    if ( np < 2 ) return 0.0f;
+    float x = ev.getX(1) - ev.getX(0);
+    float y = ev.getY(1) - ev.getY(0);
+    return (float)Math.sqrt(x*x + y*y);
+  }
 
-    
-    void shiftByEvent( MotionEventWrap ev )
-    {
-      float x0 = 0.0f;
-      float y0 = 0.0f;
-      float x1 = 0.0f;
-      float y1 = 0.0f;
-      int np = ev.getPointerCount();
-      if ( np >= 1 ) {
-        x0 = ev.getX(0);
-        y0 = ev.getY(0);
-        if ( np >= 2 ) {
-          x1 = ev.getX(1);
-          y1 = ev.getY(1);
-        } else {
-          x1 = x0;
-          y1 = y0;
-        } 
-      }
-      float x_shift = ( x0 - mSave0X + x1 - mSave1X ) / 2;
-      float y_shift = ( y0 - mSave0Y + y1 - mSave1Y ) / 2;
-      mSave0X = x0;
-      mSave0Y = y0;
-      mSave1X = x1;
-      mSave1Y = y1;
-    
-      if ( Math.abs( x_shift ) < TDSetting.mMinShift && Math.abs( y_shift ) < TDSetting.mMinShift ) {
-        mOffset.x += x_shift / mZoom;                // add shift to offset
-        mOffset.y += y_shift / mZoom; 
-        mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
-      }
-    }
-
-    private void moveCanvas( float x_shift, float y_shift )
-    {
-      if ( Math.abs( x_shift ) < TDSetting.mMinShift && Math.abs( y_shift ) < TDSetting.mMinShift ) {
-        mOffset.x += x_shift / mZoom;                // add shift to offset
-        mOffset.y += y_shift / mZoom; 
-        mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
-      }
-    }
-
-    public void checkZoomBtnsCtrl()
-    {
-      // if ( mZoomBtnsCtrl == null ) return; // not necessary
-      if ( TDSetting.mZoomCtrl == 2 && ! mZoomBtnsCtrl.isVisible() ) {
-        mZoomBtnsCtrl.setVisible( true );
-      }
-    }
-
-    // lp1    is the line (being drawn) to modify
-    // lp2    is used to get the line to join/continue
-    // return true is the line lp1 must be added to the sketch
-    private boolean tryToJoin( DrawingLinePath lp1, DrawingLinePath lp2 )
-    {
-      if ( lp1 == null ) return false;
-      if ( lp2 == null ) return true;
-
-      if ( mContinueLine == CONT_CONTINUE ) {
-        DrawingLinePath line = null;
-        line = mDrawingSurface.getLineToContinue( lp2.mFirst, mCurrentLine, mZoom, mSelectSize );
-        if ( line != null && mCurrentLine == line.mLineType ) { // continue line with the current line
-          mDrawingSurface.addLineToLine( lp2, line );
-          return false;
-        }
-      // } else if ( mContinueLine == CONT_CONTINUE_END ) {
-      //   DrawingLinePath line = null;
-      //   line = mDrawingSurface.getLineToContinue( lp2.mFirst, mCurrentLine, mZoom, mSelectSize );
-      //   if ( line != null && mCurrentLine == line.mLineType ) { // continue line with the current line
-      //     lp2.reversePath();
-      //     mDrawingSurface.addLineToLine( lp2, line );
-      //     return false;
-      //   }
+  void saveEventPoint( MotionEventWrap ev )
+  {
+    int np = ev.getPointerCount();
+    if ( np >= 1 ) {
+      mSave0X = ev.getX(0);
+      mSave0Y = ev.getY(0);
+      if ( np >= 2 ) {
+        mSave1X = ev.getX(1);
+        mSave1Y = ev.getY(1);
       } else {
-        DrawingLinePath line1 = null;
-        DrawingLinePath line2 = null;
-        if ( mContinueLine == CONT_START || mContinueLine == CONT_BOTH ) {
-          line1 = mDrawingSurface.getLineToContinue( lp2.mFirst, mCurrentLine, mZoom, mSelectSize );
-        }
-        if ( mContinueLine == CONT_END || mContinueLine == CONT_BOTH ) {
-          line2 = mDrawingSurface.getLineToContinue( lp2.mLast, mCurrentLine, mZoom, mSelectSize );
-        }
-        if ( line1 != null ) {
-          float d1 = line1.mFirst.distance( lp1.mFirst );
-          float d2 = line1.mLast.distance( lp1.mFirst );
-          if ( d1 < d2 ) {
-            // line.reversePath();
-            lp1.moveFirstTo( line1.mFirst.x, line1.mFirst.y );
-          } else {
-            lp1.moveFirstTo( line1.mLast.x, line1.mLast.y );
-          }
-        }
-        if ( line2 != null ) {
-          float d1 = line2.mFirst.distance( lp1.mLast );
-          float d2 = line2.mLast.distance( lp1.mLast );
-          if ( d1 < d2 ) {
-            // line.reversePath();
-            lp1.moveLastTo( line2.mFirst.x, line2.mFirst.y );
-          } else {
-            lp1.moveLastTo( line2.mLast.x, line2.mLast.y );
-          }
+        mSave1X = mSave0X;
+        mSave1Y = mSave0Y;
+      } 
+    }
+  }
+  
+  void shiftByEvent( MotionEventWrap ev )
+  {
+    float x0 = 0.0f;
+    float y0 = 0.0f;
+    float x1 = 0.0f;
+    float y1 = 0.0f;
+    int np = ev.getPointerCount();
+    if ( np >= 1 ) {
+      x0 = ev.getX(0);
+      y0 = ev.getY(0);
+      if ( np >= 2 ) {
+        x1 = ev.getX(1);
+        y1 = ev.getY(1);
+      } else {
+        x1 = x0;
+        y1 = y0;
+      } 
+    }
+    float x_shift = ( x0 - mSave0X + x1 - mSave1X ) / 2;
+    float y_shift = ( y0 - mSave0Y + y1 - mSave1Y ) / 2;
+    mSave0X = x0;
+    mSave0Y = y0;
+    mSave1X = x1;
+    mSave1Y = y1;
+  
+    if ( Math.abs( x_shift ) < TDSetting.mMinShift && Math.abs( y_shift ) < TDSetting.mMinShift ) {
+      mOffset.x += x_shift / mZoom;                // add shift to offset
+      mOffset.y += y_shift / mZoom; 
+      mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
+    }
+  }
+
+  private void moveCanvas( float x_shift, float y_shift )
+  {
+    if ( Math.abs( x_shift ) < TDSetting.mMinShift && Math.abs( y_shift ) < TDSetting.mMinShift ) {
+      mOffset.x += x_shift / mZoom;                // add shift to offset
+      mOffset.y += y_shift / mZoom; 
+      mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
+    }
+  }
+
+  public void checkZoomBtnsCtrl()
+  {
+    // if ( mZoomBtnsCtrl == null ) return; // not necessary
+    if ( TDSetting.mZoomCtrl == 2 && ! mZoomBtnsCtrl.isVisible() ) {
+      mZoomBtnsCtrl.setVisible( true );
+    }
+  }
+
+  // lp1    is the line (being drawn) to modify
+  // lp2    is used to get the line to join/continue
+  // return true is the line lp1 must be added to the sketch
+  private boolean tryToJoin( DrawingLinePath lp1, DrawingLinePath lp2 )
+  {
+    if ( lp1 == null ) return false;
+    if ( lp2 == null ) return true;
+
+    if ( mContinueLine == CONT_CONTINUE ) {
+      DrawingLinePath line = null;
+      line = mDrawingSurface.getLineToContinue( lp2.mFirst, mCurrentLine, mZoom, mSelectSize );
+      if ( line != null && mCurrentLine == line.mLineType ) { // continue line with the current line
+        mDrawingSurface.addLineToLine( lp2, line );
+        return false;
+      }
+    // } else if ( mContinueLine == CONT_CONTINUE_END ) {
+    //   DrawingLinePath line = null;
+    //   line = mDrawingSurface.getLineToContinue( lp2.mFirst, mCurrentLine, mZoom, mSelectSize );
+    //   if ( line != null && mCurrentLine == line.mLineType ) { // continue line with the current line
+    //     lp2.reversePath();
+    //     mDrawingSurface.addLineToLine( lp2, line );
+    //     return false;
+    //   }
+    } else {
+      DrawingLinePath line1 = null;
+      DrawingLinePath line2 = null;
+      if ( mContinueLine == CONT_START || mContinueLine == CONT_BOTH ) {
+        line1 = mDrawingSurface.getLineToContinue( lp2.mFirst, mCurrentLine, mZoom, mSelectSize );
+      }
+      if ( mContinueLine == CONT_END || mContinueLine == CONT_BOTH ) {
+        line2 = mDrawingSurface.getLineToContinue( lp2.mLast, mCurrentLine, mZoom, mSelectSize );
+      }
+      if ( line1 != null ) {
+        float d1 = line1.mFirst.distance( lp1.mFirst );
+        float d2 = line1.mLast.distance( lp1.mFirst );
+        if ( d1 < d2 ) {
+          // line.reversePath();
+          lp1.moveFirstTo( line1.mFirst.x, line1.mFirst.y );
+        } else {
+          lp1.moveFirstTo( line1.mLast.x, line1.mLast.y );
         }
       }
+      if ( line2 != null ) {
+        float d1 = line2.mFirst.distance( lp1.mLast );
+        float d2 = line2.mLast.distance( lp1.mLast );
+        if ( d1 < d2 ) {
+          // line.reversePath();
+          lp1.moveLastTo( line2.mFirst.x, line2.mFirst.y );
+        } else {
+          lp1.moveLastTo( line2.mLast.x, line2.mLast.y );
+        }
+      }
+    }
+    return true;
+  }
+
+  // -------------------------------------------------------------------------
+
+  private boolean pointerDown = false;
+  private boolean threePointers = false;
+
+  public boolean onTouch( View view, MotionEvent rawEvent )
+  {
+    dismissPopups();
+    checkZoomBtnsCtrl();
+
+
+    MotionEventWrap event = MotionEventWrap.wrap(rawEvent);
+    // TDLog.Log( TDLog.LOG_INPUT, "Drawing Activity onTouch() " );
+    // dumpEvent( event );
+
+    int act = event.getAction();
+    int action = act & MotionEvent.ACTION_MASK;
+    int id = 0;
+
+    if (action == MotionEvent.ACTION_POINTER_DOWN) {
+      threePointers = (event.getPointerCount() >= 3);
+      mTouchMode = MODE_ZOOM;
+      oldDist = spacing( event );
+      saveEventPoint( event );
+      pointerDown = true;
+      return true;
+    } else if ( action == MotionEvent.ACTION_POINTER_UP) {
+      int np = event.getPointerCount();
+      threePointers = (np > 3);
+      if ( np > 2 ) return true;
+      mTouchMode = MODE_MOVE;
+      id = 1 - ((act & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT);
+      // int idx = rawEvent.findPointerIndex( id );
+      if ( mSymbol != Symbol.POINT ) {
+        action = MotionEvent.ACTION_DOWN; // force next case
+      }
+      /* fall through */
+    }
+    float x_canvas = event.getX(id);
+    float y_canvas = event.getY(id);
+    float x_scene = x_canvas/mZoom - mOffset.x;
+    float y_scene = y_canvas/mZoom - mOffset.y;
+
+    if (action == MotionEvent.ACTION_DOWN) { // ---------------------------------------- DOWN
+      return onTouchDown( x_canvas, y_canvas, x_scene, y_scene );
+
+    } else if ( action == MotionEvent.ACTION_MOVE ) { // ------------------------------- MOVE
+      return onTouchMove( x_canvas, y_canvas, x_scene, y_scene, event );
+
+    } else if (action == MotionEvent.ACTION_UP) { // ----------------------------------- UP
+      return onTouchUp( x_canvas, y_canvas, x_scene, y_scene );
+    }
+    return true;
+  }
+
+  private boolean onTouchUp( float xc, float yc, float xs, float ys )
+  {
+    if ( onMenu ) {
+      closeMenu();
       return true;
     }
 
-    private boolean pointerDown = false;
-    private boolean threePointers = false;
+    if ( mTouchMode == MODE_ZOOM || mTouchMode == MODE_ROTATE ) {
+      mTouchMode = MODE_MOVE;
+    } else {
+      float x_shift = xc - mSaveX; // compute shift
+      float y_shift = yc - mSaveY;
+      if ( mMode == MODE_DRAW ) {
+        if ( mSymbol == Symbol.LINE || mSymbol == Symbol.AREA ) {
 
-    public boolean onTouch( View view, MotionEvent rawEvent )
-    {
-      dismissPopups();
-      checkZoomBtnsCtrl();
+          mCurrentBrush.mouseUp( mDrawingSurface.getPreviewPath(), xc, yc );
+          mDrawingSurface.resetPreviewPath();
 
-      float d0 = TDSetting.mCloseCutoff + mSelectSize / mZoom;
-
-      MotionEventWrap event = MotionEventWrap.wrap(rawEvent);
-      // TDLog.Log( TDLog.LOG_INPUT, "Drawing Activity onTouch() " );
-      // dumpEvent( event );
-
-      int act = event.getAction();
-      int action = act & MotionEvent.ACTION_MASK;
-      int id = 0;
-
-      if (action == MotionEvent.ACTION_POINTER_DOWN) {
-        threePointers = (event.getPointerCount() >= 3);
-        mTouchMode = MODE_ZOOM;
-        oldDist = spacing( event );
-        saveEventPoint( event );
-        pointerDown = true;
-        return true;
-      } else if ( action == MotionEvent.ACTION_POINTER_UP) {
-        int np = event.getPointerCount();
-        threePointers = (np > 3);
-        if ( np > 2 ) return true;
-        mTouchMode = MODE_MOVE;
-        id = 1 - ((act & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT);
-        // int idx = rawEvent.findPointerIndex( id );
-        if ( mSymbol != Symbol.POINT ) {
-          action = MotionEvent.ACTION_DOWN; // force next case
-        }
-        /* fall through */
-      }
-      float x_canvas = event.getX(id);
-      float y_canvas = event.getY(id);
-      float x_scene = x_canvas/mZoom - mOffset.x;
-      float y_scene = y_canvas/mZoom - mOffset.y;
-
-
-      // ---------------------------------------- DOWN
-      if (action == MotionEvent.ACTION_DOWN) {
-        mDrawingSurface.endEraser();
-
-        // TDLog.Log( TDLog.LOG_PLOT, "DOWN at X " + x_canvas + " [" +mBorderInnerLeft + " " + mBorderInnerRight + "] Y " 
-        //                                          + y_canvas + " / " + mBorderBottom );
-        if ( y_canvas > mBorderBottom ) {
-          if ( mZoomBtnsCtrlOn && x_canvas > mBorderInnerLeft && x_canvas < mBorderInnerRight ) {
-            mTouchMode = MODE_ZOOM;
-            mZoomBtnsCtrl.setVisible( true );
-            // mZoomCtrl.show( );
-          } else if ( TDSetting.mSideDrag ) {
-            mTouchMode = MODE_ZOOM;
-          }
-        } else if ( TDSetting.mSideDrag && ( x_canvas > mBorderRight || x_canvas < mBorderLeft ) ) {
-          mTouchMode = MODE_ZOOM;
-          SelectionPoint sp = mDrawingSurface.hotItem();
-          if ( sp != null && sp.type() == DrawingPath.DRAWING_PATH_POINT ) {
-            DrawingPointPath path = (DrawingPointPath)(sp.mItem);
-            if ( BrushManager.isPointOrientable(path.mPointType) ) {
-              mTouchMode = MODE_ROTATE;
-              mStartY = y_canvas;
-            }
-          }
-        }
-
-        if ( mMode == MODE_DRAW ) {
-          // TDLog.Log( TDLog.LOG_PLOT, "onTouch ACTION_DOWN symbol " + mSymbol );
-          mPointCnt = 0;
           if ( mSymbol == Symbol.LINE ) {
-            mCurrentLinePath = new DrawingLinePath( mCurrentLine );
-            mCurrentLinePath.addStartPoint( x_scene, y_scene );
-            mCurrentBrush.mouseDown( mDrawingSurface.getPreviewPath(), x_canvas, y_canvas );
+            if (    ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2
+                 || ( mPointCnt % mLinePointStep ) > 0 ) {
+              if ( mCurrentLinePath != null ) mCurrentLinePath.addPoint( xs, ys );
+            }
+    	    if ( mLandscape ) mCurrentLinePath.landscapeToPortrait();
           } else if ( mSymbol == Symbol.AREA ) {
-            // TDLog.Log( TDLog.LOG_PLOT, "onTouch ACTION_DOWN area type " + mCurrentArea );
-            mCurrentAreaPath = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(),
-              mName+"-a", TDSetting.mAreaBorder );
-            mCurrentAreaPath.addStartPoint( x_scene, y_scene );
-            // Log.v("DistoX", "start area start " + x_scene + " " + y_scene );
-            mCurrentBrush.mouseDown( mDrawingSurface.getPreviewPath(), x_canvas, y_canvas );
-          } else { // Symbol.POINT
-            // mSaveX = x_canvas; // FIXME-000
-            // mSaveY = y_canvas;
-          }
-          mSaveX = x_canvas; // FIXME-000
-          mSaveY = y_canvas;
-
-        } else if ( mMode == MODE_MOVE ) {
-          setTheTitle( );
-          mSaveX = x_canvas; // FIXME-000
-          mSaveY = y_canvas;
-          mDownX = x_canvas;
-          mDownY = y_canvas;
-          return false;
-
-        } else if ( mMode == MODE_ERASE ) {
-          // Log.v("DistoX", "Erase at " + x_scene + " " + y_scene );
-          if ( mTouchMode == MODE_MOVE ) {
-            mEraseCommand =  new EraseCommand();
-            mDrawingSurface.setEraser( x_canvas, y_canvas, mEraseSize );
-            doEraseAt( x_scene, y_scene );
-          }
-
-        } else if ( mMode == MODE_EDIT ) {
-          mStartX = x_canvas;
-          mStartY = y_canvas;
-          mEditMove = true;
-          SelectionPoint pt = mDrawingSurface.hotItem();
-          if ( pt != null ) {
-	    if ( mLandscape ) {
-              mEditMove = ( pt.distance( -y_scene, x_scene ) < d0 );
-	    } else {
-              mEditMove = ( pt.distance( x_scene, y_scene ) < d0 );
-	    }
-          } 
-          // doSelectAt( x_scene, y_scene, mSelectSize );
-          mSaveX = x_canvas;
-          mSaveY = y_canvas;
-          // return false;
-
-        } else if ( mMode == MODE_SHIFT ) {
-          mShiftMove = true; // whether to move canvas in point-shift mode
-          mStartX = x_canvas;
-          mStartY = y_canvas;
-          SelectionPoint pt = mDrawingSurface.hotItem();
-          if ( pt != null ) {
-	    if ( mLandscape ) {
-              if ( pt.distance( -y_scene, x_scene ) < d0 ) {
-                mShiftMove = false;
-                mStartX = x_scene;  // save start position
-                mStartY = y_scene;
-              }
-	    } else {
-              if ( pt.distance( x_scene, y_scene ) < d0 ) {
-                mShiftMove = false;
-                mStartX = x_scene;  // save start position
-                mStartY = y_scene;
-              }
-	    }
-          }
-          mSaveX = x_canvas; // FIXME-000
-          mSaveY = y_canvas;
-          // return false;
-
-        } else if ( mMode == MODE_SPLIT ) {
-          mCurrentBrush.mouseDown( mDrawingSurface.getPreviewPath(), x_canvas, y_canvas );
-          mSplitBorder.add( new PointF( x_scene, y_scene ) );
-          mSaveX = x_canvas; 
-          mSaveY = y_canvas;
-        }
-
-      // ---------------------------------------- MOVE
-
-      } else if ( action == MotionEvent.ACTION_MOVE ) {
-        // Log.v(  TopoDroidApp.TAG, "action MOVE mode " + mMode + " touch-mode " + mTouchMode);
-        if ( mTouchMode == MODE_MOVE) {
-          float x_shift = x_canvas - mSaveX; // compute shift
-          float y_shift = y_canvas - mSaveY;
-          boolean save = true; // FIXME-000
-          // mSaveX = x_canvas; 
-          // mSaveY = y_canvas;
-          if ( mMode == MODE_DRAW ) {
-            if ( mSymbol == Symbol.LINE ) {
-              if ( ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2 ) {
-                if ( ++mPointCnt % mLinePointStep == 0 ) {
-                  if ( mCurrentLinePath != null ) mCurrentLinePath.addPoint( x_scene, y_scene );
+            // Log.v("DistoX",
+            //       "DX " + (xs - mCurrentAreaPath.mFirst.x) + " DY " + (ys - mCurrentAreaPath.mFirst.y ) );
+            if (    PlotInfo.isVertical( mType )
+                 && BrushManager.mAreaLib.isCloseHorizontal( mCurrentArea ) 
+                 && Math.abs( xs - mCurrentAreaPath.mFirst.x ) > 20  // 20 == 1.0 meter
+                 && Math.abs( ys - mCurrentAreaPath.mFirst.y ) < 10  // 10 == 0.5 meter
+              ) {
+              LinePoint lp = mCurrentAreaPath.mFirst; 
+              float yy = lp.y;
+              mCurrentAreaPath.addPoint( xs, yy-0.001f );
+              DrawingAreaPath area = new DrawingAreaPath( mCurrentAreaPath.mAreaType,
+                                                          mCurrentAreaPath.mAreaCnt, 
+                                                          mCurrentAreaPath.mPrefix, 
+                                                          TDSetting.mAreaBorder );
+              area.addStartPoint( lp.x, lp.y );
+              for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
+                if ( lp.y <= yy ) {
+                  area.addPoint( lp.x, yy );
+                  break;
+                } else {
+                  area.addPoint( lp.x, lp.y );
                 }
-                mCurrentBrush.mouseMove( mDrawingSurface.getPreviewPath(), x_canvas, y_canvas );
-              } else {
-                save = false;
               }
-            } else if ( mSymbol == Symbol.AREA ) {
-              if ( ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2 ) {
-                if ( ++mPointCnt % mLinePointStep == 0 ) {
-                  mCurrentAreaPath.addPoint( x_scene, y_scene );
-                  // Log.v("DistoX", "start area add " + x_scene + " " + y_scene );
+              mCurrentAreaPath = area;
+            } else {  
+              if (    ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2
+                   || ( mPointCnt % mLinePointStep ) > 0 ) {
+                mCurrentAreaPath.addPoint( xs, ys );
+              }
+            }
+    	    if ( mLandscape ) mCurrentAreaPath.landscapeToPortrait();
+          }
+          
+          if ( mPointCnt > mLinePointStep || mLinePointStep == POINT_MAX ) {
+            if ( ! ( mSymbol == Symbol.LINE && mCurrentLine == BrushManager.mLineLib.mLineSectionIndex ) 
+                 && TDSetting.mLineStyle == TDSetting.LINE_STYLE_BEZIER
+                 && ( mSymbol == Symbol.AREA || ! BrushManager.mLineLib.isStyleStraight( mCurrentLine ) )
+               ) {
+              int nPts = (mSymbol == Symbol.LINE )? mCurrentLinePath.size() 
+                                                  : mCurrentAreaPath.size() ;
+              if ( nPts > 1 ) {
+                ArrayList< Point2D > pts = new ArrayList<>(); // [ nPts ];
+                // ArrayList< LinePoint > lp = 
+                //   (mSymbol == Symbol.LINE )? mCurrentLinePath.mPoints : mCurrentAreaPath.mPoints ;
+                // for (int k=0; k<nPts; ++k ) {
+                //   pts.add( new Point2D( lp.get(k).x, lp.get(k).y ) );
+                // }
+                LinePoint lp = (mSymbol == Symbol.LINE )? mCurrentLinePath.mFirst 
+                                                        : mCurrentAreaPath.mFirst;
+                for ( ; lp != null; lp = lp.mNext ) {
+                  pts.add( new Point2D( lp.x, lp.y ) );
                 }
-                mCurrentBrush.mouseMove( mDrawingSurface.getPreviewPath(), x_canvas, y_canvas );
-              } else {
-                save = false;
-              }
-            } else if ( mSymbol == Symbol.POINT ) {
-              // if ( ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2 ) {
-              //   pointerDown = 0;
-              // }
-            }
-          } else if (  mMode == MODE_MOVE 
-                   || (mMode == MODE_EDIT && mEditMove ) 
-                   || (mMode == MODE_SHIFT && mShiftMove) ) {
-            moveCanvas( x_shift, y_shift );
-          } else if ( mMode == MODE_SHIFT ) {
-            // mDrawingSurface.shiftHotItem( x_scene - mStartX, y_scene - mStartY, mEditRadius * 10 / mZoom );
-	    if ( mLandscape ) {
-              mDrawingSurface.shiftHotItem( -y_scene + mStartY, x_scene - mStartX );
-	    } else {
-              mDrawingSurface.shiftHotItem( x_scene - mStartX, y_scene - mStartY );
-	    }
-            mStartX = x_scene;
-            mStartY = y_scene;
-            modified();
-          } else if ( mMode == MODE_ERASE ) {
-            mDrawingSurface.setEraser( x_canvas, y_canvas, mEraseSize );
-            doEraseAt( x_scene, y_scene );
-          } else if ( mMode == MODE_SPLIT ) {
-            if ( ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2 ) {
-              mCurrentBrush.mouseMove( mDrawingSurface.getPreviewPath(), x_canvas, y_canvas );
-              mSplitBorder.add( new PointF( x_scene, y_scene ) );
-            } else {
-              save = false;
-            }
-          }
-          if ( save ) { // FIXME-000
-            mSaveX = x_canvas; 
-            mSaveY = y_canvas;
-          }
-        } else if ( mTouchMode == MODE_ROTATE ) {
-          mDrawingSurface.rotateHotItem( 180 * ( y_canvas - mStartY ) / TopoDroidApp.mDisplayHeight );
-          mStartX = x_canvas; // x_scene;
-          mStartY = y_canvas; // y_scene;
-          modified();
-        } else { // mTouchMode == MODE_ZOOM
-          float newDist = spacing( event );
-          float factor = ( newDist > 16.0f && oldDist > 16.0f )? newDist/oldDist : 0 ;
 
-          if ( mMode == MODE_MOVE && mShiftDrawing ) {
-            float x_shift = x_canvas - mSaveX; // compute shift
-            float y_shift = y_canvas - mSaveY;
-            if ( TDLevel.overNormal ) {
-              if ( Math.abs( x_shift ) < TDSetting.mMinShift && Math.abs( y_shift ) < TDSetting.mMinShift ) {
-		if ( mLandscape ) {
-                  mDrawingSurface.shiftDrawing( -y_shift/mZoom, x_shift/mZoom );
-		} else {
-                  mDrawingSurface.shiftDrawing( x_shift/mZoom, y_shift/mZoom );
-		}
-                modified();
-              }
-            // } else {
-            //   moveCanvas( x_shift, y_shift );
-            }
-            if ( factor > 0.05f && factor < 4.0f ) {
-              if ( threePointers ) {
-                mDrawingSurface.scaleDrawing( 1+(factor-1)*0.01f );
-              } else {
-                changeZoom( factor );
-                oldDist = newDist;
-              }
-            }
-            mSaveX = x_canvas;
-            mSaveY = y_canvas;
-          } else {
-            if ( factor > 0.05f && factor < 4.0f ) {
-              changeZoom( factor );
-              oldDist = newDist;
-            }
-            shiftByEvent( event );
-          }
-        }
-
-      // ---------------------------------------- UP
-
-      } else if (action == MotionEvent.ACTION_UP) {
-        if ( onMenu ) {
-          closeMenu();
-          return true;
-        }
-
-        if ( mTouchMode == MODE_ZOOM || mTouchMode == MODE_ROTATE ) {
-          mTouchMode = MODE_MOVE;
-        } else {
-          float x_shift = x_canvas - mSaveX; // compute shift
-          float y_shift = y_canvas - mSaveY;
-          if ( mMode == MODE_DRAW ) {
-            if ( mSymbol == Symbol.LINE || mSymbol == Symbol.AREA ) {
-
-              mCurrentBrush.mouseUp( mDrawingSurface.getPreviewPath(), x_canvas, y_canvas );
-              mDrawingSurface.resetPreviewPath();
-
-              if ( mSymbol == Symbol.LINE ) {
-                if (    ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2
-                     || ( mPointCnt % mLinePointStep ) > 0 ) {
-                  if ( mCurrentLinePath != null ) mCurrentLinePath.addPoint( x_scene, y_scene );
-                }
-		if ( mLandscape ) mCurrentLinePath.landscapeToPortrait();
-              } else if ( mSymbol == Symbol.AREA ) {
-                // Log.v("DistoX",
-                //       "DX " + (x_scene - mCurrentAreaPath.mFirst.x) + " DY " + (y_scene - mCurrentAreaPath.mFirst.y ) );
-                if (    PlotInfo.isVertical( mType )
-                     && BrushManager.mAreaLib.isCloseHorizontal( mCurrentArea ) 
-                     && Math.abs( x_scene - mCurrentAreaPath.mFirst.x ) > 20  // 20 == 1.0 meter
-                     && Math.abs( y_scene - mCurrentAreaPath.mFirst.y ) < 10  // 10 == 0.5 meter
-                  ) {
-                  LinePoint lp = mCurrentAreaPath.mFirst; 
-                  float yy = lp.y;
-                  mCurrentAreaPath.addPoint( x_scene, yy-0.001f );
-                  DrawingAreaPath area = new DrawingAreaPath( mCurrentAreaPath.mAreaType,
-                                                              mCurrentAreaPath.mAreaCnt, 
-                                                              mCurrentAreaPath.mPrefix, 
-                                                              TDSetting.mAreaBorder );
-                  area.addStartPoint( lp.x, lp.y );
-                  for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
-                    if ( lp.y <= yy ) {
-                      area.addPoint( lp.x, yy );
-                      break;
-                    } else {
-                      area.addPoint( lp.x, lp.y );
+                mBezierInterpolator.fitCurve( pts, nPts, TDSetting.mLineAccuracy, TDSetting.mLineCorner );
+                ArrayList< BezierCurve > curves = mBezierInterpolator.getCurves();
+                int k0 = curves.size();
+                // TDLog.Log( TDLog.LOG_PLOT, " Bezier size " + k0 );
+                if ( k0 > 0 ) {
+                  BezierCurve c = curves.get(0);
+                  Point2D p0 = c.getPoint(0);
+                  if ( mSymbol == Symbol.LINE ) {
+                    DrawingLinePath lp1 = new DrawingLinePath( mCurrentLine );
+                    lp1.addStartPoint( p0.x, p0.y );
+                    for (int k=0; k<k0; ++k) {
+                      c = curves.get(k);
+                      Point2D p1 = c.getPoint(1);
+                      Point2D p2 = c.getPoint(2);
+                      Point2D p3 = c.getPoint(3);
+                      lp1.addPoint3(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y );
                     }
-                  }
-                  mCurrentAreaPath = area;
-                } else {  
-                  if (    ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2
-                       || ( mPointCnt % mLinePointStep ) > 0 ) {
-                    mCurrentAreaPath.addPoint( x_scene, y_scene );
+                    boolean addline = true;
+                    if ( mContinueLine > CONT_NONE && mCurrentLine != BrushManager.mLineLib.mLineSectionIndex ) {
+                      addline = tryToJoin( lp1, mCurrentLinePath );
+                    }
+                    if ( addline ) {
+                      lp1.computeUnitNormal();
+                      if ( mSymbol == Symbol.LINE && BrushManager.mLineLib.isClosed( mCurrentLine ) ) {
+                        // mCurrentLine == lp1.mLineType 
+                        lp1.setClosed( true );
+                        lp1.closePath();
+                      }
+                      mDrawingSurface.addDrawingPath( lp1 );
+                    }
+                  } else { //  mSymbol == Symbol.AREA
+                    DrawingAreaPath ap = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(), mName+"-a", TDSetting.mAreaBorder ); 
+                    ap.addStartPoint( p0.x, p0.y );
+                    for (int k=0; k<k0; ++k) {
+                      c = curves.get(k);
+                      Point2D p1 = c.getPoint(1);
+                      Point2D p2 = c.getPoint(2);
+                      Point2D p3 = c.getPoint(3);
+                      ap.addPoint3(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y );
+                    }
+                    ap.closePath();
+                    ap.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
+                    mDrawingSurface.addDrawingPath( ap );
                   }
                 }
-		if ( mLandscape ) mCurrentAreaPath.landscapeToPortrait();
               }
-              
-              if ( mPointCnt > mLinePointStep || mLinePointStep == POINT_MAX ) {
-                if ( ! ( mSymbol == Symbol.LINE && mCurrentLine == BrushManager.mLineLib.mLineSectionIndex ) 
-                     && TDSetting.mLineStyle == TDSetting.LINE_STYLE_BEZIER
-                     && ( mSymbol == Symbol.AREA || ! BrushManager.mLineLib.isStyleStraight( mCurrentLine ) )
-                   ) {
-                  int nPts = (mSymbol == Symbol.LINE )? mCurrentLinePath.size() 
-                                                      : mCurrentAreaPath.size() ;
-                  if ( nPts > 1 ) {
-                    ArrayList< Point2D > pts = new ArrayList<>(); // [ nPts ];
-                    // ArrayList< LinePoint > lp = 
-                    //   (mSymbol == Symbol.LINE )? mCurrentLinePath.mPoints : mCurrentAreaPath.mPoints ;
-                    // for (int k=0; k<nPts; ++k ) {
-                    //   pts.add( new Point2D( lp.get(k).x, lp.get(k).y ) );
-                    // }
-                    LinePoint lp = (mSymbol == Symbol.LINE )? mCurrentLinePath.mFirst 
-                                                            : mCurrentAreaPath.mFirst;
-                    for ( ; lp != null; lp = lp.mNext ) {
-                      pts.add( new Point2D( lp.x, lp.y ) );
-                    }
-
-                    mBezierInterpolator.fitCurve( pts, nPts, TDSetting.mLineAccuracy, TDSetting.mLineCorner );
-                    ArrayList< BezierCurve > curves = mBezierInterpolator.getCurves();
-                    int k0 = curves.size();
-                    // TDLog.Log( TDLog.LOG_PLOT, " Bezier size " + k0 );
-                    if ( k0 > 0 ) {
-                      BezierCurve c = curves.get(0);
-                      Point2D p0 = c.getPoint(0);
-                      if ( mSymbol == Symbol.LINE ) {
-                        DrawingLinePath lp1 = new DrawingLinePath( mCurrentLine );
-                        lp1.addStartPoint( p0.x, p0.y );
-                        for (int k=0; k<k0; ++k) {
-                          c = curves.get(k);
-                          Point2D p1 = c.getPoint(1);
-                          Point2D p2 = c.getPoint(2);
-                          Point2D p3 = c.getPoint(3);
-                          lp1.addPoint3(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y );
-                        }
-                        boolean addline = true;
-                        if ( mContinueLine > CONT_NONE && mCurrentLine != BrushManager.mLineLib.mLineSectionIndex ) {
-                          addline = tryToJoin( lp1, mCurrentLinePath );
-                        }
-                        if ( addline ) {
-                          lp1.computeUnitNormal();
-                          if ( mSymbol == Symbol.LINE && BrushManager.mLineLib.isClosed( mCurrentLine ) ) {
-                            // mCurrentLine == lp1.mLineType 
-                            lp1.setClosed( true );
-                            lp1.closePath();
-                          }
-                          mDrawingSurface.addDrawingPath( lp1 );
-                        }
-                      } else { //  mSymbol == Symbol.AREA
-                        DrawingAreaPath ap = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(),
-                          mName+"-a", TDSetting.mAreaBorder ); 
-                        ap.addStartPoint( p0.x, p0.y );
-                        for (int k=0; k<k0; ++k) {
-                          c = curves.get(k);
-                          Point2D p1 = c.getPoint(1);
-                          Point2D p2 = c.getPoint(2);
-                          Point2D p3 = c.getPoint(3);
-                          ap.addPoint3(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y );
-                        }
-                        ap.closePath();
-                        ap.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
-                        mDrawingSurface.addDrawingPath( ap );
-                      }
-                    }
-                  }
-                }
-                else
-                {
-                  if ( mSymbol == Symbol.LINE && mCurrentLinePath != null ) {
-                    // N.B.
-                    // section direction is in the direction of the tick
-                    // and splay reference are taken from the station the section looks towards
-                    // section line points: right-end -- left-end -- tick-end
-                    //
-                    if ( mCurrentLinePath.mLineType == BrushManager.mLineLib.mLineSectionIndex ) {
-                      mCurrentLinePath.addOption("-direction both");
-                      mCurrentLinePath.makeStraight( false ); // true = with arrow
-                      boolean h_section = PlotInfo.isProfile( mType );
-                     
-                      // NOTE here l1 is the end-point and l2 the start-point (not considering the tick)
-                      //         |
-                      //         L2 --------- L1
-                      //      The azimuth reference is North-East same as bearing
-                      //         L1->L2 = atan2( (L2-L1).x, -(L2-l1).y )  Y is point downward North upward
-                      //         azimuth = dir(L1->L2) + 90
-                      //
-                      LinePoint l2 = mCurrentLinePath.mFirst; // .mNext;
-                      LinePoint l1 = l2.mNext;
-                      // Log.v("DistoX", "section line L1 " + l1.x + " " + l1.y + " L2 " + l2.x + " " + l2.y );
-
-                      List< DrawingPathIntersection > paths = mDrawingSurface.getIntersectionShot( l1, l2 );
-                      int nr_legs = paths.size() ; // 0 no-leg, 1 ok, 2 too many legs
-                      String from = "-1";
-                      String to   = "-1";
-                      float azimuth = 0;
-                      float clino = 0;
-		      float tt = -1;
-                      if ( paths.size() > 0 ) {
-                        mCurrentLinePath.computeUnitNormal();
-
-                        // orientation of the section-line
-                        azimuth = TDMath.in360( 90 + (float)(Math.atan2( l2.x-l1.x, -l2.y+l1.y ) * TDMath.RAD2DEG ) );
-
-                        if ( nr_legs == 1 ) {
-                          DrawingPathIntersection pi = paths.get(0);
-                          DrawingPath p = pi.path;
-			  tt = pi.tt;
-			  // Log.v("DistoX", "assign tt " + tt );
-                          DBlock blk = p.mBlock;
-
-                          // Float result = Float.valueOf(0);
-                          // p.intersect( l1.x, l1.y, l2.x, l2.y, result );
-                          // float intersection = result.floatValue();
-                          // // p.log();
-
-                          from = blk.mFrom;
-                          to   = blk.mTo;
-                          if ( h_section ) { // xsection in profile view
-                            int extend = 1;
-                            if ( azimuth < 180 ) {
-                              clino = 90 - azimuth;
-                              // extend = 1;
-                            } else {
-                              clino = azimuth - 270;
-                              extend = -1;
-                            }
-               
-                            float dc = TDMath.in360( (extend == blk.getExtend())? clino - blk.mClino : 180 - clino - blk.mClino );
-                            if ( dc > 90 && dc <= 270 ) { // exchange FROM-TO 
-                              azimuth = blk.mBearing + 180; if ( azimuth >= 360 ) azimuth -= 360;
-                              from = blk.mTo;
-                              to   = blk.mFrom;
-			      tt   = 1 - tt;
-                            } else {
-                              azimuth = blk.mBearing;
-                            }
-                            // if ( extend != blk.getExtend() ) {
-                            //   azimuth = blk.mBearing + 180; if ( azimuth >= 360 ) azimuth -= 360;
-                            // }
-                          } else { // xsection in plan view ( clino = 0 )
-                            float da = TDMath.in360( azimuth - blk.mBearing );
-                            if ( da > 90 && da <= 270 ) { // exchange FROM-TO 
-                              from = blk.mTo;
-                              to   = blk.mFrom;
-			      tt   = 1 - tt;
-                            }
-                          }
-                        } else if ( nr_legs > 1 ) { // many legs
-                          // Toast.makeText( mActivity, R.string.too_many_leg_intersection, Toast.LENGTH_SHORT ).show();
-                          if ( h_section ) { // xsection in profile view
-                            // nothing 
-                          } else {
-                            nr_legs = 1; // ok
-			    // these have already been computed before the if-test
-                            // azimuth = TDMath.in360( 90 + (float)(Math.atan2( l2.x-l1.x, -l2.y+l1.y ) * TDMath.RAD2DEG ) );
-                          }
-                        }
-                      }
-                      // Log.v("DistoX", "new section " + from + " - " + to );
-                      // cross-section does not exists yet
-                      if ( nr_legs == 0 ) {
-                        Toast.makeText( mActivity, R.string.no_leg_intersection, Toast.LENGTH_SHORT ).show(); 
-                      } else if ( nr_legs == 1 ) {
-                        String section_id = mData.getNextSectionId( mApp.mSID );
-                        mCurrentLinePath.addOption( "-id " + section_id );
-                        mDrawingSurface.addDrawingPath( mCurrentLinePath );
-
-                        if ( TDSetting.mAutoSectionPt && section_id != null ) {
-                          float x5 = mCurrentLinePath.mLast.x + mCurrentLinePath.mDx * 20; 
-                          float y5 = mCurrentLinePath.mLast.y + mCurrentLinePath.mDy * 20; 
-			  // FIXME if ( mLandscape ) { float t=x5; x5=-y5; y5=t; }
-                          String scrap_option = "-scrap " /* + mApp.mySurvey + "-" */ + section_id;
-                          DrawingPointPath section_pt = new DrawingPointPath( BrushManager.mPointLib.mPointSectionIndex,
-                                                                          x5, y5, DrawingPointPath.SCALE_M, 
-                                                                          null, // no text 
-                                                                          scrap_option );
-                          mDrawingSurface.addDrawingPath( section_pt );
-                        }
-
-			Log.v("DistoX", "line section dialog TT " + tt );
-                        new DrawingLineSectionDialog( mActivity, this, mApp, h_section, false, section_id, mCurrentLinePath, from, to, azimuth, clino, tt ).show();
-
-                      } else { // many legs in profile view
-                        Toast.makeText( mActivity, R.string.too_many_leg_intersection, Toast.LENGTH_SHORT ).show(); 
-                      }
-                    } else { // not section line
-                      boolean addline= true;
-                      if ( mContinueLine > CONT_NONE && mCurrentLine != BrushManager.mLineLib.mLineSectionIndex ) {
-                        addline = tryToJoin( mCurrentLinePath, mCurrentLinePath );
-                      }
-                      if ( addline ) {
-                        mCurrentLinePath.computeUnitNormal();
-                        if ( mSymbol == Symbol.LINE && BrushManager.mLineLib.isClosed( mCurrentLine ) ) {
-                          // mCurrentLine == mCurrentLinePath.mLineType
-                          mCurrentLinePath.setClosed( true );
-                          mCurrentLinePath.closePath();
-                        }
-                        mDrawingSurface.addDrawingPath( mCurrentLinePath );
-                      }
-                    }
-                    mCurrentLinePath = null;
-                  } else if ( mSymbol == Symbol.AREA && mCurrentAreaPath != null ) {
-                    mCurrentAreaPath.closePath();
-                    mCurrentAreaPath.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
-                    mDrawingSurface.addDrawingPath( mCurrentAreaPath );
-                    mCurrentAreaPath = null;
-                  }
-                }
-                // undoBtn.setEnabled(true);
-                // redoBtn.setEnabled(false);
-                // canRedo = false;
-              }
-              // if ( mSymbol == Symbol.LINE ) {
-              //   // Log.v( TopoDroidApp.TAG, "line type " + mCurrentLinePath.mLineType );
-              //   if ( mCurrentLinePath.mLineType == BrushManager.mLineLib.mLineSectionIndex ) {
-              //     // keep only first and last point
-              //     // remove line points are put the new ones: FIXME delete and add it again
-              //     mDrawingSurface.addDrawingPath( mCurrentLinePath );
-              //   }
-              // }
             }
             else
-            { // Symbol.POINT
-              if ( ( ! pointerDown ) && Math.abs( x_shift ) < TDSetting.mPointingRadius 
-                                     && Math.abs( y_shift ) < TDSetting.mPointingRadius ) {
-                // Log.v("DistoX", "insert point type " + mCurrentPoint );
-                if ( BrushManager.isPointLabel( mCurrentPoint ) ) {
-                  new DrawingLabelDialog( mActivity, this, x_scene, y_scene ).show();
-                } else if ( BrushManager.isPointPhoto( mCurrentPoint ) ) {
-                  new DrawingPhotoDialog( mActivity, this, x_scene, y_scene ).show();
-                } else if ( BrushManager.isPointAudio( mCurrentPoint ) ) {
-                  addAudioPoint( x_scene, y_scene );
-                } else {
-		  if ( mLandscape ) {
-                    DrawingPointPath point = new DrawingPointPath( mCurrentPoint, -y_scene, x_scene, mPointScale, null, null );
-		    if ( BrushManager.isPointOrientable( mCurrentPoint ) && ! BrushManager.isPointLabel( mCurrentPoint ) ) {
-		      point.rotateBy( 90 );
-		    }
-                    mDrawingSurface.addDrawingPath( point );
-		  } else {
-                    mDrawingSurface.addDrawingPath( 
-                      new DrawingPointPath( mCurrentPoint, x_scene, y_scene, mPointScale, null, null ) ); // no text, no options
-		  }
-
-                  // undoBtn.setEnabled(true);
-                  // redoBtn.setEnabled(false);
-                  // canRedo = false;
+            {
+              if ( mSymbol == Symbol.LINE && mCurrentLinePath != null ) {
+                // N.B.
+                // section direction is in the direction of the tick
+                // and splay reference are taken from the station the section looks towards
+                // section line points: right-end -- left-end -- tick-end
+                //
+                if ( mCurrentLinePath.mLineType == BrushManager.mLineLib.mLineSectionIndex ) {
+                  doSectionLine( mCurrentLinePath );
+                } else { // not section line
+                  boolean addline= true;
+                  if ( mContinueLine > CONT_NONE && mCurrentLine != BrushManager.mLineLib.mLineSectionIndex ) {
+                    addline = tryToJoin( mCurrentLinePath, mCurrentLinePath );
+                  }
+                  if ( addline ) {
+                    mCurrentLinePath.computeUnitNormal();
+                    if ( mSymbol == Symbol.LINE && BrushManager.mLineLib.isClosed( mCurrentLine ) ) {
+                      // mCurrentLine == mCurrentLinePath.mLineType
+                      mCurrentLinePath.setClosed( true );
+                      mCurrentLinePath.closePath();
+                    }
+                    mDrawingSurface.addDrawingPath( mCurrentLinePath );
+                  }
                 }
+                mCurrentLinePath = null;
+              } else if ( mSymbol == Symbol.AREA && mCurrentAreaPath != null ) {
+                mCurrentAreaPath.closePath();
+                mCurrentAreaPath.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
+                mDrawingSurface.addDrawingPath( mCurrentAreaPath );
+                mCurrentAreaPath = null;
               }
             }
-            pointerDown = false;
-            modified();
-          } else if ( mMode == MODE_EDIT ) {
-            if ( Math.abs(mStartX - x_canvas) < TDSetting.mPointingRadius 
-              && Math.abs(mStartY - y_canvas) < TDSetting.mPointingRadius ) {
-              doSelectAt( x_scene, y_scene, mSelectSize );
+            // undoBtn.setEnabled(true);
+            // redoBtn.setEnabled(false);
+            // canRedo = false;
+          }
+        }
+        else
+        { // Symbol.POINT
+          if ( ( ! pointerDown ) && Math.abs( x_shift ) < TDSetting.mPointingRadius 
+                                 && Math.abs( y_shift ) < TDSetting.mPointingRadius ) {
+            // Log.v("DistoX", "insert point type " + mCurrentPoint );
+            if ( BrushManager.isPointLabel( mCurrentPoint ) ) {
+              new DrawingLabelDialog( mActivity, this, xs, ys ).show();
+            } else if ( BrushManager.isPointPhoto( mCurrentPoint ) ) {
+              new DrawingPhotoDialog( mActivity, this, xs, ys ).show();
+            } else if ( BrushManager.isPointAudio( mCurrentPoint ) ) {
+              addAudioPoint( xs, ys );
+            } else {
+    	      if ( mLandscape ) {
+                DrawingPointPath point = new DrawingPointPath( mCurrentPoint, -ys, xs, mPointScale, null, null );
+    	        if ( BrushManager.isPointOrientable( mCurrentPoint ) && ! BrushManager.isPointLabel( mCurrentPoint ) ) {
+    	          point.rotateBy( 90 );
+    	        }
+                mDrawingSurface.addDrawingPath( point );
+    	      } else {
+                mDrawingSurface.addDrawingPath( new DrawingPointPath( mCurrentPoint, xs, ys, mPointScale, null, null ) ); // no text, no options
+    	      }
+              // undoBtn.setEnabled(true);
+              // redoBtn.setEnabled(false);
+              // canRedo = false;
             }
-            mEditMove = false;
-          } else if ( mMode == MODE_SHIFT ) {
-            if ( TDLevel.overExpert && mType == PlotInfo.PLOT_EXTENDED ) {
-              SelectionPoint hot = mDrawingSurface.hotItem();
-	      if ( hot != null ) {
-                DrawingPath path = hot.mItem;
-		if ( path.mType == DrawingPath.DRAWING_PATH_FIXED ) {
-		  DBlock blk = path.mBlock;
-		  float ms = TDSetting.mMinShift / 2;
-		  if ( mLandscape ) {
-		    float y = (path.y1 + path.y2)/2; // midpoin (scene)
-		    if ( Math.abs( y - x_scene ) < ms ) {
-		      float x = (path.x1 + path.x2)/2; // midpoin (scene)
-		      // Log.v("DistoX", "blk scene " + x + " " + y + " tap " + x_scene + " " + y_scene);
-		      if ( Math.abs( x + y_scene ) < 4*ms ) {
-		        int extend = (-y_scene + ms < x)? -1 : (-y_scene - ms > x)? 1 : 0;
-                        updateBlockExtend( blk, extend ); // equal extend checked by the method
-		      }
-		    }
-		  } else {
-		    float y = (path.y1 + path.y2)/2; // midpoin (scene)
-		    if ( Math.abs( y - y_scene ) < ms ) {
-		      float x = (path.x1 + path.x2)/2; // midpoin (scene)
-		      // Log.v("DistoX", "blk scene " + path.x1 + " " + path.x2 + " x " + x + " tap " + x_scene );
-		      if ( Math.abs( x - x_scene ) < 4*ms ) {
-		        int extend = (x_scene + ms < x)? -1 : (x_scene - ms > x)? 1 : 0;
-                        updateBlockExtend( blk, extend ); // equal extend checked by the method
-		      }
-		    }
-		  }
-		}
-	      }
+          }
+        }
+        pointerDown = false;
+        modified();
+      } else if ( mMode == MODE_EDIT ) {
+        if ( Math.abs(mStartX - xc) < TDSetting.mPointingRadius 
+          && Math.abs(mStartY - yc) < TDSetting.mPointingRadius ) {
+          doSelectAt( xs, ys, mSelectSize );
+        }
+        mEditMove = false;
+      } else if ( mMode == MODE_SHIFT ) {
+        if ( TDLevel.overExpert && mType == PlotInfo.PLOT_EXTENDED ) {
+          SelectionPoint hot = mDrawingSurface.hotItem();
+          if ( hot != null ) {
+            DrawingPath path = hot.mItem;
+    	    if ( path.mType == DrawingPath.DRAWING_PATH_FIXED ) {
+    	      DBlock blk = path.mBlock;
+    	      float ms = TDSetting.mMinShift / 2;
+    	      if ( mLandscape ) {
+    	        float y = (path.y1 + path.y2)/2; // midpoin (scene)
+    	        if ( Math.abs( y - xs ) < ms ) {
+    	          float x = (path.x1 + path.x2)/2; // midpoin (scene)
+    	          // Log.v("DistoX", "blk scene " + x + " " + y + " tap " + xs + " " + ys);
+    	          if ( Math.abs( x + ys ) < 4*ms ) {
+    	            int extend = (-ys + ms < x)? -1 : (-ys - ms > x)? 1 : 0;
+                    updateBlockExtend( blk, extend ); // equal extend checked by the method
+    	          }
+    	        }
+    	      } else {
+    	        float y = (path.y1 + path.y2)/2; // midpoin (scene)
+    	        if ( Math.abs( y - ys ) < ms ) {
+    	          float x = (path.x1 + path.x2)/2; // midpoin (scene)
+    	          // Log.v("DistoX", "blk scene " + path.x1 + " " + path.x2 + " x " + x + " tap " + xs );
+    	          if ( Math.abs( x - xs ) < 4*ms ) {
+    	            int extend = (xs + ms < x)? -1 : (xs - ms > x)? 1 : 0;
+                    updateBlockExtend( blk, extend ); // equal extend checked by the method
+    	          }
+    	        }
+    	      }
+    	    }
+          }
+        }
+        if ( mShiftMove ) {
+          if ( Math.abs(mStartX - xc) < TDSetting.mPointingRadius
+            && Math.abs(mStartY - yc) < TDSetting.mPointingRadius ) {
+            // mEditMove = false;
+            clearSelected();
+          }
+        }
+        mShiftMove = false;
+      } else if ( mMode == MODE_ERASE ) {
+        mDrawingSurface.endEraser();
+        if ( mEraseCommand != null && mEraseCommand.size() > 0 ) {
+          mEraseCommand.completeCommand();
+          mDrawingSurface.addEraseCommand( mEraseCommand );
+          mEraseCommand = null;
+        }
+      } else if ( mMode == MODE_SPLIT ) {
+        mDrawingSurface.resetPreviewPath();
+        mSplitBorder.add( new PointF( xs, ys ) );
+        doSplitPlot( );
+        setMode( MODE_MOVE );
+      } else { // MODE_MOVE 
+/* F for the moment do not create X-Sections
+        if ( Math.abs(xc - mDownX) < 10 && Math.abs(yc - mDownY) < 10 ) {
+          // check if there is a station: only PLAN and EXTENDED or PROFILE
+          if ( PlotInfo.isSketch2D( mType ) ) {
+            DrawingStationName sn = mDrawingSurface.getStationAt( xs, ys, mSelectSize );
+            if ( sn != null ) {
+              boolean barrier = mNum.isBarrier( sn.mName );
+              boolean hidden  = mNum.isHidden( sn.mName );
+              // new DrawingStationDialog( mActivity, this, sn, barrier, hidden, mApp.mXSections ).show();
+              openXSection( sn, sn.mName, mType );
             }
-            if ( mShiftMove ) {
-              if ( Math.abs(mStartX - x_canvas) < TDSetting.mPointingRadius
-                && Math.abs(mStartY - y_canvas) < TDSetting.mPointingRadius ) {
-                // mEditMove = false;
-                clearSelected();
-              }
-            }
-            mShiftMove = false;
-          } else if ( mMode == MODE_ERASE ) {
-            mDrawingSurface.endEraser();
-            if ( mEraseCommand != null && mEraseCommand.size() > 0 ) {
-              mEraseCommand.completeCommand();
-              mDrawingSurface.addEraseCommand( mEraseCommand );
-              mEraseCommand = null;
-            }
-          } else if ( mMode == MODE_SPLIT ) {
-            mDrawingSurface.resetPreviewPath();
-            mSplitBorder.add( new PointF( x_scene, y_scene ) );
-            doSplitPlot( );
-            setMode( MODE_MOVE );
-          } else { // MODE_MOVE 
-/* FIXME for the moment do not create X-Sections
-            if ( Math.abs(x_canvas - mDownX) < 10 && Math.abs(y_canvas - mDownY) < 10 ) {
-              // check if there is a station: only PLAN and EXTENDED or PROFILE
-              if ( PlotInfo.isSketch2D( mType ) ) {
-                DrawingStationName sn = mDrawingSurface.getStationAt( x_scene, y_scene, mSelectSize );
-                if ( sn != null ) {
-                  boolean barrier = mNum.isBarrier( sn.mName );
-                  boolean hidden  = mNum.isHidden( sn.mName );
-                  // new DrawingStationDialog( mActivity, this, sn, barrier, hidden, mApp.mXSections ).show();
-                  openXSection( sn, sn.mName, mType );
-                }
-              }
-            }
+          }
+        }
 */
+      }
+    }
+    return true;
+  }
+
+  private boolean onTouchDown( float xc, float yc, float xs, float ys )
+  {
+    mDrawingSurface.endEraser();
+    float d0 = TDSetting.mCloseCutoff + mSelectSize / mZoom;
+
+    // TDLog.Log( TDLog.LOG_PLOT, "DOWN at X " + xc + " [" +mBorderInnerLeft + " " + mBorderInnerRight + "] Y " 
+    //                                          + yc + " / " + mBorderBottom );
+    if ( yc > mBorderBottom ) {
+      if ( mZoomBtnsCtrlOn && xc > mBorderInnerLeft && xc < mBorderInnerRight ) {
+        mTouchMode = MODE_ZOOM;
+        mZoomBtnsCtrl.setVisible( true );
+        // mZoomCtrl.show( );
+      } else if ( TDSetting.mSideDrag ) {
+        mTouchMode = MODE_ZOOM;
+      }
+    } else if ( TDSetting.mSideDrag && ( xc > mBorderRight || xc < mBorderLeft ) ) {
+      mTouchMode = MODE_ZOOM;
+      SelectionPoint sp = mDrawingSurface.hotItem();
+      if ( sp != null && sp.type() == DrawingPath.DRAWING_PATH_POINT ) {
+        DrawingPointPath path = (DrawingPointPath)(sp.mItem);
+        if ( BrushManager.isPointOrientable(path.mPointType) ) {
+          mTouchMode = MODE_ROTATE;
+          mStartY = yc;
+        }
+      }
+    }
+
+    if ( mMode == MODE_DRAW ) {
+      // TDLog.Log( TDLog.LOG_PLOT, "onTouch ACTION_DOWN symbol " + mSymbol );
+      mPointCnt = 0;
+      if ( mSymbol == Symbol.LINE ) {
+        mCurrentLinePath = new DrawingLinePath( mCurrentLine );
+        mCurrentLinePath.addStartPoint( xs, ys );
+        mCurrentBrush.mouseDown( mDrawingSurface.getPreviewPath(), xc, yc );
+      } else if ( mSymbol == Symbol.AREA ) {
+        // TDLog.Log( TDLog.LOG_PLOT, "onTouch ACTION_DOWN area type " + mCurrentArea );
+        mCurrentAreaPath = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(),
+          mName+"-a", TDSetting.mAreaBorder );
+        mCurrentAreaPath.addStartPoint( xs, ys );
+        // Log.v("DistoX", "start area start " + xs + " " + ys );
+        mCurrentBrush.mouseDown( mDrawingSurface.getPreviewPath(), xc, yc );
+      } else { // Symbol.POINT
+        // mSaveX = xc; // FIXME-000
+        // mSaveY = yc;
+      }
+      mSaveX = xc; // FIXME-000
+      mSaveY = yc;
+
+    } else if ( mMode == MODE_MOVE ) {
+      setTheTitle( );
+      mSaveX = xc; // FIXME-000
+      mSaveY = yc;
+      mDownX = xc;
+      mDownY = yc;
+      return false;
+
+    } else if ( mMode == MODE_ERASE ) {
+      // Log.v("DistoX", "Erase at " + xs + " " + ys );
+      if ( mTouchMode == MODE_MOVE ) {
+        mEraseCommand =  new EraseCommand();
+        mDrawingSurface.setEraser( xc, yc, mEraseSize );
+        doEraseAt( xs, ys );
+      }
+
+    } else if ( mMode == MODE_EDIT ) {
+      mStartX = xc;
+      mStartY = yc;
+      mEditMove = true;
+      SelectionPoint pt = mDrawingSurface.hotItem();
+      if ( pt != null ) {
+        if ( mLandscape ) {
+          mEditMove = ( pt.distance( -ys, xs ) < d0 );
+        } else {
+          mEditMove = ( pt.distance( xs, ys ) < d0 );
+        }
+      } 
+      // doSelectAt( xs, ys, mSelectSize );
+      mSaveX = xc;
+      mSaveY = yc;
+      // return false;
+
+    } else if ( mMode == MODE_SHIFT ) {
+      mShiftMove = true; // whether to move canvas in point-shift mode
+      mStartX = xc;
+      mStartY = yc;
+      SelectionPoint pt = mDrawingSurface.hotItem();
+      if ( pt != null ) {
+        if ( mLandscape ) {
+          if ( pt.distance( -ys, xs ) < d0 ) {
+            mShiftMove = false;
+            mStartX = xs;  // save start position
+            mStartY = ys;
+          }
+        } else {
+          if ( pt.distance( xs, ys ) < d0 ) {
+            mShiftMove = false;
+            mStartX = xs;  // save start position
+            mStartY = ys;
           }
         }
       }
-      return true;
+      mSaveX = xc; // FIXME-000
+      mSaveY = yc;
+      // return false;
+
+    } else if ( mMode == MODE_SPLIT ) {
+      mCurrentBrush.mouseDown( mDrawingSurface.getPreviewPath(), xc, yc );
+      mSplitBorder.add( new PointF( xs, ys ) );
+      mSaveX = xc; 
+      mSaveY = yc;
     }
+    return true;
+  }
+
+  private boolean onTouchMove( float xc, float yc, float xs, float ys, MotionEventWrap event )
+  {
+    // Log.v(  TopoDroidApp.TAG, "action MOVE mode " + mMode + " touch-mode " + mTouchMode);
+    if ( mTouchMode == MODE_MOVE) {
+      float x_shift = xc - mSaveX; // compute shift
+      float y_shift = yc - mSaveY;
+      boolean save = true; // FIXME-000
+      // mSaveX = xc; 
+      // mSaveY = yc;
+      if ( mMode == MODE_DRAW ) {
+        if ( mSymbol == Symbol.LINE ) {
+          if ( ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2 ) {
+            if ( ++mPointCnt % mLinePointStep == 0 ) {
+              if ( mCurrentLinePath != null ) mCurrentLinePath.addPoint( xs, ys );
+            }
+            mCurrentBrush.mouseMove( mDrawingSurface.getPreviewPath(), xc, yc );
+          } else {
+            save = false;
+          }
+        } else if ( mSymbol == Symbol.AREA ) {
+          if ( ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2 ) {
+            if ( ++mPointCnt % mLinePointStep == 0 ) {
+              mCurrentAreaPath.addPoint( xs, ys );
+              // Log.v("DistoX", "start area add " + xs + " " + ys );
+            }
+            mCurrentBrush.mouseMove( mDrawingSurface.getPreviewPath(), xc, yc );
+          } else {
+            save = false;
+          }
+        } else if ( mSymbol == Symbol.POINT ) {
+          // if ( ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2 ) {
+          //   pointerDown = 0;
+          // }
+        }
+      } else if (  mMode == MODE_MOVE 
+               || (mMode == MODE_EDIT && mEditMove ) 
+               || (mMode == MODE_SHIFT && mShiftMove) ) {
+        moveCanvas( x_shift, y_shift );
+      } else if ( mMode == MODE_SHIFT ) {
+        // mDrawingSurface.shiftHotItem( xs - mStartX, ys - mStartY, mEditRadius * 10 / mZoom );
+        if ( mLandscape ) {
+          mDrawingSurface.shiftHotItem( -ys + mStartY, xs - mStartX );
+        } else {
+          mDrawingSurface.shiftHotItem( xs - mStartX, ys - mStartY );
+        }
+        mStartX = xs;
+        mStartY = ys;
+        modified();
+      } else if ( mMode == MODE_ERASE ) {
+        mDrawingSurface.setEraser( xc, yc, mEraseSize );
+        doEraseAt( xs, ys );
+      } else if ( mMode == MODE_SPLIT ) {
+        if ( ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2 ) {
+          mCurrentBrush.mouseMove( mDrawingSurface.getPreviewPath(), xc, yc );
+          mSplitBorder.add( new PointF( xs, ys ) );
+        } else {
+          save = false;
+        }
+      }
+      if ( save ) { // FIXME-000
+        mSaveX = xc; 
+        mSaveY = yc;
+      }
+    } else if ( mTouchMode == MODE_ROTATE ) {
+      mDrawingSurface.rotateHotItem( 180 * ( yc - mStartY ) / TopoDroidApp.mDisplayHeight );
+      mStartX = xc; // xs;
+      mStartY = yc; // ys;
+      modified();
+    } else { // mTouchMode == MODE_ZOOM
+      float newDist = spacing( event );
+      float factor = ( newDist > 16.0f && oldDist > 16.0f )? newDist/oldDist : 0 ;
+
+      if ( mMode == MODE_MOVE && mShiftDrawing ) {
+        float x_shift = xc - mSaveX; // compute shift
+        float y_shift = yc - mSaveY;
+        if ( TDLevel.overNormal ) {
+          if ( Math.abs( x_shift ) < TDSetting.mMinShift && Math.abs( y_shift ) < TDSetting.mMinShift ) {
+    	if ( mLandscape ) {
+              mDrawingSurface.shiftDrawing( -y_shift/mZoom, x_shift/mZoom );
+    	} else {
+              mDrawingSurface.shiftDrawing( x_shift/mZoom, y_shift/mZoom );
+    	}
+            modified();
+          }
+        // } else {
+        //   moveCanvas( x_shift, y_shift );
+        }
+        if ( factor > 0.05f && factor < 4.0f ) {
+          if ( threePointers ) {
+            mDrawingSurface.scaleDrawing( 1+(factor-1)*0.01f );
+          } else {
+            changeZoom( factor );
+            oldDist = newDist;
+          }
+        }
+        mSaveX = xc;
+        mSaveY = yc;
+      } else {
+        if ( factor > 0.05f && factor < 4.0f ) {
+          changeZoom( factor );
+          oldDist = newDist;
+        }
+        shiftByEvent( event );
+      }
+    }
+    return true;
+  }
+
+
+  private void doSectionLine( DrawingLinePath currentLine )
+  {
+    currentLine.addOption("-direction both");
+    currentLine.makeStraight( false ); // true = with arrow
+    boolean h_section = PlotInfo.isProfile( mType );
+    
+    // NOTE here l1 is the end-point and l2 the start-point (not considering the tick)
+    //         |
+    //         L2 --------- L1
+    //      The azimuth reference is North-East same as bearing
+    //         L1->L2 = atan2( (L2-L1).x, -(L2-l1).y )  Y is point downward North upward
+    //         azimuth = dir(L1->L2) + 90
+    //
+    LinePoint l2 = currentLine.mFirst; // .mNext;
+    LinePoint l1 = l2.mNext;
+    // Log.v("DistoX", "section line L1 " + l1.x + " " + l1.y + " L2 " + l2.x + " " + l2.y );
+
+    List< DrawingPathIntersection > paths = mDrawingSurface.getIntersectionShot( l1, l2 );
+    int nr_legs = paths.size() ; // 0 no-leg, 1 ok, 2 too many legs
+    String from = "-1";
+    String to   = "-1";
+    float azimuth = 0;
+    float clino = 0;
+    float tt = -1;
+    if ( paths.size() > 0 ) {
+      currentLine.computeUnitNormal();
+
+      // orientation of the section-line
+      azimuth = TDMath.in360( 90 + (float)(Math.atan2( l2.x-l1.x, -l2.y+l1.y ) * TDMath.RAD2DEG ) );
+
+      if ( nr_legs == 1 ) {
+        DrawingPathIntersection pi = paths.get(0);
+        DrawingPath p = pi.path;
+        tt = pi.tt;
+        // Log.v("DistoX", "assign tt " + tt );
+        DBlock blk = p.mBlock;
+
+        // Float result = Float.valueOf(0);
+        // p.intersect( l1.x, l1.y, l2.x, l2.y, result );
+        // float intersection = result.floatValue();
+        // // p.log();
+
+        from = blk.mFrom;
+        to   = blk.mTo;
+        if ( h_section ) { // xsection in profile view
+          int extend = 1;
+          if ( azimuth < 180 ) {
+            clino = 90 - azimuth;
+            // extend = 1;
+          } else {
+            clino = azimuth - 270;
+            extend = -1;
+          }
+    
+          float dc = TDMath.in360( (extend == blk.getExtend())? clino - blk.mClino : 180 - clino - blk.mClino );
+          if ( dc > 90 && dc <= 270 ) { // exchange FROM-TO 
+            azimuth = blk.mBearing + 180; if ( azimuth >= 360 ) azimuth -= 360;
+            from = blk.mTo;
+            to   = blk.mFrom;
+            tt   = 1 - tt;
+          } else {
+            azimuth = blk.mBearing;
+          }
+          // if ( extend != blk.getExtend() ) {
+          //   azimuth = blk.mBearing + 180; if ( azimuth >= 360 ) azimuth -= 360;
+          // }
+        } else { // xsection in plan view ( clino = 0 )
+          float da = TDMath.in360( azimuth - blk.mBearing );
+          if ( da > 90 && da <= 270 ) { // exchange FROM-TO 
+            from = blk.mTo;
+            to   = blk.mFrom;
+            tt   = 1 - tt;
+          }
+        }
+      } else if ( nr_legs > 1 ) { // many legs
+        // Toast.makeText( mActivity, R.string.too_many_leg_intersection, Toast.LENGTH_SHORT ).show();
+        if ( h_section ) { // xsection in profile view
+          // nothing 
+        } else {
+          nr_legs = 1; // ok
+          // these have already been computed before the if-test
+          // azimuth = TDMath.in360( 90 + (float)(Math.atan2( l2.x-l1.x, -l2.y+l1.y ) * TDMath.RAD2DEG ) );
+        }
+      }
+    }
+    // Log.v("DistoX", "new section " + from + " - " + to );
+    // cross-section does not exists yet
+    if ( nr_legs == 0 ) {
+      Toast.makeText( mActivity, R.string.no_leg_intersection, Toast.LENGTH_SHORT ).show(); 
+    } else if ( nr_legs == 1 ) {
+      String section_id = mData.getNextSectionId( mApp.mSID );
+      currentLine.addOption( "-id " + section_id );
+      mDrawingSurface.addDrawingPath( currentLine );
+
+      if ( TDSetting.mAutoSectionPt && section_id != null ) {
+        float x5 = currentLine.mLast.x + currentLine.mDx * 20; 
+        float y5 = currentLine.mLast.y + currentLine.mDy * 20; 
+        // FIXME if ( mLandscape ) { float t=x5; x5=-y5; y5=t; }
+        String scrap_option = "-scrap " /* + mApp.mySurvey + "-" */ + section_id;
+        DrawingPointPath section_pt = new DrawingPointPath( BrushManager.mPointLib.mPointSectionIndex,
+                                                        x5, y5, DrawingPointPath.SCALE_M, 
+                                                        null, // no text 
+                                                        scrap_option );
+        mDrawingSurface.addDrawingPath( section_pt );
+      }
+
+      // Log.v("DistoX", "line section dialog TT " + tt );
+      new DrawingLineSectionDialog( mActivity, this, mApp, h_section, false, section_id, currentLine, from, to, azimuth, clino, tt ).show();
+
+    } else { // many legs in profile view
+      Toast.makeText( mActivity, R.string.too_many_leg_intersection, Toast.LENGTH_SHORT ).show(); 
+    }
+  }
+
+  // -------------------------------------------------------------
 
     // add a therion label point (ILabelAdder)
     public void addLabel( String label, float x, float y )

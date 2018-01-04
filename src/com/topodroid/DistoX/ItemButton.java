@@ -28,10 +28,14 @@ public class ItemButton extends Button
   private Paint mPaint;
   private Path  mPath;
   // private Rect  mClip;
+  
+  private static final int WW = 25;
+  private static final int HH = 20;
+  private static final int PAD = 4;
 
   public ItemButton( Context context )
   {
-    super( context );
+super( context );
     setDefault();
   }
 
@@ -56,7 +60,7 @@ public class ItemButton extends Button
   private void setDefault()
   {
     setBackgroundColor( TDColor.BLACK );
-    setPadding(5, 5, 5, 5 );
+    setPadding( PAD, PAD, PAD, PAD );
     mPath  = null;
     mPaint = null;
   }
@@ -65,7 +69,7 @@ public class ItemButton extends Button
   {
     super(context);
     setBackgroundColor( TDColor.BLACK );
-    setPadding(5, 5, 5, 5 );
+    setPadding( PAD, PAD, PAD, PAD );
     reset( paint, path, sx, sy );
   }
 
@@ -79,8 +83,8 @@ public class ItemButton extends Button
 
   public void reset(Paint paint, Path path, float sx, float sy )
   {
-    setMinimumWidth( (int)(40*sx) );
-    setMinimumHeight( (int)(30*sy) );
+    setMinimumWidth( (int)(2*WW*sx) );
+    setMinimumHeight( (int)(2*HH*sy) );
     mPaint = paint;
     resetPath( path, sx, sy );
     // mClip = new Rect( 0, 0, (int)(40*sx), (int)(30*sy) );
@@ -92,7 +96,7 @@ public class ItemButton extends Button
     Matrix m = new Matrix();
     m.setScale( sx, sy );
     mPath.transform( m );
-    mPath.offset( 20*sx, 15*sy );
+    mPath.offset( WW*sx, HH*sy );
   }
 
   public void onDraw(Canvas canvas) 
