@@ -669,9 +669,9 @@ public class DrawingWindow extends ItemDrawer
     } else if ( blk.mType == DBlock.BLOCK_X_SPLAY ) {
       path.setPaint( BrushManager.fixedGreenPaint );
     } else {
-      if ( extend < 0.5f && extend >= 0 ) {
+      if ( extend >= 0 && extend < TDSetting.mCosHorizSplay ) {
         path.setPaint( BrushManager.fixedSplay4Paint );
-      } else if ( extend > -0.5f && extend <= 0 ) {
+      } else if ( extend < 0 && extend > -TDSetting.mCosHorizSplay ) {
         path.setPaint( BrushManager.fixedSplay3Paint );
       } else {
         path.setPaint( BrushManager.fixedSplayPaint );

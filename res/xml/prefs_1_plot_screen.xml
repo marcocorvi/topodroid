@@ -91,6 +91,16 @@
      / -->
 
      <!-- com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_HORIZ_SPLAY"
+       android:title="@string/pref_horiz_splay_title"
+       android:summary="@string/pref_horiz_splay_message"
+       android:dialogTitle="@string/pref_horiz_splay_title"
+       android:dialogMessage="@string/pref_horiz_splay_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="60"
+     / -->
+
+     <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_SECTION_SPLAY"
        android:title="@string/pref_section_splay_title"
        android:summary="@string/pref_section_splay_message"
