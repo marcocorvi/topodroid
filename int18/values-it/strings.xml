@@ -184,11 +184,11 @@
     <string name="error_group_non_integer">Il gruppo deve essere un numero intero</string>
     <string name="error_alt_required">Altezza mancante</string>
     <string name="error_invalid_number">Valore non numerico</string>
-    <!-- TODO string name="error_invalid_name">Invalid name</string -->
+    <string name="error_invalid_name">Nome non valido</string>
     <string name="error_lat_required">Latitudine mancante</string>
     <string name="error_long_required">Longitudine mancante</string>
     <string name="error_name_required">Nome mancante</string>
-    <!-- TODO string name="error_dir_exists">Directory already exists</string -->
+    <string name="error_dir_exists">Directory già esistente</string>
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Caposaldo di riferimento mancante</string>
     <!-- UNUSED string name="error_station_already_fixed">Caposaldo già con coordinate</string -->
@@ -220,10 +220,10 @@
     <string name="fixed">fisso</string>
     <string name="painted">colorato</string>
 
-    <!-- TODO string name="cbd_title">Base directory</string -->
-    <!-- TODO string name="cwd">TopoDroid project directory</string -->
-    <!-- TODO string name="empty_cwd">Empty project name</string -->
-    <!-- TODO string name="bad_cbd">Base directory inexistent or not writable</string -->
+    <string name="cbd_title">Directory base</string>
+    <string name="cwd">Directory del progetto TopoDroid</string>
+    <string name="empty_cwd">Nome progetto vuoto</string>
+    <string name="bad_cbd">Directory base inesistente o non scrivibile</string>
     <string name="bad_cwd">Il nome di un progetto non deve avere directory</string>
     <string name="bad_line">Tipo linea errato</string>
     <string name="bad_point">Tipo punto errato</string>
@@ -483,7 +483,7 @@
     <string name="extended_profile">Profilo esteso</string>
     <!-- UNUSED string name="v_section">SEZIONE VERT.</string -->
     <string name="h_section">SEZIONE ORIZZ.</string>
-    <!-- TODO string name="landscape">landscape</string -->
+    <string name="landscape">panorama</string>
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Lettura memoria DistoX fallita</string>
@@ -499,9 +499,9 @@
     <string name="button_add"       >Inserisci </string>
     <string name="button_back"      >Indietro  </string>
     <string name="button_cancel"    >Annulla   </string>
-    <!-- TODO string name="button_change"    >Change    </string -->
+    <string name="button_change"    >Cambia    </string>
     <string name="button_close"     >Chiudi    </string>
-    <!-- TODO string name="button_create"    >Create    </string -->
+    <string name="button_create"    >Crea      </string>
     <string name="button_convert"   >Converti  </string>
     <string name="button_current"   >Corrente   </string>
     <string name="button_delete"    >Elimina   </string>
@@ -540,9 +540,9 @@
     <!-- UNUSED string name="button_stop"      >Stop</string -->
     <!-- OK string name="button_upload"    >Upload   </string -->
     <string name="button_view"      >Visualizza      </string>
-    <!-- TODO string name="button_zoomfit"   >Zoom fit  </string -->
-    <!-- TODO string name="button_landscape" >Landscape </string -->
-    <!-- TODO string name="button_portrait"  >Portrait  </string -->
+    <string name="button_zoomfit"   >Adatta zoom</string>
+    <string name="button_landscape" >Panorama  </string>
+    <string name="button_portrait"  >Ritratto  </string>
 
 
     <string name="button_write"     >Installa</string>
@@ -636,23 +636,23 @@
     <!-- UNUSED string name="menu_save_th2">SAVE TH2</string -->
 <!-- END_SKETCH_3D -->    
 
-    <!-- TODO string name="man_preface">Preface</string -->
-    <!-- TODO string name="man_intro">1. Introduction</string -->
-    <!-- TODO string name="man_main">2. Main window</string -->
-    <!-- TODO string name="man_device">3. Device window</string -->
-    <!-- TODO string name="man_calib">4. Calibration window</string -->
-    <!-- TODO string name="man_gm">5. Calibration data</string -->
-    <!-- TODO string name="man_survey">6. Survey data</string -->
-    <!-- TODO string name="man_shot">7. Shot list</string -->
-    <!-- TODO string name="man_info">8. Survey info</string -->
-    <!-- TODO string name="man_sketch">9. Sketch window</string -->
-    <!-- TODO string name="man_draw">10. Sketch drawing</string -->
-    <!-- TODO string name="man_xsection">11. Cross-sections</string -->
-    <!-- TODO string name="man_overview">12. Overview window</string -->
-    <!-- TODO string name="man_export">13. Import/export</string -->
-    <!-- TODO string name="man_threed">14. 3D viewer</string -->
-    <!-- TODO string name="man_index">15. Index</string -->
-    <!-- TODO string name="man_website">* Website</string -->
+    <string name="man_preface">Prefazione</string>
+    <string name="man_intro">1. Introduzione</string>
+    <string name="man_main">2. Finestra principale</string>
+    <string name="man_device">3. Finestra Dispositivi</string>
+    <string name="man_calib">4. Finestra Calibrazione</string>
+    <string name="man_gm">5. Dati Calibrazione</string>
+    <string name="man_survey">6. Dati Rilievo</string>
+    <string name="man_shot">7. Lista battute</string>
+    <string name="man_info">8. Info rilievo</string>
+    <string name="man_sketch">9. Finestra disegno</string>
+    <string name="man_draw">10. Modifica disegno</string>
+    <string name="man_xsection">11. Sezioni-X</string>
+    <string name="man_overview">12. Finestra panoramica</string>
+    <string name="man_export">13. Importa/esporta</string>
+    <string name="man_threed">14. Visualizzatore 3D</string>
+    <string name="man_index">15. Indice</string>
+    <string name="man_website">* Sito_Web</string>
 
     <string name="help_help">Questo aiuto</string>
     <!-- UNUSED string name="help_manual">Manuale online</string -->
@@ -825,7 +825,7 @@
     <string name="title_survey_export">Esporta rilievo come </string>
     <string name="title_survey_rename">Renomina rilievo</string>
     <string name="title_plot_rename">Rinomina disegno</string>
-    <!-- TODO string name="title_plot_zoomfit">Zoom fit / Orientation</string -->
+    <string name="title_plot_zoomfit">Adatta Zoom / Orientamento</string>
     <string name="title_calib_export">Esporta calibrazione come </string>
     <!-- OK ENGLISH string name="title_zoom">Zoom</string -->
 
@@ -846,8 +846,8 @@
   <!-- UNUSED string name="pref_bootloader_summary">Bootloader abilitiato</string -->
   <string name="pref_mkeyboard_title">Tastiera</string>
   <string name="pref_mkeyboard_summary">Abilita/Disabilita tastiere personalizzate</string>
-  <!-- TODO string name="pref_local_help_title">Translated manual</string -->
-  <!-- TODO string name="pref_local_help_summary">Enable translated manual</string -->
+  <string name="pref_local_help_title">Manuale tradotto</string>
+  <string name="pref_local_help_summary">Abilita manuale tradotto</string>
   <!-- OK string name="pref_cosurvey_title">Co-surveying</string -->
   <string name="pref_cosurvey_summary">Attiva/disattiva il servizio co-surveying</string>
   <string name="pref_export_shots_title">Formato esportazione dati</string>
@@ -871,12 +871,12 @@
   <string name="pref_ortho_lrud_title">Angolo di splay di tipo LRUD</string>
   <string name="pref_ortho_lrud_summary">Minimo angolo tra splay e battuta per uno splay di tipo LRUD</string>
   <string name="pref_ortho_lrud_message">LRUD: minimo angolo splay-battuta</string>
-  <!-- TODO string name="pref_lrud_vertical_title">UD min splay clino</string -->
-  <!-- TODO string name="pref_lrud_vertical_summary">LRUD up/down minimum splay clino</string -->
-  <!-- TODO string name="pref_lrud_vertical_message">LRUD up/down minimum splay clino</string -->
-  <!-- TODO string name="pref_lrud_horizontal_title">LR max splay clino</string -->
-  <!-- TODO string name="pref_lrud_horizontal_summary">LRUD left/right maximum splay clino</string -->
-  <!-- TODO string name="pref_lrud_horizontal_message">LRUD left/right maximum splay clino</string -->
+  <string name="pref_lrud_vertical_title">UD min inclin. splay </string>
+  <string name="pref_lrud_vertical_summary">LRUD Su/Giù min inclin. splay </string>
+  <string name="pref_lrud_vertical_message">LRUD Su/Giù min inclin. splay </string>
+  <string name="pref_lrud_horizontal_title">LR max inclin. splay</string>
+  <string name="pref_lrud_horizontal_summary">LRUD Sx/Dx max inclin. splay</string>
+  <string name="pref_lrud_horizontal_message">LRUD Sx/Dx max inclin. splay</string>
   <string name="pref_survex_eol_title">Survex/Topo terminazione linea</string>
   <string name="pref_survex_eol_summary">Survex/Topo - terminazione linea</string>
   <string name="pref_survex_splay_title">Survex - stazioni splay</string>
@@ -887,18 +887,18 @@
   <string name="pref_svg_grid_summary">Aggiungi griglia alla export SVG</string>
   <string name="pref_svg_in_html_title">SVG nell\'HTML</string>
   <string name="pref_svg_in_html_summary">Inserire SVG export in HTML</string>
-  <!-- TODO string name="pref_svg_pointstroke_title">SVG point stroke</string -->
-  <!-- TODO string name="pref_svg_pointstroke_summary">Width of point symbols in SVG</string -->
-  <!-- TODO string name="pref_svg_labelstroke_title">SVG label stroke</string -->
-  <!-- TODO string name="pref_svg_labelstroke_summary">Width of label text in SVG</string -->
-  <!-- TODO string name="pref_svg_linestroke_title">SVG line stroke</string -->
-  <!-- TODO string name="pref_svg_linestroke_summary">Width of lines in SVG</string -->
-  <!-- TODO string name="pref_svg_gridstroke_title">SVG grid stroke</string -->
-  <!-- TODO string name="pref_svg_gridstroke_summary">Width of grid lines in SVG</string -->
-  <!-- TODO string name="pref_svg_shotstroke_title">SVG shot stroke</string -->
-  <!-- TODO string name="pref_svg_shotstroke_summary">Width of shot segments in SVG</string -->
-  <!-- TODO string name="pref_svg_linedirstroke_title">SVG orientation stroke</string -->
-  <!-- TODO string name="pref_svg_linedirstroke_summary">Width of line orientation in SVG</string -->
+  <string name="pref_svg_pointstroke_title">SVG, tratto del punto</string>
+  <string name="pref_svg_pointstroke_summary">SVG: larghezza dei simboli punto</string>
+  <string name="pref_svg_labelstroke_title">SVG, tratto etichetta</string>
+  <string name="pref_svg_labelstroke_summary">SVG: larghezza del testo etichetta</string>
+  <string name="pref_svg_linestroke_title">SVG, tratto della linea</string>
+  <string name="pref_svg_linestroke_summary">SVG: larghezza delle linee</string>
+  <string name="pref_svg_gridstroke_title">SVG, tratto della griglia</string>
+  <string name="pref_svg_gridstroke_summary">SVG: larghezza delle linee della griglia</string>
+  <string name="pref_svg_shotstroke_title">SVG, tratto del tiro</string>
+  <string name="pref_svg_shotstroke_summary">SVG: larghezza dei segmenti di tiro</string>
+  <string name="pref_svg_linedirstroke_title">SVG, tratto orientamento</string>
+  <string name="pref_svg_linedirstroke_summary">SVG: larghezza della linea di orientamento</string>
   <string name="pref_svg_line_dir_title">Orientamento linea SVG</string>
   <string name="pref_svg_line_dir_summary">Aggiungi spunte orientamento linea alla export SVG</string>
   <string name="pref_kml_stations_title">Capisaldi KML</string>
@@ -969,12 +969,12 @@
   <string name="pref_vert_splay_title">Soglia splay tratteggiati</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Soglia clino splay tratteggiati</string -->
   <string name="pref_vert_splay_message">Soglia clino splay tratteggiati</string>
-  <!-- TODO string name="pref_horiz_splay_title">Splay dash azimuth threshold</string -->
-  <!-- TODO string name="pref_horiz_splay_message">Splay off azimuth more than this are dashed</string -->
-  <!-- TODO string name="pref_section_splay_title">Splay dash angle threshold</string -->
-  <!-- TODO string name="pref_section_splay_message">Over this angle with the section plane, splays are dashed</string -->
-  <!-- TODO string name="pref_data_backup_title">Data auto-export</string -->
-  <!-- TODO string name="pref_data_backup_summary">Automatic data export (need default format)</string -->
+  <string name="pref_horiz_splay_title">Azimut di soglia tratteggio splay</string>
+  <string name="pref_horiz_splay_message">Splay con azimut maggiore di questo sono tratteggiati</string>
+  <string name="pref_section_splay_title">Angolo di soglia tratteggio splay</string>
+  <string name="pref_section_splay_message">Nella sezione, oltre questo angolo, gli splay sono tratteggiati</string>
+  <string name="pref_data_backup_title">Auto-esporta dati</string>
+  <string name="pref_data_backup_summary">Esportazione automatica dei dati (necessita formato di default)</string>
   <string name="pref_shared_xsections_title">X-section condivise</string>
   <string name="pref_shared_xsections_summary">X-section al caposaldo condivisa tra i disegni</string>
   <string name="xsections_shared">X-section condivise</string>
@@ -1224,7 +1224,7 @@
   <string name="pref_log_input">Input utente</string>
   <string name="pref_log_loc">Posizioni GPS</string>
   <string name="pref_log_num">Riduzione poligonale</string>
-  <!-- TODO string name="pref_log_path">File paths</string -->
+  <string name="pref_log_path">Percorso file</string>
   <string name="pref_log_photo">Foto</string>
   <string name="pref_log_plot">Disegni</string>
   <string name="pref_log_proto">Protocollo DistoX</string>
