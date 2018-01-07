@@ -274,7 +274,7 @@ public class ShotWindow extends Activity
         Toast.makeText( mActivity, getResources().getQuantityString(R.plurals.read_data, nr, nr ), Toast.LENGTH_SHORT ).show();
         // Toast.makeText( mActivity, " read_data: " + nr, Toast.LENGTH_SHORT ).show();
       }
-    } else if ( nr < 0 && nr > -5 ) {
+    } else if ( nr < 0 /* && nr > -5 */ ) {
       if ( toast ) {
 	if ( nr <= -5 ) {
           Toast.makeText( mActivity, getString(R.string.read_fail_with_code) + nr, Toast.LENGTH_SHORT ).show();
