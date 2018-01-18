@@ -139,12 +139,12 @@
        android:defaultValue="false"
      />
 
-   <CheckBoxPreference
+   <!-- CheckBoxPreference
        android:key="DISTOX_SVG_IN_HTML"
        android:summary="@string/pref_svg_in_html_summary"
        android:title="@string/pref_svg_in_html_title"
        android:defaultValue="false"
-     />
+     / -->
 
   <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_SVG_POINT_STROKE"

@@ -1834,10 +1834,11 @@ class TDExporter
         float z1 = len * sc;
         float n1 = len * cc * cb;
         float e1 = len * cc * sb;
-	if ( Math.abs( item.mClino ) > TDSetting.mLRUDvertical ) {
+	if ( Math.abs( item.mClino ) >= TDSetting.mLRUDvertical ) {
           if ( z1 > 0.0 ) { if ( z1 > lrud.u ) lrud.u = z1; }
           else            { if ( -z1 > lrud.d ) lrud.d = -z1; }
-        } else if ( Math.abs( item.mClino ) < TDSetting.mLRUDhorizontal ) {
+        } 
+	if ( Math.abs( item.mClino ) <= TDSetting.mLRUDhorizontal ) {
           float rl = e1 * n0 - n1 * e0;
           if ( rl > 0.0 ) { if ( rl > lrud.r ) lrud.r = rl; }
           else            { if ( -rl > lrud.l ) lrud.l = -rl; }

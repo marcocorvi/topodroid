@@ -1062,7 +1062,7 @@ public class DataHelper extends DataSetObservable
       }
     }
   }
-
+  
   // called by the importXXXTask's
   public long insertShots( long sid, long id, ArrayList< ParserShot > shots )
   {

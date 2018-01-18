@@ -796,8 +796,8 @@ public class DeviceHelper extends DataSetObservable
 
   public int getDeviceTail( String address )
   { 
-    int ret = 0;
     // if ( myDB == null ) return 0;
+    int ret = 0;
     Cursor cursor = null;
     try {
       cursor = myDB.query( DEVICE_TABLE, new String[] { "tail" },
@@ -814,8 +814,8 @@ public class DeviceHelper extends DataSetObservable
 
   public boolean getDeviceHeadTail( String address, int[] head_tail )
   {
-    boolean ret = false;
     // if ( myDB == null ) return false;
+    boolean ret = false;
     Cursor cursor = null;
     try {
       cursor = myDB.query( DEVICE_TABLE, new String[] { "head", "tail" },
@@ -834,8 +834,8 @@ public class DeviceHelper extends DataSetObservable
 
   boolean insertDevice( String address, String model, String name )
   {
-    boolean ret = true;
-    // if ( myDB == null ) return false;
+    if ( myDB == null ) return false;
+    boolean ret = false;
     Cursor cursor = null;
     try {
       cursor = myDB.query( DEVICE_TABLE, new String[] { "model" },
@@ -845,7 +845,6 @@ public class DeviceHelper extends DataSetObservable
       if ( cursor != null ) {
         if (cursor.moveToFirst() ) {
           // TODO address already in the database: check model
-          ret = false;
         } else {
           ContentValues cv = new ContentValues();
           cv.put( "address", address );
@@ -855,6 +854,7 @@ public class DeviceHelper extends DataSetObservable
           cv.put( "name",    name );
           cv.put( "nickname", "" );  // FIXME empty nickname
           myDB.insert( DEVICE_TABLE, null, cv );
+	  ret = true;
         }
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );

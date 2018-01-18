@@ -84,6 +84,9 @@ public class ShotNewDialog extends MyDialog
 
   private static boolean mLRUDatTo = false;
   private boolean hasPhoto = false;
+  private float mBearing;
+  private float mClino;
+  private int mOrientation;
 
   TimerTask mTimer;
   private MyKeyboard mKeyboard = null;
@@ -295,6 +298,9 @@ public class ShotNewDialog extends MyDialog
   public void setBearingAndClino( float b, float c, int o )
   {
     // Log.v("DistoX", "ShotNewDialog set B " + b + " C " + c + " O " + o );
+    mBearing = b;
+    mClino   = c;
+    mOrientation = o;
     mETbearing.setText( String.format(Locale.US, "%.1f", b ) );
     mETclino.setText( String.format(Locale.US, "%.1f", c ) );
   } 
@@ -464,6 +470,7 @@ public class ShotNewDialog extends MyDialog
             fos.write( mJpegData );
             fos.flush();
             fos.close();
+	    MyBearingAndClino.setExifBearingAndClino( imagefile, mBearing, mClino, mOrientation );
             mApp.mData.insertPhoto( mApp.mSID, photo_id, blk.mId,
                                     "",
                                     TopoDroidUtil.currentDate(),

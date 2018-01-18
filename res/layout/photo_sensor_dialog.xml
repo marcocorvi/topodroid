@@ -31,8 +31,8 @@
   <LinearLayout android:id="@+id/layout5a"
     android:layout_width="fill_parent" 
     android:layout_height="50sp"
-    android:layout_marginLeft="@dimen/marginh"
-    android:layout_marginRight="@dimen/marginh"
+    android:layout_marginLeft="0dp"
+    android:layout_marginRight="0dp"
     android:orientation="horizontal" 
     >
     <Button android:id="@+id/btn_ok"
@@ -41,6 +41,7 @@
       style="@style/button_default"
       android:text="@string/button_lrud"
       android:singleLine="true"
+      android:layout_marginRight="@dimen/marginh"
       />
     <RadioGroup 
       android:id="@+id/station"
@@ -51,12 +52,25 @@
       <RadioButton android:id="@+id/station_from"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
+        android:layout_marginRight="@dimen/marginh"
       />
       <RadioButton android:id="@+id/station_to"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
+        android:layout_marginRight="@dimen/marginh"
+      />
+      <RadioButton android:id="@+id/station_at"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
       />
     </RadioGroup>
+    <EditText android:id="@+id/station_distance" 
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content" 
+      android:maxLines="1" 
+      android:singleLine="true"
+      android:inputType="numberDecimal"
+      />
   </LinearLayout>
 
   <LinearLayout android:id="@+id/layout5b"

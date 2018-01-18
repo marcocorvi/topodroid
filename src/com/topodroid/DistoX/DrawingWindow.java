@@ -713,14 +713,15 @@ public class DrawingWindow extends ItemDrawer
       if ( mApp.getHighlightedSplayId() == blk.mId ) { dpath.setPaint( BrushManager.errorPaint ); }
     } else {
       dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );
-      if ( blk.isMultiBad() ) {
-        dpath.setPaint( BrushManager.fixedOrangePaint );
-      } else if ( mApp.mShotWindow.mDistoXAccuracy.isBlockMagneticBad( blk ) ) {
-        dpath.setPaint( BrushManager.fixedRedPaint );
-      } else if ( TDSetting.isConnectionModeBatch() && blk.isRecent( mApp.mSecondLastShotId, System.currentTimeMillis()/1000 ) ) {
-        dpath.setPaint( BrushManager.fixedBluePaint );
-      } else {
-        dpath.setPaint( BrushManager.fixedShotPaint );
+      dpath.setPaint( BrushManager.fixedShotPaint );
+      if ( blk != null ) {
+        if ( blk.isMultiBad() ) {
+          dpath.setPaint( BrushManager.fixedOrangePaint );
+        } else if ( mApp.mShotWindow.mDistoXAccuracy.isBlockMagneticBad( blk ) ) {
+          dpath.setPaint( BrushManager.fixedRedPaint );
+        } else if ( TDSetting.isConnectionModeBatch() && blk.isRecent( mApp.mSecondLastShotId, System.currentTimeMillis()/1000 ) ) {
+          dpath.setPaint( BrushManager.fixedBluePaint );
+	}
       }
     }
     // mDrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );

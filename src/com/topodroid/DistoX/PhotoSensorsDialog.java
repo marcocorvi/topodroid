@@ -46,6 +46,8 @@ public class PhotoSensorsDialog extends MyDialog
 
   private RadioButton mRBfrom;
   private RadioButton mRBto;
+  private RadioButton mRBat;
+  private EditText mETat;
   private EditText mETleft;
   private EditText mETright;
   private EditText mETup;
@@ -105,6 +107,8 @@ public class PhotoSensorsDialog extends MyDialog
 
     mRBfrom  = (RadioButton)findViewById( R.id.station_from );
     mRBto    = (RadioButton)findViewById( R.id.station_to );
+    mRBat    = (RadioButton)findViewById( R.id.station_at );
+    mETat    = (EditText)findViewById( R.id.station_distance );
     mETleft  = (EditText)findViewById( R.id.shot_left );
     mETright = (EditText)findViewById( R.id.shot_right );
     mETup    = (EditText)findViewById( R.id.shot_up );
@@ -187,13 +191,18 @@ public class PhotoSensorsDialog extends MyDialog
       mRBfrom.setChecked( true );
       if ( mBlk.mTo.length() > 0 ) {
         mRBto.setText( mBlk.mTo );
+        mETat.setText( "0" );
       } else {
         mRBto.setVisibility( View.GONE );
+        mRBat.setVisibility( View.GONE );
+        mETat.setVisibility( View.GONE );
       }
       mBTlrud.setOnClickListener( this );
     } else {
       mRBfrom.setVisibility( View.GONE );
       mRBto.setVisibility( View.GONE );
+      mRBat.setVisibility( View.GONE );
+      mETat.setVisibility( View.GONE );
       mETleft.setVisibility( View.GONE );
       mETright.setVisibility( View.GONE );
       mETup.setVisibility( View.GONE );
@@ -215,14 +224,29 @@ public class PhotoSensorsDialog extends MyDialog
     // TDLog.Log(  TDLog.LOG_INPUT, "PhotoiSensorDialog onClick() " + b.getText().toString() );
 
     if ( b == mBTlrud ) { // AT-STATION LRUD
-      String station = ( mRBto.isChecked() )? mBlk.mTo : mBlk.mFrom;
-      // check the data
-      mParent.insertLRUDatStation( station, mBlk.mBearing, mBlk.mClino, 
-        mETleft.getText().toString().replace(',','.') ,
-        mETright.getText().toString().replace(',','.') ,
-        mETup.getText().toString().replace(',','.') ,
-        mETdown.getText().toString().replace(',','.') 
-      );
+      String station = null;
+      if ( mRBto.isChecked() ) { // TO
+        station = mBlk.mTo;
+      } else if ( mRBfrom.isChecked() ) { // FROM
+        station = mBlk.mFrom;
+      } else { 
+	float d = -1;
+	String dstr = mETat.getText().toString().replace(',','.');
+	try { d = Float.parseFloat( dstr ); } catch ( NumberFormatException e ) { }
+        // add a duplicate leg d, mBlk.mBearing, mBlk.mClino
+	String from = mBlk.mFrom;
+	station = from + "-" + dstr;
+	mParent.insertDuplicateLeg( from, station, d, mBlk.mBearing, mBlk.mClino, mBlk.getExtend() );
+      }
+      if ( station != null ) {
+        // check the data
+        mParent.insertLRUDatStation( station, mBlk.mBearing, mBlk.mClino, 
+          mETleft.getText().toString().replace(',','.') ,
+          mETright.getText().toString().replace(',','.') ,
+          mETup.getText().toString().replace(',','.') ,
+          mETdown.getText().toString().replace(',','.') 
+        );
+      }
       dismiss();
     // } else if ( b == mButtonPlot ) {       // PHOTO
     //   mParent.highlightBlock( mBlk );

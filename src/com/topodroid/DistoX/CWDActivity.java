@@ -123,8 +123,10 @@ public class CWDActivity extends Activity
   {
     File[] dirs = TDPath.getTopoDroidFiles( mBaseName );
     ArrayAdapter<String> adapter = new ArrayAdapter<>( this, R.layout.menu );
-    for ( File item : dirs ) {
-      adapter.add( item.getName() );
+    if ( dirs != null ) {
+      for ( File item : dirs ) {
+        adapter.add( item.getName() );
+      }
     }
     mList.setAdapter( adapter );
     mList.setOnItemClickListener( this );

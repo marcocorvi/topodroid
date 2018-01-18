@@ -697,6 +697,12 @@ public class ShotWindow extends Activity
     (new ShotNewDialog( this, mApp, this, blk, mShotId )).show();
   }
 
+  void insertDuplicateLeg( String from, String to, float distance, float bearing, float clino, int extend )
+  {
+    mApp.insertDuplicateLeg( from, to, distance, bearing, clino, extend );
+    // updateDisplay( ); 
+  }
+
   void insertLRUDatStation( String station, float bearing, float clino,
                             String left, String right, String up, String down )
   {

@@ -42,6 +42,8 @@ public class SurveyNewDialog extends MyDialog
                              implements View.OnClickListener
                              , View.OnLongClickListener
 {
+  private final static String EMPTY = "";
+
   private MainWindow mParent;
 
   private EditText mEditName;
@@ -193,21 +195,26 @@ public class SurveyNewDialog extends MyDialog
 
     String init_station = TDSetting.mInitStation;
     if ( mEditStation.getText() != null ) {
-      String station = mEditStation.getText().toString().replaceAll("\\s+", "");
+      String station = mEditStation.getText().toString().replaceAll("\\s+", EMPTY);
       if ( station.length() > 0 ) {
         init_station = station;
       }
     }
     if ( init_station == null || init_station.length() == 0 ) init_station = "0";
       
-    if ( date != null ) { date = date.trim(); } else { date = ""; }
-    if ( team != null ) { team = team.trim(); } else { team = ""; }
-    if ( comment != null ) { comment = comment.trim(); } else { comment = ""; }
+    if ( date != null ) { date = date.trim(); } else { date = EMPTY; }
+    if ( team != null ) { team = team.trim(); } else { team = EMPTY; }
+    if ( comment != null ) { comment = comment.trim(); } else { comment = EMPTY; }
 
     int xsections = mCBxsections.isChecked() ? SurveyInfo.XSECTION_PRIVATE
                                              : SurveyInfo.XSECTION_SHARED;
 
-    mApp.setSurveyFromName( name, true ); // save survey name: tell app to set it into the database
+    long sid = mApp.setSurveyFromName( name, true ); // save survey name: tell app to set it into the database
+    if ( sid <= 0 ) {
+      TDLog.Error( "Failed to set survey name in DB");
+      return false;
+    }
+    // Note mApp.mSID == sid
     mApp.mData.updateSurveyInfo( mApp.mSID, date, team, decl, comment, init_station, xsections, true );
 
     if ( mOldSid >= 0L && mOldId >= 0L ) {  // SPLIT_SURVEY

@@ -403,9 +403,9 @@ public class TDPath
   static String getDxfFileWithExt( String name ) { return getFile( PATH_DXF, name, DXF ); }
   static String getSvgFileWithExt( String name ) 
   { 
-    if ( TDSetting.mSvgInHtml ) {
-      return getFile( PATH_SVG, name, HTML );
-    }
+    // if ( TDSetting.mSvgInHtml ) {
+    //   return getFile( PATH_SVG, name, HTML );
+    // }
     return getFile( PATH_SVG, name, SVG );
   }
   static String getPngFileWithExt( String name ) { return getFile( PATH_PNG, name, PNG ); }

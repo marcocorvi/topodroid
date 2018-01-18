@@ -62,15 +62,34 @@ class MyBearingAndClino implements IBearingAndClino
       fos.write( data );
       fos.flush();
       fos.close();
-      ExifInterface exif = new ExifInterface( mFile.getPath() );
-      String.format("%.2f %.2f", mBearing, mClino );
-      // Log.v("DistoX", "save. orientation " + mOrientation );
-      int rot = getExifOrientation( mOrientation );
+    } catch ( IOException e ) {
+      TDLog.Error( "IO exception " + e.getMessage() );
+    }
+    setExifBearingAndClino( mFile, mBearing, mClino, mOrientation );
+    // ExifInterface exif = new ExifInterface( mFile.getPath() );
+    // String.format("%.2f %.2f", mBearing, mClino );
+    // // Log.v("DistoX", "save. orientation " + mOrientation );
+    // int rot = getExifOrientation( mOrientation );
+    // exif.setAttribute( ExifInterface.TAG_ORIENTATION, Integer.toString(rot) );
+    // exif.setAttribute( ExifInterface.TAG_DATETIME, TopoDroidUtil.currentDateTime() );
+    // exif.setAttribute( ExifInterface.TAG_GPS_LATITUDE, String.format("%d/100", (int)(mClino*100) ) );
+    // exif.setAttribute( ExifInterface.TAG_GPS_LATITUDE_REF, "N" );
+    // exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE, String.format("%d/100", (int)(mBearing*100) ) );
+    // exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE_REF, "E" );
+    // exif.saveAttributes();
+  }
+
+  static void setExifBearingAndClino( File file, float b, float c, int o )
+  {
+    try {
+      ExifInterface exif = new ExifInterface( file.getPath() );
+      String.format("%.2f %.2f", b, c );
+      int rot = getExifOrientation( o );
       exif.setAttribute( ExifInterface.TAG_ORIENTATION, Integer.toString(rot) );
       exif.setAttribute( ExifInterface.TAG_DATETIME, TopoDroidUtil.currentDateTime() );
-      exif.setAttribute( ExifInterface.TAG_GPS_LATITUDE, String.format("%d/100", (int)(mClino*100) ) );
+      exif.setAttribute( ExifInterface.TAG_GPS_LATITUDE, String.format("%d/100", (int)(c*100) ) );
       exif.setAttribute( ExifInterface.TAG_GPS_LATITUDE_REF, "N" );
-      exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE, String.format("%d/100", (int)(mBearing*100) ) );
+      exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE, String.format("%d/100", (int)(b*100) ) );
       exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE_REF, "E" );
       exif.saveAttributes();
     } catch ( IOException e ) {

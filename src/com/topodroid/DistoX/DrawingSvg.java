@@ -95,9 +95,9 @@ class DrawingSvg
     int height = (int)((ymax - ymin));
 
     try {
-      if ( TDSetting.mSvgInHtml ) { // SVG_IN_HTML
-        out.write("<!DOCTYPE html>\n<html>\n<body>\n");
-      }
+      // if ( TDSetting.mSvgInHtml ) { // SVG_IN_HTML
+      //   out.write("<!DOCTYPE html>\n<html>\n<body>\n");
+      // }
 
       // header
       out.write( "<svg width=\"" + width + "\" height=\"" + height + "\"\n" );
@@ -282,9 +282,9 @@ class DrawingSvg
       out.write("</g>\n");
       out.write("</svg>\n");
 
-      if ( TDSetting.mSvgInHtml ) { // SVG_IN_HTML
-        out.write("</body>\n</html>\n");
-      }
+      // if ( TDSetting.mSvgInHtml ) { // SVG_IN_HTML
+      //   out.write("</body>\n</html>\n");
+      // }
 
       out.flush();
     } catch ( IOException e ) {
@@ -295,14 +295,16 @@ class DrawingSvg
 
   static private void toSvg( PrintWriter pw, DrawingStationName name, float xoff, float yoff )
   {
-    pw.format("<text font-size=\"20\" font=\"sans-serif\" fill=\"violet\" stroke=\"none\" text-amchor=\"middle\"");
+    // pw.format("<text font-size=\"20\" font-family=\"sans-serif\" fill=\"violet\" stroke=\"none\" text-anchor=\"middle\"");
+    pw.format("<text font-size=\"20\" fill=\"violet\" stroke=\"none\" text-anchor=\"middle\"");
     pw.format(Locale.US, " x=\"%.2f\" y=\"%.2f\">", xoff + name.cx, yoff + name.cy );
     pw.format("%s</text>\n", name.name() );
   }
 
   static private void toSvg( PrintWriter pw, DrawingStationPath st, float xoff, float yoff )
   {
-    pw.format("<text font-size=\"20\" font=\"sans-serif\" fill=\"black\" stroke=\"none\" text-amchor=\"middle\"");
+    // pw.format("<text font-size=\"20\" font-family=\"sans-serif\" fill=\"black\" stroke=\"none\" text-anchor=\"middle\"");
+    pw.format("<text font-size=\"20\" fill=\"black\" stroke=\"none\" text-anchor=\"middle\"");
     pw.format(Locale.US, " x=\"%.2f\" y=\"%.2f\">", xoff + st.cx, yoff + st.cy );
     pw.format("%s</text>\n", st.name() );
   }

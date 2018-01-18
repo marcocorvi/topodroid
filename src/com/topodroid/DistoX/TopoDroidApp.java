@@ -1640,6 +1640,17 @@ public class TopoDroidApp extends Application
     addManualSplays( -1L, station, left, right, up, down, bearing, false );
   }
 
+  // distance is user-input
+  // bearing and clino are from block
+  void insertDuplicateLeg( String from, String to, float distance, float bearing, float clino, int extend )
+  {
+    long millis = java.lang.System.currentTimeMillis()/1000;
+    distance = distance / TDSetting.mUnitLength;
+    long id = mData.insertShot( mSID, -1L, millis, distance, bearing, clino, 0.0f, extend, 1, true );
+    mData.updateShotName( id, mSID, from, to, true ); // forward = true
+    mData.updateShotFlag( id, mSID, DBlock.BLOCK_DUPLICATE, true ); // forward = true
+  }
+
   private long addManualSplays( long at, String splay_station, String left, String right, String up, String down,
                                 float bearing, boolean horizontal )
   {

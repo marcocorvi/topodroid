@@ -143,7 +143,7 @@ class TDSetting
     "DISTOX_THERION_MAPS",       // whether to put map commands before centerline in therion
     "DISTOX_SVG_GRID",           // whether to export grid in SVG 
     "DISTOX_SVG_LINE_DIR",       // whether to add line orientation ticks in SVG export
-    "DISTOX_SVG_IN_HTML",        // whether to export SVG embedded in HTML
+    // "DISTOX_SVG_IN_HTML",        // whether to export SVG embedded in HTML
     "DISTOX_SVG_POINT_STROKE",
     "DISTOX_SVG_LABEL_STROKE",
     "DISTOX_SVG_LINE_STROKE",
@@ -224,8 +224,8 @@ class TDSetting
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   // IMPORT EXPORT
   static boolean mLRExtend           = true;   // whether to extend LR or not (Compass/VisualTopo input)
-  static float   mLRUDvertical       = 45;     // vertical splay for LRUD 
-  static float   mLRUDhorizontal     = 45;     // horizontal splay for LRUD
+  static float   mLRUDvertical       = 45;     // vertical splay for UD 
+  static float   mLRUDhorizontal     = 45;     // horizontal splay for LR 
 
   static String mSurvexEol           = "\n";
   static boolean mSurvexSplay        = false;
@@ -327,7 +327,7 @@ class TDSetting
   static int mExportPlotFormat  = -1; // DISTOX_EXPORT_NONE
   static boolean mTherionMaps   = false;
   static boolean mSvgGrid       = false;
-  static boolean mSvgInHtml     = false;
+  // static boolean mSvgInHtml     = false;
   static boolean mSvgLineDirection = false;
   static boolean mKmlStations   = true;
   static boolean mKmlSplays     = false;
@@ -796,7 +796,7 @@ class TDSetting
     mTherionMaps       = prefs.getBoolean( key[k++], false ); // DISTOX_THERION_MAPS
     mSvgGrid           = prefs.getBoolean( key[k++], false ); // DISTOX_SVG_GRID
     mSvgLineDirection  = prefs.getBoolean( key[k++], false ); // DISTOX_SVG_LINE_DIR
-    mSvgInHtml         = prefs.getBoolean( key[k++], false ); // DISTOX_SVG_IN_HTML
+    // mSvgInHtml         = prefs.getBoolean( key[k++], false ); // DISTOX_SVG_IN_HTML
     mSvgPointStroke    = tryFloat( prefs, key[k++], "0.1" );  // DISTOX_SVG_POINT_STROKE
     mSvgLabelStroke    = tryFloat( prefs, key[k++], "0.3" );  // DISTOX_SVG_LABEL_STROKE
     mSvgLineStroke     = tryFloat( prefs, key[k++], "0.5" );  // DISTOX_SVG_LINE_STROKE
@@ -846,7 +846,7 @@ class TDSetting
     mReduceCosine = (float)Math.cos( mReduceAngle * TDMath.DEG2RAD );
 
     mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
-    mOrthogonalLRUD       = ( mOrthogonalLRUDAngle < 0.000001f ); 
+    mOrthogonalLRUD       = ( mOrthogonalLRUDAngle > 0.000001f ); 
 
     // mSectionStations  = tryInt( prefs, key[k++], "3");         // DISTOX_SECTION_STATIONS
 
@@ -1143,8 +1143,8 @@ class TDSetting
       mSvgGrid = prefs.getBoolean( k, false );       // DISTOX_SVG_GRID
     } else if ( k.equals( key[ nk++ ] ) ) { 
       mSvgLineDirection = prefs.getBoolean( k, false ); // DISTOX_SVG_LINE_DIR
-    } else if ( k.equals( key[ nk++ ] ) ) { 
-      mSvgInHtml = prefs.getBoolean( k, false );     // DISTOX_SVG_IN_HTML
+    // } else if ( k.equals( key[ nk++ ] ) ) { 
+    //   mSvgInHtml = prefs.getBoolean( k, false );     // DISTOX_SVG_IN_HTML
     } else if ( k.equals( key[ nk++ ] ) ) { 
       mSvgPointStroke    = tryFloat( prefs, k, "0.1" );  // DISTOX_SVG_POINT_STROKE
     } else if ( k.equals( key[ nk++ ] ) ) { 
@@ -1218,7 +1218,7 @@ class TDSetting
     } else if ( k.equals( key[ nk++ ] ) ) {       // DISTOX_ORTHO_LRUD
       mOrthogonalLRUDAngle  = tryFloat( prefs, k, "0");
       mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
-      mOrthogonalLRUD       = ( mOrthogonalLRUDAngle < 0.000001f ); 
+      mOrthogonalLRUD       = ( mOrthogonalLRUDAngle > 0.000001f ); 
     } else if ( k.equals( key[ nk++ ] ) ) {       // DISTOX_REDUCE_ANGLE
       mReduceAngle  = tryFloat( prefs, k, "45");
       mReduceCosine = (float)Math.cos( mReduceAngle * TDMath.DEG2RAD );
@@ -1471,8 +1471,8 @@ class TDSetting
     if ( name.equals( "DISTOX_COMPASS_READINGS" ) ) return parseIntValue(   value, mCompassReadings, 1 );
 
     //B if ( name.equals( "DISTOX_SPLAY_EXTEND" )
-    if ( name.equals( "DISTOX_LRUD_VERTICAL"    ) ) return parseFloatValue( value, mLRUDvertical,    0f, 90f );
-    if ( name.equals( "DISTOX_LRUD_HORIZONTAL"  ) ) return parseFloatValue( value, mLRUDhorizontal,  0f, 90f );
+    if ( name.equals( "DISTOX_LRUD_VERTICAL"    ) ) return parseFloatValue( value, mLRUDvertical,    0f, 91f );
+    if ( name.equals( "DISTOX_LRUD_HORIZONTAL"  ) ) return parseFloatValue( value, mLRUDhorizontal,  0f, 91f );
 
     //B if ( name.equals( "DISTOX_AUTO_RECONNECT" )
     //B if ( name.equals( "DISTOX_HEAD_TAIL" )
