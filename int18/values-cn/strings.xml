@@ -859,6 +859,8 @@
   <string name="pref_leg_shots_summary">每条主线最少的测量次数</string>
   <string name="pref_station_prefix_title">cSurvey 测量点名称前缀</string>
   <string name="pref_station_prefix_summary">输出cSurvey测量点名称前缀</string>
+  <!-- TODO string name="pref_compass_splays_title">Compass splays</string -->
+  <!-- TODO string name="pref_compass_splays_summary">Export splays in Compass files</string -->
   <!-- TODO string name="pref_trobot_names_title">TopoRobot station names</string -->
   <!-- TODO string name="pref_trobot_names_summary">Station names are in TopoRobot style</string -->
   <string name="pref_ortho_lrud_title">LRUD 侧线的角度</string>
@@ -960,6 +962,8 @@
   <string name="pref_min_shift_message">移动灵敏度</string>
   <string name="pref_pointing_title">笔尖半径</string>
   <string name="pref_pointing_message">笔尖半径</string>
+  <!-- TODO string name="pref_dash_splay_title">Splay dash coherence</string -->
+  <!-- TODO string name="pref_dash_splay_message">Splays dashed coherently between plan and profile</string -->
   <string name="pref_vert_splay_title">侧线虚线倾斜极限</string>
   <!-- UNUSED string name="pref_vert_splay_summary">侧线虚线倾斜极限</string -->
   <string name="pref_vert_splay_message">侧线虚线倾斜极限</string>

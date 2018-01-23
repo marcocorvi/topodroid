@@ -643,9 +643,9 @@ public class MainWindow extends Activity
   public void onStop()
   {
     super.onStop();
-    if ( TopoDroidApp.isTracing ) {
-      Debug.stopMethodTracing();
-    }
+    // if ( TopoDroidApp.isTracing ) {
+    //   Debug.stopMethodTracing();
+    // }
   }
 
   @Override

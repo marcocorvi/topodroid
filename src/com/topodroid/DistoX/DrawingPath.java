@@ -57,6 +57,7 @@ public class DrawingPath extends RectF
   // private int dir; // 0 x1 < x2, 1 y1 < y2, 2 x2 < x1, 3 y2 < y1
   DBlock mBlock;
   boolean mLandscape;
+  float mExtend;  // extend value for splays (= cos of angle splay-leg)
 
   protected float cx, cy; // midpoint scene coords
   // RectF mBBox;   // path boundig box (scene coords)
@@ -73,6 +74,7 @@ public class DrawingPath extends RectF
     // x2 = y2 = 1.0f;
     // dx = dy = 1.0f;
     mLandscape = false;
+    mExtend = 1;
   }
 
   // boolean isDeletable( ) 

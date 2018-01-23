@@ -106,6 +106,7 @@ class SymbolLineLibrary extends SymbolLibrary
     if ( dir.exists() ) {
       int systemNr = mSymbols.size();
       File[] files = dir.listFiles();
+      if ( files == null ) return;
       for ( File file : files ) {
         SymbolLine symbol = new SymbolLine( file.getPath(), file.getName(), locale, iso );
         if ( symbol.mThName == null ) {

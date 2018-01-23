@@ -860,6 +860,8 @@
   <string name="pref_leg_shots_summary">Poligon mérések minmális száma poligonhosszanként</string>
   <string name="pref_station_prefix_title">Pontnév előtag cSurvey programhoz</string>
   <string name="pref_station_prefix_summary">cSurvey pontnév előtagok exportálása</string>
+  <!-- TODO string name="pref_compass_splays_title">Compass splays</string -->
+  <!-- TODO string name="pref_compass_splays_summary">Export splays in Compass files</string -->
   <string name="pref_trobot_names_title">TopoRobot pontnevek</string>
   <string name="pref_trobot_names_summary">Pontnevek a TopoRobot program stílusában</string>
   <string name="pref_ortho_lrud_title">BJFL segédpontok szöge</string>
@@ -960,6 +962,8 @@
   <string name="pref_min_shift_message">Elmozdulás érzékenyég</string>
   <string name="pref_pointing_title">Mutató sugara</string>
   <string name="pref_pointing_message">Mutató sugara</string>
+  <!-- TODO string name="pref_dash_splay_title">Splay dash coherence</string -->
+  <!-- TODO string name="pref_dash_splay_message">Splays dashed coherently between plan and profile</string -->
   <string name="pref_vert_splay_title">Segédmérések megszaggatásának lejtszög küszöbértéke</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Splay over this inclination are dashed</string -->
   <string name="pref_vert_splay_message">Ennél nagyobb lejtszögű segédmérések szaggatott vonallal jelöltek</string>

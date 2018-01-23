@@ -888,6 +888,8 @@
   <string name="pref_leg_shots_summary">Minimale Anzahl Messungen zur Erkennung als Messzug</string>
   <string name="pref_station_prefix_title">Exportiere Messpunkt Prefix</string>
   <string name="pref_station_prefix_summary">Exportiere Messpunkt Prefix (compass)</string>
+  <!-- TODO string name="pref_compass_splays_title">Compass splays</string -->
+  <!-- TODO string name="pref_compass_splays_summary">Export splays in Compass files</string -->
   <string name="pref_trobot_names_title">TopoRobot Namen</string>
   <string name="pref_trobot_names_summary">Stationen wie in TopoRobot benennen</string>
   <string name="pref_ortho_lrud_title">Min. Winkel für LRUD in Export</string>
@@ -988,6 +990,8 @@
   <string name="pref_min_shift_message">Ignoriert Verschiebungen größer als dieser Wert. Verhindert herumspringen bei Multitouch.</string>
   <string name="pref_pointing_title">Radius für Tippen</string>
   <string name="pref_pointing_message">Ein Antippen wird innerhalb dieses Radiuses erkannt in der Punktauswahl.</string>
+  <!-- TODO string name="pref_dash_splay_title">Splay dash coherence</string -->
+  <!-- TODO string name="pref_dash_splay_message">Splays dashed coherently between plan and profile</string -->
   <string name="pref_vert_splay_title">Neigung für gestrichelte Linien</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string -->
   <string name="pref_vert_splay_message">Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string>

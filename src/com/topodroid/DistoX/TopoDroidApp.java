@@ -120,7 +120,7 @@ public class TopoDroidApp extends Application
   public static float mDisplayHeight = 320f;
   static boolean mXSections = false;       // current value of mSharedXSections
 
-  static boolean isTracing = false;
+  // static boolean isTracing = false;
 
   // static float mManualCalibrationLength  = 0; // calibration of manually inputed data: length
   // static float mManualCalibrationAzimuth = 0;
@@ -486,10 +486,10 @@ public class TopoDroidApp extends Application
     TDSetting.loadSecondaryPreferences( this, mPrefs );
     checkAutoPairing();
 
-    if ( TDLog.LOG_DEBUG ) {
-      isTracing = true;
-      Debug.startMethodTracing("DISTOX");
-    }
+    // if ( TDLog.LOG_DEBUG ) {
+    //   isTracing = true;
+    //   Debug.startMethodTracing("DISTOX");
+    // }
 
     mPrefs.registerOnSharedPreferenceChangeListener( this );
     // TDLog.Debug("ready");
@@ -516,7 +516,6 @@ public class TopoDroidApp extends Application
     // require large memory pre Honeycomb
     // dalvik.system.VMRuntime.getRuntime().setMinimumHeapSize( 64<<20 );
 
-    // Log.v("DistoX", "START" );
     // TDLog.Profile("TDApp onCreate");
     try {
       VERSION      = getPackageManager().getPackageInfo( getPackageName(), 0 ).versionName;
@@ -587,7 +586,7 @@ public class TopoDroidApp extends Application
       if ( mDData.getValue( "symbol_version" ) == null ) installSymbols( true );
       installFirmware( false );
       // installUserManual( );
-      updateDefaultPreferences(); // reset a few default preference values
+      // updateDefaultPreferences(); // reset a few default preference values - not needed any more
     }
 
     // ***** CHECK SPECIAL EXPERIMENTAL FEATURES
@@ -1508,6 +1507,7 @@ public class TopoDroidApp extends Application
     // Log.v("DistoX", "clear " + dirname );
     File dir = new File( dirname );
     File [] files = dir.listFiles();
+    if ( files == null ) return;
     for ( int i=0; i<files.length; ++i ) {
       if ( files[i].isDirectory() ) continue;
       files[i].delete();

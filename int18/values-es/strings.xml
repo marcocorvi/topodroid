@@ -869,6 +869,8 @@
   <string name="pref_leg_shots_summary">Número mínimo de tomas por visual</string>
   <string name="pref_station_prefix_title">Prefijo estación de exportación</string>
   <string name="pref_station_prefix_summary">Prefijo estación de exportación cSurvey</string>
+  <!-- TODO string name="pref_compass_splays_title">Compass splays</string -->
+  <!-- TODO string name="pref_compass_splays_summary">Export splays in Compass files</string -->
   <string name="pref_trobot_names_title">TopoRobot Nombres de estaciones</string>
   <string name="pref_trobot_names_summary">Los nombres de las estaciones están en el estilo TopoRobot</string>
   <string name="pref_ortho_lrud_title">LRUD ángulo de apertura</string>
@@ -969,6 +971,8 @@
   <string name="pref_min_shift_message">Sensibilidad para mover dibujo</string>
   <string name="pref_pointing_title">Orientación nodo</string>
   <string name="pref_pointing_message">Sensibilidad para orientar el punto verde (nodo)</string>
+  <!-- TODO string name="pref_dash_splay_title">Splay dash coherence</string -->
+  <!-- TODO string name="pref_dash_splay_message">Splays dashed coherently between plan and profile</string -->
   <string name="pref_vert_splay_title">Límite de trazos del borde</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Límite de trazos del borde</string -->
   <string name="pref_vert_splay_message">Límite de trazos del borde</string>

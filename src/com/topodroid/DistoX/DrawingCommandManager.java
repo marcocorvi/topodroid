@@ -915,7 +915,7 @@ public class DrawingCommandManager
   // } 
 
   // FIXME LEGS_SPLAYS
-  void resetFixedPaint( Paint paint )
+  void resetFixedPaint( boolean profile, Paint paint )
   {
     if( mLegsStack != null ) { 
       synchronized( mLegsStack ) {
@@ -935,7 +935,11 @@ public class DrawingCommandManager
           final DrawingPath path = (DrawingPath) i.next();
           if ( path.mBlock == null || ( ! path.mBlock.mMultiBad ) ) {
             // path.setPaint( paint );
-            DrawingWindow.setSplayPaint( path, path.mBlock );
+	    if ( TDSetting.mDashSplay || profile ) {
+              DrawingWindow.setSplayPaintClino( path, path.mBlock );
+	    } else {
+              DrawingWindow.setSplayPaintExtend( path, path.mBlock, path.mExtend );
+	    }
           }
         }
       }

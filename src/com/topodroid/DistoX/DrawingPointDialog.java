@@ -114,7 +114,11 @@ public class DrawingPointDialog extends MyDialog
 	// FIXME SECTION_RENAME
 	// mXSectionName = mApp.mSurvey + "-" + mXSectionName;
         mHasXSectionOutline = mParent.hasXSectionOutline( mXSectionName );
-        mCBxsection.setChecked( mHasXSectionOutline );
+	if ( TDLevel.overAdvanced ) {
+          mCBxsection.setChecked( mHasXSectionOutline );
+	} else {
+          mCBxsection.setVisibility( View.GONE );
+	}
         mBTdraw.setOnClickListener( this );
       }
     } else {
@@ -159,7 +163,7 @@ public class DrawingPointDialog extends MyDialog
       else if ( mBtnScaleXL.isChecked() ) mPoint.setScale( DrawingPointPath.SCALE_XL );
 
       if ( mXSectionName != null ) {
-        if ( mHasXSectionOutline != mCBxsection.isChecked() ) {
+        if ( TDLevel.overAdvanced && mHasXSectionOutline != mCBxsection.isChecked() ) {
           mParent.setXSectionOutline( mXSectionName, mCBxsection.isChecked(), mPoint.cx, mPoint.cy );
         }
       }

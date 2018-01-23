@@ -77,6 +77,13 @@
        android:inputType="number"
        android:defaultValue="80"/>
 
+    <CheckBoxPreference
+       android:key="DISTOX_DASH_SPLAY"
+       android:summary="@string/pref_dash_splay_message"
+       android:title="@string/pref_dash_splay_title"
+       android:defaultValue="true"
+       />
+
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_VERT_SPLAY"
        android:title="@string/pref_vert_splay_title"

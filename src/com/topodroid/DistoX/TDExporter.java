@@ -1888,6 +1888,27 @@ class TDExporter
     pw.format( "\r\n" );
   }
 
+  private static void printSplayToDat( PrintWriter pw, String from, String to, DBlock blk, boolean reverse )
+  {
+    if ( ! TDSetting.mCompassSplays ) return;
+    float b = blk.mBearing;
+    float c = blk.mClino;
+    if ( reverse ) {
+      b += 180;
+      if ( b >=360 ) b -= 360;
+      c = -c;
+    }
+    pw.format(Locale.US, "%s %s %.2f %.1f %.1f -9.90 -9.90 -9.90 -9.90", from, to, blk.mLength*TopoDroidUtil.M2FT, b, c );
+
+    // if ( duplicate ) {
+    //   pw.format(" #|L#");
+    // }
+    if ( blk.mComment != null && blk.mComment.length() > 0 ) {
+      pw.format(" %s", blk.mComment );
+    }
+    pw.format( "\r\n" );
+  }
+
   static private void writeDatFromTo( PrintWriter pw, String prefix, String from, String to )
   {
     if ( TDSetting.mExportStationsPrefix ) {
@@ -1950,6 +1971,11 @@ class TDExporter
       boolean duplicate = false;
       LRUD lrud;
 
+      HashMap<String, Integer > splay_station = null;
+      if ( TDSetting.mCompassSplays ) {
+        splay_station = new HashMap<String, Integer >();
+      }
+
       for ( DBlock item : list ) {
         String from = item.mFrom;
         String to   = item.mTo;
@@ -1967,6 +1993,15 @@ class TDExporter
               duplicate = false;
               ref_item = null; 
             }
+	    if ( TDSetting.mCompassSplays ) {
+              Integer i = splay_station.get( to );
+	      int ii = 0;
+	      if ( splay_station.containsKey(to) ) {
+                ii = splay_station.get( to ).intValue();
+              }
+	      splay_station.put( to, new Integer(ii) );
+	      printSplayToDat( pw, to, to + "ss" + ii, item, true ); // reverse
+	    }
           }
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // splay shot
@@ -1977,6 +2012,15 @@ class TDExporter
               duplicate = false;
               ref_item = null; 
             }
+	    if ( TDSetting.mCompassSplays ) {
+              Integer i = splay_station.get( from );
+	      int ii = 0;
+	      if ( splay_station.containsKey(from) ) {
+                ii = splay_station.get( from ).intValue();
+              }
+	      splay_station.put( from, new Integer(ii) );
+	      printSplayToDat( pw, from, from + "ss" + ii, item, false ); // not reverse
+	    }
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {
               lrud = computeLRUD( ref_item, list, true );

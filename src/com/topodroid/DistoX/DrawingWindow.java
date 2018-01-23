@@ -661,8 +661,9 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.setNorthPath( dpath );
   }
 
-  // extend = cos(angle_splay_leg)
-  static void setSplayPaint( DrawingPath path, DBlock blk, float extend )
+  // setSplayExtend is used for the plan view
+  // extend = cos(angle_splay-leg)
+  static void setSplayPaintExtend( DrawingPath path, DBlock blk, float extend )
   {
     if ( blk.isCommented() ) {
       path.setPaint( BrushManager.fixedSplay0Paint );
@@ -679,7 +680,8 @@ public class DrawingWindow extends ItemDrawer
     }
   }
   
-  static void setSplayPaint( DrawingPath path, DBlock blk )
+  // setSplayClino is used for the profile view
+  static void setSplayPaintClino( DrawingPath path, DBlock blk )
   {
     if ( blk.isCommented() ) {
       path.setPaint( BrushManager.fixedSplay0Paint );
@@ -698,17 +700,19 @@ public class DrawingWindow extends ItemDrawer
       
 
   // used to add legs and splays
-  private void addFixedLine( DBlock blk, float x1, float y1, float x2, float y2,
+  // @param extend  used only for splays
+  private void addFixedLine( long type, DBlock blk, float x1, float y1, float x2, float y2,
                              // float xoff, float yoff, 
                              float extend, boolean splay, boolean selectable )
   {
     DrawingPath dpath = null;
     if ( splay ) {
       dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
-      if ( PlotInfo.isProfile( mType ) ) {
-        setSplayPaint( dpath, blk, extend );
+      dpath.mExtend = extend; // save extend into path
+      if ( TDSetting.mDashSplay || PlotInfo.isProfile( type ) ) {
+        setSplayPaintClino( dpath, blk );
       } else {
-        setSplayPaint( dpath, blk );
+        setSplayPaintExtend( dpath, blk, extend );
       }
       if ( mApp.getHighlightedSplayId() == blk.mId ) { dpath.setPaint( BrushManager.errorPaint ); }
     } else {
@@ -1043,17 +1047,17 @@ public class DrawingWindow extends ItemDrawer
         NumStation st1 = sh.from;
         NumStation st2 = sh.to;
         if ( st1.show() && st2.show() ) {
-          addFixedLine( sh.getFirstBlock(), (float)(st1.e), (float)(st1.s), (float)(st2.e), (float)(st2.s), sh.mExtend, false, true );
+          addFixedLine( type, sh.getFirstBlock(), (float)(st1.e), (float)(st1.s), (float)(st2.e), (float)(st2.s), sh.mExtend, false, true );
                         // xoff, yoff, false, true );
         }
       }
       for ( NumSplay sp : splays ) {
-        if ( Math.abs( sp.getBlock().mClino ) < TDSetting.mSplayVertThrs ) {
+        if ( Math.abs( sp.getBlock().mClino ) < TDSetting.mSplayVertThrs ) { // include only splays with clino below mSplayVertThrs
           NumStation st = sp.from;
           if ( st.show() ) {
             DBlock blk = sp.getBlock();
             if ( ! blk.isNoPlan() ) {
-              addFixedLine( blk, (float)(st.e), (float)(st.s), (float)(sp.e), (float)(sp.s), sp.mExtend, true, true );
+              addFixedLine( type, blk, (float)(st.e), (float)(st.s), (float)(sp.e), (float)(sp.s), sp.mExtend, true, true );
                           // xoff, yoff, true, true );
             }
           }
@@ -1076,7 +1080,7 @@ public class DrawingWindow extends ItemDrawer
           NumStation st2 = sh.to;
 	  DBlock blk = sh.getFirstBlock();
           if ( blk != null && st1.mHasCoords && st2.mHasCoords && st1.show() && st2.show() ) {
-            addFixedLine( blk, (float)(st1.h), (float)(st1.v), (float)(st2.h), (float)(st2.v), sh.mExtend, false, true );
+            addFixedLine( type, blk, (float)(st1.h), (float)(st1.v), (float)(st2.h), (float)(st2.v), sh.mExtend, false, true );
                           // xoff, yoff, false, true );
           }
         }
@@ -1086,7 +1090,7 @@ public class DrawingWindow extends ItemDrawer
         if ( st.mHasCoords && st.show() ) {
           DBlock blk = sp.getBlock();
           if ( ! blk.isNoProfile() ) {
-            addFixedLine( blk, (float)(st.h), (float)(st.v), (float)(sp.h), (float)(sp.v), sp.mExtend, true, true );
+            addFixedLine( type, blk, (float)(st.h), (float)(st.v), (float)(sp.h), (float)(sp.v), sp.mExtend, true, true );
                         // xoff, yoff, true, true );
           }
         }
@@ -1108,8 +1112,8 @@ public class DrawingWindow extends ItemDrawer
         if ( st1.show() && st2.show() ) {
           h1 = (float)( st1.e * cosp + st1.s * sinp );
           h2 = (float)( st2.e * cosp + st2.s * sinp );
-          // addFixedLine( sh.getFirstBlock(), h1, (float)(st1.v), h2, (float)(st2.v), xoff, yoff, sh.mExtend, false, true );
-          addFixedLine( sh.getFirstBlock(), h1, (float)(st1.v), h2, (float)(st2.v), sh.mExtend, false, true );
+          // addFixedLine( type, sh.getFirstBlock(), h1, (float)(st1.v), h2, (float)(st2.v), xoff, yoff, sh.mExtend, false, true );
+          addFixedLine( type, sh.getFirstBlock(), h1, (float)(st1.v), h2, (float)(st2.v), sh.mExtend, false, true );
         }
       } 
       for ( NumSplay sp : splays ) {
@@ -1119,8 +1123,8 @@ public class DrawingWindow extends ItemDrawer
           if ( ! blk.isNoProfile() ) {
             h1 = (float)( st.e * cosp + st.s * sinp );
             h2 = (float)( sp.e * cosp + sp.s * sinp );
-            // addFixedLine( sp.getBlock(), h1, (float)(st.v), h2, (float)(sp.v), xoff, yoff, sp.mExtend, true, true );
-            addFixedLine( blk, h1, (float)(st.v), h2, (float)(sp.v), sp.mExtend, true, true );
+            // addFixedLine( type, sp.getBlock(), h1, (float)(st.v), h2, (float)(sp.v), xoff, yoff, sp.mExtend, true, true );
+            addFixedLine( type, blk, h1, (float)(st.v), h2, (float)(sp.v), sp.mExtend, true, true );
           }
         }
       }
@@ -1973,8 +1977,8 @@ public class DrawingWindow extends ItemDrawer
           yfrom = -xn * xfrom - yn * yfrom;
           xfrom = xx;
         }
-        // addFixedLine( blk, xfrom, yfrom, xto, yto, 0, 0, false, false ); // not-splay, not-selecteable
-        addFixedLine( blk, xfrom, yfrom, xto, yto, blk.getReducedExtend(), false, false ); // not-splay, not-selecteable
+        // addFixedLine( mType, blk, xfrom, yfrom, xto, yto, 0, 0, false, false ); // not-splay, not-selecteable
+        addFixedLine( mType, blk, xfrom, yfrom, xto, yto, blk.getReducedExtend(), false, false ); // not-splay, not-selecteable
         mDrawingSurface.addDrawingStationName( mFrom, mDrawingUtil.toSceneX(xfrom, yfrom), mDrawingUtil.toSceneY(xfrom, yfrom) );
         mDrawingSurface.addDrawingStationName( mTo, mDrawingUtil.toSceneX(xto, yto), mDrawingUtil.toSceneY(xto, yto) );
         if ( tt >= 0 ) {
@@ -2247,10 +2251,10 @@ public class DrawingWindow extends ItemDrawer
     {
       if ( blk.getFlag() == flag ) return;
       blk.resetFlag( flag );
-      if ( PlotInfo.isProfile( mType ) ) {
-        setSplayPaint( shot, blk, blk.getReducedExtend() ); // really necessary only if flag || mFlag is BLOCK_COMMENTED
+      if ( TDSetting.mDashSplay || PlotInfo.isProfile( mType ) ) {
+        setSplayPaintClino( shot, blk ); // really necessary only if flag || mFlag is BLOCK_COMMENTED
       } else {
-        setSplayPaint( shot, blk ); // really necessary only if flag || mFlag is BLOCK_COMMENTED
+        setSplayPaintExtend( shot, blk, blk.getReducedExtend() ); // really necessary only if flag || mFlag is BLOCK_COMMENTED
       }
       mData.updateShotFlag( blk.mId, mSid, flag, true );
     }

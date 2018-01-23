@@ -68,6 +68,13 @@
        android:defaultValue="false"
      />
 
+   <CheckBoxPreference
+       android:key="DISTOX_COMPASS_SPLAYS"
+       android:summary="@string/pref_compass_splays_summary"
+       android:title="@string/pref_compass_splays_title"
+       android:defaultValue="false"
+     />
+
   <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_ORTHO_LRUD"
        android:title="@string/pref_ortho_lrud_title"

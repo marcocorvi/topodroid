@@ -128,6 +128,7 @@ class SymbolPointLibrary extends SymbolLibrary
     if ( dir.exists() ) {
       int systemNr = mSymbols.size();
       File[] files = dir.listFiles();
+      if ( files == null ) return;
       for ( File file : files ) { // there is a null-pointer exception here, but files cannot be null !!!
         String fname = file.getName();
         if ( fname.equals("photo") && ! FeatureChecker.checkCamera( ctx ) ) continue;

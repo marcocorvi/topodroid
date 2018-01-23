@@ -862,6 +862,8 @@
   <string name="pref_leg_shots_summary">Minimalno število zaporednih vizur poligona</string>
   <string name="pref_station_prefix_title">Izvozi začetnico merilnih točk</string>
   <string name="pref_station_prefix_summary">Izvozi v cSurvey začetnico merilnih točk</string>
+  <!-- TODO string name="pref_compass_splays_title">Compass splays</string -->
+  <!-- TODO string name="pref_compass_splays_summary">Export splays in Compass files</string -->
   <!-- TODO string name="pref_trobot_names_title">TopoRobot station names</string -->
   <!-- TODO string name="pref_trobot_names_summary">Station names are in TopoRobot style</string -->
   <string name="pref_ortho_lrud_title">Kot stranskih vizur  LRUD</string>
@@ -962,6 +964,8 @@
   <!-- TODO string name="pref_min_shift_message">Shift sensitivity</string -->
   <!-- TODO string name="pref_pointing_title">Pointing radius</string -->
   <!-- TODO string name="pref_pointing_message">Pointing radius</string -->
+  <!-- TODO string name="pref_dash_splay_title">Splay dash coherence</string -->
+  <!-- TODO string name="pref_dash_splay_message">Splays dashed coherently between plan and profile</string -->
   <string name="pref_vert_splay_title">Prag črtkanih stranskih vizur</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Prag črtkanih stranskih vizur po naklonom</string -->
   <string name="pref_vert_splay_message">Prag črtkanih stranskih vizur po naklonom</string>

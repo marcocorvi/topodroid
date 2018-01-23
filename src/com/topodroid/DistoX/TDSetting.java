@@ -157,6 +157,7 @@ class TDSetting
     "DISTOX_SPLAY_VERT_THRS",    // splays with clino over mSplayVertThrs are not displayed in plan view
     "DISTOX_BACKSIGHT",          // whether to add backsight fields in manual shot input dialog
     "DISTOX_MAG_ANOMALY",        // whether to compensate magnetic anomaly
+    "DISTOX_DASH_SPLAY",         // whether dash-splay are coherent between plan and profile
     "DISTOX_VERT_SPLAY",         // splays with clino over this are shown with dashed/dotted line
     "DISTOX_HORIZ_SPLAY",        // splays off-azimuth over this are shown with dashed/dotted line
     "DISTOX_SECTION_SPLAY",      // splays with angle over this are shown with dashed/dotted line
@@ -175,6 +176,7 @@ class TDSetting
     "DISTOX_UNIT_GRID",          // plot grid unit [m, y, 2ft]
     // "DISTOX_XTHERION_AREAS",  // save areas a-la xtherion
     "DISTOX_THERION_SPLAYS",     // whether to add u:splay lines to Therion th2 export
+    "DISTOX_COMPASS_SPLAYS",     // whether to add splays to Compass dat export
     "DISTOX_RECENT_NR",          // number of most recent items (item picker)
     "DISTOX_AREA_BORDER",        // area border visibility
     "DISTOX_ORTHO_LRUD",         // orthogonal LRUD ( >=1 disable, min 0 )
@@ -239,7 +241,8 @@ class TDSetting
 
   // static boolean mXTherionAreas = false;
   static boolean mAutoStations  = true;  // whether to add stations automatically to scrap therion files
-  static boolean mTherionSplays = true;  // whether to add splay segments to auto stations
+  static boolean mTherionSplays = false; // whether to add splay segments to auto stations
+  static boolean mCompassSplays = false; // whether to add splays to Compass export
 
   static float mBitmapScale = 1.5f;
   static float mDxfScale = 1.0f;
@@ -353,6 +356,7 @@ class TDSetting
   static boolean mMagAnomaly    = false;    // local magnetic anomaly survey
   static float   mSplayVertThrs = 80;
   static boolean mAzimuthManual = false;    // whether to manually set extend / or use reference azimuth
+  static boolean mDashSplay     = true;     // whether dash-splay are coherent between plan and profile
   static float   mVertSplay     = 50;
   static float   mHorizSplay    = 60;
   static float   mCosHorizSplay = TDMath.cosd( mHorizSplay );
@@ -811,6 +815,7 @@ class TDSetting
     mBacksight     = prefs.getBoolean( key[k++], false );   // DISTOX_BACKSIGHT
     setMagAnomaly(   prefs.getBoolean( key[k++], false ) ); // DISTOX_MAG_ANOMALY
 
+    mDashSplay = prefs.getBoolean( key[k++], true );              // DISTOX_DASH_SPLAY
     mVertSplay = tryFloat( prefs, key[k++], "50" );               // DISTOX_VERT_SPLAY
     mHorizSplay = tryFloat( prefs, key[k++], "60" );              // DISTOX_HORIZ_SPLAY
     mCosHorizSplay = TDMath.cosd( mHorizSplay );
@@ -836,6 +841,7 @@ class TDSetting
     mUnitGrid       = tryFloat(  prefs, key[k++], "1" );      // DISTOX_UNIT_GRID
     // mXTherionAreas  = prefs.getBoolean( key[k++], false );    // DISTOX_XTHERION_AREAS
     mTherionSplays  = prefs.getBoolean( key[k++], false );    // DISTOX_THERION_SPLAYS
+    mCompassSplays  = prefs.getBoolean( key[k++], false );    // DISTOX_COMPASS_SPLAYS
 
     mRecentNr   = tryInt( prefs, key[k++], "4" );               // DISTOX_RECENT_NR choice: 3, 4, 5, 6
 
@@ -1169,6 +1175,8 @@ class TDSetting
       mBacksight = prefs.getBoolean( k, false );
     } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_MAG_ANOMALY
       setMagAnomaly( prefs.getBoolean( k, false ) );
+    } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_DASH_SPLAY
+      mDashSplay = prefs.getBoolean( k, true );      
     } else if ( k.equals( key[ nk++ ] ) ) {
       mVertSplay = tryFloat( prefs, k, "50" );
     } else if ( k.equals( key[ nk++ ] ) ) {
@@ -1209,6 +1217,8 @@ class TDSetting
     //   mXTherionAreas = prefs.getBoolean( k, false );   
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_THERION_SPLAYS
       mTherionSplays  = prefs.getBoolean( k, false );   
+    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_COMPASS_SPLAYS
+      mCompassSplays  = prefs.getBoolean( k, false );   
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_RECENT_NR
       mRecentNr = tryInt( prefs, k, "4" );
 
@@ -1500,6 +1510,7 @@ class TDSetting
     //B if ( name.equals( "DISTOX_BACKSIGHT" )
     //B if ( name.equals( "DISTOX_Z6_WORKAROUND" )
     //B if ( name.equals( "DISTOX_MAG_ANOMALY" )
+    //B if ( name.equals( "DISTOX_DASH_SPLAY"       ) 
     if ( name.equals( "DISTOX_VERT_SPLAY"       ) ) return parseFloatValue( value, mVertSplay, 0, 91 );
     if ( name.equals( "DISTOX_HORIZ_SPLAY"      ) ) return parseFloatValue( value, mHorizSplay, 0, 91 );
     if ( name.equals( "DISTOX_SECTION_SPLAY"    ) ) return parseFloatValue( value, mSectionSplay, 0, 91 );
@@ -1522,6 +1533,7 @@ class TDSetting
     //C if ( name.equals( "DISTOX_UNIT_GRID" ) 
     //B if ( name.equals( "DISTOX_XTHERION_AREAS" )
     //B if ( name.equals( "DISTOX_THERION_SPLAYS" )
+    //B if ( name.equals( "DISTOX_COMPASS_SPLAYS" )
     //C if ( name.equals( "DISTOX_RECENT_NR" )
     //B if ( name.equals( "DISTOX_AREA_BORDER" )
     if ( name.equals( "DISTOX_ORTHO_LRUD" ) ) return parseFloatValue( value, mOrthogonalLRUDAngle, 0, 90 );

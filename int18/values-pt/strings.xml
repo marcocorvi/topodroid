@@ -861,6 +861,8 @@
   <string name="pref_leg_shots_summary">Quantidade mínimo de medições para uma visada</string>
   <string name="pref_station_prefix_title">Prefixos bases Compass</string>
   <string name="pref_station_prefix_summary">Exportar prefixo de bases (Compass)</string>
+  <!-- TODO string name="pref_compass_splays_title">Compass splays</string -->
+  <!-- TODO string name="pref_compass_splays_summary">Export splays in Compass files</string -->
   <string name="pref_trobot_names_title">Nomes bases TopoRobot</string>
   <string name="pref_trobot_names_summary">Os nomes das bases usam o estilo do TopoRobot</string>
   <string name="pref_ortho_lrud_title">Ângulo med. aux. EDTC Compass</string>
@@ -961,6 +963,8 @@
   <string name="pref_min_shift_message">Mudar sensibilidade</string>
   <string name="pref_pointing_title">Diâmetro tolerância cursor</string>
   <string name="pref_pointing_message">Tolerância entre toque e destoque para seleção de ponto</string>
+  <!-- TODO string name="pref_dash_splay_title">Splay dash coherence</string -->
+  <!-- TODO string name="pref_dash_splay_message">Splays dashed coherently between plan and profile</string -->
   <string name="pref_vert_splay_title">Limite med. aux. tracejadas</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Medidas auxiliares acima desta inclinação serão tracejadas</string -->
   <string name="pref_vert_splay_message">Medidas auxiliares acima dessa inclinação serão tracejadas</string>

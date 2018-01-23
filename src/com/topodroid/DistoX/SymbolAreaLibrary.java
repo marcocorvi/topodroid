@@ -147,6 +147,7 @@ class SymbolAreaLibrary extends SymbolLibrary
     if ( dir.exists() ) {
       int systemNr = size();
       File[] files = dir.listFiles();
+      if ( files == null ) return;
       for ( File file : files ) {
         SymbolArea symbol = new SymbolArea( file.getPath(), file.getName(), locale, iso );
         if ( symbol.mThName == null ) {

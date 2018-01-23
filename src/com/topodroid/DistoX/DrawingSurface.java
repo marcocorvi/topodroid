@@ -392,8 +392,8 @@ public class DrawingSurface extends SurfaceView
 
   void resetFixedPaint( Paint paint )
   {
-    mCommandManager1.resetFixedPaint( paint );
-    mCommandManager2.resetFixedPaint( paint );
+    mCommandManager1.resetFixedPaint( false, paint );
+    mCommandManager2.resetFixedPaint( true,  paint ); 
   }
 
   // called by DarwingActivity::addFixedLine

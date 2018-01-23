@@ -863,6 +863,8 @@
   <string name="pref_leg_shots_summary">Минимален брой поредни еднакви измервания за да се считат за антена</string>
   <string name="pref_station_prefix_title">Експортиране на префикс в името на реперите</string>
   <string name="pref_station_prefix_summary">Експортиране в cSurvey на префикс в името на реперите</string>
+  <!-- TODO string name="pref_compass_splays_title">Compass splays</string -->
+  <!-- TODO string name="pref_compass_splays_summary">Export splays in Compass files</string -->
   <string name="pref_trobot_names_title">TopoRobot имена на репери</string>
   <string name="pref_trobot_names_summary">Имената на реперите са в стил TopoRobot</string>
   <string name="pref_ortho_lrud_title">ЛДГД ъгъл на странично изм.</string>
@@ -957,6 +959,8 @@
   <string name="pref_min_shift_message">Чувствителностс при скролиране на скицата</string>
   <string name="pref_pointing_title">Радиус при преместване</string>
   <string name="pref_pointing_message">Радиус на повторно натискане за преместване на елемент</string>
+  <!-- TODO string name="pref_dash_splay_title">Splay dash coherence</string -->
+  <!-- TODO string name="pref_dash_splay_message">Splays dashed coherently between plan and profile</string -->
   <string name="pref_vert_splay_title">Наклонени измервания с пунктир</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Странични измервания с по-голям наклон са с пунктир в плана</string -->
   <string name="pref_vert_splay_message">Странични измервания с по-голям наклон са с пунктир в плана</string>
