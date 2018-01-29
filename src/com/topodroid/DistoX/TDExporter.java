@@ -1999,7 +1999,7 @@ class TDExporter
 	      if ( splay_station.containsKey(to) ) {
                 ii = splay_station.get( to ).intValue();
               }
-	      splay_station.put( to, new Integer(ii) );
+	      splay_station.put( to, new Integer(ii+1) );
 	      printSplayToDat( pw, to, to + "ss" + ii, item, true ); // reverse
 	    }
           }
@@ -2018,7 +2018,7 @@ class TDExporter
 	      if ( splay_station.containsKey(from) ) {
                 ii = splay_station.get( from ).intValue();
               }
-	      splay_station.put( from, new Integer(ii) );
+	      splay_station.put( from, new Integer(ii+1) );
 	      printSplayToDat( pw, from, from + "ss" + ii, item, false ); // not reverse
 	    }
           } else {

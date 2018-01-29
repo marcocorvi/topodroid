@@ -96,6 +96,11 @@ public class DistoXProtocol
 
 //------------------------------------------------------
 
+  /** 
+   * @param timeout    joining timeout
+   * @param maxtimeout max number of join attempts
+   * @return number of data to read
+   */
   private int getAvailable( long timeout, int maxtimeout ) throws IOException
   {
     mMaxTimeout = maxtimeout;
@@ -224,7 +229,6 @@ public class DistoXProtocol
     //     mBuffer[3], mBuffer[4], mBuffer[5], mBuffer[6], mBuffer[7] ) );
     // }
 
-
     int high, low;
     switch ( type ) {
       case 0x01: // data
@@ -268,7 +272,7 @@ public class DistoXProtocol
         if ( mGX > TopoDroidUtil.ZERO ) mGX = mGX - TopoDroidUtil.NEG;
         if ( mGY > TopoDroidUtil.ZERO ) mGY = mGY - TopoDroidUtil.NEG;
         if ( mGZ > TopoDroidUtil.ZERO ) mGZ = mGZ - TopoDroidUtil.NEG;
-        TDLog.Log( TDLog.LOG_PROTO, "handle Packet G " + String.format(" %x %x %x", mGX, mGY, mGZ ) );
+        // TDLog.Log( TDLog.LOG_PROTO, "handle Packet G " + String.format(" %x %x %x", mGX, mGY, mGZ ) );
         return DISTOX_PACKET_G;
       case 0x03: // m
         mMX = MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
@@ -278,7 +282,7 @@ public class DistoXProtocol
         if ( mMX > TopoDroidUtil.ZERO ) mMX = mMX - TopoDroidUtil.NEG;
         if ( mMY > TopoDroidUtil.ZERO ) mMY = mMY - TopoDroidUtil.NEG;
         if ( mMZ > TopoDroidUtil.ZERO ) mMZ = mMZ - TopoDroidUtil.NEG;
-        TDLog.Log( TDLog.LOG_PROTO, "handle Packet M " + String.format(" %x %x %x", mMX, mMY, mMZ ) );
+        // TDLog.Log( TDLog.LOG_PROTO, "handle Packet M " + String.format(" %x %x %x", mMX, mMY, mMZ ) );
         return DISTOX_PACKET_M;
       case 0x04: // vector data packet
         if ( mDevice.mType == Device.DISTO_X310 ) {
@@ -356,10 +360,10 @@ public class DistoXProtocol
         // if ( (mBuffer[0] & 0x0f) != 0 ) // ack every packet
         { 
           mAcknowledge[0] = (byte)(( mBuffer[0] & 0x80 ) | 0x55);
-          if ( TDLog.LOG_PROTO ) {
-            TDLog.Log( TDLog.LOG_PROTO,
-              "read packet byte " + String.format(" %02x", mBuffer[0] ) + " ... writing ack" );
-          }
+          // if ( TDLog.LOG_PROTO ) {
+          //   TDLog.Log( TDLog.LOG_PROTO,
+          //     "read packet byte " + String.format(" %02x", mBuffer[0] ) + " ... writing ack" );
+          // }
           mOut.write( mAcknowledge, 0, 1 );
         }
         if ( ok ) return handlePacket();
@@ -413,12 +417,12 @@ public class DistoXProtocol
       }
 
       // DEBUG
-      if ( TDLog.LOG_PROTO ) {
-        TDLog.Log( TDLog.LOG_PROTO, 
-          "Proto readToRead Head-Tail " + 
-          String.format("%02x%02x-%02x%02x", mBuffer[4], mBuffer[3], mBuffer[6], mBuffer[5] )
-          + " " + head + " - " + tail + " = " + ret );
-      }
+      // if ( TDLog.LOG_PROTO ) {
+      //   TDLog.Log( TDLog.LOG_PROTO, 
+      //     "Proto readToRead Head-Tail " + 
+      //     String.format("%02x%02x-%02x%02x", mBuffer[4], mBuffer[3], mBuffer[6], mBuffer[5] )
+      //     + " " + head + " - " + tail + " = " + ret );
+      // }
       return ret;
     } catch ( EOFException e ) {
       TDLog.Error( "Proto readToRead Head-Tail read() failed" );
