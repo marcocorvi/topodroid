@@ -42,9 +42,7 @@ public class PhotoCommentDialog extends MyDialog
 
   /**
    * @param context   context
-   * @param calib     calibration activity
-   * @param group     data group
-   * @param data      calibration data (as string)
+   * @param parent    parent shot list activity
    */
   PhotoCommentDialog( Context context, ShotWindow parent )
   {

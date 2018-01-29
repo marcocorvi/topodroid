@@ -150,11 +150,7 @@ public class ParserTherion
   /** read input file
    * @param filename name of the file to parse
    * @param basepath survey pathname base
-   * @param usd   use survey declination
-   * @param sd    survey decliunation
-   * @param ul units of length (as multiple of 1 meter)
-   * @param ub units of bearing (as multiple of 1 degree)
-   * @param uc units of clino
+   * @param state    state of the parser
    */
   private void readFile( String filename, String basepath, ParserTherionState state )
                        throws ParserException

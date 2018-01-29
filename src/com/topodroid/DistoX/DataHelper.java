@@ -78,7 +78,7 @@ public class DataHelper extends DataSetObservable
   private long           myNextId;   // id of next shot
   private long           myNextCId;  // id of next calib-data
 
-  private SQLiteStatement updateConfig = null;
+  // private SQLiteStatement updateConfig = null;
 
   private SQLiteStatement updateAudioStmt = null;
   private SQLiteStatement updateShotStmt = null;
@@ -201,7 +201,7 @@ public class DataHelper extends DataSetObservable
           } catch ( InterruptedException e ) {}
         }
 
-        updateConfig = myDB.compileStatement( "UPDATE configs SET value=? WHERE key=?" );
+        // updateConfig = myDB.compileStatement( "UPDATE configs SET value=? WHERE key=?" );
 
      } catch ( SQLiteException e ) {
        myDB = null;
@@ -1663,15 +1663,17 @@ public class DataHelper extends DataSetObservable
   {
     boolean ret = false;
     if ( myDB == null ) return false;
-    Cursor cursor = myDB.query( AUDIO_TABLE,
-       		         new String[] { "date" }, // columns
-                                WHERE_SID_SHOTID, new String[] { Long.toString(sid), Long.toString(bid) },
-                                null, null,  null ); 
+    String[] args = new String[] { Long.toString(sid), Long.toString(bid) };
+    Cursor cursor = myDB.query( AUDIO_TABLE, new String[] { "date" }, WHERE_SID_SHOTID, args, null, null,  null ); 
     if (cursor.moveToFirst()) { // update
-      updateAudioStmt.bindString( 1, date );
-      updateAudioStmt.bindString( 2, Long.toString(sid) );
-      updateAudioStmt.bindString( 3, Long.toString(bid) );
-      ret = doStatement( updateAudioStmt, "audio update" );
+      String where = "WHERE surveyId=? AND shotId=?";
+      ContentValues cv = new ContentValues();
+      cv.put( "date", date );
+      ret = ( myDB.update( AUDIO_TABLE, cv, WHERE_SID_SHOTID, args ) > 0 );
+      // updateAudioStmt.bindString( 1, date );
+      // updateAudioStmt.bindString( 2, Long.toString(sid) );
+      // updateAudioStmt.bindString( 3, Long.toString(bid) );
+      // ret = doStatement( updateAudioStmt, "audio update" );
     } else { // insert
       ret = ( insertAudio( sid, -1L, bid, date ) >= 0 );
     }
@@ -2602,18 +2604,19 @@ public class DataHelper extends DataSetObservable
                                 "key = ?", new String[] { key },
                                 null, null, null );
      if ( cursor != null ) {
+       ContentValues cv = new ContentValues();
+       cv.put( "value",   value );
        try {
          if (cursor.moveToFirst()) {
-           updateConfig.bindString( 1, value );
-           updateConfig.bindString( 2, key );
+           // updateConfig.bindString( 1, value );
+           // updateConfig.bindString( 2, key );
            try {
-             updateConfig.execute();
+             // updateConfig.execute();
+	     myDB.update( CONFIG_TABLE, cv, "key=?", new String[] { key } );
            } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
            } catch (SQLiteException e ) { logError( "config update " + key + " " + value, e ); }
          } else {
-           ContentValues cv = new ContentValues();
            cv.put( "key",     key );
-           cv.put( "value",   value );
            try {
              myDB.insert( CONFIG_TABLE, null, cv );
            } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );

@@ -24,6 +24,10 @@ import android.util.Log;
 
 public class ParserCompass extends ImportParser
 {
+  /** Compass parser
+   * @param filename name of the file to parse
+   * @param apply_declination whether to aapply declination correction
+   */
   public ParserCompass( String filename, boolean apply_declination ) throws ParserException
   {
     super( apply_declination );
@@ -52,9 +56,7 @@ public class ParserCompass extends ImportParser
   }
 
   /** read input file
-   * @param filename name of the file to parse
-  /** read input file
-   * @param filename name of the file to parse
+   * @param br buffered reader on the input file
    */
   @Override
   void readFile( BufferedReader br ) throws ParserException

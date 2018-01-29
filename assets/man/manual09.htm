@@ -111,7 +111,7 @@ Accordingly, the drawing references dialog has no box for the splays.
 <h4>SKETCH SETTINGS</h4>
 <ul style="margin-top=0">
   <li><i>Drawing tool picker</i>: most-recent [default], or list, or grid, or triple-grid view</li>
-  <li><i>Number of recent tools</i> to display in the recent tool picker [3, 4, 5, or 6]</li>
+  <li><i>Number of recent tools</i> to display in the recent tool picker [3, <u>4</u>, 5, or 6]</li>
   <li><i>Side drag</i>: enable panning by side-drag</li>
   <li><i>Zoom controls</i>: specifies whether and how zoom controls are displayed on multitouch devices [B]. The zoom controls can be hidden, displayed only for a short interval when the user tap the lower part of the screen in the middle, or shown all the time</li>
   <li><i>Midline check</i>: check if all the legs are attached to the midline</li>
@@ -120,30 +120,33 @@ Accordingly, the drawing references dialog has no box for the splays.
     <ul style="margin-top:0; margin-bottom:0">
     <li><i>Non-zoomed point</i>: point items stay of fixed size when zooming</li>
     <li><i>Base scale</i> for point symbols</li>
-    <li>Label <i>text size</i> [default 24 pt]</li>
+    <li>Label <i>text size</i> [24 pt]</li>
     </ul>
   <li><i>LINE TOOLS</i>
     <ul style="margin-top:0; margin-bottom:0">
     <li>Line <i>tracing style</i>: fine, normal, coarse, or "splines" (interpolated-curve)</li>
     <li>Line <i>thickness</i></li>
-    <li><i>Direction tick length</i> for x-section lines [default 5 px]</li>
-    <li>Line <i>point spacing</i>: distance between line points in normal style [default 5 px] </li>
-    <li><i>Bezier accuracy</i> determines the number of base points in the interpolating spline. The smaller the more points. The default value is 1.0.</li>
+    <li><i>Direction tick length</i> for x-section lines [5 px]</li>
+    <li>Line <i>point spacing</i>: distance between line points in normal style [5 px] </li>
+    <li><i>Bezier accuracy</i> determines the number of base points in the interpolating spline. The smaller the more points [1.0]</li>
     <li><i>Bezier corner</i>. Even a spline should have corners, when there is a sharp turn at a point. Small values (0.2) make the corner sharper. Large values (20.0) make them rounded.</li>
     </ul>
   </li>
   <li><i>SKETCH ITEMS</i>
     <ul style="margin-top:0; margin-bottom:0">
-  <li><i>Splay plan-view threshold</i>: splay shots with inclination above this threshold are hidden in the plan-view</li>
-  <li><i>Splay dash threshold</i>: splay shots with inclination above this threshold are drawn with a dashed line in plan view</li>
+  <li><i>Splay plan-view threshold</i>: splay shots with inclination above this threshold are hidden in the plan-view [80 deg.]</li>
+  <li><i>Splay dash coherence</i>: splay shots dashed coherently between plan and profile views [yes]</li>
+  <li><i>Splay dash clino threshold</i>: splay shots with inclination above this threshold are dashed, in plan view [50 deg.]</li>
+  <li><i>Splay dash azimuth threshold</i>: splay shots with azimuth off more than this threshold are dashed, in profile view [60 deg.]</li>
+  <li><i>Splay dash angle threshold</i>: splay shots making an angle smaller than this threshold are dashed, in x-sections [60 deg.]</li>
   <li><i>X-section H-threshold</i>: the inclination angle above which a x-section is horizontal. (Below it x-section are vertical).</li>
     <li>Survey line <i>thickness</i> (midline/splay)</li>
-    <li>Station name <i>text size</i> [default 18 pt] [N]</li>
-    <li>Size of <i>green dots</i> displayed in <b>edit</b> mode [default 5 px] [A]</li>
-    <li><i>Selection</i> radius for fine-editing a sketch; [default 16 px] [A]</li>
+    <li>Station name <i>text size</i> [18 pt] [N]</li>
+    <li>Size of <i>green dots</i> displayed in <b>edit</b> mode [5 px] [A]</li>
+    <li><i>Selection</i> radius for fine-editing a sketch; [16 px] [A]</li>
     <li>Radius of <i>pointing</i>: to select you must not move the finger more than this [A]</li>
     <li><i>Eraser size</i></li>
-    <li><i>Shift sensitivity</i>: maximum stepping when moving a sketch [default 60 px] [E]. Increase it if sketch shifting is jaggy</li>
+    <li><i>Shift sensitivity</i>: maximum stepping when moving a sketch [60 px] [E]. Increase it if sketch shifting is jaggy</li>
     </ul>
   </li>
   <li><i>AUTO WALLS [E]</i> <a href="page_walls.htm">settings</a></li>

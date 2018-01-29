@@ -213,9 +213,10 @@
     <!-- UNUSED string name="none">няма</string -->
     <!-- UNUSED string name="barrier_add">Скриване на следващи репери</string -->
     <string name="hide_from">Скриване от</string>
-    <string name="barrier_del">Показване на следващи репери</string>
+    <!-- UNUSED string name="barrier_del">Показване на следващи репери</string -->
     <!-- UNUSED string name="hidden_add">Скриване на предишни репери</string -->
-    <string name="hidden_del">Показване на предишни репери</string>
+    <!-- UNUSED string name="hidden_del">Показване на предишни репери</string -->
+    <!-- TODO string name="hidden_show">Show shots beyond station</string -->
     <string name="splays_toggle">Показване/скриване на странични изм.</string>
     <string name="splays">Странични изм.</string>
     <string name="fixed">Фиксиран</string>
@@ -839,6 +840,8 @@
 
   <string name="pref_raw_data_title">Необработени данни</string>
   <string name="pref_raw_data_summary">Показване на необработени данни</string>
+  <!-- TODO string name="pref_calib_shot_download_title">Download remote data</string -->
+  <!-- TODO string name="pref_calib_shot_download_summary">Download remote calib data immediately</string -->
   <!-- UNUSED string name="pref_bootloader_title">Зареждане на фърмуер</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Разрешаване на инсталирането на фърмуер</string -->
   <string name="pref_mkeyboard_title">Собствена клавиатура</string>

@@ -4,16 +4,20 @@ name-es anastomosis
 name-pt anastomose
 th_name anastomosis
 orientation no
-color 0x6666ff
+color 0xcccccc
 csurvey 6 6 80
 path
-  moveTo -6 4
-  lineTo -4 5
-  lineTo 0 -5
-  lineTo 2 -4 
-  moveTo -2 4
-  lineTo 0 5
-  lineTo 4 -5
-  lineTo 6 -4
+  moveTo -6 3
+  cubicTo -6 4 -4 4 -4 3
+  lineTo -4 -3
+  cubicTo -4 -4 -2 -4 -2 -3
+  lineTo -2 3
+  cubicTo -2 4 0 4 0 3
+  lineTo 0 -3 
+  cubicTo 0 -4 2 -4 2 -3
+  lineTo 2 3
+  cubicTo 2 4 4 4 4 3
+  lineTo 4 -3
+  cubicTo 4 -4 6 -4 6 -3
 endpath
 endsymbol

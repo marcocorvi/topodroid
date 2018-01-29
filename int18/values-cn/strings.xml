@@ -211,9 +211,10 @@
     <!-- UNUSED string name="none">无</string -->
     <!-- UNUSED string name="barrier_add">隐藏以下的测量</string -->
     <!-- TODO string name="hide_from">Hide from</string -->
-    <string name="barrier_del">显示以下的测量</string>
+    <!-- UNUSED string name="barrier_del">显示以下的测量</string -->
     <!-- UNUSED string name="hidden_add">隐藏之前的测量</string -->
-    <string name="hidden_del">显示之前的测量</string>
+    <!-- UNUSED string name="hidden_del">显示之前的测量</string -->
+    <!-- TODO string name="hidden_show">Show shots beyond station</string -->
     <string name="splays_toggle">辐线测量显示开关</string>
     <!-- TODO string name="splays">splays</string -->
     <!-- TODO string name="fixed">fixed</string -->
@@ -835,6 +836,8 @@
 
   <string name="pref_raw_data_title">原始数据</string>
   <string name="pref_raw_data_summary">显示原始数据</string>
+  <!-- TODO string name="pref_calib_shot_download_title">Download remote data</string -->
+  <!-- TODO string name="pref_calib_shot_download_summary">Download remote calib data immediately</string -->
   <!-- UNUSED string name="pref_bootloader_title">引导程序</string -->
   <!-- UNUSED string name="pref_bootloader_summary">启用/停用 引导程序</string -->
   <string name="pref_mkeyboard_title">键盘</string>

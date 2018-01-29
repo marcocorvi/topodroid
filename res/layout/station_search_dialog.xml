@@ -24,7 +24,7 @@
         android:layout_marginTop="@dimen/marginv"
     />
 
-    <LinearLayout android:id="@+id/layout1"
+    <LinearLayout android:id="@+id/layout2"
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

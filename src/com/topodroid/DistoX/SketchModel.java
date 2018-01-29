@@ -170,10 +170,10 @@ class SketchModel
     return true;
   }
 
-  /**
-   * @param sections  station sections
-   * @param name station name
-   */
+  // /**
+  //  * @param sections  station sections
+  //  * @param name station name
+  //  */
   // private boolean createJoinSurface( SketchSectionSet sections, String name, Vector center )
   // {
   //   // Log.v("DistoX", "join sections nr: " + sections.size() );

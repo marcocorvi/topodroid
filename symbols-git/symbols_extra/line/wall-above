@@ -6,9 +6,9 @@ name-ru вышерасположенная_стена
 name-bg по-високо_разположена_стена
 th_name wall:overlying
 group wall
-color 0xffe5cc 0x99
+color 0xff0000 0x99
 width 1
 csurvey 5 1 2 2
-dash 10 5 3 5
+dash 5 10 
 endsymbol
 

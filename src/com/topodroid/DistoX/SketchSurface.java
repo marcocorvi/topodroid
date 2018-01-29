@@ -931,12 +931,12 @@ class SketchSurface extends SketchShot
   private final static float MAX_DIST  = 10f; // FIXME > 2*PI+eps 
   private final static float MAX_DIST2 =  5f; // MAX_DIST / 2
 
-  /**
-   * @param ss set of cross-sections at the station
-   * @param info
-   * @param splays splays at the station
-   * @param center station 3D coords
-   */
+  // /**
+  //  * @param ss set of cross-sections at the station
+  //  * @param info
+  //  * @param splays splays at the station
+  //  * @param center station 3D coords
+  //  */
   // void makeJoinTriangles( SketchSectionSet ss, Sketch3dInfo info, ArrayList< SketchFixedPath > splays, Vector center )
   // {
   //   int ms = ss.size();

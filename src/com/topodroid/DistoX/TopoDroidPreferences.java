@@ -100,7 +100,7 @@ public class TopoDroidPreferences extends PreferenceActivity
       case PREF_CATEGORY_PLOT:   addPreferencesFromResource(R.xml.prefs_4_plot);
         // TODO handle ZOOM_CONTROLS separatedly
         break;
-      case PREF_CATEGORY_CALIB:  addPreferencesFromResource(R.xml.prefs_calib); break;
+      case PREF_CATEGORY_CALIB:  addPreferencesFromResource(R.xml.prefs_5_calib); break;
       case PREF_CATEGORY_DEVICE: addPreferencesFromResource(R.xml.prefs_3_device);
         linkPreference( "DISTOX_CALIB_PREF", PREF_CATEGORY_CALIB );
         break;

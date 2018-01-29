@@ -2157,12 +2157,12 @@ public class SketchWindow extends ItemDrawer
   //   return ( y > 0 )? 2 : 3;
   // }
 
-  /** quadrants start point
-   * @param q    quadrant
-   * @param xc   center X coord
-   * @param yc   center Y coord
-   * @param r    radius
-   */
+  // /** quadrants start point
+  //  * @param q    quadrant
+  //  * @param xc   center X coord
+  //  * @param yc   center Y coord
+  //  * @param r    radius
+  //  */
   // PointF getQuadStart( int q, float xc, float yc, float r )
   // {
   //   switch ( q ) {

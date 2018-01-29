@@ -212,9 +212,10 @@
 <!-- UNUSED string name="none">aucun</string -->
 <!-- UNUSED string name="barrier_add">Cacher les visées suivantes</string -->
     <string name="hide_from">Masquer depuis…</string>
-<string name="barrier_del">Afficher les visées suivantes</string>
+<!-- UNUSED string name="barrier_del">Afficher les visées suivantes</string -->
 <!-- UNUSED string name="hidden_add">Cacher les visées precedentes</string -->
-<string name="hidden_del">Afficher les visées précédentes</string>
+<!-- UNUSED string name="hidden_del">Afficher les visées précédentes</string -->
+    <!-- TODO string name="hidden_show">Show shots beyond station</string -->
 <string name="splays_toggle">Basculer les visées d\'habillage - Splays</string>
     <!-- TODO string name="splays">splays</string -->
 <string name="fixed">fixé</string>
@@ -834,6 +835,8 @@
 
   <string name="pref_raw_data_title">Données brutes</string>
   <string name="pref_raw_data_summary">Afficher les données brutes</string>
+  <!-- TODO string name="pref_calib_shot_download_title">Download remote data</string -->
+  <!-- TODO string name="pref_calib_shot_download_summary">Download remote calib data immediately</string -->
   <!-- UNUSED string name="pref_bootloader_title">Chargeur de démarrage</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Activer le chargeur de démarrage</string -->
   <string name="pref_mkeyboard_title">Clavier</string>

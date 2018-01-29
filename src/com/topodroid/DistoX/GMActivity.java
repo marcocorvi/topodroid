@@ -331,7 +331,9 @@ public class GMActivity extends Activity
 
   /** compute the error stats of the data of this calibration using the 
    * coeffiecients of another calibration
-   * @param name  the other calibration name
+   * @param  calib    calibration (algorithm)
+   * @param  list     calibration data
+   * @param  errors   [output] errors 
    * @return number of errors in the array
    */
   private int computeErrorStats( CalibAlgo calib, List<CalibCBlock> list, float[] errors )

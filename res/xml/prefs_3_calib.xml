@@ -38,6 +38,13 @@
        android:inputType="number"
        android:defaultValue="200" />
 
+     <CheckBoxPreference
+       android:key="DISTOX_CALIB_SHOT_DOWNLOAD"
+       android:summary="@string/pref_calib_shot_download_summary"
+       android:title="@string/pref_calib_shot_download_title"
+       android:defaultValue="true"
+     />
+
      <!-- CheckBoxPreference
        android:key="DISTOX_RAW_DATA"
        android:summary="@string/pref_raw_data_summary"

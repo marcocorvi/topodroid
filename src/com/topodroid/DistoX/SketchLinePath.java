@@ -43,7 +43,6 @@ public class SketchLinePath extends SketchPath
   /**
    * @param path_type    path type (POINT, LINE, AREA)
    * @param th_type      therion type
-   * @param view_type    view type (top, side, 3d)
    * @param s1           first station
    * @param s2           second station
    * @param painter      painter

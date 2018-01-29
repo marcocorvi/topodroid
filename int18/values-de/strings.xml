@@ -217,9 +217,10 @@
     <!-- UNUSED string name="none">kein</string -->
     <!-- UNUSED string name="barrier_add">Nachfolgende Messungen ausblenden</string -->
     <string name="hide_from">Seite ausblenden</string>
-    <string name="barrier_del">Nachfolgende Messungen anzeigen</string>
+    <!-- UNUSED string name="barrier_del">Nachfolgende Messungen anzeigen</string -->
     <!-- NO string name="hidden_add">Vorherige Messungen ausblenden</string -->
-    <string name="hidden_del">Vorherige Messungen anzeigen</string>
+    <!-- UNUSED string name="hidden_del">Vorherige Messungen anzeigen</string -->
+    <!-- TODO string name="hidden_show">Show shots beyond station</string -->
     <string name="splays_toggle">Hilfszüge ein/ausblenden</string>
     <string name="splays">Hilfszüge</string>
     <string name="fixed">fixiert</string>
@@ -864,6 +865,8 @@
 
   <string name="pref_raw_data_title">Rohdaten anzeigen</string>
   <string name="pref_raw_data_summary">Rohdaten anzeigen</string>
+  <!-- TODO string name="pref_calib_shot_download_title">Download remote data</string -->
+  <!-- TODO string name="pref_calib_shot_download_summary">Download remote calib data immediately</string -->
   <!-- UNUSED string name="pref_bootloader_title">Bootloader</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Die Bootloader ermöglichen</string -->
   <string name="pref_mkeyboard_title">Tastatur</string>

@@ -1086,9 +1086,9 @@ public class DeviceHelper extends DataSetObservable
    //   }
    // }
 
-   /** load survey data from a sql file
-    * @param filename  name of the sql file
-    */
+   // /** load survey data from a sql file
+   //  * @param filename  name of the sql file
+   //  */
    // long loadFromFile( String filename, int db_version )
    // {
    //   long sid = -1;

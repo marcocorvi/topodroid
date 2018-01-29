@@ -217,9 +217,10 @@
     <!-- UNUSED string name="none">none</string -->
     <!-- UNUSED string name="barrier_add">Ovira</string -->
     <!-- TODO string name="hide_from">Hide from</string -->
-    <string name="barrier_del">Ovira izbriši</string>
+    <!-- UNUSED string name="barrier_del">Ovira izbriši</string -->
     <!-- UNUSED string name="hidden_add">Skriji mediano linijo</string -->
-    <string name="hidden_del">Pokaži mediano linijo</string>
+    <!-- UNUSED string name="hidden_del">Pokaži mediano linijo</string -->
+    <!-- TODO string name="hidden_show">Show shots beyond station</string -->
     <string name="splays_toggle">Pokaži ali skrij stranske vizure</string>
     <!-- TODO string name="splays">splays</string -->
     <string name="fixed">fiksen</string>
@@ -838,6 +839,8 @@
 
   <string name="pref_raw_data_title">Grobi podatki</string>
   <string name="pref_raw_data_summary">Prikaži grobe podatke</string>
+  <!-- TODO string name="pref_calib_shot_download_title">Download remote data</string -->
+  <!-- TODO string name="pref_calib_shot_download_summary">Download remote calib data immediately</string -->
   <!-- UNUSED string name="pref_bootloader_title">Bootloader</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Bootloader abilitiato</string -->
   <string name="pref_mkeyboard_title">Tipkovnica</string>

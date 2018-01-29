@@ -117,7 +117,7 @@ class Selection
 
   /** like insertItem, but it returns the inserted SelectionPoint
    * @param path     point-line path
-   * @param point    new point on the point-line
+   * @param pt       new point on the point-line
    * @return
    */
   SelectionPoint insertPathPoint( DrawingPointLinePath path, LinePoint pt )

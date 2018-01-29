@@ -20,8 +20,9 @@ The calibration data are displayed with red and blue text-color, alternating bet
 
 <h4>BUTTONS</h4>
 <ul style="margin-top=0">
+<li><u>Toggle</u> the DistoX calibration mode on and off</li>
+<li><u>Bluetooth</u>: reset BT, or control DistoX remotely</li>
 <li><u>Download</u> calibration data from the DistoX</li>
-<li><u>toggle</u> the DistoX calibration mode on and off</li>
 <li><u>Groups</u> divides the calibration data into <a href="page_groups.htm">groups</a> automatically</li>
 <li><a href="page_calib_coeffs.htm">calibration coefficients</a> computation</li>
 <li><a href="page_calib_distrib.htm">angular distribution</a> of the calibration data</li>
@@ -32,6 +33,11 @@ The calibration data are displayed with red and blue text-color, alternating bet
 At the moment only on-demand data download is active for the calibration data. The downloaded data are added to the current calibration. Therefore you can take some calibration measurements, download the data, check if you are satisfied with them, if not take further data and download them, and so on until you are happy with your calibration data. Downloaded data can be "disabled" (by setting the group number to "0" (zero); 
 disabled data are not used in the computation of calibration coefficients), or deleted (usually not shown in the list of data).
 Deleted data are not taken into account in the group assignment policy.<br><p>
+
+<h4>Bluetooth</h4>
+This button resets the TopoDroid bluetooth connection.<br>
+It also lets the user control the DistoX remotely [A]: turn on or off the laser, and take a calibration shot.
+The data is immediately downloaded if the related setting is selected.<br><p>
 
 <h4>Calibration computation</h4>
 The "gear" button starts the computation of the calibration coefficients.<br>

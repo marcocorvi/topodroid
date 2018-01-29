@@ -57,9 +57,8 @@ public class CalibGMDialog extends MyDialog
 
   /**
    * @param context   context
-   * @param calib     calibration activity
-   * @param group     data group
-   * @param data      calibration data (as string)
+   * @param parent    parent GM activity
+   * @param blk       calibration data
    */
   CalibGMDialog( Context context, GMActivity parent, CalibCBlock blk )
   {

@@ -54,7 +54,6 @@ class BezierCurve
   /**  ComputeMaxError: Find max squared distance of digitized points to fitted curve.
       d;		  Array of digitized points	
       first, last;  Indices defining region	
-      bezCurve;	  Fitted Bezier curve		
       u;		  Parameterization of points	
   */
   public float computeMaxError( ArrayList<Point2D> d, int first, int last, float[] u )

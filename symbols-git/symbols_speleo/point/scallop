@@ -1,0 +1,26 @@
+﻿symbol point
+name scallop
+name-cn 波痕
+name-es golpe_gubia
+name-pt marca de fluxo
+name-it scallop
+name-fr coups_de_gouge
+name-de Fließfacette
+name-ru фасетки
+name-fa گوش_ماهی
+name-bg фасетки
+name-ua фасетки
+name-hu hullámkagyló
+th_name scallop
+orientation yes
+color 0x6666ff
+csurvey 6 6 80
+path
+  moveTo 0 6
+  lineTo -3 0 
+  cubicTo -3 -1.5 -1.5 -3 0 -3
+  cubicTo 1.5 -3 3 -1.5 3 0
+  lineTo 0 6
+endpath
+endsymbol
+

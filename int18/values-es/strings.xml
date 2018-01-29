@@ -211,9 +211,10 @@
     <!-- UNUSED string name="none">Nada</string -->
     <!-- UNUSED string name="barrier_add">¿Quiere dividir dibujo de la poligonal principal?</string -->
     <string name="hide_from">Ocultar desde</string>
-    <string name="barrier_del">¿Quiere unir el croquis de la poligonal principal?</string>
+    <!-- UNUSED string name="barrier_del">¿Quiere unir el croquis de la poligonal principal?</string -->
     <!-- UNUSED string name="hidden_add">Oculta dibujo de la poligonal principal</string -->
-    <string name="hidden_del">Mostrar el croquis de la poligonal principal</string>
+    <!-- UNUSED string name="hidden_del">Mostrar el croquis de la poligonal principal</string -->
+    <!-- TODO string name="hidden_show">Show shots beyond station</string -->
     <string name="splays_toggle">Cambiar a tomas laterales</string>
     <string name="splays">Tomas laterales</string>
     <string name="fixed">Fijo</string>
@@ -845,6 +846,8 @@
 
   <string name="pref_raw_data_title">Datos sin procesar</string>
   <string name="pref_raw_data_summary">Mostrar datos sin procesar</string>
+  <!-- TODO string name="pref_calib_shot_download_title">Download remote data</string -->
+  <!-- TODO string name="pref_calib_shot_download_summary">Download remote calib data immediately</string -->
   <!-- UNUSED string name="pref_bootloader_title">Gestor de arranque</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Habilitar gestor de arranque</string -->
   <string name="pref_mkeyboard_title">Teclado</string>

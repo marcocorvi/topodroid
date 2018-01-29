@@ -6,9 +6,9 @@ name-ru нижерасположенная_стена
 name-bg по-ниско_разположена_стена
 th_name wall:underlying
 group wall
-color 0xcc6600 0x99
+color 0xff0000 0xcc
 width 1
 csurvey 5 1 2 2
-dash 10 5 3 5
+dash 10 10
 endsymbol
 

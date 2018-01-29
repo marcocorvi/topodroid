@@ -214,7 +214,7 @@ class CutNPaste
       textview3 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
-            new DeviceX310TakeShot( null, app, 1 ).execute();
+            new DeviceX310TakeShot( (TDSetting.mCalibShotDownload ? lister : null), app, 1 ).execute();
             dismissPopupBT();
           }
         } );

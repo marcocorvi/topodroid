@@ -212,9 +212,10 @@
     <!-- UNUSED string name="none">none</string -->
     <!-- UNUSED string name="barrier_add">Interruzione restituzione?</string -->
     <string name="hide_from">Nascondi da</string>
-    <string name="barrier_del">Continuazione restituzione?</string>
+    <!-- UNUSED string name="barrier_del">Continuazione restituzione?</string -->
     <!-- UNUSED string name="hidden_add">Nascondi la linea mediana</string -->
-    <string name="hidden_del">Mostra la linea mediana</string>
+    <!-- UNUSED string name="hidden_del">Mostra la linea mediana</string -->
+    <!-- TODO string name="hidden_show">Show shots beyond station</string -->
     <string name="splays_toggle">Mostra o Nascondi gli splay</string>
     <string name="splays">splay</string>
     <string name="fixed">fisso</string>
@@ -842,6 +843,8 @@
 
   <string name="pref_raw_data_title">Dati grezzi</string>
   <string name="pref_raw_data_summary">Mostra dati grezzi</string>
+  <!-- TODO string name="pref_calib_shot_download_title">Download remote data</string -->
+  <!-- TODO string name="pref_calib_shot_download_summary">Download remote calib data immediately</string -->
   <!-- UNUSED string name="pref_bootloader_title">Bootloader</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Bootloader abilitiato</string -->
   <string name="pref_mkeyboard_title">Tastiera</string>

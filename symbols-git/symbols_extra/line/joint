@@ -1,0 +1,9 @@
+symbol line
+name joint
+th_name u:joint
+group joint
+color 0xffffff 0x99
+width 1
+csurvey 5 1 2 2
+dash 15 5 3 5
+endsymbol

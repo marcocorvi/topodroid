@@ -213,9 +213,10 @@
     <!-- UNUSED string name="none">none</string -->
     <!-- UNUSED string name="barrier_add">Приховати нитку ходу після цього пікету?</string -->
     <string name="hide_from">Приховати від</string>
-    <string name="barrier_del">Показати нитку ходу після цього пікету?</string>
+    <!-- UNUSED string name="barrier_del">Показати нитку ходу після цього пікету?</string -->
     <!-- UNUSED string name="hidden_add">Приховати нитку ходу до цього пікету</string -->
-    <string name="hidden_del">Показати нитку ходу до цього пікету</string>
+    <!-- UNUSED string name="hidden_del">Показати нитку ходу до цього пікету</string -->
+    <!-- TODO string name="hidden_show">Show shots beyond station</string -->
     <string name="splays_toggle">Показати/приховати бок. заміри</string>
     <!-- TODO string name="splays">splays</string -->
     <string name="fixed">фіксований репер</string>
@@ -838,6 +839,8 @@
 
   <string name="pref_raw_data_title">Сирі дані</string>
   <string name="pref_raw_data_summary">Показати сирі дані</string>
+  <!-- TODO string name="pref_calib_shot_download_title">Download remote data</string -->
+  <!-- TODO string name="pref_calib_shot_download_summary">Download remote calib data immediately</string -->
   <!-- UNUSED string name="pref_bootloader_title">Завантажувач</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Вкл завантажувач</string -->
   <string name="pref_mkeyboard_title">Клавіатура</string>

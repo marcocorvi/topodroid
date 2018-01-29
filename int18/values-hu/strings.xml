@@ -212,9 +212,10 @@
     <!-- UNUSED string name="none">none</string -->
     <!-- UNUSED string name="barrier_add">Következő mérések elrejtése</string -->
     <string name="hide_from">Elrejtés innen</string>
-    <string name="barrier_del">Következő mérések mutatása</string>
+    <!-- UNUSED string name="barrier_del">Következő mérések mutatása</string -->
     <!-- UNUSED string name="hidden_add">Előző mérések elrejtése</string -->
-    <string name="hidden_del">Előző mérések mutatása</string>
+    <!-- UNUSED string name="hidden_del">Előző mérések mutatása</string -->
+    <!-- TODO string name="hidden_show">Show shots beyond station</string -->
     <string name="splays_toggle">Mutassa a fix pontokat </string>
     <string name="splays">segédpontok</string>
     <string name="fixed">csavarral állandósított</string>
@@ -836,6 +837,8 @@
 
   <string name="pref_raw_data_title">Nyers adat</string>
   <string name="pref_raw_data_summary">Mutassa a nyers adatot</string>
+  <!-- TODO string name="pref_calib_shot_download_title">Download remote data</string -->
+  <!-- TODO string name="pref_calib_shot_download_summary">Download remote calib data immediately</string -->
   <!-- UNUSED string name="pref_bootloader_title">Bootloader</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Enable bootloader</string -->
   <string name="pref_mkeyboard_title">Billentyűzet</string>

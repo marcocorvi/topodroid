@@ -212,9 +212,10 @@
     <!-- UNUSED string name="none">nenhum</string -->
     <!-- UNUSED string name="barrier_add">Ocultar visadas longe base referência</string -->
     <string name="hide_from">Ocultar a partir</string>
-    <string name="barrier_del">Mostrar visadas longe base referência</string>
+    <!-- UNUSED string name="barrier_del">Mostrar visadas longe base referência</string -->
     <!-- UNUSED string name="hidden_add">Ocultar visadas até base referência</string -->
-    <string name="hidden_del">Mostrar visadas até base referência</string>
+    <!-- UNUSED string name="hidden_del">Mostrar visadas até base referência</string -->
+    <!-- TODO string name="hidden_show">Show shots beyond station</string -->
     <string name="splays_toggle">Alternar exibição das medidas auxiliares</string>
     <string name="splays">medidas auxiliares</string>
     <string name="fixed">fixa</string>
@@ -837,6 +838,8 @@
 
   <string name="pref_raw_data_title">Dados brutos</string>
   <string name="pref_raw_data_summary">Exibir dados brutos</string>
+  <!-- TODO string name="pref_calib_shot_download_title">Download remote data</string -->
+  <!-- TODO string name="pref_calib_shot_download_summary">Download remote calib data immediately</string -->
   <!-- UNUSED string name="pref_bootloader_title">Bootloader</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Ativar bootloader</string -->
   <string name="pref_mkeyboard_title">Teclado</string>

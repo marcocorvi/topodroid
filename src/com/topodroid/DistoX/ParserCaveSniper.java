@@ -24,6 +24,9 @@ import android.util.Log;
 
 public class ParserCaveSniper extends ImportParser
 {
+  /** CaveSniper parser
+   * @param filename name of the file to parse
+   */
   public ParserCaveSniper( String filename ) throws ParserException
   {
     super( false );  // do not apply_declination
@@ -40,9 +43,7 @@ public class ParserCaveSniper extends ImportParser
   }
 
   /** read input file
-   * @param filename name of the file to parse
-  /** read input file
-   * @param filename name of the file to parse
+   * @param br   buffered reader on the input file
    */
   @Override
   void readFile( BufferedReader br ) throws ParserException
