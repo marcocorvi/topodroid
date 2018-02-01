@@ -216,7 +216,7 @@
     <!-- UNUSED string name="barrier_del">Показать нитку хода после этого пикета</string -->
     <!-- UNUSED string name="hidden_add">Скрыть нитку хода до этого пикета</string -->
     <!-- UNUSED string name="hidden_del">Показать нитку хода до этого пикета</string -->
-    <!-- TODO string name="hidden_show">Show shots beyond station</string -->
+    <string name="hidden_show">Показать нитку хода после этого пикета</string>
     <string name="splays_toggle">Показать/скрыть бок. замеры</string>
     <string name="splays">бок. замеры</string>
     <string name="fixed">фиксированный репер</string>
@@ -840,8 +840,8 @@
 
   <string name="pref_raw_data_title">Сырые данные</string>
   <string name="pref_raw_data_summary">Показать сырые данные</string>
-  <!-- TODO string name="pref_calib_shot_download_title">Download remote data</string -->
-  <!-- TODO string name="pref_calib_shot_download_summary">Download remote calib data immediately</string -->
+  <string name="pref_calib_shot_download_title">Скачать данные калибровки</string>
+  <string name="pref_calib_shot_download_summary">Скачивать калибровочные замеры сразу после измерений</string>
   <!-- UNUSED string name="pref_bootloader_title">Загрузчик</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Вкл Загрузчик</string -->
   <string name="pref_mkeyboard_title">Клавиатура</string>
@@ -866,8 +866,8 @@
   <string name="pref_leg_shots_summary">Минимальное кол-во повторяющихся замеров на отрезке</string>
   <string name="pref_station_prefix_title">Экспортировать префиксы пикетов</string>
   <string name="pref_station_prefix_summary">Экспортировать префиксы пикетов для cSurvey</string>
-  <!-- TODO string name="pref_compass_splays_title">Compass splays</string -->
-  <!-- TODO string name="pref_compass_splays_summary">Export splays in Compass files</string -->
+  <string name="pref_compass_splays_title">Боковые замеры в Compass</string>
+  <string name="pref_compass_splays_summary">Экспортировать боковые замеры в формат Compass</string>
   <string name="pref_trobot_names_title">Номера пикетов TopoRobot</string>
   <string name="pref_trobot_names_summary">Номера пикетов в стиле TopoRobot</string>
   <string name="pref_ortho_lrud_title">Мин. угол бок. замера для ЛПВН</string>
@@ -968,8 +968,8 @@
   <string name="pref_min_shift_message">Чувствительность к сдвигу</string>
   <string name="pref_pointing_title">Радиус указания</string>
   <string name="pref_pointing_message">Радиус указания</string>
-  <!-- TODO string name="pref_dash_splay_title">Splay dash coherence</string -->
-  <!-- TODO string name="pref_dash_splay_message">Splays dashed coherently between plan and profile</string -->
+  <string name="pref_dash_splay_title">Боковые замеры пунктиром ПЛ-РР</string>
+  <string name="pref_dash_splay_message">Боковые замеры пунктиром когерентны на плане и разрезе</string>
   <string name="pref_vert_splay_title">Порог угла бок. замеров пунктиром</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Порог угла бок. замеров показанных пунктиром</string -->
   <string name="pref_vert_splay_message">Порог угла бок. замеров показанных пунктиром в плане</string>
