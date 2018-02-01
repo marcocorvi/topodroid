@@ -2364,4 +2364,11 @@ public class SketchWindow extends ItemDrawer
 
 */
 
+  public void enableBluetoothButton( boolean enable )
+  {
+    // TODO
+    // mButton1[BTN_BLUETOOTH].setBackgroundDrawable( enable ? mBMbluetooth : mBMbluetooth_no );
+    // mButton1[BTN_BLUETOOTH].setEnabled( enable );
+  }
+
 }

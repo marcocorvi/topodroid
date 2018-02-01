@@ -44,7 +44,7 @@ class ItemPickerDialog extends MyDialog
                        // , View.OnLongClickListener
                        // , AdapterView.OnItemClickListener
 {
-  private final static float DIMXP = 1.8f;
+  private final static float DIMXP = 1.6f; // 1.8f;
   private final static float DIMXL = 2.2f;
   private final static float DIMYL = 1.9f;
 
@@ -170,6 +170,7 @@ class ItemPickerDialog extends MyDialog
     for ( int k=0; k<TDSetting.mRecentNr; ++k ) {
       mRecent[k] = new ItemButton( mContext );
       mRecent[k].setOnClickListener( this );
+      // mRecent[k].setOnLongClickListener( this );
       mRecentLayout.addView( mRecent[k], lllp );
     }
     
@@ -279,7 +280,7 @@ class ItemPickerDialog extends MyDialog
           Symbol p = symbols[k];
           if ( p == null ) break;
           if ( p == item.mSymbol ) {
-            mRecent[k].reset( p.getPaint(), p.getPath(), DIMXP, DIMXP );
+            mRecent[k].resetPaintPath( p.getPaint(), p.getPath(), DIMXP, DIMXP );
             break;
           }
         }
@@ -311,7 +312,7 @@ class ItemPickerDialog extends MyDialog
       if ( p == null ) {
         mRecent[k].setVisibility( View.INVISIBLE );
       } else {
-        mRecent[k].reset( p.getPaint(), p.getPath(), sx, sy );
+        mRecent[k].resetPaintPath( p.getPaint(), p.getPath(), sx, sy );
         mRecent[k].setVisibility( View.VISIBLE );
       }
     }
@@ -671,12 +672,14 @@ class ItemPickerDialog extends MyDialog
         break;
     }
 
+    // this select the symbol and closes the dialog
     try {
       ItemButton iv = (ItemButton)view;
       if ( iv != null ) {
         for ( int k=0; k<TDSetting.mRecentNr; ++k ) {
           if ( iv == mRecent[k] ) {
             setRecent( k );
+	    closeDialog();
             return;
           }
         }
@@ -685,6 +688,40 @@ class ItemPickerDialog extends MyDialog
      
     // dismiss();
   }
+  
+  // // This onLongClick moves the long-clicked symbol to the first place, however this is not necessary
+  // public boolean onLongClick( View v )
+  // {
+  //   ItemButton ib = (ItemButton)v;
+  //   if ( ib != null ) {
+  //     for ( int k=0; k<TDSetting.mRecentNr; ++k ) {
+  //       if ( mRecent[k] == ib ) {
+  //         // Log.v("DistoX", "long click view " + k + " " + ItemDrawer.mRecentPoint[k].mThName );
+  //         if ( k > 0 ) {
+  //           if ( mItemType == Symbol.POINT ) {
+  //             Symbol pt = ItemDrawer.mRecentPoint[k];
+  //             for ( ; k > 0; --k ) ItemDrawer.mRecentPoint[k] = ItemDrawer.mRecentPoint[k-1];
+  //             ItemDrawer.mRecentPoint[0] = pt;
+  //           } else if ( mItemType == Symbol.LINE ) {
+  //             Symbol ln = ItemDrawer.mRecentLine[k];
+  //             for ( ; k > 0; --k ) ItemDrawer.mRecentLine[k] = ItemDrawer.mRecentLine[k-1];
+  //             ItemDrawer.mRecentLine[0] = ln;
+  //           } else if ( mItemType == Symbol.AREA ) {
+  //             Symbol ar = ItemDrawer.mRecentArea[k];
+  //             for ( ; k > 0; --k ) ItemDrawer.mRecentArea[k] = ItemDrawer.mRecentArea[k-1];
+  //             ItemDrawer.mRecentArea[0] = ar;
+  //           }
+  //           // setRecentSymbol( sym );
+  //           updateRecentButtons( mItemType );
+  //         }
+  //         break;
+  //       }
+  //     }
+  //   } else {
+  //     TDLog.Error("long click null view");
+  //   }
+  //   return true;
+  // }
 
   // @Override
   // public void onItemClick( AdapterView adapter, View view, int pos, long id )
@@ -695,20 +732,26 @@ class ItemPickerDialog extends MyDialog
 
   private void setRecent( int k )
   {
-    Symbol p = null;
     if ( mItemType == Symbol.POINT ) {
-      p = ItemDrawer.mRecentPoint[k];
+      mSelectedPoint = setRecentSymbol( ItemDrawer.mRecentPoint[k] );
     } else if ( mItemType == Symbol.LINE ) {
-      p = ItemDrawer.mRecentLine[k];
+      mSelectedLine  = setRecentSymbol( ItemDrawer.mRecentLine[k] );
     } else if ( mItemType == Symbol.AREA ) {
-      p = ItemDrawer.mRecentArea[k];
+      mSelectedArea  = setRecentSymbol( ItemDrawer.mRecentArea[k] );
     }
+  }
+
+  private int setRecentSymbol( Symbol p )
+  {
+    int index = -1;
     if ( p != null ) {
-      if ( mAdapter != null ) mAdapter.setSelectedItem( p );
+      if ( mAdapter != null ) {
+        index = mAdapter.setSelectedItem( p ); // selected symbol index
+      }
       setSeekBarProgress();
     }
+    return index;
   } 
-    
 
   public void closeDialog()
   {  

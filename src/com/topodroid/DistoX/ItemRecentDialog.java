@@ -44,6 +44,10 @@ class ItemRecentDialog extends MyDialog
                        // , IItemPicker
                        // , AdapterView.OnItemClickListener
 {
+  private final static float DIMXP = 1.6f; // 1.5f;
+  private final static float DIMXL = 2.2f; // 2.0f
+  private final static float DIMYL = 1.9f; // 1.7f
+
   private int mItemType; // items type
   private int mPointPos;  // item point position
   private int mLinePos;   // item line  position
@@ -195,7 +199,7 @@ class ItemRecentDialog extends MyDialog
     Symbol symbol = ItemDrawer.mRecentPoint[0];
     if ( symbol != null && symbol.isOrientable() ) {
       symbol.setAngle( angle );
-      mRecentP[0].reset( symbol.getPaint(), symbol.getPath(), 1.5f, 1.5f );
+      mRecentP[0].resetPaintPath( symbol.getPaint(), symbol.getPath(), DIMXP, DIMXP );
       mRecentP[0].invalidate();
     }
     // FIXME Most-Recent can orient only points
@@ -207,7 +211,7 @@ class ItemRecentDialog extends MyDialog
     for ( int k=0; k<nrRecent; ++k ) {
       Symbol p = symbols[k];
       if ( p == null ) break;
-      recent[k].reset( p.getPaint(), p.getPath(), sx, sy );
+      recent[k].resetPaintPath( p.getPaint(), p.getPath(), sx, sy );
       recent[k].invalidate();
     }
   }
@@ -215,9 +219,9 @@ class ItemRecentDialog extends MyDialog
   private void updateRecentButtons( )
   {
     // float sx=1.0f, sy=1.0f;
-    setRecentButtons( mRecentP, ItemDrawer.mRecentPoint, 1.5f, 1.5f ); // sx*1.5f, sy*1.5f
-    setRecentButtons( mRecentL, ItemDrawer.mRecentLine, 2.0f, 1.7f ); // sx*2.0f, sy*1.7f
-    setRecentButtons( mRecentA, ItemDrawer.mRecentArea, 2.0f, 1.7f ); // sx*2.0f, sy*1.7f
+    setRecentButtons( mRecentP, ItemDrawer.mRecentPoint, DIMXP, DIMXP );
+    setRecentButtons( mRecentL, ItemDrawer.mRecentLine, DIMXL, DIMYL );
+    setRecentButtons( mRecentA, ItemDrawer.mRecentArea, DIMXL, DIMYL );
     // FIXME Most-Recent can orient only points
     Symbol p = ItemDrawer.mRecentPoint[0];
     mSeekBar.setEnabled( p != null && p.isOrientable() );

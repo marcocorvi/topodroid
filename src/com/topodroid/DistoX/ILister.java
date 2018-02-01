@@ -81,5 +81,10 @@ public interface ILister
    */
   public void setTheTitle();
 
+  /** enable/disable theBluetooth button
+   * @param enable
+   */
+  public void enableBluetoothButton( boolean enable );
+
 }
 

@@ -155,7 +155,7 @@ class CutNPaste
   /** show BT popup under button b
    * @param b button
    */
-  static PopupWindow showPopupBT( final Context context, ILister ilister, final TopoDroidApp app, View b, boolean gm_data )
+  static PopupWindow showPopupBT( final Context context, final ILister ilister, final TopoDroidApp app, View b, boolean gm_data )
   {
     final ListerHandler lister = new ListerHandler( ilister );
     LinearLayout popup_layout  = new LinearLayout( context );
@@ -214,7 +214,8 @@ class CutNPaste
       textview3 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
-            new DeviceX310TakeShot( (TDSetting.mCalibShotDownload ? lister : null), app, 1 ).execute();
+            // ilister.enableBluetoothButton(false);
+            new DeviceX310TakeShot( ilister, (TDSetting.mCalibShotDownload ? lister : null), app, 1 ).execute();
             dismissPopupBT();
           }
         } );
@@ -227,7 +228,8 @@ class CutNPaste
         textview3 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
           new View.OnClickListener( ) {
             public void onClick(View v) {
-              new DeviceX310TakeShot( lister, app, 1 ).execute();
+              // ilister.enableBluetoothButton(false);
+              new DeviceX310TakeShot( ilister, lister, app, 1 ).execute();
               dismissPopupBT();
             }
           } );
@@ -239,7 +241,8 @@ class CutNPaste
         textview4 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
           new View.OnClickListener( ) {
             public void onClick(View v) {
-              new DeviceX310TakeShot( lister, app, TDSetting.mMinNrLegShots ).execute();
+              // ilister.enableBluetoothButton(false);
+              new DeviceX310TakeShot( ilister, lister, app, TDSetting.mMinNrLegShots ).execute();
               dismissPopupBT();
             }
           } );

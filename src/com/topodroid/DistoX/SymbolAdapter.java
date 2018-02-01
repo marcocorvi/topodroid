@@ -93,7 +93,7 @@ class SymbolAdapter extends ArrayAdapter< EnableSymbol >
     holder.mCheckBox.setOnClickListener( b );
     // holder.mCheckBox.setText( b.getName() );
     holder.mTextView.setText( b.getName() );
-    holder.mButton.reset( b.mSymbol.getPaint(), b.mSymbol.getPath(), b.sx, b.sy );
+    holder.mButton.resetPaintPath( b.mSymbol.getPaint(), b.mSymbol.getPath(), b.sx, b.sy );
     convertView.invalidate();
     return convertView;
   }

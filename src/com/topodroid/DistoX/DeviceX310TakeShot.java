@@ -15,13 +15,15 @@ import android.os.AsyncTask;
  
 class DeviceX310TakeShot extends AsyncTask<Integer, Integer, Integer >
 {
+  ILister mILister;
   ListerHandler mLister; // lister that manages downloaded shots (if null shots are not downloaded)
   TopoDroidApp  mApp;
   int mNr;               // number of shots before download
  
-  DeviceX310TakeShot( ListerHandler lister, TopoDroidApp app, int nr )
+  DeviceX310TakeShot( ILister ilister, ListerHandler lister, TopoDroidApp app, int nr )
   {
     super();
+    mILister  = ilister; 
     mLister   = lister; 
     mApp      = app;
     mNr       = nr;
@@ -50,6 +52,12 @@ class DeviceX310TakeShot extends AsyncTask<Integer, Integer, Integer >
   protected void onProgressUpdate(Integer... progress) { }
 
   @Override
+  protected void onPreExecute( )
+  {
+    mILister.enableBluetoothButton(false);
+  }
+
+  @Override
   protected void onPostExecute( Integer result ) 
   {
     if ( mLister != null ) {
@@ -59,5 +67,6 @@ class DeviceX310TakeShot extends AsyncTask<Integer, Integer, Integer >
       mApp.setX310Laser( 2, null ); // 2 = measure
       // try { Thread.sleep( TDSetting.mWaitLaser ); } catch( InterruptedException e ) { }
     }
+    mILister.enableBluetoothButton(true);
   }
 }

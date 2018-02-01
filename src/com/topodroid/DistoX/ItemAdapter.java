@@ -108,8 +108,11 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
     }
   }
 
-  // set selected position from the item symbol
-  void setSelectedItem( Symbol symbol )
+  /** set selected position from the item symbol
+   * @param symbol   selected symbol
+   * @return index of selected symbol ie item.mIndex
+   */
+  int setSelectedItem( Symbol symbol )
   {
     mPos = -1;
     for ( int k=0; k<mItems.size(); ++k ) {
@@ -125,6 +128,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
       mPos = ( mItems.size() > 1 )? 1 : 0;
       mItems.get( mPos ).setChecked( true );
     }
+    return mItems.get( mPos ).mIndex;
   }
 
   // public ItemSymbol get( String name ) 

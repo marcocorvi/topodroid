@@ -40,6 +40,7 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.KeyEvent;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -58,6 +59,7 @@ public class GMActivity extends Activity
                         , ILister
                         , IEnableButtons
                         , OnClickListener
+                        , OnLongClickListener
 {
   private TopoDroidApp mApp;
 
@@ -635,10 +637,7 @@ public class GMActivity extends Activity
       handleMenu( pos );
       return;
     }
-    if ( onMenu ) {
-      closeMenu();
-      return;
-    }
+    if ( closeMenu() ) return;
 
     CharSequence item = ((TextView) view).getText();
     String value = item.toString();
@@ -703,6 +702,10 @@ public class GMActivity extends Activity
     for ( int k=0; k<mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( this, this, izons[k] );
     }
+    if ( TDLevel.overAdvanced && mApp.distoType() == Device.DISTO_X310 ) {
+      mButton1[ BTN_BT ].setOnLongClickListener( this );
+    }
+
     mBMdownload     = MyButton.getButtonBackground( mApp, res, izons[BTN_DOWNLOAD] ); 
     mBMdownload_on  = MyButton.getButtonBackground( mApp, res, izonsno[BTN_DOWNLOAD] );
     mBMbluetooth    = MyButton.getButtonBackground( mApp, res, izons[BTN_BT] );
@@ -800,12 +803,32 @@ public class GMActivity extends Activity
     }
   }
 
+  public void enableBluetoothButton( boolean enable )
+  {
+    mButton1[BTN_BT].setBackgroundDrawable( enable ? mBMbluetooth : mBMbluetooth_no );
+    mButton1[BTN_BT].setEnabled( enable );
+  }
+
+  @Override 
+  public boolean onLongClick( View view )
+  {
+    if ( closeMenu() ) return true;
+    CutNPaste.dismissPopupBT();
+
+    Button b = (Button)view;
+    if ( b == mButton1[ BTN_BT ] ) {
+      // Log.v("DistoX", "BT button long click");
+      // enableBluetoothButton(false);
+      new DeviceX310TakeShot( this, (TDSetting.mCalibShotDownload ? new ListerHandler(this) : null), mApp, 1 ).execute();
+      return true;
+    }
+    return false;
+  }
+
   public void onClick(View view)
   {
-    if ( onMenu ) {
-      closeMenu();
-      return;
-    }
+    if ( closeMenu() ) return;
+    if ( CutNPaste.dismissPopupBT() ) return;
 
     Button b = (Button)view;
 
@@ -1084,12 +1107,16 @@ public class GMActivity extends Activity
     mMenu.invalidate();
   }
 
-  private void closeMenu()
+  private boolean closeMenu()
   {
-    mMenu.setVisibility( View.GONE );
-    // HOVER
-    // mMenuAdapter.resetBgColor();
-    onMenu = false;
+    if ( onMenu ) {
+      mMenu.setVisibility( View.GONE );
+      // HOVER
+      // mMenuAdapter.resetBgColor();
+      onMenu = false;
+      return true;
+    }
+    return false;
   }
 
   private void handleMenu( int pos )

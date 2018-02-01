@@ -1735,6 +1735,12 @@ public class ShotWindow extends Activity
     }
   }
 
+  public void enableBluetoothButton( boolean enable )
+  {
+    mButton1[BTN_BLUETOOTH].setBackgroundDrawable( enable ? mBMbluetooth : mBMbluetooth_no );
+    mButton1[BTN_BLUETOOTH].setEnabled( enable );
+  }
+
   void renumberShotsAfter( DBlock blk )
   {
     // Log.v("DistoX", "renumber shots after " + blk.mLength + " " + blk.mBearing + " " + blk.mClino );

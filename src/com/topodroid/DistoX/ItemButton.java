@@ -35,7 +35,7 @@ public class ItemButton extends Button
 
   public ItemButton( Context context )
   {
-super( context );
+    super( context );
     setDefault();
   }
 
@@ -70,7 +70,7 @@ super( context );
     super(context);
     setBackgroundColor( TDColor.BLACK );
     setPadding( PAD, PAD, PAD, PAD );
-    reset( paint, path, sx, sy );
+    resetPaintPath( paint, path, sx, sy );
   }
 
   public ItemButton(Context context, Paint paint, Path path, float sx, float sy, int pad )
@@ -78,10 +78,10 @@ super( context );
     super(context);
     setBackgroundColor( TDColor.BLACK );
     setPadding(pad, pad, pad, pad );
-    reset( paint, path, sx, sy );
+    resetPaintPath( paint, path, sx, sy );
   }
 
-  public void reset(Paint paint, Path path, float sx, float sy )
+  public void resetPaintPath(Paint paint, Path path, float sx, float sy )
   {
     setMinimumWidth( (int)(2*WW*sx) );
     setMinimumHeight( (int)(2*HH*sy) );

@@ -5057,6 +5057,13 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  public void enableBluetoothButton( boolean enable )
+  {
+    mButton1[BTN_BLUETOOTH].setBackgroundDrawable( enable ? mBMbluetooth : mBMbluetooth_no );
+    mButton1[BTN_BLUETOOTH].setEnabled( enable );
+  }
+
+
 // -------------------------------------------------------------
 // AUTO WALLS
 

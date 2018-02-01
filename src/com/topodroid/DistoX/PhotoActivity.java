@@ -233,4 +233,6 @@ public class PhotoActivity extends Activity
     return false;
   }
 
+  public void enableBluetoothButton( boolean enable ) { } 
+
 }
