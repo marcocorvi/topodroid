@@ -122,7 +122,7 @@ class TDLog
   {
     if ( LOG_DEBUG && msg != null ) {
       mMillis = System.currentTimeMillis() % 600000;
-      if ( mLogStream == 0 ) {
+      if ( mLogStream == 0 || mLog == null ) {
         Log.v( TAG, mMillis + " " + msg );
       } else {
         mLog.format( "%d: %s\n", mMillis, msg );
@@ -135,7 +135,7 @@ class TDLog
   {
     if ( LOG_ERR && msg != null ) {
       mMillis = System.currentTimeMillis() % 600000;
-      if ( mLogStream == 0 ) {
+      if ( mLogStream == 0 || mLog == null ) {
         Log.v( TAG, mMillis + " " + msg );
       } else {
         mLog.format( "%d: %s\n", mMillis, msg );
@@ -148,7 +148,7 @@ class TDLog
   {
     if ( flag && msg != null ) {
       mMillis = System.currentTimeMillis() % 600000;
-      if ( mLogStream == 0 ) {
+      if ( mLogStream == 0 || mLog == null ) {
         Log.v( TAG, mMillis + " " + msg );
       } else {
         mLog.format( "%d: %s\n", mMillis, msg );
@@ -161,7 +161,7 @@ class TDLog
   {
     StackTraceElement[] trace = e.getStackTrace();
     if ( trace == null ) return;
-    if ( mLogStream == 0 ) {
+    if ( mLogStream == 0 || mLog == null ) {
       for ( StackTraceElement st : trace ) Log.v( TAG, st.toString() );
     } else {
       for ( StackTraceElement st : trace ) mLog.format( "%s\n", st.toString() );

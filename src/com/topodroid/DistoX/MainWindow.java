@@ -57,6 +57,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.res.Resources;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 
 import android.bluetooth.BluetoothDevice;
@@ -629,6 +630,11 @@ public class MainWindow extends Activity
     //    [off] onSaveInstanceState
     //    [on]  onResume
     updateDisplay( );
+
+    if ( ! checkPermissions() ) {
+      // TODO
+      finish();
+    }
   }
 
   @Override
@@ -752,4 +758,32 @@ public class MainWindow extends Activity
     return false;
   }
 
+
+  private boolean checkPermissions()
+  {
+    String perms[] = {
+      android.Manifest.permission.BLUETOOTH,
+      android.Manifest.permission.BLUETOOTH_ADMIN,
+      android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+      // android.Manifest.permission.READ_EXTERNAL_STORAGE,
+      android.Manifest.permission.ACCESS_FINE_LOCATION,
+      android.Manifest.permission.CAMERA,
+      android.Manifest.permission.RECORD_AUDIO
+    };
+    int k;
+    for ( k=0; k<3; ++k ) {
+      int res = checkCallingOrSelfPermission( perms[k] );
+      if ( res != PackageManager.PERMISSION_GRANTED ) {
+        Toast.makeText( mActivity, "TopoDroid must have " + perms[k], Toast.LENGTH_LONG ).show();
+	return false;
+      }
+    }
+    for ( ; k<6; ++k ) {
+      int res = checkCallingOrSelfPermission( perms[k] );
+      if ( res != PackageManager.PERMISSION_GRANTED ) {
+        Toast.makeText( mActivity, "TopoDroid may need " + perms[k], Toast.LENGTH_LONG ).show();
+      }
+    }
+    return true;
+  }
 }
