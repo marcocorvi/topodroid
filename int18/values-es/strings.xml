@@ -237,6 +237,7 @@
     <string name="no_db">No hay base de datos</string>
     <string name="no_device_address">Dispositivo no seleccionado</string>
     <string name="no_device_found">No se encuentra dispositivos</string>
+    <!-- TODO string name="no_feature_audio">Audio not supported</string -->
     <string name="no_gms">La calibración no tiene datos.\nPulse el botón Descargar</string>
     <string name="no_geo_station">Error: estación no geolocalizada</string>
     <string name="no_leg_intersection">La línea de la sección no atraviesa ninguna visual</string>
@@ -1252,6 +1253,8 @@
   <!-- UNUSED string name="line_normal">normal</string -->
   <!-- UNUSED string name="line_coarse">gruesa</string -->
 
+    <!-- TODO string name="perms_mandatory">TopoDroid cannot run without these permissions:</string -->
+    <!-- TODO string name="perms_optional">TopoDroid may fail without these permissions:</string -->
     <string name="welcome_title">Bienvenido a TopoDroid %1$s</string>
 
 

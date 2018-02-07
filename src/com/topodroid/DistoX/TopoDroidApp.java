@@ -112,6 +112,7 @@ public class TopoDroidApp extends Application
   // static String mManual;  // manual url
   static Locale mLocale;
   static String mLocaleStr;
+  static int mCheckPerms;
 
   static String mClipboardText = null; // text clipboard
 
@@ -537,79 +538,88 @@ public class TopoDroidApp extends Application
       setDefaultSocketType();
     }
 
-    // TDLog.Profile("TDApp paths");
-    TDPath.setDefaultPaths();
+    mCheckPerms = FeatureChecker.checkPermissions( this );
 
-    // TDLog.Profile("TDApp cwd");
-    mCWD = mPrefs.getString( "DISTOX_CWD", "TopoDroid" );
-    mCBD = mPrefs.getString( "DISTOX_CBD", TDPath.PATH_BASEDIR );
-    TDPath.setPaths( mCWD, mCBD );
+    if ( mCheckPerms >= 0 ) {
+      // TDLog.Profile("TDApp paths");
+      TDPath.setDefaultPaths();
 
-    // TDLog.Profile("TDApp DB");
-    mDataListeners = new DataListenerSet( );
-    // ***** DATABASE MUST COME BEFORE PREFERENCES
-    mData  = new DataHelper( this, mDataListeners );
-    mDData = new DeviceHelper( this, null ); 
+      // TDLog.Profile("TDApp cwd");
+      mCWD = mPrefs.getString( "DISTOX_CWD", "TopoDroid" );
+      mCBD = mPrefs.getString( "DISTOX_CBD", TDPath.PATH_BASEDIR );
+      TDPath.setPaths( mCWD, mCBD );
 
-    mStationName = new StationName();
+      // TDLog.Profile("TDApp DB");
+      mDataListeners = new DataListenerSet( );
+      // ***** DATABASE MUST COME BEFORE PREFERENCES
+      mData  = new DataHelper( this, mDataListeners );
+      mDData = new DeviceHelper( this, null ); 
 
-    // TDLog.Profile("TDApp prefs");
-    // LOADING THE SETTINGS IS RATHER EXPENSIVE !!!
-    TDSetting.loadPrimaryPreferences( this, mPrefs );
+      mStationName = new StationName();
 
-    // TDLog.Profile("TDApp BT");
-    mBTAdapter = BluetoothAdapter.getDefaultAdapter();
-    // if ( mBTAdapter == null ) {
-    //   // Toast.makeText( this, R.string.not_available, Toast.LENGTH_SHORT ).show();
-    //   // finish(); // FIXME
-    //   // return;
-    // }
-    // TDLog.Profile("TDApp comm");
+      // TDLog.Profile("TDApp prefs");
+      // LOADING THE SETTINGS IS RATHER EXPENSIVE !!!
+      TDSetting.loadPrimaryPreferences( this, mPrefs );
 
-    // Log.v("DistoX", "VD TDapp on create");
-    // createComm();
+      // TDLog.Profile("TDApp BT");
+      mBTAdapter = BluetoothAdapter.getDefaultAdapter();
+      // if ( mBTAdapter == null ) {
+      //   // Toast.makeText( this, R.string.not_available, Toast.LENGTH_SHORT ).show();
+      //   // finish(); // FIXME
+      //   // return;
+      // }
+      // TDLog.Profile("TDApp comm");
 
-    mListerSet = new ListerSetHandler();
-    mDataDownloader = new DataDownloader( this, this );
+      // Log.v("DistoX", "VD TDapp on create");
+      // createComm();
 
-    mEnableZip = true;
+      mListerSet = new ListerSetHandler();
+      mDataDownloader = new DataDownloader( this, this );
 
-    // ***** DRAWING TOOLS SYMBOLS
-    // TDLog.Profile("TDApp symbols");
+      mEnableZip = true;
 
-    // if one of the symbol dirs does not exists all of then are restored
-    String version = mDData.getValue( "version" );
-    if ( version == null || ( ! version.equals(VERSION) ) ) {
-      mDData.setValue( "version", VERSION );
-      // FIXME MANUAL installManual( );  // must come before installSymbols
-      // FIXME INSTALL_SYMBOL installSymbols( false ); // this updates symbol_version in the database
-      if ( mDData.getValue( "symbol_version" ) == null ) installSymbols( true );
-      installFirmware( false );
-      // installUserManual( );
-      // updateDefaultPreferences(); // reset a few default preference values - not needed any more
-    }
+      // ***** DRAWING TOOLS SYMBOLS
+      // TDLog.Profile("TDApp symbols");
 
-    // ***** CHECK SPECIAL EXPERIMENTAL FEATURES
-    if ( TDLevel.overTester ) {
-      String value = mDData.getValue("sketches");
-      mSketches =  value != null 
+      // if one of the symbol dirs does not exists all of then are restored
+      String version = mDData.getValue( "version" );
+      if ( version == null || ( ! version.equals(VERSION) ) ) {
+        mDData.setValue( "version", VERSION );
+        // FIXME MANUAL installManual( );  // must come before installSymbols
+        // FIXME INSTALL_SYMBOL installSymbols( false ); // this updates symbol_version in the database
+        if ( mDData.getValue( "symbol_version" ) == null ) installSymbols( true );
+        installFirmware( false );
+        // installUserManual( );
+        // updateDefaultPreferences(); // reset a few default preference values - not needed any more
+      }
+
+      // ***** CHECK SPECIAL EXPERIMENTAL FEATURES
+      if ( TDLevel.overTester ) {
+        String value = mDData.getValue("sketches");
+        mSketches =  value != null 
                 && value.equals("on")
                 && getPackageManager().hasSystemFeature( PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH );
-    }
-
-    if ( TDLevel.overExpert ) {
-      String value = mDData.getValue("cosurvey");
-      mCosurvey =  value != null && value.equals("on");
-      setCoSurvey( false );
-      setBooleanPreference( "DISTOX_COSURVEY", false );
-      if ( mCosurvey ) {
-        mSyncConn = new ConnectionHandler( this );
-        mConnListener = new ArrayList<>();
       }
-    }
 
-    // TDLog.Profile("TDApp device etc.");
-    mDevice = mDData.getDevice( mPrefs.getString( TDSetting.keyDeviceName(), EMPTY ) );
+      if ( TDLevel.overExpert ) {
+        String value = mDData.getValue("cosurvey");
+        mCosurvey =  value != null && value.equals("on");
+        setCoSurvey( false );
+        setBooleanPreference( "DISTOX_COSURVEY", false );
+        if ( mCosurvey ) {
+          mSyncConn = new ConnectionHandler( this );
+          mConnListener = new ArrayList<>();
+        }
+      }
+
+      // TDLog.Profile("TDApp device etc.");
+      mDevice = mDData.getDevice( mPrefs.getString( TDSetting.keyDeviceName(), EMPTY ) );
+
+      if ( mDevice != null ) {
+        createComm();
+      }
+      mHighlightedSplay = null;
+    }
 
     DistoXConnectionError = new String[5];
     DistoXConnectionError[0] = getResources().getString( R.string.distox_err_ok );
@@ -617,10 +627,6 @@ public class TopoDroidApp extends Application
     DistoXConnectionError[2] = getResources().getString( R.string.distox_err_headtail_io );
     DistoXConnectionError[3] = getResources().getString( R.string.distox_err_headtail_eof );
     DistoXConnectionError[4] = getResources().getString( R.string.distox_err_connected );
-
-    if ( mDevice != null ) {
-      createComm();
-    }
 
     DisplayMetrics dm = getResources().getDisplayMetrics();
     float density  = dm.density;
@@ -632,7 +638,6 @@ public class TopoDroidApp extends Application
     // DrawingUtil.CENTER_X = mDisplayWidth  / 2;
     // DrawingUtil.CENTER_Y = mDisplayHeight / 2;
 
-    mHighlightedSplay = null;
 
     // mManual = getResources().getString( R.string.topodroid_man );
   }
@@ -1549,7 +1554,6 @@ public class TopoDroidApp extends Application
 
   static private void symbolsUncompress( InputStream fis, boolean overwrite )
   {
-    // Log.v( "DistoX", "symbol uncompress ...");
     TDPath.symbolsCheckDirs();
     try {
       // byte buffer[] = new byte[36768];
@@ -1559,7 +1563,6 @@ public class TopoDroidApp extends Application
       while ( ( ze = zin.getNextEntry() ) != null ) {
         String filepath = ze.getName();
         if ( filepath.endsWith("README") ) continue;
-        // Log.v(  "DistoX", "ZipEntry " + filepath );
         if ( ! ze.isDirectory() ) {
           if ( filepath.startsWith( "symbol" ) ) {
             int pos  = 1 + filepath.indexOf('/');

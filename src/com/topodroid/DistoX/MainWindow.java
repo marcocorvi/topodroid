@@ -469,13 +469,18 @@ public class MainWindow extends Activity
     mListView = (HorizontalListView) findViewById(R.id.listview);
     resetButtonBar();
 
-    if ( mApp.mWelcomeScreen ) {
-      mApp.setBooleanPreference( "DISTOX_WELCOME_SCREEN", false );
-      mApp.mWelcomeScreen = false;
-      mTopoDroidAbout = new TopoDroidAbout( this );
-      mTopoDroidAbout.setOnCancelListener( this );
-      mTopoDroidAbout.setOnDismissListener( this );
-      mTopoDroidAbout.show();
+    if ( mApp.mCheckPerms != 0 ) {
+      new TopoDroidPerms( this, mApp.mCheckPerms ).show();
+      if ( mApp.mCheckPerms < 0 ) finish();
+    } else {
+      if ( mApp.mWelcomeScreen ) {
+        mApp.setBooleanPreference( "DISTOX_WELCOME_SCREEN", false );
+        mApp.mWelcomeScreen = false;
+        mTopoDroidAbout = new TopoDroidAbout( this );
+        mTopoDroidAbout.setOnCancelListener( this );
+        mTopoDroidAbout.setOnDismissListener( this );
+        mTopoDroidAbout.show();
+      }
     }
 
     // FIXME INSTALL_SYMBOL
@@ -507,21 +512,22 @@ public class MainWindow extends Activity
     //   }
     // };
     // TDLog.Profile("TDActivity thread");
-    Thread loader = new Thread() {
-      @Override
-      public void run() {
-        mApp.startupStep2();
-        Resources res = getResources();
-        BrushManager.reloadPointLibrary( mApp, res ); // reload symbols
-        BrushManager.reloadLineLibrary( res );
-        BrushManager.reloadAreaLibrary( res );
-        BrushManager.doMakePaths( );
-        WorldMagneticModel.loadEGM9615( mApp );
-      }
-    };
-    loader.setPriority( Thread.MIN_PRIORITY );
-    loader.start();
-
+    if ( mApp.mCheckPerms >= 0 ) {
+      Thread loader = new Thread() {
+        @Override
+        public void run() {
+          mApp.startupStep2();
+          Resources res = getResources();
+          BrushManager.reloadPointLibrary( mApp, res ); // reload symbols
+          BrushManager.reloadLineLibrary( res );
+          BrushManager.reloadAreaLibrary( res );
+          BrushManager.doMakePaths( );
+          WorldMagneticModel.loadEGM9615( mApp );
+        }
+      };
+      loader.setPriority( Thread.MIN_PRIORITY );
+      loader.start();
+    }
     setTheTitle();
   }
   
@@ -631,10 +637,6 @@ public class MainWindow extends Activity
     //    [on]  onResume
     updateDisplay( );
 
-    if ( ! checkPermissions() ) {
-      // TODO
-      finish();
-    }
   }
 
   @Override
@@ -759,31 +761,4 @@ public class MainWindow extends Activity
   }
 
 
-  private boolean checkPermissions()
-  {
-    String perms[] = {
-      android.Manifest.permission.BLUETOOTH,
-      android.Manifest.permission.BLUETOOTH_ADMIN,
-      android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-      // android.Manifest.permission.READ_EXTERNAL_STORAGE,
-      android.Manifest.permission.ACCESS_FINE_LOCATION,
-      android.Manifest.permission.CAMERA,
-      android.Manifest.permission.RECORD_AUDIO
-    };
-    int k;
-    for ( k=0; k<3; ++k ) {
-      int res = checkCallingOrSelfPermission( perms[k] );
-      if ( res != PackageManager.PERMISSION_GRANTED ) {
-        Toast.makeText( mActivity, "TopoDroid must have " + perms[k], Toast.LENGTH_LONG ).show();
-	return false;
-      }
-    }
-    for ( ; k<6; ++k ) {
-      int res = checkCallingOrSelfPermission( perms[k] );
-      if ( res != PackageManager.PERMISSION_GRANTED ) {
-        Toast.makeText( mActivity, "TopoDroid may need " + perms[k], Toast.LENGTH_LONG ).show();
-      }
-    }
-    return true;
-  }
 }

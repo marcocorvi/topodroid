@@ -52,17 +52,59 @@ class FeatureChecker
   //   }
   // }
 
+  /** check whether the running app has the needed permissions
+   * @return 0 ok
+   *         -1 missing some necessary permission
+   *         >0 missing some complementary permssion (flag):
+   *            1 FILE_LOCATION
+   *            2 CAMERA
+   *            4 AUDIO
+   */
+  static int checkPermissions( Context context )
+  {
+    String perms[] = {
+      android.Manifest.permission.BLUETOOTH,
+      android.Manifest.permission.BLUETOOTH_ADMIN,
+      android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+      // android.Manifest.permission.READ_EXTERNAL_STORAGE,
+      android.Manifest.permission.ACCESS_FINE_LOCATION,
+      android.Manifest.permission.CAMERA,
+      android.Manifest.permission.RECORD_AUDIO
+    };
+    int k;
+    for ( k=0; k<3; ++k ) {
+      int res = context.checkCallingOrSelfPermission( perms[k] );
+      if ( res != PackageManager.PERMISSION_GRANTED ) {
+        // Toast.makeText( mActivity, "TopoDroid must have " + perms[k], Toast.LENGTH_LONG ).show();
+	return -1;
+      }
+    }
+    int ret = 0;
+    int flag = 1;
+    for ( ; k<6; ++k ) {
+      int res = context.checkCallingOrSelfPermission( perms[k] );
+      if ( res != PackageManager.PERMISSION_GRANTED ) {
+        // Toast.makeText( mActivity, "TopoDroid may need " + perms[k], Toast.LENGTH_LONG ).show();
+	ret += flag;
+      }
+      flag *= 2;
+    }
+    return ret;
+  }
+
   static boolean checkLocation( Context context )
   {
     PackageManager pm = context.getPackageManager();
-    return pm.hasSystemFeature(PackageManager.FEATURE_LOCATION)
+    return ( context.checkCallingOrSelfPermission( android.Manifest.permission.ACCESS_FINE_LOCATION ) == PackageManager.PERMISSION_GRANTED )
+        && pm.hasSystemFeature(PackageManager.FEATURE_LOCATION)
         && pm.hasSystemFeature(PackageManager.FEATURE_LOCATION_GPS);
   }
 
   static boolean checkCamera( Context context )
   {
     PackageManager pm = context.getPackageManager();
-    return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA)
+    return ( context.checkCallingOrSelfPermission( android.Manifest.permission.CAMERA ) == PackageManager.PERMISSION_GRANTED )
+        && pm.hasSystemFeature(PackageManager.FEATURE_CAMERA)
         && pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_AUTOFOCUS);
   }
 
@@ -73,11 +115,13 @@ class FeatureChecker
 
   static boolean checkMicrophone( Context context )
   {
-    return context.getPackageManager().hasSystemFeature( PackageManager.FEATURE_MICROPHONE );
+    return ( context.checkCallingOrSelfPermission( android.Manifest.permission.RECORD_AUDIO ) == PackageManager.PERMISSION_GRANTED )
+        && context.getPackageManager().hasSystemFeature( PackageManager.FEATURE_MICROPHONE );
   }
 
   static boolean checkBluetooth( Context context )
   {
-    return context.getPackageManager().hasSystemFeature( PackageManager.FEATURE_BLUETOOTH );
+    return ( context.checkCallingOrSelfPermission( android.Manifest.permission.BLUETOOTH ) == PackageManager.PERMISSION_GRANTED )
+        && context.getPackageManager().hasSystemFeature( PackageManager.FEATURE_BLUETOOTH );
   }
 }

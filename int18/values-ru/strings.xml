@@ -239,6 +239,7 @@
     <string name="no_db">Отсутствует база данных</string>
     <string name="no_device_address">Прибор не выбран</string>
     <string name="no_device_found">Прибор не обнаружен</string>
+    <!-- TODO string name="no_feature_audio">Audio not supported</string -->
     <string name="no_gms">Отсутствуют данные для калибровки.\nИспользуйте кнопку Скачать</string>
     <string name="no_geo_station">Ошибка: отсутствует пикет с координатами</string>
     <string name="no_leg_intersection">Разрез не пересекает пикет</string>
@@ -1253,6 +1254,8 @@
   <!-- UNUSED string name="alt_ortho">ортометрическая</string -->
   <!-- UNUSED string name="splay_extend">вычислять развертку сплеев</string -->
 
+    <!-- TODO string name="perms_mandatory">TopoDroid cannot run without these permissions:</string -->
+    <!-- TODO string name="perms_optional">TopoDroid may fail without these permissions:</string -->
     <string name="welcome_title">TopoDroid %1$s</string>
 
     <string name="welcome_text">

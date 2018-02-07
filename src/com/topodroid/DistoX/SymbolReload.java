@@ -69,16 +69,16 @@ public class SymbolReload extends MyDialog
     // TDLog.Log( TDLog.LOG_SHOT, "Shot Dialog::onCreate" );
     initLayout( R.layout.symbol_reload, R.string.symbol_reload );
 
-    TextView tv = (TextView) findViewById( R.id.symbol_version );
+    TextView tv = (TextView) findViewById( R.id.text_version );
 
-    mCBspeleo = (CheckBox) findViewById( R.id.symbol_speleo );
-    mCBextra  = (CheckBox) findViewById( R.id.symbol_extra  );
-    mCBmine   = (CheckBox) findViewById( R.id.symbol_mine   );
-    mCBgeo    = (CheckBox) findViewById( R.id.symbol_geo    );
-    mCBarcheo = (CheckBox) findViewById( R.id.symbol_archeo );
-    mCBpaleo  = (CheckBox) findViewById( R.id.symbol_paleo  );
-    mCBbio    = (CheckBox) findViewById( R.id.symbol_bio    );
-    mCBkarst  = (CheckBox) findViewById( R.id.symbol_karst  );
+    mCBspeleo = (CheckBox) findViewById( R.id.ckb_speleo );
+    mCBextra  = (CheckBox) findViewById( R.id.ckb_extra  );
+    mCBmine   = (CheckBox) findViewById( R.id.ckb_mine   );
+    mCBgeo    = (CheckBox) findViewById( R.id.ckb_geo    );
+    mCBarcheo = (CheckBox) findViewById( R.id.ckb_archeo );
+    mCBpaleo  = (CheckBox) findViewById( R.id.ckb_paleo  );
+    mCBbio    = (CheckBox) findViewById( R.id.ckb_bio    );
+    mCBkarst  = (CheckBox) findViewById( R.id.ckb_karst  );
 
     mBtnCancel  = (Button) findViewById( R.id.button_cancel );
     mBtnInstall = (Button) findViewById( R.id.button_add );

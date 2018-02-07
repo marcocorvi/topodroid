@@ -128,9 +128,13 @@ class SymbolPointLibrary extends SymbolLibrary
     if ( dir.exists() ) {
       int systemNr = mSymbols.size();
       File[] files = dir.listFiles();
-      if ( files == null ) return;
+      if ( files == null ) {
+         TDLog.Error("null symbol-file list" );
+	 return;
+      }
       for ( File file : files ) { // there is a null-pointer exception here, but files cannot be null !!!
         String fname = file.getName();
+
         if ( fname.equals("photo") && ! FeatureChecker.checkCamera( ctx ) ) continue;
         if ( fname.equals("audio") && ! FeatureChecker.checkMicrophone( ctx ) ) continue;
 
@@ -157,6 +161,7 @@ class SymbolPointLibrary extends SymbolLibrary
       }
       sortSymbolByName( systemNr );
     } else {
+      TDLog.Error( "No symbol directory" );
       dir.mkdirs( );
     }
   }

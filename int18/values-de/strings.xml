@@ -243,6 +243,7 @@
     <string name="no_db">Keine Datenbank</string>
     <string name="no_device_address">Kein Gerät gewählt</string>
     <string name="no_device_found">Kein Gerät gefunden</string>
+    <!-- TODO string name="no_feature_audio">Audio not supported</string -->
     <string name="no_gms">Kalibrierung mit keinen Daten</string>
     <string name="no_geo_station">Fehler: keine geolokalisierte Station</string>
     <string name="no_leg_intersection">Schnittlinie kreuzt keine Vermessung</string>
@@ -1280,6 +1281,8 @@
   <!-- UNUSED string name="splay_extend">estimate splay extend</string -->
 
 <!-- WELCOME MESSAGE: IT WOULD BE NICE TO HAVE THIS TRANSLATED -->
+    <!-- TODO string name="perms_mandatory">TopoDroid cannot run without these permissions:</string -->
+    <!-- TODO string name="perms_optional">TopoDroid may fail without these permissions:</string -->
     <string name="welcome_title">Willkommen in TopoDroid %1$s</string>
     <string name="welcome_text">
 \nTopoDroid is eine Open-Source Android Applikation zur Vermessung von Höhlen m mit dem DistoX.

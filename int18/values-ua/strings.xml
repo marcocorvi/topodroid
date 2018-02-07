@@ -239,6 +239,7 @@
     <string name="no_db">Відсутня база даних</string>
     <string name="no_device_address">Прилад не вибраний</string>
     <string name="no_device_found">Прилад не виявлено</string>
+    <!-- TODO string name="no_feature_audio">Audio not supported</string -->
     <string name="no_gms">Відсутні дані для калібрування.\Використовуйте кнопку Скачати</string>
     <string name="no_geo_station">Помилка: отсутствует пікет с координатами</string>
     <string name="no_leg_intersection">Розріз не перетинає пікет</string>
@@ -1245,6 +1246,8 @@
   <!-- UNUSED string name="line_normal">нормальний</string -->
   <!-- UNUSED string name="line_coarse">грубий</string -->
 
+    <!-- TODO string name="perms_mandatory">TopoDroid cannot run without these permissions:</string -->
+    <!-- TODO string name="perms_optional">TopoDroid may fail without these permissions:</string -->
     <string name="welcome_title">TopoDroid %1$s</string>
 
     <string name="welcome_text">

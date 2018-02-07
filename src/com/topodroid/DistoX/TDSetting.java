@@ -243,7 +243,7 @@ class TDSetting
   // static boolean mXTherionAreas = false;
   static boolean mAutoStations  = true;  // whether to add stations automatically to scrap therion files
   static boolean mTherionSplays = false; // whether to add splay segments to auto stations
-  static boolean mCompassSplays = false; // whether to add splays to Compass export
+  static boolean mCompassSplays = true;  // whether to add splays to Compass export
 
   static float mBitmapScale = 1.5f;
   static float mDxfScale = 1.0f;
@@ -844,7 +844,7 @@ class TDSetting
     mUnitGrid       = tryFloat(  prefs, key[k++], "1" );      // DISTOX_UNIT_GRID
     // mXTherionAreas  = prefs.getBoolean( key[k++], false );    // DISTOX_XTHERION_AREAS
     mTherionSplays  = prefs.getBoolean( key[k++], false );    // DISTOX_THERION_SPLAYS
-    mCompassSplays  = prefs.getBoolean( key[k++], false );    // DISTOX_COMPASS_SPLAYS
+    mCompassSplays  = prefs.getBoolean( key[k++], true );     // DISTOX_COMPASS_SPLAYS
 
     mRecentNr   = tryInt( prefs, key[k++], "4" );               // DISTOX_RECENT_NR choice: 3, 4, 5, 6
 
@@ -1223,7 +1223,7 @@ class TDSetting
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_THERION_SPLAYS
       mTherionSplays  = prefs.getBoolean( k, false );   
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_COMPASS_SPLAYS
-      mCompassSplays  = prefs.getBoolean( k, false );   
+      mCompassSplays  = prefs.getBoolean( k, true );   
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_RECENT_NR
       mRecentNr = tryInt( prefs, k, "4" );
 

@@ -239,6 +239,7 @@
     <string name="no_db">Липсва база данни</string>
     <string name="no_device_address">Липсва избрано устройство</string>
     <string name="no_device_found">Не е намерено устройство</string>
+    <!-- TODO string name="no_feature_audio">Audio not supported</string -->
     <string name="no_gms">Калибрацията на съдържа данни.\nИзползвайте бутона за изтегляне на данни</string>
     <string name="no_geo_station">Грешка: няма георефериран репер</string>
     <string name="no_leg_intersection">Линията на сечението не пресича нито една отсечка</string>
@@ -1254,6 +1255,8 @@
   <!-- UNUSED string name="alt_ortho">ортометрична</string -->
   <!-- UNUSED string name="splay_extend">Разгъване на странични отсечки</string -->
 
+    <!-- TODO string name="perms_mandatory">TopoDroid cannot run without these permissions:</string -->
+    <!-- TODO string name="perms_optional">TopoDroid may fail without these permissions:</string -->
     <string name="welcome_title">Добре дошли в TopoDroid %1$s</string>
 
     <string name="welcome_text">

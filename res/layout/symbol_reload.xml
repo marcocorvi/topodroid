@@ -5,7 +5,7 @@
   android:layout_height="fill_parent"
   >
       
-  <TextView android:id="@+id/symbol_version"
+  <TextView android:id="@+id/text_version"
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" 
     android:layout_marginRight="@dimen/marginh"
@@ -13,82 +13,94 @@
     android:layout_marginTop="@dimen/marginv"
   />
 
-  <CheckBox android:id="@+id/symbol_speleo"
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:layout_marginRight="@dimen/marginh"
-    android:layout_marginLeft="@dimen/marginh"
-    android:layout_marginTop="@dimen/marginv"
-    android:text="@string/symbol_speleo"
-  />
+  <ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    >
+<LinearLayout 
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  >
+    <CheckBox android:id="@+id/ckb_speleo"
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content" 
+      android:layout_marginRight="@dimen/marginh"
+      android:layout_marginLeft="@dimen/marginh"
+      android:layout_marginTop="@dimen/marginv"
+      android:text="@string/symbol_speleo"
+    />
 
-  <CheckBox android:id="@+id/symbol_extra"
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:layout_marginRight="@dimen/marginh"
-    android:layout_marginLeft="@dimen/marginh"
-    android:layout_marginTop="@dimen/marginv"
-    android:text="@string/symbol_extra"
-  />
-          	
-  <CheckBox android:id="@+id/symbol_mine"
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:layout_marginRight="@dimen/marginh"
-    android:layout_marginLeft="@dimen/marginh"
-    android:layout_marginTop="@dimen/marginv"
-    android:text="@string/symbol_mine"
-  />
-          	
-  <CheckBox android:id="@+id/symbol_geo"
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:layout_marginRight="@dimen/marginh"
-    android:layout_marginLeft="@dimen/marginh"
-    android:layout_marginTop="@dimen/marginv"
-    android:text="@string/symbol_geo"
-  />
-          	
-  <CheckBox android:id="@+id/symbol_archeo"
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:layout_marginRight="@dimen/marginh"
-    android:layout_marginLeft="@dimen/marginh"
-    android:layout_marginTop="@dimen/marginv"
-    android:text="@string/symbol_archeo"
-  />
-          	
-  <CheckBox android:id="@+id/symbol_paleo"
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:layout_marginRight="@dimen/marginh"
-    android:layout_marginLeft="@dimen/marginh"
-    android:layout_marginTop="@dimen/marginv"
-    android:text="@string/symbol_paleo"
-  />
+    <CheckBox android:id="@+id/ckb_extra"
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content" 
+      android:layout_marginRight="@dimen/marginh"
+      android:layout_marginLeft="@dimen/marginh"
+      android:layout_marginTop="@dimen/marginv"
+      android:text="@string/symbol_extra"
+    />
+            	
+    <CheckBox android:id="@+id/ckb_mine"
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content" 
+      android:layout_marginRight="@dimen/marginh"
+      android:layout_marginLeft="@dimen/marginh"
+      android:layout_marginTop="@dimen/marginv"
+      android:text="@string/symbol_mine"
+    />
+            	
+    <CheckBox android:id="@+id/ckb_geo"
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content" 
+      android:layout_marginRight="@dimen/marginh"
+      android:layout_marginLeft="@dimen/marginh"
+      android:layout_marginTop="@dimen/marginv"
+      android:text="@string/symbol_geo"
+    />
+            	
+    <CheckBox android:id="@+id/ckb_archeo"
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content" 
+      android:layout_marginRight="@dimen/marginh"
+      android:layout_marginLeft="@dimen/marginh"
+      android:layout_marginTop="@dimen/marginv"
+      android:text="@string/symbol_archeo"
+    />
+            	
+    <CheckBox android:id="@+id/ckb_paleo"
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content" 
+      android:layout_marginRight="@dimen/marginh"
+      android:layout_marginLeft="@dimen/marginh"
+      android:layout_marginTop="@dimen/marginv"
+      android:text="@string/symbol_paleo"
+    />
 
-  <CheckBox android:id="@+id/symbol_bio"
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:layout_marginRight="@dimen/marginh"
-    android:layout_marginLeft="@dimen/marginh"
-    android:layout_marginTop="@dimen/marginv"
-    android:text="@string/symbol_bio"
-  />
+    <CheckBox android:id="@+id/ckb_bio"
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content" 
+      android:layout_marginRight="@dimen/marginh"
+      android:layout_marginLeft="@dimen/marginh"
+      android:layout_marginTop="@dimen/marginv"
+      android:text="@string/symbol_bio"
+    />
 
-  <CheckBox android:id="@+id/symbol_karst"
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:layout_marginRight="@dimen/marginh"
-    android:layout_marginLeft="@dimen/marginh"
-    android:layout_marginTop="@dimen/marginv"
-    android:text="@string/symbol_karst"
-  />
+    <CheckBox android:id="@+id/ckb_karst"
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content" 
+      android:layout_marginRight="@dimen/marginh"
+      android:layout_marginLeft="@dimen/marginh"
+      android:layout_marginTop="@dimen/marginv"
+      android:text="@string/symbol_karst"
+    />
+  </LinearLayout>
+  </ScrollView>
           	
   <LinearLayout 
     android:orientation="horizontal"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/marginvbig"
     >
       <Button android:id="@+id/button_add"

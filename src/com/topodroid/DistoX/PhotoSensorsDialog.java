@@ -39,7 +39,7 @@ public class PhotoSensorsDialog extends MyDialog
   private ShotWindow mParent;
   private DBlock mBlk;
 
-  private boolean hasAudio = false;
+  private boolean audioCheck = false;
 
   private TextView mTVstations;
   private TextView mTVdata;
@@ -94,7 +94,7 @@ public class PhotoSensorsDialog extends MyDialog
 
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
 
-    hasAudio = FeatureChecker.checkMicrophone( mContext );
+    audioCheck = FeatureChecker.checkMicrophone( mContext );
 
     LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
     layout4.setMinimumHeight( size + 20 );
@@ -116,7 +116,7 @@ public class PhotoSensorsDialog extends MyDialog
     int nr_buttons = 5; // ( mBlk.type() == DBlock.BLOCK_MAIN_LEG )? 7 : 6;
     // mButtonPlot   = new MyCheckBox( mContext, size, R.drawable.iz_plot, R.drawable.iz_plot ); 
     mButtonPhoto  = new MyCheckBox( mContext, size, R.drawable.iz_camera, R.drawable.iz_camera ); 
-    if ( hasAudio ) {
+    if ( audioCheck ) {
       mButtonAudio = new MyCheckBox( mContext, size, R.drawable.iz_audio, R.drawable.iz_audio ); 
       mButtonAudio.setOnClickListener( this );
     } else {
@@ -134,7 +134,7 @@ public class PhotoSensorsDialog extends MyDialog
     mButton = new Button[nr_buttons];
     int pos = 0;
     mButton[pos++] = mButtonPhoto;
-    if ( hasAudio ) mButton[pos++] = mButtonAudio;
+    if ( audioCheck ) mButton[pos++] = mButtonAudio;
     mButton[pos++] = mButtonSensor;
     mButton[pos++] = mButtonShot;
     if ( mButtonSurvey != null ) mButton[pos++] = mButtonSurvey;
@@ -252,7 +252,7 @@ public class PhotoSensorsDialog extends MyDialog
     } else if ( b == mButtonPhoto ) {       // PHOTO
       mParent.askPhotoComment( );
       dismiss();
-    } else if ( hasAudio && b == mButtonAudio ) {       // AUDIO
+    } else if ( audioCheck && b == mButtonAudio ) {       // AUDIO
       mParent.startAudio( mBlk );
       dismiss();
     } else if ( b == mButtonSensor ) { // SENSOIR

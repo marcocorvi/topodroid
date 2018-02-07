@@ -238,6 +238,7 @@
 <string name="no_db">Pas de base de données</string>
 <string name="no_device_address">Adresse de périphérique non sélectionnée</string>
 <string name="no_device_found">Pas de périphérique trouvé</string>
+    <!-- TODO string name="no_feature_audio">Audio not supported</string -->
 <string name="no_gms">L\'étalonnage ne contient pas de données.\nUtiliser le bouton Télécharger</string>
 <string name="no_geo_station">Échec : pas de station géolocalisée</string>
 <string name="no_leg_intersection">La ligne de section ne coupe aucune ligne de cheminement</string>
@@ -1251,6 +1252,8 @@
   <!-- UNUSED string name="alt_ortho">orthometrique</string -->
   <!-- UNUSED string name="splay_extend">estimer extension visée laterales</string -->
 
+    <!-- TODO string name="perms_mandatory">TopoDroid cannot run without these permissions:</string -->
+    <!-- TODO string name="perms_optional">TopoDroid may fail without these permissions:</string -->
     <string name="welcome_title">Bienvenue dans TopoDroid %1$s</string>
 
     <string name="welcome_text">

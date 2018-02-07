@@ -243,6 +243,7 @@
     <string name="no_db">Ni baze podatkov</string>
     <string name="no_device_address">Aparat ni izbran</string>
     <string name="no_device_found">Aparat ni najden</string>
+    <!-- TODO string name="no_feature_audio">Audio not supported</string -->
     <string name="no_gms">Kalibracija brez datuma</string>
     <string name="no_geo_station">Napaka: nobena merilna točka ni geolokalizirana </string>
     <string name="no_leg_intersection">Presek ne seka vizure</string>
@@ -1245,6 +1246,8 @@
   <!-- UNUSED string name="line_normal">normale</string -->
   <!-- UNUSED string name="line_coarse">grossolana</string -->
 
+    <!-- TODO string name="perms_mandatory">TopoDroid cannot run without these permissions:</string -->
+    <!-- TODO string name="perms_optional">TopoDroid may fail without these permissions:</string -->
     <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">
 \nTopoDroid je app Android odprtega izvora per fare za idelavo jamskih načrtov z DistoX

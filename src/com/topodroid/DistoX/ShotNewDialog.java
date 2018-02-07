@@ -83,7 +83,7 @@ public class ShotNewDialog extends MyDialog
   private byte[] mJpegData; // camera jpeg data
 
   private static boolean mLRUDatTo = false;
-  private boolean hasPhoto = false;
+  private boolean cameraCheck = false;
   private float mBearing;
   private float mClino;
   private int mOrientation;
@@ -101,7 +101,7 @@ public class ShotNewDialog extends MyDialog
     mAt      = at;
     mTimer   = null;
     mJpegData = null;
-    hasPhoto = FeatureChecker.checkCamera( app );
+    cameraCheck = FeatureChecker.checkCamera( mApp );
   }
 
 
@@ -237,8 +237,7 @@ public class ShotNewDialog extends MyDialog
     mBtnSensor.setLayoutParams( params );
     mBtnSensor.setOnClickListener( this );
 
-    if ( TDLevel.overAdvanced && hasPhoto ) {
-      
+    if ( cameraCheck && TDLevel.overAdvanced ) {
       mBtnCamera = new MyCheckBox( mContext, size, R.drawable.iz_camera, R.drawable.iz_camera ); 
       layout4.addView( mBtnCamera );
       params = (LinearLayout.LayoutParams) mBtnCamera.getLayoutParams();
@@ -492,7 +491,7 @@ public class ShotNewDialog extends MyDialog
     } else if ( b == mBtnSensor ) {
       mTimer = new TimerTask( mContext, this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
       mTimer.execute();
-    } else if ( hasPhoto && b == mBtnCamera && TDLevel.overAdvanced ) {
+    } else if ( b == mBtnCamera && cameraCheck && TDLevel.overAdvanced ) {
       new QCamCompass( mContext, this, /* null, -1L, */ null, true, true).show();
                        // null drawer, -1 pid // DO NOT USE THIS
                        // null inserter, with_box, with_delay

@@ -238,6 +238,7 @@
     <string name="no_db">Nincs adatbázis</string>
     <string name="no_device_address">Nincs kiválasztott eszköz</string>
     <string name="no_device_found">Nem talált eszközt</string>
+    <!-- TODO string name="no_feature_audio">Audio not supported</string -->
     <string name="no_gms">Nincsenek kalibrációs adatok.\nTöltsd le az adatokat </string>
     <string name="no_geo_station">Hiba: nincs geolokalizált mérésipont</string>
     <string name="no_leg_intersection">A szelvény nem keresztez poligont</string>
@@ -1250,6 +1251,8 @@
   <!-- UNUSED string name="alt_ortho">orthometric</string -->
   <!-- UNUSED string name="splay_extend">estimate splay extend</string -->
 
+    <!-- TODO string name="perms_mandatory">TopoDroid cannot run without these permissions:</string -->
+    <!-- TODO string name="perms_optional">TopoDroid may fail without these permissions:</string -->
     <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">
 \nTopoDroid egy Nyílt forráskódú Android alkalmazás DistoX-el történő barlangfelmérésre.

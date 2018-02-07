@@ -237,6 +237,7 @@
     <string name="no_db">无数据库</string>
     <string name="no_device_address">设备未指定</string>
     <string name="no_device_found">未发现设备</string>
+    <!-- TODO string name="no_feature_audio">Audio not supported</string -->
     <string name="no_gms">校准无数据.\n点击下载按钮</string>
     <string name="no_geo_station">错误: 无地理定位点</string>
     <string name="no_leg_intersection">断面线与主线无交叉</string>
@@ -1254,6 +1255,8 @@
   <!-- UNUSED string name="alt_ortho">垂直高度</string -->
   <!-- UNUSED string name="splay_extend">估算侧线延展</string -->
 
+    <!-- TODO string name="perms_mandatory">TopoDroid cannot run without these permissions:</string -->
+    <!-- TODO string name="perms_optional">TopoDroid may fail without these permissions:</string -->
     <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">
 \nTopoDroid是一个专门配合DistoX使用的开源的免费的洞穴测量软件.

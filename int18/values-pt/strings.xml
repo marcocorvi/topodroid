@@ -238,6 +238,7 @@
     <string name="no_db">Nenhum banco de dados</string>
     <string name="no_device_address">Dispositivo não selecionado</string>
     <string name="no_device_found">Nenhum dispositivo encontrado</string>
+    <!-- TODO string name="no_feature_audio">Audio not supported</string -->
     <string name="no_gms">Calibração sem dados.\nUse o botão de Download</string>
     <string name="no_geo_station">Falha: nenhuma base geolocalizada</string>
     <string name="no_leg_intersection">Linha de corte não cruza nenhuma linha de visada</string>
@@ -1251,6 +1252,8 @@
   <!-- UNUSED string name="alt_ortho">Ortométrico</string -->
   <!-- UNUSED string name="splay_extend">Estimar extensão visada auxiliar</string -->
 
+    <!-- TODO string name="perms_mandatory">TopoDroid cannot run without these permissions:</string -->
+    <!-- TODO string name="perms_optional">TopoDroid may fail without these permissions:</string -->
     <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">
 \nTopodroid é um aplicativo Android Open Source para mapeamento de cavernas com DistoX.

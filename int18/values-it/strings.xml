@@ -238,6 +238,7 @@
     <string name="no_db">Nessun database</string>
     <string name="no_device_address">Dispositivo non selezionato</string>
     <string name="no_device_found">Dispositivo non trovato</string>
+    <!-- TODO string name="no_feature_audio">Audio not supported</string -->
     <string name="no_gms">Calibrazione senza data.</string>
     <string name="no_geo_station">Errore: nessun caposaldo geolocalizzato</string>
     <string name="no_leg_intersection">La linea di sezione non interseca alcuna battuta</string>
@@ -1258,6 +1259,8 @@
   <!-- UNUSED string name="splay_extend">estimate splay extend</string -->
 
 
+    <string name="perms_mandatory">I seguenti permessi sono necessari:</string>
+    <string name="perms_optional">Senza questi permessi alcune funzioni sono disattivate:</string>
     <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">
 \nTopoDroid è una app Android open-source per fare rilievi di grotta con il DistoX

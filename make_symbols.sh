@@ -11,6 +11,7 @@ function makezip {
     cp $i $base/$1/$j
   done
   cd $base
+  rm -f res/raw/$2.zip
   zip res/raw/$2.zip ./$1/point/* ./$1/line/* ./$1/area/*
   rm -rf $base/$1
 }

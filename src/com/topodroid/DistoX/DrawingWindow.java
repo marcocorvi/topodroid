@@ -269,6 +269,7 @@ public class DrawingWindow extends ItemDrawer
   private DataDownloader mDataDownloader;
   private DrawingUtil mDrawingUtil;
   private boolean mLandscape;
+  private boolean audioCheck;
   private DataHelper mData;
   private Activity mActivity = null;
   long getSID() { return mApp.mSID; }
@@ -1595,6 +1596,8 @@ public class DrawingWindow extends ItemDrawer
     mActivity = this;
     mData = mApp.mData; // new DataHelper( this ); 
 
+    audioCheck = FeatureChecker.checkMicrophone( mActivity );
+
     mZoomBtnsCtrlOn = (TDSetting.mZoomCtrl > 1);  // do before setting content
     mPointScale = DrawingPointPath.SCALE_M;
 
@@ -2757,7 +2760,11 @@ public class DrawingWindow extends ItemDrawer
             } else if ( BrushManager.isPointPhoto( mCurrentPoint ) ) {
               new DrawingPhotoDialog( mActivity, this, xs, ys ).show();
             } else if ( BrushManager.isPointAudio( mCurrentPoint ) ) {
-              addAudioPoint( xs, ys );
+	      if ( audioCheck ) {
+                addAudioPoint( xs, ys );
+	      } else {
+                Toast.makeText( mActivity, R.string.no_feature_audio, Toast.LENGTH_SHORT ).show();
+              }
             } else {
     	      if ( mLandscape ) {
                 DrawingPointPath point = new DrawingPointPath( mCurrentPoint, -ys, xs, mPointScale, null, null );
@@ -3273,6 +3280,10 @@ public class DrawingWindow extends ItemDrawer
     private void addAudioPoint( float x, float y )
     {
       mMediaComment = "";
+      if ( ! audioCheck ) {
+	// TODO Toast.makeText( mActivity, R.string.no_feature_audio, Toast.LENGTH_SHORT ).show();
+	return;
+      }
       mMediaId = mApp.mData.nextAudioNegId( mApp.mSID );
       if ( mLandscape ) {
         mMediaX = -y;
@@ -4291,8 +4302,12 @@ public class DrawingWindow extends ItemDrawer
               if ( BrushManager.isPointPhoto( point.mPointType ) ) {
                 new DrawingPhotoEditDialog( mActivity, this, mApp, (DrawingPhotoPath)point ).show();
               } else if ( BrushManager.isPointAudio( point.mPointType ) ) {
-                DrawingAudioPath audio = (DrawingAudioPath)point;
-                new AudioDialog( this, mApp, this, audio.mId ).show();
+                if ( audioCheck ) {
+                  DrawingAudioPath audio = (DrawingAudioPath)point;
+                  new AudioDialog( this, mApp, this, audio.mId ).show();
+                } else {
+	          // TODO Toast.makeText( mActivity, R.string.no_feature_audio, Toast.LENGTH_SHORT ).show();
+		}
               } else {
                 new DrawingPointDialog( mActivity, this, point ).show();
               }
