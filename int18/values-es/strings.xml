@@ -539,9 +539,9 @@
     <!-- UNUSED string name="button_stop"      >Stop</string -->
     <string name="button_upload"    >Cargar    </string>
     <string name="button_view"      >Ver       </string>
-    <string name="button_zoomfit"   >Ajuste de zoom  </string>
-    <string name="button_landscape" >Paisaje </string>
-    <string name="button_portrait"  >Retrato  </string>
+    <!-- UNUSED string name="button_zoomfit"   >Ajuste de zoom  </string -->
+    <!-- UNUSED string name="button_landscape" >Paisaje </string -->
+    <!-- UNUSED string name="button_portrait"  >Retrato  </string -->
 
 
     <string name="button_write"     >Enviar calibración a distoX</string>

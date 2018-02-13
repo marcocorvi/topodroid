@@ -559,9 +559,9 @@
     <!-- UNUSED string name="button_stop"      >Stop</string -->
     <string name="button_upload"    >Schreiben</string>
     <string name="button_view"      >Anzeigen      </string>
-    <string name="button_zoomfit"   >Grösse anpassen  </string>
-    <string name="button_landscape" >Querformat </string>
-    <string name="button_portrait"  >Hochformat  </string>
+    <!-- UNUSED string name="button_zoomfit"   >Grösse anpassen  </string -->
+    <!-- UNUSED string name="button_landscape" >Querformat </string -->
+    <!-- UNUSED string name="button_portrait"  >Hochformat  </string -->
 
     <string name="button_write"     >Hochladen</string>
     <string name="button_xsection"  >Profil</string>

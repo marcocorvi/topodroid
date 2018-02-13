@@ -44,9 +44,12 @@ class ItemPickerDialog extends MyDialog
                        // , View.OnLongClickListener
                        // , AdapterView.OnItemClickListener
 {
-  private final static float DIMXP = 1.6f; // 1.8f;
-  private final static float DIMXL = 2.2f;
-  private final static float DIMYL = 1.9f;
+  private static float DIMXP = 1.6f; // 1.8f;
+  private static float DIMXL = 2.2f;
+  private static float DIMYL = 1.9f;
+  // private static int DIMPD = 2;
+  private static int DIMMX = 5;
+  private static int DIMMY = 2;
 
   private int mItemType; // items type
   private int mPointPos;  // item point position
@@ -120,6 +123,13 @@ class ItemPickerDialog extends MyDialog
     super.onCreate( savedInstanceState );
     // requestWindowFeature(Window.FEATURE_NO_TITLE);
 
+    DIMXP = Float.parseFloat( mContext.getResources().getString( R.string.dimxp ) );
+    DIMXL = Float.parseFloat( mContext.getResources().getString( R.string.dimxl ) );
+    DIMYL = Float.parseFloat( mContext.getResources().getString( R.string.dimyl ) );
+    // DIMPD = Integer.parseInt( mContext.getResources().getString( R.string.dimpd ) );
+    DIMMX = Integer.parseInt( mContext.getResources().getString( R.string.dimmx ) );
+    DIMMY = Integer.parseInt( mContext.getResources().getString( R.string.dimmy ) );
+
     createAdapters( ( TDSetting.mPickerType == TDSetting.PICKER_LIST 
                    || TDSetting.mPickerType == TDSetting.PICKER_RECENT ) );
     
@@ -166,7 +176,7 @@ class ItemPickerDialog extends MyDialog
     int lw = LinearLayout.LayoutParams.WRAP_CONTENT;
     int lh = LinearLayout.LayoutParams.WRAP_CONTENT;
     LinearLayout.LayoutParams lllp = new LinearLayout.LayoutParams(lh,lw);
-    lllp.setMargins(5, 2, 5, 2);
+    lllp.setMargins(DIMMX, DIMMY, DIMMX, DIMMY);
     for ( int k=0; k<TDSetting.mRecentNr; ++k ) {
       mRecent[k] = new ItemButton( mContext );
       mRecent[k].setOnClickListener( this );

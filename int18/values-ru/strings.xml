@@ -543,9 +543,9 @@
     <!-- UNUSED string name="button_stop"      >Stop</string -->
     <string name="button_upload"    >Загрузить  </string>
     <string name="button_view"      >Просмотр   </string>
-    <string name="button_zoomfit"   >Вместить  </string>
-    <string name="button_landscape" >Альбомная </string>
-    <string name="button_portrait"  >Портретная</string>
+    <!-- UNUSED string name="button_zoomfit"   >Вместить  </string -->
+    <!-- UNUSED string name="button_landscape" >Альбомная </string -->
+    <!-- UNUSED string name="button_portrait"  >Портретная</string -->
 
 
     <string name="button_write"     >Передать в Disto</string>

@@ -44,9 +44,12 @@ class ItemRecentDialog extends MyDialog
                        // , IItemPicker
                        // , AdapterView.OnItemClickListener
 {
-  private final static float DIMXP = 1.6f; // 1.5f;
-  private final static float DIMXL = 2.2f; // 2.0f
-  private final static float DIMYL = 1.9f; // 1.7f
+  private static float DIMXP = 1.6f; // 1.5f;
+  private static float DIMXL = 2.2f; // 2.0f
+  private static float DIMYL = 1.9f; // 1.7f
+  // private static int DIMPD = 2;
+  private static int DIMMX = 5;
+  private static int DIMMY = 2;
 
   private int mItemType; // items type
   private int mPointPos;  // item point position
@@ -108,6 +111,13 @@ class ItemRecentDialog extends MyDialog
     setContentView(R.layout.item_recent_dialog);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
+    DIMXP = Float.parseFloat( mContext.getResources().getString( R.string.dimxp ) );
+    DIMXL = Float.parseFloat( mContext.getResources().getString( R.string.dimxl ) );
+    DIMYL = Float.parseFloat( mContext.getResources().getString( R.string.dimyl ) );
+    // DIMPD = Integer.parseInt( mContext.getResources().getString( R.string.dimpd ) );
+    DIMMX = Integer.parseInt( mContext.getResources().getString( R.string.dimmx ) );
+    DIMMY = Integer.parseInt( mContext.getResources().getString( R.string.dimmy ) );
+
     // mRecentLayout = (LinearLayout) findViewById( R.id.layout_point );
     mRecentP = new ItemButton[ nrRecent ];
     mRecentL = new ItemButton[ nrRecent ];
@@ -117,11 +127,11 @@ class ItemRecentDialog extends MyDialog
     LinearLayout layouta = (LinearLayout) findViewById( R.id.layout_area  );
 
     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 0, LinearLayout.LayoutParams.WRAP_CONTENT );
-    lp.setMargins( 0, 2, 5, 2 );
+    lp.setMargins( 0, DIMMY, DIMMX, DIMMY );
     lp.weight = 16;
     LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams( 
       LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
-    lp2.setMargins( 2, 2, 0, 2 );
+    lp2.setMargins( DIMMY, DIMMY, 0, DIMMY );
     lp2.weight = 10;
 
     for ( int k=0; k<nrRecent; ++k ) {

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="default_textsize">20</string>
+  <string name="default_buttonsize">5</string>
+
+<!-- MATERIAL
+  <dimen name="activity_horizontal_margin">20dp</dimen>
+  <dimen name="activity_vertical_margin">20dp</dimen>
+  <dimen name="nav_drawer_width">320dp</dimen>
+-->
+  <dimen name="size">16sp</dimen>
+  <dimen name="sizeplus">18sp</dimen>
+
+  <dimen name="textsize">16sp</dimen>
+  <dimen name="textsizehead">18sp</dimen>
+  <dimen name="textsizebig">22sp</dimen>
+  <dimen name="textsizehuge">32sp</dimen>
+
+  <dimen name="padding">3dp</dimen>
+  <dimen name="paddingh">10dp</dimen>
+  <dimen name="paddingv">6dp</dimen>
+  <dimen name="paddingmedium">8dp</dimen>
+  <dimen name="paddingbig">15dp</dimen>
+
+  <dimen name="marginh">24dp</dimen>
+  <dimen name="marginv">15dp</dimen>
+  <dimen name="marginvbig">32dp</dimen>
+
+  <dimen name="margintiny">3dp</dimen>
+  <dimen name="marginsmall">8dp</dimen>
+  <dimen name="marginnormal">15dp</dimen>
+  <dimen name="marginhuge">60dp</dimen>
+
+  <dimen name="dividersmall">3dp</dimen>
+  <dimen name="divider">8dp</dimen>
+  <dimen name="dividerbig">15dp</dimen>
+
+  <string name="dimxp">2.4f</string>
+  <string name="dimxl">3.3f</string>
+  <string name="dimyl">2.9f</string>
+  <!-- string name="dimpd">3</string -->
+  <string name="dimmx">8</string>
+  <string name="dimmy">3</string>
+</resources>

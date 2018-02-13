@@ -541,9 +541,9 @@
     <!-- UNUSED string name="button_stop"      >ARRETER</string -->
     <string name="button_upload"    >UPLOAD   </string>
     <string name="button_view">Vue</string>
-    <!-- TODO string name="button_zoomfit"   >Zoom fit  </string -->
-    <!-- TODO string name="button_landscape" >Landscape </string -->
-    <!-- TODO string name="button_portrait"  >Portrait  </string -->
+    <!-- UNUSED string name="button_zoomfit"   >Zoom fit  </string -->
+    <!-- UNUSED string name="button_landscape" >Landscape </string -->
+    <!-- UNUSED string name="button_portrait"  >Portrait  </string -->
 
 
     <string name="button_write"     >Uploader</string>

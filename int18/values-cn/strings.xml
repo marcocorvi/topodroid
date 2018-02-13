@@ -540,9 +540,9 @@
     <!-- UNUSED string name="button_stop"      >停止</string -->
     <string name="button_upload"    >上传    </string>
     <string name="button_view"      >查看      </string>
-    <!-- TODO string name="button_zoomfit"   >Zoom fit  </string -->
-    <!-- TODO string name="button_landscape" >Landscape </string -->
-    <!-- TODO string name="button_portrait"  >Portrait  </string -->
+    <!-- UNUSED string name="button_zoomfit"   >Zoom fit  </string -->
+    <!-- UNUSED string name="button_landscape" >Landscape </string -->
+    <!-- UNUSED string name="button_portrait"  >Portrait  </string -->
 
 
     <string name="button_write"     >上传</string>
