@@ -184,11 +184,11 @@
     <string name="error_group_non_integer">O grupo deve ser um número inteiro</string>
     <string name="error_alt_required">Altitude exigida</string>
     <string name="error_invalid_number">Número inválido</string>
-    <!-- TODO string name="error_invalid_name">Invalid name</string -->
+    <string name="error_invalid_name">Nome inválido</string>
     <string name="error_lat_required">Latitude exigida</string>
     <string name="error_long_required">Longitude exigida</string>
     <string name="error_name_required">Nome exigido</string>
-    <!-- TODO string name="error_dir_exists">Directory already exists</string -->
+    <string name="error_dir_exists">Diretório já existe</string>
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Estação de referência exigida</string>
     <!-- UNUSED string name="error_station_already_fixed">Base já tem coordenadas</string -->
@@ -215,16 +215,16 @@
     <!-- UNUSED string name="barrier_del">Mostrar visadas longe base referência</string -->
     <!-- UNUSED string name="hidden_add">Ocultar visadas até base referência</string -->
     <!-- UNUSED string name="hidden_del">Mostrar visadas até base referência</string -->
-    <!-- TODO string name="hidden_show">Show shots beyond station</string -->
+    <string name="hidden_show">Mostrar visadas após base</string>
     <string name="splays_toggle">Alternar exibição das medidas auxiliares</string>
     <string name="splays">medidas auxiliares</string>
     <string name="fixed">fixa</string>
     <string name="painted">pintada</string>
 
-    <!-- TODO string name="cbd_title">Base directory</string -->
-    <!-- TODO string name="cwd">TopoDroid project directory</string -->
-    <!-- TODO string name="empty_cwd">Empty project name</string -->
-    <!-- TODO string name="bad_cbd">Base directory inexistent or not writable</string -->
+    <string name="cbd_title">Diretório base</string>
+    <string name="cwd">Diretório de projetos do TopoDroid</string>
+    <string name="empty_cwd">Nome de projeto vazio</string>
+    <string name="bad_cbd">Diretório base inexistente ou não liberado para escrita</string>
     <string name="bad_cwd">O nome do projeto não pode incluir um diretório</string>
     <string name="bad_line">Tipo de linha inválido</string>
     <string name="bad_point">Tipo de ponto inválido</string>
@@ -238,7 +238,7 @@
     <string name="no_db">Nenhum banco de dados</string>
     <string name="no_device_address">Dispositivo não selecionado</string>
     <string name="no_device_found">Nenhum dispositivo encontrado</string>
-    <!-- TODO string name="no_feature_audio">Audio not supported</string -->
+    <string name="no_feature_audio">Sem suporte para áudio</string>
     <string name="no_gms">Calibração sem dados.\nUse o botão de Download</string>
     <string name="no_geo_station">Falha: nenhuma base geolocalizada</string>
     <string name="no_leg_intersection">Linha de corte não cruza nenhuma linha de visada</string>
@@ -483,7 +483,7 @@
     <string name="extended_profile">Perfil retificado</string>
     <!-- UNUSED string name="v_section">CORTE V</string -->
     <string name="h_section">CORTE H</string>
-    <!-- TODO string name="landscape">landscape</string -->
+    <string name="landscape">retrato</string>
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Falha na leitura da memória da DistoX</string>
@@ -499,9 +499,9 @@
     <string name="button_add"       >Novo       </string>
     <string name="button_back"      >Voltar     </string>
     <string name="button_cancel"    >Cancelar   </string>
-    <!-- TODO string name="button_change"    >Change    </string -->
+    <string name="button_change"    >Alterar    </string>
     <string name="button_close"     >Fechar     </string>
-    <!-- TODO string name="button_create"    >Create    </string -->
+    <string name="button_create"    >Criar      </string>
     <string name="button_convert"   >Converter  </string>
     <string name="button_current"   >Atual      </string>
     <string name="button_delete"    >Apagar     </string>
@@ -822,7 +822,7 @@
     <string name="title_survey_export">Exportar topo</string>
     <string name="title_survey_rename">Renomear topo</string>
     <string name="title_plot_rename">Renomear croqui</string>
-    <!-- TODO string name="title_plot_zoomfit">Zoom fit / Orientation</string -->
+    <string name="title_plot_zoomfit">Encaixar zoom / Orientação</string>
     <string name="title_calib_export">Exportar calibração</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
@@ -839,8 +839,8 @@
 
   <string name="pref_raw_data_title">Dados brutos</string>
   <string name="pref_raw_data_summary">Exibir dados brutos</string>
-  <!-- TODO string name="pref_calib_shot_download_title">Download remote data</string -->
-  <!-- TODO string name="pref_calib_shot_download_summary">Download remote calib data immediately</string -->
+  <string name="pref_calib_shot_download_title">Fazer download de dados remotos</string>
+  <string name="pref_calib_shot_download_summary">Fazer download de dados de calibração remotos imediatamente</string>
   <!-- UNUSED string name="pref_bootloader_title">Bootloader</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Ativar bootloader</string -->
   <string name="pref_mkeyboard_title">Teclado</string>
@@ -865,19 +865,19 @@
   <string name="pref_leg_shots_summary">Quantidade mínimo de medições para uma visada</string>
   <string name="pref_station_prefix_title">Prefixos bases Compass</string>
   <string name="pref_station_prefix_summary">Exportar prefixo de bases (Compass)</string>
-  <!-- TODO string name="pref_compass_splays_title">Compass splays</string -->
-  <!-- TODO string name="pref_compass_splays_summary">Export splays in Compass files</string -->
+  <string name="pref_compass_splays_title">Medidas auxiliares Compass</string>
+  <string name="pref_compass_splays_summary">Exportar medidas auxiliares em arquivos Compass</string>
   <string name="pref_trobot_names_title">Nomes bases TopoRobot</string>
   <string name="pref_trobot_names_summary">Os nomes das bases usam o estilo do TopoRobot</string>
   <string name="pref_ortho_lrud_title">Ângulo med. aux. EDTC Compass</string>
   <string name="pref_ortho_lrud_summary">Ângulo mínimo entre uma medida auxiliar e uma visada para ser uma medida auxiliar EDTC</string>
   <string name="pref_ortho_lrud_message">Ângulo mínimo entre uma medida auxiliar e uma visada para ser EDTC</string>
-  <!-- TODO string name="pref_lrud_vertical_title">UD min splay clino</string -->
-  <!-- TODO string name="pref_lrud_vertical_summary">LRUD up/down minimum splay clino</string -->
-  <!-- TODO string name="pref_lrud_vertical_message">LRUD up/down minimum splay clino</string -->
-  <!-- TODO string name="pref_lrud_horizontal_title">LR max splay clino</string -->
-  <!-- TODO string name="pref_lrud_horizontal_summary">LRUD left/right maximum splay clino</string -->
-  <!-- TODO string name="pref_lrud_horizontal_message">LRUD left/right maximum splay clino</string -->
+  <string name="pref_lrud_vertical_title">Incl. mín. TB</string>
+  <string name="pref_lrud_vertical_summary">Incl. mín. medidas auxiliares Topo/Base</string>
+  <string name="pref_lrud_vertical_message">Inclinação mínima de medidas auxiliares Topo/Base</string>
+  <string name="pref_lrud_horizontal_title">Incl. máx. ED</string>
+  <string name="pref_lrud_horizontal_summary">Incl. máx. medidas auxiliares Esquerda/Direita</string>
+  <string name="pref_lrud_horizontal_message">Inclinação máxima de medidas auxiliares Esquerda/Direita</string>
   <string name="pref_survex_eol_title">Terminação linha Survex/Topo</string>
   <string name="pref_survex_eol_summary">Terminação de linha Survex/Topo</string>
   <string name="pref_survex_splay_title">Base med. aux. Survex</string>
@@ -967,8 +967,8 @@
   <string name="pref_min_shift_message">Mudar sensibilidade</string>
   <string name="pref_pointing_title">Diâmetro tolerância cursor</string>
   <string name="pref_pointing_message">Tolerância entre toque e destoque para seleção de ponto</string>
-  <!-- TODO string name="pref_dash_splay_title">Splay dash coherence</string -->
-  <!-- TODO string name="pref_dash_splay_message">Splays dashed coherently between plan and profile</string -->
+  <string name="pref_dash_splay_title">Coerência pontilhado med. aux.</string>
+  <string name="pref_dash_splay_message">Pontilhamento coerente entre medidas auxiliares na planta baixa e nos perfis</string>
   <string name="pref_vert_splay_title">Limite med. aux. tracejadas</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Medidas auxiliares acima desta inclinação serão tracejadas</string -->
   <string name="pref_vert_splay_message">Medidas auxiliares acima dessa inclinação serão tracejadas</string>
