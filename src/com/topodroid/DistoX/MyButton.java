@@ -49,7 +49,7 @@ public class MyButton
   // called with context = mApp
   static void resetCache( /* Context context, */ int size )
   {
-    mSize    = size;
+    if ( size > 0 ) mSize = size;
     if ( USE_CACHE ) mBitmapCache.clear();
   }
 

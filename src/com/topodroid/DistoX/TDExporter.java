@@ -499,23 +499,29 @@ class TDExporter
   static float EARTH_RADIUS1 = (float)(6378137 * Math.PI / 180.0f); // semimajor axis [m]
   static float EARTH_RADIUS2 = (float)(6356752 * Math.PI / 180.0f);
 
-  static private DistoXNum getGeolocalizedData( long sid, DataHelper data, float decl, float asl_factor )
+  static private List<DistoXNum> getGeolocalizedData( long sid, DataHelper data, float decl, float asl_factor )
   {
-    // Log.v("DistoX", "get geoloc. data. Decl " + decl );
     List< FixedInfo > fixeds = data.selectAllFixed( sid, 0 );
+    // Log.v("DistoX", "get geoloc. data. Decl " + decl + " fixeds " + fixeds.size() );
     if ( fixeds.size() == 0 ) return null;
 
-    DistoXNum num = null;
-    FixedInfo origin = null;
+    List<DistoXNum> nums = new ArrayList<DistoXNum>();
     List<DBlock> shots_data = data.selectAllShots( sid, 0 );
+    FixedInfo origin = null;
     for ( FixedInfo fixed : fixeds ) {
-      num = new DistoXNum( shots_data, fixed.name, null, null, decl );
+      DistoXNum num = new DistoXNum( shots_data, fixed.name, null, null, decl );
+      // Log.v("DistoX", "Num shots " + num.getShots().size() );
       if ( num.getShots().size() > 0 ) {
-        origin = fixed;
-        break;
-      }
+        makeGeolocalizedData( num, fixed, decl, asl_factor );
+	nums.add( num );
+      } 
     }
-    if ( origin == null || num == null ) return null;
+    // if ( origin == null || num == null ) return null;
+    return nums;
+  }
+
+  static private void makeGeolocalizedData( DistoXNum num, FixedInfo origin, float decl, float asl_factor )
+  {
 
     float lat = (float)origin.lat;
     float lng = (float)origin.lng;
@@ -544,20 +550,16 @@ class TDExporter
       sp.s = lat - sp.s * s_radius;
       sp.v = (asl - sp.v) * asl_factor;
     }
-    return num;
   }
 
   static String exportSurveyAsKml( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     // Log.v("DistoX", "export as KML " + filename );
-    DistoXNum num = getGeolocalizedData( sid, data, info.declination, 1.0f );
-    if ( num == null ) {
+    List<DistoXNum> nums = getGeolocalizedData( sid, data, info.declination, 1.0f );
+    if ( nums == null || nums.size() == 0 ) {
       TDLog.Error( "Failed PLT export: no geolocalized station");
       return "";
     }
-    List<NumStation> stations = num.getStations();
-    List<NumShot>    shots = num.getShots();
-    List<NumSplay>   splays = num.getSplays();
 
     // now write the KML
     try {
@@ -609,58 +611,63 @@ class TDExporter
       pw.format("  </LineStyle>\n");
       pw.format("</Style>\n");
       
-      if ( TDSetting.mKmlStations ) {
-        for ( NumStation st : stations ) {
-          pw.format("<Placemark>\n");
-          pw.format("  <name>%s</name>\n", st.name );
-          pw.format("  <styleUrl>#station</styleUrl>\n");
-          pw.format("  <MultiGeometry>\n");
-          pw.format("    <altitudeMode>absolute</altitudeMode>\n");
-            pw.format("  <Point id=\"%s\">\n", st.name );
-            pw.format(Locale.US, "    <coordinates>%f,%f,%f</coordinates>\n", st.e, st.s, st.v );
-            pw.format("  </Point>\n");
-          pw.format("  </MultiGeometry>\n");
-          pw.format("</Placemark>\n");
+      for ( DistoXNum num : nums ) {
+        List<NumStation> stations = num.getStations();
+        List<NumShot>    shots = num.getShots();
+        List<NumSplay>   splays = num.getSplays();
+        if ( TDSetting.mKmlStations ) {
+          for ( NumStation st : stations ) {
+            pw.format("<Placemark>\n");
+            pw.format("  <name>%s</name>\n", st.name );
+            pw.format("  <styleUrl>#station</styleUrl>\n");
+            pw.format("  <MultiGeometry>\n");
+            pw.format("    <altitudeMode>absolute</altitudeMode>\n");
+              pw.format("  <Point id=\"%s\">\n", st.name );
+              pw.format(Locale.US, "    <coordinates>%f,%f,%f</coordinates>\n", st.e, st.s, st.v );
+              pw.format("  </Point>\n");
+            pw.format("  </MultiGeometry>\n");
+            pw.format("</Placemark>\n");
+          }
         }
-      }
 
-      pw.format("<Placemark>\n");
-      pw.format("  <name>centerline</name>\n" );
-      pw.format("  <styleUrl>#centerline</styleUrl>\n");
-      pw.format("  <MultiGeometry>\n");
-      pw.format("    <altitudeMode>absolute</altitudeMode>\n");
-      for ( NumShot sh : shots ) {
-        NumStation from = sh.from;
-        NumStation to   = sh.to;
-        if ( from.mHasCoords && to.mHasCoords ) {
-          pw.format("    <LineString id=\"%s-%s\"> <coordinates>\n", from.name, to.name );
-          // pw.format("      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
-          // pw.format("      <extrude>1</extrude>\n"); // extends the line down to the ground
-          pw.format(Locale.US, "        %f,%f,%f %f,%f,%f\n", from.e, from.s, from.v, to.e, to.s, to.v );
-          pw.format("    </coordinates> </LineString>\n");
-        } else {
-          // Log.v("DistoX", "missing coords " + from.name + " " + from.mHasCoords + " " + to.name + " " + to.mHasCoords );
-        }
-      }
-      pw.format("  </MultiGeometry>\n");
-      pw.format("</Placemark>\n");
-
-      if ( TDSetting.mKmlSplays ) {
         pw.format("<Placemark>\n");
-        pw.format("  <name>splays</name>\n" );
-        pw.format("  <styleUrl>#splay</styleUrl>\n");
+        pw.format("  <name>centerline</name>\n" );
+        pw.format("  <styleUrl>#centerline</styleUrl>\n");
         pw.format("  <MultiGeometry>\n");
         pw.format("    <altitudeMode>absolute</altitudeMode>\n");
-        for ( NumSplay sp : splays ) {
-          NumStation from = sp.from;
-          pw.format("    <LineString> <coordinates>\n");
-          // pw.format("      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
-          // pw.format("      <extrude>1</extrude>\n"); // extends the line down to the ground
-          pw.format(Locale.US, "        %f,%f,%f %f,%f,%f\n", from.e, from.s, from.v, sp.e, sp.s, sp.v );
-          pw.format("    </coordinates> </LineString>\n");
+        for ( NumShot sh : shots ) {
+          NumStation from = sh.from;
+          NumStation to   = sh.to;
+          if ( from.mHasCoords && to.mHasCoords ) {
+            pw.format("    <LineString id=\"%s-%s\"> <coordinates>\n", from.name, to.name );
+            // pw.format("      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
+            // pw.format("      <extrude>1</extrude>\n"); // extends the line down to the ground
+            pw.format(Locale.US, "        %f,%f,%f %f,%f,%f\n", from.e, from.s, from.v, to.e, to.s, to.v );
+            pw.format("    </coordinates> </LineString>\n");
+          } else {
+            // Log.v("DistoX", "missing coords " + from.name + " " + from.mHasCoords + " " + to.name + " " + to.mHasCoords );
+          }
         }
         pw.format("  </MultiGeometry>\n");
         pw.format("</Placemark>\n");
+
+        if ( TDSetting.mKmlSplays ) {
+          pw.format("<Placemark>\n");
+          pw.format("  <name>splays</name>\n" );
+          pw.format("  <styleUrl>#splay</styleUrl>\n");
+          pw.format("  <MultiGeometry>\n");
+          pw.format("    <altitudeMode>absolute</altitudeMode>\n");
+          for ( NumSplay sp : splays ) {
+            NumStation from = sp.from;
+            pw.format("    <LineString> <coordinates>\n");
+            // pw.format("      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
+            // pw.format("      <extrude>1</extrude>\n"); // extends the line down to the ground
+            pw.format(Locale.US, "        %f,%f,%f %f,%f,%f\n", from.e, from.s, from.v, sp.e, sp.s, sp.v );
+            pw.format("    </coordinates> </LineString>\n");
+          }
+          pw.format("  </MultiGeometry>\n");
+          pw.format("</Placemark>\n");
+        }
       }
 
       pw.format("</Document>\n");
@@ -681,14 +688,11 @@ class TDExporter
   static String exportSurveyAsPlt( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     // Log.v("DistoX", "export as trackfile: " + filename );
-    DistoXNum num = getGeolocalizedData( sid, data, info.declination, TopoDroidUtil.M2FT );
-    if ( num == null ) {
+    List<DistoXNum> nums = getGeolocalizedData( sid, data, info.declination, TopoDroidUtil.M2FT );
+    if ( nums == null || nums.size() == 0 ) {
       TDLog.Error( "Failed PLT export: no geolocalized station");
       return "";
     }
-    List<NumStation> stations = num.getStations();
-    List<NumShot>    shots = num.getShots();
-    // List<NumSplay>   splays = num.getSplays();
 
     // now write the PLT file
     try {
@@ -706,9 +710,16 @@ class TDExporter
       // fill-style: 0=solid, 1=clear, 2=Bdiag, 3=Fdiag, 4=cross, 5=diag_cross, 6=horiz, 7=vert
       //
       pw.format("0,2,1677690,%s - TopoDroid v %s,0,0,0,8421376,-1,0\r\n", TopoDroidUtil.getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
-      pw.format("%d\r\n", stations.size() );
-      
 
+      int tot_stations = 0;
+      for ( DistoXNum num : nums ) {
+        List<NumStation> stations = num.getStations();
+        // List<NumShot>    shots = num.getShots();
+        // List<NumSplay>   splays = num.getSplays();
+	tot_stations += stations.size();
+      }
+      pw.format("%d\r\n", tot_stations );
+      
       // date should be "days_since_12/30/1899.time_of_the_day"
       // eg, 0=12/30/1899, 2=1/1/1900, 35065=1/1/1996, 36526=1/1/00, 39447=1/1/08, 40908=1/1/12, ...
       Calendar cal = Calendar.getInstance();
@@ -718,16 +729,22 @@ class TDExporter
 
       // String date = TopoDroidUtil.getDateString( "dd-MMM-yy" );
 
-      NumStation last = null;
-      for ( NumShot sh : shots ) {
-        NumStation from = sh.from;
-        NumStation to   = sh.to;
-        if ( from != last ) {
-          pw.format(Locale.US, "%f, %f,1, %f,%d,,\r\n", from.e, from.s, from.v, days );
+      for ( DistoXNum num : nums ) {
+        List<NumStation> stations = num.getStations();
+        List<NumShot>    shots = num.getShots();
+        // List<NumSplay>   splays = num.getSplays();
+        NumStation last = null;
+        for ( NumShot sh : shots ) {
+          NumStation from = sh.from;
+          NumStation to   = sh.to;
+          if ( from != last ) {
+            pw.format(Locale.US, "%f, %f,1, %f,%d,,\r\n", from.e, from.s, from.v, days );
+          }
+          pw.format(Locale.US, "%f,%f,0,%f,%d,,\r\n", to.e, to.s, to.v, days );
+          last = to;
         }
-        pw.format(Locale.US, "%f,%f,0,%f,%d,,\r\n", to.e, to.s, to.v, days );
-        last = to;
       }
+
       fw.flush();
       fw.close();
       return filename;

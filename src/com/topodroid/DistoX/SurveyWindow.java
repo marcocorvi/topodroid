@@ -223,7 +223,7 @@ public class SurveyWindow extends Activity
     // mPhoto = new ArrayList<>();
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
-    int size = mApp.setListViewHeight( mListView );
+    /* int size = */ mApp.setListViewHeight( mListView );
 
     Resources res = getResources();
     mNrButton1 = TDLevel.overNormal ? 6 

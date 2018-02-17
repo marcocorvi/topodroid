@@ -218,8 +218,15 @@ class TDSetting
   // prefs default values
   static String  mDefaultTeam = "";
 
+  static final int MIN_SIZE_BUTTONS = 32;
+  static final int MIN_SIZE_TEXT    = 12;
+  static final int BTN_SIZE_SMALL   = 36;
+  static final int BTN_SIZE_NORMAL  = 42;
+  static final int BTN_SIZE_MEDIUM  = 48;
+  static final int BTN_SIZE_LARGE   = 64;
+  static final int BTN_SIZE_HUGE    = 84;
   static int mSizeBtns     = 0;      // action bar buttons scale (either 1 or 2)
-  static int mSizeButtons;
+  static int mSizeButtons  = 42;     // default 42 minimum MIN_SIZE_BUTTONS
   static int mTextSize     = 16;     // list text size 
   static boolean mKeyboard = true;
   static boolean mLocalManPages = true;
@@ -634,16 +641,17 @@ class TDSetting
   {
     int sz = mSizeBtns;
     switch ( size ) {
-      case 0: sz = 36; break; // small
-      case 1: sz = 42; break; // normal
-      case 3: sz = 48; break; // medium
-      case 4: sz = 64; break; // large
-      case 2: sz = 84; break; // huge
+      case 0: sz = BTN_SIZE_SMALL;  break;
+      case 1: sz = BTN_SIZE_NORMAL; break;
+      case 3: sz = BTN_SIZE_MEDIUM; break;
+      case 4: sz = BTN_SIZE_LARGE;  break;
+      case 2: sz = BTN_SIZE_HUGE;   break;
     }
     if ( sz != mSizeBtns ) {
       mSizeBtns = sz;
       mSizeButtons = (int)( mSizeBtns * app.getDisplayDensity() * 0.86f );
       // Log.v("DistoX", "Size " + size + " Btns " + mSizeBtns + " " + mSizeButtons );
+      if ( mSizeButtons < MIN_SIZE_BUTTONS ) mSizeButtons = MIN_SIZE_BUTTONS;
       return true;
     }
     return false;
@@ -1414,7 +1422,7 @@ class TDSetting
     //S if ( name.equals( "DISTOX_INIT_STATION" )
     //B if ( name.equals( "DISTOX_AZIMUTH_MANUAL" )
 
-    if ( name.equals( "DISTOX_TEXT_SIZE" ) ) return parseIntValue( value, mTextSize, 1 );
+    if ( name.equals( "DISTOX_TEXT_SIZE" ) ) return parseIntValue( value, mTextSize, MIN_SIZE_TEXT );
     if ( name.equals( "DISTOX_CLOSE_DISTANCE" ) ) return parseFloatValue( value, mCloseDistance, 0.0001f );
     if ( name.equals( "DISTOX_EXTEND_THR2"    ) ) return parseFloatValue( value, mExtendThr, 0, 90 );
     if ( name.equals( "DISTOX_VTHRESHOLD"     ) ) return parseFloatValue( value, mVThreshold, 0, 90 );

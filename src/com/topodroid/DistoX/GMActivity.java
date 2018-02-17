@@ -692,7 +692,7 @@ public class GMActivity extends Activity
 
     // mHandler = new ConnHandler( mApp, this );
     mListView = (HorizontalListView) findViewById(R.id.listview);
-    int size = mApp.setListViewHeight( mListView );
+    /* int size = */ mApp.setListViewHeight( mListView );
 
     mNrButton1 = 5;
     if ( TDLevel.overBasic  ) mNrButton1 += 1; // COVER

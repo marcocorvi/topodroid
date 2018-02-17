@@ -133,7 +133,7 @@ public class FixedActivity extends Activity
     setTitle( R.string.title_fixed );
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
-    int size = mApp.setListViewHeight( mListView );
+    /* int size = */ mApp.setListViewHeight( mListView );
     mNrButton1 = (hasGps)? 3 : 2;
     mButton1 = new Button[ mNrButton1 ];
     int kz = (hasGps)? 0 : 1; // index of izons

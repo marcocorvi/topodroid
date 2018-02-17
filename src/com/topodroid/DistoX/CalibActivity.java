@@ -161,7 +161,7 @@ public class CalibActivity extends Activity
     }
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
-    int size = mApp.setListViewHeight( mListView );
+    /* int size = */ mApp.setListViewHeight( mListView );
 
     Resources res = getResources();
     mNrButton1 = 2 + ( TDLevel.overNormal? 1 : 0 );

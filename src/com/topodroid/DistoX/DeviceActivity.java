@@ -222,7 +222,7 @@ public class DeviceActivity extends Activity
     mTvAddress = (TextView) findViewById( R.id.device_address );
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
-    int size = mApp.setListViewHeight( mListView );
+    /* int size = */ mApp.setListViewHeight( mListView );
 
     Resources res = getResources();
     mNrButton1 = 3;
