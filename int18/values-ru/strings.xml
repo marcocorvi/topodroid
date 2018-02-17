@@ -796,7 +796,7 @@
     <string name="title_fixed_import">Импортировать координаты точки</string>
     <string name="title_fixed_gps">Гео-привязка пикета: GPS</string>
     <string name="title_fixed_add">Гео-привязка пикета: вручную</string>
-    <string name="title_manual">TopoDroid Инструкция</string>
+    <string name="title_manual">Руководство TopoDroid</string>
     <string name="title_mode">Режим отображения</string>
     <string name="title_move">Перемещение</string>
     <string name="title_note">Заметки</string>
