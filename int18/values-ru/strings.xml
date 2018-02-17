@@ -848,7 +848,7 @@
   <string name="pref_mkeyboard_title">Клавиатура</string>
   <string name="pref_mkeyboard_summary">Вкл/Выкл сторонние клавиатуры </string>
   <string name="pref_local_help_title">Руководство на Русском</string>
-  <string name="pref_local_help_summary">Включить руководство пользователя на Русском языкеl</string>
+  <string name="pref_local_help_summary">Включить руководство пользователя на Русском языке</string>
   <string name="pref_cosurvey_title">Совместная съёмка</string>
   <string name="pref_cosurvey_summary">Вкл/Выкл Совместную съёмку</string>
   <string name="pref_export_shots_title">Формат экспорта данных</string>
