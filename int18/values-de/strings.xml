@@ -220,7 +220,7 @@
     <!-- UNUSED string name="barrier_del">Nachfolgende Messungen anzeigen</string -->
     <!-- NO string name="hidden_add">Vorherige Messungen ausblenden</string -->
     <!-- UNUSED string name="hidden_del">Vorherige Messungen anzeigen</string -->
-    <!-- TODO string name="hidden_show">Show shots beyond station</string -->
+    <string name="hidden_show">Messungen nach der Station anzeigen</string>
     <string name="splays_toggle">Hilfszüge ein/ausblenden</string>
     <string name="splays">Hilfszüge</string>
     <string name="fixed">fixiert</string>
@@ -243,7 +243,7 @@
     <string name="no_db">Keine Datenbank</string>
     <string name="no_device_address">Kein Gerät gewählt</string>
     <string name="no_device_found">Kein Gerät gefunden</string>
-    <!-- TODO string name="no_feature_audio">Audio not supported</string -->
+    <string name="no_feature_audio">Audio nicht unterstützt</string>
     <string name="no_gms">Kalibrierung mit keinen Daten</string>
     <string name="no_geo_station">Fehler: keine geolokalisierte Station</string>
     <string name="no_leg_intersection">Schnittlinie kreuzt keine Vermessung</string>
@@ -866,8 +866,8 @@
 
   <string name="pref_raw_data_title">Rohdaten anzeigen</string>
   <string name="pref_raw_data_summary">Rohdaten anzeigen</string>
-  <!-- TODO string name="pref_calib_shot_download_title">Download remote data</string -->
-  <!-- TODO string name="pref_calib_shot_download_summary">Download remote calib data immediately</string -->
+  <string name="pref_calib_shot_download_title">Daten herunterladen</string>
+  <string name="pref_calib_shot_download_summary">Kalibrierungsdaten sofort herunterladen</string>
   <!-- UNUSED string name="pref_bootloader_title">Bootloader</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Die Bootloader ermöglichen</string -->
   <string name="pref_mkeyboard_title">Tastatur</string>
@@ -892,8 +892,8 @@
   <string name="pref_leg_shots_summary">Minimale Anzahl Messungen zur Erkennung als Messzug</string>
   <string name="pref_station_prefix_title">Exportiere Messpunkt Prefix</string>
   <string name="pref_station_prefix_summary">Exportiere Messpunkt Prefix (compass)</string>
-  <!-- TODO string name="pref_compass_splays_title">Compass splays</string -->
-  <!-- TODO string name="pref_compass_splays_summary">Export splays in Compass files</string -->
+  <string name="pref_compass_splays_title">Exportiere Hilfszüge</string>
+  <string name="pref_compass_splays_summary">Export Hilfszüge (compass)</string>
   <string name="pref_trobot_names_title">TopoRobot Namen</string>
   <string name="pref_trobot_names_summary">Stationen wie in TopoRobot benennen</string>
   <string name="pref_ortho_lrud_title">Min. Winkel für LRUD in Export</string>
@@ -993,9 +993,9 @@
   <string name="pref_min_shift_title">Verschieben Sensitivität</string>
   <string name="pref_min_shift_message">Ignoriert Verschiebungen größer als dieser Wert. Verhindert herumspringen bei Multitouch.</string>
   <string name="pref_pointing_title">Radius für Tippen</string>
-  <string name="pref_pointing_message">Ein Antippen wird innerhalb dieses Radiuses erkannt in der Punktauswahl.</string>
-  <!-- TODO string name="pref_dash_splay_title">Splay dash coherence</string -->
-  <!-- TODO string name="pref_dash_splay_message">Splays dashed coherently between plan and profile</string -->
+  <string name="pref_pointing_message">Radius für Objekterkennung beim Antippen</string>
+  <string name="pref_dash_splay_title">Hilfslinien Kohärenz</string>
+  <string name="pref_dash_splay_message">Hilfslinien kohärent gestrichelt zwischen Skizzen</string>
   <string name="pref_vert_splay_title">Vertikale Neigung für gestrichelte Hilfslinien</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string -->
   <string name="pref_vert_splay_message">Vertikaler Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string>
@@ -1281,8 +1281,8 @@
   <!-- UNUSED string name="splay_extend">estimate splay extend</string -->
 
 <!-- WELCOME MESSAGE: IT WOULD BE NICE TO HAVE THIS TRANSLATED -->
-    <!-- TODO string name="perms_mandatory">TopoDroid cannot run without these permissions:</string -->
-    <!-- TODO string name="perms_optional">TopoDroid may fail without these permissions:</string -->
+    <string name="perms_mandatory">TopoDroid benötigt folgende Berechtigungen:</string>
+    <string name="perms_optional">TopoDroid sollte folgende Berechtigungen erhalten:</string>
     <string name="welcome_title">Willkommen in TopoDroid %1$s</string>
     <string name="welcome_text">
 \nTopoDroid is eine Open-Source Android Applikation zur Vermessung von Höhlen m mit dem DistoX.
