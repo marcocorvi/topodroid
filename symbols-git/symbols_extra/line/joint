@@ -1,5 +1,6 @@
 symbol line
 name joint
+name-pt fratura
 th_name u:joint
 group joint
 color 0xffffff 0x99
