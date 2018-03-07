@@ -1,5 +1,6 @@
 ﻿symbol point
 name vegetable-debris
+name-pt restos-vegetais
 th_name vegetable-debris
 orientation no
 color 0xffcc99
