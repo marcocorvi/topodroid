@@ -123,7 +123,12 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
               ret1 = false;
             } else {
               float scale = mSurface.getBitmapScale();
-              new ExportBitmapToFile( mContext, bitmap, scale, mFullName, false ).execute();
+	      if ( scale > 0 ) {
+                new ExportBitmapToFile( mContext, bitmap, scale, mFullName, false ).execute();
+	      } else {
+                TDLog.Error( "cannot save PNG: negative scale" );
+		ret1 = false;
+	      }
             }
             break;
         }

@@ -866,7 +866,7 @@ public class DrawingCommandManager
     }
   }
 
-  void sharpenLine( DrawingLinePath line ) 
+  void sharpenPointLine( DrawingPointLinePath line ) 
   {
     synchronized( mCurrentStack ) {
       line.makeSharp( );
@@ -874,7 +874,7 @@ public class DrawingCommandManager
     // checkLines();
   }
 
-  void reduceLine( DrawingLinePath line ) 
+  void reducePointLine( DrawingPointLinePath line ) 
   {
     synchronized( mSelection ) {
       mSelection.removePath( line );
@@ -889,7 +889,23 @@ public class DrawingCommandManager
     // checkLines();
   }
 
-  void closeLine( DrawingLinePath line )
+
+  void rockPointLine( DrawingPointLinePath line ) 
+  {
+    synchronized( mSelection ) {
+      mSelection.removePath( line );
+      clearSelected();
+    }
+    synchronized( mCurrentStack ) {
+      line.makeRock( );
+    }
+    synchronized( mSelection ) {
+      mSelection.insertPath( line );
+    }
+    // checkLines();
+  }
+
+  void closePointLine( DrawingPointLinePath line )
   {
     synchronized( mCurrentStack ) {
       SelectionPoint sp = mSelection.getSelectionPoint( line.mLast );

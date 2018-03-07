@@ -52,6 +52,14 @@
     />
   </LinearLayout>
 
+  <LinearLayout android:id="@+id/layout3"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" 
+        android:gravity="right"
+      >
+  </LinearLayout>
+
   <LinearLayout 
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content"

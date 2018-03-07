@@ -246,9 +246,10 @@ public class DrawingSurface extends SurfaceView
     commandManager.addEraseCommand( cmd );
   }
 
-  void sharpenLine( DrawingLinePath line ) { commandManager.sharpenLine( line ); }
-  void reduceLine( DrawingLinePath line ) { commandManager.reduceLine( line ); }
-  void closeLine( DrawingLinePath line ) { commandManager.closeLine( line ); }
+  void sharpenPointLine( DrawingPointLinePath line ) { commandManager.sharpenPointLine( line ); }
+  void reducePointLine( DrawingPointLinePath line ) { commandManager.reducePointLine( line ); }
+  void rockPointLine( DrawingPointLinePath line ) { commandManager.rockPointLine( line ); }
+  void closePointLine( DrawingPointLinePath line ) { commandManager.closePointLine( line ); }
 
   void endEraser() { commandManager.endEraser(); }
   void setEraser( float x, float y, float r ) { commandManager.setEraser(x, y, r); } // canvas x,y, r
@@ -433,8 +434,6 @@ public class DrawingSurface extends SurfaceView
   
   // void setBounds( float x1, float x2, float y1, float y2 ) { commandManager.setBounds( x1, x2, y1, y2 ); }
 
-  public boolean hasMoreRedo() { return commandManager.hasMoreRedo(); }
-
   public void redo()
   {
     isDrawing = true;
@@ -447,21 +446,47 @@ public class DrawingSurface extends SurfaceView
     commandManager.undo();
   }
 
-  public boolean hasMoreUndo() { return commandManager.hasMoreUndo(); }
+  public boolean hasMoreRedo()
+  { return commandManager!= null && commandManager.hasMoreRedo(); }
+
+  public boolean hasMoreUndo()
+  { return commandManager!= null && commandManager.hasMoreUndo(); }
 
   // public boolean hasStationName( String name ) { return commandManager.hasUserStation( name ); }
 
-  DrawingStationPath getStationPath( String name ) { return commandManager.getUserStation( name ); }
+  DrawingStationPath getStationPath( String name )
+  {
+    if ( commandManager == null ) return null;
+    return commandManager.getUserStation( name );
+  }
 
-  void addDrawingStationPath( DrawingStationPath path ) { commandManager.addUserStation( path ); }
-  void removeDrawingStationPath( DrawingStationPath path ) { commandManager.removeUserStation( path ); }
+  void addDrawingStationPath( DrawingStationPath path )
+  {
+    if ( commandManager == null ) return;
+    commandManager.addUserStation( path );
+  }
+ 
+  void removeDrawingStationPath( DrawingStationPath path )
+  {
+    if ( commandManager == null ) return;
+    commandManager.removeUserStation( path );
+  }
 
-  public RectF getBitmapBounds( ) { return commandManager.getBitmapBounds(); }
+  public RectF getBitmapBounds( )
+  { 
+    if ( commandManager == null ) return null;
+    return commandManager.getBitmapBounds();
+  }
 
-  public float getBitmapScale() { return commandManager.getBitmapScale(); }
+  public float getBitmapScale() 
+  { 
+    if ( commandManager == null ) return -1;
+    return commandManager.getBitmapScale();
+  }
 
   public Bitmap getBitmap( long type )
   {
+    if ( commandManager == null ) return null;
     if ( PlotInfo.isProfile( type ) ) {
       return mCommandManager2.getBitmap();
     } else if ( type == PlotInfo.PLOT_PLAN ) {

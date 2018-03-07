@@ -11,9 +11,14 @@
  */
 package com.topodroid.DistoX;
 
+import android.os.Build;
+import android.os.Build.VERSION_CODES;
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 // import android.content.pm.FeatureInfo;
+
+// import android.util.Log;
 
 class FeatureChecker
 {
@@ -52,25 +57,47 @@ class FeatureChecker
   //   }
   // }
 
-  /** check whether the running app has the needed permissions
-   * @return 0 ok
-   *         -1 missing some necessary permission
-   *         >0 missing some complementary permssion (flag):
-   *            1 FILE_LOCATION
-   *            2 CAMERA
-   *            4 AUDIO
-   */
-  static int checkPermissions( Context context )
-  {
-    String perms[] = {
-      android.Manifest.permission.BLUETOOTH,
+  /** permissions string codes
+   */ 
+  static String perms[] = {
+      android.Manifest.permission.BLUETOOTH,            // Bluetooth permissions are normal - no need to request at runtime
       android.Manifest.permission.BLUETOOTH_ADMIN,
       android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
       // android.Manifest.permission.READ_EXTERNAL_STORAGE,
       android.Manifest.permission.ACCESS_FINE_LOCATION,
       android.Manifest.permission.CAMERA,
       android.Manifest.permission.RECORD_AUDIO
-    };
+  };
+
+  /** app specific code - for callback in MainWindow
+   */
+  static final int REQUEST_PERMISSIONS = 1;
+
+  static boolean MustRestart = false; // whether need to restart app
+  static boolean GrantedPermission[] = { false, false, false, false, false, false };
+
+  static void createPermissions( Context context, Activity activity )
+  {
+    MustRestart = false;
+    if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.M ) return;
+    for ( int k=0; k<6; ++k ) {
+      GrantedPermission[k] = ( context.checkSelfPermission( perms[k] ) == PackageManager.PERMISSION_GRANTED );
+      // Log.v("DistoXX", "FC perm " + k + " granted " + GrantedPermission[k] );
+      if ( ! GrantedPermission[k] ) MustRestart = true;
+    }
+    // Log.v("DistoXX", "FC must restart " + MustRestart );
+    if ( MustRestart ) {
+      activity.requestPermissions( perms, REQUEST_PERMISSIONS );
+    }
+  }
+
+  /** check whether the running app has the needed permissions
+   * @return 0 ok
+   *         -1 missing some necessary permission
+   *         >0 missing some complementary permssion (flag):
+   */
+  static int checkPermissions( Context context )
+  {
     int k;
     for ( k=0; k<3; ++k ) {
       int res = context.checkCallingOrSelfPermission( perms[k] );

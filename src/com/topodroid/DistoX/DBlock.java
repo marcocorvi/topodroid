@@ -404,14 +404,14 @@ public class DBlock
     return String.format(Locale.US, "%.1f", mClino * TDSetting.mUnitAngle );
   }
 
-  public String extraString( DistoXAccuracy accu )
-  {
-    return String.format(Locale.US, "A %.1f  M %.1f  D %.1f", 
-      accu.deltaAcc( mAcceleration ), 
-      accu.deltaMag( mMagnetic ), 
-      accu.deltaDip( mDip ) * TDSetting.mUnitAngle
-    );
-  }
+  // public String extraString( DistoXAccuracy accu )
+  // {
+  //   return String.format(Locale.US, "A %.1f  M %.1f  D %.1f", 
+  //     accu.deltaAcc( mAcceleration ), 
+  //     accu.deltaMag( mMagnetic ), 
+  //     accu.deltaDip( mDip ) * TDSetting.mUnitAngle
+  //   );
+  // }
 
 }
 

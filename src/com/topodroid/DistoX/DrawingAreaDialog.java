@@ -19,13 +19,15 @@ import android.content.Context;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.CheckBox;
+import android.widget.Spinner;
+import android.widget.LinearLayout;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
@@ -44,6 +46,8 @@ public class DrawingAreaDialog extends MyDialog
 
   private Button mBtnOk;
   private Button mBtnCancel;
+
+  private MyCheckBox mBtnReduce;
 
   public DrawingAreaDialog( Context context, DrawingWindow parent, DrawingAreaPath line )
   {
@@ -77,6 +81,16 @@ public class DrawingAreaDialog extends MyDialog
 
     // NOTE area do not have options
 
+    int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
+    mBtnReduce = new MyCheckBox( mContext, size, R.drawable.iz_reduce_ok,  R.drawable.iz_reduce_no  );
+
+    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
+      LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
+    lp.setMargins( 0, 10, 20, 10 );
+
+    LinearLayout layout3 = (LinearLayout)findViewById( R.id.layout3 );
+    layout3.addView( mBtnReduce, lp );
+
     mBtnOk = (Button) findViewById( R.id.button_ok );
     mBtnCancel = (Button) findViewById( R.id.button_cancel );
     mBtnOk.setOnClickListener( this );
@@ -97,6 +111,10 @@ public class DrawingAreaDialog extends MyDialog
 
     if ( b == mBtnOk ) {
       if ( mType != mArea.mAreaType ) mArea.setAreaType( mType );
+
+      if ( mBtnReduce.isChecked() ) {
+        mParent.reduceArea( mArea );
+      }
 
       mArea.setVisible( mCBvisible.isChecked() );
       if ( mOrientable ) {

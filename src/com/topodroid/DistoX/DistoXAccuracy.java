@@ -14,6 +14,7 @@
 package com.topodroid.DistoX;
 
 import java.util.List;
+import java.util.Locale;
 
 class DistoXAccuracy
 {
@@ -91,10 +92,21 @@ class DistoXAccuracy
 
   boolean isBlockMagneticBad( DBlock blk )
   {
-    if ( blk.mAcceleration < 10.0f || blk.mMagnetic < 10.0f ) return false;
+    if ( blk == null || blk.mAcceleration < 10.0f || blk.mMagnetic < 10.0f ) return false;
     return deltaMag( blk.mMagnetic ) > TDSetting.mMagneticThr
         || deltaAcc( blk.mAcceleration ) > TDSetting.mAccelerationThr
         || deltaDip( blk.mDip ) > TDSetting.mDipThr;
   }
+  
+  String getBlockExtraString( DBlock blk )
+  {
+    if ( blk == null ) return "";
+    return String.format(Locale.US, "A %.1f  M %.1f  D %.1f", 
+      deltaAcc( blk.mAcceleration ), 
+      deltaMag( blk.mMagnetic ), 
+      deltaDip( blk.mDip ) * TDSetting.mUnitAngle
+    );
+  }
+
 
 }

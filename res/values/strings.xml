@@ -1275,6 +1275,8 @@
 
     <string name="perms_mandatory">TopoDroid cannot run without these permissions:</string>
     <string name="perms_optional">TopoDroid may fail without these permissions:</string>
+    <string name="perm_required">Required permissions are now granted. Restart TopoDroid</string>
+    <string name="perm_consider">Consider granting permission: </string>
     <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">
 \nTopoDroid is an Open Source Android app for surveying caves with the DistoX.

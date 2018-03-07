@@ -223,6 +223,26 @@ public class DrawingPointLinePath extends DrawingPath
     if ( mSize > 2 ) {
       int size = 1;
       LinePoint prev = mFirst;
+      LinePoint pt = prev.mNext;
+      while ( pt != mLast && pt != null ) {
+        LinePoint next = pt.mNext; // pt.mNext != null because pt < mLast
+        prev.mNext = next;
+        next.mPrev = prev; 
+        ++ size;
+        prev = next;
+        pt = prev.mNext;
+      }
+      if ( pt == mLast ) ++ size; // for the mLast point
+      mSize = size;     
+    }    
+    retracePath();
+  }
+
+  void makeRock()
+  {
+    if ( mSize > 2 ) {
+      int size = 1;
+      LinePoint prev = mFirst;
       LinePoint pt = mFirst.mNext;
       while ( pt != mLast ) {
         LinePoint next = pt.mNext; // pt.mNext != null because pt < mLast

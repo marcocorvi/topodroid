@@ -722,7 +722,7 @@ public class DrawingWindow extends ItemDrawer
       if ( blk != null ) {
         if ( blk.isMultiBad() ) {
           dpath.setPaint( BrushManager.fixedOrangePaint );
-        } else if ( mApp.mShotWindow.mDistoXAccuracy.isBlockMagneticBad( blk ) ) {
+        } else if ( mApp.mShotWindow != null && mApp.mShotWindow.isBlockMagneticBad( blk ) ) {
           dpath.setPaint( BrushManager.fixedRedPaint );
         } else if ( TDSetting.isConnectionModeBatch() && blk.isRecent( mApp.mSecondLastShotId, System.currentTimeMillis()/1000 ) ) {
           dpath.setPaint( BrushManager.fixedBluePaint );
@@ -739,7 +739,7 @@ public class DrawingWindow extends ItemDrawer
                                      // float xoff, float yoff, 
                                      boolean blue )
   {
-	  Log.v("DistoX", "Section splay angle " + a + " " + TDSetting.mVertSplay );
+    // Log.v("DistoX", "Section splay angle " + a + " " + TDSetting.mVertSplay );
     DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
     if ( blue ) {
       if ( blk.mType == DBlock.BLOCK_X_SPLAY ) {
@@ -2347,7 +2347,7 @@ public class DrawingWindow extends ItemDrawer
         if ( plot != null ) {
           mData.dropPlot( plot.id, mApp.mSID );
         } else {
-          TDLog.Error("No plot NAME " + xs_id + " SID " + mApp.mSID + " in database" );
+          TDLog.Error("Delete section line. No plot NAME " + xs_id + " SID " + mApp.mSID );
         }
       } else {
         mDrawingSurface.deletePath( line );
@@ -2357,21 +2357,34 @@ public class DrawingWindow extends ItemDrawer
 
     void sharpenLine( DrawingLinePath line )
     {
-      mDrawingSurface.sharpenLine( line );
+      mDrawingSurface.sharpenPointLine( line );
       modified();
     }
 
     void reduceLine( DrawingLinePath line )
     {
-      mDrawingSurface.reduceLine( line );
+      mDrawingSurface.reducePointLine( line );
+      modified();
+    }
+
+    void rockLine( DrawingLinePath line )
+    {
+      mDrawingSurface.rockPointLine( line );
       modified();
     }
 
     void closeLine( DrawingLinePath line )
     {
-      mDrawingSurface.closeLine( line );
+      mDrawingSurface.closePointLine( line );
       modified();
     }
+
+    void reduceArea( DrawingAreaPath area )
+    {
+      mDrawingSurface.reducePointLine( area );
+      modified();
+    }
+
 
     void deleteArea( DrawingAreaPath area )
     {
@@ -3182,7 +3195,8 @@ public class DrawingWindow extends ItemDrawer
         float x5 = currentLine.mLast.x + currentLine.mDx * 20; 
         float y5 = currentLine.mLast.y + currentLine.mDy * 20; 
         // FIXME if ( mLandscape ) { float t=x5; x5=-y5; y5=t; }
-        String scrap_option = "-scrap " /* + mApp.mySurvey + "-" */ + section_id;
+        // FIXME String scrap_option = "-scrap " /* + mApp.mySurvey + "-" */ + section_id;
+        String scrap_option = "-scrap " + mApp.mySurvey + "-" + section_id;
         DrawingPointPath section_pt = new DrawingPointPath( BrushManager.mPointLib.mPointSectionIndex,
                                                         x5, y5, DrawingPointPath.SCALE_M, 
                                                         null, // no text 
@@ -3334,6 +3348,7 @@ public class DrawingWindow extends ItemDrawer
         xs_id = "xh-" + name;
         xtype = PlotInfo.PLOT_XH_SECTION;
       } else {
+	TDLog.Error("No at-station section to delete. Plot type " + type + " Name " + name + " SID "  + mApp.mSID );
         return;
       }
 
@@ -3412,7 +3427,7 @@ public class DrawingWindow extends ItemDrawer
       if ( ! mApp.mXSections ) xs_id = xs_id + "-" + mName;
       long xtype = getXSectionType( type );
 
-      // Log.v("DistoXX", "open xsection <" + xs_id + ">" );
+      // Log.v("DistoXX", "open xsection <" + xs_id + "> nick <" + nick + ">" );
 
       PlotInfo plot = mData.getPlotInfo( mApp.mSID, xs_id );
 
@@ -3442,7 +3457,8 @@ public class DrawingWindow extends ItemDrawer
           float x5 = st.getXSectionX( 4 ); // FIXME offset
           float y5 = st.getXSectionY( 4 );
 	  if ( mLandscape ) { float t=x5; x5=-y5; y5=t; }
-	  String scrap_option = "-scrap " /* + mApp.mySurvey + "-" */ + xs_id;
+	  // FIXME String scrap_option = "-scrap " /* + mApp.mySurvey + "-" */ + xs_id;
+	  String scrap_option = "-scrap " + mApp.mySurvey + "-" + xs_id;
 	  DrawingPointPath section_pt = new DrawingPointPath( BrushManager.mPointLib.mPointSectionIndex,
 							    x5, y5, DrawingPointPath.SCALE_M, 
 							    null, scrap_option ); // no text
@@ -5620,7 +5636,8 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.clearXSectionOutline( name );
     if ( on_off ) {
       String tdr = TDPath.getTdrFileWithExt( name );
-      // Log.v("DistoX", "XSECTION set " + name + " " + x + " " + y );
+      // Log.v("DistoXX", "XSECTION set " + name + " " + x + " " + y );
+      // Log.v("DistoXX", "XSECTION set " + name + " on_off " + on_off + " tdr " + tdr );
       mDrawingSurface.setXSectionOutline( name, tdr, x-mDrawingUtil.CENTER_X, y-mDrawingUtil.CENTER_Y );
     }
   }

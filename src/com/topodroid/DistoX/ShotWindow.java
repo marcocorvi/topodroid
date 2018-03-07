@@ -174,7 +174,7 @@ public class ShotWindow extends Activity
   private TopoDroidApp   mApp;
   private Activity       mActivity;
   private DataDownloader mDataDownloader;
-  DistoXAccuracy mDistoXAccuracy;
+  private DistoXAccuracy mDistoXAccuracy;
 
   boolean mSplay = true;  //!< whether to hide splay shots
   boolean mLeg   = true;  //!< whether to hide leg extra shots
@@ -194,6 +194,10 @@ public class ShotWindow extends Activity
   private int mNrButtonF = 5;
 
   private StationSearch mSearch;
+
+  boolean isBlockMagneticBad( DBlock blk ) { return mDistoXAccuracy.isBlockMagneticBad( blk ); }
+
+  String getBlockExtraString( DBlock blk ) { return mDistoXAccuracy.getBlockExtraString( blk ); }
 
   public void setRefAzimuth( float azimuth, long fixed_extend )
   {
@@ -306,7 +310,6 @@ public class ShotWindow extends Activity
     }
   }
 
-  boolean isBlockMagneticBad( DBlock blk ) { return mDistoXAccuracy.isBlockMagneticBad( blk ); }
 
   public void setTheTitle()
   {
