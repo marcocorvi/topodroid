@@ -446,6 +446,7 @@
     <string name="zip_saved">Salvato </string>
     <string name="zip_failed">Archiviazione rilievo fallita</string>
     <string name="unzip_fail">Scompattazione rilievo fallita</string>
+    <!-- TODO string name="unzip_fail_sqlite">Failed SQL: delete survey and retry</string -->
     <string name="unzip_fail_survey">Fallito: Nome rilievo non corrispondente</string>
     <string name="unzip_fail_db">Fallito: Versione database non corrispondente</string>
     <string name="unzip_fail_td">Fallito: Versione TopoDroid non corrispondente</string>

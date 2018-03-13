@@ -24,6 +24,7 @@
       android:text="@string/longitude"
     />
     <EditText android:id="@+id/fix_lng" 
+      style="@style/edit_text"
       android:layout_width="0dp"
       android:layout_weight="40"
       android:layout_height="wrap_content" 
@@ -49,6 +50,7 @@
       android:text="@string/latitude"
     />
     <EditText android:id="@id/fix_lat" 
+      style="@style/edit_text"
       android:layout_width="0dp"
       android:layout_weight="40"
       android:layout_height="wrap_content" 
@@ -73,6 +75,7 @@
       android:text="@string/h_ellipsoid"
     />
     <EditText android:id="@id/fix_alt" 
+      style="@style/edit_text"
       android:layout_width="0dp"
       android:layout_weight="40"
       android:layout_height="wrap_content" 
@@ -97,6 +100,7 @@
       android:text="@string/h_geoid"
     />
     <EditText android:id="@id/fix_asl" 
+      style="@style/edit_text"
       android:layout_width="0dp"
       android:layout_weight="40"
       android:layout_height="wrap_content" 
@@ -113,6 +117,7 @@
     android:paddingBottom="@dimen/paddingv"
     >  
     <EditText android:id="@+id/fix_station" 
+      style="@style/edit_text"
       android:layout_width="0dp"
       android:layout_weight="20"
       android:layout_height="wrap_content"
@@ -120,6 +125,7 @@
       android:inputType="text"
     />
     <EditText android:id="@id/fix_comment" 
+      style="@style/edit_text"
       android:layout_width="0dp"
       android:layout_weight="80"
       android:layout_height="wrap_content" 
@@ -144,6 +150,7 @@
       android:text="@string/declination"
     />
     <EditText android:id="@id/fix_decl" 
+      style="@style/edit_text"
       android:layout_width="0dp"
       android:layout_weight="30"
       android:layout_height="wrap_content" 
@@ -169,8 +176,6 @@
     >  
     <Button android:id="@+id/fix_convert"
       style="@style/button_default"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
       android:layout_marginRight="@dimen/marginh"
       android:text="@string/button_convert"
       />
@@ -204,22 +209,16 @@
     > 
     <Button android:id="@+id/fix_view"
       style="@style/button_default"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
       android:layout_marginRight="@dimen/marginh"
       android:text="@string/button_view"
     />
     <Button android:id="@+id/fix_save"
       style="@style/button_default"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content" 
       android:layout_marginLeft="@dimen/marginh"
       android:text="@string/button_save"
     />
     <Button android:id="@+id/fix_drop"
       style="@style/button_default"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
       android:text="@string/button_delete"
       android:textColor="@color/textdelete"
     />

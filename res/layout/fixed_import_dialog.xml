@@ -14,6 +14,7 @@
     android:layout_height="wrap_content"
     >
     <EditText android:id="@+id/station" 
+      style="@style/edit_text"
       android:layout_marginTop="@dimen/margintiny"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content" 
@@ -23,6 +24,7 @@
       android:ems="25"
     />
     <EditText android:id="@+id/comment" 
+      style="@style/edit_text"
       android:layout_marginTop="10dp"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content" 
@@ -80,15 +82,11 @@
       >
       <Button android:id="@+id/btn_view"
         style="@style/button_default"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         android:text="@string/button_view"
         android:layout_marginRight="@dimen/marginh"
       />
       <Button android:id="@+id/btn_ok"
         style="@style/button_default"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         android:text="@string/button_save"
       />
     </LinearLayout>

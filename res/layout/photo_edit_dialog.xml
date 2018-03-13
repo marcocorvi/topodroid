@@ -50,16 +50,12 @@
     >
     <Button android:id="@+id/photo_delete"
       style="@style/button_default"
-      android:layout_height="wrap_content"
-      android:layout_width="wrap_content"
       android:textColor="@color/textdelete"
       android:text="@string/button_delete"
       android:layout_marginRight="@dimen/marginh"
     />
     <Button android:id="@+id/photo_ok"
       style="@style/button_default"
-      android:layout_height="wrap_content"
-      android:layout_width="wrap_content"
       android:text="@string/button_save"
     />
   </LinearLayout>

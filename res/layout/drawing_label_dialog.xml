@@ -14,6 +14,7 @@
     />
       				  
   <EditText android:id="@+id/label_text"
+    style="@style/edit_text"
     android:layout_marginTop="@dimen/margintiny"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content" 
@@ -31,15 +32,11 @@
     >
     <Button android:id="@+id/label_ok"
       style="@style/button_default"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
       android:text="@string/button_ok"
       android:layout_marginRight="@dimen/marginh"
     />
     <Button android:id="@+id/label_cancel"
       style="@style/button_default"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
       android:text="@string/button_cancel"
     />
   </LinearLayout>

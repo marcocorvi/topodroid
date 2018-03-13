@@ -34,22 +34,16 @@
       >
 <!--
 	    <Button android:id="@+id/buttonClick"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
               style="@style/button_default"
               android:gravity="right"
               android:layout_marginBottom="@dimen/marginv"
             />
 	    <Button android:id="@+id/buttonSave"
-              android:layout_width="wrap_content"
-	      android:layout_height="wrap_content"
               style="@style/button_default"
               android:gravity="right"
               android:layout_marginBottom="@dimen/marginv"
               />
 	    <Button android:id="@+id/buttonQuit"
-              android:layout_width="wrap_content"
-	      android:layout_height="wrap_content"
               style="@style/button_default"
               android:gravity="right"
               android:layout_marginBottom="@dimen/marginv"

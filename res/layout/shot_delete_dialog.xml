@@ -36,8 +36,6 @@
 
   <Button android:id="@+id/shot_delete"
     style="@style/button_default"
-    android:layout_width="wrap_content" 
-    android:layout_height="wrap_content" 
     android:text="@string/button_delete"
     android:textColor="@color/textdelete"
   />

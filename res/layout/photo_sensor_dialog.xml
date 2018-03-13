@@ -36,8 +36,6 @@
     android:orientation="horizontal" 
     >
     <Button android:id="@+id/btn_ok"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
       style="@style/button_default"
       android:text="@string/button_lrud"
       android:singleLine="true"
@@ -65,11 +63,11 @@
       />
     </RadioGroup>
     <EditText android:id="@+id/station_distance" 
+      style="@style/edit_signeddecimal_light"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content" 
       android:maxLines="1" 
       android:singleLine="true"
-      android:inputType="numberDecimal"
       />
   </LinearLayout>
 
@@ -82,6 +80,7 @@
     android:orientation="horizontal" 
     >
     <EditText android:id="@+id/shot_left" 
+      style="@style/edit_decimal_light"
       android:maxLines="1" 
       android:layout_width="0dp"
       android:layout_weight="25"
@@ -89,9 +88,9 @@
       android:hint="&#x21A4;"
       android:nextFocusRight="@+id/shot_right"
       android:singleLine="true"
-      android:inputType="numberDecimal"
       />
     <EditText android:id="@id/shot_right" 
+      style="@style/edit_decimal_light"
       android:maxLines="1" 
       android:layout_width="0dp"
       android:layout_weight="25"
@@ -99,9 +98,9 @@
       android:hint="&#x21A6;"
       android:nextFocusRight="@+id/shot_up"
       android:singleLine="true"
-      android:inputType="numberDecimal"
       />
     <EditText android:id="@id/shot_up" 
+      style="@style/edit_decimal_light"
       android:maxLines="1" 
       android:layout_width="0dp"
       android:layout_weight="25"
@@ -109,16 +108,15 @@
       android:hint="&#x21A5;"
       android:nextFocusRight="@+id/shot_down"
       android:singleLine="true"
-      android:inputType="numberDecimal"
       />
     <EditText android:id="@id/shot_down" 
+      style="@style/edit_decimal_light"
       android:maxLines="1" 
       android:layout_width="0dp"
       android:layout_weight="25"
       android:layout_height="wrap_content" 
       android:hint="&#x21A7;"
       android:singleLine="true"
-      android:inputType="numberDecimal"
       />
   </LinearLayout>
 
@@ -172,8 +170,6 @@
     >
     <Button android:id="@+id/button_cancel"
       style="@style/button_default"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
       android:text="@string/button_cancel"
     />
   </LinearLayout>

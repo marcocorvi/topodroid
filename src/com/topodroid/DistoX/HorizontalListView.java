@@ -153,7 +153,7 @@ public class HorizontalListView extends AdapterView<ListAdapter>
   {
     LayoutParams params = child.getLayoutParams();
     if(params == null) {
-        params = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
+        params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
     }
 
     addViewInLayout(child, viewPos, params, true);

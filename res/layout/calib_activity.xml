@@ -49,19 +49,20 @@
      android:layout_height="fill_parent"
      >
     <EditText android:id="@+id/calib_name" 
-          android:layout_marginTop="@dimen/margintiny"
-          android:layout_width="fill_parent"
-          android:layout_height="wrap_content" 
-          android:singleLine="true"
-          android:hint="@string/name"
-          android:scrollHorizontally="true" />
+      style="@style/edit_text_light"
+      android:layout_marginTop="@dimen/margintiny"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content" 
+      android:singleLine="true"
+      android:hint="@string/name"
+      android:scrollHorizontally="true" />
      		
     <Button android:id="@+id/calib_date" 
-          android:layout_marginTop="@dimen/margintiny"
-          android:layout_width="fill_parent"
-          android:layout_height="wrap_content" 
-          android:singleLine="true"
-          android:scrollHorizontally="true"
+      android:layout_marginTop="@dimen/margintiny"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content" 
+      android:singleLine="true"
+      android:scrollHorizontally="true"
     />
 
     <!-- TextView android:id="@+id/calib_device" 
@@ -73,13 +74,14 @@
           android:scrollHorizontally="true" / -->
 
     <EditText android:id="@+id/calib_comment" 
-          android:maxLines="1" 
-          android:layout_marginTop="@dimen/margintiny"
-          android:layout_width="fill_parent"
-          android:layout_height="wrap_content" 
-          android:singleLine="true"
-          android:hint="@string/description"
-          android:scrollHorizontally="true" />
+      style="@style/edit_text_light"
+      android:maxLines="1" 
+      android:layout_marginTop="@dimen/margintiny"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content" 
+      android:singleLine="true"
+      android:hint="@string/description"
+      android:scrollHorizontally="true" />
 
 
     <TextView 

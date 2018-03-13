@@ -7,6 +7,7 @@
     >
  
     <EditText android:id="@+id/station"
+      style="@style/edit_text"
         android:layout_marginTop="@dimen/margintiny"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
@@ -18,6 +19,7 @@
         />
  
     <EditText android:id="@+id/comment"
+      style="@style/edit_text"
         android:layout_below="@id/station"
         android:layout_marginTop="@dimen/marginv"
         android:layout_width="fill_parent"
@@ -37,8 +39,6 @@
         android:layout_marginTop="@dimen/marginvbig"
         >
       <!-- Button android:id="@+id/button_cancel"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         style="@style/button_default"
         android:text="@string/button_cancel"
         / -->
@@ -49,16 +49,12 @@
         android:gravity="left"
         >
       <Button android:id="@+id/button_loc"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         android:layout_gravity="left"
         style="@style/button_default"
         android:text="@string/button_gps_start"
         />
 
       <Button android:id="@+id/button_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:text="@string/button_view"
         style="@style/button_default"
@@ -72,8 +68,6 @@
         android:gravity="right"
         >
       <Button android:id="@+id/button_add"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         android:layout_gravity="right"
         style="@style/button_default"
         android:text="@string/button_save"

@@ -95,8 +95,6 @@
       >
       <Button android:id="@+id/button_coeff_write"
         style="@style/button_default"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         android:text="@string/button_write"
         android:textColor="@color/textdelete"
       />

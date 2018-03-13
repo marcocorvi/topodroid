@@ -23,22 +23,16 @@
     >
     <Button android:id="@+id/btn_merge"
       style="@style/button_default"
-      android:layout_width="wrap_content"
-      android:layout_height="match_parent"
       android:layout_marginRight="@dimen/marginh"
       android:text="@string/button_merge"
     />
     <Button android:id="@+id/btn_clear"
       style="@style/button_default"
-      android:layout_width="wrap_content"
-      android:layout_height="match_parent"
       android:layout_marginRight="@dimen/marginh"
       android:text="@string/button_clear"
     />
     <Button android:id="@+id/btn_back"
       style="@style/button_default"
-      android:layout_width="wrap_content"
-      android:layout_height="match_parent"
       android:text="@string/button_cancel"
     />
   </LinearLayout>

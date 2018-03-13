@@ -13,6 +13,7 @@
       />
 
     <EditText android:id="@+id/line_options"
+      style="@style/edit_text_light"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:hint="@string/options"
@@ -70,15 +71,11 @@
       >
       <Button android:id="@+id/button_ok"
         style="@style/button_default"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         android:layout_marginRight="@dimen/marginh"
         android:text="@string/button_ok"
       />
       <Button android:id="@+id/button_cancel"
         style="@style/button_default"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         android:layout_marginRight="@dimen/marginh"
         android:text="@string/button_cancel"
       />

@@ -37,6 +37,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -338,15 +339,16 @@ public class ShotDialog extends MyDialog
     }
 
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
+    // Toast.makeText( mContext, "SIZE " + size, Toast.LENGTH_SHORT).show();
     
     LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
     // LinearLayout layout9 = (LinearLayout) findViewById( R.id.layout9 );
     layout4.setMinimumHeight( size + 20 );
     // layout9.setMinimumHeight( size + 20 );
 
-    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
-      LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
-    lp.setMargins( 0, 10, 20, 10 );
+    // LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
+    //   LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
+    // lp.setMargins( 0, 10, 20, 10 );
 
     if ( TDLevel.overNormal ) {
       mRBdup       = new MyCheckBox( mContext, size, R.drawable.iz_dup_ok, R.drawable.iz_dup_no );

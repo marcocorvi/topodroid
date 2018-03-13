@@ -18,9 +18,8 @@
          android:text="@string/calibration_length"
       />
       <EditText android:id="@+id/et_length"
-         android:layout_width="200dp"
-         android:layout_height="wrap_content" 
-         android:inputType="numberDecimal|numberSigned"
+        style="@style/edit_signeddecimal_light"
+        android:layout_width="200dp"
       />
     </LinearLayout>
 
@@ -29,15 +28,14 @@
       android:layout_height="wrap_content"
       android:paddingBottom="10dp">
       <TextView android:id="@+id/tv_azimuth" 
-         android:layout_width="200dp"
-         android:layout_height="wrap_content" 
-         android:ems="25"
-         android:text="@string/calibration_azimuth"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content" 
+        android:ems="25"
+        android:text="@string/calibration_azimuth"
       />
       <EditText android:id="@+id/et_azimuth"
-         android:layout_width="200dp"
-         android:layout_height="wrap_content" 
-         android:inputType="numberDecimal|numberSigned"
+        style="@style/edit_signeddecimal_light"
+        android:layout_width="200dp"
       />
     </LinearLayout>
 
@@ -52,9 +50,8 @@
          android:text="@string/calibration_clino"
       />
       <EditText android:id="@+id/et_clino"
-         android:layout_width="200dp"
-         android:layout_height="wrap_content" 
-         android:inputType="numberDecimal|numberSigned"
+        style="@style/edit_signeddecimal_light"
+        android:layout_width="200dp"
       />
     </LinearLayout>
 
@@ -79,15 +76,11 @@
       >
       <Button android:id="@+id/button_ok"
         style="@style/button_default"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         android:text="@string/button_save"
         android:layout_marginRight="@dimen/marginh"
       />
       <Button android:id="@+id/button_back"
         style="@style/button_default"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         android:text="@string/button_cancel"
       />
     </LinearLayout>

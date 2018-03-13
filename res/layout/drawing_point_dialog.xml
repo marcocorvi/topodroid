@@ -97,12 +97,14 @@
   </LinearLayout>
 
   <EditText android:id="@+id/point_text"
+    style="@style/edit_text_light"
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
     android:paddingBottom="10dp"
     android:inputType="text"
   />
   <EditText android:id="@+id/point_options"
+    style="@style/edit_text_light"
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
     android:hint="@string/options"
@@ -126,23 +128,17 @@
     >
     <Button android:id="@+id/button_draw"
       style="@style/button_default"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
       android:layout_marginRight="@dimen/marginh"
       android:text="@string/button_plot"
     />
     <Button android:id="@+id/button_ok"
       style="@style/button_default"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
       android:layout_marginRight="@dimen/marginh"
       android:text="@string/button_save"
     />
 
     <Button android:id="@+id/button_cancel"
       style="@style/button_default"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
       android:text="@string/button_cancel"
     />
 

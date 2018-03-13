@@ -69,6 +69,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.Toolbar;
 
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -104,7 +106,8 @@ public class MainWindow extends Activity
   private Activity mActivity = null;
   private boolean onMenu; // whether menu is displaying
 
-  private LinearLayout mLayout;
+  // private LinearLayout mTdLayout;
+  private RelativeLayout mRelLayout;
   private ListView mList;
 
   // private ArrayAdapter<String> mArrayAdapter;
@@ -359,7 +362,6 @@ public class MainWindow extends Activity
   TopoDroidAbout mTopoDroidAbout = null;
  
   HorizontalListView mListView;
-  // HorizontalImageButtonView mButtonView1;
   HorizontalButtonView mButtonView1;
   Button     mImage;
   ListView   mMenu;
@@ -367,6 +369,8 @@ public class MainWindow extends Activity
   // MyMenuAdapter mMenuAdapter = null;
   ArrayAdapter< String > mMenuAdapter;
   
+  // FIXME TOOLBAR Toolbar mToolbar;
+
 
   void setMenuAdapter( Resources res )
   {
@@ -447,7 +451,8 @@ public class MainWindow extends Activity
     // mArrayAdapter = new ArrayAdapter<>( this, R.layout.message );
     mArrayAdapter = new ListItemAdapter( this, R.layout.message );
 
-    mLayout = (LinearLayout) findViewById( R.id.td_layout );
+    // mTdLayout = (LinearLayout) findViewById( R.id.td_layout );
+    mRelLayout = (RelativeLayout) findViewById( R.id.rel_layout );
 
     mList = (ListView) findViewById(R.id.td_list);
     mList.setAdapter( mArrayAdapter );
@@ -470,6 +475,10 @@ public class MainWindow extends Activity
     // TDLog.Profile("TDActivity buttons");
     mListView = (HorizontalListView) findViewById(R.id.listview);
     resetButtonBar();
+
+    // FIXME TOOLBAR mToolbar = (Toolbar) findViewById( R.id.toolbar );
+    // setActionBar( mToolbar );
+    // resetToolbar();
 
     if ( mApp.mCheckPerms != 0 ) {
       new TopoDroidPerms( this, mApp.mCheckPerms ).show();
@@ -539,6 +548,7 @@ public class MainWindow extends Activity
   {
     int size = mApp.setListViewHeight( mListView );
     MyButton.resetCache( /* mApp, */ size );
+    // Toast.makeText( this, "SIZE " + size, Toast.LENGTH_SHORT ).show();
 
     // FIXME THMANAGER
     mNrButton1 = 4;
@@ -550,10 +560,33 @@ public class MainWindow extends Activity
       mButton1[k] = MyButton.getButton( mActivity, this, izons[k] );
     }
 
-    // mButtonView1 = new HorizontalImageButtonView( mButton1 );
     mButtonView1 = new HorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );
+
+    // mRelLayout.invalidate();
   }
+
+  // FIXME TOOLBAR void resetToolbar()
+  // {
+  //   int size = TDSetting.mSizeButtons;
+  //   MyButton.resetCache( /* mApp, */ size );
+
+  //   LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+
+  //   // FIXME THMANAGER
+  //   mNrButton1 = 4;
+  //   if ( TDLevel.overExpert ) mNrButton1 ++; // TH MANAGER
+  //   mButton1 = new Button[mNrButton1];
+
+  //   for (int k=0; k<mNrButton1; ++k ) {
+  //     mButton1[k] = MyButton.getButton( mActivity, this, izons[k] );
+  //     mToolbar.addView( mButton1[k], params );
+  //   }
+
+  //   mImage = MyButton.getButton( mActivity, this, R.drawable.ic_menu );
+  //   mImage.setBackgroundDrawable( MyButton.getButtonBackground( mApp, getResources(), R.drawable.iz_menu ) );
+  //   mToolbar.addView( mImage, params );
+  // }
 
   @Override
   public void onDismiss( DialogInterface d )

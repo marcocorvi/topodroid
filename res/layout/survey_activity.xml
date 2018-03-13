@@ -49,7 +49,7 @@
       >
    					  
     <EditText android:id="@+id/survey_name" 
-        style="@style/edit_text"
+        style="@style/edit_text_light"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/marginv"
         android:scrollHorizontally="true"
@@ -65,7 +65,7 @@
     />
    		
     <EditText android:id="@+id/survey_team" 
-        style="@style/edit_text"
+        style="@style/edit_text_light"
         android:layout_width="match_parent"
         android:hint="@string/team"
         android:layout_marginTop="@dimen/marginv"
@@ -73,14 +73,14 @@
     />
    		
     <EditText android:id="@+id/survey_decl" 
-        style="@style/edit_signeddecimal"
+        style="@style/edit_signeddecimal_light"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/marginv"
         android:scrollHorizontally="true"
     />
 
       <EditText android:id="@+id/survey_comment" 
-        style="@style/edit_text"
+        style="@style/edit_text_light"
         android:layout_width="match_parent"
         android:hint="@string/description"
         android:layout_marginTop="@dimen/marginv"

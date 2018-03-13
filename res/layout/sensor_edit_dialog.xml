@@ -35,7 +35,7 @@
         />
 
     <EditText android:id="@+id/sensor_comment" 
-        style="@style/edit_text"
+        style="@style/edit_text_light"
         android:layout_marginTop="@dimen/marginv"
         android:layout_width="fill_parent"
         android:hint="@string/comment"
@@ -51,15 +51,11 @@
       >
       <Button android:id="@+id/sensor_delete"
         style="@style/button_default"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
         android:textColor="@color/textdelete"
         android:text="@string/button_delete"
         android:layout_marginRight="@dimen/marginh"
       />
       <Button android:id="@+id/sensor_ok"
-          android:layout_height="wrap_content"
-          android:layout_width="wrap_content"
           style="@style/button_default"
           android:text="@string/button_save"
       />

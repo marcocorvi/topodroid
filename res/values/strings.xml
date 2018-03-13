@@ -450,6 +450,7 @@
     <string name="zip_saved">Saved </string>
     <string name="zip_failed">Failed survey-zip</string>
     <string name="unzip_fail">Failed survey-unzip</string>
+    <string name="unzip_fail_sqlite">Failed SQL: delete survey and retry</string>
     <string name="unzip_fail_survey">Failed: survey name mismatch</string>
     <string name="unzip_fail_db">Failed: database version mismatch</string>
     <string name="unzip_fail_td">Failed: TopoDroid version mismatch</string>

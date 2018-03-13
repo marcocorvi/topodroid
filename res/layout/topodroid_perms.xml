@@ -24,8 +24,6 @@
     >
     <Button android:id="@+id/btn_ok"
       style="@style/button_default"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
       android:text="@string/button_save"
       android:layout_marginRight="@dimen/marginh" 
     />

@@ -16,7 +16,7 @@
         />
    		
     <EditText android:id="@+id/photo_comment_comment" 
-      style="@style/edit_text"
+      style="@style/edit_text_light"
       android:maxLines="1" 
       android:layout_marginTop="@dimen/marginv"
       android:layout_width="fill_parent"
@@ -39,15 +39,11 @@
       >
       <Button android:id="@+id/photo_comment_ok"
         style="@style/button_default"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         android:layout_marginRight="@dimen/marginh"
         android:text="@string/button_ok"
       />
       <Button android:id="@+id/photo_comment_cancel"
         style="@style/button_default"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         android:text="@string/button_cancel"
       />
     </LinearLayout>

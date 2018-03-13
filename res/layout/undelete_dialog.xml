@@ -21,15 +21,11 @@
       >
       <Button android:id="@+id/button_status"
         style="@style/button_default"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         android:text="@string/undelete_shot"
         android:layout_marginRight="@dimen/marginh"
       />
       <Button android:id="@+id/button_cancel"
         style="@style/button_default"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         android:text="@string/button_cancel"
       />  
     </LinearLayout>

@@ -446,6 +446,7 @@
     <string name="zip_saved">Enregistré </string>
     <string name="zip_failed">Échec lors de la compression du relevé</string>
     <string name="unzip_fail">Échec lors de la décompression du relevé</string>
+    <!-- TODO string name="unzip_fail_sqlite">Failed SQL: delete survey and retry</string -->
     <string name="unzip_fail_survey">Échec : nom du relevé incorrect</string>
     <string name="unzip_fail_db">Échec : version de base de données incorrecte</string>
     <string name="unzip_fail_td">Échec : version de TopoDroid incorrecte</string>

@@ -261,7 +261,7 @@ public class PhotoSensorsDialog extends MyDialog
     // } else if ( b == mButtonExternal ) {
     //   mParent.askExternal( );
     } else if ( b == mButtonShot ) {  // INSERT SHOT
-      mParent.insertShotAt( mBlk );
+      mParent.dialogInsertShotAt( mBlk );
       dismiss();
     } else if ( mButtonSurvey != null && b == mButtonSurvey ) { // SPLIT
       TopoDroidAlertDialog.makeAlert( mParent, mParent.getResources(), R.string.survey_split,

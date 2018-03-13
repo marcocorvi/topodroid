@@ -447,6 +447,7 @@
     <string name="zip_saved">Збережено </string>
     <string name="zip_failed">Помилка survey-zip</string>
     <string name="unzip_fail">Помилка survey-unzip</string>
+    <!-- TODO string name="unzip_fail_sqlite">Failed SQL: delete survey and retry</string -->
     <string name="unzip_fail_survey">Помилка: розбіжність назви зйомки</string>
     <string name="unzip_fail_db">Помилка: розбіжність версія бази даних</string>
     <string name="unzip_fail_td">Помилка: розбіжність версія TopoDroid</string>

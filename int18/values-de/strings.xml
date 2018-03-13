@@ -457,6 +457,7 @@
     <string name="zip_saved">Zip-Datei gespeichert</string>
     <string name="zip_failed">Fehler beim Speichern der Zip-Datei</string>
     <string name="unzip_fail">Fehler beim Entpacken der Zip-Datei</string>
+    <!-- TODO string name="unzip_fail_sqlite">Failed SQL: delete survey and retry</string -->
     <string name="unzip_fail_survey">Fehler: Vermessungsname falsch</string>
     <string name="unzip_fail_db">Fehler: Ungültige Datenbank-Version</string>
     <string name="unzip_fail_td">Fehler: Ungültige TopoDroid-Version</string>

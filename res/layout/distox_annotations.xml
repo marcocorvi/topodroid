@@ -19,6 +19,7 @@
         android:layout_weight="1"
         >
       <EditText android:id="@+id/note_text"
+        style="@style/edit_text_light"
         android:layout_marginTop="@dimen/margintiny"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -41,14 +42,10 @@
       >
       <Button android:id="@+id/button_ok"
         style="@style/button_default"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         android:text="@string/button_save"
       />
       <Button android:id="@+id/button_cancel"
         style="@style/button_default"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         android:layout_marginLeft="@dimen/marginh"
         android:text="@string/button_cancel"
       />

@@ -445,6 +445,7 @@
     <string name="zip_saved">保存 </string>
     <string name="zip_failed">文件压缩失败</string>
     <string name="unzip_fail">文件解压失败</string>
+    <!-- TODO string name="unzip_fail_sqlite">Failed SQL: delete survey and retry</string -->
     <string name="unzip_fail_survey">错误:测量名称不匹配</string>
     <string name="unzip_fail_db">错误: 数据库版本不匹配</string>
     <string name="unzip_fail_td">错误: TopoDroid 版本不匹配</string>

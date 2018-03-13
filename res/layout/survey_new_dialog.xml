@@ -18,7 +18,7 @@
       >
 
     <EditText android:id="@+id/survey_name" 
-      style="@style/edit_text"
+      style="@style/edit_text_light"
       android:layout_marginTop="@dimen/marginvbig"
       android:layout_width="match_parent"
       android:hint="@string/name"
@@ -35,7 +35,7 @@
     />
         	
     <EditText android:id="@+id/survey_team" 
-        style="@style/edit_text"
+        style="@style/edit_text_light"
         android:layout_marginTop="@dimen/margintiny"
         android:layout_width="match_parent"
         android:hint="@string/team"
@@ -43,14 +43,14 @@
     />
         	
     <EditText android:id="@+id/survey_station" 
-      style="@style/edit_text"
+      style="@style/edit_text_light"
       android:layout_marginTop="@dimen/margintiny"
       android:layout_width="match_parent"
       android:scrollHorizontally="true"
     />
         	
     <EditText android:id="@+id/survey_decl" 
-        style="@style/edit_signeddecimal"
+        style="@style/edit_signeddecimal_light"
         android:layout_marginTop="2sp"
         android:layout_width="match_parent"
         android:hint="@string/declination"
@@ -58,7 +58,7 @@
     />
         	
     <EditText android:id="@+id/survey_comment" 
-        style="@style/edit_text"
+        style="@style/edit_text_light"
         android:layout_marginTop="@dimen/margintiny"
         android:layout_width="match_parent"
         android:hint="@string/description"
@@ -86,22 +86,16 @@
       >
       <Button android:id="@+id/surveySave"
         style="@style/button_default"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/button_save"
         android:layout_marginRight="@dimen/marginh"
       />
       <Button android:id="@+id/surveyOpen"
         style="@style/button_default"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/button_open"
         android:layout_marginRight="@dimen/marginh"
       />
       <Button android:id="@+id/surveyCancel"
         style="@style/button_default"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/button_cancel"
       />
   </LinearLayout>

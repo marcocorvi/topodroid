@@ -176,6 +176,7 @@ public class Archiver
 
   public int unArchive( String filename, String surveyname )
   {
+    boolean sql_success = false;
     int ok_manifest = -2;
     String pathname;
     try {
@@ -200,7 +201,7 @@ public class Archiver
         f.delete();
       }
       zip.close();
-      TDLog.Log( TDLog.LOG_ZIP, "unArchive manifest " + ok_manifest );
+      TDLog.Log( TDLog.LOG_ZIP, "un-archive manifest " + ok_manifest );
       if ( ok_manifest == 0 ) {
         FileInputStream fis = new FileInputStream( filename );
         ZipInputStream zin = new ZipInputStream( fis );
@@ -295,7 +296,7 @@ public class Archiver
               fout.close();
               if ( sql ) {
                 TDLog.Log( TDLog.LOG_ZIP, "Zip sqlfile \"" + pathname + "\"" );
-                app.mData.loadFromFile( pathname, app.mManifestDbVersion );
+                sql_success = ( app.mData.loadFromFile( pathname, app.mManifestDbVersion ) >= 0 );
                 File f = new File( pathname );
                 f.delete();
               }
@@ -310,6 +311,12 @@ public class Archiver
     } catch ( IOException e ) {
       TDLog.Error( "ERROR IO: " + e.toString() );
     }
+    if ( ! sql_success ) {
+      TDLog.Error( "ERROR SQL" );
+      // TODO tell user that there was a problem
+      ok_manifest = -5;
+    }
+
     return ok_manifest;
   }
 }

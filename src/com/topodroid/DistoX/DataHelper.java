@@ -71,9 +71,6 @@ public class DataHelper extends DataSetObservable
   private final static String WHERE_SID_SHOTID  = "surveyId=? AND shotId=?";
   private final static String WHERE_SID_START   = "surveyId=? AND start=?";
 
-  static final long LEG_NORMAL = 0L;
-  static final long LEG_EXTRA  = 1L;
-
   private SQLiteDatabase myDB = null;
   private long           myNextId;   // id of next shot
   private long           myNextCId;  // id of next calib-data
@@ -515,7 +512,7 @@ public class DataHelper extends DataSetObservable
     // Log.v("DistoX", "compile statements done");
   }
 
-  private void logError( String msg, SQLiteException e )
+  private void logError( String msg, Exception e )
   {
     TDLog.Error("DB " + msg + ": " + e.getMessage() );
   }
@@ -549,14 +546,15 @@ public class DataHelper extends DataSetObservable
       }
     } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
     } catch ( SQLiteException e1 )       { logError("survey rename " + name, e1 ); 
-    // } catch ( IllegalStateException e2 ) { logError("survey rename", e2 );
+    } catch ( IllegalStateException e2 ) { logError("survey rename", e2 );
     } finally { myDB.endTransaction(); }
     return true;
   }
 
-  public void updateSurveyInfo( long id, String date, String team, double decl, String comment,
+  public boolean updateSurveyInfo( long id, String date, String team, double decl, String comment,
                                 String init_station, int xsections, boolean forward )
   {
+    boolean ret = false;
     ContentValues vals = new ContentValues();
     vals.put( "day", date );
     vals.put( "team", ((team != null)? team : "") );
@@ -572,10 +570,12 @@ public class DataHelper extends DataSetObservable
       if ( forward && mListeners != null ) { // synchronized( mListeners )
         mListeners.onUpdateSurveyInfo( id, date, team, decl, comment, init_station, xsections );
       }
+      ret = true;
     } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
     } catch ( SQLiteException e1 )       { logError("survey info", e1 ); 
-    // } catch ( IllegalStateException e2 ) { logError("survey info", e2 );
+    } catch ( IllegalStateException e2 ) { logError("survey info", e2 );
     } finally { myDB.endTransaction(); }
+    return ret;
   }
 
   public boolean updateSurveyDayAndComment( String name, String date, String comment, boolean forward )
@@ -598,7 +598,7 @@ public class DataHelper extends DataSetObservable
       ret = true;
     } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
     } catch ( SQLiteException e1 )       { logError(msg, e1 ); 
-    // } catch ( IllegalStateException e2 ) { logError(msg, e2 );
+    } catch ( IllegalStateException e2 ) { logError(msg, e2 );
     } finally { myDB.endTransaction(); }
     return ret;
   }
@@ -613,7 +613,7 @@ public class DataHelper extends DataSetObservable
       ret = true;
     } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
     } catch ( SQLiteException e1 )       { logError(msg, e1 );
-    // } catch ( IllegalStateException e2 ) { logError(msg, e2 );
+    } catch ( IllegalStateException e2 ) { logError(msg, e2 );
     } finally { myDB.endTransaction(); }
     return ret;
   }
@@ -628,7 +628,7 @@ public class DataHelper extends DataSetObservable
       ret = true;
     } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
     } catch ( SQLiteException e1 )       { logError(msg, e1 ); 
-    // } catch ( IllegalStateException e2 ) { logError(msg, e2 );
+    } catch ( IllegalStateException e2 ) { logError(msg, e2 );
     } finally { myDB.endTransaction(); }
     return ret;
   }
@@ -643,7 +643,7 @@ public class DataHelper extends DataSetObservable
       ret = true;
     } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
     } catch ( SQLiteException e1 )       { logError(msg, e1 );
-    // } catch ( IllegalStateException e2 ) { logError(msg, e2 );
+    } catch ( IllegalStateException e2 ) { logError(msg, e2 );
     } finally { myDB.endTransaction(); }
     return ret;
   }
@@ -662,7 +662,7 @@ public class DataHelper extends DataSetObservable
       ret = true;
     } catch ( SQLiteDiskIOException e )  {  handleDiskIOError( e );
     } catch (SQLiteException e1 )        { logError(table + " update " + id, e1 ); 
-    // } catch ( IllegalStateException e2 ) { logError(table + " update " + id, e2 );
+    } catch ( IllegalStateException e2 ) { logError(table + " update " + id, e2 );
     } finally { myDB.endTransaction(); }
     return ret;
   }
@@ -675,10 +675,10 @@ public class DataHelper extends DataSetObservable
       stmt.execute();
       myDB.setTransactionSuccessful();
       ret = true;
-    } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
+    } catch ( SQLiteDiskIOException e0 ) { handleDiskIOError( e0 );
     } catch ( SQLiteException e1 )       { logError(msg, e1 ); 
+    } catch ( IllegalStateException e2 ) { logError(msg, e2 );
     } finally { myDB.endTransaction(); }
-    // } catch ( IllegalStateException e2 ) { logError(msg, e2 ); 
     return ret;
   }
 
@@ -854,7 +854,7 @@ public class DataHelper extends DataSetObservable
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch ( SQLiteException e ) { logError("Shot update sqlite error " + fStation + " " + tStation, e );
       // try { Thread.sleep(50); } catch (InterruptedException ee ) { } 
-    // } catch ( IllegalStateException e2 ) { logError("Shot update sqlite error " + fStation + " " + tStation, e2 );
+    } catch ( IllegalStateException e2 ) { logError("Shot update sqlite error " + fStation + " " + tStation, e2 );
     } finally {
       myDB.endTransaction();
     }
@@ -939,13 +939,13 @@ public class DataHelper extends DataSetObservable
     // get the shot sid/id
     DBlock blk = selectShot( id, sid );
     if ( blk.mType == DBlock.BLOCK_SPLAY ) {
-      updateShotLeg( id, sid, 2L, forward );
-      return 2L;
+      updateShotLeg( id, sid, DBlock.LEG_XSPLAY, forward );
+      return DBlock.LEG_XSPLAY;
     } else if ( blk.mType == DBlock.BLOCK_X_SPLAY ) {
-      updateShotLeg( id, sid, 0L, forward );
-      return 0L;
+      updateShotLeg( id, sid, DBlock.LEG_NORMAL, forward );
+      return DBlock.LEG_NORMAL;
     }
-    return -1L;
+    return DBlock.LEG_INVALID;
   }
 
   public void updateShotExtend( long id, long sid, long extend, boolean forward )
@@ -1153,13 +1153,13 @@ public class DataHelper extends DataSetObservable
   }
 
   
-  public long insertShot( long sid, long id, long millis, double d, double b, double c, double r, long extend,
+  public long insertShot( long sid, long id, long millis, double d, double b, double c, double r, long extend, long leg,
                           long shot_type, boolean forward )
-  { // 0L=leg, 0L=status, type 
-    return doInsertShot( sid, id, millis, "", "",  d, b, c, r, extend, DBlock.BLOCK_SURVEY, 0L, 0L, shot_type, "", forward );
+  { // leg, 0L=status, type 
+    return doInsertShot( sid, id, millis, "", "",  d, b, c, r, extend, DBlock.BLOCK_SURVEY, leg, 0L, shot_type, "", forward );
   }
 
-  public void updateShotAMDR( long id, long sid, double acc, double mag, double dip, double r, boolean forward )
+  public boolean updateShotAMDR( long id, long sid, double acc, double mag, double dip, double r, boolean forward )
   {
     // if ( myDB == null ) return;
 
@@ -1184,7 +1184,9 @@ public class DataHelper extends DataSetObservable
       if ( forward && mListeners != null ) { // synchronized( mListeners )
         mListeners.onUpdateShotAMDR( sid, id, acc, mag, dip, r );
       }
+      return true;
     }
+    return false;
   }
 
   private void renamePlotFile( String oldname, String newname )
@@ -1329,7 +1331,7 @@ public class DataHelper extends DataSetObservable
     } catch (SQLiteException e) { logError("transfer shots", e); }
   }
 
-  public long insertShotAt( long sid, long at, long millis, double d, double b, double c, double r, long extend, long type, boolean forward )
+  public long insertShotAt( long sid, long at, long millis, double d, double b, double c, double r, long extend, long leg, long type, boolean forward )
   {
     if ( myDB == null ) return -1L;
     shiftShotsId( sid, at );
@@ -1348,14 +1350,14 @@ public class DataHelper extends DataSetObservable
     cv.put( "dip",      0.0 );
     cv.put( "extend",   extend );
     cv.put( "flag",     DBlock.BLOCK_SURVEY ); // flag );
-    cv.put( "leg",      LEG_NORMAL ); // leg );
+    cv.put( "leg",      leg ); // DBlock.LEG_NORMAL ); // leg );
     cv.put( "status",   TDStatus.NORMAL ); // status );
     cv.put( "comment",  "" ); // comment );
     cv.put( "type",     type ); 
     cv.put( "millis",   millis );
     if ( doInsert( SHOT_TABLE, cv, "insert at" ) ) {
       if ( forward && mListeners != null ) { // synchronized( mListeners )
-        mListeners.onInsertShotAt( sid, at, millis, d, b, c, r, extend, DBlock.BLOCK_SURVEY );
+        mListeners.onInsertShotAt( sid, at, millis, d, b, c, r, extend, leg, DBlock.BLOCK_SURVEY );
       }
     }
     return at;
@@ -1368,7 +1370,7 @@ public class DataHelper extends DataSetObservable
                           long extend, long flag, long leg, long status, long shot_type,
                           String comment, boolean forward )
   {
-    // TDLog.Log( TDLog.LOG_DB, "insertShot <" + id + "> " + from + "-" + to + " extend " + extend );
+    // TDLog.Log( TDLog.LOG_DB, "insert shot <" + id + "> " + from + "-" + to + " extend " + extend );
     if ( myDB == null ) return -1L;
     if ( id == -1L ) {
       ++ myNextId;
@@ -1655,7 +1657,7 @@ public class DataHelper extends DataSetObservable
     cv.put( "id",       id );
     cv.put( "shotId",   bid );
     cv.put( "date",     date );
-    doInsert( AUDIO_TABLE, cv, "insert audio" );
+    if ( ! doInsert( AUDIO_TABLE, cv, "insert audio" ) ) return -1L;
     return id;
   }
 
@@ -2063,10 +2065,10 @@ public class DataHelper extends DataSetObservable
            if ( k > 0 ) {
              // Log.v("DistoX", blk.mId + " clear shot name " + ret );
              updateShotName( ret, sid, "", "", forward );
-             updateShotLeg( ret, sid, LEG_EXTRA, forward ); 
+             updateShotLeg( ret, sid, DBlock.LEG_EXTRA, forward ); 
              if ( k == 2 ) { // N.B. if k == 2 must set ShotLeg also to intermediate shot
                if ( cursor.moveToPrevious() ) { // overcautious
-                 updateShotLeg( cursor.getLong(0), sid, LEG_EXTRA, forward ); 
+                 updateShotLeg( cursor.getLong(0), sid, DBlock.LEG_EXTRA, forward ); 
                }
              }
            }
@@ -2886,7 +2888,7 @@ public class DataHelper extends DataSetObservable
      cv.put( "title",     title );
      cv.put( "date",      date );
      cv.put( "comment",   (comment == null)? "" : comment );
-     doInsert( PHOTO_TABLE, cv, "photo insert" );
+     if ( ! doInsert( PHOTO_TABLE, cv, "photo insert" ) ) return -1L;
      return id;
    }
 
@@ -2947,7 +2949,7 @@ public class DataHelper extends DataSetObservable
      cv.put( "comment",   (comment == null)? "" : comment );
      cv.put( "type",      type );
      cv.put( "value",     value );
-     doInsert( SENSOR_TABLE, cv, "sensor insert" );
+     if ( ! doInsert( SENSOR_TABLE, cv, "sensor insert" ) ) return -1L;
      return id;
    }
 
@@ -3091,7 +3093,7 @@ public class DataHelper extends DataSetObservable
      cv.put( "cs_latitude",  cs_lat );
      cv.put( "cs_altitude",  cs_alt );
      cv.put( "source",     source );
-     doInsert( FIXED_TABLE, cv, "insert fixed" );
+     if ( ! doInsert( FIXED_TABLE, cv, "insert fixed" ) ) return -1L;
      return id;
    }
 
@@ -3126,6 +3128,8 @@ public class DataHelper extends DataSetObservable
        if ( forward && mListeners != null ) { // synchronized( mListeners )
          mListeners.onInsertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation );
        }
+     } else { // failed
+       id = -1L;
      }
      return id;
    }
@@ -3587,7 +3591,7 @@ public class DataHelper extends DataSetObservable
      cv.put( "vert",     z );
      cv.put( "azimuth",  azimuth );
      cv.put( "clino",    clino );
-     doInsert( SKETCH_TABLE, cv, "sketch insert" );
+     if ( ! doInsert( SKETCH_TABLE, cv, "sketch insert" ) ) return -1L;
      return id;
    }
 /* END SKETCH_3D */
@@ -3850,6 +3854,7 @@ public class DataHelper extends DataSetObservable
     */
    long loadFromFile( String filename, int db_version )
    {
+     boolean success = true; // whether the load is successful
      long sid = -1;
      long id, status, shotid;
      String station, title, date, name, comment;
@@ -3880,7 +3885,8 @@ public class DataHelper extends DataSetObservable
          if ( db_version > 29) xsections = (int)( scanline0.longValue( ) );
 
          sid = setSurvey( name, false );
-         updateSurveyInfo( sid, day, team, decl, comment, init_station, xsections, false );
+         success &= updateSurveyInfo( sid, day, team, decl, comment, init_station, xsections, false );
+
          while ( (line = br.readLine()) != null ) {
            TDLog.Log( TDLog.LOG_DB, "loadFromFile: " + line );
            vals = line.split(" ", 4);
@@ -3900,7 +3906,26 @@ public class DataHelper extends DataSetObservable
              shotid  = scanline1.longValue( );
              date    = scanline1.stringValue( );
              if ( shotid >= 0 ) {
-               insertAudio( sid, id, shotid, date );
+               if ( insertAudio( sid, id, shotid, date ) < 0 ) { success = false; }
+               // TDLog.Log( TDLog.LOG_DB, "loadFromFile photo " + sid + " " + id + " " + title + " " + name );
+             }
+
+           } else if ( table.equals(SENSOR_TABLE) ) { // FIXME SENSORS
+             // "id", "shotId", "status", "title", "date", "comment", "type", "value" 
+             id      = scanline1.longValue( );
+             shotid  = scanline1.longValue( );
+             status  = scanline1.longValue( );
+             title   = scanline1.stringValue( );
+             date    = scanline1.stringValue( );
+             comment = scanline1.stringValue( );
+             String type  = scanline1.stringValue( );
+             String value = scanline1.stringValue( );
+             if ( shotid >= 0 ) {
+               if ( insertSensor( sid, id, shotid, title, date, comment, type, value ) >= 0 ) {
+                 success &= updateStatus( SENSOR_TABLE, id, sid, status );
+	       } else {
+		 success = false;
+	       }
                // TDLog.Log( TDLog.LOG_DB, "loadFromFile photo " + sid + " " + id + " " + title + " " + name );
              }
 
@@ -3910,7 +3935,7 @@ public class DataHelper extends DataSetObservable
              date    = scanline1.stringValue( );
              comment = scanline1.stringValue( );
              if ( shotid >= 0 ) {
-               insertPhoto( sid, id, shotid, title, date, comment );
+               if ( insertPhoto( sid, id, shotid, title, date, comment ) < 0 ) { success = false; }
                // TDLog.Log( TDLog.LOG_DB, "loadFromFile photo " + sid + " " + id + " " + title + " " + name );
              }
            } else if ( table.equals(PLOT_TABLE) ) { // ***** PLOTS
@@ -3927,7 +3952,7 @@ public class DataHelper extends DataSetObservable
              String hide  = ( db_version > 24 )? scanline1.stringValue( ) : "";
              String nick  = ( db_version > 30 )? scanline1.stringValue( ) : "";
 	     int orientation = (db_version > 32 )? (int)(scanline1.longValue()) : 0; // default PlotInfo.ORIENTATION_PORTRAIT
-             insertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation, false );
+             if ( insertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation, false ) < 0 ) { success = false; }
              // TDLog.Log( TDLog.LOG_DB, "loadFromFile plot " + sid + " " + id + " " + start + " " + name );
    
 /* FIXME BEGIN SKETCH_3D */
@@ -3951,7 +3976,7 @@ public class DataHelper extends DataSetObservable
              double vert   = scanline1.doubleValue( );
              double azimuth= scanline1.doubleValue( );
              double clino  = scanline1.doubleValue( );
-             insertSketch3d( sid, id, name, status, start, st1, st2, xofft, yofft, zoomt, xoffs, yoffs, zooms, xoff3, yoff3, zoom3, east, south, vert, azimuth, clino );
+             if ( insertSketch3d( sid, id, name, status, start, st1, st2, xofft, yofft, zoomt, xoffs, yoffs, zooms, xoff3, yoff3, zoom3, east, south, vert, azimuth, clino ) < 0 ) { success = false; }
 /* END SKETCH_3D */
            } else if ( table.equals(SHOT_TABLE) ) { // ***** SHOTS
              String from = scanline1.stringValue( );
@@ -3972,9 +3997,12 @@ public class DataHelper extends DataSetObservable
              long type = 0; if ( db_version > 21 ) type = scanline1.longValue( );
 	     long millis = 0; if ( db_version > 31 ) millis = scanline1.longValue( );
 
-             doInsertShot( sid, id, millis, from, to, d, b, c, r, extend, flag, leg, status, type, comment, false );
-             updateShotAMDR( id, sid, acc, mag, dip, r, false );
-             // TDLog.Log( TDLog.LOG_DB, "insertShot " + sid + " " + id + " " + from + " " + to );
+             if ( doInsertShot( sid, id, millis, from, to, d, b, c, r, extend, flag, leg, status, type, comment, false ) >= 0 ) {
+               success &= updateShotAMDR( id, sid, acc, mag, dip, r, false );
+	     } else {
+	       success = false;
+	     }
+             // TDLog.Log( TDLog.LOG_DB, "insert shot " + sid + " " + id + " " + from + " " + to );
            } else if ( table.equals(FIXED_TABLE) ) {
              station    = scanline1.stringValue( );
              double lng = scanline1.doubleValue( );
@@ -3994,7 +4022,9 @@ public class DataHelper extends DataSetObservable
                cs_alt = scanline1.doubleValue( );
              }
              // use id == -1L to force DB get a new id
-             insertFixed( sid, -1L, station, lng, lat, alt, asl, comment, status, source, cs, cs_lng, cs_lat, cs_alt );
+             if ( insertFixed( sid, -1L, station, lng, lat, alt, asl, comment, status, source, cs, cs_lng, cs_lat, cs_alt ) < 0 ) {
+	       success = false;
+	     }
              // TDLog.Log( TDLog.LOG_DB, "loadFromFile fixed " + sid + " " + id + " " + station  );
            } else if ( table.equals(STATION_TABLE) ) {
              // N.B. ONLY IF db_version > 19
@@ -4003,7 +4033,7 @@ public class DataHelper extends DataSetObservable
              name    = scanline1.stringValue( );
              comment = scanline1.stringValue( );
              long flag = ( db_version > 25 )? scanline1.longValue() : 0;
-             insertStation( sid, name, comment, flag );
+             success &= insertStation( sid, name, comment, flag );
            }
          }
        }
@@ -4012,7 +4042,7 @@ public class DataHelper extends DataSetObservable
      } catch ( IOException e ) {
      }
 
-     return sid;
+     return (success ? sid : -sid );
    }
 
    // ----------------------------------------------------------------------

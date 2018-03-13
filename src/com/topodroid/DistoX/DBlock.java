@@ -65,12 +65,17 @@ public class DBlock
   boolean mWithPhoto;
   boolean mMultiBad; // whether it disagree with siblings
 
-  public static final int BLOCK_BLANK      = 0;
-  public static final int BLOCK_MAIN_LEG   = 1; // primary leg shot
-  public static final int BLOCK_SPLAY      = 2;
-  public static final int BLOCK_SEC_LEG    = 3; // additional shot of a centerline leg
-  public static final int BLOCK_BLANK_LEG  = 4; // blank centerline leg-shot
-  public static final int BLOCK_X_SPLAY    = 5; // FIXME_X_SPLAY cross splay
+  static final int BLOCK_BLANK      = 0;
+  static final int BLOCK_MAIN_LEG   = 1; // primary leg shot
+  static final int BLOCK_SPLAY      = 2;
+  static final int BLOCK_SEC_LEG    = 3; // additional shot of a centerline leg
+  static final int BLOCK_BLANK_LEG  = 4; // blank centerline leg-shot
+  static final int BLOCK_X_SPLAY    = 5; // FIXME_X_SPLAY cross splay
+
+  static final long LEG_INVALID = -1L;
+  static final long LEG_NORMAL  = 0L;
+  static final long LEG_EXTRA   = 1L;
+  static final long LEG_XSPLAY  = 2L;
 
   private static int[] colors = {
     TDColor.LIGHT_PINK,   // blank

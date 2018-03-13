@@ -101,8 +101,6 @@
 
       <Button
         android:id="@+id/shot_reverse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_weight="30"
         android:layout_gravity="center"
         style="@style/button_default"
@@ -120,7 +118,7 @@
     </LinearLayout>				  
 
   <EditText android:id="@id/shot_comment" 
-    style="@style/edit_text"
+    style="@style/edit_text_light"
     android:layout_below="@id/layout3"
     android:maxLines="1" 
     android:layout_marginTop="@dimen/margintiny"
@@ -210,8 +208,6 @@
       android:layout_marginTop="@dimen/marginvbig"
       >
       <Button android:id="@+id/btn_lrud"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         style="@style/button_default"
         android:text="@string/button_ok"
         android:singleLine="true"
@@ -228,6 +224,7 @@
     android:orientation="horizontal" 
     >
     <EditText android:id="@+id/shot_left" 
+      style="@style/edit_text"
       android:maxLines="1" 
       android:layout_width="0dp"
       android:layout_weight="25"
@@ -237,6 +234,7 @@
       android:singleLine="true"
       />
     <EditText android:id="@id/shot_right" 
+      style="@style/edit_text"
       android:maxLines="1" 
       android:layout_width="0dp"
       android:layout_weight="25"
@@ -246,6 +244,7 @@
       android:singleLine="true"
       />
     <EditText android:id="@id/shot_up" 
+      style="@style/edit_text"
       android:maxLines="1" 
       android:layout_width="0dp"
       android:layout_weight="25"
@@ -255,6 +254,7 @@
       android:singleLine="true"
       />
     <EditText android:id="@id/shot_down" 
+      style="@style/edit_text"
       android:maxLines="1" 
       android:layout_width="0dp"
       android:layout_weight="25"
@@ -290,29 +290,21 @@
     >
     <Button android:id="@+id/btn_ok"
       style="@style/button_default"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
       android:layout_marginRight="@dimen/marginh"
       android:text="@string/button_ok"
     />
     <Button android:id="@+id/btn_save"
       style="@style/button_default"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
       android:layout_marginRight="@dimen/marginh"
       android:text="@string/button_save"
     />
     <Button android:id="@+id/btn_more"
       style="@style/button_default"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
       android:layout_marginRight="@dimen/marginh"
       android:text="@string/button_more"
     />
     <Button android:id="@+id/btn_back"
       style="@style/button_default"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
       android:text="@string/button_cancel"
     />
   </LinearLayout>

@@ -28,6 +28,7 @@
       />
 
     <EditText android:id="@+id/tv_nickname" 
+      style="@style/edit_text"
         android:layout_marginTop="@dimen/margintiny"
         android:layout_width="200dp"
       	android:ems="25"
@@ -45,15 +46,11 @@
       >
       <Button android:id="@+id/button_ok"
         style="@style/button_default"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         android:text="@string/button_ok"
         android:layout_marginRight="@dimen/marginh"
       />
       <Button android:id="@+id/button_cancel"
         style="@style/button_default"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         android:text="@string/button_cancel"
       />
     </LinearLayout>

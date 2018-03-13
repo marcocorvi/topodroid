@@ -20,14 +20,10 @@
     android:layout_marginTop="@dimen/marginv"
     >
     <Button android:id="@+id/button_start"
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content" 
           style="@style/button_default"
           android:text="@string/button_start"
     />
     <Button android:id="@+id/button_stop"
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content" 
           style="@style/button_default"
           android:text="@string/button_stop"
     />
@@ -50,22 +46,16 @@
     android:gravity="right"
     >
     <Button android:id="@+id/button_connect"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
       style="@style/button_default"
       android:text="@string/menu_attach"
       android:layout_marginRight="@dimen/marginh"
     />
     <Button android:id="@+id/button_disconnect"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
       style="@style/button_default"
       android:text="@string/menu_detach"
       android:layout_marginRight="@dimen/marginh"
     />
     <Button android:id="@+id/button_sync"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
       style="@style/button_default"
       android:text="@string/menu_sync"
     />
@@ -79,8 +69,6 @@
       android:layout_marginTop="@dimen/marginv" 
       >
       <Button android:id="@+id/button_cancel"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         style="@style/button_default"
         android:text="@string/button_back"
         />

@@ -32,14 +32,12 @@
       android:layout_marginTop="@dimen/marginv"
       >
       <EditText android:id="@+id/et_azimuth"
-        style="@style/edit_number"
+        style="@style/edit_number_light"
         android:layout_width="100dp" 
         android:layout_marginRight="@dimen/marginh"
         android:imeOptions="actionDone"
       />    
       <!-- Button android:id="@+id/btn_sensor"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         style="@style/button_default"
         android:text="@string/button_azimuth"
         / -->
@@ -54,7 +52,6 @@
       <Button android:id="@+id/btn_left"
         style="@style/button_default"
         android:layout_width="0dp" 
-        android:layout_height="wrap_content" 
         android:layout_weight="25"
         android:text="@string/button_left"
         android:layout_marginRight="@dimen/marginh"
@@ -62,7 +59,6 @@
       <Button android:id="@+id/btn_ok"
         style="@style/button_default"
         android:layout_width="0dp" 
-        android:layout_height="wrap_content" 
         android:layout_weight="25"
         android:text="@string/button_ok"
         android:layout_marginRight="@dimen/marginh"
@@ -70,7 +66,6 @@
       <Button android:id="@+id/btn_right"
         style="@style/button_default"
         android:layout_width="0dp" 
-        android:layout_height="wrap_content" 
         android:layout_weight="25"
         android:text="@string/button_right"
       />
@@ -86,8 +81,6 @@
       >
       <Button android:id="@+id/button_cancel"
         style="@style/button_default"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         android:text="@string/button_cancel"
       />
     </LinearLayout>

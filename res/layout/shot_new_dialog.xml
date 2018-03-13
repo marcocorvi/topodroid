@@ -26,6 +26,7 @@
       android:orientation="horizontal" 
       >
       <EditText android:id="@+id/shot_from" 
+        style="@style/edit_text"
         android:maxLines="1" 
         android:layout_width="0dp"
         android:layout_weight="50"
@@ -36,6 +37,7 @@
         android:singleLine="true"
         />
       <EditText android:id="@+id/shot_to" 
+        style="@style/edit_text"
         android:maxLines="1" 
         android:layout_width="0dp"
         android:layout_weight="50"
@@ -56,6 +58,7 @@
       android:orientation="horizontal" 
       >
       <EditText android:id="@+id/shot_distance" 
+        style="@style/edit_text"
         android:maxLines="1" 
         android:layout_width="0dp"
         android:layout_weight="30"
@@ -65,6 +68,7 @@
         android:singleLine="true"
         />
       <EditText android:id="@id/shot_bearing" 
+        style="@style/edit_text"
         android:maxLines="1" 
         android:layout_width="0dp"
         android:layout_weight="30"
@@ -74,6 +78,7 @@
         android:singleLine="true"
         />
       <EditText android:id="@id/shot_clino" 
+        style="@style/edit_text"
         android:maxLines="1" 
         android:layout_width="0dp"
         android:layout_weight="30"
@@ -101,6 +106,7 @@
       android:orientation="horizontal" 
       >
       <EditText android:id="@+id/shot_backdistance" 
+        style="@style/edit_text"
         android:maxLines="1" 
         android:layout_width="0dp"
         android:layout_weight="30"
@@ -110,6 +116,7 @@
         android:singleLine="true"
         />
       <EditText android:id="@id/shot_backbearing" 
+        style="@style/edit_text"
         android:maxLines="1" 
         android:layout_width="0dp"
         android:layout_weight="30"
@@ -119,6 +126,7 @@
         android:singleLine="true"
         />
       <EditText android:id="@id/shot_backclino" 
+        style="@style/edit_text"
         android:maxLines="1" 
         android:layout_width="0dp"
         android:layout_weight="30"
@@ -144,6 +152,7 @@
       android:orientation="horizontal" 
       >
       <EditText android:id="@id/shot_left" 
+        style="@style/edit_text"
         android:maxLines="1" 
         android:layout_width="0dp"
         android:layout_weight="25"
@@ -153,6 +162,7 @@
         android:singleLine="true"
         />
       <EditText android:id="@id/shot_right" 
+        style="@style/edit_text"
         android:maxLines="1" 
         android:layout_width="0dp"
         android:layout_weight="25"
@@ -162,6 +172,7 @@
         android:singleLine="true"
         />
       <EditText android:id="@id/shot_up" 
+        style="@style/edit_text"
         android:maxLines="1" 
         android:layout_width="0dp"
         android:layout_weight="25"
@@ -171,6 +182,7 @@
         android:singleLine="true"
         />
       <EditText android:id="@id/shot_down" 
+        style="@style/edit_text"
         android:maxLines="1" 
         android:layout_width="0dp"
         android:layout_weight="25"
@@ -226,8 +238,6 @@
       android:orientation="horizontal" 
       >
       <!== Button android:id="@+id/button_sensor"
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content" 
           style="@style/button_default"
           android:text="@string/button_direction"
           / ==>
@@ -261,22 +271,16 @@
       >
       <Button android:id="@+id/button_ok_shot_name"
         style="@style/button_default"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         android:layout_marginRight="@dimen/marginh"
         android:text="@string/button_ok"
       />
       <Button android:id="@+id/button_save_shot_name"
         style="@style/button_default"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         android:layout_marginRight="@dimen/marginh"
         android:text="@string/button_save"
       />
       <Button android:id="@+id/button_cancel_name"
         style="@style/button_default"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         android:text="@string/button_cancel"
       />
   </LinearLayout>

@@ -104,24 +104,18 @@
     android:layout_marginTop="@dimen/marginvbig"
     >
       <Button android:id="@+id/button_add"
-            android:layout_width="wrap_content" 
-            android:layout_height="wrap_content" 
             style="@style/button_default"
             android:text="@string/btn_install"
             android:layout_marginRight="@dimen/marginh"
       />
 
       <Button android:id="@+id/button_replace"
-            android:layout_width="wrap_content" 
-            android:layout_height="wrap_content" 
             style="@style/button_default"
             android:text="@string/button_replace"
             android:layout_marginRight="@dimen/marginh"
       />
 
       <Button android:id="@+id/button_cancel"
-            android:layout_width="wrap_content" 
-            android:layout_height="wrap_content" 
             style="@style/button_default"
             android:text="@string/button_cancel"
             android:layout_marginRight="@dimen/marginh"

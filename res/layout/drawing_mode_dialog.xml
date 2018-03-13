@@ -66,15 +66,11 @@
     >
     <Button android:id="@+id/button_ok"
       style="@style/button_default"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
       android:layout_marginRight="@dimen/marginh"
       android:text="@string/button_ok"
     />
     <Button android:id="@+id/button_back"
       style="@style/button_default"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
       android:text="@string/button_cancel"
     />
   </LinearLayout>

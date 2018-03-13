@@ -559,9 +559,9 @@ public class ShotWindow extends Activity
     for ( ; blk != null; ) {
       long leg = mApp.mData.updateSplayLeg( blk.mId, mApp.mSID, true );
       // Log.v("DistoX", "toggle splay type " + pos + " new leg " + leg );
-      if ( leg == 0L ) {
+      if ( leg == DBlock.LEG_NORMAL ) {
         blk.mType = DBlock.BLOCK_SPLAY;
-      } else if ( leg == 2L ) {
+      } else if ( leg == DBlock.LEG_XSPLAY ) {
         blk.mType = DBlock.BLOCK_X_SPLAY;
       } else {
         break;
@@ -695,7 +695,7 @@ public class ShotWindow extends Activity
   // }
 
   // called to insert a manual shot after a given shot
-  void insertShotAt( DBlock blk )
+  void dialogInsertShotAt( DBlock blk )
   {
     (new ShotNewDialog( this, mApp, this, blk, mShotId )).show();
   }

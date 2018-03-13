@@ -52,29 +52,21 @@
 <!--
     <Button android:id="@+id/button_foto"
       style="@style/button_default"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
       android:layout_marginRight="@dimen/marginh"
       android:text="@string/button_photo"
     />
     <Button android:id="@+id/button_draw"
       style="@style/button_default"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
       android:layout_marginRight="@dimen/marginh"
       android:text="@string/button_plot"
     />
     <Button android:id="@+id/button_erase"
       style="@style/button_default"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
       android:layout_marginRight="@dimen/marginh"
       android:text="@string/button_delete"
     />
     <Button android:id="@+id/button_save"
       style="@style/button_default"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content"
       android:text="@string/button_save"
     />
 -->
@@ -87,8 +79,6 @@
     android:orientation="horizontal" 
     >
     <Button android:id="@+id/button_cancel"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
       style="@style/button_default"
       android:text="@string/button_cancel"
     />

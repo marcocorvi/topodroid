@@ -14,20 +14,18 @@
    					  
     <Button android:id="@+id/button_dump"
       style="@style/button_default"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
       android:layout_gravity="left"
       android:text="@string/button_dump"
     />
 
     <EditText android:id="@+id/et_dumpfrom" 
-      style="@style/edit_number"
+      style="@style/edit_number_light"
       android:layout_marginTop="@dimen/margintiny"
       android:layout_width="100dp"
       android:hint="0"
     />
     <EditText android:id="@+id/et_dumpto" 
-      style="@style/edit_number"
+      style="@style/edit_number_light"
       android:layout_marginTop="@dimen/margintiny"
       android:layout_width="100dp"
       android:hint="1040"
@@ -40,7 +38,7 @@
     android:orientation="horizontal"
     >
     <EditText android:id="@+id/et_dumpfile" 
-      style="@style/edit_text"
+      style="@style/edit_text_light"
       android:layout_marginTop="@dimen/margintiny"
       android:layout_width="fill_parent"
       android:hint="@string/save_as"

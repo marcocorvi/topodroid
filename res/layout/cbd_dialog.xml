@@ -19,14 +19,12 @@
     >
 
     <Button android:id="@+id/button_ok"
-      android:layout_width="wrap_content"
       android:layout_height="match_parent"
       style="@style/button_default"
       android:text="@string/button_ok"
     />
 
     <Button android:id="@+id/button_cancel"
-      android:layout_width="wrap_content"
       android:layout_height="match_parent"
       style="@style/button_default"
       android:text="@string/button_cancel"
@@ -41,13 +39,13 @@
     >
 
     <Button android:id="@+id/button_create"
-      android:layout_width="wrap_content"
       android:layout_height="match_parent"
       style="@style/button_default"
       android:text="@string/button_create"
     />
 
     <EditText android:id="@+id/subdir"
+      style="@style/edit_text"
       android:layout_width="fill_parent"
       android:layout_height="match_parent"
       android:textSize="@dimen/textsizebig"
@@ -68,8 +66,6 @@
          android:layout_gravity="left"
          >
       <Button android:id="@+id/button_cancel"
-            android:layout_width="wrap_content" 
-            android:layout_height="wrap_content" 
             style="@style/button_default"
             android:text="@string/button_cancel"
       />

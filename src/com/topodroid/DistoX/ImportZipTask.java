@@ -35,8 +35,10 @@ class ImportZipTask extends ImportTask
   protected void onPostExecute(Long result) {
     mMain.setTheTitle( );
     mMain.updateDisplay( );
-    if ( result < -4 ) {
+    if ( result < -5 ) {
       Toast.makeText( mMain, R.string.unzip_fail, Toast.LENGTH_SHORT).show();
+    } else if ( result == -5 ) {
+      Toast.makeText( mMain, R.string.unzip_fail_sqlite, Toast.LENGTH_SHORT).show();
     } else if ( result == -4 ) {
       Toast.makeText( mMain, R.string.unzip_fail_survey, Toast.LENGTH_SHORT).show();
     } else if ( result == -3 ) {

@@ -451,6 +451,7 @@
     <string name="zip_saved">Shranjeno komprimirano</string>
     <string name="zip_failed">Neuspešno komprimiranje načrta</string>
     <string name="unzip_fail">Neuspešno dekomprimiranje načrta</string>
+    <!-- TODO string name="unzip_fail_sqlite">Failed SQL: delete survey and retry</string -->
     <!-- TODO string name="unzip_fail_survey">Failed: survey name mismatch</string -->
     <!-- TODO string name="unzip_fail_db">Failed: database version mismatch</string -->
     <!-- TODO string name="unzip_fail_td">Failed: TopoDroid version mismatch</string -->

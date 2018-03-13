@@ -904,12 +904,14 @@ class TDSetting
         setActivityBooleans( app, level );
         if ( main_window != null ) {
           main_window.resetButtonBar();
+          // FIXME TOOLBAR main_window.resetToolbar();
           main_window.setMenuAdapter( app.getResources() );
         }  
       }
     } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_SIZE_BUTTONS
       if ( setSizeButtons( app, tryInt( prefs, k, defaultButtonSize ) ) ) {
         if ( main_window != null ) main_window.resetButtonBar();
+          // FIXME TOOLBAR main_window.resetToolbar();
       }
     } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_TEXT_SIZE
       setTextSize( app, tryInt( prefs, k, defaultTextSize ) );

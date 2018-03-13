@@ -446,6 +446,7 @@
     <string name="zip_saved">Mentve</string>
     <string name="zip_failed">Nem sikerült a felmérés tömörítése</string>
     <string name="unzip_fail">Nem sikerült a felmérés kitömörítése</string>
+    <!-- TODO string name="unzip_fail_sqlite">Failed SQL: delete survey and retry</string -->
     <string name="unzip_fail_survey">Kitömörítés nem sikerült: felmérés neve nem megfelelő</string>
     <string name="unzip_fail_db">Kitömörítés nem sikerült: adatbázis verzió nem megfelelő</string>
     <string name="unzip_fail_td">Kitömörítés nem sikerült: TopoDroid verzió nem megfelelő</string>

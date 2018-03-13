@@ -445,6 +445,7 @@
     <string name="zip_saved">Salvo </string>
     <string name="zip_failed">Falha na compressão da topo</string>
     <string name="unzip_fail">Falha na decompressão da topo</string>
+    <!-- TODO string name="unzip_fail_sqlite">Failed SQL: delete survey and retry</string -->
     <string name="unzip_fail_survey">Falha: nome da topo incompatível</string>
     <string name="unzip_fail_db">Falha: versão do banco de dados incompatível</string>
     <string name="unzip_fail_td">Falha: versão do TopoDroid incompatível</string>

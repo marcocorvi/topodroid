@@ -31,6 +31,7 @@
   />
 
   <EditText android:id="@+id/photo_comment" 
+    style="@style/edit_text"
     android:layout_marginTop="2dp"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content" 
@@ -48,16 +49,12 @@
     android:gravity="right"
     >
     <!-- Button android:id="@+id/photo_delete"
-      android:layout_height="wrap_content"
-      android:layout_width="wrap_content"
       style="@style/button_default"
       android:textColor="@color/textdelete"
       android:text="@string/button_delete"
     / -->
     <Button android:id="@+id/photo_ok"
       style="@style/button_default"
-      android:layout_height="wrap_content"
-      android:layout_width="wrap_content"
       android:text="@string/button_save"
     />
   </LinearLayout>

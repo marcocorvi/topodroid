@@ -14,8 +14,6 @@
        >
    					  
       <Button android:id="@+id/button_store"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         android:layout_gravity="left"
         style="@style/button_default"
         android:text="@string/button_store"
@@ -45,8 +43,6 @@
        >
    					  
       <Button android:id="@+id/button_read"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         android:layout_gravity="left"
         style="@style/button_default"
         android:text="@string/button_read"
@@ -78,8 +74,6 @@
        >
    					  
       <Button android:id="@+id/button_dump"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         android:layout_gravity="left"
         style="@style/button_default"
         android:text="@string/button_dump"
@@ -107,7 +101,7 @@
        >
    					  
       <EditText android:id="@+id/et_dumpfile" 
-        style="@style/edit_text"
+        style="@style/edit_text_light"
         android:layout_marginTop="@dimen/margintiny"
         android:layout_width="fill_parent" 
         android:hint="@string/save_as"
@@ -124,20 +118,18 @@
    					  
       <Button android:id="@+id/button_reset"
         style="@style/button_default"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         android:layout_gravity="left"
         android:text="@string/button_reset"
         android:textColor="@color/textdelete"
         />
 
       <EditText android:id="@+id/et_from" 
-        style="@style/edit_number"
+        style="@style/edit_number_light"
         android:layout_marginTop="@dimen/margintiny"
         android:layout_width="100dp"
       />
       <EditText android:id="@+id/et_to" 
-        style="@style/edit_number"
+        style="@style/edit_number_light"
         android:layout_marginTop="@dimen/margintiny"
         android:layout_width="100dp"
       />

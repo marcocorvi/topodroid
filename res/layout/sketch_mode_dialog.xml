@@ -37,14 +37,12 @@
 
     <CheckBox android:id="@+id/sketch_mode_splays"
         android:layout_width="fill_parent" 
-        android:layout_height="wrap_content" 
         style="@style/button_default"
         android:text="Show splays"
       />
 
     <CheckBox android:id="@+id/sketch_mode_foresurface"
         android:layout_width="fill_parent" 
-        android:layout_height="wrap_content" 
         style="@style/button_default"
         android:text="Show fore surface"
       />
@@ -57,8 +55,6 @@
       android:gravity="right"
       >
       <Button android:id="@+id/button_ok"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         style="@style/button_default"
         android:text="@string/button_save"
       />

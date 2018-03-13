@@ -114,8 +114,8 @@ class DataListenerSet
 
   // @param e extend
   // @param t type
-  public void onInsertShotAt( long sid, long at, long millis, double d, double b, double c, double r, long e, long t )
-  { for ( DataListener l : mListeners ) l.onInsertShotAt( sid, at, millis, d, b, c, r, e, t ); }
+  public void onInsertShotAt( long sid, long at, long millis, double d, double b, double c, double r, long e, long leg, long t )
+  { for ( DataListener l : mListeners ) l.onInsertShotAt( sid, at, millis, d, b, c, r, e, leg, t ); }
 
   // public void transferShots( long sid, long old_sid, long old_id );
 

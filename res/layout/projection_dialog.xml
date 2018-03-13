@@ -36,8 +36,6 @@
       android:orientation="horizontal"
       >
       <Button android:id="@+id/btn_minus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/marginh"
         style="@style/button_default"
         android:text="-"
@@ -50,15 +48,11 @@
         android:imeOptions="actionDone"
       />
       <Button android:id="@+id/btn_plus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/marginh"
         style="@style/button_default"
         android:text="+"
       />
       <Button android:id="@+id/btn_ok"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         style="@style/button_default"
         android:text="@string/button_ok"
       />

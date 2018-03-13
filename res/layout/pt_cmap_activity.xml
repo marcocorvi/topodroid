@@ -44,11 +44,13 @@
       android:layout_weight="10"
       />
     <EditText android:id="@+id/etline0"
+      style="@style/edit_text"
       android:layout_width="wrap_content"
       android:layout_weight="45"
       android:inputType="text"
       />
     <EditText android:id="@+id/etpoint0"
+      style="@style/edit_text"
       android:layout_width="wrap_content"
       android:layout_weight="45"
       android:inputType="text"
@@ -65,11 +67,13 @@
       android:layout_weight="10"
       />
     <EditText android:id="@+id/etline1"
+      style="@style/edit_text"
       android:layout_width="wrap_content"
       android:layout_weight="45"
       android:inputType="text"
       />
     <EditText android:id="@+id/etpoint1"
+      style="@style/edit_text"
       android:layout_width="wrap_content"
       android:layout_weight="45"
       android:inputType="text"
@@ -86,11 +90,13 @@
       android:layout_weight="10"
       />
     <EditText android:id="@+id/etline2"
+      style="@style/edit_text"
       android:layout_width="wrap_content"
       android:layout_weight="45"
       android:inputType="text"
       />
     <EditText android:id="@+id/etpoint2"
+      style="@style/edit_text"
       android:layout_width="wrap_content"
       android:layout_weight="45"
       android:inputType="text"
@@ -107,11 +113,13 @@
       android:layout_weight="10"
       />
     <EditText android:id="@+id/etline3"
+      style="@style/edit_text"
       android:layout_width="wrap_content"
       android:layout_weight="45"
       android:inputType="text"
       />
     <EditText android:id="@+id/etpoint3"
+      style="@style/edit_text"
       android:layout_width="wrap_content"
       android:layout_weight="45"
       android:inputType="text"
@@ -128,11 +136,13 @@
       android:layout_weight="10"
       />
     <EditText android:id="@+id/etline4"
+      style="@style/edit_text"
       android:layout_width="wrap_content"
       android:layout_weight="45"
       android:inputType="text"
       />
     <EditText android:id="@+id/etpoint4"
+      style="@style/edit_text"
       android:layout_width="wrap_content"
       android:layout_weight="45"
       android:inputType="text"
@@ -149,11 +159,13 @@
       android:layout_weight="10"
       />
     <EditText android:id="@+id/etline5"
+      style="@style/edit_text"
       android:layout_width="wrap_content"
       android:layout_weight="45"
       android:inputType="text"
       />
     <EditText android:id="@+id/etpoint5"
+      style="@style/edit_text"
       android:layout_width="wrap_content"
       android:layout_weight="45"
       android:inputType="text"
@@ -170,11 +182,13 @@
       android:layout_weight="10"
       />
     <EditText android:id="@+id/etline6"
+      style="@style/edit_text"
       android:layout_width="wrap_content"
       android:layout_weight="45"
       android:inputType="text"
       />
     <EditText android:id="@+id/etpoint6"
+      style="@style/edit_text"
       android:layout_width="wrap_content"
       android:layout_weight="45"
       android:inputType="text"
@@ -193,8 +207,6 @@
     >
     <Button android:id="@+id/button_ok"
       style="@style/button_default"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
       android:layout_marginRight="@dimen/marginh"
       android:text="@string/button_save"
     />

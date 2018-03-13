@@ -51,6 +51,7 @@
 
 
     <EditText 
+      style="@style/edit_text_light"
         android:id="@+id/sensor_type"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -58,6 +59,7 @@
         />
    		
     <EditText 
+      style="@style/edit_text_light"
       android:id="@+id/sensor_value"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
@@ -65,6 +67,7 @@
       />
 
     <EditText 
+      style="@style/edit_text_light"
       android:id="@+id/sensor_comment"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
@@ -80,8 +83,6 @@
       >
    		
       <Button android:id="@+id/sensor_cancel"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         android:layout_marginRight="@dimen/marginh"
         style="@style/button_default"
         android:text="@string/button_back"
@@ -95,8 +96,6 @@
         >
         <Button android:id="@+id/sensor_ok"
           style="@style/button_default"
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content" 
           android:layout_marginRight="@dimen/marginh"
           android:text="@string/button_save"
           />

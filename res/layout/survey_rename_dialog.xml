@@ -7,7 +7,7 @@
   >
 
     <EditText android:id="@+id/et_name" 
-       style="@style/edit_text"
+       style="@style/edit_text_light"
        android:layout_width="match_parent" 
        android:layout_marginTop="@dimen/marginv"
        />
@@ -23,15 +23,11 @@
 
       <Button android:id="@+id/btn_ok"
         style="@style/button_default"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         android:layout_marginRight="@dimen/marginh"
         android:text="@string/button_ok"
         />
       <Button android:id="@+id/btn_back"
         style="@style/button_default"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         android:text="@string/button_cancel"
         />
 
@@ -46,8 +42,6 @@
        android:layout_marginTop="@dimen/marginvbig"
        >
       <Button android:id="@+id/button_cancel"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
         android:layout_marginRight="@dimen/marginh"
         style="@style/button_default"
         android:text="@string/button_cancel"

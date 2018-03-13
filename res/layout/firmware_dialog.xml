@@ -25,6 +25,7 @@
   </RadioGroup>
 
   <EditText 
+    style="@style/edit_text_light"
     android:id="@+id/firmware_file"
     android:hint="@string/firmware_file"
     android:layout_width="fill_parent"
@@ -34,8 +35,6 @@
   <Button
     style="@style/button_default"
     android:id="@+id/firmware_ok"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
     android:text="@string/button_ok"
   />
 

@@ -100,7 +100,7 @@ public interface DataListener
 
   // @param e extend
   // @param t type
-  public void onInsertShotAt( long sid, long at, long millis, double d, double b, double c, double r, long e, long t );
+  public void onInsertShotAt( long sid, long at, long millis, double d, double b, double c, double r, long e, long leg, long t );
 
   // public void transferShots( long sid, long old_sid, long old_id );
 

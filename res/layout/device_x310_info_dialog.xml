@@ -31,8 +31,6 @@
     />
 
     <Button android:id="@+id/btn_ok"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content" 
       android:layout_marginLeft="@dimen/marginh"
       style="@style/button_default"
       android:text="@string/button_save"
@@ -79,8 +77,6 @@
     >
     <Button android:id="@+id/button_cancel"
       style="@style/button_default"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
       android:text="@string/button_back"
       />
   </LinearLayout>

@@ -447,6 +447,7 @@
     <string name="zip_saved">Записан </string>
     <string name="zip_failed">Грешка при архивиране</string>
     <string name="unzip_fail">Грешка при разархивиране</string>
+    <!-- TODO string name="unzip_fail_sqlite">Failed SQL: delete survey and retry</string -->
     <string name="unzip_fail_survey">Грешка: различно име на картировка</string>
     <string name="unzip_fail_db">Грешка: различни версии на базата данни</string>
     <string name="unzip_fail_td">Грешка: различни версии на Topodroid</string>

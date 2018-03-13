@@ -23,16 +23,12 @@
       android:layout_marginTop="@dimen/marginvbig" 
       >
       <!-- Button android:id="@+id/audio_delete"
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content" 
           android:layout_marginRight="@dimen/marginh" 
           style="@style/button_default"
           android:text="@string/button_delete"
       / -->
 
       <Button android:id="@+id/audio_close"
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content" 
           style="@style/button_default"
           android:text="@string/button_close"
       />
