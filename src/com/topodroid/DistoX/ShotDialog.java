@@ -48,7 +48,7 @@ import android.view.KeyEvent;
 
 import android.util.Log;
 
-public class ShotDialog extends MyDialog
+class ShotDialog extends MyDialog
                         implements View.OnClickListener
                                  , View.OnLongClickListener
 {
@@ -84,7 +84,7 @@ public class ShotDialog extends MyDialog
   // private MyCheckBox mCBhighlight;
 
   HorizontalListView mListView;
-  HorizontalButtonView mButtonView;
+  private HorizontalButtonView mButtonView;
   private Button[] mButton;
 
   private CheckBox mRBleft;
@@ -149,7 +149,7 @@ public class ShotDialog extends MyDialog
   private static int flagBearing  = MyKeyboard.FLAG_POINT;
   private static int flagClino    = MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_SIGN;
 
-  public ShotDialog( Context context, ShotWindow parent, int pos, DBlock blk,
+  ShotDialog( Context context, ShotWindow parent, int pos, DBlock blk,
                      DBlock prev, DBlock next
                    )
   {

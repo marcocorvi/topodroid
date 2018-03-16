@@ -13,16 +13,16 @@ package com.topodroid.DistoX;
 
 import java.util.ArrayList;
 
-public class NumNode 
+class NumNode
 {
   static final int NODE_END = 0; // branch types
   static final int NODE_CROSS = 1;
  
-  public int type; // node type
-  public int use;  // tag for loop identification
+  int type; // node type
+  int use;  // tag for loop identification
   NumStation station; // station of this node
   ArrayList< NumShot > shots; // station shots
-  ArrayList< NumBranch > branches;
+  private ArrayList< NumBranch > branches;
   float e, s, v; // east, south, vert 3D position
 
   NumNode( int t, NumStation st )

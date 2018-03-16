@@ -12,7 +12,7 @@
 package com.topodroid.DistoX;
 
 import android.os.Bundle;
-import android.app.Dialog;
+// import android.app.Dialog;
 // import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -39,11 +39,11 @@ class DeviceA3InfoDialog extends MyDialog
   DeviceActivity mParent;
   Device mDevice;
 
-  TextView tv_serial;
-  TextView tv_statusAngle;
-  TextView tv_statusCompass;
-  TextView tv_statusCalib;
-  TextView tv_statusSilent;
+  private TextView tv_serial;
+  private TextView tv_statusAngle;
+  private TextView tv_statusCompass;
+  private TextView tv_statusCalib;
+  private TextView tv_statusSilent;
 
   DeviceA3InfoDialog( Context context, DeviceActivity parent, Device device )
   {
@@ -92,7 +92,7 @@ class DeviceA3InfoDialog extends MyDialog
     // mBTcancel.setOnClickListener( this );
   }
 
-  public void updateInfo( DeviceA3Info info ) 
+  void updateInfo( DeviceA3Info info )
   {
     if ( info == null ) return;
     tv_serial.setText( info.mCode );
@@ -122,7 +122,7 @@ class DeviceA3InfoDialog extends MyDialog
     }
   }
 
-  void doSetModel()
+  private void doSetModel()
   {
     if ( mRBa3.isChecked() ) {
       mParent.setDeviceModel( mDevice, Device.DISTO_A3 );

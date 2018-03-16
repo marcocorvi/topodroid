@@ -12,7 +12,7 @@
 package com.topodroid.DistoX;
 
 import android.os.Bundle;
-import android.app.Dialog;
+// import android.app.Dialog;
 // import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -38,9 +38,9 @@ class DeviceX310InfoDialog extends MyDialog
   DeviceActivity mParent;
   Device mDevice;
 
-  TextView tv_code;
-  TextView tv_firmware;
-  TextView tv_hardware;
+  private TextView tv_code;
+  private TextView tv_firmware;
+  private TextView tv_hardware;
 
   DeviceX310InfoDialog( Context context, DeviceActivity parent, Device device )
   {
@@ -54,9 +54,7 @@ class DeviceX310InfoDialog extends MyDialog
   public void onCreate( Bundle bundle )
   {
     super.onCreate( bundle );
-
-    setContentView( R.layout.device_x310_info_dialog );
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout( R.layout.device_x310_info_dialog, R.string.device_info );
 
     Resources res = mParent.getResources();
 
@@ -70,8 +68,6 @@ class DeviceX310InfoDialog extends MyDialog
     tv_firmware = (TextView) findViewById( R.id.tv_firmware );
     tv_hardware = (TextView) findViewById( R.id.tv_hardware );
 
-    setTitle( res.getString( R.string.device_info ) );
-
     tv_address.setText( String.format( res.getString( R.string.device_address ), mDevice.mAddress ) );
     tv_code.setText( res.getString( R.string.getting_info ) );
     // tv_firmware.setText( "" );
@@ -84,7 +80,7 @@ class DeviceX310InfoDialog extends MyDialog
     mBTback.setOnClickListener( this );
   }
 
-  public void updateInfo( DeviceX310Info info )
+  void updateInfo( DeviceX310Info info )
   {
     if ( info == null ) return;
     tv_code.setText(     info.mCode );
@@ -112,7 +108,7 @@ class DeviceX310InfoDialog extends MyDialog
     }
   }
 
-  void doSetModel()
+  private void doSetModel()
   {
     if ( mRBa3.isChecked() ) {
       mParent.setDeviceModel( mDevice, Device.DISTO_A3 );

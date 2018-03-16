@@ -12,19 +12,19 @@
 package com.topodroid.DistoX;
 
 import android.os.Bundle;
-import android.app.Dialog;
+// import android.app.Dialog;
 // import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
+// import android.content.Intent;
 
-import android.graphics.*;
+// import android.graphics.*;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
 
 
-public class DrawingLabelDialog extends MyDialog 
+class DrawingLabelDialog extends MyDialog
                                 implements View.OnClickListener
 {
   private EditText mLabel;
@@ -33,7 +33,7 @@ public class DrawingLabelDialog extends MyDialog
   private float mX;
   private float mY;
 
-  public DrawingLabelDialog( Context context, ILabelAdder activity, float x, float y )
+  DrawingLabelDialog( Context context, ILabelAdder activity, float x, float y )
   {
     super(context, R.string.DrawingLabelDialog );
     mActivity = activity;
@@ -56,13 +56,14 @@ public class DrawingLabelDialog extends MyDialog
 
   }
 
+  @Override
   public void onClick(View view)
   {
     // TDLog.Log( TDLog.LOG_INPUT, "DrawingLabelDialog onClick() " + view.toString() );
     if (view.getId() == R.id.label_ok ) {
       mActivity.addLabel( mLabel.getText().toString(), mX, mY );
-    } else if ( view.getId() == R.id.label_cancel ) {
-      /* nothing */
+    // } else if ( view.getId() == R.id.label_cancel ) {
+    //   /* nothing */
     }
     dismiss();
   }

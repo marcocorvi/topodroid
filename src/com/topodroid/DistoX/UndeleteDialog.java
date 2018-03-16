@@ -30,7 +30,7 @@ import android.widget.Toast;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-public class UndeleteDialog extends MyDialog
+class UndeleteDialog extends MyDialog
                             implements OnItemClickListener
                             , View.OnClickListener
 {
@@ -51,7 +51,7 @@ public class UndeleteDialog extends MyDialog
 
   private int mStatus;
 
-  public UndeleteDialog( Context context, ShotWindow parent, DataHelper data, long sid,
+  UndeleteDialog( Context context, ShotWindow parent, DataHelper data, long sid,
                          List<DBlock> shots1, List<DBlock> shots2, List<DBlock> shots3,
                          List<PlotInfo> plots )
   {

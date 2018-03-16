@@ -26,7 +26,7 @@ class MagGeodetic
   double phi; /* geodetic latitude */
   double HeightAboveEllipsoid; /* height above the ellipsoid (HaE) */
   double HeightAboveGeoid; /* (height above the EGM96 geoid model ) */
-  boolean UseGeoid;
+  private boolean UseGeoid;
 
   MagGeodetic()
   {

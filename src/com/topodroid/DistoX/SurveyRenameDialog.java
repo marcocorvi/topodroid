@@ -26,7 +26,7 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
 
-public class SurveyRenameDialog extends MyDialog
+class SurveyRenameDialog extends MyDialog
                                 implements View.OnClickListener
 {
   private EditText mEtName;
@@ -61,6 +61,7 @@ public class SurveyRenameDialog extends MyDialog
     setTitle( R.string.title_survey_rename );
   }
 
+  @Override
   public void onClick(View v) 
   {
     // When the user clicks, just finish this activity.

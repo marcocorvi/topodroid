@@ -14,9 +14,9 @@ package com.topodroid.DistoX;
 import java.io.File;
 import java.io.IOException;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
-import android.os.Environment;
+// import android.os.Environment;
 
 import android.content.Context;
 
@@ -25,13 +25,13 @@ import android.media.MediaRecorder;
 
 import android.widget.LinearLayout;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.Window;
-import android.view.WindowManager;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.View.OnClickListener;
+// import android.view.Window;
+// import android.view.WindowManager;
+// import android.view.ViewGroup.LayoutParams;
 
 import android.widget.Button;
-import android.widget.Toast;
+// import android.widget.Toast;
 
 public class AudioDialog extends MyDialog
                          implements View.OnClickListener
@@ -39,25 +39,25 @@ public class AudioDialog extends MyDialog
   private static int ACTION_NONE = 0;
   private static int ACTION_DELETE = 1;
   private static int ACTION_OVERWRITE = 2;
-  int mAction = 0;
+  private int mAction = 0;
 
-  MediaPlayer   mMP;
-  MediaRecorder mMR;
+  private MediaPlayer   mMP;
+  private MediaRecorder mMR;
 
-  MyStateBox mBtnPlay;
-  MyStateBox mBtnRec;
-  MyStateBox mBtnDelete;
+  private MyStateBox mBtnPlay;
+  private MyStateBox mBtnRec;
+  private MyStateBox mBtnDelete;
 
-  Button mBtnConfirm;
-  Button mBtnClose;
+  private Button mBtnConfirm;
+  private Button mBtnClose;
 
   TopoDroidApp mApp;
   IAudioInserter mParent;
-  long mBid;
-  String mFilepath;
-  boolean hasFile;
-  boolean canRec;
-  boolean canPlay;
+  private long mBid;
+  private String mFilepath;
+  private boolean hasFile;
+  private boolean canRec;
+  private boolean canPlay;
   // AudioInfo mAudio;
 
   AudioDialog( Context ctx, TopoDroidApp app, IAudioInserter parent, long bid )
@@ -174,15 +174,15 @@ public class AudioDialog extends MyDialog
     dismiss();
   }
 
-  void deleteAudio()
+  private void deleteAudio()
   {
     File file = new File( mFilepath );
     file.delete();
-    mApp.mData.deleteAudio( mApp.mSID, mBid );
+    TopoDroidApp.mData.deleteAudio( mApp.mSID, mBid );
     if ( mParent != null ) mParent.deletedAudio( mBid );
   }
 
-  public void startRec()
+  private void startRec()
   {
     try {
       if ( mParent != null ) mParent.startRecordAudio( mBid );
@@ -202,7 +202,7 @@ public class AudioDialog extends MyDialog
     }
   }
 
-  public void stopRec()
+  private void stopRec()
   {
     try {
       mMR.stop();
@@ -214,14 +214,14 @@ public class AudioDialog extends MyDialog
       mBtnConfirm.setText( R.string.audio_paused );
       canPlay = true;
       hasFile = true;
-      mApp.mData.setAudio( mApp.mSID, mBid, TopoDroidUtil.currentDateTime() );
+      TopoDroidApp.mData.setAudio( mApp.mSID, mBid, TopoDroidUtil.currentDateTime() );
       if ( mParent != null ) mParent.stopRecordAudio( mBid );
     } catch ( IllegalStateException e ) {
     } catch ( RuntimeException e ) {
     }
   }
 
-  public void startPlay()
+  private void startPlay()
   {
     try {
       mMP = new MediaPlayer();
@@ -247,7 +247,7 @@ public class AudioDialog extends MyDialog
     }
   }
 
-  public void stopPlay()
+  private void stopPlay()
   {
     try {
       canRec = true;

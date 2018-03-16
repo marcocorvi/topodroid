@@ -34,6 +34,7 @@ import java.util.List;
 import android.util.Log;
 
 /**
+ * @note this class must be public
  */
 public class ProjectionSurface extends SurfaceView
                             implements SurfaceHolder.Callback
@@ -64,7 +65,7 @@ public class ProjectionSurface extends SurfaceView
     // private TimerTask mTask;
     // void setZoomer( IZoomer zoomer ) { mZoomer = zoomer; }
 
-    public ProjectionSurface(Context context, AttributeSet attrs) 
+    public ProjectionSurface(Context context, AttributeSet attrs)
     {
       super(context, attrs);
       mWidth  = 0;
@@ -80,7 +81,7 @@ public class ProjectionSurface extends SurfaceView
 
     // -----------------------------------------------------------
 
-    public void setTransform( float dx, float dy, float s ) { mCommandManager.setTransform( dx, dy, s ); }
+    void setTransform( float dx, float dy, float s ) { mCommandManager.setTransform( dx, dy, s ); }
 
     void clearReferences( ) { mCommandManager.clearReferences(); }
 
@@ -120,9 +121,9 @@ public class ProjectionSurface extends SurfaceView
       private volatile boolean mRunning;
       private SurfaceHolder mSurfaceHolder;
 
-      public DrawThread(SurfaceHolder holder) { mSurfaceHolder = holder; }
+      DrawThread(SurfaceHolder holder) { mSurfaceHolder = holder; }
 
-      public void stopRunning() { mRunning = false; }
+      void stopRunning() { mRunning = false; }
 
       @Override
       public void run() 
@@ -143,7 +144,7 @@ public class ProjectionSurface extends SurfaceView
     }
 
     // called by DrawingWindow::computeReference
-    public DrawingStationName addDrawingStationName ( NumStation num_st, float x, float y )
+    DrawingStationName addDrawingStationName ( NumStation num_st, float x, float y )
     {
       DrawingStationName st = new DrawingStationName( num_st, x, y );
       st.setPaint( BrushManager.duplicateStationPaint );
@@ -152,7 +153,7 @@ public class ProjectionSurface extends SurfaceView
     }
 
     // called by DarwingActivity::addFixedLine
-    public void addFixedPath( DrawingPath path, boolean splay )
+    void addFixedPath( DrawingPath path, boolean splay )
     {
       if ( splay ) {
         mCommandManager.addSplayPath( path );
@@ -162,7 +163,7 @@ public class ProjectionSurface extends SurfaceView
     }
 
     // k : grid type 1, 10, 100
-    public void addGridPath( DrawingPath path, int k ) { mCommandManager.addGrid( path, k ); }
+    void addGridPath( DrawingPath path, int k ) { mCommandManager.addGrid( path, k ); }
 
     // void setBounds( float x1, float x2, float y1, float y2 ) { mCommandManager.setBounds( x1, x2, y1, y2 ); }
 

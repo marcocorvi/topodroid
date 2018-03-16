@@ -39,7 +39,7 @@ import android.util.Log;
 
 /**
  */
-public class SketchDrawingSurface extends SurfaceView
+class SketchDrawingSurface extends SurfaceView
                                   implements SurfaceHolder.Callback
                                   , IDrawingSurface
 {
@@ -47,8 +47,8 @@ public class SketchDrawingSurface extends SurfaceView
 
   protected DrawThread mDrawThread;
   private Bitmap mBitmap;
-  public volatile boolean isDrawing = true;
-  public DrawingPath mPreviewPath;
+  volatile boolean isDrawing = true;
+  DrawingPath mPreviewPath;
   // private SurfaceHolder mHolder; // canvas holder
   private Context mContext;
   private AttributeSet mAttrs;
@@ -64,7 +64,7 @@ public class SketchDrawingSurface extends SurfaceView
   public boolean isDrawing() { return isDrawing; }
 
 
-  public SketchDrawingSurface(Context context, AttributeSet attrs) 
+  SketchDrawingSurface(Context context, AttributeSet attrs)
   {
     super(context, attrs);
     mWidth = 0;
@@ -156,7 +156,7 @@ public class SketchDrawingSurface extends SurfaceView
   //   return st;
   // }
 
-  public void clearReferences() 
+  void clearReferences()
   { 
     // commandManager.clearReferences();
     if ( mModel != null ) {
@@ -164,7 +164,7 @@ public class SketchDrawingSurface extends SurfaceView
     }
   }
 
-  public void undo()
+  void undo()
   {
     this.isDrawing = true;
     mModel.undo();

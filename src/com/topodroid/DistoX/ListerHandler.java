@@ -17,9 +17,9 @@ import android.os.Bundle;
 
 import android.util.Log;
 
-public class ListerHandler extends Handler 
+class ListerHandler extends Handler
 {
-  ILister mLister = null;
+  private ILister mLister = null;
 
   // default cstr
   ListerHandler( ) { mLister = null; }

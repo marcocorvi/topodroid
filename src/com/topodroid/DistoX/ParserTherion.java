@@ -24,7 +24,7 @@ import android.util.Log;
 
 // TODO this class can be made extend ImportParser
 
-public class ParserTherion
+class ParserTherion
 {
   final static String EMPTY = "";
 
@@ -37,21 +37,21 @@ public class ParserTherion
   final static int DATA_DIMENSION  = 6;
   final static int DATA_NOSURVEY   = 7;
 
-  public String mName = null;  // survey name
-  public String mDate = null;  // survey date
-  public String mTeam = "";
-  public String mTitle = "";
-  public float  mDeclination = 0.0f; // one-survey declination
+  String mName = null;  // survey name
+  String mDate = null;  // survey date
+  private String mTeam = "";
+  String mTitle = "";
+  float  mDeclination = 0.0f; // one-survey declination
   private boolean mApplyDeclination = false;
  
-  Stack< ParserTherionState > mStates; // states stack (LIFO)
+  private Stack< ParserTherionState > mStates; // states stack (LIFO)
 
-  void pushState( ParserTherionState state )
+  private void pushState( ParserTherionState state )
   {
     mStates.push( state );
   }
 
-  ParserTherionState popState() 
+  private ParserTherionState popState()
   {
     return mStates.pop();
   }
@@ -97,13 +97,13 @@ public class ParserTherion
   public int getShotNumber()    { return shots.size(); }
   public int getSplayNumber()   { return splays.size(); }
 
-  public ArrayList< ParserShot > getShots()    { return shots; }
-  public ArrayList< ParserShot > getSplays()   { return splays; }
-  public ArrayList< Station >    getStations() { return stations; }
-  public ArrayList< Fix >        getFixes()    { return fixes; }
+  ArrayList< ParserShot > getShots()    { return shots; }
+  ArrayList< ParserShot > getSplays()   { return splays; }
+  ArrayList< Station >    getStations() { return stations; }
+  ArrayList< Fix >        getFixes()    { return fixes; }
 
   // same as in ImportParser.java
-  public String initStation()
+  String initStation()
   {
     for ( ParserShot sh : shots ) {
       if ( sh.from != null && sh.from.length() > 0 ) return sh.from;
@@ -111,7 +111,7 @@ public class ParserTherion
     return "0";
   }
 
-  public ParserTherion( String filename, boolean apply_declination ) throws ParserException
+  ParserTherion( String filename, boolean apply_declination ) throws ParserException
   {
     fixes    = new ArrayList<>();
     stations = new ArrayList<>();
@@ -682,7 +682,7 @@ public class ParserTherion
     // Log.v( TopoDroidApp.TAG, "ParserTherion shots "+ shots.size() + " splays "+ splays.size() +" fixes "+  fixes.size() );
   }
 
-  float parseAngleUnit( String unit ) 
+  private float parseAngleUnit( String unit )
   {
     // not handled "percent"
     if ( unit.startsWith("min") ) return 1/60.0f;
@@ -692,7 +692,7 @@ public class ParserTherion
     return 1.0f;
   }
 
-  float parseLengthUnit( String unit ) 
+  private float parseLengthUnit( String unit )
   {
     if ( unit.startsWith("c") ) return 0.01f; // cm centimeter
     if ( unit.startsWith("f") ) return (float)TopoDroidUtil.FT2M; // ft feet
@@ -703,7 +703,7 @@ public class ParserTherion
     return 1.0f;
   }
 
-  int parseExtend( String extend, int old_extend )
+  private int parseExtend( String extend, int old_extend )
   {
     // skip: hide, start
     if ( extend.equals("hide") || extend.equals("start") ) {

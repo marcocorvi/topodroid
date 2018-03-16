@@ -24,7 +24,7 @@ import android.os.Message;
 
 import android.util.Log;
 
-public class SyncService 
+class SyncService
 {
     // Name for the SDP record when creating server socket
     private static final String NAME = "TopoDroidSync";
@@ -51,10 +51,10 @@ public class SyncService
     private volatile boolean mAcceptRun;
 
     // Constants that indicate the current connection state
-    public static final int STATE_NONE = 0;       // we're doing nothing
-    public static final int STATE_LISTEN = 1;     // now listening for incoming connections
-    public static final int STATE_CONNECTING = 2; // now initiating an outgoing connection
-    public static final int STATE_CONNECTED = 3;  // now connected to a remote device
+    static final int STATE_NONE = 0;       // we're doing nothing
+    static final int STATE_LISTEN = 1;     // now listening for incoming connections
+    static final int STATE_CONNECTING = 2; // now initiating an outgoing connection
+    static final int STATE_CONNECTED = 3;  // now connected to a remote device
 
     static final String mStateName[] = { "none", "listen", "connecting", "connected" };
 
@@ -68,7 +68,7 @@ public class SyncService
 
     static final String DEVICE = "DEVICE";
 
-  public SyncService( /* Context context, */ TopoDroidApp app, Handler handler )
+  SyncService( /* Context context, */ TopoDroidApp app, Handler handler )
   {
     // mContext = context;
     mApp     = app;
@@ -100,8 +100,8 @@ public class SyncService
     mHandler.obtainMessage( MESSAGE_ACCEPT_STATE, state, -1).sendToTarget();
   }
 
-  public synchronized int getConnectState() { return mConnectState; }
-  public synchronized int getAcceptState() { return mAcceptState; }
+  synchronized int getConnectState() { return mConnectState; }
+  synchronized int getAcceptState() { return mAcceptState; }
 
   String getConnectStateStr()
   {
@@ -119,9 +119,9 @@ public class SyncService
     return ( mRemoteDevice != null )? mRemoteDevice.getName() : null;
   }
 
-  public int getType() { return mType; }
+  int getType() { return mType; }
 
-  public synchronized void start() 
+  synchronized void start()
   {
     TDLog.Log( TDLog.LOG_SYNC, "sync start()" );
     mAcceptRun = false;
@@ -154,7 +154,7 @@ public class SyncService
    * Start the ConnectingThread to initiate a connection to a remote device.
    * @param device  The BluetoothDevice to connect
    */
-  public synchronized void connect( BluetoothDevice device )
+  synchronized void connect( BluetoothDevice device )
   {
     TDLog.Log( TDLog.LOG_SYNC, "sync connect to " + device.getName() );
     mRemoteDevice = device;
@@ -185,7 +185,7 @@ public class SyncService
    * @param socket  The BluetoothSocket on which the connection was made
    * @param device  The BluetoothDevice that has been connected
    */
-  public synchronized void connected(BluetoothSocket socket, BluetoothDevice device)
+  synchronized void connected(BluetoothSocket socket, BluetoothDevice device)
   {
     TDLog.Log( TDLog.LOG_SYNC, "sync connected. remote device " + device.getName() );
 
@@ -209,7 +209,7 @@ public class SyncService
     setConnectState(STATE_CONNECTED);
   }
 
-  public synchronized void disconnect() 
+  synchronized void disconnect()
   {
     TDLog.Log( TDLog.LOG_SYNC, "sync disconnect");
     if ( mConnectingThread != null ) { mConnectingThread.cancel();   mConnectingThread   = null; }
@@ -227,7 +227,7 @@ public class SyncService
     setConnectState( STATE_NONE );
   }
 
-  public synchronized void stop() 
+  synchronized void stop()
   {
     TDLog.Log( TDLog.LOG_SYNC, "sync stop");
     if ( mAcceptThread    != null ) { mAcceptThread.cancel();    mAcceptThread    = null; }
@@ -235,7 +235,7 @@ public class SyncService
     mType = STATE_NONE;
   }
 
-  public boolean writeBuffer( byte[] buffer ) 
+  boolean writeBuffer( byte[] buffer )
   {
     // Log.v("DistoX", "sync write (conn state " + mConnectState + " length " + buffer.length + ") " + buffer[0] + " " + buffer[1] + " ... "); 
     ConnectedThread r;    // Create temporary object
@@ -283,7 +283,7 @@ public class SyncService
   {
     private BluetoothServerSocket mmServerSocket;
 
-    public AcceptThread() {
+    AcceptThread() {
       createServerSocket();
     }
  
@@ -364,7 +364,7 @@ public class SyncService
     private final BluetoothSocket mmSocket;
     private final BluetoothDevice mmDevice;
 
-    public ConnectingThread( BluetoothDevice device )
+    ConnectingThread( BluetoothDevice device )
     {
       mmDevice = device;
       BluetoothSocket tmp = null;
@@ -430,7 +430,7 @@ public class SyncService
     private final InputStream mmInStream;
     private final OutputStream mmOutStream;
 
-    public ConnectedThread(BluetoothSocket socket)
+    ConnectedThread(BluetoothSocket socket)
     {
       mmSocket = socket;
       InputStream tmpIn = null;
@@ -509,7 +509,7 @@ public class SyncService
      * Write to the connected OutStream.
      * @param buffer  The bytes to write
      */
-    public boolean doWriteBuffer( byte[] buffer ) 
+    boolean doWriteBuffer( byte[] buffer )
     {
       Log.v("DistoX", "sync connected write " + buffer.length + ": <" + buffer[0] + "|" + buffer[1] + ">" );
 

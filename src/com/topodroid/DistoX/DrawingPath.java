@@ -25,7 +25,7 @@ import android.graphics.Path;
 import android.graphics.Matrix;
 import android.graphics.RectF;
 
-import android.util.Log;
+// import android.util.Log;
 
 /**
  * direct/indirect subclasses:
@@ -35,18 +35,19 @@ import android.util.Log;
  *   - DrawingPointPath
  *   - DrawingStationPath
  */
-public class DrawingPath extends RectF
+
+class DrawingPath extends RectF
                          implements ICanvasCommand
 {
-  public static final int DRAWING_PATH_FIXED   = 0; // leg
-  public static final int DRAWING_PATH_SPLAY   = 1; // splay
-  public static final int DRAWING_PATH_GRID    = 2; // grid
-  public static final int DRAWING_PATH_STATION = 3; // station point (user inserted)
-  public static final int DRAWING_PATH_POINT   = 4; // drawing point
-  public static final int DRAWING_PATH_LINE    = 5;
-  public static final int DRAWING_PATH_AREA    = 6;
-  public static final int DRAWING_PATH_NAME    = 7; // station name (from survey data)
-  public static final int DRAWING_PATH_NORTH   = 8; // north line (5m long)
+  static final int DRAWING_PATH_FIXED   = 0; // leg
+  static final int DRAWING_PATH_SPLAY   = 1; // splay
+  static final int DRAWING_PATH_GRID    = 2; // grid
+  static final int DRAWING_PATH_STATION = 3; // station point (user inserted)
+  static final int DRAWING_PATH_POINT   = 4; // drawing point
+  static final int DRAWING_PATH_LINE    = 5;
+  static final int DRAWING_PATH_AREA    = 6;
+  static final int DRAWING_PATH_NAME    = 7; // station name (from survey data)
+  static final int DRAWING_PATH_NORTH   = 8; // north line (5m long)
 
   Path mPath;
   Path mTransformedPath;
@@ -104,7 +105,7 @@ public class DrawingPath extends RectF
     bottom = y2;
   }
 
-  protected boolean intersects( RectF bbox )
+  boolean intersects( RectF bbox )
   { 
     // return true;
     if ( bbox == null ) return true;
@@ -132,7 +133,7 @@ public class DrawingPath extends RectF
         dpp.mOrientation = 360 - dpp.mOrientation;
         flip_path = true;
         offx = dx;
-      } else {
+      // } else {
       }
       // Log.v("DistoX", "x0 " + x0 + " offx " + offx + " Cx " + oldcx + " -> " + cx);
       if ( mPath != null ) {
@@ -212,7 +213,7 @@ public class DrawingPath extends RectF
 
   // x10, y10 first endpoint scene coords
   // x20, y20 second endpoint scene coords
-  public void setEndPoints( float x10, float y10, float x20, float y20 )
+  void setEndPoints( float x10, float y10, float x20, float y20 )
   {
     x1 = x10;
     y1 = y10;
@@ -365,7 +366,7 @@ public class DrawingPath extends RectF
 
   public void setOrientation( double angle ) { }
 
-  public String toTherion( ) { return new String("FIXME"); }
+  public String toTherion( ) { return "FIXME"; }
 
   void toDataStream( DataOutputStream dos ) { TDLog.Error( "ERROR DrawingPath toDataStream executed"); }
 

@@ -20,8 +20,8 @@ class PTMapping
 {
   static final int XTHERION_FACTOR = 25;
 
-    PTPoint _origin;
-    int _scale;   //!< scale 50 .. 20000
+    private PTPoint _origin;
+    private int _scale;   //!< scale 50 .. 20000
 
     PTMapping()
     {

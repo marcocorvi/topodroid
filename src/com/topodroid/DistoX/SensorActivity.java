@@ -144,7 +144,7 @@ public class SensorActivity extends Activity
 
     mBTok.setOnClickListener( this );
     mBTcancel.setOnClickListener( this );
-    // setTitleColor( 0x006d6df6 );
+    // setTitleColor( TDColor.TITLE_NORMAL );
 
     // mETtype.setText( null );
     // mETvalue.setText( null );

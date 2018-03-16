@@ -19,15 +19,15 @@ import java.io.FileOutputStream;
 
 class PTShot
 {
-    PTId _from;
-    PTId _to;
-    int _dist;    //!< distance [mm]
-    short _azimuth; //!< full circle 2^16
-    short _inclination;
-    byte _flags;   //!< bit0: flipped shot // byte
-    byte _roll;    //!< roll angle [full circle 256] // byte
-    short _trip_index;    //!< -1: no trip; >=0 trip reference
-    PTString _comment;      //!< only if _flags & 0x2
+    private PTId _from;
+    private PTId _to;
+    private int _dist;    //!< distance [mm]
+    private short _azimuth; //!< full circle 2^16
+    private short _inclination;
+    private byte _flags;   //!< bit0: flipped shot // byte
+    private byte _roll;    //!< roll angle [full circle 256] // byte
+    private short _trip_index;    //!< -1: no trip; >=0 trip reference
+    private PTString _comment;      //!< only if _flags & 0x2
 
     PTShot()
     {

@@ -24,39 +24,39 @@ class SketchDef
     // public static final float ZOOM_INC = 1.4f;
     // public static final float ZOOM_DEC = 1.0f/ZOOM_INC;
 
-    public final static int DISPLAY_NGBH = 0;
-    public final static int DISPLAY_SINGLE = 1;
-    public final static int DISPLAY_ALL  = 2;
-    public final static int DISPLAY_NONE = 3;
-    public final static int DISPLAY_MAX  = 4;
+    final static int DISPLAY_NGBH = 0;
+    final static int DISPLAY_SINGLE = 1;
+    final static int DISPLAY_ALL  = 2;
+    final static int DISPLAY_NONE = 3;
+    final static int DISPLAY_MAX  = 4;
 
-    public static final int MODE_MOVE    = 0;
-    public static final int MODE_DRAW    = 1;
-    public static final int MODE_EDIT    = 2;  // change the surface as a whole
-    public static final int MODE_SELECT  = 3;  // select a point to edit
-    // public static final int MODE_STEP    = 4;  // step to another leg
-    // public static final int MODE_HEAD = 5;
-    // public static final int MODE_JOIN = 6;
+    static final int MODE_MOVE    = 0;
+    static final int MODE_DRAW    = 1;
+    static final int MODE_EDIT    = 2;  // change the surface as a whole
+    static final int MODE_SELECT  = 3;  // select a point to edit
+    // static final int MODE_STEP    = 4;  // step to another leg
+    // static final int MODE_HEAD = 5;
+    // static final int MODE_JOIN = 6;
 
-    public static final int TOUCH_NONE = 0;
-    public static final int TOUCH_MOVE = 2;
-    public static final int TOUCH_ZOOM = 5;
+    static final int TOUCH_NONE = 0;
+    static final int TOUCH_MOVE = 2;
+    static final int TOUCH_ZOOM = 5;
 
-    // public static final int VIEW_NONE  = 0;
-    // public static final int VIEW_3D    = 1; 
+    // static final int VIEW_NONE  = 0;
+    // static final int VIEW_3D    = 1;
 
-    public static final int EDIT_NONE = 0;
-    public static final int EDIT_CUT = 1;
-    public static final int EDIT_STRETCH = 2;
-    public static final int EDIT_EXTRUDE = 3;
+    static final int EDIT_NONE = 0;
+    static final int EDIT_CUT = 1;
+    static final int EDIT_STRETCH = 2;
+    static final int EDIT_EXTRUDE = 3;
 
-    public static final int SELECT_NONE = 0;
-    public static final int SELECT_SECTION = 1;
-    public static final int SELECT_STEP = 2;
-    public static final int SELECT_SHOT = 3;
-    public static final int SELECT_JOIN = 4;
+    static final int SELECT_NONE = 0;
+    static final int SELECT_SECTION = 1;
+    static final int SELECT_STEP = 2;
+    static final int SELECT_SHOT = 3;
+    static final int SELECT_JOIN = 4;
     
-    public static final int LINE_SECTION = -1; // section line type
+    static final int LINE_SECTION = -1; // section line type
 
     static final String[] mode_name = { "none", "draw", "move", "item" };
     // static final String[] view_type = { "none", "3d" };

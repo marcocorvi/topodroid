@@ -19,14 +19,14 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import android.graphics.Canvas;
-import android.graphics.Paint;
+// import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.Matrix;
 
 // import android.util.Log;
 
-public class DrawingStationName extends DrawingPointPath
+class DrawingStationName extends DrawingPointPath
 {
   private static float toTherion = TDConst.TO_THERION;
 
@@ -35,11 +35,11 @@ public class DrawingStationName extends DrawingPointPath
   // float mX;     // scene coordinates (cx, cy)
   // float mY;
 
-  boolean mDuplicate;  // whether this is a duplicated station
+  private boolean mDuplicate;  // whether this is a duplicated station
 
   long  mXSectionType; // whether this station has a X-section
   float mAzimuth, mClino;
-  float mDX, mDY;     // X-section direction
+  private float mDX, mDY;     // X-section direction
 
   // get coords for a "section" point
   float getXSectionX( float r ) { return cx - ((mXSectionType == PlotInfo.PLOT_NULL)? 0 : r * mDY); }
@@ -84,7 +84,7 @@ public class DrawingStationName extends DrawingPointPath
     makeStraightPath( 0, 0, 2*TDSetting.mStationSize*mName.length(), 0, cx, cy );
   }
 
-  static final int LENGTH = 20;
+  static final private int LENGTH = 20;
 
   String name() { return mName; }
   NumStation station() { return mStation; }

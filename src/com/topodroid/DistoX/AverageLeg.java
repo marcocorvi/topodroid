@@ -13,7 +13,7 @@ package com.topodroid.DistoX;
 
 class AverageLeg
 {
-  Vector mAverage;
+  private Vector mAverage;
   int mCnt;
   float mDecl; // magnetic declination
 

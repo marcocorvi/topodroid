@@ -34,25 +34,25 @@ import android.graphics.Bitmap;
 
 // import android.util.Log;
 
-public class CalibCheckDialog extends MyDialog
+class CalibCheckDialog extends MyDialog
                               implements OnItemClickListener
 {
-  private SurveyWindow mParent;
+  // private SurveyWindow mParent;
   private List< DBlock > mShots;
 
   // private ImageView hist0;
   private ImageView hist1;
   private ImageView hist2;
 
-  private ArrayAdapter<String> mArrayAdapter;
-  private ListView mList;
+  // private ArrayAdapter<String> mArrayAdapter;
+  // private ListView mList;
 
-  public CalibCheckDialog( Context context,
+  CalibCheckDialog( Context context,
                            SurveyWindow parent,
                            List< DBlock > shots )
   {
     super( context, R.string.CalibCheckDialog );
-    mParent = parent;
+    // mParent = parent;
     mShots  = shots;
   }
 
@@ -62,23 +62,28 @@ public class CalibCheckDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
 
-    setContentView(R.layout.calib_check_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
-
+    // setContentView(R.layout.calib_check_dialog);
+    // try {
+    //   getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    // } catch ( NullPointerException e ) { 
+    //   TDLog.Error("CalibCheckDialog: set layout NPE");
+    // }
+    initLayout( R.layout.calib_check_dialog, R.string.title_calib_check );
+    
     // hist0 = (ImageView) findViewById( R.id.histogram0 );
     hist1 = (ImageView) findViewById( R.id.histogram1 );
     hist2 = (ImageView) findViewById( R.id.histogram2 );
 
-    mArrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
+    ArrayAdapter<String> array_adapter = new ArrayAdapter<>( mContext, R.layout.message );
 
-    mList = (ListView) findViewById(R.id.list);
-    mList.setAdapter( mArrayAdapter );
-    mList.setOnItemClickListener( this );
-    mList.setDividerHeight( 2 );
+    ListView list = (ListView) findViewById(R.id.list);
+    list.setAdapter( array_adapter );
+    list.setOnItemClickListener( this );
+    list.setDividerHeight( 2 );
     
-    setTitle( R.string.title_calib_check );
+    // setTitle( R.string.title_calib_check );
     for ( DBlock blk : mShots ) {
-      mArrayAdapter.add( blk.toShortString(true) );
+      array_adapter.add( blk.toShortString(true) );
     }
   }
 

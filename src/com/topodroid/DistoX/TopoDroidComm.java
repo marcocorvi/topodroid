@@ -25,7 +25,7 @@ import android.content.BroadcastReceiver;
 import android.widget.Toast;
 import android.util.Log;
 
-public class TopoDroidComm
+class TopoDroidComm
 {
   protected TopoDroidApp mApp;
   protected String mAddress;
@@ -34,7 +34,7 @@ public class TopoDroidComm
 
   protected boolean mBTConnected;
 
-  public byte[] mCoeff;
+  byte[] mCoeff;
 
 // -----------------------------------------------------------
 
@@ -62,7 +62,7 @@ public class TopoDroidComm
      * @param protocol    communication protocol
      * @param to_read     number of data to read (use -1 to read forever until timeout or an exception)
      */
-    public RfcommThread( DistoXProtocol protocol, int to_read, Handler /* ILister */ lister ) // FIXME LISTER
+    RfcommThread( DistoXProtocol protocol, int to_read, Handler /* ILister */ lister ) // FIXME LISTER
     {
       toRead = to_read;
       mProto = protocol;
@@ -228,12 +228,12 @@ public class TopoDroidComm
     // TDLog.Log( TDLog.LOG_COMM, "TopoDroid Comm cstr");
   }
 
-  public void resume()
+  void resume()
   {
     // if ( mRfcommThread != null ) { mRfcommThread.resume(); }
   }
 
-  public void suspend()
+  void suspend()
   {
     // if ( mRfcommThread != null ) { mRfcommThread.suspend(); }
   }
@@ -273,7 +273,7 @@ public class TopoDroidComm
     return false;
   }
 
-  public void disconnectRemoteDevice( )
+  void disconnectRemoteDevice( )
   {
     // TDLog.Log( TDLog.LOG_COMM, "disconnect remote device ");
     cancelRfcommThread();
@@ -299,38 +299,38 @@ public class TopoDroidComm
     return ret;
   }
 
-  public void setX310Laser( String address, int what, Handler /* ILister */ lister ) { }
+  void setX310Laser( String address, int what, Handler /* ILister */ lister ) { }
 
-  public boolean toggleCalibMode( String address, int type ) { return false; }
+  boolean toggleCalibMode( String address, int type ) { return false; }
 
-  public boolean writeCoeff( String address, byte[] coeff ) { return false; }
+  boolean writeCoeff( String address, byte[] coeff ) { return false; }
 
-  public boolean readCoeff( String address, byte[] coeff ) { return false; }
+  boolean readCoeff( String address, byte[] coeff ) { return false; }
 
-  public String readHeadTail( String address, byte[] command, int[] head_tail ) { return null; }
+  String readHeadTail( String address, byte[] command, int[] head_tail ) { return null; }
   
-  public int readX310Memory( String address, int from, int to, List< MemoryOctet > memory ) { return -1; }
+  int readX310Memory( String address, int from, int to, List< MemoryOctet > memory ) { return -1; }
 
-  public int readA3Memory( String address, int from, int to, List< MemoryOctet > memory ) { return -1; }
+  int readA3Memory( String address, int from, int to, List< MemoryOctet > memory ) { return -1; }
 
   byte[] readMemory( String address, int addr ) { return null; }
 
-  public int swapHotBit( String address, int from, int to ) { return -1; }
+  int swapHotBit( String address, int from, int to ) { return -1; }
 
   // ------------------------------------------------------------------------------------
   // CONTINUOUS DATA DOWNLOAD
 
-  public boolean connectDevice( String address, Handler /* ILister */ lister ) 
+  boolean connectDevice( String address, Handler /* ILister */ lister )
   {
     return false;
    }
 
-  public void disconnect() { }
+  void disconnect() { }
 
   // -------------------------------------------------------------------------------------
   // ON-DEMAND DATA DOWNLOAD
 
-  public int downloadData( String address, Handler /* ILister */ lister )
+  int downloadData( String address, Handler /* ILister */ lister )
   {
     return -1;
   }
@@ -338,8 +338,8 @@ public class TopoDroidComm
   // ====================================================================================
   // FIRMWARE
 
-  public int dumpFirmware( String address, String filepath ) { return 0; }
+  int dumpFirmware( String address, String filepath ) { return 0; }
 
-  public int uploadFirmware( String address, String filepath ) { return 0; }
+  int uploadFirmware( String address, String filepath ) { return 0; }
 
 };

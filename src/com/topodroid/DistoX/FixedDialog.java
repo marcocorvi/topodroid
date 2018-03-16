@@ -44,7 +44,7 @@ import android.net.Uri;
 import android.util.Log;
 
 
-public class FixedDialog extends MyDialog
+class FixedDialog extends MyDialog
                          implements View.OnClickListener
 {
   private FixedActivity mParent;
@@ -78,7 +78,7 @@ public class FixedDialog extends MyDialog
   private WorldMagneticModel mWMM;
 
 
-  public FixedDialog( Context context, FixedActivity parent, FixedInfo fxd )
+  FixedDialog( Context context, FixedActivity parent, FixedInfo fxd )
   {
     super( context, R.string.FixedDialog );
     mParent      = parent;
@@ -205,15 +205,15 @@ public class FixedDialog extends MyDialog
 
     if ( b == mButtonSave ) {
       String station = mETstation.getText().toString();
-      if ( station == null || station.length() == 0 ) {
+      if ( /* station == null || */ station.length() == 0 ) {
         mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
         return;
       }
       String comment = mETcomment.getText().toString();
-      if ( comment == null ) comment = "";
+      // if ( comment == null ) comment = "";
       if ( mButtonDecl.isChecked() && mTVdecl.getText() != null ) {
         String decl_str = mTVdecl.getText().toString();
-        if ( decl_str != null && decl_str.length() > 0 ) {
+        if ( /* decl_str != null && */ decl_str.length() > 0 ) {
           decl_str = decl_str.replaceAll( ",", "." );
           try {
             mParent.setDeclination( Float.parseFloat( decl_str ) );

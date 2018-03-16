@@ -29,12 +29,12 @@ import android.widget.Toast;
 class MemoryReadTask extends AsyncTask<Void, Integer, Integer>
 {
   TopoDroidApp   mApp;
-  IMemoryDialog  mDialog;
+  private IMemoryDialog  mDialog;
   int mType; // DistoX type
   String mAddress;
-  int[] mHT;
-  String mDumpfile = null;
-  ArrayList< MemoryOctet > mMemory;
+  private int[] mHT;
+  private String mDumpfile = null;
+  private ArrayList< MemoryOctet > mMemory;
 
   MemoryReadTask( TopoDroidApp app, IMemoryDialog dialog, int type, String address, int[] ht, String dumpfile )
   {

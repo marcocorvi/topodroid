@@ -29,7 +29,7 @@ import android.widget.ImageView;
 import android.util.Log;
 
 
-public class SurveyStatDialog extends MyDialog 
+class SurveyStatDialog extends MyDialog
                               implements View.OnClickListener
 {
   private TextView mTextLeg;
@@ -47,11 +47,11 @@ public class SurveyStatDialog extends MyDialog
   private ImageView histM;
   private ImageView histD;
  
-  SurveyStat mStat;
+  private SurveyStat mStat;
 
   private Button mBtnBack;
 
-  public SurveyStatDialog( Context context, SurveyStat stat )
+  SurveyStatDialog( Context context, SurveyStat stat )
   {
     super( context, R.string.SurveyStatDialog );
     mStat = stat;
@@ -125,7 +125,7 @@ public class SurveyStatDialog extends MyDialog
       dismiss();
     }
 
-  static Bitmap makeHistogramBitmap( float[] vals, int nr, float ave, float std, int width, int height, int bin, int col )
+  static private Bitmap makeHistogramBitmap( float[] vals, int nr, float ave, float std, int width, int height, int bin, int col )
   {
     Bitmap bitmap = Bitmap.createBitmap( width+20, height+20, Bitmap.Config.ARGB_8888 );
     int ww = bitmap.getWidth();

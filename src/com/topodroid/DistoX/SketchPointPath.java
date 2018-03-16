@@ -28,7 +28,7 @@ import android.util.Log;
 
 /**
  */
-public class SketchPointPath extends SketchPath
+class SketchPointPath extends SketchPath
 {
   // static final String TAG = "DistoX";
   private static float toTherion = 1.0f; // TDConst.TO_THERION;
@@ -48,7 +48,7 @@ public class SketchPointPath extends SketchPath
   String mLabel;
   Path mPath;
 
-  public SketchPointPath( int type, String s1, String s2, float x, float y, float z )
+  SketchPointPath( int type, String s1, String s2, float x, float y, float z )
   {
     super( DrawingPath.DRAWING_PATH_POINT, s1, s2 );
     mThType = type;
@@ -69,7 +69,7 @@ public class SketchPointPath extends SketchPath
 
   // public int pointType() { return mThType; }
 
-  public void setOrientation( Vector p, Sketch3dInfo info )
+  void setOrientation( Vector p, Sketch3dInfo info )
   { 
     // Log.v("DistoX", "point orient. " + p.x + " " + p.y + " " + p.z );
     mOrientation = p;
@@ -102,7 +102,7 @@ public class SketchPointPath extends SketchPath
     return sw.getBuffer().toString();
   }
 
-  public void toTdr( BufferedOutputStream bos ) throws IOException
+  void toTdr( BufferedOutputStream bos ) throws IOException
   {
     SketchModel.toTdr( bos, (short)1 );
     SketchModel.toTdr( bos, BrushManager.mPointLib.getSymbolThName(mThType) );
@@ -125,7 +125,7 @@ public class SketchPointPath extends SketchPath
   //   }
   // }
 
-  public void draw( Canvas canvas, Matrix matrix, Sketch3dInfo info )
+  void draw( Canvas canvas, Matrix matrix, Sketch3dInfo info )
   {
     Path  path = null;
     if ( mLabel == null ) {

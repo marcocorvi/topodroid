@@ -223,7 +223,7 @@
       android:id="@+id/layout4"
       android:layout_below="@id/radio5"
       android:layout_width="fill_parent" 
-      android:layout_height="50dp"
+      android:layout_height="wrap_content"
       android:paddingLeft="10dp"
       android:paddingRight="10dp"
       android:orientation="horizontal" 

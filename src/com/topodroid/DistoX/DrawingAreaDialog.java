@@ -11,27 +11,27 @@
  */
 package com.topodroid.DistoX;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 
 import android.content.Context;
 
-import android.widget.TextView;
-import android.widget.EditText;
+// import android.widget.TextView;
+// import android.widget.EditText;
 import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+// import android.widget.RadioButton;
+// import android.widget.RadioGroup;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.LinearLayout;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
+// import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 
-public class DrawingAreaDialog extends MyDialog
+class DrawingAreaDialog extends MyDialog
                                implements View.OnClickListener, AdapterView.OnItemSelectedListener
 {
   private DrawingAreaPath mArea;
@@ -39,7 +39,7 @@ public class DrawingAreaDialog extends MyDialog
   private boolean mOrientable;
 
   private CheckBox mCBvisible;
-  private Spinner mETtype;
+  // private Spinner mETtype;
   private int mType;
 
   private OrientationWidget mOrientationWidget; 
@@ -49,7 +49,7 @@ public class DrawingAreaDialog extends MyDialog
 
   private MyCheckBox mBtnReduce;
 
-  public DrawingAreaDialog( Context context, DrawingWindow parent, DrawingAreaPath line )
+  DrawingAreaDialog( Context context, DrawingWindow parent, DrawingAreaPath line )
   {
     super( context, R.string.DrawingAreaDialog );
     mParent = parent;
@@ -69,11 +69,11 @@ public class DrawingAreaDialog extends MyDialog
 
     mOrientationWidget = new OrientationWidget( this, mOrientable, mArea.mOrientation );
 
-    mETtype = (Spinner) findViewById( R.id.area_type );
+    Spinner eTtype = (Spinner) findViewById( R.id.area_type );
     ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, BrushManager.mAreaLib.getSymbolNames() );
-    mETtype.setAdapter( adapter );
-    mETtype.setSelection( mType );
-    mETtype.setOnItemSelectedListener( this );
+    eTtype.setAdapter( adapter );
+    eTtype.setSelection( mType );
+    eTtype.setOnItemSelectedListener( this );
 
 
     mCBvisible = (CheckBox) findViewById( R.id.area_visible );
@@ -120,8 +120,8 @@ public class DrawingAreaDialog extends MyDialog
       if ( mOrientable ) {
         mArea.setOrientation( mOrientationWidget.mOrient );
       }
-    } else if ( b == mBtnCancel ) {
-      // nothing
+    // } else if ( b == mBtnCancel ) {
+    //   /* nothing */
     }
     dismiss();
   }

@@ -41,13 +41,13 @@ class SketchTriangle
   Vector normal;
   PointF p1, p2, p3;     // canvas-projected vertex points (scene coords)
 
-  float cosine1;  // cosine angle v2-v1-v3
-  float cosine2;
-  float cosine3;
+  private float cosine1;  // cosine angle v2-v1-v3
+  private float cosine2;
+  private float cosine3;
 
-  Vector w12;  // unit vector (v1 - v2)
-  Vector w23;  // unit vector (v2 - v3)
-  Vector w31;
+  private Vector w12;  // unit vector (v1 - v2)
+  private Vector w23;  // unit vector (v2 - v3)
+  private Vector w31;
 
   // N.B. side s23 is opposite to vertex 1 (i0)
   SketchTriangle( SketchSurface parent, 
@@ -173,7 +173,7 @@ class SketchTriangle
     float a = (y23 * x + x32 * y + p2.x*p3.y-p3.x*p2.y)/det;
     float b = (y31 * x + x13 * y + p3.x*p1.y-p1.x*p3.y)/det;
     float c = (y12 * x + x21 * y + p1.x*p2.y-p2.x*p1.y)/det;
-    Vector ret = new Vector( a*v1.x+b*v2.x+c*v3.x,
+    return new Vector( a*v1.x+b*v2.x+c*v3.x,
                              a*v1.y+b*v2.y+c*v3.y,
                              a*v1.z+b*v2.z+c*v3.z );
     // check
@@ -181,7 +181,6 @@ class SketchTriangle
     // if ( Math.abs(c3) > 0.01 || Math.abs(a+b+c-1) > 0.01 ) {
     //   Log.v("DistoX", "fail tri vector normal: " + c3 + " coords " + a + " " + b + " " + c );
     // }
-    return ret;
   }
 
   /** check if this triangle contais a scene point X=(x,y)

@@ -31,7 +31,7 @@ import android.graphics.Matrix;
 
 import android.util.Log;
 
-public class LinePoint extends Point2D
+class LinePoint extends Point2D
 {
   private static final float toTherion = TDConst.TO_THERION;
 
@@ -103,7 +103,7 @@ public class LinePoint extends Point2D
   }
 
   // make isolated line-point copying coords from another
-  public LinePoint( LinePoint lp )
+  LinePoint( LinePoint lp )
   { 
     x  = lp.x;
     y  = lp.y;
@@ -116,7 +116,7 @@ public class LinePoint extends Point2D
     mPrev = null;
   }
 
-  public LinePoint( LinePoint lp, LinePoint prev )
+  LinePoint( LinePoint lp, LinePoint prev )
   { 
     x  = lp.x;
     y  = lp.y;
@@ -130,7 +130,7 @@ public class LinePoint extends Point2D
     mPrev = prev;
   }
   
-  public LinePoint( float x0, float y0, LinePoint prev )
+  LinePoint( float x0, float y0, LinePoint prev )
   {
     super( x0, y0 );
     // x = x0;
@@ -141,7 +141,7 @@ public class LinePoint extends Point2D
     mPrev = prev;
   }
 
-  public LinePoint( float x10, float y10, float x20, float y20, float x0, float y0, LinePoint prev )
+  LinePoint( float x10, float y10, float x20, float y20, float x0, float y0, LinePoint prev )
   {
     super( x0, y0 );
     // x  = x0;

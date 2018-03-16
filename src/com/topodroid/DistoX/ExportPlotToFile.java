@@ -23,7 +23,7 @@ import android.widget.Toast;
 
 import android.util.Log;
 
-class ExportPlotToFile extends AsyncTask<Void,Void,Boolean> 
+class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
 {
     private Context mContext;
     private DrawingCommandManager mCommand;
@@ -35,7 +35,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     private boolean mToast;
     private DrawingUtil mDrawingUtil;
 
-    public ExportPlotToFile( Context context, DrawingCommandManager command, DrawingUtil drawingUtil,
+    ExportPlotToFile( Context context, DrawingCommandManager command, DrawingUtil drawingUtil,
                          DistoXNum num, long type, String name, String ext, boolean toast )
     {
       // Log.v("DistoX", "export plot to file cstr. " + name );

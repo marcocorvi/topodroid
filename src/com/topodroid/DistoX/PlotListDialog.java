@@ -37,7 +37,7 @@ import android.widget.Toast;
 
 import android.util.Log;
 
-public class PlotListDialog extends MyDialog
+class PlotListDialog extends MyDialog
                         implements OnItemClickListener
                                 // , OnItemLongClickListener
                                 , View.OnClickListener
@@ -59,9 +59,9 @@ public class PlotListDialog extends MyDialog
   // END_SKETCH_3D
 
   // private ListView mList;
-  private GridView mList;
+  // private GridView mList;
 
-  public PlotListDialog( Context context, ShotWindow parent, TopoDroidApp app, DrawingWindow parent2 )
+  PlotListDialog( Context context, ShotWindow parent, TopoDroidApp app, DrawingWindow parent2 )
   {
     super( context, R.string.PlotListDialog );
     mParent  = parent;
@@ -78,11 +78,11 @@ public class PlotListDialog extends MyDialog
     mArrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
     // mArrayAdapter = new ListItemAdapter( mContext, R.layout.message );
 
-    mList = (GridView) findViewById(R.id.list);
-    mList.setAdapter( mArrayAdapter );
-    mList.setOnItemClickListener( this );
-    // mList.setDividerHeight( 2 );
-    mList.setHorizontalSpacing( 2 );
+    GridView list = (GridView) findViewById(R.id.list);
+    list.setAdapter( mArrayAdapter );
+    list.setOnItemClickListener( this );
+    // list.setDividerHeight( 2 );
+    list.setHorizontalSpacing( 2 );
 
     mBtnPlotNew = (Button) findViewById(R.id.plot_new);
     mBtnClose   = (Button) findViewById(R.id.btn_close);

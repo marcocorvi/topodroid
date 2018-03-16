@@ -22,13 +22,13 @@ package com.topodroid.DistoX;
 
 import java.util.ArrayList;
 
-public class BezierInterpolator
+class BezierInterpolator
 {
   private ArrayList< BezierCurve > curves;  // array of cubic splines
   private float[][] C;                      // Matrix C: 2x2
   private float[]   X;                      // Matrix X: 2x1
 
-  public BezierInterpolator()
+  BezierInterpolator()
   {
     curves = new ArrayList<>();
     C = new float[2][2];
@@ -69,10 +69,10 @@ public class BezierInterpolator
   // BEZIER
 
   /*  B0, B1, B2, B3: Bezier multipliers */
-  float B0(float t, float t1) { return t1*t1*t1;  }
-  float B1(float t, float t1) { return 3*t*t1*t1; }
-  float B2(float t, float t1) { return 3*t*t*t1;  }
-  float B3(float t, float t1) { return t*t*t;     }
+  private float B0(float t, float t1) { return t1*t1*t1;  }
+  private float B1(float t, float t1) { return 3*t*t1*t1; }
+  private float B2(float t, float t1) { return 3*t*t*t1;  }
+  private float B3(float t, float t1) { return t*t*t;     }
 
   /**  generateBezier: Use least-squares method to find Bezier CP's for region.
    * d             Array of digitized points
@@ -351,7 +351,7 @@ public class BezierInterpolator
    * nPts	Number of digitized points
    * error	User-defined error squared
    */
-  public float fitCurve( ArrayList<Point2D> d, int nPts, float error, float len_thr )
+  float fitCurve( ArrayList<Point2D> d, int nPts, float error, float len_thr )
   {
     // TDLog.Log( TDLog.LOG_BEZIER, "fitCurve nr. pts " + nPts );
     if ( nPts <= 1 ) return 0.0f;
@@ -372,7 +372,7 @@ public class BezierInterpolator
     return err;
   }
 
-  public ArrayList< BezierCurve > getCurves() { return curves; }
+  ArrayList< BezierCurve > getCurves() { return curves; }
 
   public int size() { return curves.size(); }
 

@@ -13,16 +13,16 @@ package com.topodroid.DistoX;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.util.Set;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Collections;
+// import java.util.Set;
+// import java.util.ArrayList;
+// import java.util.Comparator;
+// import java.util.Collections;
 
 // import android.app.Activity;
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 
-import android.content.Intent;
+// import android.content.Intent;
 
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -33,19 +33,19 @@ import android.widget.EditText;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.Toast;
+// import android.widget.Toast;
 
-import android.content.IntentFilter;
+// import android.content.IntentFilter;
 import android.content.Context;
 
 
-public class CBDdialog extends MyDialog
+class CBDdialog extends MyDialog
                                implements OnItemClickListener
                                , OnClickListener
 { 
   private CWDActivity mParent;
 
-  private ArrayAdapter<String> mArrayAdapter;
+  // private ArrayAdapter<String> mArrayAdapter;
   private ListView mList;
   private TextView mTVcbd;
   private EditText mETsubdir;
@@ -53,7 +53,8 @@ public class CBDdialog extends MyDialog
   private Button mBtnOk;
   private Button mBtnCreate;
 
-  public CBDdialog( Context context, CWDActivity parent, String basename )
+
+  CBDdialog( Context context, CWDActivity parent, String basename )
   {
     super( context, R.string.CBDdialog );
     mParent  = parent;
@@ -79,7 +80,7 @@ public class CBDdialog extends MyDialog
     mBtnCreate.setOnClickListener( this );
     mBtnOk.setOnClickListener( this );
 
-    // setTitleColor( 0x006d6df6 );
+    // setTitleColor( TDColor.TITLE_NORMAL );
     
     updateList();
   }
@@ -88,7 +89,7 @@ public class CBDdialog extends MyDialog
   {
     mTVcbd.setText( mBasename );
 
-    mArrayAdapter = new ArrayAdapter<>( mContext, R.layout.menu );
+    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>( mContext, R.layout.menu );
     File base = new File( mBasename );
     File[] dirs = base.listFiles( new FileFilter() {
       public boolean accept( File pathname ) { 
@@ -107,14 +108,14 @@ public class CBDdialog extends MyDialog
       // try {
       //   if ( parent_path.canWrite() ) mArrayAdapter.add( ".." );
       // } catch ( SecurityException e ) { }
-      mArrayAdapter.add( ".." );
+      arrayAdapter.add( ".." );
     }
     if ( dirs != null && dirs.length > 0 ) {
       for ( File item : dirs ) {
-        mArrayAdapter.add( item.getName() );
+        arrayAdapter.add( item.getName() );
       }
     }
-    mList.setAdapter( mArrayAdapter );
+    mList.setAdapter( arrayAdapter );
     mBtnOk.setEnabled( base.canWrite() );
     mBtnCreate.setEnabled( base.canWrite() );
   }

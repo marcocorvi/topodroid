@@ -149,7 +149,7 @@ class SketchPainter
     setStrokeWidths();
   }
 
-  void setStrokeWidths()
+  private void setStrokeWidths()
   {
     whitePaint.setStrokeWidth( BrushManager.WIDTH_PREVIEW );
     // previewPaint.setStrokeWidth( BrushManager.WIDTH_PREVIEW );

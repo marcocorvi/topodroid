@@ -11,11 +11,11 @@
  */
 package com.topodroid.DistoX;
 
-public class NumSplay extends NumSurveyPoint
+class NumSplay extends NumSurveyPoint
 {
   public NumStation from;
   private DBlock block;
-  float mDecl;
+  private float mDecl;
   float mExtend;
 
   DBlock getBlock() { return block; }

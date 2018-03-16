@@ -18,6 +18,7 @@
  *  Email:  Susan.McLean@noaa.gov
  */
 package com.topodroid.DistoX;
+
 class WMMcoeff
 {
   int n;

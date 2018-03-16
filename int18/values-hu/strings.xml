@@ -773,6 +773,7 @@
     <string name="title_audio">Hangjegyzet</string>
     <string name="title_calib">Kalibrációk</string>
     <string name="title_calib_check">Kalir. ell. mérések</string>
+    <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Kalibrációs adatok eloszlása</string>
     <string name="title_coeff">Kalibrációs együtthatók</string>
     <string name="title_contour">Körvonal</string>
@@ -1006,6 +1007,8 @@
   <string name="pref_min_leg_message">Az ennél rövidebb mérések narancssárga háttérrel lesznek megjelölve</string>
   <string name="pref_backsight_title">Visszamérés(Irányzék?)</string>
   <string name="pref_backsight_summary">Visszamérés(Irányzék?) mező az új mérés párbeszéd ablakban</string>
+  <!-- TODO string name="pref_backshot_title">Backshot DistoX</string -->
+  <!-- TODO string name="pref_backshot_summary">DistoX in backshot mode</string -->
   <string name="pref_prev_next_title">Előző/Köv. gombok</string>
   <string name="pref_prev_next_summary">Előző/Köv. gombok a mérés párbeszéd ablakban</string>
   <string name="pref_mag_anomaly_title">Mágneses anomália</string>

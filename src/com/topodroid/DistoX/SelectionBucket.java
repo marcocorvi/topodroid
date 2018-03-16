@@ -14,11 +14,11 @@ package com.topodroid.DistoX;
 // import java.util.LinkedList;
 // import java.util.ListIterator;
 import java.util.ArrayList;
-import java.util.Iterator;
+// import java.util.Iterator;
 
 import android.graphics.RectF;
 
-import android.util.Log;
+// import android.util.Log;
 
 class SelectionBucket
 {

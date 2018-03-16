@@ -12,15 +12,15 @@
 package com.topodroid.DistoX;
 
 import java.util.List;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 import android.os.Bundle;
-import android.app.Dialog;
+// import android.app.Dialog;
 
 import android.content.Context;
 
 import android.view.View;
-import android.view.View.OnClickListener;
+// import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 
 import android.widget.ArrayAdapter;
@@ -32,18 +32,18 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 // import android.widget.AdapterView.OnItemLongClickListener;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 
-public class CalibValidateListDialog extends MyDialog
+class CalibValidateListDialog extends MyDialog
                         implements OnItemClickListener
 {
   private GMActivity mParent;
-  private ArrayAdapter<String> mArrayAdapter;
+  // private ArrayAdapter<String> mArrayAdapter;
 
-  private ListView mList;
+  // private ListView mList;
   private List<String> mCalibs;
 
-  public CalibValidateListDialog( Context context, GMActivity parent, List<String> calibs )
+  CalibValidateListDialog( Context context, GMActivity parent, List<String> calibs )
   {
     super( context, R.string.CalibValidateListDialog );
     mParent  = parent;
@@ -54,19 +54,21 @@ public class CalibValidateListDialog extends MyDialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.calib_validate_list_dialog );
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    
+    // setContentView(R.layout.calib_validate_list_dialog );
+    // getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout( R.layout.calib_validate_list_dialog, R.string.title_calib );
 
-    mArrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
+    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
 
-    mList = (ListView) findViewById(R.id.list);
-    mList.setAdapter( mArrayAdapter );
-    mList.setOnItemClickListener( this );
-    mList.setDividerHeight( 2 );
+    ListView list = (ListView) findViewById(R.id.list);
+    list.setAdapter( arrayAdapter );
+    list.setOnItemClickListener( this );
+    list.setDividerHeight( 2 );
 
-    setTitle( R.string.title_calib );
+    // setTitle( R.string.title_calib );
     for ( String item : mCalibs ) {
-      mArrayAdapter.add( item );
+      arrayAdapter.add( item );
     }
   }
  

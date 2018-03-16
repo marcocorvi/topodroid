@@ -16,13 +16,13 @@ package com.topodroid.DistoX;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import android.util.Log;
+// import android.util.Log;
 
 import android.graphics.Matrix;
 
 class Selection
 {
-  final static int BSIZE = 100; // bucket size factor
+  final static private int BSIZE = 100; // bucket size factor
 
   ArrayList< SelectionPoint > mPoints;
   ArrayList< SelectionBucket > mBuckets;
@@ -82,9 +82,8 @@ class Selection
     mBuckets.clear();
   }
 
-  void clearReferencePoints()
+  synchronized void clearReferencePoints()
   {
-    synchronized ( mPoints ) {
       Iterator< SelectionPoint > it = mPoints.iterator();
       while( it.hasNext() ) {
         SelectionPoint sp1 = (SelectionPoint)it.next();
@@ -93,12 +92,10 @@ class Selection
           it.remove( );
         }
       }
-    }
   }
 
-  void clearDrawingPoints()
+  synchronized void clearDrawingPoints()
   {
-    synchronized ( mPoints ) {
       Iterator< SelectionPoint > it = mPoints.iterator();
       while( it.hasNext() ) {
         SelectionPoint sp1 = (SelectionPoint)it.next();
@@ -107,7 +104,6 @@ class Selection
           it.remove( );
         }
       }
-    }
   }
 
   void insertStationName( DrawingStationName st )
@@ -202,7 +198,7 @@ class Selection
   }
 
   // FIXME this is called with dmin = 10f
-  SelectionPoint getBucketNearestPoint( SelectionPoint sp, float x, float y, float dmin )
+  private SelectionPoint getBucketNearestPoint(SelectionPoint sp,float x,float y,float dmin)
   {
     SelectionPoint spmin = null;
     float x0 = sp.X();
@@ -303,7 +299,7 @@ class Selection
   }
 
 
-  SelectionPoint bucketSelectOnItemAt( DrawingPath item, float x, float y, float radius )
+  private SelectionPoint bucketSelectOnItemAt(DrawingPath item,float x,float y,float radius)
   {  
     float min_distance = radius;
     SelectionPoint ret = null;
@@ -323,8 +319,7 @@ class Selection
     return ret;
   }
 
-  void bucketSelectAt( float x, float y, float radius, int mode,
-                       SelectionSet sel, boolean legs, boolean splays, boolean stations )
+  private void bucketSelectAt(float x,float y,float radius,int mode,SelectionSet sel,boolean legs,boolean splays,boolean stations)
   {
     // Log.v("DistoX", "bucket select at " + x + " " + y + " R " + radius + " buckets " + mBuckets.size() );
     if ( mode == Drawing.FILTER_ALL ) {
@@ -395,8 +390,7 @@ class Selection
     bucketSelectAt( x, y, radius, mode, sel, legs, splays, stations );
     // Log.v("DistoX", "bucketSelect size " + sel.size() );
 
-    if ( sel.size() > 0 ) return;
-
+    // if ( sel.size() > 0 ) return;
   }
 
   private SelectionBucket getBucket( float x, float y )
@@ -428,7 +422,7 @@ class Selection
     }
   }
 
-  void rebucketLinePath( DrawingPointLinePath line )
+  private void rebucketLinePath(DrawingPointLinePath line)
   {
     for ( LinePoint lp = line.mFirst; lp != null; lp = lp.mNext ) {
       for ( SelectionPoint sp : mPoints ) {

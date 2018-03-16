@@ -20,7 +20,7 @@ class BezierCurve
   private Point2D Vtemp[];  // work vector of four points
   private int splitIndex;       // Point of split (criteria: maximum error)	
 
-  public BezierCurve()
+  BezierCurve()
   {
     c = new Point2D[4];
     Vtemp = new Point2D[4];
@@ -31,7 +31,7 @@ class BezierCurve
     splitIndex = -1;
   }
 
-  public BezierCurve( Point2D c0, Point2D c1, Point2D c2, Point2D c3 )
+  BezierCurve( Point2D c0, Point2D c1, Point2D c2, Point2D c3 )
   {
     c = new Point2D[4];
     Vtemp = new Point2D[4];
@@ -46,17 +46,17 @@ class BezierCurve
   }
 
   // control points
-  public void setPoint(int k, Point2D p ) { c[k].set(p); }
-  public Point2D getPoint( int k ) { return c[k]; }
+  void setPoint(int k, Point2D p ) { c[k].set(p); }
+  Point2D getPoint( int k ) { return c[k]; }
 
-  public int getSplitIndex() { return splitIndex; }
+  int getSplitIndex() { return splitIndex; }
 
   /**  ComputeMaxError: Find max squared distance of digitized points to fitted curve.
       d;		  Array of digitized points	
       first, last;  Indices defining region	
       u;		  Parameterization of points	
   */
-  public float computeMaxError( ArrayList<Point2D> d, int first, int last, float[] u )
+  float computeMaxError( ArrayList<Point2D> d, int first, int last, float[] u )
   {
     splitIndex = (last - first + 1)/2;
     float maxDist = 0.0f;
@@ -78,9 +78,8 @@ class BezierCurve
    * @param d           Array of digitized points
    * @param first, last	Indices defining region
    * @param u           Current parameter values
-   * @param bezCurve    Current fitted curve
    */
-  public void reparameterize( ArrayList<Point2D> d, int first, int last, float[] u )
+  void reparameterize( ArrayList<Point2D> d, int first, int last, float[] u )
   {
     // int nPts = last-first+1;
     // float[] uPrime = new float[ nPts ]; /*  New parameter values	*/
@@ -96,7 +95,7 @@ class BezierCurve
    * degree  The degree of the bezier curve
    * t       Parametric value to find point for	
    */
-  public Point2D evaluate( float t ) { return evaluate(3, c, t ); }
+  private Point2D evaluate( float t ) { return evaluate(3, c, t ); }
 
   private Point2D evaluate( int degree, Point2D[] V, float t )
   {

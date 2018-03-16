@@ -22,7 +22,7 @@ import android.view.View;
 
 // import android.util.Log;
 
-public class QCamBox extends View
+class QCamBox extends View
 {
   private Paint mWhite;
   

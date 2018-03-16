@@ -12,31 +12,16 @@
  */
 package com.topodroid.DistoX;
 
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.Matrix;
-
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.util.Iterator;
-// import java.util.List;
-import java.util.ArrayList;
-import java.util.Locale;
-
-import android.util.Log;
+// import android.util.Log;
 
 /**
  */
-public class DrawingOutlinePath
+class DrawingOutlinePath
 {
   private String mScrap;  // scrap name
   DrawingLinePath mPath;
 
-  public DrawingOutlinePath( String name, DrawingLinePath path )
+  DrawingOutlinePath( String name, DrawingLinePath path )
   {
     mScrap = name;
     mPath  = path;

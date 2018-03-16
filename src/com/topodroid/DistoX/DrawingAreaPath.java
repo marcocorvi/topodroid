@@ -14,14 +14,14 @@
  */
 package com.topodroid.DistoX;
 
-import android.graphics.Canvas;
+// import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Path;
+// import android.graphics.Path;
 import android.graphics.Matrix;
-import android.graphics.Bitmap;
-import android.graphics.BitmapShader;
+// import android.graphics.Bitmap;
+// import android.graphics.BitmapShader;
 import android.graphics.Shader;
-import android.graphics.Shader.TileMode;
+// import android.graphics.Shader.TileMode;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -30,14 +30,14 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 // import java.util.Iterator;
 // import java.util.List;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 import java.util.Locale;
 
-import android.util.Log;
+// import android.util.Log;
 
 /**
  */
-public class DrawingAreaPath extends DrawingPointLinePath
+class DrawingAreaPath extends DrawingPointLinePath
 {
   // private static int area_id_cnt = 0;
   // private statis String makeId() 
@@ -52,9 +52,9 @@ public class DrawingAreaPath extends DrawingPointLinePath
   double mOrientation;
   String mPrefix;      // border/area name prefix (= scrap name)
   // boolean mVisible; // visible border in DrawingPointLinePath
-  Shader mLocalShader = null;
+  private Shader mLocalShader = null;
 
-  public DrawingAreaPath( int type, int cnt, String prefix, boolean visible )
+  DrawingAreaPath( int type, int cnt, String prefix, boolean visible )
   {
     super( DrawingPath.DRAWING_PATH_AREA, visible, true );
     mAreaType = type;
@@ -75,7 +75,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
   }
 
   // @param id   string "area id" (mPrefix + mAreaCnt )
-  public DrawingAreaPath( int type, String id, boolean visible )
+  DrawingAreaPath( int type, String id, boolean visible )
   {
     // visible = ?,   closed = true
     super( DrawingPath.DRAWING_PATH_AREA, visible, true );
@@ -159,7 +159,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
     return null;
   }
 
-  public void setAreaType( int t ) 
+  void setAreaType( int t )
   {
     mAreaType = t;
     if ( mAreaType < BrushManager.mAreaLib.mSymbolNr ) {
@@ -174,7 +174,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
     mPaint = new Paint( paint );
   }
 
-  public int areaType() { return mAreaType; }
+  int areaType() { return mAreaType; }
 
   @Override
   public void setOrientation( double angle ) 

@@ -13,18 +13,18 @@ package com.topodroid.DistoX;
 
 class SensorInfo
 {
-  public long sid;       // survey id
-  public long id;        // photo id
-  public long shotid;    // shot id
-  public String mTitle;   // sensor title
-  public String mShotName; // shot name
-  public String mDate;
-  public String mComment;
-  public String mType;    // sensor type
-  public String mValue;   // sensor value
+  long sid;       // survey id
+  long id;        // photo id
+  long shotid;    // shot id
+  String mTitle;   // sensor title
+  String mShotName; // shot name
+  String mDate;
+  String mComment;
+  String mType;    // sensor type
+  String mValue;   // sensor value
   // public String mUnit;
 
-  public SensorInfo( long _sid, long _id, long _shotid, String title, String shotname, String date, String comment, 
+  SensorInfo( long _sid, long _id, long _shotid, String title, String shotname, String date, String comment,
                      String type, String value )
   {
     sid    = _sid;

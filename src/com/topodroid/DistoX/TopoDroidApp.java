@@ -930,7 +930,7 @@ public class TopoDroidApp extends Application
   }
     
 
-  public long setSurveyFromName( String survey, boolean forward ) 
+  long setSurveyFromName( String survey, boolean forward )
   { 
     mSID = -1;       // no survey by default
     mySurvey = null;
@@ -964,17 +964,17 @@ public class TopoDroidApp extends Application
     return 0;
   }
 
-  public boolean hasSurveyName( String name ) 
+  boolean hasSurveyName( String name )
   {
     return ( mData == null ) || mData.hasSurveyName( name );
   }
 
-  public boolean hasCalibName( String name ) 
+  boolean hasCalibName( String name )
   {
     return ( mDData == null ) || mDData.hasCalibName( name );
   }
 
-  public long setCalibFromName( String calib ) 
+  long setCalibFromName( String calib )
   {
     mCID = -1;
     myCalib = null;
@@ -986,7 +986,7 @@ public class TopoDroidApp extends Application
     return 0;
   }
 
-  // public void setSurveyFromId( long id )
+  // void setSurveyFromId( long id )
   // {
   //   if ( mData != null ) {
   //     mySurvey = mData.getSurveyFromId( id );
@@ -1000,7 +1000,7 @@ public class TopoDroidApp extends Application
   //   }
   // }
 
-  // public void setCalibFromId( long id )
+  // void setCalibFromId( long id )
   // {
   //  if ( mDData != null ) {
   //     myCalib = mDData.getCalibFromId( id );
@@ -1156,7 +1156,7 @@ public class TopoDroidApp extends Application
   // -------------------------------------------------------------
   // DATA BATCH DOWNLOAD
 
-  public int downloadDataBatch( Handler /* ILister */ lister ) // FIXME LISTER
+  int downloadDataBatch( Handler /* ILister */ lister ) // FIXME LISTER
   {
     mSecondLastShotId = lastShotId();
     int ret = 0;
@@ -1191,7 +1191,7 @@ public class TopoDroidApp extends Application
   // this re-assign stations to shots with station(s) already set
   // the list of stations is ordered by compare
   //
-  public void assignStationsAfter( DBlock blk0, List<DBlock> list, ArrayList<String> sts )
+  void assignStationsAfter( DBlock blk0, List<DBlock> list, ArrayList<String> sts )
   { 
     // Log.v("DistoX", "assign stations after " + blk0.Name() + " size " + list.size() );
     // if ( TDSetting.mSurveyStations < 0 ) return;
@@ -1218,7 +1218,7 @@ public class TopoDroidApp extends Application
   // called also by ShotWindow::updataBlockList
   // @param list blocks whose stations need to be set in the DB
   //
-  public void assignStationsAll( List<DBlock> list )
+  void assignStationsAll( List<DBlock> list )
   { 
     // Log.v("DistoX", "assign stations size " + list.size() );
     // if ( TDSetting.mSurveyStations < 0 ) return;
@@ -1245,7 +1245,7 @@ public class TopoDroidApp extends Application
   // ================================================================
   // EXPORTS
 
-  public String exportSurveyAsCsx( DrawingWindow sketch, String origin )
+  String exportSurveyAsCsx( DrawingWindow sketch, String origin )
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
     if ( info == null ) return null;
@@ -1254,7 +1254,7 @@ public class TopoDroidApp extends Application
     return TDExporter.exportSurveyAsCsx( mSID, mData, info, sketch, origin, filename );
   }
 
-  public String exportSurveyAsTop( DrawingWindow sketch, String origin )
+  String exportSurveyAsTop( DrawingWindow sketch, String origin )
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
     if ( info == null ) {
@@ -1265,7 +1265,7 @@ public class TopoDroidApp extends Application
     return TDExporter.exportSurveyAsTop( mSID, mData, info, sketch, origin, filename );
   }
 
-  public String exportSurveyAsTh( )
+  String exportSurveyAsTh( )
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
     if ( info == null ) {
@@ -1276,7 +1276,7 @@ public class TopoDroidApp extends Application
     return TDExporter.exportSurveyAsTh( mSID, mData, info, filename );
   }
 
-  public String exportSurveyAsPlg()
+  String exportSurveyAsPlg()
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
     if ( info == null ) {
@@ -1287,7 +1287,7 @@ public class TopoDroidApp extends Application
     return TDExporter.exportSurveyAsPlg( mSID, mData, info, filename );
   }
 
-  public String exportSurveyAsCav()
+  String exportSurveyAsCav()
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
     if ( info == null ) {
@@ -1298,7 +1298,7 @@ public class TopoDroidApp extends Application
     return TDExporter.exportSurveyAsCav( mSID, mData, info, filename );
   }
 
-  public String exportSurveyAsGrt()
+  String exportSurveyAsGrt()
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
     if ( info == null ) {
@@ -1309,7 +1309,7 @@ public class TopoDroidApp extends Application
     return TDExporter.exportSurveyAsGrt( mSID, mData, info, filename );
   }
 
-  public String exportSurveyAsGtx()
+  String exportSurveyAsGtx()
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
     if ( info == null ) {
@@ -1320,7 +1320,7 @@ public class TopoDroidApp extends Application
     return TDExporter.exportSurveyAsGtx( mSID, mData, info, filename );
   }
 
-  public String exportSurveyAsSvx()
+  String exportSurveyAsSvx()
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
     if ( info == null ) {
@@ -1331,7 +1331,7 @@ public class TopoDroidApp extends Application
     return TDExporter.exportSurveyAsSvx( mSID, mData, info, mDevice, filename );
   }
 
-  public String exportSurveyAsSur()
+  String exportSurveyAsSur()
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
     if ( info == null ) {
@@ -1342,7 +1342,7 @@ public class TopoDroidApp extends Application
     return TDExporter.exportSurveyAsSur( mSID, mData, info, filename );
   }
 
-  public String exportSurveyAsTrb()
+  String exportSurveyAsTrb()
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
     if ( info == null ) {
@@ -1353,7 +1353,7 @@ public class TopoDroidApp extends Application
     return TDExporter.exportSurveyAsTrb( mSID, mData, info, filename );
   }
 
-  public String exportSurveyAsTro()
+  String exportSurveyAsTro()
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
     if ( info == null ) {
@@ -1364,7 +1364,7 @@ public class TopoDroidApp extends Application
     return TDExporter.exportSurveyAsTro( mSID, mData, info, filename );
   }
 
-  public String exportSurveyAsCsv( )
+  String exportSurveyAsCsv( )
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
     if ( info == null ) {
@@ -1375,7 +1375,7 @@ public class TopoDroidApp extends Application
     return TDExporter.exportSurveyAsCsv( mSID, mData, info, filename );
   }
 
-  public String exportSurveyAsSrv()
+  String exportSurveyAsSrv()
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
     if ( info == null ) {
@@ -1386,7 +1386,7 @@ public class TopoDroidApp extends Application
     return TDExporter.exportSurveyAsSrv( mSID, mData, info, filename );
   }
 
-  public String exportSurveyAsDxf( DistoXNum num )
+  String exportSurveyAsDxf( DistoXNum num )
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
     if ( info == null ) {
@@ -1397,7 +1397,7 @@ public class TopoDroidApp extends Application
     return TDExporter.exportSurveyAsDxf( mSID, mData, info, num, filename );
   }
 
-  public String exportSurveyAsKml( )
+  String exportSurveyAsKml( )
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
     if ( info == null ) {
@@ -1408,7 +1408,7 @@ public class TopoDroidApp extends Application
     return TDExporter.exportSurveyAsKml( mSID, mData, info, filename );
   }
 
-  public String exportSurveyAsPlt( )
+  String exportSurveyAsPlt( )
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
     if ( info == null ) {
@@ -1419,7 +1419,7 @@ public class TopoDroidApp extends Application
     return TDExporter.exportSurveyAsPlt( mSID, mData, info, filename );
   }
 
-  public String exportSurveyAsDat()
+  String exportSurveyAsDat()
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
     if ( info == null ) {
@@ -1431,7 +1431,7 @@ public class TopoDroidApp extends Application
   }
 
 
-  public String exportCalibAsCsv( )
+  String exportCalibAsCsv( )
   {
     if ( mCID < 0 ) return null;
     CalibInfo ci = mDData.selectCalibInfo( mCID );
@@ -1788,7 +1788,7 @@ public class TopoDroidApp extends Application
    * NOTE manual shots take into account the instruents calibrations
    *      LRUD are not affected
    */
-  public DBlock insertManualShot( long at, String from, String to,
+  DBlock insertManualShot( long at, String from, String to,
                            float distance, float bearing, float clino, long extend0,
                            String left, String right, String up, String down,
                            String splay_station )
@@ -1946,7 +1946,7 @@ public class TopoDroidApp extends Application
     return mData.insertPlot( sid, -1L, name, type, 0L, from, to, 0, 0, TopoDroidApp.mScaleFactor, azimuth, clino, hide, nick, 0, false );
   }
 
-  public void viewPhoto( Context ctx, String filename )
+  void viewPhoto( Context ctx, String filename )
   {
     // Log.v("DistoX", "photo <" + filename + ">" );
     File file = new File( filename );

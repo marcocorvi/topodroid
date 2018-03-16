@@ -146,8 +146,8 @@ public class OverviewWindow extends ItemDrawer
     private static final float ZOOM_INC = 1.4f;
     private static final float ZOOM_DEC = 1.0f/ZOOM_INC;
 
-    public static final int MODE_MOVE = 2;
-    public static final int MODE_ZOOM = 4;  
+    static final int MODE_MOVE = 2;
+    static final int MODE_ZOOM = 4;
 
     final static int MEASURE_OFF   = 0;
     final static int MEASURE_START = 1;
@@ -167,8 +167,8 @@ public class OverviewWindow extends ItemDrawer
     private long mSid;     // survey id
     private long mType;    // current plot type
     private boolean mLandscape;
-    private String mFrom;
-    private PlotInfo mPlot1;
+    // private String mFrom;
+    // private PlotInfo mPlot1;
 
     @Override
     public void onVisibilityChanged(boolean visible)
@@ -471,7 +471,7 @@ public class OverviewWindow extends ItemDrawer
       mData         = mApp.mData; // new DataHelper( this ); 
       Bundle extras = getIntent().getExtras();
       mSid          = extras.getLong( TDTag.TOPODROID_SURVEY_ID );
-      mFrom         = extras.getString( TDTag.TOPODROID_PLOT_FROM );
+      // mFrom      = extras.getString( TDTag.TOPODROID_PLOT_FROM );
       mZoom         = extras.getFloat( TDTag.TOPODROID_PLOT_ZOOM );
       mType         = (int)extras.getLong( TDTag.TOPODROID_PLOT_TYPE );
       mLandscape    = extras.getBoolean( TDTag.TOPODROID_PLOT_LANDSCAPE );
@@ -595,7 +595,7 @@ public class OverviewWindow extends ItemDrawer
         float ydelta = 0.0f;
         if ( k == 0 ) {
           String view  = plot.view;
-          mPlot1 = plot;
+          // mPlot1 = plot;
           // mPid = plot.id;
           // NOTE Overview only for plan or extended plots
           // float decl = mData.getSurveyDeclination( mSid );

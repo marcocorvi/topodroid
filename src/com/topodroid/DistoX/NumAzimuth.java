@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-public class NumAzimuth
+class NumAzimuth
 {
   float mAzimuth;  // azimuth of the leg at the station [degrees]
   float mExtend;   // extend of the leg "at the station"

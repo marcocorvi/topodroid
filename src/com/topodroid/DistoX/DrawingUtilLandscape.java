@@ -11,10 +11,10 @@
  */
 package com.topodroid.DistoX;
 
-import android.graphics.Paint;
+// import android.graphics.Paint;
 // import android.graphics.Paint.FontMetrics;
 // import android.graphics.PointF;
-import android.graphics.Path;
+// import android.graphics.Path;
 // import android.graphics.Path.Direction;
 
 class DrawingUtilLandscape extends DrawingUtil

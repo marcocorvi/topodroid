@@ -36,7 +36,7 @@
   </LinearLayout>
 
   <EditText android:id="@+id/comment"
-      style="@style/edit_text"
+      style="@style/edit_text_light"
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
      android:layout_below="@id/layout0"

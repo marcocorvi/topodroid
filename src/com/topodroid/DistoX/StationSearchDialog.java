@@ -33,7 +33,7 @@ import android.widget.CheckBox;
 
 import android.util.Log;
 
-public class StationSearchDialog extends MyDialog
+class StationSearchDialog extends MyDialog
                         implements View.OnClickListener
                         , View.OnLongClickListener
 {
@@ -48,7 +48,7 @@ public class StationSearchDialog extends MyDialog
 
   private MyKeyboard mKeyboard = null;
 
-  public StationSearchDialog( Context context, ShotWindow parent, String station )
+  StationSearchDialog( Context context, ShotWindow parent, String station )
   {
     super( context, R.string.StationSearchDialog );
     mParent  = parent;

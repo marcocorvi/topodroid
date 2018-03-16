@@ -35,7 +35,7 @@ import android.content.IntentFilter;
 import android.content.Context;
 
 
-public class FirmwareFileDialog extends MyDialog
+class FirmwareFileDialog extends MyDialog
                           implements OnItemClickListener
 { 
   private TopoDroidApp mApp;
@@ -43,9 +43,9 @@ public class FirmwareFileDialog extends MyDialog
 
   private ArrayAdapter<String> mArrayAdapter;
   private ListView mList;
-  private TextView mTVfile;
+  // private TextView mTVfile;
 
-  public FirmwareFileDialog( Context context, FirmwareDialog parent, TopoDroidApp app )
+  FirmwareFileDialog( Context context, FirmwareDialog parent, TopoDroidApp app )
   {
     super( context, R.string.FirmwareFileDialog );
     mParent  = parent;
@@ -65,9 +65,9 @@ public class FirmwareFileDialog extends MyDialog
     mList.setOnItemClickListener( this );
     mList.setDividerHeight( 2 );
 
-    mTVfile = (TextView) findViewById( R.id.file );
+    // mTVfile = (TextView) findViewById( R.id.file );
 
-    // setTitleColor( 0x006d6df6 );
+    // setTitleColor( TDColor.TITLE_NORMAL );
 
     File[] files = TDPath.getBinFiles();
     ArrayList<String> names = new ArrayList<>();

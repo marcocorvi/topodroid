@@ -49,7 +49,7 @@ class FirmwareDialog extends MyDialog
 
   DeviceActivity mParent;
   TopoDroidApp   mApp;
-  KeyListener    mETkeyListener;
+  private KeyListener    mETkeyListener;
 
   FirmwareDialog( Context context, DeviceActivity parent, TopoDroidApp app )
   {
@@ -156,7 +156,7 @@ class FirmwareDialog extends MyDialog
     }
   }
 
-  void askDump( final String filename )
+  private void askDump( final String filename )
   {
     TopoDroidAlertDialog.makeAlert( mContext, mParent.getResources(), R.string.ask_dump,
       new DialogInterface.OnClickListener() {
@@ -174,7 +174,7 @@ class FirmwareDialog extends MyDialog
     );
   }
 
-  void askUpload( final String filename, final boolean compatible )
+  private void askUpload( final String filename, final boolean compatible )
   {
     TDLog.LogFile( "FW/HW compatibility " + (compatible? "yes" : "no") );
     String title = mParent.getResources().getString( compatible? R.string.ask_upload : R.string.ask_upload_not_compatible );

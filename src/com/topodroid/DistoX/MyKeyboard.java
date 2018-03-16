@@ -48,7 +48,7 @@ import android.util.Log;
 
 /* you need to override EditText::onTouchListener()
  */
-public class MyKeyboard // FIXME DIALOG extends Dialog
+class MyKeyboard // FIXME DIALOG extends Dialog
                         implements OnKeyListener
                                  , OnKeyboardActionListener 
 {
@@ -66,14 +66,14 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
   static final int FLAG_POINT_LCASE       = 0x0a; // FLAG_POINT | FLAG_LCASE
   static final int FLAG_POINT_LCASE_2ND   = 0x2a; // FLAG_POINT | FLAG_LCASE | FLAG_2ND
 
-  boolean hasDegree;
-  boolean hasPoint;
-  boolean hasSign;
-  boolean hasLcase;
+  private boolean hasDegree;
+  private boolean hasPoint;
+  private boolean hasSign;
+  private boolean hasLcase;
 
-  boolean inLcase;
+  private boolean inLcase;
 
-  Map< EditText, Integer > mFlags;
+  private Map< EditText, Integer > mFlags;
 
   private Context  mContext;
   private EditText mEdit; 
@@ -90,7 +90,7 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
   // Keyboard.Key mKeyMinute;
   // Keyboard.Key mKeyPoint;
 
-  int setFlags( EditText e )
+  private int setFlags( EditText e )
   { 
     Integer j = mFlags.get( e );
     int flag = ( j == null )? 0 : j.intValue();
@@ -101,7 +101,7 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
     return flag;
   }
     
-  Integer addFlag( EditText e, int f )
+  private Integer addFlag( EditText e, int f )
   {
     return mFlags.put( e, Integer.valueOf(f) );
   }
@@ -113,9 +113,12 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
       // Log.v("DistoX", "set listeners for " + e.getText().toString() + " flag " + flag );
 
       if ( ( flag & FLAG_NOEDIT ) == FLAG_NOEDIT ) {
-        e.setBackgroundColor( TDColor.MID_GRAY );
-      } else {
-        e.setBackgroundResource( android.R.drawable.edit_text );
+        // e.setBackgroundColor( TDColor.MID_GRAY );
+        e.setTextColor( TDColor.BLACK );
+	e.setFocusable( false );
+        // e.setBackgroundResource( R.drawable.edit_text );
+      // } else {
+        // e.setBackgroundResource( android.R.drawable.edit_text );
       }
 
       e.setOnFocusChangeListener( new OnFocusChangeListener() {
@@ -208,7 +211,7 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
     }
   }
 
-  void switchKeyboard( int flag )
+  private void switchKeyboard( int flag )
   {
     if ( mKeyboard2 == null ) return;
     Keyboard next = ( (flag & FLAG_2ND) == FLAG_2ND )? mKeyboard2 : mKeyboard1;
@@ -228,7 +231,7 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
     return mKeyboardView.isShown();
   }
 
-  public MyKeyboard( Context context, KeyboardView view, int kbdid1, int kbdid2 )
+  MyKeyboard( Context context, KeyboardView view, int kbdid1, int kbdid2 )
   {
     // FIXME DIALOG super( context );
     mContext = context;
@@ -276,7 +279,7 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
     }
   }
 
-  void clearCursor( ) { clearCursor( mEdit ); }
+  private void clearCursor( ) { clearCursor( mEdit ); }
 
   static private void clearCursor( EditText e )
   {

@@ -35,17 +35,17 @@ import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class CalibGMDialog extends MyDialog
+class CalibGMDialog extends MyDialog
                            implements View.OnClickListener
 {
   private GMActivity  mParent;
   private CalibCBlock mBlk;
 
-  private EditText mETbearing;
-  private EditText mETclino;
-  private EditText mETroll;
+  // private EditText mETbearing;
+  // private EditText mETclino;
+  // private EditText mETroll;
 
-  private TextView mTVerror;
+  // private TextView mTVerror;
   
   private EditText mETname;  // group number
   private Button   mButtonOK;
@@ -75,10 +75,10 @@ public class CalibGMDialog extends MyDialog
 
     initLayout( R.layout.calib_gm_dialog, null );
 
-    mETbearing = (EditText) findViewById( R.id.gm_bearing );
-    mETclino   = (EditText) findViewById( R.id.gm_clino   );
-    mETroll    = (EditText) findViewById( R.id.gm_roll    );
-    mTVerror   = (TextView) findViewById( R.id.gm_error );
+    EditText eTbearing = (EditText) findViewById( R.id.gm_bearing );
+    EditText eTclino   = (EditText) findViewById( R.id.gm_clino   );
+    EditText eTroll    = (EditText) findViewById( R.id.gm_roll    );
+    TextView tVerror   = (TextView) findViewById( R.id.gm_error );
 
     mETname = (EditText) findViewById(R.id.gm_name);
 
@@ -110,10 +110,10 @@ public class CalibGMDialog extends MyDialog
     // mCBregroup = (CheckBox) findViewById(R.id.gm_regroup );
     // mCBregroup.setChecked( false );
 
-    mETbearing.setText( String.format( "%.1f", mBlk.mBearing ) );
-    mETclino.setText( String.format( "%.1f", mBlk.mClino ) );
-    mETroll.setText( String.format( "%.1f", mBlk.mRoll ) );
-    mTVerror.setText( String.format( "%.4f", mBlk.mError ) );
+    eTbearing.setText( String.format( "%.1f", mBlk.mBearing ) );
+    eTclino.setText( String.format( "%.1f", mBlk.mClino ) );
+    eTroll.setText( String.format( "%.1f", mBlk.mRoll ) );
+    tVerror.setText( String.format( "%.4f", mBlk.mError ) );
 
     mETname.setHint( Long.toString( mBlk.mGroup ) );
     mButtonOK.setOnClickListener( this );
@@ -126,11 +126,12 @@ public class CalibGMDialog extends MyDialog
     } else {
       mETname.setInputType( TDConst.NUMBER_SIGNED );
     }
-    setEditable( mETbearing, null, false, MyKeyboard.FLAG_POINT );
-    setEditable( mETclino,   null, false, MyKeyboard.FLAG_POINT );
-    setEditable( mETroll,    null, false, MyKeyboard.FLAG_POINT );
+    setEditable( eTbearing, null, false, MyKeyboard.FLAG_POINT );
+    setEditable( eTclino,   null, false, MyKeyboard.FLAG_POINT );
+    setEditable( eTroll,    null, false, MyKeyboard.FLAG_POINT );
   }
 
+  @Override
   public void onClick(View v) 
   {
     Button b = (Button) v;

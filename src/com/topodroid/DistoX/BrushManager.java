@@ -31,10 +31,10 @@ import android.content.res.Resources;
 /**
  * gereric brush 
  */
-public class BrushManager
+class BrushManager
 {
-  static final int WIDTH_CURRENT = 1;
-  static final int WIDTH_FIXED   = 1;
+  private static final int WIDTH_CURRENT = 1;
+  private static final int WIDTH_FIXED   = 1;
   static final int WIDTH_PREVIEW = 1;
 
   static SymbolPointLibrary mPointLib = null;
@@ -131,7 +131,7 @@ public class BrushManager
   // static BitmapDrawable mSymbolHighlight = null;
 
   // ===========================================================================
-  static boolean mReloadSymbols = true; // whether to reload symbols
+  static private boolean mReloadSymbols = true; // whether to reload symbols
 
   static void makePaths( Context ctx, Resources res )
   {

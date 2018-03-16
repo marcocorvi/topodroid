@@ -19,7 +19,7 @@ import java.util.Iterator;
 import android.util.Log;
 
 
-public class TRobot
+class TRobot
 {
   ArrayList< TRobotSeries > mSeries;
   ArrayList< TRobotPoint  > mPoints;
@@ -163,7 +163,7 @@ public class TRobot
     }
   }
 
-  TRobotPoint getPoint( TRobotSeries sr, int np )
+  private TRobotPoint getPoint(TRobotSeries sr,int np)
   {
     if ( sr == null ) return null;
     for ( TRobotPoint pt : mPoints ) {
@@ -172,7 +172,7 @@ public class TRobot
     return null;
   }
 
-  TRobotSeries getSeries( int ns )
+  private TRobotSeries getSeries(int ns)
   {
     for ( TRobotSeries sr : mSeries ) {
       if ( ns == sr.mNumber ) return sr;

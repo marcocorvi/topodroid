@@ -13,7 +13,7 @@ package com.topodroid.DistoX;
 
 import java.util.ArrayList;
 
-public class NumShot 
+class NumShot
 {
   NumStation from;
   NumStation to;
@@ -29,8 +29,8 @@ public class NumShot
   // float mLength;
   // float mBearing;
   // float mClino;
-  AverageLeg mAvgLeg;
-  float mAnomaly;  // local magnetic anomaly
+  private AverageLeg mAvgLeg;
+  private float mAnomaly;  // local magnetic anomaly
 
   float length()  { return mAvgLeg.length(); }
   float bearing() { return mAvgLeg.bearing(); }

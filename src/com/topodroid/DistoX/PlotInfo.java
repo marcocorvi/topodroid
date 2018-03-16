@@ -19,35 +19,35 @@ class PlotInfo
 {
   // sketch types
   // TODO NEVER CHANGE - THESE ARE WRITTEN IN TDR FILES
-  public static final long PLOT_NULL       = -1; 
-  public static final long PLOT_X_SECTION  = 0; // X-section at a station (defined in PLAN plot)
-  public static final long PLOT_PLAN       = 1;
-  public static final long PLOT_EXTENDED   = 2;
-  public static final long PLOT_H_SECTION  = 3; // leave the place but do not use
-  public static final long PLOT_PHOTO      = 4;
-  public static final long PLOT_SECTION    = 5; // section-line cross-section
-  public static final long PLOT_SKETCH_3D  = 6;
-  public static final long PLOT_XH_SECTION = 7; // X-H_sectiuon at a station (defined in EXT plot)
-  public static final long PLOT_PROFILE    = 8; // projected profile
+  static final long PLOT_NULL       = -1;
+  static final long PLOT_X_SECTION  = 0; // X-section at a station (defined in PLAN plot)
+  static final long PLOT_PLAN       = 1;
+  static final long PLOT_EXTENDED   = 2;
+  static final long PLOT_H_SECTION  = 3; // leave the place but do not use
+  static final long PLOT_PHOTO      = 4;
+  static final long PLOT_SECTION    = 5; // section-line cross-section
+  static final long PLOT_SKETCH_3D  = 6;
+  static final long PLOT_XH_SECTION = 7; // X-H_sectiuon at a station (defined in EXT plot)
+  static final long PLOT_PROFILE    = 8; // projected profile
 
   final static int ORIENTATION_PORTRAIT  = 0;
   final static int ORIENTATION_LANDSCAPE = 1;
 
-  public long surveyId; // survey id
-  public long id;       // plot id
-  public String name;   // name of the plot
-  public int type;      // type of the plot
-  public String start;  // base station
-  public String view;   // viewed station (barrier)
-  public String hide;   // hiding stations / parent plot (xsections)
-  public String nick;   // nickname (xsections)
-  public float xoffset; // display X-offset
-  public float yoffset; // display Y-offset
-  public float zoom;    // display zoom
-  public float azimuth; // vertical cross-section azimuth / profile projection azimuth
-  public float clino;   // inclination (0 for plan cross-sections)
-  public int csxIndex = -1;  // numerical index for cSurvey xsection exports
-  public int orientation = ORIENTATION_PORTRAIT;
+  long surveyId; // survey id
+  long id;       // plot id
+  String name;   // name of the plot
+  int type;      // type of the plot
+  String start;  // base station
+  String view;   // viewed station (barrier)
+  String hide;   // hiding stations / parent plot (xsections)
+  String nick;   // nickname (xsections)
+  float xoffset; // display X-offset
+  float yoffset; // display Y-offset
+  float zoom;    // display zoom
+  float azimuth; // vertical cross-section azimuth / profile projection azimuth
+  float clino;   // inclination (0 for plan cross-sections)
+  int csxIndex = -1;  // numerical index for cSurvey xsection exports
+  int orientation = ORIENTATION_PORTRAIT;
 
   boolean isPortrait()  { return orientation == ORIENTATION_PORTRAIT; }
   boolean isLandscape() { return orientation == ORIENTATION_LANDSCAPE; }
@@ -145,7 +145,7 @@ class PlotInfo
     surveyId = sid;
   }
 
-  public String getTypeString() 
+  String getTypeString()
   {
     return projName[ type ];
   }

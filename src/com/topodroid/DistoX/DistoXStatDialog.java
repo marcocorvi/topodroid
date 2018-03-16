@@ -12,19 +12,19 @@
 package com.topodroid.DistoX;
 
 import java.util.List;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 import android.os.Bundle;
-import android.app.Dialog;
+// import android.app.Dialog;
 // import android.app.Activity;
 import android.content.Context;
 // import android.content.Intent;
 import android.content.res.Resources;
 
-import android.graphics.*;
+// import android.graphics.*;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.View.OnClickListener;
+// import android.view.ViewGroup.LayoutParams;
 
 import android.widget.TextView;
 import android.widget.Button;
@@ -32,13 +32,13 @@ import android.widget.ListView;
 
 import android.widget.ArrayAdapter;
 
-public class DistoXStatDialog extends MyDialog 
+class DistoXStatDialog extends MyDialog
                               implements View.OnClickListener
 {
     private DistoXNum mNum;
     private String mOrigin;
     private float mAzimuth;
-    SurveyStat mStat;
+    private SurveyStat mStat;
 
     private TextView mTextOrigin;
     private TextView mTextAzimuth;
@@ -63,7 +63,7 @@ public class DistoXStatDialog extends MyDialog
 
     private Button mBtnBack;
 
-    public DistoXStatDialog( Context context, DistoXNum num, String origin, float azimuth, SurveyStat stat )
+    DistoXStatDialog( Context context, DistoXNum num, String origin, float azimuth, SurveyStat stat )
     {
       super( context, R.string.DistoXStatDialog );
       mNum    = num;
@@ -168,10 +168,10 @@ public class DistoXStatDialog extends MyDialog
     @Override
     public void onClick(View view)
     {
-      Button b = (Button)view;
-      if ( b == mBtnBack ) {
-        /* nothing */
-      }
+      // Button b = (Button)view;
+      // if ( b == mBtnBack ) {
+      //   /* nothing */
+      // }
       dismiss();
     }
 }

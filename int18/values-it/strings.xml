@@ -774,6 +774,7 @@
     <string name="title_audio">Commento audio</string>
     <string name="title_calib">Calibrazioni</string>
     <string name="title_calib_check">Tiri di controllo calib.</string>
+    <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Distribuzione dati calibrazione</string>
     <string name="title_coeff">Calibrazione</string>
     <!-- NO string name="title_contour">Contour</string -->
@@ -1013,6 +1014,8 @@
   <string name="pref_min_leg_message">Battute meno lunghe del minimo hanno uno sfondo arancio</string>
   <string name="pref_backsight_title">Backsight</string>
   <string name="pref_backsight_summary">Campi backsight nel dialogo Nuova Battuta</string>
+  <!-- TODO string name="pref_backshot_title">Backshot DistoX</string -->
+  <!-- TODO string name="pref_backshot_summary">DistoX in backshot mode</string -->
   <string name="pref_prev_next_title">Pulsanti Prec/Succ</string>
   <string name="pref_prev_next_summary">Pulsanti Prec/Succ nel riquadro di tiro</string>
   <string name="pref_mag_anomaly_title">Anomalia magnetica</string>

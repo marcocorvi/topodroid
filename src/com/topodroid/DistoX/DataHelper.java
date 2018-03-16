@@ -41,7 +41,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.HashMap;
 
-public class DataHelper extends DataSetObservable
+class DataHelper extends DataSetObservable
 {
 
   static final String DB_VERSION = "33";
@@ -173,14 +173,14 @@ public class DataHelper extends DataSetObservable
     openDatabase();
   }
 
-  public void closeDatabase()
+  void closeDatabase()
   {
     if ( myDB == null ) return;
     myDB.close();
     myDB = null;
   }
 
-  public void openDatabase() 
+  void openDatabase()
   {
     String database_name = TDPath.getDatabase();
     DistoXOpenHelper openHelper = new DistoXOpenHelper( mContext, database_name );
@@ -235,7 +235,7 @@ public class DataHelper extends DataSetObservable
    // ----------------------------------------------------------------------
    // SURVEY DATA
 
-  public String getSurveyInitailStation( long id )
+  String getSurveyInitailStation( long id )
   {
     String ret = "";
     if ( myDB == null ) return ret;
@@ -258,7 +258,7 @@ public class DataHelper extends DataSetObservable
   // at-station xsextions type
   //   0 : shared
   //   1 : private
-  public int getSurveyXSections( long id )
+  int getSurveyXSections( long id )
   {
     int ret = 0;
     if ( myDB == null ) return ret;
@@ -278,7 +278,7 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
-  public float getSurveyDeclination( long sid )
+  float getSurveyDeclination( long sid )
   {
     float ret = 0;
     if ( myDB == null ) return 0;
@@ -297,7 +297,7 @@ public class DataHelper extends DataSetObservable
   }
 
 
-  public SurveyStat getSurveyStat( long sid )
+  SurveyStat getSurveyStat( long sid )
   {
     // TDLog.Log( TDLog.LOG_DB, "getSurveyStat sid " + sid );
     HashMap< String, Integer > map = new HashMap< String, Integer >();
@@ -453,7 +453,7 @@ public class DataHelper extends DataSetObservable
   // --------------------------------------------------------------------
   // compile statements
 
-  public void compileStatements()
+  void compileStatements()
   {
     if ( myDB != null ) {
       // clearStationsStmt = myDB.compileStatement( "UPDATE shots SET fStation=\"\", tStation=\"\" where id>? and surveyId=?" );
@@ -533,7 +533,7 @@ public class DataHelper extends DataSetObservable
   // SURVEY
   // survey attributes renaming are "rare" actions
 
-  public boolean renameSurvey( long id, String name, boolean forward )
+  boolean renameSurvey( long id, String name, boolean forward )
   {
     ContentValues vals = new ContentValues();
     vals.put("name", name );
@@ -551,7 +551,7 @@ public class DataHelper extends DataSetObservable
     return true;
   }
 
-  public boolean updateSurveyInfo( long id, String date, String team, double decl, String comment,
+  boolean updateSurveyInfo( long id, String date, String team, double decl, String comment,
                                 String init_station, int xsections, boolean forward )
   {
     boolean ret = false;
@@ -578,7 +578,7 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
-  public boolean updateSurveyDayAndComment( String name, String date, String comment, boolean forward )
+  boolean updateSurveyDayAndComment( String name, String date, String comment, boolean forward )
   {
     boolean ret = false;
     long id = getIdFromName( SURVEY_TABLE, name );
@@ -684,7 +684,7 @@ public class DataHelper extends DataSetObservable
 
   // -----------------------------------------------------------------
 
-  public boolean updateSurveyDayAndComment( long id, String date, String comment, boolean forward )
+  boolean updateSurveyDayAndComment( long id, String date, String comment, boolean forward )
   {
     if ( date == null ) return false;
     ContentValues vals = new ContentValues();
@@ -698,7 +698,7 @@ public class DataHelper extends DataSetObservable
     return true;
   }
 
-  public void updateSurveyTeam( long id, String team, boolean forward )
+  void updateSurveyTeam( long id, String team, boolean forward )
   {
     ContentValues vals = new ContentValues();
     vals.put( "team", team );
@@ -709,7 +709,7 @@ public class DataHelper extends DataSetObservable
     }
   }
 
-  public void updateSurveyInitStation( long id, String station, boolean forward )
+  void updateSurveyInitStation( long id, String station, boolean forward )
   {
     ContentValues vals = new ContentValues();
     vals.put( "init_station", station );
@@ -719,7 +719,7 @@ public class DataHelper extends DataSetObservable
       }
     }
   }
-  public void updateSurveyDeclination( long id, double decl, boolean forward )
+  void updateSurveyDeclination( long id, double decl, boolean forward )
   {
     ContentValues vals = new ContentValues();
     vals.put( "declination", decl );
@@ -733,7 +733,7 @@ public class DataHelper extends DataSetObservable
   // -----------------------------------------------------------------------
   // SURVEY delete
 
-  public void doDeleteSurvey( long sid ) 
+  void doDeleteSurvey( long sid )
   {
     if ( myDB == null ) return;
     String[] clause = new String[]{ Long.toString( sid ) };
@@ -890,7 +890,7 @@ public class DataHelper extends DataSetObservable
   // }
 
 
-  public void updateShotName( long id, long sid, String fStation, String tStation, boolean forward )
+  void updateShotName( long id, long sid, String fStation, String tStation, boolean forward )
   {
     if ( myDB == null ) return;
     if ( fStation == null ) fStation = "";
@@ -912,7 +912,7 @@ public class DataHelper extends DataSetObservable
   }
 
   // "leg" flag: 0 splay, 1 leg, 2 x-splay
-  public void updateShotLeg( long id, long sid, long leg, boolean forward )
+  void updateShotLeg( long id, long sid, long leg, boolean forward )
   {
     // if ( myDB == null ) return;
     StringWriter sw = new StringWriter();
@@ -933,7 +933,7 @@ public class DataHelper extends DataSetObservable
   }
 
   // FIXME_X_SPLAY
-  public long updateSplayLeg( long id, long sid, boolean forward )
+  long updateSplayLeg( long id, long sid, boolean forward )
   {
     // if ( myDB == null ) return;
     // get the shot sid/id
@@ -948,7 +948,7 @@ public class DataHelper extends DataSetObservable
     return DBlock.LEG_INVALID;
   }
 
-  public void updateShotExtend( long id, long sid, long extend, boolean forward )
+  void updateShotExtend( long id, long sid, long extend, boolean forward )
   {
     // if ( myDB == null ) return;
 
@@ -962,7 +962,7 @@ public class DataHelper extends DataSetObservable
     } 
   }
 
-  public void updateShotFlag( long id, long sid, long flag, boolean forward )
+  void updateShotFlag( long id, long sid, long flag, boolean forward )
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
@@ -974,7 +974,7 @@ public class DataHelper extends DataSetObservable
     } 
   }
 
-  public void updateShotComment( long id, long sid, String comment, boolean forward )
+  void updateShotComment( long id, long sid, String comment, boolean forward )
   {
     // if ( myDB == null ) return;
     if ( comment == null ) comment = "";
@@ -1000,7 +1000,7 @@ public class DataHelper extends DataSetObservable
     } 
   }
 
-  public void deleteShot( long id, long sid, int status, boolean forward ) 
+  void deleteShot( long id, long sid, int status, boolean forward )
   {
     // if ( myDB == null ) return;
     if ( updateStatus( SHOT_TABLE, id, sid, status ) ) {
@@ -1010,7 +1010,7 @@ public class DataHelper extends DataSetObservable
     }
   }
 
-  public void undeleteShot( long id, long sid, boolean forward ) 
+  void undeleteShot( long id, long sid, boolean forward )
   {
     // if ( myDB == null ) return;
     if ( updateStatus( SHOT_TABLE, id, sid, TDStatus.NORMAL ) ) {
@@ -1064,7 +1064,7 @@ public class DataHelper extends DataSetObservable
   }
   
   // called by the importXXXTask's
-  public long insertShots( long sid, long id, ArrayList< ParserShot > shots )
+  long insertShots( long sid, long id, ArrayList< ParserShot > shots )
   {
     // if ( myDB == null ) return -1L;
     long millis = 0L;
@@ -1146,20 +1146,20 @@ public class DataHelper extends DataSetObservable
     return id;
   }
 
-  public long insertDistoXShot( long sid, long id, double d, double b, double c, double r, long extend,
+  long insertDistoXShot( long sid, long id, double d, double b, double c, double r, long extend,
                           long status, boolean forward )
   { // 0L=leg, status, 0L=type DISTOX
     return doInsertShot( sid, id, System.currentTimeMillis()/1000, "", "",  d, b, c, r, extend, DBlock.BLOCK_SURVEY, 0L, status, 0L, "", forward );
   }
 
   
-  public long insertShot( long sid, long id, long millis, double d, double b, double c, double r, long extend, long leg,
+  long insertShot( long sid, long id, long millis, double d, double b, double c, double r, long extend, long leg,
                           long shot_type, boolean forward )
   { // leg, 0L=status, type 
     return doInsertShot( sid, id, millis, "", "",  d, b, c, r, extend, DBlock.BLOCK_SURVEY, leg, 0L, shot_type, "", forward );
   }
 
-  public boolean updateShotAMDR( long id, long sid, double acc, double mag, double dip, double r, boolean forward )
+  boolean updateShotAMDR( long id, long sid, double acc, double mag, double dip, double r, boolean forward )
   {
     // if ( myDB == null ) return;
 
@@ -1234,7 +1234,7 @@ public class DataHelper extends DataSetObservable
     }
   }
 
-  public void transferShots( long sid, long old_sid, long old_id )
+  void transferShots( long sid, long old_sid, long old_id )
   {
     if ( myDB == null ) return;
     SurveyInfo old_survey = selectSurveyInfo( old_sid );
@@ -1331,7 +1331,7 @@ public class DataHelper extends DataSetObservable
     } catch (SQLiteException e) { logError("transfer shots", e); }
   }
 
-  public long insertShotAt( long sid, long at, long millis, double d, double b, double c, double r, long extend, long leg, long type, boolean forward )
+  long insertShotAt( long sid, long at, long millis, double d, double b, double c, double r, long extend, long leg, long type, boolean forward )
   {
     if ( myDB == null ) return -1L;
     shiftShotsId( sid, at );
@@ -1408,7 +1408,7 @@ public class DataHelper extends DataSetObservable
   // -----------------------------------------------------------------
   // PLOT
 
-  public void updatePlot( long pid, long sid, double xoffset, double yoffset, double zoom )
+  void updatePlot( long pid, long sid, double xoffset, double yoffset, double zoom )
   {
     if ( myDB == null ) return;
     // TDLog.Log( TDLog.LOG_DB, "update Plot: " + pid + "/" + sid + " x " + xoffset + " y " + yoffset + " zoom " + zoom);
@@ -1428,7 +1428,7 @@ public class DataHelper extends DataSetObservable
     // try { updatePlotStmt.execute(); } catch (SQLiteException e) { logError("plot update", e); }
   }
  
-  public boolean updatePlotNick( long pid, long sid, String nick )
+  boolean updatePlotNick( long pid, long sid, String nick )
   {
     if ( myDB == null ) return false;
     // TDLog.Log( TDLog.LOG_DB, "update PlotView: " + pid + "/" + sid + " view " + view );
@@ -1447,7 +1447,7 @@ public class DataHelper extends DataSetObservable
     return doStatement( updatePlotNickStmt, "plot nick" );
   }
  
-  public boolean updatePlotView( long pid, long sid, String view )
+  boolean updatePlotView( long pid, long sid, String view )
   {
     if ( myDB == null ) return false;
     // TDLog.Log( TDLog.LOG_DB, "update PlotView: " + pid + "/" + sid + " view " + view );
@@ -1466,7 +1466,7 @@ public class DataHelper extends DataSetObservable
     return doStatement( updatePlotViewStmt, "plot view" );
   }
 
-  public boolean updatePlotHide( long pid, long sid, String hide )
+  boolean updatePlotHide( long pid, long sid, String hide )
   {
     if ( myDB == null ) return false;
     // TDLog.Log( TDLog.LOG_DB, "update PlotHide: " + pid + "/" + sid + " hide " + hide );
@@ -1487,7 +1487,7 @@ public class DataHelper extends DataSetObservable
    
   /** DROP is a real record delete from the database table
    */
-  public void dropPlot( long pid, long sid )
+  void dropPlot( long pid, long sid )
   {
     if ( myDB == null ) return;
     myDB.beginTransaction();
@@ -1499,7 +1499,7 @@ public class DataHelper extends DataSetObservable
     } finally { myDB.endTransaction(); }
   }
 
-  public void deletePlot( long pid, long sid )
+  void deletePlot( long pid, long sid )
   {
     // TDLog.Log( TDLog.LOG_DB, "deletePlot: " + pid + "/" + sid );
     if ( myDB == null ) return;
@@ -1507,7 +1507,7 @@ public class DataHelper extends DataSetObservable
   }
 
   // THIS REALLY DROPS THE RECORD FROM THE TABLE
-  public void deletePlotByName( String name, long sid )
+  void deletePlotByName( String name, long sid )
   {
     if ( myDB == null ) return;
     myDB.beginTransaction();
@@ -1519,7 +1519,7 @@ public class DataHelper extends DataSetObservable
     } finally { myDB.endTransaction(); }
   }
   
-  public void undeletePlot( long pid, long sid )
+  void undeletePlot( long pid, long sid )
   {
     // TDLog.Log( TDLog.LOG_DB, "undeletePlot: " + pid + "/" + sid );
     if ( myDB == null ) return;
@@ -1540,7 +1540,7 @@ public class DataHelper extends DataSetObservable
   // ----------------------------------------------------------------------
   // SELECT STATEMENTS
 
-  public List< SensorInfo > selectAllSensors( long sid, long status )
+  List< SensorInfo > selectAllSensors( long sid, long status )
   {
     List< SensorInfo > list = new ArrayList<>();
     if ( myDB == null ) return list;
@@ -1622,7 +1622,7 @@ public class DataHelper extends DataSetObservable
   }
 
 
-  public AudioInfo getAudio( long sid, long bid )
+  AudioInfo getAudio( long sid, long bid )
   {
     if ( myDB == null ) return null;
     AudioInfo ret = null;
@@ -1643,12 +1643,12 @@ public class DataHelper extends DataSetObservable
 
   // negative id used for sketch audios
   // positive id used for blocks audios
-  public long nextAudioNegId( long sid )
+  long nextAudioNegId( long sid )
   {
     return minId( AUDIO_TABLE, sid );
   }
 
-  public long insertAudio( long sid, long id, long bid, String date )
+  long insertAudio( long sid, long id, long bid, String date )
   {
     if ( myDB == null ) return -1L;
     if ( id == -1L ) id = maxId( AUDIO_TABLE, sid );
@@ -1661,7 +1661,7 @@ public class DataHelper extends DataSetObservable
     return id;
   }
 
-  public boolean setAudio( long sid, long bid, String date )
+  boolean setAudio( long sid, long bid, String date )
   {
     boolean ret = false;
     if ( myDB == null ) return false;
@@ -1683,7 +1683,7 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
-  public List< AudioInfo > selectAllAudios( long sid )
+  List< AudioInfo > selectAllAudios( long sid )
   {
     List< AudioInfo > list = new ArrayList<>();
     if ( myDB == null ) return list;
@@ -1705,7 +1705,7 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
-  public void deleteAudio( long sid, long bid )
+  void deleteAudio( long sid, long bid )
   {
     if ( myDB == null ) return;
     try {
@@ -1714,7 +1714,7 @@ public class DataHelper extends DataSetObservable
     } catch (SQLiteException e) { logError("photo delete", e); }
   }
 
-  public List< PhotoInfo > selectAllPhotos( long sid, long status )
+  List< PhotoInfo > selectAllPhotos( long sid, long status )
   {
     List< PhotoInfo > list = new ArrayList<>();
     if ( myDB == null ) return list;
@@ -1787,7 +1787,7 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
-  public List< FixedInfo > selectAllFixed( long sid, int status )
+  List< FixedInfo > selectAllFixed( long sid, int status )
   {
     List< FixedInfo > list = new ArrayList<>();
     if ( myDB == null ) return list;
@@ -1852,7 +1852,7 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
-   public boolean hasSurveyPlot( long sid, String name )
+   boolean hasSurveyPlot( long sid, String name )
    {
      boolean ret = false;
      if ( myDB == null ) return ret;
@@ -1864,7 +1864,7 @@ public class DataHelper extends DataSetObservable
      return ret;
    }
 
-   public boolean hasSurveyStation( long sid, String start )
+   boolean hasSurveyStation( long sid, String start )
    {
      boolean ret = false;
      if ( myDB == null ) return ret;
@@ -1879,7 +1879,7 @@ public class DataHelper extends DataSetObservable
    }
 
 
-   public int maxPlotIndex( long sid ) 
+   int maxPlotIndex( long sid )
    {
      int ret = 0;
      if ( myDB == null ) return ret;
@@ -1943,7 +1943,7 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
-   public List< PlotInfo > selectAllPlots( long sid )
+   List< PlotInfo > selectAllPlots( long sid )
    {
      return doSelectAllPlots( sid, 
                               WHERE_SID,
@@ -1952,7 +1952,7 @@ public class DataHelper extends DataSetObservable
    }
 
 
-   public List< PlotInfo > selectAllPlots( long sid, long status )
+   List< PlotInfo > selectAllPlots( long sid, long status )
    {
      return doSelectAllPlots( sid, 
                               WHERE_SID_STATUS,
@@ -1960,7 +1960,7 @@ public class DataHelper extends DataSetObservable
      );
    }
 
-   public List< PlotInfo > selectAllPlotsWithType( long sid, long status, long type )
+   List< PlotInfo > selectAllPlotsWithType( long sid, long status, long type )
    {
      return doSelectAllPlots( sid, 
                               "surveyId=? and status=? and type=? ",
@@ -1969,7 +1969,7 @@ public class DataHelper extends DataSetObservable
    }
 
 
-   public List< PlotInfo > selectAllPlotsWithType( long sid, long status, long type, boolean landscape )
+   List< PlotInfo > selectAllPlotsWithType( long sid, long status, long type, boolean landscape )
    {
      return doSelectAllPlots( sid, 
                               "surveyId=? and status=? and type=? and orientation=" + (landscape? 1 : 0),
@@ -1980,7 +1980,7 @@ public class DataHelper extends DataSetObservable
    // NEW X_SECTIONS hide = parent plot
    // @param parent   parent plot name (null if shared xsections)
    //
-   public List< PlotInfo > selectAllPlotSectionsWithType( long sid, long status, long type, String parent )
+   List< PlotInfo > selectAllPlotSectionsWithType( long sid, long status, long type, String parent )
    {
      if ( parent == null ) {
        return doSelectAllPlots( sid, 
@@ -1995,7 +1995,7 @@ public class DataHelper extends DataSetObservable
    }
 
 
-   public List< PlotInfo > selectAllPlotsSection( long sid, long status )
+   List< PlotInfo > selectAllPlotsSection( long sid, long status )
    {
      return doSelectAllPlots( sid, 
                               "surveyId=? and status=? and ( type=0 or type=3 or type=5 or type=7 )",
@@ -2012,7 +2012,7 @@ public class DataHelper extends DataSetObservable
    }
 
 
-   public boolean hasShot( long sid, String fStation, String tStation )
+   boolean hasShot( long sid, String fStation, String tStation )
    {
      if ( myDB == null ) return false;
      Cursor cursor = myDB.query( SHOT_TABLE,
@@ -2027,7 +2027,7 @@ public class DataHelper extends DataSetObservable
      return ret;
    }
      
-   public String nextStation( long sid, String fStation )
+   String nextStation( long sid, String fStation )
    {
      if ( myDB == null ) return null;
      Cursor cursor = myDB.query( SHOT_TABLE,
@@ -2096,7 +2096,7 @@ public class DataHelper extends DataSetObservable
    //   if (cursor != null && !cursor.isClosed()) cursor.close();
    // }
 
-   public DBlock selectShot( long id, long sid )
+   DBlock selectShot( long id, long sid )
    {
      // TDLog.Log( TDLog.LOG_DB, "selectShot " + id + "/" + sid );
      if ( myDB == null ) return null;
@@ -2112,14 +2112,14 @@ public class DataHelper extends DataSetObservable
      return block;
    }
 
-   public DBlock selectLastLegShot( long sid )
+   DBlock selectLastLegShot( long sid )
    {
      return selectPreviousLegShot( myNextId+1, sid );
    }
 
-   public DBlock selectPreviousLegShot( long shot_id, long sid )
+   DBlock selectPreviousLegShot( long shot_id, long sid )
    {
-     // TDLog.Log( TDLog.LOG_DB, "selectPreviousLegShot " + shot_id + "/" + sid );
+     // TDLog.Log( TDLog.LOG_DB, "select previous leg shot " + shot_id + "/" + sid );
      if ( myDB == null ) return null;
      Cursor cursor = myDB.query( SHOT_TABLE, mShotFields,
                                  "surveyId=? and id<?",
@@ -2200,7 +2200,7 @@ public class DataHelper extends DataSetObservable
    //   return Integer.toString(ret);
    // }
 
-   public DBlock selectNextLegShot( long shot_id, long sid ) 
+   DBlock selectNextLegShot( long shot_id, long sid )
    {
      // TDLog.Log( TDLog.LOG_DB, "selectNextLegShot " + shot_id + "/" + sid );
      if ( myDB == null ) return null;
@@ -2246,7 +2246,7 @@ public class DataHelper extends DataSetObservable
    //   return ret;
    // }
 
-   public List<DBlock> selectShotsBetweenStations( long sid, String st1, String st2, long status )
+   List<DBlock> selectShotsBetweenStations( long sid, String st1, String st2, long status )
    {
      List< DBlock > list = new ArrayList<>();
      if ( myDB == null ) return list;
@@ -2265,7 +2265,7 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
-   public List<DBlock> selectShotsAfterId( long sid, long id , long status )
+   List<DBlock> selectShotsAfterId( long sid, long id , long status )
    {
      List< DBlock > list = new ArrayList<>();
      if ( myDB == null ) return list;
@@ -2286,7 +2286,7 @@ public class DataHelper extends DataSetObservable
 
    // select shots (either legs or splays) at a station
    // in the case of legs, select only "independent" legs (one for each neighbor station)
-   public List<DBlock> selectShotsAt( long sid, String station, boolean leg )
+   List<DBlock> selectShotsAt( long sid, String station, boolean leg )
    {
      List< DBlock > list = new ArrayList<>();
      if ( station == null || station.length() == 0 ) return list;
@@ -2330,7 +2330,7 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
-   public List<DBlock> selectSplaysAt( long sid, String station, boolean leg )
+   List<DBlock> selectSplaysAt( long sid, String station, boolean leg )
    {
      List< DBlock > list = new ArrayList<>();
      if ( station == null || station.length() == 0 ) return list;
@@ -2354,7 +2354,7 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
-   public List<DBlock> selectAllShotsAtStations( long sid, String station1, String station2 )
+   List<DBlock> selectAllShotsAtStations( long sid, String station1, String station2 )
    {
      if ( station2 == null ) return selectAllShotsAtStation( sid, station1 );
 
@@ -2380,7 +2380,7 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
-   public List<DBlock> selectAllShotsAtStation( long sid, String station )
+   List<DBlock> selectAllShotsAtStation( long sid, String station )
    {
      List< DBlock > list = new ArrayList<>();
      if ( station == null ) return list;
@@ -2404,7 +2404,7 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
-   public List<DBlock> selectAllShotsToStation( long sid, String station )
+   List<DBlock> selectAllShotsToStation( long sid, String station )
    {
      List< DBlock > list = new ArrayList<>();
      if ( myDB == null ) return list;
@@ -2426,7 +2426,7 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
-   public ArrayList<String> selectAllStationsBefore( long id, long sid, long status )
+   ArrayList<String> selectAllStationsBefore( long id, long sid, long status )
    {
      ArrayList< String > list = new ArrayList<>();
      if ( myDB == null ) return list;
@@ -2447,7 +2447,7 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
-   public List<DBlock> selectAllShotsAfter( long id, long sid, long status )
+   List<DBlock> selectAllShotsAfter( long id, long sid, long status )
    {
      List< DBlock > list = new ArrayList<>();
      if ( myDB == null ) return list;
@@ -2467,7 +2467,7 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
-   public List<DBlock> selectAllShots( long sid, long status )
+   List<DBlock> selectAllShots( long sid, long status )
    {
      List< DBlock > list = new ArrayList<>();
      if ( myDB == null ) return list;
@@ -2486,7 +2486,7 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
-   public List<DBlock> selectAllLegShots( long sid, long status )
+   List<DBlock> selectAllLegShots( long sid, long status )
    {
      List< DBlock > list = new ArrayList<>();
      if ( myDB == null ) return list;
@@ -2507,7 +2507,7 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
-   public SurveyInfo selectSurveyInfo( long sid )
+   SurveyInfo selectSurveyInfo( long sid )
    {
      SurveyInfo info = null;
      if ( myDB == null ) return null;
@@ -2555,12 +2555,12 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
-   public List<String> selectAllSurveys() { return selectAllNames( SURVEY_TABLE ); }
+   List<String> selectAllSurveys() { return selectAllNames( SURVEY_TABLE ); }
 
    // ----------------------------------------------------------------------
    // CONFIG DATA
 
-   public String getValue( String key )
+   String getValue( String key )
    {
      if ( myDB == null ) {
        TDLog.Error( "DataHelper::getValue null DB");
@@ -2586,7 +2586,7 @@ public class DataHelper extends DataSetObservable
      return value;
    }
 
-   public void setValue( String key, String value )
+   void setValue( String key, String value )
    {
      if ( myDB == null ) {
        TDLog.Error( "DataHelper::setValue null DB");
@@ -2731,7 +2731,7 @@ public class DataHelper extends DataSetObservable
    final String prefix = "xx";
    final int prefix_length = 2; // prefix.length();
 
-   public String getNextSectionId( long sid )
+   String getNextSectionId( long sid )
    {
      int max = 0; 
      if ( myDB == null ) return "xxo"; // FIXME null
@@ -2759,10 +2759,11 @@ public class DataHelper extends DataSetObservable
        }
        if (!cursor.isClosed()) cursor.close();
      }
-     return prefix + Integer.toString(max);
+     // return prefix + Integer.toString(max);
+     return String.format(Locale.US, "%s%d", prefix, max );
    }
 
-   public boolean updatePlotName( long sid, long pid, String name )
+   boolean updatePlotName( long sid, long pid, String name )
    {
      if ( updatePlotNameStmt == null ) {
        updatePlotNameStmt = myDB.compileStatement( "UPDATE plots set name=? WHERE surveyId=? AND id=?" );
@@ -2773,7 +2774,7 @@ public class DataHelper extends DataSetObservable
      return doStatement( updatePlotNameStmt, "plot name" );
    }
 
-   public boolean updatePlotOrientation( long sid, long pid, int orient )
+   boolean updatePlotOrientation( long sid, long pid, int orient )
    {
      if ( updatePlotOrientationStmt == null ) {
        updatePlotOrientationStmt = myDB.compileStatement( "UPDATE plots set orientation=? WHERE surveyId=? AND id=?" );
@@ -2784,7 +2785,7 @@ public class DataHelper extends DataSetObservable
      return doStatement( updatePlotOrientationStmt, "plot orientation" );
    }
 
-   public boolean updatePlotAzimuthClino( long sid, long pid, float b, float c )
+   boolean updatePlotAzimuthClino( long sid, long pid, float b, float c )
    {
      if ( updatePlotAzimuthClinoStmt == null ) {
        updatePlotAzimuthClinoStmt = myDB.compileStatement( "UPDATE plots set azimuth=?, clino=? WHERE surveyId=? AND id=?" );
@@ -2796,7 +2797,7 @@ public class DataHelper extends DataSetObservable
      return doStatement( updatePlotAzimuthClinoStmt, "plot azi+clino" );
    }
  
-   public PlotInfo getPlotInfo( long sid, String name )
+   PlotInfo getPlotInfo( long sid, String name )
    {
      PlotInfo plot = null;
      if ( myDB != null && name != null ) {
@@ -2847,7 +2848,7 @@ public class DataHelper extends DataSetObservable
      return ret;
    }
 
-   // public String getPlotFieldAsString( long sid, long pid, String field )
+   // String getPlotFieldAsString( long sid, long pid, String field )
    // {
    //   String ret = null;
    //   if ( field == null ) return ret;
@@ -2876,7 +2877,7 @@ public class DataHelper extends DataSetObservable
     * @param title     photo title
     * @param comment
     */
-   public long insertPhoto( long sid, long id, long shotid, String title, String date, String comment )
+   long insertPhoto( long sid, long id, long shotid, String title, String date, String comment )
    {
      if ( myDB == null ) return -1L;
      if ( id == -1L ) id = maxId( PHOTO_TABLE, sid );
@@ -2892,12 +2893,12 @@ public class DataHelper extends DataSetObservable
      return id;
    }
 
-   public long nextPhotoId( long sid )
+   long nextPhotoId( long sid )
    {
      return maxId( PHOTO_TABLE, sid );
    }
 
-   public boolean updatePhoto( long sid, long id, String comment )
+   boolean updatePhoto( long sid, long id, String comment )
    {
      if ( myDB == null ) return false;
      ContentValues vals = new ContentValues();
@@ -2912,7 +2913,7 @@ public class DataHelper extends DataSetObservable
      return true;
    }
 
-   public void deletePhoto( long sid, long id )
+   void deletePhoto( long sid, long id )
    {
      if ( myDB == null ) return;
      myDB.beginTransaction();
@@ -2934,8 +2935,8 @@ public class DataHelper extends DataSetObservable
     * @param type      sensor type
     * @param value     sensor value
     */
-   public long insertSensor( long sid, long id, long shotid, String title, String date, String comment, 
-                             String type, String value )
+   long insertSensor( long sid, long id, long shotid, String title, String date, String comment,
+   String type, String value )
    {
      if ( id == -1L ) id = maxId( SENSOR_TABLE, sid );
      if ( myDB == null ) return -1L;
@@ -2953,18 +2954,18 @@ public class DataHelper extends DataSetObservable
      return id;
    }
 
-   public long nextSensorId( long sid )
+   long nextSensorId( long sid )
    {
      return maxId( SENSOR_TABLE, sid );
    }
 
-   public void deleteSensor( long sid, long id )
+   void deleteSensor( long sid, long id )
    {
      if ( myDB == null ) return;
      updateStatus( SENSOR_TABLE, id, sid, TDStatus.DELETED );
    }
 
-   public boolean updateSensor( long sid, long id, String comment )
+   boolean updateSensor( long sid, long id, String comment )
    {
      if ( myDB == null ) return false;
      ContentValues vals = new ContentValues();
@@ -3050,7 +3051,7 @@ public class DataHelper extends DataSetObservable
    }
 
 
-   public boolean hasFixed( long sid, String station )
+   boolean hasFixed( long sid, String station )
    {
      return ( getFixedId( sid, station ) != -1 );
    }
@@ -3059,7 +3060,7 @@ public class DataHelper extends DataSetObservable
     *       Before inserting a location drop existing deleted fixeds for the station
     * N.B. this must be called with id == -1L ( currently called only by SurveyWindow )
     */
-   public long insertFixed( long sid, long id, String station, double lng, double lat, double alt, double asl,
+   long insertFixed( long sid, long id, String station, double lng, double lat, double alt, double asl,
                             String comment, long status, long source )
    {
      return insertFixed( sid, id, station, lng, lat, alt, asl, comment, status, source, "", 0, 0, 0 );
@@ -3097,7 +3098,7 @@ public class DataHelper extends DataSetObservable
      return id;
    }
 
-   public long insertPlot( long sid, long id, String name, long type, long status, String start, String view,
+   long insertPlot( long sid, long id, String name, long type, long status, String start, String view,
                            double xoffset, double yoffset, double zoom, double azimuth, double clino,
                            String hide, String nick, int orientation, boolean forward )
    {
@@ -3168,7 +3169,7 @@ public class DataHelper extends DataSetObservable
     return id - 1L;
   }
 
-  public long getLastShotId( long sid )
+  long getLastShotId( long sid )
   {
     return maxId( SHOT_TABLE, sid );
   }
@@ -3179,7 +3180,7 @@ public class DataHelper extends DataSetObservable
    * @param station  station name
    * @return true if found a record, false otherwise
    */  
-  public boolean hasFixedStation( long id, long sid, String station )
+  boolean hasFixedStation( long id, long sid, String station )
   {
     boolean ret = false;
     if ( myDB == null ) return ret;
@@ -3240,7 +3241,7 @@ public class DataHelper extends DataSetObservable
   
 
   // FIXME DBCHECK
-  public boolean updateFixedStation( long id, long sid, String station )
+  boolean updateFixedStation( long id, long sid, String station )
   {
     // Log.v("DistoX", "update fixed id " + id + " station " + station );
     boolean ret = false;
@@ -3254,12 +3255,12 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
-  public void updateFixedStatus( long id, long sid, long status )
+  void updateFixedStatus( long id, long sid, long status )
   {
     updateStatus( FIXED_TABLE, id, sid, status );
   }
 
-  public void updateFixedStationComment( long id, long sid, String station, String comment )
+  void updateFixedStationComment( long id, long sid, String station, String comment )
   {
     ContentValues vals = new ContentValues();
     vals.put( "station", station );
@@ -3267,7 +3268,7 @@ public class DataHelper extends DataSetObservable
     doUpdate( FIXED_TABLE, vals, sid, id, "fixed cmt" );
   }
 
-  public void updateFixedAltitude( long id, long sid, double alt, double asl )
+  void updateFixedAltitude( long id, long sid, double alt, double asl )
   {
     if ( myDB == null ) return;
     ContentValues vals = new ContentValues();
@@ -3276,7 +3277,7 @@ public class DataHelper extends DataSetObservable
     doUpdate( FIXED_TABLE, vals, sid, id, "fixed alt" );
   }
 
-  public void updateFixedData( long id, long sid, double lng, double lat, double alt )
+  void updateFixedData( long id, long sid, double lng, double lat, double alt )
   {
     if ( myDB == null ) return;
     ContentValues vals = new ContentValues();
@@ -3286,7 +3287,7 @@ public class DataHelper extends DataSetObservable
     doUpdate( FIXED_TABLE, vals, sid, id, "fixed data" );
   }
 
-  public void updateFixedData( long id, long sid, double lng, double lat, double alt, double asl )
+  void updateFixedData( long id, long sid, double lng, double lat, double alt, double asl )
   {
     if ( myDB == null ) return;
     ContentValues vals = new ContentValues();
@@ -3297,7 +3298,7 @@ public class DataHelper extends DataSetObservable
     doUpdate( FIXED_TABLE, vals, sid, id, "fixed data" );
   }
 
-  public void updateFixedCS( long id, long sid, String cs, double lng, double lat, double alt )
+  void updateFixedCS( long id, long sid, String cs, double lng, double lat, double alt )
   {
     if ( myDB == null ) return;
     ContentValues vals = new ContentValues();
@@ -3315,8 +3316,8 @@ public class DataHelper extends DataSetObservable
     doUpdate( FIXED_TABLE, vals, sid, id, "fixed cs" );
   }
 
-  public boolean hasSurveyName( String name )  { return hasName( name, SURVEY_TABLE ); }
-  public boolean hasCalibName( String name )  { return hasName( name, CALIB_TABLE ); }
+  boolean hasSurveyName( String name )  { return hasName( name, SURVEY_TABLE ); }
+  // boolean hasCalibName( String name )  { return hasName( name, CALIB_TABLE ); }
 
   private boolean hasName( String name, String table )
   {
@@ -3335,7 +3336,7 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
-   public long setSurvey( String name, boolean forward )
+   long setSurvey( String name, boolean forward )
    {
      myNextId = 0;
      if ( myDB == null ) return 0L;
@@ -3355,13 +3356,13 @@ public class DataHelper extends DataSetObservable
      return sid;
    }
 
-   public String getSurveyFromId( long sid ) { return getNameFromId( SURVEY_TABLE, sid ); }
+   String getSurveyFromId( long sid ) { return getNameFromId( SURVEY_TABLE, sid ); }
 
-   public String getSurveyDate( long sid ) { return getSurveyFieldAsString( sid, "day" ); }
+   String getSurveyDate( long sid ) { return getSurveyFieldAsString( sid, "day" ); }
 
-   public String getSurveyComment( long sid ) { return getSurveyFieldAsString( sid, "comment" ); }
+   String getSurveyComment( long sid ) { return getSurveyFieldAsString( sid, "comment" ); }
 
-   public String getSurveyTeam( long sid ) { return getSurveyFieldAsString( sid, "team" ); }
+   String getSurveyTeam( long sid ) { return getSurveyFieldAsString( sid, "team" ); }
 
    private String getSurveyFieldAsString( long sid, String attr )
    {
@@ -3380,7 +3381,7 @@ public class DataHelper extends DataSetObservable
 // -------------------------------------------------------------------------------
 // SKETCH_3D
 /* FIXME BEGIN SKETCH_3D */
-  public boolean updateSketch( long sketch_id, long sid, 
+  boolean updateSketch( long sketch_id, long sid,
                             String st1, String st2,
                             double xofftop, double yofftop, double zoomtop,
                             double xoffside, double yoffside, double zoomside,
@@ -3412,7 +3413,7 @@ public class DataHelper extends DataSetObservable
     return doStatement( updateSketchStmt, "sketch" );
   }
   
-  public void deleteSketch( long sketch_id, long sid )
+  void deleteSketch( long sketch_id, long sid )
   {
     if ( myDB == null ) return;
     updateStatus( SKETCH_TABLE, sketch_id, sid, TDStatus.DELETED );
@@ -3461,7 +3462,7 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
-   public List< Sketch3dInfo > selectAllSketches( long sid )
+   List< Sketch3dInfo > selectAllSketches( long sid )
    {
      return doSelectAllSketches( sid, 
                                  WHERE_SID,
@@ -3469,7 +3470,7 @@ public class DataHelper extends DataSetObservable
      );
    }
 
-   public List< Sketch3dInfo > selectAllSketches( long sid, long status )
+   List< Sketch3dInfo > selectAllSketches( long sid, long status )
    {
      return doSelectAllSketches( sid, 
                                  WHERE_SID_STATUS,
@@ -3485,7 +3486,7 @@ public class DataHelper extends DataSetObservable
      );
    }
  
-   public Sketch3dInfo getSketch3dInfo( long sid, String name )
+   Sketch3dInfo getSketch3dInfo( long sid, String name )
    {
      Sketch3dInfo sketch = null;
      if ( myDB != null && name != null ) {
@@ -3540,7 +3541,7 @@ public class DataHelper extends DataSetObservable
      return ret;
    }
 
-   public boolean hasSketch3d( long sid, String name )
+   boolean hasSketch3d( long sid, String name )
    {
      boolean ret = false;
      if ( myDB != null && name != null ) {
@@ -3557,7 +3558,7 @@ public class DataHelper extends DataSetObservable
    }
 
 
-   public long insertSketch3d( long sid, long id, String name, long status, String start, String st1, String st2,
+   long insertSketch3d( long sid, long id, String name, long status, String start, String st1, String st2,
                            double xoffsettop, double yoffsettop, double zoomtop,
                            double xoffsetside, double yoffsetside, double zoomside,
                            double xoffset3d, double yoffset3d, double zoom3d,
@@ -3608,7 +3609,7 @@ public class DataHelper extends DataSetObservable
    // 12 FIXEDS   { "id", "station", "longitude", "latitude", "altitude", "altimetric", "comment", "status",
    //               "cs_name", "cs_longitude", "cs_latitude", "cs_altitude" }
 
-   public void dumpToFile( String filename, long sid )
+   void dumpToFile( String filename, long sid )
    {
      // TDLog.Log( TDLog.LOG_DB, "dumpToFile " + filename );
      // String where = "surveyId=" + Long.toString(sid);

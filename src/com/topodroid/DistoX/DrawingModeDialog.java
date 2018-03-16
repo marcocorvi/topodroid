@@ -12,7 +12,7 @@
 package com.topodroid.DistoX;
 
 import android.os.Bundle;
-import android.app.Dialog;
+// import android.app.Dialog;
 // import android.app.Activity;
 import android.content.Context;
 // import android.content.Intent;
@@ -23,7 +23,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 
 
-public class DrawingModeDialog extends MyDialog 
+class DrawingModeDialog extends MyDialog
                                implements View.OnClickListener
 {
     private CheckBox mCBleg;      // whether to show legs
@@ -41,7 +41,7 @@ public class DrawingModeDialog extends MyDialog
     private DrawingSurface mSurface;
     private DrawingWindow mParent; // used only to decide whether display checkbox "Shift"
 
-    public DrawingModeDialog( Context context, DrawingWindow parent, DrawingSurface surface )
+    DrawingModeDialog( Context context, DrawingWindow parent, DrawingSurface surface )
     {
       super(context, R.string.DrawingModeDialog );
       mParent  = parent;
@@ -87,6 +87,7 @@ public class DrawingModeDialog extends MyDialog
       mCBscaleRef.setChecked((mode & DisplayMode.DISPLAY_SCALE_REF) != 0);
     }
 
+    @Override
     public void onClick(View view)
     {
       // TDLog.Log( TDLog.LOG_INPUT, "DrawingModeDialog onClick " + view.toString() );

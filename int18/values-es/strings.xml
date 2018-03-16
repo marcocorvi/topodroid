@@ -775,6 +775,7 @@
     <string name="title_audio">Comentario de audio</string>
     <string name="title_calib">Calibración</string>
     <string name="title_calib_check">Calibración: compruebe las tomas</string>
+    <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Distibución datos Calibración</string>
     <string name="title_coeff">Coeficiente Calibración</string>
     <string name="title_contour">Contorno</string>
@@ -1016,6 +1017,8 @@
   <string name="pref_min_leg_message">Las tomas más cortas que el mínimo, tienen fondo naranja</string>
   <string name="pref_backsight_title">Toma duplicada visual</string>
   <string name="pref_backsight_summary">Se duplican los datos en el diálogo de la toma manual</string>
+  <!-- TODO string name="pref_backshot_title">Backshot DistoX</string -->
+  <!-- TODO string name="pref_backshot_summary">DistoX in backshot mode</string -->
   <string name="pref_prev_next_title">Añadir botón Ant./Sig.</string>
   <string name="pref_prev_next_summary">Añade un botón Anterior/Sguiente en diálogo de toma</string>
   <string name="pref_mag_anomaly_title">Compensación magnética</string>

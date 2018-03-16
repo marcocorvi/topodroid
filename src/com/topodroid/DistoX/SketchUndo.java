@@ -15,7 +15,7 @@ package com.topodroid.DistoX;
 
 /**
  */
-public class SketchUndo
+class SketchUndo
 {
   static final int UNDO_PATH = 0;
   static final int UNDO_SECTION = 1;
@@ -27,7 +27,7 @@ public class SketchUndo
 
   SketchUndo mNext;  // next undo in the chain
 
-  public SketchUndo( SketchUndo next, SketchPath path )
+  SketchUndo( SketchUndo next, SketchPath path )
   {
     mType = UNDO_PATH;
     mPath = path;

@@ -35,7 +35,7 @@ class FixedInfo extends MagLatLong
   double cs_lat;
   double cs_alt;
 
-  public FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid, 
+  FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid,
                     String cmt, long src )
   {
     id = _id;
@@ -52,7 +52,7 @@ class FixedInfo extends MagLatLong
     cs_alt = 0;
   }
 
-  public FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid,
+  FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid,
                     String cmt, long src,
                     String name_cs, double lng_cs, double lat_cs, double alt_cs )
   {
@@ -94,17 +94,17 @@ class FixedInfo extends MagLatLong
   // }
 
   // get the string "name long lat alt" for the exports
-  public String toExportString()
+  String toExportString()
   {
     return String.format(Locale.US, "%s %.6f %.6f %.0f", name, lng, lat, asl );
   }
 
-  public String toExportCSString()
+  String toExportCSString()
   {
     return String.format(Locale.US, "%s %.2f %.2f %.0f", name, cs_lng, cs_lat, cs_alt );
   }
 
-  public String csName() { return cs; }
+  String csName() { return cs; }
 
 
   public String toString()
@@ -171,7 +171,7 @@ class FixedInfo extends MagLatLong
     return string2real( txt.toString() );
   }
 
-  static double string2real( String str )
+  static private double string2real( String str )
   {
     if ( str == null ) return 0;
     str = str.trim();  // drop initial and final spaces

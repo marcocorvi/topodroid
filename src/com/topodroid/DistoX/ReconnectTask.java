@@ -17,7 +17,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 
-public class ReconnectTask extends AsyncTask< String, Integer, Integer >
+class ReconnectTask extends AsyncTask< String, Integer, Integer >
 {
   private DataDownloader mDownloader;
   private ReconnectTask  running;

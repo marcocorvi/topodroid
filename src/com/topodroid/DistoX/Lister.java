@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-public class Lister
+class Lister
 {
   static final String NUMBER    = "LISTER_NUMBER";
   static final String STATE     = "LISTER_STATE";

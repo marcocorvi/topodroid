@@ -15,7 +15,7 @@ package com.topodroid.DistoX;
 import android.os.AsyncTask;
 
 
-public class SketchLoader extends AsyncTask< String, Integer, Integer >
+class SketchLoader extends AsyncTask< String, Integer, Integer >
 {
   private SketchWindow  mParent;
   private SketchModel   mModel;

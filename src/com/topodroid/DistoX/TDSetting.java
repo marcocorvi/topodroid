@@ -84,6 +84,7 @@ class TDSetting
     "DISTOX_PREV_NEXT",           // whether to put "prev-next" arrows in shot edit dialog
     "DISTOX_MAX_SHOT_LENGTH",     // maximum length of a shot data
     "DISTOX_MIN_LEG_LENGTH",      // minimum length of a shot data
+    "DISTOX_BACKSHOT",            // using DistoX in backshot mode
 
     "DISTOX_UNIT_LOCATION",       // units of location [ddmmss dec.deg]
     "DISTOX_CRS",                 // default C.R.S.
@@ -334,6 +335,7 @@ class TDSetting
   static float mVThreshold = 80f;   // verticality threshold (LRUD)
   static float mHThreshold;         // horizontal plot threshold
   static boolean mDataBackup = false; // whether to export data when shotwindow is closed
+  static boolean mDistoXBackshot = false;
 
   static int mExportShotsFormat = -1; // DISTOX_EXPORT_NONE
   static int mExportPlotFormat  = -1; // DISTOX_EXPORT_NONE
@@ -745,6 +747,7 @@ class TDSetting
     mPrevNext      = prefs.getBoolean( key[k++], true );    // DISTOX_PREV_NEXT
     mMaxShotLength = tryFloat( prefs, key[k++], "50"   );   // DISTOX_MAX_SHOT_LENGTH
     mMinLegLength  = tryFloat( prefs, key[k++], "0.5" );    // DISTOX_MIN_LEG_LENGTH
+    mDistoXBackshot= prefs.getBoolean( key[k++], false );   // DISTOX_BACKSHOT
 
     mUnitLocation  = prefs.getString( key[k++], "ddmmss" ).equals("ddmmss") ? TDConst.DDMMSS  // choice
                                                                             : TDConst.DEGREE;
@@ -1020,6 +1023,8 @@ class TDSetting
       mMaxShotLength = tryFloat( prefs, k, "50" );  
     } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_MIN_LEG_LENGTH
       mMinLegLength = tryFloat( prefs, k, "0.5" );  
+    } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_BACKSHOT
+      mDistoXBackshot = prefs.getBoolean( k, false );
     } else if ( k.equals( key[ nk++ ] ) ) {
       mUnitLocation  = prefs.getString( k, "ddmmss" ).equals("ddmmss") ? TDConst.DDMMSS
                                                                        : TDConst.DEGREE;
@@ -1441,6 +1446,7 @@ class TDSetting
     //B if ( name.equals( "DISTOX_PREV_NEXT" )
     if ( name.equals( "DISTOX_MAX_SHOT_LENGTH") ) return parseFloatValue( value, mMaxShotLength, 20 );
     if ( name.equals( "DISTOX_MIN_LEG_LENGTH") ) return parseFloatValue( value, mMinLegLength, 0, 5 );
+    //B if ( name.equals( "DISTOX_BACKSHOT" )
 
     //C if ( name.equals( "DISTOX_UNIT_LOCATION" )
     //S if ( name.equals( "DISTOX_CRS" )

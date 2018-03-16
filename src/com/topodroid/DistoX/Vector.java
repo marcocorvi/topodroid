@@ -20,14 +20,14 @@ import java.util.Locale;
 
 import android.util.Log;
 
-public class Vector
+class Vector
 {
-  public float x,y,z;
+  float x,y,z;
 
-  public static Vector zero = new Vector(0.0f, 0.0f, 0.0f);
+  static Vector zero = new Vector(0.0f, 0.0f, 0.0f);
 
   // defaulkt cstr: zero vector
-  public Vector()
+  Vector()
   {
     x = 0.0f;
     y = 0.0f;
@@ -35,7 +35,7 @@ public class Vector
   }
 
   // cstr vector (x0, y0., z0)
-  public Vector( float x0, float y0, float z0 )
+  Vector( float x0, float y0, float z0 )
   {
     x = x0;
     y = y0;
@@ -45,7 +45,7 @@ public class Vector
   // cstr a unit vector from bearing and clino (as used by the calibration class)
   // b   bearing [radians]
   // c   clino [radians]
-  public Vector( float b, float c )
+  Vector( float b, float c )
   {
     float h = (float)Math.cos( c );
     x = h * (float)Math.cos( b );
@@ -54,7 +54,7 @@ public class Vector
   }
 
   // copy cstr
-  public Vector( Vector a )
+  Vector( Vector a )
   {
     x = a.x;
     y = a.y;
@@ -74,41 +74,35 @@ public class Vector
   }
 
   // get unit vector 
-  public Vector getUnitVector( )
+  Vector getUnitVector( )
   {
     Vector ret = new Vector( x, y, z );
     ret.normalize();
     return ret;
   }
 
-  public float Length()
+  float Length()
   {
     return (float)Math.sqrt( x*x + y*y + z*z );
   }
 
-  public float LengthSquared()
+  float LengthSquared()
   {
     return ( x*x + y*y + z*z );
   }
 
-  public float Abs( ) { return Length(); }
+  float Abs( ) { return Length(); }
 
-  public Vector TurnX( float s, float c )
+  Vector TurnX( float s, float c )
   {
     return new Vector( x, c*y - s*z, c*z + s*y );
   }
 
-  public Vector TurnY( float s, float c )
-  {
-    return new Vector( c*x + s*z, y, c*z - s*x );
-  }
+  // Vector TurnY( float s, float c ) { return new Vector( c*x + s*z, y, c*z - s*x ); }
 
-  public Vector TurnZ( float s, float c )
-  {
-    return new Vector( c*x - s*y, c*y + s*x, z );
-  }
+  // Vector TurnZ( float s, float c ) { return new Vector( c*x - s*y, c*y + s*x, z ); }
 
-  public void normalize( )
+  void normalize( )
   {
     float len = Length();
     if ( len > 0.0f ) {
@@ -119,14 +113,14 @@ public class Vector
     }
   }
 
-  public void reverse()
+  void reverse()
   {
     x = -x;
     y = -y;
     z = -z;
   }
 
-  public float MaxDiff( Vector b )
+  float MaxDiff( Vector b )
   {
     float dx = TDMath.abs( x - b.x );
     float dy = TDMath.abs( y - b.y );
@@ -136,62 +130,50 @@ public class Vector
     return dx;
   }
 
-  public void copy( Vector b ) // copy assignment
+  void copy( Vector b ) // copy assignment
   {
     x = b.x;
     y = b.y;
     z = b.z;
   }
 
-  // public void set( Vector a )
+  // void set( Vector a )
   // {
   //   x = a.x;
   //   y = a.y;
   //   z = a.z;
   // }
 
-  public void plusEqual( Vector b ) 
+  void plusEqual( Vector b ) 
   {
     x += b.x;
     y += b.y;
     z += b.z;
   }
 
-  public void minusEqual( Vector b ) 
+  void minusEqual( Vector b ) 
   {
     x -= b.x;
     y -= b.y;
     z -= b.z;
   }
 
-  public void timesEqual( float f )
+  void timesEqual( float f )
   {
     x *= f;
     y *= f;
     z *= f;
   }
 
-  public Vector plus( Vector b ) 
-  {
-    return new Vector( x+b.x, y+b.y, z+b.z );
-  }
+  Vector plus( Vector b ) { return new Vector( x+b.x, y+b.y, z+b.z ); }
 
-  public Vector minus( Vector b ) 
-  {
-    return new Vector( x-b.x, y-b.y, z-b.z );
-  }
+  Vector minus( Vector b ) { return new Vector( x-b.x, y-b.y, z-b.z ); }
 
   // MULTIPLICATION: this * b
-  public Vector times( float b )
-  {
-    return new Vector(x*b, y*b, z*b );
-  }
+  Vector times( float b ) { return new Vector(x*b, y*b, z*b ); }
 
   // DOT PRODUCT: this * b
-  public float dot( Vector b )
-  {
-    return x*b.x + y*b.y + z*b.z;
-  }
+  float dot( Vector b ) { return x*b.x + y*b.y + z*b.z; }
 
   // dot-product of two Vectors
   static float dot_product( Vector p1, Vector p2 )
@@ -200,7 +182,7 @@ public class Vector
   }
 
   // CROSS PRODUCT: this % b
-  public Vector cross( Vector b )
+  Vector cross( Vector b )
   {
     return new Vector( y*b.z - z*b.y, z*b.x - x*b.z, x*b.y - y*b.x );
   }
@@ -243,14 +225,14 @@ public class Vector
    *
    * B - (B*T)/(T*T) T
    */
-  public Vector orthogonalNormal( Vector b )
+  Vector orthogonalNormal( Vector b )
   {
     float f = ( this.dot( b ) )/(x*x + y*y + z*z );
     return new Vector( b.x - f*x, b.y - f*y, b.z - f*z );
   }
 
   // if this is normalized can use this method
-  public Vector orthogonal( Vector b )
+  Vector orthogonal( Vector b )
   {
     float f = this.dot( b );
     return new Vector( b.x - f*x, b.y - f*y, b.z - f*z );

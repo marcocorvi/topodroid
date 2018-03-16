@@ -14,18 +14,18 @@
  */
 package com.topodroid.DistoX;
 
-import java.lang.Math;
+// import java.lang.Math;
 
-import android.util.Log;
+// import android.util.Log;
 
 
-public class CHFacet
+class CHFacet
 {
   boolean valid;
   int    nr; // number of vectors
-  public Vector[] mV; // vectors
-  public Vector mN;   // unit normal
-  public Vector mCenter;   // center
+  Vector[] mV; // vectors
+  Vector mN;   // unit normal
+  Vector mCenter;   // center
   private boolean hasCenter;
   private boolean hasNormal;
 

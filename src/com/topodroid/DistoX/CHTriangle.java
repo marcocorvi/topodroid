@@ -14,12 +14,12 @@
  */
 package com.topodroid.DistoX;
 
-import java.lang.Math;
+// import java.lang.Math;
 
-import android.util.Log;
+// import android.util.Log;
 
 
-public class CHTriangle extends CHFacet
+class CHTriangle extends CHFacet
 {
 
   CHTriangle( Vector a, Vector b, Vector c )

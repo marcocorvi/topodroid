@@ -11,18 +11,18 @@
  */
 package com.topodroid.DistoX;
 
-import java.util.List;
+// import java.util.List;
 
 import android.app.Activity;
 // import android.app.ActivityManager;
 // import android.app.ActivityManager.RunningTaskInfo;
 import android.os.AsyncTask;
-import android.content.Context;
+// import android.content.Context;
 
-import android.widget.Button;
+// import android.widget.Button;
 import android.widget.Toast;
 
-import android.util.Log;
+// import android.util.Log;
 
 class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
 {
@@ -30,10 +30,10 @@ class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
   static final int PARENT_GM     = 2;
 
   byte[]   coeff;
-  Activity mActivity;
-  IEnableButtons mEnableButtons;
   TopoDroidApp mApp;
-  int mParentType;
+  Activity mActivity;
+  private IEnableButtons mEnableButtons;
+  private int mParentType;
   // String comp_name;
 
   CalibReadTask( Activity activity, IEnableButtons eb, TopoDroidApp app, int parent_type )
@@ -74,12 +74,12 @@ class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
 
       switch ( mParentType ) {
         case PARENT_DEVICE:
-          if ( mApp.mDeviceActivityVisible ) {
+          if ( TopoDroidApp.mDeviceActivityVisible ) {
             (new CalibCoeffDialog( mActivity, mApp, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
           }
           break;
         case PARENT_GM:
-          if ( mApp.mGMActivityVisible ) {
+          if ( TopoDroidApp.mGMActivityVisible ) {
             (new CalibCoeffDialog( mActivity, mApp, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
           }
           break;

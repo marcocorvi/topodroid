@@ -12,7 +12,7 @@
 package com.topodroid.DistoX;
 
 
-public class TDAzimuth
+class TDAzimuth
 {
   // ----------------------------------------------------------------
   static float mRefAzimuth = 90; // west to east

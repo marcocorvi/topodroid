@@ -11,33 +11,33 @@
  */
 package com.topodroid.DistoX;
 
-import java.util.Set;
-import java.util.List;
+// import java.util.Set;
+// import java.util.List;
 import java.util.ArrayList;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 
 import android.content.Context;
-import android.content.DialogInterface;
+// import android.content.DialogInterface;
 
 import android.widget.TextView;
-import android.widget.ArrayAdapter;
+// import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Button;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Toast;
+// import android.widget.Toast;
 
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 
-import android.util.Log;
+// import android.util.Log;
 
-import android.bluetooth.BluetoothDevice;
+// import android.bluetooth.BluetoothDevice;
 
-public class DeviceSelectDialog extends MyDialog
+class DeviceSelectDialog extends MyDialog
                                 implements OnItemClickListener
                                 , OnClickListener
 {
@@ -85,7 +85,7 @@ public class DeviceSelectDialog extends MyDialog
     if ( TDLevel.overTester ) { // FIXME VirtualDistoX
       array_adapter.add( "X000" );
     }
-    ArrayList<Device> devices = mApp.mDData.getDevices();
+    ArrayList<Device> devices = TopoDroidApp.mDData.getDevices();
     for ( Device device : devices ) {
       // String addr  = device.mAddress;
       // String model = device.mName;
@@ -117,10 +117,10 @@ public class DeviceSelectDialog extends MyDialog
   @Override
   public void onClick(View v) 
   {
-    Button b = (Button) v;
-    if ( b == mBtnCancel ) {
-      /* nothing */
-    }
+    // Button b = (Button) v;
+    // if ( b == mBtnCancel ) {
+    //   /* nothing */
+    // }
     dismiss();
   }
 

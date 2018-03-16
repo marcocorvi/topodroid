@@ -30,10 +30,10 @@ import android.util.Log;
 
 /**
  */
-public class SketchLinePath extends SketchPath
+class SketchLinePath extends SketchPath
 {
   // boolean log;
-  boolean mClosed;
+  private boolean mClosed;
   // boolean mReversed;
   String  mOptions;
   Line3D  mLine;              // 3D points of the traced line (scene coords)
@@ -47,7 +47,7 @@ public class SketchLinePath extends SketchPath
    * @param s2           second station
    * @param painter      painter
    */
-  public SketchLinePath( int path_type, int th_type, String s1, String s2, SketchPainter painter )
+  SketchLinePath( int path_type, int th_type, String s1, String s2, SketchPainter painter )
   {
     super( path_type, s1, s2 );
     // log = true;
@@ -72,7 +72,7 @@ public class SketchLinePath extends SketchPath
   }
 
   // (x,y,z) world (=scene) coords
-  Vector addLinePoint( float x, float y, float z ) 
+  Vector addLinePoint( float x, float y, float z )
   {
     Vector ret = new Vector(x,y,z);
     mLine.points.add( ret );
@@ -154,7 +154,7 @@ public class SketchLinePath extends SketchPath
     return dist;
   }
 
-  public void draw( Canvas canvas, Matrix matrix, Sketch3dInfo info )
+  void draw( Canvas canvas, Matrix matrix, Sketch3dInfo info )
   {
     Path  path = new Path();
     boolean first = true;
@@ -215,7 +215,7 @@ public class SketchLinePath extends SketchPath
     return sw.getBuffer().toString();
   }
 
-  public void toTdr( BufferedOutputStream bos ) throws IOException
+  void toTdr( BufferedOutputStream bos ) throws IOException
   {
     SketchModel.toTdr( bos, (short)2 );
     SketchModel.toTdr( bos, BrushManager.mLineLib.getSymbolThName( mThType ) );

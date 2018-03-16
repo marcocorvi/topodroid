@@ -11,26 +11,26 @@
  */
 package com.topodroid.DistoX;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 
 import android.content.Context;
 
-import android.widget.TextView;
+// import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.ImageView;
+// import android.widget.RadioGroup;
+// import android.widget.ImageView;
 import android.widget.CheckBox;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
-import android.graphics.Paint;
+// import android.graphics.Paint;
 
-import android.util.Log;
+// import android.util.Log;
 
-public class DrawingPointDialog extends MyDialog
+class DrawingPointDialog extends MyDialog
                                implements View.OnClickListener
 {
   private DrawingPointPath mPoint;
@@ -57,7 +57,7 @@ public class DrawingPointDialog extends MyDialog
 
   private String mXSectionName; // full section name = scrap-name
 
-  public DrawingPointDialog( Context context, DrawingWindow parent, DrawingPointPath point )
+  DrawingPointDialog( Context context, DrawingWindow parent, DrawingPointPath point )
   {
     super( context, R.string.DrawingPointDialog );
     mParent = parent;
@@ -72,8 +72,9 @@ public class DrawingPointDialog extends MyDialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.drawing_point_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    
+    initLayout(R.layout.drawing_point_dialog, 
+      "POINT " + BrushManager.mPointLib.getSymbolName( mPoint.mPointType ) );
 
     // mTVtype = (TextView) findViewById( R.id.point_type );
     mEToptions = (EditText) findViewById( R.id.point_options );
@@ -81,8 +82,7 @@ public class DrawingPointDialog extends MyDialog
 
     mCBxsection = (CheckBox) findViewById( R.id.point_xsection );
     mBTdraw     = (Button) findViewById( R.id.button_draw );
-
-    setTitle( "POINT " + BrushManager.mPointLib.getSymbolName( mPoint.mPointType ) );
+    
     if ( BrushManager.mPointLib.pointHasTextOrValue( mPoint.mPointType ) ) {
       String text = mPoint.getPointText();
       mETtext.setText( (text == null)? "" : text );

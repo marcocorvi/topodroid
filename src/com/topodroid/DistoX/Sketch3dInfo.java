@@ -47,8 +47,8 @@ class Sketch3dInfo extends SketchShot
   NumStation station2;  // station 2
   // NumShot    shot;      // current shot
   float  ne, ns, nv;    // unit vector in the direction of sight
-  float  nxx, nxy, nxz; // unit vector of X-axis in the projection
-  float  nyx, nyy, nyz; // unit vector of Y-axis in the projection
+  private float  nxx, nxy, nxz; // unit vector of X-axis in the projection
+  private float  nyx, nyy, nyz; // unit vector of Y-axis in the projection
   private float de1, ds1, dv1; // difference: Station2 - Station1
   // private float dh1;
   // float  dvdh;               // ratio DV/DH
@@ -134,7 +134,7 @@ Nx=(-ca,-sa,0) | ,'
               / \
        south /   \ Ny = No ^ Nx
    */
-  void setDirection()
+  private void setDirection()
   {
     float cc = TDMath.cosd( clino ); // cos and sin of clino and azimuth
     float sc = TDMath.sind( clino );
@@ -316,12 +316,12 @@ Nx=(-ca,-sa,0) | ,'
     return   (y+yoffset_3d)   * zoom_3d;
   }
 
-  Vector sceneToWorld( float x, float y )
+  private Vector sceneToWorld( float x, float y )
   {
     return new Vector( nxx * x + nyx * y, nxy * x + nyy * y, nxz * x + nyz * y );
   }
 
-  Vector sceneToWorld( LinePoint p ) { return sceneToWorld( p.x, p.y ); }
+  private Vector sceneToWorld( LinePoint p ) { return sceneToWorld( p.x, p.y ); }
 
   Vector sceneToWorld( PointF p ) { return sceneToWorld( p.x, p.y ); }
 

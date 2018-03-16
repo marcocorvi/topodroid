@@ -37,13 +37,13 @@ import java.util.Random;
 
 public class MyButton
 {
-  static int mSize = 42;
+  static private int mSize = 42;
   private final static boolean USE_CACHE = true;
 
   static Random rand = new Random();
 
   // CACHE : using a cache for the BitmapDrawing does not dramatically improve perfoormanaces
-  static SparseArray<BitmapDrawable> mBitmapCache = USE_CACHE ? new SparseArray<BitmapDrawable>()
+  static private SparseArray<BitmapDrawable> mBitmapCache = USE_CACHE ? new SparseArray<BitmapDrawable>()
                                                               : null;
 
   // called with context = mApp
@@ -56,7 +56,7 @@ public class MyButton
   static Button getButton( Context ctx, OnClickListener click, int res_id )
   {
     Button ret = new Button( ctx );
-    ret.setPadding(0,0,0,0);
+    ret.setPadding(10,0,10,0);
     ret.setOnClickListener( click );
     ret.setBackgroundDrawable( getButtonBackground( ctx, ctx.getResources(), res_id ) );
     return ret;

@@ -15,22 +15,22 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
 
-import android.content.Intent;
+// import android.content.Intent;
 
-import android.util.Log;
+// import android.util.Log;
 
-import java.util.ArrayList;
-import java.util.concurrent.ConcurrentLinkedQueue;
+// import java.util.ArrayList;
+// import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.Locale;
 
-import android.bluetooth.BluetoothAdapter;
+// import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 
 class ConnectionHandler extends Handler
                         implements DataListener
 {
-   SyncService mSyncService;
-   
+   private SyncService mSyncService;
+
    long mSID; // survey id for this connection
    private byte mSendCounter;  // send counter
    private byte mRecvCounter;  // recv counter must be equal to the peer send counter
@@ -154,14 +154,14 @@ class ConnectionHandler extends Handler
      }
    }
   
-   void connectionFailed()
+   private void connectionFailed()
    {
      TDLog.Log( TDLog.LOG_SYNC, "ConnectionHandler connectionFailed() ");
      if ( mClient ) {
        mClient = false;
        mDevice = null;
        mApp.syncConnectionFailed();
-     } else {
+     // } else {
        // mSyncService.start();
      }
    }
@@ -185,13 +185,13 @@ class ConnectionHandler extends Handler
      // }
    }
 
-   boolean writeBytes( byte[] buffer ) 
+   private boolean writeBytes( byte[] buffer )
    {
      TDLog.Log( TDLog.LOG_SYNC, "ConnectionHandler write CNT " + buffer[0] + " key " + buffer[1] );
      return mSyncService.writeBuffer( buffer );
    }
 
-   void startSendThread()
+   private void startSendThread()
    {
      TDLog.Log( TDLog.LOG_SYNC, "ConnectionHandler startSendThread()");
      mSendThread = new SendThread( mBufferQueue );
@@ -199,7 +199,7 @@ class ConnectionHandler extends Handler
      mSendThread.start();
    }
 
-   void stopSendThread()
+  private void stopSendThread()
    {
      TDLog.Log( TDLog.LOG_SYNC, "ConnectionHandler stopSendThread()");
      if ( mSendThread != null ) {
@@ -215,13 +215,13 @@ class ConnectionHandler extends Handler
 
    // -----------------------------------------
 
-   byte increaseCounter( byte cnt )
+  private byte increaseCounter( byte cnt )
    {
      return ( cnt == (byte)0xfe )? (byte)0 : (byte)(cnt+1);
    }
 
 
-   boolean doAcknowledge( int cnt )
+  private boolean doAcknowledge( int cnt )
    {
      // Log.v("DistoX", "ACK count " + cnt );
      mAck[0] = (byte)cnt;
@@ -232,7 +232,7 @@ class ConnectionHandler extends Handler
    }
 
    // tell the peer my send counter
-   boolean doSyncCounter( )
+   private  boolean doSyncCounter( )
    {
      mAck[0] = (byte)mSendCounter;
      mAck[1] = DataListener.SYNC;
@@ -254,7 +254,7 @@ class ConnectionHandler extends Handler
    // SURVEY_NAME = 6;
    // SURVEY_INIT_STATION = 7;
    //
-   void onRecv( int bytes, byte[] buffer ) 
+   private void onRecv( int bytes, byte[] buffer )
    {
      TDLog.Log( TDLog.LOG_SYNC, "recv " + bytes + " length " + + buffer.length );
      if ( buffer.length < 2 ) {
@@ -470,44 +470,43 @@ class ConnectionHandler extends Handler
 
   public void onUpdateShotDBC( long id, long sid, float d, float b, float c )
   {
-    enqueue( DataListener.SHOT_DBC_UPDATE, String.format( "%d|%d|%.2f|%.1f|%.1f|", (int)id, (int)sid, d, b, c ) );
+    enqueue( DataListener.SHOT_DBC_UPDATE, String.format(Locale.US,"%d|%d|%.2f|%.1f|%.1f|", (int)id, (int)sid, d, b, c ) );
   }
 
   public void onUpdateShot( long id, long sid, String fStation, String tStation,
                             long extend, long flag, long leg, String comment ) 
   {
-    enqueue( DataListener.SHOT_UPDATE, String.format( "%d|%d|%s|%s|%d|%d|%d|%s|",
+    enqueue( DataListener.SHOT_UPDATE, String.format(Locale.US,"%d|%d|%s|%s|%d|%d|%d|%s|",
       (int)id, (int)sid, fStation, tStation, (int)extend, (int)flag, (int)leg, comment ) );
   }
 
   public void onUpdateShotName( long id, long sid, String fStation, String tStation )
   {
-    enqueue( DataListener.SHOT_NAME, String.format( "%d|%d|%s|%s|", (int)id, (int)sid, fStation, tStation ) );
+    enqueue( DataListener.SHOT_NAME, String.format(Locale.US,"%d|%d|%s|%s|", (int)id, (int)sid, fStation, tStation ) );
   }
 
   public void onUpdateShotLeg( long id, long sid, long leg ) 
   {
-    enqueue( DataListener.SHOT_LEG, String.format( "%d|%d|%d|", (int)id, (int)sid, (int)leg ) );
+    enqueue( DataListener.SHOT_LEG, String.format(Locale.US,"%d|%d|%d|", (int)id, (int)sid, (int)leg ) );
   }
-
   public void onUpdateShotExtend( long id, long sid, long extend ) 
   {
-    enqueue( DataListener.SHOT_EXTEND, String.format( "%d|%d|%d|", (int)id, (int)sid, (int)extend ) );
+    enqueue( DataListener.SHOT_EXTEND, String.format(Locale.US,"%d|%d|%d|", (int)id, (int)sid, (int)extend ) );
   }
 
   public void onUpdateShotFlag( long id, long sid, long flag )
   {
-    enqueue( DataListener.SHOT_FLAG, String.format( "%d|%d|%d|", (int)id, (int)sid, (int)flag ) );
+    enqueue( DataListener.SHOT_FLAG, String.format(Locale.US, "%d|%d|%d|", (int)id, (int)sid, (int)flag ) );
   }
 
   public void onUpdateShotComment( long id, long sid, String comment ) 
   {
-    enqueue( DataListener.SHOT_COMMENT, String.format( "%d|%d|%s|", (int)id, (int)sid, comment ) );
+    enqueue( DataListener.SHOT_COMMENT, String.format(Locale.US, "%d|%d|%s|", (int)id, (int)sid, comment ) );
   }
 
   public void onUpdateShotStatus( long id, long sid, long status )
   {
-    enqueue( DataListener.SHOT_STATUS, String.format( "%d|%d|%d|", (int)id, (int)sid, (int)status ) );
+    enqueue( DataListener.SHOT_STATUS, String.format(Locale.US, "%d|%d|%d|", (int)id, (int)sid, (int)status ) );
   }
 
   public void onUpdateShotAMDR( long sid, long id, double acc, double mag, double dip, double roll ) 
@@ -518,12 +517,12 @@ class ConnectionHandler extends Handler
 
   public void onDeleteShot( long id, long sid, int status )
   {
-    enqueue( DataListener.SHOT_DELETE, String.format( "%d|%d|%d|", (int)id, (int)sid, status ) );
+    enqueue( DataListener.SHOT_DELETE, String.format(Locale.US, "%d|%d|%d|", (int)id, (int)sid, status ) );
   }
 
   public void onUndeleteShot( long id, long sid )
   {
-    enqueue( DataListener.SHOT_UNDELETE, String.format( "%d|%d|", (int)id, (int)sid ) );
+    enqueue( DataListener.SHOT_UNDELETE, String.format(Locale.US, "%d|%d|", (int)id, (int)sid ) );
   }
 
   public void onInsertShot( long sid, long id, long millis, String from, String to, 
@@ -531,14 +530,14 @@ class ConnectionHandler extends Handler
                           long extend, long flag, long leg, long status, long shot_type, String comment ) 
   {
     enqueue( DataListener.SHOT_INSERT, 
-      String.format(Locale.US, "%d|%d|%ld|%s|%s|%.2f|%.1f|%.1f|%.1f|%d|%d|%d|%d|%d|%s|", 
+      String.format(Locale.US, "%d|%d|%d|%s|%s|%.2f|%.1f|%.1f|%.1f|%d|%d|%d|%d|%d|%s|",
       (int)sid, (int)id, millis, from, to, d, b, c, r, (int)extend, (int)flag, (int)leg, (int)status, (int)shot_type, comment ) );
   }
 
   public void onInsertShotAt( long sid, long at, long millis, double d, double b, double c, double r, long e, long leg, long t ) 
   {
     enqueue( DataListener.SHOT_INSERTAT, 
-      String.format(Locale.US, "%d|%d|%ld|%.2f|%.1f|%.1f|%.1f|%d|%d|%d", (int)sid, (int)at, millis, d, b, c, r, (int)e, (int)leg, (int)t ) );
+      String.format(Locale.US, "%d|%d|%d|%.2f|%.1f|%.1f|%.1f|%d|%d|%d", (int)sid, (int)at, millis, d, b, c, r, (int)e, (int)leg, (int)t ) );
   }
 
   // public void transferShots( long sid, long old_sid, long old_id ) { }
@@ -591,15 +590,15 @@ class ConnectionHandler extends Handler
   // public void onNewFixed( long sid, long id, String station, double lng, double lat, double alt, double asl,
   //                         String comment, long status ) { }
   // public void onUpdateFixedStation( long id, long sid, String station ) { }
-  // public void onUpdateFixedStatus( long id, long sid, long status ) { }
+  // public void onU "%d|%d|%d|", (int)id, (int)sid, (int)status pdateFixedStatus( long id, long sid, long status ) { }
   // public void onDeletedFixed( long sid, String station ) { }
 
   // -------------------------------------------------------------------
   // need a thread to empty the queue and write to the SyncService connected thread
   // incoming messages are handled by this class directly
 
-  static int SLEEP_DEQUE =  100; 
-  static int SLEEP_EMPTY = 1000;
+  static private int SLEEP_DEQUE =  100;
+  static private int SLEEP_EMPTY = 1000;
 
   private class SendThread extends Thread
   {

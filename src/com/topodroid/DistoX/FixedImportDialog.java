@@ -47,7 +47,7 @@ import android.net.Uri;
 
 import android.util.Log;
 
-public class FixedImportDialog extends MyDialog
+class FixedImportDialog extends MyDialog
                                implements OnItemClickListener
                                         , OnClickListener
                                         , OnLongClickListener
@@ -73,7 +73,7 @@ public class FixedImportDialog extends MyDialog
 
   private MyKeyboard mKeyboard;
 
-  public FixedImportDialog( Context context, FixedActivity parent )
+  FixedImportDialog( Context context, FixedActivity parent )
   {
     super( context, R.string.FixedImportDialog );
     mParent  = parent;
@@ -213,12 +213,12 @@ public class FixedImportDialog extends MyDialog
     boolean do_toast = false;
     if ( b == mBtnOk ) {
       String station = mETstation.getText().toString();
-      if ( station == null || station.length() == 0 ) {
+      if ( /* station == null || */ station.length() == 0 ) {
         mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
         return;
       }
       String comment = mETcomment.getText().toString();
-      if ( comment == null ) comment = "";
+      // if ( comment == null ) comment = "";
       if ( isSet ) {
         mParent.addFixedPoint( station, mLng, mLat, mHEll, mHGeo, comment, FixedInfo.SRC_MOBILE_TOP );
       dismiss();

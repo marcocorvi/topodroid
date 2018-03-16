@@ -31,7 +31,7 @@ import android.widget.TextView;
 
 import android.widget.Toast;
 
-public class PlotZoomFitDialog extends MyDialog
+class PlotZoomFitDialog extends MyDialog
                                implements OnClickListener
 {
   private DrawingWindow mParent;
@@ -39,7 +39,7 @@ public class PlotZoomFitDialog extends MyDialog
   private Button mBtnLandscape;
   // private Button mBtnZoomFit;
 
-  public PlotZoomFitDialog( Context context, DrawingWindow parent )
+  PlotZoomFitDialog( Context context, DrawingWindow parent )
   {
     super( context, R.string.PlotZoomFitDialog );
     mParent = parent;

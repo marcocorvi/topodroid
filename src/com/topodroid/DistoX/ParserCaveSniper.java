@@ -22,12 +22,12 @@ import java.util.regex.Pattern;
 
 import android.util.Log;
 
-public class ParserCaveSniper extends ImportParser
+class ParserCaveSniper extends ImportParser
 {
   /** CaveSniper parser
    * @param filename name of the file to parse
    */
-  public ParserCaveSniper( String filename ) throws ParserException
+  ParserCaveSniper( String filename ) throws ParserException
   {
     super( false );  // do not apply_declination
     readFile( filename );

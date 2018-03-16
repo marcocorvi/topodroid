@@ -26,7 +26,7 @@ class MemoryOctet
 
   // ------------------------------------------------------------
 
-  static double toDistance( byte b0, byte b1, byte b2 )
+  static private double toDistance( byte b0, byte b1, byte b2 )
   {
     int dhh = (int)( b0 & 0x40 );
     double d =  dhh * 1024.0 + toInt( b2, b1 );
@@ -36,13 +36,13 @@ class MemoryOctet
     return 100 + (d-100000) / 100.0;
   }
 
-  static double toAzimuth( byte b1, byte b2 ) // b1 low, b2 high
+  static private double toAzimuth( byte b1, byte b2 ) // b1 low, b2 high
   {
     int b = toInt( b2, b1 );
     return b * 180.0 / 32768.0; // 180/0x8000;
   }
 
-  static double toClino( byte b1, byte b2 ) // b1 low, b2 high
+  static private double toClino( byte b1, byte b2 ) // b1 low, b2 high
   {
     int c = toInt( b2, b1 );
     double cc = c * 90.0  / 16384.0; // 90/0x4000;
@@ -73,7 +73,7 @@ class MemoryOctet
     data  = new byte[8];
   }
 
-  public void printHexString( PrintWriter pw ) 
+  void printHexString( PrintWriter pw )
   {
     boolean hot  = (int)( data[0] & 0x80 ) == 0x80; // test hot bit
     pw.format( "%4d %c %02x %02x %02x %02x %02x %02x %02x %02x",

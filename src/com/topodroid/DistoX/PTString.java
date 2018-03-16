@@ -19,7 +19,7 @@ import java.io.IOException;
 
 class PTString 
 {
-  String _str; //!< UTF-8 encoded zero terminated (size=length+1)
+  private String _str; //!< UTF-8 encoded zero terminated (size=length+1)
 
   PTString() 
   {

@@ -22,9 +22,9 @@ package com.topodroid.DistoX;
 // MAGtype_MagneticModel;
 class  MagModel
 {
-  String ModelName;
-  int nTerms;
-  double EditionDate;
+  private String ModelName;
+  private int nTerms;
+  private double EditionDate;
   double epoch; /*Base time of Geomagnetic model epoch (yrs)*/
   double CoefficientFileEndDate; 
   int nMax; /* Maximum degree of spherical harmonic model */

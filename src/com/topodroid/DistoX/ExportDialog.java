@@ -31,7 +31,7 @@ import android.view.ViewGroup.LayoutParams;
 
 import android.util.Log;
 
-public class ExportDialog extends MyDialog
+class ExportDialog extends MyDialog
                           implements AdapterView.OnItemSelectedListener, View.OnClickListener
 {
   private Button   mBtnOk;
@@ -80,7 +80,7 @@ public class ExportDialog extends MyDialog
   @Override
   public void onNothingSelected( AdapterView av ) { mSelected = null; }
 
-
+  @Override
   public void onClick(View v) 
   {
     // Log.v("DistoX", "Selected " + mSelected );

@@ -17,14 +17,14 @@ import android.graphics.Paint;
 import android.graphics.Path;
 // import android.graphics.Path.Direction;
 
-import android.util.Log;
+// import android.util.Log;
 
 
 class DrawingUtil
 {
   static final float SCALE_FIX = 20.0f; 
-  public static float CENTER_X = 100f;
-  public static float CENTER_Y = 120f;
+  static float CENTER_X = 100f;
+  static float CENTER_Y = 120f;
 
   // private static final PointF mCenter = new PointF( CENTER_X, CENTER_Y );
 

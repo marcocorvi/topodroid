@@ -114,7 +114,7 @@
   </LinearLayout>
 
   <EditText android:id="@id/edit_comment" 
-      style="@style/edit_text"
+      style="@style/edit_text_light"
       android:layout_below="@id/layout3b"
       android:layout_marginTop="@dimen/margintiny"
       android:layout_width="fill_parent"

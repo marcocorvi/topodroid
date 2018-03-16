@@ -15,26 +15,26 @@
  */
 package com.topodroid.DistoX;
 
-import java.util.List;
-import java.util.ArrayList;
+// import java.util.List;
+// import java.util.ArrayList;
 
 import android.os.Bundle;
-import android.app.Dialog;
+// import android.app.Dialog;
 
 import android.content.Context;
 
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.View.OnClickListener;
+// import android.view.ViewGroup.LayoutParams;
 
 import android.widget.Button;
 import android.widget.CheckBox;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 
-import android.util.Log;
+// import android.util.Log;
 
-public class DrawingProfileFlipDialog extends MyDialog
+class DrawingProfileFlipDialog extends MyDialog
                            implements View.OnClickListener
 {
   private DrawingWindow mParent;
@@ -42,7 +42,7 @@ public class DrawingProfileFlipDialog extends MyDialog
 
   private Button mBtnOK;
 
-  public DrawingProfileFlipDialog( Context context, DrawingWindow parent )
+  DrawingProfileFlipDialog( Context context, DrawingWindow parent )
   {
     super( context, R.string.DrawingProfileFlipDialog );
     mParent  = parent;

@@ -24,7 +24,7 @@ class Trilateration
   private double error;
   private int iter;
 
-  TriPoint getPoint( String n )
+  private TriPoint getPoint( String n )
   {
     for ( TriPoint p : points ) if ( n.equals(p.name) ) return p;
     return null;
@@ -55,7 +55,7 @@ class Trilateration
     error = minimize1( 0.01, 0.10, 100 );
   }
 
-  void initialize()
+  private void initialize()
   {
     double d, a;
     boolean repeat = true;
@@ -174,7 +174,7 @@ class Trilateration
   // }
 
   // Error Fct = Sum | d(pi,pj) - leg.d |
-  double minimize1( double eps, double delta, int iter_max )
+  private double minimize1( double eps, double delta, int iter_max )
   {
     int n_pts = points.size();
     eps *= n_pts; // 1 mm per point

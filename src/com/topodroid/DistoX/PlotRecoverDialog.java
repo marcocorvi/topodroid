@@ -44,7 +44,7 @@ import android.widget.Toast;
 
 import android.util.Log;
 
-public class PlotRecoverDialog extends MyDialog
+class PlotRecoverDialog extends MyDialog
                         implements View.OnClickListener
                         , OnItemClickListener
 {
@@ -57,11 +57,11 @@ public class PlotRecoverDialog extends MyDialog
 
   private ListView mList;
   ArrayAdapter<String> mAdapter;
-  String mFilename;
+  private String mFilename;
   long mType;             // plot type
 
   // type is either 1 or 2
-  public PlotRecoverDialog( Context context, DrawingWindow parent, String filename, long type )
+  PlotRecoverDialog( Context context, DrawingWindow parent, String filename, long type )
   {
     super( context, R.string.PlotRecoverDialog );
     mParent   = parent;
@@ -76,14 +76,14 @@ public class PlotRecoverDialog extends MyDialog
 
     initLayout( R.layout.plot_recover_dialog, R.string.title_plot_reload );
 
-    mList = (ListView) findViewById(R.id.th2_list);
+    mList = (ListView) findViewById( R.id.th2_list);
     mList.setDividerHeight( 2 );
     mList.setOnItemClickListener( this );
  
     mTVfilename = (TextView) findViewById( R.id.filename );
 
-    mBtnOK      = (Button) findViewById(R.id.btn_ok );
-    mBtnBack    = (Button) findViewById(R.id.btn_back );
+    mBtnOK      = (Button) findViewById( R.id.btn_ok );
+    mBtnBack    = (Button) findViewById( R.id.btn_back );
     mBtnOK.setOnClickListener( this );   // OK-SAVE
     mBtnBack.setOnClickListener( this );  
 
@@ -135,7 +135,9 @@ public class PlotRecoverDialog extends MyDialog
 
     // if ( TDSetting.mBinaryTh2 ) { // TDR BINARY
       populateAdapter( TDPath.getTdrFileWithExt( mFilename ), ".tdr" );
-      mTVfilename.setText( mFilename + ".tdr" );
+      String name = mFilename + ".tdr";
+      mTVfilename.setText( name );
+
     // } else {
     //   populateAdapter( TDPath.getTh2FileWithExt( mFilename ), ".th2" );
     //   mTVfilename.setText( mFilename + ".th2" );

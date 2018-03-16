@@ -43,6 +43,7 @@ import android.util.Log;
 
 /** this is the camera preview class
  *  It access the camera via the QCamPreview
+ *  @note this class must be public
  */
 public class QCamDrawingSurface extends SurfaceView
                                 implements SurfaceHolder.Callback 
@@ -103,7 +104,7 @@ public class QCamDrawingSurface extends SurfaceView
   //   }
   // } 
 
-  public QCamDrawingSurface(Context context, AttributeSet attrs) 
+  public QCamDrawingSurface(Context context, AttributeSet attrs)
   {
     super(context, attrs);
     mContext = context;
@@ -161,7 +162,7 @@ public class QCamDrawingSurface extends SurfaceView
     return ret;
   }
 
-  public void close()
+  void close()
   {
     // if ( mOrientationListener != null ) mOrientationListener.disable( );
     if ( mCamera != null ) {
@@ -172,7 +173,7 @@ public class QCamDrawingSurface extends SurfaceView
     }
   }
 
-  public boolean open()
+  boolean open()
   {
     // Log.v("DistoX", "open qcam" );
     close();

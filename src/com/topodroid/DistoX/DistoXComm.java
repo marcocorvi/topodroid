@@ -11,31 +11,31 @@
  */
 package com.topodroid.DistoX;
 
-import java.nio.ByteBuffer;
+// import java.nio.ByteBuffer;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.EOFException;
+// import java.io.EOFException;
 import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 import java.util.List;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
 
-import android.app.Activity;
+// import android.app.Activity;
 
-import android.os.Bundle;
+// import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
+// import android.os.Message;
 
 // import android.os.Parcelable;
 import android.os.ParcelUuid;
 // import android.os.AsyncTask;
 
-import android.bluetooth.BluetoothAdapter;
+// import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 // import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
@@ -45,12 +45,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.BroadcastReceiver;
 
-import android.database.DataSetObserver;
+// import android.database.DataSetObserver;
 
 // import android.widget.Toast;
-import android.util.Log;
+// import android.util.Log;
 
-public class DistoXComm extends TopoDroidComm
+class DistoXComm extends TopoDroidComm
 {
   private BluetoothDevice mBTDevice;
   private BluetoothSocket mBTSocket;
@@ -321,8 +321,8 @@ public class DistoXComm extends TopoDroidComm
           TDLog.Error( "create Socket IO " + e.getMessage() );
           if ( mBTSocket != null ) { mBTSocket = null; }
         }
-      } else {
-        // TDLog.Log( TDLog.LOG_BT, "device not paired. state " + mBTDevice.getBondState() );
+      // } else {
+      //   TDLog.Log( TDLog.LOG_BT, "device not paired. state " + mBTDevice.getBondState() );
       }
 
       mProtocol = null;
@@ -455,7 +455,7 @@ public class DistoXComm extends TopoDroidComm
   //   return false;
   // }
 
-  public void disconnectRemoteDevice( )
+  void disconnectRemoteDevice( )
   {
     // TDLog.Log( TDLog.LOG_COMM, "disconnect remote device ");
     super.disconnectRemoteDevice();
@@ -468,7 +468,7 @@ public class DistoXComm extends TopoDroidComm
   /**
    * nothing to read (only write) --> no AsyncTask
    */
-  public void setX310Laser( String address, int what, Handler /* ILister */ lister ) // FIXME LISTER
+  void setX310Laser( String address, int what, Handler /* ILister */ lister ) // FIXME LISTER
   {
     if ( connectSocket( address ) ) {
       switch ( what ) {
@@ -488,8 +488,8 @@ public class DistoXComm extends TopoDroidComm
               while ( mRfcommThread != null ) {
                 try { Thread.sleep( 100 ); } catch ( InterruptedException e ) { }
               }
-            } else {
-              // Log.v("DistoX", "RF comm thread not null ");
+            // } else {
+            //   Log.v("DistoX", "RF comm thread not null ");
             }
           }
           break;
@@ -512,7 +512,7 @@ public class DistoXComm extends TopoDroidComm
    * @param type       device type
    * @return 
    */
-  public boolean toggleCalibMode( String address, int type )
+  boolean toggleCalibMode( String address, int type )
   {
     if ( ! checkRfcommThreadNull( "toggle Calib Mode: address " + address + " type " + type ) ) {
       TDLog.Error( "toggle Calib Mode address " + address + " not null RFcomm thread" );
@@ -563,7 +563,7 @@ public class DistoXComm extends TopoDroidComm
     return ret;
   }
 
-  public boolean writeCoeff( String address, byte[] coeff )
+  boolean writeCoeff( String address, byte[] coeff )
   {
     if ( ! checkRfcommThreadNull( "write coeff: address " + address ) ) return false;
     boolean ret = false;
@@ -579,7 +579,7 @@ public class DistoXComm extends TopoDroidComm
   }
 
   // called only by CalibReadTask
-  public boolean readCoeff( String address, byte[] coeff )
+  boolean readCoeff( String address, byte[] coeff )
   {
     if ( ! checkRfcommThreadNull( "read coeff: address " + address ) ) return false;
     boolean ret = false;
@@ -600,7 +600,7 @@ public class DistoXComm extends TopoDroidComm
     return ret;
   }
 
-  public String readHeadTail( String address, byte[] command, int[] head_tail )
+  String readHeadTail( String address, byte[] command, int[] head_tail )
   {
     String res = null;
     if ( mApp.distoType() == Device.DISTO_A3 ) {
@@ -627,7 +627,7 @@ public class DistoXComm extends TopoDroidComm
   //   return n;
   // }
 
-  public int readX310Memory( String address, int from, int to, List< MemoryOctet > memory )
+  int readX310Memory( String address, int from, int to, List< MemoryOctet > memory )
   {
     if ( ! checkRfcommThreadNull( "read X310 memory: address " + address ) ) return -1;
     int n = 0;
@@ -639,7 +639,7 @@ public class DistoXComm extends TopoDroidComm
     return n;
   }
 
-  public int readA3Memory( String address, int from, int to, List< MemoryOctet > memory )
+  int readA3Memory( String address, int from, int to, List< MemoryOctet > memory )
   {
     if ( ! checkRfcommThreadNull( "read A3 memory: address " + address ) ) return -1;
     from &= 0x7ff8;
@@ -672,7 +672,7 @@ public class DistoXComm extends TopoDroidComm
 
   /** swap hot bit in the range [from, to) [only A3]
    */
-  public int swapHotBit( String address, int from, int to )
+  int swapHotBit( String address, int from, int to )
   {
     if ( ! checkRfcommThreadNull( "swap hot bit: address " + address ) ) return -1;
     if ( mApp.distoType() != Device.DISTO_A3 ) return -2;
@@ -706,7 +706,7 @@ public class DistoXComm extends TopoDroidComm
   // ------------------------------------------------------------------------------------
   // CONTINUOUS DATA DOWNLOAD
 
-  public boolean connectDevice( String address, Handler /* ILister */ lister ) // FIXME LISTER
+  boolean connectDevice( String address, Handler /* ILister */ lister ) // FIXME LISTER
   {
     if ( mRfcommThread != null ) {
       TDLog.Log( TDLog.LOG_COMM, "DistoX Comm connect: already connected");
@@ -719,7 +719,7 @@ public class DistoXComm extends TopoDroidComm
     return true;
   }
 
-  public void disconnect()
+  void disconnect()
   {
     // TDLog.Log( TDLog.LOG_COMM, "disconnect");
     cancelRfcommThread();
@@ -729,7 +729,7 @@ public class DistoXComm extends TopoDroidComm
   // -------------------------------------------------------------------------------------
   // ON-DEMAND DATA DOWNLOAD
 
-  public int downloadData( String address, Handler /* ILister */ lister ) // FIXME LISTER
+  int downloadData( String address, Handler /* ILister */ lister ) // FIXME LISTER
   {
     if ( ! checkRfcommThreadNull( "download data: address " + address ) ) {
       TDLog.Error( "download data: RFcomm thread not null");
@@ -790,7 +790,7 @@ public class DistoXComm extends TopoDroidComm
   //   return ret;
   // }
     
-  public int dumpFirmware( String address, String filepath )
+  int dumpFirmware( String address, String filepath )
   {
     int ret = 0;
     if ( connectSocket( address ) ) {
@@ -800,7 +800,7 @@ public class DistoXComm extends TopoDroidComm
     return ret;
   }
 
-  public int uploadFirmware( String address, String filepath )
+  int uploadFirmware( String address, String filepath )
   {
     int ret = 0;
     if ( connectSocket( address ) ) {

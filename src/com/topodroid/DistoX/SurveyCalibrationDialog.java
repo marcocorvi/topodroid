@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import java.util.Locale;
+
 import android.os.Bundle;
 import android.app.Dialog;
 // import android.app.Activity;
@@ -57,9 +59,9 @@ class SurveyCalibrationDialog extends MyDialog
     mETlength  = (EditText) findViewById( R.id.et_length );
     mETazimuth = (EditText) findViewById( R.id.et_azimuth );
     mETclino   = (EditText) findViewById( R.id.et_clino );
-    mETlength.setText(  Float.toString( ManualCalibration.mLength ) );
-    mETazimuth.setText( Float.toString( ManualCalibration.mAzimuth ) );
-    mETclino.setText(   Float.toString( ManualCalibration.mClino ) );
+    mETlength.setText(  String.format(Locale.US, "%.2f", ManualCalibration.mLength ) );
+    mETazimuth.setText( String.format(Locale.US, "%.1f", ManualCalibration.mAzimuth ) );
+    mETclino.setText(   String.format(Locale.US, "%.1f", ManualCalibration.mClino ) );
 
     mCBlrud   = (CheckBox) findViewById( R.id.cb_lrud );
     mCBlrud.setChecked( ManualCalibration.mLRUD );

@@ -52,7 +52,7 @@
     <string name="calibration_azimuth">Compass</string>
     <string name="calibration_clino">Clino</string>
 
-    <string name="calib_new">New Calibration</string>
+    <string name="calib_new">New calibration</string>
     <string name="calib_exists">Calibration already exists</string>
     <string name="calib_delete">Delete calibration </string>
     <string name="calib_device_mismatch">WARNING: Calibration-Device mismatch</string>
@@ -406,7 +406,7 @@
     <string name="make_surface">Surface exists. Replace it?</string>
 
     <string name="sketch3d_name">name</string>
-    <string name="sketch3d_new">New 3D model</string>
+    <string name="sketch3d_new">New model</string>
     <string name="sketch3d_next">next station</string>
     <string name="sketch3d_loading">loading model ...</string>
     <!-- UNUSED string name="sketch3d_null_name">Missing 3D sketch name</string -->
@@ -788,6 +788,7 @@
     <string name="title_audio">Audio comment</string>
     <string name="title_calib">Calibrations</string>
     <string name="title_calib_check">Calibration-check shots</string>
+    <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Calibration data distribution</string>
     <string name="title_coeff">Calibration coefficients</string>
     <string name="title_contour">Contour</string>
@@ -1026,6 +1027,8 @@
   <string name="pref_min_leg_message">Legs shorter than the minimum have orange background</string>
   <string name="pref_backsight_title">Backsight</string>
   <string name="pref_backsight_summary">Backsight fields in the new-shot dialog</string>
+  <string name="pref_backshot_title">Backshot DistoX</string>
+  <string name="pref_backshot_summary">DistoX in backshot mode</string>
   <string name="pref_prev_next_title">Prev/Next buttons</string>
   <string name="pref_prev_next_summary">Prev/Next buttons in the shot dialog</string>
   <string name="pref_mag_anomaly_title">Magnetic Anomaly</string>

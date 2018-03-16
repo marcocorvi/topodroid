@@ -13,9 +13,9 @@
 
 package com.topodroid.DistoX;
 
-import android.graphics.Canvas;
+// import android.graphics.Canvas;
 // import android.graphics.Paint;
-import android.graphics.Path;
+// import android.graphics.Path;
 import android.graphics.Matrix;
 
 import java.util.Locale;
@@ -29,7 +29,7 @@ import java.io.IOException;
 /**
  * station points do not shift (!)
  */
-public class DrawingStationPath extends DrawingPath
+class DrawingStationPath extends DrawingPath
 {
   private static float toTherion = TDConst.TO_THERION;
 

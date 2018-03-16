@@ -34,17 +34,17 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import android.widget.Toast;
 
-public class PlotMergeDialog extends MyDialog
+class PlotMergeDialog extends MyDialog
                              implements OnItemClickListener
                                         , OnClickListener
 {
   private DrawingWindow mParent;
   private ArrayAdapter<String> mArrayAdapter;
 
-  private ListView mList;
+  // private ListView mList;
   private List<PlotInfo> mPlots;
 
-  public PlotMergeDialog( Context context, DrawingWindow parent, List<PlotInfo> plots )
+  PlotMergeDialog( Context context, DrawingWindow parent, List<PlotInfo> plots )
   {
     super( context, R.string.PlotMergeDialog );
     mParent = parent;
@@ -60,10 +60,10 @@ public class PlotMergeDialog extends MyDialog
 
     mArrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
 
-    mList = (ListView) findViewById(R.id.list);
-    mList.setAdapter( mArrayAdapter );
-    mList.setOnItemClickListener( this );
-    mList.setDividerHeight( 2 );
+    ListView list = (ListView) findViewById(R.id.list);
+    list.setAdapter( mArrayAdapter );
+    list.setOnItemClickListener( this );
+    list.setDividerHeight( 2 );
 
     ((Button) findViewById( R.id.button_cancel )).setOnClickListener( this );
 

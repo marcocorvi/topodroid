@@ -19,11 +19,11 @@ import java.io.FileOutputStream;
 
 class PTReference
 {
-    PTId _station;
-    long _east;     //!< east coordinate [mm]
-    long _north;    //!< north coordinate [mm]
-    int _altitude; //!< altitude [mm above sea level]
-    PTString _comment;
+    private PTId _station;
+    private long _east;     //!< east coordinate [mm]
+    private long _north;    //!< north coordinate [mm]
+    private int _altitude; //!< altitude [mm above sea level]
+    private PTString _comment;
 
     PTReference()
     {

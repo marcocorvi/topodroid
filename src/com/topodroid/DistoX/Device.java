@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-import android.util.Log;
+// import android.util.Log;
 
 class Device
 {
@@ -22,15 +22,15 @@ class Device
   String mName;     // device name (X310 only)
   String mNickname; // device nickname
   int mType;        // device type
-  int mHead;
-  int mTail;
+  private int mHead;
+  private int mTail;
 
   final static int DISTO_NONE = 0;
   final static int DISTO_A3   = 1;
   final static int DISTO_X310 = 2;
   final static int DISTO_X000 = 3;
   final static String[] typeString = { "Unknown", "A3", "X310", "X000" };
-  final static String[] typeSimpleString = { "Unknown", "DistoX", "DistoX2", "DistoX0" };
+  final static private String[] typeSimpleString = { "Unknown", "DistoX", "DistoX2", "DistoX0" };
   
   static String typeToString( int type ) { return typeString[ type ]; }
 
@@ -93,7 +93,7 @@ class Device
     return typeString[ mType ] + " " + mName + " " + mAddress;
   }
 
-  public String toSimpleString() { return typeSimpleString[ mType ] + " " + mName; }
+  String toSimpleString() { return typeSimpleString[ mType ] + " " + mName; }
   
   
 }

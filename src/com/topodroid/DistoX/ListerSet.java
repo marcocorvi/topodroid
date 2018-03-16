@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 import android.util.Log;
 
-public class ListerSet implements ILister
+class ListerSet implements ILister
 {
   private ArrayList<ILister> mLister;
 

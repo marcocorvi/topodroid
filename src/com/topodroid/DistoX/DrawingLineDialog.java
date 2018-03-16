@@ -11,27 +11,27 @@
  */
 package com.topodroid.DistoX;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 
 import android.content.Context;
 
-import android.widget.TextView;
+// import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+// import android.widget.RadioButton;
+// import android.widget.RadioGroup;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.LinearLayout;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
+// import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 
-public class DrawingLineDialog extends MyDialog
+class DrawingLineDialog extends MyDialog
                                implements View.OnClickListener, AdapterView.OnItemSelectedListener
 {
   private DrawingLinePath mLine;
@@ -56,7 +56,7 @@ public class DrawingLineDialog extends MyDialog
   private MyCheckBox mBtnRock;
   private MyCheckBox mBtnClose;
 
-  public DrawingLineDialog( Context context, DrawingWindow parent, DrawingLinePath line, LinePoint lp )
+  DrawingLineDialog( Context context, DrawingWindow parent, DrawingLinePath line, LinePoint lp )
   {
     super( context, R.string.DrawingLineDialog );
     mParent  = parent;
@@ -206,8 +206,8 @@ public class DrawingLineDialog extends MyDialog
       } else {
         mLine.setClosed( false );
       }
-    } else if ( b == mBtnCancel ) {
-      // nothing
+    // } else if ( b == mBtnCancel ) {
+    //   /* nothing */
     }
     dismiss();
   }

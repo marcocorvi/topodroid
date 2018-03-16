@@ -17,14 +17,14 @@ import java.util.ArrayList;
 
 import android.util.Log;
 
-public class ConvexHull
+class ConvexHull
 {
-  private Vector mV1;  // first base point
-  private Vector mV2;  // second base point
+  // private Vector mV1;  // first base point
+  // private Vector mV2;  // second base point
 
-  private Vector mX;   // X unit vector (mV2-mV1).normalized()
-  private Vector mY;
-  private Vector mZ;
+  // private Vector mX;   // X unit vector (mV2-mV1).normalized()
+  // private Vector mY;
+  // private Vector mZ;
 
   ArrayList< Vector > mPts; // other points
   ArrayList< CHTriangle > mTri;
@@ -43,13 +43,14 @@ public class ConvexHull
     }
   }
 
-  ConvexHull( Vector v1, Vector v2, ArrayList<Vector> pts )
+  ConvexHull( Vector mV1, Vector mV2, ArrayList<Vector> pts )
   {
-    mV1 = v1;
-    mV2 = v2;
+    // mV1 = v1;
+    // mV2 = v2;
     mPts = pts;
 
-    mX = mV2.minus( mV1 );
+    Vector mZ;
+    Vector mX = mV2.minus( mV1 );
     mX.normalize(); 
     if ( Math.abs( mX.z ) > Math.abs( mX.y ) ) {
       if ( Math.abs( mX.y ) > Math.abs( mX.x ) ) {
@@ -64,7 +65,7 @@ public class ConvexHull
         mZ = new Vector( 0, 0, 1 ); 
       }
     }
-    mY = mX.cross( mZ );
+    Vector mY = mX.cross( mZ );
     mY.normalize();
     mZ = mX.cross( mY ); 
     mZ.normalize(); // not really needed: should be normalized

@@ -31,7 +31,7 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
     private String filename = null;
     private boolean mToast;
 
-    public ExportBitmapToFile( Context context, Bitmap bitmap, float scale, String name, boolean toast )
+    ExportBitmapToFile( Context context, Bitmap bitmap, float scale, String name, boolean toast )
     {
        mContext  = context;
        mBitmap   = bitmap;

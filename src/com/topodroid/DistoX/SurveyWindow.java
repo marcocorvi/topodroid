@@ -109,7 +109,7 @@ public class SurveyWindow extends Activity
   private Activity mActivity = null;
 
   private EditText mTextName;
-  private Button mEditDate;
+  private Button   mEditDate;
   private EditText mEditTeam;
   private EditText mEditDecl;
   private EditText mEditComment;
@@ -140,6 +140,7 @@ public class SurveyWindow extends Activity
     name = TopoDroidUtil.noSpaces( name );
     if ( mApp.renameCurrentSurvey( mApp.mSID, name, true ) ) {
       mTextName.setText( name );
+      mTextName.setTextColor( TDColor.NAME_COLOR );
     } else {
       Toast.makeText( mActivity, R.string.cannot_rename, Toast.LENGTH_SHORT).show();
     }
@@ -154,6 +155,7 @@ public class SurveyWindow extends Activity
     if ( mApp.mSID < 0 ) return false;
     SurveyInfo info = mApp.getSurveyInfo();
     mTextName.setText( info.name );
+    mTextName.setTextColor( TDColor.NAME_COLOR );
     mInitStation = info.initStation;
     mXSections   = info.xsections;
 
@@ -257,7 +259,7 @@ public class SurveyWindow extends Activity
   {
     super.onResume();
     mApp.resetLocale();
-    float decl = mApp.mData.getSurveyDeclination( mApp.mSID );
+    float decl = TopoDroidApp.mData.getSurveyDeclination( mApp.mSID );
     mEditDecl.setText( String.format(Locale.US, "%.4f", decl ) );
   }
 
@@ -295,7 +297,7 @@ public class SurveyWindow extends Activity
     if ( k < mNrButton1 && b == mButton1[k++] ) {  // note
       doNotes();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // INFO STATISTICS
-      new SurveyStatDialog( mActivity, mApp.mData.getSurveyStat( mApp.mSID ) ).show();
+      new SurveyStatDialog( mActivity, TopoDroidApp.mData.getSurveyStat( mApp.mSID ) ).show();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // 3D
       do3D();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // GPS
@@ -376,7 +378,7 @@ public class SurveyWindow extends Activity
   void setDeclination( float decl )
   {
     mEditDecl.setText( String.format(Locale.US, "%.4f", decl ) );
-    mApp.mData.updateSurveyDeclination( mApp.mSID, decl, true );
+    TopoDroidApp.mData.updateSurveyDeclination( mApp.mSID, decl, true );
   }
 
   // float getDeclination()
@@ -423,7 +425,7 @@ public class SurveyWindow extends Activity
     if ( comment != null ) { comment = comment.trim(); } else { comment = ""; }
 
     // TDLog.Log( TDLog.LOG_SURVEY, "INSERT survey id " + id + " date " + date + " name " + name + " comment " + comment );
-    mApp.mData.updateSurveyInfo( mApp.mSID, date, team, decl, comment, mInitStation, mXSections, true );
+    TopoDroidApp.mData.updateSurveyInfo( mApp.mSID, date, team, decl, comment, mInitStation, mXSections, true );
   }
 
   public void doExport( String type )
@@ -445,7 +447,7 @@ public class SurveyWindow extends Activity
     TDPath.deleteSurveyFiles( survey );
 
     for ( int status = 0; status < 2; ++status ) {
-      List< PlotInfo > plots = mApp.mData.selectAllPlots( mApp.mSID, status );
+      List< PlotInfo > plots = TopoDroidApp.mData.selectAllPlots( mApp.mSID, status );
       if ( plots.size() > 0 ) {
         TDPath.deleteSurveyPlotFiles( survey, plots );
       }
@@ -453,13 +455,13 @@ public class SurveyWindow extends Activity
 
     // TODO delete 3D-files
     for ( int status = 0; status < 2; ++status ) {
-      List< Sketch3dInfo > sketches = mApp.mData.selectAllSketches( mApp.mSID, status );
+      List< Sketch3dInfo > sketches = TopoDroidApp.mData.selectAllSketches( mApp.mSID, status );
       if ( sketches.size() > 0 ) {
         TDPath.deleteSurvey3dFiles( survey, sketches );
       }
     }
 
-    mApp.mData.doDeleteSurvey( mApp.mSID );
+    TopoDroidApp.mData.doDeleteSurvey( mApp.mSID );
     mApp.setSurveyFromName( null, false ); // tell app to clear survey name and id
     setResult( RESULT_OK, new Intent() );
     finish();
@@ -543,7 +545,7 @@ public class SurveyWindow extends Activity
     } else if ( TDLevel.overAdvanced && p++ == pos ) { // INSTRUMENTS CALIBRATION
       new SurveyCalibrationDialog( mActivity, mApp ).show();
     } else if ( TDLevel.overAdvanced && p++ == pos ) { // CALIBRATION CHECK SHOTS
-      List< DBlock > shots = mApp.mData.selectAllShots( mApp.mSID, TDStatus.CHECK );
+      List< DBlock > shots = TopoDroidApp.mData.selectAllShots( mApp.mSID, TDStatus.CHECK );
       if ( shots.size() == 0 ) {
         Toast.makeText( mActivity, R.string.no_calib_check, Toast.LENGTH_SHORT).show();
       } else {

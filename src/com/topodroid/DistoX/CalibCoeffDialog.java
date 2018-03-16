@@ -13,7 +13,7 @@ package com.topodroid.DistoX;
 
 import java.util.Locale;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 
 import android.content.Context;
@@ -22,36 +22,36 @@ import android.widget.TextView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.view.View;
-import android.view.View.OnClickListener;
+// import android.view.View.OnClickListener;
 
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
+// import android.graphics.Bitmap.Config;
 
-import android.util.Log;
+// import android.util.Log;
 
-public class CalibCoeffDialog extends MyDialog
+class CalibCoeffDialog extends MyDialog
                               implements View.OnClickListener
 {
   private TopoDroidApp mApp;
 
   private static final int WIDTH  = 200;
   private static final int HEIGHT = 100;
-  private ImageView mImage; // error histogram
+  // private ImageView mImage; // error histogram
   private Bitmap mBitmap = null;
 
-  private TextView mTextBG;
-  private TextView mTextAGx;
-  private TextView mTextAGy;
-  private TextView mTextAGz;
-  private TextView mTextBM;
-  private TextView mTextAMx;
-  private TextView mTextAMy;
-  private TextView mTextAMz;
-  private TextView mTextNL;
-  private TextView mTextDelta;
-  private TextView mTextDelta2;
-  private TextView mTextMaxError;
-  private TextView mTextIter;
+  // private TextView mTextBG;
+  // private TextView mTextAGx;
+  // private TextView mTextAGy;
+  // private TextView mTextAGz;
+  // private TextView mTextBM;
+  // private TextView mTextAMx;
+  // private TextView mTextAMy;
+  // private TextView mTextAMz;
+  // private TextView mTextNL;
+  // private TextView mTextDelta;
+  // private TextView mTextDelta2;
+  // private TextView mTextMaxError;
+  // private TextView mTextIter;
 
   private Button mButtonWrite;
   // private Button   mButtonBack;
@@ -72,7 +72,7 @@ public class CalibCoeffDialog extends MyDialog
   private byte[] mCoeff;
   // private boolean mSaturated;
 
-  public CalibCoeffDialog( Context context, TopoDroidApp app,
+  CalibCoeffDialog( Context context, TopoDroidApp app,
                            Vector bg, Matrix ag, Vector bm, Matrix am, Vector nl, float[] errors,
                            float delta, float delta2, float error, long iter, byte[] coeff /*, boolean saturated */ )
   {
@@ -93,7 +93,7 @@ public class CalibCoeffDialog extends MyDialog
     if ( nl != null ) {
       nlx = String.format(Locale.US, "nL   %8.4f %8.4f %8.4f", nl.x, nl.y, nl.z );
     } else {
-      nlx = new String("");
+      nlx = ""; // new String("");
     }
 
     delta0  = String.format( mContext.getResources().getString( R.string.calib_error ), delta );
@@ -183,40 +183,40 @@ public class CalibCoeffDialog extends MyDialog
 
     initLayout( R.layout.calib_coeff_dialog, R.string.title_coeff );
 
-    mTextBG  = (TextView) findViewById(R.id.coeff_bg);
-    mTextAGx = (TextView) findViewById(R.id.coeff_agx);
-    mTextAGy = (TextView) findViewById(R.id.coeff_agy);
-    mTextAGz = (TextView) findViewById(R.id.coeff_agz);
-    
-    mTextBM  = (TextView) findViewById(R.id.coeff_bm);
-    mTextAMx = (TextView) findViewById(R.id.coeff_amx);
-    mTextAMy = (TextView) findViewById(R.id.coeff_amy);
-    mTextAMz = (TextView) findViewById(R.id.coeff_amz);
+    TextView textBG  = (TextView) findViewById(R.id.coeff_bg);
+    TextView textAGx = (TextView) findViewById(R.id.coeff_agx);
+    TextView textAGy = (TextView) findViewById(R.id.coeff_agy);
+    TextView textAGz = (TextView) findViewById(R.id.coeff_agz);
 
-    mTextNL = (TextView) findViewById(R.id.coeff_nl);
+    TextView textBM  = (TextView) findViewById(R.id.coeff_bm);
+    TextView textAMx = (TextView) findViewById(R.id.coeff_amx);
+    TextView textAMy = (TextView) findViewById(R.id.coeff_amy);
+    TextView textAMz = (TextView) findViewById(R.id.coeff_amz);
 
-    mImage        = (ImageView) findViewById( R.id.histogram );
-    mTextDelta    = (TextView) findViewById(R.id.coeff_delta);
-    mTextDelta2   = (TextView) findViewById(R.id.coeff_delta2);
-    mTextMaxError = (TextView) findViewById(R.id.coeff_max_error);
-    mTextIter     = (TextView) findViewById(R.id.coeff_iter);
+    TextView textNL = (TextView) findViewById(R.id.coeff_nl);
+
+    ImageView image        = (ImageView) findViewById( R.id.histogram );
+    TextView textDelta    = (TextView) findViewById(R.id.coeff_delta);
+    TextView textDelta2   = (TextView) findViewById(R.id.coeff_delta2);
+    TextView textMaxError = (TextView) findViewById(R.id.coeff_max_error);
+    TextView textIter     = (TextView) findViewById(R.id.coeff_iter);
     mButtonWrite  = (Button) findViewById( R.id.button_coeff_write );
 
-    mTextBG.setText( bg0 );
-    mTextAGx.setText( agx );
-    mTextAGy.setText( agy );
-    mTextAGz.setText( agz );
-    mTextBM.setText( bm0 );
-    mTextAMx.setText( amx );
-    mTextAMy.setText( amy );
-    mTextNL.setText( nlx );
-    mTextAMz.setText( amz );
+    textBG.setText( bg0 );
+    textAGx.setText( agx );
+    textAGy.setText( agy );
+    textAGz.setText( agz );
+    textBM.setText( bm0 );
+    textAMx.setText( amx );
+    textAMy.setText( amy );
+    textNL.setText( nlx );
+    textAMz.setText( amz );
     if ( mBitmap != null ) {
-      mImage.setImageBitmap( mBitmap );
-      mTextDelta.setText( delta0 );
-      mTextDelta2.setText( delta02 );
-      mTextMaxError.setText( error0 );
-      mTextIter.setText( iter0 );
+      image.setImageBitmap( mBitmap );
+      textDelta.setText( delta0 );
+      textDelta2.setText( delta02 );
+      textMaxError.setText( error0 );
+      textIter.setText( iter0 );
       mButtonWrite.setOnClickListener( this );
       // if ( mSaturated ) {
       //   mButtonWrite.setEnabled( false );
@@ -226,11 +226,11 @@ public class CalibCoeffDialog extends MyDialog
       // mButtonBack  = (Button) findViewById( R.id.button_coeff_back );
       // mButtonBack.setOnClickListener( this );
     } else {
-      mImage.setVisibility( View.GONE );
-      mTextDelta.setVisibility( View.GONE );
-      mTextDelta2.setVisibility( View.GONE );
-      mTextMaxError.setVisibility( View.GONE );
-      mTextIter.setVisibility( View.GONE );
+      image.setVisibility( View.GONE );
+      textDelta.setVisibility( View.GONE );
+      textDelta2.setVisibility( View.GONE );
+      textMaxError.setVisibility( View.GONE );
+      textIter.setVisibility( View.GONE );
       mButtonWrite.setVisibility( View.GONE );
     }
   }

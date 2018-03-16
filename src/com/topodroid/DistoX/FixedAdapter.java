@@ -28,7 +28,7 @@ class FixedAdapter extends ArrayAdapter< FixedInfo >
   private List< FixedInfo > items;
   private Context context;
 
-  public FixedAdapter( Context ctx, int id, List< FixedInfo > items )
+  FixedAdapter( Context ctx, int id, List< FixedInfo > items )
   {
     super( ctx, id, items );
     this.context = ctx;

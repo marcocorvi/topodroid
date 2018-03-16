@@ -30,12 +30,12 @@ class PTTrip
     static final long SEC_OFFSET = 2208988800L;  /* 86400 * (70*365 + 17) */
     static final long NANO2SEC   = 10000000L;   /* 100 ns to 1 s */
 
-    long _time; //!< ticks [100 ns] since 1.01.01 00:00
+    private long _time; //!< ticks [100 ns] since 1.01.01 00:00
     int _day;
     int _month;
     int _year;
-    short _declination; //!< full circle 2^16
-    PTString _comment;
+    private short _declination; //!< full circle 2^16
+    private PTString _comment;
 
     PTTrip()
     {

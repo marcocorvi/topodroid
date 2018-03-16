@@ -771,6 +771,7 @@
     <string name="title_audio">Commentaire Audio</string>
     <string name="title_calib">Étalonnage</string>
     <string name="title_calib_check">Visée de contrôle étalonnage</string>
+    <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Distributions des données d\'étalonnage</string>
     <string name="title_coeff">Coefficients d\'étalonnage</string>
     <string name="title_contour">Contour</string>
@@ -1006,6 +1007,8 @@
   <string name="pref_min_leg_message">Les cheminements inférieurs à ce minimum on un fond orange</string>
   <string name="pref_backsight_title">Visée inverse</string>
   <string name="pref_backsight_summary">Afficher les champs de saisie inverse dans la boîte de dialogue de nouvelle visée</string>
+  <!-- TODO string name="pref_backshot_title">Backshot DistoX</string -->
+  <!-- TODO string name="pref_backshot_summary">DistoX in backshot mode</string -->
   <string name="pref_prev_next_title">Icônes Précédent/Suivant</string>
   <string name="pref_prev_next_summary">Boutons Précédent/Suivant dans la boîte de dialogue de nouvelle visée</string>
   <string name="pref_mag_anomaly_title">Anomalie magnétique</string>

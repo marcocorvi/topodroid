@@ -16,7 +16,7 @@ import java.util.ArrayList;
 class SketchBorder
 {
   ArrayList< SketchSide > sides;
-  Vector mCenter;
+  private Vector mCenter;
 
   SketchBorder()
   {

@@ -21,7 +21,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.MarginLayoutParams;
 import android.graphics.drawable.BitmapDrawable;
 
-public class MyStateBox extends CompoundButton
+class MyStateBox extends CompoundButton
 {
   Context mContext = null;
   int mState;

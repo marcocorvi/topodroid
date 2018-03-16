@@ -23,7 +23,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 
 
-public class OverviewModeDialog extends MyDialog 
+class OverviewModeDialog extends MyDialog
                                 implements View.OnClickListener
 {
     private CheckBox mCBleg;      // whether to show legs
@@ -36,12 +36,12 @@ public class OverviewModeDialog extends MyDialog
     // private Button mBtnBack;
 
     private DrawingSurface mSurface;
-    private OverviewWindow mParent; 
+    // private OverviewWindow mParent;
 
-    public OverviewModeDialog( Context context, OverviewWindow parent, DrawingSurface surface )
+    OverviewModeDialog( Context context, OverviewWindow parent, DrawingSurface surface )
     {
       super(context, R.string.OverviewModeDialog );
-      mParent  = parent;
+      // mParent  = parent;
       mSurface = surface;
     }
 

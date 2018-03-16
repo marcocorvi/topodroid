@@ -14,26 +14,26 @@
  */
 package com.topodroid.DistoX;
 
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.Matrix;
+// import android.graphics.Canvas;
+// import android.graphics.Paint;
+// import android.graphics.Path;
+// import android.graphics.Matrix;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.Iterator;
+// import java.util.Iterator;
 // import java.util.List;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 import java.util.Locale;
 
-import android.util.Log;
+// import android.util.Log;
 
 /**
  */
-public class DrawingLinePath extends DrawingPointLinePath
+class DrawingLinePath extends DrawingPointLinePath
 {
   static final int OUTLINE_OUT = 1;
   static final int OUTLINE_IN = -1;
@@ -187,10 +187,12 @@ public class DrawingLinePath extends DrawingPointLinePath
     }
     if ( ! exclude ) {
       // lp = mPoints.get(k); // k == k0
-      if ( lp.has_cp ) {
-        line1.addPoint3( lp.x1, lp.y1, lp.x2, lp.y2, lp.x, lp.y );
-      } else {
-        line1.addPoint( lp.x, lp.y );
+      if ( lp != null ) {
+        if ( lp.has_cp ) {
+          line1.addPoint3( lp.x1, lp.y1, lp.x2, lp.y2, lp.x, lp.y );
+        } else {
+          line1.addPoint( lp.x, lp.y );
+        }
       }
     } else {
       // ++ k;
@@ -239,7 +241,7 @@ public class DrawingLinePath extends DrawingPointLinePath
 
   boolean isReversed() { return mReversed; }
 
-  public int lineType() { return mLineType; }
+  int lineType() { return mLineType; }
 
   void setLineType( int type )
   {

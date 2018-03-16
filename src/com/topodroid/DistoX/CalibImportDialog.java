@@ -12,7 +12,7 @@
 package com.topodroid.DistoX;
 
 import java.io.File;
-import java.util.Set;
+// import java.util.Set;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Collections;
@@ -21,7 +21,7 @@ import java.util.Collections;
 import android.app.Dialog;
 import android.os.Bundle;
 
-import android.content.Intent;
+// import android.content.Intent;
 
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -33,21 +33,21 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
-import android.content.IntentFilter;
+// import android.content.IntentFilter;
 import android.content.Context;
 
 
-public class CalibImportDialog extends MyDialog
+class CalibImportDialog extends MyDialog
                                implements OnItemClickListener
                                , OnClickListener
 { 
   private DeviceActivity mParent;
 
-  private ArrayAdapter<String> mArrayAdapter;
+  // private ArrayAdapter<String> mArrayAdapter;
   private ListView mList;
-  private Button mBtnCancel;
+  // private Button mBtnCancel;
 
-  public CalibImportDialog( Context context, DeviceActivity parent )
+  CalibImportDialog( Context context, DeviceActivity parent )
   {
     super( context, R.string.CalibImportDialog );
     mParent  = parent;
@@ -60,15 +60,15 @@ public class CalibImportDialog extends MyDialog
 
     initLayout( R.layout.import_dialog, R.string.calib_import_title );
 
-    mArrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
+    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
     mList = (ListView) findViewById(R.id.list);
     mList.setOnItemClickListener( this );
     mList.setDividerHeight( 2 );
 
-    mBtnCancel = (Button)findViewById( R.id.button_cancel );
-    mBtnCancel.setOnClickListener( this );
+    Button btnCancel = (Button)findViewById( R.id.button_cancel );
+    btnCancel.setOnClickListener( this );
 
-    // setTitleColor( 0x006d6df6 );
+    // setTitleColor( TDColor.TITLE_NORMAL );
 
     File[] files = TDPath.getCalibFiles();
     ArrayList<String> names = new ArrayList<>();
@@ -86,9 +86,9 @@ public class CalibImportDialog extends MyDialog
       };
       Collections.sort( names, cmp );
       for ( int k=0; k<names.size(); ++k ) {
-        mArrayAdapter.add( names.get(k) );
+        arrayAdapter.add( names.get(k) );
       }
-      mList.setAdapter( mArrayAdapter );
+      mList.setAdapter( arrayAdapter );
     } else {
       Toast.makeText( mContext, R.string.import_none, Toast.LENGTH_SHORT ).show();
       dismiss();

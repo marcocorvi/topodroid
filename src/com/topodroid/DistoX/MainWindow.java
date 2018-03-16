@@ -103,12 +103,16 @@ public class MainWindow extends Activity
                         , OnDismissListener
 {
   private TopoDroidApp mApp;
+  private DataHelper mApp_mData;
+  private boolean mApp_mCosurvey;
+  private int mApp_mCheckPerms;
+
   private Activity mActivity = null;
   private boolean onMenu; // whether menu is displaying
 
   // private LinearLayout mTdLayout;
-  private RelativeLayout mRelLayout;
-  private ListView mList;
+  // private RelativeLayout mRelLayout;
+  // private ListView mList;
 
   // private ArrayAdapter<String> mArrayAdapter;
   private ListItemAdapter mArrayAdapter;
@@ -161,9 +165,9 @@ public class MainWindow extends Activity
     
   public void updateDisplay( )
   {
-    DataHelper data = mApp.mData;
-    if ( data != null ) {
-      List<String> list = data.selectAllSurveys();
+    // DataHelper data = mApp.mData;
+    if ( mApp_mData != null ) {
+      List<String> list = mApp_mData.selectAllSurveys();
       updateList( list );
       if ( say_no_survey && list.size() == 0 ) {
         say_no_survey = false;
@@ -185,6 +189,7 @@ public class MainWindow extends Activity
   // ---------------------------------------------------------------
   // list items click
 
+  @Override
   public void onClick(View view)
   { 
     if ( onMenu ) {
@@ -314,7 +319,7 @@ public class MainWindow extends Activity
   {
     // String title = getResources().getString( R.string.app_name );
     setTitle( mApp.getConnectionStateTitleStr() + mApp.mCWD );
-    setTitleColor( TDColor.NORMAL );
+    setTitleColor( TDColor.TITLE_NORMAL );
     // Log.v("DistoX", "TopoDroid activity set the title <" + mApp.getConnectionStateTitleStr() + title + ">" );
   }
 
@@ -329,7 +334,7 @@ public class MainWindow extends Activity
     if ( filename.endsWith(".th") || filename.endsWith(".TH") ) {
       String filepath = TDPath.getImportFile( filename );
       String name = filename.replace(".th", "" ).replace(".TH", "");
-      if ( mApp.mData.hasSurveyName( name ) ) {
+      if ( mApp_mData.hasSurveyName( name ) ) {
         Toast.makeText(mActivity, R.string.import_already, Toast.LENGTH_SHORT).show();
         setTheTitle();
         return;
@@ -380,7 +385,7 @@ public class MainWindow extends Activity
 
     if ( TDLevel.overNormal )   mMenuAdapter.add( res.getString( menus[0] ) ); // PALETTE
     if ( TDLevel.overAdvanced ) mMenuAdapter.add( res.getString( menus[1] ) ); // LOGS
-    if ( TDLevel.overExpert && mApp.mCosurvey ) mMenuAdapter.add( res.getString( menus[2] ) ); // CO-SURVEY
+    if ( TDLevel.overExpert && mApp_mCosurvey ) mMenuAdapter.add( res.getString( menus[2] ) ); // CO-SURVEY
     mMenuAdapter.add( res.getString( menus[3] ) ); // ABOUT
     mMenuAdapter.add( res.getString( menus[4] ) ); // SETTINGS
     mMenuAdapter.add( res.getString( menus[5] ) ); // HELP
@@ -413,7 +418,7 @@ public class MainWindow extends Activity
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_LOG );
         startActivity( intent );
       } else {  
-        if ( TDLevel.overExpert && mApp.mCosurvey && p++ == pos ) {  // CO-SURVEY
+        if ( TDLevel.overExpert && mApp_mCosurvey && p++ == pos ) {  // CO-SURVEY
           (new ConnectDialog( mActivity, mApp )).show();
         } else { 
           if ( p++ == pos ) { // ABOUT
@@ -444,7 +449,10 @@ public class MainWindow extends Activity
     setContentView(R.layout.topodroid_activity);
     mApp = (TopoDroidApp) getApplication();
     mActivity = this;
-    mApp.mActivity = this;
+    TopoDroidApp.mActivity = this;
+    mApp_mData       = TopoDroidApp.mData;
+    mApp_mCosurvey   = TopoDroidApp.mCosurvey;
+    mApp_mCheckPerms = TopoDroidApp.mCheckPerms;
 
     FeatureChecker.createPermissions( mApp, mActivity );
 
@@ -452,14 +460,14 @@ public class MainWindow extends Activity
     mArrayAdapter = new ListItemAdapter( this, R.layout.message );
 
     // mTdLayout = (LinearLayout) findViewById( R.id.td_layout );
-    mRelLayout = (RelativeLayout) findViewById( R.id.rel_layout );
+    // mRelLayout = (RelativeLayout) findViewById( R.id.rel_layout );
 
-    mList = (ListView) findViewById(R.id.td_list);
-    mList.setAdapter( mArrayAdapter );
-    mList.setOnItemClickListener( this );
-    mList.setLongClickable( true );
-    mList.setOnItemLongClickListener( this );
-    mList.setDividerHeight( 2 );
+    ListView list = (ListView) findViewById(R.id.td_list);
+    list.setAdapter( mArrayAdapter );
+    list.setOnItemClickListener( this );
+    list.setLongClickable( true );
+    list.setOnItemLongClickListener( this );
+    list.setDividerHeight( 2 );
 
     // TDLog.Profile("TDActivity menu");
     mImage = (Button) findViewById( R.id.handle );
@@ -480,9 +488,9 @@ public class MainWindow extends Activity
     // setActionBar( mToolbar );
     // resetToolbar();
 
-    if ( mApp.mCheckPerms != 0 ) {
-      new TopoDroidPerms( this, mApp.mCheckPerms ).show();
-      if ( mApp.mCheckPerms < 0 ) finish();
+    if ( mApp_mCheckPerms != 0 ) {
+      new TopoDroidPerms( this, mApp_mCheckPerms ).show();
+      if ( mApp_mCheckPerms < 0 ) finish();
     } else {
       if ( mApp.mWelcomeScreen ) {
         mApp.setBooleanPreference( "DISTOX_WELCOME_SCREEN", false );
@@ -509,7 +517,7 @@ public class MainWindow extends Activity
     // }
     // // mApp.installSymbols( true );
 
-    // setTitleColor( 0x006d6df6 );
+    // setTitleColor( TDColor.TITLE_NORMAL );
 
     // new AsyncTask<Void,Void,Void>() {
     //   @Override
@@ -523,7 +531,7 @@ public class MainWindow extends Activity
     //   }
     // };
     // TDLog.Profile("TDActivity thread");
-    if ( mApp.mCheckPerms >= 0 ) {
+    if ( mApp_mCheckPerms >= 0 ) {
       Thread loader = new Thread() {
         @Override
         public void run() {
@@ -558,6 +566,7 @@ public class MainWindow extends Activity
     mImage.setBackgroundDrawable( MyButton.getButtonBackground( mApp, getResources(), R.drawable.iz_menu ) );
     for (int k=0; k<mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( mActivity, this, izons[k] );
+      mButton1[k].setElevation(40);
     }
 
     mButtonView1 = new HorizontalButtonView( mButton1 );

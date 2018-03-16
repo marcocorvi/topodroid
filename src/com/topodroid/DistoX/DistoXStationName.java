@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 // import android.util.Log;
 
-public class DistoXStationName
+class DistoXStationName
 {
   static String mInitialStation;
   static String mSecondStation;
@@ -37,7 +37,7 @@ public class DistoXStationName
     'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' 
   };
 
-  public static boolean isLessOrEqual( String lhs, String rhs )
+  static boolean isLessOrEqual( String lhs, String rhs )
   {
     int l1 = lhs.length();
     int l2 = rhs.length();
@@ -76,7 +76,7 @@ public class DistoXStationName
     return ( l1 <= l2 );
   }
 
-  public static String increment( String name, List<DBlock> list )
+  static String increment( String name, List<DBlock> list )
   {
     do {
       name = increment( name ); 
@@ -84,7 +84,7 @@ public class DistoXStationName
     return name;
   }
 
-  public static String increment( String name, ArrayList<String> sts )
+  static String increment( String name, ArrayList<String> sts )
   {
     do {
       name = increment( name ); 
@@ -93,7 +93,7 @@ public class DistoXStationName
   }
 
 
-  public static String increment( String name )
+  static String increment( String name )
   {
     // if name is numeric
     // Log.v( TopoDroidApp.TAG, "incrementing " + name );
@@ -176,7 +176,7 @@ public class DistoXStationName
   }
 
   // check if the ordered list of names contains a name
-  static boolean orderContains( ArrayList< String > a, String s )
+  static private boolean orderContains( ArrayList< String > a, String s )
   {
     int n1 = 0;
     int n2 = a.size();

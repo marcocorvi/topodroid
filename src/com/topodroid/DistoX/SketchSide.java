@@ -21,7 +21,7 @@ class SketchSide
 {
   SketchSurface surface;
   int index;         // index in the array of sides
-  boolean highlight; // whether this side is highlighted
+  private boolean highlight; // whether this side is highlighted
   int v1;            // index of first vertex
   int v2;            // index of second vertex
   SketchTriangle t1;

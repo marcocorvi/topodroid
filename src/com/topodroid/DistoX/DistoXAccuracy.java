@@ -76,19 +76,19 @@ class DistoXAccuracy
     }
   } 
 
-  float deltaAcc( float acc )
+  private float deltaAcc( float acc )
   {
     if ( mAccelerationMean > 0 ) return TDMath.abs( 100*(acc - mAccelerationMean)/mAccelerationMean ); 
     return 0;
   }
 
-  float deltaMag( float mag )
+  private float deltaMag( float mag )
   {
     if ( mMagneticMean > 0 ) return TDMath.abs( 100*(mag - mMagneticMean)/mMagneticMean );
     return 0;
   }
 
-  float deltaDip( float dip ) { return TDMath.abs( dip - mDipMean ); }
+  private float deltaDip( float dip ) { return TDMath.abs( dip - mDipMean ); }
 
   boolean isBlockMagneticBad( DBlock blk )
   {

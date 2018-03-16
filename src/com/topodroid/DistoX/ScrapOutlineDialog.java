@@ -37,7 +37,7 @@ import android.widget.Toast;
 
 import android.util.Log;
 
-public class ScrapOutlineDialog extends MyDialog
+class ScrapOutlineDialog extends MyDialog
                         implements OnItemClickListener
                                 // , OnItemLongClickListener
                                 , View.OnClickListener
@@ -52,7 +52,7 @@ public class ScrapOutlineDialog extends MyDialog
   private ListView mList;
   private List< PlotInfo > mPlots;
 
-  public ScrapOutlineDialog( Context context, DrawingWindow parent, TopoDroidApp app, List< PlotInfo > plots )
+  ScrapOutlineDialog( Context context, DrawingWindow parent, TopoDroidApp app, List< PlotInfo > plots )
   {
     super( context, R.string.ScrapOutlineDialog );
     mParent = parent;

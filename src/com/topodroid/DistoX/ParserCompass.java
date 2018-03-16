@@ -18,17 +18,18 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.util.ArrayList;
 // import java.util.Stack;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 import android.util.Log;
 
-public class ParserCompass extends ImportParser
+class ParserCompass extends ImportParser
 {
   /** Compass parser
    * @param filename name of the file to parse
    * @param apply_declination whether to aapply declination correction
    */
-  public ParserCompass( String filename, boolean apply_declination ) throws ParserException
+  ParserCompass( String filename, boolean apply_declination ) throws ParserException
   {
     super( apply_declination );
     // Log.v("DistoX", "Parser Compass <" + filename + ">" );
@@ -81,7 +82,7 @@ public class ParserCompass extends ImportParser
           if ( mDate == null ) {
             String[] vals = splitLine(line); // line.split( "\\s+" );
             try {
-              mDate = String.format( "%04d.%02d.%02d",
+              mDate = String.format(Locale.US, "%04d.%02d.%02d",
                 Integer.parseInt( vals[4] ), Integer.parseInt( vals[2] ), Integer.parseInt( vals[3] ) );
             } catch ( NumberFormatException e ) { }
             if ( vals.length >= 6 ) {

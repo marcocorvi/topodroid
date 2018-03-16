@@ -794,6 +794,7 @@
     <string name="title_audio">Audio-Kommentar</string>
     <string name="title_calib">Kalibrierung</string>
     <string name="title_calib_check">Kalibrierungs-Testmessungen</string>
+    <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Kalibrierungsdaten</string>
     <string name="title_coeff">Kalibrierungs-Koeffizienten</string>
     <string name="title_contour">Konturen</string>
@@ -1035,6 +1036,8 @@
   <string name="pref_min_leg_message">Kürzere Messtrecken werden orange dargestellt</string>
   <string name="pref_backsight_title">Rückmessungs-Feld anzeigen</string>
   <string name="pref_backsight_summary">Rückmessungs-Feld im Dialog bei neuem manuellen Messzug anzeigen</string>
+  <!-- TODO string name="pref_backshot_title">Backshot DistoX</string -->
+  <!-- TODO string name="pref_backshot_summary">DistoX in backshot mode</string -->
   <string name="pref_prev_next_title">Vorherige/Nächste Messtrecke</string>
   <string name="pref_prev_next_summary">Buttons anzeigen im Messdialog</string>
   <string name="pref_mag_anomaly_title">Magnetische Abweichung</string>

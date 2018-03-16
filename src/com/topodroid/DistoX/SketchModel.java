@@ -53,11 +53,11 @@ class SketchModel
   boolean mDisplaySplays;
   boolean mDisplayForeSurface;
 
-  Sketch3dInfo mInfo;
-  SketchPainter mPainter;
+  private Sketch3dInfo mInfo;
+  private SketchPainter mPainter;
   SketchSurface mCurrentSurface;
 
-  Matrix mMatrix;
+  private Matrix mMatrix;
   List< NumStation > stations;
   // List< NumShot >    shots;
   // List< NumSplay >   splays;
@@ -68,13 +68,13 @@ class SketchModel
   List<SketchSurface>  mSurfaces;
   List<SketchSurface>  mJoins;
 
-  ArrayList< SketchRefinement > mRefines;
-  ArrayList< Vector > mBorder3d;
+  private ArrayList< SketchRefinement > mRefines;
+  private ArrayList< Vector > mBorder3d;
   // SketchLinePath mEditLine;
   // ArrayList< PointF > mBorder;
 
-  SketchUndo mUndo;
-  SketchUndo mRedo;
+  private SketchUndo mUndo;
+  private SketchUndo mRedo;
 
   int mDisplayMode  = SketchDef.DISPLAY_NONE;
   int mActivityMode = SketchDef.MODE_MOVE;
@@ -489,17 +489,17 @@ class SketchModel
     mRedo = null;
   }
 
-  public void addFixedPath( SketchFixedPath path )
+  void addFixedPath( SketchFixedPath path )
   {
     mFixedStack.add( path );
   }
 
-  public void addFixedStation( SketchStationName st )
+  void addFixedStation( SketchStationName st )
   {
     mStations.add( st );
   }
 
-  public void redo()
+  void redo()
   {
     if ( mRedo != null ) {
       SketchUndo redo = mRedo;
@@ -514,7 +514,7 @@ class SketchModel
     }
   }
 
-  public void undo ()
+  void undo ()
   {
     if ( mUndo != null ) {
       SketchUndo undo = mUndo;
@@ -536,14 +536,14 @@ class SketchModel
     }
   }
 
-  public void setTransform( float dx, float dy, float s )
+  void setTransform( float dx, float dy, float s )
   {
     mMatrix = new Matrix();
     mMatrix.postTranslate( dx, dy );
     mMatrix.postScale( s, s );
   }
 
-  public void executeAll( Canvas canvas, Handler doneHandler )
+  void executeAll( Canvas canvas, Handler doneHandler )
   {
     if ( mFixedStack != null ) {
       synchronized( mFixedStack ) {
@@ -689,7 +689,7 @@ class SketchModel
 
   }
 
-  public SketchTriangle selectTriangleAt( float x_scene, float y_scene, SketchTriangle tri, float size )
+  SketchTriangle selectTriangleAt( float x_scene, float y_scene, SketchTriangle tri, float size )
   {
     if ( tri != null ) {
       // try tri first and its ngbhs
@@ -709,7 +709,7 @@ class SketchModel
     return null;
   }
 
-  public SketchFixedPath selectShotAt( float x, float y, float size ) // (x,y) scene coords, view-mode
+  SketchFixedPath selectShotAt( float x, float y, float size ) // (x,y) scene coords, view-mode
   {
     float min_dist = SketchDef.MIN_DISTANCE;
     SketchFixedPath ret = null;
@@ -725,7 +725,7 @@ class SketchModel
     return ret;
   }
 
-  public SketchLinePath selectLineAt( float x, float y, float z, int v, float size ) // (x,y,z) world coords, view-mode
+  SketchLinePath selectLineAt( float x, float y, float z, int v, float size ) // (x,y,z) world coords, view-mode
   {
     float min_dist = SketchDef.MIN_DISTANCE;
     SketchLinePath ret = null;
@@ -742,7 +742,7 @@ class SketchModel
     return ret;
   }
   
-  public SketchStationName selectStationAt( float x, float y, float size ) // (x,y) scene coords, view-mode
+  SketchStationName selectStationAt( float x, float y, float size ) // (x,y) scene coords, view-mode
   {
     float min_dist = SketchDef.MIN_DISTANCE;
     SketchStationName ret = null;
@@ -756,12 +756,12 @@ class SketchModel
     return ret;
   }
 
-  public void deleteLine( SketchLinePath line )
+  void deleteLine( SketchLinePath line )
   {
     mPaths.remove( line );
   }
 
-  public void exportTherion( BufferedWriter out, String sketch_name, String proj_name )
+  void exportTherion( BufferedWriter out, String sketch_name, String proj_name )
   {
     // commandManager.exportTherion( out, sketch_name, plot_name );
     try {
@@ -859,7 +859,7 @@ class SketchModel
     return line;
   } 
 
-  public boolean loadTh3( String filename, SymbolsPalette missingSymbols, SketchPainter painter )
+  boolean loadTh3( String filename, SymbolsPalette missingSymbols, SketchPainter painter )
   {
     float x, y, z, x1, y1, z1, x2, y2, z2;
     int i1, i2, i3;
@@ -1186,12 +1186,12 @@ class SketchModel
     return mSelected.prevHotItem();
   }
 
-  void clearSelected()
-  {
-    synchronized( mSelected ) {
-      mSelected.clear();
-    }
-  }
+  // void clearSelected()
+  // {
+  //   synchronized( mSelected ) {
+  //     mSelected.clear();
+  //   }
+  // }
 
   SketchVertex getVertexAt( float x, float y, float d ) // (x,y) canvas point
   { 
@@ -1214,7 +1214,7 @@ class SketchModel
   //   if ( mCurrentSurface != null ) mCurrentSurface.refineAtSelectedVertex();
   // }
 
-  public static void toTdr( BufferedOutputStream bos, String s ) throws IOException
+  static void toTdr( BufferedOutputStream bos, String s ) throws IOException
   {
     byte[] str = s.getBytes();
     int len = str.length;
@@ -1222,7 +1222,7 @@ class SketchModel
     bos.write( str, 0, len );
   }
 
-  public static void toTdr( BufferedOutputStream bos, float x, float y, float z ) throws IOException
+  static void toTdr( BufferedOutputStream bos, float x, float y, float z ) throws IOException
   {
     ByteBuffer b = ByteBuffer.allocate(12); // e, s, v
     b.putFloat( x );
@@ -1238,19 +1238,19 @@ class SketchModel
   //   bos.write( b.array(), 0, 4 );
   // }
 
-  public static void toTdr( BufferedOutputStream bos, short n ) throws IOException
+  static void toTdr( BufferedOutputStream bos, short n ) throws IOException
   {
     ByteBuffer b = ByteBuffer.allocate(2); 
     b.putShort( n );
     bos.write( b.array(), 0, 2 );
   }
 
-  public static void toTdr( BufferedOutputStream bos, byte b ) throws IOException
+  static void toTdr( BufferedOutputStream bos, byte b ) throws IOException
   {
     bos.write( b );
   }
 
-  public void exportTdr( BufferedOutputStream bos, String sketch_name, String proj_name )
+  void exportTdr( BufferedOutputStream bos, String sketch_name, String proj_name )
   {
     // commandManager.exportTherion( out, sketch_name, plot_name );
     try {
@@ -1353,7 +1353,7 @@ class SketchModel
     // Log.v("DistoX", " V " + nv + "/" + surface.mVertices.size() + " T " + nt + "/" + surface.mTriangles.size() );
   }
 
-  public boolean loadTdr3( String filename, SymbolsPalette missingSymbols, SketchPainter painter )
+  boolean loadTdr3( String filename, SymbolsPalette missingSymbols, SketchPainter painter )
   {
     int k, idx, np;
     float x, y, z;

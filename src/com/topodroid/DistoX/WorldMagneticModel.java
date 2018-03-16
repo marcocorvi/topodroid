@@ -31,23 +31,23 @@ import android.util.Log;
 
 class WorldMagneticModel
 {
-  int nMax;
-  int numTerms;
-  MagModel mModel;
-  static MagDate  mStartEpoch = null;
-  static float    mGeoidHeightBuffer[] = null;
-  static WMMcoeff mWmmCoeff[] = null;
-  MagEllipsoid mEllip;
-  MagGeoid     mGeoid;
+  // private int nMax;
+  // private int numTerms;
+  private MagModel mModel;
+  private static MagDate  mStartEpoch = null;
+  private static float    mGeoidHeightBuffer[] = null;
+  private static WMMcoeff mWmmCoeff[] = null;
+  private MagEllipsoid mEllip;
+  private MagGeoid     mGeoid;
 
   WorldMagneticModel( Context context )
   {
-    nMax = 12;
-    numTerms = MagUtil.CALCULATE_NUMTERMS( nMax );
-    loadWMM( context, numTerms );
+    int n_max = 12;
+    int n_terms = MagUtil.CALCULATE_NUMTERMS( n_max );
+    loadWMM( context, n_terms );
     loadEGM9615( context );
 
-    mModel = new MagModel( numTerms, nMax, nMax );
+    mModel = new MagModel( n_terms, n_max, n_max );
     mModel.epoch = 2015.0;
     mModel.CoefficientFileEndDate = mModel.epoch + 5;
     mModel.setCoeffs( mWmmCoeff );
@@ -170,7 +170,7 @@ class WorldMagneticModel
   final static int ND = 7002;
 
   // this is correct
-  static int byteToInt( byte b[] )
+  static private int byteToInt( byte b[] )
   {
     int i3 = (int)b[3]; 
     int i2 = (int)b[2]; if ( (b[2] & 0x80) == 0x80 ) i2 = 256+i2;
@@ -180,13 +180,12 @@ class WorldMagneticModel
     return ret;
   }
   
-  static int byteToFirst( byte b[] )
+  static private int byteToFirst( byte b[] )
   {
-    int ret = (((int)b[0]) << 4) | (((int)b[1] & 0xF0)>>4);
-    return ret;
+    return (((int)b[0]) << 4) | (((int)b[1] & 0xF0)>>4);
   }
   
-  static int byteToSecond( byte b[] )
+  static private int byteToSecond( byte b[] )
   {
     int ret = (((int)b[2]) << 4) | ((int)b[1] & 0x0F);
     return ret;
@@ -268,7 +267,7 @@ class WorldMagneticModel
     // Log.v("DistoX", "load EGM9615 done");
   }
 
-  static void loadWMM( Context context, int num_terms )
+  static private void loadWMM( Context context, int num_terms )
   {
     {
       if ( mWmmCoeff != null ) return;

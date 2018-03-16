@@ -51,6 +51,7 @@ import android.text.Editable;
 
 import java.util.List;
 // import java.util.ArrayList;
+import java.util.Locale;
 
 import java.util.concurrent.RejectedExecutionException;
 // import java.util.Deque; // only API-9
@@ -58,6 +59,7 @@ import java.util.concurrent.RejectedExecutionException;
 import android.util.Log;
 
 /**
+ * @note this class must be public
  */
 public class ProjectionDialog extends MyDialog
                              implements View.OnTouchListener
@@ -79,8 +81,8 @@ public class ProjectionDialog extends MyDialog
   private EditText mETazimuth;
   private DistoXNum mNum;
 
-  ZoomButtonsController mZoomBtnsCtrl = null;
-  boolean mZoomBtnsCtrlOn = false;
+  private ZoomButtonsController mZoomBtnsCtrl = null;
+  private boolean mZoomBtnsCtrlOn = false;
   private float oldDist;  // zoom pointer-spacing
 
   private int mTouchMode = DrawingWindow.MODE_MOVE;
@@ -108,6 +110,7 @@ public class ProjectionDialog extends MyDialog
 
   List<DBlock> mList = null;
 
+  boolean mETazimuthChanged = false;
 
   public ProjectionDialog( Context context, ShotWindow parent, long sid, String name, String from )
   {
@@ -121,9 +124,10 @@ public class ProjectionDialog extends MyDialog
     mApp     = mParent.getApp();
   }
 
-  void updateEditText() 
+  private void updateEditText()
   { 
-    mETazimuth.setText( Integer.toString( (int)mAzimuth ) ); 
+    mETazimuth.setText( String.format(Locale.US, "%d", mAzimuth ) );
+    Log.v("DistoX", "set azimuth " + mAzimuth );
   }
 
   // -------------------------------------------------------------------
@@ -160,8 +164,8 @@ public class ProjectionDialog extends MyDialog
     // if ( mZoomBtnsCtrlOn ) mZoomBtnsCtrl.setVisible( false );
   }
 
-  public void zoomIn()  { changeZoom( DrawingWindow.ZOOM_INC ); }
-  public void zoomOut() { changeZoom( DrawingWindow.ZOOM_DEC ); }
+  void zoomIn()  { changeZoom( DrawingWindow.ZOOM_INC ); }
+  void zoomOut() { changeZoom( DrawingWindow.ZOOM_DEC ); }
   // public void zoomOne() { resetZoom( ); }
 
   // public void zoomView( )
@@ -340,7 +344,8 @@ public class ProjectionDialog extends MyDialog
           seekbar.setProgress( progress - 360 );
         } else {
           computeReferences();
-          if ( ! mETazimuth.hasFocus() ) updateEditText();
+          if ( ! mETazimuthChanged ) updateEditText();
+	  mETazimuthChanged = false;
         }
         // Log.v("DistoX", "set azimuth " + mAzimuth );
       }
@@ -370,7 +375,7 @@ public class ProjectionDialog extends MyDialog
       {
         try {
           int azimuth = Integer.parseInt( mETazimuth.getText().toString() );
-          if ( azimuth < 0 || azimuth > 360 ) azimuth = 0;
+          // if ( azimuth < 0 || azimuth > 360 ) azimuth = 0;
           setAzimuth( azimuth, false );
           // updateSeekBar();
           // updateView();
@@ -398,7 +403,8 @@ public class ProjectionDialog extends MyDialog
   void setAzimuth( int a, boolean edit_text )
   {
     mAzimuth = a;
-    if ( mAzimuth < 0 || mAzimuth >= 360 ) mAzimuth = 0;
+    if ( mAzimuth < 0 || mAzimuth >= 360 ) { mAzimuth = 0; edit_text = true; }
+    mETazimuthChanged = ! edit_text;
     computeReferences();
     mSeekBar.setProgress( ( mAzimuth < 180 )? 200 + mAzimuth : mAzimuth - 160 );
     if ( edit_text ) updateEditText();
@@ -599,6 +605,7 @@ public class ProjectionDialog extends MyDialog
       return true;
    }
 
+   @Override
    public void onClick(View view)
    {
      Button b = (Button)view;

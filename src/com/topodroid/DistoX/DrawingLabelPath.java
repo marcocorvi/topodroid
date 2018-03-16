@@ -28,12 +28,12 @@ import java.util.Locale;
 
 /**
  */
-public class DrawingLabelPath extends DrawingPointPath
+class DrawingLabelPath extends DrawingPointPath
 {
   private static float toTherion = TDConst.TO_THERION;
   // private Paint paint;
 
-  public DrawingLabelPath( String text, float off_x, float off_y, int scale, String options )
+  DrawingLabelPath( String text, float off_x, float off_y, int scale, String options )
   {
     super( BrushManager.mPointLib.mPointLabelIndex, off_x, off_y, scale, text, options );
     // mPointText = text;

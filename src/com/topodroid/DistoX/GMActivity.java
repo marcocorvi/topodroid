@@ -91,7 +91,8 @@ public class GMActivity extends Activity
                         R.drawable.iz_compute,
                         R.drawable.iz_cover,
                         R.drawable.iz_read,
-                        R.drawable.iz_write
+                        R.drawable.iz_write,
+                        R.drawable.iz_empty
                      };
   final static int BTN_TOGGLE   = 0;
   final static int BTN_BT       = 1;
@@ -698,8 +699,8 @@ public class GMActivity extends Activity
     if ( TDLevel.overBasic  ) mNrButton1 += 1; // COVER
     if ( TDLevel.overNormal ) mNrButton1 += 2; // READ WRITE
     Resources res = getResources();
-    mButton1 = new Button[ mNrButton1 ];
-    for ( int k=0; k<mNrButton1; ++k ) {
+    mButton1 = new Button[ mNrButton1+1 ];
+    for ( int k=0; k<=mNrButton1; ++k ) { // add also EMPTY button
       mButton1[k] = MyButton.getButton( this, this, izons[k] );
     }
     if ( TDLevel.overAdvanced && mApp.distoType() == Device.DISTO_X310 ) {
@@ -737,6 +738,7 @@ public class GMActivity extends Activity
     mImage.setBackgroundDrawable( MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter( res );
+    onMenu = true;
     closeMenu();
     // HOVER
     mMenu.setOnItemClickListener( this );
@@ -746,9 +748,9 @@ public class GMActivity extends Activity
   {
     setTitle( mCalibName );
     if ( mBlkStatus == 0 ) {
-      setTitleColor( TDColor.NORMAL );
+      setTitleColor( TDColor.TITLE_NORMAL );
     } else {
-      setTitleColor( TDColor.NORMAL2 );
+      setTitleColor( TDColor.TITLE_NORMAL2 );
     }
   }
 
@@ -783,7 +785,7 @@ public class GMActivity extends Activity
       mButton1[BTN_WRITE].setBackgroundDrawable( ( enable2 ? mBMwrite : mBMwrite_no ) );
     }
     if ( enable ) {
-      setTitleColor( TDColor.NORMAL );
+      setTitleColor( TDColor.TITLE_NORMAL );
       mButton1[BTN_TOGGLE].setBackgroundDrawable( mBMtoggle );
       mButton1[BTN_BT].setBackgroundDrawable( mBMbluetooth );
     } else {
@@ -825,6 +827,7 @@ public class GMActivity extends Activity
     return false;
   }
 
+  @Override
   public void onClick(View view)
   {
     if ( closeMenu() ) return;
@@ -1080,7 +1083,8 @@ public class GMActivity extends Activity
         return onSearchRequested();
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
         String help_page = getResources().getString( R.string.GMActivity );
-        if ( help_page != null ) UserManualActivity.showHelpPage( this, help_page );
+        // if ( help_page != null )
+             UserManualActivity.showHelpPage( this, help_page );
         return true;
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)

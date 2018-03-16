@@ -16,6 +16,7 @@ import java.util.Iterator;
 import java.io.File;
 
 import java.util.List;
+import java.util.Locale;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -50,7 +51,7 @@ import android.net.Uri;
 
 import android.util.Log;
 
-public class FixedGpsDialog extends MyDialog
+class FixedGpsDialog extends MyDialog
                             implements View.OnClickListener
                                      , View.OnLongClickListener
                                      , TextView.OnEditorActionListener
@@ -87,7 +88,7 @@ public class FixedGpsDialog extends MyDialog
 
   private MyKeyboard mKeyboard;
 
-  public FixedGpsDialog( Context context, FixedActivity parent )
+  FixedGpsDialog( Context context, FixedActivity parent )
   {
     super(context, R.string.FixedGpsDialog );
     mParent = parent;
@@ -156,7 +157,7 @@ public class FixedGpsDialog extends MyDialog
       return;
     }
     String comment = mETcomment.getText().toString();
-    if ( comment == null ) comment = "";
+    // if ( comment == null ) comment = "";
     mParent.addFixedPoint( name, mLng, mLat, mHEll, mHGeo, comment, FixedInfo.SRC_TOPODROID );
   }
 
@@ -313,7 +314,7 @@ public class FixedGpsDialog extends MyDialog
         if ( sat.usedInFix() ) ++nr;
       }
       // TDLog.Log(TDLog.LOG_LOC, "onGpsStatusChanged nr satellites used in fix " + nr );
-      mBtnStatus.setText( Integer.toString( nr ) );
+      mBtnStatus.setText( String.format(Locale.US, "%d", nr ) );
       switch ( nr ) {
         case 0: mBtnStatus.setBackgroundColor( 0x80ff0000 );
                 break;

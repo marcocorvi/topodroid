@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-import java.io.File;
+// import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.FileReader;
@@ -23,9 +23,9 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.content.Context;
 
-import android.content.Intent;
+// import android.content.Intent;
 
-import android.widget.TextView;
+// import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
 import android.view.View;
@@ -34,7 +34,7 @@ import android.view.ViewGroup.LayoutParams;
 // import android.view.KeyEvent;
 
 
-public class DistoXAnnotations extends MyDialog // Activity
+class DistoXAnnotations extends MyDialog // Activity
                                implements View.OnClickListener
 {
   // private TextView mTVtitle;
@@ -101,10 +101,7 @@ public class DistoXAnnotations extends MyDialog // Activity
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-
-    setContentView(R.layout.distox_annotations);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
-    setTitle( R.string.title_note );
+    initLayout( R.layout.distox_annotations, R.string.title_note );
 
     // mTVtitle  = (TextView) findViewById(R.id.note_title );
     mETtext   = (EditText) findViewById(R.id.note_text );

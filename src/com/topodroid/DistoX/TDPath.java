@@ -26,7 +26,7 @@ import android.os.RemoteException;
 
 import android.util.Log;
 
-public class TDPath
+class TDPath
 {
   final static int NR_BACKUP = 5;
   final static String BCK_SUFFIX = ".bck";
@@ -114,7 +114,10 @@ public class TDPath
   private static String PATH_ZIP;    //  = PATH_BASE + "zip/";
   // private static String APP_TLX_PATH ; //  = PATH_BASE + "tlx/";
 
-  final static Object mTherionLock = new Object();
+  final static Object mTherionLock   = new Object();
+  final static Object mXSectionsLock = new Object();
+  final static Object mSelectionLock = new Object();
+  final static Object mSelectedLock  = new Object();
 
   static String getDatabase() { return getDirFile( "distox14.sqlite" ); }
   static String getDeviceDatabase() { return PATH_DEFAULT + "device10.sqlite"; }
@@ -317,9 +320,9 @@ public class TDPath
   // ------------------------------------------------------------------
   // FILE NAMES
 
-  public static String getSqlFile() { return PATH_BASE + "survey.sql"; }
+  static String getSqlFile() { return PATH_BASE + "survey.sql"; }
 
-  public static String getManifestFile() { return PATH_BASE + "manifest"; }
+  static String getManifestFile() { return PATH_BASE + "manifest"; }
 
   static String getSymbolFile( String name ) { return APP_SYMBOL_PATH + name; }
   static String getSymbolSaveFile( String name ) { return APP_SYMBOL_SAVE_PATH + name; }

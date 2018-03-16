@@ -18,7 +18,7 @@ class AudioInfo
   public long shotid;    // shot id
   public String mDate;
 
-  public AudioInfo( long _sid, long _id, long _shotid, String dt )
+  AudioInfo( long _sid, long _id, long _shotid, String dt )
   {
     sid    = _sid;
     id     = _id;

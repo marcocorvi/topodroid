@@ -26,21 +26,21 @@ import android.util.Log;
 class PTFile
 {
 
-  static byte bytes2byte( byte[] b ) 
+  static private byte bytes2byte( byte[] b )
   {
     final ByteBuffer bb = ByteBuffer.wrap( b );
     bb.order( ByteOrder.LITTLE_ENDIAN );
     return bb.get(0);
   }
  
-  static int bytes2int( byte[] b ) 
+  static private int bytes2int( byte[] b )
   {
     final ByteBuffer bb = ByteBuffer.wrap( b );
     bb.order( ByteOrder.LITTLE_ENDIAN );
     return bb.getInt();
   }
  
-  static byte[] int2bytes( int i )
+  static private byte[] int2bytes( int i )
   { 
     final ByteBuffer bb = ByteBuffer.allocate( Integer.SIZE / Byte.SIZE );
     bb.order( ByteOrder.LITTLE_ENDIAN );
@@ -48,14 +48,14 @@ class PTFile
     return bb.array();
   }
 
-  static int bytes2short( byte[] b ) 
+  static private int bytes2short( byte[] b )
   {
     final ByteBuffer bb = ByteBuffer.wrap( b );
     bb.order( ByteOrder.LITTLE_ENDIAN );
     return bb.getShort();
   }
  
-  static byte[] short2bytes( short i )
+  static private byte[] short2bytes( short i )
   { 
     final ByteBuffer bb = ByteBuffer.allocate( Short.SIZE / Byte.SIZE );
     bb.order( ByteOrder.LITTLE_ENDIAN );
@@ -63,14 +63,14 @@ class PTFile
     return bb.array();
   }
 
-  static long bytes2long( byte[] b ) 
+  static private long bytes2long( byte[] b )
   {
     final ByteBuffer bb = ByteBuffer.wrap( b );
     bb.order( ByteOrder.LITTLE_ENDIAN );
     return bb.getLong();
   }
  
-  static byte[] long2bytes( long i )
+  static private byte[] long2bytes( long i )
   { 
     final ByteBuffer bb = ByteBuffer.allocate( Long.SIZE / Byte.SIZE );
     bb.order( ByteOrder.LITTLE_ENDIAN );
@@ -195,14 +195,14 @@ class PTFile
     // int _trip_count;
     // int _shot_count;
     // int _ref_count;
-    ArrayList< PTTrip > _trips;
-    ArrayList< PTShot > _shots;
-    ArrayList< PTReference > _references;
-    HashMap<String,Integer> stationsId;
+    private ArrayList< PTTrip > _trips;
+    private ArrayList< PTShot > _shots;
+    private ArrayList< PTReference > _references;
+    private HashMap<String,Integer> stationsId;
 
-    PTMapping _overview;
-    PTDrawing _outline;
-    PTDrawing _sideview;
+    private PTMapping _overview;
+    private PTDrawing _outline;
+    private PTDrawing _sideview;
 
     // String[] _color_line;  // color --> th_line
     // String[] _color_point; // color --> th_point

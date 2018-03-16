@@ -20,9 +20,9 @@ import android.graphics.Path;
 
 class Symbol implements SymbolInterface
 {
-  public static final int POINT = 1;
-  public static final int LINE  = 2;
-  public static final int AREA  = 3;
+  static final int POINT = 1;
+  static final int LINE  = 2;
+  static final int AREA  = 3;
 
   boolean mEnabled;  //!< whether the symbol is enabled in the library
   String  mThName;   // therion name

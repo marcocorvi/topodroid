@@ -14,22 +14,22 @@
  */
 package com.topodroid.DistoX;
 
-import android.graphics.Canvas;
-import android.graphics.Paint;
+// import android.graphics.Canvas;
+// import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.Matrix;
+// import android.graphics.Matrix;
 
 
-import java.util.Iterator;
+// import java.util.Iterator;
 // import java.util.List;
 import java.util.ArrayList;
 
 // used by Log.e
-import android.util.Log;
+// import android.util.Log;
 
 /**
  */
-public class DrawingPointLinePath extends DrawingPath
+class DrawingPointLinePath extends DrawingPath
 {
   private boolean mVisible; // visible line
   private boolean mClosed;
@@ -149,7 +149,7 @@ public class DrawingPointLinePath extends DrawingPath
   }
 
 
-  public DrawingPointLinePath( int path_type, boolean visible, boolean closed )
+  DrawingPointLinePath( int path_type, boolean visible, boolean closed )
   {
     super( path_type, null ); // DrawingPath.DRAWING_PATH_AREA );
     // mPoints  = new ArrayList<>();
@@ -337,7 +337,7 @@ public class DrawingPointLinePath extends DrawingPath
     // Log.v( TopoDroidApp.TAG, "make straight final size " + mPoints.size() );
   }
     
-  public void addStartPoint( float x, float y ) 
+  void addStartPoint( float x, float y ) 
   {
     // mPrevPoint = new LinePoint(x,y, null);
     // mPoints.add( mPrevPoint );
@@ -349,7 +349,7 @@ public class DrawingPointLinePath extends DrawingPath
     top  = bottom = y;
   }
 
-  public void addPoint( float x, float y ) 
+  void addPoint( float x, float y ) 
   {
     if ( Float.isNaN(x) || Float.isNaN(y) ) return;
     if ( mFirst == null ) {
@@ -365,7 +365,7 @@ public class DrawingPointLinePath extends DrawingPath
     }
   }
 
-  public void addPoint3( float x1, float y1, float x2, float y2, float x, float y ) 
+  void addPoint3( float x1, float y1, float x2, float y2, float x, float y ) 
   {
     if ( Float.isNaN(x) || Float.isNaN(y) ) return;
     if ( mFirst == null ) {
@@ -388,7 +388,7 @@ public class DrawingPointLinePath extends DrawingPath
   }
 
   // ----------------------------------------------
-  protected void addStartPointNoPath( float x, float y ) 
+  void addStartPointNoPath( float x, float y ) 
   {
     mFirst = mLast = new LinePoint(x,y, null);
     ++ mSize;
@@ -396,7 +396,7 @@ public class DrawingPointLinePath extends DrawingPath
     top  = bottom = y;
   }
 
-  protected void addPointNoPath( float x, float y ) 
+  void addPointNoPath( float x, float y ) 
   {
     mLast = new LinePoint(x, y, mLast);
     ++ mSize;
@@ -404,7 +404,7 @@ public class DrawingPointLinePath extends DrawingPath
     if ( y < top  ) { top  = y; } else if ( y > bottom ) { bottom = y; }
   }
 
-  protected void addPoint3NoPath( float x1, float y1, float x2, float y2, float x, float y ) 
+  void addPoint3NoPath( float x1, float y1, float x2, float y2, float x, float y ) 
   {
     mLast = new LinePoint( x1,y1, x2,y2, x,y, mLast );
     ++mSize;
@@ -538,7 +538,7 @@ public class DrawingPointLinePath extends DrawingPath
     return (dist > 0 )? TDMath.sqrt(dist) : 0;
   }
 
-  public void closePath() 
+  void closePath() 
   {
     mPath.close();
     // Log.v( TopoDroidApp.TAG, "area close path" );

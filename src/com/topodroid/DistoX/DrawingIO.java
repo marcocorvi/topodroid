@@ -20,8 +20,8 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
+// import java.io.ByteArrayInputStream;
+// import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.StringWriter;
@@ -29,16 +29,16 @@ import java.io.PrintWriter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.EOFException;
+// import java.io.EOFException;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.HashMap;
+// import java.util.HashMap;
 import java.util.Locale;
 
 import android.graphics.RectF;
 
-import android.util.Log;
+// import android.util.Log;
 
 class DrawingIO
 {
@@ -61,7 +61,7 @@ class DrawingIO
     return line;
   } 
 
-  public static boolean doLoadTherion( DrawingSurface surface,
+  static boolean doLoadTherion( DrawingSurface surface,
                                 String filename,
                                 float dx, float dy,
                                 SymbolsPalette missingSymbols,
@@ -419,7 +419,7 @@ class DrawingIO
                   }
                   // Log.v( "DistoX", "  line start point: <" + line + "> " + x + " " + y );
                   while ( (line = readLine( br )) != null ) {
-                    if ( line.indexOf( "l-size" ) >= 0 ) continue;
+                    if ( line.contains( "l-size" ) ) continue;
                     if ( line.equals( "endline" ) ) {
                       if ( path != null ) {
                         if ( type.equals("section") ) { // section line only in non-section scraps
@@ -480,7 +480,7 @@ class DrawingIO
     }
     // remove repeated names
 
-    return (missingSymbols != null )? missingSymbols.isOK() : true;
+    return (missingSymbols == null ) || missingSymbols.isOK();
   }
 
   // =========================================================================
@@ -491,7 +491,7 @@ class DrawingIO
   // which calls the full method exportTherion with the list of sketch items
   //
   // FIXME DataHelper and SID are necessary to export splays by the station
-  static public void exportTherion( // DataHelper dh, long sid, 
+  static void exportTherion( // DataHelper dh, long sid,
                        DrawingSurface surface, int type, File file, String fullname, String projname, int proj_dir )
   {
     // Log.v("DistoX", "Export Therion file " + file.getPath() );
@@ -506,7 +506,7 @@ class DrawingIO
     }
   }
 
-  static public void exportDataStream( DrawingSurface surface, int type, File file, String fullname, int proj_dir )
+  static void exportDataStream( DrawingSurface surface, int type, File file, String fullname, int proj_dir )
   {
     try {
       FileOutputStream fos = new FileOutputStream( file );
@@ -530,7 +530,7 @@ class DrawingIO
     }
   }
 
-  static public void exportDataStream( List<DrawingPath> paths, int type, File file, String fullname, int proj_dir )
+  static void exportDataStream( List<DrawingPath> paths, int type, File file, String fullname, int proj_dir )
   {
     try {
       FileOutputStream fos = new FileOutputStream( file );
@@ -580,7 +580,7 @@ class DrawingIO
   // stations: U
   // E
 
-  static public int skipTdrHeader( DataInputStream dis )
+  static int skipTdrHeader( DataInputStream dis )
   {
     int what, type, dir;
     int version = 0;
@@ -622,7 +622,7 @@ class DrawingIO
     return (flag == 0x07)? version : 0;
   }
 
-  static public boolean doLoadDataStream( DrawingSurface surface,
+  static boolean doLoadDataStream( DrawingSurface surface,
                                    String filename,
                                    float dx, float dy,
                                    SymbolsPalette missingSymbols,
@@ -774,10 +774,10 @@ class DrawingIO
       }
       // Log.v("DistoX", "read: " + sb.toString() );
     }
-    return (missingSymbols != null )? missingSymbols.isOK() : true;
+    return (missingSymbols == null ) || missingSymbols.isOK();
   }
 
-  static public void doLoadOutlineDataStream( DrawingSurface surface,
+  static void doLoadOutlineDataStream( DrawingSurface surface,
                                    String filename,
                                    float dx, float dy, String name )
   {
@@ -937,16 +937,16 @@ class DrawingIO
     }
   }
 
-  static public void exportDataStream( 
+  static void exportDataStream(
       int type,
       DataOutputStream dos,
       String scrap_name,
       int proj_dir,
       RectF bbox,
       DrawingPath north,
-      List<ICanvasCommand> cstack,
-      List<DrawingStationPath> userstations,
-      List<DrawingStationName> stations )
+      final List<ICanvasCommand> cstack,
+      final List<DrawingStationPath> userstations,
+      final List<DrawingStationName> stations )
   {
     try { 
       dos.write( 'V' ); // version
@@ -1084,7 +1084,7 @@ class DrawingIO
   }
 
   // FIXME DataHelper and SID are necessary to export splays by the station
-  static public void exportTherion( // DataHelper dh, long sid,
+  static void exportTherion( // DataHelper dh, long sid,
                       int type, BufferedWriter out, String scrap_name, String proj_name, int project_dir,
         RectF bbox,
         DrawingPath north,
@@ -1312,7 +1312,7 @@ class DrawingIO
     }
   }
   
-  static public void doExportCsxXSection( PrintWriter pw, String filename,
+  static void doExportCsxXSection( PrintWriter pw, String filename,
                                           String survey, String cave, String branch, String bind, DrawingUtil drawingUtil )
   {
     File file = new File( filename );

@@ -30,7 +30,7 @@ import android.widget.LinearLayout;
 import android.util.Log;
 
 
-public class SymbolReload extends MyDialog
+class SymbolReload extends MyDialog
                           implements View.OnClickListener
 {
   private TopoDroidApp mApp;
@@ -50,7 +50,7 @@ public class SymbolReload extends MyDialog
 
   private boolean mAll;
 
-  public SymbolReload( Context context, TopoDroidApp app, boolean all )
+  SymbolReload( Context context, TopoDroidApp app, boolean all )
   {
     super(context, R.string.SymbolReload );
     mApp = app;
@@ -96,7 +96,7 @@ public class SymbolReload extends MyDialog
       mCBbio.setVisibility( View.GONE );
       mCBkarst.setVisibility( View.GONE );
       mBtnInstall.setVisibility( View.GONE );
-      String version = mApp.mDData.getValue( "symbol_version" );
+      String version = TopoDroidApp.mDData.getValue( "symbol_version" );
       tv.setText( String.format( mApp.getResources().getString(R.string.symbols_ask), TopoDroidApp.SYMBOL_VERSION, version ) );
     } else {
       mBtnInstall.setOnClickListener( this );

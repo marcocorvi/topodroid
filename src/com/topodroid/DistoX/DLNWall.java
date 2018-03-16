@@ -23,14 +23,14 @@ import android.util.Log;
 
 class DLNWall
 {
-  ArrayList< DLNTriangle > mTri;
-  ArrayList< DLNSideList > mHull; // convex hull
+  private ArrayList< DLNTriangle > mTri;
+  private ArrayList< DLNSideList > mHull; // convex hull
   ArrayList< DLNSideList > mPosHull;
   ArrayList< DLNSideList > mNegHull;
-  Point2D P0;
-  Point2D P1;
-  Point2D P01;
-  float P01len2;
+  private Point2D P0;
+  private Point2D P1;
+  private Point2D P01;
+  private float P01len2;
 
   DLNWall( Point2D p0, Point2D p1 )
   {
@@ -282,7 +282,7 @@ class DLNWall
   //   }
   // }
 
-  void setSitePole( DLNSite site )
+  private void setSitePole( DLNSite site )
   {
     for ( DLNTriangle t : mTri ) {
       if ( t.hasPoint( site ) ) {
@@ -293,7 +293,7 @@ class DLNWall
     }
   }
 
-  boolean isIntersection( Point2D q0, Point2D q1 )
+  private boolean isIntersection( Point2D q0, Point2D q1 )
   {
     {
       float xp = P1.x - P0.x;
@@ -308,7 +308,7 @@ class DLNWall
     return true;
   }
 
-  int sign( DLNSideList hs )
+  private int sign( DLNSideList hs )
   {
     DLNSide s = hs.side;
     Point2D p1 = s.mP1.sub( P0 );
@@ -330,7 +330,7 @@ class DLNWall
   //   return true;
   // }
 
-  void doTriangle( DLNTriangle t0, Point2D p )
+  private void doTriangle( DLNTriangle t0, Point2D p )
   {
     Stack< DLNTriangle > stack = new Stack< DLNTriangle >();
     stack.add( t0 );
@@ -340,7 +340,7 @@ class DLNWall
     // consistency();
   }
 
-  boolean isInsideHull( Point2D p )
+  private boolean isInsideHull( Point2D p )
   {
     double a = 0;
     for ( DLNSideList it : mHull ) {
@@ -359,7 +359,7 @@ class DLNWall
   }
   
   
-  void handleTriangle( Stack< DLNTriangle > stack, Point2D p1 )
+  private void handleTriangle( Stack< DLNTriangle > stack, Point2D p1 )
   {
     DLNTriangle t1 = stack.pop();
     DLNSide s1 = t1.sideOf( p1 );
@@ -431,7 +431,7 @@ class DLNWall
   //   for ( DLNTriangle t : mTri ) consistency( t );
   // }
 
-  void removeTriangle( DLNTriangle t ) { mTri.remove( t ); }
+  private void removeTriangle( DLNTriangle t ) { mTri.remove( t ); }
 
 }
 

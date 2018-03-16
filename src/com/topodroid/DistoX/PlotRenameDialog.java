@@ -27,7 +27,7 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
 
-public class PlotRenameDialog extends MyDialog
+class PlotRenameDialog extends MyDialog
                               implements View.OnClickListener
 {
   private EditText mEtName;
@@ -86,6 +86,7 @@ public class PlotRenameDialog extends MyDialog
     setTitle( R.string.title_plot_rename );
   }
 
+  @Override
   public void onClick(View v) 
   {
     // When the user clicks, just finish this activity.

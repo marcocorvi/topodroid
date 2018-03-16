@@ -24,12 +24,12 @@ package com.topodroid.DistoX;
 
 import java.lang.Math;
 
-import java.util.Locale;
+// import java.util.Locale;
 
 // used by logCoeff
-import android.util.Log;
+// import android.util.Log;
 
-public class CalibAlgoBH extends CalibAlgo
+class CalibAlgoBH extends CalibAlgo
 {
   // private boolean mNonLinear;
   // private Vector nL;
@@ -51,7 +51,7 @@ public class CalibAlgoBH extends CalibAlgo
   }
 
 
-  public CalibAlgoBH( int N, boolean nonLinear )
+  CalibAlgoBH( int N, boolean nonLinear )
   {
     super( N, nonLinear );
     // mNonLinear = nonLinear;

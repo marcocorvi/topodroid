@@ -97,7 +97,7 @@ public class CWDActivity extends Activity
 	return false;
       }
     }
-    if ( dir_name.indexOf("/") >= 0 ) {
+    if ( dir_name.contains("/") ) {
       Toast.makeText( this, R.string.bad_cwd, Toast.LENGTH_SHORT ).show();
       return false;
     }

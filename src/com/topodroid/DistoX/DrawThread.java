@@ -13,7 +13,7 @@ package com.topodroid.DistoX;
 
 import android.view.SurfaceHolder;
 
-import android.util.Log;
+// import android.util.Log;
 
 
 class DrawThread extends  Thread
@@ -23,14 +23,14 @@ class DrawThread extends  Thread
 
   private IDrawingSurface mParent;
 
-  public DrawThread( IDrawingSurface parent, SurfaceHolder holder)
+  DrawThread( IDrawingSurface parent, SurfaceHolder holder)
   {
     // TDLog.Log( TDLog.LOG_PLOT, "draw thread cstr");
     mParent = parent;
     mHolder = holder;
   }
 
-  public void setHolder( SurfaceHolder holder )
+  void setHolder( SurfaceHolder holder )
   {
     // TDLog.Log( TDLog.LOG_PLOT, "draw thread set holder " + ( ( holder == null )? "null" : "non-null" ) );
     mHolder = holder;

@@ -29,16 +29,16 @@ import android.view.KeyEvent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-public class SensorEditDialog extends MyDialog
+class SensorEditDialog extends MyDialog
                              implements View.OnClickListener
 {
   private SensorListActivity mParent;
   private SensorInfo mSensor;
 
-  private TextView mTVtype;
-  private TextView mTVtitle;
-  private TextView mTVshotname;
-  private TextView mTVvalue;
+  // private TextView mTVtype;
+  // private TextView mTVtitle;
+  // private TextView mTVshotname;
+  // private TextView mTVvalue;
 
   private EditText mETcomment;  // sensor comment
   private Button   mButtonOK;
@@ -63,19 +63,19 @@ public class SensorEditDialog extends MyDialog
     // TDLog.Log( TDLog.LOG_PHOTO, "onCreate" );
     initLayout( R.layout.sensor_edit_dialog, R.string.title_sensor_edit );
 
-    mTVtitle      = (TextView) findViewById( R.id.sensor_title );
-    mTVtype       = (TextView) findViewById( R.id.sensor_type );
-    mTVvalue      = (TextView) findViewById( R.id.sensor_value );
-    mTVshotname   = (TextView) findViewById( R.id.sensor_shotname );
+    TextView tVtitle      = (TextView) findViewById( R.id.sensor_title );
+    TextView tVtype       = (TextView) findViewById( R.id.sensor_type );
+    TextView tVvalue      = (TextView) findViewById( R.id.sensor_value );
+    TextView tVshotname   = (TextView) findViewById( R.id.sensor_shotname );
     mETcomment    = (EditText) findViewById( R.id.sensor_comment );
     mButtonOK     = (Button) findViewById( R.id.sensor_ok );
     mButtonDelete = (Button) findViewById( R.id.sensor_delete );
     // mButtonCancel = (Button) findViewById( R.id.sensor_cancel );
 
-    mTVtitle.setText( mSensor.mTitle );
-    mTVtype.setText( mSensor.mType );
-    mTVvalue.setText( mSensor.mValue );
-    mTVshotname.setText( mSensor.mShotName );
+    tVtitle.setText( mSensor.mTitle );
+    tVtype.setText( mSensor.mType );
+    tVvalue.setText( mSensor.mValue );
+    tVshotname.setText( mSensor.mShotName );
     // public String mSensor.mDate;
     if ( mSensor.mComment != null ) {
       mETcomment.setText( mSensor.mComment );

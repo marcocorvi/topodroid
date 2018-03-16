@@ -14,7 +14,7 @@ package com.topodroid.DistoX;
 import java.io.File;
 import java.io.IOException;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 
 import android.content.Context;
@@ -22,9 +22,10 @@ import android.content.Context;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.EditText;
-import android.widget.Button;
-import android.widget.CheckBox;
+// import android.widget.Button;
+// import android.widget.CheckBox;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 
 import android.widget.ImageView;
 import android.graphics.Bitmap;
@@ -32,9 +33,9 @@ import android.graphics.BitmapFactory;
 
 import android.media.ExifInterface;
 
-import android.util.Log;
+// import android.util.Log;
 
-public class DrawingLineSectionDialog extends MyDialog
+class DrawingLineSectionDialog extends MyDialog
                                implements View.OnClickListener
 {
   private DrawingLinePath mLine;
@@ -45,10 +46,10 @@ public class DrawingLineSectionDialog extends MyDialog
   private TextView mTVoptions;
   // private CheckBox mReversed;
   String mId;
-  PlotInfo mPlotInfo;
+  private PlotInfo mPlotInfo;
   String  mFrom;
   String  mTo;
-  String  mNick;
+  private String  mNick;
   float   mAzimuth;
   float   mClino;
   private int mOrientation = 0;
@@ -65,13 +66,13 @@ public class DrawingLineSectionDialog extends MyDialog
   // private Button   mBtnCancel;
   private EditText mETnick;
   private ImageView mIVimage;   // photo image
-  boolean mHSection;
-  boolean mExists;
-  String  mFilename;
+  private boolean mHSection;
+  private boolean mExists;
+  private String  mFilename;
   private boolean hasPhoto;
-  float mTT; // intersection abscissa
+  private float mTT; // intersection abscissa
   
-  public DrawingLineSectionDialog( Context context,
+  DrawingLineSectionDialog( Context context,
                                    DrawingWindow parent, TopoDroidApp app, boolean h_section, boolean exists, String id,
                                    DrawingLinePath line, String from, String to, float azimuth, float clino, float tt0 )
   {
@@ -117,9 +118,9 @@ public class DrawingLineSectionDialog extends MyDialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.drawing_line_section_dialog);
-
-    setTitle( String.format( mParent.getResources().getString( R.string.title_draw_line ),
+    // cannot use initLayout
+    initLayout( R.layout.drawing_line_section_dialog,
+     String.format( mParent.getResources().getString( R.string.title_draw_line ),
               BrushManager.mLineLib.getSymbolThName( mLine.mLineType ) ) + " " + mFrom + " " + mTo );
 
     mTVoptions = (TextView) findViewById( R.id.line_options );
@@ -152,8 +153,8 @@ public class DrawingLineSectionDialog extends MyDialog
       lp.setMargins( 0, -10, 40, 10 );
       mBtnFoto.setLayoutParams( lp );
       mBtnFoto.setOnClickListener( this );
-    } else {
-      // mBtnFoto.setVisibility( View.GONE );
+    // } else {
+    //   /* mBtnFoto.setVisibility( View.GONE ); */
     }
 
     // mBtnDraw = (Button) findViewById( R.id.button_draw );

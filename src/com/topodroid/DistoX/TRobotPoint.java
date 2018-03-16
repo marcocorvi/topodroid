@@ -13,7 +13,7 @@ package com.topodroid.DistoX;
 
 import android.util.Log;
 
-public class TRobotPoint
+class TRobotPoint
 {
   int mNumber;  // TopoRobot point number
   String mName; // TopoDroid station name

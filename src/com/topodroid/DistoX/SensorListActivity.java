@@ -79,7 +79,7 @@ public class SensorListActivity extends Activity
 
   // -------------------------------------------------------------------
 
-  public void updateDisplay( )
+  private void updateDisplay( )
   {
     // TDLog.Log( TDLog.LOG_SENSOR, "updateDisplay() status: " + StatusName() + " forcing: " + force_update );
     DataHelper data = app.mData;
@@ -93,7 +93,7 @@ public class SensorListActivity extends Activity
     }
   }
 
-  private void updateSensorList( List< SensorInfo > list )
+  public void updateSensorList( List< SensorInfo > list )
   {
     // TDLog.Log(TDLog.LOG_SENSOR, "updateSensorList size " + list.size() );
     mDataAdapter.clear();
@@ -117,7 +117,7 @@ public class SensorListActivity extends Activity
     startSensorDialog( (TextView)view, position );
   }
 
-  public void startSensorDialog( TextView tv, int pos )
+  void startSensorDialog( TextView tv, int pos )
   {
      mSaveSensor = mDataAdapter.get(pos);
      (new SensorEditDialog( this, this, mSaveSensor )).show();
@@ -143,13 +143,13 @@ public class SensorListActivity extends Activity
 
   // ------------------------------------------------------------------
 
-  public void dropSensor( SensorInfo sensor )
+  void dropSensor( SensorInfo sensor )
   {
     app.mData.deleteSensor( sensor.sid, sensor.id );
     updateDisplay( ); // FIXME
   }
 
-  public void updateSensor( SensorInfo sensor, String comment )
+  void updateSensor( SensorInfo sensor, String comment )
   {
     // TDLog.Log( TDLog.LOG_SENSOR, "updateSensor comment " + comment );
     if ( app.mData.updateSensor( sensor.sid, sensor.id, comment ) ) {

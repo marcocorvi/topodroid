@@ -27,7 +27,7 @@ class CalibCBlockAdapter extends ArrayAdapter< CalibCBlock >
   private Context context;                 // context 
 
 
-  public CalibCBlockAdapter( Context ctx, int id, ArrayList< CalibCBlock > items )
+  CalibCBlockAdapter( Context ctx, int id, ArrayList< CalibCBlock > items )
   {
     super( ctx, id, items );
     this.context = ctx;
@@ -42,7 +42,7 @@ class CalibCBlockAdapter extends ArrayAdapter< CalibCBlock >
     View v = convertView;
     if ( v == null ) {
       LayoutInflater li = (LayoutInflater)context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-      v = li.inflate( R.layout.row, null );
+      v = li.inflate( R.layout.row, null ); // FIXME NULL_PTR
     }
 
     CalibCBlock b = items.get( pos );

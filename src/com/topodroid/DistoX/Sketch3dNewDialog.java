@@ -26,7 +26,7 @@ import android.view.ViewGroup.LayoutParams;
 
 import android.widget.Toast;
 
-public class Sketch3dNewDialog extends MyDialog
+class Sketch3dNewDialog extends MyDialog
                                implements View.OnClickListener
 {
   private TopoDroidApp mApp;
@@ -39,7 +39,7 @@ public class Sketch3dNewDialog extends MyDialog
   private Button   mBtnOK;
   // private Button   mBtnCancel;
 
-  public Sketch3dNewDialog( Context context, INewPlot maker, TopoDroidApp app )
+  Sketch3dNewDialog( Context context, INewPlot maker, TopoDroidApp app )
   {
     super( context, R.string.Sketch3dNewDialog );
     mApp    = app;
@@ -93,7 +93,7 @@ public class Sketch3dNewDialog extends MyDialog
           if ( next != null ) {
             next = TopoDroidUtil.noSpaces( next );
             if ( next.length() > 0 ) {
-              if ( ! mApp.mData.hasShot( mApp.mSID, start, next ) ) {
+              if ( ! TopoDroidApp.mData.hasShot( mApp.mSID, start, next ) ) {
                 error = mContext.getResources().getString( R.string.no_shot_between_stations );
                 mEditNext.setError( error );
                 return;

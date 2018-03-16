@@ -17,7 +17,7 @@ package com.topodroid.DistoX;
 class DrawingPathIntersection // extends PointF
 {
   public DrawingPath path; // reference
-  public float tt;         // intersection coordinate
+  float tt;         // intersection coordinate
 
   DrawingPathIntersection( DrawingPath path0, float t0 )
   {

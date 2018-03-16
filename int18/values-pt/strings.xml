@@ -774,6 +774,7 @@
     <string name="title_audio">Áudio comentário</string>
     <string name="title_calib">Calibrações</string>
     <string name="title_calib_check">Medidas de verificação de calibração</string>
+    <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Distribuição dos dados de calibração</string>
     <string name="title_coeff">Coeficientes de calibração</string>
     <string name="title_contour">Contorno</string>
@@ -1008,6 +1009,8 @@
   <string name="pref_min_leg_message">Visadas menores que este valor mínimo tem fundo laranja</string>
   <string name="pref_backsight_title">Medida contra</string>
   <string name="pref_backsight_summary">Campos de contra azimute e inclinação invertida para inserção manual de medida</string>
+  <!-- TODO string name="pref_backshot_title">Backshot DistoX</string -->
+  <!-- TODO string name="pref_backshot_summary">DistoX in backshot mode</string -->
   <string name="pref_prev_next_title">Botões Ant/Próx</string>
   <string name="pref_prev_next_summary">Botões Ant/Próx na janela de medição</string>
   <string name="pref_mag_anomaly_title">Anomalia magnética</string>

@@ -11,6 +11,7 @@
  */
 package com.topodroid.DistoX;
 
+import java.util.Locale;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -32,7 +33,7 @@ import android.widget.Toast;
 
 // import android.util.Log;
 
-public class PlotNewDialog extends MyDialog
+class PlotNewDialog extends MyDialog
                            implements View.OnClickListener
                            , View.OnLongClickListener
 {
@@ -50,7 +51,7 @@ public class PlotNewDialog extends MyDialog
   private int mIndex;
   private MyKeyboard mKeyboard = null;
 
-  public PlotNewDialog( Context context, TopoDroidApp app, INewPlot maker, int index )
+  PlotNewDialog( Context context, TopoDroidApp app, INewPlot maker, int index )
   {
     super( context, R.string.PlotNewDialog );
     mApp    = app;
@@ -71,7 +72,7 @@ public class PlotNewDialog extends MyDialog
     mEditStart = (EditText) findViewById(R.id.edit_plot_start);
     // mEditProject = (EditText) findViewById(R.id.plot_project);
 
-    mEditName.setText( Integer.toString( mIndex ) );
+    mEditName.setText( String.format(Locale.US, "%d", mIndex ) );
     // if current station is set:
     String station = mApp.getCurrentOrLastStation();
     if ( station != null ) mEditStart.setText( station );

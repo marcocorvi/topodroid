@@ -25,18 +25,18 @@ class Scanline
     skipSpaces();
   }
 
-  void skipSpaces( )
+  private void skipSpaces( )
   {
     while ( pos < len && val.charAt(pos) == ' ' ) ++ pos;
   }
 
-  void skipCommaAndSpaces( )
+  private void skipCommaAndSpaces( )
   {
     if ( pos < len && val.charAt(pos) == ',' ) ++pos;
     while ( pos < len && val.charAt(pos) == ' ' ) ++ pos;
   }
   
-  int nextQuote( )
+  private int nextQuote()
   {
     int next = pos;
     while ( next < len && val.charAt(next) != '"' ) ++next; 
@@ -45,7 +45,7 @@ class Scanline
 
   // return the position of next comma or space
   // the return value is guaranteed >= pos
-  int nextCommaOrSpace( )
+  private int nextCommaOrSpace()
   {
     int next = pos;
     while ( next < len && val.charAt(next) != ',' && val.charAt(next) != ' ' ) ++next; 

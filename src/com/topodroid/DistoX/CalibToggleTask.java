@@ -14,14 +14,14 @@ package com.topodroid.DistoX;
 import android.app.Activity;
 import android.os.AsyncTask;
 
-import android.widget.Button;
+// import android.widget.Button;
 import android.widget.Toast;
 
 class CalibToggleTask extends AsyncTask<Void, Integer, Boolean>
 {
   Activity   mActivity;
   TopoDroidApp mApp;
-  IEnableButtons mEnableButtons;
+  private IEnableButtons mEnableButtons;
 
   CalibToggleTask( Activity act, IEnableButtons eb, TopoDroidApp app )
   {

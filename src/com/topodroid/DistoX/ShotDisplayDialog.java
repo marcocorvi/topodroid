@@ -23,7 +23,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 
 
-public class ShotDisplayDialog extends MyDialog 
+class ShotDisplayDialog extends MyDialog
                                implements View.OnClickListener
 {
     private CheckBox mCBids;      // whether to hide ids
@@ -34,7 +34,7 @@ public class ShotDisplayDialog extends MyDialog
 
     private ShotWindow mParent;
 
-    public ShotDisplayDialog( Context context, ShotWindow parent )
+    ShotDisplayDialog( Context context, ShotWindow parent )
     {
       super( context, R.string.ShotDisplayDialog );
       mParent = parent;
@@ -64,6 +64,7 @@ public class ShotDisplayDialog extends MyDialog
 
     }
 
+    @Override
     public void onClick(View view)
     {
       // TDLog.Log( TDLog.LOG_INPUT, "ShotDisplayDialog onClick " + view.toString() );

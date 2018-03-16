@@ -22,6 +22,7 @@
   <dimen name="paddingmedium">5dp</dimen>
   <dimen name="paddingbig">10dp</dimen>
 
+  <dimen name="marginhsmall">9dp</dimen>
   <dimen name="marginh">15dp</dimen>
   <dimen name="marginv">10dp</dimen>
   <dimen name="marginvbig">25dp</dimen>

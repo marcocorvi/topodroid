@@ -21,7 +21,7 @@ import java.util.GregorianCalendar;
 
 import android.util.Log;
 
-public class TopoDroidUtil
+class TopoDroidUtil
 {
   // static final float M_PI  = 3.1415926536f; // Math.PI;
   // static final float M_2PI = 6.283185307f;  // 2*Math.PI;

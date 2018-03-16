@@ -26,13 +26,13 @@ import android.util.Log;
 
 /**
  */
-public class SketchStationName extends SketchPath
+class SketchStationName extends SketchPath
 {
   private static float toTherion = 1.0f; // TDConst.TO_THERION;
 
   String mName;   // station name
   float x, y, z;  // world coordinates
-  float xc, yc;   // scene coordinates
+  private float xc, yc;   // scene coordinates
 
   /**
    * @param   n   name
@@ -40,7 +40,7 @@ public class SketchStationName extends SketchPath
    * @param   y0  Y world coordinate
    * @param   z0  Z world coordinate
    */
-  public SketchStationName( String n, float x0, float y0, float z0 )
+  SketchStationName( String n, float x0, float y0, float z0 )
   {
     super( DrawingPath.DRAWING_PATH_NAME, null, null );
     mName = n;
@@ -59,7 +59,7 @@ public class SketchStationName extends SketchPath
   //   canvas.drawTextOnPath( mName, path, 0f, 0f, mPaint );
   // }
 
-  public void draw( Canvas canvas, Matrix matrix, Sketch3dInfo info )
+  void draw( Canvas canvas, Matrix matrix, Sketch3dInfo info )
   {
     Path path = new Path( );
     path.moveTo(0,0);
@@ -86,7 +86,7 @@ public class SketchStationName extends SketchPath
       x*toTherion, -y*toTherion, -z*toTherion, mName );
   }
 
-  public void toTdr( BufferedOutputStream bos ) throws IOException
+  void toTdr( BufferedOutputStream bos ) throws IOException
   {
     SketchModel.toTdr( bos, "stat" );
     SketchModel.toTdr( bos, mName );

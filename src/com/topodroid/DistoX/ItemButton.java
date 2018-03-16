@@ -23,7 +23,10 @@ import android.graphics.Matrix;
 
 import android.widget.Button;
 
-public class ItemButton extends Button 
+/**
+ * @note this class mustbe public
+ */
+public class ItemButton extends Button
 {
   private Paint mPaint;
   private Path  mPath;

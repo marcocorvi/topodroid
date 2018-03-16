@@ -13,7 +13,7 @@ package com.topodroid.DistoX;
 
 // import android.app.Activity;
 import android.app.Dialog;
-import android.content.Intent;
+// import android.content.Intent;
 import android.content.Context;
 
 import android.os.Bundle;
@@ -26,11 +26,12 @@ import android.widget.LinearLayout;
 import android.widget.Button;
 import android.widget.TextView;
 // import android.widget.FrameLayout;
-import android.widget.Toast;
+// import android.widget.Toast;
 
 import android.graphics.drawable.BitmapDrawable;
 
-import android.util.Log;
+// import android.util.Log;
+import java.util.Locale;
 
 public class QCamCompass extends Dialog
                          implements OnClickListener
@@ -40,30 +41,30 @@ public class QCamCompass extends Dialog
   // DrawingWindow mDrawer;
   // long mPid;
 
-  IPhotoInserter mInserter;
-  QCamDrawingSurface mSurface;
-  QCamBox mBox;
-  Button buttonClick;
-  Button buttonSave;
-  Button buttonCancel;
+  private IPhotoInserter mInserter;
+  private QCamDrawingSurface mSurface;
+  // private QCamBox mBox;
+  private Button buttonClick;
+  private Button buttonSave;
+  private Button buttonCancel;
 
-  BitmapDrawable mBDcameraRed;
-  BitmapDrawable mBDcamera;
-  BitmapDrawable mBDsaveok;
-  BitmapDrawable mBDsaveoff;
+  private BitmapDrawable mBDcameraRed;
+  private BitmapDrawable mBDcamera;
+  private BitmapDrawable mBDsaveok;
+  private BitmapDrawable mBDsaveoff;
 
-  TextView mTVdata;
+  private TextView mTVdata;
   float mBearing;
   float mClino;
   int   mOrientation;
-  boolean mHasBearingAndClino;
-  IBearingAndClino mCallback;
-  boolean mWithBox;
-  boolean mWithDelay;
-  boolean mHasSaved;
-  boolean mHasShot;
+  private boolean mHasBearingAndClino;
+  private IBearingAndClino mCallback;
+  private boolean mWithBox;
+  private boolean mWithDelay;
+  private boolean mHasSaved;
+  private boolean mHasShot;
 
-  QCamCompass( Context context, IBearingAndClino callback, 
+  public QCamCompass( Context context, IBearingAndClino callback, 
                // DrawingWindow drawer, long pid, 
                IPhotoInserter inserter, boolean with_box, boolean with_delay )
   {
@@ -92,7 +93,7 @@ public class QCamCompass extends Dialog
     // }
   }
 
-  void enableButtonSave( boolean enable ) 
+  private void enableButtonSave( boolean enable )
   {
     buttonSave.setEnabled( enable );
     // buttonSave.setVisibility( enable? View.VISIBLE : View.GONE );
@@ -115,14 +116,14 @@ public class QCamCompass extends Dialog
     // buttonCancel = (Button) findViewById(R.id.buttonQuit);
 
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
-    buttonClick  = MyButton.getButton( mContext, this, R.drawable.iz_camera_red );
-    buttonSave   = MyButton.getButton( mContext, this, R.drawable.iz_save_off );
-    buttonCancel = MyButton.getButton( mContext, this, R.drawable.iz_cancel );
+    buttonClick  = MyButton.getButton( mContext, this, R.drawable.iz_camera_red_transp );
+    buttonSave   = MyButton.getButton( mContext, this, R.drawable.iz_save_off_transp );
+    buttonCancel = MyButton.getButton( mContext, this, R.drawable.iz_cancel_transp );
 
-    mBDcameraRed = MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_camera_red );
-    mBDcamera    = MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_camera );
-    mBDsaveok    = MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_save );
-    mBDsaveoff   = MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_save_off );
+    mBDcameraRed = MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_camera_red_transp );
+    mBDcamera    = MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_camera_transp );
+    mBDsaveok    = MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_save_transp );
+    mBDsaveoff   = MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_save_off_transp );
 
     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
       LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
@@ -141,8 +142,8 @@ public class QCamCompass extends Dialog
     mHasBearingAndClino = false; 
 
     if ( mWithBox ) {
-      mBox = new QCamBox( mContext );
-      addContentView( mBox, new LayoutParams( LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT ) );
+      QCamBox box = new QCamBox( mContext );
+      addContentView( box, new LayoutParams( LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT ) );
     }
   }
 
@@ -153,7 +154,7 @@ public class QCamCompass extends Dialog
     mClino   = c;
     mOrientation = MyBearingAndClino.getCameraOrientation( o );
     // Log.v("DistoX", "QCam compass orient " + o + " --> " + mOrientation );
-    mTVdata.setText( String.format("%.2f %.2f", mBearing, mClino ) );
+    mTVdata.setText( String.format(Locale.US, "%.2f %.2f", mBearing, mClino ) );
     mHasBearingAndClino = true;
 
     // take snapshot

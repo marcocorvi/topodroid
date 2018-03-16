@@ -19,23 +19,23 @@
       android:layout_height="wrap_content"
       android:orientation="horizontal"
       >
-      <com.topodroid.DistoX.HorizontalListView android:id="@+id/listview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/right"
-      />
-      <LinearLayout android:id="@id/right"
+      <LinearLayout android:id="@+id/right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:background="#111"
-      >
-      <Button android:id="@+id/handle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_menu"
-      />
+        >
+        <Button android:id="@+id/handle"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:background="@drawable/ic_menu"
+        />
       </LinearLayout>
+      <com.topodroid.DistoX.HorizontalListView android:id="@+id/listview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/right"
+      />
    </RelativeLayout>
 
   <FrameLayout 

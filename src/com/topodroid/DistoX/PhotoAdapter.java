@@ -26,7 +26,7 @@ class PhotoAdapter extends ArrayAdapter< PhotoInfo >
   private ArrayList< PhotoInfo > items;
   private Context context;
 
-  public PhotoAdapter( Context ctx, int id, ArrayList< PhotoInfo > items )
+  PhotoAdapter( Context ctx, int id, ArrayList< PhotoInfo > items )
   {
     super( ctx, id, items );
     this.context = ctx;

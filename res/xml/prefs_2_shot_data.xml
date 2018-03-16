@@ -40,6 +40,13 @@
        android:entryValues="@array/legShotsValue"
        />
 
+     <!-- CheckBoxPreference
+       android:key="DISTOX_BACKSHOT"
+       android:summary="@string/pref_backshot_summary"
+       android:title="@string/pref_backshot_title"
+       android:defaultValue="false"
+     / -->
+
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_EXTEND_THR2"
        android:title="@string/pref_ethr_title"

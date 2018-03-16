@@ -14,15 +14,15 @@ package com.topodroid.DistoX;
 
 class DLNTriangle
 {
-  Point2D mP0;
-  Point2D mP1;
-  Point2D mP2;
-  DLNSide mS0; // opposite side of P0, ie, [P1,P2]
-  DLNSide mS1;
-  DLNSide mS2;
+  private Point2D mP0;
+  private Point2D mP1;
+  private Point2D mP2;
+  private DLNSide mS0; // opposite side of P0, ie, [P1,P2]
+  private DLNSide mS1;
+  private DLNSide mS2;
   Point2D mCenter;
   float mRadius; // square radius
-  float x10, y10, x21, y21, x02, y02;
+  private float x10, y10, x21, y21, x02, y02;
 
   DLNTriangle( Point2D p0, Point2D p1, Point2D p2 )
   {
@@ -114,7 +114,7 @@ class DLNTriangle
   //
   // y10 s + y20 t =   x21
   // x10 s + x20 t = - y21
-  void computeCenterAndRadius()
+  private void computeCenterAndRadius()
   {
     x10 = mP1.x - mP0.x;
     y10 = mP1.y - mP0.y;

@@ -36,12 +36,12 @@ class SymbolPoint extends Symbol
   static final float dxfScale = 0.05f;
   static final float csxScale = 5.00f;
   static final float csxdxfScale = csxScale * dxfScale;
-  public Paint  mPaint;
-  public Path   mPath;
-  public Path   mOrigPath;
-  public String mName;
-  public String mDxf;
-  public String mSvg;
+  Paint  mPaint;
+  Path   mPath;
+  Path   mOrigPath;
+  String mName;
+  String mDxf;
+  String mSvg;
 
   int mHasText;         // whether the point has a text (1), value (2), or none (0)
   boolean mOrientable;
@@ -165,7 +165,7 @@ class SymbolPoint extends Symbol
    *      endpath
    *      endsymbol
    */
-  void readFile( String pathname, String locale, String iso )
+  private void readFile( String pathname, String locale, String iso )
   {
     // Log.v(  TopoDroidApp.TAG, "SymbolPoint::readFile " + pathname + " locale " + locale );
  

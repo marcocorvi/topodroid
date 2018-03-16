@@ -44,7 +44,7 @@ import android.view.KeyEvent;
 import android.util.Log;
 
 
-public class ShotNewDialog extends MyDialog
+class ShotNewDialog extends MyDialog
                            implements View.OnClickListener
                            , View.OnLongClickListener
                            , IBearingAndClino
@@ -88,10 +88,10 @@ public class ShotNewDialog extends MyDialog
   private float mClino;
   private int mOrientation;
 
-  TimerTask mTimer;
+  private TimerTask mTimer;
   private MyKeyboard mKeyboard = null;
 
-  public ShotNewDialog( Context context, TopoDroidApp app, ILister lister, DBlock last_blk, long at )
+  ShotNewDialog( Context context, TopoDroidApp app, ILister lister, DBlock last_blk, long at )
   {
     super( context, R.string.ShotNewDialog );
     mApp     = app;
@@ -230,7 +230,7 @@ public class ShotNewDialog extends MyDialog
     //   LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
     // lp.setMargins( 0, -10, 20, 10 );
 
-    mBtnSensor = new MyCheckBox( mContext, size, R.drawable.iz_compass, R.drawable.iz_compass ); 
+    mBtnSensor = new MyCheckBox( mContext, size, R.drawable.iz_compass_transp, R.drawable.iz_compass_transp ); 
     layout4.addView( mBtnSensor );
     LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mBtnSensor.getLayoutParams();
     params.setMargins( 0, -10, 40, 10 );
@@ -238,7 +238,7 @@ public class ShotNewDialog extends MyDialog
     mBtnSensor.setOnClickListener( this );
 
     if ( cameraCheck && TDLevel.overAdvanced ) {
-      mBtnCamera = new MyCheckBox( mContext, size, R.drawable.iz_camera, R.drawable.iz_camera ); 
+      mBtnCamera = new MyCheckBox( mContext, size, R.drawable.iz_camera_transp, R.drawable.iz_camera_transp ); 
       layout4.addView( mBtnCamera );
       params = (LinearLayout.LayoutParams) mBtnCamera.getLayoutParams();
       params.setMargins( 0, -10, 40, 10 );

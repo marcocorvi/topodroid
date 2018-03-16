@@ -38,7 +38,7 @@ import android.view.View.OnClickListener;
 // import android.widget.AdapterView;
 // import android.widget.AdapterView.OnItemClickListener;
 
-public class SurveyNewDialog extends MyDialog
+class SurveyNewDialog extends MyDialog
                              implements View.OnClickListener
                              , View.OnLongClickListener
 {
@@ -54,7 +54,7 @@ public class SurveyNewDialog extends MyDialog
   private EditText mEditComment;
   private CheckBox mCBxsections;
 
-  MyDateSetListener mDateListener;
+  private MyDateSetListener mDateListener;
 
   private Button mBTsave;
   private Button mBTopen;
@@ -67,7 +67,7 @@ public class SurveyNewDialog extends MyDialog
   private long mOldId  = -1L;
 
 // -------------------------------------------------------------------
-  public SurveyNewDialog( Context context, MainWindow parent, long old_sid, long old_id )
+  SurveyNewDialog( Context context, MainWindow parent, long old_sid, long old_id )
   {
     super( context, R.string.SurveyNewDialog );
     mParent = parent;
@@ -215,10 +215,10 @@ public class SurveyNewDialog extends MyDialog
       return false;
     }
     // Note mApp.mSID == sid
-    mApp.mData.updateSurveyInfo( mApp.mSID, date, team, decl, comment, init_station, xsections, true );
+    TopoDroidApp.mData.updateSurveyInfo( mApp.mSID, date, team, decl, comment, init_station, xsections, true );
 
     if ( mOldSid >= 0L && mOldId >= 0L ) {  // SPLIT_SURVEY
-      mApp.mData.transferShots( mApp.mSID, mOldSid, mOldId );
+      TopoDroidApp.mData.transferShots( mApp.mSID, mOldSid, mOldId );
       mOldSid = -1L;
       mOldId = -1l;
     }

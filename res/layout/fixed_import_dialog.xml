@@ -14,7 +14,7 @@
     android:layout_height="wrap_content"
     >
     <EditText android:id="@+id/station" 
-      style="@style/edit_text"
+      style="@style/edit_text_light"
       android:layout_marginTop="@dimen/margintiny"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content" 
@@ -24,7 +24,7 @@
       android:ems="25"
     />
     <EditText android:id="@+id/comment" 
-      style="@style/edit_text"
+      style="@style/edit_text_light"
       android:layout_marginTop="10dp"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content" 

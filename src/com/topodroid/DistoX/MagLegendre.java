@@ -23,7 +23,7 @@ package com.topodroid.DistoX;
 // MAGtype_LegendreFunction;
 class MagLegendre
 {
-  int nTerms;
+  private int nTerms;
   double[] Pcup; /* Legendre Function */
   double[] dPcup; /* Derivative of Legendre fcn */
 

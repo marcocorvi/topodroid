@@ -49,7 +49,7 @@ import android.database.DataSetObserver;
 // import android.widget.Toast;
 import android.util.Log;
 
-public class VirtualDistoXComm extends TopoDroidComm
+class VirtualDistoXComm extends TopoDroidComm
 {
   private String mAddress;
   private VirtualDistoX mServer;
@@ -91,7 +91,7 @@ public class VirtualDistoXComm extends TopoDroidComm
    * @param type       device type
    * @return 
    */
-  public boolean toggleCalibMode( String address, int type )
+  boolean toggleCalibMode( String address, int type )
   {
     // Log.v("DistoX", "VD comm toggleCalibMode");
     boolean ret = false;
@@ -109,7 +109,7 @@ public class VirtualDistoXComm extends TopoDroidComm
     return ret;
   }
 
-  public boolean writeCoeff( String address, byte[] coeff )
+  boolean writeCoeff( String address, byte[] coeff )
   {
     // Log.v("DistoX", "VD comm writeCoeff");
     boolean ret = false;
@@ -121,7 +121,7 @@ public class VirtualDistoXComm extends TopoDroidComm
   }
 
   // called only by CalibReadTask
-  public boolean readCoeff( String address, byte[] coeff )
+  boolean readCoeff( String address, byte[] coeff )
   {
     // Log.v("DistoX", "VD comm readCoeff");
     boolean ret = false;
@@ -143,7 +143,7 @@ public class VirtualDistoXComm extends TopoDroidComm
   // ------------------------------------------------------------------------------------
   // CONTINUOUS DATA DOWNLOAD
 
-  public boolean connectDevice( String address, Handler /* ILister */ lister ) // FIXME LISTER
+  boolean connectDevice( String address, Handler /* ILister */ lister ) // FIXME LISTER
   {
     // Log.v("DistoX", "VD comm connect device");
     if ( createSocket() ) {
@@ -153,7 +153,7 @@ public class VirtualDistoXComm extends TopoDroidComm
     return false;
   }
 
-  public void disconnect()
+  void disconnect()
   {
     // Log.v("DistoX", "VD comm disconnectDevice");
     cancelRfcommThread();
@@ -214,7 +214,7 @@ public class VirtualDistoXComm extends TopoDroidComm
   // -------------------------------------------------------------------------------------
   // ON-DEMAND DATA DOWNLOAD
 
-  public int downloadData( String address, Handler /* ILister */ lister ) // FIXME LISTER
+  int downloadData( String address, Handler /* ILister */ lister ) // FIXME LISTER
   {
     int ret = 0;
     // Log.v("DistoX", "VD comm download data");

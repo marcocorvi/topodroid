@@ -39,72 +39,72 @@ class DataListenerSet
 
 
   // only the sync-layer need be notified of this
-  public void onSetSurvey( long id, String name )
+  void onSetSurvey( long id, String name )
   { for ( DataListener l : mListeners ) l.onSetSurvey( id, name ); }
 
-  public void onUpdateSurveyName( long id, String name )
+  void onUpdateSurveyName( long id, String name )
   { for ( DataListener l : mListeners ) l.onUpdateSurveyName( id, name ); }
 
-  public void onUpdateSurveyInfo( long id, String date, String team, double decl,
+  void onUpdateSurveyInfo( long id, String date, String team, double decl,
                                   String comment, String station, int xsections )
   { for ( DataListener l : mListeners ) l.onUpdateSurveyInfo( id, date, team, decl, comment, station, xsections ); }
 
-  public void onUpdateSurveyDayAndComment( long id, String date, String comment )
+  void onUpdateSurveyDayAndComment( long id, String date, String comment )
   { for ( DataListener l : mListeners ) l.onUpdateSurveyDayAndComment( id, date, comment ); }
 
-  public void onUpdateSurveyTeam( long id, String team )
+  void onUpdateSurveyTeam( long id, String team )
   { for ( DataListener l : mListeners ) l.onUpdateSurveyTeam( id, team ); }
 
-  public void onUpdateSurveyInitStation( long id, String station )
+  void onUpdateSurveyInitStation( long id, String station )
   { for ( DataListener l : mListeners ) l.onUpdateSurveyTeam( id, station ); }
 
-  public void onUpdateSurveyDeclination( long id, double decl )
+  void onUpdateSurveyDeclination( long id, double decl )
   { for ( DataListener l : mListeners ) l.onUpdateSurveyDeclination( id, decl ); }
 
   // -------------------------------------------------------------------------
   // SHOTS
 
-  public void onUpdateShot( long id, long sid, String fStation, String tStation,
+  void onUpdateShot( long id, long sid, String fStation, String tStation,
                             long extend, long flag, long leg, String comment )
   { for ( DataListener l : mListeners ) l.onUpdateShot( id, sid, fStation, tStation, extend, flag, leg, comment ); }
 
-  public void onUpdateShotDBC( long id, long sid, float d, float b, float c )
+  void onUpdateShotDBC( long id, long sid, float d, float b, float c )
   { for ( DataListener l : mListeners ) l.onUpdateShotDBC( id, sid, d, b, c ); }
 
-  public void onUpdateShotName( long id, long sid, String fStation, String tStation )
+  void onUpdateShotName( long id, long sid, String fStation, String tStation )
   { for ( DataListener l : mListeners ) l.onUpdateShotName( id, sid, fStation, tStation ); }
 
-  public void onUpdateShotLeg( long id, long sid, long leg )
+  void onUpdateShotLeg( long id, long sid, long leg )
   { for ( DataListener l : mListeners ) l.onUpdateShotLeg( id, sid, leg ); }
 
-  public void onUpdateShotExtend( long id, long sid, long extend )
+  void onUpdateShotExtend( long id, long sid, long extend )
   { for ( DataListener l : mListeners ) l.onUpdateShotExtend( id, sid, extend ); }
 
-  public void onUpdateShotFlag( long id, long sid, long flag )
+  void onUpdateShotFlag( long id, long sid, long flag )
   { for ( DataListener l : mListeners ) l.onUpdateShotFlag( id, sid, flag ); }
 
-  public void onUpdateShotComment( long id, long sid, String comment )
+  void onUpdateShotComment( long id, long sid, String comment )
   { for ( DataListener l : mListeners ) l.onUpdateShotComment( id, sid, comment ); }
 
-  public void onUpdateShotStatus( long id, long sid, long status )
+  void onUpdateShotStatus( long id, long sid, long status )
   { for ( DataListener l : mListeners ) l.onUpdateShotStatus( id, sid, status ); }
 
-  public void onUpdateShotAMDR( long sid, long id, double acc, double mag, double dip, double r )
+  void onUpdateShotAMDR( long sid, long id, double acc, double mag, double dip, double r )
   { for ( DataListener l : mListeners ) l.onUpdateShotAMDR( sid, id, acc, mag, dip, r ); }
 
   // public void onUpdateShotNameAndExtend( long sid, ArrayList< DBlock > updatelist );
   // FIXME repeatedly call UpdateShotName() and UpdateShotExtend();
 
-  public void onDeleteShot( long id, long sid, int status )
+  void onDeleteShot( long id, long sid, int status )
   { for ( DataListener l : mListeners ) l.onDeleteShot( id, sid, status ); }
 
-  public void onUndeleteShot( long id, long sid )
+  void onUndeleteShot( long id, long sid )
   { for ( DataListener l : mListeners ) l.onUndeleteShot( id, sid ); }
 
   // public void onInsertShots( long sid, long id, ArrayList< ParserShot > shots )
   // FIXME repeatedly call InsertShot()
 
-  public void onInsertShot( long sid, long id, long millis, String from, String to, 
+  void onInsertShot( long sid, long id, long millis, String from, String to,
                             double d, double b, double c, double r, 
                             long extend, long flag, long leg, long status, long shot_type, String comment )
   {
@@ -114,7 +114,7 @@ class DataListenerSet
 
   // @param e extend
   // @param t type
-  public void onInsertShotAt( long sid, long at, long millis, double d, double b, double c, double r, long e, long leg, long t )
+  void onInsertShotAt( long sid, long at, long millis, double d, double b, double c, double r, long e, long leg, long t )
   { for ( DataListener l : mListeners ) l.onInsertShotAt( sid, at, millis, d, b, c, r, e, leg, t ); }
 
   // public void transferShots( long sid, long old_sid, long old_id );
@@ -124,7 +124,7 @@ class DataListenerSet
   // -------------------------------------------------------
   // PLOTS Aand SKETCHES
 
-  public void onInsertPlot( long sid, long id, String name, long type, long status, String start, String view,
+  void onInsertPlot( long sid, long id, String name, long type, long status, String start, String view,
                             double xoff, double yoff, double zoom, double azimuth, double clino, String hide,
 		            String nick, int orientation )
   { for ( DataListener l : mListeners )

@@ -16,25 +16,25 @@ import java.util.List;
 
 import android.util.Log;
 
-public class TriShot
+class TriShot
 {
   boolean used;
-  public String from;
-  public String to;
-  public int extend;
-  public int reversed;  // -1 reversed, +1 normal 
+  String from;
+  String to;
+  int extend;
+  int reversed;  // -1 reversed, +1 normal
                         // NOTE splay temp-shot can be reversed - leg temp-shot are always normal
                         // this is checked only in makeShotFromTmp to detect errors
-  public boolean duplicate;
-  public boolean surface;
-  public boolean commented;
-  public int     backshot; // 0 forward, +1 sibling forward, -1 sibling backshot
-  public TriShot sibling;  // sibling shot with same stations
-  public ArrayList<DBlock> blocks;
+  boolean duplicate;
+  boolean surface;
+  boolean commented;
+  int     backshot; // 0 forward, +1 sibling forward, -1 sibling backshot
+  TriShot sibling;  // sibling shot with same stations
+  ArrayList<DBlock> blocks;
   AverageLeg mAvgLeg;
   TriCluster cluster;
 
-  public TriShot( DBlock blk, String f, String t, int e, int r )
+  TriShot( DBlock blk, String f, String t, int e, int r )
   { 
     used = false;
     from = f;

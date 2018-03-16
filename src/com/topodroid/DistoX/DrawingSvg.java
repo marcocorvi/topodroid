@@ -16,8 +16,8 @@ import java.util.Locale;
 
 import java.util.List;
 // import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Locale;
+// import java.util.HashMap;
+// import java.util.Locale;
 
 // import java.io.FileWriter;
 import java.io.StringWriter;
@@ -31,7 +31,7 @@ import java.io.IOException;
 
 import android.graphics.RectF;
 
-import android.util.Log;
+// import android.util.Log;
 
 class DrawingSvg
 {
@@ -252,7 +252,7 @@ class DrawingSvg
                 // String scrapfile = point.mOptions.substring( 7 ) + ".tdr";
 
                 // TODO open file survey-xx#.tdr and convert it to svg
-                tdrToSvg( pw5, scrapfile, xx, yy, -mDrawingUtil.CENTER_X, -mDrawingUtil.CENTER_Y );
+                tdrToSvg( pw5, scrapfile, xx, yy, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
               }
               // pw5.format("</g>\n");
             } else {

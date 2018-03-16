@@ -21,9 +21,9 @@ package com.topodroid.DistoX;
 
 class MagErrors
 {
-  double DeclErr;
-  double InclErr;
-  double FErr;
+  private double DeclErr;
+  private double InclErr;
+  private double FErr;
 
   MagErrors( )
   {

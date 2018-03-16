@@ -26,14 +26,14 @@ class SensorAdapter extends ArrayAdapter< SensorInfo >
   private ArrayList< SensorInfo > items;
   private Context context;
 
-  public SensorAdapter( Context ctx, int id, ArrayList< SensorInfo > items )
+  SensorAdapter( Context ctx, int id, ArrayList< SensorInfo > items )
   {
     super( ctx, id, items );
     this.context = ctx;
     this.items = items;
   }
 
-  public SensorInfo get( int pos ) { return items.get(pos); }
+  SensorInfo get( int pos ) { return items.get(pos); }
  
   @Override
   public View getView( int pos, View convertView, ViewGroup parent )

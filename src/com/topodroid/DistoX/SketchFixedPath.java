@@ -28,16 +28,16 @@ import java.util.ArrayList;
 
 /**
  */
-public class SketchFixedPath extends SketchPath
+class SketchFixedPath extends SketchPath
 {
   DBlock mBlock;
-  Paint mStepPaint;
-  float sx, sy;     // midpoint scene 2d coords
-  float cx, cy, cz; // midpoint 3d coords
-  Line3D  mLine;
+  private Paint mStepPaint;
+  private float sx, sy;     // midpoint scene 2d coords
+  private float cx, cy, cz; // midpoint 3d coords
+  private Line3D  mLine;
 
 
-  public SketchFixedPath( int type, DBlock blk, Paint paint, Paint step_paint ) 
+  SketchFixedPath( int type, DBlock blk, Paint paint, Paint step_paint )
   {
     super( type, blk.mFrom, blk.mTo );
     mBlock = blk;
@@ -53,7 +53,7 @@ public class SketchFixedPath extends SketchPath
   /**
    * (x,y,z) world coords referred to the mInfo origin
    */
-  public void addPoint( float x, float y, float z ) 
+  void addPoint( float x, float y, float z )
   {
     // Log.v("DistoX", "add 3d point " + x + " " + y + " " + z );
     mLine.points.add( new Vector(x,y,z) );
@@ -76,7 +76,7 @@ public class SketchFixedPath extends SketchPath
     cz = z;
   }
 
-  public void draw( Canvas canvas, Matrix matrix, Sketch3dInfo info, int activity_mode )
+  void draw( Canvas canvas, Matrix matrix, Sketch3dInfo info, int activity_mode )
   {
     Path  path = new Path();
     int np = 0;

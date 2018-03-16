@@ -30,10 +30,10 @@ import android.util.Log;
 
 class SymbolAreaLibrary extends SymbolLibrary
 {
-  static final String DefaultAreas[] = {
+  static final private String DefaultAreas[] = {
     "blocks", "clay", "debris", "sand"
   };
-  int mAreaUserIndex;
+  private int mAreaUserIndex;
 
   SymbolAreaLibrary( Resources res )
   {

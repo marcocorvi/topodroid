@@ -182,7 +182,7 @@ class SymbolArea extends Symbol
    *      color 0xHHHHHH_COLOR 0xAA_ALPHA
    *      endsymbol
    */
-  void readFile( String filename, String locale, String iso )
+  private void readFile( String filename, String locale, String iso )
   {
     // Log.v(  TopoDroidApp.TAG, "SymbolPoint::readFile " + filename + " " + locale + " " + iso );
   

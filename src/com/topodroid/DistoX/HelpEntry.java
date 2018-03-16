@@ -23,8 +23,8 @@ import android.graphics.drawable.BitmapDrawable;
 
 class HelpEntry
 {
-  Button   mButton   = null;
-  TextView mTextView = null;
+  private Button   mButton   = null;
+  private TextView mTextView = null;
   LinearLayout mView;
 
   /**

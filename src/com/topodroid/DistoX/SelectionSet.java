@@ -13,11 +13,11 @@ package com.topodroid.DistoX;
 
 import java.util.ArrayList;
 
-import android.util.Log;
+// import android.util.Log;
 
 class SelectionSet
 {
-  int mIndex;   // index of the "hot" item
+  private int mIndex;   // index of the "hot" item
   SelectionPoint mHotItem; 
   ArrayList< SelectionPoint > mPoints;
 
@@ -35,7 +35,7 @@ class SelectionSet
     mHotItem = null;
   }
 
-  void clearHotItemRange()
+  private void clearHotItemRange()
   {
     if ( mHotItem != null ) {
       mHotItem.mLP1 = null;
@@ -55,8 +55,7 @@ class SelectionSet
 
   boolean rotateHotItem( float dy )
   {
-    if ( mHotItem == null ) return false;
-    return mHotItem.rotateBy( dy );
+    return ( mHotItem != null ) && mHotItem.rotateBy( dy );
   }
 
   SelectionPoint nextHotItem( )

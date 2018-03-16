@@ -12,19 +12,19 @@
 package com.topodroid.DistoX;
 
 import android.os.Bundle;
-import android.app.Dialog;
+// import android.app.Dialog;
 // import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
+// import android.content.Intent;
 
-import android.graphics.*;
+// import android.graphics.*;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
 
 
-public class DrawingPhotoDialog extends MyDialog 
+class DrawingPhotoDialog extends MyDialog
                                 implements View.OnClickListener
 {
   private EditText mComment;
@@ -33,7 +33,7 @@ public class DrawingPhotoDialog extends MyDialog
   private float mX;
   private float mY;
 
-  public DrawingPhotoDialog( Context context, ILabelAdder activity, float x, float y )
+  DrawingPhotoDialog( Context context, ILabelAdder activity, float x, float y )
   {
     super(context, R.string.DrawingPhotoDialog );
     mActivity = activity;
@@ -55,13 +55,14 @@ public class DrawingPhotoDialog extends MyDialog
     mComment.setTextSize( TDSetting.mTextSize );
   }
 
+  @Override
   public void onClick(View view)
   {
     // TDLog.Log( TDLog.LOG_INPUT, "DrawingPhotoDialog onClick() " + view.toString() );
     if (view.getId() == R.id.photo_ok ) {
       mActivity.addPhotoPoint( mComment.getText().toString(), mX, mY );
-    } else if ( view.getId() == R.id.photo_cancel ) {
-      /* nothing */
+    // } else if ( view.getId() == R.id.photo_cancel ) {
+    //   /* nothing */
     }
     dismiss();
   }

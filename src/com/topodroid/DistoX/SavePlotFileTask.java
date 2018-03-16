@@ -41,7 +41,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   private int mSuffix;
   private int mRotate;  // nr. backups to rotate
 
-  public SavePlotFileTask( Context context, DrawingWindow parent, Handler handler,
+  SavePlotFileTask( Context context, DrawingWindow parent, Handler handler,
                            TopoDroidApp app, DrawingSurface surface, 
                            String fullname, long type, int proj_dir, int suffix, int rotate )
   {
@@ -61,7 +61,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      // Log.v( "DistoX", "save plot file task [1] " + mFullName + " type " + mType );
   }
 
-  public SavePlotFileTask( Context context, DrawingWindow parent, Handler handler,
+  SavePlotFileTask( Context context, DrawingWindow parent, Handler handler,
                            TopoDroidApp app, List<DrawingPath> paths,
                            String fullname, long type, int proj_dir )
   {

@@ -14,13 +14,13 @@ package com.topodroid.DistoX;
 import java.util.ArrayList;
 
 import android.os.Bundle;
-import android.app.Dialog;
+// import android.app.Dialog;
 // import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
-import android.content.DialogInterface.OnDismissListener;
+// import android.content.Intent;
+// import android.content.DialogInterface;
+// import android.content.DialogInterface.OnCancelListener;
+// import android.content.DialogInterface.OnDismissListener;
 
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -35,7 +35,7 @@ class DeviceX310MemoryDialog extends MyDialog
                              implements View.OnClickListener
                              , IMemoryDialog
 {
-  private Button mBtnDump;
+  // private Button mBtnDump;
   // private Button mBtnBack;
 
   private EditText mETdumpfrom;
@@ -58,16 +58,14 @@ class DeviceX310MemoryDialog extends MyDialog
   public void onCreate( Bundle bundle )
   {
     super.onCreate( bundle );
-
     initLayout( R.layout.device_x310_memory_dialog, R.string.memoryX310 );
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
     mETdumpfrom  = (EditText) findViewById( R.id.et_dumpfrom );
     mETdumpto    = (EditText) findViewById( R.id.et_dumpto );
     mETdumpfile  = (EditText) findViewById( R.id.et_dumpfile );
 
-    mBtnDump = (Button) findViewById(R.id.button_dump );
-    mBtnDump.setOnClickListener( this );
+    Button btnDump = (Button) findViewById(R.id.button_dump );
+    btnDump.setOnClickListener( this );
     // mBtnBack = (Button) findViewById(R.id.button_cancel);
     // mBtnBack.setOnClickListener( this );
     
@@ -99,12 +97,12 @@ class DeviceX310MemoryDialog extends MyDialog
       case R.id.button_dump:
         from = mETdumpfrom.getText().toString();
         to   = mETdumpto.getText().toString();
-        if ( from == null || from.length() == 0 ) {
+        if ( /* from == null || */ from.length() == 0 ) {
           error = mParent.getResources().getString( R.string.error_begin_required );
           mETdumpfrom.setError( error );
           return;
         }
-        if ( to == null || to.length() == 0 ) {
+        if ( /* to == null || */ to.length() == 0 ) {
           error = mParent.getResources().getString( R.string.error_end_required );
           mETdumpto.setError( error );
           return;

@@ -31,7 +31,7 @@ import android.graphics.Matrix;
 
 // import android.util.Log;
 
-public class SymbolLine extends Symbol
+class SymbolLine extends Symbol
 {
   String mName;       // local name
   Paint  mPaint;      // forward paint
@@ -54,7 +54,7 @@ public class SymbolLine extends Symbol
   // @Override public boolean setAngle( float angle ) { }
   // @Override public int getAngle() { return 0; }
 
-  public String getGroup() { return mGroup; }
+  String getGroup() { return mGroup; }
 
   // width = 1;
   // no effect
@@ -153,7 +153,7 @@ public class SymbolLine extends Symbol
    *      endeffect
    *      endsymbol
    */
-  void readFile( String filename, String locale, String iso )
+  private void readFile( String filename, String locale, String iso )
   {
     // Log.v(  TopoDroidApp.TAG, "load line file " + filename );
     float unit = TDSetting.mUnit * TDSetting.mLineThickness;

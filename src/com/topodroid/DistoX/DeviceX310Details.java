@@ -17,7 +17,7 @@ class DeviceX310Details
   static final int MAX_INDEX_X310 = 1064;
 
   // address of status word in DistoX2 memory
-  public final static int mStatusAddress[] = {  
+  final static int mStatusAddress[] = {  
     0xc006, 0xc006, 0xc006, 0xc034, 0xc044, 0xc044,
   };
 
@@ -37,7 +37,7 @@ class DeviceX310Details
   // packet to address:  segment = packet / 2
   //                     packet_nr = packet % 2
 
-  static int segmentToAddress( int segment )
+  static private int segmentToAddress( int segment )
   { return ( segment / 56 ) * 1024 + ( segment % 56 ) * 18; }
 
   static int packetToAddress( int packet ) 

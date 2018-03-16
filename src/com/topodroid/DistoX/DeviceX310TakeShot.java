@@ -15,10 +15,10 @@ import android.os.AsyncTask;
  
 class DeviceX310TakeShot extends AsyncTask<Integer, Integer, Integer >
 {
-  ILister mILister;
-  ListerHandler mLister; // lister that manages downloaded shots (if null shots are not downloaded)
+  private ILister mILister;
+  private ListerHandler mLister; // lister that manages downloaded shots (if null shots are not downloaded)
   TopoDroidApp  mApp;
-  int mNr;               // number of shots before download
+  private int mNr;               // number of shots before download
  
   DeviceX310TakeShot( ILister ilister, ListerHandler lister, TopoDroidApp app, int nr )
   {

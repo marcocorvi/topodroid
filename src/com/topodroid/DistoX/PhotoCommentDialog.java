@@ -29,7 +29,7 @@ import android.view.KeyEvent;
 
 // import android.util.Log;
 
-public class PhotoCommentDialog extends MyDialog
+class PhotoCommentDialog extends MyDialog
                          implements View.OnClickListener
 {
   private ShotWindow mParent;
@@ -76,6 +76,7 @@ public class PhotoCommentDialog extends MyDialog
     mButtonCancel.setOnClickListener( this );
   }
 
+  @Override
   public void onClick(View v) 
   {
     Button b = (Button) v;

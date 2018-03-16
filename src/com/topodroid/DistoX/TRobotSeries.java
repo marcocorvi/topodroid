@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import android.util.Log;
 
 
-public class TRobotSeries
+class TRobotSeries
 {
   int mNumber;       // TopoRobot series number
   private int mPtCnt;  // point counter

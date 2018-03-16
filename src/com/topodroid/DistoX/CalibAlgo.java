@@ -21,7 +21,7 @@ import java.util.Locale;
 // used by logCoeff
 import android.util.Log;
 
-public class CalibAlgo
+class CalibAlgo
 {
   protected Matrix aG = null;
   protected Matrix aM = null;
@@ -146,7 +146,7 @@ public class CalibAlgo
   //   // Log.v("DistoX", String.format("NL %8.4f %8.4f %8.4f", nL.x, nL.y, nL.z ) );
   // }
 
-  public CalibAlgo( int N, boolean nonLinear )
+  CalibAlgo( int N, boolean nonLinear )
   {
     num = 0;
     if ( N > 0 ) Reset( N );
@@ -155,17 +155,17 @@ public class CalibAlgo
 
   // void setAlgorith( boolean nonLinear ) { mNonLinear = nonLinear; }
 
-  public float Delta()        { return mDelta; }
-  public float Delta2()       { return mDelta2; }
+  float Delta()        { return mDelta; }
+  float Delta2()       { return mDelta2; }
   public float Error( int k ) { return err[k]; }
-  public float[] Errors()     { return err; }
-  public float MaxError( )    { return mMaxError; }
+  float[] Errors()     { return err; }
+  float MaxError( )    { return mMaxError; }
 
-  public Matrix GetAG() { return aG; }
-  public Matrix GetAM() { return aM; }
-  public Vector GetBG() { return bG; }
-  public Vector GetBM() { return bM; }
-  public Vector GetNL() { return nL; }
+  Matrix GetAG() { return aG; }
+  Matrix GetAM() { return aM; }
+  Vector GetBG() { return bG; }
+  Vector GetBM() { return bM; }
+  Vector GetNL() { return nL; }
 
   // public int nrCoeff() { return mNonLinear ? 52 : 48; }
 
@@ -183,7 +183,7 @@ public class CalibAlgo
     return v;
   }
 
-  public byte[] GetCoeff()
+  byte[] GetCoeff()
   {
     if ( aG == null ) return null;
     byte[] coeff = new byte[ 52 ]; // FIXME nrCoeff()
@@ -420,7 +420,7 @@ public class CalibAlgo
   //          254       -1
   //  0xff    255        0     
   //
-  static float byteToFloatNL( byte b )
+  static private float byteToFloatNL( byte b )
   {
     int c0 = 1 + (int)(b);
     if ( c0 >= 128 ) c0 = c0 - 256;
@@ -462,13 +462,13 @@ public class CalibAlgo
     }
   }
 
-  public void AddValues( CalibCBlock b )
+  void AddValues( CalibCBlock b )
   {
     // add also group-0 CBlocks to keep CBlock list and calib vectors aligned
     AddValues( b.gx, b.gy, b.gz, b.mx, b.my, b.mz, b.mGroup );
   }
 
-  public void AddValues( long gx, long gy, long gz, long mx, long my, long mz, long group0 )
+  private void AddValues( long gx, long gy, long gz, long mx, long my, long mz, long group0 )
   {
     if ( idx >= num ) {
       return;
@@ -481,7 +481,7 @@ public class CalibAlgo
 
     if ( TDLog.LOG_CALIB ) {
       TDLog.Log( TDLog.LOG_CALIB, 
-        String.format("Add %d G %d %d %d M %d %d %d Grp %d", idx, gx, gy, gz, mx, my, mz, group0 ) );
+        String.format(Locale.US, "Add %d G %d %d %d M %d %d %d Grp %d", idx, gx, gy, gz, mx, my, mz, group0 ) );
     }
     idx ++;
   }
@@ -559,14 +559,14 @@ public class CalibAlgo
     return ix / TopoDroidUtil.FN;
   }
 
-  protected void saturate( Vector nl )
+  void saturate( Vector nl )
   {
     nl.x = saturate( nl.x );
     nl.y = saturate( nl.y );
     nl.z = saturate( nl.z );
   }
 
-  protected void computeBearingAndClinoRad( Vector g0, Vector m0 )
+  void computeBearingAndClinoRad( Vector g0, Vector m0 )
   {
     // Vector g = g0.mult( 1.0f / TopoDroidUtil.FV );
     // Vector m = m0.mult( 1.0f / TopoDroidUtil.FV );

@@ -23,12 +23,13 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.util.Log;
 
 /**
+ * @note this class must be public
  */
 public class MyEditPreference extends EditTextPreference
 {
   SharedPreferences sp;
 
-  public MyEditPreference( Context c, AttributeSet a ) 
+  public MyEditPreference( Context c, AttributeSet a )
   {
     super(c,a);
     init();

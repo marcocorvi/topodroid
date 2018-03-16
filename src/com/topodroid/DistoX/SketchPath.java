@@ -24,7 +24,7 @@ import android.graphics.Paint;
  *   - the paint
  *   - the surface of this path
  */
-public class SketchPath extends SketchShot
+class SketchPath extends SketchShot
 {
   int mType;       // BrushManager.DRAWING_TYPE_POINT LINE AREA
   int mThType;     // item therion type
@@ -45,6 +45,6 @@ public class SketchPath extends SketchShot
     mSurface  = null;
   }
 
-  public String toTherion() { return new String("FIXME SketchPath::toTherion()"); }
+  public String toTherion() { return "FIXME SketchPath::toTherion()"; }
 
 }

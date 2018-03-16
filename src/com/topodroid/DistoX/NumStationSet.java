@@ -25,7 +25,7 @@ class NumStationSet
   static final boolean RED = false;
 
 
-  static int compare( String s1, String s2 )
+  static private int compare( String s1, String s2 )
   { 
     int l1 = s1.length();
     int l2 = s2.length();
@@ -138,8 +138,8 @@ class NumStationSet
 
   }
 
-  ArrayList< NumStation > mStations;
-  NumStationNode mRoot;
+  private ArrayList< NumStation > mStations;
+  private NumStationNode mRoot;
 
   NumStationSet() 
   { 

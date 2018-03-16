@@ -11,22 +11,22 @@
  */
 package com.topodroid.DistoX;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 import android.content.Context;
 // import android.app.Dialog;
 
 import android.widget.CheckBox;
 // import android.widget.Button;
-import android.widget.TextView;
+// import android.widget.TextView;
 
-import android.view.LayoutInflater;
+// import android.view.LayoutInflater;
 // import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
+// import android.view.View.OnClickListener;
 // import android.view.View.OnTouchListener;
 // import android.text.Layout;
-import android.widget.LinearLayout;
+// import android.widget.LinearLayout;
 
 // import android.util.Log;
 
@@ -70,7 +70,7 @@ class EnableSymbol implements View.OnClickListener
   // boolean getEnabled() { return mSymbol.isEnabled(); }
   // void setEnabled( boolean enabled ) { mSymbol.mEnabled = enabled; }
 
-  public EnableSymbol( Context context, int type, int index, SymbolInterface symbol )
+  EnableSymbol( Context context, int type, int index, SymbolInterface symbol )
   {  
     mType  = type;
     // mIndex = index;

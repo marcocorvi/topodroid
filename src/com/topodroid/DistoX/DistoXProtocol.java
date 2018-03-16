@@ -14,33 +14,33 @@ package com.topodroid.DistoX;
 import java.io.IOException;
 import java.io.EOFException;
 import java.io.FileNotFoundException;
-import java.io.FilterInputStream;
+// import java.io.FilterInputStream;
 import java.io.File;
-import java.io.InputStream;
+// import java.io.InputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.util.UUID;
 import java.util.List;
-import java.util.Locale;
-import java.lang.reflect.Field;
+// import java.util.Locale;
+// import java.lang.reflect.Field;
 import java.net.Socket;
 
-import android.os.CountDownTimer;
+// import android.os.CountDownTimer;
 
 import java.nio.channels.ClosedByInterruptException;
-import java.nio.ByteBuffer;
+// import java.nio.ByteBuffer;
 
 // import android.bluetooth.BluetoothDevice;
 // import android.bluetooth.BluetoothServerSocket;
-import android.bluetooth.BluetoothSocket;
+// import android.bluetooth.BluetoothSocket;
 
-import android.util.Log;
+// import android.util.Log;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 
-public class DistoXProtocol
+class DistoXProtocol
 {
   private Device mDevice;
   // private DistoX mDistoX;
@@ -167,7 +167,7 @@ public class DistoXProtocol
 
 //-----------------------------------------------------
 
-  public DistoXProtocol( DataInputStream in, DataOutputStream out, Device device )
+  DistoXProtocol( DataInputStream in, DataOutputStream out, Device device )
   {
     mDevice = device;
     // mSocket = socket;
@@ -207,7 +207,7 @@ public class DistoXProtocol
     mOut = out;
   }
 
-  public void closeIOstreams()
+  void closeIOstreams()
   {
     if ( mIn != null ) {
       try { mIn.close(); } catch ( IOException e ) { }
@@ -316,7 +316,7 @@ public class DistoXProtocol
     return DISTOX_PACKET_NONE;
   } 
 
-  public int readPacket( boolean no_timeout ) 
+  int readPacket( boolean no_timeout )
   {
     int min_available = ( mDevice.mType == Device.DISTO_X000)? 8 : 1; // FIXME 8 should work in every case
 
@@ -380,7 +380,7 @@ public class DistoXProtocol
     return DISTOX_PACKET_NONE;
   }
 
-  public boolean sendCommand( byte cmd )
+  boolean sendCommand( byte cmd )
   {
     // TDLog.Log( TDLog.LOG_PROTO, "sendCommand " + String.format("Send command %02x", cmd ) );
 
@@ -395,7 +395,7 @@ public class DistoXProtocol
     return true;
   }
 
-  public int readToRead( byte[] command, boolean a3 ) // number of data-packet to read
+  int readToRead( byte[] command, boolean a3 ) // number of data-packet to read
   {
     int ret = 0;
     try {
@@ -433,7 +433,7 @@ public class DistoXProtocol
     }
   }
 
-  public boolean swapHotBit( int addr ) // only A3
+  boolean swapHotBit( int addr ) // only A3
   {
     try {
       mBuffer[0] = (byte) 0x38;
@@ -484,7 +484,7 @@ public class DistoXProtocol
   }
 
   // @param command head-tail command with the memory address of head-tail words
-  public String readHeadTail( byte[] command, int[] head_tail )
+  String readHeadTail( byte[] command, int[] head_tail )
   {
     try {
       mOut.write( command, 0, 3 );
@@ -495,9 +495,8 @@ public class DistoXProtocol
       // TODO value of Head-Tail in byte[3-7]
       head_tail[0] = MemoryOctet.toInt( mBuffer[4], mBuffer[3] );
       head_tail[1] = MemoryOctet.toInt( mBuffer[6], mBuffer[5] );
-      String res = String.format("%02x%02x-%02x%02x", mBuffer[4], mBuffer[3], mBuffer[6], mBuffer[5] );
+      return String.format("%02x%02x-%02x%02x", mBuffer[4], mBuffer[3], mBuffer[6], mBuffer[5] );
       // TDLog.Log( TDLog.LOG_PROTO, "read Head Tail " + res );
-      return res;
     } catch ( EOFException e ) {
       TDLog.Error( "read Head Tail read() EOF failed" );
       return null;
@@ -566,7 +565,7 @@ public class DistoXProtocol
   // each data takes 18 bytes
 
 
-  public int readX310Memory( int start, int end, List< MemoryOctet > data )
+  int readX310Memory( int start, int end, List< MemoryOctet > data )
   {
     // Log.v( "DistoX", "start " + start + " end " + end );
     int cnt = 0;
@@ -671,7 +670,7 @@ public class DistoXProtocol
   //   return start - cnt;
   // }
 
-  public byte[] readMemory( int addr )
+  byte[] readMemory( int addr )
   {
     mBuffer[0] = (byte)( 0x38 );
     mBuffer[1] = (byte)( addr & 0xff );
@@ -691,7 +690,7 @@ public class DistoXProtocol
     return ret;
   }
 
-  public int readMemory( int start, int end, List< MemoryOctet > data )
+  int readMemory( int start, int end, List< MemoryOctet > data )
   {
     if ( start < 0 ) start = 0;
     if ( end > 0x8000 ) end = 0x8000;
@@ -731,7 +730,7 @@ public class DistoXProtocol
     return cnt;
   }
 
-  public boolean read8000( byte[] result )
+  boolean read8000( byte[] result )
   {
     try {
       mOut.write( mAddr8000, 0, 3 );
@@ -753,7 +752,7 @@ public class DistoXProtocol
     return true;
   }
 
-  public boolean writeCalibration( byte[] calib )
+  boolean writeCalibration( byte[] calib )
   { 
     if ( calib == null ) return false;
     int  len  = calib.length;
@@ -791,7 +790,7 @@ public class DistoXProtocol
   }
 
   // called only by DistoXComm.readCoeff (TopoDroidComm.readCoeff)
-  public boolean readCalibration( byte[] calib )
+  boolean readCalibration( byte[] calib )
   {
     if ( calib == null ) return false;
     int  len  = calib.length;
@@ -825,7 +824,7 @@ public class DistoXProtocol
     return true;  
   }
 
-  public int uploadFirmware( String filepath )
+  int uploadFirmware( String filepath )
   {
     TDLog.LogFile( "Firmware upload: protocol starts" );
     byte[] buf = new byte[259];
@@ -886,7 +885,7 @@ public class DistoXProtocol
     return ( ok ? cnt : -cnt );
   }
 
-  public int dumpFirmware( String filepath )
+  int dumpFirmware( String filepath )
   {
     TDLog.LogFile( "Firmware dump: output filepath " + filepath );
     byte[] buf = new byte[256];

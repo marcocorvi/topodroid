@@ -12,15 +12,15 @@
 package com.topodroid.DistoX;
 
 import java.util.List;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 import android.os.Bundle;
-import android.app.Dialog;
+// import android.app.Dialog;
 
 import android.content.Context;
 
 import android.view.View;
-import android.view.View.OnClickListener;
+// import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 
 import android.widget.ArrayAdapter;
@@ -32,9 +32,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 // import android.widget.AdapterView.OnItemLongClickListener;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 
-public class CalibListDialog extends MyDialog
+class CalibListDialog extends MyDialog
                              implements OnItemClickListener
                              , View.OnClickListener
                              // , OnItemLongClickListener
@@ -50,7 +50,7 @@ public class CalibListDialog extends MyDialog
 
   private ListView mList;
 
-  public CalibListDialog( Context context, DeviceActivity parent, TopoDroidApp app )
+  CalibListDialog( Context context, DeviceActivity parent, TopoDroidApp app )
   {
     super( context, R.string.CalibListDialog );
     mParent = parent;
@@ -61,8 +61,10 @@ public class CalibListDialog extends MyDialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.calib_list_dialog );
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    
+    // setContentView(R.layout.calib_list_dialog );
+    // getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout( R.layout.calib_list_dialog, R.string.title_calib );
 
     mArrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
     // mArrayAdapter = new ListItemAdapter( mContext, R.layout.message );
@@ -86,7 +88,7 @@ public class CalibListDialog extends MyDialog
     }
     // mBtnCancel.setOnClickListener( this );
 
-    setTitle( R.string.title_calib );
+    // setTitle( R.string.title_calib );
     updateList();
   }
 

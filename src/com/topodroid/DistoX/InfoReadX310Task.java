@@ -22,8 +22,8 @@ import android.widget.Toast;
 class InfoReadX310Task extends AsyncTask<Void, Integer, Boolean>
 {
   TopoDroidApp   mApp;
-  DeviceX310InfoDialog  mDialog;
-  DeviceX310Info mInfo = null;
+  private DeviceX310InfoDialog  mDialog;
+  private DeviceX310Info mInfo = null;
   // int mType; // DistoX type
   String mAddress;
 

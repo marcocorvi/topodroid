@@ -11,17 +11,17 @@
  */
 package com.topodroid.DistoX;
 
-public class TriSplay
+class TriSplay
 {
   boolean used;
-  public String from;   // splay station (usually "from")
-  public int extend;
-  public int reversed;  // -1 reversed, +1 normal 
+  String from;   // splay station (usually "from")
+  int extend;
+  int reversed;  // -1 reversed, +1 normal
                         // NOTE splay temp-shot can be reversed - leg temp-shot are always normal
                         // this is checked only in makeShotFromTmp to detect errors
-  public DBlock block;
+  DBlock block;
 
-  public TriSplay( DBlock blk, String f, int e, int r )
+  TriSplay( DBlock blk, String f, int e, int r )
   { 
     used = false;
     from = f;

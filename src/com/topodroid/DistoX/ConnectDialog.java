@@ -12,19 +12,19 @@
 package com.topodroid.DistoX;
 
 import java.util.Set;
-import java.util.List;
-import java.util.ArrayList;
+// import java.util.List;
+// import java.util.ArrayList;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 // import android.os.AsyncTask;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.DialogInterface;
+// import android.content.Intent;
+// import android.content.DialogInterface;
 
 import android.widget.TextView;
-import android.widget.ArrayAdapter;
+// import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Button;
 import android.view.View;
@@ -32,7 +32,7 @@ import android.view.ViewGroup.LayoutParams;
 
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
+// import android.widget.AdapterView.OnItemLongClickListener;
 
 import android.widget.Toast;
 
@@ -40,7 +40,7 @@ import android.widget.Toast;
 
 import android.bluetooth.BluetoothDevice;
 
-public class ConnectDialog extends MyDialog
+class ConnectDialog extends MyDialog
                            implements View.OnClickListener
                            , OnItemClickListener
 {
@@ -48,7 +48,7 @@ public class ConnectDialog extends MyDialog
 
   // private ArrayAdapter<String> mArrayAdapter;
   private ListItemAdapter mArrayAdapter;
-  private ListView mList;
+  // private ListView mList;
 
   // private String mAddress;
 
@@ -59,12 +59,12 @@ public class ConnectDialog extends MyDialog
   // private Button mBtnStop;
   private Button mBtnSync;
 
-  private TextView mTVstate;
+  // private TextView mTVstate;
 
   private TopoDroidApp mApp;
 
   private String mName = null;
-  Set<BluetoothDevice> mDevices;
+  private Set<BluetoothDevice> mDevices;
 
   // void setButtons( int state ) 
   // {
@@ -98,26 +98,27 @@ public class ConnectDialog extends MyDialog
 
     // mAddress = getIntent().getExtras().getString(   TopoDroidApp.TOPODROID_DEVICE_ADDR );
 
-    setContentView( R.layout.connect_dialog );
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    // setContentView( R.layout.connect_dialog );
+    // getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout( R.layout.connect_dialog, R.string.title_device );
 
     mTVaddress = (TextView) findViewById( R.id.device_address );
-    mTVstate   = (TextView) findViewById( R.id.conn_state );
+    TextView tVstate   = (TextView) findViewById( R.id.conn_state );
 
     if ( mApp.getAcceptState() == SyncService.STATE_LISTEN ) {
-      mTVstate.setText( "LISTEN | " + mApp.getConnectionStateStr() );
+      tVstate.setText( "LISTEN | " + mApp.getConnectionStateStr() );
     } else {
-      mTVstate.setText( mApp.getConnectionStateStr() );
+      tVstate.setText( mApp.getConnectionStateStr() );
     }
 
     // mArrayAdapter = new ArrayAdapter<>( this, R.layout.message );
     mArrayAdapter = new ListItemAdapter( mContext, R.layout.message );
-    mList = (ListView) findViewById(R.id.dev_list);
-    mList.setAdapter( mArrayAdapter );
-    mList.setOnItemClickListener( this );
-    // mList.setLongClickable( true );
-    // mList.setOnItemLongClickListener( this );
-    mList.setDividerHeight( 2 );
+    ListView list = (ListView) findViewById(R.id.dev_list);
+    list.setAdapter( mArrayAdapter );
+    list.setOnItemClickListener( this );
+    // list.setLongClickable( true );
+    // list.setOnItemLongClickListener( this );
+    list.setDividerHeight( 2 );
 
     // mBtnCancel = (Button) findViewById( R.id.button_cancel );
     mBtnConnect = (Button) findViewById( R.id.button_connect );
@@ -133,7 +134,7 @@ public class ConnectDialog extends MyDialog
     // mBtnStop.setOnClickListener( this );
     mBtnSync.setOnClickListener( this );
 
-    setTitle( R.string.title_device );
+    // setTitle( R.string.title_device );
     updateList();
   }
 
@@ -162,7 +163,7 @@ public class ConnectDialog extends MyDialog
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {
     CharSequence item = ((TextView) view).getText();
-    String name = item.toString();
+    // String name = item.toString();
     // if ( mName != null && ! mName.equals( name ) ) {
     //   if ( mApp.getConnectionType() == SyncService.STATE_CONNECTED ) {
     //     disconnectDevice(); // FIXME do this ?
@@ -170,7 +171,7 @@ public class ConnectDialog extends MyDialog
     //   //   stopDevice();
     //   }
     // }
-    mName = name;
+    mName = item.toString(); // name;
     mTVaddress.setText( mName );
   }
 

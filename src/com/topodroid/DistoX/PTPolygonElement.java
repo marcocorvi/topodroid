@@ -21,8 +21,8 @@ import java.io.FileOutputStream;
 class PTPolygonElement extends PTElement
 {
     // int _point_count;  //!< number of points
-    ArrayList<PTPoint> _points;     //!< points
-    byte _color;  //!< 1=black, 2=gray, 3=brown, 4=b;lue, 5=red, 6=green
+    private ArrayList<PTPoint> _points;     //!< points
+    private byte _color;  //!< 1=black, 2=gray, 3=brown, 4=b;lue, 5=red, 6=green
 
     PTPolygonElement()
     {

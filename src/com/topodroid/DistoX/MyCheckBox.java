@@ -23,7 +23,7 @@ import android.util.Log;
 
 /**
  */
-public class MyCheckBox extends CompoundButton
+class MyCheckBox extends CompoundButton
 {
   Context mContext = null;
   int mIdOn;
@@ -31,7 +31,7 @@ public class MyCheckBox extends CompoundButton
   int mSize;
   boolean mState;
 
-  public MyCheckBox( Context context )
+  MyCheckBox( Context context )
   {
     super( context );
     mContext = context;
@@ -42,7 +42,7 @@ public class MyCheckBox extends CompoundButton
     init();
   }
 
-  public MyCheckBox( Context context, int size, int id_on, int id_off )
+  MyCheckBox( Context context, int size, int id_on, int id_off )
   {
     super( context );
 
@@ -62,7 +62,7 @@ public class MyCheckBox extends CompoundButton
     init();
   }
 
-  void init() 
+  private void init()
   {
     setOnCheckedChangeListener( new OnCheckedChangeListener() {
       @Override

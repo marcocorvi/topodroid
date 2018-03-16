@@ -45,7 +45,7 @@ class DistoXNum
   private float mErr1;
   private float mErr2;
 
-  void resetStats()
+  private void resetStats()
   {
     mLength = 0.0f;
     mProjLen = 0.0f;
@@ -54,7 +54,7 @@ class DistoXNum
     mErr0 = mErr1 = mErr2 = 0;
   }
 
-  void addToStats( TriShot ts )
+  private void addToStats( TriShot ts )
   {
     int size = ts.blocks.size();
     for ( int i = 0; i < size; ++i ) {
@@ -69,7 +69,7 @@ class DistoXNum
     }
   }
 
-  void addToStats( boolean d, boolean s, float l, float h )
+  private void addToStats( boolean d, boolean s, float l, float h )
   {
     if ( d ) ++mDupNr;
     if ( s ) ++mSurfNr;
@@ -79,7 +79,7 @@ class DistoXNum
     }
   }
 
-  void addToStats( boolean d, boolean s, float l, float h, float v )
+  private void addToStats( boolean d, boolean s, float l, float h, float v )
   {
     if ( d ) ++mDupNr;
     if ( s ) ++mSurfNr;
@@ -95,7 +95,7 @@ class DistoXNum
 
   // FIXME make mStations a hashmap (key station name)
   // private ArrayList<NumStation> mStations;
-  NumStationSet mStations;
+  private NumStationSet mStations;
   private ArrayList<NumStation> mClosureStations;
   private ArrayList<NumShot>    mShots;
   private ArrayList<NumSplay>   mSplays;
@@ -103,31 +103,31 @@ class DistoXNum
   private ArrayList<NumNode>    mNodes;
 
 
-  public int stationsNr()  { return mStations.size(); }
-  public int shotsNr()     { return mShots.size(); }
-  public int duplicateNr() { return mDupNr; }
-  public int surfaceNr()   { return mSurfNr; }
-  public int splaysNr()    { return mSplays.size(); }
-  public int loopNr()      { return mClosures.size(); }
+  int stationsNr()  { return mStations.size(); }
+  int shotsNr()     { return mShots.size(); }
+  int duplicateNr() { return mDupNr; }
+  int surfaceNr()   { return mSurfNr; }
+  int splaysNr()    { return mSplays.size(); }
+  // int loopNr()      { return mClosures.size(); }
 
-  public float surveyLength() { return mLength; }
-  public float surveyProjLen() { return mProjLen; }
-  public float surveyTop()    { return -mZmin; } // top must be positive
-  public float surveyBottom() { return -mZmax; } // bottom must be negative
+  float surveyLength() { return mLength; }
+  float surveyProjLen() { return mProjLen; }
+  float surveyTop()    { return -mZmin; } // top must be positive
+  float surveyBottom() { return -mZmax; } // bottom must be negative
 
-  public float angleErrorMean()   { return mErr1; } // radians
-  public float angleErrorStddev() { return mErr2; } // radians
+  float angleErrorMean()   { return mErr1; } // radians
+  float angleErrorStddev() { return mErr2; } // radians
 
-  public boolean surveyAttached; //!< whether the survey is attached
-  public boolean surveyExtend;
+  boolean surveyAttached; //!< whether the survey is attached
+  boolean surveyExtend;
 
-  public List<NumStation> getStations() { return mStations.getStations(); }
-  public List<NumStation> getClosureStations() { return mClosureStations; }
-  public List<NumShot>    getShots()    { return mShots; }
-  public List<NumSplay>   getSplays()   { return mSplays; }
-  public List<String>     getClosures() { return mClosures; }
+  List<NumStation> getStations() { return mStations.getStations(); }
+  List<NumStation> getClosureStations() { return mClosureStations; }
+  List<NumShot>    getShots()    { return mShots; }
+  List<NumSplay>   getSplays()   { return mSplays; }
+  List<String>     getClosures() { return mClosures; }
 
-  public List<NumSplay>   getSplaysAt( NumStation st ) 
+  List<NumSplay>   getSplaysAt( NumStation st )
   {
     ArrayList< NumSplay > ret = new ArrayList<>();
     for ( NumSplay splay : mSplays ) {
@@ -139,7 +139,7 @@ class DistoXNum
   }
 
   // get shots at station st, except shot [st,except]
-  public List<NumShot> getShotsAt( NumStation st, NumStation except )
+  List<NumShot> getShotsAt( NumStation st, NumStation except )
   {
     ArrayList<NumShot> ret = new ArrayList<>();
     for ( NumShot shot : mShots ) {
@@ -177,7 +177,7 @@ class DistoXNum
     }
   }
 
-  void setStationsHide( String hide )
+  private void setStationsHide( String hide )
   {
     if ( hide == null ) return;
     String[] names = hide.split(" ");
@@ -211,7 +211,7 @@ class DistoXNum
     }
   }
 
-  void setStationsBarr( String barr )
+  private void setStationsBarr( String barr )
   {
     if ( barr == null ) return;
     String[] names = barr.split(" ");
@@ -223,15 +223,13 @@ class DistoXNum
   boolean isHidden( String name )
   {
     NumStation st = getStation( name );
-    if ( st == null ) return false;
-    return st.hidden();
+    return ( st != null && st.hidden() );
   }
 
   boolean isBarrier( String name )
   {
     NumStation st = getStation( name );
-    if ( st == null ) return false;
-    return st.barrier();
+    return ( st != null && st.barrier() );
   }
 
   // for the shot FROM-TO
@@ -385,18 +383,18 @@ class DistoXNum
     if ( s.v > mVmax ) mVmax = s.v;
   }
 
-  public float surveyNorth() { return (mSmin < 0)? -mSmin : 0; }
-  public float surveySouth() { return mSmax; }
-  public float surveyWest() { return (mEmin < 0)? -mEmin : 0; }
-  public float surveyEast() { return mEmax; }
-  public float surveySmin() { return mSmin; }
-  public float surveySmax() { return mSmax; }
-  public float surveyEmin() { return mEmin; }
-  public float surveyEmax() { return mEmax; }
-  public float surveyHmin() { return mHmin; }
-  public float surveyHmax() { return mHmax; }
-  public float surveyVmin() { return mVmin; }
-  public float surveyVmax() { return mVmax; }
+  float surveyNorth() { return (mSmin < 0)? -mSmin : 0; }
+  float surveySouth() { return mSmax; }
+  float surveyWest() { return (mEmin < 0)? -mEmin : 0; }
+  float surveyEast() { return mEmax; }
+  float surveySmin() { return mSmin; }
+  float surveySmax() { return mSmax; }
+  float surveyEmin() { return mEmin; }
+  float surveyEmax() { return mEmax; }
+  float surveyHmin() { return mHmin; }
+  float surveyHmax() { return mHmax; }
+  float surveyVmin() { return mVmin; }
+  float surveyVmax() { return mVmax; }
 
   // ----------------------------------------------------------------------------
   /** add a shot to a station (possibly forwarded to the station's node)
@@ -574,7 +572,7 @@ class DistoXNum
   /** correct temporary shots using trilateration
    * @param shots temporary shot list
    */
-  void makeTrilateration( List<TriShot> shots )
+  private void makeTrilateration( List<TriShot> shots )
   {
     ArrayList<TriCluster> clusters = new ArrayList<>();
     for ( TriShot sh : shots ) sh.cluster = null;
@@ -1277,7 +1275,7 @@ class DistoXNum
    * FIXME there is a flaw:
    * this method does not detect single loops with no hair attached
    */
-  ArrayList<NumBranch> makeBranches( ArrayList<NumNode> nodes, boolean also_cross_end )
+  private ArrayList<NumBranch> makeBranches( ArrayList<NumNode> nodes, boolean also_cross_end )
   {
     // for ( NumNode nd : nodes ) {
     //   Log.v("DistoX", "node " + nd.station.name + " branches " + nd.branches.size() );
@@ -1363,7 +1361,7 @@ class DistoXNum
    * @param nc   size of columns
    * @param nd   row-stride
    */
-  static float invertMatrix( float[] a, int nr, int nc, int nd)
+  static private float invertMatrix( float[] a, int nr, int nc, int nd)
   {
     float  det_val = 1.0f;                /* determinant value */
     int     ij, jr, ki, kj;
@@ -1408,7 +1406,7 @@ class DistoXNum
     return det_val;
   }
 
-  void doLoopCompensation( ArrayList< NumNode > nodes, ArrayList< NumShot > shots )
+  private void doLoopCompensation( ArrayList< NumNode > nodes, ArrayList< NumShot > shots )
   {
     ArrayList<NumBranch> branches = makeBranches( nodes, false );
 

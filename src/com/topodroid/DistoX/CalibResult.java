@@ -13,10 +13,10 @@ package com.topodroid.DistoX;
 
 class CalibResult
 {
-  public float error;  // average error [deg]
-  public float stddev; // error stddev [deg]
-  public float max_error;      // [deg]
-  public int iterations;  
+  float error;  // average error [deg]
+  float stddev; // error stddev [deg]
+  float max_error;      // [deg]
+  int iterations;  
 
   CalibResult()
   {

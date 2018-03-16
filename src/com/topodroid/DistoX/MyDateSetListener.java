@@ -17,7 +17,7 @@ import android.app.DatePickerDialog.OnDateSetListener;
 
 class MyDateSetListener implements OnDateSetListener 
 {
-  TextView mView;
+  private TextView mView;
 
   MyDateSetListener( TextView v )
   {

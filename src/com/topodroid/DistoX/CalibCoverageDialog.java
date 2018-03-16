@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import java.util.List;
+import java.util.Locale;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -27,16 +28,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.View;
 
-public class CalibCoverageDialog extends MyDialog
+class CalibCoverageDialog extends MyDialog
                            implements View.OnClickListener
 {
   private class Direction
   {
-    public float mCompass;
-    public float mClino;
-    public float mValue;
+    float mCompass;
+    float mClino;
+    float mValue;
 
-    public Direction( float cm, float cl, float v )
+    Direction( float cm, float cl, float v )
     {
       mCompass = cm;
       mClino = cl;
@@ -66,7 +67,7 @@ public class CalibCoverageDialog extends MyDialog
   private Button mBtnEvalCal;
   // private Button mBtnBack;
 
-  public CalibCoverageDialog( Context context, List< CalibCBlock > list, CalibAlgo cal )
+  CalibCoverageDialog( Context context, List< CalibCBlock > list, CalibAlgo cal )
   {
     super( context, R.string.CalibCoverageDialog );
     
@@ -103,9 +104,10 @@ public class CalibCoverageDialog extends MyDialog
   private void reset()
   {
     mImage.setImageBitmap( mBitmap );
-    mText.setText( Float.toString( mCoverage ) );
+    mText.setText( String.format(Locale.US, "%.2f", mCoverage ) );
   }
 
+  @Override
   public void onClick(View v) 
   {
     Button btn = (Button)v;

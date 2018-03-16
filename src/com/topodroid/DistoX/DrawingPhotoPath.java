@@ -11,11 +11,11 @@
  */
 package com.topodroid.DistoX;
 
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.RectF;
-import android.graphics.Matrix;
+// import android.graphics.Canvas;
+// import android.graphics.Paint;
+// import android.graphics.Path;
+// import android.graphics.RectF;
+// import android.graphics.Matrix;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -30,14 +30,14 @@ import android.util.Base64;
 
 /**
  */
-public class DrawingPhotoPath extends DrawingPointPath
+class DrawingPhotoPath extends DrawingPointPath
 {
   private static float toTherion = TDConst.TO_THERION;
 
   long mId; // id of the photo 
   // private Paint paint;
 
-  public DrawingPhotoPath( String text, float off_x, float off_y, int scale, String options, long id )
+  DrawingPhotoPath( String text, float off_x, float off_y, int scale, String options, long id )
   {
     super( BrushManager.mPointLib.mPointPhotoIndex, off_x, off_y, scale, text, options );
     mId = id;

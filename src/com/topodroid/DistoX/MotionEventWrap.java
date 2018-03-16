@@ -14,16 +14,16 @@ import android.os.Build;
 import android.view.MotionEvent;
 // import android.util.Log;
 
-public class MotionEventWrap 
+class MotionEventWrap
 {
    protected MotionEvent event;
 
-   protected MotionEventWrap( MotionEvent event ) 
+   MotionEventWrap( MotionEvent event )
    {
       this.event = event;
    }
 
-   static public MotionEventWrap wrap(MotionEvent event) 
+   static MotionEventWrap wrap(MotionEvent event)
    {
       // FIXME NFE 
 
@@ -37,25 +37,25 @@ public class MotionEventWrap
       }
    }
    
-   public int getAction() { return event.getAction(); }
+   int getAction() { return event.getAction(); }
 
    // this is the X coord (pixels, from the center ?) adjusted for containing window and views
    // to get the real X use getRawX()
    //
-   public float getX() { return event.getX(); }
-   public float getX(int pointerIndex) 
+   float getX() { return event.getX(); }
+   float getX(int pointerIndex)
    {
       verifyPointerIndex(pointerIndex);
       return getX();
    }
-   public float getY() { return event.getY(); }
-   public float getY(int pointerIndex) 
+   float getY() { return event.getY(); }
+   float getY(int pointerIndex)
    {
       verifyPointerIndex(pointerIndex);
       return getY();
    }
-   public int getPointerCount() { return 1; }
-   public int getPointerId(int pointerIndex) 
+   int getPointerCount() { return 1; }
+   int getPointerId(int pointerIndex)
    {
       verifyPointerIndex(pointerIndex);
       return 0;

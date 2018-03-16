@@ -23,7 +23,7 @@ import android.bluetooth.BluetoothDevice;
 
 import android.util.Log;
 
-public class PairingRequest extends BroadcastReceiver{
+class PairingRequest extends BroadcastReceiver{
   @Override
   public void onReceive(Context context, Intent intent){
     if (intent.getAction().equals("ACTION_PAIRING_REQUEST")) {

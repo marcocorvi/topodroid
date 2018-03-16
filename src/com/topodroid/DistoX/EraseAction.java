@@ -12,30 +12,30 @@
  */
 package com.topodroid.DistoX;
 
-import java.io.PrintWriter;
+// import java.io.PrintWriter;
 
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.Matrix;
+// import android.graphics.Canvas;
+// import android.graphics.Paint;
+// import android.graphics.Path;
+// import android.graphics.Matrix;
 
 import java.util.ArrayList;
 // import android.util.Log;
 
 /**
  */
-public class EraseAction // implements ICanvasCommand
+class EraseAction // implements ICanvasCommand
 {
-  public static final int ERASE_REMOVE = 0; // drop item
-  public static final int ERASE_INSERT = 1; // add item
-  public static final int ERASE_MODIFY = 2; // modify item
+  static final int ERASE_REMOVE = 0; // drop item
+  static final int ERASE_INSERT = 1; // add item
+  static final int ERASE_MODIFY = 2; // modify item
 
 
   int mInitialType;  // action inital type
   int mType;         // action type
   DrawingPath mPath; // affected path
-  ArrayList< LinePoint > mOldPoints = null;
-  ArrayList< LinePoint > mNewPoints = null;
+  private ArrayList< LinePoint > mOldPoints = null;
+  private ArrayList< LinePoint > mNewPoints = null;
                  
   EraseAction( int type, DrawingPath path )
   {

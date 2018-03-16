@@ -23,7 +23,7 @@ import android.view.View.OnKeyListener;
 import android.view.KeyEvent;
 import android.view.Window;
 
-public class MyDialog extends Dialog 
+class MyDialog extends Dialog
                       // implements View.OnClickListener
 {
   protected Context mContext;

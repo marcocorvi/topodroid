@@ -15,42 +15,42 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Bitmap;
 import android.graphics.Point;
-import android.graphics.PorterDuff;
+// import android.graphics.PorterDuff;
 import android.graphics.PointF;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 // import android.graphics.Path.Direction;
-import android.os.Handler;
+// import android.os.Handler;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+// import java.util.Map;
+// import java.util.concurrent.ConcurrentHashMap;
 // import java.util.Locale;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.io.BufferedWriter;
-import java.io.StringWriter;
+// import java.io.StringWriter;
 import java.io.PrintWriter;
-import java.io.FileReader;
-import java.io.FileOutputStream;
+// import java.io.FileReader;
+// import java.io.FileOutputStream;
 import java.io.DataOutputStream;
 // import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.EOFException;
+// import java.io.IOException;
+// import java.io.EOFException;
 
-import java.util.Locale;
+// import java.util.Locale;
 
-import android.util.Log;
+// import android.util.Log;
 
 /**
  */
-public class DrawingCommandManager 
+class DrawingCommandManager
 {
   private static final int BORDER = 20;
 
-  static int mDisplayMode = DisplayMode.DISPLAY_ALL; // this display mode is shared among command managers
+  static private int mDisplayMode = DisplayMode.DISPLAY_ALL; // this display mode is shared among command managers
   private RectF mBBox;
   boolean mIsExtended = false;
 
@@ -58,20 +58,20 @@ public class DrawingCommandManager
   private DrawingPath mFirstReference;
   private DrawingPath mSecondReference;
 
-  private List<DrawingPath>    mGridStack1;
-  private List<DrawingPath>    mGridStack10;
-  private List<DrawingPath>    mGridStack100;
+  final private List<DrawingPath>    mGridStack1;
+  final private List<DrawingPath>    mGridStack10;
+  final private List<DrawingPath>    mGridStack100;
 
   private DrawingScaleReference mScaleRef; /*[AR] this is the instance of scale reference line*/
 
-  private List<DrawingPath>        mLegsStack;
-  private List<DrawingPath>        mSplaysStack;
-  private List<ICanvasCommand>     mCurrentStack;
-  private List<DrawingStationPath> mUserStations;  // user-inserted stations
-  private List<ICanvasCommand>     mRedoStack;
+  final private List<DrawingPath>        mLegsStack;
+  final private List<DrawingPath>        mSplaysStack;
+  final private List<ICanvasCommand>     mCurrentStack;
+  final private List<DrawingStationPath> mUserStations;  // user-inserted stations
+  final private List<ICanvasCommand>     mRedoStack;
   // private List<DrawingPath>     mHighlight;  // highlighted path
-  private List<DrawingStationName> mStations;  // survey stations
-  private List<DrawingLinePath>    mScrap;     // scrap outline
+  final private List<DrawingStationName> mStations;  // survey stations
+  final private List<DrawingLinePath>    mScrap;     // scrap outline
   private List<DrawingOutlinePath> mXSections; // xsections outlines
   private int mMaxAreaIndex;                   // max index of areas in this plot
 
@@ -105,8 +105,8 @@ public class DrawingCommandManager
   private float mEraserY = 0;
   private float mEraserR = 0; // eraser radius
 
-  public void setDisplayMode( int mode ) { mDisplayMode = mode; }
-  public int getDisplayMode( ) { return mDisplayMode; }
+  void setDisplayMode( int mode ) { mDisplayMode = mode; }
+  int getDisplayMode( ) { return mDisplayMode; }
 
   /* Check if any line overlaps another of the same type
    * In case of overlap the overlapped line is removed
@@ -176,7 +176,7 @@ public class DrawingCommandManager
     synchronized( mSplaysStack ) { flipXAxes( mSplaysStack ); }
     // FIXME 
     synchronized( mScrap ) { mScrap.clear(); }
-    synchronized( mXSections ) { mXSections.clear(); }
+    synchronized( TDPath.mXSectionsLock ) { mXSections.clear(); }
  
     synchronized( mStations ) {
       for ( DrawingStationName st : mStations ) {
@@ -231,7 +231,7 @@ public class DrawingCommandManager
       }
     }
     if ( mSelection != null ) {
-      synchronized( mSelection ) {
+      synchronized( TDPath.mSelectionLock ) {
         mSelection.shiftSelectionBy( x, y );
       }
     }
@@ -262,13 +262,13 @@ public class DrawingCommandManager
       }
     }
     if ( mSelection != null ) {
-      synchronized( mSelection ) {
+      synchronized( TDPath.mSelectionLock ) {
         mSelection.scaleSelectionBy( z, m );
       }
     }
   }
 
-  public DrawingCommandManager()
+  DrawingCommandManager()
   {
     mIsExtended  = false;
     mBBox = new RectF();
@@ -308,7 +308,7 @@ public class DrawingCommandManager
   //                                   + mCurrentStack.toArray().length );
   // }
 
-  void clearSelected() { synchronized( mSelected ) { mSelected.clear(); } }
+  void clearSelected() { synchronized( TDPath.mSelectedLock ) { mSelected.clear(); } }
 
   void clearReferences()
   {
@@ -325,15 +325,15 @@ public class DrawingCommandManager
     synchronized( mLegsStack )   { mLegsStack.clear(); }
     synchronized( mSplaysStack ) { mSplaysStack.clear(); }
     synchronized( mScrap       ) { mScrap.clear(); }
-    synchronized( mXSections   ) { mXSections.clear(); }
+    synchronized( TDPath.mXSectionsLock   ) { mXSections.clear(); }
     synchronized( mStations )    { mStations.clear(); }
     clearSelected();
-    synchronized( mSelection )   { mSelection.clearReferencePoints(); }
+    synchronized( TDPath.mSelectionLock )   { mSelection.clearReferencePoints(); }
   }
 
   private void clearSketchItems()
   {
-    synchronized( mSelection )    { mSelection.clearSelectionPoints(); }
+    synchronized( TDPath.mSelectionLock )    { mSelection.clearSelectionPoints(); }
     synchronized( mCurrentStack ) { mCurrentStack.clear(); }
     synchronized( mUserStations ) { mUserStations.clear(); }
     mRedoStack.clear();
@@ -372,7 +372,7 @@ public class DrawingCommandManager
   List< DrawingPathIntersection > getIntersectionShot( LinePoint p1, LinePoint p2 )
   {
     List< DrawingPathIntersection > ret = new ArrayList<>();
-    Float pt = new Float( 0 );
+    Float pt = Float.valueOf( 0 );
     for ( DrawingPath p : mLegsStack ) {
       if ( p.mType == DrawingPath.DRAWING_PATH_FIXED ) {
         float t = p.intersectSegment( p1.x, p1.y, p2.x, p2.y );
@@ -436,7 +436,7 @@ public class DrawingCommandManager
   /* Set the transform matrix for the canvas rendering of the drawing
    * The matrix is diag(s*dx, s*dy)
    */
-  public void setTransform( float dx, float dy, float s, boolean landscape )
+  void setTransform( float dx, float dy, float s, boolean landscape )
   {
     mLandscape = landscape;
     mScale  = 1 / s;
@@ -554,7 +554,7 @@ public class DrawingCommandManager
                 ret = 2; 
                 eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
                 mCurrentStack.remove( path );
-                synchronized( mSelection ) {
+                synchronized ( TDPath.mSelectionLock ) {
                   mSelection.removePath( path );
                 }
               } 
@@ -565,7 +565,7 @@ public class DrawingCommandManager
                 // LinePoint lp = points.get(0);
                 LinePoint lp = first;
                 doRemoveLinePoint( line, pt.mPoint, pt );
-                synchronized( mSelection ) {
+                synchronized ( TDPath.mSelectionLock ) {
                   mSelection.removeLinePoint( line, lp ); // index = 0
                   // mSelection.mPoints.remove( pt );        // index = 1
                 }
@@ -579,7 +579,7 @@ public class DrawingCommandManager
                 LinePoint lp = first;
                 doRemoveLinePoint( line, lp, null );
                 doRemoveLinePoint( line, pt.mPoint, pt );
-                synchronized( mSelection ) {
+                synchronized ( TDPath.mSelectionLock ) {
                   mSelection.removeLinePoint( line, lp ); // index = 0
                   mSelection.mPoints.remove( pt );        // index = 1
                 }
@@ -593,7 +593,7 @@ public class DrawingCommandManager
                 LinePoint lp = last;
                 doRemoveLinePoint( line, lp, null );
                 doRemoveLinePoint( line, pt.mPoint, pt );
-                synchronized( mSelection ) {
+                synchronized ( TDPath.mSelectionLock ) {
                   mSelection.removeLinePoint( line, lp ); // size -1
                   mSelection.mPoints.remove( pt );        // size -2
                 }
@@ -611,7 +611,7 @@ public class DrawingCommandManager
                 ret = 6;
                 eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
                 mCurrentStack.remove( path );
-                synchronized( mSelection ) {
+                synchronized ( TDPath.mSelectionLock ) {
                   mSelection.removePath( path );
                 }
               } else {
@@ -626,7 +626,7 @@ public class DrawingCommandManager
               ret = 1;
               eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
               mCurrentStack.remove( path );
-              synchronized( mSelection ) {
+              synchronized ( TDPath.mSelectionLock ) {
                 mSelection.removePath( path );
               }
             }
@@ -663,12 +663,12 @@ public class DrawingCommandManager
           mCurrentStack.add( line2 );
         }
       }
-      synchronized( mSelection ) {
+      synchronized( TDPath.mSelectionLock ) {
         mSelection.removePath( line ); 
         if ( line1.size() > 1 ) mSelection.insertLinePath( line1 );
         if ( line2.size() > 1 ) mSelection.insertLinePath( line2 );
       }
-    } else {
+    // } else {
       // FIXME 
       // TDLog.Error( "FAILED splitAt " + lp.x + " " + lp.y );
       // line.dump();
@@ -706,7 +706,7 @@ public class DrawingCommandManager
         mCurrentStack.add( line1 );
         mCurrentStack.add( line2 );
       }
-      synchronized( mSelection ) {
+      synchronized( TDPath.mSelectionLock ) {
         mSelection.removePath( line ); 
         mSelection.insertLinePath( line1 );
         mSelection.insertLinePath( line2 );
@@ -731,7 +731,7 @@ public class DrawingCommandManager
     //line.mPoints.remove( point );
     line.remove( point );
     if ( sp != null ) { // sp can be null 
-      synchronized( mSelection ) {
+      synchronized( TDPath.mSelectionLock ) {
         mSelection.removePoint( sp );
       }
     }
@@ -744,7 +744,7 @@ public class DrawingCommandManager
     // int size = line.mPoints.size();
     int size = line.size();
     if ( size <= 2 ) return false;
-    synchronized( mSelection ) { clearSelected(); }
+    synchronized( TDPath.mSelectionLock ) { clearSelected(); }
     // for ( int k=0; k<size; ++k ) 
     for ( LinePoint lp = line.mFirst; lp != null; lp = lp.mNext ) 
     {
@@ -753,7 +753,7 @@ public class DrawingCommandManager
         synchronized( mCurrentStack ) {
           // line.mPoints.remove( k );
           line.remove( point );
-          synchronized( mSelection ) {
+          synchronized( TDPath.mSelectionLock ) {
             mSelection.removePoint( sp );
           }
           // checkLines();
@@ -770,13 +770,13 @@ public class DrawingCommandManager
     synchronized( mCurrentStack ) {
       mCurrentStack.remove( path );
     }
-    synchronized( mSelection ) {
+    synchronized( TDPath.mSelectionLock ) {
       mSelection.removePath( path );
       clearSelected();
     }
   }
   
-  boolean isInside( float x, float y, ArrayList<PointF> b )
+  private boolean isInside( float x, float y, ArrayList<PointF> b )
   {
     int n = b.size();
     PointF p = b.get( n-1 );
@@ -828,7 +828,7 @@ public class DrawingCommandManager
     synchronized( mSplaysStack ) {
       mSplaysStack.remove( p );
     }
-    synchronized( mSelection ) {
+    synchronized( TDPath.mSelectionLock ) {
       mSelection.removePoint( sp );
       clearSelected();
     }
@@ -876,14 +876,14 @@ public class DrawingCommandManager
 
   void reducePointLine( DrawingPointLinePath line ) 
   {
-    synchronized( mSelection ) {
+    synchronized( TDPath.mSelectionLock ) {
       mSelection.removePath( line );
       clearSelected();
     }
     synchronized( mCurrentStack ) {
       line.makeReduce( );
     }
-    synchronized( mSelection ) {
+    synchronized( TDPath.mSelectionLock ) {
       mSelection.insertPath( line );
     }
     // checkLines();
@@ -892,14 +892,14 @@ public class DrawingCommandManager
 
   void rockPointLine( DrawingPointLinePath line ) 
   {
-    synchronized( mSelection ) {
+    synchronized( TDPath.mSelectionLock ) {
       mSelection.removePath( line );
       clearSelected();
     }
     synchronized( mCurrentStack ) {
       line.makeRock( );
     }
-    synchronized( mSelection ) {
+    synchronized( TDPath.mSelectionLock ) {
       mSelection.insertPath( line );
     }
     // checkLines();
@@ -962,13 +962,13 @@ public class DrawingCommandManager
     }
   }
 
-  public void addLegPath( DrawingPath path, boolean selectable )
+  void addLegPath( DrawingPath path, boolean selectable )
   { 
     if ( mLegsStack == null ) return;
     synchronized( mLegsStack ) {
       mLegsStack.add( path );
       if ( selectable ) {
-        synchronized( mSelection ) {
+        synchronized( TDPath.mSelectionLock ) {
           if ( path.mBlock != null ) {
             // Log.v( "DistoX", "selection add fixed path " + path.mBlock.mFrom + " " + path.mBlock.mTo );
           }
@@ -978,13 +978,13 @@ public class DrawingCommandManager
     }
   }  
 
-  public void addSplayPath( DrawingPath path, boolean selectable )
+  void addSplayPath( DrawingPath path, boolean selectable )
   {
     if ( mSplaysStack == null ) return;
     synchronized( mSplaysStack ) {
       mSplaysStack.add( path );
       if ( selectable ) {
-        synchronized( mSelection ) {
+        synchronized( TDPath.mSelectionLock ) {
           if ( path.mBlock != null ) {
             // Log.v( "DistoX", "selection add fixed path " + path.mBlock.mFrom + " " + path.mBlock.mTo );
           }
@@ -994,12 +994,12 @@ public class DrawingCommandManager
     }
   }  
   
-  public void setNorth( DrawingPath path )
+  void setNorth( DrawingPath path )
   {
     mNorthLine = path;
   }
   
-  public void addGrid( DrawingPath path, int k ) 
+  void addGrid( DrawingPath path, int k )
   { 
     if ( mGridStack1 == null ) return;
     synchronized( mGridStack1 ) {
@@ -1078,14 +1078,14 @@ public class DrawingCommandManager
     synchronized( mCurrentStack ) {
       mCurrentStack.add( path );
     }
-    synchronized( mSelection ) {
+    synchronized( TDPath.mSelectionLock ) {
       mSelection.insertPath( path );
     }
     
     // checkLines();
   }
 
-  public boolean deleteSectionPoint( String scrap_name, EraseCommand cmd )
+  boolean deleteSectionPoint( String scrap_name, EraseCommand cmd )
   {
     int index = BrushManager.mPointLib.mPointSectionIndex;
     synchronized( mCurrentStack ) {
@@ -1125,7 +1125,7 @@ public class DrawingCommandManager
   }
 
   // called by DrawingSurface.getBitmap()
-  public RectF getBitmapBounds()
+  RectF getBitmapBounds()
   {
     // Log.v("DistoX", "get bitmap bounds. splays " + mSplaysStack.size() 
     //               + " legs " + mLegsStack.size() 
@@ -1294,7 +1294,7 @@ public class DrawingCommandManager
       mRedoStack.add( cmd );
 
       if ( cmd.commandType() == 0 ) {
-        synchronized( mSelection ) {
+        synchronized( TDPath.mSelectionLock ) {
           mSelection.removePath( (DrawingPath)cmd );
         }
       } else { // EraseCommand
@@ -1309,7 +1309,7 @@ public class DrawingCommandManager
             synchronized( mCurrentStack ) {
               mCurrentStack.remove( path );
             }
-            synchronized( mSelection ) {
+            synchronized( TDPath.mSelectionLock ) {
               mSelection.removePath( path );
             }
           } else if ( action.mType == EraseAction.ERASE_REMOVE ) {
@@ -1317,17 +1317,17 @@ public class DrawingCommandManager
               action.restorePoints( true ); // true: use old points
               mCurrentStack.add( path );
             }
-            synchronized( mSelection ) {
+            synchronized( TDPath.mSelectionLock ) {
               mSelection.insertPath( path );
             }
           } else if ( action.mType == EraseAction.ERASE_MODIFY ) { // undo modify
-            synchronized( mSelection ) {
+            synchronized( TDPath.mSelectionLock ) {
               mSelection.removePath( path );
             }
             synchronized( mCurrentStack ) {
               action.restorePoints( true );
             }
-            synchronized( mSelection ) {
+            synchronized( TDPath.mSelectionLock ) {
               mSelection.insertPath( path );
             }
           }
@@ -1337,10 +1337,9 @@ public class DrawingCommandManager
     // checkLines();
   }
 
-  public int currentStackLength()
+  private int currentStackLength()
   {
-    final int length = mCurrentStack.toArray().length;
-    return length;
+    return mCurrentStack.toArray().length;
   }
 
   // line points are scene-coords
@@ -1382,7 +1381,7 @@ public class DrawingCommandManager
    */
   void addLineToLine( DrawingLinePath line, DrawingLinePath line0 )
   {
-    synchronized( mSelection ) {
+    synchronized( TDPath.mSelectionLock ) {
       mSelection.removePath( line0 );
     }
     synchronized( mCurrentStack ) {
@@ -1394,7 +1393,7 @@ public class DrawingCommandManager
         line0.computeUnitNormal();
       }
     }
-    synchronized( mSelection ) {
+    synchronized( TDPath.mSelectionLock ) {
       mSelection.insertPath( line0 );
     }
     // checkLines();
@@ -1410,7 +1409,7 @@ public class DrawingCommandManager
   }
 
   // N.B. doneHandler is not used
-  public void executeAll( Canvas canvas, float zoom, ArrayList<String> splay_stations )
+  void executeAll( Canvas canvas, float zoom, ArrayList<String> splay_stations )
   {
     if ( canvas == null ) {
       TDLog.Error( "drawing executeAll: null canvas");
@@ -1512,7 +1511,7 @@ public class DrawingCommandManager
       }
     }
     if ( mXSections != null && mXSections.size() > 0 ) {
-      synchronized( mXSections )  {
+      synchronized( TDPath.mXSectionsLock )  {
         final Iterator i = mXSections.iterator();
         while ( i.hasNext() ){
           final DrawingOutlinePath path = (DrawingOutlinePath) i.next();
@@ -1577,7 +1576,7 @@ public class DrawingCommandManager
     }
 
     if ( mDisplayPoints ) {
-      synchronized( mSelection ) {
+      synchronized( TDPath.mSelectionLock ) {
         float radius = TDSetting.mDotRadius/zoom;
         final Iterator i = mSelection.mBuckets.iterator();
         while ( i.hasNext() ) {
@@ -1622,7 +1621,7 @@ public class DrawingCommandManager
         // }
 
       }
-      synchronized( mSelected ) {
+      synchronized( TDPath.mSelectedLock ) {
         if ( mSelected.mPoints.size() > 0 ) { // FIXME SELECTIOM
           float radius = 4*TDSetting.mDotRadius/zoom;
           Path path;
@@ -1757,12 +1756,12 @@ public class DrawingCommandManager
   //   return false;
   // }
 
-  public boolean hasMoreRedo()
+  boolean hasMoreRedo()
   {
     return  mRedoStack.toArray().length > 0;
   }
 
-  public boolean hasMoreUndo()
+  boolean hasMoreUndo()
   {
     return  mCurrentStack.toArray().length > 0;
   }
@@ -1779,7 +1778,7 @@ public class DrawingCommandManager
         synchronized( mCurrentStack ) {
           mCurrentStack.add( redoCommand );
         }
-        synchronized( mSelection ) {
+        synchronized( TDPath.mSelectionLock ) {
           mSelection.insertPath( redoCommand );
         }
       } else {
@@ -1791,24 +1790,24 @@ public class DrawingCommandManager
             synchronized( mCurrentStack ) {
               mCurrentStack.add( path );
             }
-            synchronized( mSelection ) {
+            synchronized( TDPath.mSelectionLock ) {
               mSelection.insertPath( path );
             }
           } else if ( action.mType == EraseAction.ERASE_REMOVE ) {
             synchronized( mCurrentStack ) {
               mCurrentStack.remove( path );
             }
-            synchronized( mSelection ) {
+            synchronized( TDPath.mSelectionLock ) {
               mSelection.removePath( path );
             }
           } else if ( action.mType == EraseAction.ERASE_MODIFY ) {
-            synchronized( mSelection ) {
+            synchronized( TDPath.mSelectionLock ) {
               mSelection.removePath( path );
             }
             synchronized( mCurrentStack ) {
               action.restorePoints( false ); // false: use new points
             }
-            synchronized( mSelection ) {
+            synchronized( TDPath.mSelectionLock ) {
               mSelection.insertPath( path );
             }
           }
@@ -1836,7 +1835,7 @@ public class DrawingCommandManager
     }
     float radius = TDSetting.mCloseCutoff + size / zoom;
     SelectionPoint sp2 = null;
-    synchronized ( mSelected ) {
+    synchronized ( TDPath.mSelectedLock ) {
       sp2 = mSelection.selectOnItemAt( item, x, y, 4*radius );
     }
     if ( sp2 == null ) {
@@ -1891,14 +1890,14 @@ public class DrawingCommandManager
   }
 
     
-  public SelectionSet getItemsAt( float x, float y, float zoom, int mode, float size )
+  SelectionSet getItemsAt( float x, float y, float zoom, int mode, float size )
   {
     float radius = TDSetting.mCloseCutoff + size/zoom; // TDSetting.mSelectness / zoom;
     // Log.v( "DistoX", "getItemAt " + x + " " + y + " zoom " + zoom + " mode " + mode + " size " + size + " " + radius );
     boolean legs   = (mDisplayMode & DisplayMode.DISPLAY_LEG) != 0;
     boolean splays = (mDisplayMode & DisplayMode.DISPLAY_SPLAY ) != 0;
     boolean stations = (mDisplayMode & DisplayMode.DISPLAY_STATION ) != 0;
-    synchronized ( mSelected ) {
+    synchronized ( TDPath.mSelectedLock ) {
       mSelected.clear();
       mSelection.selectAt( mSelected, x, y, radius, mode, legs, splays, stations );
       if ( mSelected.mPoints.size() > 0 ) {
@@ -1921,11 +1920,11 @@ public class DrawingCommandManager
     DrawingPointLinePath line = (DrawingPointLinePath)sp.mItem;
     LinePoint p1 = line.insertPointAfter( x, y, lp );
     SelectionPoint sp1 = null;
-    synchronized( mSelection ) {
+    synchronized( TDPath.mSelectionLock ) {
       sp1 = mSelection.insertPathPoint( line, p1 );
     }
     if ( sp1 != null ) {
-      synchronized( mSelected ) {
+      synchronized( TDPath.mSelectedLock ) {
         mSelected.mPoints.add( sp1 );
       }
     }
@@ -2114,13 +2113,15 @@ public class DrawingCommandManager
       ++ k0;
       len = 0;
     }
-    while ( lp2 != null /* && k0 < size */ ) { // N.B. k0 must be < size
-      len += dist[k0];
-      float dx = (1 - len/spr.rlen) * spr.dx;
-      float dy = (1 - len/spr.rlen) * spr.dy;
-      lp2.shiftBy( dx, dy );
-      lp2 = lp2.mNext;
-      ++ k0;
+    if ( spr != null ) {
+      while ( lp2 != null /* && k0 < size */ ) { // N.B. k0 must be < size
+        len += dist[k0];
+        float dx = (1 - len/spr.rlen) * spr.dx;
+        float dy = (1 - len/spr.rlen) * spr.dy;
+        lp2.shiftBy( dx, dy );
+        lp2 = lp2.mNext;
+        ++ k0;
+      }
     }
     line.retracePath();
 
@@ -2365,7 +2366,7 @@ public class DrawingCommandManager
 
     synchronized( mCurrentStack ) {
       if ( ret == 0 ) { 
-        synchronized( mSelection ) {
+        synchronized( TDPath.mSelectionLock ) {
           mSelection.removePath( area );
         }
         // next-prev refer to the point list along the area path.
@@ -2418,11 +2419,11 @@ public class DrawingCommandManager
         if ( reverse ) {
           LinePoint q = qq10.mPrev;
           LinePoint p = pp10;
-          if ( q != null ) {
-            // TDLog.Debug( "snap attach at " + q.x + " " + q.y );
-          } else {
-            // TDLog.Debug( "snap restart area ");
-          }
+          // if ( q != null ) {
+          //   // TDLog.Debug( "snap attach at " + q.x + " " + q.y );
+          // } else {
+          //   // TDLog.Debug( "snap restart area ");
+          // }
           q = new LinePoint( p.x, p.y, q );
           // TDLog.Debug( "snap first new point " + q.x + " " + q.y );
           if ( p != pp20 ) {
@@ -2458,11 +2459,11 @@ public class DrawingCommandManager
 
           LinePoint q = qq20.mPrev;
           LinePoint p = pp20;
-          if ( q != null ) {
-            // TDLog.Debug( "snap attach at " + q.x + " " + q.y );
-          } else {
-            // TDLog.Debug( "snap restart area ");
-          }
+          // if ( q != null ) {
+          //   // TDLog.Debug( "snap attach at " + q.x + " " + q.y );
+          // } else {
+          //   // TDLog.Debug( "snap restart area ");
+          // }
           q = new LinePoint( p.x, p.y, q );
           // TDLog.Debug( "snap first new point " + q.x + " " + q.y );
           if ( p != pp10 ) {
@@ -2492,7 +2493,7 @@ public class DrawingCommandManager
       area.retracePath();
       
       if ( ret == 0 ) {
-        synchronized( mSelection ) {
+        synchronized( TDPath.mSelectionLock ) {
           mSelection.insertPath( area );
         }
       }
@@ -2508,7 +2509,7 @@ public class DrawingCommandManager
 
   void rotateHotItem( float dy )
   { 
-    synchronized( mSelection ) {
+    synchronized( TDPath.mSelectionLock ) {
       mSelected.rotateHotItem( dy );
     }
   }
@@ -2516,7 +2517,7 @@ public class DrawingCommandManager
   // void shiftHotItem( float dx, float dy, float range ) 
   void shiftHotItem( float dx, float dy )
   { 
-    synchronized( mSelection ) {
+    synchronized( TDPath.mSelectionLock ) {
       // SelectionPoint sp = mSelected.shiftHotItem( dx, dy, range );
       SelectionPoint sp = mSelected.shiftHotItem( dx, dy );
       DrawingPath path = sp.mItem;
@@ -2559,7 +2560,7 @@ public class DrawingCommandManager
   //   mSelection = selection;
   // }
 
-  RectF computeBBox() 
+  private RectF computeBBox() 
   {
     float xmin=1000000f, xmax=-1000000f, 
           ymin=1000000f, ymax=-1000000f;
@@ -2580,7 +2581,7 @@ public class DrawingCommandManager
   }
 
   // FIXME DataHelper and SID are necessary to export splays by the station
-  public void exportTherion( // DataHelper dh, long sid,
+  void exportTherion( // DataHelper dh, long sid,
                              int type, BufferedWriter out, String scrap_name, String proj_name, int proj_dir )
   {
     RectF bbox = computeBBox();
@@ -2589,7 +2590,7 @@ public class DrawingCommandManager
                              mCurrentStack, mUserStations, mStations, mSplaysStack );
   }
    
-  public void exportDataStream( int type, DataOutputStream dos, String scrap_name, int proj_dir )
+  void exportDataStream( int type, DataOutputStream dos, String scrap_name, int proj_dir )
   {
     RectF bbox = computeBBox();
     DrawingIO.exportDataStream( type, dos, scrap_name, proj_dir, bbox, mNorthLine, mCurrentStack, mUserStations, mStations );
@@ -2629,13 +2630,13 @@ public class DrawingCommandManager
   }
  
   // called by DrawingSurface::addDrawingStationName
-  public void addStation( DrawingStationName st, boolean selectable )
+  void addStation( DrawingStationName st, boolean selectable )
   {
     // Log.v("DistoX", "add station " + st.name() + " scene " + st.cx + " " + st.cy + " XSection " + st.mXSectionType );
     synchronized( mStations ) {
       mStations.add( st );
       if ( selectable ) {
-        synchronized( mSelection ) {
+        synchronized( TDPath.mSelectionLock ) {
           // Log.v( "DistoX", "selection add station " + st.name() );
           mSelection.insertStationName( st );
         }
@@ -2681,7 +2682,7 @@ public class DrawingCommandManager
 
   void clearScrapOutline() { synchronized( mScrap ) { mScrap.clear(); } }
 
-  public void addScrapOutlinePath( DrawingLinePath path ) 
+  void addScrapOutlinePath( DrawingLinePath path )
   {
     synchronized( mScrap ) {
       mScrap.add( path );
@@ -2695,12 +2696,12 @@ public class DrawingCommandManager
   //   }
   // }
 
-  void clearXSectionsOutline() { synchronized( mXSections ) { mXSections.clear(); } }
+  void clearXSectionsOutline() { synchronized( TDPath.mXSectionsLock ) { mXSections.clear(); } }
 
   boolean hasXSectionOutline( String name ) 
   { 
     if ( mXSections == null || mXSections.size() == 0 ) return false;
-    synchronized( mXSections )  {
+    synchronized( TDPath.mXSectionsLock )  {
       final Iterator i = mXSections.iterator();
       while ( i.hasNext() ){
         final DrawingOutlinePath path = (DrawingOutlinePath) i.next();
@@ -2712,7 +2713,7 @@ public class DrawingCommandManager
 
   void addXSectionOutlinePath( DrawingOutlinePath path )
   {
-    synchronized( mXSections ) {
+    synchronized( TDPath.mXSectionsLock ) {
       mXSections.add( path );
     }
   }
@@ -2720,7 +2721,7 @@ public class DrawingCommandManager
   void clearXSectionOutline( String name )
   {
     List<DrawingOutlinePath> xsections = Collections.synchronizedList(new ArrayList<DrawingOutlinePath>());
-    synchronized( mXSections ) {
+    synchronized( TDPath.mXSectionsLock ) {
       final Iterator i = mXSections.iterator();
       while ( i.hasNext() ) {
         final DrawingOutlinePath path = (DrawingOutlinePath) i.next();
@@ -2731,9 +2732,9 @@ public class DrawingCommandManager
     mXSections = xsections;
   }
 
-  void shiftXSectionOutline( String name, float dx, float dy )
+  private void shiftXSectionOutline( String name, float dx, float dy )
   {
-    synchronized( mXSections ) {
+    synchronized( TDPath.mXSectionsLock ) {
       final Iterator i = mXSections.iterator();
       while ( i.hasNext() ) {
         final DrawingOutlinePath path = (DrawingOutlinePath) i.next();

@@ -15,7 +15,7 @@ import java.lang.Math;
 
 // import android.util.Log;
 
-public class TDMath
+class TDMath
 {
   static final float M_PI  = (float)Math.PI;     // 3.1415926536f;
   static final float M_2PI = (2*M_PI); // 6.283185307f; 

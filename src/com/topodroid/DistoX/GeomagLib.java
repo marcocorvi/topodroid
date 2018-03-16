@@ -125,7 +125,7 @@ class GeomagLib
       FOffset*Multiplier );
   }
 
-  MagElement calculateGeoMagneticElements(MagVector result )
+  private MagElement calculateGeoMagneticElements(MagVector result )
   {
     MagElement elems = new MagElement( );
     elems.X = result.x;
@@ -179,7 +179,7 @@ class GeomagLib
   /** This takes the Magnetic Variation in x, y, and z and uses it to calculate the secular variation
    *  of each of the Geomagnetic elements.
    */
-  void calculateSecularVariationElements( MagVector var, MagElement elems )
+  private void calculateSecularVariationElements( MagVector var, MagElement elems )
   {
     elems.Xdot = var.x;
     elems.Ydot = var.y;
@@ -212,7 +212,7 @@ class GeomagLib
 
   /* Gets the UTM Parameters for a given Latitude and Longitude.
    */
-  MagUTMParams MAG_GetTransverseMercator(MagGeodetic geodetic )
+  private MagUTMParams MAG_GetTransverseMercator(MagGeodetic geodetic )
   {
     /*   Get the map projection  parameters */
     double Lambda = TDMath.DEG2RAD * geodetic.lambda;
@@ -258,7 +258,7 @@ class GeomagLib
    *    HemiSphere        : North or South hemisphere           (output)
    *    CentralMeridian	: Central Meridian of the UTM Zone in radians	   (output)
    */
-  MagUTMParams  MAG_GetUTMParameters(double Latitude, double Longitude )
+  private MagUTMParams  MAG_GetUTMParameters(double Latitude, double Longitude )
   {
     if ( (Latitude < TDMath.DEG2RAD*MagUtil.MAG_UTM_MIN_LAT_DEGREE)
       || (Latitude > TDMath.DEG2RAD*MagUtil.MAG_UTM_MAX_LAT_DEGREE) ) {
@@ -294,7 +294,7 @@ class GeomagLib
   /* Rotate the Magnetic Vectors to Geodetic Coordinates
    * Equation 16, WMM Technical report
    */
-  MagVector rotateVector( MagSpherical spherical,
+  private MagVector rotateVector( MagSpherical spherical,
              MagGeodetic geodetic,
 	     MagVector MagneticResultsSph )
   {
@@ -337,7 +337,7 @@ class GeomagLib
    *       pscale       point-scale (dimensionless)
    *       CoM          Convergence-of-meridians in radians
    */
-  MagUTMParams MAG_TMfwd4(double Eps, double Epssq, double K0R4, double K0R4oa,
+  private MagUTMParams MAG_TMfwd4(double Eps, double Epssq, double K0R4, double K0R4oa,
         double Acoeff[], MagUTMParams utm0, double K0, double falseE,
         double falseN, boolean XYonly, double Lambda, double Phi )
   {
@@ -459,7 +459,7 @@ class GeomagLib
                                   double[] Pcup;  ( store Legendre Function  )
                                   double[] dPcup; ( store  Derivative of Lagendre function )
    */
-  MagLegendre associatedLegendreFunction(MagSpherical spherical, int nMax )
+  private MagLegendre associatedLegendreFunction(MagSpherical spherical, int nMax )
   {
     double sin_phi = Math.sin( TDMath.DEG2RAD * spherical.phig ); // sin  (geocentric latitude)
 
@@ -486,7 +486,7 @@ class GeomagLib
    *  Variables computed are (a/r)^(n+2), cos_m(lamda) and sin_m(lambda) for spherical harmonic
    *  summations. (Equations 10-12 in the WMM Technical Report)
    */
-  MagHarmonic sphericalHarmonicVariables( MagEllipsoid ellip, MagSpherical spherical, int nMax )
+  private MagHarmonic sphericalHarmonicVariables( MagEllipsoid ellip, MagSpherical spherical, int nMax )
   {
     MagHarmonic vars = new MagHarmonic( nMax );
     double cos_lambda = Math.cos(TDMath.DEG2RAD * spherical.lambda);
@@ -590,7 +590,7 @@ class GeomagLib
    *
    * The derivatives can't be computed for latitude = |90| degrees.
    */
-  MagLegendre MAG_PcupHigh( double x, int nMax)
+  private MagLegendre MAG_PcupHigh( double x, int nMax)
   {
     int NumTerms = ((nMax + 1) * (nMax + 2) / 2);
     if ( Math.abs(x) == 1.0 ) {
@@ -685,7 +685,7 @@ class GeomagLib
    * to the latitude. The difference is a sign reversal for the derivative of
    * the Associated Legendre Functions.
    */
-  MagLegendre MAG_PcupLow( double x, int nMax )
+  private MagLegendre MAG_PcupLow( double x, int nMax )
   {
     int NumTerms = ((nMax + 1) * (nMax + 2) / 2);
     MagLegendre legendre = new MagLegendre( NumTerms );
@@ -757,7 +757,7 @@ class GeomagLib
 
   /** This Function sums the secular variation coefficients to get the secular variation of the Magnetic vector.
    */
-  MagVector sumSecVar( MagLegendre legendre,
+  private MagVector sumSecVar( MagLegendre legendre,
                        MagModel model,
 		       MagHarmonic sph_vars,
 		       MagSpherical spherical )
@@ -805,7 +805,7 @@ class GeomagLib
 
   /** Special calculation for the secular variation summation at the poles.
    */
-  void secVarSummationSpecial( MagModel model,
+  private void secVarSummationSpecial( MagModel model,
                                    MagHarmonic sph_vars,
 				   MagSpherical spherical,
 				   MagVector res )
@@ -845,7 +845,7 @@ class GeomagLib
    *  grad V = -- r  +  - -- t  +  -------- -- p
    *                   dr       r dt       r sin(t) dp
    */
-  MagVector summation( MagLegendre legendre,
+  private MagVector summation( MagLegendre legendre,
                        MagModel model,
 		MagHarmonic sph_vars,
 		MagSpherical spherical )
@@ -898,7 +898,7 @@ class GeomagLib
   /** Special calculation for the component By at Geographic poles.
    * See Section 1.4, "SINGULARITIES AT THE GEOGRAPHIC POLES", WMM Technical report
    */
-  void specialSummation( MagModel model,
+  private void specialSummation( MagModel model,
                              MagHarmonic sph_vars,
 			     MagSpherical spherical,
 			     MagVector res )

@@ -19,9 +19,9 @@ import java.io.FileOutputStream;
 
 class PTXSectionElement extends PTElement
 {
-    PTPoint _pos;
-    PTId _station;
-    int _direction; //!< -1 horizontal, >=0 projection azimuth
+    private PTPoint _pos;
+    private PTId _station;
+    private int _direction; //!< -1 horizontal, >=0 projection azimuth
                         //!< (internal angle units)
     PTXSectionElement()
     {

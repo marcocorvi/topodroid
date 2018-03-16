@@ -13,7 +13,7 @@ package com.topodroid.DistoX;
 
 import android.graphics.Path;
 
-public class DrawingPenBrush extends DrawingBrush
+class DrawingPenBrush extends DrawingBrush
 {
     @Override
     public void mouseDown(Path path, float x, float y) {

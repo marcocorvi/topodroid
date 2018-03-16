@@ -16,12 +16,12 @@ package com.topodroid.DistoX;
 
 import java.lang.Math;
 
-import java.util.Locale;
+// import java.util.Locale;
 
 // used by logCoeff
-import android.util.Log;
+// import android.util.Log;
 
-public class CalibAlgoMin extends CalibAlgo
+class CalibAlgoMin extends CalibAlgo
 {
   // private boolean mNonLinear;
   // private Vector nL;
@@ -45,7 +45,7 @@ public class CalibAlgoMin extends CalibAlgo
   }
 
 
-  public CalibAlgoMin( int idx, boolean nonLinear )
+  CalibAlgoMin( int idx, boolean nonLinear )
   {
     super( idx, nonLinear );
     // mNonLinear = nonLinear;
@@ -87,14 +87,14 @@ public class CalibAlgoMin extends CalibAlgo
   Vector G( int n ) { return bG.plus( aG.timesV( g[n] ) ); }
   Vector M( int n ) { return bM.plus( aM.timesV( m[n] ) ); }
 
-  float mean_dip()
+  private float mean_dip()
   {
     float sum = 0;
     for (int i=0; i<idx; ++i ) sum += G(i).dot( M(i) );
     return sum / idx;
   }
 
-  Vector mean_g()
+  private Vector mean_g()
   {
     Vector sum = new Vector();
     for (int i=0; i<idx; ++i ) sum.plusEqual( g[i] );
@@ -102,7 +102,7 @@ public class CalibAlgoMin extends CalibAlgo
     return sum;
   }
   
-  Vector mean_m()
+  private Vector mean_m()
   {
     Vector sum = new Vector();
     for (int i=0; i<idx; ++i ) sum.plusEqual( m[i] );
@@ -110,7 +110,7 @@ public class CalibAlgoMin extends CalibAlgo
     return sum;
   }
   
-  Matrix mean_gg()
+  private Matrix mean_gg()
   {
     Matrix sum = new Matrix();
     for (int i=0; i<idx; ++i ) sum.plusEqual( new Matrix( g[i], g[i] ) );
@@ -118,7 +118,7 @@ public class CalibAlgoMin extends CalibAlgo
     return sum;
   }
   
-  Matrix mean_mm()
+  private Matrix mean_mm()
   {
     Matrix sum = new Matrix();
     for (int i=0; i<idx; ++i ) sum.plusEqual( new Matrix( m[i], m[i] ) );
@@ -126,7 +126,7 @@ public class CalibAlgoMin extends CalibAlgo
     return sum;
   }
   
-  float dgx2()
+  private float dgx2()
   {
     float sum = 0;
     for (int i=0; i<idx; i+=4 ) {
@@ -140,7 +140,7 @@ public class CalibAlgoMin extends CalibAlgo
     return sum / idx;
   }
     
-  float dmx2()
+  private float dmx2()
   {
     float sum = 0;
     for (int i=0; i<idx; i+=4 ) {
@@ -155,7 +155,7 @@ public class CalibAlgoMin extends CalibAlgo
   }
   
 
-  Matrix dgxyz()
+  private Matrix dgxyz()
   {
     Matrix sum = new Matrix();
     long group0 = -1;
@@ -419,21 +419,21 @@ public class CalibAlgoMin extends CalibAlgo
 
   // ========================================================
   
-  float r2g()
+  private float r2g()
   {
     float sum = 0;
     for (int i=0; i<idx; ++i ) sum += G(i).LengthSquared();
     return sum / idx;
   }
   
-  float r2m() // < (Bm+Am*ms) * (Bm+Am*ms) >
+  private float r2m() // < (Bm+Am*ms) * (Bm+Am*ms) >
   {
     float sum = 0;
     for (int i=0; i<idx; ++i ) sum += M(i).LengthSquared();
     return sum / idx;
   }
   
-  Matrix r2gg()
+  private Matrix r2gg()
   {
     Matrix sum = new Matrix();
     for (int i=0; i<idx; ++i ) {
@@ -445,7 +445,7 @@ public class CalibAlgoMin extends CalibAlgo
     return sum;
   }
   
-  Matrix r2mm()
+  private Matrix r2mm()
   {
     Matrix sum = new Matrix();
     for (int i=0; i<idx; ++i ) {
@@ -457,7 +457,7 @@ public class CalibAlgoMin extends CalibAlgo
     return sum;
   }
   
-  Vector g0() // <Bg + Ag * gs>
+  private Vector g0() // <Bg + Ag * gs>
   {
     Vector sum = new Vector();
     for (int i=0; i<idx; ++i ) sum.plusEqual( G(i) );
@@ -465,7 +465,7 @@ public class CalibAlgoMin extends CalibAlgo
     return sum;
   }
     
-  Vector m0() // <Bm + Am * ms>
+  private Vector m0() // <Bm + Am * ms>
   {
     Vector sum = new Vector();
     for (int i=0; i<idx; ++i ) sum.plusEqual( M(i) );
@@ -473,7 +473,7 @@ public class CalibAlgoMin extends CalibAlgo
     return sum;
   }
   
-  Matrix gg()
+  private Matrix gg()
   {
     Matrix sum = new Matrix();
     for (int i=0; i<idx; ++i ) sum.plusEqual( new Matrix( G(i), g[i] ) );
@@ -489,7 +489,7 @@ public class CalibAlgoMin extends CalibAlgo
     return sum;
   }
   
-  Vector r2ag()
+  private Vector r2ag()
   {
     Vector sum = new Vector();
     for (int i=0; i<idx; ++i ) sum.plusEqual( g[i].times( G(i).LengthSquared() ) );
@@ -497,7 +497,7 @@ public class CalibAlgoMin extends CalibAlgo
     return aG.timesV( sum );
   }
     
-  Vector r2am()
+  private Vector r2am()
   {
     Vector sum = new Vector();
     for (int i=0; i<idx; ++i ) sum.plusEqual( m[i].times( M(i).LengthSquared() ) );
@@ -505,7 +505,7 @@ public class CalibAlgoMin extends CalibAlgo
     return aM.timesV( sum );
   }
   
-  Vector gmm( float d ) // (G*M - d) M
+  private Vector gmm( float d ) // (G*M - d) M
   {
     Vector sum = new Vector();
     for (int i=0; i<idx; ++i ) {
@@ -516,7 +516,7 @@ public class CalibAlgoMin extends CalibAlgo
     return sum;
   }
   
-  Vector gmg( float d ) // (G*M - d) G
+  private Vector gmg( float d ) // (G*M - d) G
   {
     Vector sum = new Vector();
     for (int i=0; i<idx; ++i ) {
@@ -527,7 +527,7 @@ public class CalibAlgoMin extends CalibAlgo
     return sum;
   }
    
-  Matrix r2bg()
+  private Matrix r2bg()
   {
     Matrix sum = new Matrix(); 
     for (int i=0; i<idx; ++i ) {
@@ -539,7 +539,7 @@ public class CalibAlgoMin extends CalibAlgo
     return sum;
   }
       
-  Matrix r2bm()
+  private Matrix r2bm()
   {
     Matrix sum = new Matrix();
     for (int i=0; i<idx; ++i ) {
@@ -551,7 +551,7 @@ public class CalibAlgoMin extends CalibAlgo
     return sum;
   }
   
-  Matrix gmmg( float d )
+  private Matrix gmmg( float d )
   {
     Matrix sum = new Matrix();
     for (int i=0; i<idx; ++i ) {
@@ -564,7 +564,7 @@ public class CalibAlgoMin extends CalibAlgo
     return sum;
   }
   
-  Matrix gmgm( float d )
+  private Matrix gmgm( float d )
   {
     Matrix sum = new Matrix();
     for (int i=0; i<idx; ++i ) {

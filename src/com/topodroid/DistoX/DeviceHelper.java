@@ -11,13 +11,13 @@
  */
 package com.topodroid.DistoX;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+// import java.io.File;
+// import java.io.FileNotFoundException;
+// import java.io.IOException;
+// import java.io.FileReader;
+// import java.io.BufferedReader;
+// import java.io.FileWriter;
+// import java.io.PrintWriter;
 
 import android.content.Context;
 import android.content.ContentValues;
@@ -40,7 +40,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.HashMap;
 
-public class DeviceHelper extends DataSetObservable
+class DeviceHelper extends DataSetObservable
 {
 
   static final String DB_VERSION = "26";
@@ -83,7 +83,7 @@ public class DeviceHelper extends DataSetObservable
 
   public SQLiteDatabase getDb() { return myDB; }
 
-  public DeviceHelper( Context context, ArrayList<DataListener> listeners )
+  DeviceHelper( Context context, ArrayList<DataListener> listeners )
   {
     mContext = context;
     mListeners = listeners;
@@ -98,7 +98,7 @@ public class DeviceHelper extends DataSetObservable
   }
 
 
-  public void openDatabase() 
+  private void openDatabase()
   {
     String database_name = TDPath.getDeviceDatabase();
     DistoXOpenHelper openHelper = new DistoXOpenHelper( mContext, database_name );
@@ -159,7 +159,7 @@ public class DeviceHelper extends DataSetObservable
     } catch (SQLiteException e ) { logError( "delete GM " + cid + "/" + id, e ); }
   }
 
-  public void doDeleteCalib( long cid ) 
+  void doDeleteCalib( long cid )
   {
     // if ( myDB == null ) return;
     if ( doDeleteGMStmt == null )
@@ -175,7 +175,7 @@ public class DeviceHelper extends DataSetObservable
     } catch (SQLiteException e ) { logError( "delete calib", e ); }
   }
 
-  public long updateGMName( long gid, long cid, String grp )
+  void updateGMName( long gid, long cid, String grp )
   {
     // if ( myDB == null ) return -1;
     if ( updateGMGroupStmt == null )
@@ -187,10 +187,10 @@ public class DeviceHelper extends DataSetObservable
       updateGMGroupStmt.execute();
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch (SQLiteException e ) { logError( "update GM " + cid + "/" + gid + " group " + grp, e ); }
-    return 0;
+    // return 0;
   }
 
-  public long updateGMError( long id, long cid, double error )
+  void updateGMError( long id, long cid, double error )
   {
     // if ( myDB == null ) return -1;
     if ( updateGMErrorStmt == null ) 
@@ -202,10 +202,10 @@ public class DeviceHelper extends DataSetObservable
       updateGMErrorStmt.execute();
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch (SQLiteException e ) { logError( "update GM error", e ); }
-    return 0;
+    // return 0;
   }
 
-  public long insertGM( long cid, long gx, long gy, long gz, long mx, long my, long mz )
+  long insertGM( long cid, long gx, long gy, long gz, long mx, long my, long mz )
   {
     // if ( myDB == null ) return -1;
     ++ myNextCId;
@@ -234,7 +234,7 @@ public class DeviceHelper extends DataSetObservable
   // SELECT STATEMENTS
 
 
-  public void resetAllGMs( long cid, long start_id )
+  void resetAllGMs( long cid, long start_id )
   {
     if ( resetAllGMStmt == null )
        resetAllGMStmt = myDB.compileStatement( "UPDATE gms SET grp=0, error=0 WHERE calibId=? AND id>? AND status=0" );
@@ -247,7 +247,7 @@ public class DeviceHelper extends DataSetObservable
     } catch (SQLiteException e ) { logError( "reset GM " + cid + "/" + start_id, e ); }
   }
 
-  public List<CalibCBlock> selectAllGMs( long cid, int status )
+  List<CalibCBlock> selectAllGMs( long cid, int status )
   {
     List< CalibCBlock > list = new ArrayList<>();
     // if ( myDB == null ) return list;
@@ -283,7 +283,7 @@ public class DeviceHelper extends DataSetObservable
     return list;
   }
 
-  public CalibCBlock selectGM( long id, long cid )
+  CalibCBlock selectGM( long id, long cid )
   {
     CalibCBlock block = null;
     // if ( myDB == null ) return null;
@@ -316,7 +316,7 @@ public class DeviceHelper extends DataSetObservable
   }
 
 
-  public int selectCalibAlgo( long cid )
+  int selectCalibAlgo( long cid )
   {
     int algo = CalibInfo.ALGO_AUTO; // default 
     // if ( myDB == null ) return 0;
@@ -335,7 +335,7 @@ public class DeviceHelper extends DataSetObservable
     return algo;
   }
 
-  public long getCalibCID( String name, String device )
+  long getCalibCID( String name, String device )
   {
     long id = -1L;
     Cursor cursor = null;
@@ -353,7 +353,7 @@ public class DeviceHelper extends DataSetObservable
     return id;
   }
  
-  public CalibInfo selectCalibInfo( long cid )
+  CalibInfo selectCalibInfo( long cid )
   {
     CalibInfo info = null;
     // if ( myDB == null ) return null;
@@ -378,7 +378,7 @@ public class DeviceHelper extends DataSetObservable
     return info;
   }
 
-  public void selectCalibError( long cid, CalibResult res )
+  void selectCalibError( long cid, CalibResult res )
   {
     // if ( myDB == null ) return;
     Cursor cursor = null;
@@ -407,7 +407,7 @@ public class DeviceHelper extends DataSetObservable
     } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
   }
 
-  public String selectCalibCoeff( long cid )
+  String selectCalibCoeff( long cid )
   {
     String coeff = null;
     // if ( myDB == null ) return null;
@@ -453,7 +453,7 @@ public class DeviceHelper extends DataSetObservable
 
   public List<String> selectAllCalibs() { return selectAllNames( CALIB_TABLE ); }
 
-  public List<String> selectDeviceCalibs( String device ) 
+  List<String> selectDeviceCalibs( String device )
   {
     List<String> ret = new ArrayList<>();
     Cursor cursor = null;
@@ -502,7 +502,7 @@ public class DeviceHelper extends DataSetObservable
   // ----------------------------------------------------------------------
   // CONFIG DATA
 
-  public String getValue( String key )
+  String getValue( String key )
   {
     if ( myDB == null ) {
       TDLog.Error( "DeviceHelper::getValue null DB");
@@ -527,7 +527,7 @@ public class DeviceHelper extends DataSetObservable
     return value;
   }
 
-  public void setValue( String key, String value )
+  void setValue( String key, String value )
   {
     if ( myDB == null ) {
       TDLog.Error( "DeviceHelper::setValue null DB");
@@ -671,7 +671,7 @@ public class DeviceHelper extends DataSetObservable
                            null, null, null );
       if ( cursor != null && cursor.moveToFirst() ) {
         id = cursor.getLong(0);
-        if (cursor != null && !cursor.isClosed()) { cursor.close(); cursor = null; }
+        if ( /* cursor != null && */ !cursor.isClosed()) { cursor.close(); cursor = null; }
       } else {
         if (cursor != null && !cursor.isClosed()) { cursor.close(); cursor = null; }
         // SELECT max(id) FROM table
@@ -740,7 +740,7 @@ public class DeviceHelper extends DataSetObservable
   }
 
   // get device by address or by nickname
-  public Device getDevice( String addr )
+  Device getDevice( String addr )
   {
     // if ( myDB == null ) return null;
     Device ret = getDeviceByAddress( addr );
@@ -812,10 +812,10 @@ public class DeviceHelper extends DataSetObservable
     return ret;
   }
 
-  public boolean getDeviceHeadTail( String address, int[] head_tail )
+  void getDeviceHeadTail( String address, int[] head_tail )
   {
     // if ( myDB == null ) return false;
-    boolean ret = false;
+    // boolean ret = false;
     Cursor cursor = null;
     try {
       cursor = myDB.query( DEVICE_TABLE, new String[] { "head", "tail" },
@@ -825,17 +825,17 @@ public class DeviceHelper extends DataSetObservable
       if (cursor != null && cursor.moveToFirst() ) {
         head_tail[0] = (int)( cursor.getLong(0) );
         head_tail[1] = (int)( cursor.getLong(1) );
-        ret = true;
+        // ret = true;
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
-    return ret;
+    // return ret;
   }
 
-  boolean insertDevice( String address, String model, String name )
+  void insertDevice( String address, String model, String name )
   {
-    if ( myDB == null ) return false;
-    boolean ret = false;
+    if ( myDB == null ) return; // false;
+    // boolean ret = false;
     Cursor cursor = null;
     try {
       cursor = myDB.query( DEVICE_TABLE, new String[] { "model" },
@@ -854,13 +854,13 @@ public class DeviceHelper extends DataSetObservable
           cv.put( "name",    name );
           cv.put( "nickname", "" );  // FIXME empty nickname
           myDB.insert( DEVICE_TABLE, null, cv );
-	  ret = true;
+	         // ret = true;
         }
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch (SQLiteException e ) { logError( "insert device", e ); 
     } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
-    return ret;
+    // return ret;
   }
 
   private void insertDeviceHeadTail( String address, String model, int[] head_tail, String name )
@@ -879,7 +879,7 @@ public class DeviceHelper extends DataSetObservable
     } catch (SQLiteException e ) { logError( "insert device H-T", e ); }
   }
 
-  public void updateDeviceModel( String address, String model )
+  void updateDeviceModel( String address, String model )
   {
     if ( updateDeviceModelStmt == null )
       updateDeviceModelStmt = myDB.compileStatement( "UPDATE devices set model=? WHERE address=?" );
@@ -890,7 +890,7 @@ public class DeviceHelper extends DataSetObservable
     } catch (SQLiteException e ) { logError( "update device", e ); }
   }
 
-  public void updateDeviceNickname( String address, String nickname )
+  void updateDeviceNickname( String address, String nickname )
   {
     if ( updateDeviceNicknameStmt == null )
         updateDeviceNicknameStmt = myDB.compileStatement( "UPDATE devices set nickname=? WHERE address=?" );
@@ -901,7 +901,7 @@ public class DeviceHelper extends DataSetObservable
     } catch (SQLiteException e ) { logError( "update device nickname", e ); }
   }
 
-  public boolean updateDeviceHeadTail( String address, int[] head_tail )
+  boolean updateDeviceHeadTail( String address, int[] head_tail )
   {
     // if ( myDB == null ) return false;
     boolean ret = false;
@@ -925,8 +925,8 @@ public class DeviceHelper extends DataSetObservable
           } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
           } catch (SQLiteException e ) { logError( "update device H-T", e ); }
           ret = true;
-        } else {
-          // insertDeviceHeadTail( address, "DistoX", head_tail, name ); // FIXME name ?
+        // } else {
+        //   insertDeviceHeadTail( address, "DistoX", head_tail, name ); // FIXME name ?
         }
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -935,7 +935,7 @@ public class DeviceHelper extends DataSetObservable
   }
 
 
-  public boolean hasCalibName( String name )  { return hasName( name, CALIB_TABLE ); }
+  boolean hasCalibName( String name )  { return hasName( name, CALIB_TABLE ); }
 
   private boolean hasName( String name, String table )
   {
@@ -955,10 +955,10 @@ public class DeviceHelper extends DataSetObservable
      return ret;
    }
 
-   public boolean updateCalibInfo( long id, String date, String device, String comment )
+   void updateCalibInfo( long id, String date, String device, String comment )
    {
      // TDLog.Log( TDLog.LOG_DB, "updateCalibInfo id " + id + " day " + date + " comm. " + comment );
-     if ( date == null ) return false;
+     if ( date == null ) return; // false;
      if ( updateCalibStmt == null )
         updateCalibStmt = myDB.compileStatement( "UPDATE calibs SET day=?, device=?, comment=? WHERE id=?" );
      String dev = (device != null)? device : "";
@@ -971,10 +971,10 @@ public class DeviceHelper extends DataSetObservable
        updateCalibStmt.execute(); 
      } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
      } catch (SQLiteException e ) { logError( "update calib", e ); }
-     return true;
+     // return true;
    }
 
-   public boolean updateCalibAlgo( long id, long algo )
+   void updateCalibAlgo( long id, long algo )
    {
      // TDLog.Log( TDLog.LOG_DB, "updateCalibAlgo id " + id + " algo " + algo );
      if ( updateCalibAlgoStmt == null )
@@ -985,13 +985,13 @@ public class DeviceHelper extends DataSetObservable
        updateCalibAlgoStmt.execute();
      } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
      } catch (SQLiteException e ) { logError( "update calib algo", e ); }
-     return true;
+     // return true;
    }
 
-   public boolean updateCalibCoeff( long id, String coeff )
+   void updateCalibCoeff( long id, String coeff )
    {
      // TDLog.Log( TDLog.LOG_DB, "updateCalibCoeff id " + id + " coeff. " + coeff );
-     if ( coeff == null ) return false;
+     if ( coeff == null ) return; // false;
      if ( updateCalibCoeffStmt == null )
         updateCalibCoeffStmt = myDB.compileStatement( "UPDATE calibs SET coeff=? WHERE id=?" );
      updateCalibCoeffStmt.bindString( 1, coeff );
@@ -1000,10 +1000,10 @@ public class DeviceHelper extends DataSetObservable
        updateCalibCoeffStmt.execute();
      } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
      } catch (SQLiteException e ) { logError( "update calib coeff", e ); }
-     return true;
+     // return true;
    }
 
-   public boolean updateCalibError( long id, double error, double stddev, double max_error, int iterations )
+   void updateCalibError( long id, double error, double stddev, double max_error, int iterations )
    {
      // TDLog.Log( TDLog.LOG_DB, "updateCalibCoeff id " + id + " coeff. " + coeff );
      if ( updateCalibErrorStmt == null )
@@ -1017,10 +1017,10 @@ public class DeviceHelper extends DataSetObservable
        updateCalibErrorStmt.execute(); 
      } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
      } catch (SQLiteException e ) { logError( "update calib error", e ); }
-     return true;
+     // return true;
    }
 
-   public long setCalib( String calib ) 
+   long setCalib( String calib )
    {
      myNextCId = 0;
      // if ( myDB == null ) return 0L;
@@ -1039,82 +1039,6 @@ public class DeviceHelper extends DataSetObservable
    }
 
    public String getCalibFromId( long cid ) { return getNameFromId( CALIB_TABLE, cid ); }
-
-
-   // ----------------------------------------------------------------------
-   // SERIALIZATION of surveys TO FILE
-   // the following tables are serialized (besides the survey recond)
-
-   // public void dumpToFile( String filename, long sid )
-   // {
-   //   // TDLog.Log( TDLog.LOG_DB, "dumpToFile " + filename );
-   //   if ( myDB == null ) return;
-   //   try {
-   //     TDPath.checkPath( filename );
-   //     FileWriter fw = new FileWriter( filename );
-   //     PrintWriter pw = new PrintWriter( fw );
-   //     // Cursor cursor = myDB.query( TABLE, 
-   //     //                      new String[] { "id", "shotId", "status", "title", "date", "comment", "type", "value" },
-   //     //                      "surveyId=?", new String[] { Long.toString( sid ) },
-   //     //                      null, null, null );
-   //     // if (cursor.moveToFirst()) {
-   //     //   do {
-   //     //     pw.format(Locale.US,
-   //     //               "INSERT into %s values( %d, %d, %d, %d, \"%s\", \"%s\", \"%s\", \"%s\", \"%s\" );\n",
-   //     //               FIXED_TABLE,
-   //     //               sid,
-   //     //               cursor.getLong(0),
-   //     //               cursor.getLong(1),
-   //     //               cursor.getLong(2),
-   //     //               cursor.getString(3),
-   //     //               cursor.getString(4),
-   //     //               cursor.getString(5),
-   //     //               cursor.getString(6),
-   //     //               cursor.getString(7)
-   //     //              );
-   //     //   } while (cursor.moveToNext());
-   //     // }
-   //     // if (cursor != null && !cursor.isClosed()) {
-   //     //   cursor.close();
-   //     // }
-   //     fw.flush();
-   //     fw.close();
-   //   } catch ( FileNotFoundException e ) {
-   //     // FIXME
-   //   } catch ( IOException e ) {
-   //     // FIXME
-   //   }
-   // }
-
-   // /** load survey data from a sql file
-   //  * @param filename  name of the sql file
-   //  */
-   // long loadFromFile( String filename, int db_version )
-   // {
-   //   long sid = -1;
-   //   long id, status, shotid;
-   //   String station, title, date, name, comment;
-   //   String line;
-   //   try {
-   //     FileReader fr = new FileReader( filename );
-   //     BufferedReader br = new BufferedReader( fr );
-   //     // first line is survey
-   //     line = br.readLine();
-   //     // TDLog.Log( TDLog.LOG_DB, "loadFromFile: " + line );
-   //     String[] vals = line.split(" ", 4); 
-   //     // if ( vals.length != 4 ) { TODO } // FIXME
-   //     String table = vals[2];
-   //     String v = vals[3];
-   //     pos = v.indexOf( '(' ) + 1;
-   //     len = v.lastIndexOf( ')' );
-   //     skipSpaces( v );
-   //     // ... 
-   //     fr.close();
-   //   } catch ( FileNotFoundException e ) {
-   //   } catch ( IOException e ) {
-   //   }
-   //   return sid;
-   // }
 
    // ----------------------------------------------------------------------
    // DATABASE TABLES

@@ -14,8 +14,8 @@ package com.topodroid.DistoX;
 
 import java.util.Locale;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+// import java.util.ArrayList;
+// import java.util.HashMap;
 
 // import java.io.FileWriter;
 import java.io.StringWriter;
@@ -29,7 +29,7 @@ import java.io.IOException;
 
 import android.graphics.RectF;
 
-import android.util.Log;
+// import android.util.Log;
 
 class DrawingDxf
 {
@@ -50,25 +50,25 @@ class DrawingDxf
   static final String lt_continuous = "Continuous";
   static final String lt_byBlock    = "ByBlock";
   
-  static final String AcDbSymbolTR = "AcDbSymbolTableRecord";
-  static final String AcDbEntity   = "AcDbEntity";
-  static final String AcDbText     = "AcDbText";
-  static final String AcDbLine     = "AcDbLine";
-  static final String AcDbPolyline = "AcDbPolyline";
-  static final String AcDbDictionary = "AcDbDictionary";
+  static final private String AcDbSymbolTR = "AcDbSymbolTableRecord";
+  static final private String AcDbEntity   = "AcDbEntity";
+  static final private String AcDbText     = "AcDbText";
+  static final private String AcDbLine     = "AcDbLine";
+  static final private String AcDbPolyline = "AcDbPolyline";
+  static final private String AcDbDictionary = "AcDbDictionary";
 
-  static final String EOL = "\r\n";
-  static final String EOL100 = "  100\r\n";
-  static final String EOLSPACE = "\r\n  ";
-  static final String SPACE = "  ";
+  static final private String EOL = "\r\n";
+  static final private String EOL100 = "  100\r\n";
+  static final private String EOLSPACE = "\r\n  ";
+  static final private String SPACE = "  ";
  
 
-  static void writeComment( BufferedWriter out, String comment ) throws IOException
+  static private void writeComment( BufferedWriter out, String comment ) throws IOException
   {
     out.write( "  999" + EOL + comment + EOL );
   }
 
-  static void writeHex( BufferedWriter out, int code, int handle ) throws IOException // mVersion13
+  static private void writeHex( BufferedWriter out, int code, int handle ) throws IOException // mVersion13
   {
     if ( mVersion13 ) {
       StringWriter sw = new StringWriter();
@@ -78,14 +78,14 @@ class DrawingDxf
     }
   }
 
-  static void printHex( PrintWriter pw, int code, int handle ) // mVersion13
+  static private void printHex( PrintWriter pw, int code, int handle ) // mVersion13
   {
     if ( mVersion13 ) {
       pw.printf("  %d%s%X%s", code, EOL, handle, EOL );
     }
   }
 
-  static void writeAcDb( BufferedWriter out, int hex, String acdb1 ) throws IOException // mVersion13
+  static private void writeAcDb( BufferedWriter out, int hex, String acdb1 ) throws IOException // mVersion13
   {
     if ( mVersion13 ) {
       if ( hex >= 0 ) writeHex( out, 5, hex );
@@ -93,7 +93,7 @@ class DrawingDxf
     }
   }
 
-  static void writeAcDb( BufferedWriter out, int hex, String acdb1, String acdb2 ) throws IOException // mVersion13
+  static private void writeAcDb( BufferedWriter out, int hex, String acdb1, String acdb2 ) throws IOException // mVersion13
   {
     if ( mVersion13 ) {
       if ( hex >= 0 ) writeHex( out, 5, hex );
@@ -102,7 +102,7 @@ class DrawingDxf
   }
 
 
-  static void printAcDb( PrintWriter pw, int hex, String acdb1 ) // mVersion13
+  static private void printAcDb( PrintWriter pw, int hex, String acdb1 ) // mVersion13
   {
     if ( mVersion13 ) {
       if ( hex >= 0 ) printHex( pw, 5, hex );
@@ -118,7 +118,7 @@ class DrawingDxf
     }
   }
 
-  static void writeString(  BufferedWriter out, int code, String name ) throws IOException
+  static private void writeString(  BufferedWriter out, int code, String name ) throws IOException
   {
     out.write( "  " + code + EOL + name + EOL );
   }
@@ -138,19 +138,19 @@ class DrawingDxf
     out.write( SPACE + code + EOL + val + EOL );
   }
 
-  static void printInt(  PrintWriter pw, int code, int val )
+  static private void printInt(  PrintWriter pw, int code, int val )
   {
     pw.printf( "  %d%s%d%s", code, EOL, val, EOL );
   }
 
-  static void writeXY( BufferedWriter out, int x, int y, int base ) throws IOException
+  static private void writeXY( BufferedWriter out, int x, int y, int base ) throws IOException
   {
     int b10 = 10 + base;
     int b20 = 20 + base;
     out.write( SPACE + b10 + EOL + x + EOLSPACE + b20 + EOL + y + EOL );
   }
 
-  static void writeXYZ( BufferedWriter out, int x, int y, int z, int base ) throws IOException
+  static private void writeXYZ( BufferedWriter out, int x, int y, int z, int base ) throws IOException
   {
     int b10 = 10 + base;
     int b20 = 20 + base;
@@ -158,7 +158,7 @@ class DrawingDxf
     out.write( SPACE + b10 + EOL + x + EOLSPACE + b20 + EOL + y + EOLSPACE + b30 + EOL + z + EOL );
   }
 
-  static void printXY( PrintWriter pw, float x, float y, int base )
+  static private void printXY( PrintWriter pw, float x, float y, int base )
   {
     pw.printf(Locale.US, "  %d%s%.2f%s  %d%s%.2f%s", base+10, EOL, x, EOL, base+20, EOL, y, EOL );
   }
@@ -177,18 +177,18 @@ class DrawingDxf
 
   // -----------------------------------------
 
-  static void writeSection( BufferedWriter out, String name ) throws IOException
+  static private void writeSection( BufferedWriter out, String name ) throws IOException
   {
     writeString(out, 0, "SECTION");
     writeString(out, 2, name );
   }
 
-  static void writeEndSection( BufferedWriter out ) throws IOException
+  static private void writeEndSection( BufferedWriter out ) throws IOException
   {
     writeString(out, 0, "ENDSEC" );
   }
 
-  static void writeBeginTable(  BufferedWriter out, String name, int handle, int num ) throws IOException
+  static private void writeBeginTable(  BufferedWriter out, String name, int handle, int num ) throws IOException
   {
     writeString(out, 0, "TABLE" );
     writeString(out, 2, name );
@@ -196,12 +196,12 @@ class DrawingDxf
     if ( num >= 0 ) writeInt(out, 70, num );
   }
   
-  static void writeEndTable(  BufferedWriter out ) throws IOException
+  static private void writeEndTable(  BufferedWriter out ) throws IOException
   {
     writeString( out, 0, "ENDTAB");
   }
 
-  static void printLayer( PrintWriter pw2, int handle, String name, int flag, int color, String linetype )
+  static private void printLayer( PrintWriter pw2, int handle, String name, int flag, int color, String linetype )
   {
     name = name.replace(":", "-");
     printString( pw2, 0, "LAYER" );
@@ -225,7 +225,7 @@ class DrawingDxf
   //   printString( pw, 100, AcDbText );
   // }
 
-  static int  printPolyline( PrintWriter pw, DrawingPointLinePath line, float scale, int handle,
+  static private int  printPolyline( PrintWriter pw, DrawingPointLinePath line, float scale, int handle,
                              String layer, boolean closed, float xoff, float yoff )
   {
     int close = (closed ? 1 : 0 );
@@ -286,7 +286,7 @@ class DrawingDxf
     return handle;
   }
 
-  static boolean checkSpline( DrawingPointLinePath line )
+  static private boolean checkSpline( DrawingPointLinePath line )
   {
     if ( mVersion13 ) {
       for ( LinePoint p = line.mFirst; p != null; p = p.mNext ) {
@@ -298,7 +298,7 @@ class DrawingDxf
     return false;
   }
 
-  static int printSpline( PrintWriter pw, DrawingPointLinePath line, float scale, int handle, String layer, boolean closed,
+  static private int printSpline( PrintWriter pw, DrawingPointLinePath line, float scale, int handle, String layer, boolean closed,
                           float xoff, float yoff )
   {
     printString( pw, 0, "SPLINE" );
@@ -380,7 +380,7 @@ class DrawingDxf
     return handle;
   }
 
-  static int printText( PrintWriter pw, int handle, String label, float x, float y, float angle, float scale,
+  static private int printText( PrintWriter pw, int handle, String label, float x, float y, float angle, float scale,
                         String layer, String style, float xoff, float yoff )
   {
     // if ( false && mVersion13 ) { // FIXME TEXT in AC1012
@@ -786,7 +786,7 @@ class DrawingDxf
 
       writeSection( out, "ENTITIES" );
       {
-        float SCALE_FIX = mDrawingUtil.SCALE_FIX;
+        float SCALE_FIX = DrawingUtil.SCALE_FIX;
 
         // reference
         {
@@ -854,8 +854,8 @@ class DrawingDxf
                 float y1 = scale *( yoff + mDrawingUtil.toSceneY( t.h, t.v ) );
                 printXYZ( pw4, x0, -y0, 0.0f, 0 );
                 printXYZ( pw4, x1, -y1, 0.0f, 1 );
-              } else if ( type == PlotInfo.PLOT_SECTION ) {
-                // nothing
+              // } else if ( type == PlotInfo.PLOT_SECTION ) {
+              //   /* nothing */
               }
             // }
             out.write( sw4.getBuffer().toString() );
@@ -941,7 +941,7 @@ class DrawingDxf
                 if ( scrapname != null ) {
                   String scrapfile = scrapname + ".tdr";
                   handle = tdrToDxf( pw5, handle, scrapfile, 
-                         scale, point.cx, point.cy, -mDrawingUtil.CENTER_X, -mDrawingUtil.CENTER_Y );
+                         scale, point.cx, point.cy, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
                 }
               } else {
                 handle = toDxf( pw5, handle, point, scale, xoff, yoff );
@@ -1147,7 +1147,7 @@ class DrawingDxf
   }
 
 // SECTION OBJECTS
-  static int writeSectionObjects( BufferedWriter out, int handle ) throws IOException
+  static private int writeSectionObjects( BufferedWriter out, int handle ) throws IOException
   {
     writeSection( out, "OBJECTS" );
 

@@ -775,6 +775,7 @@
     <string name="title_audio">Аудио заметка</string>
     <string name="title_calib">Калибровки</string>
     <string name="title_calib_check">Замеры контроля калибровки</string>
+    <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Калибровка и распределение данных</string>
     <string name="title_coeff">Калибровочные коэффициенты</string>
     <string name="title_contour">Контур</string>
@@ -1010,6 +1011,8 @@
   <string name="pref_min_leg_message">Замеры, короче минимальной длинны будут подцвечены оранжевым</string>
   <string name="pref_backsight_title">Обратный замер</string>
   <string name="pref_backsight_summary">Поле для ввода обратного замера в диалоге ручного ввода замера</string>
+  <!-- TODO string name="pref_backshot_title">Backshot DistoX</string -->
+  <!-- TODO string name="pref_backshot_summary">DistoX in backshot mode</string -->
   <string name="pref_prev_next_title">Кнопки Пред/След</string>
   <string name="pref_prev_next_summary">Кнопки Предыдущий/Следующий в диалоге измерений</string>
   <string name="pref_mag_anomaly_title">Магнитная Аномалия</string>

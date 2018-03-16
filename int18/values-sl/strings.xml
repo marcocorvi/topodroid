@@ -775,6 +775,7 @@
     <!-- TODO string name="title_audio">Audio comment</string -->
     <string name="title_calib">Kalibracija</string>
     <!-- TODO string name="title_calib_check">Calibration-check shots</string -->
+    <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Razporeditev podatkov kalibracije</string>
     <string name="title_coeff">Kalibracija</string>
     <!-- TODO string name="title_contour">Contour</string -->
@@ -1009,6 +1010,8 @@
   <!-- TODO string name="pref_min_leg_message">Legs shorter than the minimum have orange background</string -->
   <string name="pref_backsight_title">Vzvratn</string>
   <string name="pref_backsight_summary">Vzvratno polje v oknu Nova vizura</string>
+  <!-- TODO string name="pref_backshot_title">Backshot DistoX</string -->
+  <!-- TODO string name="pref_backshot_summary">DistoX in backshot mode</string -->
   <!-- TODO string name="pref_prev_next_title">Prev/Next buttons</string -->
   <!-- TODO string name="pref_prev_next_summary">Prev/Next buttons in the shot dialog</string -->
   <string name="pref_mag_anomaly_title">Magnetna anomalija</string>

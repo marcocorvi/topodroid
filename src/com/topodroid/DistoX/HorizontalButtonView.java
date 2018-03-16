@@ -22,7 +22,7 @@ import android.widget.Button;
 
 class HorizontalButtonView
 {
-  Button[] mButtons;
+  private Button[] mButtons;
 
   HorizontalButtonView( Button[] buttons )
   {

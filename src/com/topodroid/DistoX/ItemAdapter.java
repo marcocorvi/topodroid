@@ -38,7 +38,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
   private int mType;
   private boolean mShowSelected;
 
-  public ItemAdapter( Context ctx, IItemPicker parent, int type, int id, ArrayList< ItemSymbol > items )
+  ItemAdapter( Context ctx, IItemPicker parent, int type, int id, ArrayList< ItemSymbol > items )
   {
     super( ctx, id, items );
     mParent = parent;
@@ -162,7 +162,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
   private long mClickMillis = 0;
   static final int DOUBLE_CLICK_TIME = 400;
 
-  public void doClick( View v )
+  private void doClick( View v )
   {
     // Log.v("DistoX", "--> ItemAdapter doClick()");
     long millis = System.currentTimeMillis();

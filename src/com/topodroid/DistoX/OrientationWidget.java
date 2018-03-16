@@ -25,18 +25,18 @@ import android.graphics.Paint;
 
 class OrientationWidget
 {
-  private SeekBar  mSeekBar;
+  // private SeekBar  mSeekBar;
   private ImageView mIVorientation;
   private Bitmap mBitmap = null;
   private Canvas mCanvas = null;
 
   int mOrient;
 
-  public OrientationWidget( Dialog parent, boolean orientable, double orient )
+  OrientationWidget( Dialog parent, boolean orientable, double orient )
   {
     mOrient = (int)orient;
 
-    mSeekBar  = (SeekBar) parent.findViewById( R.id.seekbar );
+    SeekBar seekBar  = (SeekBar) parent.findViewById( R.id.seekbar );
     mIVorientation = (ImageView) parent.findViewById( R.id.image );
 
     if ( orientable ) {
@@ -44,9 +44,9 @@ class OrientationWidget
       mCanvas = new Canvas( mBitmap );
       mIVorientation.setImageBitmap( mBitmap );
       drawOrientation();
-      mSeekBar.setProgress( ( mOrient+180)%360 );
+      seekBar.setProgress( ( mOrient+180)%360 );
 
-      mSeekBar.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener() {
+      seekBar.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener() {
         public void onProgressChanged( SeekBar seekbar, int progress, boolean fromUser) {
           if ( fromUser ) {
             mOrient = 180 + progress;
@@ -57,10 +57,10 @@ class OrientationWidget
         public void onStartTrackingTouch(SeekBar seekbar) { }
         public void onStopTrackingTouch(SeekBar seekbar) { }
       } );
-      mSeekBar.setMax( 360 );
+      seekBar.setMax( 360 );
     } else {
       mIVorientation.setVisibility( View.GONE );
-      mSeekBar.setVisibility( View.GONE );
+      seekBar.setVisibility( View.GONE );
     }
 
   }

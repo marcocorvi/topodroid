@@ -18,7 +18,7 @@ import android.os.Bundle;
 
 import android.content.Intent;
 
-import android.util.Log;
+// import android.util.Log;
 
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -44,7 +44,7 @@ public class DeviceList extends Activity
   public static final int DEVICE_SCAN = 0x2;
   
   private ArrayAdapter<String> mArrayAdapter;
-  private ListView mList;
+  // private ListView mList;
 
   @Override
   public void onCreate(Bundle savedInstanceState)
@@ -56,14 +56,18 @@ public class DeviceList extends Activity
     mArrayAdapter = new ArrayAdapter<>( this, R.layout.message );
     // mDataAdapter = new ArrayAdapter<>( this, R.layout.data );
 
-    mList = (ListView) findViewById(R.id.list);
-    mList.setAdapter( mArrayAdapter );
-    mList.setOnItemClickListener( this );
-    mList.setDividerHeight( 2 );
+    ListView list = (ListView) findViewById(R.id.list);
+    list.setAdapter( mArrayAdapter );
+    list.setOnItemClickListener( this );
+    list.setDividerHeight( 2 );
 
-    // setTitleColor( 0x006d6df6 );
+    // setTitleColor( TDColor.TITLE_NORMAL );
 
-    int command = getIntent().getExtras().getInt( TDTag.TOPODROID_DEVICE_ACTION );
+    int command = 0;
+    try {
+      command = getIntent().getExtras().getInt( TDTag.TOPODROID_DEVICE_ACTION );
+    } catch ( NullPointerException e ) { }
+
     // TDLog.Log( TDLog.LOG_BT, "command " + command );
     switch ( command )
     {
@@ -156,7 +160,7 @@ public class DeviceList extends Activity
               String device_addr = device.getAddress();
               String name = Device.modelToName( model );
               // Log.v( "DistoX", "scan receiver <" + name + "> " + device_addr ); 
-              mApp.mDData.insertDevice( device_addr, model, name );
+              TopoDroidApp.mDData.insertDevice( device_addr, model, name );
               mArrayAdapter.add( Device.typeString[ Device.stringToType(model) ] + " " + name + " " + device_addr );
             }
           }

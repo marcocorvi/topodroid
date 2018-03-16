@@ -32,7 +32,7 @@ class HelpAdapter extends ArrayAdapter< HelpEntry >
   // private Context mContext;
   private HelpDialog mParent;
 
-  public HelpAdapter( Context ctx, HelpDialog parent, int id, ArrayList< HelpEntry > items )
+  HelpAdapter( Context ctx, HelpDialog parent, int id, ArrayList< HelpEntry > items )
   {
     super( ctx, id, items );
     mParent = parent;

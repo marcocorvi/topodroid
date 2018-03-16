@@ -13,19 +13,19 @@ package com.topodroid.DistoX;
 
 class SurveyStat
 {
-  public long id;  // survey id
-  public float lengthLeg;
-  public float lengthDuplicate;
-  public float lengthSurface;
+  long id;  // survey id
+  float lengthLeg;
+  float lengthDuplicate;
+  float lengthSurface;
 
-  public int countLeg;
-  public int countDuplicate;
-  public int countSurface;
-  public int countSplay;
+  int countLeg;
+  int countDuplicate;
+  int countSurface;
+  int countSplay;
 
-  public int countStation;
-  public int countLoop;
-  public int countComponent;
+  int countStation;
+  int countLoop;
+  int countComponent;
 
   float averageM;
   float averageG;

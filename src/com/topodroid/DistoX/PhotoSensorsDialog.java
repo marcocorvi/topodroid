@@ -33,7 +33,7 @@ import android.widget.CheckBox;
 
 import android.util.Log;
 
-public class PhotoSensorsDialog extends MyDialog
+class PhotoSensorsDialog extends MyDialog
                                 implements View.OnClickListener
 {
   private ShotWindow mParent;
@@ -148,7 +148,7 @@ public class PhotoSensorsDialog extends MyDialog
     LinearLayout layout4b = (LinearLayout) findViewById( R.id.layout4b );
     layout4b.setMinimumHeight( size + 20 );
 
-    mButtonDelete = new MyCheckBox( mContext, size, R.drawable.iz_delete, R.drawable.iz_delete );
+    mButtonDelete = new MyCheckBox( mContext, size, R.drawable.iz_delete_transp, R.drawable.iz_delete_transp );
     mButtonDelete.setOnClickListener( this );
     // mCBleg = (CheckBox) findViewById( R.id.leg ); // delete whole leg
     layout4b.addView( mButtonDelete );
@@ -163,7 +163,7 @@ public class PhotoSensorsDialog extends MyDialog
       mCBleg.setLayoutParams( lp );
       if ( TDLevel.overAdvanced && mBlk.mShotType == 0 ) {
         layout4c.setMinimumHeight( size + 20 );
-        mButtonCheck  = new MyCheckBox( mContext, size, R.drawable.iz_compute, R.drawable.iz_compute );
+        mButtonCheck  = new MyCheckBox( mContext, size, R.drawable.iz_compute_transp, R.drawable.iz_compute_transp );
         mButtonCheck.setOnClickListener( this );
         layout4c.addView( mButtonCheck );
         mButtonCheck.setLayoutParams( lp );
@@ -216,6 +216,7 @@ public class PhotoSensorsDialog extends MyDialog
 
   }
 
+  @Override
   public void onClick(View v) 
   {
     Button b = (Button) v;

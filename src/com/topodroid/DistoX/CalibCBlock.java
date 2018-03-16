@@ -15,7 +15,7 @@ import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.util.Locale;
 
-public class CalibCBlock
+class CalibCBlock
 {
   private static int[] colors = { // 0xffcccccc, 0xffffcccc, 0xffccccff 
     TDColor.LIGHT_GRAY,
@@ -62,7 +62,7 @@ public class CalibCBlock
     mError = 0.0f;
   }
 
-  public boolean isFarFrom( float b0, float c0, float thr )
+  boolean isFarFrom( float b0, float c0, float thr )
   {
     computeBearingAndClino();
     float c = c0 * TDMath.DEG2RAD;
@@ -79,13 +79,13 @@ public class CalibCBlock
     return x < thr; // 0.70: approx 45 degrees
   }
 
-  public void setId( long id, long cid ) 
+  void setId( long id, long cid )
   {
     mId = id;
     mCalibId = cid;
   }
   // FIXME ZERO-DATA
-  public void setGroupIfNonZero( long g ) { mGroup = isGZero() ? 0 : g; }
+  void setGroupIfNonZero( long g ) { mGroup = isGZero() ? 0 : g; }
 
   public void setGroup( long g ) { mGroup = g; }
   public void setError( float err ) { mError = err; }
@@ -98,7 +98,7 @@ public class CalibCBlock
 
   void setStatus( long s ) { mStatus = s; }
 
-  public void setData( long gx0, long gy0, long gz0, long mx0, long my0, long mz0 )
+  void setData( long gx0, long gy0, long gz0, long mx0, long my0, long mz0 )
   {
     gx = ( gx0 > TopoDroidUtil.ZERO ) ? gx0 - TopoDroidUtil.NEG : gx0;
     gy = ( gy0 > TopoDroidUtil.ZERO ) ? gy0 - TopoDroidUtil.NEG : gy0;
@@ -108,7 +108,7 @@ public class CalibCBlock
     mz = ( mz0 > TopoDroidUtil.ZERO ) ? mz0 - TopoDroidUtil.NEG : mz0;
   } 
 
-  public void computeBearingAndClino()
+  void computeBearingAndClino()
   {
     float f = TopoDroidUtil.FV;
     // StringWriter sw = new StringWriter();
@@ -120,7 +120,7 @@ public class CalibCBlock
     doComputeBearingAndClino( g, m );
   }
 
-  public void computeBearingAndClino( CalibAlgo calib )
+  void computeBearingAndClino( CalibAlgo calib )
   {
     float f = TopoDroidUtil.FV;
     Vector g = new Vector( gx/f, gy/f, gz/f );

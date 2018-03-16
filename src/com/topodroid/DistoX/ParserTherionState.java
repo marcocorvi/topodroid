@@ -12,7 +12,7 @@
  */
 package com.topodroid.DistoX;
 
-public class ParserTherionState
+class ParserTherionState
 {
   boolean in_centerline;
   boolean in_data;
@@ -46,7 +46,7 @@ public class ParserTherionState
 
   int data_type;
 
-  public ParserTherionState()
+  ParserTherionState()
   {
     mUnitLen = 1.0f;
     mUnitBer = 1.0f;
@@ -77,7 +77,7 @@ public class ParserTherionState
     data_type = 0; // DATA_NONE
   }
 
-  public ParserTherionState( ParserTherionState state )
+  ParserTherionState( ParserTherionState state )
   {
     mUnitLen = state.mUnitLen;
     mUnitBer = state.mUnitBer;

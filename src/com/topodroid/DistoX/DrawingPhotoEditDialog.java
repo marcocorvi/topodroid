@@ -13,12 +13,12 @@ package com.topodroid.DistoX;
 
 import java.io.IOException;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 
-import android.content.Intent;
+// import android.content.Intent;
 import android.content.Context;
-import android.net.Uri;
+// import android.net.Uri;
 
 import android.widget.TextView;
 import android.widget.EditText;
@@ -26,18 +26,18 @@ import android.widget.ImageView;
 import android.widget.Button;
 import android.widget.Toast;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.view.View.OnKeyListener;
-import android.view.KeyEvent;
+// import android.view.ViewGroup.LayoutParams;
+// import android.view.View.OnKeyListener;
+// import android.view.KeyEvent;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import android.media.ExifInterface;
 
-import android.util.Log;
+// import android.util.Log;
 
-public class DrawingPhotoEditDialog extends MyDialog
+class DrawingPhotoEditDialog extends MyDialog
                              implements View.OnClickListener
 {
   private TopoDroidApp  mApp;
@@ -46,8 +46,8 @@ public class DrawingPhotoEditDialog extends MyDialog
   private String mFilename;
 
   private EditText mETcomment;  // photo comment
-  private ImageView mIVimage;   // photo image
-  private Button   mButtonOK;
+  // private ImageView mIVimage;   // photo image
+  // private Button   mButtonOK;
   // private Button   mButtonDelete;
   // private Button   mButtonCancel;
   private float mAzimuth = 0;
@@ -97,9 +97,9 @@ public class DrawingPhotoEditDialog extends MyDialog
     // TDLog.Log( TDLog.LOG_PHOTO, "onCreate" );
     initLayout( R.layout.drawing_photo_edit_dialog, R.string.title_photo_comment );
 
-    mIVimage      = (ImageView) findViewById( R.id.photo_image );
+    ImageView iVimage      = (ImageView) findViewById( R.id.photo_image );
     mETcomment    = (EditText) findViewById( R.id.photo_comment );
-    mButtonOK     = (Button) findViewById( R.id.photo_ok );
+    Button buttonOK     = (Button) findViewById( R.id.photo_ok );
     // mButtonDelete = (Button) findViewById( R.id.photo_delete );
     // mButtonCancel = (Button) findViewById( R.id.photo_cancel );
 
@@ -130,23 +130,24 @@ public class DrawingPhotoEditDialog extends MyDialog
         int h2 = image.getHeight() / 8;
         Bitmap image2 = Bitmap.createScaledBitmap( image, w2, h2, true );
         if ( image2 != null ) {
-          MyBearingAndClino.applyOrientation( mIVimage, image2, mOrientation );
+          MyBearingAndClino.applyOrientation( iVimage, image2, mOrientation );
           // mIVimage.setHeight( h2 );
           // mIVimage.setWidth( w2 );
-          mIVimage.setOnClickListener( this );
+          iVimage.setOnClickListener( this );
         } else {
-          mIVimage.setVisibility( View.GONE );
+          iVimage.setVisibility( View.GONE );
         }
       }
     } catch ( OutOfMemoryError e ) {
       Toast.makeText( mParent, R.string.null_bitmap, Toast.LENGTH_SHORT ).show();
     }
 
-    mButtonOK.setOnClickListener( this );
+    buttonOK.setOnClickListener( this );
     // mButtonDelete.setOnClickListener( this );
     // mButtonCancel.setOnClickListener( this );
   }
 
+  @Override
   public void onClick(View v) 
   {
     // Button b = (Button) v;
@@ -156,7 +157,7 @@ public class DrawingPhotoEditDialog extends MyDialog
       case R.id.photo_ok:
         String comment = ( mETcomment.getText() == null )? "" : mETcomment.getText().toString();
         mPhoto.setPointText( comment );
-        mApp.mData.updatePhoto( mApp.mSID, mPhoto.mId, comment );
+        TopoDroidApp.mData.updatePhoto( mApp.mSID, mPhoto.mId, comment );
         break;
       // case R.id.photo_delete:
       //   mParent.dropPhoto( mPhoto );

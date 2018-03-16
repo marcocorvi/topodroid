@@ -130,10 +130,7 @@ class SelectionPoint
 
   boolean rotateBy( float dy )
   {
-    if ( mItem.mType == DrawingPath.DRAWING_PATH_POINT ) {
-      return mItem.rotateBy( dy );
-    }
-    return false;
+    return ( mItem.mType == DrawingPath.DRAWING_PATH_POINT ) && mItem.rotateBy( dy );
   }
 
 

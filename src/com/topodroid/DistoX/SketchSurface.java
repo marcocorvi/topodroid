@@ -35,11 +35,11 @@ import android.util.Log;
 class SketchSurface extends SketchShot
 {
   SparseArray< SketchVertex > mVertices;
-  SparseArray< PointF > mCorners;   // corners of forward surface: index-of-vertex, canvas-point
+  private SparseArray< PointF > mCorners;   // corners of forward surface: index-of-vertex, canvas-point
 
-  SparseArray< SketchSide > mSides;
+  private SparseArray< SketchSide > mSides;
   ArrayList< SketchTriangle > mTriangles;
-  int maxkey_vtx;
+  private int maxkey_vtx;
   // int maxkey_sds;
   private SketchVertex mSelectedVertex;
   
@@ -54,14 +54,14 @@ class SketchSurface extends SketchShot
    *  they are not saved in the th3 file
    *  they are displayed in the draw method
    */
-  ArrayList< SketchBorder >   mBorders;
+  private ArrayList< SketchBorder >   mBorders;
 /* if MODE_EDIT
   ArrayList< SketchVertex >   mInsideVertices; 
   ArrayList< SketchTriangle > mInsideTriangles;
   ArrayList< SketchTriangle > mOutsideTriangles;
 */
 
-  SketchPainter mPainter;
+  private SketchPainter mPainter;
   // SketchTriangle mSelectedTriangle;
 
   // sides are indexed by two vertex indices (v1,v2)

@@ -18,21 +18,22 @@ import java.io.IOException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Stack;
-import java.util.regex.Pattern;
+// import java.util.ArrayList;
+// import java.util.Stack;
+// import java.util.regex.Pattern;
+import java.util.Locale;
 
 import android.util.Log;
 
-public class ParserPocketTopo extends ImportParser
+class ParserPocketTopo extends ImportParser
 {
   String mTitle = "";
   String mComment;
   String mStartFrom;
 
-  static final float PT_SCALE = 0.1f; // 100/1000
+  static final private float PT_SCALE = 0.1f; // 100/1000
 
-  public ParserPocketTopo( String filename, String surveyname, boolean apply_declination )
+  ParserPocketTopo( String filename, String surveyname, boolean apply_declination )
                            throws ParserException
   {
     super( apply_declination );
@@ -65,7 +66,7 @@ public class ParserPocketTopo extends ImportParser
     // mTeam = "";
     if ( nr_trip > 0 ) { // use only the first trip
       PTTrip trip = ptfile.getTrip(0);
-      mDate = String.format( "%04d-%02d-%02d", trip._year, trip._month, trip._day );
+      mDate = String.format(Locale.US, "%04d-%02d-%02d", trip._year, trip._month, trip._day );
       if ( trip.hasComment() ) mComment = trip.comment();
       // trip.declination(); NOT USED
       // TODO create a survey
@@ -160,7 +161,7 @@ public class ParserPocketTopo extends ImportParser
     
   }
 
-  final static float FCT = 0.0f;
+  static final private float FCT = 0.0f;
   /** return true if successful
    */
   private boolean writeDrawing( String filename, PTDrawing drawing, long type, float xoff, float yoff )

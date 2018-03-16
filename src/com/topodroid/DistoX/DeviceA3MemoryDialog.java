@@ -12,15 +12,16 @@
 package com.topodroid.DistoX;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import android.os.Bundle;
-import android.app.Dialog;
+// import android.app.Dialog;
 // import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
+// import android.content.Intent;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
-import android.content.DialogInterface.OnDismissListener;
+// import android.content.DialogInterface.OnCancelListener;
+// import android.content.DialogInterface.OnDismissListener;
 
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -110,8 +111,8 @@ class DeviceA3MemoryDialog extends MyDialog
 
   private void setText( TextView h, TextView t, int[] ht )
   {
-    h.setText( String.format("%04d", ht[0] / 8 ) );
-    t.setText( String.format("%04d", ht[1] / 8 ) );
+    h.setText( String.format(Locale.US, "%04d", ht[0] / 8 ) );
+    t.setText( String.format(Locale.US, "%04d", ht[1] / 8 ) );
   }
 
   // int parseInt( EditText et, int scale )
@@ -158,12 +159,12 @@ class DeviceA3MemoryDialog extends MyDialog
       case R.id.button_dump:
         from = mETdumpfrom.getText().toString();
         to   = mETdumpto.getText().toString();
-        if ( from == null || from.length() == 0 ) {
+        if ( /* from == null || */ from.length() == 0 ) {
           error = mParent.getResources().getString( R.string.error_begin_required );
           mETdumpfrom.setError( error );
           return;
         }
-        if ( to == null || to.length() == 0 ) {
+        if ( /* to == null || */ to.length() == 0 ) {
           error = mParent.getResources().getString( R.string.error_end_required );
           mETdumpto.setError( error );
           return;
@@ -195,12 +196,12 @@ class DeviceA3MemoryDialog extends MyDialog
       case R.id.button_reset:
         from = mETfrom.getText().toString().trim();
         to   = mETto.getText().toString().trim();
-        if ( from == null || from.length() == 0 ) {
+        if ( /* from == null || */ from.length() == 0 ) {
           error = mParent.getResources().getString( R.string.error_begin_required );
           mETfrom.setError( error );
           return;
         }
-        if ( to == null || to.length() == 0 ) {
+        if ( /* to == null || */ to.length() == 0 ) {
           error = mParent.getResources().getString( R.string.error_end_required );
           mETto.setError( error );
           return;
@@ -229,7 +230,7 @@ class DeviceA3MemoryDialog extends MyDialog
   }
 
   // @param ht[] head-tail addresses
-  void askReset( final int ht[] )
+  private void askReset( final int ht[] )
   {
     TopoDroidAlertDialog.makeAlert( mContext, mParent.getResources(), R.string.ask_reset,
       new DialogInterface.OnClickListener() {

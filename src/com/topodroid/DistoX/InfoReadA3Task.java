@@ -20,8 +20,8 @@ import android.content.Context;
 class InfoReadA3Task extends AsyncTask<Void, Integer, Boolean>
 {
   TopoDroidApp   mApp;
-  DeviceA3InfoDialog  mDialog;
-  DeviceA3Info mInfo = null;
+  private DeviceA3InfoDialog  mDialog;
+  private DeviceA3Info mInfo = null;
   // int mType; // DistoX type
   String mAddress;
 

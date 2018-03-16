@@ -110,7 +110,7 @@ class SymbolEnableDialog extends MyDialog
     updateList();
   }
 
-  boolean createAdapters()
+  private boolean createAdapters()
   {
     mPointAdapter = new SymbolAdapter( mContext, R.layout.symbol, new ArrayList<EnableSymbol>() );
     mLineAdapter  = new SymbolAdapter( mContext, R.layout.symbol, new ArrayList<EnableSymbol>() );

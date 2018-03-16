@@ -414,7 +414,7 @@ public class SketchWindow extends ItemDrawer
   // -------------------------------------------------------------------------
   // SYMBOL-CHOICE methods
   
-  public void areaSelected( int k, boolean update_recent ) 
+  public void areaSelected( int k, boolean update_recent )
   {
     if ( k >= 0 && k < BrushManager.mAreaLib.mSymbolNr ) {
       mSymbol = Symbol.AREA;
@@ -549,14 +549,14 @@ public class SketchWindow extends ItemDrawer
   //   }
   // }
 
-  private class SaveTh3File extends AsyncTask<Intent,Void,Boolean>
+  class SaveTh3File extends AsyncTask<Intent,Void,Boolean>
   {
     private Context mContext;
     private Handler mHandler;
     private SketchModel mModel;
     private String mFullName;
 
-    public SaveTh3File( Context context, Handler handler, SketchModel model, String name )
+    SaveTh3File( Context context, Handler handler, SketchModel model, String name )
     {
        mContext  = context;
        mHandler  = handler;
@@ -600,7 +600,7 @@ public class SketchWindow extends ItemDrawer
     private SketchModel mModel;
     private String mFullName;
 
-    public SaveTdr3File( Context context, Handler handler, SketchModel model, String name )
+    SaveTdr3File( Context context, Handler handler, SketchModel model, String name )
     {
        mContext  = context;
        mHandler  = handler;
@@ -684,7 +684,7 @@ public class SketchWindow extends ItemDrawer
       private SketchModel mModel;
       private String mFullName;
 
-      public SaveDxfFile( Context context, Handler handler, SketchModel model, String name )
+      SaveDxfFile( Context context, Handler handler, SketchModel model, String name )
       {
          mContext  = context;
          mHandler  = handler;
@@ -948,7 +948,7 @@ public class SketchWindow extends ItemDrawer
   protected synchronized void onStart()
   {
     super.onStart();
-    loadRecentSymbols( mApp.mData );
+    loadRecentSymbols( TopoDroidApp.mData );
   }
 
   @Override
@@ -982,7 +982,7 @@ public class SketchWindow extends ItemDrawer
       mDataDownloader.onStop();
       mApp.disconnectRemoteDevice( false );
     }
-    saveRecentSymbols( mApp.mData );
+    saveRecentSymbols( TopoDroidApp.mData );
     super.onStop();
   }
 
@@ -2249,7 +2249,7 @@ public class SketchWindow extends ItemDrawer
   @Override
   public void refreshDisplay( int nr, boolean toast ) 
   {
-    mActivity.setTitleColor( TDColor.NORMAL );
+    mActivity.setTitleColor( TDColor.TITLE_NORMAL );
     if ( nr >= 0 ) {
       if ( nr > 0 ) {
         List<DBlock> list = mData.selectAllShots( mSid, TDStatus.NORMAL );

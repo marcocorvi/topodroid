@@ -21,11 +21,11 @@ package com.topodroid.DistoX;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
-import android.util.FloatMath;
+// import android.util.FloatMath;
 
-import android.util.Log;
+// import android.util.Log;
 
-public class DrawingScaleReference
+class DrawingScaleReference
 {
   private static final float MIN_WIDTH_PERCENT = 0.2f;
   private static final float MAX_WIDTH_PERCENT = 1.0f;
@@ -46,7 +46,7 @@ public class DrawingScaleReference
    * @param widthPercent maximum width of scale reference in percentage of screen width
    *                     (valid value are in range [0.2, 1.0]
    */
-  public DrawingScaleReference( Point loc, float widthPercent ) 
+  DrawingScaleReference( Point loc, float widthPercent )
   {
     this( null, loc, widthPercent );
   }
@@ -59,7 +59,7 @@ public class DrawingScaleReference
    * @param widthPercent maximum width of scale reference in percentage of screen width
    *                     (valid value are in range [0.2, 1.0]
    */
-  public DrawingScaleReference(Paint p, Point loc, float widthPercent) {
+  DrawingScaleReference(Paint p, Point loc, float widthPercent) {
 
     if(p == null)
     {
@@ -93,7 +93,7 @@ public class DrawingScaleReference
    *
    * @param paint th new paint to be used. If null, the setting is ignored.
    */
-  public void setPaint( Paint paint ) {
+  void setPaint( Paint paint ) {
     if ( paint != null ) {
       mPaint = paint;
     }
@@ -104,7 +104,7 @@ public class DrawingScaleReference
    * @param canvas canvas to draw in
    * @param zoom zoom factor used
      */
-  public void draw( Canvas canvas, float zoom, boolean landscape )
+  void draw( Canvas canvas, float zoom, boolean landscape )
   {
     if (canvas != null)
     {

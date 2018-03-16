@@ -21,13 +21,13 @@ import android.view.LayoutInflater;
 
 import java.util.ArrayList;
 
-public class MyStringAdapter extends BaseAdapter
+class MyStringAdapter extends BaseAdapter
 {
   Context mContext;
-  int     mResId;
-  ArrayList<String> mStr;
+  private int     mResId;
+  private ArrayList<String> mStr;
 
-  public MyStringAdapter( Context context, int res_id )
+  MyStringAdapter( Context context, int res_id )
   {
     mContext = context;
     mResId   = res_id;

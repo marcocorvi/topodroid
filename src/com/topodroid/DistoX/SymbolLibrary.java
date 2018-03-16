@@ -29,9 +29,9 @@ import android.util.Log;
 
 class SymbolLibrary
 {
-  protected String mPrefix;
+  String mPrefix;
 
-  protected ArrayList< Symbol > mSymbols;
+  ArrayList< Symbol > mSymbols;
   private SymbolNode mRoot;
   int mSymbolNr;
 
@@ -49,7 +49,7 @@ class SymbolLibrary
   // used by DrawingDxf and DrawingSurface (for the palette)
   ArrayList< Symbol > getSymbols() { return mSymbols; }
 
-  protected boolean addSymbol( Symbol v )
+  boolean addSymbol( Symbol v )
   {
     boolean ret = true;
     SymbolNode n = new SymbolNode( v );
@@ -125,7 +125,7 @@ class SymbolLibrary
   boolean hasSymbolByThName( String th_name ) { return ( null != get( th_name ) ); }
 
   // this is used by loadUserXXX 
-  protected boolean hasSymbolByFilename( String fname ) { return ( null != get( fname ) ); }
+  boolean hasSymbolByFilename( String fname ) { return ( null != get( fname ) ); }
 
   Symbol getSymbolByFilename( String fname ) { return get( fname ); }
   // Symbol getSymbolByThName( String th_name ) { return get( th_name ); }
@@ -164,7 +164,7 @@ class SymbolLibrary
 
   // ========================================================================
 
-  protected void sortSymbolByName( int start )
+  void sortSymbolByName( int start )
   {
     for ( int k=start+1; k<mSymbolNr; ) {
       Symbol prev = mSymbols.get(k-1);
@@ -211,7 +211,7 @@ class SymbolLibrary
   }
 
   // symbols = palette.mPaletteAreas etc. (filenames)
-  protected void makeEnabledListFromStrings( TreeSet<String> symbols )
+  void makeEnabledListFromStrings( TreeSet<String> symbols )
   {
     for ( Symbol symbol : mSymbols ) symbol.setEnabled( false );
     for ( String fname : symbols ) {
@@ -254,10 +254,10 @@ class SymbolLibrary
   }
 
   // -------------------------------------------------------------
-  static final boolean BLACK = true;
-  static final boolean RED = false;
+  static final private boolean BLACK = true;
+  static final private boolean RED = false;
 
-  static int compare( String s1, String s2 )
+  static private int compare( String s1, String s2 )
   { 
     int l1 = s1.length();
     int l2 = s2.length();

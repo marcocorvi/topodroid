@@ -27,7 +27,7 @@ import android.view.View.OnKeyListener;
 import android.view.KeyEvent;
 
 
-public class ShotDeleteDialog extends MyDialog
+class ShotDeleteDialog extends MyDialog
                               implements View.OnClickListener
 {
   private ShotWindow mParent;
@@ -81,6 +81,7 @@ public class ShotDeleteDialog extends MyDialog
 
   }
 
+  @Override
   public void onClick(View v) 
   {
     Button b = (Button) v;

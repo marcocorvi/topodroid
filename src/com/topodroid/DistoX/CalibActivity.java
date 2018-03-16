@@ -11,32 +11,32 @@
  */
 package com.topodroid.DistoX;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 import android.app.Activity;
 // import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
-import android.content.Context;
+// import android.content.Context;
 // import android.content.Intent;
 
 import android.widget.EditText;
-import android.widget.TextView;
+// import android.widget.TextView;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.view.View;
 import android.app.DatePickerDialog;
 
-import android.app.Application;
+// import android.app.Application;
 
-import android.content.Context;
+// import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 
 import android.widget.Toast;
-import android.view.View;
-import android.view.View.OnClickListener;
+// import android.view.View;
+// import android.view.View.OnClickListener;
 import android.view.KeyEvent;
 
 import android.widget.AdapterView;
@@ -44,8 +44,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+// import android.graphics.Bitmap;
+// import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 
 public class CalibActivity extends Activity
@@ -279,7 +279,7 @@ public class CalibActivity extends Activity
 
   private void showCoeffs()
   {
-    byte[] coeff = CalibAlgo.stringToCoeff( mApp.mDData.selectCalibCoeff( mApp.mCID ) );
+    byte[] coeff = CalibAlgo.stringToCoeff( TopoDroidApp.mDData.selectCalibCoeff( mApp.mCID ) );
     Matrix mG = new Matrix();
     Matrix mM = new Matrix();
     Vector vG = new Vector();
@@ -290,7 +290,7 @@ public class CalibActivity extends Activity
     CalibAlgo.coeffToNL( coeff, nL );
    
     CalibResult res = new CalibResult();
-    mApp.mDData.selectCalibError( mApp.mCID, res );
+    TopoDroidApp.mDData.selectCalibError( mApp.mCID, res );
     (new CalibCoeffDialog( this, mApp, vG, mG, vM, mM, nL, null,
                            res.error, res.stddev, res.max_error, res.iterations, coeff /*, false */ )).show();
   }
@@ -318,11 +318,11 @@ public class CalibActivity extends Activity
   private void doSave( )
   {
     String name = mEditName.getText().toString().trim();
-    if ( name == null ) {
-      String error = getResources().getString( R.string.error_name_required );
-      mEditName.setError( error );
-      return;
-    }
+    // if ( name == null ) {
+    //   String error = getResources().getString( R.string.error_name_required );
+    //   mEditName.setError( error );
+    //   return;
+    // }
     name = TopoDroidUtil.noSpaces( name );
     if ( name.length() == 0 ) {
       String error = getResources().getString( R.string.error_name_required );
@@ -338,7 +338,7 @@ public class CalibActivity extends Activity
     if ( comment != null ) { comment = comment.trim(); }
 
     if ( isSaved ) { // calib already saved
-      mApp.mDData.updateCalibInfo( mApp.mCID, date, device, comment );
+      TopoDroidApp.mDData.updateCalibInfo( mApp.mCID, date, device, comment );
       Toast.makeText( this, R.string.calib_updated, Toast.LENGTH_SHORT ).show();
     } else { // new calib
       name = TopoDroidUtil.noSpaces( name );
@@ -349,7 +349,7 @@ public class CalibActivity extends Activity
           mEditName.setError( error );
         } else {
           mApp.setCalibFromName( name );
-          mApp.mDData.updateCalibInfo( mApp.mCID, date, device, comment );
+          TopoDroidApp.mDData.updateCalibInfo( mApp.mCID, date, device, comment );
           setNameEditable( true );
           Toast.makeText( this, R.string.calib_saved, Toast.LENGTH_SHORT ).show();
         }
@@ -361,7 +361,7 @@ public class CalibActivity extends Activity
     if ( mCBAlgoLinear.isChecked() )         algo = 1;
     else if ( mCBAlgoNonLinear.isChecked() ) algo = 2;
     else if ( mCBAlgoMinimum.isChecked() )   algo = 3;
-    mApp.mDData.updateCalibAlgo( mApp.mCID, algo );
+    TopoDroidApp.mDData.updateCalibAlgo( mApp.mCID, algo );
 
     setButtons();
   }
@@ -382,7 +382,7 @@ public class CalibActivity extends Activity
   public void doDelete()
   {
     if ( mApp.mCID < 0 ) return;
-    mApp.mDData.doDeleteCalib( mApp.mCID );
+    TopoDroidApp.mDData.doDeleteCalib( mApp.mCID );
     mApp.setCalibFromName( null );
     finish();
   }

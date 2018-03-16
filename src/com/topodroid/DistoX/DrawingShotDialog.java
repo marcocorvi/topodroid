@@ -12,27 +12,27 @@
 package com.topodroid.DistoX;
 
 import android.os.Bundle;
-import android.app.Dialog;
+// import android.app.Dialog;
 // import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
+// import android.content.Intent;
 
-import android.graphics.*;
+// import android.graphics.*;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.EditText;
-import android.widget.RadioButton;
+// import android.widget.RadioButton;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
-import android.text.InputType;
+// import android.text.InputType;
 import android.inputmethodservice.KeyboardView;
 
 import android.util.Log;
 
-public class DrawingShotDialog extends MyDialog 
+class DrawingShotDialog extends MyDialog
                                implements View.OnClickListener
                                , View.OnLongClickListener
 {
@@ -68,7 +68,7 @@ public class DrawingShotDialog extends MyDialog
 
   MyKeyboard mKeyboard = null;
 
-  public DrawingShotDialog( Context context, DrawingWindow parent, DrawingPath shot, int flag )
+  DrawingShotDialog( Context context, DrawingWindow parent, DrawingPath shot, int flag )
   {
     super(context, R.string.DrawingShotDialog );
     mParent  = parent;
@@ -82,9 +82,9 @@ public class DrawingShotDialog extends MyDialog
   protected void onCreate(Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
-
-    setContentView(R.layout.drawing_shot_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout( R.layout.drawing_shot_dialog,
+      String.format( mContext.getResources().getString( R.string.shot_title ), mBlock.mFrom, mBlock.mTo ) );
+    
 
     mLabel     = (TextView) findViewById(R.id.shot_label);
     mETfrom    = (EditText) findViewById(R.id.shot_from );
@@ -214,8 +214,7 @@ public class DrawingShotDialog extends MyDialog
         }
       }
     }
-    setTitle( String.format( mContext.getResources().getString( R.string.shot_title ), mBlock.mFrom, mBlock.mTo ) );
-
+    
     if ( TDSetting.mKeyboard ) {
       int flag = MyKeyboard.FLAG_POINT_LCASE_2ND;
       if ( TDSetting.mStationNames == 1 ) flag = MyKeyboard.FLAG_POINT;

@@ -16,6 +16,7 @@ package com.topodroid.DistoX;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import android.app.Dialog;
 // import android.app.Activity;
@@ -38,7 +39,7 @@ import android.text.InputType;
 import android.inputmethodservice.KeyboardView;
 
 
-public class SketchNewShotDialog extends MyDialog
+class SketchNewShotDialog extends MyDialog
                                  implements View.OnClickListener
 {
   private Button   mBtnOk;
@@ -130,9 +131,9 @@ public class SketchNewShotDialog extends MyDialog
         mFrom = mBlk.mFrom;
         mETfrom.setText( mFrom );
         mETto.setText( mBlk.mTo );
-        mETlength.setText(  Float.toString( mBlk.mLength ) );
-        mETazimuth.setText( Float.toString( mBlk.mBearing ) );
-        mETclino.setText(   Float.toString( mBlk.mClino ) );
+        mETlength.setText(  String.format(Locale.US, "%.2f", mBlk.mLength ) );
+        mETazimuth.setText( String.format(Locale.US, "%.1f", mBlk.mBearing ) );
+        mETclino.setText(   String.format(Locale.US, "%.1f", mBlk.mClino ) );
         mETlength.setEnabled( false );
         mETazimuth.setEnabled( false );
         mETclino.setEnabled( false );
@@ -150,6 +151,7 @@ public class SketchNewShotDialog extends MyDialog
     // mBtnCancel.setOnClickListener( this );
   }
 
+  @Override
   public void onClick(View v) 
   {
     MyKeyboard.close( mKeyboard );

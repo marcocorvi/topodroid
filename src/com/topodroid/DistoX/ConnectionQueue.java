@@ -13,9 +13,9 @@ package com.topodroid.DistoX;
 
 class ConnectionQueue
 {
-  int mSize;
-  ConnectionQueueItem mHead;
-  ConnectionQueueItem mLast;
+  private int mSize;
+  private ConnectionQueueItem mHead;
+  private ConnectionQueueItem mLast;
 
   ConnectionQueue( )
   {

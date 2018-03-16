@@ -17,18 +17,18 @@ import java.lang.reflect.InvocationTargetException;
 // import android.app.Activity;
 // import android.os.Bundle;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.BroadcastReceiver;
+// import android.content.Context;
+// import android.content.Intent;
+// import android.content.IntentFilter;
+// import android.content.BroadcastReceiver;
 
 // import android.widget.Toast;
 
-import android.util.Log;
+// import android.util.Log;
 
 import android.bluetooth.BluetoothDevice;
 
-public class DeviceUtil
+class DeviceUtil
 {
   // FIXME PAIRING api-19
   // final static String ACTION_PAIRING_REQUEST = "android.bluetooth.device.action.PAIRING_REQUEST";
@@ -38,8 +38,8 @@ public class DeviceUtil
 
   static boolean isPaired( BluetoothDevice device )
   {
-    if ( device == null ) return false;
-    return device.getBondState() == BluetoothDevice.BOND_BONDED;
+    return ( device == null )? false 
+           : device.getBondState() == BluetoothDevice.BOND_BONDED;
   }
 
   // @return 0: null device

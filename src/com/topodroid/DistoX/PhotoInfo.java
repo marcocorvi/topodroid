@@ -17,12 +17,12 @@ class PhotoInfo
   public long id;        // photo id
   public long shotid;    // shot id
   public String mTitle;   // photo title FIXME TITLE
-  public String mShotName; // shot name
+  String mShotName; // shot name
   // public String mName; // photo filename without extension ".jpg" and survey prefix dir = photo id
   public String mDate;
   public String mComment;
 
-  public PhotoInfo( long _sid, long _id, long _shotid, String t, String sn, String dt, String cmt )
+  PhotoInfo( long _sid, long _id, long _shotid, String t, String sn, String dt, String cmt )
   {
     sid    = _sid;
     id     = _id;

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 import android.util.Log;
 
-public class NumStation extends NumSurveyPoint
+class NumStation extends NumSurveyPoint
 {
   String name;  // station name
   float   mShortpathDist; // loop closure distance (shortest-path algo)
@@ -37,7 +37,7 @@ public class NumStation extends NumSurveyPoint
   boolean barrier() { return mBarrierAndHidden || mHidden < 0; }
   boolean hidden()  { return mBarrierAndHidden || mHidden > 0; }
 
-  ArrayList< NumAzimuth > mLegs; // ordered list of legs at the shot (used to compute extends)
+  private ArrayList< NumAzimuth > mLegs; // ordered list of legs at the shot (used to compute extends)
 
   NumStation( String id )
   {

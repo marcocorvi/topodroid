@@ -17,23 +17,23 @@ package com.topodroid.DistoX;
 import java.util.List;
 
 import android.os.Bundle;
-import android.app.Dialog;
+// import android.app.Dialog;
 // import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
+// import android.content.Intent;
 
-import android.graphics.*;
+// import android.graphics.*;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.EditText;
 
-import android.util.Log;
+// import android.util.Log;
 
 
-public class DrawingStationDialog extends MyDialog 
+class DrawingStationDialog extends MyDialog
                                   implements View.OnClickListener
                                   , IBearingAndClino
 {
@@ -69,7 +69,7 @@ public class DrawingStationDialog extends MyDialog
     private float mClino;
     private List<DBlock> mBlk;
 
-    public DrawingStationDialog( Context context, DrawingWindow parent, DrawingStationName station,
+    DrawingStationDialog( Context context, DrawingWindow parent, DrawingStationName station,
                                  DrawingStationPath path,
                                  boolean is_barrier, boolean is_hidden, boolean global_xsections, List<DBlock> blk )
     {
@@ -258,6 +258,7 @@ public class DrawingStationDialog extends MyDialog
       }
     }
 
+    @Override
     public void onClick(View view)
     {
       // TDLog.Log( TDLog.LOG_INPUT, "Drawing Station Dialog onClick() " + view.toString() );

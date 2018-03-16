@@ -35,7 +35,7 @@ import android.widget.TextView;
 
 import android.util.Log;
 
-public class FixedAddDialog extends MyDialog
+class FixedAddDialog extends MyDialog
                             implements View.OnClickListener
                                      , View.OnLongClickListener
 {
@@ -58,7 +58,7 @@ public class FixedAddDialog extends MyDialog
   private double  mLng, mLat, mHEll, mHGeo;
   private boolean mNorth, mEast;
 
-  public FixedAddDialog( Context context, FixedActivity parent )
+  FixedAddDialog( Context context, FixedActivity parent )
   {
     super( context, R.string.FixedAddDialog );
     mParent = parent;
@@ -127,15 +127,15 @@ public class FixedAddDialog extends MyDialog
     return true;
   }
 
-  boolean getLngLat()
+  private boolean getLngLat()
   {
     String longit = mETlng.getText().toString();
-    if ( longit == null || longit.length() == 0 ) {
+    if ( /* longit == null || */ longit.length() == 0 ) {
       mETlng.setError( mContext.getResources().getString( R.string.error_long_required ) );
       return false;
     }
     String latit = mETlat.getText().toString();
-    if ( latit == null || latit.length() == 0 ) {
+    if ( /* latit == null || */ latit.length() == 0 ) {
       mETlat.setError( mContext.getResources().getString( R.string.error_lat_required) );
       return false;
     }
@@ -189,22 +189,22 @@ public class FixedAddDialog extends MyDialog
       return;
     } else if ( b == mBtnOK ) {
       String name = mETstation.getText().toString();
-      if ( name == null || name.length() == 0 ) {
+      if ( /* name == null || */ name.length() == 0 ) {
         mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
         return;
       }
       String comment = mETcomment.getText().toString();
-      if ( comment == null ) comment = "";
+      // if ( comment == null ) comment = "";
       if ( getLngLat() ) {
         String altit = mEThell.getText().toString();
         String aslit = mEThgeo.getText().toString();
-        if ( ( altit == null || altit.length() == 0 ) && (aslit == null || aslit.length() == 0 ) ) {
+        if ( ( /* altit == null || */ altit.length() == 0 ) && ( /* aslit == null || */ aslit.length() == 0 ) ) {
           mEThell.setError( mContext.getResources().getString( R.string.error_alt_required) );
           return;
         }
         mHEll = -1000.0;
         mHGeo = -1000.0;
-        if ( ( altit == null || altit.length() == 0 ) ) {
+        if ( ( /* altit == null || */ altit.length() == 0 ) ) {
           try {
             mHGeo = Double.parseDouble( aslit.replace(",", ".") );
           } catch ( NumberFormatException e ) {
@@ -220,7 +220,7 @@ public class FixedAddDialog extends MyDialog
             mEThell.setError( mContext.getResources().getString( R.string.error_invalid_number) );
             return;
           }
-          if ( ( aslit == null || aslit.length() == 0 ) ) {
+          if ( ( /* aslit == null || */ aslit.length() == 0 ) ) {
             WorldMagneticModel wmm = new WorldMagneticModel( mContext );
             mHGeo = wmm.ellipsoidToGeoid( mLat, mLng, mHEll );
           } else {

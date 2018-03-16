@@ -26,13 +26,13 @@ import android.content.res.Resources;
 
 /**
  */
-public class SymbolsPalette 
+class SymbolsPalette
 {
   TreeSet< String > mPalettePoint;  // filenames == th_names
   TreeSet< String > mPaletteLine;
   TreeSet< String > mPaletteArea;
 
-  public SymbolsPalette( )
+  SymbolsPalette( )
   {
     mPalettePoint = new TreeSet< String >();
     mPaletteLine  = new TreeSet< String >();

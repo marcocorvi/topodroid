@@ -68,7 +68,7 @@ class TDLog
 
 
   // --------------- LOG PREFERENCES ----------------------
-  public static final String[] log_key = {
+  static final String[] log_key = {
     "DISTOX_LOG_DEBUG",           // + 0
     "DISTOX_LOG_ERR",
     "DISTOX_LOG_INPUT",           // + 2

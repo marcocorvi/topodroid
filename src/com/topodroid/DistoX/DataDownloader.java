@@ -135,7 +135,7 @@ class DataDownloader
 
   // BATCH ON-DEMAND DOWNLOAD
   // non-private to allow the DistoX select dialog
-  void tryDownloadData( )
+  private void tryDownloadData( )
   {
     // mSecondLastShotId = mApp.lastShotId( );
     if ( mApp.mDevice != null && mApp.mBTAdapter.isEnabled() ) {

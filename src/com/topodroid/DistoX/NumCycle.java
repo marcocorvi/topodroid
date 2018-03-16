@@ -15,11 +15,11 @@ import java.util.ArrayList;
 
 // import android.util.Log;
 
-public class NumCycle 
+class NumCycle
 {
-  int mMax;
+  private int mMax;
   int mSize;
-  NumBranch[] branches;
+  private NumBranch[] branches;
   // NumNode[]   nodes;
   int[]       dirs; // branch direction in the cycle
   float e, s, v;    // displacement = closure error

@@ -776,6 +776,7 @@
     <string name="title_audio">Аудио коментар</string>
     <string name="title_calib">Калибрации</string>
     <string name="title_calib_check">Контролни измервания</string>
+    <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Разпределение на данните от калибрацията</string>
     <string name="title_coeff">Коефициенти на калибрацията</string>
     <!-- NO string name="title_contour">Contour</string -->
@@ -1010,6 +1011,8 @@
   <string name="pref_min_leg_message">Отсечки под тази дължина се маркират като вероятно грешни</string>
   <string name="pref_backsight_title">Обратна отсечка</string>
   <string name="pref_backsight_summary">Въвеждане на обр. азимут/накл/разст при ръчно добавяне на отсечка</string>
+  <!-- TODO string name="pref_backshot_title">Backshot DistoX</string -->
+  <!-- TODO string name="pref_backshot_summary">DistoX in backshot mode</string -->
   <string name="pref_prev_next_title">Пред./Следваща бутони</string>
   <string name="pref_prev_next_summary">Показване на бутони за Предишна/Следваща отсечка</string>
   <string name="pref_mag_anomaly_title">Магнитна аномалия</string>

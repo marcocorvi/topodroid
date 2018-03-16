@@ -29,7 +29,7 @@ import java.util.ArrayList;
 
 /**
  */
-public class SketchAreaPath extends SketchPath
+class SketchAreaPath extends SketchPath
 {
   private static int area_id_cnt = 0;
   // private static final String TAG = "DistoX";
@@ -37,15 +37,14 @@ public class SketchAreaPath extends SketchPath
   private static String makeId() 
   {
     ++ area_id_cnt;
-    String ret = "a" + area_id_cnt;
-    return ret;
+    return "a" + area_id_cnt;
   }
 
-  int mAreaCnt;
-  boolean mVisible; // visible border
-  Line3D mLine;
+  private int mAreaCnt;
+  private boolean mVisible; // visible border
+  private Line3D mLine;
 
-  public SketchAreaPath( int type, String s1, String s2, String id, boolean visible )
+  SketchAreaPath( int type, String s1, String s2, String id, boolean visible )
   {
     super( DrawingPath.DRAWING_PATH_AREA, s1, s2 );
     // mViewType = SketchDef.VIEW_3D;
@@ -60,27 +59,27 @@ public class SketchAreaPath extends SketchPath
     mVisible = visible;
   }
 
-  public void addPoint( float x, float y, float z ) 
+  void addPoint( float x, float y, float z )
   {
     mLine.points.add( new Vector(x,y,z) );
   }
 
-  public void addPoint3( float x1, float y1, float z1, float x2, float y2, float z2, float x, float y, float z ) 
+  void addPoint3( float x1, float y1, float z1, float x2, float y2, float z2, float x, float y, float z )
   {
     mLine.points.add( new Vector( x,y,z ) );
   }
 
-  public void close() 
+  void close()
   {
     // FIXME TODO
   }
 
-  public void setAreaType( int t ) 
+  void setAreaType( int t )
   {
     mThType = t;
   }
 
-  public int areaType() { return mThType; }
+  int areaType() { return mThType; }
 
   @Override
   public String toTherion()
@@ -100,7 +99,7 @@ public class SketchAreaPath extends SketchPath
     return sw.getBuffer().toString();
   }
 
-  public void toTdr( BufferedOutputStream bos ) throws IOException
+  void toTdr( BufferedOutputStream bos ) throws IOException
   {
     SketchModel.toTdr( bos, (short)3 );
     SketchModel.toTdr( bos, BrushManager.mAreaLib.getSymbolThName( mThType ) );

@@ -12,7 +12,7 @@
 package com.topodroid.DistoX;
 
 import android.os.Bundle;
-import android.app.Dialog;
+// import android.app.Dialog;
 // import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -52,15 +52,16 @@ class DeviceNameDialog extends MyDialog
   {
     super.onCreate( bundle );
 
-    setContentView( R.layout.device_name_dialog );
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    // setContentView( R.layout.device_name_dialog );
+    // getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout( R.layout.device_name_dialog, R.string.device_info );
 
     mTVmodel = (TextView) findViewById( R.id.tv_model );
     mTVname = (TextView) findViewById( R.id.tv_name );
     mTVaddress = (TextView) findViewById( R.id.tv_address );
     mETnickname = (EditText) findViewById( R.id.tv_nickname );
 
-    setTitle( mParent.getResources().getString( R.string.device_info ) );
+    // setTitle( mParent.getResources().getString( R.string.device_info ) );
 
     mTVmodel.setText( mDevice.mModel );
     mTVname.setText( mDevice.mName );
@@ -73,7 +74,6 @@ class DeviceNameDialog extends MyDialog
     mBTok.setOnClickListener( this );
     mBTback = (Button) findViewById( R.id.button_cancel );
     mBTback.setOnClickListener( this );
-
   }
 
   @Override
@@ -85,8 +85,8 @@ class DeviceNameDialog extends MyDialog
         String nickname = mETnickname.getText().toString();
         mParent.setDeviceName( mDevice, nickname );
       }
-    } else if ( b == mBTback ) {
-      /* nothing */
+    // } else if ( b == mBTback ) {
+    //   /* nothing */
     }
     dismiss();
   }

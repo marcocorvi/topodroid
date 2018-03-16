@@ -43,7 +43,7 @@ import android.widget.Toast;
 
 import android.util.Log;
 
-public class CurrentStationDialog extends MyDialog
+class CurrentStationDialog extends MyDialog
                         implements View.OnClickListener
                         , View.OnLongClickListener
                         , OnItemClickListener
@@ -66,7 +66,7 @@ public class CurrentStationDialog extends MyDialog
 
   private MyKeyboard mKeyboard = null;
 
-  public CurrentStationDialog( Context context, ShotWindow parent, TopoDroidApp app )
+  CurrentStationDialog( Context context, ShotWindow parent, TopoDroidApp app )
   {
     super( context, R.string.CurrentStationDialog );
     mParent  = parent;

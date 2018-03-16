@@ -27,7 +27,7 @@ import android.view.View.OnClickListener;
 
 import android.widget.Toast;
 
-public class SketchModeDialog extends MyDialog
+class SketchModeDialog extends MyDialog
                               implements View.OnClickListener
 {
   private SketchModel mModel;
@@ -43,7 +43,7 @@ public class SketchModeDialog extends MyDialog
   private Button   mBtnOK;
   // private Button   mBtnCancel;
 
-  public SketchModeDialog( Context context, SketchModel model )
+  SketchModeDialog( Context context, SketchModel model )
   {
     super( context, R.string.SketchModeDialog );
     mModel = model;

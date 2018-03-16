@@ -24,23 +24,23 @@ import android.widget.Toast;
 
 // import android.util.Log;
 
-public class TimerTask extends AsyncTask<String, Integer, Long >
+class TimerTask extends AsyncTask<String, Integer, Long >
                        implements SensorEventListener
 {
   final static int X_AXIS = 1; // short side of phone heading right
   final static int Y_AXIS = 2; // long side of phone heading top
   final static int Z_AXIS = 3; // coming out of the screen
 
-  int mCntAcc;
-  int mCntMag;
-  float mValAcc[] = new float[3];
-  float mValMag[] = new float[3];
-  Context mContext; 
+  private int mCntAcc;
+  private int mCntMag;
+  private float mValAcc[] = new float[3];
+  private float mValMag[] = new float[3];
+  Context mContext;
   IBearingAndClino mParent;
   boolean mRun;
-  int mAxis;
-  int mWait;  // secs to wait
-  int mCount; // measures to count
+  private int mAxis;
+  private int mWait;  // secs to wait
+  private int mCount; // measures to count
 
   TimerTask( Context context, IBearingAndClino parent, int axis, int wait, int count )
   {

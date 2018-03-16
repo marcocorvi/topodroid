@@ -19,7 +19,7 @@ import android.os.Bundle;
 
 import android.util.Log;
 
-public class ListerSetHandler extends ListerHandler
+class ListerSetHandler extends ListerHandler
 {
   private ArrayList<ILister> mListers;
 

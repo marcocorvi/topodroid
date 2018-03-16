@@ -13,7 +13,7 @@ package com.topodroid.DistoX;
 
 import java.util.ArrayList;
 
-public class TriCluster
+class TriCluster
 {
   ArrayList<TriShot> shots;
   ArrayList<String>  stations;

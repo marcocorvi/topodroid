@@ -12,7 +12,7 @@
  */
 package com.topodroid.DistoX;
 
-public class ParserException extends Exception
+class ParserException extends Exception
 {
 
 }

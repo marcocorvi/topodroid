@@ -18,10 +18,11 @@ import android.util.AttributeSet;
 import android.preference.Preference.OnPreferenceChangeListener;
 
 /**
+ * @note this class must be public
  */
 public class MyListPreference extends ListPreference
 {
-  public MyListPreference( Context c, AttributeSet a ) 
+  public MyListPreference( Context c, AttributeSet a )
   {
     super(c,a);
     init();

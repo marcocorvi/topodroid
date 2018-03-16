@@ -15,7 +15,7 @@ package com.topodroid.DistoX;
 import android.os.AsyncTask;
 
 
-public class CalibComputer extends AsyncTask< String, Integer, Integer >
+class CalibComputer extends AsyncTask< String, Integer, Integer >
 {
   static final int CALIB_COMPUTE_CALIB  = 0;
   static final int CALIB_COMPUTE_GROUPS = 1;

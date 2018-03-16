@@ -15,6 +15,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import java.util.Locale;
+
 import android.widget.ImageView;
 
 import android.graphics.Matrix;
@@ -27,13 +29,13 @@ import android.util.Log;
 class MyBearingAndClino implements IBearingAndClino
 {
   TopoDroidApp mApp;
-  File  mFile;
+  private File  mFile;
   // long  mPid;
   float mBearing;
   float mClino;
   int   mOrientation; // camera orientation in degrees
 
-  public MyBearingAndClino( TopoDroidApp app, File imagefile /*, long pid */ )
+  MyBearingAndClino( TopoDroidApp app, File imagefile /*, long pid */ )
   {
     mApp  = app; 
     mFile = imagefile;
@@ -67,14 +69,14 @@ class MyBearingAndClino implements IBearingAndClino
     }
     setExifBearingAndClino( mFile, mBearing, mClino, mOrientation );
     // ExifInterface exif = new ExifInterface( mFile.getPath() );
-    // String.format("%.2f %.2f", mBearing, mClino );
+    // String.format(Locale.US, "%.2f %.2f", mBearing, mClino );
     // // Log.v("DistoX", "save. orientation " + mOrientation );
     // int rot = getExifOrientation( mOrientation );
-    // exif.setAttribute( ExifInterface.TAG_ORIENTATION, Integer.toString(rot) );
+    // exif.setAttribute( ExifInterface.TAG_ORIENTATION, String.format(Locale.US, "%d", rot) );
     // exif.setAttribute( ExifInterface.TAG_DATETIME, TopoDroidUtil.currentDateTime() );
-    // exif.setAttribute( ExifInterface.TAG_GPS_LATITUDE, String.format("%d/100", (int)(mClino*100) ) );
+    // exif.setAttribute( ExifInterface.TAG_GPS_LATITUDE, String.format(Locale.US, "%d/100", (int)(mClino*100) ) );
     // exif.setAttribute( ExifInterface.TAG_GPS_LATITUDE_REF, "N" );
-    // exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE, String.format("%d/100", (int)(mBearing*100) ) );
+    // exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE, String.format(Locale.US, "%d/100", (int)(mBearing*100) ) );
     // exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE_REF, "E" );
     // exif.saveAttributes();
   }
@@ -83,13 +85,13 @@ class MyBearingAndClino implements IBearingAndClino
   {
     try {
       ExifInterface exif = new ExifInterface( file.getPath() );
-      String.format("%.2f %.2f", b, c );
+      String.format(Locale.US, "%.2f %.2f", b, c );
       int rot = getExifOrientation( o );
-      exif.setAttribute( ExifInterface.TAG_ORIENTATION, Integer.toString(rot) );
+      exif.setAttribute( ExifInterface.TAG_ORIENTATION, String.format(Locale.US, "%d", rot) );
       exif.setAttribute( ExifInterface.TAG_DATETIME, TopoDroidUtil.currentDateTime() );
-      exif.setAttribute( ExifInterface.TAG_GPS_LATITUDE, String.format("%d/100", (int)(c*100) ) );
+      exif.setAttribute( ExifInterface.TAG_GPS_LATITUDE, String.format(Locale.US, "%d/100", (int)(c*100) ) );
       exif.setAttribute( ExifInterface.TAG_GPS_LATITUDE_REF, "N" );
-      exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE, String.format("%d/100", (int)(b*100) ) );
+      exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE, String.format(Locale.US, "%d/100", (int)(b*100) ) );
       exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE_REF, "E" );
       exif.saveAttributes();
     } catch ( IOException e ) {
@@ -131,7 +133,7 @@ class MyBearingAndClino implements IBearingAndClino
   //   xx        xx       x    x      x         xxxxxx   xxxxxx         x
   //   x          x    xxxx    xxxx   
   //
-  static int getExifOrientation( int orientation )
+  static private int getExifOrientation( int orientation )
   {
     if ( orientation <  45 ) return 6; // up
     if ( orientation < 135 ) return 3; // right

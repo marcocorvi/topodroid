@@ -26,7 +26,7 @@ class ListItemAdapter extends ArrayAdapter< String >
   private Context context;            // context 
 
 
-  public ListItemAdapter( Context ctx, int id )
+  ListItemAdapter( Context ctx, int id )
   {
     super( ctx, id );
     this.context = ctx;

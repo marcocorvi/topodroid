@@ -18,6 +18,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="vertical"
+      android:layout_marginTop="@dimen/marginv"
       android:layout_marginBottom="@dimen/marginv"
     >
     <SeekBar android:id="@+id/seekbar"
@@ -36,23 +37,29 @@
       android:orientation="horizontal"
       >
       <Button android:id="@+id/btn_minus"
+        android:layout_width="0dp"
+        android:layout_weight="20"
         android:layout_marginRight="@dimen/marginh"
         style="@style/button_default"
         android:text="-"
       />
       <EditText android:id="@+id/textform"
         style="@style/edit_number"
-        android:layout_width="50dp"
+        android:layout_width="0dp"
         android:layout_weight="40"
         android:layout_marginRight="@dimen/marginh"
         android:imeOptions="actionDone"
       />
       <Button android:id="@+id/btn_plus"
+        android:layout_width="0dp"
+        android:layout_weight="20"
         android:layout_marginRight="@dimen/marginh"
         style="@style/button_default"
         android:text="+"
       />
       <Button android:id="@+id/btn_ok"
+        android:layout_width="0dp"
+        android:layout_weight="20"
         style="@style/button_default"
         android:text="@string/button_ok"
       />

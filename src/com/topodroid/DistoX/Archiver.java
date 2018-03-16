@@ -29,23 +29,25 @@ import java.util.List;
 // import java.util.Locale;
 // import java.util.ArrayList;
 
-import android.content.Context;
-import android.content.Intent;
+// import android.content.Context;
+// import android.content.Intent;
 
 // import android.util.Log;
 
 
-public class Archiver
+class Archiver
 {
   private TopoDroidApp app;
+  private DataHelper app_data;
   private static final int BUF_SIZE = 2048;
   private byte[] data = new byte[ BUF_SIZE ];
 
-  public String zipname;
+  String zipname;
 
-  public Archiver( TopoDroidApp _app )
+  Archiver( TopoDroidApp _app )
   {
     app = _app;
+    app_data = TopoDroidApp.mData;
     data = new byte[ BUF_SIZE ];
   }
 
@@ -74,7 +76,7 @@ public class Archiver
     return ret;
   }
 
-  public boolean archive( )
+  boolean archive( )
   {
     if ( app.mSID < 0 ) return false;
     
@@ -91,17 +93,17 @@ public class Archiver
       zos = new ZipOutputStream( new BufferedOutputStream( new FileOutputStream( zipname ) ) );
 
 /* FIXME BEGIN SKETCH_3D */
-      List< Sketch3dInfo > sketches  = app.mData.selectAllSketches( app.mSID, TDStatus.NORMAL );
+      List< Sketch3dInfo > sketches  = app_data.selectAllSketches( app.mSID, TDStatus.NORMAL );
       for ( Sketch3dInfo skt : sketches ) {
         addEntry( zos, new File( TDPath.getSurveySketchOutFile( survey, skt.name ) ) );
       }
-      sketches  = app.mData.selectAllSketches( app.mSID, TDStatus.DELETED );
+      sketches  = app_data.selectAllSketches( app.mSID, TDStatus.DELETED );
       for ( Sketch3dInfo skt : sketches ) {
         addEntry( zos, new File( TDPath.getSurveySketchOutFile( survey, skt.name ) ) );
       }
 /* END SKETCH_3D */
 
-      List< PlotInfo > plots  = app.mData.selectAllPlots( app.mSID, TDStatus.NORMAL );
+      List< PlotInfo > plots  = app_data.selectAllPlots( app.mSID, TDStatus.NORMAL );
       for ( PlotInfo plt : plots ) {
         addEntry( zos, new File( TDPath.getSurveyPlotTh2File( survey, plt.name ) ) );
         addEntry( zos, new File( TDPath.getSurveyPlotTdrFile( survey, plt.name ) ) );
@@ -114,22 +116,22 @@ public class Archiver
         }
       }
 
-      plots  = app.mData.selectAllPlots( app.mSID, TDStatus.DELETED );
+      plots  = app_data.selectAllPlots( app.mSID, TDStatus.DELETED );
       for ( PlotInfo plt : plots ) {
         addEntry( zos, new File( TDPath.getSurveyPlotTdrFile( survey, plt.name ) ) );
       }
 
-      List< PhotoInfo > photos = app.mData.selectAllPhotos( app.mSID, TDStatus.NORMAL );
+      List< PhotoInfo > photos = app_data.selectAllPhotos( app.mSID, TDStatus.NORMAL );
       for ( PhotoInfo pht : photos ) {
         addEntry( zos, new File( TDPath.getSurveyJpgFile( survey, Long.toString(pht.id) ) ) );
       }
 
-      photos = app.mData.selectAllPhotos( app.mSID, TDStatus.DELETED );
+      photos = app_data.selectAllPhotos( app.mSID, TDStatus.DELETED );
       for ( PhotoInfo pht : photos ) {
         addEntry( zos, new File( TDPath.getSurveyJpgFile( survey, Long.toString(pht.id) ) ) );
       }
 
-      List< AudioInfo > audios = app.mData.selectAllAudios( app.mSID );
+      List< AudioInfo > audios = app_data.selectAllAudios( app.mSID );
       for ( AudioInfo audio : audios ) {
         addEntry( zos, new File( TDPath.getSurveyAudioFile( survey, Long.toString( audio.shotid ) ) ) );
       }
@@ -152,7 +154,7 @@ public class Archiver
       addEntry( zos, new File( TDPath.getSurveyNoteFile( survey ) ) );
  
       pathname = TDPath.getSqlFile( );
-      app.mData.dumpToFile( pathname, app.mSID );
+      app_data.dumpToFile( pathname, app.mSID );
       addEntry( zos, new File(pathname) );
 
       pathname = TDPath.getManifestFile();
@@ -174,7 +176,7 @@ public class Archiver
     return ret;
   }
 
-  public int unArchive( String filename, String surveyname )
+  int unArchive( String filename, String surveyname )
   {
     boolean sql_success = false;
     int ok_manifest = -2;
@@ -296,7 +298,7 @@ public class Archiver
               fout.close();
               if ( sql ) {
                 TDLog.Log( TDLog.LOG_ZIP, "Zip sqlfile \"" + pathname + "\"" );
-                sql_success = ( app.mData.loadFromFile( pathname, app.mManifestDbVersion ) >= 0 );
+                sql_success = ( app_data.loadFromFile( pathname, app.mManifestDbVersion ) >= 0 );
                 File f = new File( pathname );
                 f.delete();
               }

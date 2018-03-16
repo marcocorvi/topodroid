@@ -13,45 +13,45 @@ package com.topodroid.DistoX;
 
 import android.content.Context;
 import android.graphics.*; // Bitmap
-import android.os.Handler;
-import android.os.Message;
+// import android.os.Handler;
+// import android.os.Message;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
+// import android.view.View;
 
-import android.view.MotionEvent;
+// import android.view.MotionEvent;
 
 import android.graphics.Path;
 import android.graphics.Paint;
 
 import java.util.ArrayList;
-import java.util.TreeSet;
-import java.util.Collections;
-import java.util.Iterator;
+// import java.util.TreeSet;
+// import java.util.Collections;
+// import java.util.Iterator;
 import java.util.List;
 import java.util.HashMap;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
+// import java.io.FileReader;
+// import java.io.BufferedReader;
+// import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.io.FileInputStream;
-import java.io.DataInputStream;
+// import java.io.FileInputStream;
+// import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.EOFException;
+// import java.io.IOException;
+// import java.io.EOFException;
 
-import java.util.Timer;
-import java.util.TimerTask;
+// import java.util.Timer;
+// import java.util.TimerTask;
 
-import android.util.Log;
+// import android.util.Log;
 
 /**
  */
-public class DrawingSurface extends SurfaceView
+class DrawingSurface extends SurfaceView
                             implements SurfaceHolder.Callback
                             , IDrawingSurface
 {
@@ -254,8 +254,8 @@ public class DrawingSurface extends SurfaceView
   void endEraser() { commandManager.endEraser(); }
   void setEraser( float x, float y, float r ) { commandManager.setEraser(x, y, r); } // canvas x,y, r
 
-  int eraseAt( float x, float y, float zoom, EraseCommand cmd, int erase_mode, float erase_size ) 
-  { return commandManager.eraseAt( x, y, zoom, cmd, erase_mode, erase_size ); }
+  void eraseAt( float x, float y, float zoom, EraseCommand cmd, int erase_mode, float erase_size ) 
+  { commandManager.eraseAt( x, y, zoom, cmd, erase_mode, erase_size ); }
   
   void addEraseCommand( EraseCommand cmd )
   {
@@ -351,7 +351,7 @@ public class DrawingSurface extends SurfaceView
   // @param num_st     station
   // @param selectable whether the station is selectable
   // @param xsections  list of survey xsections
-  public DrawingStationName addDrawingStationName ( String parent, NumStation num_st, float x, float y, boolean selectable, List<PlotInfo> xsections )
+  DrawingStationName addDrawingStationName ( String parent, NumStation num_st, float x, float y, boolean selectable, List<PlotInfo> xsections )
   {
     // TDLog.Log( TDLog.LOG_PLOT, "add Drawing Station Name " + num_st.name + " " + x + " " + y );
     // FIXME STATION_XSECTION
@@ -381,7 +381,7 @@ public class DrawingSurface extends SurfaceView
 
   // called by DrawingWindow (for SECTION)
   // note: not selectable
-  public DrawingStationName addDrawingStationName( String name, float x, float y )
+  DrawingStationName addDrawingStationName( String name, float x, float y )
   {
     // TDLog.Log( TDLog.LOG_PLOT, "add Drawing Station Name " + name + " " + x + " " + y );
     // NOTE No station_XSection in X-Sections
@@ -398,7 +398,7 @@ public class DrawingSurface extends SurfaceView
   }
 
   // called by DarwingActivity::addFixedLine
-  public void addFixedPath( DrawingPath path, boolean splay, boolean selectable )
+  void addFixedPath( DrawingPath path, boolean splay, boolean selectable )
   {
     if ( splay ) {
       commandManager.addSplayPath( path, selectable );
@@ -427,29 +427,29 @@ public class DrawingSurface extends SurfaceView
   { commandManager.addXSectionOutlinePath( path ); }
 
   // return true if point has been deleted
-  public boolean deleteSectionPoint( String scrap_name )
+  boolean deleteSectionPoint( String scrap_name )
   {
     return commandManager.deleteSectionPoint( scrap_name, null ); // null eraseCommand
   }
   
   // void setBounds( float x1, float x2, float y1, float y2 ) { commandManager.setBounds( x1, x2, y1, y2 ); }
 
-  public void redo()
+  void redo()
   {
     isDrawing = true;
     commandManager.redo();
   }
 
-  public void undo()
+  void undo()
   {
     isDrawing = true;
     commandManager.undo();
   }
 
-  public boolean hasMoreRedo()
+  boolean hasMoreRedo()
   { return commandManager!= null && commandManager.hasMoreRedo(); }
 
-  public boolean hasMoreUndo()
+  boolean hasMoreUndo()
   { return commandManager!= null && commandManager.hasMoreUndo(); }
 
   // public boolean hasStationName( String name ) { return commandManager.hasUserStation( name ); }
@@ -472,19 +472,19 @@ public class DrawingSurface extends SurfaceView
     commandManager.removeUserStation( path );
   }
 
-  public RectF getBitmapBounds( )
+  RectF getBitmapBounds( )
   { 
     if ( commandManager == null ) return null;
     return commandManager.getBitmapBounds();
   }
 
-  public float getBitmapScale() 
+  float getBitmapScale() 
   { 
     if ( commandManager == null ) return -1;
     return commandManager.getBitmapScale();
   }
 
-  public Bitmap getBitmap( long type )
+  Bitmap getBitmap( long type )
   {
     if ( commandManager == null ) return null;
     if ( PlotInfo.isProfile( type ) ) {
@@ -603,7 +603,7 @@ public class DrawingSurface extends SurfaceView
     mDrawThread = null;
   }
 
-  public void exportTherion( // DataHelper dh, long sid,
+  void exportTherion( // DataHelper dh, long sid,
                 int type, BufferedWriter out, String sketch_name, String plot_name, int proj_dir )
   {
     // Log.v("DistoX", sketch_name + " export th2 type " + type );
@@ -616,7 +616,7 @@ public class DrawingSurface extends SurfaceView
     }
   }
 
-  public void exportDataStream( int type, DataOutputStream dos, String sketch_name, int proj_dir )
+  void exportDataStream( int type, DataOutputStream dos, String sketch_name, int proj_dir )
   {
     // Log.v("DistoX", sketch_name + " export stream type " + type );
     if ( PlotInfo.isProfile( type ) ) {
@@ -655,7 +655,7 @@ public class DrawingSurface extends SurfaceView
 
   // called by OverviewWindow
   // @pre th2 != null
-  public boolean addloadTherion( String th2, float xdelta, float ydelta, SymbolsPalette missingSymbols )
+  boolean addloadTherion( String th2, float xdelta, float ydelta, SymbolsPalette missingSymbols )
   {
     SymbolsPalette localPalette = preparePalette();
     if ( (new File(th2)).exists() ) {
@@ -666,7 +666,7 @@ public class DrawingSurface extends SurfaceView
 
   // called by OverviewWindow
   // @pre tdr != null
-  public boolean addloadDataStream( String tdr, String th2, float xdelta, float ydelta, SymbolsPalette missingSymbols )
+  boolean addloadDataStream( String tdr, String th2, float xdelta, float ydelta, SymbolsPalette missingSymbols )
   {
     SymbolsPalette localPalette = preparePalette();
     if ( (new File(tdr)).exists() ) {
@@ -678,7 +678,7 @@ public class DrawingSurface extends SurfaceView
   }
 
   // @note th21 and th22 can be null
-  public boolean modeloadTherion( String th21, SymbolsPalette missingSymbols )
+  boolean modeloadTherion( String th21, SymbolsPalette missingSymbols )
   {
     SymbolsPalette localPalette = preparePalette();
     if ( missingSymbols != null ) missingSymbols.resetSymbolLists();
@@ -691,7 +691,7 @@ public class DrawingSurface extends SurfaceView
   // @note th21 and th22 can be null, 
   // @note th21 is not used if tdr1 == null
   // @note th22 is not used if tdr2 == null
-  public boolean modeloadDataStream( String tdr1, String th21, SymbolsPalette missingSymbols )
+  boolean modeloadDataStream( String tdr1, String th21, SymbolsPalette missingSymbols )
   {
     SymbolsPalette localPalette = preparePalette();
     if ( missingSymbols != null ) missingSymbols.resetSymbolLists();

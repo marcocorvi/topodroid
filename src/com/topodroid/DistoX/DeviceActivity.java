@@ -66,6 +66,7 @@ public class DeviceActivity extends Activity
                             // , RadioGroup.OnCheckedChangeListener
 {
   private TopoDroidApp mApp;
+  private DeviceHelper mApp_mDData;
 
   private TextView mTvAddress;
 
@@ -213,7 +214,7 @@ public class DeviceActivity extends Activity
     super.onCreate(savedInstanceState);
     // TDLog.Debug("device activity on create");
     mApp = (TopoDroidApp) getApplication();
-
+    mApp_mDData = TopoDroidApp.mDData;
     mDevice  = mApp.mDevice;
     // mAddress = mDevice.mAddress;
     // mAddress = getIntent().getExtras().getString(   TDTag.TOPODROID_DEVICE_ADDR );
@@ -292,15 +293,15 @@ public class DeviceActivity extends Activity
         setTitle( R.string.title_device );
         for ( BluetoothDevice device : device_set ) {
           String addr  = device.getAddress();
-          Device dev = mApp.mDData.getDevice( addr );
+          Device dev = mApp_mDData.getDevice( addr );
           if ( dev == null ) {
             String model = device.getName();
             if ( model == null ) {
               TDLog.Error( "WARNING. Null name for device " + addr );
             } else if ( model.startsWith( "DistoX", 0 ) ) {
               String name  = Device.modelToName( model );
-              mApp.mDData.insertDevice( addr, model, name );
-              dev = mApp.mDData.getDevice( addr );
+              mApp_mDData.insertDevice( addr, model, name );
+              dev = mApp_mDData.getDevice( addr );
             }
           }
           if ( dev != null ) {
@@ -394,7 +395,7 @@ public class DeviceActivity extends Activity
       }
     }
     if ( enable ) {
-      setTitleColor( TDColor.NORMAL );
+      setTitleColor( TDColor.TITLE_NORMAL );
       mButton1[IDX_TOGGLE].setBackgroundDrawable( mBMtoggle );
       mButton1[IDX_CALIB].setBackgroundDrawable( mBMcalib );
       if ( TDLevel.overNormal ) {
@@ -471,7 +472,7 @@ public class DeviceActivity extends Activity
         } else {
           TDLog.Error( "Unknown DistoX type " + mDevice.mType );
         }
-        // setTitleColor( TDColor.NORMAL );
+        // setTitleColor( TDColor.TITLE_NORMAL );
       }
 
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {   // CALIB_READ TDLevel.overNormal
@@ -512,7 +513,7 @@ public class DeviceActivity extends Activity
     // TDLog.Debug("device activity on resume" );
     registerReceiver( mPairReceiver, new IntentFilter( BluetoothDevice.ACTION_BOND_STATE_CHANGED ) );
     mApp.resumeComm();
-    mApp.mDeviceActivityVisible = true;
+    TopoDroidApp.mDeviceActivityVisible = true;
     // TDLog.Debug("device activity on resume done" );
   }
 
@@ -520,23 +521,23 @@ public class DeviceActivity extends Activity
   public void onPause()
   {
     super.onPause();
-    mApp.mDeviceActivityVisible = false;
+    TopoDroidApp.mDeviceActivityVisible = false;
     unregisterReceiver( mPairReceiver );
   }
 
   // -----------------------------------------------------------------------------
 
-  boolean readDeviceHeadTail( byte[] command, int[] head_tail )
+  void /*boolean*/ readDeviceHeadTail( byte[] command, int[] head_tail )
   {
     // TDLog.Log( TDLog.LOG_DEVICE, "onClick mBtnHeadTail. Is connected " + mApp.isConnected() );
     String ht = mApp.readHeadTail( mDevice.mAddress, command, head_tail );
     if ( ht == null ) {
       Toast.makeText( this, R.string.head_tail_failed, Toast.LENGTH_SHORT).show();
-      return false;
+      // return false;
     }
     // Log.v( TopoDroidApp.TAG, "Head " + head_tail[0] + " tail " + head_tail[1] );
     // Toast.makeText( this, getString(R.string.head_tail) + ht, Toast.LENGTH_SHORT).show();
-    return true;
+    // return true;
   }
 
   // reset data from stored-tail (inclusive) to current-tail (exclusive)
@@ -551,7 +552,7 @@ public class DeviceActivity extends Activity
   void storeDeviceHeadTail( int[] head_tail )
   {
     // Log.v(TopoDroidApp.TAG, "store HeadTail " + mDevice.mAddress + " : " + head_tail[0] + " " + head_tail[1] );
-    if ( ! mApp.mDData.updateDeviceHeadTail( mDevice.mAddress, head_tail ) ) {
+    if ( ! mApp_mDData.updateDeviceHeadTail( mDevice.mAddress, head_tail ) ) {
       Toast.makeText( this, getString(R.string.head_tail_store_failed), Toast.LENGTH_SHORT).show();
     }
   }
@@ -559,7 +560,7 @@ public class DeviceActivity extends Activity
   void retrieveDeviceHeadTail( int[] head_tail )
   {
     // Log.v(TopoDroidApp.TAG, "store HeadTail " + mDevice.mAddress + " : " + head_tail[0] + " " + head_tail[1] );
-    mApp.mDData.getDeviceHeadTail( mDevice.mAddress, head_tail );
+    mApp_mDData.getDeviceHeadTail( mDevice.mAddress, head_tail );
   }
 
   void readX310Info( DeviceX310InfoDialog dialog )
@@ -623,6 +624,7 @@ public class DeviceActivity extends Activity
   {
     // Log.v("DistoX", "on Activity Result: req. " + request + " res. " + result );
     Bundle extras = (intent != null)? intent.getExtras() : null;
+    if ( extras == null ) return;
     switch ( request ) {
       case TDRequest.REQUEST_DEVICE:
         if ( result == RESULT_OK ) {
@@ -643,8 +645,7 @@ public class DeviceActivity extends Activity
                 DeviceUtil.bindDevice( btDevice );
                 for (int c=0; c<TDSetting.mConnectSocketDelay; ++c ) {
                   if ( DeviceUtil.isPaired( btDevice ) ) break;
-                  try {
-                    // Thread.yield();
+                  try {                     // Thread.yield();
                     Thread.sleep( 100 );
                   } catch ( InterruptedException e ) { }
                 }
@@ -814,10 +815,10 @@ public class DeviceActivity extends Activity
   public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id)
   {
     String item_str = (String) mArrayAdapter.getItem(pos); // "model name addr"
-    if ( item_str.equals("X000") ) return true;
+    if ( item_str == null || item_str.equals("X000") ) return true;
     String vals[] = item_str.split(" ", 3);
     String address = vals[2]; // address or nickname
-    Device device = mApp.mDData.getDevice( address );
+    Device device = mApp_mDData.getDevice( address );
     if ( device != null ) {
       (new DeviceNameDialog( this, this, device )).show();
     }
@@ -847,7 +848,7 @@ public class DeviceActivity extends Activity
     if ( ! file.exists() ) {
       Toast.makeText(this, R.string.file_not_found, Toast.LENGTH_SHORT).show();
     } else {
-      switch ( TDExporter.importCalibFromCsv( mApp.mDData, filename, mDevice.mAddress ) ) {
+      switch ( TDExporter.importCalibFromCsv( mApp_mDData, filename, mDevice.mAddress ) ) {
         case 0:
           Toast.makeText(this, R.string.import_calib_ok, Toast.LENGTH_SHORT).show();
           break;

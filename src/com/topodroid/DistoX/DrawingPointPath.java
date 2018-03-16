@@ -30,7 +30,7 @@ import java.util.Locale;
 
 /**
  */
-public class DrawingPointPath extends DrawingPath
+class DrawingPointPath extends DrawingPath
 {
   private static float toTherion = TDConst.TO_THERION;
 
@@ -42,7 +42,7 @@ public class DrawingPointPath extends DrawingPath
   static final int SCALE_XL = 2;
   static private final String SCALE_STR[] = { "xs", "s", "m", "l", "xl" };
   static private final String SCALE_STR_UC[] = { "XS", "S", "M", "L", "XL" };
-  static String scaleToString( int scale ) 
+  static private String scaleToString( int scale ) 
   { return ( scale >= SCALE_XS && scale <= SCALE_XL )? SCALE_STR[ scale+2 ] : "-"; }
   static String scaleToStringUC( int scale ) 
   { return ( scale >= SCALE_XS && scale <= SCALE_XL )? SCALE_STR_UC[ scale+2 ] : "-"; }
@@ -94,7 +94,7 @@ public class DrawingPointPath extends DrawingPath
   //   return null;
   // }
 
-  public DrawingPointPath( int type, float x, float y, int scale, String text, String options )
+  DrawingPointPath( int type, float x, float y, int scale, String text, String options )
   {
     super( DrawingPath.DRAWING_PATH_POINT, null );
     // TDLog.Log( TDLog.LOG_PATH, "Point " + type + " X " + x + " Y " + y );
@@ -162,7 +162,7 @@ public class DrawingPointPath extends DrawingPath
     return null;
   }
 
-  protected void setCenter( float x, float y )
+  void setCenter( float x, float y )
   {
     cx = x;
     cy = y;
@@ -312,9 +312,9 @@ public class DrawingPointPath extends DrawingPath
     resetPath( 1.0f );
   }
 
-  public String getPointText() { return mPointText; }
+  String getPointText() { return mPointText; }
 
-  public void setPointText( String text ) 
+  void setPointText( String text )
   {
     mPointText = text;
   }
@@ -370,7 +370,7 @@ public class DrawingPointPath extends DrawingPath
     return sw.getBuffer().toString();
   }
 
-  protected void toTherionOrientation( PrintWriter pw )
+  void toTherionOrientation( PrintWriter pw )
   {
     if ( mOrientation != 0.0 ) {
       pw.format(Locale.US, " -orientation %.2f", mOrientation);
@@ -388,7 +388,7 @@ public class DrawingPointPath extends DrawingPath
     }
   }
 
-  protected void toTherionOptions( PrintWriter pw )
+  void toTherionOptions( PrintWriter pw )
   {
     if ( mScale != SCALE_M ) {
       pw.format( " -scale %s", scaleToString( mScale ) );

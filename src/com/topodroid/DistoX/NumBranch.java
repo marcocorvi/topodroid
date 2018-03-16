@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 // import android.util.Log;
 
-public class NumBranch 
+class NumBranch
 {
   static final int BRANCH_UNKNOWN = 0; // branch types
   static final int BRANCH_END_END = 1;

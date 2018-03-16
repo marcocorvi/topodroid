@@ -39,16 +39,16 @@ class ItemSymbol
   int mIndex;  // symbol index
   CheckBox     mCheckBox = null;
   ItemButton   mButton   = null;
-  TextView     mTextView = null;
+  private TextView     mTextView = null;
   LinearLayout mView;
   SymbolInterface mSymbol;
-  float sx = TDSetting.mUnit;
-  float sy = TDSetting.mUnit;
-  boolean mUseText;
+  private float sx = TDSetting.mUnit;
+  private float sy = TDSetting.mUnit;
+  private boolean mUseText;
 
   // private Context mContext;
 
-  public ItemSymbol( Context context, IItemPicker dialog, int type, int index, SymbolInterface symbol, boolean use_text )
+  ItemSymbol( Context context, IItemPicker dialog, int type, int index, SymbolInterface symbol, boolean use_text )
   {  
     mType  = type;
     mIndex = index;
