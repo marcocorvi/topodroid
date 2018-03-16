@@ -215,7 +215,7 @@
     <!-- UNUSED string name="barrier_del">Continuazione restituzione?</string -->
     <!-- UNUSED string name="hidden_add">Nascondi la linea mediana</string -->
     <!-- UNUSED string name="hidden_del">Mostra la linea mediana</string -->
-    <!-- TODO string name="hidden_show">Show shots beyond station</string -->
+    <string name="hidden_show">Mostra battute oltre il caposaldo</string>
     <string name="splays_toggle">Mostra o Nascondi gli splay</string>
     <string name="splays">splay</string>
     <string name="fixed">fisso</string>
@@ -238,7 +238,7 @@
     <string name="no_db">Nessun database</string>
     <string name="no_device_address">Dispositivo non selezionato</string>
     <string name="no_device_found">Dispositivo non trovato</string>
-    <!-- TODO string name="no_feature_audio">Audio not supported</string -->
+    <string name="no_feature_audio">Audio non supportato</string>
     <string name="no_gms">Calibrazione senza data.</string>
     <string name="no_geo_station">Errore: nessun caposaldo geolocalizzato</string>
     <string name="no_leg_intersection">La linea di sezione non interseca alcuna battuta</string>
@@ -446,7 +446,7 @@
     <string name="zip_saved">Salvato </string>
     <string name="zip_failed">Archiviazione rilievo fallita</string>
     <string name="unzip_fail">Scompattazione rilievo fallita</string>
-    <!-- TODO string name="unzip_fail_sqlite">Failed SQL: delete survey and retry</string -->
+    <string name="unzip_fail_sqlite">Errore SQL: cancellare il rilievo e riprovare</string>
     <string name="unzip_fail_survey">Fallito: Nome rilievo non corrispondente</string>
     <string name="unzip_fail_db">Fallito: Versione database non corrispondente</string>
     <string name="unzip_fail_td">Fallito: Versione TopoDroid non corrispondente</string>
@@ -846,8 +846,8 @@
 
   <string name="pref_raw_data_title">Dati grezzi</string>
   <string name="pref_raw_data_summary">Mostra dati grezzi</string>
-  <!-- TODO string name="pref_calib_shot_download_title">Download remote data</string -->
-  <!-- TODO string name="pref_calib_shot_download_summary">Download remote calib data immediately</string -->
+  <string name="pref_calib_shot_download_title">Download dati</string>
+  <string name="pref_calib_shot_download_summary">Download immediatamente i dati di calibrazione</string>
   <!-- UNUSED string name="pref_bootloader_title">Bootloader</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Bootloader abilitiato</string -->
   <string name="pref_mkeyboard_title">Tastiera</string>
@@ -872,8 +872,8 @@
   <string name="pref_leg_shots_summary">Minimo numero di misure per tiro di poligonale</string>
   <string name="pref_station_prefix_title">Esporta il prefisso dei caposaldi</string>
   <string name="pref_station_prefix_summary">Esporta in cSurvey il prefisso dei caposaldi</string>
-  <!-- TODO string name="pref_compass_splays_title">Compass splays</string -->
-  <!-- TODO string name="pref_compass_splays_summary">Export splays in Compass files</string -->
+  <string name="pref_compass_splays_title">Splay Compass</string>
+  <string name="pref_compass_splays_summary">Esporta splay in file Compass</string>
   <string name="pref_trobot_names_title">Nomi capisaldi TopoRobot</string>
   <string name="pref_trobot_names_summary">I nomi capisaldi sono in stile TopoRobot</string>
   <string name="pref_ortho_lrud_title">Angolo di splay di tipo LRUD</string>
@@ -974,8 +974,8 @@
   <string name="pref_min_shift_message">Sensibilita\' allo spostamento</string>
   <string name="pref_pointing_title">Raggio di puntamento</string>
   <string name="pref_pointing_message">Raggio di puntamento</string>
-  <!-- TODO string name="pref_dash_splay_title">Splay dash coherence</string -->
-  <!-- TODO string name="pref_dash_splay_message">Splays dashed coherently between plan and profile</string -->
+  <string name="pref_dash_splay_title">Coerenza tratteggio Splay</string>
+  <string name="pref_dash_splay_message">Splay tratteggiati coerentemente tra pianta e sezione</string>
   <string name="pref_vert_splay_title">Soglia splay tratteggiati</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Soglia clino splay tratteggiati</string -->
   <string name="pref_vert_splay_message">Soglia clino splay tratteggiati</string>

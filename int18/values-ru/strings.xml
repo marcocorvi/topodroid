@@ -448,7 +448,7 @@
     <string name="zip_saved">Сохранено </string>
     <string name="zip_failed">Ошибка survey-zip</string>
     <string name="unzip_fail">Ошибка survey-unzip</string>
-    <!-- TODO string name="unzip_fail_sqlite">Failed SQL: delete survey and retry</string -->
+    <string name="unzip_fail_sqlite">Ошибка SQL: удалите съёмку и попробуйте снова</string>
     <string name="unzip_fail_survey">Ошибка: несовпадение названия съёмки</string>
     <string name="unzip_fail_db">Ошибка: несовпадение версии базы данных</string>
     <string name="unzip_fail_td">Ошибка: несовпадение версии TopoDroid</string>
