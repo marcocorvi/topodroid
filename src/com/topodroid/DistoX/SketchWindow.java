@@ -252,6 +252,8 @@ public class SketchWindow extends ItemDrawer
                         R.string.help_help
                       };
 
+  private static final int HELP_PAGE = R.string.SketchWindow;
+
   private int mSelectMode = Drawing.FILTER_ALL;
   private int mSelectScale = 0;
 
@@ -2055,7 +2057,7 @@ public class SketchWindow extends ItemDrawer
       mActivity.startActivity( optionsIntent );
     } else if ( p++ == pos ) { // HELP
       int nn = mNrButton1 + mNrButton2 - GREEN_BTN + /* mNrButton3 - GREEN_BTN */ + mNrButton4 - GREEN_BTN;
-      (new HelpDialog(mActivity, izons, menus, help_icons, help_menus, nn, menus.length ) ).show();
+      new HelpDialog(mActivity, izons, menus, help_icons, help_menus, nn, menus.length, getResources().getString( HELP_PAGE ) ).show();
     }
   }
 
@@ -2213,8 +2215,7 @@ public class SketchWindow extends ItemDrawer
       case KeyEvent.KEYCODE_SEARCH:
         return onSearchRequested();
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
-        String help_page = getResources().getString( R.string.SketchWindow );
-        if ( help_page != null ) UserManualActivity.showHelpPage( mActivity, help_page );
+        UserManualActivity.showHelpPage( mActivity, getResources().getString( HELP_PAGE ));
         return true;
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)

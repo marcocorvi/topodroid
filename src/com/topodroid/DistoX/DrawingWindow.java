@@ -259,6 +259,8 @@ public class DrawingWindow extends ItemDrawer
                         R.string.help_help
                       };
 
+  private static final int HELP_PAGE = R.string.DrawingWindow;
+
   private final static int DISMISS_NONE   = 0;
   private final static int DISMISS_EDIT   = 1;
   private final static int DISMISS_FILTER = 2;
@@ -4810,8 +4812,7 @@ public class DrawingWindow extends ItemDrawer
       case KeyEvent.KEYCODE_SEARCH:
         return onSearchRequested();
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
-        String help_page = getResources().getString( R.string.DrawingWindow );
-        if ( help_page != null ) UserManualActivity.showHelpPage( mActivity, help_page );
+        UserManualActivity.showHelpPage( mActivity, getResources().getString( HELP_PAGE ));
         return true;
       case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
@@ -4970,7 +4971,7 @@ public class DrawingWindow extends ItemDrawer
         // 1 for select-tool
         int nn = 1 + NR_BUTTON1 + NR_BUTTON2 - 3 + NR_BUTTON5 - 5 + ( TDLevel.overBasic? mNrButton3 - 3: 0 );
         // Log.v("DistoX", "Help menu, nn " + nn );
-        (new HelpDialog(mActivity, izons, menus, help_icons, help_menus, nn, help_menus.length ) ).show();
+        new HelpDialog(mActivity, izons, menus, help_icons, help_menus, nn, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
       }
   }
 

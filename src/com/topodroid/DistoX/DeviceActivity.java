@@ -130,6 +130,8 @@ public class DeviceActivity extends Activity
                         R.string.help_help
                       };
 
+  private static final int HELP_PAGE = R.string.DeviceActivity;
+
   // private ArrayAdapter<String> mArrayAdapter;
   private ListItemAdapter mArrayAdapter;
   private ListView mList;
@@ -693,8 +695,7 @@ public class DeviceActivity extends Activity
       case KeyEvent.KEYCODE_SEARCH:
         return onSearchRequested();
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
-        String help_page = getResources().getString( R.string.DeviceActivity );
-        if ( help_page != null ) UserManualActivity.showHelpPage( this, help_page );
+        UserManualActivity.showHelpPage( this, getResources().getString( HELP_PAGE ) );
         return true;
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
@@ -762,7 +763,7 @@ public class DeviceActivity extends Activity
       intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_DEVICE );
       startActivity( intent );
     } else if ( p++ == pos ) { // HELP
-      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length ) ).show();
+      new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
     // } else if ( TDLevel.overTester && p++ == pos ) { // CALIB_RESET
     //   doCalibReset();
     }

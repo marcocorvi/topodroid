@@ -49,11 +49,12 @@ class HelpDialog extends Dialog
   private int mMenuTexts[];
   private int mNr0;
   private int mNr1;
+  private String mPage;
 
   private Button mBtnManual;
 
   // TODO list of help entries
-  HelpDialog( Context context, int icons[], int menus[], int texts1[], int texts2[], int n0, int n1 )
+  HelpDialog( Context context, int icons[], int menus[], int texts1[], int texts2[], int n0, int n1, String page )
   {
     super( context );
     mContext = context;
@@ -107,7 +108,7 @@ class HelpDialog extends Dialog
   public void onClick( View v ) 
   {
     dismiss();
-    mContext.startActivity( new Intent( Intent.ACTION_VIEW ).setClass( mContext, UserManualActivity.class ) );
+    UserManualActivity.showHelpPage( mContext, mPage );
   }
 
 }

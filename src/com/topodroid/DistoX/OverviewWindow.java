@@ -99,6 +99,9 @@ public class OverviewWindow extends ItemDrawer
                         R.string.help_prefs,
                         R.string.help_help
                       };
+
+  private static final int HELP_PAGE = R.string.OverviewWindow;
+
   // FIXME_OVER BitmapDrawable mBMextend;
   // FIXME_OVER BitmapDrawable mBMplan;
   BitmapDrawable mBMselect;
@@ -1061,8 +1064,7 @@ public class OverviewWindow extends ItemDrawer
       case KeyEvent.KEYCODE_SEARCH:
         return onSearchRequested();
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
-        String help_page = getResources().getString( R.string.OverviewWindow );
-        if ( help_page != null ) UserManualActivity.showHelpPage( mActivity, help_page );
+        UserManualActivity.showHelpPage( mActivity, getResources().getString( HELP_PAGE ));
         return true;
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
@@ -1105,7 +1107,7 @@ public class OverviewWindow extends ItemDrawer
       intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_PLOT );
       mActivity.startActivity( intent );
     } else if ( p++ == pos ) { // HELP
-      (new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, menus.length ) ).show();
+      new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, menus.length, getResources().getString( HELP_PAGE ) ).show();
     }
   }
 
