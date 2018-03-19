@@ -61,6 +61,7 @@
   <string name="FixedGpsDialog">page_fixed_gps.htm</string>
   <string name="FixedImportDialog">page_fixed_import.htm</string>
   <string name="GMGroupsDialog">page_groups.htm</string>
+  <string name="HelpDialog">page_help.htm</string>
   <string name="ImportDialog">page_import.htm</string>
   <string name="ItemPickerDialog">page_tools_list.htm</string>
   <string name="ItemRecentDialog">page_tools_recent.htm</string>

@@ -14,32 +14,28 @@ package com.topodroid.DistoX;
 import java.util.ArrayList;
 
 import android.os.Bundle;
-import android.app.Dialog;
+// import android.app.Dialog;
 // import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
-// import android.view.Window;
-
-// import android.graphics.*;
-import android.view.View;
 import android.widget.Button;
+// import android.widget.TextView;
+import android.widget.ListView;
 
 // import android.widget.AdapterView;
 // import android.widget.AdapterView.OnItemClickListener;
 
-// import android.widget.TextView;
-import android.widget.ListView;
-
-// import android.view.View;
+import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 
 // import android.util.Log;
 
-class HelpDialog extends Dialog
+class HelpDialog extends MyDialog
                  implements OnClickListener
+                          , OnLongClickListener
 {
-  private Context mContext;
   private ListView    mList;
   private HelpAdapter mAdapter;
 
@@ -56,14 +52,14 @@ class HelpDialog extends Dialog
   // TODO list of help entries
   HelpDialog( Context context, int icons[], int menus[], int texts1[], int texts2[], int n0, int n1, String page )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.HelpDialog ); 
     mIcons = icons;
     mMenus = menus;
     mIconTexts = texts1;
     mMenuTexts = texts2;
     mNr0 = n0;
     mNr1 = n1; // offset of menus
+    mPage = page;
     // Log.v("DistoX", "HELP buttons " + mNr0 + " menus " + mNr1 );
   }
 
@@ -71,12 +67,11 @@ class HelpDialog extends Dialog
   public void onCreate( Bundle savedInstanceState )
   {
     super.onCreate( savedInstanceState );
-
-    setContentView(R.layout.help_dialog);
-    setTitle( mContext.getResources().getString( R.string.HELP ) );
+    initLayout(R.layout.help_dialog, R.string.HELP );
 
     mBtnManual = (Button) findViewById( R.id.button_manual );
     mBtnManual.setOnClickListener( this );
+    mBtnManual.setOnLongClickListener( this );
 
     mList = (ListView) findViewById(R.id.help_list);
     // mList.setOnItemClickListener( this );
@@ -109,6 +104,14 @@ class HelpDialog extends Dialog
   {
     dismiss();
     UserManualActivity.showHelpPage( mContext, mPage );
+  }
+
+  @Override 
+  public boolean onLongClick( View v ) 
+  {
+    dismiss();
+    UserManualActivity.showHelpPage( mContext, null );
+    return true;
   }
 
 }

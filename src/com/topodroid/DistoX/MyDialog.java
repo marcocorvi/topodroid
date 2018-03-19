@@ -27,13 +27,15 @@ class MyDialog extends Dialog
                       // implements View.OnClickListener
 {
   protected Context mContext;
-  private String mHelpPage;
+  private String mHelpPage = null;
 
   MyDialog( Context context, int help_resource )
   {
     super( context );
     mContext = context;
-    mHelpPage = mContext.getResources().getString( help_resource );
+    if ( help_resource != 0 ) {
+      mHelpPage = mContext.getResources().getString( help_resource );
+    }
   }
 
   // utility method for derived classes
