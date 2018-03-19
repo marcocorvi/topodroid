@@ -154,6 +154,8 @@ public class MainWindow extends Activity
                           R.string.help_help
                         };
 
+  private static final int HELP_PAGE = R.string.MainWindow;
+
   // -------------------------------------------------------------
   private boolean say_no_survey = true;
   private boolean say_not_enabled = true; // whether to say that BT is not enabled
@@ -430,7 +432,7 @@ public class MainWindow extends Activity
               startActivity( intent );
             } else { 
               if ( p++ == pos ) { // HELP
-                (new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, menus.length ) ).show();
+                new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, menus.length, getResources().getString( HELP_PAGE )).show();
               }
             }
           }
@@ -792,8 +794,7 @@ public class MainWindow extends Activity
       case KeyEvent.KEYCODE_SEARCH:
         return onSearchRequested();
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
-        String help_page = getResources().getString( R.string.MainWindow );
-        if ( help_page != null ) UserManualActivity.showHelpPage( mActivity, help_page );
+        UserManualActivity.showHelpPage( mActivity, getResources().getString( HELP_PAGE ));
         return true;
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)

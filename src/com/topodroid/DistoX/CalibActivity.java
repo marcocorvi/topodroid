@@ -89,6 +89,8 @@ public class CalibActivity extends Activity
                         R.string.help_help
                       };
 
+  private static final int HELP_PAGE = R.string.CalibActivity;
+
   private EditText mEditName;
   private Button mEditDate;
   // private TextView mEditDevice;
@@ -407,8 +409,7 @@ public class CalibActivity extends Activity
       case KeyEvent.KEYCODE_SEARCH:
         return onSearchRequested();
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
-        String help_page = getResources().getString( R.string.CalibActivity );
-        if ( help_page != null ) UserManualActivity.showHelpPage( this, help_page );
+        UserManualActivity.showHelpPage( this, getResources().getString( HELP_PAGE ));
         return true;
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
@@ -464,7 +465,7 @@ public class CalibActivity extends Activity
       startActivity( intent );
 
     } else if ( p++ == pos ) { // HELP
-      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, menus.length ) ).show();
+      new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, menus.length, getResources().getString( HELP_PAGE )).show();
     }
   }
 

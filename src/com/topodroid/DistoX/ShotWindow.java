@@ -174,6 +174,8 @@ public class ShotWindow extends Activity
                           R.string.help_help
                       };
 
+  private static final int HELP_PAGE = R.string.ShotWindow;
+
   private TopoDroidApp   mApp;
   private Activity       mActivity;
   private DataDownloader mDataDownloader;
@@ -642,7 +644,7 @@ public class ShotWindow extends Activity
       mActivity.startActivity( intent );
     } else if ( p++ == pos ) { // HELP
       // int nn = mNrButton1; //  + ( TDLevel.overNormal ?  mNrButton2 : 0 );
-      (new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, menus.length ) ).show();
+      new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, menus.length, getResources().getString( HELP_PAGE ) ).show();
     }
   }
 
@@ -1650,8 +1652,7 @@ public class ShotWindow extends Activity
       case KeyEvent.KEYCODE_SEARCH:
         return onSearchRequested();
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
-        String help_page = getResources().getString( R.string.ShotWindow );
-        if ( help_page != null ) UserManualActivity.showHelpPage( mActivity, help_page );
+        UserManualActivity.showHelpPage( mActivity, getResources().getString( HELP_PAGE ));
         return true;
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
