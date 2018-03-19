@@ -20,16 +20,16 @@ class BezierCurve
   private Point2D Vtemp[];  // work vector of four points
   private int splitIndex;       // Point of split (criteria: maximum error)	
 
-  BezierCurve()
-  {
-    c = new Point2D[4];
-    Vtemp = new Point2D[4];
-    for (int i=0; i<4; ++i ) {
-      c[i] = new Point2D();
-      Vtemp[i] = new Point2D();
-    }
-    splitIndex = -1;
-  }
+  // BezierCurve() // UNUSED
+  // {
+  //   c = new Point2D[4];
+  //   Vtemp = new Point2D[4];
+  //   for (int i=0; i<4; ++i ) {
+  //     c[i] = new Point2D();
+  //     Vtemp[i] = new Point2D();
+  //   }
+  //   splitIndex = -1;
+  // }
 
   BezierCurve( Point2D c0, Point2D c1, Point2D c2, Point2D c3 )
   {
@@ -46,7 +46,7 @@ class BezierCurve
   }
 
   // control points
-  void setPoint(int k, Point2D p ) { c[k].set(p); }
+  // void setPoint(int k, Point2D p ) { c[k].set(p); } // UNUSED
   Point2D getPoint( int k ) { return c[k]; }
 
   int getSplitIndex() { return splitIndex; }

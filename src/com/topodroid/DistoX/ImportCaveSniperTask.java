@@ -25,19 +25,20 @@ class ImportCaveSniperTask extends ImportTask
   {
     long sid = 0;
     try {
+      DataHelper app_data = TopoDroidApp.mData;
       ParserCaveSniper parser = new ParserCaveSniper( str[0] ); 
       ArrayList< ParserShot > shots  = parser.getShots();
       ArrayList< ParserShot > splays = parser.getSplays();
-      if ( mApp.mData.hasSurveyName( parser.mName ) ) {
+      if ( app_data.hasSurveyName( parser.mName ) ) {
         return -1L;
       }
       sid = mApp.setSurveyFromName( parser.mName, false ); // IMPORT DAT no forward
-      mApp.mData.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle, false );
-      // mApp.mData.updateSurveyDeclination( sid, parser.mDeclination, false );
-      mApp.mData.updateSurveyInitStation( sid, parser.initStation(), false );
+      app_data.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle, false );
+      // app_data.updateSurveyDeclination( sid, parser.mDeclination, false );
+      app_data.updateSurveyInitStation( sid, parser.initStation(), false );
 
-      long id = mApp.mData.insertShots( sid, 1, shots ); // start id = 1
-      // mApp.mData.insertShots( sid, id, splays );
+      long id = app_data.insertShots( sid, 1, shots ); // start id = 1
+      // app_data.insertShots( sid, id, splays );
     } catch ( ParserException e ) {
       // Toast.makeText(mActivity, R.string.file_parse_fail, Toast.LENGTH_SHORT).show();
     }

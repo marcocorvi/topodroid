@@ -41,7 +41,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
 
   private ArrayList< View > mViews;
 
-  public DBlockAdapter( Context ctx, ShotWindow parent, int id, ArrayList< DBlock > items )
+  DBlockAdapter( Context ctx, ShotWindow parent, int id, ArrayList< DBlock > items )
   {
     super( ctx, id, items );
     mContext = ctx;
@@ -90,7 +90,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
         blk.mMultiSelected = true;
         if ( blk.mView != null ) blk.mView.setBackgroundColor( TDColor.GRID );
       }
-    } else {
+    // } else {
       // Log.v("DistoX", "adapter multiselect. null blk. size " + mSelect.size() );
     }
     return ( mSelect.size() > 0 );
@@ -225,7 +225,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
 
     void setViewText( DBlock b, OnLongClickListener listener )
     {
-      tvId.setText( String.format( "%1$d", b.mId ) );
+      tvId.setText( String.format(Locale.US, "%1$d", b.mId ) );
       tvFrom.setText( b.mFrom );
       tvTo.setText( b.mTo );
       tvLength.setText(  String.format(Locale.US, "%1$6.2f %2$5.1f %3$5.1f %4$s", 
@@ -343,7 +343,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     return null;
   }
 
-  void updateBlocksName( boolean set )
+  private void updateBlocksName( boolean set )
   {
     if ( ! set ) {
       for ( DBlock b : mItems ) {

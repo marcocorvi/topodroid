@@ -22,7 +22,7 @@ package com.topodroid.DistoX;
 // MAGtype_SphericalHarmonicVariables
 class MagHarmonic
 {
-  int nMax;
+  private int nMax;
   double RelativeRadiusPower[];
   double cos_mlambda[];
   double sin_mlambda[]; 

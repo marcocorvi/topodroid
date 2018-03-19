@@ -14,15 +14,15 @@ package com.topodroid.DistoX;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.DataInputStream;
-import java.io.FileOutputStream;
-import java.io.DataOutputStream;
+// import java.io.FileOutputStream;
+// import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.FileNotFoundException;
+// import java.io.FileNotFoundException;
 
 class FirmwareUtils 
 {
 
-  static final byte[] signature = {
+  static final private byte[] signature = {
     (byte)0x03, (byte)0x48, (byte)0x85, (byte)0x46, (byte)0x03, (byte)0xf0, (byte)0x34, (byte)0xf8,
     (byte)0x00, (byte)0x48, (byte)0x00, (byte)0x47, (byte)0xf5, (byte)0x08, (byte)0x00, (byte)0x08,
     (byte)0x40, (byte)0x0c, (byte)0x00, (byte)0x20, (byte)0x00, (byte)0x23, (byte)0x02, (byte)0xe0,

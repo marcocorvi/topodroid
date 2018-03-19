@@ -38,8 +38,8 @@ class DeviceUtil
 
   static boolean isPaired( BluetoothDevice device )
   {
-    return ( device == null )? false 
-           : device.getBondState() == BluetoothDevice.BOND_BONDED;
+    return ( device != null ) && 
+           ( device.getBondState() == BluetoothDevice.BOND_BONDED );
   }
 
   // @return 0: null device

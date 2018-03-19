@@ -14,7 +14,7 @@ package com.topodroid.DistoX;
 // import android.widget.Toast;
 import android.os.AsyncTask;
 
-import android.util.Log;
+// import android.util.Log;
 
 
 class ReconnectTask extends AsyncTask< String, Integer, Integer >

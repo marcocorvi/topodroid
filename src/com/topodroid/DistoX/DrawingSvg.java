@@ -36,9 +36,9 @@ import android.graphics.RectF;
 class DrawingSvg
 {
   // FIXME station scale is 0.3
-  static final int POINT_SCALE  = 10;
-  static final int POINT_RADIUS = 10;
-  static final int RADIUS = 3;
+  static final private int POINT_SCALE  = 10;
+  static final private int POINT_RADIUS = 10;
+  static final private int RADIUS = 3;
   // float SCALE_FIX = mDrawingUtil.SCALE_FIX; // 20.0f
 
   private static void printSvgGrid( BufferedWriter out, List<DrawingPath> grid, String color, float opacity, float xoff, float yoff )

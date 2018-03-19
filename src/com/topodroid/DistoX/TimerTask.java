@@ -20,7 +20,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 
 // import android.util.Log;
 
@@ -35,7 +35,8 @@ class TimerTask extends AsyncTask<String, Integer, Long >
   private int mCntMag;
   private float mValAcc[] = new float[3];
   private float mValMag[] = new float[3];
-  Context mContext;
+  private SensorManager mSensorManager;
+  // Context mContext; // FIXME LEAK
   IBearingAndClino mParent;
   boolean mRun;
   private int mAxis;
@@ -44,12 +45,13 @@ class TimerTask extends AsyncTask<String, Integer, Long >
 
   TimerTask( Context context, IBearingAndClino parent, int axis, int wait, int count )
   {
-    mContext = context;
+    // mContext = context;
     mParent  = parent;
     mRun     = true;
     mAxis    = axis;
     mWait    = wait;
     mCount   = count;
+    mSensorManager = (SensorManager)context.getSystemService( Context.SENSOR_SERVICE );
     // Log.v("DistoX", "timer task axis " + axis );
   }
 
@@ -77,21 +79,24 @@ class TimerTask extends AsyncTask<String, Integer, Long >
       int cnt = 3*mCount;
       mValAcc[0] = 0; mValAcc[1] = 0; mValAcc[2] = 0;
       mValMag[0] = 0; mValMag[1] = 0; mValMag[2] = 0;
-      SensorManager sensor_manager = (SensorManager)mContext.getSystemService( Context.SENSOR_SERVICE );
-      Sensor mAcc = sensor_manager.getDefaultSensor( Sensor.TYPE_ACCELEROMETER );
-      Sensor mMag = sensor_manager.getDefaultSensor( Sensor.TYPE_MAGNETIC_FIELD );
-      if ( mAcc != null && mMag != null ) {
-        sensor_manager.registerListener( this, mAcc, SensorManager.SENSOR_DELAY_NORMAL );
-        sensor_manager.registerListener( this, mMag, SensorManager.SENSOR_DELAY_NORMAL );
-        while ( cnt > 0 && ( mCntAcc < mCount || mCntMag < mCount ) ) {
-          toneG.startTone( ToneGenerator.TONE_PROP_BEEP, duration ); 
-          try{
-            -- cnt;
-            Thread.sleep( 100 );
-          } catch ( InterruptedException e ) {
-          }
-        }    
-        sensor_manager.unregisterListener( this );
+      if ( mSensorManager != null ) {
+        Sensor mAcc = mSensorManager.getDefaultSensor( Sensor.TYPE_ACCELEROMETER );
+        Sensor mMag = mSensorManager.getDefaultSensor( Sensor.TYPE_MAGNETIC_FIELD );
+        if ( mAcc != null && mMag != null ) {
+          mSensorManager.registerListener( this, mAcc, SensorManager.SENSOR_DELAY_NORMAL );
+          mSensorManager.registerListener( this, mMag, SensorManager.SENSOR_DELAY_NORMAL );
+          while ( cnt > 0 && ( mCntAcc < mCount || mCntMag < mCount ) ) {
+            toneG.startTone( ToneGenerator.TONE_PROP_BEEP, duration ); 
+            try{
+              -- cnt;
+              Thread.sleep( 100 );
+            } catch ( InterruptedException e ) {
+            }
+          }    
+          mSensorManager.unregisterListener( this );
+        }
+      // } else {
+      //   // FAILED
       }
     }
     // Log.v("DistoX", "timer task bkgr done");
@@ -115,8 +120,8 @@ class TimerTask extends AsyncTask<String, Integer, Long >
       mValMag[1] /= mCntMag;
       mValMag[2] /= mCntMag;
       computeBearingAndClino();
-    } else {
-      Toast.makeText(mContext, R.string.insufficient_data, Toast.LENGTH_SHORT ).show();
+    // } else {
+    //   Toast.makeText(mContext, R.string.insufficient_data, Toast.LENGTH_SHORT ).show();
     }
   }
 

@@ -13,13 +13,13 @@ package com.topodroid.DistoX;
 
 import java.util.List;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 
 import android.content.Context;
 
 import android.widget.TextView;
-import android.widget.Button;
+// import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -27,10 +27,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.View.OnClickListener;
+// import android.view.ViewGroup.LayoutParams;
 
-import android.graphics.Bitmap;
+// import android.graphics.Bitmap;
 
 // import android.util.Log;
 

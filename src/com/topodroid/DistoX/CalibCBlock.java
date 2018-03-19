@@ -23,20 +23,20 @@ class CalibCBlock
     TDColor.LIGHT_BLUE
   };
 
-  public long mId;
-  public long mCalibId;
-  public long gx;
-  public long gy;
-  public long gz;
-  public long mx;
-  public long my;
-  public long mz;
-  public long  mGroup;
-  public float mBearing;  // computed compass
-  public float mClino;    // computed clino
-  public float mRoll;     // computed roll
-  public float mError;    // error in the calibration algo associated to this data
-  public long mStatus;
+  long mId;
+  long mCalibId;
+  long gx;
+  long gy;
+  long gz;
+  long mx;
+  long my;
+  long mz;
+  long  mGroup;
+  float mBearing;  // computed compass
+  float mClino;    // computed clino
+  float mRoll;     // computed roll
+  float mError;    // error in the calibration algo associated to this data
+  long mStatus;
 
   boolean isSaturated()
   { 
@@ -48,7 +48,7 @@ class CalibCBlock
     return ( gx == 0 && gy == 0 && gz == 0 );
   }
 
-  public CalibCBlock()
+  CalibCBlock()
   {
     mId = 0;
     mCalibId = 0;
@@ -87,10 +87,10 @@ class CalibCBlock
   // FIXME ZERO-DATA
   void setGroupIfNonZero( long g ) { mGroup = isGZero() ? 0 : g; }
 
-  public void setGroup( long g ) { mGroup = g; }
-  public void setError( float err ) { mError = err; }
+  void setGroup( long g ) { mGroup = g; }
+  void setError( float err ) { mError = err; }
 
-  public int color() 
+  int color() 
   {
     if ( mGroup <= 0 ) return colors[0];
     return colors[ 1 + (int)(mGroup % 2) ];

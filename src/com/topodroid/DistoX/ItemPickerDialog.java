@@ -14,12 +14,12 @@ package com.topodroid.DistoX;
 import java.util.ArrayList;
 
 import android.os.Bundle;
-import android.app.Dialog;
+// import android.app.Dialog;
 // import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
+// import android.content.Intent;
 
-import android.view.Window;
+// import android.view.Window;
 
 import android.graphics.*;
 import android.view.View;
@@ -29,14 +29,14 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
-import android.widget.AdapterView;
+// import android.widget.AdapterView;
 // import android.widget.AdapterView.OnItemClickListener;
 
 // import android.widget.TextView;
-import android.widget.ListView;
+// import android.widget.ListView;
 import android.widget.GridView;
 
-import android.util.Log;
+// import android.util.Log;
 
 class ItemPickerDialog extends MyDialog
                        implements View.OnClickListener

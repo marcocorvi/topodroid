@@ -11,40 +11,40 @@
  */
 package com.topodroid.DistoX;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.DialogInterface;
+// import android.app.Activity;
+// import android.content.Context;
+// import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 
 import android.util.TypedValue;
 
-import android.graphics.Paint;
-import android.graphics.Paint.FontMetrics;
+// import android.graphics.Paint;
+// import android.graphics.Paint.FontMetrics;
 import android.graphics.PointF;
 import android.graphics.Path;
-import android.graphics.Path.Direction;
+// import android.graphics.Path.Direction;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.Matrix;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+// import android.os.Handler;
+// import android.os.Message;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.view.ViewGroup;
-import android.view.Display;
+// import android.widget.LinearLayout;
+// import android.view.ViewGroup;
+// import android.view.Display;
 import android.view.KeyEvent;
 // for FRAGMENT
-import android.view.ViewGroup;
-import android.view.LayoutInflater;
+// import android.view.ViewGroup;
+// import android.view.LayoutInflater;
 
 // import android.view.ContextMenu;
 // import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.Button;
-import android.widget.ZoomControls;
-import android.widget.ZoomButton;
+// import android.widget.ZoomControls;
+// import android.widget.ZoomButton;
 import android.widget.ZoomButtonsController;
 import android.widget.ZoomButtonsController.OnZoomListener;
 import android.widget.Toast;
@@ -53,12 +53,12 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
-import android.util.DisplayMetrics;
+// import android.util.DisplayMetrics;
 
-import java.io.File;
-import java.io.FileWriter;
+// import java.io.File;
+// import java.io.FileWriter;
 import java.util.List;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 // import android.util.Log;
 

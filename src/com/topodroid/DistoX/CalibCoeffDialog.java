@@ -30,7 +30,7 @@ import android.graphics.Bitmap;
 // import android.util.Log;
 
 class CalibCoeffDialog extends MyDialog
-                              implements View.OnClickListener
+                       implements View.OnClickListener
 {
   private TopoDroidApp mApp;
 

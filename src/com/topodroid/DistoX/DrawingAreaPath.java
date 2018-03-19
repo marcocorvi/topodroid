@@ -222,6 +222,7 @@ class DrawingAreaPath extends DrawingPointLinePath
   @Override
   public String toTherion( )
   {
+    if ( mLast == null || mFirst == null ) return null;
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
     pw.format("line border -id %s%d -close on", mPrefix, mAreaCnt );

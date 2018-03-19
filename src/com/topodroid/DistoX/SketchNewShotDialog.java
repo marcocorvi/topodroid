@@ -18,24 +18,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 // import android.app.Activity;
 import android.os.Bundle;
 
-import android.content.Intent;
+// import android.content.Intent;
 
 import android.content.Context;
 
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
+// import android.widget.TextView;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 // import android.view.View.OnKeyListener;
 // import android.view.KeyEvent;
 
-import android.text.InputType;
+// import android.text.InputType;
 import android.inputmethodservice.KeyboardView;
 
 
@@ -57,7 +57,7 @@ class SketchNewShotDialog extends MyDialog
   private TopoDroidApp   mApp;
   String mFrom;
   boolean manual_shot;
-  DBlock mBlk;
+  private DBlock mBlk;
 
   private MyKeyboard mKeyboard;
 
@@ -67,8 +67,8 @@ class SketchNewShotDialog extends MyDialog
 
     mParent = parent;
     mApp    = app;
-    mData   = app.mData;
-    mShots  = app.mShotWindow;
+    mData   = TopoDroidApp.mData;
+    mShots  = mApp.mShotWindow;
     mFrom   = name;
     mBlk    = null;
     if ( mFrom == null || mFrom.length() == 0 ) {
@@ -189,7 +189,7 @@ class SketchNewShotDialog extends MyDialog
         } else {
           updateList = new ArrayList<>();
         }
-        updateList.add( mBlk );
+        if ( updateList != null ) updateList.add( mBlk );
       }
       // TODO mParent update Num
       // mParent.recreateNum( mData.selectAllShots( mApp.mSID, 0 ) );

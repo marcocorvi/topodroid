@@ -11,9 +11,9 @@
  */
 package com.topodroid.DistoX;
 
-import android.widget.CheckBox;
-import android.widget.TextView;
-import android.widget.LinearLayout;
+// import android.widget.CheckBox;
+// import android.widget.TextView;
+// import android.widget.LinearLayout;
 
 import android.graphics.Paint;
 import android.graphics.Path;

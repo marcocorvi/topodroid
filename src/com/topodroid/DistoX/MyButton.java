@@ -17,7 +17,7 @@ import android.content.res.Resources;
 import android.widget.Button;
 import android.widget.Toast;
 import android.widget.TextView;
-import android.view.View;
+// import android.view.View;
 import android.view.View.OnClickListener;
 // import android.view.View.OnLongClickListener;
 // import android.view.MotionEvent;
@@ -28,10 +28,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 
 import android.util.SparseArray;
-import android.util.Log;
+// import android.util.Log;
 
-import java.io.InputStream;
-import java.io.IOException;
+// import java.io.InputStream;
+// import java.io.IOException;
 
 import java.util.Random;
 

@@ -11,17 +11,17 @@
  */
 package com.topodroid.DistoX;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 import android.os.AsyncTask;
-import android.os.Handler;
+// import android.os.Handler;
 
-import android.util.Log;
+// import android.util.Log;
 
 public class DataDownloadTask extends AsyncTask< String, Integer, Integer >
 {
-  private TopoDroidApp mApp;
+  private TopoDroidApp mApp; // FIXME LEAK
   private static DataDownloadTask running = null;
   // private ILister mLister;
   private ListerHandler mLister; // FIXME LISTER

@@ -33,7 +33,7 @@ import android.graphics.drawable.BitmapDrawable;
 // import android.util.Log;
 import java.util.Locale;
 
-public class QCamCompass extends Dialog
+class QCamCompass extends Dialog
                          implements OnClickListener
                                   , IBearingAndClino
 {
@@ -64,7 +64,7 @@ public class QCamCompass extends Dialog
   private boolean mHasSaved;
   private boolean mHasShot;
 
-  public QCamCompass( Context context, IBearingAndClino callback, 
+  QCamCompass( Context context, IBearingAndClino callback, 
                // DrawingWindow drawer, long pid, 
                IPhotoInserter inserter, boolean with_box, boolean with_delay )
   {

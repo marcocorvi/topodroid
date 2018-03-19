@@ -11,43 +11,43 @@
  */
 package com.topodroid.DistoX;
 
-import java.nio.ByteBuffer;
+// import java.nio.ByteBuffer;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.EOFException;
-import java.io.UnsupportedEncodingException;
-import java.util.UUID;
-import java.util.List;
-import java.util.ArrayList;
+// import java.io.IOException;
+// import java.io.EOFException;
+// import java.io.UnsupportedEncodingException;
+// import java.util.UUID;
+// import java.util.List;
+// import java.util.ArrayList;
 
-import java.lang.reflect.Method;
-import java.lang.reflect.InvocationTargetException;
+// import java.lang.reflect.Method;
+// import java.lang.reflect.InvocationTargetException;
 
-import android.content.Context;
-import android.content.ComponentName;
-import android.content.ServiceConnection;
+// import android.content.Context;
+// import android.content.ComponentName;
+// import android.content.ServiceConnection;
 
-import android.app.Activity;
+// import android.app.Activity;
 
-import android.os.Bundle;
+// import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
-import android.os.IBinder;
+// import android.os.Message;
+// import android.os.IBinder;
 
 // import android.os.Parcelable;
-import android.os.ParcelUuid;
+// import android.os.ParcelUuid;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.BroadcastReceiver;
+// import android.content.Context;
+// import android.content.Intent;
+// import android.content.IntentFilter;
+// import android.content.BroadcastReceiver;
 
-import android.database.DataSetObserver;
+// import android.database.DataSetObserver;
 
 // import android.widget.Toast;
-import android.util.Log;
+// import android.util.Log;
 
 class VirtualDistoXComm extends TopoDroidComm
 {
@@ -201,8 +201,8 @@ class VirtualDistoXComm extends TopoDroidComm
         mRfcommThread = new RfcommThread( mProtocol, to_read, lister );
         mRfcommThread.start();
         // TDLog.Log( TDLog.LOG_COMM, "startRFcommThread started");
-      } else {
-        // Log.v("DistoX", "VD startRFcommThread already running");
+      // } else {
+      //   // Log.v("DistoX", "VD startRFcommThread already running");
       }
       return true;
     } else {

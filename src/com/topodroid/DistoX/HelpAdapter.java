@@ -15,14 +15,14 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
+// import android.widget.CheckBox;
 // import android.widget.TextView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.LayoutInflater;
+// import android.view.LayoutInflater;
 
 
-import android.widget.LinearLayout;
+// import android.widget.LinearLayout;
 
 // import android.util.Log;
 

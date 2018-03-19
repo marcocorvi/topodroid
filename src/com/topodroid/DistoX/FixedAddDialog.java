@@ -15,7 +15,7 @@ import java.util.Locale;
 
 import android.net.Uri;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 
 import android.content.Context;
@@ -23,21 +23,21 @@ import android.content.Intent;
 
 import android.widget.EditText;
 import android.widget.Button;
-import android.widget.CheckBox;
+// import android.widget.CheckBox;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.view.KeyEvent;
+// import android.view.ViewGroup.LayoutParams;
+// import android.view.KeyEvent;
 
 import android.inputmethodservice.KeyboardView;
-import android.widget.Toast;
-import android.widget.TextView;
+// import android.widget.Toast;
+// import android.widget.TextView;
 // import android.view.View.OnFocusChangeListener;
 
-import android.util.Log;
+// import android.util.Log;
 
 class FixedAddDialog extends MyDialog
-                            implements View.OnClickListener
-                                     , View.OnLongClickListener
+                     implements View.OnClickListener
+                              , View.OnLongClickListener
 {
   private FixedActivity mParent;
 

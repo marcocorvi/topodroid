@@ -11,23 +11,23 @@
  */
 package com.topodroid.DistoX;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 
 import android.content.Context;
-import android.content.DialogInterface;
+// import android.content.DialogInterface;
 
 import android.widget.TextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.view.Window;
-import android.view.WindowManager;
+// import android.view.ViewGroup.LayoutParams;
+// import android.view.Window;
+// import android.view.WindowManager;
 
-import android.widget.LinearLayout;
+// import android.widget.LinearLayout;
 
-import android.util.Log;
+// import android.util.Log;
 
 
 class SymbolReload extends MyDialog

@@ -13,13 +13,13 @@ package com.topodroid.DistoX;
 
 // import android.app.Activity;
 import android.app.Dialog;
-import android.os.Bundle;
+// import android.os.Bundle;
 import android.content.Context;
-import android.content.Intent;
+// import android.content.Intent;
 
-import android.view.View;
+// import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-import android.view.View.OnKeyListener;
+// import android.view.View.OnKeyListener;
 import android.view.KeyEvent;
 import android.view.Window;
 

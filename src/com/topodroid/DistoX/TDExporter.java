@@ -496,8 +496,8 @@ class TDExporter
   // KML export
   // shot flags are ignored
 
-  static float EARTH_RADIUS1 = (float)(6378137 * Math.PI / 180.0f); // semimajor axis [m]
-  static float EARTH_RADIUS2 = (float)(6356752 * Math.PI / 180.0f);
+  static private float EARTH_RADIUS1 = (float)(6378137 * Math.PI / 180.0f); // semimajor axis [m]
+  static private float EARTH_RADIUS2 = (float)(6356752 * Math.PI / 180.0f);
 
   static private List<DistoXNum> getGeolocalizedData( long sid, DataHelper data, float decl, float asl_factor )
   {
@@ -644,8 +644,8 @@ class TDExporter
             // pw.format("      <extrude>1</extrude>\n"); // extends the line down to the ground
             pw.format(Locale.US, "        %f,%f,%f %f,%f,%f\n", from.e, from.s, from.v, to.e, to.s, to.v );
             pw.format("    </coordinates> </LineString>\n");
-          } else {
-            // Log.v("DistoX", "missing coords " + from.name + " " + from.mHasCoords + " " + to.name + " " + to.mHasCoords );
+          // } else {
+          //   // Log.v("DistoX", "missing coords " + from.name + " " + from.mHasCoords + " " + to.name + " " + to.mHasCoords );
           }
         }
         pw.format("  </MultiGeometry>\n");
@@ -946,9 +946,11 @@ class TDExporter
         StringBuilder sb_painted = new StringBuilder();
         for ( CurrentStation station : stations ) {
           if ( station.mFlag == CurrentStation.STATION_FIXED ) { 
-            sb_fixed.append(" " + station.mName );
+            sb_fixed.append(" ");
+            sb_fixed.append( station.mName );
           } else if ( station.mFlag == CurrentStation.STATION_PAINTED ) {
-            sb_painted.append(" " + station.mName );
+            sb_painted.append(" ");
+            sb_painted.append( station.mName );
           }
           pw.format("    station %s \"%s\"\n", station.mName, station.mComment );
         }
@@ -1140,22 +1142,22 @@ class TDExporter
    *      (optional survey commands)
    *    *end survey_name
    */
-  static String   survex_flags_duplicate     = "   *flags duplicate";
-  static String   survex_flags_not_duplicate = "   *flags not duplicate";
+  static private String survex_flags_duplicate     = "   *flags duplicate";
+  static private String survex_flags_not_duplicate = "   *flags not duplicate";
   // static String   survex_flags_surface       = "   *flags surface";
   // static String   survex_flags_not_surface   = "   *flags not surface";
 
-  static void writeSurvexLine( PrintWriter pw, String str )
+  static private void writeSurvexLine( PrintWriter pw, String str )
   {
     pw.format("%s%s", str, TDSetting.mSurvexEol );
   }
 
-  static void writeSurvexEOL( PrintWriter pw )
+  static private void writeSurvexEOL( PrintWriter pw )
   {
     pw.format("%s", TDSetting.mSurvexEol );
   }
 
-  static boolean writeSurvexLeg( PrintWriter pw, boolean first, boolean dup, AverageLeg leg, DBlock blk, float ul, float ua )
+  static private boolean writeSurvexLeg( PrintWriter pw, boolean first, boolean dup, AverageLeg leg, DBlock blk, float ul, float ua )
   {
     if ( first ) {
       pw.format(Locale.US, "  %.2f %.1f %.1f", leg.length() * ul, leg.bearing() * ua, leg.clino() * ua );
@@ -1172,7 +1174,7 @@ class TDExporter
     return false;
   }
 
-  static void writeSurvexLRUD( PrintWriter pw, String st, LRUD lrud, float ul )
+  static private void writeSurvexLRUD( PrintWriter pw, String st, LRUD lrud, float ul )
   {
     if ( lrud != null ) {
       pw.format(Locale.US, "%s  %.2f %.2f %.2f %.2f", st, lrud.l * ul, lrud.r * ul, lrud.u * ul, lrud.d * ul );
@@ -1180,7 +1182,7 @@ class TDExporter
     }
   }
 
-  static void writeSurvexSplay( PrintWriter pw, String from, String to, DBlock blk, float ul, float ua )
+  static private void writeSurvexSplay( PrintWriter pw, String from, String to, DBlock blk, float ul, float ua )
   {
     if ( blk.isCommented() ) {
       pw.format(Locale.US, "; %s %s %.2f %.1f %.1f", from, to, blk.mLength * ul, blk.mBearing * ua, blk.mClino * ua );
@@ -2452,7 +2454,7 @@ class TDExporter
   // commented flag supported for splays
 
   // one of 6 14 31 83 115 164 211
-  static int randomColor()
+  static private int randomColor()
   {
     return 5;
   }
@@ -2961,7 +2963,7 @@ class TDExporter
     // if ( duplicate ) pw.format("#end_duplicate%s", eol);
   }
 
-  static long printCavExtend( PrintWriter pw, long extend, long item_extend, String eol )
+  static private long printCavExtend( PrintWriter pw, long extend, long item_extend, String eol )
   {
     if ( item_extend != extend ) { 
       if ( item_extend == DBlock.EXTEND_LEFT ) {

@@ -15,20 +15,20 @@
  */
 package com.topodroid.DistoX;
 
-import java.util.List;
+// import java.util.List;
 import java.util.ArrayList;
 
 import android.os.Bundle;
-import android.app.Dialog;
+// import android.app.Dialog;
 
 import android.content.Context;
 
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.View.OnClickListener;
+// import android.view.ViewGroup.LayoutParams;
 import android.inputmethodservice.KeyboardView;
 
-import android.widget.ArrayAdapter;
+// import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -39,9 +39,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 // import android.widget.AdapterView.OnItemLongClickListener;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 
-import android.util.Log;
+// import android.util.Log;
 
 class CurrentStationDialog extends MyDialog
                         implements View.OnClickListener
@@ -126,7 +126,7 @@ class CurrentStationDialog extends MyDialog
   {
     MyStringAdapter adapter = new MyStringAdapter( mContext, R.layout.message );
     // mApp.fillCurrentStationAdapter( adapter );
-    ArrayList< CurrentStation > stations = mApp.mData.getStations( mApp.mSID );
+    ArrayList< CurrentStation > stations = TopoDroidApp.mData.getStations( mApp.mSID );
     for ( CurrentStation st : stations ) {
       adapter.add( st.toString() );
     }
@@ -146,7 +146,7 @@ class CurrentStationDialog extends MyDialog
       name = token[0];
     }
     // Log.v("DistoX", "get station <" + name + ">" );
-    CurrentStation cs = mApp.mData.getStation( mApp.mSID, name );
+    CurrentStation cs = TopoDroidApp.mData.getStation( mApp.mSID, name );
     mBtnFixed.setChecked( false );
     mBtnPainted.setChecked( false );
     if ( cs == null ) {
@@ -211,7 +211,7 @@ class CurrentStationDialog extends MyDialog
       }
 
       // mApp.pushCurrentStation( name, comment );
-      mApp.mData.insertStation( mApp.mSID, name, comment, flag );
+      TopoDroidApp.mData.insertStation( mApp.mSID, name, comment, flag );
       updateList();
       return;
 
@@ -220,7 +220,7 @@ class CurrentStationDialog extends MyDialog
         mName.setError( error );
         return;
       }
-      mApp.mData.deleteStation( mApp.mSID, name );
+      TopoDroidApp.mData.deleteStation( mApp.mSID, name );
       updateList();
       mName.setText("");
       mComment.setText("");

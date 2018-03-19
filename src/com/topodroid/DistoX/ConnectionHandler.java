@@ -267,7 +267,7 @@ class ConnectionHandler extends Handler
        mRecvCounter = cnt;
        return;
      } else if ( key == DataListener.ACK ) {
-       synchronized( mBufferQueue ) {
+       synchronized( mBufferQueue ) { // FIXME SYNC
          ConnectionQueueItem item = mBufferQueue.find( cnt );
          if ( item != null ) {
            mBufferQueue.remove( item );
@@ -308,6 +308,7 @@ class ConnectionHandler extends Handler
      TDLog.Log( TDLog.LOG_SYNC,
         "recv <" + cnt + "|" + key + "> len " + buffer.length + " data[" + data.length + "]: " + data_str );
 
+     DataHelper app_data = TopoDroidApp.mData;
      switch ( key ) {
        case DataListener.SURVEY_SET:
          if ( ! data[0].equals( mApp.mySurvey ) ) { // N.B. data[0] not null
@@ -317,72 +318,72 @@ class ConnectionHandler extends Handler
          }
          break; 
        case DataListener.SURVEY_INFO:
-         mApp.mData.updateSurveyInfo( mSID, data[0], data[1], Double.parseDouble( data[2] ), data[3], data[4], 
+         app_data.updateSurveyInfo( mSID, data[0], data[1], Double.parseDouble( data[2] ), data[3], data[4], 
                                       Integer.parseInt(data[5]), false );
          break;
        case DataListener.SURVEY_DATE:
-         mApp.mData.updateSurveyDayAndComment( mSID, data[0], data[1], false );
+         app_data.updateSurveyDayAndComment( mSID, data[0], data[1], false );
          break;
        case DataListener.SURVEY_TEAM:
-         mApp.mData.updateSurveyTeam( mSID, data[0], false );
+         app_data.updateSurveyTeam( mSID, data[0], false );
          break;
        case DataListener.SURVEY_DECL:
-         mApp.mData.updateSurveyDeclination( mSID, Double.parseDouble( data[0] ), false );
+         app_data.updateSurveyDeclination( mSID, Double.parseDouble( data[0] ), false );
          break;
        case DataListener.SURVEY_NAME:
          mApp.renameCurrentSurvey( mSID, data[0], false );
          break;
        case DataListener.SURVEY_INIT_STATION:
-         mApp.mData.updateSurveyInitStation( mSID, data[0], false );
+         app_data.updateSurveyInitStation( mSID, data[0], false );
          break;
 
        case DataListener.SHOT_UPDATE:
-         mApp.mData.updateShot( Integer.parseInt(data[0]), mSID, data[2], data[3], 
+         app_data.updateShot( Integer.parseInt(data[0]), mSID, data[2], data[3], 
                                 Integer.parseInt(data[4]), Integer.parseInt(data[5]), Integer.parseInt(data[6]),
                                 data[7], false );
          break;
        case DataListener.SHOT_NAME:
-         mApp.mData.updateShotName( Integer.parseInt(data[0]), mSID, data[2], data[3], false );
+         app_data.updateShotName( Integer.parseInt(data[0]), mSID, data[2], data[3], false );
          break;
        case DataListener.SHOT_LEG:
-         mApp.mData.updateShotLeg( Integer.parseInt(data[0]), mSID, Integer.parseInt(data[2]), false );
+         app_data.updateShotLeg( Integer.parseInt(data[0]), mSID, Integer.parseInt(data[2]), false );
          break;
        case DataListener.SHOT_EXTEND:
-         mApp.mData.updateShotExtend( Integer.parseInt(data[0]), mSID, Integer.parseInt(data[2]), false );
+         app_data.updateShotExtend( Integer.parseInt(data[0]), mSID, Integer.parseInt(data[2]), false );
          break;
        case DataListener.SHOT_FLAG:
-         mApp.mData.updateShotFlag( Integer.parseInt(data[0]), mSID, Integer.parseInt(data[2]), false );
+         app_data.updateShotFlag( Integer.parseInt(data[0]), mSID, Integer.parseInt(data[2]), false );
          break;
        case DataListener.SHOT_COMMENT:
-         mApp.mData.updateShotComment( Integer.parseInt(data[0]), mSID, data[2], false );
+         app_data.updateShotComment( Integer.parseInt(data[0]), mSID, data[2], false );
          break;
        case DataListener.SHOT_STATUS:
-         mApp.mData.updateShotStatus( Integer.parseInt(data[0]), mSID, Integer.parseInt(data[2]), false );
+         app_data.updateShotStatus( Integer.parseInt(data[0]), mSID, Integer.parseInt(data[2]), false );
          break;
        case DataListener.SHOT_DELETE:
-         mApp.mData.deleteShot( Integer.parseInt(data[0]), mSID, Integer.parseInt(data[2]), false );
+         app_data.deleteShot( Integer.parseInt(data[0]), mSID, Integer.parseInt(data[2]), false );
          break;
        case DataListener.SHOT_UNDELETE:
-         mApp.mData.undeleteShot( Integer.parseInt(data[0]), mSID, false );
+         app_data.undeleteShot( Integer.parseInt(data[0]), mSID, false );
          break;
        case DataListener.SHOT_AMDR:
-         mApp.mData.updateShotAMDR( Integer.parseInt(data[0]), mSID, 
+         app_data.updateShotAMDR( Integer.parseInt(data[0]), mSID, 
            Double.parseDouble(data[2]), Double.parseDouble(data[3]), Double.parseDouble(data[4]), Double.parseDouble(data[5]),
            false );
          break;
        case DataListener.SHOT_DBC_UPDATE:
-         mApp.mData.updateShotDistanceBearingClino( Integer.parseInt(data[0]), mSID, 
+         app_data.updateShotDistanceBearingClino( Integer.parseInt(data[0]), mSID, 
                                 Float.parseFloat(data[2]), Float.parseFloat(data[3]), Float.parseFloat(data[4]), false );
          break;
 
        case DataListener.SHOT_INSERT:
-         mApp.mData.doInsertShot( mSID, Integer.parseInt(data[1]), Long.parseLong(data[2]), data[3], data[4],
+         app_data.doInsertShot( mSID, Integer.parseInt(data[1]), Long.parseLong(data[2]), data[3], data[4],
            Double.parseDouble(data[5]), Double.parseDouble(data[6]), Double.parseDouble(data[7]), Double.parseDouble(data[8]),
            Integer.parseInt(data[9]), Integer.parseInt(data[10]), Integer.parseInt(data[11]), Integer.parseInt(data[12]),
            Integer.parseInt(data[13]), data[14], false );
          break;
        case DataListener.SHOT_INSERTAT:
-         mApp.mData.insertShotAt( mSID, Integer.parseInt(data[1]), Long.parseLong(data[2]),
+         app_data.insertShotAt( mSID, Integer.parseInt(data[1]), Long.parseLong(data[2]),
            Double.parseDouble(data[3]), Double.parseDouble(data[4]), Double.parseDouble(data[5]), Double.parseDouble(data[6]),
            Long.parseLong(data[7]), Long.parseLong(data[8]),
            Integer.parseInt(data[9]),
@@ -390,7 +391,7 @@ class ConnectionHandler extends Handler
          break;
 
        case DataListener.PLOT_INSERT:
-         mApp.mData.insertPlot( mSID, Integer.parseInt(data[1]), data[2], Integer.parseInt(data[3]),
+         app_data.insertPlot( mSID, Integer.parseInt(data[1]), data[2], Integer.parseInt(data[3]),
            Integer.parseInt(data[4]),
            data[5], data[6], Double.parseDouble(data[7]), Double.parseDouble(data[8]),
            Double.parseDouble(data[9]), Double.parseDouble(data[10]), Double.parseDouble(data[11]),

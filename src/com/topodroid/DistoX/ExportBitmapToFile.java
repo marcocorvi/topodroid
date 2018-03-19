@@ -18,13 +18,13 @@ import android.content.Context;
 import android.os.AsyncTask;
 // import android.os.Handler;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
+// import android.graphics.Bitmap.CompressFormat;
 
 import android.widget.Toast;
 
 class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean> 
 {
-    private Context mContext;
+    private Context mContext; // FIXME LEAK: used to Toast
     private Bitmap mBitmap;
     private float  mScale;
     private String mFullName;

@@ -12,21 +12,21 @@
  */
 package com.topodroid.DistoX;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 import android.content.Context;
 // import android.content.BroadcastReceiver;
-import android.content.Intent;
-import android.content.IntentFilter;
+// import android.content.Intent;
+// import android.content.IntentFilter;
 
-import android.bluetooth.BluetoothDevice;
+// import android.bluetooth.BluetoothDevice;
 
-import android.widget.Button;
+// import android.widget.Button;
 // import android.widget.Toast;
 
-import android.os.Bundle;
+// import android.os.Bundle;
 
-import android.util.Log;
+// import android.util.Log;
 
 class DataDownloader
 {
@@ -51,13 +51,13 @@ class DataDownloader
     return 1;
   }
 
-  private Context mContext;
+  // private Context mContext; // UNUSED
   private TopoDroidApp mApp;
   // private BroadcastReceiver mBTReceiver = null;
 
   DataDownloader( Context context, TopoDroidApp app )
   {
-    mContext = context;
+    // mContext = context;
     mApp     = app;
     // mBTReceiver = null;
   }
@@ -148,7 +148,7 @@ class DataDownloader
       TDLog.Error( "download data: no device selected" );
       if ( mApp.mSID < 0 ) {
         TDLog.Error( "download data: no survey selected" );
-      } else {
+      // } else {
         // DBlock last_blk = mApp.mData.selectLastLegShot( mApp.mSID );
         // (new ShotNewDialog( mContext, mApp, lister, last_blk, -1L )).show();
       }

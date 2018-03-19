@@ -13,7 +13,7 @@ package com.topodroid.DistoX;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
+// import android.app.Activity;
 
 import android.content.Context;
 import android.widget.ArrayAdapter;
@@ -23,7 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
 
-import android.widget.LinearLayout;
+// import android.widget.LinearLayout;
 
 // import android.util.Log;
 
@@ -41,7 +41,7 @@ class SymbolAdapter extends ArrayAdapter< EnableSymbol >
     // mActivity = ctx;
     mLayoutInflater = (LayoutInflater)ctx.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
 
-    if ( items != null ) {
+    if ( items != null ) { // ALWAYS true
       mItems = items;
     } else {
       mItems = new ArrayList<>();

@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-import java.lang.Math;
+// import java.lang.Math;
 
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -19,7 +19,7 @@ import java.util.Locale;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import android.util.Log;
+// import android.util.Log;
 
 class TopoDroidUtil
 {
@@ -108,7 +108,7 @@ class TopoDroidUtil
     return getDatePlg( y, m, d );
   }
 
-  static int mDaysByMonth[] = { 0, 31, 59, 90, 120, 151, 181,  212, 243, 273, 284, 294, 324 };
+  static final private int mDaysByMonth[] = { 0, 31, 59, 90, 120, 151, 181,  212, 243, 273, 284, 294, 324 };
   // m: 1 .. 12
   static float getDatePlg( int y, int m, int d )
   {

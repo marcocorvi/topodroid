@@ -11,26 +11,26 @@
  */
 package com.topodroid.DistoX;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 
-import android.content.Intent;
+// import android.content.Intent;
 import android.content.Context;
 
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
-import android.widget.Toast;
+// import android.widget.Toast;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.view.View.OnKeyListener;
-import android.view.KeyEvent;
+// import android.view.ViewGroup.LayoutParams;
+// import android.view.View.OnKeyListener;
+// import android.view.KeyEvent;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+// import android.graphics.Bitmap;
+// import android.graphics.BitmapFactory;
 
 class SensorEditDialog extends MyDialog
-                             implements View.OnClickListener
+                       implements View.OnClickListener
 {
   private SensorListActivity mParent;
   private SensorInfo mSensor;
@@ -93,7 +93,7 @@ class SensorEditDialog extends MyDialog
 
     if ( b == mButtonOK ) {
       String comment = mETcomment.getText().toString();
-      if ( comment == null ) comment = "";
+      // if ( comment == null ) comment = "";
       mParent.updateSensor( mSensor, comment );
     } else if ( b == mButtonDelete ) {
       mParent.dropSensor( mSensor );

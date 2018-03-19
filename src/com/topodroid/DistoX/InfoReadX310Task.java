@@ -11,9 +11,9 @@
  */
 package com.topodroid.DistoX;
 
-import android.app.Activity;
+// import android.app.Activity;
 import android.os.AsyncTask;
-import android.content.Context;
+// import android.content.Context;
 
 import android.widget.Toast;
 
@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 class InfoReadX310Task extends AsyncTask<Void, Integer, Boolean>
 {
-  TopoDroidApp   mApp;
+  TopoDroidApp   mApp; // FIXME LEAK
   private DeviceX310InfoDialog  mDialog;
   private DeviceX310Info mInfo = null;
   // int mType; // DistoX type

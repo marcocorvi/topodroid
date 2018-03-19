@@ -12,7 +12,7 @@
 package com.topodroid.DistoX;
 
 import android.os.Bundle;
-import android.app.Dialog;
+// import android.app.Dialog;
 // import android.app.Activity;
 import android.content.Context;
 // import android.content.Intent;
@@ -20,8 +20,8 @@ import android.content.res.Resources;
 
 import android.graphics.*;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.view.View.OnClickListener;
+// import android.view.ViewGroup.LayoutParams;
+// import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -118,10 +118,10 @@ class SurveyStatDialog extends MyDialog
     @Override
     public void onClick(View view)
     {
-      Button b = (Button)view;
-      if ( b == mBtnBack ) {
-        /* nothing */
-      }
+      // Button b = (Button)view;
+      // if ( b == mBtnBack ) {
+      //   /* nothing */
+      // }
       dismiss();
     }
 

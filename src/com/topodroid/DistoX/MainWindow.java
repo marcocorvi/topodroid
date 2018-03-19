@@ -11,29 +11,29 @@
  */
 package com.topodroid.DistoX;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.FileNotFoundException;
+// import java.io.File;
+// import java.io.IOException;
+// import java.io.FileNotFoundException;
 // import java.io.EOFException;
 // import java.io.DataInputStream;
 // import java.io.DataOutputStream;
-import java.io.FileInputStream;
-import java.io.PrintWriter;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.util.UUID;
+// import java.io.FileInputStream;
+// import java.io.PrintWriter;
+// import java.io.BufferedReader;
+// import java.io.FileReader;
+// import java.io.FileWriter;
+// import java.util.UUID;
 import java.util.List;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 // import android.os.AsyncTask;
-import android.os.Debug;
+// import android.os.Debug;
 
 // import java.lang.Long;
 // import java.lang.reflect.Method;
 // import java.lang.reflect.InvocationTargetException;
 
-import android.app.Application;
+// import android.app.Application;
 import android.app.Activity;
 import android.app.Dialog;
 
@@ -45,49 +45,49 @@ import android.os.Handler;
 // import android.os.Parcelable;
 
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothServerSocket;
-import android.bluetooth.BluetoothSocket;
+// import android.bluetooth.BluetoothServerSocket;
+// import android.bluetooth.BluetoothSocket;
 
-import android.location.LocationManager;
+// import android.location.LocationManager;
 
-import android.content.Context;
+// import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
+// import android.content.IntentFilter;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.res.Resources;
 import android.content.pm.PackageManager;
-import android.net.Uri;
+// import android.net.Uri;
 
-import android.bluetooth.BluetoothDevice;
+// import android.bluetooth.BluetoothDevice;
 
 import android.widget.TextView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.ImageView;
+// import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.Toolbar;
+// import android.widget.LinearLayout;
+// import android.widget.RelativeLayout;
+// import android.widget.Toolbar;
 
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.view.View.OnClickListener;
+// import android.view.ViewGroup.LayoutParams;
+// import android.view.View.OnClickListener;
 import android.view.KeyEvent;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.preference.PreferenceManager;
+// import android.preference.PreferenceManager;
 
 // import android.view.Menu;
 // import android.view.MenuItem;
 
-import android.graphics.Color;
-import android.graphics.PorterDuff;
+// import android.graphics.Color;
+// import android.graphics.PorterDuff;
 
-import android.util.Log;
+// import android.util.Log;
 
 /*
   Method m = device.getClass().getMethod( "createRfcommSocket", new Class[] (int.class) );
@@ -449,7 +449,7 @@ public class MainWindow extends Activity
     setContentView(R.layout.topodroid_activity);
     mApp = (TopoDroidApp) getApplication();
     mActivity = this;
-    TopoDroidApp.mActivity = this;
+    mApp.mActivity = this;
     mApp_mData       = TopoDroidApp.mData;
     mApp_mCosurvey   = TopoDroidApp.mCosurvey;
     mApp_mCheckPerms = TopoDroidApp.mCheckPerms;
@@ -566,7 +566,7 @@ public class MainWindow extends Activity
     mImage.setBackgroundDrawable( MyButton.getButtonBackground( mApp, getResources(), R.drawable.iz_menu ) );
     for (int k=0; k<mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( mActivity, this, izons[k] );
-      mButton1[k].setElevation(40);
+      // mButton1[k].setElevation(40);
     }
 
     mButtonView1 = new HorizontalButtonView( mButton1 );

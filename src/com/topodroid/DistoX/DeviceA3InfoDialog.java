@@ -15,7 +15,7 @@ import android.os.Bundle;
 // import android.app.Dialog;
 // import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
+// import android.content.Intent;
 import android.content.DialogInterface;
 // import android.content.DialogInterface.OnCancelListener;
 // import android.content.DialogInterface.OnDismissListener;
@@ -57,9 +57,7 @@ class DeviceA3InfoDialog extends MyDialog
   public void onCreate( Bundle bundle )
   {
     super.onCreate( bundle );
-
-    setContentView( R.layout.device_a3_info_dialog );
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout( R.layout.device_a3_info_dialog, R.string.device_info  );
 
     Resources res = mParent.getResources();
 
@@ -74,8 +72,6 @@ class DeviceA3InfoDialog extends MyDialog
     tv_statusCompass = (TextView) findViewById( R.id.tv_status_compass );
     tv_statusCalib   = (TextView) findViewById( R.id.tv_status_calib );
     tv_statusSilent  = (TextView) findViewById( R.id.tv_status_silent );
-
-    setTitle( res.getString( R.string.device_info ) );
 
     tv_address.setText( String.format( res.getString( R.string.device_address ), mDevice.mAddress ) );
 

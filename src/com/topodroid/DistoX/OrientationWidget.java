@@ -15,7 +15,7 @@ import android.app.Dialog;
 
 import android.widget.ImageView;
 import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
+// import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.view.View;
 
 import android.graphics.Bitmap;

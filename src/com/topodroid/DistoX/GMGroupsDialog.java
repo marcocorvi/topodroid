@@ -11,17 +11,17 @@
  */
 package com.topodroid.DistoX;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 import android.content.Context;
 
 import android.widget.TextView;
-import android.widget.CheckBox;
+// import android.widget.CheckBox;
 import android.widget.Button;
 
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 
 class GMGroupsDialog extends MyDialog
                      implements OnClickListener
@@ -67,8 +67,8 @@ class GMGroupsDialog extends MyDialog
       mParent.computeGroups( -1L );
     } else if ( b == mBtnReset ) {
       mParent.resetGroups( -1L );
-    } else if ( b == mBtnCancel ) {
-      /* nothing */
+    // } else if ( b == mBtnCancel ) {
+    //   /* nothing */
     }
     dismiss();
   }

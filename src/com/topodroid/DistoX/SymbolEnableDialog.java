@@ -16,21 +16,21 @@ import java.util.ArrayList;
 import android.os.Bundle;
 import android.os.AsyncTask;
 
-import android.app.Dialog;
-import android.app.Activity;
+// import android.app.Dialog;
+// import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.content.DialogInterface;
+// import android.content.Intent;
+// import android.content.DialogInterface;
 // import android.content.DialogInterface.OnClickListener;
 
-import android.view.Window;
+// import android.view.Window;
 
 import android.graphics.*;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 
-import android.widget.AdapterView;
+// import android.widget.AdapterView;
 // import android.widget.AdapterView.OnItemClickListener;
 
 // import android.widget.TextView;
@@ -75,9 +75,9 @@ class SymbolEnableDialog extends MyDialog
   {
     super.onCreate( savedInstanceState );
 
-    requestWindowFeature(Window.FEATURE_NO_TITLE);
-    setContentView(R.layout.symbol_enable_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    // requestWindowFeature(Window.FEATURE_NO_TITLE);
+    initLayout(R.layout.symbol_enable_dialog, null );
+    // getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
     mList = (ListView) findViewById(R.id.symbol_list);
     // mList.setOnItemClickListener( this );
@@ -223,7 +223,7 @@ class SymbolEnableDialog extends MyDialog
     dismiss();
   }
 
-  private class SaveSymbols extends AsyncTask< Void, Void, Void >
+  private class SaveSymbols extends AsyncTask< Void, Void, Void > // FIXME LEAK
   {
     SymbolAdapter mPtAdapter;
     SymbolAdapter mLnAdapter;

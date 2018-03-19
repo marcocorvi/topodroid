@@ -12,16 +12,16 @@
 package com.topodroid.DistoX;
 
 import java.io.File;
-import java.util.Set;
+// import java.util.Set;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Collections;
 
 // import android.app.Activity;
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 
-import android.content.Intent;
+// import android.content.Intent;
 
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -33,11 +33,11 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
-import android.content.IntentFilter;
+// import android.content.IntentFilter;
 import android.content.Context;
 
 
-public class ImportDialog extends MyDialog
+class ImportDialog extends MyDialog
                           implements OnItemClickListener
                           , OnClickListener
 { 
@@ -48,7 +48,7 @@ public class ImportDialog extends MyDialog
   private ListView mList;
   private Button mBtnCancel;
 
-  public ImportDialog( Context context, MainWindow parent, TopoDroidApp _app )
+  ImportDialog( Context context, MainWindow parent, TopoDroidApp _app )
   {
     super( context, R.string.ImportDialog );
     mParent  = parent;
@@ -59,7 +59,6 @@ public class ImportDialog extends MyDialog
   public void onCreate(Bundle savedInstanceState)
   {
     super.onCreate( savedInstanceState );
-
     initLayout( R.layout.import_dialog, R.string.import_title );
 
     mArrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );

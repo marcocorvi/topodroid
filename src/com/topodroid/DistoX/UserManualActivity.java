@@ -12,9 +12,10 @@
 package com.topodroid.DistoX;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.IOException;
+// import java.io.FileReader;
+// import java.io.BufferedReader;
+// import java.io.IOException;
+import java.util.Locale;
 
 import android.app.Activity;
 // import android.app.Dialog;
@@ -44,7 +45,7 @@ import android.widget.Toast;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import android.util.Log;
+// import android.util.Log;
 
 public class UserManualActivity extends Activity
                                 implements OnItemClickListener, OnClickListener
@@ -164,7 +165,7 @@ public class UserManualActivity extends Activity
     mList.setVisibility( View.GONE );
     if ( pos <= 15 ) {
       mCloseOnBack = 0;
-      load( String.format( "manual%02d.htm", pos ) );
+      load( String.format(Locale.US, "manual%02d.htm", pos ) );
     } else {
       getManualFromWeb();
     }

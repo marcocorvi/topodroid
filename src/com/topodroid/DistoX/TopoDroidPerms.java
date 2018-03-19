@@ -13,33 +13,31 @@
 package com.topodroid.DistoX;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.ActivityNotFoundException;
+// import android.content.Intent;
+// import android.content.ActivityNotFoundException;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.widget.Button;
 import android.widget.TextView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
-import android.net.Uri;
+// import android.net.Uri;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 
-class TopoDroidPerms extends Dialog
+class TopoDroidPerms extends MyDialog
                      implements OnClickListener
 {
   // private Button mBTok;
-  private Context mContext;
+  // private Context mContext; // INHERITED
 
   TopoDroidPerms( Context context, int check_perms )
   {
-    super( context );
-    mContext = context;
-    setContentView(R.layout.topodroid_perms);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
-
-    setTitle( String.format( context.getResources().getString(R.string.welcome_title), TopoDroidApp.VERSION ) );
+    super( context, R.string.TopoDroidPerms );
+    // mContext = context;
+    initLayout(R.layout.topodroid_perms,
+      String.format( context.getResources().getString(R.string.welcome_title), TopoDroidApp.VERSION ) );
 
     StringBuilder sb = new StringBuilder();
     if ( check_perms < 0 ) {

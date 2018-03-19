@@ -11,34 +11,34 @@
  */
 package com.topodroid.DistoX;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.content.Context;
 // import android.content.res.Resources;
 
-import android.graphics.Paint;
-import android.graphics.Paint.FontMetrics;
+// import android.graphics.Paint;
+// import android.graphics.Paint.FontMetrics;
 import android.graphics.PointF;
 import android.graphics.Path;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+// import android.os.Handler;
+// import android.os.Message;
 // import android.view.Menu;
 // import android.view.SubMenu;
 // import android.view.MenuItem;
-import android.view.KeyEvent;
+// import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.view.ViewGroup;
-import android.view.Display;
-import android.util.DisplayMetrics;
+// import android.widget.LinearLayout;
+// import android.widget.PopupWindow;
+// import android.view.ViewGroup;
+// import android.view.Display;
+// import android.util.DisplayMetrics;
 // import android.view.ContextMenu;
 // import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.Button;
-import android.widget.ZoomControls;
-import android.widget.ZoomButton;
+// import android.widget.ZoomControls;
+// import android.widget.ZoomButton;
 import android.widget.ZoomButtonsController;
 import android.widget.ZoomButtonsController.OnZoomListener;
 import android.widget.Toast;
@@ -53,15 +53,14 @@ import java.util.List;
 // import java.util.ArrayList;
 import java.util.Locale;
 
-import java.util.concurrent.RejectedExecutionException;
+// import java.util.concurrent.RejectedExecutionException;
 // import java.util.Deque; // only API-9
 
 import android.util.Log;
 
 /**
- * @note this class must be public
  */
-public class ProjectionDialog extends MyDialog
+class ProjectionDialog extends MyDialog
                              implements View.OnTouchListener
                                       , View.OnClickListener
                                       , OnZoomListener
@@ -112,7 +111,7 @@ public class ProjectionDialog extends MyDialog
 
   boolean mETazimuthChanged = false;
 
-  public ProjectionDialog( Context context, ShotWindow parent, long sid, String name, String from )
+  ProjectionDialog( Context context, ShotWindow parent, long sid, String name, String from )
   {
     super( context, R.string.ProjectionDialog ); // FIXME
     mParent = parent;
@@ -309,15 +308,18 @@ public class ProjectionDialog extends MyDialog
     mBtnOk.setOnClickListener( this );
     mBtnPlus.setOnClickListener( this );
     mBtnMinus.setOnClickListener( this );
-    mZoom = mApp.mScaleFactor;    // canvas zoom
+    mZoom = TopoDroidApp.mScaleFactor;    // canvas zoom
 
-    mBorderRight  = mApp.mDisplayWidth * 15 / 16;
-    mBorderLeft   = mApp.mDisplayWidth / 16;
-    mBorderInnerRight  = mApp.mDisplayWidth * 3 / 4;
-    mBorderInnerLeft   = mApp.mDisplayWidth / 4;
-    mBorderBottom = mApp.mDisplayHeight * 7 / 8;
+    float displayWidth = TopoDroidApp.mDisplayWidth;
+    float displayHeight = TopoDroidApp.mDisplayHeight;
+    
+    mBorderRight  = displayWidth * 15 / 16;
+    mBorderLeft   = displayWidth / 16;
+    mBorderInnerRight  = displayWidth * 3 / 4;
+    mBorderInnerLeft   = displayWidth / 4;
+    mBorderBottom = displayHeight * 7 / 8;
 
-    mDisplayCenter = new PointF(mApp.mDisplayWidth / 2, mApp.mDisplayHeight / 2);
+    mDisplayCenter = new PointF( displayWidth / 2, displayHeight / 2);
     // Log.v("DistoX", "surface " + mOffset.x + " " + mOffset.y + " " + mZoom );
 
     mDrawingSurface = (ProjectionSurface) findViewById(R.id.drawingSurface);
@@ -400,7 +402,7 @@ public class ProjectionDialog extends MyDialog
     doStart();
   }
 
-  void setAzimuth( int a, boolean edit_text )
+  private void setAzimuth( int a, boolean edit_text )
   {
     mAzimuth = a;
     if ( mAzimuth < 0 || mAzimuth >= 360 ) { mAzimuth = 0; edit_text = true; }
@@ -421,7 +423,7 @@ public class ProjectionDialog extends MyDialog
 
     private void doStart()
     {
-      mList = mApp.mData.selectAllShots( mSid, TDStatus.NORMAL );
+      mList = TopoDroidApp.mData.selectAllShots( mSid, TDStatus.NORMAL );
       if ( mList.size() == 0 ) {
         dismiss();
         Toast.makeText( mContext, R.string.few_data, Toast.LENGTH_SHORT ).show();
@@ -446,7 +448,7 @@ public class ProjectionDialog extends MyDialog
       }
    }
 
-   float spacing( MotionEventWrap ev )
+   private float spacing( MotionEventWrap ev )
    {
       int np = ev.getPointerCount();
       if ( np < 2 ) return 0.0f;
@@ -455,7 +457,7 @@ public class ProjectionDialog extends MyDialog
       return (float)Math.sqrt(x*x + y*y);
    }
 
-   void saveEventPoint( MotionEventWrap ev )
+   private void saveEventPoint( MotionEventWrap ev )
    {
       int np = ev.getPointerCount();
       if ( np >= 1 ) {
@@ -472,7 +474,7 @@ public class ProjectionDialog extends MyDialog
    }
 
     
-   void shiftByEvent( MotionEventWrap ev )
+   private void shiftByEvent( MotionEventWrap ev )
    {
       float x0 = 0.0f;
       float y0 = 0.0f;

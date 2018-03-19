@@ -11,11 +11,11 @@
  */
 package com.topodroid.DistoX;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 // import android.app.Activity;
 import android.os.Bundle;
 
-import android.content.Intent;
+// import android.content.Intent;
 import android.content.Context;
 
 import android.widget.EditText;
@@ -24,7 +24,7 @@ import android.widget.CheckBox;
 import android.view.View;
 // import android.view.View.OnKeyListener;
 // import android.view.KeyEvent;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 
 
 class PlotRenameDialog extends MyDialog
@@ -55,8 +55,8 @@ class PlotRenameDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
 
-    setContentView(R.layout.plot_rename_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout( R.layout.plot_rename_dialog, R.string.title_plot_rename );
+    
     mBtnRename = (Button) findViewById(R.id.btn_rename );
     mBtnSplit  = (Button) findViewById(R.id.btn_split );
     // mBtnMerge  = (Button) findViewById(R.id.btn_merge );
@@ -82,8 +82,6 @@ class PlotRenameDialog extends MyDialog
       // mBtnMerge.setVisibility( View.GONE );
       mEtStation.setInputType( android.text.InputType.TYPE_NULL );
     }
-
-    setTitle( R.string.title_plot_rename );
   }
 
   @Override
@@ -92,7 +90,7 @@ class PlotRenameDialog extends MyDialog
     // When the user clicks, just finish this activity.
     // onPause will be called, and we save our data there.
     Button b = (Button) v;
-    INewPlot maker = mApp.mShotWindow;
+    INewPlot maker = mApp.mShotWindow; // FIXME
 
     if ( b == mBtnRename ) {
       String name = mEtName.getText().toString();

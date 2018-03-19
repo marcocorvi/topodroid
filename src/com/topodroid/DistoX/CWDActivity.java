@@ -12,16 +12,16 @@
 package com.topodroid.DistoX;
 
 import java.io.File;
-import java.util.List;
-import java.util.ArrayList;
+// import java.util.List;
+// import java.util.ArrayList;
 
-import android.app.Application;
+// import android.app.Application;
 import android.app.Activity;
 import android.os.Bundle;
 
-import android.content.Context;
+// import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
+// import android.content.res.Resources;
 
 import android.widget.TextView;
 import android.widget.EditText;
@@ -33,14 +33,14 @@ import android.widget.LinearLayout;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
-import android.view.WindowManager.LayoutParams;
+// import android.view.WindowManager.LayoutParams;
 import android.view.KeyEvent;
 
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
-import android.util.Log;
+// import android.util.Log;
 
 public class CWDActivity extends Activity
                          implements OnItemClickListener

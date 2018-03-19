@@ -31,11 +31,11 @@ import java.nio.ByteBuffer;
 
 import android.graphics.Matrix;
 import android.graphics.Canvas;
-import android.graphics.Bitmap;
-import android.graphics.PorterDuff;
-import android.graphics.RectF;
+// import android.graphics.Bitmap;
+// import android.graphics.PorterDuff;
+// import android.graphics.RectF;
 import android.graphics.PointF;
-import android.graphics.Paint;
+// import android.graphics.Paint;
 import android.graphics.Path;
 import android.os.Handler;
 
@@ -811,7 +811,8 @@ class SketchModel
             break;
           case DrawingPath.DRAWING_PATH_POINT:
             SketchPointPath point = ( SketchPointPath ) path;
-            out.write( point.toTherion() );
+            String pp_str = point.toTherion();
+	    if ( pp_str != null ) out.write( pp_str );
             break;
         }
       }
@@ -1158,7 +1159,7 @@ class SketchModel
     }
     // remove repeated names
     // Log.v( "DistoX", "load Th3 " + filename + " done" );
-    return (missingSymbols != null )? missingSymbols.isOK() : true;
+    return (missingSymbols == null ) || missingSymbols.isOK();
   }
 
   // -----------------------------------------------------------------
@@ -1462,7 +1463,7 @@ class SketchModel
     }
     // remove repeated names
     // Log.v( "DistoX", "load Tdr3 " + filename + " done" );
-    return (missingSymbols != null )? missingSymbols.isOK() : true;
+    return (missingSymbols == null ) || missingSymbols.isOK();
   }
     
 }

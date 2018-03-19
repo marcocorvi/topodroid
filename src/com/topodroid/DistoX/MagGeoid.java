@@ -22,14 +22,14 @@ package com.topodroid.DistoX;
 // MAGtype_Geoid
 class MagGeoid
 {
-  int NumbGeoidCols;
-  int NumbGeoidRows;
-  int NumbHeaderItems;
-  int ScaleFactor;
-  int NumbGeoidElevs;
-  boolean Geoid_Initialized;
-  boolean UseGeoid;
-  float[] GeoidHeightBuffer;  // geoid height relative to ellipsoid
+  private int NumbGeoidCols;
+  private int NumbGeoidRows;
+  private int NumbHeaderItems;
+  private int ScaleFactor;
+  private int NumbGeoidElevs;
+  private boolean Geoid_Initialized;
+  private boolean UseGeoid;
+  private float[] GeoidHeightBuffer;  // geoid height relative to ellipsoid
 
   /* Sets EGM-96 model file parameters */
   MagGeoid( float[] heights )
@@ -111,7 +111,7 @@ class MagGeoid
    *    Longitude           : Geodetic longitude in radians          (input)
    *    DeltaHeight         : Height Adjustment, in meters.          (output)
    */
-  double getGeoidHeight( MagLatLong rep )
+  private double getGeoidHeight( MagLatLong rep )
   {
     if (  ( ! Geoid_Initialized )
        || (( rep.lat < -90) || (rep.lat > 90)) /* Latitude out of range */

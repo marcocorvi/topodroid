@@ -21,7 +21,7 @@ class CurrentStation
   static final int STATION_FIXED   = 1;
   static final int STATION_PAINTED = 2;
 
-  static final String[] flag_str = { " ", " [F] ", " [P] " };
+  static final private String[] flag_str = { " ", " [F] ", " [P] " };
 
   CurrentStation( String name, String comment, long flag )
   {

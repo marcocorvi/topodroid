@@ -29,7 +29,7 @@ import android.content.Context;
 import android.widget.EditText;
 import android.widget.Button;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 // import android.view.View.OnKeyListener;
 // import android.view.KeyEvent;
 

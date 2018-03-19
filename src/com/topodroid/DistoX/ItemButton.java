@@ -17,8 +17,8 @@ import android.graphics.Paint;
 // import android.graphics.Color;
 import android.graphics.Canvas;
 import android.graphics.Path;
-import android.graphics.Rect;
-import android.graphics.Region;
+// import android.graphics.Rect;
+// import android.graphics.Region;
 import android.graphics.Matrix;
 
 import android.widget.Button;

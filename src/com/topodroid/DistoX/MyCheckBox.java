@@ -14,12 +14,12 @@ package com.topodroid.DistoX;
 import android.content.Context;
 
 import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+// import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup.MarginLayoutParams;
+// import android.view.View.OnClickListener;
+// import android.view.ViewGroup.MarginLayoutParams;
 
-import android.util.Log;
+// import android.util.Log;
 
 /**
  */

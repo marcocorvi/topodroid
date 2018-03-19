@@ -19,32 +19,32 @@ import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.inputmethodservice.KeyboardView.OnKeyboardActionListener;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 
 import android.widget.EditText;
 
 import android.content.Context;
-import android.os.Bundle;
+// import android.os.Bundle;
 
 import android.view.View;
 import android.view.View.OnKeyListener;
-import android.view.View.OnClickListener; 
+// import android.view.View.OnClickListener; 
 import android.view.View.OnFocusChangeListener; 
-import android.view.View.OnTouchListener; 
-import android.view.Gravity; 
-import android.view.Window; 
-import android.view.WindowManager; 
+// import android.view.View.OnTouchListener; 
+// import android.view.Gravity; 
+// import android.view.Window; 
+// import android.view.WindowManager; 
 import android.view.inputmethod.InputMethodManager; 
 import android.view.KeyEvent;
-import android.view.MotionEvent;
-import android.view.ViewGroup;
+// import android.view.MotionEvent;
+// import android.view.ViewGroup;
 
 import android.text.InputType;
 import android.text.Editable;
-import android.text.Layout;
+// import android.text.Layout;
 import android.text.method.KeyListener; 
 
-import android.util.Log;
+// import android.util.Log;
 
 /* you need to override EditText::onTouchListener()
  */
@@ -206,9 +206,8 @@ class MyKeyboard // FIXME DIALOG extends Dialog
   {
     mKeyboardView.setVisibility( View.VISIBLE );
     mKeyboardView.setEnabled( true );
-    if ( v != null ) {
-
-    }
+    // if ( v != null ) {
+    // }
   }
 
   private void switchKeyboard( int flag )
@@ -299,15 +298,15 @@ class MyKeyboard // FIXME DIALOG extends Dialog
     return false;
   }
 
-  final static char CHAR_MINUS      = (char)'-';
+  final static private char CHAR_MINUS      = (char)'-';
   final static char CHAR_PLUS_MINUS = (char)177;
-  final static char CHAR_DEGREE     = (char)176;
-  final static char CHAR_MINUTE     = (char)39;
-  final static char CHAR_POINT      = (char)46;
-  final static char CHAR_CURSOR     = (char)95; // 95 underscore, 124 vert bar, 63 question mark 166 broken vert bar
-  final static String STR_DEGREE  = Character.toString( CHAR_DEGREE );
-  final static String STR_MINUTE  = Character.toString( CHAR_MINUTE );
-  final static String STR_POINT   = Character.toString( CHAR_POINT  );
+  final static private char CHAR_DEGREE     = (char)176;
+  final static private char CHAR_MINUTE     = (char)39;
+  final static private char CHAR_POINT      = (char)46;
+  final static private char CHAR_CURSOR     = (char)95; // 95 underscore, 124 vert bar, 63 question mark 166 broken vert bar
+  final static private String STR_DEGREE  = Character.toString( CHAR_DEGREE );
+  final static private String STR_MINUTE  = Character.toString( CHAR_MINUTE );
+  final static private String STR_POINT   = Character.toString( CHAR_POINT  );
 
 
   @Override
@@ -389,8 +388,8 @@ class MyKeyboard // FIXME DIALOG extends Dialog
       }
       // editable.cursorAt( editable.length() );
       // setTitle( editable.toString() );
-    } else {
-      // Log.d( TAG, "Keycode " + keyCode );
+    // } else {
+    //   // Log.d( TAG, "Keycode " + keyCode );
     }
   }
 

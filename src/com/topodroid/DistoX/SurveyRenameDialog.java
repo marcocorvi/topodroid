@@ -11,11 +11,11 @@
  */
 package com.topodroid.DistoX;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 // import android.app.Activity;
 import android.os.Bundle;
 
-import android.content.Intent;
+// import android.content.Intent;
 import android.content.Context;
 
 import android.widget.EditText;
@@ -23,7 +23,7 @@ import android.widget.Button;
 import android.view.View;
 // import android.view.View.OnKeyListener;
 // import android.view.KeyEvent;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 
 
 class SurveyRenameDialog extends MyDialog
@@ -46,9 +46,8 @@ class SurveyRenameDialog extends MyDialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-
-    setContentView(R.layout.survey_rename_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout(R.layout.survey_rename_dialog, R.string.title_survey_rename );
+    
     mBtnOK   = (Button) findViewById(R.id.btn_ok );
     mBtnBack = (Button) findViewById(R.id.btn_back );
 
@@ -57,8 +56,6 @@ class SurveyRenameDialog extends MyDialog
 
     mEtName = (EditText) findViewById( R.id.et_name );
     mEtName.setText( mParent.getSurveyName( ) );
-
-    setTitle( R.string.title_survey_rename );
   }
 
   @Override
@@ -69,8 +66,8 @@ class SurveyRenameDialog extends MyDialog
     Button b = (Button) v;
     if ( b == mBtnOK ) {
       mParent.renameSurvey( mEtName.getText().toString() );
-    } else if ( b == mBtnBack ) {
-      /* nothing */
+    // } else if ( b == mBtnBack ) {
+    //   /* nothing */
     }
     dismiss();
   }

@@ -11,8 +11,8 @@
  */
 package com.topodroid.DistoX;
 
-import java.io.File;
-import java.io.FileReader;
+// import java.io.File;
+// import java.io.FileReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
@@ -26,8 +26,8 @@ import android.graphics.PathEffect;
 import android.graphics.ComposePathEffect;
 import android.graphics.DashPathEffect;
 import android.graphics.PathDashPathEffect;
-import android.graphics.PathDashPathEffect.Style;
-import android.graphics.Matrix;
+// import android.graphics.PathDashPathEffect.Style;
+// import android.graphics.Matrix;
 
 // import android.util.Log;
 

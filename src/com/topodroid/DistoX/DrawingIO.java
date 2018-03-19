@@ -1108,25 +1108,39 @@ class DrawingIO
           DrawingPath p = (DrawingPath) cmd;
           if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
             DrawingPointPath pp = (DrawingPointPath)p;
-            out.write( pp.toTherion() );
-            out.newLine();
+            String pp_str = pp.toTherion();
+	    if ( pp_str != null ) {
+              out.write( pp_str );
+              out.newLine();
+	    }
           } else if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) { // should never happen
             // if ( ! TDSetting.mAutoStations ) {
             //   DrawingStationPath st = (DrawingStationPath)p;
-            //   out.write( st.toTherion() );
-            //   out.newLine();
-            // }
+            //   String st_str = st.toTherion();
+	    //   if ( st_str != null ) {
+            //     out.write( st_str );
+            //     out.newLine();
+            //   }
+	    // }
           } else if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
             DrawingLinePath lp = (DrawingLinePath)p;
             if ( lp.size() > 1 ) {
-              out.write( lp.toTherion() );
-              out.newLine();
-            }
+              String lp_str = lp.toTherion();
+	      if ( lp_str != null ) {
+                out.write( lp_str );
+                out.newLine();
+              }
+	    }
           } else if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
             DrawingAreaPath ap = (DrawingAreaPath)p;
-            out.write( ap.toTherion() );
-            out.newLine();
-          }
+            if ( ap.size() > 2 ) {
+              String ap_str = ap.toTherion();
+	      if ( ap_str != null ) {
+                out.write( ap_str );
+                out.newLine();
+              }
+	    }
+	  }
         }
       }
       out.newLine();
@@ -1155,8 +1169,11 @@ class DrawingIO
           // FIXME if station is in the convex hull (bbox) of the lines
           if ( bbox.left > st.cx || bbox.right  < st.cx ) continue;
           if ( bbox.top  > st.cy || bbox.bottom < st.cy ) continue;
-          out.write( st.toTherion() );
-          out.newLine();
+	  String st_str = st.toTherion();
+	  if ( st_str != null ) {
+            out.write( st_str );
+            out.newLine();
+	  }
 /*
  * this was to export splays by the station instead of all of them
  *
@@ -1197,9 +1214,12 @@ class DrawingIO
       } else {
         synchronized( userstations ) {
           for ( DrawingStationPath sp : userstations ) {
-            out.write( sp.toTherion() );
-            out.newLine();
-          }
+            String sp_str = sp.toTherion();
+	    if ( sp_str != null ) {
+              out.write( sp_str );
+              out.newLine();
+            }
+	  }
         }
       }
       exportTherionClose( out );
@@ -1223,6 +1243,7 @@ class DrawingIO
     String points = "";
     String lines  = "";
     String areas  = "";
+    String th_str;
 
     // synchronized( TDPath.mTherionLock ) 
     {
@@ -1272,23 +1293,29 @@ class DrawingIO
               }
               break;
             case 'P':
-              out.write( DrawingPointPath.loadDataStream( version, dis, 0, 0, null ).toTherion() );
+              th_str = DrawingPointPath.loadDataStream( version, dis, 0, 0, null ).toTherion();
+	      if ( th_str != null ) out.write( th_str );
               break;
             case 'T':
-              out.write( DrawingLabelPath.loadDataStream( version, dis, 0, 0 ).toTherion() );
+              th_str = DrawingLabelPath.loadDataStream( version, dis, 0, 0 ).toTherion();
+	      if ( th_str != null ) out.write( th_str );
               break;
             case 'L':
-              out.write( DrawingLinePath.loadDataStream( version, dis, 0, 0, null ).toTherion() );
+              th_str = DrawingLinePath.loadDataStream( version, dis, 0, 0, null ).toTherion();
+	      if ( th_str != null ) out.write( th_str );
               break;
             case 'A':
-              out.write( DrawingAreaPath.loadDataStream( version, dis, 0, 0, null ).toTherion() );
+              th_str = DrawingAreaPath.loadDataStream( version, dis, 0, 0, null ).toTherion();
+	      if ( th_str != null ) out.write( th_str );
               break;
             case 'U':
-              out.write( DrawingStationPath.loadDataStream( version, dis ).toTherion() );
+              th_str = DrawingStationPath.loadDataStream( version, dis ).toTherion();
+	      if ( th_str != null ) out.write( th_str );
               break;
             case 'X':
               // NOTE need to check XSection ??? STATION_XSECTION
-              out.write( DrawingStationName.loadDataStream( version, dis ).toTherion() );
+              th_str = DrawingStationName.loadDataStream( version, dis ).toTherion();
+	      if ( th_str != null ) out.write( th_str );
               break;
             case 'F':
               break; // continue parsing stations

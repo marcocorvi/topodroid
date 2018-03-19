@@ -30,14 +30,14 @@
       <item name="android:layout_marginTop">-10dip</item>
       <item name="android:paddingTop">-8dip</item>
       <item name="android:textSize">18sp</item>
-      <item name="android:textColor">#6699ff</item>
+      <item name="android:textColor">@color/title</item>
     </style>
 
     <style name="Theme.Dialog" parent="@android:style/Theme.Dialog">
       <item name="android:layout_marginTop">0dip</item>
       <item name="android:paddingTop">2dip</item>
       <item name="android:textSize">14sp</item>
-      <item name="android:textColor">#ffffff</item>
+      <item name="android:textColor">@color/text</item>
     </style>
 
 <!-- MATERIAL
@@ -125,8 +125,8 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:singleLine">true</item>
         <item name="android:inputType">number</item>
-        <item name="android:textColor">#ffffff</item>
-        <item name="android:textColorHint">#666666</item>
+	<item name="android:textColor">@color/text</item>
+	<item name="android:textColorHint">@color/hint</item>
     </style>
 
     <style name="edit_number_light">
@@ -134,8 +134,8 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:singleLine">true</item>
         <item name="android:inputType">number</item>
-        <item name="android:textColor">#ffffff</item>
-        <item name="android:textColorHint">#999999</item>
+	<item name="android:textColor">@color/text</item>
+	<item name="android:textColorHint">@color/hint</item>
     </style>
 
     <style name="edit_decimal">
@@ -143,8 +143,8 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:singleLine">true</item>
         <item name="android:inputType">numberDecimal</item>
-        <item name="android:textColor">#ffffff</item>
-        <item name="android:textColorHint">#666666</item>
+	<item name="android:textColor">@color/text</item>
+	<item name="android:textColorHint">@color/hint</item>
     </style>
 
     <style name="edit_decimal_light">
@@ -152,8 +152,8 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:singleLine">true</item>
         <item name="android:inputType">numberDecimal</item>
-        <item name="android:textColor">#ffffff</item>
-        <item name="android:textColorHint">#999999</item>
+	<item name="android:textColor">@color/text</item>
+	<item name="android:textColorHint">@color/hint</item>
     </style>
 
     <style name="edit_signeddecimal">
@@ -161,8 +161,8 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:singleLine">true</item>
         <item name="android:inputType">numberDecimal|numberSigned</item>
-        <item name="android:textColor">#ffffff</item>
-        <item name="android:textColorHint">#666666</item>
+	<item name="android:textColor">@color/text</item>
+	<item name="android:textColorHint">@color/hint</item>
     </style>
 
     <style name="edit_signeddecimal_light">
@@ -170,8 +170,8 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:singleLine">true</item>
         <item name="android:inputType">numberDecimal|numberSigned</item>
-        <item name="android:textColor">#ffffff</item>
-        <item name="android:textColorHint">#999999</item>
+	<item name="android:textColor">@color/text</item>
+	<item name="android:textColorHint">@color/hint</item>
     </style>
 
     <style name="edit_text">
@@ -179,8 +179,8 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:singleLine">true</item>
         <item name="android:inputType">text</item>
-        <item name="android:textColor">#ffffff</item>
-        <item name="android:textColorHint">#666666</item>
+	<item name="android:textColor">@color/text</item>
+	<item name="android:textColorHint">@color/hint</item>
     </style>
 
     <style name="edit_text_light">
@@ -188,8 +188,8 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:singleLine">true</item>
         <item name="android:inputType">text</item>
-        <item name="android:textColor">#ffffff</item>
-        <item name="android:textColorHint">#999999</item>
+	<item name="android:textColor">@color/text</item>
+	<item name="android:textColorHint">@color/hint</item>
     </style>
 
     <style name="keyboard">

@@ -13,11 +13,11 @@ package com.topodroid.DistoX;
 
 import java.util.ArrayList;
 
-import android.os.Handler;
+// import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
 
-import android.util.Log;
+// import android.util.Log;
 
 class ListerSetHandler extends ListerHandler
 {

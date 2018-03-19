@@ -17,13 +17,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.BroadcastReceiver;
+// import android.content.Context;
+// import android.content.Intent;
+// import android.content.IntentFilter;
+// import android.content.BroadcastReceiver;
 
 import android.widget.Toast;
-import android.util.Log;
+// import android.util.Log;
 
 class TopoDroidComm
 {
@@ -114,7 +114,7 @@ class TopoDroidComm
           TDLog.Log( TDLog.LOG_DISTOX, "DATA PACKET " + d + " " + b + " " + c );
           // NOTE type=0 shot is DistoX-type
           long status = ( d > TDSetting.mMaxShotLength )? TDStatus.OVERSHOOT : TDStatus.NORMAL;
-          mLastShotId = mApp.mData.insertDistoXShot( mApp.mSID, -1L, d, b, c, r, DBlock.EXTEND_IGNORE, status, true );
+          mLastShotId = TopoDroidApp.mData.insertDistoXShot( mApp.mSID, -1L, d, b, c, r, DBlock.EXTEND_IGNORE, status, true );
           if ( mLister != null ) { // FIXME LISTER sendMessage with mLastShotId only
             Message msg = mLister.obtainMessage( Lister.UPDATE );
             Bundle bundle = new Bundle();
@@ -146,7 +146,7 @@ class TopoDroidComm
           // get G and M from mProto and save them to store
           TDLog.Log( TDLog.LOG_PROTO, "save G " + mProto.mGX + " " + mProto.mGY + " " + mProto.mGZ + 
                             " M " + mProto.mMX + " " + mProto.mMY + " " + mProto.mMZ );
-          long cblk = mApp.mDData.insertGM( mApp.mCID, mProto.mGX, mProto.mGY, mProto.mGZ, mProto.mMX, mProto.mMY, mProto.mMZ );
+          long cblk = TopoDroidApp.mDData.insertGM( mApp.mCID, mProto.mGX, mProto.mGY, mProto.mGZ, mProto.mMX, mProto.mMY, mProto.mMZ );
           if ( mLister != null ) {
             Message msg = mLister.obtainMessage( Lister.UPDATE );
             Bundle bundle = new Bundle();
@@ -156,7 +156,7 @@ class TopoDroidComm
           }
           if ( ! hasG ) {
             TDLog.Error( "data without G packet " + nReadPackets );
-            TopoDroidApp.mActivity.runOnUiThread( new Runnable() {
+            mApp.mActivity.runOnUiThread( new Runnable() {
               public void run() {
                 Toast toast = Toast.makeText(mApp, "data without G: " + nReadPackets, Toast.LENGTH_SHORT );
                 toast.getView().setBackgroundColor( 0xff993333 );
@@ -196,7 +196,7 @@ class TopoDroidComm
           double roll = mProto.mRoll;
           TDLog.Log( TDLog.LOG_DISTOX, "VECTOR PACKET " + mLastShotId + " " + acc + " " + mag + " " + dip + " " + roll );
           if ( mApp.distoType() == Device.DISTO_X310 ) {
-            mApp.mData.updateShotAMDR( mLastShotId, mApp.mSID, acc, mag, dip, roll, true );
+            TopoDroidApp.mData.updateShotAMDR( mLastShotId, mApp.mSID, acc, mag, dip, roll, true );
             if ( TDSetting.mWaitData > 10 ) {
               try {
                 Thread.sleep( TDSetting.mWaitData ); // slowdown

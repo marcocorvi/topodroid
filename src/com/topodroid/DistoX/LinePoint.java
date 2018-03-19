@@ -22,14 +22,14 @@
 package com.topodroid.DistoX;
 
 import java.io.PrintWriter;
-import java.io.DataInputStream;
+// import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Locale;
 
 import android.graphics.Matrix;
 
-import android.util.Log;
+// import android.util.Log;
 
 class LinePoint extends Point2D
 {

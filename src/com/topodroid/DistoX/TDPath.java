@@ -19,12 +19,12 @@ import java.io.FileFilter;
 import java.util.List;
 
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
-import android.os.Messenger;
-import android.os.RemoteException;
+// import android.os.Handler;
+// import android.os.Message;
+// import android.os.Messenger;
+// import android.os.RemoteException;
 
-import android.util.Log;
+// import android.util.Log;
 
 class TDPath
 {

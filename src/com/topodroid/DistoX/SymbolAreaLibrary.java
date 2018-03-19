@@ -12,21 +12,21 @@
 package com.topodroid.DistoX;
 
 import java.util.Locale;
-import java.util.ArrayList;
-import java.util.TreeSet;
+// import java.util.ArrayList;
+// import java.util.TreeSet;
 import java.io.File;
-import java.io.PrintWriter;
-import java.io.DataOutputStream;
-import java.io.IOException;
+// import java.io.PrintWriter;
+// import java.io.DataOutputStream;
+// import java.io.IOException;
 
-import android.graphics.Paint;
+// import android.graphics.Paint;
 import android.graphics.Bitmap;
 import android.graphics.Shader;
 import android.graphics.BitmapShader;
 import android.graphics.Shader.TileMode;
 import android.content.res.Resources;
 
-import android.util.Log;
+// import android.util.Log;
 
 class SymbolAreaLibrary extends SymbolLibrary
 {
@@ -49,7 +49,7 @@ class SymbolAreaLibrary extends SymbolLibrary
   boolean isCloseHorizontal( int k ) 
   {
     SymbolArea s = (SymbolArea)getSymbolByIndex(k);
-    return ( s == null )? false : s.mCloseHorizontal;
+    return ( s != null ) && s.mCloseHorizontal;
   }
 
   // FIXME AREA_ORIENT
@@ -84,8 +84,7 @@ class SymbolAreaLibrary extends SymbolLibrary
     if ( s == null ) return null; 
     Bitmap b = s.mShaderBitmap;
     if ( b == null ) return null;
-    BitmapShader ret = new BitmapShader( b, s.mXMode, s.mYMode );
-    return ret;
+    return new BitmapShader( b, s.mXMode, s.mYMode );
   }
   
   TileMode getAreaXMode( int k ) 
@@ -192,7 +191,7 @@ class SymbolAreaLibrary extends SymbolLibrary
       symbol = new SymbolArea( file.getPath(), file.getName(), locale, iso );
       addSymbol( symbol );
     }
-    if ( symbol == null ) return false;
+    // if ( symbol == null ) return false; // ALWAYS false
     if ( ! symbol.isEnabled() ) {
       symbol.setEnabled( true ); // TopoDroidApp.mData.isSymbolEnabled( mPrefix + symbol.mThName ) );
       makeEnabledList();

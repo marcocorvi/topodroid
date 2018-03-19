@@ -12,7 +12,7 @@
 package com.topodroid.DistoX;
 
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 
 import android.content.Context;
@@ -20,12 +20,12 @@ import android.content.Context;
 // import android.widget.EditText;
 import android.widget.Button;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
+// import android.widget.RadioGroup;
 import android.widget.CheckBox;
 import android.view.View;
-import android.view.View.OnClickListener;
+// import android.view.View.OnClickListener;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 
 class SketchModeDialog extends MyDialog
                               implements View.OnClickListener

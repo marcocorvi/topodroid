@@ -293,6 +293,7 @@ class DrawingLinePath extends DrawingPointLinePath
   @Override
   public String toTherion( )
   {
+    if ( mFirst == null ) return null;
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
     pw.format("line %s", BrushManager.mLineLib.getSymbolThName(mLineType) );

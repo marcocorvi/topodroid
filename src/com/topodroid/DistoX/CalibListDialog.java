@@ -21,7 +21,7 @@ import android.content.Context;
 
 import android.view.View;
 // import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -94,8 +94,8 @@ class CalibListDialog extends MyDialog
 
   private void updateList()
   {
-    if ( mApp.mDData != null && mApp.mDevice != null ) {
-      List< String > list = mApp.mDData.selectDeviceCalibs( mApp.mDevice.mAddress );
+    if ( TopoDroidApp.mDData != null && mApp.mDevice != null ) {
+      List< String > list = TopoDroidApp.mDData.selectDeviceCalibs( mApp.mDevice.mAddress );
       // mList.setAdapter( mArrayAdapter );
       mArrayAdapter.clear();
       for ( String item : list ) {

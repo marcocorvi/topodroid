@@ -13,7 +13,7 @@
  */
 package com.topodroid.DistoX;
 
-import android.graphics.PointF;
+// import android.graphics.PointF;
 
 class Point2D // extends PointF
 {

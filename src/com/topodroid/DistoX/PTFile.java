@@ -21,7 +21,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import android.util.Log;
+// import android.util.Log;
 
 class PTFile
 {

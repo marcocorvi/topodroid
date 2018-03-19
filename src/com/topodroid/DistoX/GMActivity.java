@@ -19,16 +19,16 @@ import java.util.ArrayList;
 // import java.lang.reflect.Method;
 // import java.lang.reflect.InvocationTargetException;
 
-import android.app.Application;
+// import android.app.Application;
 import android.app.Activity;
 // import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.os.AsyncTask;
+// import android.os.AsyncTask;
 // import android.os.Handler;
 // import android.os.Message;
 // import android.os.Parcelable;
 
-import android.content.Context;
+// import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.DialogInterface;
@@ -45,14 +45,14 @@ import android.view.KeyEvent;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
-import android.view.Menu;
+// import android.view.Menu;
 import android.view.MenuItem;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+// import android.graphics.Bitmap;
+// import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 
-import android.util.Log;
+// import android.util.Log;
 
 public class GMActivity extends Activity
                         implements OnItemClickListener
@@ -62,6 +62,7 @@ public class GMActivity extends Activity
                         , OnLongClickListener
 {
   private TopoDroidApp mApp;
+  private DeviceHelper mApp_mDData;
 
   private CalibAlgo mCalibration = null;
 
@@ -178,7 +179,7 @@ public class GMActivity extends Activity
   {
     long cid = mApp.mCID;
     if ( cid < 0 ) return -2;
-    List<CalibCBlock> list = mApp.mDData.selectAllGMs( cid, 0 ); 
+    List<CalibCBlock> list = mApp_mDData.selectAllGMs( cid, 0 ); 
     if ( list.size() < 16 ) {
       return -1;
     }
@@ -212,13 +213,13 @@ public class GMActivity extends Activity
       float[] errors = mCalibration.Errors();
       for ( int k = 0; k < list.size(); ++k ) {
         CalibCBlock cb = list.get( k );
-        mApp.mDData.updateGMError( cb.mId, cid, errors[k] );
+        mApp_mDData.updateGMError( cb.mId, cid, errors[k] );
         // cb.setError( errors[k] );
       }
 
       byte[] coeff = mCalibration.GetCoeff();
-      mApp.mDData.updateCalibCoeff( cid, CalibAlgo.coeffToString( coeff ) );
-      mApp.mDData.updateCalibError( cid, 
+      mApp_mDData.updateCalibCoeff( cid, CalibAlgo.coeffToString( coeff ) );
+      mApp_mDData.updateCalibError( cid, 
              mCalibration.Delta(),
              mCalibration.Delta2(),
              mCalibration.MaxError(),
@@ -239,12 +240,12 @@ public class GMActivity extends Activity
   {
     String device = mApp.distoAddress();
     if ( device == null ) return;
-    Long cid = mApp.mDData.getCalibCID( name, device );
+    Long cid = mApp_mDData.getCalibCID( name, device );
     if ( cid < 0 ) {
       return;
     }
-    List<CalibCBlock> list  = mApp.mDData.selectAllGMs( mApp.mCID, 0 );
-    List<CalibCBlock> list1 = mApp.mDData.selectAllGMs( cid, 0 );
+    List<CalibCBlock> list  = mApp_mDData.selectAllGMs( mApp.mCID, 0 );
+    List<CalibCBlock> list1 = mApp_mDData.selectAllGMs( cid, 0 );
     // list.addAll( list1 );
     int size  = list.size();
     int size1 = list1.size();
@@ -253,8 +254,8 @@ public class GMActivity extends Activity
       return;
     }
 
-    String coeffStr = mApp.mDData.selectCalibCoeff( cid );
-    int algo = mApp.mDData.selectCalibAlgo( cid );
+    String coeffStr = mApp_mDData.selectCalibCoeff( cid );
+    int algo = mApp_mDData.selectCalibAlgo( cid );
     if ( algo == 0 ) algo = mApp.getCalibAlgoFromDevice();
     CalibAlgo calib1 = null;
     switch ( algo ) {
@@ -272,8 +273,8 @@ public class GMActivity extends Activity
     // Log.v("DistoX", "Calib-1 algo " + algo );
     // calib1.dump();
 
-    coeffStr = mApp.mDData.selectCalibCoeff( mApp.mCID );
-    algo = mApp.mDData.selectCalibAlgo( mApp.mCID );
+    coeffStr = mApp_mDData.selectCalibCoeff( mApp.mCID );
+    algo = mApp_mDData.selectCalibAlgo( mApp.mCID );
     if ( algo == 0 ) algo = mApp.getCalibAlgoFromDevice();
     CalibAlgo calib0 = null;
     switch ( algo ) {
@@ -400,7 +401,7 @@ public class GMActivity extends Activity
 
   void handleComputeCalibResult( int job, int result )
   {
-    if ( ! mApp.mGMActivityVisible ) return;
+    if ( ! TopoDroidApp.mGMActivityVisible ) return;
     switch ( job ) {
       case CalibComputer.CALIB_COMPUTE_CALIB:
         resetTitle( );
@@ -465,7 +466,7 @@ public class GMActivity extends Activity
   void doResetGroups( long start_id )
   {
     // Log.v("DistoX", "Reset CID " + mApp.mCID + " from gid " + start_id );
-    mApp.mDData.resetAllGMs( mApp.mCID, start_id ); // reset all groups where status=0, and id >= start_id
+    mApp_mDData.resetAllGMs( mApp.mCID, start_id ); // reset all groups where status=0, and id >= start_id
   }
 
   /** called by CalibComputer Task
@@ -477,7 +478,7 @@ public class GMActivity extends Activity
     // Log.v("DistoX", "Compute CID " + cid + " from gid " + start_id );
     if ( cid < 0 ) return -2;
     float thr = TDMath.cosd( TDSetting.mGroupDistance );
-    List<CalibCBlock> list = mApp.mDData.selectAllGMs( cid, 0 );
+    List<CalibCBlock> list = mApp_mDData.selectAllGMs( cid, 0 );
     if ( list.size() < 4 ) {
       return -1;
     }
@@ -510,7 +511,7 @@ public class GMActivity extends Activity
             c = item.mClino;
           }
           item.setGroup( group );
-          mApp.mDData.updateGMName( item.mId, item.mCalibId, Long.toString( item.mGroup ) );
+          mApp_mDData.updateGMName( item.mId, item.mCalibId, Long.toString( item.mGroup ) );
           // N.B. item.calibId == cid
         }
         break;
@@ -519,7 +520,7 @@ public class GMActivity extends Activity
         for ( CalibCBlock item : list ) {
           if ( start_id >= 0 && item.mId <= start_id ) continue;
           item.setGroupIfNonZero( group );
-          mApp.mDData.updateGMName( item.mId, item.mCalibId, Long.toString( item.mGroup ) );
+          mApp_mDData.updateGMName( item.mId, item.mCalibId, Long.toString( item.mGroup ) );
           ++ cnt;
           if ( (cnt%4) == 0 ) {
             ++group;
@@ -531,7 +532,7 @@ public class GMActivity extends Activity
         for ( CalibCBlock item : list ) {
           if ( start_id >= 0 && item.mId <= start_id ) continue;
           item.setGroupIfNonZero( group );
-          mApp.mDData.updateGMName( item.mId, item.mCalibId, Long.toString( item.mGroup ) );
+          mApp_mDData.updateGMName( item.mId, item.mCalibId, Long.toString( item.mGroup ) );
           ++ cnt;
           if ( (cnt%4) == 0 || cnt >= 16 ) ++group;
         }
@@ -579,7 +580,7 @@ public class GMActivity extends Activity
   @Override
   public void updateBlockList( long blk_id ) 
   {
-    updateBlockList( mApp.mDData.selectGM( blk_id, mApp.mCID ) );
+    updateBlockList( mApp_mDData.selectGM( blk_id, mApp.mCID ) );
   }
 
   @Override
@@ -598,8 +599,8 @@ public class GMActivity extends Activity
     // Log.v( TopoDroidApp.TAG, "update Display CID " + mApp.mCID );
     resetTitle( );
     mDataAdapter.clear();
-    if ( mApp.mDData != null && mApp.mCID >= 0 ) {
-      List<CalibCBlock> list = mApp.mDData.selectAllGMs( mApp.mCID, mBlkStatus );
+    if ( mApp_mDData != null && mApp.mCID >= 0 ) {
+      List<CalibCBlock> list = mApp_mDData.selectAllGMs( mApp.mCID, mBlkStatus );
       // Log.v( TopoDroidApp.TAG, "update Display GMs " + list.size() );
       updateGMList( list );
       setTitle( mCalibName );
@@ -683,6 +684,7 @@ public class GMActivity extends Activity
     super.onCreate( savedInstanceState );
     setContentView(R.layout.gm_activity);
     mApp = (TopoDroidApp) getApplication();
+    mApp_mDData = TopoDroidApp.mDData;
 
     mDataAdapter  = new CalibCBlockAdapter( this, R.layout.row, new ArrayList<CalibCBlock>() );
 
@@ -876,7 +878,7 @@ public class GMActivity extends Activity
 
     } else if ( b == mButton1[BTN_GROUP] ) { // GROUP
       if ( mApp.mCID >= 0 ) {
-        List< CalibCBlock > list = mApp.mDData.selectAllGMs( mApp.mCID, 0 );
+        List< CalibCBlock > list = mApp_mDData.selectAllGMs( mApp.mCID, 0 );
         if ( list.size() >= 16 ) {
           (new GMGroupsDialog( this, this, 
             ( TDSetting.mGroupBy == TDSetting.GROUP_BY_DISTANCE )?
@@ -913,7 +915,7 @@ public class GMActivity extends Activity
       if ( mCalibration == null ) {
         Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT ).show();
       } else {
-        List< CalibCBlock > list = mApp.mDData.selectAllGMs( mApp.mCID, 0 );
+        List< CalibCBlock > list = mApp_mDData.selectAllGMs( mApp.mCID, 0 );
         if ( list.size() >= 16 ) {
           ( new CalibCoverageDialog( this, list, mCalibration ) ).show();
         } else {
@@ -992,14 +994,14 @@ public class GMActivity extends Activity
     // Log.v( TopoDroidApp.TAG, "onResume ");
     updateDisplay( );
     // mApp.registerConnListener( mHandler );
-    mApp.mGMActivityVisible = true;
+    TopoDroidApp.mGMActivityVisible = true;
   }
 
   @Override
   protected synchronized void onPause() 
   { 
     super.onPause();
-    mApp.mGMActivityVisible = false;
+    TopoDroidApp.mGMActivityVisible = false;
     // mApp.unregisterConnListener( mHandler );
     // if ( mApp.mComm != null ) { mApp.mComm.suspend(); }
   }
@@ -1040,7 +1042,7 @@ public class GMActivity extends Activity
  
   void updateGM( long value, String name )
   {
-    mApp.mDData.updateGMName( mCIDid, mApp.mCID, name );
+    mApp_mDData.updateGMName( mCIDid, mApp.mCID, name );
     String id = Long.toString(mCIDid);
     // CalibCBlock blk = mApp.mDData.selectGM( mCIDid, mApp.mCID );
     mSaveCBlock.setGroup( value );
@@ -1057,7 +1059,7 @@ public class GMActivity extends Activity
 
   void deleteGM( boolean delete )
   {
-    mApp.mDData.deleteGM( mApp.mCID, mCIDid, delete );
+    mApp_mDData.deleteGM( mApp.mCID, mCIDid, delete );
     updateDisplay( );
   }
 
@@ -1131,7 +1133,7 @@ public class GMActivity extends Activity
       mBlkStatus = 1 - mBlkStatus;       // 0 --> 1;  1 --> 0
       updateDisplay( );
     } else if ( TDLevel.overAdvanced && p++ == pos ) { // VALIDATE
-      List< String > list = mApp.mDData.selectDeviceCalibs( mApp.mDevice.mAddress );
+      List< String > list = mApp_mDData.selectDeviceCalibs( mApp.mDevice.mAddress );
       for ( String str : list ) {
         int len = str.indexOf(' ');
         if ( mApp.myCalib.equals( str.substring(0,len) ) ) {

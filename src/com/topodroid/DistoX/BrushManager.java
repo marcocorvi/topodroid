@@ -11,16 +11,16 @@
  */
 package com.topodroid.DistoX;
 
-import java.lang.Math;
+// import java.lang.Math;
 
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.DashPathEffect;
-import android.graphics.Matrix;
+// import android.graphics.Matrix;
 import android.graphics.Bitmap;
 import android.graphics.Shader;
 import android.graphics.BitmapShader;
-import android.graphics.drawable.BitmapDrawable;
+// import android.graphics.drawable.BitmapDrawable;
 import android.graphics.Shader.TileMode;
 
 import android.content.Context;

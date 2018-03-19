@@ -12,13 +12,13 @@
 package com.topodroid.DistoX;
 
 import java.util.Locale;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 import android.widget.RadioButton;
 
@@ -26,9 +26,9 @@ import android.widget.RadioButton;
 // import android.widget.ArrayAdapter;
 
 import android.content.Context;
-import android.content.Intent;
+// import android.content.Intent;
 
-import android.text.InputType;
+// import android.text.InputType;
 import android.inputmethodservice.KeyboardView;
 
 import android.widget.TextView;
@@ -37,11 +37,11 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.view.View.OnKeyListener;
-import android.view.KeyEvent;
+// import android.view.ViewGroup.LayoutParams;
+// import android.view.View.OnKeyListener;
+// import android.view.KeyEvent;
 
-import android.util.Log;
+// import android.util.Log;
 
 
 class ShotNewDialog extends MyDialog
@@ -462,7 +462,7 @@ class ShotNewDialog extends MyDialog
       if ( blk != null ) {
         if ( mJpegData != null ) { 
           // Log.v("DistoX", "save Jpeg image size " + mJpegData.length );
-          long photo_id = mApp.mData.nextPhotoId( mApp.mSID );
+          long photo_id = TopoDroidApp.mData.nextPhotoId( mApp.mSID );
           File imagefile = new File( TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString(photo_id ) ) );
           try {
             FileOutputStream fos = new FileOutputStream( imagefile );
@@ -470,7 +470,7 @@ class ShotNewDialog extends MyDialog
             fos.flush();
             fos.close();
 	    MyBearingAndClino.setExifBearingAndClino( imagefile, mBearing, mClino, mOrientation );
-            mApp.mData.insertPhoto( mApp.mSID, photo_id, blk.mId,
+            TopoDroidApp.mData.insertPhoto( mApp.mSID, photo_id, blk.mId,
                                     "",
                                     TopoDroidUtil.currentDate(),
                                     "snap " + shot_from + " " + shot_to ); // FIXME TITLE has to go

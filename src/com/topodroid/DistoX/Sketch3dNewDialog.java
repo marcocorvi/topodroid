@@ -12,19 +12,19 @@
 package com.topodroid.DistoX;
 
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 
 import android.content.Context;
 
 import android.widget.EditText;
 import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+// import android.widget.RadioButton;
+// import android.widget.RadioGroup;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 
 class Sketch3dNewDialog extends MyDialog
                                implements View.OnClickListener
@@ -90,7 +90,7 @@ class Sketch3dNewDialog extends MyDialog
           mEditStart.setError( error );
           return;
         } else {
-          if ( next != null ) {
+          // if ( next != null ) {
             next = TopoDroidUtil.noSpaces( next );
             if ( next.length() > 0 ) {
               if ( ! TopoDroidApp.mData.hasShot( mApp.mSID, start, next ) ) {
@@ -101,7 +101,7 @@ class Sketch3dNewDialog extends MyDialog
             } else {
               next = null;
             }
-          }
+          // }
           mMaker.makeNewSketch3d( name, start, next );
         }
       }

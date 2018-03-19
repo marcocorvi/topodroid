@@ -54,7 +54,7 @@ class CalibAlgo
     return new Vector( x/TopoDroidUtil.FV, y/TopoDroidUtil.FV, z/TopoDroidUtil.FV );
   }
 
-  static final double MAX_M_VALUE = 1.99993896;
+  static final private double MAX_M_VALUE = 1.99993896;
 
   // this should never happen with BH algo
   //

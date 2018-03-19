@@ -16,7 +16,7 @@ import java.util.Locale;
 // import android.app.Dialog;
 import android.os.Bundle;
 
-import android.text.method.KeyListener;
+// import android.text.method.KeyListener;
 
 import android.content.Context;
 // import android.util.AttributeSet;

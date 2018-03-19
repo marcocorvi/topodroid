@@ -17,32 +17,32 @@ package com.topodroid.DistoX;
 
 import java.io.File;
 
-import java.util.List;
-import java.util.ArrayList;
+// import java.util.List;
+// import java.util.ArrayList;
 
 import android.os.Bundle;
-import android.app.Dialog;
+// import android.app.Dialog;
 
 import android.content.Context;
 
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.View.OnClickListener;
+// import android.view.ViewGroup.LayoutParams;
 
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Button;
-import android.widget.CheckBox;
+// import android.widget.CheckBox;
 
 import android.widget.TextView;
-import android.widget.EditText;
+// import android.widget.EditText;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 // import android.widget.AdapterView.OnItemLongClickListener;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 
-import android.util.Log;
+// import android.util.Log;
 
 class PlotRecoverDialog extends MyDialog
                         implements View.OnClickListener

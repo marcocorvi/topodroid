@@ -167,7 +167,7 @@ class DrawingStationName extends DrawingPointPath
   @Override
   public String toTherion( )
   {
-    if ( mStation == null ) return ""; // empty string
+    if ( mStation == null ) return null; // FIXME
     return String.format(Locale.US, "point %.2f %.2f station -name \"%s\"", cx*toTherion, -cy*toTherion, mName );
   }
 

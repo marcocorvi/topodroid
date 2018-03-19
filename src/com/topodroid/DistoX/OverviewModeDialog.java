@@ -12,7 +12,7 @@
 package com.topodroid.DistoX;
 
 import android.os.Bundle;
-import android.app.Dialog;
+// import android.app.Dialog;
 // import android.app.Activity;
 import android.content.Context;
 // import android.content.Intent;

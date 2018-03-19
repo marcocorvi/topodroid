@@ -19,22 +19,22 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 
-import android.view.Window;
+// import android.view.Window;
 
 // import android.graphics.*;
 import android.view.View;
 import android.widget.Button;
 
-import android.widget.AdapterView;
+// import android.widget.AdapterView;
 // import android.widget.AdapterView.OnItemClickListener;
 
 // import android.widget.TextView;
 import android.widget.ListView;
 
-import android.view.View;
+// import android.view.View;
 import android.view.View.OnClickListener;
 
-import android.util.Log;
+// import android.util.Log;
 
 class HelpDialog extends Dialog
                  implements OnClickListener
@@ -87,9 +87,9 @@ class HelpDialog extends Dialog
     mList.invalidate();
   }
 
-  void createAdapter()
+  private void createAdapter()
   {
-    Log.v("DistoX", "HELP create adapter mNr0 " + mNr0 );
+    // Log.v("DistoX", "HELP create adapter mNr0 " + mNr0 );
     mAdapter = new HelpAdapter( mContext, this, R.layout.item, new ArrayList<HelpEntry>() );
     // int np = mIcons.length;
     for ( int i=0; i<mNr0; ++i ) {

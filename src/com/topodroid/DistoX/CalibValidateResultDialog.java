@@ -33,7 +33,7 @@ class CalibValidateResultDialog extends MyDialog
   // private ImageView hist2;
   private String avestd0;
   private String avestd1;
-  private String std;
+  private String std; // UNUSED
   private String err1;
   private String err2;
   private String errmax;

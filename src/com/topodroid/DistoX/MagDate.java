@@ -22,10 +22,10 @@ package com.topodroid.DistoX;
 // MAGtype_Date;
 class MagDate
 {
-    static int MonthDays[] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-    int Year;
-    int Month;
-    int Day;
+    static private int MonthDays[] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    private int Year;
+    private int Month;
+    private int Day;
     double DecimalYear; /* decimal years */
 
   MagDate( int y, int m, int d )
@@ -59,7 +59,7 @@ class MagDate
   }
 
   // MAG_DateToYear
-  double toDecimalYear( int year, int month, int day )
+  private double toDecimalYear( int year, int month, int day )
   {
     double yds = 365.0;
     if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {

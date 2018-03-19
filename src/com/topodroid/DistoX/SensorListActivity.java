@@ -11,32 +11,32 @@
  */
 package com.topodroid.DistoX;
 
-import java.io.File;
-import java.io.IOException;
+// import java.io.File;
+// import java.io.IOException;
 // import java.io.EOFException;
 // import java.io.DataInputStream;
 // import java.io.DataOutputStream;
-import java.io.BufferedReader;
-import java.io.FileReader;
+// import java.io.BufferedReader;
+// import java.io.FileReader;
 // import java.io.FileWriter;
 import java.util.List;
 import java.util.ArrayList;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+// import android.os.Handler;
+// import android.os.Message;
 
-import android.app.Application;
+// import android.app.Application;
 import android.app.Activity;
 
-import android.content.ActivityNotFoundException;
+// import android.content.ActivityNotFoundException;
 // import android.content.res.ColorStateList;
-import android.content.Context;
-import android.content.Intent;
+// import android.content.Context;
+// import android.content.Intent;
 
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.SubMenu;
+// import android.view.Menu;
+// import android.view.MenuItem;
+// import android.view.SubMenu;
 // import android.view.MenuInflater;
 import android.view.KeyEvent;
 
@@ -46,23 +46,23 @@ import android.view.KeyEvent;
 import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.app.Dialog;
-import android.widget.Button;
+// import android.app.Dialog;
+// import android.widget.Button;
 import android.view.View;
 // import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.preference.PreferenceManager;
+// import android.preference.PreferenceManager;
 
-import android.provider.MediaStore;
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
-import android.net.Uri;
+// import android.provider.MediaStore;
+// import android.graphics.Bitmap;
+// import android.graphics.Bitmap.CompressFormat;
+// import android.net.Uri;
 
 public class SensorListActivity extends Activity
                                 implements OnItemClickListener
 {
-  private TopoDroidApp app;
+  private TopoDroidApp mApp;
 
   private ListView mList;
   // private int mListPos = -1;
@@ -82,12 +82,11 @@ public class SensorListActivity extends Activity
   private void updateDisplay( )
   {
     // TDLog.Log( TDLog.LOG_SENSOR, "updateDisplay() status: " + StatusName() + " forcing: " + force_update );
-    DataHelper data = app.mData;
-    if ( data != null && app.mSID >= 0 ) {
-      List< SensorInfo > list = data.selectAllSensors( app.mSID, TDStatus.NORMAL );
+    if ( TopoDroidApp.mData != null && mApp.mSID >= 0 ) {
+      List< SensorInfo > list = TopoDroidApp.mData.selectAllSensors( mApp.mSID, TDStatus.NORMAL );
       // TDLog.Log( TDLog.LOG_PHOTO, "update shot list size " + list.size() );
       updateSensorList( list );
-      setTitle( app.mySurvey );
+      setTitle( mApp.mySurvey );
     // } else {
     //   Toast.makeText( this, R.string.no_survey, Toast.LENGTH_SHORT ).show();
     }
@@ -130,7 +129,8 @@ public class SensorListActivity extends Activity
   {
     super.onCreate( savedInstanceState );
     setContentView(R.layout.sensor_list_activity);
-    app = (TopoDroidApp) getApplication();
+    
+    mApp = (TopoDroidApp) getApplication();
     mDataAdapter = new SensorAdapter( this, R.layout.row, new ArrayList< SensorInfo >() );
 
     mList = (ListView) findViewById(R.id.list);
@@ -145,14 +145,14 @@ public class SensorListActivity extends Activity
 
   void dropSensor( SensorInfo sensor )
   {
-    app.mData.deleteSensor( sensor.sid, sensor.id );
+    TopoDroidApp.mData.deleteSensor( sensor.sid, sensor.id );
     updateDisplay( ); // FIXME
   }
 
   void updateSensor( SensorInfo sensor, String comment )
   {
     // TDLog.Log( TDLog.LOG_SENSOR, "updateSensor comment " + comment );
-    if ( app.mData.updateSensor( sensor.sid, sensor.id, comment ) ) {
+    if ( TopoDroidApp.mData.updateSensor( sensor.sid, sensor.id, comment ) ) {
       // if ( app.mListRefresh ) {
       //   // This works but it refreshes the whole list
       //   mDataAdapter.notifyDataSetChanged();

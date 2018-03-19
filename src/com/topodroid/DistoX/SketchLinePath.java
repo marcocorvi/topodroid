@@ -12,7 +12,7 @@
 package com.topodroid.DistoX;
 
 import android.graphics.Canvas;
-import android.graphics.Paint;
+// import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.Matrix;
@@ -22,11 +22,11 @@ import java.io.StringWriter;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 
-import java.util.Iterator;
+// import java.util.Iterator;
 // import java.util.List;
 import java.util.ArrayList;
 
-import android.util.Log;
+// import android.util.Log;
 
 /**
  */
@@ -182,6 +182,8 @@ class SketchLinePath extends SketchPath
   @Override
   public String toTherion()
   {
+    // FIXME if ( st1 == null || st2 == null ) return null;
+    // FIXME if ( mLine.size() == 0 ) return null;
     // Log.v("DistoX", "Line toTherion, stations " + st1 + " " + st2 );
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);

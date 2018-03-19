@@ -19,21 +19,21 @@ import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.io.IOException;
 
-import android.content.Intent;
+// import android.content.Intent;
 import android.content.Context;
-import android.content.ComponentName;
-import android.content.ServiceConnection;
-import android.app.Service;
-import android.os.IBinder;
-import android.os.Binder;
+// import android.content.ComponentName;
+// import android.content.ServiceConnection;
+// import android.app.Service;
+// import android.os.IBinder;
+// import android.os.Binder;
 
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
+// import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
 
-import android.util.Log;
+// import android.util.Log;
 
-public class VirtualDistoX 
+class VirtualDistoX 
 {
   private boolean mBound = false; // single client at once
 
@@ -57,7 +57,7 @@ public class VirtualDistoX
   // -------------------------------------------------------------
 
   // starting by startService()
-  public void startServer( Context ctx )
+  void startServer( Context ctx )
   {
     // Log.v("DistoX", "VD server: start ");
     mSharedPrefs = PreferenceManager.getDefaultSharedPreferences( ctx );
@@ -66,14 +66,14 @@ public class VirtualDistoX
     startServiceThread();
   }
 
-  public void stopServer( Context ctx )
+  void stopServer( Context ctx )
   {
     // Log.v("DistoX", "VD server: stop ");
     stopServiceThread();
     saveCalibration();
   }
 
-  public void bindServer()
+  void bindServer()
   {
     // Log.v("DistoX", "VD server: bind. bound: " + mBound );
     if ( ! mBound ) {
@@ -82,7 +82,7 @@ public class VirtualDistoX
     }
   }
 
-  public boolean unbindServer()
+  boolean unbindServer()
   {
     // Log.v("DistoX", "VD server: unbind. bound: " + mBound );
     mBound = false;
@@ -93,10 +93,10 @@ public class VirtualDistoX
   // -------------------------------------------------------------
   // data streams
   
-  PipedOutputStream  mServerToClient   = null;
-  PipedInputStream   mClientToServer   = null;
-  PipedOutputStream  mServerFromClient = null;
-  PipedInputStream   mClientFromServer = null;
+  private PipedOutputStream  mServerToClient   = null;
+  private PipedInputStream   mClientToServer   = null;
+  private PipedOutputStream  mServerFromClient = null;
+  private PipedInputStream   mClientFromServer = null;
   
 
   DataInputStream  getInputStream()
@@ -114,11 +114,11 @@ public class VirtualDistoX
   } 
 
   // TODO a thread handling I/O
-  volatile boolean mIOWaitAck = false;
-  volatile boolean mCmdDone   = false;
-  volatile boolean mDataDone  = false;
-  Thread mCmdThread  = null;
-  Thread mDataThread = null;
+  volatile private boolean mIOWaitAck = false;
+  volatile private boolean mCmdDone   = false;
+  volatile private boolean mDataDone  = false;
+  private Thread mCmdThread  = null;
+  private Thread mDataThread = null;
 
   private void startIOThread()
   {
@@ -256,14 +256,14 @@ public class VirtualDistoX
   // service thread
 
   private Thread mServiceThread = null;
-  int mCount;                  // octet index
-  boolean mCalibMode  = false; // whether to use raw data (calibration)
-  boolean mSilentMode = false;
+  private int mCount;                  // octet index
+  private boolean mCalibMode  = false; // whether to use raw data (calibration)
+  private boolean mSilentMode = false;
 
-  final static float G_MAX = 32768;
-  final static float M_MAX = 32768;
+  final static private float G_MAX = 32768;
+  final static private float M_MAX = 32768;
 
-  boolean mServiceThreadDone;
+  private boolean mServiceThreadDone;
   class ServiceThread extends Thread
   {
     public void run()
@@ -292,14 +292,14 @@ public class VirtualDistoX
     }
   };
 
-  void startServiceThread()
+  private void startServiceThread()
   {
     // Log.v("DistoX", "VD server: start service thread" );
     mServiceThread = new ServiceThread();
     mServiceThread.start();
   }
 
-  void stopServiceThread()
+  private void stopServiceThread()
   {
     // Log.v("DistoX", "VD server: stop service thread" );
     if ( mServiceThread == null ) return;

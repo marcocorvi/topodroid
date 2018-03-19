@@ -11,51 +11,51 @@
  */
 package com.topodroid.DistoX;
 
-import android.app.Activity;
+// import android.app.Activity;
 import android.content.Context;
-import android.content.ActivityNotFoundException;
+// import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.pm.ActivityInfo;
 
-import android.graphics.Bitmap;
-import android.graphics.Paint;
+// import android.graphics.Bitmap;
+// import android.graphics.Paint;
 import android.graphics.Paint.FontMetrics;
-import android.graphics.PointF;
-import android.graphics.Path;
-import android.graphics.Path.Direction;
+// import android.graphics.PointF;
+// import android.graphics.Path;
+// import android.graphics.Path.Direction;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
-import android.view.Menu;
-import android.view.SubMenu;
-import android.view.MenuItem;
+// import android.os.Message;
+// import android.view.Menu;
+// import android.view.SubMenu;
+// import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
+// import android.view.ViewGroup;
 import android.view.KeyEvent;
 // for FRAGMENT
-import android.view.ViewGroup;
-import android.view.LayoutInflater;
+// import android.view.ViewGroup;
+// import android.view.LayoutInflater;
 
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Button;
-import android.widget.ZoomControls;
-import android.widget.ZoomButton;
-import android.widget.ZoomButtonsController;
-import android.widget.ZoomButtonsController.OnZoomListener;
+// import android.widget.ZoomControls;
+// import android.widget.ZoomButton;
+// import android.widget.ZoomButtonsController;
+// import android.widget.ZoomButtonsController.OnZoomListener;
 import android.widget.Toast;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
-import android.hardware.SensorManager;
+// import android.hardware.SensorManager;
 
-import java.io.File;
+// import java.io.File;
 import java.io.FileWriter;
 // import java.io.StringWriter;
 import java.io.PrintWriter;
@@ -67,8 +67,8 @@ import java.util.List;
 import java.util.ArrayList;
 // import java.util.Locale;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+// import android.graphics.Bitmap;
+// import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 
 import android.util.Log;
@@ -471,9 +471,9 @@ public class SketchWindow extends ItemDrawer
    */
   private void resetZoom() 
   {
-    mInfo.resetZoom3d( mApp.mDisplayWidth/(10*mApp.mScaleFactor),
-                       mApp.mDisplayHeight/(10*mApp.mScaleFactor),
-                       10 * mApp.mScaleFactor );
+    mInfo.resetZoom3d( TopoDroidApp.mDisplayWidth/(10*TopoDroidApp.mScaleFactor),
+                       TopoDroidApp.mDisplayHeight/(10*TopoDroidApp.mScaleFactor),
+                       10 * TopoDroidApp.mScaleFactor );
     mModel.setTransform( mInfo.xoffset_3d, mInfo.yoffset_3d, mInfo.zoom_3d );
   }
 
@@ -549,7 +549,7 @@ public class SketchWindow extends ItemDrawer
   //   }
   // }
 
-  class SaveTh3File extends AsyncTask<Intent,Void,Boolean>
+  class SaveTh3File extends AsyncTask<Intent,Void,Boolean> // FIXME LEAK
   {
     private Context mContext;
     private Handler mHandler;
@@ -593,7 +593,7 @@ public class SketchWindow extends ItemDrawer
     }
   }
 
-  private class SaveTdr3File extends AsyncTask<Intent,Void,Boolean>
+  private class SaveTdr3File extends AsyncTask<Intent,Void,Boolean> // FIXME LEAK
   {
     private Context mContext;
     private Handler mHandler;
@@ -677,7 +677,7 @@ public class SketchWindow extends ItemDrawer
     }
   }
 
-  private class SaveDxfFile extends AsyncTask<Intent,Void,Boolean>
+  private class SaveDxfFile extends AsyncTask<Intent,Void,Boolean> // FIXME LEAK
   {
       private Context mContext;
       private Handler mHandler;
@@ -771,10 +771,13 @@ public class SketchWindow extends ItemDrawer
 
     BrushManager.makePaths( mApp, getResources() );
 
-    mData        = mApp.mData; // new DataHelper( this ); 
+    mData        = TopoDroidApp.mData; // new DataHelper( this ); 
     Bundle extras = getIntent().getExtras();
-    mSid         = extras.getLong(   TDTag.TOPODROID_SURVEY_ID );
-    String name  = extras.getString( TDTag.TOPODROID_SKETCH_NAME );
+    String name = "";
+    if ( extras != null ) {
+      mSid = extras.getLong(   TDTag.TOPODROID_SURVEY_ID );
+      name = extras.getString( TDTag.TOPODROID_SKETCH_NAME );
+    }
     mFullName    = mApp.mySurvey + "-" + name;
     // mCompass     = null;
     // mDecl = mData.getSurveyDeclination( mSid );
@@ -782,8 +785,8 @@ public class SketchWindow extends ItemDrawer
 
     mInfo      = mData.getSketch3dInfo( mSid, name );
     mPid       = mInfo.id;
-    mInfo.xcenter = mApp.mDisplayWidth/2;
-    mInfo.ycenter = mApp.mDisplayHeight/2;
+    mInfo.xcenter = TopoDroidApp.mDisplayWidth/2;
+    mInfo.ycenter = TopoDroidApp.mDisplayHeight/2;
 
     List<DBlock> list = mData.selectAllShots( mSid, TDStatus.NORMAL );
     if ( list.size() == 0 ) {
@@ -1047,13 +1050,13 @@ public class SketchWindow extends ItemDrawer
                              is_reference? BrushManager.highlightPaint : BrushManager.fixedShotPaint,
                              BrushManager.fixedBluePaint );
     }
-    if ( path != null ) {
+    // if ( path != null ) { // ALWAYS true
       // path.setEndPoints( x1, y1, x2, y2 ); // scene coords
       path.set3dMidpoint( (x1+x2)/2, (y1+y2)/2, (z1+z2)/2 );
       path.addPoint( x1, y1, z1 );
       path.addPoint( x2, y2, z2 );
       mModel.addFixedPath( path );
-    }
+    // }
   }
 
   // ------------------------------------------------------------------------------------

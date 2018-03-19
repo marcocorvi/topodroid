@@ -90,6 +90,7 @@
   <string name="SymbolEnableDialog">page_tools.htm</string>
   <string name="SymbolReload">page_symbol_reload.htm</string>
   <!-- string name="TopoDroidAlertDialog"></string -->
+  <string name="TopoDroidPerms">page_perms.htm</string>
   <string name="UndeleteDialog">page_undelete.htm</string>
 
 </resources>

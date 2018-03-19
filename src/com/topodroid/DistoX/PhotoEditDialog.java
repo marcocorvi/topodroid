@@ -13,12 +13,12 @@ package com.topodroid.DistoX;
 
 import java.io.IOException;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 
-import android.content.Intent;
+// import android.content.Intent;
 import android.content.Context;
-import android.net.Uri;
+// import android.net.Uri;
 
 import android.widget.TextView;
 import android.widget.EditText;
@@ -26,16 +26,16 @@ import android.widget.ImageView;
 import android.widget.Button;
 import android.widget.Toast;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.view.View.OnKeyListener;
-import android.view.KeyEvent;
+// import android.view.ViewGroup.LayoutParams;
+// import android.view.View.OnKeyListener;
+// import android.view.KeyEvent;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import android.media.ExifInterface;
 
-import android.util.Log;
+// import android.util.Log;
 
 public class PhotoEditDialog extends MyDialog
                              implements View.OnClickListener

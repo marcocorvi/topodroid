@@ -16,17 +16,17 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 // import android.app.Activity;
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Environment;
 
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -34,7 +34,7 @@ import android.widget.TextView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.TextView;
+// import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -45,15 +45,15 @@ import android.inputmethodservice.KeyboardView;
 
 import android.net.Uri;
 
-import android.util.Log;
+// import android.util.Log;
 
 class FixedImportDialog extends MyDialog
                                implements OnItemClickListener
                                         , OnClickListener
                                         , OnLongClickListener
 { 
-  static final String POINTLISTS = Environment.getExternalStorageDirectory().getPath() + "/MobileTopographer/pointlists";
-  static final String POINTLISTS_PRO = Environment.getExternalStorageDirectory().getPath() + "/MobileTopographerPro/pointlists";
+  static final private String POINTLISTS = Environment.getExternalStorageDirectory().getPath() + "/MobileTopographer/pointlists";
+  static final private String POINTLISTS_PRO = Environment.getExternalStorageDirectory().getPath() + "/MobileTopographerPro/pointlists";
 
   private FixedActivity mParent;
 
@@ -128,7 +128,7 @@ class FixedImportDialog extends MyDialog
     isSet = false;
   }
 
-  private boolean readPoints()
+  private boolean readPoints() // UNUSED return
   {
     mArrayAdapter.clear();
 

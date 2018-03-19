@@ -12,25 +12,25 @@
 package com.topodroid.DistoX;
 
 import java.util.Locale;
-import java.util.ArrayList;
-import java.util.TreeSet;
+// import java.util.ArrayList;
+// import java.util.TreeSet;
 import java.io.File;
-import java.io.PrintWriter;
-import java.io.DataOutputStream;
-import java.io.IOException;
+// import java.io.PrintWriter;
+// import java.io.DataOutputStream;
+// import java.io.IOException;
 
 import android.graphics.Paint;
 import android.content.res.Resources;
 
-import android.util.Log;
+// import android.util.Log;
 
 class SymbolLineLibrary extends SymbolLibrary
 {
-  static final String DefaultLines[] = {
+  static final private String DefaultLines[] = {
     "arrow", "border", "pit", "rock-border", "slope"
   };
 
-  int mLineUserIndex;
+  int mLineUserIndex; // PRIVATE
   int mLineWallIndex;
   int mLineSlopeIndex;
   int mLineSectionIndex;
@@ -152,10 +152,10 @@ class SymbolLineLibrary extends SymbolLibrary
       if ( ! file.exists() ) return false;
       symbol = new SymbolLine( file.getPath(), file.getName(), locale, iso );
       addSymbol( symbol );
-    } else {
-      // Log.v( TopoDroidApp.TAG, "enabling missing line " + fname );
+    // } else {
+    //   // Log.v( TopoDroidApp.TAG, "enabling missing line " + fname );
     }
-    if ( symbol == null ) return false;
+    // if ( symbol == null ) return false; // ALWAYS false
 
     symbol.setEnabled( true ); // TopoDroidApp.mData.isSymbolEnabled( "a_" + symbol.mThName ) );
     

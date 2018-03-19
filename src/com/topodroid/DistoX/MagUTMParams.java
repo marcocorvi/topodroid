@@ -20,7 +20,7 @@
 package com.topodroid.DistoX;
 
 // MAGtype_UTMParameters;
-public class MagUTMParams {
+class MagUTMParams {
   double Lambda;   // used in calculation
   double Easting;  // (X) in meters
   double Northing; // (Y) in meters

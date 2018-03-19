@@ -149,13 +149,15 @@ class DataHelper extends DataSetObservable
   // DATABASE
 
   private Context mContext;
+  private TopoDroidApp mApp;
 
   public SQLiteDatabase getDb() { return myDB; }
 
 
-  public DataHelper( Context context, DataListenerSet listeners )
+  public DataHelper( Context context, TopoDroidApp app, DataListenerSet listeners )
   {
     mContext = context;
+    mApp     = app;
     mShotFields = new String[] { 
          "id", "fStation", "tStation", "distance", "bearing",
          "clino", "acceleration", "magnetic", "dip", "extend",
@@ -520,7 +522,7 @@ class DataHelper extends DataSetObservable
   private void handleDiskIOError( SQLiteDiskIOException e )
   {
     Log.e("DistoX", "DB disk error " + e.getMessage() );
-    TopoDroidApp.mActivity.runOnUiThread( new Runnable() {
+    mApp.mActivity.runOnUiThread( new Runnable() {
       public void run() {
         Toast toast = Toast.makeText( mContext, "Critical failure: Disk i/o error", Toast.LENGTH_LONG );
         toast.getView().setBackgroundColor( TDColor.BROWN );

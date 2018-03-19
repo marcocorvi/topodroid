@@ -27,6 +27,7 @@ class ImportTherionTask extends ImportTask
   {
     long sid = 0;
     try {
+      DataHelper app_data = TopoDroidApp.mData;
       ParserTherion parser = new ParserTherion( str[0], true ); // apply_declination = true
       ArrayList< ParserShot > shots  = parser.getShots();
       ArrayList< ParserShot > splays = parser.getSplays();
@@ -34,23 +35,23 @@ class ImportTherionTask extends ImportTask
       ArrayList< ParserTherion.Fix > fixes = parser.getFixes();
 
       sid = mApp.setSurveyFromName( str[1], false ); // IMPORT TH no forward
-      mApp.mData.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle, false );
-      mApp.mData.updateSurveyDeclination( sid, parser.mDeclination, false );
-      mApp.mData.updateSurveyInitStation( sid, parser.initStation(), false );
+      app_data.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle, false );
+      app_data.updateSurveyDeclination( sid, parser.mDeclination, false );
+      app_data.updateSurveyInitStation( sid, parser.initStation(), false );
 
-      long id = mApp.mData.insertShots( sid, 1, shots ); // start id = 1
-      mApp.mData.insertShots( sid, id, splays );
+      long id = app_data.insertShots( sid, 1, shots ); // start id = 1
+      app_data.insertShots( sid, id, splays );
 
       // FIXME this suppose CS long-lat, ie, e==long, n==lat
       // WorldMagneticModel wmm = new WorldMagneticModel( mApp );
       // for ( ParserTherion.Fix fix : fixes ) {
       //   // double asl = fix.z;
       //   double alt = wmm.geoidToEllipsoid( fix.n, fix.e, fix.z );
-      //   mApp.mData.insertFixed( sid, -1L, fix.name, fix.e, fix.n, alt, fix.z, "", 0 );
+      //   app_data.insertFixed( sid, -1L, fix.name, fix.e, fix.n, alt, fix.z, "", 0 );
       // }
 
       for ( ParserTherion.Station st : stations ) {
-        mApp.mData.insertStation( sid, st.name, st.comment, st.flag );
+        app_data.insertStation( sid, st.name, st.comment, st.flag );
       }
     } catch ( ParserException e ) {
       // Toast.makeText(mActivity, R.string.file_parse_fail, Toast.LENGTH_SHORT).show();

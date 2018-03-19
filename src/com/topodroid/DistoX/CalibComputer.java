@@ -22,7 +22,7 @@ class CalibComputer extends AsyncTask< String, Integer, Integer >
   static final int CALIB_RESET_GROUPS   = 2;
   static final int CALIB_RESET_AND_COMPUTE_GROUPS = 3;
 
-  private GMActivity mParent;
+  private GMActivity mParent; // FIXME LEAK
   private static CalibComputer running = null;
   private long mStartId;
   private int mJob;

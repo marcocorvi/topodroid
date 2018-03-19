@@ -12,33 +12,33 @@
 package com.topodroid.DistoX;
 
 import java.util.List;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 import android.os.Bundle;
-import android.app.Dialog;
+// import android.app.Dialog;
 
 import android.content.Context;
 import android.content.res.Resources;
 
 import android.view.View;
-import android.view.View.OnClickListener;
+// import android.view.View.OnClickListener;
 
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.GridView;
+// import android.widget.GridView;
 import android.widget.Button;
 
-import android.widget.TextView;
+// import android.widget.TextView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 // import android.widget.AdapterView.OnItemLongClickListener;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 
-import android.util.Log;
+// import android.util.Log;
 
 class ScrapOutlineDialog extends MyDialog
-                        implements OnItemClickListener
+                         implements OnItemClickListener
                                 // , OnItemLongClickListener
                                 , View.OnClickListener
 {
@@ -64,7 +64,8 @@ class ScrapOutlineDialog extends MyDialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.scrap_outline_dialog );
+    initLayout(R.layout.scrap_outline_dialog, R.string.title_scraps_outline );
+    
     mArrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
     // mArrayAdapter = new ListItemAdapter( mContext, R.layout.message );
 
@@ -85,7 +86,6 @@ class ScrapOutlineDialog extends MyDialog
     }
 
     updateList();
-    setTitle( R.string.title_scraps_outline );
   }
 
   private void updateList()

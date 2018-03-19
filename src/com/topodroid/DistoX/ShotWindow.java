@@ -12,32 +12,32 @@
 package com.topodroid.DistoX;
 
 import java.io.File;
-import java.io.IOException;
+// import java.io.IOException;
 // import java.io.EOFException;
 // import java.io.DataInputStream;
 // import java.io.DataOutputStream;
-import java.io.BufferedReader;
-import java.io.FileReader;
+// import java.io.BufferedReader;
+// import java.io.FileReader;
 // import java.io.FileWriter;
 import java.util.List;
 import java.util.ArrayList;
 // import java.util.Stack;
 import java.util.Locale;
 
-import android.os.Parcelable;
+// import android.os.Parcelable;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
-import android.os.Debug;
+// import android.os.Message;
+// import android.os.Debug;
 
 // import android.os.SystemClock;
 // import android.os.PowerManager;
 import android.content.res.Resources;
 
-import android.graphics.Rect;
+// import android.graphics.Rect;
 
-import android.app.Application;
+// import android.app.Application;
 import android.app.Activity;
 
 import android.content.ActivityNotFoundException;
@@ -46,50 +46,50 @@ import android.content.DialogInterface;
 // import android.content.DialogInterface.OnDismissListener;
 // import android.content.res.ColorStateList;
 
-import android.provider.Settings.System;
+// import android.provider.Settings.System;
 
 // import android.location.LocationManager;
 
-import android.content.Context;
+// import android.content.Context;
 import android.content.Intent;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 
-import android.view.WindowManager;
+// import android.view.WindowManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
-import android.view.Menu;
-import android.view.MenuItem;
+// import android.view.Menu;
+// import android.view.MenuItem;
 import android.view.KeyEvent;
 // for FRAGMENT
-import android.view.ViewGroup;
-import android.view.LayoutInflater;
+// import android.view.ViewGroup;
+// import android.view.LayoutInflater;
 
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.PopupWindow;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+// import android.widget.PopupWindow;
+// import android.widget.LinearLayout;
+// import android.widget.RelativeLayout;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
+// import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import android.preference.PreferenceManager;
+// import android.preference.PreferenceManager;
 
 import android.provider.MediaStore;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
+// import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.Paint.FontMetrics;
+// import android.graphics.Paint.FontMetrics;
 
 import android.net.Uri;
 
-import android.util.Log;
+// import android.util.Log;
 
 public class ShotWindow extends Activity
                           implements OnItemClickListener
@@ -229,7 +229,7 @@ public class ShotWindow extends Activity
     } 
   }
 
-  long secondLastShotId() { return mApp.mSecondLastShotId; }
+  long secondLastShotId() { return TopoDroidApp.mSecondLastShotId; }
 
   private ListView mList;
   // private int mListPos = -1;
@@ -440,8 +440,8 @@ public class ShotWindow extends Activity
             } else {
               /* nothing */
             }
-          } else {
-            /* nothing */
+          // } else {
+          //   /* nothing */
           }
         }
       } else {
@@ -803,17 +803,19 @@ public class ShotWindow extends Activity
       // case TDRequest.EXTERNAL_ACTIVITY:
         if ( resCode == Activity.RESULT_OK ) {
           Bundle extras = data.getExtras();
-          String type  = extras.getString( TDTag.TOPODROID_SENSOR_TYPE );
-          String value = extras.getString( TDTag.TOPODROID_SENSOR_VALUE );
-          String comment = extras.getString( TDTag.TOPODROID_SENSOR_COMMENT );
-          // TDLog.Log( TDLog.LOG_SENSOR, "insert sensor " + type + " " + value + " " + comment );
+          if ( extras != null ) {
+            String type  = extras.getString( TDTag.TOPODROID_SENSOR_TYPE );
+            String value = extras.getString( TDTag.TOPODROID_SENSOR_VALUE );
+            String comment = extras.getString( TDTag.TOPODROID_SENSOR_COMMENT );
+            // TDLog.Log( TDLog.LOG_SENSOR, "insert sensor " + type + " " + value + " " + comment );
 
-          mApp_mData.insertSensor( mApp.mSID, mSensorId, mShotId, "",
+            mApp_mData.insertSensor( mApp.mSID, mSensorId, mShotId, "",
                                   TopoDroidUtil.currentDate(),
                                   comment,
                                   type,
                                   value );
-          // FIXME NOTIFY ? no
+            // FIXME NOTIFY ? no
+          }
         }
         break;
       case TDRequest.INFO_ACTIVITY_SHOTWINDOW:
@@ -868,7 +870,7 @@ public class ShotWindow extends Activity
     setContentView( R.layout.shot_activity );
     mApp = (TopoDroidApp) getApplication();
     mApp_mData = TopoDroidApp.mData;
-    TopoDroidApp.mShotWindow = this; // FIXME
+    mApp.mShotWindow = this; // FIXME
     mDataDownloader = mApp.mDataDownloader; // new DataDownloader( this, mApp );
     mActivity = this;
     mOnOpenDialog = false;
@@ -918,7 +920,7 @@ public class ShotWindow extends Activity
       mButtonF[k] = MyButton.getButton( this, this, izonsF[k] );
     }
 
-    TDAzimuth.resetRefAzimuth( 90 );
+    TDAzimuth.resetRefAzimuth( this, 90 );
     // setRefAzimuthButton( ); // called by mApp.resetRefAzimuth
 
     mButtonView1 = new HorizontalButtonView( mButton1 );
@@ -1029,10 +1031,11 @@ public class ShotWindow extends Activity
     restoreInstanceFromData();
     updateDisplay( );
 
-    if ( mDataDownloader != null ) mDataDownloader.onResume();
-
-    // mApp.registerConnListener( mHandler );
-    setConnectionStatus( mDataDownloader.getStatus() );
+    if ( mDataDownloader != null ) {
+      mDataDownloader.onResume();
+      // mApp.registerConnListener( mHandler );
+      setConnectionStatus( mDataDownloader.getStatus() );
+    }
   }
 
   // --------------------------------------------------------------
@@ -1296,7 +1299,7 @@ public class ShotWindow extends Activity
     for ( DBlock blk : mDataAdapter.mSelect ) {
       long id = blk.mId;
       mApp_mData.deleteShot( id, mApp.mSID, TDStatus.DELETED, true ); // forward = true
-      if ( blk != null && blk.type() == DBlock.BLOCK_MAIN_LEG ) {
+      if ( /* blk != null && */ blk.type() == DBlock.BLOCK_MAIN_LEG ) {
         if ( mLeg ) {
           for ( ++id; ; ++id ) {
             DBlock b = mApp_mData.selectShot( id, mApp.mSID );
@@ -1609,7 +1612,7 @@ public class ShotWindow extends Activity
           Toast.makeText( mActivity, R.string.no_db, Toast.LENGTH_SHORT ).show();
         // } else if ( ret == -2 ) {
         //   Toast.makeText( mActivity, R.string.makes_cycle, Toast.LENGTH_SHORT ).show();
-        } else {
+        // } else {
           // // update same shots of the given block: SHOULD NOT HAPPEN
           // List< DBlock > blk_list = mApp.mData.selectShotsAfterId( blk.mId, mApp.mSID, 0L );
           // for ( DBlock blk1 : blk_list ) {

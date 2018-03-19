@@ -12,10 +12,10 @@
 package com.topodroid.DistoX;
 
 import java.util.List;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 import android.os.Bundle;
-import android.app.Dialog;
+// import android.app.Dialog;
 
 import android.content.Context;
 
@@ -32,7 +32,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 // import android.widget.AdapterView.OnItemLongClickListener;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 
 class PlotMergeDialog extends MyDialog
                              implements OnItemClickListener
@@ -55,8 +55,7 @@ class PlotMergeDialog extends MyDialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.plot_merge_dialog );
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout(R.layout.plot_merge_dialog, R.string.title_plot_merge );
 
     mArrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
 
@@ -67,7 +66,7 @@ class PlotMergeDialog extends MyDialog
 
     ((Button) findViewById( R.id.button_cancel )).setOnClickListener( this );
 
-    setTitle( R.string.title_plot_merge );
+    
     for ( PlotInfo plt : mPlots ) {
       mArrayAdapter.add( plt.name );
     }

@@ -16,12 +16,12 @@ import java.util.ArrayList;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
-import android.util.Log;
+// import android.util.Log;
 
 class PTDrawing
 {
-    PTMapping _mapping;
-    ArrayList< PTElement > _elements;
+    private PTMapping _mapping;
+    private ArrayList< PTElement > _elements;
 
     PTDrawing()
     { 

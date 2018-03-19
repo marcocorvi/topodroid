@@ -35,20 +35,20 @@ class DrawingDxf
 {
   private static boolean mVersion13 = false;
 
-  static final float POINT_SCALE   = 10.0f;
-  static final float STATION_SCALE = 6.0f;
-  static final float LABEL_SCALE   = 8.0f;
-  static final float AXIS_SCALE    = 6.0f;
+  static final private float POINT_SCALE   = 10.0f;
+  static final private float STATION_SCALE = 6.0f;
+  static final private float LABEL_SCALE   = 8.0f;
+  static final private float AXIS_SCALE    = 6.0f;
   static final String zero = "0.0";
   static final String one  = "1.0";
   // static final String half = "0.5";
-  static final String two_n_half = "2.5";
+  static final private String two_n_half = "2.5";
   static final String ten  = "10";
   static final String empty = "";
-  static final String my_style      = "MyStyle";
-  static final String standard      = "Standard";
-  static final String lt_continuous = "Continuous";
-  static final String lt_byBlock    = "ByBlock";
+  static final private String my_style      = "MyStyle";
+  static final private String standard      = "Standard";
+  static final private String lt_continuous = "Continuous";
+  static final private String lt_byBlock    = "ByBlock";
   
   static final private String AcDbSymbolTR = "AcDbSymbolTableRecord";
   static final private String AcDbEntity   = "AcDbEntity";

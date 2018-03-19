@@ -11,29 +11,31 @@
  */
 package com.topodroid.DistoX;
 
-import android.app.Dialog;
+import java.util.Locale;
+
+// import android.app.Dialog;
 import android.os.Bundle;
 
-import android.content.Intent;
+// import android.content.Intent;
 import android.content.Context;
-import android.content.DialogInterface;
+// import android.content.DialogInterface;
 import android.inputmethodservice.KeyboardView;
 
 import android.text.method.KeyListener;
-import android.text.InputType;
+// import android.text.InputType;
 
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
-import android.widget.CheckBox;
+// import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.view.View.OnKeyListener;
-import android.view.KeyEvent;
+// import android.view.ViewGroup.LayoutParams;
+// import android.view.View.OnKeyListener;
+// import android.view.KeyEvent;
 
-import android.view.Window;
-import android.view.WindowManager;
+// import android.view.Window;
+// import android.view.WindowManager;
 
 class CalibGMDialog extends MyDialog
                            implements View.OnClickListener
@@ -110,10 +112,10 @@ class CalibGMDialog extends MyDialog
     // mCBregroup = (CheckBox) findViewById(R.id.gm_regroup );
     // mCBregroup.setChecked( false );
 
-    eTbearing.setText( String.format( "%.1f", mBlk.mBearing ) );
-    eTclino.setText( String.format( "%.1f", mBlk.mClino ) );
-    eTroll.setText( String.format( "%.1f", mBlk.mRoll ) );
-    tVerror.setText( String.format( "%.4f", mBlk.mError ) );
+    eTbearing.setText( String.format(Locale.US, "%.1f", mBlk.mBearing ) );
+    eTclino.setText( String.format(Locale.US, "%.1f", mBlk.mClino ) );
+    eTroll.setText( String.format(Locale.US, "%.1f", mBlk.mRoll ) );
+    tVerror.setText( String.format(Locale.US, "%.4f", mBlk.mError ) );
 
     mETname.setHint( Long.toString( mBlk.mGroup ) );
     mButtonOK.setOnClickListener( this );

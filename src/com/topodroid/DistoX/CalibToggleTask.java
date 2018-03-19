@@ -19,8 +19,8 @@ import android.widget.Toast;
 
 class CalibToggleTask extends AsyncTask<Void, Integer, Boolean>
 {
-  Activity   mActivity;
-  TopoDroidApp mApp;
+  Activity   mActivity; // FIXME LEAK
+  TopoDroidApp mApp;    // FIXME LEAK
   private IEnableButtons mEnableButtons;
 
   CalibToggleTask( Activity act, IEnableButtons eb, TopoDroidApp app )

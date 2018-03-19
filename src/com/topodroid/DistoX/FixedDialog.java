@@ -14,23 +14,23 @@ package com.topodroid.DistoX;
 // import java.util.regex.Pattern;
 import java.util.Locale;
 
-import android.widget.ArrayAdapter;
+// import android.widget.ArrayAdapter;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 
 import android.content.Context;
-import android.content.DialogInterface;
+// import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.ActivityNotFoundException;
+// import android.content.ActivityNotFoundException;
 
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.GridView;
+// import android.view.ViewGroup.LayoutParams;
+// import android.widget.GridView;
 // import android.view.View.OnKeyListener;
 // import android.view.KeyEvent;
 import android.inputmethodservice.KeyboardView;
@@ -41,11 +41,11 @@ import android.net.Uri;
 
 // import android.widget.Toast;
 
-import android.util.Log;
+// import android.util.Log;
 
 
 class FixedDialog extends MyDialog
-                         implements View.OnClickListener
+                  implements View.OnClickListener
 {
   private FixedActivity mParent;
   private FixedInfo mFxd;
@@ -196,6 +196,7 @@ class FixedDialog extends MyDialog
     showConvertedCoords( );
   }
 
+  @Override
   public void onClick(View v) 
   {
     MyKeyboard.close( mKeyboard );
@@ -237,7 +238,6 @@ class FixedDialog extends MyDialog
           mParent.updateFixedData( mFxd, lng, lat, alt, asl );
         }
       }
-      dismiss();
     } else if ( b == mButtonConvert ) {
       String cs_to = mFxd.hasCSCoords() ? mFxd.cs : TDSetting.mCRS;
       mParent.tryProj4( this, cs_to, mFxd );
@@ -247,10 +247,10 @@ class FixedDialog extends MyDialog
       mContext.startActivity( new Intent( Intent.ACTION_VIEW, uri ) );
     } else if ( b == mButtonDrop ) {
       mParent.dropFixed( mFxd );
-      dismiss();
     // } else { // b == mButtonCancel
-    //   dismiss();
+    //   /* nothing */
     }
+    dismiss();
   }
 
   @Override

@@ -498,7 +498,7 @@ class TDSetting
   //   mZoomControls = ctrl;
   //   // FIXME forward setting to DrawingWindow
   // }
-  static void setZoomControls( String ctrl, boolean is_multitouch )
+  static void setZoomControls( String ctrl, boolean is_multitouch ) // PRIVATE
   {
     try {
       int i = Integer.parseInt( ctrl );
@@ -936,7 +936,7 @@ class TDSetting
       DistoXStationName.setInitialStation( mInitStation );
     } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_AZIMUTH_MANUAL
       mAzimuthManual = prefs.getBoolean( k, false ); 
-      TDAzimuth.resetRefAzimuth( TDAzimuth.mRefAzimuth );
+      TDAzimuth.resetRefAzimuth( app.mShotWindow, TDAzimuth.mRefAzimuth );
 
     } else if ( k.equals( key[ nk++ ] ) ) {
       // mDevice      = mData.getDevice( prefs.getString( k, "" ) );  // DISTOX_DEVICE - UNUSED HERE
@@ -1349,7 +1349,7 @@ class TDSetting
   //   editor.commit();
   // }
   
-  static void setPreference( SharedPreferences sp, String name, String value )
+  static private void setPreference( SharedPreferences sp, String name, String value )
   {
     Editor editor = sp.edit();
     editor.putString( name, value );

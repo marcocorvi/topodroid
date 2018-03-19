@@ -14,9 +14,9 @@ package com.topodroid.DistoX;
 import java.util.Locale;
 
 import android.graphics.PointF;
-import android.graphics.Path;
+// import android.graphics.Path;
 
-import android.util.Log;
+// import android.util.Log;
 
 class Sketch3dInfo extends SketchShot
 {
@@ -173,8 +173,8 @@ Nx=(-ca,-sa,0) | ,'
       yoffset_side = ycenter;
       xoffset_3d   = xcenter;
       yoffset_3d   = ycenter;
-    } else {
-      /* anything to do ? */
+    // } else {
+    //   /* anything to do ? */
     }
     if ( blk != null ) {
       shotBearing = blk.mBearing;

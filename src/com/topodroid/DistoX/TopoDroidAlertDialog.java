@@ -13,11 +13,11 @@ package com.topodroid.DistoX;
 
 import android.content.DialogInterface;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
+// import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.res.Resources;
 
-import android.widget.TextView;
+// import android.widget.TextView;
 
 class TopoDroidAlertDialog 
 {

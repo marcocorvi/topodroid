@@ -13,30 +13,30 @@ package com.topodroid.DistoX;
 
 import java.util.Iterator;
 
-import java.io.File;
+// import java.io.File;
 
-import java.util.List;
+// import java.util.List;
 import java.util.Locale;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 
 import android.content.Context;
 import android.content.Intent;
 
-import android.view.inputmethod.EditorInfo;
+// import android.view.inputmethod.EditorInfo;
 import android.view.KeyEvent;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
-import android.widget.AdapterView;
+// import android.widget.AdapterView;
 // import android.widget.AdapterView.OnItemClickListener;
 // import android.widget.TextView.OnEditorActionListener;
 
 import android.view.View;
-import android.widget.ListView;
+// import android.widget.ListView;
 import android.widget.Toast;
 import android.inputmethodservice.KeyboardView;
 
@@ -49,7 +49,7 @@ import android.location.GpsSatellite;
 
 import android.net.Uri;
 
-import android.util.Log;
+// import android.util.Log;
 
 class FixedGpsDialog extends MyDialog
                             implements View.OnClickListener
@@ -60,7 +60,7 @@ class FixedGpsDialog extends MyDialog
 {
   private FixedActivity mParent;
   // private boolean  mLocated;
-  private LocationManager locManager;
+  private LocationManager locManager = null;
   private WorldMagneticModel mWMM;
 
   private TextView mTVlat;
@@ -77,11 +77,11 @@ class FixedGpsDialog extends MyDialog
   private Button   mBtnStatus;
   // private Button   mBtnCancel;
 
-  double mLat;  // decimal degrees
-  double mLng;  // decimal degrees
-  double mHEll; // meters
-  double mHGeo; // altimetric altitude
-  boolean mHasLocation;
+  private double mLat;  // decimal degrees
+  private double mLng;  // decimal degrees
+  private double mHEll; // meters
+  private double mHGeo; // altimetric altitude
+  private boolean mHasLocation;
 
   private GpsStatus mStatus;
   private boolean mLocating; // whether is locating
@@ -92,8 +92,12 @@ class FixedGpsDialog extends MyDialog
   {
     super(context, R.string.FixedGpsDialog );
     mParent = parent;
-    locManager = (LocationManager) mContext.getSystemService( Context.LOCATION_SERVICE );
-    mStatus = locManager.getGpsStatus( null );
+    if ( FeatureChecker.checkLocation( context ) ) { // CHECK_PERMISSIONS
+      locManager = (LocationManager) mContext.getSystemService( Context.LOCATION_SERVICE );
+      if ( locManager != null ) {
+        mStatus = locManager.getGpsStatus( null );
+      }
+    }
     mHasLocation = false;
     // mLocating = false;
     // Log.v(  TopoDroidApp.TAG, "UnitLocation " + TopoDroidApp.mUnitLocation + " ddmmss " + TopoDroidApp.DDMMSS );
@@ -267,8 +271,10 @@ class FixedGpsDialog extends MyDialog
   {
     mBtnLoc.setText( mContext.getResources().getString( R.string.button_gps_start ) );
     mBtnStatus.setBackgroundColor( 0xff3366ff );
-    locManager.removeUpdates( this );
-    locManager.removeGpsStatusListener( this );
+    if ( locManager != null ) {
+      locManager.removeUpdates( this );
+      locManager.removeGpsStatusListener( this );
+    }
     mLocating = false;
   }
 
@@ -278,9 +284,11 @@ class FixedGpsDialog extends MyDialog
     mHasLocation = false;
     mBtnStatus.setText( "0" );
     mBtnStatus.setBackgroundColor( 0x80ff0000 );
-    locManager.addGpsStatusListener( this );
-    locManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 1000, 0, this );
-    mLocating = true;
+    if ( locManager != null ) {
+      locManager.addGpsStatusListener( this );
+      locManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 1000, 0, this );
+      mLocating = true;
+    }
   }
 
   @Override
@@ -306,6 +314,9 @@ class FixedGpsDialog extends MyDialog
   public void onGpsStatusChanged( int event ) 
   {
     if ( event == GpsStatus.GPS_EVENT_SATELLITE_STATUS ) {
+      if ( locManager == null ) {
+        return;
+      }
       locManager.getGpsStatus( mStatus );
       Iterator< GpsSatellite > sats = mStatus.getSatellites().iterator();
       int  nr = 0;
@@ -347,8 +358,10 @@ class FixedGpsDialog extends MyDialog
     if ( CutNPaste.dismissPopup() ) return;
     if ( MyKeyboard.close( mKeyboard ) ) return;
     if ( mLocating ) {
-      locManager.removeUpdates( this );
-      locManager.removeGpsStatusListener( this );
+      if ( locManager != null ) {
+        locManager.removeUpdates( this );
+        locManager.removeGpsStatusListener( this );
+      }
       mLocating = false;
     }
     dismiss();

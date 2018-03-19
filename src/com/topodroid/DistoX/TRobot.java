@@ -14,10 +14,9 @@ package com.topodroid.DistoX;
 import java.util.List;
 // import java.util.Locale;
 import java.util.ArrayList;
-import java.util.Iterator;
+// import java.util.Iterator;
 
-import android.util.Log;
-
+// import android.util.Log;
 
 class TRobot
 {

@@ -13,17 +13,17 @@
 package com.topodroid.DistoX;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.ActivityNotFoundException;
+// import android.content.Intent;
+// import android.content.ActivityNotFoundException;
 
 import android.app.Dialog;
-import android.widget.Button;
-import android.view.View;
-import android.view.View.OnClickListener;
+// import android.widget.Button;
+// import android.view.View;
+// import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
-import android.net.Uri;
+// import android.net.Uri;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 
 class TopoDroidAbout extends Dialog
                      // implements OnClickListener

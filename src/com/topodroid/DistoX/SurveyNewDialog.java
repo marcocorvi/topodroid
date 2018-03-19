@@ -11,13 +11,13 @@
  */
 package com.topodroid.DistoX;
 
-import java.util.List;
+//import java.util.List;
 
 // import java.io.File;
 // import java.io.IOException;
 
 // import android.app.Activity;
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 import android.app.DatePickerDialog;
 
@@ -25,16 +25,16 @@ import android.content.Context;
 // import android.content.Intent;
 
 import android.widget.EditText;
-import android.widget.TextView;
+// import android.widget.TextView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.Toast;
+// import android.widget.Toast;
 
 // import android.util.Log;
 
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.view.View.OnClickListener;
+// import android.view.ViewGroup.LayoutParams;
+// import android.view.View.OnClickListener;
 // import android.widget.AdapterView;
 // import android.widget.AdapterView.OnItemClickListener;
 
@@ -140,7 +140,7 @@ class SurveyNewDialog extends MyDialog
 
     // if ( mEditName.getText() == null ) return;
     String name = mEditName.getText().toString();
-    if ( name == null || name.length() == 0 ) {
+    if ( /* name == null || */ name.length() == 0 ) { // ALWAYS false
       String error = mContext.getResources().getString( R.string.error_name_required );
       mEditName.setError( error );
       return;
@@ -183,7 +183,7 @@ class SurveyNewDialog extends MyDialog
     double decl = 0.0;
     if ( mEditDecl.getText() != null ) {
       String decl_str = mEditDecl.getText().toString();
-      if ( decl_str != null && decl_str.length() > 0 ) {
+      if ( /* decl_str != null && */ decl_str.length() > 0 ) { // ALWAYS true
         decl_str = decl_str.replace(',', '.');
         try {
           decl = Double.parseDouble( decl_str );

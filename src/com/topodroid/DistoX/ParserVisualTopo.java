@@ -12,15 +12,15 @@
  */
 package com.topodroid.DistoX;
 
-import java.io.File;
+// import java.io.File;
 import java.io.IOException;
-import java.io.FileReader;
+// import java.io.FileReader;
 import java.io.BufferedReader;
-import java.util.ArrayList;
-import java.util.Stack;
-import java.util.regex.Pattern;
+// import java.util.ArrayList;
+// import java.util.Stack;
+// import java.util.regex.Pattern;
 
-import android.util.Log;
+// import android.util.Log;
 
 class ParserVisualTopo extends ImportParser
 {

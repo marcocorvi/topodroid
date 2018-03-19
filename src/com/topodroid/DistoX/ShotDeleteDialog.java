@@ -11,10 +11,10 @@
  */
 package com.topodroid.DistoX;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 
-import android.content.Intent;
+// import android.content.Intent;
 import android.content.Context;
 
 import android.widget.TextView;
@@ -22,9 +22,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.view.View.OnKeyListener;
-import android.view.KeyEvent;
+// import android.view.ViewGroup.LayoutParams;
+// import android.view.View.OnKeyListener;
+// import android.view.KeyEvent;
 
 
 class ShotDeleteDialog extends MyDialog
@@ -58,16 +58,14 @@ class ShotDeleteDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
     // TDLog.Log(  TDLog.LOG_PHOTO, "ShotDeleteDialog onCreate" );
-    setContentView(R.layout.shot_delete_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout( R.layout.shot_delete_dialog, R.string.title_shot_delete );
+    // getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
     mButtonDelete = (Button) findViewById(R.id.shot_delete );
     // mButtonCancel = (Button) findViewById(R.id.button_cancel );
 
     mCBleg = (CheckBox) findViewById( R.id.leg );
     mCBleg.setChecked( false );
-
-    setTitle( R.string.title_shot_delete );
 
     mTVstations = (TextView) findViewById( R.id.shot_shot_stations );
     mTVdata = (TextView) findViewById( R.id.shot_shot_data );

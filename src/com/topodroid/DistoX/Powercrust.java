@@ -12,11 +12,11 @@ package com.topodroid.DistoX;
 
 //  import android.util.FloatMath;
 
-import java.io.*;
-import java.util.List;
+// import java.io.*;
+// import java.util.List;
 import java.util.ArrayList;
 
-import android.util.Log;
+// import android.util.Log;
 
 class Powercrust
 {

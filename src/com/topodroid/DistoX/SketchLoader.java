@@ -17,7 +17,7 @@ import android.os.AsyncTask;
 
 class SketchLoader extends AsyncTask< String, Integer, Integer >
 {
-  private SketchWindow  mParent;
+  private SketchWindow  mParent; // FIXME LEAK context
   private SketchModel   mModel;
   private String        mFullName;
   private SketchPainter mPainter;
@@ -39,14 +39,14 @@ class SketchLoader extends AsyncTask< String, Integer, Integer >
     int ret = 0;
 
     String filename;
-    if ( false ) {
-      filename = TDPath.getTh3FileWithExt( mFullName );
-      // mAllSymbols = 
-      mModel.loadTh3( filename, null /* missingSymbols */, mPainter );
-    } else {
+    // if ( false ) {
+    //   filename = TDPath.getTh3FileWithExt( mFullName );
+    //   // mAllSymbols = 
+    //   mModel.loadTh3( filename, null /* missingSymbols */, mPainter );
+    // } else {
       filename = TDPath.getTdr3FileWithExt( mFullName );
       mModel.loadTdr3( filename, null /* missingSymbols */, mPainter );
-    }
+    // }
 
     return ret;
   }

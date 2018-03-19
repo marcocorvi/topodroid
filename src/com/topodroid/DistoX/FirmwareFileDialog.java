@@ -12,16 +12,16 @@
 package com.topodroid.DistoX;
 
 import java.io.File;
-import java.util.Set;
+// import java.util.Set;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Collections;
 
 // import android.app.Activity;
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 
-import android.content.Intent;
+// import android.content.Intent;
 
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -31,14 +31,14 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
-import android.content.IntentFilter;
+// import android.content.IntentFilter;
 import android.content.Context;
 
 
 class FirmwareFileDialog extends MyDialog
                           implements OnItemClickListener
 { 
-  private TopoDroidApp mApp;
+  // private TopoDroidApp mApp; // UNUSED
   private FirmwareDialog mParent;
 
   private ArrayAdapter<String> mArrayAdapter;
@@ -49,7 +49,7 @@ class FirmwareFileDialog extends MyDialog
   {
     super( context, R.string.FirmwareFileDialog );
     mParent  = parent;
-    mApp = app;
+    // mApp = app;
   }
 
   @Override

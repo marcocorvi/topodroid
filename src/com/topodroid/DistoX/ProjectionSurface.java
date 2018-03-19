@@ -13,25 +13,25 @@ package com.topodroid.DistoX;
 
 import android.content.Context;
 import android.graphics.*; // Bitmap
-import android.os.Handler;
-import android.os.Message;
+// import android.os.Handler;
+// import android.os.Message;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
+// import android.view.View;
 
-import android.view.MotionEvent;
+// import android.view.MotionEvent;
 
-import java.util.ArrayList;
-import java.util.TreeSet;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+// import java.util.ArrayList;
+// import java.util.TreeSet;
+// import java.util.Collections;
+// import java.util.Iterator;
+// import java.util.List;
 
 // import java.util.Timer;
 // import java.util.TimerTask;
 
-import android.util.Log;
+// import android.util.Log;
 
 /**
  * @note this class must be public

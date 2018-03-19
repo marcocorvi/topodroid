@@ -11,11 +11,11 @@
  */
 package com.topodroid.DistoX;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 // import android.app.Activity;
 import android.os.Bundle;
 
-import android.content.Intent;
+// import android.content.Intent;
 
 import android.content.Context;
 
@@ -27,9 +27,9 @@ import android.widget.ArrayAdapter;
 import android.view.View;
 // import android.view.View.OnKeyListener;
 // import android.view.KeyEvent;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 
-import android.util.Log;
+// import android.util.Log;
 
 class ExportDialog extends MyDialog
                           implements AdapterView.OnItemSelectedListener, View.OnClickListener
@@ -64,7 +64,7 @@ class ExportDialog extends MyDialog
     ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, mTypes );
     spin.setAdapter( adapter );
 
-    mBtnOk = (Button) findViewById(R.id.button_ok );
+    mBtnOk   = (Button) findViewById(R.id.button_ok );
     mBtnBack = (Button) findViewById(R.id.button_back );
     mBtnOk.setOnClickListener( this );
     mBtnBack.setOnClickListener( this );
@@ -87,8 +87,8 @@ class ExportDialog extends MyDialog
     Button b = (Button)v;
     if ( b == mBtnOk && mSelected != null ) {
       mParent.doExport( mSelected );
-    } else if ( b == mBtnBack ) {
-      /* nothing */
+    // } else if ( b == mBtnBack ) {
+    //   /* nothing */
     }
     dismiss();
   }

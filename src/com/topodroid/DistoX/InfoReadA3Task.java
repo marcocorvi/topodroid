@@ -11,15 +11,15 @@
  */
 package com.topodroid.DistoX;
 
-import android.app.Activity;
+// import android.app.Activity;
 import android.os.AsyncTask;
-import android.content.Context;
+// import android.content.Context;
 
 // import android.util.Log;
 
 class InfoReadA3Task extends AsyncTask<Void, Integer, Boolean>
 {
-  TopoDroidApp   mApp;
+  TopoDroidApp   mApp; // FIXME LEAK
   private DeviceA3InfoDialog  mDialog;
   private DeviceA3Info mInfo = null;
   // int mType; // DistoX type

@@ -13,12 +13,12 @@ package com.topodroid.DistoX;
 
 import android.content.Context;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 import android.widget.CompoundButton;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup.MarginLayoutParams;
+// import android.view.View;
+// import android.view.View.OnClickListener;
+// import android.view.ViewGroup.MarginLayoutParams;
 import android.graphics.drawable.BitmapDrawable;
 
 class MyStateBox extends CompoundButton

@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 import android.content.Context;
 // import android.app.Dialog;
@@ -24,14 +24,14 @@ import android.widget.CheckBox;
 // import android.widget.Button;
 import android.widget.TextView;
 
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.View.OnTouchListener;
+// import android.view.LayoutInflater;
+// import android.view.MotionEvent;
+// import android.view.View;
+// import android.view.View.OnTouchListener;
 // import android.text.Layout;
 import android.widget.LinearLayout;
 
-import android.util.Log;
+// import android.util.Log;
 
 class ItemSymbol
 {

@@ -13,7 +13,7 @@
 package com.topodroid.DistoX;
 
 
-import android.util.Log;
+// import android.util.Log;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -161,7 +161,7 @@ class StationName
             p_to = back; 
           } else {  // forward
             flip = true;
-            if ( increment ) {
+            if ( increment ) { // ALWAYS true
               // move for
               back = next;
               from = DistoXStationName.increment( next ); 
@@ -252,10 +252,10 @@ class StationName
                   }
                 }
               }
-            } else { // only when coming from a LEG
-              // if ( mCurrentStationName == null ) {
-              //   station = from;
-              // }
+            // } else { // only when coming from a LEG
+            //   // if ( mCurrentStationName == null ) {
+            //   //   station = from;
+            //   // }
             }
             nrLegShots = 0;
             setBlockName( data_helper, sid, blk, station, "" );
@@ -706,12 +706,12 @@ class StationName
   // ---------------------------------- TopoRobot policy -----------------------------------
   // TopoRobot policy is splay-first then forward leg 
 
-  String getTRobotStation( int sr, int pt )
+  private String getTRobotStation( int sr, int pt )
   {
     return Integer.toString( sr ) + "." + Integer.toString( pt );
   }
 
-  int getMaxTRobotSeries( List<DBlock> list )
+  private int getMaxTRobotSeries( List<DBlock> list )
   {
     int ret = 1;
     for ( DBlock blk : list ) {
@@ -796,7 +796,7 @@ class StationName
 
         if ( prev == null ) {
           prev = blk;
-          blk.setName( ((station!=null)? station : from), "" );
+          blk.setName( ((station!=null)? station : from), "" ); // ALWAYS true
           data_helper.updateShotName( blk.mId, sid, blk.mFrom, "", true );  // SPLAY
           // Log.v( "DistoX", blk.mId + " FROM " + blk.mFrom + " PREV null" );
         } else {
@@ -854,7 +854,7 @@ class StationName
   // ------------------------------------------------------------------------------------------------------
   // backshot station assignments
 
-  void assignStations_TripodBackshot( DataHelper data_helper, long sid, List<DBlock> list )
+  private void assignStations_TripodBackshot( DataHelper data_helper, long sid, List<DBlock> list )
   { 
     DBlock prev = null;
     String from = DistoXStationName.mSecondStation;     // 1
@@ -920,10 +920,10 @@ class StationName
                   }
                 }
               }
-            } else { // only when coming from a LEG
-              // if ( mCurrentStationName == null ) {
-              //   station = from;
-              // }
+            // } else { // only when coming from a LEG
+            //   // if ( mCurrentStationName == null ) {
+            //   //   station = from;
+            //   // }
             }
             nrLegShots = 0;
             setBlockName( data_helper, sid, blk, "", station );
@@ -965,7 +965,7 @@ class StationName
   }
 
 
-  void assignStations_BacksightBachshot( DataHelper data_helper, long sid, List<DBlock> list )
+  private void assignStations_BacksightBachshot( DataHelper data_helper, long sid, List<DBlock> list )
   { 
     // mSecondLastShotId = lastShotId(); // FIXME this probably not needed
     // Log.v("DistoX", "Backsight assign stations. Size " + list.size() );
@@ -1071,7 +1071,7 @@ class StationName
     }
   }
   
-  void assignStations_DefaultBackshot( DataHelper data_helper, long sid, List<DBlock> list )
+  private void assignStations_DefaultBackshot( DataHelper data_helper, long sid, List<DBlock> list )
   { 
     // mSecondLastShotId = lastShotId(); // FIXME this probably not needed
     // Log.v("DistoX", "assign stations default. size " + list.size() );

@@ -12,34 +12,34 @@
 package com.topodroid.DistoX;
 
 import java.io.File;
-import java.io.IOException;
+// import java.io.IOException;
 // import java.io.EOFException;
 // import java.io.DataInputStream;
 // import java.io.DataOutputStream;
-import java.io.BufferedReader;
-import java.io.FileReader;
+// import java.io.BufferedReader;
+// import java.io.FileReader;
 // import java.io.FileWriter;
 import java.util.List;
 import java.util.ArrayList;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+// import android.os.Handler;
+// import android.os.Message;
 
-import android.app.Application;
+// import android.app.Application;
 import android.app.Activity;
-import android.app.Dialog;
+// import android.app.Dialog;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.ActivityNotFoundException;
+// import android.content.Context;
+// import android.content.Intent;
+// import android.content.ActivityNotFoundException;
 
 import android.view.View;
-import android.view.View.OnClickListener;
+// import android.view.View.OnClickListener;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.SubMenu;
+// import android.view.Menu;
+// import android.view.MenuItem;
+// import android.view.SubMenu;
 // import android.view.MenuInflater;
 // import android.content.res.ColorStateList;
 
@@ -50,19 +50,20 @@ import android.view.SubMenu;
 import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.Button;
+// import android.widget.Button;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.preference.PreferenceManager;
+// import android.preference.PreferenceManager;
 
-import android.provider.MediaStore;
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
+// import android.provider.MediaStore;
+// import android.graphics.Bitmap;
+// import android.graphics.Bitmap.CompressFormat;
 
 public class PhotoActivity extends Activity
                            implements OnItemClickListener, ILister
 {
   private TopoDroidApp mApp;
+  private DataHelper mApp_mData;
 
   private ListView mList;
   // private int mListPos = -1;
@@ -109,9 +110,8 @@ public class PhotoActivity extends Activity
   public void updateDisplay( )
   {
     // TDLog.Log( TDLog.LOG_PHOTO, "updateDisplay() status: " + StatusName() + " forcing: " + force_update );
-    DataHelper data = mApp.mData;
-    if ( data != null && mApp.mSID >= 0 ) {
-      List< PhotoInfo > list = data.selectAllPhotos( mApp.mSID, TDStatus.NORMAL );
+    if ( mApp_mData != null && mApp.mSID >= 0 ) {
+      List< PhotoInfo > list = mApp_mData.selectAllPhotos( mApp.mSID, TDStatus.NORMAL );
       // TDLog.Log( TDLog.LOG_PHOTO, "update shot list size " + list.size() );
       updatePhotoList( list );
       setTitle( mApp.mySurvey );
@@ -170,6 +170,7 @@ public class PhotoActivity extends Activity
     super.onCreate( savedInstanceState );
     setContentView(R.layout.main_photo);
     mApp = (TopoDroidApp) getApplication();
+    mApp_mData = TopoDroidApp.mData;
     mDataAdapter = new PhotoAdapter( this, R.layout.row, new ArrayList< PhotoInfo >() );
 
     mList = (ListView) findViewById(R.id.list);
@@ -184,7 +185,7 @@ public class PhotoActivity extends Activity
 
   public void dropPhoto( PhotoInfo photo )
   {
-    mApp.mData.deletePhoto( photo.sid, photo.id );
+    mApp_mData.deletePhoto( photo.sid, photo.id );
 
     File imagefile = new File( TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString(photo.id) ) );
     imagefile.delete();
@@ -195,7 +196,7 @@ public class PhotoActivity extends Activity
   public void updatePhoto( PhotoInfo photo, String comment )
   {
     // TDLog.Log( TDLog.LOG_PHOTO, "updatePhoto comment " + comment );
-    if ( mApp.mData.updatePhoto( photo.sid, photo.id, comment ) ) {
+    if ( mApp_mData.updatePhoto( photo.sid, photo.id, comment ) ) {
       // if ( mApp.mListRefresh ) {
       //   // This works but it refreshes the whole list
       //   mDataAdapter.notifyDataSetChanged();

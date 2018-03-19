@@ -11,19 +11,19 @@
  */
 package com.topodroid.DistoX;
 
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.Matrix;
+// import android.graphics.Canvas;
+// import android.graphics.Paint;
+// import android.graphics.Path;
+// import android.graphics.Matrix;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 
-import java.util.Iterator;
+// import java.util.Iterator;
 // import java.util.List;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 // import android.util.Log;
 
@@ -84,6 +84,7 @@ class SketchAreaPath extends SketchPath
   @Override
   public String toTherion()
   {
+    // FIXME if ( mLine.size() == 0 ) return null;
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
     pw.format("line border -id a%d -close on ", mAreaCnt );

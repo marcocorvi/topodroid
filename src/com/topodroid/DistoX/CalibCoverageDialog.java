@@ -15,9 +15,9 @@ import java.util.List;
 import java.util.Locale;
 
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
+// import android.graphics.Bitmap.Config;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 
 import android.widget.Toast;
@@ -29,7 +29,7 @@ import android.widget.TextView;
 import android.view.View;
 
 class CalibCoverageDialog extends MyDialog
-                           implements View.OnClickListener
+                          implements View.OnClickListener
 {
   private class Direction
   {

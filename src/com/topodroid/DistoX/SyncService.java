@@ -17,7 +17,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
-import android.content.Context;
+// import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -56,7 +56,7 @@ class SyncService
     static final int STATE_CONNECTING = 2; // now initiating an outgoing connection
     static final int STATE_CONNECTED = 3;  // now connected to a remote device
 
-    static final String mStateName[] = { "none", "listen", "connecting", "connected" };
+    static final private String mStateName[] = { "none", "listen", "connecting", "connected" };
 
     static final int MESSAGE_CONNECT_STATE  = 1;
     static final int MESSAGE_DEVICE = 2;

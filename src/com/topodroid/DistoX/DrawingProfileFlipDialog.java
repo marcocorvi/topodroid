@@ -57,7 +57,7 @@ class DrawingProfileFlipDialog extends MyDialog
 
     mCBshots = (CheckBox) findViewById( R.id.shots );
 
-    mBtnOK      = (Button) findViewById(R.id.button_ok );
+    mBtnOK   = (Button) findViewById(R.id.button_ok );
     mBtnOK.setOnClickListener( this );   // OK-SAVE
 
   }

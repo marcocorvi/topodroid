@@ -17,12 +17,12 @@ import java.io.IOException;
 import java.util.Locale;
 
 import android.graphics.Canvas;
-import android.graphics.Paint;
+// import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.Matrix;
 
-import android.util.Log;
+// import android.util.Log;
 
 /**
  */

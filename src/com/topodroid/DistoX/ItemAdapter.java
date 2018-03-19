@@ -160,7 +160,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
   }
 
   private long mClickMillis = 0;
-  static final int DOUBLE_CLICK_TIME = 400;
+  static final private int DOUBLE_CLICK_TIME = 400;
 
   private void doClick( View v )
   {

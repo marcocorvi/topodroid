@@ -12,17 +12,17 @@
 package com.topodroid.DistoX;
 
 import java.util.Set;
-import java.util.List;
-import java.util.ArrayList;
+// import java.util.List;
+// import java.util.ArrayList;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.BufferedWriter;
-import java.io.PrintWriter;
-import java.io.IOException;
+// import java.io.FileWriter;
+// import java.io.BufferedWriter;
+// import java.io.PrintWriter;
+// import java.io.IOException;
 
-import java.lang.reflect.Method;
-import java.lang.reflect.InvocationTargetException;
+// import java.lang.reflect.Method;
+// import java.lang.reflect.InvocationTargetException;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -33,13 +33,13 @@ import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.content.DialogInterface;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
+// import android.content.ComponentName;
 
 import android.widget.TextView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Button;
-import android.widget.RadioButton;
+// import android.widget.RadioButton;
 import android.view.View;
 import android.view.KeyEvent;
 // import android.widget.RadioGroup;
@@ -50,11 +50,11 @@ import android.widget.AdapterView.OnItemLongClickListener;
 
 import android.widget.Toast;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+// import android.graphics.Bitmap;
+// import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 
-import android.util.Log;
+// import android.util.Log;
 
 import android.bluetooth.BluetoothDevice;
 

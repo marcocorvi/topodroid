@@ -13,9 +13,9 @@ package com.topodroid.DistoX;
 
 import java.util.regex.Pattern;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
-import android.widget.RadioButton;
+// import android.widget.RadioButton;
 
 import android.text.method.KeyListener;
 import android.text.InputType;
@@ -25,32 +25,32 @@ import android.text.InputType;
 
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.content.DialogInterface;
+// import android.content.res.Resources;
+// import android.content.DialogInterface;
 import android.inputmethodservice.KeyboardView;
 
-import android.graphics.Paint.FontMetrics;
+// import android.graphics.Paint.FontMetrics;
 
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.Toast;
+// import android.widget.PopupWindow;
+// import android.widget.Toast;
 
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.view.Window;
-import android.view.WindowManager;
-import android.view.View.OnKeyListener;
-import android.view.KeyEvent;
+// import android.view.ViewGroup.LayoutParams;
+// import android.view.Window;
+// import android.view.WindowManager;
+// import android.view.View.OnKeyListener;
+// import android.view.KeyEvent;
 
-import android.util.Log;
+// import android.util.Log;
 
 class ShotDialog extends MyDialog
-                        implements View.OnClickListener
-                                 , View.OnLongClickListener
+                 implements View.OnClickListener
+                          , View.OnLongClickListener
 {
   private ShotWindow mParent;
   private DBlock mBlk;
@@ -124,20 +124,20 @@ class ShotDialog extends MyDialog
 
   // private CheckBox mCBdeleteLeg;
 
-  String shot_from;
-  String shot_to;
-  boolean shot_leg;
-  boolean shot_xsplay;
-  // String shot_data;
-  String shot_distance;
-  String shot_bearing;
-  String shot_clino;
-  boolean shot_manual;
+  private String shot_from;
+  private String shot_to;
+  private boolean shot_leg;
+  private boolean shot_xsplay;
+  // private String shot_data;
+  private String shot_distance;
+  private String shot_bearing;
+  private String shot_clino;
+  private boolean shot_manual;
 
-  String shot_extra;
-  int  shot_extend;
-  long shot_flag;
-  String shot_comment;
+  private String shot_extra;
+  private int  shot_extend;
+  private long shot_flag;
+  private String shot_comment;
 
   MyKeyboard mKeyboard = null;
 

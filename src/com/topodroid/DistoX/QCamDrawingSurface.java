@@ -16,30 +16,30 @@ import java.util.List;
 
 import android.content.Context;
 
-import android.os.Handler;
-import android.os.Message;
+// import android.os.Handler;
+// import android.os.Message;
 
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Path;
+// import android.graphics.Bitmap;
+// import android.graphics.Canvas;
+// import android.graphics.Color;
+// import android.graphics.Paint;
+// import android.graphics.Path;
 import android.graphics.ImageFormat;
 
 import android.hardware.Camera;
 // import android.hardware.Camera.CameraInfo; // UNUSED
-import android.hardware.Camera.Parameters;
+// import android.hardware.Camera.Parameters;
 import android.hardware.Camera.PreviewCallback;
 import android.hardware.Camera.PictureCallback;
 import android.hardware.Camera.ShutterCallback;
-import android.hardware.SensorManager;
+// import android.hardware.SensorManager;
 
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 // import android.view.OrientationEventListener;
 
 import android.util.AttributeSet;
-import android.util.Log;
+// import android.util.Log;
 
 /** this is the camera preview class
  *  It access the camera via the QCamPreview

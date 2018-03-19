@@ -12,11 +12,11 @@
 package com.topodroid.DistoX;
 
 // import java.util.regex.Pattern;
-import java.util.Locale;
+// import java.util.Locale;
 
-import android.widget.ArrayAdapter;
+// import android.widget.ArrayAdapter;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 
 import android.content.Context;
@@ -24,61 +24,56 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ActivityNotFoundException;
 
-import android.widget.TextView;
-import android.widget.EditText;
+// import android.widget.TextView;
+// import android.widget.EditText;
 import android.widget.Button;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.GridView;
+// import android.view.ViewGroup.LayoutParams;
+// import android.widget.GridView;
 // import android.view.View.OnKeyListener;
 // import android.view.KeyEvent;
-import android.inputmethodservice.KeyboardView;
+// import android.inputmethodservice.KeyboardView;
 
-import android.net.Uri;
+// import android.net.Uri;
 
 // import android.widget.Toast;
+// import android.util.Log;
 
-import android.util.Log;
-
-
-import java.util.Iterator;
-
-import java.io.File;
+// import java.util.Iterator;
+// import java.io.File;
 
 import java.util.List;
 
 import android.app.Activity;
-import android.os.Bundle;
+// import android.os.Bundle;
 
-import android.content.Context;
+// import android.content.Context;
 
-import android.view.inputmethod.EditorInfo;
+// import android.view.inputmethod.EditorInfo;
 import android.view.KeyEvent;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 
-import android.widget.TextView;
-import android.widget.EditText;
-import android.widget.Button;
+// import android.widget.TextView;
+// import android.widget.EditText;
+// import android.widget.Button;
 // import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.TextView.OnEditorActionListener;
+// import android.widget.TextView.OnEditorActionListener;
 
-import android.view.View;
+// import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.inputmethodservice.KeyboardView;
+// import android.inputmethodservice.KeyboardView;
 
-import android.location.Location;
-import android.location.LocationListener;
+// import android.location.Location;
+// import android.location.LocationListener;
 import android.location.LocationManager;
-import android.location.GpsStatus;
-import android.location.GpsSatellite;
+// import android.location.GpsStatus;
+// import android.location.GpsSatellite;
 // import android.location.GpsStatus.Listener;
 
-
-import android.util.Log;
-
+// import android.util.Log;
 
 public class FixedActivity extends Activity
                            implements View.OnClickListener
@@ -160,7 +155,7 @@ public class FixedActivity extends Activity
 
   public void refreshList()
   {
-    List< FixedInfo > fxds = mApp.mData.selectAllFixed( mApp.mSID, TDStatus.NORMAL );
+    List< FixedInfo > fxds = TopoDroidApp.mData.selectAllFixed( mApp.mSID, TDStatus.NORMAL );
     mFixedAdapter = new FixedAdapter( mContext, R.layout.message, fxds );
     mList.setAdapter( mFixedAdapter );
   }
@@ -198,7 +193,7 @@ public class FixedActivity extends Activity
   private FixedInfo addLocation( String station, double lng, double lat, double h_ell, double h_geo,
                                  String comment, long source )
   {
-    long id = mApp.mData.insertFixed( mApp.mSID, -1L, station, lng, lat, h_ell, h_geo, comment, 0L, source );
+    long id = TopoDroidApp.mData.insertFixed( mApp.mSID, -1L, station, lng, lat, h_ell, h_geo, comment, 0L, source );
     return new FixedInfo( id, station, lng, lat, h_ell, h_geo, comment, source ); 
   }
 
@@ -211,16 +206,20 @@ public class FixedActivity extends Activity
     int k = 0;
     if ( hasGps && b == mButton1[k++] ) { // GPS
       final LocationManager lm = (LocationManager)getSystemService( Context.LOCATION_SERVICE );
-      if ( ! lm.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
-        TopoDroidAlertDialog.makeAlert( this, getResources(), getResources().getString( R.string.ask_gps_service ),
-          new DialogInterface.OnClickListener( ) { 
-            @Override public void onClick( DialogInterface dialog, int btn ) { 
-              startActivity( new Intent( android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS ) );
+      if ( lm != null ) {
+        if ( ! lm.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+          TopoDroidAlertDialog.makeAlert( this, getResources(), getResources().getString( R.string.ask_gps_service ),
+            new DialogInterface.OnClickListener( ) { 
+              @Override public void onClick( DialogInterface dialog, int btn ) { 
+                startActivity( new Intent( android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS ) );
+              }
             }
-          }
-        );
+          );
+        } else {
+          new FixedGpsDialog( mContext, this ).show();
+        }
       } else {
-        new FixedGpsDialog( mContext, this ).show();
+        TDLog.Error("No location manager" );
       }
     } else if ( b == mButton1[k++] ) { // ADD
       new FixedAddDialog( mContext, this ).show();
@@ -233,33 +232,33 @@ public class FixedActivity extends Activity
 
   public boolean hasLocation( String station )
   {
-    return mApp.mData.hasFixed( mApp.mSID, station );
+    return TopoDroidApp.mData.hasFixed( mApp.mSID, station );
   }
 
   void updateFixedData( FixedInfo fxd, double lng, double lat, double alt, double asl )
   {
-    mApp.mData.updateFixedData( fxd.id, mApp.mSID, lng, lat, alt, asl );
+    TopoDroidApp.mData.updateFixedData( fxd.id, mApp.mSID, lng, lat, alt, asl );
     // mList.invalidate();
     refreshList();
   }
  
   void updateFixedNameComment( FixedInfo fxd, String name, String comment )
   {
-    mApp.mData.updateFixedStationComment( fxd.id, mApp.mSID, name, comment );
+    TopoDroidApp.mData.updateFixedStationComment( fxd.id, mApp.mSID, name, comment );
     // mList.invalidate();
     refreshList();
   }
 
   public void dropFixed( FixedInfo fxd )
   {
-    mApp.mData.updateFixedStatus( fxd.id, mApp.mSID, TDStatus.DELETED );
+    TopoDroidApp.mData.updateFixedStatus( fxd.id, mApp.mSID, TDStatus.DELETED );
     refreshList();
   }
 
   void setDeclination( float decl )
   {
     // Log.v( "DistoX", "set declination " + decl );
-    mApp.mData.updateSurveyDeclination( mApp.mSID, decl, true );
+    TopoDroidApp.mData.updateSurveyDeclination( mApp.mSID, decl, true );
   }
 
   // private final static int LOCATION_REQUEST = 1;
@@ -314,28 +313,32 @@ public class FixedActivity extends Activity
       if ( reqCode == CRS_CONVERSION_REQUEST ) {
         if ( mFixedDialog != null ) {
           Bundle bundle = intent.getExtras();
-          String cs = bundle.getString( "cs_to" );
-          // String title = String.format(Locale.US, "%.2f %.2f %.2f",
-          //    bundle.getDouble( "longitude"),
-          //    bundle.getDouble( "latitude"),
-          //    bundle.getDouble( "altitude") );
-          // TDLog.Log( TDLog.LOG_LOC, "CONV. RESULT " + title );
-          // mFixedDialog.setTitle( title );
-          // mFixedDialog.setCSto( cs );
-          double lng = bundle.getDouble( "longitude");
-          double lat = bundle.getDouble( "latitude");
-          double alt = bundle.getDouble( "altitude");
-          mApp.mData.updateFixedCS(  mFixedDialog.getFixedId(), mApp.mSID, cs, lng, lat, alt );
-          mFixedDialog.setConvertedCoords( cs, lng, lat, alt );
-          mFixedDialog = null;
+          if ( bundle != null ) {
+            String cs = bundle.getString( "cs_to" );
+            // String title = String.format(Locale.US, "%.2f %.2f %.2f",
+            //    bundle.getDouble( "longitude"),
+            //    bundle.getDouble( "latitude"),
+            //    bundle.getDouble( "altitude") );
+            // TDLog.Log( TDLog.LOG_LOC, "CONV. RESULT " + title );
+            // mFixedDialog.setTitle( title );
+            // mFixedDialog.setCSto( cs );
+            double lng = bundle.getDouble( "longitude");
+            double lat = bundle.getDouble( "latitude");
+            double alt = bundle.getDouble( "altitude");
+            TopoDroidApp.mData.updateFixedCS(  mFixedDialog.getFixedId(), mApp.mSID, cs, lng, lat, alt );
+            mFixedDialog.setConvertedCoords( cs, lng, lat, alt );
+            mFixedDialog = null;
+          }
         }
       } else if ( reqCode == CRS_INPUT_REQUEST ) {
         Bundle bundle = intent.getExtras();
-        double lng = bundle.getDouble( "longitude");
-        double lat = bundle.getDouble( "latitude");
-        double alt = bundle.getDouble( "altitude");
-        mFixedAddDialog.setCoords( lng, lat, alt );
-        mFixedAddDialog = null;
+        if ( bundle != null ) {
+          mFixedAddDialog.setCoords(
+            bundle.getDouble( "longitude"),
+            bundle.getDouble( "latitude"),
+            bundle.getDouble( "altitude") );
+          mFixedAddDialog = null;
+        }
       }
     }
   }

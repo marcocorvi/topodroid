@@ -16,7 +16,7 @@ class TriSplay
   boolean used;
   String from;   // splay station (usually "from")
   int extend;
-  int reversed;  // -1 reversed, +1 normal
+  int reversed;  // -1 reversed, +1 normal // PRIVATE
                         // NOTE splay temp-shot can be reversed - leg temp-shot are always normal
                         // this is checked only in makeShotFromTmp to detect errors
   DBlock block;

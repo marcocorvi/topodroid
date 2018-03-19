@@ -366,7 +366,7 @@ class DrawingPath extends RectF
 
   public void setOrientation( double angle ) { }
 
-  public String toTherion( ) { return "FIXME"; }
+  public String toTherion( ) { return null; } // FIXME
 
   void toDataStream( DataOutputStream dos ) { TDLog.Error( "ERROR DrawingPath toDataStream executed"); }
 

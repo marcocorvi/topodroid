@@ -15,7 +15,7 @@ import android.content.Context;
 import android.preference.Preference;
 import android.preference.ListPreference;
 import android.util.AttributeSet;
-import android.preference.Preference.OnPreferenceChangeListener;
+// import android.preference.Preference.OnPreferenceChangeListener;
 
 /**
  * @note this class must be public

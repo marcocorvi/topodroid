@@ -18,7 +18,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import android.util.Log;
+// import android.util.Log;
 
 class Vector
 {
@@ -188,7 +188,7 @@ class Vector
   }
 
   // cross-product of two Vectors
-  static Vector cross_product( Vector p1, Vector p2 )
+  static Vector cross_product( Vector p1, Vector p2 ) // PRIVATE
   {
     return new Vector( p1.y * p2.z - p1.z * p2.y,
                        p1.z * p2.x - p1.x * p2.z,
@@ -232,7 +232,7 @@ class Vector
   }
 
   // if this is normalized can use this method
-  Vector orthogonal( Vector b )
+  Vector orthogonal( Vector b ) // PRIVATE
   {
     float f = this.dot( b );
     return new Vector( b.x - f*x, b.y - f*y, b.z - f*z );
@@ -291,7 +291,7 @@ class Vector
   
   /** compute the mean vector (CoM) of the vectors of an array
    */
-  static Vector computeMeanVector( ArrayList<Vector> pts )
+  static Vector computeMeanVector( ArrayList<Vector> pts ) // PRIVATE
   {
     float x0 = 0.0f;
     float y0 = 0.0f;

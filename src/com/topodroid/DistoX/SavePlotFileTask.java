@@ -23,15 +23,15 @@ import android.os.AsyncTask;
 import android.os.Handler;
 
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
+// import android.graphics.Bitmap.CompressFormat;
 
-import android.util.Log;
+// import android.util.Log;
 
 class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
 {
-  private Context mContext;
+  private Context mContext; // FIXME LEAK
   private Handler mHandler;
-  private TopoDroidApp mApp;
+  // private TopoDroidApp mApp;
   private DrawingWindow mParent;
   private DrawingSurface mSurface;
   private List<DrawingPath> mPaths;
@@ -48,7 +48,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      mContext  = context;
      mParent   = parent;
      mHandler  = handler;
-     mApp      = app;
+     // mApp      = app;
      mSurface  = surface;
      mPaths    = null;
      mFullName = fullname;
@@ -68,7 +68,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      mContext  = context;
      mParent   = parent;
      mHandler  = handler;
-     mApp      = app;
+     // mApp      = app;
      mSurface  = null;
      mPaths    = paths;
      mFullName = fullname;

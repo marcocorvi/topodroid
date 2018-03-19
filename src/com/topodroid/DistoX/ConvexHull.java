@@ -15,7 +15,7 @@ import java.lang.Math;
 import java.util.ArrayList;
 // import java.util.Iterator;
 
-import android.util.Log;
+// import android.util.Log;
 
 class ConvexHull
 {
@@ -26,7 +26,7 @@ class ConvexHull
   // private Vector mY;
   // private Vector mZ;
 
-  ArrayList< Vector > mPts; // other points
+  private ArrayList< Vector > mPts; // other points
   ArrayList< CHTriangle > mTri;
 
   private class VectorPair

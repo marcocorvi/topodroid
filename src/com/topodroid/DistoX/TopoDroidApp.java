@@ -12,24 +12,24 @@
 package com.topodroid.DistoX;
 
 import java.io.File;
-import java.io.FileFilter;
+// import java.io.FileFilter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.PrintStream;
+// import java.io.PrintStream;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.BufferedReader;
 
 import java.io.InputStream;
-import java.io.FileInputStream;
-import java.io.BufferedInputStream;
+// import java.io.FileInputStream;
+// import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
-import java.io.BufferedOutputStream;
-import java.util.zip.ZipOutputStream;
+// import java.io.BufferedOutputStream;
+// import java.util.zip.ZipOutputStream;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
+// import java.util.zip.ZipFile;
 
 import java.util.Locale;
 
@@ -38,23 +38,23 @@ import java.util.ArrayList;
 // import java.util.Stack;
 
 
-import android.widget.ArrayAdapter;
+// import android.widget.ArrayAdapter;
 
-import android.os.Environment;
+// import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
-import android.os.Debug;
+// import android.os.Debug;
 import android.os.SystemClock; // FIXME TROBOT
 
 import android.app.Application;
-import android.app.KeyguardManager;
-import android.app.KeyguardManager.KeyguardLock;
-import android.app.Activity;
+// import android.app.KeyguardManager;
+// import android.app.KeyguardManager.KeyguardLock;
+// import android.app.Activity;
 
 import android.preference.PreferenceManager;
-import android.preference.Preference;
+// import android.preference.Preference;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.SharedPreferences.Editor;
@@ -67,22 +67,22 @@ import android.content.ActivityNotFoundException;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 
-import android.provider.Settings.System;
-import android.provider.Settings.SettingNotFoundException;
+// import android.provider.Settings.System;
+// import android.provider.Settings.SettingNotFoundException;
 
-import android.view.WindowManager;
-import android.view.Display;
+// import android.view.WindowManager;
+// import android.view.Display;
 import android.view.ViewGroup.LayoutParams;
 
 import android.widget.Button;
-import android.graphics.Point;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
+// import android.graphics.Point;
+// import android.graphics.Bitmap;
+// import android.graphics.BitmapFactory;
+// import android.graphics.drawable.BitmapDrawable;
 
 import android.net.Uri;
 
-import android.util.Log;
+// import android.util.Log;
 import android.util.DisplayMetrics;
 
 import android.bluetooth.BluetoothAdapter;
@@ -188,10 +188,10 @@ public class TopoDroidApp extends Application
   static DataHelper mData = null;         // database 
   static DeviceHelper mDData = null;      // device/calib database
 
-  static SurveyWindow mSurveyWindow = null;
-  static ShotWindow mShotWindow     = null;
+  SurveyWindow mSurveyWindow = null;
+  ShotWindow mShotWindow     = null;
   // static DrawingWindow mDrawingWindow = null; // FIXME currently not used
-  static MainWindow mActivity = null; 
+  MainWindow mActivity = null; 
   TopoDroidPreferences mPrefActivity = null;
 
   static boolean mDeviceActivityVisible = false;
@@ -218,12 +218,12 @@ public class TopoDroidApp extends Application
 
   float getDisplayDensity( )
   {
-    return getResources().getSystem().getDisplayMetrics().density;
+    return Resources.getSystem().getDisplayMetrics().density;
   }
 
   static float getDisplayDensity( Context context )
   {
-    return context.getResources().getSystem().getDisplayMetrics().density;
+    return Resources.getSystem().getDisplayMetrics().density;
   }
 
   int setListViewHeight( HorizontalListView listView )
@@ -552,8 +552,8 @@ public class TopoDroidApp extends Application
       // TDLog.Profile("TDApp DB");
       mDataListeners = new DataListenerSet( );
       // ***** DATABASE MUST COME BEFORE PREFERENCES
-      mData  = new DataHelper( this, mDataListeners );
-      mDData = new DeviceHelper( this, null ); 
+      mData  = new DataHelper( this, this, mDataListeners );
+      mDData = new DeviceHelper( this, this, null ); 
 
       mStationName = new StationName();
 
@@ -974,16 +974,16 @@ public class TopoDroidApp extends Application
     return ( mDData == null ) || mDData.hasCalibName( name );
   }
 
-  long setCalibFromName( String calib )
+  void /*long*/ setCalibFromName( String calib ) // RETURN value not used
   {
     mCID = -1;
     myCalib = null;
     if ( calib != null && mDData != null ) {
       mCID = mDData.setCalib( calib );
       myCalib = (mCID > 0)? calib : null;
-      return mCID;
+      // return mCID;
     }
-    return 0;
+    // return 0;
   }
 
   // void setSurveyFromId( long id )

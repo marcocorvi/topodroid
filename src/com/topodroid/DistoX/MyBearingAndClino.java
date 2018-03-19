@@ -24,7 +24,7 @@ import android.graphics.Bitmap;
 
 import android.media.ExifInterface;
 
-import android.util.Log;
+// import android.util.Log;
 
 class MyBearingAndClino implements IBearingAndClino
 {
@@ -85,7 +85,7 @@ class MyBearingAndClino implements IBearingAndClino
   {
     try {
       ExifInterface exif = new ExifInterface( file.getPath() );
-      String.format(Locale.US, "%.2f %.2f", b, c );
+      // String.format(Locale.US, "%.2f %.2f", b, c );
       int rot = getExifOrientation( o );
       exif.setAttribute( ExifInterface.TAG_ORIENTATION, String.format(Locale.US, "%d", rot) );
       exif.setAttribute( ExifInterface.TAG_DATETIME, TopoDroidUtil.currentDateTime() );

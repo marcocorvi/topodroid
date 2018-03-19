@@ -14,21 +14,21 @@ package com.topodroid.DistoX;
 import java.util.List;
 import java.util.Locale;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 import android.content.Context;
-import android.content.Intent;
+// import android.content.Intent;
 
-import android.widget.ArrayAdapter;
+// import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Toast;
+// import android.widget.Toast;
 
 import android.view.View;
-import android.view.View.OnClickListener;
+// import android.view.View.OnClickListener;
 
 class UndeleteDialog extends MyDialog
                             implements OnItemClickListener
@@ -44,10 +44,10 @@ class UndeleteDialog extends MyDialog
   // ArrayAdapter< String >  mArrayAdapter;
   MyStringAdapter mArrayAdapter;
   ListView mList;
-  List< DBlock > mShots1; // deleted
-  List< DBlock > mShots2; // overshoot
-  List< DBlock > mShots3; // check
-  List< PlotInfo >     mPlots;
+  private List< DBlock > mShots1; // deleted
+  private List< DBlock > mShots2; // overshoot
+  private List< DBlock > mShots3; // check
+  private List< PlotInfo >     mPlots;
 
   private int mStatus;
 
@@ -142,9 +142,9 @@ class UndeleteDialog extends MyDialog
     }
     switch ( mStatus ) {
       case 0:
-        for ( PlotInfo p : mPlots ) {
+        if ( mPlots != null ) for ( PlotInfo p : mPlots ) {
           if ( p.type == PlotInfo.PLOT_PLAN ) {
-            mArrayAdapter.add( String.format("plot %d <%s> %s", p.id, p.name, p.getTypeString() ) );
+            mArrayAdapter.add( String.format(Locale.US, "plot %d <%s> %s", p.id, p.name, p.getTypeString() ) );
           // } else { // this is OK extended do not show up in this dialog
           //   TDLog.Log( TDLog.LOG_PLOT, " plot " + p.id + " <" + p.name + "> " +  p.getTypeString() );
           }
@@ -152,21 +152,21 @@ class UndeleteDialog extends MyDialog
         mBtnStatus.setText( R.string.undelete_plot );
         break;
       case TDStatus.DELETED:
-        for ( DBlock b : mShots1 ) {
+        if ( mShots1 != null ) for ( DBlock b : mShots1 ) {
           mArrayAdapter.add( 
             String.format(Locale.US, "shot %d <%s> %.2f %.1f %.1f", b.mId, b.Name(), b.mLength, b.mBearing, b.mClino ) );
         }
         mBtnStatus.setText( R.string.undelete_shot );
         break;
       case TDStatus.OVERSHOOT:
-        for ( DBlock b : mShots2 ) {
+        if ( mShots2 != null ) for ( DBlock b : mShots2 ) {
           mArrayAdapter.add( 
             String.format(Locale.US, "shot %d %.2f %.1f %.1f", b.mId, b.mLength, b.mBearing, b.mClino ) );
         }
         mBtnStatus.setText( R.string.undelete_overshoot );
         break;
       case TDStatus.CHECK:
-        for ( DBlock b : mShots3 ) {
+        if ( mShots3 != null ) for ( DBlock b : mShots3 ) {
           mArrayAdapter.add( 
             String.format(Locale.US, "shot %d %.2f %.1f %.1f", b.mId, b.mLength, b.mBearing, b.mClino ) );
         }

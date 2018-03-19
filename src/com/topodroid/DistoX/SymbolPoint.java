@@ -11,8 +11,8 @@
  */
 package com.topodroid.DistoX;
 
-import java.io.File;
-import java.io.FileReader;
+// import java.io.File;
+// import java.io.FileReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
@@ -29,22 +29,22 @@ import android.graphics.RectF;
 import android.graphics.Matrix;
 
 // to log error
-import android.util.Log;
+// import android.util.Log;
 
 class SymbolPoint extends Symbol
 {
-  static final float dxfScale = 0.05f;
-  static final float csxScale = 5.00f;
-  static final float csxdxfScale = csxScale * dxfScale;
+  static final private float dxfScale = 0.05f;
+  static final private float csxScale = 5.00f;
+  static final private float csxdxfScale = csxScale * dxfScale;
   Paint  mPaint;
   Path   mPath;
-  Path   mOrigPath;
+  Path   mOrigPath; // PRIVATE
   String mName;
-  String mDxf;
+  String mDxf; // PRIVATE
   String mSvg;
 
   int mHasText;         // whether the point has a text (1), value (2), or none (0)
-  boolean mOrientable;
+  boolean mOrientable; // PRIVATE
   double mOrientation;      // orientation [degrees]
   // SymbolPointBasic mPoint1; // basic point
 
@@ -292,8 +292,8 @@ class SymbolPoint extends Symbol
               //     mPoint2 = new SymbolPointBasic( name, th_name, fname, color, path );
               //     mOrientable = true;
               //   }
-              } else {
-                // ERROR only two points max
+              // } else {
+              //   // ERROR only two points max
               }
               ++ cnt;
             }

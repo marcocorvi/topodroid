@@ -23,7 +23,7 @@ import java.io.PrintWriter;
 // import java.util.regex.Pattern;
 import java.util.Locale;
 
-import android.util.Log;
+// import android.util.Log;
 
 class ParserPocketTopo extends ImportParser
 {

@@ -11,18 +11,18 @@
  */
 package com.topodroid.DistoX;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 
-import android.content.Intent;
+// import android.content.Intent;
 import android.content.Context;
 import android.content.DialogInterface;
 
 
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.view.View.OnKeyListener;
-import android.view.KeyEvent;
+// import android.view.ViewGroup.LayoutParams;
+// import android.view.View.OnKeyListener;
+// import android.view.KeyEvent;
 
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -31,7 +31,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.CheckBox;
 
-import android.util.Log;
+// import android.util.Log;
 
 class PhotoSensorsDialog extends MyDialog
                                 implements View.OnClickListener
@@ -66,7 +66,7 @@ class PhotoSensorsDialog extends MyDialog
   private MyCheckBox mButtonCheck = null;
 
   HorizontalListView mListView;
-  HorizontalButtonView mButtonView;
+  private HorizontalButtonView mButtonView;
   private Button[] mButton;
 
   private Button mBtnCancel;
@@ -89,8 +89,7 @@ class PhotoSensorsDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
     // TDLog.Log(  TDLog.LOG_PHOTO, "PhotoSensorDialog onCreate" );
-    setContentView(R.layout.photo_sensor_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout(R.layout.photo_sensor_dialog, R.string.title_photo );
 
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
 
@@ -176,8 +175,6 @@ class PhotoSensorsDialog extends MyDialog
     
     mBtnCancel = (Button) findViewById( R.id.button_cancel );
     mBtnCancel.setOnClickListener( this );
-
-    setTitle( R.string.title_photo );
 
     mTVstations = (TextView) findViewById( R.id.photo_shot_stations );
     mTVdata = (TextView) findViewById( R.id.photo_shot_data );

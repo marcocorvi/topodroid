@@ -11,25 +11,25 @@
  */
 package com.topodroid.DistoX;
 
-import java.util.List;
-import java.util.ArrayList;
+// import java.util.List;
+// import java.util.ArrayList;
 
 import android.os.Bundle;
-import android.app.Dialog;
+// import android.app.Dialog;
 
 import android.content.Context;
 
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import android.widget.TextView;
+// import android.widget.TextView;
 // import android.widget.AdapterView.OnItemLongClickListener;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 
 class PlotZoomFitDialog extends MyDialog
                                implements OnClickListener
@@ -49,8 +49,7 @@ class PlotZoomFitDialog extends MyDialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.plot_zoomfit_dialog );
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout( R.layout.plot_zoomfit_dialog, R.string.title_plot_zoomfit );
 
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
 
@@ -84,8 +83,6 @@ class PlotZoomFitDialog extends MyDialog
       // mBtnPortrait.setText( R.string.button_zoomfit );
     // }
     ((Button) findViewById( R.id.button_cancel )).setOnClickListener( this );
-
-    setTitle( R.string.title_plot_zoomfit );
   }
  
   // ---------------------------------------------------------------

@@ -17,8 +17,8 @@ import android.widget.Toast;
 
 abstract class ImportTask extends AsyncTask< String, Integer, Long >
 {
-  MainWindow mMain;
-  TopoDroidApp mApp;
+  MainWindow mMain;  // FIXME LEAK
+  TopoDroidApp mApp; // FIXME LEAK used by inheriting classes
 
   ImportTask( MainWindow main )
   {

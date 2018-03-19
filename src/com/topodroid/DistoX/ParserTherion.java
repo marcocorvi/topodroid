@@ -12,7 +12,7 @@
  */
 package com.topodroid.DistoX;
 
-import java.io.File;
+// import java.io.File;
 import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -20,22 +20,22 @@ import java.util.ArrayList;
 import java.util.Stack;
 import java.util.regex.Pattern;
 
-import android.util.Log;
+// import android.util.Log;
 
 // TODO this class can be made extend ImportParser
 
 class ParserTherion
 {
-  final static String EMPTY = "";
+  final static private String EMPTY = "";
 
-  final static int DATA_NONE       = 0;
-  final static int DATA_NORMAL     = 1;
-  final static int DATA_TOPOFIL    = 2;
-  final static int DATA_CARTESIAN  = 3;
-  final static int DATA_CYLPOLAR   = 4;
-  final static int DATA_DIVING     = 5;
-  final static int DATA_DIMENSION  = 6;
-  final static int DATA_NOSURVEY   = 7;
+  final static private int DATA_NONE       = 0;
+  final static private int DATA_NORMAL     = 1;
+  final static private int DATA_TOPOFIL    = 2;
+  final static private int DATA_CARTESIAN  = 3;
+  final static private int DATA_CYLPOLAR   = 4;
+  final static private int DATA_DIVING     = 5;
+  final static private int DATA_DIMENSION  = 6;
+  final static private int DATA_NOSURVEY   = 7;
 
   String mName = null;  // survey name
   String mDate = null;  // survey date
@@ -94,8 +94,8 @@ class ParserTherion
   private ArrayList< ParserShot > shots;   // centerline shots
   private ArrayList< ParserShot > splays;  // splay shots
 
-  public int getShotNumber()    { return shots.size(); }
-  public int getSplayNumber()   { return splays.size(); }
+  // public int getShotNumber()    { return shots.size(); }
+  // public int getSplayNumber()   { return splays.size(); }
 
   ArrayList< ParserShot > getShots()    { return shots; }
   ArrayList< ParserShot > getSplays()   { return splays; }
@@ -456,10 +456,12 @@ class ParserTherion
                     sb.append( comment.substring( 1 ) );
                     for ( int kk=3; kk<vals_len; ++kk ) {
                       if ( vals[kk].endsWith("\"") ) {
-                        sb.append( " " + vals[kk].substring(0, vals[kk].length()-1) );
+                        sb.append(" ");
+                        sb.append( vals[kk].substring(0, vals[kk].length()-1) );
                         break;
                       } else {
-                        sb.append( " " + vals[kk] );
+                        sb.append(" ");
+                        sb.append( vals[kk] );
                       }
                     }
                     comment = sb.toString();

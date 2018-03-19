@@ -12,26 +12,26 @@
 package com.topodroid.DistoX;
 
 import java.util.Locale;
-import java.util.ArrayList;
-import java.util.TreeSet;
+// import java.util.ArrayList;
+// import java.util.TreeSet;
 import java.io.File;
 
-import android.graphics.Paint;
+// import android.graphics.Paint;
 import android.graphics.Path;
 
 import android.content.Context;
 import android.content.res.Resources;
 
-import android.util.Log;
+// import android.util.Log;
 
 class SymbolPointLibrary extends SymbolLibrary
 {
-  static final String DefaultPoints[] = {
+  static final private String DefaultPoints[] = {
     "air-draught", "blocks", "clay", "continuation", "debris", "entrance", "sand", "stalactite", "stalagmite", "water-flow"
   };
 
   // ArrayList< SymbolPoint > mPoint;    // enabled points
-  int mPointUserIndex;
+  int mPointUserIndex; // PRIVATE
   int mPointLabelIndex;
   int mPointPhotoIndex;
   int mPointAudioIndex;
@@ -92,8 +92,8 @@ class SymbolPointLibrary extends SymbolLibrary
 
   // ========================================================================
 
-  final String p_label = "moveTo 0 3 lineTo 0 -6 lineTo -3 -6 lineTo 3 -6"; // "T" shape
-  final String p_user = "addCircle 0 0 6";                                  // "o" shape
+  final private String p_label = "moveTo 0 3 lineTo 0 -6 lineTo -3 -6 lineTo 3 -6"; // "T" shape
+  final private String p_user = "addCircle 0 0 6";                                  // "o" shape
 
   private void loadSystemPoints( Resources res )
   {
@@ -182,10 +182,10 @@ class SymbolPointLibrary extends SymbolLibrary
       if ( ! file.exists() ) return false;
       symbol = new SymbolPoint( file.getPath(), file.getName(), locale, iso );
       addSymbol( symbol );
-    } else {
-      // Log.v( TopoDroidApp.TAG, "enabling missing point " + fname );
+    // } else {
+    //   // Log.v( TopoDroidApp.TAG, "enabling missing point " + fname );
     }
-    if ( symbol == null ) return false;
+    // if ( symbol == null ) return false; // ALWAYS false
 
     symbol.setEnabled( true ); // TopoDroidApp.mData.isSymbolEnabled( "a_" + symbol.mThName ) );
     makeEnabledList();

@@ -13,11 +13,11 @@ package com.topodroid.DistoX;
 
 // import java.util.List;
 
-import android.app.Activity;
+// import android.app.Activity;
 // import android.app.ActivityManager;
 // import android.app.ActivityManager.RunningTaskInfo;
 import android.os.AsyncTask;
-// import android.content.Context;
+import android.content.Context;
 
 // import android.widget.Button;
 import android.widget.Toast;
@@ -30,15 +30,15 @@ class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
   static final int PARENT_GM     = 2;
 
   byte[]   coeff;
-  TopoDroidApp mApp;
-  Activity mActivity;
+  TopoDroidApp mApp;  // FIXME LEAK
+  Context mContext; // FIXME LEAK
   private IEnableButtons mEnableButtons;
   private int mParentType;
   // String comp_name;
 
-  CalibReadTask( Activity activity, IEnableButtons eb, TopoDroidApp app, int parent_type )
+  CalibReadTask( Context context, IEnableButtons eb, TopoDroidApp app, int parent_type )
   {
-    mActivity = activity;
+    mContext = context;
     mApp      = app;
     mEnableButtons = eb;
     coeff = new byte[52]; // always read 52 bytes
@@ -75,12 +75,12 @@ class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
       switch ( mParentType ) {
         case PARENT_DEVICE:
           if ( TopoDroidApp.mDeviceActivityVisible ) {
-            (new CalibCoeffDialog( mActivity, mApp, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
+            (new CalibCoeffDialog( mContext, mApp, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
           }
           break;
         case PARENT_GM:
           if ( TopoDroidApp.mGMActivityVisible ) {
-            (new CalibCoeffDialog( mActivity, mApp, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
+            (new CalibCoeffDialog( mContext, mApp, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
           }
           break;
       }

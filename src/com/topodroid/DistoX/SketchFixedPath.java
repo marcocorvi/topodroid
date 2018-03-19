@@ -15,14 +15,14 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
-import android.graphics.RectF;
+// import android.graphics.RectF;
 import android.graphics.Matrix;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Iterator;
+// import java.util.Iterator;
 // import java.util.List;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 // import android.util.Log;
 
@@ -115,6 +115,7 @@ class SketchFixedPath extends SketchPath
   @Override
   public String toTherion()
   {
+    // FIXME if ( mLine.size() == 0 ) return null;
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
     pw.format("line shot" );

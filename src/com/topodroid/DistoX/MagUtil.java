@@ -36,14 +36,14 @@ class MagUtil
    */
 
   // These error values are the NGDC error model 
-  static final double WMM_UNCERTAINTY_F = 152;
-  static final double WMM_UNCERTAINTY_H = 133;
-  static final double WMM_UNCERTAINTY_X = 138;
-  static final double WMM_UNCERTAINTY_Y = 89;
-  static final double WMM_UNCERTAINTY_Z = 165;
-  static final double WMM_UNCERTAINTY_I = 0.22;
-  static final double WMM_UNCERTAINTY_D_OFFSET = 0.24;
-  static final double WMM_UNCERTAINTY_D_COEF = 5432;
+  static final private double WMM_UNCERTAINTY_F = 152;
+  static final private double WMM_UNCERTAINTY_H = 133;
+  static final private double WMM_UNCERTAINTY_X = 138;
+  static final private double WMM_UNCERTAINTY_Y = 89;
+  static final private double WMM_UNCERTAINTY_Z = 165;
+  static final private double WMM_UNCERTAINTY_I = 0.22;
+  static final private double WMM_UNCERTAINTY_D_OFFSET = 0.24;
+  static final private double WMM_UNCERTAINTY_D_COEF = 5432;
 
   // static final double M_PI = Math.PI;
   // static final double RAD2DEG = 180.0/M_PI;

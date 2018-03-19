@@ -12,19 +12,19 @@
 package com.topodroid.DistoX;
 
 import java.util.List;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 import android.os.Bundle;
-import android.app.Dialog;
+// import android.app.Dialog;
 
 import android.content.Context;
 import android.content.res.Resources;
 
 import android.view.View;
-import android.view.View.OnClickListener;
+// import android.view.View.OnClickListener;
 
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
+// import android.widget.ListView;
 import android.widget.GridView;
 import android.widget.Button;
 
@@ -35,7 +35,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import android.widget.Toast;
 
-import android.util.Log;
+// import android.util.Log;
 
 class PlotListDialog extends MyDialog
                         implements OnItemClickListener
@@ -100,7 +100,7 @@ class PlotListDialog extends MyDialog
 
     // FIXME_SKETCH_3D
       mBtnSketch3dNew = (Button) findViewById(R.id.sketch3d_new);
-      if ( mApp.mSketches && mDoNew ) {
+      if ( TopoDroidApp.mSketches && mDoNew ) {
         mBtnSketch3dNew.setOnClickListener( this );
       } else {
         mBtnSketch3dNew.setEnabled( false );
@@ -115,16 +115,16 @@ class PlotListDialog extends MyDialog
 
   private void updateList()
   {
-    if ( mApp.mData != null && mApp.mSID >= 0 ) {
+    if ( TopoDroidApp.mData != null && mApp.mSID >= 0 ) {
       setTitle( R.string.title_scraps );
 
       Resources res = mApp.getResources();
 
-      List< PlotInfo > list = mApp.mData.selectAllPlots( mApp.mSID, TDStatus.NORMAL ); 
+      List< PlotInfo > list = TopoDroidApp.mData.selectAllPlots( mApp.mSID, TDStatus.NORMAL ); 
       List< Sketch3dInfo > slist = null;
       // FIXME_SKETCH_3D
-        if ( mApp.mSketches ) {
-          slist = mApp.mData.selectAllSketches( mApp.mSID, TDStatus.NORMAL );
+        if ( TopoDroidApp.mSketches ) {
+          slist = TopoDroidApp.mData.selectAllSketches( mApp.mSID, TDStatus.NORMAL );
         }
       // END_SKETCH_3D //
       if ( list.size() == 0 && ( slist == null || slist.size() == 0 ) ) {
@@ -153,8 +153,8 @@ class PlotListDialog extends MyDialog
           }
         }
       // END_SKETCH_3D //
-    } else {
-      // TDLog.Log( TDLog.LOG_PLOT, "null data or survey (" + mApp.mSID + ")" );
+    // } else {
+    //   // TDLog.Log( TDLog.LOG_PLOT, "null data or survey (" + mApp.mSID + ")" );
     }
   }
  
@@ -166,7 +166,7 @@ class PlotListDialog extends MyDialog
     if ( b == mBtnPlotNew ) {
       hide();
       if ( mParent != null ) {
-        int idx = 1 + mApp.mData.maxPlotIndex( mApp.mSID );
+        int idx = 1 + TopoDroidApp.mData.maxPlotIndex( mApp.mSID );
         new PlotNewDialog( mContext, mApp, mParent, idx ).show();
       }
     } else if ( b == mBtnClose ) {
@@ -176,7 +176,7 @@ class PlotListDialog extends MyDialog
     } else if ( b == mBtnBack ) {
       /* nothing */
     // FIXME_SKETCH_3D
-    } else if ( mApp.mSketches && b == mBtnSketch3dNew ) {
+    } else if ( TopoDroidApp.mSketches && b == mBtnSketch3dNew ) {
       if ( mParent != null ) {
         new Sketch3dNewDialog( mContext, mParent, mApp ).show();
       }

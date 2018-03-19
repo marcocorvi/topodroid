@@ -29,9 +29,9 @@ class TDLog
 
   static final String TAG = "DistoX";
 
-  static int mLogStream = 0;    // log stream
-  static PrintWriter mLog = null;
-  static long mMillis;
+  static private int mLogStream = 0;    // log stream
+  static private PrintWriter mLog = null;
+  static private long mMillis;
 
   static boolean LOG_BEZIER = false;
   static boolean LOG_BT     = false;   // bluetooth
@@ -68,7 +68,7 @@ class TDLog
 
 
   // --------------- LOG PREFERENCES ----------------------
-  static final String[] log_key = {
+  static final private String[] log_key = {
     "DISTOX_LOG_DEBUG",           // + 0
     "DISTOX_LOG_ERR",
     "DISTOX_LOG_INPUT",           // + 2

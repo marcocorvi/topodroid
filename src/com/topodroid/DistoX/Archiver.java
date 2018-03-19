@@ -167,11 +167,11 @@ class Archiver
     // } catch ( IOException e ) {
     //   // FIXME
     } finally {
+      if ( zos != null ) try { zos.close(); } catch ( IOException e ) { }
       File fp = new File( TDPath.getSqlFile() );
       if ( fp.exists() ) {
-        // fp.delete();
+        fp.delete();
       }
-      if ( zos != null ) try { zos.close(); } catch ( IOException e ) { }
     }
     return ret;
   }

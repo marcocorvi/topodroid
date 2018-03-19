@@ -78,16 +78,14 @@ public class AudioDialog extends MyDialog
   protected void onCreate( Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
-    initLayout( R.layout.audio_dialog, null );
-
-    setTitle( R.string.title_audio );
+    initLayout( R.layout.audio_dialog, R.string.title_audio );
 
     LinearLayout layout2 = (LinearLayout) findViewById( R.id.layout2 );
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
-    layout2.setMinimumHeight( size + 20 );
+    layout2.setMinimumHeight( size + 40 );
     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
       LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
-    lp.setMargins( 0, 10, 20, 10 );
+    lp.setMargins( 10, 10, 20, 20 );
 
     // mBtnDelete = (Button) findViewById( R.id.audio_delete );
     mBtnClose = (Button) findViewById( R.id.audio_close );
@@ -95,8 +93,9 @@ public class AudioDialog extends MyDialog
 
     mBtnRec    = new MyStateBox( mContext, R.drawable.iz_audio_rec, R.drawable.iz_audio_rec_on );
     mBtnPlay   = new MyStateBox( mContext, R.drawable.iz_audio_play_off, R.drawable.iz_audio_play, R.drawable.iz_audio_stop );
-    mBtnDelete = new MyStateBox( mContext, R.drawable.iz_delete, R.drawable.iz_delete );
-    mBtnConfirm = new Button( mContext );
+    mBtnDelete = new MyStateBox( mContext, R.drawable.iz_audio_delete, R.drawable.iz_audio_delete );
+    // mBtnConfirm = new Button( mContext );
+    mBtnConfirm = (Button) findViewById( R.id.audio_confirm );
 
     mBtnRec.setOnClickListener( this );
     mBtnPlay.setOnClickListener( this );
@@ -113,7 +112,7 @@ public class AudioDialog extends MyDialog
     layout2.addView( mBtnPlay, lp );
     layout2.addView( mBtnRec, lp );
     layout2.addView( mBtnDelete, lp );
-    layout2.addView( mBtnConfirm, lp );
+    // layout2.addView( mBtnConfirm, lp );
     layout2.invalidate();
   }
 

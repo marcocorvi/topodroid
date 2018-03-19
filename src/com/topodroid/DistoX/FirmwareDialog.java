@@ -12,19 +12,19 @@
 package com.topodroid.DistoX;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.DataInputStream;
-import java.io.IOException;
+// import java.io.FileInputStream;
+// import java.io.DataInputStream;
+// import java.io.IOException;
 
 import android.os.Bundle;
-import android.app.Dialog;
+// import android.app.Dialog;
 
 // import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
+// import android.content.Intent;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
-import android.content.DialogInterface.OnDismissListener;
+// import android.content.DialogInterface.OnCancelListener;
+// import android.content.DialogInterface.OnDismissListener;
 
 import android.view.View;
 import android.widget.Button;
@@ -35,7 +35,7 @@ import android.widget.Toast;
 
 import android.text.method.KeyListener;
 
-import android.util.Log;
+// import android.util.Log;
 
 class FirmwareDialog extends MyDialog
                              implements View.OnClickListener

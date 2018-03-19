@@ -13,7 +13,7 @@ package com.topodroid.DistoX;
 
 import android.app.Activity;
 
-import android.util.Log;
+// import android.util.Log;
 
 public class ItemDrawer extends Activity
 {

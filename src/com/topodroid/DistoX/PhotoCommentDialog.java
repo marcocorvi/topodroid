@@ -11,21 +11,21 @@
  */
 package com.topodroid.DistoX;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 
-import android.content.Intent;
+// import android.content.Intent;
 import android.content.Context;
 
-import android.widget.TextView;
+// import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.CheckBox;
 
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-import android.view.View.OnKeyListener;
-import android.view.KeyEvent;
+// import android.view.View.OnKeyListener;
+// import android.view.KeyEvent;
 
 // import android.util.Log;
 
@@ -59,8 +59,8 @@ class PhotoCommentDialog extends MyDialog
 
     cameraCheck = FeatureChecker.checkCamera( mContext );
     // TDLog.Log(  TDLog.LOG_PHOTO, "PhotoCommentDialog onCreate" );
-    setContentView(R.layout.photo_comment_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout(R.layout.photo_comment_dialog, R.string.title_photo_comment );
+    
 
     mETcomment = (EditText) findViewById(R.id.photo_comment_comment);
     mButtonOK  = (Button) findViewById(R.id.photo_comment_ok );
@@ -69,8 +69,6 @@ class PhotoCommentDialog extends MyDialog
     if ( ! cameraCheck ) {
       mCamera.setVisibility( View.GONE );
     }
-
-    setTitle( R.string.title_photo_comment );
 
     mButtonOK.setOnClickListener( this );
     mButtonCancel.setOnClickListener( this );

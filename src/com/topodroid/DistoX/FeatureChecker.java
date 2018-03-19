@@ -12,7 +12,7 @@
 package com.topodroid.DistoX;
 
 import android.os.Build;
-import android.os.Build.VERSION_CODES;
+// import android.os.Build.VERSION_CODES;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -59,7 +59,7 @@ class FeatureChecker
 
   /** permissions string codes
    */ 
-  static String perms[] = {
+  static private String perms[] = {
       android.Manifest.permission.BLUETOOTH,            // Bluetooth permissions are normal - no need to request at runtime
       android.Manifest.permission.BLUETOOTH_ADMIN,
       android.Manifest.permission.WRITE_EXTERNAL_STORAGE,

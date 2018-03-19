@@ -14,17 +14,17 @@ package com.topodroid.DistoX;
 import java.util.Locale;
 
 import android.os.Bundle;
-import android.app.Dialog;
+// import android.app.Dialog;
 // import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.content.DialogInterface;
+// import android.content.Intent;
+// import android.content.DialogInterface;
 // import android.content.DialogInterface.OnCancelListener;
 // import android.content.DialogInterface.OnDismissListener;
 
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.TextView;
+// import android.view.ViewGroup.LayoutParams;
+// import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -53,8 +53,7 @@ class SurveyCalibrationDialog extends MyDialog
   {
     super.onCreate( bundle );
 
-    setContentView( R.layout.survey_calibration_dialog );
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout( R.layout.survey_calibration_dialog, R.string.calibration_title );
 
     mETlength  = (EditText) findViewById( R.id.et_length );
     mETazimuth = (EditText) findViewById( R.id.et_azimuth );
@@ -65,8 +64,6 @@ class SurveyCalibrationDialog extends MyDialog
 
     mCBlrud   = (CheckBox) findViewById( R.id.cb_lrud );
     mCBlrud.setChecked( ManualCalibration.mLRUD );
-
-    setTitle( mApp.getResources().getString( R.string.calibration_title ) );
 
     mBTok = (Button) findViewById( R.id.button_ok );
     mBTok.setOnClickListener( this );
@@ -96,8 +93,8 @@ class SurveyCalibrationDialog extends MyDialog
       }
       ManualCalibration.mLRUD = mCBlrud.isChecked();
 
-    } else if ( b == mBTback ) {
-      /* nothing */
+    // } else if ( b == mBTback ) {
+    //   /* nothing */
     }
     dismiss();
   }

@@ -19,7 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 class ListItemAdapter extends ArrayAdapter< String >
 {

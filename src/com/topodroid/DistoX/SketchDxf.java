@@ -17,7 +17,7 @@ import java.io.PrintWriter;
 import java.util.Locale;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+// import java.util.HashMap;
 
 import android.util.SparseArray;
 

@@ -24,7 +24,7 @@ import android.widget.RadioButton;
 // import android.widget.ImageView;
 import android.widget.CheckBox;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 
 // import android.graphics.Paint;
 

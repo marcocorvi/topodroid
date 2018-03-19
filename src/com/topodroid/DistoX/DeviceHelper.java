@@ -24,7 +24,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.DataSetObservable;
-import android.database.DatabaseUtils.InsertHelper;
+// import android.database.DatabaseUtils.InsertHelper;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
@@ -33,12 +33,12 @@ import android.database.sqlite.SQLiteDiskIOException;
 
 import android.widget.Toast;
 
-import android.util.Log;
+// import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.HashMap;
+// import java.util.Locale;
+// import java.util.HashMap;
 
 class DeviceHelper extends DataSetObservable
 {
@@ -80,17 +80,19 @@ class DeviceHelper extends DataSetObservable
   // DATABASE
 
   private Context mContext;
+  private TopoDroidApp mApp;
 
-  public SQLiteDatabase getDb() { return myDB; }
+  SQLiteDatabase getDb() { return myDB; }
 
-  DeviceHelper( Context context, ArrayList<DataListener> listeners )
+  DeviceHelper( Context context, TopoDroidApp app, ArrayList<DataListener> listeners )
   {
     mContext = context;
+    mApp     = app;
     mListeners = listeners;
     openDatabase();
   }
 
-  public void closeDatabase()
+  void closeDatabase()
   {
     if ( myDB == null ) return;
     myDB.close();
@@ -133,7 +135,7 @@ class DeviceHelper extends DataSetObservable
   private void handleDiskIOError( SQLiteDiskIOException e )
   {
     TDLog.Error("DB disk error " + e.getMessage() );
-    TopoDroidApp.mActivity.runOnUiThread( new Runnable() {
+    mApp.mActivity.runOnUiThread( new Runnable() {
       public void run() {
         Toast toast = Toast.makeText( mContext, "Critical failure: Disk i/o error", Toast.LENGTH_LONG );
         toast.getView().setBackgroundColor( TDColor.BROWN );
@@ -451,7 +453,7 @@ class DeviceHelper extends DataSetObservable
     return list;
   }
 
-  public List<String> selectAllCalibs() { return selectAllNames( CALIB_TABLE ); }
+  List<String> selectAllCalibs() { return selectAllNames( CALIB_TABLE ); }
 
   List<String> selectDeviceCalibs( String device )
   {
@@ -473,7 +475,7 @@ class DeviceHelper extends DataSetObservable
     return ret;
   }
 
-  public List<CalibInfo> selectDeviceCalibsInfo( String device ) 
+  List<CalibInfo> selectDeviceCalibsInfo( String device ) 
   {
     List<CalibInfo> ret = new ArrayList<>();
     Cursor cursor = null;
@@ -715,7 +717,7 @@ class DeviceHelper extends DataSetObservable
     return id;
   }
 
-  public ArrayList< Device > getDevices( ) 
+  ArrayList< Device > getDevices( ) 
   {
     ArrayList<Device> ret = new ArrayList<>();
     // if ( myDB == null ) return ret;
@@ -794,7 +796,7 @@ class DeviceHelper extends DataSetObservable
     return ret;
   }
 
-  public int getDeviceTail( String address )
+  int getDeviceTail( String address )
   { 
     // if ( myDB == null ) return 0;
     int ret = 0;
@@ -1038,7 +1040,7 @@ class DeviceHelper extends DataSetObservable
      return cid;
    }
 
-   public String getCalibFromId( long cid ) { return getNameFromId( CALIB_TABLE, cid ); }
+   String getCalibFromId( long cid ) { return getNameFromId( CALIB_TABLE, cid ); }
 
    // ----------------------------------------------------------------------
    // DATABASE TABLES

@@ -18,14 +18,14 @@ class TDAzimuth
   static float mRefAzimuth = 90; // west to east
   static long  mFixedExtend = 0;
 
-  static void resetRefAzimuth( float azimuth )
+  static void resetRefAzimuth( final ShotWindow window, float azimuth )
   {
     mRefAzimuth  = azimuth;
     mFixedExtend = ( TDSetting.mAzimuthManual )? 1L : 0L;
-    if ( TopoDroidApp.mShotWindow != null ) {
-      TopoDroidApp.mShotWindow.runOnUiThread( new Runnable() {
+    if ( window != null ) {
+      window.runOnUiThread( new Runnable() {
         public void run() {
-          TopoDroidApp.mShotWindow.setRefAzimuthButton();
+          window.setRefAzimuthButton();
         }
       } );
     }

@@ -16,13 +16,13 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
-import android.util.Log;
+// import android.util.Log;
 
 class NumStationSet
 {
 // -------------------------------------------------------------
-  static final boolean BLACK = true;
-  static final boolean RED = false;
+  static final private boolean BLACK = true;
+  static final private boolean RED = false;
 
 
   static private int compare( String s1, String s2 )

@@ -16,11 +16,11 @@ import java.io.PrintWriter;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 
-import java.util.Collections;
+// import java.util.Collections;
 import java.util.ArrayList;
-import java.util.Random;
-import java.util.Iterator;
-import java.util.HashMap;
+// import java.util.Random;
+// import java.util.Iterator;
+// import java.util.HashMap;
 import java.util.Comparator;
 import android.util.SparseArray;
 
@@ -556,8 +556,8 @@ class SketchSurface extends SketchShot
         side.t1 = tri;
       } else if ( side.t2 == null ) {
         side.t2 = tri;
-      } else {
-        // Log.e("DistoX", "multi T side " + side.t1.i + " " + side.t1.j + " " + side.t1.k + "  " + side.t2.i + " " + side.t2.j + " " + side.t2.k + "  " + tri.i + " " + tri.j + " " + tri.k );
+      // } else {
+      //   // Log.e("DistoX", "multi T side " + side.t1.i + " " + side.t1.j + " " + side.t1.k + "  " + side.t2.i + " " + side.t2.j + " " + side.t2.k + "  " + tri.i + " " + tri.j + " " + tri.k );
       }
     }
   }      
@@ -678,7 +678,7 @@ class SketchSurface extends SketchShot
   /** add a vertex given X,Y,Z (or return an already existing close vertex)
    * @return the vertex key (index)
    */
-  final double EPS = 0.01;
+  final private double EPS = 0.01;
   private int addVertex( float x, float y, float z )
   {
     int size = mVertices.size();

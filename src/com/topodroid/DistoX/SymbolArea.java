@@ -11,8 +11,8 @@
  */
 package com.topodroid.DistoX;
 
-import java.io.File;
-import java.io.FileReader;
+// import java.io.File;
+// import java.io.FileReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
@@ -25,14 +25,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Shader.TileMode;
 
-import android.util.Log;
+// import android.util.Log;
 
 class SymbolArea extends Symbol
 {
   String mName;
   int mColor;
   boolean mCloseHorizontal;
-  boolean mOrientable;
+  boolean mOrientable; // PRIVATE
   // FIXME AREA_ORIENT
   double mOrientation;
 
@@ -157,17 +157,16 @@ class SymbolArea extends Symbol
     return null;
   }
 
-  private void makeShader( Bitmap bitmap0, TileMode xmode, TileMode ymode, boolean subimage ) 
+  private void makeShader( Bitmap bitmap, TileMode xmode, TileMode ymode, boolean subimage ) 
   {
-    if ( bitmap0 == null ) return;
-    Bitmap bitmap = bitmap0;
+    if ( bitmap == null ) return;
     int width  = bitmap.getWidth();
     int height = bitmap.getHeight();
     if ( width > 0 && height > 0 ) {
       if ( subimage ) {
         int w1 = width / 2;
         int h1 = height / 2;
-        mShaderBitmap = Bitmap.createBitmap( bitmap0, w1/2, h1/2, w1, h1 );
+        mShaderBitmap = Bitmap.createBitmap( bitmap, w1/2, h1/2, w1, h1 );
       }
       mShader = new BitmapShader( mShaderBitmap, xmode, ymode );
       mPaint.setShader( mShader );

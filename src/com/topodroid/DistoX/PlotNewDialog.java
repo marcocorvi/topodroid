@@ -13,23 +13,23 @@ package com.topodroid.DistoX;
 
 import java.util.Locale;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 
 import android.content.Context;
 // import android.text.InputType;
 import android.inputmethodservice.KeyboardView;
 
-import android.view.Window;
+// import android.view.Window;
 
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
+// import android.widget.LinearLayout;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 
 // import android.util.Log;
 
@@ -135,22 +135,23 @@ class PlotNewDialog extends MyDialog
       // String view  = mEditView.getText().toString();
       // String view = null;
 
-      if ( name == null ) {
-        String error = mContext.getResources().getString( R.string.error_name_required );
-        mEditName.setError( error );
-        return;
-      } 
+      // if ( name == null ) { // CANNOT HAPPEN
+      //   String error = mContext.getResources().getString( R.string.error_name_required );
+      //   mEditName.setError( error );
+      //   return;
+      // }
       name = TopoDroidUtil.noSpaces( name );
       if ( name.length() == 0 ) {
         String error = mContext.getResources().getString( R.string.error_name_required );
         mEditName.setError( error );
         return;
       } 
-      if ( start == null ) {
-        String error = mContext.getResources().getString( R.string.error_start_required );
-        mEditStart.setError( error );
-        return;
-      } 
+      // if ( start == null ) { // CANNOT HAPPEN
+      //   String error = mContext.getResources().getString( R.string.error_start_required );
+      //   mEditStart.setError( error );
+      //   return;
+      // }
+      
       // start = TopoDroidUtil.noSpaces( start );
       start = start.trim();
       if ( start.length() == 0 ) {

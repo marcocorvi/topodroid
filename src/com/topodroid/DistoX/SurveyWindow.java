@@ -13,19 +13,19 @@ package com.topodroid.DistoX;
 
 import java.util.Locale;
 import java.util.List;
-import java.util.Calendar;
-import java.util.ArrayList;
+// import java.util.Calendar;
+// import java.util.ArrayList;
 
-import java.io.File;
-import java.io.IOException;
+// import java.io.File;
+// import java.io.IOException;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
 // import android.app.Dialog;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+// import android.os.Handler;
+// import android.os.Message;
 
 import android.content.Context;
 import android.content.Intent;
@@ -33,7 +33,7 @@ import android.content.DialogInterface;
 import android.content.ActivityNotFoundException;
 import android.content.res.Resources;
 
-import android.location.LocationManager;
+// import android.location.LocationManager;
 
 import android.widget.EditText;
 import android.widget.TextView;
@@ -45,20 +45,20 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import android.widget.Toast;
 
-import android.util.Log;
+// import android.util.Log;
 
 import android.view.View;
-import android.view.View.OnClickListener;
+// import android.view.View.OnClickListener;
 import android.view.KeyEvent;
 // for FRAGMENT
-import android.view.ViewGroup;
-import android.view.LayoutInflater;
+// import android.view.ViewGroup;
+// import android.view.LayoutInflater;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
+// import android.graphics.Bitmap;
+// import android.graphics.BitmapFactory;
+// import android.graphics.drawable.BitmapDrawable;
 
-import android.net.Uri;
+// import android.net.Uri;
 
 public class SurveyWindow extends Activity
                             implements IExporter
@@ -132,6 +132,7 @@ public class SurveyWindow extends Activity
 
   TopoDroidApp mApp;
   private boolean mustOpen;
+  private int mNameColor;
 
   String getSurveyName() { return mApp.mySurvey; }
 
@@ -140,7 +141,7 @@ public class SurveyWindow extends Activity
     name = TopoDroidUtil.noSpaces( name );
     if ( mApp.renameCurrentSurvey( mApp.mSID, name, true ) ) {
       mTextName.setText( name );
-      mTextName.setTextColor( TDColor.NAME_COLOR );
+      mTextName.setTextColor( mNameColor );
     } else {
       Toast.makeText( mActivity, R.string.cannot_rename, Toast.LENGTH_SHORT).show();
     }
@@ -155,7 +156,7 @@ public class SurveyWindow extends Activity
     if ( mApp.mSID < 0 ) return false;
     SurveyInfo info = mApp.getSurveyInfo();
     mTextName.setText( info.name );
-    mTextName.setTextColor( TDColor.NAME_COLOR );
+    mTextName.setTextColor( mNameColor );
     mInitStation = info.initStation;
     mXSections   = info.xsections;
 
@@ -185,7 +186,8 @@ public class SurveyWindow extends Activity
 
     mApp = (TopoDroidApp)getApplication();
     mApp.mSurveyWindow = this;
-	mActivity = this;
+    mActivity = this;
+    mNameColor = getResources().getColor( R.color.textfixed );
 
     mContext = this;
     mustOpen = false;
@@ -319,7 +321,7 @@ public class SurveyWindow extends Activity
 
   private void doArchive()
   {
-    while ( ! mApp.mEnableZip ) Thread.yield();
+    while ( ! TopoDroidApp.mEnableZip ) Thread.yield();
 
     mApp.doExportData( TDSetting.mExportShotsFormat, false );
     Archiver archiver = new Archiver( mApp );
@@ -409,7 +411,7 @@ public class SurveyWindow extends Activity
     float decl = 0.0f;
     if ( mEditDecl.getText() != null ) {
       String decl_str = mEditDecl.getText().toString();
-      if ( decl_str != null && decl_str.length() > 0 ) {
+      if ( /* decl_str != null && */ decl_str.length() > 0 ) { // ALWAYS true
         try {
           decl = Float.parseFloat( decl_str );
         } catch ( NumberFormatException e ) {
@@ -567,7 +569,7 @@ public class SurveyWindow extends Activity
     closeMenu();
     if ( mMenu == (ListView)parent ) {
       handleMenu( pos );
-      return;
+      // return;
     }
     // if ( onMenu ) {
     //   closeMenu();

@@ -17,15 +17,15 @@ import java.io.BufferedWriter;
 import android.content.Context;
 
 import android.os.AsyncTask;
-import android.os.Message;
+// import android.os.Message;
 
 import android.widget.Toast;
 
-import android.util.Log;
+// import android.util.Log;
 
 class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
 {
-    private Context mContext;
+    private Context mContext;  // FIXME LEAK used by Toast
     private DrawingCommandManager mCommand;
     private DistoXNum mNum;
     private long mType;

@@ -32,11 +32,11 @@ import android.util.TypedValue;
 
 class CutNPaste
 {
-  final static int BUTTON_HEIGHT = 22;
+  final static private int BUTTON_HEIGHT = 22;
 
-  static String mClipboardText = null;
-  static PopupWindow popup = null;
-  static EditText    popup_et = null;
+  static private String mClipboardText = null;
+  static private PopupWindow popup = null;
+  static private EditText    popup_et = null;
 
   static boolean dismissPopup()
   {
@@ -119,7 +119,7 @@ class CutNPaste
     popup.showAsDropDown( popup_et );
   }
 
-  static Button makeButton( Context context, String text, int color, int size )
+  static private Button makeButton( Context context, String text, int color, int size )
   {
     Button button = new Button( context );
     // button.set???( R.layout.popup_item );
@@ -150,7 +150,7 @@ class CutNPaste
     return button;
   }
 
-  static PopupWindow mPopupBT = null;
+  static private PopupWindow mPopupBT = null;
 
   /** show BT popup under button b
    * @param b button
@@ -255,10 +255,10 @@ class CutNPaste
     // int h = (int)( BUTTON_HEIGHT * 7 * 1.1 ); 
     textview0.setWidth( w );
     if ( app.distoType() == Device.DISTO_X310 ) {
-      textview1.setWidth( w );
-      textview2.setWidth( w );
-      textview3.setWidth( w );
-      if ( ! gm_data ) textview4.setWidth( w );
+      if ( textview1 != null) textview1.setWidth( w );
+      if ( textview2 != null) textview2.setWidth( w );
+      if ( textview3 != null) textview3.setWidth( w );
+      if ( ! gm_data ) if ( textview4 != null ) textview4.setWidth( w );
     }
     mPopupBT = new PopupWindow( popup_layout, w, h ); 
     mPopupBT.showAsDropDown(b); 

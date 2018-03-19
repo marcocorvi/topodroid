@@ -552,7 +552,7 @@ public class DrawingWindow extends ItemDrawer
 
         mFullName1 = fullName1;
         mFullName2 = fullName2;
-        TopoDroidApp.mShotWindow.setRecentPlot( name, mType );
+        mApp.mShotWindow.setRecentPlot( name, mType );
       } else {
         Toast.makeText( mActivity, R.string.plot_duplicate_name, Toast.LENGTH_SHORT ).show();
         // Log.v("DistoX", "plot name already exists");
@@ -723,7 +723,7 @@ public class DrawingWindow extends ItemDrawer
       if ( blk != null ) {
         if ( blk.isMultiBad() ) {
           dpath.setPaint( BrushManager.fixedOrangePaint );
-        } else if ( TopoDroidApp.mShotWindow != null && TopoDroidApp.mShotWindow.isBlockMagneticBad( blk ) ) {
+        } else if ( mApp.mShotWindow != null && mApp.mShotWindow.isBlockMagneticBad( blk ) ) {
           dpath.setPaint( BrushManager.fixedRedPaint );
         } else if ( TDSetting.isConnectionModeBatch() && blk.isRecent( TopoDroidApp.mSecondLastShotId, System.currentTimeMillis()/1000 ) ) {
           dpath.setPaint( BrushManager.fixedBluePaint );
@@ -2292,7 +2292,7 @@ public class DrawingWindow extends ItemDrawer
     {
       mDrawingSurface.deleteSplay( p, sp ); 
       mApp_mData.deleteShot( blk.mId, mApp.mSID, TDStatus.DELETED, true );
-      TopoDroidApp.mShotWindow.updateDisplay(); // FIXME ???
+      mApp.mShotWindow.updateDisplay(); // FIXME ???
     }
 
     void deletePoint( DrawingPointPath point ) 
@@ -3620,7 +3620,7 @@ public class DrawingWindow extends ItemDrawer
     {
       mApp_mData.deletePlot( mPid1, mSid );
       if ( mPid2 >= 0 ) mApp_mData.deletePlot( mPid2, mSid );
-      TopoDroidApp.mShotWindow.setRecentPlot( null, 0 );
+      mApp.mShotWindow.setRecentPlot( null, 0 );
       finish();
     }
 
@@ -4021,8 +4021,8 @@ public class DrawingWindow extends ItemDrawer
         computeReferences( mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, true );
       }
       resetReference( mPlot2 );
-      if ( TopoDroidApp.mShotWindow != null ) {
-        TopoDroidApp.mShotWindow.mRecentPlotType = mType;
+      if ( mApp.mShotWindow != null ) {
+        mApp.mShotWindow.mRecentPlotType = mType;
       } else {
         TDLog.Error("Null app mShotWindow on recent plot type2");
       }
@@ -4040,8 +4040,8 @@ public class DrawingWindow extends ItemDrawer
         computeReferences( mPlot1.type, mPlot1.name, TopoDroidApp.mScaleFactor, true );
       }
       resetReference( mPlot1 );
-      if ( TopoDroidApp.mShotWindow != null ) {
-        TopoDroidApp.mShotWindow.mRecentPlotType = mType;
+      if ( mApp.mShotWindow != null ) {
+        mApp.mShotWindow.mRecentPlotType = mType;
       } else {
         TDLog.Error("Null app mShotWindow on recent plot type1");
       }

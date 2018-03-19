@@ -12,14 +12,14 @@
 package com.topodroid.DistoX;
 
 import android.content.Context;
-import android.view.View;
+// import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.LinearLayout;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
+// import android.graphics.Bitmap;
+// import android.graphics.BitmapFactory;
+// import android.graphics.drawable.BitmapDrawable;
 
 class HelpEntry
 {

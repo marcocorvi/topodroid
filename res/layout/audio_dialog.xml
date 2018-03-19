@@ -6,12 +6,26 @@
     android:orientation="vertical"
     >
 
-    <LinearLayout android:id="@+id/layout2"
-      android:layout_width="wrap_content" 
+    <LinearLayout 
+      android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/marginv"
       android:orientation="horizontal" 
       >
+      <LinearLayout android:id="@+id/layout2"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginv"
+        android:orientation="horizontal" 
+	/>
+      <Button android:id="@+id/audio_confirm"
+        style="@style/button_default"
+        android:layout_gravity="right"
+        android:gravity="right"
+        android:layout_marginTop="@dimen/marginv"
+        android:layout_marginLeft="@dimen/marginh" 
+        android:layout_marginRight="@dimen/marginh" 
+        />
     </LinearLayout>
 
     <LinearLayout 

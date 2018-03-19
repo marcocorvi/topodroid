@@ -25,19 +25,20 @@ class ImportPocketTopoTask extends ImportTask
   {
     long sid = 0;
     try {
+      DataHelper app_data = TopoDroidApp.mData;
       // import PocketTopo (only data for the first trip)
       ParserPocketTopo parser = new ParserPocketTopo( str[0], str[1], true ); // apply_declination = true
       ArrayList< ParserShot > shots  = parser.getShots();
-      if ( mApp.mData.hasSurveyName( parser.mName ) ) {
+      if ( app_data.hasSurveyName( parser.mName ) ) {
         return -1L;
       }
 
       sid = mApp.setSurveyFromName( parser.mName, false );
-      mApp.mData.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle, false );
-      mApp.mData.updateSurveyDeclination( sid, parser.mDeclination, false );
-      mApp.mData.updateSurveyInitStation( sid, parser.initStation(), false );
+      app_data.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle, false );
+      app_data.updateSurveyDeclination( sid, parser.mDeclination, false );
+      app_data.updateSurveyInitStation( sid, parser.initStation(), false );
 
-      long id = mApp.mData.insertShots( sid, 1, shots ); // start id = 1
+      long id = app_data.insertShots( sid, 1, shots ); // start id = 1
       TDLog.Log( TDLog.LOG_PTOPO, "SID " + sid + " inserted shots. return " + id );
 
       if ( parser.mStartFrom != null ) {
