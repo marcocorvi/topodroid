@@ -29,7 +29,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Toast;
+// import android.widget.Toast;
 
 // import android.content.IntentFilter;
 import android.content.Context;
@@ -89,7 +89,7 @@ class FirmwareFileDialog extends MyDialog
       }
       mList.setAdapter( mArrayAdapter );
     } else {
-      Toast.makeText( mContext, R.string.firmware_none, Toast.LENGTH_SHORT ).show();
+      TDToast.make( mContext, R.string.firmware_none );
       dismiss();
     }
 

@@ -102,7 +102,7 @@ class FeatureChecker
     for ( k=0; k<3; ++k ) {
       int res = context.checkCallingOrSelfPermission( perms[k] );
       if ( res != PackageManager.PERMISSION_GRANTED ) {
-        // Toast.makeText( mActivity, "TopoDroid must have " + perms[k], Toast.LENGTH_LONG ).show();
+        // TDToast.make( mActivity, "TopoDroid must have " + perms[k] );
 	return -1;
       }
     }
@@ -111,7 +111,7 @@ class FeatureChecker
     for ( ; k<6; ++k ) {
       int res = context.checkCallingOrSelfPermission( perms[k] );
       if ( res != PackageManager.PERMISSION_GRANTED ) {
-        // Toast.makeText( mActivity, "TopoDroid may need " + perms[k], Toast.LENGTH_LONG ).show();
+        // TDToast.make( mActivity, "TopoDroid may need " + perms[k] );
 	ret += flag;
       }
       flag *= 2;

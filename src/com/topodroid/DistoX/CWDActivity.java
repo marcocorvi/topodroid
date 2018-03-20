@@ -38,7 +38,7 @@ import android.view.KeyEvent;
 
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Toast;
+// import android.widget.Toast;
 
 // import android.util.Log;
 
@@ -79,26 +79,26 @@ public class CWDActivity extends Activity
     File base_dir = new File( base_name );
     try {
       if ( ! ( base_dir.exists() && base_dir.canWrite() ) ) {
-        Toast.makeText( this, R.string.bad_cbd, Toast.LENGTH_SHORT ).show();
+        TDToast.make( this, R.string.bad_cbd );
         return false;
       }
     } catch ( SecurityException e ) { 
-      Toast.makeText( this, R.string.bad_cbd, Toast.LENGTH_SHORT ).show();
+      TDToast.make( this, R.string.bad_cbd );
       return false;
     }
 
     if ( dir_name == null ) {
-      Toast.makeText( this, R.string.empty_cwd, Toast.LENGTH_SHORT ).show();
+      TDToast.make( this, R.string.empty_cwd );
       return false;
     } else {
       dir_name = dir_name.trim();
       if ( dir_name.length() == 0 ) {
-        Toast.makeText( this, R.string.empty_cwd, Toast.LENGTH_SHORT ).show();
+        TDToast.make( this, R.string.empty_cwd );
 	return false;
       }
     }
     if ( dir_name.contains("/") ) {
-      Toast.makeText( this, R.string.bad_cwd, Toast.LENGTH_SHORT ).show();
+      TDToast.make( this, R.string.bad_cwd );
       return false;
     }
     if ( ! dir_name.toUpperCase().startsWith( "TOPODROID" ) ) {

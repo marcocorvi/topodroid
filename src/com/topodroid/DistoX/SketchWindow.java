@@ -500,10 +500,10 @@ public class SketchWindow extends ItemDrawer
   // {
   //   Bitmap bitmap = mSketchSurface.getBitmap();
   //   if ( bitmap == null ) {
-  //     Toast.makeText( mActivity, R.string.null_bitmap, Toast.LENGTH_SHORT ).show();
+  //     TDToast.make( mActivity, R.string.null_bitmap );
   //   } else {
   //     new ExportBitmapToFile( mActivity, mSaveHandler, mSketchSurface.getBitmap(), mFullName ).execute();
-  //     Toast.makeText( mActivity, getString(R.string.saved_file_1) + mFullName + ".png", Toast.LENGTH_SHORT ).show();
+  //     TDToast.make( mActivity, getString(R.string.saved_file_1) + mFullName + ".png" );
   //   }
   // }
 
@@ -642,7 +642,7 @@ public class SketchWindow extends ItemDrawer
   // void doSaveTh3AndReload()
   // {
   //   if ( mFullName != null && mSketchSurface != null ) {
-  //     Toast.makeText( mActivity, "save th3 and reload ... wait", Toast.LENGTH_SHORT ).show();
+  //     TDToast.make( mActivity, "save th3 and reload ... wait" );
   //     Handler saveHandler = new Handler(){
   //       @Override
   //       public void handleMessage(Message msg) {
@@ -650,12 +650,12 @@ public class SketchWindow extends ItemDrawer
   //         mModel.loadTh3( filename, null, mPainter );
   //         mSketchSurface.setModel( mModel );
   //         mSketchSurface.isDrawing = true;
-  //         Toast.makeText( mSketchSurface.getContext(), "save th3 and reload done", Toast.LENGTH_SHORT ).show();
+  //         TDToast.make( mSketchSurface.getContext(), "save th3 and reload done" );
   //       }
   //     };
   //     new SaveTh3File(this, saveHandler, mModel, mFullName ).execute();
   //   } else {
-  //     Toast.makeText( mActivity, "FAIL save th3 and reload", Toast.LENGTH_SHORT ).show();
+  //     TDToast.make( mActivity, "FAIL save th3 and reload" );
   //   }
   // }
 
@@ -792,7 +792,7 @@ public class SketchWindow extends ItemDrawer
 
     List<DBlock> list = mData.selectAllShots( mSid, TDStatus.NORMAL );
     if ( list.size() == 0 ) {
-      Toast.makeText( mActivity, R.string.few_data, Toast.LENGTH_SHORT ).show();
+      TDToast.make( mActivity, R.string.few_data );
       finish();
     } else {
       prepareReferences( list );
@@ -974,7 +974,7 @@ public class SketchWindow extends ItemDrawer
                         mInfo.xoffset_3d, mInfo.yoffset_3d, mInfo.zoom_3d, 
                         mInfo.east, mInfo.south, mInfo.vert,
                         mInfo.azimuth, mInfo.clino );
-    // Toast.makeText( this, R.string.saving_wait, Toast.LENGTH_SHORT ).show();
+    // TDToast.make( this, R.string.saving_wait );
     doSaveTdr3();
     super.onPause();
   }
@@ -1133,7 +1133,7 @@ public class SketchWindow extends ItemDrawer
     mNum = new DistoXNum( list, mInfo.start, null, null, mDecl ); // FIXME null: no barrier no hiding
     // N.B. mCheckExtend does not metter for 3D
     if ( (! mNum.surveyAttached) && TDSetting.mCheckAttached ) {
-      Toast.makeText( mActivity, R.string.survey_not_attached, Toast.LENGTH_SHORT ).show();
+      TDToast.make( mActivity, R.string.survey_not_attached );
     }
     mModel = new SketchModel( mInfo, mNum, mPainter );
     mSketchSurface.setModel( mModel );
@@ -1377,7 +1377,7 @@ public class SketchWindow extends ItemDrawer
         if ( mModel.mDisplayMode == SketchDef.DISPLAY_NONE ) { // MODE_STEP
           SketchFixedPath path = doSelectShotAt( x_scene, y_scene, mSelectSize ); 
           if ( path == null ) {
-            Toast.makeText( mActivity, R.string.shot_not_found, Toast.LENGTH_SHORT ).show();
+            TDToast.make( mActivity, R.string.shot_not_found );
           } else {
             DBlock blk = path.mBlock;
             if ( blk != null ) {
@@ -1429,7 +1429,7 @@ public class SketchWindow extends ItemDrawer
       // } else if ( mMode == SketchDef.MODE_STEP ) { // MODE_SELECT
       //   SketchFixedPath path = doSelectShotAt( x_scene, y_scene, mSelectSize ); 
       //   if ( path == null ) {
-      //     Toast.makeText( mActivity, R.string.shot_not_found, Toast.LENGTH_SHORT ).show();
+      //     TDToast.make( mActivity, R.string.shot_not_found );
       //   } else {
       //     DBlock blk = path.mBlock;
       //     if ( blk != null ) {
@@ -1711,9 +1711,8 @@ public class SketchWindow extends ItemDrawer
         //             refines.add( new SketchRefinement( tri10, u1, u12, w120 ) );
         //           }
         //           if ( skipped_triangle ) {
-        //             Toast.makeText( mActivity, R.string.few_line_points, Toast.LENGTH_SHORT ).show();
+        //             TDToast.make( mActivity, R.string.few_line_points );
         //           } else {
-
         //             // Log.v("DistoX", "refinements " + refines.size() );
         //             // NOW GET the inside triangles. extend border a little
         //             // float x = 0;  
@@ -1846,7 +1845,7 @@ public class SketchWindow extends ItemDrawer
       if ( mLoaded ) {
         new SketchModeDialog( mActivity, mModel ).show();
       } else {
-        Toast.makeText( mActivity, R.string.sketch3d_loading, Toast.LENGTH_SHORT ).show();
+        TDToast.make( mActivity, R.string.sketch3d_loading );
       }
     } else if ( b == mButton1[k1++] ) { // SURFACE
       if ( mLoaded ) {
@@ -1856,7 +1855,7 @@ public class SketchWindow extends ItemDrawer
           doMakeSurface( true );
         }
       } else {
-        Toast.makeText( mActivity, R.string.sketch3d_loading, Toast.LENGTH_SHORT ).show();
+        TDToast.make( mActivity, R.string.sketch3d_loading );
       }
     } else if ( b == mButton1[k1++] ) { // DOWNLOAD
       if ( mApp.mDevice != null ) {
@@ -1868,7 +1867,7 @@ public class SketchWindow extends ItemDrawer
         new DataDownloadTask( mApp, handler ).execute();
         // new DataDownloadTask( mApp, this ).execute();
       } else {
-        Toast.makeText( mActivity, R.string.device_none, Toast.LENGTH_SHORT ).show();
+        TDToast.make( mActivity, R.string.device_none );
       }
     } else if ( b == mButton1[k1++] ) { // NOTES
       (new DistoXAnnotations( mActivity, mData.getSurveyFromId(mSid) )).show();
@@ -1894,7 +1893,7 @@ public class SketchWindow extends ItemDrawer
     //   // Log.v("DistoX", "refine to max side ");
     //   int split = mModel.refineToMaxSide( TDSetting.mSketchSideSize );
     //   if ( split == 0 ) { 
-    //     Toast.makeText( mActivity, getString(R.string.sketch_no_split), Toast.LENGTH_SHORT ).show();
+    //     TDToast.make( mActivity, R.string.sketch_no_split );
     //   }
     // } else if ( b == mButton3[k3++] ) { // refine_center
     //   mModel.refineSurfaceAtCenters();
@@ -2028,7 +2027,7 @@ public class SketchWindow extends ItemDrawer
       if ( mLoaded ) {
         new ExportDialog( mActivity, this, TDConst.mSketchExportTypes, R.string.title_plot_save ).show();
       } else {
-        Toast.makeText( mActivity, R.string.sketch3d_loading, Toast.LENGTH_SHORT ).show();
+        TDToast.make( mActivity, R.string.sketch3d_loading );
       }
     } else if ( p++ == pos ) { // PALETTE 
       BrushManager.makePaths( mApp, getResources() );
@@ -2046,13 +2045,13 @@ public class SketchWindow extends ItemDrawer
       if ( mLoaded ) {
         askDelete();
       } else {
-        Toast.makeText( mActivity, R.string.sketch3d_loading, Toast.LENGTH_SHORT ).show();
+        TDToast.make( mActivity, R.string.sketch3d_loading );
       }
     } else if ( p++ == pos ) { // CLEAR
       if ( mLoaded ) {
         askClear();
       } else {
-        Toast.makeText( mActivity, R.string.sketch3d_loading, Toast.LENGTH_SHORT ).show();
+        TDToast.make( mActivity, R.string.sketch3d_loading );
       }
     } else if ( p++ == pos ) { // SETTINGS
       Intent optionsIntent = new Intent( mActivity, TopoDroidPreferences.class );
@@ -2186,7 +2185,7 @@ public class SketchWindow extends ItemDrawer
     } else if ( TDSetting.mSketchModelType == 2 ) {
       mModel.makeSurface( mModel.SURFACE_POWERCRUST );
     } else if ( toast ) {
-      Toast.makeText( mActivity, "no surface type selected", Toast.LENGTH_SHORT ).show();
+      TDToast.make( mActivity, "no surface type selected" );
     }
   }
 
@@ -2259,9 +2258,9 @@ public class SketchWindow extends ItemDrawer
         List<DBlock> list = mData.selectAllShots( mSid, TDStatus.NORMAL );
         recreateNum( list );
       }
-      Toast.makeText( mActivity, getResources().getQuantityString(R.plurals.read_data, nr, nr ), Toast.LENGTH_SHORT ).show();
+      TDToast.make( mActivity, getResources().getQuantityString(R.plurals.read_data, nr, nr ) );
     } else if ( nr < 0 ) {
-      Toast.makeText( mActivity, mApp.DistoXConnectionError[ -nr ], Toast.LENGTH_SHORT ).show();
+      TDToast.make( mActivity, mApp.DistoXConnectionError[ -nr ] );
     }
   }
    

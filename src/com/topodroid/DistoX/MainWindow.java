@@ -173,7 +173,7 @@ public class MainWindow extends Activity
       updateList( list );
       if ( say_no_survey && list.size() == 0 ) {
         say_no_survey = false;
-        Toast.makeText( mActivity, R.string.no_survey, Toast.LENGTH_SHORT ).show();
+        TDToast.make( mActivity, R.string.no_survey );
       } 
     }
   }
@@ -220,13 +220,13 @@ public class MainWindow extends Activity
     {
       if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) { // mBtnDevice
         if ( mApp.mBTAdapter == null ) {
-          Toast.makeText( mActivity, R.string.no_bt, Toast.LENGTH_SHORT ).show();
+          TDToast.make( mActivity, R.string.no_bt );
         } else {
           if ( mApp.mBTAdapter.isEnabled() ) {
             // TDLog.Debug( "start device window");
             startActivity( new Intent( Intent.ACTION_VIEW ).setClass( mActivity, DeviceActivity.class ) );
           } else {
-            Toast.makeText( mActivity, R.string.not_enabled, Toast.LENGTH_SHORT ).show();
+            TDToast.make( mActivity, R.string.not_enabled );
           }
         }
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // NEW SURVEY/CALIB
@@ -245,7 +245,7 @@ public class MainWindow extends Activity
           // intent.putExtra( "survey", mApp.getSurveyThFile() );
           startActivity( intent );
         } catch ( ActivityNotFoundException e ) {
-          Toast.makeText( mActivity, R.string.no_thmanager, Toast.LENGTH_SHORT ).show();
+          TDToast.make( mActivity, R.string.no_thmanager );
         }
       // } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // DATABASE
       //   try {
@@ -253,7 +253,7 @@ public class MainWindow extends Activity
       //     intent.addCategory("com.kokufu.intent.category.APP_DB_VIEWER");
       //     startActivity( intent );
       //   } catch ( ActivityNotFoundException e ) {
-      //     Toast.makeText( mActivity, R.string.no_db_viewer, Toast.LENGTH_SHORT ).show();
+      //     TDToast.make( mActivity, R.string.no_db_viewer );
       //   }
       }
     }
@@ -337,11 +337,11 @@ public class MainWindow extends Activity
       String filepath = TDPath.getImportFile( filename );
       String name = filename.replace(".th", "" ).replace(".TH", "");
       if ( mApp_mData.hasSurveyName( name ) ) {
-        Toast.makeText(mActivity, R.string.import_already, Toast.LENGTH_SHORT).show();
+        TDToast.make(mActivity, R.string.import_already );
         setTheTitle();
         return;
       }
-      // Toast.makeText(mActivity, R.string.import_wait, Toast.LENGTH_SHORT).show();
+      // TDToast.make(mActivity, R.string.import_wait );
       new ImportTherionTask( this ).execute( filepath, name );
     } else if ( filename.endsWith(".dat") || filename.endsWith(".DAT") ) {
       String filepath = TDPath.getImportFile( filename );
@@ -356,7 +356,7 @@ public class MainWindow extends Activity
       String filepath = TDPath.getImportFile( filename );
       new ImportCaveSniperTask( this ).execute( filepath ); 
     } else if ( filename.endsWith(".zip") ) {
-      Toast.makeText(mActivity, R.string.import_zip_wait, Toast.LENGTH_LONG).show();
+      TDToast.makeLong( mActivity, R.string.import_zip_wait );
       new ImportZipTask( this ) .execute( filename );
     } else {
       setTheTitle( );
@@ -406,7 +406,7 @@ public class MainWindow extends Activity
   private void handleMenu( int pos ) 
   {
     closeMenu();
-    // Toast.makeText(mActivity, item.toString(), Toast.LENGTH_SHORT).show();
+    // TDToast.make(mActivity, item.toString() );
     int p = 0;
       Intent intent;
       if ( TDLevel.overNormal && p++ == pos ) { // PALETTE EXTRA SYMBOLS
@@ -558,7 +558,7 @@ public class MainWindow extends Activity
   {
     int size = mApp.setListViewHeight( mListView );
     MyButton.resetCache( /* mApp, */ size );
-    // Toast.makeText( this, "SIZE " + size, Toast.LENGTH_SHORT ).show();
+    // TDToast.make( this, "SIZE " + size );
 
     // FIXME THMANAGER
     mNrButton1 = 4;
@@ -651,7 +651,7 @@ public class MainWindow extends Activity
     if ( do_check_bt ) {
       do_check_bt = false;
       if ( mApp.mBTAdapter == null ) {
-        Toast.makeText( this, R.string.no_bt, Toast.LENGTH_SHORT ).show();
+        TDToast.make( this, R.string.no_bt );
       } else {
         if ( TDSetting.mCheckBT == 1 && ! mApp.mBTAdapter.isEnabled() ) {    
           Intent enableIntent = new Intent( BluetoothAdapter.ACTION_REQUEST_ENABLE );
@@ -743,7 +743,7 @@ public class MainWindow extends Activity
       return;
     }
     doubleBack = true;
-    doubleBackToast = Toast.makeText( this, R.string.double_back, Toast.LENGTH_SHORT );
+    doubleBackToast = TDToast.makeToast( this, R.string.double_back );
     doubleBackToast.show();
     doubleBackHandler.postDelayed( doubleBackRunnable, 1000 );
   }
@@ -762,7 +762,7 @@ public class MainWindow extends Activity
           // nothing to do: scanBTDEvices() is called by menu CONNECT
         } else if ( say_not_enabled ) {
           say_not_enabled = false;
-          Toast.makeText(this, R.string.not_enabled, Toast.LENGTH_SHORT).show();
+          TDToast.make(this, R.string.not_enabled );
           // finish();
         }
         // FIXME_BT

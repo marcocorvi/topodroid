@@ -63,7 +63,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 // import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
+// import android.widget.Toast;
 // import android.inputmethodservice.KeyboardView;
 
 // import android.location.Location;
@@ -286,7 +286,7 @@ public class FixedActivity extends Activity
       startActivityForResult( intent, CRS_CONVERSION_REQUEST );
     } catch ( ActivityNotFoundException e ) {
       mFixedDialog = null;
-      Toast.makeText( mContext, R.string.no_proj4, Toast.LENGTH_SHORT).show();
+      TDToast.make( mContext, R.string.no_proj4 );
     }
   }
 
@@ -302,7 +302,7 @@ public class FixedActivity extends Activity
       startActivityForResult( intent, CRS_INPUT_REQUEST );
     } catch ( ActivityNotFoundException e ) {
       mFixedAddDialog = null;
-      Toast.makeText( mContext, R.string.no_proj4, Toast.LENGTH_SHORT).show();
+      TDToast.make( mContext, R.string.no_proj4 );
     }
   }
 

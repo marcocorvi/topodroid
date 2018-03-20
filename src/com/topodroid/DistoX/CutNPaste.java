@@ -18,7 +18,7 @@ import android.widget.PopupWindow;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Toast;
+// import android.widget.Toast;
 
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -77,9 +77,7 @@ class CutNPaste
             mClipboardText = popup_et.getText().toString();
             popup_et.setText("");
             String str = String.format( context.getResources().getString( R.string.copied ), mClipboardText );
-            Toast t = Toast.makeText( context, str, Toast.LENGTH_SHORT );
-            t.setGravity( Gravity.LEFT | Gravity.TOP, 10, 10);
-            t.show();
+            TDToast.makeGravity( context, str, Gravity.LEFT | Gravity.TOP );
           }
           dismissPopup();
         }
@@ -90,9 +88,7 @@ class CutNPaste
           if ( popup_et != null ) {
             mClipboardText = popup_et.getText().toString();
             String str = String.format( context.getResources().getString( R.string.copied ), mClipboardText );
-            Toast t = Toast.makeText( context, str, Toast.LENGTH_SHORT );
-            t.setGravity( Gravity.LEFT | Gravity.TOP, 10, 10);
-            t.show();
+            TDToast.makeGravity( context, str, Gravity.LEFT | Gravity.TOP );
           }
           dismissPopup();
         }
@@ -173,7 +169,7 @@ class CutNPaste
         public void onClick(View v) {
           app.resetComm();
           dismissPopupBT();
-          Toast.makeText( context, R.string.bt_reset, Toast.LENGTH_SHORT).show();
+          TDToast.make( context, R.string.bt_reset );
         }
       } );
 

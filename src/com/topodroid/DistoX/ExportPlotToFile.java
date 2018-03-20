@@ -19,7 +19,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 // import android.os.Message;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 
 // import android.util.Log;
 
@@ -89,10 +89,9 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
       super.onPostExecute(bool);
       if ( mToast ) {
         if ( bool ) {
-          Toast.makeText( mContext, mContext.getResources().getString(R.string.saved_file_1) + " " + filename,
-                          Toast.LENGTH_SHORT ).show();
+          TDToast.make( mContext, mContext.getResources().getString(R.string.saved_file_1) + " " + filename );
         } else {
-          Toast.makeText( mContext, mContext.getResources().getString(R.string.saving_file_failed), Toast.LENGTH_SHORT ).show();
+          TDToast.make( mContext, R.string.saving_file_failed );
         }
       }
     }

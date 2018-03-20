@@ -31,6 +31,7 @@
       <item name="android:paddingTop">-8dip</item>
       <item name="android:textSize">18sp</item>
       <item name="android:textColor">@color/title</item>
+      <item name="android:singleLine">true</item>
     </style>
 
     <style name="Theme.Dialog" parent="@android:style/Theme.Dialog">

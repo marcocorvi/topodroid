@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import android.os.AsyncTask;
 // import android.content.Context;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 
 // import android.util.Log;
 
@@ -73,7 +73,7 @@ class MemoryReadTask extends AsyncTask<Void, Integer, Integer>
     if ( result > 0 && mDialog != null ) {
       mDialog.updateList( mMemory );
     } else {
-      Toast.makeText( mApp, R.string.read_failed, Toast.LENGTH_SHORT ).show();
+      TDToast.make( mApp, R.string.read_failed );
     }
   }
 

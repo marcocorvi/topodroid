@@ -13,7 +13,7 @@ package com.topodroid.DistoX;
 
 // import java.util.ArrayList;
 
-import android.widget.Toast;
+// import android.widget.Toast;
    
 class ImportZipTask extends ImportTask
 {
@@ -36,19 +36,19 @@ class ImportZipTask extends ImportTask
     mMain.setTheTitle( );
     mMain.updateDisplay( );
     if ( result < -5 ) {
-      Toast.makeText( mMain, R.string.unzip_fail, Toast.LENGTH_SHORT).show();
+      TDToast.make( mMain, R.string.unzip_fail );
     } else if ( result == -5 ) {
-      Toast.makeText( mMain, R.string.unzip_fail_sqlite, Toast.LENGTH_SHORT).show();
+      TDToast.make( mMain, R.string.unzip_fail_sqlite );
     } else if ( result == -4 ) {
-      Toast.makeText( mMain, R.string.unzip_fail_survey, Toast.LENGTH_SHORT).show();
+      TDToast.make( mMain, R.string.unzip_fail_survey );
     } else if ( result == -3 ) {
-      Toast.makeText( mMain, R.string.unzip_fail_db, Toast.LENGTH_SHORT).show();
+      TDToast.make( mMain, R.string.unzip_fail_db );
     } else if ( result == -2 ) {
-      Toast.makeText( mMain, R.string.unzip_fail_td, Toast.LENGTH_SHORT).show();
+      TDToast.make( mMain, R.string.unzip_fail_td );
     } else if ( result == -1 ) {
-      Toast.makeText( mMain, R.string.import_already, Toast.LENGTH_SHORT).show();
+      TDToast.make( mMain, R.string.import_already );
     } else {
-      Toast.makeText( mMain, R.string.import_zip_ok, Toast.LENGTH_SHORT).show();
+      TDToast.make( mMain, R.string.import_zip_ok );
     }
   }
 }

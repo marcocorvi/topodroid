@@ -21,7 +21,6 @@ class Point2D // extends PointF
   public float x;  // X coord
   public float y;  // Y coord
 
-
   Point2D( )
   {
     x = 0f;

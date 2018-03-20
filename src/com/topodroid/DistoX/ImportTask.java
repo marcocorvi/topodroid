@@ -13,7 +13,7 @@ package com.topodroid.DistoX;
 
 import android.os.AsyncTask;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 
 abstract class ImportTask extends AsyncTask< String, Integer, Long >
 {
@@ -36,7 +36,7 @@ abstract class ImportTask extends AsyncTask< String, Integer, Long >
     if ( result >= 0 ) {
       mMain.updateDisplay( );
     } else {
-      Toast.makeText( mMain, R.string.import_already, Toast.LENGTH_SHORT).show();
+      TDToast.make( mMain, R.string.import_already );
     }
   }
 }

@@ -37,7 +37,7 @@ import android.widget.Button;
 
 import android.view.View;
 // import android.widget.ListView;
-import android.widget.Toast;
+// import android.widget.Toast;
 import android.inputmethodservice.KeyboardView;
 
 import android.location.Location;
@@ -242,7 +242,7 @@ class FixedGpsDialog extends MyDialog
       }
     }
     if ( do_toast ) {
-      Toast.makeText( mContext, R.string.no_location_data, Toast.LENGTH_SHORT ).show();
+      TDToast.make( mContext, R.string.no_location_data );
     }
   }
 

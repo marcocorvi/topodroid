@@ -190,10 +190,10 @@ class DrawingPath extends RectF
   void pathAddLineTo( float x, float y )
   {
     mPath.lineTo( x, y );
-    mPath.moveTo( x+10, y+10 );
-    mPath.lineTo( x-10, y-10 );
-    mPath.moveTo( x+10, y-10 );
-    mPath.lineTo( x-10, y+10 );
+    mPath.moveTo( x+5, y+5 );
+    mPath.lineTo( x-5, y-5 );
+    mPath.moveTo( x+5, y-5 );
+    mPath.lineTo( x-5, y+5 );
     mPath.moveTo( x, y );
     setEndPoints( x1, y1, x, y );
   }

@@ -48,7 +48,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 
 // import android.graphics.Bitmap;
 // import android.graphics.BitmapFactory;
@@ -147,7 +147,7 @@ public class DeviceActivity extends Activity
         final int state = intent.getIntExtra( BluetoothDevice.EXTRA_BOND_STATE, BluetoothDevice.ERROR );
         final int prev  = intent.getIntExtra( BluetoothDevice.EXTRA_PREVIOUS_BOND_STATE, BluetoothDevice.ERROR );
         if ( state == BluetoothDevice.BOND_BONDED && prev == BluetoothDevice.BOND_BONDING ) {
-          // FIXME Toast.makeText( this, R.string.device_paired, Toast.LENGTH_SHORT).show();
+          // FIXME TDToast.make( this, R.string.device_paired );
           updateList();
         }
       }
@@ -290,7 +290,7 @@ public class DeviceActivity extends Activity
     if ( mApp.mBTAdapter != null ) {
       Set<BluetoothDevice> device_set = mApp.mBTAdapter.getBondedDevices(); // get paired devices
       if ( device_set.isEmpty() ) {
-        // Toast.makeText(this, R.string.no_paired_device, Toast.LENGTH_SHORT).show();
+        // TDToast.make(this, R.string.no_paired_device );
       } else {
         setTitle( R.string.title_device );
         for ( BluetoothDevice device : device_set ) {
@@ -376,10 +376,10 @@ public class DeviceActivity extends Activity
     BluetoothDevice device = mApp.mBTAdapter.getRemoteDevice( mDevice.mAddress );
     switch ( DeviceUtil.pairDevice( device ) ) {
       case -1: // failure
-        // Toast.makeText( this, R.string.pairing_failed, Toast.LENGTH_SHORT).show(); // TODO
+        // TDToast.make( this, R.string.pairing_failed ); // TODO
         break;
       case 2: // already paired
-        // Toast.makeText( this, R.string.device_paired, Toast.LENGTH_SHORT).show();
+        // TDToast.make( this, R.string.device_paired ); 
         break;
       default: // 0: null device
                // 1: paired ok
@@ -439,7 +439,7 @@ public class DeviceActivity extends Activity
     // FIXME COMMENTED
     // TopoDroidComm comm = mApp.mComm;
     // if ( comm == null ) {
-    //   Toast.makeText( this, R.string.connect_failed, Toast.LENGTH_SHORT).show();
+    //   TDToast.make( this, R.string.connect_failed );
     //   return;
     // }
 
@@ -447,24 +447,24 @@ public class DeviceActivity extends Activity
     if ( k < mNrButton1 && b == mButton1[k++] ) {         // RESET COMM STATE [This is fast]
       mApp.resetComm();
       setState();
-      Toast.makeText(this, R.string.bt_reset, Toast.LENGTH_SHORT).show();
+      TDToast.make( this, R.string.bt_reset );
     } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // CALIBRATION MODE TOGGLE
       if ( mDevice == null ) { // mAddress.length() < 1 ) {
-        Toast.makeText( this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
+        TDToast.make( this, R.string.no_device_address );
       } else {
         enableButtons( false );
         new CalibToggleTask( this, this, mApp ).execute();
       }
     } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // CALIBRATIONS
       if ( mApp.mDevice == null ) {
-        Toast.makeText(this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
+        TDToast.make( this, R.string.no_device_address );
       } else {
         (new CalibListDialog( this, this, mApp )).show();
       }
 
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {    // INFO TDLevel.overNormal
       if ( mDevice == null ) {
-        Toast.makeText( this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
+        TDToast.make( this, R.string.no_device_address );
       } else {
         // setTitleColor( TDColor.CONNECTED ); // USELESS
         if ( mDevice.mType == Device.DISTO_A3 ) {
@@ -479,7 +479,7 @@ public class DeviceActivity extends Activity
 
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {   // CALIB_READ TDLevel.overNormal
       if ( mDevice == null ) { // mAddress.length() < 1 ) {
-        Toast.makeText( this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
+        TDToast.make( this, R.string.no_device_address );
       } else {
         enableButtons( false );
         new CalibReadTask( this, this, mApp, CalibReadTask.PARENT_DEVICE ).execute();
@@ -487,14 +487,14 @@ public class DeviceActivity extends Activity
 
     } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // DISTOX MEMORY TDLevel.overAdvanced
       if ( mDevice == null ) { // mAddress.length() < 1 ) {
-        Toast.makeText( this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
+        TDToast.make( this, R.string.no_device_address );
       } else {
         if ( mDevice.mType == Device.DISTO_A3 ) {
           new DeviceA3MemoryDialog( this, this ).show();
         } else if ( mDevice.mType == Device.DISTO_X310 ) {
           new DeviceX310MemoryDialog( this, this ).show();
         } else {
-          Toast.makeText( this, "Unknown DistoX type " + mDevice.mType, Toast.LENGTH_SHORT).show();
+          TDToast.make( this, "Unknown DistoX type " + mDevice.mType );
         }
       }
 
@@ -534,11 +534,11 @@ public class DeviceActivity extends Activity
     // TDLog.Log( TDLog.LOG_DEVICE, "onClick mBtnHeadTail. Is connected " + mApp.isConnected() );
     String ht = mApp.readHeadTail( mDevice.mAddress, command, head_tail );
     if ( ht == null ) {
-      Toast.makeText( this, R.string.head_tail_failed, Toast.LENGTH_SHORT).show();
+      TDToast.make( this, R.string.head_tail_failed );
       // return false;
     }
     // Log.v( TopoDroidApp.TAG, "Head " + head_tail[0] + " tail " + head_tail[1] );
-    // Toast.makeText( this, getString(R.string.head_tail) + ht, Toast.LENGTH_SHORT).show();
+    // TDToast.make( this, getString(R.string.head_tail) + ht );
     // return true;
   }
 
@@ -555,7 +555,7 @@ public class DeviceActivity extends Activity
   {
     // Log.v(TopoDroidApp.TAG, "store HeadTail " + mDevice.mAddress + " : " + head_tail[0] + " " + head_tail[1] );
     if ( ! mApp_mDData.updateDeviceHeadTail( mDevice.mAddress, head_tail ) ) {
-      Toast.makeText( this, getString(R.string.head_tail_store_failed), Toast.LENGTH_SHORT).show();
+      TDToast.make( this, R.string.head_tail_store_failed );
     }
   }
 
@@ -586,7 +586,7 @@ public class DeviceActivity extends Activity
   {
     if (    head_tail[0] < 0 || head_tail[0] >= DeviceA3Details.MAX_ADDRESS_A3 
          || head_tail[1] < 0 || head_tail[1] >= DeviceA3Details.MAX_ADDRESS_A3 ) {
-      Toast.makeText(this, R.string.device_illegal_addr, Toast.LENGTH_SHORT).show();
+      TDToast.make(this, R.string.device_illegal_addr );
       return;
     }
     ( new MemoryReadTask( mApp, dialog, Device.DISTO_A3, mDevice.mAddress, head_tail, dumpfile ) ).execute();
@@ -596,7 +596,7 @@ public class DeviceActivity extends Activity
   // void resetX310DeviceHeadTail( final int[] head_tail )
   // {
   //   int n = mApp.resetX310Memory( mDevice.mAddress, head_tail[0], head_tail[1] );
-  //   Toast.makeText(this, "X310 memory reset " + n + " data", Toast.LENGTH_SHORT ).show();
+  //   TDToast.make(this, "X310 memory reset " + n + " data" );
   // }
 
   // reset device from stored-tail to given tail
@@ -604,7 +604,7 @@ public class DeviceActivity extends Activity
   {
     // Log.v(TopoDroidApp.TAG, "reset device from " + head_tail[0] + " to " + head_tail[1] );
     if ( head_tail[0] < 0 || head_tail[0] >= 0x8000 || head_tail[1] < 0 || head_tail[1] >= 0x8000 ) {
-      Toast.makeText(this, R.string.device_illegal_addr, Toast.LENGTH_SHORT).show();
+      TDToast.make(this, R.string.device_illegal_addr );
       return;
     } 
     // TODO ask confirm
@@ -668,7 +668,7 @@ public class DeviceActivity extends Activity
       //   if ( result == Activity.RESULT_OK ) {
       //     // nothing to do: scanBTDevices(); is called by menu CONNECT
       //   } else {
-      //     Toast.makeText(this, R.string.not_enabled, Toast.LENGTH_SHORT).show();
+      //     TDToast.make(this, R.string.not_enabled );
       //     finish();
       //   }
       //   break;
@@ -742,7 +742,7 @@ public class DeviceActivity extends Activity
       Intent scanIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DeviceList.class );
       scanIntent.putExtra( TDTag.TOPODROID_DEVICE_ACTION, DeviceList.DEVICE_SCAN );
       startActivityForResult( scanIntent, TDRequest.REQUEST_DEVICE );
-      Toast.makeText(this, R.string.wait_scan, Toast.LENGTH_LONG).show();
+      TDToast.makeLong(this, R.string.wait_scan );
 
     } else if ( TDLevel.overBasic && p++ == pos ) { // PAIR
       pairDevice();
@@ -752,7 +752,7 @@ public class DeviceActivity extends Activity
 
     } else if ( TDLevel.overAdvanced && p++ == pos ) { // FIRMWARE
       if ( TDSetting.mCommType != 0 ) {
-        Toast.makeText( this, "Connection mode must be \"on-demand\"", Toast.LENGTH_LONG).show();
+        TDToast.makeLong( this, "Connection mode must be \"on-demand\"" );
       } else {
         mApp.resetComm();
         (new FirmwareDialog( this, this, mApp )).show();
@@ -847,29 +847,29 @@ public class DeviceActivity extends Activity
     String filename = TDPath.getCCsvFile( name );
     File file = new File( filename );
     if ( ! file.exists() ) {
-      Toast.makeText(this, R.string.file_not_found, Toast.LENGTH_SHORT).show();
+      TDToast.make(this, R.string.file_not_found );
     } else {
       switch ( TDExporter.importCalibFromCsv( mApp_mDData, filename, mDevice.mAddress ) ) {
         case 0:
-          Toast.makeText(this, R.string.import_calib_ok, Toast.LENGTH_SHORT).show();
+          TDToast.make(this, R.string.import_calib_ok );
           break;
         case -1:
-          Toast.makeText(this, R.string.import_calib_no_header, Toast.LENGTH_SHORT).show();
+          TDToast.make(this, R.string.import_calib_no_header );
           break;
         case -2:
-          Toast.makeText(this, R.string.import_calib_already, Toast.LENGTH_SHORT).show();
+          TDToast.make(this, R.string.import_calib_already );
           break;
         case -3:
-          Toast.makeText(this, R.string.import_calib_mismatch, Toast.LENGTH_SHORT).show();
+          TDToast.make(this, R.string.import_calib_mismatch );
           break;
         case -4:
-          Toast.makeText(this, R.string.import_calib_no_data, Toast.LENGTH_SHORT).show();
+          TDToast.make(this, R.string.import_calib_no_data );
           break;
         case -5:
-          Toast.makeText(this, R.string.import_calib_io_error, Toast.LENGTH_SHORT).show();
+          TDToast.make(this, R.string.import_calib_io_error );
           break;
         default:
-          Toast.makeText(this, R.string.import_failed, Toast.LENGTH_SHORT).show();
+          TDToast.make(this, R.string.import_failed );
       }
     }
   }

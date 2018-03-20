@@ -20,7 +20,7 @@ import android.os.AsyncTask;
 import android.graphics.Bitmap;
 // import android.graphics.Bitmap.CompressFormat;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 
 class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean> 
 {
@@ -63,11 +63,10 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
       super.onPostExecute(bool);
       if ( mToast ) {
         if ( bool ) {
-          Toast.makeText( mContext, 
-                          String.format( mContext.getResources().getString(R.string.saved_file_2), filename, mScale),
-                          Toast.LENGTH_SHORT ).show();
+          TDToast.make( mContext, 
+                          String.format( mContext.getResources().getString(R.string.saved_file_2), filename, mScale) );
         } else {
-          Toast.makeText( mContext, R.string.saving_file_failed, Toast.LENGTH_SHORT ).show();
+          TDToast.make( mContext, R.string.saving_file_failed );
         }
       }
     }

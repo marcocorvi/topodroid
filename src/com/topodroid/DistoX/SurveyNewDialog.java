@@ -173,7 +173,7 @@ class SurveyNewDialog extends MyDialog
     name = TopoDroidUtil.noSpaces( name ).trim(); // FIXME FORCE NAMES WITHOUT SPACES
     if ( name.length() == 0 ) return false;
     if ( mApp.hasSurveyName( name ) ) { // name already exists
-      // Toast.makeText( mContext, R.string.survey_exists, Toast.LENGTH_SHORT).show();
+      // TDToast.make( mContext, R.string.survey_exists );
       return false;
     }
 

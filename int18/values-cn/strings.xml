@@ -125,6 +125,7 @@
     <string name="few_data">数据不足</string>
     <string name="few_iter">重复失败</string>
     <string name="few_groups">数据组数据不足</string>
+    <!-- TODO string name="found_groups">Found %1$d groups</string -->
     <!-- UNUSED string name="few_plots">绘图不足</string -->
     <string name="few_calibs">校准数据不足</string>
     <!-- TODO string name="getting_info">Getting DistoX info ...</string -->
@@ -251,6 +252,7 @@
     <string name="no_sketch">无3D草图</string>
     <!-- UNUSED string name="no_shots">测量无数据.\n点击下载按钮获取数据</string -->
     <string name="no_survey">无测量选择.</string>
+    <!-- TODO string name="no_to_station">No TO station.</string -->
     <string name="no_thmanager">ThManager 未安装</string>
     <string name="no_db_viewer">DB_viewer 未发现</string>
     <string name="no_undelete">无还原项目</string>
@@ -423,6 +425,9 @@
     <string name="survey_not_attached">警告: 独立测量数据</string>
     <!-- TODO string name="survey_not_extend">WARNING: unset shot extends</string -->
     <!-- TODO string name="survey_not_attached_extend">WARNING: unattached shots and unset extends</string -->
+    <!-- TODO string name="saturated_coeffs">WARNING: saturated calibration coefficients</string -->
+    <!-- TODO string name="out_of_memory">WARNING: out of memory !</string -->
+    <!-- TODO string name="disk_io_error">CRITICAL: disk i/o error !</string -->
     <string name="cannot_rename">不能重命名</string>
     <string name="declination">磁偏角.</string>
     <string name="description">描述</string>
@@ -458,7 +463,7 @@
     <string name="stat_component">组成 %1$d</string>
     <string name="stat_depth">深度 %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">复制单个测量数据 %1$d %2$.1f %3$s</string>
-    <string name="stat_leg">主线 %1$d %2$.1f %3$s</string>
+    <string name="stat_leg">主线 %1$d %2$.1f %3$s %4$.1f %5$s</string>
     <string name="stat_length">长度 %1$.1f %2$s</string>
     <!-- TODO string name="stat_projlen">Plan length %1$.1f %2$s</string -->
     <string name="stat_loop">环测 %1$d</string>

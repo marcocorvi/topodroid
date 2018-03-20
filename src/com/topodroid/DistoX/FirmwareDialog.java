@@ -31,7 +31,7 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.EditText;
 // import android.widget.TextView;
-import android.widget.Toast;
+// import android.widget.Toast;
 
 import android.text.method.KeyListener;
 
@@ -125,14 +125,14 @@ class FirmwareDialog extends MyDialog
           }
         }
         if ( filename == null ) {
-          Toast.makeText( mParent, mParent.getResources().getString(R.string.firmware_file_missing), Toast.LENGTH_SHORT).show();
+          TDToast.make( mParent, R.string.firmware_file_missing );
           return;
         }
         if ( mBtnDump.isChecked() ) {
           TDLog.LogFile( "Firmware dump to " + filename );
           File fp = new File( TDPath.getBinFile( filename ) );
           if ( fp.exists() ) {
-            Toast.makeText( mParent, mParent.getResources().getString(R.string.firmware_file_exists), Toast.LENGTH_SHORT).show();
+            TDToast.make( mParent, R.string.firmware_file_exists );
             return;    
           }
           askDump( filename );
@@ -148,7 +148,7 @@ class FirmwareDialog extends MyDialog
           // int hw = mApp.readFirmwareHardware();
           // TDLog.LogFile( "Firmware version " + fw + " Hardware version " + hw );
           // // Log.v( "DistoX", "HW " + hw + " FW " + fw );
-          // // Toast.makeText( mParent, "HARDWARE " + hw, Toast.LENGTH_LONG ).show();
+          // // TDToast.make( mParent, "HARDWARE " + hw );
           // askUpload( filename, areCompatible(hw,fw) );
           askUpload( filename, (fw == 21 || fw == 22 || fw == 23 || fw == 24 || fw == 25 || fw == 250 ) );
         }
@@ -165,9 +165,8 @@ class FirmwareDialog extends MyDialog
           TDLog.LogFile( "Firmware dumping to file " + filename );
           int ret = mApp.dumpFirmware( filename );
           TDLog.LogFile( "Firmware dump to " + filename + " result: " + ret );
-          Toast.makeText( mParent, 
-            String.format( mParent.getResources().getString(R.string.firmware_file_dumped), filename, ret ),
-            Toast.LENGTH_SHORT).show();
+          TDToast.makeLong( mParent, 
+            String.format( mParent.getResources().getString(R.string.firmware_file_dumped), filename, ret ) );
           // finish(); 
         }
       }
@@ -188,9 +187,8 @@ class FirmwareDialog extends MyDialog
           long len = file.length();
           int ret  = mApp.uploadFirmware( filename );
           TDLog.LogFile( "Firmware upload result: written " + ret + " bytes of " + len );
-          Toast.makeText( mParent, 
-            String.format( mParent.getResources().getString(R.string.firmware_file_uploaded), filename, ret, len ),
-            Toast.LENGTH_LONG).show();
+          TDToast.makeLong( mParent, 
+            String.format( mParent.getResources().getString(R.string.firmware_file_uploaded), filename, ret, len ) );
           // finish(); 
         }
       }

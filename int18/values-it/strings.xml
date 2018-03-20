@@ -125,6 +125,7 @@
     <string name="few_data">Dati insufficienti</string>
     <string name="few_iter">Iterazione fallita</string>
     <string name="few_groups">Dati con gruppi non sufficienti</string>
+    <!-- TODO string name="found_groups">Found %1$d groups</string -->
     <!-- UNUSED string name="few_plots">Troppo pochi disegni</string -->
     <string name="few_calibs">Calibrazioni non sufficienti</string>
     <string name="getting_info">Scarico info dal DistoX...</string>
@@ -252,6 +253,7 @@
     <string name="no_sketch">No disegno 3D</string>
     <!-- UNUSED string name="no_shots">Rilievo senza dati</string -->
     <string name="no_survey">Rilievo non selezionato</string>
+    <!-- TODO string name="no_to_station">No TO station.</string -->
     <string name="no_thmanager">ThManager non installato</string>
     <string name="no_db_viewer">DB_viewer non installato</string>
     <string name="no_undelete">Nessun oggetto da riprendere</string>
@@ -424,6 +426,9 @@
     <string name="survey_not_attached">ATTENZIONE: dati scollegati</string>
     <string name="survey_not_extend">WARNING: extend disabilitati</string>
     <string name="survey_not_attached_extend">WARNING: tiri non collegati ed extend disabilitati</string>
+    <!-- TODO string name="saturated_coeffs">WARNING: saturated calibration coefficients</string -->
+    <!-- TODO string name="out_of_memory">WARNING: out of memory !</string -->
+    <!-- TODO string name="disk_io_error">CRITICAL: disk i/o error !</string -->
     <string name="cannot_rename">Rinomina rilievo non riuscita</string>
     <string name="declination">decl. magn.</string>
     <string name="description">descrizione</string>
@@ -459,7 +464,7 @@
     <string name="stat_component">Componenti %1$d</string>
     <string name="stat_depth">Profondità %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Battute doppie %1$d %2$.1f %3$s</string>
-    <string name="stat_leg">Battute %1$d %2$.1f %3$s</string>
+    <string name="stat_leg">Battute %1$d %2$.1f %3$s %4$.1f %5$s</string>
     <string name="stat_length">Sviluppo %1$.1f %2$s</string>
     <string name="stat_projlen">Lunghezza piano %1$.1f %2$s</string>
     <string name="stat_loop">Anelli %1$d</string>

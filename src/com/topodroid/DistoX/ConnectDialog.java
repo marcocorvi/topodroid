@@ -34,7 +34,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 // import android.widget.AdapterView.OnItemLongClickListener;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 
 // import android.util.Log;
 
@@ -146,7 +146,7 @@ class ConnectDialog extends MyDialog
     if ( mApp.mBTAdapter != null ) {
       mDevices = mApp.mBTAdapter.getBondedDevices(); // get paired devices
       if ( mDevices.isEmpty() ) {
-        // Toast.makeText(this, R.string.no_paired_device, Toast.LENGTH_SHORT).show();
+        // TDToast.make(this, R.string.no_paired_device );
       } else {
         for ( BluetoothDevice device : mDevices ) {
           // String addr = device.getAddress();
@@ -243,31 +243,31 @@ class ConnectDialog extends MyDialog
     // } else
     if ( b == mBtnConnect ) {
       if ( mApp.getConnectState() != SyncService.STATE_NONE ) {
-        Toast.makeText( mContext, R.string.connected_already, Toast.LENGTH_SHORT).show();
+        TDToast.make( mContext, R.string.connected_already );
       } else if ( mName != null ) {
         connectDevice();
         dismiss();
       } else {
-        Toast.makeText( mContext, R.string.no_device_address, Toast.LENGTH_SHORT).show();
+        TDToast.make( mContext, R.string.no_device_address );
       } 
     } else if ( b == mBtnDisconnect ) {
       if ( mApp.getConnectState() != SyncService.STATE_CONNECTED ) {
-        Toast.makeText( mContext, R.string.connected_none, Toast.LENGTH_SHORT).show();
+        TDToast.make( mContext, R.string.connected_none );
       } else if ( mName != null ) {
         if ( disconnectDevice() ) {
           dismiss();
         }
       } else {
-        Toast.makeText( mContext, R.string.no_device_address, Toast.LENGTH_SHORT).show();
+        TDToast.make( mContext, R.string.no_device_address );
       }
     } else if ( b == mBtnSync ) {
       if ( mApp.getConnectState() != SyncService.STATE_CONNECTED ) {
-        Toast.makeText( mContext, R.string.connected_none, Toast.LENGTH_SHORT).show();
+        TDToast.make( mContext, R.string.connected_none );
       } else if ( mName != null ) {
         syncDevice();
         dismiss();
       } else {
-        Toast.makeText( mContext, R.string.no_device_address, Toast.LENGTH_SHORT).show();
+        TDToast.make( mContext, R.string.no_device_address );
       }
     // } else if ( b == mBtnCancel ) {
     //   /* nothing */

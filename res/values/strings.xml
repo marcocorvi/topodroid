@@ -126,6 +126,7 @@
     <string name="few_data">Not enough data</string>
     <string name="few_iter">Failed: too many iterations</string>
     <string name="few_groups">Not enough data with group</string>
+    <string name="found_groups">Found %1$d groups</string>
     <!-- UNUSED string name="few_plots">Not enough sketches</string -->
     <string name="few_calibs">Not enough calibrations</string>
     <string name="getting_info">Getting DistoX info ...</string>
@@ -254,11 +255,12 @@
     <string name="no_sketch">No 3D sketch</string>
     <!-- UNUSED string name="no_shots">Survey has no shots.\nUse Download button to get some</string -->
     <string name="no_survey">No survey selected.</string>
+    <string name="no_to_station">No TO station.</string>
     <string name="no_thmanager">ThManager app not installed</string>
     <string name="no_db_viewer">DB_viewer app not found</string>
     <string name="no_undelete">No item to recover</string>
-    <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Bearing %5$.1f"</string>
-    <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Clino %5$.1f"</string>
+    <string name="format_measure_plan">D %1$.2f %2$.2f X %3$.2f Y %4$.2f A. %5$.1f"</string>
+    <string name="format_measure_profile">D %1$.2f %2$.2f X %3$.2f Y %4$.2f C. %5$.1f"</string>
 
     <string name="menu_3d">3D</string>
     <string name="menu_about">ABOUT</string>
@@ -428,6 +430,10 @@
     <string name="survey_not_attached">WARNING: unattached shots</string>
     <string name="survey_not_extend">WARNING: unset shot extends</string>
     <string name="survey_not_attached_extend">WARNING: unattached shots and unset extends</string>
+    <string name="saturated_coeffs">WARNING: saturated calibration coefficients</string>
+    <string name="out_of_memory">WARNING: out of memory !</string>
+    <string name="disk_io_error">CRITICAL: disk i/o error !</string>
+
     <string name="cannot_rename">Cannot rename survey</string>
     <string name="declination">Magn. decl.</string>
     <string name="description">description</string>
@@ -464,7 +470,7 @@
     <string name="stat_component">Components %1$d</string>
     <string name="stat_depth">Depth %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Duplicate shots %1$d %2$.1f %3$s</string>
-    <string name="stat_leg">Legs %1$d %2$.1f %3$s</string>
+    <string name="stat_leg">Legs %1$d %2$.1f %3$s %4$.1f $5$s</string>
     <string name="stat_length">Length %1$.1f %2$s</string>
     <string name="stat_projlen">Plan length %1$.1f %2$s</string>
     <string name="stat_loop">Loops %1$d</string>

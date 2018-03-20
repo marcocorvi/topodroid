@@ -15,7 +15,7 @@ import android.app.Activity;
 import android.os.AsyncTask;
 
 // import android.widget.Button;
-import android.widget.Toast;
+// import android.widget.Toast;
 
 class CalibToggleTask extends AsyncTask<Void, Integer, Boolean>
 {
@@ -45,9 +45,9 @@ class CalibToggleTask extends AsyncTask<Void, Integer, Boolean>
   protected void onPostExecute( Boolean result )
   {
     if ( result ) {
-      Toast.makeText( mActivity, R.string.toggle_ok, Toast.LENGTH_SHORT).show();
+      TDToast.make( mActivity, R.string.toggle_ok );
     } else {
-      Toast.makeText( mActivity, R.string.toggle_failed, Toast.LENGTH_SHORT).show();
+      TDToast.make( mActivity, R.string.toggle_failed );
     }
     mEnableButtons.enableButtons( true );
   }

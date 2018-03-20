@@ -24,7 +24,7 @@ import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Button;
-import android.widget.Toast;
+// import android.widget.Toast;
 import android.view.View;
 // import android.view.ViewGroup.LayoutParams;
 // import android.view.View.OnKeyListener;
@@ -139,7 +139,7 @@ class DrawingPhotoEditDialog extends MyDialog
         }
       }
     } catch ( OutOfMemoryError e ) {
-      Toast.makeText( mParent, R.string.null_bitmap, Toast.LENGTH_SHORT ).show();
+      TDToast.make( mParent, R.string.null_bitmap );
     }
 
     buttonOK.setOnClickListener( this );

@@ -47,7 +47,7 @@ import android.widget.Button;
 // import android.widget.ZoomButton;
 import android.widget.ZoomButtonsController;
 import android.widget.ZoomButtonsController.OnZoomListener;
-import android.widget.Toast;
+// import android.widget.Toast;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
@@ -58,7 +58,7 @@ import android.widget.AdapterView.OnItemClickListener;
 // import java.io.File;
 // import java.io.FileWriter;
 import java.util.List;
-// import java.util.ArrayList;
+import java.util.ArrayList;
 
 // import android.util.Log;
 
@@ -75,10 +75,11 @@ public class OverviewWindow extends ItemDrawer
                         R.drawable.iz_measure,       // 0
                         R.drawable.iz_mode,          // 1
                         R.drawable.iz_angle,   // 2
+			R.drawable.iz_undo,    // 3
                         // FIXME_OVER R.drawable.iz_plan,          // 3
-                        R.drawable.iz_menu,          // 3
-                        R.drawable.iz_measure_on,
-                        R.drawable.iz_polyline
+                        // R.drawable.iz_menu,          // 4
+                        // R.drawable.iz_measure_on,
+                        // R.drawable.iz_polyline
                       };
   // FIXME_OVER private static int BTN_PLOT = 2;
 
@@ -111,6 +112,7 @@ public class OverviewWindow extends ItemDrawer
 
   private final int IC_SELECT   = 0;
   private final int IC_CONTINUE = 2;
+  private final int IC_UNDO     = 3;
 
   private float mDDtotal = 0;
   private int mTotal = 0;
@@ -160,6 +162,7 @@ public class OverviewWindow extends ItemDrawer
     private int mTouchMode = MODE_MOVE;
     private int mOnMeasure = MEASURE_OFF;
     private boolean mIsContinue = false;
+    private ArrayList< Point2D > mMeasurePts;
 
     private float mSaveX;
     private float mSaveY;
@@ -356,7 +359,7 @@ public class OverviewWindow extends ItemDrawer
 
     // FIXME mCheckExtend
     // if ( (! mNum.surveyAttached) && TDSetting.mCheckAttached ) {
-    //   Toast.makeText( mActivity, R.string.survey_not_attached, Toast.LENGTH_SHORT ).show();
+    //   TDToast.make( mActivity, R.string.survey_not_attached );
     // }
   }
     
@@ -364,8 +367,8 @@ public class OverviewWindow extends ItemDrawer
     // ------------------------------------------------------------------------------
     // BUTTON BAR
   
-    private Button[] mButton1; // primary
-    private int mNrButton1 = 3;          // main-primary
+    private Button[] mButton1;  // primary
+    private int mNrButton1 = 4; // main-primary
     HorizontalListView mListView;
     HorizontalButtonView mButtonView1;
     ListView   mMenu;
@@ -423,6 +426,8 @@ public class OverviewWindow extends ItemDrawer
       mCrossPath.lineTo(-10,10);
       mCirclePath = new Path();
       mCirclePath.addCircle( 0, 0, 15, Path.Direction.CCW );
+
+      mMeasurePts = new ArrayList< Point2D >();
 
       // Display display = getWindowManager().getDefaultDisplay();
       // DisplayMetrics dm = new DisplayMetrics();
@@ -561,7 +566,7 @@ public class OverviewWindow extends ItemDrawer
       // mBlockList = mData.selectAllLegShots( mSid, TDStatus.NORMAL );
       mBlockList = mData.selectAllShots( mSid, TDStatus.NORMAL );
       if ( mBlockList.size() == 0 ) {
-        Toast.makeText( mActivity, R.string.few_data, Toast.LENGTH_SHORT ).show();
+        TDToast.make( mActivity, R.string.few_data );
         finish();
       } else {
         loadFiles( mType ); 
@@ -578,7 +583,7 @@ public class OverviewWindow extends ItemDrawer
       // Log.v( "DistoX", "Overview plots " + plots.size() );
 
       // if ( plots.size() < 1 ) { // N.B. this should never happpen
-      //   Toast.makeText( this, R.string.few_plots, Toast.LENGTH_SHORT ).show();
+      //   TDToast.make( this, R.string.few_plots );
       //   finish();
       //   return;
       // }
@@ -639,7 +644,7 @@ public class OverviewWindow extends ItemDrawer
       // if ( ! mAllSymbols ) {
       //   String msg = missingSymbols.getMessage( getResources() );
       //   TDLog.Log( TDLog.LOG_PLOT, "Missing " + msg );
-      //   Toast.makeText( this, "Missing symbols \n" + msg, Toast.LENGTH_LONG ).show();
+      //   TDToast.make( this, "Missing symbols \n" + msg );
       //   // (new MissingDialog( this, this, msg )).show();
       //   // finish();
       // }
@@ -767,6 +772,30 @@ public class OverviewWindow extends ItemDrawer
   float mStartY = 0;
   float mBaseX = 0;
   float mBaseY = 0;
+  
+  private float deltaX( float x1, float x0 ) 
+  { return (  (x1 - x0) / mDrawingUtil.SCALE_FIX ) / TDSetting.mUnitGrid; }
+
+  private float deltaY( float y1, float y0 )
+  { return ( -(y1 - y0) / mDrawingUtil.SCALE_FIX ) / TDSetting.mUnitGrid; }
+
+  private double angleBase( float bx, float by )
+  {
+    double ba = Math.atan2( bx, by ) * 180 / Math.PI;
+    if ( ba < 0 ) ba += 360;
+
+    if ( mType == PlotInfo.PLOT_PLAN ) {
+      /* nothing */
+    } else {
+      if ( ba <= 180 ) {
+        ba = 90 - ba;
+      } else {
+        ba = ba - 270;
+      } 
+    }
+    ba *= TDSetting.mUnitAngle;
+    return ba;
+  }
 
   public boolean onTouch( View view, MotionEvent rawEvent )
   {
@@ -850,36 +879,30 @@ public class OverviewWindow extends ItemDrawer
           path.makePath( null, new Matrix(), mStartX, mStartY );
           path.mPath.moveTo( mStartX, mStartY );
           mOverviewSurface.setSecondReference( path );
+	  mMeasurePts.clear();
+	  mMeasurePts.add( new Point2D( mStartX, mStartY ) );
         }
       } else if ( mOnMeasure == MEASURE_ON ) {
         // FIXME use scene values
         float x = x_canvas/mZoom - mOffset.x;
         float y = y_canvas/mZoom - mOffset.y;
+
         // segment displacement
-        float dx = (  (x - mStartX) / mDrawingUtil.SCALE_FIX ) / TDSetting.mUnitGrid;
-        float dy = ( -(y - mStartY) / mDrawingUtil.SCALE_FIX ) / TDSetting.mUnitGrid;
+        float dx = deltaX(x, mStartX);
+        float dy = deltaY(y, mStartY);
+
         // total displacement, with respect to base
-        float bx = (  (x - mBaseX) / mDrawingUtil.SCALE_FIX ) / TDSetting.mUnitGrid;
-        float by = ( -(y - mBaseY) / mDrawingUtil.SCALE_FIX ) / TDSetting.mUnitGrid;
+        float bx = deltaX(x, mBaseX);
+        float by = deltaY(y, mBaseY);
+
         // angle with respect to base
-        double ba = Math.atan2( bx, by ) * 180 / Math.PI;
-        if ( ba < 0 ) ba += 360;
-
-        String format;
-        if ( mType == PlotInfo.PLOT_PLAN ) {
-          format = getResources().getString( R.string.format_measure_plan );
-        } else {
-          if ( ba <= 180 ) {
-            ba = 90 - ba;
-          } else {
-            ba = ba - 270;
-          } 
-          format = getResources().getString( R.string.format_measure_profile );
-        }
-        ba *= TDSetting.mUnitAngle;
-
+        double ba = angleBase( bx, by );
         float dd = TDMath.sqrt( dx * dx + dy * dy );
         float bb = TDMath.sqrt( bx * bx + by * by );
+
+        String format = ( mType == PlotInfo.PLOT_PLAN )?
+          getResources().getString( R.string.format_measure_plan ) :
+          getResources().getString( R.string.format_measure_profile );
 
         if ( mIsContinue ) {
           mDDtotal += dd;
@@ -887,6 +910,7 @@ public class OverviewWindow extends ItemDrawer
           mOverviewSurface.addSecondReference( x, y );
           mStartX = x;
           mStartY = y;
+	  mMeasurePts.add( new Point2D( mStartX, mStartY ) );
         } else {
           mDDtotal = dd;
           mTotal   = 1;
@@ -1031,11 +1055,49 @@ public class OverviewWindow extends ItemDrawer
         new OverviewModeDialog( mActivity, this, mOverviewSurface ).show();
       } else if ( b == mButton1[2] ) { // continue
         toggleIsContinue( );
+      } else if ( b == mButton1[3] ) { // undo
+	undoMeasurePoint();
 
       // FIXME_OVER } else if ( b == mButton1[2] ) { // toggle plan/extended
       // FIXME_OVER   switchPlotType();
       }
     }
+
+  private void undoMeasurePoint()
+  {
+    if ( ! mIsContinue ) return;
+    int sz = mMeasurePts.size() - 1;
+    if ( sz <= 0 ) return;
+    Point2D pt1 = mMeasurePts.get(sz);
+    Point2D pt0 = mMeasurePts.get(sz-1);
+    float dx = deltaX( pt1.x, pt0.x );
+    float dy = deltaX( pt1.y, pt0.y );
+    float bx = deltaX( pt1.x, mBaseX );
+    float by = deltaX( pt1.y, mBaseY );
+    double ba = angleBase( bx, by );
+    float dd = TDMath.sqrt( dx * dx + dy * dy );
+    float bb = TDMath.sqrt( bx * bx + by * by );
+    mDDtotal -= dd;
+    mTotal   --;
+    mStartX = pt0.x;
+    mStartY = pt0.y;
+    mMeasurePts.remove( sz );
+    DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null );
+    path.setPaint( BrushManager.fixedBluePaint );
+    path.makePath( null, new Matrix(), mBaseX, mBaseY );
+    path.mPath.moveTo( mBaseX, mBaseY );
+    mOverviewSurface.setSecondReference( path );
+    for ( int k=1; k<sz; ++k ) {
+      Point2D pt = mMeasurePts.get(k);
+      mOverviewSurface.addSecondReference( pt.x, pt.y );
+    }
+
+    String format = ( mType == PlotInfo.PLOT_PLAN )?
+      getResources().getString( R.string.format_measure_plan ) :
+      getResources().getString( R.string.format_measure_profile );
+
+    mActivity.setTitle( String.format( format, bb, mDDtotal, bx, by, ba ) );
+  }
 
   private void toggleIsContinue( )
   {

@@ -339,7 +339,7 @@ class ShotDialog extends MyDialog
     }
 
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
-    // Toast.makeText( mContext, "SIZE " + size, Toast.LENGTH_SHORT).show();
+    // TDToast.make( mContext, "SIZE " + size );
     
     LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
     // LinearLayout layout9 = (LinearLayout) findViewById( R.id.layout9 );

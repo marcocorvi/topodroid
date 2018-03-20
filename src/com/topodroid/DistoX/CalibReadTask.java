@@ -20,7 +20,7 @@ import android.os.AsyncTask;
 import android.content.Context;
 
 // import android.widget.Button;
-import android.widget.Toast;
+// import android.widget.Toast;
 
 // import android.util.Log;
 
@@ -85,7 +85,7 @@ class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
           break;
       }
     } else {
-      Toast.makeText( mApp, R.string.read_failed, Toast.LENGTH_SHORT).show();
+      TDToast.make( mApp, R.string.read_failed );
     }
   }
 }

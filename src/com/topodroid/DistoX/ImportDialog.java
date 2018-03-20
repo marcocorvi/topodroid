@@ -31,7 +31,7 @@ import android.widget.TextView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.Toast;
+// import android.widget.Toast;
 
 // import android.content.IntentFilter;
 import android.content.Context;
@@ -95,7 +95,7 @@ class ImportDialog extends MyDialog
       }
       mList.setAdapter( mArrayAdapter );
     } else {
-      Toast.makeText( mContext, R.string.import_none, Toast.LENGTH_SHORT ).show();
+      TDToast.make( mContext, R.string.import_none );
       dismiss();
     }
   }

@@ -24,7 +24,7 @@ import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Button;
-import android.widget.Toast;
+// import android.widget.Toast;
 import android.view.View;
 // import android.view.ViewGroup.LayoutParams;
 // import android.view.View.OnKeyListener;
@@ -145,7 +145,7 @@ public class PhotoEditDialog extends MyDialog
         }
       }
     } catch ( OutOfMemoryError e ) {
-      Toast.makeText( mParent, R.string.null_bitmap, Toast.LENGTH_SHORT ).show();
+      TDToast.make( mParent, R.string.null_bitmap );
     }
 
     mButtonOK.setOnClickListener( this );

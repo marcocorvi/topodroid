@@ -34,7 +34,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 // import android.view.View;
 // import android.view.View.OnClickListener;
 import android.view.KeyEvent;
@@ -267,7 +267,7 @@ public class CalibActivity extends Activity
     } else if ( k < mNrButton1 && b == mButton1[k++] ) { // OPEN GM
       if ( ! mApp.checkCalibrationDeviceMatch() ) {
         // FIXME use alert dialog
-        Toast.makeText( this, R.string.calib_device_mismatch, Toast.LENGTH_LONG ).show();
+        TDToast.make( this, R.string.calib_device_mismatch );
       }
       doOpen();
     // } else if ( k < mNrButton1 && b == mButton1[k++] ) { // EXPORT
@@ -341,22 +341,22 @@ public class CalibActivity extends Activity
 
     if ( isSaved ) { // calib already saved
       TopoDroidApp.mDData.updateCalibInfo( mApp.mCID, date, device, comment );
-      Toast.makeText( this, R.string.calib_updated, Toast.LENGTH_SHORT ).show();
+      TDToast.make( this, R.string.calib_updated );
     } else { // new calib
       name = TopoDroidUtil.noSpaces( name );
       if ( name != null && name.length() > 0 ) {
         if ( mApp.hasCalibName( name ) ) { // name already exists
-          // Toast.makeText( this, R.string.calib_exists, Toast.LENGTH_SHORT ).show();
+          // TDToast.make( this, R.string.calib_exists );
           String error = getResources().getString( R.string.calib_exists );
           mEditName.setError( error );
         } else {
           mApp.setCalibFromName( name );
           TopoDroidApp.mDData.updateCalibInfo( mApp.mCID, date, device, comment );
           setNameEditable( true );
-          Toast.makeText( this, R.string.calib_saved, Toast.LENGTH_SHORT ).show();
+          TDToast.make( this, R.string.calib_saved );
         }
       } else {
-        Toast.makeText( this, R.string.calib_no_name, Toast.LENGTH_SHORT ).show();
+        TDToast.make( this, R.string.calib_no_name );
       }
     }
     int algo = 0;
@@ -446,7 +446,7 @@ public class CalibActivity extends Activity
   private void handleMenu( int pos )
   {
     closeMenu();
-    // Toast.makeText(this, item.toString(), Toast.LENGTH_SHORT).show();
+    // TDToast.make(this, item.toString() );
     int p = 0;
     if ( TDLevel.overNormal && p++ == pos ) { // EXPORT
       if ( mApp.myCalib != null ) {
@@ -487,9 +487,7 @@ public class CalibActivity extends Activity
   private void doExport( int exportType, boolean warn )
   {
     if ( mApp.mCID < 0 ) {
-      if ( warn ) {
-        Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT).show();
-      }
+      if ( warn ) TDToast.make( this, R.string.no_calibration );
     } else {
       String filename = null;
       switch ( exportType ) {
@@ -498,9 +496,9 @@ public class CalibActivity extends Activity
       }
       if ( warn ) { 
         if ( filename != null ) {
-          Toast.makeText( this, getString(R.string.saving_) + filename, Toast.LENGTH_SHORT).show();
+          TDToast.make( this, getString(R.string.saving_) + filename );
         } else {
-          Toast.makeText( this, R.string.saving_file_failed, Toast.LENGTH_SHORT).show();
+          TDToast.make( this, R.string.saving_file_failed );
         }
       }
     }

@@ -45,7 +45,7 @@ public class DataDownloadTask extends AsyncTask< String, Integer, Integer >
     // Log.v("DistoX", "READ " + nRead + " data in " + time + " msec");
 
     // if ( nRead < 0 ) {
-    //   Toast.makeText( mApp.getApplicationContext(), mApp.DistoXConnectionError[ -nRead ], Toast.LENGTH_SHORT ).show();
+    //   TDToast.make( mApp.getApplicationContext(), mApp.DistoXConnectionError[ -nRead ] );
     // TDLog.Error( "doInBackground read " + nRead );
     return nRead;
   }

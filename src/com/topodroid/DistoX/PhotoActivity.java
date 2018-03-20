@@ -49,7 +49,7 @@ import android.view.KeyEvent;
 // import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.ListView;
-import android.widget.Toast;
+// import android.widget.Toast;
 // import android.widget.Button;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -116,7 +116,7 @@ public class PhotoActivity extends Activity
       updatePhotoList( list );
       setTitle( mApp.mySurvey );
     // } else {
-    //   Toast.makeText( this, R.string.no_survey, Toast.LENGTH_SHORT ).show();
+    //   TDToast.make( this, R.string.no_survey );
     }
   }
 
@@ -128,7 +128,7 @@ public class PhotoActivity extends Activity
     mDataAdapter.clear();
     mList.setAdapter( mDataAdapter );
     if ( list.size() == 0 ) {
-      Toast.makeText( this, R.string.no_photos, Toast.LENGTH_SHORT ).show();
+      TDToast.make( this, R.string.no_photos );
       finish();
     }
     for ( PhotoInfo item : list ) {
@@ -205,7 +205,7 @@ public class PhotoActivity extends Activity
       // }
       updateDisplay( ); // FIXME
     } else {
-      Toast.makeText( this, R.string.no_db, Toast.LENGTH_SHORT ).show();
+      TDToast.make( this, R.string.no_db );
     }
   }
 

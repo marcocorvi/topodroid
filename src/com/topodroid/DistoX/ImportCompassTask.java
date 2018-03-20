@@ -40,7 +40,7 @@ class ImportCompassTask extends ImportTask
       long id = app_data.insertShots( sid, 1, shots ); // start id = 1
       app_data.insertShots( sid, id, splays );
     } catch ( ParserException e ) {
-      // Toast.makeText(mActivity, R.string.file_parse_fail, Toast.LENGTH_SHORT).show();
+      // TDToast.make(mActivity, R.string.file_parse_fail );
     }
     return sid;
   }

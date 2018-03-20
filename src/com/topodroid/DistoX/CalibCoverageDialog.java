@@ -20,7 +20,7 @@ import android.graphics.Bitmap;
 // import android.app.Dialog;
 import android.os.Bundle;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 import android.content.Context;
 
 import android.widget.Button;
@@ -121,7 +121,7 @@ class CalibCoverageDialog extends MyDialog
         fillImage();
         reset();
       } else {
-        Toast.makeText( mContext, R.string.no_calib, Toast.LENGTH_SHORT ).show();
+        TDToast.make( mContext, R.string.no_calib );
       }
     } else {
       dismiss();

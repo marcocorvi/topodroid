@@ -45,7 +45,7 @@ import android.view.KeyEvent;
 // import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.ListView;
-import android.widget.Toast;
+// import android.widget.Toast;
 // import android.app.Dialog;
 // import android.widget.Button;
 import android.view.View;
@@ -88,7 +88,7 @@ public class SensorListActivity extends Activity
       updateSensorList( list );
       setTitle( mApp.mySurvey );
     // } else {
-    //   Toast.makeText( this, R.string.no_survey, Toast.LENGTH_SHORT ).show();
+    //   TDToast.make( this, R.string.no_survey );
     }
   }
 
@@ -98,7 +98,7 @@ public class SensorListActivity extends Activity
     mDataAdapter.clear();
     mList.setAdapter( mDataAdapter );
     if ( list.size() == 0 ) {
-      Toast.makeText( this, R.string.no_sensors, Toast.LENGTH_SHORT ).show();
+      TDToast.make( this, R.string.no_sensors );
       finish();
     }
     for ( SensorInfo item : list ) {
@@ -161,7 +161,7 @@ public class SensorListActivity extends Activity
       // }
       updateDisplay(); // FIXME
     } else {
-      Toast.makeText( this, R.string.no_db, Toast.LENGTH_SHORT ).show();
+      TDToast.make( this, R.string.no_db );
     }
   }
 

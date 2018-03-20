@@ -33,7 +33,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 // import android.widget.AdapterView.OnItemLongClickListener;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 
 // import android.util.Log;
 
@@ -128,7 +128,7 @@ class PlotListDialog extends MyDialog
         }
       // END_SKETCH_3D //
       if ( list.size() == 0 && ( slist == null || slist.size() == 0 ) ) {
-        Toast.makeText( mContext, R.string.no_plots, Toast.LENGTH_SHORT ).show();
+        TDToast.make( mContext, R.string.no_plots );
         dismiss();
       }
       // mList.setAdapter( mArrayAdapter );

@@ -40,7 +40,7 @@ import android.view.View.OnClickListener;
 
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Toast;
+// import android.widget.Toast;
 
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -72,7 +72,7 @@ public class UserManualActivity extends Activity
       try {
         startActivity( new Intent( Intent.ACTION_VIEW, Uri.parse( manual )));
       } catch ( ActivityNotFoundException e ) {
-        Toast.makeText( this, R.string.no_manual, Toast.LENGTH_SHORT ).show();
+        TDToast.make( this, R.string.no_manual );
       }
     }
   }

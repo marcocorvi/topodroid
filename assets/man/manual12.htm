@@ -8,13 +8,18 @@ The Overview window displays all the sketches together, either in plan or in pro
 The overview window can be either in normal mode (canvas shift and zoom), or in measure-mode.<br><p>
 The Overview window has two buttons:
 <ul style="margin-top=0">
-<li><i>measure-mode</i> switches the window in "measure mode"</li>
+<li><i>measure-mode</i> toggles the window in "measure mode"</li>
 <li><i>references</i> display the reference dialog, through which the user can switch on/off the display of midline, splay shots, station names, metric grid, and scalebar.</li>
 <li><i>polyline</i>; when enabled you can measure the total length of a polyline traced by tapping the positions of the nodes</li>
+<li><i>undo</i> remove the last point of the polyline</li>
 </ul>
 <br><p>
 
 The "display reference" dialog has also a checkbox to hide the cave details and show the outline only.<br><p>
+
+When the window is in <i>measure mode</i> the first button has a bright green color.
+In this mode the drawing can be translated with the side draw (if enabled) and zoomed with the zoom buttoms (if enabled).
+<br><p>
 
 <h4>Segment measure</h4>
 When the Overview window is in measure-mode you can measure the distance between two points on the canvas.
@@ -29,7 +34,8 @@ The distance is computed in the plane of the canvas. In plan view, this is the h
 
 <h4>Polyline measure</h4>
 The "polyline" measure is useful to get an estimate of the "length" of the cave, more sensible than the length of the midline.
-You tap on the start of the polyline and the additional taps mark the nodes of the polyline.<br><p>
+You tap on the start of the polyline and the additional taps mark the nodes of the polyline.
+If you make a mistake tap the <i>undo</i> to remove the last points one at a time.<br><p>
 
 The title displays the distance between the two end points, the polyline length, the X-Y displacement between the endpoints, and the angle.<br><p>
 

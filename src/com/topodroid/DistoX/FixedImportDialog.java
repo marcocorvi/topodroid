@@ -36,7 +36,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 // import android.widget.TextView;
 import android.widget.EditText;
-import android.widget.Toast;
+// import android.widget.Toast;
 
 import android.content.Context;
 import android.content.Intent;
@@ -150,7 +150,7 @@ class FixedImportDialog extends MyDialog
     if ( ret ) {
       mList.setAdapter( mArrayAdapter );
     } else {
-      Toast.makeText( mContext, R.string.MT_points_none, Toast.LENGTH_SHORT ).show();
+      TDToast.make( mContext, R.string.MT_points_none );
       dismiss();
     }
     return ret;
@@ -236,7 +236,7 @@ class FixedImportDialog extends MyDialog
       dismiss();
     }
     if ( do_toast ) {
-      Toast.makeText( mContext, R.string.no_location_data, Toast.LENGTH_SHORT ).show();
+      TDToast.make( mContext, R.string.no_location_data );
     }
   }
 

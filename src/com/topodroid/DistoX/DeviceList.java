@@ -26,7 +26,7 @@ import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Toast;
+// import android.widget.Toast;
 
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothAdapter;
@@ -93,7 +93,7 @@ public class DeviceList extends Activity
       StringBuffer buf = new StringBuffer( item );
       int k = buf.lastIndexOf(" ");
       String address = buf.substring(k+1);
-      // Toast.makeText( mApp.getApplicationContext(), address, Toast.LENGTH_SHORT).show();
+      // TDToast.make( mApp.getApplicationContext(), address );
       TDLog.Log( TDLog.LOG_BT, "DeviceList item click Address " + address );
       Intent intent = new Intent();
       intent.putExtra( TDTag.TOPODROID_DEVICE_ACTION, address );
@@ -110,7 +110,7 @@ public class DeviceList extends Activity
     if ( mApp.mBTAdapter != null ) {
       Set<BluetoothDevice> device_set = mApp.mBTAdapter.getBondedDevices();
       if ( device_set.isEmpty() ) {
-        Toast.makeText(this, R.string.no_paired_device, Toast.LENGTH_SHORT).show();
+        TDToast.make(this, R.string.no_paired_device );
       } else {
         setTitle( R.string.title_device );
         mArrayAdapter.clear();
@@ -121,7 +121,7 @@ public class DeviceList extends Activity
       }
       // TDLog.Log( TDLog.LOG_BT, "showPairedDevices n. " + mArrayAdapter.getCount() );
     } else {
-      Toast.makeText(this, R.string.not_available, Toast.LENGTH_SHORT).show();
+      TDToast.make(this, R.string.not_available );
     }
   }
 
@@ -148,7 +148,7 @@ public class DeviceList extends Activity
           setTitle( R.string.title_device );
           resetReceiver();
           if ( mArrayAdapter.getCount() < 1 ) { 
-            Toast.makeText( mApp.getApplicationContext(), R.string.no_device_found, Toast.LENGTH_SHORT).show();
+            TDToast.make( mApp.getApplicationContext(), R.string.no_device_found );
             finish(); // no need to keep list of scanned distox open
           }
         } else if ( BluetoothDevice.ACTION_FOUND.equals( action ) ) {

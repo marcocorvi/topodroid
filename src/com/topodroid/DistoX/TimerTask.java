@@ -121,7 +121,7 @@ class TimerTask extends AsyncTask<String, Integer, Long >
       mValMag[2] /= mCntMag;
       computeBearingAndClino();
     // } else {
-    //   Toast.makeText(mContext, R.string.insufficient_data, Toast.LENGTH_SHORT ).show();
+    //   TDToast.make(mContext, R.string.insufficient_data );
     }
   }
 

@@ -31,7 +31,7 @@ import android.database.sqlite.SQLiteStatement;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteDiskIOException;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 
 // import android.util.Log;
 
@@ -137,9 +137,7 @@ class DeviceHelper extends DataSetObservable
     TDLog.Error("DB disk error " + e.getMessage() );
     mApp.mActivity.runOnUiThread( new Runnable() {
       public void run() {
-        Toast toast = Toast.makeText( mContext, "Critical failure: Disk i/o error", Toast.LENGTH_LONG );
-        toast.getView().setBackgroundColor( TDColor.BROWN );
-        toast.show();
+        TDToast.makeBG( mContext, R.string.disk_io_error, TDColor.BROWN );
       }
     } );
   }

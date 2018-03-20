@@ -43,7 +43,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 
 // import android.util.Log;
 
@@ -146,7 +146,7 @@ public class SurveyWindow extends Activity
       mTextName.setText( name );
       mTextName.setTextColor( mNameColor );
     } else {
-      Toast.makeText( mActivity, R.string.cannot_rename, Toast.LENGTH_SHORT).show();
+      TDToast.make( mActivity, R.string.cannot_rename );
     }
   } 
     
@@ -330,9 +330,9 @@ public class SurveyWindow extends Activity
     Archiver archiver = new Archiver( mApp );
     if ( archiver.archive( ) ) {
       String msg = getResources().getString( R.string.zip_saved ) + " " + archiver.zipname;
-      Toast.makeText( mActivity, msg, Toast.LENGTH_SHORT).show();
+      TDToast.make( mActivity, msg );
     } else {
-      Toast.makeText( mActivity, R.string.zip_failed, Toast.LENGTH_SHORT).show();
+      TDToast.make( mActivity, R.string.zip_failed );
     }
   }
 
@@ -357,7 +357,7 @@ public class SurveyWindow extends Activity
         intent.putExtra( "survey", TDPath.getSurveyThFile( mApp.mySurvey ) );
         mActivity.startActivity( intent );
       } catch ( ActivityNotFoundException e ) {
-        Toast.makeText( mActivity, R.string.no_cave3d, Toast.LENGTH_SHORT).show();
+        TDToast.make( mActivity, R.string.no_cave3d );
       }
     }
   }
@@ -376,7 +376,7 @@ public class SurveyWindow extends Activity
     if ( mApp.mySurvey != null ) {
       (new DistoXAnnotations( mActivity, mApp.mySurvey )).show();
     } else { // SHOULD NEVER HAPPEN
-      Toast.makeText( mActivity, R.string.no_survey, Toast.LENGTH_SHORT).show();
+      TDToast.make( mActivity, R.string.no_survey );
     }
   }
 
@@ -551,7 +551,7 @@ public class SurveyWindow extends Activity
     } else if ( TDLevel.overAdvanced && p++ == pos ) { // CALIBRATION CHECK SHOTS
       List< DBlock > shots = TopoDroidApp.mData.selectAllShots( mApp.mSID, TDStatus.CHECK );
       if ( shots.size() == 0 ) {
-        Toast.makeText( mActivity, R.string.no_calib_check, Toast.LENGTH_SHORT).show();
+        TDToast.make( mActivity, R.string.no_calib_check );
       } else {
         new CalibCheckDialog( mActivity, this, shots ).show();
       }
@@ -586,7 +586,7 @@ public class SurveyWindow extends Activity
   //   Handler convert_handler= new Handler(){
   //     @Override
   //     public void handleMessage(Message msg) {
-  //       Toast.makeText( mActivity, R.string.converted_tdr2th2, Toast.LENGTH_SHORT).show();
+  //       TDToast.make( mActivity, R.string.converted_tdr2th2 );
   //     }
   //   };
   //   (new ConvertTdr2Th2Task( mActivity, convert_handler, mApp )).execute();

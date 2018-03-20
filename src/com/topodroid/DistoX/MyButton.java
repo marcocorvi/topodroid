@@ -15,8 +15,8 @@ import android.content.Context;
 import android.content.res.Resources;
 
 import android.widget.Button;
-import android.widget.Toast;
-import android.widget.TextView;
+// import android.widget.Toast;
+// import android.widget.TextView;
 // import android.view.View;
 import android.view.View.OnClickListener;
 // import android.view.View.OnLongClickListener;
@@ -75,10 +75,7 @@ public class MyButton
         if ( USE_CACHE ) mBitmapCache.append( res_id, ret );
       } catch ( OutOfMemoryError err ) {
         TDLog.Error("out of memory: " + err.getMessage() );
-        Toast toast = Toast.makeText( ctx, "WARNING. Out Of Memroy", Toast.LENGTH_LONG );
-        TextView tv = (TextView)toast.getView().findViewById( android.R.id.message );
-        tv.setTextColor( TDColor.FIXED_RED );
-        toast.show();
+        TDToast.makeColor( ctx, R.string.out_of_memory, TDColor.FIXED_RED );
         // try { 
         //   InputStream is = ctx.getAssets().open("iz_oom.png");
         //   ret = new BitmapDrawable( res, is );

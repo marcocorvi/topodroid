@@ -88,7 +88,7 @@ import android.util.DisplayMetrics;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 
 public class TopoDroidApp extends Application
                           implements OnSharedPreferenceChangeListener
@@ -564,7 +564,7 @@ public class TopoDroidApp extends Application
       // TDLog.Profile("TDApp BT");
       mBTAdapter = BluetoothAdapter.getDefaultAdapter();
       // if ( mBTAdapter == null ) {
-      //   // Toast.makeText( this, R.string.not_available, Toast.LENGTH_SHORT ).show();
+      //   // TDToast.make( this, R.string.not_available );
       //   // finish(); // FIXME
       //   // return;
       // }
@@ -689,13 +689,13 @@ public class TopoDroidApp extends Application
   {
     if ( b != null ) b.setEnabled( false );
     if ( mComm == null || mDevice == null ) {
-      Toast.makeText( context, R.string.no_device_address, Toast.LENGTH_SHORT ).show();
+      TDToast.make( context, R.string.no_device_address );
     } else if ( check && ! checkCalibrationDeviceMatch() ) {
-      Toast.makeText( context, R.string.calib_device_mismatch, Toast.LENGTH_SHORT ).show();
+      TDToast.make( context, R.string.calib_device_mismatch );
     } else if ( ! mComm.writeCoeff( distoAddress(), coeff ) ) {
-      Toast.makeText( context, R.string.write_failed, Toast.LENGTH_SHORT).show();
+      TDToast.make( context, R.string.write_failed );
     } else {
-      Toast.makeText( context, R.string.write_ok, Toast.LENGTH_SHORT).show();
+      TDToast.make( context, R.string.write_ok );
     }
     if ( b != null ) b.setEnabled( true );
   }
@@ -1198,7 +1198,7 @@ public class TopoDroidApp extends Application
     if ( TDSetting.mTRobotShot ) {
       long millis = SystemClock.uptimeMillis(); // FIXME TROBOT
       if ( millis > trobotmillis + 10000 ) {
-        Toast.makeText( this, "WARNING TopoRobot policy is very experimental", Toast.LENGTH_SHORT).show();
+        TDToast.make( this, "WARNING TopoRobot policy is very experimental" );
         trobotmillis = millis;
       }
       mStationName.assignStationsAfter_TRobot( mData, mSID, blk0, list, sts );
@@ -1225,7 +1225,7 @@ public class TopoDroidApp extends Application
     if ( TDSetting.mTRobotShot ) {
       long millis = SystemClock.uptimeMillis(); // FIXME TROBOT
       if ( millis > trobotmillis + 10000 ) {
-        Toast.makeText( this, "WARNING TopoRobot policy is very experimental", Toast.LENGTH_SHORT).show();
+        TDToast.make( this, "WARNING TopoRobot policy is very experimental" );
         trobotmillis = millis;
       }
       mStationName.assignStations_TRobot( mData, mSID, list );
@@ -1806,7 +1806,7 @@ public class TopoDroidApp extends Application
     if ( ( distance < 0.0f ) ||
          ( clino < -90.0f || clino > 90.0f ) ||
          ( b < 0.0f || b >= 360.0f ) ) {
-      Toast.makeText( this, R.string.illegal_data_value, Toast.LENGTH_SHORT ).show();
+      TDToast.make( this, R.string.illegal_data_value );
       return null;
     }
     bearing = (bearing  - ManualCalibration.mAzimuth) / TDSetting.mUnitAngle;
@@ -1815,7 +1815,7 @@ public class TopoDroidApp extends Application
 
     if ( from != null && to != null && from.length() > 0 ) {
       // if ( mData.makesCycle( -1L, mSID, from, to ) ) {
-      //   Toast.makeText( this, R.string.makes_cycle, Toast.LENGTH_SHORT ).show();
+      //   TDToast.make( this, R.string.makes_cycle );
       // } else
       {
         // TDLog.Log( TDLog.LOG_SHOT, "manual-shot Data " + distance + " " + bearing + " " + clino );
@@ -1852,7 +1852,7 @@ public class TopoDroidApp extends Application
         ret = mData.selectShot( id, mSID );
       }
     } else {
-      Toast.makeText( this, R.string.missing_station, Toast.LENGTH_SHORT ).show();
+      TDToast.make( this, R.string.missing_station );
     }
     return ret;
   }
@@ -2063,12 +2063,12 @@ public class TopoDroidApp extends Application
 
   void syncConnectionFailed()
   {
-    Toast.makeText( this, "Sync connection failed", Toast.LENGTH_SHORT ).show();
+    TDToast.make( this, "Sync connection failed" );
   }
 
   void syncConnectedDevice( String name )
   {
-    Toast.makeText( this, "Sync connected " + name, Toast.LENGTH_SHORT ).show();
+    TDToast.make( this, "Sync connected " + name );
     if ( mSyncConn != null ) registerDataListener( mSyncConn );
   }
 
@@ -2112,7 +2112,7 @@ public class TopoDroidApp extends Application
     if ( exportType < 0 ) return;
     if ( mSID < 0 ) {
       if ( warn ) {
-        Toast.makeText( this, R.string.no_survey, Toast.LENGTH_SHORT).show();
+        TDToast.make( this, R.string.no_survey );
       }
     } else {
       String filename = null;
@@ -2164,19 +2164,19 @@ public class TopoDroidApp extends Application
           filename = exportSurveyAsCav();
           break;
         case TDConst.DISTOX_EXPORT_GRT: // Grottolf
-          Toast.makeText( this, "WARNING Grottolf export is untested", Toast.LENGTH_SHORT ).show(); 
+          TDToast.make( this, "WARNING Grottolf export is untested" );
           filename = exportSurveyAsGrt();
           break;
         case TDConst.DISTOX_EXPORT_GTX: // GHTopo
-          Toast.makeText( this, "WARNING GHTopo export is untested", Toast.LENGTH_SHORT ).show(); // FIXME TROBOT
+          TDToast.make( this, "WARNING GHTopo export is untested" );
           filename = exportSurveyAsGtx();
           break;
         case TDConst.DISTOX_EXPORT_SUR: // WinKarst
-          Toast.makeText( this, "WARNING WinKarst export is untested", Toast.LENGTH_SHORT ).show(); 
+          TDToast.make( this, "WARNING WinKarst export is untested" );
           filename = exportSurveyAsSur();
           break;
         case TDConst.DISTOX_EXPORT_TRB: // TopoRobot
-          Toast.makeText( this, "WARNING TopoRobot export is untested", Toast.LENGTH_SHORT ).show(); 
+          TDToast.make( this, "WARNING TopoRobot export is untested" );
           filename = exportSurveyAsTrb();
           break;
 
@@ -2187,11 +2187,11 @@ public class TopoDroidApp extends Application
       }
       if ( warn ) { 
         if ( filename == null ) {
-          Toast.makeText( this, R.string.saving_file_failed, Toast.LENGTH_SHORT).show();
+          TDToast.make( this, R.string.saving_file_failed );
         } else if ( filename.length() == 0 ) {
-          Toast.makeText( this, R.string.no_geo_station, Toast.LENGTH_SHORT).show();
+          TDToast.make( this, R.string.no_geo_station );
         } else {
-          Toast.makeText( this, mActivity.getString(R.string.saving_) + filename, Toast.LENGTH_SHORT).show();
+          TDToast.make( this, mActivity.getString(R.string.saving_) + filename );
         }
       }
     }

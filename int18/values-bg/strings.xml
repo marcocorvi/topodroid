@@ -125,6 +125,7 @@
     <string name="few_data">Няма достатъчно данни</string>
     <string name="few_iter">Невъзможни итерации</string>
     <string name="few_groups">Недостатъчно групи</string>
+    <!-- TODO string name="found_groups">Found %1$d groups</string -->
     <!-- UNUSED string name="few_plots">Няма достатъчно скици</string -->
     <string name="few_calibs">Няма достатъчно калибрации</string>
     <string name="getting_info">Прочитане на DistoX инфо...</string>
@@ -253,6 +254,7 @@
     <string name="no_sketch">Няма 3D скица</string>
     <!-- UNUSED string name="no_shots">Картировката не съдържа отсечки.\nИзползвайте бутона за изтегляне на данни</string -->
     <string name="no_survey">Не е избрана картировка</string>
+    <!-- TODO string name="no_to_station">No TO station.</string -->
     <string name="no_thmanager">ThManager не е инсталирана</string>
     <string name="no_db_viewer">Програмата SQliteViewer не е инсталирана</string>
     <string name="no_undelete">Няма елементи за възстановяване</string>
@@ -425,6 +427,9 @@
     <string name="survey_not_attached">ВНИМАНИЕ: някои отсечки не са свързани</string>
     <string name="survey_not_extend">Внимание: отсечката не е разгъната</string>
     <string name="survey_not_attached_extend">Внимание: Някои отсечки не са прикачени или разгънати</string>
+    <!-- TODO string name="saturated_coeffs">WARNING: saturated calibration coefficients</string -->
+    <!-- TODO string name="out_of_memory">WARNING: out of memory !</string -->
+    <!-- TODO string name="disk_io_error">CRITICAL: disk i/o error !</string -->
     <string name="cannot_rename">Не може да се преименува картировката</string>
     <string name="declination">Магн. деклинация</string>
     <string name="description">описание</string>
@@ -460,7 +465,7 @@
     <string name="stat_component">Компоненти %1$d</string>
     <string name="stat_depth">Дълбочина %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Дублирани отсечки %1$d %2$.1f %3$s</string>
-    <string name="stat_leg">Отсечки %1$d %2$.1f %3$s</string>
+    <string name="stat_leg">Отсечки %1$d %2$.1f %3$s %4$.1f %5$s</string>
     <string name="stat_length">Дължина %1$.1f %2$s</string>
     <string name="stat_projlen">Редуцирана дължина %1$.1f %2$s</string>
     <string name="stat_loop">Полигони %1$d</string>

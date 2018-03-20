@@ -32,7 +32,7 @@ import android.database.sqlite.SQLiteStatement;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteDiskIOException;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 
 import android.util.Log;
 
@@ -312,6 +312,7 @@ class DataHelper extends DataSetObservable
     SurveyStat stat = new SurveyStat();
     stat.id = sid;
     stat.lengthLeg = 0.0f;
+    stat.planLength = 0.0f;
     stat.lengthDuplicate = 0.0f;
     stat.lengthSurface   = 0.0f;
     stat.countLeg = 0;
@@ -376,7 +377,7 @@ class DataHelper extends DataSetObservable
 
     // count components
     cursor = myDB.query( SHOT_TABLE,
-			        new String[] { "flag", "distance", "fStation", "tStation" },
+			        new String[] { "flag", "distance", "fStation", "tStation", "clino" },
                                 "surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ", 
                                 new String[] { Long.toString(sid) },
                                 null, null, null );
@@ -385,6 +386,7 @@ class DataHelper extends DataSetObservable
         switch ( (int)(cursor.getLong(0)) ) {
           case 0: ++ stat.countLeg;
             stat.lengthLeg += (float)( cursor.getDouble(1) );
+            stat.planLength += (float)( cursor.getDouble(1) * Math.cos( cursor.getDouble(4)*TDMath.DEG2RAD ) );
             break;
           case 1: ++ stat.countSurface;
             stat.lengthSurface += (float)( cursor.getDouble(1) );
@@ -524,9 +526,7 @@ class DataHelper extends DataSetObservable
     Log.e("DistoX", "DB disk error " + e.getMessage() );
     mApp.mActivity.runOnUiThread( new Runnable() {
       public void run() {
-        Toast toast = Toast.makeText( mContext, "Critical failure: Disk i/o error", Toast.LENGTH_LONG );
-        toast.getView().setBackgroundColor( TDColor.BROWN );
-        toast.show();
+        TDToast.makeBG( mContext, R.string.disk_io_error, TDColor.BROWN );
       }
     } );
   }

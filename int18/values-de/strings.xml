@@ -130,6 +130,7 @@
     <string name="few_data">Nicht genügend Daten</string>
     <string name="few_iter">Nicht genügend Wiederholungen</string>
     <string name="few_groups">Zu wenige Gruppen</string>
+    <!-- TODO string name="found_groups">Found %1$d groups</string -->
     <!-- UNUSED string name="few_plots">Nicht genügend Skizzen</string -->
     <string name="few_calibs">Nicht genügend Kalibrierungen</string>
     <string name="getting_info">DistoX wird abgefragt ...</string>
@@ -257,6 +258,7 @@
     <string name="no_sketch">Keine 3D Skizze</string>
     <!-- UNUSED string name="no_shots">Vermessung hat keine Messungen</string -->
     <string name="no_survey">Keine Vermessung ausgewählt</string>
+    <!-- TODO string name="no_to_station">No TO station.</string -->
     <string name="no_thmanager">Keine ThManager App</string>
     <string name="no_db_viewer">Keine DB_viewer App</string>
     <string name="no_undelete">Nichts wiederherzustellen</string>
@@ -435,6 +437,9 @@
     <string name="survey_not_attached">WARNUNG: Unverbundene Messungen</string>
     <string name="survey_not_extend">WARNUNG: Nicht definierte LRUD Werte</string>
     <string name="survey_not_attached_extend">WARNUNG: Nicht verbundene Messungen</string>
+    <!-- TODO string name="saturated_coeffs">WARNING: saturated calibration coefficients</string -->
+    <!-- TODO string name="out_of_memory">WARNING: out of memory !</string -->
+    <!-- TODO string name="disk_io_error">CRITICAL: disk i/o error !</string -->
     <string name="cannot_rename">Kann Vermessung nicht umbenennen</string>
     <string name="declination">Magnetische Deklination</string>
     <string name="description">Beschreibung</string>
@@ -470,7 +475,7 @@
     <string name="stat_component">Komponenten %1$d</string>
     <string name="stat_depth">Tiefe %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Doppelmessungen %1$d %2$.1f %3$s</string>
-    <string name="stat_leg">Messstrecke %1$d %2$.1f %3$s</string>
+    <string name="stat_leg">Messstrecke %1$d %2$.1f %3$s %4$.1f %5$s</string>
     <string name="stat_length">Länge %1$.1f %2$s</string>
     <string name="stat_projlen">Skizzenlänge %1$.1f %2$s</string>
     <string name="stat_loop">Kreisschlüsse %1$d</string>
