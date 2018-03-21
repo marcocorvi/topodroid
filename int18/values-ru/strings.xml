@@ -125,7 +125,7 @@
     <string name="few_data">Недостаточно данных</string>
     <string name="few_iter">Ошибка: Недостаточно итераций</string>
     <string name="few_groups">Недостаточно данных с номером группы</string>
-    <!-- TODO string name="found_groups">Found %1$d groups</string -->
+    <string name="found_groups">Найдено %1$d групп</string>
     <!-- UNUSED string name="few_plots">Недостаточно абрисов</string -->
     <string name="few_calibs">Недостаточно калиб. замеров</string>
     <string name="getting_info">Получение информации о DistoX...</string>
@@ -254,7 +254,7 @@
     <string name="no_sketch">Отсутствует 3D абрис</string>
     <!-- UNUSED string name="no_shots">В съёмке отсутствуют пикеты.\nИспользуйте кнопку Скачать для их создания</string -->
     <string name="no_survey">Съёмка не выбрана.</string>
-    <!-- TODO string name="no_to_station">No TO station.</string -->
+    <string name="no_to_station">Отсутсвует пикет ДО.</string>
     <string name="no_thmanager">ThManager не установлен</string>
     <string name="no_db_viewer">Приложение просмотра баз данных не найдено</string>
     <string name="no_undelete">Нечего восстанавливать</string>
@@ -428,9 +428,9 @@
     <string name="survey_not_attached">ВНИМАНИЕ: не соединенный пикет</string>
     <string name="survey_not_extend">ВНИМАНИЕ: замеры без направления развертки</string>
     <string name="survey_not_attached_extend">ВНИМАНИЕ: не соединенный пикет и замеры без направления развертки</string>
-    <!-- TODO string name="saturated_coeffs">WARNING: saturated calibration coefficients</string -->
-    <!-- TODO string name="out_of_memory">WARNING: out of memory !</string -->
-    <!-- TODO string name="disk_io_error">CRITICAL: disk i/o error !</string -->
+    <string name="saturated_coeffs">ВНИМАНИЕ: насыщенные коэфициенты калибровки</string>
+    <string name="out_of_memory">ВНИМАНИЕ: out of memory !</string>
+    <string name="disk_io_error">ОШИБКА: ошибка ввода/вывода !</string>
     <string name="cannot_rename">Не могу перименовать съёмку</string>
     <string name="declination">Магн. скл.</string>
     <string name="description">описание</string>
