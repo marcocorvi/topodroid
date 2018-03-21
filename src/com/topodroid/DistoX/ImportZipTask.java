@@ -17,6 +17,7 @@ package com.topodroid.DistoX;
    
 class ImportZipTask extends ImportTask
 {
+
   ImportZipTask( MainWindow main ) { super(main); }
 
   @Override
@@ -24,6 +25,7 @@ class ImportZipTask extends ImportTask
   {
     String filename = str[0];
     Archiver archiver = new Archiver( mApp );
+
     int ret = archiver.unArchive( TDPath.getZipFile( filename ), filename.replace(".zip", ""));
     return (long)ret;
   }
@@ -34,7 +36,7 @@ class ImportZipTask extends ImportTask
   @Override
   protected void onPostExecute(Long result) {
     mMain.setTheTitle( );
-    mMain.updateDisplay( );
+    mProgress.dismiss();
     if ( result < -5 ) {
       TDToast.make( mMain, R.string.unzip_fail );
     } else if ( result == -5 ) {
@@ -48,6 +50,7 @@ class ImportZipTask extends ImportTask
     } else if ( result == -1 ) {
       TDToast.make( mMain, R.string.import_already );
     } else {
+      mMain.updateDisplay( );
       TDToast.make( mMain, R.string.import_zip_ok );
     }
   }

@@ -13,14 +13,11 @@ package com.topodroid.DistoX;
 
 import java.util.Locale;
 
-// import android.app.Dialog;
 import android.os.Bundle;
 
 // import android.text.method.KeyListener;
 
 import android.content.Context;
-// import android.util.AttributeSet;
-// import android.content.DialogInterface;
 
 // import android.widget.TextView;
 // import android.widget.TextView.OnEditorActionListener;
@@ -41,11 +38,10 @@ import android.widget.SeekBar;
 // import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import android.graphics.Bitmap;
-import android.graphics.Matrix;
+// import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 
 // import android.util.Log;
-
 
 class AzimuthDialDialog extends MyDialog
                               implements View.OnClickListener
@@ -69,58 +65,19 @@ class AzimuthDialDialog extends MyDialog
   private Button mBtnCancel;
 
   private SeekBar mSeekBar;
-  // private int[] mPxl;
+  private MyTurnBitmap mDialBitmap;
 
-  AzimuthDialDialog( Context context, ILister parent, float azimuth, Bitmap dial )
+  AzimuthDialDialog( Context context, ILister parent, float azimuth, MyTurnBitmap dial )
   {
     super(context, R.string.AzimuthDialDialog );
     mParent  = parent;
     mAzimuth = azimuth;
-    mBMdial  = dial;
-    // mPxl = new int[96*96];
+    mDialBitmap = dial;
   }
-
-  // void rotatedBitmap( Bitmap bmp, int n1, float a, int n2 )
-  // {
-  //   float n11 = (n1-1.0f)/2;
-  //   float n21 = (n2-1.0f)/2;
-  //   float c = ( TDMath.cosd( a ) * n1 ) / n2;
-  //   float s = ( TDMath.sind( a ) * n1 ) / n2;
-  //   int i2 = n2/2;
-  //   int i1 = i2-1;
-  //   for ( int j=0; j<n2; ++j ) {
-  //     float js = n11 - s * (j-n21);
-  //     float jc = n11 + c * (j-n21);
-  //     int i=i2; 
-  //     for ( ; i<n2; ++i ) {
-  //       try {
-  //         mPxl[j*n2+i] = bmp.getPixel( (int)( js + c * (i-n21)), (int)( jc + s * (i-n21)) );
-  //       } catch ( IllegalArgumentException e ) {
-  //       	Log.v("DistoX", "break at J " + j + " I " + i );
-  //         break; }
-  //     }
-  //     for ( ; i<n2; ++i ) mPxl[j*n2+i] = 0xffcc6666;
-  //     i=i1; 
-  //     for ( ; i>=0; --i ) {
-  //       try {
-  //         mPxl[j*n2+i] = bmp.getPixel( (int)( js + c * (i-n21)), (int)( jc + s * (i-n21)) );
-  //       } catch ( IllegalArgumentException e ) { break; }
-  //     }
-  //     for ( ; i>=0; --i ) mPxl[j*n2+i] = 0xff66cc66;
-  //   }
-  // }
 
   private void updateView()
   {
-    Matrix m = new Matrix();
-    // float s = TDMath.cosd( ((mAzimuth % 90) - 45) );
-    // m.preScale( s, s );
-    m.preRotate( mAzimuth - 90 );
-    int w = 96; // mBMdial.getWidth();
-    Bitmap bm1 = Bitmap.createScaledBitmap( mBMdial, w, w, true );
-    Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, w, w, m, true);
-    // rotatedBitmap( mBMdial, mBMdial.getWidth(), mAzimuth, 96 );
-    // Bitmap bm2 = Bitmap.createBitmap( mPxl, 96, 96, Bitmap.Config.ALPHA_8 );
+    Bitmap bm2 = mDialBitmap.getBitmap( mAzimuth, 96 );
     mBTazimuth.setBackgroundDrawable( new BitmapDrawable( mContext.getResources(), bm2 ) );
   }
 

@@ -76,8 +76,8 @@ import android.view.ViewGroup.LayoutParams;
 
 import android.widget.Button;
 // import android.graphics.Point;
-// import android.graphics.Bitmap;
-// import android.graphics.BitmapFactory;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 // import android.graphics.drawable.BitmapDrawable;
 
 import android.net.Uri;
@@ -113,6 +113,17 @@ public class TopoDroidApp extends Application
   static Locale mLocale;
   static String mLocaleStr;
   static int mCheckPerms;
+
+  static private MyTurnBitmap mDialBitmap = null;
+
+  static MyTurnBitmap getDialBitmap( Resources res )
+  {
+    if ( mDialBitmap == null ) {
+      Bitmap dial = BitmapFactory.decodeResource( res, R.drawable.iz_dial_transp ); // FIXME AZIMUTH_DIAL
+      mDialBitmap = new MyTurnBitmap( dial, 0x00000000 );
+    }
+    return mDialBitmap;
+  }
 
   static String mClipboardText = null; // text clipboard
 

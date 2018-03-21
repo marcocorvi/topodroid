@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="pref_category">#ff33ccff</color>
+    <color name="menu_foreground">#ff33ccff</color>
+    <color name="menu_background">#ff333333</color>
+    <!-- color name="menu_highlight">#ffff9900</color -->
+    <color name="button_background">#ff33ccff</color>
+    <color name="textdelete">#ffcc0000</color>
+    <color name="divider">#ff444444</color>
+
+    <color name="title">#ff6699ff</color>
+    <color name="textfixed">#ff66cc99</color>
+    <color name="text">#ffffffff</color>
+    <color name="hint">#ff999999</color>
+
+<!-- MATERIAL
+    <color name="colorPrimary">#33ccff</color>
+    <color name="colorPrimaryDark">#0099cc</color>
+    <color name="textColorPrimary">#ffffff</color>
+    <color name="windowBackground">#000000</color>
+    <color name="navigationBarColor">#666666</color>
+    <color name="colorAccent">#ff33cc</color>
+-->
+</resources>

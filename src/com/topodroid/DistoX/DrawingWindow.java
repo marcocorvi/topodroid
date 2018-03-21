@@ -485,7 +485,8 @@ public class DrawingWindow extends ItemDrawer
   private BitmapDrawable mBMselectArea;
   private BitmapDrawable mBMselectShot;
   private BitmapDrawable mBMselectStation;
-  private Bitmap mBMdial;
+  // private Bitmap mBMdial;
+  private MyTurnBitmap mDialBitmap; // use global MyDialBitmap
 
   HorizontalListView mListView;
   ListView   mMenu;
@@ -1171,10 +1172,11 @@ public class DrawingWindow extends ItemDrawer
     if ( BTN_DIAL >= mButton1.length ) return;
 
     if ( TDAzimuth.mFixedExtend == 0 ) {
-      android.graphics.Matrix m = new android.graphics.Matrix();
-      m.postRotate( azimuth - 90 );
-      Bitmap bm1 = Bitmap.createScaledBitmap( mBMdial, mButtonSize, mButtonSize, true );
-      Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, mButtonSize, mButtonSize, m, true);
+      // android.graphics.Matrix m = new android.graphics.Matrix();
+      // m.postRotate( azimuth - 90 );
+      // Bitmap bm1 = Bitmap.createScaledBitmap( mBMdial, mButtonSize, mButtonSize, true );
+      // Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, mButtonSize, mButtonSize, m, true);
+      Bitmap bm2 = mDialBitmap.getBitmap( TDAzimuth.mRefAzimuth, mButtonSize );
       mButton1[BTN_DIAL].setBackgroundDrawable( new BitmapDrawable( getResources(), bm2 ) );
     } else if ( TDAzimuth.mFixedExtend == -1L ) {
       mButton1[BTN_DIAL].setBackgroundDrawable( mBMleft );
@@ -1501,7 +1503,9 @@ public class DrawingWindow extends ItemDrawer
       else if ( ic == IC_BLUETOOTH ) { mBMbluetooth = MyButton.getButtonBackground( mApp, res, izons[ic] ); }
       else if ( ic == IC_PLAN ) { mBMplan     = MyButton.getButtonBackground( mApp, res, izons[ic] ); }
     }
-    mBMdial          = BitmapFactory.decodeResource( res, R.drawable.iz_dial_transp ); // FIXME AZIMUTH_DIAL
+    // mBMdial          = BitmapFactory.decodeResource( res, R.drawable.iz_dial_transp ); // FIXME AZIMUTH_DIAL
+    mDialBitmap      = TopoDroidApp.getDialBitmap( res );
+
     mBMextend        = MyButton.getButtonBackground( mApp, res, izons[IC_EXTEND] ); 
     mBMdownload_on   = MyButton.getButtonBackground( mApp, res, R.drawable.iz_download_on );
     mBMdownload_wait = MyButton.getButtonBackground( mApp, res, R.drawable.iz_download_wait );
@@ -4247,7 +4251,7 @@ public class DrawingWindow extends ItemDrawer
           if ( TDSetting.mAzimuthManual ) {
             setRefAzimuth( 0, - TDAzimuth.mFixedExtend );
           } else {
-            (new AzimuthDialDialog( mActivity, this, TDAzimuth.mRefAzimuth, mBMdial )).show();
+            (new AzimuthDialDialog( mActivity, this, TDAzimuth.mRefAzimuth, mDialBitmap )).show();
           }
         }
 

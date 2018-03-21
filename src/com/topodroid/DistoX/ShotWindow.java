@@ -216,12 +216,13 @@ public class ShotWindow extends Activity
     if ( ! TDLevel.overNormal ) return;
     if ( BTN_AZIMUTH >= mButton1.length ) return;
     if ( TDAzimuth.mFixedExtend == 0 ) {
-      android.graphics.Matrix m = new android.graphics.Matrix();
-      m.postRotate( TDAzimuth.mRefAzimuth - 90 );
+      // android.graphics.Matrix m = new android.graphics.Matrix();
+      // m.postRotate( TDAzimuth.mRefAzimuth - 90 );
       // if ( mBMdial != null ) // extra care !!!
       {
-        Bitmap bm1 = Bitmap.createScaledBitmap( mBMdial, mButtonSize, mButtonSize, true );
-        Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, mButtonSize, mButtonSize, m, true);
+        // Bitmap bm1 = Bitmap.createScaledBitmap( mBMdial, mButtonSize, mButtonSize, true );
+        // Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, mButtonSize, mButtonSize, m, true);
+	Bitmap bm2 = mDialBitmap.getBitmap( TDAzimuth.mRefAzimuth, mButtonSize );
         mButton1[ BTN_AZIMUTH ].setBackgroundDrawable( new BitmapDrawable( getResources(), bm2 ) );
       }
     } else if ( TDAzimuth.mFixedExtend == -1L ) {
@@ -829,6 +830,7 @@ public class ShotWindow extends Activity
         }
         break;
     }
+    setRefAzimuthButton( );
   }
 
   // ---------------------------------------------------------------
@@ -852,8 +854,9 @@ public class ShotWindow extends Activity
   BitmapDrawable mBMdownload_no;
   // BitmapDrawable mBMadd;
   BitmapDrawable mBMplot;
-  Bitmap mBMdial;
-  Bitmap mBMdial_transp;
+  // Bitmap mBMdial;
+  // Bitmap mBMdial_transp;
+  MyTurnBitmap mDialBitmap;
   BitmapDrawable mBMplot_no;
   BitmapDrawable mBMleft;
   BitmapDrawable mBMright;
@@ -898,8 +901,10 @@ public class ShotWindow extends Activity
       else if ( k == BTN_BLUETOOTH ) { mBMbluetooth = MyButton.getButtonBackground( mApp, res, izons[k] ); }
       else if ( k == BTN_PLOT ) { mBMplot     = MyButton.getButtonBackground( mApp, res, izons[k] ); }
     }
-    mBMdial          = BitmapFactory.decodeResource( res, R.drawable.iz_dial_transp ); // FIXME AZIMUTH_DIAL
-    mBMdial_transp   = BitmapFactory.decodeResource( res, R.drawable.iz_dial_transp );
+    // mBMdial          = BitmapFactory.decodeResource( res, R.drawable.iz_dial_transp ); // FIXME AZIMUTH_DIAL
+    // mBMdial_transp   = BitmapFactory.decodeResource( res, R.drawable.iz_dial_transp );
+    mDialBitmap      = TopoDroidApp.getDialBitmap( res );
+
     mBMplot_no       = MyButton.getButtonBackground( mApp, res, R.drawable.iz_plot_no );
     mBMdownload_on   = MyButton.getButtonBackground( mApp, res, R.drawable.iz_download_on );
     mBMdownload_wait = MyButton.getButtonBackground( mApp, res, R.drawable.iz_download_wait );
@@ -1038,6 +1043,7 @@ public class ShotWindow extends Activity
       // mApp.registerConnListener( mHandler );
       setConnectionStatus( mDataDownloader.getStatus() );
     }
+    setRefAzimuthButton( );
   }
 
   // --------------------------------------------------------------
@@ -1237,7 +1243,7 @@ public class ShotWindow extends Activity
           if ( TDSetting.mAzimuthManual ) {
             setRefAzimuth( 0, - TDAzimuth.mFixedExtend );
           } else {
-            (new AzimuthDialDialog( mActivity, this, TDAzimuth.mRefAzimuth, mBMdial_transp )).show();
+            (new AzimuthDialDialog( mActivity, this, TDAzimuth.mRefAzimuth, mDialBitmap )).show();
           }
         }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // SEARCH

@@ -356,7 +356,7 @@ public class MainWindow extends Activity
       String filepath = TDPath.getImportFile( filename );
       new ImportCaveSniperTask( this ).execute( filepath ); 
     } else if ( filename.endsWith(".zip") ) {
-      TDToast.makeLong( mActivity, R.string.import_zip_wait );
+      // TDToast.makeLong( mActivity, R.string.import_zip_wait );
       new ImportZipTask( this ) .execute( filename );
     } else {
       setTheTitle( );
