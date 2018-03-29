@@ -125,7 +125,7 @@
     <string name="few_data">Няма достатъчно данни</string>
     <string name="few_iter">Невъзможни итерации</string>
     <string name="few_groups">Недостатъчно групи</string>
-    <!-- TODO string name="found_groups">Found %1$d groups</string -->
+    <string name="found_groups">Намерени %1$d групи</string>
     <!-- UNUSED string name="few_plots">Няма достатъчно скици</string -->
     <string name="few_calibs">Няма достатъчно калибрации</string>
     <string name="getting_info">Прочитане на DistoX инфо...</string>
@@ -185,12 +185,12 @@
     <string name="error_group_required">Необходим номер на група</string>
     <string name="error_group_non_integer">Номерът на група трябва да е цяло число</string>
     <string name="error_alt_required">Необходима височина</string>
-    <string name="error_invalid_number">Невалидно число</string>
-    <!-- TODO string name="error_invalid_name">Invalid name</string -->
+    <string name="error_invalid_number">Грешно число</string>
+    <string name="error_invalid_name">Грешно име</string>
     <string name="error_lat_required">Необходима геогр. широчина</string>
     <string name="error_long_required">Необходима геогр. дължина</string>
     <string name="error_name_required">Необходимо име</string>
-    <!-- TODO string name="error_dir_exists">Directory already exists</string -->
+    <string name="error_dir_exists">Директорията вече съществува</string>
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Необходим репер</string>
     <!-- UNUSED string name="error_station_already_fixed">Репера вече има координати</string -->
@@ -217,16 +217,16 @@
     <!-- UNUSED string name="barrier_del">Показване на следващи репери</string -->
     <!-- UNUSED string name="hidden_add">Скриване на предишни репери</string -->
     <!-- UNUSED string name="hidden_del">Показване на предишни репери</string -->
-    <!-- TODO string name="hidden_show">Show shots beyond station</string -->
+    <string name="hidden_show">Показване на измервания след репер</string>
     <string name="splays_toggle">Показване/скриване на странични изм.</string>
     <string name="splays">Странични изм.</string>
     <string name="fixed">Фиксиран</string>
     <string name="painted">Боядисан</string>
 
-    <!-- TODO string name="cbd_title">Base directory</string -->
-    <!-- TODO string name="cwd">TopoDroid project directory</string -->
-    <!-- TODO string name="empty_cwd">Empty project name</string -->
-    <!-- TODO string name="bad_cbd">Base directory inexistent or not writable</string -->
+    <string name="cbd_title">Базова директория</string>
+    <string name="cwd">TopoDroid директория за картировки</string>
+    <string name="empty_cwd">Празно име на проект/картировка</string>
+    <string name="bad_cbd">Базовата директория не съществува или е само за четене</string>
     <string name="bad_cwd">Името на проекта не може да бъде директория</string>
     <string name="bad_line">Невалиден тип линия</string>
     <string name="bad_point">Невалиден тип точка</string>
@@ -240,7 +240,7 @@
     <string name="no_db">Липсва база данни</string>
     <string name="no_device_address">Липсва избрано устройство</string>
     <string name="no_device_found">Не е намерено устройство</string>
-    <!-- TODO string name="no_feature_audio">Audio not supported</string -->
+    <string name="no_feature_audio">Не се поддържа аудио</string>
     <string name="no_gms">Калибрацията на съдържа данни.\nИзползвайте бутона за изтегляне на данни</string>
     <string name="no_geo_station">Грешка: няма георефериран репер</string>
     <string name="no_leg_intersection">Линията на сечението не пресича нито една отсечка</string>
@@ -254,7 +254,7 @@
     <string name="no_sketch">Няма 3D скица</string>
     <!-- UNUSED string name="no_shots">Картировката не съдържа отсечки.\nИзползвайте бутона за изтегляне на данни</string -->
     <string name="no_survey">Не е избрана картировка</string>
-    <!-- TODO string name="no_to_station">No TO station.</string -->
+    <string name="no_to_station">Няма репер ДО</string>
     <string name="no_thmanager">ThManager не е инсталирана</string>
     <string name="no_db_viewer">Програмата SQliteViewer не е инсталирана</string>
     <string name="no_undelete">Няма елементи за възстановяване</string>
@@ -427,9 +427,9 @@
     <string name="survey_not_attached">ВНИМАНИЕ: някои отсечки не са свързани</string>
     <string name="survey_not_extend">Внимание: отсечката не е разгъната</string>
     <string name="survey_not_attached_extend">Внимание: Някои отсечки не са прикачени или разгънати</string>
-    <!-- TODO string name="saturated_coeffs">WARNING: saturated calibration coefficients</string -->
-    <!-- TODO string name="out_of_memory">WARNING: out of memory !</string -->
-    <!-- TODO string name="disk_io_error">CRITICAL: disk i/o error !</string -->
+    <string name="saturated_coeffs">Внимание: наситени данни за калиб. коефициенти</string>
+    <string name="out_of_memory">Внимание: недостатъчна памет!</string>
+    <string name="disk_io_error">Грешка при четене/запис на диска!</string>
     <string name="cannot_rename">Не може да се преименува картировката</string>
     <string name="declination">Магн. деклинация</string>
     <string name="description">описание</string>
@@ -452,7 +452,7 @@
     <string name="zip_saved">Записан </string>
     <string name="zip_failed">Грешка при архивиране</string>
     <string name="unzip_fail">Грешка при разархивиране</string>
-    <!-- TODO string name="unzip_fail_sqlite">Failed SQL: delete survey and retry</string -->
+    <string name="unzip_fail_sqlite">Грешка в SQL: изтрийте картировката и опитайте пак</string>
     <string name="unzip_fail_survey">Грешка: различно име на картировка</string>
     <string name="unzip_fail_db">Грешка: различни версии на базата данни</string>
     <string name="unzip_fail_td">Грешка: различни версии на Topodroid</string>
@@ -492,7 +492,7 @@
     <string name="extended_profile">Разгънат разрез</string>
     <!-- UNUSED string name="v_section">Верт. сечение</string -->
     <string name="h_section">Хор. сечение</string>
-    <!-- TODO string name="landscape">landscape</string -->
+    <string name="landscape">Хоризонтално (landscape)</string>
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Грешка при четене от паметта на DistoX</string>
@@ -508,9 +508,9 @@
     <string name="button_add"       >Добавяне  </string>
     <string name="button_back"      >Обратно   </string>
     <string name="button_cancel"    >Отказ     </string>
-    <!-- TODO string name="button_change"    >Change    </string -->
+    <string name="button_change"    >Промяна   </string>
     <string name="button_close"     >Затваряне </string>
-    <!-- TODO string name="button_create"    >Create    </string -->
+    <string name="button_create"    >Създаване </string>
     <string name="button_convert"   >Конверт.  </string>
     <string name="button_current"   >Направи текущ</string>
     <string name="button_delete"    >Изтриване </string>
@@ -831,7 +831,7 @@
     <string name="title_survey_export">Експортиране на картировка като</string>
     <string name="title_survey_rename">Преименуване като</string>
     <string name="title_plot_rename">Преименуване на скица</string>
-    <!-- TODO string name="title_plot_zoomfit">Zoom fit / Orientation</string -->
+    <string name="title_plot_zoomfit">Опт. приближаване / Ориентация</string>
     <string name="title_calib_export">Експортиране на калибрация като</string>
     <!-- string name="title_zoom">Приближаване</string -->
 
@@ -848,14 +848,14 @@
 
   <string name="pref_raw_data_title">Необработени данни</string>
   <string name="pref_raw_data_summary">Показване на необработени данни</string>
-  <!-- TODO string name="pref_calib_shot_download_title">Download remote data</string -->
-  <!-- TODO string name="pref_calib_shot_download_summary">Download remote calib data immediately</string -->
+  <string name="pref_calib_shot_download_title">Сваляне на данни</string>
+  <string name="pref_calib_shot_download_summary">Незабавно сваляне на данните за калибрацията</string>
   <!-- UNUSED string name="pref_bootloader_title">Зареждане на фърмуер</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Разрешаване на инсталирането на фърмуер</string -->
   <string name="pref_mkeyboard_title">Собствена клавиатура</string>
   <string name="pref_mkeyboard_summary">Използване на Topodroid клавиатурни подредби</string>
-  <!-- TODO string name="pref_local_help_title">Translated manual</string -->
-  <!-- TODO string name="pref_local_help_summary">Enable translated manual</string -->
+  <string name="pref_local_help_title">Преведено ръководство</string>
+  <string name="pref_local_help_summary">Включване на преведено ръководство</string>
   <string name="pref_cosurvey_title">Ко-картиране</string>
   <string name="pref_cosurvey_summary">Разрешаване на едновременно картиране</string>
   <string name="pref_export_shots_title">Експортиране на измервания</string>
@@ -874,8 +874,8 @@
   <string name="pref_leg_shots_summary">Минимален брой поредни еднакви измервания за да се считат за антена</string>
   <string name="pref_station_prefix_title">Експортиране на префикс в името на реперите</string>
   <string name="pref_station_prefix_summary">Експортиране в cSurvey на префикс в името на реперите</string>
-  <!-- TODO string name="pref_compass_splays_title">Compass splays</string -->
-  <!-- TODO string name="pref_compass_splays_summary">Export splays in Compass files</string -->
+  <string name="pref_compass_splays_title">Странични изм. в Compass</string>
+  <string name="pref_compass_splays_summary">Експортиране на стр. изм в Compass</string>
   <string name="pref_trobot_names_title">TopoRobot имена на репери</string>
   <string name="pref_trobot_names_summary">Имената на реперите са в стил TopoRobot</string>
   <string name="pref_ortho_lrud_title">ЛДГД ъгъл на странично изм.</string>
@@ -891,20 +891,20 @@
   <string name="pref_svg_grid_summary">Добавяне на мрежа в SVG експорт</string>
   <string name="pref_svg_in_html_title">SVG в HTML</string>
   <string name="pref_svg_in_html_summary">Вмъкване на SVG експорт в HTML</string>
-  <!-- TODO string name="pref_svg_pointstroke_title">SVG point stroke</string -->
-  <!-- TODO string name="pref_svg_pointstroke_summary">Width of point symbols in SVG</string -->
-  <!-- TODO string name="pref_svg_labelstroke_title">SVG label stroke</string -->
-  <!-- TODO string name="pref_svg_labelstroke_summary">Width of label text in SVG</string -->
-  <!-- TODO string name="pref_svg_linestroke_title">SVG line stroke</string -->
-  <!-- TODO string name="pref_svg_linestroke_summary">Width of lines in SVG</string -->
-  <!-- TODO string name="pref_svg_gridstroke_title">SVG grid stroke</string -->
-  <!-- TODO string name="pref_svg_gridstroke_summary">Width of grid lines in SVG</string -->
-  <!-- TODO string name="pref_svg_shotstroke_title">SVG shot stroke</string -->
-  <!-- TODO string name="pref_svg_shotstroke_summary">Width of shot segments in SVG</string -->
-  <!-- TODO string name="pref_svg_linedirstroke_title">SVG orientation stroke</string -->
-  <!-- TODO string name="pref_svg_linedirstroke_summary">Width of line orientation in SVG</string -->
-  <string name="pref_svg_line_dir_title">Ориентация на SVG линия</string>
-  <string name="pref_svg_line_dir_summary">Добавяне на помощни черти за ориантация на линия в SVG експорт</string>
+  <string name="pref_svg_pointstroke_title">SVG широчина точки</string>
+  <string name="pref_svg_pointstroke_summary">Широчина на символ точка в SVG</string>
+  <string name="pref_svg_labelstroke_title">SVG широчина надпис</string>
+  <string name="pref_svg_labelstroke_summary">Широчина на надпис в SVG</string>
+  <string name="pref_svg_linestroke_title">SVG широчина линии</string>
+  <string name="pref_svg_linestroke_summary">Широчина на линии в SVG</string>
+  <string name="pref_svg_gridstroke_title">SVG широчина мрежа</string>
+  <string name="pref_svg_gridstroke_summary">Широчина на линии от мрежата в SVG</string>
+  <string name="pref_svg_shotstroke_title">SVG широчина отсечки</string>
+  <string name="pref_svg_shotstroke_summary">Широчина на сегменти от отсечките в SVG</string>
+  <string name="pref_svg_linedirstroke_title">SVG широчина помощни черти</string>
+  <string name="pref_svg_linedirstroke_summary">Широчина на помощни черти за посока на линия в SVG</string>
+  <string name="pref_svg_line_dir_title">Посока на SVG линии</string>
+  <string name="pref_svg_line_dir_summary">Добавяне на помощни черти за посока на линия в SVG експорт</string>
   <string name="pref_kml_stations_title">KML репери</string>
   <string name="pref_kml_stations_summary">Добавяне на реперите в KML експорт</string>
   <string name="pref_kml_splays_title">KML странични измервания</string>
@@ -970,26 +970,26 @@
   <string name="pref_min_shift_message">Чувствителностс при скролиране на скицата</string>
   <string name="pref_pointing_title">Радиус при преместване</string>
   <string name="pref_pointing_message">Радиус на повторно натискане за преместване на елемент</string>
-  <!-- TODO string name="pref_dash_splay_title">Splay dash coherence</string -->
-  <!-- TODO string name="pref_dash_splay_message">Splays dashed coherently between plan and profile</string -->
+  <string name="pref_dash_splay_title">Съгласуване на пунктир в стран. изм.</string>
+  <string name="pref_dash_splay_message">Еднакъв пунктир в страничните измервания в плана и разреза</string>
   <string name="pref_vert_splay_title">Наклонени измервания с пунктир</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Странични измервания с по-голям наклон са с пунктир в плана</string -->
   <string name="pref_vert_splay_message">Странични измервания с по-голям наклон са с пунктир в плана</string>
-  <!-- TODO string name="pref_horiz_splay_title">Splay dash azimuth threshold</string -->
-  <!-- TODO string name="pref_horiz_splay_message">Splay off azimuth more than this are dashed</string -->
-  <!-- TODO string name="pref_section_splay_title">Splay dash angle threshold</string -->
-  <!-- TODO string name="pref_section_splay_message">Over this angle with the section plane, splays are dashed</string -->
-  <!-- TODO string name="pref_data_backup_title">Data auto-export</string -->
-  <!-- TODO string name="pref_data_backup_summary">Automatic data export (need default format)</string -->
-  <!-- TODO string name="pref_lrud_vertical_title">UD min splay clino</string -->
-  <!-- TODO string name="pref_lrud_vertical_summary">LRUD up/down minimum splay clino</string -->
-  <!-- TODO string name="pref_lrud_vertical_message">LRUD up/down minimum splay clino</string -->
-  <!-- TODO string name="pref_lrud_horizontal_title">LR max splay clino</string -->
-  <!-- TODO string name="pref_lrud_horizontal_summary">LRUD left/right maximum splay clino</string -->
-  <!-- TODO string name="pref_lrud_horizontal_message">LRUD left/right maximum splay clino</string -->
-  <string name="pref_shared_xsections_title">Споделение сечения в репери</string>
+  <string name="pref_horiz_splay_title">Азимут граница за пунктирани стр. изм.</string>
+  <string name="pref_horiz_splay_message">Стр. изм. с по-голямо отклонение от антената са пунктирани</string>
+  <string name="pref_section_splay_title">Граница от равнината за пункт. стр. изм.</string>
+  <string name="pref_section_splay_message">Пунктирани, ако ъгъла от равнината е по-голям</string>
+  <string name="pref_data_backup_title">Автоматично експортиране на измервания</string>
+  <string name="pref_data_backup_summary">Автоматично експортиране на измервания (необходим е зададен формат)</string>
+  <string name="pref_lrud_vertical_title">Мин. наклон Горе/Долу</string>
+  <string name="pref_lrud_vertical_summary">Минимален наклон на стр. изм. Горе/Долу</string>
+  <string name="pref_lrud_vertical_message">Минимален наклон на стр. изм. Горе/Долу</string>
+  <string name="pref_lrud_horizontal_title">Макс. наклон Ляво/Дясно</string>
+  <string name="pref_lrud_horizontal_summary">Максимален наклон на стр. изм. Ляво/Дясно</string>
+  <string name="pref_lrud_horizontal_message">Максимален наклон на стр. изм. Ляво/Дясно</string>
+  <string name="pref_shared_xsections_title">Споделени сечения в репери</string>
   <string name="pref_shared_xsections_summary">Сеченията в реперите са споделени между скиците</string>
-  <string name="xsections_shared">Споделение сечения в репери</string>
+  <string name="xsections_shared">Споделени сечения в репери</string>
   <string name="xsections_private">Индивидуални сечения в репери</string>
 
 
@@ -1016,8 +1016,8 @@
   <string name="pref_min_leg_message">Отсечки под тази дължина се маркират като вероятно грешни</string>
   <string name="pref_backsight_title">Обратна отсечка</string>
   <string name="pref_backsight_summary">Въвеждане на обр. азимут/накл/разст при ръчно добавяне на отсечка</string>
-  <!-- TODO string name="pref_backshot_title">Backshot DistoX</string -->
-  <!-- TODO string name="pref_backshot_summary">DistoX in backshot mode</string -->
+  <string name="pref_backshot_title">DistoX в обратен режим</string>
+  <string name="pref_backshot_summary">DistoX в режим на обратна отсечка</string>
   <string name="pref_prev_next_title">Пред./Следваща бутони</string>
   <string name="pref_prev_next_summary">Показване на бутони за Предишна/Следваща отсечка</string>
   <string name="pref_mag_anomaly_title">Магнитна аномалия</string>
@@ -1238,7 +1238,7 @@
   <string name="pref_log_input">Входни данни</string>
   <string name="pref_log_loc">Местоположение</string>
   <string name="pref_log_num">Редуциране на данни</string>
-  <!-- TODO string name="pref_log_path">File paths</string -->
+  <string name="pref_log_path">Пътища към файловете</string>
   <string name="pref_log_photo">Снимки</string>
   <string name="pref_log_plot">Скици</string>
   <string name="pref_log_proto">DistoX протокол</string>
@@ -1264,8 +1264,8 @@
   <!-- UNUSED string name="alt_ortho">ортометрична</string -->
   <!-- UNUSED string name="splay_extend">Разгъване на странични отсечки</string -->
 
-    <!-- TODO string name="perms_mandatory">TopoDroid cannot run without these permissions:</string -->
-    <!-- TODO string name="perms_optional">TopoDroid may fail without these permissions:</string -->
+    <string name="perms_mandatory">TopoDroid не може да стартира без тези права:</string>
+    <string name="perms_optional">TopoDroid може да не работи правилно без тези права:</string>
     <string name="welcome_title">Добре дошли в TopoDroid %1$s</string>
 
     <string name="welcome_text">
