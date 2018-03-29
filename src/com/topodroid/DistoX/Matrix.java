@@ -20,8 +20,8 @@ class Matrix
   static Matrix zero = new Matrix( Vector.zero, Vector.zero, Vector.zero );
 
   static Matrix one = new Matrix( new Vector(1.0f, 0.0f, 0.0f),
-                                         new Vector(0.0f, 1.0f, 0.0f),
-                                         new Vector(0.0f, 0.0f, 1.0f) );
+                                  new Vector(0.0f, 1.0f, 0.0f),
+                                  new Vector(0.0f, 0.0f, 1.0f) );
 
   // Default cstr: zero matrix
   Matrix()
@@ -108,7 +108,7 @@ class Matrix
   }
 
   // inverse of the transposed: (this^t)^-1
-  private Matrix InverseT()
+  Matrix InverseT()
   {
     Matrix ad = new Matrix( y.cross(z), z.cross(x), x.cross(y) );
     float inv_det = 1.0f / ( x.dot( ad.x ) );

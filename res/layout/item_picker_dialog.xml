@@ -27,12 +27,6 @@
                 android:text="@string/AREA"
                 android:textSize="@dimen/textsizehead"
         />
-        <LinearLayout 
-          android:layout_width="fill_parent"
-          android:layout_height="wrap_content"
-          android:orientation="horizontal"
-          android:gravity="right"
-          >
           <!-- Button android:id="@+id/item_left"
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
@@ -47,16 +41,30 @@
             android:layout_marginTop="@dimen/marginv"
             android:background="@drawable/ic_redo"
           / -->
-          <SeekBar android:id="@+id/seekbar"
-             android:layout_width="fill_parent"
-             android:layout_height="20sp" 
-             android:max="360"
-             android:background="#666666"
-             android:progressDrawable="@drawable/progress2"
-          />
-        </LinearLayout>
-
       </LinearLayout>
+      <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginv"
+        android:layout_marginBottom="@dimen/marginv"
+        android:orientation="horizontal"
+        android:gravity="right"
+        >
+        <Button android:id="@+id/size"
+            android:layout_width="80dp"
+            android:layout_marginRight="@dimen/marginh"
+            style="@style/button_default"
+            android:text="-/+"
+        />
+        <SeekBar android:id="@+id/seekbar"
+           android:layout_width="fill_parent"
+	   android:layout_height="20sp" 
+           android:max="360"
+           android:background="#666666"
+           android:progressDrawable="@drawable/progress2"
+        />
+      </LinearLayout>
+
 
       <LinearLayout android:id="@+id/layout2"
         android:layout_width="fill_parent"
@@ -67,12 +75,6 @@
         android:layout_marginLeft="@dimen/marginh"
         android:orientation="horizontal"
       >
-        <Button android:id="@+id/size"
-            android:layout_width="80dp"
-            android:layout_marginRight="@dimen/marginh"
-            style="@style/button_default"
-            android:text="-/+"
-        />
 <!--
             android:layout_weight="10"
           <com.topodroid.DistoX.ItemButton android:id="@+id/recent0"

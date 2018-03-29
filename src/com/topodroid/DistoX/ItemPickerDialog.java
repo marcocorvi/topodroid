@@ -84,8 +84,8 @@ class ItemPickerDialog extends MyDialog
   private ItemAdapter mAreaAdapter  = null;
   private ItemAdapter mAdapter = null;
 
-  private LinearLayout mRecentLayout;
-  private ItemButton mRecent[];
+  private LinearLayout mRecentLayout = null;
+  private ItemButton mRecent[] = null;
 
   // static int mLinePos;
   // static int mAreaPos;
@@ -169,19 +169,19 @@ class ItemPickerDialog extends MyDialog
       mGrid  = null;
       mGridL = null;
       mGridA = null;
-    }
 
-    mRecentLayout = (LinearLayout) findViewById( R.id.layout2 );
-    mRecent = new ItemButton[ TDSetting.mRecentNr ];
-    int lw = LinearLayout.LayoutParams.WRAP_CONTENT;
-    int lh = LinearLayout.LayoutParams.WRAP_CONTENT;
-    LinearLayout.LayoutParams lllp = new LinearLayout.LayoutParams(lh,lw);
-    lllp.setMargins(DIMMX, DIMMY, DIMMX, DIMMY);
-    for ( int k=0; k<TDSetting.mRecentNr; ++k ) {
-      mRecent[k] = new ItemButton( mContext );
-      mRecent[k].setOnClickListener( this );
-      // mRecent[k].setOnLongClickListener( this );
-      mRecentLayout.addView( mRecent[k], lllp );
+      mRecentLayout = (LinearLayout) findViewById( R.id.layout2 );
+      mRecent = new ItemButton[ TDSetting.mRecentNr ];
+      int lw = LinearLayout.LayoutParams.WRAP_CONTENT;
+      int lh = LinearLayout.LayoutParams.WRAP_CONTENT;
+      LinearLayout.LayoutParams lllp = new LinearLayout.LayoutParams(lh,lw);
+      lllp.setMargins(DIMMX, DIMMY, DIMMX, DIMMY);
+      for ( int k=0; k<TDSetting.mRecentNr; ++k ) {
+        mRecent[k] = new ItemButton( mContext );
+        mRecent[k].setOnClickListener( this );
+        // mRecent[k].setOnLongClickListener( this );
+        mRecentLayout.addView( mRecent[k], lllp );
+      }
     }
     
     mBTpoint = (Button) findViewById(R.id.item_point);
@@ -290,7 +290,7 @@ class ItemPickerDialog extends MyDialog
           Symbol p = symbols[k];
           if ( p == null ) break;
           if ( p == item.mSymbol ) {
-            mRecent[k].resetPaintPath( p.getPaint(), p.getPath(), DIMXP, DIMXP );
+            if ( mRecent != null ) mRecent[k].resetPaintPath( p.getPaint(), p.getPath(), DIMXP, DIMXP );
             break;
           }
         }
@@ -317,6 +317,7 @@ class ItemPickerDialog extends MyDialog
 
   private void setRecentButtons( Symbol symbols[], float sx, float sy )
   {
+    if ( mRecent == null ) return;
     for ( int k=0; k<TDSetting.mRecentNr; ++k ) {
       Symbol p = symbols[k];
       if ( p == null ) {
@@ -682,19 +683,20 @@ class ItemPickerDialog extends MyDialog
         break;
     }
 
-    // this select the symbol and closes the dialog
-    try {
-      ItemButton iv = (ItemButton)view;
-      if ( iv != null ) {
-        for ( int k=0; k<TDSetting.mRecentNr; ++k ) {
-          if ( iv == mRecent[k] ) {
-            setRecent( k );
-	    closeDialog();
-            return;
+    if ( mRecent != null ) { // this select the symbol and closes the dialog
+      try {
+        ItemButton iv = (ItemButton)view;
+        if ( iv != null ) {
+          for ( int k=0; k<TDSetting.mRecentNr; ++k ) {
+            if ( iv == mRecent[k] ) {
+              setRecent( k );
+              closeDialog();
+              return;
+            }
           }
         }
-      }
-    } catch ( ClassCastException e ) { } // it is ok
+      } catch ( ClassCastException e ) { } // it is ok
+    }
      
     // dismiss();
   }

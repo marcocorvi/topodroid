@@ -1339,6 +1339,9 @@ class DrawingIO
     }
   }
   
+  // -----------------------------------------------------------------------------
+  // CSURVEY
+
   static void doExportCsxXSection( PrintWriter pw, String filename,
                                           String survey, String cave, String branch, String bind, DrawingUtil drawingUtil )
   {

@@ -108,6 +108,24 @@ class DrawingCommandManager
   void setDisplayMode( int mode ) { mDisplayMode = mode; }
   int getDisplayMode( ) { return mDisplayMode; }
 
+  void highlights( TopoDroidApp app ) 
+  {
+    synchronized( mSplaysStack ) {
+      for ( DrawingPath path : mSplaysStack ) {
+        if ( app.hasHighlightedId( path.mBlock.mId ) ) { 
+          path.setPaint( BrushManager.errorPaint );
+        }
+      }
+    }
+    synchronized( mLegsStack ) {
+      for ( DrawingPath path : mLegsStack ) {
+        if ( app.hasHighlightedId( path.mBlock.mId ) ) { 
+          path.setPaint( BrushManager.errorPaint );
+        }
+      }
+    }
+  }
+
   /* Check if any line overlaps another of the same type
    * In case of overlap the overlapped line is removed
    */

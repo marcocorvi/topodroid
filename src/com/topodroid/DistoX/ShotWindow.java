@@ -89,7 +89,7 @@ import android.graphics.drawable.BitmapDrawable;
 
 import android.net.Uri;
 
-// import android.util.Log;
+import android.util.Log;
 
 public class ShotWindow extends Activity
                           implements OnItemClickListener
@@ -135,6 +135,8 @@ public class ShotWindow extends Activity
                         R.drawable.iz_left,
                         R.drawable.iz_flip,
                         R.drawable.iz_right,
+                        R.drawable.iz_highlight,
+                        R.drawable.iz_bedding,
                         R.drawable.iz_delete,
                         R.drawable.iz_cancel
                       };
@@ -196,7 +198,7 @@ public class ShotWindow extends Activity
 
   // private RelativeLayout mFooter = null;
   private Button[] mButtonF;
-  private int mNrButtonF = 5;
+  private int mNrButtonF = 7;
 
   private StationSearch mSearch;
 
@@ -267,7 +269,7 @@ public class ShotWindow extends Activity
   // FXIME ok only for numbers
   // String getNextStationName()
   // {
-  //   return mApp.mData.getNextStationName( mApp.mSID );
+  //   return mApp_mData.getNextStationName( mApp.mSID );
   // }
 
   @Override
@@ -276,7 +278,7 @@ public class ShotWindow extends Activity
     setConnectionStatus( mDataDownloader.getStatus() );
     if ( nr >= 0 ) {
       if ( nr > 0 ) {
-        // mLastShotId = mApp.mData.getLastShotId( mApp.mSID );
+        // mLastShotId = mApp_mData.getLastShotId( mApp.mSID );
         updateDisplay( );
       }
       if ( toast ) {
@@ -298,8 +300,8 @@ public class ShotWindow extends Activity
   void updateDisplay( )
   {
     // Log.v( "DistoX", "update Display() " );
-    highlightBlock( null );
-    // DataHelper data = mApp.mData;
+    // highlightBlocks( null );
+    // DataHelper data = mApp_mData;
     if ( mApp_mData != null && mApp.mSID >= 0 ) {
       List<DBlock> list = mApp_mData.selectAllShots( mApp.mSID, TDStatus.NORMAL );
       mDistoXAccuracy = new DistoXAccuracy( list ); 
@@ -369,7 +371,7 @@ public class ShotWindow extends Activity
       } else {
         mApp.assignStationsAll( mDataAdapter.getItemsForAssign() );
       }
-      // mApp.mData.getShotName( mApp.mSID, blk );
+      // mApp_mData.getShotName( mApp.mSID, blk );
 
       mList.post( new Runnable() {
         @Override public void run() {
@@ -495,8 +497,9 @@ public class ShotWindow extends Activity
     }
   }
 
-  private void clearMultiSelect( )
+  void clearMultiSelect( )
   {
+    mApp.setHighlighted( null );
     mDataAdapter.clearMultiSelect( );
     // mFooter.setVisibility( View.GONE );
     mListView.setAdapter( mButtonView1.mAdapter );
@@ -550,12 +553,11 @@ public class ShotWindow extends Activity
     // TDLog.Log( TDLog.LOG_INPUT, "ShotWindow onItemLongClick id " + id);
     DBlock blk = mDataAdapter.get(pos);
     // onBlockLongClick( blk );
-    if ( blk.isSplay() ) {
-      highlightBlock( blk );
-    } else {
-      // Log.v("DistoX", "multi select " + pos );
+    // if ( blk.isSplay() ) {
+    //   highlightBlocks( blk );
+    // } else {
       multiSelect( pos );
-    }
+    // }
     return true;
   }
 
@@ -694,7 +696,7 @@ public class ShotWindow extends Activity
 
   // void askExternal( )
   // {
-  //   mSensorId = mApp.mData.nextSensorId( mApp.mSID );
+  //   mSensorId = mApp_mData.nextSensorId( mApp.mSID );
   //   TDLog.Log( TDLog.LOG_SENSOR, "sensor " + mSensorId );
   //   Intent intent = new Intent( this, ExternalActivity.class );
   //   startActivityForResult( intent, TDRequest.EXTERNAL_ACTIVITY );
@@ -781,7 +783,7 @@ public class ShotWindow extends Activity
 
   // void deletePhoto( PhotoInfo photo ) 
   // {
-  //   mApp.mData.deletePhoto( mApp.mSID, photo.id );
+  //   mApp_mData.deletePhoto( mApp.mSID, photo.id );
   //   File imagefile = new File( mApp.getSurveyJpgFile( Long.toString(photo.id) ) );
   //   try {
   //     imagefile.delete();
@@ -799,7 +801,7 @@ public class ShotWindow extends Activity
           // (new PhotoCommentDialog(this, this) ).show();
           insertPhoto();
         } else {
-          // mApp.mData.deletePhoto( mApp.mSID, mPhotoId );
+          // mApp_mData.deletePhoto( mApp.mSID, mPhotoId );
         }
         break;
       case TDRequest.SENSOR_ACTIVITY_SHOTWINDOW:
@@ -949,7 +951,7 @@ public class ShotWindow extends Activity
     // mList.setFastScrollEnabled( true );
 
     // restoreInstanceFromData();
-    // mLastExtend = mApp.mData.getLastShotId( mApp.mSID );
+    // mLastExtend = mApp_mData.getLastShotId( mApp.mSID );
     List<DBlock> list = mApp_mData.selectAllShots( mApp.mSID, TDStatus.NORMAL );
     // mSecondLastShotId = mApp.lastShotId( );
 
@@ -1272,6 +1274,12 @@ public class ShotWindow extends Activity
         clearMultiSelect( );
         updateDisplay();
         // mList.invalidate(); // NOTE not enough to see the change in the list immediately
+      } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // HIGHLIGHT
+        highlightBlocks( mDataAdapter.mSelect );
+        // clearMultiSelect( );
+        // updateDisplay();
+      } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // BEDDING
+        blocksBedding( mDataAdapter.mSelect );
       } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // DELETE
         askMultiDelete();
       } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // CANCEL
@@ -1412,7 +1420,9 @@ public class ShotWindow extends Activity
     mRecentPlotType = type;
   }
 
-  public void startExistingPlot( String name, long type, String station ) // name = plot/sketch3d name
+  // called either by a long-tap on plot button 
+  //        or a highlights
+  void startExistingPlot( String name, long type, String station ) // name = plot/sketch3d name
   {
     // TDLog.Log( TDLog.LOG_SHOT, "start Existing Plot \"" + name + "\" type " + type + " sid " + mApp.mSID );
     if ( type != PlotInfo.PLOT_SKETCH_3D ) {
@@ -1593,15 +1603,119 @@ public class ShotWindow extends Activity
   }
 
   // open the sketch and highlight block in the sketch
-  void highlightBlock( DBlock blk ) 
+  void highlightBlocks( List<DBlock> blks )  // HIGHLIGHT
   {
-    // Log.v("DistoX", "highlight block " + ( (blk==null)? "null" : blk.mFrom ) );
-    mApp.setHighlightedSplay( blk );
+    mApp.setHighlighted( blks );
+    // Log.v("DistoX", "highlight blocks [0] " + ( (blks==null)? "null" : blks.size() ) );
+    if ( blks == null || blks.size() == 0 ) return;
     // now if there is a plot open it
-    if ( blk != null && mRecentPlot != null ) {
-      // Log.v("DistoX", "highlight " + blk.mFrom );
-      startExistingPlot( mRecentPlot, mRecentPlotType, blk.mFrom );
+    if ( mRecentPlot != null ) {
+      startExistingPlot( mRecentPlot, mRecentPlotType, blks.get(0).mFrom );
     }
+  }
+
+  /** bedding: solve Sum (A*x + B*y + C*z + 1)^2 minimum
+   *   xx  xy  xz   A   -xn
+   *   xy  yy  yz * B = -yn
+   *   xz  yz  zz   C   -zn
+   *
+   *   det = xx * (yy * zz - yz^2) - xy * (xy * zz - xz * yz) + xz * (xy * yz - yy * xz) 
+   *       = xx yy zz - xx yz^2 - yy xz^2 - zz xy^2 + 2 xy xz yz
+   *  the DIP is downwards and 90 deg. right from the STRIKE, thus
+   *    D x S = N
+   *    S x N = D
+   *    S = ( Z x N ) normalized
+   *
+   *          ^ Z
+   *          |  Normal
+   *          | /
+   *          |/______ Strike
+   *           \
+   *            \ Dip
+   *  The dip angle is measured from the horizontal plane
+   *  The strike from the north
+   */
+  void blocksBedding( List<DBlock> blks ) // BEDDING
+  {
+    if ( blks != null || blks.size() > 2 ) {
+      DBlock b0 = blks.get(0);
+      String st = b0.mFrom;
+      float xx = 0, xy = 0, yy = 0, xz = 0, zz = 0, yz = 0, xn = 0, yn = 0, zn = 0;
+      int nn = 0;
+      if ( st != null && st.length() > 0 ) {
+        for ( DBlock b : blks ) {
+          if ( st.equals( b.mFrom ) ) {
+            float h = TDMath.cosd(b.mClino);
+            float z = TDMath.sind(b.mClino);
+            float y = h * TDMath.cosd(b.mBearing);
+            float x = h * TDMath.sind(b.mBearing);
+            xx += x * x;
+            xy += x * y;
+            xz += x * z;
+            yy += y * y;
+            yz += y * z;
+            zz += z * z;
+            xn += x;
+            yn += y;
+            zn += z;
+            ++ nn;
+          }
+        }
+      } else {
+        st = b0.mTo;
+        if ( st != null && st.length() > 0 ) {
+          for ( DBlock b : blks ) {
+            if ( st.equals( b.mTo ) ) {
+              float h = TDMath.cosd(b.mClino);
+              float z = TDMath.sind(b.mClino);       // vertical upwards
+              float y = h * TDMath.cosd(b.mBearing); // north
+              float x = h * TDMath.sind(b.mBearing); // east
+              xx += x * x;
+              xy += x * y;
+              xz += x * z;
+              yy += y * y;
+              yz += y * z;
+              zz += z * z;
+              xn += x;
+              yn += y;
+              zn += z;
+	      ++ nn;
+            }
+          }
+	}
+      }
+      if ( nn >= 3 ) {
+        Matrix m = new Matrix( new Vector(xx, xy, xz), new Vector(xy, yy, yz), new Vector(xz, yz, zz) );
+        Matrix minv = m.InverseT(); // m is self-transpose
+        Vector n0 = new Vector( -xn, -yn, -zn );
+        Vector n1 = minv.timesV( n0 ); // n1 = (a,b,c)
+        if ( n1.z < 0 ) { n1.x = - n1.x; n1.y = - n1.y; n1.z = - n1.z; } // make N positive Z
+        n1.normalize();
+        // Log.v("DistoX", "Plane normal " + n1.x + " " + n1.y + " " + n1.z );
+
+        // Vector z0 = new Vector( 0, 0, 1 );
+        // Vector stk = z0.cross( n1 );  // strike = ( -n1.y, n1.x, 0 );
+        // stk.normalized();
+        // Vector dip = n1.cross( stk ); // dip
+        // float astk = TDMath.atan2d( stk.x, stk.y ); // TDMath.atan2d( -n1.y, n1.x );
+        // float adip = TDMath.acosd( dip.z ); // TDMath.asind( n1.z );
+        float astk = TDMath.atan2d( -n1.y, n1.x );
+        float adip = 90 - TDMath.asind( n1.z );
+        String strike_dip = String.format(getResources().getString(R.string.strike_dip), astk, adip );
+        TDToast.make( mActivity, strike_dip );
+        if ( b0.mComment != null && b0.mComment.length() > 0 ) {
+          b0.mComment = b0.mComment + " " + strike_dip;
+  	} else {
+          b0.mComment = strike_dip;
+	}
+	mApp_mData.updateShotComment( b0.mId, mApp.mSID, b0.mComment, false ); // FIXME no forward
+	if ( b0.mView != null ) b0.mView.invalidate();
+      } else {
+        TDToast.make( mActivity, R.string.few_data );
+      }
+    }
+    clearMultiSelect( );
+    mList.invalidate();
   }
   
   // this method is called by ShotDialog() with to.length() == 0 ie to == ""
@@ -1621,10 +1735,10 @@ public class ShotWindow extends Activity
         //   TDToast.make( mActivity, R.string.makes_cycle );
         // } else {
           // // update same shots of the given block: SHOULD NOT HAPPEN
-          // List< DBlock > blk_list = mApp.mData.selectShotsAfterId( blk.mId, mApp.mSID, 0L );
+          // List< DBlock > blk_list = mApp_mData.selectShotsAfterId( blk.mId, mApp.mSID, 0L );
           // for ( DBlock blk1 : blk_list ) {
           //   if ( ! blk1.isRelativeDistance( blk ) ) break;
-          //   mApp.mData.updateShotLeg( blk1.mId, mApp.mSID, 1L, true );
+          //   mApp_mData.updateShotLeg( blk1.mId, mApp.mSID, 1L, true );
           // }
         }
       } else {
@@ -1767,7 +1881,7 @@ public class ShotWindow extends Activity
     List< DBlock > shots;
     // backsight and tripod seem o be OK
     // if ( TDSetting.mTripodShot || TDSetting.mBacksightShot ) {
-    //   shots = mApp.mData.selectAllShots( mApp.mSID, TDStatus.NORMAL );
+    //   shots = mApp_mData.selectAllShots( mApp.mSID, TDStatus.NORMAL );
     // } else {
       shots = mApp_mData.selectAllShotsAfter( blk.mId, mApp.mSID, TDStatus.NORMAL );
     // }
@@ -1775,7 +1889,7 @@ public class ShotWindow extends Activity
     mApp.assignStationsAfter( blk, shots, stations );
 
     // DEBUG re-assign all the stations
-    // List< DBlock > shots = mApp.mData.selectAllShots( mApp.mSID, TDStatus.NORMAL );
+    // List< DBlock > shots = mApp_mData.selectAllShots( mApp.mSID, TDStatus.NORMAL );
     // mApp.assign Stations( shots );
 
     updateDisplay();

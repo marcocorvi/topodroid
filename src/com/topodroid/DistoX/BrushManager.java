@@ -80,6 +80,9 @@ class BrushManager
 
   static int getPointLabelIndex() { return mPointLib.mPointLabelIndex; }
 
+  // LINE CLOSED
+  static boolean isLineClosed( int index ) { return mLineLib.isClosed( index ); }
+
   // FIXME AREA_ORIENT
   static void resetAreaOrientations( ) { mAreaLib.resetOrientations(); }
   static double getAreaOrientation( int index ) { return mAreaLib.getAreaOrientation( index ); }

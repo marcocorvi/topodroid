@@ -82,7 +82,7 @@ import android.graphics.BitmapFactory;
 
 import android.net.Uri;
 
-// import android.util.Log;
+import android.util.Log;
 import android.util.DisplayMetrics;
 
 import android.bluetooth.BluetoothAdapter;
@@ -147,9 +147,17 @@ public class TopoDroidApp extends Application
   //   mManualCalibrationLRUD    = false;
   // }
 
-  DBlock mHighlightedSplay = null;
-  void setHighlightedSplay( DBlock blk ) { mHighlightedSplay = blk; }
-  long getHighlightedSplayId( ) { return (mHighlightedSplay == null)? -1 : mHighlightedSplay.mId; }
+  private List<DBlock> mHighlighted = null;
+  void    setHighlighted( List<DBlock> blks ) { mHighlighted = blks; }
+  // int     getHighlightedSize() { return (mHighlighted != null)? -1 : mHighlighted.size(); }
+  boolean hasHighlighted() { return mHighlighted != null && mHighlighted.size() > 0; }
+  boolean hasHighlightedId( long id )
+  {
+    if ( mHighlighted == null ) return false;
+    for ( DBlock b : mHighlighted ) if ( b.mId == id ) return true;
+    return false;
+  }
+
   int mSplayMode = 2; // cross-section splay display mode
   
   // ----------------------------------------------------------------------
@@ -629,7 +637,7 @@ public class TopoDroidApp extends Application
       if ( mDevice != null ) {
         createComm();
       }
-      mHighlightedSplay = null;
+      mHighlighted = null;
     }
 
     DistoXConnectionError = new String[5];

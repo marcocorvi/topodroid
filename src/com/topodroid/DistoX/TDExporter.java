@@ -120,10 +120,10 @@ class TDExporter
   }
 
   // segments have only the attribute "cave", no attribute "branch"
-  static private void writeCsxSegment( PrintWriter pw, long id, String cave, String branch, String f, String t )
+  static private void writeCsxSegment( PrintWriter pw, long id, String cave, String branch, String session, String f, String t )
   {
     // TDLog.Log( TDLog.LOG_CSURVEY, "shot segment " + id + " cave " + cave + " " + f + " - " + t ); 
-    pw.format("<segment id=\"%d\" cave=\"%s\" branch=\"%s\" from=\"%s\" to=\"%s\"", (int)id, cave, branch, f, t );
+    pw.format("<segment id=\"%d\" cave=\"%s\" branch=\"%s\" session=\"%s\" from=\"%s\" to=\"%s\"", (int)id, cave, branch, session, f, t );
   }
 
   static private void writeCsxTSplaySegment( PrintWriter pw, String cave, String branch, String t, int cnt, boolean xsplay )
@@ -245,6 +245,9 @@ class TDExporter
       pw.format("      </session>\n");
       pw.format("    </sessions>\n");
 
+      String session = info.date.replaceAll("-", "") + "_" +  cave.replaceAll(" ", "_");
+      session = session.toLowerCase();
+
    // ============== CAVE INFOS and BRANCHES
       pw.format("    <caveinfos>\n");
       pw.format("      <caveinfo name=\"%s\"", cave );
@@ -273,7 +276,7 @@ class TDExporter
       pw.format("  <segments>\n");
 
       for ( DBlock blk : clist ) { // calib-check shots
-        writeCsxSegment( pw, blk.mId, cave, branch, blk.mFrom, blk.mTo );
+        writeCsxSegment( pw, blk.mId, cave, branch, session, blk.mFrom, blk.mTo );
         pw.format(" exclude=\"1\"");
         pw.format(" calibration=\"1\""); 
         pw.format(Locale.US, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"",
@@ -313,7 +316,7 @@ class TDExporter
             }
           } else { // only TO station
             if ( leg.mCnt > 0 && ref_item != null ) {
-              writeCsxSegment( pw, ref_item.mId, cave, branch, f, t ); // branch prefix
+              writeCsxSegment( pw, ref_item.mId, cave, branch, session, f, t ); // branch prefix
 
               if ( extend == -1 ) pw.format(" direction=\"1\"");
               if ( dup || sur /* || bck */ ) {
@@ -357,7 +360,7 @@ class TDExporter
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // ONLY FROM STATION : splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // finish writing previous leg shot
-              writeCsxSegment( pw, ref_item.mId, cave, branch, f, t ); // branch prefix
+              writeCsxSegment( pw, ref_item.mId, cave, branch, session, f, t ); // branch prefix
               if ( extend == -1 ) pw.format(" direction=\"1\"");
               if ( dup || sur /* || bck */ ) {
                 pw.format(" exclude=\"1\"");
@@ -398,7 +401,7 @@ class TDExporter
             pw.format("    </segment>\n");
           } else { // BOTH FROM AND TO STATIONS
             if ( leg.mCnt > 0 && ref_item != null ) {
-              writeCsxSegment( pw, ref_item.mId, cave, branch, f, t ); // branch prefix
+              writeCsxSegment( pw, ref_item.mId, cave, branch, session, f, t ); // branch prefix
               if ( extend == -1 ) pw.format(" direction=\"1\"");
               if ( dup || sur /* || bck */ ) {
                 pw.format(" exclude=\"1\"");
@@ -436,7 +439,7 @@ class TDExporter
         }
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
-        writeCsxSegment( pw, ref_item.mId, cave, branch, f, t ); // branch prefix
+        writeCsxSegment( pw, ref_item.mId, cave, branch, session, f, t ); // branch prefix
         if ( extend == -1 ) pw.format(" direction=\"1\"");
         if ( dup || sur /* || bck */ ) {
            pw.format(" exclude=\"1\"");
@@ -1917,7 +1920,7 @@ class TDExporter
       if ( b >=360 ) b -= 360;
       c = -c;
     }
-    pw.format(Locale.US, "%s %s %.2f %.1f %.1f -9.90 -9.90 -9.90 -9.90", from, to, blk.mLength*TopoDroidUtil.M2FT, b, c );
+    pw.format(Locale.US, "%s %s %.2f %.1f %.1f -9.90 -9.90 -9.90 -9.90 #|L#", from, to, blk.mLength*TopoDroidUtil.M2FT, b, c );
 
     // if ( duplicate ) {
     //   pw.format(" #|L#");

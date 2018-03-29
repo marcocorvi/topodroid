@@ -45,6 +45,20 @@ class BezierCurve
     splitIndex = -1;
   }
 
+  BezierCurve( float x0, float y0, float x1, float y1, float x2, float y2, float x3, float y3 )
+  {
+    c = new Point2D[4];
+    Vtemp = new Point2D[4];
+    c[0] = new Point2D( x0, y0 );
+    c[1] = new Point2D( x1, y1 );
+    c[2] = new Point2D( x2, y2 );
+    c[3] = new Point2D( x3, y3 );
+    for (int i=0; i<4; ++i ) {
+      Vtemp[i] = new Point2D();
+    }
+    splitIndex = -1;
+  }
+
   // control points
   // void setPoint(int k, Point2D p ) { c[k].set(p); } // UNUSED
   Point2D getPoint( int k ) { return c[k]; }
@@ -94,8 +108,9 @@ class BezierCurve
   /**  Bezier: Evaluate a Bezier curve at a particular parameter value
    * degree  The degree of the bezier curve
    * t       Parametric value to find point for	
+   * @note used by cSurevy export
    */
-  private Point2D evaluate( float t ) { return evaluate(3, c, t ); }
+  Point2D evaluate( float t ) { return evaluate(3, c, t ); }
 
   private Point2D evaluate( int degree, Point2D[] V, float t )
   {

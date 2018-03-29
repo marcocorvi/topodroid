@@ -95,7 +95,7 @@ class TopoDroidComm
             }
           }
         } else if ( res == DistoXProtocol.DISTOX_ERR_OFF ) {
-          TDLog.Error( "RFcomm readPacket returns ERR_OFF " );
+          // TDLog.Error( "RFcomm readPacket returns ERR_OFF " );
           // if ( TDSetting.mCommType == 1 && TDSetting.mAutoReconnect ) { // FIXME ACL_DISCONNECT
           //   mApp.mDataDownloader.setConnected( false );
           //   mApp.notifyStatus();
@@ -111,7 +111,7 @@ class TopoDroidComm
           double r = mProto.mRoll;
           // extend is unset to start
           // long extend = TDAzimuth.computeLegExtend( b ); // DBlock.EXTEND_UNSET; FIXME-EXTEND 
-          TDLog.Log( TDLog.LOG_DISTOX, "DATA PACKET " + d + " " + b + " " + c );
+          // TDLog.Log( TDLog.LOG_COMM, "DATA PACKET " + d + " " + b + " " + c );
           // NOTE type=0 shot is DistoX-type
           long status = ( d > TDSetting.mMaxShotLength )? TDStatus.OVERSHOOT : TDStatus.NORMAL;
           mLastShotId = TopoDroidApp.mData.insertDistoXShot( mApp.mSID, -1L, d, b, c, r, DBlock.EXTEND_IGNORE, status, true );
@@ -144,8 +144,8 @@ class TopoDroidComm
           // TDLog.Log( TDLog.LOG_DISTOX, "M PACKET" );
           ++nReadPackets;
           // get G and M from mProto and save them to store
-          TDLog.Log( TDLog.LOG_PROTO, "save G " + mProto.mGX + " " + mProto.mGY + " " + mProto.mGZ + 
-                            " M " + mProto.mMX + " " + mProto.mMY + " " + mProto.mMZ );
+          // TDLog.Log( TDLog.LOG_PROTO, "save G " + mProto.mGX + " " + mProto.mGY + " " + mProto.mGZ + 
+          //                   " M " + mProto.mMX + " " + mProto.mMY + " " + mProto.mMZ );
           long cblk = TopoDroidApp.mDData.insertGM( mApp.mCID, mProto.mGX, mProto.mGY, mProto.mGZ, mProto.mMX, mProto.mMY, mProto.mMZ );
           if ( mLister != null ) {
             Message msg = mLister.obtainMessage( Lister.UPDATE );
@@ -164,35 +164,36 @@ class TopoDroidComm
           }
           hasG = false;
         } else if ( res == DistoXProtocol.DISTOX_PACKET_REPLY ) {
-          
-          byte[] addr = mProto.getAddress();
-          byte[] reply = mProto.getReply();
-          String result = String.format("%02x %02x %02x %02x at %02x%02x",
-            reply[0], reply[1], reply[2], reply[3], addr[1], addr[0] );
-          TDLog.Log( TDLog.LOG_DISTOX, "REPLY PACKET: " + result ); 
+          // TODO jandle packet reply
+	  //
+          // byte[] addr = mProto.getAddress();
+          // byte[] reply = mProto.getReply();
+          // String result = String.format("%02x %02x %02x %02x at %02x%02x",
+          //   reply[0], reply[1], reply[2], reply[3], addr[1], addr[0] );
+          // TDLog.Log( TDLog.LOG_DISTOX, "REPLY PACKET: " + result ); 
 
-          if ( addr[0] == (byte)0x00 && addr[1] == (byte)0x80 ) { // 0x8000
-            // TDLog.Log( TDLog.LOG_DISTOX, "toggle reply" );
-            // if ( (reply[0] & CALIB_BIT) == 0 ) {
-            //     mProto.sendCommand( (byte)0x31 );  // TOGGLE CALIB ON
-            // } else {
-            //     mProto.sendCommand( (byte)0x30 );  // TOGGLE CALIB OFF
-            // }
-          } else if ( ( addr[1] & (byte)0x80) == (byte)0x80 ) { // REPLY TO READ/WRITE-CALIBs
-            // TDLog.Log( TDLog.LOG_DISTOX, "write reply" );
-            // mProto.setWrittenCalib( true );
-          } else if ( addr[0] == 0x20 && addr[1] == (byte)0xC0 ) { // C020 READ HEAD-TAIL
-            // TDLog.Log( TDLog.LOG_DISTOX, "read head-tail reply");
-            // mHead = (int)( reply[0] | ( (int)(reply[1]) << 8 ) );
-            // mTail = (int)( reply[2] | ( (int)(reply[3]) << 8 ) );
-          }
+          // if ( addr[0] == (byte)0x00 && addr[1] == (byte)0x80 ) { // 0x8000
+          //   // TDLog.Log( TDLog.LOG_DISTOX, "toggle reply" );
+          //   // if ( (reply[0] & CALIB_BIT) == 0 ) {
+          //   //     mProto.sendCommand( (byte)0x31 );  // TOGGLE CALIB ON
+          //   // } else {
+          //   //     mProto.sendCommand( (byte)0x30 );  // TOGGLE CALIB OFF
+          //   // }
+          // } else if ( ( addr[1] & (byte)0x80) == (byte)0x80 ) { // REPLY TO READ/WRITE-CALIBs
+          //   // TDLog.Log( TDLog.LOG_DISTOX, "write reply" );
+          //   // mProto.setWrittenCalib( true );
+          // } else if ( addr[0] == 0x20 && addr[1] == (byte)0xC0 ) { // C020 READ HEAD-TAIL
+          //   // TDLog.Log( TDLog.LOG_DISTOX, "read head-tail reply");
+          //   // mHead = (int)( reply[0] | ( (int)(reply[1]) << 8 ) );
+          //   // mTail = (int)( reply[2] | ( (int)(reply[3]) << 8 ) );
+          // }
         } else if ( res == DistoXProtocol.DISTOX_PACKET_VECTOR ) {
           ++nReadPackets;  // vector packet do count
           double acc  = mProto.mAcceleration;
           double mag  = mProto.mMagnetic;
           double dip  = mProto.mDip;
           double roll = mProto.mRoll;
-          TDLog.Log( TDLog.LOG_DISTOX, "VECTOR PACKET " + mLastShotId + " " + acc + " " + mag + " " + dip + " " + roll );
+          // TDLog.Log( TDLog.LOG_DISTOX, "VECTOR PACKET " + mLastShotId + " " + acc + " " + mag + " " + dip + " " + roll );
           if ( mApp.distoType() == Device.DISTO_X310 ) {
             TopoDroidApp.mData.updateShotAMDR( mLastShotId, mApp.mSID, acc, mag, dip, roll, true );
             if ( TDSetting.mWaitData > 10 ) {

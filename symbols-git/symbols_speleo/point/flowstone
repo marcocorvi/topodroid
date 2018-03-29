@@ -12,7 +12,7 @@ name-ua натік
 name-fa فلاوستون
 name-hu cseppkőlefolyás
 th_name flowstone
-orientation no
+orientation yes
 color 0xccff66
 csurvey 6 6 80
 path

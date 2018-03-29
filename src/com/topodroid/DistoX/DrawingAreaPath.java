@@ -266,6 +266,7 @@ class DrawingAreaPath extends DrawingPointLinePath
     pw.format("          <item layer=\"%d\" cave=\"%s\" branch=\"%s\" name=\"\" type=\"3\" category=\"%d\" linetype=\"2\"",
       layer, cave, branch, cat );
     if ( bind != null ) pw.format(" bind=\"%s\"", bind );
+    // FIXME CLOSE
     pw.format(" mergemode=\"0\">\n" );
     pw.format("            <pen type=\"%d\" />\n", pen);
     pw.format("            <brush type=\"%d\" />\n", brush);

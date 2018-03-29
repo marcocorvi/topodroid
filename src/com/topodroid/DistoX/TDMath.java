@@ -34,6 +34,7 @@ class TDMath
   static float atan2d( float y, float x ) { return (float)( RAD2DEG * Math.atan2( y, x ) ); }
   static float acos( float x )   { return (float)( Math.acos( x ) ); }
   static float acosd( float x )  { return (float)( RAD2DEG * Math.acos( x ) ); }
+  static float asind( float x )  { return (float)( RAD2DEG * Math.asin( x ) ); }
   static float sqrt( float x )   { return (float)Math.sqrt( x ); }
 
   static float in360( float f )

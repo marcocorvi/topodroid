@@ -15,5 +15,5 @@ th_name border
 group border
 color 0x00cc00 0xff
 width 1
-csurvey 5 1 2 2
+csurvey 2 1 3 2
 endsymbol

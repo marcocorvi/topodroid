@@ -122,6 +122,7 @@
     <!-- UNUSED string name="external_prompt">Enter measurement</string -->
     <string name="splay_at_to">LRUD at TO station</string>
     <string name="lrud">LRUD</string>
+    <string name="strike_dip">Strike %1$.0f Dip %2$.0f</string>
 
     <string name="few_data">Not enough data</string>
     <string name="few_iter">Failed: too many iterations</string>

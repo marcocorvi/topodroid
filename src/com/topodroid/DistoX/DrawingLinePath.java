@@ -260,30 +260,77 @@ class DrawingLinePath extends DrawingPointLinePath
     pw.format("          <item layer=\"%d\" cave=\"%s\" branch=\"%s\" name=\"\" type=\"%d\" category=\"%d\" linetype=\"0\"",
       layer, cave, branch, type, cat );
     if ( bind != null ) pw.format(" bind=\"%s\"", bind );
+    // FIXME CLOSE 
     pw.format(" mergemode=\"0\">\n" );
     pw.format("            <pen type=\"%d\" />\n", pen);
     pw.format("            <points data=\"");
     boolean b = true;
+    float x3, y3;
+    float x0, y0, x1, y1, x2, y2;
     // for ( LinePoint pt : mPoints ) 
     if ( ! mReversed ) {
       // NOTE do not skip tick-point if want to save section with tick
       // if ( mLineType == BrushManager.mLineLib.mLineSectionIndex && size() > 2 ) pt = pt.mNext; // skip first point (tick)
       LinePoint pt = mFirst; 
-      for ( ; pt != null; pt = pt.mNext ) 
+      x0 = mDrawingUtil.sceneToWorldX( pt.x, pt.y );
+      y0 = mDrawingUtil.sceneToWorldY( pt.x, pt.y );
+      pw.format(Locale.US, "%.2f %.2f ", x0, y0 );
+      if ( b ) { pw.format("B "); b = false; }
+      for ( pt = pt.mNext; pt != null; pt = pt.mNext ) 
       {
-        float x = mDrawingUtil.sceneToWorldX( pt.x, pt.y );
-        float y = mDrawingUtil.sceneToWorldY( pt.x, pt.y );
-        pw.format(Locale.US, "%.2f %.2f ", x, y );
-        if ( b ) { pw.format("B "); b = false; }
+        x3 = mDrawingUtil.sceneToWorldX( pt.x, pt.y );
+        y3 = mDrawingUtil.sceneToWorldY( pt.x, pt.y );
+	if ( pt.has_cp ) {
+          x1 = mDrawingUtil.sceneToWorldX( pt.x1, pt.y1 );
+          y1 = mDrawingUtil.sceneToWorldY( pt.x1, pt.y1 );
+          x2 = mDrawingUtil.sceneToWorldX( pt.x2, pt.y2 );
+          y2 = mDrawingUtil.sceneToWorldY( pt.x2, pt.y2 );
+	  float len = (x1-x0)*(x1-x0) + (x2-x1)*(x2-x1) + (x3-x2)*(x3-x2) + (x3-x0)*(x3-x0)
+	            + (y1-y0)*(y1-y0) + (y2-y1)*(y2-y1) + (y3-y2)*(y3-y2) + (y3-y0)*(y3-y0);
+	  int np = (int)( TDMath.sqrt( len ) );
+	  if ( np > 1 ) {
+	    BezierCurve bc = new BezierCurve( x0, y0, x1, y1, x2, y2, x3, y3 );
+	    for ( int n=1; n < np; ++n ) {
+	      Point2D p = bc.evaluate( (float)n / (float)np );
+              pw.format(Locale.US, "%.2f %.2f ", p.x, p.y );
+            }
+	  }
+	} 
+        pw.format(Locale.US, "%.2f %.2f ", x3, y3 );
+        // if ( b ) { pw.format("B "); b = false; }
+	x0 = x3;
+	y0 = y3;
       }
     } else {
       LinePoint pt = mLast;
-      for ( ; pt != null; pt = pt.mPrev ) 
+      x0 = mDrawingUtil.sceneToWorldX( pt.x, pt.y );
+      y0 = mDrawingUtil.sceneToWorldY( pt.x, pt.y );
+      pw.format(Locale.US, "%.2f %.2f ", x0, y0 );
+      if ( b ) { pw.format("B "); b = false; }
+      for ( pt = pt.mPrev; pt != null; pt = pt.mPrev ) 
       {
-        float x = mDrawingUtil.sceneToWorldX( pt.x, pt.y );
-        float y = mDrawingUtil.sceneToWorldY( pt.x, pt.y );
-        pw.format(Locale.US, "%.2f %.2f ", x, y );
-        if ( b ) { pw.format("B "); b = false; }
+        x3 = mDrawingUtil.sceneToWorldX( pt.x, pt.y );
+        y3 = mDrawingUtil.sceneToWorldY( pt.x, pt.y );
+	if ( pt.has_cp ) {
+          x1 = mDrawingUtil.sceneToWorldX( pt.x2, pt.y2 );
+          y1 = mDrawingUtil.sceneToWorldY( pt.x2, pt.y2 );
+          x2 = mDrawingUtil.sceneToWorldX( pt.x1, pt.y1 );
+          y2 = mDrawingUtil.sceneToWorldY( pt.x1, pt.y1 );
+	  float len = (x1-x0)*(x1-x0) + (x2-x1)*(x2-x1) + (x3-x2)*(x3-x2) + (x3-x0)*(x3-x0)
+	            + (y1-y0)*(y1-y0) + (y2-y1)*(y2-y1) + (y3-y2)*(y3-y2) + (y3-y0)*(y3-y0);
+	  int np = (int)( TDMath.sqrt( len ) );
+	  if ( np > 1 ) {
+	    BezierCurve bc = new BezierCurve( x0, y0, x1, y1, x2, y2, x3, y3 );
+	    for ( int n=1; n < np; ++n ) {
+	      Point2D p = bc.evaluate( (float)n / (float)np );
+              pw.format(Locale.US, "%.2f %.2f ", p.x, p.y );
+	    }
+	  }
+	}
+        pw.format(Locale.US, "%.2f %.2f ", x3, y3 );
+        // if ( b ) { pw.format("B "); b = false; }
+	x0 = x3;
+	y0 = y3;
       }
     }
     pw.format("\" />\n");

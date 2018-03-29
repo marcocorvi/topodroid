@@ -719,12 +719,11 @@ public class DrawingWindow extends ItemDrawer
       } else {
         setSplayPaintExtend( dpath, blk, extend );
       }
-      if ( mApp.getHighlightedSplayId() == blk.mId ) { dpath.setPaint( BrushManager.errorPaint ); }
     } else {
       dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );
       dpath.setPaint( BrushManager.fixedShotPaint );
       if ( blk != null ) {
-        if ( blk.isMultiBad() ) {
+	if ( blk.isMultiBad() ) {
           dpath.setPaint( BrushManager.fixedOrangePaint );
         } else if ( mApp.mShotWindow != null && mApp.mShotWindow.isBlockMagneticBad( blk ) ) {
           dpath.setPaint( BrushManager.fixedRedPaint );
@@ -737,6 +736,7 @@ public class DrawingWindow extends ItemDrawer
     mDrawingUtil.makePath( dpath, x1, y1, x2, y2 );
     mDrawingSurface.addFixedPath( dpath, splay, selectable );
   }
+
 
   // used for splays in x-sections
   private void addFixedSectionSplay( DBlock blk, float x1, float y1, float x2, float y2, float a,
@@ -882,8 +882,6 @@ public class DrawingWindow extends ItemDrawer
   void switchExistingPlot( String plot_name, long plot_type ) // context of current SID
   {
     doSaveTdr();
-
-
   }
 
   // called by doPause 
@@ -1738,6 +1736,12 @@ public class DrawingWindow extends ItemDrawer
       mApp.registerLister( this );
     } 
 
+    if ( mApp.hasHighlighted() ) {
+      // Log.v("DistoX", "drawing window [2] highlighted " + mApp.getHighlightedSize() );
+      mDrawingSurface.highlights( mApp );
+      mApp.mShotWindow.clearMultiSelect();
+    }
+
     // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on create done");
   }
 
@@ -1746,6 +1750,8 @@ public class DrawingWindow extends ItemDrawer
   // called by PlotListDialog
   void switchNameAndType( String name, long t ) // SWITCH
   {
+    // if necessary save default export
+    //
     mZoom     = mApp.mScaleFactor;    // canvas zoom
     mOffset.x = 0;
     mOffset.y = 0;
@@ -1905,6 +1911,9 @@ public class DrawingWindow extends ItemDrawer
 
     if ( PlotInfo.isAnySection( mType ) ) {
       makeSectionReferences( list, tt );
+    // } else {
+    //   Log.v("DistoX", "try to highlight [1] ");
+    //   if ( mApp.hasHighlighted() ) mDrawingSurface.highlights( mApp ); 
     }
     // TDLog.TimeEnd("do start done");
 

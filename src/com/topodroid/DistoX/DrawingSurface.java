@@ -47,7 +47,7 @@ import java.io.DataOutputStream;
 // import java.util.Timer;
 // import java.util.TimerTask;
 
-// import android.util.Log;
+import android.util.Log;
 
 /**
  */
@@ -206,6 +206,14 @@ class DrawingSurface extends SurfaceView
   List< DrawingPathIntersection > getIntersectionShot( LinePoint p1, LinePoint p2 )
   {
     return commandManager.getIntersectionShot(p1, p2);
+  }
+
+  void highlights( TopoDroidApp app ) { 
+    // Log.v("DistoX", "surface [3] highlight: nr. " + app.getHighlightedSize() );
+    if ( mCommandManager2 != null ) {
+      mCommandManager1.highlights( app );
+      mCommandManager2.highlights( app );
+    }
   }
 
   // -----------------------------------------------------------
