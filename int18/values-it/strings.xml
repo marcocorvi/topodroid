@@ -874,6 +874,8 @@
   <string name="pref_size_buttons_summary">Dimensione bottoni barra superiore</string>
   <!-- UNUSED string name="pref_size_buttons_message">Scrivi la dimensione dei bottoni della barra superiore [pixels]</string -->
 
+  <!-- TODO string name="pref_bezier_step_title">Point spacing</string -->
+  <!-- TODO string name="pref_bezier_step_summary">Distance between points on an export line [m]</string -->
   <string name="pref_leg_shots_title">Misure per battuta</string>
   <string name="pref_leg_shots_summary">Minimo numero di misure per tiro di poligonale</string>
   <string name="pref_station_prefix_title">Esporta il prefisso dei caposaldi</string>

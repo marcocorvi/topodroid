@@ -869,6 +869,8 @@
   <string name="pref_size_buttons_summary">Tamanho dos botões da barra de ações</string>
   <!-- UNUSED string name="pref_size_buttons_message">Defina o tamanho dos botões da barra de ações [pixels]</string -->
 
+  <!-- TODO string name="pref_bezier_step_title">Point spacing</string -->
+  <!-- TODO string name="pref_bezier_step_summary">Distance between points on an export line [m]</string -->
   <string name="pref_leg_shots_title">Mínimo medições por visada</string>
   <string name="pref_leg_shots_summary">Quantidade mínimo de medições para uma visada</string>
   <string name="pref_station_prefix_title">Prefixos bases Compass</string>

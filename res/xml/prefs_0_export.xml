@@ -132,6 +132,15 @@
        android:defaultValue="false"
      / -->
 
+  <!-- com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_BEZIER_STEP"
+       android:title="@string/pref_bezier_step_title"
+       android:summary="@string/pref_bezier_step_summary"
+       android:dialogTitle="@string/pref_bezier_step_title"
+       android:dialogMessage="@string/pref_bezier_step_summary"
+       android:inputType="numberDecimal"
+       android:defaultValue="0.2" / -->
+
    <!-- CheckBoxPreference
        android:key="DISTOX_SVG_GRID"
        android:summary="@string/pref_svg_grid_summary"
@@ -161,6 +170,7 @@
        android:dialogMessage="@string/pref_svg_pointstroke_summary"
        android:inputType="numberDecimal"
        android:defaultValue="0.1" / -->
+
   <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_SVG_LABEL_STROKE"
        android:title="@string/pref_svg_labelstroke_title"

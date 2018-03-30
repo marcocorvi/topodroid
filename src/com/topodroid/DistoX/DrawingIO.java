@@ -1343,7 +1343,7 @@ class DrawingIO
   // CSURVEY
 
   static void doExportCsxXSection( PrintWriter pw, String filename,
-                                          String survey, String cave, String branch, String bind, DrawingUtil drawingUtil )
+                                   String survey, String cave, String branch, /* String session, */ String bind, DrawingUtil drawingUtil )
   {
     File file = new File( filename );
     if ( ! file.exists() ) return;
@@ -1441,10 +1441,10 @@ class DrawingIO
         e.printStackTrace();
       }
     }
-    doExportAsCsx( pw, survey, cave, branch, bind, paths, null, null, drawingUtil ); // all_sections=null, sections=null
+    doExportAsCsx( pw, survey, cave, branch, /* session, */ bind, paths, null, null, drawingUtil ); // all_sections=null, sections=null
   }
 
-  static void doExportAsCsx( PrintWriter pw, String survey, String cave, String branch, String bind,
+  static void doExportAsCsx( PrintWriter pw, String survey, String cave, String branch, /* String session, */ String bind,
                              List<DrawingPath> paths, List< PlotInfo > all_sections, List< PlotInfo > sections,
 			     DrawingUtil mDrawingUtil )
   {

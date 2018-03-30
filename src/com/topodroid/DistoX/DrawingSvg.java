@@ -309,6 +309,43 @@ class DrawingSvg
     pw.format("%s</text>\n", st.name() );
   }
 
+  static private void toSvgPointLine( PrintWriter pw, DrawingPointLinePath lp, float xoff, float yoff, boolean closed )
+  {
+    pw.format(" d=\"");
+    LinePoint p = lp.mFirst;
+    float x0 = xoff+p.x;
+    float y0 = yoff+p.y;
+    pw.format(Locale.US, "M %.2f %.2f", xoff+p.x, yoff+p.y );
+    for ( p = p.mNext; p != null; p = p.mNext ) { 
+      float x3 = xoff+p.x;
+      float y3 = yoff+p.y;
+      if ( p.has_cp ) { // FIXME this converts the cubic with a thickly interpolated polyline
+        float x1 = xoff + p.x1;
+        float y1 = yoff + p.y1;
+        float x2 = xoff + p.x2;
+        float y2 = yoff + p.y2;
+	float len = (x1-x0)*(x1-x0) + (x2-x1)*(x2-x1) + (x3-x2)*(x3-x2) + (x3-x0)*(x3-x0)
+	          + (y1-y0)*(y1-y0) + (y2-y1)*(y2-y1) + (y3-y2)*(y3-y2) + (y3-y0)*(y3-y0);
+	int np = (int)( TDMath.sqrt( len ) * TDSetting.mBezierStep / 2 + 0.5f );
+	if ( np > 1 ) {
+	  BezierCurve bc = new BezierCurve( x0, y0, x1, y1, x2, y2, x3, y3 );
+	  for ( int n=1; n < np; ++n ) {
+	    Point2D pb = bc.evaluate( (float)n / (float)np );
+            pw.format(Locale.US, " L %.2f %.2f", pb.x, pb.y );
+          }
+	}
+      } 
+      pw.format(Locale.US, " L %.2f %.2f", x3, y3 );
+      x0 = x3;
+      y0 = y3;
+    }
+    if ( closed ) { 
+      pw.format(" Z \"");
+    } else {
+      pw.format("\"");
+    }
+  }
+
   static private void toSvg( PrintWriter pw, DrawingLinePath line, String color, float xoff, float yoff ) 
   {
     String th_name = BrushManager.mLineLib.getSymbolThName( line.mLineType ); 
@@ -318,13 +355,7 @@ class DrawingSvg
     else if ( th_name.equals( "fault" ) ) pw.format(" stroke-dasharray=\"8 4 \"");
     else if ( th_name.equals( "floor-meander" ) ) pw.format(" stroke-dasharray=\"6 2 \"");
     else if ( th_name.equals( "ceiling-meander" ) ) pw.format(" stroke-dasharray=\"6 2 \"");
-    pw.format(" d=\"");
-    LinePoint p = line.mFirst;
-    pw.format(Locale.US, "M %.2f %.2f", xoff+p.x, yoff+p.y );
-    for ( p = p.mNext; p != null; p = p.mNext ) { 
-      pw.format(Locale.US, " L %.2f %.2f", xoff+p.x, yoff+p.y );
-    }
-    pw.format("\"");
+    toSvgPointLine( pw, line, xoff, yoff, line.isClosed() );
     if ( TDSetting.mSvgLineDirection ) {
       if ( BrushManager.mLineLib.hasEffect( line.mLineType ) ) {
         if ( line.isReversed() ) {
@@ -339,13 +370,9 @@ class DrawingSvg
 
   static private void toSvg( PrintWriter pw, DrawingAreaPath area, String color, float xoff, float yoff )
   {
-    pw.format("  <path stroke=\"black\" stroke-width=\"%.2f\" fill=\"%s\" fill-opacity=\"0.5\" d=\"", TDSetting.mSvgLineStroke, color );
-    LinePoint p = area.mFirst;
-    pw.format(Locale.US, "M %.2f %.2f", xoff+p.x, yoff+p.y );
-    for ( p = p.mNext; p != null; p = p.mNext ) { 
-      pw.format(Locale.US, " L %.2f %.2f", xoff+p.x, yoff+p.y );
-    }
-    pw.format(" Z\" />\n");
+    pw.format("  <path stroke=\"black\" stroke-width=\"%.2f\" fill=\"%s\" fill-opacity=\"0.5\" ", TDSetting.mSvgLineStroke, color );
+    toSvgPointLine( pw, area, xoff, yoff, true ); // area borders are closed
+    pw.format(" />\n");
   }
 
   static private void toSvg( PrintWriter pw, DrawingPointPath point, String color, float xoff, float yoff )

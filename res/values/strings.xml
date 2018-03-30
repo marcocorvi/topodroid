@@ -885,6 +885,8 @@
   <string name="pref_size_buttons_summary">Size of action-bar buttons</string>
   <!-- UNUSED string name="pref_size_buttons_message">Enter the size of action-bar buttons [pixels]</string -->
 
+  <string name="pref_bezier_step_title">Point spacing</string>
+  <string name="pref_bezier_step_summary">Distance between points on an export line [m]</string>
   <string name="pref_leg_shots_title">Minimum leg shots</string>
   <string name="pref_leg_shots_summary">Minimum number of shots per leg</string>
   <string name="pref_station_prefix_title">Compass station prefix</string>

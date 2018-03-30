@@ -896,6 +896,8 @@
   <string name="pref_size_buttons_summary">Größe der Action-bar Buttons</string>
   <!-- UNUSED string name="pref_size_buttons_message">Eingabe der Größe der Action-bar Buttons [px]</string -->
 
+  <!-- TODO string name="pref_bezier_step_title">Point spacing</string -->
+  <!-- TODO string name="pref_bezier_step_summary">Distance between points on an export line [m]</string -->
   <string name="pref_leg_shots_title">Min. Messungen für Messzüge</string>
   <string name="pref_leg_shots_summary">Minimale Anzahl Messungen zur Erkennung als Messzug</string>
   <string name="pref_station_prefix_title">Exportiere Messpunkt Prefix</string>

@@ -136,6 +136,7 @@ class TDSetting
     "DISTOX_LRUD_VERTICAL",
     "DISTOX_LRUD_HORIZONTAL",
     "DISTOX_BITMAP_SCALE",       // default bitmap scale
+    "DISTOX_BEZIER_STEP",        // max step between interpolating points for bezier in export (cSurvey)
     "DISTOX_THUMBNAIL",          // size of photo thumbnails
     "DISTOX_DOT_RADIUS",         // radius of green dots
     "DISTOX_FIXED_THICKNESS",    // thickness of fixed lines
@@ -254,7 +255,8 @@ class TDSetting
   static boolean mCompassSplays = true;  // whether to add splays to Compass export
 
   static float mBitmapScale = 1.5f;
-  static float mDxfScale = 1.0f;
+  static float mBezierStep  = 0.2f;
+  static float mDxfScale    = 1.0f;
   static int mBitmapBgcolor = 0x000000;
 
   static int mAcadVersion = 13;      // AutoCAD version 9, or 13
@@ -805,6 +807,7 @@ class TDSetting
     mLRUDhorizontal    = tryFloat( prefs, key[k++], "90" );   // DISTOX_LRUD_HORIZONTAL
 
     mBitmapScale       = tryFloat( prefs, key[k++], "1.5" );  // DISTOX_BITMAP_SCALE 
+    mBezierStep        = tryFloat( prefs, key[k++], "0.2" );  // DISTOX_BEZIER_STEP
     mThumbSize         = tryInt(   prefs, key[k++], "200" );  // DISTOX_THUMBNAIL
     mDotRadius         = tryFloat( prefs, key[k++], "5"   );  // DISTOX_DOT_RADIUS
     mFixedThickness    = tryFloat( prefs, key[k++], "1"   );  // DISTOX_FIXED_THICKNESS
@@ -1145,6 +1148,8 @@ class TDSetting
 
     } else if ( k.equals( key[ nk++ ] ) ) {
       mBitmapScale = tryFloat( prefs, k, "1.5" );     // DISTOX_BITMAP_SCALE
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mBezierStep  = tryFloat( prefs, k, "0.2" );     // DISTOX_BEZIER_STEP
     } else if ( k.equals( key[ nk++ ] ) ) {
       mThumbSize = tryInt( prefs, k, "200" );         // DISTOX_THUMBNAIL
     } else if ( k.equals( key[ nk++ ] ) ) { 
@@ -1509,6 +1514,7 @@ class TDSetting
     //B if ( name.equals( "DISTOX_AUTO_RECONNECT" )
     //B if ( name.equals( "DISTOX_HEAD_TAIL" )
     if ( name.equals( "DISTOX_BITMAP_SCALE"     ) ) return parseFloatValue( value, mBitmapScale,    0.5f, 10f );
+    if ( name.equals( "DISTOX_BEZIER_STEP"      ) ) return parseFloatValue( value, mBezierStep,     0.1f,  2f );
     if ( name.equals( "DISTOX_THUMBNAIL"        ) ) return parseIntValue(   value, mThumbSize,      80,   400 );
     if ( name.equals( "DISTOX_DOT_RADIUS"       ) ) return parseFloatValue( value, mDotRadius,      1,    100 );
     if ( name.equals( "DISTOX_FIXED_THICKNESS"  ) ) return parseFloatValue( value, mFixedThickness, 1,    10 );

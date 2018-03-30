@@ -29,7 +29,7 @@ import java.io.IOException;
 // import java.util.ArrayList;
 import java.util.Locale;
 
-// import android.util.Log;
+import android.util.Log;
 
 /**
  */
@@ -275,6 +275,7 @@ class DrawingLinePath extends DrawingPointLinePath
       x0 = mDrawingUtil.sceneToWorldX( pt.x, pt.y );
       y0 = mDrawingUtil.sceneToWorldY( pt.x, pt.y );
       pw.format(Locale.US, "%.2f %.2f ", x0, y0 );
+      // Log.v("DistoX", "X " + x0 + " Y " + y0 );
       if ( b ) { pw.format("B "); b = false; }
       for ( pt = pt.mNext; pt != null; pt = pt.mNext ) 
       {
@@ -287,16 +288,18 @@ class DrawingLinePath extends DrawingPointLinePath
           y2 = mDrawingUtil.sceneToWorldY( pt.x2, pt.y2 );
 	  float len = (x1-x0)*(x1-x0) + (x2-x1)*(x2-x1) + (x3-x2)*(x3-x2) + (x3-x0)*(x3-x0)
 	            + (y1-y0)*(y1-y0) + (y2-y1)*(y2-y1) + (y3-y2)*(y3-y2) + (y3-y0)*(y3-y0);
-	  int np = (int)( TDMath.sqrt( len ) );
+	  int np = (int)( TDMath.sqrt( len ) * TDSetting.mBezierStep / 2 + 0.5f );
 	  if ( np > 1 ) {
 	    BezierCurve bc = new BezierCurve( x0, y0, x1, y1, x2, y2, x3, y3 );
 	    for ( int n=1; n < np; ++n ) {
 	      Point2D p = bc.evaluate( (float)n / (float)np );
               pw.format(Locale.US, "%.2f %.2f ", p.x, p.y );
+              // Log.v("DistoX", "N " + n + " X " + p.x + " Y " + p.y );
             }
 	  }
 	} 
         pw.format(Locale.US, "%.2f %.2f ", x3, y3 );
+        // Log.v("DistoX", "X " + x3 + " Y " + y3 );
         // if ( b ) { pw.format("B "); b = false; }
 	x0 = x3;
 	y0 = y3;
@@ -306,6 +309,7 @@ class DrawingLinePath extends DrawingPointLinePath
       x0 = mDrawingUtil.sceneToWorldX( pt.x, pt.y );
       y0 = mDrawingUtil.sceneToWorldY( pt.x, pt.y );
       pw.format(Locale.US, "%.2f %.2f ", x0, y0 );
+      // Log.v("DistoX", "X " + x0 + " Y " + y0 );
       if ( b ) { pw.format("B "); b = false; }
       for ( pt = pt.mPrev; pt != null; pt = pt.mPrev ) 
       {
@@ -318,16 +322,18 @@ class DrawingLinePath extends DrawingPointLinePath
           y2 = mDrawingUtil.sceneToWorldY( pt.x1, pt.y1 );
 	  float len = (x1-x0)*(x1-x0) + (x2-x1)*(x2-x1) + (x3-x2)*(x3-x2) + (x3-x0)*(x3-x0)
 	            + (y1-y0)*(y1-y0) + (y2-y1)*(y2-y1) + (y3-y2)*(y3-y2) + (y3-y0)*(y3-y0);
-	  int np = (int)( TDMath.sqrt( len ) );
+	  int np = (int)( TDMath.sqrt( len ) * TDSetting.mBezierStep / 2 + 0.5f );
 	  if ( np > 1 ) {
 	    BezierCurve bc = new BezierCurve( x0, y0, x1, y1, x2, y2, x3, y3 );
 	    for ( int n=1; n < np; ++n ) {
 	      Point2D p = bc.evaluate( (float)n / (float)np );
               pw.format(Locale.US, "%.2f %.2f ", p.x, p.y );
+              // Log.v("DistoX", "N " + n + " X " + p.x + " Y " + p.y );
 	    }
 	  }
 	}
         pw.format(Locale.US, "%.2f %.2f ", x3, y3 );
+        // Log.v("DistoX", "X " + x3 + " Y " + y3 );
         // if ( b ) { pw.format("B "); b = false; }
 	x0 = x3;
 	y0 = y3;

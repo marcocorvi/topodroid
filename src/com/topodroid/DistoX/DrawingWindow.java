@@ -5042,7 +5042,7 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
   }
 
-  void exportAsCsx( PrintWriter pw, String survey, String cave, String branch )
+  void exportAsCsx( PrintWriter pw, String survey, String cave, String branch /*, String session */ )
   {
     // Log.v("DistoX", "export as CSX <<" + cave + ">>" );
     List< PlotInfo > all_sections = mApp_mData.selectAllPlotsSection( mSid, TDStatus.NORMAL );
@@ -5050,35 +5050,35 @@ public class DrawingWindow extends ItemDrawer
     ArrayList< PlotInfo > sections2 = new ArrayList<>(); // profile xsections
 
     pw.format("  <plan>\n");
-    mDrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_PLAN, survey, cave, branch, all_sections, sections1, mDrawingUtil );
+    mDrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_PLAN, survey, cave, branch, /* session, */ all_sections, sections1, mDrawingUtil );
     pw.format("    <plot />\n");
     pw.format("  </plan>\n");
     
     pw.format("  <profile>\n");
-    mDrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_EXTENDED, survey, cave, branch, all_sections, sections2, mDrawingUtil ); 
+    mDrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_EXTENDED, survey, cave, branch, /* session, */ all_sections, sections2, mDrawingUtil ); 
     pw.format("    <plot />\n");
     pw.format("  </profile>\n");
 
     pw.format("    <crosssections>\n");
     for ( PlotInfo section1 : sections1 ) {
       pw.format("    <crosssection id=\"%s\" design=\"0\" crosssection=\"%d\">\n", section1.name, section1.csxIndex );
-      exportCsxXSection( pw, section1, survey, cave, branch, mDrawingUtil );
+      exportCsxXSection( pw, section1, survey, cave, branch, /* session, */ mDrawingUtil );
       pw.format("    </crosssection>\n" );
     }
     for ( PlotInfo section2 : sections2 ) {
       pw.format("    <crosssection id=\"%s\" design=\"1\" crosssection=\"%d\">\n", section2.name, section2.csxIndex );
-      exportCsxXSection( pw, section2, survey, cave, branch, mDrawingUtil );
+      exportCsxXSection( pw, section2, survey, cave, branch, /* session, */ mDrawingUtil );
       pw.format("    </crosssection>\n" );
     }
     pw.format("    </crosssections>\n");
   }
 
-  private void exportCsxXSection( PrintWriter pw, PlotInfo section, String survey, String cave, String branch, DrawingUtil drawingUtil )
+  private void exportCsxXSection( PrintWriter pw, PlotInfo section, String survey, String cave, String branch, /* String session, */ DrawingUtil drawingUtil )
   {
     // String name = section.name; // binding name
     // open xsection file
     String filename = TDPath.getSurveyPlotTdrFile( survey, section.name );
-    DrawingIO.doExportCsxXSection( pw, filename, survey, cave, branch, section.name, drawingUtil ); // bind=section.name
+    DrawingIO.doExportCsxXSection( pw, filename, survey, cave, branch, /* session, */ section.name, drawingUtil ); // bind=section.name
   }
 
   public void setConnectionStatus( int status )

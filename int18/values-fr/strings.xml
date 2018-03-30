@@ -866,6 +866,8 @@
   <string name="pref_size_buttons_summary">Taille de la barre d\'action des boutons</string>
   <!-- UNUSED string name="pref_size_buttons_message">Entrez la taille de la barre d\'action des boutons [pixels]</string -->
 
+  <!-- TODO string name="pref_bezier_step_title">Point spacing</string -->
+  <!-- TODO string name="pref_bezier_step_summary">Distance between points on an export line [m]</string -->
   <string name="pref_leg_shots_title">Nombre mini. visées</string>
   <string name="pref_leg_shots_summary">Nombre minimum de visées successives pour identifier un cheminement</string>
   <string name="pref_station_prefix_title">Préfixe station EcSurvey</string>

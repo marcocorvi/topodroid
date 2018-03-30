@@ -867,6 +867,8 @@
   <string name="pref_size_buttons_summary">活动按钮尺寸</string>
   <!-- UNUSED string name="pref_size_buttons_message">输入活动按钮尺寸 [pixels]</string -->
 
+  <!-- TODO string name="pref_bezier_step_title">Point spacing</string -->
+  <!-- TODO string name="pref_bezier_step_summary">Distance between points on an export line [m]</string -->
   <string name="pref_leg_shots_title">最小的主线测量</string>
   <string name="pref_leg_shots_summary">每条主线最少的测量次数</string>
   <string name="pref_station_prefix_title">cSurvey 测量点名称前缀</string>

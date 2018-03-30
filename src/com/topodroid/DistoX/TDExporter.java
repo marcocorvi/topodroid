@@ -126,17 +126,17 @@ class TDExporter
     pw.format("<segment id=\"%d\" cave=\"%s\" branch=\"%s\" session=\"%s\" from=\"%s\" to=\"%s\"", (int)id, cave, branch, session, f, t );
   }
 
-  static private void writeCsxTSplaySegment( PrintWriter pw, String cave, String branch, String t, int cnt, boolean xsplay )
+  static private void writeCsxTSplaySegment( PrintWriter pw, String cave, String branch, String session, String t, int cnt, boolean xsplay )
   {
     // TDLog.Log( TDLog.LOG_CSURVEY, "T-splay segment cave " + cave + " " + t + " " + cnt ); 
-    pw.format("<segment id=\"\" cave=\"%s\" branch=\"%s\" from=\"%s(%d)\" to=\"%s\"", cave, branch, t, cnt, t );
+    pw.format("<segment id=\"\" cave=\"%s\" branch=\"%s\" session=\"%s\" from=\"%s(%d)\" to=\"%s\"", cave, branch, session, t, cnt, t );
     if ( xsplay ) pw.format(" cut=\"1\"");
   }
 
-  static private void writeCsxFSplaySegment( PrintWriter pw, String cave, String branch, String f, int cnt, boolean xsplay )
+  static private void writeCsxFSplaySegment( PrintWriter pw, String cave, String branch, String session, String f, int cnt, boolean xsplay )
   {
     // TDLog.Log( TDLog.LOG_CSURVEY, "F-splay segment cave " + cave + " " + f + " " + cnt ); 
-    pw.format("<segment id=\"\" cave=\"%s\" branch=\"%s\" from=\"%s\" to=\"%s(%d)\"", cave, branch, f, f, cnt );
+    pw.format("<segment id=\"\" cave=\"%s\" branch=\"%s\" session=\"%s\" from=\"%s\" to=\"%s(%d)\"", cave, branch, session, f, f, cnt );
     if ( xsplay ) pw.format(" cut=\"1\"");
   }
 
@@ -245,7 +245,7 @@ class TDExporter
       pw.format("      </session>\n");
       pw.format("    </sessions>\n");
 
-      String session = info.date.replaceAll("-", "") + "_" +  cave.replaceAll(" ", "_");
+      String session = info.date.replaceAll("\\.", "") + "_" +  cave.replaceAll(" ", "_");
       session = session.toLowerCase();
 
    // ============== CAVE INFOS and BRANCHES
@@ -340,7 +340,7 @@ class TDExporter
             }
 
             extend = item.getExtend();
-            writeCsxTSplaySegment( pw, cave, branch, to, cntSplay, item.isXSplay() ); // branch prefix
+            writeCsxTSplaySegment( pw, cave, branch, session, to, cntSplay, item.isXSplay() ); // branch prefix
             ++ cntSplay;
             pw.format(" splay=\"1\" exclude=\"1\"");
             if ( item.isCommented() ) pw.format(" commented=\"1\"");
@@ -383,7 +383,7 @@ class TDExporter
             }
 
             extend = item.getExtend();
-            writeCsxFSplaySegment( pw, cave, branch, from, cntSplay, item.isXSplay() ); // branch prefix
+            writeCsxFSplaySegment( pw, cave, branch, session, from, cntSplay, item.isXSplay() ); // branch prefix
             ++cntSplay;
             pw.format(" splay=\"1\" exclude=\"1\"");
             if ( item.isCommented() ) pw.format(" commented=\"1\"");
@@ -475,7 +475,7 @@ class TDExporter
 
       // ============= SKETCHES
       if ( sketch != null ) {
-        sketch.exportAsCsx( pw, survey, cave, branch );
+        sketch.exportAsCsx( pw, survey, cave, branch /*, session */ );
       } else {
         pw.format("  <plan>\n");
         exportEmptyCsxSketch( pw );

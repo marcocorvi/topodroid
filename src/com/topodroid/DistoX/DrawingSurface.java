@@ -716,14 +716,14 @@ class DrawingSurface extends SurfaceView
   // -----------------------------------------------------------------------------
   // EXPORT
 
-  void exportAsCsx( PrintWriter pw, long type, String survey, String cave, String branch,
+  void exportAsCsx( PrintWriter pw, long type, String survey, String cave, String branch, /* String session, */
                     List<PlotInfo> all_sections, List<PlotInfo> sections, DrawingUtil drawingUtil )
   {
     if ( PlotInfo.isProfile( type ) ) {
       // FIXME OK PROFILE to check
-      mCommandManager2.exportAsCsx( pw, survey, cave, branch, all_sections, sections, drawingUtil );
+      mCommandManager2.exportAsCsx( pw, survey, cave, branch, /* session, */ all_sections, sections, drawingUtil );
     } else if ( type == PlotInfo.PLOT_PLAN ) {
-      mCommandManager1.exportAsCsx( pw, survey, cave, branch, all_sections, sections, drawingUtil );
+      mCommandManager1.exportAsCsx( pw, survey, cave, branch, /* session, */ all_sections, sections, drawingUtil );
     } else { // should never happen, but it happens for X-Sections
       pw.format("    <layers>\n");
       pw.format("      <layer name=\"Base\" type=\"0\">\n");

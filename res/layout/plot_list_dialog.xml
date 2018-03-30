@@ -11,6 +11,7 @@
     android:stackFromBottom="false"
     android:transcriptMode="alwaysScroll"
     android:layout_weight="1"
+    android:layout_marginTop="@dimen/marginv"
     android:textSize="@dimen/textsize"
     android:numColumns="2"
     android:divider="@color/divider"

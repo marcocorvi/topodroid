@@ -868,6 +868,8 @@
   <string name="pref_size_buttons_summary">Fejléc gombok mérete</string>
   <!-- UNUSED string name="pref_size_buttons_message">Enter the size of action-bar buttons [pixels]</string -->
 
+  <!-- TODO string name="pref_bezier_step_title">Point spacing</string -->
+  <!-- TODO string name="pref_bezier_step_summary">Distance between points on an export line [m]</string -->
   <string name="pref_leg_shots_title">Minimális poligon mérés</string>
   <string name="pref_leg_shots_summary">Poligon mérések minmális száma poligonhosszanként</string>
   <string name="pref_station_prefix_title">Pontnév előtag cSurvey programhoz</string>

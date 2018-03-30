@@ -2614,7 +2614,7 @@ class DrawingCommandManager
     DrawingIO.exportDataStream( type, dos, scrap_name, proj_dir, bbox, mNorthLine, mCurrentStack, mUserStations, mStations );
   }
 
-  void exportAsCsx( PrintWriter pw, String survey, String cave, String branch,
+  void exportAsCsx( PrintWriter pw, String survey, String cave, String branch, /* String session, */
                     List<PlotInfo> all_sections, List<PlotInfo> sections, DrawingUtil drawingUtil )
   {
     ArrayList< DrawingPath > paths = new ArrayList<>();
@@ -2622,7 +2622,7 @@ class DrawingCommandManager
       for ( ICanvasCommand cmd : mCurrentStack ) {
         if ( cmd.commandType() == 0 ) paths.add( (DrawingPath) cmd );
       }
-      DrawingIO.doExportAsCsx( pw, survey, cave, branch, null, paths, all_sections, sections, drawingUtil ); // bind=null
+      DrawingIO.doExportAsCsx( pw, survey, cave, branch, /* session, */ null, paths, all_sections, sections, drawingUtil ); // bind=null
     }
   }
 

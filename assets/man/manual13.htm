@@ -180,6 +180,10 @@ If the survey has more than one sketch, you must export each sketch individually
 
 The sketch items are distributed on suitable <i>cSurvey</i> layers.<br><p>
 
+Settings:<ul style="margin-top=0">
+<li><u>point spacing</u> maximum distance between interpolating points on smooth lines</li>
+</ul><p>
+
 <b>DXF</b> (.dxf)<br>
 Sketches can be exported as 2D DXF files with layers for each point, line and area type in addition to the layers of the data 3D DXF. The sketch items in the 2D DXF lie in the Z=0 plane.<br><p>
 
@@ -187,10 +191,11 @@ Sketches can be exported as 2D DXF files with layers for each point, line and ar
 
 Settings:<ul style="margin-top=0">
 <li><u>scale</u> of the DXF</li>
-<li><u>section-point</u>: if section points are automatically added to section lines,
-the section drawing is inserted in the export, at the "section" point</li>
+<li><u>section-point</u>: if a section line has the relative section point,
+the drawing of the section is inserted in the export, at the "section" point</li>
 <li><u>splay endpoints</u></li>
-<li>AutoCAD version (6 or 12)</li>
+<li><u>point spacing</u> maximum distance between interpolating points on smooth lines</li>
+<li>AutoCAD version: 6 (Acad-9) or 12 (Acad-13). Default "12": <b>try "6" if you have problem opening the exported file</b></li>
 </ul><p>
 
 <b>SVG</b> (.svg)<br>
@@ -202,6 +207,7 @@ Settings:<ul style="margin-top=0">
 the section drawing is inserted in the export, at the "section" point</li>
 <li>automatic <u>station-points</u>: if enabled all stations are included in the export,
 otherwise only the user-chosen stations are included</li>
+<li><u>point spacing</u> maximum distance between interpolating points on smooth lines</li>
 <li><u>grid</u> lines</li> 
 <li><u>line orientation</u> tick</li> 
 <li><u>line widths</u>: labels, icons, lines (and area borders), grid lines, shots, orientation stroke</li>

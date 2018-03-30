@@ -224,9 +224,21 @@ class DrawingDxf
   //   printString( pw, 7, style );
   //   printString( pw, 100, AcDbText );
   // }
+  static private int printLinePoint( PrintWriter pw, float scale, int handle, String layer, float x, float y )
+  {
+    printString( pw, 0, "VERTEX" );
+    if ( mVersion13 ) {
+      ++handle;
+      printAcDb( pw, handle, "AcDbVertex", "AcDb3dPolylineVertex" );
+      printInt( pw, 70, 32 ); // flag 32 = 3D polyline vertex
+    }
+    printString( pw, 8, layer );
+    printXYZ( pw, x * scale, -y * scale, 0.0f, 0 );
+    return handle;
+  }
 
-  static private int  printPolyline( PrintWriter pw, DrawingPointLinePath line, float scale, int handle,
-                             String layer, boolean closed, float xoff, float yoff )
+  static private int printPolyline( PrintWriter pw, DrawingPointLinePath line, float scale, int handle,
+                                    String layer, boolean closed, float xoff, float yoff )
   {
     int close = (closed ? 1 : 0 );
     printString( pw, 0, "POLYLINE" );
@@ -239,25 +251,37 @@ class DrawingDxf
     printInt( pw, 66, 1 ); // group 1
     printInt( pw, 70, 8 + close ); // polyline flag 8 = 3D polyline, 1 = closed 
     printInt( pw, 75, 0 ); // 6 cubic spline, 5 quad spline, 0
-    for (LinePoint p = line.mFirst; p != null; p = p.mNext ) { 
-      printString( pw, 0, "VERTEX" );
-      if ( mVersion13 ) {
-        ++handle;
-        printAcDb( pw, handle, "AcDbVertex", "AcDb3dPolylineVertex" );
-        printInt( pw, 70, 32 ); // flag 32 = 3D polyline vertex
-      }
-      printString( pw, 8, layer );
-      printXYZ( pw, (p.x+xoff) * scale, -(p.y+yoff) * scale, 0.0f, 0 );
+    LinePoint p = line.mFirst;
+    float x0 = xoff + p.x;
+    float y0 = yoff + p.y;
+    handle = printLinePoint( pw, scale, handle, layer, x0, y0 );
+
+    for ( p = p.mNext; p != null; p = p.mNext ) { 
+      float x3 = xoff + p.x;
+      float y3 = yoff + p.y;
+      if ( p.has_cp ) { // FIXME this converts the cubic with a thickly interpolated polyline
+        float x1 = xoff + p.x1;
+        float y1 = yoff + p.y1;
+        float x2 = xoff + p.x2;
+        float y2 = yoff + p.y2;
+	float len = (x1-x0)*(x1-x0) + (x2-x1)*(x2-x1) + (x3-x2)*(x3-x2) + (x3-x0)*(x3-x0)
+	          + (y1-y0)*(y1-y0) + (y2-y1)*(y2-y1) + (y3-y2)*(y3-y2) + (y3-y0)*(y3-y0);
+	int np = (int)( TDMath.sqrt( len ) * TDSetting.mBezierStep / 2 + 0.5f );
+	if ( np > 1 ) {
+	  BezierCurve bc = new BezierCurve( x0, y0, x1, y1, x2, y2, x3, y3 );
+	  for ( int n=1; n < np; ++n ) {
+	    Point2D pb = bc.evaluate( (float)n / (float)np );
+            handle = printLinePoint( pw, scale, handle, layer, pb.x, pb.y );
+          }
+	}
+      } 
+      handle = printLinePoint( pw, scale, handle, layer, x3, y3 );
+      x0 = x3;
+      y0 = y3;
     }
     if ( closed ) {
-      printString( pw, 0, "VERTEX" );
-      if ( mVersion13 ) {
-        ++handle;
-        printAcDb( pw, handle, "AcDbVertex", "AcDb3dPolylineVertex" );
-        printInt( pw, 70, 32 ); // flag 32 = 3D polyline vertex
-      }
-      printString( pw, 8, layer );
-      printXYZ( pw, (line.mFirst.x+xoff) * scale, -(line.mFirst.y+yoff) * scale, 0.0f, 0 );
+      p = line.mFirst;
+      handle = printLinePoint( pw, scale, handle, layer, xoff+p.x, yoff+p.y );
     }
     pw.printf("  0%sSEQEND%s", EOL, EOL );
     if ( mVersion13 ) {
@@ -267,24 +291,24 @@ class DrawingDxf
     return handle;
   }
 
-  static int printLWPolyline( PrintWriter pw, DrawingPointLinePath line, float scale, int handle, String layer, boolean closed,
-                              float xoff, float yoff )
-  {
-    int close = (closed ? 1 : 0 );
-    printString( pw, 0, "LWPOLYLINE" );
-    ++handle;
-        printAcDb( pw, handle, AcDbEntity, AcDbPolyline );
-    printString( pw, 8, layer );
-    printInt( pw, 38, 0 ); // elevation
-    printInt( pw, 39, 1 ); // thickness
-    printInt( pw, 43, 1 ); // start width
-    printInt( pw, 70, close ); // not closed
-    printInt( pw, 90, line.size() ); // nr. of points
-    for (LinePoint p = line.mFirst; p != null; p = p.mNext ) { 
-      printXY( pw, (p.x+xoff) * scale, -(p.y+yoff) * scale, 0 );
-    }
-    return handle;
-  }
+  // static private int printLWPolyline( PrintWriter pw, DrawingPointLinePath line, float scale, int handle, String layer, boolean closed,
+  //                             float xoff, float yoff )
+  // {
+  //   int close = (closed ? 1 : 0 );
+  //   printString( pw, 0, "LWPOLYLINE" );
+  //   ++handle;
+  //       printAcDb( pw, handle, AcDbEntity, AcDbPolyline );
+  //   printString( pw, 8, layer );
+  //   printInt( pw, 38, 0 ); // elevation
+  //   printInt( pw, 39, 1 ); // thickness
+  //   printInt( pw, 43, 1 ); // start width
+  //   printInt( pw, 70, close ); // not closed
+  //   printInt( pw, 90, line.size() ); // nr. of points
+  //   for (LinePoint p = line.mFirst; p != null; p = p.mNext ) { 
+  //     printXY( pw, (p.x+xoff) * scale, -(p.y+yoff) * scale, 0 );
+  //   }
+  //   return handle;
+  // }
 
   static private boolean checkSpline( DrawingPointLinePath line )
   {
