@@ -117,7 +117,7 @@ class CalibGMDialog extends MyDialog
     eTroll.setText( String.format(Locale.US, "%.1f", mBlk.mRoll ) );
     tVerror.setText( String.format(Locale.US, "%.4f", mBlk.mError ) );
 
-    mETname.setHint( Long.toString( mBlk.mGroup ) );
+    mETname.setText( Long.toString( mBlk.mGroup ) );
     mButtonOK.setOnClickListener( this );
     mButtonDelete.setOnClickListener( this );
     mButtonCancel.setOnClickListener( this );
@@ -141,9 +141,9 @@ class CalibGMDialog extends MyDialog
     if ( b == mButtonOK ) {
       MyKeyboard.close( mKeyboard );
       String name = mETname.getText().toString();
-      if ( name == null || name.length() == 0 ) {
-        name = mETname.getHint().toString();
-      }
+      // if ( name == null || name.length() == 0 ) {
+      //   name = mETname.getHint().toString();
+      // }
       if ( name == null || name.length() == 0 ) {
         mETname.setError( mParent.getResources().getString( R.string.error_group_required ) );
         return;

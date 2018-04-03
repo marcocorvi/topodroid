@@ -21,14 +21,14 @@ import android.content.BroadcastReceiver;
 
 import android.bluetooth.BluetoothDevice;
 
-import android.util.Log;
+// import android.util.Log;
 
 class PairingRequest extends BroadcastReceiver{
   @Override
   public void onReceive(Context context, Intent intent){
     if (intent.getAction().equals("ACTION_PAIRING_REQUEST")) {
       BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-      Log.v("DistoX", "PAIRING REQUEST: " + device.getName() + " " + device.getAddress() );
+      // Log.v("DistoX", "PAIRING REQUEST: " + device.getName() + " " + device.getAddress() );
       try { 
         device.getClass().getMethod("setPairingConfirmation", boolean.class).invoke(device, true);
         device.getClass().getMethod("cancelPairingUserInput", boolean.class).invoke(device, true);

@@ -22,16 +22,17 @@
           />
       </LinearLayout>
 
-      <LinearLayout
+      <!-- LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
 	android:layout_toLeftOf="@id/right"
-      >
-      <com.topodroid.DistoX.HorizontalListView android:id="@+id/listview"
+        -->
+        <com.topodroid.DistoX.HorizontalListView android:id="@+id/listview"
           android:layout_width="fill_parent"
-          android:layout_height="50sp"
-      />
-      </LinearLayout>
+          android:layout_height="wrap_content"
+	  android:layout_toLeftOf="@id/right"
+        />
+      <!-- /LinearLayout -->
      
     </RelativeLayout>
    					  

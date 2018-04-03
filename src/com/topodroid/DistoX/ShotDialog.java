@@ -149,13 +149,16 @@ class ShotDialog extends MyDialog
   private static int flagBearing  = MyKeyboard.FLAG_POINT;
   private static int flagClino    = MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_SIGN;
 
+  private boolean mFirst;
+
   ShotDialog( Context context, ShotWindow parent, int pos, DBlock blk,
-                     DBlock prev, DBlock next
-                   )
+              DBlock prev, DBlock next
+            )
   {
     super( context, R.string.ShotDialog );
     mParent = parent;
     mPos = pos;
+    mFirst = true;
     loadDBlock( blk, prev, next );
     // TDLog.Log( TDLog.LOG_SHOT, "Shot Dialog " + blk.toString(true) );
   }
@@ -176,10 +179,20 @@ class ShotDialog extends MyDialog
     if ( blk.isTypeBlank() && prev != null && prev.type() == DBlock.BLOCK_MAIN_LEG ) {
       if ( DistoXStationName.isLessOrEqual( prev.mFrom, prev.mTo ) ) {
         shot_from = prev.mTo;
-        shot_to   = DistoXStationName.increment( prev.mTo );
+	if ( mFirst ) {
+          shot_to = DistoXStationName.incrementName( prev.mTo, mParent.getStationNames() );
+	  mFirst  = false;
+	} else {
+          shot_to   = DistoXStationName.incrementName( prev.mTo );
+	}
       } else {
         shot_to = prev.mFrom;
-        shot_from = DistoXStationName.increment( prev.mFrom );
+	if ( mFirst ) {
+          shot_from = DistoXStationName.incrementName( prev.mFrom, mParent.getStationNames() );
+	  mFirst  = false;
+	} else {
+          shot_from = DistoXStationName.incrementName( prev.mFrom );
+	}
       }
     }
     

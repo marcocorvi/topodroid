@@ -26,7 +26,7 @@ import android.widget.TextView;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import android.util.Log;
+// import android.util.Log;
 
 
 class SurveyStatDialog extends MyDialog
@@ -87,7 +87,7 @@ class SurveyStatDialog extends MyDialog
       float g = mStat.averageG*TDSetting.mAccelerationThr/2000; // 2000 = 20 * 100
       float m = mStat.averageM*TDSetting.mMagneticThr/2000;
       float d = TDSetting.mDipThr/20;
-      Log.v("DistoX", "G " + g + " M " + m + " D " + d );
+      // Log.v("DistoX", "G " + g + " M " + m + " D " + d );
       histG.setImageBitmap( makeHistogramBitmap( mStat.G, mStat.nrMGD, mStat.averageG, g,
                             400, 100, 40, TDColor.BLUE ) );
       histM.setImageBitmap( makeHistogramBitmap( mStat.M, mStat.nrMGD, mStat.averageM, m,

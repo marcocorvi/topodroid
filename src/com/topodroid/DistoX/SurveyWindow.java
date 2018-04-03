@@ -71,7 +71,8 @@ public class SurveyWindow extends Activity
                         R.drawable.iz_3d,
                         R.drawable.iz_gps,
                         R.drawable.iz_camera,
-                        R.drawable.iz_sensor
+                        R.drawable.iz_sensor,
+			R.drawable.iz_empty
                      };
   private static int menus[] = {
                         R.string.menu_close,
@@ -235,8 +236,8 @@ public class SurveyWindow extends Activity
     Resources res = getResources();
     mNrButton1 = TDLevel.overNormal ? 6 
                : TDLevel.overBasic ? 3 : 2;
-    mButton1 = new Button[ mNrButton1 ];
-    for ( int k=0; k<mNrButton1; ++k ) {
+    mButton1 = new Button[ mNrButton1 + 1 ];
+    for ( int k=0; k <= mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( mActivity, this, izons[k] );
     }
 

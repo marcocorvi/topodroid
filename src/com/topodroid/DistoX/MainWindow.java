@@ -123,9 +123,9 @@ public class MainWindow extends Activity
                           R.drawable.iz_plus,
                           R.drawable.iz_import,
                           R.drawable.iz_palette,
-                          R.drawable.iz_manager,
-                          // FIXME THMANAGER
+                          R.drawable.iz_manager, // FIXME THMANAGER
                           // R.drawable.iz_database
+			  R.drawable.iz_empty
                           };
 
   private static int menus[] = { 
@@ -563,10 +563,10 @@ public class MainWindow extends Activity
     // FIXME THMANAGER
     mNrButton1 = 4;
     if ( TDLevel.overExpert ) mNrButton1 ++; // TH MANAGER
-    mButton1 = new Button[mNrButton1];
+    mButton1 = new Button[ mNrButton1 + 1 ];
 
     mImage.setBackgroundDrawable( MyButton.getButtonBackground( mApp, getResources(), R.drawable.iz_menu ) );
-    for (int k=0; k<mNrButton1; ++k ) {
+    for (int k=0; k <= mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( mActivity, this, izons[k] );
       // mButton1[k].setElevation(40);
     }

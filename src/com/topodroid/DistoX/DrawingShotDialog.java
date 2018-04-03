@@ -30,7 +30,7 @@ import android.widget.LinearLayout;
 // import android.text.InputType;
 import android.inputmethodservice.KeyboardView;
 
-import android.util.Log;
+// import android.util.Log;
 
 class DrawingShotDialog extends MyDialog
                                implements View.OnClickListener
@@ -75,7 +75,7 @@ class DrawingShotDialog extends MyDialog
     mBlock   = shot.mBlock;
     mPath    = shot;
     mFlag    = flag;
-    Log.v("DistoX", "FLAG " + mFlag + " FROM " + mBlock.mFrom + " TO " + mBlock.mTo );
+    // Log.v("DistoX", "FLAG " + mFlag + " FROM " + mBlock.mFrom + " TO " + mBlock.mTo );
   }
 
   @Override

@@ -180,41 +180,42 @@ class ShotNewDialog extends MyDialog
     // mETfrom.setRawInputType( InputType.TYPE_CLASS_NUMBER );
     // mETto.setRawInputType( InputType.TYPE_CLASS_NUMBER );
 
+    // FIXME setHint -> setText
     if ( mAt < 0 ) {
       // prev blk is the last leg block of the survey
       if ( mPrevBlk != null ) {
         if ( TDSetting.mSurveyStations == 1 ) {
-          mETfrom.setHint( mPrevBlk.mTo );
-          mETto.setHint( DistoXStationName.increment( mPrevBlk.mTo ) );
+          mETfrom.setText( mPrevBlk.mTo );
+          mETto.setText( DistoXStationName.incrementName( mPrevBlk.mTo, mApp.getStationNames() ) );
         } else {
-          mETto.setHint( mPrevBlk.mFrom );
-          mETfrom.setHint( DistoXStationName.increment( mPrevBlk.mFrom ) );
+          mETto.setText( mPrevBlk.mFrom );
+          mETfrom.setText( DistoXStationName.incrementName( mPrevBlk.mFrom, mApp.getStationNames() ) );
         }
       } else {
         if ( TDSetting.mSurveyStations == 1 ) {
-          mETfrom.setHint( DistoXStationName.mInitialStation );
-          mETto.setHint( DistoXStationName.mSecondStation );
+          mETfrom.setText( DistoXStationName.mInitialStation );
+          mETto.setText( DistoXStationName.mSecondStation );
         } else {
-          mETfrom.setHint( DistoXStationName.mSecondStation );
-          mETto.setHint( DistoXStationName.mInitialStation );
+          mETfrom.setText( DistoXStationName.mSecondStation );
+          mETto.setText( DistoXStationName.mInitialStation );
         }
       }
       String current_name = mApp.getCurrentStationName();
       if ( current_name != null ) {
         if ( TDSetting.isSurveyForward() ) {
-          mETfrom.setHint( current_name );
+          mETfrom.setText( current_name );
         } else {
-          mETto.setHint( current_name );
+          mETto.setText( current_name );
         }
       }
     } else {
       // prev blk is the leg after which to add the new shot
       if ( TDSetting.mSurveyStations == 1 ) {
-        mETfrom.setHint( mPrevBlk.mTo );
-        mETto.setHint( "" );
+        mETfrom.setText( mPrevBlk.mTo );
+        mETto.setText( "" );
       } else {
-        mETfrom.setHint( "" );
-        mETto.setHint( mPrevBlk.mFrom );
+        mETfrom.setText( "" );
+        mETto.setText( mPrevBlk.mFrom );
       }
     }
 
@@ -278,7 +279,7 @@ class ShotNewDialog extends MyDialog
 
   private void resetData( String from )
   {
-    String to = DistoXStationName.increment( from );
+    String to = DistoXStationName.incrementName( from, mApp.getStationNames() );
     mETfrom.setText( from );
     mETto.setText(to);
     mETdistance.setText("");
@@ -339,11 +340,11 @@ class ShotNewDialog extends MyDialog
         shot_to = mETto.getText().toString();
       }
 
-      if ( ( shot_from == null || shot_from.length() == 0 ) &&
-             ( shot_to == null || shot_to.length() == 0 ) ) {
-        shot_from = mETfrom.getHint().toString();
-        shot_to = mETto.getHint().toString();
-      }
+      // if ( ( shot_from == null || shot_from.length() == 0 ) &&
+      //        ( shot_to == null || shot_to.length() == 0 ) ) {
+      //   shot_from = mETfrom.getHint().toString();
+      //   shot_to = mETto.getHint().toString();
+      // }
 
       shot_to = TopoDroidUtil.noSpaces( shot_to );
       if ( shot_to.equals(".") || shot_to.equals("-") ) shot_to = "";

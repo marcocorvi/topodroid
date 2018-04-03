@@ -240,6 +240,7 @@ class DrawingDxf
   static private int printPolyline( PrintWriter pw, DrawingPointLinePath line, float scale, int handle,
                                     String layer, boolean closed, float xoff, float yoff )
   {
+    float bezier_step = TDSetting.getBezierStep();
     int close = (closed ? 1 : 0 );
     printString( pw, 0, "POLYLINE" );
     ++handle;
@@ -266,7 +267,7 @@ class DrawingDxf
         float y2 = yoff + p.y2;
 	float len = (x1-x0)*(x1-x0) + (x2-x1)*(x2-x1) + (x3-x2)*(x3-x2) + (x3-x0)*(x3-x0)
 	          + (y1-y0)*(y1-y0) + (y2-y1)*(y2-y1) + (y3-y2)*(y3-y2) + (y3-y0)*(y3-y0);
-	int np = (int)( TDMath.sqrt( len ) * TDSetting.mBezierStep / 2 + 0.5f );
+	int np = (int)( TDMath.sqrt( len ) * bezier_step + 0.5f );
 	if ( np > 1 ) {
 	  BezierCurve bc = new BezierCurve( x0, y0, x1, y1, x2, y2, x3, y3 );
 	  for ( int n=1; n < np; ++n ) {

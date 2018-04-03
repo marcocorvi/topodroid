@@ -140,10 +140,7 @@ class SketchNewShotDialog extends MyDialog
       } else {
         mETfrom.setText( mFrom );
         String to = mFrom;
-        List< DBlock > list = mData.selectAllShots( mApp.mSID, 0 );
-        do {
-            to = DistoXStationName.increment( to ); 
-        } while ( DistoXStationName.listHasName( list, to ) );
+        to = DistoXStationName.incrementName( to, mApp.getStationNames() ); 
         mETto.setText( to );
       }
     }

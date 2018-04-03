@@ -311,6 +311,7 @@ class DrawingSvg
 
   static private void toSvgPointLine( PrintWriter pw, DrawingPointLinePath lp, float xoff, float yoff, boolean closed )
   {
+    float bezier_step = TDSetting.getBezierStep();
     pw.format(" d=\"");
     LinePoint p = lp.mFirst;
     float x0 = xoff+p.x;
@@ -326,7 +327,7 @@ class DrawingSvg
         float y2 = yoff + p.y2;
 	float len = (x1-x0)*(x1-x0) + (x2-x1)*(x2-x1) + (x3-x2)*(x3-x2) + (x3-x0)*(x3-x0)
 	          + (y1-y0)*(y1-y0) + (y2-y1)*(y2-y1) + (y3-y2)*(y3-y2) + (y3-y0)*(y3-y0);
-	int np = (int)( TDMath.sqrt( len ) * TDSetting.mBezierStep / 2 + 0.5f );
+	int np = (int)( TDMath.sqrt( len ) * bezier_step + 0.5f );
 	if ( np > 1 ) {
 	  BezierCurve bc = new BezierCurve( x0, y0, x1, y1, x2, y2, x3, y3 );
 	  for ( int n=1; n < np; ++n ) {

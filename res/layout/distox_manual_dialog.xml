@@ -11,15 +11,15 @@
     android:layout_height="wrap_content"
   />
 
-   <ImageView android:id="@+id/handle"
-     android:layout_width="42dp"
-     android:layout_height="42dp"
-     android:src="@drawable/ic_mode"
-     android:layout_gravity="right"
-     android:gravity="right"
-     android:contentDescription="@string/contents"
-   />
-   <ListView android:id="@+id/content"
+  <ImageView android:id="@+id/handle"
+    android:layout_width="42dp"
+    android:layout_height="42dp"
+    android:src="@drawable/ic_mode"
+    android:layout_gravity="right"
+    android:gravity="right"
+    android:contentDescription="@string/contents"
+  />
+  <ListView android:id="@+id/content"
      android:layout_width="240dp"
      android:layout_height="wrap_content"
      android:choiceMode="singleChoice"
@@ -29,7 +29,7 @@
      android:orientation="vertical"
      android:layout_gravity="right"
      android:gravity="right"
-   />
+  />
 
 </FrameLayout>
 

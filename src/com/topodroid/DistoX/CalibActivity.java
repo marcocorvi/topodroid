@@ -62,7 +62,8 @@ public class CalibActivity extends Activity
   private static int izons[] = {
                         R.drawable.iz_save,
                         R.drawable.iz_open,
-                        R.drawable.iz_read
+                        R.drawable.iz_read,
+			R.drawable.iz_empty
                      };
 
   BitmapDrawable mBMopen;
@@ -167,8 +168,8 @@ public class CalibActivity extends Activity
 
     Resources res = getResources();
     mNrButton1 = 2 + ( TDLevel.overNormal? 1 : 0 );
-    mButton1 = new Button[ mNrButton1 ];
-    for ( int k=0; k<mNrButton1; ++k ) {
+    mButton1 = new Button[ mNrButton1 + 1 ];
+    for ( int k=0; k <= mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( this, this, izons[k] );
       if ( k == 1 )      { mBMopen = MyButton.getButtonBackground( mApp, res, izons[k] ); }
       else if ( k == 2 ) { mBMread = MyButton.getButtonBackground( mApp, res, izons[k] ); }

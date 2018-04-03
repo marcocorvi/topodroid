@@ -155,7 +155,7 @@ class SketchModel
   boolean joinSurfacesAtStation( SketchStationName st )
   {
     String name = st.mName; 
-    Log.v("DistoX", "join surfaces at station " + name );
+    Log.v("DistoX", "TODO join surfaces at station " + name );
     // for ( SketchSurface surface : mJoins ) {
     //   if ( surface.st1.equals( name ) ) { 
     //     mJoins.remove( surface );
@@ -1073,7 +1073,7 @@ class SketchModel
             }
           }
           if ( th_type == -1 ) {
-            Log.v("DistoX", "ERROR symbol not found " + vals[k] );
+            TDLog.Error("ERROR symbol not found " + vals[k] );
           }
           
             // TDLog.Log( TDLog.LOG_PLOT, "line type " + vals[1] );

@@ -627,7 +627,8 @@ class DrawingIO
                                    float dx, float dy,
                                    SymbolsPalette missingSymbols,
                                    SymbolsPalette localPalette,
-                                   RectF bbox, boolean complete )
+                                   RectF bbox,
+				   boolean complete )
   {
     int version = 0;
     boolean in_scrap = false;
@@ -740,6 +741,9 @@ class DrawingIO
             case 'A':
               path = DrawingAreaPath.loadDataStream( version, dis, dx, dy, missingSymbols );
               break;
+            case 'J':
+              path = DrawingSpecialPath.loadDataStream( version, dis, dx, dy );
+              break;
             case 'U':
               path = DrawingStationPath.loadDataStream( version, dis ); // consume DrawingStationName data
               break;
@@ -851,6 +855,9 @@ class DrawingIO
               break;
             case 'A':
               DrawingAreaPath.loadDataStream( version, dis, dx, dy, null );
+              break;
+            case 'J':
+              DrawingSpecialPath.loadDataStream( version, dis, dx, dy );
               break;
             case 'U':
               DrawingStationPath.loadDataStream( version, dis ); // consume DrawingStationName data
@@ -1308,6 +1315,10 @@ class DrawingIO
               th_str = DrawingAreaPath.loadDataStream( version, dis, 0, 0, null ).toTherion();
 	      if ( th_str != null ) out.write( th_str );
               break;
+            case 'J':
+              th_str = DrawingSpecialPath.loadDataStream( version, dis, 0, 0 ).toTherion(); // empty string anyways
+	      if ( th_str != null ) out.write( th_str );
+              break;
             case 'U':
               th_str = DrawingStationPath.loadDataStream( version, dis ).toTherion();
 	      if ( th_str != null ) out.write( th_str );
@@ -1401,20 +1412,19 @@ class DrawingIO
               }
               break;
             case 'P':
-              // ( DrawingPointPath.loadDataStream( version, dis, 0, 0, null )).toCsurvey(pw, survey, cave, branch, bind );
               paths.add( DrawingPointPath.loadDataStream( version, dis, 0, 0, null ) );
               break;
             case 'T':
-              // ( DrawingLabelPath.loadDataStream( version, dis, 0, 0 )).toCsurvey(pw, survey, cave, branch, bind );
               paths.add( DrawingLabelPath.loadDataStream( version, dis, 0, 0 ) );
               break;
             case 'L':
-              // ( DrawingLinePath.loadDataStream( version, dis, 0, 0, null )).toCsurvey(pw, survey, cave, branch, bind );
               paths.add( DrawingLinePath.loadDataStream( version, dis, 0, 0, null ) );
               break;
             case 'A':
-              // ( DrawingAreaPath.loadDataStream( version, dis, 0, 0, null )).toCsurvey(pw, survey, cave, branch, bind );
               paths.add( DrawingAreaPath.loadDataStream( version, dis, 0, 0, null ) );
+              break;
+	    case 'J':
+              paths.add( DrawingSpecialPath.loadDataStream( version, dis, 0, 0 ) );
               break;
             case 'U':
               DrawingStationPath.loadDataStream( version, dis );

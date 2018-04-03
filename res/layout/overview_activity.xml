@@ -48,17 +48,18 @@
             android:background="@drawable/ic_menu"
           />
         </LinearLayout>
-        <LinearLayout
+        <!-- LinearLayout
           xmlns:android="http://schemas.android.com/apk/res/android"
           android:layout_width="fill_parent"
           android:layout_height="wrap_content"
           android:layout_toLeftOf="@id/right"
-          >
+          -->
           <com.topodroid.DistoX.HorizontalListView android:id="@+id/listview"
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/right"
           />
-        </LinearLayout>
+        <!-- /LinearLayout -->
       </RelativeLayout>
 
       <ListView android:id="@+id/menu"

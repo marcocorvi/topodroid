@@ -262,7 +262,7 @@
        android:key="DISTOX_ACAD_VERSION"
        android:title="@string/pref_acad_version_title"
        android:summary="@string/pref_acad_version_summary"
-       android:defaultValue="13"
+       android:defaultValue="9"
        android:entries="@array/acadVersion"
        android:entryValues="@array/acadVersionValue"
        />

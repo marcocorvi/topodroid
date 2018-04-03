@@ -685,7 +685,7 @@ class DrawingSurface extends SurfaceView
     return false;
   }
 
-  // @note th21 and th22 can be null
+  // @note th21 can be null
   boolean modeloadTherion( String th21, SymbolsPalette missingSymbols )
   {
     SymbolsPalette localPalette = preparePalette();
@@ -696,9 +696,7 @@ class DrawingSurface extends SurfaceView
   // FIXME 
   // WITH VERSION 3.0 support for TH2 fallback will be dropped
   // @note tdr1 and tdr2 can be null
-  // @note th21 and th22 can be null, 
   // @note th21 is not used if tdr1 == null
-  // @note th22 is not used if tdr2 == null
   boolean modeloadDataStream( String tdr1, String th21, SymbolsPalette missingSymbols )
   {
     SymbolsPalette localPalette = preparePalette();

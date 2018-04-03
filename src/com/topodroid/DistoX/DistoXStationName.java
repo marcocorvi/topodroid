@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import java.util.List;
+import java.util.Set;
 import java.util.ArrayList;
 
 // import android.util.Log;
@@ -25,7 +26,7 @@ class DistoXStationName
   {
     if ( init == null || init.length() == 0 ) init = TDSetting.mInitStation;
     mInitialStation = init;
-    mSecondStation  = increment( init );
+    mSecondStation  = incrementName( init );
   }
 
   private static char[] lc = {
@@ -76,24 +77,32 @@ class DistoXStationName
     return ( l1 <= l2 );
   }
 
-  static String increment( String name, List<DBlock> list )
+  static String incrementName( String name, Set<String> set )
   {
     do {
-      name = increment( name ); 
+      name = incrementName( name ); 
+    } while ( set.contains( name ) );
+    return name;
+  }
+
+  static String incrementName( String name, List<DBlock> list )
+  {
+    do {
+      name = incrementName( name ); 
     } while ( listHasName( list, name ) );
     return name;
   }
 
-  static String increment( String name, ArrayList<String> sts )
+  static String incrementName( String name, ArrayList<String> sts )
   {
     do {
-      name = increment( name ); 
+      name = incrementName( name ); 
     } while ( orderContains( sts, name ) );
     return name;
   }
 
 
-  static String increment( String name )
+  static String incrementName( String name )
   {
     // if name is numeric
     // Log.v( TopoDroidApp.TAG, "incrementing " + name );
@@ -130,6 +139,7 @@ class DistoXStationName
     return "";
   }
 
+  // used by SketchNewShotDialog
   static boolean listHasName( List<DBlock> list, String name )
   {
     if ( name != null ) {

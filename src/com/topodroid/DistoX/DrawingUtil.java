@@ -28,6 +28,12 @@ class DrawingUtil
 
   // private static final PointF mCenter = new PointF( CENTER_X, CENTER_Y );
 
+  static float toSceneX( Point2D p ) { return CENTER_X + p.x * SCALE_FIX; }
+  static float toSceneY( Point2D p ) { return CENTER_Y + p.y * SCALE_FIX; }
+
+  static float sceneToWorldX( Point2D p ) { return (p.x - CENTER_X) / SCALE_FIX; }
+  static float sceneToWorldY( Point2D p ) { return (p.y - CENTER_Y) / SCALE_FIX; }
+
   float toSceneX( float x, float y ) { return x; } // CENTER_X + x * SCALE_FIX; }
   float toSceneY( float x, float y ) { return y; } // CENTER_Y + y * SCALE_FIX; }
 

@@ -34,6 +34,7 @@ import java.util.zip.ZipEntry;
 import java.util.Locale;
 
 import java.util.List;
+import java.util.Set;
 import java.util.ArrayList;
 // import java.util.Stack;
 
@@ -339,6 +340,8 @@ public class TopoDroidApp extends Application
     if ( mDData == null ) return null;
     return mDData.selectCalibInfo( mCID );
   }
+
+  Set<String> getStationNames() { return mData.selectAllStations( mSID ); }
 
   // ----------------------------------------------------------------
 
@@ -1210,8 +1213,10 @@ public class TopoDroidApp extends Application
   // this re-assign stations to shots with station(s) already set
   // the list of stations is ordered by compare
   //
-  void assignStationsAfter( DBlock blk0, List<DBlock> list, ArrayList<String> sts )
+  // @param list list of shot to assign
+  void assignStationsAfter( DBlock blk0, List<DBlock> list )
   { 
+    Set<String> sts = mData.selectAllStationsBefore( blk0.mId, mSID, TDStatus.NORMAL  );
     // Log.v("DistoX", "assign stations after " + blk0.Name() + " size " + list.size() );
     // if ( TDSetting.mSurveyStations < 0 ) return;
     if ( TDSetting.mTRobotShot ) {
@@ -1237,8 +1242,9 @@ public class TopoDroidApp extends Application
   // called also by ShotWindow::updataBlockList
   // @param list blocks whose stations need to be set in the DB
   //
-  void assignStationsAll( List<DBlock> list )
+  void assignStationsAll(  List<DBlock> list )
   { 
+    Set<String> sts = mData.selectAllStations( mSID );
     // Log.v("DistoX", "assign stations size " + list.size() );
     // if ( TDSetting.mSurveyStations < 0 ) return;
     if ( TDSetting.mTRobotShot ) {
@@ -1247,18 +1253,18 @@ public class TopoDroidApp extends Application
         TDToast.make( this, "WARNING TopoRobot policy is very experimental" );
         trobotmillis = millis;
       }
-      mStationName.assignStations_TRobot( mData, mSID, list );
+      mStationName.assignStations_TRobot( mData, mSID, list, sts );
       return;
     } 
     if ( TDSetting.mBacksightShot ) {
-      mStationName.assignStations_Backsight( mData, mSID, list );
+      mStationName.assignStations_Backsight( mData, mSID, list, sts );
       return;
     } 
     if ( TDSetting.mTripodShot ) {
-      mStationName.assignStations_Tripod( mData, mSID, list );
+      mStationName.assignStations_Tripod( mData, mSID, list, sts );
       return;
     }
-    mStationName.assignStations_Default( mData, mSID, list );
+    mStationName.assignStations_Default( mData, mSID, list, sts );
   }
 
   // ================================================================

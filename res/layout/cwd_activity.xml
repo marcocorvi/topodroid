@@ -58,16 +58,11 @@
       />
     </LinearLayout>
 
-    <!-- ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        -->
-      <ListView android:id="@+id/cwd_list"
+    <ListView android:id="@+id/cwd_list"
           style="@style/list_top"
           android:layout_width="fill_parent"
           android:layout_height="wrap_content"
           android:layout_marginTop="@dimen/marginvbig"
-      />
-    <!-- /ScrollView -->  
+    />
 
 </LinearLayout>

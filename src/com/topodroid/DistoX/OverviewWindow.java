@@ -80,6 +80,7 @@ public class OverviewWindow extends ItemDrawer
                         // R.drawable.iz_menu,          // 4
                         // R.drawable.iz_measure_on,
                         // R.drawable.iz_polyline
+			R.drawable.iz_empty
                       };
   // FIXME_OVER private static int BTN_PLOT = 2;
 
@@ -455,8 +456,8 @@ public class OverviewWindow extends ItemDrawer
       mListView = (HorizontalListView) findViewById(R.id.listview);
       /* int size = */ mApp.setListViewHeight( mListView );
 
-      mButton1 = new Button[ mNrButton1 ];
-      for ( int k=0; k<mNrButton1; ++k ) {
+      mButton1 = new Button[ mNrButton1 + 1 ];
+      for ( int k=0; k <= mNrButton1; ++k ) {
         mButton1[k] = MyButton.getButton( mActivity, this, izons[k] );
         if ( k == 0 ) {
           mBMselect = MyButton.getButtonBackground( mApp, res, izons[k] );

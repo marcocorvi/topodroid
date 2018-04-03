@@ -23,9 +23,10 @@ import android.graphics.Path;
 // import java.util.Iterator;
 // import java.util.List;
 import java.util.ArrayList;
+import java.io.PrintWriter;
 
 // used by Log.e
-// import android.util.Log;
+import android.util.Log;
 
 /**
  */
@@ -574,5 +575,42 @@ class DrawingPointLinePath extends DrawingPath
   //   //   canvas.drawPath( path1, BrushManager.highlightPaint );
   //   // }
   // }
+
+  protected void toTherionPoints( PrintWriter pw, boolean close )
+  {
+    // for ( LinePoint pt : mPoints ) 
+    LinePoint pt = mFirst; 
+    pt.toTherion( pw );
+    float x0 = DrawingUtil.sceneToWorldX( pt );
+    float y0 = DrawingUtil.sceneToWorldY( pt );
+    float delta = 0;
+    // Log.v("DistoX", "X " + x0 + " Y " + y0 );
+    // if ( mLineType == BrushManager.mLineLib.mLineSectionIndex && size() > 2 ) pt = pt.mNext; // skip first point (tick)
+    for ( pt = pt.mNext; pt != null; pt = pt.mNext ) {
+      float x3 = DrawingUtil.sceneToWorldX( pt );
+      float y3 = DrawingUtil.sceneToWorldY( pt );
+      if ( pt.has_cp ) { 
+        pt.toTherion( pw );
+	delta = 0;
+        // Log.v("DistoX", "X " + x3 + " Y " + y3 + " with CP " );
+      } else {
+	delta += TDMath.sqrt( (x3-x0)*(x3-x0) + (y3-y0)*(y3-y0) );
+        // Log.v("DistoX", "X " + x3 + " Y " + y3 + " Delta " + delta );
+	if ( delta > TDSetting.mBezierStep ) {
+          pt.toTherion( pw );
+	  delta = 0;
+	}
+      }
+      x0 = x3;
+      y0 = y3;
+    }
+    if ( close ) { // insert start point again if closed
+      float dx = mLast.x - mFirst.x;
+      float dy = mLast.y - mFirst.y;
+      if ( dx*dx + dy*dy > 1.0e-7 ) {
+        mFirst.toTherion( pw );
+      }
+    }
+  }
 }
 

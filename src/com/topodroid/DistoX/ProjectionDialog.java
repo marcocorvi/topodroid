@@ -56,7 +56,7 @@ import java.util.Locale;
 // import java.util.concurrent.RejectedExecutionException;
 // import java.util.Deque; // only API-9
 
-import android.util.Log;
+// import android.util.Log;
 
 /**
  */
@@ -126,7 +126,7 @@ class ProjectionDialog extends MyDialog
   private void updateEditText()
   { 
     mETazimuth.setText( String.format(Locale.US, "%d", mAzimuth ) );
-    Log.v("DistoX", "set azimuth " + mAzimuth );
+    // Log.v("DistoX", "set azimuth " + mAzimuth );
   }
 
   // -------------------------------------------------------------------

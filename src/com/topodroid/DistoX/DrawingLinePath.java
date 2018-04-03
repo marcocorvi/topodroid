@@ -252,6 +252,7 @@ class DrawingLinePath extends DrawingPointLinePath
   @Override
   public void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil )
   {
+    float bezier_step = TDSetting.getBezierStep();
     int layer  = BrushManager.getLineCsxLayer( mLineType );
     int type   = BrushManager.getLineCsxType( mLineType );
     int cat    = BrushManager.getLineCsxCategory( mLineType );
@@ -288,7 +289,7 @@ class DrawingLinePath extends DrawingPointLinePath
           y2 = mDrawingUtil.sceneToWorldY( pt.x2, pt.y2 );
 	  float len = (x1-x0)*(x1-x0) + (x2-x1)*(x2-x1) + (x3-x2)*(x3-x2) + (x3-x0)*(x3-x0)
 	            + (y1-y0)*(y1-y0) + (y2-y1)*(y2-y1) + (y3-y2)*(y3-y2) + (y3-y0)*(y3-y0);
-	  int np = (int)( TDMath.sqrt( len ) * TDSetting.mBezierStep / 2 + 0.5f );
+	  int np = (int)( TDMath.sqrt( len ) * bezier_step + 0.5f );
 	  if ( np > 1 ) {
 	    BezierCurve bc = new BezierCurve( x0, y0, x1, y1, x2, y2, x3, y3 );
 	    for ( int n=1; n < np; ++n ) {
@@ -322,7 +323,7 @@ class DrawingLinePath extends DrawingPointLinePath
           y2 = mDrawingUtil.sceneToWorldY( pt.x1, pt.y1 );
 	  float len = (x1-x0)*(x1-x0) + (x2-x1)*(x2-x1) + (x3-x2)*(x3-x2) + (x3-x0)*(x3-x0)
 	            + (y1-y0)*(y1-y0) + (y2-y1)*(y2-y1) + (y3-y2)*(y3-y2) + (y3-y0)*(y3-y0);
-	  int np = (int)( TDMath.sqrt( len ) * TDSetting.mBezierStep / 2 + 0.5f );
+	  int np = (int)( TDMath.sqrt( len ) * bezier_step + 0.5f );
 	  if ( np > 1 ) {
 	    BezierCurve bc = new BezierCurve( x0, y0, x1, y1, x2, y2, x3, y3 );
 	    for ( int n=1; n < np; ++n ) {
@@ -374,15 +375,17 @@ class DrawingLinePath extends DrawingPointLinePath
     }
     pw.format("\n");
 
-    // for ( LinePoint pt : mPoints ) 
-    LinePoint pt = mFirst; 
-    // if ( mLineType == BrushManager.mLineLib.mLineSectionIndex && size() > 2 ) pt = pt.mNext; // skip first point (tick)
-    for ( ; pt != null; pt = pt.mNext ) {
-      pt.toTherion( pw );
-    }
-    // if ( isClosed() ) { // insert start point again if closed
-    //   mFirst.toTherion( pw );
+    // // for ( LinePoint pt : mPoints ) 
+    // LinePoint pt = mFirst; 
+    // // if ( mLineType == BrushManager.mLineLib.mLineSectionIndex && size() > 2 ) pt = pt.mNext; // skip first point (tick)
+    // for ( ; pt != null; pt = pt.mNext ) {
+    //   pt.toTherion( pw );
     // }
+    // // if ( isClosed() ) { // insert start point again if closed
+    // //   mFirst.toTherion( pw );
+    // // }
+    toTherionPoints( pw, isClosed() );
+
     if ( mLineType == BrushManager.mLineLib.mLineSlopeIndex ) {
       pw.format("  l-size 40\n");
     }

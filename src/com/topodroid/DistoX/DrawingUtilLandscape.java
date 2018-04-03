@@ -8,6 +8,8 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
+ *
+ *  @note this class is not used
  */
 package com.topodroid.DistoX;
 

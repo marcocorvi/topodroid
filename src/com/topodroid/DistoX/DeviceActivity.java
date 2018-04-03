@@ -86,7 +86,8 @@ public class DeviceActivity extends Activity
                         R.drawable.iz_compute,
                         R.drawable.iz_info,
                         R.drawable.iz_read,
-                        R.drawable.iz_sdcard
+                        R.drawable.iz_sdcard,
+			R.drawable.iz_empty
                      };
 
   BitmapDrawable mBMtoggle;
@@ -231,7 +232,7 @@ public class DeviceActivity extends Activity
     mNrButton1 = 3;
     if ( TDLevel.overNormal ) mNrButton1 += 2; // CALIB-READ INFO
     if ( TDLevel.overAdvanced ) mNrButton1 += 1; // MEMORY
-    mButton1 = new Button[ mNrButton1 ];
+    mButton1 = new Button[ mNrButton1 + 1 ];
 
     // int k=0; 
     // mButton1[k++] = MyButton.getButton( this, this, izons[0] );
@@ -240,7 +241,7 @@ public class DeviceActivity extends Activity
     // if ( TDLevel.overNormal   ) mButton1[k++] = MyButton.getButton( this, this, izons[3] ); // INFO
     // if ( TDLevel.overNormal   ) mButton1[k++] = MyButton.getButton( this, this, izons[4] ); // CALIB_READ
     // if ( TDLevel.overAdvanced ) mButton1[k++] = MyButton.getButton( this, this, izons[5] ); // MEMORY
-    for ( int k=0; k<mNrButton1; ++k ) {
+    for ( int k=0; k <= mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( this, this, izons[k] );
     }
 

@@ -20,6 +20,7 @@ import java.io.File;
 // import java.io.FileReader;
 // import java.io.FileWriter;
 import java.util.List;
+import java.util.Set;
 import java.util.ArrayList;
 // import java.util.Stack;
 import java.util.Locale;
@@ -118,7 +119,8 @@ public class ShotWindow extends Activity
                         R.drawable.iz_plus,
                         R.drawable.iz_station,
                         R.drawable.iz_dial,
-                        R.drawable.iz_search
+                        R.drawable.iz_search,
+			R.drawable.iz_empty
                       };
 
   private static int izonsno[] = {
@@ -138,7 +140,8 @@ public class ShotWindow extends Activity
                         R.drawable.iz_highlight,
                         R.drawable.iz_bedding,
                         R.drawable.iz_delete,
-                        R.drawable.iz_cancel
+                        R.drawable.iz_cancel,
+			R.drawable.iz_empty
                       };
 
   private static int menus[] = {
@@ -196,6 +199,33 @@ public class ShotWindow extends Activity
   private Button[] mButton1;
   private int mNrButton1 = 0;
 
+  private ListView mList;
+  // private int mListPos = -1;
+  // private int mListTop = 0;
+  private DBlockAdapter mDataAdapter;
+  // private ArrayAdapter< String > mDataAdapter;
+  private ArrayList< String > mShowSplay;
+
+
+  // private long mLastExtend; // id of the last-extend-ed splay 
+
+  // private static final String LIST_STATE = "listState";
+  // private int mFirstPos = -1;  
+  // private int mScroll   = 0;
+  // private int mSavePos  = -1;  // shot entry position
+  private int mShotPos  = -1;  // shot entry position
+  private int mPrevPos  = 0;   // prev shot entry position
+  private int mNextPos  = 0;   // next shot entry position
+  // private TextView mSaveTextView = null;
+
+  static long    mSensorId;
+  static long    mPhotoId;
+  static String  mComment;
+  static long    mShotId;   // photo/sensor shot id
+  boolean mOnOpenDialog = false;
+
+  // ConnHandler mHandler;
+
   // private RelativeLayout mFooter = null;
   private Button[] mButtonF;
   private int mNrButtonF = 7;
@@ -234,36 +264,11 @@ public class ShotWindow extends Activity
     } 
   }
 
-  long secondLastShotId() { return TopoDroidApp.mSecondLastShotId; }
-
-  private ListView mList;
-  // private int mListPos = -1;
-  // private int mListTop = 0;
-  private DBlockAdapter mDataAdapter;
-  // private ArrayAdapter< String > mDataAdapter;
-  private ArrayList< String > mShowSplay;
-
-
-  // private long mLastExtend; // id of the last-extend-ed splay 
-
-  // private static final String LIST_STATE = "listState";
-  // private int mFirstPos = -1;  
-  // private int mScroll   = 0;
-  // private int mSavePos  = -1;  // shot entry position
-  private int mShotPos  = -1;  // shot entry position
-  private int mPrevPos  = 0;   // prev shot entry position
-  private int mNextPos  = 0;   // next shot entry position
-  // private TextView mSaveTextView = null;
-
-  static long    mSensorId;
-  static long    mPhotoId;
-  static String  mComment;
-  static long    mShotId;   // photo/sensor shot id
-  boolean mOnOpenDialog = false;
-
-  // ConnHandler mHandler;
-
   TopoDroidApp getApp() { return mApp; }
+
+  Set<String> getStationNames() { return mApp_mData.selectAllStations( mApp.mSID ); }
+
+  long secondLastShotId() { return TopoDroidApp.mSecondLastShotId; }
 
   // -------------------------------------------------------------------
   // FXIME ok only for numbers
@@ -896,8 +901,8 @@ public class ShotWindow extends Activity
     mNrButton1 = TDLevel.overExpert ? 9
                : TDLevel.overNormal ? 8
                : TDLevel.overBasic ?  6 : 5;
-    mButton1 = new Button[ mNrButton1 ];
-    for ( int k=0; k<mNrButton1; ++k ) {
+    mButton1 = new Button[ mNrButton1 + 1 ];
+    for ( int k=0; k <= mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( this, this, izons[k] );
       if ( k == BTN_DOWNLOAD )  { mBMdownload = MyButton.getButtonBackground( mApp, res, izons[k] ); }
       else if ( k == BTN_BLUETOOTH ) { mBMbluetooth = MyButton.getButtonBackground( mApp, res, izons[k] ); }
@@ -924,8 +929,8 @@ public class ShotWindow extends Activity
       }
     }
 
-    mButtonF = new Button[ mNrButtonF ];
-    for ( int k=0; k<mNrButtonF; ++k ) {
+    mButtonF = new Button[ mNrButtonF + 1 ];
+    for ( int k=0; k <= mNrButtonF; ++k ) {
       mButtonF[k] = MyButton.getButton( this, this, izonsF[k] );
     }
 
@@ -1885,8 +1890,8 @@ public class ShotWindow extends Activity
     // } else {
       shots = mApp_mData.selectAllShotsAfter( blk.mId, mApp.mSID, TDStatus.NORMAL );
     // }
-    ArrayList<String> stations = mApp_mData.selectAllStationsBefore( blk.mId, mApp.mSID, TDStatus.NORMAL );
-    mApp.assignStationsAfter( blk, shots, stations );
+    // Set<String> stations = mApp_mData.selectAllStationsBefore( blk.mId, mApp.mSID, TDStatus.NORMAL );
+    mApp.assignStationsAfter( blk, shots /*, stations */ );
 
     // DEBUG re-assign all the stations
     // List< DBlock > shots = mApp_mData.selectAllShots( mApp.mSID, TDStatus.NORMAL );

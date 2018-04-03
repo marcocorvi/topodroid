@@ -256,10 +256,12 @@ class TDSetting
 
   static float mBitmapScale = 1.5f;
   static float mBezierStep  = 0.2f;
+  static float getBezierStep() { return ( mBezierStep < 0.1f )? 0.05f : (mBezierStep/2); }
+ 
   static float mDxfScale    = 1.0f;
   static int mBitmapBgcolor = 0x000000;
 
-  static int mAcadVersion = 13;      // AutoCAD version 9, or 13
+  static int mAcadVersion = 9;      // AutoCAD version 9, or 13
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // LOCATION
@@ -846,7 +848,7 @@ class TDSetting
     mSideDrag = prefs.getBoolean( key[k++], false );          // DISTOX_SIDE_DRAG
 
     mDxfScale    = tryFloat( prefs, key[k++], "1.0" );        // DISTOX_DXF_SCALE
-    mAcadVersion = tryInt(   prefs, key[k++], "13" );         // DISTOX_ACAD_VERSION choice: 9, 13
+    mAcadVersion = tryInt(   prefs, key[k++], "9" );         // DISTOX_ACAD_VERSION choice: 9, 13
 
     setBitmapBgcolor( prefs.getString( key[k++], "0 0 0" ) ); // DISTOX_BITMAP_BGCOLOR
 
@@ -1222,7 +1224,7 @@ class TDSetting
       mDxfScale = tryFloat( prefs, k, "1" );   // DISTOX_DXF_SCALE
     } else if ( k.equals( key[ nk++ ] ) ) {
       try {
-        mAcadVersion = Integer.parseInt( prefs.getString( k, "13") ); // DISTOX_ACAD_VERSION
+        mAcadVersion = Integer.parseInt( prefs.getString( k, "9") ); // DISTOX_ACAD_VERSION
       } catch ( NumberFormatException e) { }
     } else if ( k.equals( key[ nk++ ] ) ) {
       setBitmapBgcolor( prefs.getString( k, "0 0 0" ) ); // DISTOX_BITMAP_BGCOLOR
@@ -1514,7 +1516,7 @@ class TDSetting
     //B if ( name.equals( "DISTOX_AUTO_RECONNECT" )
     //B if ( name.equals( "DISTOX_HEAD_TAIL" )
     if ( name.equals( "DISTOX_BITMAP_SCALE"     ) ) return parseFloatValue( value, mBitmapScale,    0.5f, 10f );
-    if ( name.equals( "DISTOX_BEZIER_STEP"      ) ) return parseFloatValue( value, mBezierStep,     0.1f,  2f );
+    if ( name.equals( "DISTOX_BEZIER_STEP"      ) ) return parseFloatValue( value, mBezierStep,     0f,   2f ); // N.B. 0 = disable Bezier Step
     if ( name.equals( "DISTOX_THUMBNAIL"        ) ) return parseIntValue(   value, mThumbSize,      80,   400 );
     if ( name.equals( "DISTOX_DOT_RADIUS"       ) ) return parseFloatValue( value, mDotRadius,      1,    100 );
     if ( name.equals( "DISTOX_FIXED_THICKNESS"  ) ) return parseFloatValue( value, mFixedThickness, 1,    10 );

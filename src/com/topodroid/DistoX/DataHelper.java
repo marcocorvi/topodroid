@@ -38,6 +38,8 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.Locale;
 import java.util.HashMap;
 
@@ -2428,10 +2430,10 @@ class DataHelper extends DataSetObservable
      return list;
    }
 
-   ArrayList<String> selectAllStationsBefore( long id, long sid, long status )
+   Set<String> selectAllStationsBefore( long id, long sid, long status )
    {
-     ArrayList< String > list = new ArrayList<>();
-     if ( myDB == null ) return list;
+     Set< String > set = new TreeSet<String>();
+     if ( myDB == null ) return set;
      Cursor cursor = myDB.query(SHOT_TABLE, new String[] { "fStation", "tStation" },
                      "id<=? and surveyId=? and status=?",
                      new String[] { Long.toString(id), Long.toString(sid), Long.toString(status) },
@@ -2439,14 +2441,14 @@ class DataHelper extends DataSetObservable
      if (cursor.moveToFirst()) {
        do {
          String f = cursor.getString( 0 );
-         if ( f.length() > 0 ) DistoXStationName.orderInsert( list, f );
+         if ( f.length() > 0 ) set.add( f );
          String t = cursor.getString( 1 );
-         if ( t.length() > 0 ) DistoXStationName.orderInsert( list, t );
+         if ( t.length() > 0 ) set.add( t );
        } while (cursor.moveToNext());
      }
      // TDLog.Log( TDLog.LOG_DB, "select All Shots after " + id + " list size " + list.size() );
      if (cursor != null && !cursor.isClosed()) cursor.close();
-     return list;
+     return set;
    }
 
    List<DBlock> selectAllShotsAfter( long id, long sid, long status )
@@ -2467,6 +2469,24 @@ class DataHelper extends DataSetObservable
      // TDLog.Log( TDLog.LOG_DB, "select All Shots after " + id + " list size " + list.size() );
      if (cursor != null && !cursor.isClosed()) cursor.close();
      return list;
+   }
+
+   Set<String> selectAllStations( long sid )
+   {
+     Set<String> set = new TreeSet<String>();
+     if ( myDB == null ) return set;
+     Cursor cursor = myDB.query(SHOT_TABLE, new String[] { "fStation", "tStation" },
+                     WHERE_SID, new String[]{ Long.toString(sid) },
+                     null, null, null );
+     if (cursor.moveToFirst()) {
+       do {
+         String f = cursor.getString( 0 );
+         if ( f.length() > 0 ) set.add( f );
+         String t = cursor.getString( 1 );
+         if ( t.length() > 0 ) set.add( t );
+       } while (cursor.moveToNext());
+     }
+     return set;
    }
 
    List<DBlock> selectAllShots( long sid, long status )

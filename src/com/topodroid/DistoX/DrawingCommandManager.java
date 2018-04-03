@@ -366,6 +366,7 @@ class DrawingCommandManager
     // mMatrix = new Matrix(); // identity
   }
 
+  // first and second references are used only by the OverviewWindow
   void setFirstReference( DrawingPath path ) { synchronized( mGridStack1 ) { mFirstReference = path; } }
 
   void setSecondReference( DrawingPath path ) { synchronized( mGridStack1 ) { mSecondReference = path; } }
@@ -1096,8 +1097,10 @@ class DrawingCommandManager
     synchronized( mCurrentStack ) {
       mCurrentStack.add( path );
     }
-    synchronized( TDPath.mSelectionLock ) {
-      mSelection.insertPath( path );
+    if ( path.mType != DrawingPath.DRAWING_PATH_NORTH ) {
+      synchronized( TDPath.mSelectionLock ) {
+        mSelection.insertPath( path );
+      }
     }
     
     // checkLines();
@@ -1640,7 +1643,7 @@ class DrawingCommandManager
 
       }
       synchronized( TDPath.mSelectedLock ) {
-        if ( mSelected.mPoints.size() > 0 ) { // FIXME SELECTIOM
+        if ( mSelected.mPoints.size() > 0 ) { // FIXME SELECTION
           float radius = 4*TDSetting.mDotRadius/zoom;
           Path path;
           SelectionPoint sp = mSelected.mHotItem;

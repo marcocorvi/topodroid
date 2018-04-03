@@ -230,18 +230,20 @@ class DrawingAreaPath extends DrawingPointLinePath
     // for ( LinePoint pt : mPoints ) 
     pw.format("\n");
 
-    for ( LinePoint pt = mFirst; pt != null; pt = pt.mNext ) 
-    {
-      pt.toTherion( pw );
-    }
-    // if ( TDSetting.xTherionAreas ) // NOTE xtherion needs an extra point 
-    {
-      float dx = mLast.x - mFirst.x;
-      float dy = mLast.y - mFirst.y;
-      if ( dx*dx + dy*dy > 1.0e-7 ) {
-        mFirst.toTherion( pw );
-      }
-    }
+    // for ( LinePoint pt = mFirst; pt != null; pt = pt.mNext ) 
+    // {
+    //   pt.toTherion( pw );
+    // }
+    // // if ( TDSetting.xTherionAreas ) // NOTE xtherion needs an extra point 
+    // {
+    //   float dx = mLast.x - mFirst.x;
+    //   float dy = mLast.y - mFirst.y;
+    //   if ( dx*dx + dy*dy > 1.0e-7 ) {
+    //     mFirst.toTherion( pw );
+    //   }
+    // }
+    toTherionPoints( pw, true );
+
     pw.format("endline\n");
     pw.format("area %s", BrushManager.mAreaLib.getSymbolThName( mAreaType ) );
     if ( BrushManager.mAreaLib.isSymbolOrientable( mAreaType ) ) {

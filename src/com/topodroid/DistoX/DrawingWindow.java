@@ -66,6 +66,7 @@ import java.io.PrintWriter;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.util.List;
+import java.util.Set;
 import java.util.ArrayList;
 
 import java.util.concurrent.RejectedExecutionException;
@@ -497,6 +498,8 @@ public class DrawingWindow extends ItemDrawer
   boolean onMenu;
 
   private int mNrSaveTh2Task = 0;
+
+  Set<String> getStationNames() { return mApp_mData.selectAllStations( mApp.mSID ); }
 
   // ----------------------------------------------------------
   // PLOT NAME(S)
@@ -1491,7 +1494,7 @@ public class DrawingWindow extends ItemDrawer
   {
     Resources res = getResources();
     if ( ! TDLevel.overNormal ) -- mNrButton1;
-    mButton1 = new Button[ mNrButton1 ]; // MOVE
+    mButton1 = new Button[ mNrButton1 + 1 ]; // MOVE
     int off = 0;
     int ic = 0;
     for ( int k=0; k<mNrButton1; ++k ) {
@@ -1501,6 +1504,7 @@ public class DrawingWindow extends ItemDrawer
       else if ( ic == IC_BLUETOOTH ) { mBMbluetooth = MyButton.getButtonBackground( mApp, res, izons[ic] ); }
       else if ( ic == IC_PLAN ) { mBMplan     = MyButton.getButtonBackground( mApp, res, izons[ic] ); }
     }
+    mButton1[ mNrButton1 ] = MyButton.getButton( mActivity,this, R.drawable.iz_empty );
     // mBMdial          = BitmapFactory.decodeResource( res, R.drawable.iz_dial_transp ); // FIXME AZIMUTH_DIAL
     mDialBitmap      = TopoDroidApp.getDialBitmap( res );
 
@@ -1517,13 +1521,14 @@ public class DrawingWindow extends ItemDrawer
     mBMsplayBoth     = MyButton.getButtonBackground( mApp, res, R.drawable.iz_splay_both );
 
     if ( ! TDLevel.overNormal ) -- mNrButton2;
-    mButton2 = new Button[ mNrButton2 ]; // DRAW
+    mButton2 = new Button[ mNrButton2 + 1 ]; // DRAW
     off = (NR_BUTTON1 - 3); 
     for ( int k=0; k<mNrButton2; ++k ) {
       ic = ( k < 3 )? k : off+k;
       mButton2[k] = MyButton.getButton( mActivity, this, ((k==0)? izons_ok[ic] : izons[ic]) );
       if ( ic == IC_CONT_NONE ) mBMcont_none = MyButton.getButtonBackground( mApp, res, ((k==0)? izons_ok[ic] : izons[ic]));
     }
+    mButton2[ mNrButton2 ] = mButton1[ mNrButton1 ];
     mBMcont_continue  = MyButton.getButtonBackground( mApp, res, izons[IC_CONT_CONTINUE] );
     mBMcont_start = MyButton.getButtonBackground( mApp, res, izons[IC_CONT_START] );
     mBMcont_end   = MyButton.getButtonBackground( mApp, res, izons[IC_CONT_END] );
@@ -1533,7 +1538,7 @@ public class DrawingWindow extends ItemDrawer
     mBMdelete_on  = MyButton.getButtonBackground( mApp, res, izons[IC_DELETE_ON] );
 
     if ( ! TDLevel.overExpert ) -- mNrButton3;
-    mButton3 = new Button[ mNrButton3 ];      // EDIT
+    mButton3 = new Button[ mNrButton3 + 1 ];      // EDIT
     off = (NR_BUTTON1 - 3) + (NR_BUTTON2 - 3); 
     for ( int k=0; k<mNrButton3; ++k ) {
       ic = ( k < 3 )? k : off+k;
@@ -1550,16 +1555,18 @@ public class DrawingWindow extends ItemDrawer
       mBMedit_ok = MyButton.getButtonBackground( mApp, res, izons[IC_BORDER_OK] ); 
       mBMedit_no = MyButton.getButtonBackground( mApp, res, izons[IC_BORDER_NO] );
     }
+    mButton3[ mNrButton3 ] = mButton1[ mNrButton1 ];
     mBMjoin_no = MyButton.getButtonBackground( mApp, res, izons[IC_JOIN_NO] );
     mBMadd     = MyButton.getButtonBackground( mApp, res, izons[IC_ADD] );
 
 
-    mButton5 = new Button[ mNrButton5 ];    // ERASE
+    mButton5 = new Button[ mNrButton5 + 1 ];    // ERASE
     off = 9 - 3; // (mNrButton1-3) + (mNrButton2-3) + (mNrButton3-3);
     for ( int k=0; k<mNrButton5; ++k ) {
       ic = ( k < 3 )? k : off+k;
       mButton5[k] = MyButton.getButton( mActivity, this, ((k==1)? izons_ok[ic] : izons[ic] ) );
     }
+    mButton5[ mNrButton5 ] = mButton1[ mNrButton1 ];
     mBMeraseAll   = MyButton.getButtonBackground( mApp, res, izons[IC_ERASE_ALL] );
     mBMerasePoint = MyButton.getButtonBackground( mApp, res, izons[IC_ERASE_POINT] );
     mBMeraseLine  = MyButton.getButtonBackground( mApp, res, izons[IC_ERASE_LINE] );
@@ -1920,6 +1927,12 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.setSelectMode( mSelectMode );
   }
 
+  private void makeXSectionLegPoint( float x, float y )
+  {
+    DrawingSpecialPath path = new DrawingSpecialPath( mDrawingUtil.toSceneX(x,y), mDrawingUtil.toSceneY(x,y) );
+    mDrawingSurface.addDrawingPath( path );
+  }
+
   private void makeSectionReferences( List<DBlock> list, float tt )
   {
     // Log.v("DistoX", "Section " + mClino + " " + mAzimuth );
@@ -2000,15 +2013,17 @@ public class DrawingWindow extends ItemDrawer
         addFixedLine( mType, blk, xfrom, yfrom, xto, yto, blk.getReducedExtend(), false, false ); // not-splay, not-selecteable
         mDrawingSurface.addDrawingStationName( mFrom, mDrawingUtil.toSceneX(xfrom, yfrom), mDrawingUtil.toSceneY(xfrom, yfrom) );
         mDrawingSurface.addDrawingStationName( mTo, mDrawingUtil.toSceneX(xto, yto), mDrawingUtil.toSceneY(xto, yto) );
-        if ( tt >= 0 ) {
+        if ( tt >= 0 && tt <= 1 ) {
           float xtt = xfrom + tt * ( xto - xfrom );
           float ytt = yfrom + tt * ( yto - yfrom );
 	  if ( mLandscape ) { float t=xtt; xtt=-ytt; ytt=t; }
           // Log.v("DistoX", "TT " + tt + " " + xtt + " " + xfrom + " " + xto );
           // point index 0 = user
-          DrawingPath point = new DrawingPointPath( 0, mDrawingUtil.toSceneX(xtt, ytt), mDrawingUtil.toSceneY(xtt, ytt),
-      		                              DrawingPointPath.SCALE_XS, null, null ); // no text, no options
-          mDrawingSurface.addDrawingPath( point );
+          // DrawingPath point = new DrawingPointPath( 0, mDrawingUtil.toSceneX(xtt, ytt), mDrawingUtil.toSceneY(xtt, ytt),
+      	  //                                     DrawingPointPath.SCALE_XS, null, null ); // no text, no options
+          // mDrawingSurface.addDrawingPath( point );
+
+	  makeXSectionLegPoint( xtt, ytt );
         }
       }
     } else { // if ( PlotInfo.isXSection( mType ) ) 
