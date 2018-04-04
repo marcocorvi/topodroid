@@ -43,6 +43,13 @@
        />
 
   <CheckBoxPreference
+       android:key="DISTOX_NO_CURSOR"
+       android:summary="@string/pref_no_cursor_summary"
+       android:title="@string/pref_no_cursor_title"
+       android:defaultValue="false"
+       />
+
+  <CheckBoxPreference
        android:key="DISTOX_LOCAL_HELP"
        android:summary="@string/pref_local_help_summary"
        android:title="@string/pref_local_help_title"

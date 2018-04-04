@@ -6,6 +6,8 @@
  * @date nov 2013
  *
  * @brief TopoDroid button bar buttons view
+ * @note  the adapter needs an extra empty button (to make room for the menu button
+ *        at the right) because the right border is the left of the last button
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -48,11 +50,18 @@ public class HorizontalListView extends AdapterView<ListAdapter>
 
   private boolean mDataChanged = false;               // whether data have changed
   private Runnable mRunnable = null;
+  private boolean  mEmptyPlaceholder = false;
 
-  public HorizontalListView(Context context, AttributeSet attrs)
+  public HorizontalListView(Context context, AttributeSet attrs )
   {
     super(context, attrs);
+    mEmptyPlaceholder = false;
     initView();
+  }
+
+  void setEmptyPlacholder( boolean empty_placehoder )
+  {
+    mEmptyPlaceholder = empty_placehoder;
   }
 
   private synchronized void initView() 
@@ -64,7 +73,7 @@ public class HorizontalListView extends AdapterView<ListAdapter>
     mNextX = 0;
     mMaxX = Integer.MAX_VALUE;
     mScroller = new Scroller(getContext());
-    mGesture = new GestureDetector(getContext(), mOnGesture);
+    mGesture  = new GestureDetector(getContext(), mOnGesture);
     mRunnable = new Runnable() {
         @Override
         public void run() {
@@ -214,7 +223,11 @@ public class HorizontalListView extends AdapterView<ListAdapter>
     int edge = 0;
     View child = getChildAt(getChildCount()-1);
     if ( child != null ) {
-      edge = child.getRight();
+      if ( mEmptyPlaceholder ) {
+        edge = child.getLeft(); // FIXME this requires an extra "empty" button on the list
+      } else {
+        edge = child.getRight();
+      }
     }
     fillListRight(edge, dx);
      

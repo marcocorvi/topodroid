@@ -852,6 +852,8 @@
   <!-- UNUSED string name="pref_bootloader_summary">Enable bootloader</string -->
   <string name="pref_mkeyboard_title">Billentyűzet</string>
   <string name="pref_mkeyboard_summary">Engedélyezze az egyedi billentyűzeteket</string>
+  <!-- TODO string name="pref_no_cursor_title">No keyboard cursor</string -->
+  <!-- TODO string name="pref_no_cursor_summary">Disable custom-keyboard cursor</string -->
   <!-- TODO string name="pref_local_help_title">Translated manual</string -->
   <!-- TODO string name="pref_local_help_summary">Enable translated manual</string -->
   <string name="pref_cosurvey_title">Együttes felmérés</string>

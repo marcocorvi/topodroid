@@ -853,6 +853,8 @@
   <!-- UNUSED string name="pref_bootloader_summary">Ativar bootloader</string -->
   <string name="pref_mkeyboard_title">Teclado</string>
   <string name="pref_mkeyboard_summary">Habilitar teclados customizados</string>
+  <!-- TODO string name="pref_no_cursor_title">No keyboard cursor</string -->
+  <!-- TODO string name="pref_no_cursor_summary">Disable custom-keyboard cursor</string -->
   <string name="pref_local_help_title">Manual traduzido</string>
   <string name="pref_local_help_summary">Habilitar manual traduzido</string>
   <string name="pref_cosurvey_title">Topo colaborativa</string>

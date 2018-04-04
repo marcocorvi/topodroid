@@ -858,6 +858,8 @@
   <!-- UNUSED string name="pref_bootloader_summary">Bootloader abilitiato</string -->
   <string name="pref_mkeyboard_title">Tastiera</string>
   <string name="pref_mkeyboard_summary">Abilita/Disabilita tastiere personalizzate</string>
+  <!-- TODO string name="pref_no_cursor_title">No keyboard cursor</string -->
+  <!-- TODO string name="pref_no_cursor_summary">Disable custom-keyboard cursor</string -->
   <string name="pref_local_help_title">Manuale tradotto</string>
   <string name="pref_local_help_summary">Abilita manuale tradotto</string>
   <!-- OK string name="pref_cosurvey_title">Co-surveying</string -->

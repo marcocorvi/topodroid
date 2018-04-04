@@ -821,6 +821,7 @@ public class SketchWindow extends ItemDrawer
     // selectBtn.setOnClickListener( this );
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
+    mListView.setEmptyPlacholder( true );
     /* int size = */ mApp.setListViewHeight( mListView );
 
     Resources res = getResources();

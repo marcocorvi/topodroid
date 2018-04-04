@@ -231,6 +231,7 @@ public class SurveyWindow extends Activity
     // mPhoto = new ArrayList<>();
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
+    mListView.setEmptyPlacholder( true );
     /* int size = */ mApp.setListViewHeight( mListView );
 
     Resources res = getResources();

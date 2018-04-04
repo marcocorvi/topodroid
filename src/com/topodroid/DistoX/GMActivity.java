@@ -694,6 +694,7 @@ public class GMActivity extends Activity
 
     // mHandler = new ConnHandler( mApp, this );
     mListView = (HorizontalListView) findViewById(R.id.listview);
+    mListView.setEmptyPlacholder(true);
     /* int size = */ mApp.setListViewHeight( mListView );
 
     mNrButton1 = 5;

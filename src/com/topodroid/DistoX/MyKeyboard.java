@@ -270,7 +270,7 @@ class MyKeyboard // FIXME DIALOG extends Dialog
 
   static private void setCursor( EditText e )
   {
-    if ( e == null ) return;
+    if ( e == null || TDSetting.mNoCursor ) return;
     Editable cs = e.getText();
     int len = cs.length();
     if ( len == 0 || cs.charAt(len-1) != CHAR_CURSOR ) {
@@ -282,7 +282,7 @@ class MyKeyboard // FIXME DIALOG extends Dialog
 
   static private void clearCursor( EditText e )
   {
-    if ( e == null ) return;
+    if ( e == null || TDSetting.mNoCursor ) return;
     Editable cs = e.getText();
     int len = cs.length();
     if ( len > 0 && cs.charAt(len-1) == CHAR_CURSOR ) {

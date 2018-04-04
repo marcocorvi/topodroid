@@ -880,6 +880,8 @@
   <!-- UNUSED string name="pref_bootloader_summary">Die Bootloader ermöglichen</string -->
   <string name="pref_mkeyboard_title">Tastatur</string>
   <string name="pref_mkeyboard_summary">Verwendet vereinfachte Tastatur</string>
+  <!-- TODO string name="pref_no_cursor_title">No keyboard cursor</string -->
+  <!-- TODO string name="pref_no_cursor_summary">Disable custom-keyboard cursor</string -->
   <string name="pref_local_help_title">Übersetztes Handbuch</string>
   <string name="pref_local_help_summary">Lokale Übersetzung verwenden (falls vorhanden)</string>
   <string name="pref_cosurvey_title">Co-Vermessung</string>

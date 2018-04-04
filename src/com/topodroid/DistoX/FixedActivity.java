@@ -128,6 +128,7 @@ public class FixedActivity extends Activity
     setTitle( R.string.title_fixed );
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
+    // mListView.setEmptyPlacholder(true);
     /* int size = */ mApp.setListViewHeight( mListView );
     mNrButton1 = (hasGps)? 3 : 2;
     mButton1 = new Button[ mNrButton1 ];

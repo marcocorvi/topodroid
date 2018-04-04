@@ -893,6 +893,7 @@ public class ShotWindow extends Activity
     mDataAdapter = new DBlockAdapter( this, this, R.layout.dblock_row, new ArrayList<DBlock>() );
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
+    mListView.setEmptyPlacholder( true );
     // mFootList = (HorizontalListView) findViewById(R.id.footlist);
     mButtonSize = mApp.setListViewHeight( mListView );
     // mButtonSize = mApp.setListViewHeight( mFootList );

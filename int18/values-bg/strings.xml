@@ -855,6 +855,8 @@
   <!-- UNUSED string name="pref_bootloader_summary">Разрешаване на инсталирането на фърмуер</string -->
   <string name="pref_mkeyboard_title">Собствена клавиатура</string>
   <string name="pref_mkeyboard_summary">Използване на Topodroid клавиатурни подредби</string>
+  <!-- TODO string name="pref_no_cursor_title">No keyboard cursor</string -->
+  <!-- TODO string name="pref_no_cursor_summary">Disable custom-keyboard cursor</string -->
   <string name="pref_local_help_title">Преведено ръководство</string>
   <string name="pref_local_help_summary">Включване на преведено ръководство</string>
   <string name="pref_cosurvey_title">Ко-картиране</string>

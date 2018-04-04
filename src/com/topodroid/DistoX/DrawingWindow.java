@@ -1647,6 +1647,7 @@ public class DrawingWindow extends ItemDrawer
     // switchZoomCtrl( TDSetting.mZoomCtrl );
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
+    mListView.setEmptyPlacholder(true);
     mButtonSize = mApp.setListViewHeight( mListView );
 
     mImage = (Button) findViewById( R.id.handle );

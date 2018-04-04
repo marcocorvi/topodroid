@@ -869,6 +869,8 @@
   <!-- UNUSED string name="pref_bootloader_summary">Enable bootloader</string -->
   <string name="pref_mkeyboard_title">Keyboard</string>
   <string name="pref_mkeyboard_summary">Enable custom keyboards</string>
+  <string name="pref_no_cursor_title">No keyboard cursor</string>
+  <string name="pref_no_cursor_summary">Disable custom-keyboard cursor</string>
   <string name="pref_local_help_title">Translated manual</string>
   <string name="pref_local_help_summary">Enable translated manual</string>
   <string name="pref_cosurvey_title">Co-surveying service</string>

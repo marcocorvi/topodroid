@@ -454,6 +454,7 @@ public class OverviewWindow extends ItemDrawer
       switchZoomCtrl( TDSetting.mZoomCtrl );
 
       mListView = (HorizontalListView) findViewById(R.id.listview);
+      mListView.setEmptyPlacholder( true );
       /* int size = */ mApp.setListViewHeight( mListView );
 
       mButton1 = new Button[ mNrButton1 + 1 ];

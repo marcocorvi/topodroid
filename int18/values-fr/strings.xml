@@ -850,6 +850,8 @@
   <!-- UNUSED string name="pref_bootloader_summary">Activer le chargeur de démarrage</string -->
   <string name="pref_mkeyboard_title">Clavier</string>
   <string name="pref_mkeyboard_summary">Activer/Désactiver clavier optionnel</string>
+  <!-- TODO string name="pref_no_cursor_title">No keyboard cursor</string -->
+  <!-- TODO string name="pref_no_cursor_summary">Disable custom-keyboard cursor</string -->
   <!-- TODO string name="pref_local_help_title">Translated manual</string -->
   <!-- TODO string name="pref_local_help_summary">Enable translated manual</string -->
   <string name="pref_cosurvey_title">Co-relevé</string>

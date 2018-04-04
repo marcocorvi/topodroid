@@ -861,6 +861,8 @@
   <!-- UNUSED string name="pref_bootloader_summary">Habilitar gestor de arranque</string -->
   <string name="pref_mkeyboard_title">Teclado</string>
   <string name="pref_mkeyboard_summary">Activar/Desactivar los teclados personalizados</string>
+  <!-- TODO string name="pref_no_cursor_title">No keyboard cursor</string -->
+  <!-- TODO string name="pref_no_cursor_summary">Disable custom-keyboard cursor</string -->
   <string name="pref_local_help_title">Traducción del Manual</string>
   <string name="pref_local_help_summary">Activar la traducción del Manual</string>
   <string name="pref_cosurvey_title">Cosurvey</string>

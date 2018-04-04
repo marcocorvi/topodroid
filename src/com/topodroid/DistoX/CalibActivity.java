@@ -164,6 +164,7 @@ public class CalibActivity extends Activity
     }
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
+    mListView.setEmptyPlacholder(true);
     /* int size = */ mApp.setListViewHeight( mListView );
 
     Resources res = getResources();
@@ -179,7 +180,6 @@ public class CalibActivity extends Activity
 
     mButtonView1 = new HorizontalButtonView( mButton1 );
     // mButtonView2 = new HorizontalButtonView( mButton2 );
-    mListView = (HorizontalListView) findViewById(R.id.listview);
     mListView.setAdapter( mButtonView1.mAdapter );
 
     // TDLog.Log( TDLog.LOG_CALIB, "app mCID " + mApp.mCID );

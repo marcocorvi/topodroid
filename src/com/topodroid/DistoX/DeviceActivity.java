@@ -226,6 +226,7 @@ public class DeviceActivity extends Activity
     mTvAddress = (TextView) findViewById( R.id.device_address );
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
+    mListView.setEmptyPlacholder(true);
     /* int size = */ mApp.setListViewHeight( mListView );
 
     Resources res = getResources();

@@ -85,6 +85,7 @@ class TDSetting
     "DISTOX_MAX_SHOT_LENGTH",     // maximum length of a shot data
     "DISTOX_MIN_LEG_LENGTH",      // minimum length of a shot data
     "DISTOX_BACKSHOT",            // using DistoX in backshot mode
+    "DISTOX_NO_CURSOR",           // no cursor for custom keyboard
 
     "DISTOX_UNIT_LOCATION",       // units of location [ddmmss dec.deg]
     "DISTOX_CRS",                 // default C.R.S.
@@ -231,6 +232,7 @@ class TDSetting
   static int mSizeButtons  = 42;     // default 42 minimum MIN_SIZE_BUTTONS
   static int mTextSize     = 16;     // list text size 
   static boolean mKeyboard = true;
+  static boolean mNoCursor = false;
   static boolean mLocalManPages = true;
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -752,6 +754,7 @@ class TDSetting
     mMaxShotLength = tryFloat( prefs, key[k++], "50"   );   // DISTOX_MAX_SHOT_LENGTH
     mMinLegLength  = tryFloat( prefs, key[k++], "0.5" );    // DISTOX_MIN_LEG_LENGTH
     mDistoXBackshot= prefs.getBoolean( key[k++], false );   // DISTOX_BACKSHOT
+    mNoCursor      = prefs.getBoolean( key[k++], false  );  // DISTOX_NO_CURSOR
 
     mUnitLocation  = prefs.getString( key[k++], "ddmmss" ).equals("ddmmss") ? TDConst.DDMMSS  // choice
                                                                             : TDConst.DEGREE;
@@ -848,7 +851,7 @@ class TDSetting
     mSideDrag = prefs.getBoolean( key[k++], false );          // DISTOX_SIDE_DRAG
 
     mDxfScale    = tryFloat( prefs, key[k++], "1.0" );        // DISTOX_DXF_SCALE
-    mAcadVersion = tryInt(   prefs, key[k++], "9" );         // DISTOX_ACAD_VERSION choice: 9, 13
+    mAcadVersion = tryInt(   prefs, key[k++], "9" );          // DISTOX_ACAD_VERSION choice: 9, 13
 
     setBitmapBgcolor( prefs.getString( key[k++], "0 0 0" ) ); // DISTOX_BITMAP_BGCOLOR
 
@@ -1030,6 +1033,8 @@ class TDSetting
       mMinLegLength = tryFloat( prefs, k, "0.5" );  
     } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_BACKSHOT
       mDistoXBackshot = prefs.getBoolean( k, false );
+    } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_NO_CURSOR
+      mNoCursor = prefs.getBoolean( k, false );
     } else if ( k.equals( key[ nk++ ] ) ) {
       mUnitLocation  = prefs.getString( k, "ddmmss" ).equals("ddmmss") ? TDConst.DDMMSS
                                                                        : TDConst.DEGREE;
@@ -1454,6 +1459,7 @@ class TDSetting
     if ( name.equals( "DISTOX_MAX_SHOT_LENGTH") ) return parseFloatValue( value, mMaxShotLength, 20 );
     if ( name.equals( "DISTOX_MIN_LEG_LENGTH") ) return parseFloatValue( value, mMinLegLength, 0, 5 );
     //B if ( name.equals( "DISTOX_BACKSHOT" )
+    //B if ( name.equals( "DISTOX_NO_CURSOR" )
 
     //C if ( name.equals( "DISTOX_UNIT_LOCATION" )
     //S if ( name.equals( "DISTOX_CRS" )

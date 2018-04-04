@@ -410,6 +410,7 @@ class ShotDialog extends MyDialog
     if ( mRBsplay  != null ) mButton[k++] = mRBsplay;
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
+    // mListView.setEmptyPlacholder( true );
     /* size = */ TopoDroidApp.setListViewHeight( mContext, mListView );
     mButtonView = new HorizontalButtonView( mButton );
     mListView.setAdapter( mButtonView.mAdapter );

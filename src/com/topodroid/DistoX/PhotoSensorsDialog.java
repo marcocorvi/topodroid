@@ -139,6 +139,7 @@ class PhotoSensorsDialog extends MyDialog
     if ( mButtonSurvey != null ) mButton[pos++] = mButtonSurvey;
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
+    // mListView.setEmptyPlacholder( true );
     /* size = */ TopoDroidApp.setListViewHeight( mContext, mListView );
     mButtonView = new HorizontalButtonView( mButton );
     mListView.setAdapter( mButtonView.mAdapter );

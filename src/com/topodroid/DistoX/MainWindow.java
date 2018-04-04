@@ -484,6 +484,7 @@ public class MainWindow extends Activity
 
     // TDLog.Profile("TDActivity buttons");
     mListView = (HorizontalListView) findViewById(R.id.listview);
+    mListView.setEmptyPlacholder( true );
     resetButtonBar();
 
     // FIXME TOOLBAR mToolbar = (Toolbar) findViewById( R.id.toolbar );
