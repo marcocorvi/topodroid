@@ -126,7 +126,7 @@
     <string name="few_data">Não há dados suficientes</string>
     <string name="few_iter">Falha: excesso de iterações</string>
     <string name="few_groups">Não há dados suficientes para os grupos</string>
-    <!-- TODO string name="found_groups">Found %1$d groups</string -->
+    <string name="found_groups">Encontrados %1$d grupos</string>
     <!-- UNUSED string name="few_plots">Esboços não suficientes</string -->
     <string name="few_calibs">Calibrações insuficientes</string>
     <string name="getting_info">Obtendo informações da DistoX ...</string>
@@ -254,7 +254,7 @@
     <string name="no_sketch">Nenhum croqui 3D</string>
     <!-- UNUSED string name="no_shots">Nenhuma medida registrada na topo.\nUsar o botão Download para baixar algumas</string -->
     <string name="no_survey">Nenhuma topo selecionada</string>
-    <!-- TODO string name="no_to_station">No TO station.</string -->
+    <string name="no_to_station">Sem base PARA.</string>
     <string name="no_thmanager">O aplicativo ThManager não está instalado</string>
     <string name="no_db_viewer">DB_viewer não encontrado</string>
     <string name="no_undelete">Nenhum item a ser restaurado</string>
@@ -426,9 +426,9 @@
     <string name="survey_not_attached">ATENÇÃO: visadas desconectadas</string>
     <string name="survey_not_extend">ATENÇÃO: visadas sem medidas auxiliares</string>
     <string name="survey_not_attached_extend">ATENÇÃO: visadas desconectadas e sem medidas auxiliares</string>
-    <!-- TODO string name="saturated_coeffs">WARNING: saturated calibration coefficients</string -->
-    <!-- TODO string name="out_of_memory">WARNING: out of memory !</string -->
-    <!-- TODO string name="disk_io_error">CRITICAL: disk i/o error !</string -->
+    <string name="saturated_coeffs">ALERTA: coeficientes de calibração saturados</string>
+    <string name="out_of_memory">ALERTA: sem memória!</string>
+    <string name="disk_io_error">CRÍTICO: erro de e/s no disco!</string>
     <string name="cannot_rename">Não é possível renomear a topo</string>
     <string name="declination">declinação magnética</string>
     <string name="description">descrição</string>
@@ -451,7 +451,7 @@
     <string name="zip_saved">Salvo </string>
     <string name="zip_failed">Falha na compressão da topo</string>
     <string name="unzip_fail">Falha na decompressão da topo</string>
-    <!-- TODO string name="unzip_fail_sqlite">Failed SQL: delete survey and retry</string -->
+    <string name="unzip_fail_sqlite">SQL falhou: apague a topo e tente novamente</string>
     <string name="unzip_fail_survey">Falha: nome da topo incompatível</string>
     <string name="unzip_fail_db">Falha: versão do banco de dados incompatível</string>
     <string name="unzip_fail_td">Falha: versão do TopoDroid incompatível</string>
@@ -869,8 +869,8 @@
   <string name="pref_size_buttons_summary">Tamanho dos botões da barra de ações</string>
   <!-- UNUSED string name="pref_size_buttons_message">Defina o tamanho dos botões da barra de ações [pixels]</string -->
 
-  <!-- TODO string name="pref_bezier_step_title">Point spacing</string -->
-  <!-- TODO string name="pref_bezier_step_summary">Distance between points on an export line [m]</string -->
+  <string name="pref_bezier_step_title">Espaçamento do ponto</string>
+  <string name="pref_bezier_step_summary">Distância entre pontos em uma linha exportada [m]</string>
   <string name="pref_leg_shots_title">Mínimo medições por visada</string>
   <string name="pref_leg_shots_summary">Quantidade mínimo de medições para uma visada</string>
   <string name="pref_station_prefix_title">Prefixos bases Compass</string>
@@ -982,10 +982,10 @@
   <string name="pref_vert_splay_title">Limite med. aux. tracejadas</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Medidas auxiliares acima desta inclinação serão tracejadas</string -->
   <string name="pref_vert_splay_message">Medidas auxiliares acima dessa inclinação serão tracejadas</string>
-  <!-- TODO string name="pref_horiz_splay_title">Splay dash azimuth threshold</string -->
-  <!-- TODO string name="pref_horiz_splay_message">Splay off azimuth more than this are dashed</string -->
-  <!-- TODO string name="pref_section_splay_title">Splay dash angle threshold</string -->
-  <!-- TODO string name="pref_section_splay_message">Over this angle with the section plane, splays are dashed</string -->
+  <string name="pref_horiz_splay_title">Limite pontilhamento de med. aux. X azimute</string>
+  <string name="pref_horiz_splay_message">Medida auxiliar divergindo do azimute acima deste limite será pontilhada</string>
+  <string name="pref_section_splay_title">Limite pontilhamento de med. aux. X plano corte</string>
+  <string name="pref_section_splay_message">Acima deste ângulo com o plano do corte, a medida auxiliar será pontilhada</string>
   <string name="pref_data_backup_title">Exportação automática</string>
   <string name="pref_data_backup_summary">Exportação automática de dados (exige definição de formato padrão)</string>
   <string name="pref_shared_xsections_title">Cortes X compartilhados</string>
@@ -1017,8 +1017,8 @@
   <string name="pref_min_leg_message">Visadas menores que este valor mínimo tem fundo laranja</string>
   <string name="pref_backsight_title">Medida contra</string>
   <string name="pref_backsight_summary">Campos de contra azimute e inclinação invertida para inserção manual de medida</string>
-  <!-- TODO string name="pref_backshot_title">Backshot DistoX</string -->
-  <!-- TODO string name="pref_backshot_summary">DistoX in backshot mode</string -->
+  <string name="pref_backshot_title">Contramedida DistoXBackshot DistoX</string>
+  <string name="pref_backshot_summary">DistoX em modo de contramedida</string>
   <string name="pref_prev_next_title">Botões Ant/Próx</string>
   <string name="pref_prev_next_summary">Botões Ant/Próx na janela de medição</string>
   <string name="pref_mag_anomaly_title">Anomalia magnética</string>
