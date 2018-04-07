@@ -55,7 +55,7 @@
     <string name="calib_new">Nova calibração</string>
     <string name="calib_exists">Já existe uma calibração com este nome</string>
     <string name="calib_delete">Apagar calibração </string>
-    <string name="calib_device_mismatch">ATENÇÃO: Dispositivo a ser calibrado incompatível</string>
+    <string name="calib_device_mismatch">ALERTA: Dispositivo a ser calibrado incompatível</string>
     <string name="calib_no_name">Nome exigido</string>
     <string name="calib_gm_policy">Regra</string>
     <string name="calib_gm_undelete">Restaurar os dados de calibração?</string>
@@ -423,12 +423,12 @@
     <!-- UNUSED string name="survey_date">aaaa.mm.dd</string -->
     <string name="survey_delete">Apagar a topo?</string>
     <string name="survey_split">Dividir a topo?</string>
-    <string name="survey_not_attached">ATENÇÃO: visadas desconectadas</string>
-    <string name="survey_not_extend">ATENÇÃO: visadas sem medidas auxiliares</string>
-    <string name="survey_not_attached_extend">ATENÇÃO: visadas desconectadas e sem medidas auxiliares</string>
+    <string name="survey_not_attached">ALERTA: visadas desconectadas</string>
+    <string name="survey_not_extend">ALERTA: visadas sem medidas auxiliares</string>
+    <string name="survey_not_attached_extend">ALERTA: visadas desconectadas e sem medidas auxiliares</string>
     <string name="saturated_coeffs">ALERTA: coeficientes de calibração saturados</string>
     <string name="out_of_memory">ALERTA: sem memória!</string>
-    <string name="disk_io_error">CRÍTICO: erro de e/s no disco!</string>
+    <string name="disk_io_error">CRÍTICO: erro de E/S no disco!</string>
     <string name="cannot_rename">Não é possível renomear a topo</string>
     <string name="declination">declinação magnética</string>
     <string name="description">descrição</string>
