@@ -120,7 +120,7 @@
     <string name="extend_vert">Vertical</string>
     <!-- UNUSED string name="external_prompt">Inserir medição</string -->
     <string name="splay_at_to">Dados EDTC na base PARA</string>
-    <string name="lrud">EDTB</string>
+    <string name="lrud">EDTC</string>
     <!-- TODO string name="strike_dip">Strike %1$.0f Dip %2$.0f</string -->
 
     <string name="few_data">Não há dados suficientes</string>
@@ -882,9 +882,9 @@
   <string name="pref_ortho_lrud_title">Ângulo med. aux. EDTC Compass</string>
   <string name="pref_ortho_lrud_summary">Ângulo mínimo entre uma medida auxiliar e uma visada para ser uma medida auxiliar EDTC</string>
   <string name="pref_ortho_lrud_message">Ângulo mínimo entre uma medida auxiliar e uma visada para ser EDTC</string>
-  <string name="pref_lrud_vertical_title">Incl. mín. TB</string>
-  <string name="pref_lrud_vertical_summary">Incl. mín. medidas auxiliares Topo/Base</string>
-  <string name="pref_lrud_vertical_message">Inclinação mínima de medidas auxiliares Topo/Base</string>
+  <string name="pref_lrud_vertical_title">Incl. mín. TC</string>
+  <string name="pref_lrud_vertical_summary">Incl. mín. medidas auxiliares Teto/Chão</string>
+  <string name="pref_lrud_vertical_message">Inclinação mínima de medidas auxiliares Teto/Chão</string>
   <string name="pref_lrud_horizontal_title">Incl. máx. ED</string>
   <string name="pref_lrud_horizontal_summary">Incl. máx. medidas auxiliares Esquerda/Direita</string>
   <string name="pref_lrud_horizontal_message">Inclinação máxima de medidas auxiliares Esquerda/Direita</string>
