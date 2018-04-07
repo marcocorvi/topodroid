@@ -869,7 +869,7 @@
   <string name="pref_size_buttons_summary">Tamanho dos botões da barra de ações</string>
   <!-- UNUSED string name="pref_size_buttons_message">Defina o tamanho dos botões da barra de ações [pixels]</string -->
 
-  <string name="pref_bezier_step_title">Espaçamento do ponto</string>
+  <string name="pref_bezier_step_title">Espaçamento pontos</string>
   <string name="pref_bezier_step_summary">Distância entre pontos em uma linha exportada [m]</string>
   <string name="pref_leg_shots_title">Mínimo medições por visada</string>
   <string name="pref_leg_shots_summary">Quantidade mínimo de medições para uma visada</string>
