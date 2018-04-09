@@ -107,7 +107,7 @@ class SymbolEnableDialog extends MyDialog
     if ( ! createAdapters() ) dismiss();
 
     // mList.setAdapter( mPointAdapter );
-    updateList();
+    updateList( -1, mType );
   }
 
   private boolean createAdapters()
@@ -145,16 +145,28 @@ class SymbolEnableDialog extends MyDialog
     return true;
   }
 
-  private void updateList()
+  private void updateList( int old_type, int new_type )
   {
     // Log.v( TopoDroidApp.TAG, "SymbolEnableDialog ... updateList type " + mType );
-    switch ( mType ) {
+    switch ( old_type ) {
+      case Symbol.POINT:
+        mBTpoint.setTextColor( 0xffffffff );
+        break;
+      case Symbol.LINE:
+        mBTline.setTextColor( 0xffffffff );
+        break;
+      case Symbol.AREA:
+        mBTarea.setTextColor( 0xffffffff );
+        break;
+    }
+    switch ( new_type ) {
       case Symbol.POINT:
         if ( TDLevel.overBasic ) {
           mList.setAdapter( mPointAdapter );
           mBTpoint.getBackground().setColorFilter( TDColor.LIGHT_BLUE, PorterDuff.Mode.LIGHTEN );
           mBTline.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
           mBTarea.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
+          mBTpoint.setTextColor( 0xff333333 );
         }
         break;
       case Symbol.LINE:
@@ -162,6 +174,7 @@ class SymbolEnableDialog extends MyDialog
         mBTpoint.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
         mBTline.getBackground().setColorFilter( TDColor.LIGHT_BLUE, PorterDuff.Mode.LIGHTEN );
         mBTarea.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
+        mBTline.setTextColor( 0xff333333 );
         break;
       case Symbol.AREA:
         if ( TDLevel.overBasic ) {
@@ -169,9 +182,11 @@ class SymbolEnableDialog extends MyDialog
           mBTpoint.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
           mBTline.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
           mBTarea.getBackground().setColorFilter( TDColor.LIGHT_BLUE, PorterDuff.Mode.LIGHTEN );
+          mBTarea.setTextColor( 0xff333333 );
         }
         break;
     }
+    mType = new_type;
     mList.invalidate();
   }
 
@@ -211,8 +226,7 @@ class SymbolEnableDialog extends MyDialog
         break;
     }
     if ( type >= 0 && type != mType ) {
-      mType = type;
-      updateList();
+      updateList( mType, type );
     }
     // dismiss();
   }

@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-     android:id="@+id/td_layout"
-     android:orientation="vertical"
-     android:layout_width="fill_parent"
-     android:layout_height="fill_parent"
-     >
+  android:id="@+id/td_layout"
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  >
 
-    <TextView android:id="@+id/filename"
+  <Spinner android:id="@+id/tdr_spin"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/marginvbig"
+    android:drawSelectorOnTop="true"
+  />
+      				  
+
+  <!-- TextView android:id="@+id/filename"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
@@ -18,14 +26,14 @@
      android:layout_width="match_parent"
      android:layout_height="0dp"
      android:layout_weight="1"
-   />  
+   / -->  
 
    <LinearLayout 
-      android:orientation="horizontal"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
-      android:layout_marginRight="@dimen/marginvbig"
-      android:layout_gravity="right"
+      android:orientation="horizontal"
+      android:layout_marginTop="@dimen/marginvbig"
+      android:layout_marginBottom="@dimen/marginvbig"
       android:gravity="right"
       >
       <Button android:id="@+id/btn_ok"

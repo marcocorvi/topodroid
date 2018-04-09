@@ -33,11 +33,17 @@ import java.util.Locale;
 class DrawingSpecialPath extends DrawingPath
 {
   // private static float toTherion = TDConst.TO_THERION;
+  
+  static final int SPECIAL_ANY = 0; // generic
+  static final int SPECIAL_DOT = 1; // leg x-section dot reference
 
-  DrawingSpecialPath( float x, float y )
+  int mType; // type of special path
+
+  DrawingSpecialPath( int t, float x, float y )
   {
     super( DrawingPath.DRAWING_PATH_NORTH, null );
     // TDLog.Log( TDLog.LOG_PATH, "Point " + type + " X " + x + " Y " + y );
+    mType = t;
     setCenter( x, y );
     resetPath();
   }
@@ -45,9 +51,10 @@ class DrawingSpecialPath extends DrawingPath
   static DrawingSpecialPath loadDataStream( int version, DataInputStream dis, float x, float y )
   {
     try {
+      int t = dis.readInt();
       float ccx = x + dis.readFloat();
       float ccy = y + dis.readFloat();
-      DrawingSpecialPath ret = new DrawingSpecialPath( ccx, ccy );
+      DrawingSpecialPath ret = new DrawingSpecialPath( t, ccx, ccy );
       return ret;
     } catch ( IOException e ) {
       TDLog.Error( "SPECIAL in error " + e.getMessage() );
@@ -138,6 +145,7 @@ class DrawingSpecialPath extends DrawingPath
   {
     try {
       dos.write( 'J' );
+      dos.writeInt( mType );
       dos.writeFloat( cx );
       dos.writeFloat( cy );
       // TDLog.Log( TDLog.LOG_PLOT, "P " + name + " " + cx + " " + cy );

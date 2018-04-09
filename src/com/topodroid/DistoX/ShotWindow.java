@@ -105,8 +105,8 @@ public class ShotWindow extends Activity
   final static int BTN_BLUETOOTH = 1;
   final static int BTN_PLOT      = 3;
   final static int BTN_MANUAL    = 5;
-  final static int BTN_AZIMUTH   = 7;
-  final static int BTN_SEARCH    = 8;
+  final static int BTN_SEARCH    = 7;
+  final static int BTN_AZIMUTH   = 8;
 
   private DataHelper mApp_mData;
 
@@ -118,8 +118,8 @@ public class ShotWindow extends Activity
                         R.drawable.iz_note,
                         R.drawable.iz_plus,
                         R.drawable.iz_station,
-                        R.drawable.iz_dial,
                         R.drawable.iz_search,
+                        R.drawable.iz_dial,
 			R.drawable.iz_empty
                       };
 
@@ -164,8 +164,8 @@ public class ShotWindow extends Activity
                           R.string.help_note,
                           R.string.help_add_shot,
                           R.string.help_current_station,
-                          R.string.help_azimuth,
                           R.string.help_search,
+                          R.string.help_azimuth,
                         };
    private static int help_menus[] = {
                           R.string.help_close,
@@ -1246,6 +1246,8 @@ public class ShotWindow extends Activity
           //   updateDisplay( );
           // }
         }
+      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // SEARCH
+        new StationSearchDialog( mActivity, this, mSearch.getName() ).show();
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // AZIMUTH
         if ( TDLevel.overNormal ) {
           if ( TDSetting.mAzimuthManual ) {
@@ -1254,8 +1256,6 @@ public class ShotWindow extends Activity
             (new AzimuthDialDialog( mActivity, this, TDAzimuth.mRefAzimuth, mDialBitmap )).show();
           }
         }
-      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // SEARCH
-        new StationSearchDialog( mActivity, this, mSearch.getName() ).show();
 
       } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // LEFT
         for ( DBlock blk : mDataAdapter.mSelect ) {

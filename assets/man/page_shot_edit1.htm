@@ -24,13 +24,17 @@ It displays
 <li><img src="btn_renumber.png" valighn="bottom"> renumber shots from this leg onward following the current station naming policy. Both stations must have been specified</li>
 <li><img src="btn_splay_group.png" valighn="bottom"> apply the station change to all splays in the group of the splay shot. It applies only to the splays with same station as the edit shot. Only FROM station must have been specified</li>
 <li><img src="btn_xsplay.png" valighn="bottom"> toggle X-splay marks for this shot and all previous splays of the group. X-splays are shown in green.</li>
-<li>the last button restricts the display of splays to plan only or to profile only</li>
+<li>the last button restricts the display of splays to plan only or to profile only. X-splays are supported by cSurvey.</li>
 <li><b>OK</b>: save the changes and close the dialog</li>
 <li><b>Save</b>: save the changes without closing the dialog</li>
 <li><b>More</b>: switch to the secondary <a href="page_shot_edit2.htm">edit dialog</a></li>
 <li><b>Cancel</b>: close the dialog without saving</li>
 </ul>
 <br><p>
+
+The shot flags, "duplicate", "surface" and "commented", are mutually exclusive.
+Shots with a flag do not count for the survey statistics.
+The export of the shot is also affected by the shot flag, either with a flag, if the format supports it, or as comment.<br><p>
 
 <b>Station cut-n-paste</b><br>
 Station names can be 'cut', 'copied', and 'pasted' across the app, in any dialog where there is a station entry

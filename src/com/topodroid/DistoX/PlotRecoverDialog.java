@@ -30,14 +30,15 @@ import android.view.View;
 // import android.view.ViewGroup.LayoutParams;
 
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
+// import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Button;
 // import android.widget.CheckBox;
-
-import android.widget.TextView;
+// import android.widget.TextView;
 // import android.widget.EditText;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
+// import android.widget.AdapterView.OnItemClickListener;
 // import android.widget.AdapterView.OnItemLongClickListener;
 
 // import android.widget.Toast;
@@ -46,18 +47,22 @@ import android.widget.AdapterView.OnItemClickListener;
 
 class PlotRecoverDialog extends MyDialog
                         implements View.OnClickListener
-                        , OnItemClickListener
+                        , OnItemSelectedListener
+                        // , OnItemClickListener
 {
   private TopoDroidApp mApp;
   private DrawingWindow mParent; 
 
-  private TextView mTVfilename;
+  // private TextView mTVfilename;
   private Button mBtnOK;
   private Button mBtnBack;
 
-  private ListView mList;
+  // private ListView mList;
+  private Spinner mSpin;
   ArrayAdapter<String> mAdapter;
+  private String[] mFiles;
   private String mFilename;
+  private String mSelected;
   long mType;             // plot type
 
   // type is either 1 or 2
@@ -76,11 +81,13 @@ class PlotRecoverDialog extends MyDialog
 
     initLayout( R.layout.plot_recover_dialog, R.string.title_plot_reload );
 
-    mList = (ListView) findViewById( R.id.th2_list);
-    mList.setDividerHeight( 2 );
-    mList.setOnItemClickListener( this );
- 
-    mTVfilename = (TextView) findViewById( R.id.filename );
+    // mList = (ListView) findViewById( R.id.th2_list);
+    // mList.setDividerHeight( 2 );
+    // mList.setOnItemClickListener( this );
+    // mTVfilename = (TextView) findViewById( R.id.filename );
+
+    mSpin = (Spinner)findViewById( R.id.tdr_spin );
+    mSpin.setOnItemSelectedListener( this );
 
     mBtnOK      = (Button) findViewById( R.id.btn_ok );
     mBtnBack    = (Button) findViewById( R.id.btn_back );
@@ -106,25 +113,34 @@ class PlotRecoverDialog extends MyDialog
     
   private void populateAdapter( String filename, String ext )
   {
+    mFiles = new String[2 + TDPath.NR_BACKUP];
+    int kk = 0;
 
     long millis = System.currentTimeMillis();
     File file = new File( filename );
     if ( file.exists() ) {
       String age = getAge( millis - file.lastModified() );
-      mAdapter.add( Long.toString(file.length()) + " " + age + " " +  mFilename + ext );
+      String name  = mFilename + ext;
+      mAdapter.add( age + " [" + Long.toString(file.length()) + "] " +  name );
+      mFiles[kk++] = name;
+      mSelected = name;
     }
     String filename1 = filename + TDPath.BCK_SUFFIX;
     file = new File( filename1 );
     if ( file.exists() ) {
       String age = getAge( millis - file.lastModified() );
-      mAdapter.add( Long.toString(file.length()) + " " + age + " " +  mFilename + ext + TDPath.BCK_SUFFIX );
+      String name = mFilename + ext + TDPath.BCK_SUFFIX;
+      mAdapter.add( age + " [" + Long.toString(file.length()) + "] " + name );
+      mFiles[kk++] = name;
     }
     for ( int i=0; i< TDPath.NR_BACKUP; ++i ) {
       filename1 = filename + TDPath.BCK_SUFFIX + Integer.toString(i);
       file = new File( filename1 );
       if ( file.exists() ) {
         String age = getAge( millis - file.lastModified() );
-        mAdapter.add( Long.toString(file.length()) + " " + age + " " +  mFilename + ext + TDPath.BCK_SUFFIX + Integer.toString(i) );
+	String name = mFilename + ext + TDPath.BCK_SUFFIX + Integer.toString(i);
+        mAdapter.add( age + " [" + Long.toString(file.length()) + "] " + name );
+        mFiles[kk++] = name;
       }
     }
   }
@@ -135,24 +151,30 @@ class PlotRecoverDialog extends MyDialog
 
     // if ( TDSetting.mBinaryTh2 ) { // TDR BINARY
       populateAdapter( TDPath.getTdrFileWithExt( mFilename ), ".tdr" );
-      String name = mFilename + ".tdr";
-      mTVfilename.setText( name );
+      // mTVfilename.setText( name );
 
     // } else {
     //   populateAdapter( TDPath.getTh2FileWithExt( mFilename ), ".th2" );
     //   mTVfilename.setText( mFilename + ".th2" );
     // }
-    mList.setAdapter( mAdapter );
+    // mList.setAdapter( mAdapter );
+    mSpin.setAdapter( mAdapter );
   }
 
+  // @Override 
+  // public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+  // {
+  //   CharSequence item = ((TextView) view).getText();
+  //   String[] name = item.toString().split(" ");
+  //   mTVfilename.setText( name[2] );
+  // }
 
-  @Override 
-  public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-  {
-    CharSequence item = ((TextView) view).getText();
-    String[] name = item.toString().split(" ");
-    mTVfilename.setText( name[2] );
-  }
+  @Override
+  public void onItemSelected( AdapterView av, View v, int pos, long id ) { mSelected = mFiles[ pos ]; }
+
+  @Override
+  public void onNothingSelected( AdapterView av ) { mSelected = null; }
+
  
   @Override
   public void onClick(View v) 
@@ -160,7 +182,8 @@ class PlotRecoverDialog extends MyDialog
     // TDLog.Log(  TDLog.LOG_INPUT, "PlotRecoverDialog onClick() " );
     Button b = (Button) v;
     if ( b == mBtnOK ) { // OK
-      mParent.doRecover( mTVfilename.getText().toString(), mType );
+      // mParent.doRecover( mTVfilename.getText().toString(), mType );
+      if ( mSelected != null ) mParent.doRecover( mSelected, mType );
       dismiss();
     } else if ( b == mBtnBack ) {
       dismiss();

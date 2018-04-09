@@ -185,6 +185,8 @@ class TDExporter
     String branch = "";
     if ( sketch != null && sketch.getName() != null ) {
       branch = sketch.getName();
+      int len = branch.length();
+      if ( len > 1 ) branch = branch.substring(0, len-1);
     }
 
     // STATIONS_PREFIX

@@ -1928,11 +1928,11 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.setSelectMode( mSelectMode );
   }
 
-  private void makeXSectionLegPoint( float x, float y )
-  {
-    DrawingSpecialPath path = new DrawingSpecialPath( mDrawingUtil.toSceneX(x,y), mDrawingUtil.toSceneY(x,y) );
-    mDrawingSurface.addDrawingPath( path );
-  }
+  // private void makeXSectionLegPoint( float x, float y )
+  // {
+  //   DrawingSpecialPath path = new DrawingSpecialPath( DrawingSpecialPath.SPECIAL_DOT, mDrawingUtil.toSceneX(x,y), mDrawingUtil.toSceneY(x,y) );
+  //   mDrawingSurface.addDrawingPath( path );
+  // }
 
   private void makeSectionReferences( List<DBlock> list, float tt )
   {
@@ -2019,12 +2019,9 @@ public class DrawingWindow extends ItemDrawer
           float ytt = yfrom + tt * ( yto - yfrom );
 	  if ( mLandscape ) { float t=xtt; xtt=-ytt; ytt=t; }
           // Log.v("DistoX", "TT " + tt + " " + xtt + " " + xfrom + " " + xto );
-          // point index 0 = user
-          // DrawingPath point = new DrawingPointPath( 0, mDrawingUtil.toSceneX(xtt, ytt), mDrawingUtil.toSceneY(xtt, ytt),
-      	  //                                     DrawingPointPath.SCALE_XS, null, null ); // no text, no options
-          // mDrawingSurface.addDrawingPath( point );
-
-	  makeXSectionLegPoint( xtt, ytt );
+	  // makeXSectionLegPoint( xtt, ytt );
+          DrawingSpecialPath path = new DrawingSpecialPath( DrawingSpecialPath.SPECIAL_DOT, mDrawingUtil.toSceneX(xtt,ytt), mDrawingUtil.toSceneY(xtt,ytt) );
+          mDrawingSurface.addDrawingPath( path );
         }
       }
     } else { // if ( PlotInfo.isXSection( mType ) ) 
