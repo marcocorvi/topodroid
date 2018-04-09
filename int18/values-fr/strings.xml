@@ -265,8 +265,8 @@
 <string name="menu_about">A PROPOS</string>
 <string name="menu_area">ZONE</string>
 <string name="menu_attach">CONNECTER</string>
-<string name="menu_attached">Connecté</string>
-<string name="menu_ready">Prêt</string>
+<!-- UNUSED string name="menu_attached">Connecté</string -->
+<!-- UNUSED string name="menu_ready">Prêt</string -->
     <string name="menu_calib_check">VERIF ÉTALON.</string>
     <string name="menu_close">FERMER</string>
     <string name="menu_delete">SUPPRIMER</string>
