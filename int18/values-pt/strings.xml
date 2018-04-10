@@ -853,7 +853,7 @@
   <!-- UNUSED string name="pref_bootloader_summary">Ativar bootloader</string -->
   <string name="pref_mkeyboard_title">Teclado</string>
   <string name="pref_mkeyboard_summary">Habilitar teclados customizados</string>
-  <string name="pref_no_cursor_title">Sem curso teclado</string>
+  <string name="pref_no_cursor_title">Sem cursor teclado</string>
   <string name="pref_no_cursor_summary">Desabilitar o cursor do teclado especial</string>
   <string name="pref_local_help_title">Manual traduzido</string>
   <string name="pref_local_help_summary">Habilitar manual traduzido</string>
