@@ -61,3 +61,5 @@ NOTE replace spaces in the name with underscore
 
 [O] push the new symbols file to github and let me know
 i need to increase the symbols version in the code otherwise topodroid will not install the new files
+
+[1] a perl script is available, utils/strings.pl, to compare a translation string file against the english file.
