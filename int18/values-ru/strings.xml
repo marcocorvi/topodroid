@@ -855,8 +855,8 @@
   <!-- UNUSED string name="pref_bootloader_summary">Вкл Загрузчик</string -->
   <string name="pref_mkeyboard_title">Клавиатура</string>
   <string name="pref_mkeyboard_summary">Вкл/Выкл сторонние клавиатуры </string>
-  <!-- TODO string name="pref_no_cursor_title">No keyboard cursor</string -->
-  <!-- TODO string name="pref_no_cursor_summary">Disable custom-keyboard cursor</string -->
+  <string name="pref_no_cursor_title">Без курсора</string>
+  <string name="pref_no_cursor_summary">Отключить отображение курсора для сторонних клавиатур.</string>
   <string name="pref_local_help_title">Руководство на Русском</string>
   <string name="pref_local_help_summary">Включить руководство пользователя на Русском языке</string>
   <string name="pref_cosurvey_title">Совместная съёмка</string>
