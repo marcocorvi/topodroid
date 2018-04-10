@@ -121,7 +121,7 @@
     <!-- UNUSED string name="external_prompt">Inserir medição</string -->
     <string name="splay_at_to">Dados EDTC na base PARA</string>
     <string name="lrud">EDTC</string>
-    <!-- TODO string name="strike_dip">Strike %1$.0f Dip %2$.0f</string -->
+    <string name="strike_dip">Strike %1$.0f Dip %2$.0f</string>
 
     <string name="few_data">Não há dados suficientes</string>
     <string name="few_iter">Falha: excesso de iterações</string>
@@ -853,8 +853,8 @@
   <!-- UNUSED string name="pref_bootloader_summary">Ativar bootloader</string -->
   <string name="pref_mkeyboard_title">Teclado</string>
   <string name="pref_mkeyboard_summary">Habilitar teclados customizados</string>
-  <!-- TODO string name="pref_no_cursor_title">No keyboard cursor</string -->
-  <!-- TODO string name="pref_no_cursor_summary">Disable custom-keyboard cursor</string -->
+  <string name="pref_no_cursor_title">Sem curso teclado</string>
+  <string name="pref_no_cursor_summary">Desabilitar o cursor do teclado especial</string>
   <string name="pref_local_help_title">Manual traduzido</string>
   <string name="pref_local_help_summary">Habilitar manual traduzido</string>
   <string name="pref_cosurvey_title">Topo colaborativa</string>
