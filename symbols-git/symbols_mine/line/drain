@@ -3,6 +3,7 @@ name drain
 name-de Wasserablauf
 name-pt ralo
 name-es drenaje
+name-ru водосток
 th_name u:drain
 group drain
 color 0x3399ff

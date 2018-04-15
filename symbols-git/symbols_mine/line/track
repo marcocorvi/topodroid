@@ -3,6 +3,7 @@ name track
 name-de Schienen
 name-pt trilha
 name-es camino
+name-ru колея
 th_name u:track
 group track
 color 0xcccccc 
