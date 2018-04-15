@@ -2,6 +2,7 @@ symbol point
 name foliation-horizontal
 name-pt foliação_horizontal
 name-es foliación_orizontal
+name-ru сланцеватость_горизонтальная
 th_name u:foliation_horizontal
 color 0xcccc99
 csurvey 0 0 0 
