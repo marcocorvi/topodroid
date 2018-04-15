@@ -2,6 +2,7 @@ symbol point
 name sink
 name-pt sumidouro
 name-es sumidero
+name-ru провал
 th_name u:sink
 color 0x33ccff
 csurvey 0 0 0
