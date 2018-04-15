@@ -2,6 +2,7 @@ symbol point
 name insect
 name-es insecto
 name-pt inseto
+name-ru насекомое
 th_name u:insect
 color 0xffcc33
 csurvey 0 0 0
