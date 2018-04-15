@@ -2,7 +2,7 @@ symbol line
 name valley_u
 name-pt vale_em_u
 name-es valle_en_U
-name-ru долина_ю
+name-ru долина_U_образная
 th_name u:valley_u
 group valley
 color 0x999999 0xff
