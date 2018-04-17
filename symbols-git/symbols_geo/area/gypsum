@@ -3,6 +3,7 @@ name gypsum
 name-it gesso
 name-es yeso
 name-pt gesso
+name-ru гипс
 th_name u:gypsum
 color 0xffffff 0xcc
 csurvey 1 48 0 3

@@ -2,6 +2,7 @@ symbol area
 name mudstone
 name-pt pelito
 name-es lutolita
+name-ru аргиллит
 th_name u:mudstone
 color 0xcc6666 0xcc
 csurvey 1 48 0 3

@@ -4,6 +4,7 @@ name rock-edge
 name-cn 岩石边界
 name-es bloque_aristas
 name-pt limite_rocha
+name-ru ребро_глыбы
 th_name rock-edge
 style straight x2
 color 0xffcc00 0xff

@@ -3,6 +3,7 @@ symbol line
 name wall-pit
 name-es pozo_pared
 name-pt parede_poço
+name-ru стена_отвеса
 th_name wall:pit
 group wall
 color 0xff0000 0xff

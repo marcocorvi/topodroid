@@ -3,6 +3,7 @@ symbol point
 name flowstone-choke
 name-es colmatado_por_concreción
 name-pt obstrução_por_escorrimento
+name-ru блокировано_натеками
 th_name flowstone-choke
 orientation no
 color 0xff6666

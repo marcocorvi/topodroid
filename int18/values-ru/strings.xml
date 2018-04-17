@@ -26,7 +26,7 @@
     <!-- string name="thp_danger">опасность</string -->
     <string name="thp_user">пользовательский</string>
     <string name="thp_label">подпись</string>
-    <!-- string name="thl_danger">опасность</string -->
+    <!-- string name="thp_danger">опасность</string -->
     <string name="thl_user">пользовательский</string>
     <string name="thl_wall">стена</string>
     <string name="tha_user">пользовательский</string>
@@ -74,14 +74,14 @@
     <string name="calib_max_error">Макс. ошибка: %1$.4f градусов</string>
     <string name="calib_ave_std">Точность: %1$.4f +- %2$.4f градусов</string>
     <string name="calib_precision">Точность</string>
-    <string name="calib_iter">Итерации: %1$d</string>
+    <string name="calib_iter">Итераций: %1$d</string>
     <string name="calib_reset">Сбросить калибровку DistoX ?</string>
 
     <string name="algorithm">Алгоритм расчета:</string>
     <string name="auto">авто</string>
     <string name="linear">линейный</string>
     <string name="non_linear">нелинейный</string>
-    <!-- NO string name="algo_minimum">minimum</string -->
+    <!-- NO string name="algo_minimum">минимум</string -->
    
     <string name="device_algo_failed">Алгоритм автоопределения не сработал\nИспользую линейный алгоритм</string>
     <string name="device_address">Адрес %1$s</string>
@@ -95,6 +95,7 @@
     <string name="device_code">DistoX код %1$4d</string>
     <string name="device_firmware">Прошивка  %1$d.%2$d</string>
     <string name="device_hardware">Чип  %1$d.%2$d</string>
+    <string name="device_memory">Память  %1$02x.%2$02x</string>
     <string name="device_status_angle_grad">Ед измерения угла: град.</string>
     <string name="device_status_angle_degree">Ед измерения угла: градусы</string>
     <string name="device_status_compass_on">Азимут/угол: вкл</string>
@@ -270,6 +271,7 @@
     <!-- UNUSED string name="menu_ready">Ready</string -->
     <string name="menu_calib_check">КОНТРОЛЬ КАЛИБ.</string>
     <string name="menu_close">ЗАКРЫТЬ</string>
+    <string name="menu_clear">ОЧИСТИТЬ</string>
     <string name="menu_delete">Удалить</string>
     <string name="menu_detach">Отсоединить</string>
     <string name="menu_display">Показать</string>
@@ -335,7 +337,7 @@
     <!-- OK string name="not_connected">Нет соединения</string -->
     <!-- UNUSED string name="not_implemented">Пока не реализовано</string -->
     <string name="null_bitmap">null bitmap [OOM error]</string>
-    <!-- UNUSED string name="photo">фото</string -->
+    <string name="photo">фото</string>
     <string name="photo_camera">Приложение камера</string>
     <string name="photo_comment_prompt">Введите комментарий к фото</string>
     <string name="photo_azimuth_clino">Азимут: %1$.1f Наклон: %2$.1f</string>
@@ -359,7 +361,7 @@
     <!-- UNUSED string name="plot_recover">Перезагрузить абрис из бекапа?</string -->
     <string name="plot_start">Начальный пикет</string>
     <!-- UNUSED string name="plot_view">Просмотренный пикет</string -->
-    <!-- UNUSED string name="read_fail_with_code">Ошибка чтения: код ошибки </string -->
+    <string name="read_fail_with_code">Ошибка чтения: код ошибки </string>
     <string name="read_failed">Ошибка чтения DistoX</string>
     <!-- UNUSED string name="reading_file_failed">Чтение файла не удалось</string -->
 
@@ -605,7 +607,9 @@
     <string name="sketch_mode_single">Отдельный пикет</string>
     <string name="sketch_mode_ngbh">Соседние пикеты</string>
     <string name="sketch_mode_all">Все пикеты</string>
+    <string name="sketch_mode_none">Нет поверхности</string>
     <string name="sketch_delete">Удалить 3D модель ?</string>
+    <string name="sketch_clear">Очистить 3D модель ?</string>
     <!-- UNUSED string name="sketch_no_split">Не точно. Уменьшите боковую макс. длинну чтобы уточнить.</string -->
     <string name="length">Длина [м]</string>
     <string name="azimuth">Азимут [грд]</string>
@@ -766,6 +770,7 @@
     <string name="help_surface">Создать поверхность</string>
     <string name="help_save_model">Экспорт 3D модели</string>
     <string name="help_trash_model">Удалить 3D модель</string>
+    <string name="help_clear_model">Очистить 3D модель</string>
     <string name="help_head_model">Ориентировать 3D модель</string>
     <!-- UNUSED string name="help_erase_model">Удалить область</string -->
     <!-- UNUSED string name="help_cut_model">Обрезать область</string -->
@@ -776,6 +781,11 @@
     <!-- UNUSED string name="help_refine_point">Уточнить поверхность в точке</string -->
     <!-- UNUSED string name="help_refine_triangle">Уточнить поверхность вдоль длинной стороны</string -->
   
+    <string name="audio_paused">Пауза</string>
+    <string name="audio_playing">Воспроизведение</string>
+    <string name="audio_recording">Запись</string>
+    <string name="audio_delete">Удалить ?</string>
+    <string name="audio_overwrite">Перезаписать ?</string>
 
     <string name="title_azimut">Направление развёртки</string>
     <string name="title_audio">Аудио заметка</string>
@@ -839,6 +849,7 @@
   <string name="pref_cat_drawing">Настройки Рисования </string>
   <string name="pref_cat_import_export">ИМПОРТ-ЭКСПОРТ</string>
   <string name="pref_cat_calib">Настройки Калибровки</string>
+  <string name="pref_cat_min_algo">АЛГОРИТМ МИНИМИЗАЦИИ</string>
   <string name="pref_cat_device">Настройки Устройства</string>
   <string name="pref_cat_sketch">Настройки Абриса</string>
   <string name="pref_cat_log">Настройки журнала</string>
@@ -995,9 +1006,13 @@
   <string name="pref_shared_xsections_title">Общий поперечный разрез</string>
   <string name="pref_shared_xsections_summary">Поперечные разреы на пикете общие для плана и разреза</string>
   <string name="xsections_shared">Общие поперечные разреы</string>
-  <string name="xsections_private">НЕОбщие поперечные разрезы</string>
+  <string name="xsections_private">НЕ Общие поперечные разрезы</string>
   <!-- UNUSED string name="pref_list_refresh_title">Обновить список</string -->
-  <!-- UNUSED string name="pref_list_refresh_summary">Принудительно обновить список</string -->
+  <!-- UNUSED string name="pref_list_refresh_summary">Принудительно обновить список</string -->	
+  <string name="pref_reduce_angle_title">Угол спрямления</string>
+  <string name="pref_reduce_angle_summary">Минимальный угол между сегментами спрямляемых линий</string>
+  <string name="pref_reduce_angle_message">Минимальный угол между сегментами спрямляемых линий</string>	
+	
   <string name="pref_survey_stations_title">Настройки авто-нумерации пикетов</string>
   <string name="pref_survey_stations_summary">Авто нумерация пикетов</string>
   <string name="pref_accel_thr_title">Максимальное допустимое ускорение</string>
@@ -1186,6 +1201,8 @@
   <string name="pref_sketchCompassReadings_title">Значения азимута</string>
   <string name="pref_sketchCompassReadings_summary">Кол-во осредняемых значений азимутов</string>
   <string name="pref_sketchCompassReadings_message">Кол-во осредняемых значений азимутов</string>
+  <string name="pref_sketchModelType_title">Тип модели стен</string>
+  <string name="pref_sketchModelType_summary">Модель для построения стен</string>
 
   <string name="pref_unit_length_title">Единицы измерения длины</string>
   <string name="pref_unit_length_summary">Показать единицы длины</string>
@@ -1270,8 +1287,9 @@
 
     <string name="perms_mandatory">TopoDroid не может работать без следующих разрешений:</string>
     <string name="perms_optional">TopoDroid может работать нестабильно без следующих разрешений:</string>
+    <string name="perm_required">Необходимые разрешения были предоставлены. Перезапустить TopoDroid</string>
+    <string name="perm_consider">Предоставьте программе разрешения: </string>
     <string name="welcome_title">TopoDroid %1$s</string>
-
     <string name="welcome_text">
 \nTopoDroid это ПО с открытым исходным кодом для топосъёмки пещер при помощи прибора DistoX.
 \n\nНет гарантий: используя данное ПО вы соглашаетесть с тем что автор не несет ответственность за потерю данных.

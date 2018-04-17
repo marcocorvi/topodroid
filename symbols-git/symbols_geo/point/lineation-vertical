@@ -2,6 +2,7 @@ symbol point
 name lineation-vertical
 name-pt lineação_vertical
 name-es lineación vertical
+name-ru вертикально_линейно
 th_name u:lineation_vertical
 color 0xffffff
 csurvey 0 0 0

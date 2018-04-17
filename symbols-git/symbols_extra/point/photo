@@ -1,6 +1,7 @@
 symbol point
 name photo
 name-pt foto
+name-ru фото
 th_name u:photo
 orientation no
 has_text yes

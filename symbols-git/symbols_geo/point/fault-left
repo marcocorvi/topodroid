@@ -3,6 +3,7 @@ name fault-left
 name-it faglia_sinistra
 name-es falla_izquierda
 name-pt falha_esquerda
+name-ru нарушение_левостороннее
 th_name u:fault-left
 color 0xff6666
 csurvey 0 0 0
