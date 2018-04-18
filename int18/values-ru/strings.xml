@@ -845,14 +845,14 @@
     <string name="title_calib_export">Экспорт калибровки как</string>
     <!-- UNUSED string name="title_zoom">Зум</string -->
 
-  <string name="pref_cat_survey">Настройки топосъёмки </string>
-  <string name="pref_cat_drawing">Настройки Рисования </string>
-  <string name="pref_cat_import_export">ИМПОРТ-ЭКСПОРТ</string>
-  <string name="pref_cat_calib">Настройки Калибровки</string>
+  <string name="pref_cat_survey">НАСТРОЙКИ ТОПОСЪЁМКИ </string>
+  <string name="pref_cat_drawing">НАСТРОЙКИ РИСОВАНИЯ </string>
+  <string name="pref_cat_import_export">НАСТРОЙКИ ИМПОРТА-ЭКСПОРТА</string>
+  <string name="pref_cat_calib">НАСТРОЙКИ КАЛИБРОВКИ</string>
   <string name="pref_cat_min_algo">АЛГОРИТМ МИНИМИЗАЦИИ</string>
-  <string name="pref_cat_device">Настройки Устройства</string>
-  <string name="pref_cat_sketch">Настройки Абриса</string>
-  <string name="pref_cat_log">Настройки журнала</string>
+  <string name="pref_cat_device">НАСТРОЙКИ УСТРОЙСТВА DistoX</string>
+  <string name="pref_cat_sketch">НАСТРОЙКИ АБРИСА</string>
+  <string name="pref_cat_log">НАСТРОЙКИ ЖУРНАЛА</string>
   <!-- OK string name="pref_hide_help_title">Скрыть помощь</string -->
   <!-- OK string name="pref_hide_help_summary">Скрыть кнопку помощи</string -->
   <string name="pref_locale_title">Язык</string>
@@ -968,7 +968,7 @@
   <!-- UNUSED string name="pref_gps_averaging_title">Осреднение данных GPS </string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Использовать GPSAveraging?</string -->
 
-  <string name="pref_plot_screen_title">Настройки экрана абрисов</string>
+  <string name="pref_plot_screen_title">НАСТРОЙКИ ЭКРАНА АБРИСОВ</string>
   <string name="pref_tool_line_title">НАСТРОЙКИ ЛИНИЙ</string>
   <string name="pref_tool_point_title">НАСТРОЙКИ ТОЧЕК</string>
   <string name="pref_location_title">НАСТРОЙКИ МЕСТОПОЛОЖЕНИЯ</string>
