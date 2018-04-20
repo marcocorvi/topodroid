@@ -452,7 +452,7 @@
     <string name="zip_failed">Falha na compressão da topo</string>
     <string name="unzip_fail">Falha na decompressão da topo</string>
     <string name="unzip_fail_sqlite">SQL falhou: apague a topo e tente novamente</string>
-    <string name="unzip_fail_survey">Falha: nome da topo incompatível</string>
+    <string name="unzip_fail_survey">Falha: nome da topo diferença no nome do arquivo</string>
     <string name="unzip_fail_db">Falha: versão do banco de dados incompatível</string>
     <string name="unzip_fail_td">Falha: versão do TopoDroid incompatível</string>
     <!-- UNUSED string name="zoom_in_out">Abrir/fechar zoom</string -->
