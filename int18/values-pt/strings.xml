@@ -464,7 +464,7 @@
     <string name="stat_component">Componentes %1$d</string>
     <string name="stat_depth">Profundidade %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Visadas duplicadas %1$d %2$.1f %3$s</string>
-    <string name="stat_leg">Visadas %1$d %2$.1f %3$s %4$.1f %5$s</string>
+    <string name="stat_leg">Visadas - Qt: %1$d  - Ext. total: %2$.1f %3$s Proj. horiz.: %4$.1f %5$s</string>
     <string name="stat_length">Comprimento %1$.1f %2$s</string>
     <string name="stat_projlen">Comprimento da topo %1$.1f %2$s</string>
     <string name="stat_loop">Anéis %1$d</string>
