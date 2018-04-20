@@ -69,10 +69,10 @@
     <!-- UNUSED string name="connect_failed">Ошибка соединения</string -->
     <!-- UNUSED string name="data">данные</string -->
     <string name="using">Использую %1$s</string>
-    <string name="calib_error">Средн. Ошибка: %1$.4f градусов</string>
-    <string name="calib_stddev">Ст-откл ошибок: %1$.4f градусов</string>
-    <string name="calib_max_error">Макс. ошибка: %1$.4f градусов</string>
-    <string name="calib_ave_std">Точность: %1$.4f +- %2$.4f градусов</string>
+    <string name="calib_error">Средн. Ошибка: %1$.4f градуса</string>
+    <string name="calib_stddev">Ст-откл ошибок: %1$.4f градуса</string>
+    <string name="calib_max_error">Макс. ошибка: %1$.4f градуса</string>
+    <string name="calib_ave_std">Точность: %1$.4f +- %2$.4f градуса</string>
     <string name="calib_precision">Точность</string>
     <string name="calib_iter">Итераций: %1$d</string>
     <string name="calib_reset">Сбросить калибровку DistoX ?</string>
@@ -584,7 +584,7 @@
     <string name="btn_import">Импорт</string>
     <string name="btn_install">Установитъ</string>
 
-    <string name="symbol_archeo">Архео.</string>
+    <string name="symbol_archeo">Археология</string>
     <string name="symbol_bio">Биология</string>
     <string name="symbol_geo">Геология</string>
     <string name="symbol_karst">Карст</string>
