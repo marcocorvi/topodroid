@@ -69,10 +69,10 @@
     <!-- UNUSED string name="connect_failed">Ошибка соединения</string -->
     <!-- UNUSED string name="data">данные</string -->
     <string name="using">Использую %1$s</string>
-    <string name="calib_error">Средн. Ошибка: %1$.4f градусов</string>
-    <string name="calib_stddev">Ст-откл ошибок: %1$.4f градусов</string>
-    <string name="calib_max_error">Макс. ошибка: %1$.4f градусов</string>
-    <string name="calib_ave_std">Точность: %1$.4f +- %2$.4f градусов</string>
+    <string name="calib_error">Средн. Ошибка: %1$.4f градуса</string>
+    <string name="calib_stddev">Ст-откл ошибок: %1$.4f градуса</string>
+    <string name="calib_max_error">Макс. ошибка: %1$.4f градуса</string>
+    <string name="calib_ave_std">Точность: %1$.4f +- %2$.4f градуса</string>
     <string name="calib_precision">Точность</string>
     <string name="calib_iter">Итераций: %1$d</string>
     <string name="calib_reset">Сбросить калибровку DistoX ?</string>
@@ -584,7 +584,7 @@
     <string name="btn_import">Импорт</string>
     <string name="btn_install">Установитъ</string>
 
-    <string name="symbol_archeo">Архео.</string>
+    <string name="symbol_archeo">Археология</string>
     <string name="symbol_bio">Биология</string>
     <string name="symbol_geo">Геология</string>
     <string name="symbol_karst">Карст</string>
@@ -845,14 +845,14 @@
     <string name="title_calib_export">Экспорт калибровки как</string>
     <!-- UNUSED string name="title_zoom">Зум</string -->
 
-  <string name="pref_cat_survey">Настройки топосъёмки </string>
-  <string name="pref_cat_drawing">Настройки Рисования </string>
-  <string name="pref_cat_import_export">ИМПОРТ-ЭКСПОРТ</string>
-  <string name="pref_cat_calib">Настройки Калибровки</string>
+  <string name="pref_cat_survey">НАСТРОЙКИ ТОПОСЪЁМКИ </string>
+  <string name="pref_cat_drawing">НАСТРОЙКИ РИСОВАНИЯ </string>
+  <string name="pref_cat_import_export">НАСТРОЙКИ ИМПОРТА-ЭКСПОРТА</string>
+  <string name="pref_cat_calib">НАСТРОЙКИ КАЛИБРОВКИ</string>
   <string name="pref_cat_min_algo">АЛГОРИТМ МИНИМИЗАЦИИ</string>
-  <string name="pref_cat_device">Настройки Устройства</string>
-  <string name="pref_cat_sketch">Настройки Абриса</string>
-  <string name="pref_cat_log">Настройки журнала</string>
+  <string name="pref_cat_device">НАСТРОЙКИ УСТРОЙСТВА DistoX</string>
+  <string name="pref_cat_sketch">НАСТРОЙКИ АБРИСА</string>
+  <string name="pref_cat_log">НАСТРОЙКИ ЖУРНАЛА</string>
   <!-- OK string name="pref_hide_help_title">Скрыть помощь</string -->
   <!-- OK string name="pref_hide_help_summary">Скрыть кнопку помощи</string -->
   <string name="pref_locale_title">Язык</string>
@@ -968,7 +968,7 @@
   <!-- UNUSED string name="pref_gps_averaging_title">Осреднение данных GPS </string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Использовать GPSAveraging?</string -->
 
-  <string name="pref_plot_screen_title">Настройки экрана абрисов</string>
+  <string name="pref_plot_screen_title">НАСТРОЙКИ ЭКРАНА АБРИСОВ</string>
   <string name="pref_tool_line_title">НАСТРОЙКИ ЛИНИЙ</string>
   <string name="pref_tool_point_title">НАСТРОЙКИ ТОЧЕК</string>
   <string name="pref_location_title">НАСТРОЙКИ МЕСТОПОЛОЖЕНИЯ</string>
