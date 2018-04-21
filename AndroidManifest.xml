@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="400006"
-      android:versionName="4.0.0f"
+      android:versionCode="400009"
+      android:versionName="4.0.0i"
     >
     <uses-sdk
        android:minSdkVersion="8"
@@ -20,13 +20,13 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <!-- uses-permission android:name="android.permission.DISABLE_KEYGUARD"/ -->
     <!-- uses-permission android:name="android.permission.WRITE_SETTINGS"/ -->
-    <!-- uses-permission android:name="android.permission.INTERNET"/ -->
+    <uses-permission android:name="android.permission.INTERNET"/>
     <!-- uses-permission android:name="android.permission.DEVICE_POWER"/ -->
     <!-- uses-permission android:name="android.permission.WAKE_LOCK"/ -->
 
     <uses-feature android:name="android.hardware.screen.portrait" android.required="true" />
     <uses-feature android:name="android.hardware.bluetooth" android.required="true" />
-<!--
+
     <uses-feature android:name="android.hardware.touchscreen" android.required="false" />
     <uses-feature android:name="android.hardware.camera" android.required="false" />
     <uses-feature android:name="android.hardware.camera.autofocus" android.required="false" />
@@ -36,7 +36,7 @@
     <uses-feature android:name="android.hardware.audio.output" android.required="false" />
     <uses-feature android:name="android.hardware.sensor.accelerometer" android.required="false" />
     <uses-feature android:name="android.hardware.sensor.compass" android.required="false" />
--->
+
 
     <application
           android:name=".TopoDroidApp"

@@ -49,11 +49,13 @@
        android:defaultValue="false"
        / -->
 
-  <CheckBoxPreference
-       android:key="DISTOX_LOCAL_HELP"
+  <com.topodroid.DistoX.MyListPreference
+       android:key="DISTOX_LOCAL_MAN"
        android:summary="@string/pref_local_help_summary"
        android:title="@string/pref_local_help_title"
-       android:defaultValue="true"
+       android:defaultValue="0"
+       android:entries="@array/localUserMan"
+       android:entryValues="@array/localUserManValue"
        />
 
   <!-- CheckBoxPreference

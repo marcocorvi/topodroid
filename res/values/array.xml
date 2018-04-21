@@ -97,7 +97,6 @@
      <item name="chinese">中文</item>
      <item name="ukrainian">Українська</item>
      <item name="hungarian">Hungarian</item>
-
   </string-array>
   <string-array name="localeValue">
      <item name="default"></item>
@@ -113,6 +112,22 @@
      <item name="chinese">cn</item>
      <item name="ukrainian">ua</item>
      <item name="hungarian">hu</item>
+  </string-array>
+
+  <!-- DISTOX_LOCAL_HELP -->
+  <string-array name="localUserMan">
+     <item name="english">English</item>
+     <item name="french">Français</item>
+     <item name="spanish">Español</item>
+     <item name="italian">Italiano</item>
+     <item name="russian">Русский</item>
+  </string-array>
+  <string-array name="localUserManValue">
+     <item name="english">0</item>
+     <item name="french">1</item>
+     <item name="spanish">2</item>
+     <item name="italian">3</item>
+     <item name="russian">4</item>
   </string-array>
 
   <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->

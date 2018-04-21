@@ -42,7 +42,7 @@ class TDSetting
     "DISTOX_TEXT_SIZE",           // size of tetx [pt]
     "DISTOX_MKEYBOARD",           // whether to use TopoDroid keypads
     "DISTOX_TEAM",                // default team
-    "DISTOX_LOCAL_HELP",          // enable local man pages
+    "DISTOX_LOCAL_MAN",          // enable local man pages
     "DISTOX_COSURVEY",            // whether to enable co-surveying
     "DISTOX_INIT_STATION",        // default initial station name
     "DISTOX_AZIMUTH_MANUAL",      // whether the "extend" is fixed L or R, selected by hand 
@@ -680,7 +680,7 @@ class TDSetting
     setTextSize( app, tryInt( prefs, key[k++], defaultTextSize ) );// DISTOX_TEXT_SIZE
     mKeyboard    = prefs.getBoolean( key[k++], true );             // DISTOX_MKEYBOARD
     mDefaultTeam = prefs.getString( key[k++], "" );                // DISTOX_TEAM
-    mLocalManPages = prefs.getBoolean( key[k++], true );           // DISTOX_LOCAL_HELP
+    mLocalManPages = handleLocalUserMan( prefs.getString( key[k++], "0" ), false, null ); // DISTOX_LOCAL_MAN
     boolean co_survey = prefs.getBoolean( key[k++], false );       // DISTOX_COSURVEY 
 
     mInitStation = prefs.getString( key[k++], "0" ).replaceAll("\\s+", "");  // DISTOX_INIT_STATION 
@@ -932,7 +932,7 @@ class TDSetting
     } else if ( k.equals( key[ nk++ ] ) ) {
       mDefaultTeam     = prefs.getString( k, "" );       // DISTOX_TEAM
     } else if ( k.equals( key[ nk++ ] ) ) {
-      mLocalManPages = prefs.getBoolean( k, true );           // DISTOX_LOCAL_HELP
+      mLocalManPages = handleLocalUserMan( prefs.getString( k, "0" ), true, app );      // DISTOX_LOCAL_MAN
     } else if ( k.equals( key[ nk++ ] ) ) {
       boolean co_survey = prefs.getBoolean( k, false );  // DISTOX_COSURVEY
       if ( co_survey != app.mCoSurveyServer ) {
@@ -1505,7 +1505,7 @@ class TDSetting
     // if ( name.equals( "DISTOX_PLOT_CACHE") ) 
 
     // if ( name.equals( "DISTOX_TEAM" )
-    // if ( name.equals( "DISTOX_LOCAL_HELP" )
+    // if ( name.equals( "DISTOX_LOCAL_MAN" )
     if ( name.equals( "DISTOX_SHOT_TIMER"     ) ) return parseIntValue( value, mTimerWait, 0 );
     if ( name.equals( "DISTOX_BEEP_VOLUME"    ) ) return parseIntValue( value, mBeepVolume, 10, 100 );
     // if ( name.equals( "DISTOX_LEG_SHOTS" )
@@ -1592,6 +1592,29 @@ class TDSetting
     //C if ( name.equals( "DISTOX_LOCALE" )
     //A if ( name.equals( "DISTOX_CWD"    )
     return value;
+  }
+
+  static boolean handleLocalUserMan( String man, boolean download, TopoDroidApp app ) 
+  {
+    int idx = Integer.parseInt( man ); // no throw
+    if ( idx > 0 && idx < 5 ) { 
+      if ( download && FeatureChecker.checkInternet( app ) ) { // download user manual 
+	int[] res = { 
+	  0,
+	  R.string.user_man_fr,
+	  R.string.user_man_es,
+	  R.string.user_man_it,
+	  R.string.user_man_ru
+	};
+        String url = app.getResources().getString( res[idx] );
+	if ( url != null && url.length() > 0 ) {
+          // try do download the zip
+          (new UserManDownload( app, url )).execute();
+	}
+      }
+      return true;
+    }
+    return false;
   }
 
 }

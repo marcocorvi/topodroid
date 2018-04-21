@@ -87,7 +87,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 // import android.graphics.Color;
 // import android.graphics.PorterDuff;
 
-// import android.util.Log;
+import android.util.Log;
 
 /*
   Method m = device.getClass().getMethod( "createRfcommSocket", new Class[] (int.class) );
@@ -808,7 +808,7 @@ public class MainWindow extends Activity
   @Override
   public void onRequestPermissionsResult( int code, final String[] perms, int[] results )
   {
-    // Log.v("DistoXX", "MAIN req code " + code + " results length " + results.length );
+    Log.v("DistoXX", "MAIN req code " + code + " results length " + results.length );
     if ( code == FeatureChecker.REQUEST_PERMISSIONS ) {
       if ( results.length > 0 ) {
 	for ( int k = 0; k < results.length; ++ k ) {
@@ -818,13 +818,13 @@ public class MainWindow extends Activity
       }
     }
     // Log.v("DistoXX", "MAIN must restart " + FeatureChecker.MustRestart );
-    if ( ! FeatureChecker.MustRestart ) {
-      TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.perm_required,
-        new DialogInterface.OnClickListener() {
-          @Override public void onClick( DialogInterface dialog, int btn ) { finish(); }
-        }
-      );
-    }
+    // if ( ! FeatureChecker.MustRestart ) {
+    //   TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.perm_required,
+    //     new DialogInterface.OnClickListener() {
+    //       @Override public void onClick( DialogInterface dialog, int btn ) { finish(); }
+    //     }
+    //   );
+    // }
   }
 
 

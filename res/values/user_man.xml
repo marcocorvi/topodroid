@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="user_man_fr">http://souterweb.free.fr/topographie/topodroid_travaux/fr.zip</string>
+  <string name="user_man_es">https://github.com/xguerrero/Topodroid_manual_es/archive/master.zip</string>
+  <string name="user_man_it">https://github.com/fato63/TopoItMan/raw/master/TopodroidItManual.zip</string>
+  <string name="user_man_ru">https://github.com/akozhenkov/TD_manual_RU/archive/master.zip</string>
+</resources>

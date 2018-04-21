@@ -369,6 +369,7 @@ class TDPath
   static String getBinFile( String name )    { return PATH_BIN + name; }
   static String getCCsvFile( String name )   { return PATH_CCSV + name; }
   static String getManFile( String name )    { return PATH_MAN + name; }
+  static String getManPath( )    { return PATH_MAN; }
 
   static String getNoteFile( String name )   { return APP_NOTE_PATH + name; }
 

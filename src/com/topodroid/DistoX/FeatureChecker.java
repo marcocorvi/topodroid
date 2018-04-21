@@ -62,12 +62,16 @@ class FeatureChecker
   static private String perms[] = {
       android.Manifest.permission.BLUETOOTH,            // Bluetooth permissions are normal - no need to request at runtime
       android.Manifest.permission.BLUETOOTH_ADMIN,
+      android.Manifest.permission.INTERNET,
       android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
       // android.Manifest.permission.READ_EXTERNAL_STORAGE,
       android.Manifest.permission.ACCESS_FINE_LOCATION,
       android.Manifest.permission.CAMERA,
       android.Manifest.permission.RECORD_AUDIO
   };
+
+  static final int NR_PERMS_D = 4;
+  static final int NR_PERMS   = 7;
 
   /** app specific code - for callback in MainWindow
    */
@@ -80,14 +84,16 @@ class FeatureChecker
   {
     MustRestart = false;
     if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.M ) return;
-    for ( int k=0; k<6; ++k ) {
+    for ( int k=0; k<NR_PERMS; ++k ) { // check whether the app has the six permissions
       GrantedPermission[k] = ( context.checkSelfPermission( perms[k] ) == PackageManager.PERMISSION_GRANTED );
       // Log.v("DistoXX", "FC perm " + k + " granted " + GrantedPermission[k] );
       if ( ! GrantedPermission[k] ) MustRestart = true;
     }
     // Log.v("DistoXX", "FC must restart " + MustRestart );
-    if ( MustRestart ) {
+    if ( MustRestart ) { // if a permission has not been granted request it
       activity.requestPermissions( perms, REQUEST_PERMISSIONS );
+      android.os.Process.killProcess( android.os.Process.myPid() );
+      System.exit( 1 );
     }
   }
 
@@ -95,11 +101,14 @@ class FeatureChecker
    * @return 0 ok
    *         -1 missing some necessary permission
    *         >0 missing some complementary permssion (flag):
+   *            1 FINE_LOCATION
+   *            2 CAMERA
+   *            4 AUDIO
    */
   static int checkPermissions( Context context )
   {
     int k;
-    for ( k=0; k<3; ++k ) {
+    for ( k=0; k<NR_PERMS_D; ++k ) {
       int res = context.checkCallingOrSelfPermission( perms[k] );
       if ( res != PackageManager.PERMISSION_GRANTED ) {
         // TDToast.make( mActivity, "TopoDroid must have " + perms[k] );
@@ -108,7 +117,7 @@ class FeatureChecker
     }
     int ret = 0;
     int flag = 1;
-    for ( ; k<6; ++k ) {
+    for ( ; k<NR_PERMS; ++k ) {
       int res = context.checkCallingOrSelfPermission( perms[k] );
       if ( res != PackageManager.PERMISSION_GRANTED ) {
         // TDToast.make( mActivity, "TopoDroid may need " + perms[k] );
@@ -150,5 +159,10 @@ class FeatureChecker
   {
     return ( context.checkCallingOrSelfPermission( android.Manifest.permission.BLUETOOTH ) == PackageManager.PERMISSION_GRANTED )
         && context.getPackageManager().hasSystemFeature( PackageManager.FEATURE_BLUETOOTH );
+  }
+
+  static boolean checkInternet( Context context )
+  {
+    return ( context.checkCallingOrSelfPermission( android.Manifest.permission.INTERNET ) == PackageManager.PERMISSION_GRANTED );
   }
 }
