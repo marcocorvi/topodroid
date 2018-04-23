@@ -561,7 +561,7 @@
     <string name="mode_splay">Medidas auxiliares</string>
     <string name="mode_station">Bases</string>
     <string name="mode_grid">Grade</string>
-    <string name="mode_fixed">Referências fixas</string>
+    <string name="mode_fixed">Deslocar croqui da aranha (CUIDADO!)</string>
     <string name="mode_outline">Contorno</string>
     <string name="mode_scale_ref">Escala gráfica</string>
 
