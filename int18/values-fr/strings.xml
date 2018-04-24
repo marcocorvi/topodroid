@@ -71,7 +71,7 @@
     <!-- UNUSED string name="data"> données</string -->
     <string name="using">Utilisation de %1$s</string>
     <string name="calib_error">Erreur moyenne : %1$f degrés</string>
-    <string name="calib_stddev">Erreur stddev: %1$.4f degrés</string>
+    <string name="calib_stddev">Ecart type : %1$.4f degrés</string>
     <string name="calib_max_error">Erreur max : %1$.4f degrés</string>
     <string name="calib_ave_std">Précision : %1$.4f %2$.4f degrés</string>
     <string name="calib_precision">Précision</string>
@@ -369,7 +369,7 @@
     <string name="saving_">Enregistrement</string>
     <string name="saving_file_failed">Échec de l\'enregistrement du fichier</string>
     <!-- UNUSED string name="scrap_name">Nom du croquis</string -->
-    <string name="splay">Visée latéralle</string>
+    <string name="splay">Visée latérale</string>
     <string name="too_many_leg_intersection">La ligne de section croise plus d\'une ligne de cheminement.</string>
     <string name="too_many_legs_xsection">Trop de visées pour la section X</string>
     <!-- UNUSED string name="converted_tdr2th2">Fichier de dessin binaire convertis vers th2</string -->
@@ -405,7 +405,7 @@
     <string name="shot_reverse">inverse</string>
     <string name="shot_to">à ou VERS</string>
 
-    <string name="make_surface">Cette surface existe. La remplacer?</string>
+    <string name="make_surface">Cette surface existe. La remplacer ?</string>
 
     <string name="sketch3d_name">nom</string>
     <string name="sketch3d_new">Nouveau modèle 3D</string>
@@ -417,7 +417,7 @@
 
     <string name="station">Station</string>
     <string name="station_ask">Insérer station ?</string>
-    <string name="station_del">Suppr. la station du croquis ?</string>
+    <string name="station_del">Supprimer la station du croquis ?</string>
     <string name="station_set">Continuer le relevé depuis cette station ?</string>
     <!-- UNUSED string name="station_base">Station de référence</string -->
     <!-- UNUSED string name="station_next">next station</string -->
@@ -461,9 +461,9 @@
     <!-- UNUSED string name="zoom_in_out">Zoom +/-</string -->
 
     <string name="survey_info">Information sur le relevé</string>
-    <string name="stat_stddev_m">M stddev %1$.1f %%</string>
-    <string name="stat_stddev_g">G stddev %1$.1f %%</string>
-    <string name="stat_stddev_dip">Dip stddev %1$.1f deg. (moyenne %2$.1f deg.)</string>
+    <string name="stat_stddev_m">Ecart type M %1$.1f %%</string>
+    <string name="stat_stddev_g">Ecart type G %1$.1f %%</string>
+    <string name="stat_stddev_dip">Ecart type Dipôle %1$.1f deg. (moyenne %2$.1f deg.)</string>
     <string name="stat_component">Composants %1$d</string>
     <string name="stat_depth">Profondeur %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Visées dupliquées %1$d %2$.1f %3$s</string>
@@ -636,7 +636,7 @@
     <!-- UNUSED string name="btn_surface">surface</string -->
 
     <!-- UNUSED string name="station_next">SUIVANT</string -->
-    <string name="no_shot_between_stations">Pas de points entre les stations</string>
+    <string name="no_shot_between_stations">Pas de point entre les stations</string>
     <string name="few_line_points">La ligne a trop peu de points</string>
     <string name="line_delete">Supprimer la ligne</string>
     <string name="flip_shots">Inverser les points</string>
@@ -715,10 +715,10 @@
     <string name="help_stats">Statistiques du relevé</string>
     <string name="help_save_plot">Exporte le croquis</string>
     <!-- UNUSED string name="help_tdr2th2">Converti dessin vers format th2</string -->
-    <string name="help_toggle_plot">Bascule entre plan et section étendue</string>
+    <string name="help_toggle_plot">Bascule entre plan et coupe développée</string>
     <!-- UNUSED string name="help_trash">Supprime le croquis</string -->
     <string name="help_undo">Annule la dernière action</string>
-    <string name="help_redo">Rétabli la dernière action</string>
+    <string name="help_redo">Rétablit la dernière action</string>
     <string name="help_symbol_plot">Sélectionne le symbole à dessiner</string>
     <string name="help_delete_item">Supprimer objet topo</string>
     <string name="help_range">Déplacer portion de ligne</string>
@@ -748,7 +748,7 @@
     <string name="help_delete_calib">Supprime l\'étalonnage</string>
     <string name="help_detach">Supprime le choix du DistoX courant</string>
     <string name="help_firmware">Mise à jour du firmware du DistoX2</string>
-    <string name="help_toggle">Bascule DistoX entre mode étalonnage/normal</string>
+    <string name="help_toggle">Bascule DistoX entre mode étalonnage et normal</string>
     <string name="help_sdcard">Fonction mémoire du DistoX</string>
     <string name="help_read">Lit les coefficients d\'étalonnage du DistoX</string>
     <string name="help_info_device">Information sur l\'appareil</string>
@@ -814,8 +814,8 @@
     <string name="title_plot_save">Enregistrer le croquis sous</string>
     <string name="title_plot_merge">Fusionner Esquisse</string>
     <string name="title_plot_reload">Recharger le croquis</string>
-    <string name="title_profile_flip">Basculer le profil du croquis?</string>
-    <string name="title_projection">Azimut profil projecté %1$d</string>
+    <string name="title_profile_flip">Basculer la coupe du croquis ?</string>
+    <string name="title_projection">Azimut coupe projetée %1$d</string>
     <string name="title_refs">Références du dessin</string>
     <string name="title_scraps">Croquis du relevé</string>
     <string name="title_scraps_outline">Contours Esquisse</string>
@@ -858,7 +858,7 @@
   <string name="pref_local_help_title">Manuel traduit</string>
   <string name="pref_local_help_summary">Activer la traduction du manuel</string>
   <string name="pref_cosurvey_title">Co-relevé topographique</string>
-  <string name="pref_cosurvey_summary">Activer/désactiver co-relevé topo</string>
+  <string name="pref_cosurvey_summary">Activer/désactiver co-relevé topographique</string>
   <string name="pref_export_shots_title">Format export des données</string>
   <string name="pref_export_shots_summary">Format export des données par défaut</string>
   <string name="pref_export_plot_title">Format export dessins</string>

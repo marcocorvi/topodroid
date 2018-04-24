@@ -125,11 +125,18 @@
     android:layout_gravity="right" 
     android:gravity="right" 
     >
-    <Button android:id="@+id/btn_color"
-      style="@style/button_default"
-      android:text="@string/button_color"
+    <LinearLayout 
+      android:layout_margin="0dp"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content"
+      android:background="@drawable/button_border"
       android:layout_marginRight="@dimen/marginh"
-    />
+      >
+      <Button android:id="@+id/btn_color"
+        style="@style/button_default"
+        android:text="@string/button_color"
+      />
+    </LinearLayout>
     <Button android:id="@+id/walls"
       style="@style/button_default"
       android:text="@string/make_walls"
