@@ -269,6 +269,8 @@
 <!-- UNUSED string name="menu_ready">Prêt</string -->
     <string name="menu_calib_check">VERIF ÉTALON.</string>
     <string name="menu_close">FERMER</string>
+    <!-- TODO string name="menu_clear">CLEAR</string -->
+    <!-- TODO string name="menu_color">CLEAR COLOR</string -->
     <string name="menu_delete">SUPPRIMER</string>
     <string name="menu_detach">DÉCONNECTER</string>
     <string name="menu_display">AFFICHAGE</string>
@@ -510,6 +512,7 @@
     <string name="button_change"    >Changer    </string>
     <string name="button_close"     >Fermer     </string>
     <string name="button_create"    >Créer    </string>
+    <!-- TODO string name="button_color"     >Color</string -->
     <string name="button_convert"   >Convertir   </string>
     <string name="button_current"   >Courant   </string>
     <string name="button_delete"    >Supprimer    </string>
@@ -670,6 +673,7 @@
     <string name="help_calib_check">Visées de contrôle étalonnage</string>
     <string name="help_close">Fermer fenêtre</string>
     <string name="help_coeff">Montrer les coefficients d\'étalonnage</string>
+    <!-- TODO string name="help_color">Clear splay colors</string -->
     <string name="help_continue">Continuer une ligne</string>
     <string name="help_current_station">Stations enregistrées</string>
     <string name="help_azimuth">Azimuth Référence Etendue</string>
@@ -780,6 +784,7 @@
     <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Distributions des données d\'étalonnage</string>
     <string name="title_coeff">Coefficients d\'étalonnage</string>
+    <!-- TODO string name="title_color_picker">Pick a color</string -->
     <string name="title_contour">Contour</string>
     <!-- UNUSED string name="title_coord">Entrer les Coordonnées du point</string -->
     <string name="title_current_station">Stations sauvegardées</string>

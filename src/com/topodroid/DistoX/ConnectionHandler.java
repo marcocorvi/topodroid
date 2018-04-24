@@ -377,16 +377,17 @@ class ConnectionHandler extends Handler
          break;
 
        case DataListener.SHOT_INSERT:
-         app_data.doInsertShot( mSID, Integer.parseInt(data[1]), Long.parseLong(data[2]), data[3], data[4],
-           Double.parseDouble(data[5]), Double.parseDouble(data[6]), Double.parseDouble(data[7]), Double.parseDouble(data[8]),
-           Integer.parseInt(data[9]), Integer.parseInt(data[10]), Integer.parseInt(data[11]), Integer.parseInt(data[12]),
-           Integer.parseInt(data[13]), data[14], false );
+         app_data.doInsertShot( mSID, Integer.parseInt(data[1]), Long.parseLong(data[2]), Long.parseLong(data[3]),
+           data[4], data[5],
+           Double.parseDouble(data[6]), Double.parseDouble(data[7]), Double.parseDouble(data[8]), Double.parseDouble(data[9]),
+           Integer.parseInt(data[10]), Integer.parseInt(data[11]), Integer.parseInt(data[12]), Integer.parseInt(data[13]),
+           Integer.parseInt(data[14]), data[15], false );
          break;
        case DataListener.SHOT_INSERTAT:
-         app_data.insertShotAt( mSID, Integer.parseInt(data[1]), Long.parseLong(data[2]),
-           Double.parseDouble(data[3]), Double.parseDouble(data[4]), Double.parseDouble(data[5]), Double.parseDouble(data[6]),
-           Long.parseLong(data[7]), Long.parseLong(data[8]),
-           Integer.parseInt(data[9]),
+         app_data.insertShotAt( mSID, Integer.parseInt(data[1]), Long.parseLong(data[2]), Long.parseLong(data[3]),
+           Double.parseDouble(data[4]), Double.parseDouble(data[5]), Double.parseDouble(data[6]), Double.parseDouble(data[7]),
+           Long.parseLong(data[8]), Long.parseLong(data[9]),
+           Integer.parseInt(data[10]),
            false );
          break;
 
@@ -510,6 +511,12 @@ class ConnectionHandler extends Handler
     enqueue( DataListener.SHOT_STATUS, String.format(Locale.US, "%d|%d|%d|", (int)id, (int)sid, (int)status ) );
   }
 
+  public void onUpdateShotColor( long sid, long id, long color )
+  {
+    enqueue( DataListener.SHOT_COLOR, 
+      String.format(Locale.US, "%d|%d|%d|", (int)sid, (int)id, (int)color ) );
+  }
+
   public void onUpdateShotAMDR( long sid, long id, double acc, double mag, double dip, double roll ) 
   {
     enqueue( DataListener.SHOT_AMDR, 
@@ -526,19 +533,19 @@ class ConnectionHandler extends Handler
     enqueue( DataListener.SHOT_UNDELETE, String.format(Locale.US, "%d|%d|", (int)id, (int)sid ) );
   }
 
-  public void onInsertShot( long sid, long id, long millis, String from, String to, 
+  public void onInsertShot( long sid, long id, long millis, long color, String from, String to, 
                           double d, double b, double c, double r, 
                           long extend, long flag, long leg, long status, long shot_type, String comment ) 
   {
     enqueue( DataListener.SHOT_INSERT, 
-      String.format(Locale.US, "%d|%d|%d|%s|%s|%.2f|%.1f|%.1f|%.1f|%d|%d|%d|%d|%d|%s|",
-      (int)sid, (int)id, millis, from, to, d, b, c, r, (int)extend, (int)flag, (int)leg, (int)status, (int)shot_type, comment ) );
+      String.format(Locale.US, "%d|%d|%d|%d|%s|%s|%.2f|%.1f|%.1f|%.1f|%d|%d|%d|%d|%d|%s|",
+      (int)sid, (int)id, millis, color, from, to, d, b, c, r, (int)extend, (int)flag, (int)leg, (int)status, (int)shot_type, comment ) );
   }
 
-  public void onInsertShotAt( long sid, long at, long millis, double d, double b, double c, double r, long e, long leg, long t ) 
+  public void onInsertShotAt( long sid, long at, long millis, long color, double d, double b, double c, double r, long e, long leg, long t ) 
   {
     enqueue( DataListener.SHOT_INSERTAT, 
-      String.format(Locale.US, "%d|%d|%d|%.2f|%.1f|%.1f|%.1f|%d|%d|%d", (int)sid, (int)at, millis, d, b, c, r, (int)e, (int)leg, (int)t ) );
+      String.format(Locale.US, "%d|%d|%d|%d|%.2f|%.1f|%.1f|%.1f|%d|%d|%d", (int)sid, (int)at, millis, color, d, b, c, r, (int)e, (int)leg, (int)t ) );
   }
 
   // public void transferShots( long sid, long old_sid, long old_id ) { }

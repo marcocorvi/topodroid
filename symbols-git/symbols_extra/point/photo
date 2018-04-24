@@ -3,7 +3,7 @@ name photo
 name-pt foto
 name-ru фото
 th_name u:photo
-orientation no
+orientation yes
 has_text yes
 color 0xffffff
 csurvey 6 6 80
@@ -18,6 +18,10 @@ path
   lineTo -5 -3
   lineTo -5 3
   addCircle 0 0 1.5
+  moveTo 2 -5
+  lineTo 3 -7
+  moveTo -2 -5
+  lineTo -3 -7
 endpath
 endsymbol
 

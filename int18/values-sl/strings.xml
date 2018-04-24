@@ -274,6 +274,8 @@
     <!-- UNUSED string name="menu_ready">Ready</string -->
     <!-- TODO string name="menu_calib_check">CALIBR. CHECK</string -->
     <!-- TODO string name="menu_close">CLOSE</string -->
+    <!-- TODO string name="menu_clear">CLEAR</string -->
+    <!-- TODO string name="menu_color">CLEAR COLOR</string -->
     <string name="menu_delete">BRIŠI</string>
     <string name="menu_detach">ODPNI</string>
     <string name="menu_display">PRIKAŽI</string>
@@ -516,6 +518,7 @@
     <!-- TODO string name="button_change"    >Change    </string -->
     <!-- TODO string name="button_close">Close     </string -->
     <!-- TODO string name="button_create"    >Create    </string -->
+    <!-- TODO string name="button_color"     >Color</string -->
     <string name="button_convert"   >Pretvori </string>
     <string name="button_current"   >Trenuten   </string>
     <string name="button_delete"    >Odstrani   </string>
@@ -672,6 +675,7 @@
     <!-- TODO string name="help_calib_check">Calibration-check shots</string -->
     <!-- TODO string name="help_close">Close window</string -->
     <string name="help_coeff">Koeficient kalibracije</string>
+    <!-- TODO string name="help_color">Clear splay colors</string -->
     <!-- TODO string name="help_continue">Continue drawing a line</string -->
     <!-- TODO string name="help_contour">Contour editing</string -->
     <string name="help_current_station">Shranjene merilne točke</string>
@@ -784,6 +788,7 @@
     <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Razporeditev podatkov kalibracije</string>
     <string name="title_coeff">Kalibracija</string>
+    <!-- TODO string name="title_color_picker">Pick a color</string -->
     <!-- TODO string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Inserisci le coordinate del punto:</string -->
     <string name="title_current_station">Shranjene merilne točke</string>

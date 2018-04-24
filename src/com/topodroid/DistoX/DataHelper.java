@@ -46,8 +46,8 @@ import java.util.HashMap;
 class DataHelper extends DataSetObservable
 {
 
-  static final String DB_VERSION = "33";
-  static final int DATABASE_VERSION = 33;
+  static final String DB_VERSION = "34";
+  static final int DATABASE_VERSION = 34;
   static final int DATABASE_VERSION_MIN = 21; // was 14
 
   private static final String CONFIG_TABLE = "configs";
@@ -92,6 +92,8 @@ class DataHelper extends DataSetObservable
   // private SQLiteStatement updateShotExtendStmt = null;
   // private SQLiteStatement updateShotFlagStmt = null;
   // private SQLiteStatement updateShotCommentStmt = null;
+  private SQLiteStatement resetShotColorStmt = null;
+  private SQLiteStatement updateShotColorStmt = null;
   private SQLiteStatement updateShotAMDRStmt = null;
   // private SQLiteStatement shiftShotsIdStmt = null;
 
@@ -163,7 +165,7 @@ class DataHelper extends DataSetObservable
     mShotFields = new String[] { 
          "id", "fStation", "tStation", "distance", "bearing",
          "clino", "acceleration", "magnetic", "dip", "extend",
-         "flag", "leg", "comment", "type", "millis"
+         "flag", "leg", "comment", "type", "millis", "color"
     };
     mSketchFields =
     new String[] {
@@ -233,6 +235,8 @@ class DataHelper extends DataSetObservable
      block.mComment = cursor.getString(12);
      block.mShotType = (int)cursor.getLong(13);
      block.mTime = cursor.getLong(14);
+     int color = (int)cursor.getLong(15);
+     block.mPaint = ( color == 0 )? null : BrushManager.makePaint( color );
    }
    
 
@@ -477,6 +481,8 @@ class DataHelper extends DataSetObservable
 
       updateShotNameAndExtendStmt =
         myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, leg=? WHERE surveyId=? AND id=?" );
+      resetShotColorStmt   = myDB.compileStatement( "UPDATE shots SET color=0 WHERE surveyId=?" );
+      updateShotColorStmt  = myDB.compileStatement( "UPDATE shots SET color=? WHERE surveyId=? AND id=?" );
       updateShotAMDRStmt   =
         myDB.compileStatement( "UPDATE shots SET acceleration=?, magnetic=?, dip=?, roll=? WHERE surveyId=? AND id=?" );
 
@@ -1072,6 +1078,7 @@ class DataHelper extends DataSetObservable
   {
     // if ( myDB == null ) return -1L;
     long millis = 0L;
+    long color  = 0L;
 
     InsertHelper ih = new InsertHelper( myDB, SHOT_TABLE );
     final int surveyIdCol = ih.getColumnIndex( "surveyId" );
@@ -1092,6 +1099,7 @@ class DataHelper extends DataSetObservable
     final int commentCol  = ih.getColumnIndex( "comment" );
     final int typeCol     = ih.getColumnIndex( "type" );
     final int millisCol   = ih.getColumnIndex( "millis" );
+    final int colorCol    = ih.getColumnIndex( "color" );
     try {
       // myDB.execSQL("PRAGMA synchronous=OFF");
       myDB.setLockingEnabled( false );
@@ -1120,6 +1128,7 @@ class DataHelper extends DataSetObservable
         ih.bind( commentCol, s.comment );
         ih.bind( typeCol, 0 ); // parser shot are not-modifiable
         ih.bind( millisCol, millis );
+        ih.bind( colorCol, color );
         ih.execute();
         ++id;
       }
@@ -1135,7 +1144,7 @@ class DataHelper extends DataSetObservable
     if ( mListeners != null ) {
       // synchronized( mListeners )
       for ( ParserShot s : shots ) {
-        mListeners.onInsertShot( sid, id, millis, s.from, s.to, s.len, s.ber, s.cln, s.rol, s.extend, 
+        mListeners.onInsertShot( sid, id, millis, color, s.from, s.to, s.len, s.ber, s.cln, s.rol, s.extend, 
                             s.duplicate ? DBlock.BLOCK_DUPLICATE    // flag
                             : s.surface ? DBlock.BLOCK_SURFACE 
                             // : s.commented ? DBlock.BLOCK_COMMENTED 
@@ -1153,14 +1162,53 @@ class DataHelper extends DataSetObservable
   long insertDistoXShot( long sid, long id, double d, double b, double c, double r, long extend,
                           long status, boolean forward )
   { // 0L=leg, status, 0L=type DISTOX
-    return doInsertShot( sid, id, System.currentTimeMillis()/1000, "", "",  d, b, c, r, extend, DBlock.BLOCK_SURVEY, 0L, status, 0L, "", forward );
+    return doInsertShot( sid, id, System.currentTimeMillis()/1000, 0L, "", "",  d, b, c, r, extend, DBlock.BLOCK_SURVEY, 0L, status, 0L, "", forward );
   }
 
-  
-  long insertShot( long sid, long id, long millis, double d, double b, double c, double r, long extend, long leg,
+  long insertShot( long sid, long id, long millis, long color, double d, double b, double c, double r, long extend, long leg,
                           long shot_type, boolean forward )
   { // leg, 0L=status, type 
-    return doInsertShot( sid, id, millis, "", "",  d, b, c, r, extend, DBlock.BLOCK_SURVEY, leg, 0L, shot_type, "", forward );
+    return doInsertShot( sid, id, millis, color, "", "",  d, b, c, r, extend, DBlock.BLOCK_SURVEY, leg, 0L, shot_type, "", forward );
+  }
+
+  boolean resetShotColor( long sid )
+  {
+    if ( resetShotColorStmt == null ) {
+      resetShotColorStmt   =
+        myDB.compileStatement( "UPDATE shots SET color=0 WHERE surveyId=?" );
+    }
+    resetShotColorStmt.bindLong( 1, sid );
+    if ( doStatement( resetShotColorStmt, "Color" ) ) {
+      return true;
+    }
+    return false;
+  }
+
+  boolean updateShotColor( long id, long sid, int color, boolean forward )
+  {
+    // if ( myDB == null ) return;
+
+    // StringWriter sw = new StringWriter();
+    // PrintWriter pw  = new PrintWriter( sw );
+    // pw.format( Locale.US,
+    //            "UPDATE shots SET color=%d WHERE surveyId=%d AND id=%d",
+    //            color, sid, id );
+    // myDB.execSQL( sw.toString() );
+    if ( updateShotColorStmt == null ) {
+      updateShotColorStmt   =
+        myDB.compileStatement( "UPDATE shots SET color=? WHERE surveyId=? AND id=?" );
+    }
+
+    updateShotColorStmt.bindLong( 1, color );
+    updateShotColorStmt.bindLong( 2, sid );
+    updateShotColorStmt.bindLong( 3, id );
+    if ( doStatement( updateShotColorStmt, "Color" ) ) {
+      if ( forward && mListeners != null ) { // synchronized( mListeners )
+        mListeners.onUpdateShotColor( sid, id, color );
+      }
+      return true;
+    }
+    return false;
   }
 
   boolean updateShotAMDR( long id, long sid, double acc, double mag, double dip, double r, boolean forward )
@@ -1335,7 +1383,7 @@ class DataHelper extends DataSetObservable
     } catch (SQLiteException e) { logError("transfer shots", e); }
   }
 
-  long insertShotAt( long sid, long at, long millis, double d, double b, double c, double r, long extend, long leg, long type, boolean forward )
+  long insertShotAt( long sid, long at, long millis, long color, double d, double b, double c, double r, long extend, long leg, long type, boolean forward )
   {
     if ( myDB == null ) return -1L;
     shiftShotsId( sid, at );
@@ -1359,9 +1407,11 @@ class DataHelper extends DataSetObservable
     cv.put( "comment",  "" ); // comment );
     cv.put( "type",     type ); 
     cv.put( "millis",   millis );
+    cv.put( "color",    color );
+
     if ( doInsert( SHOT_TABLE, cv, "insert at" ) ) {
       if ( forward && mListeners != null ) { // synchronized( mListeners )
-        mListeners.onInsertShotAt( sid, at, millis, d, b, c, r, extend, leg, DBlock.BLOCK_SURVEY );
+        mListeners.onInsertShotAt( sid, at, millis, color, d, b, c, r, extend, leg, DBlock.BLOCK_SURVEY );
       }
     }
     return at;
@@ -1369,7 +1419,7 @@ class DataHelper extends DataSetObservable
 
   // return the new-shot id
   // called by ConnectionHandler too
-  long doInsertShot( long sid, long id, long millis, String from, String to, 
+  long doInsertShot( long sid, long id, long millis, long color, String from, String to, 
                           double d, double b, double c, double r, 
                           long extend, long flag, long leg, long status, long shot_type,
                           String comment, boolean forward )
@@ -1401,9 +1451,10 @@ class DataHelper extends DataSetObservable
     cv.put( "comment",  comment );
     cv.put( "type",     shot_type );
     cv.put( "millis",   millis );
+    cv.put( "color",    color );
     if ( doInsert( SHOT_TABLE, cv, "insert" ) ) {
       if ( forward && mListeners != null ) { // synchronized( mListeners )
-        mListeners.onInsertShot( sid,  id, millis, from, to, d, b, c, r, extend, flag, leg, status, shot_type, comment );
+        mListeners.onInsertShot( sid,  id, millis, color, from, to, d, b, c, r, extend, flag, leg, status, shot_type, comment );
       }
     } 
     return id;
@@ -3764,13 +3815,13 @@ class DataHelper extends DataSetObservable
        cursor = myDB.query( SHOT_TABLE, 
                             new String[] { "id", "fStation", "tStation", "distance", "bearing", "clino", "roll",
                                            "acceleration", "magnetic", "dip",
-                                           "extend", "flag", "leg", "status", "comment", "type" },
+                                           "extend", "flag", "leg", "status", "comment", "type", "millis", "color" },
                             "surveyId=?", new String[] { Long.toString( sid ) },
                             null, null, null );
        if (cursor.moveToFirst()) {
          do {
            pw.format(Locale.US,
-                     "INSERT into %s values( %d, %d, \"%s\", \"%s\", %.2f, %.2f, %.2f, %.2f, %.2f %.2f %.2f, %d, %d, %d, %d, \"%s\", %d );\n",
+                     "INSERT into %s values( %d, %d, \"%s\", \"%s\", %.2f, %.2f, %.2f, %.2f, %.2f %.2f %.2f, %d, %d, %d, %d, \"%s\", %d, %d, %d );\n",
                      SHOT_TABLE,
                      sid,
                      cursor.getLong(0),
@@ -3788,7 +3839,9 @@ class DataHelper extends DataSetObservable
                      cursor.getLong(12),    // leg
                      cursor.getLong(13),    // status
                      cursor.getString(14),  // comment
-                     cursor.getLong(15)     // type
+                     cursor.getLong(15),    // type
+                     cursor.getLong(16),    // millis
+                     0 // cursor.getLong(17) // COLOR is not exported
            );
          } while (cursor.moveToNext());
        }
@@ -4017,10 +4070,11 @@ class DataHelper extends DataSetObservable
              status      = scanline1.longValue( );
              comment     = scanline1.stringValue( );
              // FIXME N.B. shot_type is not saved before 22
-             long type = 0; if ( db_version > 21 ) type = scanline1.longValue( );
+             long type   = 0; if ( db_version > 21 ) type   = scanline1.longValue( );
 	     long millis = 0; if ( db_version > 31 ) millis = scanline1.longValue( );
+	     long color  = 0; if ( db_version > 33 ) color  = scanline1.longValue( );
 
-             if ( doInsertShot( sid, id, millis, from, to, d, b, c, r, extend, flag, leg, status, type, comment, false ) >= 0 ) {
+             if ( doInsertShot( sid, id, millis, color, from, to, d, b, c, r, extend, flag, leg, status, type, comment, false ) >= 0 ) {
                success &= updateShotAMDR( id, sid, acc, mag, dip, r, false );
 	     } else {
 	       success = false;
@@ -4220,8 +4274,9 @@ class DataHelper extends DataSetObservable
              +   " leg INTEGER, "
              +   " status INTEGER, " // NORMAL DELETED OVERSHOOT
              +   " comment TEXT, "
-             +   " type INTEGER, "    // DISTOX MANUAL
-             +   " millis INTEGER "   // timestamp
+             +   " type INTEGER, "     // DISTOX MANUAL
+             +   " millis INTEGER, "   // timestamp
+	     +   " color INTEGER "     // custom color
              // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
              // +   " ON DELETE CASCADE "
              +   ")"
@@ -4435,6 +4490,8 @@ class DataHelper extends DataSetObservable
 	   case 32:
              db.execSQL( "ALTER TABLE plots ADD COLUMN orientation INTEGER default 0" );
 	   case 33:
+             db.execSQL( "ALTER TABLE shots ADD COLUMN color INTEGER default 0" );
+	   case 34:
              /* current version */
            default:
              break;

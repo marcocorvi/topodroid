@@ -269,6 +269,8 @@
     <!-- UNUSED string name="menu_ready">Ready</string -->
     <string name="menu_calib_check">VERIFICA CALIBR.</string>
     <string name="menu_close">CHIUDI</string>
+    <!-- TODO string name="menu_clear">CLEAR</string -->
+    <!-- TODO string name="menu_color">CLEAR COLOR</string -->
     <string name="menu_delete">ELIMINA</string>
     <string name="menu_detach">SCONNETTI</string>
     <!-- OK string name="menu_display">DISPLAY</string -->
@@ -511,6 +513,7 @@
     <string name="button_change"    >Cambia    </string>
     <string name="button_close"     >Chiudi    </string>
     <string name="button_create"    >Crea      </string>
+    <!-- TODO string name="button_color"     >Color</string -->
     <string name="button_convert"   >Converti  </string>
     <string name="button_current"   >Corrente   </string>
     <string name="button_delete"    >Elimina   </string>
@@ -671,6 +674,7 @@
     <string name="help_calib_check">Tiri di controllo calib.</string>
     <string name="help_close">Chiusura finestra</string>
     <string name="help_coeff">Coefficienti della calibrazione</string>
+    <!-- TODO string name="help_color">Clear splay colors</string -->
     <string name="help_continue">Continuare il disegno di una linea</string>
     <!-- NO string name="help_contour">Contour editing</string -->
     <string name="help_current_station">Capisaldi salvati</string>
@@ -783,6 +787,7 @@
     <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Distribuzione dati calibrazione</string>
     <string name="title_coeff">Calibrazione</string>
+    <!-- TODO string name="title_color_picker">Pick a color</string -->
     <!-- NO string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Inserisci le coordinate del punto:</string -->
     <string name="title_current_station">Capisaldi salvati</string>

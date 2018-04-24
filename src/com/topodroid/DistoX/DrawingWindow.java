@@ -742,13 +742,17 @@ public class DrawingWindow extends ItemDrawer
 
 
   // used for splays in x-sections
+  // the DBlock comes from a query in the DB and it is not the DBlock in the plan/profile
+  //     therefore coloring the splays of those blocks does not affect the X-Section splay coloring
   private void addFixedSectionSplay( DBlock blk, float x1, float y1, float x2, float y2, float a,
                                      // float xoff, float yoff, 
                                      boolean blue )
   {
     // Log.v("DistoX", "Section splay angle " + a + " " + TDSetting.mVertSplay );
     DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
-    if ( blue ) {
+    if ( blk.mPaint != null ) {
+      dpath.setPaint( blk.mPaint );
+    } else if ( blue ) {
       if ( blk.mType == DBlock.BLOCK_X_SPLAY ) {
         dpath.setPaint( BrushManager.fixedGreenPaint );
       } else if ( a > TDSetting.mSectionSplay ) {
@@ -770,7 +774,6 @@ public class DrawingWindow extends ItemDrawer
       }
     }
     // dpath.setPaint( blue? BrushManager.fixedSplay2Paint : BrushManager.fixedSplayPaint );
-
     // mDrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
     mDrawingUtil.makePath( dpath, x1, y1, x2, y2 );
     mDrawingSurface.addFixedPath( dpath, true, false ); // true SPLAY false SELECTABLE
@@ -821,9 +824,9 @@ public class DrawingWindow extends ItemDrawer
     } else if ( mMode == MODE_SPLIT ) {
       sb.append( res.getString( R.string.title_split ) );
     }
-    if ( ! mDrawingSurface.isSelectable() ) {
-      sb.append( mActivity.getTitle() + " [!s]" );
-    }
+    // if ( ! mDrawingSurface.isSelectable() ) {
+    //   sb.append( mActivity.getTitle() + " [!s]" );
+    // }
     mActivity.setTitle( sb.toString() );
   }
 
@@ -5669,5 +5672,20 @@ public class DrawingWindow extends ItemDrawer
       mDrawingSurface.setXSectionOutline( name, tdr, x-DrawingUtil.CENTER_X, y-DrawingUtil.CENTER_Y );
     }
   }
+
+  void updateBlockColor( DBlock blk, int color )
+  {
+    if ( color == 0 ) { // clear color is 0
+      blk.mPaint= null;
+    } else {
+      if ( blk.mPaint == null ) {
+        blk.mPaint = BrushManager.makePaint( color );
+      } else {
+        blk.mPaint.setColor( color );
+      }
+    }
+    mApp_mData.updateShotColor( blk.mId, mApp.mSID, color, false ); // do not forward color
+  }
+
 
 }

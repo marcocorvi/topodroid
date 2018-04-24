@@ -62,7 +62,7 @@ class FeatureChecker
   static private String perms[] = {
       android.Manifest.permission.BLUETOOTH,            // Bluetooth permissions are normal - no need to request at runtime
       android.Manifest.permission.BLUETOOTH_ADMIN,
-      android.Manifest.permission.INTERNET,
+      // android.Manifest.permission.INTERNET,
       android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
       // android.Manifest.permission.READ_EXTERNAL_STORAGE,
       android.Manifest.permission.ACCESS_FINE_LOCATION,
@@ -70,8 +70,8 @@ class FeatureChecker
       android.Manifest.permission.RECORD_AUDIO
   };
 
-  static final int NR_PERMS_D = 4;
-  static final int NR_PERMS   = 7;
+  static final int NR_PERMS_D = 3;
+  static final int NR_PERMS   = 6;
 
   /** app specific code - for callback in MainWindow
    */
