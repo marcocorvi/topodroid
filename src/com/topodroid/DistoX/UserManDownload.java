@@ -81,6 +81,7 @@ class UserManDownload extends AsyncTask< String, Integer, Integer >
 	}
       }
       http.disconnect();
+      ret = 1;
     } catch ( MalformedURLException e1 ) {
       TDLog.Error( "ERROR bad URL: " + e1.toString() );
     } catch ( IOException e2 ) {
@@ -100,6 +101,11 @@ class UserManDownload extends AsyncTask< String, Integer, Integer >
   {
     if ( res != null ) {
       int r = res.intValue();
+      if ( r == 1 ) { // success
+	TDToast.make( mContext, R.string.user_man_ok );
+      } else { // failed
+	TDToast.make( mContext, R.string.user_man_fail );
+      }
     }
     unlock();
   }

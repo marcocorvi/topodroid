@@ -2,6 +2,8 @@
 <resources>
     <!-- manual>https://sites.google.com/site/speleoapps/home/topodroid/docs/TopoDroid-2.2.4.pdf</manual -->
     <string name="no_manual">Handbuch konnte nicht heruntergeladen werden.</string>
+    <!-- TODO string name="user_man_ok">Installed user manual translation</string -->
+    <!-- TODO string name="user_man_fail">Failed to install user manual translation</string -->
 
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Erneut ZURÜCK drücken zum verlassen</string>
