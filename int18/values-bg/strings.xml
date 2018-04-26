@@ -2,6 +2,8 @@
 <resources>
     <!-- OK string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     <string name="no_manual">Ръководството не може да бъде изтеглено</string>
+    <!-- TODO string name="user_man_ok">Installed user manual translation</string -->
+    <!-- TODO string name="user_man_fail">Failed to install user manual translation</string -->
 
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Натиснете отново за да излезете</string>
@@ -270,6 +272,8 @@
     <!-- UNUSED string name="menu_ready">ready</string -->
     <string name="menu_calib_check">Проверка калибрация</string>
     <string name="menu_close">Затваряне</string>
+    <!-- TODO string name="menu_clear">CLEAR</string -->
+    <!-- TODO string name="menu_color">CLEAR COLOR</string -->
     <string name="menu_delete">Изтриване</string>
     <string name="menu_detach">Прек. на връзката</string>
     <string name="menu_display">Дисплей</string>
@@ -512,6 +516,7 @@
     <string name="button_change"    >Промяна   </string>
     <string name="button_close"     >Затваряне </string>
     <string name="button_create"    >Създаване </string>
+    <!-- TODO string name="button_color"     >Color</string -->
     <string name="button_convert"   >Конверт.  </string>
     <string name="button_current"   >Направи текущ</string>
     <string name="button_delete"    >Изтриване </string>
@@ -673,6 +678,7 @@
     <string name="help_calib_check">Контролни измервания</string>
     <string name="help_close">Затваряне на прозореца</string>
     <string name="help_coeff">Показване на коеф. на калибрация</string>
+    <!-- TODO string name="help_color">Clear splay colors</string -->
     <string name="help_continue">Продължаване на линия</string>
     <!-- NO string name="help_contour">Contour editing</string -->
     <string name="help_current_station">Записани репери</string>
@@ -785,6 +791,7 @@
     <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Разпределение на данните от калибрацията</string>
     <string name="title_coeff">Коефициенти на калибрацията</string>
+    <!-- TODO string name="title_color_picker">Pick a color</string -->
     <!-- NO string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Въведете координати на точката:</string -->
     <string name="title_current_station">Записани репери</string>

@@ -18,6 +18,8 @@ import java.util.Locale;
 
 import android.view.View;
 
+import android.graphics.Paint; // custom paint
+
 // import android.util.Log;
 
 class DBlock
@@ -43,6 +45,7 @@ class DBlock
   private int    mPos;     // position in the list
   int    mVisible; // whether is visible in the list
   boolean mMultiSelected; // whether the block is in multiselect list
+  Paint  mPaint;
 
   long   mId;
   long   mTime;
@@ -170,6 +173,7 @@ class DBlock
     mPos  = 0;
     mVisible = View.VISIBLE;
     mMultiSelected = false;
+    mPaint = null;
     mId = 0;
     mTime = 0;
     mSurveyId = 0;
@@ -198,6 +202,7 @@ class DBlock
     mPos  = 0;
     mVisible = View.VISIBLE;
     mMultiSelected = false;
+    mPaint = null;
     mId = 0;
     mTime = 0;
     mSurveyId = 0;

@@ -2,6 +2,8 @@
 <resources>
     <!-- OK string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     <string name="no_manual">Не возможно скачать страницы помощи из интернета.</string>
+    <!-- TODO string name="user_man_ok">Installed user manual translation</string -->
+    <!-- TODO string name="user_man_fail">Failed to install user manual translation</string -->
 
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Нажмите "НАЗАД" еще раз для выхода</string>
@@ -271,6 +273,8 @@
     <!-- UNUSED string name="menu_ready">Ready</string -->
     <string name="menu_calib_check">КОНТРОЛЬ КАЛИБ.</string>
     <string name="menu_close">ЗАКРЫТЬ</string>
+    <!-- DUP string name="menu_clear">ОЧИСТИТЬ</string -->
+    <string name="menu_color">ОЧИСТИТЬ ЦВЕТ</string>
     <string name="menu_clear">ОЧИСТИТЬ</string>
     <string name="menu_delete">Удалить</string>
     <string name="menu_detach">Отсоединить</string>
@@ -514,6 +518,7 @@
     <string name="button_change"    >Изменить    </string>
     <string name="button_close"     >Закрыть   </string>
     <string name="button_create"    >Создать    </string>
+    <string name="button_color"     >Цвет	</string>
     <string name="button_convert"   >Конвертир.</string>
     <string name="button_current"   >Текущий   </string>
     <string name="button_delete"    >Удалить   </string>
@@ -676,6 +681,7 @@
     <string name="help_calib_check">Контрольные замеры</string>
     <string name="help_close">Закрыть Окно</string>
     <string name="help_coeff">Показать коэффициенты калибровки</string>
+    <string name="help_color">Сбросить цвет сплеев</string>
     <string name="help_continue">Продолжить рисовать линию</string>
     <string name="help_contour">Редактировать контуры</string>
     <string name="help_current_station">Сохраненные пикеты</string>
@@ -794,6 +800,7 @@
     <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Калибровка и распределение данных</string>
     <string name="title_coeff">Калибровочные коэффициенты</string>
+    <string name="title_color_picker">Выбрать цвет</string>
     <string name="title_contour">Контур</string>
     <!-- UNUSED string name="title_coord">Введите координаты точки:</string -->
     <string name="title_current_station">Сохраненные пикеты</string>

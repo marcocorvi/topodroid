@@ -2,6 +2,8 @@
 <resources>
     <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string>
     <string name="no_manual">Nem lehet letölteni a felhasználói kézikönyvet az internetről</string>
+    <!-- TODO string name="user_man_ok">Installed user manual translation</string -->
+    <!-- TODO string name="user_man_fail">Failed to install user manual translation</string -->
 
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Nyomd meg a vissza gombot újra a kilépéshez</string>
@@ -269,6 +271,8 @@
     <!-- UNUSED string name="menu_ready">KÉSZ</string -->
     <string name="menu_calib_check">KALIBR. ELLENŐRZÉS</string>
     <string name="menu_close">BEZÁR</string>
+    <!-- TODO string name="menu_clear">CLEAR</string -->
+    <!-- TODO string name="menu_color">CLEAR COLOR</string -->
     <string name="menu_delete">TÖRÖL</string>
     <string name="menu_detach">SZÉTKAPCSOL</string>
     <string name="menu_display">KÉPERNYŐ</string>
@@ -511,6 +515,7 @@
     <!-- TODO string name="button_change"    >Change    </string -->
     <string name="button_close"     >Bezár     </string>
     <!-- TODO string name="button_create"    >Create    </string -->
+    <!-- TODO string name="button_color"     >Color</string -->
     <string name="button_convert"   >Átalakít  </string>
     <string name="button_current"   >Jelenlegi</string>
     <string name="button_delete"    >Töröl     </string>
@@ -672,6 +677,7 @@
     <string name="help_calib_check">Kalibr. ell. mérések</string>
     <string name="help_close">Súgó bezárása</string>
     <string name="help_coeff">Mutassa a kalibrációs együtthatókat</string>
+    <!-- TODO string name="help_color">Clear splay colors</string -->
     <string name="help_continue">Vonal folytatása</string>
     <string name="help_contour">Körvonal szerkesztése</string>
     <string name="help_current_station">Elmentett mérési pontok</string>
@@ -782,6 +788,7 @@
     <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Kalibrációs adatok eloszlása</string>
     <string name="title_coeff">Kalibrációs együtthatók</string>
+    <!-- TODO string name="title_color_picker">Pick a color</string -->
     <string name="title_contour">Körvonal</string>
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Elmentett mérési pontok</string>

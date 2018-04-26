@@ -2,6 +2,8 @@
 <resources>
     <!-- OK string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     <string name="no_manual">Не можливо скачати сторінку допомоги з інтернету.</string>
+    <!-- TODO string name="user_man_ok">Installed user manual translation</string -->
+    <!-- TODO string name="user_man_fail">Failed to install user manual translation</string -->
 
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Натисніть "НАЗАД" ще раз для виходу</string>
@@ -271,6 +273,8 @@
     <!-- UNUSED string name="menu_ready">Ready</string -->
     <!-- TODO string name="menu_calib_check">CALIBR. CHECK</string -->
     <string name="menu_close">ЗАКРИТИ</string>
+    <!-- TODO string name="menu_clear">CLEAR</string -->
+    <!-- TODO string name="menu_color">CLEAR COLOR</string -->
     <string name="menu_delete">Видалити</string>
     <string name="menu_detach">Від\'єднати</string>
     <string name="menu_display">Показати</string>
@@ -513,6 +517,7 @@
     <!-- TODO string name="button_change"    >Change    </string -->
     <string name="button_close"     >Закрити     </string>
     <!-- TODO string name="button_create"    >Create    </string -->
+    <!-- TODO string name="button_color"     >Color</string -->
     <string name="button_convert"   >Конвертув.</string>
     <string name="button_current"   >Поточний   </string>
     <string name="button_delete"    >Видалити   </string>
@@ -673,6 +678,7 @@
     <!-- TODO string name="help_calib_check">Calibration-check shots</string -->
     <string name="help_close">Закрити вікно</string>
     <string name="help_coeff">Показать коэфіцієнти калібрування</string>
+    <!-- TODO string name="help_color">Clear splay colors</string -->
     <string name="help_continue">Продовжити малювати лінію</string>
     <string name="help_contour">Редагувати контури</string>
     <string name="help_current_station">Збережені пікети</string>
@@ -786,6 +792,7 @@
     <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Калібрування и розподіл даних</string>
     <string name="title_coeff">Калібрувальні коефіцієнти</string>
+    <!-- TODO string name="title_color_picker">Pick a color</string -->
     <string name="title_contour">Контур</string>
     <!-- UNUSED string name="title_coord">Введіть координати точки:</string -->
     <string name="title_current_station">Збережені пікети</string>

@@ -2,6 +2,8 @@
 <resources>
     <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs/2.7-es-UserManual.pdf</string>
     <string name="no_manual">No se puede recuperar el manual de usuario de la web</string>
+    <!-- TODO string name="user_man_ok">Installed user manual translation</string -->
+    <!-- TODO string name="user_man_fail">Failed to install user manual translation</string -->
 
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Haga doble click para salir</string>
@@ -268,6 +270,8 @@
     <!-- UNUSED string name="menu_ready">Ready</string -->
     <string name="menu_calib_check">Verificar calibración</string>
     <string name="menu_close">Cerrar</string>
+    <!-- TODO string name="menu_clear">CLEAR</string -->
+    <!-- TODO string name="menu_color">CLEAR COLOR</string -->
     <string name="menu_delete">Eliminar</string>
     <string name="menu_detach">Desconectar</string>
     <string name="menu_display">Pantalla</string>
@@ -508,6 +512,7 @@
     <string name="button_change"    >Cambio    </string>
     <string name="button_close"     >Cerrar     </string>
     <string name="button_create"    >Crear    </string>
+    <!-- TODO string name="button_color"     >Color</string -->
     <string name="button_convert"   >Convertir </string>
     <string name="button_current"   >Corriente   </string>
     <string name="button_delete"    >Eliminar  </string>
@@ -670,6 +675,7 @@
     <string name="help_calib_check">Calibración: compruebe las tomas</string>
     <string name="help_close">Cerrar ventana</string>
     <string name="help_coeff">Mostrar coeficientes de calibración</string>
+    <!-- TODO string name="help_color">Clear splay colors</string -->
     <string name="help_continue">Continuar el dibujo de una línea</string>
     <string name="help_contour">Editar Contorno</string>
     <string name="help_current_station">Última estación guardada</string>
@@ -784,6 +790,7 @@
     <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Distibución datos Calibración</string>
     <string name="title_coeff">Coeficiente Calibración</string>
+    <!-- TODO string name="title_color_picker">Pick a color</string -->
     <string name="title_contour">Contorno</string>
     <!-- UNUSED string name="title_coord">Introduzca las coordenadas del punto:</string -->
     <string name="title_current_station">Última estación guardada</string>

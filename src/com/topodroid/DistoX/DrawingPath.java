@@ -350,13 +350,18 @@ class DrawingPath extends RectF
       }
     } else {
       if (    mType == DRAWING_PATH_SPLAY  // FIXME_X_SPLAY
-           && mBlock != null 
-           && mBlock.isRecent( TopoDroidApp.mSecondLastShotId, System.currentTimeMillis()/1000 ) ) {
-        if ( mBlock.mType == DBlock.BLOCK_SPLAY && BrushManager.fixedBluePaint != null ) {
-          canvas.drawPath( path, BrushManager.fixedBluePaint );
-        } else if ( mBlock.mType == DBlock.BLOCK_X_SPLAY && BrushManager.fixedSplay2Paint != null ) {
-          canvas.drawPath( path, BrushManager.fixedSplay2Paint );
-        }
+           && mBlock != null ) {
+	if ( mBlock.isRecent( TopoDroidApp.mSecondLastShotId, System.currentTimeMillis()/1000 ) ) {
+          if ( mBlock.mType == DBlock.BLOCK_SPLAY && BrushManager.fixedBluePaint != null ) {
+            canvas.drawPath( path, BrushManager.fixedBluePaint );
+          } else if ( mBlock.mType == DBlock.BLOCK_X_SPLAY && BrushManager.fixedSplay2Paint != null ) {
+            canvas.drawPath( path, BrushManager.fixedSplay2Paint );
+          }
+	} else if ( mBlock.mPaint != null ) {
+          canvas.drawPath( path, mBlock.mPaint );
+	} else {
+          canvas.drawPath( path, mPaint );
+	}
       } else if ( mPaint != null ) {
         canvas.drawPath( path, mPaint );
       }

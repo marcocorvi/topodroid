@@ -64,6 +64,7 @@ public interface DataListener
   static final byte SHOT_INSERT   = (byte)21;
   static final byte SHOT_INSERTAT = (byte)23;
   static final byte SHOT_STATUS   = (byte)24;
+  static final byte SHOT_COLOR    = (byte)25;
 
   public void onUpdateShot( long id, long sid, String fStation, String tStation,
                             long extend, long flag, long leg, String comment );
@@ -84,6 +85,8 @@ public interface DataListener
 
   public void onUpdateShotAMDR( long sid, long id, double acc, double mag, double dip, double r );
 
+  public void onUpdateShotColor( long sid, long id, long color );
+
   // public void onUpdateShotNameAndExtend( long sid, ArrayList< DBlock > updatelist );
   // FIXME repeatedly call UpdateShotName() and UpdateShotExtend();
 
@@ -94,13 +97,13 @@ public interface DataListener
   // public void onInsertShots( long sid, long id, ArrayList< ParserShot > shots );
   // FIXME repeatedly call InsertShot()
 
-  public void onInsertShot( long sid, long id, long millis, String from, String to, 
+  public void onInsertShot( long sid, long id, long millis, long color, String from, String to, 
                           double d, double b, double c, double r, 
                           long extend, long flag, long leg, long status, long shot_type, String comment );
 
   // @param e extend
   // @param t type
-  public void onInsertShotAt( long sid, long at, long millis, double d, double b, double c, double r, long e, long leg, long t );
+  public void onInsertShotAt( long sid, long at, long millis, long color, double d, double b, double c, double r, long e, long leg, long t );
 
   // public void transferShots( long sid, long old_sid, long old_id );
 

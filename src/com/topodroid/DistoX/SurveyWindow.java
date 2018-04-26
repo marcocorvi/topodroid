@@ -79,6 +79,7 @@ public class SurveyWindow extends Activity
                         R.string.menu_export,
                         R.string.menu_rename,
                         R.string.menu_delete,
+                        R.string.menu_color,
                         R.string.menu_manual_calibration,
                         R.string.menu_calib_check,
                         R.string.menu_options,
@@ -98,6 +99,7 @@ public class SurveyWindow extends Activity
                         R.string.help_export_survey,
                         R.string.help_rename,
                         R.string.help_delete_survey,
+                        R.string.help_color,
                         R.string.help_manual_calibration,
                         R.string.help_calib_check,
                         R.string.help_prefs,
@@ -135,6 +137,7 @@ public class SurveyWindow extends Activity
   int mXSections;
 
   TopoDroidApp mApp;
+  DataHelper   mApp_mData;
   private boolean mustOpen;
   private int mNameColor;
 
@@ -189,6 +192,7 @@ public class SurveyWindow extends Activity
     super.onCreate( savedInstanceState );
 
     mApp = (TopoDroidApp)getApplication();
+    mApp_mData = mApp.mData;
     mApp.mSurveyWindow = this;
     mActivity = this;
     mNameColor = getResources().getColor( R.color.textfixed );
@@ -266,7 +270,7 @@ public class SurveyWindow extends Activity
   {
     super.onResume();
     mApp.resetLocale();
-    float decl = TopoDroidApp.mData.getSurveyDeclination( mApp.mSID );
+    float decl = mApp_mData.getSurveyDeclination( mApp.mSID );
     mEditDecl.setText( String.format(Locale.US, "%.4f", decl ) );
   }
 
@@ -304,7 +308,7 @@ public class SurveyWindow extends Activity
     if ( k < mNrButton1 && b == mButton1[k++] ) {  // note
       doNotes();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // INFO STATISTICS
-      new SurveyStatDialog( mActivity, TopoDroidApp.mData.getSurveyStat( mApp.mSID ) ).show();
+      new SurveyStatDialog( mActivity, mApp_mData.getSurveyStat( mApp.mSID ) ).show();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // 3D
       do3D();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // GPS
@@ -385,7 +389,7 @@ public class SurveyWindow extends Activity
   void setDeclination( float decl )
   {
     mEditDecl.setText( String.format(Locale.US, "%.4f", decl ) );
-    TopoDroidApp.mData.updateSurveyDeclination( mApp.mSID, decl, true );
+    mApp_mData.updateSurveyDeclination( mApp.mSID, decl, true );
   }
 
   // float getDeclination()
@@ -432,7 +436,7 @@ public class SurveyWindow extends Activity
     if ( comment != null ) { comment = comment.trim(); } else { comment = ""; }
 
     // TDLog.Log( TDLog.LOG_SURVEY, "INSERT survey id " + id + " date " + date + " name " + name + " comment " + comment );
-    TopoDroidApp.mData.updateSurveyInfo( mApp.mSID, date, team, decl, comment, mInitStation, mXSections, true );
+    mApp_mData.updateSurveyInfo( mApp.mSID, date, team, decl, comment, mInitStation, mXSections, true );
   }
 
   public void doExport( String type )
@@ -454,7 +458,7 @@ public class SurveyWindow extends Activity
     TDPath.deleteSurveyFiles( survey );
 
     for ( int status = 0; status < 2; ++status ) {
-      List< PlotInfo > plots = TopoDroidApp.mData.selectAllPlots( mApp.mSID, status );
+      List< PlotInfo > plots = mApp_mData.selectAllPlots( mApp.mSID, status );
       if ( plots.size() > 0 ) {
         TDPath.deleteSurveyPlotFiles( survey, plots );
       }
@@ -462,13 +466,13 @@ public class SurveyWindow extends Activity
 
     // TODO delete 3D-files
     for ( int status = 0; status < 2; ++status ) {
-      List< Sketch3dInfo > sketches = TopoDroidApp.mData.selectAllSketches( mApp.mSID, status );
+      List< Sketch3dInfo > sketches = mApp_mData.selectAllSketches( mApp.mSID, status );
       if ( sketches.size() > 0 ) {
         TDPath.deleteSurvey3dFiles( survey, sketches );
       }
     }
 
-    TopoDroidApp.mData.doDeleteSurvey( mApp.mSID );
+    mApp_mData.doDeleteSurvey( mApp.mSID );
     mApp.setSurveyFromName( null, false ); // tell app to clear survey name and id
     setResult( RESULT_OK, new Intent() );
     finish();
@@ -518,10 +522,11 @@ public class SurveyWindow extends Activity
     mMenuAdapter.add( res.getString( menus[1] ) );
     if ( TDLevel.overExpert   ) mMenuAdapter.add( res.getString( menus[2] ) );
     if ( TDLevel.overNormal   ) mMenuAdapter.add( res.getString( menus[3] ) );
-    if ( TDLevel.overAdvanced ) mMenuAdapter.add( res.getString( menus[4] ) );
+    if ( TDLevel.overExpert   ) mMenuAdapter.add( res.getString( menus[4] ) );
     if ( TDLevel.overAdvanced ) mMenuAdapter.add( res.getString( menus[5] ) );
-    mMenuAdapter.add( res.getString( menus[6] ) );
+    if ( TDLevel.overAdvanced ) mMenuAdapter.add( res.getString( menus[6] ) );
     mMenuAdapter.add( res.getString( menus[7] ) );
+    mMenuAdapter.add( res.getString( menus[8] ) );
 
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
@@ -548,10 +553,12 @@ public class SurveyWindow extends Activity
       new SurveyRenameDialog( mActivity, this ).show();
     } else if ( TDLevel.overNormal && p++ == pos ) { // DELETE
       askDelete();
+    } else if ( TDLevel.overExpert && p++ == pos ) { // CLEAR COLOR
+      mApp_mData.resetShotColor( mApp.mSID );
     } else if ( TDLevel.overAdvanced && p++ == pos ) { // INSTRUMENTS CALIBRATION
       new SurveyCalibrationDialog( mActivity, mApp ).show();
     } else if ( TDLevel.overAdvanced && p++ == pos ) { // CALIBRATION CHECK SHOTS
-      List< DBlock > shots = TopoDroidApp.mData.selectAllShots( mApp.mSID, TDStatus.CHECK );
+      List< DBlock > shots = mApp_mData.selectAllShots( mApp.mSID, TDStatus.CHECK );
       if ( shots.size() == 0 ) {
         TDToast.make( mActivity, R.string.no_calib_check );
       } else {

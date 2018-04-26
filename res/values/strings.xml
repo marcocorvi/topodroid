@@ -2,6 +2,8 @@
 <resources>
     <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string>
     <string name="no_manual">Cannot retrieve user manual from the web</string>
+    <string name="user_man_ok">Installed user manual translation</string>
+    <string name="user_man_fail">Failed to install user manual translation</string>
 
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Click BACK again to exit</string>
@@ -272,6 +274,7 @@
     <string name="menu_calib_check">CALIB. CHECK</string>
     <string name="menu_close">CLOSE</string>
     <string name="menu_clear">CLEAR</string>
+    <string name="menu_color">CLEAR COLOR</string>
     <string name="menu_delete">DELETE</string>
     <string name="menu_detach">DISCONNECT</string>
     <string name="menu_display">DISPLAY</string>
@@ -517,6 +520,7 @@
     <string name="button_change"    >Change    </string>
     <string name="button_close"     >Close     </string>
     <string name="button_create"    >Create    </string>
+    <string name="button_color"     >Color</string>
     <string name="button_convert"   >Convert   </string>
     <string name="button_current"   >Active    </string>
     <string name="button_delete"    >Delete    </string>
@@ -680,6 +684,7 @@
     <string name="help_calib_check">Calibration-check shots</string>
     <string name="help_close">Close window</string>
     <string name="help_coeff">Show calibration coefficients</string>
+    <string name="help_color">Clear splay colors</string>
     <string name="help_continue">Continue drawing a line</string>
     <string name="help_contour">Contour editing</string>
     <string name="help_current_station">Saved stations</string>
@@ -798,6 +803,7 @@
     <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Calibration data distribution</string>
     <string name="title_coeff">Calibration coefficients</string>
+    <string name="title_color_picker">Pick a color</string>
     <string name="title_contour">Contour</string>
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Saved stations</string>

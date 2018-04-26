@@ -2,6 +2,8 @@
 <resources>
     <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string>
     <string name="no_manual">Não é possível obter o manual do usuário da internet</string>
+    <string name="user_man_ok">Manual traduzido instalado</string>
+    <string name="user_man_fail">Instalação do manual traduzido falhou</string>
 
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Clicar novamente em VOLTAR para sair</string>
@@ -269,6 +271,8 @@
     <!-- UNUSED string name="menu_ready">Pronto</string -->
     <string name="menu_calib_check">VERIF. CALIB.</string>
     <string name="menu_close">FECHAR</string>
+    <string name="menu_clear">LIMPAR</string>
+    <string name="menu_color">VOLTAR PARA COR PADRÃO</string>
     <string name="menu_delete">APAGAR</string>
     <string name="menu_detach">DESCONECTAR</string>
     <string name="menu_display">DISPLAY</string>
@@ -509,6 +513,7 @@
     <string name="button_change"    >Alterar    </string>
     <string name="button_close"     >Fechar     </string>
     <string name="button_create"    >Criar      </string>
+    <string name="button_color"     >Cor        </string>
     <string name="button_convert"   >Converter  </string>
     <string name="button_current"   >Atual      </string>
     <string name="button_delete"    >Apagar     </string>
@@ -561,7 +566,7 @@
     <string name="mode_splay">Medidas auxiliares</string>
     <string name="mode_station">Bases</string>
     <string name="mode_grid">Grade</string>
-    <string name="mode_fixed">Deslocar croqui da aranha (CUIDADO!)</string>
+    <string name="mode_fixed">Alterar posição do croqui X aranha</string>
     <string name="mode_outline">Contorno</string>
     <string name="mode_scale_ref">Escala gráfica</string>
 
@@ -585,7 +590,7 @@
     <string name="symbol_geo">Geologia</string>
     <string name="symbol_karst">Carste</string>
     <string name="symbol_mine">Mineração</string>
-    <string name="symbol_paleo">Paleologia</string>
+    <string name="symbol_paleo">Paleontologia</string>
     <string name="symbol_speleo">Espeleologia</string>
     <string name="symbol_extra">Espeleologia (2)</string>
 
@@ -671,6 +676,7 @@
     <string name="help_calib_check">Medidas de verificação de calibração</string>
     <string name="help_close">Fechar janela</string>
     <string name="help_coeff">Mostrar coeficientes de calibração</string>
+    <string name="help_color">Voltar medidas auxiliares para cor padrão</string>
     <string name="help_continue">Continuar desenho de uma linha</string>
     <string name="help_contour">Editar perfil</string>
     <string name="help_current_station">Bases salvas</string>
@@ -783,6 +789,7 @@
     <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Distribuição dos dados de calibração</string>
     <string name="title_coeff">Coeficientes de calibração</string>
+    <string name="title_color_picker">Escolha uma cor</string>
     <string name="title_contour">Contorno</string>
     <!-- UNUSED string name="title_coord">Inserir as coordenadas do ponto:</string -->
     <string name="title_current_station">Base gravadas</string>

@@ -92,6 +92,9 @@ class DataListenerSet
   void onUpdateShotAMDR( long sid, long id, double acc, double mag, double dip, double r )
   { for ( DataListener l : mListeners ) l.onUpdateShotAMDR( sid, id, acc, mag, dip, r ); }
 
+  void onUpdateShotColor( long sid, long id, long color )
+  { for ( DataListener l : mListeners ) l.onUpdateShotColor( sid, id, color ); }
+
   // public void onUpdateShotNameAndExtend( long sid, ArrayList< DBlock > updatelist );
   // FIXME repeatedly call UpdateShotName() and UpdateShotExtend();
 
@@ -104,18 +107,18 @@ class DataListenerSet
   // public void onInsertShots( long sid, long id, ArrayList< ParserShot > shots )
   // FIXME repeatedly call InsertShot()
 
-  void onInsertShot( long sid, long id, long millis, String from, String to,
+  void onInsertShot( long sid, long id, long millis, long color, String from, String to,
                             double d, double b, double c, double r, 
                             long extend, long flag, long leg, long status, long shot_type, String comment )
   {
     for ( DataListener l : mListeners )
-      l.onInsertShot( sid, id, millis, from, to, d, b, c, r, extend, flag, leg, status, shot_type, comment );
+      l.onInsertShot( sid, id, millis, color, from, to, d, b, c, r, extend, flag, leg, status, shot_type, comment );
   }
 
   // @param e extend
   // @param t type
-  void onInsertShotAt( long sid, long at, long millis, double d, double b, double c, double r, long e, long leg, long t )
-  { for ( DataListener l : mListeners ) l.onInsertShotAt( sid, at, millis, d, b, c, r, e, leg, t ); }
+  void onInsertShotAt( long sid, long at, long millis, long color, double d, double b, double c, double r, long e, long leg, long t )
+  { for ( DataListener l : mListeners ) l.onInsertShotAt( sid, at, millis, color, d, b, c, r, e, leg, t ); }
 
   // public void transferShots( long sid, long old_sid, long old_id );
 

@@ -17,7 +17,8 @@ import android.os.Bundle;
 import android.content.Context;
 // import android.content.Intent;
 
-// import android.graphics.*;
+import android.graphics.Paint;
+
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
@@ -35,10 +36,12 @@ import android.inputmethodservice.KeyboardView;
 class DrawingShotDialog extends MyDialog
                                implements View.OnClickListener
                                , View.OnLongClickListener
+			       , MyColorPicker.IColorChanged
 {
   private TextView mLabel;
   private Button mBtnOK;
   private Button mBtnCancel;
+  private Button mBtnColor;
   private EditText mETfrom;
   private EditText mETto;
   private EditText mETcomment;
@@ -59,6 +62,7 @@ class DrawingShotDialog extends MyDialog
 
   private DrawingWindow mParent;
   private DBlock mBlock;
+  private int mColor;    // bock color
   private DrawingPath mPath;
   private int mFlag; // can barrier/hidden FROM and TO
   // 0x01 can barrier FROM
@@ -73,6 +77,7 @@ class DrawingShotDialog extends MyDialog
     super(context, R.string.DrawingShotDialog );
     mParent  = parent;
     mBlock   = shot.mBlock;
+    mColor   = ( mBlock.mPaint == null )? 0 : mBlock.mPaint.getColor();
     mPath    = shot;
     mFlag    = flag;
     // Log.v("DistoX", "FLAG " + mFlag + " FROM " + mBlock.mFrom + " TO " + mBlock.mTo );
@@ -109,6 +114,14 @@ class DrawingShotDialog extends MyDialog
     // mRBdup  = (CheckBox) findViewById( R.id.duplicate );
     // mRBsurf = (CheckBox) findViewById( R.id.surface );
     // mRBbackshot  = (CheckBox) findViewById( R.id.backshot );
+
+    mBtnColor  = (Button) findViewById( R.id.btn_color );
+    if ( TDLevel.overExpert && mBlock.isSplay() ) {
+      mBtnColor.setBackgroundColor( mColor ); 
+      mBtnColor.setOnClickListener( this );
+    } else {
+      mBtnColor.setVisibility( View.GONE );
+    }
 
     LinearLayout layout3  = (LinearLayout) findViewById( R.id.layout3 );
     LinearLayout layout3b = (LinearLayout) findViewById( R.id.layout3b );
@@ -239,6 +252,14 @@ class DrawingShotDialog extends MyDialog
   }
 
   @Override
+  public void colorChanged( int color )
+  {
+    mColor = color;
+    mParent.updateBlockColor( mBlock, mColor );
+    mBtnColor.setBackgroundColor( mColor );
+  }
+
+  @Override
   public void onClick(View view)
   {
     // TDLog.Log( TDLog.LOG_INPUT, "DrawingShotDialog onClick() " + view.toString() );
@@ -246,7 +267,10 @@ class DrawingShotDialog extends MyDialog
 
     Button b = (Button)view;
 
-    if ( b == mRBleft ) {
+    if ( b == mBtnColor ) {
+      new MyColorPicker( mContext, this, mColor ).show();
+      return;
+    } else if ( b == mRBleft ) {
       mRBvert.setChecked( false );
       mRBright.setChecked( false );
     } else if ( b == mRBvert ) {

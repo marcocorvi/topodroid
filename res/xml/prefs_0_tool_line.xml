@@ -58,7 +58,7 @@
        android:key="DISTOX_AUTO_SECTION_PT"
        android:summary="@string/pref_auto_section_pt_summary"
        android:title="@string/pref_auto_section_pt_title"
-       android:defaultValue="true"
+       android:defaultValue="false"
        / -->
 
      <!-- CheckBoxPreference
