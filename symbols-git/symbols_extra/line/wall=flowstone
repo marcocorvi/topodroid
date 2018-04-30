@@ -2,7 +2,7 @@ encoding  utf-8
 symbol line
 name wall_flowstone
 name-es pared_de_colada
-name-pt parece_escorrimento
+name-pt parede_escorrimento
 name-ru стена_в_натеках
 th_name wall:flowstone
 group wall
