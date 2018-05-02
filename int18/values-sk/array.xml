@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+  <!-- TODO string-array name="unitGrid">
+     <item name="meter">meter</item>
+     <item name="yard">yard</item>
+     <item name="two_tf">2 feet</item>
+  </string-array -->
+
+  <!-- TODO string-array name="loopClosure">
+     <item name="none">None</item>
+     <item name="normal">Normal</item>
+     <item name="triangles">Triangles</item>
+  </string-array -->
+
+  <!-- TODO string-array name="wallsType">
+     <item name="none">None</item>
+     <item name="convex">Convex</item>
+     <item name="delaunay">TODO</item>
+  </string-array -->
+
+  <!-- TODO string-array name="zoomCtrl">
+     <item name="0">Off</item>
+     <item name="1">Temporary</item>
+     <item name="2">Permanent</item>
+  </string-array -->
+
+  <string-array name="stationNames">
+     <item name="alpha">Alfabetično</item>
+     <item name="number">Numerično</item>
+  </string-array>
+
+  <!-- UNUSED string-array name="extend_name">
+     <item>Sinistra</item>
+     <item>Verticale</item>
+     <item>Destra</item>
+     <item>- -</item>
+  </string-array -->
+
+  <!-- TODO string-array name="exportShots">
+     <item name="none">none</item>
+     <item name="therion">Therion</item>
+     <item name="compass">Compass</item>
+     <item name="csurvey">cSurvey</item>
+     <item name="grottolf">Grottolf</item>
+     <item name="pockettopo">PocketTopo</item>
+     <item name="polygon">Polygon</item>
+     <item name="survex">Survex</item>
+     <item name="topo">Topo</item>
+     <item name="visualtopo">VisualTopo</item>
+     <item name="walls">Walls</item>
+     <item name="csv">CSV</item>
+     <item name="dxf">DXF</item>
+  </string-array -->
+
+  <!-- TODO string-array name="exportPlot">
+     <item name="none">none</item>
+     <item name="therion">Therion</item>
+     <item name="csurvey">cSurvey</item>
+     <item name="dxf">DXF</item>
+     <item name="svg">SVG</item>
+     <item name="png">PNG</item>
+  </string-array -->
+
+  <!-- TODO string-array name="extraButtons">
+     <item name="basic">Osnovno</item>
+     <item name="normal">Normalno</item>
+     <item name="advanced">Napredno</item>
+     <item name="expert">Eksperimentalno</item>
+     <item name="tester">Tester</item>
+  </string-array -->
+
+  <!-- TODO string-array name="sizeButtons">
+     <item name="small1">Malo</item>
+     <item name="large">Veliko</item>
+  </string-array -->
+
+  <!-- OK string-array name="logStream">
+     <item name="android">System log</item>
+     <item name="file">File log</item>
+  </string-array -->
+
+  <!-- TODO string-array name="connMode">
+     <item name="batch">Na zahtevo</item>
+     <item name="continuous">Kontinuirani</item>
+     <item name="multi">Multi</item>
+  </string-array -->
+
+  <!-- UNUSED string-array name="altitudeType">
+    <item name="wgs84">WGS84i ellissoidea</item>
+    <item name="asl">Ortometrica</item>
+  </string-array -->
+
+  <string-array name="sockType">
+     <item name="default">Privzeto</item>
+     <item name="Insecure">Nejasno</item>
+  </string-array>
+
+  <string-array name="surveyStations">
+     <item name="no">Ne</item>
+     <item name="for">Razširjeno, viz naprej</item>
+     <item name="back">Razširjeno, viz nazaj</item>
+     <item name="for2">viz naprej, razširjeno</item>
+     <item name="back2">viz nazaj, razširjeno</item>
+     <item name="anomaly">Nazaj</item>
+     <item name="tripod">Triopod</item>
+     <item name="toporobot">TopoRobot</item>
+  </string-array>
+
+  <!-- TODO string-array name="pickerType">
+     <item name="recent">Most recent</item>
+     <item name="list">Lista</item>
+     <item name="grid">Griglia</item>
+  </string-array -->
+
+  <!-- UNUSED string-array name="deviceType">
+     <item name="none">None</item>
+     <item name="A3">A3</item>
+     <item name="X310">X310</item>
+  </string-array -->
+
+  <string-array name="deviceBT">
+     <item name="0">Onemogočeno</item>
+     <item name="1">Preveri ob zagonu</item>
+     <item name="2">Omogočeno</item>
+  </string-array>
+
+  <!-- UNUSED string-array name="exportType">
+     <item name="th">Therion</item>
+     <item name="dat">Compass</item>
+     <item name="svx">Survex</item>
+     <item name="tro">VisualTopo</item>
+  </string-array -->
+
+  <string-array name="lineStyle">
+     <item name="none">Podrobno</item>
+     <item name="two">Normalno</item>
+     <item name="two">Grobo</item>
+     <item name="bezier">Zakrivljeno</item>
+  </string-array>
+
+  <string-array name="groupBy">
+     <item name="distance">Oddaljenost</item>
+     <item name="four">Časovno</item>
+     <item name="only16">Samo prvih 16</item>
+  </string-array>
+
+  <string-array name="unitLength">
+     <item name="meters">metri</item>
+     <item name="feet">čevlji</item>
+  </string-array>
+
+  <string-array name="unitAngle">
+     <item name="degrees">stopnije</item>
+     <item name="grads">gradi</item>
+  </string-array>
+
+  <string-array name="unitLocation">
+     <item name="degrees">stopinje</item>
+     <item name="ddmmss">stopnije, minute, sekunde</item>
+  </string-array>
+
+  <string-array name="calibAlgo">
+     <item name="auto">automatsko</item>
+     <item name="linear">linearno</item>
+     <item name="nonlinear">nelinearno</item>
+  </string-array>
+
+  <!-- TODO string-array name="rawCData">
+     <item name="none">None</item>
+     <item name="dec">Decimal</item>
+     <item name="hex">Hex</item>
+  </string-array -->
+
+</resources>
