@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string --> 
-    <string name="no_manual">Ni mogoče priti do dokumentacije na internetu</string>
+    <string name="no_manual">Nie je možné získať dokumentáciu online</string>
     <!-- TODO string name="user_man_ok">Installed user manual translation</string -->
     <!-- TODO string name="user_man_fail">Failed to install user manual translation</string -->
 
     <string name="app_name">TopoDroid</string>
-    <string name="double_back">Klikni ponovno nazaj za izhod</string>
+    <string name="double_back">Opätovným kliknutím opäť opustíte</string>
 
-    <string name="version_ask">Posodobitev topodroida na novejšo različico.\nŽelite reinstalirati orodje za risanje?</string>
+    <string name="version_ask">Aktualizácia topodoidu na novšiu verziu. \ Chcete preinštalovať nástroj na kreslenie?</string>
     <!-- TODO string name="symbols_ask">Install drawing tools v.%1$s?\n(Current v.%2$s)</string -->
 
-    <string name="POINT">točka</string>
-    <string name="LINE">Linija</string>
-    <string name="AREA">Območje</string>
-    <string name="HELP">Pomoč</string>
-    <string name="STATION">Merilna točka</string>
+    <string name="POINT">bod</string>
+    <string name="LINE">čiara</string>
+    <string name="AREA">oblasť</string>
+    <string name="HELP">Pomoc</string>
+    <string name="STATION">Merací bod</string>
 
-    <string name="cut">Izreži</string>
-    <string name="copy">Kopiraj</string>
-    <string name="paste">Prilepi</string>
-    <string name="copied">Kopirati v opombah</string>
+    <string name="cut">Vystrihnite to</string>
+    <string name="copy">Kopíruj</string>
+    <string name="paste">Prilep</string>
+    <string name="copied">Kopírovať do poznámok</string>
 
     <string name="memoryA3">DistoX A3</string>
     <string name="memoryX310">DistoX X310</string>
     <!-- UNUSED string name="memory_data">Podatki DistoX</string -->
 
     <!-- TODO string name="thp_user">user</string -->
-    <string name="thp_label">Oznaka</string>
+    <string name="thp_label">Označenie</string>
     <!-- UNUSED string name="thp_danger">pericolo</string -->
     <string name="thl_wall">Stena</string>
     <string name="tha_water">Voda</string>
@@ -35,54 +35,54 @@
     <!-- TODO string name="tha_water">water</string -->
 
     <string name="make_walls">Stena</string>
-    <string name="missing_station">Manjkajoča merilna točka</string>
+    <string name="missing_station">Chýba merací bod</string>
     <!-- TODO string name="station_not_found">Station not found</string -->
     <!-- UNUSED string name="missing_area">AREA</string -->
-    <!-- UNUSED string name="missing_hint">Installa i prototipi grafici con TdSymbol</string -->
+    <!-- UNUSED string name="missing_hint">Inštalovať a prototypovať grafiku s TdSymbol</string -->
     <!-- UNUSED string name="missing_line">LINEA</string -->
     <!-- UNUSED string name="missing_point">PUNTO</string -->
     <!-- UNUSED string name="missing_save">Disegno non salvato causa prototipi mancanti</string -->
     <!-- UNUSED string name="missing_symbols">Mancano alcuni prototipi grafici.\nSalvare ugualmente?</string -->
     <!-- UNUSED string name="missing_title">PROTOTIPI MANCANTI</string -->
     <!-- UNUSED string name="missing_warning">Mancano i seguenti prototipi grafici.\n</string -->
-    <string name="failed_snap_to_line">Manjkajoča linija za omejitev prostora</string>
-    <string name="failed_snap_to_point">Manjkajoča oporna točka</string>
+    <string name="failed_snap_to_line">Chýba riadok na obmedzenie medzery</string>
+    <string name="failed_snap_to_point">Chýba bod</string>
     <!-- TODO string name="failed_snap_to_splays">No close splay to snap the line to</string -->
 
-    <string name="calibration_title">Pripomočki za kalibracijo</string>
-    <string name="calibration_length">Dolžina</string>
+    <string name="calibration_title">Kalibračné nástroje</string>
+    <string name="calibration_length">Dĺžka</string>
     <string name="calibration_azimuth">Azimut</string>
-    <string name="calibration_clino">Naklon</string>
+    <string name="calibration_clino">Sklon</string>
 
-    <string name="calib_new">Nova kalibracija</string>
-    <string name="calib_exists">Obstoječa kalibracija</string>
-    <string name="calib_delete">Izbriši kalibracijo </string>
-    <string name="calib_device_mismatch">POZOR. Razkorak med kalibracijo in napravo</string>
-    <string name="calib_no_name">Ime manjkajoče kalibracije</string>
-    <string name="calib_gm_policy">Pravila kalibracije</string>
-    <string name="calib_gm_undelete">Povrni podatke kalibracije</string>
-    <string name="calib_saved">Shrani kalibracijo</string>
-    <string name="calib_updated">Osveži kalibracijo</string>
-    <string name="calib_compute_groups">Razvrsti podatke v obdelavi</string>
-    <string name="calib_compute_coeffs">Izračunaj koeficient </string>
+    <string name="calib_new">Nová kalibrácia</string>
+    <string name="calib_exists">Existujúca kalibrácia</string>
+    <string name="calib_delete">Vymažte kalibráciu</string>
+    <string name="calib_device_mismatch">UPOZORNENIE. Rozdiel medzi kalibráciou a zariadením</string>
+    <string name="calib_no_name">Názov chýbajúcej kalibrácie</string>
+    <string name="calib_gm_policy">Pravidlá kalibrácie</string>
+    <string name="calib_gm_undelete">Obnovte kalibračné údaje</string>
+    <string name="calib_saved">Uložte kalibráciu</string>
+    <string name="calib_updated">Obnovte kalibráciu</string>
+    <string name="calib_compute_groups">Zoradiť údaje pri spracovaní</string>
+    <string name="calib_compute_coeffs">Vypočítajte koeficient</string>
     <!-- UNUSED string name="calib_read_coeffs">Lettura coefficienti in corso</string -->
-    <string name="calib_write_coeffs">Izpiši koeficient</string>
-    <string name="calib_validation">Ovrednoti kalibracijo</string>
+    <string name="calib_write_coeffs">Vytlačte koeficient</string>
+    <string name="calib_validation">Vyhodnoťte kalibráciu</string>
     <!-- UNUSED string name="connect_failed">Comunicazione DistoX fallita</string -->
     <!-- UNUSED string name="data"> dati</string -->
     <string name="using">Uporabi %1$s</string>
-    <string name="calib_error">Napaka %1$f stopinj</string>
-    <string name="calib_stddev">Napaka stddev: %1$.4f stopinj</string>
-    <string name="calib_max_error">Maksimalna napaka %1$.4f stopinj</string>
-    <string name="calib_ave_std">Povprečje: %1$.4f %2$.4f stopinj</string>
-    <string name="calib_precision">Natančnost</string>
-    <string name="calib_iter">Iterazioni: %1$d</string>
+    <string name="calib_error">Chyba %1$f stupňa</string>
+    <string name="calib_stddev">Chyba stddev: %1$.4f stupňa</string>
+    <string name="calib_max_error">Maximálna chyba %1$.4f stupňa</string>
+    <string name="calib_ave_std">Priemerne: %1$.4f %2$.4f stupňa</string>
+    <string name="calib_precision">Presnosť</string>
+    <string name="calib_iter">Iterácie: %1$d</string>
     <!-- TODO string name="calib_reset">Reset DistoX calibration ?</string -->
     <!-- UNUSED string name="calib_saturated_values">Pozor: %1$ nasičeni podatki</string -->
-    <string name="algorithm">Algoritmo:</string>
+    <string name="algorithm">Algoritmus:</string>
     <string name="auto">Auto</string>
-    <string name="linear">Linearno</string>
-    <string name="non_linear">Nelinearno</string>
+    <string name="linear">Lineárne</string>
+    <string name="non_linear">Nelineárne</string>
     <!-- NO string name="algo_minimum">minimum</string -->
    
     <!-- FIXME string name="device_algo_failed">Neuspešna definicija automatičnega lgoritma_uporaba linearnega algoritma</string bad chararcter backslash-u  -->
