@@ -176,6 +176,10 @@
     <string name="loop_none">няма полигон loop</string>
     <!-- UNUSED string name="long_lat">Дълж.-Шир.</string -->
 
+    <!-- TODO string name="error_m">Error [m]</string -->
+    <!-- TODO string name="fmt_error_m">Error %1$.1f m</string -->
+    <!-- TODO string name="fmt_h_geoid">Error %1$.0f m</string -->
+    <!-- TODO string name="fmt_h_ellipsoid">Error %1$.0f m</string -->
 
     <string name="error_azimuth_required">Необходим азимут</string>
     <string name="error_length_required">Необходима дължина</string>
@@ -674,6 +678,7 @@
     <!-- UNUSED string name="help_manual">Ръководство</string -->
     <string name="help_measure">Измерване на разстояния</string>
     <string name="help_measure_type">Режим измерване: фиксирана точка или поли-линия</string>
+    <!-- TODO string name="help_measure_undo">Drop the last polyline point</string -->
 
     <string name="help_calib_check">Контролни измервания</string>
     <string name="help_close">Затваряне на прозореца</string>

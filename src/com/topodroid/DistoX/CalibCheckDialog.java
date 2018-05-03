@@ -32,7 +32,7 @@ import android.view.View;
 
 // import android.graphics.Bitmap;
 
-// import android.util.Log;
+import android.util.Log;
 
 class CalibCheckDialog extends MyDialog
                               implements OnItemClickListener
@@ -95,6 +95,7 @@ class CalibCheckDialog extends MyDialog
     String str = item.toString();
     int len = str.indexOf(" ");
     int id = Integer.parseInt( str.substring(0, len) );
+    // Log.v("DistoX", "check item " + id );
     DBlock blk = null;
     float x=0, y=0, z=0; // vector sum of the data in the leg
     int n1 = 0;          // number of data in the leg
@@ -115,7 +116,7 @@ class CalibCheckDialog extends MyDialog
           break;
         }
       } else if ( blk != null ) {
-        if ( b.type() == DBlock.BLOCK_MAIN_LEG ) {
+        if ( b.type() == DBlock.BLOCK_MAIN_LEG ) { // next leg set
           break;
         } else {
           float h = b.mLength * TDMath.cosd( b.mClino );
@@ -127,7 +128,9 @@ class CalibCheckDialog extends MyDialog
       }
       ++k;
     }
+
     if ( blk != null ) {
+      // Log.v("DistoX", "check block " + blk.mFrom + " " + blk.mTo + " n1 " + n1 );
       Vector v0 = new Vector( x, y, z ); // unit vector along the leg
       float l0 = v0.Length();            // length of leg vector
       v0.normalize();
@@ -137,10 +140,13 @@ class CalibCheckDialog extends MyDialog
       k = 0;
       for ( DBlock b : mShots ) {
         if ( ! in_leg ) {
-          if ( b.type() == DBlock.BLOCK_MAIN_LEG && blk.mFrom.equals( b.mTo ) && blk.mTo.equals( b.mFrom ) ) {
-            k2 = k;
-            in_leg = true;
-            ++n2;
+          if ( b.type() == DBlock.BLOCK_MAIN_LEG ) {
+            // FIXME only the first backshot is considered
+	    if ( blk.mFrom.equals( b.mTo ) && blk.mTo.equals( b.mFrom ) ) {
+              k2 = k;
+              n2 = 1;
+              in_leg = true;
+            }
           }
         } else {
           if ( b.type() == DBlock.BLOCK_MAIN_LEG ) {
@@ -151,6 +157,7 @@ class CalibCheckDialog extends MyDialog
         }
         ++k;
       }
+
       float errors1[] = new float[n1]; // angle differences between data in leg and leg average [radians]
       for ( k = 0; k<n1; ++k ) {
         DBlock b = mShots.get( k1 + k );
@@ -160,7 +167,9 @@ class CalibCheckDialog extends MyDialog
         errors1[k] = (float)(Vector.arc_distance( v0, v1 ));
       }
       hist1.setImageBitmap( CalibCoeffDialog.makeHistogramBitmap( errors1, 400, 100, 40, 50, TDColor.FIXED_ORANGE ) );
+
       if ( n2 > 0 ) {
+	// Log.v("DistoX", "found opposite block: n2 " + n2 );
         float errors2[] = new float[n2*n1];
         for ( k = 0; k<n1; ++k ) {
           DBlock bb = mShots.get( k1 + k );
@@ -177,7 +186,134 @@ class CalibCheckDialog extends MyDialog
         }
         hist2.setImageBitmap( CalibCoeffDialog.makeHistogramBitmap( errors2, 400, 100, 40, 10, TDColor.LIGHT_GRAY ) );
       } else {
-        hist2.setImageBitmap( null );
+	Log.v("DistoX", "search a triangle" );
+	// k2 = n2 = 0;
+        int n3 = 0;
+        int k3 = 0; // index of the opposite leg
+        String station = null;
+	k = 0;
+	in_leg = false;
+	int sign2 = 0;
+	int sign3 = 0;
+	DBlock blk2 = null;
+	boolean reversed = false; // triangle is 1-3-2
+        for ( DBlock b : mShots ) {
+	  if ( b == blk ) { ++k; continue; }
+          if ( ! in_leg ) {
+            if ( b.type() == DBlock.BLOCK_MAIN_LEG ) {
+              // FIXME only the first triangle trial is considered
+	      if ( b.mFrom.equals( blk.mFrom ) && ! b.mTo.equals( blk.mTo ) ) {
+                k2 = k;
+	        n2 = 1;
+		sign2 = -1;
+		blk2 = b;
+	        station = b.mTo;
+		reversed = true;
+		in_leg = true;
+	      } else if ( b.mFrom.equals( blk.mTo ) && ! b.mTo.equals( blk.mFrom ) ) {
+                k2 = k;
+	        n2 = 1;
+		sign2 = 1;
+		blk2 = b;
+	        station = b.mTo;
+		in_leg = true;
+	      } else if ( b.mTo.equals( blk.mFrom ) && ! b.mFrom.equals( blk.mTo ) ) {
+                k2 = k;
+	        n2 = 1;
+		sign2 = 1;
+		blk2 = b;
+	        station = b.mFrom;
+		reversed = true;
+		in_leg = true;
+	      } else if ( b.mTo.equals( blk.mTo   ) && ! b.mFrom.equals( blk.mFrom ) ) {
+                k2 = k;
+	        n2 = 1;
+		sign2 = -1;
+		blk2 = b;
+	        station = b.mFrom;
+		in_leg = true;
+	      }
+	    }
+	  } else {
+            if ( b.type() == DBlock.BLOCK_MAIN_LEG ) {
+	      break;
+            } else {
+              ++n2;
+            }
+	  }
+	  ++k;
+	}
+	if ( station != null ) {
+          // Log.v("DistoX", "found block2 " + blk2.mFrom + " " + blk2.mTo + " sign2 " + sign2 + " n2 " + n2 );
+	  k = 0;
+	  in_leg = false;
+          for ( DBlock b : mShots ) {
+	    if ( b == blk || b == blk2 ) { ++k; continue; }
+            if ( ! in_leg ) {
+              if ( b.type() == DBlock.BLOCK_MAIN_LEG ) {
+	        if ( b.mFrom.equals( blk.mFrom ) && b.mTo.equals( station ) ) {
+                  k3 = k;
+	          n3 = 1;
+		  sign3 = -1;
+		  in_leg = true;
+		} else if ( b.mFrom.equals( blk.mTo ) && b.mTo.equals( station ) ) {
+                  k3 = k;
+	          n3 = 1;
+		  sign3 = 1;
+		  in_leg = true;
+	        } else if ( b.mTo.equals( blk.mFrom ) && b.mFrom.equals( station ) ) {
+                  k3 = k;
+	          n3 = 1;
+		  sign3 = 1;
+		  in_leg = true;
+	        } else if ( b.mTo.equals( blk.mTo   ) && b.mFrom.equals( station ) ) {
+                  k3 = k;
+	          n3 = 1;
+		  sign3 = -1;
+		  in_leg = true;
+		}
+	      }
+	    } else {
+              if ( b.type() == DBlock.BLOCK_MAIN_LEG ) {
+	        break;
+              } else {
+                ++n3;
+              }
+	    }
+	    ++k;
+	  }
+	}
+	if ( n2 > 0 && n3 > 0 ) {
+          // Log.v("DistoX", "found block3 k1 " + k1 + " k2 " + k2 + " k3 " + k3 );
+          float errors3[] = new float[n3*n2*n1];
+          for ( int h1 = 0; h1<n1; ++h1 ) {
+            DBlock bb = mShots.get( k1 + h1 );
+            float h = bb.mLength * TDMath.cosd( bb.mClino );
+            Vector w1 = new Vector( h * TDMath.sind( bb.mBearing ), h * TDMath.cosd( bb.mBearing ), bb.mLength * TDMath.sind( bb.mClino ) );
+	    float l1 = w1.Length();
+            for ( int h2 = 0; h2<n2; ++h2 ) {
+              bb = mShots.get( k2 + h2 );
+              h = sign2 * bb.mLength * TDMath.cosd( bb.mClino );
+              Vector w2 = new Vector( h * TDMath.sind( bb.mBearing ), h * TDMath.cosd( bb.mBearing ), bb.mLength * TDMath.sind( bb.mClino ) );
+	      float l2 = w2.Length();
+              w2.plusEqual( w1 );                      // W1 + W2
+	      for ( int h3 = 0; h3<n3; ++h3 ) {
+                bb = mShots.get( k3 + h3 );
+                h = sign3 * bb.mLength * TDMath.cosd( bb.mClino );
+                Vector w3 = new Vector( h * TDMath.sind( bb.mBearing ), h * TDMath.cosd( bb.mBearing ), bb.mLength * TDMath.sind( bb.mClino ) );
+	        float l3 = w3.Length();
+                w3.plusEqual( w2 );                    // W1 + W2 + W3
+	    	// misclosure (percent of length), the factor 1 / (10*RAD2DEG) acoounts for the same in makeHistogramBitmap()
+		// 52 = 3*sqrt(3) * 100 / 10
+                errors3[(h1*n2+h2)*n3+h3] = 52 * w3.Length() / ( (l1+l2+l3)*TDMath.RAD2DEG);
+		// Log.v("DistoX", "error " + errors3[(h1*n2+h2)*n3+h3] + " " + l1 + " " + l2 + " " + l3 );
+	      }
+	    }
+          }
+          hist2.setImageBitmap( CalibCoeffDialog.makeHistogramBitmap( errors3, 400, 100, 40, 10, TDColor.MID_GRAY ) );
+        } else {
+          hist2.setImageBitmap( null );
+	}
       }
     } else {
       hist1.setImageBitmap( null );

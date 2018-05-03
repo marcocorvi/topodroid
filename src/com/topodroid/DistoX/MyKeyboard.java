@@ -495,7 +495,9 @@ class MyKeyboard // FIXME DIALOG extends Dialog
       if ( editable ) {
         registerEditText( kbd, et, flag );
         // et.setKeyListener( mKeyboard );
-        et.setBackgroundResource( android.R.drawable.edit_text );
+        // et.setBackgroundResource( android.R.drawable.edit_text );
+        // et.setBackgroundResource( R.color.bg );
+	// et.setTextColor( R.color.text );
       } else {
         registerEditText( kbd, et, flag | FLAG_NOEDIT );
         et.setBackgroundColor( TDColor.MID_GRAY );
@@ -503,7 +505,7 @@ class MyKeyboard // FIXME DIALOG extends Dialog
     } else {
       if ( editable ) {
         et.setKeyListener( kl );
-        et.setBackgroundResource( android.R.drawable.edit_text );
+        // et.setBackgroundResource( android.R.drawable.edit_text );
         et.setClickable( true );
         et.setFocusable( true );
       } else {

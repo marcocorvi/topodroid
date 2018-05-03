@@ -181,6 +181,11 @@
     <string name="loop_none">Kein Ringschluss</string>
     <!-- UNUSED string name="long_lat">Länge-Breite</string -->
 <!-- INPUT FIELDS ERROR STRINGS: BAD VALUE or MISSING VALUE -->
+    <!-- TODO string name="error_m">Error [m]</string -->
+    <!-- TODO string name="fmt_error_m">Error %1$.1f m</string -->
+    <!-- TODO string name="fmt_h_geoid">Error %1$.0f m</string -->
+    <!-- TODO string name="fmt_h_ellipsoid">Error %1$.0f m</string -->
+
     <string name="error_azimuth_required">Azimut erforderlich</string>
     <string name="error_length_required">Länge erforderlich</string>
     <string name="error_clino_required">Neigung erforderlich</string>
@@ -690,6 +695,7 @@
     <!-- UNUSED string name="help_manual">Handbuch</string -->
     <string name="help_measure">Entfernungen messen</string>
     <string name="help_measure_type">Messmodus: Fixpunkt oder Polygonzug</string>
+    <!-- TODO string name="help_measure_undo">Drop the last polyline point</string -->
 
     <string name="help_calib_check">Testmessungen</string>
     <string name="help_close">Fenster schließen</string>

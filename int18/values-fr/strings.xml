@@ -176,6 +176,11 @@
 <string name="loop_none">Pas de bouclage</string>
 <!-- UNUSED string name="long_lat">Long-Lat</string -->
 
+    <!-- TODO string name="error_m">Error [m]</string -->
+    <!-- TODO string name="fmt_error_m">Error %1$.1f m</string -->
+    <!-- TODO string name="fmt_h_geoid">Error %1$.0f m</string -->
+    <!-- TODO string name="fmt_h_ellipsoid">Error %1$.0f m</string -->
+
 <string name="error_azimuth_required">Azimut nécessaire</string>
 <string name="error_length_required">Longueur nécessaire</string>
 <string name="error_clino_required">Pente nécessaire</string>
@@ -671,6 +676,7 @@
     <!-- UNUSED string name="help_manual">Manuel Utilisateur</string -->
     <string name="help_measure">Mesurer les distances</string>
     <string name="help_measure_type">Mode de mesure : point fixe ou polyligne</string>
+    <!-- TODO string name="help_measure_undo">Drop the last polyline point</string -->
 
     <string name="help_calib_check">Visées de contrôle étalonnage</string>
     <string name="help_close">Fermer fenêtre</string>
@@ -1146,7 +1152,7 @@
   <string name="pref_loopClosure_summary">Compensation d\'erreur de bouclage</string>
   <!-- UNUSED string name="pref_splayExtend_title">Splay extend</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Whether to estimate the extend of splays</string -->
-  <string name="pref_swapL_title">Inverser D/G dans la boussole</string>
+  <string name="pref_swapLR_title">Inverser D/G dans la boussole</string>
   <string name="pref_swapLR_summary">Inverser D/G dans les exports boussole</string>
   <string name="pref_LRExtend_title">Estimer dist. latérales G/D</string>
   <string name="pref_LRExtend_summary">Estimer les extensions gauche/droite (Compass/VisualTopo import)</string>

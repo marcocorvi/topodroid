@@ -12,6 +12,7 @@
     <color name="textfixed">#ff66cc99</color>
     <color name="text">#ffffffff</color>
     <color name="hint">#ff999999</color>
+    <color name="bg">#ff333333</color>
 
 <!-- MATERIAL
     <color name="colorPrimary">#33ccff</color>

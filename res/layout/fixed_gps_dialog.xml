@@ -108,9 +108,17 @@
         android:text="@string/h_geoid"
         />
 
+    <TextView android:id="@+id/error"
+        android:layout_below="@id/h_geoid"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:text="@string/error_m"
+        />
+
     <ListView android:id="@+id/list"
       style="@style/list_top"
-      android:layout_below="@id/h_geoid"
+      android:layout_below="@id/error"
       android:layout_width="fill_parent"
       android:layout_height="match_parent"
       />  

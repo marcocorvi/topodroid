@@ -178,6 +178,11 @@
 
     <!-- OK string name="line_delete">Удалить линию</string -->
 
+    <!-- TODO string name="error_m">Error [m]</string -->
+    <!-- TODO string name="fmt_error_m">Error %1$.1f m</string -->
+    <!-- TODO string name="fmt_h_geoid">Error %1$.0f m</string -->
+    <!-- TODO string name="fmt_h_ellipsoid">Error %1$.0f m</string -->
+
     <string name="error_azimuth_required">Требуется азимут</string>
     <string name="error_length_required">Требуется длина</string>
     <string name="error_clino_required">Требуется угол</string>
@@ -677,6 +682,7 @@
     <!-- UNUSED string name="help_manual">Инструкция</string -->
     <string name="help_measure">Измерить расстояния</string>
     <string name="help_measure_type">Режим измерений: по прямой или ломаной</string>
+    <!-- TODO string name="help_measure_undo">Drop the last polyline point</string -->
     
     <string name="help_calib_check">Контрольные замеры</string>
     <string name="help_close">Закрыть Окно</string>

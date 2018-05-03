@@ -177,6 +177,10 @@
     <string name="loop_none">no loop</string>
     <!-- UNUSED string name="long_lat">Long-Lat</string -->
 
+    <string name="error_m">Error [m]</string>
+    <string name="fmt_error_m">Error %1$.1f m</string>
+    <string name="fmt_h_geoid">Error %1$.0f m</string>
+    <string name="fmt_h_ellipsoid">Error %1$.0f m</string>
 
     <string name="error_azimuth_required">Azimuth required</string>
     <string name="error_length_required">Length required</string>
@@ -680,6 +684,7 @@
     <!-- UNUSED string name="help_manual">User manual</string -->
     <string name="help_measure">Measure distances</string>
     <string name="help_measure_type">Measuring mode: fixed point or polyline</string>
+    <string name="help_measure_undo">Drop the last polyline point</string>
     
     <string name="help_calib_check">Calibration-check shots</string>
     <string name="help_close">Close window</string>

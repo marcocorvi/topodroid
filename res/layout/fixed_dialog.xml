@@ -24,7 +24,7 @@
       android:text="@string/longitude"
     />
     <EditText android:id="@+id/fix_lng" 
-      style="@style/edit_text"
+      style="@style/edit_decimal_light"
       android:layout_width="0dp"
       android:layout_weight="40"
       android:layout_height="wrap_content" 
@@ -50,7 +50,7 @@
       android:text="@string/latitude"
     />
     <EditText android:id="@id/fix_lat" 
-      style="@style/edit_text"
+      style="@style/edit_decimal_light"
       android:layout_width="0dp"
       android:layout_weight="40"
       android:layout_height="wrap_content" 
@@ -75,7 +75,7 @@
       android:text="@string/h_ellipsoid"
     />
     <EditText android:id="@id/fix_alt" 
-      style="@style/edit_text"
+      style="@style/edit_decimal_light"
       android:layout_width="0dp"
       android:layout_weight="40"
       android:layout_height="wrap_content" 
@@ -100,7 +100,7 @@
       android:text="@string/h_geoid"
     />
     <EditText android:id="@id/fix_asl" 
-      style="@style/edit_text"
+      style="@style/edit_decimal_light"
       android:layout_width="0dp"
       android:layout_weight="40"
       android:layout_height="wrap_content" 

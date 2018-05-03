@@ -178,6 +178,11 @@
     <!-- UNUSED string name="long_lat">Широта-Довгота</string -->
 
 
+    <!-- TODO string name="error_m">Error [m]</string -->
+    <!-- TODO string name="fmt_error_m">Error %1$.1f m</string -->
+    <!-- TODO string name="fmt_h_geoid">Error %1$.0f m</string -->
+    <!-- TODO string name="fmt_h_ellipsoid">Error %1$.0f m</string -->
+
     <string name="error_azimuth_required">Вимагається азимут</string>
     <string name="error_length_required">Вимагається довжина</string>
     <string name="error_clino_required">Вимагається кут</string>
@@ -674,6 +679,7 @@
     <!-- UNUSED string name="help_manual">Інструкція</string -->
     <string name="help_measure">Виміряти відстань</string>
     <!-- TODO string name="help_measure_type">Measuring mode: fixed point or polyline</string -->
+    <!-- TODO string name="help_measure_undo">Drop the last polyline point</string -->
 
     <!-- TODO string name="help_calib_check">Calibration-check shots</string -->
     <string name="help_close">Закрити вікно</string>

@@ -176,6 +176,11 @@
     <string name="loop_none">nincs hurok</string>
     <!-- UNUSED string name="long_lat">Long-Lat</string -->
 
+    <!-- TODO string name="error_m">Error [m]</string -->
+    <!-- TODO string name="fmt_error_m">Error %1$.1f m</string -->
+    <!-- TODO string name="fmt_h_geoid">Error %1$.0f m</string -->
+    <!-- TODO string name="fmt_h_ellipsoid">Error %1$.0f m</string -->
+
     <string name="error_azimuth_required">Azimut szükséges</string>
     <string name="error_length_required">Hossz szükséges</string>
     <string name="error_clino_required">Lejtszög szükséges</string>
@@ -673,6 +678,7 @@
     <!-- UNUSED string name="help_manual">User manual</string -->
     <string name="help_measure">Távolságmérés</string>
     <string name="help_measure_type">Mérési mód: fix pont vagy vonallánc</string>
+    <!-- TODO string name="help_measure_undo">Drop the last polyline point</string -->
     
     <string name="help_calib_check">Kalibr. ell. mérések</string>
     <string name="help_close">Súgó bezárása</string>

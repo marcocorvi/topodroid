@@ -181,6 +181,11 @@
     <!-- TODO string name="split_nothing">Nothing to split</string -->
     <!-- TODO string name="copy_items">Copy items</string -->
 
+    <!-- TODO string name="error_m">Error [m]</string -->
+    <!-- TODO string name="fmt_error_m">Error %1$.1f m</string -->
+    <!-- TODO string name="fmt_h_geoid">Error %1$.0f m</string -->
+    <!-- TODO string name="fmt_h_ellipsoid">Error %1$.0f m</string -->
+
     <string name="error_azimuth_required">Manjkajoč  azimut</string>
     <string name="error_length_required">Manjkajoč  dolžina</string>
     <string name="error_clino_required">Manjkajoč  naklon</string>
@@ -673,6 +678,7 @@
     <!-- UNUSED string name="help_manual">Manuale online</string -->
     <string name="help_measure">Meriti razdaljo</string>
     <!-- TODO string name="help_measure_type">Measuring mode: fixed point or polyline</string -->
+    <!-- TODO string name="help_measure_undo">Drop the last polyline point</string -->
     
     <!-- TODO string name="help_calib_check">Calibration-check shots</string -->
     <!-- TODO string name="help_close">Close window</string -->

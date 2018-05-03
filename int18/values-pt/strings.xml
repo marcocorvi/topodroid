@@ -176,6 +176,11 @@
     <string name="loop_none">nenhum anel</string>
     <!-- UNUSED string name="long_lat">Long-Lat</string -->
 
+    <!-- TODO string name="error_m">Error [m]</string -->
+    <!-- TODO string name="fmt_error_m">Error %1$.1f m</string -->
+    <!-- TODO string name="fmt_h_geoid">Error %1$.0f m</string -->
+    <!-- TODO string name="fmt_h_ellipsoid">Error %1$.0f m</string -->
+
     <string name="error_azimuth_required">Azimute exigido</string>
     <string name="error_length_required">Comprimento exigido</string>
     <string name="error_clino_required">Inclinação exigida</string>
@@ -672,6 +677,7 @@
     <!-- UNUSED string name="help_manual">Manual do usuário</string -->
     <string name="help_measure">Medir distâncias</string>
     <string name="help_measure_type">Modo de medição: ponto fixo ou linha com diversos pontos</string>
+    <!-- TODO string name="help_measure_undo">Drop the last polyline point</string -->
     
     <string name="help_calib_check">Medidas de verificação de calibração</string>
     <string name="help_close">Fechar janela</string>

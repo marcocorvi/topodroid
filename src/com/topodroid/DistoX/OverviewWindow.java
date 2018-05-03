@@ -95,6 +95,7 @@ public class OverviewWindow extends ItemDrawer
                         R.string.help_refs,
                         R.string.help_measure_type,
                         // FIXME_OVER R.string.help_toggle_plot,
+                        R.string.help_measure_undo,
                       };
   private static int help_menus[] = {
                         R.string.help_close,

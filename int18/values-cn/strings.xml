@@ -175,6 +175,11 @@
     <string name="loop_none">无环路</string>
     <!-- UNUSED string name="long_lat">Long-Lat</string -->
 
+    <!-- TODO string name="error_m">Error [m]</string -->
+    <!-- TODO string name="fmt_error_m">Error %1$.1f m</string -->
+    <!-- TODO string name="fmt_h_geoid">Error %1$.0f m</string -->
+    <!-- TODO string name="fmt_h_ellipsoid">Error %1$.0f m</string -->
+
     <string name="error_azimuth_required">需输入方位角</string>
     <string name="error_length_required">需输入距离</string>
     <string name="error_clino_required">需输入倾角</string>
@@ -670,6 +675,7 @@
     <!-- UNUSED string name="help_manual">用户手册</string -->
     <string name="help_measure">测量距离</string>
     <!-- TODO string name="help_measure_type">Measuring mode: fixed point or polyline</string -->
+    <!-- TODO string name="help_measure_undo">Drop the last polyline point</string -->
     
     <!-- TODO string name="help_calib_check">Calibration-check shots</string -->
     <string name="help_close">关闭窗口</string>
