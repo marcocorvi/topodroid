@@ -85,16 +85,16 @@
     <string name="non_linear">Nelineárne</string>
     <!-- NO string name="algo_minimum">minimum</string -->
    
-    <!-- FIXME string name="device_algo_failed">Neuspešna definicija automatičnega lgoritma_uporaba linearnega algoritma</string bad chararcter backslash-u  -->
-    <!-- TODO string name="device_address">Address %1$s</string -->
-    <!-- UNUSED string name="device_busy">Aparat zaseden</string -->
-    <string name="device_illegal_addr">Ilegalen naslov spomina naprave</string>
-    <string name="device_info">Podatki o napravi</string>
-    <string name="device_model_set">Želiš spremeniti model naprave</string>
-    <string name="device_none">Nobeden  DistoX izbran</string>
+    <!-- FIXME string name="device_algo_failed">Neúspešná definícia automatizovaného algoritmu pomocou lineárneho algoritmu</string bad chararcter backslash-u  -->
+    <!-- TODO string name="device_address">Adresa %1$s</string -->
+    <!-- UNUSED string name="device_busy">Zariadenie je zaneprázdnené</string -->
+    <string name="device_illegal_addr">Neplatná adresa pamäte zariadenia</string>
+    <string name="device_info">Informácie o zariadení</string>
+    <string name="device_model_set">Chcete zmeniť model zariadenia</string>
+    <string name="device_none">Nie je vybraté DistoX</string>
     <!-- UNUSED string name="device_paired">Device is paired</string -->
-    <string name="device_reset">Resetiranje spomina DistoX</string>
-    <string name="device_code">Koda DistoX %1$4d</string>
+    <string name="device_reset">Obnovenie pamäte DistroX</string>
+    <string name="device_code">DistoX kód %1$4d</string>
     <string name="device_firmware">Firmware %1$d.%2$d</string>
     <string name="device_hardware">Hardware %1$d.%2$d</string>
     <!-- TODO string name="device_status_angle_grad">Angle units: grad</string -->
@@ -105,11 +105,11 @@
     <!-- TODO string name="device_status_normal">Mode: normal</string -->
     <!-- TODO string name="device_status_silent_on">Silent: on</string -->
     <!-- TODO string name="device_status_silent_off">Silent: off</string -->
-    <string name="bt_reset">Resetiranje povezave bluetooth</string>
-    <string name="save_as">Shrani kot</string>
+    <string name="bt_reset">Obnovenie pripojenia Bluetooth</string>
+    <string name="save_as">Uložiť ako</string>
     <string name="nickname"></string>
 
-    <string name="comment">Komentar</string>
+    <string name="comment">Komentár</string>
     <!-- UNUSED string name="flag">Flag</string -->
     <!-- UNUSED string name="backshot">backshot</string -->
     <!-- UNUSED string name="duplicate">duplicato</string -->
@@ -117,20 +117,20 @@
     <!-- UNUSED string name="surface">superficie</string -->
     <!-- UNUSED string name="extend">Extend</string -->
     <!-- UNUSED string name="extend_ignore">Niente</string -->
-    <string name="extend_left">L</string>
-    <string name="extend_right">D</string>
+    <string name="extend_left">Ľ</string>
+    <string name="extend_right">P</string>
     <string name="extend_vert">Vert.</string>
     <!-- UNUSED string name="external_prompt">Scrivi i dati</string -->
-    <string name="splay_at_to">Razprši k merilni dostopni  točki</string>
+    <string name="splay_at_to">Roztiahnite sa do meracieho prístupového bodu</string>
     <!-- TODO string name="lrud">LRUD</string -->
     <!-- TODO string name="strike_dip">Strike %1$.0f Dip %2$.0f</string -->
 
-    <string name="few_data">Pomankljivi podatki</string>
+    <string name="few_data">Nedostatok údajov</string>
     <!-- TODO string name="few_iter">Failed to iterate</string -->
     <!-- TODO string name="few_groups">Not enough data with group</string -->
     <!-- TODO string name="found_groups">Found %1$d groups</string -->
     <!-- UNUSED string name="few_plots">Troppo pochi disegni</string -->
-    <string name="few_calibs">Pomankljiva kalibracija</string>
+    <string name="few_calibs">Nízka kalibrácia</string>
     <!-- TODO string name="getting_info">Getting DistoX info ...</string -->
 
     <string name="calib_import_title">Uvozi kalibracijo</string>
