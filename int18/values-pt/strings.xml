@@ -571,7 +571,7 @@
     <string name="mode_splay">Medidas auxiliares</string>
     <string name="mode_station">Bases</string>
     <string name="mode_grid">Grade</string>
-    <string name="mode_fixed">Alterar posição do croqui X aranha</string>
+    <string name="mode_fixed">Deslocar croqui X aranha (CUIDADO!)</string>
     <string name="mode_outline">Contorno</string>
     <string name="mode_scale_ref">Escala gráfica</string>
 
@@ -829,7 +829,7 @@
     <string name="title_projection">Azimute do corte projetado %1$d</string>
     <string name="title_refs">Mostrar</string>
     <string name="title_scraps">Croquis da topo</string>
-    <string name="title_scraps_outline">Contorno do croqui</string>
+    <string name="title_scraps_outline">Contorno de outro croqui</string>
     <string name="title_select">Selecionar</string>
     <string name="title_shift">Deslocar</string>
     <string name="title_shot_delete">Apagar medida?</string>
