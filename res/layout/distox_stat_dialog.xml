@@ -5,105 +5,117 @@
   android:layout_height="wrap_content"
   android:orientation="vertical"
   >
-
-  <TextView android:id="@+id/stat_leg"
-    android:layout_marginTop="@dimen/marginv"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" 
-  />
-  <TextView android:id="@+id/stat_duplicate"
-    android:layout_marginTop="@dimen/marginsmall"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" 
-  />
-  <TextView android:id="@+id/stat_surface"
-    android:layout_marginTop="@dimen/marginsmall"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" 
-  />
-  <TextView android:id="@+id/stat_splay"
-    android:layout_marginTop="@dimen/marginsmall"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" 
-  />
-  <TextView android:id="@+id/stat_station"
-    android:layout_marginTop="@dimen/marginsmall"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" 
-  />
-  <TextView android:id="@+id/stat_loop"
-    android:layout_marginTop="@dimen/marginsmall"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" 
-  />
-  <TextView android:id="@+id/stat_component"
-    android:layout_marginTop="@dimen/marginsmall"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" 
-  />
-  <TextView android:id="@+id/text_stat_origin"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" 
-    android:layout_marginTop="@dimen/marginv"
-  />
-  <TextView android:id="@+id/text_stat_azimuth"
-    android:layout_marginTop="@dimen/marginsmall"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" 
-  />
-  <TextView android:id="@+id/text_stat_length"
-    android:layout_marginTop="@dimen/marginsmall"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" 
-  />
-  <TextView android:id="@+id/text_stat_projlen"
-    android:layout_marginTop="@dimen/marginsmall"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" 
-  />
-  <TextView android:id="@+id/text_stat_wens"
-    android:layout_marginTop="@dimen/marginsmall"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" 
-  />
-  <TextView android:id="@+id/text_stat_zminmax"
-    android:layout_marginTop="@dimen/marginsmall"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" 
-  />
-  <TextView android:id="@+id/text_stat_stations"
-    android:layout_marginTop="@dimen/marginsmall"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" 
-  />
-  <TextView android:id="@+id/text_stat_shots"
-    android:layout_marginTop="@dimen/marginsmall"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" 
-  />
-  <TextView android:id="@+id/text_stat_splays"
-    android:layout_marginTop="@dimen/marginsmall"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" 
-  />
-  <TextView android:id="@+id/text_stat_angle_error"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" 
-    android:layout_marginTop="@dimen/marginsmall"
-  />
-  <TextView android:id="@+id/text_stat_loops"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" 
-    android:text="@string/loop_closure_errors"
-    android:layout_marginTop="@dimen/marginsmall"
-  />
-  <ListView android:id="@+id/list"
-    style="@style/list_top"
-    android:layout_marginTop="@dimen/marginv"
+  <ScrollView 
     android:layout_width="fill_parent"
     android:layout_height="0dp"
     android:layout_weight="1"
-  />  
+    >
+    <LinearLayout
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+     >
+
+      <TextView android:id="@+id/stat_leg"
+        android:layout_marginTop="@dimen/marginv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+      />
+      <TextView android:id="@+id/stat_duplicate"
+        android:layout_marginTop="@dimen/marginsmall"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+      />
+      <TextView android:id="@+id/stat_surface"
+        android:layout_marginTop="@dimen/marginsmall"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+      />
+      <TextView android:id="@+id/stat_splay"
+        android:layout_marginTop="@dimen/marginsmall"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+      />
+      <TextView android:id="@+id/stat_station"
+        android:layout_marginTop="@dimen/marginsmall"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+      />
+      <TextView android:id="@+id/stat_loop"
+        android:layout_marginTop="@dimen/marginsmall"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+      />
+      <TextView android:id="@+id/stat_component"
+        android:layout_marginTop="@dimen/marginsmall"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+      />
+      <TextView android:id="@+id/text_stat_origin"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="@dimen/marginv"
+      />
+      <TextView android:id="@+id/text_stat_azimuth"
+        android:layout_marginTop="@dimen/marginsmall"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+      />
+      <TextView android:id="@+id/text_stat_length"
+        android:layout_marginTop="@dimen/marginsmall"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+      />
+      <TextView android:id="@+id/text_stat_projlen"
+        android:layout_marginTop="@dimen/marginsmall"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+      />
+      <TextView android:id="@+id/text_stat_wens"
+        android:layout_marginTop="@dimen/marginsmall"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+      />
+      <TextView android:id="@+id/text_stat_zminmax"
+        android:layout_marginTop="@dimen/marginsmall"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+      />
+      <TextView android:id="@+id/text_stat_stations"
+        android:layout_marginTop="@dimen/marginsmall"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+      />
+      <TextView android:id="@+id/text_stat_shots"
+        android:layout_marginTop="@dimen/marginsmall"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+      />
+      <TextView android:id="@+id/text_stat_splays"
+        android:layout_marginTop="@dimen/marginsmall"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+      />
+      <TextView android:id="@+id/text_stat_angle_error"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="@dimen/marginsmall"
+      />
+      <TextView android:id="@+id/text_stat_loops"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:text="@string/loop_closure_errors"
+        android:layout_marginTop="@dimen/marginsmall"
+      />
+      <ListView android:id="@+id/list"
+        style="@style/list_top"
+        android:layout_marginTop="@dimen/marginv"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+      />  
+    </LinearLayout> 
+  </ScrollView>
 
   <LinearLayout 
     android:layout_width="fill_parent"

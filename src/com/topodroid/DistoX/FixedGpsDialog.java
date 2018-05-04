@@ -49,7 +49,7 @@ import android.location.GpsSatellite;
 
 import android.net.Uri;
 
-// import android.util.Log;
+import android.util.Log;
 
 class FixedGpsDialog extends MyDialog
                             implements View.OnClickListener
@@ -78,11 +78,11 @@ class FixedGpsDialog extends MyDialog
   private Button   mBtnStatus;
   // private Button   mBtnCancel;
 
-  private double mLat;  // decimal degrees
-  private double mLng;  // decimal degrees
-  private double mHEll; // meters
+  private double mLat = 0;  // decimal degrees
+  private double mLng = 0;  // decimal degrees
+  private double mHEll = 0; // meters
   private double mHGeo; // altimetric altitude
-  private double mErr2; // location error [m]
+  private double mErr2 = -1; // location error [m]
   private boolean mHasLocation;
   private int mNrSatellites = 0;
 
@@ -254,31 +254,41 @@ class FixedGpsDialog extends MyDialog
   /** location is stored in decimal degrees but displayed as deg:min:sec
    * N.B. the caller must check loc != null
    */
-  private double mW0 = 0.9;
+  private double mW0 = 0.8;
   private double mW1 = 1 - mW0;
-  // private double mW2 = 1 / mW1;
+  private double mW2 = mW1 / mW0;
+  private double mR = 6371000; // approx earth radius
 
-  private void displayLocation( Location loc )
+  private void displayLocation( Location loc /*, boolean do_error*/ )
   {
-    double mR = 6400000; // approx 6400 Km
-    double mRlat = 0;
+    double ret = 0;
     if ( mErr2 < 0 ) {	  
       mLat  = loc.getLatitude();  // decimal degree
       mLng  = loc.getLongitude();
       mHEll = loc.getAltitude();  // meter
-      mErr2 = 0;
-      mRlat = mR * Math.cos( mLat * TDMath.DEG2RAD );
+      mErr2 = 10000;              // start with a large value
     } else {
-      double lat  = mW1 * loc.getLatitude()  + mW0*mLat;
-      double lng  = mW1 * loc.getLongitude() + mW0*mLng;
-      double hell = mW1 * loc.getAltitude()  + mW0*mHEll;
-      double dlat = (lat-mLat) * mR * TDMath.DEG2RAD;
-      double dlng = (lng-mLng) * mRlat * TDMath.DEG2RAD;
-      double dhell = hell - mHEll;
-      mErr2 = mW0 * mErr2 + mW1*( dlat*dlat + dlng*dlng + dhell*dhell );
+      double lat0 = loc.getLatitude();
+      double lng0 = loc.getLongitude();
+      double hel0 = loc.getAltitude();
+      double lat  = mW1 * lat0 + mW0 * mLat;
+      double lng  = mW1 * lng0 + mW0 * mLng;
+      double hell = mW1 * hel0 + mW0 * mHEll;
+      double dlat = (lat0-mLat) * mR * TDMath.DEG2RAD;
+      double dlng = (lng0-mLng) * mR * TDMath.DEG2RAD * Math.cos( mLat * TDMath.DEG2RAD );
+      double dhel = hel0 - mHEll;
+      double err2 = ( dlat*dlat + dlng*dlng + dhel*dhel );
+      mErr2 = mW0 * mErr2 + mW2 * err2;
       mLat  = lat;
       mLng  = lng;
       mHEll = hell;
+      ret   = Math.sqrt( mErr2 );
+
+      if ( ret < 1 ) {
+	ret = 1; // FIXME hard lower bound
+      } else if ( ret > 100 ) {
+	ret = 100;
+      }
     }
     mHGeo = mWMM.ellipsoidToGeoid( mLat, mLng, mHEll ); 
     mHasLocation = true;
@@ -287,8 +297,13 @@ class FixedGpsDialog extends MyDialog
     mTVlat.setText( mContext.getResources().getString( R.string.latitude ) + " " + FixedInfo.double2string( mLat ) );
     mTValt.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_h_ellipsoid ), mHEll ) );
     mTVasl.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_h_geoid ), mHGeo ) );
-    mTVerr.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_error_m ), Math.sqrt(mErr2) ) );
-    
+    mTVerr.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_error_m ), ret ) );
+    // if ( do_error ) {
+    //   mTVerr.setTextColor( 0xff00ff00 );
+    // } else {
+    //   mTVerr.setTextColor( 0xff00ffff );
+    // }
+    // return ret;
   }
 
   // -----------------------------------------------------------
@@ -310,6 +325,7 @@ class FixedGpsDialog extends MyDialog
     mHasLocation = false;
     mBtnStatus.setText( "0" );
     mBtnStatus.setBackgroundColor( 0x80ff0000 );
+    mErr2 = -1; // restart location averaging
     if ( locManager != null ) {
       locManager.addGpsStatusListener( this );
       locManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 1000, 0, this );
@@ -320,7 +336,8 @@ class FixedGpsDialog extends MyDialog
   @Override
   public void onLocationChanged( Location loc )
   {
-    if ( loc != null && mNrSatellites > 3 ) displayLocation( loc );
+    // Log.v("DistoX", "Location Changed nr satellites used in fix " + mNrSatellites );
+    if ( loc != null && mNrSatellites > 3 ) displayLocation( loc /*, true */ );
     // mLocated = true;
   }
 
@@ -357,23 +374,26 @@ class FixedGpsDialog extends MyDialog
       }
       mNrSatellites = getNrSatellites();
       // TDLog.Log(TDLog.LOG_LOC, "onGpsStatusChanged nr satellites used in fix " + mNrSatellites );
+      // Log.v("DistoX", "GPS Status Changed nr satellites used in fix " + mNrSatellites );
       mBtnStatus.setText( String.format(Locale.US, "%d", mNrSatellites ) );
+
       switch ( mNrSatellites ) {
         case 0: mBtnStatus.setBackgroundColor( 0x80ff0000 );
                 break;
         case 1: mBtnStatus.setBackgroundColor( 0x80993333 );
                 break;
-        case 2: mBtnStatus.setBackgroundColor( 0x80663333 );
+        case 2: mBtnStatus.setBackgroundColor( 0x80666633 );
                 break;
         case 3: mBtnStatus.setBackgroundColor( 0x80339933 );
                 break;
         default: mBtnStatus.setBackgroundColor( 0x8000ff00 );
                 break;
       }
+
       if ( mNrSatellites > 3 ) {
         try {
           Location loc = locManager.getLastKnownLocation( LocationManager.GPS_PROVIDER );
-          if ( loc != null ) displayLocation( loc );
+          if ( loc != null ) displayLocation( loc /*, false*/ );
         } catch ( IllegalArgumentException e ) {
           TDLog.Error( "onGpsStatusChanged IllegalArgumentException " );
         } catch ( SecurityException e ) {

@@ -179,8 +179,8 @@
 
     <string name="error_m">Error [m]</string>
     <string name="fmt_error_m">Error %1$.1f m</string>
-    <string name="fmt_h_geoid">Error %1$.0f m</string>
-    <string name="fmt_h_ellipsoid">Error %1$.0f m</string>
+    <string name="fmt_h_geoid">Geoid alt. %1$.0f m</string>
+    <string name="fmt_h_ellipsoid">Ellipsoid alt. %1$.0f m</string>
 
     <string name="error_azimuth_required">Azimuth required</string>
     <string name="error_length_required">Length required</string>
