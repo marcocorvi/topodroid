@@ -199,18 +199,18 @@
     <string name="error_name_required">Chýba meno</string>
     <!-- TODO string name="error_dir_exists">Directory already exists</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
-    <string name="error_start_required">Manjkajoča ref točka</string>
+    <string name="error_start_required">Chýba bod ref</string>
     <!-- UNUSED string name="error_station_already_fixed">Caposaldo già con coordinate</string -->
-    <string name="error_station_required">Manjkajoča merilna točka</string>
-    <string name="error_station_non_existing">Neobstoječa merilna točka</string>
-    <string name="error_sensor_required">Manjkajoča senzor</string>
-    <string name="error_value_required">Manjkajoča vrednost</string>
+    <string name="error_station_required">Chýba merací bod</string>
+    <string name="error_station_non_existing">Neexistujúci merací bod</string>
+    <string name="error_sensor_required">Chýba snímač</string>
+    <string name="error_value_required">Chýba hodnota</string>
     
-    <string name="group_title">Dodeli skupine podatkom iz kalibracije</string>
-    <string name="group_policy_four">Metoda: skupine po štiri</string>
-    <string name="group_policy_sixteen">Metoda: skupine po štiri, nato posamezne</string>
-    <string name="group_policy_distance">Metoda: glede na kotno razdaljo</string>
-    <string name="group_reset">Briši skupine</string>
+    <string name="group_title">Priraďte skupiny ku kalibračným údajom</string>
+    <string name="group_policy_four">Metóda: štyri skupiny</string>
+    <string name="group_policy_sixteen">Metóda: štyri skupiny, potom individuálne</string>
+    <string name="group_policy_distance">Metóda: vzhľadom na uhlovú vzdialenosť</string>
+    <string name="group_reset">Odstrániť skupiny</string>
 
     <!-- UNUSED string name="scale">scala</string -->
     <!-- TODO string name="reversed">reversed</string -->
