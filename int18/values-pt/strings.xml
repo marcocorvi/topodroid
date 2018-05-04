@@ -176,10 +176,10 @@
     <string name="loop_none">nenhum anel</string>
     <!-- UNUSED string name="long_lat">Long-Lat</string -->
 
-    <!-- TODO string name="error_m">Error [m]</string -->
-    <!-- TODO string name="fmt_error_m">Error %1$.1f m</string -->
-    <!-- TODO string name="fmt_h_geoid">Error %1$.0f m</string -->
-    <!-- TODO string name="fmt_h_ellipsoid">Error %1$.0f m</string -->
+    <string name="error_m">Erro [m]</string>
+    <string name="fmt_error_m">Erro: %1$.1f m</string>
+    <string name="fmt_h_geoid">Erro (geóide): %1$.0f m</string>
+    <string name="fmt_h_ellipsoid">Erro (elipsóide): %1$.0f m</string>
 
     <string name="error_azimuth_required">Azimute exigido</string>
     <string name="error_length_required">Comprimento exigido</string>
@@ -571,7 +571,7 @@
     <string name="mode_splay">Medidas auxiliares</string>
     <string name="mode_station">Bases</string>
     <string name="mode_grid">Grade</string>
-    <string name="mode_fixed">Alterar posição do croqui X aranha</string>
+    <string name="mode_fixed">Deslocar croqui X aranha (CUIDADO!)</string>
     <string name="mode_outline">Contorno</string>
     <string name="mode_scale_ref">Escala gráfica</string>
 
@@ -677,7 +677,7 @@
     <!-- UNUSED string name="help_manual">Manual do usuário</string -->
     <string name="help_measure">Medir distâncias</string>
     <string name="help_measure_type">Modo de medição: ponto fixo ou linha com diversos pontos</string>
-    <!-- TODO string name="help_measure_undo">Drop the last polyline point</string -->
+    <string name="help_measure_undo">Descartar o último ponto da polilinha</string>
     
     <string name="help_calib_check">Medidas de verificação de calibração</string>
     <string name="help_close">Fechar janela</string>
@@ -829,7 +829,7 @@
     <string name="title_projection">Azimute do corte projetado %1$d</string>
     <string name="title_refs">Mostrar</string>
     <string name="title_scraps">Croquis da topo</string>
-    <string name="title_scraps_outline">Contorno do croqui</string>
+    <string name="title_scraps_outline">Contorno de outro croqui</string>
     <string name="title_select">Selecionar</string>
     <string name="title_shift">Deslocar</string>
     <string name="title_shot_delete">Apagar medida?</string>
