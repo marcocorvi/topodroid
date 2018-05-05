@@ -377,7 +377,7 @@
     <string name="saving_file_failed">Neúspešná záchrana súborov</string>
     <!-- UNUSED string name="scrap_name">nome del disegno</string -->
     <string name="splay">bočné videnie</string>
-    <string name="too_many_leg_intersection">Presek seka več vizur</string>
+    <string name="too_many_leg_intersection">Riadok prierezu prekračuje viac ako jednu cestu.</string>
     <string name="too_many_legs_xsection">Preveč vizur za presek</string>
     <!-- UNUSED string name="converted_tdr2th2">Pretvorjena skice iz binarnega formata v th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Pretvori  skico iz binarnega formata v th2</string -->
