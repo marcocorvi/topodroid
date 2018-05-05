@@ -378,25 +378,25 @@
     <!-- UNUSED string name="scrap_name">nome del disegno</string -->
     <string name="splay">bočné videnie</string>
     <string name="too_many_leg_intersection">Riadok prierezu prekračuje viac ako jednu cestu.</string>
-    <string name="too_many_legs_xsection">Preveč vizur za presek</string>
+    <string name="too_many_legs_xsection">Príliš veľa cieľov pre sekciu X</string>
     <!-- UNUSED string name="converted_tdr2th2">Pretvorjena skice iz binarnega formata v th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Pretvori  skico iz binarnega formata v th2</string -->
-    <string name="section_area">Površina preseka: %1$.1f</string>
-    <!-- TODO string name="section_name">section comment</string -->
+    <string name="section_area">Sekcia zón: %1$.1f</string>
+    <!-- TODO string name="section_name">Sekcia Komentáre</string -->
     <!-- TODO string name="scrap_outline">Sketch outline</string -->
 
     <!-- UNUSED string name="sensor">sensore</string -->
-    <string name="sensor_gravity">teža</string>
+    <string name="sensor_gravity">prísnosť</string>
     <!-- UNUSED string name="sensor_humidity">umidità</string -->
-    <string name="sensor_light">luč</string>
-    <string name="sensor_magnetic_field">magnetno polje</string>
+    <string name="sensor_light">jas</string>
+    <string name="sensor_magnetic_field">magnetické pole</string>
     <!-- UNUSED string name="sensor_orientation">orientazione</string -->
-    <string name="sensor_pressure">pritisk</string>
-    <string name="sensor_temperature">temperatura</string>
-    <string name="sensor_extern">zunanji</string>
-    <string name="sensor_type">tip</string>
-    <string name="sensor_value">vrednost</string>
-    <string name="sensor_comment">komentar</string>
+    <string name="sensor_pressure">prítlač</string>
+    <string name="sensor_temperature">teplota</string>
+    <string name="sensor_extern">externý</string>
+    <string name="sensor_type">typ</string>
+    <string name="sensor_value">hodnota</string>
+    <string name="sensor_comment">komentár</string>
     <!-- TODO string name="insufficient_data">insufficient sensor data</string -->
 
     <!-- UNUSED string name="shot_clino">clino</string -->
