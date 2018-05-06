@@ -600,31 +600,31 @@
     <string name="symbol_speleo">Speleológia</string>
     <string name="symbol_extra">Speleo (2)</string>
 
-    <string name="symbol_reload">Strumenti Disegno</string>
+    <string name="symbol_reload">Nástroje na kreslenie</string>
 
 <!-- FIXME_SKETCH_3D -->    
     <!-- OK string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
     <!-- NO string name="title_sketch_new">New 3D sketch</string -->
     <!-- UNUSED string name="title_sketch_edit">Edit 3D surface</string -->
-    <string name="title_sketch_shot">Nuovo tiro</string>
-    <string name="title_sketch_refs">Modo di visualizzazione</string>
+    <string name="title_sketch_shot">Nový záber</string>
+    <string name="title_sketch_refs">Režim zobrazenia</string>
     <!-- UNUSED string name="title_sketch_section_type">Tipo di sezioni</string -->
     <!-- UNUSED string name="title_sketch_select">Seleziona un oggetto</string -->
 
     <!-- select button labels -->
-    <string name="sketch_mode_single">Tiro singolo</string>
-    <string name="sketch_mode_ngbh">Tiri vicini</string>
-    <string name="sketch_mode_all">Tutti i tiri</string>
-    <string name="sketch_delete">Cancella modello 3D ?</string>
+    <string name="sketch_mode_single">Jedna snímka</string>
+    <string name="sketch_mode_ngbh">Zavrieť zábery</string>
+    <string name="sketch_mode_all">Všetky zábery</string>
+    <string name="sketch_delete">Zmazať 3D model?</string>
     <!-- UNUSED string name="sketch_no_split">Nessun raffinamento. Diminuire lato max. Lunghezza da raffinare ulteriormente.</string -->
-    <string name="length">Lunghezza [m]</string>
+    <string name="length">Dĺžka [m]</string>
     <string name="azimuth">Azimut [deg]</string>
-    <string name="clino">Inclinazione [deg]</string>
+    <string name="clino">Sklon [deg]</string>
 
-    <string name="orientation">orientamento</string>
-    <string name="contents">contenuti</string>
-    <string name="error_distribution">distribuzione degli errori</string>
-    <string name="angle_distribution">distribuzione degli angoli</string>
+    <string name="orientation">Orientácia</string>
+    <string name="contents">Obsah</string>
+    <string name="error_distribution">distribúcia chýb</string>
+    <string name="angle_distribution">rozdelenie rohov</string>
 
     <!-- UNUSED string name="btn_head">head</string -->
     <!-- UNUSED string name="btn_stretch">Stretch</string -->
@@ -632,7 +632,7 @@
     <!-- UNUSED string name="btn_erase">erase</string -->
     <!-- UNUSED string name="btn_cut">cut</string -->
     <!-- UNUSED string name="btn_vertical">Vertical</string -->
-    <string name="btn_horizontal">Orizontale</string>
+    <string name="btn_horizontal">Horizontálne</string>
 
     <!-- UNUSED string name="btn_section">Section</string -->
     <!-- UNUSED string name="btn_step">Step</string -->
@@ -644,39 +644,39 @@
     <!-- UNUSED string name="btn_surface">surface</string -->
 
     <!-- UNUSED string name="station_next">NEXT</string -->
-    <string name="no_shot_between_stations">Nessun tiro tra i capisaldi</string>
-    <string name="few_line_points">La linea ha troppo pochi punti</string>
-    <string name="line_delete">Elimina linea</string>
-    <string name="flip_shots">Capovolgi battute</string>
-    <string name="split_nothing">Nulla da dividere</string>
-    <string name="copy_items">Copia elemento</string>
+    <string name="no_shot_between_stations">Žiadny bod medzi stanicami</string>
+    <string name="few_line_points">Linka má príliš málo bodov</string>
+    <string name="line_delete">Odstrániť riadok</string>
+    <string name="flip_shots">Obrátené body</string>
+    <string name="split_nothing">Nič, čo sa dá rozdeliť</string>
+    <string name="copy_items">Kopírovanie položiek</string>
 
-    <string name="menu_head">CIMA</string>
+    <string name="menu_head">Hlavné menu</string>
     <!-- UNUSED string name="menu_save_th2">SAVE TH2</string -->
 <!-- END_SKETCH_3D -->    
 
-    <string name="man_preface">Prefazione</string>
-    <string name="man_intro">1. Introduzione</string>
-    <string name="man_main">2. Finestra principale</string>
-    <string name="man_device">3. Finestra Dispositivi</string>
-    <string name="man_calib">4. Finestra Calibrazione</string>
-    <string name="man_gm">5. Dati Calibrazione</string>
-    <string name="man_survey">6. Dati Rilievo</string>
-    <string name="man_shot">7. Lista battute</string>
-    <string name="man_info">8. Info rilievo</string>
-    <string name="man_sketch">9. Finestra disegno</string>
-    <string name="man_draw">10. Modifica disegno</string>
-    <string name="man_xsection">11. Sezioni-X</string>
-    <string name="man_overview">12. Finestra panoramica</string>
-    <string name="man_export">13. Importa/esporta</string>
-    <string name="man_threed">14. Visualizzatore 3D</string>
-    <string name="man_index">15. Indice</string>
-    <string name="man_website">* Sito_Web</string>
+    <string name="man_preface">Predhovor</string>
+    <string name="man_intro">1. Úvod</string>
+    <string name="man_main">2. Hlavné okno</string>
+    <string name="man_device">3. Okno Zariadenia</string>
+    <string name="man_calib">4. Okno kalibrácie</string>
+    <string name="man_gm">5. Kalibračné údaje</string>
+    <string name="man_survey">6. Relevantné údaje</string>
+    <string name="man_shot">7. Zoznam nástrelov</string>
+    <string name="man_info">8. Informácie o relevantnosti</string>
+    <string name="man_sketch">9. Kreslenie okna</string>
+    <string name="man_draw">10. Upraviť výkres</string>
+    <string name="man_xsection">11. Oddiely-X</string>
+    <string name="man_overview">12. Panoramatické okno</string>
+    <string name="man_export">13. Import / Export</string>
+    <string name="man_threed">14. 3D prehliadač</string>
+    <string name="man_index">15. Indexovať</string>
+    <string name="man_website">* web stránka</string>
 
-    <string name="help_help">Questo aiuto</string>
+    <string name="help_help">Táto pomoc</string>
     <!-- UNUSED string name="help_manual">Manuale online</string -->
-    <string name="help_measure">Misurare le distanze</string>
-    <string name="help_measure_type">Metodo misura: punti fissi o polilinea</string>
+    <string name="help_measure">Merajte vzdialenosti</string>
+    <string name="help_measure_type">Metóda merania: pevné body alebo krivka</string>
     <!-- TODO string name="help_measure_undo">Drop the last polyline point</string -->
     
     <string name="help_calib_check">Tiri di controllo calib.</string>
