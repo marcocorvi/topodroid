@@ -548,33 +548,33 @@
     <string name="button_reset"     >Resetovať   </string>
     <string name="button_left"      >Vľavo</string>
     <string name="button_right"     >Vpravo</string>
-    <string name="button_clear"     >Cancella  </string>
-    <string name="button_save"      >Salva     </string>
+    <string name="button_clear"     >Vymazať  </string>
+    <string name="button_save"      >Uložiť     </string>
     <!-- UNUSED string name="button_select"    >Seleziona </string -->
-    <string name="button_search"    >Cerca     </string>
-    <string name="button_merge"     >Unisci    </string>
-    <string name="button_split"     >Dividi    </string>
-    <string name="button_store"     >Scrivi    </string>
+    <string name="button_search"    >Vyhľadávanie     </string>
+    <string name="button_merge"     >Zlúčiť    </string>
+    <string name="button_split"     >Rozdeliť   </string>
+    <string name="button_store"     >Zapísať    </string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
     <!-- OK string name="button_upload"    >Upload   </string -->
-    <string name="button_view"      >Visualizza      </string>
+    <string name="button_view"      >Prezerať     </string>
     <!-- UNUSED string name="button_zoomfit"   >Adatta zoom</string -->
     <!-- UNUSED string name="button_landscape" >Panorama  </string -->
     <!-- UNUSED string name="button_portrait"  >Ritratto  </string -->
 
 
-    <string name="button_write"     >Installa</string>
-    <string name="button_xsection"  >Sezione trasversale</string>
-    <string name="xsection">Sezione trasversale</string>
+    <string name="button_write"     >Inštalovať</string>
+    <string name="button_xsection"  >Prierez</string>
+    <string name="xsection">Prierez</string>
 
-    <string name="mode_leg">Battute</string>
-    <string name="mode_splay">Splay</string>
-    <string name="mode_station">Capisaldi</string>
-    <string name="mode_grid">Griglia</string>
-    <string name="mode_fixed">[ Bloccati ]</string>
-    <string name="mode_outline">Solo contorno</string>
-    <string name="mode_scale_ref">Scala barra di riferimento</string>
+    <string name="mode_leg">Klepať</string>
+    <string name="mode_splay">Zošikmiť</string>
+    <string name="mode_station">Míľniky</string>
+    <string name="mode_grid">Mriežka</string>
+    <string name="mode_fixed">[ zamknutý ]</string>
+    <string name="mode_outline">Iba obrys</string>
+    <string name="mode_scale_ref">Referenčná stupnica</string>
 
     <!-- UNUSED string name="remote_title">DistoX Remote Control</string -->
     <string name="remote_on">Laser ON</string>
@@ -583,21 +583,21 @@
     <!-- OK string name="remote_reset">Reset BT</string -->
     <!-- UNUSED string name="download">Scarica dati</string -->
 
-    <string name="popup_do_splay">Splay</string>
-    <string name="popup_do_leg">Battuta</string>
-    <string name="popup_do_gm_data">Tiro di calib.</string>
+    <string name="popup_do_splay">Zošikmiť</string>
+    <string name="popup_do_leg">Klepať</string>
+    <string name="popup_do_gm_data">Nastrelenie kalibr.</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
-    <string name="btn_import">Importa</string>
-    <string name="btn_install">Installa</string>
+    <string name="btn_import">Import</string>
+    <string name="btn_install">Inštalovať</string>
 
-    <string name="symbol_archeo">Archeologico</string>
-    <string name="symbol_bio">Biologico</string>
-    <string name="symbol_geo">Geologico</string>
-    <string name="symbol_karst">Carsico</string>
-    <string name="symbol_mine">Minerario</string>
-    <string name="symbol_paleo">Paleologico</string>
-    <string name="symbol_speleo">Speleologico</string>
+    <string name="symbol_archeo">Archeológia</string>
+    <string name="symbol_bio">Organický</string>
+    <string name="symbol_geo">Geologický</string>
+    <string name="symbol_karst">Kras</string>
+    <string name="symbol_mine">Baníctvo</string>
+    <string name="symbol_paleo">Paleontológia</string>
+    <string name="symbol_speleo">Speleológia</string>
     <string name="symbol_extra">Speleo (2)</string>
 
     <string name="symbol_reload">Strumenti Disegno</string>
