@@ -3,6 +3,7 @@ name doline_slope
 name-pt rampa_de_dolina
 name-es rampa_de_dolina
 name-ru склон_воронки
+name-fr pente_de_doline
 th_name u:doline_slope
 group doline
 color 0x66cc33 0xff
