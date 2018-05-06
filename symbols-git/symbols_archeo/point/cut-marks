@@ -4,6 +4,7 @@ name-it scavi_sovrapposti
 name-es marcas_excavación
 name-pt marcas_escavação
 name-ru отметины_среза
+name-fr trace_de_creusement
 th_name u:cut_marks
 color 0xffffff
 csurvey 0 0 0
