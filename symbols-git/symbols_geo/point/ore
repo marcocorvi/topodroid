@@ -3,6 +3,7 @@ name ore
 name-pt minério
 name-es mineral
 name-ru руда
+name-fr minerai
 th_name u:ore
 color 0x66ff99
 csurvey 0 0 0
