@@ -3,6 +3,7 @@ name cave_vertical
 name-pt caverna_vertical
 name-es sima
 name-ru пещера_вертикальная
+name-fr cavité_verticale
 th_name u:cave_vertical
 orientation no
 color 0xffcc66
