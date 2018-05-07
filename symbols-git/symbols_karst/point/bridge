@@ -3,6 +3,7 @@ name bridge
 name-pt ponte
 name-es puente
 name-ru мост
+name-fr pont_rocheux
 th_name u:bridge
 orientation no
 color 0xffffff

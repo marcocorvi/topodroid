@@ -3,6 +3,7 @@ name slope_sheer
 name-es pendiente_escarpada
 name-pt rampa_quase_vertical
 name-ru склон_отвесный
+name-fr pente_abrupte
 th_name slope:sheer
 group slope
 color 0xff0000 0xff

@@ -4,6 +4,7 @@ name ceiling-step
 name-es resalte_techo
 name-pt degrau_teto
 name-ru уступ_потолка
+name-fr décrochement-de-plafond
 th_name ceiling-step
 color 0x33cc66 0xff
 width 1

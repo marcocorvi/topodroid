@@ -3,6 +3,7 @@ name shelter
 name-pt abrigo
 name-es abrigo
 name-ru укрытие
+name-fr abri_sous_roche
 th_name u:shelter
 orientation no
 color 0xffffff
