@@ -998,23 +998,23 @@
   <string name="pref_pointing_title">Polomer polôh</string>
   <string name="pref_pointing_message">Polomer polôh</string>
   <string name="pref_dash_splay_title">Súdržnosť šrafovania s rozprašovaním</string>
-  <string name="pref_dash_splay_message">Splay tratteggiati coerentemente tra pianta e sezione</string>
-  <string name="pref_vert_splay_title">Soglia splay tratteggiati</string>
+  <string name="pref_dash_splay_message">Splay sú prepojené medzi plánom a profilom</string>
+  <string name="pref_vert_splay_title">Prahová hodnota rozptýleného bodu</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Soglia clino splay tratteggiati</string -->
-  <string name="pref_vert_splay_message">Soglia clino splay tratteggiati</string>
-  <string name="pref_horiz_splay_title">Azimut di soglia tratteggio splay</string>
-  <string name="pref_horiz_splay_message">Splay con azimut maggiore di questo sono tratteggiati</string>
-  <string name="pref_section_splay_title">Angolo di soglia tratteggio splay</string>
-  <string name="pref_section_splay_message">Nella sezione, oltre questo angolo, gli splay sono tratteggiati</string>
-  <string name="pref_data_backup_title">Auto-esporta dati</string>
-  <string name="pref_data_backup_summary">Esportazione automatica dei dati (necessita formato di default)</string>
-  <string name="pref_shared_xsections_title">X-section condivise</string>
-  <string name="pref_shared_xsections_summary">X-section al caposaldo condivisa tra i disegni</string>
-  <string name="xsections_shared">X-section condivise</string>
-  <string name="xsections_private">X-section private</string>
+  <string name="pref_vert_splay_message">Splash sklon nad prahom sú prerušené</string>
+  <string name="pref_horiz_splay_title">Prahová šírka azimutu</string>
+  <string name="pref_horiz_splay_message">Spúšte s azimutom väčším ako toto sú prerušené</string>
+  <string name="pref_section_splay_title">Prahový uhol rozptylu</string>
+  <string name="pref_section_splay_message">Bočné náhľady prierezu s uhlom pod touto hranicou sú prerušenée</string>
+  <string name="pref_data_backup_title">Automatické exportovanie údajov</string>
+  <string name="pref_data_backup_summary">Automatický export údajov (vyžaduje predvolený formát)</string>
+  <string name="pref_shared_xsections_title">X-sekcia bola zdieľaná</string>
+  <string name="pref_shared_xsections_summary">X-rez do spoločného bodu medzi výkresmi</string>
+  <string name="xsections_shared">X-sekcia bola zdieľaná</string>
+  <string name="xsections_private">X-sekcia súkromná</string>
 
 
-  <string name="pref_survey_stations_title">Capisaldi rilievo</string>
+  <string name="Prieskumné stanice">Capisaldi rilievo</string>
   <string name="pref_survey_stations_summary">Capisaldi rilievo automatici</string>
   <string name="pref_accel_thr_title">Tolleranza accelerazione</string>
   <string name="pref_accel_thr_summary">Tolleranza valori di accelerazione</string>
