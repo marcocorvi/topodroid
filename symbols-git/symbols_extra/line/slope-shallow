@@ -3,6 +3,7 @@ name slope_shallow
 name-es pendiente_suave
 name-pt rampa_suave
 name-ru склон_пологий
+name-fr pente_douce
 th_name slope:shallow
 group slope
 color 0xffffcc 0xff

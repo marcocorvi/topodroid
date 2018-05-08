@@ -3,6 +3,7 @@ name stream
 name-pt corrente
 name-es corriente
 name-ru ручей
+name-fr courant_(d'eau)
 th_name u:stream
 style straight x0
 color 0x3399ff 0xff

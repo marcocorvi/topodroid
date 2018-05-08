@@ -4,6 +4,7 @@ name floor-step
 name-es resalte
 name-pt degrau_chão
 name-ru уступ_пола
+name-fr ressaut
 th_name floor-step
 color 0x33cc66 0xff
 width 8

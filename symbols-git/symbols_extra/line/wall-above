@@ -4,6 +4,7 @@ name-es pared_galeria_superior
 name-pt parede_acima
 name-ru вышерасположенная_стена
 name-bg по-високо_разположена_стена
+name-fr voûte
 th_name wall:overlying
 group wall
 color 0xff0000 0x99

@@ -4,6 +4,7 @@ name wall_pebbles
 name-es pared_cantos_rodados
 name-pt parede_seixos
 name-ru стена_в_гальке
+name-fr paroi_de_galets
 th_name wall:pebbles
 group wall
 color 0xff0000 0xff

@@ -4,6 +4,7 @@ name wall_flowstone
 name-es pared_de_colada
 name-pt parede_escorrimento
 name-ru стена_в_натеках
+name-fr paroi_stalagmitique
 th_name wall:flowstone
 group wall
 color 0xff0000 0xff

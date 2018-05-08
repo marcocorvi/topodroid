@@ -4,6 +4,7 @@ name-de Eisenbahn
 name-pt trilho
 name-es rail_vagoneta
 name-ru узкоколейная_дорога
+name-fr rails
 th_name u:railway
 group railway
 color 0xcccccc 

@@ -2,6 +2,7 @@
 name vegetable-debris
 name-pt restos-vegetais
 name-ru остатки_растительности
+name-fr débris_végétaux
 th_name vegetable-debris
 orientation no
 color 0xffcc99
