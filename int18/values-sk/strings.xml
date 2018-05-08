@@ -176,8 +176,8 @@
     <string name="loop_none">Žiadna slučka</string>
     <!-- UNUSED string name="long_lat">Dol-Širina</string -->
 
-    <string name="line_delete">Odstráňte riadok</string>
-    <string name="flip_shots">Zatvorte meranie</string>
+    <!-- ALREADY DEFINED string name="line_delete">Odstráňte riadok</string -->
+    <!-- ALREADY DEFINED string name="flip_shots">Zatvorte meranie</string -->
     <!-- TODO string name="split_nothing">Nothing to split</string -->
     <!-- TODO string name="copy_items">Copy items</string -->
 
@@ -820,7 +820,7 @@
     <string name="title_mode">Režim zobrazenia</string>
     <string name="title_move">Sťahovať</string>
     <string name="title_note">Poznámky</string>
-    <string name="title_photo"Foto / Meranie</string>
+    <string name="title_photo">Meranie</string>
     <string name="title_photo_comment">Komentár fotky</string>
     <string name="title_plot_save">Uložiť výkres ako </string>
     <string name="title_plot_merge">Zlúčiť náčrt</string>
@@ -873,7 +873,7 @@
   <string name="pref_mkeyboard_summary">Povoliť / zakázať vlastné klávesnice</string>
   <!-- TODO string name="pref_no_cursor_title">No keyboard cursor</string -->
   <!-- TODO string name="pref_no_cursor_summary">Disable custom-keyboard cursor</string -->
-  <string name="pref_local_help_title"Prekladateľská príručka</string>
+  <string name="pref_local_help_title">Prekladateľská príručka</string>
   <string name="pref_local_help_summary">Povoľte preložené manuálne</string>
   <!-- OK string name="pref_cosurvey_title">Co-surveying</string -->
   <string name="pref_cosurvey_summary">Aktivovať / deaktivovať službu spoločného prieskumu</string>
@@ -1014,7 +1014,7 @@
   <string name="xsections_private">X-sekcia súkromná</string>
 
 
-  <string name="Capisaldi rilievo">Prieskumné stanice</string>
+  <string name="pref_survey_stations_title">Prieskumné stanice</string>
   <string name="pref_survey_stations_summary">Automatické reliéfne základy</string>
   <string name="pref_accel_thr_title">Tolerancia zrýchlenia</string>
   <string name="pref_accel_thr_summary">Tolerancia hodnôt zrýchlenia</string>
