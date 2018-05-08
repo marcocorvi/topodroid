@@ -1911,7 +1911,12 @@ public class DrawingWindow extends ItemDrawer
 
     // TDLog.TimeEnd( "before load" );
 
-    if ( do_load ) loadFiles( mType, list ); 
+    if ( do_load ) {
+      if ( ! loadFiles( mType, list ) ) {
+        TDToast.make( mActivity, R.string.plot_not_found );
+	finish();
+      }
+    }
 
     setPlotType( mType );
     // TDLog.TimeEnd( "after load" );
@@ -2073,7 +2078,7 @@ public class DrawingWindow extends ItemDrawer
     // mDrawingSurface.setScaleBar( mCenter.x, mCenter.y ); // (90,160) center of the drawing
   }
 
-    private void loadFiles( long type, List<DBlock> list )
+    private boolean loadFiles( long type, List<DBlock> list )
     {
       // Log.v("DistoX", "load files()" );
       
@@ -2087,8 +2092,10 @@ public class DrawingWindow extends ItemDrawer
       if ( PlotInfo.isSketch2D( type ) ) {
         // Log.v( "DistoX", "load files type " + type + " " + mName1 + " " + mName2 );
         mPlot1 = mApp_mData.getPlotInfo( mSid, mName1 );
-        mPid1  = mPlot1.id;
         mPlot2 = mApp_mData.getPlotInfo( mSid, mName2 );
+	if ( mPlot1 == null ) return false;
+	if ( mPlot2 == null ) return false;
+        mPid1  = mPlot1.id;
         mPid2  = mPlot2.id;
         // Log.v("DistoX", "Plot2 type " + mPlot2.type + " azimuth " + mPlot2.azimuth );
         mPid = mPid1;
@@ -2099,6 +2106,7 @@ public class DrawingWindow extends ItemDrawer
       } else {
         // Log.v( "DistoX", "load files type " + type + " " + mName3 );
         mPlot3 = mApp_mData.getPlotInfo( mSid, mName3 );
+	if ( mPlot3 == null ) return false;
         mPid3  = mPlot3.id;
         filename3  = TDPath.getTh2FileWithExt( mFullName3 );
         filename3b = TDPath.getTdrFileWithExt( mFullName3 );
@@ -2159,6 +2167,7 @@ public class DrawingWindow extends ItemDrawer
       //   // (new MissingDialog( mActivity, this, msg )).show();
       //   // finish();
       // }
+      return true;
    }
 
    private void setPlotType( long type )

@@ -331,13 +331,14 @@ class ShotNewDialog extends MyDialog
 
     if ( b == mBtnOk || b == mBtnSave ) {
       String shot_from =  null;
-      String shot_to = null;
+      String shot_to = "";
    
       if ( notDone && mETfrom.getText() != null ) {
-        shot_from = mETfrom.getText().toString();
+        shot_from = TopoDroidUtil.noSpaces( mETfrom.getText().toString() );
       }
       if ( notDone && mETto.getText() != null ) {
-        shot_to = mETto.getText().toString();
+        shot_to = TopoDroidUtil.noSpaces( mETto.getText().toString() );
+        if ( shot_to.equals(".") || shot_to.equals("-") ) shot_to = "";
       }
 
       // if ( ( shot_from == null || shot_from.length() == 0 ) &&
@@ -346,10 +347,7 @@ class ShotNewDialog extends MyDialog
       //   shot_to = mETto.getHint().toString();
       // }
 
-      shot_to = TopoDroidUtil.noSpaces( shot_to );
-      if ( shot_to.equals(".") || shot_to.equals("-") ) shot_to = "";
-      shot_from = TopoDroidUtil.noSpaces( shot_from );
-      if ( shot_from.length() == 0 ) {
+      if ( shot_from == null || shot_from.length() == 0 ) {
         mETfrom.setError( mContext.getResources().getString( R.string.error_from_required ) );
         return;
       }
