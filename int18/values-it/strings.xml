@@ -2,8 +2,8 @@
 <resources>
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string --> 
     <string name="no_manual">Scarico manuale utente dal web non riuscito</string>
-    <!-- TODO string name="user_man_ok">Installed user manual translation</string -->
-    <!-- TODO string name="user_man_fail">Failed to install user manual translation</string -->
+    <string name="user_man_ok">Istallata la traduzione del maunale utente</string>
+    <string name="user_man_fail">Errore nella istallazione del manuale utente</string>
 
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Per uscire premi INDIETRO di nuovo</string>
@@ -123,12 +123,12 @@
     <!-- UNUSED string name="external_prompt">Scrivi i dati</string -->
     <string name="splay_at_to">LRUD al caposaldo di arrivo</string>
     <!-- OKFT string name="lrud">LRUD</string -->
-    <!-- TODO string name="strike_dip">Strike %1$.0f Dip %2$.0f</string -->
+    <string name="strike_dip">Tiri %1$.0f Incl. %2$.0f</string>
 
     <string name="few_data">Dati insufficienti</string>
     <string name="few_iter">Iterazione fallita</string>
     <string name="few_groups">Dati con gruppi non sufficienti</string>
-    <!-- TODO string name="found_groups">Found %1$d groups</string -->
+    <string name="found_groups">Trovati %1$d gruppi</string>
     <!-- UNUSED string name="few_plots">Troppo pochi disegni</string -->
     <string name="few_calibs">Calibrazioni non sufficienti</string>
     <string name="getting_info">Scarico info dal DistoX...</string>
@@ -176,10 +176,10 @@
     <string name="loop_none">Nessun anello</string>
     <!-- UNUSED string name="long_lat">Long-Lat</string -->
 
-    <!-- TODO string name="error_m">Error [m]</string -->
-    <!-- TODO string name="fmt_error_m">Error %1$.1f m</string -->
-    <!-- TODO string name="fmt_h_geoid">Error %1$.0f m</string -->
-    <!-- TODO string name="fmt_h_ellipsoid">Error %1$.0f m</string -->
+    <string name="error_m">Errore [m]</string>
+    <string name="fmt_error_m">Errore %1$.1f m</string>
+    <string name="fmt_h_geoid">Errore %1$.0f m</string>
+    <string name="fmt_h_ellipsoid">Errore %1$.0f m</string>
 
     <string name="error_azimuth_required">Azimuth mancante</string>
     <string name="error_length_required">Lunghezza mancante</string>
@@ -261,7 +261,7 @@
     <string name="no_sketch">No disegno 3D</string>
     <!-- UNUSED string name="no_shots">Rilievo senza dati</string -->
     <string name="no_survey">Rilievo non selezionato</string>
-    <!-- TODO string name="no_to_station">No TO station.</string -->
+    <string name="no_to_station">No caposaldo A.</string>
     <string name="no_thmanager">ThManager non installato</string>
     <string name="no_db_viewer">DB_viewer non installato</string>
     <string name="no_undelete">Nessun oggetto da riprendere</string>
@@ -276,8 +276,8 @@
     <!-- UNUSED string name="menu_ready">Ready</string -->
     <string name="menu_calib_check">VERIFICA CALIBR.</string>
     <string name="menu_close">CHIUDI</string>
-    <!-- TODO string name="menu_clear">CLEAR</string -->
-    <!-- TODO string name="menu_color">CLEAR COLOR</string -->
+    <string name="menu_clear">PULISCI</string>
+    <string name="menu_color">PULISCI COLORE</string>
     <string name="menu_delete">ELIMINA</string>
     <string name="menu_detach">SCONNETTI</string>
     <!-- OK string name="menu_display">DISPLAY</string -->
@@ -436,9 +436,9 @@
     <string name="survey_not_attached">ATTENZIONE: dati scollegati</string>
     <string name="survey_not_extend">WARNING: extend disabilitati</string>
     <string name="survey_not_attached_extend">WARNING: tiri non collegati ed extend disabilitati</string>
-    <!-- TODO string name="saturated_coeffs">WARNING: saturated calibration coefficients</string -->
-    <!-- TODO string name="out_of_memory">WARNING: out of memory !</string -->
-    <!-- TODO string name="disk_io_error">CRITICAL: disk i/o error !</string -->
+    <string name="saturated_coeffs">WARNING: Coefficenti di calibrazione saturati</string>
+    <string name="out_of_memory">WARNING: Memoria terminata !</string>
+    <string name="disk_io_error">CRITICAL: Errore disco !</string>
     <string name="cannot_rename">Rinomina rilievo non riuscita</string>
     <string name="declination">decl. magn.</string>
     <string name="description">descrizione</string>
@@ -520,7 +520,7 @@
     <string name="button_change"    >Cambia    </string>
     <string name="button_close"     >Chiudi    </string>
     <string name="button_create"    >Crea      </string>
-    <!-- TODO string name="button_color"     >Color</string -->
+    <string name="button_color"     >Colore</string>
     <string name="button_convert"   >Converti  </string>
     <string name="button_current"   >Corrente   </string>
     <string name="button_delete"    >Elimina   </string>
@@ -677,12 +677,12 @@
     <!-- UNUSED string name="help_manual">Manuale online</string -->
     <string name="help_measure">Misurare le distanze</string>
     <string name="help_measure_type">Metodo misura: punti fissi o polilinea</string>
-    <!-- TODO string name="help_measure_undo">Drop the last polyline point</string -->
+    <string name="help_measure_undo">Cancella l'ultimo punto della polilinea</string>
     
     <string name="help_calib_check">Tiri di controllo calib.</string>
     <string name="help_close">Chiusura finestra</string>
     <string name="help_coeff">Coefficienti della calibrazione</string>
-    <!-- TODO string name="help_color">Clear splay colors</string -->
+    <string name="help_color">Pulisci i colori degli splay</string>
     <string name="help_continue">Continuare il disegno di una linea</string>
     <!-- NO string name="help_contour">Contour editing</string -->
     <string name="help_current_station">Capisaldi salvati</string>
@@ -795,7 +795,7 @@
     <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Distribuzione dati calibrazione</string>
     <string name="title_coeff">Calibrazione</string>
-    <!-- TODO string name="title_color_picker">Pick a color</string -->
+    <string name="title_color_picker">Prendi un colore</string>
     <!-- NO string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Inserisci le coordinate del punto:</string -->
     <string name="title_current_station">Capisaldi salvati</string>
@@ -871,8 +871,8 @@
   <!-- UNUSED string name="pref_bootloader_summary">Bootloader abilitiato</string -->
   <string name="pref_mkeyboard_title">Tastiera</string>
   <string name="pref_mkeyboard_summary">Abilita/Disabilita tastiere personalizzate</string>
-  <!-- TODO string name="pref_no_cursor_title">No keyboard cursor</string -->
-  <!-- TODO string name="pref_no_cursor_summary">Disable custom-keyboard cursor</string -->
+  <string name="pref_no_cursor_title">No cursore di tastiera</string>
+  <string name="pref_no_cursor_summary">Disabilita cursore di tastiera personalizzata</string>
   <string name="pref_local_help_title">Manuale tradotto</string>
   <string name="pref_local_help_summary">Abilita manuale tradotto</string>
   <!-- OK string name="pref_cosurvey_title">Co-surveying</string -->
@@ -889,8 +889,8 @@
   <string name="pref_size_buttons_summary">Dimensione bottoni barra superiore</string>
   <!-- UNUSED string name="pref_size_buttons_message">Scrivi la dimensione dei bottoni della barra superiore [pixels]</string -->
 
-  <!-- TODO string name="pref_bezier_step_title">Point spacing</string -->
-  <!-- TODO string name="pref_bezier_step_summary">Distance between points on an export line [m]</string -->
+  <string name="pref_bezier_step_title">Spaziatura punti</string>
+  <string name="pref_bezier_step_summary">Distanza tra punti in una linea di export [m]</string>
   <string name="pref_leg_shots_title">Misure per battuta</string>
   <string name="pref_leg_shots_summary">Minimo numero di misure per tiro di poligonale</string>
   <string name="pref_station_prefix_title">Esporta il prefisso dei caposaldi</string>
@@ -1037,8 +1037,8 @@
   <string name="pref_min_leg_message">Battute meno lunghe del minimo hanno uno sfondo arancio</string>
   <string name="pref_backsight_title">Backsight</string>
   <string name="pref_backsight_summary">Campi backsight nel dialogo Nuova Battuta</string>
-  <!-- TODO string name="pref_backshot_title">Backshot DistoX</string -->
-  <!-- TODO string name="pref_backshot_summary">DistoX in backshot mode</string -->
+  <string name="pref_backshot_title">Modo Backshot</string>
+  <string name="pref_backshot_summary">DistoX in modo backshot</string>
   <string name="pref_prev_next_title">Pulsanti Prec/Succ</string>
   <string name="pref_prev_next_summary">Pulsanti Prec/Succ nel riquadro di tiro</string>
   <string name="pref_mag_anomaly_title">Anomalia magnetica</string>
