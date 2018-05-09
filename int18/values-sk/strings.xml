@@ -24,7 +24,7 @@
 
     <string name="memoryA3">DistoX A3</string>
     <string name="memoryX310">DistoX X310</string>
-    <!-- UNUSED string name="memory_data">Podatki DistoX</string -->
+    <!-- UNUSED string name="memory_data">DistoX dáta</string -->
 
     <!-- TODO string name="thp_user">user</string -->
     <string name="thp_label">Označenie</string>
@@ -1152,18 +1152,18 @@
   <string name="pref_backup_interval_summary">Minimálny interval medzi 2 zálohami [s]</string>
   <!-- UNUSED string name="pref_xtherion_areas_title">Aree xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Salva le aree in modo xtherion</string -->
-  <string name="pref_therion_splays_title">Splay Therion</string>
-  <string name="pref_therion_splays_summary">Aggiungere linee u:splay ai file th2</string>
-  <string name="pref_autoStations_title">Punti th2 station</string>
-  <string name="pref_autoStations_summary">Aggiungi capisaldi automaticamente</string>
-  <string name="pref_loopClosure_title">Chiusura anelli</string>
-  <string name="pref_loopClosure_summary">Compensazione errore nella chiusura anelli</string>
+  <string name="pref_therion_splays_title">Prehliadať cez Therion</string>
+  <string name="pref_therion_splays_summary">Pridať riadky na: zobrazenie súborov th2</string>
+  <string name="pref_autoStations_title">Body stanice Th2</string>
+  <string name="pref_autoStations_summary">Pridanie staníc automaticky</string>
+  <string name="pref_loopClosure_title">Opakovanie</string>
+  <string name="pref_loopClosure_summary">Kompenzácia chyby slučky</string>
   <!-- UNUSED string name="pref_splayExtend_title">Stima extend per splay</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Stima del extend degli splay</string -->
-  <string name="pref_swapLR_title">Scambia LR in Compass</string>
-  <string name="pref_swapLR_summary">Scambia LR nella export Compass</string>
-  <string name="pref_LRExtend_title">Stima extend Sx/Dx</string>
-  <string name="pref_LRExtend_summary">Stima extend Sx/Dx (Bussola/import VisualTopo)</string>
+  <string name="pref_swapLR_title">Prepnite LR na kompas</string>
+  <string name="pref_swapLR_summary">Späť D / G v exporte do Compasu</string>
+  <string name="pref_LRExtend_title">Odhad predĺženia Sx/Dx</string>
+  <string name="pref_LRExtend_summary">Odhad predĺženia Sx/Dx (Bussola/import VisualTopo)</string>
 
   <string name="pref_picker_type_title">Dialogo scelta prototipo</string>
   <string name="pref_picker_type_summary">Tipo dialogo scelta prototipo grafico</string>
