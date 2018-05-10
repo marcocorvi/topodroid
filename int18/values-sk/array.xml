@@ -102,27 +102,27 @@
   </string-array>
 
   <string-array name="surveyStations">
-     <item name="no">No</item>
-     <item name="for">Splay, battuta diretta</item>
-     <item name="back">Splay, battuta inversa</item>
-     <item name="for2">Battuta diretta, splay</item>
-     <item name="back2">Battuta inversa, splay</item>
-     <item name="anomaly">Doppia battuta</item>
-     <item name="tripod">Tripod</item>
+     <item name="no">Nie</item>
+     <item name="for">Normálny cieľ, najprv bočné miesta</item>
+     <item name="back">Opačný pohľad, bočné náhľady najprvnversa</item>
+     <item name="for2">Normálny cieľ, cesta ako prvá</item>
+     <item name="back2">Spiatočný cieľ, cesta najprv</item>
+     <item name="anomaly">Pohľad zozadu, spätné videnie</item>
+     <item name="tripod">Statív</item>
      <item name="toporobot">TopoRobot</item>
   </string-array>
 
   <string-array name="pickerType">
-     <item name="recent">Piu\' recente</item>
-     <item name="list">Lista</item>
-     <item name="grid">Griglia</item>
-     <item name="grid3">Tre griglie</item>
+     <item name="recent">Viac nedávno</item>
+     <item name="list">Zoznam</item>
+     <item name="grid">Mriežka</item>
+     <item name="grid3">Tri mriežky</item>
   </string-array>
 
   <string-array name="sectionStations">
-     <item name="Entrambe">both</item>
-     <item name="from">Dietro</item>
-     <item name="to">Di fronte</item>
+     <item name="Entrambe">oba</item>
+     <item name="from">za</item>
+     <item name="to">Pred vami</item>
   </string-array>
 
   <!-- UNUSED string-array name="deviceType">
@@ -132,9 +132,9 @@
   </string-array -->
 
   <string-array name="deviceBT">
-     <item name="0">Disattivo</item>
-     <item name="1">Verifica a startup</item>
-     <item name="2">Attivo</item>
+     <item name="0">Odpojený</item>
+     <item name="1">Kontrola pri štarte</item>
+     <item name="2">Aktívny</item>
   </string-array>
 
   <!-- UNUSED string-array name="exportType">
@@ -145,43 +145,43 @@
   </string-array -->
 
   <string-array name="lineStyle">
-     <item name="none">Fine</item>
-     <item name="two">Normale</item>
-     <item name="two">Grezza</item>
+     <item name="none">Koniec</item>
+     <item name="two">Normálne</item>
+     <item name="two">Hrubý</item>
      <item name="bezier">Bezier</item>
   </string-array>
 
   <string-array name="groupBy">
-     <item name="distance">Distanza</item>
-     <item name="four">A gruppi di quattro</item>
-     <item name="only16">Solo i primi 16</item>
+     <item name="distance">Vzdialenosť</item>
+     <item name="four">V štyroch skupinách</item>
+     <item name="only16">Len prvých 16</item>
   </string-array>
 
   <string-array name="unitLength">
-     <item name="meters">metri</item>
-     <item name="feet">piedi</item>
+     <item name="meters">metre</item>
+     <item name="feet">chôdza</item>
   </string-array>
 
   <string-array name="unitAngle">
-     <item name="degrees">gradi sessagesimali</item>
-     <item name="grads">gradi centesimali</item>
+     <item name="degrees">Desatinné stupne</item>
+     <item name="grads">Desatinné stupne</item>
   </string-array>
 
   <string-array name="unitLocation">
-     <item name="degrees">gradi decimali</item>
-     <item name="ddmmss">gradi, minuti, secondi</item>
+     <item name="degrees">Desatinné stupne</item>
+     <item name="ddmmss">stupňov, minút, sekúnd</item>
   </string-array>
 
   <string-array name="calibAlgo">
      <item name="auto">auto</item>
-     <item name="linear">lineare</item>
-     <item name="nonlinear">non-lineare</item>
+     <item name="linear">lineárne</item>
+     <item name="nonlinear">nelineáre</item>
   </string-array>
 
   <string-array name="rawCData">
-     <item name="none">Nessuno</item>
-     <item name="dec">Decimali</item>
-     <item name="hex">Esadecimali</item>
+     <item name="none">Žiadny</item>
+     <item name="dec">Desatinný</item>
+     <item name="hex">Hexa</item>
   </string-array>
 
 </resources>
