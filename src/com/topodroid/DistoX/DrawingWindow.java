@@ -5674,10 +5674,10 @@ public class DrawingWindow extends ItemDrawer
   void setXSectionOutline( String name, boolean on_off, float x, float y )
   { 
     mDrawingSurface.clearXSectionOutline( name );
+    // Log.v("DistoXX", "XSECTION set " + name + " on/off " + on_off + " " + x + " " + y );
     if ( on_off ) {
       String tdr = TDPath.getTdrFileWithExt( name );
-      // Log.v("DistoXX", "XSECTION set " + name + " " + x + " " + y );
-      // Log.v("DistoXX", "XSECTION set " + name + " on_off " + on_off + " tdr " + tdr );
+      // Log.v("DistoXX", "XSECTION set " + name + " on_off " + on_off + " tdr-file " + tdr );
       mDrawingSurface.setXSectionOutline( name, tdr, x-DrawingUtil.CENTER_X, y-DrawingUtil.CENTER_Y );
     }
   }

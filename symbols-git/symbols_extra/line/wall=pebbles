@@ -8,6 +8,7 @@ name-fr paroi_de_galets
 th_name wall:pebbles
 group wall
 color 0xff0000 0xff
+csurvey 5 4 1 1
 width 1
 effect
   moveTo 0 0

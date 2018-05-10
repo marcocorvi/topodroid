@@ -38,7 +38,7 @@ import java.util.Locale;
 
 import android.graphics.RectF;
 
-// import android.util.Log;
+import android.util.Log;
 
 class DrawingIO
 {
@@ -792,7 +792,7 @@ class DrawingIO
     FileInputStream fis = null;
     DataInputStream dis = null;
 
-    // Log.v("DistoX", "drawing I/O load outline stream " + filename );
+    // Log.v("DistoXX", "drawing I/O load outline stream " + filename + " name " + ((name == null)? "null" : name) );
     synchronized( TDPath.mTherionLock ) {
       try {
         // CACHE check if filename is in the cache: if so use the cache byte array
@@ -810,7 +810,7 @@ class DrawingIO
         while ( todo ) {
           DrawingLinePath path = null;
           int what = dis.read();
-          // Log.v("DistoX", "Read " + what );
+          // Log.v("DistoXX", "Read " + what );
           path = null;
           switch ( what ) {
             case 'V':
@@ -874,7 +874,7 @@ class DrawingIO
           } 
           if (    in_scrap && path != null 
                && ( BrushManager.mLineLib.isWall( path.mLineType ) || path.hasOutline() ) ) {
-            // Log.v("DistoX0", "outline add path ... " + path.mFirst.mX + " " + path.mFirst.mY );
+            // Log.v("DistoXX", "outline add path ... " + path.mFirst.x + " " + path.mFirst.y + " path size " + path.size()  );
             path.setPaint( BrushManager.fixedGrid100Paint );
             if ( name != null ) { // xsection outline
               surface.addXSectionOutlinePath( new DrawingOutlinePath( name, path ) );

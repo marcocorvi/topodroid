@@ -8,6 +8,7 @@ name-fr paroi_de_puits
 th_name wall:pit
 group wall
 color 0xff0000 0xff
+csurvey 5 4 1 1
 effect
   moveTo 0 1
   lineTo 12 1
