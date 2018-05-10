@@ -2,33 +2,33 @@
 
 <resources>
 
-  <!-- TODO string-array name="unitGrid">
-     <item name="meter">meter</item>
-     <item name="yard">yard</item>
-     <item name="two_tf">2 feet</item>
-  </string-array -->
+  <string-array name="unitGrid">
+     <item name="meter">metre</item>
+     <item name="yard">yardy</item>
+     <item name="two_tf">2 chôdza</item>
+  </string-array>
 
-  <!-- TODO string-array name="loopClosure">
-     <item name="none">None</item>
-     <item name="normal">Normal</item>
-     <item name="triangles">Triangles</item>
-  </string-array -->
+  <string-array name="loopClosure">
+     <item name="none">Žiadny</item>
+     <item name="normal">Normálne</item>
+     <item name="triangles">Trojuholníky</item>
+  </string-array>
 
-  <!-- TODO string-array name="wallsType">
-     <item name="none">None</item>
-     <item name="convex">Convex</item>
+  <string-array name="wallsType">
+     <item name="none">nikto</item>
+     <item name="convex">konvexné</item>
      <item name="delaunay">TODO</item>
-  </string-array -->
+  </string-array>
 
-  <!-- TODO string-array name="zoomCtrl">
+  <string-array name="zoomCtrl">
      <item name="0">Off</item>
-     <item name="1">Temporary</item>
-     <item name="2">Permanent</item>
-  </string-array -->
+     <item name="1">dočasný</item>
+     <item name="2">stály</item>
+  </string-array>
 
   <string-array name="stationNames">
-     <item name="alpha">Alfabetično</item>
-     <item name="number">Numerično</item>
+     <item name="alpha">abecedný</item>
+     <item name="number">číselný</item>
   </string-array>
 
   <!-- UNUSED string-array name="extend_name">
@@ -38,8 +38,8 @@
      <item>- -</item>
   </string-array -->
 
-  <!-- TODO string-array name="exportShots">
-     <item name="none">none</item>
+  <string-array name="exportShots">
+     <item name="none">nikto</item>
      <item name="therion">Therion</item>
      <item name="compass">Compass</item>
      <item name="csurvey">cSurvey</item>
@@ -52,40 +52,44 @@
      <item name="walls">Walls</item>
      <item name="csv">CSV</item>
      <item name="dxf">DXF</item>
-  </string-array -->
+  </string-array>
 
-  <!-- TODO string-array name="exportPlot">
-     <item name="none">none</item>
+  <string-array name="exportPlot">
+     <item name="none">nessuno</item>
      <item name="therion">Therion</item>
      <item name="csurvey">cSurvey</item>
      <item name="dxf">DXF</item>
      <item name="svg">SVG</item>
      <item name="png">PNG</item>
-  </string-array -->
+  </string-array>
 
-  <!-- TODO string-array name="extraButtons">
-     <item name="basic">Osnovno</item>
-     <item name="normal">Normalno</item>
-     <item name="advanced">Napredno</item>
-     <item name="expert">Eksperimentalno</item>
+  <string-array name="extraButtons">
+     <item name="basic">Base</item>
+     <item name="normal">Normale</item>
+     <item name="advanced">Avanzato</item>
+     <item name="expert">Esperto</item>
      <item name="tester">Tester</item>
-  </string-array -->
+     <!-- item name="complete">Completo</item -->
+  </string-array>
 
-  <!-- TODO string-array name="sizeButtons">
-     <item name="small1">Malo</item>
-     <item name="large">Veliko</item>
-  </string-array -->
+  <string-array name="sizeButtons">
+     <item name="small">Piccoli</item>
+     <item name="normal">Normali</item>
+     <item name="medium">Medi</item>
+     <item name="large">Grandi</item>
+     <item name="huge">Enormi</item>
+  </string-array>
 
   <!-- OK string-array name="logStream">
      <item name="android">System log</item>
      <item name="file">File log</item>
   </string-array -->
 
-  <!-- TODO string-array name="connMode">
-     <item name="batch">Na zahtevo</item>
-     <item name="continuous">Kontinuirani</item>
-     <item name="multi">Multi</item>
-  </string-array -->
+  <string-array name="connMode">
+     <item name="batch">A richiesta</item>
+     <item name="continuous">Continuo</item>
+     <item name="multi">Con selezione</item>
+  </string-array>
 
   <!-- UNUSED string-array name="altitudeType">
     <item name="wgs84">WGS84i ellissoidea</item>
@@ -93,37 +97,44 @@
   </string-array -->
 
   <string-array name="sockType">
-     <item name="default">Privzeto</item>
-     <item name="Insecure">Nejasno</item>
+     <item name="default">Default</item>
+     <item name="Insecure">Insicura</item>
   </string-array>
 
   <string-array name="surveyStations">
-     <item name="no">Ne</item>
-     <item name="for">Razširjeno, viz naprej</item>
-     <item name="back">Razširjeno, viz nazaj</item>
-     <item name="for2">viz naprej, razširjeno</item>
-     <item name="back2">viz nazaj, razširjeno</item>
-     <item name="anomaly">Nazaj</item>
-     <item name="tripod">Triopod</item>
+     <item name="no">No</item>
+     <item name="for">Splay, battuta diretta</item>
+     <item name="back">Splay, battuta inversa</item>
+     <item name="for2">Battuta diretta, splay</item>
+     <item name="back2">Battuta inversa, splay</item>
+     <item name="anomaly">Doppia battuta</item>
+     <item name="tripod">Tripod</item>
      <item name="toporobot">TopoRobot</item>
   </string-array>
 
-  <!-- TODO string-array name="pickerType">
-     <item name="recent">Most recent</item>
+  <string-array name="pickerType">
+     <item name="recent">Piu\' recente</item>
      <item name="list">Lista</item>
      <item name="grid">Griglia</item>
-  </string-array -->
+     <item name="grid3">Tre griglie</item>
+  </string-array>
+
+  <string-array name="sectionStations">
+     <item name="Entrambe">both</item>
+     <item name="from">Dietro</item>
+     <item name="to">Di fronte</item>
+  </string-array>
 
   <!-- UNUSED string-array name="deviceType">
-     <item name="none">None</item>
+     <item name="none">Nessuno</item>
      <item name="A3">A3</item>
      <item name="X310">X310</item>
   </string-array -->
 
   <string-array name="deviceBT">
-     <item name="0">Onemogočeno</item>
-     <item name="1">Preveri ob zagonu</item>
-     <item name="2">Omogočeno</item>
+     <item name="0">Disattivo</item>
+     <item name="1">Verifica a startup</item>
+     <item name="2">Attivo</item>
   </string-array>
 
   <!-- UNUSED string-array name="exportType">
@@ -134,43 +145,43 @@
   </string-array -->
 
   <string-array name="lineStyle">
-     <item name="none">Podrobno</item>
-     <item name="two">Normalno</item>
-     <item name="two">Grobo</item>
-     <item name="bezier">Zakrivljeno</item>
+     <item name="none">Fine</item>
+     <item name="two">Normale</item>
+     <item name="two">Grezza</item>
+     <item name="bezier">Bezier</item>
   </string-array>
 
   <string-array name="groupBy">
-     <item name="distance">Oddaljenost</item>
-     <item name="four">Časovno</item>
-     <item name="only16">Samo prvih 16</item>
+     <item name="distance">Distanza</item>
+     <item name="four">A gruppi di quattro</item>
+     <item name="only16">Solo i primi 16</item>
   </string-array>
 
   <string-array name="unitLength">
      <item name="meters">metri</item>
-     <item name="feet">čevlji</item>
+     <item name="feet">piedi</item>
   </string-array>
 
   <string-array name="unitAngle">
-     <item name="degrees">stopnije</item>
-     <item name="grads">gradi</item>
+     <item name="degrees">gradi sessagesimali</item>
+     <item name="grads">gradi centesimali</item>
   </string-array>
 
   <string-array name="unitLocation">
-     <item name="degrees">stopinje</item>
-     <item name="ddmmss">stopnije, minute, sekunde</item>
+     <item name="degrees">gradi decimali</item>
+     <item name="ddmmss">gradi, minuti, secondi</item>
   </string-array>
 
   <string-array name="calibAlgo">
-     <item name="auto">automatsko</item>
-     <item name="linear">linearno</item>
-     <item name="nonlinear">nelinearno</item>
+     <item name="auto">auto</item>
+     <item name="linear">lineare</item>
+     <item name="nonlinear">non-lineare</item>
   </string-array>
 
-  <!-- TODO string-array name="rawCData">
-     <item name="none">None</item>
-     <item name="dec">Decimal</item>
-     <item name="hex">Hex</item>
-  </string-array -->
+  <string-array name="rawCData">
+     <item name="none">Nessuno</item>
+     <item name="dec">Decimali</item>
+     <item name="hex">Esadecimali</item>
+  </string-array>
 
 </resources>

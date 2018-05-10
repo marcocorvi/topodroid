@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <plurals name="calib_saturated_values">
-    <item quantity="one">ATTENZIONE. Un dato saturato.</item>
-    <item quantity="other">ATTENZIONE. %1$d dati saturati</item>
+    <item quantity="one">UPOZORNENIE. 1 nasýtené meranie</item>
+    <item quantity="other">UPOZORNENIE. %1$d nasýtené údaje</item>
   </plurals>
 
   <plurals name="read_data">
-    <item quantity="zero">Nessun dato letto</item>
-    <item quantity="one">Letto un dato</item>
-    <item quantity="other">Letti %1$d dati</item>
+    <item quantity="zero">Žiadne údaje neboli prečítané</item>
+    <item quantity="one">Čítanie údajov</item>
+    <item quantity="other">Oddelenné %1$d dáta</item>
   </plurals>
 
   <plurals name="read_calib_data">
-    <item quantity="zero">Nessun dato letto</item>
-    <item quantity="one">Letto un dato (%2$d pacchetti)</item>
-    <item quantity="other">Letti %1$d dati (%2$d pacchetti)</item>
+    <item quantity="zero">Žiadne údaje neboli prečítané</item>
+    <item quantity="one">Prečítajte si danné (%2$d balíčky)</item>
+    <item quantity="other">Prečítať %1$d dáta (%2$d pacchetti)</item>
   </plurals>
 </resources>
