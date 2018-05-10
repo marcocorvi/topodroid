@@ -62,12 +62,17 @@ file, and add the missing strings, possibly commented if there is no need for tr
 The "...Value" strings in the "array.xml" files must not be translated, so they must be present
 only in the default file.
 
+Please take care to write the xml tags properly, especially the closing tag </string>.
+One of the most annoying mistake to fix is a tag missing the initial "<" because the 
+compiler does not signal the line where it occurs.
 
 -------------------------------------------------------------------------
 IMPORTANT: ENCODING
 The string files are encoded.
 Write the proper encoding in the first line, and use an editor that saves the file with that encoding.
 My suggestion is to use UTF-8 to make life easier for you and me.
+
+Note that the apostrophe (asii 0x27)must be escaped, ie "\'".
 
 -------------------------------------------------------------------------
 HOW TO MANAGE YOUR TRANSLATION WITH THE SOURCE TREE
@@ -112,15 +117,13 @@ the Settings app).
 ------------------------------------------------------------------------
 USER MANUAL
 
-With v. 3.4.3o TopoDroid has experimental support for translated user manuals.
-
 The default user manual consists of HTML pages in the directory assets/man, and is bundled
-in the apk (app package). Translated user manuals are not included in the apk but must 
-be installed separately by the user. The files must have the same names as the default
-files, and must be put in the subdirectory TopoDroid/man (which must be created).
+in the apk (app package). Translated user manuals are not included in the apk but can be
+downloaded and installed from the app. The files must have the same names as the default
+files, and must be put in a zip archive containing the subdirectory man and all the man pages. 
+TopoDroid downloads the zip and unpack the files in the subdirectory TopoDroid/man.
 
-The suggested deployment is a zip containing the subdirectory man and all the man pages.
-The user can then uncompress it under TopoDroid.
+The download of a translated manual is started selecting the translation in the relevant setting.
 
 When the user opens the manual, TopoDroid searches for the translated page first. 
 If this is not found it falls back to the deafult man page.
