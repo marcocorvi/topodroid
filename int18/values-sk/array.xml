@@ -64,20 +64,20 @@
   </string-array>
 
   <string-array name="extraButtons">
-     <item name="basic">Base</item>
-     <item name="normal">Normale</item>
-     <item name="advanced">Avanzato</item>
-     <item name="expert">Esperto</item>
-     <item name="tester">Tester</item>
+     <item name="basic">základné</item>
+     <item name="normal">Noemálne</item>
+     <item name="advanced">Pokročilé</item>
+     <item name="expert">Expertné</item>
+     <item name="tester">Testovacie</item>
      <!-- item name="complete">Completo</item -->
   </string-array>
 
   <string-array name="sizeButtons">
-     <item name="small">Piccoli</item>
-     <item name="normal">Normali</item>
-     <item name="medium">Medi</item>
-     <item name="large">Grandi</item>
-     <item name="huge">Enormi</item>
+     <item name="small">Malé</item>
+     <item name="normal">Normálne</item>
+     <item name="medium">Stredné</item>
+     <item name="large">Vačšie</item>
+     <item name="huge">Obrovské</item>
   </string-array>
 
   <!-- OK string-array name="logStream">
@@ -86,9 +86,9 @@
   </string-array -->
 
   <string-array name="connMode">
-     <item name="batch">A richiesta</item>
-     <item name="continuous">Continuo</item>
-     <item name="multi">Con selezione</item>
+     <item name="batch">Na požiadanie</item>
+     <item name="continuous">Nepretržité</item>
+     <item name="multi">S výberom</item>
   </string-array>
 
   <!-- UNUSED string-array name="altitudeType">
@@ -97,8 +97,8 @@
   </string-array -->
 
   <string-array name="sockType">
-     <item name="default">Default</item>
-     <item name="Insecure">Insicura</item>
+     <item name="default">Predvolené</item>
+     <item name="Insecure">Neisté</item>
   </string-array>
 
   <string-array name="surveyStations">
