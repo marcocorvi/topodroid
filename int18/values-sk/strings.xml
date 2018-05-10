@@ -11,9 +11,9 @@
     <string name="version_ask">Aktualizácia topodoidu na novšiu verziu. \ Chcete preinštalovať nástroj na kreslenie?</string>
     <!-- TODO string name="symbols_ask">Install drawing tools v.%1$s?\n(Current v.%2$s)</string -->
 
-    <string name="POINT">bod</string>
-    <string name="LINE">čiara</string>
-    <string name="AREA">oblasť</string>
+    <string name="POINT">Bod</string>
+    <string name="LINE">Čiara</string>
+    <string name="AREA">Oblasť</string>
     <string name="HELP">Pomoc</string>
     <string name="STATION">Merací bod</string>
 
