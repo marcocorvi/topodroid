@@ -382,7 +382,7 @@
     <!-- UNUSED string name="convert_tdr2th2">Sobrescrever arquivos de croqui th2?</string -->
     <string name="section_area">Área do corte: %1$.1f</string>
     <string name="section_name">comentário sobre corte</string>
-    <string name="scrap_outline">Contorno do croqui</string>
+    <string name="scrap_outline">Contorno de outro croqui</string>
 
     <!-- UNUSED string name="sensor">sensor</string -->
     <string name="sensor_gravity">gravidade</string>
@@ -829,7 +829,7 @@
     <string name="title_projection">Azimute do corte projetado %1$d</string>
     <string name="title_refs">Mostrar</string>
     <string name="title_scraps">Croquis da topo</string>
-    <string name="title_scraps_outline">Contorno de outro croqui</string>
+    <string name="title_scraps_outline">Contorno do croqui</string>
     <string name="title_select">Selecionar</string>
     <string name="title_shift">Deslocar</string>
     <string name="title_shot_delete">Apagar medida?</string>
