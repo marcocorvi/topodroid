@@ -575,7 +575,7 @@
     <string name="mode_scale_ref">Referenčná stupnica</string>
 
     <!-- UNUSED string name="remote_title">DistoX Remote Control</string -->
-    <string name="remote_on">Laser yapnutý</string>
+    <string name="remote_on">Laser zapnutý</string>
     <string name="remote_off">Laser vypnutý</string>
     <!-- UNUSED string name="remote_measure">Misura</string -->
     <!-- OK string name="remote_reset">Reset BT</string -->
@@ -1291,8 +1291,8 @@
 \nManual: Tlačidlo MENU
 \nDokumentácia: http://sites.google.com/site/speleoapps
 \nKomentáre, hlásenia chýb, požiadavky: marco.corvi@gmail.com
-\nOriginálny preklad: v.0.1b 10.5.2018 M.Jurečka: jurecka@gmail.com
-\nAktualizovaný dňa: revizia 13.5.2018 B.Turčina, M.Chlebovec (zdroj)
+\nOriginálny preklad: v0.1b - 10.5.2018 M.Jurečka: jurecka@gmail.com https://www.speleork.sk
+\nAktualizovaný dňa: revizia v0.2 - 13.5.2018 B.Turčina, M.Chlebovec (zdroj prekladu: Taliančina, Nemčina, Angličtina)
     </string>
 
   <!-- OK string name="firmware_title">Firmware Updater</string -->
