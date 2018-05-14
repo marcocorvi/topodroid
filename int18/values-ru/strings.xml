@@ -2,8 +2,8 @@
 <resources>
     <!-- OK string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     <string name="no_manual">Не возможно скачать страницы помощи из интернета.</string>
-    <!-- TODO string name="user_man_ok">Installed user manual translation</string -->
-    <!-- TODO string name="user_man_fail">Failed to install user manual translation</string -->
+    <string name="user_man_ok">Установленный перевод руководства</string>
+    <string name="user_man_fail">Не удалось установить перевод руководства</string>
 
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Нажмите "НАЗАД" еще раз для выхода</string>
@@ -178,10 +178,10 @@
 
     <!-- OK string name="line_delete">Удалить линию</string -->
 
-    <!-- TODO string name="error_m">Error [m]</string -->
-    <!-- TODO string name="fmt_error_m">Error %1$.1f m</string -->
-    <!-- TODO string name="fmt_h_geoid">Error %1$.0f m</string -->
-    <!-- TODO string name="fmt_h_ellipsoid">Error %1$.0f m</string -->
+    <string name="error_m">Ошибка [м]</string>
+    <string name="fmt_error_m">Ошибка %1$.1f м</string>
+    <string name="fmt_h_geoid">Ошибка %1$.0f м</string>
+    <string name="fmt_h_ellipsoid">Ошибка %1$.0f м</string>
 
     <string name="error_azimuth_required">Требуется азимут</string>
     <string name="error_length_required">Требуется длина</string>
@@ -682,7 +682,7 @@
     <!-- UNUSED string name="help_manual">Инструкция</string -->
     <string name="help_measure">Измерить расстояния</string>
     <string name="help_measure_type">Режим измерений: по прямой или ломаной</string>
-    <!-- TODO string name="help_measure_undo">Drop the last polyline point</string -->
+    <string name="help_measure_undo">Удалить последнюю точку полилинии</string>
     
     <string name="help_calib_check">Контрольные замеры</string>
     <string name="help_close">Закрыть Окно</string>
