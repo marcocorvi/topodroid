@@ -713,16 +713,17 @@ public class ShotWindow extends Activity
     (new ShotNewDialog( this, mApp, this, blk, mShotId )).show();
   }
 
-  void insertDuplicateLeg( String from, String to, float distance, float bearing, float clino, int extend )
+  // return id of inserted leg
+  long insertDuplicateLeg( String from, String to, float distance, float bearing, float clino, int extend )
   {
-    mApp.insertDuplicateLeg( from, to, distance, bearing, clino, extend );
+    return mApp.insertDuplicateLeg( from, to, distance, bearing, clino, extend );
     // updateDisplay( ); 
   }
 
-  void insertLRUDatStation( String station, float bearing, float clino,
+  void insertLRUDatStation( long at, String station, float bearing, float clino,
                             String left, String right, String up, String down )
   {
-    mApp.insertLRUDatStation( station, bearing, clino, left, right, up, down );
+    mApp.insertLRUDatStation( at, station, bearing, clino, left, right, up, down );
     updateDisplay( ); 
   }
 

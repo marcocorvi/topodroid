@@ -70,6 +70,7 @@ class DataHelper extends DataSetObservable
   private final static String WHERE_SID_ID_MORE = "surveyId=? AND id>=?";
   private final static String WHERE_SID_NAME    = "surveyId=? AND name=?";
   private final static String WHERE_SID_STATUS  = "surveyId=? AND status=?";
+  private final static String WHERE_SID_STATUS_LEG  = "surveyId=? AND status=? AND fStation > \"\" AND tStation > \"\"";
   private final static String WHERE_SID_SHOTID  = "surveyId=? AND shotId=?";
   private final static String WHERE_SID_START   = "surveyId=? AND start=?";
 
@@ -2481,6 +2482,7 @@ class DataHelper extends DataSetObservable
      return list;
    }
 
+   // select all LEG stations before a shot
    Set<String> selectAllStationsBefore( long id, long sid, long status )
    {
      Set< String > set = new TreeSet<String>();
@@ -2492,9 +2494,11 @@ class DataHelper extends DataSetObservable
      if (cursor.moveToFirst()) {
        do {
          String f = cursor.getString( 0 );
-         if ( f.length() > 0 ) set.add( f );
          String t = cursor.getString( 1 );
-         if ( t.length() > 0 ) set.add( t );
+         if ( f.length() > 0 && t.length() > 0 ) {
+           set.add( f );
+           set.add( t );
+	 }
        } while (cursor.moveToNext());
      }
      // TDLog.Log( TDLog.LOG_DB, "select All Shots after " + id + " list size " + list.size() );
@@ -2522,6 +2526,7 @@ class DataHelper extends DataSetObservable
      return list;
    }
 
+   // select all LEG stations
    Set<String> selectAllStations( long sid )
    {
      Set<String> set = new TreeSet<String>();
@@ -2532,9 +2537,11 @@ class DataHelper extends DataSetObservable
      if (cursor.moveToFirst()) {
        do {
          String f = cursor.getString( 0 );
-         if ( f.length() > 0 ) set.add( f );
          String t = cursor.getString( 1 );
-         if ( t.length() > 0 ) set.add( t );
+         if ( f.length() > 0 && t.length() > 0 ) {
+           set.add( f );
+           set.add( t );
+	 }
        } while (cursor.moveToNext());
      }
      return set;
@@ -2557,6 +2564,22 @@ class DataHelper extends DataSetObservable
      // TDLog.Log( TDLog.LOG_DB, "select All Shots list size " + list.size() );
      if (cursor != null && !cursor.isClosed()) cursor.close();
      return list;
+   }
+
+   DBlock selectLastLegShot( long sid, long status )
+   {
+     if ( myDB == null ) return null;
+     DBlock block = null;
+     Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
+                     WHERE_SID_STATUS_LEG, new String[]{ Long.toString(sid), Long.toString(status) },
+                     null, null, "id desc", "1" );
+     if (cursor.moveToFirst()) {
+       // Log.v("DistoX", "got the last leg " + cursor.getLong(0) + " " + cursor.getString(1) + " - " + cursor.getString(2) );
+       block = new DBlock();
+       fillBlock( sid, block, cursor );
+     }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
+     return block;
    }
 
    List<DBlock> selectAllLegShots( long sid, long status )

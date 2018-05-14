@@ -4094,7 +4094,7 @@ public class DrawingWindow extends ItemDrawer
 
     // flip the profile sketch left/right
     // @param flip_shots whether to flip also the shots extend
-    // @note barrier shots are not flipped; hiding shots are flipped
+    // @note barrier and hiding shots are not flipped
     public void flipProfile( boolean flip_shots )
     {
       mDrawingSurface.flipProfile( mZoom );

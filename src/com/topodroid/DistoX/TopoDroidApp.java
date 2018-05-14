@@ -1200,11 +1200,13 @@ public class TopoDroidApp extends Application
   // =======================================================
   StationName mStationName;
 
+  // void resetCurrentStationName( String name ) { mStationName.resetCurrentStationName( name ); }
   boolean setCurrentStationName( String name ) { return mStationName.setCurrentStationName( name ); }
   String getCurrentStationName() { return mStationName.getCurrentStationName(); }
   boolean isCurrentStationName( String name ) { return mStationName.isCurrentStationName( name ); }
   void clearCurrentStations() { mStationName.clearCurrentStations(); }
   String getCurrentOrLastStation( ) { return mStationName.getCurrentOrLastStation( mData, mSID); }
+  private void resetCurrentOrLastStation( ) { mStationName.resetCurrentOrLastStation( mData, mSID); }
 
   // FIXME TROBOT
   static long trobotmillis = 0L;
@@ -1661,22 +1663,42 @@ public class TopoDroidApp extends Application
   }
 
   // ---------------------------------------------------------
-  void insertLRUDatStation( String station, float bearing, float clino,
+  /** insert LRUD splays at a given station, before shot with id "at"
+   * @param at       block id before which to insert the LRUD
+   * @param splay_station station of the LRUD splay
+   * @param bearing  block azimuth
+   * @param clino    bock clino
+   * @param left     LEFT length
+   * @param right    RIGHT length
+   * @param up       UP length
+   * @param down     DOWN length
+   */
+  void insertLRUDatStation( long at, String splay_station, float bearing, float clino,
                             String left, String right, String up, String down )
   {
     // could return the long
-    addManualSplays( -1L, station, left, right, up, down, bearing, false );
+    addManualSplays( at, splay_station, left, right, up, down, bearing, false ); // horizontal=false
   }
 
-  // distance is user-input
-  // bearing and clino are from block
-  void insertDuplicateLeg( String from, String to, float distance, float bearing, float clino, int extend )
+  /**
+    * @param from     FROM station
+    * @param to       TO station
+    * @param distance user-input distance (current units)
+    * @param bearing  from block
+    * @param clino    from block
+    * @param extend   ...
+    * @return id of inserted leg
+    * @note before inserting the duplicate leg it set the CurrentStationName
+    */
+  long insertDuplicateLeg( String from, String to, float distance, float bearing, float clino, int extend )
   {
+    resetCurrentOrLastStation( );
     long millis = java.lang.System.currentTimeMillis()/1000;
     distance = distance / TDSetting.mUnitLength;
     long id = mData.insertShot( mSID, -1L, millis, 0, distance, bearing, clino, 0.0f, extend, DBlock.LEG_NORMAL, 1, true );
     mData.updateShotName( id, mSID, from, to, true ); // forward = true
     mData.updateShotFlag( id, mSID, DBlock.BLOCK_DUPLICATE, true ); // forward = true
+    return id;
   }
 
   private long addManualSplays( long at, String splay_station, String left, String right, String up, String down,
@@ -1686,123 +1708,123 @@ public class TopoDroidApp extends Application
     long millis = java.lang.System.currentTimeMillis()/1000;
     long extend = 0L;
     float calib = ManualCalibration.mLRUD ? ManualCalibration.mLength / TDSetting.mUnitLength : 0;
+    float l = -1.0f;
+    float r = -1.0f;
+    float u = -1.0f;
+    float d = -1.0f;
     if ( left != null && left.length() > 0 ) {
-      float l = -1.0f;
       try {
         l = Float.parseFloat( left ) / TDSetting.mUnitLength;
       } catch ( NumberFormatException e ) {
         TDLog.Error( "manual-shot parse error: left " + left );
       }
       l -= calib;
-      
-      if ( l >= 0.0f ) {
-        if ( horizontal ) { // WENS
-          extend = TDAzimuth.computeSplayExtend( 270 );
-          if ( at >= 0L ) {
-            id = mData.insertShotAt( mSID, at, millis, 0, l, 270.0f, 0.0f, 0.0f, extend, DBlock.LEG_XSPLAY, 1, true );
-            ++at;
-          } else {
-            id = mData.insertShot( mSID, -1L, millis, 0, l, 270.0f, 0.0f, 0.0f, extend, DBlock.LEG_XSPLAY, 1, true );
-          }
-        } else {
-          float b = bearing - 90.0f;
-          if ( b < 0.0f ) b += 360.0f;
-          extend = TDAzimuth.computeSplayExtend( b );
-          // b = in360( b );
-          if ( at >= 0L ) {
-            id = mData.insertShotAt( mSID, at, millis, 0, l, b, 0.0f, 0.0f, extend, DBlock.LEG_XSPLAY, 1, true );
-            ++at;
-          } else {
-            id = mData.insertShot( mSID, -1L, millis, 0, l, b, 0.0f, 0.0f, extend, DBlock.LEG_XSPLAY, 1, true );
-          }
-        }
-        mData.updateShotName( id, mSID, splay_station, EMPTY, true );
-      }
-    } 
+    }  
     if ( right != null && right.length() > 0 ) {
-      float r = -1.0f;
       try {
         r = Float.parseFloat( right ) / TDSetting.mUnitLength;
       } catch ( NumberFormatException e ) {
         TDLog.Error( "manual-shot parse error: right " + right );
       }
       r -= calib;
-      if ( r >= 0.0f ) {
-        if ( horizontal ) { // WENS
-          extend = TDAzimuth.computeSplayExtend( 90 );
-          if ( at >= 0L ) {
-            id = mData.insertShotAt( mSID, at, millis, 0, r, 90.0f, 0.0f, 0.0f, extend, DBlock.LEG_XSPLAY, 1, true );
-            ++at;
-          } else {
-            id = mData.insertShot( mSID, -1L, millis, 0, r, 90.0f, 0.0f, 0.0f, extend, DBlock.LEG_XSPLAY, 1, true );
-          }
-        } else {
-          float b = bearing + 90.0f;
-          if ( b >= 360.0f ) b -= 360.0f;
-          extend = TDAzimuth.computeSplayExtend( b );
-          if ( at >= 0L ) {
-            id = mData.insertShotAt( mSID, at, millis, 0, r, b, 0.0f, 0.0f, extend, DBlock.LEG_XSPLAY, 1, true );
-            ++at;
-          } else {
-            id = mData.insertShot( mSID, -1L, millis, 0, r, b, 0.0f, 0.0f, extend, DBlock.LEG_XSPLAY, 1, true );
-          }
-        }
-        mData.updateShotName( id, mSID, splay_station, EMPTY, true );
-      }
     }
     if ( up != null && up.length() > 0 ) {
-      float u = -1.0f;
       try {
         u = Float.parseFloat( up ) / TDSetting.mUnitLength;
       } catch ( NumberFormatException e ) {
         TDLog.Error( "manual-shot parse error: up " + up );
       }
       u -= calib;
-      if ( u >= 0.0f ) {  
-        if ( horizontal ) {
-          if ( at >= 0L ) {
-            id = mData.insertShotAt( mSID, at, millis, 0, u, 0.0f, 0.0f, 0.0f, 0L, DBlock.LEG_XSPLAY, 1, true );
-            ++at;
-          } else {
-            id = mData.insertShot( mSID, -1L, millis, 0, u, 0.0f, 0.0f, 0.0f, 0L, DBlock.LEG_XSPLAY, 1, true );
-          }
-        } else {
-          if ( at >= 0L ) {
-            id = mData.insertShotAt( mSID, at, millis, 0, u, 0.0f, 90.0f, 0.0f, 0L, DBlock.LEG_XSPLAY, 1, true );
-            ++at;
-          } else {
-            id = mData.insertShot( mSID, -1L, millis, 0, u, 0.0f, 90.0f, 0.0f, 0L, DBlock.LEG_XSPLAY, 1, true );
-          }
-        }
-        mData.updateShotName( id, mSID, splay_station, EMPTY, true );
-      }
     }
     if ( down != null && down.length() > 0 ) {
-      float d = -1.0f;
       try {
         d = Float.parseFloat( down ) / TDSetting.mUnitLength;
       } catch ( NumberFormatException e ) {
         TDLog.Error( "manual-shot parse error: down " + down );
       }
       d -= calib;
-      if ( d >= 0.0f ) {
-        if ( horizontal ) {
-          if ( at >= 0L ) {
-            id = mData.insertShotAt( mSID, at, millis, 0, d, 180.0f, 0.0f, 0.0f, 0L, DBlock.LEG_XSPLAY, 1, true );
-            ++at;
-          } else {
-            id = mData.insertShot( mSID, -1L, millis, 0, d, 180.0f, 0.0f, 0.0f, 0L, DBlock.LEG_XSPLAY, 1, true );
-          }
+    }
+
+    if ( l >= 0.0f ) {
+      if ( horizontal ) { // WENS
+        extend = TDAzimuth.computeSplayExtend( 270 );
+        if ( at >= 0L ) {
+          id = mData.insertShotAt( mSID, at, millis, 0, l, 270.0f, 0.0f, 0.0f, extend, DBlock.LEG_XSPLAY, 1, true );
+          ++at;
         } else {
-          if ( at >= 0L ) {
-            id = mData.insertShotAt( mSID, at, millis, 0, d, 0.0f, -90.0f, 0.0f, 0L, DBlock.LEG_XSPLAY, 1, true );
-            ++at;
-          } else {
-            id = mData.insertShot( mSID, -1L, millis, 0, d, 0.0f, -90.0f, 0.0f, 0L, DBlock.LEG_XSPLAY, 1, true );
-          }
+          id = mData.insertShot( mSID, -1L, millis, 0, l, 270.0f, 0.0f, 0.0f, extend, DBlock.LEG_XSPLAY, 1, true );
         }
-        mData.updateShotName( id, mSID, splay_station, EMPTY, true );
+      } else {
+        float b = bearing - 90.0f;
+        if ( b < 0.0f ) b += 360.0f;
+        extend = TDAzimuth.computeSplayExtend( b );
+        // b = in360( b );
+        if ( at >= 0L ) {
+          id = mData.insertShotAt( mSID, at, millis, 0, l, b, 0.0f, 0.0f, extend, DBlock.LEG_XSPLAY, 1, true );
+          ++at;
+        } else {
+          id = mData.insertShot( mSID, -1L, millis, 0, l, b, 0.0f, 0.0f, extend, DBlock.LEG_XSPLAY, 1, true );
+        }
       }
+      mData.updateShotName( id, mSID, splay_station, EMPTY, true );
+    }
+    if ( r >= 0.0f ) {
+      if ( horizontal ) { // WENS
+        extend = TDAzimuth.computeSplayExtend( 90 );
+        if ( at >= 0L ) {
+          id = mData.insertShotAt( mSID, at, millis, 0, r, 90.0f, 0.0f, 0.0f, extend, DBlock.LEG_XSPLAY, 1, true );
+          ++at;
+        } else {
+          id = mData.insertShot( mSID, -1L, millis, 0, r, 90.0f, 0.0f, 0.0f, extend, DBlock.LEG_XSPLAY, 1, true );
+        }
+      } else {
+        float b = bearing + 90.0f;
+        if ( b >= 360.0f ) b -= 360.0f;
+        extend = TDAzimuth.computeSplayExtend( b );
+        if ( at >= 0L ) {
+          id = mData.insertShotAt( mSID, at, millis, 0, r, b, 0.0f, 0.0f, extend, DBlock.LEG_XSPLAY, 1, true );
+          ++at;
+        } else {
+          id = mData.insertShot( mSID, -1L, millis, 0, r, b, 0.0f, 0.0f, extend, DBlock.LEG_XSPLAY, 1, true );
+        }
+      }
+      mData.updateShotName( id, mSID, splay_station, EMPTY, true );
+    }
+    if ( u >= 0.0f ) {  
+      if ( horizontal ) {
+        if ( at >= 0L ) {
+          id = mData.insertShotAt( mSID, at, millis, 0, u, 0.0f, 0.0f, 0.0f, 0L, DBlock.LEG_XSPLAY, 1, true );
+          ++at;
+        } else {
+          id = mData.insertShot( mSID, -1L, millis, 0, u, 0.0f, 0.0f, 0.0f, 0L, DBlock.LEG_XSPLAY, 1, true );
+        }
+      } else {
+        if ( at >= 0L ) {
+          id = mData.insertShotAt( mSID, at, millis, 0, u, 0.0f, 90.0f, 0.0f, 0L, DBlock.LEG_XSPLAY, 1, true );
+          ++at;
+        } else {
+          id = mData.insertShot( mSID, -1L, millis, 0, u, 0.0f, 90.0f, 0.0f, 0L, DBlock.LEG_XSPLAY, 1, true );
+        }
+      }
+      mData.updateShotName( id, mSID, splay_station, EMPTY, true );
+    }
+    if ( d >= 0.0f ) {
+      if ( horizontal ) {
+        if ( at >= 0L ) {
+          id = mData.insertShotAt( mSID, at, millis, 0, d, 180.0f, 0.0f, 0.0f, 0L, DBlock.LEG_XSPLAY, 1, true );
+          ++at;
+        } else {
+          id = mData.insertShot( mSID, -1L, millis, 0, d, 180.0f, 0.0f, 0.0f, 0L, DBlock.LEG_XSPLAY, 1, true );
+        }
+      } else {
+        if ( at >= 0L ) {
+          id = mData.insertShotAt( mSID, at, millis, 0, d, 0.0f, -90.0f, 0.0f, 0L, DBlock.LEG_XSPLAY, 1, true );
+          ++at;
+        } else {
+          id = mData.insertShot( mSID, -1L, millis, 0, d, 0.0f, -90.0f, 0.0f, 0L, DBlock.LEG_XSPLAY, 1, true );
+        }
+      }
+      mData.updateShotName( id, mSID, splay_station, EMPTY, true );
     }
     return at;
   }

@@ -13,7 +13,7 @@
 package com.topodroid.DistoX;
 
 
-// import android.util.Log;
+import android.util.Log;
 
 import java.util.List;
 import java.util.Set;
@@ -35,36 +35,51 @@ class StationName
     return true;
   }
 
+  // unused
+  // void resetCurrentStationName( String name ) { mCurrentStationName = name; }
+
   String getCurrentStationName() { return mCurrentStationName; }
 
   boolean isCurrentStationName( String name ) { return name.equals(mCurrentStationName); }
 
-  // FIXME 
-  // not efficient: use a better select with reverse order and test on FROM
   private String getLastStationName( DataHelper data_helper, long sid )
   {
-    DBlock last = null;
-    List<DBlock> list = data_helper.selectAllShots( sid, TDStatus.NORMAL );
+    // FIXME not efficient: use a better select with reverse order and test on FROM
+    // DBlock last = null;
+    // List<DBlock> list = data_helper.selectAllShots( sid, TDStatus.NORMAL );
+    // if ( TDSetting.mDistoXBackshot ) {
+    //   for ( DBlock blk : list ) {
+    //     if ( blk.mTo != null && blk.mTo.length() > 0 ) { last = blk; }
+    //   }
+    //   if ( last == null ) return "0";
+    //   if ( last.mFrom == null || last.mFrom.length() == 0 ) return last.mTo;
+    //   if ( TDSetting.mSurveyStations == 1 ) return last.mFrom;  // forward-shot
+    //   return last.mTo;
+    // } else {
+    //   for ( DBlock blk : list ) {
+    //     if ( blk.mFrom != null && blk.mFrom.length() > 0 ) { last = blk; }
+    //   }
+    //   if ( last == null ) return "0";
+    //   if ( last.mTo == null || last.mTo.length() == 0 ) return last.mFrom;
+    //   if ( TDSetting.mSurveyStations == 1 ) return last.mTo;  // forward-shot
+    //   return last.mFrom;
+    // }
+    DBlock last = data_helper.selectLastLegShot( sid, TDStatus.NORMAL );
+    if ( last == null ) return "0";
     if ( TDSetting.mDistoXBackshot ) {
-      for ( DBlock blk : list ) {
-        if ( blk.mTo != null && blk.mTo.length() > 0 ) { last = blk; }
-      }
-      if ( last == null ) return "0";
-      if ( last.mFrom == null || last.mFrom.length() == 0 ) return last.mTo;
       if ( TDSetting.mSurveyStations == 1 ) return last.mFrom;  // forward-shot
       return last.mTo;
     } else {
-      for ( DBlock blk : list ) {
-        if ( blk.mFrom != null && blk.mFrom.length() > 0 ) { last = blk; }
-      }
-      if ( last == null ) return "0";
-      if ( last.mTo == null || last.mTo.length() == 0 ) return last.mFrom;
       if ( TDSetting.mSurveyStations == 1 ) return last.mTo;  // forward-shot
       return last.mFrom;
     }
     // return "0";
   }
 
+  void resetCurrentOrLastStation( DataHelper data_helper, long sid )
+  {
+    if ( mCurrentStationName == null ) mCurrentStationName = getLastStationName( data_helper, sid );
+  }
 
   String getCurrentOrLastStation( DataHelper data_helper, long sid )
   {
@@ -604,7 +619,6 @@ class StationName
       return;
     }
     // mSecondLastShotId = lastShotId(); // FIXME this probably not needed
-    // Log.v("DistoX", "assign stations default. size " + list.size() );
 
     int survey_stations = TDSetting.mSurveyStations;
     if ( survey_stations <= 0 ) return;
@@ -622,6 +636,7 @@ class StationName
                    : (shot_after_splay ? from : "");  // splays station
     // Log.v("DistoX", "assign stations: F <" + from + "> T <" + to + "> st. <" + station + "> Blk size " + list.size() );
     // Log.v("DistoX", "Current St. " + ( (mCurrentStationName==null)? "null" : mCurrentStationName ) );
+    // Log.v("DistoXX", "assign stations default. size " + list.size() + " fwd " + forward_shots + " shot after splays " + shot_after_splay + " station " + station );
 
     int nrLegShots = 0;
 
@@ -690,11 +705,11 @@ class StationName
           } else { // backward shots: ..., 1-0, 2-1 ==> from=Next(2)=3 to=2 ie 3-2
             to      = blk.mFrom;
             from    = DistoXStationName.incrementName( to, sts ); // FIXME it was from
-            if ( mCurrentStationName == null ) {
-              station = shot_after_splay ? from       // 2,   2, 2, 2-1, [ 3, 3, ..., 3-2 ]  ...
-                                         : blk.mFrom; // 2-1, 2, 2, 2,   [ 3-2, 3, 3, ... 3 ] ...
-            } // otherwise station = mCurrentStationName
+	    // station must be set even there is a "currentStation"
+            station = shot_after_splay ? from       // 2,   2, 2, 2-1, [ 3, 3, ..., 3-2 ]  ...
+                                       : blk.mFrom; // 2-1, 2, 2, 2,   [ 3-2, 3, 3, ... 3 ] ...
           }
+          // Log.v("DistoXX", "IDX " + blk.mId + ": " + blk.mFrom + " - " + blk.mTo + " Next " + from + " - " + to + " station " + station );
           nrLegShots = TDSetting.mMinNrLegShots;
         } 
         else // FROM non-empty, TO empty --> SPLAY

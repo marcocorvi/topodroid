@@ -221,6 +221,7 @@ class PhotoSensorsDialog extends MyDialog
     // TDLog.Log(  TDLog.LOG_INPUT, "PhotoiSensorDialog onClick() " + b.getText().toString() );
 
     if ( b == mBTlrud ) { // AT-STATION LRUD
+      long at = mBlk.mId;
       String station = null;
       if ( mRBto.isChecked() ) { // TO
         station = mBlk.mTo;
@@ -233,11 +234,11 @@ class PhotoSensorsDialog extends MyDialog
         // add a duplicate leg d, mBlk.mBearing, mBlk.mClino
 	String from = mBlk.mFrom;
 	station = from + "-" + dstr;
-	mParent.insertDuplicateLeg( from, station, d, mBlk.mBearing, mBlk.mClino, mBlk.getExtend() );
+	at = mParent.insertDuplicateLeg( from, station, d, mBlk.mBearing, mBlk.mClino, mBlk.getExtend() );
       }
       if ( station != null ) {
         // check the data
-        mParent.insertLRUDatStation( station, mBlk.mBearing, mBlk.mClino, 
+        mParent.insertLRUDatStation( at, station, mBlk.mBearing, mBlk.mClino, 
           mETleft.getText().toString().replace(',','.') ,
           mETright.getText().toString().replace(',','.') ,
           mETup.getText().toString().replace(',','.') ,

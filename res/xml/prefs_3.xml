@@ -72,7 +72,8 @@
        android:defaultValue="false"
        />
 
-  <com.topodroid.DistoX.MyListPreference
+  <!--suppress AndroidDomInspection -->
+    <com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_LOCALE"
        android:title="@string/pref_locale_title"
        android:summary="@string/pref_locale_summary"

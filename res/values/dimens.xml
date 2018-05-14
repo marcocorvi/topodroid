@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="default_textsize">16</string>
+  <string name="default_textsize">20</string>
   <string name="default_buttonsize">3</string>
 
 <!-- MATERIAL

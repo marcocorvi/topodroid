@@ -71,7 +71,7 @@
        <item name="android:background">@drawable/button</item>
        <item name="android:minWidth">24dip</item>
        <item name="android:minHeight">12dip</item>
-       <item name="android:elevation">20dip</item>
+       <!-- item name="android:elevation">20dip</item -->
     </style>
 
     <style name="menu_default">
