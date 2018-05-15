@@ -12,6 +12,7 @@ name-bg въздушно_течение
 name-ua тяга
 name-sl zrak
 name-hu légáramlás
+name-sk Smer prúdenia vzduchu
 th_name air-draught
 orientation yes
 color 0x00ccff
