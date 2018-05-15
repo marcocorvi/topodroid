@@ -1,9 +1,10 @@
 symbol area
-name ignous
+name igneous
 name-it roccia_ignea
 name-es ígneo
 name-pt ígnea
 name-ru магматическая_порода
+name-fr roche_magmatique
 th_name u:ignous
 color 0xcc6633 0xcc
 csurvey 1 48 0 3
