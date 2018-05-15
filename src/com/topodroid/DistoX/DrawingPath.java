@@ -359,7 +359,7 @@ class DrawingPath extends RectF
           }
 	} else if ( mBlock.mPaint != null ) {
           canvas.drawPath( path, mBlock.mPaint );
-	} else {
+	} else if ( mPaint != null ) {
           canvas.drawPath( path, mPaint );
 	}
       } else if ( mPaint != null ) {
