@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import java.io.File;
+import java.util.Locale;
 // import java.util.List;
 // import java.util.ArrayList;
 
@@ -101,7 +102,7 @@ public class CWDActivity extends Activity
       TDToast.make( this, R.string.bad_cwd );
       return false;
     }
-    if ( ! dir_name.toUpperCase().startsWith( "TOPODROID" ) ) {
+    if ( ! dir_name.toUpperCase(Locale.US).startsWith( "TOPODROID" ) ) {
       dir_name = "TopoDroid-" + dir_name;
     } else { 
       dir_name = "TopoDroid" + dir_name.substring(9);

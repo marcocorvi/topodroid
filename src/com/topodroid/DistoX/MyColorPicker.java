@@ -66,6 +66,7 @@ class MyColorPicker extends MyDialog
       
       private boolean mTrackingCenter;
       private boolean mHighlightCenter;
+      private RectF   mRect;
       
       ColorPickerView(Context c, IColorChanged l, int color)
       {
@@ -83,15 +84,16 @@ class MyColorPicker extends MyDialog
         mCenterPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mCenterPaint.setColor(color);
         mCenterPaint.setStrokeWidth(5);
+
+        float r = CENTER_X - mPaint.getStrokeWidth()*0.5f;
+	mRect = new RectF( -r, -r, r, r );
       }
 
       @Override 
       protected void onDraw(Canvas canvas)
       {
-          float r = CENTER_X - mPaint.getStrokeWidth()*0.5f;
-          
           canvas.translate(CENTER_X, CENTER_X);
-          canvas.drawOval(new RectF(-r, -r, r, r), mPaint);            
+          canvas.drawOval( mRect, mPaint);            
           canvas.drawCircle(0, 0, CENTER_RADIUS, mCenterPaint);
           
           if (mTrackingCenter) {

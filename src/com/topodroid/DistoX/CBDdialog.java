@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.Locale;
 // import java.util.Set;
 // import java.util.ArrayList;
 // import java.util.Comparator;
@@ -94,7 +95,7 @@ class CBDdialog extends MyDialog
     File[] dirs = base.listFiles( new FileFilter() {
       public boolean accept( File pathname ) { 
         if ( pathname.getName().startsWith(".") ) return false;
-        if ( pathname.getName().toUpperCase().startsWith("TOPODROID") ) return false;
+        if ( pathname.getName().toUpperCase(Locale.US).startsWith("TOPODROID") ) return false;
         try {
 	  // canExecute() is API-9
           if ( pathname.isDirectory() && pathname.canRead() ) return true;
@@ -135,7 +136,7 @@ class CBDdialog extends MyDialog
         mETsubdir.setError( mContext.getResources().getString( R.string.error_invalid_name ) );
 	return;
       }
-      if ( subdir.startsWith(".") || subdir.toUpperCase().startsWith("TOPODROID") ) {
+      if ( subdir.startsWith(".") || subdir.toUpperCase(Locale.US).startsWith("TOPODROID") ) {
         mETsubdir.setError( mContext.getResources().getString( R.string.error_invalid_name ) );
 	return;
       }

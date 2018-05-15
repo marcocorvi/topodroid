@@ -1358,28 +1358,28 @@ class TDSetting
   //   SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences( this );
   //   SharedPreferences.Editor editor = sp.edit();
   //   editor.clear();
-  //   editor.commit();
+  //   editor.apply();
   // }
   
   static private void setPreference( SharedPreferences sp, String name, String value )
   {
     Editor editor = sp.edit();
     editor.putString( name, value );
-    editor.commit();
+    editor.apply(); // was editor.commit();
   }
 
   // static void setPreference( SharedPreferences sp, String name, int val )
   // {
   //   Editor editor = sp.edit();
   //   editor.putString( name, Integer.toString(val) );
-  //   editor.commit();
+  //   editor.apply();
   // }
 
   // static void setPreference( SharedPreferences sp, String name, float val )
   // {
   //   Editor editor = sp.edit();
   //   editor.putString( name, Float.toString(val) );
-  //   editor.commit();
+  //   editor.apply();
   // }
 
   // ===================================================================

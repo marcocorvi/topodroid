@@ -178,7 +178,7 @@ class TDExporter
                                    String origin, String filename )
   {
     // Log.v("DistoX", "export as csurvey: " + filename );
-    String cave = info.name.toUpperCase();
+    String cave = info.name.toUpperCase(Locale.US);
     String survey = info.name;
 
     // String prefix = "";
@@ -248,7 +248,7 @@ class TDExporter
       pw.format("    </sessions>\n");
 
       String session = info.date.replaceAll("\\.", "") + "_" +  cave.replaceAll(" ", "_");
-      session = session.toLowerCase();
+      session = session.toLowerCase(Locale.US);
 
    // ============== CAVE INFOS and BRANCHES
       pw.format("    <caveinfos>\n");

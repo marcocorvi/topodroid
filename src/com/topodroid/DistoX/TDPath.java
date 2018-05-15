@@ -17,6 +17,7 @@ import java.io.FileFilter;
 // import java.io.FileNotFoundException;
 
 import java.util.List;
+import java.util.Locale;
 
 import android.os.Environment;
 // import android.os.Handler;
@@ -446,7 +447,7 @@ class TDPath
             if ( pathname.isDirectory() ) return false;
             if ( ne == 0 ) return true;
             for ( int n = 0; n < ne; ++n ) {
-              if ( pathname.getName().toLowerCase().endsWith( ext[n] ) ) return true;
+              if ( pathname.getName().toLowerCase(Locale.US).endsWith( ext[n] ) ) return true;
             }
             return false;
           }
@@ -463,7 +464,7 @@ class TDPath
     return dir.listFiles( new FileFilter() {
       public boolean accept( File pathname ) { 
         if ( ! pathname.isDirectory() ) return false;
-        if ( pathname.getName().toLowerCase().startsWith( "topodroid" ) ) return true;
+        if ( pathname.getName().toLowerCase(Locale.US).startsWith( "topodroid" ) ) return true;
         return false;
       }
     } );

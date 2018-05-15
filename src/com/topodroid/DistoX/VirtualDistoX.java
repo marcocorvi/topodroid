@@ -579,7 +579,7 @@ class VirtualDistoX
   {
     SharedPreferences.Editor editor = mSharedPrefs.edit();
     editor.putFloat( key, val );
-    editor.commit();
+    editor.apply(); // was editor.commit();
   }
 
   private Vector loadVector( String key )

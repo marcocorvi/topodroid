@@ -56,7 +56,7 @@ public class MyEditPreference extends EditTextPreference
         {
           SharedPreferences.Editor editor = sp.edit();
           editor.putString( p.getKey(), new_value );
-          editor.commit();
+          editor.apply(); // was editor.commit();
           EditTextPreference ep = (EditTextPreference)p;
           ep.setSummary( new_value );
           ep.setText( new_value );

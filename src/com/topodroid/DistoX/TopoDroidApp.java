@@ -1038,7 +1038,7 @@ public class TopoDroidApp extends Application
     String defaultSockType = ( android.os.Build.MANUFACTURER.equals("samsung") ) ? "1" : "0";
     Editor editor = mPrefs.edit();
     editor.putString( "DISTOX_SOCK_TYPE", defaultSockType ); 
-    editor.commit();
+    editor.apply(); // was editor.commit();
   }
 
   private void updateDefaultPreferences()
@@ -1048,7 +1048,7 @@ public class TopoDroidApp extends Application
       if ( ! "1".equals( mPrefs.getString( "DISTOX_GROUP_BY", "1" ) ) ) {
         editor.putString( "DISTOX_GROUP_BY", "1" ); 
       }
-      editor.commit();
+      editor.apply();
     }
   }
 
@@ -1060,7 +1060,7 @@ public class TopoDroidApp extends Application
       Editor editor = mPrefs.edit();
       editor.putString( "DISTOX_CWD", cwd ); 
       editor.putString( "DISTOX_CBD", cbd ); 
-      editor.commit();
+      editor.apply();
     }
     setCWD( cwd, cbd ); 
   }
@@ -1070,7 +1070,7 @@ public class TopoDroidApp extends Application
     if ( mPrefs != null ) {
       Editor editor = mPrefs.edit();
       editor.putString( "DISTOX_PT_CMAP", cmap ); 
-      editor.commit();
+      editor.apply();
     }
     PtCmapActivity.setMap( cmap );
   }
@@ -1081,7 +1081,7 @@ public class TopoDroidApp extends Application
     editor.putString( "DISTOX_ACCEL_THR", Float.toString( acceleration ) ); 
     editor.putString( "DISTOX_MAG_THR", Float.toString( magnetic ) ); 
     editor.putString( "DISTOX_DIP_THR", Float.toString( dip ) ); 
-    editor.commit();
+    editor.apply();
   }
 
   void setShotDataPreference( float leg_tolerance, int leg_shots, float extend_thr,
@@ -1095,7 +1095,7 @@ public class TopoDroidApp extends Application
     editor.putBoolean( "DISTOX_SPLAY_EXTEND", splay_extend );
     editor.putString( "DISTOX_SHOT_TIMER",  Integer.toString( timer ) ); 
     editor.putString( "DISTOX_BEEP_VOLUME", Integer.toString( volume ) ); 
-    editor.commit();
+    editor.apply();
   }
 
   void setPlotScreenPreference( float line_width, float survey_width, float station_size, float label_size, 
@@ -1108,7 +1108,7 @@ public class TopoDroidApp extends Application
     editor.putString( "DISTOX_LABEL_SIZE",      Float.toString( label_size ) ); 
     editor.putString( "DISTOX_DOT_RADIUS",      Float.toString( dot_size ) ); 
     editor.putString( "DISTOX_CLOSENESS",       Float.toString( selection_radius ) ); 
-    editor.commit();
+    editor.apply();
   }
 
   void setToolScreenPreference( float point_scale, float section_line_tick, int line_style,
@@ -1121,7 +1121,7 @@ public class TopoDroidApp extends Application
     editor.putString( "DISTOX_LINE_SEGMENT",  Float.toString( line_point_spacing ) ); 
     editor.putString( "DISTOX_LINE_ACCURACY", Float.toString( bezier_accuracy ) ); 
     editor.putString( "DISTOX_LINE_CORNER",   Float.toString( bezier_corner ) ); 
-    editor.commit();
+    editor.apply();
   }
   
   void setSurveyLocationPreference( String crs, boolean gps_averaging, String units, int alt, boolean alt_lookup )
@@ -1132,7 +1132,7 @@ public class TopoDroidApp extends Application
     editor.putString( "DISTOX_UNIT_LOCATION", units ); 
     editor.putString( "DISTOX_ALTITUDE", Integer.toString( alt ) ); 
     editor.putBoolean( "DISTOX_ALTIMETRIC", alt_lookup );
-    editor.commit();
+    editor.apply();
   }
 
 
@@ -1147,7 +1147,7 @@ public class TopoDroidApp extends Application
   {
     SharedPreferences.Editor editor = mPrefs.edit();
     editor.putBoolean( preference, val );
-    editor.commit(); // Very important to save the preference
+    editor.apply(); // Very important to save the preference
   }
 
   void setDevice( String address ) 
@@ -1171,7 +1171,7 @@ public class TopoDroidApp extends Application
     if ( mPrefs != null ) {
       Editor editor = mPrefs.edit();
       editor.putString( TDSetting.keyDeviceName(), address ); 
-      editor.commit();
+      editor.apply();
     }
   }
 

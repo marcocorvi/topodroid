@@ -2544,6 +2544,7 @@ class DataHelper extends DataSetObservable
 	 }
        } while (cursor.moveToNext());
      }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
      return set;
    }
 
