@@ -10,6 +10,7 @@ name-ru стена_из_блоков
 name-ua стіна_із_блоків
 name-fa دیوار_بلوکی
 name-hu fal_kőzettömbökből
+name-sk steny_z_blkov
 th_name wall:blocks
 group wall
 color 0xff0000 0xff
