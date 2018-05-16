@@ -1008,6 +1008,9 @@
   <string name="pref_shared_xsections_summary">Сеченията в реперите са споделени между скиците</string>
   <string name="xsections_shared">Споделени сечения в репери</string>
   <string name="xsections_private">Индивидуални сечения в репери</string>
+  <!-- TODO string name="pref_reduce_angle_title">Straightening angle</string -->
+  <!-- TODO string name="pref_reduce_angle_summary">Minimal segment-angle straightening lines</string -->
+  <!-- TODO string name="pref_reduce_angle_message">Minimal segment-angle straightening lines</string -->
 
 
   <string name="pref_survey_stations_title">Репери</string>

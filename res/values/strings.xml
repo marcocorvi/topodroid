@@ -1003,7 +1003,7 @@
   <string name="pref_eraseness_title">Eraser size</string>
   <string name="pref_eraseness_message">Sketch item erasing radius</string>
   <string name="pref_min_shift_title">Shift sensitivity</string>
-  <string name="pref_min_shift_message">Shift sensitivity</string>
+  <string name="pref_min_shift_message">Maximum shift speed [pxl/step]</string>
   <string name="pref_pointing_title">Pointing tolerance</string>
   <string name="pref_pointing_message">Touch-down/lift-up tolerance for point selection</string>
   <string name="pref_dash_splay_title">Splay dash coherence</string>

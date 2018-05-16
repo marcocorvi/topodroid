@@ -1012,6 +1012,9 @@
   <string name="pref_shared_xsections_summary">X-section al caposaldo condivisa tra i disegni</string>
   <string name="xsections_shared">X-section condivise</string>
   <string name="xsections_private">X-section private</string>
+  <!-- TODO string name="pref_reduce_angle_title">Straightening angle</string -->
+  <!-- TODO string name="pref_reduce_angle_summary">Minimal segment-angle straightening lines</string -->
+  <!-- TODO string name="pref_reduce_angle_message">Minimal segment-angle straightening lines</string -->
 
 
   <string name="pref_survey_stations_title">Capisaldi rilievo</string>

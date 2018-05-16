@@ -1008,6 +1008,9 @@
   <!-- TODO string name="pref_shared_xsections_summary">At-station x-sections shared among sketches</string -->
   <!-- TODO string name="xsections_shared">Shared X-sections</string -->
   <!-- TODO string name="xsections_private">Private X-sections</string -->
+  <!-- TODO string name="pref_reduce_angle_title">Straightening angle</string -->
+  <!-- TODO string name="pref_reduce_angle_summary">Minimal segment-angle straightening lines</string -->
+  <!-- TODO string name="pref_reduce_angle_message">Minimal segment-angle straightening lines</string -->
 
 
   <string name="pref_survey_stations_title">Merilne točke načrta</string>

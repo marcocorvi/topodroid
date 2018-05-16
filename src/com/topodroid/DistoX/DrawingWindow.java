@@ -3106,11 +3106,11 @@ public class DrawingWindow extends ItemDrawer
         float y_shift = yc - mSaveY;
         if ( TDLevel.overNormal ) {
           if ( Math.abs( x_shift ) < TDSetting.mMinShift && Math.abs( y_shift ) < TDSetting.mMinShift ) {
-    	if ( mLandscape ) {
+    	    if ( mLandscape ) {
               mDrawingSurface.shiftDrawing( -y_shift/mZoom, x_shift/mZoom );
-    	} else {
+    	    } else {
               mDrawingSurface.shiftDrawing( x_shift/mZoom, y_shift/mZoom );
-    	}
+    	    }
             modified();
           }
         // } else {

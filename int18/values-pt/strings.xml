@@ -1007,6 +1007,9 @@
   <string name="pref_shared_xsections_summary">Cortes X em bases compartilhados entre croquis</string>
   <string name="xsections_shared">Cortes X compartilhados</string>
   <string name="xsections_private">Cortes X não compartilhados</string>
+  <!-- TODO string name="pref_reduce_angle_title">Straightening angle</string -->
+  <!-- TODO string name="pref_reduce_angle_summary">Minimal segment-angle straightening lines</string -->
+  <!-- TODO string name="pref_reduce_angle_message">Minimal segment-angle straightening lines</string -->
 
 
   <string name="pref_survey_stations_title">Regras para bases</string>

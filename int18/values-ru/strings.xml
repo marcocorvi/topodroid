@@ -1020,6 +1020,9 @@
   <string name="pref_shared_xsections_summary">Поперечные разреы на пикете общие для плана и разреза</string>
   <string name="xsections_shared">Общие поперечные разреы</string>
   <string name="xsections_private">НЕ Общие поперечные разрезы</string>
+  <!-- TODO string name="pref_reduce_angle_title">Straightening angle</string -->
+  <!-- TODO string name="pref_reduce_angle_summary">Minimal segment-angle straightening lines</string -->
+  <!-- TODO string name="pref_reduce_angle_message">Minimal segment-angle straightening lines</string -->
   <!-- UNUSED string name="pref_list_refresh_title">Обновить список</string -->
   <!-- UNUSED string name="pref_list_refresh_summary">Принудительно обновить список</string -->	
   <string name="pref_reduce_angle_title">Угол спрямления</string>

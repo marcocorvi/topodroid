@@ -416,9 +416,9 @@ class TDSetting
   // selection_radius = cutoff + closeness / zoom
   static final float mCloseCutoff = 0.01f; // minimum selection radius
 
-  static float mSelectness = 24f;             // selection radius
+  static float mSelectness = 24f;            // selection radius
   static float mEraseness = 36f;             // eraser radius
-  static int mMinShift = 60;
+  static int mMinShift = 60;                 // shift sensitivity
   static int mPointingRadius = 16;
 
   // static final String LINE_SHIFT = "20.0";
