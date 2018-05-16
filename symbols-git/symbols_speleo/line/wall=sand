@@ -10,6 +10,7 @@ name-ru стена_песок
 name-ua стіна_пісок
 name-fa شن
 name-hu fal_homok
+name-sk piesková_stena
 th_name wall:sand
 group wall
 color 0xff0000 0xff

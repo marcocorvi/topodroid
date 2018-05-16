@@ -11,6 +11,7 @@ name-bg предполагаема
 name-ua ймовірний
 name-fa احتمال_داشتن
 name-hu fal_feltételezett
+name-sk odhadovaná_stena
 th_name wall:presumed
 group wall
 color 0xff0000 0xff
