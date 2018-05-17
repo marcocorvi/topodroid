@@ -1266,6 +1266,7 @@
   <string name="pref_log_loc">Posicionamiento</string>
   <string name="pref_log_num">Reducción de datos</string>
   <!-- TODO string name="pref_log_path">File paths</string -->
+  <!-- TODO string name="pref_log_perm">Permissions</string -->
   <string name="pref_log_photo">Foto</string>
   <string name="pref_log_plot">Dibujo</string>
   <string name="pref_log_proto">Protocolo DistoX</string>

@@ -194,11 +194,11 @@ public class MainWindow extends Activity
   @Override
   public void onClick(View view)
   { 
+    // TDLog.Log( TDLog.LOG_INPUT, "MainWindow onClick() " + view.toString() );
     if ( onMenu ) {
       closeMenu();
       return;
     }
-    // TDLog.Log( TDLog.LOG_INPUT, "MainWindow onClick() " + view.toString() );
     Intent intent;
     // int status = mStatus;
     Button b0 = (Button)view;
@@ -733,6 +733,7 @@ public class MainWindow extends Activity
   @Override
   public void onBackPressed () // askClose
   {
+    // TDLog.Log( TDLog.LOG_INPUT, "MainWindow onBackPressed()" );
     if ( onMenu ) {
       closeMenu();
       return;
@@ -808,7 +809,7 @@ public class MainWindow extends Activity
   @Override
   public void onRequestPermissionsResult( int code, final String[] perms, int[] results )
   {
-    Log.v("DistoXX", "MAIN req code " + code + " results length " + results.length );
+    // TDLog.Log(TDLog.LOG_PERM, "MAIN req code " + code + " results length " + results.length );
     if ( code == FeatureChecker.REQUEST_PERMISSIONS ) {
       if ( results.length > 0 ) {
 	for ( int k = 0; k < results.length; ++ k ) {

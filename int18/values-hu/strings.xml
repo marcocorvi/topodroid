@@ -1256,6 +1256,7 @@
   <string name="pref_log_loc">Helyszín</string>
   <string name="pref_log_num">Adat redukció</string>
   <!-- TODO string name="pref_log_path">File paths</string -->
+  <!-- TODO string name="pref_log_perm">Permissions</string -->
   <string name="pref_log_photo">Fotó</string>
   <string name="pref_log_plot">Vázlatok</string>
   <string name="pref_log_proto">DistoX protokol</string>

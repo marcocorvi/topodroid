@@ -1257,6 +1257,7 @@
   <string name="pref_log_loc">Localização</string>
   <string name="pref_log_num">Redução de dados</string>
   <string name="pref_log_path">Arquivos</string>
+  <!-- TODO string name="pref_log_perm">Permissions</string -->
   <string name="pref_log_photo">Foto</string>
   <string name="pref_log_plot">Croquis</string>
   <string name="pref_log_proto">Protocolo DistoX</string>

@@ -82,6 +82,7 @@ class FeatureChecker
 
   static void createPermissions( Context context, Activity activity )
   {
+    // TDLog.Log( LOG_PERM, "create permissions" );
     MustRestart = false;
     if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.M ) return;
     for ( int k=0; k<NR_PERMS; ++k ) { // check whether the app has the six permissions
@@ -107,6 +108,7 @@ class FeatureChecker
    */
   static int checkPermissions( Context context )
   {
+    // TDLog.Log( LOG_PERM, "check permissions" );
     int k;
     for ( k=0; k<NR_PERMS_D; ++k ) {
       int res = context.checkCallingOrSelfPermission( perms[k] );
@@ -130,6 +132,7 @@ class FeatureChecker
 
   static boolean checkLocation( Context context )
   {
+    // TDLog.Log( LOG_PERM, "check location" );
     PackageManager pm = context.getPackageManager();
     return ( context.checkCallingOrSelfPermission( android.Manifest.permission.ACCESS_FINE_LOCATION ) == PackageManager.PERMISSION_GRANTED )
         && pm.hasSystemFeature(PackageManager.FEATURE_LOCATION)
@@ -138,6 +141,7 @@ class FeatureChecker
 
   static boolean checkCamera( Context context )
   {
+    // TDLog.Log( LOG_PERM, "check camera" );
     PackageManager pm = context.getPackageManager();
     return ( context.checkCallingOrSelfPermission( android.Manifest.permission.CAMERA ) == PackageManager.PERMISSION_GRANTED )
         && pm.hasSystemFeature(PackageManager.FEATURE_CAMERA)
@@ -146,23 +150,27 @@ class FeatureChecker
 
   static boolean checkMultitouch( Context context )
   {
+    // TDLog.Log( LOG_PERM, "check multitouch" );
     return context.getPackageManager().hasSystemFeature( PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH );
   }
 
   static boolean checkMicrophone( Context context )
   {
+    // TDLog.Log( LOG_PERM, "check microphone" );
     return ( context.checkCallingOrSelfPermission( android.Manifest.permission.RECORD_AUDIO ) == PackageManager.PERMISSION_GRANTED )
         && context.getPackageManager().hasSystemFeature( PackageManager.FEATURE_MICROPHONE );
   }
 
   static boolean checkBluetooth( Context context )
   {
+    // TDLog.Log( LOG_PERM, "check bluetooth" );
     return ( context.checkCallingOrSelfPermission( android.Manifest.permission.BLUETOOTH ) == PackageManager.PERMISSION_GRANTED )
         && context.getPackageManager().hasSystemFeature( PackageManager.FEATURE_BLUETOOTH );
   }
 
   static boolean checkInternet( Context context )
   {
+    // TDLog.Log( LOG_PERM, "check internet" );
     return ( context.checkCallingOrSelfPermission( android.Manifest.permission.INTERNET ) == PackageManager.PERMISSION_GRANTED );
   }
 }

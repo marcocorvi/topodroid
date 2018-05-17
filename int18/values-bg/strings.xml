@@ -1259,6 +1259,7 @@
   <string name="pref_log_loc">Местоположение</string>
   <string name="pref_log_num">Редуциране на данни</string>
   <string name="pref_log_path">Пътища към файловете</string>
+  <!-- TODO string name="pref_log_perm">Permissions</string -->
   <string name="pref_log_photo">Снимки</string>
   <string name="pref_log_plot">Скици</string>
   <string name="pref_log_proto">DistoX протокол</string>

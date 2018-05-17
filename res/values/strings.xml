@@ -1274,6 +1274,7 @@
   <string name="pref_log_loc">Location</string>
   <string name="pref_log_num">Data reduction</string>
   <string name="pref_log_path">File paths</string>
+  <string name="pref_log_perm">Permissions</string>
   <string name="pref_log_photo">Photo</string>
   <string name="pref_log_plot">Sketches</string>
   <string name="pref_log_proto">DistoX protocol</string>

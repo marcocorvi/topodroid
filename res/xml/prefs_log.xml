@@ -29,6 +29,12 @@
      />
 
      <CheckBoxPreference
+       android:key="DISTOX_LOG_PERM"
+       android:title="@string/pref_log_perm"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
        android:key="DISTOX_LOG_PATH"
        android:title="@string/pref_log_path"
        android:defaultValue="false"

@@ -1261,6 +1261,7 @@
   <string name="pref_log_loc">Місцеположення</string>
   <string name="pref_log_num">Стиснення даних</string>
   <!-- TODO string name="pref_log_path">File paths</string -->
+  <!-- TODO string name="pref_log_perm">Permissions</string -->
   <string name="pref_log_photo">Фото</string>
   <string name="pref_log_plot">Абриси</string>
   <string name="pref_log_proto">Протокол DistoX</string>

@@ -1260,6 +1260,7 @@
   <string name="pref_log_loc">位置坐标</string>
   <string name="pref_log_num">数据压缩</string>
   <!-- TODO string name="pref_log_path">File paths</string -->
+  <!-- TODO string name="pref_log_perm">Permissions</string -->
   <string name="pref_log_photo">照片</string>
   <string name="pref_log_plot">草图</string>
   <string name="pref_log_proto">DistoX 协议</string>

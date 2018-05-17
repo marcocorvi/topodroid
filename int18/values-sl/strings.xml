@@ -1259,6 +1259,7 @@
   <string name="pref_log_loc">Pozicija GPS</string>
   <string name="pref_log_num">Pomanjšanje poligona</string>
   <!-- TODO string name="pref_log_path">File paths</string -->
+  <!-- TODO string name="pref_log_perm">Permissions</string -->
   <string name="pref_log_photo">Foto</string>
   <string name="pref_log_plot">Skice</string>
   <string name="pref_log_proto">Protokol DistoX</string>

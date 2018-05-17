@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+/** a splay has the coordinates of the endpoint
+ */
 class NumSplay extends NumSurveyPoint
 {
   public NumStation from;

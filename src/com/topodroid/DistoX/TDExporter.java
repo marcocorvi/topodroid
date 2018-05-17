@@ -553,6 +553,7 @@ class TDExporter
     }
     for ( NumSplay sp : num.getSplays() ) {
       sp.s = lat - sp.s * s_radius;
+      sp.e = lng + sp.e * e_radius;
       sp.v = (asl - sp.v) * asl_factor;
     }
   }

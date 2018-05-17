@@ -811,6 +811,7 @@ class DistoXNum
             tmpshots.remove( ts1 );
             ts1 = ts2;
           }
+          ts0.sibling = null;
         // } else {
         //   for ( ts1 = ts0.sibling; ts1 != null; ts1 = ts1.sibling ) {
         //     assert ( ts1.backshot != 0 );
@@ -854,10 +855,10 @@ class DistoXNum
             // if ( ts.backshot == 0 ) 
             {
               // TDLog.Log(TDLog.LOG_NUM, "shot " + ts.from + " " + ts.to + " <" + ts.backshot + ">" );
-              int   nfwd = 1;
-              float bfwd = ts.b();
-              int   nbck = 0;
-              float bbck = 0;
+              int   nfwd = 1;      // nr of forward
+              float bfwd = ts.b(); // forward bearing
+              int   nbck = 0;      // nr of backward
+              float bbck = 0;      // backward bearing
               for ( TriShot ts1 = ts.sibling; ts1 != null; ts1 = ts1.sibling ) {
                 // TDLog.Log(TDLog.LOG_NUM, "sibling " + ts1.from + " " + ts1.to + " <" + ts1.backshot + ">" );
                 if ( ts1.backshot == 1 ) {
@@ -884,10 +885,11 @@ class DistoXNum
                   ++ nbck;
                 }
               }
-              if ( nbck > 0 ) {
-                anomaly = bbck/nbck - bfwd/nfwd - 180;
+              if ( nbck > 0 ) {  // station_anomaly must be subtracted to mearured bearing to get corrected bearing
+                anomaly = bbck/nbck - bfwd/nfwd - 180;  // station_anomaly = <backward> - <forward> - 180
                 if ( anomaly < -180 ) anomaly += 360;
               }
+	      // Log.v("DistoXX", "anomaly " + anomaly);
 
               // A_north       B_north
               // |              \
@@ -925,7 +927,8 @@ class DistoXNum
                 if ( ! mStations.addStation( st1 ) ) mClosureStations.add( st1 );
 
                 st1.addAzimuth( (ts.b()+180)%360, -ext );
-                st1.mAnomaly = anomaly;
+                st1.mAnomaly = anomaly + sf.mAnomaly;
+	        // Log.v("DistoXX", "station " + st1.name + " anomaly " + st1.mAnomaly );
                 updateBBox( st1 );
                 st1.mDuplicate = true;
 
@@ -955,7 +958,8 @@ class DistoXNum
               if ( ! mStations.addStation( st ) ) mClosureStations.add( st );
 
               st.addAzimuth( (ts.b()+180)%360, -ext );
-              st.mAnomaly = anomaly;
+              st.mAnomaly = anomaly + sf.mAnomaly;
+	      // Log.v("DistoXX", "station " + st.name + " anomaly " + st.mAnomaly );
               updateBBox( st );
               addToStats( ts.duplicate, ts.surface, Math.abs(ts.d()), ts.h(), st.v );
 
@@ -979,7 +983,8 @@ class DistoXNum
             if ( ! mStations.addStation( sf ) ) mClosureStations.add( sf );
 
             sf.addAzimuth( ts.b(), ext );
-            sf.mAnomaly = anomaly; // FIXME
+            sf.mAnomaly = anomaly + st.mAnomaly; // FIXME
+	    // Log.v("DistoXX", "station " + sf.name + " anomaly " + sf.mAnomaly );
             // if ( TDLog.LOG_DEBUG ) {
             //   Log.v( TDLog.TAG, "new station T->F id= " + ts.from + " from= " + st.name + " anomaly " + anomaly ); 
             //   Log.v( TDLog.TAG, "  " + sf.e + " " + sf.s + " : " + sf.h + " " + sf.v );
