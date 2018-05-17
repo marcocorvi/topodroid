@@ -274,7 +274,7 @@
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
     <!-- TODO string name="menu_calib_check">CALIBR. CHECK</string -->
-    <!-- TODO string name="menu_close">CLOSE</string -->
+    <!-- TODO string name="menu_close">ZATVORIŤ</string -->
     <!-- TODO string name="menu_clear">CLEAR</string -->
     <!-- TODO string name="menu_color">CLEAR COLOR</string -->
     <string name="menu_delete">VYMAZAŤ</string>
@@ -298,7 +298,7 @@
     <!-- OK string name="menu_palette">PALETTE</string -->
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SNÍMAČ</string>
-    <string name="menu_scan">SCAN</string>
+    <string name="menu_scan">SKENUJ</string>
     <!-- UNUSED string name="menu_station">CAPISALDI</string -->
     <string name="menu_stats">ŠTATISTIKA</string>
     <string name="menu_survey">INFORMÁCIE</string>
