@@ -274,7 +274,7 @@
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
     <!-- TODO string name="menu_calib_check">CALIBR. CHECK</string -->
-    <!-- TODO string name="menu_close">CLOSE</string -->
+    <!-- TODO string name="menu_close">ZATVORIŤ</string -->
     <!-- TODO string name="menu_clear">CLEAR</string -->
     <!-- TODO string name="menu_color">CLEAR COLOR</string -->
     <string name="menu_delete">VYMAZAŤ</string>
@@ -298,7 +298,7 @@
     <!-- OK string name="menu_palette">PALETTE</string -->
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SNÍMAČ</string>
-    <string name="menu_scan">SCAN</string>
+    <string name="menu_scan">SKENUJ</string>
     <!-- UNUSED string name="menu_station">CAPISALDI</string -->
     <string name="menu_stats">ŠTATISTIKA</string>
     <string name="menu_survey">INFORMÁCIE</string>
@@ -975,8 +975,8 @@
   <string name="pref_tool_point_title">MOŽNOSTI BODOV</string>
   <string name="pref_location_title">MOŽNOSTI POLOHY</string>
   <string name="pref_accuracy_title">PRESNOSŤ MOŽNOSTÍ</string>
-  <string name="pref_shot_data_title">POLIGONÁLNE MOŽNOSTI</string>
-  <string name="pref_shot_units_title">MOŽNOSTI JEDNOTKY\'</string>
+  <string name="pref_shot_data_title">POLYGONÁLNE MOŽNOSTI</string>
+  <string name="pref_shot_units_title">MOŽNOSTI JEDNOTKY</string>
   <string name="pref_cwd_title">Pracovný adresár</string>
   <!-- UNUSED string name="pref_cwd_summary">Directory di lavoro di TopoDroid</string -->
   <!-- UNUSED string name="pref_cwd_message">Scrivi la directory di lavoro di TopoDroid</string -->
