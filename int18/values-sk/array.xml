@@ -106,14 +106,14 @@
      <item name="for">Normálny cieľ, najprv bočné miesta</item>
      <item name="back">Opačný pohľad, bočné náhľady najprv cesta</item>
      <item name="for2">Normálny cieľ, cesta ako prvá</item>
-     <item name="back2">Spiatočný cieľ, cesta najprv</item>
+     <item name="back2">Spiatočný cieľ, cesta ako prvá</item>
      <item name="anomaly">Pohľad zozadu, spätné videnie</item>
      <item name="tripod">Statív</item>
      <item name="toporobot">TopoRobot</item>
   </string-array>
 
   <string-array name="pickerType">
-     <item name="recent">Viac nedávno</item>
+     <item name="recent">Nedávny</item>
      <item name="list">Zoznam</item>
      <item name="grid">Mriežka</item>
      <item name="grid3">Tri mriežky</item>
@@ -175,7 +175,7 @@
   <string-array name="calibAlgo">
      <item name="auto">auto</item>
      <item name="linear">lineárne DistroX</item>
-     <item name="nonlinear">nelineáre DistroX</item>
+     <item name="nonlinear">nelineárne DistroX</item>
   </string-array>
 
   <string-array name="rawCData">
