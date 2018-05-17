@@ -975,8 +975,8 @@
   <string name="pref_tool_point_title">MOŽNOSTI BODOV</string>
   <string name="pref_location_title">MOŽNOSTI POLOHY</string>
   <string name="pref_accuracy_title">PRESNOSŤ MOŽNOSTÍ</string>
-  <string name="pref_shot_data_title">POLIGONÁLNE MOŽNOSTI</string>
-  <string name="pref_shot_units_title">MOŽNOSTI JEDNOTKY\'</string>
+  <string name="pref_shot_data_title">POLYGONÁLNE MOŽNOSTI</string>
+  <string name="pref_shot_units_title">MOŽNOSTI JEDNOTKY</string>
   <string name="pref_cwd_title">Pracovný adresár</string>
   <!-- UNUSED string name="pref_cwd_summary">Directory di lavoro di TopoDroid</string -->
   <!-- UNUSED string name="pref_cwd_message">Scrivi la directory di lavoro di TopoDroid</string -->
