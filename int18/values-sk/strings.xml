@@ -121,7 +121,7 @@
     <string name="extend_right">P</string>
     <string name="extend_vert">Vert.</string>
     <!-- UNUSED string name="external_prompt">Scrivi i dati</string -->
-    <string name="splay_at_to">Roztiahnite sa do meracieho prístupového bodu</string>
+    <string name="splay_at_to">LRUD do meracieho bodu</string>
     <!-- TODO string name="lrud">LRUD</string -->
     <!-- TODO string name="strike_dip">Strike %1$.0f Dip %2$.0f</string -->
 
@@ -224,7 +224,7 @@
     <!-- UNUSED string name="hidden_add">Skryje mediálnu čiaru</string -->
     <!-- UNUSED string name="hidden_del">Zobraziť stredovú čiaru</string -->
     <!-- TODO string name="hidden_show">Zobraziť zábery za stanicami</string -->
-    <string name="splays_toggle">Zobraziť alebo skryť bočné pohľady</string>
+    <string name="splays_toggle">Prepnúť pomocné zameranie displeja</string>
     <!-- TODO string name="splays">splays</string -->
     <string name="fixed">fixné</string>
     <string name="painted">kreslené</string>
@@ -375,7 +375,7 @@
     <string name="saving_">Ukladanie </string>
     <string name="saving_file_failed">Neúspešné uloženie súbora</string>
     <!-- UNUSED string name="scrap_name">nome del disegno</string -->
-    <string name="splay">bočné videnie</string>
+    <string name="splay">Pomocné zameranie</string>
     <string name="too_many_leg_intersection">Úseková priamka prechádza mnohými vetvami</string>
     <string name="too_many_legs_xsection">Príliš veľa vetiev pre sekciu X</string>
     <!-- UNUSED string name="converted_tdr2th2">Pretvorjena skice iz binarnega formata v th2</string -->
@@ -480,7 +480,7 @@
     <string name="stat_origin">0 - Počiatočná stanica: %1$s</string>
     <string name="stat_azimuth">Azimut navrhovaného profilu: %1$.1f</string>
     <string name="stat_shot">Zábery %1$d,   Dvojitý %2$d,   Povrch %3$d</string>
-    <string name="stat_splay">Zošikmiť %1$d</string>
+    <string name="stat_splay">Pomocné zamerania %1$d</string>
     <string name="stat_station">Míľniky %1$d</string>
     <string name="stat_surface">Plošné zábery %1$d %2$.1f %3$s</string>
     <!-- OK string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]</string -->
@@ -490,9 +490,9 @@
 
 
     <string name="hide_blank">Prázdne zábery</string>
-    <string name="hide_leg">ID cieľa</string>
+    <string name="hide_leg">Opakované hlavné merania</string>
     <string name="hide_ids">Zmazanie ID</string>
-    <string name="hide_splay">Bočné merania</string>
+    <string name="hide_splay">Pomocné zamerania laserom</string>
 
     <string name="plan">Plan</string>
     <string name="extended">predĺžený</string>
@@ -567,7 +567,7 @@
     <string name="xsection">Prierez</string>
 
     <string name="mode_leg">Klepať</string>
-    <string name="mode_splay">Zošikmiť</string>
+    <string name="mode_splay">Pomocné zamerania</string>
     <string name="mode_station">Míľniky</string>
     <string name="mode_grid">Mriežka</string>
     <string name="mode_fixed">[ zamknutý ]</string>
@@ -581,8 +581,8 @@
     <!-- OK string name="remote_reset">Reset BT</string -->
     <!-- UNUSED string name="download">Scarica dati</string -->
 
-    <string name="popup_do_splay">Zošikmiť</string>
-    <string name="popup_do_leg">Klepať</string>
+    <string name="popup_do_splay">Pomocné zameranie</string>
+    <string name="popup_do_leg">Hlavné zamerania laserom</string>
     <string name="popup_do_gm_data">Nastrelenie kalibr.</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
@@ -697,7 +697,7 @@
     <string name="help_info_topodroid">Info TopoDroid</string>
     <string name="help_download">Stiahnite si dáta</string>
     <!-- UNUSED string name="help_splay">Assegna capisaldi agli splay automaticamente</string -->
-    <string name="help_display">Zvoľte režim zobrazenia</string>
+    <string name="help_display">Zobrazovací mód</string>
     <string name="help_display_calib">Zobraziť / skryť zrušené zábery</string>
     <string name="help_validate">Validácia kalibrácie</string>
     <string name="help_overview">Celkový pohľad</string>
@@ -888,27 +888,27 @@
 
   <!-- TODO string name="pref_bezier_step_title">Point spacing</string -->
   <!-- TODO string name="pref_bezier_step_summary">Distance between points on an export line [m]</string -->
-  <string name="pref_leg_shots_title">Minimálne cielové číslo</string>
+  <string name="pref_leg_shots_title">Minimálne hlavné zamerania</string>
   <string name="pref_leg_shots_summary">Minimálny počet opatrení pre polygonálny nástrel</string>
   <string name="pref_station_prefix_title">Exportujte prefix referenčných kritérií</string>
   <string name="pref_station_prefix_summary">Export do cSkúste predponu referenčných kritérií</string>
-  <string name="pref_compass_splays_title">Bočné postavenie kompasu</string>
-  <string name="pref_compass_splays_summary">Exportujte bočné pohľady do súboru Compass</string>
+  <string name="pref_compass_splays_title">Pomocné zameranie kompasu</string>
+  <string name="pref_compass_splays_summary">Export pomocných merianí do kompas súborov</string>
   <string name="pref_trobot_names_title">Názvy staníc TopoRobot</string>
   <string name="pref_trobot_names_summary">Názvy staníc sú v štýle TopoRobot</string>
-  <string name="pref_ortho_lrud_title">Uhol rozopnutia typu LRUD</string>
-  <string name="pref_ortho_lrud_summary">Minimálny uhol medzi rozprašovaním a tlmením pre typ LRUD</string>
-  <string name="pref_ortho_lrud_message">LRUD minimálny uhol rozpínacieho ramena</string>
-  <string name="pref_lrud_vertical_title">UD min sklon. zošikmenia </string>
-  <string name="pref_lrud_vertical_summary">LRUD hore / dole min. zošikmit </string>
-  <string name="pref_lrud_vertical_message">LRUD hore / dole min. zošikmit </string>
-  <string name="pref_lrud_horizontal_title">Maximálny sklon LR. zošikmenia</string>
-  <string name="pref_lrud_horizontal_summary">LRUD Maximálny sklon vľavo / vpravo. zošikmenia</string>
-  <string name="pref_lrud_horizontal_message">LRUD Maximálny sklon vľavo / vpravo. zošikmenia</string>
+  <string name="pref_ortho_lrud_title">LRUD pomocné zameranie uhla</string>
+  <string name="pref_ortho_lrud_summary">Minimálne zameranie uhla pre LRUD merania</string>
+  <string name="pref_ortho_lrud_message">LRUD minimálny zameriavací uhol </string>
+  <string name="pref_lrud_vertical_title">UD pomocné zameriavanie clino</string>
+  <string name="pref_lrud_vertical_summary">LRUD minimálne clino pre horné/dolné pomocné zamerania</string>
+  <string name="pref_lrud_vertical_message">Horné/dolné minimálne pomocné zamerania clino</string>
+  <string name="pref_lrud_horizontal_title">LR pomocné zameranie clino</string>
+  <string name="pref_lrud_horizontal_summary">LRUD Maximálny clino pre ľavé/pravé pomocné zamerania</string>
+  <string name="pref_lrud_horizontal_message">ľavé/pravé maximálne pomocné zameranie clino</string>
   <string name="pref_survex_eol_title">Skončovací riadok Survex / Topo</string>
   <string name="pref_survex_eol_summary">Survex / topo - line ukončenie</string>
-  <string name="pref_survex_splay_title">Survex spustí stanicu</string>
-  <string name="pref_survex_splay_summary">Survex - Pridajte stanicu A do rozptylu</string>
+  <string name="pref_survex_splay_title">Survex pomocné zameranie bodu</string>
+  <string name="pref_survex_splay_summary">Pridať k bodu do pomocných zameranív Survex-e</string>
   <string name="pref_survex_lrud_title">Survex - LRUD</string>
   <string name="pref_survex_lrud_summary">Survex - Pridajte LRUD na export</string>
   <string name="pref_svg_grid_title">SVG mriežka</string>
@@ -931,8 +931,8 @@
   <string name="pref_svg_line_dir_summary">Pridajte orientáciu čiary do exportu SVG</string>
   <string name="pref_kml_stations_title">KML stanice</string>
   <string name="pref_kml_stations_summary">Pridať stanice do exportu KML</string>
-  <string name="pref_kml_splays_title">Spusť KML</string>
-  <string name="pref_kml_splays_summary">Spúšťa sa\'export KML</string>
+  <string name="pref_kml_splays_title">KML pomocné zamerania</string>
+  <string name="pref_kml_splays_summary">Pridať pomocné zamerania do KML exportu</string>
 
   <string name="pref_sock_type_title">Zásuvka</string>
   <string name="pref_sock_type_summary">Vytvorte zásuvku</string>
@@ -994,24 +994,21 @@
   <string name="pref_min_shift_message">Citlivosť na pohyb</string>
   <string name="pref_pointing_title">Polomer polôh</string>
   <string name="pref_pointing_message">Polomer pre rozoznanie objektov pri náklepe</string>
-  <string name="pref_dash_splay_title">Súdržnosť šrafovania s rozprašovaním</string>
-  <string name="pref_dash_splay_message">Splay sú prepojené medzi plánom a profilom</string>
-  <string name="pref_vert_splay_title">Prahová hodnota rozptýleného bodu</string>
+  <string name="pref_dash_splay_title">Pomocné zameriavanie mriežkovej koherencie</string>
+  <string name="pref_dash_splay_message">Pomocné zamerania mriežkovania koherentne medzi plánom a profilom</string>
+  <string name="pref_vert_splay_title">Prahová hodnota pomocného zamerania</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Soglia clino splay tratteggiati</string -->
-  <string name="pref_vert_splay_message">Splash sklon nad prahom sú prerušené</string>
-  <string name="pref_horiz_splay_title">Prahová šírka azimutu</string>
-  <string name="pref_horiz_splay_message">Spúšte s azimutom väčším ako toto sú prerušené</string>
-  <string name="pref_section_splay_title">Prahový uhol rozptylu</string>
-  <string name="pref_section_splay_message">Bočné náhľady prierezu s uhlom pod touto hranicou sú prerušenée</string>
+  <string name="pref_vert_splay_message">Pomocné merania clino cez prahovú hodnotu sú načtrnuté</string>
+  <string name="pref_horiz_splay_title">Pomocné meranie nanesenia prahová hodnota azimutu</string>
+  <string name="pref_horiz_splay_message">Pomocné meranie azimutu vypnuté, viac ako to sú prerušené</string>
+  <string name="pref_section_splay_title">Pomocné meranie prahovej hodnoty uhla </string>
+  <string name="pref_section_splay_message">Pomocné merania cez tento uhol so sekciou roviny sú prerušené</string>
   <string name="pref_data_backup_title">Automatické exportovanie údajov</string>
   <string name="pref_data_backup_summary">Automatický export údajov (vyžaduje predvolený formát)</string>
   <string name="pref_shared_xsections_title">X-sekcia bola zdieľaná</string>
   <string name="pref_shared_xsections_summary">X-rez do spoločného bodu medzi výkresmi</string>
   <string name="xsections_shared">X-sekcia bola zdieľaná</string>
   <string name="xsections_private">X-sekcia súkromná</string>
-  <!-- TODO string name="pref_reduce_angle_title">Straightening angle</string -->
-  <!-- TODO string name="pref_reduce_angle_summary">Minimal segment-angle straightening lines</string -->
-  <!-- TODO string name="pref_reduce_angle_message">Minimal segment-angle straightening lines</string -->
     
   <string name="pref_survey_stations_title">Stratégia merania</string>
   <string name="pref_survey_stations_summary">Automatické reliéfne základy</string>
@@ -1046,19 +1043,19 @@
   <string name="pref_azimuth_manual_summary">Ručne definujte rozšírenia D / G záberov</string>
 
   <string name="pref_team_title">Tím</string>
-  <string name="pref_team_summary">Meno skupiny jaskyniarov</string>
-  <string name="pref_team_message">Názvy meračov v skupine</string>
+  <string name="pref_team_summary">Prieskumná skupina</string>
+  <string name="pref_team_message">Default prieskumná skupina</string>
 
-  <string name="pref_ethr_title">Uhol vert. sa rozširuje</string>
-  <string name="pref_ethr_summary">Uhol vert. rozšíriť o zošikmenie</string>
-  <string name="pref_ethr_message">Uhol vert. rozšíriť o zošikmenie</string>
-  <string name="pref_vthr_title">Prah vert.</string>
+  <string name="pref_ethr_title">Vertikálna prahová hodnota pomocného merania</string>
+  <string name="pref_ethr_summary">Oblasť vertikálneho rozšírenia (pomocné merania)</string>
+  <string name="pref_ethr_message">Uhol približne 90 pre pomocné meranie vertikálneho rozšírenia [stupňov] </string>
+  <string name="pref_vthr_title">Pomocné meranie </string>
   <string name="pref_vthr_summary">Prah sklonu LRUD / WENS</string>
   <string name="pref_vthr_message">Prah sklonu pre LRUD / WENS</string>
 
-  <string name="pref_plan_vthr_title">Vertikálny prah zošikmenia</string>
-  <!-- UNUSED string name="pref_plan_vthr_summary">soglia verticale per splay in pianta</string -->
-  <string name="pref_plan_vthr_message">Vertikálny prah pre zošikmenie v pláne</string>
+  <string name="pref_plan_vthr_title">Pomocné meranie prahovej hodnoty pôdorysu</string>
+  <!-- UNUSED string name="pref_plan_vthr_summary">Pomocné meranie vertikálnej prahovej hodnoty v pôdoryse</string -->
+  <string name="pref_plan_vthr_message">Skryť pomocné merania s vysokou inklináciou v pôdoryse</string>
   <string name="pref_init_station_title">Počiatočný základ</string>
   <string name="pref_init_station_summary">Predvolená počiatočná referenčná hodnota</string>
   <string name="pref_init_station_message">Predvolená počiatočná referenčná hodnota</string>
@@ -1079,7 +1076,7 @@
   <string name="pref_dxf_scale_title">Výkresová stupnica DXF</string>
   <string name="pref_dxf_scale_summary">Faktor mierky DXF</string>
   <string name="pref_dxf_scale_message">Faktor mierky na export výkresu vo formáte DXF</string>
-  <string name="pref_dxf_blocks_title">spúšťať koncový bod DXF </string>
+  <string name="pref_dxf_blocks_title">DXF pomocné meranie koncových bodov</string>
   <string name="pref_dxf_blocks_summary">Koniec bočných pozorovaní DXF </string>
   <string name="pref_thumbnail_title">Veľkosť miniatúr</string>
   <string name="pref_thumbnail_summary">Veľkosť miniatúry obrázka</string>
@@ -1151,8 +1148,8 @@
   <string name="pref_backup_interval_summary">Minimálny interval medzi 2 zálohami [s]</string>
   <!-- UNUSED string name="pref_xtherion_areas_title">Aree xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Salva le aree in modo xtherion</string -->
-  <string name="pref_therion_splays_title">Prehliadať cez Therion</string>
-  <string name="pref_therion_splays_summary">Pridať riadky na: zobrazenie súborov th2</string>
+  <string name="pref_therion_splays_title">Therion pomocné merania</string>
+  <string name="pref_therion_splays_summary">Pridať riadky u: pomocné riadky do súborov th2</string>
   <string name="pref_autoStations_title">Body stanice Th2</string>
   <string name="pref_autoStations_summary">Pridanie staníc automaticky</string>
   <string name="pref_loopClosure_title">Opakovanie</string>
@@ -1184,8 +1181,8 @@
   <string name="pref_auto_section_pt_title">Body oddielu</string>
   <string name="pref_auto_section_pt_summary">Pridajte bod čiary do riadkov sekcie</string>
 
-  <string name="pref_sketchUsesSplays_title">Sketch splays</string>
-  <string name="pref_sketchUsesSplays_summary">Sketch surface uses splays</string>
+  <string name="pref_sketchUsesSplays_title">Pomocné merania náčrtu</string>
+  <string name="pref_sketchUsesSplays_summary">Náčrtový povrch používa pomocné meranie</string>
   <string name="pref_sketchLineStep_title">Line step</string>
   <string name="pref_sketchLineStep_summary">Distance between line points</string>
   <string name="pref_sketchLineStep_message">Distance between line points</string>
@@ -1204,7 +1201,7 @@
 
   <string name="pref_unit_length_title">Jednotkové dĺžky</string>
   <string name="pref_unit_length_summary">Jednotkové dĺžky</string>
-  <string name="pref_unit_angle_title">Rohové jednotky</string>
+  <string name="pref_unit_angle_title">Rohové jednotky/string>
   <string name="pref_unit_angle_summary">Rohové jednotky</string>
   <string name="pref_unit_location_title">Jednotky pozície</string>
   <string name="pref_unit_location_summary">Jednotky pozície</string>
@@ -1212,12 +1209,12 @@
   <string name="pref_plot_walls_title">AUTOMATICKÉ MOŽNOSTI</string>
   <string name="pref_walls_type_title">Typ stien</string>
   <string name="pref_walls_type_summary">Typ stien</string>
-  <string name="pref_walls_plan_thr_title">Maximálny plán naklonenia max</string>
-  <string name="pref_walls_plan_thr_summary">Maximálny bočný sklon pre rovinné steny</string>
-  <string name="pref_walls_plan_thr_message">Maximálny sklon bočných cieľových stien návrhu [deg]</string>
-  <string name="pref_walls_extended_thr_title">Uhol vyžarovania v úseku</string>
-  <string name="pref_walls_extended_thr_summary">Maximálny sklon rozpery pre priečne steny</string>
-  <string name="pref_walls_extended_thr_message">Maximálna rozteč sklonu pre profilové steny [deg]</string>
+  <string name="pref_walls_plan_thr_title">Plán pomocného merania clino</string>
+  <string name="pref_walls_plan_thr_summary">Maximálne pomocné meranie clino pre plán stien</string>
+  <string name="pref_walls_plan_thr_message">Maximálne pomocné meranie clino pre plán stien [stupne]</string>
+  <string name="pref_walls_extended_thr_title">Pomocné meranie profilu clino</string>
+  <string name="pref_walls_extended_thr_summary">Maximálne pomocné meranie pre profil stien</string>
+  <string name="pref_walls_extended_thr_message">Maximálne pomocné meranie pre profil stien [stupne]</string>
   <string name="pref_walls_xclose_title">Správa priestoru</string>
   <string name="pref_walls_xclose_summary">Minimálna bodová vzdialenosť stien</string>
   <string name="pref_walls_xclose_message">Minimálna bodová vzdialenosť stien [m]</string>
@@ -1259,7 +1256,6 @@
   <string name="pref_log_loc">Polohy GPS</string>
   <string name="pref_log_num">Kompresia dát</string>
   <string name="pref_log_path">Cesta súboru</string>
-  <!-- TODO string name="pref_log_perm">Permissions</string -->
   <string name="pref_log_photo">Foto</string>
   <string name="pref_log_plot">Kresby</string>
   <string name="pref_log_proto">Protokol DistoX</string>
@@ -1297,6 +1293,7 @@
 \nKomentáre, hlásenia chýb, požiadavky: marco.corvi@gmail.com
 \nOriginálny preklad: v0.1b - 10.5.2018 M.Jurečka: jurecka@gmail.com https://www.speleork.sk
 \nAktualizovaný dňa: revizia v0.2 - 13.5.2018 B.Turčina, M.Chlebovec (zdroj prekladu: Taliančina, Nemčina, Angličtina)
+\nAktualizovaný dňa: revizia v0.3 - 18.5.2018 M.Chlebovec (zdroj prekladu: Angličtina)
     </string>
 
   <!-- OK string name="firmware_title">Firmware Updater</string -->
