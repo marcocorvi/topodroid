@@ -398,17 +398,17 @@
     <string name="sensor_comment">komentár</string>
     <!-- TODO string name="insufficient_data">insufficient sensor data</string -->
 
-    <!-- UNUSED string name="shot_clino">clino</string -->
-    <!-- UNUSED string name="shot_compass">bussola</string -->
-    <string name="shot_delete">Odstrániť pohľad?</string>
-    <string name="shots_delete">Odstrániť pohľady?</string>
-    <string name="shot_check">Označiť pohľad ako kontrolný pohľad?</string>
+    <!-- UNUSED string name="shot_clino">zamerať sklon</string -->
+    <!-- UNUSED string name="shot_compass">zamerať kompasom</string -->
+    <string name="shot_delete">Odstrániť zameranie ?</string>
+    <string name="shots_delete">Odstrániť zamerania ?</string>
+    <string name="shot_check">Označiť zameranie, ako kontrolné zameranie ?</string>
     <string name="shot_from">Od</string>
-    <string name="shot_info">Zadajte dáta pohľadu</string>
+    <string name="shot_info">Zadajte ručne pomocné merania</string>
     <!-- UNUSED string name="shot_length">longueur</string -->
     <string name="shot_note">poznámka</string>
-    <string name="shot_not_found">Nenašiel sa pohľad</string>
-    <string name="shot_reverse">reverzne</string>
+    <string name="shot_not_found">Nenašlo sa zameranie</string>
+    <string name="shot_reverse">spätné meranie</string>
     <string name="shot_to">Na</string>
 
     <string name="make_surface">Povrch existuje. Nahradiť ho?</string>
