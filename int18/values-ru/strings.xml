@@ -1025,9 +1025,6 @@
   <string name="pref_reduce_angle_message">Минимальный угол между сегментами для спрямления линии</string>
   <!-- UNUSED string name="pref_list_refresh_title">Обновить список</string -->
   <!-- UNUSED string name="pref_list_refresh_summary">Принудительно обновить список</string -->	
-  <string name="pref_reduce_angle_title">Угол спрямления</string>
-  <string name="pref_reduce_angle_summary">Минимальный угол между сегментами спрямляемых линий</string>
-  <string name="pref_reduce_angle_message">Минимальный угол между сегментами спрямляемых линий</string>	
 	
   <string name="pref_survey_stations_title">Настройки авто-нумерации пикетов</string>
   <string name="pref_survey_stations_summary">Авто нумерация пикетов</string>
