@@ -1007,9 +1007,9 @@
   <string name="pref_shared_xsections_summary">Cortes X em bases compartilhados entre croquis</string>
   <string name="xsections_shared">Cortes X compartilhados</string>
   <string name="xsections_private">Cortes X não compartilhados</string>
-  <!-- TODO string name="pref_reduce_angle_title">Straightening angle</string -->
-  <!-- TODO string name="pref_reduce_angle_summary">Minimal segment-angle straightening lines</string -->
-  <!-- TODO string name="pref_reduce_angle_message">Minimal segment-angle straightening lines</string -->
+  <string name="pref_reduce_angle_title">Ângulo endireitar</string>
+  <string name="pref_reduce_angle_summary">Ângulo mínimo do segmento a endireitar</string>
+  <string name="pref_reduce_angle_message">Ângulo mínimo do segmento a endireitar</string>
 
 
   <string name="pref_survey_stations_title">Regras para bases</string>
@@ -1257,7 +1257,7 @@
   <string name="pref_log_loc">Localização</string>
   <string name="pref_log_num">Redução de dados</string>
   <string name="pref_log_path">Arquivos</string>
-  <!-- TODO string name="pref_log_perm">Permissions</string -->
+  <string name="pref_log_perm">Permissões</string>
   <string name="pref_log_photo">Foto</string>
   <string name="pref_log_plot">Croquis</string>
   <string name="pref_log_proto">Protocolo DistoX</string>
@@ -1288,7 +1288,7 @@
     <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">
 \nTopodroid é um aplicativo Android Open Source para mapeamento de cavernas com DistoX.
-\n\nNenhuma garantia: utilizando o aplicativo, você concorda com o fato que o autor não é responsável por qualquer perda de dados ou outros danos quaisquer.
+\n\nNenhuma garantia: utilizando o aplicativo, você concorda com o fato de que o autor não é responsável por qualquer perda de dados ou outros danos quaisquer.
 \n\nAjuda: menu "Ajuda"
 \nPágina principal: botão MENU
 \nDocumentos: http://sites.google.com/site/speleoapps
@@ -1305,7 +1305,7 @@
 \n[1] Selecionar uma das 2 opções: "Enviar" um novo firmware para a DistoX ou "Baixar" o firmware atual da DistoX para para um arquivo local.
 \n[2] Selecione o arquivo a ser enviado ou baixado. Os arquivos de firmware estão na pasta bin.
 \n[3] Assegure-se de que a versão do firmware seja compatível com a versão do hardware da DistoX.
-\n[4] Colocar a DistoX2 na modalidade bootloader: manter o botão "MAIS ou MENOS" pressionado em quanto liga o Disto X com  a tecla DIST.
+\n[4] Colocar a DistoX2 na modalidade bootloader: manter o botão "MAIS ou MENOS" pressionado em quanto liga o Disto X com a tecla DIST.
 \n[5] Apertar o botão OK.
 \n[6] Confirme para continuar e aguarde até a conclusão do processo.
 \n[7] Desligar a DistoX2 com a tecla CLR.
