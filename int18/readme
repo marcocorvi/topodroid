@@ -72,7 +72,7 @@ The string files are encoded.
 Write the proper encoding in the first line, and use an editor that saves the file with that encoding.
 My suggestion is to use UTF-8 to make life easier for you and me.
 
-Note that the apostrophe (asii 0x27)must be escaped, ie "\'".
+Note that the apostrophe (asii 0x27) must be escaped, ie "\'".
 
 -------------------------------------------------------------------------
 HOW TO MANAGE YOUR TRANSLATION WITH THE SOURCE TREE
