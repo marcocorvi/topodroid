@@ -14,14 +14,14 @@ name-hu agyag
 name-sk hlina
 th_name clay
 orientation no
-color 0xffcc66
+color 0xccff33
 csurvey 6 6 80
 path
-  moveTo -6 -2
-  lineTo -1 -2
-  moveTo 2 -2
-  lineTo 7 -2
-  moveTo -3 2
-  lineTo 3 2  
+  moveTo -8 3
+  lineTo -2 -3
+  moveTo -3 3
+  lineTo 3 -3
+  moveTo 2 3
+  lineTo 8 -3
 endpath
 endsymbol
