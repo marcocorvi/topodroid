@@ -6,7 +6,7 @@
     <!-- TODO string name="user_man_fail">Failed to install user manual translation</string -->
 
     <string name="app_name">TopoDroid</string>
-    <string name="double_back">Opätovným kliknutím na BACK ukončíte aplikáciu</string>
+    <string name="double_back">Opätovným kliknutím na SPAŤ ukončíte aplikáciu</string>
 
     <string name="version_ask">Aktualizácia topodoidu na novšiu verziu. \ Chcete preinštalovať nástroj na kreslenie?</string>
     <!-- TODO string name="symbols_ask">Install drawing tools v.%1$s?\n(Current v.%2$s)</string -->
@@ -290,12 +290,12 @@
     <!-- TODO string name="menu_switch">SWITCH/CLOSE</string -->
     <string name="menu_help">POMOC</string>
     <string name="menu_join_survey">PRIPOJ PLÁN</string> <!-- rilievo cooperativo -->
-    <string name="menu_logs">LOGS</string>
+    <string name="menu_logs">ZÁZNAM</string>
     <string name="menu_manual_calibration">KALIBRÁCIA</string>
-    <string name="menu_options">MOŽNOSTI</string>
+    <string name="menu_options">NASTAVENIA</string>
     <string name="menu_overview">PREHĽAD</string>
     <string name="menu_pair">SPÁROVAŤ</string>
-    <!-- OK string name="menu_palette">PALETTE</string -->
+    <!-- OK string name="menu_palette">PALETA</string -->
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SNÍMAČ</string>
     <string name="menu_scan">SKENUJ</string>
@@ -642,7 +642,7 @@
     <!-- UNUSED string name="btn_surface">surface</string -->
 
     <!-- UNUSED string name="station_next">NEXT</string -->
-    <string name="no_shot_between_stations">Žiadny bod medzi stanicami</string>
+    <string name="no_shot_between_stations">Žiadna zámera medzi bodami</string>
     <string name="few_line_points">Linka má príliš málo bodov</string>
     <string name="line_delete">Odstrániť čiaru</string>
     <string name="flip_shots">Obrátené body</string>
@@ -850,12 +850,12 @@
     <!-- OK ENGLISH string name="title_zoom">Zoom</string -->
 
   <string name="pref_cat_survey">MOŽNOSTI RIEŠENIA</string>
-  <string name="pref_cat_drawing">VÝKRESOVÉ MOŽNOSTI</string>
-  <string name="pref_cat_import_export">MOŽNOSTI IMPORT/EXPORT</string>
-  <string name="pref_cat_calib">MOŽNOSTI KALIBRÁCIE</string>
-  <string name="pref_cat_device">MOŽNOSTI DISTOX</string>
+  <string name="pref_cat_drawing">NASTAVENIE KRESLENIA</string>
+  <string name="pref_cat_import_export">NASTAVENIE IMPORT/EXPORT</string>
+  <string name="pref_cat_calib">NASTAVENIE KALIBRÁCIE</string>
+  <string name="pref_cat_device">NASTAVENIE DISTOX</string>
   <!-- UNUSED string name="pref_cat_sketch">OPZIONI SKETCH 3D</string -->
-  <string name="pref_cat_log">Možnosti log</string>
+  <string name="pref_cat_log">Možnosti záznamu</string>
 
   <string name="pref_locale_title">Jazyk</string>
   <string name="pref_locale_summary">Jazyk</string>
@@ -970,13 +970,13 @@
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Se usare GPSAveraging</string -->
 
-  <string name="pref_plot_screen_title">VÝKRESOVÉ MOŽNOSTI</string>
-  <string name="pref_tool_line_title">MOŽNOSTI LINIEK</string>
-  <string name="pref_tool_point_title">MOŽNOSTI BODOV</string>
-  <string name="pref_location_title">MOŽNOSTI POLOHY</string>
-  <string name="pref_accuracy_title">PRESNOSŤ MOŽNOSTÍ</string>
-  <string name="pref_shot_data_title">POLYGONÁLNE MOŽNOSTI</string>
-  <string name="pref_shot_units_title">MOŽNOSTI JEDNOTKY</string>
+  <string name="pref_plot_screen_title">VÝKRESOVÉ NASTAVENIE</string>
+  <string name="pref_tool_line_title">NASTAVENIE LINIEK</string>
+  <string name="pref_tool_point_title">NASTAVENIE BODOV</string>
+  <string name="pref_location_title">NASTAVENIE POLOHY</string>
+  <string name="pref_accuracy_title">NASTAVENIE PRESNOSTI</string>
+  <string name="pref_shot_data_title">POLYGONÁLNE NASTAVENIE</string>
+  <string name="pref_shot_units_title">NASTAVENIE JEDNOTKY</string>
   <string name="pref_cwd_title">Pracovný adresár</string>
   <!-- UNUSED string name="pref_cwd_summary">Directory di lavoro di TopoDroid</string -->
   <!-- UNUSED string name="pref_cwd_message">Scrivi la directory di lavoro di TopoDroid</string -->
@@ -1044,7 +1044,7 @@
 
   <string name="pref_team_title">Tím</string>
   <string name="pref_team_summary">Prieskumná skupina</string>
-  <string name="pref_team_message">Default prieskumná skupina</string>
+  <string name="pref_team_message">Predvolená prieskumná skupina</string>
 
   <string name="pref_ethr_title">Vertikálna prahová hodnota pomocného merania</string>
   <string name="pref_ethr_summary">Oblasť vertikálneho rozšírenia (pomocné merania)</string>
@@ -1183,21 +1183,21 @@
 
   <string name="pref_sketchUsesSplays_title">Pomocné merania náčrtu</string>
   <string name="pref_sketchUsesSplays_summary">Náčrtový povrch používa pomocné meranie</string>
-  <string name="pref_sketchLineStep_title">Line step</string>
-  <string name="pref_sketchLineStep_summary">Distance between line points</string>
-  <string name="pref_sketchLineStep_message">Distance between line points</string>
-  <string name="pref_sketchBorderStep_title">Border step</string>
-  <string name="pref_sketchBorderStep_summary">Distance between edit-line points</string>
-  <string name="pref_sketchBorderStep_message">Distance between edit-line points</string>
-  <string name="pref_sketchSectionStep_title">Section step</string>
-  <string name="pref_sketchSectionStep_summary">Distance between sections</string>
-  <string name="pref_sketchSectionStep_message">Distance between intermediate sections</string>
-  <string name="pref_sketchDeltaExtrude_title">Extrude delta</string>
-  <string name="pref_sketchDeltaExtrude_summary">Extrude delta</string>
-  <string name="pref_sketchDeltaExtrude_message">Extrude delta</string>
-  <string name="pref_sketchCompassReadings_title">Compass readings</string>
-  <string name="pref_sketchCompassReadings_summary">Number of readings to average</string>
-  <string name="pref_sketchCompassReadings_message">Number of compass readings to average</string>
+  <string name="pref_sketchLineStep_title">Čiarový krok</string>
+  <string name="pref_sketchLineStep_summary">Vzdialenosť medzi čiarami</string>
+  <string name="pref_sketchLineStep_message">Vzdialenosť medzi čiarami</string>
+  <string name="pref_sketchBorderStep_title">Hraničný krok</string>
+  <string name="pref_sketchBorderStep_summary">Vzdialenosť medzi bodmi editovacieho riadku</string>
+  <string name="pref_sketchBorderStep_message">Vzdialenosť medzi bodmi editovacieho riadku</string>
+  <string name="pref_sketchSectionStep_title">Krok sekcie</string>
+  <string name="pref_sketchSectionStep_summary">Vzdialenosť medzi sekciami</string>
+  <string name="pref_sketchSectionStep_message">Vzdialenosť medzi strednými časťami</string>
+  <string name="pref_sketchDeltaExtrude_title">Pretlačte delta</string>
+  <string name="pref_sketchDeltaExtrude_summary">Pretlačte delta</string>
+  <string name="pref_sketchDeltaExtrude_message">Pretlačte delta</string>
+  <string name="pref_sketchCompassReadings_title">Čítania kompasu</string>
+  <string name="pref_sketchCompassReadings_summary">Počet odčítaní do priemeru</string>
+  <string name="pref_sketchCompassReadings_message">Počet čítaní kompasu na priemer</string>
 
   <string name="pref_unit_length_title">Jednotkové dĺžky</string>
   <string name="pref_unit_length_summary">Jednotkové dĺžky</string>
