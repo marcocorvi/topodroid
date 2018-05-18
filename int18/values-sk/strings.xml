@@ -80,9 +80,9 @@
     <!-- TODO string name="calib_reset">Reset DistoX calibration ?</string -->
     <!-- UNUSED string name="calib_saturated_values">Pozor: %1$ nasičeni podatki</string -->
     <string name="algorithm">Algoritmus:</string>
-    <string name="auto">Auto</string>
-    <string name="linear">Lineárne</string>
-    <string name="non_linear">Nelineárne</string>
+    <string name="auto">Automaticky</string>
+    <string name="linear">Lineárne kalibrovanie DistroX</string>
+    <string name="non_linear">Nelineárne kalibrovanie DistroX</string>
     <!-- NO string name="algo_minimum">minimum</string -->
    
     <!-- FIXME string name="device_algo_failed">Neúspešná definícia automatizovaného algoritmu pomocou lineárneho algoritmu</string bad chararcter backslash-u  -->
