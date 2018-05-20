@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- OK string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
-    <string name="no_manual">Не возможно скачать страницы помощи из интернета.</string>
-    <string name="user_man_ok">Установленный перевод руководства</string>
+    <string name="no_manual">Невозможно скачать руководство из интернета.</string>
+    <string name="user_man_ok">Перевод руководства установлен</string>
     <string name="user_man_fail">Не удалось установить перевод руководства</string>
 
     <string name="app_name">TopoDroid</string>
