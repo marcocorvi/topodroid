@@ -79,7 +79,8 @@ class DrawingSurface extends SurfaceView
   static DrawingCommandManager mCommandManager2 = null; 
   static DrawingCommandManager mCommandManager3 = null; 
 
-  ArrayList< String > mSplayStations; // stations where to show splays
+  ArrayList< String > mSplayStationsOn;  // stations where to show splays
+  ArrayList< String > mSplayStationsOff; // stations where not to show splays
 
   public boolean isDrawing() { return isDrawing; }
 
@@ -182,7 +183,8 @@ class DrawingSurface extends SurfaceView
     // mCommandManager1 = new DrawingCommandManager();
     // mCommandManager2 = new DrawingCommandManager();
     commandManager = mCommandManager3;
-    mSplayStations = new ArrayList<>();
+    mSplayStationsOn  = new ArrayList<>();
+    mSplayStationsOff = new ArrayList<>();
   }
 
   // -------------------------------------------------------------------
@@ -336,7 +338,7 @@ class DrawingSurface extends SurfaceView
         mWidth  = canvas.getWidth();
         mHeight = canvas.getHeight();
         canvas.drawColor(0, PorterDuff.Mode.CLEAR);
-        commandManager.executeAll( canvas, mZoomer.zoom(), mSplayStations );
+        commandManager.executeAll( canvas, mZoomer.zoom(), mSplayStationsOn, mSplayStationsOff );
         if ( mPreviewPath != null ) mPreviewPath.draw(canvas, null);
       }
     } finally {
@@ -762,39 +764,48 @@ class DrawingSurface extends SurfaceView
     }
   }
 
-  // void addSplayStation( String station ) 
-  // {
-  //   if ( station == null ) return;
-  //   if ( mSplayStations.contains( station ) ) return;
-  //   mSplayStations.add( station );
-  // }
+  boolean isStationSplaysOn( String st_name )
+  {
+    if ( st_name == null ) return false;
+    return mSplayStationsOn.contains( st_name );
+  }
 
-  // void removeSplayStation( String station ) 
-  // {
-  //   if ( station == null ) return;
-  //   // if ( ! mSplayStations.contains( station ) ) return;
-  //   mSplayStations.remove( station );
-  // }
+  boolean isStationSplaysOff( String st_name )
+  {
+    if ( st_name == null ) return false;
+    return mSplayStationsOff.contains( st_name );
+  }
 
-  void toggleStationSplays( String station ) 
+  void toggleStationSplays( String station, boolean on, boolean off )
   {
     if ( station == null ) return;
-    if ( mSplayStations.contains( station ) ) {
-      mSplayStations.remove( station );
+    setStationSplays( mSplayStationsOn,  station, on );
+    setStationSplays( mSplayStationsOff, station, off );
+  }
+
+  private void setStationSplays( ArrayList<String> splayStations, String station, boolean on )
+  {
+    if ( splayStations.contains( station ) ) {
+      if ( ! on ) splayStations.remove( station );
     } else {
-      mSplayStations.add( station );
+      if ( on ) splayStations.add( station );
     }
   }
 
-  void setStationSplays( String station, boolean on )
+  void hideStationSplays( String station )
   {
     if ( station == null ) return;
-    if ( mSplayStations.contains( station ) ) {
-      if ( ! on ) mSplayStations.remove( station );
-    } else {
-      if ( on ) mSplayStations.add( station );
-    }
+    if ( mSplayStationsOn.contains( station ) ) mSplayStationsOn.remove( station );
+    if ( ! mSplayStationsOff.contains( station ) ) mSplayStationsOff.add( station );
   }
+
+  void showStationSplays( String station )
+  {
+    if ( station == null ) return;
+    if ( mSplayStationsOff.contains( station ) ) mSplayStationsOff.remove( station );
+    if ( ! mSplayStationsOn.contains( station ) ) mSplayStationsOn.add( station );
+  }
+  
   
   void setStationXSections( List<PlotInfo> xsection_plan, List<PlotInfo> xsection_ext, long type2 )
   {

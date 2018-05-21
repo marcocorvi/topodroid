@@ -1447,23 +1447,23 @@ public class DrawingWindow extends ItemDrawer
     switch ( mode ) {
       case 0:
         mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMsplayNone );
-        if ( PlotInfo.isSection( mType ) ) mDrawingSurface.setStationSplays( mTo, false );
-        mDrawingSurface.setStationSplays( mFrom, false );
+        if ( PlotInfo.isSection( mType ) ) mDrawingSurface.hideStationSplays( mTo );
+        mDrawingSurface.hideStationSplays( mFrom );
         break;
       case 1:
         mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMsplayFront );
-        if ( PlotInfo.isSection( mType ) ) mDrawingSurface.setStationSplays( mTo, true );
-        mDrawingSurface.setStationSplays( mFrom, false );
+        if ( PlotInfo.isSection( mType ) ) mDrawingSurface.showStationSplays( mTo );
+        mDrawingSurface.hideStationSplays( mFrom );
         break;
       case 2:
         mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMsplayBoth );
-        if ( PlotInfo.isSection( mType ) ) mDrawingSurface.setStationSplays( mTo, true );
-        mDrawingSurface.setStationSplays( mFrom, true );
+        if ( PlotInfo.isSection( mType ) ) mDrawingSurface.showStationSplays( mTo );
+        mDrawingSurface.showStationSplays( mFrom );
         break;
       case 3:
         mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMsplayBack );
-        if ( PlotInfo.isSection( mType ) ) mDrawingSurface.setStationSplays( mTo, false );
-        mDrawingSurface.setStationSplays( mFrom, true );
+        if ( PlotInfo.isSection( mType ) ) mDrawingSurface.hideStationSplays( mTo );
+        mDrawingSurface.showStationSplays( mFrom );
         break;
     }
   }
@@ -3524,9 +3524,19 @@ public class DrawingWindow extends ItemDrawer
       }
     }
 
-    void toggleStationSplays( String st_name )
+    void toggleStationSplays( String st_name, boolean on, boolean off )
     {
-      mDrawingSurface.toggleStationSplays( st_name );
+      mDrawingSurface.toggleStationSplays( st_name, on, off );
+    }
+
+    boolean isStationSplaysOn( String st_name )
+    {
+      return mDrawingSurface.isStationSplaysOn( st_name );
+    }
+
+    boolean isStationSplaysOff( String st_name )
+    {
+      return mDrawingSurface.isStationSplaysOff( st_name );
     }
 
     void toggleStationHidden( String st_name, boolean is_hidden )

@@ -225,6 +225,7 @@
     <!-- UNUSED string name="hidden_del">显示之前的测量</string -->
     <!-- TODO string name="hidden_show">Show shots beyond station</string -->
     <string name="splays_toggle">辐线测量显示开关</string>
+    <!-- TODO string name="splays_on_off">Splays</string -->
     <!-- TODO string name="splays">splays</string -->
     <!-- TODO string name="fixed">fixed</string -->
     <!-- TODO string name="painted">painted</string -->
@@ -536,6 +537,8 @@
     <!-- TODO string name="button_more"    >More</string -->
     <!-- TODO string name="button_lrud"    >Add LRUD</string -->
     <string name="button_ok"        >同意        </string>
+    <!-- TODO string name="button_off"       >off</string -->
+    <!-- TODO string name="button_on"        >on</string -->
     <string name="button_open"      >打开      </string>
     <string name="button_read"      >读取      </string>
     <!-- UNUSED string name="button_redo"      >Redo      </string -->

@@ -231,6 +231,7 @@
     <!-- UNUSED string name="hidden_del">Pokaži mediano linijo</string -->
     <!-- TODO string name="hidden_show">Show shots beyond station</string -->
     <string name="splays_toggle">Pokaži ali skrij stranske vizure</string>
+    <!-- TODO string name="splays_on_off">Splays</string -->
     <!-- TODO string name="splays">splays</string -->
     <string name="fixed">fiksen</string>
     <string name="painted">barvast</string>
@@ -543,6 +544,8 @@
     <!-- TODO string name="button_more"    >More</string -->
     <!-- TODO string name="button_lrud"    >Add LRUD</string -->
     <!-- OK string name="button_ok"        >OK        </string -->
+    <!-- TODO string name="button_off"       >off</string -->
+    <!-- TODO string name="button_on"        >on</string -->
     <string name="button_open"      >Odpri      </string>
     <string name="button_read"      >Beri     </string>
     <!-- UNUSED string name="button_redo"      >Redo      </string -->

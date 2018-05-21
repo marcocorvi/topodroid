@@ -228,6 +228,7 @@
     <!-- UNUSED string name="hidden_del">Показати нитку ходу до цього пікету</string -->
     <!-- TODO string name="hidden_show">Show shots beyond station</string -->
     <string name="splays_toggle">Показати/приховати бок. заміри</string>
+    <!-- TODO string name="splays_on_off">Splays</string -->
     <!-- TODO string name="splays">splays</string -->
     <string name="fixed">фіксований репер</string>
     <string name="painted">нарисованний</string>
@@ -540,6 +541,8 @@
     <string name="button_more"    >Більше</string>
     <string name="button_lrud"    >Додати LRUD</string>
     <!-- OK string name="button_ok"        >OK        </string -->
+    <!-- TODO string name="button_off"       >off</string -->
+    <!-- TODO string name="button_on"        >on</string -->
     <string name="button_open"      >Відкр     </string>
     <string name="button_read"      >Зчитати   </string>
     <!-- UNUSED string name="button_redo"      >Повторити      </string -->

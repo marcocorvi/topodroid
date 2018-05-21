@@ -226,6 +226,7 @@
     <!-- UNUSED string name="hidden_del">Előző mérések mutatása</string -->
     <!-- TODO string name="hidden_show">Show shots beyond station</string -->
     <string name="splays_toggle">Mutassa a fix pontokat </string>
+    <!-- TODO string name="splays_on_off">Splays</string -->
     <string name="splays">segédpontok</string>
     <string name="fixed">csavarral állandósított</string>
     <string name="painted">felfestett</string>
@@ -538,6 +539,8 @@
     <string name="button_more"    >Több</string>
     <string name="button_lrud"    >BJFL hozzáadása</string>
     <string name="button_ok"        >OK     </string>
+    <!-- TODO string name="button_off"       >off</string -->
+    <!-- TODO string name="button_on"        >on</string -->
     <string name="button_open"      >Megnyit</string>
     <string name="button_read"      >Olvas  </string>
     <!-- UNUSED string name="button_redo"      >Redo      </string -->

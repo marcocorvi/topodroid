@@ -225,6 +225,7 @@
     <!-- UNUSED string name="hidden_del">Zobraziť stredovú čiaru</string -->
     <!-- TODO string name="hidden_show">Zobraziť zábery za stanicami</string -->
     <string name="splays_toggle">Zobraziť alebo skryť bočné pohľady</string>
+    <!-- TODO string name="splays_on_off">Splays</string -->
     <!-- TODO string name="splays">splays</string -->
     <string name="fixed">fixné</string>
     <string name="painted">kreslené</string>
@@ -537,6 +538,8 @@
     <string name="button_more"    >Viac</string>
     <string name="button_lrud"    >Pridať LRUD</string>
     <string name="button_ok"        >OK        </string>
+    <!-- TODO string name="button_off"       >off</string -->
+    <!-- TODO string name="button_on"        >on</string -->
     <string name="button_open"      >Otvoriť     </string>
     <string name="button_read"      >Čítať    </string>
     <!-- UNUSED string name="button_redo"      >Ripeti azione</string -->

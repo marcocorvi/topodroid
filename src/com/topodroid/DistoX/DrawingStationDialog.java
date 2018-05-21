@@ -45,7 +45,8 @@ class DrawingStationDialog extends MyDialog
     private Button mBtnSet;
     private Button mBtnBarrier;
     private Button mBtnHidden;
-    private Button mBtnSplays;
+    private CheckBox mCbSplaysOn;
+    private CheckBox mCbSplaysOff;
 
     private EditText mETnick;
     private Button mBtnXSection;
@@ -100,7 +101,8 @@ class DrawingStationDialog extends MyDialog
 
       mBtnBarrier  = (Button) findViewById(R.id.btn_break );
       mBtnHidden = (Button) findViewById(R.id.btn_hidden );
-      mBtnSplays = (Button) findViewById(R.id.btn_splays );
+      mCbSplaysOn  = (CheckBox) findViewById(R.id.btn_splays_on );
+      mCbSplaysOff = (CheckBox) findViewById(R.id.btn_splays_off );
       mBtnOK     = (Button) findViewById(R.id.btn_ok);
       mBtnSet    = (Button) findViewById(R.id.btn_set);
       mBtnCancel = (Button) findViewById(R.id.btn_cancel);
@@ -124,7 +126,10 @@ class DrawingStationDialog extends MyDialog
         mHiddenLabel.setVisibility( View.GONE );
         mLabel.setVisibility( View.GONE );
         ((TextView)findViewById(R.id.station_set)).setVisibility( View.GONE );
-        mBtnSplays.setOnClickListener( this );
+        mCbSplaysOn.setOnClickListener( this );
+        mCbSplaysOff.setOnClickListener( this );
+	mCbSplaysOn.setChecked( mParent.isStationSplaysOn( mStationName ) );
+	mCbSplaysOff.setChecked( mParent.isStationSplaysOff( mStationName ) );
 
         mETnick.setVisibility( View.GONE );
         mBtnXSection.setVisibility( View.GONE );
@@ -145,7 +150,10 @@ class DrawingStationDialog extends MyDialog
           mBtnOK.setOnClickListener( this );
         }
         mBtnSet.setOnClickListener( this );
-        mBtnSplays.setOnClickListener( this );
+        mCbSplaysOn.setOnClickListener( this );
+        mCbSplaysOff.setOnClickListener( this );
+	mCbSplaysOn.setChecked( mParent.isStationSplaysOn( mStationName ) );
+	mCbSplaysOff.setChecked( mParent.isStationSplaysOff( mStationName ) );
     
         if ( TDLevel.overAdvanced ) {
           mBtnXDelete.setOnClickListener( this );
@@ -279,8 +287,13 @@ class DrawingStationDialog extends MyDialog
         mParent.toggleStationBarrier( mStationName, mIsBarrier );
       } else if ( b == mBtnHidden ) {
         mParent.toggleStationHidden( mStationName, mIsHidden );
-      } else if ( b == mBtnSplays ) {
-        mParent.toggleStationSplays( mStationName );
+      } else if ( b == mCbSplaysOn ) {
+	mCbSplaysOff.setChecked( false );
+        mParent.toggleStationSplays( mStationName, mCbSplaysOn.isChecked(), false );
+      } else if ( b == mCbSplaysOff ) {
+	mCbSplaysOn.setChecked( false );
+        mParent.toggleStationSplays( mStationName, false, mCbSplaysOff.isChecked() );
+
       } else if ( b == mBtnXSection ) {
         nick = (mETnick.getText() != null)? mETnick.getText().toString() : null;
         // if ( nick.length() == 0 ) {

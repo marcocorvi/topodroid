@@ -226,6 +226,7 @@
     <!-- UNUSED string name="hidden_del">Показване на предишни репери</string -->
     <string name="hidden_show">Показване на измервания след репер</string>
     <string name="splays_toggle">Показване/скриване на странични изм.</string>
+    <!-- TODO string name="splays_on_off">Splays</string -->
     <string name="splays">Странични изм.</string>
     <string name="fixed">Фиксиран</string>
     <string name="painted">Боядисан</string>
@@ -538,6 +539,8 @@
     <string name="button_more"    >Още</string>
     <string name="button_lrud"    >Добавяне на ЛДГД</string>
     <string name="button_ok"        >OK        </string>
+    <!-- TODO string name="button_off"       >off</string -->
+    <!-- TODO string name="button_on"        >on</string -->
     <string name="button_open"      >Отваряне  </string>
     <string name="button_read"      >Четене    </string>
     <!-- UNUSED string name="button_redo"      >Redo      </string -->

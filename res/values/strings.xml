@@ -227,6 +227,7 @@
     <!-- UNUSED string name="hidden_del">Show previous shots</string -->
     <string name="hidden_show">Show shots beyond station</string>
     <string name="splays_toggle">Toggle splays display</string>
+    <string name="splays_on_off">Splays</string>
     <string name="splays">splays</string>
     <string name="fixed">fixed</string>
     <string name="painted">painted</string>
@@ -542,6 +543,8 @@
     <string name="button_more"    >More</string>
     <string name="button_lrud"    >+ LRUD</string>
     <string name="button_ok"        >OK        </string>
+    <string name="button_off"       >off</string>
+    <string name="button_on"        >on</string>
     <string name="button_open"      >Open      </string>
     <string name="button_read"      >Read      </string>
     <!-- UNUSED string name="button_redo"      >Redo      </string -->

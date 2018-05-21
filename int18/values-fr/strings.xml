@@ -226,6 +226,7 @@
 <!-- UNUSED string name="hidden_del">Afficher les visées précédentes</string -->
 <string name="hidden_show">Montrer les visées après la station</string>
 <string name="splays_toggle">Basculer les visées d\'habillage - Splays</string>
+    <!-- TODO string name="splays_on_off">Splays</string -->
 <string name="splays">Visées d\'habillage</string>
 <string name="fixed">fixé</string>
 <string name="painted">dessiné</string>
@@ -537,6 +538,8 @@
     <string name="button_more"    >Plus</string>
     <string name="button_lrud"    >Ajouter GDHB LRUD</string>
     <string name="button_ok"        >OK        </string>
+    <!-- TODO string name="button_off"       >off</string -->
+    <!-- TODO string name="button_on"        >on</string -->
     <string name="button_open"      >Ouvrir    </string>
     <string name="button_read"      >Lecture      </string>
     <!-- UNUSED string name="button_redo"      >Redo      </string -->

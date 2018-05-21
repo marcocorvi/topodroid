@@ -1420,17 +1420,19 @@ class DrawingCommandManager
     // checkLines();
   }
 
-  private boolean showStationSplays( DrawingPath p, ArrayList<String> splay_stations ) 
+  // check whether an array of stations name contains the FROM station of the path's block
+  // used to decide whether to display splays
+  private boolean containsStation( DrawingPath p, ArrayList<String> stations ) 
   {
     DBlock blk = p.mBlock;
     if ( blk == null ) return false;
     String station = blk.mFrom;
     if ( station == null || station.length() == 0 ) return false;
-    return splay_stations.contains( station );
+    return stations.contains( station );
   }
 
   // N.B. doneHandler is not used
-  void executeAll( Canvas canvas, float zoom, ArrayList<String> splay_stations )
+  void executeAll( Canvas canvas, float zoom, ArrayList<String> splays_on, ArrayList<String> splays_off )
   {
     if ( canvas == null ) {
       TDLog.Error( "drawing executeAll: null canvas");
@@ -1511,13 +1513,15 @@ class DrawingCommandManager
       }
     }
 
-    if ( mSplaysStack != null && ( splays || splay_stations.size() > 0 ) ) {
+    if ( mSplaysStack != null && ( splays || splays_on.size() > 0 ) ) {
       synchronized( mSplaysStack ) {
         final Iterator i = mSplaysStack.iterator();
         while ( i.hasNext() ){
           final DrawingPath path = (DrawingPath) i.next();
-          if ( splays || showStationSplays( path, splay_stations ) ) {
-            path.draw( canvas, mMatrix, mScale, mBBox );
+          if ( splays ) {
+	    if ( ! containsStation( path, splays_off ) ) path.draw( canvas, mMatrix, mScale, mBBox );
+	    } else {
+            if ( containsStation( path, splays_on ) ) path.draw( canvas, mMatrix, mScale, mBBox );
           }
         }
       }

@@ -231,6 +231,7 @@
     <!-- UNUSED string name="hidden_del">Vorherige Messungen anzeigen</string -->
     <string name="hidden_show">Messungen nach der Station anzeigen</string>
     <string name="splays_toggle">Hilfszüge ein/ausblenden</string>
+    <!-- TODO string name="splays_on_off">Splays</string -->
     <string name="splays">Hilfszüge</string>
     <string name="fixed">fixiert</string>
     <string name="painted">gezeichnet</string>
@@ -555,6 +556,8 @@
     <string name="button_more"    >Mehr</string>
     <string name="button_lrud"    >LRUD hinzufügen</string>
     <string name="button_ok"        >OK        </string>
+    <!-- TODO string name="button_off"       >off</string -->
+    <!-- TODO string name="button_on"        >on</string -->
     <string name="button_open"      >Öffnen     </string>
     <string name="button_read"      >Lesen      </string>
     <!-- UNUSED string name="button_redo"      >Nochmals      </string -->

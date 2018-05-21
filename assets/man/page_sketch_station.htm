@@ -6,7 +6,7 @@ This dialog has these actions:
 <ul>
 <li>make the station "active", ie, continue the survey from this station.</li>
 <li>show the hidden midline (if applicable)</li>
-<li>toggle the display of the splay shots at the station</li>
+<li>force showing/hiding the display of the splay shots at the station</li>
 <li>at-station x-section buttons</li>
 </ul>
 
@@ -25,6 +25,13 @@ The display of the midline can be limited through the property edit dialog of le
 When the midline beyond the station is hidden, there is a button to revert and show it in the station edit dialog.<br><p>
 
 <img src="hiding_stations.png" alt="hiding stations"><br><p>
+
+<b>Station splays</b><br>
+The display of the station splays can be forces to override the global setting of the sketch.
+If showing is forced, the splays are shown even when they are hidden globally.
+If hiding is forced, the splays are not shown even when they are displayed globally.<br>
+This flag does NOT affect the edit-selection of splays; the selection green dots are always displayed
+according to the global setting.<br><p>
 
 <b>At-station x-section</b><br>
 X-sections can be created at stations.
