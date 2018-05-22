@@ -254,7 +254,7 @@
     <string name="no_location_data">Žiadne informácie o pozícii</string>
     <string name="no_paired_device">Ziadne spárované zariadenie DistoX \nSpustite skenovanie a spárujete DistoX.</string>
     <string name="no_photos">Plán bez fotografie</string>
-    <string name="no_plots">Polygon bez náčrtu /nPoužite tlačidlo Pridať na vytvorenie</string>
+    <string name="no_plots">Polygon bez náčrtu /Použite tlačidlo Pridať na vytvorenie</string>
     <!-- TODO string name="no_profile_overview">No overview for projected profiles</string -->
     <string name="no_proj4">Proj4 nie je nainštalovaný</string>
     <string name="no_sensors">Plán nemá žiadne meranie</string>
