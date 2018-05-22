@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- OK string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
-    <string name="no_manual">Не возможно скачать страницы помощи из интернета.</string>
-    <string name="user_man_ok">Установленный перевод руководства</string>
+    <string name="no_manual">Невозможно скачать руководство из интернета.</string>
+    <string name="user_man_ok">Перевод руководства установлен</string>
     <string name="user_man_fail">Не удалось установить перевод руководства</string>
 
     <string name="app_name">TopoDroid</string>
@@ -884,8 +884,8 @@
   <string name="pref_mkeyboard_summary">Вкл/Выкл сторонние клавиатуры </string>
   <string name="pref_no_cursor_title">Без курсора</string>
   <string name="pref_no_cursor_summary">Отключить отображение курсора для сторонних клавиатур.</string>
-  <string name="pref_local_help_title">Руководство на Русском</string>
-  <string name="pref_local_help_summary">Включить руководство пользователя на Русском языке</string>
+  <string name="pref_local_help_title">Язык руководства пользователя</string>
+  <string name="pref_local_help_summary">Переключить язык руководства пользователя</string>
   <string name="pref_cosurvey_title">Совместная съёмка</string>
   <string name="pref_cosurvey_summary">Вкл/Выкл Совместную съёмку</string>
   <string name="pref_export_shots_title">Формат экспорта данных</string>
