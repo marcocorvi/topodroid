@@ -852,7 +852,7 @@
     <string name="title_calib_export">Exportovať kalibráciu ako </string>
     <!-- OK ENGLISH string name="title_zoom">Zoom</string -->
 
-  <string name="pref_cat_survey">MOŽNOSTI RIEŠENIA</string>
+  <string name="pref_cat_survey">PODROBNÉ NASTAVENIA</string>
   <string name="pref_cat_drawing">NASTAVENIE KRESLENIA</string>
   <string name="pref_cat_import_export">NASTAVENIE IMPORT/EXPORT</string>
   <string name="pref_cat_calib">NASTAVENIE KALIBRÁCIE</string>
