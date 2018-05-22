@@ -554,7 +554,7 @@ class DrawingCommandManager
   {
     SelectionSet sel = new SelectionSet();
     float erase_radius = TDSetting.mCloseCutoff + erase_size / zoom;
-    mSelection.selectAt( sel, x, y, erase_radius, Drawing.FILTER_ALL, false, false, false );
+    mSelection.selectAt( sel, x, y, erase_radius, Drawing.FILTER_ALL, false, false, false, null, null );
     int ret = 0;
     if ( sel.size() > 0 ) {
       synchronized( mCurrentStack ) {
@@ -1613,8 +1613,15 @@ class DrawingCommandManager
                 || ( type == DrawingPath.DRAWING_PATH_LINE && ! slines ) 
                 || ( type == DrawingPath.DRAWING_PATH_AREA && ! sareas ) 
                 || ( type == DrawingPath.DRAWING_PATH_FIXED && ! (legs && sshots) )
-                || ( type == DrawingPath.DRAWING_PATH_SPLAY && ! (splays && sshots) )
+                // || ( type == DrawingPath.DRAWING_PATH_SPLAY && ! (splays && sshots) )
                 || ( type == DrawingPath.DRAWING_PATH_NAME  && ! (sstations) ) ) continue;
+	      if ( type == DrawingPath.DRAWING_PATH_SPLAY ) {
+                if ( splays ) {
+                  if ( containsStation( pt.mItem, splays_off ) ) continue;
+		} else {
+                  if ( ! containsStation( pt.mItem, splays_on ) ) continue;
+		}
+	      }
               float x, y;
               if ( pt.mPoint != null ) { // line-point
                 x = pt.mPoint.x;
@@ -1915,7 +1922,7 @@ class DrawingCommandManager
   }
 
     
-  SelectionSet getItemsAt( float x, float y, float zoom, int mode, float size )
+  SelectionSet getItemsAt( float x, float y, float zoom, int mode, float size, ArrayList<String> splays_on, ArrayList<String> splays_off )
   {
     float radius = TDSetting.mCloseCutoff + size/zoom; // TDSetting.mSelectness / zoom;
     // Log.v( "DistoX", "getItemAt " + x + " " + y + " zoom " + zoom + " mode " + mode + " size " + size + " " + radius );
@@ -1924,7 +1931,7 @@ class DrawingCommandManager
     boolean stations = (mDisplayMode & DisplayMode.DISPLAY_STATION ) != 0;
     synchronized ( TDPath.mSelectedLock ) {
       mSelected.clear();
-      mSelection.selectAt( mSelected, x, y, radius, mode, legs, splays, stations );
+      mSelection.selectAt( mSelected, x, y, radius, mode, legs, splays, stations, splays_on, splays_off );
       if ( mSelected.mPoints.size() > 0 ) {
         // Log.v("DistoX", "seleceted " + mSelected.mPoints.size() + " points " );
         mSelected.nextHotItem();

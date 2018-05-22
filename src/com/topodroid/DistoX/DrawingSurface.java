@@ -533,7 +533,7 @@ class DrawingSurface extends SurfaceView
 
   SelectionSet getItemsAt( float x, float y, float zoom, int mode, float size ) 
   { 
-    return commandManager.getItemsAt( x, y, zoom, mode, size );
+    return commandManager.getItemsAt( x, y, zoom, mode, size, mSplayStationsOn, mSplayStationsOff );
   }
 
   // set line range at the hot-item
