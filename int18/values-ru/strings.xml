@@ -228,7 +228,7 @@
     <!-- UNUSED string name="hidden_del">Показать нитку хода до этого пикета</string -->
     <string name="hidden_show">Показать нитку хода после этого пикета</string>
     <string name="splays_toggle">Показать/скрыть бок. замеры</string>
-    <!-- TODO string name="splays_on_off">Splays</string -->
+    <string name="splays_on_off">Вкл/Выкл бок. замер</string>
     <string name="splays">бок. замеры</string>
     <string name="fixed">фиксированный репер</string>
     <string name="painted">нарисованный</string>
@@ -542,8 +542,8 @@
     <string name="button_more"    >Ещё</string>
     <string name="button_lrud"    >Добавить ЛПВН</string>
     <!-- OK string name="button_ok"        >OK        </string -->
-    <!-- TODO string name="button_off"       >off</string -->
-    <!-- TODO string name="button_on"        >on</string -->
+    <string name="button_off"       >выкл</string>
+    <string name="button_on"        >вкл</string>
     <string name="button_open"      >Откр      </string>
     <string name="button_read"      >Считать   </string>
     <!-- UNUSED string name="button_redo"      >Повторить      </string -->
