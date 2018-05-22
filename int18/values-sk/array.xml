@@ -64,7 +64,7 @@
   </string-array>
 
   <string-array name="extraButtons">
-     <item name="basic">základné</item>
+     <item name="basic">Základné</item>
      <item name="normal">Normálne</item>
      <item name="advanced">Pokročilé</item>
      <item name="expert">Expertné</item>
