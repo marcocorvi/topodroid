@@ -405,7 +405,7 @@
     <string name="shots_delete">Odstrániť zamerania ?</string>
     <string name="shot_check">Označiť zameranie, ako kontrolné zameranie ?</string>
     <string name="shot_from">Od</string>
-    <string name="shot_info">Zadajte ručne pomocné merania</string>
+    <string name="shot_info">Zadajte pomocné merania</string>
     <!-- UNUSED string name="shot_length">longueur</string -->
     <string name="shot_note">poznámka</string>
     <string name="shot_not_found">Nenašlo sa zameranie</string>
