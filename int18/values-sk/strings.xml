@@ -844,7 +844,7 @@
 
     <string name="title_stats">Štatistika</string>
     <string name="title_survey">Informácie o relevantnosti</string>
-    <string name="title_survey_new">Nový výpis</string>
+    <string name="title_survey_new">Nové meranie</string>
     <string name="title_survey_export">Export správy ako </string>
     <string name="title_survey_rename">Premenujte prehľad ako</string>
     <string name="title_plot_rename">Premenujte výkres</string>
@@ -1013,7 +1013,7 @@
   <string name="xsections_shared">X-sekcia bola zdieľaná</string>
   <string name="xsections_private">Priečne rezy X-súkromné</string>
     
-  <string name="pref_survey_stations_title">Stratégia merania</string>
+  <string name="pref_survey_stations_title">Metóda merania</string>
   <string name="pref_survey_stations_summary">Zhrnutie bodového priekumu</string>
   <string name="pref_accel_thr_title">Tolerancia zrýchlenia</string>
   <string name="pref_accel_thr_summary">Tolerancia hodnôt zrýchlenia</string>
