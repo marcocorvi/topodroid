@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid calibration coefficient computation
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -22,10 +22,10 @@ class CalibComputer extends AsyncTask< String, Integer, Integer >
   static final int CALIB_RESET_GROUPS   = 2;
   static final int CALIB_RESET_AND_COMPUTE_GROUPS = 3;
 
-  private GMActivity mParent; // FIXME LEAK
+  private final GMActivity mParent; // FIXME LEAK
   private static CalibComputer running = null;
-  private long mStartId;
-  private int mJob;
+  private final long mStartId;
+  private final int mJob;
 
   CalibComputer( GMActivity parent, long start, int job )
   {

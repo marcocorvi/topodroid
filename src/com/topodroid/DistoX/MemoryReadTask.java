@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid DistoX memory read task
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -28,10 +28,10 @@ import android.os.AsyncTask;
 
 class MemoryReadTask extends AsyncTask<Void, Integer, Integer>
 {
-  TopoDroidApp   mApp;
+  private final TopoDroidApp   mApp;
   private IMemoryDialog  mDialog;
-  int mType; // DistoX type
-  String mAddress;
+  private int mType; // DistoX type
+  private String mAddress;
   private int[] mHT;
   private String mDumpfile = null;
   private ArrayList< MemoryOctet > mMemory;

@@ -118,11 +118,11 @@
      <item name="grid3">Triple cuadricula</item>
   </string-array>
 
-  <string-array name="sectionStations">
+  <!-- UNUSED string-array name="sectionStations">
      <item name="both">Ambos</item>
      <item name="from">Detrás</item>
      <item name="to">Delante</item>
-  </string-array>
+  </string-array -->
 
   <!-- UNUSED string-array name="deviceType">
      <item name="none">Nada</item>

@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid photo comment dialog (to enter the comment of the photo)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -23,7 +23,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 // import android.view.View.OnKeyListener;
 // import android.view.KeyEvent;
 
@@ -32,7 +32,7 @@ import android.view.ViewGroup.LayoutParams;
 class PhotoCommentDialog extends MyDialog
                          implements View.OnClickListener
 {
-  private ShotWindow mParent;
+  private final ShotWindow mParent;
 
   private EditText mETcomment;     // photo comment
   private Button   mButtonOK;

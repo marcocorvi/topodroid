@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid centerline computation
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Stack;
 import java.util.Locale;
 
-import android.util.Log;
+// import android.util.Log;
 
 class DistoXNum
 {

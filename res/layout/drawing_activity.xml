@@ -8,7 +8,7 @@
   style="@style/base_padding"
 -->
   
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
      android:orientation="vertical"
      android:layout_width="match_parent"
      android:layout_height="match_parent"
@@ -17,6 +17,7 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:clickable="true"
+      android:focusable="true"
       android:id="@+id/drawingSurface"
       />
     <LinearLayout

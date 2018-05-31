@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid survey sensor listing
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -92,7 +92,7 @@ public class SensorListActivity extends Activity
     }
   }
 
-  public void updateSensorList( List< SensorInfo > list )
+  private void updateSensorList( List< SensorInfo > list )
   {
     // TDLog.Log(TDLog.LOG_SENSOR, "updateSensorList size " + list.size() );
     mDataAdapter.clear();
@@ -116,7 +116,7 @@ public class SensorListActivity extends Activity
     startSensorDialog( (TextView)view, position );
   }
 
-  void startSensorDialog( TextView tv, int pos )
+  private void startSensorDialog( TextView tv, int pos )
   {
      mSaveSensor = mDataAdapter.get(pos);
      (new SensorEditDialog( this, this, mSaveSensor )).show();

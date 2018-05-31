@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid activity level(s)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -16,12 +16,12 @@ import android.provider.Settings.Secure;
 
 class TDLevel
 {
-  static final int BASIC    = 0;
-  static final int NORMAL   = 1;
-  static final int ADVANCED = 2;
-  static final int EXPERT   = 3;
-  static final int TESTER   = 4;
-  static final int COMPLETE = 5;
+  static final private int BASIC    = 0;
+  static final private int NORMAL   = 1;
+  static final private int ADVANCED = 2;
+  static final private int EXPERT   = 3;
+  // static final private int TESTER   = 4;
+  // static final private int COMPLETE = 5;
 
   static int mLevel = 1; // activity level
 

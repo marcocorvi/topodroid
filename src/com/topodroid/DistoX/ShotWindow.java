@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid survey shots management
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -84,13 +84,13 @@ import android.widget.Toast;
 import android.provider.MediaStore;
 import android.graphics.Bitmap;
 // import android.graphics.Bitmap.CompressFormat;
-import android.graphics.BitmapFactory;
+// import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 // import android.graphics.Paint.FontMetrics;
 
 import android.net.Uri;
 
-import android.util.Log;
+// import android.util.Log;
 
 public class ShotWindow extends Activity
                           implements OnItemClickListener
@@ -110,7 +110,7 @@ public class ShotWindow extends Activity
 
   private DataHelper mApp_mData;
 
-  private static int izons[] = {
+  private static final int izons[] = {
                         R.drawable.iz_download,
                         R.drawable.iz_bt,
                         R.drawable.iz_mode,
@@ -123,7 +123,7 @@ public class ShotWindow extends Activity
 			R.drawable.iz_empty
                       };
 
-  private static int izonsno[] = {
+  private static final int izonsno[] = {
                         0,
                         0,
                         0,
@@ -133,7 +133,7 @@ public class ShotWindow extends Activity
                         0
                       };
 
-  private static int izonsF[] = {
+  private static final int izonsF[] = {
                         R.drawable.iz_left,
                         R.drawable.iz_flip,
                         R.drawable.iz_right,
@@ -144,7 +144,7 @@ public class ShotWindow extends Activity
 			R.drawable.iz_empty
                       };
 
-  private static int menus[] = {
+  private static final int menus[] = {
                         R.string.menu_close,
                         R.string.menu_survey,
                         R.string.menu_recover,
@@ -156,7 +156,7 @@ public class ShotWindow extends Activity
                         R.string.menu_help
                      };
 
-  private static int help_icons[] = {
+  private static final int help_icons[] = {
                           R.string.help_download,
                           R.string.help_remote,
                           R.string.help_display,
@@ -167,7 +167,7 @@ public class ShotWindow extends Activity
                           R.string.help_search,
                           R.string.help_azimuth,
                         };
-   private static int help_menus[] = {
+   private static final int help_menus[] = {
                           R.string.help_close,
                           R.string.help_survey_info,
                           R.string.help_undelete,
@@ -192,10 +192,10 @@ public class ShotWindow extends Activity
   // private Bundle mSavedState = null;
   // long mSecondLastShotId = 0L;
   // long mLastShotId;
-  String mRecentPlot     = null;
+  private String mRecentPlot     = null;
   long   mRecentPlotType = PlotInfo.PLOT_PLAN;
 
-  int mButtonSize = 42;
+  private int mButtonSize = 42;
   private Button[] mButton1;
   private int mNrButton1 = 0;
 
@@ -218,10 +218,10 @@ public class ShotWindow extends Activity
   private int mNextPos  = 0;   // next shot entry position
   // private TextView mSaveTextView = null;
 
-  static long    mSensorId;
-  static long    mPhotoId;
-  static String  mComment;
-  static long    mShotId;   // photo/sensor shot id
+  private static long    mSensorId;
+  private static long    mPhotoId;
+  private static String  mComment;
+  private static long    mShotId;   // photo/sensor shot id
   boolean mOnOpenDialog = false;
 
   // ConnHandler mHandler;
@@ -335,8 +335,8 @@ public class ShotWindow extends Activity
     sb.append( mApp.getConnectionStateTitleStr() );
     sb.append( mApp.mySurvey );
 
+    setTitleColor( TDSetting.mTitleColor );
     mActivity.setTitle( sb.toString() );
-    // FIXME setTitleColor( TDColor.TITLE_NORMAL );
   }
 
   boolean isCurrentStationName( String st ) { return mApp.isCurrentStationName( st ); }
@@ -843,31 +843,31 @@ public class ShotWindow extends Activity
 
   // ---------------------------------------------------------------
   // private Button mButtonHelp;
-  HorizontalListView mListView;
-  HorizontalButtonView mButtonView1;
+  private HorizontalListView mListView;
+  private HorizontalButtonView mButtonView1;
   // HorizontalListView mFootList;
-  HorizontalButtonView mFooterView;
-  ListView   mMenu = null;
-  Button     mImage;
+  private HorizontalButtonView mFooterView;
+  private ListView   mMenu = null;
+  private Button     mImage;
   // HOVER
   // MyMenuAdapter mMenuAdapter;
-  ArrayAdapter< String > mMenuAdapter;
-  boolean onMenu = false;
+  private ArrayAdapter< String > mMenuAdapter;
+  private boolean onMenu = false;
 
-  BitmapDrawable mBMbluetooth;
-  BitmapDrawable mBMbluetooth_no;
-  BitmapDrawable mBMdownload;
-  BitmapDrawable mBMdownload_on;
-  BitmapDrawable mBMdownload_wait;
-  BitmapDrawable mBMdownload_no;
+  private BitmapDrawable mBMbluetooth;
+  private BitmapDrawable mBMbluetooth_no;
+  private BitmapDrawable mBMdownload;
+  private BitmapDrawable mBMdownload_on;
+  private BitmapDrawable mBMdownload_wait;
+  private BitmapDrawable mBMdownload_no;
   // BitmapDrawable mBMadd;
-  BitmapDrawable mBMplot;
+  private BitmapDrawable mBMplot;
   // Bitmap mBMdial;
   // Bitmap mBMdial_transp;
-  MyTurnBitmap mDialBitmap;
-  BitmapDrawable mBMplot_no;
-  BitmapDrawable mBMleft;
-  BitmapDrawable mBMright;
+  private MyTurnBitmap mDialBitmap;
+  private BitmapDrawable mBMplot_no;
+  private BitmapDrawable mBMleft;
+  private BitmapDrawable mBMright;
 
   // void refreshList()
   // {
@@ -1038,11 +1038,10 @@ public class ShotWindow extends Activity
   {
     super.onResume();
     mApp.resetLocale();
-    // Log.v("DistoX", "ShotWindow onResume()" );
 
     // FIXME NOTIFY register ILister
     // if ( mApp.mComm != null ) { mApp.mComm.resume(); }
-    // Log.v( "DistoX", "Shot Activity onResume()" );
+    // Log.v( "DistoX", "Shot Activity on Resume()" );
     
     restoreInstanceFromData();
     updateDisplay( );

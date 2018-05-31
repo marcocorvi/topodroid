@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid sketch line section dialog 
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -45,13 +45,13 @@ class DrawingLineSectionDialog extends MyDialog
   // private TextView mTVtype;
   private TextView mTVoptions;
   // private CheckBox mReversed;
-  String mId;
+  private String mId;
   private PlotInfo mPlotInfo;
-  String  mFrom;
-  String  mTo;
+  private String  mFrom;
+  private String  mTo;
   private String  mNick;
-  float   mAzimuth;
-  float   mClino;
+  private float   mAzimuth;
+  private float   mClino;
   private int mOrientation = 0;
 
   // private Button   mBtnFoto;
@@ -124,7 +124,7 @@ class DrawingLineSectionDialog extends MyDialog
               BrushManager.mLineLib.getSymbolThName( mLine.mLineType ) ) + " " + mFrom + " " + mTo );
 
     mTVoptions = (TextView) findViewById( R.id.line_options );
-    mTVoptions.setText( "ID " + mId );
+    mTVoptions.setText( String.format( mContext.getResources().getString( R.string.fmt_id ), mId ) );
 
     TextView tv_azimuth = (TextView) findViewById( R.id.line_azimuth );
     TextView tv_date    = (TextView) findViewById( R.id.line_date );

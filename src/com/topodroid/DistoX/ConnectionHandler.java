@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid lister interface
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -31,7 +31,7 @@ class ConnectionHandler extends Handler
 {
    private SyncService mSyncService;
 
-   long mSID; // survey id for this connection
+  private long mSID; // survey id for this connection
    private byte mSendCounter;  // send counter
    private byte mRecvCounter;  // recv counter must be equal to the peer send counter
                        // it is increased after the ack
@@ -605,8 +605,8 @@ class ConnectionHandler extends Handler
   // need a thread to empty the queue and write to the SyncService connected thread
   // incoming messages are handled by this class directly
 
-  static private int SLEEP_DEQUE =  100;
-  static private int SLEEP_EMPTY = 1000;
+  static final private int SLEEP_DEQUE =  100;
+  static final private int SLEEP_EMPTY = 1000;
 
   private class SendThread extends Thread
   {

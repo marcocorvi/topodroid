@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid-DistoX BlueTooth communication 
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -22,7 +22,7 @@ import android.os.Message;
 // import android.content.IntentFilter;
 // import android.content.BroadcastReceiver;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 // import android.util.Log;
 
 class TopoDroidComm
@@ -211,7 +211,7 @@ class TopoDroidComm
       // mApp.notifyConnState( );
 
     }
-  };
+  }
 
   protected RfcommThread mRfcommThread;
 
@@ -341,4 +341,4 @@ class TopoDroidComm
 
   int uploadFirmware( String address, String filepath ) { return 0; }
 
-};
+}

@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid SQLite database manager
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -43,6 +43,7 @@ import java.util.TreeSet;
 import java.util.Locale;
 import java.util.HashMap;
 
+@SuppressWarnings("SyntaxError")
 class DataHelper extends DataSetObservable
 {
 
@@ -136,16 +137,16 @@ class DataHelper extends DataSetObservable
 
   private String[] mShotFields; // select shot fields
 
-  static private String[] mPlotFieldsFull =
+  static final private String[] mPlotFieldsFull =
     { "id", "name", "type", "status", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide", "nick" };
-  static private String[] mPlotFields =
+  static final private String[] mPlotFields =
     { "id", "name", "type", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide", "nick", "orientation" };
 
   private String[] mSketchFields; // select sketch fields
 
   private DataListenerSet mListeners;
 
-  private static String[] mFixedFields = { 
+  private static final String[] mFixedFields = {
     "id", "station", "longitude", "latitude", "altitude", "altimetric", "comment", "status", "source",
     "cs_name", "cs_longitude", "cs_latitude", "cs_altitude"
   };
@@ -153,8 +154,8 @@ class DataHelper extends DataSetObservable
   // ----------------------------------------------------------------------
   // DATABASE
 
-  private Context mContext;
-  private TopoDroidApp mApp;
+  private final Context mContext;
+  private final TopoDroidApp mApp;
 
   public SQLiteDatabase getDb() { return myDB; }
 
@@ -546,6 +547,7 @@ class DataHelper extends DataSetObservable
 
   boolean renameSurvey( long id, String name, boolean forward )
   {
+    boolean ret = true;
     ContentValues vals = new ContentValues();
     vals.put("name", name );
     try {
@@ -555,11 +557,11 @@ class DataHelper extends DataSetObservable
       if ( forward && mListeners != null ) { // synchronized( mListeners )
         mListeners.onUpdateSurveyName( id, name );
       }
-    } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
-    } catch ( SQLiteException e1 )       { logError("survey rename " + name, e1 ); 
-    } catch ( IllegalStateException e2 ) { logError("survey rename", e2 );
+    } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e ); ret = false;
+    } catch ( SQLiteException e1 )       { logError("survey rename " + name, e1 ); ret =false;
+    } catch ( IllegalStateException e2 ) { logError("survey rename", e2 ); ret = false;
     } finally { myDB.endTransaction(); }
-    return true;
+    return ret;
   }
 
   boolean updateSurveyInfo( long id, String date, String team, double decl, String comment,
@@ -1704,7 +1706,7 @@ class DataHelper extends DataSetObservable
     return minId( AUDIO_TABLE, sid );
   }
 
-  long insertAudio( long sid, long id, long bid, String date )
+  private long insertAudio( long sid, long id, long bid, String date )
   {
     if ( myDB == null ) return -1L;
     if ( id == -1L ) id = maxId( AUDIO_TABLE, sid );
@@ -2173,7 +2175,7 @@ class DataHelper extends DataSetObservable
      return selectPreviousLegShot( myNextId+1, sid );
    }
 
-   DBlock selectPreviousLegShot( long shot_id, long sid )
+   private DBlock selectPreviousLegShot( long shot_id, long sid )
    {
      // TDLog.Log( TDLog.LOG_DB, "select previous leg shot " + shot_id + "/" + sid );
      if ( myDB == null ) return null;
@@ -2436,7 +2438,7 @@ class DataHelper extends DataSetObservable
      return list;
    }
 
-   List<DBlock> selectAllShotsAtStation( long sid, String station )
+   private List<DBlock> selectAllShotsAtStation( long sid, String station )
    {
      List< DBlock > list = new ArrayList<>();
      if ( station == null ) return list;
@@ -2825,8 +2827,8 @@ class DataHelper extends DataSetObservable
    }
 
    // FIXME 'xx' is the prefix-name for sections
-   final String prefix = "xx";
-   final int prefix_length = 2; // prefix.length();
+   private static final String prefix = "xx";
+   private static final int prefix_length = 2; // prefix.length();
 
    String getNextSectionId( long sid )
    {
@@ -2972,7 +2974,7 @@ class DataHelper extends DataSetObservable
     * @param id        photo id (or -1)
     * @param shotid    shot id
     * @param title     photo title
-    * @param comment
+    * @param comment   comment
     */
    long insertPhoto( long sid, long id, long shotid, String title, String date, String comment )
    {
@@ -3028,7 +3030,7 @@ class DataHelper extends DataSetObservable
     * @param shotid    shot id
     * @param title     sensor title
     * @param date      sensor date
-    * @param comment
+    * @param comment   comment
     * @param type      sensor type
     * @param value     sensor value
     */
@@ -3277,7 +3279,7 @@ class DataHelper extends DataSetObservable
    * @param station  station name
    * @return true if found a record, false otherwise
    */  
-  boolean hasFixedStation( long id, long sid, String station )
+  private boolean hasFixedStation( long id, long sid, String station )
   {
     boolean ret = false;
     if ( myDB == null ) return ret;
@@ -3301,7 +3303,7 @@ class DataHelper extends DataSetObservable
    * @param sid          survey ID
    * @param station      station
    * @return fixed ID or -1L
-   * @note only non-deleted fixed are considered
+   * note only non-deleted fixed are considered
    */
   private long getFixedId( long sid, String station )
   {
@@ -4234,6 +4236,7 @@ class DataHelper extends DataSetObservable
    // ----------------------------------------------------------------------
    // DATABASE TABLES
 
+   @SuppressWarnings("SyntaxError")
    private static class DistoXOpenHelper extends SQLiteOpenHelper
    {
       private static final String create_table = "CREATE TABLE IF NOT EXISTS ";

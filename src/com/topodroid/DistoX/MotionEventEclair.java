@@ -10,9 +10,9 @@ package com.topodroid.DistoX;
 
 import android.view.MotionEvent;
 
-public class MotionEventEclair extends MotionEventWrap
+class MotionEventEclair extends MotionEventWrap
 {
-   protected MotionEventEclair(MotionEvent event) {
+   MotionEventEclair(MotionEvent event) {
       super(event);
    }
    public float getX(int pointerIndex) {

@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid DistoX calibration coefficients display dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -32,7 +32,7 @@ import android.graphics.Bitmap;
 class CalibCoeffDialog extends MyDialog
                        implements View.OnClickListener
 {
-  private TopoDroidApp mApp;
+  private final TopoDroidApp mApp;
 
   private static final int WIDTH  = 200;
   private static final int HEIGHT = 100;

@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid multistate button
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -23,9 +23,9 @@ import android.graphics.drawable.BitmapDrawable;
 
 class MyStateBox extends CompoundButton
 {
-  Context mContext = null;
-  int mState;
-  BitmapDrawable[] mBG;
+  private Context mContext = null;
+  private int mState;
+  private BitmapDrawable[] mBG;
   
   MyStateBox( Context context )
   {

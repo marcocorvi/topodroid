@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid DistoX X310 device memory dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -43,10 +43,10 @@ class DeviceX310MemoryDialog extends MyDialog
   private EditText mETdumpfile;
 
   // List< MemoryOctet> mMemory;
-  ArrayAdapter< String > mArrayAdapter;
-  ListView mList;
+  private ArrayAdapter< String > mArrayAdapter;
+  private ListView mList;
 
-  DeviceActivity mParent;
+  private final DeviceActivity mParent;
 
   DeviceX310MemoryDialog( Context context, DeviceActivity parent )
   {

@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid drawing: canvas command interface
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -17,16 +17,16 @@ import android.graphics.RectF;
 
 /* interface for the canvas commands
  */
-public interface ICanvasCommand {
-    public int  commandType(); // command type: 0 DrawingPath, 1 EraseCommand
-    public void draw(Canvas canvas, RectF bbox );
-    public void draw(Canvas canvas, Matrix mat, float scale, RectF bbox );
+interface ICanvasCommand {
+    int  commandType(); // command type: 0 DrawingPath, 1 EraseCommand
+    void draw(Canvas canvas, RectF bbox );
+    void draw(Canvas canvas, Matrix mat, float scale, RectF bbox );
 
     // public void undoCommand();
 
-    public void flipXAxis(float z);
-    public void shiftPathBy( float x, float y );
-    public void scalePathBy( float z, Matrix m );
-    public void computeBounds( RectF bounds, boolean b );
+    void flipXAxis(float z);
+    void shiftPathBy( float x, float y );
+    void scalePathBy( float z, Matrix m );
+    void computeBounds( RectF bounds, boolean b );
 
 }

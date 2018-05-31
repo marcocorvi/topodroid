@@ -6,7 +6,7 @@
  * @brief TopoDroid about dialog
  *
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * ----------------------------------------------------------
  */
@@ -29,7 +29,7 @@ class TopoDroidAbout extends Dialog
                      // implements OnClickListener
 {
   // private Button mBTok;
-  private Context mContext;
+  private final Context mContext;
 
   TopoDroidAbout( Context context )
   {

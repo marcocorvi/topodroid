@@ -6,7 +6,7 @@
  * @brief TopoDroid drawing: points
  *        type DRAWING_PATH_POINT
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -32,7 +32,7 @@ import java.util.Locale;
  */
 class DrawingPointPath extends DrawingPath
 {
-  private static float toTherion = TDConst.TO_THERION;
+  private static final float toTherion = TDConst.TO_THERION;
 
   static final int SCALE_NONE = -3; // used to force scaling
   static final int SCALE_XS = -2;

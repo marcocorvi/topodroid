@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid DistoX calib mode toggle task
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -19,9 +19,9 @@ import android.os.AsyncTask;
 
 class CalibToggleTask extends AsyncTask<Void, Integer, Boolean>
 {
-  Activity   mActivity; // FIXME LEAK
-  TopoDroidApp mApp;    // FIXME LEAK
-  private IEnableButtons mEnableButtons;
+  private final Activity   mActivity; // FIXME LEAK
+  private final TopoDroidApp mApp;    // FIXME LEAK
+  private final IEnableButtons mEnableButtons;
 
   CalibToggleTask( Activity act, IEnableButtons eb, TopoDroidApp app )
   {

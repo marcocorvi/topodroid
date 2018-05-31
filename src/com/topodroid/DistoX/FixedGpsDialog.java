@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid GPS-location for fixed stations
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -19,6 +19,7 @@ import java.util.Iterator;
 import java.util.Locale;
 
 // import android.app.Dialog;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import android.content.Context;
@@ -49,7 +50,7 @@ import android.location.GpsSatellite;
 
 import android.net.Uri;
 
-import android.util.Log;
+// import android.util.Log;
 
 class FixedGpsDialog extends MyDialog
                             implements View.OnClickListener
@@ -58,7 +59,7 @@ class FixedGpsDialog extends MyDialog
                                      , LocationListener
                                      , GpsStatus.Listener
 {
-  private FixedActivity mParent;
+  private final FixedActivity mParent;
   // private boolean  mLocated;
   private LocationManager locManager = null;
   private WorldMagneticModel mWMM;
@@ -91,7 +92,8 @@ class FixedGpsDialog extends MyDialog
 
   private MyKeyboard mKeyboard;
 
-  FixedGpsDialog( Context context, FixedActivity parent )
+  @SuppressLint("MissingPermission")
+  FixedGpsDialog(Context context, FixedActivity parent )
   {
     super(context, R.string.FixedGpsDialog );
     mParent = parent;
@@ -254,10 +256,10 @@ class FixedGpsDialog extends MyDialog
   /** location is stored in decimal degrees but displayed as deg:min:sec
    * N.B. the caller must check loc != null
    */
-  private double mW0 = 0.8;
-  private double mW1 = 1 - mW0;
-  private double mW2 = mW1 / mW0;
-  private double mR = 6371000; // approx earth radius
+  private final double mW0 = 0.8;
+  private final double mW1 = 1 - mW0;
+  private final double mW2 = mW1 / mW0;
+  private final double mR = 6371000; // approx earth radius
 
   private void displayLocation( Location loc /*, boolean do_error*/ )
   {
@@ -293,8 +295,8 @@ class FixedGpsDialog extends MyDialog
     mHGeo = mWMM.ellipsoidToGeoid( mLat, mLng, mHEll ); 
     mHasLocation = true;
 
-    mTVlng.setText( mContext.getResources().getString( R.string.longitude ) + " " + FixedInfo.double2string( mLng ) );
-    mTVlat.setText( mContext.getResources().getString( R.string.latitude ) + " " + FixedInfo.double2string( mLat ) );
+    mTVlng.setText( String.format( mContext.getResources().getString( R.string.fmt_longitude ), FixedInfo.double2string( mLng ) ) );
+    mTVlat.setText( String.format( mContext.getResources().getString( R.string.fmt_latitude ), FixedInfo.double2string( mLat ) ) );
     mTValt.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_h_ellipsoid ), mHEll ) );
     mTVasl.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_h_geoid ), mHGeo ) );
     mTVerr.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_error_m ), ret ) );
@@ -319,6 +321,7 @@ class FixedGpsDialog extends MyDialog
     mLocating = false;
   }
 
+  @SuppressLint("MissingPermission")
   private void setGPSon()
   {
     // mBtnLoc.setText( mContext.getResources().getString( R.string.button_gps_stop ) );
@@ -354,6 +357,7 @@ class FixedGpsDialog extends MyDialog
     // TDLog.Log(TDLog.LOG_LOC, "onStatusChanged status " + status );
   }
 
+  @SuppressLint("MissingPermission")
   private int getNrSatellites()
   {
     locManager.getGpsStatus( mStatus );

@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid cubic bezier interpolator
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  *
@@ -374,6 +374,6 @@ class BezierInterpolator
 
   ArrayList< BezierCurve > getCurves() { return curves; }
 
-  public int size() { return curves.size(); }
+  // public int size() { return curves.size(); }
 
 }

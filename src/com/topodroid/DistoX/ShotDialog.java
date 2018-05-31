@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid survey shot dialog to enter FROM-TO stations etc.
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -52,7 +52,7 @@ class ShotDialog extends MyDialog
                  implements View.OnClickListener
                           , View.OnLongClickListener
 {
-  private ShotWindow mParent;
+  private final ShotWindow mParent;
   private DBlock mBlk;
   private DBlock mPrevBlk;
   private DBlock mNextBlk;
@@ -83,7 +83,7 @@ class ShotDialog extends MyDialog
   private MyCheckBox mCBxSplay = null;
   // private MyCheckBox mCBhighlight;
 
-  HorizontalListView mListView;
+  private HorizontalListView mListView;
   private HorizontalButtonView mButtonView;
   private Button[] mButton;
 
@@ -139,15 +139,15 @@ class ShotDialog extends MyDialog
   private long shot_flag;
   private String shot_comment;
 
-  MyKeyboard mKeyboard = null;
+  private MyKeyboard mKeyboard = null;
 
   private KeyListener mKLdistance;
   private KeyListener mKLbearing;
   private KeyListener mKLclino;
 
-  private static int flagDistance = MyKeyboard.FLAG_POINT;
-  private static int flagBearing  = MyKeyboard.FLAG_POINT;
-  private static int flagClino    = MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_SIGN;
+  private static final int flagDistance = MyKeyboard.FLAG_POINT;
+  private static final int flagBearing  = MyKeyboard.FLAG_POINT;
+  private static final int flagClino    = MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_SIGN;
 
   private boolean mFirst;
 
@@ -492,7 +492,7 @@ class ShotDialog extends MyDialog
     // }
 
     boolean all_splay = mCBallSplay.isChecked();
-    boolean x_splay = (mCBxSplay != null)? mCBxSplay.isChecked() : false;
+    boolean x_splay = (mCBxSplay != null) && mCBxSplay.isChecked();
     boolean leg_next  = false;
     if ( mCBlegPrev.isChecked() ) {
       shot_from = "";

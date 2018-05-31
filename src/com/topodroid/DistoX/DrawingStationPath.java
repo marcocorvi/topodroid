@@ -6,7 +6,7 @@
  * @brief TopoDroid drawing: user-defined station point 
  *        type DRAWING_PATH_STATION
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -31,7 +31,7 @@ import java.io.IOException;
  */
 class DrawingStationPath extends DrawingPath
 {
-  private static float toTherion = TDConst.TO_THERION;
+  private static final float toTherion = TDConst.TO_THERION;
 
   // float mXpos, mYpos;         // X-Y station position (scene): use cx, cy
   protected int mScale;       //! symbol scale

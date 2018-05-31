@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid drawing: area symbol
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -36,8 +36,8 @@ class SymbolArea extends Symbol
   // FIXME AREA_ORIENT
   double mOrientation;
 
-  Paint mPaint;
-  Path mPath;
+  private Paint mPaint;
+  private Path mPath;
   Bitmap       mBitmap;
   Bitmap       mShaderBitmap = null;
   BitmapShader mShader; // paint bitmap shader

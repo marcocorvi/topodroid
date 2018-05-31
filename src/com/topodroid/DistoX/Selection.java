@@ -5,7 +5,7 @@
  *
  * @brief Selection among drawing items
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * ----------------------------------------------------
  */
@@ -84,26 +84,26 @@ class Selection
 
   synchronized void clearReferencePoints()
   {
-      Iterator< SelectionPoint > it = mPoints.iterator();
-      while( it.hasNext() ) {
-        SelectionPoint sp1 = (SelectionPoint)it.next();
-        if ( sp1.isReferenceType() ) {
-          sp1.setBucket( null );
-          it.remove( );
-        }
+    Iterator< SelectionPoint > it = mPoints.iterator();
+    while( it.hasNext() ) {
+      SelectionPoint sp1 = (SelectionPoint)it.next();
+      if ( sp1.isReferenceType() ) {
+        sp1.setBucket( null );
+        it.remove( );
       }
+    }
   }
 
   synchronized void clearDrawingPoints()
   {
-      Iterator< SelectionPoint > it = mPoints.iterator();
-      while( it.hasNext() ) {
-        SelectionPoint sp1 = (SelectionPoint)it.next();
-        if ( sp1.isDrawingType() ) {
-          sp1.setBucket( null );
-          it.remove( );
-        }
+    Iterator< SelectionPoint > it = mPoints.iterator();
+    while( it.hasNext() ) {
+      SelectionPoint sp1 = (SelectionPoint)it.next();
+      if ( sp1.isDrawingType() ) {
+        sp1.setBucket( null );
+        it.remove( );
       }
+    }
   }
 
   void insertStationName( DrawingStationName st )
@@ -114,7 +114,7 @@ class Selection
   /** like insertItem, but it returns the inserted SelectionPoint
    * @param path     point-line path
    * @param pt       new point on the point-line
-   * @return
+   * @return newly cretaed selection point
    */
   SelectionPoint insertPathPoint( DrawingPointLinePath path, LinePoint pt )
   {
@@ -205,9 +205,7 @@ class Selection
     float y0 = sp.Y();
     for ( SelectionBucket bucket : mBuckets ) {
       if ( bucket.contains( x0, y0, dmin, dmin ) ) {
-        final Iterator jt = bucket.mPoints.iterator();
-        while( jt.hasNext() ) {
-          SelectionPoint sp2 = (SelectionPoint)jt.next();
+        for ( SelectionPoint sp2 : bucket.mPoints ) {
           if ( sp == sp2 ) continue;
           float d = sp2.distance( x, y );
           if ( d < dmin ) {
@@ -225,9 +223,7 @@ class Selection
     SelectionPoint spmin = getBucketNearestPoint( sp, x, y, dmin );
     if ( spmin != null ) return spmin;
 
-    final Iterator it = mPoints.iterator();
-    while( it.hasNext() ) {
-      SelectionPoint sp1 = (SelectionPoint)it.next();
+    for ( SelectionPoint sp1 : mPoints ) {
       if ( sp == sp1 ) continue;
       float d = sp1.distance( x, y );
       if ( d < dmin ) {
@@ -288,9 +284,7 @@ class Selection
     float y0 = lp.y;
     for ( SelectionBucket bucket : mBuckets ) {
       if ( bucket.contains( x0, y0, 10f, 10f ) ) {
-        final Iterator jt = bucket.mPoints.iterator();
-        while( jt.hasNext() ) {
-          SelectionPoint sp = (SelectionPoint)jt.next();
+        for ( SelectionPoint sp : bucket.mPoints ) {
           if ( lp == sp.mPoint ) return sp;
         }
       }

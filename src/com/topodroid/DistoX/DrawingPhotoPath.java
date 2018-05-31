@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid drawing: photo point
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -32,7 +32,7 @@ import android.util.Base64;
  */
 class DrawingPhotoPath extends DrawingPointPath
 {
-  private static float toTherion = TDConst.TO_THERION;
+  private static final float toTherion = TDConst.TO_THERION;
 
   long mId; // id of the photo 
   // private Paint paint;

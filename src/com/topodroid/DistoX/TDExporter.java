@@ -5,7 +5,7 @@
  *
  * @grief TopoDroid exports
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  * formats
@@ -43,17 +43,17 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.HashMap;
 
-import android.util.Log;
+// import android.util.Log;
 import android.util.Base64;
 
 class TDExporter
 {
                                    // -1      0           1        2         3       4
-  static String[] therion_extend = { "left", "vertical", "right", "ignore", "hide", "start", "unset", "left", "vert", "right" };
-  static String   therion_flags_duplicate     = "   flags duplicate\n";
-  static String   therion_flags_not_duplicate = "   flags not duplicate\n";
-  static String   therion_flags_surface       = "   flags surface\n";
-  static String   therion_flags_not_surface   = "   flags not surface\n";
+  private static final String[] therion_extend = { "left", "vertical", "right", "ignore", "hide", "start", "unset", "left", "vert", "right" };
+  private static final String   therion_flags_duplicate     = "   flags duplicate\n";
+  private static final String   therion_flags_not_duplicate = "   flags not duplicate\n";
+  private static final String   therion_flags_surface       = "   flags surface\n";
+  private static final String   therion_flags_not_surface   = "   flags not surface\n";
 
 
   static byte[] readFileBytes( File file )
@@ -501,8 +501,8 @@ class TDExporter
   // KML export
   // shot flags are ignored
 
-  static private float EARTH_RADIUS1 = (float)(6378137 * Math.PI / 180.0f); // semimajor axis [m]
-  static private float EARTH_RADIUS2 = (float)(6356752 * Math.PI / 180.0f);
+  static private final float EARTH_RADIUS1 = (float)(6378137 * Math.PI / 180.0f); // semimajor axis [m]
+  static private final float EARTH_RADIUS2 = (float)(6356752 * Math.PI / 180.0f);
 
   static private List<DistoXNum> getGeolocalizedData( long sid, DataHelper data, float decl, float asl_factor )
   {
@@ -1148,8 +1148,8 @@ class TDExporter
    *      (optional survey commands)
    *    *end survey_name
    */
-  static private String survex_flags_duplicate     = "   *flags duplicate";
-  static private String survex_flags_not_duplicate = "   *flags not duplicate";
+  static private final String survex_flags_duplicate     = "   *flags duplicate";
+  static private final String survex_flags_not_duplicate = "   *flags not duplicate";
   // static String   survex_flags_surface       = "   *flags surface";
   // static String   survex_flags_not_surface   = "   *flags not surface";
 
@@ -3413,7 +3413,7 @@ class TDExporter
    * @param pw     writer
    * @param item   reference shot
    ( @param list   ...
-   * @note item is guaranteed not null by the caller
+   * note item is guaranteed not null by the caller
    */
   static private boolean printStartShotToTro( PrintWriter pw, DBlock item, List< DBlock > list )
   {
@@ -3629,7 +3629,7 @@ class TDExporter
       BufferedReader br = new BufferedReader( fr );
     
       String line = br.readLine();
-      if ( line == null || line.indexOf("TopoDroid") < 0 ) {
+      if ( line == null || ! line.contains("TopoDroid") ) {
         ret = -1; // NOT TOPODROID CSV
       } else {
         br.readLine(); // skip empty line

@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid drawing: display mode dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -38,8 +38,8 @@ class DrawingModeDialog extends MyDialog
     // private Button mBtnOK;
     // private Button mBtnBack;
 
-    private DrawingSurface mSurface;
-    private DrawingWindow mParent; // used only to decide whether display checkbox "Shift"
+    private final DrawingSurface mSurface;
+    private final DrawingWindow mParent; // used only to decide whether display checkbox "Shift"
 
     DrawingModeDialog( Context context, DrawingWindow parent, DrawingSurface surface )
     {

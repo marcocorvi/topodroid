@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid 3d sketch: 3D surface 
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -661,7 +661,7 @@ class SketchSurface extends SketchShot
 
   /** add a vertex with a given index ( for loadTh3 )
    * @param n   vertex key
-   * @reurn the new-vertex index
+   * @return the new-vertex index
    */
   int addVertex( int n, float x, float y, float z ) {
     SketchVertex v = new SketchVertex( this, n, x, y, z );
@@ -675,10 +675,14 @@ class SketchSurface extends SketchShot
    */
   private int addVertex( Vector v ) { return addVertex( v.x, v.y, v.z ); }
 
+  final private double EPS = 0.01;
+
   /** add a vertex given X,Y,Z (or return an already existing close vertex)
+   * @param x    X coord
+   * @param y    Y coord
+   * @param z    Z coord
    * @return the vertex key (index)
    */
-  final private double EPS = 0.01;
   private int addVertex( float x, float y, float z )
   {
     int size = mVertices.size();
@@ -911,7 +915,7 @@ class SketchSurface extends SketchShot
       v1 = x1;
       v2 = x2;
     }
-  };
+  }
 
   /** check if the array of index-pairs contains a given pair
    * @param n1   first index of the pair

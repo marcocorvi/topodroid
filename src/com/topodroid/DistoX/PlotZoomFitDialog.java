@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid plot zomm-fit / landscape
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -34,7 +34,7 @@ import android.widget.LinearLayout;
 class PlotZoomFitDialog extends MyDialog
                                implements OnClickListener
 {
-  private DrawingWindow mParent;
+  private final DrawingWindow mParent;
   private Button mBtnPortrait;
   private Button mBtnLandscape;
   // private Button mBtnZoomFit;

@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid drawing: area symbol library
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -135,8 +135,8 @@ class SymbolLibrary
   String getSymbolThName( int k ) { return ( k < 0 || k >= mSymbolNr )? null : mSymbols.get(k).getThName(); }
   Paint getSymbolPaint( int k )   { return ( k < 0 || k >= mSymbolNr )? null : mSymbols.get(k).getPaint(); }
   Path  getSymbolPath( int k )    { return ( k < 0 || k >= mSymbolNr )? null : mSymbols.get(k).getPath(); }
-  boolean isSymbolOrientable( int k )   { return ( k < 0 || k >= mSymbolNr )? false : mSymbols.get( k ).isOrientable(); }
-  boolean isSymbolEnabled( int k )      { return ( k < 0 || k >= mSymbolNr )? false : mSymbols.get( k ).isEnabled(); }
+  boolean isSymbolOrientable( int k )   { return k >= 0 && k < mSymbolNr && mSymbols.get( k ).isOrientable(); }
+  boolean isSymbolEnabled( int k )      { return k >= 0 && k < mSymbolNr && mSymbols.get( k ).isEnabled(); }
 
   ArrayList<String> getSymbolNames()
   {

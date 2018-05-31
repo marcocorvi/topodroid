@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid timer
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -37,7 +37,7 @@ class TimerTask extends AsyncTask<String, Integer, Long >
   private float mValMag[] = new float[3];
   private SensorManager mSensorManager;
   // Context mContext; // FIXME LEAK
-  IBearingAndClino mParent;
+  private IBearingAndClino mParent;
   boolean mRun;
   private int mAxis;
   private int mWait;  // secs to wait

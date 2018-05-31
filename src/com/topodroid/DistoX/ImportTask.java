@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid VisualTopo import task
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -18,8 +18,8 @@ import android.app.ProgressDialog;
 
 abstract class ImportTask extends AsyncTask< String, Integer, Long >
 {
-  MainWindow mMain;  // FIXME LEAK
-  TopoDroidApp mApp; // FIXME LEAK used by inheriting classes
+  final MainWindow mMain;  // FIXME LEAK
+  final TopoDroidApp mApp; // FIXME LEAK used by inheriting classes
   ProgressDialog mProgress = null;
 
   ImportTask( MainWindow main )

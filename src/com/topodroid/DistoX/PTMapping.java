@@ -5,7 +5,7 @@
  *
  * @brief PocketTopo file IO
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -18,7 +18,7 @@ import java.io.FileOutputStream;
 
 class PTMapping
 {
-  static final int XTHERION_FACTOR = 25;
+  static final private int XTHERION_FACTOR = 25;
 
     private PTPoint _origin;
     private int _scale;   //!< scale 50 .. 20000
@@ -33,7 +33,7 @@ class PTMapping
 
     PTPoint origin() { return _origin; }
 
-    void setOrigin( int x, int y ) { _origin.set( x, y ); }
+    private void setOrigin( int x, int y ) { _origin.set( x, y ); }
 
     int scale() { return _scale; }
     void setScale( int s )

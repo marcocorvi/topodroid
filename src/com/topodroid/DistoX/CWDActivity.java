@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid CWD activity
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -120,7 +120,7 @@ public class CWDActivity extends Activity
     return true;
   }
     
-  public void updateDisplay( )
+  private void updateDisplay()
   {
     File[] dirs = TDPath.getTopoDroidFiles( mBaseName );
     ArrayAdapter<String> adapter = new ArrayAdapter<>( this, R.layout.menu );

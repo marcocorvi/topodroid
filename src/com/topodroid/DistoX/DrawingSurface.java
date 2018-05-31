@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid drawing: drawing surface (canvas)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -47,7 +47,7 @@ import java.io.DataOutputStream;
 // import java.util.Timer;
 // import java.util.TimerTask;
 
-import android.util.Log;
+// import android.util.Log;
 
 /**
  */
@@ -62,11 +62,11 @@ class DrawingSurface extends SurfaceView
 
   protected DrawThread mDrawThread;
 
-  boolean mSurfaceCreated = false;
+  private boolean mSurfaceCreated = false;
   public volatile boolean isDrawing = true;
   private DrawingPath mPreviewPath;
   // private SurfaceHolder mHolder; // canvas holder
-  private Context mContext;
+  private final Context mContext;
   private IZoomer mZoomer = null;
   private AttributeSet mAttrs;
   private int mWidth;            // canvas width
@@ -77,10 +77,10 @@ class DrawingSurface extends SurfaceView
 
   static DrawingCommandManager mCommandManager1 = null; 
   static DrawingCommandManager mCommandManager2 = null; 
-  static DrawingCommandManager mCommandManager3 = null; 
+  static DrawingCommandManager mCommandManager3 = null;
 
-  ArrayList< String > mSplayStationsOn;  // stations where to show splays
-  ArrayList< String > mSplayStationsOff; // stations where not to show splays
+  private ArrayList< String > mSplayStationsOn;  // stations where to show splays
+  private ArrayList< String > mSplayStationsOff; // stations where not to show splays
 
   public boolean isDrawing() { return isDrawing; }
 

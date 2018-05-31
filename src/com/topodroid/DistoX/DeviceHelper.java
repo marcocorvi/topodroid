@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid SQLite "device" database manager
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -79,8 +79,8 @@ class DeviceHelper extends DataSetObservable
   // ----------------------------------------------------------------------
   // DATABASE
 
-  private Context mContext;
-  private TopoDroidApp mApp;
+  private final Context mContext;
+  private final TopoDroidApp mApp;
 
   SQLiteDatabase getDb() { return myDB; }
 
@@ -118,6 +118,7 @@ class DeviceHelper extends DataSetObservable
         } catch ( InterruptedException e ) {}
       }
 
+      //noinspection SyntaxError
       updateConfig = myDB.compileStatement( "UPDATE configs SET value=? WHERE key=?" );
 
     } catch ( SQLiteException e ) {
@@ -1061,7 +1062,8 @@ class DeviceHelper extends DataSetObservable
         // TDLog.Log( TDLog.LOG_DB, "DistoXOpenHelper onCreate done db " + db );
       }
 
-      private void createTables( SQLiteDatabase db )
+      @SuppressWarnings("SyntaxError")
+      private void createTables(SQLiteDatabase db )
       {
          db.setLockingEnabled( false );
          db.beginTransaction();

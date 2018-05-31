@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid application (consts and prefs)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -83,7 +83,7 @@ import android.graphics.BitmapFactory;
 
 import android.net.Uri;
 
-import android.util.Log;
+// import android.util.Log;
 import android.util.DisplayMetrics;
 
 import android.bluetooth.BluetoothAdapter;
@@ -99,7 +99,7 @@ public class TopoDroidApp extends Application
 
   static final String EMPTY = "";
 
-  static String SYMBOL_VERSION = "35";
+  static final String SYMBOL_VERSION = "35";
   static String VERSION = "0.0.0"; 
   static int VERSION_CODE = 0;
   static int MAJOR = 0;
@@ -1038,7 +1038,8 @@ public class TopoDroidApp extends Application
     String defaultSockType = ( android.os.Build.MANUFACTURER.equals("samsung") ) ? "1" : "0";
     Editor editor = mPrefs.edit();
     editor.putString( "DISTOX_SOCK_TYPE", defaultSockType ); 
-    editor.apply(); // was editor.commit();
+    editor.apply(); 
+    // FIXME-23 editor.commit();
   }
 
   private void updateDefaultPreferences()
@@ -1049,6 +1050,7 @@ public class TopoDroidApp extends Application
         editor.putString( "DISTOX_GROUP_BY", "1" ); 
       }
       editor.apply();
+      // FIXME-23 editor.commit();
     }
   }
 
@@ -1061,6 +1063,7 @@ public class TopoDroidApp extends Application
       editor.putString( "DISTOX_CWD", cwd ); 
       editor.putString( "DISTOX_CBD", cbd ); 
       editor.apply();
+      // FIXME-23 editor.commit();
     }
     setCWD( cwd, cbd ); 
   }
@@ -1071,6 +1074,7 @@ public class TopoDroidApp extends Application
       Editor editor = mPrefs.edit();
       editor.putString( "DISTOX_PT_CMAP", cmap ); 
       editor.apply();
+      // FIXME-23 editor.commit();
     }
     PtCmapActivity.setMap( cmap );
   }
@@ -1082,6 +1086,7 @@ public class TopoDroidApp extends Application
     editor.putString( "DISTOX_MAG_THR", Float.toString( magnetic ) ); 
     editor.putString( "DISTOX_DIP_THR", Float.toString( dip ) ); 
     editor.apply();
+    // FIXME-23 editor.commit();
   }
 
   void setShotDataPreference( float leg_tolerance, int leg_shots, float extend_thr,
@@ -1096,6 +1101,7 @@ public class TopoDroidApp extends Application
     editor.putString( "DISTOX_SHOT_TIMER",  Integer.toString( timer ) ); 
     editor.putString( "DISTOX_BEEP_VOLUME", Integer.toString( volume ) ); 
     editor.apply();
+    // FIXME-23 editor.commit();
   }
 
   void setPlotScreenPreference( float line_width, float survey_width, float station_size, float label_size, 
@@ -1109,6 +1115,7 @@ public class TopoDroidApp extends Application
     editor.putString( "DISTOX_DOT_RADIUS",      Float.toString( dot_size ) ); 
     editor.putString( "DISTOX_CLOSENESS",       Float.toString( selection_radius ) ); 
     editor.apply();
+    // FIXME-23 editor.commit();
   }
 
   void setToolScreenPreference( float point_scale, float section_line_tick, int line_style,
@@ -1122,6 +1129,7 @@ public class TopoDroidApp extends Application
     editor.putString( "DISTOX_LINE_ACCURACY", Float.toString( bezier_accuracy ) ); 
     editor.putString( "DISTOX_LINE_CORNER",   Float.toString( bezier_corner ) ); 
     editor.apply();
+    // FIXME-23 editor.commit();
   }
   
   void setSurveyLocationPreference( String crs, boolean gps_averaging, String units, int alt, boolean alt_lookup )
@@ -1133,6 +1141,7 @@ public class TopoDroidApp extends Application
     editor.putString( "DISTOX_ALTITUDE", Integer.toString( alt ) ); 
     editor.putBoolean( "DISTOX_ALTIMETRIC", alt_lookup );
     editor.apply();
+    // FIXME-23 editor.commit();
   }
 
 
@@ -1148,6 +1157,7 @@ public class TopoDroidApp extends Application
     SharedPreferences.Editor editor = mPrefs.edit();
     editor.putBoolean( preference, val );
     editor.apply(); // Very important to save the preference
+    // FIXME-23 editor.commit();
   }
 
   void setDevice( String address ) 
@@ -1172,6 +1182,7 @@ public class TopoDroidApp extends Application
       Editor editor = mPrefs.edit();
       editor.putString( TDSetting.keyDeviceName(), address ); 
       editor.apply();
+      // FIXME-23 editor.commit();
     }
   }
 
@@ -1688,7 +1699,7 @@ public class TopoDroidApp extends Application
     * @param clino    from block
     * @param extend   ...
     * @return id of inserted leg
-    * @note before inserting the duplicate leg it set the CurrentStationName
+    * note before inserting the duplicate leg it set the CurrentStationName
     */
   long insertDuplicateLeg( String from, String to, float distance, float bearing, float clino, int extend )
   {

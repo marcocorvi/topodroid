@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid station naming
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  * N.B. backsight and tripod need the whole list to decide how to assign names
@@ -13,11 +13,11 @@
 package com.topodroid.DistoX;
 
 
-import android.util.Log;
+// import android.util.Log;
 
 import java.util.List;
 import java.util.Set;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 class StationName
 {

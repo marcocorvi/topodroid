@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid photo dialog (to enter the name of the photo)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -36,8 +36,8 @@ import android.widget.CheckBox;
 class PhotoSensorsDialog extends MyDialog
                                 implements View.OnClickListener
 {
-  private ShotWindow mParent;
-  private DBlock mBlk;
+  private final ShotWindow mParent;
+  private final DBlock mBlk;
 
   private boolean audioCheck = false;
 
@@ -65,7 +65,7 @@ class PhotoSensorsDialog extends MyDialog
   private MyCheckBox mButtonDelete;
   private MyCheckBox mButtonCheck = null;
 
-  HorizontalListView mListView;
+  private HorizontalListView mListView;
   private HorizontalButtonView mButtonView;
   private Button[] mButton;
 

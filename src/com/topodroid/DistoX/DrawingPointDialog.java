@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid sketch point attributes editing dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -33,9 +33,9 @@ import android.view.View;
 class DrawingPointDialog extends MyDialog
                                implements View.OnClickListener
 {
-  private DrawingPointPath mPoint;
-  private DrawingWindow  mParent;
-  private boolean mOrientable;
+  private final DrawingPointPath mPoint;
+  private final DrawingWindow  mParent;
+  private final boolean mOrientable;
 
   // private TextView mTVtype;
   private EditText mEToptions;

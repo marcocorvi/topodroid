@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid dialog for a new (manually entered) shot
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -50,8 +50,8 @@ class ShotNewDialog extends MyDialog
                            , IBearingAndClino
 {
   // private ShotWindow mParent;
-  private TopoDroidApp mApp;
-  private ILister mLister;
+  private final TopoDroidApp mApp;
+  private final ILister mLister;
   private DBlock mPrevBlk;
   private boolean  notDone;
   private long mAt; // id of the shot where to add new shot (-1 end)

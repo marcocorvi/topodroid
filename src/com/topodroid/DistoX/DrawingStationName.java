@@ -6,7 +6,7 @@
  * @brief TopoDroid drawing station name from survey data reduction (reference station names)
  *        type: DRAWING_PATH_NAME
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -28,7 +28,7 @@ import android.graphics.Matrix;
 
 class DrawingStationName extends DrawingPointPath
 {
-  private static float toTherion = TDConst.TO_THERION;
+  private static final float toTherion = TDConst.TO_THERION;
 
   private String mName; // station name
   private NumStation mStation;
@@ -38,7 +38,7 @@ class DrawingStationName extends DrawingPointPath
   private boolean mDuplicate;  // whether this is a duplicated station
 
   long  mXSectionType; // whether this station has a X-section
-  float mAzimuth, mClino;
+  private float mAzimuth, mClino;
   private float mDX, mDY;     // X-section direction
 
   // get coords for a "section" point

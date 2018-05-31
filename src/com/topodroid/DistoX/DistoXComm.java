@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid-DistoX BlueTooth communication 
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -48,7 +48,7 @@ import android.content.BroadcastReceiver;
 // import android.database.DataSetObserver;
 
 // import android.widget.Toast;
-import android.util.Log;
+// import android.util.Log;
 
 class DistoXComm extends TopoDroidComm
 {
@@ -503,7 +503,7 @@ class DistoXComm extends TopoDroidComm
   }
 
   /** send the set/unset calib-mode command
-   * @note called within connectSocket()
+   * note called within connectSocket()
    * nothing to read (only write) --> no AsyncTask
    */
   private boolean setCalibMode( boolean turn_on )
@@ -514,7 +514,7 @@ class DistoXComm extends TopoDroidComm
   /** Toggle device calibration mode
    * @param address    device address
    * @param type       device type
-   * @return 
+   * @return true if success
    */
   boolean toggleCalibMode( String address, int type )
   {
@@ -816,4 +816,4 @@ class DistoXComm extends TopoDroidComm
     return ret;
   }
 
-};
+}

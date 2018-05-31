@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid profile azimuth: projection surface (canvas)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -34,16 +34,16 @@ import android.view.SurfaceView;
 // import android.util.Log;
 
 /**
- * @note this class must be public
+ * note this class must be public
  */
 public class ProjectionSurface extends SurfaceView
                             implements SurfaceHolder.Callback
 {
-    boolean mSurfaceCreated = false;
-    protected DrawThread mDrawThread;
+    private boolean mSurfaceCreated = false;
+    private DrawThread mDrawThread;
     private volatile boolean isDrawing = true;
     private SurfaceHolder mHolder = null; // canvas holder
-    private Context mContext;
+    private final Context mContext;
     // private IZoomer mZoomer = null;
     // private AttributeSet mAttrs;
     private int mWidth;            // canvas width
@@ -131,7 +131,7 @@ public class ProjectionSurface extends SurfaceView
         // Log.v("DistoX", "drawing thread run");
         mRunning = true;
         while ( mRunning ) {
-          if ( isDrawing == true ) {
+          if ( isDrawing ) {
             refreshSurface( mSurfaceHolder );
           } else {
             try {

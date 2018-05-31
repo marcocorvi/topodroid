@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid cubic bezier curve (spline)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  * CHANGES
@@ -107,8 +107,8 @@ class BezierCurve
 
   /**  Bezier: Evaluate a Bezier curve at a particular parameter value
    * degree  The degree of the bezier curve
-   * t       Parametric value to find point for	
-   * @note used by cSurevy export
+   * @param t       Parametric value to find point for
+   * note used by cSurevy export
    */
   Point2D evaluate( float t ) { return evaluate(3, c, t ); }
 

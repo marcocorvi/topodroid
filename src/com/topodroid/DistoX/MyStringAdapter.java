@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid simple string adapter
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 class MyStringAdapter extends BaseAdapter
 {
-  Context mContext;
+  private final Context mContext;
   private int     mResId;
   private ArrayList<String> mStr;
 
@@ -54,7 +54,7 @@ class MyStringAdapter extends BaseAdapter
     Holder holder;
     if  ( convertView == null ) {
       holder = new Holder();
-      convertView = LayoutInflater.from( mContext ).inflate( mResId, null );
+      convertView = LayoutInflater.from( mContext ).inflate( mResId, parent, false );
       holder.tv = (TextView) convertView.findViewById( R.id.message_text );
       holder.tv.setTextSize( TDSetting.mTextSize );
       convertView.setTag( holder );

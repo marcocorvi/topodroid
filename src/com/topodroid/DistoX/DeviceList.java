@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid DistoX device list activity
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -40,8 +40,8 @@ public class DeviceList extends Activity
 { 
   private TopoDroidApp mApp;
 
-  public static final int DEVICE_PAIR = 0x1;
-  public static final int DEVICE_SCAN = 0x2;
+  static final int DEVICE_PAIR = 0x1;
+  static final int DEVICE_SCAN = 0x2;
   
   private ArrayAdapter<String> mArrayAdapter;
   // private ListView mList;

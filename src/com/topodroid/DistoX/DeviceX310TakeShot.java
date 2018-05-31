@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid DistoX310 shooting class
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -15,9 +15,9 @@ import android.os.AsyncTask;
  
 class DeviceX310TakeShot extends AsyncTask<Integer, Integer, Integer >
 {
-  private ILister mILister;
-  private ListerHandler mLister; // lister that manages downloaded shots (if null shots are not downloaded)
-  TopoDroidApp  mApp;  // FIXME LEAK
+  private final ILister mILister;
+  private final ListerHandler mLister; // lister that manages downloaded shots (if null shots are not downloaded)
+  private final TopoDroidApp  mApp;  // FIXME LEAK
   private int mNr;               // number of shots before download
  
   DeviceX310TakeShot( ILister ilister, ListerHandler lister, TopoDroidApp app, int nr )

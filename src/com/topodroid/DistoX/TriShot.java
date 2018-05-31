@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid centerline computation: temporary shot
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -68,7 +68,7 @@ class TriShot
   ArrayList<DBlock> getBlocks() { return blocks; }
 
   /** get the temp-shot distance
-   * @note if the temp-shot is reversed the distance is negative
+   * note if the temp-shot is reversed the distance is negative
    */
   float d()
   {

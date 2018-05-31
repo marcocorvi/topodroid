@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid MobileTopographer pointlist files dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -55,7 +55,7 @@ class FixedImportDialog extends MyDialog
   static final private String POINTLISTS = Environment.getExternalStorageDirectory().getPath() + "/MobileTopographer/pointlists";
   static final private String POINTLISTS_PRO = Environment.getExternalStorageDirectory().getPath() + "/MobileTopographerPro/pointlists";
 
-  private FixedActivity mParent;
+  private final FixedActivity mParent;
 
   private ArrayAdapter<String> mArrayAdapter;
   private ListView mList;

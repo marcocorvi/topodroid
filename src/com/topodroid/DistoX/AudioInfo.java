@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid Audio info (id, sid, shot_id, date )
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -13,10 +13,10 @@ package com.topodroid.DistoX;
 
 class AudioInfo
 {
-  public long sid;       // survey id
-  public long id;        // audio id
-  public long shotid;    // shot id
-  public String mDate;
+  private final long sid;       // survey id
+  public  final long id;        // audio id
+  public  final long shotid;    // shot id
+  private final String mDate;
 
   AudioInfo( long _sid, long _id, long _shotid, String dt )
   {

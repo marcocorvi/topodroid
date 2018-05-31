@@ -125,11 +125,11 @@
      <item name="grid3">Тройна таблица</item>
   </string-array>
 
-  <string-array name="sectionStations">
+  <!-- UNUSED string-array name="sectionStations">
      <item name="both">В двата</item>
      <item name="from">В заден</item>
      <item name="to">В преден</item>
-  </string-array>
+  </string-array -->
 
   <!-- UNUSED string-array name="deviceType">
      <item name="none">Няма</item>

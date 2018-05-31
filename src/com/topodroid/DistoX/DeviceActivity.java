@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid DistoX device activity
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -70,7 +70,7 @@ public class DeviceActivity extends Activity
 
   private TextView mTvAddress;
 
-  private static int izonsno[] = {
+  private static final int izonsno[] = {
                         0,
                         R.drawable.iz_toggle_no,
                         R.drawable.iz_compute_no,
@@ -80,7 +80,7 @@ public class DeviceActivity extends Activity
                         // R.drawable.iz_remote_no
                      };
 
-  private static int izons[] = {
+  private static final int izons[] = {
                         R.drawable.iz_bt,
                         R.drawable.iz_toggle,
                         R.drawable.iz_compute,
@@ -90,20 +90,20 @@ public class DeviceActivity extends Activity
 			R.drawable.iz_empty
                      };
 
-  BitmapDrawable mBMtoggle;
-  BitmapDrawable mBMtoggle_no;
-  BitmapDrawable mBMcalib;
-  BitmapDrawable mBMcalib_no;
-  BitmapDrawable mBMread;
-  BitmapDrawable mBMread_no;
+  private BitmapDrawable mBMtoggle;
+  private BitmapDrawable mBMtoggle_no;
+  private BitmapDrawable mBMcalib;
+  private BitmapDrawable mBMcalib_no;
+  private BitmapDrawable mBMread;
+  private BitmapDrawable mBMread_no;
 
-  final int IDX_TOGGLE = 1;
-  final int IDX_CALIB  = 2;
-  final int IDX_INFO   = 3;
-  final int IDX_READ   = 4;
-  final int IDX_MEMORY = 5;
+  static final int IDX_TOGGLE = 1;
+  static final int IDX_CALIB  = 2;
+  static final int IDX_INFO   = 3;
+  static final int IDX_READ   = 4;
+  static final int IDX_MEMORY = 5;
 
-  private static int menus[] = {
+  private static final int menus[] = {
                         R.string.menu_scan,
                         R.string.menu_pair,
                         R.string.menu_detach,
@@ -113,7 +113,7 @@ public class DeviceActivity extends Activity
                         // CALIB_RESET , R.string.menu_calib_reset
                      };
 
-  private static int help_icons[] = {
+  private static final int help_icons[] = {
                         R.string.help_bluetooth,
                         R.string.help_toggle,
                         R.string.title_calib,
@@ -122,7 +122,7 @@ public class DeviceActivity extends Activity
                         R.string.help_sdcard
                         // R.string.help_remote
                      };
-  private static int help_menus[] = {
+  private static final int help_menus[] = {
                         R.string.help_scan,
                         R.string.help_pair,
                         R.string.help_detach,
@@ -140,7 +140,7 @@ public class DeviceActivity extends Activity
   // private String mAddress;
   private Device mDevice;
 
-  final BroadcastReceiver mPairReceiver = new BroadcastReceiver()
+  private final BroadcastReceiver mPairReceiver = new BroadcastReceiver()
   {
     public void onReceive( Context ctx, Intent intent )
     {
@@ -175,14 +175,14 @@ public class DeviceActivity extends Activity
   // private Button mButtonHelp;
   private Button[] mButton1;
   private int mNrButton1 = 6; // 7 if ButtonRemote
-  HorizontalListView mListView;
-  HorizontalButtonView mButtonView1;
-  ListView   mMenu;
-  Button     mImage;
+  private HorizontalListView mListView;
+  private HorizontalButtonView mButtonView1;
+  private ListView   mMenu;
+  private Button     mImage;
   // HOVER
   // MyMenuAdapter mMenuAdapter;
-  ArrayAdapter< String > mMenuAdapter;
-  boolean onMenu;
+  private ArrayAdapter< String > mMenuAdapter;
+  private boolean onMenu;
 
 
   // private void setButtonRemote( )
@@ -360,7 +360,7 @@ public class DeviceActivity extends Activity
     }
   }
 
-  void detachDevice()
+  private void detachDevice()
   {
     if ( mDevice == null ) return;
     mApp.setDevice( null );
@@ -372,7 +372,7 @@ public class DeviceActivity extends Activity
 
 
 
-  void pairDevice()
+  private void pairDevice()
   {
     if ( mDevice == null ) return;
     BluetoothDevice device = mApp.mBTAdapter.getRemoteDevice( mDevice.mAddress );

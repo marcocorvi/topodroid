@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid 3 vector
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  * This software is adapted from TopoLinux implementation,
@@ -24,7 +24,7 @@ class Vector
 {
   float x,y,z;
 
-  static Vector zero = new Vector(0.0f, 0.0f, 0.0f);
+  static final Vector zero = new Vector(0.0f, 0.0f, 0.0f);
 
   // defaulkt cstr: zero vector
   Vector()

@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid drawing: drawing I/O
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -38,12 +38,12 @@ import java.util.Locale;
 
 import android.graphics.RectF;
 
-import android.util.Log;
+// import android.util.Log;
 
 class DrawingIO
 {
-  private static float toTherion = TDConst.TO_THERION;
-  private static float oneMeter  = DrawingUtil.SCALE_FIX * toTherion;
+  private static final float toTherion = TDConst.TO_THERION;
+  private static final float oneMeter  = DrawingUtil.SCALE_FIX * toTherion;
 
   private static String readLine( BufferedReader br )
   {
@@ -1046,13 +1046,13 @@ class DrawingIO
     PrintWriter pw  = new PrintWriter(sw);
     pw.format("#P");
     String[] vals = points.split(",");
-    for ( int k=0; k<vals.length; ++k ) if ( vals[k].length() > 0 ) pw.format(" %s", vals[k] );
+    for ( String v : vals ) if ( v.length() > 0 ) pw.format(" %s", v );
     pw.format("\n#L");
     vals = lines.split(",");
-    for ( int k=0; k<vals.length; ++k ) if ( vals[k].length() > 0 ) pw.format(" %s", vals[k] );
+    for ( String v : vals ) if ( v.length() > 0 ) pw.format(" %s", v );
     pw.format("\n#A");
     vals = lines.split(",");
-    for ( int k=0; k<vals.length; ++k ) if ( vals[k].length() > 0 ) pw.format(" %s", vals[k] );
+    for ( String v : vals ) if ( v.length() > 0 ) pw.format(" %s", v );
     pw.format("\n");
     out.write( sw.getBuffer().toString() );
   }
@@ -1156,68 +1156,72 @@ class DrawingIO
         float th = TDConst.TO_THERION;
         StringWriter sw = new StringWriter();
         PrintWriter pw  = new PrintWriter(sw);
-        for ( DrawingPath splay : splays ) {
-          // if ( bbox.left > splay.right  || bbox.right  < splay.left ) continue;
-          // if ( bbox.top  > splay.bottom || bbox.bottom < splay.top  ) continue;
-          if ( splay.intersects( bbox ) ) {
-            pw.format("line u:splay -visibility off\n");
-            pw.format( Locale.US, "  %.2f %.2f\n  %.2f %.2f\n", splay.x1*th, -splay.y1*th, splay.x2*th, -splay.y2*th );
-            pw.format("endline\n");
+	synchronized( splays ) {
+          for ( DrawingPath splay : splays ) {
+            // if ( bbox.left > splay.right  || bbox.right  < splay.left ) continue;
+            // if ( bbox.top  > splay.bottom || bbox.bottom < splay.top  ) continue;
+            if ( splay.intersects( bbox ) ) {
+              pw.format("line u:splay -visibility off\n");
+              pw.format( Locale.US, "  %.2f %.2f\n  %.2f %.2f\n", splay.x1*th, -splay.y1*th, splay.x2*th, -splay.y2*th );
+              pw.format("endline\n");
+            }
           }
-        }
+	}
         out.write( sw.toString() );
         out.newLine();
       }
 
       if ( TDSetting.mAutoStations ) {
-        for ( DrawingStationName st : stations ) {
-          NumStation station = st.station();
-          if ( station != null && station.barriered() ) continue;
-          // FIXME if station is in the convex hull (bbox) of the lines
-          if ( bbox.left > st.cx || bbox.right  < st.cx ) continue;
-          if ( bbox.top  > st.cy || bbox.bottom < st.cy ) continue;
-	  String st_str = st.toTherion();
-	  if ( st_str != null ) {
-            out.write( st_str );
-            out.newLine();
-	  }
+        synchronized( stations ) {
+          for ( DrawingStationName st : stations ) {
+            NumStation station = st.station();
+            if ( station != null && station.barriered() ) continue;
+            // FIXME if station is in the convex hull (bbox) of the lines
+            if ( bbox.left > st.cx || bbox.right  < st.cx ) continue;
+            if ( bbox.top  > st.cy || bbox.bottom < st.cy ) continue;
+	    String st_str = st.toTherion();
+	    if ( st_str != null ) {
+              out.write( st_str );
+              out.newLine();
+	    }
 /*
  * this was to export splays by the station instead of all of them
  *
-          if ( TDSetting.mTherionSplays ) {
-            float th = TDConst.TO_THERION;
-            float x = st.cx * th;
-            float y = - st.cy * th;
-            th *= DrawingUtil.SCALE_FIX;
-            List< DBlock > blks = dh.selectSplaysAt( sid, st.name(), false );
-            if ( type == PlotInfo.PLOT_PLAN ) {
-              for ( DBlock blk : blks ) {
-                float h = blk.mLength * TDMath.cosd( blk.mClino ) * th;
-                float e = h * TDMath.sind( blk.mBearing );
-                float n = h * TDMath.cosd( blk.mBearing );
-                out.write( "line splay\n" );
-                out.write( String.format(Locale.US, "  %.2f %.2f\n  %.2f %.2f\n", x, y, x+e, y+n ) );
-                out.write( "endline\n" );
-              }
-            } else if ( PlotInfo.isProfile( type ) ) {
-              for ( DBlock blk : blks ) {
-                float v = blk.mLength * TDMath.sind( blk.mClino ) * th;
-                float h = blk.mLength * TDMath.cosd( blk.mClino ) * th * blk.getReducedExtend();
-                out.write( "line splay\n" );
-                out.write( String.format(Locale.US, "  %.2f %.2f\n  %.2f %.2f\n", x, y, x+h, y+v ) );
-                out.write( "endline\n" );
-              }
-            } else if ( PlotInfo.isSection( type ) ) {
-              for ( DBlock blk : blks ) {
-                float d = blk.mLength;
-                float b = blk.mBearing;
-                float c = blk.mClino;
-                long  e = blk.getReducedExtend();
+            if ( TDSetting.mTherionSplays ) {
+              float th = TDConst.TO_THERION;
+              float x = st.cx * th;
+              float y = - st.cy * th;
+              th *= DrawingUtil.SCALE_FIX;
+              List< DBlock > blks = dh.selectSplaysAt( sid, st.name(), false );
+              if ( type == PlotInfo.PLOT_PLAN ) {
+                for ( DBlock blk : blks ) {
+                  float h = blk.mLength * TDMath.cosd( blk.mClino ) * th;
+                  float e = h * TDMath.sind( blk.mBearing );
+                  float n = h * TDMath.cosd( blk.mBearing );
+                  out.write( "line splay\n" );
+                  out.write( String.format(Locale.US, "  %.2f %.2f\n  %.2f %.2f\n", x, y, x+e, y+n ) );
+                  out.write( "endline\n" );
+                }
+              } else if ( PlotInfo.isProfile( type ) ) {
+                for ( DBlock blk : blks ) {
+                  float v = blk.mLength * TDMath.sind( blk.mClino ) * th;
+                  float h = blk.mLength * TDMath.cosd( blk.mClino ) * th * blk.getReducedExtend();
+                  out.write( "line splay\n" );
+                  out.write( String.format(Locale.US, "  %.2f %.2f\n  %.2f %.2f\n", x, y, x+h, y+v ) );
+                  out.write( "endline\n" );
+                }
+              } else if ( PlotInfo.isSection( type ) ) {
+                for ( DBlock blk : blks ) {
+                  float d = blk.mLength;
+                  float b = blk.mBearing;
+                  float c = blk.mClino;
+                  long  e = blk.getReducedExtend();
+                }
               }
             }
-          }
 */
-        }
+          }
+	}
       } else {
         synchronized( userstations ) {
           for ( DrawingStationPath sp : userstations ) {

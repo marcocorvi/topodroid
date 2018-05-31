@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid survey archiver
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -37,8 +37,8 @@ import java.util.List;
 
 class Archiver
 {
-  private TopoDroidApp app;
-  private DataHelper app_data;
+  private final TopoDroidApp app;
+  private final DataHelper app_data;
   private static final int BUF_SIZE = 2048;
   private byte[] data = new byte[ BUF_SIZE ];
 
@@ -80,7 +80,7 @@ class Archiver
   {
     if ( app.mSID < 0 ) return false;
     
-    File temp = null;
+    // File temp = null;
     String survey = app.mySurvey;
     boolean ret = true;
 

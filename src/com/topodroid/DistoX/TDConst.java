@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid numerical constants
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -62,7 +62,7 @@ class TDConst
     "KML",
     "OziExplorer"
   };
-  static final int[] mSurveyExportIndex = { 
+  static final private int[] mSurveyExportIndex = {
     DISTOX_EXPORT_ZIP,
     DISTOX_EXPORT_DAT,
     DISTOX_EXPORT_CSX,
@@ -90,7 +90,7 @@ class TDConst
       "SVG",
       "PNG"
   };
-  static final int[] mPlotExportIndex = {
+  static final private int[] mPlotExportIndex = {
     DISTOX_EXPORT_TH2,
     DISTOX_EXPORT_CSX,
     DISTOX_EXPORT_DXF,
@@ -99,10 +99,10 @@ class TDConst
   };
 
   static final String[] mCalibExportTypes = { "CSV" };
-  static final int[] mCalibExportIndex = { DISTOX_EXPORT_CSV };
+  static final private int[] mCalibExportIndex = { DISTOX_EXPORT_CSV };
 
   static final String[] mSketchExportTypes = { "Therion", "DXF" };
-  static final int[] mSketchExportIndex = { DISTOX_EXPORT_TH3, DISTOX_EXPORT_DXF };
+  static final private int[] mSketchExportIndex = { DISTOX_EXPORT_TH3, DISTOX_EXPORT_DXF };
 
   private static int exportIndex( String type, String[] types, int[] index )
   {

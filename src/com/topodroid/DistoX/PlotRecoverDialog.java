@@ -9,7 +9,7 @@
  * a station on it or pop one from it
  *
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -51,7 +51,7 @@ class PlotRecoverDialog extends MyDialog
                         // , OnItemClickListener
 {
   private TopoDroidApp mApp;
-  private DrawingWindow mParent; 
+  private final DrawingWindow mParent;
 
   // private TextView mTVfilename;
   private Button mBtnOK;
@@ -59,11 +59,11 @@ class PlotRecoverDialog extends MyDialog
 
   // private ListView mList;
   private Spinner mSpin;
-  ArrayAdapter<String> mAdapter;
+  private ArrayAdapter<String> mAdapter;
   private String[] mFiles;
   private String mFilename;
   private String mSelected;
-  long mType;             // plot type
+  private long mType;             // plot type
 
   // type is either 1 or 2
   PlotRecoverDialog( Context context, DrawingWindow parent, String filename, long type )

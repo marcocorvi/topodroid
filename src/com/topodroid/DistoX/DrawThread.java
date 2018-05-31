@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid  surface (canvas) drawing thread
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -21,7 +21,7 @@ class DrawThread extends  Thread
   private volatile SurfaceHolder mHolder;
   private volatile boolean mRunning;
 
-  private IDrawingSurface mParent;
+  private final IDrawingSurface mParent;
 
   DrawThread( IDrawingSurface parent, SurfaceHolder holder)
   {

@@ -5,7 +5,7 @@
  *
  * @brief PocketTopo file IO - String
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -29,7 +29,7 @@ class PTString
   /** cstr
    * @param val C string (zero terminated)
    *
-   * @note a NULL string is considered as an empty string
+   * note a NULL string is considered as an empty string
    */
   PTString( String val )
   {

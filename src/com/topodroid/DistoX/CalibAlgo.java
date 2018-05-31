@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid DistoX calibration algorithm
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  * This software is adapted from TopoLinux implementation,
@@ -19,7 +19,7 @@ import java.lang.Math;
 import java.util.Locale;
 
 // used by logCoeff
-import android.util.Log;
+// import android.util.Log;
 
 class CalibAlgo
 {
@@ -49,7 +49,7 @@ class CalibAlgo
 
   static protected Vector scaledVector( Vector v ) { return scaledVector( v.x, v.y, v.z ); }
 
-  static protected Vector scaledVector( float x, float y, float z )
+  static private Vector scaledVector( float x, float y, float z )
   {
     return new Vector( x/TopoDroidUtil.FV, y/TopoDroidUtil.FV, z/TopoDroidUtil.FV );
   }
@@ -169,14 +169,14 @@ class CalibAlgo
 
   // public int nrCoeff() { return mNonLinear ? 52 : 48; }
 
-  static protected long roundV( float x )
+  static private long roundV( float x )
   {
     long v = (long)Math.round(x * TopoDroidUtil.FV);
     if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
     return v;
   }
 
-  static protected long roundM( float x )
+  static private long roundM( float x )
   {
     long v = (long)Math.round(x * TopoDroidUtil.FM);
     if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;

@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid lister interface
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -13,15 +13,15 @@ package com.topodroid.DistoX;
 
 import android.view.SurfaceHolder;
 
-public interface IDrawingSurface 
+interface IDrawingSurface 
 {
   /**
    * @param holder surface holder
    * 
    * refresh surface
    */
-  public void refresh( SurfaceHolder holder );
+  void refresh( SurfaceHolder holder );
 
-  public boolean isDrawing();
+  boolean isDrawing();
 
 }

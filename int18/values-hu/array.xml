@@ -145,11 +145,11 @@
      <item name="grid3">3D Rács</item>
   </string-array>
 
-  <string-array name="sectionStations">
+  <!-- UNUSED string-array name="sectionStations">
      <item name="both">Mindkettő</item>
      <item name="from">Hátsó</item>
      <item name="to">Elülső</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="recentNr">
      <item name="3">3</item>

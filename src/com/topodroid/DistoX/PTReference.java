@@ -5,7 +5,7 @@
  *
  * @brief PocketTopo file IO
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -31,7 +31,7 @@ class PTReference
       _east = 0L;
       _north = 0L;
       _altitude = 0;
-      _comment = new PTString();;
+      _comment = new PTString();
     }
 
     PTReference( String id, long east, long north, int altitude, String comment )

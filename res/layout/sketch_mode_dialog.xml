@@ -38,13 +38,13 @@
     <CheckBox android:id="@+id/sketch_mode_splays"
         android:layout_width="fill_parent" 
         style="@style/button_default"
-        android:text="Show splays"
+	android:text="@string/splays_show"
       />
 
     <CheckBox android:id="@+id/sketch_mode_foresurface"
         android:layout_width="fill_parent" 
         style="@style/button_default"
-        android:text="Show fore surface"
+	android:text="@string/foresurface_show"
       />
 
     <LinearLayout 

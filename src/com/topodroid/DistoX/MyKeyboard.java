@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid numerical keyboard dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -75,7 +75,7 @@ class MyKeyboard // FIXME DIALOG extends Dialog
 
   private Map< EditText, Integer > mFlags;
 
-  private Context  mContext;
+  private final Context  mContext;
   private EditText mEdit; 
   private KeyboardView mKeyboardView;
   private Keyboard mKeyboard;

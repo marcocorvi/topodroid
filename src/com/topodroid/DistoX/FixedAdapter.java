@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid adapter for fixed station info
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -26,7 +26,7 @@ import java.util.List;
 class FixedAdapter extends ArrayAdapter< FixedInfo >
 {
   private List< FixedInfo > items;
-  private Context context;
+  private final Context context;
 
   FixedAdapter( Context ctx, int id, List< FixedInfo > items )
   {
@@ -43,7 +43,7 @@ class FixedAdapter extends ArrayAdapter< FixedInfo >
     View v = convertView;
     if ( v == null ) {
       LayoutInflater li = (LayoutInflater)context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-      v = li.inflate( R.layout.row, null );
+      v = li.inflate( R.layout.row, parent, false );
     }
 
     FixedInfo b = items.get( pos );

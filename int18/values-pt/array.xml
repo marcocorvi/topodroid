@@ -127,11 +127,11 @@
      <item name="grid3">Grade tripla</item>
   </string-array>
 
-  <string-array name="sectionStations">
+  <!-- UNUSED string-array name="sectionStations">
      <item name="both">Ambos</item>
      <item name="from">De</item>
      <item name="to">Para</item>
-  </string-array>
+  </string-array -->
 
   <!-- OK string-array name="recentNr">
      <item name="3">3</item>

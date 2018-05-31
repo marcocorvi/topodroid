@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid sensor measurement edit dialog 
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -32,7 +32,7 @@ import android.view.View;
 class SensorEditDialog extends MyDialog
                        implements View.OnClickListener
 {
-  private SensorListActivity mParent;
+  private final SensorListActivity mParent;
   private SensorInfo mSensor;
 
   // private TextView mTVtype;

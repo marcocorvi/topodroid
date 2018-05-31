@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid sketch save dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  *
@@ -15,7 +15,7 @@
 package com.topodroid.DistoX;
 
 import java.util.ArrayList;
-import java.util.List;
+// import java.util.List;
 import java.util.Locale;
 
 // import android.app.Dialog;
@@ -51,11 +51,11 @@ class SketchNewShotDialog extends MyDialog
   private EditText mETazimuth;
   private EditText mETclino;
 
-  private SketchWindow mParent;
+  private final SketchWindow mParent;
   private DataHelper     mData;
-  private ShotWindow   mShots;
-  private TopoDroidApp   mApp;
-  String mFrom;
+  private final ShotWindow   mShots;
+  private final TopoDroidApp   mApp;
+  private String mFrom;
   boolean manual_shot;
   private DBlock mBlk;
 

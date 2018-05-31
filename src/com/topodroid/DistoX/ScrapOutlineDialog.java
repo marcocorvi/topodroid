@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid list of scrap outlines
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -42,8 +42,8 @@ class ScrapOutlineDialog extends MyDialog
                                 // , OnItemLongClickListener
                                 , View.OnClickListener
 {
-  private DrawingWindow mParent;
-  private TopoDroidApp mApp;
+  private final DrawingWindow mParent;
+  private final TopoDroidApp mApp;
   private ArrayAdapter<String> mArrayAdapter;
   // private ListItemAdapter mArrayAdapter;
   private Button mBtnBack;

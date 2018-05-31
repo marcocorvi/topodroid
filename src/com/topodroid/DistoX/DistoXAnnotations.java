@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid survey shot dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -19,7 +19,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 // import android.app.Activity;
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 import android.content.Context;
 

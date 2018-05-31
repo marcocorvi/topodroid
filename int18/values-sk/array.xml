@@ -119,11 +119,11 @@
      <item name="grid3">Tri mriežky</item>
   </string-array>
 
-  <string-array name="sectionStations">
+  <!-- UNUSED string-array name="sectionStations">
      <item name="Entrambe">oba</item>
      <item name="from">od</item>
      <item name="to">na</item>
-  </string-array>
+  </string-array -->
 
   <!-- UNUSED string-array name="deviceType">
      <item name="none">Nessuno</item>

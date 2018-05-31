@@ -21,7 +21,7 @@
 package com.topodroid.DistoX;
 
 import android.os.Bundle;
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Paint;
 import android.graphics.Color;

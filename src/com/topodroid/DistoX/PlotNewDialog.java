@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid new-plot dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -37,7 +37,7 @@ class PlotNewDialog extends MyDialog
                            implements View.OnClickListener
                            , View.OnLongClickListener
 {
-  private TopoDroidApp mApp;
+  private final TopoDroidApp mApp;
   private INewPlot mMaker;
   // private boolean notDone;
 

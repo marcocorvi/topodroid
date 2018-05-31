@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid drawing photo-item edit dialog 
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -40,8 +40,8 @@ import android.media.ExifInterface;
 class DrawingPhotoEditDialog extends MyDialog
                              implements View.OnClickListener
 {
-  private TopoDroidApp  mApp;
-  private DrawingWindow mParent;
+  private final TopoDroidApp  mApp;
+  private final DrawingWindow mParent;
   private DrawingPhotoPath mPhoto;
   private String mFilename;
 

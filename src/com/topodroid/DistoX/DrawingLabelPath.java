@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid drawing: label-point
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -30,7 +30,7 @@ import java.util.Locale;
  */
 class DrawingLabelPath extends DrawingPointPath
 {
-  private static float toTherion = TDConst.TO_THERION;
+  private static final float toTherion = TDConst.TO_THERION;
   // private Paint paint;
 
   DrawingLabelPath( String text, float off_x, float off_y, int scale, String options )

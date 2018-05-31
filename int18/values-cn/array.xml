@@ -124,7 +124,7 @@
      <item name="grid3">全部显示</item>
   </string-array>
 
-  <!-- TODO string-array name="sectionStations">
+  <!-- UNUSED string-array name="sectionStations">
      <item name="both">两者</item>
      <item name="from">后面</item>
      <item name="to">前面</item>

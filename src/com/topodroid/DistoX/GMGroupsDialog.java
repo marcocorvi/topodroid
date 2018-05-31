@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid calibration data dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -26,7 +26,7 @@ import android.view.View.OnClickListener;
 class GMGroupsDialog extends MyDialog
                      implements OnClickListener
 {
-  private GMActivity mParent;
+  private final GMActivity mParent;
 
   private Button mBtnReset;
   private Button mBtnOK;

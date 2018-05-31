@@ -6,7 +6,7 @@
  * @brief TopoDroid Therion parser
  *
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * ----------------------------------------------------------
  */
@@ -66,7 +66,7 @@ class ParserTherion
     String name;
     float e, n, z; // north east, vertical (upwards)
 
-    public Fix( String nm, float e0, float n0, float z0 )
+    Fix( String nm, float e0, float n0, float z0 )
     {
       name = nm;
       e = e0;
@@ -81,7 +81,7 @@ class ParserTherion
     String comment;
     long flag;
  
-    public Station( String n, String c, long f )
+    Station( String n, String c, long f )
     {
       name = n;
       comment = c;

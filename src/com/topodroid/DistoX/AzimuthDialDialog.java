@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid survey azimuth dialog 
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -48,8 +48,8 @@ class AzimuthDialDialog extends MyDialog
                               , IBearingAndClino
 {
 
-  private ILister mParent;
-  float mAzimuth;
+  private final ILister mParent;
+  private float mAzimuth;
   private Bitmap mBMdial;
 
   private EditText mETazimuth;

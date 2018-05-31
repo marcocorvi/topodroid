@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid main drawing activity
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -23,7 +23,7 @@ import android.graphics.Paint.FontMetrics;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Path;
-import android.graphics.Path.Direction;
+// import android.graphics.Path.Direction;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -36,14 +36,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.view.ViewGroup;
-import android.view.Display;
-import android.util.DisplayMetrics;
+//  android.view.ViewGroup;
+// import android.view.Display;
+// import android.util.DisplayMetrics;
 // import android.view.ContextMenu;
 // import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.Button;
-import android.widget.ZoomControls;
-import android.widget.ZoomButton;
+// import android.widget.ZoomControls;
+// import android.widget.ZoomButton;
 import android.widget.ZoomButtonsController;
 import android.widget.ZoomButtonsController.OnZoomListener;
 import android.widget.ListView;
@@ -54,17 +54,17 @@ import android.widget.Toast;
 
 import android.provider.MediaStore;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
-import android.graphics.BitmapFactory;
+// import android.graphics.Bitmap.CompressFormat;
+// import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 
 import android.net.Uri;
 
 import java.io.File;
-import java.io.FileWriter;
+// import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
+// import java.io.BufferedWriter;
+// import java.io.FileOutputStream;
 import java.util.List;
 import java.util.Set;
 import java.util.ArrayList;
@@ -73,7 +73,7 @@ import java.util.concurrent.RejectedExecutionException;
 // import java.util.Deque; // only API-9
 
 // import android.util.SparseArray;
-import android.util.Log;
+// import android.util.Log;
 
 /**
  */
@@ -93,67 +93,67 @@ public class DrawingWindow extends ItemDrawer
                                       , IPhotoInserter
                                       , IAudioInserter
 {
-  private static int izons_ok[] = { 
+  private static final int izons_ok[] = {
                         R.drawable.iz_edit_ok, // 0
                         R.drawable.iz_eraser_ok,
                         R.drawable.iz_select_ok };
 
-  private static int IC_DOWNLOAD  = 3;
-  private static int IC_BLUETOOTH = 4;
-  private static int IC_PLAN      = 7;
-  private static int IC_DIAL      = 8;
-  private static int IC_CONT_NONE = 12;  // index of continue-no icon
-  private static int IC_PREV      = 13;
-  private static int IC_NEXT      = 14;
-  private static int IC_JOIN      = 15;
-  private static int IC_BORDER_NO = 18;
-  private static int IC_ERASE_ALL = 20; 
-  private static int IC_MEDIUM    = 21;
+  private static final int IC_DOWNLOAD  = 3;
+  private static final int IC_BLUETOOTH = 4;
+  private static final int IC_PLAN      = 7;
+  private static final int IC_DIAL      = 8;
+  private static final int IC_CONT_NONE = 12;  // index of continue-no icon
+  private static final int IC_PREV      = 13;
+  private static final int IC_NEXT      = 14;
+  private static final int IC_JOIN      = 15;
+  private static final int IC_BORDER_NO = 18;
+  private static final int IC_ERASE_ALL = 20;
+  private static final int IC_MEDIUM    = 21;
 
-  private static int IC_MENU          = 21+1;
-  private static int IC_EXTEND        = 21+2;
-  private static int IC_JOIN_NO       = 21+3;
-  private static int IC_CONT_START    = 21+4;     // index of continue icon
-  private static int IC_CONT_END      = 21+5;     // index of continue icon
-  private static int IC_CONT_BOTH     = 21+6;     // index of continue icon
-  private static int IC_CONT_CONTINUE = 21+7;     // index of continue icon
-  private static int IC_ADD           = 21+8;
-  private static int IC_BORDER_OK     = 21+9;
-  private static int IC_BORDER_BOX    = 21+10; 
-  private static int IC_ERASE_POINT   = 21+11; 
-  private static int IC_ERASE_LINE    = 21+12; 
-  private static int IC_ERASE_AREA    = 21+13; 
-  private static int IC_SMALL         = 21+14;
-  private static int IC_LARGE         = 21+15;
-  private static int IC_SELECT_ALL    = 21+16;
-  private static int IC_SELECT_POINT  = 21+17;
-  private static int IC_SELECT_LINE   = 21+18;
-  private static int IC_SELECT_AREA   = 21+19;
-  private static int IC_SELECT_SHOT   = 21+20;
-  private static int IC_SELECT_STATION= 21+21;
-  private static int IC_CONT_OFF      = 21+22;
-  private static int IC_DELETE_OFF    = 17;
-  private static int IC_DELETE_ON     = 21+23;
+  private static final int IC_MENU          = 21+1;
+  private static final int IC_EXTEND        = 21+2;
+  private static final int IC_JOIN_NO       = 21+3;
+  private static final int IC_CONT_START    = 21+4;     // index of continue icon
+  private static final int IC_CONT_END      = 21+5;     // index of continue icon
+  private static final int IC_CONT_BOTH     = 21+6;     // index of continue icon
+  private static final int IC_CONT_CONTINUE = 21+7;     // index of continue icon
+  private static final int IC_ADD           = 21+8;
+  private static final int IC_BORDER_OK     = 21+9;
+  private static final int IC_BORDER_BOX    = 21+10;
+  private static final int IC_ERASE_POINT   = 21+11;
+  private static final int IC_ERASE_LINE    = 21+12;
+  private static final int IC_ERASE_AREA    = 21+13;
+  private static final int IC_SMALL         = 21+14;
+  private static final int IC_LARGE         = 21+15;
+  private static final int IC_SELECT_ALL    = 21+16;
+  private static final int IC_SELECT_POINT  = 21+17;
+  private static final int IC_SELECT_LINE   = 21+18;
+  private static final int IC_SELECT_AREA   = 21+19;
+  private static final int IC_SELECT_SHOT   = 21+20;
+  private static final int IC_SELECT_STATION= 21+21;
+  private static final int IC_CONT_OFF      = 21+22;
+  private static final int IC_DELETE_OFF    = 17;
+  private static final int IC_DELETE_ON     = 21+23;
 
-  private static int BTN_DOWNLOAD = 3;  // index of mButton1 download button
-  private static int BTN_BLUETOOTH = 4; // index of mButton1 bluetooth button
-  private static int BTN_PLOT = 7;      // index of mButton1 plot button
-  private static int BTN_DIAL = 8;      // index of mButton1 azimuth button (level > normal)
+  private static final int BTN_DOWNLOAD = 3;  // index of mButton1 download button
+  private static final int BTN_BLUETOOTH = 4; // index of mButton1 bluetooth button
+  private static final int BTN_PLOT = 7;      // index of mButton1 plot button
+  private static final int BTN_DIAL = 8;      // index of mButton1 azimuth button (level > normal)
 
-  private static int BTN_CONT = 6;      // index of mButton2 continue button (level > normal)
-  private static int BTN_JOIN = 5;      // index of mButton3 join button
-  private static int BTN_REMOVE = 7;    // index of mButton3 remove
-  private static int BTN_BORDER = 8;    // line border-editing (leve > advanced)
+  private static final int BTN_CONT = 6;      // index of mButton2 continue button (level > normal)
+  private static final int BTN_JOIN = 5;      // index of mButton3 join button
+  private static final int BTN_REMOVE = 7;    // index of mButton3 remove
+  private static final int BTN_BORDER = 8;    // line border-editing (leve > advanced)
 
-  private static int BTN_SELECT_MODE = 3; // select-mode button
-  private static int BTN_SELECT_PREV = 3; // select-mode button
-  private static int BTN_SELECT_NEXT = 4; // select-mode button
-  private static int BTN_DELETE      = 7; // select-mode button
+  private static final int BTN_SELECT_MODE = 3; // select-mode button
+  private static final int BTN_SELECT_PREV = 3; // select-mode button
+  private static final int BTN_SELECT_NEXT = 4; // select-mode button
+  private static final int BTN_DELETE      = 7; // select-mode button
 
-  private static int BTN_ERASE_MODE = 5; // erase-mode button
-  private static int BTN_ERASE_SIZE = 6; // erase-size button
+  private static final int BTN_ERASE_MODE = 5; // erase-mode button
+  private static final int BTN_ERASE_SIZE = 6; // erase-size button
 
-  private static int izons[] = { 
+  private static final int izons[] = {
                         R.drawable.iz_edit,          // 0
                         R.drawable.iz_eraser,
                         R.drawable.iz_select,
@@ -205,7 +205,7 @@ public class DrawingWindow extends ItemDrawer
                         R.drawable.iz_cont_off,       // 21+22 continuation off
 			R.drawable.iz_delete,         // 21+23 do delete
                       };
-  private static int menus[] = {
+  private static final int menus[] = {
                         R.string.menu_switch,
                         R.string.menu_export,     // 0
                         R.string.menu_stats,      // 1
@@ -223,7 +223,7 @@ public class DrawingWindow extends ItemDrawer
   private static final int MENU_AREA  = 10;
   private static final int MENU_CLOSE = 11;
 
-  private static int help_icons[] = { 
+  private static final int help_icons[] = {
                         R.string.help_draw,
                         R.string.help_eraser,
                         R.string.help_edit,
@@ -247,7 +247,7 @@ public class DrawingWindow extends ItemDrawer
                         R.string.help_erase_mode,
                         R.string.help_erase_size
                       };
-  private static int help_menus[] = {
+  private static final int help_menus[] = {
                         R.string.help_plot_switch,
                         R.string.help_save_plot,
                         R.string.help_stats,
@@ -295,9 +295,9 @@ public class DrawingWindow extends ItemDrawer
   private Path  mCurrentPath;
 
   // LinearLayout popup_layout = null;
-  PopupWindow mPopupEdit   = null;
-  PopupWindow mPopupFilter = null;
-  PopupWindow mPopupJoin   = null;
+  private PopupWindow mPopupEdit   = null;
+  private PopupWindow mPopupFilter = null;
+  private PopupWindow mPopupJoin   = null;
 
   ShotNewDialog mShotNewDialog = null;
 
@@ -323,17 +323,17 @@ public class DrawingWindow extends ItemDrawer
   private boolean mEditMove;    // whether moving the selected point
   private boolean mShiftMove;   // whether to move the canvas in point-shift mode
   boolean mShiftDrawing;        // whether to shift the drawing
-  EraseCommand mEraseCommand = null;
+  private EraseCommand mEraseCommand = null;
 
-  int mHotItemType = -1;
+  private int mHotItemType = -1;
   private boolean mHasSelected = false;
   private boolean inLinePoint = false;
 
   // ZOOM
   static final float ZOOM_INC = 1.4f;
   static final float ZOOM_DEC = 1.0f/ZOOM_INC;
-  ZoomButtonsController mZoomBtnsCtrl = null;
-  boolean mZoomBtnsCtrlOn = false;
+  private ZoomButtonsController mZoomBtnsCtrl = null;
+  private boolean mZoomBtnsCtrlOn = false;
   // FIXME ZOOM_CTRL ZoomControls mZoomCtrl = null;
   // ZoomButton mZoomOut;
   // ZoomButton mZoomIn;
@@ -357,10 +357,10 @@ public class DrawingWindow extends ItemDrawer
   static final int CONT_END   = 2;  // continue: join to existing line
   static final int CONT_BOTH  = 3;  // continue: join to existing line
   static final int CONT_CONTINUE  = 4;  // continue: continue existing line 
-  static final int CONT_MAX   = 5; 
+  static final int CONT_MAX   = 5;
 
-  public int mMode       = MODE_MOVE;
-  private int mTouchMode = MODE_MOVE;
+  private int mMode         = MODE_MOVE;
+  private int mTouchMode    = MODE_MOVE;
   private int mContinueLine = CONT_NONE;
   private float mDownX;
   private float mDownY;
@@ -380,11 +380,11 @@ public class DrawingWindow extends ItemDrawer
 
   private String mName;   // current-plot name
   String mName1;          // first name (PLAN)
-  String mName2;          // second name (EXTENDED/PROJECTED)
-  String mName3;          // third name (SECTION)
-  String mFullName1;      // accessible by the SaveThread
-  String mFullName2;
-  String mFullName3;
+  private String mName2;          // second name (EXTENDED/PROJECTED)
+  private String mName3;          // third name (SECTION)
+  private String mFullName1;      // accessible by the SaveThread
+  private String mFullName2;
+  private String mFullName3;
 
   private PlotInfo mPlot1;
   private PlotInfo mPlot2;
@@ -405,7 +405,7 @@ public class DrawingWindow extends ItemDrawer
   private float mClino   = 0.0f;
   private PointF mOffset  = new PointF( 0f, 0f );
   private PointF mDisplayCenter;
-  protected float mZoom  = 1.0f;
+  private float mZoom  = 1.0f;
 
   private boolean mModified; // whether the sketch has been modified 
   private long mBackupTime;  // last time of backup
@@ -417,10 +417,10 @@ public class DrawingWindow extends ItemDrawer
   private float mBorderBottom     = 4096;
     
   // PLOT SPLIT
-  String mSplitName;
-  DrawingStationName mSplitStation;
-  ArrayList< PointF > mSplitBorder = null;
-  boolean mSplitRemove;
+  private String mSplitName;
+  private DrawingStationName mSplitStation;
+  private ArrayList< PointF > mSplitBorder = null;
+  private boolean mSplitRemove;
 
   // ----------------------------------------------------------------
   // BUTTONS and MENU
@@ -431,10 +431,10 @@ public class DrawingWindow extends ItemDrawer
   private Button[] mButton2; // draw
   private Button[] mButton3; // edit
   private Button[] mButton5; // eraser
-  static final int NR_BUTTON1 = 9;
-  static final int NR_BUTTON2 = 7;
-  static final int NR_BUTTON3 = 9;
-  static final int NR_BUTTON5 = 7;
+  private static final int NR_BUTTON1 = 9;
+  private static final int NR_BUTTON2 = 7;
+  private static final int NR_BUTTON3 = 9;
+  private static final int NR_BUTTON5 = 7;
   private int mNrButton1 = NR_BUTTON1; // main-primary [8: if level <= normal]
   private int mNrButton2 = NR_BUTTON2; // draw
   private int mNrButton3 = NR_BUTTON3; // edit [8 if level <= advanced]
@@ -489,13 +489,13 @@ public class DrawingWindow extends ItemDrawer
   // private Bitmap mBMdial;
   private MyTurnBitmap mDialBitmap; // use global MyDialBitmap
 
-  HorizontalListView mListView;
-  ListView   mMenu;
-  Button     mImage;
+  private HorizontalListView mListView;
+  private ListView   mMenu;
+  private Button     mImage;
   // HOVER
   // MyMenuAdapter mMenuAdapter;
-  ArrayAdapter< String > mMenuAdapter;
-  boolean onMenu;
+  private ArrayAdapter< String > mMenuAdapter;
+  private boolean onMenu;
 
   private int mNrSaveTh2Task = 0;
 
@@ -946,7 +946,7 @@ public class DrawingWindow extends ItemDrawer
         @Override
         public void handleMessage(Message msg) {
           // mApp.mShotWindow.enableSketchButton( true );
-          mApp.mEnableZip = true;
+          TopoDroidApp.mEnableZip = true;
         }
       };
     }
@@ -1406,7 +1406,7 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  long mSavedType;
+  private long mSavedType;
 
   private void resetStatus()
   {
@@ -1624,14 +1624,14 @@ public class DrawingWindow extends ItemDrawer
 
     setContentView(R.layout.drawing_activity);
     mDataDownloader   = mApp.mDataDownloader; // new DataDownloader( this, mApp );
-    mZoom             = mApp.mScaleFactor;    // canvas zoom
-    mBorderRight      = mApp.mDisplayWidth * 15 / 16;
-    mBorderLeft       = mApp.mDisplayWidth / 16;
-    mBorderInnerRight = mApp.mDisplayWidth * 3 / 4;
-    mBorderInnerLeft  = mApp.mDisplayWidth / 4;
-    mBorderBottom     = mApp.mDisplayHeight * 7 / 8;
+    mZoom             = TopoDroidApp.mScaleFactor;    // canvas zoom
+    mBorderRight      = TopoDroidApp.mDisplayWidth * 15 / 16;
+    mBorderLeft       = TopoDroidApp.mDisplayWidth / 16;
+    mBorderInnerRight = TopoDroidApp.mDisplayWidth * 3 / 4;
+    mBorderInnerLeft  = TopoDroidApp.mDisplayWidth / 4;
+    mBorderBottom     = TopoDroidApp.mDisplayHeight * 7 / 8;
 
-    mDisplayCenter = new PointF(mApp.mDisplayWidth  / 2, mApp.mDisplayHeight / 2);
+    mDisplayCenter = new PointF(TopoDroidApp.mDisplayWidth  / 2, TopoDroidApp.mDisplayHeight / 2);
 
     // setCurrentPaint();
     mCurrentBrush = new DrawingPenBrush();
@@ -1763,7 +1763,7 @@ public class DrawingWindow extends ItemDrawer
   {
     // if necessary save default export
     //
-    mZoom     = mApp.mScaleFactor;    // canvas zoom
+    mZoom     = TopoDroidApp.mScaleFactor;    // canvas zoom
     mOffset.x = 0;
     mOffset.y = 0;
     PlotInfo p1 = mApp_mData.getPlotInfo( mApp.mSID, name+"p" );
@@ -2320,7 +2320,7 @@ public class DrawingWindow extends ItemDrawer
       if ( mType == PlotInfo.PLOT_EXTENDED ) { 
         List<DBlock> list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
         mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl ); 
-        computeReferences( (int)mType, mName, mApp.mScaleFactor, true );
+        computeReferences( (int)mType, mName, TopoDroidApp.mScaleFactor, true );
         mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
         modified();
       } 
@@ -4301,7 +4301,7 @@ public class DrawingWindow extends ItemDrawer
 
       } else if ( b == mButton2[k2++] || b == mButton5[k5++] ) { // UNDO
         mDrawingSurface.undo();
-        if ( mDrawingSurface.hasMoreUndo() == false ) {
+        if ( ! mDrawingSurface.hasMoreUndo() ) {
           // undoBtn.setEnabled( false );
         }
         // redoBtn.setEnabled( true );
@@ -4716,12 +4716,12 @@ public class DrawingWindow extends ItemDrawer
     mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl );
     // doMoveTo();
     if ( mType == (int)PlotInfo.PLOT_PLAN ) {
-      computeReferences( mPlot2.type, mPlot2.name, mApp.mScaleFactor, true );
-      computeReferences( mPlot1.type, mPlot1.name, mApp.mScaleFactor, true );
+      computeReferences( mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, true );
+      computeReferences( mPlot1.type, mPlot1.name, TopoDroidApp.mScaleFactor, true );
       if ( reset ) resetReference( mPlot1 );
     } else if ( PlotInfo.isProfile( mType ) ) {
-      computeReferences( mPlot1.type, mPlot1.name, mApp.mScaleFactor, true );
-      computeReferences( mPlot2.type, mPlot2.name, mApp.mScaleFactor, true );
+      computeReferences( mPlot1.type, mPlot1.name, TopoDroidApp.mScaleFactor, true );
+      computeReferences( mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, true );
       if ( reset ) resetReference( mPlot2 );
     }
   }
@@ -4763,7 +4763,7 @@ public class DrawingWindow extends ItemDrawer
     } else {
       List<DBlock> list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
       mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl );
-      recomputeReferences( mApp.mScaleFactor, false );
+      recomputeReferences( TopoDroidApp.mScaleFactor, false );
       // if ( mType == (int)PlotInfo.PLOT_PLAN ) {
       //   if ( mPlot2 != null ) {
       //     computeReferences( (int)mPlot2.type, mPlot2.name, mApp.mScaleFactor, false );

@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid calib info (name, date, comment etc)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -20,7 +20,7 @@ class CalibInfo
   final static int ALGO_NON_LINEAR = 2;
   final static int ALGO_MINIMUM    = 3;
 
-  public long id;           //!< database ID
+  private long id;           //!< database ID
   public String name;       //!< name 
   public String date;       //!< date
   public String device;     //!< device address

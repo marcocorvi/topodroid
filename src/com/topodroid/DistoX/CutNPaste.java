@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid shot stations cut-n-paste
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -21,8 +21,8 @@ import android.widget.LinearLayout;
 // import android.widget.Toast;
 
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
+// import android.view.View.OnClickListener;
+// import android.view.View.OnTouchListener;
 import android.view.Gravity;
 import android.view.MotionEvent;
 

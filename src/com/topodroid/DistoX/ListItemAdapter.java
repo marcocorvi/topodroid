@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid adapter for calibration data
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -23,7 +23,7 @@ import android.view.LayoutInflater;
 
 class ListItemAdapter extends ArrayAdapter< String >
 {
-  private Context context;            // context 
+  private final Context context;            // context
 
 
   ListItemAdapter( Context ctx, int id )
@@ -41,7 +41,7 @@ class ListItemAdapter extends ArrayAdapter< String >
     View v = convertView;
     if ( v == null ) {
       LayoutInflater li = (LayoutInflater)context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-      v = li.inflate( R.layout.row, null );
+      v = li.inflate( R.layout.row, parent, false );
     }
 
     String b = getItem( pos );

@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid 3d sketch: drawing surface (canvas)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -13,29 +13,29 @@ package com.topodroid.DistoX;
 
 import android.content.Context;
 import android.graphics.*;
-import android.os.Handler;
-import android.os.Message;
+// import android.os.Handler;
+// import android.os.Message;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
+// import android.view.View;
 
 import android.graphics.Path;
 import android.graphics.Paint;
 
-import java.util.ArrayList;
-import java.util.TreeSet;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.EOFException;
+// import java.util.ArrayList;
+// import java.util.TreeSet;
+// import java.util.Collections;
+// import java.util.Iterator;
+// import java.util.List;
+// import java.io.BufferedWriter;
+// import java.io.FileReader;
+// import java.io.BufferedReader;
+// import java.io.FileNotFoundException;
+// import java.io.IOException;
+// import java.io.EOFException;
 
-import android.util.Log;
+// import android.util.Log;
 
 /**
  */
@@ -45,12 +45,12 @@ class SketchDrawingSurface extends SurfaceView
 {
   static final String TAG = "DistoX";
 
-  protected DrawThread mDrawThread;
+  private DrawThread mDrawThread;
   private Bitmap mBitmap;
   volatile boolean isDrawing = true;
-  DrawingPath mPreviewPath;
+  private DrawingPath mPreviewPath;
   // private SurfaceHolder mHolder; // canvas holder
-  private Context mContext;
+  private final Context mContext;
   private AttributeSet mAttrs;
   private int mWidth;            // canvas width
   private int mHeight;           // canvas height
@@ -179,7 +179,7 @@ class SketchDrawingSurface extends SurfaceView
 
   public void surfaceChanged(SurfaceHolder holder, int format, int width,  int height) 
   {
-    mBitmap =  Bitmap.createBitmap (width, height, Bitmap.Config.ARGB_8888);;
+    mBitmap =  Bitmap.createBitmap (width, height, Bitmap.Config.ARGB_8888);
   }
 
   void setThreadRunning( boolean running ) 

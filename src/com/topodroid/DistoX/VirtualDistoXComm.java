@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid - DistoX_server communication 
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -89,7 +89,7 @@ class VirtualDistoXComm extends TopoDroidComm
   /** Toggle device calibration mode
    * @param address    device address
    * @param type       device type
-   * @return 
+   * @return true if successful
    */
   boolean toggleCalibMode( String address, int type )
   {
@@ -231,4 +231,4 @@ class VirtualDistoXComm extends TopoDroidComm
   }
 
   // ====================================================================================
-};
+}

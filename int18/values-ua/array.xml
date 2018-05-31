@@ -120,11 +120,11 @@
      <item name="grid3">Потрійна сітка</item>
   </string-array>
 
-  <string-array name="sectionStations">
+  <!-- UNUSED string-array name="sectionStations">
      <item name="both">обидва</item>
      <item name="from">позаду</item>
      <item name="to">спереду</item>
-  </string-array>
+  </string-array -->
 
   <!-- UNUSED string-array name="deviceType">
      <item name="none">Без типу</item>

@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid list of plots to merge in the active plot
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -21,7 +21,7 @@ import android.content.Context;
 
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -38,7 +38,7 @@ class PlotMergeDialog extends MyDialog
                              implements OnItemClickListener
                                         , OnClickListener
 {
-  private DrawingWindow mParent;
+  private final DrawingWindow mParent;
   private ArrayAdapter<String> mArrayAdapter;
 
   // private ListView mList;

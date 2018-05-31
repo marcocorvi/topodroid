@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid current base directory dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -86,7 +86,7 @@ class CBDdialog extends MyDialog
     updateList();
   }
 
-  void updateList()
+  private void updateList()
   {
     mTVcbd.setText( mBasename );
 

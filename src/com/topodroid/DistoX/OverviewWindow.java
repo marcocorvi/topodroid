@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid sketch overview activity
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -71,7 +71,7 @@ public class OverviewWindow extends ItemDrawer
                                       , OnZoomListener
                                       , IZoomer
 {
-  private static int izons[] = { 
+  private static final int izons[] = {
                         R.drawable.iz_measure,       // 0
                         R.drawable.iz_mode,          // 1
                         R.drawable.iz_angle,   // 2
@@ -84,20 +84,20 @@ public class OverviewWindow extends ItemDrawer
                       };
   // FIXME_OVER private static int BTN_PLOT = 2;
 
-  private static int menus[] = {
+  private static final int menus[] = {
                         R.string.menu_close,
                         R.string.menu_options,
                         R.string.menu_help
                      };
 
-  private static int help_icons[] = { 
+  private static final int help_icons[] = {
                         R.string.help_measure,
                         R.string.help_refs,
                         R.string.help_measure_type,
                         // FIXME_OVER R.string.help_toggle_plot,
                         R.string.help_measure_undo,
                       };
-  private static int help_menus[] = {
+  private static final int help_menus[] = {
                         R.string.help_close,
                         R.string.help_prefs,
                         R.string.help_help
@@ -107,10 +107,10 @@ public class OverviewWindow extends ItemDrawer
 
   // FIXME_OVER BitmapDrawable mBMextend;
   // FIXME_OVER BitmapDrawable mBMplan;
-  BitmapDrawable mBMselect;
-  BitmapDrawable mBMselectOn;
-  BitmapDrawable mBMcontinueNo;
-  BitmapDrawable mBMcontinueOn;
+  private BitmapDrawable mBMselect;
+  private BitmapDrawable mBMselectOn;
+  private BitmapDrawable mBMcontinueNo;
+  private BitmapDrawable mBMcontinueOn;
 
   private final int IC_SELECT   = 0;
   private final int IC_CONTINUE = 2;
@@ -143,9 +143,9 @@ public class OverviewWindow extends ItemDrawer
     String mName1;  // first name (PLAN)
     String mName2;  // second name (EXTENDED)
 
-    boolean mZoomBtnsCtrlOn = false;
-    ZoomButtonsController mZoomBtnsCtrl = null;
-    View mZoomView;
+  private boolean mZoomBtnsCtrlOn = false;
+  private ZoomButtonsController mZoomBtnsCtrl = null;
+  private View mZoomView;
     // ZoomControls mZoomCtrl;
     // ZoomButton mZoomOut;
     // ZoomButton mZoomIn;
@@ -371,16 +371,16 @@ public class OverviewWindow extends ItemDrawer
   
     private Button[] mButton1;  // primary
     private int mNrButton1 = 4; // main-primary
-    HorizontalListView mListView;
-    HorizontalButtonView mButtonView1;
-    ListView   mMenu;
-    Button     mImage;
+  private HorizontalListView mListView;
+  private HorizontalButtonView mButtonView1;
+  private ListView   mMenu;
+  private Button     mImage;
     // HOVER
     // MyMenuAdapter mMenuAdapter;
-    ArrayAdapter< String > mMenuAdapter;
-    boolean onMenu;
-  
-    List<DBlock> mBlockList = null;
+    private ArrayAdapter< String > mMenuAdapter;
+  private boolean onMenu;
+
+  private List<DBlock> mBlockList = null;
   
     public float zoom() { return mZoom; }
 
@@ -443,7 +443,7 @@ public class OverviewWindow extends ItemDrawer
       Resources res = getResources();
       // mZoom = mApp.mScaleFactor;    // canvas zoom
 
-      mDisplayCenter = new PointF(mApp.mDisplayWidth  / 2, mApp.mDisplayHeight / 2);
+      mDisplayCenter = new PointF(TopoDroidApp.mDisplayWidth  / 2, TopoDroidApp.mDisplayHeight / 2);
 
       mOverviewSurface = (DrawingSurface) findViewById(R.id.drawingSurface);
       mOverviewSurface.setZoomer( this );
@@ -479,7 +479,7 @@ public class OverviewWindow extends ItemDrawer
       BrushManager.makePaths( mApp, res );
       setTheTitle();
 
-      mData         = mApp.mData; // new DataHelper( this ); 
+      mData         = TopoDroidApp.mData; // new DataHelper( this );
       Bundle extras = getIntent().getExtras();
       mSid          = extras.getLong( TDTag.TOPODROID_SURVEY_ID );
       // mFrom      = extras.getString( TDTag.TOPODROID_PLOT_FROM );
@@ -489,11 +489,11 @@ public class OverviewWindow extends ItemDrawer
       // mDrawingUtil = mLandscape ? (new DrawingUtilLandscape()) : (new DrawingUtilPortrait());
       mDrawingUtil = new DrawingUtilPortrait();
 
-      mBorderRight      = mApp.mDisplayWidth * 15 / 16;
-      mBorderLeft       = mApp.mDisplayWidth / 16;
-      mBorderInnerRight = mApp.mDisplayWidth * 3 / 4;
-      mBorderInnerLeft  = mApp.mDisplayWidth / 4;
-      mBorderBottom     = mApp.mDisplayHeight * 7 / 8;
+      mBorderRight      = TopoDroidApp.mDisplayWidth * 15 / 16;
+      mBorderLeft       = TopoDroidApp.mDisplayWidth / 16;
+      mBorderInnerRight = TopoDroidApp.mDisplayWidth * 3 / 4;
+      mBorderInnerLeft  = TopoDroidApp.mDisplayWidth / 4;
+      mBorderBottom     = TopoDroidApp.mDisplayHeight * 7 / 8;
 
       // Log.v("DistoX", "Overview from " + mFrom + " Type " + mType + " Zoom " + mZoom );
 
@@ -532,8 +532,8 @@ public class OverviewWindow extends ItemDrawer
       doPause();
     }
 
-    @Override
-    protected synchronized void onStart()
+    // @Override
+    // protected synchronized void onStart()
     {
       super.onStart();
     }
@@ -581,7 +581,7 @@ public class OverviewWindow extends ItemDrawer
     private void loadFiles( long type )
     {
       // List<PlotInfo> plots = mApp.mData.selectAllPlotsWithType( mSid, TDStatus.NORMAL, type, landscape );
-      List<PlotInfo> plots = mApp.mData.selectAllPlotsWithType( mSid, TDStatus.NORMAL, type );
+      List<PlotInfo> plots = TopoDroidApp.mData.selectAllPlotsWithType( mSid, TDStatus.NORMAL, type );
 
       // Log.v( "DistoX", "Overview plots " + plots.size() );
 
@@ -626,8 +626,8 @@ public class OverviewWindow extends ItemDrawer
             ydelta = st.v - mStartStation.v;
           }
         }
-        xdelta *= mDrawingUtil.SCALE_FIX;
-        ydelta *= mDrawingUtil.SCALE_FIX;
+        xdelta *= DrawingUtil.SCALE_FIX;
+        ydelta *= DrawingUtil.SCALE_FIX;
         // Log.v( "DistoX", " delta " + xdelta + " " + ydelta );
 
         // now try to load drawings from therion file
@@ -675,8 +675,8 @@ public class OverviewWindow extends ItemDrawer
    //   // mOverviewSurface.refresh();
    // }
 
-  float mSave0X, mSave0Y;
-  float mSave1X, mSave1Y;
+  private float mSave0X, mSave0Y;
+  private float mSave1X, mSave1Y;
 
     
   private void dumpEvent( MotionEventWrap ev )
@@ -700,7 +700,7 @@ public class OverviewWindow extends ItemDrawer
   }
   
 
-  float spacing( MotionEventWrap ev )
+  private float spacing(MotionEventWrap ev)
   {
     int np = ev.getPointerCount();
     if ( np < 2 ) return 0.0f;
@@ -709,7 +709,7 @@ public class OverviewWindow extends ItemDrawer
     return TDMath.sqrt(x*x + y*y);
   }
 
-  void saveEventPoint( MotionEventWrap ev )
+  private void saveEventPoint(MotionEventWrap ev)
   {
     int np = ev.getPointerCount();
     if ( np >= 1 ) {
@@ -726,7 +726,7 @@ public class OverviewWindow extends ItemDrawer
   }
 
   
-  void shiftByEvent( MotionEventWrap ev )
+  private void shiftByEvent(MotionEventWrap ev)
   {
     float x0 = 0.0f;
     float y0 = 0.0f;
@@ -770,17 +770,17 @@ public class OverviewWindow extends ItemDrawer
   }
 
 
-  float oldDist = 0;
-  float mStartX = 0;
-  float mStartY = 0;
-  float mBaseX = 0;
-  float mBaseY = 0;
+  private float oldDist = 0;
+  private float mStartX = 0;
+  private float mStartY = 0;
+  private float mBaseX = 0;
+  private float mBaseY = 0;
   
   private float deltaX( float x1, float x0 ) 
-  { return (  (x1 - x0) / mDrawingUtil.SCALE_FIX ) / TDSetting.mUnitGrid; }
+  { return (  (x1 - x0) / DrawingUtil.SCALE_FIX ) / TDSetting.mUnitGrid; }
 
   private float deltaY( float y1, float y0 )
-  { return ( -(y1 - y0) / mDrawingUtil.SCALE_FIX ) / TDSetting.mUnitGrid; }
+  { return ( -(y1 - y0) / DrawingUtil.SCALE_FIX ) / TDSetting.mUnitGrid; }
 
   private double angleBase( float bx, float by )
   {
@@ -813,7 +813,7 @@ public class OverviewWindow extends ItemDrawer
     float y_canvas = event.getY();
     // Log.v("DistoX", "touch canvas " + x_canvas + " " + y_canvas ); 
 
-    if ( mZoomBtnsCtrlOn && y_canvas > mDrawingUtil.CENTER_Y*2-20 ) {
+    if ( mZoomBtnsCtrlOn && y_canvas > DrawingUtil.CENTER_Y*2-20 ) {
       mZoomBtnsCtrl.setVisible( true );
       // mZoomCtrl.show( );
     }

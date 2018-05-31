@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid survey activity
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -44,7 +44,7 @@ class SurveyNewDialog extends MyDialog
 {
   private final static String EMPTY = "";
 
-  private MainWindow mParent;
+  private final MainWindow mParent;
 
   private EditText mEditName;
   private Button   mEditDate;
@@ -60,7 +60,7 @@ class SurveyNewDialog extends MyDialog
   private Button mBTopen;
   private Button mBTback;
 
-  private TopoDroidApp mApp;
+  private final TopoDroidApp mApp;
   private SurveyInfo info;
 
   private long mOldSid = -1L;
@@ -220,7 +220,7 @@ class SurveyNewDialog extends MyDialog
     if ( mOldSid >= 0L && mOldId >= 0L ) {  // SPLIT_SURVEY
       TopoDroidApp.mData.transferShots( mApp.mSID, mOldSid, mOldId );
       mOldSid = -1L;
-      mOldId = -1l;
+      mOldId = -1L;
     }
     
     return true;

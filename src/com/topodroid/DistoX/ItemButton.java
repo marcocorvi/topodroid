@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid drawing: button for a symbol item
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -24,7 +24,7 @@ import android.graphics.Matrix;
 import android.widget.Button;
 
 /**
- * @note this class mustbe public
+ * note this class must be public
  */
 public class ItemButton extends Button
 {

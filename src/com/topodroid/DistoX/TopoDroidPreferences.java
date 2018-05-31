@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid options dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -63,10 +63,10 @@ public class TopoDroidPreferences extends PreferenceActivity
 
   private int mPrefCategory = PREF_CATEGORY_ALL; // preference category
 
-  Preference mCwdPreference;
-  Preference mPtCmapPreference;
+  private Preference mCwdPreference;
+  private Preference mPtCmapPreference;
 
-  TopoDroidApp mApp;
+  private TopoDroidApp mApp;
 
   @Override
   public void onDestroy( )

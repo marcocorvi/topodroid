@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid plot export as bitmap
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -24,7 +24,7 @@ import android.graphics.Bitmap;
 
 class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean> 
 {
-    private Context mContext; // FIXME LEAK: used to Toast
+    private final Context mContext; // FIXME LEAK: used to Toast
     private Bitmap mBitmap;
     private float  mScale;
     private String mFullName;

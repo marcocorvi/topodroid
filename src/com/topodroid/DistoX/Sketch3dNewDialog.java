@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid 3d sketch: new-sketch3d dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -29,7 +29,7 @@ import android.view.View;
 class Sketch3dNewDialog extends MyDialog
                                implements View.OnClickListener
 {
-  private TopoDroidApp mApp;
+  private final TopoDroidApp mApp;
   private INewPlot mMaker;
 
   private EditText mEditName;

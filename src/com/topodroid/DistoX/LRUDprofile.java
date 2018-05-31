@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid LRUD with profile for Grottolf
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -28,7 +28,7 @@ class LRUDprofile extends LRUD
   }
 
   float bearing;
-  ArrayList<Profile> data;
+  private ArrayList<Profile> data;
 
   LRUDprofile( float b )
   {

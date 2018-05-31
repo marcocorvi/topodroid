@@ -5,24 +5,24 @@
  *
  * @brief TopoDroid application settings (preferenceces)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
 package com.topodroid.DistoX;
 
-import android.os.Build;
+// import android.os.Build;
 import android.content.Context;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-import android.util.Log;
+// import android.util.Log;
 
 class TDSetting
 {
-  static String defaultTextSize = "16";
-  static String defaultButtonSize = "1";
+  static private String defaultTextSize = "16";
+  static private String defaultButtonSize = "1";
 
   static void setTextSize( TopoDroidApp app, int ts )
   {
@@ -33,9 +33,9 @@ class TDSetting
   // ---------------------------------------------------------
   // PREFERENCES KEYS
 
-  final static int NR_PRIMARY_PREFS = 13;
+  final static private int NR_PRIMARY_PREFS = 13;
 
-  static final String[] key = { // prefs keys
+  static final private String[] key = { // prefs keys
     // ------------------------- PRIMARY PREFS
     "DISTOX_EXTRA_BUTTONS",       // Activity Level
     "DISTOX_SIZE_BUTTONS",        // size of buttons (S, N, M, L, XL)
@@ -342,6 +342,7 @@ class TDSetting
   static float mHThreshold;         // horizontal plot threshold
   static boolean mDataBackup = false; // whether to export data when shotwindow is closed
   static boolean mDistoXBackshot = false;
+  static int mTitleColor = TDColor.TITLE_NORMAL;
 
   static int mExportShotsFormat = -1; // DISTOX_EXPORT_NONE
   static int mExportPlotFormat  = -1; // DISTOX_EXPORT_NONE
@@ -432,10 +433,10 @@ class TDSetting
   static int mRecentNr    = 4;        // nr. most recent symbols
 
   static final int LINE_STYLE_BEZIER = 0;  // drawing line styles
-  static final int LINE_STYLE_ONE    = 1;
-  static final int LINE_STYLE_TWO    = 2;
-  static final int LINE_STYLE_THREE  = 3;
-  static final String LINE_STYLE     = "2";     // LINE_STYLE_TWO NORMAL
+  static final private int LINE_STYLE_ONE    = 1;
+  static final private int LINE_STYLE_TWO    = 2;
+  static final private int LINE_STYLE_THREE  = 3;
+  static final private String LINE_STYLE     = "2";     // LINE_STYLE_TWO NORMAL
   static int   mLineStyle = LINE_STYLE_BEZIER;    
   static int   mLineType;        // line type:  1       1     2    3
   static int   mLineSegment   = 10;
@@ -702,7 +703,7 @@ class TDSetting
 
   static void loadSecondaryPreferences( TopoDroidApp app, SharedPreferences prefs )
   {
-    int k = NR_PRIMARY_PREFS;;
+    int k = NR_PRIMARY_PREFS;
 
     // ------------------- DEVICE PREFERENCES
     mSockType       = tryInt( prefs, key[k++], mDefaultSockStrType );        // DISTOX_SOCK_TYPE choice: 0, 1, (2, 3)
@@ -935,7 +936,7 @@ class TDSetting
       mLocalManPages = handleLocalUserMan( prefs.getString( k, "0" ), true, app );      // DISTOX_LOCAL_MAN
     } else if ( k.equals( key[ nk++ ] ) ) {
       boolean co_survey = prefs.getBoolean( k, false );  // DISTOX_COSURVEY
-      if ( co_survey != app.mCoSurveyServer ) {
+      if ( co_survey != TopoDroidApp.mCoSurveyServer ) {
         app.setCoSurvey( co_survey ); // set flag and start/stop server
       }
     } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_INIT_STATION
@@ -1336,19 +1337,24 @@ class TDSetting
     mBacksightShot   = false;
     mTripodShot      = false;
     mShotAfterSplays = true;
+    mTitleColor      = TDColor.TITLE_NORMAL;
     if ( mSurveyStations == 7 ) {  // TOPOROBOT
       mTRobotShot = true;
       mSurveyStations  = 1;
+      mTitleColor = TDColor.TITLE_TOPOROBOT;
       // FIXME Toast.makeToast( mContext, "WARNING TopoRobot policy is experimental", Toast.LENGTH_LONG).show();
     } else if ( mSurveyStations == 6 ) {  // TRIPOD
       mTripodShot = true;
       mSurveyStations  = 1;
+      mTitleColor = TDColor.TITLE_TRIPOD;
     } else if ( mSurveyStations == 5 ) { // BACKSIGHT
       mBacksightShot = true;
       mSurveyStations  = 1;
+      mTitleColor = TDColor.TITLE_BACKSIGHT;
     } else {
       mShotAfterSplays = ( mSurveyStations <= 2 );
       if ( mSurveyStations > 2 ) mSurveyStations -= 2;
+      if ( mSurveyStations == 1 ) mTitleColor = TDColor.TITLE_BACKSHOT;
     }
     // Log.v("DistoX", "mSurveyStations " + mSurveyStations + " mShotAfterSplays " + mShotAfterSplays );
   }
@@ -1365,7 +1371,8 @@ class TDSetting
   {
     Editor editor = sp.edit();
     editor.putString( name, value );
-    editor.apply(); // was editor.commit();
+    editor.apply(); 
+    // FIXME-23 editor.commit();
   }
 
   // static void setPreference( SharedPreferences sp, String name, int val )

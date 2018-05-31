@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid adapter for survey data
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -26,30 +26,30 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import android.util.Log;
+// import android.util.Log;
 
 class DBlockAdapter extends ArrayAdapter< DBlock >
                           implements OnLongClickListener
                                    // , OnClickListener
 {
-  private Context mContext;
+  // private Context mContext;
   private ShotWindow mParent;
   ArrayList< DBlock > mItems;
   ArrayList< DBlock > mSelect;
   boolean show_ids;  //!< whether to show data ids
   private LayoutInflater mLayoutInflater;
 
-  private ArrayList< View > mViews;
+  // private ArrayList< View > mViews;
 
   DBlockAdapter( Context ctx, ShotWindow parent, int id, ArrayList< DBlock > items )
   {
     super( ctx, id, items );
-    mContext = ctx;
+    // mContext = ctx;
     mParent  = parent;
     mItems   = items;
     mSelect  = new ArrayList<>();
     mLayoutInflater = (LayoutInflater)ctx.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-    mViews = new ArrayList<>();
+    // mViews = new ArrayList<>();
   }
 
   int[] searchStation( String name, boolean splays )
@@ -298,7 +298,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     DBlock b = mItems.get( pos );
     ViewHolder holder = null; 
     if ( convertView == null ) {
-      convertView = mLayoutInflater.inflate( R.layout.dblock_row, null );
+      convertView = mLayoutInflater.inflate( R.layout.dblock_row, parent, false );
       holder = new ViewHolder( 
         (TextView)convertView.findViewById( R.id.id ),
         (TextView)convertView.findViewById( R.id.from ),

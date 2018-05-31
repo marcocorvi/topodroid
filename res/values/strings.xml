@@ -132,7 +132,7 @@
     <string name="found_groups">Found %1$d groups</string>
     <!-- UNUSED string name="few_plots">Not enough sketches</string -->
     <string name="few_calibs">Not enough calibrations</string>
-    <string name="getting_info">Getting DistoX info ...</string>
+    <string name="getting_info">Getting DistoX info &#8230;</string>
 
     <string name="calib_import_title">Calibration import</string>
     <string name="import_title">Survey import</string>
@@ -229,6 +229,14 @@
     <string name="splays_toggle">Toggle splays display</string>
     <string name="splays_on_off">Splays</string>
     <string name="splays">splays</string>
+    <string name="splays_show">Show splays</string>
+    <string name="foresurface_show">Show fore surface</string>
+    <string name="fmt_listen">LISTEN | %1$s</string>
+    <string name="fmt_id">ID %1$s</string>
+    <string name="fmt_latitude">Latitude %1$s</string>
+    <string name="fmt_longitude">Longitude %1$s</string>
+    <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string> 
+
     <string name="fixed">fixed</string>
     <string name="painted">painted</string>
 
@@ -419,7 +427,7 @@
     <string name="sketch3d_name">name</string>
     <string name="sketch3d_new">New model</string>
     <string name="sketch3d_next">next station</string>
-    <string name="sketch3d_loading">loading model ...</string>
+    <string name="sketch3d_loading">loading model &#8230;</string>
     <!-- UNUSED string name="sketch3d_null_name">Missing 3D sketch name</string -->
     <!-- UNUSED string name="sketch3d_null_next">Missing 3D sketch next station</string -->
     <!-- UNUSED string name="sketch3d_null_start">Missing 3D sketch base station</string -->

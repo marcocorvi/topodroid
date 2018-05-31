@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid DistoX X310 device info dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -15,8 +15,8 @@ import android.os.Bundle;
 // import android.app.Dialog;
 // import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.content.DialogInterface;
+// import android.content.Intent;
+// import android.content.DialogInterface;
 // import android.content.DialogInterface.OnCancelListener;
 // import android.content.DialogInterface.OnDismissListener;
 
@@ -36,8 +36,8 @@ class DeviceNameDialog extends MyDialog
   private Button mBTok;
   private Button mBTback;
 
-  DeviceActivity mParent;
-  Device mDevice;
+  private final DeviceActivity mParent;
+  private final Device mDevice;
 
   DeviceNameDialog( Context context, DeviceActivity parent, Device device )
   {

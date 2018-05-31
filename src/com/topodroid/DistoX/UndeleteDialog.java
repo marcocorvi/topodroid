@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid undelete survey item activity
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -30,20 +30,22 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.view.View;
 // import android.view.View.OnClickListener;
 
+// import android.util.Log;
+
 class UndeleteDialog extends MyDialog
                             implements OnItemClickListener
                             , View.OnClickListener
 {
-  public long mSID;
-  DataHelper mData;
-  ShotWindow mParent;
+  private long mSID;
+  private final DataHelper mData;
+  private final ShotWindow mParent;
 
   private Button mBtnCancel;
   private Button mBtnStatus;
 
   // ArrayAdapter< String >  mArrayAdapter;
-  MyStringAdapter mArrayAdapter;
-  ListView mList;
+  private MyStringAdapter mArrayAdapter;
+  private ListView mList;
   private List< DBlock > mShots1; // deleted
   private List< DBlock > mShots2; // overshoot
   private List< DBlock > mShots3; // check
@@ -140,6 +142,7 @@ class UndeleteDialog extends MyDialog
         if ( mShots2 != null && mShots2.size() > 0 ) { mStatus = 2; break; }
         if ( mShots3 != null && mShots3.size() > 0 ) { mStatus = 3; break; }
     }
+    // Log.v("DistoX", "Undelete status " + mStatus );
     switch ( mStatus ) {
       case 0:
         if ( mPlots != null ) for ( PlotInfo p : mPlots ) {
@@ -173,6 +176,8 @@ class UndeleteDialog extends MyDialog
         mBtnStatus.setText( R.string.undelete_check );
         break;
     }
+    mList.setAdapter( mArrayAdapter );
+    // mList.invalidate( );
   }
 
 }

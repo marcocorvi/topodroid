@@ -5,7 +5,7 @@
  *
  * @brief PocketTopo file IO
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -431,7 +431,10 @@ class PTFile
 
     /** add a trip
      * @param y   year
-     * @param
+     * @param m   month
+     * @param d   day
+     * @param declination magnetic declination
+     * @param comment     comment
      * @return trip index
      */
     int addTrip( int y, int m, int d, float declination, String comment )

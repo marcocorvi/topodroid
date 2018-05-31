@@ -5,157 +5,157 @@
  *
  * @brief TopoDroid lister interface
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
 package com.topodroid.DistoX;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
-public interface DataListener 
+interface DataListener 
 {
-  static final byte SHUTDOWN = (byte)0;
-  static final byte SYNC     = (byte)0xfd;
-  static final byte ACK = (byte)0xfe;
-  static final byte EOL = (byte)0xff;
+  byte SHUTDOWN = (byte)0;
+  byte SYNC     = (byte)0xfd;
+  byte ACK = (byte)0xfe;
+  byte EOL = (byte)0xff;
 
   // -------------------------------------------------------------------------
   // SURVEY
 
-  static final byte SURVEY_SET  = (byte)1;
-  static final byte SURVEY_INFO = (byte)2;
-  static final byte SURVEY_DATE = (byte)3;
-  static final byte SURVEY_TEAM = (byte)4;
-  static final byte SURVEY_DECL = (byte)5;
-  static final byte SURVEY_NAME = (byte)6;
-  static final byte SURVEY_INIT_STATION = (byte)7;
+  byte SURVEY_SET  = (byte)1;
+  byte SURVEY_INFO = (byte)2;
+  byte SURVEY_DATE = (byte)3;
+  byte SURVEY_TEAM = (byte)4;
+  byte SURVEY_DECL = (byte)5;
+  byte SURVEY_NAME = (byte)6;
+  byte SURVEY_INIT_STATION = (byte)7;
 
   // only the sync-layer need be notified of this
-  public void onSetSurvey( long id, String name );
+  void onSetSurvey( long id, String name );
 
-  public void onUpdateSurveyName( long id, String name );
+  void onUpdateSurveyName( long id, String name );
 
-  public void onUpdateSurveyInfo( long id, String date, String team, double decl,
+  void onUpdateSurveyInfo( long id, String date, String team, double decl,
                                   String comment, String station, int xsections );
 
-  public void onUpdateSurveyDayAndComment( long id, String date, String comment );
+  void onUpdateSurveyDayAndComment( long id, String date, String comment );
 
-  public void onUpdateSurveyTeam( long id, String team );
+  void onUpdateSurveyTeam( long id, String team );
 
-  public void onUpdateSurveyInitStation( long id, String station );
+  void onUpdateSurveyInitStation( long id, String station );
 
-  public void onUpdateSurveyDeclination( long id, double decl );
+  void onUpdateSurveyDeclination( long id, double decl );
 
   // -------------------------------------------------------------------------
   // SHOTS
 
-  static final byte SHOT_UPDATE   = (byte)11;
-  static final byte SHOT_NAME     = (byte)12;
-  static final byte SHOT_LEG      = (byte)13;
-  static final byte SHOT_EXTEND   = (byte)14;
-  static final byte SHOT_FLAG     = (byte)15;
-  static final byte SHOT_COMMENT  = (byte)16;
-  static final byte SHOT_DELETE   = (byte)17;
-  static final byte SHOT_UNDELETE = (byte)18;
-  static final byte SHOT_AMDR     = (byte)19;
-  static final byte SHOT_DBC_UPDATE = (byte)20;
+  byte SHOT_UPDATE   = (byte)11;
+  byte SHOT_NAME     = (byte)12;
+  byte SHOT_LEG      = (byte)13;
+  byte SHOT_EXTEND   = (byte)14;
+  byte SHOT_FLAG     = (byte)15;
+  byte SHOT_COMMENT  = (byte)16;
+  byte SHOT_DELETE   = (byte)17;
+  byte SHOT_UNDELETE = (byte)18;
+  byte SHOT_AMDR     = (byte)19;
+  byte SHOT_DBC_UPDATE = (byte)20;
 
-  static final byte SHOT_INSERT   = (byte)21;
-  static final byte SHOT_INSERTAT = (byte)23;
-  static final byte SHOT_STATUS   = (byte)24;
-  static final byte SHOT_COLOR    = (byte)25;
+  byte SHOT_INSERT   = (byte)21;
+  byte SHOT_INSERTAT = (byte)23;
+  byte SHOT_STATUS   = (byte)24;
+  byte SHOT_COLOR    = (byte)25;
 
-  public void onUpdateShot( long id, long sid, String fStation, String tStation,
+  void onUpdateShot( long id, long sid, String fStation, String tStation,
                             long extend, long flag, long leg, String comment );
 
-  public void onUpdateShotDBC( long id, long sid, float d, float b, float c );
+  void onUpdateShotDBC( long id, long sid, float d, float b, float c );
 
-  public void onUpdateShotName( long id, long sid, String fStation, String tStation );
+  void onUpdateShotName( long id, long sid, String fStation, String tStation );
 
-  public void onUpdateShotLeg( long id, long sid, long leg );
+  void onUpdateShotLeg( long id, long sid, long leg );
 
-  public void onUpdateShotExtend( long id, long sid, long extend );
+  void onUpdateShotExtend( long id, long sid, long extend );
 
-  public void onUpdateShotFlag( long id, long sid, long flag );
+  void onUpdateShotFlag( long id, long sid, long flag );
 
-  public void onUpdateShotComment( long id, long sid, String comment );
+  void onUpdateShotComment( long id, long sid, String comment );
 
-  public void onUpdateShotStatus( long id, long sid, long status );
+  void onUpdateShotStatus( long id, long sid, long status );
 
-  public void onUpdateShotAMDR( long sid, long id, double acc, double mag, double dip, double r );
+  void onUpdateShotAMDR( long sid, long id, double acc, double mag, double dip, double r );
 
-  public void onUpdateShotColor( long sid, long id, long color );
+  void onUpdateShotColor( long sid, long id, long color );
 
-  // public void onUpdateShotNameAndExtend( long sid, ArrayList< DBlock > updatelist );
+  // void onUpdateShotNameAndExtend( long sid, ArrayList< DBlock > updatelist );
   // FIXME repeatedly call UpdateShotName() and UpdateShotExtend();
 
-  public void onDeleteShot( long id, long sid, int status );
+  void onDeleteShot( long id, long sid, int status );
 
-  public void onUndeleteShot( long hot_id, long sid );
+  void onUndeleteShot( long hot_id, long sid );
 
-  // public void onInsertShots( long sid, long id, ArrayList< ParserShot > shots );
+  // void onInsertShots( long sid, long id, ArrayList< ParserShot > shots );
   // FIXME repeatedly call InsertShot()
 
-  public void onInsertShot( long sid, long id, long millis, long color, String from, String to, 
+  void onInsertShot( long sid, long id, long millis, long color, String from, String to, 
                           double d, double b, double c, double r, 
                           long extend, long flag, long leg, long status, long shot_type, String comment );
 
   // @param e extend
   // @param t type
-  public void onInsertShotAt( long sid, long at, long millis, long color, double d, double b, double c, double r, long e, long leg, long t );
+  void onInsertShotAt( long sid, long at, long millis, long color, double d, double b, double c, double r, long e, long leg, long t );
 
-  // public void transferShots( long sid, long old_sid, long old_id );
+  // void transferShots( long sid, long old_sid, long old_id );
 
-  // public void doDeleteSurvey( long sid ) 
+  // void doDeleteSurvey( long sid ) 
 
   // -------------------------------------------------------
   // PLOTS Aand SKETCHES
 
-  static final byte PLOT_INSERT   = (byte)31;
-  static final byte PLOT_UPDATE   = (byte)32;
-  static final byte PLOT_DROP     = (byte)33;
-  static final byte PLOT_DELETE   = (byte)34;
-  static final byte PLOT_UNDLEETE = (byte)35;
+  byte PLOT_INSERT   = (byte)31;
+  byte PLOT_UPDATE   = (byte)32;
+  byte PLOT_DROP     = (byte)33;
+  byte PLOT_DELETE   = (byte)34;
+  byte PLOT_UNDLEETE = (byte)35;
 
-  public void onInsertPlot( long sid, long id, String name, long type, long status, String start, String view,
+  void onInsertPlot( long sid, long id, String name, long type, long status, String start, String view,
                             double xoffset, double yoffset, double zoom, double azimuth, double clino, String hide,
 			    String nick, int orientation );
 
-  // public void updatePlot( long plot_id, long survey_id, double xoffset, double yoffset, double zoom );
+  // void updatePlot( long plot_id, long survey_id, double xoffset, double yoffset, double zoom );
 
-  // public void onNewSketch3d( long sid, long id, String name, long status, String start, String st1, String st2,
+  // void onNewSketch3d( long sid, long id, String name, long status, String start, String st1, String st2,
   //                         double xoffsettop, double yoffsettop, double zoomtop,
   //                         double xoffsetside, double yoffsetside, double zoomside,
   //                         double xoffset3d, double yoffset3d, double zoom3d,
   //                         double x, double y, double z, double azimuth, double clino );
 
-  // public void updateSketch( long sketch_id, long survey_id, 
+  // void updateSketch( long sketch_id, long survey_id, 
   //                            String st1, String st2,
   //                            double xofftop, double yofftop, double zoomtop,
   //                            double xoffside, double yoffside, double zoomside,
   //                            double xoff3d, double yoff3d, double zoom3d,
   //                            double east, double south, double vert, double azimuth, double clino );
 
-  // public void dropPlot( long plot_id, long survey_id ); // real delete
-  // public void deletePlot( long plot_id, long survey_id )
-  // public void undeletePlot( long plot_id, long survey_id )
-  // public void deleteSketch( long sketch_id, long survey_id )
+  // void dropPlot( long plot_id, long survey_id ); // real delete
+  // void deletePlot( long plot_id, long survey_id )
+  // void undeletePlot( long plot_id, long survey_id )
+  // void deleteSketch( long sketch_id, long survey_id )
 
-  // public void onNewPhoto( long sid, long id, long shotid, String title, String date, String comment );
-  // public void onUpdatePhoto( long sid, long id, String comment );
-  // public void onDeletePhoto( long sid, long id );
+  // void onNewPhoto( long sid, long id, long shotid, String title, String date, String comment );
+  // void onUpdatePhoto( long sid, long id, String comment );
+  // void onDeletePhoto( long sid, long id );
 
-  // public void onNewSensor( long sid, long id, long shotid, String title, String date, String comment, 
+  // void onNewSensor( long sid, long id, long shotid, String title, String date, String comment, 
   //                            String type, String value );
-  // public void onDeleteSensor( long sid, long id );
-  // public void onUpdateSensor( long sid, long id, String comment );
+  // void onDeleteSensor( long sid, long id );
+  // void onUpdateSensor( long sid, long id, String comment );
 
-  // public void onNewFixed( long sid, long id, String station, double lng, double lat, double alt, double asl,
+  // void onNewFixed( long sid, long id, String station, double lng, double lat, double alt, double asl,
   //                         String comment, long status );
-  // public void onUpdateFixedStation( long id, long sid, String station );
-  // public void onUpdateFixedStatus( long id, long sid, long status );
-  // public void onDeletedFixed( long sid, String station ); 
+  // void onUpdateFixedStation( long id, long sid, String station );
+  // void onUpdateFixedStatus( long id, long sid, long status );
+  // void onDeletedFixed( long sid, String station ); 
 
 }
 

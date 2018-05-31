@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid user manual actvity with a webview
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -79,8 +79,8 @@ public class UserManualActivity extends Activity
 
 // -------------------------------------------------------------------
   // SlidingDrawer mDrawer;
-  ImageView     mImage;
-  ListView      mList;
+  private ImageView     mImage;
+  private ListView      mList;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) 

@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid drawing: dialog for a survey shot: editing comment, extend and flag
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -17,10 +17,10 @@ import android.os.Bundle;
 import android.content.Context;
 // import android.content.Intent;
 
-import android.graphics.Paint;
+// import android.graphics.Paint;
 
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.EditText;
@@ -60,7 +60,7 @@ class DrawingShotDialog extends MyDialog
   // private CheckBox mRBbackshot;
   private Button mRBwalls;
 
-  private DrawingWindow mParent;
+  private final DrawingWindow mParent;
   private DBlock mBlock;
   private int mColor;    // bock color
   private DrawingPath mPath;
@@ -70,7 +70,7 @@ class DrawingShotDialog extends MyDialog
   // 0x04 can barrier TO
   // 0x08 can hidden  TO
 
-  MyKeyboard mKeyboard = null;
+  private MyKeyboard mKeyboard = null;
 
   DrawingShotDialog( Context context, DrawingWindow parent, DrawingPath shot, int flag )
   {

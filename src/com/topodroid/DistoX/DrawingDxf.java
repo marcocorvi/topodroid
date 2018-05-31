@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid drawing: dxf export
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -39,12 +39,12 @@ class DrawingDxf
   static final private float STATION_SCALE = 6.0f;
   static final private float LABEL_SCALE   = 8.0f;
   static final private float AXIS_SCALE    = 6.0f;
-  static final String zero = "0.0";
-  static final String one  = "1.0";
+  static final private String zero = "0.0";
+  static final private String one  = "1.0";
   // static final String half = "0.5";
   static final private String two_n_half = "2.5";
   static final String ten  = "10";
-  static final String empty = "";
+  static final private String empty = "";
   static final private String my_style      = "MyStyle";
   static final private String standard      = "Standard";
   static final private String lt_continuous = "Continuous";

@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid shot-list: display mode dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -32,7 +32,7 @@ class ShotDisplayDialog extends MyDialog
     private CheckBox mCBleg;      // whether to hide repeated leg 
     // private Button mBtnRefresh;
 
-    private ShotWindow mParent;
+    private final ShotWindow mParent;
 
     ShotDisplayDialog( Context context, ShotWindow parent )
     {

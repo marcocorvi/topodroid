@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid dialog to enter long-lat data
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -39,7 +39,7 @@ class FixedAddDialog extends MyDialog
                      implements View.OnClickListener
                               , View.OnLongClickListener
 {
-  private FixedActivity mParent;
+  private final FixedActivity mParent;
 
   private MyKeyboard mKeyboard = null;
   private EditText mETstation;

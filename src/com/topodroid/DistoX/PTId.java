@@ -5,7 +5,7 @@
  *
  * @brief PocketTopo file IO
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -20,7 +20,7 @@ import java.util.Locale;
 class PTId
 {
   static final int ID_UNDEFINED = 0x80000000;
-  static final int ID_NUMBER = 0x80000001;
+  static final int ID_NUMBER    = 0x80000001;
   // static int ID_COUNT = 0;
 
   int _id; //!< id: 0x80000000 undefined, 

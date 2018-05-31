@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid drawing: brush interface
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -15,8 +15,8 @@ import android.graphics.Path;
 
 /**
  */
-public interface IBrush {
-    public void mouseDown( Path path, float x, float y);
-    public void mouseMove( Path path, float x, float y);
-    public void mouseUp( Path path, float x, float y);
+interface IBrush {
+    void mouseDown( Path path, float x, float y);
+    void mouseMove( Path path, float x, float y);
+    void mouseUp( Path path, float x, float y);
 }

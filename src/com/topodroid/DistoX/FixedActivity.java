@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid survey fix point edit dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -80,7 +80,7 @@ public class FixedActivity extends Activity
                                     , OnItemClickListener
 {
   private Context mContext;
-  TopoDroidApp mApp;
+  private TopoDroidApp mApp;
   private ListView mList;
   private FixedAdapter mFixedAdapter;
 
@@ -89,8 +89,8 @@ public class FixedActivity extends Activity
 
   private Button[] mButton1;
   private int mNrButton1 = 0;
-  HorizontalListView mListView;
-  HorizontalButtonView mButtonView1;
+  private HorizontalListView mListView;
+  private HorizontalButtonView mButtonView1;
 
 
   private boolean hasGps = false;
@@ -101,12 +101,12 @@ public class FixedActivity extends Activity
   // MyMenuAdapter mMenuAdapter;
   // boolean onMenu;
 
-  private static int izons[] = { 
+  private static final int izons[] = {
                         R.drawable.iz_gps,
                         R.drawable.iz_plus,
                         R.drawable.iz_import
                      };
-  // private static int menus[] = {
+  // private static final int menus[] = {
   //                    };
 
 // -------------------------------------------------------------------
@@ -154,7 +154,7 @@ public class FixedActivity extends Activity
     refreshList();
   }
 
-  public void refreshList()
+  private void refreshList()
   {
     List< FixedInfo > fxds = TopoDroidApp.mData.selectAllFixed( mApp.mSID, TDStatus.NORMAL );
     mFixedAdapter = new FixedAdapter( mContext, R.layout.message, fxds );
@@ -263,8 +263,8 @@ public class FixedActivity extends Activity
   }
 
   // private final static int LOCATION_REQUEST = 1;
-  private static int CRS_CONVERSION_REQUEST = 2; // not final ?
-  private static int CRS_INPUT_REQUEST = 3;      // not final ?
+  private static final int CRS_CONVERSION_REQUEST = 2; // not final ?
+  private static final int CRS_INPUT_REQUEST = 3;      // not final ?
   private FixedDialog mFixedDialog = null;
   private FixedAddDialog mFixedAddDialog = null;
 

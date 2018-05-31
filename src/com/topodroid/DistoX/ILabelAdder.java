@@ -5,15 +5,15 @@
  *
  * @brief TopoDroid label adder interfare
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
 package com.topodroid.DistoX;
 
-public interface ILabelAdder
+interface ILabelAdder
 {
-  public void addLabel( String text, float x, float y );
+  void addLabel( String text, float x, float y );
 
-  public void addPhotoPoint( String text, float x, float y );
+  void addPhotoPoint( String text, float x, float y );
 }

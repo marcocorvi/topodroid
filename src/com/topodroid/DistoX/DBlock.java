@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid DistoX survey data
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -42,7 +42,7 @@ class DBlock
   static final int EXTEND_NONE   = EXTEND_VERT;
 
   View   mView;
-  private int    mPos;     // position in the list
+  // private int    mPos;     // position in the list
   int    mVisible; // whether is visible in the list
   boolean mMultiSelected; // whether the block is in multiselect list
   Paint  mPaint;
@@ -80,7 +80,7 @@ class DBlock
   static final long LEG_EXTRA   = 1L;
   static final long LEG_XSPLAY  = 2L;
 
-  private static int[] colors = {
+  private static final int[] colors = {
     TDColor.LIGHT_PINK,   // blank
     TDColor.WHITE,        // midline
     TDColor.LIGHT_BLUE,   // splay
@@ -170,7 +170,7 @@ class DBlock
   {
     // assert( f != null && t != null );
     mView = null; // view is set by the DBlockAdapter
-    mPos  = 0;
+    // mPos  = 0;
     mVisible = View.VISIBLE;
     mMultiSelected = false;
     mPaint = null;
@@ -199,7 +199,7 @@ class DBlock
   DBlock()
   {
     mView = null; // view is set by the DBlockAdapter
-    mPos  = 0;
+    // mPos  = 0;
     mVisible = View.VISIBLE;
     mMultiSelected = false;
     mPaint = null;

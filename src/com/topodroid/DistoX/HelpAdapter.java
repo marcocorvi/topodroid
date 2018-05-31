@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid help dialog items adapter
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -28,9 +28,9 @@ import android.view.ViewGroup;
 
 class HelpAdapter extends ArrayAdapter< HelpEntry >
 {
-  private ArrayList< HelpEntry > mItems;
+  private final ArrayList< HelpEntry > mItems;
   // private Context mContext;
-  private HelpDialog mParent;
+  private final HelpDialog mParent;
 
   HelpAdapter( Context ctx, HelpDialog parent, int id, ArrayList< HelpEntry > items )
   {

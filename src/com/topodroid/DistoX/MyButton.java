@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid buttons factory
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -35,7 +35,7 @@ import android.util.SparseArray;
 
 import java.util.Random;
 
-public class MyButton
+class MyButton
 {
   static private int mSize = 42;
   private final static boolean USE_CACHE = true;

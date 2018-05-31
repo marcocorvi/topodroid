@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid sketch line attributes editing dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -34,9 +34,9 @@ import android.view.View;
 class DrawingAreaDialog extends MyDialog
                                implements View.OnClickListener, AdapterView.OnItemSelectedListener
 {
-  private DrawingAreaPath mArea;
-  private DrawingWindow mParent;
-  private boolean mOrientable;
+  private final DrawingAreaPath mArea;
+  private final DrawingWindow mParent;
+  private final boolean mOrientable;
 
   private CheckBox mCBvisible;
   // private Spinner mETtype;

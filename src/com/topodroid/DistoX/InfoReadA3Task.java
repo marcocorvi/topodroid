@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid DistoX info A3 read task
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -19,11 +19,11 @@ import android.os.AsyncTask;
 
 class InfoReadA3Task extends AsyncTask<Void, Integer, Boolean>
 {
-  TopoDroidApp   mApp; // FIXME LEAK
-  private DeviceA3InfoDialog  mDialog;
+  private final TopoDroidApp   mApp; // FIXME LEAK
+  private final DeviceA3InfoDialog  mDialog;
   private DeviceA3Info mInfo = null;
   // int mType; // DistoX type
-  String mAddress;
+  private String mAddress;
 
   InfoReadA3Task( TopoDroidApp app, DeviceA3InfoDialog dialog, String address )
   {

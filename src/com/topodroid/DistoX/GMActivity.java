@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid calibration data activity
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -14,6 +14,7 @@ package com.topodroid.DistoX;
 // import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Locale;
 
 // import java.lang.Long;
 // import java.lang.reflect.Method;
@@ -84,7 +85,7 @@ public class GMActivity extends Activity
   private String mCalibName;
   // private ConnHandler mHandler;
 
-  private static int izons[] = { 
+  private static final int izons[] = {
                         R.drawable.iz_toggle,
                         R.drawable.iz_bt,
                         R.drawable.iz_download,
@@ -104,7 +105,7 @@ public class GMActivity extends Activity
   final static int BTN_READ     = 6;
   final static int BTN_WRITE    = 7;
 
-  static int izonsno[] = { 
+  static final int izonsno[] = {
                         R.drawable.iz_toggle_no,
                         R.drawable.iz_bt_no,
                         R.drawable.iz_download_on,
@@ -115,14 +116,14 @@ public class GMActivity extends Activity
                         R.drawable.iz_write_no
                      };
 
-  static int menus[] = {
+  static final int menus[] = {
                         R.string.menu_display,
                         R.string.menu_validate,
                         R.string.menu_options, 
                         R.string.menu_help
                      };
 
-  static int help_icons[] = { 
+  static final int help_icons[] = {
                         R.string.help_toggle,
                         R.string.help_bluetooth,
                         R.string.help_download,
@@ -132,7 +133,7 @@ public class GMActivity extends Activity
                         R.string.help_read,
                         R.string.help_write
                       };
-  static int help_menus[] = { 
+  static final int help_menus[] = {
                         R.string.help_display_calib,
                         R.string.help_validate,
                         R.string.help_prefs,
@@ -143,28 +144,28 @@ public class GMActivity extends Activity
 
   static int mNrButton1 = 0;
   private Button[]     mButton1;
-  HorizontalListView   mListView;
-  HorizontalButtonView mButtonView1;
+  private HorizontalListView   mListView;
+  private HorizontalButtonView mButtonView1;
   boolean mEnableWrite;
-  ListView   mMenu;
-  Button     mImage;
+  private ListView   mMenu;
+  private Button     mImage;
   // HOVER
   // MyMenuAdapter mMenuAdapter;
-  ArrayAdapter< String > mMenuAdapter;
-  boolean onMenu;
+  private ArrayAdapter< String > mMenuAdapter;
+  private boolean onMenu;
 
-  BitmapDrawable mBMtoggle;
-  BitmapDrawable mBMtoggle_no;
-  BitmapDrawable mBMcover    = null;
-  BitmapDrawable mBMcover_no = null;
-  BitmapDrawable mBMread     = null;
-  BitmapDrawable mBMread_no  = null;
-  BitmapDrawable mBMwrite    = null;
-  BitmapDrawable mBMwrite_no = null;
-  BitmapDrawable mBMdownload;
-  BitmapDrawable mBMdownload_on;
-  BitmapDrawable mBMbluetooth;
-  BitmapDrawable mBMbluetooth_no;
+  private BitmapDrawable mBMtoggle;
+  private BitmapDrawable mBMtoggle_no;
+  private BitmapDrawable mBMcover    = null;
+  private BitmapDrawable mBMcover_no = null;
+  private BitmapDrawable mBMread     = null;
+  private BitmapDrawable mBMread_no  = null;
+  private BitmapDrawable mBMwrite    = null;
+  private BitmapDrawable mBMwrite_no = null;
+  private BitmapDrawable mBMdownload;
+  private BitmapDrawable mBMdownload_on;
+  private BitmapDrawable mBMbluetooth;
+  private BitmapDrawable mBMbluetooth_no;
 
   public void setTheTitle() { }
 
@@ -175,7 +176,7 @@ public class GMActivity extends Activity
 
   /** called by CalibComputer Task
    * @return nr of iterations (neg. error)
-   * @note run on an AsyncTask
+   * note run on an AsyncTask
    */
   int computeCalib()
   {
@@ -463,7 +464,7 @@ public class GMActivity extends Activity
 
   /** called by CalibComputer Task
    * @param start_id id of the GM-data to start with
-   * @note run on an AsyncTask
+   * note run on an AsyncTask
    */
   void doResetGroups( long start_id )
   {
@@ -472,7 +473,8 @@ public class GMActivity extends Activity
   }
 
   /** called by CalibComputer Task
-   * @note run on an AsyncTask
+   * @param start_id  data id from whcih to start
+   * note run on an AsyncTask
    */
   int doComputeGroups( long start_id )
   {
@@ -1043,14 +1045,14 @@ public class GMActivity extends Activity
   void updateGM( long value, String name )
   {
     mApp_mDData.updateGMName( mCIDid, mApp.mCID, name );
-    String id = Long.toString(mCIDid);
+    // String id = Long.toString(mCIDid);
     // CalibCBlock blk = mApp.mDData.selectGM( mCIDid, mApp.mCID );
     mSaveCBlock.setGroup( value );
 
     // if ( mApp.mListRefresh ) {
     //   mDataAdapter.notifyDataSetChanged();
     // } else {
-      mSaveTextView.setText( id + " <" + name + "> " + mSaveData );
+      mSaveTextView.setText( String.format(Locale.US, getResources().getString(R.string.fmt_savetext), mCIDid, name, mSaveData ) );
       mSaveTextView.setTextColor( mSaveCBlock.color() );
       // mSaveTextView.invalidate();
       // updateDisplay( ); // FIXME

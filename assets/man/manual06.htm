@@ -3,6 +3,16 @@
 
 The survey shot window displays the list of the shots of the survey.<br><p>
 
+The title displays the survey name, and, in multi-distox mode, the active DistoX.
+The title color depends on the current station assignment policy:
+<ul>
+<li>blue: foreshot policies</li>
+<li>dark blue: backshot policies</li>
+<li>pink: "tripod" policy</li>
+<li>violet: "backsight" policy</li>
+<li>orange: "toporobot" policy</li>
+</ul><br><p>
+
 TopoDroid distinguishes four kinds of shots (displayed with different colors):
 <ol>
 <li>[red] "blank" shots, i.e, shots with the stations not set yet</li>
@@ -68,7 +78,7 @@ If the 3D modelling is enabled there is also a button to create a new 3D model, 
 <li><u>Recover</u>: deleted item (shot or sketch) <a href="page_undelete.htm">recovery</a></li>
 <li><u>Photo</u>: pictures taken for this survey</li>
 <li><u>Sensor</u>: sensor data taken for this survey</li>
-<li><u>3D</u>: 3D survey display (requires <a page="manual14.htm">Cave3D</a>)</li>
+<li><u>3D</u>: 3D survey display (requires <a href="manual14.htm">Cave3D</a>)</li>
 <li><u>DistoX</u>: switches to the device window</li>
 <li><u>Settings</u></li>
 <li><u>Help</u></li>
@@ -77,7 +87,7 @@ If the 3D modelling is enabled there is also a button to create a new 3D model, 
 <h4>SURVEY SETTINGS</h4>
 <ul style="margin-top:0">
   <li><i>Team</i>: the default surveying team. If the value is not empty, it is used to set the "Team" field when you create a new survey. Write your name and that of the cavers you usually survey with. [default unset]</li>
-  <li><i>Stations policy</i>: select the automatic <a href="page_station_policy.htm">station naming policy.</a> [default "splays+foresight"]</li>
+  <li><i>Stations policy</i>: select the automatic <a href="page_station_policy.htm">station naming policy.</a> [default "splays+foresight"].i</li>
   <li><i>Station names</i> specifies the type of the station names, either alphanumeric or numeric [default "alphanumeric"]</li>
   <li><i>Initial station name</i>: the default first station name for new surveys. Can be overridden in the <i>New survey</i> dialog. [default unset]</li>
   <li><i>Thumbnail size</i>: size of the photo thumbnails [default 200, min 80, max 400]</li>

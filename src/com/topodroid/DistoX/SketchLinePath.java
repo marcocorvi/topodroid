@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid 3d sketch: line-path (lines)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -35,7 +35,7 @@ class SketchLinePath extends SketchPath
   // boolean log;
   private boolean mClosed;
   // boolean mReversed;
-  String  mOptions;
+  private String  mOptions;
   Line3D  mLine;              // 3D points of the traced line (scene coords)
   ArrayList< Vector > mPts3D; // points 3D for the triangulated surface
   float mAngle;               // rotation angle with respect to the centerline (used by makeSurface)

@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid calib activity
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -53,37 +53,37 @@ public class CalibActivity extends Activity
                            , View.OnClickListener
                            , IExporter
 {
-  private static int izonsno[] = {
+  private static final int izonsno[] = {
                         0, // R.drawable.iz_save_no,
                         R.drawable.iz_open_no,
                         R.drawable.iz_read_no
                         // R.drawable.iz_export0_no
                      };
-  private static int izons[] = {
+  private static final int izons[] = {
                         R.drawable.iz_save,
                         R.drawable.iz_open,
                         R.drawable.iz_read,
 			R.drawable.iz_empty
                      };
 
-  BitmapDrawable mBMopen;
-  BitmapDrawable mBMopen_no;
-  BitmapDrawable mBMread;
-  BitmapDrawable mBMread_no;
+  private BitmapDrawable mBMopen;
+  private BitmapDrawable mBMopen_no;
+  private BitmapDrawable mBMread;
+  private BitmapDrawable mBMread_no;
   
-  private static int menus[] = {
+  private static final int menus[] = {
                         R.string.menu_export,
                         R.string.menu_delete,
                         R.string.menu_options,
                         R.string.menu_help
                      };
 
-  private static int help_icons[] = {
+  private static final int help_icons[] = {
                         R.string.help_save_calib,
                         R.string.help_open_calib,
                         R.string.help_coeff
                       };
-  private static int help_menus[] = {
+  private static final int help_menus[] = {
                         R.string.help_export_calib,
                         R.string.help_delete_calib,
                         R.string.help_prefs,
@@ -98,7 +98,7 @@ public class CalibActivity extends Activity
   private String mDeviceAddress;
   private EditText mEditComment;
 
-  MyDateSetListener mDateListener;
+  private MyDateSetListener mDateListener;
 
   private RadioButton mCBAlgoAuto;
   private RadioButton mCBAlgoLinear;
@@ -130,14 +130,14 @@ public class CalibActivity extends Activity
   private Button[] mButton1;
   private int mNrButton1 = 0;
   // private Button[] mButton2;
-  HorizontalListView mListView;
-  HorizontalButtonView mButtonView1;
-  ListView   mMenu;
-  Button     mImage;
+  private HorizontalListView mListView;
+  private HorizontalButtonView mButtonView1;
+  private ListView   mMenu;
+  private Button     mImage;
   // HOVER
   // MyMenuAdapter mMenuAdapter;
-  ArrayAdapter< String > mMenuAdapter;
-  boolean onMenu;
+  private ArrayAdapter< String > mMenuAdapter;
+  private boolean onMenu;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) 
@@ -382,7 +382,7 @@ public class CalibActivity extends Activity
     }
   }
 
-  public void doDelete()
+  private void doDelete()
   {
     if ( mApp.mCID < 0 ) return;
     TopoDroidApp.mDData.doDeleteCalib( mApp.mCID );

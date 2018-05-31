@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid main class: survey/calib list
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -87,7 +87,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 // import android.graphics.Color;
 // import android.graphics.PorterDuff;
 
-import android.util.Log;
+// import android.util.Log;
 
 /*
   Method m = device.getClass().getMethod( "createRfcommSocket", new Class[] (int.class) );
@@ -118,7 +118,7 @@ public class MainWindow extends Activity
   private ListItemAdapter mArrayAdapter;
 
   private Button[] mButton1;
-  private static int izons[] = {
+  private static final int izons[] = {
                           R.drawable.iz_disto2b, // iz_disto,
                           R.drawable.iz_plus,
                           R.drawable.iz_import,
@@ -128,7 +128,7 @@ public class MainWindow extends Activity
 			  R.drawable.iz_empty
                           };
 
-  private static int menus[] = { 
+  private static final int menus[] = {
                           R.string.menu_palette,
                           R.string.menu_logs,
                           R.string.menu_join_survey,
@@ -137,7 +137,7 @@ public class MainWindow extends Activity
                           R.string.menu_help
                           };
 
-  private static int help_icons[] = { R.string.help_device,
+  private static final int help_icons[] = { R.string.help_device,
                           R.string.help_add_topodroid,
                           R.string.help_import,
                           R.string.help_symbol,
@@ -145,7 +145,7 @@ public class MainWindow extends Activity
                           // FIXME THMANAGER
                           // R.string.help_database
                           };
-  private static int help_menus[] = {
+  private static final int help_menus[] = {
                           R.string.help_symbol,
                           R.string.help_log,
                           R.string.help_join_survey,
@@ -367,14 +367,14 @@ public class MainWindow extends Activity
   // ---------------------------------------------------------------
 
   TopoDroidAbout mTopoDroidAbout = null;
- 
-  HorizontalListView mListView;
-  HorizontalButtonView mButtonView1;
-  Button     mImage;
-  ListView   mMenu;
+
+  private HorizontalListView mListView;
+  private HorizontalButtonView mButtonView1;
+  private Button     mImage;
+  private ListView   mMenu;
   // HOVER
   // MyMenuAdapter mMenuAdapter = null;
-  ArrayAdapter< String > mMenuAdapter;
+  private ArrayAdapter< String > mMenuAdapter;
   
   // FIXME TOOLBAR Toolbar mToolbar;
 
@@ -552,8 +552,8 @@ public class MainWindow extends Activity
     }
     setTheTitle();
   }
-  
-  int mNrButton1 = 5;
+
+  private int mNrButton1 = 5;
 
   void resetButtonBar()
   {
@@ -806,6 +806,7 @@ public class MainWindow extends Activity
     return false;
   }
 
+  // FIXME-23
   @Override
   public void onRequestPermissionsResult( int code, final String[] perms, int[] results )
   {

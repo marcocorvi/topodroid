@@ -9,7 +9,7 @@
  * @note  the adapter needs an extra empty button (to make room for the menu button
  *        at the right) because the right border is the left of the last button
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -33,14 +33,14 @@ import android.widget.Scroller;
 public class HorizontalListView extends AdapterView<ListAdapter> 
 {
   public boolean mAlwaysOverrideTouch = true;
-  protected ListAdapter mAdapter;              // data adapter
+  private ListAdapter mAdapter;              // data adapter
   private int mLeftViewIndex = -1;
   private int mRightViewIndex = 0;
   protected int mCurrentX;
-  protected int mNextX;
+  private int mNextX;
   private int mMaxX = Integer.MAX_VALUE;
   private int mDisplayOffset = 0;
-  protected Scroller mScroller;
+  private Scroller mScroller;
   private GestureDetector mGesture;
   private Queue<View> mRemovedViewQueue = new LinkedList<View>();
 
@@ -454,7 +454,7 @@ public class HorizontalListViewDemo extends Activity
 
       @Override
       public View getView(int position, View convertView, ViewGroup parent) {
-          View retval = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewitem, null);
+          View retval = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewitem, parent, false );
           TextView title = (TextView) retval.findViewById(R.id.title);
           Button button = (Button) retval.findViewById(R.id.clickbutton);
           button.setOnClickListener(mOnButtonClicked);

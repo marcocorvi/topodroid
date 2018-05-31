@@ -8,7 +8,7 @@
  * for when station points are not automatically added
  *
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -57,9 +57,9 @@ class DrawingStationDialog extends MyDialog
 
     private Button mBtnCancel;
 
-    private DrawingWindow mParent;
-    private DrawingStationName mStation; // num station point
-    private DrawingStationPath mPath;
+    private final DrawingWindow mParent;
+    private final DrawingStationName mStation; // num station point
+    private final DrawingStationPath mPath;
 
     private String mStationName;
     private boolean mIsBarrier;

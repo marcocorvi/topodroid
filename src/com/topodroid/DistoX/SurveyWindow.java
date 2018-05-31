@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid survey activity
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -65,7 +65,7 @@ public class SurveyWindow extends Activity
                             , OnItemClickListener
                             , View.OnClickListener
 {
-  private static int izons[] = { 
+  private static final int izons[] = {
                         R.drawable.iz_note,
                         R.drawable.iz_info, // ic_details,
                         R.drawable.iz_3d,
@@ -74,7 +74,7 @@ public class SurveyWindow extends Activity
                         R.drawable.iz_sensor,
 			R.drawable.iz_empty
                      };
-  private static int menus[] = {
+  private static final int menus[] = {
                         R.string.menu_close,
                         R.string.menu_export,
                         R.string.menu_rename,
@@ -86,7 +86,7 @@ public class SurveyWindow extends Activity
                         R.string.menu_help
                       };
 
-  private static int help_icons[] = { 
+  private static final int help_icons[] = {
                         R.string.help_note,
                         R.string.help_info_shot,
                         R.string.help_3d,
@@ -94,7 +94,7 @@ public class SurveyWindow extends Activity
                         R.string.help_photo,
                         R.string.help_sensor
                         };
-  private static int help_menus[] = { 
+  private static final int help_menus[] = {
                         R.string.help_close,
                         R.string.help_export_survey,
                         R.string.help_rename,
@@ -125,19 +125,19 @@ public class SurveyWindow extends Activity
 
   private Button[] mButton1;
   private int mNrButton1 = 0;
-  HorizontalListView mListView;
-  HorizontalButtonView mButtonView1;
-  ListView   mMenu;
-  Button     mImage;
+  private HorizontalListView mListView;
+  private HorizontalButtonView mButtonView1;
+  private ListView   mMenu;
+  private Button     mImage;
   // HOVER
   // MyMenuAdapter mMenuAdapter;
-  ArrayAdapter< String > mMenuAdapter;
-  boolean onMenu;
-  String mInitStation = null;
-  int mXSections;
+  private ArrayAdapter< String > mMenuAdapter;
+  private boolean onMenu;
+  private String mInitStation = null;
+  private int mXSections;
 
-  TopoDroidApp mApp;
-  DataHelper   mApp_mData;
+  private TopoDroidApp mApp;
+  private DataHelper   mApp_mData;
   private boolean mustOpen;
   private int mNameColor;
 
@@ -192,7 +192,7 @@ public class SurveyWindow extends Activity
     super.onCreate( savedInstanceState );
 
     mApp = (TopoDroidApp)getApplication();
-    mApp_mData = mApp.mData;
+    mApp_mData = TopoDroidApp.mData;
     mApp.mSurveyWindow = this;
     mActivity = this;
     mNameColor = getResources().getColor( R.color.textfixed );

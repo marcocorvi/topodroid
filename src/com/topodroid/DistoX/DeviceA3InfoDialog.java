@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid DistoX A3 device info dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -22,7 +22,7 @@ import android.content.DialogInterface;
 import android.content.res.Resources;
 
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 
 import android.widget.TextView;
 import android.widget.RadioButton;
@@ -36,8 +36,8 @@ class DeviceA3InfoDialog extends MyDialog
   private Button   mBTok;
   // private Button   mBTcancel;
 
-  DeviceActivity mParent;
-  Device mDevice;
+  private final DeviceActivity mParent;
+  private final Device mDevice;
 
   private TextView tv_serial;
   private TextView tv_statusAngle;

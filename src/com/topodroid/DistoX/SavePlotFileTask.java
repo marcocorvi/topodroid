@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid drawing: save drawing in therion format
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -29,11 +29,11 @@ import android.graphics.Bitmap;
 
 class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
 {
-  private Context mContext; // FIXME LEAK
+  private final Context mContext; // FIXME LEAK
   private Handler mHandler;
   // private TopoDroidApp mApp;
-  private DrawingWindow mParent;
-  private DrawingSurface mSurface;
+  private final DrawingWindow mParent;
+  private final DrawingSurface mSurface;
   private List<DrawingPath> mPaths;
   private String mFullName;
   private int mType;    // plot type

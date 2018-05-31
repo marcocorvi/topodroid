@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid calibration data dialog (to assign the group number)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -40,7 +40,7 @@ import android.view.View;
 class CalibGMDialog extends MyDialog
                            implements View.OnClickListener
 {
-  private GMActivity  mParent;
+  private final GMActivity  mParent;
   private CalibCBlock mBlk;
 
   // private EditText mETbearing;
@@ -117,7 +117,7 @@ class CalibGMDialog extends MyDialog
     eTroll.setText( String.format(Locale.US, "%.1f", mBlk.mRoll ) );
     tVerror.setText( String.format(Locale.US, "%.4f", mBlk.mError ) );
 
-    mETname.setText( Long.toString( mBlk.mGroup ) );
+    mETname.setText( String.format(Locale.US, "%d", mBlk.mGroup ) );
     mButtonOK.setOnClickListener( this );
     mButtonDelete.setOnClickListener( this );
     mButtonCancel.setOnClickListener( this );

@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid drawing: dialog for the photo of a point "photo"
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -29,9 +29,9 @@ class DrawingPhotoDialog extends MyDialog
 {
   private EditText mComment;
 
-  private ILabelAdder mActivity;
-  private float mX;
-  private float mY;
+  private final ILabelAdder mActivity;
+  private final float mX;
+  private final float mY;
 
   DrawingPhotoDialog( Context context, ILabelAdder activity, float x, float y )
   {

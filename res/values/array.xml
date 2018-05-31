@@ -330,7 +330,7 @@
      <item name="grid3">3</item>
   </string-array>
 
-  <string-array name="sectionStations">
+  <!-- string-array name="sectionStations">
      <item name="both">Both</item>
      <item name="from">Behind</item>
      <item name="to">In front</item>
@@ -339,7 +339,7 @@
      <item name="both">3</item>
      <item name="from">1</item>
      <item name="to">2</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="recentNr">
      <item name="3">3</item>

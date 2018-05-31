@@ -123,11 +123,11 @@
     <item name="asl">Orthometrique</item>
   </string-array -->
   
-  <string-array name="sectionStations">
+  <!-- UNUSED string-array name="sectionStations">
      <item name="both">Les deux</item>
      <item name="from">Derrière</item>
      <item name="to">Devant</item>
-  </string-array>
+  </string-array -->
  
 
   <string-array name="sockType">

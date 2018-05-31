@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid quick cam compass
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -37,11 +37,11 @@ class QCamCompass extends Dialog
                          implements OnClickListener
                                   , IBearingAndClino
 {
-  Context mContext;
+  private final Context mContext;
   // DrawingWindow mDrawer;
   // long mPid;
 
-  private IPhotoInserter mInserter;
+  private final IPhotoInserter mInserter;
   private QCamDrawingSurface mSurface;
   // private QCamBox mBox;
   private Button buttonClick;
@@ -54,9 +54,9 @@ class QCamCompass extends Dialog
   private BitmapDrawable mBDsaveoff;
 
   private TextView mTVdata;
-  float mBearing;
-  float mClino;
-  int   mOrientation;
+  private float mBearing;
+  private float mClino;
+  private int   mOrientation;
   private boolean mHasBearingAndClino;
   private IBearingAndClino mCallback;
   private boolean mWithBox;

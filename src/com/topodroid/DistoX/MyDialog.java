@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid generic dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -26,7 +26,7 @@ import android.view.Window;
 class MyDialog extends Dialog
                       // implements View.OnClickListener
 {
-  protected Context mContext;
+  protected final Context mContext;
   private String mHelpPage = null;
 
   MyDialog( Context context, int help_resource )

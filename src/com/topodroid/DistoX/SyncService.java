@@ -34,7 +34,7 @@ class SyncService
 
     // Member fields
     // private Context mContext;
-    private TopoDroidApp mApp;
+    private final TopoDroidApp mApp;
 
     private final BluetoothAdapter mAdapter;
     private BluetoothDevice  mRemoteDevice;

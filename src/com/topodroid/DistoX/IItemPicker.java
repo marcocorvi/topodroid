@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid item picker interface
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -16,7 +16,7 @@ package com.topodroid.DistoX;
 interface IItemPicker 
           // extends OnClickListener
 {
-  public void setTypeAndItem( int type, int pos );
+  void setTypeAndItem( int type, int pos );
 
-  public void closeDialog();
+  void closeDialog();
 }

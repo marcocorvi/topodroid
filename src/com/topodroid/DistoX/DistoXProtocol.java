@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid TopoDroid-DistoX communication protocol
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -42,7 +42,7 @@ import java.nio.channels.ClosedByInterruptException;
 
 class DistoXProtocol
 {
-  private Device mDevice;
+  private final Device mDevice;
   // private DistoX mDistoX;
   // private BluetoothDevice  mBTDevice;
   // private BluetoothSocket  mSocket = null;
@@ -87,8 +87,8 @@ class DistoXProtocol
   int mMaxTimeout = 8;
   
 
-  byte[] getAddress() { return mAddress; }
-  byte[] getReply()   { return mReplyBuffer; }
+  // byte[] getAddress() { return mAddress; }
+  // byte[] getReply()   { return mReplyBuffer; }
 
   // FIXME the record of written calibration is not used
   // boolean writtenCalib = false;
@@ -229,7 +229,7 @@ class DistoXProtocol
     //     mBuffer[3], mBuffer[4], mBuffer[5], mBuffer[6], mBuffer[7] ) );
     // }
 
-    int high, low;
+    // int high, low;
     switch ( type ) {
       case 0x01: // data
         int dhh = (int)( mBuffer[0] & 0x40 );
@@ -507,8 +507,8 @@ class DistoXProtocol
   }
 
   // X310    
-  private static int DATA_PER_BLOCK = 56;
-  private static int BYTE_PER_DATA  = 18;
+  private static final int DATA_PER_BLOCK = 56;
+  private static final int BYTE_PER_DATA  = 18;
   // note 56*18 = 1008
   // next there are 16 byte padding for each 1024-byte block (0x400 byte block)
   //
@@ -937,4 +937,4 @@ class DistoXProtocol
     return ( ok ? cnt : -cnt );
   }
 
-};
+}

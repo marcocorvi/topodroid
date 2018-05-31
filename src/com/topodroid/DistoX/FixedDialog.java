@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid survey fix point edit dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -47,7 +47,7 @@ import android.net.Uri;
 class FixedDialog extends MyDialog
                   implements View.OnClickListener
 {
-  private FixedActivity mParent;
+  private final FixedActivity mParent;
   private FixedInfo mFxd;
 
   // private TextView mTVdata;

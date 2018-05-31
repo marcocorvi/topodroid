@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid enabled symbol(s)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -32,7 +32,7 @@ import android.view.View;
 
 class EnableSymbol implements View.OnClickListener
 {
-  int mType;   // symbol type POINT (0) LINE (1) AREA (2)
+  private int mType;   // symbol type POINT (0) LINE (1) AREA (2)
   // int mIndex;  // symbol index
   boolean mEnabled;
   SymbolInterface mSymbol;

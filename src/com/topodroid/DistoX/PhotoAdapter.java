@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid adapter for survey data
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -41,7 +41,7 @@ class PhotoAdapter extends ArrayAdapter< PhotoInfo >
     View v = convertView;
     if ( v == null ) {
       LayoutInflater li = (LayoutInflater)context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-      v = li.inflate( R.layout.row, null );
+      v = li.inflate( R.layout.row, parent, false );
     }
 
     PhotoInfo b = items.get( pos );
