@@ -228,6 +228,13 @@
     <string name="splays_toggle">Alternar exibição das medidas auxiliares</string>
     <!-- TODO string name="splays_on_off">Splays</string -->
     <string name="splays">medidas auxiliares</string>
+    <!-- TODO string name="splays_show">Show splays</string -->
+    <!-- TODO string name="foresurface_show">Show fore surface</string -->
+    <!-- TODO string name="fmt_listen">LISTEN | %1$s</string -->
+    <!-- TODO string name="fmt_id">ID %1$s</string -->
+    <!-- TODO string name="fmt_latitude">Latitude %1$s</string -->
+    <!-- TODO string name="fmt_longitude">Longitude %1$s</string -->
+    <!-- TODO string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string --> 
     <string name="fixed">fixa</string>
     <string name="painted">pintada</string>
 
