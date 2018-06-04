@@ -298,12 +298,12 @@
     <!-- TODO string name="menu_switch">SWITCH/CLOSE</string -->
     <string name="menu_help">POMOC</string>
     <string name="menu_join_survey">PRIPOJ PLÁN</string> <!-- rilievo cooperativo -->
-    <string name="menu_logs">ZÁZNAM</string>
+    <string name="menu_logs">ZÁZNAM PROGRAMU</string>
     <string name="menu_manual_calibration">KALIBRÁCIA</string>
     <string name="menu_options">NASTAVENIA</string>
     <string name="menu_overview">PREHĽAD</string>
     <string name="menu_pair">SPÁROVAŤ</string>
-    <!-- OK string name="menu_palette">PALETA</string -->
+    string name="menu_palette">PALETA</string> 
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SNÍMAČ</string>
     <string name="menu_scan">SKENOVAŤ</string>
@@ -859,7 +859,7 @@
     <string name="title_calib_export">Exportovať kalibráciu ako </string>
     <!-- OK ENGLISH string name="title_zoom">Zoom</string -->
 
-  <string name="pref_cat_survey">PODROBNÉ NASTAVENIA</string>
+  <string name="pref_cat_survey">NASTAVENIA MERANIA</string>
   <string name="pref_cat_drawing">NASTAVENIE KRESLENIA</string>
   <string name="pref_cat_import_export">NASTAVENIE IMPORT/EXPORT</string>
   <string name="pref_cat_calib">NASTAVENIE KALIBRÁCIE</string>
@@ -878,15 +878,15 @@
   <!-- UNUSED string name="pref_bootloader_summary">Bootloader abilitiato</string -->
   <string name="pref_mkeyboard_title">Klávesnica</string>
   <string name="pref_mkeyboard_summary">Povoliť / zakázať vlastné klávesnice</string>
-  <!-- TODO string name="pref_no_cursor_title">No keyboard cursor</string -->
-  <!-- TODO string name="pref_no_cursor_summary">Disable custom-keyboard cursor</string -->
+  <string name="pref_no_cursor_title">Kurzory na klávesnici</string>
+  <string name="pref_no_cursor_summary">Zrušiť tlačidlá kurzoru na klávesnici</string>
   <string name="pref_local_help_title">Prekladateľská príručka</string>
   <string name="pref_local_help_summary">Povoľte preložené manuálne</string>
-  <!-- OK string name="pref_cosurvey_title">Spoločný priekum</string -->
+  <string name="pref_cosurvey_title">Spoločný priekum</string>
   <string name="pref_cosurvey_summary">Aktivovať / deaktivovať službu spoločného prieskumu</string>
-  <string name="pref_export_shots_title">Formát exportu údajov</string>
+  <string name="pref_export_shots_title">Predvolený formát exportu</string>
   <string name="pref_export_shots_summary">Formát exportu preferenčných údajov</string>
-  <string name="pref_export_plot_title"> Predvolený exportný výkres</string>
+  <string name="pref_export_plot_title"> Predvolený formát náčrtu</string>
   <string name="pref_export_plot_summary">Predvolený formát exportu formátu</string>
   <string name="pref_therion_maps_title">Therion mapy najprv</string>
   <string name="pref_therion_maps_summary">Therion mapy pred dátami prieskumu</string>
@@ -900,8 +900,8 @@
   <!-- TODO string name="pref_bezier_step_summary">Distance between points on an export line [m]</string -->
   <string name="pref_leg_shots_title">Minimálne hlavné zamerania</string>
   <string name="pref_leg_shots_summary">Minimálny počet opatrení pre polygonálne meranie</string>
-  <string name="pref_station_prefix_title">Exportujte prefix referenčných kritérií</string>
-  <string name="pref_station_prefix_summary">Export so - Skúste predponu referenčných kritérií</string>
+  <string name="pref_station_prefix_title">Predčíslie bodu v programe Compass</string>
+  <string name="pref_station_prefix_summary">Export predčíslia bodov</string>
   <string name="pref_compass_splays_title">Pomocné zameranie kompasu</string>
   <string name="pref_compass_splays_summary">Export pomocných merianí do kompas súborov</string>
   <string name="pref_trobot_names_title">Názvy staníc TopoRobot</string>
@@ -1160,7 +1160,7 @@
   <!-- UNUSED string name="pref_xtherion_areas_summary">Salva le aree in modo xtherion</string -->
   <string name="pref_therion_splays_title">Therion pomocné merania</string>
   <string name="pref_therion_splays_summary">Pridať riadky u: pomocné riadky do súborov th2</string>
-  <string name="pref_autoStations_title">Meracie body Th2</string>
+  <string name="pref_autoStations_title">Meracie body Therionu</string>
   <string name="pref_autoStations_summary">Pridanie staníc automaticky</string>
   <string name="pref_loopClosure_title">Opakovanie</string>
   <string name="pref_loopClosure_summary">Kompenzácia chyby slučky</string>
@@ -1168,8 +1168,8 @@
   <!-- UNUSED string name="pref_splayExtend_summary">Stima del extend degli splay</string -->
   <string name="pref_swapLR_title">Prepnite LR na kompas</string>
   <string name="pref_swapLR_summary">Späť D / G v exporte do Compasu</string>
-  <string name="pref_LRExtend_title">Odhad predĺženia Sx/Dx</string>
-  <string name="pref_LRExtend_summary">Odhad predĺženia Sx/Dx (Bussola/import VisualTopo)</string>
+  <string name="pref_LRExtend_title">Odhadnúť pozdĺžny rez vľavo a pravo</string>
+  <string name="pref_LRExtend_summary">Odhadnúť pozdĺžny rez vľavo a pravo (len pre import Compass VisualTopo)</string>
 
   <string name="pref_picker_type_title">Dialog pre výber prototypu</string>
   <string name="pref_picker_type_summary">Typ dialógového okna výberu grafického prototypu</string>
@@ -1249,7 +1249,7 @@
   <!-- NO string name="pref_algo_min_delta_message">Min-algo group G^M.x weight</string -->
 
   <!-- OK string name="pref_log_stream_summary">Log output stream</string -->
-  <!-- OK string name="pref_log_stream_title">Log stream</string -->
+<string name="pref_log_stream_title">Tok záznamu</string>
   <string name="pref_log_bt">Bluetooth</string>
   <string name="pref_log_bezier">Bezierova krivka</string>
   <string name="pref_log_calib">Kalibrácia</string>
@@ -1271,9 +1271,9 @@
   <string name="pref_log_proto">Protokol DistoX</string>
   <!-- OK string name="pref_log_ptopo">PocketTopo</string -->
   <string name="pref_log_sensor">Senzory</string>
-  <string name="pref_log_shot">Ťahať</string>
+  <string name="pref_log_shot">Zámery</string>
   <!-- OK string name="pref_log_sync">Cosurveying</string -->
-  <string name="pref_log_survey">Prieskumy</string>
+  <string name="pref_log_survey">Merania</string>
   <string name="pref_log_therion">Therion</string>
   <string name="pref_log_units">Jednotky</string>
   <string name="pref_log_zip">ZIP</string>
