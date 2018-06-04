@@ -164,7 +164,7 @@
 
   <string-array name="unitAngle">
      <item name="degrees">Desatinné stupne</item>
-     <item name="grads">Desatinné stupne</item>
+     <item name="grads">Gradiány</item>
   </string-array>
 
   <string-array name="unitLocation">
