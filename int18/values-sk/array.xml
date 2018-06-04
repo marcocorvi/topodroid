@@ -17,7 +17,7 @@
   <string-array name="wallsType">
      <item name="none">žiadne</item>
      <item name="convex">konvexné</item>
-     <item name="delaunay">TODO</item>
+     <item name="delaunay">Delaunay triangulácia</item>
   </string-array>
 
   <string-array name="zoomCtrl">
