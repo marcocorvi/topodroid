@@ -5,7 +5,7 @@
   <string-array name="unitGrid">
      <item name="meter">metre</item>
      <item name="yard">yardy</item>
-     <item name="two_tf">2 chôdza</item>
+     <item name="two_tf">stopy</item>
   </string-array>
 
   <string-array name="loopClosure">
@@ -102,14 +102,14 @@
   </string-array>
 
   <string-array name="surveyStations">
-     <item name="no">Nie</item>
-     <item name="for">Normálny cieľ, najprv bočné miesta</item>
-     <item name="back">Opačný pohľad, bočné náhľady najprv cesta</item>
-     <item name="for2">Normálny cieľ, cesta ako prvá</item>
-     <item name="back2">Spiatočný cieľ, cesta ako prvá</item>
-     <item name="anomaly">Pohľad zozadu, spätné videnie</item>
-     <item name="tripod">Statív</item>
-     <item name="toporobot">TopoRobot</item>
+     <item name="no">Žiadna</item>
+     <item name="for">Pomocne zámery, hlavná zámera dopredu</item>
+     <item name="back">Pomocné zámery, hlavná zámera naspäť</item>
+     <item name="for2">Hlavná zámera dopredu, pomocné zámery</item>
+     <item name="back2">Hlavná zámera naspäť, pomocné zámery</item>
+     <item name="anomaly">Hlavná zámera naspäť, pomocné zámery, hlavná zámera dopredu</item>
+     <item name="tripod">Hlavná zámera naspäť a hlavná zámera dopredu</item>
+     <item name="toporobot">Meranie ako v programe TopoRobot</item>
   </string-array>
 
   <string-array name="pickerType">
@@ -159,7 +159,7 @@
 
   <string-array name="unitLength">
      <item name="meters">metre</item>
-     <item name="feet">chôdza</item>
+     <item name="feet">stopy</item>
   </string-array>
 
   <string-array name="unitAngle">
