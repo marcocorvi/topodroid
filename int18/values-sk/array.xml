@@ -169,7 +169,7 @@
 
   <string-array name="unitLocation">
      <item name="degrees">Desatinné stupne</item>
-     <item name="ddmmss">stupňov, minút, sekúnd</item>
+     <item name="ddmmss">stupne, minúty, sekúndy</item>
   </string-array>
 
   <string-array name="calibAlgo">
