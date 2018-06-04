@@ -5,19 +5,19 @@
   <string-array name="unitGrid">
      <item name="meter">metre</item>
      <item name="yard">yardy</item>
-     <item name="two_tf">2 chôdza</item>
+     <item name="two_tf">stopy</item>
   </string-array>
 
   <string-array name="loopClosure">
      <item name="none">Žiadne</item>
      <item name="normal">Normálne</item>
-     <item name="triangles">Trojuholníky</item>
+     <item name="triangles">Triangulácia</item>
   </string-array>
 
   <string-array name="wallsType">
      <item name="none">žiadne</item>
      <item name="convex">konvexné</item>
-     <item name="delaunay">TODO</item>
+     <item name="delaunay">Delaunay triangulácia</item>
   </string-array>
 
   <string-array name="zoomCtrl">
@@ -102,14 +102,14 @@
   </string-array>
 
   <string-array name="surveyStations">
-     <item name="no">Nie</item>
-     <item name="for">Normálny cieľ, najprv bočné miesta</item>
-     <item name="back">Opačný pohľad, bočné náhľady najprv cesta</item>
-     <item name="for2">Normálny cieľ, cesta ako prvá</item>
-     <item name="back2">Spiatočný cieľ, cesta ako prvá</item>
-     <item name="anomaly">Pohľad zozadu, spätné videnie</item>
-     <item name="tripod">Statív</item>
-     <item name="toporobot">TopoRobot</item>
+     <item name="no">Žiadna</item>
+     <item name="for">Pomocne zámery, hlavná zámera dopredu</item>
+     <item name="back">Pomocné zámery, hlavná zámera naspäť</item>
+     <item name="for2">Hlavná zámera dopredu, pomocné zámery</item>
+     <item name="back2">Hlavná zámera naspäť, pomocné zámery</item>
+     <item name="anomaly">Hlavná zámera naspäť, pomocné zámery, hlavná zámera dopredu</item>
+     <item name="tripod">Hlavná zámera naspäť a hlavná zámera dopredu</item>
+     <item name="toporobot">Meranie ako v programe TopoRobot</item>
   </string-array>
 
   <string-array name="pickerType">
@@ -159,17 +159,17 @@
 
   <string-array name="unitLength">
      <item name="meters">metre</item>
-     <item name="feet">chôdza</item>
+     <item name="feet">stopy</item>
   </string-array>
 
   <string-array name="unitAngle">
      <item name="degrees">Desatinné stupne</item>
-     <item name="grads">Desatinné stupne</item>
+     <item name="grads">Gradiány</item>
   </string-array>
 
   <string-array name="unitLocation">
      <item name="degrees">Desatinné stupne</item>
-     <item name="ddmmss">stupňov, minút, sekúnd</item>
+     <item name="ddmmss">stupne, minúty, sekúndy</item>
   </string-array>
 
   <string-array name="calibAlgo">

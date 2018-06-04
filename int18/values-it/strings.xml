@@ -228,14 +228,14 @@
     <!-- UNUSED string name="hidden_del">Mostra la linea mediana</string -->
     <string name="hidden_show">Mostra battute oltre il caposaldo</string>
     <string name="splays_toggle">Mostra o Nascondi gli splay</string>
-    <!-- TODO string name="splays_on_off">Splays</string -->
+    <string name="splays_on_off">Splays</string>
     <string name="splays">splay</string>
-    <!-- TODO string name="splays_show">Show splays</string -->
-    <!-- TODO string name="foresurface_show">Show fore surface</string -->
+    <string name="splays_show">Mostra splays</string>
+    <string name="foresurface_show">Mostra superficie</string>
     <!-- TODO string name="fmt_listen">LISTEN | %1$s</string -->
     <!-- TODO string name="fmt_id">ID %1$s</string -->
-    <!-- TODO string name="fmt_latitude">Latitude %1$s</string -->
-    <!-- TODO string name="fmt_longitude">Longitude %1$s</string -->
+    <string name="fmt_latitude">Latitudine %1$s</string>
+    <string name="fmt_longitude">Longitudine %1$s</string>
     <!-- TODO string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string --> 
     <string name="fixed">fisso</string>
     <string name="painted">colorato</string>
@@ -1024,9 +1024,9 @@
   <string name="pref_shared_xsections_summary">X-section al caposaldo condivisa tra i disegni</string>
   <string name="xsections_shared">X-section condivise</string>
   <string name="xsections_private">X-section private</string>
-  <!-- TODO string name="pref_reduce_angle_title">Straightening angle</string -->
-  <!-- TODO string name="pref_reduce_angle_summary">Minimal segment-angle straightening lines</string -->
-  <!-- TODO string name="pref_reduce_angle_message">Minimal segment-angle straightening lines</string -->
+  <string name="pref_reduce_angle_title">Angolo di raddrizzamento</string>
+  <string name="pref_reduce_angle_summary">Minimo angolo in un punto per eliminarlo</string>
+  <string name="pref_reduce_angle_message">Minimo angolo della linea in un punto per eliminarlo</string>
 
 
   <string name="pref_survey_stations_title">Capisaldi rilievo</string>
@@ -1275,7 +1275,7 @@
   <string name="pref_log_loc">Posizioni GPS</string>
   <string name="pref_log_num">Riduzione poligonale</string>
   <string name="pref_log_path">Percorso file</string>
-  <!-- TODO string name="pref_log_perm">Permissions</string -->
+  <string name="pref_log_perm">Permessi</string>
   <string name="pref_log_photo">Foto</string>
   <string name="pref_log_plot">Disegni</string>
   <string name="pref_log_proto">Protocollo DistoX</string>

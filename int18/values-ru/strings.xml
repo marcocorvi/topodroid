@@ -232,13 +232,13 @@
     <string name="splays_toggle">Показать/скрыть бок. замеры</string>
     <string name="splays_on_off">Вкл/Выкл бок. замер</string>
     <string name="splays">бок. замеры</string>
-    <!-- TODO string name="splays_show">Show splays</string -->
-    <!-- TODO string name="foresurface_show">Show fore surface</string -->
-    <!-- TODO string name="fmt_listen">LISTEN | %1$s</string -->
-    <!-- TODO string name="fmt_id">ID %1$s</string -->
-    <!-- TODO string name="fmt_latitude">Latitude %1$s</string -->
-    <!-- TODO string name="fmt_longitude">Longitude %1$s</string -->
-    <!-- TODO string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string --> 
+    <string name="splays_show">Показать бок. замеры</string>
+    <string name="foresurface_show">Показать переднюю поверхность</string>
+    <string name="fmt_listen">СЛУШАТЬ | %1$s</string>
+    <string name="fmt_id">ID %1$s</string>
+    <string name="fmt_latitude">Широта %1$s</string>
+    <string name="fmt_longitude">Долгота %1$s</string>
+    <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string> 
     <string name="fixed">фиксированный репер</string>
     <string name="painted">нарисованный</string>
 
