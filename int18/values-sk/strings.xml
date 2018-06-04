@@ -739,7 +739,7 @@
     <string name="help_redo">Opakujte poslednú akciu kreslenia</string>
     <string name="help_symbol_plot">Zvoľte nástroje kresby</string>
     <string name="help_delete_item">Odstrániť prvok kreslenia</string>
-    <string name="help_range">Presunúť časť linky</string>
+    <string name="help_range">Presunúť časť čiary</string>
     <!-- UNUSED string name="help_clear">Pulisci selezione</string -->
     <string name="help_eraser">Režim vymazania</string>
     <string name="help_select_mode">Výberový nástroj</string>
@@ -1130,7 +1130,7 @@
   <string name="pref_label_size_title">Veľkosť štítkov</string>
   <string name="pref_label_size_summary">Veľkosť štítkov</string>
   <string name="pref_label_size_message">Veľkosť štítkov</string>
-  <string name="pref_arrow_length_title">Bod linky s bodkou</string>
+  <string name="pref_arrow_length_title">Bod čiary s bodkou</string>
   <!-- UNUSED string name="pref_arrow_length_summary">Dĺžka smeru sekcie</string -->
   <string name="pref_arrow_length_message">Hrúbka prerušovanej čiary</string>
   <string name="pref_dot_radius_title">Velkosť zelených bodov</string>
