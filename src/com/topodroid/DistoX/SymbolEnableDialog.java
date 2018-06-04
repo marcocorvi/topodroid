@@ -1,4 +1,4 @@
-/** @file SymbolEnableDialog.java
+/* @file SymbolEnableDialog.java
  *
  * @author marco corvi
  * @date 

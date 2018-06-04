@@ -1,4 +1,4 @@
-/** @file FirmwareUtils.java
+/* @file FirmwareUtils.java
  *
  * @author marco corvi
  * @date nov 2011

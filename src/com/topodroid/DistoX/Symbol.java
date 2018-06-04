@@ -1,4 +1,4 @@
-/** @file Symbol.java
+/* @file Symbol.java
  *
  * @author marco corvi
  * @date 

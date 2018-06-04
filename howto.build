@@ -30,3 +30,42 @@ Subdirs bin gen are created by the build
    
 N.B. to build/install release apk replace "debug" with "release".
 Keystore and key for topodroid are not included in the repo :-)
+
+----------------------------------------------------------------
+Howto Build with studio
+
+[2] TopoDroid studio setup
+
+Home:
+~/ApkProjects/TopoDroid
+
+it includes:
+  app/
+      app.iml
+      build.bundle
+      build.gradle
+      proguard-rules.pro
+      build/
+      libs/ (empty)
+      src/
+          androidTest
+          main/
+               AndroidManifest.xml
+               assets -->
+               java -->
+               jni -->
+               libs ( jni builds )
+               res/
+                   drawable layout raw values xml -->
+                   drawable-*
+                   drawable-v24
+                   values-v16
+          test
+  gradle/wrapper/gradle-wrapper.jar
+                 gradle-wrapper.properties
+  build.gradle
+  gradle.properties
+  gradle.bat
+  local.properties ( ndk.dir and sdk.dir )
+  settings.gradle
+  TopoDroid.iml

@@ -16,6 +16,8 @@
     <string name="AREA">Площ</string>
     <string name="HELP">Помощ</string>
     <string name="STATION">Репер </string>
+    <!-- TODO string name="UP">UPWARD</string -->
+    <!-- TODO string name="DOWN">DOWNWARD</string -->
 
     <string name="cut">Изрязване</string>
     <string name="copy">Копиране</string>

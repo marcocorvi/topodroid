@@ -1,4 +1,4 @@
-/** @file SymbolAreaLibrary.java
+/* @file SymbolAreaLibrary.java
  *
  * @author marco corvi
  * @date dec 2012
@@ -171,7 +171,7 @@ class SymbolAreaLibrary extends SymbolLibrary
       }
       sortSymbolByName( systemNr );
     } else {
-      dir.mkdirs( );
+      if ( ! dir.mkdirs( ) ) TDLog.Error( "mkdir error" );
     }
   }
 

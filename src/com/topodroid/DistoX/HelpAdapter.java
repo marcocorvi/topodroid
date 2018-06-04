@@ -1,4 +1,4 @@
-/** @file HelpAdapter.java
+/* @file HelpAdapter.java
  *
  * @author marco corvi
  * @date nov 2013

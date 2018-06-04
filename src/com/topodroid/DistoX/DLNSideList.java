@@ -1,4 +1,4 @@
-/** @file DLNSideList.java
+/* @file DLNSideList.java
  *
  * @author marco corvi
  * @date june 2017

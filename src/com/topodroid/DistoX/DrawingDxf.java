@@ -1,4 +1,4 @@
-/** @file DrawingDxf.java
+/* @file DrawingDxf.java
  *
  * @author marco corvi
  * @date mar 2013
@@ -133,7 +133,7 @@ class DrawingDxf
     pw.printf(Locale.US, "  %d%s%.2f%s", code, EOL, val, EOL );
   }
 
-  static void writeInt(  BufferedWriter out, int code, int val ) throws IOException
+  static private void writeInt(  BufferedWriter out, int code, int val ) throws IOException
   {
     out.write( SPACE + code + EOL + val + EOL );
   }
@@ -631,20 +631,20 @@ class DrawingDxf
           ++handle; printLayer( pw2, handle, "REF",     flag, color, lt_continuous ); ++color; // white
           
           color = 10;
-          if ( linelib != null ) { 
+          // if ( linelib != null ) { // always true
             for ( Symbol line : linelib.getSymbols() ) {
               String lname = "L_" + line.getThName().replace(':','-');
               ++handle; printLayer( pw2, handle, lname, flag, color, lt_continuous ); ++color;
             }
-          }
+          // }
 
           color = 60;
-          if ( arealib != null ) {
+          // if ( arealib != null ) { // always true
             for ( Symbol s : arealib.getSymbols() ) {
               String aname = "A_" + s.getThName().replace(':','-');
               ++handle; printLayer( pw2, handle, aname, flag, color, lt_continuous ); ++color;
             }
-          }
+          // }
           out.write( sw2.getBuffer().toString() );
         }
         writeEndTable( out );

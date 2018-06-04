@@ -1,4 +1,4 @@
-/** @file SketchModel.java
+/* @file SketchModel.java
  *
  * @author marco corvi
  * @date feb 2013
@@ -854,7 +854,7 @@ class SketchModel
         line = line.substring( 0, comment );
       }
       line = line.trim();
-      line.replaceAll(" *", " ");
+      line = line.replaceAll(" *", " ");
       // line.replaceAll("\\s+", " ");
     }
     return line;

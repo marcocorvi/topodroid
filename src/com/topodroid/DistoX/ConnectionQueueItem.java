@@ -1,4 +1,4 @@
-/** @file ConnectionQueueItem.java
+/* @file ConnectionQueueItem.java
  *
  * @author marco corvi
  * @date 

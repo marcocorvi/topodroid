@@ -1,4 +1,4 @@
-/** @file TDSetting.java
+/* @file TDSetting.java
  *
  * @author marco corvi
  * @date jan 2014

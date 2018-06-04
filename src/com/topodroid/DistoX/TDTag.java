@@ -1,4 +1,4 @@
-/** @file TDTag.java
+/* @file TDTag.java
  *
  * @author marco corvi
  * @date nov 2011

@@ -1,4 +1,4 @@
-/** @file ParserCompass.java
+/* @file ParserCompass.java
  *
  * @author marco corvi
  * @date nov 2014
@@ -108,16 +108,14 @@ class ParserCompass extends ImportParser
                     if ( k < kmax ) {
                       mRight = Float.parseFloat(vals[k]) * TopoDroidUtil.FT2M; ++k;
                       mFlag = null;
-                      mComment = "";
                       if ( k < kmax ) {
-                        if ( vals[k].startsWith("#") ) {
-                          mFlag = vals[k]; ++k;
-                        }
-                        if ( k < kmax ) {
-                          mComment = vals[k];
-                          while ( k < kmax ) { mComment = mComment + " " + vals[k]; ++k; }
+                        if (vals[k].startsWith("#")) {
+                          mFlag = vals[k];
+                          ++k;
                         }
                       }
+                      mComment = TopoDroidUtil.concat( vals, k );
+                      // k = vals.length;
                     }
                   }
                 }

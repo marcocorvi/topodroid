@@ -1,4 +1,4 @@
-/** @file SymbolLine.java
+/* @file SymbolLine.java
  *
  * @author marco corvi
  * @date dec 2012

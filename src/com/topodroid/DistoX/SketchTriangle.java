@@ -1,4 +1,4 @@
-/** @file SketchTriangle.java
+/* @file SketchTriangle.java
  *
  * @author marco corvi
  * @date feb 2013

@@ -1,4 +1,4 @@
-/** @file DBlockAdapter.java
+/* @file DBlockAdapter.java
  *
  * @author marco corvi
  * @date apr 2012

@@ -1,4 +1,4 @@
-/** @file NumStationSet.java
+/* @file NumStationSet.java
  *
  * @author marco corvi
  * @date jan 2013

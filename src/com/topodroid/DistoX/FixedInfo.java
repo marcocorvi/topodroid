@@ -1,4 +1,4 @@
-/** @file FixedInfo.java
+/* @file FixedInfo.java
  *
  * @author marco corvi
  * @date apr 2012

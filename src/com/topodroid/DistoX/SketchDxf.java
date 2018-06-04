@@ -1,4 +1,4 @@
-/** @file SketchDxf.java
+/* @file SketchDxf.java
  *
  * @author marco corvi
  * @date apr 2013

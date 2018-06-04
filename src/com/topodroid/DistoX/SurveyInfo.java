@@ -1,4 +1,4 @@
-/** @file SurveyInfo.java
+/* @file SurveyInfo.java
  *
  * @author marco corvi
  * @date may 2012

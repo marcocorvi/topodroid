@@ -34,8 +34,8 @@ class DrawingStationPath extends DrawingPath
   private static final float toTherion = TDConst.TO_THERION;
 
   // float mXpos, mYpos;         // X-Y station position (scene): use cx, cy
-  protected int mScale;       //! symbol scale
-  private String mName;               // station name
+  private int mScale;         //! symbol scale
+  private String mName;       // station name
 
 
   public DrawingStationPath( String name, float x, float y, int scale )
@@ -80,7 +80,7 @@ class DrawingStationPath extends DrawingPath
 
   String name() { return mName; }
 
-  void setScale( int scale )
+  private void setScale( int scale )
   {
     if ( scale != mScale ) {
       // TDLog.Error( "set scale " + scale );

@@ -1,4 +1,4 @@
-/** @file JoinClickListener.java
+/* @file JoinClickListener.java
  *
  * @author marco corvi
  * @date may 2017

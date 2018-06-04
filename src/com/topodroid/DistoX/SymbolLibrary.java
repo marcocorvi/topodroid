@@ -1,4 +1,4 @@
-/** @file SymbolLibrary.java
+/* @file SymbolLibrary.java
  *
  * @author marco corvi
  * @date dec 2012

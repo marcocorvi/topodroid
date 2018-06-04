@@ -96,7 +96,7 @@ class DrawingModeDialog extends MyDialog
           int mode = DisplayMode.DISPLAY_NONE;
           if ( mParent != null && ! mParent.isAnySection() ) {
             if ( mCBsplay.isChecked() )   mode |= DisplayMode.DISPLAY_SPLAY;
-            if ( mParent != null && TDLevel.overAdvanced ) {
+            if ( /* mParent != null && */ TDLevel.overAdvanced ) {
               mParent.mShiftDrawing = mCBfixed.isChecked();
             }
           }
@@ -107,7 +107,7 @@ class DrawingModeDialog extends MyDialog
 
           // TDLog.Error( "Mode " + mode );
           mSurface.setDisplayMode( mode );
-          if ( TDLevel.overNormal && mCBscrap.isChecked() ) {
+          if ( TDLevel.overNormal && mCBscrap.isChecked() && mParent != null ) {
             mParent.scrapOutlineDialog();
           }
 

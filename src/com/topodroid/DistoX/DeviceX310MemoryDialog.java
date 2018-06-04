@@ -1,4 +1,4 @@
-/** @file DeviceX310MemoryDialog.java
+/* @file DeviceX310MemoryDialog.java
  *
  * @author marco corvi
  * @date nov 2011

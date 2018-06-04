@@ -302,7 +302,7 @@ class DataHelper extends DataSetObservable
     if (cursor.moveToFirst()) {
       ret = (float)(cursor.getDouble( 0 ));
     }
-    if (cursor != null && !cursor.isClosed()) cursor.close();
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return ret;
   }
 
@@ -381,7 +381,7 @@ class DataHelper extends DataSetObservable
         stat.stddevG  *= 100/stat.averageG;
       }
     }
-    if (cursor != null && !cursor.isClosed()) cursor.close();
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
     // count components
     cursor = myDB.query( SHOT_TABLE,
@@ -441,7 +441,7 @@ class DataHelper extends DataSetObservable
 
       } while ( cursor.moveToNext() );
     }
-    if (cursor != null && !cursor.isClosed()) cursor.close();
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
     stat.countStation = map.size();
     stat.countLoop = nl;
@@ -458,7 +458,7 @@ class DataHelper extends DataSetObservable
     if (cursor.moveToFirst()) {
       stat.countSplay = (int)( cursor.getLong(0) );
     }
-    if (cursor != null && !cursor.isClosed()) cursor.close();
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return stat;
   }
 
@@ -1250,7 +1250,7 @@ class DataHelper extends DataSetObservable
     File newfile = new File( newname );
     if ( oldfile.exists() ) {
       if ( ! newfile.exists() ) {
-        oldfile.renameTo( newfile );
+        if ( ! oldfile.renameTo( newfile ) ) TDLog.Error("File rename error");
       } else {
         TDLog.Error("Plot rename: " + newname + " exists" );
       }
@@ -1282,7 +1282,7 @@ class DataHelper extends DataSetObservable
       File oldfile = new File( TDPath.getTdr3File( old_survey_name + "-" + sketch.name + ".tdr3" ) );
       File newfile = new File( TDPath.getTdr3File( new_survey_name + "=" + sketch.name + ".tdr3" ) );
       if ( oldfile.exists() && ! newfile.exists() ) {
-        oldfile.renameTo( newfile );
+        if ( ! oldfile.renameTo( newfile ) ) TDLog.Error("File rename error");
       } else {
         TDLog.Error( "Sketch rename: " + sketch.name + " exists" );
       }
@@ -1360,7 +1360,7 @@ class DataHelper extends DataSetObservable
           File oldfile = new File( TDPath.getSurveyAudioFile( old_survey.name, Long.toString(audio.shotid) ) );
           File newfile = new File( TDPath.getSurveyAudioFile( new_survey.name, Long.toString(audio.shotid) ) );
           if ( oldfile.exists() && ! newfile.exists() ) {
-            oldfile.renameTo( newfile );
+            if ( ! oldfile.renameTo( newfile ) )TDLog.Error("File rename error");
           } else {
             TDLog.Error( "Survey rename " + old_survey.name + "/" + audio.id + ".wav exists" );
           }
@@ -1373,7 +1373,7 @@ class DataHelper extends DataSetObservable
           File oldfile = new File( TDPath.getSurveyJpgFile( old_survey.name, Long.toString(photo.id) ) );
           File newfile = new File( TDPath.getSurveyJpgFile( new_survey.name, Long.toString(photo.id) ) );
           if ( oldfile.exists() && ! newfile.exists() ) {
-            oldfile.renameTo( newfile );
+            if ( ! oldfile.renameTo( newfile ) ) TDLog.Error("File rename error");
           } else {
             TDLog.Error( "Survey rename " + old_survey.name + "/" + photo.id + ".jpg exists" );
           }
@@ -1591,7 +1591,7 @@ class DataHelper extends DataSetObservable
     if ( cursor.moveToFirst() && cursor.getLong(0) == PlotInfo.PLOT_PLAN ) {
       updateStatus( PLOT_TABLE, pid+1, sid, TDStatus.NORMAL );
     }
-    if (cursor != null && !cursor.isClosed()) cursor.close();
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
   }
   
 
@@ -1623,7 +1623,7 @@ class DataHelper extends DataSetObservable
       } while (cursor.moveToNext());
     }
     // TDLog.Log( TDLog.LOG_DB, "select All Sensors list size " + list.size() );
-    if (cursor != null && !cursor.isClosed()) cursor.close();
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     for ( SensorInfo si : list ) { // set shot-names to the sensor infos
       cursor = myDB.query( SHOT_TABLE, 
                            new String[] { "fStation", "tStation" },
@@ -1633,7 +1633,7 @@ class DataHelper extends DataSetObservable
       if (cursor.moveToFirst()) {
         si.mShotName = cursor.getString(0) + "-" + cursor.getString(1);
       }
-      if (cursor != null && !cursor.isClosed()) cursor.close();
+      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     }
     return list;
   }
@@ -1663,7 +1663,7 @@ class DataHelper extends DataSetObservable
       } while (cursor.moveToNext());
     }
     // TDLog.Log( TDLog.LOG_DB, "select All Sensors list size " + list.size() );
-    if (cursor != null && !cursor.isClosed()) cursor.close();
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     String[] where = new String[2];
     where[0] = Long.toString(sid);
     for ( SensorInfo si : list ) { // set shot-names to the sensor infos
@@ -1674,7 +1674,7 @@ class DataHelper extends DataSetObservable
       if (cursor.moveToFirst()) {
         si.mShotName = cursor.getString(0) + "-" + cursor.getString(1);
       }
-      if (cursor != null && !cursor.isClosed()) cursor.close();
+      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     }
     return list;
   }
@@ -1695,7 +1695,7 @@ class DataHelper extends DataSetObservable
                            cursor.getString(1)  // date
                          );
     }
-    if (cursor != null && !cursor.isClosed()) cursor.close();
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return ret;
   }
 
@@ -1737,7 +1737,7 @@ class DataHelper extends DataSetObservable
     } else { // insert
       ret = ( insertAudio( sid, -1L, bid, date ) >= 0 );
     }
-    if (cursor != null && !cursor.isClosed()) cursor.close();
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return ret;
   }
 
@@ -1759,7 +1759,7 @@ class DataHelper extends DataSetObservable
       } while (cursor.moveToNext());
     }
     // TDLog.Log( TDLog.LOG_DB, "select All Photos list size " + list.size() );
-    if (cursor != null && !cursor.isClosed()) cursor.close();
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return list;
   }
 
@@ -1792,7 +1792,7 @@ class DataHelper extends DataSetObservable
       } while (cursor.moveToNext());
     }
     // TDLog.Log( TDLog.LOG_DB, "select All Photos list size " + list.size() );
-    if (cursor != null && !cursor.isClosed()) cursor.close();
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
     String[] where = new String[2];
     where[0] = Long.toString(sid);
@@ -1804,7 +1804,7 @@ class DataHelper extends DataSetObservable
       if (cursor.moveToFirst()) {
         pi.mShotName = cursor.getString(0) + "-" + cursor.getString(1);
       }
-      if (cursor != null && !cursor.isClosed()) cursor.close();
+      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     }
     return list;
   }
@@ -1829,7 +1829,7 @@ class DataHelper extends DataSetObservable
       } while (cursor.moveToNext());
     }
     // TDLog.Log( TDLog.LOG_DB, "select All Photos list size " + list.size() );
-    if (cursor != null && !cursor.isClosed()) cursor.close();
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
     String[] where = new String[2];
     where[0] = Long.toString(sid);
@@ -1840,7 +1840,7 @@ class DataHelper extends DataSetObservable
       if (cursor.moveToFirst()) {
         pi.mShotName = cursor.getString(0) + "-" + cursor.getString(1);
       }
-      if (cursor != null && !cursor.isClosed()) cursor.close();
+      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     }
     return list;
   }
@@ -1871,7 +1871,7 @@ class DataHelper extends DataSetObservable
         ) );
       } while (cursor.moveToNext());
     }
-    if (cursor != null && !cursor.isClosed()) cursor.close();
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     // TDLog.Log( TDLog.LOG_DB, "select all fixeds " + sid + " size " + list.size() );
     return list;
   }
@@ -1905,7 +1905,7 @@ class DataHelper extends DataSetObservable
          ) );
        } while (cursor.moveToNext());
      }
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      // TDLog.Log( TDLog.LOG_DB, "select all fixeds " + sid + " size " + list.size() );
      return list;
    }
@@ -1918,7 +1918,7 @@ class DataHelper extends DataSetObservable
                                 WHERE_SID_NAME, new String[] { Long.toString(sid), name }, 
                                 null, null, "id" );
      if (cursor.moveToFirst()) ret = true;
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return ret;
    }
 
@@ -1932,7 +1932,7 @@ class DataHelper extends DataSetObservable
                                 new String[] { Long.toString(sid), start, start }, 
                                 null, null, "id" );
      if (cursor.moveToFirst()) ret = true;
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return ret;
    }
 
@@ -1961,7 +1961,7 @@ class DataHelper extends DataSetObservable
          }
        } while (cursor.moveToNext());
      }
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return ret;
    }
 
@@ -1997,7 +1997,7 @@ class DataHelper extends DataSetObservable
        } while (cursor.moveToNext());
      }
      // TDLog.Log( TDLog.LOG_DB, "select All Plots list size " + list.size() );
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return list;
    }
 
@@ -2081,7 +2081,7 @@ class DataHelper extends DataSetObservable
        null,   // having
        null ); // order by
      boolean ret = cursor.moveToFirst();
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return ret;
    }
      
@@ -2101,7 +2101,7 @@ class DataHelper extends DataSetObservable
          ret = cursor.getString( 0 );
        } while ( ret.length() == 0 && cursor.moveToNext());
      }
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return ret;
    }
 
@@ -2138,7 +2138,7 @@ class DataHelper extends DataSetObservable
          if ( ! cursor.moveToNext() ) break;
        }
      }
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return ret;
    }
 
@@ -2166,7 +2166,7 @@ class DataHelper extends DataSetObservable
        block = new DBlock();
        fillBlock( sid, block, cursor );
      }
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return block;
    }
 
@@ -2194,7 +2194,7 @@ class DataHelper extends DataSetObservable
          }  
        } while (block == null && cursor.moveToNext());
      }
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return block;
    }
 
@@ -2220,7 +2220,7 @@ class DataHelper extends DataSetObservable
          }
        } while (cursor.moveToNext());
      }
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return ret;
    }
 
@@ -2275,7 +2275,7 @@ class DataHelper extends DataSetObservable
          }  
        } while (block == null && cursor.moveToNext());
      }
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return block;
    }
 
@@ -2319,7 +2319,7 @@ class DataHelper extends DataSetObservable
          list.add( block );
        } while (cursor.moveToNext());
      }
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return list;
    }
 
@@ -2338,7 +2338,7 @@ class DataHelper extends DataSetObservable
          list.add( block );
        } while (cursor.moveToNext());
      }
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return list;
    }
 
@@ -2384,7 +2384,7 @@ class DataHelper extends DataSetObservable
          }
        } while (cursor.moveToNext());
      }
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return list;
    }
 
@@ -2408,7 +2408,7 @@ class DataHelper extends DataSetObservable
          }
        } while (cursor.moveToNext());
      }
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return list;
    }
 
@@ -2434,7 +2434,7 @@ class DataHelper extends DataSetObservable
        } while (cursor.moveToNext());
      }
      // TDLog.Log( TDLog.LOG_DB, "select All Shots At Station list size " + list.size() );
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return list;
    }
 
@@ -2458,7 +2458,7 @@ class DataHelper extends DataSetObservable
        } while (cursor.moveToNext());
      }
      // TDLog.Log( TDLog.LOG_DB, "select All Shots At Station list size " + list.size() );
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return list;
    }
 
@@ -2480,7 +2480,7 @@ class DataHelper extends DataSetObservable
        } while (cursor.moveToNext());
      }
      // TDLog.Log( TDLog.LOG_DB, "select All Shots To Station list size " + list.size() );
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return list;
    }
 
@@ -2504,7 +2504,7 @@ class DataHelper extends DataSetObservable
        } while (cursor.moveToNext());
      }
      // TDLog.Log( TDLog.LOG_DB, "select All Shots after " + id + " list size " + list.size() );
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return set;
    }
 
@@ -2524,7 +2524,7 @@ class DataHelper extends DataSetObservable
        } while (cursor.moveToNext());
      }
      // TDLog.Log( TDLog.LOG_DB, "select All Shots after " + id + " list size " + list.size() );
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return list;
    }
 
@@ -2546,7 +2546,7 @@ class DataHelper extends DataSetObservable
 	 }
        } while (cursor.moveToNext());
      }
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return set;
    }
 
@@ -2565,7 +2565,7 @@ class DataHelper extends DataSetObservable
        } while (cursor.moveToNext());
      }
      // TDLog.Log( TDLog.LOG_DB, "select All Shots list size " + list.size() );
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return list;
    }
 
@@ -2581,7 +2581,7 @@ class DataHelper extends DataSetObservable
        block = new DBlock();
        fillBlock( sid, block, cursor );
      }
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return block;
    }
 
@@ -2602,7 +2602,7 @@ class DataHelper extends DataSetObservable
        } while (cursor.moveToNext());
      }
      // TDLog.Log( TDLog.LOG_DB, "select All Shots list size " + list.size() );
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return list;
    }
 
@@ -2625,7 +2625,7 @@ class DataHelper extends DataSetObservable
        info.initStation = cursor.getString( 5 );
        info.xsections = (int)cursor.getLong( 6 );
      }
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return info;
    }
    // ----------------------------------------------------------------------
@@ -2646,7 +2646,7 @@ class DataHelper extends DataSetObservable
            list.add( cursor.getString(0) );
          } while (cursor.moveToNext());
        }
-       if (cursor != null && !cursor.isClosed()) cursor.close();
+       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      } catch ( SQLException e ) {
        // ignore
      }
@@ -2803,9 +2803,9 @@ class DataHelper extends DataSetObservable
                                  null, null, null );
      if (cursor.moveToFirst() ) {
        id = cursor.getLong(0);
-       if (cursor != null && !cursor.isClosed()) cursor.close();
+       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      } else {
-       if (cursor != null && !cursor.isClosed()) cursor.close();
+       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
        // SELECT max(id) FROM table
        cursor = myDB.query( table, new String[] { "max(id)" },
                             null, null, null, null, null );
@@ -2814,7 +2814,7 @@ class DataHelper extends DataSetObservable
        } else {
          id = 1;
        }
-       if (cursor != null && !cursor.isClosed()) cursor.close();
+       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
        // INSERT INTO table VALUES( id, name, "", "" )
        ContentValues cv = new ContentValues();
        cv.put( "id",      id );
@@ -3446,7 +3446,7 @@ class DataHelper extends DataSetObservable
      if (cursor.moveToFirst() ) {
        myNextId = cursor.getLong(0);
      }
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
      // TDLog.Log( TDLog.LOG_DB, "setSurvey " + name + " forward " + forward + " listeners " + mListeners.size() );
      if ( forward && mListeners != null ) { // synchronized( mListeners )
@@ -3473,7 +3473,7 @@ class DataHelper extends DataSetObservable
      if (cursor.moveToFirst() ) {
        ret = cursor.getString(0);
      }
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return ret;
    }
 
@@ -3557,7 +3557,7 @@ class DataHelper extends DataSetObservable
        } while (cursor.moveToNext());
      }
      // TDLog.Log( TDLog.LOG_DB, "select All Sketch list size " + list.size() );
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return list;
    }
 
@@ -3617,7 +3617,7 @@ class DataHelper extends DataSetObservable
          sketch.azimuth = (float)( cursor.getDouble(16) );
          sketch.clino   = (float)( cursor.getDouble(17) );
        }
-       if (cursor != null && !cursor.isClosed()) cursor.close();
+       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      }
      return sketch;
    }
@@ -3737,7 +3737,7 @@ class DataHelper extends DataSetObservable
            );
          } while (cursor.moveToNext());
        }
-       if (cursor != null && !cursor.isClosed()) cursor.close();
+       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
        cursor = myDB.query( AUDIO_TABLE, // SELECT ALL AUDIO RECORD
                             new String[] { "id", "shotId", "date" },
@@ -3754,7 +3754,7 @@ class DataHelper extends DataSetObservable
                      cursor.getString(2) ); // date
          } while (cursor.moveToNext());
        }
-       if (cursor != null && !cursor.isClosed()) cursor.close();
+       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
        cursor = myDB.query( PHOTO_TABLE, // SELECT ALL PHOTO RECORD
   			    new String[] { "id", "shotId", "status", "title", "date", "comment" },
@@ -3774,7 +3774,7 @@ class DataHelper extends DataSetObservable
                      cursor.getString(5) );
          } while (cursor.moveToNext());
        }
-       if (cursor != null && !cursor.isClosed()) cursor.close();
+       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
        cursor = myDB.query( PLOT_TABLE, 
                             mPlotFieldsFull,
@@ -3802,7 +3802,7 @@ class DataHelper extends DataSetObservable
            );
          } while (cursor.moveToNext());
        }
-       if (cursor != null && !cursor.isClosed()) cursor.close();
+       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
        cursor = myDB.query( SKETCH_TABLE, 
                             new String[] { "id", "name", "status", "start", "st1", "st2", "xoffsettop", "yoffsettop", "zoomtop", "xoffsetside", "yoffsetside", "zoomside", "xoffset3d", "yoffset3d", "zoom3d", "east", "south", "vert", "azimuth", "clino" },
                             "surveyId=?", new String[] { Long.toString( sid ) },
@@ -3836,7 +3836,7 @@ class DataHelper extends DataSetObservable
                     );
          } while (cursor.moveToNext());
        }
-       if (cursor != null && !cursor.isClosed()) cursor.close();
+       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
        cursor = myDB.query( SHOT_TABLE, 
                             new String[] { "id", "fStation", "tStation", "distance", "bearing", "clino", "roll",
@@ -3871,7 +3871,7 @@ class DataHelper extends DataSetObservable
            );
          } while (cursor.moveToNext());
        }
-       if (cursor != null && !cursor.isClosed()) cursor.close();
+       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
        cursor = myDB.query( FIXED_TABLE, 
                   mFixedFields,
@@ -3899,7 +3899,7 @@ class DataHelper extends DataSetObservable
            );
          } while (cursor.moveToNext());
        }
-       if (cursor != null && !cursor.isClosed()) cursor.close();
+       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
        cursor = myDB.query( STATION_TABLE, 
                             new String[] { "name", "comment", "flag" },
@@ -3917,7 +3917,7 @@ class DataHelper extends DataSetObservable
              cursor.getLong(2) );
          } while (cursor.moveToNext());
        }
-       if (cursor != null && !cursor.isClosed()) cursor.close();
+       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
        cursor = myDB.query( SENSOR_TABLE, 
                             new String[] { "id", "shotId", "status", "title", "date", "comment", "type", "value" },
@@ -3940,7 +3940,7 @@ class DataHelper extends DataSetObservable
                     );
          } while (cursor.moveToNext());
        }
-       if (cursor != null && !cursor.isClosed()) cursor.close();
+       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
        fw.flush();
        fw.close();
@@ -4181,7 +4181,7 @@ class DataHelper extends DataSetObservable
        cv.put( "flag",      flag );
        ret = doInsert( STATION_TABLE, cv, "station insert" );
      }
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return ret;
    }
 
@@ -4196,7 +4196,7 @@ class DataHelper extends DataSetObservable
      if (cursor.moveToFirst()) {
        cs = new CurrentStation( cursor.getString(0), cursor.getString(1), cursor.getLong(2) );
      }
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return cs;
    }
 
@@ -4214,7 +4214,7 @@ class DataHelper extends DataSetObservable
          ret.add( new CurrentStation( cursor.getString(0), cursor.getString(1), cursor.getLong(2) ) );
        } while (cursor.moveToNext());
      }
-     if (cursor != null && !cursor.isClosed()) cursor.close();
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return ret;
    }
 

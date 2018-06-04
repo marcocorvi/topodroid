@@ -1,4 +1,4 @@
-/** @file IBearingAndClino.java
+/* @file IBearingAndClino.java
  *
  * @author marco corvi 
  * @date nov 2013

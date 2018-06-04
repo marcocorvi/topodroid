@@ -1,4 +1,4 @@
-/** @filke CHTriangle.java
+/* @filke CHTriangle.java
  *
  * @author marco corvi
  * @date nov 2014

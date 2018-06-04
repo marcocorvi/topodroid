@@ -1,4 +1,4 @@
-/** @file TopoDroidAbout.java
+/* @file TopoDroidAbout.java
  *
  * @author marco corvi
  * @date may 2012

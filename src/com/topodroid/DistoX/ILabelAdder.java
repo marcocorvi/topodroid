@@ -1,4 +1,4 @@
-/** @file ILabelAdder.java
+/* @file ILabelAdder.java
  *
  * @author marco corvi
  * @date may 2012

@@ -1,4 +1,4 @@
-/** @file TDAzimuth.java
+/* @file TDAzimuth.java
  *
  * @author marco corvi
  * @date mar 2016

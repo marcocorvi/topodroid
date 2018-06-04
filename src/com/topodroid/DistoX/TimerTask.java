@@ -1,4 +1,4 @@
-/** @file TimerTask.java
+/* @file TimerTask.java
  *
  * @author marco corvi
  * @date jan 2014

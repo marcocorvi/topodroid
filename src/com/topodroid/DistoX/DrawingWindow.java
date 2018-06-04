@@ -289,17 +289,17 @@ public class DrawingWindow extends ItemDrawer
   private DrawingSurface  mDrawingSurface;
   private DrawingLinePath mCurrentLinePath;
   private DrawingAreaPath mCurrentAreaPath;
-  private DrawingPath mFixedDrawingPath;
+  // private DrawingPath mFixedDrawingPath;
   // private Paint mCurrentPaint;
   private DrawingBrush mCurrentBrush;
-  private Path  mCurrentPath;
+  // private Path  mCurrentPath;
 
   // LinearLayout popup_layout = null;
   private PopupWindow mPopupEdit   = null;
   private PopupWindow mPopupFilter = null;
   private PopupWindow mPopupJoin   = null;
 
-  ShotNewDialog mShotNewDialog = null;
+  // ShotNewDialog mShotNewDialog = null;
 
   // private boolean canRedo;
   private int mPointCnt; // counter of points in the currently drawing line
@@ -351,13 +351,13 @@ public class DrawingWindow extends ItemDrawer
   static final int MODE_SPLIT = 8;  // split the plot
 
   // line join-continue
-  static final int CONT_OFF   = -1; // continue off
-  static final int CONT_NONE  = 0;  // no continue
-  static final int CONT_START = 1;  // continue: join to existing line
-  static final int CONT_END   = 2;  // continue: join to existing line
-  static final int CONT_BOTH  = 3;  // continue: join to existing line
-  static final int CONT_CONTINUE  = 4;  // continue: continue existing line 
-  static final int CONT_MAX   = 5;
+  static final private int CONT_OFF   = -1; // continue off
+  static final private int CONT_NONE  = 0;  // no continue
+  static final private int CONT_START = 1;  // continue: join to existing line
+  static final private int CONT_END   = 2;  // continue: join to existing line
+  static final private int CONT_BOTH  = 3;  // continue: join to existing line
+  static final private int CONT_CONTINUE  = 4;  // continue: continue existing line
+  // static final private int CONT_MAX   = 5;
 
   private int mMode         = MODE_MOVE;
   private int mTouchMode    = MODE_MOVE;
@@ -919,7 +919,7 @@ public class DrawingWindow extends ItemDrawer
   private void startSaveTdrTask( final long type, int suffix, int maxTasks, int rotate )
   {
     // Log.v("DistoX", "start save Th2 task. type " + type + " suffix " + suffix 
-    //                + " maxTasks " + maxTasks + " rotate " + rotate ); 
+    //                 + " maxTasks " + maxTasks + " rotate " + rotate ); 
     if ( suffix != PlotSave.EXPORT ) {
       if ( ! mModified ) return;
       if ( mNrSaveTh2Task > maxTasks ) return;
@@ -959,7 +959,10 @@ public class DrawingWindow extends ItemDrawer
       try { 
         (new SavePlotFileTask( mActivity, this, saveHandler, mApp, mDrawingSurface, mFullName2, mPlot2.type,
                               (int)mPlot2.azimuth, suffix, rotate )).execute();
-      } catch ( RejectedExecutionException e ) { }
+      } catch ( RejectedExecutionException e ) { 
+        TDLog.Error("rejected exec save plot " + mFullName2 );
+        // Log.v("DistoX", "rejected exec save plot " + mFullName2 );
+      }
       name = mFullName1;
       tt   = mPlot1.type; // PlotType.PLOT_PLAN
     } else if ( PlotInfo.isProfile( type ) ) {
@@ -974,6 +977,8 @@ public class DrawingWindow extends ItemDrawer
       (new SavePlotFileTask( mActivity, this, saveHandler, mApp, mDrawingSurface, name, tt, azimuth, suffix, rotate )
       ).execute();
     } catch ( RejectedExecutionException e ) { 
+      TDLog.Error("rejected exec save plot " + name );
+      // Log.v("DistoX", "rejected exec save plot " + name );
       -- mNrSaveTh2Task;
     }
   }
@@ -1029,12 +1034,14 @@ public class DrawingWindow extends ItemDrawer
 
     if ( type == PlotInfo.PLOT_PLAN ) {
       mDrawingSurface.setManager( DrawingSurface.DRAWING_PLAN, type );
-      mDrawingUtil.addGrid( mNum.surveyEmin(), mNum.surveyEmax(), mNum.surveySmin(), mNum.surveySmax(), mDrawingSurface );
+      if ( mNum != null ) 
+        mDrawingUtil.addGrid( mNum.surveyEmin(), mNum.surveyEmax(), mNum.surveySmin(), mNum.surveySmax(), mDrawingSurface );
                            // xoff, yoff, mDrawingSurface );
       mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_PLAN, type );
     } else {
       mDrawingSurface.setManager( DrawingSurface.DRAWING_PROFILE, type );
-      mDrawingUtil.addGrid( mNum.surveyHmin(), mNum.surveyHmax(), mNum.surveyVmin(), mNum.surveyVmax(), mDrawingSurface );
+      if ( mNum != null ) 
+        mDrawingUtil.addGrid( mNum.surveyHmin(), mNum.surveyHmax(), mNum.surveyVmin(), mNum.surveyVmax(), mDrawingSurface );
                            // xoff, yoff, mDrawingSurface );
       mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_PROFILE, type );
       if ( type == PlotInfo.PLOT_PROFILE ) {
@@ -1812,7 +1819,7 @@ public class DrawingWindow extends ItemDrawer
   @Override
   protected synchronized void onPause() 
   { 
-    // Log.v("DistoX", "Drawing Activity onPause " + ((mDataDownloader!=null)?"with DataDownloader":"") );
+    // Log.v("DistoX", "Drawing Activity onPause " );
     doPause();
     super.onPause();
     // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on pause done");
@@ -2341,13 +2348,12 @@ public class DrawingWindow extends ItemDrawer
       if ( BrushManager.isPointPhoto( point.mPointType ) ) {
         DrawingPhotoPath photo = (DrawingPhotoPath)point;
         mApp_mData.deletePhoto( mApp.mSID, photo.mId );
-        File file = new File( TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString( photo.mId ) ) );
-        file.delete();
+        TopoDroidUtil.deleteFile( TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString( photo.mId ) ) );
       } else if ( BrushManager.isPointAudio( point.mPointType ) ) {
         DrawingAudioPath audio = (DrawingAudioPath)point;
         mApp_mData.deleteAudio( mApp.mSID, audio.mId );
-        File file = new File( TDPath.getSurveyAudioFile( mApp.mySurvey, Long.toString( audio.mId ) ) );
-        file.delete();
+
+        TopoDroidUtil.deleteFile( TDPath.getSurveyAudioFile( mApp.mySurvey, Long.toString( audio.mId ) ) );
       } else if ( BrushManager.isPointSection( point.mPointType ) ) {
         mDrawingSurface.clearXSectionOutline( point.getOption( "-scrap" ) );
       }
@@ -2480,8 +2486,8 @@ public class DrawingWindow extends ItemDrawer
       } 
     }
   }
-  
-  void shiftByEvent( MotionEventWrap ev )
+
+  private void shiftByEvent( MotionEventWrap ev )
   {
     float x0 = 0.0f;
     float y0 = 0.0f;
@@ -3267,9 +3273,9 @@ public class DrawingWindow extends ItemDrawer
       } 
     }
 
-    String mMediaComment = null;
-    long  mMediaId = -1L;
-    float mMediaX, mMediaY;
+  private String mMediaComment = null;
+  private long  mMediaId = -1L;
+  private float mMediaX, mMediaY;
 
     public void insertPhoto( )
     {
@@ -3396,10 +3402,8 @@ public class DrawingWindow extends ItemDrawer
       st.resetXSection();
       mApp_mData.deletePlotByName( xs_id, mApp.mSID );
       // drop the files
-      File tdr = new File( TDPath.getSurveyPlotTdrFile( mApp.mySurvey, xs_id ) );
-      if ( tdr.exists() ) tdr.delete(); 
-      File th2 = new File( TDPath.getSurveyPlotTh2File( mApp.mySurvey, xs_id ) );
-      if ( th2.exists() ) th2.delete(); 
+      TopoDroidUtil.deleteFile( TDPath.getSurveyPlotTdrFile( mApp.mySurvey, xs_id ) );
+      TopoDroidUtil.deleteFile( TDPath.getSurveyPlotTh2File( mApp.mySurvey, xs_id ) );
       // TODO delete backup files
 
       deleteSectionPoint( xs_id ); 
@@ -3543,31 +3547,34 @@ public class DrawingWindow extends ItemDrawer
     {
       String hide = mPlot1.hide.trim();
       // Log.v("DistoX", "toggle station " + st_name + " hidden " + is_hidden + " hide: <" + hide + ">" );
-      String new_hide = "";
+      String new_hide = ""; // empty string
       boolean add = false;
       boolean drop = false;
-      if ( hide == null ) {
+      if ( /* hide == null || */ hide.length() == 0 ) {
         add = true;
         drop = false;
       } else {
         String[] hidden = hide.split( "\\s+" );
+        StringBuilder sb = new StringBuilder();
         int k = 0;
         for (; k < hidden.length; ++k ) {
           if ( hidden[k].length() > 0 ) {
             if ( hidden[k].equals( st_name ) ) { // N.B. hidden[k] != null
               drop = true;
             } else {
-              new_hide = new_hide + " " + hidden[k];
+              sb.append(" ").append( hidden[k] );
+              // new_hide = new_hide + " " + hidden[k];
             }
           }
         }
-        if ( new_hide.length() > 0 ) new_hide = new_hide.trim();
+        if ( sb.length() > 0 ) new_hide = sb.toString().trim();
+        // if ( new_hide.length() > 0 ) new_hide = new_hide.trim();
         add = ! drop;
       }
       int h = 0;
 
       if ( add && ! is_hidden ) {
-        if ( hide == null || hide.length() == 0 ) {
+        if ( /* hide == null || */ hide.length() == 0 ) {
           hide = st_name;
         } else {
           hide = hide + " " + st_name;
@@ -3599,7 +3606,7 @@ public class DrawingWindow extends ItemDrawer
     {
       String view = mPlot1.view.trim();
       // Log.v("DistoX", "toggle station " + st_name + " barrier " + is_barrier + " view: <" + view + ">" );
-      String new_view = "";
+      String new_view = ""; // empty string
       boolean add = false;
       boolean drop = false;
       if ( view == null ) {
@@ -3607,23 +3614,26 @@ public class DrawingWindow extends ItemDrawer
         drop = false;
       } else {
         String[] barrier = view.split( " " );
+        StringBuilder sb = new StringBuilder();
         int k = 0;
         for (; k < barrier.length; ++k ) {
           if ( barrier[k].length() > 0 ) {
             if ( barrier[k].equals( st_name ) ) { // N.B. barrier[k] != null
               drop = true;
             } else {
-              new_view = new_view + " " + barrier[k];
+              sb.append(" ").append( barrier[k] );
+              // new_view = new_view + " " + barrier[k];
             }
           }
         }
-        if ( new_view.length() > 0 ) new_view = new_view.trim();
+        if ( sb.length() > 0 ) new_view = sb.toString().trim();
+        // if ( new_view.length() > 0 ) new_view = new_view.trim();
         add = ! drop;
       }
       int h = 0;
 
       if ( add && ! is_barrier ) {
-        if ( view == null || view.length() == 0 ) {
+        if ( /* view == null || */ view.length() == 0 ) {
           view = st_name;
         } else {
           view = view + " " + st_name;
@@ -4644,7 +4654,7 @@ public class DrawingWindow extends ItemDrawer
     // }
 
 
-  static Handler th2Handler = null;
+  static private Handler th2Handler = null;
 
   // called (indirectly) only by ExportDialog: save as th2 even if there are missing symbols
   // no backup_rotate (rotate = 0)
@@ -4913,7 +4923,7 @@ public class DrawingWindow extends ItemDrawer
     onMenu = false;
   }
 
-  void doZoomFit()
+  private void doZoomFit()
   {
     // FIXME for big sketches this leaves out some bits at the ends
     // maybe should increse the bitmap bounds by a small factor ...

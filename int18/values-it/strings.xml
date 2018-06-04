@@ -16,6 +16,8 @@
     <string name="AREA">AREA</string>
     <string name="HELP">AIUTO</string>
     <string name="STATION">CAPOSALDO </string>
+    <!-- TODO string name="UP">UPWARD</string -->
+    <!-- TODO string name="DOWN">DOWNWARD</string -->
 
     <string name="cut">TAGLIA</string>
     <string name="copy">COPIA</string>

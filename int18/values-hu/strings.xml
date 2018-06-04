@@ -16,6 +16,8 @@
     <string name="AREA">TERÜLET</string>
     <string name="HELP">SEGÍTSÉG</string>
     <string name="STATION">MÉRÉSI PONT</string>
+    <!-- TODO string name="UP">UPWARD</string -->
+    <!-- TODO string name="DOWN">DOWNWARD</string -->
 
     <string name="cut">VÁGÁS</string>
     <string name="copy">MÁSOLÁS</string>

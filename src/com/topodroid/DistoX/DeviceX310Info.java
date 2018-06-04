@@ -1,4 +1,4 @@
-/** @file DeviceX310Info.java
+/* @file DeviceX310Info.java
  *
  * @author marco corvi
  * @date nov 2011

@@ -1,4 +1,4 @@
-/** @file NumSplay.java
+/* @file NumSplay.java
  *
  * @author marco corvi
  * @date jan 2013

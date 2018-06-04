@@ -1,4 +1,4 @@
-/** @file IPhotoInserter.java
+/* @file IPhotoInserter.java
  *
  * @author marco corvi
  * @date may 2012

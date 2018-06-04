@@ -1,4 +1,4 @@
-/** @file SketchPainter.java
+/* @file SketchPainter.java
  *
  * @author marco corvi
  * @date feb 2013

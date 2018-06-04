@@ -1,4 +1,4 @@
-/** @file Line3D.java
+/* @file Line3D.java
  *
  * @author marco corvi
  * @date feb 2013

@@ -1,4 +1,4 @@
-/** @file ParserShot.java
+/* @file ParserShot.java
  *
  * @author marco corvi
  * @date may 2012

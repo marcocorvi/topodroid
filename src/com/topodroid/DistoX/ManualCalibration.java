@@ -1,4 +1,4 @@
-/** @file ManualCalibration.java
+/* @file ManualCalibration.java
  *
  * @author marco corvi
  * @date jul 2017

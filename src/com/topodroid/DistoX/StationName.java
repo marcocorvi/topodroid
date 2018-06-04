@@ -1,4 +1,4 @@
-/** @file StationName.java
+/* @file StationName.java
  *
  * @author marco corvi
  * @date nov 2011

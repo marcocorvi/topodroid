@@ -1,4 +1,4 @@
-/** @file IFilterClickHandler.java
+/* @file IFilterClickHandler.java
  *
  * @author marco corvi
  * @date may 2017

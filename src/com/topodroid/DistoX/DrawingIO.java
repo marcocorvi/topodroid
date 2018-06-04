@@ -55,7 +55,7 @@ class DrawingIO
     }
     if ( line != null ) {
       line = line.trim();
-      line.replaceAll(" *", " ");
+      line = line.replaceAll(" *", " ");
       // line.replaceAll("\\s+", " ");
     }
     return line;
@@ -194,21 +194,20 @@ class DrawingIO
                   label_text = vals[k+1];
                   k += 2;
                   if ( label_text.startsWith( "\"" ) ) {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(label_text);
                     while ( k < vals.length ) {
-                      label_text = label_text + " " + vals[k];
+                      sb.append(" ").append(vals[k]);
+                      // label_text = label_text + " " + vals[k];
                       if ( vals[k].endsWith( "\"" ) ) break;
                       ++ k;
                     }
-                    label_text = label_text.replaceAll( "\"", "" );
+                    label_text = sb.toString().replaceAll( "\"", "" );
                     ++ k;
                   }
                 } else {
-                  options = vals[k];
-                  ++ k;
-                  while ( vals.length > k ) {
-                    options += " " + vals[k];
-                    ++ k;
-                  }
+                  options = TopoDroidUtil.concat( vals, k );
+                  k = vals.length;
                 }
               }
 
@@ -944,6 +943,7 @@ class DrawingIO
     }
   }
 
+  // this is called by DrawingCommandManager
   static void exportDataStream(
       int type,
       DataOutputStream dos,
@@ -955,6 +955,7 @@ class DrawingIO
       final List<DrawingStationPath> userstations,
       final List<DrawingStationName> stations )
   {
+    // Log.v("DistoX", "cstack size " + cstack.size() );
     try { 
       dos.write( 'V' ); // version
       dos.writeInt( TopoDroidApp.VERSION_CODE );

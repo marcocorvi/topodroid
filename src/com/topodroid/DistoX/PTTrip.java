@@ -1,4 +1,4 @@
-/** @file PTTrip.java
+/* @file PTTrip.java
  *
  * @author marco corvi
  * @date march 2010

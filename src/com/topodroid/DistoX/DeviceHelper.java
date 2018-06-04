@@ -43,9 +43,9 @@ import java.util.List;
 class DeviceHelper extends DataSetObservable
 {
 
-  static final String DB_VERSION = "26";
-  static final int DATABASE_VERSION = 26;
-  static final int DATABASE_VERSION_MIN = 21; 
+  // static final private String DB_VERSION = "26";
+  static final private int DATABASE_VERSION = 26;
+  // static final private int DATABASE_VERSION_MIN = 21;
 
   private static final String CONFIG_TABLE = "configs";
   private static final String CALIB_TABLE  = "calibs";

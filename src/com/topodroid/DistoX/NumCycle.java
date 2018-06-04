@@ -1,4 +1,4 @@
-/** @file NumCycle.java
+/* @file NumCycle.java
  *
  * @author marco corvi
  * @date jan 2013

@@ -1,4 +1,4 @@
-/** @file TopoDroidApp.java
+/* @file TopoDroidApp.java
  *
  * @author marco corvi
  * @date nov 2011
@@ -864,86 +864,42 @@ public class TopoDroidApp extends Application
         List< PlotInfo > plots = mData.selectAllPlots( sid );
         for ( PlotInfo p : plots ) {
           // Therion
-            old = new File( TDPath.getSurveyPlotTh2File( mySurvey, p.name ) );
-            nev = new File( TDPath.getSurveyPlotTh2File( name, p.name ) );
-            if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+          TopoDroidUtil.renameFile( TDPath.getSurveyPlotTh2File( mySurvey, p.name ), TDPath.getSurveyPlotTh2File( name, p.name ) );
           // Tdr
-            old = new File( TDPath.getSurveyPlotTdrFile( mySurvey, p.name ) );
-            nev = new File( TDPath.getSurveyPlotTdrFile( name, p.name ) );
-            if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+          TopoDroidUtil.renameFile( TDPath.getSurveyPlotTdrFile( mySurvey, p.name ), TDPath.getSurveyPlotTdrFile( name, p.name ) );
           // rename exported plots: dxf png svg csx
-            old = new File( TDPath.getSurveyPlotDxfFile( mySurvey, p.name ) );
-            nev = new File( TDPath.getSurveyPlotDxfFile( name, p.name ) );
-            if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-            old = new File( TDPath.getSurveyPlotSvgFile( mySurvey, p.name ) );
-            nev = new File( TDPath.getSurveyPlotSvgFile( name, p.name ) );
-            if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-            old = new File( TDPath.getSurveyPlotHtmFile( mySurvey, p.name ) ); // SVG in HTML
-            nev = new File( TDPath.getSurveyPlotHtmFile( name, p.name ) );
-            if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-            old = new File( TDPath.getSurveyPlotPngFile( mySurvey, p.name ) );
-            nev = new File( TDPath.getSurveyPlotPngFile( name, p.name ) );
-            if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-            old = new File( TDPath.getSurveyPlotCsxFile( mySurvey, p.name ) );
-            nev = new File( TDPath.getSurveyPlotCsxFile( name, p.name ) );
-            if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+          TopoDroidUtil.renameFile( TDPath.getSurveyPlotDxfFile( mySurvey, p.name ), TDPath.getSurveyPlotDxfFile( name, p.name ) );
+          TopoDroidUtil.renameFile( TDPath.getSurveyPlotSvgFile( mySurvey, p.name ), TDPath.getSurveyPlotSvgFile( name, p.name ) );
+          TopoDroidUtil.renameFile( TDPath.getSurveyPlotHtmFile( mySurvey, p.name ), TDPath.getSurveyPlotHtmFile( name, p.name ) );
+          TopoDroidUtil.renameFile( TDPath.getSurveyPlotPngFile( mySurvey, p.name ), TDPath.getSurveyPlotPngFile( name, p.name ) );
+          TopoDroidUtil.renameFile( TDPath.getSurveyPlotCsxFile( mySurvey, p.name ), TDPath.getSurveyPlotCsxFile( name, p.name ) );
         }
       }
       { // rename sketch files: th3
         List< Sketch3dInfo > sketches = mData.selectAllSketches( sid );
         for ( Sketch3dInfo s : sketches ) {
-          old = new File( TDPath.getSurveySketchOutFile( mySurvey, s.name ) );
-          nev = new File( TDPath.getSurveySketchOutFile( name, s.name ) );
-          if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+          TopoDroidUtil.renameFile( TDPath.getSurveySketchOutFile( mySurvey, s.name ), TDPath.getSurveySketchOutFile( name, s.name ) );
         }
       }
       // rename exported files: csv csx dat dxf kml plt srv svx th top tro 
-        old = new File( TDPath.getSurveyThFile( mySurvey ) );
-        nev = new File( TDPath.getSurveyThFile( name ) );
-        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-        old = new File( TDPath.getSurveyCsvFile( mySurvey ) );
-        nev = new File( TDPath.getSurveyCsvFile( name ) );
-        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-        old = new File( TDPath.getSurveyCsxFile( mySurvey ) );
-        nev = new File( TDPath.getSurveyCsxFile( name ) );
-        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-        old = new File( TDPath.getSurveyCaveFile( mySurvey ) );
-        nev = new File( TDPath.getSurveyCaveFile( name ) );
-        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-        old = new File( TDPath.getSurveyDatFile( mySurvey ) );
-        nev = new File( TDPath.getSurveyDatFile( name ) );
-        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-        old = new File( TDPath.getSurveyDxfFile( mySurvey ) );
-        nev = new File( TDPath.getSurveyDxfFile( name ) );
-        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-        old = new File( TDPath.getSurveyKmlFile( mySurvey ) );
-        nev = new File( TDPath.getSurveyKmlFile( name ) );
-        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-        old = new File( TDPath.getSurveyPltFile( mySurvey ) );
-        nev = new File( TDPath.getSurveyPltFile( name ) );
-        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-        old = new File( TDPath.getSurveySrvFile( mySurvey ) );
-        nev = new File( TDPath.getSurveySrvFile( name ) );
-        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-        old = new File( TDPath.getSurveySvxFile( mySurvey ) );
-        nev = new File( TDPath.getSurveySvxFile( name ) );
-        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-        old = new File( TDPath.getSurveyTopFile( mySurvey ) );
-        nev = new File( TDPath.getSurveyTopFile( name ) );
-        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-        old = new File( TDPath.getSurveyTroFile( mySurvey ) );
-        nev = new File( TDPath.getSurveyTroFile( name ) );
-        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+        TopoDroidUtil.renameFile( TDPath.getSurveyThFile( mySurvey ), TDPath.getSurveyThFile( name ) );
+        TopoDroidUtil.renameFile( TDPath.getSurveyCsvFile( mySurvey ), TDPath.getSurveyCsvFile( name ) );
+        TopoDroidUtil.renameFile( TDPath.getSurveyCsxFile( mySurvey ), TDPath.getSurveyCsxFile( name ) );
+        TopoDroidUtil.renameFile( TDPath.getSurveyCaveFile( mySurvey ), TDPath.getSurveyCaveFile( name ) );
+        TopoDroidUtil.renameFile( TDPath.getSurveyDatFile( mySurvey ), TDPath.getSurveyDatFile( name ) );
+        TopoDroidUtil.renameFile( TDPath.getSurveyDxfFile( mySurvey ), TDPath.getSurveyDxfFile( name ) );
+        TopoDroidUtil.renameFile( TDPath.getSurveyKmlFile( mySurvey ), TDPath.getSurveyKmlFile( name ) );
+        TopoDroidUtil.renameFile( TDPath.getSurveyPltFile( mySurvey ), TDPath.getSurveyPltFile( name ) );
+        TopoDroidUtil.renameFile( TDPath.getSurveySrvFile( mySurvey ), TDPath.getSurveySrvFile( name ) );
+        TopoDroidUtil.renameFile( TDPath.getSurveySvxFile( mySurvey ), TDPath.getSurveySvxFile( name ) );
+        TopoDroidUtil.renameFile( TDPath.getSurveyTopFile( mySurvey ), TDPath.getSurveyTopFile( name ) );
+        TopoDroidUtil.renameFile( TDPath.getSurveyTroFile( mySurvey ), TDPath.getSurveyTroFile( name ) );
 
       { // rename note file: note
-        old = new File( TDPath.getSurveyNoteFile( mySurvey ) );
-        nev = new File( TDPath.getSurveyNoteFile( name ) );
-        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+        TopoDroidUtil.renameFile( TDPath.getSurveyNoteFile( mySurvey ), TDPath.getSurveyNoteFile( name ) );
       }
       { // rename photo folder: photo
-        old = new File( TDPath.getSurveyPhotoDir( mySurvey ) );
-        nev = new File( TDPath.getSurveyPhotoDir( name ) );
-        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+        TopoDroidUtil.renameFile( TDPath.getSurveyPhotoDir( mySurvey ), TDPath.getSurveyPhotoDir( name ) );
       }
       mySurvey = name;
       return true;
@@ -1540,8 +1496,7 @@ public class TopoDroidApp extends Application
   {
     String lines[] = { "blocks", "debris", "clay", "presumed", "sand", "ice" };
     for ( String line : lines ) {
-      File file = new File( TDPath.APP_LINE_PATH + line );
-      if ( file.exists() ) file.delete();
+      TopoDroidUtil.deleteFile( TDPath.APP_LINE_PATH + line );
     }
   }
 
@@ -1553,7 +1508,7 @@ public class TopoDroidApp extends Application
     if ( files == null ) return;
     for ( int i=0; i<files.length; ++i ) {
       if ( files[i].isDirectory() ) continue;
-      files[i].delete();
+      if ( ! files[i].delete() ) TDLog.Error("File delete failed ");
     }
   }
     
@@ -1610,7 +1565,9 @@ public class TopoDroidApp extends Application
           File file = new File( pathname );
           if ( overwrite || ! file.exists() ) {
             // APP_SAVE SYMBOLS
-            if ( file.exists() ) file.renameTo( new File( TDPath.getSymbolSaveFile( filepath ) ) );
+            if ( file.exists() ) {
+              if ( ! file.renameTo( new File( TDPath.getSymbolSaveFile( filepath ) ) ) ) TDLog.Error("File rename error");
+            }
 
             TDPath.checkPath( pathname );
             FileOutputStream fout = new FileOutputStream( pathname );

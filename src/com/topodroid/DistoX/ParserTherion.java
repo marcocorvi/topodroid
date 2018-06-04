@@ -1,4 +1,4 @@
-/** @file ParserTherion.java
+/* @file ParserTherion.java
  *
  * @author marco corvi
  * @date may 2012
@@ -288,16 +288,21 @@ class ParserTherion
                   for ( ++j; j<vals_len; ++j ) {
                     if ( vals[j].length() == 0 ) continue;
                     if ( vals[j].startsWith("\"") ) {
-                      mTitle = vals[j].substring(1);
+                      StringBuilder sb = new StringBuilder();
+                      sb.append( vals[j].substring(1) );
+                      // mTitle = vals[j].substring(1);
                       for ( ++j; j<vals_len; ++j ) {
                         if ( vals[j].length() == 0 ) continue;
                         if ( vals[j].endsWith( "\"" ) ) {
-                          mTitle += " " + vals[j].substring(0, vals[j].length()-1);
+                          sb.append(" ").append(vals[j].substring(0, vals[j].length()-1));
+                          // mTitle += " " + vals[j].substring(0, vals[j].length()-1);
                           break;
                         } else {
-                          mTitle += " " + vals[j];
+                          sb.append(" ").append(vals[j] );
+                          // mTitle += " " + vals[j];
                         }
                       }
+                      mTitle = sb.toString();
                     } else {
                       mTitle = vals[j];
                     }
@@ -315,10 +320,13 @@ class ParserTherion
               } else if ( cmd.equals("date") ) {
                 String date = vals[1];
                 if ( mDate == null ) mDate = date; // save centerline date
-              } else if ( cmd.equals("team") ) { 
+              } else if ( cmd.equals("team") ) {
+                StringBuilder sb = new StringBuilder();
                 for ( int j = 1; j < vals_len; ++j ) {
-                  mTeam +=  " " + vals[j];
+                  sb.append(" ").append( vals[j] );
+                  // mTeam +=  " " + vals[j];
                 }
+                mTeam += sb.toString();
               // } else if ( cmd.equals("explo-date") ) {
               // } else if ( cmd.equals("explo-team") ) {
               // } else if ( cmd.equals("instrument") ) {

@@ -1,4 +1,4 @@
-/** @file DrawingSvg.java
+/* @file DrawingSvg.java
  *
  * @author marco corvi
  * @date mar 2013

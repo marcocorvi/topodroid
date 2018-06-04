@@ -1,4 +1,4 @@
-/** @file ConvexHull.java
+/* @file ConvexHull.java
  *
  * @author marco corvi
  * @date nov 2014

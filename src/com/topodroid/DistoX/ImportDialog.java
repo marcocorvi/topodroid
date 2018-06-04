@@ -1,4 +1,4 @@
-/** @file ImportDialog.java
+/* @file ImportDialog.java
  *
  * @author marco corvi
  * @date nov 2011

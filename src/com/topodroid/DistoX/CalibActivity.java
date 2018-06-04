@@ -336,16 +336,16 @@ public class CalibActivity extends Activity
     String date = mEditDate.getText().toString();
     String device = mDeviceAddress; // mEditDevice.getText().toString();
     String comment = mEditComment.getText().toString();
-    if ( date    != null ) { date    = date.trim(); }
+    /* if ( date != null ) */ { date    = date.trim(); }  // date != null always true
     if ( device  != null ) { device  = device.trim(); }
-    if ( comment != null ) { comment = comment.trim(); }
+    /* if ( comment != null ) */ { comment = comment.trim(); } // comment != null always true
 
     if ( isSaved ) { // calib already saved
       TopoDroidApp.mDData.updateCalibInfo( mApp.mCID, date, device, comment );
       TDToast.make( this, R.string.calib_updated );
     } else { // new calib
       name = TopoDroidUtil.noSpaces( name );
-      if ( name != null && name.length() > 0 ) {
+      if ( /* name != null && */ name.length() > 0 ) { // name != null always true
         if ( mApp.hasCalibName( name ) ) { // name already exists
           // TDToast.make( this, R.string.calib_exists );
           String error = getResources().getString( R.string.calib_exists );

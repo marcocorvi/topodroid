@@ -1,4 +1,4 @@
-/** @file ImportParser.java
+/* @file ImportParser.java
  *
  * @author marco corvi
  * @date mar 2015

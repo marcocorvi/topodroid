@@ -1,4 +1,4 @@
-/** @file DeviceA3MemoryDialog.java
+/* @file DeviceA3MemoryDialog.java
  *
  * @author marco corvi
  * @date nov 2011

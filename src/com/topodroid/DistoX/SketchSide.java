@@ -1,4 +1,4 @@
-/** @file SketchSide.java
+/* @file SketchSide.java
  *
  * @author marco corvi
  * @date feb 2013

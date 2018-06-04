@@ -1,4 +1,4 @@
-/** @file TDLog.java
+/* @file TDLog.java
  *
  * @author marco corvi
  * @date nov 2011

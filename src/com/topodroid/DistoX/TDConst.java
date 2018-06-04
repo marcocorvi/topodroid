@@ -1,4 +1,4 @@
-/** @file TDConst.java
+/* @file TDConst.java
  *
  * @author marco corvi
  * @date jan 2014

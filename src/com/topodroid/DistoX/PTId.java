@@ -1,4 +1,4 @@
-/** @file PTId.java
+/* @file PTId.java
  *
  * @author marco corvi
  * @date march 2010
@@ -97,7 +97,7 @@ class PTId
 
   public String toString()
   {
-    if ( isUndef() ) return new String("-");
+    if ( isUndef() ) return "-";
     if ( isNumber() ) {
       return String.format(Locale.US, "%d", _id + 0x80000001 ); // FIXME this is the correct form
       // return new String("-");

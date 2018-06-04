@@ -1,4 +1,4 @@
-/** @file OrientationWidget.java
+/* @file OrientationWidget.java
  *
  * @author marco corvi
  * @date june 2012

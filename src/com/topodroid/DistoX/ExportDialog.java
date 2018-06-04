@@ -1,4 +1,4 @@
-/** @file ExportDialog.java
+/* @file ExportDialog.java
  *
  * @author marco corvi
  * @date nov 2011

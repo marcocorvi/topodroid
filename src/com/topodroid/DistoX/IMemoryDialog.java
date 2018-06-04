@@ -1,4 +1,4 @@
-/** @file IMemoryDialog.java
+/* @file IMemoryDialog.java
  *
  * @author marco corvi 
  * @date nov 2013

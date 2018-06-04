@@ -23,13 +23,13 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_weight="1"
-      android:text="UP"
+      android:text="@string/UP"
       />
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_weight="1"
-      android:text="DOWN"
+      android:text="@string/DOWN"
       />
     <ImageView android:id="@+id/coverage_image_up"
       android:layout_marginTop="@dimen/margintiny"

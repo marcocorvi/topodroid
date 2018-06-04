@@ -1,4 +1,4 @@
-/** @file ItemAdapter.java
+/* @file ItemAdapter.java
  *
  * @author marco corvi
  * @date

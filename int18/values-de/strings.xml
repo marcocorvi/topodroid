@@ -16,6 +16,8 @@
     <string name="AREA">FLÄCHEN</string>
     <string name="HELP">HILFE</string>
     <string name="STATION">Messpunkt</string>
+    <!-- TODO string name="UP">UPWARD</string -->
+    <!-- TODO string name="DOWN">DOWNWARD</string -->
 
     <string name="cut">AUSSCHNEIDEN</string>
     <string name="copy">KOPIEREN</string>

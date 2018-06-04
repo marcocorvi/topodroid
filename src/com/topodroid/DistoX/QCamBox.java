@@ -1,4 +1,4 @@
-/** @file QCamBox.java
+/* @file QCamBox.java
  *
  * @author marco corvi
  * @date jan. 2017

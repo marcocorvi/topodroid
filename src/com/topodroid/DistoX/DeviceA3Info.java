@@ -1,4 +1,4 @@
-/** @file DeviceA3iInfo.java
+/* @file DeviceA3iInfo.java
  *
  * @author marco corvi
  * @date nov 2011

@@ -1,4 +1,4 @@
-/** @file TRobotSeries.java
+/* @file TRobotSeries.java
  *
  * @author marco corvi
  * @date june 2012

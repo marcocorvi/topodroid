@@ -1,4 +1,4 @@
-/** @file CalibInfo.java
+/* @file CalibInfo.java
  *
  * @author marco corvi
  * @date may 2012

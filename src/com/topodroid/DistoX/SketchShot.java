@@ -1,4 +1,4 @@
-/** @flile SketchShot.java
+/* @flile SketchShot.java
  *
  * @author marco corvi
  * @date mar 2013

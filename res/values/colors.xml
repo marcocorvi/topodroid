@@ -8,11 +8,11 @@
     <color name="textdelete">#ffcc0000</color>
     <color name="divider">#ff444444</color>
 
-    <color name="title">#ff99ccff</color>
-    <color name="textfixed">#ff339966</color>
-    <color name="text">#ff333333</color>
+    <color name="title">#ff6699ff</color>
+    <color name="textfixed">#ff66cc99</color>
+    <color name="text">#ffffffff</color>
     <color name="hint">#ff999999</color>
-    <!-- color name="bg">#ffcccccc</color -->
+    <color name="bg">#ff333333</color>
 
 <!-- MATERIAL
     <color name="colorPrimary">#33ccff</color>

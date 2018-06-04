@@ -1,4 +1,4 @@
-/** @file PTPolygonElement.java
+/* @file PTPolygonElement.java
  *
  * @author marco corvi
  * @date march 2010

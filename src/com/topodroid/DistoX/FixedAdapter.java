@@ -1,4 +1,4 @@
-/** @file FixedAdapter.java
+/* @file FixedAdapter.java
  *
  * @author marco corvi
  * @date june 2012

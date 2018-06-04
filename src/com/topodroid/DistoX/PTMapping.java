@@ -1,4 +1,4 @@
-/** @file PTMapping.java
+/* @file PTMapping.java
  *
  * @author marco corvi
  * @date march 2010

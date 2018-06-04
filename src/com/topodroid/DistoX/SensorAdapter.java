@@ -1,4 +1,4 @@
-/** @file SensorAdapter.java
+/* @file SensorAdapter.java
  *
  * @author marco corvi
  * @date apr 2012

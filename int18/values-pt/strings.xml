@@ -16,6 +16,8 @@
     <string name="AREA">ÁREA</string>
     <string name="HELP">AJUDA</string>
     <string name="STATION">BASE</string>
+    <!-- TODO string name="UP">UPWARD</string -->
+    <!-- TODO string name="DOWN">DOWNWARD</string -->
 
     <string name="cut">CORTAR</string>
     <string name="copy">COPIAR</string>

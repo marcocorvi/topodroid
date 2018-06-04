@@ -1,4 +1,4 @@
-/** @file NumSurveyPoint.java
+/* @file NumSurveyPoint.java
  *
  * @author marco corvi
  * @date jan 2013

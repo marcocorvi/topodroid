@@ -97,11 +97,11 @@ public class DeviceActivity extends Activity
   private BitmapDrawable mBMread;
   private BitmapDrawable mBMread_no;
 
-  static final int IDX_TOGGLE = 1;
-  static final int IDX_CALIB  = 2;
-  static final int IDX_INFO   = 3;
-  static final int IDX_READ   = 4;
-  static final int IDX_MEMORY = 5;
+  static final private int IDX_TOGGLE = 1;
+  static final private int IDX_CALIB  = 2;
+  // static final private int IDX_INFO   = 3;
+  static final private int IDX_READ   = 4;
+  // static final private int IDX_MEMORY = 5;
 
   private static final int menus[] = {
                         R.string.menu_scan,

@@ -1,4 +1,4 @@
-/** @file PTShot.java
+/* @file PTShot.java
  *
  * @author marco corvi
  * @date march 2010

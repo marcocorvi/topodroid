@@ -1,4 +1,4 @@
-/** @file SelectionPoint.java
+/* @file SelectionPoint.java
  *
  * @author marco corvi
  * @date feb 2013

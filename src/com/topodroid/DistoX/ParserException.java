@@ -1,4 +1,4 @@
-/** @file ParserException.java
+/* @file ParserException.java
  *
  * @author marco corvi
  * @date may 2012

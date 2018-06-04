@@ -1,4 +1,4 @@
-/** @file DeviceA3InfoDialog.java
+/* @file DeviceA3InfoDialog.java
  *
  * @author marco corvi
  * @date nov 2011

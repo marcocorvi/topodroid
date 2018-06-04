@@ -1,4 +1,4 @@
-/** @file DataDownloader.java
+/* @file DataDownloader.java
  *
  * @author marco corvi
  * @date sept 2014

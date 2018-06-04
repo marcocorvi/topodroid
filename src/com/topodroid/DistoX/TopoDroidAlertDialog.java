@@ -1,4 +1,4 @@
-/** @file TopoDroidAlertDialog.java
+/* @file TopoDroidAlertDialog.java
  *
  * @author marco corvi
  * @date may 2012

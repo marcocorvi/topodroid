@@ -1,4 +1,4 @@
-/** @file MemoryOctet.java
+/* @file MemoryOctet.java
  *
  * @author marco corvi
  * @date 201311

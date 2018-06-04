@@ -1,4 +1,4 @@
-/** @file HelpDialog.java
+/* @file HelpDialog.java
  *
  * @author marco corvi
  * @date nov 2013

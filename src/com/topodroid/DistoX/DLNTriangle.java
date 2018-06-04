@@ -1,4 +1,4 @@
-/** @file DLNTriangle.java
+/* @file DLNTriangle.java
  *
  * @author marco corvi
  * @date june 2017

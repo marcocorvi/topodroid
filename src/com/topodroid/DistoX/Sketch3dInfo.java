@@ -1,4 +1,4 @@
-/** @flile Sketch3dInfo.java
+/* @flile Sketch3dInfo.java
  *
  * @author marco corvi
  * @date jan 2013

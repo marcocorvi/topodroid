@@ -144,7 +144,7 @@ class CalibGMDialog extends MyDialog
       // if ( name == null || name.length() == 0 ) {
       //   name = mETname.getHint().toString();
       // }
-      if ( name == null || name.length() == 0 ) {
+      if ( /* name == null || */ name.length() == 0 ) { // name == null always false
         mETname.setError( mParent.getResources().getString( R.string.error_group_required ) );
         return;
       } else {

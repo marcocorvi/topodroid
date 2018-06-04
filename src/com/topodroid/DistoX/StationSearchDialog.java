@@ -1,4 +1,4 @@
-/** @file StationSearchDialog.java
+/* @file StationSearchDialog.java
  *
  * @author marco corvi
  * @date jul 2017

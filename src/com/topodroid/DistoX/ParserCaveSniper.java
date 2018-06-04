@@ -1,4 +1,4 @@
-/** @file ParserCaveSniper.java
+/* @file ParserCaveSniper.java
  *
  * @author marco corvi
  * @date dec 2017
@@ -78,13 +78,9 @@ class ParserCaveSniper extends ImportParser
               mLength  = Float.parseFloat(vals[k]); ++k;
               mBearing = Float.parseFloat(vals[k]); ++k;
               mClino   = Float.parseFloat(vals[k]); ++k;
-              if ( k < kmax ) {
-                mComment = vals[k];
-                while ( k < kmax ) { mComment = mComment + " " + vals[k]; ++k; }
-              } else {
-                mComment = "";
-	      }
-	      if ( mTo.startsWith( mFrom + ":" ) ) { // splay are added to the shots array to keep the list order
+              mComment = TopoDroidUtil.concat( vals, k );
+              // k = vals.length;
+	          if ( mTo.startsWith( mFrom + ":" ) ) { // splay are added to the shots array to keep the list order
                 shots.add( new ParserShot( mFrom, EMPTY, mLength, mBearing, mClino, 0.0f, 0, 0, false, false, false, mComment ) );
               } else {
                 int extend = ( mBearing < 90 || mBearing > 270 )? 1 : -1;

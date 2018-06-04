@@ -1,4 +1,4 @@
-/** @file TDMath.java
+/* @file TDMath.java
  *
  * @author marco corvi
  * @date jan 2014

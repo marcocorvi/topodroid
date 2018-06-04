@@ -1,4 +1,4 @@
-/** @file AverageLeg.java
+/* @file AverageLeg.java
  *
  * @author marco corvi
  * @date jan 2014

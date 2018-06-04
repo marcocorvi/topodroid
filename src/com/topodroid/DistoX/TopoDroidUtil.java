@@ -1,4 +1,4 @@
-/** @file TopoDroidUtil.java
+/* @file TopoDroidUtil.java
  *
  * @author marco corvi
  * @date jan 2014
@@ -18,6 +18,8 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+
+import java.io.File;
 
 // import android.util.Log;
 
@@ -67,6 +69,52 @@ class TopoDroidUtil
 
   // static float slope2degree( float slp ) { return (float)( Math.atan( slp/100 ) * RAD2DEG ); }
 
+  static void deleteFile( String pathname )
+  {
+    File f = new File( pathname );
+    if ( f.exists() ) {
+      if ( ! f.delete() ) TDLog.Error("File delete failed " + pathname );
+    }
+  }
+
+  static void renameFile( String oldname, String newname )
+  {
+    File f1 = new File( oldname );
+    File f2 = new File( newname );
+    if ( f1.exists() && ! f2.exists() ) {
+      if ( ! f1.renameTo( f2 ) ) TDLog.Error("File rename failed " + oldname + " " + newname );
+    } 
+  }
+
+  static void moveFile( String oldname, String newname )
+  {
+    File f1 = new File( oldname );
+    File f2 = new File( newname );
+    if ( f1.exists() ) {
+      if ( ! f1.renameTo( f2 ) ) TDLog.Error("File move failed " + oldname + " " + newname );
+    } 
+  }
+
+  static void makeDir( String pathname )
+  {
+    File f = new File( pathname );
+    if ( f.exists() ) return;
+    if ( ! f.isDirectory() ) {
+      if ( ! f.mkdirs() ) TDLog.Error("Mkdir failed " + pathname );
+    }
+  }
+  
+
+  static String concat( String[] vals, int k )
+  {
+    if ( k < vals.length ) {
+      StringBuilder sb = new StringBuilder();
+      sb.append(vals[k]);
+      for (++k; k < vals.length; ++k) sb.append(" ").append(vals[k]);
+      return sb.toString();
+    }
+    return "";
+  }
 
   static String noSpaces( String s )
   {

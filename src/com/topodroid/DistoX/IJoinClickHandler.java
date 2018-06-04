@@ -1,4 +1,4 @@
-/** @file IJoinClickHandler.java
+/* @file IJoinClickHandler.java
  *
  * @author marco corvi
  * @date may 2017

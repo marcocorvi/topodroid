@@ -1,4 +1,4 @@
-/** @file CalibValidateListDialog.java
+/* @file CalibValidateListDialog.java
  *
  * @author marco corvi
  * @date nov 2014

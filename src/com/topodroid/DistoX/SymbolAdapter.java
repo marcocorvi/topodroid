@@ -1,4 +1,4 @@
-/** @file SymbolAdapter.java
+/* @file SymbolAdapter.java
  *
  * @author marco corvi
  * @date 

@@ -1,4 +1,4 @@
-/** @file SketchNewShotDialog.java
+/* @file SketchNewShotDialog.java
  *
  * @author marco corvi
  * @date mar 2013

@@ -1,4 +1,4 @@
-/** @file DLNSite.java
+/* @file DLNSite.java
  *
  * @author marco corvi
  * @date june 2017

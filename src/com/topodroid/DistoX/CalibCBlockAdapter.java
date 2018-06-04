@@ -1,4 +1,4 @@
-/** @file CalibCBlockAdapter.java
+/* @file CalibCBlockAdapter.java
  *
  * @author marco corvi
  * @date apr 2012

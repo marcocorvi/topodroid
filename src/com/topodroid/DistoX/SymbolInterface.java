@@ -1,4 +1,4 @@
-/** @file SymbolInterface.java
+/* @file SymbolInterface.java
  *
  * @author marco corvi
  * @date 

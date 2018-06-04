@@ -175,8 +175,7 @@ class AudioDialog extends MyDialog
 
   private void deleteAudio()
   {
-    File file = new File( mFilepath );
-    file.delete();
+    TopoDroidUtil.deleteFile( mFilepath );
     TopoDroidApp.mData.deleteAudio( mApp.mSID, mBid );
     if ( mParent != null ) mParent.deletedAudio( mBid );
   }

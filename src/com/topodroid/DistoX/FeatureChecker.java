@@ -70,8 +70,8 @@ class FeatureChecker
       android.Manifest.permission.RECORD_AUDIO
   };
 
-  static final int NR_PERMS_D = 3;
-  static final int NR_PERMS   = 6;
+  static final private int NR_PERMS_D = 3;
+  static final private int NR_PERMS   = 6;
 
   /** app specific code - for callback in MainWindow
    */

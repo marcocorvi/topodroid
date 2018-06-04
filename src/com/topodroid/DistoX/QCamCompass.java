@@ -1,4 +1,4 @@
-/** @file QCamCompass.java
+/* @file QCamCompass.java
  *
  * @author marco corvi
  * @date jan. 2017

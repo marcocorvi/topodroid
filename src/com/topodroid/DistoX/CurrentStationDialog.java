@@ -1,4 +1,4 @@
-/** @file CurrentStationDialog.java
+/* @file CurrentStationDialog.java
  *
  * @author marco corvi
  * @date jan 2015

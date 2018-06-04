@@ -1,4 +1,4 @@
-/** @file SketchVertex.java
+/* @file SketchVertex.java
  *
  * @author marco corvi
  * @date feb 2013

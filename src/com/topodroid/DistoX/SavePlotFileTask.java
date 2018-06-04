@@ -1,4 +1,4 @@
-/** @file SavePlotFileTask.java
+/* @file SavePlotFileTask.java
  *
  * @author marco corvi
  * @date jan 2014
@@ -150,13 +150,14 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         for ( File f : files ) {
           if ( f.getName().endsWith("tmp") && f.lastModified() < time ) {
             // TDLog.Log( TDLog.LOG_PLOT, "delete temp file " + f.getAbsolutePath() );
-            f.delete();
+            if ( ! f.delete() ) TDLog.Error("File delete error");
           }
         }
 
         String tempname1 = TDPath.getTmpFileWithExt( Integer.toString(mSuffix) + Long.toString(now) );
         File file1 = new File( tempname1 );
         // TDLog.Log( TDLog.LOG_PLOT, "saving binary " + mFullName );
+        // Log.v( "DistoX", "saving binary " + mFullName );
         if ( mSuffix == PlotSave.CREATE ) {
           DrawingIO.exportDataStream( mPaths, mType, file1, mFullName, mProjDir );
         } else {
@@ -165,10 +166,11 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
 
         if ( isCancelled() ) {
           TDLog.Error( "binary save cancelled " + mFullName );
-          file1.delete();
+          if ( ! file1.delete() ) TDLog.Error("File delete error");
           ret2 = false;
         } else {
           // TDLog.Log( TDLog.LOG_PLOT, "save binary completed" + mFullName );
+          // Log.v( "DistoX", "save binary completed" + mFullName );
           String filename1 = TDPath.getTdrFileWithExt( mFullName );
           File file0 = new File( filename1 );
           if ( file0.exists() ) file0.renameTo( new File( filename1 + TDPath.BCK_SUFFIX ) );

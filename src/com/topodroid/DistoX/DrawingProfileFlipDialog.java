@@ -1,4 +1,4 @@
-/** @file DrawingProfileFlipDialog.java
+/* @file DrawingProfileFlipDialog.java
  *
  * @author marco corvi
  * @date jan 2015

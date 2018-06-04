@@ -1,4 +1,4 @@
-/** @file DLNWall.java
+/* @file DLNWall.java
  *
  * @author marco corvi
  * @date june 2017

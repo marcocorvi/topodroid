@@ -1,4 +1,4 @@
-/** @file LinePoint.java
+/* @file LinePoint.java
  *
  * @author marco corvi
  * @date dec 2011

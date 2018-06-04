@@ -1,4 +1,4 @@
-/** @file CBDdialog.java
+/* @file CBDdialog.java
  *
  * @author marco corvi
  * @date sept 2015
@@ -146,7 +146,7 @@ class CBDdialog extends MyDialog
         mETsubdir.setError( mContext.getResources().getString( R.string.error_dir_exists ) );
 	return;
       }
-      dir.mkdir();
+      if ( ! dir.mkdir() ) TDLog.Error("mkdir error");
       mParent.setBasename( subdir );
     } // else if ( v.getId() == R.id.button_cancel ) 
     dismiss();

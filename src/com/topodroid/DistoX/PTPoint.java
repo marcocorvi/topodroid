@@ -1,4 +1,4 @@
-/** @file PTPoint.java
+/* @file PTPoint.java
  *
  * @author marco corvi
  * @date march 2010

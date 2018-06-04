@@ -1,4 +1,4 @@
-/** @file TDStatus.java
+/* @file TDStatus.java
  *
  * @author marco corvi
  * @date jul 2017

@@ -1,4 +1,4 @@
-/** @file TRobot.java
+/* @file TRobot.java
  *
  * @author marco corvi
  * @date june 2012

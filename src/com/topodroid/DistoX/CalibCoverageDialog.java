@@ -1,4 +1,4 @@
-/** @file CalibCoverageDialog.java
+/* @file CalibCoverageDialog.java
  *
  * @author marco corvi
  * @date jan 2012

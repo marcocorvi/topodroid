@@ -1,4 +1,4 @@
-/** @file ItemButton.java
+/* @file ItemButton.java
  *
  * @author marco corvi
  * @date dec 2013

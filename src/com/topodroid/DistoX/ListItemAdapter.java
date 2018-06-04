@@ -1,4 +1,4 @@
-/** @file ListItemAdapter.java
+/* @file ListItemAdapter.java
  *
  * @author marco corvi
  * @date nov 2014

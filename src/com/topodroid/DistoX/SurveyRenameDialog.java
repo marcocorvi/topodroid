@@ -1,4 +1,4 @@
-/** @file SurveyRenameDialog.java
+/* @file SurveyRenameDialog.java
  *
  * @author marco corvi
  * @date nov 2011

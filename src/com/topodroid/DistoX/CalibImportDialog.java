@@ -1,4 +1,4 @@
-/** @file CalibImportDialog.java
+/* @file CalibImportDialog.java
  *
  * @author marco corvi
  * @date sept 2015

@@ -1,4 +1,4 @@
-/** @file PTDrawing.java
+/* @file PTDrawing.java
  *
  * @author marco corvi
  * @date march 2010

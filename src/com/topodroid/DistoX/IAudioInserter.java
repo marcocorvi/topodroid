@@ -1,4 +1,4 @@
-/** @file IAudioInserter.java
+/* @file IAudioInserter.java
  *
  * @author marco corvi
  * @date june 2017

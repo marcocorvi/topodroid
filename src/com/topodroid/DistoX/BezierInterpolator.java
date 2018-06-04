@@ -355,19 +355,24 @@ class BezierInterpolator
   {
     // TDLog.Log( TDLog.LOG_BEZIER, "fitCurve nr. pts " + nPts );
     if ( nPts <= 1 ) return 0.0f;
+    float err = 0.0f;
     curves.clear();
     ArrayList<Integer> corners = findCorners( d, nPts, len_thr );
-    int i1 = corners.get(0).intValue();
-    float err = 0.0f;
-    for ( int k=1; k<corners.size(); ++k ) {
-      int i2 = corners.get(k).intValue(); // nPts-1
-      // TDLog.Log( TDLog.LOG_BEZIER, "fitting from " + i1 + " to " + i2 );
-      /*  Unit tangent vectors at endpoints */
-      Point2D tHat1 = computeLeftTangent( d, i1 );
-      Point2D tHat2 = computeRightTangent( d, i2 );
-      float e = fitCubic( d, i1, i2, tHat1, tHat2, error );
-      if ( e > err ) err = e;
-      i1 = i2;
+    if ( corners == null) return err;
+    try {
+      int i1 = corners.get(0).intValue();
+      for ( int k=1; k<corners.size(); ++k ) {
+        int i2 = corners.get(k).intValue(); // nPts-1
+        // TDLog.Log( TDLog.LOG_BEZIER, "fitting from " + i1 + " to " + i2 );
+        /*  Unit tangent vectors at endpoints */
+        Point2D tHat1 = computeLeftTangent(d, i1);
+        Point2D tHat2 = computeRightTangent(d, i2);
+        float e = fitCubic(d, i1, i2, tHat1, tHat2, error);
+        if (e > err) err = e;
+        i1 = i2;
+      }
+    } catch ( NullPointerException e ) {
+      TDLog.Error( "Null pointer " );
     }
     return err;
   }

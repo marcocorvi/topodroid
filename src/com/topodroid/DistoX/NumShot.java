@@ -1,4 +1,4 @@
-/** @file NumShot.java
+/* @file NumShot.java
  *
  * @author marco corvi
  * @date jan 2013

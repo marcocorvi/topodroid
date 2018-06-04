@@ -1,4 +1,4 @@
-/** @file SketchBorder.java
+/* @file SketchBorder.java
  *
  * @author marco corvi
  * @date jan 2013

@@ -1,4 +1,4 @@
-/** @file PlotMergeDialog.java
+/* @file PlotMergeDialog.java
  *
  * @author marco corvi
  * @date jul 2017

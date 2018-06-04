@@ -1,4 +1,4 @@
-/** @file EnableSymbol.java
+/* @file EnableSymbol.java
  *
  * @author marco corvi
  * @date nov 2013

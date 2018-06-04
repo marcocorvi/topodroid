@@ -121,7 +121,7 @@ public class SurveyWindow extends Activity
   private EditText mEditComment;
   private TextView mTVxsections;
 
-  MyDateSetListener mDateListener;
+  private MyDateSetListener mDateListener;
 
   private Button[] mButton1;
   private int mNrButton1 = 0;

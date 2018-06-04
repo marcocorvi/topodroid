@@ -1,4 +1,4 @@
-/** @file PhotoInfo.java
+/* @file PhotoInfo.java
  *
  * @author marco corvi
  * @date may 2012

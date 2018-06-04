@@ -1,4 +1,4 @@
-/** @file SurveyCalibrationDialog.java
+/* @file SurveyCalibrationDialog.java
  *
  * @author marco corvi
  * @date nov 2011

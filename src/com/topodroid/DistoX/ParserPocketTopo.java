@@ -1,4 +1,4 @@
-/** @file ParserPocketTopo.java
+/* @file ParserPocketTopo.java
  *
  * @author marco corvi
  * @date nov 2014
@@ -245,7 +245,7 @@ class ParserPocketTopo extends ImportParser
         ret = true;
       } catch ( IOException e ) {
         TDLog.Error( mName + " scraps IO error " + e );
-        file.delete();
+        if ( ! file.delete() ) TDLog.Error("File delete error");
       }
     }
     return ret;

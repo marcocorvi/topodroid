@@ -1,4 +1,4 @@
-/** @file Device.java
+/* @file Device.java
  *
  * @author marco corvi
  * @date nov 2011

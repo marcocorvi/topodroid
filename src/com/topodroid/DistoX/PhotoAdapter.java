@@ -1,4 +1,4 @@
-/** @file PhotoAdapter.java
+/* @file PhotoAdapter.java
  *
  * @author marco corvi
  * @date apr 2012

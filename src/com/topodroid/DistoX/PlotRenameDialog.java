@@ -1,4 +1,4 @@
-/** @file PlotRenameDialog.java
+/* @file PlotRenameDialog.java
  *
  * @author marco corvi
  * @date nov 2011

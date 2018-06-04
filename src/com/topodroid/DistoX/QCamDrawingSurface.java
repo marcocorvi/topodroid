@@ -1,4 +1,4 @@
-/** @file QCamDrawingSurface.java
+/* @file QCamDrawingSurface.java
  *
  * @author marco corvi
  * @date jan. 2017

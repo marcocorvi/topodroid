@@ -1,4 +1,4 @@
-/** @file DistoXStationName.java
+/* @file DistoXStationName.java
  *
  * @author marco corvi
  * @date may 2012
@@ -214,7 +214,7 @@ class DistoXStationName
         return true;
       } else if ( cmp < 0 ) {
         n2 = n0;
-      } else if ( cmp > 0 ) {
+      } else /* if ( cmp > 0 ) */ {
         n1 = n0;
       }
     }
@@ -253,7 +253,7 @@ class DistoXStationName
         return;
       } else if ( cmp < 0 ) {
         n2 = n0;
-      } else if ( cmp > 0 ) {
+      } else /* if ( cmp > 0 ) */ {
         n1 = n0;
       }
     }

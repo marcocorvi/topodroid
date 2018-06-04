@@ -1,4 +1,4 @@
-/** @file MyButton.java
+/* @file MyButton.java
  *
  * @author marco corvi
  * @date may 2012

@@ -1,4 +1,4 @@
-/** @file ParserVisualTopo.java
+/* @file ParserVisualTopo.java
  *
  * @author marco corvi
  * @date mar 2015

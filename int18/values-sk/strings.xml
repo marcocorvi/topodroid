@@ -16,6 +16,8 @@
     <string name="AREA">OBLASŤ</string>
     <string name="HELP">POMOC</string>
     <string name="STATION">MERACÍ_BOD</string>
+    <!-- TODO string name="UP">UPWARD</string -->
+    <!-- TODO string name="DOWN">DOWNWARD</string -->
 
     <string name="cut">VYSTRIHNÚŤ</string>
     <string name="copy">KOPÍROVAŤ</string>

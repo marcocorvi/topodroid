@@ -62,7 +62,7 @@ class DrawingSpecialPath extends DrawingPath
     return null;
   }
 
-  void setCenter( float x, float y )
+  private void setCenter( float x, float y )
   {
     cx = x;
     cy = y;

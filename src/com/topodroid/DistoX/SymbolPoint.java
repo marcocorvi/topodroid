@@ -1,4 +1,4 @@
-/** @file SymbolPoint.java
+/* @file SymbolPoint.java
  *
  * @author marco corvi
  * @date dec 2012

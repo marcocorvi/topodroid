@@ -1,4 +1,4 @@
-/** @file NumAzimuth.java
+/* @file NumAzimuth.java
  *
  * @author marco corvi
  * @date jan 2013

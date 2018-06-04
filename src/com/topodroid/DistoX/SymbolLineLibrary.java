@@ -1,4 +1,4 @@
-/** @file SymbolLineLibrary.java
+/* @file SymbolLineLibrary.java
  *
  * @author marco corvi
  * @date dec 2012
@@ -132,7 +132,7 @@ class SymbolLineLibrary extends SymbolLibrary
       // mSymbolNr = mSymbols.size();
       sortSymbolByName( systemNr );
     } else {
-      dir.mkdirs( );
+      if ( ! dir.mkdirs( ) ) TDLog.Error( "mkdir error" );
     }
   }
 

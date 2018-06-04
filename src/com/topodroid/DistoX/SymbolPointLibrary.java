@@ -1,4 +1,4 @@
-/** @file SymbolPointLibrary.java
+/* @file SymbolPointLibrary.java
  *
  * @author marco corvi
  * @date dec 2012
@@ -161,7 +161,7 @@ class SymbolPointLibrary extends SymbolLibrary
       sortSymbolByName( systemNr );
     } else {
       TDLog.Error( "No symbol directory" );
-      dir.mkdirs( );
+      if ( ! dir.mkdirs( ) ) TDLog.Error( "mkdir error" );
     }
   }
 

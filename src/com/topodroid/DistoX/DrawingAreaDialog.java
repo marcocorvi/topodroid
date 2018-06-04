@@ -1,4 +1,4 @@
-/** @file DrawingAreaDialog.java
+/* @file DrawingAreaDialog.java
  *
  * @author marco corvi
  * @date june 2012

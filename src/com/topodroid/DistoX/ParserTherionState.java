@@ -1,4 +1,4 @@
-/** @file ParserTherionState.java
+/* @file ParserTherionState.java
  *
  * @author marco corvi
  * @date may 2012

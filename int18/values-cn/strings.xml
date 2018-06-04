@@ -16,6 +16,8 @@
     <string name="AREA">面图例</string>
     <string name="HELP">帮助</string>
     <string name="STATION">测点 </string>
+    <!-- TODO string name="UP">UPWARD</string -->
+    <!-- TODO string name="DOWN">DOWNWARD</string -->
 
     <string name="cut">剪切</string>
     <string name="copy">复制</string>

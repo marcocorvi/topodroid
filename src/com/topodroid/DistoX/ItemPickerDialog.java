@@ -1,4 +1,4 @@
-/** @file ItemPickerDialog.java
+/* @file ItemPickerDialog.java
  *
  * @author marco corvi
  * @date 

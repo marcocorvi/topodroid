@@ -1,4 +1,4 @@
-/** @file TRobotPoint.java
+/* @file TRobotPoint.java
  *
  * @author marco corvi
  * @date june 2012

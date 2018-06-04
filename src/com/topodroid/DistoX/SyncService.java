@@ -1,4 +1,4 @@
-/** @file SyncService.java
+/* @file SyncService.java
  * 
  * --------------------------------------------------------
  * this class is made after the sample BluetoothChat by the 
@@ -463,8 +463,8 @@ class SyncService
             // add buffer to the data 
             if ( buffer[k] == DataListener.EOL ) {
               // end of message: send to upper layer
-              byte[] tmp = new byte[pos];  
-              for ( int j=0; j<pos; ++j) tmp[j] = data[j];
+              byte[] tmp = new byte[pos];
+              System.arraycopy(data, 0, tmp, 0, pos);
               // special handle shutdown message 
               if ( data[0] == 0 && 
                    data[1] == DataListener.SHUTDOWN && 

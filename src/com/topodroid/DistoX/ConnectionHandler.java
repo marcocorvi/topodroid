@@ -130,7 +130,7 @@ class ConnectionHandler extends Handler
        }
      }
      mDevice = device;
-     if ( mDevice != null ) {
+     /* if ( mDevice != null ) */ { // always true
        mClient = true;
        mSyncService.connect( mDevice );
      }

@@ -1,4 +1,4 @@
-/** @filke CHFacet.java
+/* @filke CHFacet.java
  *
  * @author marco corvi
  * @date may 2017

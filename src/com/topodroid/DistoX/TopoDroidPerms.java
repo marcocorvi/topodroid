@@ -1,4 +1,4 @@
-/** @file TopoDroidPerms.java
+/* @file TopoDroidPerms.java
  *
  * @author marco corvi
  * @date may 2018

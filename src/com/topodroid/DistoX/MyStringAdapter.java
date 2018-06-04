@@ -1,4 +1,4 @@
-/** @file MyStringAdapter.java
+/* @file MyStringAdapter.java
  *
  * @author marco corvi
  * @date mar 2016

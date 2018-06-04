@@ -1,4 +1,4 @@
-/** @file DLNPole.java
+/* @file DLNPole.java
  *
  * @author marco corvi
  * @date june 2017

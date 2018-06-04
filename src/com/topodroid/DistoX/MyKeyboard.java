@@ -1,4 +1,4 @@
-/** @file MyKeyboard.java
+/* @file MyKeyboard.java
  *
  * @author marco corvi
  * @date june 2012

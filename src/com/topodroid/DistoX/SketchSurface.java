@@ -1,4 +1,4 @@
-/** @file SketchSurface.java
+/* @file SketchSurface.java
  *
  * @author marco corvi
  * @date feb 2013
@@ -889,7 +889,7 @@ class SketchSurface extends SketchShot
    * @param p1   first unit vector of the first pair
    * @param p2   second unit vector of the first pair
    * @param q1   first unit vector of the second pair
-   * @param q2
+   * @param q2   second unit vector of the second pair
    */
   private boolean arcIntersect( Vector p1, Vector p2, Vector q1, Vector q2 )
   {

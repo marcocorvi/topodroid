@@ -1,4 +1,4 @@
-/** @file AudioInfo.java
+/* @file AudioInfo.java
  *
  * @author marco corvi
  * @date may 2012

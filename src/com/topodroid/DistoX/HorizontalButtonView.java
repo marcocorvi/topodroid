@@ -1,4 +1,4 @@
-/** @file HorizontalButtonView.java
+/* @file HorizontalButtonView.java
  *
  * @author marco corvi (adapted from 
  * http://sandyandroidtutorials.blogspot.it/2013/06/horizontal-listview-tutorial.html

@@ -51,7 +51,7 @@ class DistoXProtocol
   private DataOutputStream mOut;
   // private byte[] mHeadTailA3;  // head/tail for Protocol A3
   private byte[] mAddr8000;
-  private byte[] mAddress;   // request-reply address
+  private byte[] mAddress;        // request-reply address
   private byte[] mRequestBuffer;   // request buffer
   private byte[] mReplyBuffer;     // reply data
   private byte[] mAcknowledge;

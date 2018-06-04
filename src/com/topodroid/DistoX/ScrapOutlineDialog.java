@@ -1,4 +1,4 @@
-/** @file ScrapOutlineDialog.java
+/* @file ScrapOutlineDialog.java
  *
  * @author marco corvi
  * @date june 2017

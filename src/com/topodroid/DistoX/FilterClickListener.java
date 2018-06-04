@@ -1,4 +1,4 @@
-/** @file FilterClickListener.java
+/* @file FilterClickListener.java
  *
  * @author marco corvi
  * @date may 2017

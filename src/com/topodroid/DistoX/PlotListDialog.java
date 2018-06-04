@@ -1,4 +1,4 @@
-/** @file PlotListDialog.java
+/* @file PlotListDialog.java
  *
  * @author marco corvi
  * @date nov 2011

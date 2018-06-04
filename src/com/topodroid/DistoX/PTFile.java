@@ -1,4 +1,4 @@
-/** @file PTFile.java
+/* @file PTFile.java
  *
  * @author marco corvi
  * @date march 2010
@@ -87,12 +87,22 @@ class PTFile
     }
   }
 
-  private static void read( FileInputStream fs, byte[] b, int n )
+  // used also by PTString
+  //  @param fs    input stream
+  //  @param b     byte array to store read bytes
+  //  @param n     total number of bytes to read
+  static void read( FileInputStream fs, byte[] b, int n )
   {
     try {
-      fs.read( b, 0, n );
+      int nread  = 0; // number of bytes that have been read
+      int toread = n; // number of bytes still to read
+      do {
+        int nn = fs.read( b, nread, toread );
+	nread  += nn;
+	toread -= nn;
+      } while ( nread < n );
     } catch ( IOException e ) {
-      TDLog.Error( "IO error on read " + n + " bytes: " + e.toString() );
+      TDLog.Error( "IO error on read " + n + " bytes: " + e.getMessage() );
     }
   }
 
@@ -279,12 +289,7 @@ class PTFile
       clear();
       // read ID and version
       byte[] bytes = new byte[4];
-      try {
-        fs.read( bytes, 0, 4 );
-        // assert bytes == Top3
-      } catch( IOException e ) {
-        TDLog.Error( "IO error on \"Top3\"");
-      }
+      read( fs, bytes, 4 );
       TDLog.Log( TDLog.LOG_PTOPO, "PT ID " + bytes[0] + bytes[1] + bytes[2] );
 
       int tc = PTFile.readInt( fs ); 

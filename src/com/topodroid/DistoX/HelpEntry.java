@@ -1,4 +1,4 @@
-/** @file HelpEntry
+/* @file HelpEntry
  *
  * @author marco corvi
  * @date nov 2013

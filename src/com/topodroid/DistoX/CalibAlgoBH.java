@@ -425,7 +425,7 @@ class CalibAlgoBH extends CalibAlgo
         gl[k] = g[k].plus( gs.timesV( nL ) );
       }
     } else {
-      for ( int k=0; k<size; ++k ) gl[k] = g[k];
+      System.arraycopy(g, 0, gl, 0, size);
     }
     Vector grp = new Vector();
     Vector mrp = new Vector();

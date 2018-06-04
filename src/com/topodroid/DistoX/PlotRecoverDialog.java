@@ -1,4 +1,4 @@
-/** @file PlotRecoverDialog.java
+/* @file PlotRecoverDialog.java
  *
  * @author marco corvi
  * @date jan 2015

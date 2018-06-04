@@ -1,4 +1,4 @@
-/** @file SymbolArea.java
+/* @file SymbolArea.java
  *
  * @author marco corvi
  * @date dec 2012
@@ -112,7 +112,7 @@ class SymbolArea extends Symbol
     }
   }
 
-  void makePath()
+  private void makePath()
   {
     mPath = new Path();
     if ( mCloseHorizontal ) {

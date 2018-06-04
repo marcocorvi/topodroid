@@ -1,4 +1,4 @@
-/** @file MyDialog.java
+/* @file MyDialog.java
  *
  * @author marco corvi
  * @date jan 2016

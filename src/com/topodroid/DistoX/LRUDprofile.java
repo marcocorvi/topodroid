@@ -1,4 +1,4 @@
-/** @file LRUDprofile.java
+/* @file LRUDprofile.java
  *
  * @author marco corvi
  * @date dec 2014

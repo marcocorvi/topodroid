@@ -1,4 +1,4 @@
-/** @file TDExporter.java
+/* @file TDExporter.java
  *
  * @author marco corvi
  * @date jan 2014

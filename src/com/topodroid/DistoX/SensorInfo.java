@@ -1,4 +1,4 @@
-/** @file SensorInfo.java
+/* @file SensorInfo.java
  *
  * @author marco corvi
  * @date aug 2012

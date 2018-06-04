@@ -1,4 +1,4 @@
-/** @file GMGroupsDialog.java
+/* @file GMGroupsDialog.java
  *
  * @author marco corvi
  * @date may 2012

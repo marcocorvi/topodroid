@@ -1,4 +1,4 @@
-/** @file VirtualDistoX.java
+/* @file VirtualDistoX.java
  *
  * @author marco corvi
  * @date mar 2016
@@ -561,7 +561,7 @@ class VirtualDistoX
     }
     if ( mData == null || mData.size() == 0 ) return false;
     MemoryOctet tmp = (MemoryOctet)( mData.poll() ); // pollFirst() );
-    for ( int k=0; k<8; ++k ) octet[k] = tmp.data[k];
+    System.arraycopy(tmp.data, 0, octet, 0, 8);
     return true;
   }
 

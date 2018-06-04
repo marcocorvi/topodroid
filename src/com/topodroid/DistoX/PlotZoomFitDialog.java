@@ -1,4 +1,4 @@
-/** @file PlotZoomFitDialog.java
+/* @file PlotZoomFitDialog.java
  *
  * @author marco corvi
  * @date jul 2017

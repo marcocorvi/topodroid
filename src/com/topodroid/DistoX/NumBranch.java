@@ -1,4 +1,4 @@
-/** @file NumBranch.java
+/* @file NumBranch.java
  *
  * @author marco corvi
  * @date jan 2013

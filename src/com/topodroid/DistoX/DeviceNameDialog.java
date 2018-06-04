@@ -1,4 +1,4 @@
-/** @file DeviceNameDialog.java
+/* @file DeviceNameDialog.java
  *
  * @author marco corvi
  * @date nov 2011

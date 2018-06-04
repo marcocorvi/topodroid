@@ -1,4 +1,4 @@
-/** @file IItemPicker.java
+/* @file IItemPicker.java
  *
  * @author marco corvi
  * @date dec 2011

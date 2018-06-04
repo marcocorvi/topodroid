@@ -1,4 +1,4 @@
-/** @file FirmwareDialog.java
+/* @file FirmwareDialog.java
  *
  * @author marco corvi
  * @date nov 2011

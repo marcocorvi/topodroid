@@ -1,4 +1,4 @@
-/** @file DrawingPointDialog.java
+/* @file DrawingPointDialog.java
  *
  * @author marco corvi
  * @date june 2012

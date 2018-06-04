@@ -85,7 +85,7 @@ public class GMActivity extends Activity
   private String mCalibName;
   // private ConnHandler mHandler;
 
-  private static final int izons[] = {
+  static final private int izons[] = {
                         R.drawable.iz_toggle,
                         R.drawable.iz_bt,
                         R.drawable.iz_download,
@@ -96,16 +96,16 @@ public class GMActivity extends Activity
                         R.drawable.iz_write,
                         R.drawable.iz_empty
                      };
-  final static int BTN_TOGGLE   = 0;
-  final static int BTN_BT       = 1;
-  final static int BTN_DOWNLOAD = 2;
-  final static int BTN_GROUP    = 3;
-  final static int BTN_COMPUTE  = 4;
-  final static int BTN_COVER    = 5;
-  final static int BTN_READ     = 6;
-  final static int BTN_WRITE    = 7;
+  final static private int BTN_TOGGLE   = 0;
+  final static private int BTN_BT       = 1;
+  final static private int BTN_DOWNLOAD = 2;
+  final static private int BTN_GROUP    = 3;
+  final static private int BTN_COMPUTE  = 4;
+  final static private int BTN_COVER    = 5;
+  final static private int BTN_READ     = 6;
+  final static private int BTN_WRITE    = 7;
 
-  static final int izonsno[] = {
+  static final private int izonsno[] = {
                         R.drawable.iz_toggle_no,
                         R.drawable.iz_bt_no,
                         R.drawable.iz_download_on,
@@ -116,14 +116,14 @@ public class GMActivity extends Activity
                         R.drawable.iz_write_no
                      };
 
-  static final int menus[] = {
+  static final private int menus[] = {
                         R.string.menu_display,
                         R.string.menu_validate,
                         R.string.menu_options, 
                         R.string.menu_help
                      };
 
-  static final int help_icons[] = {
+  static final private int help_icons[] = {
                         R.string.help_toggle,
                         R.string.help_bluetooth,
                         R.string.help_download,
@@ -133,20 +133,20 @@ public class GMActivity extends Activity
                         R.string.help_read,
                         R.string.help_write
                       };
-  static final int help_menus[] = {
+  static final private int help_menus[] = {
                         R.string.help_display_calib,
                         R.string.help_validate,
                         R.string.help_prefs,
                         R.string.help_help
                       };
 
-  private static final int HELP_PAGE = R.string.GMActivity;
+  static final private int HELP_PAGE = R.string.GMActivity;
 
-  static int mNrButton1 = 0;
+  static private int mNrButton1 = 0;
   private Button[]     mButton1;
   private HorizontalListView   mListView;
   private HorizontalButtonView mButtonView1;
-  boolean mEnableWrite;
+  private boolean mEnableWrite;
   private ListView   mMenu;
   private Button     mImage;
   // HOVER
@@ -596,7 +596,7 @@ public class GMActivity extends Activity
 
   // --------------------------------------------------------------
 
-  public void updateDisplay( )
+  private void updateDisplay( )
   {
     // Log.v( TopoDroidApp.TAG, "update Display CID " + mApp.mCID );
     resetTitle( );

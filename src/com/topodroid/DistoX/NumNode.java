@@ -1,4 +1,4 @@
-/** @file NumNode.java
+/* @file NumNode.java
  *
  * @author marco corvi
  * @date jan 2013

@@ -1,4 +1,4 @@
-/** @file SketchDef.java
+/* @file SketchDef.java
  *
  * @author marco corvi
  * @date mar 2013

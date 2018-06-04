@@ -33,9 +33,9 @@ import android.content.res.Resources;
  */
 class BrushManager
 {
-  static final int WIDTH_CURRENT = 1;
-  static final int WIDTH_FIXED   = 1;
-  static final int WIDTH_PREVIEW = 1;
+  static final private int WIDTH_CURRENT = 1;
+  static final private int WIDTH_FIXED   = 1;
+  static final         int WIDTH_PREVIEW = 1;
 
   static SymbolPointLibrary mPointLib = null;
   static SymbolLineLibrary  mLineLib = null;
@@ -190,7 +190,7 @@ class BrushManager
 
   // static Paint makePaint( int color, int width ) { return makePaint( color, width, Paint.Style.STROKE ); }
 
-  static Paint makePaint( int color, int width, Paint.Style style )
+  static private Paint makePaint( int color, int width, Paint.Style style )
   {
     Paint paint = new Paint();
     paint.setDither(true);

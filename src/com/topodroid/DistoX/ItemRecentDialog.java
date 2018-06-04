@@ -1,4 +1,4 @@
-/** @file ItemRecentDialog.java
+/* @file ItemRecentDialog.java
  *
  * @author marco corvi
  * @date 
@@ -254,12 +254,14 @@ class ItemRecentDialog extends MyDialog
 
   private void setTheTitle()
   {
-    StringBuilder sb = new StringBuilder();
-    sb.append( "[" + DrawingPointPath.scaleToStringUC( mScale ) + "] " );
-    sb.append( (ItemDrawer.mRecentPoint[0] != null)? ItemDrawer.mRecentPoint[0].getName() : "-" );
-    sb.append( " | " + ((ItemDrawer.mRecentLine[0] != null)? ItemDrawer.mRecentLine[0].getName() : "-") );
-    sb.append( " | " + ((ItemDrawer.mRecentArea[0] != null)? ItemDrawer.mRecentArea[0].getName() : "-") );
-    setTitle( sb.toString() );
+    String sb = "[" +
+        com.topodroid.DistoX.DrawingPointPath.scaleToStringUC( mScale ) +
+        "] " +
+        ((com.topodroid.DistoX.ItemDrawer.mRecentPoint[ 0 ] != null)? com.topodroid.DistoX.ItemDrawer.mRecentPoint[ 0 ].getName() : "-") +
+        " | " +
+        ((com.topodroid.DistoX.ItemDrawer.mRecentLine[ 0 ] != null)? com.topodroid.DistoX.ItemDrawer.mRecentLine[ 0 ].getName() : "-") +
+        " | " + ((com.topodroid.DistoX.ItemDrawer.mRecentArea[ 0 ] != null)? com.topodroid.DistoX.ItemDrawer.mRecentArea[ 0 ].getName() : "-");
+    setTitle( sb );
   }
 
   private void setFirstPoint( int k )
