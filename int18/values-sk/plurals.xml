@@ -14,6 +14,6 @@
   <plurals name="read_calib_data">
     <item quantity="zero">Žiadne údaje neboli prečítané</item>
     <item quantity="one">Prečítajte si danné (%2$d balíčky)</item>
-    <item quantity="other">Prečítať %1$d dáta (%2$d pacchetti)</item>
+    <item quantity="other">Prečítať %1$d dáta (%2$d balíčky)</item>
   </plurals>
 </resources>
