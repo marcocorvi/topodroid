@@ -59,8 +59,8 @@ class UserManDownload extends AsyncTask< String, Integer, Integer >
         InputStream in = http.getInputStream();
         ZipInputStream zin = new ZipInputStream( in );
         ZipEntry ze = null;
-	File dir = new File( TDPath.getManPath() );
-	if ( ! dir.exists() ) { dir.mkdirs(); }
+       	File dir = new File( TDPath.getManPath() );
+       	if ( ! dir.exists() ) { dir.mkdirs(); }
 
         while ( ( ze = zin.getNextEntry() ) != null ) {
           String name = ze.getName();

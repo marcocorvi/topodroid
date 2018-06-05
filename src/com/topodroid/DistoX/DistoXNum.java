@@ -1314,7 +1314,7 @@ class DistoXNum
             if ( sh1 == null ) { // dangling station: CROSS_END branch --> drop
               // mEndBranches.add( branch );
               if ( also_cross_end ) {
-                branch.setLastNode( st0.node );
+                branch.setLastNode( st0.node ); // st0.node always null
                 branches.add( branch );
               }
               break;

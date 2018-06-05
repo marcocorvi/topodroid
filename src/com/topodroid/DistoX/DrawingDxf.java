@@ -1013,18 +1013,21 @@ class DrawingDxf
 
   static private int toDxf( PrintWriter pw, int handle, DrawingStationName sn, float scale, float xoff, float yoff )
   { // FIXME point scale factor is 0.3
+    if ( sn == null ) return handle;
     return printText( pw, handle, sn.name(),  (sn.cx+xoff)*scale, -(sn.cy+yoff)*scale, 0,
                         STATION_SCALE, "STATION", my_style, xoff, yoff );
   }
 
   static private int toDxf( PrintWriter pw, int handle, DrawingStationPath st, float scale, float xoff, float yoff )
   { // FIXME point scale factor is 0.3
+    if ( st == null ) return handle;
     return printText( pw, handle, st.name(),  (st.cx+xoff)*scale, -(st.cy+yoff)*scale, 0,
                         STATION_SCALE, "STATION", my_style, xoff, yoff );
   }
 
   static private int toDxf( PrintWriter pw, int handle, DrawingPointPath point, float scale, float xoff, float yoff )
   { // FIXME point scale factor is 0.3
+    if ( point == null ) return handle;
     if ( point.mPointType == BrushManager.getPointLabelIndex() ) {
       DrawingLabelPath label = (DrawingLabelPath)point;
       return printText( pw, handle, label.mPointText,  (point.cx+xoff)*scale, -(point.cy+yoff)*scale, (float)label.mOrientation,
@@ -1046,6 +1049,7 @@ class DrawingDxf
 
   static private int toDxf( PrintWriter pw, int handle, DrawingLinePath line, float scale, float xoff, float yoff )
   {
+    if ( line == null ) return handle;
     String layer = "L_" + BrushManager.mLineLib.getSymbolThName( line.lineType() ).replace(':','-');
     int flag = 0;
     if ( mVersion13 && checkSpline( line ) ) {
@@ -1057,6 +1061,7 @@ class DrawingDxf
 
   static private int toDxf( PrintWriter pw, int handle, DrawingAreaPath area, float scale, float xoff, float yoff )
   {
+    if ( area == null ) return handle;
     // Log.v("DistoX", "area size " + area.size() );
     String layer = "A_" + BrushManager.mAreaLib.getSymbolThName( area.areaType() ).replace(':','-');
     if ( mVersion13 && checkSpline( area ) ) {

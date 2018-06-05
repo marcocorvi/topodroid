@@ -72,6 +72,6 @@ class MagDate
     int temp = 0; /*Total number of days */
     for ( int i = 1; i <= month; i++) temp += MonthDays[i - 1];
     temp += day;
-    return (double)( year + (temp - 1) / yds );
+    return ( year + (temp - 1) / yds );
   }
 }

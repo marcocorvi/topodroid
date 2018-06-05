@@ -45,7 +45,7 @@ class MyDialog extends Dialog
       requestWindowFeature(Window.FEATURE_NO_TITLE);
     }
     setContentView( layout_resource );
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT ); // NullPointerException
     if ( title_resource != -1 ) {
       setTitle( title_resource );
     }
@@ -57,7 +57,7 @@ class MyDialog extends Dialog
       requestWindowFeature(Window.FEATURE_NO_TITLE);
     }
     setContentView( layout_resource );
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT ); // NullPointerException
     if ( title != null ) {
       setTitle( title );
     }
@@ -69,7 +69,7 @@ class MyDialog extends Dialog
       requestWindowFeature(Window.FEATURE_NO_TITLE);
     }
     setContentView( v );
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT ); // NullPointerException
     if ( title_resource != -1 ) {
       setTitle( title_resource );
     }

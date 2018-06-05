@@ -799,7 +799,7 @@ class CalibAlgoMin extends CalibAlgo
       computeBearingAndClinoRad( gr[i], mr[i] );
       Vector v1 = new Vector( b0, c0 );
       float e = v1.minus(vx).Length();
-      if ( errors != null ) errors[i] = (float)e;
+      if ( errors != null ) errors[i] = e;
       // Log.v("DistoX", e + " " + g[i].x + " " + g[i].y + " " + g[i].z );
       mSumCount += 1;
       mSumErrors += e;

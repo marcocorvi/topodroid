@@ -430,7 +430,7 @@ class CalibAlgo
   static byte floatToByteNL( float x )
   {
     float xf = x * TopoDroidUtil.FN; 
-    int v = (int)Math.round( xf ) - 1; 
+    int v = Math.round( xf ) - 1;
     if ( v <= 0 ) v = 0x100 + v;
     return (byte)( v & 0xff );
   }

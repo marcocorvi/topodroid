@@ -817,7 +817,7 @@ public class DeviceActivity extends Activity
   @Override 
   public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id)
   {
-    String item_str = (String) mArrayAdapter.getItem(pos); // "model name addr"
+    String item_str = mArrayAdapter.getItem(pos); // "model name addr"
     if ( item_str == null || item_str.equals("X000") ) return true;
     String vals[] = item_str.split(" ", 3);
     String address = vals[2]; // address or nickname

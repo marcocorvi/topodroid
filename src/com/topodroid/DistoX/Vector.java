@@ -254,7 +254,7 @@ class Vector
     pw.format(Locale.US, "  %.2f %.2f %.2f\n", x, -y, -z );
   }
 
-  /** The plane of a path is: a0*x + b0*y + c0*z = 1
+  /* The plane of a path is: a0*x + b0*y + c0*z = 1
    * There is an unresolved ambiguity: the normal to the plane could be
    * reversed and the plane still be the same.
    * Need to require that the points are traversed righthand wise,

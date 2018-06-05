@@ -1913,26 +1913,28 @@ class DataHelper extends DataSetObservable
    boolean hasSurveyPlot( long sid, String name )
    {
      boolean ret = false;
-     if ( myDB == null ) return ret;
-     Cursor cursor = myDB.query(PLOT_TABLE, new String[] { "id", "name" },
-                                WHERE_SID_NAME, new String[] { Long.toString(sid), name }, 
-                                null, null, "id" );
-     if (cursor.moveToFirst()) ret = true;
-     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+     if ( myDB != null ) {
+       Cursor cursor = myDB.query( PLOT_TABLE, new String[]{ "id", "name" },
+           WHERE_SID_NAME, new String[]{ Long.toString( sid ), name },
+           null, null, "id" );
+       if (cursor.moveToFirst()) ret = true;
+       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+     }
      return ret;
    }
 
    boolean hasSurveyStation( long sid, String start )
    {
      boolean ret = false;
-     if ( myDB == null ) return ret;
-     Cursor cursor = myDB.query(SHOT_TABLE,
-			        new String[] { "id", "fStation", "tStation" },
-                                "surveyId=? and ( fStation=? or tStation=? )",
-                                new String[] { Long.toString(sid), start, start }, 
-                                null, null, "id" );
-     if (cursor.moveToFirst()) ret = true;
-     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+     if ( myDB != null ) {
+       Cursor cursor = myDB.query( SHOT_TABLE,
+           new String[]{ "id", "fStation", "tStation" },
+           "surveyId=? and ( fStation=? or tStation=? )",
+           new String[]{ Long.toString( sid ), start, start },
+           null, null, "id" );
+       if (cursor.moveToFirst()) ret = true;
+       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+     }
      return ret;
    }
 
@@ -3282,19 +3284,20 @@ class DataHelper extends DataSetObservable
   private boolean hasFixedStation( long id, long sid, String station )
   {
     boolean ret = false;
-    if ( myDB == null ) return ret;
-    Cursor cursor = myDB.query( FIXED_TABLE, 
-                            new String[] { "id" },
-                            "surveyId=? and station=? and status=0",  // 0 == TDStatus.NORMAL
-                            new String[] { Long.toString( sid ), station },
-                            null, null, null );
-    if (cursor != null ) {
-      if (cursor.moveToFirst() ) {
-        do {
-          if ( cursor.getLong(0) != id ) ret = true;
-        } while (cursor.moveToNext());
+    if ( myDB != null ) {
+      Cursor cursor = myDB.query( FIXED_TABLE,
+          new String[]{ "id" },
+          "surveyId=? and station=? and status=0",  // 0 == TDStatus.NORMAL
+          new String[]{ Long.toString( sid ), station },
+          null, null, null );
+      if (cursor != null) {
+        if (cursor.moveToFirst()) {
+          do {
+            if (cursor.getLong( 0 ) != id) ret = true;
+          } while (cursor.moveToNext());
+        }
+        if (!cursor.isClosed()) cursor.close();
       }
-      if (!cursor.isClosed()) cursor.close();
     }
     return ret;
   }
@@ -3421,16 +3424,17 @@ class DataHelper extends DataSetObservable
   private boolean hasName( String name, String table )
   {
     boolean ret = false;
-    if ( myDB == null ) return ret;
-    Cursor cursor = myDB.query( table, new String[] { "id" },
-                         "name=?", 
-                         new String[] { name },
-                         null, null, null );
-    if (cursor != null) {
-      if (cursor.moveToFirst() ) {
-        ret = true;
+    if ( myDB != null ) {
+      Cursor cursor = myDB.query( table, new String[]{ "id" },
+          "name=?",
+          new String[]{ name },
+          null, null, null );
+      if (cursor != null) {
+        if (cursor.moveToFirst()) {
+          ret = true;
+        }
+        if (!cursor.isClosed()) cursor.close();
       }
-      if (!cursor.isClosed()) cursor.close();
     }
     return ret;
   }
@@ -3466,14 +3470,15 @@ class DataHelper extends DataSetObservable
    private String getSurveyFieldAsString( long sid, String attr )
    {
      String ret = null;
-     if ( myDB == null ) return ret;
-     Cursor cursor = myDB.query( SURVEY_TABLE, new String[] { attr },
-                          "id=?", new String[] { Long.toString(sid) },
-                          null, null, null );
-     if (cursor.moveToFirst() ) {
-       ret = cursor.getString(0);
+     if ( myDB != null ) {
+       Cursor cursor = myDB.query( SURVEY_TABLE, new String[]{ attr },
+           "id=?", new String[]{ Long.toString( sid ) },
+           null, null, null );
+       if (cursor.moveToFirst()) {
+         ret = cursor.getString( 0 );
+       }
+       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      }
-     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return ret;
    }
 
@@ -4177,7 +4182,7 @@ class DataHelper extends DataSetObservable
        ContentValues cv = new ContentValues();
        cv.put( "surveyId",  sid );
        cv.put( "name",      name );
-       cv.put( "comment",   (comment == null)? "" : comment );
+       cv.put( "comment",   comment );
        cv.put( "flag",      flag );
        ret = doInsert( STATION_TABLE, cv, "station insert" );
      }
@@ -4188,15 +4193,16 @@ class DataHelper extends DataSetObservable
    CurrentStation getStation( long sid, String name )
    {
      CurrentStation cs = null;
-     if ( myDB == null ) return cs;
-     Cursor cursor = myDB.query( STATION_TABLE, 
-                            new String[] { "name", "comment", "flag" },
-                            "surveyId=? and name=?", new String[] { Long.toString( sid ), name },
-                            null, null, null );
-     if (cursor.moveToFirst()) {
-       cs = new CurrentStation( cursor.getString(0), cursor.getString(1), cursor.getLong(2) );
+     if ( myDB != null ) {
+       Cursor cursor = myDB.query( STATION_TABLE,
+           new String[]{ "name", "comment", "flag" },
+           "surveyId=? and name=?", new String[]{ Long.toString( sid ), name },
+           null, null, null );
+       if (cursor.moveToFirst()) {
+         cs = new CurrentStation( cursor.getString( 0 ), cursor.getString( 1 ), cursor.getLong( 2 ) );
+       }
+       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      }
-     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return cs;
    }
 

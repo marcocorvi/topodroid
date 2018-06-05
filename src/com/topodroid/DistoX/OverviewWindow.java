@@ -321,13 +321,13 @@ public class OverviewWindow extends ItemDrawer
       for ( NumShot sh : shots ) {
         NumStation st1 = sh.from;
         NumStation st2 = sh.to;
-        addFixedLine( sh.getFirstBlock(), (float)(st1.e), (float)(st1.s), (float)(st2.e), (float)(st2.s), false );
+        addFixedLine( sh.getFirstBlock(), st1.e, st1.s, st2.e, st2.s, false );
                       // xoff, yoff, false );
       }
       for ( NumSplay sp : splays ) {
         if ( Math.abs( sp.getBlock().mClino ) < TDSetting.mSplayVertThrs ) {
           NumStation st = sp.from;
-          addFixedLine( sp.getBlock(), (float)(st.e), (float)(st.s), (float)(sp.e), (float)(sp.s), true );
+          addFixedLine( sp.getBlock(), st.e, st.s, sp.e, sp.s, true );
                         // xoff, yoff, true );
         }
       }
@@ -342,13 +342,13 @@ public class OverviewWindow extends ItemDrawer
         if  ( ! sh.mIgnoreExtend ) {
           NumStation st1 = sh.from;
           NumStation st2 = sh.to;
-          addFixedLine( sh.getFirstBlock(), (float)(st1.h), (float)(st1.v), (float)(st2.h), (float)(st2.v), false );
+          addFixedLine( sh.getFirstBlock(), st1.h, st1.v, st2.h, st2.v, false );
                         // xoff, yoff, false );
         }
       } 
       for ( NumSplay sp : splays ) {
         NumStation st = sp.from;
-        addFixedLine( sp.getBlock(), (float)(st.h), (float)(st.v), (float)(sp.h), (float)(sp.v), true );
+        addFixedLine( sp.getBlock(), st.h, st.v, sp.h, sp.v, true );
                       // xoff, yoff, true );
       }
       for ( NumStation st : stations ) {
@@ -678,7 +678,7 @@ public class OverviewWindow extends ItemDrawer
   private float mSave0X, mSave0Y;
   private float mSave1X, mSave1Y;
 
-    
+  /*
   private void dumpEvent( MotionEventWrap ev )
   {
     String name[] = { "DOWN", "UP", "MOVE", "CANCEL", "OUTSIDE", "PTR_DOWN", "PTR_UP", "7?", "8?", "9?" };
@@ -698,7 +698,7 @@ public class OverviewWindow extends ItemDrawer
     sb.append( "]" );
     // TDLog.Log(TDLog.LOG_PLOT, sb.toString() );
   }
-  
+  */
 
   private float spacing(MotionEventWrap ev)
   {

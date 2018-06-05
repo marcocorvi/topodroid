@@ -19,6 +19,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
 
+// import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
 
 class CalibCBlockAdapter extends ArrayAdapter< CalibCBlock >
@@ -37,12 +39,13 @@ class CalibCBlockAdapter extends ArrayAdapter< CalibCBlock >
   CalibCBlock get( int pos ) { return items.get(pos); }
  
   @Override
-  public View getView( int pos, View convertView, ViewGroup parent )
+  // @NonNull
+  public View getView( int pos, View convertView, /* @NonNull */ ViewGroup parent )
   {
     View v = convertView;
     if ( v == null ) {
       LayoutInflater li = (LayoutInflater)context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-      v = li.inflate( R.layout.row, parent, false ); // FIXME NULL_PTR
+      v = li.inflate( R.layout.row, parent, false ); // FIXME inflate may produce NUllPointerException
     }
 
     CalibCBlock b = items.get( pos );

@@ -361,7 +361,7 @@ class DBlock
     if ( show_id ) pw.format("%d ", mId );
     pw.format(Locale.US, "<%s-%s> %.2f %.1f %.1f [%c",
       mFrom, mTo,
-      mLength*ul, mBearing*ua, mClino*ua, mExtendTag[ (int)(mExtend) + 1 ] );
+      mLength*ul, mBearing*ua, mClino*ua, mExtendTag[ mExtend + 1 ] );
     formatFlag( pw );
     if ( mWithPhoto ) { pw.format("#"); }
     formatComment( pw );

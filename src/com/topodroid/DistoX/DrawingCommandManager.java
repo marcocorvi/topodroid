@@ -1068,7 +1068,7 @@ class DrawingCommandManager
   {
     // Log.v("DistoX", "add user station " + path.mName );
     synchronized( mUserStations ) {
-      mUserStations.add( (DrawingStationPath)path );
+      mUserStations.add( path );
     }
   }
 

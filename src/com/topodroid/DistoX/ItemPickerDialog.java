@@ -135,7 +135,7 @@ class ItemPickerDialog extends MyDialog
     
     if ( TDSetting.mPickerType == TDSetting.PICKER_GRID || TDSetting.mPickerType == TDSetting.PICKER_GRID_3 ) {
       setContentView(R.layout.item_picker2_dialog);
-      getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT );
+      getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT ); // NullPointerException
 
       mGrid  = (GridView) findViewById(R.id.item_grid);
       mGridL = (GridView) findViewById(R.id.item_grid_line);
@@ -160,7 +160,7 @@ class ItemPickerDialog extends MyDialog
       mList = null;
     } else { // PICKER_LIST || PICKER_RECENT
       setContentView(R.layout.item_picker_dialog);
-      getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT );
+      getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT ); // NullPointerException
 
       // * mList = (ListView) findViewById(R.id.item_list);
       mList = (GridView) findViewById(R.id.item_list);
@@ -686,7 +686,7 @@ class ItemPickerDialog extends MyDialog
     if ( mRecent != null ) { // this select the symbol and closes the dialog
       try {
         ItemButton iv = (ItemButton)view;
-        if ( iv != null ) {
+        // if ( iv != null ) { // always true
           for ( int k=0; k<TDSetting.mRecentNr; ++k ) {
             if ( iv == mRecent[k] ) {
               setRecent( k );
@@ -694,8 +694,10 @@ class ItemPickerDialog extends MyDialog
               return;
             }
           }
-        }
-      } catch ( ClassCastException e ) { } // it is ok
+        // }
+      } catch ( ClassCastException e ) {
+        TDLog.Error("View is not ItemButton"); // it is ok
+      }
     }
      
     // dismiss();

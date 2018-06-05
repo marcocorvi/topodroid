@@ -107,7 +107,7 @@ class DistoXStationName
     // if name is numeric
     // Log.v( TopoDroidApp.TAG, "incrementing " + name );
 
-    if ( name != null && name.length() > 0 ) {
+    if ( name != null ) {
       int len = name.length();
       if ( len > 0 ) {
         char ch = name.charAt( len - 1 );

@@ -795,14 +795,14 @@ class DrawingSurface extends SurfaceView
   void hideStationSplays( String station )
   {
     if ( station == null ) return;
-    if ( mSplayStationsOn.contains( station ) ) mSplayStationsOn.remove( station );
+    /* if ( mSplayStationsOn.contains( station ) ) */ mSplayStationsOn.remove( station );
     if ( ! mSplayStationsOff.contains( station ) ) mSplayStationsOff.add( station );
   }
 
   void showStationSplays( String station )
   {
     if ( station == null ) return;
-    if ( mSplayStationsOff.contains( station ) ) mSplayStationsOff.remove( station );
+    /* if ( mSplayStationsOff.contains( station ) ) */ mSplayStationsOff.remove( station );
     if ( ! mSplayStationsOn.contains( station ) ) mSplayStationsOn.add( station );
   }
   

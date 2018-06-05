@@ -305,7 +305,7 @@
     <string name="menu_options">NASTAVENIA</string>
     <string name="menu_overview">PREHĽAD</string>
     <string name="menu_pair">SPÁROVAŤ</string>
-    string name="menu_palette">PALETA</string> 
+    <string name="menu_palette">PALETA</string> 
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SNÍMAČ</string>
     <string name="menu_scan">SKENOVAŤ</string>

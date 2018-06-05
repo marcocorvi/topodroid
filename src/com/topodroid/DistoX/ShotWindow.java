@@ -291,11 +291,11 @@ public class ShotWindow extends Activity
         TDToast.make( mActivity, getResources().getQuantityString(R.plurals.read_data, nr, nr ) );
         // TDToast.make( mActivity, " read_data: " + nr );
       }
-    } else if ( nr < 0 /* && nr > -5 */ ) {
+    } else { // ( nr < 0 )
       if ( toast ) {
-	if ( nr <= -5 ) {
+        if ( nr <= -5 ) {
           TDToast.make( mActivity, getString(R.string.read_fail_with_code) + nr );
-	} else {
+	       } else {
           TDToast.make( mActivity, mApp.DistoXConnectionError[ -nr ] );
         }
       }

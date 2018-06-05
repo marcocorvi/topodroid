@@ -37,7 +37,7 @@ class ConnectionHandler extends Handler
                        // it is increased after the ack
    private byte mAck[]; // ACK buffer
    // ConcurrentLinkedQueue< byte[] > mBufferQueue;
-   private ConnectionQueue mBufferQueue;
+   private final ConnectionQueue mBufferQueue;
    private TopoDroidApp mApp;
    private BluetoothDevice mDevice;
    private boolean mClient;   // whether this TopoDroid initiated the connection

@@ -287,11 +287,12 @@ class TopoDroidComm
     boolean ret = false;
     if ( mProtocol != null ) {
       for (int k=0; k<3 && ! ret; ++k ) { // try three times
-        ret |= mProtocol.sendCommand( (byte)cmd ); 
+        ret = mProtocol.sendCommand( (byte)cmd );
         // TDLog.Log( TDLog.LOG_COMM, "sendCommand " + cmd + " " + k + "-ret " + ret );
         try {
           Thread.sleep( TDSetting.mWaitCommand );
         } catch ( InterruptedException e ) {
+          // TDLog.Log( TDLog.LOG_PROTO, "SendCommand sleep interrupted"); // it is ok
         }
       }
     }

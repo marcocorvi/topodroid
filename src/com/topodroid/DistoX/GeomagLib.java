@@ -709,7 +709,7 @@ class GeomagLib
           int index1 = WMMcoeff.index(n-1,m); // (n - 1) * n / 2 + m;
           legendre.Pcup[index] = x * legendre.Pcup[index1];
           legendre.dPcup[index] = x * legendre.dPcup[index1] - z * legendre.Pcup[index1];
-        } else if (n > 1 && n != m) {
+        } else if (n > 1 /* && n != m */ ) { // n != m true
           int index1 = WMMcoeff.index(n-2,m); // (n - 2) * (n - 1) / 2 + m;
           int index2 = WMMcoeff.index(n-1,m); // (n - 1) * n / 2 + m;
           if (m > n - 2) {

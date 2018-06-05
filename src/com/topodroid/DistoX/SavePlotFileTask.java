@@ -93,15 +93,19 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
 
       // first pass: export
       if ( mSuffix == PlotSave.EXPORT ) {
-        File file2 = new File( TDPath.getTh2FileWithExt( mFullName ) );
-        DrawingIO.exportTherion( // mApp.mData, mApp.mSID, 
-                                 mSurface, mType, file2, mFullName, PlotInfo.projName[mType], mProjDir );
+        if ( mSurface != null ) {
+          File file2 = new File( TDPath.getTh2FileWithExt( mFullName ) );
+          DrawingIO.exportTherion( // mApp.mData, mApp.mSID,
+              mSurface, mType, file2, mFullName, PlotInfo.projName[ mType ], mProjDir );
+        }
       } else if ( mSuffix == PlotSave.SAVE ) {
         switch ( TDSetting.mExportPlotFormat ) {
           case TDConst.DISTOX_EXPORT_TH2:
-            File file2 = new File( TDPath.getTh2FileWithExt( mFullName ) );
-            DrawingIO.exportTherion( // mApp.mData, mApp.mSID,
-                                     mSurface, mType, file2, mFullName, PlotInfo.projName[mType], mProjDir );
+            if ( mSurface != null ) {
+              File file2 = new File( TDPath.getTh2FileWithExt( mFullName ) );
+              DrawingIO.exportTherion( // mApp.mData, mApp.mSID,
+                  mSurface, mType, file2, mFullName, PlotInfo.projName[ mType ], mProjDir );
+            }
             break;
           case TDConst.DISTOX_EXPORT_DXF:
             mParent.doSaveWithExt( mType, mFullName, "dxf", false );
@@ -117,18 +121,20 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
               // fall-through
             }
           case TDConst.DISTOX_EXPORT_PNG:
-            Bitmap bitmap = mSurface.getBitmap( mType );
-            if ( bitmap == null ) {
-              TDLog.Error( "cannot save PNG: null bitmap" );
-              ret1 = false;
-            } else {
-              float scale = mSurface.getBitmapScale();
-	      if ( scale > 0 ) {
-                new ExportBitmapToFile( mContext, bitmap, scale, mFullName, false ).execute();
-	      } else {
-                TDLog.Error( "cannot save PNG: negative scale" );
-		ret1 = false;
-	      }
+            if ( mSurface != null ) {
+              Bitmap bitmap = mSurface.getBitmap( mType );
+              if (bitmap == null) {
+                TDLog.Error( "cannot save PNG: null bitmap" );
+                ret1 = false;
+              } else {
+                float scale = mSurface.getBitmapScale();
+                if (scale > 0) {
+                  new ExportBitmapToFile( mContext, bitmap, scale, mFullName, false ).execute();
+                } else {
+                  TDLog.Error( "cannot save PNG: negative scale" );
+                  ret1 = false;
+                }
+              }
             }
             break;
         }
@@ -161,7 +167,9 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         if ( mSuffix == PlotSave.CREATE ) {
           DrawingIO.exportDataStream( mPaths, mType, file1, mFullName, mProjDir );
         } else {
-          DrawingIO.exportDataStream( mSurface, mType, file1, mFullName, mProjDir );
+          if ( mSurface != null ) {
+            DrawingIO.exportDataStream( mSurface, mType, file1, mFullName, mProjDir );
+          }
         }
 
         if ( isCancelled() ) {

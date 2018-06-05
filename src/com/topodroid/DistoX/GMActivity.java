@@ -557,7 +557,7 @@ public class GMActivity extends Activity
       if ( toast ) {
         TDToast.make( this, getResources().getQuantityString(R.plurals.read_calib_data, nr/2, nr/2, nr ) );
       }
-    } else if ( nr < 0 ) {
+    } else { // ( nr < 0 )
       if ( toast ) {
         // TDToast.make( this, getString(R.string.read_fail_with_code) + nr );
         TDToast.make( this, mApp.DistoXConnectionError[ -nr ] );

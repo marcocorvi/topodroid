@@ -118,11 +118,8 @@ class FirmwareDialog extends MyDialog
       case R.id.firmware_ok:
         String filename = null;
         if ( mETfile.getText() != null ) { 
-          filename = mETfile.getText().toString();
-          if ( filename != null ) {
-            filename = filename.trim();
-            if ( filename.length() == 0 ) filename = null;
-          }
+          filename = mETfile.getText().toString().trim();
+          if ( filename.length() == 0 ) filename = null;
         }
         if ( filename == null ) {
           TDToast.make( mParent, R.string.firmware_file_missing );

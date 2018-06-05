@@ -1606,18 +1606,18 @@ class TDSetting
     int idx = Integer.parseInt( man ); // no throw
     if ( idx > 0 && idx < 5 ) { 
       if ( download && FeatureChecker.checkInternet( app ) ) { // download user manual 
-	int[] res = { 
-	  0,
-	  R.string.user_man_fr,
-	  R.string.user_man_es,
-	  R.string.user_man_it,
-	  R.string.user_man_ru
-	};
+       	int[] res = {
+	         0,
+	         R.string.user_man_fr,
+	         R.string.user_man_es,
+	         R.string.user_man_it,
+	         R.string.user_man_ru
+	       };
         String url = app.getResources().getString( res[idx] );
-	if ( url != null && url.length() > 0 ) {
+       	if ( url != null && url.length() > 0 ) {
           // try do download the zip
           (new UserManDownload( app, url )).execute();
-	}
+	       }
       }
       return true;
     }

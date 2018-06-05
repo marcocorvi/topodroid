@@ -41,7 +41,7 @@ class ListItemAdapter extends ArrayAdapter< String >
     View v = convertView;
     if ( v == null ) {
       LayoutInflater li = (LayoutInflater)context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-      v = li.inflate( R.layout.row, parent, false );
+      v = li.inflate( R.layout.row, parent, false ); // NullPointerException
     }
 
     String b = getItem( pos );

@@ -161,13 +161,13 @@ class Archiver
       app.writeManifestFile();
       addEntry( zos, new File(pathname) );
 
-      ret = true;
+      // ret = true;
     } catch ( FileNotFoundException e ) {
-      // FIXME
+      ret = false;
     // } catch ( IOException e ) {
     //   // FIXME
     } finally {
-      if ( zos != null ) try { zos.close(); } catch ( IOException e ) { }
+      if ( zos != null ) try { zos.close(); } catch ( IOException e ) { TDLog.Error("ZIP close error"); }
       TopoDroidUtil.deleteFile( TDPath.getSqlFile() );
     }
     return ret;
@@ -277,7 +277,7 @@ class Archiver
             pathname = TDPath.getJpgFile( surveyname, ze.getName() );
           } else {
             // unexpected file type
-            pathname = null; //
+            // pathname = null; // already null
           }
           TDLog.Log( TDLog.LOG_ZIP, "Zip filename \"" + pathname + "\"" );
           if ( pathname != null ) {

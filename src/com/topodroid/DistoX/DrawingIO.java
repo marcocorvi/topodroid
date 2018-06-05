@@ -757,7 +757,7 @@ class DrawingIO
               break;
             default:
               todo = false;
-              TDLog.Error( "ERROR bad input (1) " + (int)what );
+              TDLog.Error( "ERROR bad input (1) " + what );
               break;
           } 
           if ( path != null && in_scrap ) {
@@ -1096,10 +1096,10 @@ class DrawingIO
                       int type, BufferedWriter out, String scrap_name, String proj_name, int project_dir,
         RectF bbox,
         DrawingPath north,
-        List<ICanvasCommand> cstack,
-        List<DrawingStationPath> userstations,
-        List<DrawingStationName> stations,
-        List<DrawingPath> splays )
+        final List<ICanvasCommand> cstack,
+        final List<DrawingStationPath> userstations,
+        final List<DrawingStationName> stations,
+        final List<DrawingPath> splays )
   {
     try { 
       exportTherionHeader1( out, type, bbox );
@@ -1157,7 +1157,7 @@ class DrawingIO
         float th = TDConst.TO_THERION;
         StringWriter sw = new StringWriter();
         PrintWriter pw  = new PrintWriter(sw);
-	synchronized( splays ) {
+	       synchronized( splays ) {
           for ( DrawingPath splay : splays ) {
             // if ( bbox.left > splay.right  || bbox.right  < splay.left ) continue;
             // if ( bbox.top  > splay.bottom || bbox.bottom < splay.top  ) continue;
@@ -1340,7 +1340,7 @@ class DrawingIO
               break;
             default:
               todo = false;
-              TDLog.Error( "ERROR bad input (2) " + (int)what );
+              TDLog.Error( "ERROR bad input (2) " + what );
               break;
           } 
         }
@@ -1444,7 +1444,7 @@ class DrawingIO
               break;
             default:
               todo = false;
-              TDLog.Error( "ERROR bad input (2) " + (int)what );
+              TDLog.Error( "ERROR bad input (2) " + what );
               break;
           } 
         }

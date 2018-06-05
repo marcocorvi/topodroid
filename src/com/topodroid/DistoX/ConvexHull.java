@@ -73,13 +73,13 @@ class ConvexHull
     // first two triangles mV1-mV2-pmax mV2-mV1-p[0] 
     // use temporary triangle array
     ArrayList<CHTriangle> tri = new ArrayList<>();
-    Vector p = (Vector) mPts.get(0);
+    Vector p = mPts.get(0);
     tri.add( new CHTriangle( mV1, mV2, p ) );
     tri.add( new CHTriangle( mV2, mV1, p ) );
 
     ArrayList< VectorPair > vp_to_add = new ArrayList<>();
     for ( int h = 1; h<mPts.size(); ++h ) {
-      p = (Vector) mPts.get(h);
+      p = mPts.get(h);
      
       vp_to_add.clear();
       for ( CHTriangle t : tri ) {
@@ -93,9 +93,9 @@ class ConvexHull
       }
       // mark mirror vector-pairs invalid
       for ( int n1 = 0; n1 < vp_to_add.size(); ++n1 ) {
-        VectorPair vp1 = (VectorPair) vp_to_add.get( n1 );
+        VectorPair vp1 = vp_to_add.get( n1 );
         for ( int n2 = n1+1; n2 < vp_to_add.size(); ++n2 ) {
-          VectorPair vp2 = (VectorPair) vp_to_add.get( n2 );
+          VectorPair vp2 = vp_to_add.get( n2 );
           if ( vp1.mV1 == vp2.mV2 && vp1.mV2 == vp2.mV1 ) {
             vp1.valid = false;
             vp2.valid = false;

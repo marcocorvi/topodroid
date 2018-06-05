@@ -128,7 +128,7 @@ class MyKeyboard // FIXME DIALOG extends Dialog
           // Log.v(TAG, "onFocusChange() " + hasFocus + " " + e.getText().toString() );
           if ( hasFocus ) {
             InputMethodManager imm = (InputMethodManager)kbd.getContext().getSystemService( Context.INPUT_METHOD_SERVICE );
-            imm.hideSoftInputFromWindow( e.getWindowToken(), 0 );
+            imm.hideSoftInputFromWindow( e.getWindowToken(), 0 ); // NullPointerException
             if ( kbd.setEditText( e ) ) {
               // e.setBackgroundResource( R.drawable.textfield_selected );
               kbd.show( e );

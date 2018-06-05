@@ -557,7 +557,7 @@ class ShotDialog extends MyDialog
     }
 
     String comment = mETcomment.getText().toString();
-    if ( comment != null ) mBlk.mComment = comment;
+    if ( comment != null ) mBlk.mComment = comment.trim();
 
     boolean renumber  = false;
     boolean highlight = false;

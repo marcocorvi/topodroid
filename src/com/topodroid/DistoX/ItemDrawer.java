@@ -127,7 +127,7 @@ public class ItemDrawer extends Activity
     boolean first = false;
     if ( mRecentPoint[0] != null ) {
       StringBuilder points = new StringBuilder( );
-      first = false;
+      // first = false;
       for ( int k=NR_RECENT-1; k>=0; --k ) {
         if ( mRecentPoint[k] != null ) {
           if ( first ) {

@@ -41,7 +41,7 @@ class PhotoAdapter extends ArrayAdapter< PhotoInfo >
     View v = convertView;
     if ( v == null ) {
       LayoutInflater li = (LayoutInflater)context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-      v = li.inflate( R.layout.row, parent, false );
+      v = li.inflate( R.layout.row, parent, false ); // NullPointerException
     }
 
     PhotoInfo b = items.get( pos );

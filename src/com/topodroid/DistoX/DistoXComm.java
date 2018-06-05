@@ -211,8 +211,8 @@ class DistoXComm extends TopoDroidComm
       } catch ( IOException e ) {
         TDLog.Error( "close socket IOexception " + e.getMessage() );
         // TDLog.LogStackTrace( e );
-      } finally {
-        mBTConnected = false;
+      // } finally {
+      //   mBTConnected = false;
       }
     }
     mBTConnected = false;
