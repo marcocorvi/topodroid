@@ -16,8 +16,8 @@
     <string name="AREA">ОБЛАСТЬ</string>
     <string name="HELP">ПОМОЩЬ</string>
     <string name="STATION">ПИКЕТ </string>
-    <!-- TODO string name="UP">UPWARD</string -->
-    <!-- TODO string name="DOWN">DOWNWARD</string -->
+    <string name="UP">ВВЕРХ</string>
+    <string name="DOWN">ВНИЗ</string>
 
     <string name="cut">ВЫРЕЗАТЬ</string>
     <string name="copy">КОПИРОВАТЬ</string>
