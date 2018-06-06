@@ -446,6 +446,7 @@ public class TopoDroidApp extends Application
                     (( ret[0] & 0x08 ) != 0)? R.string.device_status_calib : R.string.device_status_normal );
     info.mSilent  = getResources().getString(
                     (( ret[0] & 0x10 ) != 0)? R.string.device_status_silent_on : R.string.device_status_silent_off );
+    resetComm();
     return info;
   }
 
@@ -472,17 +473,22 @@ public class TopoDroidApp extends Application
     //     String.format( getResources().getString( R.string.device_memory ), ret[0], ret[1] ) );
     // }
 
+    resetComm();
     return info;
   }
 
   String readHeadTail( String address, byte[] command, int[] head_tail )
   {
-    return mComm.readHeadTail( address, command, head_tail );
+    String ret = mComm.readHeadTail( address, command, head_tail );
+    resetComm();
+    return ret;
   }
 
   int swapHotBit( String address, int from, int to ) 
   {
-    return mComm.swapHotBit( address, from, to );
+    int ret = mComm.swapHotBit( address, from, to );
+    resetComm();
+    return ret;
   }
 
   // FIXME to disappear ...
@@ -720,36 +726,47 @@ public class TopoDroidApp extends Application
       TDToast.make( context, R.string.write_ok );
     }
     if ( b != null ) b.setEnabled( true );
+    resetComm();
   }
 
   // called by CalibReadTask.onPostExecute
   boolean readCalibCoeff( byte[] coeff )
   {
     if ( mComm == null || mDevice == null ) return false;
-    return mComm.readCoeff( mDevice.mAddress, coeff );
+    boolean ret = mComm.readCoeff( mDevice.mAddress, coeff );
+    resetComm();
+    return ret;
   }
 
   // called by CalibToggleTask.doInBackground
   boolean toggleCalibMode( )
   {
     if ( mComm == null || mDevice == null ) return false;
-    return mComm.toggleCalibMode( mDevice.mAddress, mDevice.mType );
+    boolean ret = mComm.toggleCalibMode( mDevice.mAddress, mDevice.mType );
+    resetComm();
+    return ret;
   }
 
   byte[] readMemory( String address, int addr )
   {
     if ( mComm == null || isCommConnected() ) return null;
-    return mComm.readMemory( address, addr );
+    byte[] ret = mComm.readMemory( address, addr );
+    resetComm();
+    return ret;
   }
 
   int readX310Memory( String address, int h0, int h1, ArrayList< MemoryOctet > memory )
   {
-    return mComm.readX310Memory( address, h0, h1, memory );
+    int ret = mComm.readX310Memory( address, h0, h1, memory );
+    resetComm();
+    return ret;
   }
 
   int readA3Memory( String address, int h0, int h1, ArrayList< MemoryOctet > memory )
   {
-    return mComm.readA3Memory( address, h0, h1, memory );
+    int ret = mComm.readA3Memory( address, h0, h1, memory );
+    resetComm();
+    return ret;
   }
 
   // ------------------------------------------------------------------

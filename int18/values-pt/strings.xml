@@ -153,6 +153,8 @@
     <!-- UNUSED string name="sketch_saving">Salvando croqui &#8230; por favor espere &#8230;</string -->
     <string name="MT_points_none">Nenhum ponto MobileTopographer</string>
  
+    <!-- TODO string name="pleasewait">Please wait</string -->
+    <!-- TODO string name="processing">processing &#8230;</string -->
 
     <!-- UNUSED string name="head_tail">Memória: </string -->
     <string name="head_tail_failed">Falha ao ler o índice de memória da DistoX</string>

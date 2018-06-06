@@ -158,6 +158,9 @@
     <!-- UNUSED string name="sketch_saving">Skizze speichern, bitte warten&#8230;</string -->
     <string name="MT_points_none">Keine MobileTopographer Punkte</string>
 
+    <!-- TODO string name="pleasewait">Please wait</string -->
+    <!-- TODO string name="processing">processing &#8230;</string -->
+
 <!-- MORE DEVICE STRINGS -->
     <!-- UNUSED string name="head_tail">Memory: </string -->
     <string name="head_tail_failed">Fehler beim DistoX Speicherindex lesen</string>

@@ -153,6 +153,8 @@
     <!-- UNUSED string name="sketch_saving">Записване на скица… Моля изчакайте…</string -->
     <string name="MT_points_none">Няма точки на MobileTopographer</string>
 
+    <!-- TODO string name="pleasewait">Please wait</string -->
+    <!-- TODO string name="processing">processing &#8230;</string -->
 
     <!-- UNUSED string name="head_tail">Памет: </string -->
     <string name="head_tail_failed">Неуспешен прочит на индекс от DistoX паметта</string>

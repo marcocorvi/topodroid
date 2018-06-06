@@ -154,6 +154,8 @@
     <!-- UNUSED string name="sketch_saving">Збереження абрису &#8230; обождите&#8230;</string -->
     <string name="MT_points_none">Немає точки MobileTopographer</string>
 
+    <!-- TODO string name="pleasewait">Please wait</string -->
+    <!-- TODO string name="processing">processing &#8230;</string -->
 
     <!-- UNUSED string name="head_tail">Пам'ять: </string -->
     <string name="head_tail_failed">Помилка зчитування індекса пам\'яті DistoX</string>

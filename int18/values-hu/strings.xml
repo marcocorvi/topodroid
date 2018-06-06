@@ -153,6 +153,8 @@
     <!-- UNUSED string name="sketch_saving">Saving sketch &#8230; please wait &#8230;</string -->
     <string name="MT_points_none">Nincs MobileTopographer pont</string>
  
+    <!-- TODO string name="pleasewait">Please wait</string -->
+    <!-- TODO string name="processing">processing &#8230;</string -->
 
     <!-- UNUSED string name="head_tail">Memory: </string -->
     <string name="head_tail_failed">Nem sikerült kiolvasni a DistoX memória indexét</string>

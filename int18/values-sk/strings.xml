@@ -153,6 +153,9 @@
     <!-- UNUSED string name="sketch_saving">Salvataggio disegno &#8230; attendi &#8230;</string -->
     <string name="MT_points_none">Chýbajúci bod GPS</string>
 
+    <!-- TODO string name="pleasewait">Please wait</string -->
+    <!-- TODO string name="processing">processing &#8230;</string -->
+
     <!-- UNUSED string name="head_tail">Memoria: </string -->
     <string name="head_tail_failed">Neúspešné čitanie pamäte DistoX zoznamu</string>
     <string name="head_tail_store_failed">Neúspešné uloženie pamäte DistoX zoznamu</string>

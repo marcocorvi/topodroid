@@ -27,7 +27,10 @@ abstract class ImportTask extends AsyncTask< String, Integer, Long >
     super();
     mMain = main;
     mApp  = main.getApp();
-    mProgress = ProgressDialog.show( main, "Please wait", "processing ...", true );
+    mProgress = ProgressDialog.show( main,
+		    mApp.getResources().getString(R.string.pleasewait),
+		    mApp.getResources().getString(R.string.processing),
+		    true );
   }
 
   @Override

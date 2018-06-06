@@ -153,6 +153,8 @@
     <!-- UNUSED string name="sketch_saving">保存草图中 ... 请等待...</string -->
     <string name="MT_points_none">未定位</string>
  
+    <!-- TODO string name="pleasewait">Please wait</string -->
+    <!-- TODO string name="processing">processing &#8230;</string -->
 
     <!-- UNUSED string name="head_tail">存储器: </string -->
     <string name="head_tail_failed">DistoX存储器指针读取失败</string>

@@ -154,6 +154,8 @@
 <!-- UNUSED string name="sketch_saving">Exportation de dessin ... Patientez ...</string -->
 <string name="MT_points_none">Pas de point Mobile Topographer</string>
 
+    <!-- TODO string name="pleasewait">Please wait</string -->
+    <!-- TODO string name="processing">processing &#8230;</string -->
 
 <!-- UNUSED string name="head_tail">Mémoire : </string -->
 <string name="head_tail_failed">Échec de lecture de la mémoire du DistoX</string>

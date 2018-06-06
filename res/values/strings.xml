@@ -154,6 +154,8 @@
     <!-- UNUSED string name="sketch_saving">Saving sketch &#8230; please wait &#8230;</string -->
     <string name="MT_points_none">No MobileTopographer point</string>
  
+    <string name="pleasewait">Please wait</string>
+    <string name="processing">processing &#8230;</string>
 
     <!-- UNUSED string name="head_tail">Memory: </string -->
     <string name="head_tail_failed">Failed to read DistoX memory index</string>
