@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string --> 
-    <string name="no_manual">Nie je možné získať používateľský manuál online</string>
+    <string name="no_manual">Nie je možné získať používateľský manuál</string>
     <!-- TODO string name="user_man_ok">Installed user manual translation</string -->
     <!-- TODO string name="user_man_fail">Failed to install user manual translation</string -->
 
     <string name="app_name">TopoDroid</string>
-    <string name="double_back">Opätovným kliknutím na SPAŤ ukončíte aplikáciu</string>
+    <string name="double_back">Opätovným kliknutím tlačidla SPAŤ ukončíte aplikáciu</string>
 
-    <string name="version_ask">Aktualizácia topodoidu na novšiu verziu. \ Chcete preinštalovať nástroj na kreslenie?</string>
+    <string name="version_ask">Chcete nainštalovať kresliace nástroje v.%1$s?\n(Aktuálne v.%2$s)</string>
     <!-- TODO string name="symbols_ask">Install drawing tools v.%1$s?\n(Current v.%2$s)</string -->
 
     <string name="POINT">BOD</string>
@@ -22,7 +22,7 @@
     <string name="cut">VYSTRIHNÚŤ</string>
     <string name="copy">KOPÍROVAŤ</string>
     <string name="paste">PRILEPIŤ</string>
-    <string name="copied">Kopírovať %1$s do clipboard-u</string>
+    <string name="copied">Kopírovať %1$s do pamäte</string>
 
     <string name="memoryA3">DistoX A3 pamäť</string>
     <string name="memoryX310">DistoX X310 pamäť</string>
@@ -605,8 +605,8 @@
     <string name="btn_install">Inštalovať</string>
 
     <string name="symbol_archeo">Archeológia</string>
-    <string name="symbol_bio">Organický</string>
-    <string name="symbol_geo">Geologický</string>
+    <string name="symbol_bio">Organické</string>
+    <string name="symbol_geo">Geológia</string>
     <string name="symbol_karst">Kras</string>
     <string name="symbol_mine">Baníctvo</string>
     <string name="symbol_paleo">Paleontológia</string>
@@ -701,9 +701,9 @@
     <string name="help_current_station">Uložené orientačné body</string>
     <string name="help_azimuth">Bočný odporúčaný azimut</string>
     <string name="help_device">Okno DistoX</string>
-    <string name="help_add_topodroid">Nový prieskum / kalibrácia</string>
-    <string name="help_import">Importovať súbor s údajmi zip alebo prieskum</string>
-    <string name="help_symbol">Aktivovať / deaktivovať grafické prototypy</string>
+    <string name="help_add_topodroid">Nové meranie/Kalibrácia</string>
+    <string name="help_import">Importovať zip súbor alebo meračské súbory</string>
+    <string name="help_symbol">Aktivovať/deaktivovať prvky Palety</string>
     <string name="help_therion">App Therion manažér</string>
     <!-- UNUSED string name="help_database">App database (SQliteViewer)</string -->
     <string name="help_prefs">Upraviť nastavenia</string>
@@ -882,13 +882,13 @@
   <!-- UNUSED string name="pref_bootloader_title">Bootloader</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Bootloader abilitiato</string -->
   <string name="pref_mkeyboard_title">Klávesnica</string>
-  <string name="pref_mkeyboard_summary">Povoliť / zakázať vlastné klávesnice</string>
+  <string name="pref_mkeyboard_summary">Povoliť / zakázať užívateľskú klávesnicu</string>
   <string name="pref_no_cursor_title">Kurzory na klávesnici</string>
   <string name="pref_no_cursor_summary">Zrušiť tlačidlá kurzoru na klávesnici</string>
   <string name="pref_local_help_title">Prekladateľská príručka</string>
   <string name="pref_local_help_summary">Povoľte preložené manuálne</string>
   <string name="pref_cosurvey_title">Spoločný priekum</string>
-  <string name="pref_cosurvey_summary">Aktivovať / deaktivovať službu spoločného prieskumu</string>
+  <string name="pref_cosurvey_summary">Aktivovať / deaktivovať funkciu Spoločného prieskumu</string>
   <string name="pref_export_shots_title">Predvolený formát exportu</string>
   <string name="pref_export_shots_summary">Formát exportu preferenčných údajov</string>
   <string name="pref_export_plot_title"> Predvolený formát náčrtu</string>
@@ -897,13 +897,13 @@
   <string name="pref_therion_maps_summary">Therion mapy pred dátami prieskumu</string>
   <string name="pref_extra_buttons_title">Úroveň príkazov</string>
   <string name="pref_extra_buttons_summary">Vyberte úroveň príkazov</string>
-  <string name="pref_size_buttons_title">Veľkosť tlačidla</string>
+  <string name="pref_size_buttons_title">Veľkosť ikon tlačidiel</string>
   <string name="pref_size_buttons_summary">Horná lišta s veľkosťou tlačidiel</string>
   <!-- UNUSED string name="pref_size_buttons_message">Scrivi la dimensione dei bottoni della barra superiore [pixels]</string -->
 
   <string name="pref_bezier_step_title">VZIALENOSŤ BODOV</string>
   <string name="pref_bezier_step_summary">Vzdialenosť medzi bodmi pri exporte čiary [m]</string>
-  <string name="pref_leg_shots_title">Minimálne hlavné zamerania</string>
+  <string name="pref_leg_shots_title">Minimálny počet jednotlivých zámer hlavnej zámery</string>
   <string name="pref_leg_shots_summary">Minimálny počet opatrení pre polygonálne meranie</string>
   <string name="pref_station_prefix_title">Predčíslie bodu v programe Compass</string>
   <string name="pref_station_prefix_summary">Export predčíslia bodov</string>
@@ -997,7 +997,7 @@
   <string name="pref_pt_color_map_title">Farebná mapa PocketTopo</string>
   <string name="pref_pt_color_map_summary">Farebná mapa PocketTopo (import PocketTopo)</string>
   <string name="pref_text_size_title">Veľkosť textu</string>
-  <string name="pref_text_size_summary">Zobrazuje veľkosť textu</string>
+  <string name="pref_text_size_summary">Veľkosť textu písmen v zozname</string>
   <string name="pref_text_size_message">Zobrazuje veľkosť textu</string>
   <string name="pref_closeness_title">Polomer výberu</string>
   <!-- UNUSED string name="pref_closeness_summary">Raggio di selezione oggetti disegno</string -->
@@ -1024,10 +1024,10 @@
   <string name="xsections_shared">Zdielané priečne rezy</string>
   <string name="xsections_private">Priečne rezy</string>
     
-  <string name="pref_survey_stations_title">METÓDY MERANIA</string>
+  <string name="pref_survey_stations_title">Politika číslovania bodov</string>
   <string name="pref_survey_stations_summary">Zhrnutie bodového priekumu</string>
-  <string name="pref_accel_thr_title">Tolerancia trasenia DistroX</string>
-  <string name="pref_accel_thr_summary">Tolerancia hodnôt trasenia DistroX</string>
+  <string name="pref_accel_thr_title">Tolerancia trasenia DistoX</string>
+  <string name="pref_accel_thr_summary">Tolerancia hodnôt trasenia DistoX</string>
   <string name="pref_accel_thr_message">Cieľová tolerancia: trasenie</string>
   <string name="pref_mag_thr_title">Tolerancia magnetického poľa</string>
   <string name="pref_mag_thr_summary">Tolerancia hodnôt magnetického poľa</string>
@@ -1038,34 +1038,34 @@
 
   <string name="pref_leg_title">Tolerancia merania</string>
   <string name="pref_leg_summary">Tolerancia medzi jednotlivými zámerami hlavnej zámery</string>
-  <string name="pref_leg_message">Tolerancia rýchlosti merania</string>
-  <string name="pref_max_shot_title">Maximálna dĺžka zamerania</string>
-  <string name="pref_max_shot_summary">Maximálna dĺžka zamerania [m]</string>
+  <string name="pref_leg_message">Tolerancia medzi jednotlivými zámerami hlavnej zámery</string>
+  <string name="pref_max_shot_title">Maximálna dĺžka zámery</string>
+  <string name="pref_max_shot_summary">Maximálna dĺžka zámery [m]</string>
   <string name="pref_max_shot_message">Merania nad túto dĺžku sú označené ako prestrelené</string>
   <string name="pref_min_leg_title">Minimalna dĺžka hlavnej zámery</string>
-  <string name="pref_min_leg_summary">Maximálna dĺžka zamerania [m]</string>
-  <string name="pref_min_leg_message">Hlavné zámery nad tymto minimom majú oranžové pozadie</string>
+  <string name="pref_min_leg_summary">Maximálna dĺžka zámery [m]</string>
+  <string name="pref_min_leg_message">Hlavné zámery pod týmto minimom sú oranžovo podfarbené</string>
   <string name="pref_backsight_title">Spätná zámera</string>
-  <string name="pref_backsight_summary">Polia spätnej zámery v MENU bodu zamerania</string>
+  <string name="pref_backsight_summary">Polia spätnej zámery v MENU bodu merania pri manuálnom zadávaní bodu</string>
   <string name="pref_backshot_title">Režim spätnej zámery DistoX</string>
-  <string name="pref_backshot_summary">DistoX v režime spätných zámer</string>
+  <string name="pref_backshot_summary">DistoX v režime spätných zámer - </string>
   <string name="pref_prev_next_title">Tlačidlá Predchádzajúci / Nasledujúce</string>
   <string name="pref_prev_next_summary">Zobraziť tlačítka predchádzajúci /nasledujúci v MENU bodu merania</string>
   <string name="pref_mag_anomaly_title">Lokálna kompenzácia magnetickej anomálie</string>
-  <string name="pref_mag_anomaly_summary">Lokálna kompenzácia magnetickou anomáliou</string>
-  <string name="pref_azimuth_manual_title">"fixná smerová orientácia</string>
-  <string name="pref_azimuth_manual_summary">Fixná / nastavitelná orientácia</string>
+  <string name="pref_mag_anomaly_summary">Kompenzácia lokálnej magnetickej anomálie - vyžaduje merania so spätnými zámerami - nie režim spätnej zámery DistoX</string>
+  <string name="pref_azimuth_manual_title">"Fixná smerová orientácia</string>
+  <string name="pref_azimuth_manual_summary">Zaškrtnuté = Fixná / Nezašktnuté = Nastavitelná smerová orientácia</string>
 
   <string name="pref_team_title">Tím</string>
   <string name="pref_team_summary">Prieskumná skupina</string>
-  <string name="pref_team_message">Predvolená prieskumná skupina</string>
+  <string name="pref_team_message">Predvolená meračská skupina</string>
 
   <string name="pref_ethr_title">Vertikálna prahová hodnota pomocného merania</string>
   <string name="pref_ethr_summary">Oblasť vertikálneho rozšírenia (pomocné merania)</string>
-  <string name="pref_ethr_message">Uhol od 90 stupnov pre ktorý má pomocná zámera vertikálny smer [stupňov] </string>
-  <string name="pref_vthr_title">Vertikálna prahová hodnota hlavného merania</string>
-  <string name="pref_vthr_summary">Prah sklonu LRUD / WENS</string>
-  <string name="pref_vthr_message">Prah sklonu pre LRUD / WENS</string>
+  <string name="pref_ethr_message">Uhol od 90 stupnov pre ktorý má pomocná zámera vertikálny smer [stupne] </string>
+  <string name="pref_vthr_title">Vertikálna prahová hodnota hlavnej zámery</string>
+  <string name="pref_vthr_summary">Prah sklonu pre LRUD / WENS</string>
+  <string name="pref_vthr_message">Prah sklonu hlavnej zámery medzi LRUD / WENS</string>
 
   <string name="pref_plan_vthr_title">Prahová hodnota pomocných zámer v pôdoryse</string>
   <!-- UNUSED string name="pref_plan_vthr_summary">Pomocné meranie vertikálnej prahovej hodnoty v pôdoryse</string -->
@@ -1073,7 +1073,7 @@
   <string name="pref_init_station_title">PRVÝ BOD</string>
   <string name="pref_init_station_summary">Predvolený počiatočný bod</string>
   <string name="pref_init_station_message">Predvolený počiatočný bod</string>
-  <string name="pref_station_names_title">Názvy meracích bodov</string>
+  <string name="pref_station_names_title">Názvy meračských bodov</string>
   <string name="pref_station_names_summary">Metóda pomenovania meracích bodov</string>
 
   <string name="pref_hthr_title">Prahová hodnota priečneho rezu</string>
@@ -1253,7 +1253,7 @@
   <!-- NO string name="pref_algo_min_delta_message">Min-algo group G^M.x weight</string -->
 
   <!-- OK string name="pref_log_stream_summary">Log output stream</string -->
-<string name="pref_log_stream_title">Tok záznamu</string>
+<string name="pref_log_stream_title">Systémový log</string>
   <string name="pref_log_bt">Bluetooth</string>
   <string name="pref_log_bezier">Bezierova krivka</string>
   <string name="pref_log_calib">Kalibrácia</string>
