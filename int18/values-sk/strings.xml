@@ -302,7 +302,7 @@
     <string name="menu_rename">PREMENOVAŤ</string>
     <!-- TODO string name="menu_switch">SWITCH/CLOSE</string -->
     <string name="menu_help">POMOC</string>
-    <string name="menu_join_survey">PRIPOJ PÔDORYS</string> <!-- rilievo cooperativo -->
+    <string name="menu_join_survey">SPOLOČNÝ PRIESKUM</string> <!-- rilievo cooperativo -->
     <string name="menu_logs">ZÁZNAM PROGRAMU</string>
     <string name="menu_manual_calibration">KALIBRÁCIA</string>
     <string name="menu_options">NASTAVENIA</string>
@@ -448,7 +448,7 @@
     <string name="survey_not_attached">VAROVANIE: Nepripojené merania</string>
     <string name="survey_not_extend">VAROVANIE: Nenastavená smerová orientácia</string>
     <string name="survey_not_attached_extend">VAROVANIE: nepripojené merania a nenastavená smerová orientácia</string>
-    <!-- TODO string name="saturated_coeffs">WARNING: saturated calibration coefficients</string -->
+    <!-- TODO string name="saturated_coeffs">WARNING: ated calibration coefficients</string -->
     <!-- TODO string name="out_of_memory">WARNING: out of memory !</string -->
     <!-- TODO string name="disk_io_error">CRITICAL: disk i/o error !</string -->
     <string name="cannot_rename">Nedá sa premenovať prieskum</string>
@@ -718,7 +718,7 @@
     <string name="help_overview">Celkový pohľad</string>
     <string name="help_plot">Kreslenie okna</string>
     <string name="help_note">Dôležité poznámky</string>
-    <string name="help_bluetooth">Obnovte pripojenie Bluetooth</string>
+    <string name="help_bluetooth">Pravidlá zoskupovania údajov kalibrácie Obnovte pripojenie Bluetooth</string>
     <string name="help_remote">Diaľkové ovládanie DistoX</string>
     <string name="help_add_shot">Pridajte meranie manuálne</string>
     <string name="help_info_shot">Štatistika prieskumu</string>
@@ -765,25 +765,25 @@
     <string name="help_manual_calibration">Kalibrácia stroja</string>
     <string name="help_note_plot">Upravuje vlastnosti zvoleného objektu</string>
     <!-- UNUSED string name="help_save">Zmeniť modifikáciu / kalibráciu</string -->
-    <string name="help_save_calib">Zaznamenajte si kalibráciu</string>
+    <string name="help_save_calib">Uloží kalibráciu do databázy</string>
     <string name="help_export_survey">Export prehľadu</string>
     <string name="help_loc">Lokalizácia GPS</string>
     <string name="help_delete_survey">Odstrániť prehľad</string>
     <string name="help_delete_calib">Vymažte kalibráciu</string>
-    <string name="help_detach">Odstráňte výber DistoX</string>
+    <string name="help_detach">Odpojí aktívne DistoX</string>
     <!-- OK string name="help_firmware">DistoX2 firmware updater</string -->
-    <string name="help_toggle">Zmeniť kalibráciu DistoX / normálny režim</string>
-    <string name="help_sdcard">Funkcie DistoX pamäte</string>
-    <string name="help_read">Prečítajte si kalibráciu z DistoX</string>
-    <string name="help_info_device">Dáta zariadenia DistoX</string>
-    <string name="help_scan">Vyhľadajte zariadenia DistoX</string>
-    <string name="help_pair">Spojenie s DistoX</string>
-    <string name="help_open_calib">Otvorte kalibráciu</string>
+    <string name="help_toggle">Prepnúť DistoX - kalibrácia/normálny režim</string>
+    <string name="help_sdcard">Informácie z DistoX</string>
+    <string name="help_read">Zobrazí kalibračné koeficienty z DistoX</string>
+    <string name="help_info_device">Pamäťové funkcie DistoX</string>
+    <string name="help_scan">Vyhľadá zariadenia DistoX</string>
+    <string name="help_pair">Vytvorí spojenie s DistoX</string>
+    <string name="help_open_calib">Otvorí kalibračné okno</string>
     <string name="help_export_calib">Uložiť kalibráciu</string>
     <string name="help_group">Automatické priradenie skupín</string>
     <string name="help_cover">Uhlová distribúcia kalibračných údajov</string>
     <string name="help_compute">Vypočítajte kalibráciu</string>
-    <string name="help_write">Uložte kalibráciu v DistoX</string>
+    <string name="help_write">Nahrá kalibráciu do DistoX</string>
 <!-- FIXME_SKETCH_3D -->
     <!-- UNUSED string name="help_refs_model">View mode</string -->
     <string name="help_one_model">Vhodný 3D model na zobrazenie</string>
@@ -875,10 +875,10 @@
   <string name="pref_locale_title">Jazyk</string>
   <string name="pref_locale_summary">Jazyk</string>
 
-  <string name="pref_raw_data_title">Surové údaje</string>
+  <string name="pref_raw_data_title">Surové dáta</string>
   <string name="pref_raw_data_summary">Zobrazenie nespracovaných údajov</string>
-  <string name="pref_calib_shot_download_title">Stiahnutie kalib. meracich údajov</string>
-  <string name="pref_calib_shot_download_summary">Kalibračné údaje okamžite stiahnite</string>
+  <string name="pref_calib_shot_download_title">Stiahnutie meracich údajov</string>
+  <string name="pref_calib_shot_download_summary">Kalibračné údaje stiahne okamžite</string>
   <!-- UNUSED string name="pref_bootloader_title">Bootloader</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Bootloader abilitiato</string -->
   <string name="pref_mkeyboard_title">Klávesnica</string>
@@ -907,7 +907,7 @@
   <string name="pref_leg_shots_summary">Minimálny počet opatrení pre polygonálne meranie</string>
   <string name="pref_station_prefix_title">Predčíslie bodu v programe Compass</string>
   <string name="pref_station_prefix_summary">Export predčíslia bodov</string>
-  <string name="pref_compass_splays_title">Pomocné zamery programu Compass</string>
+  <string name="pref_compass_splays_title">Pomocné zámery programu Compass</string>
   <string name="pref_compass_splays_summary">Export pomocných merianí do kompas súborov</string>
   <string name="pref_trobot_names_title">Názvy staníc TopoRobot</string>
   <string name="pref_trobot_names_summary">Názvy staníc sú v štýle TopoRobot</string>
@@ -949,36 +949,36 @@
   <string name="pref_kml_splays_title">KML pomocné zamerania</string>
   <string name="pref_kml_splays_summary">Pridať pomocné zamerania do KML exportu</string>
 
-  <string name="pref_sock_type_title">Nástrel</string>
-  <string name="pref_sock_type_summary">Vytvorte nástrel</string>
+  <string name="pref_sock_type_title">Zabezpečenie</string>
+  <string name="pref_sock_type_summary">Vytvorte zabezpečenie</string>
   <!-- UNUSED string name="pref_device_type_title">Tipo DistoX</string -->
   <!-- UNUSED string name="pref_device_type_summary">Modello DistoX</string -->
   <!-- UNUSED string name="pref_comm_retry_title">Tentativi connesione</string -->
   <!-- UNUSED string name="pref_comm_retry_summary">Numero tentativi di connessione</string -->
   <!-- UNUSED string name="pref_comm_retry_dialogtitle">Numero tentativi di connessione</string -->
   <!-- UNUSED string name="pref_comm_retry_message">Numero tentativi di connessione</string -->
-  <string name="pref_wait_laser_title">Čakanie po laseri [ms]</string>
-  <string name="pref_wait_laser_summary">Čakacia doba po zapálení lasera [ms]</string>
-  <string name="pref_wait_shot_title">Čaká sa po fotografovaní [ms]</string>
-  <string name="pref_wait_shot_summary">Čakacia doba po meraní [ms]</string>
-  <string name="pref_wait_data_title">Zlomenie údajov [ms]</string>
-  <string name="pref_wait_data_summary">Pozastaviť po stiahnutí [ms]</string>
-  <string name="pref_wait_conn_title">Dáta pripravené na oneskorenie [ms]</string>
-  <string name="pref_wait_conn_summary">Čaká na pripravenosť dát [ms]</string>
+  <string name="pref_wait_laser_title">Pauza lasera [ms]</string>
+  <string name="pref_wait_laser_summary">Doba za ktorú zasvieti laser pri ovládaní cez Bluetooth [ms]</string>
+  <string name="pref_wait_shot_title">Pauza zámery [ms]</string>
+  <string name="pref_wait_shot_summary">Doba za ktorú zameria DistoX po stlačení merania cez Bluetooth - ustálenie prístroja [ms]</string>
+  <string name="pref_wait_data_title">Pauza pri sťahovaní dát [ms]</string>
+  <string name="pref_wait_data_summary">Pauza po stiahnutí dát každého merania [ms]</string>
+  <string name="pref_wait_conn_title">Čas na Prípravu dát [ms]</string>
+  <string name="pref_wait_conn_summary">Zdržanie na čas kedy budú dáta pripravené [ms]</string>
   <string name="pref_conn_mode_title">Typ pripojenia</string>
   <string name="pref_conn_mode_summary">Typ dátového spojenia s DistoX</string>
   <string name="pref_auto_reconnect_title">Automatické opätovné pripojenie</string>
-  <string name="pref_auto_reconnect_summary">Znova pripojte k DistoX, ak sa stratí</string>
-  <string name="pref_auto_pair_title">Automatické priradenie</string>
-  <string name="pref_auto_pair_summary">Automatické pripojenie po scanovaní</string>
+  <string name="pref_auto_reconnect_summary">Znova pripojí k DistoX, pri strate pripojenia</string>
+  <string name="pref_auto_pair_title">Automatické pripojenie</string>
+  <string name="pref_auto_pair_summary">Automatické pripojenie po skenovaní</string>
   <string name="pref_head_tail_title">Počet nových údajov</string>
-  <string name="pref_head_tail_summary">Pred stiahnutím získajte množstvo údajov</string>
+  <string name="pref_head_tail_summary">Pred stiahnutím získajte počet zameraných údajov</string>
   <string name="pref_socket_delay_title">Oneskorenie spojenia</string>
   <string name="pref_socket_delay_summary">Oneskorenie pripojenia, aby bolo možné priradenie [0.1 sec]</string>
   <string name="pref_socket_delay_dialogtitle">Oneskorenie pripojenia počas pridruženia</string>
-  <string name="pref_socket_delay_message">Oneskorenie pripojenia, aby bolo možné priradenie [0.1 sec]</string>
+  <string name="pref_socket_delay_message">Oneskorenie pripojenia pred pokusom pripojiť DistoX [0.1 sec]</string>
   <string name="pref_z6_workaround_title">Dátová cesta Z6</string>
-  <string name="pref_z6_workaround_summary">Stiahnutie dát režimu Z6</string>
+  <string name="pref_z6_workaround_summary">Stiahnutie dát režimu pre telefóny Z6</string>
   <string name="pref_crs_title">C R S </string>
   <string name="pref_crs_summary">Názov CRS</string>
   <string name="pref_crs_message">Napíšte CRS ako v Proj4</string>
@@ -1009,14 +1009,14 @@
   <string name="pref_pointing_title">Tolerancia bodov</string>
   <string name="pref_pointing_message">Tolerancia pre výber bodov</string>
   <string name="pref_dash_splay_title">Vzťah čiarkovaných zámer</string>
-  <string name="pref_dash_splay_message">Čiarkované pomocné zameri adekvátne medzipôdorysom a rezom</string>
-  <string name="pref_vert_splay_title">Prahová hodnota uhla pomocnej zámery</string>
+  <string name="pref_dash_splay_message">Čiarkované pomocné zámery adekvátne medzi pôdorysom a rezom</string>
+  <string name="pref_vert_splay_title">Prahová hodnota pomocnej zámery v pôdoryse - čiarkované</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Soglia clino splay tratteggiati</string -->
-  <string name="pref_vert_splay_message">Pomocné zámeri s uhlom nad prahovú hodnotu sú čiarkované</string>
-  <string name="pref_horiz_splay_title">Prahová hodnota azimutu pomocnej zámery</string>
-  <string name="pref_horiz_splay_message">Pomocné zámeri azimutu nad prahovú hodnotu sú čiarkované </string>
-  <string name="pref_section_splay_title">Prahová hodnota uhla zamery</string>
-  <string name="pref_section_splay_message">Pomocné zámeri  väčšie ako tento uhol so sekciou roviny</string>
+  <string name="pref_vert_splay_message">Pomocné zámery s uhlom nad prahovú hodnotu sú v pôdoryse čiarkované</string>
+  <string name="pref_horiz_splay_title">Prahová hodnota azimutu pomocnej zámery v profile</string>
+  <string name="pref_horiz_splay_message">Pomocné zámery azimutu nad prahovú hodnotu sú v profile čiarkované </string>
+  <string name="pref_section_splay_title">Prahová hodnota pomocnej zámery v reze</string>
+  <string name="pref_section_splay_message">Pomocné zámery zvierajúce väčší ako tento uhol sú v reze čiarkované</string>
   <string name="pref_data_backup_title">Automatické exportovanie údajov</string>
   <string name="pref_data_backup_summary">Automatický export údajov (vyžaduje predvolený formát)</string>
   <string name="pref_shared_xsections_title">Zdielané priečne rezy</string>
@@ -1067,18 +1067,18 @@
   <string name="pref_vthr_summary">Prah sklonu hlavnej zámery medzi LRUD / WENS - Therion "vthreshold"</string>
   <string name="pref_vthr_message">Prah sklonu hlavnej zámery medzi LRUD / WENS - Therion "vthreshold"</string>
 
-  <string name="pref_plan_vthr_title">Prahová hodnota pomocných zámer v pôdoryse</string>
+  <string name="pref_plan_vthr_title">Prahová hodnota pomocnej zámery v pôdoryse - skryté</string>
   <!-- UNUSED string name="pref_plan_vthr_summary">Pomocné meranie vertikálnej prahovej hodnoty v pôdoryse</string -->
-  <string name="pref_plan_vthr_message">Skryje pomocné zámeri s vyším sklonom v pôdoryse</string>
+  <string name="pref_plan_vthr_message">Skryje pomocné zámery s vyšším sklonom v pôdoryse</string>
   <string name="pref_init_station_title">PRVÝ BOD</string>
   <string name="pref_init_station_summary">Predvolený počiatočný bod</string>
   <string name="pref_init_station_message">Predvolený počiatočný bod</string>
   <string name="pref_station_names_title">Názvy meračských bodov</string>
   <string name="pref_station_names_summary">Metóda pomenovania meracích bodov</string>
 
-  <string name="pref_hthr_title">Prahová hodnota priečneho rezu</string>
-  <string name="pref_hthr_summary">Uhol hlavných zámer cez ktorý priečne rezi sú horizontálne</string>
-  <string name="pref_hthr_message">Uhol hlavných zámer cez ktorý priečne rezi sú horizontálne</string>
+  <string name="pref_hthr_title">Prahová hodnota priečneho rezu Vert/Horizont</string>
+  <string name="pref_hthr_summary">Uhol hlavných zámer cez ktorý priečne rezy sú horizontálne</string>
+  <string name="pref_hthr_message">Uhol hlavných zámer cez ktorý priečne rezy sú horizontálne</string>
   <string name="pref_bitmap_scale_title">Rozlíšenie PNG</string>
   <string name="pref_bitmap_scale_summary">Rozlíšenie výkresov v PNG</string>
   <string name="pref_bitmap_scale_message">Rozlíšenie pri exporte výkresov PNG</string>
@@ -1119,19 +1119,19 @@
   <string name="pref_linecorner_message">Bezierov zakrivený prah uhla</string>
   <string name="pref_calib_algo_title">Algoritmus</string>
   <string name="pref_calib_algo_summary">Kalibračný algoritmus</string>
-  <string name="pref_group_by_title">Zoskupovanie pravidiel</string>
+  <string name="pref_group_by_title">Pravidlá zoskupovania údajov kalibrácie</string>
   <string name="pref_group_by_summary">Pravidlá zoskupovania údajov kalibrácie</string>
   <string name="pref_group_title">Skupinová tolerancia</string>
-  <string name="pref_group_summary">Tolerancia medzi údajmi tej istej skupiny</string>
-  <string name="pref_group_message">Tolerancia medzi údajmi tej istej skupiny</string>
+  <string name="pref_group_summary">Tolerancia medzi údajmi tej istej skupiny - maximálna uhlová odchýlka</string>
+  <string name="pref_group_message">Tolerancia medzi údajmi tej istej skupiny - maximálna uhlová odchýlka</string>
   <string name="pref_error_title">Chyba</string>
-  <string name="pref_error_summary">Minimálna chyba kalibrácie</string>
+  <string name="pref_error_summary">Minimálna chyba odchýliek koeficientov kalibrácie</string>
   <string name="pref_error_dialogtitle">Chyba kalibrácie</string>
-  <string name="pref_error_message">Minimálna chyba kalibrácie</string>
-  <string name="pref_iter_title">Skúšky</string>
-  <string name="pref_iter_summary">Maximálny počet opakovaní</string>
+  <string name="pref_error_message">Minimálna chyba odchýliek koeficientov kalibrácie</string>
+  <string name="pref_iter_title">Opakovanie</string>
+  <string name="pref_iter_summary">Maximálny počet opakovania kalibračného algoritmu</string>
   <string name="pref_iter_dialogtitle">Opakovanie kalibrácie</string>
-  <string name="pref_iter_message">Maximálny počet opakovaní</string>
+  <string name="pref_iter_message">Maximálny počet opakovania kalibračného algoritmu</string>
   <string name="pref_label_size_title">Veľkosť štítkov</string>
   <string name="pref_label_size_summary">Veľkosť štítkov</string>
   <string name="pref_label_size_message">Veľkosť štítkov</string>
@@ -1140,7 +1140,7 @@
   <string name="pref_arrow_length_message">Hrúbka prerušovanej čiary</string>
   <string name="pref_dot_radius_title">Velkosť zelených bodov</string>
   <!-- UNUSED string name="pref_dot_radius_summary">Výberové body polomeru</string -->
-  <string name="pref_dot_radius_message">Veľkosť bodov</string>
+  <string name="pref_dot_radius_message">Veľkosť bodov výberu v náčrte</string>
   <string name="pref_line_thickness_title">Hrúbky čiar</string>
   <string name="pref_line_thickness_summary">Hrúbka čiar</string>
   <string name="pref_line_thickness_message">Hrúbka čiar</string>
@@ -1179,9 +1179,9 @@
   <string name="pref_picker_type_summary">Typ dialógového okna výberu grafického prototypu</string>
   <string name="pref_section_stations_title">Meracie body X-sekcie</string>
   <string name="pref_section_stations_summary">Referenčné základy pre X-sekciu</string>
-  <string name="pref_station_size_title">Veľkosť názvu meracieho bodu</string>
-  <string name="pref_station_size_summary">Veľkosť textu názvu meracieho bodu</string>
-  <string name="pref_station_size_message">Veľkosť štítkov názvu meracieho bodu</string>
+  <string name="pref_station_size_title">Veľkosť označenia meračského bodu</string>
+  <string name="pref_station_size_summary">Veľkosť textu označenia meračského bodu</string>
+  <string name="pref_station_size_message">Veľkosť štítkov označenia meračského bodu</string>
   <string name="pref_zoom_controls_title">Nastavenie Zoom</string>
   <string name="pref_zoom_controls_summary">Nastavenia priblíženia na dotyk</string>
   <string name="pref_side_drag_title">Posun krezby v náčrte</string>
@@ -1308,8 +1308,8 @@
 \nOriginálny preklad: v0.1b - 10.5.2018 M.Jurečka: OS Ružomberok - https://www.speleork.sk - mail: jurecka@gmail.com
 \nAktualizované dňa: revizia v0.2 - 13.5.2018 B.Turčina, M.Chlebovec (zdroj prekladu: Taliančina, Nemčina, Angličtina)
 \nAktualizované dňa: revizia v0.3 - 18.5.2018 M.Chlebovec (zdroj prekladu: Angličtina)
-\nAktualizované dňa: revizia v0.4 - 19.5.2018 Miroslav Jurečka, Jozef Hetesi (Speleoklub CASSOVIA)
-\nAktualizované dňa: revizia v0.5 - 04.6.2018 Miroslav Jurečka, Jozef Hetesi (Speleoklub CASSOVIA)
+\nAktualizované dňa: revizia v0.4 - 19.5.2018 Miroslav Jurečka, Jozef Hetesi 
+\nAktualizované dňa: revizia v0.5 - 04.6.2018 Miroslav Jurečka, Jozef Hetesi 
     </string>
 
   <!-- OK string name="firmware_title">Firmware Updater</string -->
