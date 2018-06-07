@@ -446,8 +446,8 @@
     <string name="survey_delete">Vzmazať reliéf ?</string>
     <string name="survey_split">Rozdeliť reliéf ?</string>
     <string name="survey_not_attached">VAROVANIE: Nepripojené merania</string>
-    <string name="survey_not_extend">VAROVANIE: nenastavené rozšírenia meraní</string>
-    <string name="survey_not_attached_extend">VAROVANIE: nepripojené merania a nenastavené rozšírenie</string>
+    <string name="survey_not_extend">VAROVANIE: Nenastavená smerová orientácia</string>
+    <string name="survey_not_attached_extend">VAROVANIE: nepripojené merania a nenastavená smerová orientácia</string>
     <!-- TODO string name="saturated_coeffs">WARNING: saturated calibration coefficients</string -->
     <!-- TODO string name="out_of_memory">WARNING: out of memory !</string -->
     <!-- TODO string name="disk_io_error">CRITICAL: disk i/o error !</string -->
@@ -581,13 +581,13 @@
     <string name="button_xsection"  >Prierez</string>
     <string name="xsection">Prierez</string>
 
-    <string name="mode_leg">Hlavné zameranie</string>
-    <string name="mode_splay">Pomocné zameranie</string>
+    <string name="mode_leg">Hlavné zámery</string>
+    <string name="mode_splay">Pomocné zámery</string>
     <string name="mode_station">Staničenie</string>
     <string name="mode_grid">Mriežka</string>
-    <string name="mode_fixed">[ zamknutý ]</string>
-    <string name="mode_outline">Iba obrys</string>
-    <string name="mode_scale_ref">Referenčná stupnica</string>
+    <string name="mode_fixed">Bočný Posun</string>
+    <string name="mode_outline">Obrys</string>
+    <string name="mode_scale_ref">Grafická mierka</string>
 
     <!-- UNUSED string name="remote_title">DistoX Remote Control</string -->
     <string name="remote_on">Laser zapnutý</string>
@@ -1027,14 +1027,14 @@
   <string name="pref_survey_stations_title">Politika číslovania bodov</string>
   <string name="pref_survey_stations_summary">Zhrnutie bodového priekumu</string>
   <string name="pref_accel_thr_title">Tolerancia trasenia DistoX</string>
-  <string name="pref_accel_thr_summary">Tolerancia hodnôt trasenia DistoX</string>
-  <string name="pref_accel_thr_message">Cieľová tolerancia: trasenie</string>
-  <string name="pref_mag_thr_title">Tolerancia magnetického poľa</string>
-  <string name="pref_mag_thr_summary">Tolerancia hodnôt magnetického poľa</string>
-  <string name="pref_mag_thr_message">Tolerancia hodnôt magnetického poľa</string>
-  <string name="pref_dip_thr_title">Magnetická tolerancia naklonenia</string>
-  <string name="pref_dip_thr_summary">Hodnoty tolerancie magnetického naklonenia</string>
-  <string name="pref_dip_thr_message">Cieľová tolerancia: naklonenie</string>
+  <string name="pref_accel_thr_summary">Tolerancia hodnôt chvenia DistoX - A</string>
+  <string name="pref_accel_thr_message">Tolerancia chvenia - A</string>
+  <string name="pref_mag_thr_title">Tolerancia magnetického poľa - M</string>
+  <string name="pref_mag_thr_summary">Tolerancia hodnôt magnetického poľa - M</string>
+  <string name="pref_mag_thr_message">Tolerancia hodnôt magnetického poľa - M</string>
+  <string name="pref_dip_thr_title">Tolerancia magnetického uhla - D</string>
+  <string name="pref_dip_thr_summary">Hodnoty tolerancie magnetického uhla - D</string>
+  <string name="pref_dip_thr_message">Tolerancia hodnôt magnetického uhla - D</string>
 
   <string name="pref_leg_title">Tolerancia merania</string>
   <string name="pref_leg_summary">Tolerancia medzi jednotlivými zámerami hlavnej zámery</string>
@@ -1048,7 +1048,7 @@
   <string name="pref_backsight_title">Spätná zámera</string>
   <string name="pref_backsight_summary">Polia spätnej zámery v MENU bodu merania pri manuálnom zadávaní bodu</string>
   <string name="pref_backshot_title">Režim spätnej zámery DistoX</string>
-  <string name="pref_backshot_summary">DistoX v režime spätných zámer - </string>
+  <string name="pref_backshot_summary">DistoX v režime spätných zámer - merania z koncového bodu na počiatočný</string>
   <string name="pref_prev_next_title">Tlačidlá Predchádzajúci / Nasledujúce</string>
   <string name="pref_prev_next_summary">Zobraziť tlačítka predchádzajúci /nasledujúci v MENU bodu merania</string>
   <string name="pref_mag_anomaly_title">Lokálna kompenzácia magnetickej anomálie</string>
@@ -1064,8 +1064,8 @@
   <string name="pref_ethr_summary">Oblasť vertikálneho rozšírenia (pomocné merania)</string>
   <string name="pref_ethr_message">Uhol od 90 stupnov pre ktorý má pomocná zámera vertikálny smer [stupne] </string>
   <string name="pref_vthr_title">Vertikálna prahová hodnota hlavnej zámery</string>
-  <string name="pref_vthr_summary">Prah sklonu pre LRUD / WENS</string>
-  <string name="pref_vthr_message">Prah sklonu hlavnej zámery medzi LRUD / WENS</string>
+  <string name="pref_vthr_summary">Prah sklonu hlavnej zámery medzi LRUD / WENS - Therion "vthreshold"</string>
+  <string name="pref_vthr_message">Prah sklonu hlavnej zámery medzi LRUD / WENS - Therion "vthreshold"</string>
 
   <string name="pref_plan_vthr_title">Prahová hodnota pomocných zámer v pôdoryse</string>
   <!-- UNUSED string name="pref_plan_vthr_summary">Pomocné meranie vertikálnej prahovej hodnoty v pôdoryse</string -->
@@ -1096,8 +1096,8 @@
   <string name="pref_thumbnail_summary">Veľkosť náhľadu obrázka</string>
   <string name="pref_thumbnail_message">Veľkosť náhľadu obrázka</string>
   <string name="pref_shot_timer_title">Časovač zámery smeru</string>
-  <string name="pref_shot_timer_summary">sekundy pred meraním zamery smeru</string>
-  <string name="pref_shot_timer_message">sekundy pred meraním zamery smeru</string>
+  <string name="pref_shot_timer_summary">Sekundy pred meraním zámery smeru pomocou senzorov mobilu</string>
+  <string name="pref_shot_timer_message">Sekundy pred meraním zámery smeru pomocou senzorov mobilu</string>
   <string name="pref_beep_volume_title">Nastavenie hlasitosti</string>
   <string name="pref_beep_volume_summary">Percento hlasitosti pípania</string>
   <string name="pref_beep_volume_message">Percento hlasitosti pípania</string>
@@ -1105,7 +1105,7 @@
   <string name="pref_drawing_unit_summary">Veľkosť bodov</string>
   <string name="pref_drawing_unit_message">Mierka veľkosti bodov</string>
   <string name="pref_unscaled_points_title">Približovanie bodov v náčrte</string>
-  <string name="pref_unscaled_points_summary">Body v náčrte sa nezväčšujú ani nepribližujú</string>
+  <string name="pref_unscaled_points_summary">Nezaškrtnuté = povolený zoom bodov</string>
   <string name="pref_segment_title">Rozstupové body na čiarach</string>
   <!-- UNUSED string name="pref_segment_summary">Minimálna vzdialenosť bodov na čiarach</string -->
   <string name="pref_segment_message">Minimálna vzdialenosť medzi bodmi čiary</string>
@@ -1135,7 +1135,7 @@
   <string name="pref_label_size_title">Veľkosť štítkov</string>
   <string name="pref_label_size_summary">Veľkosť štítkov</string>
   <string name="pref_label_size_message">Veľkosť štítkov</string>
-  <string name="pref_arrow_length_title">Bod čiary s bodkou</string>
+  <string name="pref_arrow_length_title">Hrúbka čiary</string>
   <!-- UNUSED string name="pref_arrow_length_summary">Dĺžka smeru sekcie</string -->
   <string name="pref_arrow_length_message">Hrúbka prerušovanej čiary</string>
   <string name="pref_dot_radius_title">Velkosť zelených bodov</string>
@@ -1153,7 +1153,7 @@
   <string name="pref_checkBT_title">Bluetooth</string>
   <string name="pref_checkBT_summary">Aktivovať / deaktivovať Bluetooth</string>
   <string name="pref_checkAttached_title">Kontrola meračských bodov</string>
-  <string name="pref_checkAttached_summary">Skontrolujte, či sú pripojené meracie body</string>
+  <string name="pref_checkAttached_summary">Skontrolujte, či sú pripojené meračské body</string>
   <string name="pref_checkExtend_title">Kontrola smerovej orientácie hlavných zámer</string>
   <string name="pref_checkExtend_summary">Skontroluje, či je definovaná smerová orientácia</string>
   <string name="pref_backup_number_title">Počet záloh dát programu</string>
@@ -1184,8 +1184,8 @@
   <string name="pref_station_size_message">Veľkosť štítkov názvu meracieho bodu</string>
   <string name="pref_zoom_controls_title">Nastavenie Zoom</string>
   <string name="pref_zoom_controls_summary">Nastavenia priblíženia na dotyk</string>
-  <string name="pref_side_drag_title">Bočné - ťahanie</string>
-  <string name="pref_side_drag_summary">Povoľte bočné presunutie krezby v náčrte</string>
+  <string name="pref_side_drag_title">Posun krezby v náčrte</string>
+  <string name="pref_side_drag_summary">Povolí bočný presun krezby v náčrte - po povolení voľby Bočný Posun v režime Kreslenia</string>
   <string name="pref_unit_grid_title">Jednotky náčrtu</string>
   <string name="pref_unit_grid_summary">Veľkosť buniek v mriežke</string>
   <string name="pref_recent_nr_title">Počet najpoužívanejších nástrojov</string>
