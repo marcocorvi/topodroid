@@ -649,7 +649,7 @@ public class DrawingWindow extends ItemDrawer
       if ( BrushManager.mLineLib.getLineGroup( mCurrentLine ) == null ) {
         setButtonContinue( CONT_OFF );
       } else {
-        setButtonContinue( CONT_NONE );
+        setButtonContinue( mContinueLine ); // was CONT_NONE
       }
     }
   }
@@ -1912,7 +1912,7 @@ public class DrawingWindow extends ItemDrawer
     mCurrentLine  = ( BrushManager.mLineLib.isSymbolEnabled( "wall" ) )? 1 : 0;
     mCurrentArea  = ( BrushManager.mAreaLib.isSymbolEnabled( "water" ) )? 1 : 0;
     mContinueLine = CONT_NONE;
-    if ( TDLevel.overNormal ) setButtonContinue( CONT_NONE );
+    if ( TDLevel.overNormal ) setButtonContinue( mContinueLine );
 
     List<DBlock> list = null;
     if ( PlotInfo.isSection( mType ) ) {

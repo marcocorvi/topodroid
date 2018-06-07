@@ -533,7 +533,7 @@ public class ShotWindow extends Activity
     // TDLog.Log( TDLog.LOG_INPUT, "ShotWindow onItemClick id " + id);
     DBlock blk = mDataAdapter.get(pos);
     // Log.v( "DistoX", "ShotWindow onItemClick id " + id + " pos " + pos + " blk " + blk.mFrom + " " + blk.mTo );
-    onBlockClick( blk, pos );
+    if ( blk != null ) onBlockClick( blk, pos );
   }
 
   void onBlockClick( DBlock blk, int pos )
@@ -557,6 +557,7 @@ public class ShotWindow extends Activity
 
     // TDLog.Log( TDLog.LOG_INPUT, "ShotWindow onItemLongClick id " + id);
     DBlock blk = mDataAdapter.get(pos);
+    if ( blk == null ) return false;
     // onBlockLongClick( blk );
     // if ( blk.isSplay() ) {
     //   highlightBlocks( blk );
@@ -1489,6 +1490,7 @@ public class ShotWindow extends Activity
     long id = 0;
     for ( int k=0; k<mDataAdapter.size(); ++k ) {
       DBlock b = mDataAdapter.get(k);
+      if ( b == null ) return null;
       if ( b.isTypeBlank() ) {
         id = b.mId - 1;
         break;
@@ -1526,10 +1528,16 @@ public class ShotWindow extends Activity
     } else {
       mNextPos = mShotPos;
     }
-    while ( mNextPos < mDataAdapter.size() && blk != mDataAdapter.get(mNextPos) ) ++ mNextPos;
-    ++ mNextPos; // one position after blk
-    while ( mNextPos < mDataAdapter.size() ) {
+    // while ( mNextPos < mDataAdapter.size() && blk != mDataAdapter.get(mNextPos) ) ++ mNextPos;
+    for ( ; mNextPos < mDataAdapter.size(); ++ mNextPos ) {
       DBlock b = mDataAdapter.get(mNextPos);
+      if ( b == null ) return null;
+      if ( b == blk ) break;
+    }
+    // start at one position after blk
+    for ( ++mNextPos; mNextPos < mDataAdapter.size(); ++mNextPos ) {
+      DBlock b = mDataAdapter.get(mNextPos);
+      if ( b == null ) return null;
       int t = b.type();
       if ( t == DBlock.BLOCK_MAIN_LEG ) {
         return b;
@@ -1538,7 +1546,6 @@ public class ShotWindow extends Activity
                   && b.isRelativeDistance( mDataAdapter.get(mNextPos+1) ) ) {
         return b;
       }
-      ++ mNextPos;
     }
     return null;
   }
@@ -1555,14 +1562,19 @@ public class ShotWindow extends Activity
     } else {
       mPrevPos = mShotPos;
     }
-    while ( mPrevPos >= 0 && blk != mDataAdapter.get(mPrevPos) ) -- mPrevPos;
-    while ( mPrevPos > 0 ) {
-      -- mPrevPos;
+    // while ( mPrevPos >= 0 && blk != mDataAdapter.get(mPrevPos) ) -- mPrevPos;
+    for ( ; mPrevPos >= 0; -- mPrevPos ) {
       DBlock b = mDataAdapter.get(mPrevPos);
-      if ( b.type() == DBlock.BLOCK_MAIN_LEG ) {
+      if ( b == null ) return null;
+      if ( b == blk ) break;
+    }
+    for ( --mPrevPos; mPrevPos >= 0; --mPrevPos ) {
+      DBlock b = mDataAdapter.get(mPrevPos);
+      if ( b == null || b.type() == DBlock.BLOCK_MAIN_LEG ) {
         return b;
       }
     }
+    if ( mPrevPos < 0 ) mPrevPos = 0;
     return null;
   }
 

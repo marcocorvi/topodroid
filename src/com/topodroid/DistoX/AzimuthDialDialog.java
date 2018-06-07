@@ -140,10 +140,10 @@ class AzimuthDialDialog extends MyDialog
     lp.setMargins( 0, 10, 20, 10 );
 
     mBTsensor = new MyCheckBox( mContext, size, R.drawable.iz_compass_transp, R.drawable.iz_compass_transp ); 
+    layout4.addView( mBTsensor, lp );
     // LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mBTsensor.getLayoutParams();
     // params.setMargins( 10, 0, 0, 10 );
     // mBTsensor.setLayoutParams( params );
-    layout4.addView( mBTsensor, lp );
 
     // mBTback.setOnClickListener( this );
     // mBTfore.setOnClickListener( this );

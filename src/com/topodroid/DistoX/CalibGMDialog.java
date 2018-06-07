@@ -101,7 +101,6 @@ class CalibGMDialog extends MyDialog
     // layout2.addView( mButtonOK, lp );
     layout2.addView( mButtonDelete, lp );
 
-
     // LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mCBregroup.getLayoutParams();
     // params.setMargins( 0, 0, 40, 0 );
     // mCBregroup.setLayoutParams( params );

@@ -197,7 +197,13 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     return ret;
   }
 
-  public DBlock get( int pos ) { return mItems.get(pos); }
+  public DBlock get( int pos ) 
+  { 
+    try {
+      return mItems.get(pos);
+    } catch ( IndexOutOfBoundsException e ) { }
+    return null;
+  }
 
   // public DBlock getBlockById( long id ) 
   // {
