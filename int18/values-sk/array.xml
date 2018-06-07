@@ -3,9 +3,9 @@
 <resources>
 
   <string-array name="unitGrid">
-     <item name="meter">metre</item>
-     <item name="yard">yardy</item>
-     <item name="two_tf">stopy</item>
+     <item name="meter">Metre</item>
+     <item name="yard">Yardy</item>
+     <item name="two_tf">Stopy</item>
   </string-array>
 
   <string-array name="loopClosure">
@@ -15,20 +15,20 @@
   </string-array>
 
   <string-array name="wallsType">
-     <item name="none">žiadne</item>
-     <item name="convex">konvexné</item>
-     <item name="delaunay">Delaunay triangulácia</item>
+     <item name="none">Žiadne</item>
+     <item name="convex">Konvexné</item>
+     <item name="delaunay">Delaunay</item>
   </string-array>
 
   <string-array name="zoomCtrl">
-     <item name="0">vypnuté</item>
-     <item name="1">dočasné</item>
-     <item name="2">stále</item>
+     <item name="0">Vypnuté</item>
+     <item name="1">Dočasné</item>
+     <item name="2">Stále</item>
   </string-array>
 
   <string-array name="stationNames">
-     <item name="alpha">abecedný</item>
-     <item name="number">číselný</item>
+     <item name="alpha">Abecedné</item>
+     <item name="number">Číselné</item>
   </string-array>
 
   <!-- UNUSED string-array name="extend_name">
@@ -88,7 +88,7 @@
   <string-array name="connMode">
      <item name="batch">Na požiadanie</item>
      <item name="continuous">Nepretržité</item>
-     <item name="multi">S výberom</item>
+     <item name="multi">Kombinované</item>
   </string-array>
 
   <!-- UNUSED string-array name="altitudeType">
@@ -98,25 +98,25 @@
 
   <string-array name="sockType">
      <item name="default">Predvolené</item>
-     <item name="Insecure">Neisté</item>
+     <item name="Insecure">Nezabezpečené</item>
   </string-array>
 
   <string-array name="surveyStations">
      <item name="no">Žiadna</item>
-     <item name="for">Pomocne zámery, hlavná zámera dopredu</item>
-     <item name="back">Pomocné zámery, hlavná zámera naspäť</item>
-     <item name="for2">Hlavná zámera dopredu, pomocné zámery</item>
-     <item name="back2">Hlavná zámera naspäť, pomocné zámery</item>
-     <item name="anomaly">Hlavná zámera naspäť, pomocné zámery, hlavná zámera dopredu</item>
-     <item name="tripod">Hlavná zámera naspäť a hlavná zámera dopredu</item>
-     <item name="toporobot">Meranie ako v programe TopoRobot</item>
+     <item name="for">Pomocne zámery, Hlavná zámera dopredu</item>
+     <item name="back">Pomocné zámery, Hlavná zámera naspäť</item>
+     <item name="for2">Hlavná zámera dopredu, Pomocné zámery</item>
+     <item name="back2">Hlavná zámera naspäť, Pomocné zámery</item>
+     <item name="anomaly">Hlavná zámera naspäť, Pomocné zámery, Hlavná zámera dopredu</item>
+     <item name="tripod">Hlavná zámera naspäť, Hlavná zámera dopredu</item>
+     <item name="toporobot">Číslovanie ako v programe TopoRobot</item>
   </string-array>
 
   <string-array name="pickerType">
      <item name="recent">Nedávny</item>
      <item name="list">Zoznam</item>
-     <item name="grid">Mriežka</item>
-     <item name="grid3">Tri mriežky</item>
+     <item name="grid">Pole</item>
+     <item name="grid3">Tri polia</item>
   </string-array>
 
   <!-- UNUSED string-array name="sectionStations">
@@ -145,15 +145,15 @@
   </string-array -->
 
   <string-array name="lineStyle">
-     <item name="none">Koniec</item>
-     <item name="two">Normálne</item>
-     <item name="two">Hrubé</item>
-     <item name="bezier">Bezier</item>
+     <item name="none">Jemná</item>
+     <item name="two">Normálna</item>
+     <item name="two">Hrubá</item>
+     <item name="bezier">Bezierová krivka</item>
   </string-array>
 
   <string-array name="groupBy">
      <item name="distance">Vzdialenosť</item>
-     <item name="four">V štyroch skupinách</item>
+     <item name="four">Po štyroch v skupinách</item>
      <item name="only16">Len prvých 16</item>
   </string-array>
 
@@ -169,19 +169,19 @@
 
   <string-array name="unitLocation">
      <item name="degrees">Desatinné stupne</item>
-     <item name="ddmmss">stupne, minúty, sekúndy</item>
+     <item name="ddmmss">Stupne, Minúty, Sekúndy</item>
   </string-array>
 
   <string-array name="calibAlgo">
-     <item name="auto">auto</item>
-     <item name="linear">lineárne DistroX</item>
-     <item name="nonlinear">nelineárne DistroX</item>
+     <item name="auto">Automatický</item>
+     <item name="linear">Lineárne DistoX</item>
+     <item name="nonlinear">Nelineárne DistoX</item>
   </string-array>
 
   <string-array name="rawCData">
      <item name="none">Žiadny</item>
      <item name="dec">Desatinný</item>
-     <item name="hex">Hexa</item>
+     <item name="hex">Hexagonálny</item>
   </string-array>
 
 </resources>
