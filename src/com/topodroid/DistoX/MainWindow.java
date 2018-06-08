@@ -247,14 +247,6 @@ public class MainWindow extends Activity
         } catch ( ActivityNotFoundException e ) {
           TDToast.make( mActivity, R.string.no_thmanager );
         }
-      // } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // DATABASE
-      //   try {
-      //     intent = new Intent(Intent.ACTION_VIEW, Uri.parse("file://" + TDPath.getDatabase() ) );
-      //     intent.addCategory("com.kokufu.intent.category.APP_DB_VIEWER");
-      //     startActivity( intent );
-      //   } catch ( ActivityNotFoundException e ) {
-      //     TDToast.make( mActivity, R.string.no_db_viewer );
-      //   }
       }
     }
     // if ( status != mStatus ) {

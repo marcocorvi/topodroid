@@ -14,7 +14,6 @@ package com.topodroid.DistoX;
 
 import android.content.Context;
 // import android.content.Intent;
-// import android.content.ActivityNotFoundException;
 
 import android.app.Dialog;
 // import android.widget.Button;

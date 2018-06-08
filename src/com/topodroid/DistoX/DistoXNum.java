@@ -36,8 +36,9 @@ class DistoXNum
   /* statistics - not including survey shots */
   private float mZmin; // Z depth 
   private float mZmax;
-  private float mLength; // survey length 
-  private float mProjLen;  // survey projected length (on horiz plane)
+  private float mLength;  // survey length 
+  private float mExtLen;  // survey "extended" length (on extended profile)
+  private float mProjLen; // survey projected length (on horiz plane)
   private int mDupNr;  // number of duplicate shots
   private int mSurfNr; // number of surface shots
 
@@ -47,10 +48,11 @@ class DistoXNum
 
   private void resetStats()
   {
-    mLength = 0.0f;
+    mLength  = 0.0f;
+    mExtLen  = 0.0f;
     mProjLen = 0.0f;
-    mDupNr  = 0;
-    mSurfNr = 0;
+    mDupNr   = 0;
+    mSurfNr  = 0;
     mErr0 = mErr1 = mErr2 = 0;
   }
 
@@ -69,22 +71,24 @@ class DistoXNum
     }
   }
 
-  private void addToStats( boolean d, boolean s, float l, float h )
+  private void addToStats( boolean d, boolean s, float l, float e, float h )
   {
     if ( d ) ++mDupNr;
     if ( s ) ++mSurfNr;
     if ( ! ( d || s ) ) {
-      mLength += l;
+      mLength  += l;
+      mExtLen  += e;
       mProjLen += h;
     }
   }
 
-  private void addToStats( boolean d, boolean s, float l, float h, float v )
+  private void addToStats( boolean d, boolean s, float l, float e, float h, float v )
   {
     if ( d ) ++mDupNr;
     if ( s ) ++mSurfNr;
     if ( ! ( d || s ) ) {
-      mLength += l;
+      mLength  += l;
+      mExtLen  += e;
       mProjLen += h;
       if ( v < mZmin ) { mZmin = v; }
       if ( v > mZmax ) { mZmax = v; }
@@ -110,10 +114,11 @@ class DistoXNum
   int splaysNr()    { return mSplays.size(); }
   // int loopNr()      { return mClosures.size(); }
 
-  float surveyLength() { return mLength; }
+  float surveyLength()  { return mLength; }
+  float surveyExtLen()  { return mExtLen; }
   float surveyProjLen() { return mProjLen; }
-  float surveyTop()    { return -mZmin; } // top must be positive
-  float surveyBottom() { return -mZmax; } // bottom must be negative
+  float surveyTop()     { return -mZmin; } // top must be positive
+  float surveyBottom()  { return -mZmax; } // bottom must be negative
 
   float angleErrorMean()   { return mErr1; } // radians
   float angleErrorStddev() { return mErr2; } // radians
@@ -941,7 +946,9 @@ class DistoXNum
                 sh = makeShotFromTmp( sf, st, ts, 0, sf.mAnomaly, mDecl ); 
                 addShotToStations( sh, sf, st );
               }
-              addToStats( ts.duplicate, ts.surface, Math.abs(ts.d()), ts.h() ); // NOTE Math.abs is not necessary
+              // float length = ts.d();
+	      // if ( ext == 0 ) length = TDMath.sqrt( length*length - ts.h()*ts.h() );
+              addToStats( ts.duplicate, ts.surface, ts.d(), ((ext == 0)? Math.abs(ts.v()) : ts.d()), ts.h() );
 
               // do close loop also on duplicate shots
               // need the loop length to compute the fractional closure error
@@ -961,7 +968,7 @@ class DistoXNum
               st.mAnomaly = anomaly + sf.mAnomaly;
 	      // Log.v("DistoXX", "station " + st.name + " anomaly " + st.mAnomaly );
               updateBBox( st );
-              addToStats( ts.duplicate, ts.surface, Math.abs(ts.d()), ts.h(), st.v );
+              addToStats( ts.duplicate, ts.surface, ts.d(), ((ext == 0)? Math.abs(ts.v()) : ts.d()), ts.h(), st.v );
 
               // if ( TDLog.LOG_DEBUG ) {
               //   Log.v( TDLog.TAG, "new station F->T id= " + ts.to + " from= " + sf.name + " anomaly " + anomaly + " d " + ts.d() ); 

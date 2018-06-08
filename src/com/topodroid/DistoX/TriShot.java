@@ -78,10 +78,18 @@ class TriShot
     return mAvgLeg.length();
   }
 
+  // horizontal length
   float h()
   {
     return mAvgLeg.length() * TDMath.cosd( mAvgLeg.clino() );
   }
+
+  // vertical length - with sign
+  float v()
+  {
+    return mAvgLeg.length() * TDMath.sind( mAvgLeg.clino() );
+  }
+
 
   float b()
   {

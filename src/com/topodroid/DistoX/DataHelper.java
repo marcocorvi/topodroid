@@ -309,7 +309,7 @@ class DataHelper extends DataSetObservable
 
   SurveyStat getSurveyStat( long sid )
   {
-    // TDLog.Log( TDLog.LOG_DB, "getSurveyStat sid " + sid );
+    // TDLog.Log( TDLog.LOG_DB, "Get Survey Stat sid " + sid );
     HashMap< String, Integer > map = new HashMap< String, Integer >();
     int n0 = 0;
     int nc = 0;
@@ -319,7 +319,8 @@ class DataHelper extends DataSetObservable
 
     SurveyStat stat = new SurveyStat();
     stat.id = sid;
-    stat.lengthLeg = 0.0f;
+    stat.lengthLeg  = 0.0f;
+    stat.extLength  = 0.0f;
     stat.planLength = 0.0f;
     stat.lengthDuplicate = 0.0f;
     stat.lengthSurface   = 0.0f;
@@ -385,22 +386,31 @@ class DataHelper extends DataSetObservable
 
     // count components
     cursor = myDB.query( SHOT_TABLE,
-			        new String[] { "flag", "distance", "fStation", "tStation", "clino" },
-                                "surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ", 
-                                new String[] { Long.toString(sid) },
-                                null, null, null );
+			 new String[] { "flag", "distance", "fStation", "tStation", "clino", "extend" },
+                         "surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ", 
+                         new String[] { Long.toString(sid) },
+                         null, null, null );
     if (cursor.moveToFirst()) {
       do {
+	float len = (float)( cursor.getDouble(1) );
         switch ( (int)(cursor.getLong(0)) ) {
-          case 0: ++ stat.countLeg;
-            stat.lengthLeg += (float)( cursor.getDouble(1) );
-            stat.planLength += (float)( cursor.getDouble(1) * Math.cos( cursor.getDouble(4)*TDMath.DEG2RAD ) );
+          case 0: // NORMAL SHOT
+	    ++ stat.countLeg;
+            stat.lengthLeg += len;
+	    if ( cursor.getLong(5) == 0 ) {
+              stat.extLength += len * Math.abs( Math.sin( cursor.getDouble(4)*TDMath.DEG2RAD ) );
+	    } else {
+              stat.extLength += len;
+	    }
+            stat.planLength += (float)( len * Math.cos( cursor.getDouble(4)*TDMath.DEG2RAD ) );
             break;
-          case 1: ++ stat.countSurface;
-            stat.lengthSurface += (float)( cursor.getDouble(1) );
+          case 1: // SURFACE SHOT
+	    ++ stat.countSurface;
+            stat.lengthSurface += len;
             break;
-          case 2: ++ stat.countDuplicate;
-            stat.lengthDuplicate += (float)( cursor.getDouble(1) );
+          case 2: // DUPLICATE SHOT
+	    ++ stat.countDuplicate;
+            stat.lengthDuplicate += len;
             break;
         }
         String f = cursor.getString(2);
@@ -446,7 +456,7 @@ class DataHelper extends DataSetObservable
     stat.countStation = map.size();
     stat.countLoop = nl;
     stat.countComponent = nc;
-    // TDLog.Log( TDLog.LOG_DB, "getSurveyStats NV " + nv + " NE " + ne + " NL " + nl + " NC " + nc);
+    // TDLog.Log( TDLog.LOG_DB, "Get Survey Stats NV " + nv + " NE " + ne + " NL " + nl + " NC " + nc);
 
     cursor = myDB.query( SHOT_TABLE,
                          new String[] { "count()" },

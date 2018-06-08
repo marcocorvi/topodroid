@@ -13,7 +13,6 @@ package com.topodroid.DistoX;
 
 // import android.app.Activity;
 import android.content.Context;
-// import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;

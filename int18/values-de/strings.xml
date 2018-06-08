@@ -498,8 +498,9 @@
     <string name="stat_component">Komponenten %1$d</string>
     <string name="stat_depth">Tiefe %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Doppelmessungen %1$d %2$.1f %3$s</string>
-    <string name="stat_leg">Messstrecke %1$d %2$.1f %3$s %4$.1f %5$s</string>
+    <string name="stat_leg">Messstrecke %1$d %2$.1f %3$.1f %4$.1f %5$s</string>
     <string name="stat_length">Länge %1$.1f %2$s</string>
+    <!-- TODO string name="stat_extlen">3D length %1$.1f %2$s</string -->
     <string name="stat_projlen">Skizzenlänge %1$.1f %2$s</string>
     <string name="stat_loop">Kreisschlüsse %1$d</string>
     <string name="stat_origin">Ursprungs-Messpunkt: %1$s</string>

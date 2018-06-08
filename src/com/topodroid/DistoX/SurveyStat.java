@@ -15,6 +15,7 @@ class SurveyStat
 {
   long id;  // survey id
   float lengthLeg;
+  float extLength;
   float planLength;
   float lengthDuplicate;
   float lengthSurface;

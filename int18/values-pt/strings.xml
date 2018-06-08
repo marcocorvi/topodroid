@@ -485,8 +485,9 @@
     <string name="stat_component">Componentes: %1$d</string>
     <string name="stat_depth">Profundidade - Mín: %1$.1f %2$s Máx: %3$.1f %4$s"</string>
     <string name="stat_duplicate">Visadas duplicadas - Qt: %1$d Ext: %2$.1f %3$s</string>
-    <string name="stat_leg">Visadas - Qt: %1$d Ext: %2$.1f %3$s Proj horiz: %4$.1f %5$s</string>
+    <string name="stat_leg">Visadas - Qt: %1$d Ext: %2$.1f %3$.1f Proj horiz: %4$.1f %5$s</string>
     <string name="stat_length">Extensão total: %1$.1f %2$s</string>
+    <!-- TODO string name="stat_extlen">3D length %1$.1f %2$s</string -->
     <string name="stat_projlen">Projeção horizontal: %1$.1f %2$s</string>
     <string name="stat_loop">Poligonais: %1$d</string>
     <string name="stat_origin">Base inicial: %1$s</string>

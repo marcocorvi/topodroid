@@ -48,7 +48,7 @@ import android.util.Base64;
 
 class TDExporter
 {
-                                   // -1      0           1        2         3       4
+                                                 // -1      0           1        2         3       4        5
   private static final String[] therion_extend = { "left", "vertical", "right", "ignore", "hide", "start", "unset", "left", "vert", "right" };
   private static final String   therion_flags_duplicate     = "   flags duplicate\n";
   private static final String   therion_flags_not_duplicate = "   flags not duplicate\n";
@@ -979,6 +979,7 @@ class TDExporter
 
       pw.format("    data normal from to length compass clino\n");
 
+      boolean splay_extend = true;
       long extend = 0;  // current extend
       AverageLeg leg = new AverageLeg(0);
       HashMap<String, LRUD> lruds = null;
@@ -1014,9 +1015,15 @@ class TDExporter
             if ( item.mComment != null && item.mComment.length() > 0 ) {
               pw.format("  # %s\n", item.mComment );
             }
-            if ( item.getExtend() != extend ) {
+            if ( item.getExtend() > 1 ) {
+	      if ( splay_extend ) {
+                pw.format("    extend auto\n" );
+	        splay_extend = false;
+	      }
+	    } else if ( item.getExtend() != extend || ! splay_extend ) {
               extend = item.getExtend();
               pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
+	      splay_extend = true;
             }
             writeThStations( pw, ( item.isXSplay() ? "-" : "." ), to, item.isCommented() );
             pw.format(Locale.US, "%.2f %.1f %.1f\n", item.mLength * ul, item.mBearing * ua, item.mClino * ua );
@@ -1044,13 +1051,19 @@ class TDExporter
             if ( item.mComment != null && item.mComment.length() > 0 ) {
               pw.format("  # %s\n", item.mComment );
             }
-            if ( item.getExtend() != extend ) {
+            if ( item.getExtend() > 1 ) {
+	      if ( splay_extend ) {
+                pw.format("    extend auto\n" );
+	        splay_extend = false;
+	      }
+	    } else if ( item.getExtend() != extend || ! splay_extend ) {
               extend = item.getExtend();
               pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
+	      splay_extend = true;
             }
             writeThStations( pw, from, ( item.isXSplay() ? "-" : "." ), item.isCommented() );
             pw.format(Locale.US, "%.2f %.1f %.1f\n", item.mLength * ul, item.mBearing * ua, item.mClino * ua );
-          } else {
+          } else { // with both FROM and TO stations
             if ( leg.mCnt > 0 && ref_item != null ) {
               writeThLeg( pw, leg, ul, ua );
               if ( duplicate ) {
@@ -1063,9 +1076,10 @@ class TDExporter
               }
             }
             ref_item = item;
-            if ( item.getExtend() != extend ) {
+            if ( item.getExtend() != extend || ! splay_extend ) {
               extend = item.getExtend();
               pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
+	      splay_extend = true;
             }
             if ( item.isDuplicate() ) {
               pw.format(therion_flags_duplicate);

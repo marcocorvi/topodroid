@@ -66,6 +66,11 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
       />
+      <TextView android:id="@+id/text_stat_extlen"
+        android:layout_marginTop="@dimen/marginsmall"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+      />
       <TextView android:id="@+id/text_stat_projlen"
         android:layout_marginTop="@dimen/marginsmall"
         android:layout_width="fill_parent"

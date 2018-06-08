@@ -29,7 +29,6 @@ import android.os.Bundle;
 // import android.app.Application;
 import android.app.Activity;
 
-// import android.content.ActivityNotFoundException;
 // import android.content.res.ColorStateList;
 // import android.content.Context;
 // import android.content.Intent;
