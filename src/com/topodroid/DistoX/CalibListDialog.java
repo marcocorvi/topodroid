@@ -20,8 +20,6 @@ import android.os.Bundle;
 import android.content.Context;
 
 import android.view.View;
-// import android.view.View.OnClickListener;
-// import android.view.ViewGroup.LayoutParams;
 
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -30,9 +28,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-// import android.widget.AdapterView.OnItemLongClickListener;
-
-// import android.widget.Toast;
 
 class CalibListDialog extends MyDialog
                              implements OnItemClickListener
@@ -62,8 +57,6 @@ class CalibListDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
     
-    // setContentView(R.layout.calib_list_dialog );
-    // getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
     initLayout( R.layout.calib_list_dialog, R.string.title_calib );
 
     mArrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );

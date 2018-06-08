@@ -361,10 +361,6 @@ class ShotDialog extends MyDialog
     layout4.setMinimumHeight( size + 20 );
     // layout9.setMinimumHeight( size + 20 );
 
-    // LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
-    //   LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
-    // lp.setMargins( 0, 10, 20, 10 );
-
     if ( TDLevel.overNormal ) {
       mRBdup       = new MyCheckBox( mContext, size, R.drawable.iz_dup_ok, R.drawable.iz_dup_no );
       mRBsurf      = new MyCheckBox( mContext, size, R.drawable.iz_surface_ok, R.drawable.iz_surface_no );

@@ -29,7 +29,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import android.view.View;
-// import android.view.ViewGroup.LayoutParams;
 
 class DrawingLineDialog extends MyDialog
                                implements View.OnClickListener, AdapterView.OnItemSelectedListener
@@ -119,9 +118,7 @@ class DrawingLineDialog extends MyDialog
     mReversed.setChecked( mLine.isReversed() );
     mBtnClose.setChecked( mLine.isPathClosed() );
 
-    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
-      LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
-    lp.setMargins( 0, 10, 20, 10 );
+    LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 0, 10, 20, 10 );
 
     LinearLayout layout3 = (LinearLayout)findViewById( R.id.layout3 );
     layout3.addView( mReversed, lp );

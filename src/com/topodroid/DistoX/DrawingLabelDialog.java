@@ -19,7 +19,6 @@ import android.content.Context;
 
 // import android.graphics.*;
 import android.view.View;
-// import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
 

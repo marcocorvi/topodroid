@@ -28,7 +28,6 @@ import android.view.View;
 // import android.view.View.OnClickListener;
 // import android.view.Window;
 // import android.view.WindowManager;
-// import android.view.ViewGroup.LayoutParams;
 
 import android.widget.Button;
 // import android.widget.Toast;
@@ -83,9 +82,7 @@ class AudioDialog extends MyDialog
     LinearLayout layout2 = (LinearLayout) findViewById( R.id.layout2 );
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
     layout2.setMinimumHeight( size + 40 );
-    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
-      LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
-    lp.setMargins( 10, 10, 20, 20 );
+    LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 10, 10, 20, 20 );
 
     // mBtnDelete = (Button) findViewById( R.id.audio_delete );
     mBtnClose = (Button) findViewById( R.id.audio_close );

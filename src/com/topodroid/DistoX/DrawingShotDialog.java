@@ -129,9 +129,7 @@ class DrawingShotDialog extends MyDialog
     layout3.setMinimumHeight( size + 20 );
     layout3b.setMinimumHeight( size + 20 );
 
-    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
-      LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
-    lp.setMargins( 0, 10, 20, 10 );
+    LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 0, 10, 20, 10 );
 
     if ( TDLevel.overNormal ) {
       mRBdup      = new MyCheckBox( mContext, size, R.drawable.iz_dup_ok, R.drawable.iz_dup_no );

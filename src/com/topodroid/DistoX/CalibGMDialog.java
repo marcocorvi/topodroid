@@ -30,7 +30,6 @@ import android.widget.Button;
 // import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.view.View;
-// import android.view.ViewGroup.LayoutParams;
 // import android.view.View.OnKeyListener;
 // import android.view.KeyEvent;
 
@@ -88,9 +87,7 @@ class CalibGMDialog extends MyDialog
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
     layout2.setMinimumHeight( size + 20 );
     
-    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
-      LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
-    lp.setMargins( 0, 10, 20, 10 );
+    LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 0, 10, 20, 10 );
 
     // mButtonOK     = new MyCheckBox( mContext, size, R.drawable.iz_save, R.drawable.iz_save ); 
     mButtonDelete = new MyCheckBox( mContext, size, R.drawable.iz_delete, R.drawable.iz_delete ); 
@@ -101,10 +98,6 @@ class CalibGMDialog extends MyDialog
     // layout2.addView( mButtonOK, lp );
     layout2.addView( mButtonDelete, lp );
 
-    // LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mCBregroup.getLayoutParams();
-    // params.setMargins( 0, 0, 40, 0 );
-    // mCBregroup.setLayoutParams( params );
-    
     mButtonOK     = (Button) findViewById(R.id.gm_ok );
     mButtonCancel = (Button) findViewById(R.id.gm_cancel );
     // mButtonDelete = (Button) findViewById(R.id.gm_delete );

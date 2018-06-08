@@ -21,7 +21,6 @@ import android.content.Context;
 
 import android.view.View;
 // import android.view.View.OnClickListener;
-// import android.view.ViewGroup.LayoutParams;
 
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -55,8 +54,6 @@ class CalibValidateListDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
     
-    // setContentView(R.layout.calib_validate_list_dialog );
-    // getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
     initLayout( R.layout.calib_validate_list_dialog, R.string.title_calib );
 
     ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );

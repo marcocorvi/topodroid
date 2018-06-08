@@ -140,18 +140,13 @@ class DrawingLineSectionDialog extends MyDialog
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
     LinearLayout button_list = (LinearLayout)findViewById( R.id.button_list );
     button_list.setMinimumHeight( size + 20 );
-    LinearLayout.LayoutParams lp;
-    // lp = new LinearLayout.LayoutParams( LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
-    // lp.setMargins( 0, 10, 20, 10 );
 
     mIVimage = (ImageView) findViewById( R.id.line_image );
     // mBtnFoto = (Button) findViewById( R.id.button_foto );
     if ( hasPhoto ) {
       mBtnFoto = new MyCheckBox( mContext, size, R.drawable.iz_camera, R.drawable.iz_camera ); 
       button_list.addView( mBtnFoto );
-      lp = (LinearLayout.LayoutParams) mBtnFoto.getLayoutParams();
-      lp.setMargins( 0, -10, 40, 10 );
-      mBtnFoto.setLayoutParams( lp );
+      TDLayout.setMargins( mBtnFoto, 0, -10, 40, 10 );
       mBtnFoto.setOnClickListener( this );
     // } else {
     //   /* mBtnFoto.setVisibility( View.GONE ); */
@@ -160,9 +155,7 @@ class DrawingLineSectionDialog extends MyDialog
     // mBtnDraw = (Button) findViewById( R.id.button_draw );
     mBtnDraw = new MyCheckBox( mContext, size, R.drawable.iz_plot, R.drawable.iz_plot );
     button_list.addView( mBtnDraw );
-    lp = (LinearLayout.LayoutParams) mBtnDraw.getLayoutParams();
-    lp.setMargins( 0, -10, 40, 10 );
-    mBtnDraw.setLayoutParams( lp );
+    TDLayout.setMargins( mBtnDraw, 0, -10, 40, 10 );
     mBtnDraw.setOnClickListener( this );
 
     if ( mPlotInfo != null ) { // check the photo
@@ -229,9 +222,7 @@ class DrawingLineSectionDialog extends MyDialog
     // mBtnErase = (Button) findViewById( R.id.button_erase );
     mBtnErase = new MyCheckBox( mContext, size, R.drawable.iz_delete, R.drawable.iz_delete );
     button_list.addView( mBtnErase );
-    lp = (LinearLayout.LayoutParams) mBtnErase.getLayoutParams();
-    lp.setMargins( 0, -10, 40, 10 );
-    mBtnErase.setLayoutParams( lp );
+    TDLayout.setMargins( mBtnErase, 0, -10, 40, 10 );
     mBtnErase.setOnClickListener( this );
     // if ( mExists ) mBtnErase.setTextColor( 0xffff0000 );
 
@@ -239,9 +230,7 @@ class DrawingLineSectionDialog extends MyDialog
     if ( mPlotInfo != null ) {
       mBtnSave = new MyCheckBox( mContext, size, R.drawable.iz_save, R.drawable.iz_save );
       button_list.addView( mBtnSave );
-      lp = (LinearLayout.LayoutParams) mBtnSave.getLayoutParams();
-      lp.setMargins( 0, -10, 40, 10 );
-      mBtnSave.setLayoutParams( lp );
+      TDLayout.setMargins( mBtnSave, 0, -10, 40, 10 );
       mBtnSave.setOnClickListener( this );
     }
     // mBtnCancel = (Button) findViewById( R.id.button_cancel );

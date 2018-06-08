@@ -241,9 +241,7 @@ class MyColorPicker extends MyDialog
       mBtnClose.setOnClickListener( this );
 
       LinearLayout layout = (LinearLayout) findViewById( R.id.color_layout );
-      LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
-        LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
-      lp.setMargins( 10, 10, 20, 20 );
+      LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 10, 10, 20, 20 );
       mColorPicker = new ColorPickerView(getContext(), l, mColor);
       layout.addView( mColorPicker, lp );
       layout.invalidate();

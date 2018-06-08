@@ -28,7 +28,6 @@ import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.Button;
 import android.view.View;
-// import android.view.ViewGroup.LayoutParams;
 
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -98,8 +97,6 @@ class ConnectDialog extends MyDialog
 
     // mAddress = getIntent().getExtras().getString(   TopoDroidApp.TOPODROID_DEVICE_ADDR );
 
-    // setContentView( R.layout.connect_dialog );
-    // getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
     initLayout( R.layout.connect_dialog, R.string.title_device );
 
     mTVaddress = (TextView) findViewById( R.id.device_address );

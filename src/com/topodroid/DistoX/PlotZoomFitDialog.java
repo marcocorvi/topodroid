@@ -56,8 +56,7 @@ class PlotZoomFitDialog extends MyDialog
     LinearLayout layout1 = (LinearLayout) findViewById( R.id.layout1 );
     layout1.setMinimumHeight( size + 20 );
     
-    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
-    lp.setMargins( 0, 10, 30, 10 );
+    LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 0, 10, 20 ,10 );
 
     // mBtnZoomFit = new MyCheckBox( mContext, size, R.drawable.iz_zoomfit, R.drawable.iz_zoomfit );
     // mBtnZoomFit.setOnClickListener( this );

@@ -21,7 +21,6 @@ import android.content.Context;
 // import android.content.DialogInterface.OnDismissListener;
 
 import android.view.View;
-// import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
@@ -52,8 +51,6 @@ class DeviceNameDialog extends MyDialog
   {
     super.onCreate( bundle );
 
-    // setContentView( R.layout.device_name_dialog );
-    // getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
     initLayout( R.layout.device_name_dialog, R.string.device_info );
 
     mTVmodel = (TextView) findViewById( R.id.tv_model );

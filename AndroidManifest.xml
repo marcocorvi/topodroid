@@ -39,7 +39,7 @@
     <uses-feature android:name="android.hardware.sensor.compass"       android:required="false" />
 
 
-    <application
+    <application largeHeap="true"
           android:name=".TopoDroidApp"
           android:label="@string/app_name"
           android:screenOrientation="portrait"

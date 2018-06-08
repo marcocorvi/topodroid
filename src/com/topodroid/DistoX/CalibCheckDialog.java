@@ -28,7 +28,6 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import android.view.View;
 // import android.view.View.OnClickListener;
-// import android.view.ViewGroup.LayoutParams;
 
 // import android.graphics.Bitmap;
 
@@ -62,12 +61,6 @@ class CalibCheckDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
 
-    // setContentView(R.layout.calib_check_dialog);
-    // try {
-    //   getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
-    // } catch ( NullPointerException e ) { 
-    //   TDLog.Error("CalibCheckDialog: set layout NPE");
-    // }
     initLayout( R.layout.calib_check_dialog, R.string.title_calib_check );
     
     // hist0 = (ImageView) findViewById( R.id.histogram0 );

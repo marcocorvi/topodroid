@@ -128,9 +128,7 @@ class ItemRecentDialog extends MyDialog
     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 0, LinearLayout.LayoutParams.WRAP_CONTENT );
     lp.setMargins( 0, DIMMY, DIMMX, DIMMY );
     lp.weight = 16;
-    LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams( 
-      LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
-    lp2.setMargins( DIMMY, DIMMY, 0, DIMMY );
+    LinearLayout.LayoutParams lp2 = TDLayout.getLayoutParams( DIMMY, DIMMY, 0, DIMMY );
     lp2.weight = 10;
 
     for ( int k=0; k<nrRecent; ++k ) {
