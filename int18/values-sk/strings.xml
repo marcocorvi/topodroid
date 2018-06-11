@@ -6,18 +6,18 @@
     <!-- TODO string name="user_man_fail">Failed to install user manual translation</string -->
 
     <string name="app_name">TopoDroid</string>
-    <string name="double_back">Opätovným kliknutím tlačidla SPAŤ ukončíte aplikáciu</string>
+    <string name="double_back">Pre návrat Opätove stlačte tlačidlo SPÄŤ</string>
 
-    <string name="version_ask">Chcete nainštalovať kresliace nástroje v.%1$s?\n(Aktuálne v.%2$s)</string>
-    <!-- TODO string name="symbols_ask">Install drawing tools v.%1$s?\n(Current v.%2$s)</string -->
+    <string name="version_ask">Updatovať na novú verziu Topodroid.\nChcete reinštalovať kresliace nástroje?</string>
+    <string name="symbols_ask">Inštalovať kresliace nástroje v.%1$s?\n(Aktuálne v.%2$s)</string>
 
     <string name="POINT">BOD</string>
     <string name="LINE">ČIARA</string>
     <string name="AREA">OBLASŤ</string>
     <string name="HELP">POMOC</string>
     <string name="STATION">MERACÍ_BOD</string>
-    <!-- TODO string name="UP">UPWARD</string -->
-    <!-- TODO string name="DOWN">DOWNWARD</string -->
+    <string name="UP">DOHORA</string>
+    <string name="DOWN">DODOLA</string>
 
     <string name="cut">VYSTRIHNÚŤ</string>
     <string name="copy">KOPÍROVAŤ</string>
@@ -28,17 +28,17 @@
     <string name="memoryX310">DistoX X310 pamäť</string>
     <!-- UNUSED string name="memory_data">DistoX dáta</string -->
 
-    <!-- TODO string name="thp_user">user</string -->
+    <string name="thp_user">Univerzálny bod</string>
     <string name="thp_label">Označenie</string>
     <!-- UNUSED string name="thp_danger">pericolo</string -->
+    <string name="thl_user">Univerzálna čiara</string>
     <string name="thl_wall">Stena</string>
+    <string name="tha_user">Univerzálna oblasť</string>
     <string name="tha_water">Voda</string>
-    <!-- TODO string name="tha_user">user</string -->
-    <!-- TODO string name="tha_water">water</string -->
 
     <string name="make_walls">Steny</string>
     <string name="missing_station">Chýba merací bod</string>
-    <!-- TODO string name="station_not_found">Station not found</string -->
+    <string name="station_not_found">Merací bod nenájdený</string>
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Inštalovať a prototypovať grafiku s TdSymbol</string -->
     <!-- UNUSED string name="missing_line">LINEA</string -->
@@ -47,9 +47,9 @@
     <!-- UNUSED string name="missing_symbols">Mancano alcuni prototipi grafici.\nSalvare ugualmente?</string -->
     <!-- UNUSED string name="missing_title">PROTOTIPI MANCANTI</string -->
     <!-- UNUSED string name="missing_warning">Mancano i seguenti prototipi grafici.\n</string -->
-    <string name="failed_snap_to_line">Chýba riadok na obmedzenie medzery</string>
-    <string name="failed_snap_to_point">Chýba bod</string>
-    <!-- TODO string name="failed_snap_to_splays">No close splay to snap the line to</string -->
+    <string name="failed_snap_to_line">V blízkosti nie je žiadny bod z čiary "na prichytenie" ku Hranici Oblasti</string>
+    <string name="failed_snap_to_point">V blízkosti nie je žiadny bod "na prichytenie" k Bodu</string>
+    <string name="failed_snap_to_splays">V blízkosti nie je pomocná zámera na "prichytenie" ku Čiare</string>
 
     <string name="calibration_title">Kalibrácia nástrojov</string>
     <string name="calibration_length">Dĺžka</string>
@@ -59,57 +59,58 @@
     <string name="calib_new">Nová kalibrácia</string>
     <string name="calib_exists">Kalibrácia už existuje</string>
     <string name="calib_delete">Vymazať kalibráciu</string>
-    <string name="calib_device_mismatch">VAROVANIE: Kalibračné zariadenie nesúhlasí</string>
+    <string name="calib_device_mismatch">VAROVANIE: Kalibrácia - Zariadenie nesúhlasí</string>
     <string name="calib_no_name">Názov je povinný</string>
     <string name="calib_gm_policy">Pravidlá kalibrácie</string>
     <string name="calib_gm_undelete">Obnoviť kalibračné dáta?</string>
     <string name="calib_saved">Uložená kalibrácia</string>
     <string name="calib_updated">Aktualizovaná kalibrácia</string>
-    <string name="calib_compute_groups">Zoradiť údaje pri spracovaní</string>
-    <string name="calib_compute_coeffs">Vypočítajte koeficient</string>
+    <string name="calib_compute_groups">Zoradí kalibračné údaje do skupín &#8230;</string>
+    <string name="calib_compute_coeffs">Vypočíta kalibračné koeficienty &#8230;</string>
     <!-- UNUSED string name="calib_read_coeffs">Lettura coefficienti in corso</string -->
-    <string name="calib_write_coeffs">Výpočet kalibracných skupín údajov</string>
-    <string name="calib_validation">Výpočet kalibracných koeficientov &#8230;</string>
+    <string name="calib_write_coeffs">Zapíše kalibračné koeficienty &#8230;</string>
+    <string name="calib_validation">Porovnanie %1$s vs %2$s</string>
     <!-- UNUSED string name="connect_failed">Comunicazione DistoX fallita</string -->
     <!-- UNUSED string name="data"> dati</string -->
     <string name="using">Pripojené zariadenie %1$s</string>
     <string name="calib_error">Priemerná chyba" %1$f stupňov</string>
     <string name="calib_stddev">Chyba stddev: %1$.4f stupňov</string>
     <string name="calib_max_error">Maximálna chyba: %1$.4f stupňov</string>
-    <string name="calib_ave_std">Priemerne: %1$.4f %2$.4f stupňov</string>
-    <string name="calib_precision">Presnosť: %1$.4f ± %2$.4f stupňov</string>
-    <string name="calib_iter">Iterácie: %1$d</string>
-    <!-- TODO string name="calib_reset">Reset DistoX calibration ?</string -->
-    <!-- UNUSED string name="calib_saturated_values">Pozor: %1$ nasičeni podatki</string -->
-    <string name="algorithm">Algoritmus:</string>
-    <string name="auto">Automat</string>
-    <string name="linear">Lineárne kalib.</string>
-    <string name="non_linear">Nelineárne kalib.</string>
-    <!-- NO string name="algo_minimum">minimum</string -->
+    <string name="calib_ave_std">Priemerná presnosť: %1$.4f %2$.4f stupňov</string>
+    <string name="calib_precision">Presnosť</string>
+    <string name="calib_iter">Opakovania: %1$d</string>
+    <string name="calib_reset">Vymazať kalibráciu DistaX?</string>
+    
+    <string name="algorithm">Algoritmus kalibrácie:</string>
+    <string name="auto">Automatický</string>
+    <string name="linear">Lineárny</string>
+    <string name="non_linear">Nelineárny</string>
+    <string name="algo_minimum">Minimum</string>
    
-    <!-- FIXME string name="device_algo_failed">Neúspešná definícia automatizovaného algoritmu pomocou lineárneho algoritmu</string bad chararcter backslash-u  -->
-    <!-- TODO string name="device_address">Adresa %1$s</string -->
+    <string name="device_algo_failed">Zlyhala automatická detekcia algoritmu\nPoužitý lineárny algoritmus</string>
+    <string name="device_address">Adresa %1$s</string>
     <!-- UNUSED string name="device_busy">Zariadenie je zaneprázdnené</string -->
     <string name="device_illegal_addr">Neplatná adresa pamäte</string>
     <string name="device_info">Informácie o zariadení</string>
-    <string name="device_model_set">Chcete zmeniť model zariadenia?</string>
-    <string name="device_none">Nie je vybraté DistoX</string>
+    <string name="device_model_set">Chcete naozaj zmeniť model zariadenia?</string>
+    <string name="device_none">Nie je vybrané žiadne DistoX</string>
     <!-- UNUSED string name="device_paired">Device is paired</string -->
     <string name="device_reset">Reset pamäte DistoX</string>
     <string name="device_code">DistoX kód %1$4d</string>
     <string name="device_firmware">Firmware %1$d.%2$d</string>
     <string name="device_hardware">Hardware %1$d.%2$d</string>
-    <!-- TODO string name="device_status_angle_grad">Angle units: grad</string -->
-    <!-- TODO string name="device_status_angle_degree">Angle units: degree</string -->
-    <!-- TODO string name="device_status_compass_on">Compass/clino: on</string -->
-    <!-- TODO string name="device_status_compass_off">Compass/clino: off</string -->
-    <!-- FIXME string name="device_status_calib">Način %1$s</string -->
-    <!-- TODO string name="device_status_normal">Mode: normal</string -->
-    <!-- TODO string name="device_status_silent_on">Silent: on</string -->
-    <!-- TODO string name="device_status_silent_off">Silent: off</string -->
+    <string name="device_memory">Pamäť  %1$02x.%2$02x</string>
+    <string name="device_status_angle_grad">Jednotky uhlov: gradiány</string>
+    <string name="device_status_angle_degree">Jednotky uhlov: stupne</string>
+    <string name="device_status_compass_on">Compass/clino: zapnutý</string>
+    <string name="device_status_compass_off">Compass/clino: vypnutý</string>
+    <string name="device_status_calib">Mode: Kalibrácia</string>
+    <string name="device_status_normal">Mode: Nornálny</string>
+    <string name="device_status_silent_on">Tichý režim: zapnutý</string>
+    <string name="device_status_silent_off">Tichý režim: vypnutý</string>
     <string name="bt_reset">Obnovenie pripojenia Bluetooth</string>
     <string name="save_as">Uložiť ako</string>
-    <string name="nickname">Prezývka_NICK</string>
+    <string name="nickname">Prezývka NICK</string>
 
     <string name="comment">Komentár</string>
     <!-- UNUSED string name="flag">Flag</string -->
