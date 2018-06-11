@@ -11,6 +11,7 @@
   </plurals>
   <plurals name="read_calib_data">
     <item quantity="zero">Keine Kalibrierungsdaten gelesen</item>
+    <!-- TODO item quantity="one"></item -->
     <item quantity="other">%1$d Daten gelesen (%2$d Pakete)</item>
   </plurals>
 </resources>

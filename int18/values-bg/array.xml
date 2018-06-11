@@ -44,7 +44,7 @@
      <item name="four">4</item>
   </string-array>
 
-  <string-array name="exportShots">
+  <!-- FIXME string-array name="exportShots">
      <item name="none">Без експорт</item>
      <item name="therion">Therion</item>
      <item name="compass">Compass</item>
@@ -58,7 +58,7 @@
      <item name="walls">Walls</item>
      <item name="csv">CSV</item>
      <item name="dxf">DXF</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="exportPlot">
      <item name="none">Без експорт</item>

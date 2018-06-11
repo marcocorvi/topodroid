@@ -63,7 +63,7 @@
         android:layout_width="0dp"
         android:layout_weight="30"
         android:layout_height="wrap_content" 
-        android:hint="&#x2190;&#x2192;"
+	android:hint="@string/input_length"
         android:nextFocusRight="@+id/shot_bearing"
         android:singleLine="true"
         />
@@ -73,7 +73,7 @@
         android:layout_width="0dp"
         android:layout_weight="30"
         android:layout_height="wrap_content" 
-        android:hint="&#x2191;N"
+	android:hint="@string/input_azimuth"
         android:nextFocusRight="@+id/shot_clino"
         android:singleLine="true"
         />
@@ -83,7 +83,7 @@
         android:layout_width="0dp"
         android:layout_weight="30"
         android:layout_height="wrap_content" 
-        android:hint="/_"
+	android:hint="@string/input_clino"
         android:nextFocusRight="@+id/shot_left"
         android:singleLine="true"
         />
@@ -93,7 +93,7 @@
         android:layout_weight="10"
         android:layout_height="wrap_content" 
         android:layout_marginLeft="@dimen/marginh"
-        android:text="&gt;"
+	android:text="@string/greater_than"
         />
     </LinearLayout>
 
@@ -111,7 +111,7 @@
         android:layout_width="0dp"
         android:layout_weight="30"
         android:layout_height="wrap_content" 
-        android:hint="&#x2190;&#x2192;"
+	android:hint="@string/input_length"
         android:nextFocusRight="@+id/shot_backbearing"
         android:singleLine="true"
         />
@@ -121,7 +121,7 @@
         android:layout_width="0dp"
         android:layout_weight="30"
         android:layout_height="wrap_content" 
-        android:hint="&#x2191;N"
+	android:hint="@string/input_azimuth"
         android:nextFocusRight="@+id/shot_backclino"
         android:singleLine="true"
         />
@@ -131,7 +131,7 @@
         android:layout_width="0dp"
         android:layout_weight="30"
         android:layout_height="wrap_content" 
-        android:hint="/_"
+	android:hint="@string/input_clino"
         android:singleLine="true"
         />
       <TextView 
@@ -139,7 +139,7 @@
         android:layout_weight="10"
         android:layout_height="wrap_content" 
         android:layout_marginLeft="@dimen/marginh"
-        android:text="&lt;"
+	android:text="@string/less_than"
         />
     </LinearLayout>
 
@@ -157,7 +157,7 @@
         android:layout_width="0dp"
         android:layout_weight="25"
         android:layout_height="wrap_content" 
-        android:hint="&#x21A4;"
+	android:hint="@string/arrow_left"
         android:nextFocusRight="@+id/shot_right"
         android:singleLine="true"
         />
@@ -167,7 +167,7 @@
         android:layout_width="0dp"
         android:layout_weight="25"
         android:layout_height="wrap_content" 
-        android:hint="&#x21A6;"
+	android:hint="@string/arrow_right"
         android:nextFocusRight="@+id/shot_up"
         android:singleLine="true"
         />
@@ -177,7 +177,7 @@
         android:layout_width="0dp"
         android:layout_weight="25"
         android:layout_height="wrap_content" 
-        android:hint="&#x21A5;"
+        android:hint="@string/arrow_up"
         android:nextFocusRight="@+id/shot_down"
         android:singleLine="true"
         />
@@ -187,7 +187,7 @@
         android:layout_width="0dp"
         android:layout_weight="25"
         android:layout_height="wrap_content" 
-        android:hint="&#x21A7;"
+	android:hint="@string/arrow_down"
         android:nextFocusRight="@+id/top"
         android:singleLine="true"
         />

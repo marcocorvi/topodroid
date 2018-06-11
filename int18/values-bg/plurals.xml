@@ -7,11 +7,13 @@
 
   <plurals name="read_data">
     <item quantity="zero">Няма прочетени измервания</item>
+    <!-- TODO item quantity="one"></item -->
     <item quantity="other">Прочетени %1$d измервания</item>
   </plurals>
 
   <plurals name="read_calib_data">
     <item quantity="zero">Няма прочетени измервания</item>
+    <!-- TODO item quantity="one"></item -->
     <item quantity="other">Прочетени %1$d измервания (%2$d пакети)</item>
   </plurals>
 </resources>

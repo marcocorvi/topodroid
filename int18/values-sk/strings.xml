@@ -69,7 +69,7 @@
     <string name="calib_compute_coeffs">Vypočítajte koeficient</string>
     <!-- UNUSED string name="calib_read_coeffs">Lettura coefficienti in corso</string -->
     <string name="calib_write_coeffs">Výpočet kalibracných skupín údajov</string>
-    <string name="calib_validation">Výpočet kalibracných koeficientov &#8230;</string>
+    <!-- FIXME string name="calib_validation">Výpočet kalibracných koeficientov &#8230;</string -->
     <!-- UNUSED string name="connect_failed">Comunicazione DistoX fallita</string -->
     <!-- UNUSED string name="data"> dati</string -->
     <string name="using">Pripojené zariadenie %1$s</string>

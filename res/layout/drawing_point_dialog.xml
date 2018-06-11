@@ -27,27 +27,27 @@
     <RadioButton android:id="@+id/point_scale_xs"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:text="XS"
+      android:text="@string/size_xs"
     />
     <RadioButton android:id="@+id/point_scale_s"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:text="S"
+      android:text="@string/size_s"
     />
     <RadioButton android:id="@+id/point_scale_m"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:text="M"
+      android:text="@string/size_m"
     />
     <RadioButton android:id="@+id/point_scale_l"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:text="L"
+      android:text="@string/size_l"
     />
     <RadioButton android:id="@+id/point_scale_xl"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:text="XL"
+      android:text="@string/size_xl"
     />
   </RadioGroup>
 

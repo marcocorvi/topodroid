@@ -94,7 +94,7 @@
       	android:ems="25"
         android:layout_height="wrap_content" 
         android:singleLine="true"
-        android:text=" "
+	android:text="@string/empty"
         android:layout_marginTop="@dimen/marginv"
       />
 

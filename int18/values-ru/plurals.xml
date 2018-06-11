@@ -2,16 +2,24 @@
 <resources>
   <plurals name="calib_saturated_values">
     <item quantity="one">ВНИМАНИЕ. Один "насыщенный" замер</item>
+    <!-- TODO item quantity="few"></item -->
+    <!-- TODO item quantity="many"></item -->
     <item quantity="other">ВНИМАНИЕ. %1$d "насыщенных" замеров</item>
   </plurals>
 
   <plurals name="read_data">
     <item quantity="zero">Данные не считаны</item>
+    <!-- TODO item quantity="one"></item -->
+    <!-- TODO item quantity="few"></item -->
+    <!-- TODO item quantity="many"></item -->
     <item quantity="other">Считано %1$d измерений</item>
   </plurals>
 
   <plurals name="read_calib_data">
     <item quantity="zero">Данных для калибровки не считано</item>
+    <!-- TODO item quantity="one"></item -->
+    <!-- TODO item quantity="few"></item -->
+    <!-- TODO item quantity="many"></item -->
     <item quantity="other">Считанно %1$d измерений (%2$d пакетов)</item>
   </plurals>
 </resources>

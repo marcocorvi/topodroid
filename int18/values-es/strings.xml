@@ -22,7 +22,7 @@
     <string name="cut">Cortar</string>
     <string name="copy">Copiar</string>
     <string name="paste">Pegar</string>
-    <string name="copied">Copiado al portapapeles</string>
+    <!-- FIXME string name="copied">Copiado al portapapeles</string -->
 
     <string name="memoryA3">Memoria DistoX A3</string>
     <string name="memoryX310">Memoria DistoX X310</string>

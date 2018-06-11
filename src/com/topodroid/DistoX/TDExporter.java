@@ -560,6 +560,31 @@ class TDExporter
 
   static String exportSurveyAsKml( long sid, DataHelper data, SurveyInfo info, String filename )
   {
+    final String name          = "<name>%s</name\n";
+    final String name2         = "  <name>%s</name\n";
+    final String placemark     = "<Placemark>\n";
+    final String placemark_end = "</Placemark>\n";
+    final String linestyle     = "  <LineStyle>\n";
+    final String linestyle_end = "  </LineStyle>\n";
+    final String labelstyle     = "  <LabelStyle>\n";
+    final String labelstyle_end = "  </LabelStyle>\n";
+    final String style     = "<Style id=\"%s\">\n";
+    final String style_end = "</Style>\n";
+    final String point_id  = "<Point id=\"%s\">\n";
+    final String point_end = "</Point>\n";
+    final String linestring     = "  <LineString> <coordinates>\n";
+    final String linestring_id  = "  <LineString id=\"%s-%s\"> <coordinates>\n";
+    final String linestring_end = "  </coordinates> </LineString>\n";
+    final String width      = "    <width>%d</width>\n";
+    final String scale      = "    <width>%.1f</width>\n";
+    final String color      = "    <color>%s</color>\n";
+    final String color_mode = "    <colorMode>%s</colorMode>\n";
+    final String multigeometry     = "  <MultiGeometry>\n";
+    final String multigeometry_end = "  </MultiGeometry>\n";
+    final String altitudeMode = "    <altitudeMode>absolute</altitudeMode>\n";
+    final String style_url = "    <styleUrl>%s</styleUrl>\n";
+    final String coordinates3 = "    <coordinates>%f,%f,%f</coordinates>\n";
+    final String coordinates6 = "    %f,%f,%f %f,%f,%f\n";
     // Log.v("DistoX", "export as KML " + filename );
     List<DistoXNum> nums = getGeolocalizedData( sid, data, info.declination, 1.0f );
     if ( nums == null || nums.size() == 0 ) {
@@ -577,45 +602,45 @@ class TDExporter
       pw.format("<kml xmlnx=\"http://www.opengis.net/kml/2.2\">\n");
       pw.format("<Document>\n");
 
-      pw.format("<name>%s</name>\n", info.name );
+      pw.format(name, info.name );
       pw.format("<description>%s - TopoDroid v %s</description>\n",  TopoDroidUtil.getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
 
-      pw.format("<Style id=\"centerline\">\n");
-      pw.format("  <LineStyle>\n");
-      pw.format("    <color>ff0000ff</color>\n"); // AABBGGRR
-      pw.format("    <width>2</width>\n");
-      pw.format("  </LineStyle>\n");
-      pw.format("  <LabelStyle>\n");
-      pw.format("     <color>ff0000ff</color>\n"); // AABBGGRR
-      pw.format("     <colorMode>normal</colorMode>\n");
-      pw.format("     <scale>1.0</scale>\n");
-      pw.format("  </LabelStyle>\n");
-      pw.format("</Style>\n");
+      pw.format(style, "centerline");
+      pw.format(linestyle);
+      pw.format(color, "ff0000ff"); // AABBGGRR
+      pw.format(width, 2 );
+      pw.format(linestyle_end);
+      pw.format(labelstyle);
+      pw.format(color, "ff0000ff"); // AABBGGRR
+      pw.format(color_mode, "normal");
+      pw.format(scale, 1.0f );
+      pw.format(labelstyle_end);
+      pw.format(style_end);
 
-      pw.format("<Style id=\"splay\">\n");
-      pw.format("  <LineStyle>\n");
-      pw.format("    <color>ffffff00</color>\n"); // AABBGGRR
-      pw.format("    <width>1</width>\n");
-      pw.format("  </LineStyle>\n");
-      pw.format("  <LabelStyle>\n");
-      pw.format("     <color>ffffff00</color>\n"); // AABBGGRR
-      pw.format("     <colorMode>normal</colorMode>\n");
-      pw.format("     <scale>0.5</scale>\n");
-      pw.format("  </LabelStyle>\n");
-      pw.format("</Style>\n");
+      pw.format(style, "splay");
+      pw.format(linestyle);
+      pw.format(color, "ffffff00"); // AABBGGRR
+      pw.format(width, 1 );
+      pw.format(linestyle_end);
+      pw.format(labelstyle);
+      pw.format(color, "ffffff00"); // AABBGGRR
+      pw.format(color_mode, "normal");
+      pw.format(scale, 0.5f );
+      pw.format(labelstyle_end);
+      pw.format(style_end);
 
-      pw.format("<Style id=\"station\">\n");
+      pw.format(style, "station");
       pw.format("  <IconStyle><Icon></Icon></IconStyle>\n");
-      pw.format("  <LabelStyle>\n");
-      pw.format("     <color>ffff00ff</color>\n"); // AABBGGRR
-      pw.format("     <colorMode>normal</colorMode>\n");
-      pw.format("     <scale>1.0</scale>\n");
-      pw.format("  </LabelStyle>\n");
-      pw.format("  <LineStyle>\n");
-      pw.format("    <color>ffff00ff</color>\n"); // AABBGGRR
-      pw.format("    <width>1</width>\n");
-      pw.format("  </LineStyle>\n");
-      pw.format("</Style>\n");
+      pw.format(labelstyle);
+      pw.format(color, "ffff00ff"); // AABBGGRR
+      pw.format(color_mode, "normal");
+      pw.format(scale, 1.0f );
+      pw.format(labelstyle_end);
+      pw.format(linestyle);
+      pw.format(color, "ffff00ff"); // AABBGGRR
+      pw.format(width, 1 );
+      pw.format(linestyle_end);
+      pw.format(style_end);
       
       for ( DistoXNum num : nums ) {
         List<NumStation> stations = num.getStations();
@@ -623,56 +648,56 @@ class TDExporter
         List<NumSplay>   splays = num.getSplays();
         if ( TDSetting.mKmlStations ) {
           for ( NumStation st : stations ) {
-            pw.format("<Placemark>\n");
-            pw.format("  <name>%s</name>\n", st.name );
-            pw.format("  <styleUrl>#station</styleUrl>\n");
-            pw.format("  <MultiGeometry>\n");
-            pw.format("    <altitudeMode>absolute</altitudeMode>\n");
-              pw.format("  <Point id=\"%s\">\n", st.name );
-              pw.format(Locale.US, "    <coordinates>%f,%f,%f</coordinates>\n", st.e, st.s, st.v );
-              pw.format("  </Point>\n");
-            pw.format("  </MultiGeometry>\n");
-            pw.format("</Placemark>\n");
+            pw.format(placemark);
+            pw.format(name2, st.name );
+            pw.format(style_url, "#station");
+            pw.format(multigeometry);
+            pw.format(altitudeMode);
+              pw.format(point_id, st.name );
+              pw.format(Locale.US, coordinates3, st.e, st.s, st.v );
+              pw.format(point_end);
+            pw.format(multigeometry_end);
+            pw.format(placemark_end);
           }
         }
 
-        pw.format("<Placemark>\n");
-        pw.format("  <name>centerline</name>\n" );
-        pw.format("  <styleUrl>#centerline</styleUrl>\n");
-        pw.format("  <MultiGeometry>\n");
-        pw.format("    <altitudeMode>absolute</altitudeMode>\n");
+        pw.format(placemark);
+        pw.format(name2, "centerline" );
+        pw.format(style_url, "#centerline");
+        pw.format(multigeometry);
+        pw.format(altitudeMode);
         for ( NumShot sh : shots ) {
           NumStation from = sh.from;
           NumStation to   = sh.to;
           if ( from.mHasCoords && to.mHasCoords ) {
-            pw.format("    <LineString id=\"%s-%s\"> <coordinates>\n", from.name, to.name );
+            pw.format(linestring_id, from.name, to.name );
             // pw.format("      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
             // pw.format("      <extrude>1</extrude>\n"); // extends the line down to the ground
-            pw.format(Locale.US, "        %f,%f,%f %f,%f,%f\n", from.e, from.s, from.v, to.e, to.s, to.v );
-            pw.format("    </coordinates> </LineString>\n");
+            pw.format(Locale.US, coordinates6, from.e, from.s, from.v, to.e, to.s, to.v );
+            pw.format(linestring_end);
           // } else {
           //   // Log.v("DistoX", "missing coords " + from.name + " " + from.mHasCoords + " " + to.name + " " + to.mHasCoords );
           }
         }
-        pw.format("  </MultiGeometry>\n");
-        pw.format("</Placemark>\n");
+        pw.format(multigeometry_end);
+        pw.format(placemark_end);
 
         if ( TDSetting.mKmlSplays ) {
-          pw.format("<Placemark>\n");
-          pw.format("  <name>splays</name>\n" );
-          pw.format("  <styleUrl>#splay</styleUrl>\n");
-          pw.format("  <MultiGeometry>\n");
-          pw.format("    <altitudeMode>absolute</altitudeMode>\n");
+          pw.format(placemark);
+          pw.format(name2, "splays" );
+          pw.format(style_url, "#splay");
+          pw.format(multigeometry);
+          pw.format(altitudeMode);
           for ( NumSplay sp : splays ) {
             NumStation from = sp.from;
-            pw.format("    <LineString> <coordinates>\n");
+            pw.format(linestring);
             // pw.format("      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
             // pw.format("      <extrude>1</extrude>\n"); // extends the line down to the ground
-            pw.format(Locale.US, "        %f,%f,%f %f,%f,%f\n", from.e, from.s, from.v, sp.e, sp.s, sp.v );
-            pw.format("    </coordinates> </LineString>\n");
+            pw.format(Locale.US, coordinates6, from.e, from.s, from.v, sp.e, sp.s, sp.v );
+            pw.format(linestring_end);
           }
-          pw.format("  </MultiGeometry>\n");
-          pw.format("</Placemark>\n");
+          pw.format(multigeometry_end);
+          pw.format(placemark_end);
         }
       }
 
@@ -882,6 +907,7 @@ class TDExporter
     // Log.v("DistoX", "export as therion: " + filename );
     float ul = TDSetting.mUnitLength;
     float ua = TDSetting.mUnitAngle;
+    final String extend_auto = "    # extend auto\n";
 
     String uls = ( ul < 1.01f )? "meters"  : "feet"; // FIXME
     String uas = ( ua < 1.01f )? "degrees" : "grads";
@@ -976,7 +1002,6 @@ class TDExporter
 
       pw.format("    units length %s\n", uls );
       pw.format("    units compass clino %s\n", uas );
-
       pw.format("    data normal from to length compass clino\n");
 
       boolean splay_extend = true;
@@ -1017,7 +1042,7 @@ class TDExporter
             }
             if ( item.getExtend() > 1 ) {
 	      if ( splay_extend ) {
-                pw.format("    extend auto\n" );
+                pw.format( extend_auto );
 	        splay_extend = false;
 	      }
 	    } else if ( item.getExtend() != extend || ! splay_extend ) {
@@ -1053,7 +1078,7 @@ class TDExporter
             }
             if ( item.getExtend() > 1 ) {
 	      if ( splay_extend ) {
-                pw.format("    extend auto\n" );
+                pw.format( extend_auto );
 	        splay_extend = false;
 	      }
 	    } else if ( item.getExtend() != extend || ! splay_extend ) {

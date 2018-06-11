@@ -29,7 +29,7 @@
       android:layout_marginTop="@dimen/margintiny"
       android:layout_width="0dp"
       android:layout_weight="50"
-      android:text="-"
+      android:text="@string/dash"
       android:nextFocusDown="@+id/shot_to"
     />
     <EditText android:id="@+id/shot_to"
@@ -37,7 +37,7 @@
       android:layout_marginTop="@dimen/margintiny"
       android:layout_width="0dp"
       android:layout_weight="50"
-      android:text="-"
+      android:text="@string/dash"
       android:nextFocusDown="@+id/shot_comment"
       />
   </LinearLayout>
