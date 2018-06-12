@@ -997,7 +997,8 @@
   <string name="pref_crs_message">Napíšte názov CRS ako v Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Se usare GPSAveraging</string -->
-
+    
+  <string name="pref_plot_screen_title">NASTAVENIE KRESLENIA</string>
   <string name="pref_tool_line_title">NASTAVENIE ČIAR</string>
   <string name="pref_tool_point_title">NASTAVENIE BODOV</string>
   <string name="pref_location_title">NASTAVENIE POLOHY</string>
@@ -1010,15 +1011,15 @@
   <string name="pref_pt_color_map_title">Farebná mapa PocketTopo</string>
   <string name="pref_pt_color_map_summary">Farebná mapa PocketTopo (import PocketTopo)</string>
   <string name="pref_text_size_title">Veľkosť textu</string>
-  <string name="pref_text_size_summary">Veľkosť textu písmen v zozname</string>
-  <string name="pref_text_size_message">Zobrazuje veľkosť textu</string>
-  <string name="pref_closeness_title">Polomer výberu</string>
+  <string name="pref_text_size_summary">Nastaviť veľkosť textu</string>
+  <string name="pref_text_size_message">Nastaviť veľkosť textu</string>
+  <string name="pref_closeness_title">Polomer výberu objektov</string>
   <!-- UNUSED string name="pref_closeness_summary">Raggio di selezione oggetti disegno</string -->
-  <string name="pref_closeness_message">Výber okruhu objektov</string>
-  <string name="pref_eraseness_title">Rozsah gumy</string>
-  <string name="pref_eraseness_message">Veľkosť nástroja na vymazanie (guma)</string>
+  <string name="pref_closeness_message">Prednastavená veľkosť pri výbere objektov</string>
+  <string name="pref_eraseness_title">Rozsah veľkosti gumy</string>
+  <string name="pref_eraseness_message">Prednastavená veľkosť nástroja na vymazávanie (guma)</string>
   <string name="pref_min_shift_title">Citlivosť posunu</string>
-  <string name="pref_min_shift_message">Citlivosť na pohyb</string>
+  <string name="pref_min_shift_message">Maximálna rýchlosť posunu náčrtu - zvýšiť hodnotu pri zasekávaní</string>
   <string name="pref_pointing_title">Tolerancia bodov</string>
   <string name="pref_pointing_message">Tolerancia pre výber bodov</string>
   <string name="pref_dash_splay_title">Vzťah čiarkovaných zámer</string>
