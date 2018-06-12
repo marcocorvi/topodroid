@@ -164,13 +164,13 @@
     <string name="import_calib_mismatch">Calib.: Zariadenie nesúhlasí</string>
     <string name="import_calib_no_data">Calib. súbor: Žiadne dáta</string>
     <string name="import_zip_ok">Import zip súboru úspešný</string>
-    <string name="import_zip_ok">zip súbor úspešne importovaný</string>
+    <!-- FIXME REPEATED string name="import_zip_ok">zip súbor úspešne importovaný</string -->
     <string name="import_zip_wait">Importovanie zip súboru vyžaduje čas. Prosím, čakajte &#8230;</string>
     <!-- UNUSED string name="sketch_saving">Salvataggio disegno &#8230; attendi &#8230;</string -->
     <string name="MT_points_none">Chýbajúci bod MobileTopographer</string>
 
     <string name="pleasewait">Prosím čakajtet</string>
-    <string name="processing">Prebieha proces;</string>-->
+    <string name="processing">Prebieha proces;</string>
 
     <!-- UNUSED string name="head_tail">Memoria: </string -->
     <string name="head_tail_failed">Neúspešné čitanie pamäte DistoX</string>
@@ -247,7 +247,7 @@
      <string name="hidden_show">Zobraziť zámery za bodom</string>
     <string name="splays_toggle">Prepnúť zobrazenie/skrytie pomocných zámer</string>
     <string name="splays_on_off">Pomocné zámery</string>
-    <string name="splays">splays</pomocné zámery>
+    <string name="splays">pomocné zámery</string>
     <string name="splays_show">Zobraziť pomocné zámery</string>
     <!-- TODO string name="foresurface_show">Show fore surface</string -->
     <!-- TODO string name="fmt_listen">LISTEN | %1$s</string -->
@@ -317,7 +317,7 @@
     <string name="menu_reload">NAČÍTAŤ</string>
     <string name="menu_rename_delete">PREMENOVAŤ/VYMAZAŤ</string>
     <string name="menu_rename">PREMENOVAŤ</string>
-    <string name="menu_switch">PREPNÚŤ/ZATVORIŤ</string>>
+    <string name="menu_switch">PREPNÚŤ/ZATVORIŤ</string>
     <string name="menu_help">POMOC</string>
     <string name="menu_join_survey">SPOLOČNÝ PRIESKUM</string> <!-- rilievo cooperativo -->
     <string name="menu_logs">ZÁZNAM PROGRAMU</string>
@@ -412,7 +412,7 @@
     <!-- UNUSED string name="convert_tdr2th2">Pretvori  skico iz binarnega formata v th2</string -->
     <string name="section_area">Sekcia oblasti: %1$.1f</string>
     <!-- TODO string name="section_name">Sekcia Komentáre</string -->
-     <string name="scrap_outline">Obrysy</string>>
+     <string name="scrap_outline">Obrysy</string>
 
     <!-- UNUSED string name="sensor">sensore</string -->
     <string name="sensor_gravity">Gravitácia</string>
@@ -944,7 +944,7 @@
   <string name="pref_trobot_names_summary">Názvy staníc sú v štýle TopoRobot</string>
   <string name="pref_ortho_lrud_title">LRUD uhol pomocnej zámery</string>
   <string name="pref_ortho_lrud_summary">Minimálny uhol medzi pomocnou/hlavnou zámerou na export LRUD merania</string>
-  <string name="pref_ortho_lrud_summary">Minimálny uhol medzi pomocnou/hlavnou zámerou na export LRUD merania</string> 
+  <!-- FIXME REPEATED string name="pref_ortho_lrud_summary">Minimálny uhol medzi pomocnou/hlavnou zámerou na export LRUD merania</string --> 
   <string name="pref_lrud_vertical_title">UD uhol pomocnej zámery</string> 
   <string name="pref_lrud_vertical_summary">Minimálny uhol pomocnej zámery na export UD merania</string>
   <string name="pref_lrud_vertical_message">Minimálny uhol pomocnej zámery na export UD merania</string>
