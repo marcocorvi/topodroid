@@ -110,6 +110,7 @@ public class TopoDroidApp extends Application
   static final int SUB_MIN   = 1;
   
   boolean mWelcomeScreen;  // whether to show the welcome screen
+  boolean mSetupScreen;    // whether to show the welcome screen
   // static String mManual;  // manual url
   static Locale mLocale;
   static String mLocaleStr;
@@ -565,6 +566,7 @@ public class TopoDroidApp extends Application
     if ( mWelcomeScreen ) {
       setDefaultSocketType();
     }
+    mSetupScreen = mPrefs.getBoolean( "DISTOX_SETUP_SCREEN", true ); // default: SetupScreen = true
 
     mCheckPerms = FeatureChecker.checkPermissions( this );
 
@@ -1061,6 +1063,38 @@ public class TopoDroidApp extends Application
     editor.apply();
     // FIXME-23 editor.commit();
   }
+
+  void setTextSize( int ts )
+  {
+    TDSetting.setTextSize( this, ts );
+    TDSetting.setLabelSize( ts*1.5f );
+    TDSetting.setStationSize( ts*1.2f );
+    SharedPreferences.Editor editor = mPrefs.edit();
+    editor.putString( "DISTOX_TEXT_SIZE", Integer.toString(ts) );
+    editor.putString( "DISTOX_LABEL_SIZE", Float.toString(ts*1.5f) );
+    editor.putString( "DISTOX_STATION_SIZE", Float.toString(ts*1.2f) );
+    editor.apply();
+    // FIXME-23 editor.commit();
+  }
+
+  void setButtonSize( int bs )
+  {
+    TDSetting.setSizeButtons( this, bs );
+    SharedPreferences.Editor editor = mPrefs.edit();
+    editor.putString( "DISTOX_SIZE_BUTTONS", Integer.toString(bs) );
+    editor.apply();
+    // FIXME-23 editor.commit();
+  }
+
+  void setDrawingUnit( float u )
+  {
+    TDSetting.setDrawingUnit( this, u );
+    SharedPreferences.Editor editor = mPrefs.edit();
+    editor.putString( "DISTOX_DRAWING_UNIT", Float.toString(u) );
+    editor.apply();
+    // FIXME-23 editor.commit();
+  }
+
 
   void setShotDataPreference( float leg_tolerance, int leg_shots, float extend_thr,
                               float vthreshold, boolean splay_extend, int timer, int volume )

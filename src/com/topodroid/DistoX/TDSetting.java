@@ -30,6 +30,37 @@ class TDSetting
     mTextSize = (int)( ( ds * ts ) );
   }
 
+  // get tentative text size
+  static int getTextSize( TopoDroidApp app, int ts )
+  {
+    float ds = app.getDisplayDensity() / 3.0f;
+    return (int)( ( ds * ts ) );
+  }
+
+  static void setLabelSize( float f )
+  {
+    if ( f >= 1 && f != mLabelSize ) {
+      mLabelSize = f;
+      BrushManager.setTextSizes( );
+    }
+  }
+
+  static void setStationSize( float f )
+  {
+    if ( f >= 1 && f != mStationSize ) {
+      mStationSize = f;
+      BrushManager.setTextSizes( );
+    }
+  }
+
+  static void setDrawingUnit( TopoDroidApp app, float f )
+  {
+    if ( f > 0.1f && f != mUnitIcons ) {
+      mUnitIcons = f;
+      BrushManager.reloadPointLibrary( app, app.getResources() );
+    }
+  }
+
   // ---------------------------------------------------------
   // PREFERENCES KEYS
 
@@ -412,7 +443,7 @@ class TDSetting
   static int mZoomCtrl = 1;
   static boolean mSideDrag = false;
 
-  static float mUnit = 1.4f; // drawing unit
+  static float mUnitIcons = 1.4f; // drawing unit
 
   // selection_radius = cutoff + closeness / zoom
   static final float mCloseCutoff = 0.01f; // minimum selection radius
@@ -646,7 +677,7 @@ class TDSetting
     }
   }
 
-  static private boolean setSizeButtons( TopoDroidApp app, int size )
+  static boolean setSizeButtons( TopoDroidApp app, int size )
   {
     int sz = mSizeBtns;
     switch ( size ) {
@@ -664,6 +695,20 @@ class TDSetting
       return true;
     }
     return false;
+  }
+
+  // get tentative size of buttons
+  static int getSizeButtons( TopoDroidApp app, int size )
+  {
+    int sz = mSizeBtns;
+    switch ( size ) {
+      case 0: sz = BTN_SIZE_SMALL;  break;
+      case 1: sz = BTN_SIZE_NORMAL; break;
+      case 3: sz = BTN_SIZE_MEDIUM; break;
+      case 4: sz = BTN_SIZE_LARGE;  break;
+      case 2: sz = BTN_SIZE_HUGE;   break;
+    }
+    return (int)( sz * app.getDisplayDensity() * 0.86f );
   }
 
   static void loadPrimaryPreferences( TopoDroidApp app, SharedPreferences prefs )
@@ -783,7 +828,7 @@ class TDSetting
     mLineAccuracy  = tryFloat( prefs, key[k++], "1" );              // DISTOX_LINE_ACCURACY
     mLineCorner    = tryFloat( prefs, key[k++], "20"  );            // DISTOX_LINE_CORNER
     setLineStyleAndType( prefs.getString( key[k++], LINE_STYLE ) ); // DISTOX_LINE_STYLE
-    mUnit          = tryFloat( prefs, key[k++], "1.4" );            // DISTOX_DRAWING_UNIT 
+    mUnitIcons     = tryFloat( prefs, key[k++], "1.4" );            // DISTOX_DRAWING_UNIT 
     mPickerType    = tryInt(   prefs, key[k++], "0" );              // DISTOX_PICKER_TYPE choice: 0, 1, 2
     mHThreshold    = tryFloat( prefs, key[k++], "70" );             // DISTOX_HTHRESHOLD
     mStationSize   = tryFloat( prefs, key[k++], "20" );             // DISTOX_STATION_SIZE
@@ -1084,11 +1129,7 @@ class TDSetting
       setLineStyleAndType( prefs.getString( k, LINE_STYLE ) );
     } else if ( k.equals( key[ nk++ ] ) ) {                      // DISTOX_DRAWING_UNIT
       try {
-        f = Float.parseFloat( prefs.getString( k, "1.4" ) );
-        if ( f > 0 && f != mUnit ) {
-          mUnit = f;
-          BrushManager.reloadPointLibrary( app, app.getResources() );
-        }
+        setDrawingUnit( app, Float.parseFloat( prefs.getString( k, "1.4" ) ) );
       } catch ( NumberFormatException e ) { }
     } else if ( k.equals( key[ nk++ ] ) ) {                          // DISTOX_PICKER_TYPE
       mPickerType = tryInt(   prefs, k, "0" );
@@ -1096,19 +1137,11 @@ class TDSetting
       mHThreshold = tryFloat( prefs, k, "70" );  // DISTOX_HTHRESHOLD
     } else if ( k.equals( key[ nk++ ] ) ) {
       try {
-        f = Float.parseFloat( prefs.getString( k, "20" ) ); // DISTOX_STATION_SIZE
-        if ( f >= 1 && f != mStationSize ) {
-          mStationSize = f;
-          BrushManager.setTextSizes( );
-        }
+        setStationSize( Float.parseFloat( prefs.getString( k, "20" ) ) ); // DISTOX_STATION_SIZE
       } catch ( NumberFormatException e ) { }
     } else if ( k.equals( key[ nk++ ] ) ) {
       try {
-        f = Float.parseFloat( prefs.getString( k, "24" ) ); // DISTOX_LABEL_SIZE
-        if ( f >= 1 && f != mLabelSize ) {
-          mLabelSize = f;
-          BrushManager.setTextSizes( );
-        }
+        setLabelSize( Float.parseFloat( prefs.getString( k, "24" ) ) ); // DISTOX_LABEL_SIZE
       } catch ( NumberFormatException e ) { }
       // FIXME changing label size affects only new labels
       //       not existing labels (until they are edited)

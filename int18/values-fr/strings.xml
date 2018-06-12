@@ -12,6 +12,21 @@
     <string name="version_ask">Vous être en train de mettre à jour vers une nouvelle version de TopoDroid.\n Voulez-vous réinstaller les symboles de dessins ?</string>
     <string name="symbols_ask">Installer les outils de dessin v.%1$s?\n ? (v. actuelle: v.%2$s) </string>
 
+    <!-- TODO string name="setup_textsize_title">TopoDroid setup. Text size</string -->
+    <!-- TODO string name="setup_buttonsize_title">TopoDroid setup. Button size</string -->
+    <!-- TODO string name="setup_drawingunit_title">TopoDroid setup. Icons size</string -->
+    <!-- TODO string name="setup_done_title">TopoDroid setup. Done</string -->
+
+    <!-- TODO string name="setup_textsize">Set the text size.\nYou can always change this later thru the main window settings.</string -->
+    <!-- TODO string name="setup_buttonsize">Set the button size.\nYou can always change this later thru the main window settings.</string -->
+    <!-- TODO string name="setup_drawingunit">Set the sketch icon size.\nYou can always change this later thru the sketch window settings.</string -->
+    <!-- TODO string name="setup_done">The basic setup in done.\n\n
+	    If you experience problems with the DistoX connection, try and set the insecure socket.\n\n
+	    Other settings concern the presentation in the sketching window (icon size, label size, line width, etc.)
+	    you should set them to your needs./n/n
+    </string -->
+    <!-- OK string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
+
     <string name="POINT">POINT</string>
     <string name="LINE">LIGNE</string>
     <string name="AREA">ZONE</string>
@@ -548,6 +563,9 @@
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Dessin</string>
     <string name="button_more"    >Plus</string>
+    <!-- TODO string name="button_next"    >Next</string -->
+    <!-- TODO string name="button_skip"    >Skip</string -->
+    <!-- TODO string name="button_done"    >Done</string -->
     <string name="button_lrud"    >Ajouter GDHB LRUD</string>
     <string name="button_ok"        >OK        </string>
     <!-- TODO string name="button_off"       >off</string -->

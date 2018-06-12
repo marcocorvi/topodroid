@@ -88,4 +88,18 @@ class MyButton
     return ret;
   }
 
+  // get tentative bitmap (do not use cache)
+  static BitmapDrawable getButtonBackground( Context ctx, Resources res, int res_id, int size )
+  {
+    try {
+      Bitmap bm1 = BitmapFactory.decodeResource( res, res_id );
+      Bitmap bmx = Bitmap.createScaledBitmap( bm1, size, size, false );
+      return new BitmapDrawable( res, bmx );
+    } catch ( OutOfMemoryError err ) {
+      TDLog.Error("out of memory: " + err.getMessage() );
+      TDToast.makeColor( ctx, R.string.out_of_memory, TDColor.FIXED_RED );
+    }
+    return null;
+  }
+
 }

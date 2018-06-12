@@ -28,12 +28,18 @@ class TopoDroidAbout extends Dialog
                      // implements OnClickListener
 {
   // private Button mBTok;
-  private final Context mContext;
+  private Context mContext;
+  private MainWindow mParent;
+  private int mSetup;
 
-  TopoDroidAbout( Context context )
+  int nextSetup() { return mSetup + 1; }
+
+  TopoDroidAbout( Context context, MainWindow parent, int setup )
   {
     super( context );
     mContext = context;
+    mParent  = parent;
+    mSetup   = setup;
     setContentView(R.layout.welcome);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
@@ -43,5 +49,12 @@ class TopoDroidAbout extends Dialog
 
     // mBTok.setOnClickListener( this );
   }
+
+  // @Override
+  // public void onDismiss()
+  // {
+  //   if ( mSetup >= 0 ) mParent.doNextSetup( mSetup + 1 );
+  // }
+
   
 }

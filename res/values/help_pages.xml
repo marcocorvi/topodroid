@@ -94,4 +94,9 @@
   <string name="TopoDroidPerms">page_perms.htm</string>
   <string name="UndeleteDialog">page_undelete.htm</string>
 
+  <string name="SetupTextSizeDialog">page_setup.htm</string>
+  <string name="SetupButtonSizeDialog">page_setup.htm</string>
+  <string name="SetupDoneDialog">page_setup.htm</string>
+  <string name="SetupDrawingUnitDialog">page_setup.htm</string>
+
 </resources>

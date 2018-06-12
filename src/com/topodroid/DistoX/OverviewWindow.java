@@ -532,8 +532,8 @@ public class OverviewWindow extends ItemDrawer
       doPause();
     }
 
-    // @Override
-    // protected synchronized void onStart()
+    @Override
+    protected synchronized void onStart()
     {
       super.onStart();
     }

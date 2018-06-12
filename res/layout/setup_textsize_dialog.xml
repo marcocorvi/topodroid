@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  >
+  <TextView 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_marginBottom="@dimen/marginv"
+    android:text="@string/setup_textsize"
+    />
+  <TextView android:id="@+id/sample_text"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_marginBottom="@dimen/marginv"
+    android:text="@string/lorem_ipsum"
+    android:singleLine="true"
+    />
+
+  <!-- SeekBar android:id="@+id/seekbar"
+    android:layout_width="fill_parent"
+    android:layout_height="20dp" 
+    android:layout_marginLeft="@dimen/marginsmall"
+    android:layout_marginRight="@dimen/marginsmall"
+    android:layout_marginBottom="@dimen/marginv"
+    android:max="128"
+    android:background="#666666"
+    android:progressDrawable="@drawable/progress2"
+    / -->
+
+  <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_marginBottom="@dimen/marginv"
+    >
+    <Button android:id="@+id/btn_minus"
+      android:layout_width="0dp"
+      android:layout_weight="20"
+      android:layout_marginRight="@dimen/marginh"
+      style="@style/button_default"
+      android:text="@string/dash"
+    />
+    <EditText android:id="@+id/textsize"
+      android:layout_width="0dp"
+      android:layout_weight="40"
+      android:layout_height="wrap_content"
+      android:layout_marginRight="@dimen/marginh"
+      android:imeOptions="actionDone"
+      stype="@style/edit_number"
+    />
+    <Button android:id="@+id/btn_plus"
+      android:layout_width="0dp"
+      android:layout_weight="20"
+      android:layout_marginRight="@dimen/marginh"
+      style="@style/button_default"
+      android:text="@string/plus"
+    />
+  </LinearLayout>
+  <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_marginBottom="@dimen/marginv"
+    >
+    <Button android:id="@+id/btn_next"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginRight="@dimen/marginh"
+      style="@style/button_default"
+      android:text="@string/button_next"
+    />
+    <Button android:id="@+id/btn_skip"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginRight="@dimen/marginh"
+      style="@style/button_default"
+      android:text="@string/button_skip"
+    />
+  </LinearLayout>
+</LinearLayout>

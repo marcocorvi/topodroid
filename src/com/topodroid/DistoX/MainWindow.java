@@ -358,7 +358,6 @@ public class MainWindow extends Activity
   
   // ---------------------------------------------------------------
 
-  TopoDroidAbout mTopoDroidAbout = null;
 
   private HorizontalListView mListView;
   private HorizontalButtonView mButtonView1;
@@ -416,7 +415,7 @@ public class MainWindow extends Activity
           (new ConnectDialog( mActivity, mApp )).show();
         } else { 
           if ( p++ == pos ) { // ABOUT
-            (new TopoDroidAbout( mActivity )).show();
+            (new TopoDroidAbout( mActivity, this, -2 )).show();
           } else { 
             if ( p++ == pos ) { // SETTINGS
               intent = new Intent( mActivity, TopoDroidPreferences.class );
@@ -490,10 +489,17 @@ public class MainWindow extends Activity
       if ( mApp.mWelcomeScreen ) {
         mApp.setBooleanPreference( "DISTOX_WELCOME_SCREEN", false );
         mApp.mWelcomeScreen = false;
-        mTopoDroidAbout = new TopoDroidAbout( this );
-        mTopoDroidAbout.setOnCancelListener( this );
-        mTopoDroidAbout.setOnDismissListener( this );
-        mTopoDroidAbout.show();
+        if ( mApp.mSetupScreen ) {
+          mApp.setBooleanPreference( "DISTOX_SETUP_SCREEN", false );
+          mApp.mSetupScreen = false;
+          doNextSetup( SETUP_WELCOME );
+        } else {
+          (new TopoDroidAbout( this, this, -2 )).show();
+          // TopoDroidAbout tda = new TopoDroidAbout( this, this, -2 );
+          // tda.setOnCancelListener( this );
+          // tda.setOnDismissListener( this );
+          // tda.show();
+	}
       }
     }
 
@@ -596,6 +602,7 @@ public class MainWindow extends Activity
   public void onDismiss( DialogInterface d )
   { 
     if ( d == (Dialog)mTopoDroidAbout ) {
+      doNextSetup( mTopoDroidAbout.nextSetup() );
       mTopoDroidAbout = null;
     }
   }
@@ -604,6 +611,7 @@ public class MainWindow extends Activity
   public void onCancel( DialogInterface d )
   {
     if ( d == (Dialog)mTopoDroidAbout ) {
+      doNextSetup( mTopoDroidAbout.nextSetup() );
       mTopoDroidAbout = null;
     }
   }
@@ -819,6 +827,42 @@ public class MainWindow extends Activity
     //     }
     //   );
     // }
+  }
+
+  // ----------------------------------------------------------------------------
+  // setup
+  private TopoDroidAbout mTopoDroidAbout = null;
+
+  static final int SETUP_WELCOME = 0;
+  static final int SETUP_TEXTSIZE = 1;
+  static final int SETUP_BUTTONSIZE = 2;
+  static final int SETUP_DRAWINGUNIT = 3; 
+  static final int SETUP_DONE = 4; // this must be the last 
+
+  void doNextSetup( int setup ) 
+  { 
+    switch (setup) {
+      case SETUP_WELCOME: 
+        mTopoDroidAbout = new TopoDroidAbout( this, this, setup );
+        mTopoDroidAbout.setOnCancelListener( this );
+        mTopoDroidAbout.setOnDismissListener( this );
+        mTopoDroidAbout.show();
+        break;
+      case SETUP_TEXTSIZE: 
+        (new SetupTextSizeDialog( this, this, setup, TDSetting.mTextSize )).show();
+	break;
+      case SETUP_BUTTONSIZE:
+        (new SetupButtonSizeDialog( this, this, setup, TDSetting.mSizeBtns )).show();
+	break;
+      case SETUP_DRAWINGUNIT:
+        (new SetupDrawingUnitDialog( this, this, setup, TDSetting.mUnitIcons )).show();
+	break;
+      case SETUP_DONE:
+        (new SetupDoneDialog( this, this, setup )).show();
+	break;
+      default:
+	break;
+    }
   }
 
 

@@ -318,7 +318,7 @@ class DrawingPointLinePath extends DrawingPath
       float dx = - first.y + last.y;
       float d = dx*dx + dy*dy;
       if ( d > 0.00001f ) {
-        d = TDSetting.mArrowLength * TDSetting.mUnit / (float)Math.sqrt( d );
+        d = TDSetting.mArrowLength * TDSetting.mUnitIcons / (float)Math.sqrt( d );
         dx *= d;
         dy *= d;
         addStartPoint( first.x+dx, first.y+dy );

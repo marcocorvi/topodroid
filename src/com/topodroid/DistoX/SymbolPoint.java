@@ -343,7 +343,7 @@ class SymbolPoint extends Symbol
 
     float x00=0, y00=0;  // last drawn point1
 
-    float unit = TDSetting.mUnit;
+    float unit = TDSetting.mUnitIcons;
     mPath = new Path();
     String[] vals = path.split(" ");
     int s = vals.length;

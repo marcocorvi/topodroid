@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="a3">A3</string>
+  <string name="x310">X310</string>
+  <string name="east">E</string>
+  <string name="north">N</string>
+  <string name="empty"> </string>
+  <string name="zero"> 0 </string>
+  <string name="one"> 1 </string>
+  <string name="four_zero">0000</string>
+  <string name="a3_max">4096</string>
+  <string name="x310_max">1040</string>
+  <string name="size_xs">XS</string>
+  <string name="size_s">S</string>
+  <string name="size_m">M</string>
+  <string name="size_l">L</string>
+  <string name="size_xl">XL</string>
+  <string name="dash">-</string>
+  <string name="plus">+</string>
+  <string name="minus_plus">-/+</string>
+  <string name="arrow_left">&#x21a4;</string>
+  <string name="arrow_right">&#x21a6;</string>
+  <string name="arrow_up">&#x21a5;</string>
+  <string name="arrow_down">&#x21a7;</string>
+  <string name="input_length">&#x2190;&#x2192;</string>
+  <string name="input_azimuth">&#x2191;N</string>
+  <string name="input_clino">/_</string>
+  <string name="less_than">&lt;</string>
+  <string name="greater_than">&gt;</string>
+  <string name="proj4">Proj4</string>
+</resources>

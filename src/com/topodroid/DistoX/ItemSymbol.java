@@ -42,8 +42,8 @@ class ItemSymbol
   // private TextView     mTextView = null;
   LinearLayout mView;
   SymbolInterface mSymbol;
-  private float sx = TDSetting.mUnit;
-  private float sy = TDSetting.mUnit;
+  private float sx = TDSetting.mUnitIcons;
+  private float sy = TDSetting.mUnitIcons;
   private boolean mUseText;
 
   // private Context mContext;
