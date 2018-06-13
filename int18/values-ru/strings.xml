@@ -11,19 +11,19 @@
     <string name="version_ask">Обновление до новой версии TopoDroid.\nВы хотите переустановить инструменты рисования?</string>
     <!-- REPLACED string name="symbols_ask">Вы хотите переустановить инструменты рисования?</string -->
 
-    <!-- TODO string name="setup_textsize_title">TopoDroid setup. Text size</string -->
-    <!-- TODO string name="setup_buttonsize_title">TopoDroid setup. Button size</string -->
-    <!-- TODO string name="setup_drawingunit_title">TopoDroid setup. Icons size</string -->
-    <!-- TODO string name="setup_done_title">TopoDroid setup. Done</string -->
+    <string name="setup_textsize_title">Настройка TopoDroid. Размер текста</string>
+    <string name="setup_buttonsize_title">Настройка TopoDroid. Размер кнопок</string>
+    <string name="setup_drawingunit_title">Настройка TopoDroid. Размер значков</string>
+    <string name="setup_done_title">Настройка TopoDroid. Готово</string>
 
-    <!-- TODO string name="setup_textsize">Set the text size.\nYou can always change this later thru the main window settings.</string -->
-    <!-- TODO string name="setup_buttonsize">Set the button size.\nYou can always change this later thru the main window settings.</string -->
-    <!-- TODO string name="setup_drawingunit">Set the sketch icon size.\nYou can always change this later thru the sketch window settings.</string -->
-    <!-- TODO string name="setup_done">The basic setup in done.\n\n
-	    If you experience problems with the DistoX connection, try and set the insecure socket.\n\n
-	    Other settings concern the presentation in the sketching window (icon size, label size, line width, etc.)
-	    you should set them to your needs./n/n
-    </string -->
+    <string name="setup_textsize">Set the text size.\nВы всегда можете изменить это позже через главное меню настроек.</string>
+    <string name="setup_buttonsize">Set the button size.\nВы всегда можете изменить это позже через главное меню настроек.</string>
+    <string name="setup_drawingunit">Set the sketch icon size.\nВы всегда можете изменить это позже через меню настроек рисования.</string>
+    <string name="setup_done">Базовая настройка завершена.\n\n
+	    Если у вас возникли проблемы с подключением DistoX, попробуйте переключится на небезопасный протокол подключения BT.\n\n
+	    Другие настройки связанные с отображением в окне абрисов (размер значков, размер подписей, толщина линий и Т.Д.)
+            вы можете изменить под свои нужды./n/n
+    </string>
     <!-- OK string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
     <string name="symbols_ask">Установить инструменты рисования v.%1$s?\n(Текущая v.%2$s)</string>
     <string name="POINT">ТОЧКА</string>
@@ -567,9 +567,9 @@
     <!-- UNUSED string name="button_azimuth">Азимут</string -->
     <string name="button_plot"    >Абрис</string>
     <string name="button_more"    >Ещё</string>
-    <!-- TODO string name="button_next"    >Next</string -->
-    <!-- TODO string name="button_skip"    >Skip</string -->
-    <!-- TODO string name="button_done"    >Done</string -->
+    <string name="button_next"    >Далее</string>
+    <string name="button_skip"    >Пропустить</string>
+    <string name="button_done"    >Готово</string>
     <string name="button_lrud"    >Добавить ЛПВН</string>
     <!-- OK string name="button_ok"        >OK        </string -->
     <string name="button_off"       >выкл</string>
