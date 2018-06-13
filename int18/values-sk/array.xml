@@ -8,7 +8,7 @@
      <item name="two_tf">Stopy</item>
      <item name="ten_cm">10 cm</item>
   </string-array>
-
+     
   <string-array name="loopClosure">
      <item name="none">Žiadne</item>
      <item name="normal">Normálne</item>
@@ -28,7 +28,7 @@
   </string-array>
 
   <string-array name="stationNames">
-     <item name="alpha">Abecedné</item>
+     <item name="alpha">Abecedno-Číslicové</item>
      <item name="number">Číselné</item>
   </string-array>
 
@@ -107,20 +107,20 @@
 
   <string-array name="surveyStations">
      <item name="no">Žiadna</item>
-     <item name="for">Pomocne zámery, Hlavná zámera dopredu</item>
-     <item name="back">Pomocné zámery, Hlavná zámera naspäť</item>
-     <item name="for2">Hlavná zámera dopredu, Pomocné zámery</item>
-     <item name="back2">Hlavná zámera naspäť, Pomocné zámery</item>
-     <item name="anomaly">Hlavná zámera naspäť, Pomocné zámery, Hlavná zámera dopredu</item>
-     <item name="tripod">Hlavná zámera naspäť, Hlavná zámera dopredu</item>
+     <item name="for">Pomocné zámery; Hlavná zámera dopredu</item>
+     <item name="back">Pomocné zámery; Hlavná zámera naspäť</item>
+     <item name="for2">Hlavná zámera dopredu; Pomocné zámery</item>
+     <item name="back2">Hlavná zámera naspäť; Pomocné zámery</item>
+     <item name="anomaly">Hlavná zámera naspäť; Pomocné zámery; Hlavná zámera dopredu</item>
+     <item name="tripod">Hlavná zámera naspäť; Hlavná zámera dopredu</item>
      <item name="toporobot">Číslovanie ako v programe TopoRobot</item>
   </string-array>
 
   <string-array name="pickerType">
-     <item name="recent">Nedávny</item>
+     <item name="recent">Naposledy používané</item>
      <item name="list">Zoznam</item>
-     <item name="grid">Pole</item>
-     <item name="grid3">Tri polia</item>
+     <item name="grid">Mriežka</item>
+     <item name="grid3">Tri Mriežky</item>
   </string-array>
 
   <!-- UNUSED string-array name="sectionStations">
@@ -162,8 +162,8 @@
   </string-array>
 
   <string-array name="unitLength">
-     <item name="meters">metre</item>
-     <item name="feet">stopy</item>
+     <item name="meters">Metre</item>
+     <item name="feet">Stopy</item>
   </string-array>
 
   <string-array name="unitAngle">
@@ -183,9 +183,9 @@
   </string-array>
 
   <string-array name="rawCData">
-     <item name="none">Žiadny</item>
-     <item name="dec">Desatinný</item>
-     <item name="hex">Hexagonálny</item>
+     <item name="none">Žiadne</item>
+     <item name="dec">Desatinné</item>
+     <item name="hex">Hexagonálne</item>
   </string-array>
 
 </resources>
