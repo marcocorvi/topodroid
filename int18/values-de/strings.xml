@@ -8,7 +8,7 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Erneut ZURÜCK drücken zum verlassen</string>
 
-    <string name="version_ask">TopoDroid wurde auf eine neue Version aktualisiert.\nSollen die Zeichensymbole aktualisiert werden?</string>
+    <!-- UNUSED string name="version_ask">TopoDroid wurde auf eine neue Version aktualisiert.\nSollen die Zeichensymbole aktualisiert werden?</string -->
     <string name="symbols_ask">Zeichenwerkzeuge von v.%2$s auf v.%1$s aktualisieren?</string>
 
     <!-- TODO string name="setup_textsize_title">TopoDroid setup. Text size</string -->
@@ -169,7 +169,7 @@
     <string name="import_calib_no_data">Kalibrierungsdatei: Keine Daten</string>
     <string name="import_calib_io_error">Kalibrierungsdatei: Lesefehler</string>
     <string name="import_zip_ok">Zip-Datei erfolgreich importiert</string>
-    <string name="import_zip_wait">Importiere Zip-Datei, bitte warten&#8230;</string>
+    <!-- UNUSED string name="import_zip_wait">Importiere Zip-Datei, bitte warten&#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Skizze speichern, bitte warten&#8230;</string -->
     <string name="MT_points_none">Keine MobileTopographer Punkte</string>
 
@@ -250,7 +250,7 @@
     <!-- NO string name="hidden_add">Vorherige Messungen ausblenden</string -->
     <!-- UNUSED string name="hidden_del">Vorherige Messungen anzeigen</string -->
     <string name="hidden_show">Messungen nach der Station anzeigen</string>
-    <string name="splays_toggle">Hilfszüge ein/ausblenden</string>
+    <!-- UNUSED string name="splays_toggle">Hilfszüge ein/ausblenden</string -->
     <!-- TODO string name="splays_on_off">Splays</string -->
     <string name="splays">Hilfszüge</string>
     <!-- TODO string name="splays_show">Show splays</string -->
@@ -296,7 +296,7 @@
     <string name="no_survey">Keine Vermessung ausgewählt</string>
     <string name="no_to_station">Keine Zielstation.</string>
     <string name="no_thmanager">Keine ThManager App</string>
-    <string name="no_db_viewer">Keine DB_viewer App</string>
+    <!-- UNUSED string name="no_db_viewer">Keine DB_viewer App</string -->
     <string name="no_undelete">Nichts wiederherzustellen</string>
     <string name="format_measure_plan">Dist %1$.2f (Total %2$.2f) &#8736; %5$.1f° Dx %3$.2f Dy %4$.2f</string>
     <string name="format_measure_profile">Dist %1$.2f (Total %2$.2f) &#8736; %5$.1f° Dx %3$.2f Dy %4$.2f</string>
@@ -417,7 +417,7 @@
     <!-- UNUSED string name="scrap_name">Name der Skizze</string -->
     <string name="splay">Hilfszug</string>
     <string name="too_many_leg_intersection">Schnittlinie durchquert zu viele Messstrecken</string>
-    <string name="too_many_legs_xsection">Zu viele Messstrecken für Querschnitt</string>
+    <!-- UNUSED string name="too_many_legs_xsection">Zu viele Messstrecken für Querschnitt</string -->
     <!-- UNUSED string name="converted_tdr2th2">Skizzen konvertiert zu th2.</string -->
     <!-- UNUSED string name="convert_tdr2th2">th2 Skizzen überschreiben?</string -->
     <string name="section_area">Fläche: %1$.1f</string>
@@ -697,7 +697,7 @@
 
     <!-- UNUSED string name="station_next">NEXT</string -->
     <string name="no_shot_between_stations">no_shot_between_stations</string>
-    <string name="few_line_points">Line has too few points</string>
+    <!-- UNUSED string name="few_line_points">Line has too few points</string -->
     <string name="line_delete">line_delete</string>
     <string name="flip_shots">Flip shots</string>
     <string name="split_nothing">Nichts aufzuteilen</string>
@@ -766,7 +766,7 @@
     <string name="help_photo">Fotos</string>
     <string name="help_sensor">Sensormessungen</string>
     <string name="help_3d">3D-Modell (Benötigt Cave3D)</string>
-    <string name="help_move">Move/zoom Modus</string>
+    <!-- UNUSED string name="help_move">Move/zoom Modus</string -->
     <string name="help_draw">Skizzenmodus</string>
     <string name="help_edit">Bearbeitungsmodus</string>
     <string name="help_refs">Skizzenelemente anzeigen</string>
@@ -850,7 +850,7 @@
     <string name="title_coverage">Kalibrierungsdaten</string>
     <string name="title_coeff">Kalibrierungs-Koeffizienten</string>
     <string name="title_color_picker">Farbe wählen</string>
-    <string name="title_contour">Konturen</string>
+    <!-- UNUSED string name="title_contour">Konturen</string -->
     <!-- UNUSED string name="title_coord">Gib die Punkt-Koordinaten ein:</string -->
     <string name="title_current_station">Gespeicherte Messpunkte</string>
     <string name="title_station_search">Messpunkt eingeben</string>
@@ -898,7 +898,7 @@
     <!-- NO string name="title_sketch_select">Select item</string -->
 
     <string name="title_stats">Statistik</string>
-    <string name="title_step">Schritt</string>
+    <!-- UNUSED string name="title_step">Schritt</string -->
     <string name="title_survey">Vermessungs-Info</string>
     <string name="title_survey_new">Neue Vermessung</string>
     <string name="title_survey_export">Vermessung speichern als</string>
@@ -953,8 +953,8 @@
   <string name="pref_station_prefix_summary">Exportiere Messpunkt Prefix (compass)</string>
   <string name="pref_compass_splays_title">Exportiere Hilfszüge</string>
   <string name="pref_compass_splays_summary">Export Hilfszüge (compass)</string>
-  <string name="pref_trobot_names_title">TopoRobot Namen</string>
-  <string name="pref_trobot_names_summary">Stationen wie in TopoRobot benennen</string>
+  <!-- UNUSED string name="pref_trobot_names_title">TopoRobot Namen</string -->
+  <!-- UNUSED string name="pref_trobot_names_summary">Stationen wie in TopoRobot benennen</string -->
   <string name="pref_ortho_lrud_title">Min. Winkel für LRUD in Export</string>
   <string name="pref_ortho_lrud_summary">Minimaler Hilfszug-Winkel für LRUD</string>
   <string name="pref_ortho_lrud_message">Minimaler Hilfszug-Winkel für LRUD</string>
@@ -972,8 +972,8 @@
   <string name="pref_survex_lrud_summary">LRUD-Werte in Survex export</string>
   <string name="pref_svg_grid_title">SVG Gitter</string>
   <string name="pref_svg_grid_summary">Gitter zu SVG hinzufügen</string>
-  <string name="pref_svg_in_html_title">SVG in HTML</string>
-  <string name="pref_svg_in_html_summary">SVG export in HTML einbetten</string>
+  <!-- UNUSED string name="pref_svg_in_html_title">SVG in HTML</string -->
+  <!-- UNUSED string name="pref_svg_in_html_summary">SVG export in HTML einbetten</string -->
   <string name="pref_svg_pointstroke_title">SVG Punkt-Dicke</string>
   <string name="pref_svg_pointstroke_summary">Dicke von Punktsymbolen in SVG</string>
   <string name="pref_svg_labelstroke_title">SVG Text-Dicke</string>
@@ -1226,8 +1226,8 @@
 
   <string name="pref_picker_type_title">Zeichenwerkzeuge Darstellung</string>
   <string name="pref_picker_type_summary">Zeichenwerkzeug Darstellung</string>
-  <string name="pref_section_stations_title">Querschnitts-Stationen</string>
-  <string name="pref_section_stations_summary">Querschnitts-Referenz-Stationen</string>
+  <!-- UNUSED string name="pref_section_stations_title">Querschnitts-Stationen</string -->
+  <!-- UNUSED string name="pref_section_stations_summary">Querschnitts-Referenz-Stationen</string -->
   <string name="pref_station_size_title">Messpunkt Schriftgröße</string>
   <string name="pref_station_size_summary">Messpunkt Beschriftung Schriftgröße</string>
   <string name="pref_station_size_message">Messpunkt Beschriftung Schriftgröße</string>

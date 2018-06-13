@@ -8,7 +8,7 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Натисніть "НАЗАД" ще раз для виходу</string>
 
-    <string name="version_ask">Оновлення до нової версії TopoDroid.\nВи хочете переінсталювати інструменти малюнків?</string>
+    <!-- UNUSED string name="version_ask">Оновлення до нової версії TopoDroid.\nВи хочете переінсталювати інструменти малюнків?</string -->
     <string name="symbols_ask">Встановити інструменти малювання v.%1$s?\n(Поточна v.%2$s)</string>
 
     <!-- TODO string name="setup_textsize_title">TopoDroid setup. Text size</string -->
@@ -165,7 +165,7 @@
     <string name="import_calib_io_error">Каліб. файл: помилка читання</string>
     <string name="import_calib_ok">Калібрування успішно імпортовано</string>
     <string name="import_zip_ok">Успішно імпортований zip файл</string>
-    <string name="import_zip_wait">Імпорт zip файлу може зайняти багато часу. Почекайте &#8230;</string>
+    <!-- UNUSED string name="import_zip_wait">Імпорт zip файлу може зайняти багато часу. Почекайте &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Збереження абрису &#8230; обождите&#8230;</string -->
     <string name="MT_points_none">Немає точки MobileTopographer</string>
 
@@ -246,7 +246,7 @@
     <!-- UNUSED string name="hidden_add">Приховати нитку ходу до цього пікету</string -->
     <!-- UNUSED string name="hidden_del">Показати нитку ходу до цього пікету</string -->
     <!-- TODO string name="hidden_show">Show shots beyond station</string -->
-    <string name="splays_toggle">Показати/приховати бок. заміри</string>
+    <!-- UNUSED string name="splays_toggle">Показати/приховати бок. заміри</string -->
     <!-- TODO string name="splays_on_off">Splays</string -->
     <!-- TODO string name="splays">splays</string -->
     <!-- TODO string name="splays_show">Show splays</string -->
@@ -292,7 +292,7 @@
     <string name="no_survey">Зйомка не вибрана.</string>
     <!-- TODO string name="no_to_station">No TO station.</string -->
     <string name="no_thmanager">ThManager не встановлений</string>
-    <string name="no_db_viewer">Додаток перегляду баз даних не найдено</string>
+    <!-- UNUSED string name="no_db_viewer">Додаток перегляду баз даних не найдено</string -->
     <string name="no_undelete">Нічого відновлювати</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Азимут %5$.1f"</string>
     <string name="format_measure_profile">>D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Нахил %5$.1f"</string>
@@ -407,7 +407,7 @@
     <!-- UNUSED string name="scrap_name">назву абрису</string -->
     <string name="splay">боковий замір</string>
     <string name="too_many_leg_intersection">Лінія розрізу пересікає багато відрізків</string>
-    <string name="too_many_legs_xsection">Занадто багато променів для розрізу</string>
+    <!-- UNUSED string name="too_many_legs_xsection">Занадто багато променів для розрізу</string -->
     <!-- UNUSED string name="converted_tdr2th2">Конвертувати бінарні файли абрисов в формат th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Перезаписати абриси в форматі th2 ?</string -->
     <string name="section_area">Площа перерізу: %1$.1f</string>
@@ -680,7 +680,7 @@
 
     <!-- UNUSED string name="station_next">НАСТУП.</string -->
     <string name="no_shot_between_stations">немає заміру між пікетами</string>
-    <string name="few_line_points">Занадто мало точок в лінії</string>
+    <!-- UNUSED string name="few_line_points">Занадто мало точок в лінії</string -->
     <string name="line_delete">видалити_лінію</string>
     <string name="flip_shots">Розвернути пікети</string>
     <!-- TODO string name="split_nothing">Nothing to split</string -->
@@ -749,7 +749,7 @@
     <string name="help_photo">Фотографії в зйомці</string>
     <string name="help_sensor">Покази датчиків</string>
     <string name="help_3d">3D перегляд (Cave3D)</string>
-    <string name="help_move">Увімкнути режим переміщення/зума</string>
+    <!-- UNUSED string name="help_move">Увімкнути режим переміщення/зума</string -->
     <string name="help_draw">Перейти в режим малювання</string>
     <string name="help_edit">Перейти в режим редагування</string>
     <string name="help_refs">Вид вікна абрису</string>
@@ -832,7 +832,7 @@
     <string name="title_coverage">Калібрування и розподіл даних</string>
     <string name="title_coeff">Калібрувальні коефіцієнти</string>
     <!-- TODO string name="title_color_picker">Pick a color</string -->
-    <string name="title_contour">Контур</string>
+    <!-- UNUSED string name="title_contour">Контур</string -->
     <!-- UNUSED string name="title_coord">Введіть координати точки:</string -->
     <string name="title_current_station">Збережені пікети</string>
     <!-- TODO string name="title_station_search">Enter station</string -->
@@ -873,7 +873,7 @@
     <!-- TODO string name="title_split">Sketch split</string -->
 
     <string name="title_stats">Статистика</string>
-    <string name="title_step">Крок</string>
+    <!-- UNUSED string name="title_step">Крок</string -->
     <string name="title_survey">Властивості зйомки</string>
     <string name="title_survey_new">Новая зйомка</string>
     <string name="title_survey_export">Експорт зйомки як</string>
@@ -928,8 +928,8 @@
   <string name="pref_station_prefix_summary">Експортувати префікси пікетів для cSurvey</string>
   <!-- TODO string name="pref_compass_splays_title">Compass splays</string -->
   <!-- TODO string name="pref_compass_splays_summary">Export splays in Compass files</string -->
-  <string name="pref_trobot_names_title">Номера пікеті TopoRobot</string>
-  <string name="pref_trobot_names_summary">Номера пікетів в стилі TopoRobot</string>
+  <!-- UNUSED string name="pref_trobot_names_title">Номера пікеті TopoRobot</string -->
+  <!-- UNUSED string name="pref_trobot_names_summary">Номера пікетів в стилі TopoRobot</string -->
   <string name="pref_ortho_lrud_title">Мін. кут бок. заміру для ЛПВН</string>
   <string name="pref_ortho_lrud_summary">Мін. кут між бок. заміром і вектором для розрахунку ЛПВН при експорті</string>
   <string name="pref_ortho_lrud_message">мін. кут між бок. заміром і вектором для розрахунку ЛПВН</string>
@@ -947,8 +947,8 @@
   <string name="pref_survex_lrud_summary">Додати ЛПВН в при експорті в формат Survex</string>
   <string name="pref_svg_grid_title">SVG сітка</string>
   <string name="pref_svg_grid_summary">Додати сітку в SVG експорт</string>
-  <string name="pref_svg_in_html_title">SVG в HTML</string>
-  <string name="pref_svg_in_html_summary">Додати експорт SVG в HTML сторінку</string>
+  <!-- UNUSED string name="pref_svg_in_html_title">SVG в HTML</string -->
+  <!-- UNUSED string name="pref_svg_in_html_summary">Додати експорт SVG в HTML сторінку</string -->
   <!-- TODO string name="pref_svg_pointstroke_title">SVG point stroke</string -->
   <!-- TODO string name="pref_svg_pointstroke_summary">Width of point symbols in SVG</string -->
   <!-- TODO string name="pref_svg_labelstroke_title">SVG label stroke</string -->
@@ -1201,8 +1201,8 @@
 
   <string name="pref_picker_type_title">Вид меню і рисования</string>
   <string name="pref_picker_type_summary">Тип меню инструментов рисования</string>
-  <string name="pref_section_stations_title">Пікети на поперечних перерізах</string>
-  <string name="pref_section_stations_summary">Переріз пікета привязки</string>
+  <!-- UNUSED string name="pref_section_stations_title">Пікети на поперечних перерізах</string -->
+  <!-- UNUSED string name="pref_section_stations_summary">Переріз пікета привязки</string -->
   <string name="pref_station_size_title">Розмір номерів пікетів</string>
   <string name="pref_station_size_summary">Розмір номерів пікетів</string>
   <string name="pref_station_size_message">Розмір подписи пікетів</string>
@@ -1219,17 +1219,17 @@
   <string name="pref_auto_section_pt_title">Точки перерізів</string>
   <string name="pref_auto_section_pt_summary">Додати точки перерізів до линій перерізів</string>
 
-  <string name="pref_sketchUsesSplays_title">Абрис бокових замірів</string>
-  <string name="pref_sketchUsesSplays_summary">Поверхня абрису використовує бокові заміри</string>
+  <!-- UNUSED string name="pref_sketchUsesSplays_title">Абрис бокових замірів</string -->
+  <!-- UNUSED string name="pref_sketchUsesSplays_summary">Поверхня абрису використовує бокові заміри</string -->
   <string name="pref_sketchLineStep_title">Mаксимальний розмір сторони</string>
   <string name="pref_sketchLineStep_summary">Макс размір сторони трикутників</string>
   <string name="pref_sketchLineStep_message">Макс размір сторони трикутників [м]</string>
-  <string name="pref_sketchBorderStep_title">Крок границі</string>
-  <string name="pref_sketchBorderStep_summary">Відстань між точками редагування лінії</string>
-  <string name="pref_sketchBorderStep_message">Відстань між точками редагування лінії</string>
-  <string name="pref_sketchSectionStep_title">Крок перерізів</string>
-  <string name="pref_sketchSectionStep_summary">Відстань між перерізами</string>
-  <string name="pref_sketchSectionStep_message">Відстань між проміжними перерізами</string>
+  <!-- UNUSED string name="pref_sketchBorderStep_title">Крок границі</string -->
+  <!-- UNUSED string name="pref_sketchBorderStep_summary">Відстань між точками редагування лінії</string -->
+  <!-- UNUSED string name="pref_sketchBorderStep_message">Відстань між точками редагування лінії</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_title">Крок перерізів</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_summary">Відстань між перерізами</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_message">Відстань між проміжними перерізами</string -->
   <string name="pref_sketchDeltaExtrude_title">Масштаб вирізки</string>
   <string name="pref_sketchDeltaExtrude_summary">Масштаб вирізок</string>
   <string name="pref_sketchDeltaExtrude_message">Масштаб вирізок</string>

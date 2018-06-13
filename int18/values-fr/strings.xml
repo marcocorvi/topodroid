@@ -9,7 +9,7 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Appuyez RETOUR une nouvelle fois pour sortir</string>
 
-    <string name="version_ask">Vous être en train de mettre à jour vers une nouvelle version de TopoDroid.\n Voulez-vous réinstaller les symboles de dessins ?</string>
+    <!-- UNUSED string name="version_ask">Vous être en train de mettre à jour vers une nouvelle version de TopoDroid.\n Voulez-vous réinstaller les symboles de dessins ?</string -->
     <string name="symbols_ask">Installer les outils de dessin v.%1$s?\n ? (v. actuelle: v.%2$s) </string>
 
     <!-- TODO string name="setup_textsize_title">TopoDroid setup. Text size</string -->
@@ -83,7 +83,7 @@
     <string name="calib_updated">Étalonnage mis à jour</string>
     <string name="calib_compute_groups">Calculs des groupes de données d\'étalonnage…</string>
     <string name="calib_compute_coeffs">Calculs des coefficients d\'étalonnage…</string>
-    <!-- UNUSED string name="calib_read_coeffs">Lecture des coéficients de Calibration ...</string -->
+    <!-- UNUSED string name="calib_read_coeffs">Lecture des coéficients de Calibration &#8230;</string -->
     <string name="calib_write_coeffs">Écriture des coefficients d\'étalonnage…</string>
     <string name="calib_validation">Validation de %1$s vs %2$s</string>
     <!-- UNUSED string name="connect_failed">Echec de la connexion</string -->
@@ -149,11 +149,11 @@
     <string name="found_groups">Trouvé %1$d groupes</string>
 <!-- UNUSED string name="few_plots">Pas assez de Points</string -->
 <string name="few_calibs">Pas assez d\'étalonnage</string>
-    <string name="getting_info">Obtenir des informations DistoX ...</string>
+    <string name="getting_info">Obtenir des informations DistoX &#8230;</string>
 
 <string name="calib_import_title">Import de l\'étalonnage</string>
 <string name="import_title">Import fichier</string>
-<!-- UNUSED string name="import_wait">Importation de fichier... Patientez...</string -->
+<!-- UNUSED string name="import_wait">Importation de fichier&#8230; Patientez&#8230;</string -->
 <string name="import_already">Relevé déjà importé</string>
 <string name="import_none">Aucun fichier à importer</string>
 <string name="import_failed">L\'import du fichier a échoué</string>
@@ -165,8 +165,8 @@
     <string name="import_calib_no_data">Fichier d\'étalon.: aucune donnée</string>
     <string name="import_calib_io_error">Fichier d\'étalon.: erreur de lecture</string>
 <string name="import_zip_ok">Fichier zip importé avec succès</string>
-<string name="import_zip_wait">L\'importation du fichier zip peut être longue… Patientez…</string>
-<!-- UNUSED string name="sketch_saving">Exportation de dessin ... Patientez ...</string -->
+<!-- UNUSED string name="import_zip_wait">L\'importation du fichier zip peut être longue… Patientez…</string -->
+<!-- UNUSED string name="sketch_saving">Exportation de dessin &#8230; Patientez &#8230;</string -->
 <string name="MT_points_none">Pas de point Mobile Topographer</string>
 
     <!-- TODO string name="pleasewait">Please wait</string -->
@@ -244,7 +244,7 @@
 <!-- UNUSED string name="hidden_add">Cacher les visées precedentes</string -->
 <!-- UNUSED string name="hidden_del">Afficher les visées précédentes</string -->
 <string name="hidden_show">Montrer les visées après la station</string>
-<string name="splays_toggle">Basculer les visées d\'habillage - Splays</string>
+<!-- UNUSED string name="splays_toggle">Basculer les visées d\'habillage - Splays</string -->
     <!-- TODO string name="splays_on_off">Splays</string -->
 <string name="splays">Visées d\'habillage</string>
     <!-- TODO string name="splays_show">Show splays</string -->
@@ -290,7 +290,7 @@
 <string name="no_survey">Aucun relevé sélectionné.</string>
 <string name="no_to_station">Pas de station VERS (TO)</string>
 <string name="no_thmanager">ThManager non installé</string>
-<string name="no_db_viewer">DB_viewer app pas trouvée</string>
+<!-- UNUSED string name="no_db_viewer">DB_viewer app pas trouvée</string -->
 <string name="no_undelete">Aucun élément à récupérer</string>
 <string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Azimuth %4$.1f"</string>
 <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Clino %4$.1f"</string>
@@ -405,7 +405,7 @@
     <!-- UNUSED string name="scrap_name">Nom du croquis</string -->
     <string name="splay">Visée latérale</string>
     <string name="too_many_leg_intersection">La ligne de section croise plus d\'une ligne de cheminement.</string>
-    <string name="too_many_legs_xsection">Trop de visées pour la section X</string>
+    <!-- UNUSED string name="too_many_legs_xsection">Trop de visées pour la section X</string -->
     <!-- UNUSED string name="converted_tdr2th2">Fichier de dessin binaire convertis vers th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Écraser le fichier th2 ?</string -->
     <string name="section_area">Zone section : %1$.1f</string>
@@ -677,7 +677,7 @@
 
     <!-- UNUSED string name="station_next">SUIVANT</string -->
     <string name="no_shot_between_stations">Pas de point entre les stations</string>
-    <string name="few_line_points">La ligne contient trop peu de points</string>
+    <!-- UNUSED string name="few_line_points">La ligne contient trop peu de points</string -->
     <string name="line_delete">Supprimer la ligne</string>
     <string name="flip_shots">Inverser les points</string>
     <string name="split_nothing">Rien à diviser</string>
@@ -745,7 +745,7 @@
     <string name="help_photo">Photos</string>
     <string name="help_sensor">Mesures</string>
     <string name="help_3d">Visionneuse 3D (Application Cave3D)</string>
-    <string name="help_move">DÉPLACER /mode ZOOM</string>
+    <!-- UNUSED string name="help_move">DÉPLACER /mode ZOOM</string -->
     <string name="help_draw">Mode dessin</string>
     <string name="help_edit">Mode d\'édition</string>
     <string name="help_refs">Choix des références de dessin</string>
@@ -826,7 +826,7 @@
     <string name="title_coverage">Distributions des données d\'étalonnage</string>
     <string name="title_coeff">Coefficients d\'étalonnage</string>
     <string name="title_color_picker">Choisir une couleur</string>
-    <string name="title_contour">Contour</string>
+    <!-- UNUSED string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Entrer les Coordonnées du point</string -->
     <string name="title_current_station">Stations sauvegardées</string>
     <string name="title_station_search">Entrer une station</string>
@@ -867,7 +867,7 @@
     <string name="title_split">Diviser Esquisse</string>
 
     <string name="title_stats">Statistiques</string>
-    <string name="title_step">Étape</string>
+    <!-- UNUSED string name="title_step">Étape</string -->
     <string name="title_survey">Info du relevé</string>
     <string name="title_survey_new">Nouveau relevé</string>
     <string name="title_survey_export">Exporter le relevé sous</string>
@@ -920,8 +920,8 @@
   <string name="pref_station_prefix_summary">Export préfixe station cSurvey</string>
   <string name="pref_compass_splays_title">Visées latérales Compass</string>
   <string name="pref_compass_splays_summary">Exporter les visées latérales dans le fichier Compass</string>
-  <string name="pref_trobot_names_title">Noms stations TopoRobot</string>
-  <string name="pref_trobot_names_summary">Les noms de station sont de style TopoRobot</string>
+  <!-- UNUSED string name="pref_trobot_names_title">Noms stations TopoRobot</string -->
+  <!-- UNUSED string name="pref_trobot_names_summary">Les noms de station sont de style TopoRobot</string -->
   <string name="pref_ortho_lrud_title">Angle visée chem. LRUD</string>
   <string name="pref_ortho_lrud_summary">Angle minimum visée de cheminement pour une cheminement LRUD</string>
   <string name="pref_ortho_lrud_message">Angle minimum LRUD</string>
@@ -939,8 +939,8 @@
   <string name="pref_survex_lrud_summary">Ajout LRUD à l\'export Survex</string>
   <string name="pref_svg_grid_title">Grille SVG</string>
   <string name="pref_svg_grid_summary">Ajouter une grille à l\'export SVG</string>
-  <string name="pref_svg_in_html_title">SVG en HTML</string>
-  <string name="pref_svg_in_html_summary">Embarquer l\'export SVG en HTML</string>
+  <!-- UNUSED string name="pref_svg_in_html_title">SVG en HTML</string -->
+  <!-- UNUSED string name="pref_svg_in_html_summary">Embarquer l\'export SVG en HTML</string -->
   <string name="pref_svg_pointstroke_title">Points SVG</string>
   <string name="pref_svg_pointstroke_summary">Largeur des symboles ponctuels en SVG</string>
   <string name="pref_svg_labelstroke_title">Etiquette SVG</string>
@@ -994,7 +994,7 @@
   <string name="pref_z6_workaround_title">Contournement Z6</string>
   <string name="pref_z6_workaround_summary">Contournement Z6 téléchargement données</string>
   <string name="pref_crs_title">C R S </string>
-  <string name="pref_crs_summary">Nom du Système de Coordonnées de Référence (UTM, WGS84...)</string>
+  <string name="pref_crs_summary">Nom du Système de Coordonnées de Référence (UTM, WGS84&#8230;)</string>
   <string name="pref_crs_message">Saisissez le nom CRS tel que dans Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">Utilizer GPSAveraging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Utiliser GPSAveraging</string -->
@@ -1195,8 +1195,8 @@
 
   <string name="pref_picker_type_title">Sélectionneur de symbole</string>
   <string name="pref_picker_type_summary">Type sélectionneur symbole</string>
-  <string name="pref_section_stations_title">Stations X-Section</string>
-  <string name="pref_section_stations_summary">Base de référence pour les sections transverses</string>
+  <!-- UNUSED string name="pref_section_stations_title">Stations X-Section</string -->
+  <!-- UNUSED string name="pref_section_stations_summary">Base de référence pour les sections transverses</string -->
   <string name="pref_station_size_title">Taille nom de station</string>
   <string name="pref_station_size_summary">Taille du texte des stations</string>
   <string name="pref_station_size_message">Taille du texte des noms de stations</string>
@@ -1213,17 +1213,17 @@
   <string name="pref_auto_section_pt_title">Points de section</string>
   <string name="pref_auto_section_pt_summary">Ajouter point de section aux lignes de section</string>
 
-  <string name="pref_sketchUsesSplays_title">Dessiner les visées latérales</string>
-  <string name="pref_sketchUsesSplays_summary">Dessiner les surfaces en utilisant les visées latérales</string>
+  <!-- UNUSED string name="pref_sketchUsesSplays_title">Dessiner les visées latérales</string -->
+  <!-- UNUSED string name="pref_sketchUsesSplays_summary">Dessiner les surfaces en utilisant les visées latérales</string -->
   <string name="pref_sketchLineStep_title">Paramètres de ligne</string>
   <string name="pref_sketchLineStep_summary">Distance entre les points d\'une ligne</string>
   <string name="pref_sketchLineStep_message">Distance entre les points d\'une ligne</string>
-  <string name="pref_sketchBorderStep_title">Paramètre de bordure</string>
-  <string name="pref_sketchBorderStep_summary">Distance entre les points d\'édition de ligne</string>
-  <string name="pref_sketchBorderStep_message">Distance entre les points d\'édition de ligne</string>
-  <string name="pref_sketchSectionStep_title">Paramètres de section</string>
-  <string name="pref_sketchSectionStep_summary">Distance entre sections</string>
-  <string name="pref_sketchSectionStep_message">Distance entre sections intermédiaires</string>
+  <!-- UNUSED string name="pref_sketchBorderStep_title">Paramètre de bordure</string -->
+  <!-- UNUSED string name="pref_sketchBorderStep_summary">Distance entre les points d\'édition de ligne</string -->
+  <!-- UNUSED string name="pref_sketchBorderStep_message">Distance entre les points d\'édition de ligne</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_title">Paramètres de section</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_summary">Distance entre sections</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_message">Distance entre sections intermédiaires</string -->
   <string name="pref_sketchDeltaExtrude_title">Extrude delta</string>
   <string name="pref_sketchDeltaExtrude_summary">Extrude delta</string>
   <string name="pref_sketchDeltaExtrude_message">Extrude delta</string>

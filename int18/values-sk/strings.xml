@@ -8,7 +8,7 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Pre návrat Opätovne stlačte tlačidlo SPÄŤ</string>
 
-    <string name="version_ask">Updatovať na novú verziu Topodroid.\nChcete reinštalovať kresliace symboly?</string>
+    <!-- UNUSED string name="version_ask">Updatovať na novú verziu Topodroid.\nChcete reinštalovať kresliace symboly?</string -->
     <string name="symbols_ask">Inštalovať kresliace symboly v.%1$s?\n(Aktuálne v.%2$s)</string>
 
     <string name="setup_textsize_title">TopoDroid nastavenie. Veľkosť textu</string>
@@ -23,7 +23,7 @@
 	    Pokiaľ zistíte problém s pripojením DistoX skúste použiť Nezabezpečené pripojenie.\n\n
 	    Ďalšie nastavenia  (veľkosť ikon, šírky čiary, veľkosti štítkov... viete meniť neskôr v nastaveniach.)
 	    podľa Vašich potrieb./n/n
-    </string -->
+    </string>
     <!-- OK string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
 
     <string name="POINT">BOD</string>
@@ -114,7 +114,7 @@
     <string name="device_code">DistoX kód %1$4d</string>
     <string name="device_firmware">Firmware %1$d.%2$d</string>
     <string name="device_hardware">Hardware %1$d.%2$d</string>
-    <string name="device_memory">Pamäť  %1$02x.%2$02x</string>
+    <!-- UNUSED string name="device_memory">Pamäť  %1$02x.%2$02x</string -->
     <string name="device_status_angle_grad">Jednotky uhlov: gradiány</string>
     <string name="device_status_angle_degree">Jednotky uhlov: stupne</string>
     <string name="device_status_compass_on">Compass/clino: zapnutý</string>
@@ -165,7 +165,7 @@
     <string name="import_calib_no_data">Calib. súbor: Žiadne dáta</string>
     <string name="import_zip_ok">Import zip súboru úspešný</string>
     <!-- FIXME REPEATED string name="import_zip_ok">zip súbor úspešne importovaný</string -->
-    <string name="import_zip_wait">Importovanie zip súboru vyžaduje čas. Prosím, čakajte &#8230;</string>
+    <!-- UNUSED string name="import_zip_wait">Importovanie zip súboru vyžaduje čas. Prosím, čakajte &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Salvataggio disegno &#8230; attendi &#8230;</string -->
     <string name="MT_points_none">Chýbajúci bod MobileTopographer</string>
 
@@ -245,7 +245,7 @@
     <!-- UNUSED string name="hidden_add">Skryje mediálnu čiaru</string -->
     <!-- UNUSED string name="hidden_del">Zobraziť stredovú čiaru</string -->
      <string name="hidden_show">Zobraziť zámery za bodom</string>
-    <string name="splays_toggle">Prepnúť zobrazenie/skrytie pomocných zámer</string>
+    <!-- UNUSED string name="splays_toggle">Prepnúť zobrazenie/skrytie pomocných zámer</string -->
     <string name="splays_on_off">Pomocné zámery</string>
     <string name="splays">pomocné zámery</string>
     <string name="splays_show">Zobraziť pomocné zámery</string>
@@ -292,7 +292,7 @@
     <string name="no_survey">Nie je zvolené mapovanie</string>
     <string name="no_to_station">Chýba staničenie nasledujúceho bodu</string>
     <string name="no_thmanager">ThManager app nie je nainštalovaná</string>
-    <string name="no_db_viewer">DB_viewer app sa nenašla</string>
+    <!-- UNUSED string name="no_db_viewer">DB_viewer app sa nenašla</string -->
     <string name="no_undelete">Žiadna položka na Obnovenie </string>
     <!-- FIXME string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Pozicija %4$.1f"</string -->
     <!-- FIXME string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Naklon %4$.1f"</string -->
@@ -407,7 +407,7 @@
     <!-- UNUSED string name="scrap_name">nome del disegno</string -->
     <string name="splay">Pomocné zámery</string>
     <string name="too_many_leg_intersection">Čiara priečneho rezu pretína veľa hlavných zámer</string>
-    <string name="too_many_legs_xsection">Príliš veľa hlavných zámer pre priečny rez</string>
+    <!-- UNUSED string name="too_many_legs_xsection">Príliš veľa hlavných zámer pre priečny rez</string -->
     <!-- UNUSED string name="converted_tdr2th2">Pretvorjena skice iz binarnega formata v th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Pretvori  skico iz binarnega formata v th2</string -->
     <string name="section_area">Sekcia oblasti: %1$.1f</string>
@@ -686,7 +686,7 @@
 
     <!-- UNUSED string name="station_next">NEXT</string -->
     <string name="no_shot_between_stations">Žiadna zámera medzi bodmi</string>
-    <string name="few_line_points">Čiara má príliš málo bodov</string>
+    <!-- UNUSED string name="few_line_points">Čiara má príliš málo bodov</string -->
     <string name="line_delete">Odstrániť čiaru</string>
     <string name="flip_shots">Obrátiť aj zámery (nezaškrtnuté otočí len krezbu)</string>
     <string name="split_nothing">Nič na rozdelenie</string>
@@ -755,7 +755,7 @@
     <string name="help_photo">Zobraziť nasnímané fotografie</string>
     <string name="help_sensor">Zobraziť merania z interných senzorov</string>
     <string name="help_3d">3D zobrazenie (Cave3D)</string>
-    <string name="help_move">Režim presunu/zoom</string>
+    <!-- UNUSED string name="help_move">Režim presunu/zoom</string -->
     <string name="help_draw">Režim kreslenia</string>
     <string name="help_edit">Režim úprav</string>
     <string name="help_refs">Vybrať režim zobrazenia</string>
@@ -843,7 +843,7 @@
     <string name="title_coverage">Distribúcia kalibračných údajov</string>
     <string name="title_coeff">Kalibračné koeficienty</string>
     <string name="title_color_picker">Vyber farbu</string>
-    <string name="title_contour">Obrysy</string>
+    <!-- UNUSED string name="title_contour">Obrysy</string -->
     <!-- UNUSED string name="title_coord">Inserisci le coordinate del punto:</string -->
     <string name="title_current_station">Uložené meračské body</string>
     <string name="title_station_search">Vlož meračský bod</string>
@@ -884,7 +884,7 @@
     <string name="title_split">Rozdelenie nákresov</string>
 
     <string name="title_stats">Štatistika</string>
-    <string name="title_step">Krok</string>
+    <!-- UNUSED string name="title_step">Krok</string -->
     <string name="title_survey">Jaskyňa</string>
     <string name="title_survey_new">Nové mapovanie</string>
     <string name="title_survey_export">Export mapovania</string>
@@ -898,7 +898,7 @@
   <string name="pref_cat_drawing">NASTAVENIE KRESLENIA</string>
   <string name="pref_cat_import_export">NASTAVENIE IMPORT/EXPORT</string>
   <string name="pref_cat_calib">NASTAVENIE KALIBRÁCIE</string>
-  <string name="pref_cat_min_algo">MIN ALGO</string>  
+  <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->  
   <string name="pref_cat_device">NASTAVENIE DISTOX</string>
   <string name="pref_cat_sketch">3D MODELY</string>
   <string name="pref_cat_log">NASTAVENIE ZÁZNAMU</string>
@@ -940,8 +940,8 @@
   <string name="pref_station_prefix_summary">Export predčíslia bodov Compass</string>
   <string name="pref_compass_splays_title">Pomocné zámery programu Compass</string>
   <string name="pref_compass_splays_summary">Export pomocných zámer do programu Compass</string>
-  <string name="pref_trobot_names_title">Názvy staníc TopoRobot</string>
-  <string name="pref_trobot_names_summary">Názvy staníc sú v štýle TopoRobot</string>
+  <!-- UNUSED string name="pref_trobot_names_title">Názvy staníc TopoRobot</string -->
+  <!-- UNUSED string name="pref_trobot_names_summary">Názvy staníc sú v štýle TopoRobot</string -->
   <string name="pref_ortho_lrud_title">LRUD uhol pomocnej zámery</string>
   <string name="pref_ortho_lrud_summary">Minimálny uhol medzi pomocnou/hlavnou zámerou na export LRUD merania</string>
   <string name="pref_ortho_lrud_message">Minimálny uhol medzi pomocnou/hlavnou zámerou na export LRUD merania</string> 
@@ -959,8 +959,8 @@
   <string name="pref_survex_lrud_summary">Pridá LRUD do programu Survex/Therion </string>
   <string name="pref_svg_grid_title">SVG mriežka</string>
   <string name="pref_svg_grid_summary">Pridá mriežku do exportu SVG</string>
-  <string name="pref_svg_in_html_title">SVG v \'HTML</string>
-  <string name="pref_svg_in_html_summary">Zadajte export SVG v HTML</string>
+  <!-- UNUSED string name="pref_svg_in_html_title">SVG v \'HTML</string -->
+  <!-- UNUSED string name="pref_svg_in_html_summary">Zadajte export SVG v HTML</string -->
   <string name="pref_svg_pointstroke_title">SVG, šírka bodov</string>
   <string name="pref_svg_pointstroke_summary">SVG: šírka bodov</string>
   <string name="pref_svg_labelstroke_title">SVG, šírka textu</string>
@@ -1212,8 +1212,8 @@
 
   <string name="pref_picker_type_title">Spôsob zobrazenia Palety v režime kreslenia </string>
   <string name="pref_picker_type_summary">Spôsob zobrazenia výberu z Palety v režime kreslenia</string>
-  <string name="pref_section_stations_title">Meracie body X-sekcie</string>
-  <string name="pref_section_stations_summary">Referenčné základy pre X-sekciu</string>
+  <!-- UNUSED string name="pref_section_stations_title">Meracie body X-sekcie</string -->
+  <!-- UNUSED string name="pref_section_stations_summary">Referenčné základy pre X-sekciu</string -->
   <string name="pref_station_size_title">Veľkosť názvu meračského bodu</string>
   <string name="pref_station_size_summary">Veľkosť názvu meračského bodu</string>
   <string name="pref_station_size_message">Veľkosť názvu meračského bodu</string>
@@ -1230,17 +1230,17 @@
   <string name="pref_auto_section_pt_title">Sekčné body</string>
   <string name="pref_auto_section_pt_summary">Pridajte sekčný bod do čiary priečneho rezu</string>
 
-  <string name="pref_sketchUsesSplays_title">Pomocné merania nákresu</string>
-  <string name="pref_sketchUsesSplays_summary">Nákresový povrch používa pomocné meranie</string>
+  <!-- UNUSED string name="pref_sketchUsesSplays_title">Pomocné merania nákresu</string -->
+  <!-- UNUSED string name="pref_sketchUsesSplays_summary">Nákresový povrch používa pomocné meranie</string -->
   <string name="pref_sketchLineStep_title">Čiarový krok</string>
   <string name="pref_sketchLineStep_summary">Vzdialenosť medzi čiarami</string>
   <string name="pref_sketchLineStep_message">Vzdialenosť medzi čiarami</string>
-  <string name="pref_sketchBorderStep_title">Hraničný krok</string>
-  <string name="pref_sketchBorderStep_summary">Vzdialenosť medzi bodmi editovacieho riadku</string>
-  <string name="pref_sketchBorderStep_message">Vzdialenosť medzi bodmi editovacieho riadku</string>
-  <string name="pref_sketchSectionStep_title">Krok sekcie</string>
-  <string name="pref_sketchSectionStep_summary">Vzdialenosť medzi sekciami</string>
-  <string name="pref_sketchSectionStep_message">Vzdialenosť medzi strednými časťami</string>
+  <!-- UNUSED string name="pref_sketchBorderStep_title">Hraničný krok</string -->
+  <!-- UNUSED string name="pref_sketchBorderStep_summary">Vzdialenosť medzi bodmi editovacieho riadku</string -->
+  <!-- UNUSED string name="pref_sketchBorderStep_message">Vzdialenosť medzi bodmi editovacieho riadku</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_title">Krok sekcie</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_summary">Vzdialenosť medzi sekciami</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_message">Vzdialenosť medzi strednými časťami</string -->
   <string name="pref_sketchDeltaExtrude_title">Pretlačte delta</string>
   <string name="pref_sketchDeltaExtrude_summary">Pretlačte delta</string>
   <string name="pref_sketchDeltaExtrude_message">Pretlačte delta</string>

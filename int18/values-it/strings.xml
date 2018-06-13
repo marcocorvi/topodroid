@@ -8,7 +8,7 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Per uscire premi INDIETRO di nuovo</string>
 
-    <string name="version_ask">Stai aggiornando ad una nuova versione di TopoDroid.\nVuoi reinstallare prototipi grafici?</string>
+    <!-- UNUSED string name="version_ask">Stai aggiornando ad una nuova versione di TopoDroid.\nVuoi reinstallare prototipi grafici?</string -->
     <string name="symbols_ask">Installare gli strumenti di disegno v.%1$s?\n(Current v.%2$s)</string>
 
     <!-- TODO string name="setup_textsize_title">TopoDroid setup. Text size</string -->
@@ -148,7 +148,7 @@
     <string name="found_groups">Trovati %1$d gruppi</string>
     <!-- UNUSED string name="few_plots">Troppo pochi disegni</string -->
     <string name="few_calibs">Calibrazioni non sufficienti</string>
-    <string name="getting_info">Scarico info dal DistoX...</string>
+    <string name="getting_info">Scarico info dal DistoX&#8230;</string>
 
     <string name="calib_import_title">Importa calibrazione</string>
     <string name="import_title">Importazione file</string>
@@ -164,7 +164,7 @@
     <string name="import_calib_no_data">Calib. file: no dati</string>
     <string name="import_calib_io_error">Calib. file: errore in lettura</string>
     <string name="import_zip_ok">ZIP importato con successo</string>
-    <string name="import_zip_wait">Importare uno ZIP richiede tempo. Attendi&#8230;</string>
+    <!-- UNUSED string name="import_zip_wait">Importare uno ZIP richiede tempo. Attendi&#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Salvataggio disegno &#8230; attendi &#8230;</string -->
     <string name="MT_points_none">Punto GPS mancante</string>
 
@@ -244,7 +244,7 @@
     <!-- UNUSED string name="hidden_add">Nascondi la linea mediana</string -->
     <!-- UNUSED string name="hidden_del">Mostra la linea mediana</string -->
     <string name="hidden_show">Mostra battute oltre il caposaldo</string>
-    <string name="splays_toggle">Mostra o Nascondi gli splay</string>
+    <!-- UNUSED string name="splays_toggle">Mostra o Nascondi gli splay</string -->
     <string name="splays_on_off">Splays</string>
     <string name="splays">splay</string>
     <string name="splays_show">Mostra splays</string>
@@ -290,7 +290,7 @@
     <string name="no_survey">Rilievo non selezionato</string>
     <string name="no_to_station">No caposaldo A.</string>
     <string name="no_thmanager">ThManager non installato</string>
-    <string name="no_db_viewer">DB_viewer non installato</string>
+    <!-- UNUSED string name="no_db_viewer">DB_viewer non installato</string -->
     <string name="no_undelete">Nessun oggetto da riprendere</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Posizione %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Inclinazione %5$.1f"</string>
@@ -405,7 +405,7 @@
     <!-- UNUSED string name="scrap_name">nome del disegno</string -->
     <!-- OK string name="splay">splay</string -->
     <string name="too_many_leg_intersection">La sezione interseca piú battute</string>
-    <string name="too_many_legs_xsection">Troppe battute per una Cross-section</string>
+    <!-- UNUSED string name="too_many_legs_xsection">Troppe battute per una Cross-section</string -->
     <!-- UNUSED string name="converted_tdr2th2">Convertito disegno da formato binario a th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Sovrascrivo il file del disegno th2 ?</string -->
     <string name="section_area">Area della sezione: %1$.1f</string>
@@ -463,7 +463,7 @@
     <string name="survey_not_attached">ATTENZIONE: dati scollegati</string>
     <string name="survey_not_extend">WARNING: extend disabilitati</string>
     <string name="survey_not_attached_extend">WARNING: tiri non collegati ed extend disabilitati</string>
-    <string name="saturated_coeffs">WARNING: Coefficenti di calibrazione saturati</string>
+    <string name="saturated_coeffs">WARNING: Coefficienti di calibrazione saturati</string>
     <string name="out_of_memory">WARNING: Memoria terminata !</string>
     <string name="disk_io_error">CRITICAL: Errore disco !</string>
     <string name="cannot_rename">Rinomina rilievo non riuscita</string>
@@ -678,7 +678,7 @@
 
     <!-- UNUSED string name="station_next">NEXT</string -->
     <string name="no_shot_between_stations">Nessun tiro tra i capisaldi</string>
-    <string name="few_line_points">La linea ha troppo pochi punti</string>
+    <!-- UNUSED string name="few_line_points">La linea ha troppo pochi punti</string -->
     <string name="line_delete">Elimina linea</string>
     <string name="flip_shots">Capovolgi battute</string>
     <string name="split_nothing">Nulla da dividere</string>
@@ -747,7 +747,7 @@
     <string name="help_photo">Foto</string>
     <string name="help_sensor">Misurazioni</string>
     <string name="help_3d">3D app (Cave3D)</string>
-    <string name="help_move">Modalità muovi/zoom</string>
+    <!-- UNUSED string name="help_move">Modalità muovi/zoom</string -->
     <string name="help_draw">Modalità disegno</string>
     <string name="help_edit">Modalità editing</string>
     <string name="help_refs">Seleziona riferimenti per disegno</string>
@@ -930,8 +930,8 @@
   <string name="pref_station_prefix_summary">Esporta in cSurvey il prefisso dei caposaldi</string>
   <string name="pref_compass_splays_title">Splay Compass</string>
   <string name="pref_compass_splays_summary">Esporta splay in file Compass</string>
-  <string name="pref_trobot_names_title">Nomi capisaldi TopoRobot</string>
-  <string name="pref_trobot_names_summary">I nomi capisaldi sono in stile TopoRobot</string>
+  <!-- UNUSED string name="pref_trobot_names_title">Nomi capisaldi TopoRobot</string -->
+  <!-- UNUSED string name="pref_trobot_names_summary">I nomi capisaldi sono in stile TopoRobot</string -->
   <string name="pref_ortho_lrud_title">Angolo di splay di tipo LRUD</string>
   <string name="pref_ortho_lrud_summary">Minimo angolo tra splay e battuta per uno splay di tipo LRUD</string>
   <string name="pref_ortho_lrud_message">LRUD: minimo angolo splay-battuta</string>
@@ -949,8 +949,8 @@
   <string name="pref_survex_lrud_summary">Survex - Aggiungi LRUD alla export</string>
   <string name="pref_svg_grid_title">Griglia SVG</string>
   <string name="pref_svg_grid_summary">Aggiungi griglia alla export SVG</string>
-  <string name="pref_svg_in_html_title">SVG nell\'HTML</string>
-  <string name="pref_svg_in_html_summary">Inserire SVG export in HTML</string>
+  <!-- UNUSED string name="pref_svg_in_html_title">SVG nell\'HTML</string -->
+  <!-- UNUSED string name="pref_svg_in_html_summary">Inserire SVG export in HTML</string -->
   <string name="pref_svg_pointstroke_title">SVG, tratto del punto</string>
   <string name="pref_svg_pointstroke_summary">SVG: larghezza dei simboli punto</string>
   <string name="pref_svg_labelstroke_title">SVG, tratto etichetta</string>
@@ -1203,8 +1203,8 @@
 
   <string name="pref_picker_type_title">Dialogo scelta prototipo</string>
   <string name="pref_picker_type_summary">Tipo dialogo scelta prototipo grafico</string>
-  <string name="pref_section_stations_title">Capisaldi X-Section</string>
-  <string name="pref_section_stations_summary">Capisaldi di riferimento per X-Section</string>
+  <!-- UNUSED string name="pref_section_stations_title">Capisaldi X-Section</string -->
+  <!-- UNUSED string name="pref_section_stations_summary">Capisaldi di riferimento per X-Section</string -->
   <string name="pref_station_size_title">Dimensione nome capisaldi</string>
   <string name="pref_station_size_summary">Dimensione nome capisaldi</string>
   <string name="pref_station_size_message">Size of the station labels</string>
@@ -1221,17 +1221,17 @@
   <string name="pref_auto_section_pt_title">Punti sezione</string>
   <string name="pref_auto_section_pt_summary">Aggiungi un punto di sezione alle linee di sezione</string>
 
-  <string name="pref_sketchUsesSplays_title">Sketch splays</string>
-  <string name="pref_sketchUsesSplays_summary">Sketch surface uses splays</string>
+  <!-- UNUSED string name="pref_sketchUsesSplays_title">Sketch splays</string -->
+  <!-- UNUSED string name="pref_sketchUsesSplays_summary">Sketch surface uses splays</string -->
   <string name="pref_sketchLineStep_title">Line step</string>
   <string name="pref_sketchLineStep_summary">Distance between line points</string>
   <string name="pref_sketchLineStep_message">Distance between line points</string>
-  <string name="pref_sketchBorderStep_title">Border step</string>
-  <string name="pref_sketchBorderStep_summary">Distance between edit-line points</string>
-  <string name="pref_sketchBorderStep_message">Distance between edit-line points</string>
-  <string name="pref_sketchSectionStep_title">Section step</string>
-  <string name="pref_sketchSectionStep_summary">Distance between sections</string>
-  <string name="pref_sketchSectionStep_message">Distance between intermediate sections</string>
+  <!-- UNUSED string name="pref_sketchBorderStep_title">Border step</string -->
+  <!-- UNUSED string name="pref_sketchBorderStep_summary">Distance between edit-line points</string -->
+  <!-- UNUSED string name="pref_sketchBorderStep_message">Distance between edit-line points</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_title">Section step</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_summary">Distance between sections</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_message">Distance between intermediate sections</string -->
   <string name="pref_sketchDeltaExtrude_title">Extrude delta</string>
   <string name="pref_sketchDeltaExtrude_summary">Extrude delta</string>
   <string name="pref_sketchDeltaExtrude_message">Extrude delta</string>

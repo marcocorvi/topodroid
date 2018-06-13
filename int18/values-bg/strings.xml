@@ -8,7 +8,7 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Натиснете отново за да излезете</string>
 
-    <string name="version_ask">Обновяване на версията на TopoDroid.\nИскате ли да преинсталирате елементите за рисуване?</string>
+    <!-- UNUSED string name="version_ask">Обновяване на версията на TopoDroid.\nИскате ли да преинсталирате елементите за рисуване?</string -->
     <string name="symbols_ask">Инсталиране на елементи за рисуване v.%1$s?\n(Текущи v.%2$s)</string>
 
     <!-- TODO string name="setup_textsize_title">TopoDroid setup. Text size</string -->
@@ -164,7 +164,7 @@
     <string name="import_calib_no_data">Калибр. файл: няма данни</string>
     <string name="import_calib_io_error">Калибр. файл: грешка при четене</string>
     <string name="import_zip_ok">Успешно импортиране на zip файл</string>
-    <string name="import_zip_wait">Импортирането може да отнеме време. Моля изчакайте …</string>
+    <!-- UNUSED string name="import_zip_wait">Импортирането може да отнеме време. Моля изчакайте …</string -->
     <!-- UNUSED string name="sketch_saving">Записване на скица… Моля изчакайте…</string -->
     <string name="MT_points_none">Няма точки на MobileTopographer</string>
 
@@ -244,7 +244,7 @@
     <!-- UNUSED string name="hidden_add">Скриване на предишни репери</string -->
     <!-- UNUSED string name="hidden_del">Показване на предишни репери</string -->
     <string name="hidden_show">Показване на измервания след репер</string>
-    <string name="splays_toggle">Показване/скриване на странични изм.</string>
+    <!-- UNUSED string name="splays_toggle">Показване/скриване на странични изм.</string -->
     <!-- TODO string name="splays_on_off">Splays</string -->
     <string name="splays">Странични изм.</string>
     <!-- TODO string name="splays_show">Show splays</string -->
@@ -290,7 +290,7 @@
     <string name="no_survey">Не е избрана картировка</string>
     <string name="no_to_station">Няма репер ДО</string>
     <string name="no_thmanager">ThManager не е инсталирана</string>
-    <string name="no_db_viewer">Програмата SQliteViewer не е инсталирана</string>
+    <!-- UNUSED string name="no_db_viewer">Програмата SQliteViewer не е инсталирана</string -->
     <string name="no_undelete">Няма елементи за възстановяване</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Азимут %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Наклон %5$.1f"</string>
@@ -405,7 +405,7 @@
     <!-- UNUSED string name="scrap_name">Име на скица</string -->
     <string name="splay">странично измервание</string>
     <string name="too_many_leg_intersection">Линията на сечението пресича повече от една отсечка</string>
-    <string name="too_many_legs_xsection">Твърде много отсечки за сечение</string>
+    <!-- UNUSED string name="too_many_legs_xsection">Твърде много отсечки за сечение</string -->
     <!-- UNUSED string name="converted_tdr2th2">Конвертиране на файлове със скици от двоични в th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Презаписване на съшествуващи th2 файлове?</string -->
     <string name="section_area">Площ на сечение: %1$.1f</string>
@@ -679,7 +679,7 @@
 
     <!-- UNUSED string name="station_next">Следваща</string -->
     <string name="no_shot_between_stations">Няма отсечка м/у реперите</string>
-    <string name="few_line_points">Линията има твърде малко точки</string>
+    <!-- UNUSED string name="few_line_points">Линията има твърде малко точки</string -->
     <string name="line_delete">Изтр. на линия</string>
     <string name="flip_shots">Обръщане на отсечките</string>
     <string name="split_nothing">Няма какво да се раздели</string>
@@ -748,7 +748,7 @@
     <string name="help_photo">Снимки</string>
     <string name="help_sensor">Сензорни измервания</string>
     <string name="help_3d">3D програма (Cave3D)</string>
-    <string name="help_move">Режим на преместване/приближаване</string>
+    <!-- UNUSED string name="help_move">Режим на преместване/приближаване</string -->
     <string name="help_draw">Режим на скициране</string>
     <string name="help_edit">Режим на редактиране</string>
     <string name="help_refs">Избор на данни, които да се показват</string>
@@ -926,8 +926,8 @@
   <string name="pref_station_prefix_summary">Експортиране в cSurvey на префикс в името на реперите</string>
   <string name="pref_compass_splays_title">Странични изм. в Compass</string>
   <string name="pref_compass_splays_summary">Експортиране на стр. изм в Compass</string>
-  <string name="pref_trobot_names_title">TopoRobot имена на репери</string>
-  <string name="pref_trobot_names_summary">Имената на реперите са в стил TopoRobot</string>
+  <!-- UNUSED string name="pref_trobot_names_title">TopoRobot имена на репери</string -->
+  <!-- UNUSED string name="pref_trobot_names_summary">Имената на реперите са в стил TopoRobot</string -->
   <string name="pref_ortho_lrud_title">ЛДГД ъгъл на странично изм.</string>
   <string name="pref_ortho_lrud_summary">Минимален ъгъл м/у отсечка и странично за ГДЛД</string>
   <string name="pref_ortho_lrud_message">Минимален ъгъл м/у отсечка и странично за ГДЛД</string>
@@ -939,8 +939,8 @@
   <string name="pref_survex_lrud_summary">Добавяне на Л/Д/Г/Д в Survex експорт</string>
   <string name="pref_svg_grid_title">SVG мрежа</string>
   <string name="pref_svg_grid_summary">Добавяне на мрежа в SVG експорт</string>
-  <string name="pref_svg_in_html_title">SVG в HTML</string>
-  <string name="pref_svg_in_html_summary">Вмъкване на SVG експорт в HTML</string>
+  <!-- UNUSED string name="pref_svg_in_html_title">SVG в HTML</string -->
+  <!-- UNUSED string name="pref_svg_in_html_summary">Вмъкване на SVG експорт в HTML</string -->
   <string name="pref_svg_pointstroke_title">SVG широчина точки</string>
   <string name="pref_svg_pointstroke_summary">Широчина на символ точка в SVG</string>
   <string name="pref_svg_labelstroke_title">SVG широчина надпис</string>
@@ -1199,8 +1199,8 @@
 
   <string name="pref_picker_type_title">Избор на инструмент за рисуване</string>
   <string name="pref_picker_type_summary">Избор на инструмент за рисуване</string>
-  <string name="pref_section_stations_title">Измервания/репери в сечение</string>
-  <string name="pref_section_stations_summary">Показване на измервания в репер на сечение</string>
+  <!-- UNUSED string name="pref_section_stations_title">Измервания/репери в сечение</string -->
+  <!-- UNUSED string name="pref_section_stations_summary">Показване на измервания в репер на сечение</string -->
   <string name="pref_station_size_title">Размер на име на репер</string>
   <string name="pref_station_size_summary">Размер на име на репер</string>
   <string name="pref_station_size_message">Размер на име на репер в скицата</string>
@@ -1217,17 +1217,17 @@
   <string name="pref_auto_section_pt_title">Точки "сечение"</string>
   <string name="pref_auto_section_pt_summary">Добавяне на точки "сечение" към линиите</string>
 
-  <string name="pref_sketchUsesSplays_title">Изобразяване на страничните отсечки</string>
-  <string name="pref_sketchUsesSplays_summary">Повърхността използва страничните измервания</string>
+  <!-- UNUSED string name="pref_sketchUsesSplays_title">Изобразяване на страничните отсечки</string -->
+  <!-- UNUSED string name="pref_sketchUsesSplays_summary">Повърхността използва страничните измервания</string -->
   <string name="pref_sketchLineStep_title">Максимална страна</string>
   <string name="pref_sketchLineStep_summary">Максимален размер на страна на триъгълник (метри)</string>
   <string name="pref_sketchLineStep_message">Максимален размер на страна на триъгълник (метри)</string>
-  <string name="pref_sketchBorderStep_title">Стъпка</string>
-  <string name="pref_sketchBorderStep_summary">Разстояние между точки в линията</string>
-  <string name="pref_sketchBorderStep_message">Разстояние между точки в линията</string>
-  <string name="pref_sketchSectionStep_title">Стъпка в секцията</string>
-  <string name="pref_sketchSectionStep_summary">Разстояние между секциите</string>
-  <string name="pref_sketchSectionStep_message">Разстояние между междинните секции</string>
+  <!-- UNUSED string name="pref_sketchBorderStep_title">Стъпка</string -->
+  <!-- UNUSED string name="pref_sketchBorderStep_summary">Разстояние между точки в линията</string -->
+  <!-- UNUSED string name="pref_sketchBorderStep_message">Разстояние между точки в линията</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_title">Стъпка в секцията</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_summary">Разстояние между секциите</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_message">Разстояние между междинните секции</string -->
   <string name="pref_sketchDeltaExtrude_title">Екструд. мащаб</string>
   <string name="pref_sketchDeltaExtrude_summary">Мащабиращ фактор за екструдиране</string>
   <string name="pref_sketchDeltaExtrude_message">Мащабиращ фактор за екструдиране</string>

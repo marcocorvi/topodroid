@@ -8,7 +8,7 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Нажмите "НАЗАД" еще раз для выхода</string>
 
-    <string name="version_ask">Обновление до новой версии TopoDroid.\nВы хотите переустановить инструменты рисования?</string>
+    <!-- UNUSED string name="version_ask">Обновление до новой версии TopoDroid.\nВы хотите переустановить инструменты рисования?</string -->
     <!-- REPLACED string name="symbols_ask">Вы хотите переустановить инструменты рисования?</string -->
 
     <string name="setup_textsize_title">Настройка TopoDroid. Размер текста</string>
@@ -114,7 +114,7 @@
     <string name="device_code">DistoX код %1$4d</string>
     <string name="device_firmware">Прошивка  %1$d.%2$d</string>
     <string name="device_hardware">Чип  %1$d.%2$d</string>
-    <string name="device_memory">Память  %1$02x.%2$02x</string>
+    <!-- UNUSED string name="device_memory">Память  %1$02x.%2$02x</string -->
     <string name="device_status_angle_grad">Ед измерения угла: град.</string>
     <string name="device_status_angle_degree">Ед измерения угла: градусы</string>
     <string name="device_status_compass_on">Азимут/угол: вкл</string>
@@ -149,7 +149,7 @@
     <string name="found_groups">Найдено %1$d групп</string>
     <!-- UNUSED string name="few_plots">Недостаточно абрисов</string -->
     <string name="few_calibs">Недостаточно калиб. замеров</string>
-    <string name="getting_info">Получение информации о DistoX...</string>
+    <string name="getting_info">Получение информации о DistoX&#8230;</string>
 
     <string name="calib_import_title">Импорт калибровки</string>
     <string name="import_title">Импорт файла</string>
@@ -165,7 +165,7 @@
     <string name="import_calib_io_error">Файл калиб.: ошибка чтения</string>
     <string name="import_calib_ok">Калибровка успешно импортирована</string>
     <string name="import_zip_ok">Успешно импортирован zip файл</string>
-    <string name="import_zip_wait">Импорт zip файла может занять много времени. Обождите &#8230;</string>
+    <!-- UNUSED string name="import_zip_wait">Импорт zip файла может занять много времени. Обождите &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Сохранение абриса &#8230; обождите&#8230;</string -->
     <string name="MT_points_none">Нет точки MobileTopographer</string>
  
@@ -246,7 +246,7 @@
     <!-- UNUSED string name="hidden_add">Скрыть нитку хода до этого пикета</string -->
     <!-- UNUSED string name="hidden_del">Показать нитку хода до этого пикета</string -->
     <string name="hidden_show">Показать нитку хода после этого пикета</string>
-    <string name="splays_toggle">Показать/скрыть бок. замеры</string>
+    <!-- UNUSED string name="splays_toggle">Показать/скрыть бок. замеры</string -->
     <string name="splays_on_off">Вкл/Выкл бок. замер</string>
     <string name="splays">бок. замеры</string>
     <string name="splays_show">Показать бок. замеры</string>
@@ -292,7 +292,7 @@
     <string name="no_survey">Съёмка не выбрана.</string>
     <string name="no_to_station">Отсутсвует пикет ДО.</string>
     <string name="no_thmanager">ThManager не установлен</string>
-    <string name="no_db_viewer">Приложение просмотра баз данных не найдено</string>
+    <!-- UNUSED string name="no_db_viewer">Приложение просмотра баз данных не найдено</string -->
     <string name="no_undelete">Нечего восстанавливать</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Азимут %5$.1f"</string>
     <string name="format_measure_profile">>D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Уклон %5$.1f"</string>
@@ -408,7 +408,7 @@
     <!-- UNUSED string name="scrap_name">название абриса</string -->
     <string name="splay">боковой замер</string>
     <string name="too_many_leg_intersection">Линия разреза пересекает много отрезков</string>
-    <string name="too_many_legs_xsection">Слишком много лучей для разреза</string>
+    <!-- UNUSED string name="too_many_legs_xsection">Слишком много лучей для разреза</string -->
     <!-- UNUSED string name="converted_tdr2th2">Конвертировать бинарные файлы абрисов в формат th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Перезаписать абрисы в формате th2 ?</string -->
     <string name="section_area">Площадь сечения: %1$.1f</string>
@@ -447,7 +447,7 @@
     <string name="sketch3d_name">Название</string>
     <string name="sketch3d_new">Новая 3D модель</string>
     <string name="sketch3d_next">следующий пикет</string>
-	<string name="sketch3d_loading">загрузка модели ...</string>
+	<string name="sketch3d_loading">загрузка модели &#8230;</string>
     <!-- UNUSED string name="sketch3d_null_name">Отсутствует название 3D абриса</string -->
     <!-- UNUSED string name="sketch3d_null_next">Отсутствует следующий пикет 3D абриса</string -->
     <!-- UNUSED string name="sketch3d_null_start">Отсутствует начальный пикет 3D абриса</string -->
@@ -683,7 +683,7 @@
 
     <!-- UNUSED string name="station_next">СЛЕД.</string -->
     <string name="no_shot_between_stations">нет замера между пикетами</string>
-    <string name="few_line_points">Слишком мало точек в линии</string>
+    <!-- UNUSED string name="few_line_points">Слишком мало точек в линии</string -->
     <string name="line_delete">удалить_линию</string>
     <string name="flip_shots">Развернуть пикеты</string>
     <string name="split_nothing">Нечего разделять</string>
@@ -752,7 +752,7 @@
     <string name="help_photo">Фотографии в съёмке</string>
     <string name="help_sensor">Показания датчиков</string>
     <string name="help_3d">3D просмотр (Cave3D)</string>
-    <string name="help_move">Включть режим перемещения/зума</string>
+    <!-- UNUSED string name="help_move">Включть режим перемещения/зума</string -->
     <string name="help_draw">Перейти в режим рисования</string>
     <string name="help_edit">Перейти в режим редактирования</string>
     <string name="help_refs">Вид окна абриса</string>
@@ -840,7 +840,7 @@
     <string name="title_coverage">Калибровка и распределение данных</string>
     <string name="title_coeff">Калибровочные коэффициенты</string>
     <string name="title_color_picker">Выбрать цвет</string>
-    <string name="title_contour">Контур</string>
+    <!-- UNUSED string name="title_contour">Контур</string -->
     <!-- UNUSED string name="title_coord">Введите координаты точки:</string -->
     <string name="title_current_station">Сохраненные пикеты</string>
     <string name="title_station_search">Введите номер пикета</string>
@@ -881,7 +881,7 @@
     <string name="title_split">Разделить абрис</string>
 
     <string name="title_stats">Статистика</string>
-    <string name="title_step">Шаг</string>
+    <!-- UNUSED string name="title_step">Шаг</string -->
     <string name="title_survey">Свойства съёмки</string>
     <string name="title_survey_new">Новая съёмка</string>
     <string name="title_survey_export">Экспорт съёмки как</string>
@@ -895,7 +895,7 @@
   <string name="pref_cat_drawing">НАСТРОЙКИ РИСОВАНИЯ </string>
   <string name="pref_cat_import_export">НАСТРОЙКИ ИМПОРТА-ЭКСПОРТА</string>
   <string name="pref_cat_calib">НАСТРОЙКИ КАЛИБРОВКИ</string>
-  <string name="pref_cat_min_algo">АЛГОРИТМ МИНИМИЗАЦИИ</string>
+  <!-- UNUSED string name="pref_cat_min_algo">АЛГОРИТМ МИНИМИЗАЦИИ</string -->
   <string name="pref_cat_device">НАСТРОЙКИ УСТРОЙСТВА DistoX</string>
   <string name="pref_cat_sketch">НАСТРОЙКИ АБРИСА</string>
   <string name="pref_cat_log">НАСТРОЙКИ ЖУРНАЛА</string>
@@ -938,8 +938,8 @@
   <string name="pref_station_prefix_summary">Экспортировать префиксы пикетов для cSurvey</string>
   <string name="pref_compass_splays_title">Боковые замеры в Compass</string>
   <string name="pref_compass_splays_summary">Экспортировать боковые замеры в формат Compass</string>
-  <string name="pref_trobot_names_title">Номера пикетов TopoRobot</string>
-  <string name="pref_trobot_names_summary">Номера пикетов в стиле TopoRobot</string>
+  <!-- UNUSED string name="pref_trobot_names_title">Номера пикетов TopoRobot</string -->
+  <!-- UNUSED string name="pref_trobot_names_summary">Номера пикетов в стиле TopoRobot</string -->
   <string name="pref_ortho_lrud_title">Мин. угол бок. замера для ЛПВН</string>
   <string name="pref_ortho_lrud_summary">Минимальный угол между бок. замером и вектором для расчета ЛПВН при экспорте</string>
   <string name="pref_ortho_lrud_message">Мин. угол между бок. замером и вектором для расчета ЛПВН </string>
@@ -957,8 +957,8 @@
   <string name="pref_survex_lrud_summary">Добавить ЛПВН в при экспорте в формат Survex</string>
   <string name="pref_svg_grid_title">Сетка в SVG</string>
   <string name="pref_svg_grid_summary">Добавить сетку в SVG экспорт</string>
-  <string name="pref_svg_in_html_title">SVG в HTML</string>
-  <string name="pref_svg_in_html_summary">Встроить экспорт SVG в HTML страницу</string>
+  <!-- UNUSED string name="pref_svg_in_html_title">SVG в HTML</string -->
+  <!-- UNUSED string name="pref_svg_in_html_summary">Встроить экспорт SVG в HTML страницу</string -->
   <string name="pref_svg_pointstroke_title">Точки пикетов в SVG</string>
   <string name="pref_svg_pointstroke_summary">Размер символов пикетов SVG</string>
   <string name="pref_svg_labelstroke_title">Номера пикетов в SVG</string>
@@ -1212,8 +1212,8 @@
 
   <string name="pref_picker_type_title">Вид меню инструментов рисования</string>
   <string name="pref_picker_type_summary">Тип меню инструментов рисования</string>
-  <string name="pref_section_stations_title">Пикеты на поперечных сечениях</string>
-  <string name="pref_section_stations_summary">Пикеты привязки поперечных сечений</string>
+  <!-- UNUSED string name="pref_section_stations_title">Пикеты на поперечных сечениях</string -->
+  <!-- UNUSED string name="pref_section_stations_summary">Пикеты привязки поперечных сечений</string -->
   <string name="pref_station_size_title">Размер номеров пикетов</string>
   <string name="pref_station_size_summary">Размер номеров пикетов</string>
   <string name="pref_station_size_message">Размер подписи пикетов</string>
@@ -1230,17 +1230,17 @@
   <string name="pref_auto_section_pt_title">Точки сечений</string>
   <string name="pref_auto_section_pt_summary">Добавить точки сечений к линиям сечений</string>
 
-  <string name="pref_sketchUsesSplays_title">Абрис боковых замеров</string>
-  <string name="pref_sketchUsesSplays_summary">Поверхность абриса использует боковые замеры</string>
+  <!-- UNUSED string name="pref_sketchUsesSplays_title">Абрис боковых замеров</string -->
+  <!-- UNUSED string name="pref_sketchUsesSplays_summary">Поверхность абриса использует боковые замеры</string -->
   <string name="pref_sketchLineStep_title">Макс размер стороны</string>
   <string name="pref_sketchLineStep_summary">Макс размер стороны треугольников</string>
   <string name="pref_sketchLineStep_message">Макс размер стороны треугольников [м]</string>
-  <string name="pref_sketchBorderStep_title">Шаг границы</string>
-  <string name="pref_sketchBorderStep_summary">Расстоние между точками редактирования линии</string>
-  <string name="pref_sketchBorderStep_message">Расстоние между точками редактирования линии</string>
-  <string name="pref_sketchSectionStep_title">Шаг сечений</string>
-  <string name="pref_sketchSectionStep_summary">Расстоние между сечениями</string>
-  <string name="pref_sketchSectionStep_message">Расстоние между промежуточными сечениями</string>
+  <!-- UNUSED string name="pref_sketchBorderStep_title">Шаг границы</string -->
+  <!-- UNUSED string name="pref_sketchBorderStep_summary">Расстоние между точками редактирования линии</string -->
+  <!-- UNUSED string name="pref_sketchBorderStep_message">Расстоние между точками редактирования линии</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_title">Шаг сечений</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_summary">Расстоние между сечениями</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_message">Расстоние между промежуточными сечениями</string -->
   <string name="pref_sketchDeltaExtrude_title">Масштаб вырезки</string>
   <string name="pref_sketchDeltaExtrude_summary">Масштаб вырезок</string>
   <string name="pref_sketchDeltaExtrude_message">Масштаб вырезок</string>
@@ -1334,8 +1334,8 @@
 
     <string name="perms_mandatory">TopoDroid не может работать без следующих разрешений:</string>
     <string name="perms_optional">TopoDroid может работать нестабильно без следующих разрешений:</string>
-    <string name="perm_required">Необходимые разрешения были предоставлены. Перезапустить TopoDroid</string>
-    <string name="perm_consider">Предоставьте программе разрешения: </string>
+    <!-- UNUSED string name="perm_required">Необходимые разрешения были предоставлены. Перезапустить TopoDroid</string -->
+    <!-- UNUSED string name="perm_consider">Предоставьте программе разрешения: </string -->
     <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">
 \nTopoDroid это ПО с открытым исходным кодом для топосъёмки пещер с использованием прибора DistoX.

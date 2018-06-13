@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="default_textsize">20</string>
-  <string name="default_buttonsize">3</string>
+  <string name="default_textsize" >20</string>
+  <string name="default_buttonsize" >3</string>
 
 <!-- MATERIAL
   <dimen name="activity_horizontal_margin">16dp</dimen>
@@ -36,10 +36,10 @@
   <dimen name="divider">5dp</dimen>
   <dimen name="dividerbig">10dp</dimen>
 
-  <string name="dimxp">1.6f</string>
-  <string name="dimxl">2.2f</string>
-  <string name="dimyl">1.9f</string>
-  <!-- string name="dimpd">2</string -->
-  <string name="dimmx">5</string>
-  <string name="dimmy">2</string>
+  <string name="dimxp" >1.6f</string>
+  <string name="dimxl" >2.2f</string>
+  <string name="dimyl" >1.9f</string>
+  <!-- string name="dimpd" >2</string -->
+  <string name="dimmx" >5</string>
+  <string name="dimmy" >2</string>
 </resources>

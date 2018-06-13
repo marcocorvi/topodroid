@@ -8,7 +8,7 @@
      <item name="two_tf">2 feet</item>
      <item name="ten_cm">10 cm</item>
   </string-array>
-  <string-array name="unitGridValue">
+  <string-array name="unitGridValue" translatable="false">
      <item name="meter">1.0</item>
      <item name="yard">0.914</item>
      <item name="two_tf">0.6096</item>
@@ -20,7 +20,7 @@
      <item name="normal">Normal</item>
      <item name="triangles">Triangles</item>
   </string-array>
-  <string-array name="loopClosureValue">
+  <string-array name="loopClosureValue" translatable="false">
      <item name="none">0</item>
      <item name="normal">1</item>
      <item name="triangles">3</item>
@@ -30,7 +30,7 @@
      <item name="lf">Linux</item>
      <item name="lfcr">Windows</item>
   </string-array>
-  <string-array name="survexEolValue">
+  <string-array name="survexEolValue" translatable="false">
      <item name="lf">LF</item>
      <item name="lfcr">LFCR</item>
   </string-array>
@@ -40,17 +40,17 @@
      <item name="convex">Convex</item>
      <item name="delaunay">Delaunay</item>
   </string-array>
-  <string-array name="wallsTypeValue">
+  <string-array name="wallsTypeValue" translatable="false">
      <item name="none">0</item>
      <item name="convex">1</item>
      <item name="delaunay">2</item>
   </string-array>
 
-  <string-array name="acadVersion">
+  <string-array name="acadVersion" translatable="false">
      <item name="9">AutoCAD 6</item>
      <item name="13">AutoCAD 12</item>
   </string-array>
-  <string-array name="acadVersionValue">
+  <string-array name="acadVersionValue" translatable="false">
      <item name="9">9</item>
      <item name="13">13</item>
   </string-array>
@@ -60,7 +60,7 @@
      <item name="1">Temporary</item>
      <item name="2">Permanent</item>
   </string-array>
-  <string-array name="zoomCtrlValue">
+  <string-array name="zoomCtrlValue" translatable="false">
      <item name="0">0</item>
      <item name="1">1</item>
      <item name="2">2</item>
@@ -70,7 +70,7 @@
      <item name="alpha">Alphanumeric</item>
      <item name="number">Numeric</item>
   </string-array>
-  <string-array name="stationNamesValue">
+  <string-array name="stationNamesValue" translatable="false">
      <item name="alpha">alpha</item>
      <item name="number">number</item>
   </string-array>
@@ -83,7 +83,7 @@
   </string-array -->
 
   <!-- DISTOX_LOCALE -->
-  <string-array name="locale">
+  <string-array name="locale" translatable="false">
      <item name="default">default</item>
      <item name="english">English</item>
      <item name="french">Français</item>
@@ -99,7 +99,7 @@
      <item name="ukrainian">Українська</item>
      <item name="hungarian">Hungarian</item>
   </string-array>
-  <string-array name="localeValue">
+  <string-array name="localeValue" translatable="false">
      <item name="default"></item>
      <item name="english">en</item>
      <item name="french">fr</item>
@@ -117,7 +117,7 @@
   </string-array>
 
   <!-- DISTOX_LOCAL_HELP -->
-  <string-array name="localUserMan">
+  <string-array name="localUserMan" translatable="false">
      <item name="english">English</item>
      <item name="french">Français</item>
      <item name="spanish">Español</item>
@@ -125,7 +125,7 @@
      <item name="russian">Русский</item>
       <!-- item name="slovak">Slovenčina</item -->
   </string-array>
-  <string-array name="localUserManValue">
+  <string-array name="localUserManValue" translatable="false">
      <item name="english">0</item>
      <item name="french">1</item>
      <item name="spanish">2</item>
@@ -153,7 +153,7 @@
      <item name="csv">CSV</item>
      <item name="dxf">DXF</item>
   </string-array>
-  <string-array name="exportShotsValue">
+  <string-array name="exportShotsValue" translatable="false">
      <item name="none">-1</item>
      <item name="therion">0</item>
      <item name="compass">2</item>
@@ -180,7 +180,7 @@
      <item name="svg">SVG</item>
      <item name="png">PNG</item>
   </string-array>
-  <string-array name="exportPlotValue">
+  <string-array name="exportPlotValue" translatable="false">
      <item name="none">-1</item>
      <item name="therion">14</item>
      <item name="csurvey">7</item>
@@ -207,25 +207,25 @@
      <item name="svg">12</item>
   </string-array -->
 
-  <string-array name="legShots">
+  <string-array name="legShots" translatable="false">
      <item name="two">2</item>
      <item name="three">3</item>
      <item name="four">4</item>
   </string-array>
-  <string-array name="legShotsValue">
+  <string-array name="legShotsValue" translatable="false">
      <item name="two">2</item>
      <item name="three">3</item>
      <item name="four">4</item>
   </string-array>
 
-  <string-array name="backupNumber">
+  <string-array name="backupNumber" translatable="false">
      <item name="four">4</item>
      <item name="five">5</item>
      <item name="six">6</item>
      <item name="seven">7</item>
      <item name="eight">8</item>
   </string-array>
-  <string-array name="backupNumberValue">
+  <string-array name="backupNumberValue" translatable="false">
      <item name="four">4</item>
      <item name="five">5</item>
      <item name="six">6</item>
@@ -241,7 +241,7 @@
      <item name="tester">Tester</item>
      <!-- item name="complete">Complete</item -->
   </string-array>
-  <string-array name="extraButtonsValue">
+  <string-array name="extraButtonsValue" translatable="false">
      <item name="basic">0</item>
      <item name="normal">1</item>
      <item name="advanced">2</item>
@@ -257,7 +257,7 @@
      <item name="large">Large</item>
      <item name="huge">Huge</item>
   </string-array>
-  <string-array name="sizeButtonsValue">
+  <string-array name="sizeButtonsValue" translatable="false">
      <item name="small">0</item>
      <item name="normal">1</item>
      <item name="medium">3</item>
@@ -269,7 +269,7 @@
      <item name="android">System log</item>
      <item name="file">File log</item>
   </string-array>
-  <string-array name="logStreamValue">
+  <string-array name="logStreamValue" translatable="false">
      <item name="android">0</item>
      <item name="file">1</item>
   </string-array>
@@ -279,7 +279,7 @@
      <item name="continuous">Continuous</item>
      <item name="multi">Multi</item>
   </string-array>
-  <string-array name="connModeValue">
+  <string-array name="connModeValue" translatable="false">
      <item name="batch">0</item>
      <item name="continuous">1</item>
      <item name="multi">2</item>
@@ -291,7 +291,7 @@
      <!-- item name="Port">Port</item -->
      <!-- item name="InsecurePort">Insecure/Port</item -->
   </string-array>
-  <string-array name="sockTypeValue">
+  <string-array name="sockTypeValue" translatable="false">
      <item name="default">0</item>
      <item name="Insecure">1</item>
      <!-- item name="Port">2</item -->
@@ -308,7 +308,7 @@
      <item name="tripod">Tripod</item>
      <item name="toporobot">TopoRobot</item>
   </string-array>
-  <string-array name="surveyStationsValue">
+  <string-array name="surveyStationsValue" translatable="false">
      <item name="no">0</item>
      <item name="for">1</item>
      <item name="back">2</item>
@@ -325,7 +325,7 @@
      <item name="grid">Grid</item>
      <item name="grid3">Triple grid</item>
   </string-array>
-  <string-array name="pickerTypeValue">
+  <string-array name="pickerTypeValue" translatable="false">
      <item name="recent">0</item>
      <item name="list">1</item>
      <item name="grid">2</item>
@@ -343,7 +343,7 @@
      <item name="to">2</item>
   </string-array -->
 
-  <string-array name="recentNr">
+  <string-array name="recentNr" translatable="false">
      <item name="3">3</item>
      <item name="4">4</item>
      <item name="5">5</item>
@@ -366,7 +366,7 @@
      <item name="1">Check on start</item>
      <item name="2">Enabled</item>
   </string-array>
-  <string-array name="deviceBTValue">
+  <string-array name="deviceBTValue" translatable="false">
      <item name="0">0</item>
      <item name="1">1</item>
      <item name="2">2</item>
@@ -391,7 +391,7 @@
      <item name="three">Coarse</item>
      <item name="bezier">Bezier</item>
   </string-array>
-  <string-array name="lineStyleValue">
+  <string-array name="lineStyleValue" translatable="false">
      <item name="none">1</item>
      <item name="two">2</item>
      <item name="three">3</item>
@@ -403,7 +403,7 @@
      <item name="four">Four at a time</item>
      <item name="only16">Only first 16</item>
   </string-array>
-  <string-array name="groupByValue">
+  <string-array name="groupByValue" translatable="false">
      <item name="distance">0</item>
      <item name="four">1</item>
      <item name="only16">2</item>
@@ -413,7 +413,7 @@
      <item name="meters">meters</item>
      <item name="feet">feet</item>
   </string-array>
-  <string-array name="unitLengthValue">
+  <string-array name="unitLengthValue" translatable="false">
      <item name="meters">meters</item>
      <item name="feet">feet</item>
   </string-array>
@@ -426,7 +426,7 @@
      <item name="degrees">decimal degrees</item>
      <item name="grads">decimal grads</item>
   </string-array>
-  <string-array name="unitAngleValue">
+  <string-array name="unitAngleValue" translatable="false">
      <item name="degrees">degrees</item>
      <item name="grads">grads</item>
   </string-array>
@@ -435,7 +435,7 @@
      <item name="degrees">decimal degrees</item>
      <item name="ddmmss">degree, minute, seconds</item>
   </string-array>
-  <string-array name="unitLocationValue">
+  <string-array name="unitLocationValue" translatable="false">
      <item name="degrees">degrees</item>
      <item name="ddmmss">ddmmss</item>
   </string-array>
@@ -446,7 +446,7 @@
      <item name="nonlinear">Non-linear</item>
      <!-- item name="minimum">Minimum</item -->
   </string-array>
-  <string-array name="calibAlgoValue">
+  <string-array name="calibAlgoValue" translatable="false">
      <item name="auto">0</item>
      <item name="linear">1</item>
      <item name="nonlinear">2</item>
@@ -458,7 +458,7 @@
      <item name="dec">Decimal</item>
      <item name="hex">Hex</item>
   </string-array>
-  <string-array name="rawCDataValue">
+  <string-array name="rawCDataValue" translatable="false">
      <item name="none">0</item>
      <item name="dec">1</item>
      <item name="hex">2</item>
@@ -469,7 +469,7 @@
      <item name="convexhull">Convex Hull</item>
      <item name="powercrust">Powercrust</item>
   </string-array>
-  <string-array name="modelTypeValue">
+  <string-array name="modelTypeValue" translatable="false">
      <item name="none">0</item>
      <item name="convexhull">1</item>
      <item name="powercrust">2</item>

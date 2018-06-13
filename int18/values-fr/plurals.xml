@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <plurals name="calib_saturated_values">
-    <item quantity="zero">Aucune donnée saturée</item>
+    <!-- UNUSED item quantity="zero">Aucune donnée saturée</item -->
     <item quantity="one">ATTENTION. Une donnée saturée</item>
     <item quantity="other">ATTENTION. %1$d données saturées</item>
   </plurals>

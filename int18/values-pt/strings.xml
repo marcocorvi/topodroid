@@ -8,7 +8,7 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Clicar novamente em VOLTAR para sair</string>
 
-    <string name="version_ask">Atualizando para uma nova versão do TopoDroid.\nQuer re-instalar os símbolos?</string>
+    <!-- UNUSED string name="version_ask">Atualizando para uma nova versão do TopoDroid.\nQuer re-instalar os símbolos?</string -->
     <string name="symbols_ask">Instalar símbolos. v.%1$s?\n(Current v.%2$s)</string>
 
     <!-- TODO string name="setup_textsize_title">TopoDroid setup. Text size</string -->
@@ -148,7 +148,7 @@
     <string name="found_groups">Encontrados %1$d grupos</string>
     <!-- UNUSED string name="few_plots">Esboços não suficientes</string -->
     <string name="few_calibs">Calibrações insuficientes</string>
-    <string name="getting_info">Obtendo informações da DistoX ...</string>
+    <string name="getting_info">Obtendo informações da DistoX &#8230;</string>
 
     <string name="calib_import_title">Importar calibração</string>
     <string name="import_title">Importar topo</string>
@@ -164,7 +164,7 @@
     <string name="import_calib_no_data">Arquivo de calibração: nenhuma informação</string>
     <string name="import_calib_io_error">Arquivo de calibração: erro na leitura</string>
     <string name="import_zip_ok">Arquivo zip importado com sucesso</string>
-    <string name="import_zip_wait">A importação do arquivo zip pode demorar. Aguarde &#8230;</string>
+    <!-- UNUSED string name="import_zip_wait">A importação do arquivo zip pode demorar. Aguarde &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Salvando croqui &#8230; por favor espere &#8230;</string -->
     <string name="MT_points_none">Nenhum ponto MobileTopographer</string>
  
@@ -244,7 +244,7 @@
     <!-- UNUSED string name="hidden_add">Ocultar visadas até base referência</string -->
     <!-- UNUSED string name="hidden_del">Mostrar visadas até base referência</string -->
     <string name="hidden_show">Mostrar visadas após base</string>
-    <string name="splays_toggle">Alternar exibição das medidas auxiliares</string>
+    <!-- UNUSED string name="splays_toggle">Alternar exibição das medidas auxiliares</string -->
     <!-- TODO string name="splays_on_off">Splays</string -->
     <string name="splays">medidas auxiliares</string>
     <!-- TODO string name="splays_show">Show splays</string -->
@@ -290,7 +290,7 @@
     <string name="no_survey">Nenhuma topo selecionada</string>
     <string name="no_to_station">Sem base PARA.</string>
     <string name="no_thmanager">O aplicativo ThManager não está instalado</string>
-    <string name="no_db_viewer">DB_viewer não encontrado</string>
+    <!-- UNUSED string name="no_db_viewer">DB_viewer não encontrado</string -->
     <string name="no_undelete">Nenhum item a ser restaurado</string>
     <string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Azimute %4$.1f"</string>
     <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Inclinação %4$.1f"</string>
@@ -404,7 +404,7 @@
     <!-- UNUSED string name="scrap_name">nome do croqui</string -->
     <string name="splay">visada auxiliar</string>
     <string name="too_many_leg_intersection">A linha de corte cruza mais de uma linha de visada.</string>
-    <string name="too_many_legs_xsection">Corte X em bases com visadas para mais de 2 outras bases não é suportado.</string>
+    <!-- UNUSED string name="too_many_legs_xsection">Corte X em bases com visadas para mais de 2 outras bases não é suportado.</string -->
     <!-- UNUSED string name="converted_tdr2th2">Arquivos binários dos croquis convertidos para th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Sobrescrever arquivos de croqui th2?</string -->
     <string name="section_area">Área do corte: %1$.1f</string>
@@ -678,7 +678,7 @@
 
     <!-- UNUSED string name="station_next">PRÓXIMO</string -->
     <string name="no_shot_between_stations">nenhuma_visada_entre_as_bases</string>
-    <string name="few_line_points">A linha possui quantidade insuficiente de pontos</string>
+    <!-- UNUSED string name="few_line_points">A linha possui quantidade insuficiente de pontos</string -->
     <string name="line_delete">apagar_linha</string>
     <string name="flip_shots">Virar visadas</string>
     <string name="split_nothing">Nada a ser dividido</string>
@@ -747,7 +747,7 @@
     <string name="help_photo">Fotos</string>
     <string name="help_sensor">Sensores externos</string>
     <string name="help_3d">App de visualização 3D (Cave3D)</string>
-    <string name="help_move">Modo mover/zoom</string>
+    <!-- UNUSED string name="help_move">Modo mover/zoom</string -->
     <string name="help_draw">Modo DESENHAR</string>
     <string name="help_edit">Modo EDITAR</string>
     <string name="help_refs">Definir tipos de medidas apresentadas</string>
@@ -829,7 +829,7 @@
     <string name="title_coverage">Distribuição dos dados de calibração</string>
     <string name="title_coeff">Coeficientes de calibração</string>
     <string name="title_color_picker">Escolha uma cor</string>
-    <string name="title_contour">Contorno</string>
+    <!-- UNUSED string name="title_contour">Contorno</string -->
     <!-- UNUSED string name="title_coord">Inserir as coordenadas do ponto:</string -->
     <string name="title_current_station">Base gravadas</string>
     <string name="title_station_search">Entre base</string>
@@ -870,7 +870,7 @@
     <string name="title_split">Dividir croqui</string>
 
     <string name="title_stats">Estatísticas</string>
-    <string name="title_step">Passo</string>
+    <!-- UNUSED string name="title_step">Passo</string -->
     <string name="title_survey">Informações da topo</string>
     <string name="title_survey_new">Nova topo</string>
     <string name="title_survey_export">Exportar topo</string>
@@ -925,8 +925,8 @@
   <string name="pref_station_prefix_summary">Exportar prefixo de bases (Compass)</string>
   <string name="pref_compass_splays_title">Medidas auxiliares Compass</string>
   <string name="pref_compass_splays_summary">Exportar medidas auxiliares em arquivos Compass</string>
-  <string name="pref_trobot_names_title">Nomes bases TopoRobot</string>
-  <string name="pref_trobot_names_summary">Os nomes das bases usam o estilo do TopoRobot</string>
+  <!-- UNUSED string name="pref_trobot_names_title">Nomes bases TopoRobot</string -->
+  <!-- UNUSED string name="pref_trobot_names_summary">Os nomes das bases usam o estilo do TopoRobot</string -->
   <string name="pref_ortho_lrud_title">Ângulo med. aux. EDTC Compass</string>
   <string name="pref_ortho_lrud_summary">Ângulo mínimo entre uma medida auxiliar e uma visada para ser uma medida auxiliar EDTC</string>
   <string name="pref_ortho_lrud_message">Ângulo mínimo entre uma medida auxiliar e uma visada para ser EDTC</string>
@@ -944,8 +944,8 @@
   <string name="pref_survex_lrud_summary">Incluir EDTC à exportação do Survex</string>
   <string name="pref_svg_grid_title">Grade SVG</string>
   <string name="pref_svg_grid_summary">Incluir grade no arquivo SVG exportado</string>
-  <string name="pref_svg_in_html_title">SVG em HTML</string>
-  <string name="pref_svg_in_html_summary">Incorporar arquivo SVG exportado em HTML</string>
+  <!-- UNUSED string name="pref_svg_in_html_title">SVG em HTML</string -->
+  <!-- UNUSED string name="pref_svg_in_html_summary">Incorporar arquivo SVG exportado em HTML</string -->
   <string name="pref_svg_pointstroke_title">Espessura ponto SVG</string>
   <string name="pref_svg_pointstroke_summary">Espessura símbolos pontos em SVG</string>
   <string name="pref_svg_labelstroke_title">Espessura rótulo SVG</string>
@@ -1197,8 +1197,8 @@
 
   <string name="pref_picker_type_title">Janela símbolos</string>
   <string name="pref_picker_type_summary">Forma de apresentação da seleção de símbolos</string>
-  <string name="pref_section_stations_title">Bases corte X</string>
-  <string name="pref_section_stations_summary">Bases de referência cortes X</string>
+  <!-- UNUSED string name="pref_section_stations_title">Bases corte X</string -->
+  <!-- UNUSED string name="pref_section_stations_summary">Bases de referência cortes X</string -->
   <string name="pref_station_size_title">Tamanho nome bases</string>
   <string name="pref_station_size_summary">Tamanho do nome das bases</string>
   <string name="pref_station_size_message">Tamanho do nome das bases</string>
@@ -1215,17 +1215,17 @@
   <string name="pref_auto_section_pt_title">Pontos corte</string>
   <string name="pref_auto_section_pt_summary">Adicionar ponto de corte às linhas de corte</string>
 
-  <string name="pref_sketchUsesSplays_title">Medidas auxiliares croqui</string>
-  <string name="pref_sketchUsesSplays_summary">Superfícies no croqui usas medidas auxiliares</string>
+  <!-- UNUSED string name="pref_sketchUsesSplays_title">Medidas auxiliares croqui</string -->
+  <!-- UNUSED string name="pref_sketchUsesSplays_summary">Superfícies no croqui usas medidas auxiliares</string -->
   <string name="pref_sketchLineStep_title">Lado máximo</string>
   <string name="pref_sketchLineStep_summary">Tamanho máximo do lado do triângulo</string>
   <string name="pref_sketchLineStep_message">Tamanho máximo do lado do triângulo [m]</string>
-  <string name="pref_sketchBorderStep_title">Intervalo bordas</string>
-  <string name="pref_sketchBorderStep_summary">Distância entre pontos da linha editada</string>
-  <string name="pref_sketchBorderStep_message">Distância entre pontos da linha editada</string>
-  <string name="pref_sketchSectionStep_title">Intervalo cortes</string>
-  <string name="pref_sketchSectionStep_summary">Distância entre cortes</string>
-  <string name="pref_sketchSectionStep_message">Distância entre cortes consecutivos</string>
+  <!-- UNUSED string name="pref_sketchBorderStep_title">Intervalo bordas</string -->
+  <!-- UNUSED string name="pref_sketchBorderStep_summary">Distância entre pontos da linha editada</string -->
+  <!-- UNUSED string name="pref_sketchBorderStep_message">Distância entre pontos da linha editada</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_title">Intervalo cortes</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_summary">Distância entre cortes</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_message">Distância entre cortes consecutivos</string -->
   <string name="pref_sketchDeltaExtrude_title">Escala extrusão</string>
   <string name="pref_sketchDeltaExtrude_summary">Fator escala de extrusão</string>
   <string name="pref_sketchDeltaExtrude_message">Fator escala de extrusão</string>

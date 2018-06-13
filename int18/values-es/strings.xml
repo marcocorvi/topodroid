@@ -8,7 +8,7 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Haga doble click para salir</string>
 
-    <string name="version_ask">Usted va a actualizar a una nueva versión de topodroid.\n¿Quiere volver a instalar los elementos de dibujo?</string>
+    <!-- UNUSED string name="version_ask">Usted va a actualizar a una nueva versión de topodroid.\n¿Quiere volver a instalar los elementos de dibujo?</string -->
     <string name="symbols_ask">¿Quiere instalar simbologías para el croquis v.%1$s?\n(Actualiza v.%2$s)</string>
 
     <!-- TODO string name="setup_textsize_title">TopoDroid setup. Text size</string -->
@@ -164,7 +164,7 @@
     <string name="import_calib_no_data">Archivo de calib: sin datos</string>
     <string name="import_calib_io_error">Archivo de calib.: error lectura</string>
     <string name="import_zip_ok">Archivo zip importados con éxito</string>
-    <string name="import_zip_wait">El archivo zip importado puede tardar mucho tiempo. Por favor espere &#8230;</string>
+    <!-- UNUSED string name="import_zip_wait">El archivo zip importado puede tardar mucho tiempo. Por favor espere &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Exportando dibujo &#8230; espere &#8230;</string -->
     <string name="MT_points_none">No hay punto móvil Topográfico</string>
 
@@ -243,7 +243,7 @@
     <!-- UNUSED string name="hidden_add">Oculta dibujo de la poligonal principal</string -->
     <!-- UNUSED string name="hidden_del">Mostrar el croquis de la poligonal principal</string -->
     <!-- TODO string name="hidden_show">Show shots beyond station</string -->
-    <string name="splays_toggle">Cambiar a tomas laterales</string>
+    <!-- UNUSED string name="splays_toggle">Cambiar a tomas laterales</string -->
     <!-- TODO string name="splays_on_off">Splays</string -->
     <string name="splays">Tomas laterales</string>
     <!-- TODO string name="splays_show">Show splays</string -->
@@ -289,7 +289,7 @@
     <string name="no_survey">Topografía no seleccionada</string>
     <!-- TODO string name="no_to_station">No TO station.</string -->
     <string name="no_thmanager">ThManager no instalado</string>
-    <string name="no_db_viewer">app DB_viewer no instalada</string>
+    <!-- UNUSED string name="no_db_viewer">app DB_viewer no instalada</string -->
     <string name="no_undelete">No hay medida para recuperar</string>
     <!-- FIXME string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Bearing %4$.1f"</string -->
     <!-- FIXME string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Clino %4$.1f"</string -->
@@ -403,7 +403,7 @@
     <!-- UNUSED string name="scrap_name">Nombre de dibujo</string -->
     <string name="splay">Toma Lateral</string>
     <string name="too_many_leg_intersection">La línea de la sección abarca más de una visual</string>
-    <string name="too_many_legs_xsection">Hay demasiadas tomas de sección</string>
+    <!-- UNUSED string name="too_many_legs_xsection">Hay demasiadas tomas de sección</string -->
     <!-- UNUSED string name="converted_tdr2th2">Archivos binarios de dibujo convertidos a Th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">¿Sobrescribir archivos de dibujo Th2?</string -->
     <string name="section_area">Sección de área: %1$.1f</string>
@@ -705,7 +705,7 @@
     <!-- TODO string name="help_measure_undo">Drop the last polyline point</string -->
     
     <string name="no_shot_between_stations">No hay tomas entre estaciones</string>
-    <string name="few_line_points">La línea tiene muy pocos puntos</string>
+    <!-- UNUSED string name="few_line_points">La línea tiene muy pocos puntos</string -->
     <string name="line_delete">Eliminar línea</string>
     <string name="flip_shots">Tomas contínuas</string>
     <string name="split_nothing">Nada para dividir</string>
@@ -746,7 +746,7 @@
     <string name="help_photo">Ajustes de Fotos</string>
     <string name="help_sensor">Ajustes de medidas</string>
     <string name="help_3d">Visualizar en 3D(Cave3D)</string>
-    <string name="help_move">Modo Mover/zoom</string>
+    <!-- UNUSED string name="help_move">Modo Mover/zoom</string -->
     <string name="help_draw">Seleccinar herramienta de dibujo</string>
     <string name="help_edit">Seleccionar modo de edición</string>
     <string name="help_refs">Ajustes de visualización del dibujo</string>
@@ -830,7 +830,7 @@
     <string name="title_coverage">Distibución datos Calibración</string>
     <string name="title_coeff">Coeficiente Calibración</string>
     <!-- TODO string name="title_color_picker">Pick a color</string -->
-    <string name="title_contour">Contorno</string>
+    <!-- UNUSED string name="title_contour">Contorno</string -->
     <!-- UNUSED string name="title_coord">Introduzca las coordenadas del punto:</string -->
     <string name="title_current_station">Última estación guardada</string>
     <string name="title_station_search">Indicar estación</string>
@@ -877,7 +877,7 @@
     <!-- UNUSED string name="title_sketch_select">Seleccionar elemento</string -->
 
     <string name="title_stats">Estadísticas</string>
-    <string name="title_step">Medida</string>
+    <!-- UNUSED string name="title_step">Medida</string -->
     <string name="title_survey">Info. topografía</string>
     <string name="title_survey_new">Nueva topografía</string>
     <string name="title_survey_export">Exportar topografías</string>
@@ -933,8 +933,8 @@
   <string name="pref_station_prefix_summary">Prefijo estación de exportación cSurvey</string>
   <!-- TODO string name="pref_compass_splays_title">Compass splays</string -->
   <!-- TODO string name="pref_compass_splays_summary">Export splays in Compass files</string -->
-  <string name="pref_trobot_names_title">TopoRobot Nombres de estaciones</string>
-  <string name="pref_trobot_names_summary">Los nombres de las estaciones están en el estilo TopoRobot</string>
+  <!-- UNUSED string name="pref_trobot_names_title">TopoRobot Nombres de estaciones</string -->
+  <!-- UNUSED string name="pref_trobot_names_summary">Los nombres de las estaciones están en el estilo TopoRobot</string -->
   <string name="pref_ortho_lrud_title">LRUD ángulo de apertura</string>
   <string name="pref_ortho_lrud_summary">Ángulo tomas radiales</string>
   <string name="pref_ortho_lrud_message">Ángulo mínimo de tomas radiales</string>
@@ -952,8 +952,8 @@
   <string name="pref_survex_lrud_summary">Añadir toma radial a exportación Survex</string>
   <string name="pref_svg_grid_title">SVG parrilla</string>
   <string name="pref_svg_grid_summary">Añadir una parrilla a la exportación SVG</string>
-  <string name="pref_svg_in_html_title">SVG en HTML</string>
-  <string name="pref_svg_in_html_summary">Incorpore la exportación de SVG en HTML</string>
+  <!-- UNUSED string name="pref_svg_in_html_title">SVG en HTML</string -->
+  <!-- UNUSED string name="pref_svg_in_html_summary">Incorpore la exportación de SVG en HTML</string -->
   <!-- TODO string name="pref_svg_pointstroke_title">SVG point stroke</string -->
   <!-- TODO string name="pref_svg_pointstroke_summary">Width of point symbols in SVG</string -->
   <!-- TODO string name="pref_svg_labelstroke_title">SVG label stroke</string -->
@@ -1206,8 +1206,8 @@
 
   <string name="pref_picker_type_title">Selector de simbología</string>
   <string name="pref_picker_type_summary">Tipo de selector de simbología</string>
-  <string name="pref_section_stations_title">X-Sección estaciones</string>
-  <string name="pref_section_stations_summary">X-Estaciones de la sección de referencia</string>
+  <!-- UNUSED string name="pref_section_stations_title">X-Sección estaciones</string -->
+  <!-- UNUSED string name="pref_section_stations_summary">X-Estaciones de la sección de referencia</string -->
   <string name="pref_station_size_title">Tamaño de la etiqueta de la estación</string>
   <string name="pref_station_size_summary">Tamaño de la etiqueta de la estación</string>
   <string name="pref_station_size_message">Tamaño de la etiqueta de la estación</string>
@@ -1224,17 +1224,17 @@
   <string name="pref_auto_section_pt_title">Punto de sección</string>
   <string name="pref_auto_section_pt_summary">Añadir punto de la sección a las líneas de sección</string>
 
-  <string name="pref_sketchUsesSplays_title">Tomas radiales en el dibujo</string>
-  <string name="pref_sketchUsesSplays_summary">Utilizar tomas radiales en el dibujo</string>
+  <!-- UNUSED string name="pref_sketchUsesSplays_title">Tomas radiales en el dibujo</string -->
+  <!-- UNUSED string name="pref_sketchUsesSplays_summary">Utilizar tomas radiales en el dibujo</string -->
   <string name="pref_sketchLineStep_title">Paso de la línea</string>
   <string name="pref_sketchLineStep_summary">Distancia entre puntos de la línea</string>
   <string name="pref_sketchLineStep_message">Distancia entre puntos de la línea</string>
-  <string name="pref_sketchBorderStep_title">Paso borde</string>
-  <string name="pref_sketchBorderStep_summary">Distancia entre puntos de edición de la línea</string>
-  <string name="pref_sketchBorderStep_message">Distancia entre puntos de edición de la línea</string>
-  <string name="pref_sketchSectionStep_title">Sección paso</string>
-  <string name="pref_sketchSectionStep_summary">Distancia entre las secciones</string>
-  <string name="pref_sketchSectionStep_message">Distancia entre las secciones intermedias</string>
+  <!-- UNUSED string name="pref_sketchBorderStep_title">Paso borde</string -->
+  <!-- UNUSED string name="pref_sketchBorderStep_summary">Distancia entre puntos de edición de la línea</string -->
+  <!-- UNUSED string name="pref_sketchBorderStep_message">Distancia entre puntos de edición de la línea</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_title">Sección paso</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_summary">Distancia entre las secciones</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_message">Distancia entre las secciones intermedias</string -->
   <string name="pref_sketchDeltaExtrude_title">Extrusión delta</string>
   <string name="pref_sketchDeltaExtrude_summary">Extrusión delta</string>
   <string name="pref_sketchDeltaExtrude_message">Extrusión delta</string>

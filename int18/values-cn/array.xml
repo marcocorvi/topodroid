@@ -39,11 +39,11 @@
      <item>- -</item>
   </string-array -->
 
-  <string-array name="legShots">
+  <!-- OK string-array name="legShots">
      <item name="two">2</item>
      <item name="three">3</item>
      <item name="four">4</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="exportShots">
      <item name="none">无</item>
