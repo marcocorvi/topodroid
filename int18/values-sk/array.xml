@@ -27,7 +27,7 @@
   </string-array>
 
   <string-array name="stationNames">
-     <item name="alpha">Abecedné</item>
+     <item name="alpha">Abecedno-Číslicové</item>
      <item name="number">Číselné</item>
   </string-array>
 
