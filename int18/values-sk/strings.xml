@@ -474,7 +474,7 @@
     <string name="declination">Magnetická deklinácia</string>
     <string name="description">Popis</string>
     <string name="name">Názov</string>
-    <string name="team">Tím</string>
+    <string name="team">Merací tím</string>
     <!-- UNUSED string name="toggle_device">Attiva modo calibrazione</string -->
     <string name="toggle_failed">Zlyhalo prepnutie režimu DistaX kalibrácia/meranie</string>
     <string name="toggle_ok">DistoX prepnuté do režimu kalibrácie</string>
