@@ -180,9 +180,9 @@
   </string-array>
 
   <string-array name="rawCData">
-     <item name="none">Žiadny</item>
-     <item name="dec">Desatinný</item>
-     <item name="hex">Hexagonálny</item>
+     <item name="none">Žiadne</item>
+     <item name="dec">Desatinné</item>
+     <item name="hex">Hexagonálne</item>
   </string-array>
 
 </resources>
