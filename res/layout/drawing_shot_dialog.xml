@@ -137,19 +137,19 @@
         android:text="@string/button_color"
       />
     </LinearLayout>
-    <Button android:id="@+id/walls"
+    <Button android:id="@+id/btn_cancel"
       style="@style/button_default"
-      android:text="@string/make_walls"
+      android:text="@string/button_cancel"
       android:layout_marginRight="@dimen/marginh"
     />
     <Button android:id="@+id/btn_ok"
       style="@style/button_default"
-      android:layout_marginRight="@dimen/marginh"
       android:text="@string/button_save"
+      android:layout_marginRight="@dimen/marginh"
     />
-    <Button android:id="@+id/btn_cancel"
+    <Button android:id="@+id/walls"
       style="@style/button_default"
-      android:text="@string/button_cancel"
+      android:text="@string/make_walls"
     />
   </LinearLayout>
 

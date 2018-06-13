@@ -197,7 +197,7 @@ class VirtualDistoX
         mDataDone = false;
         while ( ! mDataDone ) {
           if ( mIOWaitAck ) {
-            try { Thread.sleep( 100 ); } catch ( InterruptedException e ) { }
+	    TopoDroidUtil.slowDown( 100 );
           } else {
             octet = mData.peek(); // peekFirst(); // get head of queue
             if ( octet != null ) {
@@ -216,7 +216,7 @@ class VirtualDistoX
               }
             } else {
               // Log.v("DistoX", "VD I/O no octet to write: sleep");
-              try { Thread.sleep( 500 ); } catch ( InterruptedException e ) { }
+              TopoDroidUtil.slowDown( 500 );
             }
           }
         }
@@ -286,7 +286,7 @@ class VirtualDistoX
             }
           }
         } else {
-          try { Thread.sleep( 3000 ); } catch ( InterruptedException e ) { }
+          TopoDroidUtil.slowDown( 3000 );
         }
       }
     }
@@ -320,7 +320,7 @@ class VirtualDistoX
 
   protected float data_available( Vector G, Vector M ) 
   { 
-    // try { Thread.sleep( 500 ); } catch ( InterruptedException e ) { }
+    // TopoDroidUtil.slowDown( 500 );
     if ( mData.size() > 3 && mSplay == 0 ) return -1.0f;
     G.x = (float)(Math.random()*2-1) * TopoDroidUtil.FV / 2;
     G.y = (float)(Math.random()*2-1) * TopoDroidUtil.FV / 2;
@@ -556,7 +556,7 @@ class VirtualDistoX
     int time = 0;
     while ( timeout > 0 && time < timeout ) {
       if ( mData == null ) break;
-      if ( mData.size() == 0 ) try { Thread.sleep(100); } catch (InterruptedException e ) { }
+      if ( mData.size() == 0 ) TopoDroidUtil.slowDown( 100 );
       time += 100;
     }
     if ( mData == null || mData.size() == 0 ) return false;

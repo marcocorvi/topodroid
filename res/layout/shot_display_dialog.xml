@@ -43,14 +43,14 @@
       android:layout_marginTop="@dimen/marginvbig"
       android:gravity="right"
     >
-    <Button android:id="@+id/button_ok"
-        style="@style/button_default"
-        android:layout_marginRight="@dimen/marginh"
-        android:text="@string/button_ok"
-    />
     <Button android:id="@+id/button_back"
         style="@style/button_default"
         android:text="@string/button_cancel"
+        android:layout_marginRight="@dimen/marginh"
+    />
+    <Button android:id="@+id/button_ok"
+        style="@style/button_default"
+        android:text="@string/button_ok"
     />
     </LinearLayout>
 

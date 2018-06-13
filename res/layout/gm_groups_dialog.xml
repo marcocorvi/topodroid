@@ -22,6 +22,11 @@
       android:layout_gravity="right"
       android:gravity="right"
       >
+      <Button android:id="@+id/group_cancel"
+        style="@style/button_default"
+        android:text="@string/button_cancel"
+        android:layout_marginRight="@dimen/marginh"
+      />
       <Button android:id="@+id/group_reset" 
         style="@style/button_default"
         android:text="@string/group_reset"
@@ -30,11 +35,6 @@
       <Button android:id="@+id/group_ok"
         style="@style/button_default"
         android:text="@string/button_ok"
-        android:layout_marginRight="@dimen/marginh"
-      />
-      <Button android:id="@+id/group_cancel"
-        style="@style/button_default"
-        android:text="@string/button_cancel"
       />
     </LinearLayout>
 </LinearLayout>

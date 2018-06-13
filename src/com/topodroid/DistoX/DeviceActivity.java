@@ -649,9 +649,7 @@ public class DeviceActivity extends Activity
                 DeviceUtil.bindDevice( btDevice );
                 for (int c=0; c<TDSetting.mConnectSocketDelay; ++c ) {
                   if ( DeviceUtil.isPaired( btDevice ) ) break;
-                  try {                     // Thread.yield();
-                    Thread.sleep( 100 );
-                  } catch ( InterruptedException e ) { }
+                  TopoDroidUtil.slowDown( 100 ); // Thread.yield();
                 }
               }
             }

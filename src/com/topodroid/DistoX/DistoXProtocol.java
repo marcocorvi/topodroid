@@ -336,13 +336,8 @@ class DistoXProtocol
           // while ( ( available = mIn.available() ) == 0 && timeout < maxtimeout ) 
           while ( ( available = mIn.available() ) < min_available && timeout < maxtimeout ) {
             ++ timeout;
-            try {
-              // TDLog.Log( TDLog.LOG_PROTO, "Proto read packet sleep " + timeout + "/" + maxtimeout );
-              // Log.v( "DistoX", "VD Proto read packet sleep " + timeout + "/" + maxtimeout );
-              Thread.sleep( 100 );
-            } catch (InterruptedException e ) {
-              TDLog.Error( "Proto read packet InterruptedException" + e.toString() );
-            }
+            // TDLog.Log( TDLog.LOG_PROTO, "Proto read packet sleep " + timeout + "/" + maxtimeout );
+            TopoDroidUtil.slowDown( 100, "Proto read packet InterruptedException" );
           }
         }
       }

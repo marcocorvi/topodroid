@@ -144,9 +144,7 @@ class ConnectionHandler extends Handler
      TDLog.Log( TDLog.LOG_SYNC, "ConnectionHandler reconnect() ");
      if ( mSendThread != null ) stopSendThread();
      while ( mSyncService.getConnectState() == SyncService.STATE_NONE ) {
-       try {
-         Thread.sleep( 200 );
-       } catch ( InterruptedException e ) { }
+       TopoDroidUtil.slowDown( 200 );
        mSyncService.connect( mDevice );
      }
      if ( mSyncService.getConnectState() == SyncService.STATE_CONNECTED ) {
@@ -630,7 +628,7 @@ class ConnectionHandler extends Handler
       // Log.v( "DistoX", "SendThread running ...");
       while( mRunning ) {
         while ( mRunning && mQueue.isEmpty() ) {
-          try { Thread.sleep( SLEEP_EMPTY ); } catch ( InterruptedException e ) { }
+          TopoDroidUtil.slowDown( SLEEP_EMPTY );
         }
         if ( mRunning ) {
           // byte buffer[] = mQueue.peek();
@@ -655,7 +653,7 @@ class ConnectionHandler extends Handler
               }
             }
           }
-          try { Thread.sleep( SLEEP_DEQUE ); } catch ( InterruptedException e ) { }
+          TopoDroidUtil.slowDown( SLEEP_DEQUE );
         }
       }
       TDLog.Log( TDLog.LOG_SYNC, "Send Thread exiting");

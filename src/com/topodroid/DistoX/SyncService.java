@@ -498,9 +498,7 @@ class SyncService
         // ONE-TO-ONE
         // startAccept(); 
       } else if ( mType == STATE_CONNECTING ) {
-        try {
-          Thread.sleep( 200 );
-        } catch ( InterruptedException e ) { }
+        TopoDroidUtil.slowDown( 200 );
         reconnect();
       }
     }

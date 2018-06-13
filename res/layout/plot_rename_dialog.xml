@@ -55,19 +55,19 @@
        android:orientation="horizontal"
        android:layout_marginTop="@dimen/marginvbig"
        >
-      <Button android:id="@+id/btn_rename"
+      <Button android:id="@+id/btn_back"
         style="@style/button_default"
         android:layout_marginRight="@dimen/marginh"
-        android:text="@string/button_rename"
+        android:text="@string/button_cancel"
         />
       <Button android:id="@+id/btn_delete"
         style="@style/button_default"
         android:layout_marginRight="@dimen/marginh"
         android:text="@string/button_delete"
         />
-      <Button android:id="@+id/btn_back"
+      <Button android:id="@+id/btn_rename"
         style="@style/button_default"
-        android:text="@string/button_cancel"
+        android:text="@string/button_rename"
         />
     </LinearLayout>
 

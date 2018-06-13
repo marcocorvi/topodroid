@@ -207,4 +207,33 @@ class TopoDroidUtil
   static int month() { return (new GregorianCalendar()).get( Calendar.MONTH ); }
   static int day()   { return (new GregorianCalendar()).get( Calendar.DAY_OF_MONTH); }
 
+
+  static boolean slowDown( int msec ) 
+  {
+    try {
+      Thread.sleep( msec );
+    } catch ( InterruptedException e ) { return false; }
+    return true;
+  }
+
+  static boolean slowDown( int msec, String msg )
+  {
+    try {
+      Thread.sleep( msec );
+    } catch ( InterruptedException e ) {
+      TDLog.Error( msg + " " + e.getMessage() );
+      return false;
+    }
+    return true;
+  }
+
+  static boolean yieldDown( int msec ) 
+  {
+    try {
+      Thread.yield();
+      Thread.sleep( msec );
+    } catch ( InterruptedException e ) { return false; }
+    return true;
+  }
+
 }

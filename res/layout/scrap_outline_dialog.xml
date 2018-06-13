@@ -21,19 +21,19 @@
     android:layout_marginBottom="@dimen/marginv"
     android:orientation="horizontal"
     >
-    <Button android:id="@+id/btn_merge"
-      style="@style/button_default"
-      android:layout_marginRight="@dimen/marginh"
-      android:text="@string/button_merge"
-    />
-    <Button android:id="@+id/btn_clear"
-      style="@style/button_default"
-      android:layout_marginRight="@dimen/marginh"
-      android:text="@string/button_clear"
-    />
     <Button android:id="@+id/btn_back"
       style="@style/button_default"
       android:text="@string/button_cancel"
+      android:layout_marginRight="@dimen/marginh"
+    />
+    <Button android:id="@+id/btn_clear"
+      style="@style/button_default"
+      android:text="@string/button_clear"
+      android:layout_marginRight="@dimen/marginh"
+    />
+    <Button android:id="@+id/btn_merge"
+      style="@style/button_default"
+      android:text="@string/button_merge"
     />
   </LinearLayout>
 </LinearLayout>

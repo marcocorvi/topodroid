@@ -222,7 +222,7 @@ class VirtualDistoXComm extends TopoDroidComm
       // download with timeout
       startRfcommThread( -1, lister );
       while ( mRfcommThread != null ) {
-        try { Thread.sleep( 100 ); } catch ( InterruptedException e ) { }
+        TopoDroidUtil.slowDown( 100 );
       }
       ret = nReadPackets;
       destroySocket();

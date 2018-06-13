@@ -84,9 +84,9 @@
       android:gravity="right"
       android:layout_marginTop="@dimen/marginvbig"
       >
-      <Button android:id="@+id/surveySave"
+      <Button android:id="@+id/surveyCancel"
         style="@style/button_default"
-        android:text="@string/button_save"
+        android:text="@string/button_cancel"
         android:layout_marginRight="@dimen/marginh"
       />
       <Button android:id="@+id/surveyOpen"
@@ -94,9 +94,9 @@
         android:text="@string/button_open"
         android:layout_marginRight="@dimen/marginh"
       />
-      <Button android:id="@+id/surveyCancel"
+      <Button android:id="@+id/surveySave"
         style="@style/button_default"
-        android:text="@string/button_cancel"
+        android:text="@string/button_save"
       />
   </LinearLayout>
 

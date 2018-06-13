@@ -958,7 +958,7 @@ public class DrawingWindow extends ItemDrawer
         }
       };
     }
-    try { Thread.sleep(10); } catch( InterruptedException e ) { }
+    TopoDroidUtil.slowDown( 10 );
 
     String name = null;
     int azimuth = 0;

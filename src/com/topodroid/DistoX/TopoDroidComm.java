@@ -87,12 +87,8 @@ class TopoDroidComm
           if ( toRead == -1 ) {
             doWork = false;
           } else {
-            try {
-              // TDLog.Log( TDLog.LOG_COMM, "RFcomm sleeping 1000 " );
-              Thread.sleep( TDSetting.mWaitConn );
-            } catch (InterruptedException e) {
-              // TDLog.Log( TDLog.LOG_COMM, "RFcomm thread sleep interrupt");
-            }
+            // TDLog.Log( TDLog.LOG_COMM, "RFcomm sleeping 1000 " );
+            TopoDroidUtil.slowDown( TDSetting.mWaitConn, "RFcomm thread sleep interrupt");
           }
         } else if ( res == DistoXProtocol.DISTOX_ERR_OFF ) {
           // TDLog.Error( "RFcomm readPacket returns ERR_OFF " );
@@ -122,9 +118,7 @@ class TopoDroidComm
             msg.setData(bundle);
             mLister.sendMessage(msg);
             if ( mApp.distoType() == Device.DISTO_A3 && TDSetting.mWaitData > 10 ) {
-              try {
-                Thread.sleep( TDSetting.mWaitData ); // slowdown
-              } catch ( InterruptedException e ) { }
+              TopoDroidUtil.slowDown( TDSetting.mWaitData );
             }
           }
           // if ( mLister != null ) {
@@ -197,9 +191,7 @@ class TopoDroidComm
           if ( mApp.distoType() == Device.DISTO_X310 ) {
             TopoDroidApp.mData.updateShotAMDR( mLastShotId, mApp.mSID, acc, mag, dip, roll, true );
             if ( TDSetting.mWaitData > 10 ) {
-              try {
-                Thread.sleep( TDSetting.mWaitData ); // slowdown
-              } catch ( InterruptedException e ) { }
+              TopoDroidUtil.slowDown( TDSetting.mWaitData );
             }
           }
         }
@@ -289,11 +281,7 @@ class TopoDroidComm
       for (int k=0; k<3 && ! ret; ++k ) { // try three times
         ret = mProtocol.sendCommand( (byte)cmd );
         // TDLog.Log( TDLog.LOG_COMM, "sendCommand " + cmd + " " + k + "-ret " + ret );
-        try {
-          Thread.sleep( TDSetting.mWaitCommand );
-        } catch ( InterruptedException e ) {
-          // TDLog.Log( TDLog.LOG_PROTO, "SendCommand sleep interrupted"); // it is ok
-        }
+        TopoDroidUtil.slowDown( TDSetting.mWaitCommand, "SendCommand sleep interrupted"); // it is ok to be interrupted
       }
     }
     return ret;

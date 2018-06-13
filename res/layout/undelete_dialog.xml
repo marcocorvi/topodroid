@@ -19,15 +19,15 @@
       android:layout_gravity="right"
       android:gravity="right"
       >
-      <Button android:id="@+id/button_status"
-        style="@style/button_default"
-        android:text="@string/undelete_shot"
-        android:layout_marginRight="@dimen/marginh"
-      />
       <Button android:id="@+id/button_cancel"
         style="@style/button_default"
         android:text="@string/button_cancel"
+        android:layout_marginRight="@dimen/marginh"
       />  
+      <Button android:id="@+id/button_status"
+        style="@style/button_default"
+        android:text="@string/undelete_shot"
+      />
     </LinearLayout>
 
     <ListView android:id="@+id/list_undelete"

@@ -113,9 +113,7 @@ class DeviceHelper extends DataSetObservable
       }
 
       while ( myDB.isDbLockedByOtherThreads() ) {
-        try {
-          Thread.sleep( 200 );
-        } catch ( InterruptedException e ) {}
+        TopoDroidUtil.slowDown( 200 );
       }
 
       //noinspection SyntaxError

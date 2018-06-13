@@ -201,9 +201,7 @@ class DataHelper extends DataSetObservable
         }
 
         while ( myDB.isDbLockedByOtherThreads() ) {
-          try {
-            Thread.sleep( 200 );
-          } catch ( InterruptedException e ) {}
+          TopoDroidUtil.slowDown( 200 );
         }
 
         // updateConfig = myDB.compileStatement( "UPDATE configs SET value=? WHERE key=?" );
@@ -876,7 +874,7 @@ class DataHelper extends DataSetObservable
       myDB.setTransactionSuccessful();
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch ( SQLiteException e ) { logError("Shot update sqlite error " + fStation + " " + tStation, e );
-      // try { Thread.sleep(50); } catch (InterruptedException ee ) { } 
+      // TopoDroidUtil.slowDown( 50 );
     } catch ( IllegalStateException e2 ) { logError("Shot update sqlite error " + fStation + " " + tStation, e2 );
     } finally {
       myDB.endTransaction();

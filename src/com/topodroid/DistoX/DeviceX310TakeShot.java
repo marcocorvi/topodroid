@@ -39,12 +39,12 @@ class DeviceX310TakeShot extends AsyncTask<Integer, Integer, Integer >
     int i = mNr;
     for ( ; i>1; --i ) {
       mApp.setX310Laser( 1, null );
-      try { Thread.sleep( TDSetting.mWaitLaser ); } catch( InterruptedException e ) { }
+      TopoDroidUtil.slowDown( TDSetting.mWaitLaser ); 
       mApp.setX310Laser( 2, null );   
-      try { Thread.sleep( TDSetting.mWaitShot ); } catch( InterruptedException e ) { }
+      TopoDroidUtil.slowDown( TDSetting.mWaitShot );
     }
     mApp.setX310Laser( 1, null );
-    try { Thread.sleep( TDSetting.mWaitLaser ); } catch( InterruptedException e ) { }
+    TopoDroidUtil.slowDown( TDSetting.mWaitLaser ); 
     return 0;
   }
 
@@ -62,10 +62,10 @@ class DeviceX310TakeShot extends AsyncTask<Integer, Integer, Integer >
   {
     if ( mLister != null ) {
       mApp.setX310Laser( 3, mLister ); // 3 = measure and download
-      // try { Thread.sleep( TDSetting.mWaitShot ); } catch( InterruptedException e ) { }
+      // TopoDroidUtil.slowDown( TDSetting.mWaitShot ); 
     } else {
       mApp.setX310Laser( 2, null ); // 2 = measure
-      // try { Thread.sleep( TDSetting.mWaitLaser ); } catch( InterruptedException e ) { }
+      // TopoDroidUtil.slowDown( TDSetting.mWaitLaser ); 
     }
     mILister.enableBluetoothButton(true);
   }

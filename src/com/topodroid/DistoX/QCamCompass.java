@@ -201,7 +201,7 @@ class QCamCompass extends Dialog
     } else if ( b == buttonCancel ) {
     }
     mSurface.close();
-    try { Thread.sleep( 100 ); } catch ( InterruptedException e ) { }
+    TopoDroidUtil.slowDown( 100 );
 
     if ( mHasSaved ) {
       if ( mInserter != null ) mInserter.insertPhoto();
