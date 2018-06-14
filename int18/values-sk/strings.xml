@@ -163,8 +163,8 @@
     <string name="import_calib_already">Kalibrácia už existuje</string>
     <string name="import_calib_mismatch">Calib.: Zariadenie nesúhlasí</string>
     <string name="import_calib_no_data">Calib. súbor: Žiadne dáta</string>
+    <string name="import_calib_io_error">Calib. súbor: Chyba čítania</string>
     <string name="import_zip_ok">Import zip súboru úspešný</string>
-    <!-- FIXME REPEATED string name="import_zip_ok">zip súbor úspešne importovaný</string -->
     <!-- UNUSED string name="import_zip_wait">Importovanie zip súboru vyžaduje čas. Prosím, čakajte &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Salvataggio disegno &#8230; attendi &#8230;</string -->
     <string name="MT_points_none">Chýbajúci bod MobileTopographer</string>
