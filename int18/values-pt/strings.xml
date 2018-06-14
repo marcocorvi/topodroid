@@ -11,19 +11,18 @@
     <!-- UNUSED string name="version_ask">Atualizando para uma nova versão do TopoDroid.\nQuer re-instalar os símbolos?</string -->
     <string name="symbols_ask">Instalar símbolos. v.%1$s?\n(Current v.%2$s)</string>
 
-    <!-- TODO string name="setup_textsize_title">TopoDroid setup. Text size</string -->
-    <!-- TODO string name="setup_buttonsize_title">TopoDroid setup. Button size</string -->
-    <!-- TODO string name="setup_drawingunit_title">TopoDroid setup. Icons size</string -->
-    <!-- TODO string name="setup_done_title">TopoDroid setup. Done</string -->
+    <string name="setup_textsize_title">Configuração TopoDroid. Tamanho do texto</string>
+    <string name="setup_buttonsize_title">Configuração TopoDroid. Tamanho dos botões</string>
+    <string name="setup_drawingunit_title">Configuração TopoDroid. Tamanho dos ícones</string>
+    <string name="setup_done_title">Configuração TopoDroid. Fim</string>
 
-    <!-- TODO string name="setup_textsize">Set the text size.\nYou can always change this later thru the main window settings.</string -->
-    <!-- TODO string name="setup_buttonsize">Set the button size.\nYou can always change this later thru the main window settings.</string -->
-    <!-- TODO string name="setup_drawingunit">Set the sketch icon size.\nYou can always change this later thru the sketch window settings.</string -->
-    <!-- TODO string name="setup_done">The basic setup in done.\n\n
-	    If you experience problems with the DistoX connection, try and set the insecure socket.\n\n
-	    Other settings concern the presentation in the sketching window (icon size, label size, line width, etc.)
-	    you should set them to your needs./n/n
-    </string -->
+    <string name="setup_textsize">Defina o tamanho do texto.\nPode ser alterado depois na janela principal de configurações.</string>
+    <string name="setup_buttonsize">Defina o tamanho dos botões.\nPode ser alterado depois na janela principal de configurações.</string>
+    <string name="setup_drawingunit">Defina o tamanho dos ícones do croqui.\nPode ser alterado depois na janela de configurações do croqui.</string>
+    <string name="setup_done">A configuração básica está terminada.\n\n
+	    Se você tiver problemas com a conexão com a DistoX, experimente a opção "Inseguro" para a configuração "Soquete".\n\n
+	    Há outras configurações que afetam a apresentação na janela de croqui (tamanho dos ícones e rótulos, espessura da linha, etc). Altere-as da maneira que achar mais conveniente./n/n
+    </string>
     <!-- OK string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
 
     <string name="POINT">PONTO</string>
@@ -31,8 +30,8 @@
     <string name="AREA">ÁREA</string>
     <string name="HELP">AJUDA</string>
     <string name="STATION">BASE</string>
-    <!-- TODO string name="UP">UPWARD</string -->
-    <!-- TODO string name="DOWN">DOWNWARD</string -->
+    <string name="UP">PARA CIMA</string>
+    <string name="DOWN">PARA BAIXO</string>
 
     <string name="cut">CORTAR</string>
     <string name="copy">COPIAR</string>
@@ -168,8 +167,8 @@
     <!-- UNUSED string name="sketch_saving">Salvando croqui &#8230; por favor espere &#8230;</string -->
     <string name="MT_points_none">Nenhum ponto MobileTopographer</string>
  
-    <!-- TODO string name="pleasewait">Please wait</string -->
-    <!-- TODO string name="processing">processing &#8230;</string -->
+    <string name="pleasewait">Por favor espere</string>
+    <string name="processing">processando &#8230;</string>
 
     <!-- UNUSED string name="head_tail">Memória: </string -->
     <string name="head_tail_failed">Falha ao ler o índice de memória da DistoX</string>
@@ -245,15 +244,15 @@
     <!-- UNUSED string name="hidden_del">Mostrar visadas até base referência</string -->
     <string name="hidden_show">Mostrar visadas após base</string>
     <!-- UNUSED string name="splays_toggle">Alternar exibição das medidas auxiliares</string -->
-    <!-- TODO string name="splays_on_off">Splays</string -->
+    <string name="splays_on_off">Medidas auxiliares</string>
     <string name="splays">medidas auxiliares</string>
-    <!-- TODO string name="splays_show">Show splays</string -->
-    <!-- TODO string name="foresurface_show">Show fore surface</string -->
-    <!-- TODO string name="fmt_listen">LISTEN | %1$s</string -->
-    <!-- TODO string name="fmt_id">ID %1$s</string -->
-    <!-- TODO string name="fmt_latitude">Latitude %1$s</string -->
-    <!-- TODO string name="fmt_longitude">Longitude %1$s</string -->
-    <!-- TODO string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string --> 
+    <string name="splays_show">Mostrar medidas auxiliares</string>
+    <string name="foresurface_show">Mostrar toda a superfície</string>
+    <string name="fmt_listen">OUVIR | %1$s</string>
+    <string name="fmt_id">ID %1$s</string>
+    <string name="fmt_latitude">Latitude %1$s</string>
+    <string name="fmt_longitude">Longitude %1$s</string>
+    <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string> 
     <string name="fixed">fixa</string>
     <string name="painted">pintada</string>
 
@@ -502,7 +501,7 @@
     <string name="stat_duplicate">Visadas duplicadas - Qt: %1$d Ext: %2$.1f %3$s</string>
     <string name="stat_leg">Visadas - Qt: %1$d Ext: %2$.1f %3$.1f Proj horiz: %4$.1f %5$s</string>
     <string name="stat_length">Extensão total: %1$.1f %2$s</string>
-    <!-- TODO string name="stat_extlen">3D length %1$.1f %2$s</string -->
+    <string name="stat_extlen">Comprimento 3D %1$.1f %2$s</string -->
     <string name="stat_projlen">Projeção horizontal: %1$.1f %2$s</string>
     <string name="stat_loop">Poligonais: %1$d</string>
     <string name="stat_origin">Base inicial: %1$s</string>
@@ -562,13 +561,13 @@
     <!-- UNUSED string name="button_azimuth">Azimute</string -->
     <string name="button_plot"    >Croqui</string>
     <string name="button_more"    >Mais</string>
-    <!-- TODO string name="button_next"    >Next</string -->
-    <!-- TODO string name="button_skip"    >Skip</string -->
-    <!-- TODO string name="button_done"    >Done</string -->
+    <string name="button_next"    >Próximo</string>
+    <string name="button_skip"    >Ignorar</string>
+    <string name="button_done"    >Fim</string>
     <string name="button_lrud"    >Incluir EDTC</string>
     <!-- OK string name="button_ok"        >OK        </string -->
-    <!-- TODO string name="button_off"       >off</string -->
-    <!-- TODO string name="button_on"        >on</string -->
+    <string name="button_off"       >desligar</string>
+    <string name="button_on"        >ligar</string>
     <string name="button_open"      >Abrir     </string>
     <string name="button_read"      >Ler       </string>
     <!-- UNUSED string name="button_redo"      >Refazer   </string -->
