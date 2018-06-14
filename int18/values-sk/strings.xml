@@ -1360,7 +1360,7 @@
 \n[6] Potvrďte pokračovať a počkajte na dokončenie procesu.
 \n[7] Vypnite DistoX2 CLEAR OFF tlačidlom.
 \n
-   </string -->
+   </string>
 
    <string name="firmware_none">Žiadny firmware súbor</string>
    <string name="firmware_file">Firmware súbor</string>
