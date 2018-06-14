@@ -249,8 +249,8 @@
     <string name="splays_on_off">Pomocné zámery</string>
     <string name="splays">pomocné zámery</string>
     <string name="splays_show">Zobraziť pomocné zámery</string>
-    <!-- TODO string name="foresurface_show">Show fore surface</string -->
-    <!-- TODO string name="fmt_listen">LISTEN | %1$s</string -->
+    <string name="foresurface_show">Zobraz povrch</string>
+    <string name="fmt_listen">POČÚVAJ | %1$s</string>
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Zemepisná šírka %1$s</string>
     <string name="fmt_longitude">Zemepisná dĺžka %1$s</string>
