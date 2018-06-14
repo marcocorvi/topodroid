@@ -173,6 +173,15 @@ class FixedImportDialog extends MyDialog
         int len = vals.length;
         if ( len >= 4 ) {
           ret = true;
+          // StringBuilder sb = new StringBuilder();
+          // sb.append( vals[len-3].trim() );
+          // sb.append( " " );
+          // sb.append( vals[len-4].trim() );
+          // sb.append( " " );
+          // sb.append( vals[len-2].trim() );
+          // sb.append( " " );
+          // sb.append( vals[len-1].trim() );
+		  
           // int k=0;
           // String name = vals[k];
           // while ( ++k < len-4 ) {
@@ -186,6 +195,7 @@ class FixedImportDialog extends MyDialog
               " " +
               vals[ len - 1 ].trim();
           mArrayAdapter.add( sb );
+		  // mArrayAdapter.add( sb.toString() );
         }
       }
     } catch ( IOException e ) { 

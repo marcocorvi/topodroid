@@ -371,16 +371,16 @@ public class OverviewWindow extends ItemDrawer
   
     private Button[] mButton1;  // primary
     private int mNrButton1 = 4; // main-primary
-  private HorizontalListView mListView;
-  private HorizontalButtonView mButtonView1;
-  private ListView   mMenu;
-  private Button     mImage;
+    private HorizontalListView mListView;
+    private HorizontalButtonView mButtonView1;
+    private ListView   mMenu;
+    private Button     mImage;
     // HOVER
     // MyMenuAdapter mMenuAdapter;
     private ArrayAdapter< String > mMenuAdapter;
-  private boolean onMenu;
+    private boolean onMenu;
 
-  private List<DBlock> mBlockList = null;
+    private List<DBlock> mBlockList = null;
   
     public float zoom() { return mZoom; }
 

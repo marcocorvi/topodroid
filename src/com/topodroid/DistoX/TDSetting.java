@@ -200,7 +200,7 @@ class TDSetting
     "DISTOX_STATION_NAMES",      // station names: 0 alphanumeric, 1 numbers
     "DISTOX_ZOOM_CTRL",          // whether to have zoom-ctrl (no, temp., always)
     "DISTOX_SIDE_DRAG",          // whether to enable side-drag
-    "DISTOX_DXF_SCALE",          // default DXF scale (export)
+    // "DISTOX_DXF_SCALE",          // default DXF scale (export)
     "DISTOX_ACAD_VERSION",
     "DISTOX_BITMAP_BGCOLOR",     // bitmap background color [RGB]
     "DISTOX_SURVEX_EOL",         // survex end of line [either Linux or Windows]
@@ -291,7 +291,7 @@ class TDSetting
   static float mBezierStep  = 0.2f;
   static float getBezierStep() { return ( mBezierStep < 0.1f )? 0.05f : (mBezierStep/2); }
  
-  static float mDxfScale    = 1.0f;
+  // static float mDxfScale    = 1.0f;
   static int mBitmapBgcolor = 0x000000;
 
   static int mAcadVersion = 9;      // AutoCAD version 9, or 13
@@ -896,7 +896,7 @@ class TDSetting
     setZoomControls( prefs.getString( key[k++], "1"), FeatureChecker.checkMultitouch(app) ); // DISTOX_ZOOM_CTRL
     mSideDrag = prefs.getBoolean( key[k++], false );          // DISTOX_SIDE_DRAG
 
-    mDxfScale    = tryFloat( prefs, key[k++], "1.0" );        // DISTOX_DXF_SCALE
+    // mDxfScale    = tryFloat( prefs, key[k++], "1.0" );        // DISTOX_DXF_SCALE
     mAcadVersion = tryInt(   prefs, key[k++], "9" );          // DISTOX_ACAD_VERSION choice: 9, 13
 
     setBitmapBgcolor( prefs.getString( key[k++], "0 0 0" ) ); // DISTOX_BITMAP_BGCOLOR
@@ -1259,8 +1259,8 @@ class TDSetting
       setZoomControls( prefs.getString( k, "1"), FeatureChecker.checkMultitouch(app) ); // DISTOX_ZOOM_CTRL
     } else if ( k.equals( key[ nk++ ] ) ) {
       mSideDrag = prefs.getBoolean( k, false ); // DISTOX_SIDE_DRAG
-    } else if ( k.equals( key[ nk++ ] ) ) {
-      mDxfScale = tryFloat( prefs, k, "1" );   // DISTOX_DXF_SCALE
+    // } else if ( k.equals( key[ nk++ ] ) ) {
+    //   mDxfScale = tryFloat( prefs, k, "1" );   // DISTOX_DXF_SCALE
     } else if ( k.equals( key[ nk++ ] ) ) {
       try {
         mAcadVersion = Integer.parseInt( prefs.getString( k, "9") ); // DISTOX_ACAD_VERSION
@@ -1596,7 +1596,7 @@ class TDSetting
     //C if ( name.equals( "DISTOX_ZOOM_CTRL" )
     //B if ( name.equals( "DISTOX_SIDE_DRAG" )
     //B if ( name.equals( "DISTOX_MKEYBOARD" )
-    if ( name.equals( "DISTOX_DXF_SCALE"    ) ) return parseFloatValue( value, mDxfScale, 0.1f, 10f );
+    // if ( name.equals( "DISTOX_DXF_SCALE"    ) ) return parseFloatValue( value, mDxfScale, 0.1f, 10f );
     //C if ( name.equals( "DISTOX_ACAD_VERSION" )
     //X if ( name.equals( "DISTOX_BITMAP_BGCOLOR" )
     //B if ( name.equals( "DISTOX_AUTO_PAIR" )

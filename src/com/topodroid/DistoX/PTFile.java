@@ -98,8 +98,8 @@ class PTFile
       int toread = n; // number of bytes still to read
       do {
         int nn = fs.read( b, nread, toread );
-	nread  += nn;
-	toread -= nn;
+	    nread  += nn;
+	    toread -= nn;
       } while ( nread < n );
     } catch ( IOException e ) {
       TDLog.Error( "IO error on read " + n + " bytes: " + e.getMessage() );
@@ -290,6 +290,7 @@ class PTFile
       // read ID and version
       byte[] bytes = new byte[4];
       read( fs, bytes, 4 );
+      // assert bytes == Top3
       TDLog.Log( TDLog.LOG_PTOPO, "PT ID " + bytes[0] + bytes[1] + bytes[2] );
 
       int tc = PTFile.readInt( fs ); 

@@ -1041,14 +1041,14 @@ class TDExporter
               pw.format("  # %s\n", item.mComment );
             }
             if ( item.getExtend() > 1 ) {
-	      if ( splay_extend ) {
+	          if ( splay_extend ) {
                 pw.format( extend_auto );
-	        splay_extend = false;
-	      }
-	    } else if ( item.getExtend() != extend || ! splay_extend ) {
+	            splay_extend = false;
+	          }
+	        } else if ( item.getExtend() != extend || ! splay_extend ) {
               extend = item.getExtend();
               pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
-	      splay_extend = true;
+	          splay_extend = true;
             }
             writeThStations( pw, ( item.isXSplay() ? "-" : "." ), to, item.isCommented() );
             pw.format(Locale.US, "%.2f %.1f %.1f\n", item.mLength * ul, item.mBearing * ua, item.mClino * ua );
@@ -1077,14 +1077,14 @@ class TDExporter
               pw.format("  # %s\n", item.mComment );
             }
             if ( item.getExtend() > 1 ) {
-	      if ( splay_extend ) {
+	          if ( splay_extend ) {
                 pw.format( extend_auto );
-	        splay_extend = false;
-	      }
-	    } else if ( item.getExtend() != extend || ! splay_extend ) {
+	            splay_extend = false;
+	          }
+	        } else if ( item.getExtend() != extend || ! splay_extend ) {
               extend = item.getExtend();
               pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
-	      splay_extend = true;
+	          splay_extend = true;
             }
             writeThStations( pw, from, ( item.isXSplay() ? "-" : "." ), item.isCommented() );
             pw.format(Locale.US, "%.2f %.1f %.1f\n", item.mLength * ul, item.mBearing * ua, item.mClino * ua );
@@ -1104,7 +1104,7 @@ class TDExporter
             if ( item.getExtend() != extend || ! splay_extend ) {
               extend = item.getExtend();
               pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
-	      splay_extend = true;
+	          splay_extend = true;
             }
             if ( item.isDuplicate() ) {
               pw.format(therion_flags_duplicate);

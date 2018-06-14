@@ -390,24 +390,24 @@ class DataHelper extends DataSetObservable
                          null, null, null );
     if (cursor.moveToFirst()) {
       do {
-	float len = (float)( cursor.getDouble(1) );
+	    float len = (float)( cursor.getDouble(1) );
         switch ( (int)(cursor.getLong(0)) ) {
           case 0: // NORMAL SHOT
-	    ++ stat.countLeg;
+	        ++ stat.countLeg;
             stat.lengthLeg += len;
-	    if ( cursor.getLong(5) == 0 ) {
+	        if ( cursor.getLong(5) == 0 ) {
               stat.extLength += len * Math.abs( Math.sin( cursor.getDouble(4)*TDMath.DEG2RAD ) );
-	    } else {
+	        } else {
               stat.extLength += len;
-	    }
+	        }
             stat.planLength += (float)( len * Math.cos( cursor.getDouble(4)*TDMath.DEG2RAD ) );
             break;
           case 1: // SURFACE SHOT
-	    ++ stat.countSurface;
+	        ++ stat.countSurface;
             stat.lengthSurface += len;
             break;
           case 2: // DUPLICATE SHOT
-	    ++ stat.countDuplicate;
+	        ++ stat.countDuplicate;
             stat.lengthDuplicate += len;
             break;
         }

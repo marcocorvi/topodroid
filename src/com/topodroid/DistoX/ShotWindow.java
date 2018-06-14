@@ -1528,7 +1528,22 @@ public class ShotWindow extends Activity
     } else {
       mNextPos = mShotPos;
     }
-    // while ( mNextPos < mDataAdapter.size() && blk != mDataAdapter.get(mNextPos) ) ++ mNextPos;
+	// OLD CODE
+	// while ( mNextPos < mDataAdapter.size() && blk != mDataAdapter.get(mNextPos) ) ++ mNextPos;
+    // ++ mNextPos; // one position after blk
+    // while ( mNextPos < mDataAdapter.size() ) {
+    //   DBlock b = mDataAdapter.get(mNextPos);
+    //   int t = b.type();
+    //   if ( t == DBlock.BLOCK_MAIN_LEG ) {
+    //     return b;
+    //   } else if (    DBlock.isTypeBlank( t )
+    //               && mNextPos+1 < mDataAdapter.size()
+    //               && b.isRelativeDistance( mDataAdapter.get(mNextPos+1) ) ) {
+    //     return b;
+    //   }
+    //   ++ mNextPos;
+    // }
+    // NEW CODE
     for ( ; mNextPos < mDataAdapter.size(); ++ mNextPos ) {
       DBlock b = mDataAdapter.get(mNextPos);
       if ( b == null ) return null;
@@ -1562,7 +1577,16 @@ public class ShotWindow extends Activity
     } else {
       mPrevPos = mShotPos;
     }
-    // while ( mPrevPos >= 0 && blk != mDataAdapter.get(mPrevPos) ) -- mPrevPos;
+	// OLD CODE
+	// while ( mPrevPos >= 0 && blk != mDataAdapter.get(mPrevPos) ) -- mPrevPos;
+    // while ( mPrevPos > 0 ) {
+    //   -- mPrevPos;
+    //   DBlock b = mDataAdapter.get(mPrevPos);
+    //   if ( b.type() == DBlock.BLOCK_MAIN_LEG ) {
+    //     return b;
+    //   }
+    // }
+    // NEW CODE
     for ( ; mPrevPos >= 0; -- mPrevPos ) {
       DBlock b = mDataAdapter.get(mPrevPos);
       if ( b == null ) return null;

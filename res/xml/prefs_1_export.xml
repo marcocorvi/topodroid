@@ -242,14 +242,14 @@
        android:dialogMessage="@string/pref_bitmap_bgcolor_message"
        android:defaultValue="0 0 0" />
 
-  <com.topodroid.DistoX.MyEditPreference
+  <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_DXF_SCALE"
        android:title="@string/pref_dxf_scale_title"
        android:summary="@string/pref_dxf_scale_summary"
        android:dialogTitle="@string/pref_dxf_scale_title"
        android:dialogMessage="@string/pref_dxf_scale_message"
        android:inputType="numberDecimal"
-       android:defaultValue="1.0" />
+       android:defaultValue="1.0" / -->
 
    <CheckBoxPreference
        android:key="DISTOX_DXF_BLOCKS"

@@ -279,7 +279,7 @@ class TopoDroidComm
     boolean ret = false;
     if ( mProtocol != null ) {
       for (int k=0; k<3 && ! ret; ++k ) { // try three times
-        ret = mProtocol.sendCommand( (byte)cmd );
+        ret = mProtocol.sendCommand( (byte)cmd ); // was ret |= ...
         // TDLog.Log( TDLog.LOG_COMM, "sendCommand " + cmd + " " + k + "-ret " + ret );
         TopoDroidUtil.slowDown( TDSetting.mWaitCommand, "SendCommand sleep interrupted"); // it is ok to be interrupted
       }

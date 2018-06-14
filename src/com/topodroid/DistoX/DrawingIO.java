@@ -711,10 +711,10 @@ class DrawingIO
                 String[] vals = points.split(",");
                 for ( String val : vals ) if ( val.length() > 0 ) localPalette.addPointFilename( val );
                 String lines = dis.readUTF();
-                vals = points.split(",");
+                vals = lines.split(",");
                 for ( String val : vals ) if ( val.length() > 0 ) localPalette.addLineFilename( val );
                 String areas = dis.readUTF();
-                vals = points.split(",");
+                vals = areas.split(",");
                 for ( String val : vals ) if ( val.length() > 0 ) localPalette.addAreaFilename( val );
                 in_scrap = true;
                 // Log.v("DistoX", "TDR type " + type );

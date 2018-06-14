@@ -464,6 +464,7 @@ class SyncService
             if ( buffer[k] == DataListener.EOL ) {
               // end of message: send to upper layer
               byte[] tmp = new byte[pos];
+			  // for ( int j=0; j<pos; ++j) tmp[j] = data[j];
               System.arraycopy(data, 0, tmp, 0, pos);
               // special handle shutdown message 
               if ( data[0] == 0 && 

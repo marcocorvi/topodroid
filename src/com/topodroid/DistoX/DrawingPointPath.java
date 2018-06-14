@@ -421,7 +421,8 @@ class DrawingPointPath extends DrawingPath
       dos.writeUTF( name );
       dos.writeFloat( (float)mOrientation );
       dos.writeInt( mScale );
-      dos.writeUTF( (mPointText != null)? mPointText : "" );
+      // if ( version >= 303066 ) 
+        dos.writeUTF( (mPointText != null)? mPointText : "" );
       dos.writeUTF( (mOptions != null)? mOptions : "" );
       // TDLog.Log( TDLog.LOG_PLOT, "P " + name + " " + cx + " " + cy );
     } catch ( IOException e ) {
