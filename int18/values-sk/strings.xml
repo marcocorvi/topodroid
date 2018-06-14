@@ -569,9 +569,9 @@
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Nákres</string>
     <string name="button_more"    >Viac</string>
-    <!-- TODO string name="button_next"    >Next</string -->
-    <!-- TODO string name="button_skip"    >Skip</string -->
-    <!-- TODO string name="button_done"    >Done</string -->
+    <string name="button_next"    >Ďalší</string>
+    <string name="button_skip"    >Preskočiť</string>
+    <string name="button_done"    >Dokončiť</string>
     <string name="button_lrud"    >Pridať LRUD</string>
     <string name="button_ok"        >OK        </string>
     <string name="button_off"       >Vypnúť</string>
