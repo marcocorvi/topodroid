@@ -90,11 +90,11 @@
      <item name="svg">SVG</item>
   </string-array -->
 
-  <string-array name="legShots">
+  <!-- string-array name="legShots">
      <item name="two">2</item>
      <item name="three">3</item>
      <item name="four">4</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="extraButtons">
      <item name="basic">Alap</item>

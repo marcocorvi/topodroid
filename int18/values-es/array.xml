@@ -90,7 +90,7 @@
 
   <string-array name="connMode">
      <item name="batch">Demanda</item>
-     <item name="continuous">Contínuo</item>
+     <item name="continuous">Continuo</item>
      <item name="multi">Multi</item>
   </string-array>
 

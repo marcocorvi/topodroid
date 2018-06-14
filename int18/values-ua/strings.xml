@@ -234,7 +234,7 @@
     <string name="group_reset">Скинути групи</string>
 
     <!-- UNUSED string name="scale">масштаб</string -->
-    <string name="reversed">зворотний</string>
+    <!-- UNUSED string name="reversed">зворотний</string -->
     <string name="options">опції</string>
     <string name="outline">контур стін</string>
     <string name="out">зовнішній</string>
@@ -426,7 +426,7 @@
     <string name="sensor_type">тип</string>
     <string name="sensor_value">значення</string>
     <string name="sensor_comment">коментар</string>
-    <!-- TODO string name="insufficient_data">insufficient sensor data</string -->
+    <!-- UNUSED string name="insufficient_data">insufficient sensor data</string -->
 
     <!-- UNUSED string name="shot_clino">кут</string -->
     <!-- UNUSED string name="shot_compass">азимут</string -->
@@ -531,7 +531,7 @@
     <string name="extended_profile">Розріз-розгортка</string>
     <!-- UNUSED string name="v_section">Верт-ПЕРЕРІЗ</string -->
     <string name="h_section">Гор-ПЕРЕРІЗ</string>
-    <!-- TODO string name="landscape">landscape</string -->
+    <!-- UNUSED string name="landscape">landscape</string -->
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Помилка зчитування пам\'яті DistoX</string>
@@ -544,7 +544,7 @@
     <!-- UNUSED string name="ask_close_survey">Закрити зйомку?</string -->
     <string name="ask_gps_service">Включить сервіс GPS?</string>
 
-    <string name="button_add"       >Додати  </string>
+    <!-- UNUSED string name="button_add"       >Додати  </string -->
     <string name="button_back"      >Назад     </string>
     <string name="button_cancel"    >Відміна    </string>
     <!-- TODO string name="button_change"    >Change    </string -->
@@ -560,7 +560,7 @@
     <!-- UNUSED string name="button_gps_stop"  >Стоп      </string -->
     <!-- UNUSED string name="button_manual"    >Вручну    </string -->
     <!-- UNUSED string name="button_measure"   >Змінити   </string -->
-    <string name="button_photo"   >Фото</string>
+    <!-- UNUSED string name="button_photo"   >Фото</string -->
     <!-- UNUSED string name="button_sensor"  >Датчики</string -->
     <!-- UNUESD string name="button_direction">Азимут/кут</string -->
     <!-- UNUSED string name="button_azimuth">Азимут</string -->
@@ -719,7 +719,7 @@
     <string name="help_coeff">Показать коэфіцієнти калібрування</string>
     <!-- TODO string name="help_color">Clear splay colors</string -->
     <string name="help_continue">Продовжити малювати лінію</string>
-    <string name="help_contour">Редагувати контури</string>
+    <!-- UNUSED string name="help_contour">Редагувати контури</string -->
     <string name="help_current_station">Збережені пікети</string>
     <string name="help_azimuth">Проекція розгортки на референс-азимут</string>
     <string name="help_device">Вікно управління пристроями</string>
@@ -1111,9 +1111,9 @@
   <string name="pref_bitmap_bgcolor_message">Колір фону PNG при експорті абрисов</string>
   <string name="pref_acad_version_title">Версія AutoCAD</string>
   <string name="pref_acad_version_summary">Версія AutoCAD</string>
-  <string name="pref_dxf_scale_title">Масштаб абрису в DXF</string>
-  <string name="pref_dxf_scale_summary">Фактор масштаба абрису DXF</string>
-  <string name="pref_dxf_scale_message">Масштабурючий фактор при експорті абрису в DXF</string>
+  <!-- UNUSED string name="pref_dxf_scale_title">Масштаб абрису в DXF</string -->
+  <!-- UNUSED string name="pref_dxf_scale_summary">Фактор масштаба абрису DXF</string -->
+  <!-- UNUSED string name="pref_dxf_scale_message">Масштабурючий фактор при експорті абрису в DXF</string -->
   <string name="pref_dxf_blocks_title">Точки бок. замірів в DXF</string>
   <string name="pref_dxf_blocks_summary">Точки закінченнь бокових замірів в екскорті в DXF</string>
   <string name="pref_thumbnail_title">Розмір мініатюри</string>

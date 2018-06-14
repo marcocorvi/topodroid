@@ -35,12 +35,12 @@
       <item name="android:singleLine">true</item>
     </style>
 
-    <style name="Theme.Dialog" parent="@android:style/Theme.Dialog">
+    <!-- style name="Theme.Dialog" parent="@android:style/Theme.Dialog">
       <item name="android:layout_marginTop">0dip</item>
       <item name="android:paddingTop">2dip</item>
       <item name="android:textSize">14sp</item>
       <item name="android:textColor">@color/text</item>
-    </style>
+    </style -->
 
 <!-- MATERIAL
     <style name="TDMaterialTheme" parent="Theme.AppCompat.Light.DarkActionBar">

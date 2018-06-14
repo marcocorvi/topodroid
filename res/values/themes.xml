@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="dialog_background" parent="android:Theme.Dialog" >
+    <!-- style name="dialog_background" parent="android:Theme.Dialog" >
        <item name="android:windowBackground">@color/button_background</item>
-    </style>
+    </style -->
 
 </resources>
 

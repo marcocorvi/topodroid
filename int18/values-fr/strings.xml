@@ -119,8 +119,8 @@
     <string name="device_status_angle_degree">Unités d\'angle : degré</string>
     <string name="device_status_compass_on">Boussole/clino: on</string>
     <string name="device_status_compass_off">Boussole/clino: off</string>
-    <string name="device_status_calib">Mode %1$s</string>
-    <!-- UNUSED string name="device_status_silent">Silencieux %1$s</string -->
+    <!-- TODO string name="device_status_calib">Mode: calibration</string -->
+    <!-- TODO string name="device_status_normal">Mode: normal</string -->
     <string name="device_status_silent_on">Silencieux: on</string>
     <string name="device_status_silent_off">Silencieux: off</string>
 <string name="bt_reset">Redémarrer la connexion Bluetooth</string>
@@ -232,7 +232,7 @@
 <string name="group_reset">Remise à zéro des groupes</string>
 
 <!-- UNUSED string name="scale">échelle</string -->
-<string name="reversed">inverser</string>
+<!-- UNUSED string name="reversed">inverser</string -->
 <string name="options">options</string>
 <string name="outline">contours</string>
 <string name="out">externe</string>
@@ -292,8 +292,8 @@
 <string name="no_thmanager">ThManager non installé</string>
 <!-- UNUSED string name="no_db_viewer">DB_viewer app pas trouvée</string -->
 <string name="no_undelete">Aucun élément à récupérer</string>
-<string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Azimuth %4$.1f"</string>
-<string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Clino %4$.1f"</string>
+<string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Azimuth %5$.1f"</string>
+<string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Clino %5$.1f"</string>
 
 <string name="menu_3d">3D</string>
 <string name="menu_about">A PROPOS</string>
@@ -424,7 +424,7 @@
     <string name="sensor_type">type</string>
     <string name="sensor_value">valeur</string>
     <string name="sensor_comment">commentaire</string>
-    <string name="insufficient_data">Données capteur insuffisantes</string>
+    <!-- UNUSED string name="insufficient_data">Données capteur insuffisantes</string -->
 
     <!-- UNUSED string name="shot_clino">clino</string -->
     <!-- UNUSED string name="shot_compass">compass</string -->
@@ -528,7 +528,7 @@
     <string name="extended_profile">COUPE Développée</string>
     <!-- UNUSED string name="v_section">SECTION V</string -->
     <string name="h_section">SECTION Transverse</string>
-    <string name="landscape">Paysage</string>
+    <!-- UNUSED string name="landscape">Paysage</string -->
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Échec de lecture de la mémoire du DistoX</string>
@@ -541,7 +541,7 @@
      <!-- UNUSED string name="ask_close_survey">Quitter le relevé ?</string -->
     <string name="ask_gps_service">Activer le service GPS ?</string>
 
-    <string name="button_add"       >Ajouter       </string>
+    <!-- UNUSED string name="button_add"       >Ajouter       </string -->
     <string name="button_back"      >Retour     </string>
     <string name="button_cancel"    >Annuler    </string>
     <string name="button_change"    >Changer    </string>
@@ -557,7 +557,7 @@
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
     <!-- UNUSED string name="button_manual"    >Manuel    </string -->
     <!-- UNUSED string name="button_measure"   >Mesure   </string -->
-    <string name="button_photo"   >Photos</string>
+    <!-- UNUSED string name="button_photo"   >Photos</string -->
     <!-- UNUSED string name="button_sensor"  >Capteurs</string -->
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
@@ -1105,9 +1105,9 @@
   <string name="pref_bitmap_bgcolor_message">Couleur de fond du dessin  exporté au format PNG</string>
   <string name="pref_acad_version_title">Version d\'AutoCAD</string>
   <string name="pref_acad_version_summary">Version d\'AutoCAD</string>
-  <string name="pref_dxf_scale_title">Échelle dessin DXF</string>
-  <string name="pref_dxf_scale_summary">Facteur de l\'échelle du dessin DXF</string>
-  <string name="pref_dxf_scale_message">Facteur de l\'échelle pour l\'export du dessin au format DXF</string>
+  <!-- UNUSED string name="pref_dxf_scale_title">Échelle dessin DXF</string -->
+  <!-- UNUSED string name="pref_dxf_scale_summary">Facteur de l\'échelle du dessin DXF</string -->
+  <!-- UNUSED string name="pref_dxf_scale_message">Facteur de l\'échelle pour l\'export du dessin au format DXF</string -->
   <string name="pref_dxf_blocks_title">Fin des visées latérales DXF</string>
   <string name="pref_dxf_blocks_summary">Fin des visées latérales DXF</string>
   <string name="pref_thumbnail_title">Taille des miniatures</string>

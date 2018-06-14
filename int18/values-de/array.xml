@@ -5,7 +5,7 @@
   <string-array name="unitGrid">
      <item name="meter">Meter</item>
      <item name="yard">Yard</item>
-     <item name="two_tf">2 Fuss</item>
+     <item name="two_tf">2 Fuß</item>
      <item name="ten_cm">10 cm</item>
   </string-array>
 

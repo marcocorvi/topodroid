@@ -233,7 +233,7 @@
     <string name="group_reset">Reset groups</string>
 
     <!-- UNUSED string name="scale">scale</string -->
-    <string name="reversed">reversed</string>
+    <!-- UNUSED string name="reversed">reversed</string -->
     <string name="options">options</string>
     <string name="outline">outline</string>
     <string name="out">out</string>
@@ -426,7 +426,7 @@
     <string name="sensor_type">type</string>
     <string name="sensor_value">value</string>
     <string name="sensor_comment">comment</string>
-    <string name="insufficient_data">insufficient sensor data</string>
+    <!-- UNUSED string name="insufficient_data">insufficient sensor data</string -->
 
     <!-- UNUSED string name="shot_clino">clino</string -->
     <!-- UNUSED string name="shot_compass">compass</string -->
@@ -534,7 +534,7 @@
     <string name="extended_profile">Extended profile</string>
     <!-- UNUSED string name="v_section">V-SECTION</string -->
     <string name="h_section">H-SECTION</string>
-    <string name="landscape">landscape</string>
+    <!-- UNUSED string name="landscape">landscape</string -->
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Failed DistoX memory-read</string>
@@ -547,7 +547,7 @@
     <!-- UNUSED string name="ask_close_survey">Close survey?</string -->
     <string name="ask_gps_service">Set GPS service?</string>
 
-    <string name="button_add"       >Add       </string>
+    <!-- UNUSED string name="button_add"       >Add       </string -->
     <string name="button_back"      >Back      </string>
     <string name="button_cancel"    >Cancel    </string>
     <string name="button_change"    >Change    </string>
@@ -563,7 +563,7 @@
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
     <!-- UNUSED string name="button_manual"    >Manual    </string -->
     <!-- UNUSED string name="button_measure"   >Measure   </string -->
-    <string name="button_photo"   >Photo</string>
+    <!-- UNUSED string name="button_photo"   >Photo</string -->
     <!-- UNUSED string name="button_sensor"  >Sensors</string -->
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
@@ -725,7 +725,7 @@
     <string name="help_coeff">Show calibration coefficients</string>
     <string name="help_color">Clear splay colors</string>
     <string name="help_continue">Continue drawing a line</string>
-    <string name="help_contour">Contour editing</string>
+    <!-- UNUSED string name="help_contour">Contour editing</string -->
     <string name="help_current_station">Saved stations</string>
     <string name="help_azimuth">"Extend" reference</string>
     <string name="help_device">Device activity</string>
@@ -1123,9 +1123,9 @@
   <string name="pref_bitmap_bgcolor_message">Background color of sketch PNG export</string>
   <string name="pref_acad_version_title">AutoCAD version</string>
   <string name="pref_acad_version_summary">AutoCAD version</string>
-  <string name="pref_dxf_scale_title">DXF sketch scale</string>
-  <string name="pref_dxf_scale_summary">DXF sketch scale factor</string>
-  <string name="pref_dxf_scale_message">Factor to scale DXF sketch exports</string>
+  <!-- UNUSED string name="pref_dxf_scale_title">DXF sketch scale</string -->
+  <!-- UNUSED string name="pref_dxf_scale_summary">DXF sketch scale factor</string -->
+  <!-- UNUSED string name="pref_dxf_scale_message">Factor to scale DXF sketch exports</string -->
   <string name="pref_dxf_blocks_title">DXF splay endpoints</string>
   <string name="pref_dxf_blocks_summary">DXF splay endpoints</string>
   <string name="pref_thumbnail_title">Thumbnails size</string>

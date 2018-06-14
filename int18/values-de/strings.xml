@@ -153,7 +153,7 @@
     <string name="found_groups">%1$d Gruppen gefunden</string>
     <!-- UNUSED string name="few_plots">Nicht genügend Skizzen</string -->
     <string name="few_calibs">Nicht genügend Kalibrierungen</string>
-    <string name="getting_info">DistoX wird abgefragt ...</string>
+    <string name="getting_info">DistoX wird abgefragt &#8230;</string>
 <!-- IMPORTING A SURVEY or A ZIP -->
     <string name="calib_import_title">Kalibrierung importieren</string>
     <string name="import_title">Daten Importieren</string>
@@ -238,7 +238,7 @@
     <string name="group_reset">Gruppierung zurücksetzen</string>
 
     <!-- UNUSED string name="scale">Ausmaß</string -->
-    <string name="reversed">umkehren</string>
+    <!-- UNUSED string name="reversed">umkehren</string -->
     <string name="options">Einstellungen</string>
     <string name="outline">Linientyp (Therion)</string>
     <string name="out">draußen</string>
@@ -436,7 +436,7 @@
     <string name="sensor_type">Art</string>
     <string name="sensor_value">Messung</string>
     <string name="sensor_comment">Notizen</string>
-    <string name="insufficient_data">Nicht genügend Sensordaten</string>
+    <!-- UNUSED string name="insufficient_data">Nicht genügend Sensordaten</string -->
 
     <!-- UNUSED string name="shot_clino">Neigung</string -->
     <!-- UNUSED string name="shot_compass">Azimut</string -->
@@ -547,7 +547,7 @@
     <string name="extended_profile">Erweitertes Profil</string>
     <!-- UNUSED string name="v_section">V-PROFIL</string -->
     <string name="h_section">H-PROFIL</string>
-    <string name="landscape">Querformat</string>
+    <!-- UNUSED string name="landscape">Querformat</string -->
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Verbindungsfehler mit DistoX</string>
@@ -560,7 +560,7 @@
     <!-- UNUSED string name="ask_close_survey">Vermessung schließen?</string -->
     <string name="ask_gps_service">GPS aktiveren?</string>
 
-    <string name="button_add"       >Erstellen       </string>
+    <!-- UNUSED string name="button_add"       >Erstellen       </string -->
     <string name="button_back"      >Zurück    </string>
     <string name="button_cancel"    >Abbrechen </string>
     <string name="button_change"    >Ändern    </string>
@@ -576,7 +576,7 @@
     <!-- UNUSED string name="button_gps_stop"  >Anhalten      </string -->
     <!-- UNUSED string name="button_manual"    >Handbuch</string -->
     <!-- UNUSED string name="button_measure"   >Messung   </string -->
-    <string name="button_photo"   >Foto</string>
+    <!-- UNUSED string name="button_photo"   >Foto</string -->
     <!-- UNUSED string name="button_sensor"  >Messung</string -->
     <!-- UNUSED string name="button_direction">Azimut/Neigung</string -->
     <!-- UNUSED string name="button_azimuth">Azimut</string -->
@@ -736,7 +736,7 @@
     <string name="help_coeff">Kalibrierungs-Koeffizienten zeigen</string>
     <string name="help_color">Hilfszug-Farben löschen</string>
     <string name="help_continue">Linien fortsetzen</string>
-    <string name="help_contour">Konturen bearbeiten</string>
+    <!-- UNUSED string name="help_contour">Konturen bearbeiten</string -->
     <string name="help_current_station">Gespeicherte Messpunkte</string>
     <string name="help_azimuth">Seitenriss Referenzazimut</string>
     <string name="help_device">DistoX Verwalten</string>
@@ -904,7 +904,7 @@
     <string name="title_survey_export">Vermessung speichern als</string>
     <string name="title_survey_rename">Benenne Vermessung um in</string>
     <string name="title_plot_rename">Skizze umbenennen</string>
-    <string name="title_plot_zoomfit">Grösse anpassen / Ausrichtung</string>
+    <string name="title_plot_zoomfit">Größe anpassen / Ausrichtung</string>
     <string name="title_calib_export">Kalibrierung speichern als</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 <!-- PREFERENCES STRINGS CAN BE LEFT UNTRANSLATED FOR NOW -->
@@ -1136,9 +1136,9 @@
   <string name="pref_bitmap_bgcolor_message">PNG Hintergrundfarbe Export</string>
   <string name="pref_acad_version_title">AutoCAD-Version</string>
   <string name="pref_acad_version_summary">AutoCAD-Version</string>
-  <string name="pref_dxf_scale_title">Massstab DXF-Skizze</string>
-  <string name="pref_dxf_scale_summary">Massstab-Faktor DXF-Skizze</string>
-  <string name="pref_dxf_scale_message">Massstab-Faktor DXF-Export</string>
+  <!-- UNUSED string name="pref_dxf_scale_title">Massstab DXF-Skizze</string -->
+  <!-- UNUSED string name="pref_dxf_scale_summary">Massstab-Faktor DXF-Skizze</string -->
+  <!-- UNUSED string name="pref_dxf_scale_message">Massstab-Faktor DXF-Export</string -->
   <string name="pref_dxf_blocks_title">DXF: Hilfszüge markieren</string>
   <string name="pref_dxf_blocks_summary">DXF: Enden der Hilfszüge markieren</string>
   <string name="pref_thumbnail_title">Thumbnails Größe</string>

@@ -232,7 +232,7 @@
     <string name="group_reset">Cancella i gruppi</string>
 
     <!-- UNUSED string name="scale">scala</string -->
-    <string name="reversed">inversa</string>
+    <!-- UNUSED string name="reversed">inversa</string -->
     <string name="options">opzioni</string>
     <string name="outline">outline</string>
     <string name="out">out</string>
@@ -424,7 +424,7 @@
     <string name="sensor_type">tipo</string>
     <string name="sensor_value">valore</string>
     <string name="sensor_comment">commento</string>
-    <string name="insufficient_data">Dati sensore insufficienti</string>
+    <!-- UNUSED string name="insufficient_data">Dati sensore insufficienti</string -->
 
     <!-- UNUSED string name="shot_clino">clino</string -->
     <!-- UNUSED string name="shot_compass">bussola</string -->
@@ -529,7 +529,7 @@
     <string name="extended_profile">Profilo esteso</string>
     <!-- UNUSED string name="v_section">SEZIONE VERT.</string -->
     <string name="h_section">SEZIONE ORIZZ.</string>
-    <string name="landscape">panorama</string>
+    <!-- UNUSED string name="landscape">panorama</string -->
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Lettura memoria DistoX fallita</string>
@@ -542,7 +542,7 @@
     <!-- UNUSED string name="ask_close_survey">Chiudere rilievo?</string -->
     <string name="ask_gps_service">Impostare il servizio GPS?</string>
 
-    <string name="button_add"       >Inserisci </string>
+    <!-- UNUSED string name="button_add"       >Inserisci </string -->
     <string name="button_back"      >Indietro  </string>
     <string name="button_cancel"    >Annulla   </string>
     <string name="button_change"    >Cambia    </string>
@@ -558,7 +558,7 @@
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
     <!-- UNUSED string name="button_manual"    >Manuale   </string -->
     <!-- UNUSED string name="button_measure"   >Misura    </string -->
-    <string name="button_photo"   >Foto</string>
+    <!-- UNUSED string name="button_photo"   >Foto</string -->
     <!-- UNUSED string name="button_sensor"  >Misure</string -->
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
@@ -1113,9 +1113,9 @@
   <string name="pref_bitmap_bgcolor_message">Colore di sfondo per export rilievo in formato PNG</string>
   <string name="pref_acad_version_title"> Versione di AutoCAD</string>
   <string name="pref_acad_version_summary">Versione di AutoCAD</string>
-  <string name="pref_dxf_scale_title">Scala rilievo DXF</string>
-  <string name="pref_dxf_scale_summary">Fattore di scala rilievo DXF</string>
-  <string name="pref_dxf_scale_message">Fattore di scala per export rilievo in formato DXF</string>
+  <!-- UNUSED string name="pref_dxf_scale_title">Scala rilievo DXF</string -->
+  <!-- UNUSED string name="pref_dxf_scale_summary">Fattore di scala rilievo DXF</string -->
+  <!-- UNUSED string name="pref_dxf_scale_message">Fattore di scala per export rilievo in formato DXF</string -->
   <string name="pref_dxf_blocks_title">splay endpoint DXF </string>
   <string name="pref_dxf_blocks_summary">splay endpoint DXF </string>
   <string name="pref_thumbnail_title">Dimensione thumbnails</string>

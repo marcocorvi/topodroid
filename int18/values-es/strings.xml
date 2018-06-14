@@ -148,7 +148,7 @@
     <!-- TODO string name="found_groups">Found %1$d groups</string -->
     <!-- UNUSED string name="few_plots">No hay suficientes dibujos</string -->
     <string name="few_calibs">No hay suficientes calibraciones</string>
-    <string name="getting_info">Obteniendo información DistoX ...</string>
+    <string name="getting_info">Obteniendo información DistoX &#8230;</string>
 
     <string name="calib_import_title">Importar calibración</string>
     <string name="import_title">Importar archivo</string>
@@ -231,7 +231,7 @@
     <string name="group_reset">Resetear grupos</string>
 
     <!-- UNUSED string name="scale">Escala</string -->
-    <string name="reversed">Inverso</string>
+    <!-- UNUSED string name="reversed">Inverso</string -->
     <string name="options">Nota</string>
     <string name="outline">Contorno</string>
     <string name="out">Fuera</string>
@@ -291,8 +291,8 @@
     <string name="no_thmanager">ThManager no instalado</string>
     <!-- UNUSED string name="no_db_viewer">app DB_viewer no instalada</string -->
     <string name="no_undelete">No hay medida para recuperar</string>
-    <!-- FIXME string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Bearing %4$.1f"</string -->
-    <!-- FIXME string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Clino %4$.1f"</string -->
+    <!-- TODO string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Bearing %5$.1f"</string -->
+    <!-- TODO string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Clino %5$.1f"</string -->
 
     <string name="menu_3d">Cave3D</string>
     <string name="menu_about">Acerca de..</string>
@@ -422,7 +422,7 @@
     <string name="sensor_type">Tipo</string>
     <string name="sensor_value">Valor</string>
     <string name="sensor_comment">Commentario</string>
-    <string name="insufficient_data">Datos insuficientes del sensor</string>
+    <!-- UNUSED string name="insufficient_data">Datos insuficientes del sensor</string -->
 
     <!-- UNUSED string name="shot_clino">Clino</string -->
     <!-- UNUSED string name="shot_compass">Brújula</string -->
@@ -526,7 +526,7 @@
     <string name="profile">PROYECTO</string>
     <!-- UNUSED string name="v_section">V-sección</string -->
     <string name="h_section">H-sección</string>
-    <string name="landscape">Paisaje</string>
+    <!-- UNUSED string name="landscape">Paisaje</string -->
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Fallo conexión bluetooth</string>
@@ -539,7 +539,7 @@
     <!-- UNUSED string name="ask_close_survey">Â¿Cerrar Topografía?</string -->
     <string name="ask_gps_service">¿Quiere establecer el servicio de GPS?</string>
 
-    <string name="button_add"       >Añadir    </string>
+    <!-- UNUSED string name="button_add"       >Añadir    </string -->
     <string name="button_back"      >Atrás     </string>
     <string name="button_cancel"    >Cancelar  </string>
     <string name="button_change"    >Cambio    </string>
@@ -555,7 +555,7 @@
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
     <!-- UNUSED string name="button_manual"    >Manual    </string -->
     <!-- UNUSED string name="button_measure"   >Medida   </string -->
-    <string name="button_photo"   >Fotos</string>
+    <!-- UNUSED string name="button_photo"   >Fotos</string -->
     <!-- UNUSED string name="button_sensor"  >Sensores</string -->
     <!-- UNUSED string name="button_direction">Rumbo/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Rumbo</string -->
@@ -573,12 +573,12 @@
     <!-- UNUSED string name="button_redo"      >Rehacer    </string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Enviar    </string>
-    <string name="button_rename"    >Renombrar   </string>
-    <string name="button_replace"   >Remplazar   </string>
+    <string name="button_rename"    >Renombrar </string>
+    <string name="button_replace"   >Reemplazar</string>
     <string name="button_reset"     >Resetear  </string>
     <string name="button_left"      >Izquierdo</string>
     <string name="button_right"     >Derecho</string>
-    <string name="button_clear"     >Borrar     </string>
+    <string name="button_clear"     >Borrar    </string>
     <string name="button_save"      >Guardar   </string>
     <!-- UNUSED string name="button_select"    >Seleccionar </string -->
     <string name="button_search"    >Buscar    </string>
@@ -716,7 +716,7 @@
     <string name="help_coeff">Mostrar coeficientes de calibración</string>
     <!-- TODO string name="help_color">Clear splay colors</string -->
     <string name="help_continue">Continuar el dibujo de una línea</string>
-    <string name="help_contour">Editar Contorno</string>
+    <!-- UNUSED string name="help_contour">Editar Contorno</string -->
     <string name="help_current_station">Última estación guardada</string>
     <string name="help_azimuth">Asistente referencia del rumbo</string>
     <string name="help_device">Opciones del dispositivo distoX</string>
@@ -1072,7 +1072,7 @@
   <string name="pref_max_shot_summary">Máxima longitud que debe alcanzar la toma [m]</string>
   <string name="pref_max_shot_message">Las tomas mas grandes de esta longitud se marcan como sobrepaso</string>
   <string name="pref_min_leg_title">Longitud mínima de la toma</string>
-  <string name="pref_min_leg_summary">Minima longitud de la toma [m]</string>
+  <string name="pref_min_leg_summary">Mínima longitud de la toma [m]</string>
   <string name="pref_min_leg_message">Las tomas más cortas que el mínimo, tienen fondo naranja</string>
   <string name="pref_backsight_title">Toma duplicada visual</string>
   <string name="pref_backsight_summary">Se duplican los datos en el diálogo de la toma manual</string>
@@ -1116,9 +1116,9 @@
   <string name="pref_bitmap_bgcolor_message">Exportar el color de fondo de dibujo a PNG</string>
   <string name="pref_acad_version_title">Versión de AutoCAD</string>
   <string name="pref_acad_version_summary">Versión de AutoCAD</string>
-  <string name="pref_dxf_scale_title">Escala de dibujo DXF</string>
-  <string name="pref_dxf_scale_summary">Factor de escala del dibujo DXF</string>
-  <string name="pref_dxf_scale_message">Factor de escala exportación del dibujo DXF</string>
+  <!-- UNUSED string name="pref_dxf_scale_title">Escala de dibujo DXF</string -->
+  <!-- UNUSED string name="pref_dxf_scale_summary">Factor de escala del dibujo DXF</string -->
+  <!-- UNUSED string name="pref_dxf_scale_message">Factor de escala exportación del dibujo DXF</string -->
   <string name="pref_dxf_blocks_title">Puntos finales de exportación tomas laterales DXF </string>
   <string name="pref_dxf_blocks_summary">Puntos finales de exploración DXF</string>
   <string name="pref_thumbnail_title">Tamaño miniaturas</string>
@@ -1128,8 +1128,8 @@
   <string name="pref_shot_timer_summary">Tiempo en segundos antes de medir la dirección</string>
   <string name="pref_shot_timer_message">Tiempo en segundos antes de medir la dirección</string>
   <string name="pref_beep_volume_title">Volumen del sonido del contador</string>
-  <string name="pref_beep_volume_summary">Nivel % del volumen del pitido del contador</string>
-  <string name="pref_beep_volume_message">Nivel % del volumen del pitido del contador</string>
+  <string name="pref_beep_volume_summary">Nivel %% del volumen del pitido del contador</string>
+  <string name="pref_beep_volume_message">Nivel %% del volumen del pitido del contador</string>
   <string name="pref_drawing_unit_title">Tamaño de los símbolos</string>
   <string name="pref_drawing_unit_summary">Escala de símbolos del dibujo</string>
   <string name="pref_drawing_unit_message">Tamaño de los símbolos del dibujo en la pantalla</string>

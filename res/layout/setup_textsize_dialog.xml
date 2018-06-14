@@ -51,6 +51,7 @@
       android:layout_height="wrap_content"
       android:layout_marginRight="@dimen/marginh"
       android:imeOptions="actionDone"
+      android:text="14"
       stype="@style/edit_number"
     />
     <Button android:id="@+id/btn_plus"

@@ -231,7 +231,7 @@
     <string name="group_reset">Reiniciar grupos</string>
 
     <!-- UNUSED string name="scale">Escala</string -->
-    <string name="reversed">invertido</string>
+    <!-- UNUSED string name="reversed">invertido</string -->
     <string name="options">opções</string>
     <string name="outline">contorno</string>
     <string name="out">fora</string>
@@ -291,7 +291,7 @@
     <string name="no_thmanager">O aplicativo ThManager não está instalado</string>
     <!-- UNUSED string name="no_db_viewer">DB_viewer não encontrado</string -->
     <string name="no_undelete">Nenhum item a ser restaurado</string>
-    <string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Azimute %4$.1f"</string>
+    <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Azimute %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Inclinação %4$.1f"</string>
 
     <string name="menu_3d">3D</string>
@@ -422,7 +422,7 @@
     <string name="sensor_type">tipo</string>
     <string name="sensor_value">valor</string>
     <string name="sensor_comment">comentário</string>
-    <string name="insufficient_data">informações insuficientes do sensor</string>
+    <!-- UNUSED string name="insufficient_data">informações insuficientes do sensor</string -->
 
     <!-- UNUSED string name="shot_clino">clinômetro</string -->
     <!-- UNUSED string name="shot_compass">bússola</string -->
@@ -501,7 +501,7 @@
     <string name="stat_duplicate">Visadas duplicadas - Qt: %1$d Ext: %2$.1f %3$s</string>
     <string name="stat_leg">Visadas - Qt: %1$d Ext: %2$.1f %3$.1f Proj horiz: %4$.1f %5$s</string>
     <string name="stat_length">Extensão total: %1$.1f %2$s</string>
-    <string name="stat_extlen">Comprimento 3D %1$.1f %2$s</string -->
+    <string name="stat_extlen">Comprimento 3D %1$.1f %2$s</string>
     <string name="stat_projlen">Projeção horizontal: %1$.1f %2$s</string>
     <string name="stat_loop">Poligonais: %1$d</string>
     <string name="stat_origin">Base inicial: %1$s</string>
@@ -526,7 +526,7 @@
     <string name="extended_profile">Perfil retificado</string>
     <!-- UNUSED string name="v_section">CORTE V</string -->
     <string name="h_section">CORTE H</string>
-    <string name="landscape">retrato</string>
+    <!-- UNUSED string name="landscape">retrato</string -->
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Falha na leitura da memória da DistoX</string>
@@ -539,7 +539,7 @@
     <!-- UNUSED string name="ask_close_survey">Fechar mapa?</string -->
     <string name="ask_gps_service">Configurar o serviço GPS?</string>
 
-    <string name="button_add"       >Novo       </string>
+    <!-- UNUSED string name="button_add"       >Novo       </string -->
     <string name="button_back"      >Voltar     </string>
     <string name="button_cancel"    >Cancelar   </string>
     <string name="button_change"    >Alterar    </string>
@@ -555,7 +555,7 @@
     <!-- UNUSED string name="button_gps_stop"  >Parar     </string -->
     <!-- UNUSED string name="button_manual"    >Manual    </string -->
     <!-- UNUSED string name="button_measure"   >Medir   </string -->
-    <string name="button_photo"   >Foto</string>
+    <!-- UNUSED string name="button_photo"   >Foto</string -->
     <!-- UNUSED string name="button_sensor"  >Sensores</string -->
     <!-- UNUSED string name="button_direction">Azimute/Clinômetro</string -->
     <!-- UNUSED string name="button_azimuth">Azimute</string -->
@@ -716,7 +716,7 @@
     <string name="help_coeff">Mostrar coeficientes de calibração</string>
     <string name="help_color">Voltar medidas auxiliares para cor padrão</string>
     <string name="help_continue">Continuar desenho de uma linha</string>
-    <string name="help_contour">Editar perfil</string>
+    <!-- UNUSED string name="help_contour">Editar perfil</string -->
     <string name="help_current_station">Bases salvas</string>
     <string name="help_azimuth">Referência para retificar perfil</string>
     <string name="help_device">Editar dispositivo em uso</string>
@@ -1106,9 +1106,9 @@
   <string name="pref_bitmap_bgcolor_message">Cor de fundo de imagem PNG de croqui exportado</string>
   <string name="pref_acad_version_title">Versão AutoCAD</string>
   <string name="pref_acad_version_summary">Versão AutoCAD</string>
-  <string name="pref_dxf_scale_title">Escala croqui DXF</string>
-  <string name="pref_dxf_scale_summary">Fator de escala croqui DXF</string>
-  <string name="pref_dxf_scale_message">Fator de escala na exportação de croqui em DXF</string>
+  <!-- UNUSED string name="pref_dxf_scale_title">Escala croqui DXF</string -->
+  <!-- UNUSED string name="pref_dxf_scale_summary">Fator de escala croqui DXF</string -->
+  <!-- UNUSED string name="pref_dxf_scale_message">Fator de escala na exportação de croqui em DXF</string -->
   <string name="pref_dxf_blocks_title">Ponto final med. aux. DXF</string>
   <string name="pref_dxf_blocks_summary">Ponto final de medida auxiliar DXF</string>
   <string name="pref_thumbnail_title">Tamanho Thumbnails</string>
@@ -1334,7 +1334,7 @@
   <string name="firmware_title">Atualizador Firmware</string>
   <string name="firmware_file_title">Arquivos Firmware</string>
   <string name="firmware_text">
-\n[1] Selecionar uma das 2 opções: "Enviar" um novo firmware para a DistoX ou "Baixar" o firmware atual da DistoX para para um arquivo local.
+\n[1] Selecionar uma das 2 opções: "Enviar" um novo firmware para a DistoX ou "Baixar" o firmware atual da DistoX para um arquivo local.
 \n[2] Selecione o arquivo a ser enviado ou baixado. Os arquivos de firmware estão na pasta bin.
 \n[3] Assegure-se de que a versão do firmware seja compatível com a versão do hardware da DistoX.
 \n[4] Colocar a DistoX2 na modalidade bootloader: manter o botão "MAIS ou MENOS" pressionado em quanto liga o Disto X com a tecla DIST.
