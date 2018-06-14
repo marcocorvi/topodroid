@@ -240,11 +240,11 @@
     <string name="in">Vo vnútri</string>
     <!-- UNUSED string name="none">none</string -->
     <!-- UNUSED string name="barrier_add">Ovira</string -->
-    <string name="hide_from">Skryť od</string>
+    <string name="hide_from">Skryť Do / Od</string>
     <!-- UNUSED string name="barrier_del">Vymažte prekážku</string -->
     <!-- UNUSED string name="hidden_add">Skryje mediálnu čiaru</string -->
     <!-- UNUSED string name="hidden_del">Zobraziť stredovú čiaru</string -->
-     <string name="hidden_show">Zobraziť zámery za bodom</string>
+     <string name="hidden_show">Zobraziť zámery Pred / Za bodom</string>
     <!-- UNUSED string name="splays_toggle">Prepnúť zobrazenie/skrytie pomocných zámer</string -->
     <string name="splays_on_off">Pomocné zámery</string>
     <string name="splays">pomocné zámery</string>
@@ -411,8 +411,8 @@
     <!-- UNUSED string name="converted_tdr2th2">Pretvorjena skice iz binarnega formata v th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Pretvori  skico iz binarnega formata v th2</string -->
     <string name="section_area">Sekcia oblasti: %1$.1f</string>
-    <!-- TODO string name="section_name">Sekcia Komentáre</string -->
-     <string name="scrap_outline">Obrysy</string>
+    <string name="section_name">Komentár k Priečnemu rezu</string>
+    <string name="scrap_outline">Obrysy</string>
 
     <!-- UNUSED string name="sensor">sensore</string -->
     <string name="sensor_gravity">Gravitácia</string>
