@@ -717,8 +717,8 @@
     <string name="help_help">Táto pomoc</string>
     <!-- UNUSED string name="help_manual">Manuale online</string -->
     <string name="help_measure">Merať vzdialenosti</string>
-    <string name="help_measure_type">Metódy merania: pevné body alebo krivka</string>
-    <string name="help_measure_undo">Zahoď posledný bod krivky</string>
+    <string name="help_measure_type">Metódy merania: jednotlivo / viacnásobne</string>
+    <string name="help_measure_undo">Späť</string>
     
     <string name="help_calib_check">Kalibrácia - Kontrolné merania</string>
     <string name="help_close">Zavrieť okno</string>
