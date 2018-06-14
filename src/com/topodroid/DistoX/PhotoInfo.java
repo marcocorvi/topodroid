@@ -13,14 +13,14 @@ package com.topodroid.DistoX;
 
 class PhotoInfo
 {
-  public long sid;       // survey id
-  public long id;        // photo id
-  public long shotid;    // shot id
-  public String mTitle;   // photo title FIXME TITLE
+  long sid;       // survey id
+  long id;        // photo id
+  long shotid;    // shot id
+  String mTitle;   // photo title FIXME TITLE
   String mShotName; // shot name
   // public String mName; // photo filename without extension ".jpg" and survey prefix dir = photo id
-  public String mDate;
-  public String mComment;
+  String mDate;
+  String mComment;
 
   PhotoInfo( long _sid, long _id, long _shotid, String t, String sn, String dt, String cmt )
   {

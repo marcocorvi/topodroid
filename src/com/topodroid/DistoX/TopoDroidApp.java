@@ -1067,12 +1067,12 @@ public class TopoDroidApp extends Application
   void setTextSize( int ts )
   {
     TDSetting.setTextSize( this, ts );
-    TDSetting.setLabelSize( ts*1.5f );
-    TDSetting.setStationSize( ts*1.2f );
+    TDSetting.setLabelSize( ts*3 );
+    TDSetting.setStationSize( ts*2 );
     SharedPreferences.Editor editor = mPrefs.edit();
     editor.putString( "DISTOX_TEXT_SIZE", Integer.toString(ts) );
-    editor.putString( "DISTOX_LABEL_SIZE", Float.toString(ts*1.5f) );
-    editor.putString( "DISTOX_STATION_SIZE", Float.toString(ts*1.2f) );
+    editor.putString( "DISTOX_LABEL_SIZE", Float.toString(ts*3) );
+    editor.putString( "DISTOX_STATION_SIZE", Float.toString(ts*2) );
     editor.apply();
     // FIXME-23 editor.commit();
   }

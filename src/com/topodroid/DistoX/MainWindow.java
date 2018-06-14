@@ -159,7 +159,7 @@ public class MainWindow extends Activity
   // -------------------------------------------------------------
   private boolean say_no_survey = true;
   private boolean say_not_enabled = true; // whether to say that BT is not enabled
-  boolean do_check_bt = true;             // one-time bluetooth check sentinel
+  private boolean do_check_bt = true;             // one-time bluetooth check sentinel
 
   // -------------------------------------------------------------------
 
@@ -256,7 +256,7 @@ public class MainWindow extends Activity
 
   // splitSurvey invokes this method with args: null, 0, old_sid, old_id
   //
-  void startSurvey( String value, int mustOpen ) // , long old_sid, long old_id )
+  private void startSurvey( String value, int mustOpen ) // , long old_sid, long old_id )
   {
     mApp.setSurveyFromName( value, false ); // open survey activity: tell app to update survey name+id, no forward
     Intent surveyIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, SurveyWindow.class );
@@ -833,11 +833,11 @@ public class MainWindow extends Activity
   // setup
   private TopoDroidAbout mTopoDroidAbout = null;
 
-  static final int SETUP_WELCOME = 0;
-  static final int SETUP_TEXTSIZE = 1;
-  static final int SETUP_BUTTONSIZE = 2;
-  static final int SETUP_DRAWINGUNIT = 3; 
-  static final int SETUP_DONE = 4; // this must be the last 
+  static final private int SETUP_WELCOME = 0;
+  static final private int SETUP_TEXTSIZE = 1;
+  static final private int SETUP_BUTTONSIZE = 2;
+  static final private int SETUP_DRAWINGUNIT = 3;
+  static final private int SETUP_DONE = 4; // this must be the last
 
   void doNextSetup( int setup ) 
   { 

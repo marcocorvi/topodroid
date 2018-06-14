@@ -40,7 +40,7 @@ class Archiver
   private final TopoDroidApp app;
   private final DataHelper app_data;
   private static final int BUF_SIZE = 2048;
-  private byte[] data = new byte[ BUF_SIZE ];
+  private byte[] data; // = new byte[ BUF_SIZE ];
 
   String zipname;
 

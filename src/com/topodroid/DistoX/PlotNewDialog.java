@@ -182,7 +182,7 @@ class PlotNewDialog extends MyDialog
       }
 
       if ( extended ) {
-        mMaker.makeNewPlot( name, start, extended, 0 );
+        mMaker.makeNewPlot( name, start, true, 0 ); // true = extended
       } else {
         mMaker.doProjectionDialog( name, start );
       }

@@ -26,9 +26,9 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 // import android.widget.Toast;
 
-import java.util.Locale;
+// import java.util.Locale;
 
-import android.util.Log;
+// import android.util.Log;
 
 /**
  */

@@ -22,7 +22,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.FontMetrics;
 import android.graphics.PointF;
 import android.graphics.RectF;
-import android.graphics.Path;
+// import android.graphics.Path;
 // import android.graphics.Path.Direction;
 
 import android.os.Bundle;
@@ -5256,16 +5256,16 @@ public class DrawingWindow extends ItemDrawer
         }
         if ( ok ) {
           if ( allSplay ) {
-            sites.add( new DLNSite( xs, ys ) );
+            if (sites != null) sites.add( new DLNSite( xs, ys ) );
           } else {
             // xs = (float)(sp.e) - x0;
             // yv = (float)(sp.s) - y0;
             float u = xs * uu.x + ys * uu.y;
             float v = xs * vv.x + ys * vv.y;
             if ( v > 0 ) {
-              pos.add( new PointF(u,v) );
+              if (pos != null) pos.add( new PointF(u,v) );
             } else {
-              neg.add( new PointF(u,v) );
+              if (neg != null) neg.add( new PointF(u,v) );
             }
           }
         } 
@@ -5288,15 +5288,15 @@ public class DrawingWindow extends ItemDrawer
             }
             if ( ok ) {
               if ( allSplay ) {
-                sites.add( new DLNSite( xs, ys ) );
+                if (sites != null) sites.add( new DLNSite( xs, ys ) );
               } else {
                 float u = xs * uu.x + ys * uu.y;
                 float v = xs * vv.x + ys * vv.y;
                 // Log.v("WALL", "Splay " + x2 + " " + y2 + " --> " + u + " " + v);
                 if ( /* allSplay || */ v > 0 ) { // allSplay is false
-                  pos.add( new PointF(u,v) );
+                  if (pos != null) pos.add( new PointF(u,v) );
                 } else {
-                  neg.add( new PointF(u,v) );
+                  if (neg != null) neg.add( new PointF(u,v) );
                 }
               }
             }

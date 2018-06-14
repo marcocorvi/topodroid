@@ -321,12 +321,13 @@ class ParserTherion
                 String date = vals[1];
                 if ( mDate == null ) mDate = date; // save centerline date
               } else if ( cmd.equals("team") ) {
-                StringBuilder sb = new StringBuilder();
-                for ( int j = 1; j < vals_len; ++j ) {
-                  sb.append(" ").append( vals[j] );
-                  // mTeam +=  " " + vals[j];
-                }
-                mTeam += sb.toString();
+                // StringBuilder sb = new StringBuilder();
+                // for ( int j = 1; j < vals_len; ++j ) {
+                //   sb.append(" ").append( vals[j] );
+                //   // mTeam +=  " " + vals[j];
+                // }
+                // mTeam += sb.toString();
+                mTeam += TopoDroidUtil.concat( vals, 1 );
               // } else if ( cmd.equals("explo-date") ) {
               // } else if ( cmd.equals("explo-team") ) {
               // } else if ( cmd.equals("instrument") ) {

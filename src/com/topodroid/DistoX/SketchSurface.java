@@ -525,7 +525,7 @@ class SketchSurface extends SketchShot
   // --------------------------------------------------------
   // borders
 
-  /** called by checkSide() below
+  /* called by checkSide() below
    */
   // private SketchSide getSide( int v1, int v2 )
   // {

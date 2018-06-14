@@ -272,7 +272,7 @@ class PTFile
     // void setColorPoint( String[] point ) { _color_point = point; }
 
 
-    void clear()
+  private void clear()
     {
       _trips.clear();
       _shots.clear();

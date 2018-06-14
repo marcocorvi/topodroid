@@ -201,10 +201,11 @@ class SurveyNewDialog extends MyDialog
       }
     }
     if ( init_station == null || init_station.length() == 0 ) init_station = "0";
-      
-    if ( date != null ) { date = date.trim(); } else { date = EMPTY; }
-    if ( team != null ) { team = team.trim(); } else { team = EMPTY; }
-    if ( comment != null ) { comment = comment.trim(); } else { comment = EMPTY; }
+
+    // date, team, comment always non-null
+    /* if ( date != null ) */ { date = date.trim(); } // else { date = EMPTY; }
+    /* if ( team != null ) */ { team = team.trim(); } // else { team = EMPTY; }
+    /* if ( comment != null ) */ { comment = comment.trim(); } // else { comment = EMPTY; }
 
     int xsections = mCBxsections.isChecked() ? SurveyInfo.XSECTION_PRIVATE
                                              : SurveyInfo.XSECTION_SHARED;

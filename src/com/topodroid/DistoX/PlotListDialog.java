@@ -223,7 +223,7 @@ class PlotListDialog extends MyDialog
       long plot_type = PlotInfo.PLOT_PLAN;
       Resources res = mApp.getResources();
       if ( res.getString( R.string.plan ).equals( type ) ) {
-        plot_type = PlotInfo.PLOT_PLAN;
+        plot_type = PlotInfo.PLOT_PLAN; // already assigned
       } else if ( res.getString( R.string.extended ).equals( type ) ) {
         plot_type = PlotInfo.PLOT_EXTENDED;
       } else if ( res.getString( R.string.profile ).equals( type ) ) {

@@ -586,7 +586,11 @@ class DistoXProtocol
         if ( mBuffer[0] != (byte)( 0x38 ) ) break;
         int reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1]);
         if ( reply_addr != addr ) break;
-        for (int i=3; i<7; ++i) result.data[k+i-3] = mBuffer[i];
+        // for (int i=3; i<7; ++i) result.data[k+i-3] = mBuffer[i];
+        result.data[k  ] = mBuffer[0];
+        result.data[k+1] = mBuffer[1];
+        result.data[k+2] = mBuffer[2];
+        result.data[k+3] = mBuffer[3];
       }
       if ( k == 8 ) {
         addr = index2addrX310( start ) + 16;
@@ -681,7 +685,11 @@ class DistoXProtocol
     int reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1]);
     if ( reply_addr != addr ) return null;
     byte[] ret = new byte[4];
-    for (int i=3; i<7; ++i) ret[i-3] = mBuffer[i];
+    // for (int i=3; i<7; ++i) ret[i-3] = mBuffer[i];
+    ret[0] = mBuffer[3];
+    ret[1] = mBuffer[4];
+    ret[2] = mBuffer[5];
+    ret[3] = mBuffer[6];
     return ret;
   }
 
@@ -712,7 +720,11 @@ class DistoXProtocol
         if ( mBuffer[0] != (byte)( 0x38 ) ) break;
         int reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1]);
         if ( reply_addr != addr ) break;
-        for (int i=3; i<7; ++i) result.data[k+i-3] = mBuffer[i];
+        // for (int i=3; i<7; ++i) result.data[k+i-3] = mBuffer[i];
+        result.data[k  ] = mBuffer[0];
+        result.data[k+1] = mBuffer[1];
+        result.data[k+2] = mBuffer[2];
+        result.data[k+3] = mBuffer[3];
       }
       if ( k == 8 ) {
         data.add( result );

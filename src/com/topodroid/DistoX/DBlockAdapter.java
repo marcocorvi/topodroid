@@ -302,7 +302,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   public View getView( int pos, View convertView, ViewGroup parent )
   {
     DBlock b = mItems.get( pos );
-    ViewHolder holder = null; 
+    ViewHolder holder; // = null;
     if ( convertView == null ) {
       convertView = mLayoutInflater.inflate( R.layout.dblock_row, parent, false );
       holder = new ViewHolder( 

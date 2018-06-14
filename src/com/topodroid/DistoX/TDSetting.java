@@ -1343,11 +1343,11 @@ class TDSetting
     mLineStyle = LINE_STYLE_BEZIER; // default
     mLineType  = 1;
     if ( style.equals( "0" ) ) {
-      mLineStyle = LINE_STYLE_BEZIER;
-      mLineType  = 1;
+      mLineStyle = LINE_STYLE_BEZIER; // already assigned
+      mLineType  = 1;                 // alreday assigned
     } else if ( style.equals( "1" ) ) {
       mLineStyle = LINE_STYLE_ONE;
-      mLineType  = 1;
+      mLineType  = 1;                 // already assignd
     } else if ( style.equals( "2" ) ) {
       mLineStyle = LINE_STYLE_TWO;
       mLineType  = 2;

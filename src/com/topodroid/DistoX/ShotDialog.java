@@ -728,7 +728,7 @@ class ShotDialog extends MyDialog
       shot_to = mETto.getText().toString();
       shot_to = TopoDroidUtil.noSpaces( shot_to );
       if ( shot_to.length() > 0 && shot_from.length() > 0 ) {
-        String temp = new String( shot_from );
+        String temp = shot_from; // new String( shot_from );
         shot_from = shot_to;
         shot_to = temp;
         mETfrom.setText( shot_from );

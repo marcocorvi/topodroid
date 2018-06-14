@@ -104,13 +104,19 @@ class TopoDroidUtil
     }
   }
   
-
+  // concatenate strings using a single-space separator
+  // empty strings are skipped
   static String concat( String[] vals, int k )
   {
     if ( k < vals.length ) {
       StringBuilder sb = new StringBuilder();
-      sb.append(vals[k]);
-      for (++k; k < vals.length; ++k) sb.append(" ").append(vals[k]);
+      for ( ; k<vals.length; ++k ) if ( vals[k].length() > 0 ) {
+        sb.append(vals[k]);
+        break;
+      }
+      for (++k; k < vals.length; ++k) {
+        if ( vals[k].length() > 0 ) sb.append(" ").append(vals[k]);
+      }
       return sb.toString();
     }
     return "";

@@ -135,7 +135,7 @@ class StationName
         from = DistoXStationName.incrementName( blk0.mFrom, sts );
       } else { // backward
         // increment = false;
-        flip = false;
+        flip = false; // already assigned
       }
     } else {
       from = blk0.mFrom;
@@ -147,7 +147,7 @@ class StationName
         from = DistoXStationName.incrementName( blk0.mTo, sts );
       } else { // backward
         // increment = false;
-        flip = false;
+        flip = false; // already assigned
       }
     }
 

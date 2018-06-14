@@ -369,7 +369,7 @@ class ShotNewDialog extends MyDialog
       long shot_extend = DBlock.EXTEND_RIGHT; // DBlock.EXTEND_UNSET; // FIXME-EXTEND
       if ( mRadioLeft.isChecked() ) { shot_extend = -1; }
       else if ( mRadioVert.isChecked() ) { shot_extend = 0; }
-      else if ( mRadioRight.isChecked() ) { shot_extend = 1; }
+      else if ( mRadioRight.isChecked() ) { shot_extend = 1; } // already assigned
       else { // let TopoDroid choose
         try {
           float bx = Float.parseFloat( bearing.replace(',','.') );

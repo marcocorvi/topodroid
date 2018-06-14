@@ -23,7 +23,7 @@ import android.widget.LinearLayout;
 // import android.util.DisplayMetrics;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+// import android.widget.ImageView;
 // import android.widget.Toast;
 
 import android.text.TextWatcher;

@@ -244,8 +244,8 @@ class GeomagLib
     };
 
     /*   Execution of the forward T.M. algorithm  */
-    boolean XYonly = false;
-    return MAG_TMfwd4(Eps, Epssq, K0R4, K0R4oa, Acoeff, utm0, K0, falseE, falseN, XYonly, Lambda, Phi );
+    // boolean XYonly = false;
+    return MAG_TMfwd4(Eps, Epssq, K0R4, K0R4oa, Acoeff, utm0, K0, falseE, falseN, false, Lambda, Phi );
   }
 
   /** The function MAG_GetUTMParameters converts geodetic (latitude and

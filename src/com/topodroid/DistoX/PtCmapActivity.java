@@ -42,8 +42,8 @@ public class PtCmapActivity extends Activity
 {
   private TopoDroidApp mApp;
 
-  static String mCmapLine[] = { "wall", "border", "pit", "rock-border", "arrow", "contour", "user" };
-  static String mCmapPoint[] = { "air-draught", "water-flow", "stalactite", "blocks", "debris", "pebbles", "clay" };
+  static private String mCmapLine[] = { "wall", "border", "pit", "rock-border", "arrow", "contour", "user" };
+  static private String mCmapPoint[] = { "air-draught", "water-flow", "stalactite", "blocks", "debris", "pebbles", "clay" };
 
   private EditText mETline[];
   private EditText mETpoint[];

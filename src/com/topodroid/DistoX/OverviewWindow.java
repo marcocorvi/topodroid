@@ -153,12 +153,12 @@ public class OverviewWindow extends ItemDrawer
     private static final float ZOOM_INC = 1.4f;
     private static final float ZOOM_DEC = 1.0f/ZOOM_INC;
 
-    static final int MODE_MOVE = 2;
-    static final int MODE_ZOOM = 4;
+    static final private int MODE_MOVE = 2;
+    static final private int MODE_ZOOM = 4;
 
-    final static int MEASURE_OFF   = 0;
-    final static int MEASURE_START = 1;
-    final static int MEASURE_ON    = 2;
+    final static private int MEASURE_OFF   = 0;
+    final static private int MEASURE_START = 1;
+    final static private int MEASURE_ON    = 2;
     
 
     private int mTouchMode = MODE_MOVE;

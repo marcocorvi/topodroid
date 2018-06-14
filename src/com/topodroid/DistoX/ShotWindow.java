@@ -101,12 +101,12 @@ public class ShotWindow extends Activity
                         , INewPlot
                         , IPhotoInserter
 {
-  final static int BTN_DOWNLOAD  = 0;
-  final static int BTN_BLUETOOTH = 1;
-  final static int BTN_PLOT      = 3;
-  final static int BTN_MANUAL    = 5;
-  final static int BTN_SEARCH    = 7;
-  final static int BTN_AZIMUTH   = 8;
+  final static private int BTN_DOWNLOAD  = 0;
+  final static private int BTN_BLUETOOTH = 1;
+  final static private int BTN_PLOT      = 3;
+  final static private int BTN_MANUAL    = 5;
+  final static private int BTN_SEARCH    = 7;
+  final static private int BTN_AZIMUTH   = 8;
 
   private DataHelper mApp_mData;
 

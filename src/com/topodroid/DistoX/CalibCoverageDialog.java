@@ -28,7 +28,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.View;
 
-import android.util.Log;
+// import android.util.Log;
 
 class CalibCoverageDialog extends MyDialog
                           implements View.OnClickListener

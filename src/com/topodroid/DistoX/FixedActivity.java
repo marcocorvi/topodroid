@@ -185,10 +185,10 @@ public class FixedActivity extends Activity
   {
     if ( comment == null ) comment = "";
     FixedInfo f = addLocation( name, lng, lat, alt, asl, comment, source );
-    if ( f != null ) {
+    // if ( f != null ) { // always true
       mFixedAdapter.add( f );
       mList.invalidate();
-    }
+    // }
   }
 
   private FixedInfo addLocation( String station, double lng, double lat, double h_ell, double h_geo,

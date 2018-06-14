@@ -80,7 +80,7 @@ class ItemRecentDialog extends MyDialog
   private ItemButton mRecentA[];
 
   private Button mBTsize;
-  int mScale;
+  private int mScale;
   private int nrRecent;
 
   // static int mLinePos;

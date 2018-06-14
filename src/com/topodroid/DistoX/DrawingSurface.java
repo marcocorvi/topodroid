@@ -22,8 +22,8 @@ import android.view.SurfaceView;
 
 // import android.view.MotionEvent;
 
-import android.graphics.Path;
-import android.graphics.Paint;
+// import android.graphics.Path;
+// import android.graphics.Paint;
 
 import java.util.ArrayList;
 // import java.util.TreeSet;

@@ -62,7 +62,7 @@ class ConnectDialog extends MyDialog
 
   private final TopoDroidApp mApp;
 
-  private String mName = null;
+  private String mName; // = null;
   private Set<BluetoothDevice> mDevices;
 
   // void setButtons( int state ) 

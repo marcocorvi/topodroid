@@ -810,7 +810,6 @@ class DrawingIO
           DrawingLinePath path = null;
           int what = dis.read();
           // Log.v("DistoXX", "Read " + what );
-          path = null;
           switch ( what ) {
             case 'V':
               version = dis.readInt();

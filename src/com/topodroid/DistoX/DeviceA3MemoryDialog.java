@@ -69,7 +69,7 @@ class DeviceA3MemoryDialog extends MyDialog
     super.onCreate( bundle );
 
     initLayout( R.layout.device_a3_memory_dialog, R.string.memoryA3 );
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT ); // may produce NullPointerException
+    // getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT ); // already in initLayout
 
     mTVshead = (TextView) findViewById( R.id.tv_stored_head );
     mTVstail = (TextView) findViewById( R.id.tv_stored_tail );

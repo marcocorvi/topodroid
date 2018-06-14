@@ -61,7 +61,7 @@ class CHTriangle extends CHFacet
   {
     CHTriangle[] ret = new CHTriangle[3];
 
-    Vector va=null, vb=null, vc=null;
+    Vector va, vb, vc;
     if ( p == mV[0] ) {
       va = mV[0];  vb = mV[1];  vc = mV[2];
     } else if ( p == mV[1] ) {

@@ -123,15 +123,15 @@ class DrawingAreaPath extends DrawingPointLinePath
       // setPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
 
       int has_cp;
-      float x1, y1, x2, y2, x0, y0, t;
+      float x0, y0, t;
       x0 = x + dis.readFloat( );
       y0 = y + dis.readFloat( );
       has_cp = dis.read();
       if ( has_cp == 1 ) { // consume 4 floats
-        x1 = x + dis.readFloat();
-        y1 = y + dis.readFloat();
-        x2 = x + dis.readFloat();
-        y2 = y + dis.readFloat();
+        /* x1 = x + */ dis.readFloat();
+        /* y1 = y + */ dis.readFloat();
+        /* x2 = x + */ dis.readFloat();
+        /* y2 = y + */ dis.readFloat();
       }
       ret.addStartPoint( x0, y0 );
       // Log.v("DistoX", "A start " + x + " " + y );
@@ -141,10 +141,10 @@ class DrawingAreaPath extends DrawingPointLinePath
         has_cp = dis.read();
         // Log.v("DistoX", "A point " + x + " " + y + " " + has_cp );
         if ( has_cp == 1 ) {
-          x1 = x + dis.readFloat();
-          y1 = y + dis.readFloat();
-          x2 = x + dis.readFloat();
-          y2 = y + dis.readFloat();
+          float x1 = x + dis.readFloat();
+          float y1 = y + dis.readFloat();
+          float x2 = x + dis.readFloat();
+          float y2 = y + dis.readFloat();
           ret.addPoint3( x1, y1, x2, y2, x0, y0 );
         } else {
           ret.addPoint( x0, y0 );

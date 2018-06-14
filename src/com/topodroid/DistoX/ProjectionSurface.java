@@ -85,7 +85,7 @@ public class ProjectionSurface extends SurfaceView
 
     void clearReferences( ) { mCommandManager.clearReferences(); }
 
-    void refreshSurface( SurfaceHolder holder )
+    private void refreshSurface( SurfaceHolder holder )
     {
       // if ( mZoomer != null ) mZoomer.checkZoomBtnsCtrl();
       Canvas canvas = null;

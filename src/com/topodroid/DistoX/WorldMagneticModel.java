@@ -166,8 +166,8 @@ class WorldMagneticModel
   //   return (((i3*256 + i2)*256 + i1)*256 + i0);
   // }
 
-  final static int N = 1038961;
-  final static int ND = 7002;
+  final static private int N = 1038961;
+  final static private int ND = 7002;
 
   // this is correct
   static private int byteToInt( byte b[] )

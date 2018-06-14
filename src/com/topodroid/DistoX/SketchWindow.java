@@ -1350,7 +1350,7 @@ public class SketchWindow extends ItemDrawer
     // ============================== DOWN ===============================
     else if (action == MotionEvent.ACTION_DOWN)
     {
-      if ( mMode == SketchDef.MODE_MOVE /** || mMode == SketchDef.MODE_EDIT **/ ) {
+      if ( mMode == SketchDef.MODE_MOVE /* || mMode == SketchDef.MODE_EDIT */ ) {
         // mActivity.setTitle( R.string.title_move );
         mSaveX = x_canvas;
         mSaveY = y_canvas;

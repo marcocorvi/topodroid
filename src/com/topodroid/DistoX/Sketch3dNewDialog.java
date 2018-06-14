@@ -79,13 +79,13 @@ class Sketch3dNewDialog extends MyDialog
       String next  = mEditNext.getText().toString();
 
       name = TopoDroidUtil.noSpaces( name );
-      if ( name == null || name.length() == 0 ) {
+      if ( /* name == null || */ name.length() == 0 ) {
         error = mContext.getResources().getString( R.string.error_name_required );
         mEditName.setError( error );
         return;
       } else {
         start = TopoDroidUtil.noSpaces( start );
-        if ( start == null || start.length() == 0 ) {
+        if ( /* start == null || */ start.length() == 0 ) {
           error = mContext.getResources().getString( R.string.error_start_required );
           mEditStart.setError( error );
           return;

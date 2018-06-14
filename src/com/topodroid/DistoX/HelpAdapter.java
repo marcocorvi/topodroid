@@ -37,7 +37,7 @@ class HelpAdapter extends ArrayAdapter< HelpEntry >
     super( ctx, id, items );
     mParent = parent;
 
-    if ( items != null ) {
+    if ( items != null ) { // always true
       mItems = items;
     } else {
       mItems = new ArrayList<>();

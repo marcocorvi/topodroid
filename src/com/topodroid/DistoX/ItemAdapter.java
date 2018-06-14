@@ -46,7 +46,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
     mType   = type;
     mShowSelected = true;
 
-    if ( items != null ) {
+    if ( items != null ) { // always true
       mItems = items;
       for ( ItemSymbol item : items ) {
         item.setOnClickListener( this );
