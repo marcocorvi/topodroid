@@ -294,8 +294,8 @@
     <string name="no_thmanager">ThManager app nie je nainštalovaná</string>
     <!-- UNUSED string name="no_db_viewer">DB_viewer app sa nenašla</string -->
     <string name="no_undelete">Žiadna položka na Obnovenie </string>
-    <!-- FIXME string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Pozicija %4$.1f"</string -->
-    <!-- FIXME string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Naklon %4$.1f"</string -->
+    <string name="format_measure_plan">D %1$.2f %2$.2f X %3$.2f Y %4$.2f A. %5$.1f"</string>
+    <string name="format_measure_profile">D %1$.2f %2$.2f X %3$.2f Y %4$.2f C. %5$.1f"</string>
 
     <string name="menu_3d">3D</string>
     <string name="menu_about">O PROGRAME</string>
