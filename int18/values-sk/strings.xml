@@ -163,8 +163,8 @@
     <string name="import_calib_already">Kalibrácia už existuje</string>
     <string name="import_calib_mismatch">Calib.: Zariadenie nesúhlasí</string>
     <string name="import_calib_no_data">Calib. súbor: Žiadne dáta</string>
+    <string name="import_calib_io_error">Calib. súbor: Chyba čítania</string>
     <string name="import_zip_ok">Import zip súboru úspešný</string>
-    <!-- FIXME REPEATED string name="import_zip_ok">zip súbor úspešne importovaný</string -->
     <!-- UNUSED string name="import_zip_wait">Importovanie zip súboru vyžaduje čas. Prosím, čakajte &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Salvataggio disegno &#8230; attendi &#8230;</string -->
     <string name="MT_points_none">Chýbajúci bod MobileTopographer</string>
@@ -240,17 +240,17 @@
     <string name="in">Vo vnútri</string>
     <!-- UNUSED string name="none">none</string -->
     <!-- UNUSED string name="barrier_add">Ovira</string -->
-    <string name="hide_from">Skryť od</string>
+    <string name="hide_from">Skryť Do / Od</string>
     <!-- UNUSED string name="barrier_del">Vymažte prekážku</string -->
     <!-- UNUSED string name="hidden_add">Skryje mediálnu čiaru</string -->
     <!-- UNUSED string name="hidden_del">Zobraziť stredovú čiaru</string -->
-     <string name="hidden_show">Zobraziť zámery za bodom</string>
+     <string name="hidden_show">Zobraziť zámery Pred / Za bodom</string>
     <!-- UNUSED string name="splays_toggle">Prepnúť zobrazenie/skrytie pomocných zámer</string -->
     <string name="splays_on_off">Pomocné zámery</string>
     <string name="splays">pomocné zámery</string>
     <string name="splays_show">Zobraziť pomocné zámery</string>
-    <!-- TODO string name="foresurface_show">Show fore surface</string -->
-    <!-- TODO string name="fmt_listen">LISTEN | %1$s</string -->
+    <string name="foresurface_show">Zobraz povrch</string>
+    <string name="fmt_listen">POČÚVAJ | %1$s</string>
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Zemepisná šírka %1$s</string>
     <string name="fmt_longitude">Zemepisná dĺžka %1$s</string>
@@ -294,8 +294,8 @@
     <string name="no_thmanager">ThManager app nie je nainštalovaná</string>
     <!-- UNUSED string name="no_db_viewer">DB_viewer app sa nenašla</string -->
     <string name="no_undelete">Žiadna položka na Obnovenie </string>
-    <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Pozicija %5$.1f"</string>
-    <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Naklon %5$.1f"</string>
+    <string name="format_measure_plan">D %1$.2f %2$.2f X %3$.2f Y %4$.2f A. %5$.1f"</string>
+    <string name="format_measure_profile">D %1$.2f %2$.2f X %3$.2f Y %4$.2f C. %5$.1f"</string>
 
     <string name="menu_3d">3D</string>
     <string name="menu_about">O PROGRAME</string>
@@ -411,8 +411,8 @@
     <!-- UNUSED string name="converted_tdr2th2">Pretvorjena skice iz binarnega formata v th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Pretvori  skico iz binarnega formata v th2</string -->
     <string name="section_area">Sekcia oblasti: %1$.1f</string>
-    <!-- TODO string name="section_name">Sekcia Komentáre</string -->
-     <string name="scrap_outline">Obrysy</string>
+    <string name="section_name">Komentár k Priečnemu rezu</string>
+    <string name="scrap_outline">Obrysy</string>
 
     <!-- UNUSED string name="sensor">sensore</string -->
     <string name="sensor_gravity">Gravitácia</string>
@@ -434,7 +434,7 @@
     <string name="shots_delete">Odstrániť merania ?</string>
     <string name="shot_check">Označiť meranie, ako kontrolné meranie ?</string>
     <string name="shot_from">Z</string>
-    <string name="shot_info">Zadajte meranie</string>
+    <string name="shot_info">Pridajte zámeru pred zvolený bod</string>
     <!-- UNUSED string name="shot_length">longueur</string -->
     <string name="shot_note">Poznámka</string>
     <string name="shot_not_found">Meranie sa nenašlo</string>
@@ -505,8 +505,8 @@
     <string name="stat_stddev_dip">D stddev %1$.1f stupňa (priemer %2$.1f stupňa)</string>
     <string name="stat_component">Mapovanie rozdelené na celky %1$d</string>
     <string name="stat_depth">Hĺbka %1$.1f %2$s %3$.1f %4$s"</string>
-    <string name="stat_duplicate">Opakované zámery %1$d %2$.1f %3$s</string>
-    <string name="stat_leg">Hlavné zámery %1$d %2$.1f %3$.1f %4$.1f %5$s</string>
+    <string name="stat_duplicate">Opakované zámery (počet-dĺžka) %1$d %2$.1f %3$s</string>
+    <string name="stat_leg">Hlavné zámery (počet-dĺžka-dĺžka v pôdoryse) %1$d %2$.1f %3$.1f %4$.1f %5$s</string>
     <string name="stat_length">Dĺžka %1$.1f %2$s</string>
     <string name="stat_extlen">3D dĺžka %1$.1f %2$s</string>
     <string name="stat_projlen">Dĺžka pôdorysu %1$.1f %2$s</string>
@@ -516,7 +516,7 @@
     <string name="stat_shot">Merania %1$d,   Opakované %2$d,   Povrchové %3$d</string>
     <string name="stat_splay">Pomocné zámery %1$d</string>
     <string name="stat_station">Staničenia %1$d</string>
-    <string name="stat_surface">Povrchové zámery %1$d %2$.1f %3$s</string>
+    <string name="stat_surface">Povrchové zámery (počet-dĺžka) %1$d %2$.1f %3$s</string>
     <string name="stat_wens">Z - %1$.0f  V - %2$.0f  S - %3$.0f  J - %4$.0f [%5$s]</string>
     <string name="stat_angle_error">Uhlové chyby %1$.2f ± %2$.2f"</string>
     <string name="shot_title">Meranie %1$s - %2$s"</string>
@@ -645,7 +645,7 @@
     <string name="title_sketch_new">Nový 3D nákres</string>
     <!-- UNUSED string name="title_sketch_edit">Edit 3D surface</string -->
     <string name="title_sketch_shot">Nová zámera</string>
-    <string name="title_sketch_refs">Režim zobrazenia</string>
+    <string name="title_sketch_refs">Výber možností zobrazenia</string>
     <!-- UNUSED string name="title_sketch_section_type">Tipo di sezioni</string -->
     <!-- UNUSED string name="title_sketch_select">Seleziona un oggetto</string -->
 
@@ -724,14 +724,14 @@
     <string name="help_close">Zavrieť okno</string>
     <string name="help_coeff">Ukázať Kalibračné koeficienty vybranej kalibrácie</string>
     <string name="help_color">Vymazať farbu pomocnej zámery</string>
-    <string name="help_continue">Pokračovať v kreslení čiary</string>
+    <string name="help_continue">Výbrať možnosti spájania Čiar</string>
     <!-- UNUSED string name="help_contour">Editovať obrysy</string -->
     <string name="help_current_station">Uložené meračské body</string>
     <string name="help_azimuth">Smerová orientácia</string>
     <string name="help_device">DistoX</string>
     <string name="help_add_topodroid">Začať nové Mapovanie</string>
     <string name="help_import">Importovať zip súbor alebo meračský súbor</string>
-    <string name="help_symbol">Výbrať symboly Palety</string>
+    <string name="help_symbol">Pridať Symboly do Palety</string>
     <string name="help_therion">App Therion manažér</string>
     <!-- UNUSED string name="help_database">App database (SQliteViewer)</string -->
     <string name="help_prefs">Nastavenia</string>
@@ -740,7 +740,7 @@
     <string name="help_info_topodroid">Informácie o TopoDroide</string>
     <string name="help_download">Stiahnuť kalibračné dáta z DistaX</string>
     <!-- UNUSED string name="help_splay">Assegna capisaldi agli splay automaticamente</string -->
-    <string name="help_display">Režim zobrazenia</string>
+    <string name="help_display">Výber možností zobrazenia</string>
     <string name="help_display_calib">Zobraziť / skryť vymazané zámery</string>
     <string name="help_validate">Porovnať viaceré kalibrácie</string>
     <string name="help_overview">Celkový pohľad</string>
@@ -758,7 +758,7 @@
     <!-- UNUSED string name="help_move">Režim presunu/zoom</string -->
     <string name="help_draw">Režim kreslenia</string>
     <string name="help_edit">Režim úprav</string>
-    <string name="help_refs">Vybrať režim zobrazenia</string>
+    <string name="help_refs">Vybrať možnosti zobrazenia</string>
     <string name="help_rename">Premenovať názov jaskyne</string>
     <string name="help_plot_rename">Premenovať/Vymazať nákres</string>
     <string name="help_plot_switch">Prepínanie medzi nákresmi</string>
@@ -768,20 +768,20 @@
     <!-- UNUSED string name="help_tdr2th2">Conversione formato disegno da binario a th2</string -->
     <string name="help_toggle_plot">Prepínať medzi Pôdorysom a Rozvinutým rezom/Priemetom</string>
     <!-- UNUSED string name="help_trash">ELimina disegno</string -->
-    <string name="help_undo">Odstrániť poslednú akciu kreslenia</string>
-    <string name="help_redo">Zopakovať poslednú akciu kreslenia</string>
-    <string name="help_symbol_plot">Vybrať symboly na kreslenie</string>
+    <string name="help_undo">Odstrániť poslednú akciu</string>
+    <string name="help_redo">Zopakovať poslednú akciu</string>
+    <string name="help_symbol_plot">Vybrať Symboly na kreslenie</string>
     <string name="help_delete_item">Odstrániť prvok nákresu</string>
     <string name="help_range">Presunúť časť Čiary</string>
     <!-- UNUSED string name="help_clear">Pulisci selezione</string -->
     <string name="help_eraser">Režim mazania</string>
     <string name="help_select_mode">Položky na výber - indikácia</string>
     <string name="help_erase_mode">Položky na výber - mazanie</string>
-    <string name="help_erase_size">Velkosť gumy [S/M/L]</string>
+    <string name="help_erase_size">Rozsah výberu objektov/gumy [S/M/L]</string>
     <string name="help_previous">Prejsť na predchádzajúci objekt vo výbere</string>
-    <string name="help_next">Prejsť nanasledujúci objekt vo výbere</string>
-    <string name="help_recover">Obnoviť nákresu zo zálohy</string>
-    <string name="help_zoom_fit">Zmeniť orientáciu obrazovky Portrait/Landscape</string>
+    <string name="help_next">Prejsť na nasledujúci objekt vo výbere</string>
+    <string name="help_recover">Obnoviť nákres zo zálohy</string>
+    <string name="help_zoom_fit">Zmeniť orientáciu obrazovky Sever/Západ</string>
    
     <string name="help_line_point">Akcie pre "body" Čiary: spojiť, rozdeliť, vystrihnúť, odstrániť</string>
 <!--
@@ -864,11 +864,11 @@
     <string name="title_fixed_gps">Lokalizácia: GPS</string>
     <string name="title_fixed_add">Lokalizácia: Manuálne</string>
     <string name="title_manual">TopoDroid - používateľská príručka</string>
-    <string name="title_mode">Režim Zobrazenia</string>
+    <string name="title_mode">Výber možností zobrazenia</string>
     <string name="title_move">Režim Posunu</string>
     <string name="title_note">Poznámky</string>
     <string name="title_photo">Foto</string>
-    <string name="title_photo_comment">Komentár fotky</string>
+    <string name="title_photo_comment">Fotografia</string>
     <string name="title_plot_save">Exportovať nákres </string>
     <string name="title_plot_merge">Zlúčiť nákresy</string>
     <string name="title_plot_reload">Znovu načítať nákres</string>
