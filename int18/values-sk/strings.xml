@@ -717,8 +717,8 @@
     <string name="help_help">Táto pomoc</string>
     <!-- UNUSED string name="help_manual">Manuale online</string -->
     <string name="help_measure">Merať vzdialenosti</string>
-    <string name="help_measure_type">Metódy merania: pevné body alebo krivka</string>
-    <string name="help_measure_undo">Zahoď posledný bod krivky</string>
+    <string name="help_measure_type">Metódy merania: jednotlivo / viacnásobne</string>
+    <string name="help_measure_undo">Späť</string>
     
     <string name="help_calib_check">Kalibrácia - Kontrolné merania</string>
     <string name="help_close">Zavrieť okno</string>
@@ -1058,9 +1058,10 @@
   <string name="pref_reduce_angle_title">Vyrovnávací uhol</string>
   <string name="pref_reduce_angle_summary">Minimálny segmentový uhol pre vyrovnávanie čiar</string>
   <string name="pref_reduce_angle_message">Minimálny segmentový uhol pre vyrovnávanie čiar</string>
-    
+   
+	
   <string name="pref_survey_stations_title">Politika číslovania bodov</string>
-  <string name="pref_survey_stations_summary">Zhrnutie bodového priekumu</string>
+  <string name="pref_survey_stations_summary">Politika číslovania bodov</string>
   <string name="pref_accel_thr_title">Tolerancia chvenia - A</string>
   <string name="pref_accel_thr_summary">Tolerancia hodnôt chvenia DistoX - A</string>
   <string name="pref_accel_thr_message">Tolerancia hodnôt chvenia - A</string>
@@ -1081,7 +1082,7 @@
   <string name="pref_min_leg_summary">Minimalna dĺžka hlavnej zámery [m]</string>
   <string name="pref_min_leg_message">Hlavné zámery pod týmto minimom sú oranžovo podfarbené</string>
   <string name="pref_backsight_title">Spätná zámera</string>
-  <string name="pref_backsight_summary">Polia spätnej zámery v MENU bodu merania pri manuálnom zadávaní bodu</string>
+  <string name="pref_backsight_summary">Zobrazí Polia spätnej zámery v MENU bodu merania pri manuálnom zadávaní bodu</string>
   <string name="pref_backshot_title">Režim spätnej zámery DistoX</string>
   <string name="pref_backshot_summary">DistoX v režime spätných zámer - merania z koncového bodu na počiatočný</string>
   <string name="pref_prev_next_title">Tlačidlá Predchádzajúci / Nasledujúce</string>
@@ -1109,16 +1110,16 @@
   <string name="pref_init_station_summary">Predvolené číslo počiatočného meračského bodu</string>
   <string name="pref_init_station_message">Predvolené číslo počiatočného meračského bodu</string>
   <string name="pref_station_names_title">Názvy meračských bodov</string>
-  <string name="pref_station_names_summary">Metóda pomenovania meracích bodov</string>
+  <string name="pref_station_names_summary">Názvy meračských bodov</string>
 
   <string name="pref_hthr_title">Prahová hodnota priečneho rezu Vert/Horizont</string>
   <string name="pref_hthr_summary">Uhol hlavných zámer cez ktorý priečne rezy sú horizontálne</string>
   <string name="pref_hthr_message">Uhol hlavných zámer cez ktorý priečne rezy sú horizontálne</string>
   <string name="pref_bitmap_scale_title">Rozlíšenie PNG</string>
-  <string name="pref_bitmap_scale_summary">Rozlíšenie výkresov v PNG</string>
+  <string name="pref_bitmap_scale_summary">Rozlíšenie pri exporte výkresov PNG</string>
   <string name="pref_bitmap_scale_message">Rozlíšenie pri exporte výkresov PNG</string>
   <string name="pref_bitmap_bgcolor_title">Farba pozadia pre PNG</string>
-  <string name="pref_bitmap_bgcolor_summary">Farba pozadia výkresu PNG</string>
+  <string name="pref_bitmap_bgcolor_summary">Nastavenie farby pozadia pre expotr nákresov vo formáte PNG</string>
   <string name="pref_bitmap_bgcolor_message">Nastavenie farby pozadia pre expotr nákresov vo formáte PNG</string>
   <string name="pref_acad_version_title"> Verzia AutoCADu</string>
   <string name="pref_acad_version_summary">Verzia AutoCADu</string>
@@ -1164,9 +1165,9 @@
   <string name="pref_error_dialogtitle">Chyba kalibrácie</string>
   <string name="pref_error_message">Minimálna chyba odchýliek koeficientov kalibrácie</string>
   <string name="pref_iter_title">Opakovanie</string>
-  <string name="pref_iter_summary">Maximálny počet opakovania kalibračného algoritmu</string>
+  <string name="pref_iter_summary">Maximálny počet opakovaní kalibračného algoritmu</string>
   <string name="pref_iter_dialogtitle">Opakovanie kalibrácie</string>
-  <string name="pref_iter_message">Maximálny počet opakovania kalibračného algoritmu</string>
+  <string name="pref_iter_message">Maximálny počet opakovaní kalibračného algoritmu</string>
   <string name="pref_label_size_title">Veľkosť štítkov</string>
   <string name="pref_label_size_summary">Veľkosť štítkov</string>
   <string name="pref_label_size_message">Veľkosť štítkov</string>
@@ -1177,10 +1178,10 @@
   <!-- UNUSED string name="pref_dot_radius_summary">Výberové body polomeru</string -->
   <string name="pref_dot_radius_message">Veľkosť zelených bodov výberu v Režime Editácie pri kreslení</string>
   <string name="pref_line_thickness_title">Hrúbka čiary</string>
-  <string name="pref_line_thickness_summary">Hrúbka kresliacej čiary</string>
-  <string name="pref_line_thickness_message">Hrúbka kresliacej čiary</string>
+  <string name="pref_line_thickness_summary">Hrúbka nakreslenej čiary</string>
+  <string name="pref_line_thickness_message">Hrúbka nakreslenej čiary</string>
   <string name="pref_fixed_thickness_title">Šírka meračskej zámery</string>
-  <string name="pref_fixed_thickness_summary">Hrubka polygonálnych čiar</string>
+  <string name="pref_fixed_thickness_summary">Hrúbka meračskej zámery v nákrese</string>
   <string name="pref_fixed_thickness_message">Hrúbka meračskej zámery v nákrese</string>
   <!-- UNUSED string name="pref_device_title">Zariadenie</string -->
   <!-- UNUSED string name="pref_device_summary">Adresa BT DistoX</string -->
@@ -1192,7 +1193,7 @@
   <string name="pref_checkExtend_title">Kontrola Smerovej orientácie hlavných zámer</string>
   <string name="pref_checkExtend_summary">Skontroluje, či je definovaná Smerová orientácia</string>
   <string name="pref_backup_number_title">Počet záloh dát programu</string>
-  <string name="pref_backup_number_summary">Počet záloh suborov skíc</string>
+  <string name="pref_backup_number_summary">Počet záloh dát programu</string>
   <string name="pref_backup_interval_title">Čas intervalu zálohovania dát programu</string>
   <string name="pref_backup_interval_summary">Minimálny interval medzi 2 zálohami [s]</string>
   <!-- UNUSED string name="pref_xtherion_areas_title">Aree xtherion</string -->
@@ -1202,7 +1203,7 @@
   <string name="pref_autoStations_title">Staničenie Therionu</string>
   <string name="pref_autoStations_summary">Pridanie staničení automaticky do Therionu</string>
   <string name="pref_loopClosure_title">Vyrovnanie polygoného ťahu</string>
-  <string name="pref_loopClosure_summary">Kompenzácia chyby slučky</string>
+  <string name="pref_loopClosure_summary">Vyrovnanie polygoného ťahu</string>
   <!-- UNUSED string name="pref_splayExtend_title">Stima extend per splay</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Stima del extend degli splay</string -->
   <string name="pref_swapLR_title">Prepnúť na LR</string>
@@ -1227,26 +1228,26 @@
   <string name="pref_recent_nr_summary">Počet symbolov, ktoré sa nedávno použili na zobrazenie v nástroji na výber</string>
   <string name="pref_area_border_title">Viditeľnosť hraníc oblasti</string> 
   <string name="pref_area_border_summary">Predvolená viditeľnosť okrajov oblasti</string>
-  <string name="pref_auto_section_pt_title">Sekčné body</string>
-  <string name="pref_auto_section_pt_summary">Pridajte sekčný bod do čiary priečneho rezu</string>
+  <string name="pref_auto_section_pt_title">Body pri vytvorenom priečnom reze</string>
+  <string name="pref_auto_section_pt_summary">Pridá štvorec do nákresu, ktorý indikuje vytvorený priečny rez</string>
 
   <!-- UNUSED string name="pref_sketchUsesSplays_title">Pomocné merania nákresu</string -->
   <!-- UNUSED string name="pref_sketchUsesSplays_summary">Nákresový povrch používa pomocné meranie</string -->
-  <string name="pref_sketchLineStep_title">Čiarový krok</string>
-  <string name="pref_sketchLineStep_summary">Vzdialenosť medzi čiarami</string>
-  <string name="pref_sketchLineStep_message">Vzdialenosť medzi čiarami</string>
+  <string name="pref_sketchLineStep_title">Maxinálna strana</string>
+  <string name="pref_sketchLineStep_summary">Maximálna veľkosť strany trojuholníka</string>
+  <string name="pref_sketchLineStep_message">Maximálna veľkosť strany trojuholníka</string>
   <!-- UNUSED string name="pref_sketchBorderStep_title">Hraničný krok</string -->
   <!-- UNUSED string name="pref_sketchBorderStep_summary">Vzdialenosť medzi bodmi editovacieho riadku</string -->
   <!-- UNUSED string name="pref_sketchBorderStep_message">Vzdialenosť medzi bodmi editovacieho riadku</string -->
   <!-- UNUSED string name="pref_sketchSectionStep_title">Krok sekcie</string -->
   <!-- UNUSED string name="pref_sketchSectionStep_summary">Vzdialenosť medzi sekciami</string -->
   <!-- UNUSED string name="pref_sketchSectionStep_message">Vzdialenosť medzi strednými časťami</string -->
-  <string name="pref_sketchDeltaExtrude_title">Pretlačte delta</string>
-  <string name="pref_sketchDeltaExtrude_summary">Pretlačte delta</string>
-  <string name="pref_sketchDeltaExtrude_message">Pretlačte delta</string>
+  <string name="pref_sketchDeltaExtrude_title">Extrude mierka</string>
+  <string name="pref_sketchDeltaExtrude_summary">Extrude mierka</string>
+  <string name="pref_sketchDeltaExtrude_message">Extrude mierka</string>
   <string name="pref_sketchCompassReadings_title">Čítania kompasu</string>
-  <string name="pref_sketchCompassReadings_summary">Počet odčítaní do priemeru</string>
-  <string name="pref_sketchCompassReadings_message">Počet čítaní kompasu na priemer</string>
+  <string name="pref_sketchCompassReadings_summary">Počet čítaní na výpočet priemeru</string>
+  <string name="pref_sketchCompassReadings_message">Počet čítaní kompasu na výpočet priemer</string>
 
   <string name="pref_unit_length_title">Jednotky dĺžky</string>
   <string name="pref_unit_length_summary">Jednotky dĺžky</string>
@@ -1274,18 +1275,18 @@
   <string name="pref_walls_xstep_summary">Maximálna vzdialenosť bodov na kreslenie stien</string>
   <string name="pref_walls_xstep_message">Maximálna vzdialenosť bodov na kreslenie stien [m]</string>
 
-  <!-- NO string name="pref_algo_min_alpha_title">Min-algo alpha</string -->
-  <!-- NO string name="pref_algo_min_alpha_summary">Min-algo adjustment factor</string -->
-  <!-- NO string name="pref_algo_min_alpha_message">Min-algo adjustment factor (in [0,1])</string -->
-  <!-- NO string name="pref_algo_min_beta_title">Min-algo beta</string -->
-  <!-- NO string name="pref_algo_min_beta_summary">Min-algo M dip weight</string -->
-  <!-- NO string name="pref_algo_min_beta_message">Min-algo M dip weight</string -->
-  <!-- NO string name="pref_algo_min_gamma_title">Min-algo gamma</string -->
-  <!-- NO string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x weight</string -->
-  <!-- NO string name="pref_algo_min_gamma_message">Min-algo group G.x M.x weight</string -->
-  <!-- NO string name="pref_algo_min_delta_title">Min-algo delta</string -->
-  <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
-  <!-- NO string name="pref_algo_min_delta_message">Min-algo group G^M.x weight</string -->
+  <string name="pref_algo_min_alpha_title">Min-algo alpha</string>
+  <string name="pref_algo_min_alpha_summary">Min-algo nastaviteľný faktor</string>
+  <string name="pref_algo_min_alpha_message">Min-algo nastaviteľný faktor (in [0,1])</string>
+  <string name="pref_algo_min_beta_title">Min-algo beta</string>
+  <string name="pref_algo_min_beta_summary">Min-algo M dip weight</string>
+  <string name="pref_algo_min_beta_message">Min-algo M dip weight</string>
+  <string name="pref_algo_min_gamma_title">Min-algo gamma</string>
+  <string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x weight</string>
+  <string name="pref_algo_min_gamma_message">Min-algo group G.x M.x weight</string>
+  <string name="pref_algo_min_delta_title">Min-algo delta</string>
+  <string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string>
+  <string name="pref_algo_min_delta_message">Min-algo group G^M.x weight</string>
 
   <!-- OK string name="pref_log_stream_summary">Log output stream</string -->
 <string name="pref_log_stream_title">Systémový log</string>
@@ -1348,27 +1349,27 @@
 \nAktualizované dňa: revizia v1.0 - 11-15.6.2018 Jozef Hetesi 
     </string>
 
-  <!-- OK string name="firmware_title">Firmware Updater</string -->
-  <!-- OK string name="firmware_file_title">Firmware Files</string -->
-  <!-- OK string name="firmware_text">
-\n[1] Select either to upload a firmware or to dump the firmware to a file.
-\n[2] Choose the file to upload or save. Firmware files are in the bin directory.
-\n[3] Make sure the upload firmware version is compatible with the DistoX hardware version.
-\n[4] Put the DistoX2 in bootloader mode: press PLUS and MINUS while switching on with DIST key.
-\n[5] Tap the OK button.
-\n[6] Confirm to continue and wait till the process is done.
-\n[7] Turn off the DistoX2 with the CLR key.
+  <string name="firmware_title">Firmware Updater</string>
+  <string name="firmware_file_title">Firmware Súbory</string>
+  <string name="firmware_text">
+\n[1] Vyberte buď nahrať súbor (update firmware) do DistaX, alebo uložiť existujúci firmware Kopírovaním z DistaX do pamäte telefónu.
+\n[2] Vyberte súbor na nahratie, alebo uloženie. Adresár na uloženie súborov je Topodroid/bin.
+\n[3] Uistite sa, že nahrávaná verzia firmwaru je kompatibilná s hardvérovou verziou DistaX2!!!
+\n[4] Prepnite DistoX2 do bootloader módu: stlačte a držte PLUS and MINUS a zároveň zapnite DistoX červeným tlačidlom ON/DIST.
+\n[5] Stlačte OK tlačidlo.
+\n[6] Potvrďte pokračovať a počkajte na dokončenie procesu.
+\n[7] Vypnite DistoX2 CLEAR OFF tlačidlom.
 \n
    </string -->
 
-   <!-- OK string name="firmware_none">no firmware file</string -->
-   <!-- OK string name="firmware_file">firmware file</string -->
-   <!-- OK string name="firmware_file_exists">Existing firmware file</string -->
-   <!-- OK string name="firmware_file_missing">Missing firmware file</string -->
-   <!-- OK string name="ask_dump">Dump firmware?</string -->
-   <!-- OK string name="ask_upload">Upload firmware?</string -->
-   <!-- OK string name="ask_upload_not_compatible">Firmware file does not look correct.\nUpload anyways?</string -->
-   <!-- OK string name="firmware_file_dumped">Saved firmware file %1$s size %2$d</string -->
-   <!-- OK string name="firmware_file_uploaded">Uploaded firmware file %1$s written %2$d / %3$d</string -->
+   <string name="firmware_none">Žiadny firmware súbor</string>
+   <string name="firmware_file">Firmware súbor</string>
+   <string name="firmware_file_exists">Existujúci firmware súbor</string>
+   <string name="firmware_file_missing">Chýbajúci firmware súbor</string>
+   <string name="ask_dump">Uložiť firmware?</string>
+   <string name="ask_upload">Nahrať firmware?</string>
+   <string name="ask_upload_not_compatible">Firmware nevyzerá korektne.\n Napriek tomu nahrať?</string>
+   <string name="firmware_file_dumped">Firmware uložený %1$s veľkosť %2$d</string>
+   <string name="firmware_file_uploaded">Firmware  %1$s úspešne nahraný %2$d / %3$d</string>
 
 </resources>
