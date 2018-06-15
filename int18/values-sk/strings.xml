@@ -1084,7 +1084,7 @@
   <string name="pref_backsight_title">Spätná zámera</string>
   <string name="pref_backsight_summary">Zobrazí Polia spätnej zámery v MENU bodu merania pri manuálnom zadávaní bodu</string>
   <string name="pref_backshot_title">Režim spätnej zámery DistoX</string>
-  <string name="pref_backshot_summary">DistoX v režime spätných zámer - merania z koncového bodu na počiatočný</string>
+  <string name="pref_backshot_summary">DistoX v režime spätných zámer - merania VŽDY VŠETKY zámery z koncového bodu na počiatočný!</string>
   <string name="pref_prev_next_title">Tlačidlá Predchádzajúci / Nasledujúce</string>
   <string name="pref_prev_next_summary">Zobraziť tlačítka predchádzajúci /nasledujúci v MENU bodu merania</string>
   <string name="pref_mag_anomaly_title">Lokálna kompenzácia magnetickej anomálie</string>

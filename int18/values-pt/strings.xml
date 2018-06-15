@@ -526,7 +526,7 @@
     <string name="extended_profile">Perfil retificado</string>
     <!-- UNUSED string name="v_section">CORTE V</string -->
     <string name="h_section">CORTE H</string>
-    <!-- UNUSED string name="landscape">retrato</string -->
+    <!-- UNUSED string name="landscape">paisagem</string -->
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Falha na leitura da memória da DistoX</string>

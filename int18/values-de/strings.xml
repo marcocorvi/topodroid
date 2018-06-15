@@ -2,8 +2,8 @@
 <resources>
     <!-- manual>https://sites.google.com/site/speleoapps/home/topodroid/docs/TopoDroid-2.2.4.pdf</manual -->
     <string name="no_manual">Handbuch konnte nicht heruntergeladen werden.</string>
-    <!-- TODO string name="user_man_ok">Installed user manual translation</string -->
-    <!-- TODO string name="user_man_fail">Failed to install user manual translation</string -->
+    <string name="user_man_ok">Übersetztes Handbuch installiert</string>
+    <string name="user_man_fail">Fehler beim installieren des übersetzten Handbuchs</string>
 
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Erneut ZURÜCK drücken zum verlassen</string>
@@ -11,19 +11,17 @@
     <!-- UNUSED string name="version_ask">TopoDroid wurde auf eine neue Version aktualisiert.\nSollen die Zeichensymbole aktualisiert werden?</string -->
     <string name="symbols_ask">Zeichenwerkzeuge von v.%2$s auf v.%1$s aktualisieren?</string>
 
-    <!-- TODO string name="setup_textsize_title">TopoDroid setup. Text size</string -->
-    <!-- TODO string name="setup_buttonsize_title">TopoDroid setup. Button size</string -->
-    <!-- TODO string name="setup_drawingunit_title">TopoDroid setup. Icons size</string -->
-    <!-- TODO string name="setup_done_title">TopoDroid setup. Done</string -->
+    <string name="setup_textsize_title">TopoDroid setup. Textgröße</string>
+    <string name="setup_buttonsize_title">TopoDroid setup. Knopfgröße</string>
+    <string name="setup_drawingunit_title">TopoDroid setup. Icongröße</string>
+    <string name="setup_done_title">TopoDroid setup. Fertig</string>
 
-    <!-- TODO string name="setup_textsize">Set the text size.\nYou can always change this later thru the main window settings.</string -->
-    <!-- TODO string name="setup_buttonsize">Set the button size.\nYou can always change this later thru the main window settings.</string -->
-    <!-- TODO string name="setup_drawingunit">Set the sketch icon size.\nYou can always change this later thru the sketch window settings.</string -->
-    <!-- TODO string name="setup_done">The basic setup in done.\n\n
-	    If you experience problems with the DistoX connection, try and set the insecure socket.\n\n
-	    Other settings concern the presentation in the sketching window (icon size, label size, line width, etc.)
-	    you should set them to your needs./n/n
-    </string -->
+    <string name="setup_textsize">Definiert die Textgröße.\nKann später über das Einstellungsmenü geändert werden.</string>
+    <string name="setup_buttonsize">Definiert die Knopfgröße.\nKann später über das Einstellungsmenü geändert werden.</string>
+    <string name="setup_drawingunit">Definiert die Icongröße auf der Skizze.\nKann später über das Einstellungsmenü geändert werden.</string>
+    <string name="setup_done">Grundeinstellungen vorgenommen.\n\n
+        Bei Problemen mit der Verbindung mit dem DistoX die Verbindungsart auf 'Unsicher' stellen.
+    </string>
     <!-- OK string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
 
     <string name="POINT">PUNKTE</string>
@@ -31,8 +29,8 @@
     <string name="AREA">FLÄCHEN</string>
     <string name="HELP">HILFE</string>
     <string name="STATION">Messpunkt</string>
-    <!-- TODO string name="UP">UPWARD</string -->
-    <!-- TODO string name="DOWN">DOWNWARD</string -->
+    <string name="UP">AUFWÄRTS</string>
+    <string name="DOWN">ABWÄRTS</string>
 
     <string name="cut">AUSSCHNEIDEN</string>
     <string name="copy">KOPIEREN</string>
@@ -98,9 +96,9 @@
 
     <string name="algorithm">Algorithmus:</string>
     <string name="auto">automatisch</string>
-    <!-- OK string name="linear">linear</string -->
+    <string name="linear">linear</string>
     <string name="non_linear">nicht-linear</string>
-    <!-- NO string name="algo_minimum">minimum</string -->
+    <string name="algo_minimum">minimum</string>
 <!-- DistoX DEVICE STUFF -->
     <string name="device_algo_failed">Bestimmung fehlgeschlagen.\nVerwendung von linearem Algorithmus</string>
     <string name="device_address">Adresse %1$s</string>
@@ -173,8 +171,8 @@
     <!-- UNUSED string name="sketch_saving">Skizze speichern, bitte warten&#8230;</string -->
     <string name="MT_points_none">Keine MobileTopographer Punkte</string>
 
-    <!-- TODO string name="pleasewait">Please wait</string -->
-    <!-- TODO string name="processing">processing &#8230;</string -->
+    <string name="pleasewait">Bitte warten</string>
+    <string name="processing">bearbeite &#8230;</string>
 
 <!-- MORE DEVICE STRINGS -->
     <!-- UNUSED string name="head_tail">Memory: </string -->
@@ -251,15 +249,15 @@
     <!-- UNUSED string name="hidden_del">Vorherige Messungen anzeigen</string -->
     <string name="hidden_show">Messungen nach der Station anzeigen</string>
     <!-- UNUSED string name="splays_toggle">Hilfszüge ein/ausblenden</string -->
-    <!-- TODO string name="splays_on_off">Splays</string -->
+    <string name="splays_on_off">Hilfszüge</string>
     <string name="splays">Hilfszüge</string>
-    <!-- TODO string name="splays_show">Show splays</string -->
-    <!-- TODO string name="foresurface_show">Show fore surface</string -->
-    <!-- TODO string name="fmt_listen">LISTEN | %1$s</string -->
-    <!-- TODO string name="fmt_id">ID %1$s</string -->
-    <!-- TODO string name="fmt_latitude">Latitude %1$s</string -->
-    <!-- TODO string name="fmt_longitude">Longitude %1$s</string -->
-    <!-- TODO string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string --> 
+    <string name="splays_show">Hilfszüge anzeigen</string>
+    <string name="foresurface_show">Vorderfläche zeigen</string>
+    <string name="fmt_listen">WARTEN | %1$s</string>
+    <string name="fmt_id">ID %1$s</string>
+    <string name="fmt_latitude">Länge %1$s</string>
+    <string name="fmt_longitude">Breite %1$s</string>
+    <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string> 
     <string name="fixed">fixiert</string>
     <string name="painted">gezeichnet</string>
 
@@ -320,9 +318,9 @@
     <string name="menu_delete">LÖSCHEN</string>
     <string name="menu_detach">TRENNEN</string>
     <string name="menu_display">ANZEIGEN</string>
-    <!-- OK string name="menu_distox">DISTOX</string -->
+    <string name="menu_distox">DISTOX</string>
     <string name="menu_export">EXPORTIEREN</string>
-    <!-- OK string name="menu_firmware">FIRMWARE</string -->
+    <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_recover">WIEDERHERSTELLEN</string>
     <string name="menu_reload">FRÜHERE VERSION</string>
     <string name="menu_rename_delete">UMBENENNEN/LÖSCHEN</string>
@@ -330,15 +328,15 @@
     <string name="menu_switch">WECHSELN/SCHLIEßEN</string>
     <string name="menu_help">HILFE</string>
     <string name="menu_join_survey">CO-VERMESSUNG</string>
-    <!-- OK string name="menu_logs">LOGS</string -->
+    <string name="menu_logs">LOGS</string>
     <string name="menu_manual_calibration">KALIBRIERUNG</string>
     <string name="menu_options">EINSTELLUNGEN</string>
     <string name="menu_overview">ÜBERBLICK</string>
     <string name="menu_pair">VERBINDEN</string>
-    <!-- OK string name="menu_palette">PALETTE</string -->
+    <string name="menu_palette">PALETTE</string>
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SENSORWERTE</string>
-    <!-- OK string name="menu_scan">SCAN</string -->
+    <string name="menu_scan">SCAN</string>
     <!-- UNUSED string name="menu_station">MESSPUNKTE</string -->
     <string name="menu_stats">STATISTIK</string>
     <string name="menu_survey">INFO</string>
@@ -515,7 +513,7 @@
     <string name="stat_duplicate">Doppelmessungen %1$d %2$.1f %3$s</string>
     <string name="stat_leg">Messstrecke %1$d %2$.1f %3$.1f %4$.1f %5$s</string>
     <string name="stat_length">Länge %1$.1f %2$s</string>
-    <!-- TODO string name="stat_extlen">3D length %1$.1f %2$s</string -->
+    <string name="stat_extlen">3D-Länge %1$.1f %2$s</string>
     <string name="stat_projlen">Skizzenlänge %1$.1f %2$s</string>
     <string name="stat_loop">Kreisschlüsse %1$d</string>
     <string name="stat_origin">Ursprungs-Messpunkt: %1$s</string>
@@ -582,13 +580,13 @@
     <!-- UNUSED string name="button_azimuth">Azimut</string -->
     <string name="button_plot"    >Skizze</string>
     <string name="button_more"    >Mehr</string>
-    <!-- TODO string name="button_next"    >Next</string -->
-    <!-- TODO string name="button_skip"    >Skip</string -->
-    <!-- TODO string name="button_done"    >Done</string -->
+    <string name="button_next"    >Weiter</string>
+    <string name="button_skip"    >Überspringen</string>
+    <string name="button_done"    >Fertig</string>
     <string name="button_lrud"    >LRUD hinzufügen</string>
     <string name="button_ok"        >OK        </string>
-    <!-- TODO string name="button_off"       >off</string -->
-    <!-- TODO string name="button_on"        >on</string -->
+    <string name="button_off"       >aus</string>
+    <string name="button_on"        >ein</string>
     <string name="button_open"      >Öffnen     </string>
     <string name="button_read"      >Lesen      </string>
     <!-- UNUSED string name="button_redo"      >Nochmals      </string -->
