@@ -267,6 +267,17 @@ class DrawingPointPath extends DrawingPath
   }
 
   int getScale() { return mScale; }
+
+  float getScaleValue() // FIX Asenov
+  {
+    switch ( mScale ) {
+      case SCALE_XS: return 0.50f;
+      case SCALE_S:  return 0.72f;
+      case SCALE_L:  return 1.41f;
+      case SCALE_XL: return 2.00f;
+    }
+    return 1;
+  }
       
 
   private void resetPath( float f )
@@ -278,10 +289,10 @@ class DrawingPointPath extends DrawingPath
         m.postRotate( (float)mOrientation );
       }
       switch ( mScale ) {
-        case SCALE_XS: f = 0.50f; break;
-        case SCALE_S:  f = 0.72f; break;
-        case SCALE_L:  f = 1.41f; break;
-        case SCALE_XL: f = 2.00f; break;
+        case SCALE_XS: f *= 0.50f; break;
+        case SCALE_S:  f *= 0.72f; break;
+        case SCALE_L:  f *= 1.41f; break;
+        case SCALE_XL: f *= 2.00f; break;
       }
       m.postScale(f,f);
       makePath( BrushManager.getPointOrigPath( mPointType ), m, cx, cy );

@@ -850,7 +850,7 @@ class DrawingDxf
         // printXYZ( pw8, xmin, -ymax, 0.0f, 0 );
         // printXYZ( pw8,  xmin, -ymax+10*SCALE_FIX, 0.0f, 1 );
         // out.write( sw8.getBuffer().toString() );
-        // out.flush();
+        out.flush();
         
         StringWriter sw7 = new StringWriter();
         PrintWriter pw7  = new PrintWriter(sw7);
@@ -966,7 +966,7 @@ class DrawingDxf
           else if ( path.mType == DrawingPath.DRAWING_PATH_AREA )
           {
             handle = toDxf( pw5, handle, (DrawingAreaPath)path, scale, xoff, yoff );
-          } 
+          }
           else if ( path.mType == DrawingPath.DRAWING_PATH_POINT )
           {
             DrawingPointPath point = (DrawingPointPath) path;
@@ -1000,9 +1000,9 @@ class DrawingDxf
         PrintWriter pw6  = new PrintWriter(sw6);
         if ( TDSetting.mAutoStations ) {
           for ( DrawingStationName name : plot.getStations() ) { // auto-stations
-            handle = toDxf( pw6, handle, name, scale, xoff, yoff );
-            // handle = toDxf( pw6, handle, name, scale, xoff+1.0f, yoff-1.0f );
-            // handle = printLine( pw6, scale, handle,"STATION", name.cx+xoff, -name.cy+yoff, name.cx+xoff+15.0f, -name.cy+yoff );
+            // handle = toDxf( pw6, handle, name, scale, xoff, yoff );
+            handle = toDxf( pw6, handle, name, scale, xoff+1.0f, yoff-1.0f );
+            handle = printLine( pw6,scale,handle,"STATION",name.cx+xoff, -name.cy+yoff,name.cx+xoff+15.0f, -name.cy+yoff );
           }
           out.write( sw6.getBuffer().toString() );
           out.flush();
@@ -1045,7 +1045,7 @@ class DrawingDxf
     if ( point == null ) return handle;
     if ( point.mPointType == BrushManager.getPointLabelIndex() ) {
       DrawingLabelPath label = (DrawingLabelPath)point;
-      return printText( pw, handle, label.mPointText,  (point.cx+xoff)*scale, -(point.cy+yoff)*scale, (float)label.mOrientation,
+      return printText( pw, handle, label.mPointText,  (point.cx+xoff)*scale, -(point.cy+yoff)*scale, 360.0f-(float)label.mOrientation,
                         LABEL_SCALE, "POINT", my_style, xoff, yoff );
     }
 
@@ -1055,9 +1055,9 @@ class DrawingDxf
     ++handle; printAcDb( pw, handle, "AcDbBlockReference" );
     printString( pw, 8, "POINT" );
     printString( pw, 2, block );
-    printFloat( pw, 41, POINT_SCALE );
-    printFloat( pw, 42, POINT_SCALE );
-    printFloat( pw, 50, 360-(float)(point.mOrientation) );
+    printFloat( pw, 41, point.getScaleValue()*1.4f ); // FIX Asenov
+    printFloat( pw, 42, point.getScaleValue()*1.4f );
+    printFloat( pw, 50, 360.0f-(float)(point.mOrientation) );
     printXYZ( pw, (point.cx+xoff)*scale, -(point.cy+yoff)*scale, 0, 0 );
     return handle;
   }

@@ -3283,6 +3283,7 @@ public class DrawingWindow extends ItemDrawer
       if ( label != null && label.length() > 0 ) {
 	if ( mLandscape ) { float t=x; x=-y; y=t; }
         DrawingLabelPath label_path = new DrawingLabelPath( label, x, y, mPointScale, null );
+	label_path.setOrientation( BrushManager.mPointLib.getPointOrientation( mCurrentPoint ) ); // FIX Asenov
 	label_path.mLandscape = mLandscape;
         mDrawingSurface.addDrawingPath( label_path );
         modified();
