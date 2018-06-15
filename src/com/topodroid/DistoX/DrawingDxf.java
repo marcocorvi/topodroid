@@ -35,11 +35,11 @@ class DrawingDxf
 {
   private static boolean mVersion13 = false;
 
-  static final private float POINT_SCALE   = 10.0f;
+  static final private float POINT_SCALE   = 10.0f; // scale of point icons: only ACAD_6
   // the next three are for text
-  static final private float STATION_SCALE =  6.0f / DrawingUtil.SCALE_FIX;
-  static final private float LABEL_SCALE   =  8.0f / DrawingUtil.SCALE_FIX;
-  static final private float AXIS_SCALE    =  6.0f / DrawingUtil.SCALE_FIX;
+  static final private float STATION_SCALE =  6.0f / DrawingUtil.SCALE_FIX; // scale of station names
+  static final private float LABEL_SCALE   =  8.0f / DrawingUtil.SCALE_FIX; // scale of label text
+  static final private float AXIS_SCALE    = 10.0f / DrawingUtil.SCALE_FIX; // scale of text on the axes
   static final private String zero = "0.0";
   static final private String one  = "1.0";
   // static final String half = "0.5";
@@ -622,6 +622,7 @@ class DrawingDxf
         writeEndTable( out );
         int nr_layers = 7;
 
+        SymbolPointLibrary pointlib = BrushManager.mPointLib;
         SymbolLineLibrary linelib = BrushManager.mLineLib;
         SymbolAreaLibrary arealib = BrushManager.mAreaLib;
         nr_layers += linelib.mSymbolNr + arealib.mSymbolNr;
@@ -656,6 +657,13 @@ class DrawingDxf
             for ( Symbol s : arealib.getSymbols() ) {
               String aname = "A_" + s.getThName().replace(':','-');
               ++handle; printLayer( pw2, handle, aname, flag, color, lt_continuous ); ++color;
+            }
+          // }
+          color = 80;
+          // if ( pointlib != null ) { // always true
+            for ( Symbol point : pointlib.getSymbols() ) {
+              String pname = "P_" + point.getThName().replace(':','-');
+              ++handle; printLayer( pw2, handle, pname, flag, color, lt_continuous ); ++color;
             }
           // }
           out.write( sw2.getBuffer().toString() );
@@ -778,11 +786,12 @@ class DrawingDxf
           writeBeginTable( out, "BLOCK_RECORD", handle, BrushManager.mPointLib.mSymbolNr );
           {
             for ( int n = 0; n < BrushManager.mPointLib.mSymbolNr; ++ n ) {
-              String block = "P_" + BrushManager.mPointLib.getSymbolThName(n).replace(':','-');
+              String th_name = BrushManager.mPointLib.getSymbolThName(n).replace(':','-');
               writeString( out, 0, "BLOCK_RECORD" );
               ++handle;
               writeAcDb( out, handle, AcDbSymbolTR, "AcDbBlockTableRecord" );
-              writeString( out, 2, block );
+              writeString( out, 8, "P_" + th_name );
+              writeString( out, 2, "B_" + th_name );
               writeInt( out, 70, 0 );              // flag
             }
           }
@@ -797,17 +806,15 @@ class DrawingDxf
         // // 8 layer (0), 2 block name,
         for ( int n = 0; n < BrushManager.mPointLib.mSymbolNr; ++ n ) {
           SymbolPoint pt = (SymbolPoint)BrushManager.mPointLib.getSymbolByIndex(n);
-          String block = "P_" + pt.getThName().replace(':','-');
-
+	  String th_name = pt.getThName().replace(':','-');
           writeString( out, 0, "BLOCK" );
           ++handle;
           writeAcDb( out, handle, AcDbEntity, "AcDbBlockBegin" );
-          writeString( out, 8, "POINT" );
-          writeString( out, 2, block ); // block name, can be repeated with '3'
+          // writeString( out, 8, "P_" + th_name );
+          writeString( out, 2, "B_" + th_name ); // block name, can be repeated with '3'
           writeInt( out, 70, 0 );       // flag 0=none, 1=anonymous, 2=non-conts attr, 4=xref, 8=xref overlay,
                                         // 16=ext. dependent, 32=ext. resolved (ignored), 64=referenced xref (ignored)
           writeXYZ( out, 0, 0, 0, 0 );
-
           out.write( pt.getDxf() );
           // out.write( BrushManager.mPointLib.getPoint(n).getDxf() );
 
@@ -815,7 +822,8 @@ class DrawingDxf
           if ( mVersion13 ) {
             ++handle;
             writeAcDb( out, handle, AcDbEntity, "AcDbBlockEnd");
-            writeString( out, 8, "POINT" );
+            // writeString( out, 8, "POINT" );
+            writeString( out, 8, "P_" + th_name );
           }
         }
       }
@@ -824,22 +832,30 @@ class DrawingDxf
 
       writeSection( out, "ENTITIES" );
       {
-        float SCALE_FIX = DrawingUtil.SCALE_FIX; // FIXME 1.0f
+	String scale_len = "20";
+        float sc1 = 20; // DrawingUtil.SCALE_FIX / 2 = 10;
 
         // reference
         StringWriter sw9 = new StringWriter();
         PrintWriter pw9  = new PrintWriter(sw9);
-        handle = printLine( pw9, 1.0f, handle, "REF", xmin, -ymax, xmin+10*SCALE_FIX, -ymax );
-        handle = printLine( pw9, 1.0f, handle, "REF", xmin, -ymax, xmin, -ymax+10*SCALE_FIX );
-        out.write( sw9.getBuffer().toString() );
+	float sc2 = sc1 / 2;
+        handle = printLine( pw9, 1.0f, handle, "REF", xmin,     -ymax,     xmin+sc1,  -ymax );
+        handle = printLine( pw9, 1.0f, handle, "REF", xmin,     -ymax,     xmin,      -ymax+sc1 );
+        handle = printLine( pw9, 1.0f, handle, "REF", xmin+sc2, -ymax,     xmin+sc2,  -ymax+0.5f ); // 10 m ticks
+        handle = printLine( pw9, 1.0f, handle, "REF", xmin,     -ymax+sc2, xmin+0.5f, -ymax+sc2 );
+        handle = printLine( pw9, 1.0f, handle, "REF", xmin+sc1, -ymax,     xmin+sc1,  -ymax+0.5f ); // 20 m ticks
+        handle = printLine( pw9, 1.0f, handle, "REF", xmin,     -ymax+sc1, xmin+0.5f, -ymax+sc1 );
+        // out.write( sw9.getBuffer().toString() );
+	
         // printString( pw9, 0, "LINE" );
         // ++handle;
         // printAcDb( pw9, handle, AcDbEntity, AcDbLine );
         // printString( pw9, 8, "REF" );
         // // printInt(  pw9, 39, 0 );         // line thickness
         // printXYZ( pw9, xmin, -ymax, 0.0f, 0 );
-        // printXYZ( pw9, (xmin+10*SCALE_FIX), -ymax, 0.0f, 1 );
+        // printXYZ( pw9, (xmin+sc1), -ymax, 0.0f, 1 );
         // out.write( sw9.getBuffer().toString() );
+
         // StringWriter sw8 = new StringWriter();
         // PrintWriter pw8  = new PrintWriter(sw8);
         // printString( pw8, 0, "LINE" );
@@ -848,15 +864,16 @@ class DrawingDxf
         // printString( pw8, 8, "REF" );
         // // printInt(  pw8, 39, 0 );         // line thickness
         // printXYZ( pw8, xmin, -ymax, 0.0f, 0 );
-        // printXYZ( pw8,  xmin, -ymax+10*SCALE_FIX, 0.0f, 1 );
+        // printXYZ( pw8,  xmin, -ymax+sc1, 0.0f, 1 );
         // out.write( sw8.getBuffer().toString() );
-        out.flush();
+        // out.flush();
         
-        StringWriter sw7 = new StringWriter();
-        PrintWriter pw7  = new PrintWriter(sw7);
-        handle = printText( pw7, handle, "10", xmin+10*SCALE_FIX+1, -ymax, 0, AXIS_SCALE, "REF", my_style, xoff, yoff );
-        handle = printText( pw7, handle, "10", xmin, -ymax+10*SCALE_FIX+1, 0, AXIS_SCALE, "REF", my_style, xoff, yoff );
-        out.write( sw7.getBuffer().toString() );
+	// offset axes legends by 1
+        // StringWriter sw7 = new StringWriter();
+        // PrintWriter pw7  = new PrintWriter(sw7);
+        handle = printText( pw9, handle, scale_len, xmin+sc1, -ymax+1, 0, AXIS_SCALE, "REF", my_style, xoff, yoff );
+        handle = printText( pw9, handle, scale_len, xmin+1, -ymax+sc1, 0, AXIS_SCALE, "REF", my_style, xoff, yoff );
+        out.write( sw9.getBuffer().toString() );
        
         out.flush();
 
@@ -913,7 +930,7 @@ class DrawingDxf
             //   printString( pw41, 8, "SPLAY" );
             //   // printInt( pw41, 39, 1 );         // line thickness
 
-            //   float dhs = scale * blk.mLength * (float)Math.cos( blk.mClino * TDMath.DEG2RAD )*SCALE_FIX; // scaled dh
+            //   float dhs = scale * blk.mLength * (float)Math.cos( blk.mClino * TDMath.DEG2RAD )*sc1/10; // scaled dh
             //   if ( type == PlotInfo.PLOT_PLAN ) {
             //     float x = scale * mDrawingUtil.toSceneX( f.e, f.s );
             //     float y = scale * mDrawingUtil.toSceneY( f.e, f.s );
@@ -924,7 +941,7 @@ class DrawingDxf
             //   } else if ( PlotInfo.isProfile( type ) ) {
             //     float x = scale * mDrawingUtil.toSceneX( f.h, f.v );
             //     float y = scale * mDrawingUtil.toSceneY( f.h, f.v );
-            //     float dv = - blk.mLength * (float)Math.sin( blk.mClino * TDMath.DEG2RAD )*SCALE_FIX;
+            //     float dv = - blk.mLength * (float)Math.sin( blk.mClino * TDMath.DEG2RAD )*sc1/10;
             //     printXYZ( pw41, x, -y, 0.0f, 0 );
             //     printXYZ( pw41, x+dhs*blk.getReducedExtend(), -(y+dv), 0.0f, 1 ); 
             //   } else if ( type == PlotInfo.PLOT_SECTION ) {
@@ -1000,9 +1017,9 @@ class DrawingDxf
         PrintWriter pw6  = new PrintWriter(sw6);
         if ( TDSetting.mAutoStations ) {
           for ( DrawingStationName name : plot.getStations() ) { // auto-stations
-            // handle = toDxf( pw6, handle, name, scale, xoff, yoff );
             handle = toDxf( pw6, handle, name, scale, xoff+1.0f, yoff-1.0f );
-            handle = printLine( pw6,scale,handle,"STATION",name.cx+xoff, -name.cy+yoff,name.cx+xoff+15.0f, -name.cy+yoff );
+	    float len = 2.0f + name.name().length() * 5.0f; // FIXME fonts ?
+            handle = printLine( pw6,scale,handle,"STATION",name.cx+xoff, -name.cy+yoff,name.cx+xoff+len, -name.cy+yoff );
           }
           out.write( sw6.getBuffer().toString() );
           out.flush();
@@ -1049,12 +1066,12 @@ class DrawingDxf
                         LABEL_SCALE, "POINT", my_style, xoff, yoff );
     }
 
-    String block = "P_" + BrushManager.mPointLib.getSymbolThName( point.mPointType ).replace(':','-');
+    String th_name = BrushManager.mPointLib.getSymbolThName( point.mPointType ).replace(':','-');
     // int idx = 1 + point.mPointType;
     printString( pw, 0, "INSERT" );
     ++handle; printAcDb( pw, handle, "AcDbBlockReference" );
-    printString( pw, 8, "POINT" );
-    printString( pw, 2, block );
+    printString( pw, 8, "P_" + th_name );
+    printString( pw, 2, "B_" + th_name );
     printFloat( pw, 41, point.getScaleValue()*1.4f ); // FIX Asenov
     printFloat( pw, 42, point.getScaleValue()*1.4f );
     printFloat( pw, 50, 360.0f-(float)(point.mOrientation) );
