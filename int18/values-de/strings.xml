@@ -20,7 +20,7 @@
     <string name="setup_buttonsize">Definiert die Knopfgröße.\nKann später über das Einstellungsmenü geändert werden.</string>
     <string name="setup_drawingunit">Definiert die Icongröße auf der Skizze.\nKann später über das Einstellungsmenü geändert werden.</string>
     <string name="setup_done">Grundeinstellungen vorgenommen.\n\n
-        Bei Problemen mit der Verbindung mit dem DistoX die Verbindungsart auf 'Unsicher' stellen.
+        Bei Problemen mit der Verbindung mit dem DistoX die Verbindungsart auf \'Unsicher\' stellen.
     </string>
     <!-- OK string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
 
