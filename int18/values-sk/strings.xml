@@ -1077,18 +1077,18 @@
   <string name="pref_leg_message">Tolerancia medzi jednotlivými zámerami hlavnej zámery</string>
   <string name="pref_max_shot_title">Maximálna dĺžka zámery</string>
   <string name="pref_max_shot_summary">Maximálna dĺžka zámery [m]</string>
-  <string name="pref_max_shot_message">Merania nad túto dĺžku sa nepoužívajú v programe</string>
+  <string name="pref_max_shot_message">Merania nad túto dĺžku sa nepoužívajú v programe a sú skryté</string>
   <string name="pref_min_leg_title">Minimalna dĺžka hlavnej zámery</string>
   <string name="pref_min_leg_summary">Minimalna dĺžka hlavnej zámery [m]</string>
   <string name="pref_min_leg_message">Hlavné zámery pod týmto minimom sú oranžovo podfarbené</string>
-  <string name="pref_backsight_title">Spätná zámera</string>
+  <string name="pref_backsight_title">Polia Spätnej zámery</string>
   <string name="pref_backsight_summary">Zobrazí Polia spätnej zámery v MENU bodu merania pri manuálnom zadávaní bodu</string>
-  <string name="pref_backshot_title">Režim spätnej zámery DistoX</string>
-  <string name="pref_backshot_summary">DistoX v režime spätných zámer - merania VŽDY VŠETKY zámery z koncového bodu na počiatočný!</string>
+  <string name="pref_backshot_title">Režim spätného merania DistoX - číslovanie bodov NAOPAK</string>
+  <string name="pref_backshot_summary">DistoX v režime spätného merania - merajú sa VŽDY VŠETKY zámery z koncového bodu na počiatočný!</string>
   <string name="pref_prev_next_title">Tlačidlá Predchádzajúci / Nasledujúce</string>
   <string name="pref_prev_next_summary">Zobraziť tlačítka predchádzajúci /nasledujúci v MENU bodu merania</string>
   <string name="pref_mag_anomaly_title">Lokálna kompenzácia magnetickej anomálie</string>
-  <string name="pref_mag_anomaly_summary">Kompenzácia lokálnej magnetickej anomálie - vyžaduje prevádzanie meraní so spätnými zámerami - nie režim spätnej zámery DistoX</string>
+  <string name="pref_mag_anomaly_summary">Kompenzácia lokálnej magnetickej anomálie - vyžaduje vykonávať merania zo spätnými zámerami - nie Režim spätného merania DistoX</string>
   <string name="pref_azimuth_manual_title">"Fixná Smerová orientácia</string>
   <string name="pref_azimuth_manual_summary">Zaškrtnuté = Fixná / Nezašktnuté = Nastavitelná Smerová orientácia</string>
 
