@@ -384,7 +384,7 @@
     <!-- UNUSED string name="photo_shot">aggiungi battuta</string -->
     <!-- UNUSED string name="photo_survey">dividi rilievo</string -->
     <!-- UNUSED string name="picture_no_station">Caposaldo o nome mancante</string -->
-    <string name="plot_delete">Vzmazať nákres?</string>
+    <string name="plot_delete">Vymazať nákres?</string>
     <string name="item_delete">Odstrániť položku %1$s ?</string>
     <string name="splay_delete">Odstrániť pomocnú zámeru %1$s ?</string>
     <string name="plot_duplicate_name">Názov nákresu už existuje</string>
@@ -461,7 +461,7 @@
     <!-- UNUSED string name="station_viewed">caposaldo puntato</string -->
     <string name="survey_exists">Mapovanie už existuje</string>
     <!-- UNUSED string name="survey_date">aaaa.mm.gg</string -->
-    <string name="survey_delete">Vzmazať mapovanie ?</string>
+    <string name="survey_delete">Vymazať mapovanie ?</string>
     <string name="survey_split">Rozdeliť mapovanie ?</string>
     <string name="survey_not_attached">VAROVANIE: Nepripojené merania</string>
     <string name="survey_not_extend">VAROVANIE: Nenastavená Smerová orientácia</string>
