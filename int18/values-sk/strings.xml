@@ -1051,8 +1051,8 @@
   <string name="pref_section_splay_message">Pomocné zámery zvierajúce väčší ako tento uhol sú v reze čiarkované</string>
   <string name="pref_data_backup_title">Automatické exportovanie údajov</string>
   <string name="pref_data_backup_summary">Automatický export údajov (vyžaduje predvolený formát)</string>
-  <string name="pref_shared_xsections_title">Zdielané priečne rezy</string>
-  <string name="pref_shared_xsections_summary">Priečne rezy vytvorené na meračských bodoch sú zdieľané medzi nákresmi</string>
+  <string name="pref_shared_xsections_title">Zdielané priečne rezy - predvolené nastavenie</string>
+  <string name="pref_shared_xsections_summary">Predvolené nastavenie, či pri založení mapovania majú byť Priečne rezy zdieľané medzi nákresmi</string>
   <string name="xsections_shared">Zdielané priečne rezy</string>
   <string name="xsections_private">Priečne rezy nezdieľané medzi nákresmi</string>
   <string name="pref_reduce_angle_title">Vyrovnávací uhol</string>
