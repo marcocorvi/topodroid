@@ -1088,7 +1088,7 @@
   <string name="pref_prev_next_title">Tlačidlá Predchádzajúci / Nasledujúce</string>
   <string name="pref_prev_next_summary">Zobraziť tlačítka predchádzajúci /nasledujúci v MENU bodu merania</string>
   <string name="pref_mag_anomaly_title">Lokálna kompenzácia magnetickej anomálie</string>
-  <string name="pref_mag_anomaly_summary">Kompenzácia lokálnej magnetickej anomálie - vyžaduje merania so spätnými zámerami - nie režim spätnej zámery DistoX</string>
+  <string name="pref_mag_anomaly_summary">Kompenzácia lokálnej magnetickej anomálie - vyžaduje prevádzanie meraní so spätnými zámerami - nie režim spätnej zámery DistoX</string>
   <string name="pref_azimuth_manual_title">"Fixná Smerová orientácia</string>
   <string name="pref_azimuth_manual_summary">Zaškrtnuté = Fixná / Nezašktnuté = Nastavitelná Smerová orientácia</string>
 
