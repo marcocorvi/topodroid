@@ -112,7 +112,7 @@
      <item name="for2">Hlavná zámera dopredu; Pomocné zámery</item>
      <item name="back2">Hlavná zámera naspäť; Pomocné zámery</item>
      <item name="anomaly">Hlavná zámera naspäť; Pomocné zámery; Hlavná zámera dopredu</item>
-     <item name="tripod">Zo Statívu, LEN - Hlavná zámera naspäť; Hlavná zámera dopredu</item>
+     <item name="tripod">STATÍV - Hlavná zámera naspäť; Pomocné zámery; Hlavná zámera dopredu</item>
      <item name="toporobot">Číslovanie ako v programe TopoRobot</item>
   </string-array>
 
