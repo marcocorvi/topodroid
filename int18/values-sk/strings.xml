@@ -1346,7 +1346,7 @@
 \nAktualizované dňa: revizia v0.3 - 18.5.2018 M.Chlebovec (zdroj prekladu: Angličtina)
 \nAktualizované dňa: revizia v0.4 - 19.5.2018 Miroslav Jurečka, Jozef Hetesi 
 \nAktualizované dňa: revizia v0.5 - 04.6.2018 Miroslav Jurečka, Jozef Hetesi 
-\nAktualizované dňa: revizia v1.0 - 11-15.6.2018 Jozef Hetesi 
+\nAktualizované dňa: revizia v1.0 - 11-17.6.2018 Jozef Hetesi 
     </string>
 
   <string name="firmware_title">Firmware Updater</string>
@@ -1355,7 +1355,7 @@
 \n[1] Vyberte buď nahrať súbor (update firmware) do DistaX, alebo uložiť existujúci firmware Kopírovaním z DistaX do pamäte telefónu.
 \n[2] Vyberte súbor na nahratie, alebo uloženie. Adresár na uloženie súborov je Topodroid/bin.
 \n[3] Uistite sa, že nahrávaná verzia firmwaru je kompatibilná s hardvérovou verziou DistaX2!!!
-\n[4] Prepnite DistoX2 do bootloader módu: stlačte a držte PLUS and MINUS a zároveň zapnite DistoX červeným tlačidlom ON/DIST.
+\n[4] Prepnite DistoX2 do bootloader módu: stlačte a držte PLUS and MINUS a zároveň tlačidlo ON/DIST po dobu 5 sekúnd.
 \n[5] Stlačte OK tlačidlo.
 \n[6] Potvrďte pokračovať a počkajte na dokončenie procesu.
 \n[7] Vypnite DistoX2 CLEAR OFF tlačidlom.
