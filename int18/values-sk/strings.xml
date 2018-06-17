@@ -1189,9 +1189,9 @@
   <string name="pref_checkBT_title">Bluetooth</string>
   <string name="pref_checkBT_summary">Aktivovať / deaktivovať Bluetooth</string>
   <string name="pref_checkAttached_title">Kontrola meračských bodov</string>
-  <string name="pref_checkAttached_summary">Skontroluje, či sú pripojené všetky meračské body</string>
+  <string name="pref_checkAttached_summary">Skontroluje, či sú pripojené všetky meračské body k polygónu</string>
   <string name="pref_checkExtend_title">Kontrola Smerovej orientácie hlavných zámer</string>
-  <string name="pref_checkExtend_summary">Skontroluje, či je definovaná Smerová orientácia</string>
+  <string name="pref_checkExtend_summary">Skontroluje, či je definovaná Smerová orientácia na všetkých hlavných zámerách</string>
   <string name="pref_backup_number_title">Počet záloh dát programu</string>
   <string name="pref_backup_number_summary">Počet záloh dát programu</string>
   <string name="pref_backup_interval_title">Čas intervalu zálohovania dát programu</string>
