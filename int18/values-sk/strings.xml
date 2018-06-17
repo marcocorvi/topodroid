@@ -1052,9 +1052,9 @@
   <string name="pref_data_backup_title">Automatické exportovanie údajov</string>
   <string name="pref_data_backup_summary">Automatický export údajov (vyžaduje predvolený formát)</string>
   <string name="pref_shared_xsections_title">Zdielané priečne rezy - predvolené nastavenie</string>
-  <string name="pref_shared_xsections_summary">Predvolené nastavenie, či pri založení mapovania majú byť Priečne rezy zdieľané medzi nákresmi</string>
+  <string name="pref_shared_xsections_summary">Predvolené nastavenie, či pri založení mapovania majú byť Priečne rezy zdielané medzi nákresmi</string>
   <string name="xsections_shared">Zdielané priečne rezy</string>
-  <string name="xsections_private">Priečne rezy nezdieľané medzi nákresmi</string>
+  <string name="xsections_private">Priečne rezy nezdielané medzi nákresmi</string>
   <string name="pref_reduce_angle_title">Vyrovnávací uhol</string>
   <string name="pref_reduce_angle_summary">Minimálny segmentový uhol pre vyrovnávanie čiar</string>
   <string name="pref_reduce_angle_message">Minimálny segmentový uhol pre vyrovnávanie čiar</string>
