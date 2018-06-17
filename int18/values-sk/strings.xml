@@ -1137,16 +1137,16 @@
   <string name="pref_beep_volume_title">Nastavenie hlasitosti</string>
   <string name="pref_beep_volume_summary">Percento hlasitosti pípania</string>
   <string name="pref_beep_volume_message">Percento hlasitosti pípania</string>
-  <string name="pref_drawing_unit_title">Veľkosť Bodov</string>
-  <string name="pref_drawing_unit_summary">Veľkosť Bodov</string>
+  <string name="pref_drawing_unit_title">Veľkosť Symbolov Bod</string>
+  <string name="pref_drawing_unit_summary">Veľkosť Symbolov Bod</string>
   <string name="pref_drawing_unit_message">Mierka veľkosti Symbolov BOD</string>
-  <string name="pref_unscaled_points_title">Približovanie Bodov v nákrese</string>
+  <string name="pref_unscaled_points_title">Približovanie Symbolov Bod v nákrese</string>
   <string name="pref_unscaled_points_summary">Približovanie bodov v Režime Posunu pri kreslení. Nezaškrtnuté = povolený zoom bodov</string>
   <string name="pref_segment_title">Rozstupové body na čiarach</string>
   <!-- UNUSED string name="pref_segment_summary">Minimálna vzdialenosť bodov na čiarach</string -->
   <string name="pref_segment_message">Minimálna vzdialenosť medzi bodmi čiary</string>
-  <string name="pref_linestyle_title">Štýl Čiary</string>
-  <string name="pref_linestyle_summary">Štýl Čiary</string>
+  <string name="pref_linestyle_title">Štýl Symbolu Čiary</string>
+  <string name="pref_linestyle_summary">Štýl Symbolu Čiary</string>
   <string name="pref_lineacc_title">Presnosť Bezierových kriviek</string>
   <string name="pref_lineacc_summary">Presnosť interpolácie pre Bezierove krivky (čím menšie číslo tým viac bodov)</string>
   <string name="pref_lineacc_message">Presnosť interpolácie pre Bezierove krivky (čím menšie číslo tým viac bodov)</string>
@@ -1177,7 +1177,7 @@
   <string name="pref_dot_radius_title">Veľkosť zelených bodov výberu v Režime Editácie</string>
   <!-- UNUSED string name="pref_dot_radius_summary">Výberové body polomeru</string -->
   <string name="pref_dot_radius_message">Veľkosť zelených bodov výberu v Režime Editácie pri kreslení</string>
-  <string name="pref_line_thickness_title">Hrúbka čiary</string>
+  <string name="pref_line_thickness_title">Hrúbka Symbolu Čiary</string>
   <string name="pref_line_thickness_summary">Hrúbka nakreslenej čiary</string>
   <string name="pref_line_thickness_message">Hrúbka nakreslenej čiary</string>
   <string name="pref_fixed_thickness_title">Šírka meračskej zámery</string>
