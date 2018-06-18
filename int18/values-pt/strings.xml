@@ -270,6 +270,7 @@
     <string name="no_calibration">Nenhuma calibração selecionada</string>
     <string name="no_capture_app">Nenhum aplicativo de captura de imagem</string>
     <string name="no_cave3d">Cave3D não instalado</string>
+    <!-- TODO string name="no_data_reduction">No data reduction</string -->
     <string name="no_db">Nenhum banco de dados</string>
     <string name="no_device_address">Dispositivo não selecionado</string>
     <string name="no_device_found">Nenhum dispositivo encontrado</string>
@@ -464,6 +465,7 @@
     <string name="saturated_coeffs">ALERTA: coeficientes de calibração saturados</string>
     <string name="out_of_memory">ALERTA: sem memória!</string>
     <string name="disk_io_error">CRÍTICO: erro de E/S no disco!</string>
+    <!-- TODO string name="toporobot_warning">WARNING: TopoRobot policy is experimental !</string -->
     <string name="cannot_rename">Não é possível renomear a topo</string>
     <string name="declination">declinação magnética</string>
     <string name="description">descrição</string>
@@ -1130,6 +1132,8 @@
   <string name="pref_segment_message">Distância mínima entre pontos de linhas</string>
   <string name="pref_linestyle_title">Estilo linha</string>
   <string name="pref_linestyle_summary">Estilo de desenho da linha</string>
+  <!-- TODO string name="pref_linecontinue_title">Line continue</string -->
+  <!-- TODO string name="pref_linecontinue_summary">Line default continue-mode</string -->
   <string name="pref_lineacc_title">Precisão interpolação</string>
   <string name="pref_lineacc_summary">Precisão da interpolação Bézier</string>
   <string name="pref_lineacc_message">Exatidão da interpolação cúbica das curvas Bézier</string>

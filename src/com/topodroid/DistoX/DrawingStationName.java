@@ -132,7 +132,7 @@ class DrawingStationName extends DrawingPointPath
         Path path = new Path();
         path.moveTo( cx, cy );
         path.lineTo( cx+mDX, cy+mDY );
-        canvas.drawPath( path, BrushManager.mStationSymbol.mPaint );
+        canvas.drawPath( path, BrushManager.mSectionPaint );
       }
     }
   }
@@ -152,7 +152,7 @@ class DrawingStationName extends DrawingPointPath
         path.moveTo( cx, cy );
         path.lineTo( cx+mDX, cy+mDY );
         path.transform( matrix );
-        canvas.drawPath( path, BrushManager.mStationSymbol.mPaint );
+        canvas.drawPath( path, BrushManager.mSectionPaint );
       }
     }
   }

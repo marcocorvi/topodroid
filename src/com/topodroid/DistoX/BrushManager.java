@@ -110,6 +110,7 @@ class BrushManager
   static Paint highlightPaint3 = null;
   static Paint fixedShotPaint  = null;
   static Paint fixedBluePaint  = null;
+  static Paint lightBluePaint  = null;
   static Paint fixedRedPaint  = null;
   static Paint fixedGreenPaint  = null;
   static Paint fixedYellowPaint  = null;
@@ -129,6 +130,7 @@ class BrushManager
   static Paint fixedStationHiddenPaint  = null;
   static Paint labelPaint  = null;
   static Paint duplicateStationPaint = null;
+  static Paint mSectionPaint = null;
   // static Paint stationPaint = null;
 
   // static BitmapDrawable mSymbolHighlight = null;
@@ -211,6 +213,7 @@ class BrushManager
       highlightPaint3  = makePaint( TDColor.HIGH_RED,     WIDTH_CURRENT, Paint.Style.STROKE );
       fixedShotPaint   = makePaint( 0xffbbbbbb,           WIDTH_CURRENT, Paint.Style.STROKE);
       fixedBluePaint   = makePaint( 0xff9999ff,           WIDTH_CURRENT, Paint.Style.STROKE);
+      lightBluePaint   = makePaint( 0xff99ffff,           WIDTH_CURRENT, Paint.Style.STROKE);
       fixedRedPaint    = makePaint( TDColor.FIXED_RED,    WIDTH_CURRENT, Paint.Style.STROKE);
       fixedYellowPaint = makePaint( TDColor.FIXED_YELLOW, WIDTH_CURRENT, Paint.Style.STROKE);
       fixedGreenPaint  = makePaint( TDColor.GREEN,        WIDTH_CURRENT, Paint.Style.STROKE);
@@ -255,6 +258,7 @@ class BrushManager
 
       // fixedGridPaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
       // fixedGrid10Paint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
+      mSectionPaint = makePaint( TDColor.ORANGE, 4 * WIDTH_FIXED, Paint.Style.FILL_AND_STROKE );
       doneMakePaths = true;
     }
     setStrokeWidths();
@@ -263,28 +267,20 @@ class BrushManager
 
   static void setStrokeWidths()
   {
-    if (fixedShotPaint != null)
-      fixedShotPaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
-    if (fixedBluePaint != null)
-      fixedBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
-    if (fixedSplayPaint != null)
-      fixedSplayPaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
-    if (fixedSplay2Paint != null)
-      fixedSplay2Paint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
+    if (fixedShotPaint != null)   fixedShotPaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
+    if (fixedBluePaint != null)   fixedBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
+    if (lightBluePaint != null)   lightBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
+    if (fixedSplayPaint != null)  fixedSplayPaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
+    if (fixedSplay2Paint != null) fixedSplay2Paint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
   }
 
   static void setTextSizes()
   {
-    if ( labelPaint != null )
-      labelPaint.setTextSize( TDSetting.mLabelSize );
-    if ( fixedStationPaint != null )
-      fixedStationPaint.setTextSize( TDSetting.mStationSize );
-    if ( fixedStationBarrierPaint != null ) 
-      fixedStationBarrierPaint.setTextSize( TDSetting.mStationSize );
-    if ( fixedStationHiddenPaint != null )
-      fixedStationHiddenPaint.setTextSize( TDSetting.mStationSize );
-    if ( duplicateStationPaint != null ) 
-      duplicateStationPaint.setTextSize( TDSetting.mStationSize );
+    if ( labelPaint != null )               labelPaint.setTextSize( TDSetting.mLabelSize );
+    if ( fixedStationPaint != null )        fixedStationPaint.setTextSize( TDSetting.mStationSize );
+    if ( fixedStationBarrierPaint != null ) fixedStationBarrierPaint.setTextSize( TDSetting.mStationSize );
+    if ( fixedStationHiddenPaint != null )  fixedStationHiddenPaint.setTextSize( TDSetting.mStationSize );
+    if ( duplicateStationPaint != null )    duplicateStationPaint.setTextSize( TDSetting.mStationSize );
   }
 
 }

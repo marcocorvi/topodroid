@@ -271,6 +271,7 @@
     <string name="no_calibration">Nessuna calibrazione selezionata</string>
     <string name="no_capture_app">Nessuna app per foto</string>
     <string name="no_cave3d">Cave3D non installato</string>
+    <!-- TODO string name="no_data_reduction">No data reduction</string -->
     <string name="no_db">Nessun database</string>
     <string name="no_device_address">Dispositivo non selezionato</string>
     <string name="no_device_found">Dispositivo non trovato</string>
@@ -466,6 +467,7 @@
     <string name="saturated_coeffs">WARNING: Coefficienti di calibrazione saturati</string>
     <string name="out_of_memory">WARNING: Memoria terminata !</string>
     <string name="disk_io_error">CRITICAL: Errore disco !</string>
+    <!-- TODO string name="toporobot_warning">WARNING: TopoRobot policy is experimental !</string -->
     <string name="cannot_rename">Rinomina rilievo non riuscita</string>
     <string name="declination">decl. magn.</string>
     <string name="description">descrizione</string>
@@ -1137,6 +1139,8 @@
   <string name="pref_segment_message">Minima distanza fra punti di una linea</string>
   <string name="pref_linestyle_title">Stile linee</string>
   <string name="pref_linestyle_summary">Stile linee</string>
+  <!-- TODO string name="pref_linecontinue_title">Line continue</string -->
+  <!-- TODO string name="pref_linecontinue_summary">Line default continue-mode</string -->
   <string name="pref_lineacc_title">Accuratezza curve Bezier</string>
   <string name="pref_lineacc_summary">Accuratezza di interpolazione per le curve Bezier</string>
   <string name="pref_lineacc_message">Accuratezza di interpolazione per le curve Bezier</string>

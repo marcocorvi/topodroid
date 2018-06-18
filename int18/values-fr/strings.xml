@@ -271,6 +271,7 @@
 <string name="no_calibration">Aucun étalonnage sélectionné</string>
 <string name="no_capture_app">Aucune application de capture d\'image</string>
 <string name="no_cave3d">Cave3D n\'est pas installé</string>
+    <!-- TODO string name="no_data_reduction">No data reduction</string -->
 <string name="no_db">Pas de base de données</string>
 <string name="no_device_address">Adresse de périphérique non sélectionnée</string>
 <string name="no_device_found">Pas de périphérique trouvé</string>
@@ -466,6 +467,7 @@
     <string name="saturated_coeffs">ATTENTION : coefficients d\'étalonnage saturés</string>
     <string name="out_of_memory">ATTENTION : mémoire pleine !</string>
     <string name="disk_io_error">PANNE CRITIQUE : erreur écriture lecture disque !</string>
+    <!-- TODO string name="toporobot_warning">WARNING: TopoRobot policy is experimental !</string -->
     <string name="cannot_rename">Impossible de renommer le relevé</string>
     <string name="declination">Déclinaison magnétique</string>
     <string name="description">Description</string>
@@ -1129,6 +1131,8 @@
   <string name="pref_segment_message">Distance mini entre les points d\'une ligne</string>
   <string name="pref_linestyle_title">Style de ligne</string>
   <string name="pref_linestyle_summary">Style de ligne</string>
+  <!-- TODO string name="pref_linecontinue_title">Line continue</string -->
+  <!-- TODO string name="pref_linecontinue_summary">Line default continue-mode</string -->
   <string name="pref_lineacc_title">Précision Bézier</string>
   <string name="pref_lineacc_summary">Précision de l\'interpolation Bézier</string>
   <string name="pref_lineacc_message">Précision de l\'interpolation cubique Bézier</string>

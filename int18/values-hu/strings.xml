@@ -271,6 +271,7 @@
     <string name="no_calibration">Nincs kalibráció kiválasztva</string>
     <string name="no_capture_app">Nincs app fénykép készítéshez</string>
     <string name="no_cave3d">Cave3D nincs telepítve</string>
+    <!-- TODO string name="no_data_reduction">No data reduction</string -->
     <string name="no_db">Nincs adatbázis</string>
     <string name="no_device_address">Nincs kiválasztott eszköz</string>
     <string name="no_device_found">Nem talált eszközt</string>
@@ -466,6 +467,7 @@
     <!-- TODO string name="saturated_coeffs">WARNING: saturated calibration coefficients</string -->
     <!-- TODO string name="out_of_memory">WARNING: out of memory !</string -->
     <!-- TODO string name="disk_io_error">CRITICAL: disk i/o error !</string -->
+    <!-- TODO string name="toporobot_warning">WARNING: TopoRobot policy is experimental !</string -->
     <string name="cannot_rename">A felmérés nem nevezhető át</string>
     <string name="declination">Mágn. dekl.</string>
     <string name="description">leírás</string>
@@ -1130,6 +1132,8 @@
   <string name="pref_segment_message">Minimális távolság egy vonalon lévő pontok között</string>
   <string name="pref_linestyle_title">Vonalstílus</string>
   <string name="pref_linestyle_summary">Vonal rajzstílusa</string>
+  <!-- TODO string name="pref_linecontinue_title">Line continue</string -->
+  <!-- TODO string name="pref_linecontinue_summary">Line default continue-mode</string -->
   <string name="pref_lineacc_title">Interpoláció pontossága</string>
   <string name="pref_lineacc_summary">Bezier interpoláció pontossága</string>
   <string name="pref_lineacc_message">Négyzetes Bezier interpoláció pontossága</string>

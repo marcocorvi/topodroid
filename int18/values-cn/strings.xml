@@ -270,6 +270,7 @@
     <string name="no_calibration">无校准选择</string>
     <string name="no_capture_app">无图像捕捉软件</string>
     <string name="no_cave3d">Cave3D 未安装</string>
+    <!-- TODO string name="no_data_reduction">No data reduction</string -->
     <string name="no_db">无数据库</string>
     <string name="no_device_address">设备未指定</string>
     <string name="no_device_found">未发现设备</string>
@@ -465,6 +466,7 @@
     <!-- TODO string name="saturated_coeffs">WARNING: saturated calibration coefficients</string -->
     <!-- TODO string name="out_of_memory">WARNING: out of memory !</string -->
     <!-- TODO string name="disk_io_error">CRITICAL: disk i/o error !</string -->
+    <!-- TODO string name="toporobot_warning">WARNING: TopoRobot policy is experimental !</string -->
     <string name="cannot_rename">不能重命名</string>
     <string name="declination">磁偏角.</string>
     <string name="description">描述</string>
@@ -1131,6 +1133,8 @@
   <string name="pref_segment_message">线上的点之间的最小距离</string>
   <string name="pref_linestyle_title">线类型</string>
   <string name="pref_linestyle_summary">线绘制类型</string>
+  <!-- TODO string name="pref_linecontinue_title">Line continue</string -->
+  <!-- TODO string name="pref_linecontinue_summary">Line default continue-mode</string -->
   <string name="pref_lineacc_title">贝塞尔线精度</string>
   <string name="pref_lineacc_summary">贝塞尔线插值精度</string>
   <string name="pref_lineacc_message">贝塞尔线三次插值精度</string>

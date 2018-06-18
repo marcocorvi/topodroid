@@ -273,6 +273,7 @@
     <string name="no_calibration">Калібрування не вибране</string>
     <string name="no_capture_app">Відсутній додаток для фото</string>
     <string name="no_cave3d">Cave3D не встановлений</string>
+    <!-- TODO string name="no_data_reduction">No data reduction</string -->
     <string name="no_db">Відсутня база даних</string>
     <string name="no_device_address">Прилад не вибраний</string>
     <string name="no_device_found">Прилад не виявлено</string>
@@ -468,6 +469,7 @@
     <!-- TODO string name="saturated_coeffs">WARNING: saturated calibration coefficients</string -->
     <!-- TODO string name="out_of_memory">WARNING: out of memory !</string -->
     <!-- TODO string name="disk_io_error">CRITICAL: disk i/o error !</string -->
+    <!-- TODO string name="toporobot_warning">WARNING: TopoRobot policy is experimental !</string -->
     <string name="cannot_rename">Не можу перйменувати зйомку</string>
     <string name="declination">Магн. схилення.</string>
     <string name="description">опис</string>
@@ -1135,6 +1137,8 @@
   <string name="pref_segment_message">Мінімальна відстань між точками в лінії</string>
   <string name="pref_linestyle_title">Стиль рмалювання ліній</string>
   <string name="pref_linestyle_summary">Спосіб відрисовки ліній</string>
+  <!-- TODO string name="pref_linecontinue_title">Line continue</string -->
+  <!-- TODO string name="pref_linecontinue_summary">Line default continue-mode</string -->
   <string name="pref_lineacc_title">Точність кривих Безьє</string>
   <string name="pref_lineacc_summary">Точність кривих Безьє</string>
   <string name="pref_lineacc_message">Точність кубічної інтерполяції у відрисовке кривих Безьє</string>

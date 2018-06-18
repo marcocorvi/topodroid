@@ -352,8 +352,8 @@ class DrawingPath extends RectF
       if (    mType == DRAWING_PATH_SPLAY  // FIXME_X_SPLAY
            && mBlock != null ) {
 	if ( mBlock.isRecent( TopoDroidApp.mSecondLastShotId, System.currentTimeMillis()/1000 ) ) {
-          if ( mBlock.mType == DBlock.BLOCK_SPLAY && BrushManager.fixedBluePaint != null ) {
-            canvas.drawPath( path, BrushManager.fixedBluePaint );
+          if ( mBlock.mType == DBlock.BLOCK_SPLAY && BrushManager.lightBluePaint != null ) {
+            canvas.drawPath( path, BrushManager.lightBluePaint );
           } else if ( mBlock.mType == DBlock.BLOCK_X_SPLAY && BrushManager.fixedSplay2Paint != null ) {
             canvas.drawPath( path, BrushManager.fixedSplay2Paint );
           }

@@ -1242,7 +1242,7 @@ public class TopoDroidApp extends Application
     if ( TDSetting.mTRobotShot ) {
       long millis = SystemClock.uptimeMillis(); // FIXME TROBOT
       if ( millis > trobotmillis + 10000 ) {
-        TDToast.make( this, "WARNING TopoRobot policy is very experimental" );
+        TDToast.make( this, R.string.toporobot_warning );
         trobotmillis = millis;
       }
       mStationName.assignStationsAfter_TRobot( mData, mSID, blk0, list, sts );
@@ -1270,7 +1270,7 @@ public class TopoDroidApp extends Application
     if ( TDSetting.mTRobotShot ) {
       long millis = SystemClock.uptimeMillis(); // FIXME TROBOT
       if ( millis > trobotmillis + 10000 ) {
-        TDToast.make( this, "WARNING TopoRobot policy is very experimental" );
+        TDToast.make( this, R.string.toporobot_warning );
         trobotmillis = millis;
       }
       mStationName.assignStations_TRobot( mData, mSID, list, sts );

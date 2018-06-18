@@ -273,6 +273,7 @@
     <string name="no_calibration">Калибровка не выбрана</string>
     <string name="no_capture_app">Отсутствует приложение для фото</string>
     <string name="no_cave3d">Cave3D не установлен</string>
+    <!-- TODO string name="no_data_reduction">No data reduction</string -->
     <string name="no_db">Отсутствует база данных</string>
     <string name="no_device_address">Прибор не выбран</string>
     <string name="no_device_found">Прибор не обнаружен</string>
@@ -470,6 +471,7 @@
     <string name="saturated_coeffs">ВНИМАНИЕ: насыщенные коэфициенты калибровки</string>
     <string name="out_of_memory">ВНИМАНИЕ: out of memory !</string>
     <string name="disk_io_error">ОШИБКА: ошибка ввода/вывода !</string>
+    <!-- TODO string name="toporobot_warning">WARNING: TopoRobot policy is experimental !</string -->
     <string name="cannot_rename">Не могу перименовать съёмку</string>
     <string name="declination">Магн. скл.</string>
     <string name="description">описание</string>
@@ -1146,6 +1148,8 @@
   <string name="pref_segment_message">Минимальное расстояние между точками в линии</string>
   <string name="pref_linestyle_title">Стиль рисования линий</string>
   <string name="pref_linestyle_summary">Способ отрисовки линий</string>
+  <!-- TODO string name="pref_linecontinue_title">Line continue</string -->
+  <!-- TODO string name="pref_linecontinue_summary">Line default continue-mode</string -->
   <string name="pref_lineacc_title">Точность кривых Безье</string>
   <string name="pref_lineacc_summary">Точность кривых Безье</string>
   <string name="pref_lineacc_message">Точность кубической интерполяции в отрисовке кривых Безье</string>

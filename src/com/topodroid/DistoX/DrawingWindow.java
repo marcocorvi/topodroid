@@ -73,7 +73,7 @@ import java.util.concurrent.RejectedExecutionException;
 // import java.util.Deque; // only API-9
 
 // import android.util.SparseArray;
-// import android.util.Log;
+import android.util.Log;
 
 /**
  */
@@ -352,7 +352,7 @@ public class DrawingWindow extends ItemDrawer
 
   // line join-continue
   static final private int CONT_OFF   = -1; // continue off
-  static final private int CONT_NONE  = 0;  // no continue
+  static final         int CONT_NONE  = 0;  // no continue
   static final private int CONT_START = 1;  // continue: join to existing line
   static final private int CONT_END   = 2;  // continue: join to existing line
   static final private int CONT_BOTH  = 3;  // continue: join to existing line
@@ -403,6 +403,8 @@ public class DrawingWindow extends ItemDrawer
   private String mTo;   // TO station for sections
   private float mAzimuth = 0.0f;
   private float mClino   = 0.0f;
+  private float mIntersectionT = -1.0f; // intersection abscissa for leg xsections
+  private int   mSectionSkip = 0;       // number of splays to skip in section refresh
   private PointF mOffset  = new PointF( 0f, 0f );
   private PointF mDisplayCenter;
   private float mZoom  = 1.0f;
@@ -1427,7 +1429,7 @@ public class DrawingWindow extends ItemDrawer
   {
     mSectionName  = null; 
     mShiftDrawing = false;
-    mContinueLine = CONT_NONE;
+    // mContinueLine = TDSetting.mContinueLine; // do not reset cont-mode
     resetModified();
     setMode( MODE_MOVE );
     mTouchMode    = MODE_MOVE;
@@ -1449,8 +1451,9 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.setDisplayMode( mSavedMode );
     // Log.v("DistoX", "pop " + mType + " " + mName + " from " + mFrom + " A " + mAzimuth + " C " + mClino );
     resetStatus();
-    mButton1[ BTN_DOWNLOAD ].setVisibility( View.VISIBLE );
-    mButton1[ BTN_BLUETOOTH ].setVisibility( View.VISIBLE );
+    // FIXME_SK mButton1[ BTN_DOWNLOAD ].setVisibility( View.VISIBLE );
+    // FIXME_SK mButton1[ BTN_BLUETOOTH ].setVisibility( View.VISIBLE );
+
     // mButton1[ BTN_PLOT ].setVisibility( View.VISIBLE );
     mButton1[BTN_PLOT].setOnLongClickListener( this );
     if ( TDLevel.overNormal && BTN_DIAL < mButton1.length ) mButton1[ BTN_DIAL ].setVisibility( View.VISIBLE );
@@ -1501,8 +1504,9 @@ public class DrawingWindow extends ItemDrawer
     doStart( true, tt );
     updateSplays( mApp.mSplayMode );
 
-    mButton1[ BTN_DOWNLOAD ].setVisibility( View.GONE );
-    mButton1[ BTN_BLUETOOTH ].setVisibility( View.GONE );
+    // FIXME_SK mButton1[ BTN_DOWNLOAD ].setVisibility( View.GONE );
+    // FIXME_SK mButton1[ BTN_BLUETOOTH ].setVisibility( View.GONE );
+
     // mButton1[ BTN_PLOT ].setVisibility( View.GONE );
     mButton1[BTN_PLOT].setOnLongClickListener( null );
     if ( TDLevel.overNormal && BTN_DIAL < mButton1.length ) mButton1[ BTN_DIAL ].setVisibility( View.GONE );
@@ -1737,7 +1741,7 @@ public class DrawingWindow extends ItemDrawer
     if ( mMoveTo.length() == 0 ) mMoveTo = null;
     mSectionName  = null; // resetStatus
     mShiftDrawing = false;
-    mContinueLine = CONT_NONE;
+    mContinueLine = TDSetting.mContinueLine;
     resetModified();
 
     // if ( PlotInfo.isSection( mType ) ) { 
@@ -1802,7 +1806,7 @@ public class DrawingWindow extends ItemDrawer
       mMoveTo  = null;
       mSectionName  = null; // resetStatus
       mShiftDrawing = false;
-      mContinueLine = CONT_NONE;
+      // mContinueLine = TDSetting.mContinueLine; 
       resetModified();
 
       doStart( true, -1 );
@@ -1903,15 +1907,30 @@ public class DrawingWindow extends ItemDrawer
 
 // ----------------------------------------------------------------------------
 
+  private void doRestart( )
+  {
+    List<DBlock> list = null;
+    if ( PlotInfo.isSection( mType ) ) {
+      list = mApp_mData.selectAllShotsAtStations( mSid, mFrom, mTo );
+    } else if ( PlotInfo.isXSection( mType ) ) { 
+      // N.B. mTo can be null
+      list = mApp_mData.selectShotsAt( mSid, mFrom, false ); // select only splays
+    }
+    if ( list != null && list.size() > mSectionSkip ) {
+      makeSectionReferences( list, mIntersectionT, mSectionSkip );
+    }
+  }
+
   // tt used only by leg x-sections when created to insert leg intersection point
   private void doStart( boolean do_load, float tt )
   {
+    mIntersectionT = tt;
     // Log.v("DistoX", "do start() tt " + tt );
     // TDLog.Log( TDLog.LOG_PLOT, "do Start() " + mName1 + " " + mName2 );
     mCurrentPoint = ( BrushManager.mPointLib.isSymbolEnabled( "label" ) )? 1 : 0;
     mCurrentLine  = ( BrushManager.mLineLib.isSymbolEnabled( "wall" ) )? 1 : 0;
     mCurrentArea  = ( BrushManager.mAreaLib.isSymbolEnabled( "water" ) )? 1 : 0;
-    mContinueLine = CONT_NONE;
+    // mContinueLine = TDSetting.mContinueLine; // do not reset
     if ( TDLevel.overNormal ) setButtonContinue( mContinueLine );
 
     List<DBlock> list = null;
@@ -1941,7 +1960,8 @@ public class DrawingWindow extends ItemDrawer
     // X_SECTION, XH_SECTION: mFrom != null, mTo == null, splays only 
 
     if ( PlotInfo.isAnySection( mType ) ) {
-      makeSectionReferences( list, tt );
+      mDrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
+      makeSectionReferences( list, tt, 0 );
     // } else {
     //   Log.v("DistoX", "try to highlight [1] ");
     //   if ( mApp.hasHighlighted() ) mDrawingSurface.highlights( mApp ); 
@@ -1956,11 +1976,11 @@ public class DrawingWindow extends ItemDrawer
   //   DrawingSpecialPath path = new DrawingSpecialPath( DrawingSpecialPath.SPECIAL_DOT, mDrawingUtil.toSceneX(x,y), mDrawingUtil.toSceneY(x,y) );
   //   mDrawingSurface.addDrawingPath( path );
   // }
-
-  private void makeSectionReferences( List<DBlock> list, float tt )
+  
+  private void makeSectionReferences( List<DBlock> list, float tt, int skip )
   {
     // Log.v("DistoX", "Section " + mClino + " " + mAzimuth );
-    mDrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
+    // mDrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface ); // FIXME_SK moved out
     float xfrom=0;
     float yfrom=0;
     float xto=0;
@@ -1991,68 +2011,71 @@ public class DrawingWindow extends ItemDrawer
     DBlock blk = null;
     float xn = 0;  // X-North // Rotate as NORTH is upward
     float yn = -1; // Y-North
-    if ( PlotInfo.isSection( mType ) ) {
-      if ( mType == PlotInfo.PLOT_H_SECTION ) {
-        if ( Math.abs( mClino ) > TDSetting.mHThreshold ) { // north arrow == (1,0,0), 5 m long in the CS plane
-          xn =  X1;
-          yn = -X2;
-          float d = 5 / (float)Math.sqrt(xn*xn + yn*yn);
-          if ( mClino > 0 ) xn = -xn;
-          // FIXME NORTH addFixedSpecial( xn*d, yn*d, 0, 0, 0, 0 ); 
-          // addFixedSpecial( 0, -d, 0, 0, 0, 0 ); // NORTH is upward
-          // if ( mLandscape ) {
-          //   addFixedSpecial( -d, 0, 0, 0 ); // NORTH is leftward
-          // } else {
-            addFixedSpecial( 0, -d, 0, 0 ); // NORTH is upward
-          // }
+    if ( skip == 0 ) {
+      if ( PlotInfo.isSection( mType ) ) {
+        if ( mType == PlotInfo.PLOT_H_SECTION ) {
+          if ( Math.abs( mClino ) > TDSetting.mHThreshold ) { // north arrow == (1,0,0), 5 m long in the CS plane
+            xn =  X1;
+            yn = -X2;
+            float d = 5 / (float)Math.sqrt(xn*xn + yn*yn);
+            if ( mClino > 0 ) xn = -xn;
+            // FIXME NORTH addFixedSpecial( xn*d, yn*d, 0, 0, 0, 0 ); 
+            // addFixedSpecial( 0, -d, 0, 0, 0, 0 ); // NORTH is upward
+            // if ( mLandscape ) {
+            //   addFixedSpecial( -d, 0, 0, 0 ); // NORTH is leftward
+            // } else {
+              addFixedSpecial( 0, -d, 0, 0 ); // NORTH is upward
+            // }
+          }
         }
-      }
-
-      for ( DBlock b : list ) {
-        if ( b.isSplay() ) continue;
-        if ( mFrom.equals( b.mFrom ) && mTo.equals( b.mTo ) ) { // FROM --> TO
-          dist = b.mLength;
-          blk = b;
-          break;
-        } else if ( mFrom.equals( b.mTo ) && mTo.equals( b.mFrom ) ) { // TO --> FROM
-          dist = - b.mLength;
-          blk = b;
-          break;
+        for ( DBlock b : list ) {
+          if ( b.isSplay() ) continue;
+          if ( mFrom.equals( b.mFrom ) && mTo.equals( b.mTo ) ) { // FROM --> TO
+            dist = b.mLength;
+            blk = b;
+            break;
+          } else if ( mFrom.equals( b.mTo ) && mTo.equals( b.mFrom ) ) { // TO --> FROM
+            dist = - b.mLength;
+            blk = b;
+            break;
+          }
         }
-      }
-      if ( blk != null ) {
-        float bc = blk.mClino * TDMath.DEG2RAD;
-        float bb = blk.mBearing * TDMath.DEG2RAD;
-        float X = (float)Math.cos( bc ) * (float)Math.cos( bb );
-        float Y = (float)Math.cos( bc ) * (float)Math.sin( bb );
-        float Z = (float)Math.sin( bc );
-        xfrom = -dist * (X1 * X + Y1 * Y + Z1 * Z); // neg. because it is the FROM point
-        yfrom =  dist * (X2 * X + Y2 * Y + Z2 * Z);
-        if ( mType == PlotInfo.PLOT_H_SECTION ) { // Rotate as NORTH is upward
-          float xx = -yn * xfrom + xn * yfrom;
-          yfrom = -xn * xfrom - yn * yfrom;
-          xfrom = xx;
+        if ( blk != null ) {
+          float bc = blk.mClino * TDMath.DEG2RAD;
+          float bb = blk.mBearing * TDMath.DEG2RAD;
+          float X = (float)Math.cos( bc ) * (float)Math.cos( bb );
+          float Y = (float)Math.cos( bc ) * (float)Math.sin( bb );
+          float Z = (float)Math.sin( bc );
+          xfrom = -dist * (X1 * X + Y1 * Y + Z1 * Z); // neg. because it is the FROM point
+          yfrom =  dist * (X2 * X + Y2 * Y + Z2 * Z);
+          if ( mType == PlotInfo.PLOT_H_SECTION ) { // Rotate as NORTH is upward
+            float xx = -yn * xfrom + xn * yfrom;
+            yfrom = -xn * xfrom - yn * yfrom;
+            xfrom = xx;
+          }
+          // addFixedLine( mType, blk, xfrom, yfrom, xto, yto, 0, 0, false, false ); // not-splay, not-selecteable
+          addFixedLine( mType, blk, xfrom, yfrom, xto, yto, blk.getReducedExtend(), false, false ); // not-splay, not-selecteable
+          mDrawingSurface.addDrawingStationName( mFrom, mDrawingUtil.toSceneX(xfrom, yfrom), mDrawingUtil.toSceneY(xfrom, yfrom) );
+          mDrawingSurface.addDrawingStationName( mTo, mDrawingUtil.toSceneX(xto, yto), mDrawingUtil.toSceneY(xto, yto) );
+          if ( tt >= 0 && tt <= 1 ) {
+            float xtt = xfrom + tt * ( xto - xfrom );
+            float ytt = yfrom + tt * ( yto - yfrom );
+            if ( mLandscape ) { float t=xtt; xtt=-ytt; ytt=t; }
+            // Log.v("DistoX", "TT " + tt + " " + xtt + " " + xfrom + " " + xto );
+            // makeXSectionLegPoint( xtt, ytt );
+            DrawingSpecialPath path = new DrawingSpecialPath( DrawingSpecialPath.SPECIAL_DOT, mDrawingUtil.toSceneX(xtt,ytt), mDrawingUtil.toSceneY(xtt,ytt) );
+            mDrawingSurface.addDrawingPath( path );
+          }
         }
-        // addFixedLine( mType, blk, xfrom, yfrom, xto, yto, 0, 0, false, false ); // not-splay, not-selecteable
-        addFixedLine( mType, blk, xfrom, yfrom, xto, yto, blk.getReducedExtend(), false, false ); // not-splay, not-selecteable
+      } else { // if ( PlotInfo.isXSection( mType ) ) 
         mDrawingSurface.addDrawingStationName( mFrom, mDrawingUtil.toSceneX(xfrom, yfrom), mDrawingUtil.toSceneY(xfrom, yfrom) );
-        mDrawingSurface.addDrawingStationName( mTo, mDrawingUtil.toSceneX(xto, yto), mDrawingUtil.toSceneY(xto, yto) );
-        if ( tt >= 0 && tt <= 1 ) {
-          float xtt = xfrom + tt * ( xto - xfrom );
-          float ytt = yfrom + tt * ( yto - yfrom );
-	  if ( mLandscape ) { float t=xtt; xtt=-ytt; ytt=t; }
-          // Log.v("DistoX", "TT " + tt + " " + xtt + " " + xfrom + " " + xto );
-	  // makeXSectionLegPoint( xtt, ytt );
-          DrawingSpecialPath path = new DrawingSpecialPath( DrawingSpecialPath.SPECIAL_DOT, mDrawingUtil.toSceneX(xtt,ytt), mDrawingUtil.toSceneY(xtt,ytt) );
-          mDrawingSurface.addDrawingPath( path );
-        }
       }
-    } else { // if ( PlotInfo.isXSection( mType ) ) 
-      mDrawingSurface.addDrawingStationName( mFrom, mDrawingUtil.toSceneX(xfrom, yfrom), mDrawingUtil.toSceneY(xfrom, yfrom) );
     }
 
+    int cnt = 0;
     for ( DBlock b : list ) { // repeat for splays
-      if ( ! b.isSplay() ) continue;
+      ++cnt;
+      if ( cnt < skip || ! b.isSplay() ) continue;
   
       int splay_station = 3; // could use a boolean
       if ( b.mFrom.equals( mFrom ) ) {
@@ -2090,6 +2113,7 @@ public class DrawingWindow extends ItemDrawer
         addFixedSectionSplay( b, xto, yto, xto+x, yto+y, a, true );
       }
     }
+    mSectionSkip = cnt;
     // mDrawingSurface.setScaleBar( mCenter.x, mCenter.y ); // (90,160) center of the drawing
   }
 
@@ -2872,13 +2896,13 @@ public class DrawingWindow extends ItemDrawer
             DrawingPath path = hot.mItem;
     	    if ( path.mType == DrawingPath.DRAWING_PATH_FIXED ) {
     	      DBlock blk = path.mBlock;
-    	      float ms = TDSetting.mMinShift / 2;
+    	      float ms = mZoom * TopoDroidApp.mDisplayWidth/(16*DrawingUtil.SCALE_FIX); // TDSetting.mMinShift / 2;
     	      if ( mLandscape ) {
     	        float y = (path.y1 + path.y2)/2; // midpoin (scene)
     	        if ( Math.abs( y - xs ) < ms ) {
     	          float x = (path.x1 + path.x2)/2; // midpoin (scene)
     	          // Log.v("DistoX", "blk scene " + x + " " + y + " tap " + xs + " " + ys);
-    	          if ( Math.abs( x + ys ) < 4*ms ) {
+    	          if ( Math.abs( x + ys ) < 2*ms ) {
     	            int extend = (-ys + ms < x)? -1 : (-ys - ms > x)? 1 : 0;
                     updateBlockExtend( blk, extend ); // equal extend checked by the method
     	          }
@@ -2887,8 +2911,8 @@ public class DrawingWindow extends ItemDrawer
     	        float y = (path.y1 + path.y2)/2; // midpoin (scene)
     	        if ( Math.abs( y - ys ) < ms ) {
     	          float x = (path.x1 + path.x2)/2; // midpoin (scene)
-    	          // Log.v("DistoX", "blk scene " + path.x1 + " " + path.x2 + " x " + x + " tap " + xs );
-    	          if ( Math.abs( x - xs ) < 4*ms ) {
+    	          // Log.v("DistoX", "blk scene " + path.x1 + " " + path.x2 + " x " + x + " tap " + xs + " ms " + ms);
+    	          if ( Math.abs( x - xs ) < 2*ms ) {
     	            int extend = (xs + ms < x)? -1 : (xs - ms > x)? 1 : 0;
                     updateBlockExtend( blk, extend ); // equal extend checked by the method
     	          }
@@ -4786,7 +4810,10 @@ public class DrawingWindow extends ItemDrawer
       // }
     // }
     if ( mType != (int)PlotInfo.PLOT_PLAN && ! PlotInfo.isProfile( mType ) ) {
-      resetReference( mPlot3 );
+      // FIXME_SK resetReference( mPlot3 );
+      // Log.v("DistoX", "update display() type " + mType + " section skip " + mSectionSkip );
+      doRestart();
+      updateSplays( mApp.mSplayMode );
     } else {
       List<DBlock> list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
       mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl );
@@ -4853,7 +4880,7 @@ public class DrawingWindow extends ItemDrawer
   public void updateBlockList( DBlock blk ) 
   {
     // Log.v("DistoX", "Drawing window: update Block List block " + blk.mFrom + " - " + blk.mTo ); // DATA_DOWNLOAD
-    // mApp.mShotWindow.updateBlockList( blk ); // FIXME-EXTEND this is not needed
+    mApp.mShotWindow.updateBlockList( blk ); // FIXME-EXTEND this is needed to update sketch splays immediately on download
     updateDisplay( /* true, true */ );
   }
 
@@ -4861,7 +4888,7 @@ public class DrawingWindow extends ItemDrawer
   public void updateBlockList( long blk_id )
   {
     // Log.v("DistoX", "Drawing window: update Block List block id " + blk_id ); // DATA_DOWNLOAD
-    // mApp.mShotWindow.updateBlockList( blk_id ); // FIXME-EXTEND this is not needed
+    mApp.mShotWindow.updateBlockList( blk_id ); // FIXME-EXTEND this is needed to update sketch splays immediately on download
     updateDisplay( /* true, true */ );
   }
 
@@ -4907,7 +4934,7 @@ public class DrawingWindow extends ItemDrawer
     if ( PlotInfo.isSketch2D( type ) ) {
       mMenuAdapter.add( res.getString( menus[0] ) ); // SWITCH/CLOSE
     } else {
-      mMenuAdapter.add( res.getString( menus[MENU_CLOSE] ) );  // AREA
+      mMenuAdapter.add( res.getString( menus[MENU_CLOSE] ) );  // CLOSE
     }
     mMenuAdapter.add( res.getString( menus[1] ) );  // EXPORT
     if ( PlotInfo.isAnySection( type ) ) {
@@ -4983,21 +5010,23 @@ public class DrawingWindow extends ItemDrawer
         }
       } else if ( p++ == pos ) { // EXPORT
         new ExportDialog( mActivity, this, TDConst.mPlotExportTypes, R.string.title_plot_save ).show();
-      } else if ( p++ == pos ) { // INFO
-        if ( mNum != null ) {
-          float azimuth = -1;
-          if ( mPlot2 !=  null && PlotInfo.PLOT_PROFILE == mPlot2.type ) {
-            azimuth = mPlot2.azimuth;
-          }
-          new DistoXStatDialog( mActivity, mNum, mPlot1.start, azimuth, mApp_mData.getSurveyStat( mApp.mSID ) ).show();
-        } else if ( PlotInfo.isAnySection( mType ) ) {
+      } else if ( p++ == pos ) { // INFO / AREA
+        if ( PlotInfo.isAnySection( mType ) ) {
           float area = mDrawingSurface.computeSectionArea() / (DrawingUtil.SCALE_FIX * DrawingUtil.SCALE_FIX);
-          // Log.v("DistoX", "Section area " + area );
           Resources res = getResources();
           String msg = String.format( res.getString( R.string.section_area ), area );
           TopoDroidAlertDialog.makeAlert( mActivity, res, msg, R.string.button_ok, -1, null, null );
-        }
-
+	} else {
+          if ( mNum != null ) {
+            float azimuth = -1;
+            if ( mPlot2 !=  null && PlotInfo.PLOT_PROFILE == mPlot2.type ) {
+              azimuth = mPlot2.azimuth;
+            }
+            new DistoXStatDialog( mActivity, mNum, mPlot1.start, azimuth, mApp_mData.getSurveyStat( mApp.mSID ) ).show();
+          } else {
+            TDToast.make( mActivity, R.string.no_data_reduction );
+	  }
+	}
       } else if ( TDLevel.overNormal && p++ == pos ) { // RECOVER RELOAD
         if ( PlotInfo.isProfile( mType ) ) {
           ( new PlotRecoverDialog( mActivity, this, mFullName2, mType ) ).show();
@@ -5096,7 +5125,8 @@ public class DrawingWindow extends ItemDrawer
       mDrawingSurface.modeloadDataStream( tdr, th2, null );
       DrawingSurface.addManagerToCache( mFullName2 );
       setPlotType3( );
-      makeSectionReferences( mApp_mData.selectAllShots( mSid, TDStatus.NORMAL ), -1 );
+      mDrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
+      makeSectionReferences( mApp_mData.selectAllShots( mSid, TDStatus.NORMAL ), -1, 0 );
     }
     mOffset.x = x;
     mOffset.y = y;

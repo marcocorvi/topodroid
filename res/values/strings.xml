@@ -273,6 +273,7 @@
     <string name="no_calibration">No calibration selected</string>
     <string name="no_capture_app">No image capture app</string>
     <string name="no_cave3d">Cave3D not installed</string>
+    <string name="no_data_reduction">No data reduction</string>
     <string name="no_db">No database</string>
     <string name="no_device_address">Device not selected</string>
     <string name="no_device_found">Found no device</string>
@@ -469,6 +470,8 @@
     <string name="saturated_coeffs">WARNING: saturated calibration coefficients</string>
     <string name="out_of_memory">WARNING: out of memory !</string>
     <string name="disk_io_error">CRITICAL: disk i/o error !</string>
+    <string name="toporobot_warning">WARNING: TopoRobot policy is experimental !</string>
+
 
     <string name="cannot_rename">Cannot rename survey</string>
     <string name="declination">Magn. decl.</string>
@@ -1147,6 +1150,8 @@
   <string name="pref_segment_message">Minimum distance between points on a line</string>
   <string name="pref_linestyle_title">Line style</string>
   <string name="pref_linestyle_summary">Line drawing style</string>
+  <string name="pref_linecontinue_title">Line continue</string>
+  <string name="pref_linecontinue_summary">Line default continue-mode</string>
   <string name="pref_lineacc_title">Interpolation accuracy</string>
   <string name="pref_lineacc_summary">Bezier interpolation accuracy</string>
   <string name="pref_lineacc_message">Bezier cubic interpolation accuracy</string>

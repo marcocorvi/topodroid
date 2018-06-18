@@ -406,11 +406,13 @@ class StationName
       } else if ( blk.mType == DBlock.BLOCK_MAIN_LEG ) {
         if ( blk.mId != blk0.mId ) {
           String p_to;
-          if ( /* flip && */ checkBackshot( blk, fore_length, fore_bearing, fore_clino ) ) { // backward
+          boolean backsight = checkBackshot( blk, fore_length, fore_bearing, fore_clino ); 
+          if ( /* flip && */ backsight ) {
             // flip = false;
             p_to = oldFrom; 
             from = to;
             station = from;
+	    data_helper.updateShotFlag( blk.mId, sid, DBlock.BLOCK_DUPLICATE, true ); // true = forward
           } else {  // forward
             // flip = true;
             if ( increment ) {

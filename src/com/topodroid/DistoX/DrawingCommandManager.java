@@ -1584,7 +1584,7 @@ class DrawingCommandManager
                   path1.moveTo( lp.x, lp.y );
                   path1.lineTo( lp.x+line.mDx*10, lp.y+line.mDy*10 );
                   path1.transform( mMatrix );
-                  canvas.drawPath( path1, BrushManager.mStationSymbol.mPaint );
+                  canvas.drawPath( path1, BrushManager.mSectionPaint );
                 }
               }
             }
@@ -1735,8 +1735,9 @@ class DrawingCommandManager
               }
 	    } else if ( TDLevel.overExpert && mIsExtended && item.mType == DrawingPath.DRAWING_PATH_FIXED ) {
               path = new Path();
-	      path.moveTo( x-TDSetting.mMinShift, y );
-	      path.lineTo( x+TDSetting.mMinShift, y );
+	      float w = mScale * TopoDroidApp.mDisplayWidth / 8; // TDSetting.mMinShift
+	      path.moveTo( x-w, y ); 
+	      path.lineTo( x+w, y );
               path.transform( mMatrix );
               canvas.drawPath( path, BrushManager.fixedYellowPaint );
             }

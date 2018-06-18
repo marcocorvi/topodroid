@@ -275,6 +275,7 @@
     <string name="no_calibration">Keine Kalibrierung gewählt</string>
     <string name="no_capture_app">Keine Kamera-App vorhanden</string>
     <string name="no_cave3d">Cave3D nicht installiert</string>
+    <!-- TODO string name="no_data_reduction">No data reduction</string -->
     <string name="no_db">Keine Datenbank</string>
     <string name="no_device_address">Kein Gerät gewählt</string>
     <string name="no_device_found">Kein Gerät gefunden</string>
@@ -476,6 +477,7 @@
     <string name="saturated_coeffs">WARNUNG: Kalibrierungs-Koeffizienten nicht berechenbar</string>
     <string name="out_of_memory">WARNUNG: Zuwenig Arbeitsspeicher!</string>
     <string name="disk_io_error">FEHLER: Lese-/Schreibfehler!</string>
+    <!-- TODO string name="toporobot_warning">WARNING: TopoRobot policy is experimental !</string -->
     <string name="cannot_rename">Kann Vermessung nicht umbenennen</string>
     <string name="declination">Magnetische Deklination</string>
     <string name="description">Beschreibung</string>
@@ -1158,6 +1160,8 @@
   <string name="pref_segment_message">Minimaler Abstand zwischen Punkten auf einer Linie</string>
   <string name="pref_linestyle_title">Linientyp</string>
   <string name="pref_linestyle_summary">Linientyp</string>
+  <!-- TODO string name="pref_linecontinue_title">Line continue</string -->
+  <!-- TODO string name="pref_linecontinue_summary">Line default continue-mode</string -->
   <string name="pref_lineacc_title">Interpolations-Genauigkeit</string>
   <string name="pref_lineacc_summary">Interpolationsgenauigkeit</string>
   <string name="pref_lineacc_message">Interpolationsgenauigkeit</string>

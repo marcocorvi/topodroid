@@ -140,6 +140,7 @@ class TDSetting
     "DISTOX_LINE_ACCURACY",      // Bezier interpolator param:
     "DISTOX_LINE_CORNER",        // Bezier interpolator param:
     "DISTOX_LINE_STYLE",         // line style: 0 bezier, 1 fine, 2 normal, 3 coarse
+    "DISTOX_LINE_CONTINUE",      // default line continuation set
     "DISTOX_DRAWING_UNIT",       // plot unit
     "DISTOX_PICKER_TYPE",        // tool picker: most-recent, list, grid, triple-grid
     "DISTOX_HTHRESHOLD",         // if clino is over thr, H_SECTION is horizontal (has north arrow)
@@ -167,7 +168,7 @@ class TDSetting
     "DISTOX_SPLAY_EXTEND",       // whether to set L/R extend to LRUD splay shots (Compass, VTopo import)
     "DISTOX_LRUD_VERTICAL",
     "DISTOX_LRUD_HORIZONTAL",
-    "DISTOX_BITMAP_SCALE",       // default bitmap scale
+    "DISTOX_BITMAP_SCALE",       // default bitmap scale PNG
     "DISTOX_BEZIER_STEP",        // max step between interpolating points for bezier in export (cSurvey)
     "DISTOX_THUMBNAIL",          // size of photo thumbnails
     "DISTOX_DOT_RADIUS",         // radius of green dots
@@ -334,6 +335,7 @@ class TDSetting
   static int mConnectionMode    = CONN_MODE_BATCH; 
 
   static boolean isConnectionModeBatch() { return mConnectionMode != CONN_MODE_CONTINUOUS; }
+  static boolean isConnectionModeContinuous() { return mConnectionMode == CONN_MODE_CONTINUOUS; }
 
   static boolean mZ6Workaround  = true;
 
@@ -474,6 +476,7 @@ class TDSetting
   static int   mLineSegment2  = 100;   // square of mLineSegment
   static float mLineAccuracy  = 1f;
   static float mLineCorner    = 20;    // corner threshold
+  static int   mContinueLine  = DrawingWindow.CONT_NONE; // 0
 
   static float mStationSize    = 20;   // size of station names [pt]
   static float mLabelSize      = 24;   // size of labels [pt]
@@ -828,6 +831,7 @@ class TDSetting
     mLineAccuracy  = tryFloat( prefs, key[k++], "1" );              // DISTOX_LINE_ACCURACY
     mLineCorner    = tryFloat( prefs, key[k++], "20"  );            // DISTOX_LINE_CORNER
     setLineStyleAndType( prefs.getString( key[k++], LINE_STYLE ) ); // DISTOX_LINE_STYLE
+    mContinueLine  = tryInt(   prefs, key[k++], "0" );              // DISTOX_LINE_CONTINUE
     mUnitIcons     = tryFloat( prefs, key[k++], "1.4" );            // DISTOX_DRAWING_UNIT 
     mPickerType    = tryInt(   prefs, key[k++], "0" );              // DISTOX_PICKER_TYPE choice: 0, 1, 2
     mHThreshold    = tryFloat( prefs, key[k++], "70" );             // DISTOX_HTHRESHOLD
@@ -1127,6 +1131,8 @@ class TDSetting
       mLineCorner   = tryFloat( prefs, k, "20" );
     } else if ( k.equals( key[ nk++ ] ) ) {                      // DISTOX_LINE_STYLE
       setLineStyleAndType( prefs.getString( k, LINE_STYLE ) );
+    } else if ( k.equals( key[ nk++ ] ) ) {                      // DISTOX_LINE_CONTINUE
+      mContinueLine  = tryInt( prefs, k, "0" );
     } else if ( k.equals( key[ nk++ ] ) ) {                      // DISTOX_DRAWING_UNIT
       try {
         setDrawingUnit( app, Float.parseFloat( prefs.getString( k, "1.4" ) ) );
@@ -1375,7 +1381,7 @@ class TDSetting
       mTRobotShot = true;
       mSurveyStations  = 1;
       mTitleColor = TDColor.TITLE_TOPOROBOT;
-      // FIXME Toast.makeToast( mContext, "WARNING TopoRobot policy is experimental", Toast.LENGTH_LONG).show();
+      // FIXME TDToast.make( mContext, R.string.toporobot_warning );
     } else if ( mSurveyStations == 6 ) {  // TRIPOD
       mTripodShot = true;
       mSurveyStations  = 1;
@@ -1532,6 +1538,7 @@ class TDSetting
     if ( name.equals( "DISTOX_LINE_ACCURACY"  ) ) return parseFloatValue( value, mLineAccuracy, 0.1f );
     if ( name.equals( "DISTOX_LINE_CORNER"    ) ) return parseFloatValue( value, mLineCorner,   0.1f );
     // if ( name.equals( "DISTOX_LINE_STYLE" ) 
+    // if ( name.equals( "DISTOX_LINE_CONTINUE" ) 
     // if ( name.equals( "DISTOX_DRAWING_UNIT" )
     // if ( name.equals( "DISTOX_PICKER_TYPE" )
     if ( name.equals( "DISTOX_HTHRESHOLD"     ) ) return parseFloatValue( value, mHThreshold,    0, 90 );
@@ -1561,7 +1568,7 @@ class TDSetting
 
     //B if ( name.equals( "DISTOX_AUTO_RECONNECT" )
     //B if ( name.equals( "DISTOX_HEAD_TAIL" )
-    if ( name.equals( "DISTOX_BITMAP_SCALE"     ) ) return parseFloatValue( value, mBitmapScale,    0.5f, 10f );
+    if ( name.equals( "DISTOX_BITMAP_SCALE"     ) ) return parseFloatValue( value, mBitmapScale,    0.5f, 100f );
     if ( name.equals( "DISTOX_BEZIER_STEP"      ) ) return parseFloatValue( value, mBezierStep,     0f,   2f ); // N.B. 0 = disable Bezier Step
     if ( name.equals( "DISTOX_THUMBNAIL"        ) ) return parseIntValue(   value, mThumbSize,      80,   400 );
     if ( name.equals( "DISTOX_DOT_RADIUS"       ) ) return parseFloatValue( value, mDotRadius,      1,    100 );

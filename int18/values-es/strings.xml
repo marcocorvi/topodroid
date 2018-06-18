@@ -270,6 +270,7 @@
     <string name="no_calibration">Calibración no seleccionada</string>
     <string name="no_capture_app">No hay aplicación para capturar imagen</string>
     <string name="no_cave3d">Cave3D No instalado</string>
+    <!-- TODO string name="no_data_reduction">No data reduction</string -->
     <string name="no_db">No hay base de datos</string>
     <string name="no_device_address">Dispositivo no seleccionado</string>
     <string name="no_device_found">No se encuentra dispositivos</string>
@@ -464,6 +465,7 @@
     <!-- TODO string name="saturated_coeffs">WARNING: saturated calibration coefficients</string -->
     <!-- TODO string name="out_of_memory">WARNING: out of memory !</string -->
     <!-- TODO string name="disk_io_error">CRITICAL: disk i/o error !</string -->
+    <!-- TODO string name="toporobot_warning">WARNING: TopoRobot policy is experimental !</string -->
     <string name="cannot_rename">No se puede cambiar el nombre de la topografía</string>
     <string name="declination">Declinación magnética </string>
     <string name="description">Descripción</string>
@@ -1140,6 +1142,8 @@
   <string name="pref_segment_message">Distancia Mínima entre dos puntos de una línea en el dibujo</string>
   <string name="pref_linestyle_title">Nº de puntos en línea</string>
   <string name="pref_linestyle_summary">Número de puntos en la línea dibujada</string>
+  <!-- TODO string name="pref_linecontinue_title">Line continue</string -->
+  <!-- TODO string name="pref_linecontinue_summary">Line default continue-mode</string -->
   <string name="pref_lineacc_title">Precisión Bezier</string>
   <string name="pref_lineacc_summary">Precisión Bezier interpolación cúbica</string>
   <string name="pref_lineacc_message">Precisión Bezier interpolación cúbica</string>

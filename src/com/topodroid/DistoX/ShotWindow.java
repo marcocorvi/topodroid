@@ -1141,7 +1141,7 @@ public class ShotWindow extends Activity
     if ( CutNPaste.dismissPopupBT() ) return true;
 
     Button b = (Button)view;
-    if ( b == mButton1[ BTN_DOWNLOAD ] ) {
+    if ( b == mButton1[ BTN_DOWNLOAD ] ) { // MULTI-DISTOX
       if (   TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI
           && ! mDataDownloader.isDownloading() 
           && TopoDroidApp.mDData.getDevices().size() > 1 ) {

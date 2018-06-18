@@ -273,6 +273,7 @@
     <string name="no_calibration">Nie je vybratá žiadna kalibrácia</string>
     <string name="no_capture_app">Žiadna aplikácia pre fotenie</string>
     <string name="no_cave3d">Cave3D nie je nainštalovaná</string>
+    <!-- TODO string name="no_data_reduction">No data reduction</string -->
     <string name="no_db">Žiadna databáza</string>
     <string name="no_device_address">Zariadenie nie je vybraté</string>
     <string name="no_device_found">Zariadenie sa nenašlo</string>
@@ -469,6 +470,7 @@
     <string name="saturated_coeffs">VAROVANIE: saturované kalibračné koeficienty</string>
     <string name="out_of_memory">VAROVANIE: Nedostatok pamäte !</string>
     <string name="disk_io_error">KRITICKÁ CHYBA: Chyba i/o disku !</string>
+    <!-- TODO string name="toporobot_warning">WARNING: TopoRobot policy is experimental !</string -->
     
     <string name="cannot_rename">Nedá sa premenovať názov mapovania</string>
     <string name="declination">Magnetická deklinácia</string>
@@ -1147,6 +1149,8 @@
   <string name="pref_segment_message">Minimálna vzdialenosť medzi bodmi čiary</string>
   <string name="pref_linestyle_title">Štýl Čiary</string>
   <string name="pref_linestyle_summary">Štýl Čiary</string>
+  <!-- TODO string name="pref_linecontinue_title">Line continue</string -->
+  <!-- TODO string name="pref_linecontinue_summary">Line default continue-mode</string -->
   <string name="pref_lineacc_title">Presnosť Bezierových kriviek</string>
   <string name="pref_lineacc_summary">Presnosť interpolácie pre Bezierove krivky (čím menšie číslo tým viac bodov)</string>
   <string name="pref_lineacc_message">Presnosť interpolácie pre Bezierove krivky (čím menšie číslo tým viac bodov)</string>
