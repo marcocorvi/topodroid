@@ -724,7 +724,7 @@
     <string name="help_close">Zavrieť okno</string>
     <string name="help_coeff">Ukázať Kalibračné koeficienty vybranej kalibrácie</string>
     <string name="help_color">Vymazať užívateľsky definované farby pomocných zámer</string>
-    <string name="help_continue">Výbrať možnosti spájania Čiar</string>
+    <string name="help_continue">Vybrať možnosti spájania Čiar</string>
     <!-- UNUSED string name="help_contour">Editovať obrysy</string -->
     <string name="help_current_station">Uložené meračské body</string>
     <string name="help_azimuth">Smerová orientácia</string>
