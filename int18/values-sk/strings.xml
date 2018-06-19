@@ -21,7 +21,7 @@
     <string name="setup_drawingunit">Nastavte veľkosť ikoniek.\nMožete to zmeniť aj neskôr v nastaveniach cez menu kreslenia.</string>
     <string name="setup_done">Základné nastavenie je ukončené.\n\n
 	    Pokiaľ zistíte problém s pripojením DistoX skúste použiť Nezabezpečené pripojenie.\n\n
-	    Ďalšie nastavenia  (veľkosť ikon, šírky čiary, veľkosti štítkov&#8230; viete meniť neskôr v nastaveniach.)
+	    Ďalšie nastavenia  (veľkosť ikon, šírky čiary, veľkosti poznámok&#8230; viete meniť neskôr v nastaveniach.)
 	    podľa Vašich potrieb./n/n
     </string>
     <!-- OK string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
@@ -1168,9 +1168,9 @@
   <string name="pref_iter_summary">Maximálny počet opakovaní kalibračného algoritmu</string>
   <string name="pref_iter_dialogtitle">Opakovanie kalibrácie</string>
   <string name="pref_iter_message">Maximálny počet opakovaní kalibračného algoritmu</string>
-  <string name="pref_label_size_title">Veľkosť štítkov</string>
-  <string name="pref_label_size_summary">Veľkosť štítkov</string>
-  <string name="pref_label_size_message">Veľkosť štítkov</string>
+  <string name="pref_label_size_title">Veľkosť písmen v poznámke priamo na nákrese</string>
+  <string name="pref_label_size_summary">Veľkosť písmen v symbole BOD - Poznámka</string>
+  <string name="pref_label_size_message">Veľkosť písmen v symbole BOD - Poznámka</string>
   <string name="pref_arrow_length_title">Hrúbka čiary priečneho rezu</string>
   <!-- UNUSED string name="pref_arrow_length_summary">Dĺžka smeru sekcie</string -->
   <string name="pref_arrow_length_message">Hrúbka čiary priečneho rezu</string>
