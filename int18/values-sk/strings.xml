@@ -256,8 +256,8 @@
     <string name="fmt_longitude">Zemepisná dĺžka %1$s</string>
     <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string> 
     
-    <string name="fixed">Fixný príznak bodu</string>
-    <string name="painted">Kreslený príznak bodu</string>
+    <string name="fixed">Fixný príznak bodu (Therion)</string>
+    <string name="painted">Iný príznak bodu (Therion)</string>
 
     <string name="cbd_title">Hlavný adresár</string>
     <string name="cwd">Adresár projektu TopoDroid</string>
