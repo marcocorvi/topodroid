@@ -2,13 +2,13 @@
 
 <resources>
 
-  <!-- TODO string-array name="lineContinue">
-     <item name="none">none</item>
-     <item name="start">join with start point</item>
-     <item name="end">join with end point</item>
-     <item name="both">join with both ends</item>
-     <item name="continue">continue</item>
-  </string-array -->
+  <string-array name="lineContinue">
+     <item name="none">не присоединять</item>
+     <item name="start">присоединить к начальной точке</item>
+     <item name="end">присоединить к конечной точке</item>
+     <item name="both">присоединить к началу или концу</item>
+     <item name="continue">продолжить</item>
+  </string-array>
   <string-array name="unitGrid">
      <item name="meter">метры</item>
      <item name="yard">ярды</item>
