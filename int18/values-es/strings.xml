@@ -602,6 +602,7 @@
 
     <string name="mode_leg">Visuales</string>
     <string name="mode_splay">Radiales</string>
+    <!-- TODO string name="mode_latest">Latest splays</string -->
     <string name="mode_station">Estaciones</string>
     <string name="mode_grid">Cuadrículas</string>
     <string name="mode_fixed">Desplazar objetos</string>

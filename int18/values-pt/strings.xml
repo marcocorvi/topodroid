@@ -603,6 +603,7 @@
 
     <string name="mode_leg">Visadas</string>
     <string name="mode_splay">Medidas auxiliares</string>
+    <!-- TODO string name="mode_latest">Latest splays</string -->
     <string name="mode_station">Bases</string>
     <string name="mode_grid">Grade</string>
     <string name="mode_fixed">Deslocar croqui X aranha (CUIDADO!)</string>

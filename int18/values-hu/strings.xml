@@ -605,6 +605,7 @@
 
     <string name="mode_leg">Poligonmérések</string>
     <string name="mode_splay">Segédmérések</string>
+    <!-- TODO string name="mode_latest">Latest splays</string -->
     <string name="mode_station">Mérési pontok</string>
     <string name="mode_grid">Rács</string>
     <string name="mode_fixed">Rögzített referenciapontok</string>

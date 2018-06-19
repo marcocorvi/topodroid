@@ -20,6 +20,13 @@
         android:text="@string/hide_splay"
         />
    					  
+    <CheckBox android:id="@+id/cb_mode_latest"
+      android:layout_marginTop="@dimen/margintiny"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" 
+      android:text="@string/mode_latest"
+      />
+      				  
     <CheckBox android:id="@+id/cb_mode_blank"
         android:layout_marginTop="@dimen/margintiny"
         android:layout_width="wrap_content"

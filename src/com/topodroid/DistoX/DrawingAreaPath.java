@@ -14,9 +14,9 @@
  */
 package com.topodroid.DistoX;
 
-// import android.graphics.Canvas;
+import android.graphics.Canvas;
 import android.graphics.Paint;
-// import android.graphics.Path;
+import android.graphics.Path;
 import android.graphics.Matrix;
 // import android.graphics.Bitmap;
 // import android.graphics.BitmapShader;
@@ -61,7 +61,7 @@ class DrawingAreaPath extends DrawingPointLinePath
     mAreaCnt  = cnt;
     mPrefix   = (prefix != null && prefix.length() > 0)? prefix : "a";
     if ( mAreaType < BrushManager.mAreaLib.mSymbolNr ) {
-      setPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
+      setPathPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
     }
     mOrientation = 0.0;
     if ( BrushManager.mAreaLib.isSymbolOrientable( mAreaType ) ) {
@@ -69,7 +69,7 @@ class DrawingAreaPath extends DrawingPointLinePath
       mOrientation = BrushManager.getAreaOrientation( type );
 
       mLocalShader = BrushManager.cloneAreaShader( mAreaType );
-      resetPaint();
+      resetPathPaint();
       mPaint.setShader( mLocalShader );
     }
   }
@@ -91,7 +91,7 @@ class DrawingAreaPath extends DrawingPointLinePath
       TDLog.Error( "Drawing Area Path AreaCnt parse Int error: " + id.substring(1) );
     }
     if ( mAreaType < BrushManager.mAreaLib.mSymbolNr ) {
-      setPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
+      setPathPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
     }
   }
 
@@ -120,7 +120,7 @@ class DrawingAreaPath extends DrawingPointLinePath
 
       DrawingAreaPath ret = new DrawingAreaPath( type, cnt, prefix, visible );
       ret.mOrientation = orientation;
-      // setPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
+      // setPathPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
 
       int has_cp;
       float x0, y0, t;
@@ -163,28 +163,36 @@ class DrawingAreaPath extends DrawingPointLinePath
   {
     mAreaType = t;
     if ( mAreaType < BrushManager.mAreaLib.mSymbolNr ) {
-      setPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
+      setPathPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
       // FIXME shader ?
     }
   }
 
   @Override
-  public void setPaint( Paint paint ) 
+  void setPathPaint( Paint paint ) 
   { 
     mPaint = new Paint( paint );
+    mPaint.setStyle( isVisible() ? Paint.Style.FILL_AND_STROKE : Paint.Style.FILL );
+  }
+
+  @Override
+  void setVisible( boolean visible )
+  {
+    super.setVisible( visible );
+    mPaint.setStyle( visible ? Paint.Style.FILL_AND_STROKE : Paint.Style.FILL );
   }
 
   int areaType() { return mAreaType; }
 
   @Override
-  public void setOrientation( double angle ) 
+  void setOrientation( double angle ) 
   { 
     // Log.v( "DistoX", "Area path set orientation " + angle );
     if ( ! BrushManager.mAreaLib.isSymbolOrientable( mAreaType ) ) return;
     mOrientation = angle; 
     while ( mOrientation >= 360.0 ) mOrientation -= 360.0;
     while ( mOrientation < 0.0 ) mOrientation += 360.0;
-    resetPaint();
+    resetPathPaint();
   }
 
   void shiftShaderBy( float dx, float dy, float s )
@@ -200,7 +208,7 @@ class DrawingAreaPath extends DrawingPointLinePath
     }
   }
 
-  private void resetPaint()
+  private void resetPathPaint()
   {
     // Log.v("DistoX", "arae path reset paint orientation " + mOrientation );
     // Bitmap bitmap = BrushManager.getAreaBitmap( mAreaType );
@@ -220,7 +228,19 @@ class DrawingAreaPath extends DrawingPointLinePath
   }
 
   @Override
-  public String toTherion( )
+  void drawPath( Path path, Canvas canvas )
+  {
+    if ( mPaint != null ) {
+      canvas.save();
+      canvas.clipPath( path );
+      canvas.drawPaint( mPaint );
+      if ( isVisible() ) canvas.drawPath( path, BrushManager.borderPaint );
+      canvas.restore();
+    }
+  }
+
+  @Override
+  String toTherion( )
   {
     if ( mLast == null || mFirst == null ) return null;
     StringWriter sw = new StringWriter();
@@ -256,7 +276,7 @@ class DrawingAreaPath extends DrawingPointLinePath
   }
 
   @Override
-  public void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil )
+  void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil )
   {
     int layer  = BrushManager.getAreaCsxLayer( mAreaType );
     int type   = 3;

@@ -84,8 +84,6 @@ class DrawingStationName extends DrawingPointPath
     makeStraightPath( 0, 0, 2*TDSetting.mStationSize*mName.length(), 0, cx, cy );
   }
 
-  static final private int LENGTH = 20;
-
   String name() { return mName; }
   NumStation station() { return mStation; }
 
@@ -96,17 +94,17 @@ class DrawingStationName extends DrawingPointPath
     mAzimuth      = azimuth;
     mClino        = clino;
     if ( type == PlotInfo.PLOT_PLAN ) {
-      mDX =   LENGTH * (float)Math.sin( azimuth * Math.PI/180 );
-      mDY = - LENGTH * (float)Math.cos( azimuth * Math.PI/180 );
+      mDX =   TDMath.sind( azimuth );
+      mDY = - TDMath.cosd( azimuth );
     } else if ( PlotInfo.isProfile( type ) ) {
       if ( clino > 89 ) {
         mDX = 0;
-        mDY = -LENGTH;
+        mDY = -1;
       } else if ( clino < -89 ) {
         mDX = 0;
-        mDY = LENGTH;
+        mDY = 1;
       } else {
-        mDX = LENGTH; // FIXME
+        mDX = 1; // FIXME
         mDY = 0;
       }
     }
@@ -131,7 +129,7 @@ class DrawingStationName extends DrawingPointPath
       if ( mXSectionType != PlotInfo.PLOT_NULL ) {
         Path path = new Path();
         path.moveTo( cx, cy );
-        path.lineTo( cx+mDX, cy+mDY );
+        path.lineTo( cx+mDX*TDSetting.mArrowLength, cy+mDY*TDSetting.mArrowLength );
         canvas.drawPath( path, BrushManager.mSectionPaint );
       }
     }
@@ -213,6 +211,7 @@ class DrawingStationName extends DrawingPointPath
     return null;
   }
 
+  // from ICanvasCommand
   @Override
   public void flipXAxis( float z )
   {

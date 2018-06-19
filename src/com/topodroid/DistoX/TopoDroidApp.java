@@ -225,7 +225,7 @@ public class TopoDroidApp extends Application
   static long mSecondLastShotId = 0L;
 
   public long lastShotId( ) { return mData.getLastShotId( mSID ); }
-  public long secondLastShotId( ) { return mSecondLastShotId; }
+  // public long secondLastShotId( ) { return mSecondLastShotId; }
 
   Device mDevice = null;
   int    distoType() { return (mDevice == null)? 0 : mDevice.mType; }
@@ -2012,19 +2012,24 @@ public class TopoDroidApp extends Application
     return mData.insertPlot( sid, -1L, name, type, 0L, from, to, 0, 0, TopoDroidApp.mScaleFactor, azimuth, clino, hide, nick, 0, false );
   }
 
-  void viewPhoto( Context ctx, String filename )
+  // @param ctx       context
+  // @prarm filename  photo filename
+  static void viewPhoto( Context ctx, String filename )
   {
     // Log.v("DistoX", "photo <" + filename + ">" );
     File file = new File( filename );
-    Uri uri = Uri.fromFile( file );
-    // Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("file://" + filename ) );
-    Intent intent = new Intent(Intent.ACTION_VIEW );
-    intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
-    intent.setDataAndType( uri, "image/jpeg" );
-    try {
-      ctx.startActivity( intent );
-    } catch ( ActivityNotFoundException e ) {
-      // gracefully fail without saying anything
+    if ( file.exists() ) {
+      // Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("file://" + filename ) );
+      Intent intent = new Intent(Intent.ACTION_VIEW );
+      intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+      intent.setDataAndType( Uri.fromFile( file ), "image/jpeg" );
+      try {
+        ctx.startActivity( intent );
+      } catch ( ActivityNotFoundException e ) {
+        // gracefully fail without saying anything
+      }
+    } else {
+      TDToast.make( ctx, "ERROR file not found: " + filename );
     }
   }
 

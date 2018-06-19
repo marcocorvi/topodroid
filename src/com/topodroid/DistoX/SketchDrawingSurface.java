@@ -88,7 +88,7 @@ class SketchDrawingSurface extends SurfaceView
   {
     mPreviewPath = new DrawingPath( type, null );
     mPreviewPath.mPath = new Path();
-    mPreviewPath.setPaint( paint );
+    mPreviewPath.setPathPaint( paint );
   }
 
   // public void setDisplayMode( int mode ) { commandManager.setDisplayMode(mode); }

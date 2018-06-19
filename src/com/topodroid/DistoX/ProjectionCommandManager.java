@@ -68,7 +68,8 @@ class ProjectionCommandManager
   //   }
   // }
 
-  // void flipXAxis(float z)
+  // from ICanvasCommand
+  // public void flipXAxis(float z)
   // {
   //   synchronized( mGridStack1 ) {
   //     flipXAxes( mGridStack1 );

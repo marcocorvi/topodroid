@@ -423,7 +423,7 @@ class DrawingIO
                       if ( path != null ) {
                         if ( type.equals("section") ) { // section line only in non-section scraps
                           if ( is_not_section ) {
-                            path.makeStraight( false ); // FIXME true = with arrow
+                            path.makeStraight( );
                           }
                         } else {
                           path.computeUnitNormal(); // for section-line already done by makeStraight
@@ -873,7 +873,7 @@ class DrawingIO
           if (    in_scrap && path != null 
                && ( BrushManager.mLineLib.isWall( path.mLineType ) || path.hasOutline() ) ) {
             // Log.v("DistoXX", "outline add path ... " + path.mFirst.x + " " + path.mFirst.y + " path size " + path.size()  );
-            path.setPaint( BrushManager.fixedGrid100Paint );
+            path.setPathPaint( BrushManager.fixedGrid100Paint );
             if ( name != null ) { // xsection outline
               surface.addXSectionOutlinePath( new DrawingOutlinePath( name, path ) );
             } else {

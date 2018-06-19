@@ -38,7 +38,7 @@ import android.media.ExifInterface;
 // import android.util.Log;
 
 class PhotoEditDialog extends MyDialog
-                             implements View.OnClickListener
+                      implements View.OnClickListener
 {
   private final TopoDroidApp  mApp;
   private final PhotoActivity mParent;
@@ -174,7 +174,7 @@ class PhotoEditDialog extends MyDialog
         mParent.dropPhoto( mPhoto );
         break;
       case R.id.photo_image:
-        mApp.viewPhoto( mContext, mFilename );
+        TopoDroidApp.viewPhoto( mContext, mFilename );
         return;
     }
     dismiss();

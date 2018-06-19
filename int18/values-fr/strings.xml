@@ -604,6 +604,7 @@
 
     <string name="mode_leg">Cheminements</string>
     <string name="mode_splay">Visées latérales</string>
+    <!-- TODO string name="mode_latest">Latest splays</string -->
     <string name="mode_station">Stations</string>
     <string name="mode_grid">Grille</string>
     <string name="mode_fixed">Références fixes</string>

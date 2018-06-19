@@ -48,7 +48,7 @@ class DrawingLinePath extends DrawingPointLinePath
   int mOutline; 
   private boolean mReversed;
 
-  public DrawingLinePath( int line_type )
+  DrawingLinePath( int line_type )
   {
     // visible = true,  closed = false
     super( DrawingPath.DRAWING_PATH_LINE, true, false );
@@ -59,7 +59,7 @@ class DrawingLinePath extends DrawingPointLinePath
     mLineType = line_type;
     mReversed = false;
     mOutline  = ( mLineType == BrushManager.mLineLib.mLineWallIndex )? OUTLINE_OUT : OUTLINE_NONE;
-    setPaint( BrushManager.mLineLib.getLinePaint( mLineType, mReversed ) );
+    setPathPaint( BrushManager.mLineLib.getLinePaint( mLineType, mReversed ) );
   }
 
   static DrawingLinePath loadDataStream( int version, DataInputStream dis, float x, float y, SymbolsPalette missingSymbols )
@@ -226,7 +226,7 @@ class DrawingLinePath extends DrawingPointLinePath
     if ( reversed != mReversed ) {
       mReversed = reversed;
       // retracePath();
-      setPaint( BrushManager.mLineLib.getLinePaint( mLineType, mReversed ) );
+      setPathPaint( BrushManager.mLineLib.getLinePaint( mLineType, mReversed ) );
       computeUnitNormal();
     }
   }
@@ -235,7 +235,7 @@ class DrawingLinePath extends DrawingPointLinePath
   {
     mReversed = ! mReversed;
     // retracePath();
-    setPaint( BrushManager.mLineLib.getLinePaint( mLineType, mReversed ) );
+    setPathPaint( BrushManager.mLineLib.getLinePaint( mLineType, mReversed ) );
     computeUnitNormal();
   }
 
@@ -246,11 +246,11 @@ class DrawingLinePath extends DrawingPointLinePath
   void setLineType( int type )
   {
     mLineType = type;
-    setPaint( BrushManager.mLineLib.getLinePaint( mLineType, mReversed ) );
+    setPathPaint( BrushManager.mLineLib.getLinePaint( mLineType, mReversed ) );
   }
   
   @Override
-  public void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil )
+  void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil )
   {
     float bezier_step = TDSetting.getBezierStep();
     int layer  = BrushManager.getLineCsxLayer( mLineType );
@@ -345,7 +345,7 @@ class DrawingLinePath extends DrawingPointLinePath
   }
 
   @Override
-  public String toTherion( )
+  String toTherion( )
   {
     if ( mFirst == null ) return null;
     StringWriter sw = new StringWriter();

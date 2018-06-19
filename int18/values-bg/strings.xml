@@ -605,6 +605,7 @@
 
     <string name="mode_leg">Отсечки</string>
     <string name="mode_splay">Странични</string>
+    <!-- TODO string name="mode_latest">Latest splays</string -->
     <string name="mode_station">Реперни точки</string>
     <string name="mode_grid">Мащабна мрежа</string>
     <string name="mode_fixed">Преместване на скица</string>

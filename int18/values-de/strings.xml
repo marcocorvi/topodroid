@@ -620,6 +620,7 @@
 
     <string name="mode_leg">Messstrecken</string>
     <string name="mode_splay">Hilfszüge</string>
+    <!-- TODO string name="mode_latest">Latest splays</string -->
     <string name="mode_station">Messpunkte</string>
     <string name="mode_grid">Gitter</string>
     <string name="mode_fixed">Fester Rahmen</string>

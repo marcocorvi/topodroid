@@ -605,6 +605,7 @@
 
     <string name="mode_leg">Battute</string>
     <string name="mode_splay">Splay</string>
+    <!-- TODO string name="mode_latest">Latest splays</string -->
     <string name="mode_station">Capisaldi</string>
     <string name="mode_grid">Griglia</string>
     <string name="mode_fixed">[ Bloccati ]</string>

@@ -129,6 +129,7 @@ class BrushManager
   static Paint fixedStationBarrierPaint  = null;
   static Paint fixedStationHiddenPaint  = null;
   static Paint labelPaint  = null;
+  static Paint borderPaint = null;
   static Paint duplicateStationPaint = null;
   static Paint mSectionPaint = null;
   // static Paint stationPaint = null;
@@ -249,6 +250,7 @@ class BrushManager
       fixedStationBarrierPaint = makePaint( TDColor.FULL_RED, WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
       fixedStationHiddenPaint  = makePaint( 0xFF9966ff,  WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
       labelPaint = makePaint( TDColor.WHITE, WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
+      borderPaint = makePaint( 0x99ffffff, WIDTH_FIXED, Paint.Style.STROKE);
       // stationPaint = makePaint( 0xFFFF6666, WIDTH_FIXED, Paint.Style.STROKE);
       duplicateStationPaint = makePaint( 0xFFFF66FF, WIDTH_FIXED, Paint.Style.STROKE);
       // DEBUG
@@ -258,7 +260,7 @@ class BrushManager
 
       // fixedGridPaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
       // fixedGrid10Paint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
-      mSectionPaint = makePaint( TDColor.ORANGE, 4 * WIDTH_FIXED, Paint.Style.FILL_AND_STROKE );
+      mSectionPaint = makePaint( TDColor.ORANGE, 2 * WIDTH_FIXED, Paint.Style.FILL_AND_STROKE );
       doneMakePaths = true;
     }
     setStrokeWidths();

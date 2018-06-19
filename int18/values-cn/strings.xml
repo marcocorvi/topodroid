@@ -603,6 +603,7 @@
 
     <string name="mode_leg">主线</string>
     <string name="mode_splay">侧线</string>
+    <!-- TODO string name="mode_latest">Latest splays</string -->
     <string name="mode_station">测量点</string>
     <string name="mode_grid">网格</string>
     <string name="mode_fixed">与参考匹配</string>

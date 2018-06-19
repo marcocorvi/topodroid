@@ -108,7 +108,7 @@ class DrawingPointPath extends DrawingPath
     if ( BrushManager.mPointLib.isSymbolOrientable( type ) ) {
       mOrientation = BrushManager.getPointOrientation(type);
     }
-    setPaint( BrushManager.mPointLib.getSymbolPaint( mPointType ) );
+    setPathPaint( BrushManager.mPointLib.getSymbolPaint( mPointType ) );
     mScale = scale;
     resetPath( 1.0f );
     // Log.v( TopoDroidApp.TAG, "Point cstr " + type + " orientation " + mOrientation );
@@ -149,7 +149,7 @@ class DrawingPointPath extends DrawingPath
       return ret;
 
       // // TODO parse option for "-text"
-      // setPaint( BrushManager.mPointLib.getSymbolPaint( mPointType ) );
+      // setPathPaint( BrushManager.mPointLib.getSymbolPaint( mPointType ) );
       // if ( BrushManager.mPointLib.isSymbolOrientable( mPointType ) ) {
       //   BrushManager.rotateGradPoint( mPointType, mOrientation );
       //   resetPath( 1.0f );
@@ -205,6 +205,7 @@ class DrawingPointPath extends DrawingPath
     bottom *= z;
   }
 
+  // from ICanvasCommand
   @Override
   public void shiftPathBy( float dx, float dy ) 
   {
@@ -221,6 +222,7 @@ class DrawingPointPath extends DrawingPath
     // bottom += dy;
   }
 
+  // from ICanvasCommand
   // FIXME SCALE
   @Override
   public void scalePathBy( float z, Matrix m )
@@ -299,21 +301,21 @@ class DrawingPointPath extends DrawingPath
     }
   }
 
-  // public void setPos( float x, float y ) 
+  // void setPos( float x, float y ) 
   // {
   //   setCenter( x, y );
   // }
 
-  // public void setPointType( int t ) { mPointType = t; }
-  public int pointType() { return mPointType; }
+  // void setPointType( int t ) { mPointType = t; }
+  int pointType() { return mPointType; }
 
-  // public double xpos() { return cx; }
-  // public double ypos() { return cy; }
+  // double xpos() { return cx; }
+  // double ypos() { return cy; }
 
-  // public double orientation() { return mOrientation; }
+  // double orientation() { return mOrientation; }
 
   @Override
-  public void setOrientation( double angle ) 
+  void setOrientation( double angle ) 
   { 
     // TDLog.Log( TDLog.LOG_PATH, "Point " + mPointType + " set Orientation " + angle );
     // Log.v( "DistoX", "Point::set Orientation " + angle );
@@ -330,14 +332,14 @@ class DrawingPointPath extends DrawingPath
     mPointText = text;
   }
 
-  public void shiftTo( float x, float y ) // x,y scene coords
+  void shiftTo( float x, float y ) // x,y scene coords
   {
     mPath.offset( x-cx, y-cy );
     setCenter( x, y );
   }
 
   // @Override
-  public void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil )
+  void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil )
   { 
     int size = mScale - SCALE_XS;
     int layer  = BrushManager.getPointCsxLayer( mPointType );
@@ -364,7 +366,7 @@ class DrawingPointPath extends DrawingPath
   }
 
   @Override
-  public String toTherion( )
+  String toTherion( )
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);

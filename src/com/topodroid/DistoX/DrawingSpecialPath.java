@@ -96,9 +96,11 @@ class DrawingSpecialPath extends DrawingPath
     bottom *= z;
   }
 
+  // from ICanvasCommand
   // @Override
   // public void shiftPathBy( float dx, float dy ) { }
 
+  // from ICanvasCommand
   // @Override
   // public void scalePathBy( float z, Matrix m ) { }
 
@@ -126,7 +128,7 @@ class DrawingSpecialPath extends DrawingPath
 
   private void resetPath()
   {
-    setPaint( BrushManager.labelPaint );
+    setPathPaint( BrushManager.labelPaint );
     Path p = new Path();
     p.addCircle( 0, 0, TDSetting.mLineThickness, Path.Direction.CCW );
     makePath( p, new Matrix(), cx, cy );

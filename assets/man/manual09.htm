@@ -93,14 +93,13 @@ Accordingly, the drawing references dialog has no box for the splays.
 <br><p>
 
 
-
 <h4>MENUS</h4>
 <ul style="margin-top=0">
+<li><u>Switch</u> to another sketch or <u>close</u>.</li>
 <li><u>Export</u>: the sketch can be <a href="page_plot_export.htm">exported</a> as <i>Therion</i> 2D file(s), <i>cSurvey</i> (a single file), PNG (two files), DXF (two files), and SVG (two files).</li>
 <li><a href="page_stat2.htm">Statistics</a>. For x-sections this is just the section area.</li>
 <li><u>Reload</u> the sketch from a <a href="page_backup.htm">backup copy</a>.</li>
 <li><u>Zoom-fit</u>: dialog to fit the sketch into the screen, and to select the portrait or landscape orientation</li>
-<li><u>Switch</u> to another sketch.</li>
 <li><u>Rename/Delete/Split</u> the sketch. Deleted sketches can be recovered ("recover" menu in shot window)</li>
 <li><a href="page_tools.htm">drawing tools</a> palette</li>
 <li><u>Overview</u> window, showing all the survey sketches together. [Only for plan and extended profiles]</li>
@@ -126,6 +125,7 @@ Accordingly, the drawing references dialog has no box for the splays.
   <li><i>LINE TOOLS</i>
     <ul style="margin-top:0; margin-bottom:0">
     <li>Line <i>tracing style</i>: fine, normal, coarse, or "splines" (interpolated-curve)</li>
+    <li>Line <i>default join value</i>: none, start, end, both, "continue"</li>
     <li>Line <i>thickness</i></li>
     <li><i>Direction tick length</i> for x-section lines [5 px]</li>
     <li>Line <i>point spacing</i>: distance between line points in normal style [5 px] </li>
@@ -168,8 +168,8 @@ To this aim you tap near the point you want. However if there are several points
 TopoDroid has four line styles. With the normal style [default] the lines are drawn as polylines. With the fine style the polyline segments are shorter, while with the coarse style they are longer. In the fourth style lines are interpolated replacing the segments with cubic Bezier curves (splines). These segments pass through the two endpoints and have two control points used define the curvature.
 If you export the drawing in DXF with AutoCAD version 6 do not use splines because they get exported as polylines.<br><p>
 
-<h4>Line continuation</h4>
-The <u>Continuation</u> button is a multi-state button.
+<h4>Line join</h4>
+The <u>join</u> button is a multi-state button.
 <ul>
 <li><i>off</i>: the lines of the current type cannot be joined</li>
 <li><i>no</i>: the current type line will not be joined</li>

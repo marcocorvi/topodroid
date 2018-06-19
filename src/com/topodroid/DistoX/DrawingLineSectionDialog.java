@@ -242,7 +242,7 @@ class DrawingLineSectionDialog extends MyDialog
     // TDLog.Log( TDLog.LOG_INPUT, "Drawing Line Section Dialog onClick() " + b.getText().toString() );
 
     if ( v.getId() == R.id.line_image ) {
-      mApp.viewPhoto( mContext, mFilename );
+      TopoDroidApp.viewPhoto( mContext, mFilename );
     } else {
       long type = mHSection ? PlotInfo.PLOT_H_SECTION : PlotInfo.PLOT_SECTION;
       mNick = ( mETnick.getText() != null )? mETnick.getText().toString() : "";
@@ -273,7 +273,7 @@ class DrawingLineSectionDialog extends MyDialog
     //     mParent.updatePlotNick( mPlotInfo, mNick );
     //     break;
     //   case R.id.line_image:
-    //     mApp.viewPhoto( mContext, mFilename );
+    //     TopoDroidApp.viewPhoto( mContext, mFilename );
     //     break;
     //   default: // R.id.button_cancel
     //     /* nothing */

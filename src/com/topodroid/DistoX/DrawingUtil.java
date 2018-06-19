@@ -79,7 +79,7 @@ class DrawingUtil
       k = 10;
       paint = BrushManager.fixedGrid10Paint;
     }
-    dpath.setPaint( paint );
+    dpath.setPathPaint( paint );
     dpath.mPath  = new Path();
     dpath.mPath.moveTo( x1, y1 );
     dpath.mPath.lineTo( x2, y2 );

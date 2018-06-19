@@ -147,7 +147,7 @@ class TDSetting
     "DISTOX_STATION_SIZE",       // size of station names [pt]
     "DISTOX_LABEL_SIZE",         // size of labels [pt]
     "DISTOX_LINE_THICKNESS",     // thickness of normal lines (walls are twice)
-    "DISTOX_AUTO_SECTION_PT",    // whther to add section point when tracing a section line
+    "DISTOX_AUTO_SECTION_PT",    // whether to add section point when tracing a section line
     "DISTOX_BACKUP_NUMBER",      // number of plot backups
     "DISTOX_BACKUP_INTERVAL",    // minimum interval between plot backups [60 s]
     "DISTOX_SHARED_XSECTIONS",   // whether at-station X-sections are shared among plots

@@ -28,6 +28,7 @@ class ShotDisplayDialog extends MyDialog
 {
     private CheckBox mCBids;      // whether to hide ids
     private CheckBox mCBsplay;    // whether to hide splays
+    private CheckBox mCBlatest;   // whether to show latest
     private CheckBox mCBblank;    // whether to hide blank
     private CheckBox mCBleg;      // whether to hide repeated leg 
     // private Button mBtnRefresh;
@@ -47,10 +48,11 @@ class ShotDisplayDialog extends MyDialog
 
         initLayout( R.layout.shot_display_dialog, R.string.title_mode );
 
-        mCBids   = (CheckBox) findViewById(R.id.cb_mode_ids);
-        mCBsplay = (CheckBox) findViewById(R.id.cb_mode_splay);
-        mCBblank = (CheckBox) findViewById(R.id.cb_mode_blank);
-        mCBleg   = (CheckBox) findViewById(R.id.cb_mode_leg);
+        mCBids    = (CheckBox) findViewById(R.id.cb_mode_ids);
+        mCBsplay  = (CheckBox) findViewById(R.id.cb_mode_splay);
+        mCBlatest = (CheckBox) findViewById(R.id.cb_mode_latest);
+        mCBblank  = (CheckBox) findViewById(R.id.cb_mode_blank);
+        mCBleg    = (CheckBox) findViewById(R.id.cb_mode_leg);
 
         ((Button) findViewById(R.id.button_ok)).setOnClickListener( this );
         ((Button) findViewById(R.id.button_back)).setOnClickListener( this );
@@ -58,9 +60,10 @@ class ShotDisplayDialog extends MyDialog
         // mBtnRefresh.setOnClickListener( this );
 
         mCBids.setChecked(     mParent.getShowIds() );
-        mCBsplay.setChecked( ! mParent.mSplay );
-        mCBblank.setChecked( ! mParent.mBlank );
-        mCBleg.setChecked(   ! mParent.mLeg );
+        mCBsplay.setChecked( ! mParent.mFlagSplay );
+        mCBlatest.setChecked(  mParent.mFlagLatest );
+        mCBblank.setChecked( ! mParent.mFlagBlank );
+        mCBleg.setChecked(   ! mParent.mFlagLeg );
 
     }
 
@@ -93,9 +96,10 @@ class ShotDisplayDialog extends MyDialog
     private void setParent()
     {
       mParent.setShowIds( mCBids.isChecked() );
-      mParent.mSplay = ! mCBsplay.isChecked();
-      mParent.mBlank = ! mCBblank.isChecked();
-      mParent.mLeg   = ! mCBleg.isChecked();
+      mParent.mFlagSplay = ! mCBsplay.isChecked();
+      mParent.mFlagLatest =  mCBlatest.isChecked();
+      mParent.mFlagBlank = ! mCBblank.isChecked();
+      mParent.mFlagLeg   = ! mCBleg.isChecked();
       mParent.updateDisplay( );
     }
 }

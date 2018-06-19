@@ -125,7 +125,7 @@ class DrawingLabelPath extends DrawingPointPath
   }
 
   @Override
-  public void setScale( int scale )
+  void setScale( int scale )
   {
     if ( scale != mScale ) {
       mScale = scale;
@@ -137,7 +137,7 @@ class DrawingLabelPath extends DrawingPointPath
   }
 
   @Override
-  public void setOrientation( double angle ) 
+  void setOrientation( double angle ) 
   { 
     mOrientation = angle; 
     while ( mOrientation >= 360.0 ) mOrientation -= 360.0;
@@ -160,7 +160,7 @@ class DrawingLabelPath extends DrawingPointPath
   }
 
   @Override
-  public String toTherion( )
+  String toTherion( )
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
@@ -172,7 +172,7 @@ class DrawingLabelPath extends DrawingPointPath
   }
 
   @Override
-  public void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil )
+  void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil )
   { 
     // int size = mScale - SCALE_XS;
     // int layer  = 6;

@@ -163,7 +163,7 @@ class DrawingPhotoEditDialog extends MyDialog
       //   mParent.dropPhoto( mPhoto );
       //   break;
       case R.id.photo_image:
-        mApp.viewPhoto( mContext, mFilename );
+        TopoDroidApp.viewPhoto( mContext, mFilename );
         return;
     }
     dismiss();

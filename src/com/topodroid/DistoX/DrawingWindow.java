@@ -665,7 +665,7 @@ public class DrawingWindow extends ItemDrawer
   private void addFixedSpecial( float x1, float y1, float x2, float y2 ) // float xoff, float yoff )
   {
     DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null );
-    dpath.setPaint( BrushManager.highlightPaint );
+    dpath.setPathPaint( BrushManager.highlightPaint );
     // mDrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
     mDrawingUtil.makePath( dpath, x1, y1, x2, y2 );
     mDrawingSurface.setNorthPath( dpath );
@@ -676,19 +676,19 @@ public class DrawingWindow extends ItemDrawer
   static void setSplayPaintExtend( DrawingPath path, DBlock blk, float extend )
   {
     if ( blk == null ) {
-      path.setPaint( BrushManager.fixedSplayPaint );
+      path.setPathPaint( BrushManager.fixedSplayPaint );
     } else {
       if ( blk.isCommented() ) {
-        path.setPaint( BrushManager.fixedSplay0Paint );
+        path.setPathPaint( BrushManager.fixedSplay0Paint );
       } else if ( blk.mType == DBlock.BLOCK_X_SPLAY ) {
-        path.setPaint( BrushManager.fixedGreenPaint );
+        path.setPathPaint( BrushManager.fixedGreenPaint );
       } else {
         if (extend >= 0 && extend < TDSetting.mCosHorizSplay) {
-          path.setPaint( BrushManager.fixedSplay4Paint );
+          path.setPathPaint( BrushManager.fixedSplay4Paint );
         } else if (extend < 0 && extend > -TDSetting.mCosHorizSplay) {
-          path.setPaint( BrushManager.fixedSplay3Paint );
+          path.setPathPaint( BrushManager.fixedSplay3Paint );
         } else {
-          path.setPaint( BrushManager.fixedSplayPaint );
+          path.setPathPaint( BrushManager.fixedSplayPaint );
         }
       }
     }
@@ -698,19 +698,19 @@ public class DrawingWindow extends ItemDrawer
   static void setSplayPaintClino( DrawingPath path, DBlock blk )
   {
     if ( blk == null ) {
-      path.setPaint( BrushManager.fixedSplayPaint );
+      path.setPathPaint( BrushManager.fixedSplayPaint );
     } else {
       if ( blk.isCommented() ) {
-        path.setPaint( BrushManager.fixedSplay0Paint );
+        path.setPathPaint( BrushManager.fixedSplay0Paint );
       } else if ( blk.mType == DBlock.BLOCK_X_SPLAY ) {
-        path.setPaint( BrushManager.fixedGreenPaint );
+        path.setPathPaint( BrushManager.fixedGreenPaint );
       } else {
         if (blk.mClino > TDSetting.mVertSplay) {
-          path.setPaint( BrushManager.fixedSplay4Paint );
+          path.setPathPaint( BrushManager.fixedSplay4Paint );
         } else if (blk.mClino < -TDSetting.mVertSplay) {
-          path.setPaint( BrushManager.fixedSplay3Paint );
+          path.setPathPaint( BrushManager.fixedSplay3Paint );
         } else {
-          path.setPaint( BrushManager.fixedSplayPaint );
+          path.setPathPaint( BrushManager.fixedSplayPaint );
         }
       }
     }
@@ -734,14 +734,14 @@ public class DrawingWindow extends ItemDrawer
       }
     } else {
       dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );
-      dpath.setPaint( BrushManager.fixedShotPaint );
+      dpath.setPathPaint( BrushManager.fixedShotPaint );
       if ( blk != null ) {
 	if ( blk.isMultiBad() ) {
-          dpath.setPaint( BrushManager.fixedOrangePaint );
+          dpath.setPathPaint( BrushManager.fixedOrangePaint );
         } else if ( mApp.mShotWindow != null && mApp.mShotWindow.isBlockMagneticBad( blk ) ) {
-          dpath.setPaint( BrushManager.fixedRedPaint );
-        } else if ( TDSetting.isConnectionModeBatch() && blk.isRecent( TopoDroidApp.mSecondLastShotId, System.currentTimeMillis()/1000 ) ) {
-          dpath.setPaint( BrushManager.fixedBluePaint );
+          dpath.setPathPaint( BrushManager.fixedRedPaint );
+        } else if ( TDSetting.isConnectionModeBatch() && blk.isRecent( System.currentTimeMillis()/1000 ) ) {
+          dpath.setPathPaint( BrushManager.fixedBluePaint );
 	}
       }
     }
@@ -761,29 +761,29 @@ public class DrawingWindow extends ItemDrawer
     // Log.v("DistoX", "Section splay angle " + a + " " + TDSetting.mVertSplay );
     DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
     if ( blk.mPaint != null ) {
-      dpath.setPaint( blk.mPaint );
+      dpath.setPathPaint( blk.mPaint );
     } else if ( blue ) {
       if ( blk.mType == DBlock.BLOCK_X_SPLAY ) {
-        dpath.setPaint( BrushManager.fixedGreenPaint );
+        dpath.setPathPaint( BrushManager.fixedGreenPaint );
       } else if ( a > TDSetting.mSectionSplay ) {
-        dpath.setPaint( BrushManager.fixedSplay24Paint );
+        dpath.setPathPaint( BrushManager.fixedSplay24Paint );
       } else if ( a < -TDSetting.mSectionSplay ) {
-        dpath.setPaint( BrushManager.fixedSplay23Paint );
+        dpath.setPathPaint( BrushManager.fixedSplay23Paint );
       } else {
-        dpath.setPaint( BrushManager.fixedSplay2Paint );
+        dpath.setPathPaint( BrushManager.fixedSplay2Paint );
       }
     } else {
       if ( blk.mType == DBlock.BLOCK_X_SPLAY ) {
-        dpath.setPaint( BrushManager.fixedGreenPaint );
+        dpath.setPathPaint( BrushManager.fixedGreenPaint );
       } else if ( a > TDSetting.mSectionSplay ) {
-        dpath.setPaint( BrushManager.fixedSplay4Paint );
+        dpath.setPathPaint( BrushManager.fixedSplay4Paint );
       } else if ( a < -TDSetting.mSectionSplay ) {
-        dpath.setPaint( BrushManager.fixedSplay3Paint );
+        dpath.setPathPaint( BrushManager.fixedSplay3Paint );
       } else {
-        dpath.setPaint( BrushManager.fixedSplayPaint );
+        dpath.setPathPaint( BrushManager.fixedSplayPaint );
       }
     }
-    // dpath.setPaint( blue? BrushManager.fixedSplay2Paint : BrushManager.fixedSplayPaint );
+    // dpath.setPathPaint( blue? BrushManager.fixedSplay2Paint : BrushManager.fixedSplayPaint );
     // mDrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
     mDrawingUtil.makePath( dpath, x1, y1, x2, y2 );
     mDrawingSurface.addFixedPath( dpath, true, false ); // true SPLAY false SELECTABLE
@@ -1499,7 +1499,7 @@ public class DrawingWindow extends ItemDrawer
     mAzimuth = azimuth;
     mClino   = clino;
     mSavedMode = mDrawingSurface.getDisplayMode();
-    mDrawingSurface.setDisplayMode( DisplayMode.DISPLAY_SECTION | ( mSavedMode & DisplayMode.DISPLAY_SCALE_REF ) );
+    mDrawingSurface.setDisplayMode( DisplayMode.DISPLAY_SECTION | ( mSavedMode & DisplayMode.DISPLAY_SCALEBAR ) );
     resetStatus();
     doStart( true, tt );
     updateSplays( mApp.mSplayMode );
@@ -3187,7 +3187,7 @@ public class DrawingWindow extends ItemDrawer
   private void doSectionLine( DrawingLinePath currentLine )
   {
     currentLine.addOption("-direction both");
-    currentLine.makeStraight( false ); // true = with arrow
+    currentLine.makeStraight( );
     boolean h_section = PlotInfo.isProfile( mType );
     
     // NOTE here l1 is the end-point and l2 the start-point (not considering the tick)

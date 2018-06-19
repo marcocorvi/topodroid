@@ -113,14 +113,14 @@ class DrawingCommandManager
     synchronized( mSplaysStack ) {
       for ( DrawingPath path : mSplaysStack ) {
         if ( app.hasHighlightedId( path.mBlock.mId ) ) { 
-          path.setPaint( BrushManager.errorPaint );
+          path.setPathPaint( BrushManager.errorPaint );
         }
       }
     }
     synchronized( mLegsStack ) {
       for ( DrawingPath path : mLegsStack ) {
         if ( app.hasHighlightedId( path.mBlock.mId ) ) { 
-          path.setPaint( BrushManager.errorPaint );
+          path.setPathPaint( BrushManager.errorPaint );
         }
       }
     }
@@ -182,7 +182,8 @@ class DrawingCommandManager
     }
   }
 
-  void flipXAxis( float z )
+  // from ICanvasCommand
+  public void flipXAxis( float z )
   {
     synchronized( mGridStack1 ) {
       flipXAxes( mGridStack1 );
@@ -446,6 +447,7 @@ class DrawingCommandManager
   //   if ( ! PlotInfo.isSketch2d( plot_type ) ) return null;
   //   boolean legs   = (mDisplayMode & DisplayMode.DISPLAY_LEG) != 0;
   //   boolean splays = (mDisplayMode & DisplayMode.DISPLAY_SPLAY) != 0;
+  //   boolean latest = (mDisplayMode & DisplayMode.DISPLAY_LATEST) != 0;
   //   if ( mHighlight.size() == 1 ) {
   //     return mHighlight.get(0).mBlock;
   //   }
@@ -958,7 +960,7 @@ class DrawingCommandManager
         while ( i.hasNext() ){
           final DrawingPath path = (DrawingPath) i.next();
           if ( path.mBlock == null || ( ! path.mBlock.mMultiBad ) ) {
-            path.setPaint( paint );
+            path.setPathPaint( paint );
           }
         }
       }
@@ -969,7 +971,7 @@ class DrawingCommandManager
         while ( i.hasNext() ){
           final DrawingPath path = (DrawingPath) i.next();
           if ( path.mBlock == null || ( ! path.mBlock.mMultiBad ) ) {
-            // path.setPaint( paint );
+            // path.setPathPaint( paint );
 	    if ( TDSetting.mDashSplay || profile ) {
               DrawingWindow.setSplayPaintClino( path, path.mBlock );
 	    } else {
@@ -1422,6 +1424,8 @@ class DrawingCommandManager
 
   // check whether an array of stations name contains the FROM station of the path's block
   // used to decide whether to display splays
+  // @param p         drawing path 
+  // @param stations  array of station names
   private boolean containsStation( DrawingPath p, ArrayList<String> stations ) 
   {
     DBlock blk = p.mBlock;
@@ -1441,10 +1445,11 @@ class DrawingCommandManager
 
     boolean legs     = (mDisplayMode & DisplayMode.DISPLAY_LEG     ) != 0;
     boolean splays   = (mDisplayMode & DisplayMode.DISPLAY_SPLAY   ) != 0;
+    boolean latest   = (mDisplayMode & DisplayMode.DISPLAY_LATEST  ) != 0;
     boolean stations = (mDisplayMode & DisplayMode.DISPLAY_STATION ) != 0;
     boolean grids    = (mDisplayMode & DisplayMode.DISPLAY_GRID    ) != 0;
     boolean outline  = (mDisplayMode & DisplayMode.DISPLAY_OUTLINE ) != 0;
-    boolean scaleRef = (mDisplayMode & DisplayMode.DISPLAY_SCALE_REF ) != 0;
+    boolean scaleRef = (mDisplayMode & DisplayMode.DISPLAY_SCALEBAR ) != 0;
 
     boolean spoints   = false;
     boolean slines    = false;
@@ -1513,17 +1518,21 @@ class DrawingCommandManager
       }
     }
 
-    if ( mSplaysStack != null && ( splays || splays_on.size() > 0 ) ) {
+    if ( mSplaysStack != null ) {
       synchronized( mSplaysStack ) {
-        final Iterator i = mSplaysStack.iterator();
-        while ( i.hasNext() ){
-          final DrawingPath path = (DrawingPath) i.next();
-          if ( splays ) {
+        if ( splays ) { // draw all splays except the splays-off
+          final Iterator i = mSplaysStack.iterator();
+          while ( i.hasNext() ){
+            final DrawingPath path = (DrawingPath) i.next();
 	    if ( ! containsStation( path, splays_off ) ) path.draw( canvas, mMatrix, mScale, mBBox );
-	    } else {
-            if ( containsStation( path, splays_on ) ) path.draw( canvas, mMatrix, mScale, mBBox );
-          }
-        }
+	  }
+	} else if ( latest || splays_on.size() > 0 ) { // draw the splays-on and/or the lastest
+          final Iterator i = mSplaysStack.iterator();
+          while ( i.hasNext() ){
+            final DrawingPath path = (DrawingPath) i.next();
+            if ( containsStation( path, splays_on ) || path.isBlockRecent() ) path.draw( canvas, mMatrix, mScale, mBBox );
+	  }
+	}
       }
     }
     if ( mScrap != null && mScrap.size() > 0 ) {
@@ -1547,7 +1556,9 @@ class DrawingCommandManager
  
     if ( stations && mStations != null ) {  
       synchronized( mStations ) {
-        for ( DrawingStationName st : mStations ) {
+        final Iterator i = mStations.iterator();
+        while ( i.hasNext() ){
+          final DrawingStationName st = (DrawingStationName) i.next();
           st.draw( canvas, mMatrix, mScale, mBBox );
         }
       }
@@ -1578,11 +1589,11 @@ class DrawingCommandManager
               DrawingPath path = (DrawingPath)cmd;
               if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
                 DrawingLinePath line = (DrawingLinePath)path;
-                if ( line.mLineType == BrushManager.mLineLib.mLineSectionIndex ) { // add tick to section-lines
+                if ( line.mLineType == BrushManager.mLineLib.mLineSectionIndex ) { // add direction-tick to section-lines
                   LinePoint lp = line.mFirst;
                   Path path1 = new Path();
                   path1.moveTo( lp.x, lp.y );
-                  path1.lineTo( lp.x+line.mDx*10, lp.y+line.mDy*10 );
+                  path1.lineTo( lp.x+line.mDx*TDSetting.mArrowLength, lp.y+line.mDy*TDSetting.mArrowLength );
                   path1.transform( mMatrix );
                   canvas.drawPath( path1, BrushManager.mSectionPaint );
                 }
@@ -1616,6 +1627,7 @@ class DrawingCommandManager
                 // || ( type == DrawingPath.DRAWING_PATH_SPLAY && ! (splays && sshots) )
                 || ( type == DrawingPath.DRAWING_PATH_NAME  && ! (sstations) ) ) continue;
 	      if ( type == DrawingPath.DRAWING_PATH_SPLAY ) {
+		// FIXME_LATEST latest splays
                 if ( splays ) {
                   if ( containsStation( pt.mItem, splays_off ) ) continue;
 		} else {
@@ -1929,9 +1941,11 @@ class DrawingCommandManager
     // Log.v( "DistoX", "getItemAt " + x + " " + y + " zoom " + zoom + " mode " + mode + " size " + size + " " + radius );
     boolean legs   = (mDisplayMode & DisplayMode.DISPLAY_LEG) != 0;
     boolean splays = (mDisplayMode & DisplayMode.DISPLAY_SPLAY ) != 0;
+    // boolean latest = (mDisplayMode & DisplayMode.DISPLAY_LATEST ) != 0;
     boolean stations = (mDisplayMode & DisplayMode.DISPLAY_STATION ) != 0;
     synchronized ( TDPath.mSelectedLock ) {
       mSelected.clear();
+      // FIXME_LATEST latests splays are not considered in the selection
       mSelection.selectAt( mSelected, x, y, radius, mode, legs, splays, stations, splays_on, splays_off );
       if ( mSelected.mPoints.size() > 0 ) {
         // Log.v("DistoX", "seleceted " + mSelected.mPoints.size() + " points " );
@@ -2038,7 +2052,7 @@ class DrawingCommandManager
     DrawingLinePath line = (DrawingLinePath)item;
 
     // nearby splays are the splays that get close enough (dthr) to the line
-    ArrayList< NearbySplay > splays = new ArrayList<>();
+    ArrayList< NearbySplay > nearby_splays = new ArrayList<>();
     for ( DrawingPath fxd : mSplaysStack ) {
       float x = fxd.x2;
       float y = fxd.y2;
@@ -2050,27 +2064,27 @@ class DrawingCommandManager
           dmin = d;
           lpmin = lp2;
         } else if ( lpmin != null ) { // if distances increase after a good min, break
-          splays.add( new NearbySplay( fxd.x2 - lpmin.x, fxd.y2 - lpmin.y, dmin, lpmin ) );
+          nearby_splays.add( new NearbySplay( fxd.x2 - lpmin.x, fxd.y2 - lpmin.y, dmin, lpmin ) );
           break;
         }
       }
     }
-    // Log.v("DistoX", "Nearby splays " + splays.size() + " line size " + line.size() );
-    int ks = splays.size();
+    // Log.v("DistoX", "Nearby splays " + nearby_splays.size() + " line size " + line.size() );
+    int ks = nearby_splays.size();
     if ( ks == 0 ) return -3;
-    // check that two splays do not have the same linepoint
+    // check that two nearby splays do not have the same linepoint
     for ( int k1 = 0; k1 < ks; ) {
-      NearbySplay nbs1 = splays.get( k1 );
+      NearbySplay nbs1 = nearby_splays.get( k1 );
       int dk1 = 1; // increment of k1
       int k2 = k1+1;
       while ( k2<ks ) {
-        NearbySplay nbs2 = splays.get( k2 );
+        NearbySplay nbs2 = nearby_splays.get( k2 );
         if ( nbs1.pt == nbs2.pt ) {
           ks --;
           if ( nbs1.d <= nbs2.d ) {
-            splays.remove( k2 );
+            nearby_splays.remove( k2 );
           } else {
-            splays.remove( k1 );
+            nearby_splays.remove( k1 );
             dk1 = 0;
             break;
           }
@@ -2080,10 +2094,10 @@ class DrawingCommandManager
       }
       k1 += dk1;
     }
-    // Log.v("DistoX", "Nearby splays " + splays.size() + " / " + ks );
+    // Log.v("DistoX", "Nearby splays " + nearby_splays.size() + " / " + ks );
 
     // compute distances between consecutive line points
-    // and order splays following the line path
+    // and order nearby_splays following the line path
     int k = 0; // partition of unity
     float len = 0.001f;
     LinePoint lp1 = line.mFirst;
@@ -2097,13 +2111,13 @@ class DrawingCommandManager
 
       int kk = k;
       for ( ; kk<ks; ++kk ) {
-        if ( lp2 == splays.get(kk).pt ) {
-          if ( kk != k ) { // swap splays k <--> kk
-            NearbySplay nbs = splays.remove( kk );
-            splays.add( k, nbs );
+        if ( lp2 == nearby_splays.get(kk).pt ) {
+          if ( kk != k ) { // swap nearby_splays k <--> kk
+            NearbySplay nbs = nearby_splays.remove( kk );
+            nearby_splays.add( k, nbs );
           }
-          splays.get(k).llen = len;
-          if ( k > 0 ) splays.get( k-1 ).rlen = len;
+          nearby_splays.get(k).llen = len;
+          if ( k > 0 ) nearby_splays.get( k-1 ).rlen = len;
           len = 0;
           ++ k;
           break;
@@ -2112,7 +2126,7 @@ class DrawingCommandManager
       lp1 = lp2; // lp1 = previous point
     }
     len += 0.001f;
-    splays.get( k-1 ).rlen = len;
+    nearby_splays.get( k-1 ).rlen = len;
 
     //   |----------*--------*-----
     //      llen   sp1 rlen
@@ -2124,7 +2138,7 @@ class DrawingCommandManager
     len = 0;
     LinePoint lp2 = line.mFirst;
     NearbySplay spr = null; // right splay
-    for ( NearbySplay spl : splays ) { // left splay
+    for ( NearbySplay spl : nearby_splays ) { // left splay
       while ( lp2 != spl.pt /* && lp2 != null && k0 < size */ ) { // N.B. lp2 must be non-null and k0 must be < size
         len += dist[k0];
         float dx = len/spl.llen * spl.dx;

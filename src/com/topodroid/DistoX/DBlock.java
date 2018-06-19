@@ -161,7 +161,11 @@ class DBlock
     return false;
   }
 
-  boolean isRecent( long id, long time ) { return mId >= id && (time-mTime)<10L; }
+  // a block is recent if
+  //   - its id comes after the given id
+  //   - its time is no more than 10 seconds before the given time
+  boolean isRecent( ) { return mId >= TopoDroidApp.mSecondLastShotId; }
+  boolean isRecent( long time ) { return mId >= TopoDroidApp.mSecondLastShotId && (time-mTime)<10L; }
 
   boolean isMultiBad() { return mMultiBad; }
 

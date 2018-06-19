@@ -606,6 +606,7 @@
 
     <string name="mode_leg">Нитка ходу</string>
     <string name="mode_splay">Бок. заміри</string>
+    <!-- TODO string name="mode_latest">Latest splays</string -->
     <string name="mode_station">Пікети</string>
     <string name="mode_grid">Сітка</string>
     <string name="mode_fixed">Сдвиг відносно нитки</string>

@@ -134,13 +134,14 @@ public class ShotWindow extends Activity
                       };
 
   private static final int izonsF[] = {
-                        R.drawable.iz_left,
-                        R.drawable.iz_flip,
-                        R.drawable.iz_right,
-                        R.drawable.iz_highlight,
-                        R.drawable.iz_bedding,
-                        R.drawable.iz_delete,
-                        R.drawable.iz_cancel,
+                        R.drawable.iz_left,       // extend LEFT
+                        R.drawable.iz_flip,       // extend flip
+                        R.drawable.iz_right,      // extend RIGHT
+                        R.drawable.iz_highlight,  // highlight in sketch
+			R.drawable.iz_numbers_no, // renumber shots (first must be leg)
+                        R.drawable.iz_bedding,    // compute bedding
+                        R.drawable.iz_delete,     // delete shots
+                        R.drawable.iz_cancel,     // cancel
 			R.drawable.iz_empty
                       };
 
@@ -186,9 +187,10 @@ public class ShotWindow extends Activity
   private DataDownloader mDataDownloader;
   private DistoXAccuracy mDistoXAccuracy;
 
-  boolean mSplay = true;  //!< whether to hide splay shots
-  boolean mLeg   = true;  //!< whether to hide leg extra shots
-  boolean mBlank = false; //!< whether to hide blank shots
+  boolean mFlagSplay  = true;  //!< whether to hide splay shots
+  boolean mFlagLatest = false; //!< whether to show the latest splay shots
+  boolean mFlagLeg    = true;  //!< whether to hide leg extra shots
+  boolean mFlagBlank  = false; //!< whether to hide blank shots
   // private Bundle mSavedState = null;
   // long mSecondLastShotId = 0L;
   // long mLastShotId;
@@ -228,7 +230,7 @@ public class ShotWindow extends Activity
 
   // private RelativeLayout mFooter = null;
   private Button[] mButtonF;
-  private int mNrButtonF = 7;
+  private int mNrButtonF = 8;
 
   private StationSearch mSearch;
 
@@ -267,8 +269,6 @@ public class ShotWindow extends Activity
   TopoDroidApp getApp() { return mApp; }
 
   Set<String> getStationNames() { return mApp_mData.selectAllStations( mApp.mSID ); }
-
-  long secondLastShotId() { return TopoDroidApp.mSecondLastShotId; }
 
   // -------------------------------------------------------------------
   // FXIME ok only for numbers
@@ -428,10 +428,10 @@ public class ShotWindow extends Activity
         // if ( prev != null && prev.mType == DBlock.BLOCK_BLANK ) prev.mType = DBlock.BLOCK_BLANK_LEG;
         if ( prev != null ) prev.setTypeBlankLeg();
 
-        if ( mLeg ) { // flag: hide leg extra shots
+        if ( mFlagLeg ) { // flag: hide leg extra shots
           // TDLog.Log( TDLog.LOG_SHOT, "close distance");
 
-          if ( mBlank && prev != null && prev.isTypeBlank() ) {
+          if ( mFlagBlank && prev != null && prev.isTypeBlank() ) {
             // prev was skipped: draw it now
             if ( ! prev_is_leg ) {
               cur = prev;
@@ -443,7 +443,7 @@ public class ShotWindow extends Activity
             continue;
           }
         } else { // do not hide extra leg-shots
-          if ( mBlank && prev != null && prev.isTypeBlank() ) {
+          if ( mFlagBlank && prev != null && prev.isTypeBlank() ) {
             if ( ! prev_is_leg ) {
               mDataAdapter.add( prev );
               prev_is_leg = true;
@@ -460,16 +460,16 @@ public class ShotWindow extends Activity
         prev_is_leg = false;
         if ( DBlock.isTypeBlank(t) ) {
           prev = cur;
-          if ( mBlank ) continue;
+          if ( mFlagBlank ) continue;
         } else if ( DBlock.isSplay(t) ) {
           prev = null;
-          if ( mSplay ) { // do hide splays, except those that are shown.
+          if ( mFlagSplay ) { // do hide splays, except those that are shown.
             // boolean skip = true;
             // for ( String st : mShowSplay ) {
             //   if ( st.equals( cur.mFrom ) ) { skip = false; break; }
             // }
             // if ( skip ) continue;
-            if ( ! showSplaysContains( cur.mFrom ) ) continue;
+            if ( ! ( showSplaysContains( cur.mFrom ) || ( mFlagLatest && cur.isRecent() ) ) ) continue;
           }
         } else { // t == DBlock.BLOCK_MAIN_LEG
           prev = cur;
@@ -1092,6 +1092,7 @@ public class ShotWindow extends Activity
   }
 
   // --------------------------------------------------------------
+  final String ONE = "1";
 
   // FIXME NOTIFY: the display mode is local - do not notify
   private void restoreInstanceFromData()
@@ -1100,19 +1101,20 @@ public class ShotWindow extends Activity
     if ( shots != null ) {
       String[] vals = shots.split( " " );
       // FIXME assert( vals.length > 3 );
-      mSplay  = vals[0].equals("1");
-      mLeg    = vals[1].equals("1");
-      mBlank  = vals[2].equals("1");
-      setShowIds( vals[3].equals("1") );
-      // Log.v("DistoX", "restore from data mSplay " + mSplay );
+      mFlagSplay  = vals[0].equals( ONE );
+      mFlagLeg    = vals[1].equals( ONE );
+      mFlagBlank  = vals[2].equals( ONE );
+      setShowIds( vals[3].equals( ONE ) );
+      mFlagLatest = ( vals.length > 4) && vals[4].equals( ONE );
+      // Log.v("DistoX", "restore from data mFlagSplay " + mFlagSplay );
     }
   }
     
   private void saveInstanceToData()
   {
     mApp_mData.setValue( "DISTOX_SHOTS",
-      String.format(Locale.US, "%d %d %d %d", mSplay?1:0, mLeg?1:0, mBlank?1:0, getShowIds()?1:0 ) );
-    // Log.v("DistoX", "save to data mSplay " + mSplay );
+      String.format(Locale.US, "%d %d %d %d %d", mFlagSplay?1:0, mFlagLeg?1:0, mFlagBlank?1:0, getShowIds()?1:0, mFlagLatest?1:0 ) );
+    // Log.v("DistoX", "save to data mFlagSplay " + mFlagSplay );
   }
 
   void doBluetooth( Button b )
@@ -1285,6 +1287,8 @@ public class ShotWindow extends Activity
         highlightBlocks( mDataAdapter.mSelect );
         // clearMultiSelect( );
         // updateDisplay();
+      } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // RENUMBER SELECTED SHOTS
+        renumberBlocks( mDataAdapter.mSelect );
       } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // BEDDING
         blocksBedding( mDataAdapter.mSelect );
       } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // DELETE
@@ -1322,7 +1326,7 @@ public class ShotWindow extends Activity
       long id = blk.mId;
       mApp_mData.deleteShot( id, mApp.mSID, TDStatus.DELETED, true ); // forward = true
       if ( /* blk != null && */ blk.type() == DBlock.BLOCK_MAIN_LEG ) {
-        if ( mLeg ) {
+        if ( mFlagLeg ) {
           for ( ++id; ; ++id ) {
             DBlock b = mApp_mData.selectShot( id, mApp.mSID );
             if ( b == null || b.type() != DBlock.BLOCK_SEC_LEG ) break;
@@ -1645,7 +1649,7 @@ public class ShotWindow extends Activity
   }
 
   // open the sketch and highlight block in the sketch
-  void highlightBlocks( List<DBlock> blks )  // HIGHLIGHT
+  private void highlightBlocks( List<DBlock> blks )  // HIGHLIGHT
   {
     mApp.setHighlighted( blks );
     // Log.v("DistoX", "highlight blocks [0] " + ( (blks==null)? "null" : blks.size() ) );
@@ -1654,6 +1658,15 @@ public class ShotWindow extends Activity
     if ( mRecentPlot != null ) {
       startExistingPlot( mRecentPlot, mRecentPlotType, blks.get(0).mFrom );
     }
+  }
+
+  private void renumberBlocks( List<DBlock> blks )  // RENUMBER SELECTED BLOCKS
+  {
+    if ( blks == null || blks.size() == 0 ) return;
+    DBlock blk = blks.get(0);
+    if ( ! blk.isLeg() ) return;
+    mApp.assignStationsAfter( blk, blks /*, stations */ );
+    updateDisplay();
   }
 
   /** bedding: solve Sum (A*x + B*y + C*z + 1)^2 minimum
@@ -1867,7 +1880,7 @@ public class ShotWindow extends Activity
 
   void recomputeItems( String st, int pos )
   {
-    if ( mSplay ) {
+    if ( mFlagSplay ) {
       if ( ! mShowSplay.remove( st ) ) {
         mShowSplay.add( st );
       }
@@ -1936,6 +1949,7 @@ public class ShotWindow extends Activity
 
     updateDisplay();
   }
+
 
   // merge this block to the following (or second following) block if this is a leg
   // if success update FROM/TO of the block

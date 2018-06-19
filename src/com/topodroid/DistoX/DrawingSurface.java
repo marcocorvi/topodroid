@@ -321,7 +321,7 @@ class DrawingSurface extends SurfaceView
   {
     mPreviewPath = new DrawingPath( type, null );
     mPreviewPath.mPath = new Path();
-    mPreviewPath.setPaint( paint );
+    mPreviewPath.setPathPaint( paint );
   }
 
   Path getPreviewPath() { return (mPreviewPath != null)? mPreviewPath.mPath : null; }
@@ -369,11 +369,11 @@ class DrawingSurface extends SurfaceView
 
     DrawingStationName st = new DrawingStationName( num_st, x, y );
     if ( num_st.mHidden == 1 ) {
-      st.setPaint( BrushManager.fixedStationHiddenPaint );
+      st.setPathPaint( BrushManager.fixedStationHiddenPaint );
     } else if ( num_st.mHidden == -1 || num_st.mBarrierAndHidden ) {
-      st.setPaint( BrushManager.fixedStationBarrierPaint );
+      st.setPathPaint( BrushManager.fixedStationBarrierPaint );
     } else {
-      st.setPaint( BrushManager.fixedStationPaint );
+      st.setPathPaint( BrushManager.fixedStationPaint );
     }
     if ( xsections != null && parent != null ) {
       for ( PlotInfo plot : xsections ) {
@@ -396,7 +396,7 @@ class DrawingSurface extends SurfaceView
     // TDLog.Log( TDLog.LOG_PLOT, "add Drawing Station Name " + name + " " + x + " " + y );
     // NOTE No station_XSection in X-Sections
     DrawingStationName st = new DrawingStationName( name, x, y );
-    st.setPaint( BrushManager.fixedStationPaint );
+    st.setPathPaint( BrushManager.fixedStationPaint );
     commandManager.addStation( st, false ); // NOTE make this true for selectable station in all sections
     return st;
   }

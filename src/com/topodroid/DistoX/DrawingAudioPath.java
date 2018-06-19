@@ -81,7 +81,7 @@ class DrawingAudioPath extends DrawingPointPath
   }
 
   @Override
-  public String toTherion( )
+  String toTherion( )
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
@@ -94,7 +94,7 @@ class DrawingAudioPath extends DrawingPointPath
   }
 
   @Override
-  public void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil )
+  void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil )
   { 
     // Log.v("DistoX", "audio point " + mId + " survey " + survey );
     File audiofile = new File( TDPath.getSurveyAudioFile( survey, Long.toString( mId ) ) );

@@ -85,7 +85,7 @@ class DrawingPhotoPath extends DrawingPointPath
   }
 
   @Override
-  public String toTherion( )
+  String toTherion( )
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
@@ -98,7 +98,7 @@ class DrawingPhotoPath extends DrawingPointPath
   }
 
   @Override
-  public void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil )
+  void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil )
   { 
     File photofile = new File( TDPath.getSurveyJpgFile( survey, Long.toString(mId) ) );
     if ( photofile.exists() ) {
