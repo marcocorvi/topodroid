@@ -236,8 +236,8 @@
     <!-- UNUSED string name="reversed">Otočené</string -->
     <string name="options">Možnosti</string>
     <string name="outline">Obrys</string>
-    <string name="out">Mimo</string>
-    <string name="in">Vo vnútri</string>
+    <string name="out">Out (Therion)</string>
+    <string name="in">In (Therion)</string>
     <!-- UNUSED string name="none">none</string -->
     <!-- UNUSED string name="barrier_add">Ovira</string -->
     <string name="hide_from">Skryť Do / Od</string>
