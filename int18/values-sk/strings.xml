@@ -21,7 +21,7 @@
     <string name="setup_drawingunit">Nastavte veľkosť ikoniek.\nMožete to zmeniť aj neskôr v nastaveniach cez menu kreslenia.</string>
     <string name="setup_done">Základné nastavenie je ukončené.\n\n
 	    Pokiaľ zistíte problém s pripojením DistoX skúste použiť Nezabezpečené pripojenie.\n\n
-	    Ďalšie nastavenia  (veľkosť ikon, šírky čiary, veľkosti štítkov&#8230; viete meniť neskôr v nastaveniach.)
+	    Ďalšie nastavenia  (veľkosť ikon, šírky čiary, veľkosti poznámok&#8230; viete meniť neskôr v nastaveniach.)
 	    podľa Vašich potrieb./n/n
     </string>
     <!-- OK string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
@@ -236,8 +236,8 @@
     <!-- UNUSED string name="reversed">Otočené</string -->
     <string name="options">Možnosti</string>
     <string name="outline">Obrys</string>
-    <string name="out">Mimo</string>
-    <string name="in">Vo vnútri</string>
+    <string name="out">Out (Therion)</string>
+    <string name="in">In (Therion)</string>
     <!-- UNUSED string name="none">none</string -->
     <!-- UNUSED string name="barrier_add">Ovira</string -->
     <string name="hide_from">Skryť Do / Od</string>
@@ -256,8 +256,8 @@
     <string name="fmt_longitude">Zemepisná dĺžka %1$s</string>
     <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string> 
     
-    <string name="fixed">Fixný príznak bodu</string>
-    <string name="painted">Kreslený príznak bodu</string>
+    <string name="fixed">Fixný príznak bodu (Therion)</string>
+    <string name="painted">Iný príznak bodu (Therion)</string>
 
     <string name="cbd_title">Hlavný adresár</string>
     <string name="cwd">Adresár projektu TopoDroid</string>
@@ -1058,9 +1058,9 @@
   <string name="pref_shared_xsections_summary">Predvolené nastavenie, či pri založení mapovania majú byť Priečne rezy zdielané medzi nákresmi</string>
   <string name="xsections_shared">Zdielané priečne rezy</string>
   <string name="xsections_private">Priečne rezy nezdielané medzi nákresmi</string>
-  <string name="pref_reduce_angle_title">Vyrovnávací uhol</string>
-  <string name="pref_reduce_angle_summary">Minimálny segmentový uhol pre vyrovnávanie čiar</string>
-  <string name="pref_reduce_angle_message">Minimálny segmentový uhol pre vyrovnávanie čiar</string>
+  <string name="pref_reduce_angle_title">Minimálny uhol pre vyhladenie čiar</string>
+  <string name="pref_reduce_angle_summary">Odstraňuje stredné body ČIARY medzi dvoma "rohovými" pri editácii</string>
+  <string name="pref_reduce_angle_message">Odstraňuje stredné body ČIARY medzi dvoma "rohovými" pri editácii</string>
    
 	
   <string name="pref_survey_stations_title">Politika číslovania bodov</string>
@@ -1173,9 +1173,9 @@
   <string name="pref_iter_summary">Maximálny počet opakovaní kalibračného algoritmu</string>
   <string name="pref_iter_dialogtitle">Opakovanie kalibrácie</string>
   <string name="pref_iter_message">Maximálny počet opakovaní kalibračného algoritmu</string>
-  <string name="pref_label_size_title">Veľkosť štítkov</string>
-  <string name="pref_label_size_summary">Veľkosť štítkov</string>
-  <string name="pref_label_size_message">Veľkosť štítkov</string>
+  <string name="pref_label_size_title">Veľkosť písmen v poznámke priamo na nákrese</string>
+  <string name="pref_label_size_summary">Veľkosť písmen v symbole BOD - Poznámka</string>
+  <string name="pref_label_size_message">Veľkosť písmen v symbole BOD - Poznámka</string>
   <string name="pref_arrow_length_title">Hrúbka čiary priečneho rezu</string>
   <!-- UNUSED string name="pref_arrow_length_summary">Dĺžka smeru sekcie</string -->
   <string name="pref_arrow_length_message">Hrúbka čiary priečneho rezu</string>
@@ -1346,12 +1346,8 @@
 \nUpozornenie pre použivateľa: používaním programu zbavujete autora akejkoľvek zodpovednosti za akúkoľvek stratu dát alebo poškodenie, ktoré z neho vyplývajú.
 \nDokumentácia: http://sites.google.com/site/speleoapps
 \nKomentáre, hlásenia chýb, požiadavky: marco.corvi@gmail.com
-\nOriginálny preklad: v0.1b - 10.5.2018 M.Jurečka: OS Ružomberok - https://www.speleork.sk - mail: jurecka@gmail.com
-\nAktualizované dňa: revizia v0.2 - 13.5.2018 B.Turčina, M.Chlebovec (zdroj prekladu: Taliančina, Nemčina, Angličtina)
-\nAktualizované dňa: revizia v0.3 - 18.5.2018 M.Chlebovec (zdroj prekladu: Angličtina)
-\nAktualizované dňa: revizia v0.4 - 19.5.2018 Miroslav Jurečka, Jozef Hetesi 
-\nAktualizované dňa: revizia v0.5 - 04.6.2018 Miroslav Jurečka, Jozef Hetesi 
-\nAktualizované dňa: revizia v1.0 - 11-17.6.2018 Jozef Hetesi 
+\nOriginálny preklad: v0.1-0.5 - 5/2018 M.Jurečka, B.Turčina, M.Chlebovec - OS Ružomberok - https://www.speleork.sk - mail: jurecka@gmail.com	    
+\nAktualizované dňa: revizia v1.0 - 11-17.6.2018 Jozef Hetesi - mail: jozefhetesi@gmail.com
     </string>
 
   <string name="firmware_title">Firmware Updater</string>
