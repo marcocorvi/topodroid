@@ -1055,9 +1055,9 @@
   <string name="pref_shared_xsections_summary">Predvolené nastavenie, či pri založení mapovania majú byť Priečne rezy zdielané medzi nákresmi</string>
   <string name="xsections_shared">Zdielané priečne rezy</string>
   <string name="xsections_private">Priečne rezy nezdielané medzi nákresmi</string>
-  <string name="pref_reduce_angle_title">Vyrovnávací uhol</string>
-  <string name="pref_reduce_angle_summary">Minimálny segmentový uhol pre vyrovnávanie čiar</string>
-  <string name="pref_reduce_angle_message">Minimálny segmentový uhol pre vyrovnávanie čiar</string>
+  <string name="pref_reduce_angle_title">Minimálny uhol pre vyhladenie čiar</string>
+  <string name="pref_reduce_angle_summary">Odstraňuje stredné body ČIARY medzi dvoma "rohovými" pri editácii</string>
+  <string name="pref_reduce_angle_message">Odstraňuje stredné body ČIARY medzi dvoma "rohovými" pri editácii</string>
    
 	
   <string name="pref_survey_stations_title">Politika číslovania bodov</string>
