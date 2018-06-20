@@ -277,6 +277,7 @@
     <!-- TODO string name="no_feature_audio">Audio not supported</string -->
     <string name="no_gms">校准无数据.\n点击下载按钮</string>
     <string name="no_geo_station">错误: 无地理定位点</string>
+    <!-- TODO string name="no_leg_first">Selection does not start with a leg</string -->
     <string name="no_leg_intersection">断面线与主线无交叉</string>
     <string name="no_location_data">无位置数据</string>
     <string name="no_paired_device">无配对设备.\n扫描并配对一个DistoX</string>
@@ -577,6 +578,9 @@
     <!-- UNUSED string name="button_regroup"   >重组   </string -->
     <string name="button_dump"      >删除     </string>
     <!-- TODO string name="button_rename"    >Rename    </string -->
+    <!-- TODO string name="button_renumber"  >Renumber</string -->
+    <!-- TODO string name="button_bedding"   >Bedding plane</string -->
+    <!-- TODO string name="button_highlight" >Highlight</string -->
     <!-- TODO string name="button_replace"   >Replace   </string -->
     <string name="button_reset"     >重置     </string>
     <string name="button_left"      >左</string>

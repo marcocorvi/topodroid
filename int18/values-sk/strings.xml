@@ -280,6 +280,7 @@
     <string name="no_feature_audio">Audio nie je podporované</string>
     <string name="no_gms">Kalibrácia nemá žiade dáta \nPoužite tlačidlo Stiahnuť</string>
     <string name="no_geo_station">Chyba: Bod merania nie je geolokalizovaný</string>
+    <!-- TODO string name="no_leg_first">Selection does not start with a leg</string -->
     <string name="no_leg_intersection">Čiara priečneho rezu nepretína žiadnu hlavnú zámeru</string>
     <string name="no_location_data">Žiadne dáta o pozícii</string>
     <string name="no_paired_device">Ziadne spárované zariadenie DistoX \nSpustite skenovanie a spárujete DistoX.</string>
@@ -584,6 +585,9 @@
     <!-- UNUSED string name="button_regroup"   >Raggruppare   </string -->
     <string name="button_dump"      >Kopírovať z DistaX   </string>
     <string name="button_rename"    >Premenovať    </string>
+    <!-- TODO string name="button_renumber"  >Renumber</string -->
+    <!-- TODO string name="button_bedding"   >Bedding plane</string -->
+    <!-- TODO string name="button_highlight" >Highlight</string -->
     <string name="button_replace"   >Vymeniť</string>
     <string name="button_reset"     >Resetovať   </string>
     <string name="button_left"      >Vľavo</string>

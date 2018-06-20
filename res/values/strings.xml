@@ -280,6 +280,7 @@
     <string name="no_feature_audio">Audio not supported</string>
     <string name="no_gms">Calibration has no data.\nUse Download button</string>
     <string name="no_geo_station">Failed: no geolocalized station</string>
+    <string name="no_leg_first">Selection does not start with a leg</string>
     <string name="no_leg_intersection">Section line crosses no leg</string>
     <string name="no_location_data">No location data</string>
     <string name="no_paired_device">No paired device.\nScan and pair a DistoX</string>
@@ -585,6 +586,9 @@
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Dump      </string>
     <string name="button_rename"    >Rename    </string>
+    <string name="button_renumber"  >Renumber</string>
+    <string name="button_bedding"   >Bedding plane</string>
+    <string name="button_highlight" >Highlight</string>
     <string name="button_replace"   >Replace   </string>
     <string name="button_reset"     >Reset     </string>
     <string name="button_left"      >LEFT</string>

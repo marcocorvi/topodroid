@@ -278,6 +278,7 @@
     <string name="no_feature_audio">Не се поддържа аудио</string>
     <string name="no_gms">Калибрацията на съдържа данни.\nИзползвайте бутона за изтегляне на данни</string>
     <string name="no_geo_station">Грешка: няма георефериран репер</string>
+    <!-- TODO string name="no_leg_first">Selection does not start with a leg</string -->
     <string name="no_leg_intersection">Линията на сечението не пресича нито една отсечка</string>
     <string name="no_location_data">Няма данни за местоположение</string>
     <string name="no_paired_device">Лиспва свързано устройство.\nСканирайте и свържете DistoX</string>
@@ -579,6 +580,9 @@
     <!-- UNUSED string name="button_regroup"   >Прегрупиране</string -->
     <string name="button_dump"      >Запис     </string>
     <string name="button_rename"    >Преименуване</string>
+    <!-- TODO string name="button_renumber"  >Renumber</string -->
+    <!-- TODO string name="button_bedding"   >Bedding plane</string -->
+    <!-- TODO string name="button_highlight" >Highlight</string -->
     <string name="button_replace"   >Подмяна   </string>
     <string name="button_reset"     >Нулиране   </string>
     <string name="button_left"      >Наляво</string>

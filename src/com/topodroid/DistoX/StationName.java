@@ -13,7 +13,7 @@
 package com.topodroid.DistoX;
 
 
-// import android.util.Log;
+import android.util.Log;
 
 import java.util.List;
 import java.util.Set;
@@ -335,11 +335,12 @@ class StationName
   }
 
   // @param list list of dblock to assign
+  // called by TopoDroidApp
   void assignStationsAfter_Backsight( DataHelper data_helper, long sid, DBlock blk0, List<DBlock> list, Set<String> sts )
   { 
-    boolean bs = TDSetting.mDistoXBackshot;
+    boolean bs = TDSetting.mDistoXBackshot; // whether distox is in backshot mode
 
-    // Log.v("DistoX", "Backsight assign stations after " + blk0.mFrom + "-" + blk0.mTo + " Size " + list.size() + " sid " + sid );
+    Log.v("DistoX", "BACKSIGHT assign stations after " + blk0.mFrom + "-" + blk0.mTo + " Size " + list.size() );
     boolean increment = true;
     // boolean flip = false; // whether to swap leg-stations (backsight backward shot)
     // TDLog.Log( TDLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
@@ -356,7 +357,12 @@ class StationName
     if ( bs ) {
       from = blk0.mTo;
       to   = blk0.mFrom;
-      if ( DistoXStationName.isLessOrEqual( blk0.mTo, blk0.mFrom ) ) { // forward
+      if ( DistoXStationName.isLessOrEqual( blk0.mTo, blk0.mFrom ) ) {
+        // blk0 is backsight 2--1 next is foresight 2--3:
+	//      splay station is blk0.from (2)
+	//      next station is the increment (3)
+	//           from <--- blk0 --- to ---- next
+	//                            station
         // flip    = true;
         station = to;
         next = DistoXStationName.incrementName( station, sts );
@@ -364,6 +370,10 @@ class StationName
         fore_bearing = blk0.mBearing;
         fore_clino   = blk0.mClino;
       } else { // backward
+        // blk0 is foresight 1--2 next is backsight 2--1:
+	//      splay station is blk0.to (2) so that if backsight fails the shot is taken as splay
+	//           (to) --- blk0 ---> from ---- to ---- next
+	//         old_from            station
         increment = false;
         // flip    = false;
         station = from;
@@ -375,6 +385,9 @@ class StationName
       from = blk0.mFrom;
       to   = blk0.mTo;
       if ( DistoXStationName.isLessOrEqual( blk0.mFrom, blk0.mTo ) ) { // forward
+	// blk0 is foresight 1---2 
+	//          from --- blk0 ---> to ----- next
+	//                          station
         // flip    = true;
         station = to;
         next = DistoXStationName.incrementName( station, sts );
@@ -382,6 +395,9 @@ class StationName
         fore_bearing = blk0.mBearing;
         fore_clino   = blk0.mClino;
       } else { // backward
+	// blk0 is backsight 2---1
+	//          (to) <--- blk0 ---- from ---- to ---- next
+	//         old_from            station
         increment = false;
         // flip    = false;
         station = from;
@@ -390,6 +406,7 @@ class StationName
       }
       oldFrom = blk0.mFrom;
     }
+    Log.v("DistoX", "FROM " + from + " TO " + to + " NEXT " + next + " STATION " + station + " increment " + increment );
 
     for ( DBlock blk : list ) {
       if ( blk.isSplay() ) {
@@ -406,8 +423,8 @@ class StationName
       } else if ( blk.mType == DBlock.BLOCK_MAIN_LEG ) {
         if ( blk.mId != blk0.mId ) {
           String p_to;
-          boolean backsight = checkBackshot( blk, fore_length, fore_bearing, fore_clino ); 
-          if ( /* flip && */ backsight ) {
+          boolean is_backshot = checkBackshot( blk, fore_length, fore_bearing, fore_clino ); 
+          if ( /* flip && */ is_backshot ) {
             // flip = false;
             p_to = oldFrom; 
             from = to;
@@ -429,6 +446,7 @@ class StationName
             fore_bearing = blk.mBearing;
             fore_clino   = blk.mClino;
           }
+          // Log.v("DistoX", "FROM " + from + " TO " + to + " " + p_to + " NEXT " + next + " STATION " + station + " increment " + increment + " backshot " + is_backshot );
 	  if ( bs ) {
             setBlockName( data_helper, sid, blk, p_to, from );
 	  } else {
@@ -442,8 +460,8 @@ class StationName
   void assignStations_Backsight( DataHelper data_helper, long sid, List<DBlock> list, Set<String> sts )
   { 
     // mSecondLastShotId = lastShotId(); // FIXME this probably not needed
-    // Log.v("DistoX", "Backsight assign stations. Size " + list.size() );
-    if ( TDSetting.mDistoXBackshot ) {
+    // Log.v("DistoX", "BACKSIGHT assign stations. Size " + list.size() );
+    if ( TDSetting.mDistoXBackshot ) { // if the distox is in backshot mode
       assignStations_BacksightBachshot( data_helper, sid, list, sts );
       return;
     }
@@ -462,6 +480,7 @@ class StationName
     // Log.v("DistoX", "Current St. " + ( (mCurrentStationName==null)? "null" : mCurrentStationName ) );
 
     int nrLegShots = 0;
+    // Log.v("DistoX", "FROM " + from + " TO " + to + " STATION " + station );
 
     for ( DBlock blk : list ) {
       if ( blk.mFrom.length() == 0 ) // this implies blk.mTo.length() == 0
@@ -484,11 +503,13 @@ class StationName
               mCurrentStationName = null;
               String prev_from = from;
               String prev_to   = to;
-              if ( /* flip && */ checkBackshot( prev, fore_length, fore_bearing, fore_clino) ) { 
+              boolean is_backshot = checkBackshot( prev, fore_length, fore_bearing, fore_clino);
+              if ( /* flip && */ is_backshot ) { 
                                      // 2 backsight backward shot from--old_from
                 prev_to = oldFrom;   // 1
                 station = from;
                 // flip = false;
+	        data_helper.updateShotFlag( prev.mId, sid, DBlock.BLOCK_DUPLICATE, true ); // true = forward
               } else {               // 2 backsight forward shot from--to
                 // prev_to = to;     // 3
                 oldFrom = from;      // 2
@@ -502,6 +523,7 @@ class StationName
               }
               setBlockName( data_helper, sid, prev, prev_from, prev_to );
               setLegExtend( data_helper, sid, prev );
+              // Log.v("DistoX", "FROM " + from + " TO " + to + " STATION " + station + " P_FROM " + prev_from + " P_TO " + prev_to + " backshot " + is_backshot );
             }
           } else { // distance from prev > "closeness" setting
             if ( nrLegShots > 0 ) {
@@ -536,6 +558,7 @@ class StationName
           //   flip = false;
           }
           nrLegShots = TDSetting.mMinNrLegShots;
+          // Log.v("DistoX", "FROM " + from + " TO " + to + " STATION " + station + " OLD FROM " + oldFrom );
         } 
         else // FROM non-empty, TO empty --> SPLAY
         {
@@ -985,7 +1008,9 @@ class StationName
     }
   }
 
-
+  // backsight station policy with the distox in backshot mode
+  //    that is the distox reverts azymuth and clino
+  //    since topodroid stores the data as they arrive from the distox, the shots have inverted azimuth and clino 
   private void assignStations_BacksightBachshot( DataHelper data_helper, long sid, List<DBlock> list, Set<String> sts )
   { 
     // mSecondLastShotId = lastShotId(); // FIXME this probably not needed
@@ -1027,11 +1052,13 @@ class StationName
               mCurrentStationName = null;
               String prev_from = from;
               String prev_to   = to;
-              if ( /* flip && */ checkBackshot( prev, fore_length, fore_bearing, fore_clino) ) { 
+              boolean is_backshot = checkBackshot( prev, fore_length, fore_bearing, fore_clino);
+              if ( /* flip && */ is_backshot ) {
                                      // 2 backsight backward shot from--old_from
                 prev_to = oldFrom;   // 1
                 station = from;
                 // flip = false;
+	        data_helper.updateShotFlag( prev.mId, sid, DBlock.BLOCK_DUPLICATE, true ); // true = forward
               } else {               // 2 backsight forward shot from--to
                 // prev_to = to;     // 3
                 oldFrom = from;      // 2

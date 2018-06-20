@@ -282,6 +282,7 @@
     <string name="no_feature_audio">Audio nicht unterstützt</string>
     <string name="no_gms">Kalibrierung mit keinen Daten</string>
     <string name="no_geo_station">Fehler: keine geolokalisierte Station</string>
+    <!-- TODO string name="no_leg_first">Selection does not start with a leg</string -->
     <string name="no_leg_intersection">Schnittlinie kreuzt keine Vermessung</string>
     <string name="no_location_data">Keine Ortsdaten</string>
     <string name="no_paired_device">Kein gekoppeltes DistoX Gerät</string>
@@ -595,6 +596,9 @@
     <!-- UNUSED string name="button_regroup"   >Umgruppieren   </string -->
     <string name="button_dump"      >Lesen</string>
     <string name="button_rename"    >Umbenennen    </string>
+    <!-- TODO string name="button_renumber"  >Renumber</string -->
+    <!-- TODO string name="button_bedding"   >Bedding plane</string -->
+    <!-- TODO string name="button_highlight" >Highlight</string -->
     <string name="button_replace"   >Ersetzen   </string>
     <string name="button_reset"     >Zurücksetzen</string>
     <string name="button_left"      >LINKS</string>

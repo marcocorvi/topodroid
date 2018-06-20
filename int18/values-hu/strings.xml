@@ -278,6 +278,7 @@
     <!-- TODO string name="no_feature_audio">Audio not supported</string -->
     <string name="no_gms">Nincsenek kalibrációs adatok.\nTöltsd le az adatokat </string>
     <string name="no_geo_station">Hiba: nincs geolokalizált mérésipont</string>
+    <!-- TODO string name="no_leg_first">Selection does not start with a leg</string -->
     <string name="no_leg_intersection">A szelvény nem keresztez poligont</string>
     <string name="no_location_data">Nincs hely adat</string>
     <string name="no_paired_device">Nincs párosított eszköz.\nKeress és párosíts egy DistoX-et</string>
@@ -579,6 +580,9 @@
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Biztonsági tár</string>
     <string name="button_rename"    >Átnevez    </string>
+    <!-- TODO string name="button_renumber"  >Renumber</string -->
+    <!-- TODO string name="button_bedding"   >Bedding plane</string -->
+    <!-- TODO string name="button_highlight" >Highlight</string -->
     <string name="button_replace"   >Cserél   </string>
     <string name="button_reset"     >Visszaállít</string>
     <string name="button_left"      >BAL</string>

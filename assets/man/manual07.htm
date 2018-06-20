@@ -36,12 +36,24 @@ The button bar changes to buttons for the multi-shot actions:
 <li>set the shot extend to "left"</li>
 <li>reverse the shot extends</li>
 <li>set the shot extend to "right"</li>
-<li>open the last sketch with the selected shots highlighted</li>
-<li>compute the strike and dip of the plane containing the shots. Only shots with the same FROM station as the first are considered. The result is written into the comment of the first shot</li>
+<li>special actions dialog</li>
 <li>delete the selected shots. Warning: hidden secondary-leg shots are deleted when the corresponding leg shot is deleted</li>
 <li>close the multi-shot selection</li>
 </ul>
 <br><p>
+
+The special actions dialog includes:
+<ul>
+<li>renumber the selected shots</li>
+<li>highlight the selected shots in the last sketch</li>
+<li>compute the strike and dip of the plane containing the shots</li>
+</ul>
+
+Shot renumbering is possible only if the first selected shot is a leg, oterwise it is disabled. Renumbering follows the order of selection of the shots.
+The stations of the first leg are used to seed the renumbering. They can be set in the dialog.<br>
+Highlighting opens the most recent sketch highliting the selected splays. Only splays must have been selected, otherwise it is disabled.<br>
+The computation of strike and dip of the bedding plane requires that all the selected shots have the same FROM station. Otherwise it is disabled.
+The result is shown in the dialog and added to (replaced if already present) the comment of the first selected shot.<br><p>
 
 <a href="manual06.htm">&lt; Survey data</a> |
 <a href="manual08.htm">Survey info &gt;</a>

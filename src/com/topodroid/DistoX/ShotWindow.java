@@ -90,7 +90,7 @@ import android.graphics.drawable.BitmapDrawable;
 
 import android.net.Uri;
 
-// import android.util.Log;
+import android.util.Log;
 
 public class ShotWindow extends Activity
                           implements OnItemClickListener
@@ -137,9 +137,10 @@ public class ShotWindow extends Activity
                         R.drawable.iz_left,       // extend LEFT
                         R.drawable.iz_flip,       // extend flip
                         R.drawable.iz_right,      // extend RIGHT
-                        R.drawable.iz_highlight,  // highlight in sketch
-			R.drawable.iz_numbers_no, // renumber shots (first must be leg)
-                        R.drawable.iz_bedding,    // compute bedding
+                        R.drawable.iz_highlight,  // multishot dialog: includes // highlight in sketch
+                          // R.drawable.iz_highlight,  // highlight in sketch
+			  // R.drawable.iz_numbers_no, // renumber shots (first must be leg)
+                          // R.drawable.iz_bedding,    // compute bedding
                         R.drawable.iz_delete,     // delete shots
                         R.drawable.iz_cancel,     // cancel
 			R.drawable.iz_empty
@@ -230,7 +231,7 @@ public class ShotWindow extends Activity
 
   // private RelativeLayout mFooter = null;
   private Button[] mButtonF;
-  private int mNrButtonF = 8;
+  private int mNrButtonF = 6; // 8;
 
   private StationSearch mSearch;
 
@@ -1284,13 +1285,17 @@ public class ShotWindow extends Activity
         updateDisplay();
         // mList.invalidate(); // NOTE not enough to see the change in the list immediately
       } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // HIGHLIGHT
-        highlightBlocks( mDataAdapter.mSelect );
-        // clearMultiSelect( );
-        // updateDisplay();
-      } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // RENUMBER SELECTED SHOTS
-        renumberBlocks( mDataAdapter.mSelect );
-      } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // BEDDING
-        blocksBedding( mDataAdapter.mSelect );
+        // ( blks == null || blks.size() == 0 ) cannot happen
+        (new MultishotDialog( mActivity, this, mDataAdapter.mSelect )).show();
+      //   highlightBlocks( mDataAdapter.mSelect );
+      //   // clearMultiSelect( );
+      //   // updateDisplay();
+      // } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // RENUMBER SELECTED SHOTS
+      //   renumberBlocks( mDataAdapter.mSelect );
+      //   clearMultiSelect( );
+      //   mList.invalidate();
+      // } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // BEDDING
+      //   computeBedding( mDataAdapter.mSelect );
       } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // DELETE
         askMultiDelete();
       } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // CANCEL
@@ -1649,7 +1654,8 @@ public class ShotWindow extends Activity
   }
 
   // open the sketch and highlight block in the sketch
-  private void highlightBlocks( List<DBlock> blks )  // HIGHLIGHT
+  // called by MultishotDialog
+  void highlightBlocks( List<DBlock> blks )  // HIGHLIGHT
   {
     mApp.setHighlighted( blks );
     // Log.v("DistoX", "highlight blocks [0] " + ( (blks==null)? "null" : blks.size() ) );
@@ -1658,15 +1664,25 @@ public class ShotWindow extends Activity
     if ( mRecentPlot != null ) {
       startExistingPlot( mRecentPlot, mRecentPlotType, blks.get(0).mFrom );
     }
+    clearMultiSelect( );
   }
 
-  private void renumberBlocks( List<DBlock> blks )  // RENUMBER SELECTED BLOCKS
+  // called by MultishotDialog
+  void renumberBlocks( List<DBlock> blks, String from, String to )  // RENUMBER SELECTED BLOCKS
   {
-    if ( blks == null || blks.size() == 0 ) return;
-    DBlock blk = blks.get(0);
-    if ( ! blk.isLeg() ) return;
-    mApp.assignStationsAfter( blk, blks /*, stations */ );
-    updateDisplay();
+    DBlock blk = blks.get(0); // blk is guaranteed to exists
+    if ( ! ( from.equals(blk.mFrom) && to.equals(blk.mTo) ) ) {
+      blk.setName( from, to );
+      mApp_mData.updateShotName( blk.mId, mApp.mSID, from, to, true );
+    }
+    if ( blk.isLeg() ) {
+      mApp.assignStationsAfter( blk, blks /*, stations */ );
+      updateDisplay();
+      // mList.invalidate();
+    } else {
+      TDToast.make( mActivity, R.string.no_leg_first );
+    }
+    clearMultiSelect( );
   }
 
   /** bedding: solve Sum (A*x + B*y + C*z + 1)^2 minimum
@@ -1690,8 +1706,9 @@ public class ShotWindow extends Activity
    *  The dip angle is measured from the horizontal plane
    *  The strike from the north
    */
-  void blocksBedding( List<DBlock> blks ) // BEDDING
+  String computeBedding( List<DBlock> blks ) // BEDDING
   {
+    String strike_dip = getResources().getString(R.string.few_data);
     if ( blks != null || blks.size() > 2 ) {
       DBlock b0 = blks.get(0);
       String st = b0.mFrom;
@@ -1740,6 +1757,9 @@ public class ShotWindow extends Activity
 	}
       }
       if ( nn >= 3 ) {
+	String strike_fmt = getResources().getString( R.string.strike_dip );
+	String strike_regex = strike_fmt.replaceAll("%\\d\\$.0f", "\\-??\\\\d+"); 
+	// Log.v("DistoX", "Strike regex: <<" + strike_regex + ">>");
         Matrix m = new Matrix( new Vector(xx, xy, xz), new Vector(xy, yy, yz), new Vector(xz, yz, zz) );
         Matrix minv = m.InverseT(); // m is self-transpose
         Vector n0 = new Vector( -xn, -yn, -zn );
@@ -1756,21 +1776,26 @@ public class ShotWindow extends Activity
         // float adip = TDMath.acosd( dip.z ); // TDMath.asind( n1.z );
         float astk = TDMath.atan2d( -n1.y, n1.x );
         float adip = 90 - TDMath.asind( n1.z );
-        String strike_dip = String.format(getResources().getString(R.string.strike_dip), astk, adip );
-        TDToast.make( mActivity, strike_dip );
+        strike_dip = String.format( strike_fmt, astk, adip );
+        // TDToast.make( mActivity, strike_dip );
         if ( b0.mComment != null && b0.mComment.length() > 0 ) {
-          b0.mComment = b0.mComment + " " + strike_dip;
+	  if ( b0.mComment.matches( ".*" + strike_regex + ".*" ) ) {
+	    // Log.v("DistoX", "Strike regex is contained");
+            b0.mComment = b0.mComment.replaceAll( strike_regex, strike_dip );
+	  } else {
+            b0.mComment = b0.mComment + " " + strike_dip;
+          }
   	} else {
           b0.mComment = strike_dip;
 	}
+	// Log.v("DistoX", "Comment <<" + b0.mComment + ">>");
 	mApp_mData.updateShotComment( b0.mId, mApp.mSID, b0.mComment, false ); // FIXME no forward
 	if ( b0.mView != null ) b0.mView.invalidate();
-      } else {
-        TDToast.make( mActivity, R.string.few_data );
       }
     }
-    clearMultiSelect( );
-    mList.invalidate();
+    // clearMultiSelect( );
+    // mList.invalidate();
+    return strike_dip;
   }
   
   // this method is called by ShotDialog() with to.length() == 0 ie to == ""

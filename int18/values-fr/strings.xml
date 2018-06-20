@@ -278,6 +278,7 @@
 <string name="no_feature_audio">Audio non supporté</string>
 <string name="no_gms">L\'étalonnage ne contient pas de données.\nUtiliser le bouton Télécharger</string>
 <string name="no_geo_station">Échec : pas de station géolocalisée</string>
+    <!-- TODO string name="no_leg_first">Selection does not start with a leg</string -->
 <string name="no_leg_intersection">La ligne de section transverse ne coupe aucune ligne de cheminement</string>
 <string name="no_location_data">Aucune donnée de géolocalisation</string>
 <string name="no_paired_device">Aucun périphérique appairé.\nRecherchez et appairez un DistoX</string>
@@ -578,6 +579,9 @@
     <!-- UNUSED string name="button_regroup"   >Regrouper   </string -->
     <string name="button_dump"      >Dump mémoire    </string>
     <string name="button_rename"    >Renommer    </string>
+    <!-- TODO string name="button_renumber"  >Renumber</string -->
+    <!-- TODO string name="button_bedding"   >Bedding plane</string -->
+    <!-- TODO string name="button_highlight" >Highlight</string -->
     <string name="button_replace"   >Remplacer   </string>
     <string name="button_reset"     >Reset      </string>
     <string name="button_left"      >GAUCHE</string>

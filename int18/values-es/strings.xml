@@ -277,6 +277,7 @@
     <!-- TODO string name="no_feature_audio">Audio not supported</string -->
     <string name="no_gms">La calibración no tiene datos.\nPulse el botón Descargar</string>
     <string name="no_geo_station">Error: estación no geolocalizada</string>
+    <!-- TODO string name="no_leg_first">Selection does not start with a leg</string -->
     <string name="no_leg_intersection">La línea de la sección no atraviesa ninguna visual</string>
     <string name="no_location_data">Sin datos de calibración</string>
     <string name="no_paired_device">Dispositivo no emparejado.\nEscanee y empareje DistoX</string>
@@ -576,6 +577,9 @@
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Enviar    </string>
     <string name="button_rename"    >Renombrar </string>
+    <!-- TODO string name="button_renumber"  >Renumber</string -->
+    <!-- TODO string name="button_bedding"   >Bedding plane</string -->
+    <!-- TODO string name="button_highlight" >Highlight</string -->
     <string name="button_replace"   >Reemplazar</string>
     <string name="button_reset"     >Resetear  </string>
     <string name="button_left"      >Izquierdo</string>

@@ -280,6 +280,7 @@
     <!-- TODO string name="no_feature_audio">Audio not supported</string -->
     <string name="no_gms">Відсутні дані для калібрування.\Використовуйте кнопку Скачати</string>
     <string name="no_geo_station">Помилка: отсутствует пікет с координатами</string>
+    <!-- TODO string name="no_leg_first">Selection does not start with a leg</string -->
     <string name="no_leg_intersection">Розріз не перетинає пікет</string>
     <string name="no_location_data">Немає даних про місцезнаходження</string>
     <string name="no_paired_device">Відсутній прив\'язаний пікет.\nПроскануйте і привя\'жіть DistoX</string>
@@ -581,6 +582,9 @@
     <!-- UNUSED string name="button_regroup"   >Перегрупувати   </string -->
     <string name="button_dump"      >Дамп      </string>
     <!-- TODO string name="button_rename"    >Rename    </string -->
+    <!-- TODO string name="button_renumber"  >Renumber</string -->
+    <!-- TODO string name="button_bedding"   >Bedding plane</string -->
+    <!-- TODO string name="button_highlight" >Highlight</string -->
     <string name="button_replace"   >Заміна   </string>
     <string name="button_reset"     >Скидання     </string>
     <string name="button_left"      >ЛІВО</string>

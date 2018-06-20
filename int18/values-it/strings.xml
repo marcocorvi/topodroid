@@ -278,6 +278,7 @@
     <string name="no_feature_audio">Audio non supportato</string>
     <string name="no_gms">Calibrazione senza data.</string>
     <string name="no_geo_station">Errore: nessun caposaldo geolocalizzato</string>
+    <!-- TODO string name="no_leg_first">Selection does not start with a leg</string -->
     <string name="no_leg_intersection">La linea di sezione non interseca alcuna battuta</string>
     <string name="no_location_data">Nessun dato di posizione</string>
     <string name="no_paired_device">Nessun DistoX accoppiato.</string>
@@ -579,6 +580,9 @@
     <!-- UNUSED string name="button_regroup"   >Raggruppare   </string -->
     <string name="button_dump"      >Scarica   </string>
     <string name="button_rename"    >Rinomina    </string>
+    <!-- TODO string name="button_renumber"  >Renumber</string -->
+    <!-- TODO string name="button_bedding"   >Bedding plane</string -->
+    <!-- TODO string name="button_highlight" >Highlight</string -->
     <string name="button_replace"   >Sostituisci</string>
     <string name="button_reset"     >Resetta   </string>
     <string name="button_left"      >SINISTRA</string>
