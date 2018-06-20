@@ -470,7 +470,8 @@
     <string name="saturated_coeffs">VAROVANIE: Saturované kalibračné koeficienty</string>
     <string name="out_of_memory">VAROVANIE: Nedostatok pamäte !</string>
     <string name="disk_io_error">KRITICKÁ CHYBA: Chyba i/o disku !</string>
-    <!-- TODO string name="toporobot_warning">WARNING: TopoRobot policy is experimental !</string -->
+    <string name="toporobot_warning">VAROVANIE: TopoRobot politika číslovania je experimentálna !</string>
+	
     
     <string name="cannot_rename">Nedá sa premenovať názov mapovania</string>
     <string name="declination">Magnetická deklinácia</string>
