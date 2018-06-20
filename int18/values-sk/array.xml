@@ -3,7 +3,7 @@
 <resources>
 
   <string-array name="lineContinue">
-     <item name="none">none</item>
+     <item name="none">Žiadne</item>
      <item name="start">Nadpojiť na počiatočný bod</item>
      <item name="end">Nadpojiť na koncový bod</item>
      <item name="both">Nadpojiť na obidva body</item>
