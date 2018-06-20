@@ -24,7 +24,7 @@
 	    Ďalšie nastavenia  (veľkosť ikon, šírky čiary, veľkosti poznámok&#8230; viete meniť neskôr v nastaveniach.)
 	    podľa Vašich potrieb./n/n
     </string>
-    <!-- OK string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet</string>
 
     <string name="POINT">BOD</string>
     <string name="LINE">ČIARA</string>
@@ -141,7 +141,7 @@
     <!-- UNUSED string name="external_prompt">Scrivi i dati</string -->
     <string name="splay_at_to">LRUD na druhom meračskom bode</string>
     <string name="lrud">LRUD</string>
-    <!-- TODO string name="strike_dip">Strike %1$.0f Dip %2$.0f</string -->
+    <string name="strike_dip">Strike %1$.0f Dip %2$.0f</string>
 
     <string name="few_data">Nedostatok údajov</string>
     <string name="few_iter">Zlyhanie: príliš veľa opakovaní</string>
@@ -273,7 +273,7 @@
     <string name="no_calibration">Nie je vybratá žiadna kalibrácia</string>
     <string name="no_capture_app">Žiadna aplikácia pre fotenie</string>
     <string name="no_cave3d">Cave3D nie je nainštalovaná</string>
-    <!-- TODO string name="no_data_reduction">No data reduction</string -->
+    <string name="no_data_reduction">Žiadna redukcia dát</string>
     <string name="no_db">Žiadna databáza</string>
     <string name="no_device_address">Zariadenie nie je vybraté</string>
     <string name="no_device_found">Zariadenie sa nenašlo</string>
@@ -471,7 +471,8 @@
     <string name="saturated_coeffs">VAROVANIE: Saturované kalibračné koeficienty</string>
     <string name="out_of_memory">VAROVANIE: Nedostatok pamäte !</string>
     <string name="disk_io_error">KRITICKÁ CHYBA: Chyba i/o disku !</string>
-    <!-- TODO string name="toporobot_warning">WARNING: TopoRobot policy is experimental !</string -->
+    <string name="toporobot_warning">VAROVANIE: TopoRobot politika číslovania je experimentálna !</string>
+	
     
     <string name="cannot_rename">Nedá sa premenovať názov mapovania</string>
     <string name="declination">Magnetická deklinácia</string>
@@ -487,7 +488,7 @@
     <string name="undelete_check">Kontrolné</string>
     <string name="undelete_plot">Nákresy</string>
     <string name="delete_whole_leg">Odstráňte celú hlavnú zámeru</string>
-    <string name="visible_border">Viditeľný okraj Oblasti</string>
+    <string name="visible_border">Viditeľný okraj Oblasti (Therion)</string>
     <!-- UNUSED string name="vthreshold">soglia vert.</string -->
     <string name="wait_scan">Skenovanie: čakajte &#8230;</string>
     <string name="write_failed">Zapísanie do DistaX bolo neuspešné</string>
@@ -614,7 +615,7 @@
 
     <string name="mode_leg">Hlavné zámery</string>
     <string name="mode_splay">Pomocné zámery</string>
-    <!-- TODO string name="mode_latest">Latest splays</string -->
+    <string name="mode_latest">Ostatné pomocné zámery</string>
     <string name="mode_station">Staničenie</string>
     <string name="mode_grid">Mriežka</string>
     <string name="mode_fixed">Bočný Posun</string>
@@ -731,7 +732,7 @@
     <string name="help_close">Zavrieť okno</string>
     <string name="help_coeff">Ukázať Kalibračné koeficienty vybranej kalibrácie</string>
     <string name="help_color">Vymazať užívateľsky definované farby pomocných zámer</string>
-    <string name="help_continue">Vybrať možnosti spájania Čiar</string>
+    <string name="help_continue">Vybrať možnosti nadpájania Čiar</string>
     <!-- UNUSED string name="help_contour">Editovať obrysy</string -->
     <string name="help_current_station">Uložené meračské body</string>
     <string name="help_azimuth">Smerová orientácia</string>
@@ -1154,8 +1155,8 @@
   <string name="pref_segment_message">Minimálna vzdialenosť medzi bodmi čiary</string>
   <string name="pref_linestyle_title">Štýl Symbolu Čiary</string>
   <string name="pref_linestyle_summary">Štýl Symbolu Čiary</string>
-  <!-- TODO string name="pref_linecontinue_title">Line continue</string -->
-  <!-- TODO string name="pref_linecontinue_summary">Line default continue-mode</string -->
+  <string name="pref_linecontinue_title">Nadpájanie Čiar</string>
+  <string name="pref_linecontinue_summary">Predvolené nastavenie možností nadpájania Čiar v režime kreslenia</string>
   <string name="pref_lineacc_title">Presnosť Bezierových kriviek</string>
   <string name="pref_lineacc_summary">Presnosť interpolácie pre Bezierove krivky (čím menšie číslo tým viac bodov)</string>
   <string name="pref_lineacc_message">Presnosť interpolácie pre Bezierove krivky (čím menšie číslo tým viac bodov)</string>
@@ -1235,8 +1236,8 @@
   <string name="pref_unit_grid_summary">Veľkosť buniek v mriežke</string>
   <string name="pref_recent_nr_title">Počet najpoužívanejších Symbolov</string>
   <string name="pref_recent_nr_summary">Počet symbolov, ktoré sa nedávno použili na zobrazenie v nástroji na výber</string>
-  <string name="pref_area_border_title">Viditeľnosť hraníc oblasti</string> 
-  <string name="pref_area_border_summary">Predvolená viditeľnosť okrajov oblasti</string>
+  <string name="pref_area_border_title">Viditeľnosť okrajov Oblastí (Therion)</string> 
+  <string name="pref_area_border_summary">Predvolená viditeľnosť okrajov Oblastí v programe Therion</string>
   <string name="pref_auto_section_pt_title">Body pri vytvorenom priečnom reze</string>
   <string name="pref_auto_section_pt_summary">Pridá štvorec do nákresu, ktorý indikuje vytvorený priečny rez</string>
 
@@ -1257,6 +1258,8 @@
   <string name="pref_sketchCompassReadings_title">Čítania kompasu</string>
   <string name="pref_sketchCompassReadings_summary">Počet čítaní na výpočet priemeru</string>
   <string name="pref_sketchCompassReadings_message">Počet čítaní kompasu na výpočet priemer</string>
+  <string name="pref_sketchModelType_title">Typ modelu</string>
+  <string name="pref_sketchModelType_summary">Model rekonštrukcie steny</string>	
 
   <string name="pref_unit_length_title">Jednotky dĺžky</string>
   <string name="pref_unit_length_summary">Jednotky dĺžky</string>
@@ -1297,8 +1300,8 @@
   <string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string>
   <string name="pref_algo_min_delta_message">Min-algo group G^M.x weight</string>
 
-  <!-- OK string name="pref_log_stream_summary">Log output stream</string -->
-<string name="pref_log_stream_title">Systémový log</string>
+  <string name="pref_log_stream_summary">Výstupný systémový log</string>
+  <string name="pref_log_stream_title">Systémový log</string>
   <string name="pref_log_bt">Bluetooth</string>
   <string name="pref_log_bezier">Bezierova krivka</string>
   <string name="pref_log_calib">Kalibrácia</string>
@@ -1341,17 +1344,18 @@
   <!-- UNUSED string name="alt_ortho">orthometric</string -->
   <!-- UNUSED string name="splay_extend">estimate splay extend</string -->
 
-
-    <string name="perms_mandatory">Potrebné sú nasledujúce povolenia:</string>
-    <string name="perms_optional">Bez týchto povolení sú niektoré funkcie deaktivované:</string>
+    <string name="perms_mandatory">Topodroid nemôže fungovať bez týchto povolení:</string>
+    <string name="perms_optional">Topodroid môže zlyhať bez týchto povolení:</string>
+    <!-- UNUSED string name="perm_required">Required permissions are now granted. Restart TopoDroid</string -->
+    <!-- UNUSED string name="perm_consider">Consider granting permission: </string -->	
     <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">
 \nTopoDroid je open-source aplikácia pre Android, ktorá umožňuje mapovanie jaskýň pomocou DistaX
 \nUpozornenie pre použivateľa: používaním programu zbavujete autora akejkoľvek zodpovednosti za akúkoľvek stratu dát alebo poškodenie, ktoré z neho vyplývajú.
 \nDokumentácia: http://sites.google.com/site/speleoapps
 \nKomentáre, hlásenia chýb, požiadavky: marco.corvi@gmail.com
-\nOriginálny preklad: v0.1-0.5 - 5/2018 M.Jurečka, B.Turčina, M.Chlebovec - OS Ružomberok - https://www.speleork.sk - mail: jurecka@gmail.com	    
-\nAktualizované dňa: revizia v1.0 - 11-17.6.2018 Jozef Hetesi - mail: jozefhetesi@gmail.com
+\nOriginálny preklad: v0.1-0.6 - 5-6/2018 M.Jurečka, M.Chlebovec - OS Ružomberok - https://www.speleork.sk - mail: jurecka@gmail.com	    
+\nAktualizované dňa: revizia v1.0 - 11-20.6.2018 Jozef Hetesi - mail: jozefhetesi@gmail.com
     </string>
 
   <string name="firmware_title">Firmware Updater</string>
@@ -1364,7 +1368,7 @@
 \n[5] Stlačte OK tlačidlo.
 \n[6] Potvrďte pokračovať a počkajte na dokončenie procesu.
 \n[7] Vypnite DistoX2 CLEAR OFF tlačidlom.	  
-\n   NAHRATIE NEKOMPATIBILNÉHO FIRMWARU MÔŽE POŠKODIŤ DISTOX!!!
+\n   NAHRATIE NEKOMPATIBILNÉHO FIRMWARU MÔŽE VÁŽNE POŠKODIŤ DISTOX!!!
 \n	  
    </string>
 

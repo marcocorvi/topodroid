@@ -3,8 +3,9 @@ name shelter
 name-it riparo
 name-es abrigo
 name-pt abrigo
-name-pt укрытие
+name-ru укрытие
 name-fr abri
+name-sk prístrešok
 th_name u:shelter
 color 0xffffff
 csurvey 0 0 0
