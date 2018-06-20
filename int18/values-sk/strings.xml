@@ -486,7 +486,7 @@
     <string name="undelete_check">Kontrolné</string>
     <string name="undelete_plot">Nákresy</string>
     <string name="delete_whole_leg">Odstráňte celú hlavnú zámeru</string>
-    <string name="visible_border">Viditeľný okraj Oblasti</string>
+    <string name="visible_border">Viditeľný okraj Oblasti (Therion)</string>
     <!-- UNUSED string name="vthreshold">soglia vert.</string -->
     <string name="wait_scan">Skenovanie: čakajte &#8230;</string>
     <string name="write_failed">Zapísanie do DistaX bolo neuspešné</string>
@@ -1231,8 +1231,8 @@
   <string name="pref_unit_grid_summary">Veľkosť buniek v mriežke</string>
   <string name="pref_recent_nr_title">Počet najpoužívanejších Symbolov</string>
   <string name="pref_recent_nr_summary">Počet symbolov, ktoré sa nedávno použili na zobrazenie v nástroji na výber</string>
-  <string name="pref_area_border_title">Viditeľnosť hraníc oblasti</string> 
-  <string name="pref_area_border_summary">Predvolená viditeľnosť okrajov oblasti</string>
+  <string name="pref_area_border_title">Viditeľnosť okrajov Oblastí (Therion)</string> 
+  <string name="pref_area_border_summary">Predvolená viditeľnosť okrajov Oblastí v programe Therion</string>
   <string name="pref_auto_section_pt_title">Body pri vytvorenom priečnom reze</string>
   <string name="pref_auto_section_pt_summary">Pridá štvorec do nákresu, ktorý indikuje vytvorený priečny rez</string>
 
