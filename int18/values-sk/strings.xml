@@ -24,7 +24,7 @@
 	    Ďalšie nastavenia  (veľkosť ikon, šírky čiary, veľkosti poznámok&#8230; viete meniť neskôr v nastaveniach.)
 	    podľa Vašich potrieb./n/n
     </string>
-    <!-- OK string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet</string>
 
     <string name="POINT">BOD</string>
     <string name="LINE">ČIARA</string>
