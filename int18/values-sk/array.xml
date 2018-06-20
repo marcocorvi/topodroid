@@ -2,12 +2,12 @@
 
 <resources>
 
-  <!-- TODO string-array name="lineContinue">
+  <string-array name="lineContinue">
      <item name="none">none</item>
-     <item name="start">join with start point</item>
-     <item name="end">join with end point</item>
-     <item name="both">join with both ends</item>
-     <item name="continue">continue</item>
+     <item name="start">Nadpojiť na počiatočný bod</item>
+     <item name="end">Nadpojiť na koncový bod</item>
+     <item name="both">Nadpojiť na obidva body</item>
+     <item name="continue">Pokračovanie</item>
   </string-array -->
   <string-array name="unitGrid">
      <item name="meter">Metre</item>
