@@ -728,7 +728,7 @@
     <string name="help_close">Zavrieť okno</string>
     <string name="help_coeff">Ukázať Kalibračné koeficienty vybranej kalibrácie</string>
     <string name="help_color">Vymazať užívateľsky definované farby pomocných zámer</string>
-    <string name="help_continue">Vybrať možnosti spájania Čiar</string>
+    <string name="help_continue">Vybrať možnosti nadpájania Čiar</string>
     <!-- UNUSED string name="help_contour">Editovať obrysy</string -->
     <string name="help_current_station">Uložené meračské body</string>
     <string name="help_azimuth">Smerová orientácia</string>
@@ -1151,8 +1151,8 @@
   <string name="pref_segment_message">Minimálna vzdialenosť medzi bodmi čiary</string>
   <string name="pref_linestyle_title">Štýl Symbolu Čiary</string>
   <string name="pref_linestyle_summary">Štýl Symbolu Čiary</string>
-  <!-- TODO string name="pref_linecontinue_title">Line continue</string -->
-  <!-- TODO string name="pref_linecontinue_summary">Line default continue-mode</string -->
+  <string name="pref_linecontinue_title">Nadpájanie Čiar</string>
+  <string name="pref_linecontinue_summary">Predvolené nastavenie možností nadpájania Čiar v režime kreslenia</string>
   <string name="pref_lineacc_title">Presnosť Bezierových kriviek</string>
   <string name="pref_lineacc_summary">Presnosť interpolácie pre Bezierove krivky (čím menšie číslo tým viac bodov)</string>
   <string name="pref_lineacc_message">Presnosť interpolácie pre Bezierove krivky (čím menšie číslo tým viac bodov)</string>
