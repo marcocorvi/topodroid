@@ -141,7 +141,7 @@
     <!-- UNUSED string name="external_prompt">Scrivi i dati</string -->
     <string name="splay_at_to">LRUD na druhom meračskom bode</string>
     <string name="lrud">LRUD</string>
-    <!-- TODO string name="strike_dip">Strike %1$.0f Dip %2$.0f</string -->
+    <string name="strike_dip">Strike %1$.0f Dip %2$.0f</string>
 
     <string name="few_data">Nedostatok údajov</string>
     <string name="few_iter">Zlyhanie: príliš veľa opakovaní</string>
@@ -273,7 +273,7 @@
     <string name="no_calibration">Nie je vybratá žiadna kalibrácia</string>
     <string name="no_capture_app">Žiadna aplikácia pre fotenie</string>
     <string name="no_cave3d">Cave3D nie je nainštalovaná</string>
-    <!-- TODO string name="no_data_reduction">No data reduction</string -->
+    <string name="no_data_reduction">Žiadna redukcia dát</string>
     <string name="no_db">Žiadna databáza</string>
     <string name="no_device_address">Zariadenie nie je vybraté</string>
     <string name="no_device_found">Zariadenie sa nenašlo</string>
