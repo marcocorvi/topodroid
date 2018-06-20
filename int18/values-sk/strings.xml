@@ -1296,8 +1296,8 @@
   <string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string>
   <string name="pref_algo_min_delta_message">Min-algo group G^M.x weight</string>
 
-  <!-- OK string name="pref_log_stream_summary">Log output stream</string -->
-<string name="pref_log_stream_title">Systémový log</string>
+  <string name="pref_log_stream_summary">Výstupný systémový log</string>
+  <string name="pref_log_stream_title">Systémový log</string>
   <string name="pref_log_bt">Bluetooth</string>
   <string name="pref_log_bezier">Bezierova krivka</string>
   <string name="pref_log_calib">Kalibrácia</string>
@@ -1340,9 +1340,10 @@
   <!-- UNUSED string name="alt_ortho">orthometric</string -->
   <!-- UNUSED string name="splay_extend">estimate splay extend</string -->
 
-
-    <string name="perms_mandatory">Potrebné sú nasledujúce povolenia:</string>
-    <string name="perms_optional">Bez týchto povolení sú niektoré funkcie deaktivované:</string>
+    <string name="perms_mandatory">Topodroid nemôže fungovať bez týchto povolení:</string>
+    <string name="perms_optional">Topodroid môže zlyhať bez týchto povolení:</string>
+    <!-- UNUSED string name="perm_required">Required permissions are now granted. Restart TopoDroid</string -->
+    <!-- UNUSED string name="perm_consider">Consider granting permission: </string -->	
     <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">
 \nTopoDroid je open-source aplikácia pre Android, ktorá umožňuje mapovanie jaskýň pomocou DistaX
@@ -1350,7 +1351,7 @@
 \nDokumentácia: http://sites.google.com/site/speleoapps
 \nKomentáre, hlásenia chýb, požiadavky: marco.corvi@gmail.com
 \nOriginálny preklad: v0.1-0.6 - 5-6/2018 M.Jurečka, M.Chlebovec - OS Ružomberok - https://www.speleork.sk - mail: jurecka@gmail.com	    
-\nAktualizované dňa: revizia v1.0 - 11-17.6.2018 Jozef Hetesi - mail: jozefhetesi@gmail.com
+\nAktualizované dňa: revizia v1.0 - 11-20.6.2018 Jozef Hetesi - mail: jozefhetesi@gmail.com
     </string>
 
   <string name="firmware_title">Firmware Updater</string>
@@ -1363,7 +1364,7 @@
 \n[5] Stlačte OK tlačidlo.
 \n[6] Potvrďte pokračovať a počkajte na dokončenie procesu.
 \n[7] Vypnite DistoX2 CLEAR OFF tlačidlom.	  
-\n   NAHRATIE NEKOMPATIBILNÉHO FIRMWARU MÔŽE POŠKODIŤ DISTOX!!!
+\n   NAHRATIE NEKOMPATIBILNÉHO FIRMWARU MÔŽE VÁŽNE POŠKODIŤ DISTOX!!!
 \n	  
    </string>
 
