@@ -169,8 +169,8 @@
     <!-- UNUSED string name="sketch_saving">Salvataggio disegno &#8230; attendi &#8230;</string -->
     <string name="MT_points_none">Chýbajúci bod MobileTopographer</string>
 
-    <string name="pleasewait">Prosím čakajtet</string>
-    <string name="processing">Prebieha proces;</string>
+    <string name="pleasewait">Prosím čakajte</string>
+    <string name="processing">Prebieha proces</string>
 
     <!-- UNUSED string name="head_tail">Memoria: </string -->
     <string name="head_tail_failed">Neúspešné čitanie pamäte DistoX</string>
