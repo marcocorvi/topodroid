@@ -44,7 +44,7 @@
     <!-- UNUSED string name="memory_data">DistoX dáta</string -->
 
     <string name="thp_user">Univerzálny bod</string>
-    <string name="thp_label">Označenie</string>
+    <string name="thp_label">Poznámka</string>
     <!-- UNUSED string name="thp_danger">pericolo</string -->
     <string name="thl_user">Univerzálna čiara</string>
     <string name="thl_wall">Stena</string>
