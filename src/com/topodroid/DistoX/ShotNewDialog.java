@@ -130,7 +130,7 @@ class ShotNewDialog extends MyDialog
     mETbackbearing  = (EditText) findViewById(R.id.shot_backbearing );
     mETbackclino    = (EditText) findViewById(R.id.shot_backclino );
 
-    if ( ! TDSetting.mBacksight ) {
+    if ( ! TDSetting.mBacksightInput ) {
       TextView forsight = (TextView) findViewById(R.id.shot_forsight );
       forsight.setVisibility( View.GONE );
       mLbacksight.setVisibility( View.GONE );

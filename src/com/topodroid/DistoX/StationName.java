@@ -313,7 +313,12 @@ class StationName
   }
 
 
-  private boolean checkBackshot( DBlock blk, float length, float bearing, float clino )
+  // called in assignStationsAfter_Backsight
+  //           assignStations_BacksightBachshot
+  //           assignStations_Backsight
+  // note backsight-shot is a shot taken backsight (ie backward)
+  //      backshot is a distox mode, in which direction data are stored reversed
+  private boolean checkBacksightShot( DBlock blk, float length, float bearing, float clino )
   {
     float d_thr = TDSetting.mCloseDistance * (blk.mLength+length);
     if ( Math.abs( length - blk.mLength ) > d_thr ) {
@@ -325,7 +330,7 @@ class StationName
       // Log.v("DistoX", "backshot check fails on clino " + clino + " " + blk.mClino + " thr " + a_thr );
       return false;
     }
-    if ( ! TDSetting.mMagAnomaly ) {
+    if ( ! TDSetting.doMagAnomaly() ) {
       if ( Math.abs( ( bearing < blk.mBearing )? blk.mBearing - bearing - 180 : bearing - blk.mBearing - 180 ) > a_thr ) {
         // Log.v("DistoX", "backshot check fails on bearing " + bearing + " " + blk.mBearing + " thr " + a_thr );
         return false;
@@ -423,8 +428,8 @@ class StationName
       } else if ( blk.mType == DBlock.BLOCK_MAIN_LEG ) {
         if ( blk.mId != blk0.mId ) {
           String p_to;
-          boolean is_backshot = checkBackshot( blk, fore_length, fore_bearing, fore_clino ); 
-          if ( /* flip && */ is_backshot ) {
+          boolean is_backsight_shot = checkBacksightShot( blk, fore_length, fore_bearing, fore_clino ); 
+          if ( /* flip && */ is_backsight_shot ) {
             // flip = false;
             p_to = oldFrom; 
             from = to;
@@ -446,7 +451,7 @@ class StationName
             fore_bearing = blk.mBearing;
             fore_clino   = blk.mClino;
           }
-          // Log.v("DistoX", "FROM " + from + " TO " + to + " " + p_to + " NEXT " + next + " STATION " + station + " increment " + increment + " backshot " + is_backshot );
+          // Log.v("DistoX", "FROM " + from + " TO " + to + " " + p_to + " NEXT " + next + " STATION " + station + " increment " + increment + " backshot " + is_backsight_shot );
 	  if ( bs ) {
             setBlockName( data_helper, sid, blk, p_to, from );
 	  } else {
@@ -503,8 +508,8 @@ class StationName
               mCurrentStationName = null;
               String prev_from = from;
               String prev_to   = to;
-              boolean is_backshot = checkBackshot( prev, fore_length, fore_bearing, fore_clino);
-              if ( /* flip && */ is_backshot ) { 
+              boolean is_backsight_shot = checkBacksightShot( prev, fore_length, fore_bearing, fore_clino);
+              if ( /* flip && */ is_backsight_shot ) { 
                                      // 2 backsight backward shot from--old_from
                 prev_to = oldFrom;   // 1
                 station = from;
@@ -523,7 +528,7 @@ class StationName
               }
               setBlockName( data_helper, sid, prev, prev_from, prev_to );
               setLegExtend( data_helper, sid, prev );
-              // Log.v("DistoX", "FROM " + from + " TO " + to + " STATION " + station + " P_FROM " + prev_from + " P_TO " + prev_to + " backshot " + is_backshot );
+              // Log.v("DistoX", "FROM " + from + " TO " + to + " STATION " + station + " P_FROM " + prev_from + " P_TO " + prev_to + " backshot " + is_backsight_shot );
             }
           } else { // distance from prev > "closeness" setting
             if ( nrLegShots > 0 ) {
@@ -572,7 +577,11 @@ class StationName
     }
   }
   
-  // @param list list of dblock to assign
+  // @param data_helper  database
+  // @param sid          survey id
+  // @param blk0         reference dblock
+  // @param list         list of dblock to assign
+  // @param sts          station names already in use
   void assignStationsAfter_Default( DataHelper data_helper, long sid, DBlock blk0, List<DBlock> list, Set<String> sts )
   {
     boolean bs = TDSetting.mDistoXBackshot;
@@ -583,8 +592,8 @@ class StationName
     boolean forward_shots = ( survey_stations == 1 );
     boolean shot_after_splays = TDSetting.mShotAfterSplays;
 
-    boolean increment = true;
-    boolean flip = false; // whether to swap leg-stations (backsight backward shot)
+    // boolean increment = true;
+    // boolean flip = false; // whether to swap leg-stations (backsight backward shot)
     // TDLog.Log( TDLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
 
     DBlock prev = null;
@@ -637,6 +646,10 @@ class StationName
     }
   }
 
+  // @param data_helper  database
+  // @param sid          survey id
+  // @param list         list of dblock to assign
+  // @param sts          station names already in use
   void assignStations_Default( DataHelper data_helper, long sid, List<DBlock> list, Set<String> sts )
   { 
     if ( TDSetting.mDistoXBackshot ) {
@@ -1052,8 +1065,8 @@ class StationName
               mCurrentStationName = null;
               String prev_from = from;
               String prev_to   = to;
-              boolean is_backshot = checkBackshot( prev, fore_length, fore_bearing, fore_clino);
-              if ( /* flip && */ is_backshot ) {
+              boolean is_backsight_shot = checkBacksightShot( prev, fore_length, fore_bearing, fore_clino);
+              if ( /* flip && */ is_backsight_shot ) {
                                      // 2 backsight backward shot from--old_from
                 prev_to = oldFrom;   // 1
                 station = from;

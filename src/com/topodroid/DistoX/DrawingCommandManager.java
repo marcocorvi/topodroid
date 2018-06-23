@@ -565,8 +565,12 @@ class DrawingCommandManager
           if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
             if ( erase_mode == Drawing.FILTER_ALL || erase_mode == Drawing.FILTER_LINE ) {
               DrawingLinePath line = (DrawingLinePath)path;
-              // ArrayList< LinePoint > points = line.mPoints;
-              // int size = points.size();
+	      if ( line.mLineType == BrushManager.mLineLib.mLineSectionIndex ) {
+		// do not erase section lines 2018-06-22
+		// deleting a section line should call DrawingWindow.deleteLine()
+		// deleteSectionLine( line );
+                continue;
+              }
               LinePoint first = line.mFirst;
               LinePoint last  = line.mLast;
               int size = line.size();
@@ -699,24 +703,10 @@ class DrawingCommandManager
 
   void splitLine( DrawingLinePath line, LinePoint lp )
   {
-    if ( lp == null ) {
-      return;
-    }
-    // if ( lp == line.mPoints.get(0) ) 
-    if ( lp == line.mFirst )
-    {
-      return; // cannot split at first point
-    }
-    // int size = line.mPoints.size();
+    if ( lp == null ) return;
+    if ( lp == line.mFirst || lp == line.mLast ) return; // cannot split at first and last point
     int size = line.size();
-    if ( size == 2 ) {
-      return;
-    }
-    // if ( lp == line.mPoints.get(size-1) ) 
-    if ( lp == line.mLast ) 
-    {
-      return; // cannot split at last point
-    }
+    if ( size == 2 ) return;
     clearSelected();
 
     DrawingLinePath line1 = new DrawingLinePath( line.mLineType );
@@ -739,17 +729,6 @@ class DrawingCommandManager
   // called from synchronized( mCurrentStack )
   private void doRemoveLinePoint( DrawingPointLinePath line, LinePoint point, SelectionPoint sp )
   {
-    // int size = line.mPoints.size();
-    // for ( int k=0; k<size; ++k ) {
-    //   LinePoint lp = line.mPoints.get( k );
-    //   if ( lp == point ) {
-    //     line.mPoints.remove( k );
-    //     mSelection.mPoints.remove( sp );
-    //     return;
-    //   }
-    // }
-
-    //line.mPoints.remove( point );
     line.remove( point );
     if ( sp != null ) { // sp can be null 
       synchronized( TDPath.mSelectionLock ) {
@@ -762,17 +741,13 @@ class DrawingCommandManager
   boolean removeLinePoint( DrawingPointLinePath line, LinePoint point, SelectionPoint sp )
   {
     if ( point == null ) return false;
-    // int size = line.mPoints.size();
     int size = line.size();
     if ( size <= 2 ) return false;
     synchronized( TDPath.mSelectionLock ) { clearSelected(); }
-    // for ( int k=0; k<size; ++k ) 
     for ( LinePoint lp = line.mFirst; lp != null; lp = lp.mNext ) 
     {
-      // LinePoint lp = line.mPoints.get( k );
       if ( lp == point ) {
         synchronized( mCurrentStack ) {
-          // line.mPoints.remove( k );
           line.remove( point );
           synchronized( TDPath.mSelectionLock ) {
             mSelection.removePoint( sp );
@@ -862,6 +837,7 @@ class DrawingCommandManager
     if ( eraseCmd != null ) eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
   }
 
+  // deleting a section line automatically deletes the associated section point(s)
   void deleteSectionLine( DrawingPath line, String scrap, EraseCommand cmd )
   {
     synchronized( mCurrentStack ) {
@@ -2191,22 +2167,10 @@ class DrawingCommandManager
 
     DrawingPath item = sp.mItem;
     DrawingAreaPath area = (DrawingAreaPath)item;
-    // int k0 = 0;
     LinePoint q0 = sp.mPoint;
-
-    // ArrayList< LinePoint > pts0 = area.mPoints;
-    // int size0 = pts0.size();
-    // for ( ; k0 < size0; ++k0 ) {
-    //   if ( pts0.get(k0) == q0 ) break;
-    // }
-    // if ( k0 == size0 ) return false;
     // // area border: ... --> q2 --> q0 --> q1 --> ...
-    // int k1 = (k0+1)%size0;
-    // int k2 = (k0+size0-1)%size0;
-    // LinePoint q1 = area.mPoints.get( k1 ); // next point on the area border
-    // LinePoint q2 = area.mPoints.get( k2 ); // prev point on the area border
-    LinePoint q1 = area.next( q0 );
-    LinePoint q2 = area.prev( q0 );
+    LinePoint q1 = area.next( q0 ); // next point on the area border
+    LinePoint q2 = area.prev( q0 ); // previous point on the border
 
     float x = q0.x;
     float y = q0.y;
@@ -2226,9 +2190,6 @@ class DrawingCommandManager
       if ( p.mType != DrawingPath.DRAWING_PATH_LINE &&
            p.mType != DrawingPath.DRAWING_PATH_AREA ) continue;
       DrawingPointLinePath lp = (DrawingPointLinePath)p;
-      // ArrayList< LinePoint > pts = lp.mPoints;
-      // int size = pts.size();
-      // for ( int k=0; k<size; ++k ) 
       int ks = lp.size();
       for ( LinePoint pt = lp.mFirst; pt != null && ks > 0; pt = pt.mNext )
       {
@@ -2676,7 +2637,7 @@ class DrawingCommandManager
     return null;
   }
  
-  // called by DrawingSurface::addDrawingStationName
+  // called by DrawingSurface.addDrawingStationName
   void addStation( DrawingStationName st, boolean selectable )
   {
     // Log.v("DistoX", "add station " + st.name() + " scene " + st.cx + " " + st.cy + " XSection " + st.mXSectionType );

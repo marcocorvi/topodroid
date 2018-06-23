@@ -111,7 +111,7 @@ public class GMActivity extends Activity
                         R.drawable.iz_download_on,
                         0,
                         0,
-                        R.drawable.iz_cover_no,
+                        0, // R.drawable.iz_cover_no,
                         R.drawable.iz_read_no,
                         R.drawable.iz_write_no
                      };
@@ -157,7 +157,7 @@ public class GMActivity extends Activity
   private BitmapDrawable mBMtoggle;
   private BitmapDrawable mBMtoggle_no;
   private BitmapDrawable mBMcover    = null;
-  private BitmapDrawable mBMcover_no = null;
+  // private BitmapDrawable mBMcover_no = null;
   private BitmapDrawable mBMread     = null;
   private BitmapDrawable mBMread_no  = null;
   private BitmapDrawable mBMwrite    = null;
@@ -719,7 +719,7 @@ public class GMActivity extends Activity
     mBMtoggle_no    = MyButton.getButtonBackground( mApp, res, izonsno[BTN_TOGGLE] );
     if ( TDLevel.overBasic ) {
       mBMcover        = MyButton.getButtonBackground( mApp, res, izons[BTN_COVER] );
-      mBMcover_no     = MyButton.getButtonBackground( mApp, res, izonsno[BTN_COVER] );
+      // mBMcover_no     = MyButton.getButtonBackground( mApp, res, izonsno[BTN_COVER] );
     }
     if ( TDLevel.overNormal ) {
       mBMread         = MyButton.getButtonBackground( mApp, res, izons[BTN_READ] );
@@ -761,10 +761,10 @@ public class GMActivity extends Activity
   private void enableWrite( boolean enable ) 
   {
     mEnableWrite = enable;
-    if ( TDLevel.overBasic ) {
-      mButton1[BTN_COVER].setEnabled( enable );
-      mButton1[BTN_COVER].setBackgroundDrawable( ( enable ? mBMcover : mBMcover_no ) );
-    }
+    // if ( TDLevel.overBasic ) {
+    //   mButton1[BTN_COVER].setEnabled( enable );
+    //   mButton1[BTN_COVER].setBackgroundDrawable( ( enable ? mBMcover : mBMcover_no ) );
+    // }
     if ( TDLevel.overNormal ) {
       mButton1[BTN_WRITE].setEnabled( enable );
       mButton1[BTN_WRITE].setBackgroundDrawable( ( enable ? mBMwrite : mBMwrite_no ) );
@@ -778,10 +778,10 @@ public class GMActivity extends Activity
 
     mButton1[BTN_TOGGLE].setEnabled( enable );
     mButton1[BTN_BT].setEnabled( enable );
-    if ( TDLevel.overBasic ) {
-      mButton1[BTN_COVER].setEnabled( enable2 );
-      mButton1[BTN_COVER].setBackgroundDrawable( ( enable2 ? mBMcover : mBMcover_no ) );
-    }
+    // if ( TDLevel.overBasic ) {
+    //   mButton1[BTN_COVER].setEnabled( enable2 );
+    //   mButton1[BTN_COVER].setBackgroundDrawable( ( enable2 ? mBMcover : mBMcover_no ) );
+    // }
     if ( TDLevel.overNormal ) {
       mButton1[BTN_READ].setEnabled( enable );
       mButton1[BTN_READ].setBackgroundDrawable( ( enable ? mBMread : mBMread_no ) );
@@ -914,16 +914,16 @@ public class GMActivity extends Activity
       }
 
     } else if ( TDLevel.overBasic && b == mButton1[BTN_COVER] ) { // COVER
-      if ( mCalibration == null ) {
-        TDToast.make( this, R.string.no_calibration );
-      } else {
+      // if ( mCalibration == null ) {
+      //   TDToast.make( this, R.string.no_calibration );
+      // } else {
         List< CalibCBlock > list = mApp_mDData.selectAllGMs( mApp.mCID, 0 );
         if ( list.size() >= 16 ) {
           ( new CalibCoverageDialog( this, list, mCalibration ) ).show();
         } else {
           TDToast.make( this, R.string.few_data );
         }
-      }
+      // }
 
     } else if ( TDLevel.overNormal && b == mButton1[BTN_READ] ) { // READ
       enableButtons( false );

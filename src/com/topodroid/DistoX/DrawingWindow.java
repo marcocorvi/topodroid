@@ -2421,25 +2421,32 @@ public class DrawingWindow extends ItemDrawer
     void deleteLine( DrawingLinePath line ) 
     { 
       if ( line.mLineType == BrushManager.mLineLib.mLineSectionIndex ) {
-        String xs_id = line.getOption( "-id" );
-        String scrap_name = mApp.mySurvey + "-" + xs_id;
-        mDrawingSurface.deleteSectionLine( line, scrap_name );
-        TDPath.deletePlotFileWithBackups( TDPath.getTh2File( scrap_name + ".th2" ) );
-        TDPath.deletePlotFileWithBackups( TDPath.getTdrFile( scrap_name + ".tdr" ) );
-        TDPath.deleteFile( TDPath.getJpgFile( mApp.mySurvey, xs_id + ".jpg" ) );
-
-        deleteSectionPoint( xs_id ); // delete section point and possibly clear section outline
-       
-        PlotInfo plot = mApp_mData.getPlotInfo( mApp.mSID, xs_id );
-        if ( plot != null ) {
-          mApp_mData.dropPlot( plot.id, mApp.mSID );
-        } else {
-          TDLog.Error("Delete section line. No plot NAME " + xs_id + " SID " + mApp.mSID );
-        }
+        deleteSectionLine( line );
       } else {
         mDrawingSurface.deletePath( line );
       }
       modified();
+    }
+
+    private void deleteSectionLine( DrawingLinePath line )
+    {
+      String xs_id = line.getOption( "-id" );
+      String scrap_name = mApp.mySurvey + "-" + xs_id;
+      mDrawingSurface.deleteSectionLine( line, scrap_name );
+      TDPath.deletePlotFileWithBackups( TDPath.getTh2File( scrap_name + ".th2" ) );
+      TDPath.deletePlotFileWithBackups( TDPath.getTdrFile( scrap_name + ".tdr" ) );
+      TDPath.deleteFile( TDPath.getJpgFile( mApp.mySurvey, xs_id + ".jpg" ) );
+
+      // section point is deleted automatically
+      // deleteSectionPoint( xs_id ); // delete section point and possibly clear section outline
+      mDrawingSurface.clearXSectionOutline( scrap_name ); // clear outline if any
+     
+      PlotInfo plot = mApp_mData.getPlotInfo( mApp.mSID, xs_id );
+      if ( plot != null ) {
+        mApp_mData.dropPlot( plot.id, mApp.mSID );
+      } else {
+        TDLog.Error("Delete section line. No plot NAME " + xs_id + " SID " + mApp.mSID );
+      }
     }
 
     void sharpenLine( DrawingLinePath line )

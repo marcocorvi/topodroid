@@ -809,12 +809,12 @@ class DistoXNum
           if ( d > dmax ) dmax = d;
           ts1 = ts1.sibling;
         }
-        if ( ( ! TDSetting.mMagAnomaly ) && ( dmax > TDSetting.mCloseDistance ) ) {
+        if ( ( ! TDSetting.doMagAnomaly() ) && ( dmax > TDSetting.mCloseDistance ) ) {
           blk0.mMultiBad = true;
         }
         // Log.v( "DistoX", "DMAX " + from + "-" + to + " " + dmax );
         
-        if ( ! TDSetting.mMagAnomaly ) { // (3) remove siblings
+        if ( ! TDSetting.doMagAnomaly() ) { // (3) remove siblings
           ts1 = ts0.sibling;
           while ( ts1 != null ) {
             TriShot ts2 = ts1.sibling;
@@ -861,7 +861,7 @@ class DistoXNum
           if ( pass == 0 && DBlock.getExtend(ts.extend) > 1 ) continue; // first pass skip non-extended
 
           float anomaly = 0;
-          if ( TDSetting.mMagAnomaly ) {
+          if ( TDSetting.doMagAnomaly() ) {
             // if ( ts.backshot == 0 ) 
             {
               // TDLog.Log(TDLog.LOG_NUM, "shot " + ts.from + " " + ts.to + " <" + ts.backshot + ">" );
