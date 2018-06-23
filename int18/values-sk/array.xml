@@ -47,7 +47,7 @@
   </string-array -->
 
   <string-array name="exportShots">
-     <item name="none">žiadny</item>
+     <item name="none">Žiadny</item>
      <item name="therion">Therion</item>
      <item name="compass">Compass</item>
      <item name="csurvey">cSurvey</item>
@@ -66,7 +66,7 @@
   </string-array>
 
   <string-array name="exportPlot">
-     <item name="none">nessuno</item>
+     <item name="none">Žiadny</item>
      <item name="therion">Therion</item>
      <item name="csurvey">cSurvey</item>
      <item name="dxf">DXF</item>

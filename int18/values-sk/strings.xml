@@ -20,9 +20,9 @@
     <string name="setup_buttonsize">Nastavte veľkosť tlačidiel.\nMožete to zmeniť aj neskôr v nastaveniach cez hlavné menu.</string>
     <string name="setup_drawingunit">Nastavte veľkosť ikoniek.\nMožete to zmeniť aj neskôr v nastaveniach cez menu kreslenia.</string>
     <string name="setup_done">Základné nastavenie je ukončené.\n\n
-	    Pokiaľ zistíte problém s pripojením DistoX skúste použiť Nezabezpečené pripojenie.\n\n
-	    Ďalšie nastavenia  (veľkosť ikon, šírky čiary, veľkosti poznámok&#8230; viete meniť neskôr v nastaveniach.)
-	    podľa Vašich potrieb./n/n
+	   Pokiaľ zistíte problém s pripojením DistoX skúste použiť Nezabezpečené pripojenie.\n\n
+	   Ďalšie nastavenia  (veľkosť ikon, šírky čiary, veľkosti poznámok&#8230) viete meniť neskôr v nastaveniach
+	    podľa Vašich potrieb.
     </string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet</string>
 
@@ -44,7 +44,7 @@
     <!-- UNUSED string name="memory_data">DistoX dáta</string -->
 
     <string name="thp_user">Univerzálny bod</string>
-    <string name="thp_label">Označenie</string>
+    <string name="thp_label">Poznámka</string>
     <!-- UNUSED string name="thp_danger">pericolo</string -->
     <string name="thl_user">Univerzálna čiara</string>
     <string name="thl_wall">Stena</string>
@@ -169,8 +169,8 @@
     <!-- UNUSED string name="sketch_saving">Salvataggio disegno &#8230; attendi &#8230;</string -->
     <string name="MT_points_none">Chýbajúci bod MobileTopographer</string>
 
-    <string name="pleasewait">Prosím čakajtet</string>
-    <string name="processing">Prebieha proces;</string>
+    <string name="pleasewait">Prosím čakajte</string>
+    <string name="processing">Prebieha proces</string>
 
     <!-- UNUSED string name="head_tail">Memoria: </string -->
     <string name="head_tail_failed">Neúspešné čitanie pamäte DistoX</string>
@@ -256,8 +256,8 @@
     <string name="fmt_longitude">Zemepisná dĺžka %1$s</string>
     <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string> 
     
-    <string name="fixed">Fixný príznak bodu (Therion)</string>
-    <string name="painted">Iný príznak bodu (Therion)</string>
+    <string name="fixed">Fixný príznak</string>
+    <string name="painted">Iný príznak</string>
 
     <string name="cbd_title">Hlavný adresár</string>
     <string name="cwd">Adresár projektu TopoDroid</string>
@@ -488,7 +488,7 @@
     <string name="undelete_check">Kontrolné</string>
     <string name="undelete_plot">Nákresy</string>
     <string name="delete_whole_leg">Odstráňte celú hlavnú zámeru</string>
-    <string name="visible_border">Viditeľný okraj Oblasti (Therion)</string>
+    <string name="visible_border">Viditeľná hranica Oblasti (Therion)</string>
     <!-- UNUSED string name="vthreshold">soglia vert.</string -->
     <string name="wait_scan">Skenovanie: čakajte &#8230;</string>
     <string name="write_failed">Zapísanie do DistaX bolo neuspešné</string>
@@ -538,7 +538,7 @@
     <string name="extended_profile">Zaškrtnuté = Rozvinutý rez; Nezaškrtnuté = Priemet</string>
     <!-- UNUSED string name="v_section">SEZIONE VERT.</string -->
     <string name="h_section">HORIZONTÁLNY</string>
-    <!-- UNUSED string name="landscape">viditeľná oblasť</string -->
+    <!-- UNUSED string name="landscape">Viditeľná hranica</string -->
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Čítanie pamäte DistoX zlyhalo</string>
@@ -615,7 +615,7 @@
 
     <string name="mode_leg">Hlavné zámery</string>
     <string name="mode_splay">Pomocné zámery</string>
-    <string name="mode_latest">Ostatné pomocné zámery</string>
+    <string name="mode_latest">Posledne stiahnuté pomocné zámery</string>
     <string name="mode_station">Staničenie</string>
     <string name="mode_grid">Mriežka</string>
     <string name="mode_fixed">Bočný Posun</string>
@@ -1060,8 +1060,8 @@
   <string name="pref_data_backup_title">Automatické exportovanie údajov</string>
   <string name="pref_data_backup_summary">Automatický export údajov (vyžaduje predvolený formát)</string>
   <string name="pref_shared_xsections_title">Zdielané priečne rezy - predvolené nastavenie</string>
-  <string name="pref_shared_xsections_summary">Predvolené nastavenie, či pri založení mapovania majú byť Priečne rezy zdielané medzi nákresmi</string>
-  <string name="xsections_shared">Zdielané priečne rezy</string>
+  <string name="pref_shared_xsections_summary">Predvolené nastavenie, či pri založení mapovania majú byť Priečne rezy zdielané medzi nákresmi. Nezaškrtnuté = zdielané</string>
+  <string name="xsections_shared">Zdielané priečne rezy medzi nákresmi</string>
   <string name="xsections_private">Priečne rezy nezdielané medzi nákresmi</string>
   <string name="pref_reduce_angle_title">Minimálny uhol pre vyhladenie čiar</string>
   <string name="pref_reduce_angle_summary">Odstraňuje stredné body ČIARY medzi dvoma "rohovými" pri editácii</string>
@@ -1100,7 +1100,7 @@
   <string name="pref_azimuth_manual_title">"Fixná Smerová orientácia</string>
   <string name="pref_azimuth_manual_summary">Zaškrtnuté = Fixná / Nezašktnuté = Nastavitelná Smerová orientácia</string>
 
-  <string name="pref_team_title">Tím</string>
+  <string name="pref_team_title">Predvolený meračský Tím</string>
   <string name="pref_team_summary">Prieskumná skupina</string>
   <string name="pref_team_message">Predvolená meračská skupina</string>
 
@@ -1155,7 +1155,7 @@
   <string name="pref_segment_message">Minimálna vzdialenosť medzi bodmi čiary</string>
   <string name="pref_linestyle_title">Štýl Symbolu Čiary</string>
   <string name="pref_linestyle_summary">Štýl Symbolu Čiary</string>
-  <string name="pref_linecontinue_title">Nadpájanie Čiar</string>
+  <string name="pref_linecontinue_title">Predvolené Nadpájanie Čiar</string>
   <string name="pref_linecontinue_summary">Predvolené nastavenie možností nadpájania Čiar v režime kreslenia</string>
   <string name="pref_lineacc_title">Presnosť Bezierových kriviek</string>
   <string name="pref_lineacc_summary">Presnosť interpolácie pre Bezierove krivky (čím menšie číslo tým viac bodov)</string>
@@ -1178,12 +1178,12 @@
   <string name="pref_iter_summary">Maximálny počet opakovaní kalibračného algoritmu</string>
   <string name="pref_iter_dialogtitle">Opakovanie kalibrácie</string>
   <string name="pref_iter_message">Maximálny počet opakovaní kalibračného algoritmu</string>
-  <string name="pref_label_size_title">Veľkosť písmen v poznámke priamo na nákrese</string>
+  <string name="pref_label_size_title">Veľkosť písmen v Poznámke priamo na nákrese</string>
   <string name="pref_label_size_summary">Veľkosť písmen v symbole BOD - Poznámka</string>
   <string name="pref_label_size_message">Veľkosť písmen v symbole BOD - Poznámka</string>
-  <string name="pref_arrow_length_title">Hrúbka čiary priečneho rezu</string>
+  <string name="pref_arrow_length_title">Šírka čiary priečneho rezu</string>
   <!-- UNUSED string name="pref_arrow_length_summary">Dĺžka smeru sekcie</string -->
-  <string name="pref_arrow_length_message">Hrúbka čiary priečneho rezu</string>
+  <string name="pref_arrow_length_message">Šírka čiary, ktorá indikuje vytvorený priečny rez</string>
   <string name="pref_dot_radius_title">Veľkosť zelených bodov výberu v Režime Editácie</string>
   <!-- UNUSED string name="pref_dot_radius_summary">Výberové body polomeru</string -->
   <string name="pref_dot_radius_message">Veľkosť zelených bodov výberu v Režime Editácie pri kreslení</string>
@@ -1236,8 +1236,8 @@
   <string name="pref_unit_grid_summary">Veľkosť buniek v mriežke</string>
   <string name="pref_recent_nr_title">Počet najpoužívanejších Symbolov</string>
   <string name="pref_recent_nr_summary">Počet symbolov, ktoré sa nedávno použili na zobrazenie v nástroji na výber</string>
-  <string name="pref_area_border_title">Viditeľnosť okrajov Oblastí (Therion)</string> 
-  <string name="pref_area_border_summary">Predvolená viditeľnosť okrajov Oblastí v programe Therion</string>
+  <string name="pref_area_border_title">Viditeľnosť hraníc Oblastí</string> 
+  <string name="pref_area_border_summary">Predvolená viditeľnosť hraníc Oblastí (pre export do Therionu)</string>
   <string name="pref_auto_section_pt_title">Body pri vytvorenom priečnom reze</string>
   <string name="pref_auto_section_pt_summary">Pridá štvorec do nákresu, ktorý indikuje vytvorený priečny rez</string>
 
