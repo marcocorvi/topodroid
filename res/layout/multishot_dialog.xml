@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+  android:layout_width="match_parent" 
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  android:padding="0sp"
+  >
+
+  <LinearLayout android:id="@+id/layout_renumber"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" 
+    android:layout_marginTop="@dimen/marginv"
+    >
+    <Button android:id="@+id/renumber"
+      style="@style/button_default"
+      android:layout_width="0sp"
+      android:layout_weight="50"
+      android:text="@string/button_renumber"
+      />
+    <EditText android:id="@id/shot_from" 
+      style="@style/edit_text"
+      android:layout_width="0sp"
+      android:layout_weight="50"
+      android:text=""
+      />
+    <EditText android:id="@id/shot_to" 
+      style="@style/edit_text"
+      android:layout_width="0sp"
+      android:layout_weight="50"
+      android:text=""
+      />
+  </LinearLayout>
+
+  <LinearLayout android:id="@+id/layout_highlight"
+    android:layout_below="@id/layout_renumber"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" 
+    android:layout_marginTop="@dimen/marginv"
+    >
+    <Button android:id="@+id/highlight"
+      style="@style/button_default"
+      android:layout_width="0sp"
+      android:layout_weight="50"
+      android:text="@string/button_highlight"
+      />
+    <TextView android:id="@+id/unused"
+      style="@style/edit_text"
+      android:layout_width="0sp"
+      android:layout_weight="100"
+      android:text=""
+      />
+  </LinearLayout>				  
+
+  <LinearLayout android:id="@+id/layout_bedding"
+    android:layout_below="@id/layout_highlight"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" 
+    android:layout_marginTop="@dimen/marginv"
+    >
+    <Button android:id="@+id/bedding"
+      style="@style/button_default"
+      android:layout_width="0sp"
+      android:layout_weight="50"
+      android:text="@string/button_bedding"
+      />
+    <TextView android:id="@+id/strike_dip" 
+      style="@style/edit_text"
+      android:layout_width="0sp"
+      android:layout_weight="100"
+      android:text=""
+      />
+  </LinearLayout>				  
+
+  <LinearLayout 
+    android:layout_below="@id/layout_bedding"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" 
+    android:layout_marginTop="@dimen/marginhuge"
+    >
+    <Button android:id="@+id/btn_back"
+      style="@style/button_default"
+      android:text="@string/button_cancel"
+      android:layout_marginRight="@dimen/marginh"
+    />
+  </LinearLayout>
+
+
+  <android.inputmethodservice.KeyboardView android:id="@+id/keyboardview"
+    style="@style/keyboard"
+  />
+
+</RelativeLayout>
+

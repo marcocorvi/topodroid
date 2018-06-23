@@ -145,6 +145,7 @@ public class ShotWindow extends Activity
                         R.drawable.iz_cancel,     // cancel
 			R.drawable.iz_empty
                       };
+  private static final int BTN_HIGHLIGHT = 3; // index of iz_highlight
 
   private static final int menus[] = {
                         R.string.menu_close,
@@ -933,9 +934,13 @@ public class ShotWindow extends Activity
       }
     }
 
+    if ( ! TDLevel.overExpert ) mNrButtonF --;
     mButtonF = new Button[ mNrButtonF + 1 ];
+    int k0 = 0;
     for ( int k=0; k <= mNrButtonF; ++k ) {
-      mButtonF[k] = MyButton.getButton( this, this, izonsF[k] );
+      if ( k == BTN_HIGHLIGHT && ! TDLevel.overExpert ) continue; 
+      mButtonF[k0] = MyButton.getButton( this, this, izonsF[k] );
+      ++k0;
     }
 
     TDAzimuth.resetRefAzimuth( this, 90 );
@@ -1284,7 +1289,7 @@ public class ShotWindow extends Activity
         clearMultiSelect( );
         updateDisplay();
         // mList.invalidate(); // NOTE not enough to see the change in the list immediately
-      } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // HIGHLIGHT
+      } else if ( TDLevel.overExpert && kf < mNrButtonF && b == mButtonF[kf++] ) { // HIGHLIGHT
         // ( blks == null || blks.size() == 0 ) cannot happen
         (new MultishotDialog( mActivity, this, mDataAdapter.mSelect )).show();
       //   highlightBlocks( mDataAdapter.mSelect );

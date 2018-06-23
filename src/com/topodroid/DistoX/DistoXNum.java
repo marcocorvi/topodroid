@@ -696,6 +696,7 @@ class DistoXNum
     resetBBox();
     resetStats();
     mStartStation = null;
+    int siblings = 0;
 
     // long millis_start = System.currentTimeMillis();
     
@@ -757,30 +758,34 @@ class DistoXNum
     //   Log.v( TDLog.TAG, "DistoXNum::compute tmp-shots " + tmpshots.size() + " tmp-splays " + tmpsplays.size() );
     //   for ( TriShot ts : tmpshots ) ts.Dump();
     // }
+    for ( TriShot tsh : tmpshots ) { // clear backshot and multibad
+      tsh.backshot = 0;
+      tsh.getFirstBlock().mMultiBad = false;
+    }
 
     for ( int i = 0; i < tmpshots.size(); ++i ) {
       TriShot ts0 = tmpshots.get( i );
       addToStats( ts0 );
-      DBlock blk0 = ts0.getFirstBlock();
-      blk0.mMultiBad = false;
-      if ( ts0.backshot != 0 ) continue;
+      if ( ts0.backshot != 0 ) continue; // skip siblings
 
+      DBlock blk0 = ts0.getFirstBlock();
       // (1) check if ts0 has siblings
       String from = ts0.from;
       String to   = ts0.to;
       // if ( from == null || to == null ) continue; // FIXME
       TriShot ts1 = ts0;
-      ts0.backshot = 0;
       for ( int j=i+1; j < tmpshots.size(); ++j ) {
         TriShot ts2 = tmpshots.get( j );
-        if ( from.equals( ts2.from ) && to.equals( ts2.to ) ) {
+        if ( from.equals( ts2.from ) && to.equals( ts2.to ) ) { // chain a positive sibling
           ts1.sibling = ts2;
           ts1 = ts2;
           ts2.backshot = +1;
-        } else if ( from.equals( ts2.to ) && to.equals( ts2.from ) ) {
+	  ++ siblings;
+        } else if ( from.equals( ts2.to ) && to.equals( ts2.from ) ) { // chain a negative sibling
           ts1.sibling = ts2;
           ts1 = ts2;
           ts2.backshot = -1;
+	  ++ siblings;
         }
       }
       
@@ -852,8 +857,8 @@ class DistoXNum
       while ( repeat ) {
         repeat = false;
         for ( TriShot ts : tmpshots ) {
-          if ( ts.used || ts.backshot != 0 ) continue;
-          if ( pass == 0 && DBlock.getExtend(ts.extend) > 1 ) continue;
+          if ( ts.used || ts.backshot != 0 ) continue;                  // skip used and siblings
+          if ( pass == 0 && DBlock.getExtend(ts.extend) > 1 ) continue; // first pass skip non-extended
 
           float anomaly = 0;
           if ( TDSetting.mMagAnomaly ) {
@@ -1086,7 +1091,7 @@ class DistoXNum
     // long millis_end = System.currentTimeMillis() - millis_start;
     // Log.v("DistoX", "Data reduction " + millis_end + " msec" );
 
-    return (mShots.size() == tmpshots.size() );
+    return (mShots.size() + siblings == tmpshots.size() );
   }
 
   

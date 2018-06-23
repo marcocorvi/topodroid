@@ -148,7 +148,7 @@ class DrawingStationName extends DrawingPointPath
       if ( mXSectionType != PlotInfo.PLOT_NULL ) {
         Path path = new Path();
         path.moveTo( cx, cy );
-        path.lineTo( cx+mDX, cy+mDY );
+        path.lineTo( cx+mDX*TDSetting.mArrowLength, cy+mDY*TDSetting.mArrowLength );
         path.transform( matrix );
         canvas.drawPath( path, BrushManager.mSectionPaint );
       }
