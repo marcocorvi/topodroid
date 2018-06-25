@@ -11,11 +11,28 @@
     <string name="version_ask">Se actualizează TopoDroid la o nouă versiune.\nVrei să reinstalezi uneltele de desen?</string>
     <string name="symbols_ask">Vrei să instalezi uneltele de desen v.%1$s?\n(Current v.%2$s)</string>
 
+    <string name="setup_textsize_title">Configurare TopoDroid. Mărime text</string>
+    <string name="setup_buttonsize_title">Configurare TopoDroid. Mărime butoane</string>
+    <string name="setup_drawingunit_title">Configurare TopoDroid. Mărime pictograme</string>
+    <string name="setup_done_title">Configurare TopoDroid. Gata</string>
+
+    <string name="setup_textsize">Introdu mărimea textului.\nO poți schimba mai târziu prin configurația din fereastra principală.</string>
+    <string name="setup_buttonsize">Introdu mărimea butoanelor.\nLe poți schimba mai târziu prin configurația din fereastra principală.</string>
+    <string name="setup_drawingunit">Introdu mărimea pictogramelor de schițare.\nLe poți schimba mai târziu prin configurația din fereastra principală.</string>
+    <string name="setup_done">Configurarea de bază a fost efectuată.\n\n
+	    Dacă experimentezi probleme cu conexiunea DistoX, încearcă să configurezi o conexiune(socket) nesecurizată.\n\n
+	    Alte setări controlează prezentarea în fereastra de schițare (mărimea pictogramelor și etichetelor, Lățimea liniei etc.)
+        și poți să le schimbi după nevoile proprii.
+    </string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet</string>
+
     <string name="POINT">PUNCT</string>
     <string name="LINE">LINIE</string>
     <string name="AREA">SUPRAFAȚA</string>
     <string name="HELP">AJUTOR</string>
     <string name="STATION">STAȚIE</string>
+    <string name="UP">ÎN SUS</string>
+    <string name="DOWN">ÎN JOS</string>
 
     <string name="cut">TAIE</string>
     <string name="copy">COPIAZĂ</string>
@@ -152,6 +169,8 @@
     <!-- UNUSED string name="sketch_saving">Saving sketch &#8230; please wait &#8230;</string -->
     <string name="MT_points_none">Punct MobileTopographer lipsă</string>
  
+    <string name="pleasewait">Așteaptă te rog</string>
+    <string name="processing">se procesează &#8230;</string>
 
     <!-- UNUSED string name="head_tail">Memory: </string -->
     <string name="head_tail_failed">Indexul memoriei DistoX nu a putut fi citit</string>
@@ -227,7 +246,16 @@
     <!-- UNUSED string name="hidden_del">Arată măsurătorile anterioare</string -->
     <string name="hidden_show">Arată măsurătorile după stație</string>
     <!-- UNUSED string name="splays_toggle">Comută afișarea radierilor</string -->
+    <string name="splays_on_off">Radieri</string>
     <string name="splays">radieri</string>
+    <string name="splays_show">Arată radierile</string>
+    <string name="foresurface_show">Arată suprafața din față (3D)</string>
+    <string name="fmt_listen">ASCULTĂ | %1$s</string>
+    <string name="fmt_id">ID %1$s</string>
+    <string name="fmt_latitude">Latitudine %1$s</string>
+    <string name="fmt_longitude">Longitudine %1$s</string>
+    <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string> 
+    
     <string name="fixed">fix</string>
     <string name="painted">pictat</string>
 
@@ -245,13 +273,15 @@
     <string name="no_calibration">Calibrare neselectată</string>
     <string name="no_capture_app">Lipsește aplicația de captură de imagine</string>
     <string name="no_cave3d">Cave3D nu ete instalat</string>
+    <string name="no_data_reduction">Fără simplificare de date</string>
     <string name="no_db">Lipsește baza de date</string>
     <string name="no_device_address">Dispoziv neselectat</string>
     <string name="no_device_found">Nu a fost găsit nici un dispozitiv</string>
     <string name="no_feature_audio">Audio inexistent</string>
     <string name="no_gms">Calibrarea nu are măsurători.\nFolosește butonul Descarcă</string>
     <string name="no_geo_station">Eroare: lipsește stația geolocalizată</string>
-    <string name="no_leg_intersection">Linia secțiunii nu intersesctează nici un segment de drumuire</string>
+    <string name="no_leg_first">Selecția nu începe cu o viză (segment de drumuire)</string>
+    <string name="no_leg_intersection">Linia secțiunii nu intersesctează nici o viză (segment de drumuire)</string>
     <string name="no_location_data">Lipsesc datele de localizare</string>
     <string name="no_paired_device">Nici un dispozitiv conectat.\nScanează și conectează cu un DistoX</string>
     <string name="no_photos">Cartarea nu are nici o fotografie</string>
@@ -378,7 +408,7 @@
     <string name="saving_file_failed">Eroare la salvarea fișierului</string>
     <!-- UNUSED string name="scrap_name">Numele schiței</string -->
     <string name="splay">radiere</string>
-    <string name="too_many_leg_intersection">Linia de secțiune intersectează prea multe segmente de drumuire</string>
+    <string name="too_many_leg_intersection">Linia de secțiune intersectează prea multe vize (segmente de drumuire)</string>
     <!-- UNUSED string name="too_many_legs_xsection">Prea multe segmente de drumuire pentru secțtiunea-X</string -->
     <!-- UNUSED string name="converted_tdr2th2">Fișierele binare ale schiței au fost convertite în format th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Overwrite th2 sketch files ?</string -->
@@ -441,6 +471,7 @@
     <string name="saturated_coeffs">AVERTISMENT: coeficienți calibrare saturați</string>
     <string name="out_of_memory">AVERTISMENT: memorie insuficientă !</string>
     <string name="disk_io_error">CRITIC: eroare i/o  !</string>
+    <string name="toporobot_warning">AVERTISMENT: metoda TopoRobot este experimentală !</string>
 
     <string name="cannot_rename">Cartarea nu paote fi redenumită</string>
     <string name="declination">Magn. decl.</string>
@@ -478,8 +509,9 @@
     <string name="stat_component">Componentele %1$d</string>
     <string name="stat_depth">Adâncime %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Măsurători duplicate %1$d %2$.1f %3$s</string>
-    <string name="stat_leg">Segmente drumuire  %1$d %2$.1f %3$s %4$.1f %5$s</string>
+    <string name="stat_leg">Vize(seg. drum.) %1$d %2$.1f %3$s %4$.1f %5$s</string>
     <string name="stat_length">Lungime %1$.1f %2$s</string>
+    <string name="stat_extlen">Lungime 3D %1$.1f %2$s</string>
     <string name="stat_projlen">Lungime în plan %1$.1f %2$s</string>
     <string name="stat_loop">Bucle %1$d</string>
     <string name="stat_origin">Stație zero: %1$s</string>
@@ -495,7 +527,7 @@
 
 
     <string name="hide_blank">Măsurători ~goale</string>
-    <string name="hide_leg">Segmente drumuire repetate</string>
+    <string name="hide_leg">Vize (segmente drumuire) repetate</string>
     <string name="hide_ids">ID-uri măsurători</string>
     <string name="hide_splay">Radieri</string>
 
@@ -540,6 +572,9 @@
     <!-- UNUSED string name="button_azimuth">Azimut</string -->
     <string name="button_plot"    >Schiță</string>
     <string name="button_more"    >Mai multe</string>
+    <string name="button_next"    >Următorul</string>
+    <string name="button_skip"    >Omite</string>
+    <string name="button_done"    >Gata</string>    
     <string name="button_lrud"    >+ LRUD</string>
     <string name="button_ok"        >OK         </string>
     <string name="button_open"      >Deschide   </string>
@@ -548,6 +583,9 @@
     <!-- UNUSED string name="button_regroup"   >Regrupează</string -->
     <string name="button_dump"      >Descarcă~  </string>
     <string name="button_rename"    >Redenumește</string>
+    <string name="button_renumber"  >Renumerotează</string>
+    <string name="button_bedding"   >Strat geologic</string>
+    <string name="button_highlight" >Evidențiază</string>
     <string name="button_replace"   >Înlocuiește</string>
     <string name="button_reset"     >Resetează  </string>
     <string name="button_left"      >STÂNGA</string>
@@ -574,6 +612,7 @@
 
     <string name="mode_leg">Vize</string>
     <string name="mode_splay">Radieri</string>
+    <string name="mode_latest">Ultimele radieri</string>
     <string name="mode_station">Stații</string>
     <string name="mode_grid">Caroiaj</string>
     <string name="mode_fixed">Ref. fixe</string>
@@ -819,6 +858,7 @@
     <string name="title_draw">Desen</string>
     <string name="title_draw_area">SUPRAFAȚA %1$s</string>
     <string name="title_draw_line">LINIE %1$s</string>
+    <string name="title_draw_line_no_stations">LINIE %1$s: nici o stație</string>
     <string name="title_draw_point">PUNCT %1$s</string>
     <string name="title_edit">Editează</string>
     <string name="title_edit_user_station">Editează stație utilizator </string>
@@ -1056,7 +1096,7 @@
   <string name="pref_mag_anomaly_title">Anomalie Magnetică</string>
   <string name="pref_mag_anomaly_summary">Compensează Anomalie Magnetică Locală</string>
   <string name="pref_azimuth_manual_title">Referință extensie fixă~</string>
-  <string name="pref_azimuth_manual_summary">Dreapta/Stânga fixată sau Referință extensie configurabhilă~</string>
+  <string name="pref_azimuth_manual_summary">Dreapta/Stânga fixată sau Referință extensie configurabilă~</string>
 
   <string name="pref_team_title">Echipa</string>
   <string name="pref_team_summary">Echipa de cartare</string>
@@ -1112,7 +1152,9 @@
   <!-- UNUSED string name="pref_segment_summary">Distanță minimă linie-punct</string -->
   <string name="pref_segment_message">Distanță minimă între punctele pe o linie</string>
   <string name="pref_linestyle_title">Stil linie</string>
-  <string name="pref_linestyle_summary">Stil desenare linie</string>
+  <string name="pref_linestyle_summary">Stil desenare linie</string>  
+  <string name="pref_linecontinue_title">Continuare linie</string>
+  <string name="pref_linecontinue_summary">Mod implicit continuare linie</string>  
   <string name="pref_lineacc_title">Acuratețe interpolare</string>
   <string name="pref_lineacc_summary">Acuratețe interpolare Bezier</string>
   <string name="pref_lineacc_message">Acuratețe interpolare cubică Bezier</string>

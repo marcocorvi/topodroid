@@ -76,10 +76,10 @@
   </string-array>
 
   <!-- UNUSED string-array name="extend_name">
-     <item>Left</item>
+     <item>Stânga</item>
      <item>Vertical</item>
-     <item>Right</item>
-     <item>None</item>
+     <item>Dreapta</item>
+     <item>Fără</item>
   </string-array -->
 
   <!-- DISTOX_LOCALE -->
