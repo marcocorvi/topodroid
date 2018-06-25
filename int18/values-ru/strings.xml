@@ -857,6 +857,7 @@
     <string name="title_draw">Рисовать</string>
     <string name="title_draw_area">ОБЛАСТЬ %1$s</string>
     <string name="title_draw_line">ЛИНИЯ %1$s</string>
+    <!-- TODO string name="title_draw_line_no_stations">LINE %1$s: no stations</string -->
     <string name="title_draw_point">ТОЧКА %1$s</string>
     <string name="title_edit">Редактировать</string>
     <string name="title_edit_user_station">Редактировать пользовательский пикет </string>

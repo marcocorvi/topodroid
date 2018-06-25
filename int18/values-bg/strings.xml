@@ -847,6 +847,7 @@
     <string name="title_draw">Рисуване</string>
     <string name="title_draw_area">Площ %1$s</string>
     <string name="title_draw_line">Линия %1$s</string>
+    <!-- TODO string name="title_draw_line_no_stations">LINE %1$s: no stations</string -->
     <string name="title_draw_point">Точка %1$s</string>
     <string name="title_edit">Редакция</string>
     <string name="title_edit_user_station">Редактиране на (user) репер</string>

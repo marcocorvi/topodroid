@@ -21,7 +21,7 @@
     <string name="setup_drawingunit">Nastavte veľkosť ikoniek.\nMožete to zmeniť aj neskôr v nastaveniach cez menu kreslenia.</string>
     <string name="setup_done">Základné nastavenie je ukončené.\n\n
 	   Pokiaľ zistíte problém s pripojením DistoX skúste použiť Nezabezpečené pripojenie.\n\n
-	   Ďalšie nastavenia  (veľkosť ikon, šírky čiary, veľkosti poznámok&#8230) viete meniť neskôr v nastaveniach
+	   Ďalšie nastavenia  (veľkosť ikon, šírky čiary, veľkosti poznámok&#8230;) viete meniť neskôr v nastaveniach
 	    podľa Vašich potrieb.
     </string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet</string>
@@ -861,6 +861,7 @@
     <string name="title_draw">Kreslenie</string>
     <string name="title_draw_area">OBLASŤ %1$s</string>
     <string name="title_draw_line">ČIARA %1$s</string>
+    <!-- TODO string name="title_draw_line_no_stations">LINE %1$s: no stations</string -->
     <string name="title_draw_point">BOD %1$s</string>
     <string name="title_edit">Režim Editácie</string>
     <string name="title_edit_user_station">Editovať užívateľské meračské body</string>

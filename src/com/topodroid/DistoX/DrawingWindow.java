@@ -3210,8 +3210,8 @@ public class DrawingWindow extends ItemDrawer
 
     List< DrawingPathIntersection > paths = mDrawingSurface.getIntersectionShot( l1, l2 );
     int nr_legs = paths.size() ; // 0 no-leg, 1 ok, 2 too many legs
-    String from = "-1";
-    String to   = "-1";
+    String from = null;
+    String to   = null;
     float azimuth = 0;
     float clino = 0;
     float tt = -1;

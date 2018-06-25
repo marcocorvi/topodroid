@@ -861,6 +861,7 @@
     <string name="title_draw">Draw</string>
     <string name="title_draw_area">AREA %1$s</string>
     <string name="title_draw_line">LINE %1$s</string>
+    <string name="title_draw_line_no_stations">LINE %1$s: no stations</string>
     <string name="title_draw_point">POINT %1$s</string>
     <string name="title_edit">Edit</string>
     <string name="title_edit_user_station">Edit user station </string>
