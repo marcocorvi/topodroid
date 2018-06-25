@@ -30,14 +30,14 @@
     android:orientation="horizontal" 
     android:layout_marginTop="@dimen/marginvbig"
     >
-    <Button android:id="@+id/label_ok"
-      style="@style/button_default"
-      android:text="@string/button_ok"
-      android:layout_marginRight="@dimen/marginh"
-    />
     <Button android:id="@+id/label_cancel"
       style="@style/button_default"
       android:text="@string/button_cancel"
+      android:layout_marginRight="@dimen/marginh"
+    />
+    <Button android:id="@+id/label_ok"
+      style="@style/button_default"
+      android:text="@string/button_ok"
     />
   </LinearLayout>
 

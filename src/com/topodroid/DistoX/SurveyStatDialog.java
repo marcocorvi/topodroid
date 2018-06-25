@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid survey stats display dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -99,7 +99,7 @@ class SurveyStatDialog extends MyDialog
       mBtnBack.setOnClickListener( this );
 
       mTextLeg.setText( String.format( res.getString(R.string.stat_leg),
-                        mStat.countLeg, mStat.lengthLeg * unit, unit_str, mStat.planLength * unit, unit_str ) );
+                        mStat.countLeg, mStat.lengthLeg * unit, mStat.extLength, mStat.planLength * unit, unit_str ) );
       mTextDuplicate.setText( String.format( res.getString(R.string.stat_duplicate),
                         mStat.countDuplicate, mStat.lengthDuplicate * unit, unit_str ) );
       mTextSurface.setText( String.format( res.getString(R.string.stat_surface),

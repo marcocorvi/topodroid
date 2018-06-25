@@ -1,11 +1,11 @@
-/** @file ItemSymbol.java
+/* @file ItemSymbol.java
  *
  * @author marco corvi
  * @date 
  *
  * @brief TopoDroid drawing
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -39,11 +39,11 @@ class ItemSymbol
   int mIndex;  // symbol index
   CheckBox     mCheckBox = null;
   ItemButton   mButton   = null;
-  private TextView     mTextView = null;
+  // private TextView     mTextView = null;
   LinearLayout mView;
   SymbolInterface mSymbol;
-  private float sx = TDSetting.mUnit;
-  private float sy = TDSetting.mUnit;
+  private float sx = TDSetting.mUnitIcons;
+  private float sy = TDSetting.mUnitIcons;
   private boolean mUseText;
 
   // private Context mContext;
@@ -86,10 +86,10 @@ class ItemSymbol
     ll.addView( mButton, lllp );
 
     if ( mUseText ) {
-      mTextView = new TextView( context );
-      // mTextView.setBackgroundColor( TDColor.BLACK );
-      mTextView.setText( mSymbol.getName() );
-      ll.addView( mTextView, new LinearLayout.LayoutParams(lh,lw) );
+      TextView textView = new TextView( context );
+      // textView.setBackgroundColor( TDColor.BLACK );
+      textView.setText( mSymbol.getName() );
+      ll.addView( textView, new LinearLayout.LayoutParams(lh,lw) );
     } else {
       mButton.setClickable( true );
     }

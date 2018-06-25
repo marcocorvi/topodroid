@@ -1,11 +1,11 @@
-/** @file DeviceX310Info.java
+/* @file DeviceX310Info.java
  *
  * @author marco corvi
  * @date nov 2011
  *
  * @brief TopoDroid DistoX device X310 info
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */

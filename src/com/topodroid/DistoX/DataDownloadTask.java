@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid batch data-download task
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -19,12 +19,12 @@ import android.os.AsyncTask;
 
 // import android.util.Log;
 
-public class DataDownloadTask extends AsyncTask< String, Integer, Integer >
+class DataDownloadTask extends AsyncTask< String, Integer, Integer >
 {
-  private TopoDroidApp mApp; // FIXME LEAK
+  private final TopoDroidApp mApp; // FIXME LEAK
   private static DataDownloadTask running = null;
   // private ILister mLister;
-  private ListerHandler mLister; // FIXME LISTER
+  private final ListerHandler mLister; // FIXME LISTER
 
   DataDownloadTask( TopoDroidApp app, ListerHandler /* ILister */ lister ) // FIXME LISTER
   {

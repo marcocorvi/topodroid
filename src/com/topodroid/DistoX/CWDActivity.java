@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid CWD activity
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -34,7 +34,6 @@ import android.widget.LinearLayout;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
-// import android.view.WindowManager.LayoutParams;
 import android.view.KeyEvent;
 
 import android.widget.AdapterView;
@@ -88,16 +87,16 @@ public class CWDActivity extends Activity
       return false;
     }
 
-    if ( dir_name == null ) {
-      TDToast.make( this, R.string.empty_cwd );
-      return false;
-    } else {
+    // if ( dir_name == null ) { // always false
+    //   TDToast.make( this, R.string.empty_cwd );
+    //   return false;
+    // } else {
       dir_name = dir_name.trim();
       if ( dir_name.length() == 0 ) {
         TDToast.make( this, R.string.empty_cwd );
-	return false;
+	    return false;
       }
-    }
+    // }
     if ( dir_name.contains("/") ) {
       TDToast.make( this, R.string.bad_cwd );
       return false;
@@ -120,7 +119,7 @@ public class CWDActivity extends Activity
     return true;
   }
     
-  public void updateDisplay( )
+  private void updateDisplay()
   {
     File[] dirs = TDPath.getTopoDroidFiles( mBaseName );
     ArrayAdapter<String> adapter = new ArrayAdapter<>( this, R.layout.menu );
@@ -215,7 +214,7 @@ public class CWDActivity extends Activity
         return true;
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
         String help_page = getResources().getString( R.string.CWDActivity );
-        if ( help_page != null ) UserManualActivity.showHelpPage( this, help_page );
+        /* if ( help_page != null ) always true */ UserManualActivity.showHelpPage( this, help_page );
         return true;
       // case KeyEvent.KEYCODE_SEARCH:
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)

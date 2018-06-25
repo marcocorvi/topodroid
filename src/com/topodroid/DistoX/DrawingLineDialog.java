@@ -1,11 +1,11 @@
-/** @file DrawingLineDialog.java
+/* @file DrawingLineDialog.java
  *
  * @author marco corvi
  * @date june 2012
  *
  * @brief TopoDroid sketch line attributes editing dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -29,7 +29,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import android.view.View;
-// import android.view.ViewGroup.LayoutParams;
 
 class DrawingLineDialog extends MyDialog
                                implements View.OnClickListener, AdapterView.OnItemSelectedListener
@@ -119,9 +118,7 @@ class DrawingLineDialog extends MyDialog
     mReversed.setChecked( mLine.isReversed() );
     mBtnClose.setChecked( mLine.isPathClosed() );
 
-    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
-      LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
-    lp.setMargins( 0, 10, 20, 10 );
+    LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 0, 10, 20, 10 );
 
     LinearLayout layout3 = (LinearLayout)findViewById( R.id.layout3 );
     layout3.addView( mReversed, lp );

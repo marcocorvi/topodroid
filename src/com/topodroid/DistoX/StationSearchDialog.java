@@ -1,4 +1,4 @@
-/** @file StationSearchDialog.java
+/* @file StationSearchDialog.java
  *
  * @author marco corvi
  * @date jul 2017
@@ -9,7 +9,7 @@
  * a station on it or pop one from it
  *
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -37,7 +37,7 @@ class StationSearchDialog extends MyDialog
                         implements View.OnClickListener
                         , View.OnLongClickListener
 {
-  private ShotWindow mParent;
+  private final ShotWindow mParent;
   private EditText mName;
   private String mStation;
 

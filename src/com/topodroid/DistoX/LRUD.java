@@ -1,11 +1,11 @@
-/** @file LRUD.java
+/* @file LRUD.java
  *
  * @author marco corvi
  * @date dec 2014
  *
  * @brief TopoDroid drawing: button for an area type
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */

@@ -218,7 +218,7 @@
     <string name="group_reset">Briši skupine</string>
 
     <!-- UNUSED string name="scale">scala</string -->
-    <!-- TODO string name="reversed">reversed</string -->
+    <!-- UNUSED string name="reversed">reversed</string -->
     <string name="options">opcije</string>
     <string name="outline">obris</string>
     <string name="out">zunaj</string>
@@ -231,7 +231,15 @@
     <!-- UNUSED string name="hidden_del">Pokaži mediano linijo</string -->
     <!-- TODO string name="hidden_show">Show shots beyond station</string -->
     <string name="splays_toggle">Pokaži ali skrij stranske vizure</string>
+    <!-- TODO string name="splays_on_off">Splays</string -->
     <!-- TODO string name="splays">splays</string -->
+    <!-- TODO string name="splays_show">Show splays</string -->
+    <!-- TODO string name="foresurface_show">Show fore surface</string -->
+    <!-- TODO string name="fmt_listen">LISTEN | %1$s</string -->
+    <!-- TODO string name="fmt_id">ID %1$s</string -->
+    <!-- TODO string name="fmt_latitude">Latitude %1$s</string -->
+    <!-- TODO string name="fmt_longitude">Longitude %1$s</string -->
+    <!-- TODO string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string --> 
     <string name="fixed">fiksen</string>
     <string name="painted">barvast</string>
 
@@ -506,7 +514,7 @@
     <!-- TODO string name="extended_profile">Extended profile</string -->
     <!-- UNUSED string name="v_section">SEZIONE VERT.</string -->
     <string name="h_section">HORIZONTALEN PRESEK</string>
-    <!-- TODO string name="landscape">landscape</string -->
+    <!-- UNUSED string name="landscape">landscape</string -->
 
     <!-- OK string name="distox_err_ok">OK</string -->
     <string name="distox_err_headtail">Neuspešno branje spomina DistoX</string>
@@ -535,7 +543,7 @@
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
     <!-- UNUSED string name="button_manual"    >Manuale   </string -->
     <!-- UNUSED string name="button_measure"   >Misura    </string -->
-    <string name="button_photo"   >Foto</string>
+    <!-- UNUSED string name="button_photo"   >Foto</string -->
     <!-- UNUSED string name="button_sensor"  >Misure</string -->
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
@@ -543,6 +551,8 @@
     <!-- TODO string name="button_more"    >More</string -->
     <!-- TODO string name="button_lrud"    >Add LRUD</string -->
     <!-- OK string name="button_ok"        >OK        </string -->
+    <!-- TODO string name="button_off"       >off</string -->
+    <!-- TODO string name="button_on"        >on</string -->
     <string name="button_open"      >Odpri      </string>
     <string name="button_read"      >Beri     </string>
     <!-- UNUSED string name="button_redo"      >Redo      </string -->
@@ -715,7 +725,7 @@
     <string name="help_photo">Foto</string>
     <string name="help_sensor">Meritve</string>
     <string name="help_3d">3D app (Cave3D)</string>
-    <string name="help_move">Način premikaj/zoom</string>
+    <!-- UNUSED string name="help_move">Način premikaj/zoom</string -->
     <string name="help_draw">Način skica</string>
     <string name="help_edit">Način urejanje</string>
     <string name="help_refs">Izberi referenco za načrt</string>
@@ -1076,9 +1086,9 @@
   <string name="pref_bitmap_bgcolor_message">Barva podlage za izvoz načrta v formatu PNG</string>
   <string name="pref_acad_version_title"> Verzija AutoCAD</string>
   <string name="pref_acad_version_summary">Verzija AutoCAD</string>
-  <string name="pref_dxf_scale_title">Scala rilievo DXF</string>
-  <string name="pref_dxf_scale_summary">Faktor razmerja načrta DXF</string>
-  <string name="pref_dxf_scale_message">Fattore razmerja za izvoz načrta v formatu DXF</string>
+  <!-- UNUSED string name="pref_dxf_scale_title">Scala rilievo DXF</string -->
+  <!-- UNUSED string name="pref_dxf_scale_summary">Faktor razmerja načrta DXF</string -->
+  <!-- UNUSED string name="pref_dxf_scale_message">Fattore razmerja za izvoz načrta v formatu DXF</string -->
   <!-- TODO string name="pref_dxf_blocks_title">DXF splay endpoints</string -->
   <!-- TODO string name="pref_dxf_blocks_summary">DXF splay endpoints</string -->
   <string name="pref_thumbnail_title">Dimenzije sličic thumbnails</string>
@@ -1184,17 +1194,17 @@
   <!-- TODO string name="pref_auto_section_pt_title">Section points</string -->
   <!-- TODO string name="pref_auto_section_pt_summary">Add section point to section lines</string -->
 
-  <string name="pref_sketchUsesSplays_title">Skica stranskih vizur</string>
-  <string name="pref_sketchUsesSplays_summary">Skica površine z uporabo stranskih vizur</string>
+  <!-- UNUSED string name="pref_sketchUsesSplays_title">Skica stranskih vizur</string -->
+  <!-- UNUSED string name="pref_sketchUsesSplays_summary">Skica površine z uporabo stranskih vizur</string -->
   <string name="pref_sketchLineStep_title">Stopničasta črta</string>
   <string name="pref_sketchLineStep_summary">Razdalja med točkama črte</string>
   <string name="pref_sketchLineStep_message">Razdalja med točkama črte</string>
-  <string name="pref_sketchBorderStep_title">Razmejitvena stopnica</string>
-  <string name="pref_sketchBorderStep_summary">Razdalja me urejanjem-točkam v premici</string>
-  <string name="pref_sketchBorderStep_message">Razdalja me urejanjem-točkam v premici</string>
-  <string name="pref_sketchSectionStep_title">Stopnje odseka</string>
-  <string name="pref_sketchSectionStep_summary">Razdalja med odseki</string>
-  <string name="pref_sketchSectionStep_message">Razdalja med vmesnimi odseki</string>
+  <!-- UNUSED string name="pref_sketchBorderStep_title">Razmejitvena stopnica</string -->
+  <!-- UNUSED string name="pref_sketchBorderStep_summary">Razdalja me urejanjem-točkam v premici</string -->
+  <!-- UNUSED string name="pref_sketchBorderStep_message">Razdalja me urejanjem-točkam v premici</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_title">Stopnje odseka</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_summary">Razdalja med odseki</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_message">Razdalja med vmesnimi odseki</string -->
   <string name="pref_sketchDeltaExtrude_title">Izlušči delta</string>
   <string name="pref_sketchDeltaExtrude_summary">Izlušči delta</string>
   <string name="pref_sketchDeltaExtrude_message">Izlušči delta</string>

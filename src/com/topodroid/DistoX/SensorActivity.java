@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid DistoX sensor activity
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -94,7 +94,7 @@ public class SensorActivity extends Activity
     List< Sensor > sl = mSensorManager.getSensorList( Sensor.TYPE_LIGHT );
     if ( sl.size() > 0 ) {
       mRBLight.setOnClickListener( this );
-      for ( Sensor s : sl ) mSensor.add( s );
+      mSensor.addAll( sl ); // for ( Sensor s : sl ) mSensor.add( s );
     } else {
       mRBLight.setEnabled( false );
     }
@@ -102,7 +102,7 @@ public class SensorActivity extends Activity
     sl = mSensorManager.getSensorList( Sensor.TYPE_MAGNETIC_FIELD );
     if ( sl.size() > 0 ) {
       mRBMagnetic.setOnClickListener( this );
-      for ( Sensor s : sl ) mSensor.add( s );
+      mSensor.addAll( sl ); // for ( Sensor s : sl ) mSensor.add( s );
     } else {
       mRBMagnetic.setEnabled( false );
     }
@@ -110,7 +110,7 @@ public class SensorActivity extends Activity
     sl = mSensorManager.getSensorList( Sensor.TYPE_TEMPERATURE );
     if ( sl.size() > 0 ) {
       mRBTemperature.setOnClickListener( this );
-      for ( Sensor s : sl ) mSensor.add( s );
+      mSensor.addAll( sl ); // for ( Sensor s : sl ) mSensor.add( s );
     } else {
       mRBTemperature.setEnabled( false );
     }
@@ -118,7 +118,7 @@ public class SensorActivity extends Activity
     sl = mSensorManager.getSensorList( Sensor.TYPE_PRESSURE );
     if ( sl.size() > 0 ) {
       mRBPressure.setOnClickListener( this );
-      for ( Sensor s : sl ) mSensor.add( s );
+      mSensor.addAll( sl ); // for ( Sensor s : sl ) mSensor.add( s );
     } else {
       mRBPressure.setEnabled( false );
     }
@@ -126,7 +126,7 @@ public class SensorActivity extends Activity
     sl = mSensorManager.getSensorList( Sensor.TYPE_ORIENTATION );
     if ( sl.size() > 0 ) {
       mRBGravity.setOnClickListener( this );
-      for ( Sensor s : sl ) mSensor.add( s );
+      mSensor.addAll( sl ); // for ( Sensor s : sl ) mSensor.add( s );
     } else {
       mRBGravity.setEnabled( false );
     }
@@ -315,7 +315,7 @@ public class SensorActivity extends Activity
     switch ( code ) {
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
         String help_page = getResources().getString( R.string.SensorActivity );
-        if ( help_page != null ) UserManualActivity.showHelpPage( this, help_page );
+        /* if ( help_page != null ) */ UserManualActivity.showHelpPage( this, help_page );
         return true;
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         super.onBackPressed();

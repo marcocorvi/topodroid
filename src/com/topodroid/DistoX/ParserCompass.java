@@ -1,4 +1,4 @@
-/** @file ParserCompass.java
+/* @file ParserCompass.java
  *
  * @author marco corvi
  * @date nov 2014
@@ -6,7 +6,7 @@
  * @brief TopoDroid Compass parser
  *
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * ----------------------------------------------------------
  */
@@ -36,25 +36,12 @@ class ParserCompass extends ImportParser
     readFile( filename );
   }
 
-  private boolean isDuplicate( String flag )
-  {
-    if ( flag == null ) return false;
-    if ( flag.indexOf('L') >= 0 ) return true;
-    return false;
-  }
+  private boolean isDuplicate( String flag ) { return  ( flag != null && flag.indexOf('L') >= 0 ); }
 
-  private boolean isSurface( String flag )
-  {
-    if ( flag == null ) return false;
-    if ( flag.indexOf('X') >= 0 ) return true;
-    return false;
-  }
+  private boolean isSurface( String flag ) { return ( flag != null && flag.indexOf('X') >= 0 ); }
 
-  private boolean isBackshot( String flag )
-  {
-    if ( flag == null ) return false;
-    return false;
-  }
+  // compass has no flag for backshot, therefore this is always false
+  private boolean isBackshot( String flag ) { return false; }
 
   /** read input file
    * @param br buffered reader on the input file
@@ -123,12 +110,15 @@ class ParserCompass extends ImportParser
                       mFlag = null;
                       mComment = "";
                       if ( k < kmax ) {
-                        if ( vals[k].startsWith("#") ) {
-                          mFlag = vals[k]; ++k;
+                        if (vals[k].startsWith("#")) {
+                          mFlag = vals[k];
+						  ++k;
                         }
                         if ( k < kmax ) {
-                          mComment = vals[k];
-                          while ( k < kmax ) { mComment = mComment + " " + vals[k]; ++k; }
+						  // mComment = vals[k];
+                          // while ( k < kmax ) { mComment = mComment + " " + vals[k]; ++k; }
+                          mComment = TopoDroidUtil.concat( vals, k );
+                          // k = vals.length;
                         }
                       }
                     }

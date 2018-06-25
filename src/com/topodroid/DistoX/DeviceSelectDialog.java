@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid DistoX device selection dialog (for multi-DistoX)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -31,7 +31,6 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import android.view.View;
 import android.view.View.OnClickListener;
-// import android.view.ViewGroup.LayoutParams;
 
 // import android.util.Log;
 
@@ -41,10 +40,10 @@ class DeviceSelectDialog extends MyDialog
                                 implements OnItemClickListener
                                 , OnClickListener
 {
-  private Context mContext;
-  private TopoDroidApp mApp;
-  private DataDownloader mDownloader;
-  private ILister mLister;
+  private final Context mContext;
+  private final TopoDroidApp mApp;
+  private final DataDownloader mDownloader;
+  private final ILister mLister;
 
   private ListView mList;
   private Button  mBtnCancel;

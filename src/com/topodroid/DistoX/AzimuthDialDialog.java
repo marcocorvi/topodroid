@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid survey azimuth dialog 
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -24,7 +24,6 @@ import android.content.Context;
 import android.widget.EditText;
 import android.widget.Button;
 import android.view.View;
-// import android.view.ViewGroup.LayoutParams;
 // import android.view.Window;
 //  android.view.WindowManager;
 // import android.view.KeyEvent;
@@ -48,8 +47,8 @@ class AzimuthDialDialog extends MyDialog
                               , IBearingAndClino
 {
 
-  private ILister mParent;
-  float mAzimuth;
+  private final ILister mParent;
+  private float mAzimuth;
   private Bitmap mBMdial;
 
   private EditText mETazimuth;
@@ -90,9 +89,6 @@ class AzimuthDialDialog extends MyDialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-
-    // requestWindowFeature(Window.FEATURE_NO_TITLE);
-    // getWindow().setFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN );
 
     // TDLog.Log( TDLog.LOG_SHOT, "Shot Dialog::onCreate" );
     initLayout( R.layout.azimuth_dial_dialog, R.string.title_azimut );
@@ -135,14 +131,9 @@ class AzimuthDialDialog extends MyDialog
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
     layout4.setMinimumHeight( size + 40 );
 
-    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
-      LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
-    lp.setMargins( 0, 10, 20, 10 );
+    LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 0, 10, 20, 10 );
 
     mBTsensor = new MyCheckBox( mContext, size, R.drawable.iz_compass_transp, R.drawable.iz_compass_transp ); 
-    // LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mBTsensor.getLayoutParams();
-    // params.setMargins( 10, 0, 0, 10 );
-    // mBTsensor.setLayoutParams( params );
     layout4.addView( mBTsensor, lp );
 
     // mBTback.setOnClickListener( this );

@@ -1,4 +1,4 @@
-/** @file TopoDroidAbout.java
+/* @file TopoDroidAbout.java
  *
  * @author marco corvi
  * @date may 2012
@@ -6,7 +6,7 @@
  * @brief TopoDroid about dialog
  *
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * ----------------------------------------------------------
  */
@@ -14,7 +14,6 @@ package com.topodroid.DistoX;
 
 import android.content.Context;
 // import android.content.Intent;
-// import android.content.ActivityNotFoundException;
 
 import android.app.Dialog;
 // import android.widget.Button;
@@ -30,11 +29,17 @@ class TopoDroidAbout extends Dialog
 {
   // private Button mBTok;
   private Context mContext;
+  private MainWindow mParent;
+  private int mSetup;
 
-  TopoDroidAbout( Context context )
+  int nextSetup() { return mSetup + 1; }
+
+  TopoDroidAbout( Context context, MainWindow parent, int setup )
   {
     super( context );
     mContext = context;
+    mParent  = parent;
+    mSetup   = setup;
     setContentView(R.layout.welcome);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
@@ -44,5 +49,12 @@ class TopoDroidAbout extends Dialog
 
     // mBTok.setOnClickListener( this );
   }
+
+  // @Override
+  // public void onDismiss()
+  // {
+  //   if ( mSetup >= 0 ) mParent.doNextSetup( mSetup + 1 );
+  // }
+
   
 }

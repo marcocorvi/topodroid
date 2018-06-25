@@ -6,7 +6,7 @@
  * @brief TopoDroid drawing: atomic erase command
  * 
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -66,12 +66,13 @@ class EraseCommand implements ICanvasCommand
   int size() { return mActions.size(); }
 
 
-  public int  commandType() { return 1; }
+  public int commandType() { return 1; }
 
   // nothing to draw
   public void draw(Canvas canvas, RectF bbox) { }
   public void draw(Canvas canvas, Matrix mat, float scale, RectF bbox ) { }
 
+  // from ICanvasCommand
   public void flipXAxis(float z) { } 
   public void shiftPathBy( float x, float y ) { }
   public void scalePathBy( float z, Matrix m ) { }

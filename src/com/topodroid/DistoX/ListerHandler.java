@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid handler for a data lister
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -15,7 +15,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
 
-// import android.util.Log;
+import android.util.Log;
 
 class ListerHandler extends Handler
 {
@@ -50,7 +50,7 @@ class ListerHandler extends Handler
         break;
       case Lister.UPDATE:
         long blk_id = bundle.getLong( Lister.BLOCK_ID );
-        // Log.v("DistoX", "lister message blk id " + blk_id );
+        Log.v("DistoX", "lister handler message blk id " + blk_id );
         mLister.updateBlockList( blk_id );
         break;
       case Lister.REF_AZIMUTH:

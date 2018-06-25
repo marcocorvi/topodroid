@@ -1,11 +1,11 @@
-/** @file DeviceX310InfoDialog.java
+/* @file DeviceX310InfoDialog.java
  *
  * @author marco corvi
  * @date nov 2011
  *
  * @brief TopoDroid DistoX X310 device info dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -22,7 +22,6 @@ import android.content.DialogInterface;
 import android.content.res.Resources;
 
 import android.view.View;
-// import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;
 import android.widget.RadioButton;
 import android.widget.Button;
@@ -35,8 +34,8 @@ class DeviceX310InfoDialog extends MyDialog
   private Button mBTok;
   private Button mBTback;
 
-  DeviceActivity mParent;
-  Device mDevice;
+  private final DeviceActivity mParent;
+  private final Device mDevice;
 
   private TextView tv_code;
   private TextView tv_firmware;

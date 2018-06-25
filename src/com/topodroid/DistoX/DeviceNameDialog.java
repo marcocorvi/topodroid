@@ -1,11 +1,11 @@
-/** @file DeviceNameDialog.java
+/* @file DeviceNameDialog.java
  *
  * @author marco corvi
  * @date nov 2011
  *
  * @brief TopoDroid DistoX X310 device info dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -15,13 +15,12 @@ import android.os.Bundle;
 // import android.app.Dialog;
 // import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.content.DialogInterface;
+// import android.content.Intent;
+// import android.content.DialogInterface;
 // import android.content.DialogInterface.OnCancelListener;
 // import android.content.DialogInterface.OnDismissListener;
 
 import android.view.View;
-// import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
@@ -36,8 +35,8 @@ class DeviceNameDialog extends MyDialog
   private Button mBTok;
   private Button mBTback;
 
-  DeviceActivity mParent;
-  Device mDevice;
+  private final DeviceActivity mParent;
+  private final Device mDevice;
 
   DeviceNameDialog( Context context, DeviceActivity parent, Device device )
   {
@@ -52,8 +51,6 @@ class DeviceNameDialog extends MyDialog
   {
     super.onCreate( bundle );
 
-    // setContentView( R.layout.device_name_dialog );
-    // getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
     initLayout( R.layout.device_name_dialog, R.string.device_info );
 
     mTVmodel = (TextView) findViewById( R.id.tv_model );

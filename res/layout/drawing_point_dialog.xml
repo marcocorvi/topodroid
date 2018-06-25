@@ -27,27 +27,27 @@
     <RadioButton android:id="@+id/point_scale_xs"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:text="XS"
+      android:text="@string/size_xs"
     />
     <RadioButton android:id="@+id/point_scale_s"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:text="S"
+      android:text="@string/size_s"
     />
     <RadioButton android:id="@+id/point_scale_m"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:text="M"
+      android:text="@string/size_m"
     />
     <RadioButton android:id="@+id/point_scale_l"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:text="L"
+      android:text="@string/size_l"
     />
     <RadioButton android:id="@+id/point_scale_xl"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:text="XL"
+      android:text="@string/size_xl"
     />
   </RadioGroup>
 
@@ -126,22 +126,20 @@
     android:layout_gravity="right"
     android:gravity="right"
     >
-    <Button android:id="@+id/button_draw"
-      style="@style/button_default"
-      android:layout_marginRight="@dimen/marginh"
-      android:text="@string/button_plot"
-    />
-    <Button android:id="@+id/button_ok"
-      style="@style/button_default"
-      android:layout_marginRight="@dimen/marginh"
-      android:text="@string/button_save"
-    />
-
     <Button android:id="@+id/button_cancel"
       style="@style/button_default"
       android:text="@string/button_cancel"
+      android:layout_marginRight="@dimen/marginh"
     />
-
+    <Button android:id="@+id/button_ok"
+      style="@style/button_default"
+      android:text="@string/button_save"
+      android:layout_marginRight="@dimen/marginh"
+    />
+    <Button android:id="@+id/button_draw"
+      style="@style/button_default"
+      android:text="@string/button_plot"
+    />
   </LinearLayout>
 
 </LinearLayout>

@@ -100,18 +100,26 @@
       android:layout_marginTop="@dimen/marginv"
       android:orientation="horizontal" 
       >
-
-      <Button android:id="@+id/btn_splays"
-        android:layout_marginRight="@dimen/marginh"
-        style="@style/button_default"
-        android:text="@string/button_ok"
-      />
-
-      <TextView android:id="@+id/splays_toggle"
+      <TextView android:id="@+id/splays_on_off"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
-        android:text="@string/splays_toggle"
+        android:layout_marginRight="@dimen/marginh"
+        android:text="@string/splays_on_off"
         />
+
+      <CheckBox android:id="@+id/btn_splays_on"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="@dimen/marginh"
+        android:text="@string/button_on"
+      />
+
+      <CheckBox android:id="@+id/btn_splays_off"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/button_off"
+      />
+
     </LinearLayout>
 
     <LinearLayout android:id="@+id/layout_xsection"
@@ -160,7 +168,6 @@
     <LinearLayout 
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:layout_gravity="right"
       android:gravity="right"
       android:orientation="horizontal" 
       android:layout_marginTop="@dimen/marginv"
@@ -168,6 +175,7 @@
       <Button android:id="@+id/btn_cancel"
         style="@style/button_default"
         android:text="@string/button_cancel"
+        android:layout_gravity="right"
         />
     </LinearLayout>
    					  

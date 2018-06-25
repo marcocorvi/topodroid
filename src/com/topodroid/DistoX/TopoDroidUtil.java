@@ -1,11 +1,11 @@
-/** @file TopoDroidUtil.java
+/* @file TopoDroidUtil.java
  *
  * @author marco corvi
  * @date jan 2014
  *
  * @grief numerical utilities
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -18,6 +18,8 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+
+import java.io.File;
 
 // import android.util.Log;
 
@@ -67,6 +69,58 @@ class TopoDroidUtil
 
   // static float slope2degree( float slp ) { return (float)( Math.atan( slp/100 ) * RAD2DEG ); }
 
+  static void deleteFile( String pathname )
+  {
+    File f = new File( pathname );
+    if ( f.exists() ) {
+      if ( ! f.delete() ) TDLog.Error("File delete failed " + pathname );
+    }
+  }
+
+  static void renameFile( String oldname, String newname )
+  {
+    File f1 = new File( oldname );
+    File f2 = new File( newname );
+    if ( f1.exists() && ! f2.exists() ) {
+      if ( ! f1.renameTo( f2 ) ) TDLog.Error("File rename failed " + oldname + " " + newname );
+    } 
+  }
+
+  static void moveFile( String oldname, String newname )
+  {
+    File f1 = new File( oldname );
+    File f2 = new File( newname );
+    if ( f1.exists() ) {
+      if ( ! f1.renameTo( f2 ) ) TDLog.Error("File move failed " + oldname + " " + newname );
+    } 
+  }
+
+  static void makeDir( String pathname )
+  {
+    File f = new File( pathname );
+    if ( f.exists() ) return;
+    if ( ! f.isDirectory() ) {
+      if ( ! f.mkdirs() ) TDLog.Error("Mkdir failed " + pathname );
+    }
+  }
+  
+  // concatenate strings using a single-space separator
+  // empty strings are skipped
+  static String concat( String[] vals, int k )
+  {
+    if ( k < vals.length ) {
+      StringBuilder sb = new StringBuilder();
+      for ( ; k<vals.length; ++k ) if ( vals[k].length() > 0 ) {
+        sb.append(vals[k]);
+        break;
+      }
+      for (++k; k < vals.length; ++k) {
+        if ( vals[k].length() > 0 ) sb.append(" ").append(vals[k]);
+      }
+      return sb.toString();
+    }
+    return "";
+  }
 
   static String noSpaces( String s )
   {
@@ -158,5 +212,34 @@ class TopoDroidUtil
   static int year()  { return (new GregorianCalendar()).get( Calendar.YEAR ); }
   static int month() { return (new GregorianCalendar()).get( Calendar.MONTH ); }
   static int day()   { return (new GregorianCalendar()).get( Calendar.DAY_OF_MONTH); }
+
+
+  static boolean slowDown( int msec ) 
+  {
+    try {
+      Thread.sleep( msec );
+    } catch ( InterruptedException e ) { return false; }
+    return true;
+  }
+
+  static boolean slowDown( int msec, String msg )
+  {
+    try {
+      Thread.sleep( msec );
+    } catch ( InterruptedException e ) {
+      TDLog.Error( msg + " " + e.getMessage() );
+      return false;
+    }
+    return true;
+  }
+
+  static boolean yieldDown( int msec ) 
+  {
+    try {
+      Thread.yield();
+      Thread.sleep( msec );
+    } catch ( InterruptedException e ) { return false; }
+    return true;
+  }
 
 }

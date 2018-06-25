@@ -5,13 +5,13 @@
  *
  * @brief TopoDroid lister interface
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
 package com.topodroid.DistoX;
 
-public interface ILister 
+interface ILister 
 {
   /**
    * @param nr    number of new shots
@@ -22,7 +22,7 @@ public interface ILister
    *   - ShotNewDialog.onClick
    *   - ListerHandler.handleMessage Lister.REFRESH
    */
-  public void refreshDisplay( int nr, boolean toast );
+  void refreshDisplay( int nr, boolean toast );
 
   /** 
    * @param blk data-block from which to update the list
@@ -31,9 +31,9 @@ public interface ILister
    *   - DistoXComm.run()
    *   + updateBlockList( long ) for each class that implements this method
    */
-  public void updateBlockList( DBlock blk );
+  void updateBlockList( DBlock blk );
 
-  public void updateBlockList( CalibCBlock blk );
+  void updateBlockList( CalibCBlock blk );
 
   /** 
    * @param blk_id id (of the data-block) from which to update the list
@@ -41,7 +41,7 @@ public interface ILister
    *  updateBlockList is called by
    *   - ListerHandler.handleMessage Lister.BLOCK_ID
    */
-  public void updateBlockList( long blk_id );
+  void updateBlockList( long blk_id );
 
   /**
    * @param status   current status ( 0: off,  1: on,  2: wait )A
@@ -59,9 +59,9 @@ public interface ILister
    * ShotWindow: change button[0] background
    * SketchWindow: nothing (TODO)
    */
-  public void setConnectionStatus( int status ); 
+  void setConnectionStatus( int status ); 
  
-  // public void notifyDisconnected();
+  // void notifyDisconnected();
 
   /** called by 
    *   - AzimuthDialog
@@ -74,17 +74,17 @@ public interface ILister
    * ShotWindow
    * SketchWindow: TODO
    */
-  public void setRefAzimuth( float azimuth, long fixed_extend );
+  void setRefAzimuth( float azimuth, long fixed_extend );
 
   /** set the title
    *
    */
-  public void setTheTitle();
+  void setTheTitle();
 
   /** enable/disable theBluetooth button
-   * @param enable
+   * @param enable whether to enable or disable
    */
-  public void enableBluetoothButton( boolean enable );
+  void enableBluetoothButton( boolean enable );
 
 }
 

@@ -1,11 +1,11 @@
-/** @file PlotListDialog.java
+/* @file PlotListDialog.java
  *
  * @author marco corvi
  * @date nov 2011
  *
  * @brief TopoDroid option list
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -42,9 +42,9 @@ class PlotListDialog extends MyDialog
                                 // , OnItemLongClickListener
                                 , View.OnClickListener
 {
-  private ShotWindow    mParent;
-  private DrawingWindow mParent2;
-  private TopoDroidApp mApp;
+  private final ShotWindow    mParent;
+  private final DrawingWindow mParent2;
+  private final TopoDroidApp mApp;
   private ArrayAdapter<String> mArrayAdapter;
   // private ListItemAdapter mArrayAdapter;
   private Button mBtnPlotNew;
@@ -223,7 +223,7 @@ class PlotListDialog extends MyDialog
       long plot_type = PlotInfo.PLOT_PLAN;
       Resources res = mApp.getResources();
       if ( res.getString( R.string.plan ).equals( type ) ) {
-        plot_type = PlotInfo.PLOT_PLAN;
+        plot_type = PlotInfo.PLOT_PLAN; // already assigned
       } else if ( res.getString( R.string.extended ).equals( type ) ) {
         plot_type = PlotInfo.PLOT_EXTENDED;
       } else if ( res.getString( R.string.profile ).equals( type ) ) {

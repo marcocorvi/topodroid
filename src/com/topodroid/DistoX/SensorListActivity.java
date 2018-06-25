@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid survey sensor listing
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -29,7 +29,6 @@ import android.os.Bundle;
 // import android.app.Application;
 import android.app.Activity;
 
-// import android.content.ActivityNotFoundException;
 // import android.content.res.ColorStateList;
 // import android.content.Context;
 // import android.content.Intent;
@@ -92,7 +91,7 @@ public class SensorListActivity extends Activity
     }
   }
 
-  public void updateSensorList( List< SensorInfo > list )
+  private void updateSensorList( List< SensorInfo > list )
   {
     // TDLog.Log(TDLog.LOG_SENSOR, "updateSensorList size " + list.size() );
     mDataAdapter.clear();
@@ -116,7 +115,7 @@ public class SensorListActivity extends Activity
     startSensorDialog( (TextView)view, position );
   }
 
-  void startSensorDialog( TextView tv, int pos )
+  private void startSensorDialog( TextView tv, int pos )
   {
      mSaveSensor = mDataAdapter.get(pos);
      (new SensorEditDialog( this, this, mSaveSensor )).show();
@@ -171,7 +170,7 @@ public class SensorListActivity extends Activity
     switch ( code ) {
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
         String help_page = getResources().getString( R.string.SensorListActivity );
-        if ( help_page != null ) UserManualActivity.showHelpPage( this, help_page );
+        /* if ( help_page != null ) */ UserManualActivity.showHelpPage( this, help_page );
         return true;
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         super.onBackPressed();

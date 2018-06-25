@@ -6,7 +6,7 @@
  * @brief TopoDroid drawing station name from survey data reduction (reference station names)
  *        type: DRAWING_PATH_NAME
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -28,7 +28,7 @@ import android.graphics.Matrix;
 
 class DrawingStationName extends DrawingPointPath
 {
-  private static float toTherion = TDConst.TO_THERION;
+  private static final float toTherion = TDConst.TO_THERION;
 
   private String mName; // station name
   private NumStation mStation;
@@ -38,7 +38,7 @@ class DrawingStationName extends DrawingPointPath
   private boolean mDuplicate;  // whether this is a duplicated station
 
   long  mXSectionType; // whether this station has a X-section
-  float mAzimuth, mClino;
+  private float mAzimuth, mClino;
   private float mDX, mDY;     // X-section direction
 
   // get coords for a "section" point
@@ -84,8 +84,6 @@ class DrawingStationName extends DrawingPointPath
     makeStraightPath( 0, 0, 2*TDSetting.mStationSize*mName.length(), 0, cx, cy );
   }
 
-  static final private int LENGTH = 20;
-
   String name() { return mName; }
   NumStation station() { return mStation; }
 
@@ -96,17 +94,17 @@ class DrawingStationName extends DrawingPointPath
     mAzimuth      = azimuth;
     mClino        = clino;
     if ( type == PlotInfo.PLOT_PLAN ) {
-      mDX =   LENGTH * (float)Math.sin( azimuth * Math.PI/180 );
-      mDY = - LENGTH * (float)Math.cos( azimuth * Math.PI/180 );
+      mDX =   TDMath.sind( azimuth );
+      mDY = - TDMath.cosd( azimuth );
     } else if ( PlotInfo.isProfile( type ) ) {
       if ( clino > 89 ) {
         mDX = 0;
-        mDY = -LENGTH;
+        mDY = -1;
       } else if ( clino < -89 ) {
         mDX = 0;
-        mDY = LENGTH;
+        mDY = 1;
       } else {
-        mDX = LENGTH; // FIXME
+        mDX = 1; // FIXME
         mDY = 0;
       }
     }
@@ -131,8 +129,8 @@ class DrawingStationName extends DrawingPointPath
       if ( mXSectionType != PlotInfo.PLOT_NULL ) {
         Path path = new Path();
         path.moveTo( cx, cy );
-        path.lineTo( cx+mDX, cy+mDY );
-        canvas.drawPath( path, BrushManager.mStationSymbol.mPaint );
+        path.lineTo( cx+mDX*TDSetting.mArrowLength, cy+mDY*TDSetting.mArrowLength );
+        canvas.drawPath( path, BrushManager.mSectionPaint );
       }
     }
   }
@@ -150,9 +148,9 @@ class DrawingStationName extends DrawingPointPath
       if ( mXSectionType != PlotInfo.PLOT_NULL ) {
         Path path = new Path();
         path.moveTo( cx, cy );
-        path.lineTo( cx+mDX, cy+mDY );
+        path.lineTo( cx+mDX*TDSetting.mArrowLength, cy+mDY*TDSetting.mArrowLength );
         path.transform( matrix );
-        canvas.drawPath( path, BrushManager.mStationSymbol.mPaint );
+        canvas.drawPath( path, BrushManager.mSectionPaint );
       }
     }
   }
@@ -213,6 +211,7 @@ class DrawingStationName extends DrawingPointPath
     return null;
   }
 
+  // from ICanvasCommand
   @Override
   public void flipXAxis( float z )
   {

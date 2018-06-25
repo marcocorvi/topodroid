@@ -6,7 +6,7 @@
  * @brief TopoDroid drawing: points
  *        type DRAWING_PATH_POINT
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -32,7 +32,7 @@ import java.util.Locale;
  */
 class DrawingPointPath extends DrawingPath
 {
-  private static float toTherion = TDConst.TO_THERION;
+  private static final float toTherion = TDConst.TO_THERION;
 
   static final int SCALE_NONE = -3; // used to force scaling
   static final int SCALE_XS = -2;
@@ -108,7 +108,7 @@ class DrawingPointPath extends DrawingPath
     if ( BrushManager.mPointLib.isSymbolOrientable( type ) ) {
       mOrientation = BrushManager.getPointOrientation(type);
     }
-    setPaint( BrushManager.mPointLib.getSymbolPaint( mPointType ) );
+    setPathPaint( BrushManager.mPointLib.getSymbolPaint( mPointType ) );
     mScale = scale;
     resetPath( 1.0f );
     // Log.v( TopoDroidApp.TAG, "Point cstr " + type + " orientation " + mOrientation );
@@ -149,7 +149,7 @@ class DrawingPointPath extends DrawingPath
       return ret;
 
       // // TODO parse option for "-text"
-      // setPaint( BrushManager.mPointLib.getSymbolPaint( mPointType ) );
+      // setPathPaint( BrushManager.mPointLib.getSymbolPaint( mPointType ) );
       // if ( BrushManager.mPointLib.isSymbolOrientable( mPointType ) ) {
       //   BrushManager.rotateGradPoint( mPointType, mOrientation );
       //   resetPath( 1.0f );
@@ -205,6 +205,7 @@ class DrawingPointPath extends DrawingPath
     bottom *= z;
   }
 
+  // from ICanvasCommand
   @Override
   public void shiftPathBy( float dx, float dy ) 
   {
@@ -221,6 +222,7 @@ class DrawingPointPath extends DrawingPath
     // bottom += dy;
   }
 
+  // from ICanvasCommand
   // FIXME SCALE
   @Override
   public void scalePathBy( float z, Matrix m )
@@ -267,6 +269,17 @@ class DrawingPointPath extends DrawingPath
   }
 
   int getScale() { return mScale; }
+
+  float getScaleValue() // FIX Asenov
+  {
+    switch ( mScale ) {
+      case SCALE_XS: return 0.50f;
+      case SCALE_S:  return 0.72f;
+      case SCALE_L:  return 1.41f;
+      case SCALE_XL: return 2.00f;
+    }
+    return 1;
+  }
       
 
   private void resetPath( float f )
@@ -278,31 +291,31 @@ class DrawingPointPath extends DrawingPath
         m.postRotate( (float)mOrientation );
       }
       switch ( mScale ) {
-        case SCALE_XS: f = 0.50f; break;
-        case SCALE_S:  f = 0.72f; break;
-        case SCALE_L:  f = 1.41f; break;
-        case SCALE_XL: f = 2.00f; break;
+        case SCALE_XS: f *= 0.50f; break;
+        case SCALE_S:  f *= 0.72f; break;
+        case SCALE_L:  f *= 1.41f; break;
+        case SCALE_XL: f *= 2.00f; break;
       }
       m.postScale(f,f);
       makePath( BrushManager.getPointOrigPath( mPointType ), m, cx, cy );
     }
   }
 
-  // public void setPos( float x, float y ) 
+  // void setPos( float x, float y ) 
   // {
   //   setCenter( x, y );
   // }
 
-  // public void setPointType( int t ) { mPointType = t; }
-  public int pointType() { return mPointType; }
+  // void setPointType( int t ) { mPointType = t; }
+  int pointType() { return mPointType; }
 
-  // public double xpos() { return cx; }
-  // public double ypos() { return cy; }
+  // double xpos() { return cx; }
+  // double ypos() { return cy; }
 
-  // public double orientation() { return mOrientation; }
+  // double orientation() { return mOrientation; }
 
   @Override
-  public void setOrientation( double angle ) 
+  void setOrientation( double angle ) 
   { 
     // TDLog.Log( TDLog.LOG_PATH, "Point " + mPointType + " set Orientation " + angle );
     // Log.v( "DistoX", "Point::set Orientation " + angle );
@@ -319,14 +332,14 @@ class DrawingPointPath extends DrawingPath
     mPointText = text;
   }
 
-  public void shiftTo( float x, float y ) // x,y scene coords
+  void shiftTo( float x, float y ) // x,y scene coords
   {
     mPath.offset( x-cx, y-cy );
     setCenter( x, y );
   }
 
   // @Override
-  public void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil )
+  void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil )
   { 
     int size = mScale - SCALE_XS;
     int layer  = BrushManager.getPointCsxLayer( mPointType );
@@ -353,7 +366,7 @@ class DrawingPointPath extends DrawingPath
   }
 
   @Override
-  public String toTherion( )
+  String toTherion( )
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
@@ -421,7 +434,8 @@ class DrawingPointPath extends DrawingPath
       dos.writeUTF( name );
       dos.writeFloat( (float)mOrientation );
       dos.writeInt( mScale );
-      dos.writeUTF( (mPointText != null)? mPointText : "" );
+      // if ( version >= 303066 ) 
+        dos.writeUTF( (mPointText != null)? mPointText : "" );
       dos.writeUTF( (mOptions != null)? mOptions : "" );
       // TDLog.Log( TDLog.LOG_PLOT, "P " + name + " " + cx + " " + cy );
     } catch ( IOException e ) {

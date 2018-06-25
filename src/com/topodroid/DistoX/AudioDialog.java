@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid audio dialog to register a comment for a shot
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -28,17 +28,16 @@ import android.view.View;
 // import android.view.View.OnClickListener;
 // import android.view.Window;
 // import android.view.WindowManager;
-// import android.view.ViewGroup.LayoutParams;
 
 import android.widget.Button;
 // import android.widget.Toast;
 
-public class AudioDialog extends MyDialog
+class AudioDialog extends MyDialog
                          implements View.OnClickListener
 {
-  private static int ACTION_NONE = 0;
-  private static int ACTION_DELETE = 1;
-  private static int ACTION_OVERWRITE = 2;
+  private static final int ACTION_NONE = 0;
+  private static final int ACTION_DELETE = 1;
+  private static final int ACTION_OVERWRITE = 2;
   private int mAction = 0;
 
   private MediaPlayer   mMP;
@@ -51,10 +50,10 @@ public class AudioDialog extends MyDialog
   private Button mBtnConfirm;
   private Button mBtnClose;
 
-  TopoDroidApp mApp;
-  IAudioInserter mParent;
-  private long mBid;
-  private String mFilepath;
+  private final TopoDroidApp mApp;
+  private final IAudioInserter mParent;
+  private final long mBid;
+  private final String mFilepath;
   private boolean hasFile;
   private boolean canRec;
   private boolean canPlay;
@@ -83,9 +82,7 @@ public class AudioDialog extends MyDialog
     LinearLayout layout2 = (LinearLayout) findViewById( R.id.layout2 );
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
     layout2.setMinimumHeight( size + 40 );
-    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
-      LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
-    lp.setMargins( 10, 10, 20, 20 );
+    LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 10, 10, 20, 20 );
 
     // mBtnDelete = (Button) findViewById( R.id.audio_delete );
     mBtnClose = (Button) findViewById( R.id.audio_close );
@@ -175,8 +172,7 @@ public class AudioDialog extends MyDialog
 
   private void deleteAudio()
   {
-    File file = new File( mFilepath );
-    file.delete();
+    TopoDroidUtil.deleteFile( mFilepath );
     TopoDroidApp.mData.deleteAudio( mApp.mSID, mBid );
     if ( mParent != null ) mParent.deletedAudio( mBid );
   }

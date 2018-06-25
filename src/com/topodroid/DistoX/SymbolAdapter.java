@@ -1,11 +1,11 @@
-/** @file SymbolAdapter.java
+/* @file SymbolAdapter.java
  *
  * @author marco corvi
  * @date 
  *
  * @brief TopoDroid 
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -79,7 +79,7 @@ class SymbolAdapter extends ArrayAdapter< EnableSymbol >
 
     ViewHolder holder = null; 
     if ( convertView == null ) {
-      convertView = mLayoutInflater.inflate( R.layout.enable_symbol_x, null );
+      convertView = mLayoutInflater.inflate( R.layout.enable_symbol_x, parent, false );
       holder = new ViewHolder();
       holder.mCheckBox = (CheckBox) convertView.findViewById( R.id.enable_symbol_cb );
       holder.mButton   = (ItemButton) convertView.findViewById( R.id.enable_symbol_bt );

@@ -1,11 +1,11 @@
-/** @file SymbolLineLibrary.java
+/* @file SymbolLineLibrary.java
  *
  * @author marco corvi
  * @date dec 2012
  *
  * @brief TopoDroid drawing: line symbol library
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -49,17 +49,17 @@ class SymbolLineLibrary extends SymbolLibrary
 
   // int size() { return mLine.size(); }
 
-  boolean isStyleStraight( int k ) { return ( k < 0 || k >= mSymbolNr )? true : ((SymbolLine)mSymbols.get(k)).mStyleStraight; }
+  boolean isStyleStraight( int k ) { return ( k < 0 || k >= mSymbolNr ) || ((SymbolLine)mSymbols.get(k)).mStyleStraight; }
 
-  boolean isClosed( int k ) { return ( k < 0 || k >= mSymbolNr )? false : ((SymbolLine)mSymbols.get(k)).mClosed; }
+  boolean isClosed( int k ) { return k >= 0 && k < mSymbolNr && ((SymbolLine)mSymbols.get(k)).mClosed; }
 
   int getStyleX( int k ) { return ( k < 0 || k >= mSymbolNr )? 1 : ((SymbolLine)mSymbols.get(k)).mStyleX; }
 
   String getLineGroup( int k ) { return ( k < 0 || k >= mSymbolNr )? null : ((SymbolLine)mSymbols.get(k)).mGroup; }
 
-  boolean isWall( int k ) { return ( k < 0 || k >= mSymbolNr )? false : "wall".equals(((SymbolLine)mSymbols.get(k)).mGroup); }
+  boolean isWall( int k ) { return k >= 0 && k < mSymbolNr && "wall".equals(((SymbolLine)mSymbols.get(k)).mGroup); }
 
-  boolean hasEffect( int k ) { return ( k < 0  || k >= mSymbolNr )? false : ((SymbolLine)mSymbols.get(k)).mHasEffect; }
+  boolean hasEffect( int k ) { return k >= 0  && k < mSymbolNr && ((SymbolLine)mSymbols.get(k)).mHasEffect; }
 
   Paint getLinePaint( int k, boolean reversed )
   {
@@ -132,7 +132,7 @@ class SymbolLineLibrary extends SymbolLibrary
       // mSymbolNr = mSymbols.size();
       sortSymbolByName( systemNr );
     } else {
-      dir.mkdirs( );
+      if ( ! dir.mkdirs( ) ) TDLog.Error( "mkdir error" );
     }
   }
 

@@ -1,11 +1,11 @@
-/** @file SelectionPoint.java
+/* @file SelectionPoint.java
  *
  * @author marco corvi
  * @date feb 2013
  *
  * @brief a point in the selection set
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */

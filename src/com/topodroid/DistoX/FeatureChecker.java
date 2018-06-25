@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid feature checker
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -59,7 +59,7 @@ class FeatureChecker
 
   /** permissions string codes
    */ 
-  static private String perms[] = {
+  static final private String perms[] = {
       android.Manifest.permission.BLUETOOTH,            // Bluetooth permissions are normal - no need to request at runtime
       android.Manifest.permission.BLUETOOTH_ADMIN,
       // android.Manifest.permission.INTERNET,
@@ -70,28 +70,31 @@ class FeatureChecker
       android.Manifest.permission.RECORD_AUDIO
   };
 
-  static final int NR_PERMS_D = 3;
-  static final int NR_PERMS   = 6;
+  static final private int NR_PERMS_D = 3;
+  static final private int NR_PERMS   = 6;
 
   /** app specific code - for callback in MainWindow
    */
   static final int REQUEST_PERMISSIONS = 1;
 
-  static boolean MustRestart = false; // whether need to restart app
+  private static boolean MustRestart = false; // whether need to restart app
   static boolean GrantedPermission[] = { false, false, false, false, false, false };
 
   static void createPermissions( Context context, Activity activity )
   {
     // TDLog.Log( LOG_PERM, "create permissions" );
     MustRestart = false;
+    // FIXME-23
     if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.M ) return;
     for ( int k=0; k<NR_PERMS; ++k ) { // check whether the app has the six permissions
       GrantedPermission[k] = ( context.checkSelfPermission( perms[k] ) == PackageManager.PERMISSION_GRANTED );
+      // FIXME-23 GrantedPermission[k] = true;
       // Log.v("DistoXX", "FC perm " + k + " granted " + GrantedPermission[k] );
       if ( ! GrantedPermission[k] ) MustRestart = true;
     }
     // Log.v("DistoXX", "FC must restart " + MustRestart );
     if ( MustRestart ) { // if a permission has not been granted request it
+      // FIXME-23
       activity.requestPermissions( perms, REQUEST_PERMISSIONS );
       android.os.Process.killProcess( android.os.Process.myPid() );
       System.exit( 1 );

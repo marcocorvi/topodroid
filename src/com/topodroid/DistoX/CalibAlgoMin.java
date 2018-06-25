@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid DistoX calibration algorithm Error minimization
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  * This software is adapted from TopoLinux implementation,
@@ -84,8 +84,8 @@ class CalibAlgoMin extends CalibAlgo
     // return acos( xh * n ) * 180 / M_PI;
   }
 
-  Vector G( int n ) { return bG.plus( aG.timesV( g[n] ) ); }
-  Vector M( int n ) { return bM.plus( aM.timesV( m[n] ) ); }
+  private Vector G( int n ) { return bG.plus( aG.timesV( g[n] ) ); }
+  private Vector M( int n ) { return bM.plus( aM.timesV( m[n] ) ); }
 
   private float mean_dip()
   {
@@ -481,7 +481,7 @@ class CalibAlgoMin extends CalibAlgo
     return sum;
   }
   
-  Matrix mm()
+  private Matrix mm()
   {
     Matrix sum = new Matrix();
     for (int i=0; i<idx; ++i ) sum.plusEqual( new Matrix( M(i), m[i] ) );
@@ -591,7 +591,7 @@ class CalibAlgoMin extends CalibAlgo
     return sum / idx + gamma * ( dgx2() + dmx2() );
   }
   
-  float error( float dip, float beta, float gamma )
+  private float error( float dip, float beta, float gamma )
   {
     float sum = 0;
     for ( int i=0; i<idx; ++i ) {
@@ -799,7 +799,7 @@ class CalibAlgoMin extends CalibAlgo
       computeBearingAndClinoRad( gr[i], mr[i] );
       Vector v1 = new Vector( b0, c0 );
       float e = v1.minus(vx).Length();
-      if ( errors != null ) errors[i] = (float)e;
+      if ( errors != null ) errors[i] = e;
       // Log.v("DistoX", e + " " + g[i].x + " " + g[i].y + " " + g[i].z );
       mSumCount += 1;
       mSumErrors += e;

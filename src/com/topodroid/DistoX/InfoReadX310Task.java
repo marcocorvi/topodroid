@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid DistoX info X310 read task
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -21,11 +21,11 @@ import android.os.AsyncTask;
 
 class InfoReadX310Task extends AsyncTask<Void, Integer, Boolean>
 {
-  TopoDroidApp   mApp; // FIXME LEAK
-  private DeviceX310InfoDialog  mDialog;
+  private final TopoDroidApp   mApp; // FIXME LEAK
+  private final DeviceX310InfoDialog  mDialog;
   private DeviceX310Info mInfo = null;
   // int mType; // DistoX type
-  String mAddress;
+  private String mAddress;
 
   InfoReadX310Task( TopoDroidApp app, DeviceX310InfoDialog dialog, String address )
   {

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="a3" translatable="false">A3</string>
+  <string name="x310" translatable="false">X310</string>
+  <string name="east" translatable="false">E</string>
+  <string name="north" translatable="false">N</string>
+  <string name="empty" translatable="false"> </string>
+  <string name="zero" translatable="false"> 0 </string>
+  <string name="one" translatable="false"> 1 </string>
+  <string name="four_zero" translatable="false">0000</string>
+  <string name="a3_max" translatable="false">4096</string>
+  <string name="x310_max" translatable="false">1040</string>
+  <string name="size_xs" translatable="false">XS</string>
+  <string name="size_s" translatable="false">S</string>
+  <string name="size_m" translatable="false">M</string>
+  <string name="size_l" translatable="false">L</string>
+  <string name="size_xl" translatable="false">XL</string>
+  <string name="dash" translatable="false">-</string>
+  <string name="plus" translatable="false">+</string>
+  <string name="minus_plus" translatable="false">-/+</string>
+  <string name="arrow_left" translatable="false">&#x21a4;</string>
+  <string name="arrow_right" translatable="false">&#x21a6;</string>
+  <string name="arrow_up" translatable="false">&#x21a5;</string>
+  <string name="arrow_down" translatable="false">&#x21a7;</string>
+  <string name="input_length" translatable="false">&#x2190;&#x2192;</string>
+  <string name="input_azimuth" translatable="false">&#x2191;N</string>
+  <string name="input_clino" translatable="false">/_</string>
+  <string name="less_than" translatable="false">&lt;</string>
+  <string name="greater_than" translatable="false">&gt;</string>
+  <string name="proj4" translatable="false">Proj4</string>
+</resources>

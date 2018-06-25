@@ -1,11 +1,11 @@
-/** @file DrawingAreaDialog.java
+/* @file DrawingAreaDialog.java
  *
  * @author marco corvi
  * @date june 2012
  *
  * @brief TopoDroid sketch line attributes editing dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -29,14 +29,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import android.view.View;
-// import android.view.ViewGroup.LayoutParams;
 
 class DrawingAreaDialog extends MyDialog
                                implements View.OnClickListener, AdapterView.OnItemSelectedListener
 {
-  private DrawingAreaPath mArea;
-  private DrawingWindow mParent;
-  private boolean mOrientable;
+  private final DrawingAreaPath mArea;
+  private final DrawingWindow mParent;
+  private final boolean mOrientable;
 
   private CheckBox mCBvisible;
   // private Spinner mETtype;
@@ -84,9 +83,7 @@ class DrawingAreaDialog extends MyDialog
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
     mBtnReduce = new MyCheckBox( mContext, size, R.drawable.iz_reduce_ok,  R.drawable.iz_reduce_no  );
 
-    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
-      LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
-    lp.setMargins( 0, 10, 20, 10 );
+    LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 0, 10, 20, 10 );
 
     LinearLayout layout3 = (LinearLayout)findViewById( R.id.layout3 );
     layout3.addView( mBtnReduce, lp );

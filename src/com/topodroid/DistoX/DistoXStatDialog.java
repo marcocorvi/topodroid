@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid stats display dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -24,7 +24,6 @@ import android.content.res.Resources;
 // import android.graphics.*;
 import android.view.View;
 // import android.view.View.OnClickListener;
-// import android.view.ViewGroup.LayoutParams;
 
 import android.widget.TextView;
 import android.widget.Button;
@@ -43,6 +42,7 @@ class DistoXStatDialog extends MyDialog
     private TextView mTextOrigin;
     private TextView mTextAzimuth;
     private TextView mTextLength;
+    private TextView mTextExtLen;
     private TextView mTextProjLen;
     private TextView mTextWENS;
     private TextView mTextZminmax;
@@ -86,6 +86,7 @@ class DistoXStatDialog extends MyDialog
         mTextOrigin   = (TextView) findViewById(R.id.text_stat_origin);
         mTextAzimuth  = (TextView) findViewById(R.id.text_stat_azimuth);
         mTextLength   = (TextView) findViewById(R.id.text_stat_length);
+        mTextExtLen   = (TextView) findViewById(R.id.text_stat_extlen);
         mTextProjLen  = (TextView) findViewById(R.id.text_stat_projlen);
         mTextWENS     = (TextView) findViewById(R.id.text_stat_wens);
         mTextZminmax  = (TextView) findViewById(R.id.text_stat_zminmax);
@@ -104,7 +105,7 @@ class DistoXStatDialog extends MyDialog
         mTextAngleErr  = (TextView) findViewById(R.id.text_stat_angle_error);
 
         mTextLeg.setText( String.format( res.getString(R.string.stat_leg),
-                          mStat.countLeg, mStat.lengthLeg * unit, unit_str, mStat.planLength * unit, unit_str ) );
+                          mStat.countLeg, mStat.lengthLeg * unit, mStat.extLength * unit, mStat.planLength * unit, unit_str ) );
         mTextDuplicate.setText( String.format( res.getString(R.string.stat_duplicate),
                           mStat.countDuplicate, mStat.lengthDuplicate * unit, unit_str ) );
         mTextSurface.setText( String.format( res.getString(R.string.stat_surface),
@@ -138,10 +139,9 @@ class DistoXStatDialog extends MyDialog
           mTextAzimuth.setText( String.format( res.getString(R.string.stat_azimuth), mAzimuth ) );
         }
 
-        mTextLength.setText( String.format( res.getString(R.string.stat_length),
-                             mNum.surveyLength() * unit, unit_str ) );
-        mTextProjLen.setText( String.format( res.getString(R.string.stat_projlen),
-                              mNum.surveyProjLen() * unit, unit_str ) );
+        mTextLength.setText( String.format( res.getString(R.string.stat_length), mNum.surveyLength() * unit, unit_str ) );
+        mTextExtLen.setText( String.format( res.getString(R.string.stat_extlen), mNum.surveyExtLen() * unit, unit_str ) );
+        mTextProjLen.setText( String.format( res.getString(R.string.stat_projlen), mNum.surveyProjLen() * unit, unit_str ) );
         mTextWENS.setText( String.format( res.getString(R.string.stat_wens),
                                           mNum.surveyWest()  * unit,
                                           mNum.surveyEast()  * unit,

@@ -1,28 +1,35 @@
-/** @file TDSetting.java
+/* @file TDSetting.java
  *
  * @author marco corvi
  * @date jan 2014
  *
  * @brief TopoDroid application settings (preferenceces)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
 package com.topodroid.DistoX;
 
-import android.os.Build;
+// import android.os.Build;
 import android.content.Context;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-import android.util.Log;
+// import android.util.Log;
 
 class TDSetting
 {
-  static String defaultTextSize = "16";
-  static String defaultButtonSize = "1";
+  private static int SURVEY_STATION_ZERO      = 0;
+  private static int SURVEY_STATION_FOREWARD  = 1;
+  // private static int SURVEY_STATION_BACKWARD  = 2;
+  private static int SURVEY_STATION_BACKSIGHT = 5;
+  private static int SURVEY_STATION_TRIPOD    = 6;
+  private static int SURVEY_STATION_TOPOROBOT = 7;
+
+  static private String defaultTextSize = "16";
+  static private String defaultButtonSize = "1";
 
   static void setTextSize( TopoDroidApp app, int ts )
   {
@@ -30,12 +37,43 @@ class TDSetting
     mTextSize = (int)( ( ds * ts ) );
   }
 
+  // get tentative text size
+  static int getTextSize( TopoDroidApp app, int ts )
+  {
+    float ds = app.getDisplayDensity() / 3.0f;
+    return (int)( ( ds * ts ) );
+  }
+
+  static void setLabelSize( float f )
+  {
+    if ( f >= 1 && f != mLabelSize ) {
+      mLabelSize = f;
+      BrushManager.setTextSizes( );
+    }
+  }
+
+  static void setStationSize( float f )
+  {
+    if ( f >= 1 && f != mStationSize ) {
+      mStationSize = f;
+      BrushManager.setTextSizes( );
+    }
+  }
+
+  static void setDrawingUnit( TopoDroidApp app, float f )
+  {
+    if ( f > 0.1f && f != mUnitIcons ) {
+      mUnitIcons = f;
+      BrushManager.reloadPointLibrary( app, app.getResources() );
+    }
+  }
+
   // ---------------------------------------------------------
   // PREFERENCES KEYS
 
-  final static int NR_PRIMARY_PREFS = 13;
+  final static private int NR_PRIMARY_PREFS = 13;
 
-  static final String[] key = { // prefs keys
+  static final private String[] key = { // prefs keys
     // ------------------------- PRIMARY PREFS
     "DISTOX_EXTRA_BUTTONS",       // Activity Level
     "DISTOX_SIZE_BUTTONS",        // size of buttons (S, N, M, L, XL)
@@ -109,13 +147,14 @@ class TDSetting
     "DISTOX_LINE_ACCURACY",      // Bezier interpolator param:
     "DISTOX_LINE_CORNER",        // Bezier interpolator param:
     "DISTOX_LINE_STYLE",         // line style: 0 bezier, 1 fine, 2 normal, 3 coarse
+    "DISTOX_LINE_CONTINUE",      // default line continuation set
     "DISTOX_DRAWING_UNIT",       // plot unit
     "DISTOX_PICKER_TYPE",        // tool picker: most-recent, list, grid, triple-grid
     "DISTOX_HTHRESHOLD",         // if clino is over thr, H_SECTION is horizontal (has north arrow)
     "DISTOX_STATION_SIZE",       // size of station names [pt]
     "DISTOX_LABEL_SIZE",         // size of labels [pt]
     "DISTOX_LINE_THICKNESS",     // thickness of normal lines (walls are twice)
-    "DISTOX_AUTO_SECTION_PT",    // whther to add section point when tracing a section line
+    "DISTOX_AUTO_SECTION_PT",    // whether to add section point when tracing a section line
     "DISTOX_BACKUP_NUMBER",      // number of plot backups
     "DISTOX_BACKUP_INTERVAL",    // minimum interval between plot backups [60 s]
     "DISTOX_SHARED_XSECTIONS",   // whether at-station X-sections are shared among plots
@@ -136,7 +175,7 @@ class TDSetting
     "DISTOX_SPLAY_EXTEND",       // whether to set L/R extend to LRUD splay shots (Compass, VTopo import)
     "DISTOX_LRUD_VERTICAL",
     "DISTOX_LRUD_HORIZONTAL",
-    "DISTOX_BITMAP_SCALE",       // default bitmap scale
+    "DISTOX_BITMAP_SCALE",       // default bitmap scale PNG
     "DISTOX_BEZIER_STEP",        // max step between interpolating points for bezier in export (cSurvey)
     "DISTOX_THUMBNAIL",          // size of photo thumbnails
     "DISTOX_DOT_RADIUS",         // radius of green dots
@@ -169,7 +208,7 @@ class TDSetting
     "DISTOX_STATION_NAMES",      // station names: 0 alphanumeric, 1 numbers
     "DISTOX_ZOOM_CTRL",          // whether to have zoom-ctrl (no, temp., always)
     "DISTOX_SIDE_DRAG",          // whether to enable side-drag
-    "DISTOX_DXF_SCALE",          // default DXF scale (export)
+    // "DISTOX_DXF_SCALE",          // default DXF scale (export)
     "DISTOX_ACAD_VERSION",
     "DISTOX_BITMAP_BGCOLOR",     // bitmap background color [RGB]
     "DISTOX_SURVEX_EOL",         // survex end of line [either Linux or Windows]
@@ -260,7 +299,7 @@ class TDSetting
   static float mBezierStep  = 0.2f;
   static float getBezierStep() { return ( mBezierStep < 0.1f )? 0.05f : (mBezierStep/2); }
  
-  static float mDxfScale    = 1.0f;
+  // static float mDxfScale    = 1.0f;
   static int mBitmapBgcolor = 0x000000;
 
   static int mAcadVersion = 9;      // AutoCAD version 9, or 13
@@ -303,6 +342,7 @@ class TDSetting
   static int mConnectionMode    = CONN_MODE_BATCH; 
 
   static boolean isConnectionModeBatch() { return mConnectionMode != CONN_MODE_CONTINUOUS; }
+  static boolean isConnectionModeContinuous() { return mConnectionMode == CONN_MODE_CONTINUOUS; }
 
   static boolean mZ6Workaround  = true;
 
@@ -342,6 +382,7 @@ class TDSetting
   static float mHThreshold;         // horizontal plot threshold
   static boolean mDataBackup = false; // whether to export data when shotwindow is closed
   static boolean mDistoXBackshot = false;
+  static int mTitleColor = TDColor.TITLE_NORMAL;
 
   static int mExportShotsFormat = -1; // DISTOX_EXPORT_NONE
   static int mExportPlotFormat  = -1; // DISTOX_EXPORT_NONE
@@ -352,10 +393,10 @@ class TDSetting
   static boolean mKmlStations   = true;
   static boolean mKmlSplays     = false;
 
-  static int     mSurveyStations  = 1;     // automatic survey stations: 0 no, 1 forward-after-splay, 2 backward-after-splay
+  static int     mSurveyStations  = SURVEY_STATION_FOREWARD;     // automatic survey stations: 0 no, 1 forward-after-splay, 2 backward-after-splay
   static boolean mShotAfterSplays = true;  //                            3 forward-before-splay, 4 backward-before-splay
-  static boolean isSurveyForward()  { return (mSurveyStations%2) == 1; }
-  static boolean isSurveyBackward() { return mSurveyStations>0 && (mSurveyStations%2) == 0; }
+  static boolean isSurveyForward()  { return (mSurveyStations%2) == SURVEY_STATION_FOREWARD; }
+  static boolean isSurveyBackward() { return mSurveyStations>0 && (mSurveyStations%2) == SURVEY_STATION_ZERO; }
 
   // static int mScreenTimeout = 60000; // 60 secs
   static int mTimerWait        = 10;    // Acc/Mag timer countdown (secs)
@@ -366,11 +407,11 @@ class TDSetting
   static float   mCloseDistance = 0.05f; 
   static int     mMinNrLegShots = 3;
   static String  mInitStation   = "0";
-  static boolean mBacksight     = false;    // whether to check backsight
+  static boolean mBacksightInput = false;   // whether to add backsight fields in shot anual-input dialog
   static boolean mBacksightShot = false;    // backsight shooting policy
   static boolean mTripodShot    = false;    // tripod shooting policy
   static boolean mTRobotShot    = false;    // TopoRobot shooting policy
-  static boolean mMagAnomaly    = false;    // local magnetic anomaly survey
+  private static boolean mMagAnomaly = false; // local magnetic anomaly survey, tested with doMagAnomaly
   static float   mSplayVertThrs = 80;
   static boolean mAzimuthManual = false;    // whether to manually set extend / or use reference azimuth
   static boolean mDashSplay     = true;     // whether dash-splay are coherent between plan and profile
@@ -411,7 +452,7 @@ class TDSetting
   static int mZoomCtrl = 1;
   static boolean mSideDrag = false;
 
-  static float mUnit = 1.4f; // drawing unit
+  static float mUnitIcons = 1.4f; // drawing unit
 
   // selection_radius = cutoff + closeness / zoom
   static final float mCloseCutoff = 0.01f; // minimum selection radius
@@ -432,16 +473,17 @@ class TDSetting
   static int mRecentNr    = 4;        // nr. most recent symbols
 
   static final int LINE_STYLE_BEZIER = 0;  // drawing line styles
-  static final int LINE_STYLE_ONE    = 1;
-  static final int LINE_STYLE_TWO    = 2;
-  static final int LINE_STYLE_THREE  = 3;
-  static final String LINE_STYLE     = "2";     // LINE_STYLE_TWO NORMAL
+  static final private int LINE_STYLE_ONE    = 1;
+  static final private int LINE_STYLE_TWO    = 2;
+  static final private int LINE_STYLE_THREE  = 3;
+  static final private String LINE_STYLE     = "2";     // LINE_STYLE_TWO NORMAL
   static int   mLineStyle = LINE_STYLE_BEZIER;    
   static int   mLineType;        // line type:  1       1     2    3
   static int   mLineSegment   = 10;
   static int   mLineSegment2  = 100;   // square of mLineSegment
   static float mLineAccuracy  = 1f;
   static float mLineCorner    = 20;    // corner threshold
+  static int   mContinueLine  = DrawingWindow.CONT_NONE; // 0
 
   static float mStationSize    = 20;   // size of station names [pt]
   static float mLabelSize      = 24;   // size of labels [pt]
@@ -513,14 +555,27 @@ class TDSetting
     } catch ( NumberFormatException e ) { }
   }
 
-  static private void setMagAnomaly( boolean val )
+  static private void setMagAnomaly( SharedPreferences prefs, boolean val )
   {
     mMagAnomaly = val;
-    if ( mMagAnomaly && mSurveyStations > 0 ) {
-      mBacksightShot   = true;
-      mTripodShot      = false;
-      mSurveyStations  = 1;
-      mShotAfterSplays = true;
+    if ( mMagAnomaly ) {
+      if ( ! TDLevel.overExpert ) { 
+        setPreference( prefs, "DISTOX_MAG_ANOMALY", false );
+      } else if ( mSurveyStations > 0 ) {
+        setPreference( prefs, "DISTOX_SURVEY_STATION", "5" ); // SURVEY_STATION_BACKSIGHT
+        mBacksightShot   = true;
+        mTripodShot      = false;
+        mSurveyStations  = SURVEY_STATION_FOREWARD;
+        mShotAfterSplays = true;
+      }
+    }
+  }
+
+  static private void clearMagAnomaly( SharedPreferences prefs ) 
+  {
+    if ( mMagAnomaly ) {
+      mMagAnomaly = false;
+      setPreference( prefs, "DISTOX_MAG_ANOMALY", false );
     }
   }
 
@@ -645,7 +700,7 @@ class TDSetting
     }
   }
 
-  static private boolean setSizeButtons( TopoDroidApp app, int size )
+  static boolean setSizeButtons( TopoDroidApp app, int size )
   {
     int sz = mSizeBtns;
     switch ( size ) {
@@ -663,6 +718,20 @@ class TDSetting
       return true;
     }
     return false;
+  }
+
+  // get tentative size of buttons
+  static int getSizeButtons( TopoDroidApp app, int size )
+  {
+    int sz = mSizeBtns;
+    switch ( size ) {
+      case 0: sz = BTN_SIZE_SMALL;  break;
+      case 1: sz = BTN_SIZE_NORMAL; break;
+      case 3: sz = BTN_SIZE_MEDIUM; break;
+      case 4: sz = BTN_SIZE_LARGE;  break;
+      case 2: sz = BTN_SIZE_HUGE;   break;
+    }
+    return (int)( sz * app.getDisplayDensity() * 0.86f );
   }
 
   static void loadPrimaryPreferences( TopoDroidApp app, SharedPreferences prefs )
@@ -702,7 +771,7 @@ class TDSetting
 
   static void loadSecondaryPreferences( TopoDroidApp app, SharedPreferences prefs )
   {
-    int k = NR_PRIMARY_PREFS;;
+    int k = NR_PRIMARY_PREFS;
 
     // ------------------- DEVICE PREFERENCES
     mSockType       = tryInt( prefs, key[k++], mDefaultSockStrType );        // DISTOX_SOCK_TYPE choice: 0, 1, (2, 3)
@@ -724,7 +793,7 @@ class TDSetting
     mExtendThr     = tryFloat( prefs, key[k++], "10"   ); // DISTOX_EXTEND_THR2
     mVThreshold    = tryFloat( prefs, key[k++], "80"   ); // DISTOX_VTHRESHOLD
 
-    parseSurveyStations( prefs.getString( key[k++], "1" ) ); // DISTOX_SURVEY_STATIONS
+    parseSurveyStations( prefs, prefs.getString( key[k++], "1" ) ); // DISTOX_SURVEY_STATIONS
     mDataBackup    = prefs.getBoolean( key[k++], false ); // DISTOX_DATA_BACKUP
 
     if ( prefs.getString( key[k++], UNIT_LENGTH ).equals(UNIT_LENGTH) ) {
@@ -782,7 +851,8 @@ class TDSetting
     mLineAccuracy  = tryFloat( prefs, key[k++], "1" );              // DISTOX_LINE_ACCURACY
     mLineCorner    = tryFloat( prefs, key[k++], "20"  );            // DISTOX_LINE_CORNER
     setLineStyleAndType( prefs.getString( key[k++], LINE_STYLE ) ); // DISTOX_LINE_STYLE
-    mUnit          = tryFloat( prefs, key[k++], "1.4" );            // DISTOX_DRAWING_UNIT 
+    mContinueLine  = tryInt(   prefs, key[k++], "0" );              // DISTOX_LINE_CONTINUE
+    mUnitIcons     = tryFloat( prefs, key[k++], "1.4" );            // DISTOX_DRAWING_UNIT 
     mPickerType    = tryInt(   prefs, key[k++], "0" );              // DISTOX_PICKER_TYPE choice: 0, 1, 2
     mHThreshold    = tryFloat( prefs, key[k++], "70" );             // DISTOX_HTHRESHOLD
     mStationSize   = tryFloat( prefs, key[k++], "20" );             // DISTOX_STATION_SIZE
@@ -834,8 +904,8 @@ class TDSetting
     mKmlSplays         = prefs.getBoolean( key[k++], false ); // DISTOX_KML_SPLAYS
     mSplayVertThrs     = tryFloat( prefs, key[k++], "80"  );  // DISTOX_SPLAY_VERT_THRS
 
-    mBacksight     = prefs.getBoolean( key[k++], false );   // DISTOX_BACKSIGHT
-    setMagAnomaly(   prefs.getBoolean( key[k++], false ) ); // DISTOX_MAG_ANOMALY
+    mBacksightInput = prefs.getBoolean( key[k++], false );   // DISTOX_BACKSIGHT
+    setMagAnomaly( prefs, prefs.getBoolean( key[k++], false ) ); // DISTOX_MAG_ANOMALY
 
     mDashSplay = prefs.getBoolean( key[k++], true );              // DISTOX_DASH_SPLAY
     mVertSplay = tryFloat( prefs, key[k++], "50" );               // DISTOX_VERT_SPLAY
@@ -850,7 +920,7 @@ class TDSetting
     setZoomControls( prefs.getString( key[k++], "1"), FeatureChecker.checkMultitouch(app) ); // DISTOX_ZOOM_CTRL
     mSideDrag = prefs.getBoolean( key[k++], false );          // DISTOX_SIDE_DRAG
 
-    mDxfScale    = tryFloat( prefs, key[k++], "1.0" );        // DISTOX_DXF_SCALE
+    // mDxfScale    = tryFloat( prefs, key[k++], "1.0" );        // DISTOX_DXF_SCALE
     mAcadVersion = tryInt(   prefs, key[k++], "9" );          // DISTOX_ACAD_VERSION choice: 9, 13
 
     setBitmapBgcolor( prefs.getString( key[k++], "0 0 0" ) ); // DISTOX_BITMAP_BGCOLOR
@@ -896,10 +966,12 @@ class TDSetting
   static private void setActivityBooleans( Context ctx, int level )
   {
     TDLevel.setLevel( ctx, level );
-    if ( ! TDLevel.overExpert ) {
-      mMagAnomaly = false;
-    }
+    // if ( ! TDLevel.overExpert ) {
+    //   mMagAnomaly = false; // magnetic anomaly compensation requires level overExpert
+    // }
   }
+
+  static boolean doMagAnomaly() { return mMagAnomaly && TDLevel.overExpert; }
 
   static void checkPreference( SharedPreferences prefs, String k, MainWindow main_window, TopoDroidApp app )
   {
@@ -935,7 +1007,7 @@ class TDSetting
       mLocalManPages = handleLocalUserMan( prefs.getString( k, "0" ), true, app );      // DISTOX_LOCAL_MAN
     } else if ( k.equals( key[ nk++ ] ) ) {
       boolean co_survey = prefs.getBoolean( k, false );  // DISTOX_COSURVEY
-      if ( co_survey != app.mCoSurveyServer ) {
+      if ( co_survey != TopoDroidApp.mCoSurveyServer ) {
         app.setCoSurvey( co_survey ); // set flag and start/stop server
       }
     } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_INIT_STATION
@@ -991,7 +1063,7 @@ class TDSetting
     } else if ( k.equals( key[ nk++ ] ) ) {
       mVThreshold    = tryFloat( prefs, k, "80" );   // DISTOX_VTHRESHOLD
     } else if ( k.equals( key[ nk++ ] ) ) {
-      parseSurveyStations( prefs.getString( k, "1" ) ); // DISTOX_SURVEY_STATION
+      parseSurveyStations( prefs, prefs.getString( k, "1" ) ); // DISTOX_SURVEY_STATION
     } else if ( k.equals( key[ nk++ ] ) ) {
       mDataBackup = prefs.getBoolean( k, false );      // DISTOX_DATA_BACKUP
     } else if ( k.equals( key[ nk++ ] ) ) {
@@ -1081,13 +1153,11 @@ class TDSetting
       mLineCorner   = tryFloat( prefs, k, "20" );
     } else if ( k.equals( key[ nk++ ] ) ) {                      // DISTOX_LINE_STYLE
       setLineStyleAndType( prefs.getString( k, LINE_STYLE ) );
+    } else if ( k.equals( key[ nk++ ] ) ) {                      // DISTOX_LINE_CONTINUE
+      mContinueLine  = tryInt( prefs, k, "0" );
     } else if ( k.equals( key[ nk++ ] ) ) {                      // DISTOX_DRAWING_UNIT
       try {
-        f = Float.parseFloat( prefs.getString( k, "1.4" ) );
-        if ( f > 0 && f != mUnit ) {
-          mUnit = f;
-          BrushManager.reloadPointLibrary( app, app.getResources() );
-        }
+        setDrawingUnit( app, Float.parseFloat( prefs.getString( k, "1.4" ) ) );
       } catch ( NumberFormatException e ) { }
     } else if ( k.equals( key[ nk++ ] ) ) {                          // DISTOX_PICKER_TYPE
       mPickerType = tryInt(   prefs, k, "0" );
@@ -1095,19 +1165,11 @@ class TDSetting
       mHThreshold = tryFloat( prefs, k, "70" );  // DISTOX_HTHRESHOLD
     } else if ( k.equals( key[ nk++ ] ) ) {
       try {
-        f = Float.parseFloat( prefs.getString( k, "20" ) ); // DISTOX_STATION_SIZE
-        if ( f >= 1 && f != mStationSize ) {
-          mStationSize = f;
-          BrushManager.setTextSizes( );
-        }
+        setStationSize( Float.parseFloat( prefs.getString( k, "20" ) ) ); // DISTOX_STATION_SIZE
       } catch ( NumberFormatException e ) { }
     } else if ( k.equals( key[ nk++ ] ) ) {
       try {
-        f = Float.parseFloat( prefs.getString( k, "24" ) ); // DISTOX_LABEL_SIZE
-        if ( f >= 1 && f != mLabelSize ) {
-          mLabelSize = f;
-          BrushManager.setTextSizes( );
-        }
+        setLabelSize( Float.parseFloat( prefs.getString( k, "24" ) ) ); // DISTOX_LABEL_SIZE
       } catch ( NumberFormatException e ) { }
       // FIXME changing label size affects only new labels
       //       not existing labels (until they are edited)
@@ -1204,9 +1266,9 @@ class TDSetting
     } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_SPLAY_VERT_THRS
       mSplayVertThrs = tryFloat( prefs, k, "80" );
     } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_BACKSIGHT
-      mBacksight = prefs.getBoolean( k, false );
+      mBacksightInput = prefs.getBoolean( k, false );
     } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_MAG_ANOMALY
-      setMagAnomaly( prefs.getBoolean( k, false ) );
+      setMagAnomaly( prefs, prefs.getBoolean( k, false ) );
     } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_DASH_SPLAY
       mDashSplay = prefs.getBoolean( k, true );      
     } else if ( k.equals( key[ nk++ ] ) ) {
@@ -1225,8 +1287,8 @@ class TDSetting
       setZoomControls( prefs.getString( k, "1"), FeatureChecker.checkMultitouch(app) ); // DISTOX_ZOOM_CTRL
     } else if ( k.equals( key[ nk++ ] ) ) {
       mSideDrag = prefs.getBoolean( k, false ); // DISTOX_SIDE_DRAG
-    } else if ( k.equals( key[ nk++ ] ) ) {
-      mDxfScale = tryFloat( prefs, k, "1" );   // DISTOX_DXF_SCALE
+    // } else if ( k.equals( key[ nk++ ] ) ) {
+    //   mDxfScale = tryFloat( prefs, k, "1" );   // DISTOX_DXF_SCALE
     } else if ( k.equals( key[ nk++ ] ) ) {
       try {
         mAcadVersion = Integer.parseInt( prefs.getString( k, "9") ); // DISTOX_ACAD_VERSION
@@ -1309,11 +1371,11 @@ class TDSetting
     mLineStyle = LINE_STYLE_BEZIER; // default
     mLineType  = 1;
     if ( style.equals( "0" ) ) {
-      mLineStyle = LINE_STYLE_BEZIER;
-      mLineType  = 1;
+      mLineStyle = LINE_STYLE_BEZIER; // already assigned
+      mLineType  = 1;                 // alreday assigned
     } else if ( style.equals( "1" ) ) {
       mLineStyle = LINE_STYLE_ONE;
-      mLineType  = 1;
+      mLineType  = 1;                 // already assignd
     } else if ( style.equals( "2" ) ) {
       mLineStyle = LINE_STYLE_TWO;
       mLineType  = 2;
@@ -1323,12 +1385,12 @@ class TDSetting
     }
   }
 
-  private static void parseSurveyStations( String str ) 
+  private static void parseSurveyStations( SharedPreferences prefs, String str ) 
   {
     try {
       mSurveyStations = Integer.parseInt( str );
     } catch ( NumberFormatException e ) {
-      mSurveyStations = 1;
+      mSurveyStations = SURVEY_STATION_FOREWARD;
     }
     // Log.v("DistoX", "survey stations " + mSurveyStations + " <" + str + ">" );
     /* defaults */
@@ -1336,20 +1398,26 @@ class TDSetting
     mBacksightShot   = false;
     mTripodShot      = false;
     mShotAfterSplays = true;
-    if ( mSurveyStations == 7 ) {  // TOPOROBOT
+    mTitleColor      = TDColor.TITLE_NORMAL;
+    if ( mSurveyStations == SURVEY_STATION_TOPOROBOT ) {
       mTRobotShot = true;
-      mSurveyStations  = 1;
-      // FIXME Toast.makeToast( mContext, "WARNING TopoRobot policy is experimental", Toast.LENGTH_LONG).show();
-    } else if ( mSurveyStations == 6 ) {  // TRIPOD
+      mSurveyStations  = SURVEY_STATION_FOREWARD;
+      mTitleColor = TDColor.TITLE_TOPOROBOT;
+      // FIXME TDToast.make( mContext, R.string.toporobot_warning );
+    } else if ( mSurveyStations == SURVEY_STATION_TRIPOD ) {
       mTripodShot = true;
-      mSurveyStations  = 1;
-    } else if ( mSurveyStations == 5 ) { // BACKSIGHT
+      mSurveyStations  = SURVEY_STATION_FOREWARD;
+      mTitleColor = TDColor.TITLE_TRIPOD;
+    } else if ( mSurveyStations == SURVEY_STATION_BACKSIGHT ) {
       mBacksightShot = true;
-      mSurveyStations  = 1;
+      mSurveyStations  = SURVEY_STATION_FOREWARD;
+      mTitleColor = TDColor.TITLE_BACKSIGHT;
     } else {
       mShotAfterSplays = ( mSurveyStations <= 2 );
       if ( mSurveyStations > 2 ) mSurveyStations -= 2;
+      if ( mSurveyStations == SURVEY_STATION_FOREWARD ) mTitleColor = TDColor.TITLE_BACKSHOT;
     }
+    if ( ! mBacksightShot ) clearMagAnomaly( prefs );
     // Log.v("DistoX", "mSurveyStations " + mSurveyStations + " mShotAfterSplays " + mShotAfterSplays );
   }
 
@@ -1365,7 +1433,16 @@ class TDSetting
   {
     Editor editor = sp.edit();
     editor.putString( name, value );
-    editor.apply(); // was editor.commit();
+    editor.apply(); 
+    // FIXME-23 editor.commit();
+  }
+
+  static private void setPreference( SharedPreferences sp, String name, boolean value )
+  {
+    Editor editor = sp.edit();
+    editor.putBoolean( name, value );
+    editor.apply(); 
+    // FIXME-23 editor.commit();
   }
 
   // static void setPreference( SharedPreferences sp, String name, int val )
@@ -1492,6 +1569,7 @@ class TDSetting
     if ( name.equals( "DISTOX_LINE_ACCURACY"  ) ) return parseFloatValue( value, mLineAccuracy, 0.1f );
     if ( name.equals( "DISTOX_LINE_CORNER"    ) ) return parseFloatValue( value, mLineCorner,   0.1f );
     // if ( name.equals( "DISTOX_LINE_STYLE" ) 
+    // if ( name.equals( "DISTOX_LINE_CONTINUE" ) 
     // if ( name.equals( "DISTOX_DRAWING_UNIT" )
     // if ( name.equals( "DISTOX_PICKER_TYPE" )
     if ( name.equals( "DISTOX_HTHRESHOLD"     ) ) return parseFloatValue( value, mHThreshold,    0, 90 );
@@ -1521,7 +1599,7 @@ class TDSetting
 
     //B if ( name.equals( "DISTOX_AUTO_RECONNECT" )
     //B if ( name.equals( "DISTOX_HEAD_TAIL" )
-    if ( name.equals( "DISTOX_BITMAP_SCALE"     ) ) return parseFloatValue( value, mBitmapScale,    0.5f, 10f );
+    if ( name.equals( "DISTOX_BITMAP_SCALE"     ) ) return parseFloatValue( value, mBitmapScale,    0.5f, 100f );
     if ( name.equals( "DISTOX_BEZIER_STEP"      ) ) return parseFloatValue( value, mBezierStep,     0f,   2f ); // N.B. 0 = disable Bezier Step
     if ( name.equals( "DISTOX_THUMBNAIL"        ) ) return parseIntValue(   value, mThumbSize,      80,   400 );
     if ( name.equals( "DISTOX_DOT_RADIUS"       ) ) return parseFloatValue( value, mDotRadius,      1,    100 );
@@ -1556,7 +1634,7 @@ class TDSetting
     //C if ( name.equals( "DISTOX_ZOOM_CTRL" )
     //B if ( name.equals( "DISTOX_SIDE_DRAG" )
     //B if ( name.equals( "DISTOX_MKEYBOARD" )
-    if ( name.equals( "DISTOX_DXF_SCALE"    ) ) return parseFloatValue( value, mDxfScale, 0.1f, 10f );
+    // if ( name.equals( "DISTOX_DXF_SCALE"    ) ) return parseFloatValue( value, mDxfScale, 0.1f, 10f );
     //C if ( name.equals( "DISTOX_ACAD_VERSION" )
     //X if ( name.equals( "DISTOX_BITMAP_BGCOLOR" )
     //B if ( name.equals( "DISTOX_AUTO_PAIR" )
@@ -1599,18 +1677,18 @@ class TDSetting
     int idx = Integer.parseInt( man ); // no throw
     if ( idx > 0 && idx < 5 ) { 
       if ( download && FeatureChecker.checkInternet( app ) ) { // download user manual 
-	int[] res = { 
-	  0,
-	  R.string.user_man_fr,
-	  R.string.user_man_es,
-	  R.string.user_man_it,
-	  R.string.user_man_ru
-	};
+       	int[] res = {
+	         0,
+	         R.string.user_man_fr,
+	         R.string.user_man_es,
+	         R.string.user_man_it,
+	         R.string.user_man_ru
+	       };
         String url = app.getResources().getString( res[idx] );
-	if ( url != null && url.length() > 0 ) {
+       	if ( url != null && url.length() > 0 ) {
           // try do download the zip
           (new UserManDownload( app, url )).execute();
-	}
+	       }
       }
       return true;
     }

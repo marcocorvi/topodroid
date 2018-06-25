@@ -12,14 +12,40 @@
     android:layout_height="fill_parent" 
     android:text="@string/title_coverage"
     / -->
-
-  <ImageView android:id="@+id/coverage_image"
-    android:layout_marginTop="@dimen/margintiny"
-    android:layout_width="wrap_content"
+  <GridLayout 
+    android:layout_width="wrap_content" 
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/marginv"
-    android:contentDescription="@string/angle_distribution"
-  />
+    android:rowCount="2"
+    android:columnCount="2"
+    android:orientation="horizontal"
+    >
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:text="@string/UP"
+      />
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:text="@string/DOWN"
+      />
+    <ImageView android:id="@+id/coverage_image_up"
+      android:layout_marginTop="@dimen/margintiny"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/marginv"
+      android:contentDescription="@string/angle_distribution"
+      />
+    <ImageView android:id="@+id/coverage_image_down"
+      android:layout_marginTop="@dimen/margintiny"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/marginv"
+      android:contentDescription="@string/angle_distribution"
+      />
+  </GridLayout>
 
   <TextView android:id="@+id/coverage_value"
     android:layout_marginTop="@dimen/margintiny"

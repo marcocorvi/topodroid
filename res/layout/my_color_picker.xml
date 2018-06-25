@@ -20,20 +20,19 @@
       android:gravity="right"
       android:layout_marginTop="@dimen/marginvbig" 
       >
-      <Button android:id="@+id/btn_ok"
+      <Button android:id="@+id/btn_close"
         android:layout_marginRight="@dimen/marginh" 
         style="@style/button_default"
-        android:text="@string/button_ok"
+        android:text="@string/button_close"
       />
       <Button android:id="@+id/btn_clear"
         android:layout_marginRight="@dimen/marginh" 
         style="@style/button_default"
         android:text="@string/button_clear"
       />
-      <Button android:id="@+id/btn_close"
-        android:layout_marginRight="@dimen/marginh" 
+      <Button android:id="@+id/btn_ok"
         style="@style/button_default"
-        android:text="@string/button_close"
+        android:text="@string/button_ok"
       />
     </LinearLayout>
    					  

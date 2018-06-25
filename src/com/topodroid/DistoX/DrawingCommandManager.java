@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid drawing: commands manager
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -113,14 +113,14 @@ class DrawingCommandManager
     synchronized( mSplaysStack ) {
       for ( DrawingPath path : mSplaysStack ) {
         if ( app.hasHighlightedId( path.mBlock.mId ) ) { 
-          path.setPaint( BrushManager.errorPaint );
+          path.setPathPaint( BrushManager.errorPaint );
         }
       }
     }
     synchronized( mLegsStack ) {
       for ( DrawingPath path : mLegsStack ) {
         if ( app.hasHighlightedId( path.mBlock.mId ) ) { 
-          path.setPaint( BrushManager.errorPaint );
+          path.setPathPaint( BrushManager.errorPaint );
         }
       }
     }
@@ -182,7 +182,8 @@ class DrawingCommandManager
     }
   }
 
-  void flipXAxis( float z )
+  // from ICanvasCommand
+  public void flipXAxis( float z )
   {
     synchronized( mGridStack1 ) {
       flipXAxes( mGridStack1 );
@@ -446,6 +447,7 @@ class DrawingCommandManager
   //   if ( ! PlotInfo.isSketch2d( plot_type ) ) return null;
   //   boolean legs   = (mDisplayMode & DisplayMode.DISPLAY_LEG) != 0;
   //   boolean splays = (mDisplayMode & DisplayMode.DISPLAY_SPLAY) != 0;
+  //   boolean latest = (mDisplayMode & DisplayMode.DISPLAY_LATEST) != 0;
   //   if ( mHighlight.size() == 1 ) {
   //     return mHighlight.get(0).mBlock;
   //   }
@@ -554,7 +556,7 @@ class DrawingCommandManager
   {
     SelectionSet sel = new SelectionSet();
     float erase_radius = TDSetting.mCloseCutoff + erase_size / zoom;
-    mSelection.selectAt( sel, x, y, erase_radius, Drawing.FILTER_ALL, false, false, false );
+    mSelection.selectAt( sel, x, y, erase_radius, Drawing.FILTER_ALL, false, false, false, null, null );
     int ret = 0;
     if ( sel.size() > 0 ) {
       synchronized( mCurrentStack ) {
@@ -563,8 +565,12 @@ class DrawingCommandManager
           if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
             if ( erase_mode == Drawing.FILTER_ALL || erase_mode == Drawing.FILTER_LINE ) {
               DrawingLinePath line = (DrawingLinePath)path;
-              // ArrayList< LinePoint > points = line.mPoints;
-              // int size = points.size();
+	      if ( line.mLineType == BrushManager.mLineLib.mLineSectionIndex ) {
+		// do not erase section lines 2018-06-22
+		// deleting a section line should call DrawingWindow.deleteLine()
+		// deleteSectionLine( line );
+                continue;
+              }
               LinePoint first = line.mFirst;
               LinePoint last  = line.mLast;
               int size = line.size();
@@ -697,24 +703,10 @@ class DrawingCommandManager
 
   void splitLine( DrawingLinePath line, LinePoint lp )
   {
-    if ( lp == null ) {
-      return;
-    }
-    // if ( lp == line.mPoints.get(0) ) 
-    if ( lp == line.mFirst )
-    {
-      return; // cannot split at first point
-    }
-    // int size = line.mPoints.size();
+    if ( lp == null ) return;
+    if ( lp == line.mFirst || lp == line.mLast ) return; // cannot split at first and last point
     int size = line.size();
-    if ( size == 2 ) {
-      return;
-    }
-    // if ( lp == line.mPoints.get(size-1) ) 
-    if ( lp == line.mLast ) 
-    {
-      return; // cannot split at last point
-    }
+    if ( size == 2 ) return;
     clearSelected();
 
     DrawingLinePath line1 = new DrawingLinePath( line.mLineType );
@@ -737,17 +729,6 @@ class DrawingCommandManager
   // called from synchronized( mCurrentStack )
   private void doRemoveLinePoint( DrawingPointLinePath line, LinePoint point, SelectionPoint sp )
   {
-    // int size = line.mPoints.size();
-    // for ( int k=0; k<size; ++k ) {
-    //   LinePoint lp = line.mPoints.get( k );
-    //   if ( lp == point ) {
-    //     line.mPoints.remove( k );
-    //     mSelection.mPoints.remove( sp );
-    //     return;
-    //   }
-    // }
-
-    //line.mPoints.remove( point );
     line.remove( point );
     if ( sp != null ) { // sp can be null 
       synchronized( TDPath.mSelectionLock ) {
@@ -760,17 +741,13 @@ class DrawingCommandManager
   boolean removeLinePoint( DrawingPointLinePath line, LinePoint point, SelectionPoint sp )
   {
     if ( point == null ) return false;
-    // int size = line.mPoints.size();
     int size = line.size();
     if ( size <= 2 ) return false;
     synchronized( TDPath.mSelectionLock ) { clearSelected(); }
-    // for ( int k=0; k<size; ++k ) 
     for ( LinePoint lp = line.mFirst; lp != null; lp = lp.mNext ) 
     {
-      // LinePoint lp = line.mPoints.get( k );
       if ( lp == point ) {
         synchronized( mCurrentStack ) {
-          // line.mPoints.remove( k );
           line.remove( point );
           synchronized( TDPath.mSelectionLock ) {
             mSelection.removePoint( sp );
@@ -860,6 +837,7 @@ class DrawingCommandManager
     if ( eraseCmd != null ) eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
   }
 
+  // deleting a section line automatically deletes the associated section point(s)
   void deleteSectionLine( DrawingPath line, String scrap, EraseCommand cmd )
   {
     synchronized( mCurrentStack ) {
@@ -958,7 +936,7 @@ class DrawingCommandManager
         while ( i.hasNext() ){
           final DrawingPath path = (DrawingPath) i.next();
           if ( path.mBlock == null || ( ! path.mBlock.mMultiBad ) ) {
-            path.setPaint( paint );
+            path.setPathPaint( paint );
           }
         }
       }
@@ -969,7 +947,7 @@ class DrawingCommandManager
         while ( i.hasNext() ){
           final DrawingPath path = (DrawingPath) i.next();
           if ( path.mBlock == null || ( ! path.mBlock.mMultiBad ) ) {
-            // path.setPaint( paint );
+            // path.setPathPaint( paint );
 	    if ( TDSetting.mDashSplay || profile ) {
               DrawingWindow.setSplayPaintClino( path, path.mBlock );
 	    } else {
@@ -1068,7 +1046,7 @@ class DrawingCommandManager
   {
     // Log.v("DistoX", "add user station " + path.mName );
     synchronized( mUserStations ) {
-      mUserStations.add( (DrawingStationPath)path );
+      mUserStations.add( path );
     }
   }
 
@@ -1420,17 +1398,21 @@ class DrawingCommandManager
     // checkLines();
   }
 
-  private boolean showStationSplays( DrawingPath p, ArrayList<String> splay_stations ) 
+  // check whether an array of stations name contains the FROM station of the path's block
+  // used to decide whether to display splays
+  // @param p         drawing path 
+  // @param stations  array of station names
+  private boolean containsStation( DrawingPath p, ArrayList<String> stations ) 
   {
     DBlock blk = p.mBlock;
     if ( blk == null ) return false;
     String station = blk.mFrom;
     if ( station == null || station.length() == 0 ) return false;
-    return splay_stations.contains( station );
+    return stations.contains( station );
   }
 
   // N.B. doneHandler is not used
-  void executeAll( Canvas canvas, float zoom, ArrayList<String> splay_stations )
+  void executeAll( Canvas canvas, float zoom, ArrayList<String> splays_on, ArrayList<String> splays_off )
   {
     if ( canvas == null ) {
       TDLog.Error( "drawing executeAll: null canvas");
@@ -1439,10 +1421,11 @@ class DrawingCommandManager
 
     boolean legs     = (mDisplayMode & DisplayMode.DISPLAY_LEG     ) != 0;
     boolean splays   = (mDisplayMode & DisplayMode.DISPLAY_SPLAY   ) != 0;
+    boolean latest   = (mDisplayMode & DisplayMode.DISPLAY_LATEST  ) != 0;
     boolean stations = (mDisplayMode & DisplayMode.DISPLAY_STATION ) != 0;
     boolean grids    = (mDisplayMode & DisplayMode.DISPLAY_GRID    ) != 0;
     boolean outline  = (mDisplayMode & DisplayMode.DISPLAY_OUTLINE ) != 0;
-    boolean scaleRef = (mDisplayMode & DisplayMode.DISPLAY_SCALE_REF ) != 0;
+    boolean scaleRef = (mDisplayMode & DisplayMode.DISPLAY_SCALEBAR ) != 0;
 
     boolean spoints   = false;
     boolean slines    = false;
@@ -1511,15 +1494,21 @@ class DrawingCommandManager
       }
     }
 
-    if ( mSplaysStack != null && ( splays || splay_stations.size() > 0 ) ) {
+    if ( mSplaysStack != null ) {
       synchronized( mSplaysStack ) {
-        final Iterator i = mSplaysStack.iterator();
-        while ( i.hasNext() ){
-          final DrawingPath path = (DrawingPath) i.next();
-          if ( splays || showStationSplays( path, splay_stations ) ) {
-            path.draw( canvas, mMatrix, mScale, mBBox );
-          }
-        }
+        if ( splays ) { // draw all splays except the splays-off
+          final Iterator i = mSplaysStack.iterator();
+          while ( i.hasNext() ){
+            final DrawingPath path = (DrawingPath) i.next();
+	    if ( ! containsStation( path, splays_off ) ) path.draw( canvas, mMatrix, mScale, mBBox );
+	  }
+	} else if ( latest || splays_on.size() > 0 ) { // draw the splays-on and/or the lastest
+          final Iterator i = mSplaysStack.iterator();
+          while ( i.hasNext() ){
+            final DrawingPath path = (DrawingPath) i.next();
+            if ( containsStation( path, splays_on ) || path.isBlockRecent() ) path.draw( canvas, mMatrix, mScale, mBBox );
+	  }
+	}
       }
     }
     if ( mScrap != null && mScrap.size() > 0 ) {
@@ -1543,7 +1532,9 @@ class DrawingCommandManager
  
     if ( stations && mStations != null ) {  
       synchronized( mStations ) {
-        for ( DrawingStationName st : mStations ) {
+        final Iterator i = mStations.iterator();
+        while ( i.hasNext() ){
+          final DrawingStationName st = (DrawingStationName) i.next();
           st.draw( canvas, mMatrix, mScale, mBBox );
         }
       }
@@ -1574,13 +1565,13 @@ class DrawingCommandManager
               DrawingPath path = (DrawingPath)cmd;
               if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
                 DrawingLinePath line = (DrawingLinePath)path;
-                if ( line.mLineType == BrushManager.mLineLib.mLineSectionIndex ) { // add tick to section-lines
+                if ( line.mLineType == BrushManager.mLineLib.mLineSectionIndex ) { // add direction-tick to section-lines
                   LinePoint lp = line.mFirst;
                   Path path1 = new Path();
                   path1.moveTo( lp.x, lp.y );
-                  path1.lineTo( lp.x+line.mDx*10, lp.y+line.mDy*10 );
+                  path1.lineTo( lp.x+line.mDx*TDSetting.mArrowLength, lp.y+line.mDy*TDSetting.mArrowLength );
                   path1.transform( mMatrix );
-                  canvas.drawPath( path1, BrushManager.mStationSymbol.mPaint );
+                  canvas.drawPath( path1, BrushManager.mSectionPaint );
                 }
               }
             }
@@ -1609,8 +1600,16 @@ class DrawingCommandManager
                 || ( type == DrawingPath.DRAWING_PATH_LINE && ! slines ) 
                 || ( type == DrawingPath.DRAWING_PATH_AREA && ! sareas ) 
                 || ( type == DrawingPath.DRAWING_PATH_FIXED && ! (legs && sshots) )
-                || ( type == DrawingPath.DRAWING_PATH_SPLAY && ! (splays && sshots) )
+                // || ( type == DrawingPath.DRAWING_PATH_SPLAY && ! (splays && sshots) )
                 || ( type == DrawingPath.DRAWING_PATH_NAME  && ! (sstations) ) ) continue;
+	      if ( type == DrawingPath.DRAWING_PATH_SPLAY ) {
+		// FIXME_LATEST latest splays
+                if ( splays ) {
+                  if ( containsStation( pt.mItem, splays_off ) ) continue;
+		} else {
+                  if ( ! containsStation( pt.mItem, splays_on ) ) continue;
+		}
+	      }
               float x, y;
               if ( pt.mPoint != null ) { // line-point
                 x = pt.mPoint.x;
@@ -1724,8 +1723,9 @@ class DrawingCommandManager
               }
 	    } else if ( TDLevel.overExpert && mIsExtended && item.mType == DrawingPath.DRAWING_PATH_FIXED ) {
               path = new Path();
-	      path.moveTo( x-TDSetting.mMinShift, y );
-	      path.lineTo( x+TDSetting.mMinShift, y );
+	      float w = mScale * TopoDroidApp.mDisplayWidth / 8; // TDSetting.mMinShift
+	      path.moveTo( x-w, y ); 
+	      path.lineTo( x+w, y );
               path.transform( mMatrix );
               canvas.drawPath( path, BrushManager.fixedYellowPaint );
             }
@@ -1911,16 +1911,18 @@ class DrawingCommandManager
   }
 
     
-  SelectionSet getItemsAt( float x, float y, float zoom, int mode, float size )
+  SelectionSet getItemsAt( float x, float y, float zoom, int mode, float size, ArrayList<String> splays_on, ArrayList<String> splays_off )
   {
     float radius = TDSetting.mCloseCutoff + size/zoom; // TDSetting.mSelectness / zoom;
     // Log.v( "DistoX", "getItemAt " + x + " " + y + " zoom " + zoom + " mode " + mode + " size " + size + " " + radius );
     boolean legs   = (mDisplayMode & DisplayMode.DISPLAY_LEG) != 0;
     boolean splays = (mDisplayMode & DisplayMode.DISPLAY_SPLAY ) != 0;
+    // boolean latest = (mDisplayMode & DisplayMode.DISPLAY_LATEST ) != 0;
     boolean stations = (mDisplayMode & DisplayMode.DISPLAY_STATION ) != 0;
     synchronized ( TDPath.mSelectedLock ) {
       mSelected.clear();
-      mSelection.selectAt( mSelected, x, y, radius, mode, legs, splays, stations );
+      // FIXME_LATEST latests splays are not considered in the selection
+      mSelection.selectAt( mSelected, x, y, radius, mode, legs, splays, stations, splays_on, splays_off );
       if ( mSelected.mPoints.size() > 0 ) {
         // Log.v("DistoX", "seleceted " + mSelected.mPoints.size() + " points " );
         mSelected.nextHotItem();
@@ -2026,7 +2028,7 @@ class DrawingCommandManager
     DrawingLinePath line = (DrawingLinePath)item;
 
     // nearby splays are the splays that get close enough (dthr) to the line
-    ArrayList< NearbySplay > splays = new ArrayList<>();
+    ArrayList< NearbySplay > nearby_splays = new ArrayList<>();
     for ( DrawingPath fxd : mSplaysStack ) {
       float x = fxd.x2;
       float y = fxd.y2;
@@ -2038,27 +2040,27 @@ class DrawingCommandManager
           dmin = d;
           lpmin = lp2;
         } else if ( lpmin != null ) { // if distances increase after a good min, break
-          splays.add( new NearbySplay( fxd.x2 - lpmin.x, fxd.y2 - lpmin.y, dmin, lpmin ) );
+          nearby_splays.add( new NearbySplay( fxd.x2 - lpmin.x, fxd.y2 - lpmin.y, dmin, lpmin ) );
           break;
         }
       }
     }
-    // Log.v("DistoX", "Nearby splays " + splays.size() + " line size " + line.size() );
-    int ks = splays.size();
+    // Log.v("DistoX", "Nearby splays " + nearby_splays.size() + " line size " + line.size() );
+    int ks = nearby_splays.size();
     if ( ks == 0 ) return -3;
-    // check that two splays do not have the same linepoint
+    // check that two nearby splays do not have the same linepoint
     for ( int k1 = 0; k1 < ks; ) {
-      NearbySplay nbs1 = splays.get( k1 );
+      NearbySplay nbs1 = nearby_splays.get( k1 );
       int dk1 = 1; // increment of k1
       int k2 = k1+1;
       while ( k2<ks ) {
-        NearbySplay nbs2 = splays.get( k2 );
+        NearbySplay nbs2 = nearby_splays.get( k2 );
         if ( nbs1.pt == nbs2.pt ) {
           ks --;
           if ( nbs1.d <= nbs2.d ) {
-            splays.remove( k2 );
+            nearby_splays.remove( k2 );
           } else {
-            splays.remove( k1 );
+            nearby_splays.remove( k1 );
             dk1 = 0;
             break;
           }
@@ -2068,10 +2070,10 @@ class DrawingCommandManager
       }
       k1 += dk1;
     }
-    // Log.v("DistoX", "Nearby splays " + splays.size() + " / " + ks );
+    // Log.v("DistoX", "Nearby splays " + nearby_splays.size() + " / " + ks );
 
     // compute distances between consecutive line points
-    // and order splays following the line path
+    // and order nearby_splays following the line path
     int k = 0; // partition of unity
     float len = 0.001f;
     LinePoint lp1 = line.mFirst;
@@ -2085,13 +2087,13 @@ class DrawingCommandManager
 
       int kk = k;
       for ( ; kk<ks; ++kk ) {
-        if ( lp2 == splays.get(kk).pt ) {
-          if ( kk != k ) { // swap splays k <--> kk
-            NearbySplay nbs = splays.remove( kk );
-            splays.add( k, nbs );
+        if ( lp2 == nearby_splays.get(kk).pt ) {
+          if ( kk != k ) { // swap nearby_splays k <--> kk
+            NearbySplay nbs = nearby_splays.remove( kk );
+            nearby_splays.add( k, nbs );
           }
-          splays.get(k).llen = len;
-          if ( k > 0 ) splays.get( k-1 ).rlen = len;
+          nearby_splays.get(k).llen = len;
+          if ( k > 0 ) nearby_splays.get( k-1 ).rlen = len;
           len = 0;
           ++ k;
           break;
@@ -2100,7 +2102,7 @@ class DrawingCommandManager
       lp1 = lp2; // lp1 = previous point
     }
     len += 0.001f;
-    splays.get( k-1 ).rlen = len;
+    nearby_splays.get( k-1 ).rlen = len;
 
     //   |----------*--------*-----
     //      llen   sp1 rlen
@@ -2112,7 +2114,7 @@ class DrawingCommandManager
     len = 0;
     LinePoint lp2 = line.mFirst;
     NearbySplay spr = null; // right splay
-    for ( NearbySplay spl : splays ) { // left splay
+    for ( NearbySplay spl : nearby_splays ) { // left splay
       while ( lp2 != spl.pt /* && lp2 != null && k0 < size */ ) { // N.B. lp2 must be non-null and k0 must be < size
         len += dist[k0];
         float dx = len/spl.llen * spl.dx;
@@ -2165,22 +2167,10 @@ class DrawingCommandManager
 
     DrawingPath item = sp.mItem;
     DrawingAreaPath area = (DrawingAreaPath)item;
-    // int k0 = 0;
     LinePoint q0 = sp.mPoint;
-
-    // ArrayList< LinePoint > pts0 = area.mPoints;
-    // int size0 = pts0.size();
-    // for ( ; k0 < size0; ++k0 ) {
-    //   if ( pts0.get(k0) == q0 ) break;
-    // }
-    // if ( k0 == size0 ) return false;
     // // area border: ... --> q2 --> q0 --> q1 --> ...
-    // int k1 = (k0+1)%size0;
-    // int k2 = (k0+size0-1)%size0;
-    // LinePoint q1 = area.mPoints.get( k1 ); // next point on the area border
-    // LinePoint q2 = area.mPoints.get( k2 ); // prev point on the area border
-    LinePoint q1 = area.next( q0 );
-    LinePoint q2 = area.prev( q0 );
+    LinePoint q1 = area.next( q0 ); // next point on the area border
+    LinePoint q2 = area.prev( q0 ); // previous point on the border
 
     float x = q0.x;
     float y = q0.y;
@@ -2200,9 +2190,6 @@ class DrawingCommandManager
       if ( p.mType != DrawingPath.DRAWING_PATH_LINE &&
            p.mType != DrawingPath.DRAWING_PATH_AREA ) continue;
       DrawingPointLinePath lp = (DrawingPointLinePath)p;
-      // ArrayList< LinePoint > pts = lp.mPoints;
-      // int size = pts.size();
-      // for ( int k=0; k<size; ++k ) 
       int ks = lp.size();
       for ( LinePoint pt = lp.mFirst; pt != null && ks > 0; pt = pt.mNext )
       {
@@ -2650,7 +2637,7 @@ class DrawingCommandManager
     return null;
   }
  
-  // called by DrawingSurface::addDrawingStationName
+  // called by DrawingSurface.addDrawingStationName
   void addStation( DrawingStationName st, boolean selectable )
   {
     // Log.v("DistoX", "add station " + st.name() + " scene " + st.cx + " " + st.cy + " XSection " + st.mXSectionType );

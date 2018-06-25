@@ -3,6 +3,16 @@
 
 The survey shot window displays the list of the shots of the survey.<br><p>
 
+The title displays the survey name, and, in multi-distox mode, the active DistoX.
+The title color depends on the current station assignment policy:
+<ul>
+<li>blue: foreshot policies</li>
+<li>dark blue: backshot policies</li>
+<li>pink: "tripod" policy</li>
+<li>violet: "backsight" policy</li>
+<li>orange: "toporobot" policy</li>
+</ul><br><p>
+
 TopoDroid distinguishes four kinds of shots (displayed with different colors):
 <ol>
 <li>[red] "blank" shots, i.e, shots with the stations not set yet</li>
@@ -51,7 +61,11 @@ Background colors:
 Multi-shot selection buttons:<br>
 <ul style="margin-top:0">
 <li>set shots extend to <u>left</u></li>
+<li>flip shots extend</li>
 <li>set shots extend to <u>right</u></li>
+<li>open last sketch with the shots <u>highlighted</u></li>
+<li><u>renumber</u> the shots (the first must be a leg)</li>
+<li>compute the <u>bedding plane</u> of the shots</li>
 <li><u>delete</u> the shots</li>
 <li><u>cancel</u> the multi-shot selection</li>
 </ul><br><p>
@@ -68,7 +82,7 @@ If the 3D modelling is enabled there is also a button to create a new 3D model, 
 <li><u>Recover</u>: deleted item (shot or sketch) <a href="page_undelete.htm">recovery</a></li>
 <li><u>Photo</u>: pictures taken for this survey</li>
 <li><u>Sensor</u>: sensor data taken for this survey</li>
-<li><u>3D</u>: 3D survey display (requires <a page="manual14.htm">Cave3D</a>)</li>
+<li><u>3D</u>: 3D survey display (requires <a href="manual14.htm">Cave3D</a>)</li>
 <li><u>DistoX</u>: switches to the device window</li>
 <li><u>Settings</u></li>
 <li><u>Help</u></li>
@@ -102,7 +116,7 @@ If the 3D modelling is enabled there is also a button to create a new 3D model, 
     <li><i>Loop closure</i> error compensation. It is advisable not to do the compensation, as this allows to see graphically the misclosures, and spot possible survey errors [default "none"]. The special loop compensation based on "triangles" is for <a href="page_trilateration.htm">trilateration</a> [E].</li>
     <li>whether to show <i>prev/next</i> buttons in the shot edit dialog [default yes]</li>
     <li><i>Backsight</i> fields in the shot manual input dialog [N] [default no]</li>
-    <li><i>Magnetic anomaly</i> compensation. It requires backsight auto-station policy [default off]</li>
+    <li><i>Magnetic anomaly</i> compensation [default off, Tester level]</li>
     <li><i>Timer</i>: seconds of delay before measuring directions with the Android sensors [default 10, min 0]</li>
     <li><i>Beep volume</i>: timer beep volume [N] [default 50, min 10, max 100]</li>
     </ul>
@@ -114,9 +128,11 @@ If the 3D modelling is enabled there is also a button to create a new 3D model, 
 To exit the survey data window double tap on the <u>BACK</u> button of your device.<br>
 If the automatic backup is enabled and the default data file format is set, the data are exported whenever the data window is closed.<br><p>
 
-<b>Magnetic anomaly compensation</b><br>
+<b>Magnetic anomaly compensation</b> [Tester level]<br>
 The magnetic anomaly compensation is done estimating at each station the
 "local" magnetic declination by comparing the azimuths of the leg reaching to the station and the backsight leg. The azimuth of all the shots at the station are then corrected with the "local" declination. An overall declination remains because the declination at the first station cannot be determined. Furthermore the survey azimuth angles become relative as in a traverse, therefore the angle errors add up instead of compensating.<br><p>
+
+Activating the magnetic anomaly automatically sets the basksight station policy. Changing to another station policy deactivate the mgnetic anomaly compensation.<br><p>
 
 <a href="manual05.htm">&lt; Calibration data</a> |
 <a href="manual07.htm">Shot list &gt;</a>

@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid drawing: display mode dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -28,6 +28,7 @@ class DrawingModeDialog extends MyDialog
 {
     private CheckBox mCBleg;      // whether to show legs
     private CheckBox mCBsplay;    // whether to show splays
+    private CheckBox mCBlatest;   // whether to show latest shots
     private CheckBox mCBstation;  // whether to show stations
     private CheckBox mCBgrid;     // whether to show the grid
     private CheckBox mCBfixed;    // whether to show the grid
@@ -38,8 +39,8 @@ class DrawingModeDialog extends MyDialog
     // private Button mBtnOK;
     // private Button mBtnBack;
 
-    private DrawingSurface mSurface;
-    private DrawingWindow mParent; // used only to decide whether display checkbox "Shift"
+    private final DrawingSurface mSurface;
+    private final DrawingWindow mParent; // used only to decide whether display checkbox "Shift"
 
     DrawingModeDialog( Context context, DrawingWindow parent, DrawingSurface surface )
     {
@@ -57,6 +58,7 @@ class DrawingModeDialog extends MyDialog
 
       mCBleg     = (CheckBox) findViewById(R.id.cb_mode_leg);
       mCBsplay   = (CheckBox) findViewById(R.id.cb_mode_splay);
+      mCBlatest  = (CheckBox) findViewById(R.id.cb_mode_latest);
       mCBstation = (CheckBox) findViewById(R.id.cb_mode_station);
       mCBgrid    = (CheckBox) findViewById(R.id.cb_mode_grid);
       mCBfixed   = (CheckBox) findViewById(R.id.cb_mode_fixed);
@@ -70,10 +72,12 @@ class DrawingModeDialog extends MyDialog
       int mode = mSurface.getDisplayMode();
       if ( mParent != null && mParent.isAnySection() ) {
         mCBsplay.setVisibility( View.GONE );
+        mCBlatest.setVisibility( View.GONE );
         mCBfixed.setVisibility( View.GONE );
         mCBscrap.setVisibility( View.GONE );
       } else {
         mCBsplay.setChecked(   (mode & DisplayMode.DISPLAY_SPLAY) != 0 );
+        mCBlatest.setChecked(   (mode & DisplayMode.DISPLAY_LATEST) != 0 );
         if ( mParent != null && TDLevel.overAdvanced ) {
           mCBfixed.setChecked( mParent.mShiftDrawing );
         } else {
@@ -84,7 +88,7 @@ class DrawingModeDialog extends MyDialog
       mCBleg.setChecked(     (mode & DisplayMode.DISPLAY_LEG) != 0 );
       mCBstation.setChecked( (mode & DisplayMode.DISPLAY_STATION) != 0 );
       mCBgrid.setChecked(    (mode & DisplayMode.DISPLAY_GRID) != 0 );
-      mCBscaleRef.setChecked((mode & DisplayMode.DISPLAY_SCALE_REF) != 0);
+      mCBscaleRef.setChecked((mode & DisplayMode.DISPLAY_SCALEBAR) != 0);
     }
 
     @Override
@@ -96,18 +100,19 @@ class DrawingModeDialog extends MyDialog
           int mode = DisplayMode.DISPLAY_NONE;
           if ( mParent != null && ! mParent.isAnySection() ) {
             if ( mCBsplay.isChecked() )   mode |= DisplayMode.DISPLAY_SPLAY;
-            if ( mParent != null && TDLevel.overAdvanced ) {
+            if ( mCBlatest.isChecked() )  mode |= DisplayMode.DISPLAY_LATEST;
+            if ( /* mParent != null && */ TDLevel.overAdvanced ) {
               mParent.mShiftDrawing = mCBfixed.isChecked();
             }
           }
           if ( mCBleg.isChecked() )     mode |= DisplayMode.DISPLAY_LEG;
           if ( mCBstation.isChecked() ) mode |= DisplayMode.DISPLAY_STATION;
           if ( mCBgrid.isChecked() )    mode |= DisplayMode.DISPLAY_GRID;
-          if ( mCBscaleRef.isChecked() )mode |= DisplayMode.DISPLAY_SCALE_REF;
+          if ( mCBscaleRef.isChecked() )mode |= DisplayMode.DISPLAY_SCALEBAR;
 
           // TDLog.Error( "Mode " + mode );
           mSurface.setDisplayMode( mode );
-          if ( TDLevel.overNormal && mCBscrap.isChecked() ) {
+          if ( TDLevel.overNormal && mCBscrap.isChecked() && mParent != null ) {
             mParent.scrapOutlineDialog();
           }
 
@@ -127,6 +132,7 @@ class DrawingModeDialog extends MyDialog
     //   int mode = DisplayMode.DISPLAY_NONE;
     //   if ( mCBleg.isChecked() )     mode |= DisplayMode.DISPLAY_LEG;
     //   if ( mCBsplay.isChecked() )   mode |= DisplayMode.DISPLAY_SPLAY;
+    //   if ( mCBlatest.isChecked() )  mode |= DisplayMode.DISPLAY_LATEST;
     //   if ( mCBstation.isChecked() ) mode |= DisplayMode.DISPLAY_STATION;
     //   if ( mCBgrid.isChecked() )    mode |= DisplayMode.DISPLAY_GRID;
     //   mSurface.setDisplayMode( mode );

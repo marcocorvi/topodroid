@@ -1,11 +1,11 @@
-/** @file ItemDrawer.java
+/* @file ItemDrawer.java
  *
  * @author marco corvi
  * @date oct 2014
  *
  * @brief TopoDroid label adder interfare
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -127,11 +127,11 @@ public class ItemDrawer extends Activity
     boolean first = false;
     if ( mRecentPoint[0] != null ) {
       StringBuilder points = new StringBuilder( );
-      first = false;
+      // first = false;
       for ( int k=NR_RECENT-1; k>=0; --k ) {
         if ( mRecentPoint[k] != null ) {
           if ( first ) {
-            points.append( " " + mRecentPoint[k].mThName );
+            points.append(" ").append(mRecentPoint[k].mThName);
           } else {
             first = true;
             points.append( mRecentPoint[k].mThName );
@@ -147,7 +147,7 @@ public class ItemDrawer extends Activity
       for ( int k=NR_RECENT-1; k>=0; --k ) {
         if ( mRecentLine[k] != null ) {
           if ( first ) {
-            lines.append( " " + mRecentLine[k].mThName );
+            lines.append(" ").append(mRecentLine[k].mThName);
           } else {
             first = true;
             lines.append( mRecentLine[k].mThName );
@@ -163,7 +163,7 @@ public class ItemDrawer extends Activity
       for ( int k=NR_RECENT-1; k>=0; --k ) {
         if ( mRecentArea[k] != null ) {
           if ( first ) {
-            areas.append( " " + mRecentArea[k].mThName );
+            areas.append(" ").append(mRecentArea[k].mThName);
           } else {
             first = true;
             areas.append( mRecentArea[k].mThName );

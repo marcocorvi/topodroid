@@ -1,11 +1,11 @@
-/** @file QCamDrawingSurface.java
+/* @file QCamDrawingSurface.java
  *
  * @author marco corvi
  * @date jan. 2017
  *
  * @brief TopoDroid quick cam drawing surface
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -43,26 +43,26 @@ import android.util.AttributeSet;
 
 /** this is the camera preview class
  *  It access the camera via the QCamPreview
- *  @note this class must be public
+ *  note this class must be public
  */
 public class QCamDrawingSurface extends SurfaceView
                                 implements SurfaceHolder.Callback 
 {
   private static final String TAG = "DistoX";
-  Context mContext;
+  private final Context mContext;
   QCamCompass mQCam;
 
   private Boolean mDoDraw;
-  SurfaceHolder mHolder;
+  private SurfaceHolder mHolder;
   int mWidth;            // canvas width
   int mHeight;           // canvas height
 
-  Camera mCamera = null;
-  Camera.Parameters mParameters;
-  Camera.PreviewCallback mPreviewCallback;
-  Camera.PictureCallback mRaw;
-  Camera.PictureCallback mJpeg;
-  Camera.ShutterCallback mShutter;
+  private Camera mCamera = null;
+  private Camera.Parameters mParameters;
+  private Camera.PreviewCallback mPreviewCallback;
+  private Camera.PictureCallback mRaw;
+  private Camera.PictureCallback mJpeg;
+  private Camera.ShutterCallback mShutter;
   byte[] mJpegData;
 
   // MyOrientationListener mOrientationListener = null;

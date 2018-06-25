@@ -19,7 +19,7 @@
       android:layout_height="wrap_content" 
       android:paddingLeft="@dimen/paddingh"
       android:paddingRight="@dimen/paddingh"
-      android:text="A3"
+      android:text="@string/a3"
     />
     <RadioButton android:id="@+id/rb_x310" 
       android:layout_width="wrap_content"
@@ -27,7 +27,7 @@
       android:paddingLeft="@dimen/paddingh"
       android:paddingRight="@dimen/paddingh"
       android:checked="true"
-      android:text="X310"
+      android:text="@string/x310"
     />
 
     <Button android:id="@+id/btn_ok"

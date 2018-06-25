@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid drawing symbol load/reload dialog 
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -33,7 +33,7 @@ import android.view.View;
 class SymbolReload extends MyDialog
                           implements View.OnClickListener
 {
-  private TopoDroidApp mApp;
+  private final TopoDroidApp mApp;
 
   private Button mBtnInstall;
   private Button mBtnReplace;

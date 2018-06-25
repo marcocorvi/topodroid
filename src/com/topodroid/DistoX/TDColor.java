@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid colors
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -57,6 +57,11 @@ class TDColor
 
   static final int TITLE_NORMAL  = 0xff6699ff; // FIXED_BLUE same as in values/styles.xml
   static final int TITLE_NORMAL2 = 0xff99ccff; 
+  static final int TITLE_BACKSHOT   = 0xff0099cc; // DARK BLUE
+  static final int TITLE_BACKSIGHT  = 0xffb66dff; // VIOLET
+  static final int TITLE_TRIPOD     = 0xffff6db6; // PINK
+  static final int TITLE_TOPOROBOT  = 0xffdbd100; // ORANGE
+
   static final int NORMAL       = WHITE;
   static final int NORMAL2      = LIGHT_GRAY;
   static final int CONNECTED    = FIXED_RED;

@@ -1,4 +1,4 @@
-/** @file ParserPocketTopo.java
+/* @file ParserPocketTopo.java
  *
  * @author marco corvi
  * @date nov 2014
@@ -6,7 +6,7 @@
  * @brief TopoDroid PocketTopo parser
  *
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * ----------------------------------------------------------
  */
@@ -245,7 +245,7 @@ class ParserPocketTopo extends ImportParser
         ret = true;
       } catch ( IOException e ) {
         TDLog.Error( mName + " scraps IO error " + e );
-        file.delete();
+        if ( ! file.delete() ) TDLog.Error("File delete error");
       }
     }
     return ret;

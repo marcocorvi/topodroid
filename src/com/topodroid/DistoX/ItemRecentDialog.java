@@ -1,11 +1,11 @@
-/** @file ItemRecentDialog.java
+/* @file ItemRecentDialog.java
  *
  * @author marco corvi
  * @date 
  *
  * @brief TopoDroid drawing
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -22,7 +22,7 @@ import android.content.Context;
 // import android.view.Window;
 
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -80,7 +80,7 @@ class ItemRecentDialog extends MyDialog
   private ItemButton mRecentA[];
 
   private Button mBTsize;
-  int mScale;
+  private int mScale;
   private int nrRecent;
 
   // static int mLinePos;
@@ -128,9 +128,7 @@ class ItemRecentDialog extends MyDialog
     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 0, LinearLayout.LayoutParams.WRAP_CONTENT );
     lp.setMargins( 0, DIMMY, DIMMX, DIMMY );
     lp.weight = 16;
-    LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams( 
-      LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
-    lp2.setMargins( DIMMY, DIMMY, 0, DIMMY );
+    LinearLayout.LayoutParams lp2 = TDLayout.getLayoutParams( DIMMY, DIMMY, 0, DIMMY );
     lp2.weight = 10;
 
     for ( int k=0; k<nrRecent; ++k ) {
@@ -254,12 +252,14 @@ class ItemRecentDialog extends MyDialog
 
   private void setTheTitle()
   {
-    StringBuilder sb = new StringBuilder();
-    sb.append( "[" + DrawingPointPath.scaleToStringUC( mScale ) + "] " );
-    sb.append( (ItemDrawer.mRecentPoint[0] != null)? ItemDrawer.mRecentPoint[0].getName() : "-" );
-    sb.append( " | " + ((ItemDrawer.mRecentLine[0] != null)? ItemDrawer.mRecentLine[0].getName() : "-") );
-    sb.append( " | " + ((ItemDrawer.mRecentArea[0] != null)? ItemDrawer.mRecentArea[0].getName() : "-") );
-    setTitle( sb.toString() );
+    String sb = "[" +
+        com.topodroid.DistoX.DrawingPointPath.scaleToStringUC( mScale ) +
+        "] " +
+        ((com.topodroid.DistoX.ItemDrawer.mRecentPoint[ 0 ] != null)? com.topodroid.DistoX.ItemDrawer.mRecentPoint[ 0 ].getName() : "-") +
+        " | " +
+        ((com.topodroid.DistoX.ItemDrawer.mRecentLine[ 0 ] != null)? com.topodroid.DistoX.ItemDrawer.mRecentLine[ 0 ].getName() : "-") +
+        " | " + ((com.topodroid.DistoX.ItemDrawer.mRecentArea[ 0 ] != null)? com.topodroid.DistoX.ItemDrawer.mRecentArea[ 0 ].getName() : "-");
+    setTitle( sb );
   }
 
   private void setFirstPoint( int k )

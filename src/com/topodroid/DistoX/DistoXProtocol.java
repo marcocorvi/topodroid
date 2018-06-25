@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid TopoDroid-DistoX communication protocol
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -42,7 +42,7 @@ import java.nio.channels.ClosedByInterruptException;
 
 class DistoXProtocol
 {
-  private Device mDevice;
+  private final Device mDevice;
   // private DistoX mDistoX;
   // private BluetoothDevice  mBTDevice;
   // private BluetoothSocket  mSocket = null;
@@ -51,7 +51,7 @@ class DistoXProtocol
   private DataOutputStream mOut;
   // private byte[] mHeadTailA3;  // head/tail for Protocol A3
   private byte[] mAddr8000;
-  private byte[] mAddress;   // request-reply address
+  private byte[] mAddress;        // request-reply address
   private byte[] mRequestBuffer;   // request buffer
   private byte[] mReplyBuffer;     // reply data
   private byte[] mAcknowledge;
@@ -87,8 +87,8 @@ class DistoXProtocol
   int mMaxTimeout = 8;
   
 
-  byte[] getAddress() { return mAddress; }
-  byte[] getReply()   { return mReplyBuffer; }
+  // byte[] getAddress() { return mAddress; }
+  // byte[] getReply()   { return mReplyBuffer; }
 
   // FIXME the record of written calibration is not used
   // boolean writtenCalib = false;
@@ -229,7 +229,7 @@ class DistoXProtocol
     //     mBuffer[3], mBuffer[4], mBuffer[5], mBuffer[6], mBuffer[7] ) );
     // }
 
-    int high, low;
+    // int high, low;
     switch ( type ) {
       case 0x01: // data
         int dhh = (int)( mBuffer[0] & 0x40 );
@@ -336,13 +336,8 @@ class DistoXProtocol
           // while ( ( available = mIn.available() ) == 0 && timeout < maxtimeout ) 
           while ( ( available = mIn.available() ) < min_available && timeout < maxtimeout ) {
             ++ timeout;
-            try {
-              // TDLog.Log( TDLog.LOG_PROTO, "Proto read packet sleep " + timeout + "/" + maxtimeout );
-              // Log.v( "DistoX", "VD Proto read packet sleep " + timeout + "/" + maxtimeout );
-              Thread.sleep( 100 );
-            } catch (InterruptedException e ) {
-              TDLog.Error( "Proto read packet InterruptedException" + e.toString() );
-            }
+            // TDLog.Log( TDLog.LOG_PROTO, "Proto read packet sleep " + timeout + "/" + maxtimeout );
+            TopoDroidUtil.slowDown( 100, "Proto read packet InterruptedException" );
           }
         }
       }
@@ -507,8 +502,8 @@ class DistoXProtocol
   }
 
   // X310    
-  private static int DATA_PER_BLOCK = 56;
-  private static int BYTE_PER_DATA  = 18;
+  private static final int DATA_PER_BLOCK = 56;
+  private static final int BYTE_PER_DATA  = 18;
   // note 56*18 = 1008
   // next there are 16 byte padding for each 1024-byte block (0x400 byte block)
   //
@@ -591,7 +586,11 @@ class DistoXProtocol
         if ( mBuffer[0] != (byte)( 0x38 ) ) break;
         int reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1]);
         if ( reply_addr != addr ) break;
-        for (int i=3; i<7; ++i) result.data[k+i-3] = mBuffer[i];
+        // for (int i=3; i<7; ++i) result.data[k+i-3] = mBuffer[i];
+        result.data[k  ] = mBuffer[0];
+        result.data[k+1] = mBuffer[1];
+        result.data[k+2] = mBuffer[2];
+        result.data[k+3] = mBuffer[3];
       }
       if ( k == 8 ) {
         addr = index2addrX310( start ) + 16;
@@ -686,7 +685,11 @@ class DistoXProtocol
     int reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1]);
     if ( reply_addr != addr ) return null;
     byte[] ret = new byte[4];
-    for (int i=3; i<7; ++i) ret[i-3] = mBuffer[i];
+    // for (int i=3; i<7; ++i) ret[i-3] = mBuffer[i];
+    ret[0] = mBuffer[3];
+    ret[1] = mBuffer[4];
+    ret[2] = mBuffer[5];
+    ret[3] = mBuffer[6];
     return ret;
   }
 
@@ -717,7 +720,11 @@ class DistoXProtocol
         if ( mBuffer[0] != (byte)( 0x38 ) ) break;
         int reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1]);
         if ( reply_addr != addr ) break;
-        for (int i=3; i<7; ++i) result.data[k+i-3] = mBuffer[i];
+        // for (int i=3; i<7; ++i) result.data[k+i-3] = mBuffer[i];
+        result.data[k  ] = mBuffer[0];
+        result.data[k+1] = mBuffer[1];
+        result.data[k+2] = mBuffer[2];
+        result.data[k+3] = mBuffer[3];
       }
       if ( k == 8 ) {
         data.add( result );
@@ -937,4 +944,4 @@ class DistoXProtocol
     return ( ok ? cnt : -cnt );
   }
 
-};
+}

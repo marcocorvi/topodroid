@@ -1,11 +1,11 @@
-/** @file Symbol.java
+/* @file Symbol.java
  *
  * @author marco corvi
  * @date 
  *
  * @brief TopoDroid drawing symbol: 
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */

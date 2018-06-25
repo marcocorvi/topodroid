@@ -10,7 +10,7 @@
  * PreviewPath path is a line with "many" points
  *
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -37,7 +37,7 @@ import android.graphics.RectF;
  */
 
 class DrawingPath extends RectF
-                         implements ICanvasCommand
+                  implements ICanvasCommand
 {
   static final int DRAWING_PATH_FIXED   = 0; // leg
   static final int DRAWING_PATH_SPLAY   = 1; // splay
@@ -116,6 +116,7 @@ class DrawingPath extends RectF
     return true;
   }
   
+  // from ICanvasCommand
   public void flipXAxis( float z )
   {
     float dx = 2 * DrawingUtil.CENTER_X;
@@ -209,7 +210,7 @@ class DrawingPath extends RectF
     mPath.offset( off_x, off_y );
   }
 
-  public void setPaint( Paint paint ) { mPaint = paint; }
+  void setPathPaint( Paint paint ) { mPaint = paint; }
 
   // x10, y10 first endpoint scene coords
   // x20, y20 second endpoint scene coords
@@ -272,6 +273,7 @@ class DrawingPath extends RectF
   // by default does not rotate (return false)
   boolean rotateBy( float dy ) { return false; }
 
+  // from ICanvasCommand
   public void shiftPathBy( float dx, float dy ) 
   {
     x1 += dx;
@@ -287,6 +289,7 @@ class DrawingPath extends RectF
     bottom += dy;
   }
 
+  // from ICanvasCommand
   public void scalePathBy( float z, Matrix m )
   {
     x1 *= z;
@@ -312,7 +315,7 @@ class DrawingPath extends RectF
     return (float)( Math.sqrt( dx*dx + dy*dy ) );
   }
 
-  // public int type() { return mType; }
+  // int type() { return mType; }
 
   public void draw( Canvas canvas, RectF bbox )
   {
@@ -336,24 +339,34 @@ class DrawingPath extends RectF
     }
   }
 
-  /** FIXME apparently this can be called when mPaint is still null
-   *        and when fixedBluePaint is null
-   */
-  protected void drawPath( Path path, Canvas canvas )
+  // @param time system time in seconds
+  // NOTE use 0 for no test on the block time
+  boolean isBlockRecent( )
   {
-    if ( mType == DRAWING_PATH_AREA ) {
-      if ( mPaint != null ) {
-        canvas.save();
-        canvas.clipPath( path );
-        canvas.drawPaint( mPaint );
-        canvas.restore();
-      }
-    } else {
+    return mBlock != null && mBlock.isRecent();
+  }
+
+  /* FIXME apparently this can be called when mPaint is still null
+   *        and when fixedBluePaint is null
+   *
+   * NOTE DrawingAreaPath overrides this
+   */
+  void drawPath( Path path, Canvas canvas )
+  {
+    // if ( mType == DRAWING_PATH_AREA ) {
+    //   if ( mPaint != null ) {
+    //     canvas.save();
+    //     canvas.clipPath( path );
+    //     canvas.drawPaint( mPaint );
+    //     canvas.drawPath( path, mPaint );
+    //     canvas.restore();
+    //   }
+    // } else {
       if (    mType == DRAWING_PATH_SPLAY  // FIXME_X_SPLAY
            && mBlock != null ) {
-	if ( mBlock.isRecent( TopoDroidApp.mSecondLastShotId, System.currentTimeMillis()/1000 ) ) {
-          if ( mBlock.mType == DBlock.BLOCK_SPLAY && BrushManager.fixedBluePaint != null ) {
-            canvas.drawPath( path, BrushManager.fixedBluePaint );
+	if ( mBlock.isRecent( System.currentTimeMillis()/1000 ) ) {
+          if ( mBlock.mType == DBlock.BLOCK_SPLAY && BrushManager.lightBluePaint != null ) {
+            canvas.drawPath( path, BrushManager.lightBluePaint );
           } else if ( mBlock.mType == DBlock.BLOCK_X_SPLAY && BrushManager.fixedSplay2Paint != null ) {
             canvas.drawPath( path, BrushManager.fixedSplay2Paint );
           }
@@ -365,31 +378,32 @@ class DrawingPath extends RectF
       } else if ( mPaint != null ) {
         canvas.drawPath( path, mPaint );
       }
-    }
+    // }
   }
 
 
-  public void setOrientation( double angle ) { }
+  void setOrientation( double angle ) { }
 
-  public String toTherion( ) { return null; } // FIXME
+  String toTherion( ) { return null; } // FIXME
 
   void toDataStream( DataOutputStream dos ) { TDLog.Error( "ERROR DrawingPath toDataStream executed"); }
 
-  public void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil ) { }
+  void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil ) { }
 
   // ICanvasCommand interface
   //
-  public int  commandType() { return 0; }
+  public int commandType() { return 0; }
 
-  // public void undoCommand() { // TODO this would be changed later }
+  // void undoCommand() { // TODO this would be changed later }
 
+  // from ICanvasCommand
   public void computeBounds( RectF bound, boolean b ) 
   { 
     mPath.computeBounds( bound, b );
     // Log.v("DistoX", "bounds " + bound.left + " " + bound.top + " " + bound.right + " " + bound.bottom );
   }
 
-  // public void transform( Matrix matrix ) { mPath.transform( matrix ); }
+  // void transform( Matrix matrix ) { mPath.transform( matrix ); }
 
   // ------------------------------------------------------------------
   // Therion options

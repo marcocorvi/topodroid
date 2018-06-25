@@ -1,0 +1,16 @@
+encoding  utf-8
+symbol line
+name gour-rim
+name-sk obruč
+th_name gour-rim
+group border
+color 0xccff33 0xff
+width 1
+csurvey 5 4 1 1
+effect
+  moveTo 0 0
+  cubicTo 6 -16 24 -16 30 0
+  cubicTo 24 -14 6 -14 0 0
+endeffect
+endsymbol
+

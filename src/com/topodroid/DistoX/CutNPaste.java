@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid shot stations cut-n-paste
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -21,8 +21,8 @@ import android.widget.LinearLayout;
 // import android.widget.Toast;
 
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
+// import android.view.View.OnClickListener;
+// import android.view.View.OnTouchListener;
 import android.view.Gravity;
 import android.view.MotionEvent;
 
@@ -203,7 +203,7 @@ class CutNPaste
         } );
 
       if ( gm_data ) {
-      // ----- MEASURE ONE CALIB DATA
+      // ----- MEASURE ONE CALIB DATA AND DOWNLOAD IF MODE IS CONTINUOUS
       //
       text = res.getString( R.string.popup_do_gm_data );
       if ( len < text.length() ) len = text.length();
@@ -217,7 +217,7 @@ class CutNPaste
         } );
 
       } else {
-        // ----- MEASURE ONE SPLAY AND DOWNLOAD IT
+        // ----- MEASURE ONE SPLAY AND DOWNLOAD IT IF MODE IS CONTINUOUS
         //
         text = res.getString( R.string.popup_do_splay );
         if ( len < text.length() ) len = text.length();
@@ -225,12 +225,12 @@ class CutNPaste
           new View.OnClickListener( ) {
             public void onClick(View v) {
               // ilister.enableBluetoothButton(false);
-              new DeviceX310TakeShot( ilister, lister, app, 1 ).execute();
+              new DeviceX310TakeShot( ilister, (TDSetting.isConnectionModeContinuous() ? lister : null), app, 1 ).execute();
               dismissPopupBT();
             }
           } );
 
-        // ----- MEASURE ONE LEG AND DOWNLOAD IT
+        // ----- MEASURE ONE LEG AND DOWNLOAD IT IF MODE IS CONTINUOUS
         //
         text = res.getString(R.string.popup_do_leg);
         if ( len < text.length() ) len = text.length();
@@ -238,7 +238,7 @@ class CutNPaste
           new View.OnClickListener( ) {
             public void onClick(View v) {
               // ilister.enableBluetoothButton(false);
-              new DeviceX310TakeShot( ilister, lister, app, TDSetting.mMinNrLegShots ).execute();
+              new DeviceX310TakeShot( ilister, (TDSetting.isConnectionModeContinuous()? lister : null), app, TDSetting.mMinNrLegShots ).execute();
               dismissPopupBT();
             }
           } );

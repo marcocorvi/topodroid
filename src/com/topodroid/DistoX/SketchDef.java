@@ -1,11 +1,11 @@
-/** @file SketchDef.java
+/* @file SketchDef.java
  *
  * @author marco corvi
  * @date mar 2013
  *
  * @brief TopoDroid 3d sketch: defines
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */

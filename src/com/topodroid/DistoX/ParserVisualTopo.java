@@ -1,4 +1,4 @@
-/** @file ParserVisualTopo.java
+/* @file ParserVisualTopo.java
  *
  * @author marco corvi
  * @date mar 2015
@@ -6,7 +6,7 @@
  * @brief TopoDroid VisualTopo parser
  *
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * ----------------------------------------------------------
  */
@@ -51,7 +51,7 @@ class ParserVisualTopo extends ImportParser
     return false;
   }
 
-  float angle( float value, float unit, boolean dm )
+  private float angle( float value, float unit, boolean dm )
   {
     if ( dm ) {
       int sign = 1;

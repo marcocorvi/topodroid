@@ -1,11 +1,11 @@
-/** @file TimerTask.java
+/* @file TimerTask.java
  *
  * @author marco corvi
  * @date jan 2014
  *
  * @brief TopoDroid timer
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -37,7 +37,7 @@ class TimerTask extends AsyncTask<String, Integer, Long >
   private float mValMag[] = new float[3];
   private SensorManager mSensorManager;
   // Context mContext; // FIXME LEAK
-  IBearingAndClino mParent;
+  private IBearingAndClino mParent;
   boolean mRun;
   private int mAxis;
   private int mWait;  // secs to wait
@@ -66,10 +66,7 @@ class TimerTask extends AsyncTask<String, Integer, Long >
     mCntMag = 0;
     for ( int i=0; i<mWait && mRun; ++i ) {
       toneG.startTone( ToneGenerator.TONE_PROP_BEEP, duration ); 
-      try {
-        Thread.sleep( 1000 - duration );
-      } catch ( InterruptedException e ) {
-      }
+      TopoDroidUtil.slowDown( 1000 - duration );
       if ( isCancelled() ) {
         mRun = false;
         break;
@@ -87,11 +84,8 @@ class TimerTask extends AsyncTask<String, Integer, Long >
           mSensorManager.registerListener( this, mMag, SensorManager.SENSOR_DELAY_NORMAL );
           while ( cnt > 0 && ( mCntAcc < mCount || mCntMag < mCount ) ) {
             toneG.startTone( ToneGenerator.TONE_PROP_BEEP, duration ); 
-            try{
-              -- cnt;
-              Thread.sleep( 100 );
-            } catch ( InterruptedException e ) {
-            }
+            -- cnt;
+            TopoDroidUtil.slowDown( 100 );
           }    
           mSensorManager.unregisterListener( this );
         }

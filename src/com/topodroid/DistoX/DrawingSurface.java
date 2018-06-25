@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid drawing: drawing surface (canvas)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -22,8 +22,8 @@ import android.view.SurfaceView;
 
 // import android.view.MotionEvent;
 
-import android.graphics.Path;
-import android.graphics.Paint;
+// import android.graphics.Path;
+// import android.graphics.Paint;
 
 import java.util.ArrayList;
 // import java.util.TreeSet;
@@ -47,7 +47,7 @@ import java.io.DataOutputStream;
 // import java.util.Timer;
 // import java.util.TimerTask;
 
-import android.util.Log;
+// import android.util.Log;
 
 /**
  */
@@ -62,11 +62,11 @@ class DrawingSurface extends SurfaceView
 
   protected DrawThread mDrawThread;
 
-  boolean mSurfaceCreated = false;
+  private boolean mSurfaceCreated = false;
   public volatile boolean isDrawing = true;
   private DrawingPath mPreviewPath;
   // private SurfaceHolder mHolder; // canvas holder
-  private Context mContext;
+  private final Context mContext;
   private IZoomer mZoomer = null;
   private AttributeSet mAttrs;
   private int mWidth;            // canvas width
@@ -77,9 +77,10 @@ class DrawingSurface extends SurfaceView
 
   static DrawingCommandManager mCommandManager1 = null; 
   static DrawingCommandManager mCommandManager2 = null; 
-  static DrawingCommandManager mCommandManager3 = null; 
+  static DrawingCommandManager mCommandManager3 = null;
 
-  ArrayList< String > mSplayStations; // stations where to show splays
+  private ArrayList< String > mSplayStationsOn;  // stations where to show splays
+  private ArrayList< String > mSplayStationsOff; // stations where not to show splays
 
   public boolean isDrawing() { return isDrawing; }
 
@@ -182,7 +183,8 @@ class DrawingSurface extends SurfaceView
     // mCommandManager1 = new DrawingCommandManager();
     // mCommandManager2 = new DrawingCommandManager();
     commandManager = mCommandManager3;
-    mSplayStations = new ArrayList<>();
+    mSplayStationsOn  = new ArrayList<>();
+    mSplayStationsOff = new ArrayList<>();
   }
 
   // -------------------------------------------------------------------
@@ -319,7 +321,7 @@ class DrawingSurface extends SurfaceView
   {
     mPreviewPath = new DrawingPath( type, null );
     mPreviewPath.mPath = new Path();
-    mPreviewPath.setPaint( paint );
+    mPreviewPath.setPathPaint( paint );
   }
 
   Path getPreviewPath() { return (mPreviewPath != null)? mPreviewPath.mPath : null; }
@@ -336,7 +338,7 @@ class DrawingSurface extends SurfaceView
         mWidth  = canvas.getWidth();
         mHeight = canvas.getHeight();
         canvas.drawColor(0, PorterDuff.Mode.CLEAR);
-        commandManager.executeAll( canvas, mZoomer.zoom(), mSplayStations );
+        commandManager.executeAll( canvas, mZoomer.zoom(), mSplayStationsOn, mSplayStationsOff );
         if ( mPreviewPath != null ) mPreviewPath.draw(canvas, null);
       }
     } finally {
@@ -367,11 +369,11 @@ class DrawingSurface extends SurfaceView
 
     DrawingStationName st = new DrawingStationName( num_st, x, y );
     if ( num_st.mHidden == 1 ) {
-      st.setPaint( BrushManager.fixedStationHiddenPaint );
+      st.setPathPaint( BrushManager.fixedStationHiddenPaint );
     } else if ( num_st.mHidden == -1 || num_st.mBarrierAndHidden ) {
-      st.setPaint( BrushManager.fixedStationBarrierPaint );
+      st.setPathPaint( BrushManager.fixedStationBarrierPaint );
     } else {
-      st.setPaint( BrushManager.fixedStationPaint );
+      st.setPathPaint( BrushManager.fixedStationPaint );
     }
     if ( xsections != null && parent != null ) {
       for ( PlotInfo plot : xsections ) {
@@ -394,7 +396,7 @@ class DrawingSurface extends SurfaceView
     // TDLog.Log( TDLog.LOG_PLOT, "add Drawing Station Name " + name + " " + x + " " + y );
     // NOTE No station_XSection in X-Sections
     DrawingStationName st = new DrawingStationName( name, x, y );
-    st.setPaint( BrushManager.fixedStationPaint );
+    st.setPathPaint( BrushManager.fixedStationPaint );
     commandManager.addStation( st, false ); // NOTE make this true for selectable station in all sections
     return st;
   }
@@ -531,7 +533,7 @@ class DrawingSurface extends SurfaceView
 
   SelectionSet getItemsAt( float x, float y, float zoom, int mode, float size ) 
   { 
-    return commandManager.getItemsAt( x, y, zoom, mode, size );
+    return commandManager.getItemsAt( x, y, zoom, mode, size, mSplayStationsOn, mSplayStationsOff );
   }
 
   // set line range at the hot-item
@@ -762,39 +764,48 @@ class DrawingSurface extends SurfaceView
     }
   }
 
-  // void addSplayStation( String station ) 
-  // {
-  //   if ( station == null ) return;
-  //   if ( mSplayStations.contains( station ) ) return;
-  //   mSplayStations.add( station );
-  // }
+  boolean isStationSplaysOn( String st_name )
+  {
+    if ( st_name == null ) return false;
+    return mSplayStationsOn.contains( st_name );
+  }
 
-  // void removeSplayStation( String station ) 
-  // {
-  //   if ( station == null ) return;
-  //   // if ( ! mSplayStations.contains( station ) ) return;
-  //   mSplayStations.remove( station );
-  // }
+  boolean isStationSplaysOff( String st_name )
+  {
+    if ( st_name == null ) return false;
+    return mSplayStationsOff.contains( st_name );
+  }
 
-  void toggleStationSplays( String station ) 
+  void toggleStationSplays( String station, boolean on, boolean off )
   {
     if ( station == null ) return;
-    if ( mSplayStations.contains( station ) ) {
-      mSplayStations.remove( station );
+    setStationSplays( mSplayStationsOn,  station, on );
+    setStationSplays( mSplayStationsOff, station, off );
+  }
+
+  private void setStationSplays( ArrayList<String> splayStations, String station, boolean on )
+  {
+    if ( splayStations.contains( station ) ) {
+      if ( ! on ) splayStations.remove( station );
     } else {
-      mSplayStations.add( station );
+      if ( on ) splayStations.add( station );
     }
   }
 
-  void setStationSplays( String station, boolean on )
+  void hideStationSplays( String station )
   {
     if ( station == null ) return;
-    if ( mSplayStations.contains( station ) ) {
-      if ( ! on ) mSplayStations.remove( station );
-    } else {
-      if ( on ) mSplayStations.add( station );
-    }
+    /* if ( mSplayStationsOn.contains( station ) ) */ mSplayStationsOn.remove( station );
+    if ( ! mSplayStationsOff.contains( station ) ) mSplayStationsOff.add( station );
   }
+
+  void showStationSplays( String station )
+  {
+    if ( station == null ) return;
+    /* if ( mSplayStationsOff.contains( station ) ) */ mSplayStationsOff.remove( station );
+    if ( ! mSplayStationsOn.contains( station ) ) mSplayStationsOn.add( station );
+  }
+  
   
   void setStationXSections( List<PlotInfo> xsection_plan, List<PlotInfo> xsection_ext, long type2 )
   {

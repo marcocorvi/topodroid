@@ -5,14 +5,14 @@
  *
  * @brief TopoDroid 3d sketch: points
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
 package com.topodroid.DistoX;
 
 import android.graphics.Canvas;
-import android.graphics.Paint;
+// import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.Matrix;
@@ -24,14 +24,14 @@ import java.io.IOException;
 
 import java.util.Locale;
 
-import android.util.Log;
+// import android.util.Log;
 
 /**
  */
 class SketchPointPath extends SketchPath
 {
   // static final String TAG = "DistoX";
-  private static float toTherion = 1.0f; // TDConst.TO_THERION;
+  private static final float toTherion = 1.0f; // TDConst.TO_THERION;
 
   static final int SCALE_NONE = -3; // used to force scaling
   static final int SCALE_XS = -2;

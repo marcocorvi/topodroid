@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid main drawing activity
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -68,9 +68,9 @@ class ProjectionDialog extends MyDialog
 {
   private View mZoomView;
 
-  private TopoDroidApp mApp;
-  private ShotWindow mParent;
-  private DrawingUtil mDrawingUtil;
+  private final TopoDroidApp mApp;
+  private final ShotWindow mParent;
+  private final DrawingUtil mDrawingUtil;
 
   private ProjectionSurface mDrawingSurface;
   private SeekBar mSeekBar;
@@ -107,9 +107,9 @@ class ProjectionDialog extends MyDialog
   private float mBorderInnerLeft  = 0;
   private float mBorderBottom     = 4096;
 
-  List<DBlock> mList = null;
+  private List<DBlock> mList = null;
 
-  boolean mETazimuthChanged = false;
+  private boolean mETazimuthChanged = false;
 
   ProjectionDialog( Context context, ShotWindow parent, long sid, String name, String from )
   {
@@ -181,10 +181,10 @@ class ProjectionDialog extends MyDialog
     DrawingPath dpath = null;
     if ( splay ) {
       dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
-      dpath.setPaint( BrushManager.fixedShotPaint );
+      dpath.setPathPaint( BrushManager.fixedShotPaint );
     } else {
       dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );
-      dpath.setPaint( BrushManager.labelPaint );
+      dpath.setPathPaint( BrushManager.labelPaint );
     }
     // mDrawingUtil.makePath( dpath, x1, y1, x2, y2, mOffset.x, mOffset.y );
     dpath.mPath = new Path();

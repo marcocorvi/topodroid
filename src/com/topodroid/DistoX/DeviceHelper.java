@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid SQLite "device" database manager
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -43,9 +43,9 @@ import java.util.List;
 class DeviceHelper extends DataSetObservable
 {
 
-  static final String DB_VERSION = "26";
-  static final int DATABASE_VERSION = 26;
-  static final int DATABASE_VERSION_MIN = 21; 
+  // static final private String DB_VERSION = "26";
+  static final private int DATABASE_VERSION = 26;
+  // static final private int DATABASE_VERSION_MIN = 21;
 
   private static final String CONFIG_TABLE = "configs";
   private static final String CALIB_TABLE  = "calibs";
@@ -79,8 +79,8 @@ class DeviceHelper extends DataSetObservable
   // ----------------------------------------------------------------------
   // DATABASE
 
-  private Context mContext;
-  private TopoDroidApp mApp;
+  private final Context mContext;
+  private final TopoDroidApp mApp;
 
   SQLiteDatabase getDb() { return myDB; }
 
@@ -113,11 +113,10 @@ class DeviceHelper extends DataSetObservable
       }
 
       while ( myDB.isDbLockedByOtherThreads() ) {
-        try {
-          Thread.sleep( 200 );
-        } catch ( InterruptedException e ) {}
+        TopoDroidUtil.slowDown( 200 );
       }
 
+      //noinspection SyntaxError
       updateConfig = myDB.compileStatement( "UPDATE configs SET value=? WHERE key=?" );
 
     } catch ( SQLiteException e ) {
@@ -1061,7 +1060,8 @@ class DeviceHelper extends DataSetObservable
         // TDLog.Log( TDLog.LOG_DB, "DistoXOpenHelper onCreate done db " + db );
       }
 
-      private void createTables( SQLiteDatabase db )
+      @SuppressWarnings("SyntaxError")
+      private void createTables(SQLiteDatabase db )
       {
          db.setLockingEnabled( false );
          db.beginTransaction();

@@ -1,11 +1,11 @@
-/** @file SymbolPointLibrary.java
+/* @file SymbolPointLibrary.java
  *
  * @author marco corvi
  * @date dec 2012
  *
  * @brief TopoDroid drawing: point symbol library
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -52,10 +52,9 @@ class SymbolPointLibrary extends SymbolLibrary
     makeEnabledList();
   }
 
-  boolean pointHasText( int k ) { return ( k < 0 || k >= mSymbolNr )? false : ((SymbolPoint)mSymbols.get(k)).mHasText == 1; }
-  boolean pointHasValue( int k ) { return ( k < 0 || k >= mSymbolNr )? false : ((SymbolPoint)mSymbols.get(k)).mHasText == 2; }
-  boolean pointHasTextOrValue( int k )
-  { return ( k < 0 || k >= mSymbolNr )? false : ((SymbolPoint)mSymbols.get(k)).mHasText > 0; }
+  boolean pointHasText( int k )        { return k >= 0 && k < mSymbolNr && ((SymbolPoint)mSymbols.get(k)).mHasText == 1; }
+  boolean pointHasValue( int k )       { return k >= 0 && k < mSymbolNr && ((SymbolPoint)mSymbols.get(k)).mHasText == 2; }
+  boolean pointHasTextOrValue( int k ) { return k >= 0 && k < mSymbolNr && ((SymbolPoint)mSymbols.get(k)).mHasText > 0; }
 
   double getPointOrientation( int k )
   { return ( k < 0 || k >= mSymbolNr )? 0.0 : ((SymbolPoint)mSymbols.get(k)).mOrientation; }
@@ -162,7 +161,7 @@ class SymbolPointLibrary extends SymbolLibrary
       sortSymbolByName( systemNr );
     } else {
       TDLog.Error( "No symbol directory" );
-      dir.mkdirs( );
+      if ( ! dir.mkdirs( ) ) TDLog.Error( "mkdir error" );
     }
   }
 

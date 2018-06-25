@@ -1,11 +1,11 @@
-/** @file ItemAdapter.java
+/* @file ItemAdapter.java
  *
  * @author marco corvi
  * @date
  *
  * @brief TopoDroid 
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -26,7 +26,7 @@ import android.view.View.OnClickListener;
 
 // import android.widget.LinearLayout;
 
-import android.util.Log;
+// import android.util.Log;
 
 class ItemAdapter extends ArrayAdapter< ItemSymbol >
                   implements OnClickListener
@@ -46,7 +46,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
     mType   = type;
     mShowSelected = true;
 
-    if ( items != null ) {
+    if ( items != null ) { // always true
       mItems = items;
       for ( ItemSymbol item : items ) {
         item.setOnClickListener( this );
@@ -184,18 +184,23 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
         }
       }
     } catch ( ClassCastException e ) {
-      int pos = 0;
-      ItemButton ib = (ItemButton)v;
-      for ( ItemSymbol item : mItems ) {
-        if ( ib == item.mButton ) {
-          if ( mPos == pos && Math.abs(millis - mClickMillis) < DOUBLE_CLICK_TIME ) doubleclick = true;
-          mPos = pos; // item.mIndex;
-          mParent.setTypeAndItem( mType, mPos );
-          item.setChecked( true );
-        } else {
-          item.setChecked( false );
+      try {
+        ItemButton ib = (ItemButton)v;
+        int pos = 0;
+        for (ItemSymbol item : mItems) {
+          if (ib == item.mButton) {
+            if (mPos == pos && Math.abs( millis - mClickMillis ) < DOUBLE_CLICK_TIME)
+              doubleclick = true;
+            mPos = pos; // item.mIndex;
+            mParent.setTypeAndItem( mType, mPos );
+            item.setChecked( true );
+          } else {
+            item.setChecked( false );
+          }
+          ++pos;
         }
-        ++ pos;
+      } catch ( ClassCastException ee ) {
+        TDLog.Error("View is neither CheckBox nor ItemButton");
       }
     }
     if ( doubleclick ) mParent.closeDialog();

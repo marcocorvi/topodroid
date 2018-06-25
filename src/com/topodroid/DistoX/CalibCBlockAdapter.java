@@ -1,11 +1,11 @@
-/** @file CalibCBlockAdapter.java
+/* @file CalibCBlockAdapter.java
  *
  * @author marco corvi
  * @date apr 2012
  *
  * @brief TopoDroid adapter for calibration data
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -19,12 +19,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
 
+// import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
 
 class CalibCBlockAdapter extends ArrayAdapter< CalibCBlock >
 {
   private ArrayList< CalibCBlock > items;  // list if calibration data
-  private Context context;                 // context 
+  private final Context context;                 // context
 
 
   CalibCBlockAdapter( Context ctx, int id, ArrayList< CalibCBlock > items )
@@ -37,12 +39,13 @@ class CalibCBlockAdapter extends ArrayAdapter< CalibCBlock >
   CalibCBlock get( int pos ) { return items.get(pos); }
  
   @Override
-  public View getView( int pos, View convertView, ViewGroup parent )
+  // @NonNull
+  public View getView( int pos, View convertView, /* @NonNull */ ViewGroup parent )
   {
     View v = convertView;
     if ( v == null ) {
       LayoutInflater li = (LayoutInflater)context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-      v = li.inflate( R.layout.row, null ); // FIXME NULL_PTR
+      v = li.inflate( R.layout.row, parent, false ); // FIXME inflate may produce NUllPointerException
     }
 
     CalibCBlock b = items.get( pos );

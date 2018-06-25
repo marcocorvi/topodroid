@@ -1,11 +1,11 @@
-/** @file SymbolAreaLibrary.java
+/* @file SymbolAreaLibrary.java
  *
  * @author marco corvi
  * @date dec 2012
  *
  * @brief TopoDroid drawing: area symbol library
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -171,7 +171,7 @@ class SymbolAreaLibrary extends SymbolLibrary
       }
       sortSymbolByName( systemNr );
     } else {
-      dir.mkdirs( );
+      if ( ! dir.mkdirs( ) ) TDLog.Error( "mkdir error" );
     }
   }
 

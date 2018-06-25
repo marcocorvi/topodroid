@@ -61,6 +61,15 @@
        android:defaultValue="false"
        / -->
 
+     <!-- com.topodroid.DistoX.MyListPreference
+       android:key="DISTOX_LINE_CONTINUE"
+       android:summary="@string/pref_linecontinue_summary"
+       android:title="@string/pref_linecontinue_title"
+       android:defaultValue="0"
+       android:entries="@array/lineContinue"
+       android:entryValues="@array/lineContinueValue"
+     / -->
+
      <!-- CheckBoxPreference
        android:key="DISTOX_AREA_BORDER"
        android:summary="@string/pref_area_border_summary"

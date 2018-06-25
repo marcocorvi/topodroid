@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid option list
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -18,7 +18,7 @@ import android.util.AttributeSet;
 // import android.preference.Preference.OnPreferenceChangeListener;
 
 /**
- * @note this class must be public
+ * note this class must be public
  */
 public class MyListPreference extends ListPreference
 {

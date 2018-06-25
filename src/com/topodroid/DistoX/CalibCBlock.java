@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid DistoX calibration data
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -17,7 +17,7 @@ import java.util.Locale;
 
 class CalibCBlock
 {
-  private static int[] colors = { // 0xffcccccc, 0xffffcccc, 0xffccccff 
+  private static final int[] colors = { // 0xffcccccc, 0xffffcccc, 0xffccccff
     TDColor.LIGHT_GRAY,
     TDColor.LIGHT_PINK,
     TDColor.LIGHT_BLUE

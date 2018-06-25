@@ -1,11 +1,11 @@
-/** @file MyBearingAndClino.java
+/* @file MyBearingAndClino.java
  *
  * @author marco corvi 
  * @date nov 2013
  *
  * @brief TopoDroid bearing and clino interface
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -28,12 +28,12 @@ import android.media.ExifInterface;
 
 class MyBearingAndClino implements IBearingAndClino
 {
-  TopoDroidApp mApp;
+  private final TopoDroidApp mApp;
   private File  mFile;
   // long  mPid;
-  float mBearing;
-  float mClino;
-  int   mOrientation; // camera orientation in degrees
+  private float mBearing;
+  private float mClino;
+  private int   mOrientation; // camera orientation in degrees
 
   MyBearingAndClino( TopoDroidApp app, File imagefile /*, long pid */ )
   {

@@ -1,11 +1,11 @@
-/** @file DrawingSvg.java
+/* @file DrawingSvg.java
  *
  * @author marco corvi
  * @date mar 2013
  *
  * @brief TopoDroid drawing: dxf export
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -424,19 +424,19 @@ class DrawingSvg
         switch ( what ) {
           case 'P':
             path = DrawingPointPath.loadDataStream( version, dis, dx, dy, null );
-            toSvg( pw, (DrawingPointPath)path, pathToColor(path), xoff, yoff );
+            if ( path != null) toSvg( pw, (DrawingPointPath)path, pathToColor(path), xoff, yoff );
             break;
           case 'T':
             path = DrawingLabelPath.loadDataStream( version, dis, dx, dy );
-            toSvg( pw, (DrawingLabelPath)path, pathToColor(path), xoff, yoff );
+            if ( path != null) toSvg( pw, (DrawingLabelPath)path, pathToColor(path), xoff, yoff );
             break;
           case 'L':
             path = DrawingLinePath.loadDataStream( version, dis, dx, dy, null );
-            toSvg( pw, (DrawingLinePath)path, pathToColor(path), xoff, yoff );
+            if ( path != null) toSvg( pw, (DrawingLinePath)path, pathToColor(path), xoff, yoff );
             break;
           case 'A':
             path = DrawingAreaPath.loadDataStream( version, dis, dx, dy, null );
-            toSvg( pw, (DrawingAreaPath)path, pathToColor(path), xoff, yoff );
+            if ( path != null) toSvg( pw, (DrawingAreaPath)path, pathToColor(path), xoff, yoff );
             break;
           case 'U':
             path = DrawingStationPath.loadDataStream( version, dis ); // consume DrawingStationName data

@@ -54,7 +54,7 @@
         android:layout_width="80dp"
         android:layout_marginRight="@dimen/marginh"
         style="@style/button_default"
-        android:text="-/+"
+	android:text="@string/minus_plus"
     />
     <SeekBar android:id="@+id/seekbar"
        android:layout_width="fill_parent"

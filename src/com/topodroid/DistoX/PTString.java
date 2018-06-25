@@ -1,11 +1,11 @@
-/** @file PTString.java
+/* @file PTString.java
  *
  * @author marco corvi
  * @date march 2010
  *
  * @brief PocketTopo file IO - String
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -29,7 +29,7 @@ class PTString
   /** cstr
    * @param val C string (zero terminated)
    *
-   * @note a NULL string is considered as an empty string
+   * note a NULL string is considered as an empty string
    */
   PTString( String val )
   {
@@ -41,8 +41,8 @@ class PTString
 
   void read( FileInputStream fs )
   {
+    int len = 0;
     try {
-      int len = 0;
       int shift = 0; 
       int b = 0;
       do {
@@ -50,16 +50,16 @@ class PTString
         len |= ( ((int)b) << shift );
         shift += 7;
       } while ( (b & 0x80) != 0 );
-
-      if ( len > 0 ) {
-        byte[] chars = new byte[ len + 1 ];
-        fs.read( chars, 0, len );
-        chars[len] = (byte)0;
-        _str = new String( chars );
-      } else {
-        _str = "";
-      }
     } catch ( IOException e ) {
+    }
+
+    if ( len > 0 ) {
+      byte[] chars = new byte[ len + 1 ];
+      PTFile.read( fs, chars, len );
+      chars[len] = (byte)0;
+      _str = new String( chars );
+    } else {
+      _str = "";
     }
   }
 

@@ -1,4 +1,4 @@
-/** @file HorizontalButtonView.java
+/* @file HorizontalButtonView.java
  *
  * @author marco corvi (adapted from 
  * http://sandyandroidtutorials.blogspot.it/2013/06/horizontal-listview-tutorial.html
@@ -7,7 +7,7 @@
  *
  * @brief TopoDroid button bar
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */

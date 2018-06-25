@@ -44,14 +44,14 @@
       android:layout_gravity="right"
       android:gravity="right"
       >
-      <Button android:id="@+id/button_ok"
-        style="@style/button_default"
-        android:text="@string/button_ok"
-        android:layout_marginRight="@dimen/marginh"
-      />
       <Button android:id="@+id/button_cancel"
         style="@style/button_default"
         android:text="@string/button_cancel"
+        android:layout_marginRight="@dimen/marginh"
+      />
+      <Button android:id="@+id/button_ok"
+        style="@style/button_default"
+        android:text="@string/button_ok"
       />
     </LinearLayout>
 

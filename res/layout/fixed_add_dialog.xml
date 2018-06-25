@@ -25,7 +25,7 @@
       <Button android:id="@+id/button_EW"
         style="@style/button_default"
         android:layout_weight="20"
-        android:text="E"
+	android:text="@string/east"
         android:layout_marginRight="10dp"
         />
       <EditText android:id="@id/edit_long" 
@@ -47,7 +47,7 @@
       <Button android:id="@+id/button_NS"
         style="@style/button_default"
         android:layout_weight="20"
-        android:text="N"
+	android:text="@string/north"
         android:layout_marginRight="10dp"
         />
       <EditText android:id="@id/edit_lat"
@@ -136,7 +136,7 @@
       <Button android:id="@+id/button_proj4"
         style="@style/button_default"
         android:layout_marginLeft="@dimen/marginh"
-        android:text="Proj4"
+	android:text="@string/proj4"
         />
       <LinearLayout 
         android:layout_width="fill_parent"

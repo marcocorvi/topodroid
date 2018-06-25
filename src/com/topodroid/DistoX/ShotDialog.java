@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid survey shot dialog to enter FROM-TO stations etc.
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -52,7 +52,7 @@ class ShotDialog extends MyDialog
                  implements View.OnClickListener
                           , View.OnLongClickListener
 {
-  private ShotWindow mParent;
+  private final ShotWindow mParent;
   private DBlock mBlk;
   private DBlock mPrevBlk;
   private DBlock mNextBlk;
@@ -83,7 +83,7 @@ class ShotDialog extends MyDialog
   private MyCheckBox mCBxSplay = null;
   // private MyCheckBox mCBhighlight;
 
-  HorizontalListView mListView;
+  private HorizontalListView mListView;
   private HorizontalButtonView mButtonView;
   private Button[] mButton;
 
@@ -139,15 +139,15 @@ class ShotDialog extends MyDialog
   private long shot_flag;
   private String shot_comment;
 
-  MyKeyboard mKeyboard = null;
+  private MyKeyboard mKeyboard = null;
 
   private KeyListener mKLdistance;
   private KeyListener mKLbearing;
   private KeyListener mKLclino;
 
-  private static int flagDistance = MyKeyboard.FLAG_POINT;
-  private static int flagBearing  = MyKeyboard.FLAG_POINT;
-  private static int flagClino    = MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_SIGN;
+  private static final int flagDistance = MyKeyboard.FLAG_POINT;
+  private static final int flagBearing  = MyKeyboard.FLAG_POINT;
+  private static final int flagClino    = MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_SIGN;
 
   private boolean mFirst;
 
@@ -361,10 +361,6 @@ class ShotDialog extends MyDialog
     layout4.setMinimumHeight( size + 20 );
     // layout9.setMinimumHeight( size + 20 );
 
-    // LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
-    //   LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
-    // lp.setMargins( 0, 10, 20, 10 );
-
     if ( TDLevel.overNormal ) {
       mRBdup       = new MyCheckBox( mContext, size, R.drawable.iz_dup_ok, R.drawable.iz_dup_no );
       mRBsurf      = new MyCheckBox( mContext, size, R.drawable.iz_surface_ok, R.drawable.iz_surface_no );
@@ -492,7 +488,7 @@ class ShotDialog extends MyDialog
     // }
 
     boolean all_splay = mCBallSplay.isChecked();
-    boolean x_splay = (mCBxSplay != null)? mCBxSplay.isChecked() : false;
+    boolean x_splay = (mCBxSplay != null) && mCBxSplay.isChecked();
     boolean leg_next  = false;
     if ( mCBlegPrev.isChecked() ) {
       shot_from = "";
@@ -557,7 +553,7 @@ class ShotDialog extends MyDialog
     }
 
     String comment = mETcomment.getText().toString();
-    if ( comment != null ) mBlk.mComment = comment;
+    if ( comment != null ) mBlk.mComment = comment.trim();
 
     boolean renumber  = false;
     boolean highlight = false;
@@ -732,7 +728,7 @@ class ShotDialog extends MyDialog
       shot_to = mETto.getText().toString();
       shot_to = TopoDroidUtil.noSpaces( shot_to );
       if ( shot_to.length() > 0 && shot_from.length() > 0 ) {
-        String temp = new String( shot_from );
+        String temp = shot_from; // new String( shot_from );
         shot_from = shot_to;
         shot_to = temp;
         mETfrom.setText( shot_from );

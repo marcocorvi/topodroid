@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid DistoX calibration validation results
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -33,7 +33,7 @@ class CalibValidateResultDialog extends MyDialog
   // private ImageView hist2;
   private String avestd0;
   private String avestd1;
-  private String std; // UNUSED
+  // private String std; // UNUSED
   private String err1;
   private String err2;
   private String errmax;

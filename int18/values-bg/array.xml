@@ -2,10 +2,18 @@
 
 <resources>
 
+  <!-- TODO string-array name="lineContinue">
+     <item name="none">none</item>
+     <item name="start">join with start point</item>
+     <item name="end">join with end point</item>
+     <item name="both">join with both ends</item>
+     <item name="continue">continue</item>
+  </string-array -->
   <string-array name="unitGrid">
      <item name="meter">Метри</item>
      <item name="yard">Ярдове</item>
      <item name="two_tf">2 фута</item>
+     <item name="ten_cm">10 cm</item>
   </string-array>
 
   <string-array name="loopClosure">
@@ -38,27 +46,30 @@
      <item>- -</item>
   </string-array -->
 
-  <string-array name="legShots">
+  <!-- OK string-array name="legShots">
      <item name="two">2</item>
      <item name="three">3</item>
      <item name="four">4</item>
-  </string-array>
+  </string-array -->
 
-  <string-array name="exportShots">
+  <!-- FIXME string-array name="exportShots">
      <item name="none">Без експорт</item>
      <item name="therion">Therion</item>
      <item name="compass">Compass</item>
      <item name="csurvey">cSurvey</item>
+     <item name="ghtopo">GHTopo</item>
      <item name="grottolf">Grottolf</item>
      <item name="pockettopo">PocketTopo</item>
      <item name="polygon">Polygon</item>
      <item name="survex">Survex</item>
      <item name="topo">Topo</item>
+     <item name="toporobot">TopoRobot</item>
      <item name="visualtopo">VisualTopo</item>
      <item name="walls">Walls</item>
+     <item name="winkarst">Winkarst</item>
      <item name="csv">CSV</item>
      <item name="dxf">DXF</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="exportPlot">
      <item name="none">Без експорт</item>
@@ -125,11 +136,11 @@
      <item name="grid3">Тройна таблица</item>
   </string-array>
 
-  <string-array name="sectionStations">
+  <!-- UNUSED string-array name="sectionStations">
      <item name="both">В двата</item>
      <item name="from">В заден</item>
      <item name="to">В преден</item>
-  </string-array>
+  </string-array -->
 
   <!-- UNUSED string-array name="deviceType">
      <item name="none">Няма</item>

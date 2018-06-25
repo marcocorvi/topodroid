@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid calibration data activity
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -14,6 +14,7 @@ package com.topodroid.DistoX;
 // import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Locale;
 
 // import java.lang.Long;
 // import java.lang.reflect.Method;
@@ -84,7 +85,7 @@ public class GMActivity extends Activity
   private String mCalibName;
   // private ConnHandler mHandler;
 
-  private static int izons[] = { 
+  static final private int izons[] = {
                         R.drawable.iz_toggle,
                         R.drawable.iz_bt,
                         R.drawable.iz_download,
@@ -95,34 +96,34 @@ public class GMActivity extends Activity
                         R.drawable.iz_write,
                         R.drawable.iz_empty
                      };
-  final static int BTN_TOGGLE   = 0;
-  final static int BTN_BT       = 1;
-  final static int BTN_DOWNLOAD = 2;
-  final static int BTN_GROUP    = 3;
-  final static int BTN_COMPUTE  = 4;
-  final static int BTN_COVER    = 5;
-  final static int BTN_READ     = 6;
-  final static int BTN_WRITE    = 7;
+  final static private int BTN_TOGGLE   = 0;
+  final static private int BTN_BT       = 1;
+  final static private int BTN_DOWNLOAD = 2;
+  final static private int BTN_GROUP    = 3;
+  final static private int BTN_COMPUTE  = 4;
+  final static private int BTN_COVER    = 5;
+  final static private int BTN_READ     = 6;
+  final static private int BTN_WRITE    = 7;
 
-  static int izonsno[] = { 
+  static final private int izonsno[] = {
                         R.drawable.iz_toggle_no,
                         R.drawable.iz_bt_no,
                         R.drawable.iz_download_on,
                         0,
                         0,
-                        R.drawable.iz_cover_no,
+                        0, // R.drawable.iz_cover_no,
                         R.drawable.iz_read_no,
                         R.drawable.iz_write_no
                      };
 
-  static int menus[] = {
+  static final private int menus[] = {
                         R.string.menu_display,
                         R.string.menu_validate,
                         R.string.menu_options, 
                         R.string.menu_help
                      };
 
-  static int help_icons[] = { 
+  static final private int help_icons[] = {
                         R.string.help_toggle,
                         R.string.help_bluetooth,
                         R.string.help_download,
@@ -132,39 +133,39 @@ public class GMActivity extends Activity
                         R.string.help_read,
                         R.string.help_write
                       };
-  static int help_menus[] = { 
+  static final private int help_menus[] = {
                         R.string.help_display_calib,
                         R.string.help_validate,
                         R.string.help_prefs,
                         R.string.help_help
                       };
 
-  private static final int HELP_PAGE = R.string.GMActivity;
+  static final private int HELP_PAGE = R.string.GMActivity;
 
-  static int mNrButton1 = 0;
+  static private int mNrButton1 = 0;
   private Button[]     mButton1;
-  HorizontalListView   mListView;
-  HorizontalButtonView mButtonView1;
-  boolean mEnableWrite;
-  ListView   mMenu;
-  Button     mImage;
+  private HorizontalListView   mListView;
+  private HorizontalButtonView mButtonView1;
+  private boolean mEnableWrite;
+  private ListView   mMenu;
+  private Button     mImage;
   // HOVER
   // MyMenuAdapter mMenuAdapter;
-  ArrayAdapter< String > mMenuAdapter;
-  boolean onMenu;
+  private ArrayAdapter< String > mMenuAdapter;
+  private boolean onMenu;
 
-  BitmapDrawable mBMtoggle;
-  BitmapDrawable mBMtoggle_no;
-  BitmapDrawable mBMcover    = null;
-  BitmapDrawable mBMcover_no = null;
-  BitmapDrawable mBMread     = null;
-  BitmapDrawable mBMread_no  = null;
-  BitmapDrawable mBMwrite    = null;
-  BitmapDrawable mBMwrite_no = null;
-  BitmapDrawable mBMdownload;
-  BitmapDrawable mBMdownload_on;
-  BitmapDrawable mBMbluetooth;
-  BitmapDrawable mBMbluetooth_no;
+  private BitmapDrawable mBMtoggle;
+  private BitmapDrawable mBMtoggle_no;
+  private BitmapDrawable mBMcover    = null;
+  // private BitmapDrawable mBMcover_no = null;
+  private BitmapDrawable mBMread     = null;
+  private BitmapDrawable mBMread_no  = null;
+  private BitmapDrawable mBMwrite    = null;
+  private BitmapDrawable mBMwrite_no = null;
+  private BitmapDrawable mBMdownload;
+  private BitmapDrawable mBMdownload_on;
+  private BitmapDrawable mBMbluetooth;
+  private BitmapDrawable mBMbluetooth_no;
 
   public void setTheTitle() { }
 
@@ -175,7 +176,7 @@ public class GMActivity extends Activity
 
   /** called by CalibComputer Task
    * @return nr of iterations (neg. error)
-   * @note run on an AsyncTask
+   * note run on an AsyncTask
    */
   int computeCalib()
   {
@@ -463,7 +464,7 @@ public class GMActivity extends Activity
 
   /** called by CalibComputer Task
    * @param start_id id of the GM-data to start with
-   * @note run on an AsyncTask
+   * note run on an AsyncTask
    */
   void doResetGroups( long start_id )
   {
@@ -472,7 +473,8 @@ public class GMActivity extends Activity
   }
 
   /** called by CalibComputer Task
-   * @note run on an AsyncTask
+   * @param start_id  data id from whcih to start
+   * note run on an AsyncTask
    */
   int doComputeGroups( long start_id )
   {
@@ -555,7 +557,7 @@ public class GMActivity extends Activity
       if ( toast ) {
         TDToast.make( this, getResources().getQuantityString(R.plurals.read_calib_data, nr/2, nr/2, nr ) );
       }
-    } else if ( nr < 0 ) {
+    } else { // ( nr < 0 )
       if ( toast ) {
         // TDToast.make( this, getString(R.string.read_fail_with_code) + nr );
         TDToast.make( this, mApp.DistoXConnectionError[ -nr ] );
@@ -594,7 +596,7 @@ public class GMActivity extends Activity
 
   // --------------------------------------------------------------
 
-  public void updateDisplay( )
+  private void updateDisplay( )
   {
     // Log.v( TopoDroidApp.TAG, "update Display CID " + mApp.mCID );
     resetTitle( );
@@ -717,7 +719,7 @@ public class GMActivity extends Activity
     mBMtoggle_no    = MyButton.getButtonBackground( mApp, res, izonsno[BTN_TOGGLE] );
     if ( TDLevel.overBasic ) {
       mBMcover        = MyButton.getButtonBackground( mApp, res, izons[BTN_COVER] );
-      mBMcover_no     = MyButton.getButtonBackground( mApp, res, izonsno[BTN_COVER] );
+      // mBMcover_no     = MyButton.getButtonBackground( mApp, res, izonsno[BTN_COVER] );
     }
     if ( TDLevel.overNormal ) {
       mBMread         = MyButton.getButtonBackground( mApp, res, izons[BTN_READ] );
@@ -759,10 +761,10 @@ public class GMActivity extends Activity
   private void enableWrite( boolean enable ) 
   {
     mEnableWrite = enable;
-    if ( TDLevel.overBasic ) {
-      mButton1[BTN_COVER].setEnabled( enable );
-      mButton1[BTN_COVER].setBackgroundDrawable( ( enable ? mBMcover : mBMcover_no ) );
-    }
+    // if ( TDLevel.overBasic ) {
+    //   mButton1[BTN_COVER].setEnabled( enable );
+    //   mButton1[BTN_COVER].setBackgroundDrawable( ( enable ? mBMcover : mBMcover_no ) );
+    // }
     if ( TDLevel.overNormal ) {
       mButton1[BTN_WRITE].setEnabled( enable );
       mButton1[BTN_WRITE].setBackgroundDrawable( ( enable ? mBMwrite : mBMwrite_no ) );
@@ -776,10 +778,10 @@ public class GMActivity extends Activity
 
     mButton1[BTN_TOGGLE].setEnabled( enable );
     mButton1[BTN_BT].setEnabled( enable );
-    if ( TDLevel.overBasic ) {
-      mButton1[BTN_COVER].setEnabled( enable2 );
-      mButton1[BTN_COVER].setBackgroundDrawable( ( enable2 ? mBMcover : mBMcover_no ) );
-    }
+    // if ( TDLevel.overBasic ) {
+    //   mButton1[BTN_COVER].setEnabled( enable2 );
+    //   mButton1[BTN_COVER].setBackgroundDrawable( ( enable2 ? mBMcover : mBMcover_no ) );
+    // }
     if ( TDLevel.overNormal ) {
       mButton1[BTN_READ].setEnabled( enable );
       mButton1[BTN_READ].setBackgroundDrawable( ( enable ? mBMread : mBMread_no ) );
@@ -912,16 +914,16 @@ public class GMActivity extends Activity
       }
 
     } else if ( TDLevel.overBasic && b == mButton1[BTN_COVER] ) { // COVER
-      if ( mCalibration == null ) {
-        TDToast.make( this, R.string.no_calibration );
-      } else {
+      // if ( mCalibration == null ) {
+      //   TDToast.make( this, R.string.no_calibration );
+      // } else {
         List< CalibCBlock > list = mApp_mDData.selectAllGMs( mApp.mCID, 0 );
         if ( list.size() >= 16 ) {
           ( new CalibCoverageDialog( this, list, mCalibration ) ).show();
         } else {
           TDToast.make( this, R.string.few_data );
         }
-      }
+      // }
 
     } else if ( TDLevel.overNormal && b == mButton1[BTN_READ] ) { // READ
       enableButtons( false );
@@ -1043,14 +1045,14 @@ public class GMActivity extends Activity
   void updateGM( long value, String name )
   {
     mApp_mDData.updateGMName( mCIDid, mApp.mCID, name );
-    String id = Long.toString(mCIDid);
+    // String id = Long.toString(mCIDid);
     // CalibCBlock blk = mApp.mDData.selectGM( mCIDid, mApp.mCID );
     mSaveCBlock.setGroup( value );
 
     // if ( mApp.mListRefresh ) {
     //   mDataAdapter.notifyDataSetChanged();
     // } else {
-      mSaveTextView.setText( id + " <" + name + "> " + mSaveData );
+      mSaveTextView.setText( String.format(Locale.US, getResources().getString(R.string.fmt_savetext), mCIDid, name, mSaveData ) );
       mSaveTextView.setTextColor( mSaveCBlock.color() );
       // mSaveTextView.invalidate();
       // updateDisplay( ); // FIXME

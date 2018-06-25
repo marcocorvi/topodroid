@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid main 3d sketch activity
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -13,7 +13,6 @@ package com.topodroid.DistoX;
 
 // import android.app.Activity;
 import android.content.Context;
-// import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -47,7 +46,7 @@ import android.widget.Button;
 // import android.widget.ZoomButton;
 // import android.widget.ZoomButtonsController;
 // import android.widget.ZoomButtonsController.OnZoomListener;
-import android.widget.Toast;
+// import android.widget.Toast;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
@@ -71,7 +70,7 @@ import java.util.ArrayList;
 // import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 
-import android.util.Log;
+// import android.util.Log;
 
 /**
  */
@@ -1351,7 +1350,7 @@ public class SketchWindow extends ItemDrawer
     // ============================== DOWN ===============================
     else if (action == MotionEvent.ACTION_DOWN)
     {
-      if ( mMode == SketchDef.MODE_MOVE /** || mMode == SketchDef.MODE_EDIT **/ ) {
+      if ( mMode == SketchDef.MODE_MOVE /* || mMode == SketchDef.MODE_EDIT */ ) {
         // mActivity.setTitle( R.string.title_move );
         mSaveX = x_canvas;
         mSaveY = y_canvas;
@@ -2277,7 +2276,7 @@ public class SketchWindow extends ItemDrawer
   // private PopupWindow mPopupMode = null;
 
   /** mode popup
-   * @param b button
+   * @ param b button
    *
   private void makePopupMode( View b )
   {

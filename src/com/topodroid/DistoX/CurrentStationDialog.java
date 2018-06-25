@@ -1,4 +1,4 @@
-/** @file CurrentStationDialog.java
+/* @file CurrentStationDialog.java
  *
  * @author marco corvi
  * @date jan 2015
@@ -9,7 +9,7 @@
  * a station on it or pop one from it
  *
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -25,7 +25,6 @@ import android.content.Context;
 
 import android.view.View;
 // import android.view.View.OnClickListener;
-// import android.view.ViewGroup.LayoutParams;
 import android.inputmethodservice.KeyboardView;
 
 // import android.widget.ArrayAdapter;
@@ -48,8 +47,8 @@ class CurrentStationDialog extends MyDialog
                         , View.OnLongClickListener
                         , OnItemClickListener
 {
-  private TopoDroidApp mApp;
-  private ShotWindow mParent;
+  private final TopoDroidApp mApp;
+  private final ShotWindow mParent;
   private EditText mName;
   private EditText mComment;
 

@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid DistoX calibration-check shots dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -28,7 +28,6 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import android.view.View;
 // import android.view.View.OnClickListener;
-// import android.view.ViewGroup.LayoutParams;
 
 // import android.graphics.Bitmap;
 
@@ -62,12 +61,6 @@ class CalibCheckDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
 
-    // setContentView(R.layout.calib_check_dialog);
-    // try {
-    //   getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
-    // } catch ( NullPointerException e ) { 
-    //   TDLog.Error("CalibCheckDialog: set layout NPE");
-    // }
     initLayout( R.layout.calib_check_dialog, R.string.title_calib_check );
     
     // hist0 = (ImageView) findViewById( R.id.histogram0 );
@@ -196,8 +189,8 @@ class CalibCheckDialog extends MyDialog
 	int sign2 = 0;
 	int sign3 = 0;
 	DBlock blk2 = null;
-	boolean reversed = false; // triangle is 1-3-2
-        for ( DBlock b : mShots ) {
+	// boolean reversed = false; // triangle is 1-3-2
+    for ( DBlock b : mShots ) {
 	  if ( b == blk ) { ++k; continue; }
           if ( ! in_leg ) {
             if ( b.type() == DBlock.BLOCK_MAIN_LEG ) {
@@ -208,7 +201,7 @@ class CalibCheckDialog extends MyDialog
 		sign2 = -1;
 		blk2 = b;
 	        station = b.mTo;
-		reversed = true;
+		// reversed = true;
 		in_leg = true;
 	      } else if ( b.mFrom.equals( blk.mTo ) && ! b.mTo.equals( blk.mFrom ) ) {
                 k2 = k;
@@ -223,7 +216,7 @@ class CalibCheckDialog extends MyDialog
 		sign2 = 1;
 		blk2 = b;
 	        station = b.mFrom;
-		reversed = true;
+		// reversed = true;
 		in_leg = true;
 	      } else if ( b.mTo.equals( blk.mTo   ) && ! b.mFrom.equals( blk.mFrom ) ) {
                 k2 = k;

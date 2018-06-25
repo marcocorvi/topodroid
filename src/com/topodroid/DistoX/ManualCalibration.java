@@ -1,11 +1,11 @@
-/** @file ManualCalibration.java
+/* @file ManualCalibration.java
  *
  * @author marco corvi
  * @date jul 2017
  *
  * @brief TopoDroid instrument calibration for manual shots
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */

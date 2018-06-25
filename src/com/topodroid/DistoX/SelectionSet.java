@@ -1,11 +1,11 @@
-/** @file SelectionSet.java
+/* @file SelectionSet.java
  *
  * @author marco corvi
  * @date feb 2013
  *
  * @brief set of selected drawing items
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * ----------------------------------------------------
  */
@@ -27,7 +27,7 @@ class SelectionSet
     reset();
   }
 
-  void reset()
+  private void reset()
   { 
     // Log.v("DistoX", "selection set reset()");
     clearHotItemRange();

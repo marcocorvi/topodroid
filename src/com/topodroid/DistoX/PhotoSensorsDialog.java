@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid photo dialog (to enter the name of the photo)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -36,8 +36,8 @@ import android.widget.CheckBox;
 class PhotoSensorsDialog extends MyDialog
                                 implements View.OnClickListener
 {
-  private ShotWindow mParent;
-  private DBlock mBlk;
+  private final ShotWindow mParent;
+  private final DBlock mBlk;
 
   private boolean audioCheck = false;
 
@@ -65,7 +65,7 @@ class PhotoSensorsDialog extends MyDialog
   private MyCheckBox mButtonDelete;
   private MyCheckBox mButtonCheck = null;
 
-  HorizontalListView mListView;
+  private HorizontalListView mListView;
   private HorizontalButtonView mButtonView;
   private Button[] mButton;
 
@@ -98,9 +98,7 @@ class PhotoSensorsDialog extends MyDialog
     LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
     layout4.setMinimumHeight( size + 20 );
     
-    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
-      LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
-    lp.setMargins( 0, 10, 20, 10 );
+    LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 0, 10, 20, 10 );
 
     mRBfrom  = (RadioButton)findViewById( R.id.station_from );
     mRBto    = (RadioButton)findViewById( R.id.station_to );

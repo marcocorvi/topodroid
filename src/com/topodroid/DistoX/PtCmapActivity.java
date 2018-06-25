@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid PocketTopo colormap activity
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -42,8 +42,8 @@ public class PtCmapActivity extends Activity
 {
   private TopoDroidApp mApp;
 
-  static String mCmapLine[] = { "wall", "border", "pit", "rock-border", "arrow", "contour", "user" };
-  static String mCmapPoint[] = { "air-draught", "water-flow", "stalactite", "blocks", "debris", "pebbles", "clay" };
+  static private String mCmapLine[] = { "wall", "border", "pit", "rock-border", "arrow", "contour", "user" };
+  static private String mCmapPoint[] = { "air-draught", "water-flow", "stalactite", "blocks", "debris", "pebbles", "clay" };
 
   private EditText mETline[];
   private EditText mETpoint[];
@@ -197,7 +197,7 @@ public class PtCmapActivity extends Activity
         return true;
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
         String help_page = getResources().getString( R.string.PtCmapActivity );
-        if ( help_page != null ) UserManualActivity.showHelpPage( this, help_page );
+        /* if ( help_page != null ) */ UserManualActivity.showHelpPage( this, help_page );
         return true;
       // case KeyEvent.KEYCODE_SEARCH:
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)

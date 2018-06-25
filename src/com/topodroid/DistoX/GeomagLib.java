@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid World Magnetic Model 
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  * Implemented after GeomagneticLibrary.c by
@@ -244,8 +244,8 @@ class GeomagLib
     };
 
     /*   Execution of the forward T.M. algorithm  */
-    boolean XYonly = false;
-    return MAG_TMfwd4(Eps, Epssq, K0R4, K0R4oa, Acoeff, utm0, K0, falseE, falseN, XYonly, Lambda, Phi );
+    // boolean XYonly = false;
+    return MAG_TMfwd4(Eps, Epssq, K0R4, K0R4oa, Acoeff, utm0, K0, falseE, falseN, false, Lambda, Phi );
   }
 
   /** The function MAG_GetUTMParameters converts geodetic (latitude and
@@ -709,7 +709,7 @@ class GeomagLib
           int index1 = WMMcoeff.index(n-1,m); // (n - 1) * n / 2 + m;
           legendre.Pcup[index] = x * legendre.Pcup[index1];
           legendre.dPcup[index] = x * legendre.dPcup[index1] - z * legendre.Pcup[index1];
-        } else if (n > 1 && n != m) {
+        } else if (n > 1 /* && n != m */ ) { // n != m true
           int index1 = WMMcoeff.index(n-2,m); // (n - 2) * (n - 1) / 2 + m;
           int index2 = WMMcoeff.index(n-1,m); // (n - 1) * n / 2 + m;
           if (m > n - 2) {

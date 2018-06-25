@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid drawing: dialog for the text of a label-point
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -19,7 +19,6 @@ import android.content.Context;
 
 // import android.graphics.*;
 import android.view.View;
-// import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -29,9 +28,9 @@ class DrawingLabelDialog extends MyDialog
 {
   private EditText mLabel;
 
-  private ILabelAdder mActivity;
-  private float mX;
-  private float mY;
+  private final ILabelAdder mActivity;
+  private final float mX;
+  private final float mY;
 
   DrawingLabelDialog( Context context, ILabelAdder activity, float x, float y )
   {

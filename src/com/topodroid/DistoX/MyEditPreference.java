@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid option value
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -23,11 +23,11 @@ import android.util.AttributeSet;
 // import android.util.Log;
 
 /**
- * @note this class must be public
+ * note this class must be public
  */
 public class MyEditPreference extends EditTextPreference
 {
-  SharedPreferences sp;
+  private SharedPreferences sp;
 
   public MyEditPreference( Context c, AttributeSet a )
   {
@@ -56,7 +56,8 @@ public class MyEditPreference extends EditTextPreference
         {
           SharedPreferences.Editor editor = sp.edit();
           editor.putString( p.getKey(), new_value );
-          editor.apply(); // was editor.commit();
+          editor.apply(); 
+	  // FIXME-23 editor.commit();
           EditTextPreference ep = (EditTextPreference)p;
           ep.setSummary( new_value );
           ep.setText( new_value );

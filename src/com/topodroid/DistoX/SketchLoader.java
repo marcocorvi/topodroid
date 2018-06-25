@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid 3d-sketch loader
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -17,10 +17,10 @@ import android.os.AsyncTask;
 
 class SketchLoader extends AsyncTask< String, Integer, Integer >
 {
-  private SketchWindow  mParent; // FIXME LEAK context
-  private SketchModel   mModel;
-  private String        mFullName;
-  private SketchPainter mPainter;
+  private final SketchWindow  mParent; // FIXME LEAK context
+  private final SketchModel   mModel;
+  private final String        mFullName;
+  private final SketchPainter mPainter;
   private static SketchLoader running = null;
 
   SketchLoader( SketchWindow parent, SketchModel model, String fullname, SketchPainter painter )

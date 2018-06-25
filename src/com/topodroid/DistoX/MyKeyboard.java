@@ -1,11 +1,11 @@
-/** @file MyKeyboard.java
+/* @file MyKeyboard.java
  *
  * @author marco corvi
  * @date june 2012
  *
  * @brief TopoDroid numerical keyboard dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -75,7 +75,7 @@ class MyKeyboard // FIXME DIALOG extends Dialog
 
   private Map< EditText, Integer > mFlags;
 
-  private Context  mContext;
+  private final Context  mContext;
   private EditText mEdit; 
   private KeyboardView mKeyboardView;
   private Keyboard mKeyboard;
@@ -128,7 +128,7 @@ class MyKeyboard // FIXME DIALOG extends Dialog
           // Log.v(TAG, "onFocusChange() " + hasFocus + " " + e.getText().toString() );
           if ( hasFocus ) {
             InputMethodManager imm = (InputMethodManager)kbd.getContext().getSystemService( Context.INPUT_METHOD_SERVICE );
-            imm.hideSoftInputFromWindow( e.getWindowToken(), 0 );
+            imm.hideSoftInputFromWindow( e.getWindowToken(), 0 ); // NullPointerException
             if ( kbd.setEditText( e ) ) {
               // e.setBackgroundResource( R.drawable.textfield_selected );
               kbd.show( e );

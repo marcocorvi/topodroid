@@ -1,11 +1,11 @@
-/** @file MyButton.java
+/* @file MyButton.java
  *
  * @author marco corvi
  * @date may 2012
  *
  * @brief TopoDroid buttons factory
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -35,7 +35,7 @@ import android.util.SparseArray;
 
 import java.util.Random;
 
-public class MyButton
+class MyButton
 {
   static private int mSize = 42;
   private final static boolean USE_CACHE = true;
@@ -86,6 +86,20 @@ public class MyButton
       // Log.v("DistoX", "My Button cache hit " + res_id );
     }
     return ret;
+  }
+
+  // get tentative bitmap (do not use cache)
+  static BitmapDrawable getButtonBackground( Context ctx, Resources res, int res_id, int size )
+  {
+    try {
+      Bitmap bm1 = BitmapFactory.decodeResource( res, res_id );
+      Bitmap bmx = Bitmap.createScaledBitmap( bm1, size, size, false );
+      return new BitmapDrawable( res, bmx );
+    } catch ( OutOfMemoryError err ) {
+      TDLog.Error("out of memory: " + err.getMessage() );
+      TDToast.makeColor( ctx, R.string.out_of_memory, TDColor.FIXED_RED );
+    }
+    return null;
   }
 
 }

@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid drawing: display mode dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -67,7 +67,7 @@ class OverviewModeDialog extends MyDialog
       mCBoutline.setChecked( (mode & DisplayMode.DISPLAY_OUTLINE) != 0 );
       mCBleg.setChecked(     (mode & DisplayMode.DISPLAY_LEG) != 0 );
       mCBstation.setChecked( (mode & DisplayMode.DISPLAY_STATION) != 0 );
-      mCBscaleRef.setChecked( (mode & DisplayMode.DISPLAY_SCALE_REF) != 0 );
+      mCBscaleRef.setChecked( (mode & DisplayMode.DISPLAY_SCALEBAR) != 0 );
       mCBgrid.setChecked(    (mode & DisplayMode.DISPLAY_GRID) != 0 );
     }
 
@@ -82,7 +82,7 @@ class OverviewModeDialog extends MyDialog
           if ( mCBleg.isChecked() )     mode |= DisplayMode.DISPLAY_LEG;
           if ( mCBstation.isChecked() ) mode |= DisplayMode.DISPLAY_STATION;
           if ( mCBgrid.isChecked() )    mode |= DisplayMode.DISPLAY_GRID;
-          if ( mCBscaleRef.isChecked() )mode |= DisplayMode.DISPLAY_SCALE_REF;
+          if ( mCBscaleRef.isChecked() )mode |= DisplayMode.DISPLAY_SCALEBAR;
           // TDLog.Error( "Mode " + mode );
           mSurface.setDisplayMode( mode );
           break;

@@ -5,7 +5,7 @@
  *
  * @brief SelectionBucket a rectangle of selection points
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * ----------------------------------------------------
  */
@@ -22,7 +22,7 @@ import android.graphics.RectF;
 
 class SelectionBucket
 {
-  float x0, y0, x1, y1; // bounds
+  private float x0, y0, x1, y1; // bounds
   ArrayList< SelectionPoint > mPoints;
 
   SelectionBucket( float _x0, float _y0, float _x1, float _y1 )

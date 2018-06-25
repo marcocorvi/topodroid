@@ -54,7 +54,7 @@
       	android:ems="25"
         android:layout_height="wrap_content" 
         android:singleLine="true"
-        android:text="0000"
+	android:text="@string/four_zero"
       />
       <TextView android:id="@+id/tv_read_head" 
         android:layout_marginTop="@dimen/margintiny"
@@ -62,7 +62,7 @@
       	android:ems="25"
         android:layout_height="wrap_content" 
         android:singleLine="true"
-        android:text="0000"
+	android:text="@string/four_zero"
       />
     </LinearLayout>
 
@@ -83,13 +83,13 @@
         style="@style/edit_number"
         android:layout_marginTop="@dimen/margintiny"
         android:layout_width="100dp"
-        android:hint="0"
+	android:hint="@string/zero"
       />
       <EditText android:id="@+id/et_dumpto" 
         style="@style/edit_number"
         android:layout_marginTop="@dimen/margintiny"
         android:layout_width="100dp"
-        android:hint="4096"
+	android:hint="@string/a3_max"
       />
     </LinearLayout>
 

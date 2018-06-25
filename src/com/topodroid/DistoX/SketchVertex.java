@@ -1,11 +1,11 @@
-/** @file SketchVertex.java
+/* @file SketchVertex.java
  *
  * @author marco corvi
  * @date feb 2013
  *
  * @brief TopoDroid 3d sketch: 3D surface vertex (point with index)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */

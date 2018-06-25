@@ -1,11 +1,11 @@
-/** @file PTDrawing.java
+/* @file PTDrawing.java
  *
  * @author marco corvi
  * @date march 2010
  *
  * @brief PocketTopo file IO
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -45,7 +45,7 @@ class PTDrawing
 
     /** insert an element
      * @param el   element to insert
-     * @note the caller releases the ownership of the element to the PTdrawing
+     * note the caller releases the ownership of the element to the PTdrawing
      */
     void insertElement( PTElement el ) { _elements.add( el ); }
 

@@ -8,14 +8,31 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Click BACK again to exit</string>
 
-    <string name="version_ask">Updating to a new version of TopoDroid.\nDo you want to reinstall drawing tools?</string>
+    <!-- UNUSED string name="version_ask">Updating to a new version of TopoDroid.\nDo you want to reinstall drawing tools?</string -->
     <string name="symbols_ask">Install drawing tools v.%1$s?\n(Current v.%2$s)</string>
+
+    <string name="setup_textsize_title">TopoDroid setup. Text size</string>
+    <string name="setup_buttonsize_title">TopoDroid setup. Button size</string>
+    <string name="setup_drawingunit_title">TopoDroid setup. Icons size</string>
+    <string name="setup_done_title">TopoDroid setup. Done</string>
+
+    <string name="setup_textsize">Set the text size.\nYou can always change this later through the main window settings.</string>
+    <string name="setup_buttonsize">Set the button size.\nYou can always change this later through the main window settings.</string>
+    <string name="setup_drawingunit">Set the sketch icon size.\nYou can always change this later through the sketch window settings.</string>
+    <string name="setup_done">The basic setup in done.\n\n
+	    If you experience problems with the DistoX connection, try and set the insecure socket.\n\n
+	    Other settings concern the presentation in the sketching window (icon size, label size, line width, etc.)
+	    you should set them to your needs./n/n
+    </string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet</string>
 
     <string name="POINT">POINT</string>
     <string name="LINE">LINE</string>
     <string name="AREA">AREA</string>
     <string name="HELP">HELP</string>
     <string name="STATION">STATION </string>
+    <string name="UP">UPWARD</string>
+    <string name="DOWN">DOWNWARD</string>
 
     <string name="cut">CUT</string>
     <string name="copy">COPY</string>
@@ -97,7 +114,7 @@
     <string name="device_code">DistoX code %1$4d</string>
     <string name="device_firmware">Firmware  %1$d.%2$d</string>
     <string name="device_hardware">Hardware  %1$d.%2$d</string>
-    <string name="device_memory">Memory  %1$02x.%2$02x</string>
+    <!-- UNUSED string name="device_memory">Memory  %1$02x.%2$02x</string -->
     <string name="device_status_angle_grad">Angle units: grad</string>
     <string name="device_status_angle_degree">Angle units: degree</string>
     <string name="device_status_compass_on">Compass/clino: on</string>
@@ -132,7 +149,7 @@
     <string name="found_groups">Found %1$d groups</string>
     <!-- UNUSED string name="few_plots">Not enough sketches</string -->
     <string name="few_calibs">Not enough calibrations</string>
-    <string name="getting_info">Getting DistoX info ...</string>
+    <string name="getting_info">Getting DistoX info &#8230;</string>
 
     <string name="calib_import_title">Calibration import</string>
     <string name="import_title">Survey import</string>
@@ -148,10 +165,12 @@
     <string name="import_calib_no_data">Calib. file: no data</string>
     <string name="import_calib_io_error">Calib. file: read error</string>
     <string name="import_zip_ok">Successfully imported zip file</string>
-    <string name="import_zip_wait">Imported zip file may take long. Please wait &#8230;</string>
+    <!-- UNUSED string name="import_zip_wait">Imported zip file may take long. Please wait &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Saving sketch &#8230; please wait &#8230;</string -->
     <string name="MT_points_none">No MobileTopographer point</string>
  
+    <string name="pleasewait">Please wait</string>
+    <string name="processing">processing &#8230;</string>
 
     <!-- UNUSED string name="head_tail">Memory: </string -->
     <string name="head_tail_failed">Failed to read DistoX memory index</string>
@@ -214,7 +233,7 @@
     <string name="group_reset">Reset groups</string>
 
     <!-- UNUSED string name="scale">scale</string -->
-    <string name="reversed">reversed</string>
+    <!-- UNUSED string name="reversed">reversed</string -->
     <string name="options">options</string>
     <string name="outline">outline</string>
     <string name="out">out</string>
@@ -226,8 +245,17 @@
     <!-- UNUSED string name="hidden_add">Hide previous shots</string -->
     <!-- UNUSED string name="hidden_del">Show previous shots</string -->
     <string name="hidden_show">Show shots beyond station</string>
-    <string name="splays_toggle">Toggle splays display</string>
+    <!-- UNUSED string name="splays_toggle">Toggle splays display</string -->
+    <string name="splays_on_off">Splays</string>
     <string name="splays">splays</string>
+    <string name="splays_show">Show splays</string>
+    <string name="foresurface_show">Show fore surface</string>
+    <string name="fmt_listen">LISTEN | %1$s</string>
+    <string name="fmt_id">ID %1$s</string>
+    <string name="fmt_latitude">Latitude %1$s</string>
+    <string name="fmt_longitude">Longitude %1$s</string>
+    <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string> 
+
     <string name="fixed">fixed</string>
     <string name="painted">painted</string>
 
@@ -245,12 +273,14 @@
     <string name="no_calibration">No calibration selected</string>
     <string name="no_capture_app">No image capture app</string>
     <string name="no_cave3d">Cave3D not installed</string>
+    <string name="no_data_reduction">No data reduction</string>
     <string name="no_db">No database</string>
     <string name="no_device_address">Device not selected</string>
     <string name="no_device_found">Found no device</string>
     <string name="no_feature_audio">Audio not supported</string>
     <string name="no_gms">Calibration has no data.\nUse Download button</string>
     <string name="no_geo_station">Failed: no geolocalized station</string>
+    <string name="no_leg_first">Selection does not start with a leg</string>
     <string name="no_leg_intersection">Section line crosses no leg</string>
     <string name="no_location_data">No location data</string>
     <string name="no_paired_device">No paired device.\nScan and pair a DistoX</string>
@@ -264,7 +294,7 @@
     <string name="no_survey">No survey selected.</string>
     <string name="no_to_station">No TO station.</string>
     <string name="no_thmanager">ThManager app not installed</string>
-    <string name="no_db_viewer">DB_viewer app not found</string>
+    <!-- UNUSED string name="no_db_viewer">DB_viewer app not found</string -->
     <string name="no_undelete">No item to recover</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f X %3$.2f Y %4$.2f A. %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f X %3$.2f Y %4$.2f C. %5$.1f"</string>
@@ -379,7 +409,7 @@
     <!-- UNUSED string name="scrap_name">sketch name</string -->
     <string name="splay">splay</string>
     <string name="too_many_leg_intersection">Section line crosses many legs</string>
-    <string name="too_many_legs_xsection">Too many legs for X-section</string>
+    <!-- UNUSED string name="too_many_legs_xsection">Too many legs for X-section</string -->
     <!-- UNUSED string name="converted_tdr2th2">Converted sketches binary files to th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Overwrite th2 sketch files ?</string -->
     <string name="section_area">Section area: %1$.1f</string>
@@ -398,7 +428,7 @@
     <string name="sensor_type">type</string>
     <string name="sensor_value">value</string>
     <string name="sensor_comment">comment</string>
-    <string name="insufficient_data">insufficient sensor data</string>
+    <!-- UNUSED string name="insufficient_data">insufficient sensor data</string -->
 
     <!-- UNUSED string name="shot_clino">clino</string -->
     <!-- UNUSED string name="shot_compass">compass</string -->
@@ -418,7 +448,7 @@
     <string name="sketch3d_name">name</string>
     <string name="sketch3d_new">New model</string>
     <string name="sketch3d_next">next station</string>
-    <string name="sketch3d_loading">loading model ...</string>
+    <string name="sketch3d_loading">loading model &#8230;</string>
     <!-- UNUSED string name="sketch3d_null_name">Missing 3D sketch name</string -->
     <!-- UNUSED string name="sketch3d_null_next">Missing 3D sketch next station</string -->
     <!-- UNUSED string name="sketch3d_null_start">Missing 3D sketch base station</string -->
@@ -441,6 +471,8 @@
     <string name="saturated_coeffs">WARNING: saturated calibration coefficients</string>
     <string name="out_of_memory">WARNING: out of memory !</string>
     <string name="disk_io_error">CRITICAL: disk i/o error !</string>
+    <string name="toporobot_warning">WARNING: TopoRobot policy is experimental !</string>
+
 
     <string name="cannot_rename">Cannot rename survey</string>
     <string name="declination">Magn. decl.</string>
@@ -478,8 +510,9 @@
     <string name="stat_component">Components %1$d</string>
     <string name="stat_depth">Depth %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Duplicate shots %1$d %2$.1f %3$s</string>
-    <string name="stat_leg">Legs %1$d %2$.1f %3$s %4$.1f %5$s</string>
+    <string name="stat_leg">Legs %1$d %2$.1f %3$.1f %4$.1f %5$s</string>
     <string name="stat_length">Length %1$.1f %2$s</string>
+    <string name="stat_extlen">3D length %1$.1f %2$s</string>
     <string name="stat_projlen">Plan length %1$.1f %2$s</string>
     <string name="stat_loop">Loops %1$d</string>
     <string name="stat_origin">Zero station: %1$s</string>
@@ -505,7 +538,7 @@
     <string name="extended_profile">Extended profile</string>
     <!-- UNUSED string name="v_section">V-SECTION</string -->
     <string name="h_section">H-SECTION</string>
-    <string name="landscape">landscape</string>
+    <!-- UNUSED string name="landscape">landscape</string -->
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Failed DistoX memory-read</string>
@@ -518,7 +551,7 @@
     <!-- UNUSED string name="ask_close_survey">Close survey?</string -->
     <string name="ask_gps_service">Set GPS service?</string>
 
-    <string name="button_add"       >Add       </string>
+    <!-- UNUSED string name="button_add"       >Add       </string -->
     <string name="button_back"      >Back      </string>
     <string name="button_cancel"    >Cancel    </string>
     <string name="button_change"    >Change    </string>
@@ -534,20 +567,28 @@
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
     <!-- UNUSED string name="button_manual"    >Manual    </string -->
     <!-- UNUSED string name="button_measure"   >Measure   </string -->
-    <string name="button_photo"   >Photo</string>
+    <!-- UNUSED string name="button_photo"   >Photo</string -->
     <!-- UNUSED string name="button_sensor"  >Sensors</string -->
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Sketch</string>
     <string name="button_more"    >More</string>
+    <string name="button_next"    >Next</string>
+    <string name="button_skip"    >Skip</string>
+    <string name="button_done"    >Done</string>
     <string name="button_lrud"    >+ LRUD</string>
     <string name="button_ok"        >OK        </string>
+    <string name="button_off"       >off</string>
+    <string name="button_on"        >on</string>
     <string name="button_open"      >Open      </string>
     <string name="button_read"      >Read      </string>
     <!-- UNUSED string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Dump      </string>
     <string name="button_rename"    >Rename    </string>
+    <string name="button_renumber"  >Renumber</string>
+    <string name="button_bedding"   >Bedding plane</string>
+    <string name="button_highlight" >Highlight</string>
     <string name="button_replace"   >Replace   </string>
     <string name="button_reset"     >Reset     </string>
     <string name="button_left"      >LEFT</string>
@@ -574,6 +615,7 @@
 
     <string name="mode_leg">Legs</string>
     <string name="mode_splay">Splays</string>
+    <string name="mode_latest">Latest splays</string>
     <string name="mode_station">Stations</string>
     <string name="mode_grid">Grid</string>
     <string name="mode_fixed">Fix refs</string>
@@ -652,7 +694,7 @@
 
     <!-- UNUSED string name="station_next">NEXT</string -->
     <string name="no_shot_between_stations">no_shot_between_stations</string>
-    <string name="few_line_points">Line has too few points</string>
+    <!-- UNUSED string name="few_line_points">Line has too few points</string -->
     <string name="line_delete">line_delete</string>
     <string name="flip_shots">Flip shots</string>
     <string name="split_nothing">Nothing to split</string>
@@ -691,7 +733,7 @@
     <string name="help_coeff">Show calibration coefficients</string>
     <string name="help_color">Clear splay colors</string>
     <string name="help_continue">Continue drawing a line</string>
-    <string name="help_contour">Contour editing</string>
+    <!-- UNUSED string name="help_contour">Contour editing</string -->
     <string name="help_current_station">Saved stations</string>
     <string name="help_azimuth">"Extend" reference</string>
     <string name="help_device">Device activity</string>
@@ -721,7 +763,7 @@
     <string name="help_photo">Photos</string>
     <string name="help_sensor">Measurements</string>
     <string name="help_3d">3D view (Cave3D)</string>
-    <string name="help_move">Move/zoom mode</string>
+    <!-- UNUSED string name="help_move">Move/zoom mode</string -->
     <string name="help_draw">Drawing mode</string>
     <string name="help_edit">Editing mode</string>
     <string name="help_refs">Sketching references</string>
@@ -809,7 +851,7 @@
     <string name="title_coverage">Calibration data distribution</string>
     <string name="title_coeff">Calibration coefficients</string>
     <string name="title_color_picker">Pick a color</string>
-    <string name="title_contour">Contour</string>
+    <!-- UNUSED string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Saved stations</string>
     <string name="title_station_search">Enter station</string>
@@ -850,7 +892,7 @@
     <string name="title_split">Sketch split</string>
 
     <string name="title_stats">Statistics</string>
-    <string name="title_step">Step</string>
+    <!-- UNUSED string name="title_step">Step</string -->
     <string name="title_survey">Survey Info</string>
     <string name="title_survey_new">New survey</string>
     <string name="title_survey_export">Export survey</string>
@@ -864,7 +906,7 @@
   <string name="pref_cat_drawing">SKETCHING</string>
   <string name="pref_cat_import_export">IMPORT_EXPORT</string>
   <string name="pref_cat_calib">CALIBRATIONS</string>
-  <string name="pref_cat_min_algo">MIN ALGO</string>
+  <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
   <string name="pref_cat_device">DEVICES</string>
   <string name="pref_cat_sketch">3D MODELS</string>
   <string name="pref_cat_log">LOGS</string>
@@ -906,8 +948,8 @@
   <string name="pref_station_prefix_summary">Export station prefix (compass)</string>
   <string name="pref_compass_splays_title">Compass splays</string>
   <string name="pref_compass_splays_summary">Export splays in Compass files</string>
-  <string name="pref_trobot_names_title">TopoRobot station names</string>
-  <string name="pref_trobot_names_summary">Station names are in TopoRobot style</string>
+  <!-- UNUSED string name="pref_trobot_names_title">TopoRobot station names</string -->
+  <!-- UNUSED string name="pref_trobot_names_summary">Station names are in TopoRobot style</string -->
   <string name="pref_ortho_lrud_title">LRUD splay angle</string>
   <string name="pref_ortho_lrud_summary">Minimum splay-leg angle for LRUD splays</string>
   <string name="pref_ortho_lrud_message">LRUD minimum splay-leg angle</string>
@@ -925,8 +967,8 @@
   <string name="pref_survex_lrud_summary">Add LRUD to Survex/Therion export</string>
   <string name="pref_svg_grid_title">SVG grid</string>
   <string name="pref_svg_grid_summary">Add grid to SVG export</string>
-  <string name="pref_svg_in_html_title">SVG in HTML</string>
-  <string name="pref_svg_in_html_summary">Embed SVG export in HTML</string>
+  <!-- UNUSED string name="pref_svg_in_html_title">SVG in HTML</string -->
+  <!-- UNUSED string name="pref_svg_in_html_summary">Embed SVG export in HTML</string -->
   <string name="pref_svg_pointstroke_title">SVG point stroke</string>
   <string name="pref_svg_pointstroke_summary">Width of point symbols in SVG</string>
   <string name="pref_svg_labelstroke_title">SVG label stroke</string>
@@ -1089,9 +1131,9 @@
   <string name="pref_bitmap_bgcolor_message">Background color of sketch PNG export</string>
   <string name="pref_acad_version_title">AutoCAD version</string>
   <string name="pref_acad_version_summary">AutoCAD version</string>
-  <string name="pref_dxf_scale_title">DXF sketch scale</string>
-  <string name="pref_dxf_scale_summary">DXF sketch scale factor</string>
-  <string name="pref_dxf_scale_message">Factor to scale DXF sketch exports</string>
+  <!-- UNUSED string name="pref_dxf_scale_title">DXF sketch scale</string -->
+  <!-- UNUSED string name="pref_dxf_scale_summary">DXF sketch scale factor</string -->
+  <!-- UNUSED string name="pref_dxf_scale_message">Factor to scale DXF sketch exports</string -->
   <string name="pref_dxf_blocks_title">DXF splay endpoints</string>
   <string name="pref_dxf_blocks_summary">DXF splay endpoints</string>
   <string name="pref_thumbnail_title">Thumbnails size</string>
@@ -1113,6 +1155,8 @@
   <string name="pref_segment_message">Minimum distance between points on a line</string>
   <string name="pref_linestyle_title">Line style</string>
   <string name="pref_linestyle_summary">Line drawing style</string>
+  <string name="pref_linecontinue_title">Line continue</string>
+  <string name="pref_linecontinue_summary">Line default continue-mode</string>
   <string name="pref_lineacc_title">Interpolation accuracy</string>
   <string name="pref_lineacc_summary">Bezier interpolation accuracy</string>
   <string name="pref_lineacc_message">Bezier cubic interpolation accuracy</string>
@@ -1179,8 +1223,8 @@
 
   <string name="pref_picker_type_title">Drawing tool picker</string>
   <string name="pref_picker_type_summary">Drawing tool picker type</string>
-  <string name="pref_section_stations_title">X-Section stations</string>
-  <string name="pref_section_stations_summary">X-Section reference stations</string>
+  <!-- UNUSED string name="pref_section_stations_title">X-Section stations</string -->
+  <!-- UNUSED string name="pref_section_stations_summary">X-Section reference stations</string -->
   <string name="pref_station_size_title">Station name size</string>
   <string name="pref_station_size_summary">Size of station names</string>
   <string name="pref_station_size_message">Size of station names</string>
@@ -1197,17 +1241,17 @@
   <string name="pref_auto_section_pt_title">Section points</string>
   <string name="pref_auto_section_pt_summary">Add section point to section lines</string>
 
-  <string name="pref_sketchUsesSplays_title">Sketch splays</string>
-  <string name="pref_sketchUsesSplays_summary">Sketch surface uses splays</string>
+  <!-- UNUSED string name="pref_sketchUsesSplays_title">Sketch splays</string -->
+  <!-- UNUSED string name="pref_sketchUsesSplays_summary">Sketch surface uses splays</string -->
   <string name="pref_sketchLineStep_title">Max side</string>
   <string name="pref_sketchLineStep_summary">Maximum size of a triangle side</string>
   <string name="pref_sketchLineStep_message">Maximum size of a triangle side [m]</string>
-  <string name="pref_sketchBorderStep_title">Border step</string>
-  <string name="pref_sketchBorderStep_summary">Distance between edit-line points</string>
-  <string name="pref_sketchBorderStep_message">Distance between edit-line points</string>
-  <string name="pref_sketchSectionStep_title">Section step</string>
-  <string name="pref_sketchSectionStep_summary">Distance between sections</string>
-  <string name="pref_sketchSectionStep_message">Distance between intermediate sections</string>
+  <!-- UNUSED string name="pref_sketchBorderStep_title">Border step</string -->
+  <!-- UNUSED string name="pref_sketchBorderStep_summary">Distance between edit-line points</string -->
+  <!-- UNUSED string name="pref_sketchBorderStep_message">Distance between edit-line points</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_title">Section step</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_summary">Distance between sections</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_message">Distance between intermediate sections</string -->
   <string name="pref_sketchDeltaExtrude_title">Extrude scale</string>
   <string name="pref_sketchDeltaExtrude_summary">Extrude scale factor</string>
   <string name="pref_sketchDeltaExtrude_message">Extrude scale factor</string>
@@ -1302,8 +1346,8 @@
 
     <string name="perms_mandatory">TopoDroid cannot run without these permissions:</string>
     <string name="perms_optional">TopoDroid may fail without these permissions:</string>
-    <string name="perm_required">Required permissions are now granted. Restart TopoDroid</string>
-    <string name="perm_consider">Consider granting permission: </string>
+    <!-- UNUSED string name="perm_required">Required permissions are now granted. Restart TopoDroid</string -->
+    <!-- UNUSED string name="perm_consider">Consider granting permission: </string -->
     <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">
 \nTopoDroid is an Open Source Android app for surveying caves with the DistoX.

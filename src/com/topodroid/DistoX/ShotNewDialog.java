@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid dialog for a new (manually entered) shot
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -50,8 +50,8 @@ class ShotNewDialog extends MyDialog
                            , IBearingAndClino
 {
   // private ShotWindow mParent;
-  private TopoDroidApp mApp;
-  private ILister mLister;
+  private final TopoDroidApp mApp;
+  private final ILister mLister;
   private DBlock mPrevBlk;
   private boolean  notDone;
   private long mAt; // id of the shot where to add new shot (-1 end)
@@ -130,7 +130,7 @@ class ShotNewDialog extends MyDialog
     mETbackbearing  = (EditText) findViewById(R.id.shot_backbearing );
     mETbackclino    = (EditText) findViewById(R.id.shot_backclino );
 
-    if ( ! TDSetting.mBacksight ) {
+    if ( ! TDSetting.mBacksightInput ) {
       TextView forsight = (TextView) findViewById(R.id.shot_forsight );
       forsight.setVisibility( View.GONE );
       mLbacksight.setVisibility( View.GONE );
@@ -227,23 +227,15 @@ class ShotNewDialog extends MyDialog
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
     layout4.setMinimumHeight( size + 10 );
 
-    // LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
-    //   LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
-    // lp.setMargins( 0, -10, 20, 10 );
-
     mBtnSensor = new MyCheckBox( mContext, size, R.drawable.iz_compass_transp, R.drawable.iz_compass_transp ); 
     layout4.addView( mBtnSensor );
-    LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mBtnSensor.getLayoutParams();
-    params.setMargins( 0, -10, 40, 10 );
-    mBtnSensor.setLayoutParams( params );
+    TDLayout.setMargins( mBtnSensor, 0, -10, 40, 10 );
     mBtnSensor.setOnClickListener( this );
 
     if ( cameraCheck && TDLevel.overAdvanced ) {
       mBtnCamera = new MyCheckBox( mContext, size, R.drawable.iz_camera_transp, R.drawable.iz_camera_transp ); 
       layout4.addView( mBtnCamera );
-      params = (LinearLayout.LayoutParams) mBtnCamera.getLayoutParams();
-      params.setMargins( 0, -10, 40, 10 );
-      mBtnCamera.setLayoutParams( params );
+      TDLayout.setMargins( mBtnCamera, 0, -10, 40, 10 );
       mBtnCamera.setOnClickListener( this );
     }
 
@@ -377,7 +369,7 @@ class ShotNewDialog extends MyDialog
       long shot_extend = DBlock.EXTEND_RIGHT; // DBlock.EXTEND_UNSET; // FIXME-EXTEND
       if ( mRadioLeft.isChecked() ) { shot_extend = -1; }
       else if ( mRadioVert.isChecked() ) { shot_extend = 0; }
-      else if ( mRadioRight.isChecked() ) { shot_extend = 1; }
+      else if ( mRadioRight.isChecked() ) { shot_extend = 1; } // already assigned
       else { // let TopoDroid choose
         try {
           float bx = Float.parseFloat( bearing.replace(',','.') );

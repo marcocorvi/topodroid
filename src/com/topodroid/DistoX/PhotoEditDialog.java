@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid photo edit dialog 
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -37,11 +37,11 @@ import android.media.ExifInterface;
 
 // import android.util.Log;
 
-public class PhotoEditDialog extends MyDialog
-                             implements View.OnClickListener
+class PhotoEditDialog extends MyDialog
+                      implements View.OnClickListener
 {
-  private TopoDroidApp  mApp;
-  private PhotoActivity mParent;
+  private final TopoDroidApp  mApp;
+  private final PhotoActivity mParent;
   private PhotoInfo mPhoto;
   private String mFilename;
 
@@ -174,7 +174,7 @@ public class PhotoEditDialog extends MyDialog
         mParent.dropPhoto( mPhoto );
         break;
       case R.id.photo_image:
-        mApp.viewPhoto( mContext, mFilename );
+        TopoDroidApp.viewPhoto( mContext, mFilename );
         return;
     }
     dismiss();

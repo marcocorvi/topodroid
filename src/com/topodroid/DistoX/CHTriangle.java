@@ -1,11 +1,11 @@
-/** @filke CHTriangle.java
+/* @filke CHTriangle.java
  *
  * @author marco corvi
  * @date nov 2014
  *
  * @brief TopoDroid 3 vector triangle
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  * This software is adapted from TopoLinux implementation,
@@ -61,7 +61,7 @@ class CHTriangle extends CHFacet
   {
     CHTriangle[] ret = new CHTriangle[3];
 
-    Vector va=null, vb=null, vc=null;
+    Vector va, vb, vc;
     if ( p == mV[0] ) {
       va = mV[0];  vb = mV[1];  vc = mV[2];
     } else if ( p == mV[1] ) {

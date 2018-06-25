@@ -8,14 +8,31 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Натиснете отново за да излезете</string>
 
-    <string name="version_ask">Обновяване на версията на TopoDroid.\nИскате ли да преинсталирате елементите за рисуване?</string>
+    <!-- UNUSED string name="version_ask">Обновяване на версията на TopoDroid.\nИскате ли да преинсталирате елементите за рисуване?</string -->
     <string name="symbols_ask">Инсталиране на елементи за рисуване v.%1$s?\n(Текущи v.%2$s)</string>
+
+    <!-- TODO string name="setup_textsize_title">TopoDroid setup. Text size</string -->
+    <!-- TODO string name="setup_buttonsize_title">TopoDroid setup. Button size</string -->
+    <!-- TODO string name="setup_drawingunit_title">TopoDroid setup. Icons size</string -->
+    <!-- TODO string name="setup_done_title">TopoDroid setup. Done</string -->
+
+    <!-- TODO string name="setup_textsize">Set the text size.\nYou can always change this later thru the main window settings.</string -->
+    <!-- TODO string name="setup_buttonsize">Set the button size.\nYou can always change this later thru the main window settings.</string -->
+    <!-- TODO string name="setup_drawingunit">Set the sketch icon size.\nYou can always change this later thru the sketch window settings.</string -->
+    <!-- TODO string name="setup_done">The basic setup in done.\n\n
+	    If you experience problems with the DistoX connection, try and set the insecure socket.\n\n
+	    Other settings concern the presentation in the sketching window (icon size, label size, line width, etc.)
+	    you should set them to your needs./n/n
+    </string -->
+    <!-- OK string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
 
     <string name="POINT">Точка</string>
     <string name="LINE">Линия</string>
     <string name="AREA">Площ</string>
     <string name="HELP">Помощ</string>
     <string name="STATION">Репер </string>
+    <!-- TODO string name="UP">UPWARD</string -->
+    <!-- TODO string name="DOWN">DOWNWARD</string -->
 
     <string name="cut">Изрязване</string>
     <string name="copy">Копиране</string>
@@ -131,7 +148,7 @@
     <string name="found_groups">Намерени %1$d групи</string>
     <!-- UNUSED string name="few_plots">Няма достатъчно скици</string -->
     <string name="few_calibs">Няма достатъчно калибрации</string>
-    <string name="getting_info">Прочитане на DistoX инфо...</string>
+    <string name="getting_info">Прочитане на DistoX инфо&#8230;</string>
 
     <string name="calib_import_title">Импортиране на калибрация</string>
     <string name="import_title">Импортиране на файл</string>
@@ -147,10 +164,12 @@
     <string name="import_calib_no_data">Калибр. файл: няма данни</string>
     <string name="import_calib_io_error">Калибр. файл: грешка при четене</string>
     <string name="import_zip_ok">Успешно импортиране на zip файл</string>
-    <string name="import_zip_wait">Импортирането може да отнеме време. Моля изчакайте …</string>
+    <!-- UNUSED string name="import_zip_wait">Импортирането може да отнеме време. Моля изчакайте …</string -->
     <!-- UNUSED string name="sketch_saving">Записване на скица… Моля изчакайте…</string -->
     <string name="MT_points_none">Няма точки на MobileTopographer</string>
 
+    <!-- TODO string name="pleasewait">Please wait</string -->
+    <!-- TODO string name="processing">processing &#8230;</string -->
 
     <!-- UNUSED string name="head_tail">Памет: </string -->
     <string name="head_tail_failed">Неуспешен прочит на индекс от DistoX паметта</string>
@@ -213,7 +232,7 @@
     <string name="group_reset">Изчистване на групите</string>
 
     <!-- UNUSED string name="scale">мащаб</string -->
-    <string name="reversed">обръщане</string>
+    <!-- UNUSED string name="reversed">обръщане</string -->
     <string name="options">опции</string>
     <string name="outline">контур</string>
     <string name="out">вън</string>
@@ -225,8 +244,16 @@
     <!-- UNUSED string name="hidden_add">Скриване на предишни репери</string -->
     <!-- UNUSED string name="hidden_del">Показване на предишни репери</string -->
     <string name="hidden_show">Показване на измервания след репер</string>
-    <string name="splays_toggle">Показване/скриване на странични изм.</string>
+    <!-- UNUSED string name="splays_toggle">Показване/скриване на странични изм.</string -->
+    <!-- TODO string name="splays_on_off">Splays</string -->
     <string name="splays">Странични изм.</string>
+    <!-- TODO string name="splays_show">Show splays</string -->
+    <!-- TODO string name="foresurface_show">Show fore surface</string -->
+    <!-- TODO string name="fmt_listen">LISTEN | %1$s</string -->
+    <!-- TODO string name="fmt_id">ID %1$s</string -->
+    <!-- TODO string name="fmt_latitude">Latitude %1$s</string -->
+    <!-- TODO string name="fmt_longitude">Longitude %1$s</string -->
+    <!-- TODO string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string --> 
     <string name="fixed">Фиксиран</string>
     <string name="painted">Боядисан</string>
 
@@ -244,12 +271,14 @@
     <string name="no_calibration">Не е избрана калибрация</string>
     <string name="no_capture_app">Липсва програма за камера</string>
     <string name="no_cave3d">Cave3D не е инсталирана</string>
+    <!-- TODO string name="no_data_reduction">No data reduction</string -->
     <string name="no_db">Липсва база данни</string>
     <string name="no_device_address">Липсва избрано устройство</string>
     <string name="no_device_found">Не е намерено устройство</string>
     <string name="no_feature_audio">Не се поддържа аудио</string>
     <string name="no_gms">Калибрацията на съдържа данни.\nИзползвайте бутона за изтегляне на данни</string>
     <string name="no_geo_station">Грешка: няма георефериран репер</string>
+    <!-- TODO string name="no_leg_first">Selection does not start with a leg</string -->
     <string name="no_leg_intersection">Линията на сечението не пресича нито една отсечка</string>
     <string name="no_location_data">Няма данни за местоположение</string>
     <string name="no_paired_device">Лиспва свързано устройство.\nСканирайте и свържете DistoX</string>
@@ -263,7 +292,7 @@
     <string name="no_survey">Не е избрана картировка</string>
     <string name="no_to_station">Няма репер ДО</string>
     <string name="no_thmanager">ThManager не е инсталирана</string>
-    <string name="no_db_viewer">Програмата SQliteViewer не е инсталирана</string>
+    <!-- UNUSED string name="no_db_viewer">Програмата SQliteViewer не е инсталирана</string -->
     <string name="no_undelete">Няма елементи за възстановяване</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Азимут %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Наклон %5$.1f"</string>
@@ -378,7 +407,7 @@
     <!-- UNUSED string name="scrap_name">Име на скица</string -->
     <string name="splay">странично измервание</string>
     <string name="too_many_leg_intersection">Линията на сечението пресича повече от една отсечка</string>
-    <string name="too_many_legs_xsection">Твърде много отсечки за сечение</string>
+    <!-- UNUSED string name="too_many_legs_xsection">Твърде много отсечки за сечение</string -->
     <!-- UNUSED string name="converted_tdr2th2">Конвертиране на файлове със скици от двоични в th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Презаписване на съшествуващи th2 файлове?</string -->
     <string name="section_area">Площ на сечение: %1$.1f</string>
@@ -397,7 +426,7 @@
     <string name="sensor_type">тип</string>
     <string name="sensor_value">стойност</string>
     <string name="sensor_comment">коментар</string>
-    <string name="insufficient_data">недостатъчни данни от сензора</string>
+    <!-- UNUSED string name="insufficient_data">недостатъчни данни от сензора</string -->
 
     <!-- string name="shot_clino">clino</string -->
     <!-- string name="shot_compass">compass</string -->
@@ -439,6 +468,7 @@
     <string name="saturated_coeffs">Внимание: наситени данни за калиб. коефициенти</string>
     <string name="out_of_memory">Внимание: недостатъчна памет!</string>
     <string name="disk_io_error">Грешка при четене/запис на диска!</string>
+    <!-- TODO string name="toporobot_warning">WARNING: TopoRobot policy is experimental !</string -->
     <string name="cannot_rename">Не може да се преименува картировката</string>
     <string name="declination">Магн. деклинация</string>
     <string name="description">описание</string>
@@ -474,8 +504,9 @@
     <string name="stat_component">Компоненти %1$d</string>
     <string name="stat_depth">Дълбочина %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Дублирани отсечки %1$d %2$.1f %3$s</string>
-    <string name="stat_leg">Отсечки %1$d %2$.1f %3$s %4$.1f %5$s</string>
+    <string name="stat_leg">Отсечки %1$d %2$.1f %3$.1f %4$.1f %5$s</string>
     <string name="stat_length">Дължина %1$.1f %2$s</string>
+    <!-- TODO string name="stat_extlen">3D length %1$.1f %2$s</string -->
     <string name="stat_projlen">Редуцирана дължина %1$.1f %2$s</string>
     <string name="stat_loop">Полигони %1$d</string>
     <string name="stat_origin">Начален репер: %1$s</string>
@@ -501,7 +532,7 @@
     <string name="extended_profile">Разгънат разрез</string>
     <!-- UNUSED string name="v_section">Верт. сечение</string -->
     <string name="h_section">Хор. сечение</string>
-    <string name="landscape">Хоризонтално (landscape)</string>
+    <!-- UNUSED string name="landscape">Хоризонтално (landscape)</string -->
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Грешка при четене от паметта на DistoX</string>
@@ -514,7 +545,7 @@
     <!-- UNUSED string name="ask_close_survey">Затваряне на картировката?</string -->
     <string name="ask_gps_service">Избор на GPS услуга?</string>
 
-    <string name="button_add"       >Добавяне  </string>
+    <!-- UNUSED string name="button_add"       >Добавяне  </string -->
     <string name="button_back"      >Обратно   </string>
     <string name="button_cancel"    >Отказ     </string>
     <string name="button_change"    >Промяна   </string>
@@ -530,20 +561,28 @@
     <!-- string name="button_gps_stop"  >Stop      </string -->
     <!-- string name="button_manual"    >Manual    </string -->
     <!-- string name="button_measure"   >Measure   </string -->
-    <string name="button_photo"   >Снимка</string>
+    <!-- UNUSED string name="button_photo"   >Снимка</string -->
     <!-- UNUSED string name="button_sensor"  >Сензори</string -->
     <!-- UNUSED string name="button_direction">Азимут/Наклон</string -->
     <!-- UNUSED string name="button_azimuth">Азимут</string -->
     <string name="button_plot"    >Скица</string>
     <string name="button_more"    >Още</string>
+    <!-- TODO string name="button_next"    >Next</string -->
+    <!-- TODO string name="button_skip"    >Skip</string -->
+    <!-- TODO string name="button_done"    >Done</string -->
     <string name="button_lrud"    >Добавяне на ЛДГД</string>
     <string name="button_ok"        >OK        </string>
+    <!-- TODO string name="button_off"       >off</string -->
+    <!-- TODO string name="button_on"        >on</string -->
     <string name="button_open"      >Отваряне  </string>
     <string name="button_read"      >Четене    </string>
     <!-- UNUSED string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >Прегрупиране</string -->
     <string name="button_dump"      >Запис     </string>
     <string name="button_rename"    >Преименуване</string>
+    <!-- TODO string name="button_renumber"  >Renumber</string -->
+    <!-- TODO string name="button_bedding"   >Bedding plane</string -->
+    <!-- TODO string name="button_highlight" >Highlight</string -->
     <string name="button_replace"   >Подмяна   </string>
     <string name="button_reset"     >Нулиране   </string>
     <string name="button_left"      >Наляво</string>
@@ -570,6 +609,7 @@
 
     <string name="mode_leg">Отсечки</string>
     <string name="mode_splay">Странични</string>
+    <!-- TODO string name="mode_latest">Latest splays</string -->
     <string name="mode_station">Реперни точки</string>
     <string name="mode_grid">Мащабна мрежа</string>
     <string name="mode_fixed">Преместване на скица</string>
@@ -646,7 +686,7 @@
 
     <!-- UNUSED string name="station_next">Следваща</string -->
     <string name="no_shot_between_stations">Няма отсечка м/у реперите</string>
-    <string name="few_line_points">Линията има твърде малко точки</string>
+    <!-- UNUSED string name="few_line_points">Линията има твърде малко точки</string -->
     <string name="line_delete">Изтр. на линия</string>
     <string name="flip_shots">Обръщане на отсечките</string>
     <string name="split_nothing">Няма какво да се раздели</string>
@@ -715,7 +755,7 @@
     <string name="help_photo">Снимки</string>
     <string name="help_sensor">Сензорни измервания</string>
     <string name="help_3d">3D програма (Cave3D)</string>
-    <string name="help_move">Режим на преместване/приближаване</string>
+    <!-- UNUSED string name="help_move">Режим на преместване/приближаване</string -->
     <string name="help_draw">Режим на скициране</string>
     <string name="help_edit">Режим на редактиране</string>
     <string name="help_refs">Избор на данни, които да се показват</string>
@@ -893,8 +933,8 @@
   <string name="pref_station_prefix_summary">Експортиране в cSurvey на префикс в името на реперите</string>
   <string name="pref_compass_splays_title">Странични изм. в Compass</string>
   <string name="pref_compass_splays_summary">Експортиране на стр. изм в Compass</string>
-  <string name="pref_trobot_names_title">TopoRobot имена на репери</string>
-  <string name="pref_trobot_names_summary">Имената на реперите са в стил TopoRobot</string>
+  <!-- UNUSED string name="pref_trobot_names_title">TopoRobot имена на репери</string -->
+  <!-- UNUSED string name="pref_trobot_names_summary">Имената на реперите са в стил TopoRobot</string -->
   <string name="pref_ortho_lrud_title">ЛДГД ъгъл на странично изм.</string>
   <string name="pref_ortho_lrud_summary">Минимален ъгъл м/у отсечка и странично за ГДЛД</string>
   <string name="pref_ortho_lrud_message">Минимален ъгъл м/у отсечка и странично за ГДЛД</string>
@@ -906,8 +946,8 @@
   <string name="pref_survex_lrud_summary">Добавяне на Л/Д/Г/Д в Survex експорт</string>
   <string name="pref_svg_grid_title">SVG мрежа</string>
   <string name="pref_svg_grid_summary">Добавяне на мрежа в SVG експорт</string>
-  <string name="pref_svg_in_html_title">SVG в HTML</string>
-  <string name="pref_svg_in_html_summary">Вмъкване на SVG експорт в HTML</string>
+  <!-- UNUSED string name="pref_svg_in_html_title">SVG в HTML</string -->
+  <!-- UNUSED string name="pref_svg_in_html_summary">Вмъкване на SVG експорт в HTML</string -->
   <string name="pref_svg_pointstroke_title">SVG широчина точки</string>
   <string name="pref_svg_pointstroke_summary">Широчина на символ точка в SVG</string>
   <string name="pref_svg_labelstroke_title">SVG широчина надпис</string>
@@ -1076,9 +1116,9 @@
   <string name="pref_bitmap_bgcolor_message">Цвят на фона на PNG експортирани скици</string>
   <string name="pref_acad_version_title">AutoCAD версия</string>
   <string name="pref_acad_version_summary">AutoCAD версия</string>
-  <string name="pref_dxf_scale_title">Мащаб на DXF скици</string>
-  <string name="pref_dxf_scale_summary">Мащабен фактор на DXF скици</string>
-  <string name="pref_dxf_scale_message">Фактор за мащабиране на експортиране на DXF скици</string>
+  <!-- UNUSED string name="pref_dxf_scale_title">Мащаб на DXF скици</string -->
+  <!-- UNUSED string name="pref_dxf_scale_summary">Мащабен фактор на DXF скици</string -->
+  <!-- UNUSED string name="pref_dxf_scale_message">Фактор за мащабиране на експортиране на DXF скици</string -->
   <string name="pref_dxf_blocks_title">DXF странични краища</string>
   <string name="pref_dxf_blocks_summary">DXF краища на странични измервания</string>
   <string name="pref_thumbnail_title">Резолюция на мини-картинки</string>
@@ -1100,6 +1140,8 @@
   <string name="pref_segment_message">Минимално разстояние м/у точките в "линия"</string>
   <string name="pref_linestyle_title">Стил на линии</string>
   <string name="pref_linestyle_summary">Стил на линиите за рисуване</string>
+  <!-- TODO string name="pref_linecontinue_title">Line continue</string -->
+  <!-- TODO string name="pref_linecontinue_summary">Line default continue-mode</string -->
   <string name="pref_lineacc_title">"Безие" точност</string>
   <string name="pref_lineacc_summary">Точност на интерполация на криви "Безие"</string>
   <string name="pref_lineacc_message">Точност на кубична интерполация на криви "Безие"</string>
@@ -1166,8 +1208,8 @@
 
   <string name="pref_picker_type_title">Избор на инструмент за рисуване</string>
   <string name="pref_picker_type_summary">Избор на инструмент за рисуване</string>
-  <string name="pref_section_stations_title">Измервания/репери в сечение</string>
-  <string name="pref_section_stations_summary">Показване на измервания в репер на сечение</string>
+  <!-- UNUSED string name="pref_section_stations_title">Измервания/репери в сечение</string -->
+  <!-- UNUSED string name="pref_section_stations_summary">Показване на измервания в репер на сечение</string -->
   <string name="pref_station_size_title">Размер на име на репер</string>
   <string name="pref_station_size_summary">Размер на име на репер</string>
   <string name="pref_station_size_message">Размер на име на репер в скицата</string>
@@ -1184,17 +1226,17 @@
   <string name="pref_auto_section_pt_title">Точки "сечение"</string>
   <string name="pref_auto_section_pt_summary">Добавяне на точки "сечение" към линиите</string>
 
-  <string name="pref_sketchUsesSplays_title">Изобразяване на страничните отсечки</string>
-  <string name="pref_sketchUsesSplays_summary">Повърхността използва страничните измервания</string>
+  <!-- UNUSED string name="pref_sketchUsesSplays_title">Изобразяване на страничните отсечки</string -->
+  <!-- UNUSED string name="pref_sketchUsesSplays_summary">Повърхността използва страничните измервания</string -->
   <string name="pref_sketchLineStep_title">Максимална страна</string>
   <string name="pref_sketchLineStep_summary">Максимален размер на страна на триъгълник (метри)</string>
   <string name="pref_sketchLineStep_message">Максимален размер на страна на триъгълник (метри)</string>
-  <string name="pref_sketchBorderStep_title">Стъпка</string>
-  <string name="pref_sketchBorderStep_summary">Разстояние между точки в линията</string>
-  <string name="pref_sketchBorderStep_message">Разстояние между точки в линията</string>
-  <string name="pref_sketchSectionStep_title">Стъпка в секцията</string>
-  <string name="pref_sketchSectionStep_summary">Разстояние между секциите</string>
-  <string name="pref_sketchSectionStep_message">Разстояние между междинните секции</string>
+  <!-- UNUSED string name="pref_sketchBorderStep_title">Стъпка</string -->
+  <!-- UNUSED string name="pref_sketchBorderStep_summary">Разстояние между точки в линията</string -->
+  <!-- UNUSED string name="pref_sketchBorderStep_message">Разстояние между точки в линията</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_title">Стъпка в секцията</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_summary">Разстояние между секциите</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_message">Разстояние между междинните секции</string -->
   <string name="pref_sketchDeltaExtrude_title">Екструд. мащаб</string>
   <string name="pref_sketchDeltaExtrude_summary">Мащабиращ фактор за екструдиране</string>
   <string name="pref_sketchDeltaExtrude_message">Мащабиращ фактор за екструдиране</string>

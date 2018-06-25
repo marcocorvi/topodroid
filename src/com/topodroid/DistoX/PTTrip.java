@@ -1,11 +1,11 @@
-/** @file PTTrip.java
+/* @file PTTrip.java
  *
  * @author marco corvi
  * @date march 2010
  *
  * @brief PocketTopo file IO
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */

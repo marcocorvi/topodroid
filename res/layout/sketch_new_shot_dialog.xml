@@ -18,7 +18,7 @@
         android:layout_width="0dp"
         android:layout_weight="50"
         android:layout_height="wrap_content"
-        android:hint=" 0 "
+	android:hint="@string/zero"
         android:nextFocusDown="@+id/et_to"
         android:inputType="text"
         />
@@ -27,7 +27,7 @@
         android:layout_width="0dp"
         android:layout_weight="50"
         android:layout_height="wrap_content"
-        android:hint=" 1 "
+	android:hint="@string/one"
         android:nextFocusDown="@+id/et_length"
         android:inputType="text"
         />

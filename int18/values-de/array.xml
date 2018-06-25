@@ -2,10 +2,18 @@
 
 <resources>
 
+  <!-- TODO string-array name="lineContinue">
+     <item name="none">none</item>
+     <item name="start">join with start point</item>
+     <item name="end">join with end point</item>
+     <item name="both">join with both ends</item>
+     <item name="continue">continue</item>
+  </string-array -->
   <string-array name="unitGrid">
      <item name="meter">Meter</item>
      <item name="yard">Yard</item>
-     <item name="two_tf">2 Fuss</item>
+     <item name="two_tf">2 Fuß</item>
+     <item name="ten_cm">10 cm</item>
   </string-array>
 
   <string-array name="loopClosure">
@@ -44,13 +52,16 @@
      <item name="therion">Therion</item>
      <item name="compass">Compass</item>
      <item name="csurvey">cSurvey</item>
+     <item name="ghtopo">GHTopo</item>
      <item name="grottolf">Grottolf</item>
      <item name="pockettopo">PocketTopo</item>
      <item name="polygon">Polygon</item>
      <item name="survex">Survex</item>
      <item name="topo">Topo</item>
+     <item name="toporobot">TopoRobot</item>
      <item name="visualtopo">VisualTopo</item>
      <item name="walls">Walls</item>
+     <item name="winkarst">Winkarst</item>
      <item name="csv">CSV</item>
      <item name="dxf">DXF</item>
   </string-array>
@@ -120,11 +131,11 @@
      <item name="grid3">Dreifachgitter</item>
   </string-array>
 
-  <string-array name="sectionStations">
+  <!-- UNUSED string-array name="sectionStations">
      <item name="both">beide</item>
      <item name="from">dahinter</item>
      <item name="to">davor</item>
-  </string-array>
+  </string-array -->
 
   <!-- UNUSED string-array name="deviceType">
      <item name="none">Kein</item>

@@ -1,11 +1,11 @@
-/** @file DLNSide.java
+/* @file DLNSide.java
  *
  * @author marco corvi
  * @date june 2017
  *
  * @brief TopoDroid Delaunay Traingle side
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */

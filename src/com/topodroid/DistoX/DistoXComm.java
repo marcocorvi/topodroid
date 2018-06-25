@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid-DistoX BlueTooth communication 
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -48,7 +48,7 @@ import android.content.BroadcastReceiver;
 // import android.database.DataSetObserver;
 
 // import android.widget.Toast;
-import android.util.Log;
+// import android.util.Log;
 
 class DistoXComm extends TopoDroidComm
 {
@@ -211,8 +211,8 @@ class DistoXComm extends TopoDroidComm
       } catch ( IOException e ) {
         TDLog.Error( "close socket IOexception " + e.getMessage() );
         // TDLog.LogStackTrace( e );
-      } finally {
-        mBTConnected = false;
+      // } finally {
+      //   mBTConnected = false;
       }
     }
     mBTConnected = false;
@@ -275,10 +275,7 @@ class DistoXComm extends TopoDroidComm
       if ( ! DeviceUtil.isPaired( mBTDevice ) ) {
         for ( int n=0; n < TDSetting.mConnectSocketDelay; ++n ) {
           // TDLog.Log( TDLog.LOG_BT, "[4] pairing device: trial " + n );
-          try {
-            Thread.yield();
-            Thread.sleep( 100 );
-          } catch ( InterruptedException e ) { }
+	  TopoDroidUtil.yieldDown( 100 );
           if ( DeviceUtil.isPaired( mBTDevice ) ) {
             // TDLog.Log( TDLog.LOG_BT, "[4a] device paired at time " + n );
             break;
@@ -490,7 +487,7 @@ class DistoXComm extends TopoDroidComm
               // Log.v("DistoX", "RF comm thread start ... ");
               startRfcommThread( -1, lister );
               while ( mRfcommThread != null ) {
-                try { Thread.sleep( 100 ); } catch ( InterruptedException e ) { }
+                TopoDroidUtil.slowDown( 100 );
               }
             // } else {
             //   Log.v("DistoX", "RF comm thread not null ");
@@ -503,7 +500,7 @@ class DistoXComm extends TopoDroidComm
   }
 
   /** send the set/unset calib-mode command
-   * @note called within connectSocket()
+   * note called within connectSocket()
    * nothing to read (only write) --> no AsyncTask
    */
   private boolean setCalibMode( boolean turn_on )
@@ -514,7 +511,7 @@ class DistoXComm extends TopoDroidComm
   /** Toggle device calibration mode
    * @param address    device address
    * @param type       device type
-   * @return 
+   * @return true if success
    */
   boolean toggleCalibMode( String address, int type )
   {
@@ -760,7 +757,7 @@ class DistoXComm extends TopoDroidComm
               // TDLog.Log( TDLog.LOG_COMM, "download data: read " + nReadPackets + " / " + to_read );
               prev_read = nReadPackets;
             }
-            try { Thread.sleep( 100 ); } catch ( InterruptedException e ) { }
+            TopoDroidUtil.slowDown( 100 );
           }
           // TDLog.Log( TDLog.LOG_COMM, "download done: read " + nReadPackets );
           ret = nReadPackets;
@@ -768,7 +765,7 @@ class DistoXComm extends TopoDroidComm
       } else {
         startRfcommThread( -1, lister );
         while ( mRfcommThread != null ) {
-          try { Thread.sleep( 100 ); } catch ( InterruptedException e ) { }
+          TopoDroidUtil.slowDown( 100 );
         }
         // TDLog.Log( TDLog.LOG_COMM, "download done: read " + nReadPackets );
         // cancelRfcommThread(); // called by closeSocket() which is called by destroySocket()
@@ -816,4 +813,4 @@ class DistoXComm extends TopoDroidComm
     return ret;
   }
 
-};
+}

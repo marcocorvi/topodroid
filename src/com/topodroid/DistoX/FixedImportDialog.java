@@ -1,11 +1,11 @@
-/** @file FixedImportDialog.java
+/* @file FixedImportDialog.java
  *
  * @author marco corvi
  * @date jan 2016
  *
  * @brief TopoDroid MobileTopographer pointlist files dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -55,7 +55,7 @@ class FixedImportDialog extends MyDialog
   static final private String POINTLISTS = Environment.getExternalStorageDirectory().getPath() + "/MobileTopographer/pointlists";
   static final private String POINTLISTS_PRO = Environment.getExternalStorageDirectory().getPath() + "/MobileTopographerPro/pointlists";
 
-  private FixedActivity mParent;
+  private final FixedActivity mParent;
 
   private ArrayAdapter<String> mArrayAdapter;
   private ListView mList;
@@ -173,20 +173,29 @@ class FixedImportDialog extends MyDialog
         int len = vals.length;
         if ( len >= 4 ) {
           ret = true;
-          StringBuilder sb = new StringBuilder();
-          sb.append( vals[len-3].trim() );
-          sb.append( " " );
-          sb.append( vals[len-4].trim() );
-          sb.append( " " );
-          sb.append( vals[len-2].trim() );
-          sb.append( " " );
-          sb.append( vals[len-1].trim() );
+          // StringBuilder sb = new StringBuilder();
+          // sb.append( vals[len-3].trim() );
+          // sb.append( " " );
+          // sb.append( vals[len-4].trim() );
+          // sb.append( " " );
+          // sb.append( vals[len-2].trim() );
+          // sb.append( " " );
+          // sb.append( vals[len-1].trim() );
+		  
           // int k=0;
           // String name = vals[k];
           // while ( ++k < len-4 ) {
           //    name = name + "," + vals[k];
           // }
-          mArrayAdapter.add( sb.toString() );
+          String sb = vals[ len - 3 ].trim() +
+              " " +
+              vals[ len - 4 ].trim() +
+              " " +
+              vals[ len - 2 ].trim() +
+              " " +
+              vals[ len - 1 ].trim();
+          mArrayAdapter.add( sb );
+		  // mArrayAdapter.add( sb.toString() );
         }
       }
     } catch ( IOException e ) { 

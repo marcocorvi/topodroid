@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid DistoX Beat Heeb's calibration algorithm
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  * This software is adapted from TopoLinux implementation,
@@ -425,7 +425,8 @@ class CalibAlgoBH extends CalibAlgo
         gl[k] = g[k].plus( gs.timesV( nL ) );
       }
     } else {
-      for ( int k=0; k<size; ++k ) gl[k] = g[k];
+	  // for ( int k=0; k<size; ++k ) gl[k] = g[k];
+      System.arraycopy(g, 0, gl, 0, size);
     }
     Vector grp = new Vector();
     Vector mrp = new Vector();

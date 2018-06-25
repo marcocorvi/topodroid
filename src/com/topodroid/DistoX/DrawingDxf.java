@@ -1,11 +1,11 @@
-/** @file DrawingDxf.java
+/* @file DrawingDxf.java
  *
  * @author marco corvi
  * @date mar 2013
  *
  * @brief TopoDroid drawing: dxf export
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -35,16 +35,17 @@ class DrawingDxf
 {
   private static boolean mVersion13 = false;
 
-  static final private float POINT_SCALE   = 10.0f;
-  static final private float STATION_SCALE = 6.0f;
-  static final private float LABEL_SCALE   = 8.0f;
-  static final private float AXIS_SCALE    = 6.0f;
-  static final String zero = "0.0";
-  static final String one  = "1.0";
+  static final private float POINT_SCALE   = 10.0f; // scale of point icons: only ACAD_6
+  // the next three are for text
+  static final private float STATION_SCALE =  6.0f / DrawingUtil.SCALE_FIX; // scale of station names
+  static final private float LABEL_SCALE   =  8.0f / DrawingUtil.SCALE_FIX; // scale of label text
+  static final private float AXIS_SCALE    = 10.0f / DrawingUtil.SCALE_FIX; // scale of text on the axes
+  static final private String zero = "0.0";
+  static final private String one  = "1.0";
   // static final String half = "0.5";
   static final private String two_n_half = "2.5";
   static final String ten  = "10";
-  static final String empty = "";
+  static final private String empty = "";
   static final private String my_style      = "MyStyle";
   static final private String standard      = "Standard";
   static final private String lt_continuous = "Continuous";
@@ -133,7 +134,7 @@ class DrawingDxf
     pw.printf(Locale.US, "  %d%s%.2f%s", code, EOL, val, EOL );
   }
 
-  static void writeInt(  BufferedWriter out, int code, int val ) throws IOException
+  static private void writeInt(  BufferedWriter out, int code, int val ) throws IOException
   {
     out.write( SPACE + code + EOL + val + EOL );
   }
@@ -234,6 +235,18 @@ class DrawingDxf
     }
     printString( pw, 8, layer );
     printXYZ( pw, x * scale, -y * scale, 0.0f, 0 );
+    return handle;
+  }
+
+  static private int printLine(PrintWriter pw, float scale, int handle, String layer, float x1, float y1, float x2, float y2)
+  {
+    printString( pw, 0, "LINE" );
+    ++handle;
+    printAcDb( pw, handle, AcDbEntity, AcDbLine );
+    printString( pw, 8, layer );
+    // printInt(  pw, 39, 0 );         // line thickness
+    printXYZ( pw, x1*scale, y1*scale, 0.0f, 0 );
+    printXYZ( pw, x2*scale, y2*scale, 0.0f, 1 );
     return handle;
   }
 
@@ -426,16 +439,16 @@ class DrawingDxf
       // printString( pw, 7, my_style ); // style (optional)
       // pw.printf("%s\%s 0%s", "\"10\"", EOL, EOL );
       printXYZ( pw, x, y, 0, 0 );
-      // printXYZ( pw, 0, 0, 1, 1 ); // second alignmenmt (otional)
+      // printXYZ( pw, 0, 0, 1, 1 );   // second alignmenmt (otional)
       // printXYZ( pw, 0, 0, 1, 200 ); // extrusion (otional 0 0 1)
-      // printFloat( pw, 39, 0 );   // thickness (optional 0) 
-      printFloat( pw, 40, scale );   // height 
-      // printFloat( pw, 41, 1 );    // scale X (optional 1)
-      printFloat( pw, 50, angle );    // rotation [deg]
-      printFloat( pw, 51, 0 );    // oblique angle
-      // printInt( pw, 71, 0 );  // text generation flag (optional 0)
-      // printFloat( pw, 72, 0 );    // H-align (optional 0)
-      // printFloat( pw, 73, 0 );    // V-align
+      // printFloat( pw, 39, 0 );      // thickness (optional 0) 
+      printFloat( pw, 40, scale );     // height
+      // printFloat( pw, 41, 1 );      // scale X (optional 1)
+      printFloat( pw, 50, angle );     // rotation [deg]
+      printFloat( pw, 51, 0 );         // oblique angle
+      // printInt( pw, 71, 0 );        // text generation flag (optional 0)
+      // printFloat( pw, 72, 0 );      // H-align (optional 0)
+      // printFloat( pw, 73, 0 );      // V-align
       printString( pw, 1, label );
       printString( pw, 7, style );
       printString( pw, 100, "AcDbText");
@@ -447,7 +460,7 @@ class DrawingDxf
   {
     mVersion13 = (TDSetting.mAcadVersion >= 13);
     
-    float scale = TDSetting.mDxfScale;
+    float scale = 1.0f/DrawingUtil.SCALE_FIX; // TDSetting.mDxfScale; 
     float xoff = 0;
     float yoff = 0;
     int handle = 0;
@@ -609,6 +622,7 @@ class DrawingDxf
         writeEndTable( out );
         int nr_layers = 7;
 
+        SymbolPointLibrary pointlib = BrushManager.mPointLib;
         SymbolLineLibrary linelib = BrushManager.mLineLib;
         SymbolAreaLibrary arealib = BrushManager.mAreaLib;
         nr_layers += linelib.mSymbolNr + arealib.mSymbolNr;
@@ -631,20 +645,27 @@ class DrawingDxf
           ++handle; printLayer( pw2, handle, "REF",     flag, color, lt_continuous ); ++color; // white
           
           color = 10;
-          if ( linelib != null ) { 
+          // if ( linelib != null ) { // always true
             for ( Symbol line : linelib.getSymbols() ) {
               String lname = "L_" + line.getThName().replace(':','-');
               ++handle; printLayer( pw2, handle, lname, flag, color, lt_continuous ); ++color;
             }
-          }
+          // }
 
           color = 60;
-          if ( arealib != null ) {
+          // if ( arealib != null ) { // always true
             for ( Symbol s : arealib.getSymbols() ) {
               String aname = "A_" + s.getThName().replace(':','-');
               ++handle; printLayer( pw2, handle, aname, flag, color, lt_continuous ); ++color;
             }
-          }
+          // }
+          color = 80;
+          // if ( pointlib != null ) { // always true
+            for ( Symbol point : pointlib.getSymbols() ) {
+              String pname = "P_" + point.getThName().replace(':','-');
+              ++handle; printLayer( pw2, handle, pname, flag, color, lt_continuous ); ++color;
+            }
+          // }
           out.write( sw2.getBuffer().toString() );
         }
         writeEndTable( out );
@@ -765,11 +786,12 @@ class DrawingDxf
           writeBeginTable( out, "BLOCK_RECORD", handle, BrushManager.mPointLib.mSymbolNr );
           {
             for ( int n = 0; n < BrushManager.mPointLib.mSymbolNr; ++ n ) {
-              String block = "P_" + BrushManager.mPointLib.getSymbolThName(n).replace(':','-');
+              String th_name = BrushManager.mPointLib.getSymbolThName(n).replace(':','-');
               writeString( out, 0, "BLOCK_RECORD" );
               ++handle;
               writeAcDb( out, handle, AcDbSymbolTR, "AcDbBlockTableRecord" );
-              writeString( out, 2, block );
+              writeString( out, 8, "P_" + th_name );
+              writeString( out, 2, "B_" + th_name );
               writeInt( out, 70, 0 );              // flag
             }
           }
@@ -784,17 +806,15 @@ class DrawingDxf
         // // 8 layer (0), 2 block name,
         for ( int n = 0; n < BrushManager.mPointLib.mSymbolNr; ++ n ) {
           SymbolPoint pt = (SymbolPoint)BrushManager.mPointLib.getSymbolByIndex(n);
-          String block = "P_" + pt.getThName().replace(':','-');
-
+	  String th_name = pt.getThName().replace(':','-');
           writeString( out, 0, "BLOCK" );
           ++handle;
           writeAcDb( out, handle, AcDbEntity, "AcDbBlockBegin" );
-          writeString( out, 8, "POINT" );
-          writeString( out, 2, block ); // block name, can be repeated with '3'
+          // writeString( out, 8, "P_" + th_name );
+          writeString( out, 2, "B_" + th_name ); // block name, can be repeated with '3'
           writeInt( out, 70, 0 );       // flag 0=none, 1=anonymous, 2=non-conts attr, 4=xref, 8=xref overlay,
                                         // 16=ext. dependent, 32=ext. resolved (ignored), 64=referenced xref (ignored)
           writeXYZ( out, 0, 0, 0, 0 );
-
           out.write( pt.getDxf() );
           // out.write( BrushManager.mPointLib.getPoint(n).getDxf() );
 
@@ -802,7 +822,8 @@ class DrawingDxf
           if ( mVersion13 ) {
             ++handle;
             writeAcDb( out, handle, AcDbEntity, "AcDbBlockEnd");
-            writeString( out, 8, "POINT" );
+            // writeString( out, 8, "POINT" );
+            writeString( out, 8, "P_" + th_name );
           }
         }
       }
@@ -811,40 +832,49 @@ class DrawingDxf
 
       writeSection( out, "ENTITIES" );
       {
-        float SCALE_FIX = DrawingUtil.SCALE_FIX;
+	String scale_len = "20";
+        float sc1 = 20; // DrawingUtil.SCALE_FIX / 2 = 10;
 
         // reference
-        {
-          StringWriter sw9 = new StringWriter();
-          PrintWriter pw9  = new PrintWriter(sw9);
-          printString( pw9, 0, "LINE" );
-          ++handle;
-          printAcDb( pw9, handle, AcDbEntity, AcDbLine );
-          printString( pw9, 8, "REF" );
-          // printInt(  pw9, 39, 0 );         // line thickness
-          printXYZ(  pw9, xmin, -ymax, 0.0f, 0 );
-          printXYZ( pw9, (xmin+10*SCALE_FIX), -ymax, 0.0f, 1 );
-          out.write( sw9.getBuffer().toString() );
-        }
-        {
-          StringWriter sw8 = new StringWriter();
-          PrintWriter pw8  = new PrintWriter(sw8);
-          printString( pw8, 0, "LINE" );
-          ++handle;
-          printAcDb( pw8, handle, AcDbEntity, AcDbLine );
-          printString( pw8, 8, "REF" );
-          // printInt(  pw8, 39, 0 );         // line thickness
-          printXYZ(  pw8, xmin, -ymax, 0.0f, 0 );
-          printXYZ( pw8,  xmin, -ymax+10*SCALE_FIX, 0.0f, 1 );
-          out.write( sw8.getBuffer().toString() );
-        }
-        {
-          StringWriter sw7 = new StringWriter();
-          PrintWriter pw7  = new PrintWriter(sw7);
-          handle = printText( pw7, handle, "10", xmin+10*SCALE_FIX+1, -ymax, 0, AXIS_SCALE, "REF", my_style, xoff, yoff );
-          handle = printText( pw7, handle, "10", xmin, -ymax+10*SCALE_FIX+1, 0, AXIS_SCALE, "REF", my_style, xoff, yoff );
-          out.write( sw7.getBuffer().toString() );
-        }
+        StringWriter sw9 = new StringWriter();
+        PrintWriter pw9  = new PrintWriter(sw9);
+	float sc2 = sc1 / 2;
+        handle = printLine( pw9, 1.0f, handle, "REF", xmin,     -ymax,     xmin+sc1,  -ymax );
+        handle = printLine( pw9, 1.0f, handle, "REF", xmin,     -ymax,     xmin,      -ymax+sc1 );
+        handle = printLine( pw9, 1.0f, handle, "REF", xmin+sc2, -ymax,     xmin+sc2,  -ymax+0.5f ); // 10 m ticks
+        handle = printLine( pw9, 1.0f, handle, "REF", xmin,     -ymax+sc2, xmin+0.5f, -ymax+sc2 );
+        handle = printLine( pw9, 1.0f, handle, "REF", xmin+sc1, -ymax,     xmin+sc1,  -ymax+0.5f ); // 20 m ticks
+        handle = printLine( pw9, 1.0f, handle, "REF", xmin,     -ymax+sc1, xmin+0.5f, -ymax+sc1 );
+        // out.write( sw9.getBuffer().toString() );
+	
+        // printString( pw9, 0, "LINE" );
+        // ++handle;
+        // printAcDb( pw9, handle, AcDbEntity, AcDbLine );
+        // printString( pw9, 8, "REF" );
+        // // printInt(  pw9, 39, 0 );         // line thickness
+        // printXYZ( pw9, xmin, -ymax, 0.0f, 0 );
+        // printXYZ( pw9, (xmin+sc1), -ymax, 0.0f, 1 );
+        // out.write( sw9.getBuffer().toString() );
+
+        // StringWriter sw8 = new StringWriter();
+        // PrintWriter pw8  = new PrintWriter(sw8);
+        // printString( pw8, 0, "LINE" );
+        // ++handle;
+        // printAcDb( pw8, handle, AcDbEntity, AcDbLine );
+        // printString( pw8, 8, "REF" );
+        // // printInt(  pw8, 39, 0 );         // line thickness
+        // printXYZ( pw8, xmin, -ymax, 0.0f, 0 );
+        // printXYZ( pw8,  xmin, -ymax+sc1, 0.0f, 1 );
+        // out.write( sw8.getBuffer().toString() );
+        // out.flush();
+        
+	// offset axes legends by 1
+        // StringWriter sw7 = new StringWriter();
+        // PrintWriter pw7  = new PrintWriter(sw7);
+        handle = printText( pw9, handle, scale_len, xmin+sc1, -ymax+1, 0, AXIS_SCALE, "REF", my_style, xoff, yoff );
+        handle = printText( pw9, handle, scale_len, xmin+1, -ymax+sc1, 0, AXIS_SCALE, "REF", my_style, xoff, yoff );
+        out.write( sw9.getBuffer().toString() );
+       
         out.flush();
 
         // centerline data
@@ -900,7 +930,7 @@ class DrawingDxf
             //   printString( pw41, 8, "SPLAY" );
             //   // printInt( pw41, 39, 1 );         // line thickness
 
-            //   float dhs = scale * blk.mLength * (float)Math.cos( blk.mClino * TDMath.DEG2RAD )*SCALE_FIX; // scaled dh
+            //   float dhs = scale * blk.mLength * (float)Math.cos( blk.mClino * TDMath.DEG2RAD )*sc1/10; // scaled dh
             //   if ( type == PlotInfo.PLOT_PLAN ) {
             //     float x = scale * mDrawingUtil.toSceneX( f.e, f.s );
             //     float y = scale * mDrawingUtil.toSceneY( f.e, f.s );
@@ -911,7 +941,7 @@ class DrawingDxf
             //   } else if ( PlotInfo.isProfile( type ) ) {
             //     float x = scale * mDrawingUtil.toSceneX( f.h, f.v );
             //     float y = scale * mDrawingUtil.toSceneY( f.h, f.v );
-            //     float dv = - blk.mLength * (float)Math.sin( blk.mClino * TDMath.DEG2RAD )*SCALE_FIX;
+            //     float dv = - blk.mLength * (float)Math.sin( blk.mClino * TDMath.DEG2RAD )*sc1/10;
             //     printXYZ( pw41, x, -y, 0.0f, 0 );
             //     printXYZ( pw41, x+dhs*blk.getReducedExtend(), -(y+dv), 0.0f, 1 ); 
             //   } else if ( type == PlotInfo.PLOT_SECTION ) {
@@ -953,14 +983,14 @@ class DrawingDxf
           else if ( path.mType == DrawingPath.DRAWING_PATH_AREA )
           {
             handle = toDxf( pw5, handle, (DrawingAreaPath)path, scale, xoff, yoff );
-          } 
+          }
           else if ( path.mType == DrawingPath.DRAWING_PATH_POINT )
           {
             DrawingPointPath point = (DrawingPointPath) path;
             int idx = 1 + point.mPointType;
             if ( mVersion13 ) {
               if ( point.mPointType == BrushManager.mPointLib.mPointSectionIndex ) {
-                // FIOXME GET_OPTION
+                // FIXME GET_OPTION
                 // String scrapfile = point.mOptions.substring( 7 ) + ".tdr";
                 String scrapname = point.getOption( "-scrap" );
                 if ( scrapname != null ) {
@@ -987,7 +1017,9 @@ class DrawingDxf
         PrintWriter pw6  = new PrintWriter(sw6);
         if ( TDSetting.mAutoStations ) {
           for ( DrawingStationName name : plot.getStations() ) { // auto-stations
-            handle = toDxf( pw6, handle, name, scale, xoff, yoff );
+            handle = toDxf( pw6, handle, name, scale, xoff+1.0f, yoff-1.0f );
+	    float len = 2.0f + name.name().length() * 5.0f; // FIXME fonts ?
+            handle = printLine( pw6,scale,handle,"STATION",name.cx+xoff, -name.cy+yoff,name.cx+xoff+len, -name.cy+yoff );
           }
           out.write( sw6.getBuffer().toString() );
           out.flush();
@@ -1013,39 +1045,43 @@ class DrawingDxf
 
   static private int toDxf( PrintWriter pw, int handle, DrawingStationName sn, float scale, float xoff, float yoff )
   { // FIXME point scale factor is 0.3
+    if ( sn == null ) return handle;
     return printText( pw, handle, sn.name(),  (sn.cx+xoff)*scale, -(sn.cy+yoff)*scale, 0,
                         STATION_SCALE, "STATION", my_style, xoff, yoff );
   }
 
   static private int toDxf( PrintWriter pw, int handle, DrawingStationPath st, float scale, float xoff, float yoff )
   { // FIXME point scale factor is 0.3
+    if ( st == null ) return handle;
     return printText( pw, handle, st.name(),  (st.cx+xoff)*scale, -(st.cy+yoff)*scale, 0,
                         STATION_SCALE, "STATION", my_style, xoff, yoff );
   }
 
   static private int toDxf( PrintWriter pw, int handle, DrawingPointPath point, float scale, float xoff, float yoff )
   { // FIXME point scale factor is 0.3
+    if ( point == null ) return handle;
     if ( point.mPointType == BrushManager.getPointLabelIndex() ) {
       DrawingLabelPath label = (DrawingLabelPath)point;
-      return printText( pw, handle, label.mPointText,  (point.cx+xoff)*scale, -(point.cy+yoff)*scale, (float)label.mOrientation,
+      return printText( pw, handle, label.mPointText,  (point.cx+xoff)*scale, -(point.cy+yoff)*scale, 360.0f-(float)label.mOrientation,
                         LABEL_SCALE, "POINT", my_style, xoff, yoff );
     }
 
-    String block = "P_" + BrushManager.mPointLib.getSymbolThName( point.mPointType ).replace(':','-');
+    String th_name = BrushManager.mPointLib.getSymbolThName( point.mPointType ).replace(':','-');
     // int idx = 1 + point.mPointType;
     printString( pw, 0, "INSERT" );
     ++handle; printAcDb( pw, handle, "AcDbBlockReference" );
-    printString( pw, 8, "POINT" );
-    printString( pw, 2, block );
-    printFloat( pw, 41, POINT_SCALE );
-    printFloat( pw, 42, POINT_SCALE );
-    printFloat( pw, 50, 360-(float)(point.mOrientation) );
+    printString( pw, 8, "P_" + th_name );
+    printString( pw, 2, "B_" + th_name );
+    printFloat( pw, 41, point.getScaleValue()*1.4f ); // FIX Asenov
+    printFloat( pw, 42, point.getScaleValue()*1.4f );
+    printFloat( pw, 50, 360.0f-(float)(point.mOrientation) );
     printXYZ( pw, (point.cx+xoff)*scale, -(point.cy+yoff)*scale, 0, 0 );
     return handle;
   }
 
   static private int toDxf( PrintWriter pw, int handle, DrawingLinePath line, float scale, float xoff, float yoff )
   {
+    if ( line == null ) return handle;
     String layer = "L_" + BrushManager.mLineLib.getSymbolThName( line.lineType() ).replace(':','-');
     int flag = 0;
     if ( mVersion13 && checkSpline( line ) ) {
@@ -1057,6 +1093,7 @@ class DrawingDxf
 
   static private int toDxf( PrintWriter pw, int handle, DrawingAreaPath area, float scale, float xoff, float yoff )
   {
+    if ( area == null ) return handle;
     // Log.v("DistoX", "area size " + area.size() );
     String layer = "A_" + BrushManager.mAreaLib.getSymbolThName( area.areaType() ).replace(':','-');
     if ( mVersion13 && checkSpline( area ) ) {

@@ -1,11 +1,11 @@
-/** @file TRobotSeries.java
+/* @file TRobotSeries.java
  *
  * @author marco corvi
  * @date june 2012
  *
  * @brief TopoDroid survey TopoRobot series 
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */

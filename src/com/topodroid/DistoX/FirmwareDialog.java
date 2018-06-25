@@ -1,11 +1,11 @@
-/** @file FirmwareDialog.java
+/* @file FirmwareDialog.java
  *
  * @author marco corvi
  * @date nov 2011
  *
  * @brief TopoDroid DistoX X310 device firmware dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -47,8 +47,8 @@ class FirmwareDialog extends MyDialog
 
   private EditText mETfile;
 
-  DeviceActivity mParent;
-  TopoDroidApp   mApp;
+  private final DeviceActivity mParent;
+  private final TopoDroidApp   mApp;
   private KeyListener    mETkeyListener;
 
   FirmwareDialog( Context context, DeviceActivity parent, TopoDroidApp app )
@@ -118,11 +118,8 @@ class FirmwareDialog extends MyDialog
       case R.id.firmware_ok:
         String filename = null;
         if ( mETfile.getText() != null ) { 
-          filename = mETfile.getText().toString();
-          if ( filename != null ) {
-            filename = filename.trim();
-            if ( filename.length() == 0 ) filename = null;
-          }
+          filename = mETfile.getText().toString().trim();
+          if ( filename.length() == 0 ) filename = null;
         }
         if ( filename == null ) {
           TDToast.make( mParent, R.string.firmware_file_missing );

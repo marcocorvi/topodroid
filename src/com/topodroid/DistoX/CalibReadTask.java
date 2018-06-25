@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid DistoX calib coeff read task
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -29,9 +29,9 @@ class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
   static final int PARENT_DEVICE = 1;
   static final int PARENT_GM     = 2;
 
-  byte[]   coeff;
-  TopoDroidApp mApp;  // FIXME LEAK
-  Context mContext; // FIXME LEAK
+  private byte[]   coeff;
+  private TopoDroidApp mApp; // FIXME LEAK
+  private Context mContext;  // FIXME LEAK
   private IEnableButtons mEnableButtons;
   private int mParentType;
   // String comp_name;

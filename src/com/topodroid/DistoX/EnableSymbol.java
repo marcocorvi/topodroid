@@ -1,11 +1,11 @@
-/** @file EnableSymbol.java
+/* @file EnableSymbol.java
  *
  * @author marco corvi
  * @date nov 2013
  *
  * @brief TopoDroid enabled symbol(s)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -32,7 +32,7 @@ import android.view.View;
 
 class EnableSymbol implements View.OnClickListener
 {
-  int mType;   // symbol type POINT (0) LINE (1) AREA (2)
+  private int mType;   // symbol type POINT (0) LINE (1) AREA (2)
   // int mIndex;  // symbol index
   boolean mEnabled;
   SymbolInterface mSymbol;
@@ -58,7 +58,7 @@ class EnableSymbol implements View.OnClickListener
   {
     if ( mSymbol.getThName().equals("user") ) {
       mEnabled = true;
-      ((CheckBox)v).setChecked( mEnabled );
+      ((CheckBox)v).setChecked( true ); // true = mEnabled
     } else {
       mEnabled = ! mEnabled;
     }

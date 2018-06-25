@@ -1,11 +1,11 @@
-/** @file DeviceX310MemoryDialog.java
+/* @file DeviceX310MemoryDialog.java
  *
  * @author marco corvi
  * @date nov 2011
  *
  * @brief TopoDroid DistoX X310 device memory dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -23,7 +23,6 @@ import android.content.Context;
 // import android.content.DialogInterface.OnDismissListener;
 
 import android.view.View;
-// import android.view.ViewGroup.LayoutParams;
 
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,10 +42,10 @@ class DeviceX310MemoryDialog extends MyDialog
   private EditText mETdumpfile;
 
   // List< MemoryOctet> mMemory;
-  ArrayAdapter< String > mArrayAdapter;
-  ListView mList;
+  private ArrayAdapter< String > mArrayAdapter;
+  private ListView mList;
 
-  DeviceActivity mParent;
+  private final DeviceActivity mParent;
 
   DeviceX310MemoryDialog( Context context, DeviceActivity parent )
   {

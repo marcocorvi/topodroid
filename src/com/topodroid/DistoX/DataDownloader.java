@@ -1,4 +1,4 @@
-/** @file DataDownloader.java
+/* @file DataDownloader.java
  *
  * @author marco corvi
  * @date sept 2014
@@ -6,7 +6,7 @@
  * @brief TopoDroid survey shots data downloader (continuous mode)
  *
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -52,7 +52,7 @@ class DataDownloader
   }
 
   // private Context mContext; // UNUSED
-  private TopoDroidApp mApp;
+  private final TopoDroidApp mApp;
   // private BroadcastReceiver mBTReceiver = null;
 
   DataDownloader( Context context, TopoDroidApp app )

@@ -8,14 +8,30 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Clicar novamente em VOLTAR para sair</string>
 
-    <string name="version_ask">Atualizando para uma nova versão do TopoDroid.\nQuer re-instalar os símbolos?</string>
+    <!-- UNUSED string name="version_ask">Atualizando para uma nova versão do TopoDroid.\nQuer re-instalar os símbolos?</string -->
     <string name="symbols_ask">Instalar símbolos. v.%1$s?\n(Current v.%2$s)</string>
+
+    <string name="setup_textsize_title">Configuração TopoDroid. Tamanho do texto</string>
+    <string name="setup_buttonsize_title">Configuração TopoDroid. Tamanho dos botões</string>
+    <string name="setup_drawingunit_title">Configuração TopoDroid. Tamanho dos ícones</string>
+    <string name="setup_done_title">Configuração TopoDroid. Fim</string>
+
+    <string name="setup_textsize">Defina o tamanho do texto.\nPode ser alterado depois na janela principal de configurações.</string>
+    <string name="setup_buttonsize">Defina o tamanho dos botões.\nPode ser alterado depois na janela principal de configurações.</string>
+    <string name="setup_drawingunit">Defina o tamanho dos ícones do croqui.\nPode ser alterado depois na janela de configurações do croqui.</string>
+    <string name="setup_done">A configuração básica está terminada.\n\n
+	    Se você tiver problemas com a conexão com a DistoX, experimente a opção "Inseguro" para a configuração "Soquete".\n\n
+	    Há outras configurações que afetam a apresentação na janela de croqui (tamanho dos ícones e rótulos, espessura da linha, etc). Altere-as da maneira que achar mais conveniente./n/n
+    </string>
+    <!-- OK string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
 
     <string name="POINT">PONTO</string>
     <string name="LINE">LINHA</string>
     <string name="AREA">ÁREA</string>
     <string name="HELP">AJUDA</string>
     <string name="STATION">BASE</string>
+    <string name="UP">PARA CIMA</string>
+    <string name="DOWN">PARA BAIXO</string>
 
     <string name="cut">CORTAR</string>
     <string name="copy">COPIAR</string>
@@ -131,7 +147,7 @@
     <string name="found_groups">Encontrados %1$d grupos</string>
     <!-- UNUSED string name="few_plots">Esboços não suficientes</string -->
     <string name="few_calibs">Calibrações insuficientes</string>
-    <string name="getting_info">Obtendo informações da DistoX ...</string>
+    <string name="getting_info">Obtendo informações da DistoX &#8230;</string>
 
     <string name="calib_import_title">Importar calibração</string>
     <string name="import_title">Importar topo</string>
@@ -147,10 +163,12 @@
     <string name="import_calib_no_data">Arquivo de calibração: nenhuma informação</string>
     <string name="import_calib_io_error">Arquivo de calibração: erro na leitura</string>
     <string name="import_zip_ok">Arquivo zip importado com sucesso</string>
-    <string name="import_zip_wait">A importação do arquivo zip pode demorar. Aguarde &#8230;</string>
+    <!-- UNUSED string name="import_zip_wait">A importação do arquivo zip pode demorar. Aguarde &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Salvando croqui &#8230; por favor espere &#8230;</string -->
     <string name="MT_points_none">Nenhum ponto MobileTopographer</string>
  
+    <string name="pleasewait">Por favor espere</string>
+    <string name="processing">processando &#8230;</string>
 
     <!-- UNUSED string name="head_tail">Memória: </string -->
     <string name="head_tail_failed">Falha ao ler o índice de memória da DistoX</string>
@@ -213,7 +231,7 @@
     <string name="group_reset">Reiniciar grupos</string>
 
     <!-- UNUSED string name="scale">Escala</string -->
-    <string name="reversed">invertido</string>
+    <!-- UNUSED string name="reversed">invertido</string -->
     <string name="options">opções</string>
     <string name="outline">contorno</string>
     <string name="out">fora</string>
@@ -225,8 +243,16 @@
     <!-- UNUSED string name="hidden_add">Ocultar visadas até base referência</string -->
     <!-- UNUSED string name="hidden_del">Mostrar visadas até base referência</string -->
     <string name="hidden_show">Mostrar visadas após base</string>
-    <string name="splays_toggle">Alternar exibição das medidas auxiliares</string>
+    <!-- UNUSED string name="splays_toggle">Alternar exibição das medidas auxiliares</string -->
+    <string name="splays_on_off">Medidas auxiliares</string>
     <string name="splays">medidas auxiliares</string>
+    <string name="splays_show">Mostrar medidas auxiliares</string>
+    <string name="foresurface_show">Mostrar toda a superfície</string>
+    <string name="fmt_listen">OUVIR | %1$s</string>
+    <string name="fmt_id">ID %1$s</string>
+    <string name="fmt_latitude">Latitude %1$s</string>
+    <string name="fmt_longitude">Longitude %1$s</string>
+    <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string> 
     <string name="fixed">fixa</string>
     <string name="painted">pintada</string>
 
@@ -244,12 +270,14 @@
     <string name="no_calibration">Nenhuma calibração selecionada</string>
     <string name="no_capture_app">Nenhum aplicativo de captura de imagem</string>
     <string name="no_cave3d">Cave3D não instalado</string>
+    <!-- TODO string name="no_data_reduction">No data reduction</string -->
     <string name="no_db">Nenhum banco de dados</string>
     <string name="no_device_address">Dispositivo não selecionado</string>
     <string name="no_device_found">Nenhum dispositivo encontrado</string>
     <string name="no_feature_audio">Sem suporte para áudio</string>
     <string name="no_gms">Calibração sem dados.\nUse o botão de Download</string>
     <string name="no_geo_station">Falha: nenhuma base geolocalizada</string>
+    <!-- TODO string name="no_leg_first">Selection does not start with a leg</string -->
     <string name="no_leg_intersection">Linha de corte não cruza nenhuma linha de visada</string>
     <string name="no_location_data">Nenhuma informação de posição</string>
     <string name="no_paired_device">Nenhum dispositivo associado.\nBusque e associe uma DistoX</string>
@@ -263,9 +291,9 @@
     <string name="no_survey">Nenhuma topo selecionada</string>
     <string name="no_to_station">Sem base PARA.</string>
     <string name="no_thmanager">O aplicativo ThManager não está instalado</string>
-    <string name="no_db_viewer">DB_viewer não encontrado</string>
+    <!-- UNUSED string name="no_db_viewer">DB_viewer não encontrado</string -->
     <string name="no_undelete">Nenhum item a ser restaurado</string>
-    <string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Azimute %4$.1f"</string>
+    <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Azimute %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Inclinação %4$.1f"</string>
 
     <string name="menu_3d">3D</string>
@@ -377,7 +405,7 @@
     <!-- UNUSED string name="scrap_name">nome do croqui</string -->
     <string name="splay">visada auxiliar</string>
     <string name="too_many_leg_intersection">A linha de corte cruza mais de uma linha de visada.</string>
-    <string name="too_many_legs_xsection">Corte X em bases com visadas para mais de 2 outras bases não é suportado.</string>
+    <!-- UNUSED string name="too_many_legs_xsection">Corte X em bases com visadas para mais de 2 outras bases não é suportado.</string -->
     <!-- UNUSED string name="converted_tdr2th2">Arquivos binários dos croquis convertidos para th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Sobrescrever arquivos de croqui th2?</string -->
     <string name="section_area">Área do corte: %1$.1f</string>
@@ -396,7 +424,7 @@
     <string name="sensor_type">tipo</string>
     <string name="sensor_value">valor</string>
     <string name="sensor_comment">comentário</string>
-    <string name="insufficient_data">informações insuficientes do sensor</string>
+    <!-- UNUSED string name="insufficient_data">informações insuficientes do sensor</string -->
 
     <!-- UNUSED string name="shot_clino">clinômetro</string -->
     <!-- UNUSED string name="shot_compass">bússola</string -->
@@ -438,6 +466,7 @@
     <string name="saturated_coeffs">ALERTA: coeficientes de calibração saturados</string>
     <string name="out_of_memory">ALERTA: sem memória!</string>
     <string name="disk_io_error">CRÍTICO: erro de E/S no disco!</string>
+    <!-- TODO string name="toporobot_warning">WARNING: TopoRobot policy is experimental !</string -->
     <string name="cannot_rename">Não é possível renomear a topo</string>
     <string name="declination">declinação magnética</string>
     <string name="description">descrição</string>
@@ -473,8 +502,9 @@
     <string name="stat_component">Componentes: %1$d</string>
     <string name="stat_depth">Profundidade - Mín: %1$.1f %2$s Máx: %3$.1f %4$s"</string>
     <string name="stat_duplicate">Visadas duplicadas - Qt: %1$d Ext: %2$.1f %3$s</string>
-    <string name="stat_leg">Visadas - Qt: %1$d Ext: %2$.1f %3$s Proj horiz: %4$.1f %5$s</string>
+    <string name="stat_leg">Visadas - Qt: %1$d Ext: %2$.1f %3$.1f Proj horiz: %4$.1f %5$s</string>
     <string name="stat_length">Extensão total: %1$.1f %2$s</string>
+    <string name="stat_extlen">Comprimento 3D %1$.1f %2$s</string>
     <string name="stat_projlen">Projeção horizontal: %1$.1f %2$s</string>
     <string name="stat_loop">Poligonais: %1$d</string>
     <string name="stat_origin">Base inicial: %1$s</string>
@@ -499,7 +529,7 @@
     <string name="extended_profile">Perfil retificado</string>
     <!-- UNUSED string name="v_section">CORTE V</string -->
     <string name="h_section">CORTE H</string>
-    <string name="landscape">retrato</string>
+    <!-- UNUSED string name="landscape">paisagem</string -->
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Falha na leitura da memória da DistoX</string>
@@ -512,7 +542,7 @@
     <!-- UNUSED string name="ask_close_survey">Fechar mapa?</string -->
     <string name="ask_gps_service">Configurar o serviço GPS?</string>
 
-    <string name="button_add"       >Novo       </string>
+    <!-- UNUSED string name="button_add"       >Novo       </string -->
     <string name="button_back"      >Voltar     </string>
     <string name="button_cancel"    >Cancelar   </string>
     <string name="button_change"    >Alterar    </string>
@@ -528,20 +558,28 @@
     <!-- UNUSED string name="button_gps_stop"  >Parar     </string -->
     <!-- UNUSED string name="button_manual"    >Manual    </string -->
     <!-- UNUSED string name="button_measure"   >Medir   </string -->
-    <string name="button_photo"   >Foto</string>
+    <!-- UNUSED string name="button_photo"   >Foto</string -->
     <!-- UNUSED string name="button_sensor"  >Sensores</string -->
     <!-- UNUSED string name="button_direction">Azimute/Clinômetro</string -->
     <!-- UNUSED string name="button_azimuth">Azimute</string -->
     <string name="button_plot"    >Croqui</string>
     <string name="button_more"    >Mais</string>
+    <string name="button_next"    >Próximo</string>
+    <string name="button_skip"    >Ignorar</string>
+    <string name="button_done"    >Fim</string>
     <string name="button_lrud"    >Incluir EDTC</string>
     <!-- OK string name="button_ok"        >OK        </string -->
+    <string name="button_off"       >desligar</string>
+    <string name="button_on"        >ligar</string>
     <string name="button_open"      >Abrir     </string>
     <string name="button_read"      >Ler       </string>
     <!-- UNUSED string name="button_redo"      >Refazer   </string -->
     <!-- UNUSED string name="button_regroup"   >Reagrupar   </string -->
     <string name="button_dump"      >Baixar    </string>
     <string name="button_rename"    >Renomear  </string>
+    <!-- TODO string name="button_renumber"  >Renumber</string -->
+    <!-- TODO string name="button_bedding"   >Bedding plane</string -->
+    <!-- TODO string name="button_highlight" >Highlight</string -->
     <string name="button_replace"   >Substituir</string>
     <string name="button_reset"     >Reiniciar </string>
     <string name="button_left"      >ESQUERDA</string>
@@ -569,6 +607,7 @@
 
     <string name="mode_leg">Visadas</string>
     <string name="mode_splay">Medidas auxiliares</string>
+    <!-- TODO string name="mode_latest">Latest splays</string -->
     <string name="mode_station">Bases</string>
     <string name="mode_grid">Grade</string>
     <string name="mode_fixed">Deslocar croqui X aranha (CUIDADO!)</string>
@@ -645,7 +684,7 @@
 
     <!-- UNUSED string name="station_next">PRÓXIMO</string -->
     <string name="no_shot_between_stations">nenhuma_visada_entre_as_bases</string>
-    <string name="few_line_points">A linha possui quantidade insuficiente de pontos</string>
+    <!-- UNUSED string name="few_line_points">A linha possui quantidade insuficiente de pontos</string -->
     <string name="line_delete">apagar_linha</string>
     <string name="flip_shots">Virar visadas</string>
     <string name="split_nothing">Nada a ser dividido</string>
@@ -684,7 +723,7 @@
     <string name="help_coeff">Mostrar coeficientes de calibração</string>
     <string name="help_color">Voltar medidas auxiliares para cor padrão</string>
     <string name="help_continue">Continuar desenho de uma linha</string>
-    <string name="help_contour">Editar perfil</string>
+    <!-- UNUSED string name="help_contour">Editar perfil</string -->
     <string name="help_current_station">Bases salvas</string>
     <string name="help_azimuth">Referência para retificar perfil</string>
     <string name="help_device">Editar dispositivo em uso</string>
@@ -714,7 +753,7 @@
     <string name="help_photo">Fotos</string>
     <string name="help_sensor">Sensores externos</string>
     <string name="help_3d">App de visualização 3D (Cave3D)</string>
-    <string name="help_move">Modo mover/zoom</string>
+    <!-- UNUSED string name="help_move">Modo mover/zoom</string -->
     <string name="help_draw">Modo DESENHAR</string>
     <string name="help_edit">Modo EDITAR</string>
     <string name="help_refs">Definir tipos de medidas apresentadas</string>
@@ -796,7 +835,7 @@
     <string name="title_coverage">Distribuição dos dados de calibração</string>
     <string name="title_coeff">Coeficientes de calibração</string>
     <string name="title_color_picker">Escolha uma cor</string>
-    <string name="title_contour">Contorno</string>
+    <!-- UNUSED string name="title_contour">Contorno</string -->
     <!-- UNUSED string name="title_coord">Inserir as coordenadas do ponto:</string -->
     <string name="title_current_station">Base gravadas</string>
     <string name="title_station_search">Entre base</string>
@@ -837,7 +876,7 @@
     <string name="title_split">Dividir croqui</string>
 
     <string name="title_stats">Estatísticas</string>
-    <string name="title_step">Passo</string>
+    <!-- UNUSED string name="title_step">Passo</string -->
     <string name="title_survey">Informações da topo</string>
     <string name="title_survey_new">Nova topo</string>
     <string name="title_survey_export">Exportar topo</string>
@@ -892,8 +931,8 @@
   <string name="pref_station_prefix_summary">Exportar prefixo de bases (Compass)</string>
   <string name="pref_compass_splays_title">Medidas auxiliares Compass</string>
   <string name="pref_compass_splays_summary">Exportar medidas auxiliares em arquivos Compass</string>
-  <string name="pref_trobot_names_title">Nomes bases TopoRobot</string>
-  <string name="pref_trobot_names_summary">Os nomes das bases usam o estilo do TopoRobot</string>
+  <!-- UNUSED string name="pref_trobot_names_title">Nomes bases TopoRobot</string -->
+  <!-- UNUSED string name="pref_trobot_names_summary">Os nomes das bases usam o estilo do TopoRobot</string -->
   <string name="pref_ortho_lrud_title">Ângulo med. aux. EDTC Compass</string>
   <string name="pref_ortho_lrud_summary">Ângulo mínimo entre uma medida auxiliar e uma visada para ser uma medida auxiliar EDTC</string>
   <string name="pref_ortho_lrud_message">Ângulo mínimo entre uma medida auxiliar e uma visada para ser EDTC</string>
@@ -911,8 +950,8 @@
   <string name="pref_survex_lrud_summary">Incluir EDTC à exportação do Survex</string>
   <string name="pref_svg_grid_title">Grade SVG</string>
   <string name="pref_svg_grid_summary">Incluir grade no arquivo SVG exportado</string>
-  <string name="pref_svg_in_html_title">SVG em HTML</string>
-  <string name="pref_svg_in_html_summary">Incorporar arquivo SVG exportado em HTML</string>
+  <!-- UNUSED string name="pref_svg_in_html_title">SVG em HTML</string -->
+  <!-- UNUSED string name="pref_svg_in_html_summary">Incorporar arquivo SVG exportado em HTML</string -->
   <string name="pref_svg_pointstroke_title">Espessura ponto SVG</string>
   <string name="pref_svg_pointstroke_summary">Espessura símbolos pontos em SVG</string>
   <string name="pref_svg_labelstroke_title">Espessura rótulo SVG</string>
@@ -1074,9 +1113,9 @@
   <string name="pref_bitmap_bgcolor_message">Cor de fundo de imagem PNG de croqui exportado</string>
   <string name="pref_acad_version_title">Versão AutoCAD</string>
   <string name="pref_acad_version_summary">Versão AutoCAD</string>
-  <string name="pref_dxf_scale_title">Escala croqui DXF</string>
-  <string name="pref_dxf_scale_summary">Fator de escala croqui DXF</string>
-  <string name="pref_dxf_scale_message">Fator de escala na exportação de croqui em DXF</string>
+  <!-- UNUSED string name="pref_dxf_scale_title">Escala croqui DXF</string -->
+  <!-- UNUSED string name="pref_dxf_scale_summary">Fator de escala croqui DXF</string -->
+  <!-- UNUSED string name="pref_dxf_scale_message">Fator de escala na exportação de croqui em DXF</string -->
   <string name="pref_dxf_blocks_title">Ponto final med. aux. DXF</string>
   <string name="pref_dxf_blocks_summary">Ponto final de medida auxiliar DXF</string>
   <string name="pref_thumbnail_title">Tamanho Thumbnails</string>
@@ -1098,6 +1137,8 @@
   <string name="pref_segment_message">Distância mínima entre pontos de linhas</string>
   <string name="pref_linestyle_title">Estilo linha</string>
   <string name="pref_linestyle_summary">Estilo de desenho da linha</string>
+  <!-- TODO string name="pref_linecontinue_title">Line continue</string -->
+  <!-- TODO string name="pref_linecontinue_summary">Line default continue-mode</string -->
   <string name="pref_lineacc_title">Precisão interpolação</string>
   <string name="pref_lineacc_summary">Precisão da interpolação Bézier</string>
   <string name="pref_lineacc_message">Exatidão da interpolação cúbica das curvas Bézier</string>
@@ -1164,8 +1205,8 @@
 
   <string name="pref_picker_type_title">Janela símbolos</string>
   <string name="pref_picker_type_summary">Forma de apresentação da seleção de símbolos</string>
-  <string name="pref_section_stations_title">Bases corte X</string>
-  <string name="pref_section_stations_summary">Bases de referência cortes X</string>
+  <!-- UNUSED string name="pref_section_stations_title">Bases corte X</string -->
+  <!-- UNUSED string name="pref_section_stations_summary">Bases de referência cortes X</string -->
   <string name="pref_station_size_title">Tamanho nome bases</string>
   <string name="pref_station_size_summary">Tamanho do nome das bases</string>
   <string name="pref_station_size_message">Tamanho do nome das bases</string>
@@ -1182,17 +1223,17 @@
   <string name="pref_auto_section_pt_title">Pontos corte</string>
   <string name="pref_auto_section_pt_summary">Adicionar ponto de corte às linhas de corte</string>
 
-  <string name="pref_sketchUsesSplays_title">Medidas auxiliares croqui</string>
-  <string name="pref_sketchUsesSplays_summary">Superfícies no croqui usas medidas auxiliares</string>
+  <!-- UNUSED string name="pref_sketchUsesSplays_title">Medidas auxiliares croqui</string -->
+  <!-- UNUSED string name="pref_sketchUsesSplays_summary">Superfícies no croqui usas medidas auxiliares</string -->
   <string name="pref_sketchLineStep_title">Lado máximo</string>
   <string name="pref_sketchLineStep_summary">Tamanho máximo do lado do triângulo</string>
   <string name="pref_sketchLineStep_message">Tamanho máximo do lado do triângulo [m]</string>
-  <string name="pref_sketchBorderStep_title">Intervalo bordas</string>
-  <string name="pref_sketchBorderStep_summary">Distância entre pontos da linha editada</string>
-  <string name="pref_sketchBorderStep_message">Distância entre pontos da linha editada</string>
-  <string name="pref_sketchSectionStep_title">Intervalo cortes</string>
-  <string name="pref_sketchSectionStep_summary">Distância entre cortes</string>
-  <string name="pref_sketchSectionStep_message">Distância entre cortes consecutivos</string>
+  <!-- UNUSED string name="pref_sketchBorderStep_title">Intervalo bordas</string -->
+  <!-- UNUSED string name="pref_sketchBorderStep_summary">Distância entre pontos da linha editada</string -->
+  <!-- UNUSED string name="pref_sketchBorderStep_message">Distância entre pontos da linha editada</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_title">Intervalo cortes</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_summary">Distância entre cortes</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_message">Distância entre cortes consecutivos</string -->
   <string name="pref_sketchDeltaExtrude_title">Escala extrusão</string>
   <string name="pref_sketchDeltaExtrude_summary">Fator escala de extrusão</string>
   <string name="pref_sketchDeltaExtrude_message">Fator escala de extrusão</string>
@@ -1302,7 +1343,7 @@
   <string name="firmware_title">Atualizador Firmware</string>
   <string name="firmware_file_title">Arquivos Firmware</string>
   <string name="firmware_text">
-\n[1] Selecionar uma das 2 opções: "Enviar" um novo firmware para a DistoX ou "Baixar" o firmware atual da DistoX para para um arquivo local.
+\n[1] Selecionar uma das 2 opções: "Enviar" um novo firmware para a DistoX ou "Baixar" o firmware atual da DistoX para um arquivo local.
 \n[2] Selecione o arquivo a ser enviado ou baixado. Os arquivos de firmware estão na pasta bin.
 \n[3] Assegure-se de que a versão do firmware seja compatível com a versão do hardware da DistoX.
 \n[4] Colocar a DistoX2 na modalidade bootloader: manter o botão "MAIS ou MENOS" pressionado em quanto liga o Disto X com a tecla DIST.

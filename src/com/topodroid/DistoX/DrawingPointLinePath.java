@@ -8,7 +8,7 @@
  * The area border (line) path id DrawingPath.mPath
  *
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.io.PrintWriter;
 
 // used by Log.e
-import android.util.Log;
+// import android.util.Log;
 
 /**
  */
@@ -109,6 +109,7 @@ class DrawingPointLinePath extends DrawingPath
     retracePath();
   }
 
+  // from ICanvasCommand
   @Override
   public void flipXAxis( float z )
   {
@@ -128,14 +129,14 @@ class DrawingPointLinePath extends DrawingPath
     for ( LinePoint p = mFirst.mNext; p != null; p = p.mNext ) {
       if ( p == mFirst ) break;
       // Log.v( "DistoX", "[>] " + p.x + " " + p.y );
-      if ( ++ mSize > 100 ) break;;
+      // if ( ++ mSize > 100 ) break;
     }
     // CHECK;
     int size = 1;
     for ( LinePoint p = mLast.mPrev; p != null; p = p.mPrev ) {
       if ( p == mLast ) break;
       // Log.v( "DistoX", "[<] " + p.x + " " + p.y );
-      if ( ++ size > 100 ) break;;
+      // if ( ++ size > 100 ) break;
     }
     if ( size != mSize ) {
       TDLog.Error( "recount size mismatch " + mSize + " " + size );
@@ -301,10 +302,8 @@ class DrawingPointLinePath extends DrawingPath
   }
 
 
-  // with_arrow: put a arrow-tick before the first point
-  void makeStraight( boolean with_arrow )
+  void makeStraight( )
   {
-    // Log.v( TopoDroidApp.TAG, "make straight with arrow " + with_arrow + " size " + mPoints.size() );
     // if ( mPoints.size() < 2 ) return;
     // LinePoint first = mPoints.get( 0 );
     // LinePoint last  = mPoints.get( mPoints.size() - 1 );
@@ -313,28 +312,9 @@ class DrawingPointLinePath extends DrawingPath
     LinePoint last  = mLast;
 
     clear();
-    if ( with_arrow ) {
-      float dy =   first.x - last.x;
-      float dx = - first.y + last.y;
-      float d = dx*dx + dy*dy;
-      if ( d > 0.00001f ) {
-        d = TDSetting.mArrowLength * TDSetting.mUnit / (float)Math.sqrt( d );
-        dx *= d;
-        dy *= d;
-        addStartPoint( first.x+dx, first.y+dy );
-        addPoint( first.x, first.y );
-      } else {
-        addStartPoint( first.x, first.y );
-      }
-    } else {
-      addStartPoint( first.x, first.y );
-    }
+    addStartPoint( first.x, first.y );
     addPoint( last.x, last.y );
-    if ( with_arrow ) {
-      mDx = mDy = 0;
-    } else {
-      computeUnitNormal();
-    }
+    computeUnitNormal();
     // Log.v( TopoDroidApp.TAG, "make straight final size " + mPoints.size() );
   }
     
@@ -545,12 +525,12 @@ class DrawingPointLinePath extends DrawingPath
     // Log.v( TopoDroidApp.TAG, "area close path" );
   }
 
-  // public ArrayList< LinePoint > getPoints() { return mPoints; }
+  // ArrayList< LinePoint > getPoints() { return mPoints; }
 
-  // public int size() { return mPoints.size(); }
+  // int size() { return mPoints.size(); }
 
   // @Override
-  // public void draw( Canvas canvas )
+  // void draw( Canvas canvas )
   // {
   //   super.draw( canvas );
   //   // Path path = new Path();
@@ -563,7 +543,7 @@ class DrawingPointLinePath extends DrawingPath
   // }
 
   // @Override
-  // public void draw( Canvas canvas, Matrix matrix )
+  // void draw( Canvas canvas, Matrix matrix )
   // {
   //   super.draw( canvas, matrix );
   //   // Path path = new Path();

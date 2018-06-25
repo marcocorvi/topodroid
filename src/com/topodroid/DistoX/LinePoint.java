@@ -1,11 +1,11 @@
-/** @file LinePoint.java
+/* @file LinePoint.java
  *
  * @author marco corvi
  * @date dec 2011
  *
  * @brief TopoDroid drawing: a point on a line
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  *
@@ -50,7 +50,8 @@ class LinePoint extends Point2D
     t =x2;  x2=-y2;  y2= t;
   }
 
-  void flipXAxis(float z)
+  // from ICanvasCommand
+  public void flipXAxis(float z)
   {
     float dx = 2 * DrawingUtil.CENTER_X;
     x1 = dx - x1;

@@ -1,11 +1,11 @@
-/** @file VirtualDistoX.java
+/* @file VirtualDistoX.java
  *
  * @author marco corvi
  * @date mar 2016
  *
  * @brief TopoDroid virtual DistoX
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -197,7 +197,7 @@ class VirtualDistoX
         mDataDone = false;
         while ( ! mDataDone ) {
           if ( mIOWaitAck ) {
-            try { Thread.sleep( 100 ); } catch ( InterruptedException e ) { }
+	    TopoDroidUtil.slowDown( 100 );
           } else {
             octet = mData.peek(); // peekFirst(); // get head of queue
             if ( octet != null ) {
@@ -216,7 +216,7 @@ class VirtualDistoX
               }
             } else {
               // Log.v("DistoX", "VD I/O no octet to write: sleep");
-              try { Thread.sleep( 500 ); } catch ( InterruptedException e ) { }
+              TopoDroidUtil.slowDown( 500 );
             }
           }
         }
@@ -286,11 +286,11 @@ class VirtualDistoX
             }
           }
         } else {
-          try { Thread.sleep( 3000 ); } catch ( InterruptedException e ) { }
+          TopoDroidUtil.slowDown( 3000 );
         }
       }
     }
-  };
+  }
 
   private void startServiceThread()
   {
@@ -320,7 +320,7 @@ class VirtualDistoX
 
   protected float data_available( Vector G, Vector M ) 
   { 
-    // try { Thread.sleep( 500 ); } catch ( InterruptedException e ) { }
+    // TopoDroidUtil.slowDown( 500 );
     if ( mData.size() > 3 && mSplay == 0 ) return -1.0f;
     G.x = (float)(Math.random()*2-1) * TopoDroidUtil.FV / 2;
     G.y = (float)(Math.random()*2-1) * TopoDroidUtil.FV / 2;
@@ -556,12 +556,13 @@ class VirtualDistoX
     int time = 0;
     while ( timeout > 0 && time < timeout ) {
       if ( mData == null ) break;
-      if ( mData.size() == 0 ) try { Thread.sleep(100); } catch (InterruptedException e ) { }
+      if ( mData.size() == 0 ) TopoDroidUtil.slowDown( 100 );
       time += 100;
     }
     if ( mData == null || mData.size() == 0 ) return false;
     MemoryOctet tmp = (MemoryOctet)( mData.poll() ); // pollFirst() );
-    for ( int k=0; k<8; ++k ) octet[k] = tmp.data[k];
+	// for ( int k=0; k<8; ++k ) octet[k] = tmp.data[k];
+    System.arraycopy(tmp.data, 0, octet, 0, 8);
     return true;
   }
 
@@ -579,7 +580,8 @@ class VirtualDistoX
   {
     SharedPreferences.Editor editor = mSharedPrefs.edit();
     editor.putFloat( key, val );
-    editor.apply(); // was editor.commit();
+    editor.apply();
+    // FIXME-23 editor.commit();
   }
 
   private Vector loadVector( String key )

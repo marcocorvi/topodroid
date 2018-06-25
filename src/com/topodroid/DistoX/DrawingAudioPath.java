@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid drawing: audio point
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -32,7 +32,7 @@ import android.util.Base64;
  */
 class DrawingAudioPath extends DrawingPointPath
 {
-  private static float toTherion = TDConst.TO_THERION;
+  private static final float toTherion = TDConst.TO_THERION;
 
   long mId;
   // private Paint paint;
@@ -81,7 +81,7 @@ class DrawingAudioPath extends DrawingPointPath
   }
 
   @Override
-  public String toTherion( )
+  String toTherion( )
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
@@ -94,7 +94,7 @@ class DrawingAudioPath extends DrawingPointPath
   }
 
   @Override
-  public void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil )
+  void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil )
   { 
     // Log.v("DistoX", "audio point " + mId + " survey " + survey );
     File audiofile = new File( TDPath.getSurveyAudioFile( survey, Long.toString( mId ) ) );

@@ -5,13 +5,13 @@
  *
  * @brief TopoDroid survey photo listing
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
 package com.topodroid.DistoX;
 
-import java.io.File;
+// import java.io.File;
 // import java.io.IOException;
 // import java.io.EOFException;
 // import java.io.DataInputStream;
@@ -32,7 +32,6 @@ import android.app.Activity;
 
 // import android.content.Context;
 // import android.content.Intent;
-// import android.content.ActivityNotFoundException;
 
 import android.view.View;
 // import android.view.View.OnClickListener;
@@ -107,7 +106,7 @@ public class PhotoActivity extends Activity
 
   // ----------------------------------------------------------------------
 
-  public void updateDisplay( )
+  private void updateDisplay( )
   {
     // TDLog.Log( TDLog.LOG_PHOTO, "updateDisplay() status: " + StatusName() + " forcing: " + force_update );
     if ( mApp_mData != null && mApp.mSID >= 0 ) {
@@ -154,7 +153,7 @@ public class PhotoActivity extends Activity
     startPhotoDialog( (TextView)view, position );
   }
 
-  public void startPhotoDialog( TextView tv, int pos )
+  private void startPhotoDialog( TextView tv, int pos )
   {
      mSavePhoto = mDataAdapter.get(pos);
      String filename = TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString(mSavePhoto.id) );
@@ -186,10 +185,7 @@ public class PhotoActivity extends Activity
   public void dropPhoto( PhotoInfo photo )
   {
     mApp_mData.deletePhoto( photo.sid, photo.id );
-
-    File imagefile = new File( TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString(photo.id) ) );
-    imagefile.delete();
-
+    TopoDroidUtil.deleteFile( TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString(photo.id) ) );
     updateDisplay( ); // FIXME
   }
 
@@ -219,7 +215,7 @@ public class PhotoActivity extends Activity
     switch ( code ) {
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
         String help_page = getResources().getString( R.string.PhotoActivity );
-        if ( help_page != null ) UserManualActivity.showHelpPage( this, help_page );
+        /* if ( help_page != null ) */ UserManualActivity.showHelpPage( this, help_page );
         return true;
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         super.onBackPressed();

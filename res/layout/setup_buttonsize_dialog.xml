@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  >
+  <TextView android:id="@+id/description"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_marginBottom="@dimen/marginv"
+    android:text="@string/setup_buttonsize"
+    />
+  <LinearLayout android:id="@+id/layout2"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:layout_marginTop="@dimen/marginv"
+      android:layout_marginBottom="@dimen/marginv"
+      >
+      <ImageView android:id="@+id/sample"
+        android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	/>
+  </LinearLayout>
+  <RadioGroup
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_marginBottom="@dimen/marginv"
+    >
+      <RadioButton android:id="@+id/btn_xs"
+        android:layout_width="0dp"
+        android:layout_weight="20"
+          android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/margintiny"
+        android:text="@string/size_xs"
+      />
+      <RadioButton android:id="@+id/btn_s"
+        android:layout_width="0dp"
+        android:layout_weight="20"
+          android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/margintiny"
+        android:text="@string/size_s"
+      />
+      <RadioButton android:id="@+id/btn_m"
+        android:layout_width="0dp"
+        android:layout_weight="20"
+          android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/margintiny"
+        android:text="@string/size_xs"
+      />
+      <RadioButton android:id="@+id/btn_l"
+        android:layout_width="0dp"
+        android:layout_weight="20"
+          android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/margintiny"
+        android:text="@string/size_l"
+      />
+      <RadioButton android:id="@+id/btn_xl"
+        android:layout_width="0dp"
+        android:layout_weight="20"
+          android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/margintiny"
+        android:text="@string/size_xl"
+      />
+
+  </RadioGroup>
+  <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_marginBottom="@dimen/marginv"
+    >
+    <Button android:id="@+id/btn_next"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginRight="@dimen/marginh"
+      style="@style/button_default"
+      android:text="@string/button_next"
+    />
+    <Button android:id="@+id/btn_skip"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginRight="@dimen/marginh"
+      style="@style/button_default"
+      android:text="@string/button_skip"
+    />
+  </LinearLayout>
+</LinearLayout>

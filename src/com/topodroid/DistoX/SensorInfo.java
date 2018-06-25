@@ -1,11 +1,11 @@
-/** @file SensorInfo.java
+/* @file SensorInfo.java
  *
  * @author marco corvi
  * @date aug 2012
  *
  * @brief TopoDroid Sensor info (id, station, comment, value)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */

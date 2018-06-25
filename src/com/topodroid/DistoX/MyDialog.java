@@ -1,11 +1,11 @@
-/** @file MyDialog.java
+/* @file MyDialog.java
  *
  * @author marco corvi
  * @date jan 2016
  *
  * @brief TopoDroid generic dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -26,7 +26,7 @@ import android.view.Window;
 class MyDialog extends Dialog
                       // implements View.OnClickListener
 {
-  protected Context mContext;
+  protected final Context mContext;
   private String mHelpPage = null;
 
   MyDialog( Context context, int help_resource )
@@ -45,7 +45,7 @@ class MyDialog extends Dialog
       requestWindowFeature(Window.FEATURE_NO_TITLE);
     }
     setContentView( layout_resource );
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT ); // NullPointerException
     if ( title_resource != -1 ) {
       setTitle( title_resource );
     }
@@ -57,7 +57,7 @@ class MyDialog extends Dialog
       requestWindowFeature(Window.FEATURE_NO_TITLE);
     }
     setContentView( layout_resource );
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT ); // NullPointerException
     if ( title != null ) {
       setTitle( title );
     }
@@ -69,7 +69,7 @@ class MyDialog extends Dialog
       requestWindowFeature(Window.FEATURE_NO_TITLE);
     }
     setContentView( v );
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT ); // NullPointerException
     if ( title_resource != -1 ) {
       setTitle( title_resource );
     }

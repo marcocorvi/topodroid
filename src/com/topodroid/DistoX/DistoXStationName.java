@@ -1,11 +1,11 @@
-/** @file DistoXStationName.java
+/* @file DistoXStationName.java
  *
  * @author marco corvi
  * @date may 2012
  *
  * @brief TopoDroid station name increment (static)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -29,11 +29,11 @@ class DistoXStationName
     mSecondStation  = incrementName( init );
   }
 
-  private static char[] lc = {
+  private static final char[] lc = {
     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
     'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' 
   };
-  private static char[] uc = {
+  private static final char[] uc = {
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
     'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' 
   };
@@ -107,7 +107,7 @@ class DistoXStationName
     // if name is numeric
     // Log.v( TopoDroidApp.TAG, "incrementing " + name );
 
-    if ( name != null && name.length() > 0 ) {
+    if ( name != null /* && name.length() > 0 */ ) {
       int len = name.length();
       if ( len > 0 ) {
         char ch = name.charAt( len - 1 );
@@ -214,7 +214,7 @@ class DistoXStationName
         return true;
       } else if ( cmp < 0 ) {
         n2 = n0;
-      } else if ( cmp > 0 ) {
+      } else /* if ( cmp > 0 ) */ {
         n1 = n0;
       }
     }
@@ -253,7 +253,7 @@ class DistoXStationName
         return;
       } else if ( cmp < 0 ) {
         n2 = n0;
-      } else if ( cmp > 0 ) {
+      } else /* if ( cmp > 0 ) */ {
         n1 = n0;
       }
     }

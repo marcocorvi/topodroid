@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid export plot to file
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -25,15 +25,15 @@ import android.os.AsyncTask;
 
 class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
 {
-    private Context mContext;  // FIXME LEAK used by Toast
-    private DrawingCommandManager mCommand;
-    private DistoXNum mNum;
+    private final Context mContext;  // FIXME LEAK used by Toast
+    private final DrawingCommandManager mCommand;
+    private final DistoXNum mNum;
     private long mType;
     private String mFullName;
     private String mExt; // extension
     private String filename = null;
     private boolean mToast;
-    private DrawingUtil mDrawingUtil;
+    private final DrawingUtil mDrawingUtil;
 
     ExportPlotToFile( Context context, DrawingCommandManager command, DrawingUtil drawingUtil,
                          DistoXNum num, long type, String name, String ext, boolean toast )

@@ -1,11 +1,11 @@
-/** @file SymbolEnableDialog.java
+/* @file SymbolEnableDialog.java
  *
  * @author marco corvi
  * @date 
  *
  * @brief TopoDroid drawing symbol: 
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -54,7 +54,7 @@ class SymbolEnableDialog extends MyDialog
   // private  Button mBTok;
 
   // private Activity mParent;
-  private TopoDroidApp mApp;
+  // private TopoDroidApp mApp; // NOT USED
 
   private ListView    mList;
   private SymbolAdapter mPointAdapter;
@@ -66,7 +66,7 @@ class SymbolEnableDialog extends MyDialog
   {
     super( context, R.string.SymbolEnableDialog );
     // mParent  = parent;
-    mApp     = app;
+    // mApp     = app;
     mType    = Symbol.LINE; // default symbols are lines
   }
 

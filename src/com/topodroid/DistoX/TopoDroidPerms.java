@@ -1,4 +1,4 @@
-/** @file TopoDroidPerms.java
+/* @file TopoDroidPerms.java
  *
  * @author marco corvi
  * @date may 2018
@@ -6,7 +6,7 @@
  * @brief TopoDroid permission dialog
  *
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * ----------------------------------------------------------
  */
@@ -14,14 +14,13 @@ package com.topodroid.DistoX;
 
 import android.content.Context;
 // import android.content.Intent;
-// import android.content.ActivityNotFoundException;
 
 // import android.app.Dialog;
 import android.widget.Button;
 import android.widget.TextView;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 // import android.net.Uri;
 
 // import android.widget.Toast;

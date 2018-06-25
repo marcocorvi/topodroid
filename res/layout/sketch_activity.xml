@@ -12,10 +12,11 @@
       android:layout_height="match_parent"
   >
     <com.topodroid.DistoX.SketchDrawingSurface
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:clickable="true"
-              android:id="@+id/sketchSurface"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:clickable="true"
+      android:focusable="true"
+      android:id="@+id/sketchSurface"
     />
 
     <LinearLayout

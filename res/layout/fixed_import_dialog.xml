@@ -44,7 +44,7 @@
           android:layout_width="0dp"
           android:layout_weight="40"
           android:layout_height="wrap_content"
-          android:text=" "
+	  android:text="@string/empty"
       />
       <TextView 
           android:id="@+id/tv_lat"
@@ -52,7 +52,7 @@
           android:layout_width="0dp"
           android:layout_weight="40"
           android:layout_height="wrap_content"
-          android:text=" "
+	  android:text="@string/empty"
       />
       <TextView 
           android:id="@+id/tv_alt"
@@ -60,7 +60,7 @@
           android:layout_width="0dp"
           android:layout_weight="20"
           android:layout_height="wrap_content"
-          android:text=" "
+	  android:text="@string/empty"
       />
       <TextView 
           android:id="@+id/tv_asl"
@@ -68,7 +68,7 @@
           android:layout_width="0dp"
           android:layout_weight="20"
           android:layout_height="wrap_content"
-          android:text=" "
+	  android:text="@string/empty"
       />
     </LinearLayout>
 

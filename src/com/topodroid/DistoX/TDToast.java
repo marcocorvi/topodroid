@@ -5,12 +5,13 @@
  *
  * @brief TopoDroid colors
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
 package com.topodroid.DistoX;
 
+import android.annotation.SuppressLint;
 import android.widget.Toast;
 import android.widget.TextView;
 
@@ -29,9 +30,11 @@ class TDToast
   static final private int SHORT    = Toast.LENGTH_SHORT;
   static final private int LONG     = Toast.LENGTH_LONG;
 
-  static void make( Context context, int r ) { show( Toast.makeText( context, r, SHORT ) ); }
+  @SuppressLint("ShowToast")
+  static void make(Context context, int r ) { show( Toast.makeText( context, r, SHORT ) ); }
 
-  static void make( Context context, String text ) { show( Toast.makeText( context, text, SHORT ) ); }
+  @SuppressLint("ShowToast")
+  static void make(Context context, String text ) { show( Toast.makeText( context, text, SHORT ) ); }
   
   static Toast makeToast( Context context, int r )
   {
@@ -40,9 +43,11 @@ class TDToast
     return toast;
   }
 
-  static void makeLong( Context context, int r ) { show( Toast.makeText( context, r, LONG ) ); }
+  @SuppressLint("ShowToast")
+  static void makeLong(Context context, int r ) { show( Toast.makeText( context, r, LONG ) ); }
 
-  static void makeLong( Context context, String text ) { show( Toast.makeText( context, text, LONG ) ); }
+  @SuppressLint("ShowToast")
+  static void makeLong(Context context, String text ) { show( Toast.makeText( context, text, LONG ) ); }
 
   static void makeBG( Context context, int r, int color )
   {

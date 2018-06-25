@@ -1,11 +1,11 @@
-/** @file QCamBox.java
+/* @file QCamBox.java
  *
  * @author marco corvi
  * @date jan. 2017
  *
  * @brief TopoDroid quick cam drawing surface
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -40,8 +40,8 @@ class QCamBox extends View
   {
     super.onDraw( canvas );
 
-    int x = canvas.getWidth() / 2;
-    int y = canvas.getHeight() / 2;
+    int x = /* canvas. */ getWidth() / 2;
+    int y = /* canvas. */ getHeight() / 2;
     int d = x / 4;
     canvas.drawLine( x, 0, x, y-d, mWhite );
     canvas.drawLine( x, y+d, x, 2*y, mWhite );

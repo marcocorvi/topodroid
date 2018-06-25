@@ -1,11 +1,11 @@
-/** @file TopoDroidApp.java
+/* @file TopoDroidApp.java
  *
  * @author marco corvi
  * @date nov 2011
  *
  * @brief TopoDroid application (consts and prefs)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -83,7 +83,7 @@ import android.graphics.BitmapFactory;
 
 import android.net.Uri;
 
-import android.util.Log;
+// import android.util.Log;
 import android.util.DisplayMetrics;
 
 import android.bluetooth.BluetoothAdapter;
@@ -99,7 +99,7 @@ public class TopoDroidApp extends Application
 
   static final String EMPTY = "";
 
-  static String SYMBOL_VERSION = "35";
+  static final String SYMBOL_VERSION = "35";
   static String VERSION = "0.0.0"; 
   static int VERSION_CODE = 0;
   static int MAJOR = 0;
@@ -110,6 +110,7 @@ public class TopoDroidApp extends Application
   static final int SUB_MIN   = 1;
   
   boolean mWelcomeScreen;  // whether to show the welcome screen
+  boolean mSetupScreen;    // whether to show the welcome screen
   // static String mManual;  // manual url
   static Locale mLocale;
   static String mLocaleStr;
@@ -224,7 +225,7 @@ public class TopoDroidApp extends Application
   static long mSecondLastShotId = 0L;
 
   public long lastShotId( ) { return mData.getLastShotId( mSID ); }
-  public long secondLastShotId( ) { return mSecondLastShotId; }
+  // public long secondLastShotId( ) { return mSecondLastShotId; }
 
   Device mDevice = null;
   int    distoType() { return (mDevice == null)? 0 : mDevice.mType; }
@@ -446,6 +447,7 @@ public class TopoDroidApp extends Application
                     (( ret[0] & 0x08 ) != 0)? R.string.device_status_calib : R.string.device_status_normal );
     info.mSilent  = getResources().getString(
                     (( ret[0] & 0x10 ) != 0)? R.string.device_status_silent_on : R.string.device_status_silent_off );
+    resetComm();
     return info;
   }
 
@@ -472,17 +474,22 @@ public class TopoDroidApp extends Application
     //     String.format( getResources().getString( R.string.device_memory ), ret[0], ret[1] ) );
     // }
 
+    resetComm();
     return info;
   }
 
   String readHeadTail( String address, byte[] command, int[] head_tail )
   {
-    return mComm.readHeadTail( address, command, head_tail );
+    String ret = mComm.readHeadTail( address, command, head_tail );
+    resetComm();
+    return ret;
   }
 
   int swapHotBit( String address, int from, int to ) 
   {
-    return mComm.swapHotBit( address, from, to );
+    int ret = mComm.swapHotBit( address, from, to );
+    resetComm();
+    return ret;
   }
 
   // FIXME to disappear ...
@@ -559,6 +566,7 @@ public class TopoDroidApp extends Application
     if ( mWelcomeScreen ) {
       setDefaultSocketType();
     }
+    mSetupScreen = mPrefs.getBoolean( "DISTOX_SETUP_SCREEN", true ); // default: SetupScreen = true
 
     mCheckPerms = FeatureChecker.checkPermissions( this );
 
@@ -720,36 +728,47 @@ public class TopoDroidApp extends Application
       TDToast.make( context, R.string.write_ok );
     }
     if ( b != null ) b.setEnabled( true );
+    resetComm();
   }
 
   // called by CalibReadTask.onPostExecute
   boolean readCalibCoeff( byte[] coeff )
   {
     if ( mComm == null || mDevice == null ) return false;
-    return mComm.readCoeff( mDevice.mAddress, coeff );
+    boolean ret = mComm.readCoeff( mDevice.mAddress, coeff );
+    resetComm();
+    return ret;
   }
 
   // called by CalibToggleTask.doInBackground
   boolean toggleCalibMode( )
   {
     if ( mComm == null || mDevice == null ) return false;
-    return mComm.toggleCalibMode( mDevice.mAddress, mDevice.mType );
+    boolean ret = mComm.toggleCalibMode( mDevice.mAddress, mDevice.mType );
+    resetComm();
+    return ret;
   }
 
   byte[] readMemory( String address, int addr )
   {
     if ( mComm == null || isCommConnected() ) return null;
-    return mComm.readMemory( address, addr );
+    byte[] ret = mComm.readMemory( address, addr );
+    resetComm();
+    return ret;
   }
 
   int readX310Memory( String address, int h0, int h1, ArrayList< MemoryOctet > memory )
   {
-    return mComm.readX310Memory( address, h0, h1, memory );
+    int ret = mComm.readX310Memory( address, h0, h1, memory );
+    resetComm();
+    return ret;
   }
 
   int readA3Memory( String address, int h0, int h1, ArrayList< MemoryOctet > memory )
   {
-    return mComm.readA3Memory( address, h0, h1, memory );
+    int ret = mComm.readA3Memory( address, h0, h1, memory );
+    resetComm();
+    return ret;
   }
 
   // ------------------------------------------------------------------
@@ -864,86 +883,42 @@ public class TopoDroidApp extends Application
         List< PlotInfo > plots = mData.selectAllPlots( sid );
         for ( PlotInfo p : plots ) {
           // Therion
-            old = new File( TDPath.getSurveyPlotTh2File( mySurvey, p.name ) );
-            nev = new File( TDPath.getSurveyPlotTh2File( name, p.name ) );
-            if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+          TopoDroidUtil.renameFile( TDPath.getSurveyPlotTh2File( mySurvey, p.name ), TDPath.getSurveyPlotTh2File( name, p.name ) );
           // Tdr
-            old = new File( TDPath.getSurveyPlotTdrFile( mySurvey, p.name ) );
-            nev = new File( TDPath.getSurveyPlotTdrFile( name, p.name ) );
-            if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+          TopoDroidUtil.renameFile( TDPath.getSurveyPlotTdrFile( mySurvey, p.name ), TDPath.getSurveyPlotTdrFile( name, p.name ) );
           // rename exported plots: dxf png svg csx
-            old = new File( TDPath.getSurveyPlotDxfFile( mySurvey, p.name ) );
-            nev = new File( TDPath.getSurveyPlotDxfFile( name, p.name ) );
-            if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-            old = new File( TDPath.getSurveyPlotSvgFile( mySurvey, p.name ) );
-            nev = new File( TDPath.getSurveyPlotSvgFile( name, p.name ) );
-            if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-            old = new File( TDPath.getSurveyPlotHtmFile( mySurvey, p.name ) ); // SVG in HTML
-            nev = new File( TDPath.getSurveyPlotHtmFile( name, p.name ) );
-            if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-            old = new File( TDPath.getSurveyPlotPngFile( mySurvey, p.name ) );
-            nev = new File( TDPath.getSurveyPlotPngFile( name, p.name ) );
-            if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-            old = new File( TDPath.getSurveyPlotCsxFile( mySurvey, p.name ) );
-            nev = new File( TDPath.getSurveyPlotCsxFile( name, p.name ) );
-            if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+          TopoDroidUtil.renameFile( TDPath.getSurveyPlotDxfFile( mySurvey, p.name ), TDPath.getSurveyPlotDxfFile( name, p.name ) );
+          TopoDroidUtil.renameFile( TDPath.getSurveyPlotSvgFile( mySurvey, p.name ), TDPath.getSurveyPlotSvgFile( name, p.name ) );
+          TopoDroidUtil.renameFile( TDPath.getSurveyPlotHtmFile( mySurvey, p.name ), TDPath.getSurveyPlotHtmFile( name, p.name ) );
+          TopoDroidUtil.renameFile( TDPath.getSurveyPlotPngFile( mySurvey, p.name ), TDPath.getSurveyPlotPngFile( name, p.name ) );
+          TopoDroidUtil.renameFile( TDPath.getSurveyPlotCsxFile( mySurvey, p.name ), TDPath.getSurveyPlotCsxFile( name, p.name ) );
         }
       }
       { // rename sketch files: th3
         List< Sketch3dInfo > sketches = mData.selectAllSketches( sid );
         for ( Sketch3dInfo s : sketches ) {
-          old = new File( TDPath.getSurveySketchOutFile( mySurvey, s.name ) );
-          nev = new File( TDPath.getSurveySketchOutFile( name, s.name ) );
-          if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+          TopoDroidUtil.renameFile( TDPath.getSurveySketchOutFile( mySurvey, s.name ), TDPath.getSurveySketchOutFile( name, s.name ) );
         }
       }
       // rename exported files: csv csx dat dxf kml plt srv svx th top tro 
-        old = new File( TDPath.getSurveyThFile( mySurvey ) );
-        nev = new File( TDPath.getSurveyThFile( name ) );
-        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-        old = new File( TDPath.getSurveyCsvFile( mySurvey ) );
-        nev = new File( TDPath.getSurveyCsvFile( name ) );
-        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-        old = new File( TDPath.getSurveyCsxFile( mySurvey ) );
-        nev = new File( TDPath.getSurveyCsxFile( name ) );
-        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-        old = new File( TDPath.getSurveyCaveFile( mySurvey ) );
-        nev = new File( TDPath.getSurveyCaveFile( name ) );
-        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-        old = new File( TDPath.getSurveyDatFile( mySurvey ) );
-        nev = new File( TDPath.getSurveyDatFile( name ) );
-        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-        old = new File( TDPath.getSurveyDxfFile( mySurvey ) );
-        nev = new File( TDPath.getSurveyDxfFile( name ) );
-        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-        old = new File( TDPath.getSurveyKmlFile( mySurvey ) );
-        nev = new File( TDPath.getSurveyKmlFile( name ) );
-        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-        old = new File( TDPath.getSurveyPltFile( mySurvey ) );
-        nev = new File( TDPath.getSurveyPltFile( name ) );
-        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-        old = new File( TDPath.getSurveySrvFile( mySurvey ) );
-        nev = new File( TDPath.getSurveySrvFile( name ) );
-        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-        old = new File( TDPath.getSurveySvxFile( mySurvey ) );
-        nev = new File( TDPath.getSurveySvxFile( name ) );
-        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-        old = new File( TDPath.getSurveyTopFile( mySurvey ) );
-        nev = new File( TDPath.getSurveyTopFile( name ) );
-        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
-        old = new File( TDPath.getSurveyTroFile( mySurvey ) );
-        nev = new File( TDPath.getSurveyTroFile( name ) );
-        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+        TopoDroidUtil.renameFile( TDPath.getSurveyThFile( mySurvey ), TDPath.getSurveyThFile( name ) );
+        TopoDroidUtil.renameFile( TDPath.getSurveyCsvFile( mySurvey ), TDPath.getSurveyCsvFile( name ) );
+        TopoDroidUtil.renameFile( TDPath.getSurveyCsxFile( mySurvey ), TDPath.getSurveyCsxFile( name ) );
+        TopoDroidUtil.renameFile( TDPath.getSurveyCaveFile( mySurvey ), TDPath.getSurveyCaveFile( name ) );
+        TopoDroidUtil.renameFile( TDPath.getSurveyDatFile( mySurvey ), TDPath.getSurveyDatFile( name ) );
+        TopoDroidUtil.renameFile( TDPath.getSurveyDxfFile( mySurvey ), TDPath.getSurveyDxfFile( name ) );
+        TopoDroidUtil.renameFile( TDPath.getSurveyKmlFile( mySurvey ), TDPath.getSurveyKmlFile( name ) );
+        TopoDroidUtil.renameFile( TDPath.getSurveyPltFile( mySurvey ), TDPath.getSurveyPltFile( name ) );
+        TopoDroidUtil.renameFile( TDPath.getSurveySrvFile( mySurvey ), TDPath.getSurveySrvFile( name ) );
+        TopoDroidUtil.renameFile( TDPath.getSurveySvxFile( mySurvey ), TDPath.getSurveySvxFile( name ) );
+        TopoDroidUtil.renameFile( TDPath.getSurveyTopFile( mySurvey ), TDPath.getSurveyTopFile( name ) );
+        TopoDroidUtil.renameFile( TDPath.getSurveyTroFile( mySurvey ), TDPath.getSurveyTroFile( name ) );
 
       { // rename note file: note
-        old = new File( TDPath.getSurveyNoteFile( mySurvey ) );
-        nev = new File( TDPath.getSurveyNoteFile( name ) );
-        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+        TopoDroidUtil.renameFile( TDPath.getSurveyNoteFile( mySurvey ), TDPath.getSurveyNoteFile( name ) );
       }
       { // rename photo folder: photo
-        old = new File( TDPath.getSurveyPhotoDir( mySurvey ) );
-        nev = new File( TDPath.getSurveyPhotoDir( name ) );
-        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+        TopoDroidUtil.renameFile( TDPath.getSurveyPhotoDir( mySurvey ), TDPath.getSurveyPhotoDir( name ) );
       }
       mySurvey = name;
       return true;
@@ -1038,7 +1013,8 @@ public class TopoDroidApp extends Application
     String defaultSockType = ( android.os.Build.MANUFACTURER.equals("samsung") ) ? "1" : "0";
     Editor editor = mPrefs.edit();
     editor.putString( "DISTOX_SOCK_TYPE", defaultSockType ); 
-    editor.apply(); // was editor.commit();
+    editor.apply(); 
+    // FIXME-23 editor.commit();
   }
 
   private void updateDefaultPreferences()
@@ -1049,6 +1025,7 @@ public class TopoDroidApp extends Application
         editor.putString( "DISTOX_GROUP_BY", "1" ); 
       }
       editor.apply();
+      // FIXME-23 editor.commit();
     }
   }
 
@@ -1061,6 +1038,7 @@ public class TopoDroidApp extends Application
       editor.putString( "DISTOX_CWD", cwd ); 
       editor.putString( "DISTOX_CBD", cbd ); 
       editor.apply();
+      // FIXME-23 editor.commit();
     }
     setCWD( cwd, cbd ); 
   }
@@ -1071,6 +1049,7 @@ public class TopoDroidApp extends Application
       Editor editor = mPrefs.edit();
       editor.putString( "DISTOX_PT_CMAP", cmap ); 
       editor.apply();
+      // FIXME-23 editor.commit();
     }
     PtCmapActivity.setMap( cmap );
   }
@@ -1082,7 +1061,40 @@ public class TopoDroidApp extends Application
     editor.putString( "DISTOX_MAG_THR", Float.toString( magnetic ) ); 
     editor.putString( "DISTOX_DIP_THR", Float.toString( dip ) ); 
     editor.apply();
+    // FIXME-23 editor.commit();
   }
+
+  void setTextSize( int ts )
+  {
+    TDSetting.setTextSize( this, ts );
+    TDSetting.setLabelSize( ts*3 );
+    TDSetting.setStationSize( ts*2 );
+    SharedPreferences.Editor editor = mPrefs.edit();
+    editor.putString( "DISTOX_TEXT_SIZE", Integer.toString(ts) );
+    editor.putString( "DISTOX_LABEL_SIZE", Float.toString(ts*3) );
+    editor.putString( "DISTOX_STATION_SIZE", Float.toString(ts*2) );
+    editor.apply();
+    // FIXME-23 editor.commit();
+  }
+
+  void setButtonSize( int bs )
+  {
+    TDSetting.setSizeButtons( this, bs );
+    SharedPreferences.Editor editor = mPrefs.edit();
+    editor.putString( "DISTOX_SIZE_BUTTONS", Integer.toString(bs) );
+    editor.apply();
+    // FIXME-23 editor.commit();
+  }
+
+  void setDrawingUnit( float u )
+  {
+    TDSetting.setDrawingUnit( this, u );
+    SharedPreferences.Editor editor = mPrefs.edit();
+    editor.putString( "DISTOX_DRAWING_UNIT", Float.toString(u) );
+    editor.apply();
+    // FIXME-23 editor.commit();
+  }
+
 
   void setShotDataPreference( float leg_tolerance, int leg_shots, float extend_thr,
                               float vthreshold, boolean splay_extend, int timer, int volume )
@@ -1096,6 +1108,7 @@ public class TopoDroidApp extends Application
     editor.putString( "DISTOX_SHOT_TIMER",  Integer.toString( timer ) ); 
     editor.putString( "DISTOX_BEEP_VOLUME", Integer.toString( volume ) ); 
     editor.apply();
+    // FIXME-23 editor.commit();
   }
 
   void setPlotScreenPreference( float line_width, float survey_width, float station_size, float label_size, 
@@ -1109,6 +1122,7 @@ public class TopoDroidApp extends Application
     editor.putString( "DISTOX_DOT_RADIUS",      Float.toString( dot_size ) ); 
     editor.putString( "DISTOX_CLOSENESS",       Float.toString( selection_radius ) ); 
     editor.apply();
+    // FIXME-23 editor.commit();
   }
 
   void setToolScreenPreference( float point_scale, float section_line_tick, int line_style,
@@ -1122,6 +1136,7 @@ public class TopoDroidApp extends Application
     editor.putString( "DISTOX_LINE_ACCURACY", Float.toString( bezier_accuracy ) ); 
     editor.putString( "DISTOX_LINE_CORNER",   Float.toString( bezier_corner ) ); 
     editor.apply();
+    // FIXME-23 editor.commit();
   }
   
   void setSurveyLocationPreference( String crs, boolean gps_averaging, String units, int alt, boolean alt_lookup )
@@ -1133,6 +1148,7 @@ public class TopoDroidApp extends Application
     editor.putString( "DISTOX_ALTITUDE", Integer.toString( alt ) ); 
     editor.putBoolean( "DISTOX_ALTIMETRIC", alt_lookup );
     editor.apply();
+    // FIXME-23 editor.commit();
   }
 
 
@@ -1148,6 +1164,7 @@ public class TopoDroidApp extends Application
     SharedPreferences.Editor editor = mPrefs.edit();
     editor.putBoolean( preference, val );
     editor.apply(); // Very important to save the preference
+    // FIXME-23 editor.commit();
   }
 
   void setDevice( String address ) 
@@ -1172,6 +1189,7 @@ public class TopoDroidApp extends Application
       Editor editor = mPrefs.edit();
       editor.putString( TDSetting.keyDeviceName(), address ); 
       editor.apply();
+      // FIXME-23 editor.commit();
     }
   }
 
@@ -1224,7 +1242,7 @@ public class TopoDroidApp extends Application
     if ( TDSetting.mTRobotShot ) {
       long millis = SystemClock.uptimeMillis(); // FIXME TROBOT
       if ( millis > trobotmillis + 10000 ) {
-        TDToast.make( this, "WARNING TopoRobot policy is very experimental" );
+        TDToast.make( this, R.string.toporobot_warning );
         trobotmillis = millis;
       }
       mStationName.assignStationsAfter_TRobot( mData, mSID, blk0, list, sts );
@@ -1252,7 +1270,7 @@ public class TopoDroidApp extends Application
     if ( TDSetting.mTRobotShot ) {
       long millis = SystemClock.uptimeMillis(); // FIXME TROBOT
       if ( millis > trobotmillis + 10000 ) {
-        TDToast.make( this, "WARNING TopoRobot policy is very experimental" );
+        TDToast.make( this, R.string.toporobot_warning );
         trobotmillis = millis;
       }
       mStationName.assignStations_TRobot( mData, mSID, list, sts );
@@ -1529,8 +1547,7 @@ public class TopoDroidApp extends Application
   {
     String lines[] = { "blocks", "debris", "clay", "presumed", "sand", "ice" };
     for ( String line : lines ) {
-      File file = new File( TDPath.APP_LINE_PATH + line );
-      if ( file.exists() ) file.delete();
+      TopoDroidUtil.deleteFile( TDPath.APP_LINE_PATH + line );
     }
   }
 
@@ -1542,7 +1559,7 @@ public class TopoDroidApp extends Application
     if ( files == null ) return;
     for ( int i=0; i<files.length; ++i ) {
       if ( files[i].isDirectory() ) continue;
-      files[i].delete();
+      if ( ! files[i].delete() ) TDLog.Error("File delete failed ");
     }
   }
     
@@ -1599,7 +1616,9 @@ public class TopoDroidApp extends Application
           File file = new File( pathname );
           if ( overwrite || ! file.exists() ) {
             // APP_SAVE SYMBOLS
-            if ( file.exists() ) file.renameTo( new File( TDPath.getSymbolSaveFile( filepath ) ) );
+            if ( file.exists() ) {
+              if ( ! file.renameTo( new File( TDPath.getSymbolSaveFile( filepath ) ) ) ) TDLog.Error("File rename error");
+            }
 
             TDPath.checkPath( pathname );
             FileOutputStream fout = new FileOutputStream( pathname );
@@ -1688,7 +1707,7 @@ public class TopoDroidApp extends Application
     * @param clino    from block
     * @param extend   ...
     * @return id of inserted leg
-    * @note before inserting the duplicate leg it set the CurrentStationName
+    * note before inserting the duplicate leg it set the CurrentStationName
     */
   long insertDuplicateLeg( String from, String to, float distance, float bearing, float clino, int extend )
   {
@@ -1993,19 +2012,24 @@ public class TopoDroidApp extends Application
     return mData.insertPlot( sid, -1L, name, type, 0L, from, to, 0, 0, TopoDroidApp.mScaleFactor, azimuth, clino, hide, nick, 0, false );
   }
 
-  void viewPhoto( Context ctx, String filename )
+  // @param ctx       context
+  // @prarm filename  photo filename
+  static void viewPhoto( Context ctx, String filename )
   {
     // Log.v("DistoX", "photo <" + filename + ">" );
     File file = new File( filename );
-    Uri uri = Uri.fromFile( file );
-    // Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("file://" + filename ) );
-    Intent intent = new Intent(Intent.ACTION_VIEW );
-    intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
-    intent.setDataAndType( uri, "image/jpeg" );
-    try {
-      ctx.startActivity( intent );
-    } catch ( ActivityNotFoundException e ) {
-      // gracefully fail without saying anything
+    if ( file.exists() ) {
+      // Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("file://" + filename ) );
+      Intent intent = new Intent(Intent.ACTION_VIEW );
+      intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+      intent.setDataAndType( Uri.fromFile( file ), "image/jpeg" );
+      try {
+        ctx.startActivity( intent );
+      } catch ( ActivityNotFoundException e ) {
+        // gracefully fail without saying anything
+      }
+    } else {
+      TDToast.make( ctx, "ERROR file not found: " + filename );
     }
   }
 

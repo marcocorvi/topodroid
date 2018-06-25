@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid calibration data dialog (to assign the group number)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -30,7 +30,6 @@ import android.widget.Button;
 // import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.view.View;
-// import android.view.ViewGroup.LayoutParams;
 // import android.view.View.OnKeyListener;
 // import android.view.KeyEvent;
 
@@ -40,7 +39,7 @@ import android.view.View;
 class CalibGMDialog extends MyDialog
                            implements View.OnClickListener
 {
-  private GMActivity  mParent;
+  private final GMActivity  mParent;
   private CalibCBlock mBlk;
 
   // private EditText mETbearing;
@@ -88,9 +87,7 @@ class CalibGMDialog extends MyDialog
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
     layout2.setMinimumHeight( size + 20 );
     
-    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
-      LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
-    lp.setMargins( 0, 10, 20, 10 );
+    LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 0, 10, 20, 10 );
 
     // mButtonOK     = new MyCheckBox( mContext, size, R.drawable.iz_save, R.drawable.iz_save ); 
     mButtonDelete = new MyCheckBox( mContext, size, R.drawable.iz_delete, R.drawable.iz_delete ); 
@@ -101,11 +98,6 @@ class CalibGMDialog extends MyDialog
     // layout2.addView( mButtonOK, lp );
     layout2.addView( mButtonDelete, lp );
 
-
-    // LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mCBregroup.getLayoutParams();
-    // params.setMargins( 0, 0, 40, 0 );
-    // mCBregroup.setLayoutParams( params );
-    
     mButtonOK     = (Button) findViewById(R.id.gm_ok );
     mButtonCancel = (Button) findViewById(R.id.gm_cancel );
     // mButtonDelete = (Button) findViewById(R.id.gm_delete );
@@ -117,7 +109,7 @@ class CalibGMDialog extends MyDialog
     eTroll.setText( String.format(Locale.US, "%.1f", mBlk.mRoll ) );
     tVerror.setText( String.format(Locale.US, "%.4f", mBlk.mError ) );
 
-    mETname.setText( Long.toString( mBlk.mGroup ) );
+    mETname.setText( String.format(Locale.US, "%d", mBlk.mGroup ) );
     mButtonOK.setOnClickListener( this );
     mButtonDelete.setOnClickListener( this );
     mButtonCancel.setOnClickListener( this );
@@ -144,7 +136,7 @@ class CalibGMDialog extends MyDialog
       // if ( name == null || name.length() == 0 ) {
       //   name = mETname.getHint().toString();
       // }
-      if ( name == null || name.length() == 0 ) {
+      if ( /* name == null || */ name.length() == 0 ) { // name == null always false
         mETname.setError( mParent.getResources().getString( R.string.error_group_required ) );
         return;
       } else {

@@ -1,11 +1,11 @@
-/** @file DLNWall.java
+/* @file DLNWall.java
  *
  * @author marco corvi
  * @date june 2017
  *
  * @brief TopoDroid Delaunay-Voronoi class
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -19,7 +19,7 @@ import java.util.Stack;
 // import java.io.PrintWriter;
 // import java.io.IOException;
 
-import android.util.Log;
+// import android.util.Log;
 
 class DLNWall
 {

@@ -1,11 +1,11 @@
-/** @file SketchModel.java
+/* @file SketchModel.java
  *
  * @author marco corvi
  * @date feb 2013
  *
  * @brief TopoDroid 3d sketch: sketch 3D model
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -58,7 +58,7 @@ class SketchModel
   SketchSurface mCurrentSurface;
 
   private Matrix mMatrix;
-  List< NumStation > stations;
+  private List< NumStation > stations;
   // List< NumShot >    shots;
   // List< NumSplay >   splays;
   List< SketchPath > mPaths;
@@ -79,7 +79,7 @@ class SketchModel
   int mDisplayMode  = SketchDef.DISPLAY_NONE;
   int mActivityMode = SketchDef.MODE_MOVE;
 
-  int cnt;
+  private int cnt;
 
   private float pi4 = (float)(Math.PI/4);
   private float pi2 = pi4 * 2;
@@ -854,7 +854,7 @@ class SketchModel
         line = line.substring( 0, comment );
       }
       line = line.trim();
-      line.replaceAll(" *", " ");
+      line = line.replaceAll(" *", " ");
       // line.replaceAll("\\s+", " ");
     }
     return line;

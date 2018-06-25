@@ -5,7 +5,7 @@
  *
  * @brief Selection among drawing items
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * ----------------------------------------------------
  */
@@ -84,26 +84,26 @@ class Selection
 
   synchronized void clearReferencePoints()
   {
-      Iterator< SelectionPoint > it = mPoints.iterator();
-      while( it.hasNext() ) {
-        SelectionPoint sp1 = (SelectionPoint)it.next();
-        if ( sp1.isReferenceType() ) {
-          sp1.setBucket( null );
-          it.remove( );
-        }
+    Iterator< SelectionPoint > it = mPoints.iterator();
+    while( it.hasNext() ) {
+      SelectionPoint sp1 = (SelectionPoint)it.next();
+      if ( sp1.isReferenceType() ) {
+        sp1.setBucket( null );
+        it.remove( );
       }
+    }
   }
 
   synchronized void clearDrawingPoints()
   {
-      Iterator< SelectionPoint > it = mPoints.iterator();
-      while( it.hasNext() ) {
-        SelectionPoint sp1 = (SelectionPoint)it.next();
-        if ( sp1.isDrawingType() ) {
-          sp1.setBucket( null );
-          it.remove( );
-        }
+    Iterator< SelectionPoint > it = mPoints.iterator();
+    while( it.hasNext() ) {
+      SelectionPoint sp1 = (SelectionPoint)it.next();
+      if ( sp1.isDrawingType() ) {
+        sp1.setBucket( null );
+        it.remove( );
       }
+    }
   }
 
   void insertStationName( DrawingStationName st )
@@ -114,7 +114,7 @@ class Selection
   /** like insertItem, but it returns the inserted SelectionPoint
    * @param path     point-line path
    * @param pt       new point on the point-line
-   * @return
+   * @return newly cretaed selection point
    */
   SelectionPoint insertPathPoint( DrawingPointLinePath path, LinePoint pt )
   {
@@ -205,9 +205,7 @@ class Selection
     float y0 = sp.Y();
     for ( SelectionBucket bucket : mBuckets ) {
       if ( bucket.contains( x0, y0, dmin, dmin ) ) {
-        final Iterator jt = bucket.mPoints.iterator();
-        while( jt.hasNext() ) {
-          SelectionPoint sp2 = (SelectionPoint)jt.next();
+        for ( SelectionPoint sp2 : bucket.mPoints ) {
           if ( sp == sp2 ) continue;
           float d = sp2.distance( x, y );
           if ( d < dmin ) {
@@ -225,9 +223,7 @@ class Selection
     SelectionPoint spmin = getBucketNearestPoint( sp, x, y, dmin );
     if ( spmin != null ) return spmin;
 
-    final Iterator it = mPoints.iterator();
-    while( it.hasNext() ) {
-      SelectionPoint sp1 = (SelectionPoint)it.next();
+    for ( SelectionPoint sp1 : mPoints ) {
       if ( sp == sp1 ) continue;
       float d = sp1.distance( x, y );
       if ( d < dmin ) {
@@ -288,9 +284,7 @@ class Selection
     float y0 = lp.y;
     for ( SelectionBucket bucket : mBuckets ) {
       if ( bucket.contains( x0, y0, 10f, 10f ) ) {
-        final Iterator jt = bucket.mPoints.iterator();
-        while( jt.hasNext() ) {
-          SelectionPoint sp = (SelectionPoint)jt.next();
+        for ( SelectionPoint sp : bucket.mPoints ) {
           if ( lp == sp.mPoint ) return sp;
         }
       }
@@ -319,7 +313,19 @@ class Selection
     return ret;
   }
 
-  private void bucketSelectAt(float x,float y,float radius,int mode,SelectionSet sel,boolean legs,boolean splays,boolean stations)
+  private boolean containsStation( DrawingPath p, ArrayList<String> stations ) 
+  {
+    if ( stations == null ) return false;
+    DBlock blk = p.mBlock;
+    if ( blk == null ) return false;
+    String station = blk.mFrom;
+    if ( station == null || station.length() == 0 ) return false;
+    return stations.contains( station );
+  }
+
+
+  private void bucketSelectAt(float x,float y,float radius,int mode,SelectionSet sel,boolean legs,boolean splays,boolean stations,
+		              ArrayList<String> splays_on, ArrayList<String> splays_off )
   {
     // Log.v("DistoX", "bucket select at " + x + " " + y + " R " + radius + " buckets " + mBuckets.size() );
     if ( mode == Drawing.FILTER_ALL ) {
@@ -327,9 +333,16 @@ class Selection
         if ( bucket.contains( x, y, radius, radius ) ) {
           for ( SelectionPoint sp : bucket.mPoints ) {
             if ( !legs && sp.type() == DrawingPath.DRAWING_PATH_FIXED ) continue;
-            if ( !splays && sp.type() == DrawingPath.DRAWING_PATH_SPLAY ) continue;
+            // if ( !splays && sp.type() == DrawingPath.DRAWING_PATH_SPLAY ) continue;
             if ( !stations && (    sp.type() == DrawingPath.DRAWING_PATH_STATION 
                                 || sp.type() == DrawingPath.DRAWING_PATH_NAME ) ) continue;
+            if ( sp.type() == DrawingPath.DRAWING_PATH_SPLAY ) {
+	      if ( splays ) {
+                if ( containsStation( sp.mItem, splays_off ) ) continue;
+	      } else {
+                if ( ! containsStation( sp.mItem, splays_on ) ) continue;
+	      }
+	    }
             if ( sp.distance( x, y ) < radius ) {
               // Log.v("DistoX", "pt " + sp.mPoint.x + " " + sp.mPoint.y + " dist " + sp.getDistance() );
               sel.addPoint( sp );
@@ -383,11 +396,12 @@ class Selection
     return bucketSelectOnItemAt( item, x, y, radius );
   }
 
-  void selectAt( SelectionSet sel, float x, float y, float radius, int mode, boolean legs, boolean splays, boolean stations )
+  void selectAt( SelectionSet sel, float x, float y, float radius, int mode, boolean legs, boolean splays, boolean stations,
+		 ArrayList<String> splays_on, ArrayList<String> splays_off )
   {
     // Log.v( "DistoX", "selection select at " + x + " " + y + " pts " + mPoints.size() + " " + legs + " " + splays + " " + stations + " radius " + radius );
 
-    bucketSelectAt( x, y, radius, mode, sel, legs, splays, stations );
+    bucketSelectAt( x, y, radius, mode, sel, legs, splays, stations, splays_on, splays_off );
     // Log.v("DistoX", "bucketSelect size " + sel.size() );
 
     // if ( sel.size() > 0 ) return;

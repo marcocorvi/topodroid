@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid 3d sketch: new-sketch3d dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -30,7 +30,7 @@ import android.view.View;
 class SketchModeDialog extends MyDialog
                               implements View.OnClickListener
 {
-  private SketchModel mModel;
+  private final SketchModel mModel;
 
   private RadioButton mRBsingle;
   private RadioButton mRBngbh;

@@ -89,16 +89,14 @@
     android:layout_gravity="right"
     android:gravity="right"
     >
-
-    <Button android:id="@+id/button_current"
-      style="@style/button_default"
-      android:text="@string/button_current"
-      android:layout_marginRight="@dimen/marginh"
-    />
-
     <Button android:id="@+id/button_cancel"
       style="@style/button_default"
       android:text="@string/button_cancel"
+      android:layout_marginRight="@dimen/marginh"
+    />
+    <Button android:id="@+id/button_current"
+      style="@style/button_default"
+      android:text="@string/button_current"
     />
   </LinearLayout>
 

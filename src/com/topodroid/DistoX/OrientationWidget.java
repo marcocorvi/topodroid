@@ -1,11 +1,11 @@
-/** @file OrientationWidget.java
+/* @file OrientationWidget.java
  *
  * @author marco corvi
  * @date june 2012
  *
  * @brief TopoDroid orientation widgets
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */

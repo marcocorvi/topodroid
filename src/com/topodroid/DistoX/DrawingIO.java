@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid drawing: drawing I/O
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -38,12 +38,12 @@ import java.util.Locale;
 
 import android.graphics.RectF;
 
-import android.util.Log;
+// import android.util.Log;
 
 class DrawingIO
 {
-  private static float toTherion = TDConst.TO_THERION;
-  private static float oneMeter  = DrawingUtil.SCALE_FIX * toTherion;
+  private static final float toTherion = TDConst.TO_THERION;
+  private static final float oneMeter  = DrawingUtil.SCALE_FIX * toTherion;
 
   private static String readLine( BufferedReader br )
   {
@@ -55,7 +55,7 @@ class DrawingIO
     }
     if ( line != null ) {
       line = line.trim();
-      line.replaceAll(" *", " ");
+      line = line.replaceAll(" *", " ");
       // line.replaceAll("\\s+", " ");
     }
     return line;
@@ -194,21 +194,20 @@ class DrawingIO
                   label_text = vals[k+1];
                   k += 2;
                   if ( label_text.startsWith( "\"" ) ) {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(label_text);
                     while ( k < vals.length ) {
-                      label_text = label_text + " " + vals[k];
+                      sb.append(" ").append(vals[k]);
+                      // label_text = label_text + " " + vals[k];
                       if ( vals[k].endsWith( "\"" ) ) break;
                       ++ k;
                     }
-                    label_text = label_text.replaceAll( "\"", "" );
+                    label_text = sb.toString().replaceAll( "\"", "" );
                     ++ k;
                   }
                 } else {
-                  options = vals[k];
-                  ++ k;
-                  while ( vals.length > k ) {
-                    options += " " + vals[k];
-                    ++ k;
-                  }
+                  options = TopoDroidUtil.concat( vals, k );
+                  k = vals.length;
                 }
               }
 
@@ -424,7 +423,7 @@ class DrawingIO
                       if ( path != null ) {
                         if ( type.equals("section") ) { // section line only in non-section scraps
                           if ( is_not_section ) {
-                            path.makeStraight( false ); // FIXME true = with arrow
+                            path.makeStraight( );
                           }
                         } else {
                           path.computeUnitNormal(); // for section-line already done by makeStraight
@@ -712,10 +711,10 @@ class DrawingIO
                 String[] vals = points.split(",");
                 for ( String val : vals ) if ( val.length() > 0 ) localPalette.addPointFilename( val );
                 String lines = dis.readUTF();
-                vals = points.split(",");
+                vals = lines.split(",");
                 for ( String val : vals ) if ( val.length() > 0 ) localPalette.addLineFilename( val );
                 String areas = dis.readUTF();
-                vals = points.split(",");
+                vals = areas.split(",");
                 for ( String val : vals ) if ( val.length() > 0 ) localPalette.addAreaFilename( val );
                 in_scrap = true;
                 // Log.v("DistoX", "TDR type " + type );
@@ -758,7 +757,7 @@ class DrawingIO
               break;
             default:
               todo = false;
-              TDLog.Error( "ERROR bad input (1) " + (int)what );
+              TDLog.Error( "ERROR bad input (1) " + what );
               break;
           } 
           if ( path != null && in_scrap ) {
@@ -811,7 +810,6 @@ class DrawingIO
           DrawingLinePath path = null;
           int what = dis.read();
           // Log.v("DistoXX", "Read " + what );
-          path = null;
           switch ( what ) {
             case 'V':
               version = dis.readInt();
@@ -875,7 +873,7 @@ class DrawingIO
           if (    in_scrap && path != null 
                && ( BrushManager.mLineLib.isWall( path.mLineType ) || path.hasOutline() ) ) {
             // Log.v("DistoXX", "outline add path ... " + path.mFirst.x + " " + path.mFirst.y + " path size " + path.size()  );
-            path.setPaint( BrushManager.fixedGrid100Paint );
+            path.setPathPaint( BrushManager.fixedGrid100Paint );
             if ( name != null ) { // xsection outline
               surface.addXSectionOutlinePath( new DrawingOutlinePath( name, path ) );
             } else {
@@ -944,6 +942,7 @@ class DrawingIO
     }
   }
 
+  // this is called by DrawingCommandManager
   static void exportDataStream(
       int type,
       DataOutputStream dos,
@@ -955,6 +954,7 @@ class DrawingIO
       final List<DrawingStationPath> userstations,
       final List<DrawingStationName> stations )
   {
+    // Log.v("DistoX", "cstack size " + cstack.size() );
     try { 
       dos.write( 'V' ); // version
       dos.writeInt( TopoDroidApp.VERSION_CODE );
@@ -1046,13 +1046,13 @@ class DrawingIO
     PrintWriter pw  = new PrintWriter(sw);
     pw.format("#P");
     String[] vals = points.split(",");
-    for ( int k=0; k<vals.length; ++k ) if ( vals[k].length() > 0 ) pw.format(" %s", vals[k] );
+    for ( String v : vals ) if ( v.length() > 0 ) pw.format(" %s", v );
     pw.format("\n#L");
     vals = lines.split(",");
-    for ( int k=0; k<vals.length; ++k ) if ( vals[k].length() > 0 ) pw.format(" %s", vals[k] );
+    for ( String v : vals ) if ( v.length() > 0 ) pw.format(" %s", v );
     pw.format("\n#A");
     vals = lines.split(",");
-    for ( int k=0; k<vals.length; ++k ) if ( vals[k].length() > 0 ) pw.format(" %s", vals[k] );
+    for ( String v : vals ) if ( v.length() > 0 ) pw.format(" %s", v );
     pw.format("\n");
     out.write( sw.getBuffer().toString() );
   }
@@ -1095,10 +1095,10 @@ class DrawingIO
                       int type, BufferedWriter out, String scrap_name, String proj_name, int project_dir,
         RectF bbox,
         DrawingPath north,
-        List<ICanvasCommand> cstack,
-        List<DrawingStationPath> userstations,
-        List<DrawingStationName> stations,
-        List<DrawingPath> splays )
+        final List<ICanvasCommand> cstack,
+        final List<DrawingStationPath> userstations,
+        final List<DrawingStationName> stations,
+        final List<DrawingPath> splays )
   {
     try { 
       exportTherionHeader1( out, type, bbox );
@@ -1156,68 +1156,72 @@ class DrawingIO
         float th = TDConst.TO_THERION;
         StringWriter sw = new StringWriter();
         PrintWriter pw  = new PrintWriter(sw);
-        for ( DrawingPath splay : splays ) {
-          // if ( bbox.left > splay.right  || bbox.right  < splay.left ) continue;
-          // if ( bbox.top  > splay.bottom || bbox.bottom < splay.top  ) continue;
-          if ( splay.intersects( bbox ) ) {
-            pw.format("line u:splay -visibility off\n");
-            pw.format( Locale.US, "  %.2f %.2f\n  %.2f %.2f\n", splay.x1*th, -splay.y1*th, splay.x2*th, -splay.y2*th );
-            pw.format("endline\n");
+	       synchronized( splays ) {
+          for ( DrawingPath splay : splays ) {
+            // if ( bbox.left > splay.right  || bbox.right  < splay.left ) continue;
+            // if ( bbox.top  > splay.bottom || bbox.bottom < splay.top  ) continue;
+            if ( splay.intersects( bbox ) ) {
+              pw.format("line u:splay -visibility off\n");
+              pw.format( Locale.US, "  %.2f %.2f\n  %.2f %.2f\n", splay.x1*th, -splay.y1*th, splay.x2*th, -splay.y2*th );
+              pw.format("endline\n");
+            }
           }
-        }
+	}
         out.write( sw.toString() );
         out.newLine();
       }
 
       if ( TDSetting.mAutoStations ) {
-        for ( DrawingStationName st : stations ) {
-          NumStation station = st.station();
-          if ( station != null && station.barriered() ) continue;
-          // FIXME if station is in the convex hull (bbox) of the lines
-          if ( bbox.left > st.cx || bbox.right  < st.cx ) continue;
-          if ( bbox.top  > st.cy || bbox.bottom < st.cy ) continue;
-	  String st_str = st.toTherion();
-	  if ( st_str != null ) {
-            out.write( st_str );
-            out.newLine();
-	  }
+        synchronized( stations ) {
+          for ( DrawingStationName st : stations ) {
+            NumStation station = st.station();
+            if ( station != null && station.barriered() ) continue;
+            // FIXME if station is in the convex hull (bbox) of the lines
+            if ( bbox.left > st.cx || bbox.right  < st.cx ) continue;
+            if ( bbox.top  > st.cy || bbox.bottom < st.cy ) continue;
+	    String st_str = st.toTherion();
+	    if ( st_str != null ) {
+              out.write( st_str );
+              out.newLine();
+	    }
 /*
  * this was to export splays by the station instead of all of them
  *
-          if ( TDSetting.mTherionSplays ) {
-            float th = TDConst.TO_THERION;
-            float x = st.cx * th;
-            float y = - st.cy * th;
-            th *= DrawingUtil.SCALE_FIX;
-            List< DBlock > blks = dh.selectSplaysAt( sid, st.name(), false );
-            if ( type == PlotInfo.PLOT_PLAN ) {
-              for ( DBlock blk : blks ) {
-                float h = blk.mLength * TDMath.cosd( blk.mClino ) * th;
-                float e = h * TDMath.sind( blk.mBearing );
-                float n = h * TDMath.cosd( blk.mBearing );
-                out.write( "line splay\n" );
-                out.write( String.format(Locale.US, "  %.2f %.2f\n  %.2f %.2f\n", x, y, x+e, y+n ) );
-                out.write( "endline\n" );
-              }
-            } else if ( PlotInfo.isProfile( type ) ) {
-              for ( DBlock blk : blks ) {
-                float v = blk.mLength * TDMath.sind( blk.mClino ) * th;
-                float h = blk.mLength * TDMath.cosd( blk.mClino ) * th * blk.getReducedExtend();
-                out.write( "line splay\n" );
-                out.write( String.format(Locale.US, "  %.2f %.2f\n  %.2f %.2f\n", x, y, x+h, y+v ) );
-                out.write( "endline\n" );
-              }
-            } else if ( PlotInfo.isSection( type ) ) {
-              for ( DBlock blk : blks ) {
-                float d = blk.mLength;
-                float b = blk.mBearing;
-                float c = blk.mClino;
-                long  e = blk.getReducedExtend();
+            if ( TDSetting.mTherionSplays ) {
+              float th = TDConst.TO_THERION;
+              float x = st.cx * th;
+              float y = - st.cy * th;
+              th *= DrawingUtil.SCALE_FIX;
+              List< DBlock > blks = dh.selectSplaysAt( sid, st.name(), false );
+              if ( type == PlotInfo.PLOT_PLAN ) {
+                for ( DBlock blk : blks ) {
+                  float h = blk.mLength * TDMath.cosd( blk.mClino ) * th;
+                  float e = h * TDMath.sind( blk.mBearing );
+                  float n = h * TDMath.cosd( blk.mBearing );
+                  out.write( "line splay\n" );
+                  out.write( String.format(Locale.US, "  %.2f %.2f\n  %.2f %.2f\n", x, y, x+e, y+n ) );
+                  out.write( "endline\n" );
+                }
+              } else if ( PlotInfo.isProfile( type ) ) {
+                for ( DBlock blk : blks ) {
+                  float v = blk.mLength * TDMath.sind( blk.mClino ) * th;
+                  float h = blk.mLength * TDMath.cosd( blk.mClino ) * th * blk.getReducedExtend();
+                  out.write( "line splay\n" );
+                  out.write( String.format(Locale.US, "  %.2f %.2f\n  %.2f %.2f\n", x, y, x+h, y+v ) );
+                  out.write( "endline\n" );
+                }
+              } else if ( PlotInfo.isSection( type ) ) {
+                for ( DBlock blk : blks ) {
+                  float d = blk.mLength;
+                  float b = blk.mBearing;
+                  float c = blk.mClino;
+                  long  e = blk.getReducedExtend();
+                }
               }
             }
-          }
 */
-        }
+          }
+	}
       } else {
         synchronized( userstations ) {
           for ( DrawingStationPath sp : userstations ) {
@@ -1335,7 +1339,7 @@ class DrawingIO
               break;
             default:
               todo = false;
-              TDLog.Error( "ERROR bad input (2) " + (int)what );
+              TDLog.Error( "ERROR bad input (2) " + what );
               break;
           } 
         }
@@ -1439,7 +1443,7 @@ class DrawingIO
               break;
             default:
               todo = false;
-              TDLog.Error( "ERROR bad input (2) " + (int)what );
+              TDLog.Error( "ERROR bad input (2) " + what );
               break;
           } 
         }

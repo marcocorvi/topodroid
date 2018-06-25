@@ -1,11 +1,11 @@
-/** @file CBDdialog.java
+/* @file CBDdialog.java
  *
  * @author marco corvi
  * @date sept 2015
  *
  * @brief TopoDroid current base directory dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -86,7 +86,7 @@ class CBDdialog extends MyDialog
     updateList();
   }
 
-  void updateList()
+  private void updateList()
   {
     mTVcbd.setText( mBasename );
 
@@ -146,7 +146,7 @@ class CBDdialog extends MyDialog
         mETsubdir.setError( mContext.getResources().getString( R.string.error_dir_exists ) );
 	return;
       }
-      dir.mkdir();
+      if ( ! dir.mkdir() ) TDLog.Error("mkdir error");
       mParent.setBasename( subdir );
     } // else if ( v.getId() == R.id.button_cancel ) 
     dismiss();

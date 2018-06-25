@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid 3d sketch: new-sketch3d dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -29,7 +29,7 @@ import android.view.View;
 class Sketch3dNewDialog extends MyDialog
                                implements View.OnClickListener
 {
-  private TopoDroidApp mApp;
+  private final TopoDroidApp mApp;
   private INewPlot mMaker;
 
   private EditText mEditName;
@@ -79,13 +79,13 @@ class Sketch3dNewDialog extends MyDialog
       String next  = mEditNext.getText().toString();
 
       name = TopoDroidUtil.noSpaces( name );
-      if ( name == null || name.length() == 0 ) {
+      if ( /* name == null || */ name.length() == 0 ) {
         error = mContext.getResources().getString( R.string.error_name_required );
         mEditName.setError( error );
         return;
       } else {
         start = TopoDroidUtil.noSpaces( start );
-        if ( start == null || start.length() == 0 ) {
+        if ( /* start == null || */ start.length() == 0 ) {
           error = mContext.getResources().getString( R.string.error_start_required );
           mEditStart.setError( error );
           return;

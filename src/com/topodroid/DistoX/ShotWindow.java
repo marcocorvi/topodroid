@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid survey shots management
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -84,7 +84,7 @@ import android.widget.Toast;
 import android.provider.MediaStore;
 import android.graphics.Bitmap;
 // import android.graphics.Bitmap.CompressFormat;
-import android.graphics.BitmapFactory;
+// import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 // import android.graphics.Paint.FontMetrics;
 
@@ -101,16 +101,16 @@ public class ShotWindow extends Activity
                         , INewPlot
                         , IPhotoInserter
 {
-  final static int BTN_DOWNLOAD  = 0;
-  final static int BTN_BLUETOOTH = 1;
-  final static int BTN_PLOT      = 3;
-  final static int BTN_MANUAL    = 5;
-  final static int BTN_SEARCH    = 7;
-  final static int BTN_AZIMUTH   = 8;
+  final static private int BTN_DOWNLOAD  = 0;
+  final static private int BTN_BLUETOOTH = 1;
+  final static private int BTN_PLOT      = 3;
+  final static private int BTN_MANUAL    = 5;
+  final static private int BTN_SEARCH    = 7;
+  final static private int BTN_AZIMUTH   = 8;
 
   private DataHelper mApp_mData;
 
-  private static int izons[] = {
+  private static final int izons[] = {
                         R.drawable.iz_download,
                         R.drawable.iz_bt,
                         R.drawable.iz_mode,
@@ -123,7 +123,7 @@ public class ShotWindow extends Activity
 			R.drawable.iz_empty
                       };
 
-  private static int izonsno[] = {
+  private static final int izonsno[] = {
                         0,
                         0,
                         0,
@@ -133,18 +133,21 @@ public class ShotWindow extends Activity
                         0
                       };
 
-  private static int izonsF[] = {
-                        R.drawable.iz_left,
-                        R.drawable.iz_flip,
-                        R.drawable.iz_right,
-                        R.drawable.iz_highlight,
-                        R.drawable.iz_bedding,
-                        R.drawable.iz_delete,
-                        R.drawable.iz_cancel,
+  private static final int izonsF[] = {
+                        R.drawable.iz_left,       // extend LEFT
+                        R.drawable.iz_flip,       // extend flip
+                        R.drawable.iz_right,      // extend RIGHT
+                        R.drawable.iz_highlight,  // multishot dialog: includes // highlight in sketch
+                          // R.drawable.iz_highlight,  // highlight in sketch
+			  // R.drawable.iz_numbers_no, // renumber shots (first must be leg)
+                          // R.drawable.iz_bedding,    // compute bedding
+                        R.drawable.iz_delete,     // delete shots
+                        R.drawable.iz_cancel,     // cancel
 			R.drawable.iz_empty
                       };
+  private static final int BTN_HIGHLIGHT = 3; // index of iz_highlight
 
-  private static int menus[] = {
+  private static final int menus[] = {
                         R.string.menu_close,
                         R.string.menu_survey,
                         R.string.menu_recover,
@@ -156,7 +159,7 @@ public class ShotWindow extends Activity
                         R.string.menu_help
                      };
 
-  private static int help_icons[] = {
+  private static final int help_icons[] = {
                           R.string.help_download,
                           R.string.help_remote,
                           R.string.help_display,
@@ -167,7 +170,7 @@ public class ShotWindow extends Activity
                           R.string.help_search,
                           R.string.help_azimuth,
                         };
-   private static int help_menus[] = {
+   private static final int help_menus[] = {
                           R.string.help_close,
                           R.string.help_survey_info,
                           R.string.help_undelete,
@@ -186,16 +189,17 @@ public class ShotWindow extends Activity
   private DataDownloader mDataDownloader;
   private DistoXAccuracy mDistoXAccuracy;
 
-  boolean mSplay = true;  //!< whether to hide splay shots
-  boolean mLeg   = true;  //!< whether to hide leg extra shots
-  boolean mBlank = false; //!< whether to hide blank shots
+  boolean mFlagSplay  = true;  //!< whether to hide splay shots
+  boolean mFlagLatest = false; //!< whether to show the latest splay shots
+  boolean mFlagLeg    = true;  //!< whether to hide leg extra shots
+  boolean mFlagBlank  = false; //!< whether to hide blank shots
   // private Bundle mSavedState = null;
   // long mSecondLastShotId = 0L;
   // long mLastShotId;
-  String mRecentPlot     = null;
+  private String mRecentPlot     = null;
   long   mRecentPlotType = PlotInfo.PLOT_PLAN;
 
-  int mButtonSize = 42;
+  private int mButtonSize = 42;
   private Button[] mButton1;
   private int mNrButton1 = 0;
 
@@ -218,17 +222,17 @@ public class ShotWindow extends Activity
   private int mNextPos  = 0;   // next shot entry position
   // private TextView mSaveTextView = null;
 
-  static long    mSensorId;
-  static long    mPhotoId;
-  static String  mComment;
-  static long    mShotId;   // photo/sensor shot id
+  private static long    mSensorId;
+  private static long    mPhotoId;
+  private static String  mComment;
+  private static long    mShotId;   // photo/sensor shot id
   boolean mOnOpenDialog = false;
 
   // ConnHandler mHandler;
 
   // private RelativeLayout mFooter = null;
   private Button[] mButtonF;
-  private int mNrButtonF = 7;
+  private int mNrButtonF = 6; // 8;
 
   private StationSearch mSearch;
 
@@ -268,8 +272,6 @@ public class ShotWindow extends Activity
 
   Set<String> getStationNames() { return mApp_mData.selectAllStations( mApp.mSID ); }
 
-  long secondLastShotId() { return TopoDroidApp.mSecondLastShotId; }
-
   // -------------------------------------------------------------------
   // FXIME ok only for numbers
   // String getNextStationName()
@@ -291,11 +293,11 @@ public class ShotWindow extends Activity
         TDToast.make( mActivity, getResources().getQuantityString(R.plurals.read_data, nr, nr ) );
         // TDToast.make( mActivity, " read_data: " + nr );
       }
-    } else if ( nr < 0 /* && nr > -5 */ ) {
+    } else { // ( nr < 0 )
       if ( toast ) {
-	if ( nr <= -5 ) {
+        if ( nr <= -5 ) {
           TDToast.make( mActivity, getString(R.string.read_fail_with_code) + nr );
-	} else {
+	       } else {
           TDToast.make( mActivity, mApp.DistoXConnectionError[ -nr ] );
         }
       }
@@ -335,8 +337,8 @@ public class ShotWindow extends Activity
     sb.append( mApp.getConnectionStateTitleStr() );
     sb.append( mApp.mySurvey );
 
+    setTitleColor( TDSetting.mTitleColor );
     mActivity.setTitle( sb.toString() );
-    // FIXME setTitleColor( TDColor.TITLE_NORMAL );
   }
 
   boolean isCurrentStationName( String st ) { return mApp.isCurrentStationName( st ); }
@@ -428,10 +430,10 @@ public class ShotWindow extends Activity
         // if ( prev != null && prev.mType == DBlock.BLOCK_BLANK ) prev.mType = DBlock.BLOCK_BLANK_LEG;
         if ( prev != null ) prev.setTypeBlankLeg();
 
-        if ( mLeg ) { // flag: hide leg extra shots
+        if ( mFlagLeg ) { // flag: hide leg extra shots
           // TDLog.Log( TDLog.LOG_SHOT, "close distance");
 
-          if ( mBlank && prev != null && prev.isTypeBlank() ) {
+          if ( mFlagBlank && prev != null && prev.isTypeBlank() ) {
             // prev was skipped: draw it now
             if ( ! prev_is_leg ) {
               cur = prev;
@@ -443,7 +445,7 @@ public class ShotWindow extends Activity
             continue;
           }
         } else { // do not hide extra leg-shots
-          if ( mBlank && prev != null && prev.isTypeBlank() ) {
+          if ( mFlagBlank && prev != null && prev.isTypeBlank() ) {
             if ( ! prev_is_leg ) {
               mDataAdapter.add( prev );
               prev_is_leg = true;
@@ -460,16 +462,16 @@ public class ShotWindow extends Activity
         prev_is_leg = false;
         if ( DBlock.isTypeBlank(t) ) {
           prev = cur;
-          if ( mBlank ) continue;
+          if ( mFlagBlank ) continue;
         } else if ( DBlock.isSplay(t) ) {
           prev = null;
-          if ( mSplay ) { // do hide splays, except those that are shown.
+          if ( mFlagSplay ) { // do hide splays, except those that are shown.
             // boolean skip = true;
             // for ( String st : mShowSplay ) {
             //   if ( st.equals( cur.mFrom ) ) { skip = false; break; }
             // }
             // if ( skip ) continue;
-            if ( ! showSplaysContains( cur.mFrom ) ) continue;
+            if ( ! ( showSplaysContains( cur.mFrom ) || ( mFlagLatest && cur.isRecent() ) ) ) continue;
           }
         } else { // t == DBlock.BLOCK_MAIN_LEG
           prev = cur;
@@ -533,7 +535,7 @@ public class ShotWindow extends Activity
     // TDLog.Log( TDLog.LOG_INPUT, "ShotWindow onItemClick id " + id);
     DBlock blk = mDataAdapter.get(pos);
     // Log.v( "DistoX", "ShotWindow onItemClick id " + id + " pos " + pos + " blk " + blk.mFrom + " " + blk.mTo );
-    onBlockClick( blk, pos );
+    if ( blk != null ) onBlockClick( blk, pos );
   }
 
   void onBlockClick( DBlock blk, int pos )
@@ -557,6 +559,7 @@ public class ShotWindow extends Activity
 
     // TDLog.Log( TDLog.LOG_INPUT, "ShotWindow onItemLongClick id " + id);
     DBlock blk = mDataAdapter.get(pos);
+    if ( blk == null ) return false;
     // onBlockLongClick( blk );
     // if ( blk.isSplay() ) {
     //   highlightBlocks( blk );
@@ -843,31 +846,31 @@ public class ShotWindow extends Activity
 
   // ---------------------------------------------------------------
   // private Button mButtonHelp;
-  HorizontalListView mListView;
-  HorizontalButtonView mButtonView1;
+  private HorizontalListView mListView;
+  private HorizontalButtonView mButtonView1;
   // HorizontalListView mFootList;
-  HorizontalButtonView mFooterView;
-  ListView   mMenu = null;
-  Button     mImage;
+  private HorizontalButtonView mFooterView;
+  private ListView   mMenu = null;
+  private Button     mImage;
   // HOVER
   // MyMenuAdapter mMenuAdapter;
-  ArrayAdapter< String > mMenuAdapter;
-  boolean onMenu = false;
+  private ArrayAdapter< String > mMenuAdapter;
+  private boolean onMenu = false;
 
-  BitmapDrawable mBMbluetooth;
-  BitmapDrawable mBMbluetooth_no;
-  BitmapDrawable mBMdownload;
-  BitmapDrawable mBMdownload_on;
-  BitmapDrawable mBMdownload_wait;
-  BitmapDrawable mBMdownload_no;
+  private BitmapDrawable mBMbluetooth;
+  private BitmapDrawable mBMbluetooth_no;
+  private BitmapDrawable mBMdownload;
+  private BitmapDrawable mBMdownload_on;
+  private BitmapDrawable mBMdownload_wait;
+  private BitmapDrawable mBMdownload_no;
   // BitmapDrawable mBMadd;
-  BitmapDrawable mBMplot;
+  private BitmapDrawable mBMplot;
   // Bitmap mBMdial;
   // Bitmap mBMdial_transp;
-  MyTurnBitmap mDialBitmap;
-  BitmapDrawable mBMplot_no;
-  BitmapDrawable mBMleft;
-  BitmapDrawable mBMright;
+  private MyTurnBitmap mDialBitmap;
+  private BitmapDrawable mBMplot_no;
+  private BitmapDrawable mBMleft;
+  private BitmapDrawable mBMright;
 
   // void refreshList()
   // {
@@ -931,9 +934,13 @@ public class ShotWindow extends Activity
       }
     }
 
+    if ( ! TDLevel.overExpert ) mNrButtonF --;
     mButtonF = new Button[ mNrButtonF + 1 ];
+    int k0 = 0;
     for ( int k=0; k <= mNrButtonF; ++k ) {
-      mButtonF[k] = MyButton.getButton( this, this, izonsF[k] );
+      if ( k == BTN_HIGHLIGHT && ! TDLevel.overExpert ) continue; 
+      mButtonF[k0] = MyButton.getButton( this, this, izonsF[k] );
+      ++k0;
     }
 
     TDAzimuth.resetRefAzimuth( this, 90 );
@@ -1038,11 +1045,10 @@ public class ShotWindow extends Activity
   {
     super.onResume();
     mApp.resetLocale();
-    // Log.v("DistoX", "ShotWindow onResume()" );
 
     // FIXME NOTIFY register ILister
     // if ( mApp.mComm != null ) { mApp.mComm.resume(); }
-    // Log.v( "DistoX", "Shot Activity onResume()" );
+    // Log.v( "DistoX", "Shot Activity on Resume()" );
     
     restoreInstanceFromData();
     updateDisplay( );
@@ -1092,6 +1098,7 @@ public class ShotWindow extends Activity
   }
 
   // --------------------------------------------------------------
+  final String ONE = "1";
 
   // FIXME NOTIFY: the display mode is local - do not notify
   private void restoreInstanceFromData()
@@ -1100,19 +1107,20 @@ public class ShotWindow extends Activity
     if ( shots != null ) {
       String[] vals = shots.split( " " );
       // FIXME assert( vals.length > 3 );
-      mSplay  = vals[0].equals("1");
-      mLeg    = vals[1].equals("1");
-      mBlank  = vals[2].equals("1");
-      setShowIds( vals[3].equals("1") );
-      // Log.v("DistoX", "restore from data mSplay " + mSplay );
+      mFlagSplay  = vals[0].equals( ONE );
+      mFlagLeg    = vals[1].equals( ONE );
+      mFlagBlank  = vals[2].equals( ONE );
+      setShowIds( vals[3].equals( ONE ) );
+      mFlagLatest = ( vals.length > 4) && vals[4].equals( ONE );
+      // Log.v("DistoX", "restore from data mFlagSplay " + mFlagSplay );
     }
   }
     
   private void saveInstanceToData()
   {
     mApp_mData.setValue( "DISTOX_SHOTS",
-      String.format(Locale.US, "%d %d %d %d", mSplay?1:0, mLeg?1:0, mBlank?1:0, getShowIds()?1:0 ) );
-    // Log.v("DistoX", "save to data mSplay " + mSplay );
+      String.format(Locale.US, "%d %d %d %d %d", mFlagSplay?1:0, mFlagLeg?1:0, mFlagBlank?1:0, getShowIds()?1:0, mFlagLatest?1:0 ) );
+    // Log.v("DistoX", "save to data mFlagSplay " + mFlagSplay );
   }
 
   void doBluetooth( Button b )
@@ -1141,7 +1149,7 @@ public class ShotWindow extends Activity
     if ( CutNPaste.dismissPopupBT() ) return true;
 
     Button b = (Button)view;
-    if ( b == mButton1[ BTN_DOWNLOAD ] ) {
+    if ( b == mButton1[ BTN_DOWNLOAD ] ) { // MULTI-DISTOX
       if (   TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI
           && ! mDataDownloader.isDownloading() 
           && TopoDroidApp.mDData.getDevices().size() > 1 ) {
@@ -1281,12 +1289,18 @@ public class ShotWindow extends Activity
         clearMultiSelect( );
         updateDisplay();
         // mList.invalidate(); // NOTE not enough to see the change in the list immediately
-      } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // HIGHLIGHT
-        highlightBlocks( mDataAdapter.mSelect );
-        // clearMultiSelect( );
-        // updateDisplay();
-      } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // BEDDING
-        blocksBedding( mDataAdapter.mSelect );
+      } else if ( TDLevel.overExpert && kf < mNrButtonF && b == mButtonF[kf++] ) { // HIGHLIGHT
+        // ( blks == null || blks.size() == 0 ) cannot happen
+        (new MultishotDialog( mActivity, this, mDataAdapter.mSelect )).show();
+      //   highlightBlocks( mDataAdapter.mSelect );
+      //   // clearMultiSelect( );
+      //   // updateDisplay();
+      // } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // RENUMBER SELECTED SHOTS
+      //   renumberBlocks( mDataAdapter.mSelect );
+      //   clearMultiSelect( );
+      //   mList.invalidate();
+      // } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // BEDDING
+      //   computeBedding( mDataAdapter.mSelect );
       } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // DELETE
         askMultiDelete();
       } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // CANCEL
@@ -1322,7 +1336,7 @@ public class ShotWindow extends Activity
       long id = blk.mId;
       mApp_mData.deleteShot( id, mApp.mSID, TDStatus.DELETED, true ); // forward = true
       if ( /* blk != null && */ blk.type() == DBlock.BLOCK_MAIN_LEG ) {
-        if ( mLeg ) {
+        if ( mFlagLeg ) {
           for ( ++id; ; ++id ) {
             DBlock b = mApp_mData.selectShot( id, mApp.mSID );
             if ( b == null || b.type() != DBlock.BLOCK_SEC_LEG ) break;
@@ -1490,6 +1504,7 @@ public class ShotWindow extends Activity
     long id = 0;
     for ( int k=0; k<mDataAdapter.size(); ++k ) {
       DBlock b = mDataAdapter.get(k);
+      if ( b == null ) return null;
       if ( b.isTypeBlank() ) {
         id = b.mId - 1;
         break;
@@ -1527,10 +1542,31 @@ public class ShotWindow extends Activity
     } else {
       mNextPos = mShotPos;
     }
-    while ( mNextPos < mDataAdapter.size() && blk != mDataAdapter.get(mNextPos) ) ++ mNextPos;
-    ++ mNextPos; // one position after blk
-    while ( mNextPos < mDataAdapter.size() ) {
+	// OLD CODE
+	// while ( mNextPos < mDataAdapter.size() && blk != mDataAdapter.get(mNextPos) ) ++ mNextPos;
+    // ++ mNextPos; // one position after blk
+    // while ( mNextPos < mDataAdapter.size() ) {
+    //   DBlock b = mDataAdapter.get(mNextPos);
+    //   int t = b.type();
+    //   if ( t == DBlock.BLOCK_MAIN_LEG ) {
+    //     return b;
+    //   } else if (    DBlock.isTypeBlank( t )
+    //               && mNextPos+1 < mDataAdapter.size()
+    //               && b.isRelativeDistance( mDataAdapter.get(mNextPos+1) ) ) {
+    //     return b;
+    //   }
+    //   ++ mNextPos;
+    // }
+    // NEW CODE
+    for ( ; mNextPos < mDataAdapter.size(); ++ mNextPos ) {
       DBlock b = mDataAdapter.get(mNextPos);
+      if ( b == null ) return null;
+      if ( b == blk ) break;
+    }
+    // start at one position after blk
+    for ( ++mNextPos; mNextPos < mDataAdapter.size(); ++mNextPos ) {
+      DBlock b = mDataAdapter.get(mNextPos);
+      if ( b == null ) return null;
       int t = b.type();
       if ( t == DBlock.BLOCK_MAIN_LEG ) {
         return b;
@@ -1539,7 +1575,6 @@ public class ShotWindow extends Activity
                   && b.isRelativeDistance( mDataAdapter.get(mNextPos+1) ) ) {
         return b;
       }
-      ++ mNextPos;
     }
     return null;
   }
@@ -1556,14 +1591,28 @@ public class ShotWindow extends Activity
     } else {
       mPrevPos = mShotPos;
     }
-    while ( mPrevPos >= 0 && blk != mDataAdapter.get(mPrevPos) ) -- mPrevPos;
-    while ( mPrevPos > 0 ) {
-      -- mPrevPos;
+	// OLD CODE
+	// while ( mPrevPos >= 0 && blk != mDataAdapter.get(mPrevPos) ) -- mPrevPos;
+    // while ( mPrevPos > 0 ) {
+    //   -- mPrevPos;
+    //   DBlock b = mDataAdapter.get(mPrevPos);
+    //   if ( b.type() == DBlock.BLOCK_MAIN_LEG ) {
+    //     return b;
+    //   }
+    // }
+    // NEW CODE
+    for ( ; mPrevPos >= 0; -- mPrevPos ) {
       DBlock b = mDataAdapter.get(mPrevPos);
-      if ( b.type() == DBlock.BLOCK_MAIN_LEG ) {
+      if ( b == null ) return null;
+      if ( b == blk ) break;
+    }
+    for ( --mPrevPos; mPrevPos >= 0; --mPrevPos ) {
+      DBlock b = mDataAdapter.get(mPrevPos);
+      if ( b == null || b.type() == DBlock.BLOCK_MAIN_LEG ) {
         return b;
       }
     }
+    if ( mPrevPos < 0 ) mPrevPos = 0;
     return null;
   }
 
@@ -1610,6 +1659,7 @@ public class ShotWindow extends Activity
   }
 
   // open the sketch and highlight block in the sketch
+  // called by MultishotDialog
   void highlightBlocks( List<DBlock> blks )  // HIGHLIGHT
   {
     mApp.setHighlighted( blks );
@@ -1619,6 +1669,25 @@ public class ShotWindow extends Activity
     if ( mRecentPlot != null ) {
       startExistingPlot( mRecentPlot, mRecentPlotType, blks.get(0).mFrom );
     }
+    clearMultiSelect( );
+  }
+
+  // called by MultishotDialog
+  void renumberBlocks( List<DBlock> blks, String from, String to )  // RENUMBER SELECTED BLOCKS
+  {
+    DBlock blk = blks.get(0); // blk is guaranteed to exists
+    if ( ! ( from.equals(blk.mFrom) && to.equals(blk.mTo) ) ) {
+      blk.setName( from, to );
+      mApp_mData.updateShotName( blk.mId, mApp.mSID, from, to, true );
+    }
+    if ( blk.isLeg() ) {
+      mApp.assignStationsAfter( blk, blks /*, stations */ );
+      updateDisplay();
+      // mList.invalidate();
+    } else {
+      TDToast.make( mActivity, R.string.no_leg_first );
+    }
+    clearMultiSelect( );
   }
 
   /** bedding: solve Sum (A*x + B*y + C*z + 1)^2 minimum
@@ -1642,8 +1711,9 @@ public class ShotWindow extends Activity
    *  The dip angle is measured from the horizontal plane
    *  The strike from the north
    */
-  void blocksBedding( List<DBlock> blks ) // BEDDING
+  String computeBedding( List<DBlock> blks ) // BEDDING
   {
+    String strike_dip = getResources().getString(R.string.few_data);
     if ( blks != null || blks.size() > 2 ) {
       DBlock b0 = blks.get(0);
       String st = b0.mFrom;
@@ -1692,6 +1762,9 @@ public class ShotWindow extends Activity
 	}
       }
       if ( nn >= 3 ) {
+	String strike_fmt = getResources().getString( R.string.strike_dip );
+	String strike_regex = strike_fmt.replaceAll("%\\d\\$.0f", "\\-??\\\\d+"); 
+	// Log.v("DistoX", "Strike regex: <<" + strike_regex + ">>");
         Matrix m = new Matrix( new Vector(xx, xy, xz), new Vector(xy, yy, yz), new Vector(xz, yz, zz) );
         Matrix minv = m.InverseT(); // m is self-transpose
         Vector n0 = new Vector( -xn, -yn, -zn );
@@ -1708,21 +1781,26 @@ public class ShotWindow extends Activity
         // float adip = TDMath.acosd( dip.z ); // TDMath.asind( n1.z );
         float astk = TDMath.atan2d( -n1.y, n1.x );
         float adip = 90 - TDMath.asind( n1.z );
-        String strike_dip = String.format(getResources().getString(R.string.strike_dip), astk, adip );
-        TDToast.make( mActivity, strike_dip );
+        strike_dip = String.format( strike_fmt, astk, adip );
+        // TDToast.make( mActivity, strike_dip );
         if ( b0.mComment != null && b0.mComment.length() > 0 ) {
-          b0.mComment = b0.mComment + " " + strike_dip;
+	  if ( b0.mComment.matches( ".*" + strike_regex + ".*" ) ) {
+	    // Log.v("DistoX", "Strike regex is contained");
+            b0.mComment = b0.mComment.replaceAll( strike_regex, strike_dip );
+	  } else {
+            b0.mComment = b0.mComment + " " + strike_dip;
+          }
   	} else {
           b0.mComment = strike_dip;
 	}
+	// Log.v("DistoX", "Comment <<" + b0.mComment + ">>");
 	mApp_mData.updateShotComment( b0.mId, mApp.mSID, b0.mComment, false ); // FIXME no forward
 	if ( b0.mView != null ) b0.mView.invalidate();
-      } else {
-        TDToast.make( mActivity, R.string.few_data );
       }
     }
-    clearMultiSelect( );
-    mList.invalidate();
+    // clearMultiSelect( );
+    // mList.invalidate();
+    return strike_dip;
   }
   
   // this method is called by ShotDialog() with to.length() == 0 ie to == ""
@@ -1832,7 +1910,7 @@ public class ShotWindow extends Activity
 
   void recomputeItems( String st, int pos )
   {
-    if ( mSplay ) {
+    if ( mFlagSplay ) {
       if ( ! mShowSplay.remove( st ) ) {
         mShowSplay.add( st );
       }
@@ -1901,6 +1979,7 @@ public class ShotWindow extends Activity
 
     updateDisplay();
   }
+
 
   // merge this block to the following (or second following) block if this is a leg
   // if success update FROM/TO of the block

@@ -1,4 +1,4 @@
-/** @file ParserTherion.java
+/* @file ParserTherion.java
  *
  * @author marco corvi
  * @date may 2012
@@ -6,7 +6,7 @@
  * @brief TopoDroid Therion parser
  *
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * ----------------------------------------------------------
  */
@@ -66,7 +66,7 @@ class ParserTherion
     String name;
     float e, n, z; // north east, vertical (upwards)
 
-    public Fix( String nm, float e0, float n0, float z0 )
+    Fix( String nm, float e0, float n0, float z0 )
     {
       name = nm;
       e = e0;
@@ -81,7 +81,7 @@ class ParserTherion
     String comment;
     long flag;
  
-    public Station( String n, String c, long f )
+    Station( String n, String c, long f )
     {
       name = n;
       comment = c;
@@ -288,16 +288,21 @@ class ParserTherion
                   for ( ++j; j<vals_len; ++j ) {
                     if ( vals[j].length() == 0 ) continue;
                     if ( vals[j].startsWith("\"") ) {
-                      mTitle = vals[j].substring(1);
+                      StringBuilder sb = new StringBuilder();
+                      sb.append( vals[j].substring(1) );
+                      // mTitle = vals[j].substring(1);
                       for ( ++j; j<vals_len; ++j ) {
                         if ( vals[j].length() == 0 ) continue;
                         if ( vals[j].endsWith( "\"" ) ) {
-                          mTitle += " " + vals[j].substring(0, vals[j].length()-1);
+                          sb.append(" ").append(vals[j].substring(0, vals[j].length()-1));
+                          // mTitle += " " + vals[j].substring(0, vals[j].length()-1);
                           break;
                         } else {
-                          mTitle += " " + vals[j];
+                          sb.append(" ").append(vals[j] );
+                          // mTitle += " " + vals[j];
                         }
                       }
+                      mTitle = sb.toString();
                     } else {
                       mTitle = vals[j];
                     }
@@ -315,10 +320,14 @@ class ParserTherion
               } else if ( cmd.equals("date") ) {
                 String date = vals[1];
                 if ( mDate == null ) mDate = date; // save centerline date
-              } else if ( cmd.equals("team") ) { 
-                for ( int j = 1; j < vals_len; ++j ) {
-                  mTeam +=  " " + vals[j];
-                }
+              } else if ( cmd.equals("team") ) {
+                // StringBuilder sb = new StringBuilder();
+                // for ( int j = 1; j < vals_len; ++j ) {
+                //   sb.append(" ").append( vals[j] );
+                //   // mTeam +=  " " + vals[j];
+                // }
+                // mTeam += sb.toString();
+                mTeam += TopoDroidUtil.concat( vals, 1 );
               // } else if ( cmd.equals("explo-date") ) {
               // } else if ( cmd.equals("explo-team") ) {
               // } else if ( cmd.equals("instrument") ) {

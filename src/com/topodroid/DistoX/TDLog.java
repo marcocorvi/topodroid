@@ -1,11 +1,11 @@
-/** @file TDLog.java
+/* @file TDLog.java
  *
  * @author marco corvi
  * @date nov 2011
  *
  * @brief TopoDroid application (consts and prefs)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -27,7 +27,7 @@ class TDLog
   // ---------------------------------------------------------
   // DEBUG: logcat flags
 
-  static final String TAG = "DistoX";
+  static final private String TAG = "DistoX";
 
   static private int mLogStream = 0;    // log stream
   static private PrintWriter mLog = null;

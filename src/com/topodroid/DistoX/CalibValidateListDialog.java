@@ -1,11 +1,11 @@
-/** @file CalibValidateListDialog.java
+/* @file CalibValidateListDialog.java
  *
  * @author marco corvi
  * @date nov 2014
  *
  * @brief TopoDroid calibs list to validate a calibration
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -21,7 +21,6 @@ import android.content.Context;
 
 import android.view.View;
 // import android.view.View.OnClickListener;
-// import android.view.ViewGroup.LayoutParams;
 
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -37,7 +36,7 @@ import android.widget.AdapterView.OnItemClickListener;
 class CalibValidateListDialog extends MyDialog
                         implements OnItemClickListener
 {
-  private GMActivity mParent;
+  private final GMActivity mParent;
   // private ArrayAdapter<String> mArrayAdapter;
 
   // private ListView mList;
@@ -55,8 +54,6 @@ class CalibValidateListDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
     
-    // setContentView(R.layout.calib_validate_list_dialog );
-    // getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
     initLayout( R.layout.calib_validate_list_dialog, R.string.title_calib );
 
     ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );

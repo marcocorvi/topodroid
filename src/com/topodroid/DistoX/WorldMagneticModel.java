@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid World Magnetic Model 
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  * Implemented after GeomagneticLibrary.c by
@@ -166,8 +166,8 @@ class WorldMagneticModel
   //   return (((i3*256 + i2)*256 + i1)*256 + i0);
   // }
 
-  final static int N = 1038961;
-  final static int ND = 7002;
+  final static private int N = 1038961;
+  final static private int ND = 7002;
 
   // this is correct
   static private int byteToInt( byte b[] )
@@ -218,11 +218,11 @@ class WorldMagneticModel
         int dval1, dval2;
 
         DataInputStream fis = new DataInputStream( context.getAssets().open( "wmm/egm9615.1024" ) );
-        fis.read( b4 );
+        fis.readFully( b4 );
         int kold = 0;
         res[kold] = byteToInt( b4 );
         for ( int nk=0; nk<ND; ++nk ) {
-          fis.read( b4 );
+          fis.readFully( b4 );
           int oldval = byteToInt( b4 );
           int dval = oldval >> 18;
           int dk   = oldval & 0x03ffff; // if ( dval < 0 ) dk ^= 0x03ffff;
@@ -237,7 +237,7 @@ class WorldMagneticModel
           int nj = delta[nk];
           kold ++; // skip one res
           for ( int j=1; j<nj; j+=2 ) {
-            fis.read( b3 );
+            fis.readFully( b3 );
             dval1 = byteToFirst( b3 );
             if ( dval1 >= 2048 ) dval1 -= 4096;
             res[kold++] = dval1;
@@ -246,7 +246,7 @@ class WorldMagneticModel
             res[kold++] = dval2;
           }
           if ( (nj%2) == 1 ) {
-            fis.read( b2 );
+            fis.readFully( b2 );
             dval1 = byteToFirst( b2 );
             if ( dval1 >= 2048 ) dval1 -= 4096;
             res[kold++] = dval1;
@@ -260,7 +260,7 @@ class WorldMagneticModel
           mGeoidHeightBuffer[k] = res[k] / 1000.0f;
         }
       } catch ( IOException e ) {
-        // TODO 
+        TDLog.Error("Input error " + e.getMessage() );
       }
       // System.out.println("loaded EGM9615");
     }

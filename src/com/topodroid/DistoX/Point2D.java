@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid a 2D point on the canvas
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  * 2017-06-16
@@ -47,7 +47,7 @@ class Point2D // extends PointF
 
   // use PointF implementation
   void set( float x0, float y0 ) { x = x0; y = y0; }
-  void negate() { x = -x; y = -y; }; 
+  void negate() { x = -x; y = -y; }
 
   Point2D times( float t ) { return new Point2D( x*t, y*t ); }             // this * t
 

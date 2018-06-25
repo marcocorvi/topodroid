@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid Connection dialog with another TopoDroid
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -28,7 +28,6 @@ import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.Button;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -61,9 +60,9 @@ class ConnectDialog extends MyDialog
 
   // private TextView mTVstate;
 
-  private TopoDroidApp mApp;
+  private final TopoDroidApp mApp;
 
-  private String mName = null;
+  private String mName; // = null;
   private Set<BluetoothDevice> mDevices;
 
   // void setButtons( int state ) 
@@ -98,15 +97,13 @@ class ConnectDialog extends MyDialog
 
     // mAddress = getIntent().getExtras().getString(   TopoDroidApp.TOPODROID_DEVICE_ADDR );
 
-    // setContentView( R.layout.connect_dialog );
-    // getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
     initLayout( R.layout.connect_dialog, R.string.title_device );
 
     mTVaddress = (TextView) findViewById( R.id.device_address );
     TextView tVstate   = (TextView) findViewById( R.id.conn_state );
 
     if ( mApp.getAcceptState() == SyncService.STATE_LISTEN ) {
-      tVstate.setText( "LISTEN | " + mApp.getConnectionStateStr() );
+      tVstate.setText( String.format( mContext.getResources().getString(R.string.fmt_listen), mApp.getConnectionStateStr() ) );
     } else {
       tVstate.setText( mApp.getConnectionStateStr() );
     }

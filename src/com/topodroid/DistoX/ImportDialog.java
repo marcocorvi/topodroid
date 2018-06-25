@@ -1,11 +1,11 @@
-/** @file ImportDialog.java
+/* @file ImportDialog.java
  *
  * @author marco corvi
  * @date nov 2011
  *
  * @brief TopoDroid import file list dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -41,8 +41,8 @@ class ImportDialog extends MyDialog
                           implements OnItemClickListener
                           , OnClickListener
 { 
-  private TopoDroidApp app;
-  private MainWindow mParent;
+  private final TopoDroidApp app;
+  private final MainWindow mParent;
 
   private ArrayAdapter<String> mArrayAdapter;
   private ListView mList;
@@ -110,7 +110,7 @@ class ImportDialog extends MyDialog
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {
     String item = ((TextView) view).getText().toString();
-    TDLog.Log(  TDLog.LOG_INPUT, "ImportDialog onItemClick() <" + item.toString() + ">" );
+    TDLog.Log(  TDLog.LOG_INPUT, "ImportDialog onItemClick() <" + item + ">" );
 
     // hide();
     mList.setOnItemClickListener( null );

@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid centerline computation
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Stack;
 import java.util.Locale;
 
-import android.util.Log;
+// import android.util.Log;
 
 class DistoXNum
 {
@@ -36,8 +36,9 @@ class DistoXNum
   /* statistics - not including survey shots */
   private float mZmin; // Z depth 
   private float mZmax;
-  private float mLength; // survey length 
-  private float mProjLen;  // survey projected length (on horiz plane)
+  private float mLength;  // survey length 
+  private float mExtLen;  // survey "extended" length (on extended profile)
+  private float mProjLen; // survey projected length (on horiz plane)
   private int mDupNr;  // number of duplicate shots
   private int mSurfNr; // number of surface shots
 
@@ -47,10 +48,11 @@ class DistoXNum
 
   private void resetStats()
   {
-    mLength = 0.0f;
+    mLength  = 0.0f;
+    mExtLen  = 0.0f;
     mProjLen = 0.0f;
-    mDupNr  = 0;
-    mSurfNr = 0;
+    mDupNr   = 0;
+    mSurfNr  = 0;
     mErr0 = mErr1 = mErr2 = 0;
   }
 
@@ -69,22 +71,24 @@ class DistoXNum
     }
   }
 
-  private void addToStats( boolean d, boolean s, float l, float h )
+  private void addToStats( boolean d, boolean s, float l, float e, float h )
   {
     if ( d ) ++mDupNr;
     if ( s ) ++mSurfNr;
     if ( ! ( d || s ) ) {
-      mLength += l;
+      mLength  += l;
+      mExtLen  += e;
       mProjLen += h;
     }
   }
 
-  private void addToStats( boolean d, boolean s, float l, float h, float v )
+  private void addToStats( boolean d, boolean s, float l, float e, float h, float v )
   {
     if ( d ) ++mDupNr;
     if ( s ) ++mSurfNr;
     if ( ! ( d || s ) ) {
-      mLength += l;
+      mLength  += l;
+      mExtLen  += e;
       mProjLen += h;
       if ( v < mZmin ) { mZmin = v; }
       if ( v > mZmax ) { mZmax = v; }
@@ -110,10 +114,11 @@ class DistoXNum
   int splaysNr()    { return mSplays.size(); }
   // int loopNr()      { return mClosures.size(); }
 
-  float surveyLength() { return mLength; }
+  float surveyLength()  { return mLength; }
+  float surveyExtLen()  { return mExtLen; }
   float surveyProjLen() { return mProjLen; }
-  float surveyTop()    { return -mZmin; } // top must be positive
-  float surveyBottom() { return -mZmax; } // bottom must be negative
+  float surveyTop()     { return -mZmin; } // top must be positive
+  float surveyBottom()  { return -mZmax; } // bottom must be negative
 
   float angleErrorMean()   { return mErr1; } // radians
   float angleErrorStddev() { return mErr2; } // radians
@@ -691,6 +696,7 @@ class DistoXNum
     resetBBox();
     resetStats();
     mStartStation = null;
+    int siblings = 0;
 
     // long millis_start = System.currentTimeMillis();
     
@@ -752,30 +758,34 @@ class DistoXNum
     //   Log.v( TDLog.TAG, "DistoXNum::compute tmp-shots " + tmpshots.size() + " tmp-splays " + tmpsplays.size() );
     //   for ( TriShot ts : tmpshots ) ts.Dump();
     // }
+    for ( TriShot tsh : tmpshots ) { // clear backshot and multibad
+      tsh.backshot = 0;
+      tsh.getFirstBlock().mMultiBad = false;
+    }
 
     for ( int i = 0; i < tmpshots.size(); ++i ) {
       TriShot ts0 = tmpshots.get( i );
       addToStats( ts0 );
-      DBlock blk0 = ts0.getFirstBlock();
-      blk0.mMultiBad = false;
-      if ( ts0.backshot != 0 ) continue;
+      if ( ts0.backshot != 0 ) continue; // skip siblings
 
+      DBlock blk0 = ts0.getFirstBlock();
       // (1) check if ts0 has siblings
       String from = ts0.from;
       String to   = ts0.to;
       // if ( from == null || to == null ) continue; // FIXME
       TriShot ts1 = ts0;
-      ts0.backshot = 0;
       for ( int j=i+1; j < tmpshots.size(); ++j ) {
         TriShot ts2 = tmpshots.get( j );
-        if ( from.equals( ts2.from ) && to.equals( ts2.to ) ) {
+        if ( from.equals( ts2.from ) && to.equals( ts2.to ) ) { // chain a positive sibling
           ts1.sibling = ts2;
           ts1 = ts2;
           ts2.backshot = +1;
-        } else if ( from.equals( ts2.to ) && to.equals( ts2.from ) ) {
+	  ++ siblings;
+        } else if ( from.equals( ts2.to ) && to.equals( ts2.from ) ) { // chain a negative sibling
           ts1.sibling = ts2;
           ts1 = ts2;
           ts2.backshot = -1;
+	  ++ siblings;
         }
       }
       
@@ -799,12 +809,12 @@ class DistoXNum
           if ( d > dmax ) dmax = d;
           ts1 = ts1.sibling;
         }
-        if ( ( ! TDSetting.mMagAnomaly ) && ( dmax > TDSetting.mCloseDistance ) ) {
+        if ( ( ! TDSetting.doMagAnomaly() ) && ( dmax > TDSetting.mCloseDistance ) ) {
           blk0.mMultiBad = true;
         }
         // Log.v( "DistoX", "DMAX " + from + "-" + to + " " + dmax );
         
-        if ( ! TDSetting.mMagAnomaly ) { // (3) remove siblings
+        if ( ! TDSetting.doMagAnomaly() ) { // (3) remove siblings
           ts1 = ts0.sibling;
           while ( ts1 != null ) {
             TriShot ts2 = ts1.sibling;
@@ -847,11 +857,11 @@ class DistoXNum
       while ( repeat ) {
         repeat = false;
         for ( TriShot ts : tmpshots ) {
-          if ( ts.used || ts.backshot != 0 ) continue;
-          if ( pass == 0 && DBlock.getExtend(ts.extend) > 1 ) continue;
+          if ( ts.used || ts.backshot != 0 ) continue;                  // skip used and siblings
+          if ( pass == 0 && DBlock.getExtend(ts.extend) > 1 ) continue; // first pass skip non-extended
 
           float anomaly = 0;
-          if ( TDSetting.mMagAnomaly ) {
+          if ( TDSetting.doMagAnomaly() ) {
             // if ( ts.backshot == 0 ) 
             {
               // TDLog.Log(TDLog.LOG_NUM, "shot " + ts.from + " " + ts.to + " <" + ts.backshot + ">" );
@@ -941,7 +951,9 @@ class DistoXNum
                 sh = makeShotFromTmp( sf, st, ts, 0, sf.mAnomaly, mDecl ); 
                 addShotToStations( sh, sf, st );
               }
-              addToStats( ts.duplicate, ts.surface, Math.abs(ts.d()), ts.h() ); // NOTE Math.abs is not necessary
+              // float length = ts.d();
+	      // if ( ext == 0 ) length = TDMath.sqrt( length*length - ts.h()*ts.h() );
+              addToStats( ts.duplicate, ts.surface, ts.d(), ((ext == 0)? Math.abs(ts.v()) : ts.d()), ts.h() );
 
               // do close loop also on duplicate shots
               // need the loop length to compute the fractional closure error
@@ -961,7 +973,7 @@ class DistoXNum
               st.mAnomaly = anomaly + sf.mAnomaly;
 	      // Log.v("DistoXX", "station " + st.name + " anomaly " + st.mAnomaly );
               updateBBox( st );
-              addToStats( ts.duplicate, ts.surface, Math.abs(ts.d()), ts.h(), st.v );
+              addToStats( ts.duplicate, ts.surface, ts.d(), ((ext == 0)? Math.abs(ts.v()) : ts.d()), ts.h(), st.v );
 
               // if ( TDLog.LOG_DEBUG ) {
               //   Log.v( TDLog.TAG, "new station F->T id= " + ts.to + " from= " + sf.name + " anomaly " + anomaly + " d " + ts.d() ); 
@@ -1079,7 +1091,7 @@ class DistoXNum
     // long millis_end = System.currentTimeMillis() - millis_start;
     // Log.v("DistoX", "Data reduction " + millis_end + " msec" );
 
-    return (mShots.size() == tmpshots.size() );
+    return (mShots.size() + siblings == tmpshots.size() );
   }
 
   
@@ -1314,7 +1326,7 @@ class DistoXNum
             if ( sh1 == null ) { // dangling station: CROSS_END branch --> drop
               // mEndBranches.add( branch );
               if ( also_cross_end ) {
-                branch.setLastNode( st0.node );
+                branch.setLastNode( st0.node ); // st0.node always null
                 branches.add( branch );
               }
               break;

@@ -1,11 +1,11 @@
-/** @file SurveyRenameDialog.java
+/* @file SurveyRenameDialog.java
  *
  * @author marco corvi
  * @date nov 2011
  *
  * @brief TopoDroid survey Rename dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -33,7 +33,7 @@ class SurveyRenameDialog extends MyDialog
   private Button   mBtnOK;
   private Button   mBtnBack;
 
-  private SurveyWindow mParent;
+  private final SurveyWindow mParent;
 
   SurveyRenameDialog( Context context, SurveyWindow parent )
   {

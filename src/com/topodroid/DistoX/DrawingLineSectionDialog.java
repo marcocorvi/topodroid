@@ -1,11 +1,11 @@
-/** @file DrawingLineSectionDialog.java
+/* @file DrawingLineSectionDialog.java
  *
  * @author marco corvi
  * @date jan 2014
  *
  * @brief TopoDroid sketch line section dialog 
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -45,13 +45,13 @@ class DrawingLineSectionDialog extends MyDialog
   // private TextView mTVtype;
   private TextView mTVoptions;
   // private CheckBox mReversed;
-  String mId;
+  private String mId;
   private PlotInfo mPlotInfo;
-  String  mFrom;
-  String  mTo;
+  private String  mFrom;
+  private String  mTo;
   private String  mNick;
-  float   mAzimuth;
-  float   mClino;
+  private float   mAzimuth;
+  private float   mClino;
   private int mOrientation = 0;
 
   // private Button   mBtnFoto;
@@ -124,7 +124,7 @@ class DrawingLineSectionDialog extends MyDialog
               BrushManager.mLineLib.getSymbolThName( mLine.mLineType ) ) + " " + mFrom + " " + mTo );
 
     mTVoptions = (TextView) findViewById( R.id.line_options );
-    mTVoptions.setText( "ID " + mId );
+    mTVoptions.setText( String.format( mContext.getResources().getString( R.string.fmt_id ), mId ) );
 
     TextView tv_azimuth = (TextView) findViewById( R.id.line_azimuth );
     TextView tv_date    = (TextView) findViewById( R.id.line_date );
@@ -140,18 +140,13 @@ class DrawingLineSectionDialog extends MyDialog
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
     LinearLayout button_list = (LinearLayout)findViewById( R.id.button_list );
     button_list.setMinimumHeight( size + 20 );
-    LinearLayout.LayoutParams lp;
-    // lp = new LinearLayout.LayoutParams( LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
-    // lp.setMargins( 0, 10, 20, 10 );
 
     mIVimage = (ImageView) findViewById( R.id.line_image );
     // mBtnFoto = (Button) findViewById( R.id.button_foto );
     if ( hasPhoto ) {
       mBtnFoto = new MyCheckBox( mContext, size, R.drawable.iz_camera, R.drawable.iz_camera ); 
       button_list.addView( mBtnFoto );
-      lp = (LinearLayout.LayoutParams) mBtnFoto.getLayoutParams();
-      lp.setMargins( 0, -10, 40, 10 );
-      mBtnFoto.setLayoutParams( lp );
+      TDLayout.setMargins( mBtnFoto, 0, -10, 40, 10 );
       mBtnFoto.setOnClickListener( this );
     // } else {
     //   /* mBtnFoto.setVisibility( View.GONE ); */
@@ -160,9 +155,7 @@ class DrawingLineSectionDialog extends MyDialog
     // mBtnDraw = (Button) findViewById( R.id.button_draw );
     mBtnDraw = new MyCheckBox( mContext, size, R.drawable.iz_plot, R.drawable.iz_plot );
     button_list.addView( mBtnDraw );
-    lp = (LinearLayout.LayoutParams) mBtnDraw.getLayoutParams();
-    lp.setMargins( 0, -10, 40, 10 );
-    mBtnDraw.setLayoutParams( lp );
+    TDLayout.setMargins( mBtnDraw, 0, -10, 40, 10 );
     mBtnDraw.setOnClickListener( this );
 
     if ( mPlotInfo != null ) { // check the photo
@@ -229,9 +222,7 @@ class DrawingLineSectionDialog extends MyDialog
     // mBtnErase = (Button) findViewById( R.id.button_erase );
     mBtnErase = new MyCheckBox( mContext, size, R.drawable.iz_delete, R.drawable.iz_delete );
     button_list.addView( mBtnErase );
-    lp = (LinearLayout.LayoutParams) mBtnErase.getLayoutParams();
-    lp.setMargins( 0, -10, 40, 10 );
-    mBtnErase.setLayoutParams( lp );
+    TDLayout.setMargins( mBtnErase, 0, -10, 40, 10 );
     mBtnErase.setOnClickListener( this );
     // if ( mExists ) mBtnErase.setTextColor( 0xffff0000 );
 
@@ -239,9 +230,7 @@ class DrawingLineSectionDialog extends MyDialog
     if ( mPlotInfo != null ) {
       mBtnSave = new MyCheckBox( mContext, size, R.drawable.iz_save, R.drawable.iz_save );
       button_list.addView( mBtnSave );
-      lp = (LinearLayout.LayoutParams) mBtnSave.getLayoutParams();
-      lp.setMargins( 0, -10, 40, 10 );
-      mBtnSave.setLayoutParams( lp );
+      TDLayout.setMargins( mBtnSave, 0, -10, 40, 10 );
       mBtnSave.setOnClickListener( this );
     }
     // mBtnCancel = (Button) findViewById( R.id.button_cancel );
@@ -253,7 +242,7 @@ class DrawingLineSectionDialog extends MyDialog
     // TDLog.Log( TDLog.LOG_INPUT, "Drawing Line Section Dialog onClick() " + b.getText().toString() );
 
     if ( v.getId() == R.id.line_image ) {
-      mApp.viewPhoto( mContext, mFilename );
+      TopoDroidApp.viewPhoto( mContext, mFilename );
     } else {
       long type = mHSection ? PlotInfo.PLOT_H_SECTION : PlotInfo.PLOT_SECTION;
       mNick = ( mETnick.getText() != null )? mETnick.getText().toString() : "";
@@ -284,7 +273,7 @@ class DrawingLineSectionDialog extends MyDialog
     //     mParent.updatePlotNick( mPlotInfo, mNick );
     //     break;
     //   case R.id.line_image:
-    //     mApp.viewPhoto( mContext, mFilename );
+    //     TopoDroidApp.viewPhoto( mContext, mFilename );
     //     break;
     //   default: // R.id.button_cancel
     //     /* nothing */

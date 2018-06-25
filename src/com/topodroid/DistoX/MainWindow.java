@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid main class: survey/calib list
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -87,7 +87,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 // import android.graphics.Color;
 // import android.graphics.PorterDuff;
 
-import android.util.Log;
+// import android.util.Log;
 
 /*
   Method m = device.getClass().getMethod( "createRfcommSocket", new Class[] (int.class) );
@@ -118,7 +118,7 @@ public class MainWindow extends Activity
   private ListItemAdapter mArrayAdapter;
 
   private Button[] mButton1;
-  private static int izons[] = {
+  private static final int izons[] = {
                           R.drawable.iz_disto2b, // iz_disto,
                           R.drawable.iz_plus,
                           R.drawable.iz_import,
@@ -128,7 +128,7 @@ public class MainWindow extends Activity
 			  R.drawable.iz_empty
                           };
 
-  private static int menus[] = { 
+  private static final int menus[] = {
                           R.string.menu_palette,
                           R.string.menu_logs,
                           R.string.menu_join_survey,
@@ -137,7 +137,7 @@ public class MainWindow extends Activity
                           R.string.menu_help
                           };
 
-  private static int help_icons[] = { R.string.help_device,
+  private static final int help_icons[] = { R.string.help_device,
                           R.string.help_add_topodroid,
                           R.string.help_import,
                           R.string.help_symbol,
@@ -145,7 +145,7 @@ public class MainWindow extends Activity
                           // FIXME THMANAGER
                           // R.string.help_database
                           };
-  private static int help_menus[] = {
+  private static final int help_menus[] = {
                           R.string.help_symbol,
                           R.string.help_log,
                           R.string.help_join_survey,
@@ -159,7 +159,7 @@ public class MainWindow extends Activity
   // -------------------------------------------------------------
   private boolean say_no_survey = true;
   private boolean say_not_enabled = true; // whether to say that BT is not enabled
-  boolean do_check_bt = true;             // one-time bluetooth check sentinel
+  private boolean do_check_bt = true;             // one-time bluetooth check sentinel
 
   // -------------------------------------------------------------------
 
@@ -247,14 +247,6 @@ public class MainWindow extends Activity
         } catch ( ActivityNotFoundException e ) {
           TDToast.make( mActivity, R.string.no_thmanager );
         }
-      // } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // DATABASE
-      //   try {
-      //     intent = new Intent(Intent.ACTION_VIEW, Uri.parse("file://" + TDPath.getDatabase() ) );
-      //     intent.addCategory("com.kokufu.intent.category.APP_DB_VIEWER");
-      //     startActivity( intent );
-      //   } catch ( ActivityNotFoundException e ) {
-      //     TDToast.make( mActivity, R.string.no_db_viewer );
-      //   }
       }
     }
     // if ( status != mStatus ) {
@@ -264,7 +256,7 @@ public class MainWindow extends Activity
 
   // splitSurvey invokes this method with args: null, 0, old_sid, old_id
   //
-  void startSurvey( String value, int mustOpen ) // , long old_sid, long old_id )
+  private void startSurvey( String value, int mustOpen ) // , long old_sid, long old_id )
   {
     mApp.setSurveyFromName( value, false ); // open survey activity: tell app to update survey name+id, no forward
     Intent surveyIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, SurveyWindow.class );
@@ -366,15 +358,14 @@ public class MainWindow extends Activity
   
   // ---------------------------------------------------------------
 
-  TopoDroidAbout mTopoDroidAbout = null;
- 
-  HorizontalListView mListView;
-  HorizontalButtonView mButtonView1;
-  Button     mImage;
-  ListView   mMenu;
+
+  private HorizontalListView mListView;
+  private HorizontalButtonView mButtonView1;
+  private Button     mImage;
+  private ListView   mMenu;
   // HOVER
   // MyMenuAdapter mMenuAdapter = null;
-  ArrayAdapter< String > mMenuAdapter;
+  private ArrayAdapter< String > mMenuAdapter;
   
   // FIXME TOOLBAR Toolbar mToolbar;
 
@@ -424,7 +415,7 @@ public class MainWindow extends Activity
           (new ConnectDialog( mActivity, mApp )).show();
         } else { 
           if ( p++ == pos ) { // ABOUT
-            (new TopoDroidAbout( mActivity )).show();
+            (new TopoDroidAbout( mActivity, this, -2 )).show();
           } else { 
             if ( p++ == pos ) { // SETTINGS
               intent = new Intent( mActivity, TopoDroidPreferences.class );
@@ -498,10 +489,17 @@ public class MainWindow extends Activity
       if ( mApp.mWelcomeScreen ) {
         mApp.setBooleanPreference( "DISTOX_WELCOME_SCREEN", false );
         mApp.mWelcomeScreen = false;
-        mTopoDroidAbout = new TopoDroidAbout( this );
-        mTopoDroidAbout.setOnCancelListener( this );
-        mTopoDroidAbout.setOnDismissListener( this );
-        mTopoDroidAbout.show();
+        if ( mApp.mSetupScreen ) {
+          mApp.setBooleanPreference( "DISTOX_SETUP_SCREEN", false );
+          mApp.mSetupScreen = false;
+          doNextSetup( SETUP_WELCOME );
+        } else {
+          (new TopoDroidAbout( this, this, -2 )).show();
+          // TopoDroidAbout tda = new TopoDroidAbout( this, this, -2 );
+          // tda.setOnCancelListener( this );
+          // tda.setOnDismissListener( this );
+          // tda.show();
+	}
       }
     }
 
@@ -552,8 +550,8 @@ public class MainWindow extends Activity
     }
     setTheTitle();
   }
-  
-  int mNrButton1 = 5;
+
+  private int mNrButton1 = 5;
 
   void resetButtonBar()
   {
@@ -604,6 +602,7 @@ public class MainWindow extends Activity
   public void onDismiss( DialogInterface d )
   { 
     if ( d == (Dialog)mTopoDroidAbout ) {
+      doNextSetup( mTopoDroidAbout.nextSetup() );
       mTopoDroidAbout = null;
     }
   }
@@ -612,6 +611,7 @@ public class MainWindow extends Activity
   public void onCancel( DialogInterface d )
   {
     if ( d == (Dialog)mTopoDroidAbout ) {
+      doNextSetup( mTopoDroidAbout.nextSetup() );
       mTopoDroidAbout = null;
     }
   }
@@ -806,6 +806,7 @@ public class MainWindow extends Activity
     return false;
   }
 
+  // FIXME-23
   @Override
   public void onRequestPermissionsResult( int code, final String[] perms, int[] results )
   {
@@ -826,6 +827,42 @@ public class MainWindow extends Activity
     //     }
     //   );
     // }
+  }
+
+  // ----------------------------------------------------------------------------
+  // setup
+  private TopoDroidAbout mTopoDroidAbout = null;
+
+  static final private int SETUP_WELCOME = 0;
+  static final private int SETUP_TEXTSIZE = 1;
+  static final private int SETUP_BUTTONSIZE = 2;
+  static final private int SETUP_DRAWINGUNIT = 3;
+  static final private int SETUP_DONE = 4; // this must be the last
+
+  void doNextSetup( int setup ) 
+  { 
+    switch (setup) {
+      case SETUP_WELCOME: 
+        mTopoDroidAbout = new TopoDroidAbout( this, this, setup );
+        mTopoDroidAbout.setOnCancelListener( this );
+        mTopoDroidAbout.setOnDismissListener( this );
+        mTopoDroidAbout.show();
+        break;
+      case SETUP_TEXTSIZE: 
+        (new SetupTextSizeDialog( this, this, setup, TDSetting.mTextSize )).show();
+	break;
+      case SETUP_BUTTONSIZE:
+        (new SetupButtonSizeDialog( this, this, setup, TDSetting.mSizeBtns )).show();
+	break;
+      case SETUP_DRAWINGUNIT:
+        (new SetupDrawingUnitDialog( this, this, setup, TDSetting.mUnitIcons )).show();
+	break;
+      case SETUP_DONE:
+        (new SetupDoneDialog( this, this, setup )).show();
+	break;
+      default:
+	break;
+    }
   }
 
 

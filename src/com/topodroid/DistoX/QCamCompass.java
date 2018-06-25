@@ -1,11 +1,11 @@
-/** @file QCamCompass.java
+/* @file QCamCompass.java
  *
  * @author marco corvi
  * @date jan. 2017
  *
  * @brief TopoDroid quick cam compass
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -37,11 +37,11 @@ class QCamCompass extends Dialog
                          implements OnClickListener
                                   , IBearingAndClino
 {
-  Context mContext;
+  private final Context mContext;
   // DrawingWindow mDrawer;
   // long mPid;
 
-  private IPhotoInserter mInserter;
+  private final IPhotoInserter mInserter;
   private QCamDrawingSurface mSurface;
   // private QCamBox mBox;
   private Button buttonClick;
@@ -54,9 +54,9 @@ class QCamCompass extends Dialog
   private BitmapDrawable mBDsaveoff;
 
   private TextView mTVdata;
-  float mBearing;
-  float mClino;
-  int   mOrientation;
+  private float mBearing;
+  private float mClino;
+  private int   mOrientation;
   private boolean mHasBearingAndClino;
   private IBearingAndClino mCallback;
   private boolean mWithBox;
@@ -125,9 +125,7 @@ class QCamCompass extends Dialog
     mBDsaveok    = MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_save_transp );
     mBDsaveoff   = MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_save_off_transp );
 
-    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
-      LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
-    lp.setMargins( 0, 10, 20, 10 );
+    LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 0, 10, 20, 10 );
     LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
     layout4.setMinimumHeight( size + 20 );
     layout4.addView( buttonClick, lp );
@@ -203,7 +201,7 @@ class QCamCompass extends Dialog
     } else if ( b == buttonCancel ) {
     }
     mSurface.close();
-    try { Thread.sleep( 100 ); } catch ( InterruptedException e ) { }
+    TopoDroidUtil.slowDown( 100 );
 
     if ( mHasSaved ) {
       if ( mInserter != null ) mInserter.insertPhoto();

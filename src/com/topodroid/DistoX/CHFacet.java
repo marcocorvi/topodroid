@@ -1,11 +1,11 @@
-/** @filke CHFacet.java
+/* @filke CHFacet.java
  *
  * @author marco corvi
  * @date may 2017
  *
  * @brief TopoDroid N vector facet
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  * This software is adapted from TopoLinux implementation,
@@ -22,10 +22,10 @@ package com.topodroid.DistoX;
 class CHFacet
 {
   boolean valid;
-  int    nr; // number of vectors
+  private int    nr; // number of vectors
   Vector[] mV; // vectors
-  Vector mN;   // unit normal
-  Vector mCenter;   // center
+  private Vector mN;   // unit normal
+  private Vector mCenter;   // center
   private boolean hasCenter;
   private boolean hasNormal;
 

@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid drawing: item type selection listener
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -13,9 +13,9 @@ package com.topodroid.DistoX;
 
 /**
  */
-public interface OnItemSelectedListener 
+interface OnItemSelectedListener 
 {
-  public void pointSelected( int index, boolean update_recent );
-  public void lineSelected( int index, boolean update_recent );
-  public void areaSelected( int index, boolean update_recent );
+  void pointSelected( int index, boolean update_recent );
+  void lineSelected( int index, boolean update_recent );
+  void areaSelected( int index, boolean update_recent );
 }

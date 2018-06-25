@@ -1,11 +1,11 @@
-/** @file SurveyStat.java
+/* @file SurveyStat.java
  *
  * @author marco corvi
  * @date may 2012
  *
  * @brief TopoDroid survey stat info (lengths and counts)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -15,6 +15,7 @@ class SurveyStat
 {
   long id;  // survey id
   float lengthLeg;
+  float extLength;
   float planLength;
   float lengthDuplicate;
   float lengthSurface;

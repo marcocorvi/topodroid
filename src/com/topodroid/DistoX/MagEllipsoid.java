@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid World Magnetic Model 
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  * Implemented after GeomagneticLibrary.c by
@@ -22,8 +22,8 @@ package com.topodroid.DistoX;
 // MAGtype_Ellipsoid;
 class MagEllipsoid
 {
-  double a; /*semi-major axis of the ellipsoid*/
-  double b; /*semi-minor axis of the ellipsoid*/
+  private double a; /*semi-major axis of the ellipsoid*/
+  private double b; /*semi-minor axis of the ellipsoid*/
   private double fla; /* flattening */
   private double epssq; /*first eccentricity squared */
   private double eps; /* first eccentricity */

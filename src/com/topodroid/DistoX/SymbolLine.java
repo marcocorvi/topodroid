@@ -1,11 +1,11 @@
-/** @file SymbolLine.java
+/* @file SymbolLine.java
  *
  * @author marco corvi
  * @date dec 2012
  *
  * @brief TopoDroid drawing: line symbol
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -156,7 +156,7 @@ class SymbolLine extends Symbol
   private void readFile( String filename, String locale, String iso )
   {
     // Log.v(  TopoDroidApp.TAG, "load line file " + filename );
-    float unit = TDSetting.mUnit * TDSetting.mLineThickness;
+    float unit = TDSetting.mUnitIcons * TDSetting.mLineThickness;
     String name    = null;
     String th_name = null;
     String group   = null;

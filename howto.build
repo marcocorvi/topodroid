@@ -1,0 +1,71 @@
+Howto Build with ant
+
+[1] Android setup:
+/home/programs/android-sdk : all android stuff
+/home/programs/android-ndk : all android NDK stuff
+
+[2] Topodroid setup.
+
+Home:
+/home/programs/android-sdk/sample/android-8/topodroid
+
+It contains
+AndroidManifest.xml, res, src, jni, assets, libs, symbols-git, other dirs
+build.xml, proguard.cfg, project.properties, make_symbols.sh
+
+It also has subdir ant with
+build.properties, local.properties
+
+Notes.
+Translations are symlinks in res to subdirs in int18.
+Icons are symlinks in res to subdir in drawable.
+Symbols are in symbols-git and make_symbol.sh creates the zips
+Subdirs bin gen are created by the build
+
+[3] TopoDroid debug build.
+   ant debug
+   
+[4] TopoDroid debug install.
+   adb install -r bin/DistoX-debug.apk
+   
+N.B. to build/install release apk replace "debug" with "release".
+Keystore and key for topodroid are not included in the repo :-)
+
+----------------------------------------------------------------
+Howto Build with studio
+
+[2] TopoDroid studio setup
+
+Home:
+~/ApkProjects/TopoDroid
+
+it includes:
+  app/
+      app.iml
+      build.bundle
+      build.gradle
+      proguard-rules.pro
+      build/
+      libs/ (empty)
+      src/
+          androidTest
+          main/
+               AndroidManifest.xml
+               assets -->
+               java -->
+               jni -->
+               libs ( jni builds )
+               res/
+                   drawable layout raw values xml -->
+                   drawable-*
+                   drawable-v24
+                   values-v16
+          test
+  gradle/wrapper/gradle-wrapper.jar
+                 gradle-wrapper.properties
+  build.gradle
+  gradle.properties
+  gradle.bat
+  local.properties ( ndk.dir and sdk.dir )
+  settings.gradle
+  TopoDroid.iml

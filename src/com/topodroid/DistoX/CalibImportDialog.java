@@ -1,11 +1,11 @@
-/** @file CalibImportDialog.java
+/* @file CalibImportDialog.java
  *
  * @author marco corvi
  * @date sept 2015
  *
  * @brief TopoDroid import file list dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -41,7 +41,7 @@ class CalibImportDialog extends MyDialog
                                implements OnItemClickListener
                                , OnClickListener
 { 
-  private DeviceActivity mParent;
+  private final DeviceActivity mParent;
 
   // private ArrayAdapter<String> mArrayAdapter;
   private ListView mList;

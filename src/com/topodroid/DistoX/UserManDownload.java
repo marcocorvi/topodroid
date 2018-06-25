@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid calibration coefficient computation
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -31,9 +31,10 @@ import android.content.Context;
 
 class UserManDownload extends AsyncTask< String, Integer, Integer >
 {
-  private Context mContext;
+  private final Context mContext; // used to toast
   private String  mUrl;
-  private static UserManDownload running = null;
+  // private static UserManDownload running = null; // WARNING do not place context in a static field
+  private static boolean running = false; 
 
   UserManDownload( Context context, String url )
   {
@@ -58,8 +59,8 @@ class UserManDownload extends AsyncTask< String, Integer, Integer >
         InputStream in = http.getInputStream();
         ZipInputStream zin = new ZipInputStream( in );
         ZipEntry ze = null;
-	File dir = new File( TDPath.getManPath() );
-	if ( ! dir.exists() ) { dir.mkdirs(); }
+       	File dir = new File( TDPath.getManPath() );
+       	if ( ! dir.exists() ) { dir.mkdirs(); }
 
         while ( ( ze = zin.getNextEntry() ) != null ) {
           String name = ze.getName();
@@ -112,13 +113,17 @@ class UserManDownload extends AsyncTask< String, Integer, Integer >
 
   private synchronized boolean lock()
   {
-    if ( running != null ) return false;
-    running = this;
+    // if ( running != null ) return false;
+    // running = this;
+    if ( running ) return false;
+    running = true;
     return true;
   }
 
   private synchronized void unlock()
   {
-    if ( running == this ) running = null;
+    // if ( running == this ) running = null;
+    if ( running ) running = false;
   }
+
 }

@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid drawing utilities
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -23,8 +23,8 @@ import android.graphics.Path;
 class DrawingUtil
 {
   static final float SCALE_FIX = 20.0f; 
-  static float CENTER_X = 100f;
-  static float CENTER_Y = 120f;
+  static final float CENTER_X = 100f;
+  static final float CENTER_Y = 120f;
 
   // private static final PointF mCenter = new PointF( CENTER_X, CENTER_Y );
 
@@ -79,7 +79,7 @@ class DrawingUtil
       k = 10;
       paint = BrushManager.fixedGrid10Paint;
     }
-    dpath.setPaint( paint );
+    dpath.setPathPaint( paint );
     dpath.mPath  = new Path();
     dpath.mPath.moveTo( x1, y1 );
     dpath.mPath.lineTo( x2, y2 );

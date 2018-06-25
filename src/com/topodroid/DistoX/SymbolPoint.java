@@ -1,11 +1,11 @@
-/** @file SymbolPoint.java
+/* @file SymbolPoint.java
  *
  * @author marco corvi
  * @date dec 2012
  *
  * @brief TopoDroid drawing: point symbol
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -314,7 +314,8 @@ class SymbolPoint extends Symbol
   {
     mPath = new Path();
     mPath.moveTo(0,0);
-    mDxf  = "  0\nLINE\n  8\nPOINT\n" 
+    String pname = "P_" + mThName.replace(':', '-');
+    mDxf  = "  0\nLINE\n  8\n" + pname + "\n" 
           + "  100\nAcDbEntity\n  100\nAcDbLine\n"
           + "  10\n0.0\n  20\n0.0\n  30\n0.0\n"
           + "  11\n1.0\n  21\n0.0\n  31\n0.0\n"; // 1 mm long
@@ -342,8 +343,9 @@ class SymbolPoint extends Symbol
     PrintWriter pv3  = new PrintWriter( sv3 ); // SVG circle writer
 
     float x00=0, y00=0;  // last drawn point1
+    String pname = "P_" + mThName.replace(':', '-');
 
-    float unit = TDSetting.mUnit;
+    float unit = TDSetting.mUnitIcons;
     mPath = new Path();
     String[] vals = path.split(" ");
     int s = vals.length;
@@ -374,7 +376,7 @@ class SymbolPoint extends Symbol
             y0 = Float.parseFloat( vals[k] ); 
             mPath.lineTo( x0*unit, y0*unit );
             DrawingDxf.printString( pw, 0, "LINE" );
-            DrawingDxf.printString( pw, 8, "POINT" );
+            DrawingDxf.printString( pw, 8, pname );
             DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbLine" );
             DrawingDxf.printXYZ( pw, x00, -y00, 0.0f, 0 ); // prev point
             x00 = x0 * dxfScale;
@@ -519,7 +521,7 @@ class SymbolPoint extends Symbol
             // Log.v(TopoDroidApp.TAG, mName + " " + cx + " " + cy + " R " + r + " E " + e + " angles " + a1 + " " + a2 );
 
             // DrawingDxf.printString( pw, 0, "ELLIPSE" );
-            // DrawingDxf.printString( pw, 8, "POINT" );
+            // DrawingDxf.printString( pw, 8, pname );
             // DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbEllipse" );
             // pw.printf(Locale.US,
             //           "  10\n%.2f\n  20\n%.2f\n  30\n%.2f\n  11\n%.2f\n  21\n%.2f\n  31\n%.2f\n  40\n%.2f\n  41\n%.2f\n  42\n%.2f\n",
@@ -528,7 +530,7 @@ class SymbolPoint extends Symbol
             //           e,                                      // RATIO MINOR/MAJOR
             //           a1, a2 );                               // START and END ANGLES [rad]
             DrawingDxf.printString( pw, 0, "ARC" );
-            DrawingDxf.printString( pw, 8, "POINT" );
+            DrawingDxf.printString( pw, 8, pname );
             DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbCircle" );
             DrawingDxf.printXYZ( pw, cx*dxfScale, -cy*dxfScale, 0.0f, 0 );
             DrawingDxf.printFloat( pw, 40, r*dxfScale );
@@ -544,7 +546,7 @@ class SymbolPoint extends Symbol
           
             // FIXME
             // DrawingDxf.printString( pw, 0, "LINE" );
-            // DrawingDxf.printString( pw, 8, "POINT" );
+            // DrawingDxf.printString( pw, 8, pname );
             // DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbLine" );
             // DrawingDxf.printXYZ( pw, x00, -y00, 0.0f, 0 );
             // x00 = x2 * dxfScale;
@@ -565,7 +567,7 @@ class SymbolPoint extends Symbol
             x1 = Float.parseFloat( vals[k] );                 // radius
             mPath.addCircle( x0*unit, y0*unit, x1*unit, Path.Direction.CCW );
             DrawingDxf.printString( pw, 0, "CIRCLE" );
-            DrawingDxf.printString( pw, 8, "POINT" );
+            DrawingDxf.printString( pw, 8, pname );
             DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbCircle" );
             DrawingDxf.printXYZ( pw, x0*dxfScale, -y0*dxfScale, 0.0f, 0 );
             DrawingDxf.printFloat( pw, 40, x1*dxfScale );
@@ -611,7 +613,7 @@ class SymbolPoint extends Symbol
             mPath.arcTo( new RectF(x0*unit, y0*unit, x1*unit, y1*unit), x2, y2 );
 
             // DrawingDxf.printString( pw, 0, "ELLIPSE" );
-            // DrawingDxf.printString( pw, 8, "POINT" );
+            // DrawingDxf.printString( pw, 8, pname );
             // DrawingDxf.printAcDb(pw, -1, "AcDbEntity", AcDbEllipse" );
             // pw.printf(Locale.US,
             //           "  10\n%.2f\n  20\n%.2f\n  30\n%.2f\n  11\n%.2f\n  21\n%.2f\n  31\n%.2f\n  40\n%.2f\n  41\n%.2f\n  42\n%.2f\n",
@@ -620,7 +622,7 @@ class SymbolPoint extends Symbol
             //           (y1-y0)/(x1-x0),                                              // RATIO MINOR/MAJOR
             //           x2*TDMath.DEG2RAD, (x2+y2)*TDMath.DEG2RAD );  // START and END PARAMS
             DrawingDxf.printString( pw, 0, "ARC" );
-            DrawingDxf.printString( pw, 8, "POINT" );
+            DrawingDxf.printString( pw, 8, pname );
             DrawingDxf.printAcDb(pw, -1, "AcDbEntity", "AcDbCircle" );
             DrawingDxf.printXYZ( pw, (x0+x1)/2*dxfScale, -(y0+y1)/2*dxfScale, 0.0f, 0 ); // CENTER
             DrawingDxf.printFloat( pw, 40, x1*dxfScale );                                // RADIUS

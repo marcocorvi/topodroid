@@ -6,10 +6,12 @@
   </plurals>
   <plurals name="read_data">
     <item quantity="zero">Nincs letöltött adat</item>
+    <!-- TODO item quantity="one"></item -->
     <item quantity="other">%1$d letöltött adat </item>
   </plurals>
   <plurals name="read_calib_data">
     <item quantity="zero">Nincs letöltött kalibrációs adat</item>
+    <!-- TODO item quantity="one"></item -->
     <item quantity="other">%1$d letöltött adat (%2$d csoportban)</item>
   </plurals>
 </resources>

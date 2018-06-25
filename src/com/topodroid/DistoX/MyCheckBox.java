@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid checkbox button
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -25,11 +25,11 @@ import android.view.View;
  */
 class MyCheckBox extends CompoundButton
 {
-  Context mContext = null;
-  int mIdOn;
-  int mIdOff;
-  int mSize;
-  boolean mState;
+  private Context mContext = null;
+  private int mIdOn;
+  private int mIdOff;
+  private int mSize;
+  private boolean mState;
 
   MyCheckBox( Context context )
   {

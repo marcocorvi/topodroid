@@ -6,7 +6,12 @@ This dialog is opened tapping the <u>Distribution</u> button in the <i>Calibrati
 
 It displays the distribution of the calibration data, in azimuth and inclination, i.e, on a 3D sphere.<br><p>
 
-The sphere is opened up as an ellipsis: the north in the middle, east to the right, west to the left and south on the outer border. Positive inclination in the upper hemisphere, negative in the lower one. It can show either the angular distribution of the raw data, or that of the data corrected with the calibration.<br><p>
+The sphere is cut on the horizontal plane, and the upwards and downwards hemispheres are displayed as two circles.
+The center of the circles are the vertical direction, while the points on the border are the horizontal 
+directions. On each circle, North is upward, South downward, East to the right and West to the left.<br><p>
+
+Green areas indicate directions covered by the data. Red zones are directions for which data are missing.
+The dialog can show either the angular distribution of the raw data, or that of the data corrected with the calibration.<br><p>
 
 <b>Eval</b> computes the angular distribution using the raw direction values.<br>
 <b>Eval. w clib.</b> computes the distribution after correcting the data with the calibration coefficients.<br><p> 

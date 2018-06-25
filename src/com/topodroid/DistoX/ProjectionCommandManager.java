@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid projected profile azimuth: commands manager
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -68,7 +68,8 @@ class ProjectionCommandManager
   //   }
   // }
 
-  // void flipXAxis(float z)
+  // from ICanvasCommand
+  // public void flipXAxis(float z)
   // {
   //   synchronized( mGridStack1 ) {
   //     flipXAxes( mGridStack1 );

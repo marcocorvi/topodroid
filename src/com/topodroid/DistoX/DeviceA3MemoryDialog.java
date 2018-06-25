@@ -1,11 +1,11 @@
-/** @file DeviceA3MemoryDialog.java
+/* @file DeviceA3MemoryDialog.java
  *
  * @author marco corvi
  * @date nov 2011
  *
  * @brief TopoDroid DistoX A3 device memory dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -35,7 +35,7 @@ class DeviceA3MemoryDialog extends MyDialog
                            implements View.OnClickListener
                            , IMemoryDialog
 {
-  DeviceActivity mParent;
+  private final DeviceActivity mParent;
 
   private Button mBtnStore;
   private Button mBtnReset;
@@ -54,8 +54,8 @@ class DeviceA3MemoryDialog extends MyDialog
   private TextView mTVrtail;
 
   // List< MemoryOctet> mMemory;
-  ArrayAdapter< String > mArrayAdapter;
-  ListView mList;
+  private ArrayAdapter< String > mArrayAdapter;
+  private ListView mList;
 
   DeviceA3MemoryDialog( Context context, DeviceActivity parent )
   {
@@ -69,7 +69,7 @@ class DeviceA3MemoryDialog extends MyDialog
     super.onCreate( bundle );
 
     initLayout( R.layout.device_a3_memory_dialog, R.string.memoryA3 );
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    // getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT ); // already in initLayout
 
     mTVshead = (TextView) findViewById( R.id.tv_stored_head );
     mTVstail = (TextView) findViewById( R.id.tv_stored_tail );

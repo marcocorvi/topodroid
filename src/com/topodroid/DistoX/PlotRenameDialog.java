@@ -1,11 +1,11 @@
-/** @file PlotRenameDialog.java
+/* @file PlotRenameDialog.java
  *
  * @author marco corvi
  * @date nov 2011
  *
  * @brief TopoDroid survey Rename / Delete dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -39,8 +39,8 @@ class PlotRenameDialog extends MyDialog
   // private Button   mBtnMerge;
   private CheckBox mCBcopy;
 
-  private DrawingWindow mParent;
-  private TopoDroidApp mApp;
+  private final DrawingWindow mParent;
+  private final TopoDroidApp mApp;
 
   PlotRenameDialog( Context context, DrawingWindow parent, TopoDroidApp app )
   {

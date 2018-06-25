@@ -8,14 +8,31 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">双击返回键退出</string>
 
-    <string name="version_ask">升级到新版.\n要重装绘图工具?</string>
+    <!-- UNUSED string name="version_ask">升级到新版.\n要重装绘图工具?</string -->
     <!-- TODO string name="symbols_ask">Install drawing tools v.%1$s?\n(Current v.%2$s)</string -->
+
+    <!-- TODO string name="setup_textsize_title">TopoDroid setup. Text size</string -->
+    <!-- TODO string name="setup_buttonsize_title">TopoDroid setup. Button size</string -->
+    <!-- TODO string name="setup_drawingunit_title">TopoDroid setup. Icons size</string -->
+    <!-- TODO string name="setup_done_title">TopoDroid setup. Done</string -->
+
+    <!-- TODO string name="setup_textsize">Set the text size.\nYou can always change this later thru the main window settings.</string -->
+    <!-- TODO string name="setup_buttonsize">Set the button size.\nYou can always change this later thru the main window settings.</string -->
+    <!-- TODO string name="setup_drawingunit">Set the sketch icon size.\nYou can always change this later thru the sketch window settings.</string -->
+    <!-- TODO string name="setup_done">The basic setup in done.\n\n
+	    If you experience problems with the DistoX connection, try and set the insecure socket.\n\n
+	    Other settings concern the presentation in the sketching window (icon size, label size, line width, etc.)
+	    you should set them to your needs./n/n
+    </string -->
+    <!-- OK string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
 
     <string name="POINT">点图例</string>
     <string name="LINE">线图例</string>
     <string name="AREA">面图例</string>
     <string name="HELP">帮助</string>
     <string name="STATION">测点 </string>
+    <!-- TODO string name="UP">UPWARD</string -->
+    <!-- TODO string name="DOWN">DOWNWARD</string -->
 
     <string name="cut">剪切</string>
     <string name="copy">复制</string>
@@ -63,10 +80,10 @@
     <string name="calib_gm_undelete">还原校准数据?</string>
     <string name="calib_saved">校准数据已保存</string>
     <string name="calib_updated">更新校准数据</string>
-    <string name="calib_compute_groups">计算校准数据组 ...</string>
-    <string name="calib_compute_coeffs">计算校准系数 ...</string>
-    <!-- UNUSED string name="calib_read_coeffs">读取校准系数 ...</string -->
-    <string name="calib_write_coeffs">校准系数正在写入 ...</string>
+    <string name="calib_compute_groups">计算校准数据组 &#8230;</string>
+    <string name="calib_compute_coeffs">计算校准系数 &#8230;</string>
+    <!-- UNUSED string name="calib_read_coeffs">读取校准系数 &#8230;</string -->
+    <string name="calib_write_coeffs">校准系数正在写入 &#8230;</string>
     <string name="calib_validation">确认 %1$s vs %2$s</string>
     <!-- UNUSED string name="connect_failed">连接失败</string -->
     <!-- UNUSED string name="data"> 数据</string -->
@@ -85,9 +102,9 @@
     <string name="non_linear">非线性</string>
     <!-- NO string name="algo_minimum">最小量</string -->
    
-    <string name="device_algo_failed">自动算法失败\n使用线性算法...</string>
+    <string name="device_algo_failed">自动算法失败\n使用线性算法&#8230;</string>
     <!-- TODO string name="device_address">Address %1$s</string -->
-    <!-- UNUSED string name="device_busy">设备忙...</string -->
+    <!-- UNUSED string name="device_busy">设备忙&#8230;</string -->
     <string name="device_illegal_addr">非法的存储地址</string>
     <string name="device_info">设备信息</string>
     <string name="device_model_set">你是否想要切换设备</string>
@@ -131,11 +148,11 @@
     <!-- TODO string name="found_groups">Found %1$d groups</string -->
     <!-- UNUSED string name="few_plots">绘图不足</string -->
     <string name="few_calibs">校准数据不足</string>
-    <!-- TODO string name="getting_info">Getting DistoX info ...</string -->
+    <!-- TODO string name="getting_info">Getting DistoX info &#8230;</string -->
 
     <string name="calib_import_title">校准数据输入</string>
     <string name="import_title">数据导入</string>
-    <!-- UNUSED string name="import_wait">数据导入中... 请稍后...</string -->
+    <!-- UNUSED string name="import_wait">数据导入中&#8230; 请稍后&#8230;</string -->
     <string name="import_already">测量数据已导入</string>
     <string name="import_none">无导入数据</string>
     <string name="import_failed">数据导入失败</string>
@@ -147,10 +164,12 @@
     <string name="import_calib_no_data">校准文件: 无文件</string>
     <string name="import_calib_io_error">校准文件: 读取错误</string>
     <string name="import_zip_ok">成功导入zip文件</string>
-    <string name="import_zip_wait">数据导入可能可能费点时间. 请等待 ...</string>
-    <!-- UNUSED string name="sketch_saving">保存草图中 ... 请等待...</string -->
+    <!-- UNUSED string name="import_zip_wait">数据导入可能可能费点时间. 请等待 &#8230;</string -->
+    <!-- UNUSED string name="sketch_saving">保存草图中 &#8230; 请等待&#8230;</string -->
     <string name="MT_points_none">未定位</string>
  
+    <!-- TODO string name="pleasewait">Please wait</string -->
+    <!-- TODO string name="processing">processing &#8230;</string -->
 
     <!-- UNUSED string name="head_tail">存储器: </string -->
     <string name="head_tail_failed">DistoX存储器指针读取失败</string>
@@ -212,7 +231,7 @@
     <string name="group_reset">重置分组</string>
 
     <!-- UNUSED string name="scale">比例</string -->
-    <string name="reversed">反向</string>
+    <!-- UNUSED string name="reversed">反向</string -->
     <string name="options">选项</string>
     <string name="outline">轮廓</string>
     <string name="out">出</string>
@@ -224,8 +243,16 @@
     <!-- UNUSED string name="hidden_add">隐藏之前的测量</string -->
     <!-- UNUSED string name="hidden_del">显示之前的测量</string -->
     <!-- TODO string name="hidden_show">Show shots beyond station</string -->
-    <string name="splays_toggle">辐线测量显示开关</string>
+    <!-- UNUSED string name="splays_toggle">辐线测量显示开关</string -->
+    <!-- TODO string name="splays_on_off">Splays</string -->
     <!-- TODO string name="splays">splays</string -->
+    <!-- TODO string name="splays_show">Show splays</string -->
+    <!-- TODO string name="foresurface_show">Show fore surface</string -->
+    <!-- TODO string name="fmt_listen">LISTEN | %1$s</string -->
+    <!-- TODO string name="fmt_id">ID %1$s</string -->
+    <!-- TODO string name="fmt_latitude">Latitude %1$s</string -->
+    <!-- TODO string name="fmt_longitude">Longitude %1$s</string -->
+    <!-- TODO string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string --> 
     <!-- TODO string name="fixed">fixed</string -->
     <!-- TODO string name="painted">painted</string -->
 
@@ -243,12 +270,14 @@
     <string name="no_calibration">无校准选择</string>
     <string name="no_capture_app">无图像捕捉软件</string>
     <string name="no_cave3d">Cave3D 未安装</string>
+    <!-- TODO string name="no_data_reduction">No data reduction</string -->
     <string name="no_db">无数据库</string>
     <string name="no_device_address">设备未指定</string>
     <string name="no_device_found">未发现设备</string>
     <!-- TODO string name="no_feature_audio">Audio not supported</string -->
     <string name="no_gms">校准无数据.\n点击下载按钮</string>
     <string name="no_geo_station">错误: 无地理定位点</string>
+    <!-- TODO string name="no_leg_first">Selection does not start with a leg</string -->
     <string name="no_leg_intersection">断面线与主线无交叉</string>
     <string name="no_location_data">无位置数据</string>
     <string name="no_paired_device">无配对设备.\n扫描并配对一个DistoX</string>
@@ -262,10 +291,10 @@
     <string name="no_survey">无测量选择.</string>
     <!-- TODO string name="no_to_station">No TO station.</string -->
     <string name="no_thmanager">ThManager 未安装</string>
-    <string name="no_db_viewer">DB_viewer 未发现</string>
+    <!-- UNUSED string name="no_db_viewer">DB_viewer 未发现</string -->
     <string name="no_undelete">无还原项目</string>
-    <!-- FIXME string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Bearing %4$.1f"</string -->
-    <!-- FIXME string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Clino %4$.1f"</string -->
+    <!-- TODO string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Bearing %5$.1f"</string -->
+    <!-- TODO string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Clino %5$.1f"</string -->
 
     <string name="menu_3d">3D</string>
     <string name="menu_about">关于</string>
@@ -377,7 +406,7 @@
     <!-- UNUSED string name="scrap_name">草图名称</string -->
     <string name="splay">侧线</string>
     <string name="too_many_leg_intersection">剖面线与数条主线交叉</string>
-    <string name="too_many_legs_xsection">剖面中有太多主线</string>
+    <!-- UNUSED string name="too_many_legs_xsection">剖面中有太多主线</string -->
     <!-- UNUSED string name="converted_tdr2th2">转换草图为二进制文件到 th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">重写th2草图文件?</string -->
     <string name="section_area">切面区域: %1$.1f</string>
@@ -396,7 +425,7 @@
     <string name="sensor_type">传感器类型</string>
     <string name="sensor_value">传感器值</string>
     <string name="sensor_comment">传感器注释</string>
-    <!-- TODO string name="insufficient_data">insufficient sensor data</string -->
+    <!-- UNUSED string name="insufficient_data">insufficient sensor data</string -->
 
     <!-- UNUSED string name="shot_clino">倾角测量</string -->
     <!-- UNUSED string name="shot_compass">方位角测量</string -->
@@ -438,6 +467,7 @@
     <!-- TODO string name="saturated_coeffs">WARNING: saturated calibration coefficients</string -->
     <!-- TODO string name="out_of_memory">WARNING: out of memory !</string -->
     <!-- TODO string name="disk_io_error">CRITICAL: disk i/o error !</string -->
+    <!-- TODO string name="toporobot_warning">WARNING: TopoRobot policy is experimental !</string -->
     <string name="cannot_rename">不能重命名</string>
     <string name="declination">磁偏角.</string>
     <string name="description">描述</string>
@@ -454,7 +484,7 @@
     <!-- TODO string name="delete_whole_leg">Delete whole leg</string -->
     <string name="visible_border">显示边界</string>
     <!-- UNUSED string name="vthreshold">垂直边界</string -->
-    <string name="wait_scan">扫描: 请稍后 ...</string>
+    <string name="wait_scan">扫描: 请稍后 &#8230;</string>
     <string name="write_failed">DistoX写入失败</string>
     <string name="write_ok">将校准写入DistoX</string>
     <string name="zip_saved">保存 </string>
@@ -473,8 +503,9 @@
     <string name="stat_component">组成 %1$d</string>
     <string name="stat_depth">深度 %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">复制单个测量数据 %1$d %2$.1f %3$s</string>
-    <string name="stat_leg">主线 %1$d %2$.1f %3$s %4$.1f %5$s</string>
+    <string name="stat_leg">主线 %1$d %2$.1f %3$.1f %4$.1f %5$s</string>
     <string name="stat_length">长度 %1$.1f %2$s</string>
+    <!-- TODO string name="stat_extlen">3D length %1$.1f %2$s</string -->
     <!-- TODO string name="stat_projlen">Plan length %1$.1f %2$s</string -->
     <string name="stat_loop">环测 %1$d</string>
     <string name="stat_origin">零测量点: %1$s</string>
@@ -499,7 +530,7 @@
     <string name="profile">项目.</string>
     <!-- UNUSED string name="v_section">V-截面</string -->
     <string name="h_section">H-截面</string>
-    <!-- TODO string name="landscape">landscape</string -->
+    <!-- UNUSED string name="landscape">landscape</string -->
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">DistoX存储读取失败</string>
@@ -512,7 +543,7 @@
     <!-- UNUSED string name="ask_close_survey">关闭测量?</string -->
     <!-- TODO string name="ask_gps_service">Set GPS service?</string -->
 
-    <string name="button_add"       >添加       </string>
+    <!-- UNUSED string name="button_add"       >添加       </string -->
     <string name="button_back"      >返回      </string>
     <string name="button_cancel"    >退出    </string>
     <!-- TODO string name="button_change"    >Change    </string -->
@@ -528,20 +559,28 @@
     <!-- UNUSED string name="button_gps_stop"  >停止      </string -->
     <!-- UNUSED string name="button_manual"    >手册    </string -->
     <!-- UNUSED string name="button_measure"   >测量   </string -->
-    <string name="button_photo"   >照片</string>
+    <!-- UNUSED string name="button_photo"   >照片</string -->
     <!-- UNUSED string name="button_sensor"  >传感器</string -->
     <!-- UNUSED string name="button_direction">方位角/倾角</string -->
     <!-- UNUSED string name="button_azimuth">方位角</string -->
     <string name="button_plot"    >草图</string>
     <!-- TODO string name="button_more"    >More</string -->
+    <!-- TODO string name="button_next"    >Next</string -->
+    <!-- TODO string name="button_skip"    >Skip</string -->
+    <!-- TODO string name="button_done"    >Done</string -->
     <!-- TODO string name="button_lrud"    >Add LRUD</string -->
     <string name="button_ok"        >同意        </string>
+    <!-- TODO string name="button_off"       >off</string -->
+    <!-- TODO string name="button_on"        >on</string -->
     <string name="button_open"      >打开      </string>
     <string name="button_read"      >读取      </string>
     <!-- UNUSED string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >重组   </string -->
     <string name="button_dump"      >删除     </string>
     <!-- TODO string name="button_rename"    >Rename    </string -->
+    <!-- TODO string name="button_renumber"  >Renumber</string -->
+    <!-- TODO string name="button_bedding"   >Bedding plane</string -->
+    <!-- TODO string name="button_highlight" >Highlight</string -->
     <!-- TODO string name="button_replace"   >Replace   </string -->
     <string name="button_reset"     >重置     </string>
     <string name="button_left"      >左</string>
@@ -568,6 +607,7 @@
 
     <string name="mode_leg">主线</string>
     <string name="mode_splay">侧线</string>
+    <!-- TODO string name="mode_latest">Latest splays</string -->
     <string name="mode_station">测量点</string>
     <string name="mode_grid">网格</string>
     <string name="mode_fixed">与参考匹配</string>
@@ -643,7 +683,7 @@
 
     <!-- UNUSED string name="station_next">下一个</string -->
     <string name="no_shot_between_stations">两测量点间无数据</string>
-    <string name="few_line_points">线间的点太少</string>
+    <!-- UNUSED string name="few_line_points">线间的点太少</string -->
     <string name="line_delete">删除线</string>
     <string name="flip_shots">点击测量</string>
     <!-- TODO string name="split_nothing">Nothing to split</string -->
@@ -682,7 +722,7 @@
     <string name="help_coeff">显示校准系数</string>
     <!-- TODO string name="help_color">Clear splay colors</string -->
     <string name="help_continue">继续画线</string>
-    <string name="help_contour">轮廓编辑</string>
+    <!-- UNUSED string name="help_contour">轮廓编辑</string -->
     <string name="help_current_station">保存测量点</string>
     <string name="help_azimuth">"延伸" 参照</string>
     <string name="help_device">输入设备激活</string>
@@ -712,7 +752,7 @@
     <string name="help_photo">照片对话框</string>
     <string name="help_sensor">测量对话框</string>
     <string name="help_3d">3D查看软件 (Cave3D)</string>
-    <string name="help_move">移动/缩放模式</string>
+    <!-- UNUSED string name="help_move">移动/缩放模式</string -->
     <string name="help_draw">绘画模式</string>
     <string name="help_edit">编辑模式</string>
     <string name="help_refs">选择草图参考</string>
@@ -794,13 +834,13 @@
     <string name="title_coverage">校准数据分布</string>
     <string name="title_coeff">校准系数</string>
     <!-- TODO string name="title_color_picker">Pick a color</string -->
-    <string name="title_contour">轮廓</string>
+    <!-- UNUSED string name="title_contour">轮廓</string -->
     <!-- UNUSED string name="title_coord">输入点坐标:</string -->
     <string name="title_current_station">保存测量点</string>
     <!-- TODO string name="title_station_search">Enter station</string -->
     <string name="title_device">DistoX 设备</string>
     <string name="title_device_select">选择DistoX设备</string>
-    <string name="title_discover">扫码DistoX设备...请稍后</string>
+    <string name="title_discover">扫码DistoX设备&#8230;请稍后</string>
     <string name="title_draw">绘图</string>
     <string name="title_draw_area">面图例 %1$s</string>
     <string name="title_draw_line">线图例 %1$s</string>
@@ -1074,9 +1114,9 @@
   <string name="pref_bitmap_bgcolor_message">草图输出中PNG图像背景颜色</string>
   <string name="pref_acad_version_title">AutoCAD 版本</string>
   <string name="pref_acad_version_summary">AutoCAD 版本</string>
-  <string name="pref_dxf_scale_title">DXF 草图比例</string>
-  <string name="pref_dxf_scale_summary">DXF 草图比例系数</string>
-  <string name="pref_dxf_scale_message">草图输出中DXF比例系数</string>
+  <!-- UNUSED string name="pref_dxf_scale_title">DXF 草图比例</string -->
+  <!-- UNUSED string name="pref_dxf_scale_summary">DXF 草图比例系数</string -->
+  <!-- UNUSED string name="pref_dxf_scale_message">草图输出中DXF比例系数</string -->
   <string name="pref_dxf_blocks_title">DXF 侧线终点</string>
   <string name="pref_dxf_blocks_summary">DXF 侧线终点</string>
   <string name="pref_thumbnail_title">缩略图大小</string>
@@ -1098,6 +1138,8 @@
   <string name="pref_segment_message">线上的点之间的最小距离</string>
   <string name="pref_linestyle_title">线类型</string>
   <string name="pref_linestyle_summary">线绘制类型</string>
+  <!-- TODO string name="pref_linecontinue_title">Line continue</string -->
+  <!-- TODO string name="pref_linecontinue_summary">Line default continue-mode</string -->
   <string name="pref_lineacc_title">贝塞尔线精度</string>
   <string name="pref_lineacc_summary">贝塞尔线插值精度</string>
   <string name="pref_lineacc_message">贝塞尔线三次插值精度</string>
@@ -1164,8 +1206,8 @@
 
   <string name="pref_picker_type_title">绘图工具选取</string>
   <string name="pref_picker_type_summary">绘图工具选取显示类型</string>
-  <string name="pref_section_stations_title">X-截面系</string>
-  <string name="pref_section_stations_summary">X-截面参考系</string>
+  <!-- UNUSED string name="pref_section_stations_title">X-截面系</string -->
+  <!-- UNUSED string name="pref_section_stations_summary">X-截面参考系</string -->
   <string name="pref_station_size_title">测量点名称尺寸</string>
   <string name="pref_station_size_summary">测量点名称尺寸</string>
   <string name="pref_station_size_message">测量点名称尺寸</string>
@@ -1182,17 +1224,17 @@
   <string name="pref_auto_section_pt_title">截面点</string>
   <string name="pref_auto_section_pt_summary">将截面点加入到截面线中</string>
 
-  <string name="pref_sketchUsesSplays_title">草图侧线</string>
-  <string name="pref_sketchUsesSplays_summary">草图的外表面使用侧线</string>
+  <!-- UNUSED string name="pref_sketchUsesSplays_title">草图侧线</string -->
+  <!-- UNUSED string name="pref_sketchUsesSplays_summary">草图的外表面使用侧线</string -->
   <string name="pref_sketchLineStep_title">最大尺寸</string>
   <string name="pref_sketchLineStep_summary">三角形最大尺寸</string>
   <string name="pref_sketchLineStep_message">三角形最大尺寸 [m]</string>
-  <string name="pref_sketchBorderStep_title">边框步骤</string>
-  <string name="pref_sketchBorderStep_summary">编辑的线点间的距离</string>
-  <string name="pref_sketchBorderStep_message">编辑的线点间的距离</string>
-  <string name="pref_sketchSectionStep_title">截面步骤</string>
-  <string name="pref_sketchSectionStep_summary">截面间的距离</string>
-  <string name="pref_sketchSectionStep_message">中间截面的距离</string>
+  <!-- UNUSED string name="pref_sketchBorderStep_title">边框步骤</string -->
+  <!-- UNUSED string name="pref_sketchBorderStep_summary">编辑的线点间的距离</string -->
+  <!-- UNUSED string name="pref_sketchBorderStep_message">编辑的线点间的距离</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_title">截面步骤</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_summary">截面间的距离</string -->
+  <!-- UNUSED string name="pref_sketchSectionStep_message">中间截面的距离</string -->
   <string name="pref_sketchDeltaExtrude_title">拉伸比例</string>
   <string name="pref_sketchDeltaExtrude_summary">拉伸比例系数</string>
   <string name="pref_sketchDeltaExtrude_message">拉伸比例系数</string>

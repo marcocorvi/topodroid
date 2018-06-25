@@ -2,20 +2,35 @@
 <resources>
     <!-- manual>https://sites.google.com/site/speleoapps/home/topodroid/docs/TopoDroid-2.2.4.pdf</manual -->
     <string name="no_manual">Handbuch konnte nicht heruntergeladen werden.</string>
-    <!-- TODO string name="user_man_ok">Installed user manual translation</string -->
-    <!-- TODO string name="user_man_fail">Failed to install user manual translation</string -->
+    <string name="user_man_ok">Übersetztes Handbuch installiert</string>
+    <string name="user_man_fail">Fehler beim installieren des übersetzten Handbuchs</string>
 
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Erneut ZURÜCK drücken zum verlassen</string>
 
-    <string name="version_ask">TopoDroid wurde auf eine neue Version aktualisiert.\nSollen die Zeichensymbole aktualisiert werden?</string>
+    <!-- UNUSED string name="version_ask">TopoDroid wurde auf eine neue Version aktualisiert.\nSollen die Zeichensymbole aktualisiert werden?</string -->
     <string name="symbols_ask">Zeichenwerkzeuge von v.%2$s auf v.%1$s aktualisieren?</string>
+
+    <string name="setup_textsize_title">TopoDroid setup. Textgröße</string>
+    <string name="setup_buttonsize_title">TopoDroid setup. Knopfgröße</string>
+    <string name="setup_drawingunit_title">TopoDroid setup. Icongröße</string>
+    <string name="setup_done_title">TopoDroid setup. Fertig</string>
+
+    <string name="setup_textsize">Definiert die Textgröße.\nKann später über das Einstellungsmenü geändert werden.</string>
+    <string name="setup_buttonsize">Definiert die Knopfgröße.\nKann später über das Einstellungsmenü geändert werden.</string>
+    <string name="setup_drawingunit">Definiert die Icongröße auf der Skizze.\nKann später über das Einstellungsmenü geändert werden.</string>
+    <string name="setup_done">Grundeinstellungen vorgenommen.\n\n
+        Bei Problemen mit der Verbindung mit dem DistoX die Verbindungsart auf \'Unsicher\' stellen.
+    </string>
+    <!-- OK string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
 
     <string name="POINT">PUNKTE</string>
     <string name="LINE">LINIEN</string>
     <string name="AREA">FLÄCHEN</string>
     <string name="HELP">HILFE</string>
     <string name="STATION">Messpunkt</string>
+    <string name="UP">AUFWÄRTS</string>
+    <string name="DOWN">ABWÄRTS</string>
 
     <string name="cut">AUSSCHNEIDEN</string>
     <string name="copy">KOPIEREN</string>
@@ -81,9 +96,9 @@
 
     <string name="algorithm">Algorithmus:</string>
     <string name="auto">automatisch</string>
-    <!-- OK string name="linear">linear</string -->
+    <string name="linear">linear</string>
     <string name="non_linear">nicht-linear</string>
-    <!-- NO string name="algo_minimum">minimum</string -->
+    <string name="algo_minimum">minimum</string>
 <!-- DistoX DEVICE STUFF -->
     <string name="device_algo_failed">Bestimmung fehlgeschlagen.\nVerwendung von linearem Algorithmus</string>
     <string name="device_address">Adresse %1$s</string>
@@ -136,7 +151,7 @@
     <string name="found_groups">%1$d Gruppen gefunden</string>
     <!-- UNUSED string name="few_plots">Nicht genügend Skizzen</string -->
     <string name="few_calibs">Nicht genügend Kalibrierungen</string>
-    <string name="getting_info">DistoX wird abgefragt ...</string>
+    <string name="getting_info">DistoX wird abgefragt &#8230;</string>
 <!-- IMPORTING A SURVEY or A ZIP -->
     <string name="calib_import_title">Kalibrierung importieren</string>
     <string name="import_title">Daten Importieren</string>
@@ -152,9 +167,12 @@
     <string name="import_calib_no_data">Kalibrierungsdatei: Keine Daten</string>
     <string name="import_calib_io_error">Kalibrierungsdatei: Lesefehler</string>
     <string name="import_zip_ok">Zip-Datei erfolgreich importiert</string>
-    <string name="import_zip_wait">Importiere Zip-Datei, bitte warten&#8230;</string>
+    <!-- UNUSED string name="import_zip_wait">Importiere Zip-Datei, bitte warten&#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Skizze speichern, bitte warten&#8230;</string -->
     <string name="MT_points_none">Keine MobileTopographer Punkte</string>
+
+    <string name="pleasewait">Bitte warten</string>
+    <string name="processing">bearbeite &#8230;</string>
 
 <!-- MORE DEVICE STRINGS -->
     <!-- UNUSED string name="head_tail">Memory: </string -->
@@ -218,7 +236,7 @@
     <string name="group_reset">Gruppierung zurücksetzen</string>
 
     <!-- UNUSED string name="scale">Ausmaß</string -->
-    <string name="reversed">umkehren</string>
+    <!-- UNUSED string name="reversed">umkehren</string -->
     <string name="options">Einstellungen</string>
     <string name="outline">Linientyp (Therion)</string>
     <string name="out">draußen</string>
@@ -230,8 +248,16 @@
     <!-- NO string name="hidden_add">Vorherige Messungen ausblenden</string -->
     <!-- UNUSED string name="hidden_del">Vorherige Messungen anzeigen</string -->
     <string name="hidden_show">Messungen nach der Station anzeigen</string>
-    <string name="splays_toggle">Hilfszüge ein/ausblenden</string>
+    <!-- UNUSED string name="splays_toggle">Hilfszüge ein/ausblenden</string -->
+    <string name="splays_on_off">Hilfszüge</string>
     <string name="splays">Hilfszüge</string>
+    <string name="splays_show">Hilfszüge anzeigen</string>
+    <string name="foresurface_show">Vorderfläche zeigen</string>
+    <string name="fmt_listen">WARTEN | %1$s</string>
+    <string name="fmt_id">ID %1$s</string>
+    <string name="fmt_latitude">Länge %1$s</string>
+    <string name="fmt_longitude">Breite %1$s</string>
+    <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string> 
     <string name="fixed">fixiert</string>
     <string name="painted">gezeichnet</string>
 
@@ -249,12 +275,14 @@
     <string name="no_calibration">Keine Kalibrierung gewählt</string>
     <string name="no_capture_app">Keine Kamera-App vorhanden</string>
     <string name="no_cave3d">Cave3D nicht installiert</string>
+    <!-- TODO string name="no_data_reduction">No data reduction</string -->
     <string name="no_db">Keine Datenbank</string>
     <string name="no_device_address">Kein Gerät gewählt</string>
     <string name="no_device_found">Kein Gerät gefunden</string>
     <string name="no_feature_audio">Audio nicht unterstützt</string>
     <string name="no_gms">Kalibrierung mit keinen Daten</string>
     <string name="no_geo_station">Fehler: keine geolokalisierte Station</string>
+    <!-- TODO string name="no_leg_first">Selection does not start with a leg</string -->
     <string name="no_leg_intersection">Schnittlinie kreuzt keine Vermessung</string>
     <string name="no_location_data">Keine Ortsdaten</string>
     <string name="no_paired_device">Kein gekoppeltes DistoX Gerät</string>
@@ -268,7 +296,7 @@
     <string name="no_survey">Keine Vermessung ausgewählt</string>
     <string name="no_to_station">Keine Zielstation.</string>
     <string name="no_thmanager">Keine ThManager App</string>
-    <string name="no_db_viewer">Keine DB_viewer App</string>
+    <!-- UNUSED string name="no_db_viewer">Keine DB_viewer App</string -->
     <string name="no_undelete">Nichts wiederherzustellen</string>
     <string name="format_measure_plan">Dist %1$.2f (Total %2$.2f) &#8736; %5$.1f° Dx %3$.2f Dy %4$.2f</string>
     <string name="format_measure_profile">Dist %1$.2f (Total %2$.2f) &#8736; %5$.1f° Dx %3$.2f Dy %4$.2f</string>
@@ -292,9 +320,9 @@
     <string name="menu_delete">LÖSCHEN</string>
     <string name="menu_detach">TRENNEN</string>
     <string name="menu_display">ANZEIGEN</string>
-    <!-- OK string name="menu_distox">DISTOX</string -->
+    <string name="menu_distox">DISTOX</string>
     <string name="menu_export">EXPORTIEREN</string>
-    <!-- OK string name="menu_firmware">FIRMWARE</string -->
+    <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_recover">WIEDERHERSTELLEN</string>
     <string name="menu_reload">FRÜHERE VERSION</string>
     <string name="menu_rename_delete">UMBENENNEN/LÖSCHEN</string>
@@ -302,15 +330,15 @@
     <string name="menu_switch">WECHSELN/SCHLIEßEN</string>
     <string name="menu_help">HILFE</string>
     <string name="menu_join_survey">CO-VERMESSUNG</string>
-    <!-- OK string name="menu_logs">LOGS</string -->
+    <string name="menu_logs">LOGS</string>
     <string name="menu_manual_calibration">KALIBRIERUNG</string>
     <string name="menu_options">EINSTELLUNGEN</string>
     <string name="menu_overview">ÜBERBLICK</string>
     <string name="menu_pair">VERBINDEN</string>
-    <!-- OK string name="menu_palette">PALETTE</string -->
+    <string name="menu_palette">PALETTE</string>
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SENSORWERTE</string>
-    <!-- OK string name="menu_scan">SCAN</string -->
+    <string name="menu_scan">SCAN</string>
     <!-- UNUSED string name="menu_station">MESSPUNKTE</string -->
     <string name="menu_stats">STATISTIK</string>
     <string name="menu_survey">INFO</string>
@@ -389,7 +417,7 @@
     <!-- UNUSED string name="scrap_name">Name der Skizze</string -->
     <string name="splay">Hilfszug</string>
     <string name="too_many_leg_intersection">Schnittlinie durchquert zu viele Messstrecken</string>
-    <string name="too_many_legs_xsection">Zu viele Messstrecken für Querschnitt</string>
+    <!-- UNUSED string name="too_many_legs_xsection">Zu viele Messstrecken für Querschnitt</string -->
     <!-- UNUSED string name="converted_tdr2th2">Skizzen konvertiert zu th2.</string -->
     <!-- UNUSED string name="convert_tdr2th2">th2 Skizzen überschreiben?</string -->
     <string name="section_area">Fläche: %1$.1f</string>
@@ -408,7 +436,7 @@
     <string name="sensor_type">Art</string>
     <string name="sensor_value">Messung</string>
     <string name="sensor_comment">Notizen</string>
-    <string name="insufficient_data">Nicht genügend Sensordaten</string>
+    <!-- UNUSED string name="insufficient_data">Nicht genügend Sensordaten</string -->
 
     <!-- UNUSED string name="shot_clino">Neigung</string -->
     <!-- UNUSED string name="shot_compass">Azimut</string -->
@@ -450,6 +478,7 @@
     <string name="saturated_coeffs">WARNUNG: Kalibrierungs-Koeffizienten nicht berechenbar</string>
     <string name="out_of_memory">WARNUNG: Zuwenig Arbeitsspeicher!</string>
     <string name="disk_io_error">FEHLER: Lese-/Schreibfehler!</string>
+    <!-- TODO string name="toporobot_warning">WARNING: TopoRobot policy is experimental !</string -->
     <string name="cannot_rename">Kann Vermessung nicht umbenennen</string>
     <string name="declination">Magnetische Deklination</string>
     <string name="description">Beschreibung</string>
@@ -485,8 +514,9 @@
     <string name="stat_component">Komponenten %1$d</string>
     <string name="stat_depth">Tiefe %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Doppelmessungen %1$d %2$.1f %3$s</string>
-    <string name="stat_leg">Messstrecke %1$d %2$.1f %3$s %4$.1f %5$s</string>
+    <string name="stat_leg">Messstrecke %1$d %2$.1f %3$.1f %4$.1f %5$s</string>
     <string name="stat_length">Länge %1$.1f %2$s</string>
+    <string name="stat_extlen">3D-Länge %1$.1f %2$s</string>
     <string name="stat_projlen">Skizzenlänge %1$.1f %2$s</string>
     <string name="stat_loop">Kreisschlüsse %1$d</string>
     <string name="stat_origin">Ursprungs-Messpunkt: %1$s</string>
@@ -518,7 +548,7 @@
     <string name="extended_profile">Erweitertes Profil</string>
     <!-- UNUSED string name="v_section">V-PROFIL</string -->
     <string name="h_section">H-PROFIL</string>
-    <string name="landscape">Querformat</string>
+    <!-- UNUSED string name="landscape">Querformat</string -->
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Verbindungsfehler mit DistoX</string>
@@ -531,7 +561,7 @@
     <!-- UNUSED string name="ask_close_survey">Vermessung schließen?</string -->
     <string name="ask_gps_service">GPS aktiveren?</string>
 
-    <string name="button_add"       >Erstellen       </string>
+    <!-- UNUSED string name="button_add"       >Erstellen       </string -->
     <string name="button_back"      >Zurück    </string>
     <string name="button_cancel"    >Abbrechen </string>
     <string name="button_change"    >Ändern    </string>
@@ -547,20 +577,28 @@
     <!-- UNUSED string name="button_gps_stop"  >Anhalten      </string -->
     <!-- UNUSED string name="button_manual"    >Handbuch</string -->
     <!-- UNUSED string name="button_measure"   >Messung   </string -->
-    <string name="button_photo"   >Foto</string>
+    <!-- UNUSED string name="button_photo"   >Foto</string -->
     <!-- UNUSED string name="button_sensor"  >Messung</string -->
     <!-- UNUSED string name="button_direction">Azimut/Neigung</string -->
     <!-- UNUSED string name="button_azimuth">Azimut</string -->
     <string name="button_plot"    >Skizze</string>
     <string name="button_more"    >Mehr</string>
+    <string name="button_next"    >Weiter</string>
+    <string name="button_skip"    >Überspringen</string>
+    <string name="button_done"    >Fertig</string>
     <string name="button_lrud"    >LRUD hinzufügen</string>
     <string name="button_ok"        >OK        </string>
+    <string name="button_off"       >aus</string>
+    <string name="button_on"        >ein</string>
     <string name="button_open"      >Öffnen     </string>
     <string name="button_read"      >Lesen      </string>
     <!-- UNUSED string name="button_redo"      >Nochmals      </string -->
     <!-- UNUSED string name="button_regroup"   >Umgruppieren   </string -->
     <string name="button_dump"      >Lesen</string>
     <string name="button_rename"    >Umbenennen    </string>
+    <!-- TODO string name="button_renumber"  >Renumber</string -->
+    <!-- TODO string name="button_bedding"   >Bedding plane</string -->
+    <!-- TODO string name="button_highlight" >Highlight</string -->
     <string name="button_replace"   >Ersetzen   </string>
     <string name="button_reset"     >Zurücksetzen</string>
     <string name="button_left"      >LINKS</string>
@@ -586,6 +624,7 @@
 
     <string name="mode_leg">Messstrecken</string>
     <string name="mode_splay">Hilfszüge</string>
+    <!-- TODO string name="mode_latest">Latest splays</string -->
     <string name="mode_station">Messpunkte</string>
     <string name="mode_grid">Gitter</string>
     <string name="mode_fixed">Fester Rahmen</string>
@@ -663,7 +702,7 @@
 
     <!-- UNUSED string name="station_next">NEXT</string -->
     <string name="no_shot_between_stations">no_shot_between_stations</string>
-    <string name="few_line_points">Line has too few points</string>
+    <!-- UNUSED string name="few_line_points">Line has too few points</string -->
     <string name="line_delete">line_delete</string>
     <string name="flip_shots">Flip shots</string>
     <string name="split_nothing">Nichts aufzuteilen</string>
@@ -702,7 +741,7 @@
     <string name="help_coeff">Kalibrierungs-Koeffizienten zeigen</string>
     <string name="help_color">Hilfszug-Farben löschen</string>
     <string name="help_continue">Linien fortsetzen</string>
-    <string name="help_contour">Konturen bearbeiten</string>
+    <!-- UNUSED string name="help_contour">Konturen bearbeiten</string -->
     <string name="help_current_station">Gespeicherte Messpunkte</string>
     <string name="help_azimuth">Seitenriss Referenzazimut</string>
     <string name="help_device">DistoX Verwalten</string>
@@ -732,7 +771,7 @@
     <string name="help_photo">Fotos</string>
     <string name="help_sensor">Sensormessungen</string>
     <string name="help_3d">3D-Modell (Benötigt Cave3D)</string>
-    <string name="help_move">Move/zoom Modus</string>
+    <!-- UNUSED string name="help_move">Move/zoom Modus</string -->
     <string name="help_draw">Skizzenmodus</string>
     <string name="help_edit">Bearbeitungsmodus</string>
     <string name="help_refs">Skizzenelemente anzeigen</string>
@@ -816,7 +855,7 @@
     <string name="title_coverage">Kalibrierungsdaten</string>
     <string name="title_coeff">Kalibrierungs-Koeffizienten</string>
     <string name="title_color_picker">Farbe wählen</string>
-    <string name="title_contour">Konturen</string>
+    <!-- UNUSED string name="title_contour">Konturen</string -->
     <!-- UNUSED string name="title_coord">Gib die Punkt-Koordinaten ein:</string -->
     <string name="title_current_station">Gespeicherte Messpunkte</string>
     <string name="title_station_search">Messpunkt eingeben</string>
@@ -864,13 +903,13 @@
     <!-- NO string name="title_sketch_select">Select item</string -->
 
     <string name="title_stats">Statistik</string>
-    <string name="title_step">Schritt</string>
+    <!-- UNUSED string name="title_step">Schritt</string -->
     <string name="title_survey">Vermessungs-Info</string>
     <string name="title_survey_new">Neue Vermessung</string>
     <string name="title_survey_export">Vermessung speichern als</string>
     <string name="title_survey_rename">Benenne Vermessung um in</string>
     <string name="title_plot_rename">Skizze umbenennen</string>
-    <string name="title_plot_zoomfit">Grösse anpassen / Ausrichtung</string>
+    <string name="title_plot_zoomfit">Größe anpassen / Ausrichtung</string>
     <string name="title_calib_export">Kalibrierung speichern als</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 <!-- PREFERENCES STRINGS CAN BE LEFT UNTRANSLATED FOR NOW -->
@@ -919,8 +958,8 @@
   <string name="pref_station_prefix_summary">Exportiere Messpunkt Prefix (compass)</string>
   <string name="pref_compass_splays_title">Exportiere Hilfszüge</string>
   <string name="pref_compass_splays_summary">Export Hilfszüge (compass)</string>
-  <string name="pref_trobot_names_title">TopoRobot Namen</string>
-  <string name="pref_trobot_names_summary">Stationen wie in TopoRobot benennen</string>
+  <!-- UNUSED string name="pref_trobot_names_title">TopoRobot Namen</string -->
+  <!-- UNUSED string name="pref_trobot_names_summary">Stationen wie in TopoRobot benennen</string -->
   <string name="pref_ortho_lrud_title">Min. Winkel für LRUD in Export</string>
   <string name="pref_ortho_lrud_summary">Minimaler Hilfszug-Winkel für LRUD</string>
   <string name="pref_ortho_lrud_message">Minimaler Hilfszug-Winkel für LRUD</string>
@@ -938,8 +977,8 @@
   <string name="pref_survex_lrud_summary">LRUD-Werte in Survex export</string>
   <string name="pref_svg_grid_title">SVG Gitter</string>
   <string name="pref_svg_grid_summary">Gitter zu SVG hinzufügen</string>
-  <string name="pref_svg_in_html_title">SVG in HTML</string>
-  <string name="pref_svg_in_html_summary">SVG export in HTML einbetten</string>
+  <!-- UNUSED string name="pref_svg_in_html_title">SVG in HTML</string -->
+  <!-- UNUSED string name="pref_svg_in_html_summary">SVG export in HTML einbetten</string -->
   <string name="pref_svg_pointstroke_title">SVG Punkt-Dicke</string>
   <string name="pref_svg_pointstroke_summary">Dicke von Punktsymbolen in SVG</string>
   <string name="pref_svg_labelstroke_title">SVG Text-Dicke</string>
@@ -1102,9 +1141,9 @@
   <string name="pref_bitmap_bgcolor_message">PNG Hintergrundfarbe Export</string>
   <string name="pref_acad_version_title">AutoCAD-Version</string>
   <string name="pref_acad_version_summary">AutoCAD-Version</string>
-  <string name="pref_dxf_scale_title">Massstab DXF-Skizze</string>
-  <string name="pref_dxf_scale_summary">Massstab-Faktor DXF-Skizze</string>
-  <string name="pref_dxf_scale_message">Massstab-Faktor DXF-Export</string>
+  <!-- UNUSED string name="pref_dxf_scale_title">Massstab DXF-Skizze</string -->
+  <!-- UNUSED string name="pref_dxf_scale_summary">Massstab-Faktor DXF-Skizze</string -->
+  <!-- UNUSED string name="pref_dxf_scale_message">Massstab-Faktor DXF-Export</string -->
   <string name="pref_dxf_blocks_title">DXF: Hilfszüge markieren</string>
   <string name="pref_dxf_blocks_summary">DXF: Enden der Hilfszüge markieren</string>
   <string name="pref_thumbnail_title">Thumbnails Größe</string>
@@ -1126,6 +1165,8 @@
   <string name="pref_segment_message">Minimaler Abstand zwischen Punkten auf einer Linie</string>
   <string name="pref_linestyle_title">Linientyp</string>
   <string name="pref_linestyle_summary">Linientyp</string>
+  <!-- TODO string name="pref_linecontinue_title">Line continue</string -->
+  <!-- TODO string name="pref_linecontinue_summary">Line default continue-mode</string -->
   <string name="pref_lineacc_title">Interpolations-Genauigkeit</string>
   <string name="pref_lineacc_summary">Interpolationsgenauigkeit</string>
   <string name="pref_lineacc_message">Interpolationsgenauigkeit</string>
@@ -1192,8 +1233,8 @@
 
   <string name="pref_picker_type_title">Zeichenwerkzeuge Darstellung</string>
   <string name="pref_picker_type_summary">Zeichenwerkzeug Darstellung</string>
-  <string name="pref_section_stations_title">Querschnitts-Stationen</string>
-  <string name="pref_section_stations_summary">Querschnitts-Referenz-Stationen</string>
+  <!-- UNUSED string name="pref_section_stations_title">Querschnitts-Stationen</string -->
+  <!-- UNUSED string name="pref_section_stations_summary">Querschnitts-Referenz-Stationen</string -->
   <string name="pref_station_size_title">Messpunkt Schriftgröße</string>
   <string name="pref_station_size_summary">Messpunkt Beschriftung Schriftgröße</string>
   <string name="pref_station_size_message">Messpunkt Beschriftung Schriftgröße</string>

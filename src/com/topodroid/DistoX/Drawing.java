@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid drawing const integers
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -31,14 +31,14 @@ class Drawing
   static final int SCALE_LARGE  = 2;
   static final int SCALE_MAX    = 3;
 
-  static int[] mEraseModes = {
+  static final int[] mEraseModes = {
     R.string.popup_erase_all,
     R.string.popup_erase_point,
     R.string.popup_erase_line,
     R.string.popup_erase_area
   };
 
-  static int[] mSelectModes = {
+  static final int[] mSelectModes = {
     R.string.popup_select_all,
     R.string.popup_select_point,
     R.string.popup_select_line,
@@ -47,7 +47,7 @@ class Drawing
     R.string.popup_select_station
   };
 
-  static int[] mJoinModes = {
+  static final int[] mJoinModes = {
     R.string.popup_cont_none,
     R.string.popup_cont_start,
     R.string.popup_cont_end,
