@@ -143,7 +143,7 @@ class VirtualDistoXComm extends TopoDroidComm
   // ------------------------------------------------------------------------------------
   // CONTINUOUS DATA DOWNLOAD
 
-  boolean connectDevice( String address, Handler /* ILister */ lister ) // FIXME LISTER
+  boolean connectDevice( String address, Handler /* ILister */ lister ) // FIXME_LISTER
   {
     // Log.v("DistoX", "VD comm connect device");
     if ( createSocket() ) {
@@ -193,7 +193,7 @@ class VirtualDistoXComm extends TopoDroidComm
   }
 
 
-  protected boolean startRfcommThread( int to_read, Handler /* ILister */ lister ) // FIXME LISTER
+  protected boolean startRfcommThread( int to_read, Handler /* ILister */ lister ) // FIXME_LISTER
   {
     // Log.v( "DistoX", "VD start RFcomm thread: to_read " + to_read );
     if ( mServer != null ) {
@@ -214,7 +214,7 @@ class VirtualDistoXComm extends TopoDroidComm
   // -------------------------------------------------------------------------------------
   // ON-DEMAND DATA DOWNLOAD
 
-  int downloadData( String address, Handler /* ILister */ lister ) // FIXME LISTER
+  int downloadData( String address, Handler /* ILister */ lister ) // FIXME_LISTER
   {
     int ret = 0;
     // Log.v("DistoX", "VD comm download data");

@@ -149,10 +149,12 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   // called only by ShotWindow updateBlockList( blk )
   // this method changes the ArrayList of DistoxDBlock's
   //
-  void addDataBlock( DBlock blk ) 
+  boolean addDataBlock( DBlock blk ) 
   {
+    if ( hasBlock( blk.mId ) ) return false;
     mItems.add( blk );
     // notifyDataSetChanged();
+    return true;
   }
 
   // called by ShotWindow::updateShotlist
@@ -169,6 +171,17 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
         }
       }
     }
+  }
+
+  boolean hasBlock( long id ) 
+  {
+    int size = mItems.size();
+    if ( size == 0 ) return false;
+    if ( id > mItems.get(size-1).mId ) return false;
+    return true;
+
+    // for ( DBlock b : mItems ) if ( b.mId == id ) return true;
+    // return false;
   }
 
   void updateBlockName( long id, String from, String to ) 

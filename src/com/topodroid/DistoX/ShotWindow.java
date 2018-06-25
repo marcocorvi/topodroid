@@ -368,25 +368,26 @@ public class ShotWindow extends Activity
   @Override
   public void updateBlockList( DBlock blk )
   {
-    // Log.v("DistoX", "Shot window update list. blk: " + blk.mId + " " + blk.mLength + " " + blk.mBearing + " " + blk.mClino );
+    // Log.v("DistoX", "Shot window update list. blk id: " + blk.mId + " " + blk.mLength + " " + blk.mBearing + " " + blk.mClino );
     if ( mDataAdapter != null ) {
       // FIXME 3.3.0
-      mDataAdapter.addDataBlock( blk );
-      mDistoXAccuracy.addBlock( blk );
-      if ( TDSetting.mBacksightShot || TDSetting.mTripodShot ) {
-        mApp.assignStationsAll( mDataAdapter.mItems );
-      } else {
-        mApp.assignStationsAll( mDataAdapter.getItemsForAssign() );
-      }
-      // mApp_mData.getShotName( mApp.mSID, blk );
-
-      mList.post( new Runnable() {
-        @Override public void run() {
-          // Log.v("DistoX", "notify data set changed");
-          mDataAdapter.notifyDataSetChanged(); // THIS IS IMPORTANT TO REFRESH THE DATA LIST
-          mList.setSelection( mDataAdapter.getCount() - 1 );
+      if ( mDataAdapter.addDataBlock( blk ) ) {
+        mDistoXAccuracy.addBlock( blk );
+        if ( TDSetting.mBacksightShot || TDSetting.mTripodShot ) {
+          mApp.assignStationsAll( mDataAdapter.mItems );
+        } else {
+          mApp.assignStationsAll( mDataAdapter.getItemsForAssign() );
         }
-      } );
+        // mApp_mData.getShotName( mApp.mSID, blk );
+
+        mList.post( new Runnable() {
+          @Override public void run() {
+            // Log.v("DistoX", "notify data set changed");
+            mDataAdapter.notifyDataSetChanged(); // THIS IS IMPORTANT TO REFRESH THE DATA LIST
+            mList.setSelection( mDataAdapter.getCount() - 1 );
+          }
+        } );
+      }
     }
   }
 

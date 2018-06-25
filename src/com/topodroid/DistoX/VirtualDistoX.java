@@ -581,7 +581,7 @@ class VirtualDistoX
     SharedPreferences.Editor editor = mSharedPrefs.edit();
     editor.putFloat( key, val );
     editor.apply();
-    // FIXME-23 editor.commit();
+    // FIXME_23 editor.commit();
   }
 
   private Vector loadVector( String key )

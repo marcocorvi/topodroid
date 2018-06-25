@@ -806,7 +806,7 @@ public class MainWindow extends Activity
     return false;
   }
 
-  // FIXME-23
+  // FIXME_23
   @Override
   public void onRequestPermissionsResult( int code, final String[] perms, int[] results )
   {

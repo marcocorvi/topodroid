@@ -47,7 +47,7 @@ class TopoDroidComm
     private DistoXProtocol mProto;
     private int toRead; // number of packet to read
     // private ILister mLister;
-    private Handler mLister; // FIXME LISTER
+    private Handler mLister; // FIXME_LISTER
     private long mLastShotId;   // last shot id
 
     private volatile boolean doWork = true;
@@ -62,7 +62,7 @@ class TopoDroidComm
      * @param protocol    communication protocol
      * @param to_read     number of data to read (use -1 to read forever until timeout or an exception)
      */
-    RfcommThread( DistoXProtocol protocol, int to_read, Handler /* ILister */ lister ) // FIXME LISTER
+    RfcommThread( DistoXProtocol protocol, int to_read, Handler /* ILister */ lister ) // FIXME_LISTER
     {
       toRead = to_read;
       mProto = protocol;
@@ -106,12 +106,12 @@ class TopoDroidComm
           double c = mProto.mClino;
           double r = mProto.mRoll;
           // extend is unset to start
-          // long extend = TDAzimuth.computeLegExtend( b ); // DBlock.EXTEND_UNSET; FIXME-EXTEND 
+          // long extend = TDAzimuth.computeLegExtend( b ); // DBlock.EXTEND_UNSET; FIXME_EXTEND 
           // TDLog.Log( TDLog.LOG_COMM, "DATA PACKET " + d + " " + b + " " + c );
           // NOTE type=0 shot is DistoX-type
           long status = ( d > TDSetting.mMaxShotLength )? TDStatus.OVERSHOOT : TDStatus.NORMAL;
           mLastShotId = TopoDroidApp.mData.insertDistoXShot( mApp.mSID, -1L, d, b, c, r, DBlock.EXTEND_IGNORE, status, true );
-          if ( mLister != null ) { // FIXME LISTER sendMessage with mLastShotId only
+          if ( mLister != null ) { // FIXME_LISTER sendMessage with mLastShotId only
             Message msg = mLister.obtainMessage( Lister.UPDATE );
             Bundle bundle = new Bundle();
             bundle.putLong( Lister.BLOCK_ID, mLastShotId );

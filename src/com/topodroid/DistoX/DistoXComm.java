@@ -420,7 +420,7 @@ class DistoXComm extends TopoDroidComm
     return mBTConnected;
   }
 
-  protected boolean startRfcommThread( int to_read, Handler /* ILister */ lister ) // FIXME LISTER
+  protected boolean startRfcommThread( int to_read, Handler /* ILister */ lister ) // FIXME_LISTER
   {
     // TDLog.Log( TDLog.LOG_COMM, "start RFcomm thread: to_read " + to_read );
     if ( mBTSocket != null ) {
@@ -441,7 +441,7 @@ class DistoXComm extends TopoDroidComm
 
   // -------------------------------------------------------- 
   
-  // public boolean connectRemoteDevice( String address, Handler /* ArrayList<ILister> */ lister ) // FIXME LISTER
+  // public boolean connectRemoteDevice( String address, Handler /* ArrayList<ILister> */ lister ) // FIXME_LISTER
   // {
   //   // TDLog.Log( TDLog.LOG_COMM, "connect remote device: address " + address );
   //   if ( connectSocket( address ) ) {
@@ -469,7 +469,7 @@ class DistoXComm extends TopoDroidComm
   /**
    * nothing to read (only write) --> no AsyncTask
    */
-  void setX310Laser( String address, int what, Handler /* ILister */ lister ) // FIXME LISTER
+  void setX310Laser( String address, int what, Handler /* ILister */ lister ) // FIXME_LISTER
   {
     if ( connectSocket( address ) ) {
       switch ( what ) {
@@ -707,7 +707,7 @@ class DistoXComm extends TopoDroidComm
   // ------------------------------------------------------------------------------------
   // CONTINUOUS DATA DOWNLOAD
 
-  boolean connectDevice( String address, Handler /* ILister */ lister ) // FIXME LISTER
+  boolean connectDevice( String address, Handler /* ILister */ lister ) // FIXME_LISTER
   {
     if ( mRfcommThread != null ) {
       // TDLog.Log( TDLog.LOG_COMM, "DistoX Comm connect: already connected");
@@ -731,7 +731,7 @@ class DistoXComm extends TopoDroidComm
   // -------------------------------------------------------------------------------------
   // ON-DEMAND DATA DOWNLOAD
 
-  int downloadData( String address, Handler /* ILister */ lister ) // FIXME LISTER
+  int downloadData( String address, Handler /* ILister */ lister ) // FIXME_LISTER
   {
     if ( ! checkRfcommThreadNull( "download data: address " + address ) ) {
       TDLog.Error( "download data: RFcomm thread not null");

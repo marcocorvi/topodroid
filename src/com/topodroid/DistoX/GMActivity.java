@@ -871,7 +871,7 @@ public class GMActivity extends Activity
           }
           mApp.updateCalibAlgo( mAlgo );
         }
-        ListerHandler handler = new ListerHandler( this ); // FIXME LISTER
+        ListerHandler handler = new ListerHandler( this ); // FIXME_LISTER
         new DataDownloadTask( mApp, handler ).execute();
         // new DataDownloadTask( mApp, this ).execute();
         mButton1[ BTN_DOWNLOAD ].setBackgroundDrawable( mBMdownload_on );

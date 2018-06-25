@@ -261,7 +261,7 @@ class DBlock
   String Name() { return mFrom + "-" + mTo; }
   
   // x bearing [degrees]
-  // public void setBearing( float x ) { // FIXME-EXTEND
+  // public void setBearing( float x ) { // FIXME_EXTEND
   //   mBearing = x;
   //   if ( mBearing < 180 ) {  // east to the right, west to the left
   //     mExtend = EXTEND_RIGHT;

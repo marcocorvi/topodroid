@@ -165,7 +165,7 @@ public class TopoDroidApp extends Application
   // ----------------------------------------------------------------------
   // data lister
   // ListerSet mListerSet;
-  ListerSetHandler mListerSet; // FIXME LISTER
+  ListerSetHandler mListerSet; // FIXME_LISTER
 
   void registerLister( ILister lister ) { mListerSet.registerLister( lister ); }
   void unregisterLister( ILister lister ) { mListerSet.unregisterLister( lister ); }
@@ -420,7 +420,7 @@ public class TopoDroidApp extends Application
   // FIXME_COMM
   public boolean connectDevice( String address ) 
   {
-    return mComm != null && mComm.connectDevice( address, mListerSet ); // FIXME LISTER
+    return mComm != null && mComm.connectDevice( address, mListerSet ); // FIXME_LISTER
   }
 
   public void disconnectComm()
@@ -1014,7 +1014,7 @@ public class TopoDroidApp extends Application
     Editor editor = mPrefs.edit();
     editor.putString( "DISTOX_SOCK_TYPE", defaultSockType ); 
     editor.apply(); 
-    // FIXME-23 editor.commit();
+    // FIXME_23 editor.commit();
   }
 
   private void updateDefaultPreferences()
@@ -1025,7 +1025,7 @@ public class TopoDroidApp extends Application
         editor.putString( "DISTOX_GROUP_BY", "1" ); 
       }
       editor.apply();
-      // FIXME-23 editor.commit();
+      // FIXME_23 editor.commit();
     }
   }
 
@@ -1038,7 +1038,7 @@ public class TopoDroidApp extends Application
       editor.putString( "DISTOX_CWD", cwd ); 
       editor.putString( "DISTOX_CBD", cbd ); 
       editor.apply();
-      // FIXME-23 editor.commit();
+      // FIXME_23 editor.commit();
     }
     setCWD( cwd, cbd ); 
   }
@@ -1049,7 +1049,7 @@ public class TopoDroidApp extends Application
       Editor editor = mPrefs.edit();
       editor.putString( "DISTOX_PT_CMAP", cmap ); 
       editor.apply();
-      // FIXME-23 editor.commit();
+      // FIXME_23 editor.commit();
     }
     PtCmapActivity.setMap( cmap );
   }
@@ -1061,7 +1061,7 @@ public class TopoDroidApp extends Application
     editor.putString( "DISTOX_MAG_THR", Float.toString( magnetic ) ); 
     editor.putString( "DISTOX_DIP_THR", Float.toString( dip ) ); 
     editor.apply();
-    // FIXME-23 editor.commit();
+    // FIXME_23 editor.commit();
   }
 
   void setTextSize( int ts )
@@ -1074,7 +1074,7 @@ public class TopoDroidApp extends Application
     editor.putString( "DISTOX_LABEL_SIZE", Float.toString(ts*3) );
     editor.putString( "DISTOX_STATION_SIZE", Float.toString(ts*2) );
     editor.apply();
-    // FIXME-23 editor.commit();
+    // FIXME_23 editor.commit();
   }
 
   void setButtonSize( int bs )
@@ -1083,7 +1083,7 @@ public class TopoDroidApp extends Application
     SharedPreferences.Editor editor = mPrefs.edit();
     editor.putString( "DISTOX_SIZE_BUTTONS", Integer.toString(bs) );
     editor.apply();
-    // FIXME-23 editor.commit();
+    // FIXME_23 editor.commit();
   }
 
   void setDrawingUnit( float u )
@@ -1092,7 +1092,7 @@ public class TopoDroidApp extends Application
     SharedPreferences.Editor editor = mPrefs.edit();
     editor.putString( "DISTOX_DRAWING_UNIT", Float.toString(u) );
     editor.apply();
-    // FIXME-23 editor.commit();
+    // FIXME_23 editor.commit();
   }
 
 
@@ -1108,7 +1108,7 @@ public class TopoDroidApp extends Application
     editor.putString( "DISTOX_SHOT_TIMER",  Integer.toString( timer ) ); 
     editor.putString( "DISTOX_BEEP_VOLUME", Integer.toString( volume ) ); 
     editor.apply();
-    // FIXME-23 editor.commit();
+    // FIXME_23 editor.commit();
   }
 
   void setPlotScreenPreference( float line_width, float survey_width, float station_size, float label_size, 
@@ -1122,7 +1122,7 @@ public class TopoDroidApp extends Application
     editor.putString( "DISTOX_DOT_RADIUS",      Float.toString( dot_size ) ); 
     editor.putString( "DISTOX_CLOSENESS",       Float.toString( selection_radius ) ); 
     editor.apply();
-    // FIXME-23 editor.commit();
+    // FIXME_23 editor.commit();
   }
 
   void setToolScreenPreference( float point_scale, float section_line_tick, int line_style,
@@ -1136,7 +1136,7 @@ public class TopoDroidApp extends Application
     editor.putString( "DISTOX_LINE_ACCURACY", Float.toString( bezier_accuracy ) ); 
     editor.putString( "DISTOX_LINE_CORNER",   Float.toString( bezier_corner ) ); 
     editor.apply();
-    // FIXME-23 editor.commit();
+    // FIXME_23 editor.commit();
   }
   
   void setSurveyLocationPreference( String crs, boolean gps_averaging, String units, int alt, boolean alt_lookup )
@@ -1148,7 +1148,7 @@ public class TopoDroidApp extends Application
     editor.putString( "DISTOX_ALTITUDE", Integer.toString( alt ) ); 
     editor.putBoolean( "DISTOX_ALTIMETRIC", alt_lookup );
     editor.apply();
-    // FIXME-23 editor.commit();
+    // FIXME_23 editor.commit();
   }
 
 
@@ -1164,7 +1164,7 @@ public class TopoDroidApp extends Application
     SharedPreferences.Editor editor = mPrefs.edit();
     editor.putBoolean( preference, val );
     editor.apply(); // Very important to save the preference
-    // FIXME-23 editor.commit();
+    // FIXME_23 editor.commit();
   }
 
   void setDevice( String address ) 
@@ -1189,14 +1189,14 @@ public class TopoDroidApp extends Application
       Editor editor = mPrefs.edit();
       editor.putString( TDSetting.keyDeviceName(), address ); 
       editor.apply();
-      // FIXME-23 editor.commit();
+      // FIXME_23 editor.commit();
     }
   }
 
   // -------------------------------------------------------------
   // DATA BATCH DOWNLOAD
 
-  int downloadDataBatch( Handler /* ILister */ lister ) // FIXME LISTER
+  int downloadDataBatch( Handler /* ILister */ lister ) // FIXME_LISTER
   {
     mSecondLastShotId = lastShotId();
     int ret = 0;
@@ -1947,7 +1947,7 @@ public class TopoDroidApp extends Application
 
   // --------------------------------------------------------
 
-  void setX310Laser( int what, Handler /* ILister */ lister ) // 0: off, 1: on, 2: measure // FIXME LISTER
+  void setX310Laser( int what, Handler /* ILister */ lister ) // 0: off, 1: on, 2: measure // FIXME_LISTER
   {
     if ( mComm != null && mDevice != null ) {
       mComm.setX310Laser( mDevice.mAddress, what, lister );

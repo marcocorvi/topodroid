@@ -24,9 +24,9 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
   private final TopoDroidApp mApp; // FIXME LEAK
   private static DataDownloadTask running = null;
   // private ILister mLister;
-  private final ListerHandler mLister; // FIXME LISTER
+  private final ListerHandler mLister; // FIXME_LISTER
 
-  DataDownloadTask( TopoDroidApp app, ListerHandler /* ILister */ lister ) // FIXME LISTER
+  DataDownloadTask( TopoDroidApp app, ListerHandler /* ILister */ lister ) // FIXME_LISTER
   {
     // TDLog.Error( "DataDownloadTask cstr" );
     // Log.v("DistoX", "data download task cstr");

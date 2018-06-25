@@ -57,7 +57,7 @@ public class MyEditPreference extends EditTextPreference
           SharedPreferences.Editor editor = sp.edit();
           editor.putString( p.getKey(), new_value );
           editor.apply(); 
-	  // FIXME-23 editor.commit();
+	  // FIXME_23 editor.commit();
           EditTextPreference ep = (EditTextPreference)p;
           ep.setSummary( new_value );
           ep.setText( new_value );

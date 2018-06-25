@@ -8,7 +8,7 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Apasă înca o dată BACK pentru a ieși</string>
 
-    <string name="version_ask">Se actualizează TopoDroid la o nouă versiune.\nVrei să reinstalezi uneltele de desen?</string>
+    <!-- UNUSED string name="version_ask">Se actualizează TopoDroid la o nouă versiune.\nVrei să reinstalezi uneltele de desen?</string -->
     <string name="symbols_ask">Vrei să instalezi uneltele de desen v.%1$s?\n(Current v.%2$s)</string>
 
     <string name="POINT">PUNCT</string>

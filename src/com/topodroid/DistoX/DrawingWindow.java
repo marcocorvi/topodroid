@@ -4886,8 +4886,8 @@ public class DrawingWindow extends ItemDrawer
   @Override
   public void updateBlockList( DBlock blk ) 
   {
-    // Log.v("DistoX", "Drawing window: update Block List block " + blk.mFrom + " - " + blk.mTo ); // DATA_DOWNLOAD
-    mApp.mShotWindow.updateBlockList( blk ); // FIXME-EXTEND this is needed to update sketch splays immediately on download
+    // Log.v("DistoX", "Drawing window: update Block List block id " + blk.mId + ": " + blk.mFrom + " - " + blk.mTo ); // DATA_DOWNLOAD
+    mApp.mShotWindow.updateBlockList( blk ); // FIXME_EXTEND this is needed to update sketch splays immediately on download
     updateDisplay( /* true, true */ );
   }
 
@@ -4895,7 +4895,7 @@ public class DrawingWindow extends ItemDrawer
   public void updateBlockList( long blk_id )
   {
     // Log.v("DistoX", "Drawing window: update Block List block id " + blk_id ); // DATA_DOWNLOAD
-    mApp.mShotWindow.updateBlockList( blk_id ); // FIXME-EXTEND this is needed to update sketch splays immediately on download
+    mApp.mShotWindow.updateBlockList( blk_id ); // FIXME_EXTEND this is needed to update sketch splays immediately on download
     updateDisplay( /* true, true */ );
   }
 

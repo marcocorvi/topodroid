@@ -1863,7 +1863,7 @@ public class SketchWindow extends ItemDrawer
         //      with the Asynch task that download the data.
         //      if there is an empty shot assign it
         mActivity.setTitleColor( TDColor.CONNECTED );
-        ListerHandler handler = new ListerHandler( this ); // FIXME LISTER
+        ListerHandler handler = new ListerHandler( this ); // FIXME_LISTER
         new DataDownloadTask( mApp, handler ).execute();
         // new DataDownloadTask( mApp, this ).execute();
       } else {

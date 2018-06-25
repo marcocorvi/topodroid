@@ -1434,7 +1434,7 @@ class TDSetting
     Editor editor = sp.edit();
     editor.putString( name, value );
     editor.apply(); 
-    // FIXME-23 editor.commit();
+    // FIXME_23 editor.commit();
   }
 
   static private void setPreference( SharedPreferences sp, String name, boolean value )
@@ -1442,7 +1442,7 @@ class TDSetting
     Editor editor = sp.edit();
     editor.putBoolean( name, value );
     editor.apply(); 
-    // FIXME-23 editor.commit();
+    // FIXME_23 editor.commit();
   }
 
   // static void setPreference( SharedPreferences sp, String name, int val )

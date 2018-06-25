@@ -84,17 +84,17 @@ class FeatureChecker
   {
     // TDLog.Log( LOG_PERM, "create permissions" );
     MustRestart = false;
-    // FIXME-23
+    // FIXME_23
     if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.M ) return;
     for ( int k=0; k<NR_PERMS; ++k ) { // check whether the app has the six permissions
       GrantedPermission[k] = ( context.checkSelfPermission( perms[k] ) == PackageManager.PERMISSION_GRANTED );
-      // FIXME-23 GrantedPermission[k] = true;
+      // FIXME_23 GrantedPermission[k] = true;
       // Log.v("DistoXX", "FC perm " + k + " granted " + GrantedPermission[k] );
       if ( ! GrantedPermission[k] ) MustRestart = true;
     }
     // Log.v("DistoXX", "FC must restart " + MustRestart );
     if ( MustRestart ) { // if a permission has not been granted request it
-      // FIXME-23
+      // FIXME_23
       activity.requestPermissions( perms, REQUEST_PERMISSIONS );
       android.os.Process.killProcess( android.os.Process.myPid() );
       System.exit( 1 );

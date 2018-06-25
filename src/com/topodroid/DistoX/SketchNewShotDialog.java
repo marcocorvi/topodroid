@@ -182,7 +182,7 @@ class SketchNewShotDialog extends MyDialog
           mBlk.setName( mFrom, to ); // reset block name/type
         }
         if ( ! splay ) {
-          /* updateList = mShots.numberSplays(); // FIXME-EXTEND in may go away ... */
+          /* updateList = mShots.numberSplays(); // FIXME_EXTEND it may go away ... */
         } else {
           updateList = new ArrayList<>();
         }

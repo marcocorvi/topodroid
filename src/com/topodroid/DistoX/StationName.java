@@ -95,7 +95,7 @@ class StationName
 
   private void setLegExtend( DataHelper data_helper, long sid, DBlock blk )
   {
-    // FIXME-EXTEND what has "splay extend" to do with "leg extend" ???
+    // FIXME_EXTEND what has "splay extend" to do with "leg extend" ???
     // if ( ! TDSetting.mSplayExtend ) 
     {
       long extend = TDAzimuth.computeLegExtend( blk.mBearing );
