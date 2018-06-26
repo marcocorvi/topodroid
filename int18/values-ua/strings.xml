@@ -558,6 +558,8 @@
     <string name="button_current"   >Поточний   </string>
     <string name="button_delete"    >Видалити   </string>
     <string name="button_eval"      >Обчислити    </string>
+    <!-- TODO string name="button_evalg"     >G      </string -->
+    <!-- TODO string name="button_evalm"     >M      </string -->
     <string name="button_eval_cal"  >Обчислити з урахув. каліб.</string>
     <!-- OK string name="button_gps_start" >GPS       </string -->
     <!-- UNUSED string name="button_gps_stop"  >Стоп      </string -->

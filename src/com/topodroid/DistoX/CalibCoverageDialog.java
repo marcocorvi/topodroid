@@ -67,12 +67,14 @@ class CalibCoverageDialog extends MyDialog
   private Bitmap mBitmapUp;
   private Bitmap mBitmapDown;
   private List<CalibCBlock> mList;
-  private CalibAlgo mCalib;
+  private CalibAlgo mCalib; // calibration algorithm
 
   private TextView mText;
   private ImageView mImageUp;
   private ImageView mImageDown;
   private Button mBtnEval;
+  private Button mBtnEvalG;
+  private Button mBtnEvalM;
   private Button mBtnEvalCal;
   // private Button mBtnBack;
 
@@ -104,10 +106,18 @@ class CalibCoverageDialog extends MyDialog
     mImageUp   = (ImageView) findViewById( R.id.coverage_image_up );
     mImageDown = (ImageView) findViewById( R.id.coverage_image_down );
     mBtnEval    = (Button) findViewById( R.id.coverage_eval );
+    mBtnEvalG   = (Button) findViewById( R.id.coverage_g   );
+    mBtnEvalM   = (Button) findViewById( R.id.coverage_m   );
     mBtnEvalCal = (Button) findViewById( R.id.coverage_eval_cal );
     // mBtnBack    = (Button) findViewById( R.id.coverage_back );
     mBtnEval.setOnClickListener( this );
-    mBtnEvalCal.setOnClickListener( this );
+    mBtnEvalG.setOnClickListener( this );
+    mBtnEvalM.setOnClickListener( this );
+    if ( mCalib != null ) {
+      mBtnEvalCal.setOnClickListener( this );
+    } else {
+      mBtnEvalCal.setVisibility( View.GONE );
+    }
     // mBtnBack.setOnClickListener( this );
     reset();
   }
@@ -125,6 +135,14 @@ class CalibCoverageDialog extends MyDialog
     Button btn = (Button)v;
     if ( btn == mBtnEval ) {
       evalCoverage( mList, null );
+      fillImage();
+      reset();
+    } else if ( btn == mBtnEvalG ) {
+      evalCoverageGM( mList, 0 );
+      fillImage();
+      reset();
+    } else if ( btn == mBtnEvalM ) {
+      evalCoverageGM( mList, 1 );
       fillImage();
       reset();
     } else if ( btn == mBtnEvalCal ) {
@@ -172,6 +190,7 @@ class CalibCoverageDialog extends MyDialog
     }
   }
 
+  // compass and clino in radians
   private float cosine( float compass1, float clino1, float compass2, float clino2 )
   {
     double h1 = Math.cos( clino1 );
@@ -243,6 +262,32 @@ class CalibCoverageDialog extends MyDialog
       updateDirections( compass_avg, clino_avg, cnt_avg );
     }
 
+    mCoverage = 0.0f;
+    for (int j=0; j<t_dim; ++j ) {
+      mCoverage += angles[j].mValue;
+    }
+    mCoverage = 100.0f * ( 1.0f - mCoverage/t_dim );
+  }
+
+  // @param clist  list of CBlocks
+  // @param mode   0: G,  1: M
+  private void evalCoverageGM( List<CalibCBlock> clist, int mode ) 
+  {
+    for (int j=0; j<t_dim; ++j ) angles[j].mValue = 1.0f;
+
+    long old_grp = 0;
+    float compass_avg = 0.0f;
+    float clino_avg   = 0.0f;
+    int cnt_avg = 0;
+
+    float f = TopoDroidUtil.FV;
+    for ( CalibCBlock b : clist ) {
+      if ( b.mGroup <= 0 ) continue;
+      Vector v = ( mode == 0 )? new Vector( b.gx/f, b.gy/f, b.gz/f ) : new Vector( b.mx/f, b.my/f, b.mz/f );
+      float compass = TDMath.atan2( v.x, v.y ); if ( compass < 0 ) compass += TDMath.M_2PI;
+      float clino   = TDMath.atan2( v.z, TDMath.sqrt( v.x * v.x + v.y * v.y ) );
+      updateDirections( compass, clino, 1 );
+    }
     mCoverage = 0.0f;
     for (int j=0; j<t_dim; ++j ) {
       mCoverage += angles[j].mValue;

@@ -554,6 +554,8 @@
     <!-- TODO string name="button_current"   >Current   </string -->
     <string name="button_delete"    >删除    </string>
     <string name="button_eval"      >复运算      </string>
+    <!-- TODO string name="button_evalg"     >G      </string -->
+    <!-- TODO string name="button_evalm"     >M      </string -->
     <string name="button_eval_cal"  >校准复运算</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >停止      </string -->

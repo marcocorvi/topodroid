@@ -559,6 +559,8 @@
     <string name="button_current"   >Текущий   </string>
     <string name="button_delete"    >Удалить   </string>
     <string name="button_eval"      >Вычислить    </string>
+    <!-- TODO string name="button_evalg"     >G      </string -->
+    <!-- TODO string name="button_evalm"     >M      </string -->
     <string name="button_eval_cal"  >Вычислить с учетом калиб.</string>
     <!-- OK string name="button_gps_start" >GPS       </string -->
     <!-- UNUSED string name="button_gps_stop"  >Стоп      </string -->

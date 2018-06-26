@@ -556,6 +556,8 @@
     <string name="button_current"   >Направи текущ</string>
     <string name="button_delete"    >Изтриване </string>
     <string name="button_eval"      >Оценка    </string>
+    <!-- TODO string name="button_evalg"     >G      </string -->
+    <!-- TODO string name="button_evalm"     >M      </string -->
     <string name="button_eval_cal"  >Оц./кал.  </string>
     <string name="button_gps_start" >GPS       </string>
     <!-- string name="button_gps_stop"  >Stop      </string -->

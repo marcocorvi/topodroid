@@ -553,6 +553,8 @@
     <string name="button_current"   >Corriente   </string>
     <string name="button_delete"    >Eliminar  </string>
     <string name="button_eval"      >Eval      </string>
+    <!-- TODO string name="button_evalg"     >G      </string -->
+    <!-- TODO string name="button_evalm"     >M      </string -->
     <string name="button_eval_cal"  >Eval w. calib.</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->

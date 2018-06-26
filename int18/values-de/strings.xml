@@ -572,6 +572,8 @@
     <string name="button_current"   >Hier fortsetzen   </string>
     <string name="button_delete"    >Löschen    </string>
     <string name="button_eval"      >Auswerten </string>
+    <!-- TODO string name="button_evalg"     >G      </string -->
+    <!-- TODO string name="button_evalm"     >M      </string -->
     <string name="button_eval_cal"  >Auswerten mit Kalibr.</string>
     <string name="button_gps_start" >GPS</string>
     <!-- UNUSED string name="button_gps_stop"  >Anhalten      </string -->

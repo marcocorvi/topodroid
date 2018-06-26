@@ -68,6 +68,16 @@
       android:layout_marginRight="@dimen/marginh"
       android:text="@string/button_eval"
     />
+    <Button android:id="@+id/coverage_g"
+      style="@style/button_default"
+      android:layout_marginRight="@dimen/marginh"
+      android:text="@string/button_evalg"
+    />
+    <Button android:id="@+id/coverage_m"
+      style="@style/button_default"
+      android:layout_marginRight="@dimen/marginh"
+      android:text="@string/button_evalm"
+    />
 
     <Button android:id="@+id/coverage_eval_cal"
       style="@style/button_default"

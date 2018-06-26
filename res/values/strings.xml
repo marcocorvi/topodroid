@@ -562,6 +562,8 @@
     <string name="button_current"   >Active    </string>
     <string name="button_delete"    >Delete    </string>
     <string name="button_eval"      >Eval      </string>
+    <string name="button_evalg"     >G      </string>
+    <string name="button_evalm"     >M      </string>
     <string name="button_eval_cal"  >Eval w. calib.</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->

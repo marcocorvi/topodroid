@@ -529,6 +529,8 @@
     <string name="button_current"   >Activ     </string>
     <string name="button_delete"    >Șterge    </string>
     <string name="button_eval"      >Evaluează </string>
+    <!-- TODO string name="button_evalg"     >G      </string -->
+    <!-- TODO string name="button_evalm"     >M      </string -->
     <string name="button_eval_cal"  >Evaluează calib. w.</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->

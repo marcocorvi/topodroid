@@ -562,6 +562,8 @@
     <string name="button_current"   >Aktivovať  </string>
     <string name="button_delete"    >Vymazať  </string>
     <string name="button_eval"      >Vyhodnotiť   </string>
+    <!-- TODO string name="button_evalg"     >G      </string -->
+    <!-- TODO string name="button_evalm"     >M      </string -->
     <string name="button_eval_cal"  >Vyhodnotiť kalibr.</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
