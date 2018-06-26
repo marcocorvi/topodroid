@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name soda-straw
 name-cn 鹅管
 name-es macarrón
@@ -12,6 +12,7 @@ name-bg цевичен_сталактит
 name-ua макарони
 name-hu szalmacseppkő
 name-sk brčká
+name-ro stilolită
 th_name soda-straw
 orientation no
 color 0xccff66

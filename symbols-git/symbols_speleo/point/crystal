@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name crystal
 name-cn 方解石花
 name-es cristal
@@ -12,6 +12,7 @@ name-bg кристал
 name-ua кристал
 name-hu kristály
 name-sk krištály
+name-ro cristal
 th_name crystal
 orientation no
 color 0xcccccc

@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name dig
 name-cn 挖掘痕迹
 name-es excavación
@@ -12,6 +12,7 @@ name-bg изкоп
 name-ua розкоп
 name-hu bontás
 name-sk kopať
+name-ro săpătură
 th_name dig
 orientation no
 color 0xff6666

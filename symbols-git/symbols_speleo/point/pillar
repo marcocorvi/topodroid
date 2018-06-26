@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name pillar
 name-cn 石柱
 name-es columna
@@ -12,6 +12,7 @@ name-bg сталактон
 name-ua колона
 name-hu oszlop
 name-sk pilier
+name-ro pilier
 th_name pillar
 orientation no
 color 0xccff66

@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name stalactite
 name-cn 石钟乳
 name-es estalactita
@@ -12,6 +12,7 @@ name-bg сталактит
 name-ua сталактит
 name-hu függőcseppkő
 name-sk stalaktit
+name-ro stalactită
 th_name stalactite
 orientation no
 color 0xccff66

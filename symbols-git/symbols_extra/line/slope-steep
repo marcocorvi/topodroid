@@ -1,8 +1,9 @@
-﻿symbol line
+symbol line
 name slope_steep
 name-es pendiente_inclinada
 name-pt rampa_inclinada
 name-ru склон_крутой
+name-ro pantă_abruptă
 th_name slope:steep
 group slope
 color 0xff9933 0xff

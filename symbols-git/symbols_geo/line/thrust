@@ -1,9 +1,10 @@
-﻿symbol line
+symbol line
 name thrust
 name-pt empurrão
 name-es empuje
 name-ru надвиг
 name-fr chevauchement
+name-ro şariaj
 th_name u:thrust
 group thrust
 color 0x00cc33 0xff

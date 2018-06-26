@@ -1,10 +1,11 @@
-﻿symbol point
+symbol point
 name remark
 name-pt observação
 name-es observación
 name-ru примечание
 name-fr observation
 name-sk poznámka
+name-ro notă
 th_name u:remark
 orientation no
 has_text yes

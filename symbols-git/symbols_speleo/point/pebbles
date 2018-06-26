@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name pebbles
 name-cn 卵砾石
 name-es cantos_rodados
@@ -12,6 +12,7 @@ name-bg камъчета
 name-ua галька
 name-hu kavicsok
 name-sk okruhliaky
+name-ro galeți
 th_name pebbles
 orientation no
 color 0xffcc66

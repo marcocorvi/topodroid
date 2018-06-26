@@ -1,4 +1,4 @@
-﻿symbol line
+symbol line
 name wall_clay
 name-cn 粘土洞壁
 name-es paredes_de_barro
@@ -11,6 +11,7 @@ name-ru стена_в_глине
 name-ua стіна_в_глині
 name-hu fal_agyagból
 name-sk hlinené_steny
+name-ro argilă_perete
 th_name wall:clay
 group wall
 color 0xff0000 0xff

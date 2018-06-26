@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name root
 name-cn 树根
 name-es raices
@@ -12,6 +12,7 @@ name-fa ریشه
 name-ua корні
 name-hu gyökér
 name-sk koreň
+name-ro rădăcină
 th_name root
 orientation no
 color 0xffcc99

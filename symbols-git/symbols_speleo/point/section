@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name section
 name-cn 截面
 name-es sección
@@ -12,6 +12,7 @@ name-bg сечение
 name-ua переріз
 name-hu metszet
 name-sk Priečny_rez
+name-ro secțiune
 th_name section
 orientation no
 color 0xcccccc

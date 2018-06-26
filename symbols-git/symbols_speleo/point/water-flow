@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name water-flow
 name-cn 水流
 name-es curso_activo
@@ -13,6 +13,7 @@ name-ua водотік
 name-sl vodotok
 name-hu vízfolyás
 name-sk vodný tok
+name-ro curs-de-apă
 th_name water-flow
 orientation yes
 color 0x6699ff

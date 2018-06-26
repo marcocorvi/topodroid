@@ -1,10 +1,11 @@
-﻿symbol line
+symbol line
 name anticline
 name-it anticlinale
 name-es anticlinal
 name-pt anticlinal
 name-fr anticlinal
 name-ru антиклиналь
+name-ro anticlinal
 th_name u:anticline
 group anticline
 color 0xff3399 0xff

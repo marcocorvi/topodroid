@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name paleo
 name-cn 古生物遗迹
 name-es paleolítico
@@ -12,6 +12,7 @@ name-bg палео_находка
 name-ua палео
 name-hu öslénytani_lelet
 name-sk paleontologické_nálezy
+name-ro paleo
 th_name paleo-material
 orientation no
 color 0xcc6633

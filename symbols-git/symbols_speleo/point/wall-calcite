@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name wall-calcite
 name-cn 壁流石
 name-es colada_de_calcita
@@ -12,6 +12,7 @@ name-bg калцитна_кора
 name-ua кальцитова_кірка
 name-hu cseppkőkéreg
 name-sk nástené_náteky
+name-ro calcit-perete
 th_name wall-calcite
 orientation yes
 color 0xccff66

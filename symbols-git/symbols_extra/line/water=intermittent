@@ -12,6 +12,7 @@ name-bg течаща_вода
 name-ua водотік
 name-fa جریان_آب
 name-hu vízfolyás
+name-ro curs_intermitent
 th_name water-flow:intermittent
 group water-flow
 color 0xff9933

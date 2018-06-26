@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name stalagmite
 name-cn 石笋
 name-es estalagmita
@@ -12,6 +12,7 @@ name-bg сталагмит
 name-ua сталагміт
 name-hu állócseppkő
 name-sk stalagmit
+name-ro stalagmită
 th_name stalagmite
 orientation no
 color 0xccff66

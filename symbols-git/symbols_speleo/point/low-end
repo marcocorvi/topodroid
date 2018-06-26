@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name low-end
 name-cn 低矮尽头
 name-es techo_bajo
@@ -12,6 +12,7 @@ name-bg непроходимо_снижение
 name-ua низький_хід
 name-hu mélypont
 name-sk úzke miesto
+name-ro capăt-jos
 th_name low-end
 orientation no
 color 0xff6666

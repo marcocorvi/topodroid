@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name blocks
 name-cn 块石
 name-es bloques
@@ -12,6 +12,7 @@ name-bg ск._блок
 name-ua блоки
 name-hu kőzettömbök
 name-sk bloky
+name-ro blocuri
 th_name blocks
 orientation no
 color 0xffcc66

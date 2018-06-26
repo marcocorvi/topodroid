@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name flute
 name-cn 沟槽
 name-es concrecciones
@@ -12,6 +12,7 @@ name-ua флейта
 name-fa شیار
 name-hu hullámkagyló
 name-sk konkrécia
+name-ro cupolă_eroziune
 th_name flute
 orientation yes
 color 0x6699ff

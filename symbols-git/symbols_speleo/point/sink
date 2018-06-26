@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name sink
 name-cn 消水
 name-es sumidero
@@ -12,6 +12,7 @@ name-fa فرو_رفتگی
 name-ua понор
 name-hu nyelési_pont
 name-sk ponor
+name-ro sorb
 th_name sink
 orientation no
 color 0x6699ff

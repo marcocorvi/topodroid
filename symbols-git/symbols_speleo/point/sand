@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name sand
 name-cn 砂
 name-es arena
@@ -12,6 +12,7 @@ name-bg пясък
 name-ua пісок
 name-hu homok
 name-sk piesok
+name-ro nisip
 th_name sand
 orientation no
 color 0xffcc66

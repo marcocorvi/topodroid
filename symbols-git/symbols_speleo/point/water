@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name water
 name-cn 水
 name-es agua
@@ -12,6 +12,7 @@ name-bg вода
 name-ua вода
 name-hu víz
 name-sk voda
+name-ro apă
 th_name water
 orientation no
 color 0x6699ff

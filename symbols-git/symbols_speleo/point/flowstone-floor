@@ -1,5 +1,6 @@
-﻿symbol point
+symbol point
 name flowstone-floor
+name-ro cruste-podea
 th_name flowstone:floor
 orientation no
 color 0xffcc66

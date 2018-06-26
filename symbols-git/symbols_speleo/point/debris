@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name debris
 name-cn 碎石
 name-es pedrera
@@ -12,6 +12,7 @@ name-ua щебінь
 name-bg чакъл
 name-hu törmelék
 name-sk suť
+name-ro prăbușiri
 th_name debris
 orientation no
 color 0xffcc66

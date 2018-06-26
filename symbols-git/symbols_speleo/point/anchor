@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name anchor
 name-cn 锚点
 name-es columna
@@ -13,6 +13,7 @@ name-ua гак
 name-sl sidro
 name-hu kikötési_pont
 name-sk kotviaci_bod
+name-ro ancoră
 th_name anchor
 orientation no
 color 0xffffff

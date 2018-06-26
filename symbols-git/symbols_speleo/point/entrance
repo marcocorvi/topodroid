@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name entrance
 name-cn 洞口
 name-es entrada
@@ -12,6 +12,7 @@ name-bg вход
 name-ua вхід
 name-hu bejárat
 name-sk vchod
+name-ro intrare
 th_name entrance
 orientation yes
 color 0xff3333

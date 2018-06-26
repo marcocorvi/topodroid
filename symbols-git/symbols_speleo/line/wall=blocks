@@ -1,4 +1,4 @@
-﻿symbol line
+symbol line
 name wall_blocks
 name-cn 块石洞壁
 name-es paredes_estratificadas
@@ -11,6 +11,7 @@ name-ua стіна_із_блоків
 name-fa دیوار_بلوکی
 name-hu fal_kőzettömbökből
 name-sk steny_z_blokov
+name-ro blocuri_perete
 th_name wall:blocks
 group wall
 color 0xff0000 0xff

@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name aragonite
 name-cn 文石花
 name-es aragonito
@@ -11,6 +11,7 @@ name-ru арагонит
 name-bg арагонит
 name-ua арагонит
 name-hu aragonit
+name-ro aragonit
 th_name aragonite
 name-sk aragonit
 orientation no

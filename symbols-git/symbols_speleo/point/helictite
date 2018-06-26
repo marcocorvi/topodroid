@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name helictite
 name-cn 卷曲石
 name-es helictitas
@@ -12,6 +12,7 @@ name-bg хеликтит
 name-ua геліктити
 name-hu heliktit
 name-sk heliktit
+name-ro helictită
 th_name helictite
 orientation no
 color 0xccff66
