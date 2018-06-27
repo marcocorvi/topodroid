@@ -6,6 +6,7 @@ name-es rail_vagoneta
 name-ru узкоколейная_дорога
 name-fr rails
 name-sk kolajnice
+name-ro linie_ferată
 th_name u:railway
 group railway
 color 0xcccccc 

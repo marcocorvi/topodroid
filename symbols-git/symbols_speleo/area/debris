@@ -1,4 +1,4 @@
-﻿symbol area
+symbol area
 name debris
 name-cn 碎石堆
 name-es pedrera
@@ -12,6 +12,7 @@ name-ua щебінь
 name-fa خرده_ریزه
 name-hu kőtörmelék
 name-sk suť
+name-ro prăbușiri
 th_name debris
 color 0xff6666 0x66
 csurvey 1 48 0 8

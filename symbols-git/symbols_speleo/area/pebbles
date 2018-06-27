@@ -1,4 +1,4 @@
-﻿symbol area
+symbol area
 name pebbles
 name-cn 鹅卵石
 name-es canto_rodado
@@ -12,6 +12,7 @@ name-ua галька
 name-fa سنگریزه
 name-hu kavicsok
 name-sk okruhliaky
+name-ro galeți
 th_name pebbles
 color 0xff9900 0x66
 csurvey 1 48 0 4

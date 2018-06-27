@@ -1,10 +1,11 @@
-﻿symbol line
+symbol line
 name fold
 name-it piega
 name-es pliegue
 name-pt dobra
 name-ru  складка
 name-fr pli
+name-ro cută
 th_name u:fold
 group fold
 color 0x00cc33 0xff

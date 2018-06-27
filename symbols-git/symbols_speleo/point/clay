@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name clay
 name-cn 黏土
 name-es arcilla
@@ -12,6 +12,7 @@ name-bg глина
 name-ua глина
 name-hu agyag
 name-sk hlina
+name-ro argilă
 th_name clay
 orientation no
 color 0xccff33

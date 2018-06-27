@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name air-draught
 name-cn 气流方向
 name-es corriente_de_aire
@@ -13,6 +13,7 @@ name-ua тяга
 name-sl zrak
 name-hu légáramlás
 name-sk smer_prúdenia_vzduchu
+name-ro curent_de_aer
 th_name air-draught
 orientation yes
 color 0x00ccff

@@ -1,4 +1,4 @@
-﻿symbol line
+symbol line
 name chimney
 name-cn 天井
 name-es chimenea
@@ -12,6 +12,7 @@ name-ua камін
 name-fa دودکش
 name-hu kürtő
 name-sk komín
+name-ro horn
 th_name chimney
 group chimney
 color 0xcc00cc 0xff

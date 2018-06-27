@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name curtain
 name-cn 石幔
 name-es cortina
@@ -12,6 +12,7 @@ name-bg драперия
 name-ua занавіс
 name-hu cseppkőzászló
 name-sk záclony
+name-ro draperie
 th_name curtain
 orientation no
 color 0xccff66

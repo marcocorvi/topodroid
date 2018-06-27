@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name scallop
 name-cn 波痕
 name-es golpe_gubia
@@ -12,6 +12,7 @@ name-bg фасетки
 name-ua фасетки
 name-hu hullámkagyló
 name-sk žliabkové_škrapy
+name-ro linguriță
 th_name scallop
 orientation yes
 color 0x6666ff

@@ -1,4 +1,4 @@
-﻿symbol line
+symbol line
 name border
 name-cn 边界
 name-es borde
@@ -12,6 +12,7 @@ name-ua границя
 name-fa مرز
 name-hu határvonal
 name-sk hranica
+name-ro margine
 th_name border
 group border
 color 0x00cc00 0xff

@@ -1,4 +1,4 @@
-﻿symbol line
+symbol line
 name water-flow
 name-cn 水流
 name-es curso_activo
@@ -12,6 +12,7 @@ name-ua водотік
 name-fa جریان_آب
 name-hu vízfolyás
 name-sk vodný_tok
+name-ro curs_de_apă
 th_name water-flow
 group water-flow
 color 0x6666ff

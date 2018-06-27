@@ -1,4 +1,4 @@
-﻿symbol area
+symbol area
 name ice
 name-cn 冰
 name-es hielo
@@ -12,6 +12,7 @@ name-ua лід
 name-fa یخ
 name-hu jég
 name-sk ľad
+name-ro gheață
 th_name ice
 color 0xcccccc 0x66
 csurvey 1 48 0 1

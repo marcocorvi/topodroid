@@ -1,4 +1,4 @@
-﻿symbol line
+symbol line
 name wall_ice
 name-cn 冰积洞壁
 name-es paredes_de_hielo
@@ -11,6 +11,7 @@ name-ru стена_во_льду
 name-ua стіна_в_льоду
 name-hu fal_jégből
 name-sk ľadové_steny
+name-ro gheață-perete
 th_name wall:ice
 group wall
 color 0xff0000 0xff

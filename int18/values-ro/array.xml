@@ -2,6 +2,21 @@
 
 <resources>
 
+  <string-array name="lineContinue">
+     <item name="none">fără</item>
+     <item name="start">unește cu punctul capătului de start</item>
+     <item name="end">unește cu capătul ultimului punct</item>
+     <item name="both">unește cu ambele capete</item>
+     <item name="continue">continuu</item>
+  </string-array>
+  <string-array name="lineContinueValue"> <!-- must agree with DrawingWindow.CONT_XXX -->
+     <item name="none">0</item>
+     <item name="start">1</item>
+     <item name="end">2</item>
+     <item name="both">3</item>
+     <item name="continue">4</item>
+  </string-array>
+
   <string-array name="unitGrid">
      <item name="meter">metru</item>
      <item name="yard">yard</item>
@@ -76,10 +91,10 @@
   </string-array>
 
   <!-- UNUSED string-array name="extend_name">
-     <item>Left</item>
+     <item>Stânga</item>
      <item>Vertical</item>
-     <item>Right</item>
-     <item>None</item>
+     <item>Dreapta</item>
+     <item>Fără</item>
   </string-array -->
 
   <!-- DISTOX_LOCALE -->

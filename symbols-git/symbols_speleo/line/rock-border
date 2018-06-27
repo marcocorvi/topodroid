@@ -1,4 +1,4 @@
-﻿symbol line
+symbol line
 name rock-border
 name-cn 岩石边界
 name-es borde_roca
@@ -12,6 +12,7 @@ name-bg контур_на_камък
 name-fa مرز_سنگی
 name-hu szikla_határa
 name-sk skalný_okraj
+name-ro margine-rocă
 th_name rock-border
 closed yes
 style straight x2

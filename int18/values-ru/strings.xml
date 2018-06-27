@@ -280,7 +280,7 @@
     <string name="no_feature_audio">Аудио не поддерживается</string>
     <string name="no_gms">Отсутствуют данные для калибровки.\nИспользуйте кнопку Скачать</string>
     <string name="no_geo_station">Ошибка: отсутствует пикет с координатами</string>
-    <!-- TODO string name="no_leg_first">Selection does not start with a leg</string -->
+    <string name="no_leg_first">Выбор не начинается с замера между пикетами</string>
     <string name="no_leg_intersection">Разрез не пересекает пикет</string>
     <string name="no_location_data">Нет данных о местоположении</string>
     <string name="no_paired_device">Отсутствует привязанный прибор.\nПросканируйте и привяжите DistoX</string>
@@ -585,9 +585,9 @@
     <!-- UNUSED string name="button_regroup"   >Перегруппировать   </string -->
     <string name="button_dump"      >Дамп      </string>
     <string name="button_rename"    >Переименовать    </string>
-    <!-- TODO string name="button_renumber"  >Renumber</string -->
-    <!-- TODO string name="button_bedding"   >Bedding plane</string -->
-    <!-- TODO string name="button_highlight" >Highlight</string -->
+    <string name="button_renumber"  >Перенумеровать</string>
+    <string name="button_bedding"   >Плоскость падения</string>
+    <string name="button_highlight" >Выделить</string>
     <string name="button_replace"   >Замена   </string>
     <string name="button_reset"     >Сброс     </string>
     <string name="button_left"      >ЛЕВО</string>
@@ -859,7 +859,7 @@
     <string name="title_draw">Рисовать</string>
     <string name="title_draw_area">ОБЛАСТЬ %1$s</string>
     <string name="title_draw_line">ЛИНИЯ %1$s</string>
-    <!-- TODO string name="title_draw_line_no_stations">LINE %1$s: no stations</string -->
+    <string name="title_draw_line_no_stations">ЛИНИЯ %1$s: нет пикетов</string>
     <string name="title_draw_point">ТОЧКА %1$s</string>
     <string name="title_edit">Редактировать</string>
     <string name="title_edit_user_station">Редактировать пользовательский пикет </string>

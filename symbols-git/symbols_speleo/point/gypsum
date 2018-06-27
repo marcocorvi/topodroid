@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name gypsum
 name-cn 石膏花
 name-es yeso
@@ -12,6 +12,7 @@ name-bg гипс
 name-ua гіпс
 name-hu gipsz
 name-sk sádra
+name-ro gips
 th_name gypsum
 orientation no
 color 0xffffff

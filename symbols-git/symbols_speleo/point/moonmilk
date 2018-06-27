@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name moonmilk
 name-cn 月奶石
 name-es leche_de_luna
@@ -12,6 +12,7 @@ name-bg пещерно_мляко
 name-ua мічячне_молоко
 name-hu montmilk
 name-sk mäkký_sinter
+name-ro montmilch
 th_name moonmilk
 orientation no
 color 0xffffcc

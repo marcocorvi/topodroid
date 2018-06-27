@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name breakdown-choke
 name-cn 坍塌堵塞
 name-es obstruido
@@ -12,6 +12,7 @@ name-bg блокирано_от_срутище
 name-ua заблоковано
 name-hu omladék
 name-sk zával
+name-ro obstrucție-prăbușiri
 th_name breakdown-choke
 orientation no
 color 0xff6666

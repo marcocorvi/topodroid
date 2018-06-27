@@ -1,4 +1,4 @@
-﻿symbol line
+symbol line
 name fault
 name-cn 断层
 name-es falla
@@ -12,6 +12,7 @@ name-ua розлом
 name-fa شکست_زمین
 name-hu vető
 name-sk stena_úroveň_vyššie
+name-ro falie
 th_name u:fault
 group fault
 color 0xffffff 0x99

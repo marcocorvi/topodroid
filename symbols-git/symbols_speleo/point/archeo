@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name archeo
 name-cn 考古遗迹
 name-es arqueológico
@@ -12,6 +12,7 @@ name-bg археология
 name-ua археологія
 name-hu régészeti_lelet
 name-sk archeologické_nálezy
+name-ro arheologic
 th_name archeo-material
 orientation no
 color 0xffffff

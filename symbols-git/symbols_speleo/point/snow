@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name snow
 name-cn 雪
 name-es nieve
@@ -12,6 +12,7 @@ name-bg сняг
 name-ua сніг
 name-hu hó
 name-sk sneh
+name-ro zăpadă
 th_name snow
 orientation no
 color 0xffffff

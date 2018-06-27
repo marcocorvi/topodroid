@@ -1,10 +1,11 @@
-﻿symbol line
+symbol line
 name syncline
 name-it sinclinale
 name-pt sinclinal
 name-es sinclinal
 name-ru синклиналь
 name-fr synclinal
+name-ro sinclinal
 th_name u:syncline
 group syncline
 color 0xff3399 0xff

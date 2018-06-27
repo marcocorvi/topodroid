@@ -5,6 +5,7 @@ name-es pozo_pared
 name-pt parede_poço
 name-ru стена_отвеса
 name-fr paroi_de_puits
+name-ro perete_puț
 th_name wall:pit
 group wall
 color 0xff0000 0xff

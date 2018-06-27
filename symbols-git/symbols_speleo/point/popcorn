@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name popcorn
 name-cn 石葡萄
 name-es espeleotema_coralinoidea
@@ -12,6 +12,7 @@ name-bg дендрити
 name-ua коралиты
 name-hu borsókő
 name-sk pizolity
+name-ro coralit
 th_name popcorn
 orientation no
 color 0xccff66

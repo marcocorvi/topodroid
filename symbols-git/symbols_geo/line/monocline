@@ -1,10 +1,11 @@
-﻿symbol line
+symbol line
 name monocline
 name-it monoclinale
 name-es monoclinal
 name-pt monoclinal
 name-ru моноклиналь
 name-fr monoclinal
+name-ro monoclinal
 th_name u:monocline
 group monocline
 color 0xff3399 0xff

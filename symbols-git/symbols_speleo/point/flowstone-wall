@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name flowstone-wall
 name-cn 流石
 name-es colada
@@ -12,6 +12,7 @@ name-ua натік
 name-fa فلاوستون
 name-hu cseppkőlefolyás
 name-sk zasintrené
+name-ro cruste-perete
 th_name flowstone:wall
 orientation yes
 color 0xccff66

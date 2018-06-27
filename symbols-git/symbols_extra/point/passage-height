@@ -4,6 +4,7 @@ name-pt altura_do_conduto
 name-es altura_de_paso
 name-ru высота-хода
 name-fr hauteur_de_passage
+name-ro înălțime-pasaj
 th_name passage-height
 orientation no
 has_value yes

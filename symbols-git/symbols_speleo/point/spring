@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name spring
 name-cn 泉水
 name-es surgencia
@@ -12,6 +12,7 @@ name-bg извор
 name-ua джерело
 name-hu forrás
 name-sk prúdenie_vody
+name-ro izvor
 th_name spring
 orientation yes
 color 0x6699ff

@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name disc
 name-cn 石盾
 name-es disco
@@ -12,6 +12,7 @@ name-bg диск
 name-ua диск
 name-hu cseppkődob
 name-fr disque
+name-ro disc
 th_name disk
 orientation yes
 color 0xccff66

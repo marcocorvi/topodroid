@@ -1,4 +1,4 @@
-﻿symbol area
+symbol area
 name clay
 name-cn 泥土
 name-es arcilla
@@ -12,6 +12,7 @@ name-ru глина
 name-fa خاک
 name-hu agyag
 name-sk hlina
+name-ro argilă
 th_name clay
 color 0x99ff00 0x66
 csurvey 1 48 0 3

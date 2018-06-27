@@ -1,4 +1,4 @@
-﻿symbol line
+symbol line
 name wall_debris
 name-cn 碎石洞壁
 name-es paredes_descompuestas
@@ -11,6 +11,7 @@ name-ru стена_щебень_осадки
 name-ua стіна_щебінь_опади
 name-hu fal_kőtörmelékből
 name-sk sutinové_steny
+name-ro prăbușiri-perete
 th_name wall:debris
 group wall
 color 0xff0000 0xff

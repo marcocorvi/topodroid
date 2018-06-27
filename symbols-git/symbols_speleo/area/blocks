@@ -1,4 +1,4 @@
-﻿symbol area
+symbol area
 name blocks
 name-cn 堵塞
 name-es bloques
@@ -12,6 +12,7 @@ name-ua брили
 name-fa بلوک
 name-hu kőtömbök
 name-sk kamenné_bloky
+name-ro blocuri
 th_name blocks
 color 0xff3333 0x66
 csurvey 1 48 0 9

@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name guano
 name-cn 粪石
 name-es guano
@@ -13,6 +13,7 @@ name-bg гуано
 name-ua гуано
 name-hu guano
 name-sk guano
+name-ro guano
 th_name guano
 orientation no
 color 0xcc6633

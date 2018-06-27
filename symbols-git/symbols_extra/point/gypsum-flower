@@ -1,10 +1,11 @@
-﻿symbol point
+symbol point
 name gypsum-flower
 name-es flores_de_yeso
 name-pt flor_de_calcita
 name-ru гипсовый_цветок
 name-fr fleur_de_gypse
 name-sk sádrovcová-ruža
+name-ro floare-de-gips
 th_name gypsum-flower
 orientation no
 color 0xffffff

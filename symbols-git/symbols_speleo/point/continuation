@@ -1,4 +1,4 @@
-﻿symbol point
+symbol point
 name continuation
 name-cn 延续未知
 name-es continuación
@@ -12,6 +12,7 @@ name-bg продължение
 name-ua продовження
 name-hu folytatás
 name-sk pokračovanie
+name-ro continuare
 th_name continuation
 orientation no
 has_text yes
