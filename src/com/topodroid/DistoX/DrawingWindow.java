@@ -334,7 +334,7 @@ public class DrawingWindow extends ItemDrawer
   static final float ZOOM_DEC = 1.0f/ZOOM_INC;
   private ZoomButtonsController mZoomBtnsCtrl = null;
   private boolean mZoomBtnsCtrlOn = false;
-  // FIXME ZOOM_CTRL ZoomControls mZoomCtrl = null;
+  // FIXME_ZOOM_CTRL ZoomControls mZoomCtrl = null;
   // ZoomButton mZoomOut;
   // ZoomButton mZoomIn;
   private float oldDist;  // zoom pointer-sapcing
@@ -1664,7 +1664,7 @@ public class DrawingWindow extends ItemDrawer
 
     mZoomView = (View) findViewById(R.id.zoomView );
     mZoomBtnsCtrl = new ZoomButtonsController( mZoomView );
-    // FIXME ZOOM_CTRL mZoomCtrl = (ZoomControls) mZoomBtnsCtrl.getZoomControls();
+    // FIXME_ZOOM_CTRL mZoomCtrl = (ZoomControls) mZoomBtnsCtrl.getZoomControls();
     // ViewGroup vg = mZoomBtnsCtrl.getContainer();
     // switchZoomCtrl( TDSetting.mZoomCtrl );
 
@@ -1988,24 +1988,29 @@ public class DrawingWindow extends ItemDrawer
     // normal, horizontal and cross-product
     float mc = mClino   * TDMath.DEG2RAD;
     float ma = mAzimuth * TDMath.DEG2RAD;
-    float X0 = (float)Math.cos( mc ) * (float)Math.cos( ma );  // X = North
-    float Y0 = (float)Math.cos( mc ) * (float)Math.sin( ma );  // Y = East
-    float Z0 = (float)Math.sin( mc );                        // Z = Up
     // canvas X-axis, unit horizontal axis: 90 degrees to the right of the azimuth
     //   azimuth = 0 (north) --> horizontal = ( 0N, 1E)
     //   azimuth = 90 (east) --> horizontal = (-1N, 0E)
     //   etc.
-    float X1 = - (float)Math.sin( ma ); // X1 goes to the left in the section plane !!!
-    float Y1 =   (float)Math.cos( ma ); 
-    float Z1 = 0;
-    // float X2 = - (float)Math.sin( mc ) * (float)Math.cos( ma );
-    // float Y2 = - (float)Math.sin( mc ) * (float)Math.sin( ma );
-    // float Z2 =   (float)Math.cos( ma );
     // canvas UP-axis: this is X0 ^ X1 : it goes up in the section plane 
     // canvas Y-axis = - UP-axis
-    float X2 = Y0 * Z1 - Y1 * Z0; 
-    float Y2 = Z0 * X1 - Z1 * X0;
-    float Z2 = X0 * Y1 - X1 * Y0;
+
+    // FIXME_VECTOR
+    // float X0 = (float)Math.cos( mc ) * (float)Math.cos( ma );  // X = North
+    // float Y0 = (float)Math.cos( mc ) * (float)Math.sin( ma );  // Y = East
+    // float Z0 = (float)Math.sin( mc );                          // Z = Up
+    // float X1 = - (float)Math.sin( ma ); // X1 goes to the left in the section plane !!!
+    // float Y1 =   (float)Math.cos( ma ); 
+    // float Z1 = 0;
+    // // float X2 = - (float)Math.sin( mc ) * (float)Math.cos( ma );
+    // // float Y2 = - (float)Math.sin( mc ) * (float)Math.sin( ma );
+    // // float Z2 =   (float)Math.cos( ma );
+    // float X2 = Y0 * Z1 - Y1 * Z0; 
+    // float Y2 = Z0 * X1 - Z1 * X0;
+    // float Z2 = X0 * Y1 - X1 * Y0;
+    Vector V0 = new Vector( ma, mc );
+    Vector V1 = new Vector( - (float)Math.sin( ma ), (float)Math.cos( ma ), 0 );
+    Vector V2 = V0.cross( V1 );
 
     float dist = 0;
     DBlock blk = null;
@@ -2015,11 +2020,15 @@ public class DrawingWindow extends ItemDrawer
       if ( PlotInfo.isSection( mType ) ) {
         if ( mType == PlotInfo.PLOT_H_SECTION ) {
           if ( Math.abs( mClino ) > TDSetting.mHThreshold ) { // north arrow == (1,0,0), 5 m long in the CS plane
-            xn =  X1;
-            yn = -X2;
+            // FIXME_VECTOR
+            // xn =  X1;
+            // yn = -X2;
+            xn =  V1.x;
+            yn = -V2.x; 
+
             float d = 5 / (float)Math.sqrt(xn*xn + yn*yn);
             if ( mClino > 0 ) xn = -xn;
-            // FIXME NORTH addFixedSpecial( xn*d, yn*d, 0, 0, 0, 0 ); 
+            // FIXME_NORTH addFixedSpecial( xn*d, yn*d, 0, 0, 0, 0 ); 
             // addFixedSpecial( 0, -d, 0, 0, 0, 0 ); // NORTH is upward
             // if ( mLandscape ) {
             //   addFixedSpecial( -d, 0, 0, 0 ); // NORTH is leftward
@@ -2041,13 +2050,18 @@ public class DrawingWindow extends ItemDrawer
           }
         }
         if ( blk != null ) {
-          float bc = blk.mClino * TDMath.DEG2RAD;
-          float bb = blk.mBearing * TDMath.DEG2RAD;
-          float X = (float)Math.cos( bc ) * (float)Math.cos( bb );
-          float Y = (float)Math.cos( bc ) * (float)Math.sin( bb );
-          float Z = (float)Math.sin( bc );
-          xfrom = -dist * (X1 * X + Y1 * Y + Z1 * Z); // neg. because it is the FROM point
-          yfrom =  dist * (X2 * X + Y2 * Y + Z2 * Z);
+          // FIXME_VECTOR
+          // float bc = blk.mClino * TDMath.DEG2RAD;
+          // float bb = blk.mBearing * TDMath.DEG2RAD;
+          // float X = (float)Math.cos( bc ) * (float)Math.cos( bb );
+          // float Y = (float)Math.cos( bc ) * (float)Math.sin( bb );
+          // float Z = (float)Math.sin( bc );
+          // xfrom = -dist * (X1 * X + Y1 * Y + Z1 * Z); // neg. because it is the FROM point
+          // yfrom =  dist * (X2 * X + Y2 * Y + Z2 * Z);
+	  Vector v = new Vector( blk.mBearing * TDMath.DEG2RAD, blk.mClino * TDMath.DEG2RAD );
+          xfrom = -dist * v.dot(V1); // neg. because it is the FROM point
+          yfrom =  dist * v.dot(V2);
+
           if ( mType == PlotInfo.PLOT_H_SECTION ) { // Rotate as NORTH is upward
             float xx = -yn * xfrom + xn * yfrom;
             yfrom = -xn * xfrom - yn * yfrom;
@@ -2089,14 +2103,19 @@ public class DrawingWindow extends ItemDrawer
       }
 
       float d = b.mLength;
-      float bc = b.mClino * TDMath.DEG2RAD;
-      float bb = b.mBearing * TDMath.DEG2RAD;
-      float X = (float)Math.cos( bc ) * (float)Math.cos( bb ); // North
-      float Y = (float)Math.cos( bc ) * (float)Math.sin( bb ); // East
-      float Z = (float)Math.sin( bc );                       // Up
-      float x =  d * (X1 * X + Y1 * Y + Z1 * Z);
-      float y = -d * (X2 * X + Y2 * Y + Z2 * Z);
-      float a = 90 - (float)(Math.acos(X0 * X + Y0 * Y + Z0 * Z) * TDMath.RAD2DEG); // cos-angle with the normal
+      // FIXME_VECTOR
+      // float bc = b.mClino * TDMath.DEG2RAD;
+      // float bb = b.mBearing * TDMath.DEG2RAD;
+      // float X = (float)Math.cos( bc ) * (float)Math.cos( bb ); // North
+      // float Y = (float)Math.cos( bc ) * (float)Math.sin( bb ); // East
+      // float Z = (float)Math.sin( bc );                       // Up
+      // float x =  d * (X1 * X + Y1 * Y + Z1 * Z);
+      // float y = -d * (X2 * X + Y2 * Y + Z2 * Z);
+      // float a = 90 - (float)(Math.acos(X0 * X + Y0 * Y + Z0 * Z) * TDMath.RAD2DEG); // cos-angle with the normal
+      Vector v = new Vector(  b.mBearing * TDMath.DEG2RAD, b.mClino * TDMath.DEG2RAD);
+      float x =  d * v.dot(V1);
+      float y = -d * v.dot(V2);
+      float a = 90 - (float)(Math.acos( v.dot(V0) ) * TDMath.RAD2DEG); // cos-angle with the normal
       
       if ( mType == PlotInfo.PLOT_H_SECTION ) { // Rotate as NORTH is upward
         float xx = -yn * x + xn * y;
@@ -3288,7 +3307,7 @@ public class DrawingWindow extends ItemDrawer
       if ( TDSetting.mAutoSectionPt && section_id != null ) {
         float x5 = currentLine.mLast.x + currentLine.mDx * 20; 
         float y5 = currentLine.mLast.y + currentLine.mDy * 20; 
-        // FIXME if ( mLandscape ) { float t=x5; x5=-y5; y5=t; }
+        // FIXME_LANDSCAPE if ( mLandscape ) { float t=x5; x5=-y5; y5=t; }
         // FIXME String scrap_option = "-scrap " /* + mApp.mySurvey + "-" */ + section_id;
         String scrap_option = "-scrap " + mApp.mySurvey + "-" + section_id;
         DrawingPointPath section_pt = new DrawingPointPath( BrushManager.mPointLib.mPointSectionIndex,
@@ -4612,11 +4631,14 @@ public class DrawingWindow extends ItemDrawer
       }
     }
 
+    // @param scrapname fullname of the scrap
     // name can be the scrap-name or the section-name (plot name)
+    // called only by DrawingPointDialog 
     void openSectionDraw( String scrapname )
     { 
       // remove survey name from scrap-name (if necessary)
       String name = scrapname.replace( mApp.mySurvey + "-", "" );
+      // Log.v("DistoX", "scrapname " + scrapname + " plot name " + name );
 
       PlotInfo pi = mApp_mData.getPlotInfo( mApp.mSID, name );
       if ( pi != null ) {
@@ -5388,7 +5410,7 @@ public class DrawingWindow extends ItemDrawer
         xx = xx2;
         yy = yy2;
       } 
-      // FIXME if ( mLandscape ) path.landscapeToPortrait();
+      // FIXME_LANDSCAPE if ( mLandscape ) path.landscapeToPortrait();
       path.computeUnitNormal();
       mDrawingSurface.addDrawingPath( path );
     }
@@ -5407,7 +5429,7 @@ public class DrawingWindow extends ItemDrawer
         xx = xx2;
         yy = yy2;
       } 
-      // FIXME if ( mLandscape ) path.landscapeToPortrait();
+      // FIXME_LANDSCAPE if ( mLandscape ) path.landscapeToPortrait();
       path.computeUnitNormal();
       mDrawingSurface.addDrawingPath( path );
     }
@@ -5434,7 +5456,7 @@ public class DrawingWindow extends ItemDrawer
       hull = hull.next;
       side = hull.side;
     } 
-    // FIXME if ( mLandscape ) path.landscapeToPortrait();
+    // FIXME_LANDSCAPE if ( mLandscape ) path.landscapeToPortrait();
     path.computeUnitNormal();
     mDrawingSurface.addDrawingPath( path );
   }

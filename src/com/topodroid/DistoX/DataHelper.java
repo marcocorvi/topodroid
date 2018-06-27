@@ -2422,6 +2422,7 @@ class DataHelper extends DataSetObservable
      return list;
    }
 
+   // called by DrawingWindow to splay select shots for x-sections
    List<DBlock> selectAllShotsAtStations( long sid, String station1, String station2 )
    {
      if ( station2 == null ) return selectAllShotsAtStation( sid, station1 );
@@ -2436,7 +2437,7 @@ class DataHelper extends DataSetObservable
        null, null, "id" );
      if (cursor.moveToFirst()) {
        do {
-         if ( cursor.getLong(11) == 0 ) { // skip leg-blocks
+         if ( cursor.getLong(11) == 0 ) { // skip leg-blocks (11 = "leg" flag)
            DBlock block = new DBlock();
            fillBlock( sid, block, cursor );
            list.add( block );
@@ -2445,6 +2446,47 @@ class DataHelper extends DataSetObservable
      }
      // TDLog.Log( TDLog.LOG_DB, "select All Shots At Station list size " + list.size() );
      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+     return list;
+   }
+
+   // @param sid        survey id
+   // @param stations   stations names (must be unique)
+   // @param with_leg   whether to include legs or not
+   List<DBlock> selectAllShotsAtStations( long sid, List<String> stations, boolean with_legs )
+   {
+     List< DBlock > list = new ArrayList<>();
+     if ( stations == null || myDB == null ) return list;
+     int sz = stations.size();
+     if ( sz == 0 ) return list;
+     if ( sz == 1 ) return selectAllShotsAtStation( sid, stations.get(0) );
+     if ( sz == 2 ) return selectAllShotsAtStations( sid, stations.get(0), stations.get(1) );
+
+     for ( String station : stations ) {
+       Cursor cursor = myDB.query( SHOT_TABLE, mShotFields,
+         "surveyId=? and status=? and ( fStation=? or tStation=? )",
+         new String[] { Long.toString(sid), TDStatus.NORMAL_STR, station, station },
+         null, null, "id" );
+       if (cursor.moveToFirst()) {
+         do {
+           if ( cursor.getLong(11) == 0 ) { // non-leg blocks
+             DBlock block = new DBlock();
+             fillBlock( sid, block, cursor );
+             list.add( block );
+           } else if ( with_legs ) { // leg blocks
+	     long id = cursor.getLong(0);
+	     boolean contains = false;
+	     for ( DBlock b : list ) if ( b.mId == id ) { contains = true; break; }
+	     if ( ! contains ) {
+               DBlock block = new DBlock();
+               fillBlock( sid, block, cursor );
+               list.add( block );
+	     }
+	   }
+         } while (cursor.moveToNext());
+       }
+       // TDLog.Log( TDLog.LOG_DB, "select All Shots At Station list size " + list.size() );
+       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+     }
      return list;
    }
 
