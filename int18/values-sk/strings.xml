@@ -590,7 +590,7 @@
     <!-- UNUSED string name="button_regroup"   >Raggruppare   </string -->
     <string name="button_dump"      >Kopírovať z DistaX   </string>
     <string name="button_rename"    >Premenovať    </string>
-    <!-- TODO string name="button_renumber"  >Renumber</string -->
+    <string name="button_renumber"  >Prečíslovať</string>
     <!-- TODO string name="button_bedding"   >Bedding plane</string -->
     <!-- TODO string name="button_highlight" >Highlight</string -->
     <string name="button_replace"   >Vymeniť</string>
@@ -881,7 +881,7 @@
     <string name="title_mode">Výber možností zobrazenia</string>
     <string name="title_move">Režim Posunu</string>
     <string name="title_note">Poznámky</string>
-    <string name="title_photo">Foto</string>
+    <string name="title_photo">Rozšírené možnosti</string>
     <string name="title_photo_comment">Fotografia</string>
     <string name="title_plot_save">Exportovať nákres </string>
     <string name="title_plot_merge">Zlúčiť nákresy</string>
