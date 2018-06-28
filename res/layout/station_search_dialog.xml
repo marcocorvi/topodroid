@@ -30,8 +30,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/splays"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+	android:layout_marginTop="@dimen/marginv"
+	android:layout_marginBottom="@dimen/marginv"
       >
       <Button android:id="@+id/btn_cancel"
         style="@style/button_default"

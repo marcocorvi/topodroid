@@ -36,6 +36,17 @@ public class MyListPreference extends ListPreference
 
   private void init()
   {
+    if ( getKey().equals("DISTOX_SURVEY_STATION" ) ) {
+      if ( ! TDLevel.overBasic ) {
+	setEntries( R.array.surveyStationsB );
+      } else if ( ! TDLevel.overNormal ) {
+	setEntries( R.array.surveyStationsN );
+      } else if ( ! TDLevel.overAdvanced ) {
+	setEntries( R.array.surveyStationsA );
+      } else if ( ! TDLevel.overExpert ) {
+	setEntries( R.array.surveyStationsE );
+      }	
+    }
     setOnPreferenceChangeListener( new OnPreferenceChangeListener() {
       @Override
       public boolean onPreferenceChange( Preference p, Object v ) 

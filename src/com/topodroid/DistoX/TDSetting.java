@@ -24,7 +24,9 @@ class TDSetting
   // must agree with res/values/array.xml surveyStationsValue
   private static int SURVEY_STATION_ZERO      = 0;
   private static int SURVEY_STATION_FOREWARD  = 1;
-  // private static int SURVEY_STATION_BACKWARD  = 2;
+  private static int SURVEY_STATION_BACKWARD  = 2;
+  private static int SURVEY_STATION_FOREWARD2 = 3;
+  private static int SURVEY_STATION_BACKWARD2 = 4;
   private static int SURVEY_STATION_BACKSIGHT = 5;
   private static int SURVEY_STATION_TRIPOD    = 6;
   private static int SURVEY_STATION_TOPOROBOT = 7;
@@ -398,7 +400,7 @@ class TDSetting
   static int mRecentTimeout     = 30; // 30 seconds
 
   static int     mSurveyStations  = SURVEY_STATION_FOREWARD;     // automatic survey stations: 0 no, 1 forward-after-splay, 2 backward-after-splay
-  static int     mSavedSurveyStations  = 0;  
+  static int     mSavedStationPolicy = 0;  
   static boolean mShotAfterSplays = true;  //                            3 forward-before-splay, 4 backward-before-splay
   static boolean isSurveyForward()  { return (mSurveyStations%2) == SURVEY_STATION_FOREWARD; }
   static boolean isSurveyBackward() { return mSurveyStations>0 && (mSurveyStations%2) == SURVEY_STATION_ZERO; }
@@ -565,7 +567,7 @@ class TDSetting
   // {
   //   mMagAnomaly = val;
   //   if ( mMagAnomaly ) {
-  //     int policy = mSavedSurveyStations;
+  //     int policy = mSavedStationPolicy;
   //     if ( ! TDLevel.overExpert ) { 
   //       setPreference( prefs, "DISTOX_MAG_ANOMALY", false );
   //     } else if ( mSurveyStations > 0 ) {
@@ -575,25 +577,25 @@ class TDSetting
   //       mSurveyStations  = SURVEY_STATION_FOREWARD;
   //       mShotAfterSplays = true;
   //     }
-  //     mSavedSurveyStations = policy;
+  //     mSavedStationPolicy = policy;
   //   } else {
-  //     setPreference( prefs, "DISTOX_SURVEY_STATION", Integer.toString( mSavedSurveyStations ) );
+  //     setPreference( prefs, "DISTOX_SURVEY_STATION", Integer.toString( mSavedStationPolicy ) );
   //   }
   //   // FIXME this one should tell the mPrefActivitySurvey to reload preferences
   //   //       however this restarts the activity which is not good
   //   // if ( TopoDroidApp.mPrefActivitySurvey != null ) TopoDroidApp.mPrefActivitySurvey.reloadPreferences();
   //   //
-  //   // Log.v("DistoX", "SET Policy " + mSurveyStations + " " + mSavedSurveyStations + " mag anomlay " + mMagAnomaly );
+  //   // Log.v("DistoX", "SET Policy " + mSurveyStations + " " + mSavedStationPolicy + " mag anomlay " + mMagAnomaly );
   // }
 
-  // // called only by parseSurveyStations
+  // // called only by parseStationPolicy
   // static private void clearMagAnomaly( SharedPreferences prefs ) 
   // {
   //   if ( mMagAnomaly ) {
   //     mMagAnomaly = false;
   //     // setPreference( prefs, "DISTOX_MAG_ANOMALY", false );
   //   }
-  //   // Log.v("DistoX", "CLEAR Policy " + mSurveyStations + " " + mSavedSurveyStations + " mag anomlay " + mMagAnomaly );
+  //   // Log.v("DistoX", "CLEAR Policy " + mSurveyStations + " " + mSavedStationPolicy + " mag anomlay " + mMagAnomaly );
   // }
 
   // backgroind color RGB_565
@@ -810,7 +812,7 @@ class TDSetting
     mExtendThr     = tryFloat( prefs, key[k++], "10"   ); // DISTOX_EXTEND_THR2
     mVThreshold    = tryFloat( prefs, key[k++], "80"   ); // DISTOX_VTHRESHOLD
 
-    parseSurveyStations( prefs, app, prefs.getString( key[k++], "1" ) ); // DISTOX_SURVEY_STATIONS
+    parseStationPolicy( prefs, app, prefs.getString( key[k++], "1" ) ); // DISTOX_SURVEY_STATION
     mDataBackup    = prefs.getBoolean( key[k++], false ); // DISTOX_DATA_BACKUP
 
     if ( prefs.getString( key[k++], UNIT_LENGTH ).equals(UNIT_LENGTH) ) {
@@ -989,6 +991,16 @@ class TDSetting
       setPreference( prefs, "DISTOX_SURVEY_STATION", "1" );
     }
     TDLevel.setLevel( ctx, level );
+    switch ( level ) {
+      case TDLevel.TESTER:
+        if ( mSavedStationPolicy == SURVEY_STATION_TOPOROBOT ) setPreference( prefs, "DISTOX_SURVEY_STATION", "7" );
+      case TDLevel.EXPERT:
+        if ( mSavedStationPolicy == SURVEY_STATION_ANOMALY )   setPreference( prefs, "DISTOX_SURVEY_STATION", "8" );
+      case TDLevel.ADVANCED:
+        if ( mSavedStationPolicy == SURVEY_STATION_TRIPOD    ) setPreference( prefs, "DISTOX_SURVEY_STATION", "6" );
+        if ( mSavedStationPolicy == SURVEY_STATION_FOREWARD2 ) setPreference( prefs, "DISTOX_SURVEY_STATION", "3" );
+        if ( mSavedStationPolicy == SURVEY_STATION_BACKWARD2 ) setPreference( prefs, "DISTOX_SURVEY_STATION", "4" );
+    }
     // if ( ! TDLevel.overExpert ) {
     //   mMagAnomaly = false; // magnetic anomaly compensation requires level overExpert
     // }
@@ -1084,7 +1096,7 @@ class TDSetting
     } else if ( k.equals( key[ nk++ ] ) ) {
       mVThreshold    = tryFloat( prefs, k, "80" );   // DISTOX_VTHRESHOLD
     } else if ( k.equals( key[ nk++ ] ) ) {
-      parseSurveyStations( prefs, app, prefs.getString( k, "1" ) ); // DISTOX_SURVEY_STATION
+      parseStationPolicy( prefs, app, prefs.getString( k, "1" ) ); // DISTOX_SURVEY_STATION
     } else if ( k.equals( key[ nk++ ] ) ) {
       mDataBackup = prefs.getBoolean( k, false );      // DISTOX_DATA_BACKUP
     } else if ( k.equals( key[ nk++ ] ) ) {
@@ -1408,7 +1420,7 @@ class TDSetting
     }
   }
 
-  private static void parseSurveyStations( SharedPreferences prefs, TopoDroidApp app, String str ) 
+  private static int parseStationPolicy( SharedPreferences prefs, TopoDroidApp app, String str ) 
   {
     int policy = SURVEY_STATION_FOREWARD;
     try {
@@ -1417,15 +1429,15 @@ class TDSetting
       policy = SURVEY_STATION_FOREWARD;
     }
     if ( setSurveyStations( app, policy ) ) {
-      mSavedSurveyStations = policy;
+      // nothing
     } else {
       // preference is reset to the last saved policy
-      // FIXME this does not show up in the interface unless the activity is restarted
-      setPreference( prefs, "DISTOX_SURVEY_STATION", Integer.toString( mSavedSurveyStations ) );
+      setPreference( prefs, "DISTOX_SURVEY_STATION", Integer.toString( mSavedStationPolicy ) );
       if ( TopoDroidApp.mPrefActivitySurvey != null ) TopoDroidApp.mPrefActivitySurvey.reloadPreferences();
     }
     // if ( ! mBacksightShot ) clearMagAnomaly( prefs );
-    // Log.v("DistoX", "PARSE Policy " + mSurveyStations + " " + mSavedSurveyStations + " mag anomlay " + mMagAnomaly );
+    // Log.v("DistoX", "PARSE Policy " + policy + " saved " + mSavedStationPolicy );
+    return policy;
   }
 
   // the check on the level should not be neceessary
@@ -1446,6 +1458,7 @@ class TDSetting
         mMagAnomaly      = false;
         mSurveyStations  = SURVEY_STATION_FOREWARD;
         mTitleColor = TDColor.TITLE_TOPOROBOT;
+	mSavedStationPolicy = policy;
       } else {
         TDToast.make( app, R.string.toporobot_warning );
         return false;
@@ -1459,6 +1472,7 @@ class TDSetting
         mMagAnomaly      = false;
         mSurveyStations  = SURVEY_STATION_FOREWARD;
         mTitleColor = TDColor.TITLE_TRIPOD;
+	mSavedStationPolicy = policy;
       } else {
         TDToast.make( app, R.string.tripod_warning );
         return false;
@@ -1472,6 +1486,7 @@ class TDSetting
         mMagAnomaly      = false;
         mSurveyStations  = SURVEY_STATION_FOREWARD;
         mTitleColor = TDColor.TITLE_BACKSIGHT;
+	// mSavedStationPolicy = policy; // not neceessary
       // } else {
       //   TDToast.make( app, R.string.backsight_warning );
       // }
@@ -1484,6 +1499,7 @@ class TDSetting
         mMagAnomaly      = true;
         mSurveyStations  = SURVEY_STATION_FOREWARD;
         mTitleColor = TDColor.TITLE_ANOMALY;
+	mSavedStationPolicy = policy;
       } else {
         TDToast.make( app, R.string.anomaly_warning );
 	return false;
@@ -1491,11 +1507,14 @@ class TDSetting
     } else {
       mSurveyStations = policy;
       mShotAfterSplays = ( mSurveyStations <= 2 );
-      if ( mSurveyStations > 2 ) mSurveyStations -= 2;
+      if ( mSurveyStations > 2 ) {
+	mSurveyStations -= 2;
+	mSavedStationPolicy = policy;
+      }
       if ( mSurveyStations == SURVEY_STATION_FOREWARD ) mTitleColor = TDColor.TITLE_BACKSHOT;
     }
+    // Log.v("DistoX", "set survey stations. policy " + policy );
     return true;
-    // Log.v("DistoX", "set survey stations. mSurveyStations " + mSurveyStations + " mShotAfterSplays " + mShotAfterSplays );
   }
 
   // void clearPreferences()

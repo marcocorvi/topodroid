@@ -315,18 +315,22 @@
      <!-- item name="InsecurePort">3</item -->
   </string-array>
 
+  <!--
+       the order of options must be increasing with the enabling level
+       and consistent thru all the arrays on the names
+  -->
   <string-array name="surveyStations">
      <item name="no">No</item>
      <item name="for">Splays, forward leg</item>
      <item name="back">Splays, backward leg</item>
+     <item name="backsight">Backsight</item>
+     <item name="tripod">Tripod</item>
+     <item name="anomaly">Magn. anomaly</item>
      <item name="for2">Forward leg, splays</item>
      <item name="back2">Backward leg, splays</item>
-     <item name="backsight">Backsight</item>
-     <item name="anomaly">Magn. anomaly</item>
-     <item name="tripod">Tripod</item>
      <item name="toporobot">TopoRobot</item>
   </string-array>
-<!--
+
   <string-array name="surveyStationsB">
      <item name="no">No</item>
      <item name="for">Splays, forward leg</item>
@@ -338,37 +342,36 @@
      <item name="for">Splays, forward leg</item>
      <item name="back">Splays, backward leg</item>
      <item name="backsight">Backsight</item>
-     <item name="tripod">Tripod</item>
   </string-array>
   <string-array name="surveyStationsA">
      <item name="no">No</item>
      <item name="for">Splays, forward leg</item>
      <item name="back">Splays, backward leg</item>
-     <item name="for2">Forward leg, splays</item>
-     <item name="back2">Backward leg, splays</item>
      <item name="backsight">Backsight</item>
      <item name="tripod">Tripod</item>
+     <item name="for2">Forward leg, splays</item>
+     <item name="back2">Backward leg, splays</item>
   </string-array>
   <string-array name="surveyStationsE">
      <item name="no">No</item>
      <item name="for">Splays, forward leg</item>
      <item name="back">Splays, backward leg</item>
+     <item name="backsight">Backsight</item>
+     <item name="tripod">Tripod</item>
+     <item name="anomaly">Magn. anomaly</item>
      <item name="for2">Forward leg, splays</item>
      <item name="back2">Backward leg, splays</item>
-     <item name="backsight">Backsight</item>
-     <item name="anomaly">Magn. anomaly</item>
-     <item name="tripod">Tripod</item>
   </string-array>
--->
+
   <string-array name="surveyStationsValue" translatable="false">
      <item name="no">0</item>
      <item name="for">1</item>
      <item name="back">2</item>
+     <item name="backsight">5</item>
+     <item name="tripod">6</item>
+     <item name="anomaly">8</item>
      <item name="for2">3</item>
      <item name="back2">4</item>
-     <item name="backsight">5</item>
-     <item name="anomaly">8</item>
-     <item name="tripod">6</item>
      <item name="toporobot">7</item>
   </string-array>
 

@@ -4,33 +4,35 @@
 
 When you download data TopoDroid can automatically assign them station names. A repeated measurement is considered a leg shot, the others are splay shots.  If you stick to a convention taking measurements TopoDroid automatic station naming can be very handy. TopoDroid supports a number of conventions to automatically assign stations to shots. You can select the one that fits your habits through the settings.
 <ol>
-<li><b>splays+forward</b>. At the "From" station: you take splays first and then forward leg shot(s). This is the default convention.</li>
-<li><b>forward+splays</b>. At the "From" station: you take the forward leg shot(s) first, and then the splays</li>
-<li><b>splays+backward</b>. At the "To" station: you take splays first and then backward leg shot(s)</li>
-<li><b>backward+splays</b>. At the "To" station: you take backward leg shot(s) first and then splays</li>
+<li><b>splays+forshot</b>. At the "From" station: you take splays first and then forward leg shot(s). This is the default convention.</li>
+<li><b>splays+backshot</b>. At the "To" station: you take splays first and then backward leg shot(s)</li>
 <li><b>Backsight</b>.</li>
 <li><b>tripod</b></li>
 <li><b>magnetic anomaly</b> compensation</li>
+<li><b>forshot+splays</b>. At the "From" station: you take the forward leg shot(s) first, and then the splays</li>
+<li><b>backshot+splays</b>. At the "To" station: you take backward leg shot(s) first and then splays</li>
 <li><b>TopoRobot</b></li>
 </ol><br><p>
 
-Examples of the first six conventions (shots takes at the same station are grouped in parenthesis):
-<ul>
+Examples of the conventions (shots takes at the same station are grouped in parenthesis):
+<ol>
 <li> ... (1-. 1-. 1-. 1-2) (2-. 2-. 2-3) ... </li>
-<li> ... (1-2 1-. 1-. 1-.) (2-3 2-. 2-.) ... </li>
 <li> ... (2-. 2-. 2-. 2-1) (3-. 3-. 3-2) ... </li>
-<li> ... (2-1 2-. 2-. 2-.) (3-2 3-. 3-.) ... </li>
 <li> ... (2-1 2-. 2-. 2-3) (3-2 3-. 3-. 3-4) ... </li>
 <li> ... (2-1 2-. 2-. 2-3) (4-3 4-. 4-. 4-5) ... </li>
-</ul><br>
+<li> ... (2-1 2-. 2-. 2-3) (3-2 3-. 3-. 3-4) ... (same as "3")</li>
+<li> ... (1-2 1-. 1-. 1-.) (2-3 2-. 2-.) ... </li>
+<li> ... (2-1 2-. 2-. 2-.) (3-2 3-. 3-.) ... </li>
+<li> ... (1-. 1-. 1-. 1-2) (2-. 2-. 2-3) ... (same as "1")</li>
+</ol><br>
 
-Sequence a-b-c-d for the first (foresight) and the third (backsight) policies.<br>
+Sequence a-b-c-d for the first (forshot) and the second (backshot) policies.<br>
 <img src="survey_policy.png">
 <br><p>
 
 <b>Backsight</b> policy<br>
 At each station you take the backshot to the previous station, next the splay shots, and finally the forward shot to the next station.<br>
-Backsight shots are checked: if a leg is not close to the opposite of the previuos leg it is not considered a backsight shot.<br>
+Backsight shots are checked: if a shot is not close to the opposite of the previuos leg it is not considered a backsight shot.<br>
 The backsight shots are marked "duplicate".<br><p>
 
 <b>Tripod</b> policy<br>

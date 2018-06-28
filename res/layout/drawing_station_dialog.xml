@@ -14,7 +14,7 @@
   <LinearLayout 
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
+    android:layout_marginBottom="@dimen/marginv"
     android:orientation="horizontal" 
     >
 
@@ -82,7 +82,7 @@
       >
 
       <Button android:id="@+id/btn_hidden"
-        android:layout_marginRight="10dp"
+	      android:layout_marginRight="@dimen/marginh"
         style="@style/button_default"
         android:text="@string/button_ok"
       />

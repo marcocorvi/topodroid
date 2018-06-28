@@ -15,7 +15,7 @@
     android:textSize="@dimen/textsize"
     android:numColumns="2"
     android:divider="@color/divider"
-    android:dividerHeight="2dp"
+    android:dividerHeight="@dimen/margintiny"
   />  
 
   <LinearLayout 

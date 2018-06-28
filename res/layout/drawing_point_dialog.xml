@@ -60,8 +60,8 @@
     <!-- Button android:id="@+id/left"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:paddingLeft="15dp"
-      android:paddingRight="15dp"
+      android:layout_marginLeft="@dimen/marginv"
+      android:layout_marginRight="@dimen/marginv"
       android:background="@drawable/ic_undo"
     / -->
     <ImageView android:id="@+id/image"
@@ -100,7 +100,7 @@
     style="@style/edit_text_light"
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
-    android:paddingBottom="10dp"
+    android:layout_marginBottom="@dimen/marginv"
     android:inputType="text"
   />
   <EditText android:id="@+id/point_options"
@@ -108,7 +108,7 @@
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
     android:hint="@string/options"
-    android:paddingBottom="10dp"
+    android:layout_marginBottom="@dimen/marginv"
   />
 
   <CheckBox android:id="@+id/point_xsection"
