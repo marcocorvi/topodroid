@@ -122,12 +122,43 @@
      <item name="no">Изключени</item>
      <item name="for">Странични, права отсечка</item>
      <item name="back">Странични, обратна отсечка</item>
+     <item name="backsight">Обратна отсечка, странични, права</item>
+     <item name="tripod">Статив</item>
+     <item name="anomaly">Magn. anomaly</item>
      <item name="for2">Права отсечка, странични</item>
      <item name="back2">Обратна отсечка, странични</item>
-     <item name="backsight">Обратна отсечка, странични, права</item>
-     <item name="anomaly">Magn. anomaly</item>
-     <item name="tripod">Статив</item>
      <item name="toporobot">TopoRobot</item>
+  </string-array>
+
+
+  <string-array name="surveyStationsB">
+     <item name="no">Изключени</item>
+     <item name="for">Странични, права отсечка</item>
+     <item name="back">Странични, обратна отсечка</item>
+     <item name="backsight">Обратна отсечка, странични, права</item>
+  </string-array>
+  <string-array name="surveyStationsN">
+     <item name="no">Изключени</item>
+     <item name="for">Странични, права отсечка</item>
+     <item name="back">Странични, обратна отсечка</item>
+     <item name="backsight">Обратна отсечка, странични, права</item>
+  </string-array>
+  <string-array name="surveyStationsA">
+     <item name="no">Изключени</item>
+     <item name="for">Странични, права отсечка</item>
+     <item name="back">Странични, обратна отсечка</item>
+     <item name="backsight">Обратна отсечка, странични, права</item>
+     <item name="tripod">Статив</item>
+  </string-array>
+  <string-array name="surveyStationsE">
+     <item name="no">Изключени</item>
+     <item name="for">Странични, права отсечка</item>
+     <item name="back">Странични, обратна отсечка</item>
+     <item name="backsight">Обратна отсечка, странични, права</item>
+     <item name="tripod">Статив</item>
+     <item name="anomaly">Magn. anomaly</item>
+     <item name="for2">Права отсечка, странични</item>
+     <item name="back2">Обратна отсечка, странични</item>
   </string-array>
 
   <string-array name="pickerType">

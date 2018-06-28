@@ -121,12 +121,42 @@
      <item name="no">No</item>
      <item name="for">射线, 前测主线</item>
      <item name="back">射线, 后测主线</item>
+     <item name="backsight">后测</item>
+     <item name="tripod">脚架测量</item>
+     <item name="anomaly">Magn. anomaly</item>
      <item name="for2">前测主线, 射线</item>
      <item name="back2">后测主线, 射线</item>
-     <item name="backsight">后测</item>
-     <item name="anomaly">Magn. anomaly</item>
-     <item name="tripod">脚架测量</item>
      <item name="toporobot">TopoRobot</item>
+  </string-array>
+
+  <string-array name="surveyStationsB">
+     <item name="no">No</item>
+     <item name="for">射线, 前测主线</item>
+     <item name="back">射线, 后测主线</item>
+     <item name="backsight">后测</item>
+  </string-array>
+  <string-array name="surveyStationsN">
+     <item name="no">No</item>
+     <item name="for">射线, 前测主线</item>
+     <item name="back">射线, 后测主线</item>
+     <item name="backsight">后测</item>
+  </string-array>
+  <string-array name="surveyStationsA">
+     <item name="no">No</item>
+     <item name="for">射线, 前测主线</item>
+     <item name="back">射线, 后测主线</item>
+     <item name="backsight">后测</item>
+     <item name="tripod">脚架测量</item>
+  </string-array>
+  <string-array name="surveyStationsE">
+     <item name="no">No</item>
+     <item name="for">射线, 前测主线</item>
+     <item name="back">射线, 后测主线</item>
+     <item name="backsight">后测</item>
+     <item name="tripod">脚架测量</item>
+     <item name="anomaly">Magn. anomaly</item>
+     <item name="for2">前测主线, 射线</item>
+     <item name="back2">后测主线, 射线</item>
   </string-array>
 
   <string-array name="pickerType">

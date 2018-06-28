@@ -117,12 +117,41 @@
      <item name="no">Нет</item>
      <item name="for">ЛПВН потом на след. пикет</item>
      <item name="back">ЛПВН потом на пред. пикет</item>
+     <item name="backsight">На пред. пикет ЛПВН на след. пикет</item>
+     <item name="tripod">Штатив</item>
+     <item name="anomaly">Magn. anomaly</item>
      <item name="for2">На след. пикет потом ЛПВН</item>
      <item name="back2">На пред. пикет потом ЛПВН</item>
-     <item name="backsight">На пред. пикет ЛПВН на след. пикет</item>
-     <item name="anomaly">Magn. anomaly</item>
-     <item name="tripod">Штатив</item>
      <item name="toporobot">TopoRobot</item>
+  </string-array>
+  <string-array name="surveyStationsB">
+     <item name="no">Нет</item>
+     <item name="for">ЛПВН потом на след. пикет</item>
+     <item name="back">ЛПВН потом на пред. пикет</item>
+     <item name="backsight">На пред. пикет ЛПВН на след. пикет</item>
+  </string-array>
+  <string-array name="surveyStationsN">
+     <item name="no">Нет</item>
+     <item name="for">ЛПВН потом на след. пикет</item>
+     <item name="back">ЛПВН потом на пред. пикет</item>
+     <item name="backsight">На пред. пикет ЛПВН на след. пикет</item>
+  </string-array>
+  <string-array name="surveyStationsA">
+     <item name="no">Нет</item>
+     <item name="for">ЛПВН потом на след. пикет</item>
+     <item name="back">ЛПВН потом на пред. пикет</item>
+     <item name="backsight">На пред. пикет ЛПВН на след. пикет</item>
+     <item name="tripod">Штатив</item>
+  </string-array>
+  <string-array name="surveyStationsE">
+     <item name="no">Нет</item>
+     <item name="for">ЛПВН потом на след. пикет</item>
+     <item name="back">ЛПВН потом на пред. пикет</item>
+     <item name="backsight">На пред. пикет ЛПВН на след. пикет</item>
+     <item name="tripod">Штатив</item>
+     <item name="anomaly">Magn. anomaly</item>
+     <item name="for2">На след. пикет потом ЛПВН</item>
+     <item name="back2">На пред. пикет потом ЛПВН</item>
   </string-array>
 
   <string-array name="pickerType">

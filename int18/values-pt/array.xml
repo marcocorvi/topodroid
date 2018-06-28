@@ -118,18 +118,45 @@
      <!-- item name="InsecurePort">Inseguro/Porta</item -->
   </string-array>
 
-
-
   <string-array name="surveyStations">
      <item name="no">Não</item>
      <item name="for">Auxiliares (EDTC), próxima visada</item>
      <item name="back">Auxiliares (EDTC), visada anterior</item>
+     <item name="backsight">Visada inversa</item>
+     <item name="tripod">Tripé</item>
+     <item name="anomaly">Magn. anomaly</item>
      <item name="for2">Próxima visada, auxiliares (EDTC)</item>
      <item name="back2">Visada anterior, auxiliares (EDTC)</item>
-     <item name="backsight">Visada inversa</item>
-     <item name="anomaly">Magn. anomaly</item>
-     <item name="tripod">Tripé</item>
      <item name="toporobot">TopoRobot</item>
+  </string-array>
+  <string-array name="surveyStationsB">
+     <item name="no">Não</item>
+     <item name="for">Auxiliares (EDTC), próxima visada</item>
+     <item name="back">Auxiliares (EDTC), visada anterior</item>
+     <item name="backsight">Visada inversa</item>
+  </string-array>
+  <string-array name="surveyStationsN">
+     <item name="no">Não</item>
+     <item name="for">Auxiliares (EDTC), próxima visada</item>
+     <item name="back">Auxiliares (EDTC), visada anterior</item>
+     <item name="backsight">Visada inversa</item>
+  </string-array>
+  <string-array name="surveyStationsA">
+     <item name="no">Não</item>
+     <item name="for">Auxiliares (EDTC), próxima visada</item>
+     <item name="back">Auxiliares (EDTC), visada anterior</item>
+     <item name="backsight">Visada inversa</item>
+     <item name="tripod">Tripé</item>
+  </string-array>
+  <string-array name="surveyStationsE">
+     <item name="no">Não</item>
+     <item name="for">Auxiliares (EDTC), próxima visada</item>
+     <item name="back">Auxiliares (EDTC), visada anterior</item>
+     <item name="backsight">Visada inversa</item>
+     <item name="tripod">Tripé</item>
+     <item name="anomaly">Magn. anomaly</item>
+     <item name="for2">Próxima visada, auxiliares (EDTC)</item>
+     <item name="back2">Visada anterior, auxiliares (EDTC)</item>
   </string-array>
 
   <string-array name="pickerType">

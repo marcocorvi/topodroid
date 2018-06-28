@@ -153,12 +153,41 @@
      <item name="no">Désactivé</item>
      <item name="for">Visée normale, visées latérales en premier</item>
      <item name="back">Visée inverse, visées latérales en premier</item>
+     <item name="backsight">Visée Arrière, Backsight</item>
+     <item name="tripod">Tripod</item>
+     <item name="anomaly">Magn. anomaly</item>
      <item name="for2">Visée normale, cheminement en premier</item>
      <item name="back2">Visée inverse, cheminement en premier</item>
-     <item name="backsight">Visée Arrière, Backsight</item>
-     <item name="anomaly">Magn. anomaly</item>
-     <item name="tripod">Tripod</item>
      <item name="toporobot">TopoRobot</item>
+  </string-array>
+  <string-array name="surveyStationsB">
+     <item name="no">Désactivé</item>
+     <item name="for">Visée normale, visées latérales en premier</item>
+     <item name="back">Visée inverse, visées latérales en premier</item>
+     <item name="backsight">Visée Arrière, Backsight</item>
+  </string-array>
+  <string-array name="surveyStationsN">
+     <item name="no">Désactivé</item>
+     <item name="for">Visée normale, visées latérales en premier</item>
+     <item name="back">Visée inverse, visées latérales en premier</item>
+     <item name="backsight">Visée Arrière, Backsight</item>
+  </string-array>
+  <string-array name="surveyStationsA">
+     <item name="no">Désactivé</item>
+     <item name="for">Visée normale, visées latérales en premier</item>
+     <item name="back">Visée inverse, visées latérales en premier</item>
+     <item name="backsight">Visée Arrière, Backsight</item>
+     <item name="tripod">Tripod</item>
+  </string-array>
+  <string-array name="surveyStationsE">
+     <item name="no">Désactivé</item>
+     <item name="for">Visée normale, visées latérales en premier</item>
+     <item name="back">Visée inverse, visées latérales en premier</item>
+     <item name="backsight">Visée Arrière, Backsight</item>
+     <item name="tripod">Tripod</item>
+     <item name="anomaly">Magn. anomaly</item>
+     <item name="for2">Visée normale, cheminement en premier</item>
+     <item name="back2">Visée inverse, cheminement en premier</item>
   </string-array>
  
 

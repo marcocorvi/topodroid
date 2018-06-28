@@ -176,12 +176,41 @@
      <item name="no">Nimic</item>
      <item name="for">Radieri, viză</item>
      <item name="back">Radieri, stație</item>
+     <item name="backsight">Viză inversă</item>
+     <item name="tripod">Tripod</item>
+     <item name="anomaly">Magn. anomaly</item>
      <item name="for2">Viză, radieri</item>
      <item name="back2">Stație, radieri</item>
-     <item name="backsight">Viză inversă</item>
-     <item name="anomaly">Magn. anomaly</item>
-     <item name="tripod">Tripod</item>
      <item name="toporobot">TopoRobot</item>
+  </string-array>
+  <string-array name="surveyStationsB">
+     <item name="no">Nimic</item>
+     <item name="for">Radieri, viză</item>
+     <item name="back">Radieri, stație</item>
+     <item name="backsight">Viză inversă</item>
+  </string-array>
+  <string-array name="surveyStationsN">
+     <item name="no">Nimic</item>
+     <item name="for">Radieri, viză</item>
+     <item name="back">Radieri, stație</item>
+     <item name="backsight">Viză inversă</item>
+  </string-array>
+  <string-array name="surveyStationsA">
+     <item name="no">Nimic</item>
+     <item name="for">Radieri, viză</item>
+     <item name="back">Radieri, stație</item>
+     <item name="backsight">Viză inversă</item>
+     <item name="tripod">Tripod</item>
+  </string-array>
+  <string-array name="surveyStationsE">
+     <item name="no">Nimic</item>
+     <item name="for">Radieri, viză</item>
+     <item name="back">Radieri, stație</item>
+     <item name="backsight">Viză inversă</item>
+     <item name="tripod">Tripod</item>
+     <item name="anomaly">Magn. anomaly</item>
+     <item name="for2">Viză, radieri</item>
+     <item name="back2">Stație, radieri</item>
   </string-array>
 
   <string-array name="pickerType">

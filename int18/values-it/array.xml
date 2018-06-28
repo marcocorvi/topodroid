@@ -116,12 +116,41 @@
      <item name="no">No</item>
      <item name="for">Splay, battuta diretta</item>
      <item name="back">Splay, battuta inversa</item>
+     <item name="backsight">Doppia battuta</item>
+     <item name="tripod">Tripode</item>
+     <item name="anomaly">Correzione anomalia magnetica</item>
      <item name="for2">Battuta diretta, splay</item>
      <item name="back2">Battuta inversa, splay</item>
-     <item name="backsight">Doppia battuta</item>
-     <item name="anomaly">Correzione anomalia magnetica</item>
-     <item name="tripod">Tripode</item>
      <item name="toporobot">TopoRobot</item>
+  </string-array>
+  <string-array name="surveyStationsB">
+     <item name="no">No</item>
+     <item name="for">Splay, battuta diretta</item>
+     <item name="back">Splay, battuta inversa</item>
+     <item name="backsight">Doppia battuta</item>
+  </string-array>
+  <string-array name="surveyStationsN">
+     <item name="no">No</item>
+     <item name="for">Splay, battuta diretta</item>
+     <item name="back">Splay, battuta inversa</item>
+     <item name="backsight">Doppia battuta</item>
+  </string-array>
+  <string-array name="surveyStationsA">
+     <item name="no">No</item>
+     <item name="for">Splay, battuta diretta</item>
+     <item name="back">Splay, battuta inversa</item>
+     <item name="backsight">Doppia battuta</item>
+     <item name="tripod">Tripode</item>
+  </string-array>
+  <string-array name="surveyStationsE">
+     <item name="no">No</item>
+     <item name="for">Splay, battuta diretta</item>
+     <item name="back">Splay, battuta inversa</item>
+     <item name="backsight">Doppia battuta</item>
+     <item name="tripod">Tripode</item>
+     <item name="anomaly">Correzione anomalia magnetica</item>
+     <item name="for2">Battuta diretta, splay</item>
+     <item name="back2">Battuta inversa, splay</item>
   </string-array>
 
   <string-array name="pickerType">

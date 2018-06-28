@@ -117,12 +117,41 @@
      <item name="no">Ні</item>
      <item name="for">ЛПВН потім на наступ. пікет</item>
      <item name="back">ЛПВН потім на поперед. пікет</item>
+     <item name="backsight">На поперед. пікет ЛПВН на наступ. пікет</item>
+     <item name="tripod">Штатив</item>
+     <item name="anomaly">Magn. anomaly</item>
      <item name="for2">На наступ. пікет потом ЛПВН</item>
      <item name="back2">На поперед. пікет потом ЛПВН</item>
-     <item name="backsight">На поперед. пікет ЛПВН на наступ. пікет</item>
-     <item name="anomaly">Magn. anomaly</item>
-     <item name="tripod">Штатив</item>
      <item name="toporobot">TopoRobot</item>
+  </string-array>
+  <string-array name="surveyStationsB">
+     <item name="no">Ні</item>
+     <item name="for">ЛПВН потім на наступ. пікет</item>
+     <item name="back">ЛПВН потім на поперед. пікет</item>
+     <item name="backsight">На поперед. пікет ЛПВН на наступ. пікет</item>
+  </string-array>
+  <string-array name="surveyStationsN">
+     <item name="no">Ні</item>
+     <item name="for">ЛПВН потім на наступ. пікет</item>
+     <item name="back">ЛПВН потім на поперед. пікет</item>
+     <item name="backsight">На поперед. пікет ЛПВН на наступ. пікет</item>
+  </string-array>
+  <string-array name="surveyStationsA">
+     <item name="no">Ні</item>
+     <item name="for">ЛПВН потім на наступ. пікет</item>
+     <item name="back">ЛПВН потім на поперед. пікет</item>
+     <item name="backsight">На поперед. пікет ЛПВН на наступ. пікет</item>
+     <item name="tripod">Штатив</item>
+  </string-array>
+  <string-array name="surveyStationsE">
+     <item name="no">Ні</item>
+     <item name="for">ЛПВН потім на наступ. пікет</item>
+     <item name="back">ЛПВН потім на поперед. пікет</item>
+     <item name="backsight">На поперед. пікет ЛПВН на наступ. пікет</item>
+     <item name="tripod">Штатив</item>
+     <item name="anomaly">Magn. anomaly</item>
+     <item name="for2">На наступ. пікет потом ЛПВН</item>
+     <item name="back2">На поперед. пікет потом ЛПВН</item>
   </string-array>
 
   <string-array name="pickerType">

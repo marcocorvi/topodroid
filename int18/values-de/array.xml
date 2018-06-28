@@ -117,12 +117,41 @@
      <item name="no">Keine</item>
      <item name="for">Hilfszüge, Vorwärtsmessung</item>
      <item name="back">Hilfszüge, Rückwärtsmessung</item>
+     <item name="backsight">Rückwärts, Hilfszüge, Vorwärts</item>
+     <item name="tripod">Stativ (wie oben aber mit Zwischenstation)</item>
+     <item name="anomaly">Magn. anomaly</item>
      <item name="for2">Vorwärtsmessung, Hilfszüge</item>
      <item name="back2">Rückwärtsmessung, Hilfszüge</item>
-     <item name="backsight">Rückwärts, Hilfszüge, Vorwärts</item>
-     <item name="anomaly">Magn. anomaly</item>
-     <item name="tripod">Stativ (wie oben aber mit Zwischenstation)</item>
      <item name="toporobot">TopoRobot</item>
+  </string-array>
+  <string-array name="surveyStationsB">
+     <item name="no">Keine</item>
+     <item name="for">Hilfszüge, Vorwärtsmessung</item>
+     <item name="back">Hilfszüge, Rückwärtsmessung</item>
+     <item name="backsight">Rückwärts, Hilfszüge, Vorwärts</item>
+  </string-array>
+  <string-array name="surveyStationsN">
+     <item name="no">Keine</item>
+     <item name="for">Hilfszüge, Vorwärtsmessung</item>
+     <item name="back">Hilfszüge, Rückwärtsmessung</item>
+     <item name="backsight">Rückwärts, Hilfszüge, Vorwärts</item>
+  </string-array>
+  <string-array name="surveyStationsA">
+     <item name="no">Keine</item>
+     <item name="for">Hilfszüge, Vorwärtsmessung</item>
+     <item name="back">Hilfszüge, Rückwärtsmessung</item>
+     <item name="backsight">Rückwärts, Hilfszüge, Vorwärts</item>
+     <item name="tripod">Stativ (wie oben aber mit Zwischenstation)</item>
+  </string-array>
+  <string-array name="surveyStationsE">
+     <item name="no">Keine</item>
+     <item name="for">Hilfszüge, Vorwärtsmessung</item>
+     <item name="back">Hilfszüge, Rückwärtsmessung</item>
+     <item name="backsight">Rückwärts, Hilfszüge, Vorwärts</item>
+     <item name="tripod">Stativ (wie oben aber mit Zwischenstation)</item>
+     <item name="anomaly">Magn. anomaly</item>
+     <item name="for2">Vorwärtsmessung, Hilfszüge</item>
+     <item name="back2">Rückwärtsmessung, Hilfszüge</item>
   </string-array>
 
   <string-array name="pickerType">

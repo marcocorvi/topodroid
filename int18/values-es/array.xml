@@ -111,16 +111,45 @@
      <item name="Insecure">Inestable</item>
   </string-array>
 
-    <string-array name="surveyStations">
+  <string-array name="surveyStations">
      <item name="no">Nada</item>
      <item name="for">Radiales origen + visual directa</item>
      <item name="back">Radiales destino + visual inversa</item>
+     <item name="backsight">Directa e inversa con verificación</item>
+     <item name="tripod">Teodolito o Tripode</item>
+     <item name="anomaly">Magn. anomaly</item>
      <item name="for2">Visual directa + radiales origen</item>
      <item name="back2">Visual inversa + radiales destino</item>
-     <item name="backsight">Directa e inversa con verificación</item>
-     <item name="anomaly">Magn. anomaly</item>
-     <item name="tripod">Teodolito o Tripode</item>
      <item name="toporobot">TopoRobot</item>
+  </string-array>
+  <string-array name="surveyStationsB">
+     <item name="no">Nada</item>
+     <item name="for">Radiales origen + visual directa</item>
+     <item name="back">Radiales destino + visual inversa</item>
+     <item name="backsight">Directa e inversa con verificación</item>
+  </string-array>
+  <string-array name="surveyStationsN">
+     <item name="no">Nada</item>
+     <item name="for">Radiales origen + visual directa</item>
+     <item name="back">Radiales destino + visual inversa</item>
+     <item name="backsight">Directa e inversa con verificación</item>
+  </string-array>
+  <string-array name="surveyStationsA">
+     <item name="no">Nada</item>
+     <item name="for">Radiales origen + visual directa</item>
+     <item name="back">Radiales destino + visual inversa</item>
+     <item name="backsight">Directa e inversa con verificación</item>
+     <item name="tripod">Teodolito o Tripode</item>
+  </string-array>
+  <string-array name="surveyStationsE">
+     <item name="no">Nada</item>
+     <item name="for">Radiales origen + visual directa</item>
+     <item name="back">Radiales destino + visual inversa</item>
+     <item name="backsight">Directa e inversa con verificación</item>
+     <item name="tripod">Teodolito o Tripode</item>
+     <item name="anomaly">Magn. anomaly</item>
+     <item name="for2">Visual directa + radiales origen</item>
+     <item name="back2">Visual inversa + radiales destino</item>
   </string-array>
 
   <string-array name="pickerType">

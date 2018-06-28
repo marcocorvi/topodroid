@@ -349,8 +349,6 @@
      <item name="back">Splays, backward leg</item>
      <item name="backsight">Backsight</item>
      <item name="tripod">Tripod</item>
-     <item name="for2">Forward leg, splays</item>
-     <item name="back2">Backward leg, splays</item>
   </string-array>
   <string-array name="surveyStationsE">
      <item name="no">No</item>

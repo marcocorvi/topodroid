@@ -142,12 +142,41 @@
      <item name="no">Nincs</item>
      <item name="for">Segédpontok, előremérés</item>
      <item name="back">Segédpontok, hátrafelémérés</item>
+     <item name="backsight">Visszamérés</item>
+     <item name="tripod">Háromláb</item>
+     <item name="anomaly">Magn. anomaly</item>
      <item name="for2">Előremérés, segédpontok</item>
      <item name="back2">Hátrafelé mérés, segédpontok</item>
-     <item name="backsight">Visszamérés</item>
-     <item name="anomaly">Magn. anomaly</item>
-     <item name="tripod">Háromláb</item>
      <item name="toporobot">TopoRobot</item>
+  </string-array>
+  <string-array name="surveyStationsB">
+     <item name="no">Nincs</item>
+     <item name="for">Segédpontok, előremérés</item>
+     <item name="back">Segédpontok, hátrafelémérés</item>
+     <item name="backsight">Visszamérés</item>
+  </string-array>
+  <string-array name="surveyStationsN">
+     <item name="no">Nincs</item>
+     <item name="for">Segédpontok, előremérés</item>
+     <item name="back">Segédpontok, hátrafelémérés</item>
+     <item name="backsight">Visszamérés</item>
+  </string-array>
+  <string-array name="surveyStationsA">
+     <item name="no">Nincs</item>
+     <item name="for">Segédpontok, előremérés</item>
+     <item name="back">Segédpontok, hátrafelémérés</item>
+     <item name="backsight">Visszamérés</item>
+     <item name="tripod">Háromláb</item>
+  </string-array>
+  <string-array name="surveyStationsE">
+     <item name="no">Nincs</item>
+     <item name="for">Segédpontok, előremérés</item>
+     <item name="back">Segédpontok, hátrafelémérés</item>
+     <item name="backsight">Visszamérés</item>
+     <item name="tripod">Háromláb</item>
+     <item name="anomaly">Magn. anomaly</item>
+     <item name="for2">Előremérés, segédpontok</item>
+     <item name="back2">Hátrafelé mérés, segédpontok</item>
   </string-array>
 
   <string-array name="pickerType">
