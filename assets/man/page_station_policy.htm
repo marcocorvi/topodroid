@@ -4,12 +4,12 @@
 
 When you download data TopoDroid can automatically assign them station names. A repeated measurement is considered a leg shot, the others are splay shots.  If you stick to a convention taking measurements TopoDroid automatic station naming can be very handy. TopoDroid supports a number of conventions to automatically assign stations to shots. You can select the one that fits your habits through the settings.
 <ol>
-<li><b>splays+forshot</b>. At the "From" station: you take splays first and then forward leg shot(s). This is the default convention.</li>
+<li><b>splays+foreshot</b>. At the "From" station: you take splays first and then forward leg shot(s). This is the default convention.</li>
 <li><b>splays+backshot</b>. At the "To" station: you take splays first and then backward leg shot(s)</li>
 <li><b>Backsight</b>.</li>
 <li><b>tripod</b></li>
 <li><b>magnetic anomaly</b> compensation</li>
-<li><b>forshot+splays</b>. At the "From" station: you take the forward leg shot(s) first, and then the splays</li>
+<li><b>foreshot+splays</b>. At the "From" station: you take the forward leg shot(s) first, and then the splays</li>
 <li><b>backshot+splays</b>. At the "To" station: you take backward leg shot(s) first and then splays</li>
 <li><b>TopoRobot</b></li>
 </ol><br><p>
@@ -54,5 +54,6 @@ Certain station naming policy are disabled at high activity levels:
 <li>"Magnetic anomaly" requires "expert" level</li>
 <li>"TopoRobot" requires "tester" level</li>
 </ul><br>
-Reducing the activity level when one of these is active, automatically set the station policy to the default policy (splays + forward shot).<br><p>
+Reducing the activity level when one of these is active, automatically set the station policy to the default policy (splays + foreshot).
+The policy is automatically reinstated again if the activity level is raised to the required value or above.<br><p>
 </body></html>
