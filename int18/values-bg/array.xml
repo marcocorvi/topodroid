@@ -124,7 +124,8 @@
      <item name="back">Странични, обратна отсечка</item>
      <item name="for2">Права отсечка, странични</item>
      <item name="back2">Обратна отсечка, странични</item>
-     <item name="anomaly">Обратна отсечка, странични, права</item>
+     <item name="backsight">Обратна отсечка, странични, права</item>
+     <item name="anomaly">Magn. anomaly</item>
      <item name="tripod">Статив</item>
      <item name="toporobot">TopoRobot</item>
   </string-array>

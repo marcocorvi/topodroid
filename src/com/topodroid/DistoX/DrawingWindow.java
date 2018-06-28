@@ -740,7 +740,7 @@ public class DrawingWindow extends ItemDrawer
           dpath.setPathPaint( BrushManager.fixedOrangePaint );
         } else if ( mApp.mShotWindow != null && mApp.mShotWindow.isBlockMagneticBad( blk ) ) {
           dpath.setPathPaint( BrushManager.fixedRedPaint );
-        } else if ( TDSetting.isConnectionModeBatch() && blk.isRecent( System.currentTimeMillis()/1000 ) ) {
+        } else if ( blk.isRecent( ) ) { // if ( TDSetting.isConnectionModeBatch() && blk.isTimeRecent( System.currentTimeMillis()/1000 ) )
           dpath.setPathPaint( BrushManager.fixedBluePaint );
 	}
       }
@@ -2922,24 +2922,24 @@ public class DrawingWindow extends ItemDrawer
             DrawingPath path = hot.mItem;
     	    if ( path.mType == DrawingPath.DRAWING_PATH_FIXED ) {
     	      DBlock blk = path.mBlock;
-    	      float ms = mZoom * TopoDroidApp.mDisplayWidth/(16*DrawingUtil.SCALE_FIX); // TDSetting.mMinShift / 2;
+    	      float msz = TopoDroidApp.mDisplayWidth/(16*DrawingUtil.SCALE_FIX); // TDSetting.mMinShift / 2;
     	      if ( mLandscape ) {
     	        float y = (path.y1 + path.y2)/2; // midpoin (scene)
-    	        if ( Math.abs( y - xs ) < ms ) {
+    	        if ( Math.abs( y - xs ) < msz ) {
     	          float x = (path.x1 + path.x2)/2; // midpoin (scene)
     	          // Log.v("DistoX", "blk scene " + x + " " + y + " tap " + xs + " " + ys);
-    	          if ( Math.abs( x + ys ) < 2*ms ) {
-    	            int extend = (-ys + ms < x)? -1 : (-ys - ms > x)? 1 : 0;
+    	          if ( Math.abs( x + ys ) < 2*msz ) {
+    	            int extend = (-ys + msz < x)? -1 : (-ys - msz > x)? 1 : 0;
                     updateBlockExtend( blk, extend ); // equal extend checked by the method
     	          }
     	        }
     	      } else {
     	        float y = (path.y1 + path.y2)/2; // midpoin (scene)
-    	        if ( Math.abs( y - ys ) < ms ) {
+    	        if ( Math.abs( y - ys ) < msz ) {
     	          float x = (path.x1 + path.x2)/2; // midpoin (scene)
-    	          // Log.v("DistoX", "blk scene " + path.x1 + " " + path.x2 + " x " + x + " tap " + xs + " ms " + ms);
-    	          if ( Math.abs( x - xs ) < 2*ms ) {
-    	            int extend = (xs + ms < x)? -1 : (xs - ms > x)? 1 : 0;
+    	          // Log.v("DistoX", "blk scene " + path.x1 + " " + path.x2 + " x " + x + " tap " + xs + " msz " + msz + " zoom " + mZoom );
+    	          if ( Math.abs( x - xs ) < 20*msz ) {
+    	            int extend = (xs + msz < x)? -1 : (xs - msz > x)? 1 : 0;
                     updateBlockExtend( blk, extend ); // equal extend checked by the method
     	          }
     	        }
@@ -5004,6 +5004,18 @@ public class DrawingWindow extends ItemDrawer
     zoomFit( b );
   }
 
+  void centerAtStation( String station )
+  {
+    NumStation st = mNum.getStation( station );
+    if ( st == null ) {
+      TDToast.make( mActivity, R.string.missing_station );
+    } else {
+      moveTo( mPlot1.type, station );
+      moveTo( mPlot2.type, station );
+      mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
+    }
+  }
+
   void setOrientation( int orientation )
   {
     boolean landscape = (orientation == PlotInfo.ORIENTATION_LANDSCAPE);
@@ -5064,7 +5076,7 @@ public class DrawingWindow extends ItemDrawer
         } else {
           ( new PlotRecoverDialog( mActivity, this, mFullName3, mType ) ).show();
         }
-      } else if ( TDLevel.overNormal && p++ == pos ) { // ZOOM_FIT
+      } else if ( TDLevel.overNormal && p++ == pos ) { // ZOOM_FIT / ORIENTATION
 	if ( TDLevel.overExpert ) {
           ( new PlotZoomFitDialog( mActivity, this ) ).show();
 	} else {

@@ -468,7 +468,11 @@
     <string name="saturated_coeffs">ATTENTION : coefficients d\'étalonnage saturés</string>
     <string name="out_of_memory">ATTENTION : mémoire pleine !</string>
     <string name="disk_io_error">PANNE CRITIQUE : erreur écriture lecture disque !</string>
-    <!-- TODO string name="toporobot_warning">WARNING: TopoRobot policy is experimental !</string -->
+    
+    <!-- TODO string name="toporobot_warning">TopoRobot policy is exterimental !</string -->
+    <!-- TODO string name="anomaly_warning">Magnatic anomaly compensation is expert !</string -->
+    <!-- TODO string name="tripod_warning">Tripod policy is advanced !</string -->
+
     <string name="cannot_rename">Impossible de renommer le relevé</string>
     <string name="declination">Déclinaison magnétique</string>
     <string name="description">Description</string>
@@ -594,6 +598,7 @@
     <string name="button_search"    >Chercher    </string>
     <string name="button_merge"     >Fusionner     </string>
     <string name="button_split"     >Diviser     </string>
+    <!-- TODO string name="button_station"   >Center at</string -->
     <string name="button_store"     >STOCKER     </string>
     <!-- UNUSED string name="button_start"     >DEMARRER</string -->
     <!-- UNUSED string name="button_stop"      >ARRETER</string -->
@@ -926,6 +931,8 @@
   <string name="pref_bezier_step_summary">Distance entre les points lors de l\'export ligne [m]</string>
   <string name="pref_leg_shots_title">Nombre mini. visées</string>
   <string name="pref_leg_shots_summary">Nombre minimum de visées successives pour identifier un cheminement</string>
+  <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
+  <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent</string -->
   <string name="pref_station_prefix_title">Préfixe station EcSurvey</string>
   <string name="pref_station_prefix_summary">Export préfixe station cSurvey</string>
   <string name="pref_compass_splays_title">Visées latérales Compass</string>
@@ -1079,8 +1086,8 @@
   <string name="pref_backshot_summary">DistoX en mode de visées de cheminement inverse</string>
   <string name="pref_prev_next_title">Icônes Précédent/Suivant</string>
   <string name="pref_prev_next_summary">Boutons Précédent/Suivant dans la boîte de dialogue de nouvelle visée</string>
-  <string name="pref_mag_anomaly_title">Anomalie magnétique</string>
-  <string name="pref_mag_anomaly_summary">Compensation anomalie magnétique locale</string>
+  <!-- UNUSED string name="pref_mag_anomaly_title">Anomalie magnétique</string -->
+  <!-- UNUSED string name="pref_mag_anomaly_summary">Compensation anomalie magnétique locale</string -->
   <string name="pref_azimuth_manual_title">Définition d\'"extension" manuelle</string>
   <string name="pref_azimuth_manual_summary">Définir manuellement les extensions D/G des visées</string>
 

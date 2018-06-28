@@ -466,7 +466,11 @@
     <string name="saturated_coeffs">ALERTA: coeficientes de calibração saturados</string>
     <string name="out_of_memory">ALERTA: sem memória!</string>
     <string name="disk_io_error">CRÍTICO: erro de E/S no disco!</string>
-    <!-- TODO string name="toporobot_warning">WARNING: TopoRobot policy is experimental !</string -->
+    
+    <!-- TODO string name="toporobot_warning">TopoRobot policy is exterimental !</string -->
+    <!-- TODO string name="anomaly_warning">Magnatic anomaly compensation is expert !</string -->
+    <!-- TODO string name="tripod_warning">Tripod policy is advanced !</string -->
+
     <string name="cannot_rename">Não é possível renomear a topo</string>
     <string name="declination">declinação magnética</string>
     <string name="description">descrição</string>
@@ -593,6 +597,7 @@
     <string name="button_search"    >Pesquisar </string>
     <string name="button_merge"     >Mesclar   </string>
     <string name="button_split"     >Dividir   </string>
+    <!-- TODO string name="button_station"   >Center at</string -->
     <string name="button_store"     >Armazenar </string>
     <!-- UNUSED string name="button_start"     >Iniciar</string -->
     <!-- UNUSED string name="button_stop"      >Parar</string -->
@@ -930,6 +935,8 @@
   <string name="pref_bezier_step_summary">Distância entre pontos em uma linha exportada [m]</string>
   <string name="pref_leg_shots_title">Mínimo medições por visada</string>
   <string name="pref_leg_shots_summary">Quantidade mínimo de medições para uma visada</string>
+  <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
+  <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent</string -->
   <string name="pref_station_prefix_title">Prefixos bases Compass</string>
   <string name="pref_station_prefix_summary">Exportar prefixo de bases (Compass)</string>
   <string name="pref_compass_splays_title">Medidas auxiliares Compass</string>
@@ -1081,8 +1088,8 @@
   <string name="pref_backshot_summary">DistoX em modo de contramedida</string>
   <string name="pref_prev_next_title">Botões Ant/Próx</string>
   <string name="pref_prev_next_summary">Botões Ant/Próx na janela de medição</string>
-  <string name="pref_mag_anomaly_title">Anomalia magnética</string>
-  <string name="pref_mag_anomaly_summary">Compensar anomalia magnética local</string>
+  <!-- UNUSED string name="pref_mag_anomaly_title">Anomalia magnética</string -->
+  <!-- UNUSED string name="pref_mag_anomaly_summary">Compensar anomalia magnética local</string -->
   <string name="pref_azimuth_manual_title">Ref. fixa retif. perfil</string>
   <string name="pref_azimuth_manual_summary">Referência fixa para retificação de perfil</string>
 

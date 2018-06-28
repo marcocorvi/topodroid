@@ -478,7 +478,11 @@
     <string name="saturated_coeffs">WARNUNG: Kalibrierungs-Koeffizienten nicht berechenbar</string>
     <string name="out_of_memory">WARNUNG: Zuwenig Arbeitsspeicher!</string>
     <string name="disk_io_error">FEHLER: Lese-/Schreibfehler!</string>
-    <!-- TODO string name="toporobot_warning">WARNING: TopoRobot policy is experimental !</string -->
+    
+    <!-- TODO string name="toporobot_warning">TopoRobot policy is exterimental !</string -->
+    <!-- TODO string name="anomaly_warning">Magnatic anomaly compensation is expert !</string -->
+    <!-- TODO string name="tripod_warning">Tripod policy is advanced !</string -->
+
     <string name="cannot_rename">Kann Vermessung nicht umbenennen</string>
     <string name="declination">Magnetische Deklination</string>
     <string name="description">Beschreibung</string>
@@ -611,6 +615,7 @@
     <string name="button_search"    >Suche    </string>
     <string name="button_merge"     >Zusammenführen     </string>
     <string name="button_split"     >Aufteilen     </string>
+    <!-- TODO string name="button_station"   >Center at</string -->
     <string name="button_store"     >Speichern</string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
@@ -957,6 +962,8 @@
   <string name="pref_bezier_step_summary">Abstand zwischen Punkten auf exportierter Linie [m]</string>
   <string name="pref_leg_shots_title">Min. Messungen für Messzüge</string>
   <string name="pref_leg_shots_summary">Minimale Anzahl Messungen zur Erkennung als Messzug</string>
+  <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
+  <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent</string -->
   <string name="pref_station_prefix_title">Exportiere Messpunkt Prefix</string>
   <string name="pref_station_prefix_summary">Exportiere Messpunkt Prefix (compass)</string>
   <string name="pref_compass_splays_title">Exportiere Hilfszüge</string>
@@ -1108,8 +1115,8 @@
   <string name="pref_backshot_summary">DistoX im Rückmessungs-Modus</string>
   <string name="pref_prev_next_title">Vorherige/Nächste Messtrecke</string>
   <string name="pref_prev_next_summary">Buttons anzeigen im Messdialog</string>
-  <string name="pref_mag_anomaly_title">Magnetische Abweichung</string>
-  <string name="pref_mag_anomaly_summary">Kompensiere lokale magnetische Abweichung</string>
+  <!-- UNUSED string name="pref_mag_anomaly_title">Magnetische Abweichung</string -->
+  <!-- UNUSED string name="pref_mag_anomaly_summary">Kompensiere lokale magnetische Abweichung</string -->
   <string name="pref_azimuth_manual_title">Seitenriss-Azimut wählbar</string>
   <string name="pref_azimuth_manual_summary">Azimut des Seitenrisses wählbar</string>
 

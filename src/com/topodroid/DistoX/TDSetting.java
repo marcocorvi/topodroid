@@ -17,16 +17,18 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-// import android.util.Log;
+import android.util.Log;
 
 class TDSetting
 {
+  // must agree with res/values/array.xml surveyStationsValue
   private static int SURVEY_STATION_ZERO      = 0;
   private static int SURVEY_STATION_FOREWARD  = 1;
   // private static int SURVEY_STATION_BACKWARD  = 2;
   private static int SURVEY_STATION_BACKSIGHT = 5;
   private static int SURVEY_STATION_TRIPOD    = 6;
   private static int SURVEY_STATION_TOPOROBOT = 7;
+  private static int SURVEY_STATION_ANOMALY   = 8;
 
   static private String defaultTextSize = "16";
   static private String defaultButtonSize = "1";
@@ -124,6 +126,7 @@ class TDSetting
     "DISTOX_MIN_LEG_LENGTH",      // minimum length of a shot data
     "DISTOX_BACKSHOT",            // using DistoX in backshot mode
     "DISTOX_NO_CURSOR",           // no cursor for custom keyboard
+    "DISTOX_RECENT_TIMEOUT",      // recent block timeout
 
     "DISTOX_UNIT_LOCATION",       // units of location [ddmmss dec.deg]
     "DISTOX_CRS",                 // default C.R.S.
@@ -199,7 +202,7 @@ class TDSetting
 
     "DISTOX_SPLAY_VERT_THRS",    // splays with clino over mSplayVertThrs are not displayed in plan view
     "DISTOX_BACKSIGHT",          // whether to add backsight fields in manual shot input dialog
-    "DISTOX_MAG_ANOMALY",        // whether to compensate magnetic anomaly
+    // "DISTOX_MAG_ANOMALY",        // whether to compensate magnetic anomaly
     "DISTOX_DASH_SPLAY",         // whether dash-splay are coherent between plan and profile
     "DISTOX_VERT_SPLAY",         // splays with clino over this are shown with dashed/dotted line
     "DISTOX_HORIZ_SPLAY",        // splays off-azimuth over this are shown with dashed/dotted line
@@ -392,8 +395,10 @@ class TDSetting
   static boolean mSvgLineDirection = false;
   static boolean mKmlStations   = true;
   static boolean mKmlSplays     = false;
+  static int mRecentTimeout     = 30; // 30 seconds
 
   static int     mSurveyStations  = SURVEY_STATION_FOREWARD;     // automatic survey stations: 0 no, 1 forward-after-splay, 2 backward-after-splay
+  static int     mSavedSurveyStations  = 0;  
   static boolean mShotAfterSplays = true;  //                            3 forward-before-splay, 4 backward-before-splay
   static boolean isSurveyForward()  { return (mSurveyStations%2) == SURVEY_STATION_FOREWARD; }
   static boolean isSurveyBackward() { return mSurveyStations>0 && (mSurveyStations%2) == SURVEY_STATION_ZERO; }
@@ -408,9 +413,9 @@ class TDSetting
   static int     mMinNrLegShots = 3;
   static String  mInitStation   = "0";
   static boolean mBacksightInput = false;   // whether to add backsight fields in shot anual-input dialog
-  static boolean mBacksightShot = false;    // backsight shooting policy
-  static boolean mTripodShot    = false;    // tripod shooting policy
-  static boolean mTRobotShot    = false;    // TopoRobot shooting policy
+  private static boolean mBacksightShot = false;    // backsight shooting policy
+  private static boolean mTripodShot = false;    // tripod shooting policy
+  private static boolean mTRobotShot = false;    // TopoRobot shooting policy
   private static boolean mMagAnomaly = false; // local magnetic anomaly survey, tested with doMagAnomaly
   static float   mSplayVertThrs = 80;
   static boolean mAzimuthManual = false;    // whether to manually set extend / or use reference azimuth
@@ -555,29 +560,41 @@ class TDSetting
     } catch ( NumberFormatException e ) { }
   }
 
-  static private void setMagAnomaly( SharedPreferences prefs, boolean val )
-  {
-    mMagAnomaly = val;
-    if ( mMagAnomaly ) {
-      if ( ! TDLevel.overExpert ) { 
-        setPreference( prefs, "DISTOX_MAG_ANOMALY", false );
-      } else if ( mSurveyStations > 0 ) {
-        setPreference( prefs, "DISTOX_SURVEY_STATION", "5" ); // SURVEY_STATION_BACKSIGHT
-        mBacksightShot   = true;
-        mTripodShot      = false;
-        mSurveyStations  = SURVEY_STATION_FOREWARD;
-        mShotAfterSplays = true;
-      }
-    }
-  }
+  // called on changed preferences
+  // static private void setMagAnomaly( SharedPreferences prefs, boolean val )
+  // {
+  //   mMagAnomaly = val;
+  //   if ( mMagAnomaly ) {
+  //     int policy = mSavedSurveyStations;
+  //     if ( ! TDLevel.overExpert ) { 
+  //       setPreference( prefs, "DISTOX_MAG_ANOMALY", false );
+  //     } else if ( mSurveyStations > 0 ) {
+  //       setPreference( prefs, "DISTOX_SURVEY_STATION", "5" ); // SURVEY_STATION_BACKSIGHT This change saved policy
+  //       mBacksightShot   = true;
+  //       mTripodShot      = false;
+  //       mSurveyStations  = SURVEY_STATION_FOREWARD;
+  //       mShotAfterSplays = true;
+  //     }
+  //     mSavedSurveyStations = policy;
+  //   } else {
+  //     setPreference( prefs, "DISTOX_SURVEY_STATION", Integer.toString( mSavedSurveyStations ) );
+  //   }
+  //   // FIXME this one should tell the mPrefActivitySurvey to reload preferences
+  //   //       however this restarts the activity which is not good
+  //   // if ( TopoDroidApp.mPrefActivitySurvey != null ) TopoDroidApp.mPrefActivitySurvey.reloadPreferences();
+  //   //
+  //   // Log.v("DistoX", "SET Policy " + mSurveyStations + " " + mSavedSurveyStations + " mag anomlay " + mMagAnomaly );
+  // }
 
-  static private void clearMagAnomaly( SharedPreferences prefs ) 
-  {
-    if ( mMagAnomaly ) {
-      mMagAnomaly = false;
-      setPreference( prefs, "DISTOX_MAG_ANOMALY", false );
-    }
-  }
+  // // called only by parseSurveyStations
+  // static private void clearMagAnomaly( SharedPreferences prefs ) 
+  // {
+  //   if ( mMagAnomaly ) {
+  //     mMagAnomaly = false;
+  //     // setPreference( prefs, "DISTOX_MAG_ANOMALY", false );
+  //   }
+  //   // Log.v("DistoX", "CLEAR Policy " + mSurveyStations + " " + mSavedSurveyStations + " mag anomlay " + mMagAnomaly );
+  // }
 
   // backgroind color RGB_565
   private static void setBitmapBgcolor( String color )
@@ -743,7 +760,7 @@ class TDSetting
     int k = 0;
 
     int level = Integer.parseInt( prefs.getString( key[k++], "1" ) ); // DISTOX_EXTRA_BUTTONS choice: 0, 1, 2, 3
-    setActivityBooleans( app, level );
+    setActivityBooleans( prefs, app, level );
 
     setSizeButtons( app, tryInt( prefs, key[k++], defaultButtonSize ) ); // DISTOX_SIZE_BUTTONS
     setTextSize( app, tryInt( prefs, key[k++], defaultTextSize ) );// DISTOX_TEXT_SIZE
@@ -793,7 +810,7 @@ class TDSetting
     mExtendThr     = tryFloat( prefs, key[k++], "10"   ); // DISTOX_EXTEND_THR2
     mVThreshold    = tryFloat( prefs, key[k++], "80"   ); // DISTOX_VTHRESHOLD
 
-    parseSurveyStations( prefs, prefs.getString( key[k++], "1" ) ); // DISTOX_SURVEY_STATIONS
+    parseSurveyStations( prefs, app, prefs.getString( key[k++], "1" ) ); // DISTOX_SURVEY_STATIONS
     mDataBackup    = prefs.getBoolean( key[k++], false ); // DISTOX_DATA_BACKUP
 
     if ( prefs.getString( key[k++], UNIT_LENGTH ).equals(UNIT_LENGTH) ) {
@@ -824,6 +841,7 @@ class TDSetting
     mMinLegLength  = tryFloat( prefs, key[k++], "0.5" );    // DISTOX_MIN_LEG_LENGTH
     mDistoXBackshot= prefs.getBoolean( key[k++], false );   // DISTOX_BACKSHOT
     mNoCursor      = prefs.getBoolean( key[k++], false  );  // DISTOX_NO_CURSOR
+    mRecentTimeout = tryInt(   prefs, key[k++], "30" );     // DISTOX_RECENT_TIMEOUT
 
     mUnitLocation  = prefs.getString( key[k++], "ddmmss" ).equals("ddmmss") ? TDConst.DDMMSS  // choice
                                                                             : TDConst.DEGREE;
@@ -905,7 +923,7 @@ class TDSetting
     mSplayVertThrs     = tryFloat( prefs, key[k++], "80"  );  // DISTOX_SPLAY_VERT_THRS
 
     mBacksightInput = prefs.getBoolean( key[k++], false );   // DISTOX_BACKSIGHT
-    setMagAnomaly( prefs, prefs.getBoolean( key[k++], false ) ); // DISTOX_MAG_ANOMALY
+    // setMagAnomaly( prefs, prefs.getBoolean( key[k++], false ) ); // DISTOX_MAG_ANOMALY
 
     mDashSplay = prefs.getBoolean( key[k++], true );              // DISTOX_DASH_SPLAY
     mVertSplay = tryFloat( prefs, key[k++], "50" );               // DISTOX_VERT_SPLAY
@@ -963,15 +981,18 @@ class TDSetting
     mAlgoMinDelta     = tryFloat( prefs, key[k++], "1.0" );   // DISTOX_ALGO_MIN_DELTA
   }
 
-  static private void setActivityBooleans( Context ctx, int level )
+  static private void setActivityBooleans( SharedPreferences prefs, Context ctx, int level )
   {
+    if (    ( doMagAnomaly() && level < TDLevel.EXPERT )
+         || ( doTopoRobot()  && level < TDLevel.TESTER )
+         || ( doTripod()     && level < TDLevel.ADVANCED ) ) {
+      setPreference( prefs, "DISTOX_SURVEY_STATION", "1" );
+    }
     TDLevel.setLevel( ctx, level );
     // if ( ! TDLevel.overExpert ) {
     //   mMagAnomaly = false; // magnetic anomaly compensation requires level overExpert
     // }
   }
-
-  static boolean doMagAnomaly() { return mMagAnomaly && TDLevel.overExpert; }
 
   static void checkPreference( SharedPreferences prefs, String k, MainWindow main_window, TopoDroidApp app )
   {
@@ -984,7 +1005,7 @@ class TDSetting
     if ( k.equals( key[ nk++ ] ) ) {                     // DISTOX_EXTRA_BUTTONS
       int level = tryInt( prefs, k, "1" );
       if ( level != TDLevel.mLevel ) {
-        setActivityBooleans( app, level );
+        setActivityBooleans( prefs, app, level );
         if ( main_window != null ) {
           main_window.resetButtonBar();
           // FIXME TOOLBAR main_window.resetToolbar();
@@ -1063,7 +1084,7 @@ class TDSetting
     } else if ( k.equals( key[ nk++ ] ) ) {
       mVThreshold    = tryFloat( prefs, k, "80" );   // DISTOX_VTHRESHOLD
     } else if ( k.equals( key[ nk++ ] ) ) {
-      parseSurveyStations( prefs, prefs.getString( k, "1" ) ); // DISTOX_SURVEY_STATION
+      parseSurveyStations( prefs, app, prefs.getString( k, "1" ) ); // DISTOX_SURVEY_STATION
     } else if ( k.equals( key[ nk++ ] ) ) {
       mDataBackup = prefs.getBoolean( k, false );      // DISTOX_DATA_BACKUP
     } else if ( k.equals( key[ nk++ ] ) ) {
@@ -1107,6 +1128,8 @@ class TDSetting
       mDistoXBackshot = prefs.getBoolean( k, false );
     } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_NO_CURSOR
       mNoCursor = prefs.getBoolean( k, false );
+    } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_RECENT_TIMEOUT
+      mRecentTimeout = tryInt(   prefs, k, "30" );
     } else if ( k.equals( key[ nk++ ] ) ) {
       mUnitLocation  = prefs.getString( k, "ddmmss" ).equals("ddmmss") ? TDConst.DDMMSS
                                                                        : TDConst.DEGREE;
@@ -1267,8 +1290,8 @@ class TDSetting
       mSplayVertThrs = tryFloat( prefs, k, "80" );
     } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_BACKSIGHT
       mBacksightInput = prefs.getBoolean( k, false );
-    } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_MAG_ANOMALY
-      setMagAnomaly( prefs, prefs.getBoolean( k, false ) );
+    // } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_MAG_ANOMALY
+    //   setMagAnomaly( prefs, prefs.getBoolean( k, false ) );
     } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_DASH_SPLAY
       mDashSplay = prefs.getBoolean( k, true );      
     } else if ( k.equals( key[ nk++ ] ) ) {
@@ -1385,40 +1408,94 @@ class TDSetting
     }
   }
 
-  private static void parseSurveyStations( SharedPreferences prefs, String str ) 
+  private static void parseSurveyStations( SharedPreferences prefs, TopoDroidApp app, String str ) 
   {
+    int policy = SURVEY_STATION_FOREWARD;
     try {
-      mSurveyStations = Integer.parseInt( str );
+      policy = Integer.parseInt( str );
     } catch ( NumberFormatException e ) {
-      mSurveyStations = SURVEY_STATION_FOREWARD;
+      policy = SURVEY_STATION_FOREWARD;
     }
-    // Log.v("DistoX", "survey stations " + mSurveyStations + " <" + str + ">" );
-    /* defaults */
-    mTRobotShot      = false;
-    mBacksightShot   = false;
-    mTripodShot      = false;
-    mShotAfterSplays = true;
-    mTitleColor      = TDColor.TITLE_NORMAL;
-    if ( mSurveyStations == SURVEY_STATION_TOPOROBOT ) {
-      mTRobotShot = true;
-      mSurveyStations  = SURVEY_STATION_FOREWARD;
-      mTitleColor = TDColor.TITLE_TOPOROBOT;
-      // FIXME TDToast.make( mContext, R.string.toporobot_warning );
-    } else if ( mSurveyStations == SURVEY_STATION_TRIPOD ) {
-      mTripodShot = true;
-      mSurveyStations  = SURVEY_STATION_FOREWARD;
-      mTitleColor = TDColor.TITLE_TRIPOD;
-    } else if ( mSurveyStations == SURVEY_STATION_BACKSIGHT ) {
-      mBacksightShot = true;
-      mSurveyStations  = SURVEY_STATION_FOREWARD;
-      mTitleColor = TDColor.TITLE_BACKSIGHT;
+    if ( setSurveyStations( app, policy ) ) {
+      mSavedSurveyStations = policy;
     } else {
+      // preference is reset to the last saved policy
+      // FIXME this does not show up in the interface unless the activity is restarted
+      setPreference( prefs, "DISTOX_SURVEY_STATION", Integer.toString( mSavedSurveyStations ) );
+      if ( TopoDroidApp.mPrefActivitySurvey != null ) TopoDroidApp.mPrefActivitySurvey.reloadPreferences();
+    }
+    // if ( ! mBacksightShot ) clearMagAnomaly( prefs );
+    // Log.v("DistoX", "PARSE Policy " + mSurveyStations + " " + mSavedSurveyStations + " mag anomlay " + mMagAnomaly );
+  }
+
+  // the check on the level should not be neceessary
+  static boolean doMagAnomaly() { return mMagAnomaly && TDLevel.overAdvanced; }
+  static boolean doTopoRobot()  { return mTRobotShot && TDLevel.overExpert; }
+  static boolean doTripod()     { return mTripodShot && TDLevel.overNormal; }
+  static boolean doBacksight()  { return mBacksightShot; }
+
+  private static boolean setSurveyStations( TopoDroidApp app, int policy )
+  {
+    // Log.v("DistoX", "set survey stations " + mSurveyStations );
+    if ( policy == SURVEY_STATION_TOPOROBOT ) {
+      if ( TDLevel.overExpert ) {
+        mTRobotShot      = true;
+        mBacksightShot   = false;
+        mTripodShot      = false;
+        mShotAfterSplays = true;
+        mMagAnomaly      = false;
+        mSurveyStations  = SURVEY_STATION_FOREWARD;
+        mTitleColor = TDColor.TITLE_TOPOROBOT;
+      } else {
+        TDToast.make( app, R.string.toporobot_warning );
+        return false;
+      }
+    } else if ( policy == SURVEY_STATION_TRIPOD ) {
+      if ( TDLevel.overNormal ) {
+        mTRobotShot      = false;
+        mBacksightShot   = false;
+        mTripodShot      = true;
+        mShotAfterSplays = true;
+        mMagAnomaly      = false;
+        mSurveyStations  = SURVEY_STATION_FOREWARD;
+        mTitleColor = TDColor.TITLE_TRIPOD;
+      } else {
+        TDToast.make( app, R.string.tripod_warning );
+        return false;
+      }
+    } else if ( policy == SURVEY_STATION_BACKSIGHT ) {
+      // if ( TDLevel.overNothing ) {
+        mTRobotShot      = false;
+        mBacksightShot   = true;
+        mTripodShot      = false;
+        mShotAfterSplays = true;
+        mMagAnomaly      = false;
+        mSurveyStations  = SURVEY_STATION_FOREWARD;
+        mTitleColor = TDColor.TITLE_BACKSIGHT;
+      // } else {
+      //   TDToast.make( app, R.string.backsight_warning );
+      // }
+    } else if ( policy == SURVEY_STATION_ANOMALY ) {
+      if ( TDLevel.overAdvanced ) {
+        mTRobotShot      = false;
+        mBacksightShot   = true;
+        mTripodShot      = false;
+        mShotAfterSplays = true;
+        mMagAnomaly      = true;
+        mSurveyStations  = SURVEY_STATION_FOREWARD;
+        mTitleColor = TDColor.TITLE_ANOMALY;
+      } else {
+        TDToast.make( app, R.string.anomaly_warning );
+	return false;
+      }
+    } else {
+      mSurveyStations = policy;
       mShotAfterSplays = ( mSurveyStations <= 2 );
       if ( mSurveyStations > 2 ) mSurveyStations -= 2;
       if ( mSurveyStations == SURVEY_STATION_FOREWARD ) mTitleColor = TDColor.TITLE_BACKSHOT;
     }
-    if ( ! mBacksightShot ) clearMagAnomaly( prefs );
-    // Log.v("DistoX", "mSurveyStations " + mSurveyStations + " mShotAfterSplays " + mShotAfterSplays );
+    return true;
+    // Log.v("DistoX", "set survey stations. mSurveyStations " + mSurveyStations + " mShotAfterSplays " + mShotAfterSplays );
   }
 
   // void clearPreferences()
@@ -1537,6 +1614,7 @@ class TDSetting
     if ( name.equals( "DISTOX_MIN_LEG_LENGTH") ) return parseFloatValue( value, mMinLegLength, 0, 5 );
     //B if ( name.equals( "DISTOX_BACKSHOT" )
     //B if ( name.equals( "DISTOX_NO_CURSOR" )
+    if ( name.equals( "DISTOX_RECENT_TIMEOUT"  ) ) return parseIntValue( value, mRecentTimeout, 10, 1200 ); // min 10 secs, max 20 minutes
 
     //C if ( name.equals( "DISTOX_UNIT_LOCATION" )
     //S if ( name.equals( "DISTOX_CRS" )

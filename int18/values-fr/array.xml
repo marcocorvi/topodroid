@@ -155,7 +155,8 @@
      <item name="back">Visée inverse, visées latérales en premier</item>
      <item name="for2">Visée normale, cheminement en premier</item>
      <item name="back2">Visée inverse, cheminement en premier</item>
-     <item name="anomaly">Visée Arrière, Backsight</item>
+     <item name="backsight">Visée Arrière, Backsight</item>
+     <item name="anomaly">Magn. anomaly</item>
      <item name="tripod">Tripod</item>
      <item name="toporobot">TopoRobot</item>
   </string-array>

@@ -119,7 +119,8 @@
      <item name="back">Hilfszüge, Rückwärtsmessung</item>
      <item name="for2">Vorwärtsmessung, Hilfszüge</item>
      <item name="back2">Rückwärtsmessung, Hilfszüge</item>
-     <item name="anomaly">Rückwärts, Hilfszüge, Vorwärts</item>
+     <item name="backsight">Rückwärts, Hilfszüge, Vorwärts</item>
+     <item name="anomaly">Magn. anomaly</item>
      <item name="tripod">Stativ (wie oben aber mit Zwischenstation)</item>
      <item name="toporobot">TopoRobot</item>
   </string-array>

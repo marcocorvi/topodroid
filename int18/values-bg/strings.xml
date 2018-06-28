@@ -468,7 +468,11 @@
     <string name="saturated_coeffs">Внимание: наситени данни за калиб. коефициенти</string>
     <string name="out_of_memory">Внимание: недостатъчна памет!</string>
     <string name="disk_io_error">Грешка при четене/запис на диска!</string>
-    <!-- TODO string name="toporobot_warning">WARNING: TopoRobot policy is experimental !</string -->
+    
+    <!-- TODO string name="toporobot_warning">TopoRobot policy is exterimental !</string -->
+    <!-- TODO string name="anomaly_warning">Magnatic anomaly compensation is expert !</string -->
+    <!-- TODO string name="tripod_warning">Tripod policy is advanced !</string -->
+
     <string name="cannot_rename">Не може да се преименува картировката</string>
     <string name="declination">Магн. деклинация</string>
     <string name="description">описание</string>
@@ -595,6 +599,7 @@
     <string name="button_search"    >Търсене   </string>
     <string name="button_merge"     >Сливане   </string>
     <string name="button_split"     >Разделяне</string>
+    <!-- TODO string name="button_station"   >Center at</string -->
     <string name="button_store"     >Съхраняване</string>
     <!-- UNUSED string name="button_start"     >Старт     </string -->
     <!-- UNUSED string name="button_stop"      >Стоп      </string -->
@@ -932,6 +937,8 @@
   <!-- TODO string name="pref_bezier_step_summary">Distance between points on an export line [m]</string -->
   <string name="pref_leg_shots_title">Брой измервания за антена</string>
   <string name="pref_leg_shots_summary">Минимален брой поредни еднакви измервания за да се считат за антена</string>
+  <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
+  <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent</string -->
   <string name="pref_station_prefix_title">Експортиране на префикс в името на реперите</string>
   <string name="pref_station_prefix_summary">Експортиране в cSurvey на префикс в името на реперите</string>
   <string name="pref_compass_splays_title">Странични изм. в Compass</string>
@@ -1083,8 +1090,8 @@
   <string name="pref_backshot_summary">DistoX в режим на обратна отсечка</string>
   <string name="pref_prev_next_title">Пред./Следваща бутони</string>
   <string name="pref_prev_next_summary">Показване на бутони за Предишна/Следваща отсечка</string>
-  <string name="pref_mag_anomaly_title">Магнитна аномалия</string>
-  <string name="pref_mag_anomaly_summary">Компенсиране на локални аномалии чрез обратна отсечка</string>
+  <!-- UNUSED string name="pref_mag_anomaly_title">Магнитна аномалия</string -->
+  <!-- UNUSED string name="pref_mag_anomaly_summary">Компенсиране на локални аномалии чрез обратна отсечка</string -->
   <string name="pref_azimuth_manual_title">Ръчно разгъване на отсечки</string>
   <string name="pref_azimuth_manual_summary">Ръчно разгъване на отсечки в разреза</string>
 

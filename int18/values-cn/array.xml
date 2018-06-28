@@ -123,7 +123,8 @@
      <item name="back">射线, 后测主线</item>
      <item name="for2">前测主线, 射线</item>
      <item name="back2">后测主线, 射线</item>
-     <item name="anomaly">后测</item>
+     <item name="backsight">后测</item>
+     <item name="anomaly">Magn. anomaly</item>
      <item name="tripod">脚架测量</item>
      <item name="toporobot">TopoRobot</item>
   </string-array>

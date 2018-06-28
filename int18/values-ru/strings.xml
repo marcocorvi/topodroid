@@ -472,7 +472,11 @@
     <string name="saturated_coeffs">ВНИМАНИЕ: насыщенные коэфициенты калибровки</string>
     <string name="out_of_memory">ВНИМАНИЕ: out of memory !</string>
     <string name="disk_io_error">ОШИБКА: ошибка ввода/вывода !</string>
+
     <string name="toporobot_warning">ВНИМАНИЕ: нумерация пикетов TopoRobot экспериментальняа функция!</string>
+    <!-- TODO string name="anomaly_warning">Magnatic anomaly compensation is expert !</string -->
+    <!-- TODO string name="tripod_warning">Tripod policy is advanced !</string -->
+
     <string name="cannot_rename">Не могу перименовать съёмку</string>
     <string name="declination">Магн. скл.</string>
     <string name="description">описание</string>
@@ -598,6 +602,7 @@
     <string name="button_search"    >Поиск    </string>
     <string name="button_merge"     >Объединить     </string>
     <string name="button_split"     >Разделить     </string>
+    <!-- TODO string name="button_station"   >Center at</string -->
     <string name="button_store"     >Записать   </string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
@@ -944,6 +949,8 @@
   <string name="pref_bezier_step_summary">Расстояние между точками при экспорте линий [м]</string>
   <string name="pref_leg_shots_title">Мин. кол-во измерений между пикетами</string>
   <string name="pref_leg_shots_summary">Минимальное кол-во повторяющихся замеров на отрезке</string>
+  <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
+  <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent</string -->
   <string name="pref_station_prefix_title">Экспортировать префиксы пикетов</string>
   <string name="pref_station_prefix_summary">Экспортировать префиксы пикетов для cSurvey</string>
   <string name="pref_compass_splays_title">Боковые замеры в Compass</string>
@@ -1096,8 +1103,8 @@
   <string name="pref_backshot_summary">DistoX в режиме обратных замеров</string>
   <string name="pref_prev_next_title">Кнопки Пред/След</string>
   <string name="pref_prev_next_summary">Кнопки Предыдущий/Следующий в диалоге измерений</string>
-  <string name="pref_mag_anomaly_title">Магнитная Аномалия</string>
-  <string name="pref_mag_anomaly_summary">Компенсация локальной Магнитной Аномалии</string>
+  <!-- UNUSED string name="pref_mag_anomaly_title">Магнитная Аномалия</string -->
+  <!-- UNUSED string name="pref_mag_anomaly_summary">Компенсация локальной Магнитной Аномалии</string -->
   <string name="pref_azimuth_manual_title">Устанавливать "развертку" вручную</string>
   <string name="pref_azimuth_manual_summary">Задавать направление развёртки отрезков вручную</string>
 

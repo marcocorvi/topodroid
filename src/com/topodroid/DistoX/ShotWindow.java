@@ -373,7 +373,7 @@ public class ShotWindow extends Activity
       // FIXME 3.3.0
       if ( mDataAdapter.addDataBlock( blk ) ) {
         mDistoXAccuracy.addBlock( blk );
-        if ( TDSetting.mBacksightShot || TDSetting.mTripodShot ) {
+        if ( TDSetting.doBacksight() || TDSetting.doTripod() ) {
           mApp.assignStationsAll( mDataAdapter.mItems );
         } else {
           mApp.assignStationsAll( mDataAdapter.getItemsForAssign() );
@@ -498,10 +498,12 @@ public class ShotWindow extends Activity
       // mFooter.setVisibility( View.VISIBLE );
       mListView.setAdapter( mFooterView.mAdapter );
       mListView.invalidate();
+      onMultiselect = true;
     } else {
       // mFooter.setVisibility( View.GONE );
       mListView.setAdapter( mButtonView1.mAdapter );
       mListView.invalidate();
+      onMultiselect = false;
     }
   }
 
@@ -512,6 +514,7 @@ public class ShotWindow extends Activity
     // mFooter.setVisibility( View.GONE );
     mListView.setAdapter( mButtonView1.mAdapter );
     mListView.invalidate();
+    onMultiselect = false;
   }
 
   @Override 
@@ -857,6 +860,7 @@ public class ShotWindow extends Activity
   // MyMenuAdapter mMenuAdapter;
   private ArrayAdapter< String > mMenuAdapter;
   private boolean onMenu = false;
+  private boolean onMultiselect = false;
 
   private BitmapDrawable mBMbluetooth;
   private BitmapDrawable mBMbluetooth_no;
@@ -950,6 +954,7 @@ public class ShotWindow extends Activity
     mButtonView1 = new HorizontalButtonView( mButton1 );
     mFooterView  = new HorizontalButtonView( mButtonF );
     mListView.setAdapter( mButtonView1.mAdapter );
+    onMultiselect = false;
     // mFootList.setAdapter( mFooterView.mAdapter );
 
     // mFooter = (RelativeLayout)findViewById( R.id.footer );
@@ -1082,6 +1087,10 @@ public class ShotWindow extends Activity
   {
     if ( closeMenu() ) return;
     if ( CutNPaste.dismissPopupBT() ) return;
+    if ( onMultiselect ) {
+      clearMultiSelect();
+      return;
+    }
 
     if ( doubleBack ) {
       if ( doubleBackToast != null ) doubleBackToast.cancel();
@@ -1966,7 +1975,7 @@ public class ShotWindow extends Activity
  
     List< DBlock > shots;
     // backsight and tripod seem o be OK
-    // if ( TDSetting.mTripodShot || TDSetting.mBacksightShot ) {
+    // if ( TDSetting.dpTripod() || TDSetting.doBacksight() ) {
     //   shots = mApp_mData.selectAllShots( mApp.mSID, TDStatus.NORMAL );
     // } else {
       shots = mApp_mData.selectAllShotsAfter( blk.mId, mApp.mSID, TDStatus.NORMAL );

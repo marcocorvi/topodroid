@@ -468,7 +468,11 @@
     <string name="saturated_coeffs">WARNING: Coefficienti di calibrazione saturati</string>
     <string name="out_of_memory">WARNING: Memoria terminata !</string>
     <string name="disk_io_error">CRITICAL: Errore disco !</string>
-    <!-- TODO string name="toporobot_warning">WARNING: TopoRobot policy is experimental !</string -->
+    
+    <!-- TODO string name="toporobot_warning">TopoRobot policy is exterimental !</string -->
+    <!-- TODO string name="anomaly_warning">Magnatic anomaly compensation is expert !</string -->
+    <!-- TODO string name="tripod_warning">Tripod policy is advanced !</string -->
+
     <string name="cannot_rename">Rinomina rilievo non riuscita</string>
     <string name="declination">decl. magn.</string>
     <string name="description">descrizione</string>
@@ -595,6 +599,7 @@
     <string name="button_search"    >Cerca     </string>
     <string name="button_merge"     >Unisci    </string>
     <string name="button_split"     >Dividi    </string>
+    <!-- TODO string name="button_station"   >Center at</string -->
     <string name="button_store"     >Scrivi    </string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
@@ -936,6 +941,8 @@
   <string name="pref_bezier_step_summary">Distanza tra punti in una linea di export [m]</string>
   <string name="pref_leg_shots_title">Misure per battuta</string>
   <string name="pref_leg_shots_summary">Minimo numero di misure per tiro di poligonale</string>
+  <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
+  <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent</string -->
   <string name="pref_station_prefix_title">Esporta il prefisso dei caposaldi</string>
   <string name="pref_station_prefix_summary">Esporta in cSurvey il prefisso dei caposaldi</string>
   <string name="pref_compass_splays_title">Splay Compass</string>
@@ -1087,8 +1094,8 @@
   <string name="pref_backshot_summary">DistoX in modo backshot</string>
   <string name="pref_prev_next_title">Pulsanti Prec/Succ</string>
   <string name="pref_prev_next_summary">Pulsanti Prec/Succ nel riquadro di tiro</string>
-  <string name="pref_mag_anomaly_title">Anomalia magnetica</string>
-  <string name="pref_mag_anomaly_summary">Compensazione anomalia magnetica locale</string>
+  <!-- UNUSED string name="pref_mag_anomaly_title">Anomalia magnetica</string -->
+  <!-- UNUSED string name="pref_mag_anomaly_summary">Compensazione anomalia magnetica locale</string -->
   <string name="pref_azimuth_manual_title">"extend" manuale</string>
   <string name="pref_azimuth_manual_summary">Fissa "extend" delle battute manualmente</string>
 

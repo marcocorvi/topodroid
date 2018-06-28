@@ -471,7 +471,10 @@
     <string name="saturated_coeffs">WARNING: saturated calibration coefficients</string>
     <string name="out_of_memory">WARNING: out of memory !</string>
     <string name="disk_io_error">CRITICAL: disk i/o error !</string>
-    <string name="toporobot_warning">WARNING: TopoRobot policy is experimental !</string>
+
+    <string name="toporobot_warning">TopoRobot policy is exterimental !</string>
+    <string name="anomaly_warning">Magnatic anomaly compensation is expert !</string>
+    <string name="tripod_warning">Tripod policy is advanced !</string>
 
 
     <string name="cannot_rename">Cannot rename survey</string>
@@ -601,6 +604,7 @@
     <string name="button_search"    >Search    </string>
     <string name="button_merge"     >Merge     </string>
     <string name="button_split"     >Split     </string>
+    <string name="button_station"   >Center at</string>
     <string name="button_store"     >Store     </string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
@@ -947,6 +951,8 @@
   <string name="pref_bezier_step_summary">Distance between points on an export line [m]</string>
   <string name="pref_leg_shots_title">Minimum leg shots</string>
   <string name="pref_leg_shots_summary">Minimum number of shots per leg</string>
+  <string name="pref_recent_timeout_title">Recent data timeout</string>
+  <string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent</string>
   <string name="pref_station_prefix_title">Compass station prefix</string>
   <string name="pref_station_prefix_summary">Export station prefix (compass)</string>
   <string name="pref_compass_splays_title">Compass splays</string>
@@ -1098,8 +1104,8 @@
   <string name="pref_backshot_summary">DistoX in backshot mode</string>
   <string name="pref_prev_next_title">Prev/Next buttons</string>
   <string name="pref_prev_next_summary">Prev/Next buttons in the shot dialog</string>
-  <string name="pref_mag_anomaly_title">Magnetic Anomaly</string>
-  <string name="pref_mag_anomaly_summary">Compensate Local Magnetic Anomaly</string>
+  <!-- UNUSED string name="pref_mag_anomaly_title">Magnetic Anomaly</string -->
+  <!-- UNUSED string name="pref_mag_anomaly_summary">Compensate Local Magnetic Anomaly</string -->
   <string name="pref_azimuth_manual_title">Fixed extend reference</string>
   <string name="pref_azimuth_manual_summary">Fixed R/L or settable extend reference</string>
 

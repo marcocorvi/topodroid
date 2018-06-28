@@ -25,9 +25,7 @@ import android.view.View.OnClickListener;
 
 import android.widget.Button;
 import android.widget.LinearLayout;
-
-// import android.widget.TextView;
-// import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.EditText;
 
 // import android.widget.Toast;
 
@@ -37,6 +35,8 @@ class PlotZoomFitDialog extends MyDialog
   private final DrawingWindow mParent;
   private Button mBtnPortrait;
   private Button mBtnLandscape;
+  private Button mBtnStation;
+  private EditText mETstation;
   // private Button mBtnZoomFit;
 
   PlotZoomFitDialog( Context context, DrawingWindow parent )
@@ -82,6 +82,10 @@ class PlotZoomFitDialog extends MyDialog
       // mBtnPortrait.setText( R.string.button_zoomfit );
     // }
     ((Button) findViewById( R.id.button_cancel )).setOnClickListener( this );
+
+    mBtnStation  = (Button) findViewById( R.id.button_station );
+    mETstation = (EditText) findViewById( R.id.center_station );
+    mBtnStation.setOnClickListener( this );
   }
  
   // ---------------------------------------------------------------
@@ -99,6 +103,13 @@ class PlotZoomFitDialog extends MyDialog
         mParent.setOrientation( PlotInfo.ORIENTATION_LANDSCAPE );
       // } else if ( btn == mBtnZoomFit ) {
       //   mParent.doZoomFit();
+      } else if ( btn == mBtnStation ) {
+        String station = mETstation.getText().toString();
+	if ( station == null || station.length() == 0 ) {
+          mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
+	  return;
+	}
+	mParent.centerAtStation( station );
       }
     }
     dismiss();

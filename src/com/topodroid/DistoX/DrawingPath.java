@@ -339,8 +339,7 @@ class DrawingPath extends RectF
     }
   }
 
-  // @param time system time in seconds
-  // NOTE use 0 for no test on the block time
+  // used in executeAll
   boolean isBlockRecent( )
   {
     return mBlock != null && mBlock.isRecent();
@@ -364,7 +363,7 @@ class DrawingPath extends RectF
     // } else {
       if (    mType == DRAWING_PATH_SPLAY  // FIXME_X_SPLAY
            && mBlock != null ) {
-	if ( mBlock.isRecent( System.currentTimeMillis()/1000 ) ) {
+	if ( mBlock.isRecent( ) ) { // if ( mBlock.isTimeRecent( System.currentTimeMillis()/1000 ) ) 
           if ( mBlock.mType == DBlock.BLOCK_SPLAY && BrushManager.lightBluePaint != null ) {
             canvas.drawPath( path, BrushManager.lightBluePaint );
           } else if ( mBlock.mType == DBlock.BLOCK_X_SPLAY && BrushManager.fixedSplay2Paint != null ) {

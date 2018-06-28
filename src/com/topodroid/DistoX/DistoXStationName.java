@@ -155,7 +155,7 @@ class DistoXStationName
   static int toInt( String name )
   {
     if ( name == null ) return -1;
-    if ( TDSetting.mTRobotShot ) {
+    if ( TDSetting.doTopoRobot() ) {
       int pos = name.indexOf( '.' );
       if ( pos >= 0 ) {
         int pre = 0;

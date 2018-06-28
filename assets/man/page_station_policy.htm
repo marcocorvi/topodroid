@@ -3,31 +3,54 @@
 <h4>Station naming policies</h4>
 
 When you download data TopoDroid can automatically assign them station names. A repeated measurement is considered a leg shot, the others are splay shots.  If you stick to a convention taking measurements TopoDroid automatic station naming can be very handy. TopoDroid supports a number of conventions to automatically assign stations to shots. You can select the one that fits your habits through the settings.
-<ul>
-<li>at the "From" station: you take splays first and then forward leg shot(s). This is the default convention.</li>
-<li>at the "From" station: you take the forward leg shot(s) first, and then the splays</li>
-<li>at the "To" station: you take splays first and then backward leg shot(s)</li>
-<li>at the "To" station: you take backward leg shot(s) first and then splays</li>
-<li>at a station: you take the backshot to the previous station, next the splay shots, and finally the forward shot to the next station.</li>
-<li>"tripod": like the previous but with intermediate stations without splays</li>
-</ul><br><p>
+<ol>
+<li><b>splays+forward</b>. At the "From" station: you take splays first and then forward leg shot(s). This is the default convention.</li>
+<li><b>forward+splays</b>. At the "From" station: you take the forward leg shot(s) first, and then the splays</li>
+<li><b>splays+backward</b>. At the "To" station: you take splays first and then backward leg shot(s)</li>
+<li><b>backward+splays</b>. At the "To" station: you take backward leg shot(s) first and then splays</li>
+<li><b>Backsight</b>.</li>
+<li><b>tripod</b></li>
+<li><b>magnetic anomaly</b> compensation</li>
+<li><b>TopoRobot</b></li>
+</ol><br><p>
 
-The compensation of the local magnetic anomaly requires the fifth policy. Changing to another policy disables the magnetic anomaly compensation.<br>
-The "TopoRobot" policy is just the first, but station names follow the TopoRobot convention.<br>
-Examples of the five conventions (shots takes at the same station are grouped in parenthesis):
+Examples of the first six conventions (shots takes at the same station are grouped in parenthesis):
 <ul>
 <li> ... (1-. 1-. 1-. 1-2) (2-. 2-. 2-3) ... </li>
 <li> ... (1-2 1-. 1-. 1-.) (2-3 2-. 2-.) ... </li>
 <li> ... (2-. 2-. 2-. 2-1) (3-. 3-. 3-2) ... </li>
 <li> ... (2-1 2-. 2-. 2-.) (3-2 3-. 3-.) ... </li>
 <li> ... (2-1 2-. 2-. 2-3) (3-2 3-. 3-. 3-4) ... </li>
-<li> ... (2-1         2-3) (3-2         3-4) ... </li>
+<li> ... (2-1 2-. 2-. 2-3) (4-3 4-. 4-. 4-5) ... </li>
 </ul><br>
 
 Sequence a-b-c-d for the first (foresight) and the third (backsight) policies.<br>
 <img src="survey_policy.png">
 <br><p>
 
-In the fifth policy (double shots), the backsight shots are marked "duplicate".<br><p>
+<b>Backsight</b> policy<br>
+At each station you take the backshot to the previous station, next the splay shots, and finally the forward shot to the next station.<br>
+Backsight shots are checked: if a leg is not close to the opposite of the previuos leg it is not considered a backsight shot.<br>
+The backsight shots are marked "duplicate".<br><p>
 
+<b>Tripod</b> policy<br>
+At station "1" you take splays and then shots to the station "2". Then you move into station "3", take shots to station "2", then splays, then shots
+to station "4". Move to sttaion "5" and so on.<br>
+
+<b>Magnetic anomaly compensation</b> [Tester level]<br>
+The magnetic anomaly compensation is done estimating at each station the
+"local" magnetic declination by comparing the azimuths of the leg reaching to the station and the backsight leg. The azimuth of all the shots at the station are then corrected with the "local" declination. An overall declination remains because the declination at the first station cannot be determined. Furthermore the survey azimuth angles become relative as in a traverse, therefore the angle errors add up instead of compensating.<br>
+The magnetic anomaly compensation requires taking basksight shots.<br><p>
+
+<b>TopoRobot</b> policy<br>
+The "TopoRobot" policy is just the first, but station names follow the TopoRobot convention.<br><p>
+
+<b>Station naming policy and activity levels</b><br>
+Certain station naming policy are disabled at high activity levels:
+<ul>
+<li>"Tripod" requires "advanced" level</li>
+<li>"Magnetic anomaly" requires "expert" level</li>
+<li>"TopoRobot" requires "tester" level</li>
+</ul><br>
+Reducing the activity level when one of these is active, automatically set the station policy to the default policy (splays + forward shot).<br><p>
 </body></html>

@@ -30,6 +30,25 @@
     / -->
   </LinearLayout>
 
+  <LinearLayout android:id="@+id/layout2"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    android:layout_marginTop="10pt" 
+    android:layout_marginBottom="10pt" 
+    >
+    <Button android:id="@+id/button_station"
+      style="@style/button_default"
+      android:text="@string/button_station"
+      />
+    <EditText android:id="@+id/center_station"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content" 
+      android:layout_marginLeft="10pt" 
+      />
+
+  </LinearLayout>
+
   <Button android:id="@+id/button_cancel"
     style="@style/button_default"
     android:text="@string/button_cancel"

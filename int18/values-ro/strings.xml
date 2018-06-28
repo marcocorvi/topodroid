@@ -471,7 +471,10 @@
     <string name="saturated_coeffs">AVERTISMENT: coeficienți calibrare saturați</string>
     <string name="out_of_memory">AVERTISMENT: memorie insuficientă !</string>
     <string name="disk_io_error">CRITIC: eroare i/o  !</string>
+    
     <string name="toporobot_warning">AVERTISMENT: metoda TopoRobot este experimentală !</string>
+    <!-- TODO string name="anomaly_warning">Magnatic anomaly compensation is expert !</string -->
+    <!-- TODO string name="tripod_warning">Tripod policy is advanced !</string -->
 
     <string name="cannot_rename">Cartarea nu paote fi redenumită</string>
     <string name="declination">Magn. decl.</string>
@@ -598,6 +601,7 @@
     <string name="button_search"    >Caută      </string>
     <string name="button_merge"     >Îmbină     </string>
     <string name="button_split"     >Desparte   </string>
+    <!-- TODO string name="button_station"   >Center at</string -->
     <string name="button_store"     >Stochează  </string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
@@ -944,6 +948,8 @@
   <string name="pref_bezier_step_summary">Distanța între puncte pe o linie export [m]</string>
   <string name="pref_leg_shots_title">Nr. min. măsurători/viză</string>
   <string name="pref_leg_shots_summary">Nr. minim de măsurători pe viză</string>
+  <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
+  <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent</string -->
   <string name="pref_station_prefix_title">Prefix stație Compass</string>
   <string name="pref_station_prefix_summary">Exportă prefix stație (Compass)~</string>
   <string name="pref_compass_splays_title">Radieri Compass</string>
@@ -1095,8 +1101,8 @@
   <string name="pref_backshot_summary">DistoX-ul în modul de citire cu viză inversă</string>
   <string name="pref_prev_next_title">Butoane antecedent/următor</string>
   <string name="pref_prev_next_summary">Butoane antecedent/următor în fereastra unei măsuratori noi</string>
-  <string name="pref_mag_anomaly_title">Anomalie Magnetică</string>
-  <string name="pref_mag_anomaly_summary">Compensează Anomalie Magnetică Locală</string>
+  <!-- UNUSED string name="pref_mag_anomaly_title">Anomalie Magnetică</string -->
+  <!-- UNUSED string name="pref_mag_anomaly_summary">Compensează Anomalie Magnetică Locală</string -->
   <string name="pref_azimuth_manual_title">Referință extensie fixă~</string>
   <string name="pref_azimuth_manual_summary">Dreapta/Stânga fixată sau Referință extensie configurabilă~</string>
 

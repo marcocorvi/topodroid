@@ -116,7 +116,6 @@ If the 3D modelling is enabled there is also a button to create a new 3D model, 
     <li><i>Loop closure</i> error compensation. It is advisable not to do the compensation, as this allows to see graphically the misclosures, and spot possible survey errors [default "none"]. The special loop compensation based on "triangles" is for <a href="page_trilateration.htm">trilateration</a> [E].</li>
     <li>whether to show <i>prev/next</i> buttons in the shot edit dialog [default yes]</li>
     <li><i>Backsight</i> fields in the shot manual input dialog [N] [default no]</li>
-    <li><i>Magnetic anomaly</i> compensation [default off, Tester level]</li>
     <li><i>Timer</i>: seconds of delay before measuring directions with the Android sensors [default 10, min 0]</li>
     <li><i>Beep volume</i>: timer beep volume [N] [default 50, min 10, max 100]</li>
     </ul>
@@ -128,11 +127,6 @@ If the 3D modelling is enabled there is also a button to create a new 3D model, 
 To exit the survey data window double tap on the <u>BACK</u> button of your device.<br>
 If the automatic backup is enabled and the default data file format is set, the data are exported whenever the data window is closed.<br><p>
 
-<b>Magnetic anomaly compensation</b> [Tester level]<br>
-The magnetic anomaly compensation is done estimating at each station the
-"local" magnetic declination by comparing the azimuths of the leg reaching to the station and the backsight leg. The azimuth of all the shots at the station are then corrected with the "local" declination. An overall declination remains because the declination at the first station cannot be determined. Furthermore the survey azimuth angles become relative as in a traverse, therefore the angle errors add up instead of compensating.<br><p>
-
-Activating the magnetic anomaly automatically sets the basksight station policy. Changing to another station policy deactivate the mgnetic anomaly compensation.<br><p>
 
 <a href="manual05.htm">&lt; Calibration data</a> |
 <a href="manual07.htm">Shot list &gt;</a>

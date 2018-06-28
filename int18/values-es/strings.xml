@@ -466,7 +466,11 @@
     <!-- TODO string name="saturated_coeffs">WARNING: saturated calibration coefficients</string -->
     <!-- TODO string name="out_of_memory">WARNING: out of memory !</string -->
     <!-- TODO string name="disk_io_error">CRITICAL: disk i/o error !</string -->
-    <!-- TODO string name="toporobot_warning">WARNING: TopoRobot policy is experimental !</string -->
+    
+    <!-- TODO string name="toporobot_warning">TopoRobot policy is exterimental !</string -->
+    <!-- TODO string name="anomaly_warning">Magnatic anomaly compensation is expert !</string -->
+    <!-- TODO string name="tripod_warning">Tripod policy is advanced !</string -->
+
     <string name="cannot_rename">No se puede cambiar el nombre de la topografía</string>
     <string name="declination">Declinación magnética </string>
     <string name="description">Descripción</string>
@@ -592,6 +596,7 @@
     <string name="button_search"    >Buscar    </string>
     <string name="button_merge"     >Unir     </string>
     <string name="button_split"     >Dividir     </string>
+    <!-- TODO string name="button_station"   >Center at</string -->
     <string name="button_store"     >Recibir   </string>
     <!-- UNUSED string name="button_start"     >Inicio</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
@@ -939,6 +944,8 @@
   <!-- TODO string name="pref_bezier_step_summary">Distance between points on an export line [m]</string -->
   <string name="pref_leg_shots_title">Repeticiones de una visual</string>
   <string name="pref_leg_shots_summary">Número mínimo de tomas por visual</string>
+  <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
+  <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent</string -->
   <string name="pref_station_prefix_title">Prefijo estación de exportación</string>
   <string name="pref_station_prefix_summary">Prefijo estación de exportación cSurvey</string>
   <!-- TODO string name="pref_compass_splays_title">Compass splays</string -->
@@ -1090,8 +1097,8 @@
   <!-- TODO string name="pref_backshot_summary">DistoX in backshot mode</string -->
   <string name="pref_prev_next_title">Añadir botón Ant./Sig.</string>
   <string name="pref_prev_next_summary">Añade un botón Anterior/Sguiente en diálogo de toma</string>
-  <string name="pref_mag_anomaly_title">Compensación magnética</string>
-  <string name="pref_mag_anomaly_summary">Compensar declinación magnética local</string>
+  <!-- UNUSED string name="pref_mag_anomaly_title">Compensación magnética</string -->
+  <!-- UNUSED string name="pref_mag_anomaly_summary">Compensar declinación magnética local</string -->
   <string name="pref_azimuth_manual_title">Toma extendida</string>
   <string name="pref_azimuth_manual_summary">fijas o con relación a la referencia extendida</string>
 

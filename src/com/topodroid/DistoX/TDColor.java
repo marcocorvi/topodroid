@@ -61,6 +61,7 @@ class TDColor
   static final int TITLE_BACKSIGHT  = 0xffb66dff; // VIOLET
   static final int TITLE_TRIPOD     = 0xffff6db6; // PINK
   static final int TITLE_TOPOROBOT  = 0xffdbd100; // ORANGE
+  static final int TITLE_ANOMALY    = 0xffff3333; // BRIGHT RED
 
   static final int NORMAL       = WHITE;
   static final int NORMAL2      = LIGHT_GRAY;

@@ -147,7 +147,7 @@ class MultishotDialog extends MyDialog
     }
 
     String from = mBlk.mFrom;
-    boolean bedding = ( from != null && from.length() > 0 );
+    boolean bedding = ( mBlks.size() > 1 && from != null && from.length() > 0 );
     if ( bedding ) {
       for ( DBlock blk : mBlks ) {
         if ( ! from.equals( blk.mFrom ) ) {
@@ -155,11 +155,11 @@ class MultishotDialog extends MyDialog
 	  break;
 	}
       }
-      if ( bedding ) {
-        mButtonBedding.setOnClickListener( this );
-      } else {
-        ((LinearLayout) findViewById( R.id.layout_bedding )).setVisibility( View.GONE );
-      }
+    }
+    if ( bedding ) {
+      mButtonBedding.setOnClickListener( this );
+    } else {
+      ((LinearLayout) findViewById( R.id.layout_bedding )).setVisibility( View.GONE );
     }
 
     mButtonBack.setOnClickListener( this );

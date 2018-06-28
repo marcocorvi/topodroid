@@ -616,12 +616,15 @@ class ShotDialog extends MyDialog
     if ( b == mRBleft ) {
       mRBvert.setChecked( false );
       mRBright.setChecked( false );
+      // shot_extend = mRBleft.isChecked() ? DBlock.EXTEND_LEFT : DBlock.EXTEND_IGNORE;
     } else if ( b == mRBvert ) {
       mRBleft.setChecked( false );
       mRBright.setChecked( false );
+      // shot_extend = mRBvert.isChecked() ? DBlock.EXTEND_VERT : DBlock.EXTEND_IGNORE;
     } else if ( b == mRBright ) {
       mRBleft.setChecked( false );
       mRBvert.setChecked( false );
+      // shot_extend = mRBright.isChecked() ? DBlock.EXTEND_RIGHT : DBlock.EXTEND_IGNORE;
 
     } else if ( b == mCBlegPrev ) {
       // Log.v("DistoX", "CB leg clicked ");
@@ -733,6 +736,16 @@ class ShotDialog extends MyDialog
         shot_to = temp;
         mETfrom.setText( shot_from );
         mETto.setText( shot_to );
+	// FIXME_EXTEND swap extend if set
+        if ( mRBleft.isChecked() ) {
+	  mRBleft.setChecked( false );
+	  mRBright.setChecked( true );
+          // shot_extend = DBlock.EXTEND_RIGHT;
+	} else if ( mRBright.isChecked() ) {
+	  mRBleft.setChecked( true );
+	  mRBright.setChecked( false );
+          // shot_extend = DBlock.EXTEND_LEFT;
+	}
       }
     // } else if ( b == mButtonDrop ) {
     //   mParent.dropShot( mBlk );

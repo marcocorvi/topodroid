@@ -117,7 +117,8 @@
      <item name="back">Radiales destino + visual inversa</item>
      <item name="for2">Visual directa + radiales origen</item>
      <item name="back2">Visual inversa + radiales destino</item>
-     <item name="anomaly">Directa e inversa con verificación</item>
+     <item name="backsight">Directa e inversa con verificación</item>
+     <item name="anomaly">Magn. anomaly</item>
      <item name="tripod">Teodolito o Tripode</item>
      <item name="toporobot">TopoRobot</item>
   </string-array>

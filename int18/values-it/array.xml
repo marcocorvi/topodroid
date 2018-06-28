@@ -118,8 +118,9 @@
      <item name="back">Splay, battuta inversa</item>
      <item name="for2">Battuta diretta, splay</item>
      <item name="back2">Battuta inversa, splay</item>
-     <item name="anomaly">Doppia battuta</item>
-     <item name="tripod">Tripod</item>
+     <item name="backsight">Doppia battuta</item>
+     <item name="anomaly">Correzione anomalia magnetica</item>
+     <item name="tripod">Tripode</item>
      <item name="toporobot">TopoRobot</item>
   </string-array>
 

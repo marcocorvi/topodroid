@@ -126,7 +126,8 @@
      <item name="back">Auxiliares (EDTC), visada anterior</item>
      <item name="for2">Próxima visada, auxiliares (EDTC)</item>
      <item name="back2">Visada anterior, auxiliares (EDTC)</item>
-     <item name="anomaly">Visada inversa</item>
+     <item name="backsight">Visada inversa</item>
+     <item name="anomaly">Magn. anomaly</item>
      <item name="tripod">Tripé</item>
      <item name="toporobot">TopoRobot</item>
   </string-array>

@@ -144,7 +144,8 @@
      <item name="back">Segédpontok, hátrafelémérés</item>
      <item name="for2">Előremérés, segédpontok</item>
      <item name="back2">Hátrafelé mérés, segédpontok</item>
-     <item name="anomaly">Visszamérés</item>
+     <item name="backsight">Visszamérés</item>
+     <item name="anomaly">Magn. anomaly</item>
      <item name="tripod">Háromláb</item>
      <item name="toporobot">TopoRobot</item>
   </string-array>

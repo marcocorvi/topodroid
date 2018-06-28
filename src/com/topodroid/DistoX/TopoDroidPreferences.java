@@ -22,7 +22,7 @@ import android.preference.PreferenceActivity;
 // import android.view.Menu;
 // import android.view.MenuItem;
 
-// import android.widget.ListAdapter;
+import android.widget.ListAdapter;
 
 // import android.util.Log;
 
@@ -72,7 +72,7 @@ public class TopoDroidPreferences extends PreferenceActivity
   public void onDestroy( )
   {
     super.onDestroy();
-    // if (mPrefCategory == PREF_CATEGORY_ALL ) { mApp.mPrefActivity = null; }
+    // if (mPrefCategory == PREF_CATEGORY_ALL ) { mApp.mPrefActivityAll = null; }
   }
 
   @Override
@@ -89,11 +89,14 @@ public class TopoDroidPreferences extends PreferenceActivity
         mPrefCategory = PREF_CATEGORY_ALL;
       }
     }
+    if (mPrefCategory == PREF_CATEGORY_ALL ) { mApp.mPrefActivityAll = this; }
+    if (mPrefCategory == PREF_CATEGORY_SURVEY ) { mApp.mPrefActivitySurvey = this; }
+    loadPreferences();
+  }
 
+  private void loadPreferences()
+  {
     // Log.v("DistoX", "Pref create. category " + mPrefCategory + " level " + TDSetting.mActivityLevel );
-
-    if (mPrefCategory == PREF_CATEGORY_ALL ) { mApp.mPrefActivity = this; }
-
     if ( TDLevel.overTester ) {  // =======================  DEVELOPER
       switch ( mPrefCategory ) {
       case PREF_CATEGORY_SURVEY: addPreferencesFromResource(R.xml.prefs_3_survey); break;
@@ -305,14 +308,22 @@ public class TopoDroidPreferences extends PreferenceActivity
     }
   }
 
+  // called by TopoDroidApp.setLocale
   void reloadPreferences()
   {
-    if (mPrefCategory != PREF_CATEGORY_ALL ) return;
-    mApp.mPrefActivity = null;
-    finish();
-    Intent intent = new Intent( mApp, TopoDroidPreferences.class );
-    intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_ALL );
-    startActivity( intent );
+    if (mPrefCategory == PREF_CATEGORY_ALL ) {
+      mApp.mPrefActivityAll = null;
+      finish();
+      Intent intent = new Intent( mApp, TopoDroidPreferences.class );
+      intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_ALL );
+      startActivity( intent );
+    } else if ( mPrefCategory == PREF_CATEGORY_SURVEY ) {
+      mApp.mPrefActivitySurvey = null;
+      finish();
+      Intent intent = new Intent( mApp, TopoDroidPreferences.class );
+      intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SURVEY );
+      startActivity( intent );
+    }
   }
 
   private void linkPreference( String pref_name, int category )

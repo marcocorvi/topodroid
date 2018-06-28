@@ -29,7 +29,7 @@ class TRobot
     mPoints = new ArrayList<>();
 
     boolean done = false;
-    if ( TDSetting.mTRobotShot ) {
+    if ( TDSetting.doTopoRobot() ) {
       done = populateSeries( blks );
     }
     if ( ! done ) {
