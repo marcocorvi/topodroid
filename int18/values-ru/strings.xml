@@ -474,8 +474,8 @@
     <string name="disk_io_error">ОШИБКА: ошибка ввода/вывода !</string>
 
     <string name="toporobot_warning">ВНИМАНИЕ: нумерация пикетов TopoRobot экспериментальняа функция!</string>
-    <!-- TODO string name="anomaly_warning">Magnatic anomaly compensation is expert !</string -->
-    <!-- TODO string name="tripod_warning">Tripod policy is advanced !</string -->
+    <string name="anomaly_warning">Компенсация магнитной аномалии доступна в экспертном уровне!</string>
+    <string name="tripod_warning">Политика Штатив доступна в продвинутом уровне функций!</string>
 
     <string name="cannot_rename">Не могу перименовать съёмку</string>
     <string name="declination">Магн. скл.</string>
@@ -563,8 +563,8 @@
     <string name="button_current"   >Текущий   </string>
     <string name="button_delete"    >Удалить   </string>
     <string name="button_eval"      >Вычислить    </string>
-    <!-- TODO string name="button_evalg"     >G      </string -->
-    <!-- TODO string name="button_evalm"     >M      </string -->
+    <string name="button_evalg"     >G      </string>
+    <string name="button_evalm"     >M      </string>
     <string name="button_eval_cal"  >Вычислить с учетом калиб.</string>
     <!-- OK string name="button_gps_start" >GPS       </string -->
     <!-- UNUSED string name="button_gps_stop"  >Стоп      </string -->
@@ -602,7 +602,7 @@
     <string name="button_search"    >Поиск    </string>
     <string name="button_merge"     >Объединить     </string>
     <string name="button_split"     >Разделить     </string>
-    <!-- TODO string name="button_station"   >Center at</string -->
+    <string name="button_station"   >По центру</string>
     <string name="button_store"     >Записать   </string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
@@ -949,8 +949,8 @@
   <string name="pref_bezier_step_summary">Расстояние между точками при экспорте линий [м]</string>
   <string name="pref_leg_shots_title">Мин. кол-во измерений между пикетами</string>
   <string name="pref_leg_shots_summary">Минимальное кол-во повторяющихся замеров на отрезке</string>
-  <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
-  <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent</string -->
+  <string name="pref_recent_timeout_title">Время свежести замеров</string>
+  <string name="pref_recent_timeout_summary">Отрезок времени после скачивания в течении которого данные считаются свежими</string>
   <string name="pref_station_prefix_title">Экспортировать префиксы пикетов</string>
   <string name="pref_station_prefix_summary">Экспортировать префиксы пикетов для cSurvey</string>
   <string name="pref_compass_splays_title">Боковые замеры в Compass</string>
