@@ -280,7 +280,7 @@
     <string name="no_feature_audio">Audio nie je podporované</string>
     <string name="no_gms">Kalibrácia nemá žiade dáta \nPoužite tlačidlo Stiahnuť</string>
     <string name="no_geo_station">Chyba: Bod merania nie je geolokalizovaný</string>
-    <!-- TODO string name="no_leg_first">Selection does not start with a leg</string -->
+    <string name="no_leg_first">Výber nezačína hlavnou zámerou</string>
     <string name="no_leg_intersection">Čiara priečneho rezu nepretína žiadnu hlavnú zámeru</string>
     <string name="no_location_data">Žiadne dáta o pozícii</string>
     <string name="no_paired_device">Ziadne spárované zariadenie DistoX \nSpustite skenovanie a spárujete DistoX.</string>
@@ -472,9 +472,10 @@
     <string name="out_of_memory">VAROVANIE: Nedostatok pamäte !</string>
     <string name="disk_io_error">KRITICKÁ CHYBA: Chyba i/o disku !</string>
 
-    <string name="toporobot_warning">VAROVANIE: TopoRobot politika číslovania je experimentálna !</string>
-    <!-- TODO string name="anomaly_warning">Magnatic anomaly compensation is expert !</string -->
-    <!-- TODO string name="tripod_warning">Tripod policy is advanced !</string -->
+    <string name="toporobot_warning">VAROVANIE: TopoRobot politika číslovania je experimentálna!</string>
+    <string name="anomaly_warning">Kompenzácia magnetickej anomálie je pre expertov!</string>
+    <string name="tripod_warning">Politika STATÍV-STENA je pre pokročilých !</string>
+	
     
     <string name="cannot_rename">Nedá sa premenovať názov mapovania</string>
     <string name="declination">Magnetická deklinácia</string>
