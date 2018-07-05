@@ -120,8 +120,8 @@
      <item name="for2">На след. пикет потом ЛПВН</item>
      <item name="back2">На пред. пикет потом ЛПВН</item>
      <item name="backsight">На пред. пикет ЛПВН на след. пикет</item>
-     <item name="anomaly">Магнитная аномалия</item>
-     <item name="tripod">Штатив</item>
+     <item name="anomaly">Компенсация магнитной аномалии</item>
+     <item name="tripod">Штатив: прям. обр. через один</item>
      <item name="toporobot">TopoRobot</item>
   </string-array>
 
