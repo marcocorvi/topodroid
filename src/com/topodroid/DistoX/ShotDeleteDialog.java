@@ -75,7 +75,7 @@ class ShotDeleteDialog extends MyDialog
     mButtonDelete.setOnClickListener( this );
     // mButtonCancel.setOnClickListener( this );
 
-    if ( mBlk.type() != DBlock.BLOCK_MAIN_LEG ) mCBleg.setVisibility( View.GONE );
+    if ( ! mBlk.isLeg() ) mCBleg.setVisibility( View.GONE );
 
   }
 

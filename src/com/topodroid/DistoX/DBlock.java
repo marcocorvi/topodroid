@@ -61,9 +61,9 @@ class DBlock
   float mMagnetic;
   float mDip;
   String mComment;
-  private int mExtend;
+  private int  mExtend;
   private long mFlag;     
-  int    mType;   
+  private int  mBlockType;   
   int mShotType;  // 0: DistoX, 1: manual
   boolean mWithPhoto;
   boolean mMultiBad; // whether it disagree with siblings
@@ -74,63 +74,73 @@ class DBlock
   static final int BLOCK_SEC_LEG    = 3; // additional shot of a centerline leg
   static final int BLOCK_BLANK_LEG  = 4; // blank centerline leg-shot
   static final int BLOCK_X_SPLAY    = 5; // FIXME_X_SPLAY cross splay
+  static final int BLOCK_BACK_LEG   = 6; // 
 
   static final long LEG_INVALID = -1L;
   static final long LEG_NORMAL  = 0L;
-  static final long LEG_EXTRA   = 1L;
+  static final long LEG_EXTRA   = 1L; // additional leg shots
   static final long LEG_XSPLAY  = 2L;
+  static final long LEG_BACK    = 16L;
 
   private static final int[] colors = {
-    TDColor.LIGHT_PINK,   // blank
-    TDColor.WHITE,        // midline
-    TDColor.LIGHT_BLUE,   // splay
-    TDColor.LIGHT_GRAY,   // sec. leg
-    TDColor.VIOLET,       // blank leg
-    TDColor.GREEN,        // FIXME_X_SPLAY X splay
+    TDColor.LIGHT_PINK,   // 0 blank
+    TDColor.WHITE,        // 1 midline
+    TDColor.LIGHT_BLUE,   // 2 splay
+    TDColor.LIGHT_GRAY,   // 3 sec. leg
+    TDColor.VIOLET,       // 4 blank leg
+    TDColor.GREEN,        // 5 FIXME_X_SPLAY X splay
+    TDColor.LIGHT_YELLOW, // 6 back leg
     TDColor.GREEN
   };
 
-  static final long BLOCK_SURVEY     =  0; // flags
-  static final long BLOCK_SURFACE    =  1;
-  static final long BLOCK_DUPLICATE  =  2;
-  static final long BLOCK_COMMENTED  =  4;
-  static final long BLOCK_NO_PLAN    =  8;
-  static final long BLOCK_NO_PROFILE = 16;
-  // public static final long BLOCK_BACKSHOT   = 32;
+  static final long FLAG_SURVEY     =  0; // flags
+  static final long FLAG_SURFACE    =  1;
+  static final long FLAG_DUPLICATE  =  2;
+  static final long FLAG_COMMENTED  =  4;
+  static final long FLAG_NO_PLAN    =  8;
+  static final long FLAG_NO_PROFILE = 16;
+  // static final long FLAG_BACKSHOT   = 32;
 
-  boolean isSurvey() { return mFlag == BLOCK_SURVEY; }
-  boolean isSurface()   { return (mFlag & BLOCK_SURFACE)    == BLOCK_SURFACE; }
-  boolean isDuplicate() { return (mFlag & BLOCK_DUPLICATE)  == BLOCK_DUPLICATE; }
-  boolean isCommented() { return (mFlag & BLOCK_COMMENTED)  == BLOCK_COMMENTED; }
-  boolean isNoPlan()    { return (mFlag & BLOCK_NO_PLAN)    == BLOCK_NO_PLAN; }
-  boolean isNoProfile() { return (mFlag & BLOCK_NO_PROFILE) == BLOCK_NO_PROFILE; }
-  // public boolean isBackshot() { return (mFlag & BLOCK_BACKSHOT) == BLOCK_BACKSHOT; }
+  boolean isSurvey()    { return mFlag == FLAG_SURVEY; }
+  boolean isSurface()   { return (mFlag & FLAG_SURFACE)    == FLAG_SURFACE; }
+  boolean isDuplicate() { return (mFlag & FLAG_DUPLICATE)  == FLAG_DUPLICATE; }
+  boolean isCommented() { return (mFlag & FLAG_COMMENTED)  == FLAG_COMMENTED; }
+  boolean isNoPlan()    { return (mFlag & FLAG_NO_PLAN)    == FLAG_NO_PLAN; }
+  boolean isNoProfile() { return (mFlag & FLAG_NO_PROFILE) == FLAG_NO_PROFILE; }
+  // boolean isBackshot()  { return (mFlag & FLAG_BACKSHOT)   == FLAG_BACKSHOT; }
 
-  // static boolean isSurvey(int flag) { return flag == BLOCK_SURVEY; }
-  static boolean isSurface(long flag)   { return (flag & BLOCK_SURFACE)    == BLOCK_SURFACE; }
-  static boolean isDuplicate(long flag) { return (flag & BLOCK_DUPLICATE)  == BLOCK_DUPLICATE; }
-  static boolean isCommented(long flag) { return (flag & BLOCK_COMMENTED)  == BLOCK_COMMENTED; }
-  static boolean isNoPlan(long flag)    { return (flag & BLOCK_NO_PLAN)    == BLOCK_NO_PLAN; }
-  static boolean isNoProfile(long flag) { return (flag & BLOCK_NO_PROFILE) == BLOCK_NO_PROFILE; }
-  // static public boolean isBackshot(int flag) { return (flag & BLOCK_BACKSHOT) == BLOCK_BACKSHOT; }
+  // static boolean isSurvey(int flag) { return flag == FLAG_SURVEY; }
+  static boolean isSurface(long flag)   { return (flag & FLAG_SURFACE)    == FLAG_SURFACE; }
+  static boolean isDuplicate(long flag) { return (flag & FLAG_DUPLICATE)  == FLAG_DUPLICATE; }
+  static boolean isCommented(long flag) { return (flag & FLAG_COMMENTED)  == FLAG_COMMENTED; }
+  static boolean isNoPlan(long flag)    { return (flag & FLAG_NO_PLAN)    == FLAG_NO_PLAN; }
+  static boolean isNoProfile(long flag) { return (flag & FLAG_NO_PROFILE) == FLAG_NO_PROFILE; }
+  // static boolean isBackshot(int flag) { return (flag & FLAG_BACKSHOT) == FLAG_BACKSHOT; }
 
-  // void resetFlag() { mFlag = BLOCK_SURVEY; }
+  // void resetFlag() { mFlag = FLAG_SURVEY; }
   void resetFlag( long flag ) { mFlag = flag; }
   void setFlag( long flag ) { mFlag |= flag; }
   // void clearFlag( long flag ) { mFlag &= ~flag; }
   long getFlag() { return mFlag; }
 
-  void setTypeBlankLeg( ) { if ( mType == BLOCK_BLANK ) mType = BLOCK_BLANK_LEG; }
-  boolean isTypeBlank() { return mType == BLOCK_BLANK || mType == BLOCK_BLANK_LEG; }
-  static boolean isTypeBlank( int t ) { return t == BLOCK_BLANK || t == BLOCK_BLANK_LEG; }
+  int getBlockType() { return mBlockType; }
 
-  int type() { return mType; }
+  void setTypeBlankLeg( ) { if ( mBlockType == BLOCK_BLANK ) mBlockType = BLOCK_BLANK_LEG; }
+  boolean isTypeBlank() { return mBlockType == BLOCK_BLANK || mBlockType == BLOCK_BLANK_LEG; }
+  static boolean isTypeBlank( int t ) { return t == BLOCK_BLANK || t == BLOCK_BLANK_LEG; }
 
   static boolean isSplay( int t ) { return t == BLOCK_SPLAY || t == BLOCK_X_SPLAY; }
 
-  boolean isSplay()  { return mType == BLOCK_SPLAY || mType == BLOCK_X_SPLAY; }
-  boolean isXSplay() { return mType == BLOCK_X_SPLAY; }
-  boolean isLeg()    { return mType == BLOCK_MAIN_LEG; }
+  boolean isBlank()      { return mBlockType == BLOCK_BLANK; }
+  boolean isSplay()      { return mBlockType == BLOCK_SPLAY || mBlockType == BLOCK_X_SPLAY; }
+  boolean isPlainSplay() { return mBlockType == BLOCK_SPLAY; }
+  boolean isXSplay()     { return mBlockType == BLOCK_X_SPLAY; }
+  boolean isLeg()        { return mBlockType == BLOCK_MAIN_LEG || mBlockType == BLOCK_BACK_LEG; }
+  boolean isMainLeg()    { return mBlockType == BLOCK_MAIN_LEG; }
+  boolean isBackLeg()    { return mBlockType == BLOCK_BACK_LEG; }
+  boolean isSecLeg()     { return mBlockType == BLOCK_SEC_LEG; }
+
+  void setBlockType( int type ) { mBlockType = type; }
 
   // static int getExtend( int ext ) { return ( ext < EXTEND_UNSET )? ext : ext - EXTEND_FVERT; }
   static int getExtend( int ext ) { return ext; }
@@ -198,9 +208,9 @@ class DBlock
     mDip = 0.0f;
     mComment = "";
     mExtend = e;
-    mFlag   = BLOCK_SURVEY;
-    mType   = type;
-    mShotType = shot_type;
+    mFlag   = FLAG_SURVEY;
+    mBlockType = type;
+    mShotType = shot_type; // distox or manual
     mWithPhoto = false;
     mMultiBad = false;
   }
@@ -227,9 +237,9 @@ class DBlock
     mDip = 0.0f;
     mComment = "";
     mExtend = EXTEND_RIGHT;
-    mFlag   = BLOCK_SURVEY;
-    mType   = BLOCK_BLANK;
-    mShotType = 0;
+    mFlag   = FLAG_SURVEY;
+    mBlockType   = BLOCK_BLANK;
+    mShotType = 0;  // distox
     mWithPhoto = false;
     mMultiBad = false;
   }
@@ -240,7 +250,7 @@ class DBlock
     mSurveyId = survey_id;
   }
 
-  void setName( String from, String to )
+  void setBlockName( String from, String to )
   {
     if ( from == null || to == null ) {
       TDLog.Error( "FIXME ERROR DBlock::setName() either from or to is null");
@@ -250,15 +260,15 @@ class DBlock
     mTo   = to.trim();
     if ( mFrom.length() > 0 ) {
       if ( mTo.length() > 0 ) {
-        mType = BLOCK_MAIN_LEG;
+        mBlockType = BLOCK_MAIN_LEG;
       } else {
-        mType = BLOCK_SPLAY;
+        mBlockType = BLOCK_SPLAY;
       }
     } else {
       if ( mTo.length() > 0 ) {
-        mType = BLOCK_SPLAY;
+        mBlockType = BLOCK_SPLAY;
       } else {
-        mType = BLOCK_BLANK;
+        mBlockType = BLOCK_BLANK;
       }
     }
   }
@@ -288,7 +298,7 @@ class DBlock
   //   return BLOCK_MAIN_LEG;
   // }
 
-  int color() { return colors[ mType ]; }
+  int color() { return colors[ mBlockType ]; }
 
   // compute relative angle in radians
   float relativeAngle( DBlock b )
@@ -333,7 +343,7 @@ class DBlock
   }
 
   
-  private void formatFlag( PrintWriter pw )
+  private void formatFlagPhoto( PrintWriter pw )
   {
     if ( isNoPlan() ) {
       pw.format("]_");
@@ -350,6 +360,7 @@ class DBlock
     } else {
       pw.format("]");
     }
+    if ( mWithPhoto ) { pw.format("#"); }
   }
 
   private void formatComment( PrintWriter pw )
@@ -371,8 +382,7 @@ class DBlock
     pw.format(Locale.US, "<%s-%s> %.2f %.1f %.1f [%c",
       mFrom, mTo,
       mLength*ul, mBearing*ua, mClino*ua, mExtendTag[ mExtend + 1 ] );
-    formatFlag( pw );
-    if ( mWithPhoto ) { pw.format("#"); }
+    formatFlagPhoto( pw );
     formatComment( pw );
     // TDLog.Log( TDLog.LOG_DATA, sw.getBuffer().toString() );
     return sw.getBuffer().toString();
@@ -394,8 +404,7 @@ class DBlock
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
     pw.format("[%c", mExtendTag[ mExtend + 1 ] );
-    formatFlag( pw );
-    if ( mWithPhoto ) { pw.format("#"); }
+    formatFlagPhoto( pw );
     formatComment( pw );
     return sw.getBuffer().toString();
   }

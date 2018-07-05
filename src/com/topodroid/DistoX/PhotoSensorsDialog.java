@@ -153,7 +153,7 @@ class PhotoSensorsDialog extends MyDialog
     mButtonDelete.setLayoutParams( lp );
 
     LinearLayout layout4c = (LinearLayout) findViewById( R.id.layout4c );
-    if ( mBlk.type() == DBlock.BLOCK_MAIN_LEG ) {
+    if ( mBlk.isMainLeg() ) {
       mCBleg = new CheckBox( mContext );
       mCBleg.setText( R.string.delete_whole_leg );
       mCBleg.setChecked( false );

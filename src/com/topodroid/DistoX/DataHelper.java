@@ -47,8 +47,8 @@ import java.util.HashMap;
 class DataHelper extends DataSetObservable
 {
 
-  static final String DB_VERSION = "34";
-  static final int DATABASE_VERSION = 34;
+  static final String DB_VERSION = "35";
+  static final int DATABASE_VERSION = 35;
   static final int DATABASE_VERSION_MIN = 21; // was 14
 
   private static final String CONFIG_TABLE = "configs";
@@ -93,6 +93,7 @@ class DataHelper extends DataSetObservable
   private SQLiteStatement updateShotNameAndExtendStmt = null;
   // private SQLiteStatement updateShotExtendStmt = null;
   // private SQLiteStatement updateShotFlagStmt = null;
+  // private SQLiteStatement updateShotLegFlagStmt = null;
   // private SQLiteStatement updateShotCommentStmt = null;
   private SQLiteStatement resetShotColorStmt = null;
   private SQLiteStatement updateShotColorStmt = null;
@@ -146,9 +147,10 @@ class DataHelper extends DataSetObservable
 
   private DataListenerSet mListeners;
 
+  // N.B. "source" comes after "status" although it is after "cs_altitude" in the table
   private static final String[] mFixedFields = {
     "id", "station", "longitude", "latitude", "altitude", "altimetric", "comment", "status", "source",
-    "cs_name", "cs_longitude", "cs_latitude", "cs_altitude"
+    "cs_name", "cs_longitude", "cs_latitude", "cs_altitude", "cs_decimals"
   };
 
   // ----------------------------------------------------------------------
@@ -212,10 +214,15 @@ class DataHelper extends DataSetObservable
      }
    }
 
+   static final long DATA_NORMAL   = 0L;
+   static final long DATA_SEC_LEG  = 1L;
+   static final long DATA_X_SPLAY  = 2L;
+   static final long DATA_BACK_LEG = 3L;
+
    private void fillBlock( long sid, DBlock block, Cursor cursor )
    {
      block.setId( cursor.getLong(0), sid );
-     block.setName( cursor.getString(1), cursor.getString(2) );  // from - to
+     block.setBlockName( cursor.getString(1), cursor.getString(2) );  // from - to
      block.mLength       = (float)( cursor.getDouble(3) );  // length [meters]
      // block.setBearing( (float)( cursor.getDouble(4) ) ); 
      block.mBearing      = (float)( cursor.getDouble(4) );  // bearing [degrees]
@@ -227,10 +234,12 @@ class DataHelper extends DataSetObservable
      block.setExtend( (int)(cursor.getLong(9) ) );
      block.resetFlag( cursor.getLong(10) );
      long leg = cursor.getLong(11);
-     if ( leg == 1L ) {
-       block.mType = DBlock.BLOCK_SEC_LEG; 
-     } else if ( leg == 2L ) {
-       block.mType = DBlock.BLOCK_X_SPLAY;
+     if ( leg == DATA_SEC_LEG ) {
+       block.setBlockType( DBlock.BLOCK_SEC_LEG );
+     } else if ( leg == DATA_X_SPLAY ) {
+       block.setBlockType( DBlock.BLOCK_X_SPLAY );
+     } else if ( leg == DATA_BACK_LEG ) {
+       block.setBlockType( DBlock.BLOCK_BACK_LEG );
      }
      block.mComment = cursor.getString(12);
      block.mShotType = (int)cursor.getLong(13);
@@ -488,6 +497,7 @@ class DataHelper extends DataSetObservable
       // shiftShotsIdStmt   = myDB.compileStatement( "UPDATE shots SET id=id+1 where surveyId=? and id>=?" );
       // updateShotLegStmt  = myDB.compileStatement( "UPDATE shots SET leg=? WHERE surveyId=? AND id=?" );
       // updateShotFlagStmt = myDB.compileStatement( "UPDATE shots SET flag=? WHERE surveyId=? AND id=?" );
+      // updateShotLegFlagStmt = myDB.compileStatement( "UPDATE shots SET leg=?, flag=? WHERE surveyId=? AND id=?" );
 
       updateShotNameAndExtendStmt =
         myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, leg=? WHERE surveyId=? AND id=?" );
@@ -818,7 +828,8 @@ class DataHelper extends DataSetObservable
   }
 
   int updateShot( long id, long sid, String fStation, String tStation,
-                  long extend, long flag, long leg, String comment, boolean forward )
+                  long extend, long flag, long leg,
+		  String comment, boolean forward )
   {
     boolean success = false;
     if ( myDB == null ) return -1;
@@ -959,10 +970,10 @@ class DataHelper extends DataSetObservable
     // if ( myDB == null ) return;
     // get the shot sid/id
     DBlock blk = selectShot( id, sid );
-    if ( blk.mType == DBlock.BLOCK_SPLAY ) {
+    if ( blk.isPlainSplay() ) {
       updateShotLeg( id, sid, DBlock.LEG_XSPLAY, forward );
       return DBlock.LEG_XSPLAY;
-    } else if ( blk.mType == DBlock.BLOCK_X_SPLAY ) {
+    } else if ( blk.isXSplay() ) {
       updateShotLeg( id, sid, DBlock.LEG_NORMAL, forward );
       return DBlock.LEG_NORMAL;
     }
@@ -991,6 +1002,18 @@ class DataHelper extends DataSetObservable
     if ( doExecShotSQL( id, sw ) ) {
       if ( forward && mListeners != null ) { // synchronized( mListeners )
         mListeners.onUpdateShotFlag( id, sid, flag );
+      }
+    } 
+  }
+
+  void updateShotLegFlag( long id, long sid, long leg, long flag, boolean forward )
+  {
+    StringWriter sw = new StringWriter();
+    PrintWriter pw = new PrintWriter( sw );
+    pw.format( Locale.US, "UPDATE shots SET leg=%d flag=%d WHERE surveyId=%d AND id=%d", leg, flag, sid, id );
+    if ( doExecShotSQL( id, sw ) ) {
+      if ( forward && mListeners != null ) { // synchronized( mListeners )
+        mListeners.onUpdateShotLegFlag( id, sid, leg, flag );
       }
     } 
   }
@@ -1058,7 +1081,7 @@ class DataHelper extends DataSetObservable
         updateShotNameAndExtendStmt.bindString( 1, b.mFrom );
         updateShotNameAndExtendStmt.bindString( 2, b.mTo );
         updateShotNameAndExtendStmt.bindLong(   3, b.getFullExtend() );
-        updateShotNameAndExtendStmt.bindLong(   4, (b.mType == DBlock.BLOCK_SEC_LEG)? 1 : 0 );
+        updateShotNameAndExtendStmt.bindLong(   4, b.isSecLeg()? 1 : 0 );
         updateShotNameAndExtendStmt.bindLong(   5, sid );
         updateShotNameAndExtendStmt.bindLong(   6, b.mId );
         // try {
@@ -1079,7 +1102,7 @@ class DataHelper extends DataSetObservable
       for ( DBlock b : updatelist ) {
         mListeners.onUpdateShotName( b.mId, sid, b.mFrom, b.mTo );
         mListeners.onUpdateShotExtend( b.mId, sid, b.getFullExtend() );
-        mListeners.onUpdateShotLeg( b.mId, sid, (b.mType == DBlock.BLOCK_SEC_LEG)? 1 : 0 );
+        mListeners.onUpdateShotLeg( b.mId, sid, b.isSecLeg()? 1 : 0 );
       }
     }
   }
@@ -1129,10 +1152,10 @@ class DataHelper extends DataSetObservable
         ih.bind( magneticCol, 0.0);
         ih.bind( dipCol, 0.0);
         ih.bind( extendCol, s.extend );
-        ih.bind( flagCol, s.duplicate ? DBlock.BLOCK_DUPLICATE 
-                        : s.surface ? DBlock.BLOCK_SURFACE 
-                        // : s.commented ? DBlock.BLOCK_COMMENTED // ParserShots are not "commented"
-                        // : s.backshot ? DBlock.BLOCK_BACKSHOT
+        ih.bind( flagCol, s.duplicate ? DBlock.FLAG_DUPLICATE 
+                        : s.surface ? DBlock.FLAG_SURFACE 
+                        // : s.commented ? DBlock.FLAG_COMMENTED // ParserShots are not "commented"
+                        // : s.backshot ? DBlock.FLAG_BACKSHOT
                         : 0 );
         ih.bind( legCol, s.leg );
         ih.bind( statusCol, 0 );
@@ -1156,10 +1179,10 @@ class DataHelper extends DataSetObservable
       // synchronized( mListeners )
       for ( ParserShot s : shots ) {
         mListeners.onInsertShot( sid, id, millis, color, s.from, s.to, s.len, s.ber, s.cln, s.rol, s.extend, 
-                            s.duplicate ? DBlock.BLOCK_DUPLICATE    // flag
-                            : s.surface ? DBlock.BLOCK_SURFACE 
-                            // : s.commented ? DBlock.BLOCK_COMMENTED 
-                            // : s.backshot ? DBlock.BLOCK_BACKSHOT
+                            s.duplicate ? DBlock.FLAG_DUPLICATE    // flag
+                            : s.surface ? DBlock.FLAG_SURFACE 
+                            // : s.commented ? DBlock.FLAG_COMMENTED 
+                            // : s.backshot ? DBlock.FLAG_BACKSHOT
                             : 0,
                             s.leg, // leg
                             0L, // status
@@ -1173,13 +1196,13 @@ class DataHelper extends DataSetObservable
   long insertDistoXShot( long sid, long id, double d, double b, double c, double r, long extend,
                           long status, boolean forward )
   { // 0L=leg, status, 0L=type DISTOX
-    return doInsertShot( sid, id, System.currentTimeMillis()/1000, 0L, "", "",  d, b, c, r, extend, DBlock.BLOCK_SURVEY, 0L, status, 0L, "", forward );
+    return doInsertShot( sid, id, System.currentTimeMillis()/1000, 0L, "", "",  d, b, c, r, extend, DBlock.FLAG_SURVEY, 0L, status, 0L, "", forward );
   }
 
   long insertShot( long sid, long id, long millis, long color, double d, double b, double c, double r, long extend, long leg,
                           long shot_type, boolean forward )
   { // leg, 0L=status, type 
-    return doInsertShot( sid, id, millis, color, "", "",  d, b, c, r, extend, DBlock.BLOCK_SURVEY, leg, 0L, shot_type, "", forward );
+    return doInsertShot( sid, id, millis, color, "", "",  d, b, c, r, extend, DBlock.FLAG_SURVEY, leg, 0L, shot_type, "", forward );
   }
 
   boolean resetShotColor( long sid )
@@ -1412,7 +1435,7 @@ class DataHelper extends DataSetObservable
     cv.put( "magnetic", 0.0 );
     cv.put( "dip",      0.0 );
     cv.put( "extend",   extend );
-    cv.put( "flag",     DBlock.BLOCK_SURVEY ); // flag );
+    cv.put( "flag",     DBlock.FLAG_SURVEY ); // flag );
     cv.put( "leg",      leg ); // DBlock.LEG_NORMAL ); // leg );
     cv.put( "status",   TDStatus.NORMAL ); // status );
     cv.put( "comment",  "" ); // comment );
@@ -1422,7 +1445,7 @@ class DataHelper extends DataSetObservable
 
     if ( doInsert( SHOT_TABLE, cv, "insert at" ) ) {
       if ( forward && mListeners != null ) { // synchronized( mListeners )
-        mListeners.onInsertShotAt( sid, at, millis, color, d, b, c, r, extend, leg, DBlock.BLOCK_SURVEY );
+        mListeners.onInsertShotAt( sid, at, millis, color, d, b, c, r, extend, leg, DBlock.FLAG_SURVEY );
       }
     }
     return at;
@@ -1875,7 +1898,8 @@ class DataHelper extends DataSetObservable
                                  cursor.getString(9),
                                  cursor.getDouble(10),
                                  cursor.getDouble(11),
-                                 cursor.getDouble(12)
+                                 cursor.getDouble(12),
+				 cursor.getLong(13)
         ) );
       } while (cursor.moveToNext());
     }
@@ -1905,11 +1929,12 @@ class DataHelper extends DataSetObservable
                                   cursor.getDouble(5),
                                   cursor.getString(6),
                                   // skip status
-                                  cursor.getLong(8),
+                                  cursor.getLong(8),  // source
                                   cursor.getString(9),
                                   cursor.getDouble(10),
                                   cursor.getDouble(11),
-                                  cursor.getDouble(12)
+                                  cursor.getDouble(12),
+				  cursor.getLong(13)  // cs_decimals
          ) );
        } while (cursor.moveToNext());
      }
@@ -2621,20 +2646,29 @@ class DataHelper extends DataSetObservable
      return list;
    }
 
-   DBlock selectLastLegShot( long sid, long status )
+   // @param backshot  whether the DistoX is in backshot mode
+   // @return the last block with either the from station (non-backshot) or the to station (backshot)
+   DBlock selectLastNonBlankShot( long sid, long status, boolean backshot )
    {
      if ( myDB == null ) return null;
-     DBlock block = null;
+     DBlock ret = null;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
                      WHERE_SID_STATUS_LEG, new String[]{ Long.toString(sid), Long.toString(status) },
                      null, null, "id desc", "1" );
      if (cursor.moveToFirst()) {
        // Log.v("DistoX", "got the last leg " + cursor.getLong(0) + " " + cursor.getString(1) + " - " + cursor.getString(2) );
-       block = new DBlock();
-       fillBlock( sid, block, cursor );
+       DBlock block = new DBlock();
+       do { 
+         fillBlock( sid, block, cursor );
+	 if ( backshot ) {
+           if ( block.mTo != null && block.mTo.length() > 0 ) { ret = block; break; }
+	 } else {
+           if ( block.mFrom != null && block.mFrom.length() > 0 ) { ret = block; break; }
+	 }
+       } while (cursor.moveToNext());
      }
      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-     return block;
+     return ret;
    }
 
    List<DBlock> selectAllLegShots( long sid, long status )
@@ -3214,12 +3248,12 @@ class DataHelper extends DataSetObservable
    long insertFixed( long sid, long id, String station, double lng, double lat, double alt, double asl,
                             String comment, long status, long source )
    {
-     return insertFixed( sid, id, station, lng, lat, alt, asl, comment, status, source, "", 0, 0, 0 );
+     return insertFixed( sid, id, station, lng, lat, alt, asl, comment, status, source, "", 0, 0, 0, 2 );
    }
 
    private long insertFixed( long sid, long id, String station, double lng, double lat, double alt, double asl,
                             String comment, long status, long source,
-                            String cs, double cs_lng, double cs_lat, double cs_alt )
+                            String cs, double cs_lng, double cs_lat, double cs_alt, long cs_n_dec )
    {
      // Log.v("DistoX", "insert fixed id " + id + " station " + station );
      if ( id != -1L ) return id;
@@ -3245,6 +3279,7 @@ class DataHelper extends DataSetObservable
      cv.put( "cs_latitude",  cs_lat );
      cv.put( "cs_altitude",  cs_alt );
      cv.put( "source",     source );
+     cv.put( "cs_decimals", cs_n_dec );
      if ( ! doInsert( FIXED_TABLE, cv, "insert fixed" ) ) return -1L;
      return id;
    }
@@ -3450,7 +3485,7 @@ class DataHelper extends DataSetObservable
     doUpdate( FIXED_TABLE, vals, sid, id, "fixed data" );
   }
 
-  void updateFixedCS( long id, long sid, String cs, double lng, double lat, double alt )
+  void updateFixedCS( long id, long sid, String cs, double lng, double lat, double alt, long n_dec )
   {
     if ( myDB == null ) return;
     ContentValues vals = new ContentValues();
@@ -3459,11 +3494,13 @@ class DataHelper extends DataSetObservable
       vals.put( "cs_longitude", lng );
       vals.put( "cs_latitude",  lat );
       vals.put( "cs_altitude",  alt );
+      vals.put( "cs_decimals",  n_dec );
     } else {
       vals.put( "cs_name", "" );
       vals.put( "cs_longitude", 0 );
       vals.put( "cs_latitude",  0 );
       vals.put( "cs_altitude",  0 );
+      vals.put( "cs_decimals",  2 );
     }
     doUpdate( FIXED_TABLE, vals, sid, id, "fixed cs" );
   }
@@ -3933,9 +3970,9 @@ class DataHelper extends DataSetObservable
                   "surveyId=?", new String[] { Long.toString( sid ) },
                   null, null, null );
        if (cursor.moveToFirst()) {
-         do {
+         do { // values in the order of the fields of the table
            pw.format(Locale.US,
-             "INSERT into %s values( %d, %d, \"%s\", %.6f, %.6f, %.2f, %.2f \"%s\", %d, %d, \"%s\", %.6f, %.6f, %.1f );\n",
+             "INSERT into %s values( %d, %d, \"%s\", %.6f, %.6f, %.2f, %.2f \"%s\", %d, \"%s\", %.6f, %.6f, %.1f, %d, %d );\n",
              FIXED_TABLE,
              sid,
              cursor.getLong(0),
@@ -3946,11 +3983,12 @@ class DataHelper extends DataSetObservable
              cursor.getDouble(5),
              cursor.getString(6),
              cursor.getLong(7),   // status
-             cursor.getLong(8),   // source type
              cursor.getString(9), // cs_name
              cursor.getDouble(10),
              cursor.getDouble(11),
-             cursor.getDouble(12)
+             cursor.getDouble(12),
+             cursor.getLong(8),   // source type
+             cursor.getLong(13)   // cs decimals
            );
          } while (cursor.moveToNext());
        }
@@ -4173,14 +4211,16 @@ class DataHelper extends DataSetObservable
              double cs_lng = 0;
              double cs_lat = 0;
              double cs_alt = 0;
+	     long cs_n_dec = 2;
              String cs = scanline1.stringValue( );
              if ( cs.length() > 0 ) {
                cs_lng = scanline1.doubleValue( );
                cs_lat = scanline1.doubleValue( );
                cs_alt = scanline1.doubleValue( );
+	       if ( db_version > 34 ) cs_n_dec = scanline1.longValue( );
              }
              // use id == -1L to force DB get a new id
-             if ( insertFixed( sid, -1L, station, lng, lat, alt, asl, comment, status, source, cs, cs_lng, cs_lat, cs_alt ) < 0 ) {
+             if ( insertFixed( sid, -1L, station, lng, lat, alt, asl, comment, status, source, cs, cs_lng, cs_lat, cs_alt, cs_n_dec ) < 0 ) {
 	       success = false;
 	     }
              // TDLog.Log( TDLog.LOG_DB, "loadFromFile fixed " + sid + " " + id + " " + station  );
@@ -4352,9 +4392,9 @@ class DataHelper extends DataSetObservable
              +   " acceleration REAL, "
              +   " magnetic REAL, "
              +   " dip REAL, "
-             +   " extend INTEGER, "
-             +   " flag INTEGER, "
-             +   " leg INTEGER, "
+             +   " extend INTEGER, " // LEFT VERT RIGHT IGNORE etc.
+             +   " flag INTEGER, "   // NONE DUPLICATE SURFACE COMMENTED
+             +   " leg INTEGER, "    // MAIN SEC SPLAY XSPLAY BACK ...
              +   " status INTEGER, " // NORMAL DELETED OVERSHOOT
              +   " comment TEXT, "
              +   " type INTEGER, "     // DISTOX MANUAL
@@ -4380,7 +4420,8 @@ class DataHelper extends DataSetObservable
              +   " cs_longitude REAL, "
              +   " cs_latitude REAL, "
              +   " cs_altitude REAL, "
-             +   " source INTEGER "    // 0: unknown,  1: topodroid,  2: manual,   3: mobile-topographer
+             +   " source INTEGER, "    // 0: unknown,  1: topodroid,  2: manual,   3: mobile-topographer
+	     +   " cs_decimals INTEGER"
              // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
              // +   " ON DELETE CASCADE "
              +   ")"
@@ -4575,6 +4616,8 @@ class DataHelper extends DataSetObservable
 	   case 33:
              db.execSQL( "ALTER TABLE shots ADD COLUMN color INTEGER default 0" );
 	   case 34:
+             db.execSQL( "ALTER TABLE fixeds ADD COLUMN cs_decimals INTEGER default 2" );
+	   case 35:
              /* current version */
            default:
              break;

@@ -364,9 +364,9 @@ class DrawingPath extends RectF
       if (    mType == DRAWING_PATH_SPLAY  // FIXME_X_SPLAY
            && mBlock != null ) {
 	if ( mBlock.isRecent( ) ) { // if ( mBlock.isTimeRecent( System.currentTimeMillis()/1000 ) ) 
-          if ( mBlock.mType == DBlock.BLOCK_SPLAY && BrushManager.lightBluePaint != null ) {
+          if ( mBlock.isPlainSplay() && BrushManager.lightBluePaint != null ) {
             canvas.drawPath( path, BrushManager.lightBluePaint );
-          } else if ( mBlock.mType == DBlock.BLOCK_X_SPLAY && BrushManager.fixedSplay2Paint != null ) {
+          } else if ( mBlock.isXSplay() && BrushManager.fixedSplay2Paint != null ) {
             canvas.drawPath( path, BrushManager.fixedSplay2Paint );
           }
 	} else if ( mBlock.mPaint != null ) {

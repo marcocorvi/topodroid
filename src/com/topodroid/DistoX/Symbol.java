@@ -95,4 +95,7 @@ class Symbol implements SymbolInterface
   public boolean setAngle( float angle ) { return false; }
   public int getAngle() { return 0; }
 
+  static float sizeX( int type ) { return ( type == POINT )? TDSetting.mUnitIcons * 1.5f : TDSetting.mUnitIcons * 2.2f; }
+  static float sizeY( int type ) { return ( type == POINT )? TDSetting.mUnitIcons * 1.5f : TDSetting.mUnitIcons * 1.7f; }
+
 }

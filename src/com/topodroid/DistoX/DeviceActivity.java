@@ -242,9 +242,10 @@ public class DeviceActivity extends Activity
     // if ( TDLevel.overNormal   ) mButton1[k++] = MyButton.getButton( this, this, izons[3] ); // INFO
     // if ( TDLevel.overNormal   ) mButton1[k++] = MyButton.getButton( this, this, izons[4] ); // CALIB_READ
     // if ( TDLevel.overAdvanced ) mButton1[k++] = MyButton.getButton( this, this, izons[5] ); // MEMORY
-    for ( int k=0; k <= mNrButton1; ++k ) {
+    for ( int k=0; k < mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( this, this, izons[k] );
     }
+    mButton1[mNrButton1] = MyButton.getButton( this, this, R.drawable.iz_empty );
 
     mBMtoggle    = MyButton.getButtonBackground( mApp, res, izons[IDX_TOGGLE] );
     mBMtoggle_no = MyButton.getButtonBackground( mApp, res, izonsno[IDX_TOGGLE] );

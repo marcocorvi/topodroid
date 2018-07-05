@@ -34,6 +34,7 @@ class FixedInfo extends MagLatLong
   double cs_lng;
   double cs_lat;
   double cs_alt;
+  long   cs_n_dec;
 
   FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid,
                     String cmt, long src )
@@ -50,11 +51,12 @@ class FixedInfo extends MagLatLong
     cs_lng = 0;
     cs_lat = 0;
     cs_alt = 0;
+    cs_n_dec = 2L;
   }
 
   FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid,
                     String cmt, long src,
-                    String name_cs, double lng_cs, double lat_cs, double alt_cs )
+                    String name_cs, double lng_cs, double lat_cs, double alt_cs, long n_dec )
   {
     id = _id;
     name = n;
@@ -68,15 +70,17 @@ class FixedInfo extends MagLatLong
     cs_lng  = lng_cs;
     cs_lat  = lat_cs;
     cs_alt  = alt_cs;
+    cs_n_dec = n_dec;
   }
 
-  void setCSCoords( String name_cs, double lng_cs, double lat_cs, double alt_cs )
+  void setCSCoords( String name_cs, double lng_cs, double lat_cs, double alt_cs, long n_dec )
   {
     cs = name_cs;
     if ( cs != null && cs.length() > 0 ) {
       cs_lng = lng_cs;
       cs_lat = lat_cs;
       cs_alt = alt_cs;
+      cs_n_dec = n_dec;
     }
   }
 
@@ -101,7 +105,10 @@ class FixedInfo extends MagLatLong
 
   String toExportCSString()
   {
-    return String.format(Locale.US, "%s %.2f %.2f %.0f", name, cs_lng, cs_lat, cs_alt );
+    StringBuilder fmt = new StringBuilder();
+    fmt.append("%s %.").append( cs_n_dec ).append("f %.").append( cs_n_dec ).append("f %.0f");
+    return String.format(Locale.US, fmt.toString(), name, cs_lng, cs_lat, cs_alt );
+    // return String.format(Locale.US, "%s %.2f %.2f %.0f", name, cs_lng, cs_lat, cs_alt );
   }
 
   String csName() { return cs; }

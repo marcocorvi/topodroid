@@ -337,8 +337,8 @@ class ConnectionHandler extends Handler
 
        case DataListener.SHOT_UPDATE:
          app_data.updateShot( Integer.parseInt(data[0]), mSID, data[2], data[3], 
-                                Integer.parseInt(data[4]), Integer.parseInt(data[5]), Integer.parseInt(data[6]),
-                                data[7], false );
+                              Integer.parseInt(data[4]), Integer.parseInt(data[5]), Integer.parseInt(data[6]),
+                              data[7], false );
          break;
        case DataListener.SHOT_NAME:
          app_data.updateShotName( Integer.parseInt(data[0]), mSID, data[2], data[3], false );
@@ -351,6 +351,9 @@ class ConnectionHandler extends Handler
          break;
        case DataListener.SHOT_FLAG:
          app_data.updateShotFlag( Integer.parseInt(data[0]), mSID, Integer.parseInt(data[2]), false );
+         break;
+       case DataListener.SHOT_LEG_FLAG:
+         app_data.updateShotLegFlag( Integer.parseInt(data[0]), mSID, Integer.parseInt(data[2]), Integer.parseInt(data[3]), false );
          break;
        case DataListener.SHOT_COMMENT:
          app_data.updateShotComment( Integer.parseInt(data[0]), mSID, data[2], false );
@@ -497,6 +500,11 @@ class ConnectionHandler extends Handler
   public void onUpdateShotFlag( long id, long sid, long flag )
   {
     enqueue( DataListener.SHOT_FLAG, String.format(Locale.US, "%d|%d|%d|", (int)id, (int)sid, (int)flag ) );
+  }
+
+  public void onUpdateShotLegFlag( long id, long sid, long leg, long flag )
+  {
+    enqueue( DataListener.SHOT_LEG_FLAG, String.format(Locale.US, "%d|%d|%d|%d|", (int)id, (int)sid, (int)leg, (int)flag ) );
   }
 
   public void onUpdateShotComment( long id, long sid, String comment ) 

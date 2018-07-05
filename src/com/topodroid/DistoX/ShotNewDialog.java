@@ -402,14 +402,14 @@ class ShotNewDialog extends MyDialog
                              Float.parseFloat(backdistance.replace(',','.') ),
                              Float.parseFloat(backbearing.replace(',','.') ),
                              Float.parseFloat(backclino.replace(',','.') ),
-                             back_extend,
+                             back_extend, DBlock.FLAG_SURVEY,
                              null, null, null, null, null );
             }
             blk = mApp.insertManualShot( mAt, shot_from, shot_to,
                              Float.parseFloat( distance.replace(',','.') ),
                              Float.parseFloat( bearing.replace(',','.') ),
                              Float.parseFloat( clino.replace(',','.') ),
-                             shot_extend,
+                             shot_extend, DBlock.FLAG_SURVEY,
                              mETleft.getText().toString().replace(',','.') ,
                              mETright.getText().toString().replace(',','.') ,
                              mETup.getText().toString().replace(',','.') ,
@@ -421,7 +421,7 @@ class ShotNewDialog extends MyDialog
                              Float.parseFloat( backdistance.replace(',','.') ),
                              Float.parseFloat( backbearing.replace(',','.') ),
                              Float.parseFloat( backclino.replace(',','.') ),
-                             back_extend,
+                             back_extend, DBlock.FLAG_SURVEY,
                              mETleft.getText().toString().replace(',','.') ,
                              mETright.getText().toString().replace(',','.') ,
                              mETup.getText().toString().replace(',','.') ,
@@ -435,14 +435,14 @@ class ShotNewDialog extends MyDialog
                              Float.parseFloat(distance.replace(',','.') ),
                              Float.parseFloat(bearing.replace(',','.') ),
                              Float.parseFloat(clino.replace(',','.') ),
-                             shot_extend,
+                             shot_extend, DBlock.FLAG_SURVEY,
                              null, null, null, null, null );
           } else if ( backbearing.length() > 0 && backclino.length() > 0 ) {
             blk = mApp.insertManualShot( mAt, shot_to, shot_from,
                              Float.parseFloat(backdistance.replace(',','.') ),
                              Float.parseFloat(backbearing.replace(',','.') ),
                              Float.parseFloat(backclino.replace(',','.') ),
-                             back_extend,
+                             back_extend, DBlock.FLAG_SURVEY,
                              null, null, null, null, null );
           }
         }

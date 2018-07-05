@@ -36,8 +36,8 @@ class EnableSymbol implements View.OnClickListener
   // int mIndex;  // symbol index
   boolean mEnabled;
   SymbolInterface mSymbol;
-  float sx = 1.0f;
-  float sy = 1.0f;
+  float sx;
+  float sy;
 
   boolean MustSave()
   {
@@ -77,14 +77,8 @@ class EnableSymbol implements View.OnClickListener
     // mMustSave = false;
     mSymbol = symbol;
     mEnabled = mSymbol.isEnabled();
-
-    if ( mType == Symbol.POINT ) {
-      sx = 2.0f;
-      sy = 2.0f;
-    } else if ( mType == Symbol.AREA ) {
-      sx = 2.5f;
-      sy = 1.7f;
-    }
+    sx = Symbol.sizeX( mType );
+    sy = Symbol.sizeY( mType );
   }
 
 }

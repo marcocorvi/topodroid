@@ -313,7 +313,7 @@ class TDExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null &&
-               ( item.mType == DBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
+               ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
@@ -827,7 +827,7 @@ class TDExporter
         if ( to == null || to.length() == 0 ) {
           to = "";
           if ( ref_item != null 
-            && ( item.mType == DBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
+            && ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
             from = ref_item.mFrom;
             to   = ref_item.mTo;
             extend = ref_item.getExtend();
@@ -1021,7 +1021,7 @@ class TDExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null &&
-               ( item.mType == DBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
+               ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
@@ -1315,7 +1315,7 @@ class TDExporter
           if ( from == null || from.length() == 0 ) {
             if ( to == null || to.length() == 0 ) { // no station: not exported
               if ( ref_item != null &&
-                 ( item.mType == DBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
+                 ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
                 leg.add( item.mLength, item.mBearing, item.mClino );
               }
             } else { // only TO station
@@ -1590,7 +1590,7 @@ class TDExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null && 
-               ( item.mType == DBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
+               ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
@@ -1697,7 +1697,7 @@ class TDExporter
   //     float r0[] = new float[10];
   //     DBlock ref_item = null;
   //     int extend = 0;
-  //     int flag   = DBlock.BLOCK_SURVEY;
+  //     int flag   = DBlock.FLAG_SURVEY;
 
   //     for ( DBlock item : list ) {
   //       String from = item.mFrom;
@@ -1712,7 +1712,7 @@ class TDExporter
   //               pw.format(Locale.US, "@ %.2f %.1f %.1f %.1f\n", l0[n], b0[n], c0[n], r0[n] );
   //             }
   //             extend = 0;
-  //             flag   = DBlock.BLOCK_SURVEY;
+  //             flag   = DBlock.FLAG_SURVEY;
   //           }
   //           n = 1;
   //           ref_item = item;
@@ -1738,7 +1738,7 @@ class TDExporter
   //             n = 0;
   //             ref_item = null;
   //             extend = 0;
-  //             flag   = DBlock.BLOCK_SURVEY;
+  //             flag   = DBlock.FLAG_SURVEY;
   //           }
   //           // item.Comment()
   //           pw.format("    \"%s\" \"\" ", from );
@@ -1757,7 +1757,7 @@ class TDExporter
   //             n = 0;
   //             ref_item = null;
   //             extend = 0;
-  //             flag   = DBlock.BLOCK_SURVEY;
+  //             flag   = DBlock.FLAG_SURVEY;
   //           }
   //           // item.Comment()
   //           pw.format("    \"\" \"%s\" ", to );
@@ -1766,7 +1766,7 @@ class TDExporter
   //         } else {
   //           // not exported
   //           if ( ref_item != null &&
-  //              ( item.mType == DBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
+  //              ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
   //             float bb = TopoDroidUtil.around( item.mBearing, b0[0] );
   //             l += item.mLength;
   //             b += bb;
@@ -1788,7 +1788,7 @@ class TDExporter
   //         pw.format(Locale.US, "@ %.2f %.1f %.1f %.1f\n", l0[n], b0[n], c0[n], r0[n] );
   //       }
   //       // extend = 0;
-  //       // flag   = DBlock.BLOCK_SURVEY;
+  //       // flag   = DBlock.FLAG_SURVEY;
   //     }
   //     // pw.format(Locale.US, "%.2f %.1f %.1f %.1f %d %d %d\n", 
   //     //   item.mLength, item.mBearing, item.mClino, item.mRoll, item.getExtendi(), 0, 1 );
@@ -2046,7 +2046,7 @@ class TDExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null && 
-               ( item.mType == DBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
+               ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
@@ -2270,7 +2270,7 @@ class TDExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null && 
-               ( item.mType == DBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
+               ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station: should never happen
@@ -2445,7 +2445,7 @@ class TDExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null && 
-               ( item.mType == DBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
+               ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
@@ -2700,7 +2700,7 @@ class TDExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null &&
-               ( item.mType == DBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
+               ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
@@ -2850,7 +2850,7 @@ class TDExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null &&
-               ( item.mType == DBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
+               ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
@@ -3087,7 +3087,7 @@ class TDExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null && 
-              ( item.mType == DBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
+              ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
@@ -3123,7 +3123,7 @@ class TDExporter
         flag = printFlagToCav( pw, flag, ref_item.getFlag(), eol );
         printShotToCav( pw, leg, ref_item, eol, ents );
       }      
-      flag = printFlagToCav( pw, flag, DBlock.BLOCK_SURVEY, eol );
+      flag = printFlagToCav( pw, flag, DBlock.FLAG_SURVEY, eol );
       pw.format( "%s", eol );
       pw.format("#end_declination%s", eol);
       pw.format("#end_survey%s", eol);
@@ -3238,7 +3238,7 @@ class TDExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null && 
-               ( item.mType == DBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
+               ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
@@ -3553,7 +3553,7 @@ class TDExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null && 
-               ( item.mType == DBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
+               ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
               // Log.v( TAG, "data " + item.mLength + " " + item.mBearing + " " + item.mClino );
               leg.add( item.mLength, item.mBearing, item.mClino );
             }

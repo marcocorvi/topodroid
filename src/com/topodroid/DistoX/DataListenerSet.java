@@ -83,6 +83,9 @@ class DataListenerSet
   void onUpdateShotFlag( long id, long sid, long flag )
   { for ( DataListener l : mListeners ) l.onUpdateShotFlag( id, sid, flag ); }
 
+  void onUpdateShotLegFlag( long id, long sid, long leg, long flag )
+  { for ( DataListener l : mListeners ) l.onUpdateShotLegFlag( id, sid, leg, flag ); }
+
   void onUpdateShotComment( long id, long sid, String comment )
   { for ( DataListener l : mListeners ) l.onUpdateShotComment( id, sid, comment ); }
 

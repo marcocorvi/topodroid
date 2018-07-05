@@ -502,7 +502,7 @@ class DrawingDxf
         printXYZ( pw1, 0.0f, 0.0f, 0.0f, 0 ); // FIXME (0,0,0)
         printString( pw1, 9, "$EXTMIN" ); printXYZ( pw1, xmin, -ymax, 0.0f, 0 );
         printString( pw1, 9, "$EXTMAX" ); printXYZ( pw1, xmax, -ymin, 0.0f, 0 );
-                if ( mVersion13 ) {
+        if ( mVersion13 ) {
           printString( pw1, 9, "$LIMMIN" ); printXY( pw1, 0.0f, 0.0f, 0 );
           printString( pw1, 9, "$LIMMAX" ); printXY( pw1, 420.0f, 297.0f, 0 );
         }
@@ -596,8 +596,8 @@ class DrawingDxf
           // int flag = 64;
           writeString( out, 0, "LTYPE" );
           if ( mVersion13 ) {
-                    ++handle;
-                    writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
+            ++handle;
+            writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
             writeString( out, 2, lt_byBlock );
             writeInt( out, 70, 0 );
             writeString( out, 3, "" );

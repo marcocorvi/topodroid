@@ -54,6 +54,7 @@ class TDColor
   static final int BACK_GREEN   = 0x66009292; // transparent green
   static final int BACK_VIOLET  = 0x66b66dff; // transparent violet
   static final int TRANSPARENT  = 0x00000000;
+  static final int LIGHT_YELLOW = 0xffffff9f;
 
   static final int TITLE_NORMAL  = 0xff6699ff; // FIXED_BLUE same as in values/styles.xml
   static final int TITLE_NORMAL2 = 0xff99ccff; 

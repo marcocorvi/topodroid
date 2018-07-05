@@ -48,6 +48,9 @@ class TDAzimuth
     return mFixedExtend;
   }
 
+  static long getFixedExtend() { return mFixedExtend; }
+  static boolean isFixedExtend() { return mFixedExtend != 0; }
+
   // used for manually entered shots, and by Compass/VisualTopo parser
   static long computeSplayExtend( double bearing )
   {

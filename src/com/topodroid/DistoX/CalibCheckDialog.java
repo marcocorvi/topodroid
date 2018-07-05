@@ -96,7 +96,7 @@ class CalibCheckDialog extends MyDialog
     int k  = 0;
     for ( DBlock b : mShots ) {
       if ( b.mId == id ) {
-        if ( b.type() == DBlock.BLOCK_MAIN_LEG ) {
+        if ( b.isMainLeg() ) {
           k1 = k;
           blk = b;
           float h = b.mLength * TDMath.cosd( b.mClino );
@@ -109,7 +109,7 @@ class CalibCheckDialog extends MyDialog
           break;
         }
       } else if ( blk != null ) {
-        if ( b.type() == DBlock.BLOCK_MAIN_LEG ) { // next leg set
+        if ( b.isMainLeg() ) { // next leg set
           break;
         } else {
           float h = b.mLength * TDMath.cosd( b.mClino );
@@ -133,7 +133,7 @@ class CalibCheckDialog extends MyDialog
       k = 0;
       for ( DBlock b : mShots ) {
         if ( ! in_leg ) {
-          if ( b.type() == DBlock.BLOCK_MAIN_LEG ) {
+          if ( b.isMainLeg() ) {
             // FIXME only the first backshot is considered
 	    if ( blk.mFrom.equals( b.mTo ) && blk.mTo.equals( b.mFrom ) ) {
               k2 = k;
@@ -142,7 +142,7 @@ class CalibCheckDialog extends MyDialog
             }
           }
         } else {
-          if ( b.type() == DBlock.BLOCK_MAIN_LEG ) {
+          if ( b.isMainLeg() ) {
             break;
           } else {
             ++n2;
@@ -193,7 +193,7 @@ class CalibCheckDialog extends MyDialog
     for ( DBlock b : mShots ) {
 	  if ( b == blk ) { ++k; continue; }
           if ( ! in_leg ) {
-            if ( b.type() == DBlock.BLOCK_MAIN_LEG ) {
+            if ( b.isMainLeg() ) {
               // FIXME only the first triangle trial is considered
 	      if ( b.mFrom.equals( blk.mFrom ) && ! b.mTo.equals( blk.mTo ) ) {
                 k2 = k;
@@ -228,7 +228,7 @@ class CalibCheckDialog extends MyDialog
 	      }
 	    }
 	  } else {
-            if ( b.type() == DBlock.BLOCK_MAIN_LEG ) {
+            if ( b.isMainLeg() ) {
 	      break;
             } else {
               ++n2;
@@ -243,7 +243,7 @@ class CalibCheckDialog extends MyDialog
           for ( DBlock b : mShots ) {
 	    if ( b == blk || b == blk2 ) { ++k; continue; }
             if ( ! in_leg ) {
-              if ( b.type() == DBlock.BLOCK_MAIN_LEG ) {
+              if ( b.isMainLeg() ) {
 	        if ( b.mFrom.equals( blk.mFrom ) && b.mTo.equals( station ) ) {
                   k3 = k;
 	          n3 = 1;
@@ -267,7 +267,7 @@ class CalibCheckDialog extends MyDialog
 		}
 	      }
 	    } else {
-              if ( b.type() == DBlock.BLOCK_MAIN_LEG ) {
+              if ( b.isMainLeg() ) {
 	        break;
               } else {
                 ++n3;

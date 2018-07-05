@@ -114,7 +114,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   {
     if ( name == null ) return false;
     for ( DBlock b : mItems ) {
-      if ( b.mType != DBlock.BLOCK_MAIN_LEG ) continue;
+      if ( ! b.isLeg() ) continue;
       if ( name.equals( b.mFrom ) || name.equals( b.mTo ) ) return true;
     }
     return false;
@@ -281,7 +281,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       } else {
         tvId.setVisibility( View.GONE );
       }
-      // if ( b.mType == DBlock.BLOCK_MAIN_LEG ) {
+      // if ( b.isLeg() ) {
         if ( mParent.isCurrentStationName( b.mFrom ) ) {
           tvFrom.setTextColor( TDColor.LIGHT_GREEN );
         } else {
@@ -301,7 +301,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
 
       if ( b.isCommented() ) {
         tvLength.setBackgroundColor( TDColor.VERYDARK_GRAY );
-      } else if ( b.mType == DBlock.BLOCK_MAIN_LEG && b.mLength < TDSetting.mMinLegLength ) {
+      } else if ( b.isMainLeg() && b.mLength < TDSetting.mMinLegLength ) {
         tvLength.setBackgroundColor( TDColor.BROWN );
       } else if ( mParent.isBlockMagneticBad( b ) ) {
         tvLength.setBackgroundColor( TDColor.DARK_RED );
@@ -366,7 +366,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   {
     if ( ! set ) {
       for ( DBlock b : mItems ) {
-        // if ( b.mType == DBlock.BLOCK_MAIN_LEG ) {
+        // if ( b.isLeg() ) {
           View v = b.mView;
           if ( v != null ) {
             TextView tvFrom = (TextView) v.findViewById( R.id.from );
@@ -378,7 +378,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       }
     } else {
       for ( DBlock b : mItems ) {
-        // if ( b.mType == DBlock.BLOCK_MAIN_LEG ) {
+        // if ( b.isLeg() ) {
           View v = b.mView;
           if ( v != null ) {
             TextView tvFrom = (TextView) v.findViewById( R.id.from );

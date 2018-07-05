@@ -445,7 +445,7 @@ class DistoXNum
   //   boolean ret = true;
   //   NumStation sf, st;
   //   for ( DBlock block : data ) {
-  //     switch ( block.type() ) {
+  //     switch ( block.getBlockType() ) {
   //       case DBlock.BLOCK_SPLAY:
   //         // Log.v( TopoDroidApp.TAG, "add splay " + block.mFrom );
   //         lastLeg = null;
@@ -550,7 +550,7 @@ class DistoXNum
 
   //   int rev = 0;
   //   for ( DBlock block : data ) {
-  //     if ( block.type() == DBlock.BLOCK_SPLAY ) {
+  //     if ( block.isSplay() ) {
   //       // Log.v( TopoDroidApp.TAG, "add splay " + block.mFrom );
   //       String f = block.mFrom;
   //       rev = 1;
@@ -714,7 +714,7 @@ class DistoXNum
 
     for ( DBlock blk : data ) {
       // Log.v("DistoX", "NUM blk type " + blk.mType );
-      switch ( blk.type() ) {
+      switch ( blk.getBlockType() ) {
 
         case DBlock.BLOCK_SPLAY:
         case DBlock.BLOCK_X_SPLAY:
@@ -731,7 +731,17 @@ class DistoXNum
           lastLeg.duplicate = ( blk.isDuplicate() );
           lastLeg.surface   = ( blk.isSurface() );
           lastLeg.commented = ( blk.isCommented() );
-          // lastLeg.backshot  = ( blk.isBackshot() ); // FIXME
+          // lastLeg.backshot  = 0;
+          if ( blk.getExtend() > 1 ) surveyExtend = false;
+          tmpshots.add( lastLeg );
+          break;
+
+        case DBlock.BLOCK_BACK_LEG:
+          lastLeg = new TriShot( blk, blk.mFrom, blk.mTo, blk.getExtend(), +1 );
+          lastLeg.duplicate = true;
+          lastLeg.surface   = ( blk.isSurface() );
+          lastLeg.commented = false;
+          // lastLeg.backshot  = 0;
           if ( blk.getExtend() > 1 ) surveyExtend = false;
           tmpshots.add( lastLeg );
           break;

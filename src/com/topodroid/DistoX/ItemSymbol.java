@@ -42,8 +42,8 @@ class ItemSymbol
   // private TextView     mTextView = null;
   LinearLayout mView;
   SymbolInterface mSymbol;
-  private float sx = TDSetting.mUnitIcons;
-  private float sy = TDSetting.mUnitIcons;
+  private float sx;
+  private float sy;
   private boolean mUseText;
 
   // private Context mContext;
@@ -56,16 +56,8 @@ class ItemSymbol
     mUseText = use_text;
     int pad = 4;
 
-    if ( mType == Symbol.POINT ) {
-      sx *= 1.5f; // 2.0f;
-      sy *= 1.5f; // 2.0f;
-    } else if ( mType == Symbol.LINE ) {
-      sx *= 2.2f;
-      sy *= 1.7f;
-    } else { // if ( mType == Symbol.AREA ) 
-      sx *= 2.2f;
-      sy *= 1.7f;
-    }
+    sx = Symbol.sizeX( mType );
+    sy = Symbol.sizeY( mType );
     // Log.v( TopoDroidApp.TAG, "Item " + mType + "/" + mIndex + " " + mSymbol.getName() );
 
     LinearLayout ll = new LinearLayout( context );

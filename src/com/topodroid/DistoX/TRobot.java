@@ -43,7 +43,7 @@ class TRobot
     TRobotPoint pf, pt;
     int nsf, npf, nst, npt;
     for ( DBlock blk : blks ) {
-      if ( blk.mType != DBlock.BLOCK_MAIN_LEG ) continue;
+      if ( ! blk.isLeg() ) continue;
       String[] valf = blk.mFrom.split(".");
       String[] valt = blk.mTo.split(".");
       if ( valf.length != 2 || valt.length != 2 ) continue;
@@ -107,7 +107,7 @@ class TRobot
     int mSrCnt = 0;
     ArrayList< DBlock > repeat = new ArrayList<>();
     for ( DBlock blk : blks ) {
-      if ( blk.mType == DBlock.BLOCK_MAIN_LEG ) repeat.add( blk );
+      if ( blk.isLeg() ) repeat.add( blk );
     }
     // find stations and number of occurrences
     for ( DBlock blk : repeat ) {

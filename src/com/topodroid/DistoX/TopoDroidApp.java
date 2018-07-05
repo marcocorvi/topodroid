@@ -1717,7 +1717,7 @@ public class TopoDroidApp extends Application
     distance = distance / TDSetting.mUnitLength;
     long id = mData.insertShot( mSID, -1L, millis, 0, distance, bearing, clino, 0.0f, extend, DBlock.LEG_NORMAL, 1, true );
     mData.updateShotName( id, mSID, from, to, true ); // forward = true
-    mData.updateShotFlag( id, mSID, DBlock.BLOCK_DUPLICATE, true ); // forward = true
+    mData.updateShotFlag( id, mSID, DBlock.FLAG_DUPLICATE, true ); // forward = true
     return id;
   }
 
@@ -1856,7 +1856,7 @@ public class TopoDroidApp extends Application
    *      LRUD are not affected
    */
   DBlock insertManualShot( long at, String from, String to,
-                           float distance, float bearing, float clino, long extend0,
+                           float distance, float bearing, float clino, long extend0, long flag0,
                            String left, String right, String up, String down,
                            String splay_station )
   {

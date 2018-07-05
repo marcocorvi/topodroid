@@ -65,6 +65,7 @@ interface DataListener
   byte SHOT_INSERTAT = (byte)23;
   byte SHOT_STATUS   = (byte)24;
   byte SHOT_COLOR    = (byte)25;
+  byte SHOT_LEG_FLAG = (byte)26;
 
   void onUpdateShot( long id, long sid, String fStation, String tStation,
                             long extend, long flag, long leg, String comment );
@@ -78,6 +79,8 @@ interface DataListener
   void onUpdateShotExtend( long id, long sid, long extend );
 
   void onUpdateShotFlag( long id, long sid, long flag );
+
+  void onUpdateShotLegFlag( long id, long sid, long leg, long flag );
 
   void onUpdateShotComment( long id, long sid, String comment );
 

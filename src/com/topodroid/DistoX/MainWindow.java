@@ -565,10 +565,11 @@ public class MainWindow extends Activity
     mButton1 = new Button[ mNrButton1 + 1 ];
 
     mImage.setBackgroundDrawable( MyButton.getButtonBackground( mApp, getResources(), R.drawable.iz_menu ) );
-    for (int k=0; k <= mNrButton1; ++k ) {
+    for (int k=0; k < mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( mActivity, this, izons[k] );
       // mButton1[k].setElevation(40);
     }
+    mButton1[mNrButton1] = MyButton.getButton( mActivity, this, R.drawable.iz_empty );
 
     mButtonView1 = new HorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );

@@ -326,8 +326,9 @@ public class FixedActivity extends Activity
             double lng = bundle.getDouble( "longitude");
             double lat = bundle.getDouble( "latitude");
             double alt = bundle.getDouble( "altitude");
-            TopoDroidApp.mData.updateFixedCS(  mFixedDialog.getFixedId(), mApp.mSID, cs, lng, lat, alt );
-            mFixedDialog.setConvertedCoords( cs, lng, lat, alt );
+	    long   n_dec = bundle.containsKey( "decimals" )? bundle.getLong( "decimals" ) : 2;
+            TopoDroidApp.mData.updateFixedCS(  mFixedDialog.getFixedId(), mApp.mSID, cs, lng, lat, alt, n_dec );
+            mFixedDialog.setConvertedCoords( cs, lng, lat, alt, n_dec );
             mFixedDialog = null;
           }
         }

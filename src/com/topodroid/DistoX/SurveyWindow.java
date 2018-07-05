@@ -242,9 +242,10 @@ public class SurveyWindow extends Activity
     mNrButton1 = TDLevel.overNormal ? 6 
                : TDLevel.overBasic ? 3 : 2;
     mButton1 = new Button[ mNrButton1 + 1 ];
-    for ( int k=0; k <= mNrButton1; ++k ) {
+    for ( int k=0; k < mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( mActivity, this, izons[k] );
     }
+    mButton1[mNrButton1] = MyButton.getButton( mActivity, this, R.drawable.iz_empty );
 
     mButtonView1 = new HorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );
@@ -305,18 +306,18 @@ public class SurveyWindow extends Activity
     }
 
     int k = 0;
-    if ( k < mNrButton1 && b == mButton1[k++] ) {  // note
+    if ( k < mNrButton1 && b == mButton1[k++] ) {  // NOTES
       doNotes();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // INFO STATISTICS
       new SurveyStatDialog( mActivity, mApp_mData.getSurveyStat( mApp.mSID ) ).show();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // 3D
       do3D();
-    } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // GPS
+    } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // GPS LOCATION
       mActivity.startActivity( new Intent( mActivity, FixedActivity.class ) );
       // FIXME update declination
-    } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // photo camera
+    } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // PHOTO CAMERA
       mActivity.startActivity( new Intent( mActivity, PhotoActivity.class ) );
-    } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // sensors data
+    } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // SENSORS DATA
       mActivity.startActivity( new Intent( mActivity, SensorListActivity.class ) );
     }
   }

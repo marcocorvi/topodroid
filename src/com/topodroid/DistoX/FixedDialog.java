@@ -90,9 +90,9 @@ class FixedDialog extends MyDialog
   //   mTVcrs.setText( cs );
   // }
   
-  void setConvertedCoords( String cs, double lng, double lat, double alt )
+  void setConvertedCoords( String cs, double lng, double lat, double alt, long n_dec )
   {
-    mFxd.setCSCoords( cs, lng, lat, alt );
+    mFxd.setCSCoords( cs, lng, lat, alt, n_dec );
     showConvertedCoords( );
   }
 
@@ -102,7 +102,7 @@ class FixedDialog extends MyDialog
     if ( cs != null && cs.length() > 0 ) {
       // setTitle( String.format(Locale.US, "%.2f %.2f %.1f", mFxd.cs_lng, mFxd.cs_lat, mFxd.cs_alt ) );
       mTVcrs.setText( cs );
-      mTVcs_coords.setText( String.format(Locale.US, "%.2f %.2f %.1f", mFxd.cs_lng, mFxd.cs_lat, mFxd.cs_alt ) );
+      mTVcs_coords.setText( mFxd.toExportCSString() );
       mTVcrs.setVisibility( View.VISIBLE );
       mTVcs_coords.setVisibility( View.VISIBLE );
     } else {

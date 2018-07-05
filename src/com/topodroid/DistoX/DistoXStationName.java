@@ -144,7 +144,7 @@ class DistoXStationName
   {
     if ( name != null ) {
       for ( DBlock b : list ) {
-        if ( b.mType != DBlock.BLOCK_MAIN_LEG ) continue;
+        if ( ! b.isLeg() ) continue;
         if ( name.equals( b.mFrom ) || name.equals( b.mTo ) ) return true;
       }
     }

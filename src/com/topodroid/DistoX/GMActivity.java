@@ -704,9 +704,10 @@ public class GMActivity extends Activity
     if ( TDLevel.overNormal ) mNrButton1 += 2; // READ WRITE
     Resources res = getResources();
     mButton1 = new Button[ mNrButton1+1 ];
-    for ( int k=0; k <= mNrButton1; ++k ) { // add also EMPTY button
+    for ( int k=0; k < mNrButton1; ++k ) { // add also EMPTY button
       mButton1[k] = MyButton.getButton( this, this, izons[k] );
     }
+    mButton1[mNrButton1] = MyButton.getButton( this, this, R.drawable.iz_empty );
     if ( TDLevel.overAdvanced && mApp.distoType() == Device.DISTO_X310 ) {
       mButton1[ BTN_BT ].setOnLongClickListener( this );
     }

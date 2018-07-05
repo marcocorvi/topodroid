@@ -680,7 +680,7 @@ public class DrawingWindow extends ItemDrawer
     } else {
       if ( blk.isCommented() ) {
         path.setPathPaint( BrushManager.fixedSplay0Paint );
-      } else if ( blk.mType == DBlock.BLOCK_X_SPLAY ) {
+      } else if ( blk.isXSplay() ) {
         path.setPathPaint( BrushManager.fixedGreenPaint );
       } else {
         if (extend >= 0 && extend < TDSetting.mCosHorizSplay) {
@@ -702,7 +702,7 @@ public class DrawingWindow extends ItemDrawer
     } else {
       if ( blk.isCommented() ) {
         path.setPathPaint( BrushManager.fixedSplay0Paint );
-      } else if ( blk.mType == DBlock.BLOCK_X_SPLAY ) {
+      } else if ( blk.isXSplay() ) {
         path.setPathPaint( BrushManager.fixedGreenPaint );
       } else {
         if (blk.mClino > TDSetting.mVertSplay) {
@@ -763,7 +763,7 @@ public class DrawingWindow extends ItemDrawer
     if ( blk.mPaint != null ) {
       dpath.setPathPaint( blk.mPaint );
     } else if ( blue ) {
-      if ( blk.mType == DBlock.BLOCK_X_SPLAY ) {
+      if ( blk.isXSplay() ) {
         dpath.setPathPaint( BrushManager.fixedGreenPaint );
       } else if ( a > TDSetting.mSectionSplay ) {
         dpath.setPathPaint( BrushManager.fixedSplay24Paint );
@@ -773,7 +773,7 @@ public class DrawingWindow extends ItemDrawer
         dpath.setPathPaint( BrushManager.fixedSplay2Paint );
       }
     } else {
-      if ( blk.mType == DBlock.BLOCK_X_SPLAY ) {
+      if ( blk.isXSplay() ) {
         dpath.setPathPaint( BrushManager.fixedGreenPaint );
       } else if ( a > TDSetting.mSectionSplay ) {
         dpath.setPathPaint( BrushManager.fixedSplay4Paint );
@@ -2362,9 +2362,9 @@ public class DrawingWindow extends ItemDrawer
       if ( blk.getFlag() == flag ) return;
       blk.resetFlag( flag );
       if ( TDSetting.mDashSplay || PlotInfo.isProfile( mType ) ) {
-        setSplayPaintClino( shot, blk ); // really necessary only if flag || mFlag is BLOCK_COMMENTED
+        setSplayPaintClino( shot, blk ); // really necessary only if flag || mFlag is FLAG_COMMENTED
       } else {
-        setSplayPaintExtend( shot, blk, blk.getReducedExtend() ); // really necessary only if flag || mFlag is BLOCK_COMMENTED
+        setSplayPaintExtend( shot, blk, blk.getReducedExtend() ); // really necessary only if flag || mFlag is FLAG_COMMENTED
       }
       mApp_mData.updateShotFlag( blk.mId, mSid, flag, true );
     }
@@ -2920,15 +2920,15 @@ public class DrawingWindow extends ItemDrawer
           SelectionPoint hot = mDrawingSurface.hotItem();
           if ( hot != null ) {
             DrawingPath path = hot.mItem;
-    	    if ( path.mType == DrawingPath.DRAWING_PATH_FIXED ) {
+    	    if ( path.mType == DrawingPath.DRAWING_PATH_FIXED ) { // FIXME_EXTEND
     	      DBlock blk = path.mBlock;
-    	      float msz = TopoDroidApp.mDisplayWidth/(16*DrawingUtil.SCALE_FIX); // TDSetting.mMinShift / 2;
+    	      float msz = TopoDroidApp.mDisplayWidth/(mZoom*DrawingUtil.SCALE_FIX); // TDSetting.mMinShift / 2;
     	      if ( mLandscape ) {
     	        float y = (path.y1 + path.y2)/2; // midpoin (scene)
     	        if ( Math.abs( y - xs ) < msz ) {
     	          float x = (path.x1 + path.x2)/2; // midpoin (scene)
     	          // Log.v("DistoX", "blk scene " + x + " " + y + " tap " + xs + " " + ys);
-    	          if ( Math.abs( x + ys ) < 2*msz ) {
+    	          if ( Math.abs( x + ys ) < 2.5f*msz ) {
     	            int extend = (-ys + msz < x)? -1 : (-ys - msz > x)? 1 : 0;
                     updateBlockExtend( blk, extend ); // equal extend checked by the method
     	          }
@@ -2937,8 +2937,9 @@ public class DrawingWindow extends ItemDrawer
     	        float y = (path.y1 + path.y2)/2; // midpoin (scene)
     	        if ( Math.abs( y - ys ) < msz ) {
     	          float x = (path.x1 + path.x2)/2; // midpoin (scene)
-    	          // Log.v("DistoX", "blk scene " + path.x1 + " " + path.x2 + " x " + x + " tap " + xs + " msz " + msz + " zoom " + mZoom );
-    	          if ( Math.abs( x - xs ) < 20*msz ) {
+		  float dx = x - xs;
+    	          // Log.v("DistoX", "blk scene dx " + dx + " msz " + msz + " zoom " + mZoom );
+    	          if ( Math.abs( x - xs ) < 2.5f*msz ) {
     	            int extend = (xs + msz < x)? -1 : (xs - msz > x)? 1 : 0;
                     updateBlockExtend( blk, extend ); // equal extend checked by the method
     	          }

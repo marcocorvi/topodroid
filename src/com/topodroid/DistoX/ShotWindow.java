@@ -417,18 +417,17 @@ public class ShotWindow extends Activity
     boolean prev_is_leg = false;
     for ( DBlock item : list ) {
       DBlock cur = item;
-      int t = cur.type();
-
+      // int t = cur.type();
       // TDLog.Log( TDLog.LOG_SHOT, "item " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
 
-      if ( cur.mType == DBlock.BLOCK_SEC_LEG || cur.isRelativeDistance( prev ) ) {
+      if ( cur.isSecLeg() || cur.isRelativeDistance( prev ) ) {
         // Log.v( "DistoX", "item close " + cur.type() + " " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
-        if ( cur.mType == DBlock.BLOCK_BLANK ) {   // FIXME 20140612
-          cur.mType = DBlock.BLOCK_SEC_LEG;
+        if ( cur.isBlank() ) {   // FIXME 20140612
+          cur.setBlockType( DBlock.BLOCK_SEC_LEG );
           mApp_mData.updateShotLeg( cur.mId, mApp.mSID, 1L, true ); // cur.mType ); // FIXME 20140616
         }
 
-        // if ( prev != null && prev.mType == DBlock.BLOCK_BLANK ) prev.mType = DBlock.BLOCK_BLANK_LEG;
+        // if ( prev != null && prev.isBlank() ) prev.setBlockType( DBlock.BLOCK_BLANK_LEG );
         if ( prev != null ) prev.setTypeBlankLeg();
 
         if ( mFlagLeg ) { // flag: hide leg extra shots
@@ -461,10 +460,10 @@ public class ShotWindow extends Activity
         // Log.v( "DistoX", "item not close " + cur.type() + " " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
         // TDLog.Log( TDLog.LOG_SHOT, "not close distance");
         prev_is_leg = false;
-        if ( DBlock.isTypeBlank(t) ) {
+        if ( cur.isTypeBlank() ) { // DBlock.isTypeBlank(t)
           prev = cur;
           if ( mFlagBlank ) continue;
-        } else if ( DBlock.isSplay(t) ) {
+        } else if ( cur.isSplay() ) { // DBlock.isSplay(t) 
           prev = null;
           if ( mFlagSplay ) { // do hide splays, except those that are shown.
             // boolean skip = true;
@@ -474,7 +473,7 @@ public class ShotWindow extends Activity
             // if ( skip ) continue;
             if ( ! ( showSplaysContains( cur.mFrom ) || ( mFlagLatest && cur.isRecent() ) ) ) continue;
           }
-        } else { // t == DBlock.BLOCK_MAIN_LEG
+        } else { // cur.isMainLeg() // t == DBlock.BLOCK_MAIN_LEG
           prev = cur;
         }
       }
@@ -580,9 +579,9 @@ public class ShotWindow extends Activity
       long leg = mApp_mData.updateSplayLeg( blk.mId, mApp.mSID, true );
       // Log.v("DistoX", "toggle splay type " + pos + " new leg " + leg );
       if ( leg == DBlock.LEG_NORMAL ) {
-        blk.mType = DBlock.BLOCK_SPLAY;
+        blk.setBlockType( DBlock.BLOCK_SPLAY );
       } else if ( leg == DBlock.LEG_XSPLAY ) {
-        blk.mType = DBlock.BLOCK_X_SPLAY;
+        blk.setBlockType( DBlock.BLOCK_X_SPLAY );
       } else {
         break;
       }
@@ -768,17 +767,19 @@ public class ShotWindow extends Activity
   void doDeleteShot( long id, DBlock blk, int status, boolean leg )
   {
     mApp_mData.deleteShot( id, mApp.mSID, status, true ); // forward = true
-    if ( blk != null && blk.type() == DBlock.BLOCK_MAIN_LEG ) {
+    if ( blk != null && blk.isMainLeg() ) { //  DBlock.BLOCK_MAIN_LEG 
       if ( leg ) {
         for ( ++id; ; ++id ) {
           DBlock b = mApp_mData.selectShot( id, mApp.mSID );
-          if ( b == null || b.type() != DBlock.BLOCK_SEC_LEG ) break;
+          if ( b == null || ! b.isSecLeg() ) { // != DBlock.BLOCK_SEC_LEG 
+            break;
+	  }
           mApp_mData.deleteShot( id, mApp.mSID, status, true ); // forward = true
         }
       } else { // set station to next leg shot
         ++id;
         DBlock b = mApp_mData.selectShot( id, mApp.mSID );
-        if ( b != null && b.type() == DBlock.BLOCK_SEC_LEG ) {
+        if ( b != null && b.isSecLeg() ) { //  DBlock.BLOCK_SEC_LEG --> leg-flag = 0
           mApp_mData.updateShot( id, mApp.mSID, blk.mFrom, blk.mTo, blk.getFullExtend(), blk.getFlag(), 0, blk.mComment, true ); // forward = true
           mApp_mData.updateShotStatus( id, mApp.mSID, 0, true ); // status normal, forward = true
         }
@@ -912,12 +913,13 @@ public class ShotWindow extends Activity
                : TDLevel.overNormal ? 8
                : TDLevel.overBasic ?  6 : 5;
     mButton1 = new Button[ mNrButton1 + 1 ];
-    for ( int k=0; k <= mNrButton1; ++k ) {
+    for ( int k=0; k < mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( this, this, izons[k] );
       if ( k == BTN_DOWNLOAD )  { mBMdownload = MyButton.getButtonBackground( mApp, res, izons[k] ); }
       else if ( k == BTN_BLUETOOTH ) { mBMbluetooth = MyButton.getButtonBackground( mApp, res, izons[k] ); }
       else if ( k == BTN_PLOT ) { mBMplot     = MyButton.getButtonBackground( mApp, res, izons[k] ); }
     }
+    mButton1[mNrButton1] = MyButton.getButton( this, this, R.drawable.iz_empty );
     // mBMdial          = BitmapFactory.decodeResource( res, R.drawable.iz_dial_transp ); // FIXME AZIMUTH_DIAL
     // mBMdial_transp   = BitmapFactory.decodeResource( res, R.drawable.iz_dial_transp );
     mDialBitmap      = TopoDroidApp.getDialBitmap( res );
@@ -942,11 +944,12 @@ public class ShotWindow extends Activity
     if ( ! TDLevel.overExpert ) mNrButtonF --;
     mButtonF = new Button[ mNrButtonF + 1 ];
     int k0 = 0;
-    for ( int k=0; k <= mNrButtonF; ++k ) {
+    for ( int k=0; k < mNrButtonF; ++k ) {
       if ( k == BTN_HIGHLIGHT && ! TDLevel.overExpert ) continue; 
       mButtonF[k0] = MyButton.getButton( this, this, izonsF[k] );
       ++k0;
     }
+    mButtonF[mNrButtonF] = MyButton.getButton( this, this, R.drawable.iz_empty );
 
     TDAzimuth.resetRefAzimuth( this, 90 );
     // setRefAzimuthButton( ); // called by mApp.resetRefAzimuth
@@ -1345,17 +1348,19 @@ public class ShotWindow extends Activity
     for ( DBlock blk : mDataAdapter.mSelect ) {
       long id = blk.mId;
       mApp_mData.deleteShot( id, mApp.mSID, TDStatus.DELETED, true ); // forward = true
-      if ( /* blk != null && */ blk.type() == DBlock.BLOCK_MAIN_LEG ) {
+      if ( /* blk != null && */ blk.isMainLeg() ) { // == DBlock.BLOCK_MAIN_LEG 
         if ( mFlagLeg ) {
           for ( ++id; ; ++id ) {
             DBlock b = mApp_mData.selectShot( id, mApp.mSID );
-            if ( b == null || b.type() != DBlock.BLOCK_SEC_LEG ) break;
+            if ( b == null || ! b.isSecLeg() ) { // != DBlock.BLOCK_SEC_LEG
+              break;
+	    }
             mApp_mData.deleteShot( id, mApp.mSID, TDStatus.DELETED, true ); // forward = true
           }
         } else { // set station to next leg shot
           ++id;
           DBlock b = mApp_mData.selectShot( id, mApp.mSID );
-          if ( b != null && b.type() == DBlock.BLOCK_SEC_LEG ) {
+          if ( b != null && b.isSecLeg() ) { // DBlock.BLOCK_SEC_LEG --> leg-flag 0
             mApp_mData.updateShot( id, mApp.mSID, blk.mFrom, blk.mTo, blk.getFullExtend(), blk.getFlag(), 0, blk.mComment, true ); // forward = true
             mApp_mData.updateShotStatus( id, mApp.mSID, 0, true ); // status normal, forward = true
           }
@@ -1526,7 +1531,7 @@ public class ShotWindow extends Activity
         // Log.v( TopoDroidApp.TAG, "BLANK " + b.mLength + " " + b.mBearing + " " + b.mClino );
         if ( ret != null && ret.isRelativeDistance( b ) ) return ret;
         ret = b;
-      } else if ( b.mType == DBlock.BLOCK_SEC_LEG ) {
+      } else if ( b.isSecLeg() ) {
         // Log.v( TopoDroidApp.TAG, "LEG " + b.mLength + " " + b.mBearing + " " + b.mClino );
         if ( ret != null &&  ret.isRelativeDistance( b ) ) return ret;
       } else {
@@ -1557,7 +1562,7 @@ public class ShotWindow extends Activity
     // ++ mNextPos; // one position after blk
     // while ( mNextPos < mDataAdapter.size() ) {
     //   DBlock b = mDataAdapter.get(mNextPos);
-    //   int t = b.type();
+    //   int t = b.getBlockType();
     //   if ( t == DBlock.BLOCK_MAIN_LEG ) {
     //     return b;
     //   } else if (    DBlock.isTypeBlank( t )
@@ -1577,10 +1582,10 @@ public class ShotWindow extends Activity
     for ( ++mNextPos; mNextPos < mDataAdapter.size(); ++mNextPos ) {
       DBlock b = mDataAdapter.get(mNextPos);
       if ( b == null ) return null;
-      int t = b.type();
-      if ( t == DBlock.BLOCK_MAIN_LEG ) {
+      // int t = b.getBlockType();
+      if ( b.isMainLeg() ) { // t == DBlock.BLOCK_MAIN_LEG 
         return b;
-      } else if (    DBlock.isTypeBlank( t )
+      } else if (    b.isTypeBlank( )
                   && mNextPos+1 < mDataAdapter.size()
                   && b.isRelativeDistance( mDataAdapter.get(mNextPos+1) ) ) {
         return b;
@@ -1606,7 +1611,7 @@ public class ShotWindow extends Activity
     // while ( mPrevPos > 0 ) {
     //   -- mPrevPos;
     //   DBlock b = mDataAdapter.get(mPrevPos);
-    //   if ( b.type() == DBlock.BLOCK_MAIN_LEG ) {
+    //   if ( b.isMainLeg() ) {
     //     return b;
     //   }
     // }
@@ -1618,7 +1623,7 @@ public class ShotWindow extends Activity
     }
     for ( --mPrevPos; mPrevPos >= 0; --mPrevPos ) {
       DBlock b = mDataAdapter.get(mPrevPos);
-      if ( b == null || b.type() == DBlock.BLOCK_MAIN_LEG ) {
+      if ( b == null || b.isMainLeg() ) {
         return b;
       }
     }
@@ -1636,13 +1641,14 @@ public class ShotWindow extends Activity
     mDataAdapter.updateBlockView( blk.mId );
   }
 
-  void updateShot( String from, String to, int extend, long flag, boolean leg, String comment, DBlock blk )
+  // @param leg leg data-helper value (0 normal, 1 sec, 2 x-splay, 3 back)
+  void updateShot( String from, String to, int extend, long flag, long leg, String comment, DBlock blk )
   {
     // TDLog.Log( TDLog.LOG_SHOT, "update Shot From >" + from + "< To >" + to + "< comment " + comment );
     // Log.v( "DistoX", "update Shot From >" + from + "< To >" + to + "< comment " + comment );
-    blk.setName( from, to );
+    blk.setBlockName( from, to );
 
-    int ret = mApp_mData.updateShot( blk.mId, mApp.mSID, from, to, extend, flag, leg?1:0, comment, true );
+    int ret = mApp_mData.updateShot( blk.mId, mApp.mSID, from, to, extend, flag, leg, comment, true );
 
     if ( ret == -1 ) {
       TDToast.make( mActivity, R.string.no_db );
@@ -1656,14 +1662,22 @@ public class ShotWindow extends Activity
         mApp_mData.updateShotLeg( blk1.mId, mApp.mSID, 1L, true );
       }
     }
-    if ( leg ) blk.mType = DBlock.BLOCK_SEC_LEG;
+
+    if ( leg == DataHelper.DATA_SEC_LEG ) {
+      blk.setBlockType( DBlock.BLOCK_SEC_LEG );
+    } else if ( leg == DataHelper.DATA_BACK_LEG ) {
+      blk.setBlockType( DBlock.BLOCK_BACK_LEG );
+    } else if ( blk.isBackLeg() ) {
+      blk.setBlockType( DBlock.BLOCK_MAIN_LEG );
+    }
+
     DBlock blk3 = mDataAdapter.updateBlockView( blk.mId );
     if ( blk3 != blk && blk3 != null ) {
-      blk3.setName( from, to );
+      blk3.setBlockName( from, to );
       blk3.setExtend( extend );
       blk3.resetFlag( flag );
       blk3.mComment = comment;
-      // FIXME if ( leg ) blk3.mType = DBlock.BLOCK_SEC_LEG;
+      // FIXME if ( leg == DataHelper.DATA_SEC_LEG ) blk3.setBlockType( DBlock.BLOCK_SEC_LEG );
       mDataAdapter.updateBlockView( blk3.mId );
     }
   }
@@ -1687,7 +1701,7 @@ public class ShotWindow extends Activity
   {
     DBlock blk = blks.get(0); // blk is guaranteed to exists
     if ( ! ( from.equals(blk.mFrom) && to.equals(blk.mTo) ) ) {
-      blk.setName( from, to );
+      blk.setBlockName( from, to );
       mApp_mData.updateShotName( blk.mId, mApp.mSID, from, to, true );
     }
     if ( blk.isLeg() ) {
@@ -1813,16 +1827,15 @@ public class ShotWindow extends Activity
     return strike_dip;
   }
   
-  // this method is called by ShotDialog() with to.length() == 0 ie to == ""
-  // and blk splay shot
-  public void updateSplayShots( String from, String to, long extend, long flag, boolean leg, String comment, DBlock blk )
+  // NOTE called only by ShotDialog.saveDBlock() with to.length() == 0 ie to == "" and blk splay shot
+  public void updateSplayShots( String from, String to, long extend, long flag, long leg, String comment, DBlock blk )
   {
     ArrayList< DBlock > splays = mDataAdapter.getSplaysAtId( blk.mId, blk.mFrom );
     for ( DBlock b : splays ) {
       if ( b.mId == blk.mId ) {
-        blk.setName( from, to );
-        // FIXME leg should be 0
-        int ret = mApp_mData.updateShot( blk.mId, mApp.mSID, from, to, extend, flag, leg?1:0, comment, true );
+        blk.setBlockName( from, to );
+        // FIXME leg should be DataHelper.DATA_NORMAL
+        int ret = mApp_mData.updateShot( blk.mId, mApp.mSID, from, to, extend, flag, leg, comment, true );
 
         if ( ret == -1 ) {
           TDToast.make( mActivity, R.string.no_db );
@@ -1837,7 +1850,7 @@ public class ShotWindow extends Activity
           // }
         }
       } else {
-        b.setName( from, to );
+        b.setBlockName( from, to );
         mApp_mData.updateShotName( b.mId, mApp.mSID, from, to, true );
       }
       mDataAdapter.updateBlockView( b.mId );

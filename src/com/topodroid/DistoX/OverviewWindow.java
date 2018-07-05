@@ -427,7 +427,11 @@ public class OverviewWindow extends ItemDrawer
       mCrossPath.moveTo(10,-10);
       mCrossPath.lineTo(-10,10);
       mCirclePath = new Path();
-      mCirclePath.addCircle( 0, 0, 15, Path.Direction.CCW );
+      mCirclePath.addCircle( 0, 0, 10, Path.Direction.CCW );
+      mCirclePath.moveTo(-10, 0);
+      mCirclePath.lineTo(10, 0);
+      mCirclePath.moveTo(0, -10);
+      mCirclePath.lineTo(0, 10);
 
       mMeasurePts = new ArrayList< Point2D >();
 
@@ -459,7 +463,7 @@ public class OverviewWindow extends ItemDrawer
       /* int size = */ mApp.setListViewHeight( mListView );
 
       mButton1 = new Button[ mNrButton1 + 1 ];
-      for ( int k=0; k <= mNrButton1; ++k ) {
+      for ( int k=0; k < mNrButton1; ++k ) {
         mButton1[k] = MyButton.getButton( mActivity, this, izons[k] );
         if ( k == 0 ) {
           mBMselect = MyButton.getButtonBackground( mApp, res, izons[k] );
@@ -469,6 +473,7 @@ public class OverviewWindow extends ItemDrawer
         // FIXME_OVER } else if ( k == 2 ) { // IC_PLAN = 2;
         // FIXME_OVER   mBMplan = bm;
       }
+      mButton1[mNrButton1] = MyButton.getButton( mActivity, this, R.drawable.iz_empty );
       mBMselectOn   = MyButton.getButtonBackground( mApp, res, R.drawable.iz_measure_on );
       mBMcontinueOn = MyButton.getButtonBackground( mApp, res, R.drawable.iz_polyline );
       // FIXME_OVER mBMextend  = MyButton.getButtonBackground( mApp, res, izons[IC_EXTEND] ); 

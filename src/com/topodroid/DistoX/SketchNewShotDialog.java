@@ -171,15 +171,15 @@ class SketchNewShotDialog extends MyDialog
         float ber = Float.parseFloat( mETazimuth.getText().toString() );
         float cln = Float.parseFloat( mETclino.getText().toString() );
         // append a new shot FIXME null splay ?
-        DBlock blk = mApp.insertManualShot( -1L, mFrom, to, len, ber, cln, 1L, null, null, null, null, null );
+        DBlock blk = mApp.insertManualShot( -1L, mFrom, to, len, ber, cln, 1L, 0L, null, null, null, null, null );
         updateList = new ArrayList<>();
         updateList.add( blk );
       } else {
         // set stations to mBlk
         // mBlk.setName( mFrom, to ); // FIXME
         if ( mShots != null ) {
-          mShots.updateShot( mFrom, to, 1, 0, false, null, mBlk ); // null comment ?
-          mBlk.setName( mFrom, to ); // reset block name/type
+          mShots.updateShot( mFrom, to, 1, 0, DataHelper.DATA_NORMAL, null, mBlk ); // null comment ?
+          mBlk.setBlockName( mFrom, to ); // reset block name/type
         }
         if ( ! splay ) {
           /* updateList = mShots.numberSplays(); // FIXME_EXTEND it may go away ... */

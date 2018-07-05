@@ -147,7 +147,7 @@ class DrawingShotDialog extends MyDialog
 
     boolean hide3b = true;
     if ( TDLevel.overAdvanced ) {
-      if ( mBlock.type() == DBlock.BLOCK_MAIN_LEG ) {
+      if ( mBlock.isMainLeg() ) {
         if ( ( mFlag & 0x03 ) != 0 ) { // FROM can be barrier/hidden
           mCBfrom = new CheckBox( mContext );
           mCBfrom.setText( mBlock.mFrom );
@@ -182,7 +182,7 @@ class DrawingShotDialog extends MyDialog
     // mRBbackshot.setOnClickListener( this );
     if ( TDSetting.mWallsType != TDSetting.WALLS_NONE 
       && TDLevel.overExpert 
-      && mBlock.mType == DBlock.BLOCK_MAIN_LEG
+      && mBlock.isMainLeg()
       && ( PlotInfo.isSketch2D( mParent.getPlotType() ) ) ) {
       mRBwalls.setOnClickListener( this );
     } else {
@@ -335,11 +335,11 @@ class DrawingShotDialog extends MyDialog
 
       if ( TDLevel.overNormal ) {
         long flag  = mBlock.getFlag();
-        if ( mRBdup.isChecked() )       { flag = DBlock.BLOCK_DUPLICATE; }
-        else if ( mRBsurf.isChecked() ) { flag = DBlock.BLOCK_SURFACE; }
-        else if ( mRBcmtd.isChecked() ) { flag = DBlock.BLOCK_COMMENTED; }
-        // else if ( mRBbackshot.isChecked() ) { flag = DBlock.BLOCK_BACKSHOT; }
-        else /* if ( mRBsurvey.isChecked() ) */ { flag = DBlock.BLOCK_SURVEY; }
+        if ( mRBdup.isChecked() )       { flag = DBlock.FLAG_DUPLICATE; }
+        else if ( mRBsurf.isChecked() ) { flag = DBlock.FLAG_SURFACE; }
+        else if ( mRBcmtd.isChecked() ) { flag = DBlock.FLAG_COMMENTED; }
+        // else if ( mRBbackshot.isChecked() ) { flag = DBlock.FLAG_BACKSHOT; }
+        else /* if ( mRBsurvey.isChecked() ) */ { flag = DBlock.FLAG_SURVEY; }
         mParent.updateBlockFlag( mBlock, flag, mPath ); // equal flag is checked by the method
       }
 
