@@ -280,7 +280,7 @@
     <string name="no_feature_audio">Audio nie je podporované</string>
     <string name="no_gms">Kalibrácia nemá žiade dáta \nPoužite tlačidlo Stiahnuť</string>
     <string name="no_geo_station">Chyba: Bod merania nie je geolokalizovaný</string>
-    <!-- TODO string name="no_leg_first">Selection does not start with a leg</string -->
+    <string name="no_leg_first">Výber nezačína hlavnou zámerou</string>
     <string name="no_leg_intersection">Čiara priečneho rezu nepretína žiadnu hlavnú zámeru</string>
     <string name="no_location_data">Žiadne dáta o pozícii</string>
     <string name="no_paired_device">Ziadne spárované zariadenie DistoX \nSpustite skenovanie a spárujete DistoX.</string>
@@ -436,7 +436,7 @@
     <string name="shots_delete">Odstrániť merania ?</string>
     <string name="shot_check">Označiť meranie, ako kontrolné meranie ?</string>
     <string name="shot_from">Z</string>
-    <string name="shot_info">Pridajte zámeru pred zvolený bod</string>
+    <string name="shot_info">Vložte údaje o zámere</string>
     <!-- UNUSED string name="shot_length">longueur</string -->
     <string name="shot_note">Poznámka</string>
     <string name="shot_not_found">Meranie sa nenašlo</string>
@@ -472,9 +472,10 @@
     <string name="out_of_memory">VAROVANIE: Nedostatok pamäte !</string>
     <string name="disk_io_error">KRITICKÁ CHYBA: Chyba i/o disku !</string>
 
-    <string name="toporobot_warning">VAROVANIE: TopoRobot politika číslovania je experimentálna !</string>
-    <!-- TODO string name="anomaly_warning">Magnatic anomaly compensation is expert !</string -->
-    <!-- TODO string name="tripod_warning">Tripod policy is advanced !</string -->
+    <string name="toporobot_warning">VAROVANIE: TopoRobot politika číslovania je experimentálna!</string>
+    <string name="anomaly_warning">Kompenzácia magnetickej anomálie je pre expertov!</string>
+    <string name="tripod_warning">Politika STATÍV-STENA je pre pokročilých !</string>
+	
     
     <string name="cannot_rename">Nedá sa premenovať názov mapovania</string>
     <string name="declination">Magnetická deklinácia</string>
@@ -564,8 +565,8 @@
     <string name="button_current"   >Aktivovať  </string>
     <string name="button_delete"    >Vymazať  </string>
     <string name="button_eval"      >Vyhodnotiť   </string>
-    <!-- TODO string name="button_evalg"     >G      </string -->
-    <!-- TODO string name="button_evalm"     >M      </string -->
+    <string name="button_evalg"     >G      </string>
+    <string name="button_evalm"     >M      </string>
     <string name="button_eval_cal"  >Vyhodnotiť kalibr.</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
@@ -591,8 +592,8 @@
     <string name="button_dump"      >Kopírovať z DistaX   </string>
     <string name="button_rename"    >Premenovať    </string>
     <string name="button_renumber"  >Prečíslovať</string>
-    <!-- TODO string name="button_bedding"   >Bedding plane</string -->
-    <!-- TODO string name="button_highlight" >Highlight</string -->
+    <string name="button_bedding"   >Rovina (uhol)</string>
+    <string name="button_highlight" >Zvýrazniť</string>
     <string name="button_replace"   >Vymeniť</string>
     <string name="button_reset"     >Resetovať   </string>
     <string name="button_left"      >Vľavo</string>
@@ -603,7 +604,7 @@
     <string name="button_search"    >Vyhľadať     </string>
     <string name="button_merge"     >Zlúčiť    </string>
     <string name="button_split"     >Rozdeliť   </string>
-    <!-- TODO string name="button_station"   >Center at</string -->
+    <string name="button_station"   >Vycentrovať na</string>
     <string name="button_store"     >Zapísať    </string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
@@ -866,7 +867,7 @@
     <string name="title_draw">Kreslenie</string>
     <string name="title_draw_area">OBLASŤ %1$s</string>
     <string name="title_draw_line">ČIARA %1$s</string>
-    <!-- TODO string name="title_draw_line_no_stations">LINE %1$s: no stations</string -->
+    <string name="title_draw_line_no_stations">ČIARA %1$s: bez staničení</string>
     <string name="title_draw_point">BOD %1$s</string>
     <string name="title_edit">Režim Editácie</string>
     <string name="title_edit_user_station">Editovať užívateľské meračské body</string>
@@ -950,8 +951,8 @@
   <string name="pref_bezier_step_summary">Vzdialenosť medzi bodmi Čiary pri exporte do Therionu [m]</string>
   <string name="pref_leg_shots_title">Minimálny počet jednotlivých zámer hlavnej zámery</string>
   <string name="pref_leg_shots_summary">Minimálny počet jednotlivých zámer, ktoré program vyhodnotí ako hlavnú zámeru</string>
-  <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
-  <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent</string -->
+  <string name="pref_recent_timeout_title">Posledne stiahnuté dáta - časovač</string>
+  <string name="pref_recent_timeout_summary">Čas po ktorom dáta už nie sú označené ako Posledne stiahnuté</string>
   <string name="pref_station_prefix_title">Predčíslie bodu v programe Compass</string>
   <string name="pref_station_prefix_summary">Export predčíslia bodov Compass</string>
   <string name="pref_compass_splays_title">Pomocné zámery programu Compass</string>

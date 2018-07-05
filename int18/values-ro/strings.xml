@@ -87,7 +87,7 @@
     <string name="calib_validation">Validarea %1$s vs %2$s</string>
     <!-- UNUSED string name="connect_failed">Conexiune eșuată</string -->
     <!-- UNUSED string name="data"> date</string -->
-    <string name="using">Folosind %1$s</string>
+    <string name="using">Se folosește %1$s</string>
     <string name="calib_error">Eroarea medie: %1$.4f degrees</string>
     <string name="calib_stddev">Abaterea standard: %1$.4f degrees (dev. medie pătratică - stddev)</string>
     <string name="calib_max_error">Eroarea maximă: %1$.4f degrees</string>
@@ -98,8 +98,8 @@
     
     <string name="algorithm">Algoritm:</string>
     <string name="auto">auto</string>
-    <string name="linear">linear</string>
-    <string name="non_linear">ne-linear</string>
+    <string name="linear">liniar</string>
+    <string name="non_linear">ne-liniar</string>
     <string name="algo_minimum">minim</string>
    
     <string name="device_algo_failed">Auto-determinarea algoritmului a eșuat\nSe folosește algoritmul linear</string>
@@ -139,7 +139,7 @@
     <string name="extend_right">Dreapta</string>
     <string name="extend_vert">Vertical</string>
     <!-- UNUSED string name="external_prompt">Introduce măsuratoarea</string -->
-    <string name="splay_at_to">LRUD la st. dest.</string>
+    <string name="splay_at_to">LRUD la stația dest.</string>
     <string name="lrud">LRUD</string>
     <string name="strike_dip">Strike?? %1$.0f Pantă %2$.0f</string>
 
@@ -325,7 +325,7 @@
     <string name="menu_logs">JURNALE</string>
     <string name="menu_manual_calibration">CALIBRARE</string>
     <string name="menu_options">SETĂRI</string>
-    <string name="menu_overview">~OVERVIEW</string>
+    <string name="menu_overview">~MĂSOARĂ</string>
     <string name="menu_pair">ÎMPERECHEAZĂ</string>
     <string name="menu_palette">PALETĂ</string>
     <string name="menu_photo">FOTO</string>
@@ -335,7 +335,7 @@
     <string name="menu_stats">STATISTICI</string>
     <string name="menu_survey">INFO CARTARE</string>
     <string name="menu_sync">SINCRONIZEAZĂ</string>
-    <!-- UNUSED string name="menu_tdr2th2">TH2 SKETCHES</string -->
+    <!-- UNUSED string name="menu_tdr2th2">SCHIȚE TH2</string -->
     <string name="menu_validate">VALIDEAZĂ</string>
     <string name="menu_zoom_fit">ÎNCADREAZĂ</string>
 
@@ -418,7 +418,7 @@
 
     <!-- UNUSED string name="sensor">senzor</string -->
     <string name="sensor_gravity">gravitație</string>
-    <!-- UNUSED string name="sensor_humidity">humidity</string -->
+    <!-- UNUSED string name="sensor_humidity">umiditate</string -->
     <string name="sensor_light">lumină</string>
     <string name="sensor_magnetic_field">câmp magnetic</string>
     <!-- UNUSED string name="sensor_orientation">orientare</string -->
@@ -440,7 +440,7 @@
     <!-- UNUSED string name="shot_length">lungime</string -->
     <string name="shot_note">notă</string>
     <string name="shot_not_found">Nu a fost găsită nici o măsuratoare</string>
-    <string name="shot_reverse">invers</string>
+    <string name="shot_reverse">inversează</string>
     <string name="shot_to">la</string>
 
     <string name="make_surface">Suprafața există. O înlocuiești?</string>
@@ -473,8 +473,8 @@
     <string name="disk_io_error">CRITIC: eroare i/o  !</string>
     
     <string name="toporobot_warning">AVERTISMENT: metoda TopoRobot este experimentală !</string>
-    <!-- TODO string name="anomaly_warning">Magnatic anomaly compensation is expert !</string -->
-    <!-- TODO string name="tripod_warning">Tripod policy is advanced !</string -->
+    <!-- TODO string name="anomaly_warning">Compensarea anomaliilor magnetice este pentru utilizatori experți !</string -->
+    <!-- TODO string name="tripod_warning">Metoda tripod este pentru utilizatori avansați !</string -->
 
     <string name="cannot_rename">Cartarea nu paote fi redenumită</string>
     <string name="declination">Magn. decl.</string>
@@ -529,7 +529,7 @@
     <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f</string>
 
 
-    <string name="hide_blank">Măsurători ~goale</string>
+    <string name="hide_blank">Măsurători cu valori nule (goale)</string>
     <string name="hide_leg">Vize (segmente drumuire) repetate</string>
     <string name="hide_ids">ID-uri măsurători</string>
     <string name="hide_splay">Radieri</string>
@@ -542,7 +542,7 @@
     <string name="h_section">SECȚIUNE-H</string>
     <!-- UNUSED string name="landscape">mod peisaj</string -->
 
-    <string name="distox_err_ok">OK</string>
+    <string name="distox_err_ok">Bine</string>
     <string name="distox_err_headtail">Eroare la citirea DistoX</string>
     <string name="distox_err_headtail_io">Eroare memorie I/O DistoX</string>
     <string name="distox_err_headtail_eof">Eroare memorie EOF DistoX</string>
@@ -581,7 +581,7 @@
     <string name="button_skip"    >Omite</string>
     <string name="button_done"    >Gata</string>    
     <string name="button_lrud"    >+ LRUD</string>
-    <string name="button_ok"        >OK         </string>
+    <string name="button_ok"        >Bine         </string>
     <string name="button_open"      >Deschide   </string>
     <string name="button_read"      >Citește    </string>
     <!-- UNUSED string name="button_redo"      >Refă      </string -->
@@ -596,12 +596,12 @@
     <string name="button_left"      >STÂNGA</string>
     <string name="button_right"     >DREAPTA</string>
     <string name="button_clear"     >Curăță     </string>
-    <string name="button_save"      >Save       </string>
+    <string name="button_save"      >Salvează   </string>
     <!-- UNUSED string name="button_select"    >Selectează</string -->
     <string name="button_search"    >Caută      </string>
     <string name="button_merge"     >Îmbină     </string>
     <string name="button_split"     >Desparte   </string>
-    <!-- TODO string name="button_station"   >Center at</string -->
+    <!-- TODO string name="button_station"   >Centrează la</string -->
     <string name="button_store"     >Stochează  </string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
@@ -877,7 +877,7 @@
     <string name="title_fixed_add">Introducere locație</string>
     <string name="title_manual">Manual de utilizare TopoDroid</string>
     <string name="title_mode">Mod afișare</string>
-    <string name="title_move">Mișcând</string>
+    <string name="title_move">Mișcâre</string>
     <string name="title_note">Note cartare</string>
     <string name="title_photo">Foto/Măsurători</string>
     <string name="title_photo_comment">Comentariu fotografie</string>
@@ -1229,8 +1229,8 @@
 
   <string name="pref_picker_type_title">Selecție unealtă desen</string>
   <string name="pref_picker_type_summary">Tip selecție unealtă desentype</string>
-  <!-- UNUSED string name="pref_section_stations_title">Stații Secțiuni-X (transv.)</string -->
-  <!-- UNUSED string name="pref_section_stations_summary">Stații de referință Secțiuni-X (transv.)</string -->
+  <!-- UNUSED string name="pref_section_stations_title">Stații Secțiuni-X (transversale)</string -->
+  <!-- UNUSED string name="pref_section_stations_summary">Stații de referință Secțiuni-X (transversale)</string -->
   <string name="pref_station_size_title">Mărime nume stații</string>
   <string name="pref_station_size_summary">Mărimea numelor stațiilor</string>
   <string name="pref_station_size_message">Mărimea numelor stațiilor</string>
@@ -1373,7 +1373,7 @@
 \n[2] Alege fișierul de încărcat sau de salvat. Fișierele firmware sunt în directorul bin.
 \n[3] Asigură-te că veriunea firmware de încarcat este compatibilă cu versiunea de hardware a DistoX-ului.
 \n[4] Pune DistoX2 în modul bootloader: apasă PLUS și MINUS în timp ce îl porniți cu tasta DIST.
-\n[5] Apasă butonul OK.
+\n[5] Apasă butonul Bine.
 \n[6] Confirmă pentru continuare și așteaptă finalizarea procesului.
 \n[7] Închide DistoX2 cu tasta CLR.
 \n
