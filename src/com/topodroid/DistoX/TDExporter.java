@@ -1172,7 +1172,7 @@ class TDExporter
    *    *begin survey_name
    *      *units tape feet|metres
    *      *units compass clino grads|degrees
-   *      *calibrate declination ...
+   *      *declination ... ; optional
    *      *date yyyy.mm.dd
    *      ; *fix station long lat alt
    *      ; *team "teams"
@@ -1282,7 +1282,15 @@ class TDExporter
       writeSurvexLine(pw, "  *units tape " + uls );
       writeSurvexLine(pw, "  *units compass " + uas );
       writeSurvexLine(pw, "  *units clino " + uas );
-      pw.format(Locale.US, "  *calibrate declination %.2f", info.declination ); writeSurvexEOL(pw);
+      // Don't specify a declination unless one was actually specified, as that
+      // breaks datasets using "*declination auto <coordinates>" at a higher
+      // level, which is the recommended way to handle declinations in Survex
+      // nowadays.
+      if (info.declination != 0.0) {
+        // *declination with an angle needs Survex 1.2.22 (released 2015-08-17).
+        // FIXME: Really should distinguish "unset" vs "set to 0.0".
+        pw.format(Locale.US, "  *declination %.2f", info.declination ); writeSurvexEOL(pw);
+      }
       if ( ! TDSetting.mSurvexSplay ) {
         writeSurvexLine( pw, "  *alias station - .." );
       }
