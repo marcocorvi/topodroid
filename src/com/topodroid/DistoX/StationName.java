@@ -115,11 +115,18 @@ class StationName
   // ------------------------------------------------------------------------------------------------
   // station assignments
 
-  private void setBlockName( DataHelper data_helper, long sid, DBlock blk, String from, String to ) 
+  private void setBlockName( DataHelper data_helper, long sid, DBlock blk, String from, String to, boolean is_backleg ) 
+  {
+    blk.setBlockName( from, to, is_backleg );
+    data_helper.updateShotName( blk.mId, sid, from, to, true );
+  }
+
+  private void setBlockName( DataHelper data_helper, long sid, DBlock blk, String from, String to )
   {
     blk.setBlockName( from, to );
     data_helper.updateShotName( blk.mId, sid, from, to, true );
   }
+
 
   // @param list list of dblock to assign
   void assignStationsAfter_Tripod( DataHelper data_helper, long sid, DBlock blk0, List<DBlock> list, Set<String> sts )
@@ -337,17 +344,17 @@ class StationName
   {
     float d_thr = TDSetting.mCloseDistance * (blk.mLength+length);
     if ( Math.abs( length - blk.mLength ) > d_thr ) {
-      // Log.v("DistoX", "backshot check fails on distance " + length + " " + blk.mLength + " thr " + d_thr );
+      // Log.v("DistoXX", "backshot check fails on distance " + length + " " + blk.mLength + " thr " + d_thr );
       return false;
     }
     float a_thr = TDSetting.mCloseDistance * 112; // rad2deg * 2 
     if ( Math.abs( clino + blk.mClino ) > a_thr ) {
-      // Log.v("DistoX", "backshot check fails on clino " + clino + " " + blk.mClino + " thr " + a_thr );
+      // Log.v("DistoXX", "backshot check fails on clino " + clino + " " + blk.mClino + " thr " + a_thr );
       return false;
     }
     if ( ! TDSetting.doMagAnomaly() ) {
       if ( Math.abs( ( bearing < blk.mBearing )? blk.mBearing - bearing - 180 : bearing - blk.mBearing - 180 ) > a_thr ) {
-        // Log.v("DistoX", "backshot check fails on bearing " + bearing + " " + blk.mBearing + " thr " + a_thr );
+        // Log.v("DistoXX", "backshot check fails on bearing " + bearing + " " + blk.mBearing + " thr " + a_thr );
         return false;
       }
     }
@@ -449,7 +456,8 @@ class StationName
             p_to = oldFrom; 
             from = to;
             station = from;
-	    data_helper.updateShotLegFlag( prev.mId, sid, DBlock.LEG_BACK, DBlock.FLAG_DUPLICATE, true ); // true = forward
+	    // Log.v("DistoXX", "set " + blk.mId + " back leg and dup ");
+	    data_helper.updateShotLegFlag( blk.mId, sid, LegType.BACK, DBlock.FLAG_DUPLICATE, true ); // true = forward
           } else {  // forward
             // flip = true;
             if ( increment ) {
@@ -468,9 +476,9 @@ class StationName
           }
           // Log.v("DistoX", "FROM " + from + " TO " + to + " " + p_to + " NEXT " + next + " STATION " + station + " increment " + increment + " backshot " + is_backsight_shot );
 	  if ( bs ) {
-            setBlockName( data_helper, sid, blk, p_to, from );
+            setBlockName( data_helper, sid, blk, p_to, from, is_backsight_shot );
 	  } else {
-            setBlockName( data_helper, sid, blk, from, p_to );
+            setBlockName( data_helper, sid, blk, from, p_to, is_backsight_shot );
 	  }
         }
       }
@@ -529,7 +537,8 @@ class StationName
                 prev_to = oldFrom;   // 1
                 station = from;
                 // flip = false;
-	        data_helper.updateShotLegFlag( prev.mId, sid, DBlock.LEG_BACK, DBlock.FLAG_DUPLICATE, true ); // true = forward
+	        // Log.v("DistoXX", "set " + prev.mId + " back leg and dup ");
+	        data_helper.updateShotLegFlag( prev.mId, sid, LegType.BACK, DBlock.FLAG_DUPLICATE, true ); // true = forward
               } else {               // 2 backsight forward shot from--to
                 // prev_to = to;     // 3
                 oldFrom = from;      // 2
@@ -541,7 +550,7 @@ class StationName
                 fore_bearing = prev.mBearing;
                 fore_clino   = prev.mClino;
               }
-              setBlockName( data_helper, sid, prev, prev_from, prev_to );
+              setBlockName( data_helper, sid, prev, prev_from, prev_to, is_backsight_shot );
               setLegExtend( data_helper, sid, prev );
               // Log.v("DistoX", "FROM " + from + " TO " + to + " STATION " + station + " P_FROM " + prev_from + " P_TO " + prev_to + " backshot " + is_backsight_shot );
             }
@@ -1093,7 +1102,8 @@ class StationName
                 prev_to = oldFrom;   // 1
                 station = from;
                 // flip = false;
-	        data_helper.updateShotLegFlag( prev.mId, sid, DBlock.LEG_BACK, DBlock.FLAG_DUPLICATE, true ); // true = forward
+	        // Log.v("DistoXX", "set " + prev.mId + " back leg and dup ");
+	        data_helper.updateShotLegFlag( prev.mId, sid, LegType.BACK, DBlock.FLAG_DUPLICATE, true ); // true = forward
               } else {               // 2 backsight forward shot from--to
                 // prev_to = to;     // 3
                 oldFrom = from;      // 2
@@ -1105,7 +1115,7 @@ class StationName
                 fore_bearing = prev.mBearing;
                 fore_clino   = prev.mClino;
               }
-              setBlockName( data_helper, sid, prev, prev_to, prev_from );
+              setBlockName( data_helper, sid, prev, prev_to, prev_from, is_backsight_shot );
               setLegExtend( data_helper, sid, prev );
             }
           } else { // distance from prev > "closeness" setting

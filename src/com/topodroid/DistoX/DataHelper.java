@@ -90,7 +90,6 @@ class DataHelper extends DataSetObservable
   private SQLiteStatement updateStationCommentStmt = null;
   // private SQLiteStatement deleteStationStmt = null;
   // private SQLiteStatement updateShotNameStmt = null;
-  private SQLiteStatement updateShotNameAndExtendStmt = null;
   // private SQLiteStatement updateShotExtendStmt = null;
   // private SQLiteStatement updateShotFlagStmt = null;
   // private SQLiteStatement updateShotLegFlagStmt = null;
@@ -214,15 +213,11 @@ class DataHelper extends DataSetObservable
      }
    }
 
-   static final long DATA_NORMAL   = 0L;
-   static final long DATA_SEC_LEG  = 1L;
-   static final long DATA_X_SPLAY  = 2L;
-   static final long DATA_BACK_LEG = 3L;
-
    private void fillBlock( long sid, DBlock block, Cursor cursor )
    {
+     long leg = cursor.getLong(11);
      block.setId( cursor.getLong(0), sid );
-     block.setBlockName( cursor.getString(1), cursor.getString(2) );  // from - to
+     block.setBlockName( cursor.getString(1), cursor.getString(2), (leg == LegType.BACK) );  // from - to
      block.mLength       = (float)( cursor.getDouble(3) );  // length [meters]
      // block.setBearing( (float)( cursor.getDouble(4) ) ); 
      block.mBearing      = (float)( cursor.getDouble(4) );  // bearing [degrees]
@@ -233,14 +228,14 @@ class DataHelper extends DataSetObservable
      
      block.setExtend( (int)(cursor.getLong(9) ) );
      block.resetFlag( cursor.getLong(10) );
-     long leg = cursor.getLong(11);
-     if ( leg == DATA_SEC_LEG ) {
+     if ( leg == LegType.EXTRA ) {
        block.setBlockType( DBlock.BLOCK_SEC_LEG );
-     } else if ( leg == DATA_X_SPLAY ) {
+     } else if ( leg == LegType.XSPLAY ) {
        block.setBlockType( DBlock.BLOCK_X_SPLAY );
-     } else if ( leg == DATA_BACK_LEG ) {
+     } else if ( leg == LegType.BACK ) {
        block.setBlockType( DBlock.BLOCK_BACK_LEG );
      }
+     // Log.v("DistoXX", "A7 fill block " + cursor.getLong(0) + " leg " + leg + " flag " + cursor.getLong(10) );
      block.mComment = cursor.getString(12);
      block.mShotType = (int)cursor.getLong(13);
      block.mTime = cursor.getLong(14);
@@ -499,8 +494,6 @@ class DataHelper extends DataSetObservable
       // updateShotFlagStmt = myDB.compileStatement( "UPDATE shots SET flag=? WHERE surveyId=? AND id=?" );
       // updateShotLegFlagStmt = myDB.compileStatement( "UPDATE shots SET leg=?, flag=? WHERE surveyId=? AND id=?" );
 
-      updateShotNameAndExtendStmt =
-        myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, leg=? WHERE surveyId=? AND id=?" );
       resetShotColorStmt   = myDB.compileStatement( "UPDATE shots SET color=0 WHERE surveyId=?" );
       updateShotColorStmt  = myDB.compileStatement( "UPDATE shots SET color=? WHERE surveyId=? AND id=?" );
       updateShotAMDRStmt   =
@@ -835,6 +828,7 @@ class DataHelper extends DataSetObservable
     if ( myDB == null ) return -1;
     // if ( makesCycle( id, sid, fStation, tStation ) ) return -2;
 
+    // Log.v("DistoXX", "A8 update shot. id " + id + " leg " + leg );
     if ( updateShotStmtFull == null ) {
       updateShotStmtFull = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, flag=?, leg=?, comment=? WHERE surveyId=? AND id=?" );
     }
@@ -946,6 +940,7 @@ class DataHelper extends DataSetObservable
   // "leg" flag: 0 splay, 1 leg, 2 x-splay
   void updateShotLeg( long id, long sid, long leg, boolean forward )
   {
+    // Log.v("DistoXX", "A1 update shot leg. id " + id + " leg " + leg ); 
     // if ( myDB == null ) return;
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
@@ -971,13 +966,13 @@ class DataHelper extends DataSetObservable
     // get the shot sid/id
     DBlock blk = selectShot( id, sid );
     if ( blk.isPlainSplay() ) {
-      updateShotLeg( id, sid, DBlock.LEG_XSPLAY, forward );
-      return DBlock.LEG_XSPLAY;
+      updateShotLeg( id, sid, LegType.XSPLAY, forward );
+      return LegType.XSPLAY;
     } else if ( blk.isXSplay() ) {
-      updateShotLeg( id, sid, DBlock.LEG_NORMAL, forward );
-      return DBlock.LEG_NORMAL;
+      updateShotLeg( id, sid, LegType.NORMAL, forward );
+      return LegType.NORMAL;
     }
-    return DBlock.LEG_INVALID;
+    return LegType.INVALID;
   }
 
   void updateShotExtend( long id, long sid, long extend, boolean forward )
@@ -1008,9 +1003,10 @@ class DataHelper extends DataSetObservable
 
   void updateShotLegFlag( long id, long sid, long leg, long flag, boolean forward )
   {
+    // Log.v("DistoXX", "A2 update shot leg/flag. id " + id + " leg " + leg + " flag " + flag ); 
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
-    pw.format( Locale.US, "UPDATE shots SET leg=%d flag=%d WHERE surveyId=%d AND id=%d", leg, flag, sid, id );
+    pw.format( Locale.US, "UPDATE shots SET leg=%d, flag=%d WHERE surveyId=%d AND id=%d", leg, flag, sid, id );
     if ( doExecShotSQL( id, sw ) ) {
       if ( forward && mListeners != null ) { // synchronized( mListeners )
         mListeners.onUpdateShotLegFlag( id, sid, leg, flag );
@@ -1060,49 +1056,6 @@ class DataHelper extends DataSetObservable
     if ( updateStatus( SHOT_TABLE, id, sid, TDStatus.NORMAL ) ) {
       if ( forward && mListeners != null ) { // synchronized( mListeners )
         mListeners.onUndeleteShot( id, sid );
-      }
-    }
-  }
-  
-  public void updateShotNameAndExtend( long sid, ArrayList< DBlock > updatelist )
-  {
-    // if ( myDB == null ) return;
-    boolean success = false;
-    try {
-      if ( updateShotNameAndExtendStmt == null ) {
-        updateShotNameAndExtendStmt =
-          myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, leg=? WHERE surveyId=? AND id=?" );
-      }
-
-      // myDB.execSQL("PRAGMA synchronous=OFF");
-      myDB.setLockingEnabled( false );
-      myDB.beginTransaction();
-      for ( DBlock b : updatelist ) {
-        updateShotNameAndExtendStmt.bindString( 1, b.mFrom );
-        updateShotNameAndExtendStmt.bindString( 2, b.mTo );
-        updateShotNameAndExtendStmt.bindLong(   3, b.getFullExtend() );
-        updateShotNameAndExtendStmt.bindLong(   4, b.isSecLeg()? 1 : 0 );
-        updateShotNameAndExtendStmt.bindLong(   5, sid );
-        updateShotNameAndExtendStmt.bindLong(   6, b.mId );
-        // try {
-          updateShotNameAndExtendStmt.execute();
-          success = true;
-        // } catch ( SQLiteDiskIOException e ) {  handleDiskIOError( e );
-        // } catch (SQLiteException e ) { logError("shots name+ext ", e); }
-      }
-      myDB.setTransactionSuccessful();
-    } catch ( SQLiteDiskIOException e ) {  handleDiskIOError( e );
-    } catch (SQLiteException e ) { logError("shots name+ext ", e); 
-    } finally {
-      myDB.endTransaction();
-      myDB.setLockingEnabled( true );
-      // myDB.execSQL("PRAGMA synchronous=NORMAL");
-    }
-    if ( success && mListeners != null ) { // synchronized( mListeners )
-      for ( DBlock b : updatelist ) {
-        mListeners.onUpdateShotName( b.mId, sid, b.mFrom, b.mTo );
-        mListeners.onUpdateShotExtend( b.mId, sid, b.getFullExtend() );
-        mListeners.onUpdateShotLeg( b.mId, sid, b.isSecLeg()? 1 : 0 );
       }
     }
   }
@@ -1420,6 +1373,7 @@ class DataHelper extends DataSetObservable
   long insertShotAt( long sid, long at, long millis, long color, double d, double b, double c, double r, long extend, long leg, long type, boolean forward )
   {
     if ( myDB == null ) return -1L;
+    // Log.v("DistoXX", "A4 insert shot at " + at + " leg " + leg );
     shiftShotsId( sid, at );
     ++ myNextId;
     ContentValues cv = new ContentValues();
@@ -1436,7 +1390,7 @@ class DataHelper extends DataSetObservable
     cv.put( "dip",      0.0 );
     cv.put( "extend",   extend );
     cv.put( "flag",     DBlock.FLAG_SURVEY ); // flag );
-    cv.put( "leg",      leg ); // DBlock.LEG_NORMAL ); // leg );
+    cv.put( "leg",      leg ); // LegType.NORMAL ); // leg );
     cv.put( "status",   TDStatus.NORMAL ); // status );
     cv.put( "comment",  "" ); // comment );
     cv.put( "type",     type ); 
@@ -1459,6 +1413,7 @@ class DataHelper extends DataSetObservable
                           String comment, boolean forward )
   {
     // TDLog.Log( TDLog.LOG_DB, "insert shot <" + id + "> " + from + "-" + to + " extend " + extend );
+    // Log.v("DistoXX", "A5 do insert shot id " + id + " leg " + leg + " flag " + flag );
     if ( myDB == null ) return -1L;
     if ( id == -1L ) {
       ++ myNextId;
@@ -2158,10 +2113,10 @@ class DataHelper extends DataSetObservable
            if ( k > 0 ) {
              // Log.v("DistoX", blk.mId + " clear shot name " + ret );
              updateShotName( ret, sid, "", "", forward );
-             updateShotLeg( ret, sid, DBlock.LEG_EXTRA, forward ); 
+             updateShotLeg( ret, sid, LegType.EXTRA, forward ); 
              if ( k == 2 ) { // N.B. if k == 2 must set ShotLeg also to intermediate shot
                if ( cursor.moveToPrevious() ) { // overcautious
-                 updateShotLeg( cursor.getLong(0), sid, DBlock.LEG_EXTRA, forward ); 
+                 updateShotLeg( cursor.getLong(0), sid, LegType.EXTRA, forward ); 
                }
              }
            }
@@ -2202,6 +2157,7 @@ class DataHelper extends DataSetObservable
        fillBlock( sid, block, cursor );
      }
      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+     // Log.v("DistoXX", "A6 select one shot id " + id + " block leg " + block.getLegType() );
      return block;
    }
 
@@ -2360,6 +2316,7 @@ class DataHelper extends DataSetObservable
 
    List<DBlock> selectShotsAfterId( long sid, long id , long status )
    {
+     // Log.v("DistoXX", "B1 select shots after id " + id );
      List< DBlock > list = new ArrayList<>();
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
@@ -2587,6 +2544,7 @@ class DataHelper extends DataSetObservable
 
    List<DBlock> selectAllShotsAfter( long id, long sid, long status )
    {
+     // Log.v("DistoXX", "B2 select shots after id " + id );
      List< DBlock > list = new ArrayList<>();
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
@@ -2629,6 +2587,7 @@ class DataHelper extends DataSetObservable
 
    List<DBlock> selectAllShots( long sid, long status )
    {
+     // Log.v("DistoXX", "B3 select shots all");
      List< DBlock > list = new ArrayList<>();
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
@@ -2673,6 +2632,7 @@ class DataHelper extends DataSetObservable
 
    List<DBlock> selectAllLegShots( long sid, long status )
    {
+     // Log.v("DistoXX", "B4 select shots all leg");
      List< DBlock > list = new ArrayList<>();
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,

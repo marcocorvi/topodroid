@@ -1715,7 +1715,7 @@ public class TopoDroidApp extends Application
     resetCurrentOrLastStation( );
     long millis = java.lang.System.currentTimeMillis()/1000;
     distance = distance / TDSetting.mUnitLength;
-    long id = mData.insertShot( mSID, -1L, millis, 0, distance, bearing, clino, 0.0f, extend, DBlock.LEG_NORMAL, 1, true );
+    long id = mData.insertShot( mSID, -1L, millis, 0, distance, bearing, clino, 0.0f, extend, LegType.NORMAL, 1, true );
     mData.updateShotName( id, mSID, from, to, true ); // forward = true
     mData.updateShotFlag( id, mSID, DBlock.FLAG_DUPLICATE, true ); // forward = true
     return id;
@@ -1769,10 +1769,10 @@ public class TopoDroidApp extends Application
       if ( horizontal ) { // WENS
         extend = TDAzimuth.computeSplayExtend( 270 );
         if ( at >= 0L ) {
-          id = mData.insertShotAt( mSID, at, millis, 0, l, 270.0f, 0.0f, 0.0f, extend, DBlock.LEG_XSPLAY, 1, true );
+          id = mData.insertShotAt( mSID, at, millis, 0, l, 270.0f, 0.0f, 0.0f, extend, LegType.XSPLAY, 1, true );
           ++at;
         } else {
-          id = mData.insertShot( mSID, -1L, millis, 0, l, 270.0f, 0.0f, 0.0f, extend, DBlock.LEG_XSPLAY, 1, true );
+          id = mData.insertShot( mSID, -1L, millis, 0, l, 270.0f, 0.0f, 0.0f, extend, LegType.XSPLAY, 1, true );
         }
       } else {
         float b = bearing - 90.0f;
@@ -1780,10 +1780,10 @@ public class TopoDroidApp extends Application
         extend = TDAzimuth.computeSplayExtend( b );
         // b = in360( b );
         if ( at >= 0L ) {
-          id = mData.insertShotAt( mSID, at, millis, 0, l, b, 0.0f, 0.0f, extend, DBlock.LEG_XSPLAY, 1, true );
+          id = mData.insertShotAt( mSID, at, millis, 0, l, b, 0.0f, 0.0f, extend, LegType.XSPLAY, 1, true );
           ++at;
         } else {
-          id = mData.insertShot( mSID, -1L, millis, 0, l, b, 0.0f, 0.0f, extend, DBlock.LEG_XSPLAY, 1, true );
+          id = mData.insertShot( mSID, -1L, millis, 0, l, b, 0.0f, 0.0f, extend, LegType.XSPLAY, 1, true );
         }
       }
       mData.updateShotName( id, mSID, splay_station, EMPTY, true );
@@ -1792,20 +1792,20 @@ public class TopoDroidApp extends Application
       if ( horizontal ) { // WENS
         extend = TDAzimuth.computeSplayExtend( 90 );
         if ( at >= 0L ) {
-          id = mData.insertShotAt( mSID, at, millis, 0, r, 90.0f, 0.0f, 0.0f, extend, DBlock.LEG_XSPLAY, 1, true );
+          id = mData.insertShotAt( mSID, at, millis, 0, r, 90.0f, 0.0f, 0.0f, extend, LegType.XSPLAY, 1, true );
           ++at;
         } else {
-          id = mData.insertShot( mSID, -1L, millis, 0, r, 90.0f, 0.0f, 0.0f, extend, DBlock.LEG_XSPLAY, 1, true );
+          id = mData.insertShot( mSID, -1L, millis, 0, r, 90.0f, 0.0f, 0.0f, extend, LegType.XSPLAY, 1, true );
         }
       } else {
         float b = bearing + 90.0f;
         if ( b >= 360.0f ) b -= 360.0f;
         extend = TDAzimuth.computeSplayExtend( b );
         if ( at >= 0L ) {
-          id = mData.insertShotAt( mSID, at, millis, 0, r, b, 0.0f, 0.0f, extend, DBlock.LEG_XSPLAY, 1, true );
+          id = mData.insertShotAt( mSID, at, millis, 0, r, b, 0.0f, 0.0f, extend, LegType.XSPLAY, 1, true );
           ++at;
         } else {
-          id = mData.insertShot( mSID, -1L, millis, 0, r, b, 0.0f, 0.0f, extend, DBlock.LEG_XSPLAY, 1, true );
+          id = mData.insertShot( mSID, -1L, millis, 0, r, b, 0.0f, 0.0f, extend, LegType.XSPLAY, 1, true );
         }
       }
       mData.updateShotName( id, mSID, splay_station, EMPTY, true );
@@ -1813,17 +1813,17 @@ public class TopoDroidApp extends Application
     if ( u >= 0.0f ) {  
       if ( horizontal ) {
         if ( at >= 0L ) {
-          id = mData.insertShotAt( mSID, at, millis, 0, u, 0.0f, 0.0f, 0.0f, 0L, DBlock.LEG_XSPLAY, 1, true );
+          id = mData.insertShotAt( mSID, at, millis, 0, u, 0.0f, 0.0f, 0.0f, 0L, LegType.XSPLAY, 1, true );
           ++at;
         } else {
-          id = mData.insertShot( mSID, -1L, millis, 0, u, 0.0f, 0.0f, 0.0f, 0L, DBlock.LEG_XSPLAY, 1, true );
+          id = mData.insertShot( mSID, -1L, millis, 0, u, 0.0f, 0.0f, 0.0f, 0L, LegType.XSPLAY, 1, true );
         }
       } else {
         if ( at >= 0L ) {
-          id = mData.insertShotAt( mSID, at, millis, 0, u, 0.0f, 90.0f, 0.0f, 0L, DBlock.LEG_XSPLAY, 1, true );
+          id = mData.insertShotAt( mSID, at, millis, 0, u, 0.0f, 90.0f, 0.0f, 0L, LegType.XSPLAY, 1, true );
           ++at;
         } else {
-          id = mData.insertShot( mSID, -1L, millis, 0, u, 0.0f, 90.0f, 0.0f, 0L, DBlock.LEG_XSPLAY, 1, true );
+          id = mData.insertShot( mSID, -1L, millis, 0, u, 0.0f, 90.0f, 0.0f, 0L, LegType.XSPLAY, 1, true );
         }
       }
       mData.updateShotName( id, mSID, splay_station, EMPTY, true );
@@ -1831,17 +1831,17 @@ public class TopoDroidApp extends Application
     if ( d >= 0.0f ) {
       if ( horizontal ) {
         if ( at >= 0L ) {
-          id = mData.insertShotAt( mSID, at, millis, 0, d, 180.0f, 0.0f, 0.0f, 0L, DBlock.LEG_XSPLAY, 1, true );
+          id = mData.insertShotAt( mSID, at, millis, 0, d, 180.0f, 0.0f, 0.0f, 0L, LegType.XSPLAY, 1, true );
           ++at;
         } else {
-          id = mData.insertShot( mSID, -1L, millis, 0, d, 180.0f, 0.0f, 0.0f, 0L, DBlock.LEG_XSPLAY, 1, true );
+          id = mData.insertShot( mSID, -1L, millis, 0, d, 180.0f, 0.0f, 0.0f, 0L, LegType.XSPLAY, 1, true );
         }
       } else {
         if ( at >= 0L ) {
-          id = mData.insertShotAt( mSID, at, millis, 0, d, 0.0f, -90.0f, 0.0f, 0L, DBlock.LEG_XSPLAY, 1, true );
+          id = mData.insertShotAt( mSID, at, millis, 0, d, 0.0f, -90.0f, 0.0f, 0L, LegType.XSPLAY, 1, true );
           ++at;
         } else {
-          id = mData.insertShot( mSID, -1L, millis, 0, d, 0.0f, -90.0f, 0.0f, 0L, DBlock.LEG_XSPLAY, 1, true );
+          id = mData.insertShot( mSID, -1L, millis, 0, d, 0.0f, -90.0f, 0.0f, 0L, LegType.XSPLAY, 1, true );
         }
       }
       mData.updateShotName( id, mSID, splay_station, EMPTY, true );
@@ -1892,9 +1892,9 @@ public class TopoDroidApp extends Application
           at = addManualSplays( at, splay_station, left, right, up, down, bearing, horizontal );
 
           if ( at >= 0L ) {
-            id = mData.insertShotAt( mSID, at, millis, 0, distance, bearing, clino, 0.0f, extend0, DBlock.LEG_NORMAL, 1, true );
+            id = mData.insertShotAt( mSID, at, millis, 0, distance, bearing, clino, 0.0f, extend0, LegType.NORMAL, 1, true );
           } else {
-            id = mData.insertShot( mSID, -1L, millis, 0, distance, bearing, clino, 0.0f, extend0, DBlock.LEG_NORMAL, 1, true );
+            id = mData.insertShot( mSID, -1L, millis, 0, distance, bearing, clino, 0.0f, extend0, LegType.NORMAL, 1, true );
           }
           // String name = from + "-" + to;
           mData.updateShotName( id, mSID, from, to, true );
@@ -1903,10 +1903,10 @@ public class TopoDroidApp extends Application
           // FIXME updateDisplay( );
         } else {
           if ( at >= 0L ) {
-            id = mData.insertShotAt( mSID, at, millis, 0, distance, bearing, clino, 0.0f, extend0, DBlock.LEG_NORMAL, 1, true );
+            id = mData.insertShotAt( mSID, at, millis, 0, distance, bearing, clino, 0.0f, extend0, LegType.NORMAL, 1, true );
             ++ at;
           } else {
-            id = mData.insertShot( mSID, -1L, millis, 0, distance, bearing, clino, 0.0f, extend0, DBlock.LEG_NORMAL, 1, true );
+            id = mData.insertShot( mSID, -1L, millis, 0, distance, bearing, clino, 0.0f, extend0, LegType.NORMAL, 1, true );
           }
           // String name = from + "-" + to;
           mData.updateShotName( id, mSID, from, to, true );

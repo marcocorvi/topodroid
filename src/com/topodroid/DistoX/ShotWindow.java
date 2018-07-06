@@ -424,7 +424,7 @@ public class ShotWindow extends Activity
         // Log.v( "DistoX", "item close " + cur.type() + " " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
         if ( cur.isBlank() ) {   // FIXME 20140612
           cur.setBlockType( DBlock.BLOCK_SEC_LEG );
-          mApp_mData.updateShotLeg( cur.mId, mApp.mSID, 1L, true ); // cur.mType ); // FIXME 20140616
+          mApp_mData.updateShotLeg( cur.mId, mApp.mSID, LegType.EXTRA, true ); // cur.mType ); // FIXME 20140616
         }
 
         // if ( prev != null && prev.isBlank() ) prev.setBlockType( DBlock.BLOCK_BLANK_LEG );
@@ -578,9 +578,9 @@ public class ShotWindow extends Activity
     for ( ; blk != null; ) {
       long leg = mApp_mData.updateSplayLeg( blk.mId, mApp.mSID, true );
       // Log.v("DistoX", "toggle splay type " + pos + " new leg " + leg );
-      if ( leg == DBlock.LEG_NORMAL ) {
+      if ( leg == LegType.NORMAL ) {
         blk.setBlockType( DBlock.BLOCK_SPLAY );
-      } else if ( leg == DBlock.LEG_XSPLAY ) {
+      } else if ( leg == LegType.XSPLAY ) {
         blk.setBlockType( DBlock.BLOCK_X_SPLAY );
       } else {
         break;
@@ -975,7 +975,7 @@ public class ShotWindow extends Activity
 
     // restoreInstanceFromData();
     // mLastExtend = mApp_mData.getLastShotId( mApp.mSID );
-    List<DBlock> list = mApp_mData.selectAllShots( mApp.mSID, TDStatus.NORMAL );
+    // List<DBlock> list = mApp_mData.selectAllShots( mApp.mSID, TDStatus.NORMAL );
     // mSecondLastShotId = mApp.lastShotId( );
 
     mImage = (Button) findViewById( R.id.handle );
@@ -1645,8 +1645,7 @@ public class ShotWindow extends Activity
   void updateShot( String from, String to, int extend, long flag, long leg, String comment, DBlock blk )
   {
     // TDLog.Log( TDLog.LOG_SHOT, "update Shot From >" + from + "< To >" + to + "< comment " + comment );
-    // Log.v( "DistoX", "update Shot From >" + from + "< To >" + to + "< comment " + comment );
-    blk.setBlockName( from, to );
+    blk.setBlockName( from, to, (leg == LegType.BACK) );
 
     int ret = mApp_mData.updateShot( blk.mId, mApp.mSID, from, to, extend, flag, leg, comment, true );
 
@@ -1659,25 +1658,25 @@ public class ShotWindow extends Activity
       List< DBlock > blk_list = mApp_mData.selectShotsAfterId( blk.mId, mApp.mSID, 0L );
       for ( DBlock blk1 : blk_list ) {
         if ( ! blk1.isRelativeDistance( blk ) ) break;
-        mApp_mData.updateShotLeg( blk1.mId, mApp.mSID, 1L, true );
+        mApp_mData.updateShotLeg( blk1.mId, mApp.mSID, LegType.EXTRA, true );
       }
     }
 
-    if ( leg == DataHelper.DATA_SEC_LEG ) {
+    if ( leg == LegType.EXTRA ) {
       blk.setBlockType( DBlock.BLOCK_SEC_LEG );
-    } else if ( leg == DataHelper.DATA_BACK_LEG ) {
+    } else if ( leg == LegType.BACK ) {
       blk.setBlockType( DBlock.BLOCK_BACK_LEG );
-    } else if ( blk.isBackLeg() ) {
-      blk.setBlockType( DBlock.BLOCK_MAIN_LEG );
+    // } else if ( blk.isBackLeg() ) {
+    //   blk.setBlockType( DBlock.BLOCK_MAIN_LEG );
     }
 
     DBlock blk3 = mDataAdapter.updateBlockView( blk.mId );
     if ( blk3 != blk && blk3 != null ) {
-      blk3.setBlockName( from, to );
+      blk3.setBlockName( from, to, (leg == LegType.BACK) );
       blk3.setExtend( extend );
       blk3.resetFlag( flag );
       blk3.mComment = comment;
-      // FIXME if ( leg == DataHelper.DATA_SEC_LEG ) blk3.setBlockType( DBlock.BLOCK_SEC_LEG );
+      // FIXME if ( leg == LegType.EXTRA ) blk3.setBlockType( DBlock.BLOCK_SEC_LEG );
       mDataAdapter.updateBlockView( blk3.mId );
     }
   }
@@ -1701,7 +1700,7 @@ public class ShotWindow extends Activity
   {
     DBlock blk = blks.get(0); // blk is guaranteed to exists
     if ( ! ( from.equals(blk.mFrom) && to.equals(blk.mTo) ) ) {
-      blk.setBlockName( from, to );
+      blk.setBlockName( from, to, blk.isBackLeg() );
       mApp_mData.updateShotName( blk.mId, mApp.mSID, from, to, true );
     }
     if ( blk.isLeg() ) {
@@ -1834,7 +1833,7 @@ public class ShotWindow extends Activity
     for ( DBlock b : splays ) {
       if ( b.mId == blk.mId ) {
         blk.setBlockName( from, to );
-        // FIXME leg should be DataHelper.DATA_NORMAL
+        // FIXME leg should be LegType.NORMAL
         int ret = mApp_mData.updateShot( blk.mId, mApp.mSID, from, to, extend, flag, leg, comment, true );
 
         if ( ret == -1 ) {
@@ -1846,7 +1845,7 @@ public class ShotWindow extends Activity
           // List< DBlock > blk_list = mApp_mData.selectShotsAfterId( blk.mId, mApp.mSID, 0L );
           // for ( DBlock blk1 : blk_list ) {
           //   if ( ! blk1.isRelativeDistance( blk ) ) break;
-          //   mApp_mData.updateShotLeg( blk1.mId, mApp.mSID, 1L, true );
+          //   mApp_mData.updateShotLeg( blk1.mId, mApp.mSID, LegType.Extra, true );
           // }
         }
       } else {

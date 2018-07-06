@@ -589,7 +589,7 @@ class ShotDialog extends MyDialog
       }
     }
 
-    long leg = shot_secleg ? DataHelper.DATA_SEC_LEG : DataHelper.DATA_NORMAL;
+    long leg = shot_secleg ? LegType.EXTRA : LegType.NORMAL;
     if ( all_splay ) {
       mParent.updateSplayShots( shot_from, shot_to, extend, shot_flag, leg, comment, mBlk );
     } else if ( x_splay ) {
@@ -598,7 +598,7 @@ class ShotDialog extends MyDialog
       // mBlk.setName( shot_from, shot_to ); // done by parent.updateShot
       // if ( shot_secleg ) mBlk.setBlockType( DBlock.BLOCK_SEC_LEG ); // FIXME maybe not necessary
       if ( do_backleg && backleg_val ) {
-        leg = DataHelper.DATA_BACK_LEG;
+        leg = LegType.BACK;
       }
       mParent.updateShot( shot_from, shot_to, extend, shot_flag, leg, comment, mBlk );
     }

@@ -76,12 +76,6 @@ class DBlock
   static final int BLOCK_X_SPLAY    = 5; // FIXME_X_SPLAY cross splay
   static final int BLOCK_BACK_LEG   = 6; // 
 
-  static final long LEG_INVALID = -1L;
-  static final long LEG_NORMAL  = 0L;
-  static final long LEG_EXTRA   = 1L; // additional leg shots
-  static final long LEG_XSPLAY  = 2L;
-  static final long LEG_BACK    = 16L;
-
   private static final int[] colors = {
     TDColor.LIGHT_PINK,   // 0 blank
     TDColor.WHITE,        // 1 midline
@@ -139,6 +133,15 @@ class DBlock
   boolean isMainLeg()    { return mBlockType == BLOCK_MAIN_LEG; }
   boolean isBackLeg()    { return mBlockType == BLOCK_BACK_LEG; }
   boolean isSecLeg()     { return mBlockType == BLOCK_SEC_LEG; }
+
+  long getLegType()
+  {
+    if ( mBlockType == BLOCK_SEC_LEG )  return LegType.EXTRA;
+    if ( mBlockType == BLOCK_X_SPLAY )  return LegType.XSPLAY;
+    if ( mBlockType == BLOCK_BACK_LEG ) return LegType.BACK;
+    // if ( mBlockType == BLOCK_BLANK    ) return LegType.INVALID;
+    return LegType.NORMAL;
+  }
 
   void setBlockType( int type ) { mBlockType = type; }
 
@@ -250,7 +253,9 @@ class DBlock
     mSurveyId = survey_id;
   }
 
-  void setBlockName( String from, String to )
+  void setBlockName( String from, String to ) { setBlockName( from, to, false ); }
+
+  void setBlockName( String from, String to, boolean is_backleg )
   {
     if ( from == null || to == null ) {
       TDLog.Error( "FIXME ERROR DBlock::setName() either from or to is null");
@@ -260,7 +265,7 @@ class DBlock
     mTo   = to.trim();
     if ( mFrom.length() > 0 ) {
       if ( mTo.length() > 0 ) {
-        mBlockType = BLOCK_MAIN_LEG;
+        mBlockType = is_backleg ? BLOCK_BACK_LEG : BLOCK_MAIN_LEG;
       } else {
         mBlockType = BLOCK_SPLAY;
       }
@@ -346,13 +351,13 @@ class DBlock
   private void formatFlagPhoto( PrintWriter pw )
   {
     if ( isNoPlan() ) {
-      pw.format("]_");
+      pw.format("]\u00A7");       // section symbol
     } else if ( isNoProfile() ) {
-      pw.format("]~");
+      pw.format("]_");            // low_line
     } else if ( isDuplicate() ) {
-      pw.format( "]*" );
+      pw.format( "]\u00B2" );     // superscript 2
     } else if ( isSurface() ) {
-      pw.format( "]-" );
+      pw.format( "]\u00F7" );     // division sign
     // } else if ( isCommented() ) {
     //   pw.format( "^" );
     // } else if ( isBackshot() ) {

@@ -178,7 +178,7 @@ class SketchNewShotDialog extends MyDialog
         // set stations to mBlk
         // mBlk.setName( mFrom, to ); // FIXME
         if ( mShots != null ) {
-          mShots.updateShot( mFrom, to, 1, 0, DataHelper.DATA_NORMAL, null, mBlk ); // null comment ?
+          mShots.updateShot( mFrom, to, 1, 0, LegType.NORMAL, null, mBlk ); // null comment ?
           mBlk.setBlockName( mFrom, to ); // reset block name/type
         }
         if ( ! splay ) {
