@@ -666,6 +666,9 @@ public class MainWindow extends Activity
       }
     }
     // mApp.checkAutoPairing(); // already done when prefs are loaded
+
+    // THIS IS COMMENTED BECAUSE I'M NOT SURE IT IS A GOOD THING
+    // if ( ! TDLevel.mDeveloper ) new TDVersionDownload( this ).execute(); 
   }
 
   @Override

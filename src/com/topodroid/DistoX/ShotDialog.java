@@ -161,7 +161,10 @@ class ShotDialog extends MyDialog
     mParent = parent;
     mPos = pos;
     mFirst = true;
-    loadDBlock( blk, prev, next );
+    mPrevBlk     = prev;
+    mNextBlk     = next;
+    mBlk         = blk;
+    // loadDBlock( blk, prev, next );
     // TDLog.Log( TDLog.LOG_SHOT, "Shot Dialog " + blk.toString(true) );
   }
 
@@ -216,6 +219,7 @@ class ShotDialog extends MyDialog
     shot_comment = blk.mComment;
 
     // if ( blk.type() != DBlock.BLOCK_MAIN_LEG ) mCBdeleteLeg.setVisibility( View.GONE );
+    updateView();
   }
 
   private void updateView()
@@ -246,9 +250,12 @@ class ShotDialog extends MyDialog
    
     // if ( DBlock.isSurvey(shot_flag) ) { mRBreg.setChecked( true ); }
     if ( TDLevel.overNormal ) {
-      if ( DBlock.isDuplicate(shot_flag) )      { mRBdup.setChecked( true ); }
-      else if ( DBlock.isSurface(shot_flag) )   { mRBsurf.setChecked( true ); }
-      else if ( DBlock.isCommented(shot_flag) ) { mRBcmtd.setChecked( true ); }
+      mRBdup.setState(  false );
+      mRBsurf.setState( false );
+      mRBcmtd.setState( false );
+      if ( DBlock.isDuplicate(shot_flag) )      { mRBdup.setState(  true ); }
+      else if ( DBlock.isSurface(shot_flag) )   { mRBsurf.setState( true ); }
+      else if ( DBlock.isCommented(shot_flag) ) { mRBcmtd.setState( true ); }
       else if ( TDLevel.overExpert ) {
         if ( DBlock.isNoProfile(shot_flag) )   { mRBsplay.setState( 1 ); }
         else if ( DBlock.isNoPlan(shot_flag) ) { mRBsplay.setState( 2 ); }
@@ -259,12 +266,12 @@ class ShotDialog extends MyDialog
     mCBlegPrev.setChecked( shot_secleg );
     if ( mCBbackLeg != null ) mCBbackLeg.setState( shot_backleg );
 
-    mRBleft.setChecked( false );
-    mRBvert.setChecked( false );
+    mRBleft.setChecked(  false );
+    mRBvert.setChecked(  false );
     mRBright.setChecked( false );
     // mRBignore.setChecked( false );
-    if ( shot_extend == DBlock.EXTEND_LEFT ) { mRBleft.setChecked( true ); }
-    else if ( shot_extend == DBlock.EXTEND_VERT ) { mRBvert.setChecked( true ); }
+    if ( shot_extend == DBlock.EXTEND_LEFT )       { mRBleft.setChecked(  true ); }
+    else if ( shot_extend == DBlock.EXTEND_VERT )  { mRBvert.setChecked(  true ); }
     else if ( shot_extend == DBlock.EXTEND_RIGHT ) { mRBright.setChecked( true ); }
     // else if ( shot_extend == DBlock.EXTEND_IGNORE ) { mRBignore.setChecked( true ); }
 
@@ -475,7 +482,8 @@ class ShotDialog extends MyDialog
     mRBright.setOnClickListener( this );
     // mRBignore.setOnClickListener( this );
 
-    updateView();
+    loadDBlock( mBlk, mPrevBlk, mNextBlk );
+    // updateView();
     mParent.mOnOpenDialog = false;
   }
 
@@ -538,6 +546,7 @@ class ShotDialog extends MyDialog
     }
     // else if ( mRBback.isChecked() ) { shot_flag = DBlock.FLAG_BACKSHOT; }
     // else                            { shot_flag = DBlock.FLAG_SURVEY; }
+    // Log.v("DistoXA", "shot flag " + shot_flag );
 
     shot_extend = mBlk.getExtend();
     if ( mRBleft.isChecked() )       { shot_extend = DBlock.EXTEND_LEFT; }
@@ -729,7 +738,7 @@ class ShotDialog extends MyDialog
         DBlock prevBlock = mParent.getPreviousLegShot( mPrevBlk, true );
         // TDLog.Log( TDLog.LOG_SHOT, "PREV " + mPrevBlk.toString(true ) );
         loadDBlock( mPrevBlk, prevBlock, mBlk );
-        updateView();
+        // updateView();
       } else {
         TDLog.Log( TDLog.LOG_SHOT, "PREV is null" );
       }
@@ -745,7 +754,7 @@ class ShotDialog extends MyDialog
         DBlock next = mParent.getNextLegShot( mNextBlk, true );
         // TDLog.Log( TDLog.LOG_SHOT, "NEXT " + mNextBlk.toString(true ) );
         loadDBlock( mNextBlk, mBlk, next );
-        updateView();
+        // updateView();
       } else {
         TDLog.Log( TDLog.LOG_SHOT, "NEXT is null" );
       }

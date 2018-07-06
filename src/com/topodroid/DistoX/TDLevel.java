@@ -30,23 +30,22 @@ class TDLevel
   static boolean overAdvanced = false;
   static boolean overExpert   = false;
   static boolean overTester   = false;
-
+  static boolean mDeveloper   = false;
+  static String  mAndroidId   = null;
 
   static void setLevel( Context ctx, int level )
   {
     mLevel = level;
+    if ( mAndroidId == null ) {
+      mAndroidId = Secure.getString( ctx.getContentResolver(), Secure.ANDROID_ID );
+      mDeveloper = "8c894b79b6dce351".equals( mAndroidId );
+      // "e5582eda21cafac3" // Nexus-4
+    }
     overBasic    = mLevel > BASIC;
     overNormal   = mLevel > NORMAL;
     overAdvanced = mLevel > ADVANCED;
     overExpert   = mLevel > EXPERT;
     // overTester  = mLevel > TESTER;
-    if ( overExpert ) {
-      String android_id = Secure.getString( ctx.getContentResolver(), Secure.ANDROID_ID );
-      // Log.v("DistoX", "android_id <" + android_id + ">");
-      if ( // "e5582eda21cafac3".equals( android_id ) || // Nexus-4
-           "8c894b79b6dce351".equals( android_id ) ) {   // Samsung Note-3
-        overTester = true;
-      }
-    }
+    if ( overExpert && mDeveloper ) overTester = true;
   }
 }

@@ -1247,17 +1247,13 @@ public class TopoDroidApp extends Application
         trobotmillis = millis;
       }
       mStationName.assignStationsAfter_TRobot( mData, mSID, blk0, list, sts );
-      return;
-    } 
-    if ( TDSetting.doBacksight() ) {
+    } else  if ( TDSetting.doBacksight() ) {
       mStationName.assignStationsAfter_Backsight( mData, mSID, blk0, list, sts );
-      return;
-    } 
-    if ( TDSetting.doTripod() ) {
+    } else if ( TDSetting.doTripod() ) {
       mStationName.assignStationsAfter_Tripod( mData, mSID, blk0, list, sts );
-      return;
+    } else {
+      mStationName.assignStationsAfter_Default( mData, mSID, blk0, list, sts );
     }
-    mStationName.assignStationsAfter_Default( mData, mSID, blk0, list, sts );
   }
 
   // called also by ShotWindow::updataBlockList
