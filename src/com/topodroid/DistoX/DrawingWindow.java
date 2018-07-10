@@ -420,7 +420,8 @@ public class DrawingWindow extends ItemDrawer
     
   // PLOT SPLIT
   private String mSplitName;
-  private DrawingStationName mSplitStation;
+  // private DrawingStationName mSplitStation;
+  private String mSplitStationName;
   private ArrayList< PointF > mSplitBorder = null;
   private boolean mSplitRemove;
 
@@ -2966,6 +2967,7 @@ public class DrawingWindow extends ItemDrawer
       } else if ( mMode == MODE_SPLIT ) {
         mDrawingSurface.resetPreviewPath();
         mSplitBorder.add( new PointF( xs, ys ) );
+        // Log.v("DistoX-S", "*** split border size " + mSplitBorder.size() );
         doSplitPlot( );
         setMode( MODE_MOVE );
       } else { // MODE_MOVE 
@@ -3096,6 +3098,7 @@ public class DrawingWindow extends ItemDrawer
     } else if ( mMode == MODE_SPLIT ) {
       mCurrentBrush.mouseDown( mDrawingSurface.getPreviewPath(), xc, yc );
       mSplitBorder.add( new PointF( xs, ys ) );
+      // Log.v("DistoX-S", "*** split start border size " + mSplitBorder.size() );
       mSaveX = xc; 
       mSaveY = yc;
     }
@@ -3157,6 +3160,7 @@ public class DrawingWindow extends ItemDrawer
         if ( ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2 ) {
           mCurrentBrush.mouseMove( mDrawingSurface.getPreviewPath(), xc, yc );
           mSplitBorder.add( new PointF( xs, ys ) );
+          // Log.v("DistoX-S", "*** split ... border size " + mSplitBorder.size() );
         } else {
           save = false;
         }
@@ -5678,11 +5682,13 @@ public class DrawingWindow extends ItemDrawer
   // and the survey has station "station"
   void splitPlot( String name, String station, boolean remove ) 
   {
+    // Log.v("DistoX-S", "split plot " + name + " station " + station );
     // get the DrawingStation of station
     mSplitName = name;
-    mSplitStation = mDrawingSurface.getStation( station );
+    // mSplitStation = mDrawingSurface.getStation( station );
+    mSplitStationName = station;
     mSplitRemove  = remove;
-    if ( mSplitStation != null ) {
+    // if ( mSplitStation != null ) { // do not check origin station
       if ( mSplitBorder == null ) {
         mSplitBorder = new ArrayList<>();
       } else {
@@ -5690,9 +5696,11 @@ public class DrawingWindow extends ItemDrawer
       }
       mMode = MODE_SPLIT;
       mTouchMode = MODE_MOVE;
-    } else {
-      TDToast.make(mActivity, "Missing station " + station );
-    }
+      // Log.v("DistoX-S", "*** split mode");
+    // } else {
+    //   TDToast.make(mActivity, "Missing station " + station );
+    // }
+    // Log.v("DistoX-S", "mode " + mMode + " touch-mode " + mTouchMode );
   }
 
   void mergeOutlineScrap()
@@ -5765,7 +5773,7 @@ public class DrawingWindow extends ItemDrawer
     }
     boolean extended = (mPlot2.type == PlotInfo.PLOT_EXTENDED);
     int azimuth = (int)mPlot2.azimuth; 
-    long pid = mApp.insert2dPlot( mApp.mSID, mSplitName, mSplitStation.name(), extended, azimuth );
+    long pid = mApp.insert2dPlot( mApp.mSID, mSplitName, mSplitStationName, extended, azimuth );
     String name = mSplitName + ( ( mType == PlotInfo.PLOT_PLAN )? "p" : "s" );
     String fullname = mApp.mySurvey + "-" + name;
     // PlotInfo plot = mApp_mData.getPlotInfo( mApp.mSID, name );
