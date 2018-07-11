@@ -356,9 +356,9 @@
     <string name="popup_select_all">Selectează tot</string>
     <string name="popup_select_point">Selectează punctele</string>
     <string name="popup_select_line">Selectează liniile</string>
-    <string name="popup_select_area">Select areas</string>
+    <string name="popup_select_area">Selectează suprafețe</string>
     <string name="popup_select_shot">Selectează măsurătorile</string>
-    <string name="popup_select_station">Select stațiile</string>
+    <string name="popup_select_station">Selectează stațiile</string>
 
     <string name="popup_cont_none">Fără</string>
     <string name="popup_cont_start">Punct început</string>
@@ -866,10 +866,10 @@
     <string name="title_draw_line">LINIE %1$s</string>
     <string name="title_draw_line_no_stations">LINIE %1$s: nici o stație</string>
     <string name="title_draw_point">PUNCT %1$s</string>
-    <string name="title_edit">Editează</string>
+    <string name="title_edit">Editează</string> <!-- alt= mod editare -->
     <string name="title_edit_user_station">Editează stație utilizator </string>
     <string name="title_edit_station">Editează stație </string>
-    <string name="title_erase">Șterge</string>
+    <string name="title_erase">Șterge</string> <!-- alt= mod stergere -->
     <string name="title_fixed">Locații</string>
     <string name="title_fixed_edit">Editează locația</string>
     <string name="title_fixed_import">Importă locația</string>
@@ -877,7 +877,7 @@
     <string name="title_fixed_add">Introducere locație</string>
     <string name="title_manual">Manual de utilizare TopoDroid</string>
     <string name="title_mode">Mod afișare</string>
-    <string name="title_move">Mișcâre</string>
+    <string name="title_move">Mișcare</string>
     <string name="title_note">Note cartare</string>
     <string name="title_photo">Foto/Măsurători</string>
     <string name="title_photo_comment">Comentariu fotografie</string>
