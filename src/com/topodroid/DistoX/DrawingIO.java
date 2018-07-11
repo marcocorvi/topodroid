@@ -382,8 +382,7 @@ class DrawingIO
                   } 
                 }
                 
-                int lnTypeMax = BrushManager.mLineLib.mSymbolNr;
-                int lnType = lnTypeMax;
+                int lnType = BrushManager.mLineLib.mSymbolNr;
                 DrawingLinePath path = null;
                 BrushManager.mLineLib.tryLoadMissingLine( type );
                 String thname = type;

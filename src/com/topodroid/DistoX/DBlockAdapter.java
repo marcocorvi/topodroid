@@ -173,12 +173,11 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     }
   }
 
-  boolean hasBlock( long id ) 
+  private boolean hasBlock( long id )
   {
     int size = mItems.size();
     if ( size == 0 ) return false;
-    if ( id > mItems.get(size-1).mId ) return false;
-    return true;
+    return ( id >= 0 && id <= mItems.get(size-1).mId );
 
     // for ( DBlock b : mItems ) if ( b.mId == id ) return true;
     // return false;

@@ -12,10 +12,10 @@
 package com.topodroid.DistoX;
 
 import java.io.InputStreamReader;
-import java.io.BufferedReader;;
+import java.io.BufferedReader;
 import java.io.IOException;
 
-import java.net.HttpURLConnection;
+// import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -63,14 +63,13 @@ class TDVersionDownload extends AsyncTask< Void, Integer, String >
       if ( conn == null ) return null;
       conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6");
       BufferedReader br = new BufferedReader( new InputStreamReader( conn.getInputStream() ) );
-      if ( br == null ) return null;
+      // if ( br == null ) return null; // br always non null
       StringBuilder url_data = new StringBuilder();
       String str;
       while ( ( str = br.readLine() ) != null ) url_data.append( str );
       String version = getAppVersion( current_pattern, url_data.toString() );
       if ( version == null ) return null;
-      String gplay_version = getAppVersion( app_pattern, version );
-      return gplay_version;
+      return getAppVersion( app_pattern, version );
     } catch ( MalformedURLException e1 ) {
       TDLog.Error( "ERROR bad URL: " + e1.toString() );
     } catch ( IOException e2 ) {

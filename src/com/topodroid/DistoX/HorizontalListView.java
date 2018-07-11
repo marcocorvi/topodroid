@@ -36,7 +36,7 @@ public class HorizontalListView extends AdapterView<ListAdapter>
   private ListAdapter mAdapter;              // data adapter
   private int mLeftViewIndex = -1;
   private int mRightViewIndex = 0;
-  protected int mCurrentX;
+  private int mCurrentX;
   private int mNextX;
   private int mMaxX = Integer.MAX_VALUE;
   private int mDisplayOffset = 0;
@@ -187,8 +187,7 @@ public class HorizontalListView extends AdapterView<ListAdapter>
       mDataChanged = false;
     }
     if ( mScroller.computeScrollOffset() ) {
-      int scrollx = mScroller.getCurrX();
-      mNextX = scrollx;
+      mNextX = mScroller.getCurrX();
     }
    
     if ( mNextX <= 0 ) {
@@ -316,7 +315,7 @@ public class HorizontalListView extends AdapterView<ListAdapter>
     return handled;
   }
  
-  protected boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
+  private boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
   {
     synchronized( HorizontalListView.this ) {
       mScroller.fling(mNextX, 0, (int)-velocityX, 0, 0, mMaxX, 0, 0);
@@ -325,7 +324,7 @@ public class HorizontalListView extends AdapterView<ListAdapter>
     return true;
   }
  
-  protected boolean onDown(MotionEvent e) 
+  private boolean onDown(MotionEvent e)
   {
     mScroller.forceFinished(true);
     return true;

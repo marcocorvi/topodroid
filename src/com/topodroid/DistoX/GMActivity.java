@@ -800,7 +800,7 @@ public class GMActivity extends Activity
     }
   }
 
-  void doBluetooth( Button b )
+  private void doBluetooth( Button b )
   {
     if ( TDLevel.overAdvanced && mApp.distoType() == Device.DISTO_X310 ) {
       CutNPaste.showPopupBT( this, this, mApp, b, true );

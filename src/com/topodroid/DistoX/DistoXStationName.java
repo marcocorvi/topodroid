@@ -140,7 +140,7 @@ class DistoXStationName
   }
 
   // used by SketchNewShotDialog
-  static boolean listHasName( List<DBlock> list, String name )
+  static private boolean listHasName( List<DBlock> list, String name )
   {
     if ( name != null ) {
       for ( DBlock b : list ) {

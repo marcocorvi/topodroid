@@ -22,7 +22,7 @@ import android.preference.PreferenceActivity;
 // import android.view.Menu;
 // import android.view.MenuItem;
 
-import android.widget.ListAdapter;
+// import android.widget.ListAdapter;
 
 // import android.util.Log;
 
@@ -90,7 +90,7 @@ public class TopoDroidPreferences extends PreferenceActivity
       }
     }
     if (mPrefCategory == PREF_CATEGORY_ALL ) { mApp.mPrefActivityAll = this; }
-    if (mPrefCategory == PREF_CATEGORY_SURVEY ) { mApp.mPrefActivitySurvey = this; }
+    if (mPrefCategory == PREF_CATEGORY_SURVEY ) { TopoDroidApp.mPrefActivitySurvey = this; }
     loadPreferences();
   }
 
@@ -318,7 +318,7 @@ public class TopoDroidPreferences extends PreferenceActivity
       intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_ALL );
       startActivity( intent );
     } else if ( mPrefCategory == PREF_CATEGORY_SURVEY ) {
-      mApp.mPrefActivitySurvey = null;
+      TopoDroidApp.mPrefActivitySurvey = null;
       finish();
       Intent intent = new Intent( mApp, TopoDroidPreferences.class );
       intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SURVEY );

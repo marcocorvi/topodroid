@@ -153,8 +153,7 @@ class DrawingPointDialog extends MyDialog
 
     if ( b == mBtnOk ) {
       if ( mEToptions.getText() != null ) {
-        String options = mEToptions.getText().toString().trim();
-        mPoint.mOptions = options;
+        mPoint.mOptions = mEToptions.getText().toString().trim();
       }
       if ( mBtnScaleXS.isChecked() )      mPoint.setScale( DrawingPointPath.SCALE_XS );
       else if ( mBtnScaleS.isChecked() )  mPoint.setScale( DrawingPointPath.SCALE_S  );

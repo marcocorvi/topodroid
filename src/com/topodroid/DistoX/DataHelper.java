@@ -1165,10 +1165,7 @@ class DataHelper extends DataSetObservable
         myDB.compileStatement( "UPDATE shots SET color=0 WHERE surveyId=?" );
     }
     resetShotColorStmt.bindLong( 1, sid );
-    if ( doStatement( resetShotColorStmt, "Color" ) ) {
-      return true;
-    }
-    return false;
+    return doStatement( resetShotColorStmt, "Color" );
   }
 
   boolean updateShotColor( long id, long sid, int color, boolean forward )

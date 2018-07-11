@@ -46,7 +46,7 @@ import android.view.View;
 // import android.view.View.OnKeyListener;
 // import android.view.KeyEvent;
 
-import android.util.Log;
+// import android.util.Log;
 
 class ShotDialog extends MyDialog
                  implements View.OnClickListener
@@ -82,7 +82,7 @@ class ShotDialog extends MyDialog
   private MyCheckBox mCBallSplay;
   private MyCheckBox mCBxSplay = null;
   // private MyCheckBox mCBhighlight;
-  private MyCheckBox mCBbackLeg = null;;
+  private MyCheckBox mCBbackLeg = null;
 
   private HorizontalListView mListView;
   private HorizontalButtonView mButtonView;

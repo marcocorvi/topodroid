@@ -54,8 +54,7 @@ class DrawingSpecialPath extends DrawingPath
       int t = dis.readInt();
       float ccx = x + dis.readFloat();
       float ccy = y + dis.readFloat();
-      DrawingSpecialPath ret = new DrawingSpecialPath( t, ccx, ccy );
-      return ret;
+      return new DrawingSpecialPath( t, ccx, ccy );
     } catch ( IOException e ) {
       TDLog.Error( "SPECIAL in error " + e.getMessage() );
     }

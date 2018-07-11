@@ -94,7 +94,7 @@ class VirtualDistoXComm extends TopoDroidComm
   boolean toggleCalibMode( String address, int type )
   {
     // Log.v("DistoX", "VD comm toggleCalibMode");
-    boolean ret = false;
+    return false;
     // if ( createSocket() ) {
     //   byte[] result = new byte[4];
     //   if ( mProtocol.read8000( result ) ) { 
@@ -106,30 +106,27 @@ class VirtualDistoXComm extends TopoDroidComm
     //   }
     //   destroySocket();
     // }
-    return ret;
   }
 
   boolean writeCoeff( String address, byte[] coeff )
   {
     // Log.v("DistoX", "VD comm writeCoeff");
-    boolean ret = false;
+    return false;
     // if ( createSocket() ) {
     //   ret = mProtocol.writeCalibration( mCoeff );
     //   destroySocket();
     // }
-    return ret;
   }
 
   // called only by CalibReadTask
   boolean readCoeff( String address, byte[] coeff )
   {
     // Log.v("DistoX", "VD comm readCoeff");
-    boolean ret = false;
+    return false;
     // if ( createSocket() ) {
     //   ret = mProtocol.readCalibration( coeff );
     //   destroySocket();
     // }
-    return ret;
   }
 
   // low-level memory read

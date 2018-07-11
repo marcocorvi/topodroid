@@ -183,7 +183,7 @@ class DBlock
     return mId >= TopoDroidApp.mSecondLastShotId;
   }
 
-  boolean isTimeRecent( long time ) { return mId >= TopoDroidApp.mSecondLastShotId && (time-mTime)< TDSetting.mRecentTimeout; }
+  private boolean isTimeRecent( long time ) { return mId >= TopoDroidApp.mSecondLastShotId && (time-mTime)< TDSetting.mRecentTimeout; }
 
   boolean isMultiBad() { return mMultiBad; }
 

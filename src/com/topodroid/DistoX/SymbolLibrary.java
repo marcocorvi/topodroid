@@ -319,7 +319,7 @@ class SymbolLibrary
   private void insert_case3( SymbolNode n )
   {
     SymbolNode u = uncle( n );
-    if ( u != null && isRed( u ) ) {
+    if ( /* u != null && */ isRed( u ) ) {
       n.parent.color = BLACK;
       u.color = BLACK;
       SymbolNode g = grandparent( n );

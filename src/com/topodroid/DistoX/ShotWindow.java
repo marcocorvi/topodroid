@@ -90,7 +90,7 @@ import android.graphics.drawable.BitmapDrawable;
 
 import android.net.Uri;
 
-import android.util.Log;
+// import android.util.Log;
 
 public class ShotWindow extends Activity
                           implements OnItemClickListener

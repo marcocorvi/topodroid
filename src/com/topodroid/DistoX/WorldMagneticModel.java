@@ -176,8 +176,7 @@ class WorldMagneticModel
     int i2 = (int)b[2]; if ( (b[2] & 0x80) == 0x80 ) i2 = 256+i2;
     int i1 = (int)b[1]; if ( (b[1] & 0x80) == 0x80 ) i1 = 256+i1;
     int i0 = (int)b[0]; if ( (b[0] & 0x80) == 0x80 ) i0 = 256+i0;
-    int ret = (i3 << 24) | (i2 << 16) | (i1 << 8) | (i0);
-    return ret;
+    return ( (i3 << 24) | (i2 << 16) | (i1 << 8) | (i0) );
   }
   
   static private int byteToFirst( byte b[] )
@@ -187,8 +186,7 @@ class WorldMagneticModel
   
   static private int byteToSecond( byte b[] )
   {
-    int ret = (((int)b[2]) << 4) | ((int)b[1] & 0x0F);
-    return ret;
+    return (int)( (((int)b[2]) << 4) | ((int)b[1] & 0x0F) );
   }
   
 

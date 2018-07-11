@@ -17,7 +17,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-import android.util.Log;
+// import android.util.Log;
 
 class TDSetting
 {
@@ -1403,16 +1403,16 @@ class TDSetting
 
   private static void setLineStyleAndType( String style )
   {
-    mLineStyle = LINE_STYLE_BEZIER; // default
+    mLineStyle = LINE_STYLE_TWO; // default
     mLineType  = 1;
     if ( style.equals( "0" ) ) {
-      mLineStyle = LINE_STYLE_BEZIER; // already assigned
-      mLineType  = 1;                 // alreday assigned
+      mLineStyle = LINE_STYLE_BEZIER;
+      // mLineType  = 1;                 // alreday assigned
     } else if ( style.equals( "1" ) ) {
       mLineStyle = LINE_STYLE_ONE;
-      mLineType  = 1;                 // already assignd
+      // mLineType  = 1;                 // already assignd
     } else if ( style.equals( "2" ) ) {
-      mLineStyle = LINE_STYLE_TWO;
+      // mLineStyle = LINE_STYLE_TWO; // already assigned
       mLineType  = 2;
     } else if ( style.equals( "3" ) ) {
       mLineStyle = LINE_STYLE_THREE;

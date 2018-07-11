@@ -367,9 +367,9 @@ class ShotNewDialog extends MyDialog
       // Log.v( TopoDroidApp.TAG, "data " + distance + " " + bearing + " " + clino );
 
       long shot_extend = DBlock.EXTEND_RIGHT; // DBlock.EXTEND_UNSET; // FIXME_EXTEND
-      if ( mRadioLeft.isChecked() ) { shot_extend = -1; }
-      else if ( mRadioVert.isChecked() ) { shot_extend = 0; }
-      else if ( mRadioRight.isChecked() ) { shot_extend = 1; } // already assigned
+      if ( mRadioLeft.isChecked() ) { shot_extend = DBlock.EXTEND_LEFT; }
+      else if ( mRadioVert.isChecked() ) { shot_extend = DBlock.EXTEND_VERT; }
+      else if ( mRadioRight.isChecked() ) { shot_extend = DBlock.EXTEND_RIGHT; } // already assigned
       else { // let TopoDroid choose
         try {
           float bx = Float.parseFloat( bearing.replace(',','.') );

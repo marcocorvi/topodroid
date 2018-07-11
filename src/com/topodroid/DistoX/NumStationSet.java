@@ -245,7 +245,7 @@ class NumStationSet
   private void insert_case3( NumStationNode n )
   {
     NumStationNode u = uncle( n );
-    if ( u != null && isRed( u ) ) {
+    if ( /* u != null && */ isRed( u ) ) {
       n.parent.color = BLACK;
       u.color = BLACK;
       NumStationNode g = grandparent( n );

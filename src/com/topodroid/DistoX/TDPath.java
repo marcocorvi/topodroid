@@ -468,8 +468,7 @@ class TDPath
     return dir.listFiles( new FileFilter() {
       public boolean accept( File pathname ) { 
         if ( ! pathname.isDirectory() ) return false;
-        if ( pathname.getName().toLowerCase(Locale.US).startsWith( "topodroid" ) ) return true;
-        return false;
+        return ( pathname.getName().toLowerCase(Locale.US).startsWith( "topodroid" ) );
       }
     } );
   }

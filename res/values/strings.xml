@@ -31,8 +31,8 @@
     <string name="AREA">AREA</string>
     <string name="HELP">HELP</string>
     <string name="STATION">STATION </string>
-    <string name="UP">UPWARD</string>
-    <string name="DOWN">DOWNWARD</string>
+    <string name="UP">UP</string>
+    <string name="DOWN">DOWN</string>
 
     <string name="cut">CUT</string>
     <string name="copy">COPY</string>
