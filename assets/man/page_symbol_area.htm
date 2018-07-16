@@ -27,10 +27,14 @@ The area tool file contains lines specifying the property of the drawing tool.
 <b>Close-horizontal</b><br>
 If this attribute is set the area border is closed horizontally in the profile view
 and in the x-sections.<br>
-The Y coordinate of the last point of the draw lines is replaced with that of the first point.
-By this means you can draw areas with a flat horizontal top profile.<br><p>
+If the Y coordinate of the last point of the drawn line is close to that of the first point,
+the area border is interrupted at the first point that has Y coordinate close to that of the 
+first point.
+By this means you can draw areas with a flat horizontal top (or bottom) profile.<br>
+If the Y coordinates of the drawn line endpoints differ too much, the border is closed with a 
+slant segment.<br><p>
 
-Currently, this attribute it is only for the built-in "water" tool.<br><p>
+Currently, this attribute it is only set for the built-in "water" tool.<br><p>
 
 <b>Bitmap pattern</b><br>
 With this option you can specify a background pattern, eg, for differentiating rock
@@ -39,7 +43,8 @@ formations.<br><p>
 This attribute is not used in any tool packaged in the apk.<br><p>
 
 <b>Orientation</b><br>
-If the attribute "orientable" is set, the area pattern can be rotated through the area edit dialog.<br><p>
+If the attribute "orientable" is set, the area pattern can be rotated through the area edit dialog.<br>
+Area patterns are not used in the default symbol set. Shading is preferred for performance.<p>
 
 
 </body></html>

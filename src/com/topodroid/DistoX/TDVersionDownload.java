@@ -26,7 +26,7 @@ import java.util.regex.PatternSyntaxException;
 
 import android.os.AsyncTask;
 import android.content.Context;
-
+import android.content.SharedPreferences;
 
 class TDVersionDownload extends AsyncTask< Void, Integer, String >
 {
@@ -36,10 +36,12 @@ class TDVersionDownload extends AsyncTask< Void, Integer, String >
 
   private final Context mContext; // used to toast
   // private static boolean running = false; 
+  private SharedPreferences mPrefs;
 
-  TDVersionDownload( Context context )
+  TDVersionDownload( Context context, SharedPreferences prefs )
   {
     mContext = context;
+    mPrefs   = prefs;
   }
 
   private String getAppVersion( String pattern_str, String input_str )
@@ -96,11 +98,33 @@ class TDVersionDownload extends AsyncTask< Void, Integer, String >
   protected void onPostExecute( String res )
   {
     if ( res != null ) {
-      int cmp = res.compareTo( TopoDroidApp.VERSION );
-      if ( cmp > 0 ) {
-        TDToast.make( mContext, "Newer version on Google Play: " + res );
-      // } else {
-      //   TDToast.make( mContext, "Current version on Google Play: " + res );
+      // get next alert date
+      long now = -1L;
+      long time = TDSetting.getLongPreference( mPrefs, "VERSION_ALERT_TIME", 0 );
+      boolean check = false;
+      if ( time >= 0 ) {
+        now  = System.currentTimeMillis();
+	if ( now >= time ) {
+	  now += 3600 * 24 * 30 * 1000; // 30 days
+	  check = true;
+	}
+      }
+      if ( check ) {
+        // String[] this_version = TopoDroidApp.VERSION.split("\\.");
+        // String[] play_version = res.split("\\.");
+        String this_version = TopoDroidApp.VERSION.substring(0,3);
+        String play_version = res.substring(0,3);
+        // int cmp = res.compareTo( TopoDroidApp.VERSION );
+        int cmp = play_version.compareTo( this_version );
+        if ( cmp > 0 ) {
+	  // NOTE alert dialog could make "now" -1
+          TDToast.make( mContext, "Newer version on Google Play: " + res );
+        // } else {
+        //   TDToast.make( mContext, "Current version on Google Play: " + res );
+        }
+        if ( now > 0 ) {
+	  TDSetting.setPreference( mPrefs, "VERSION_ALERT_TIME", now );
+	}
       }
     }
     // unlock();

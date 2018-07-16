@@ -73,7 +73,7 @@ import java.util.concurrent.RejectedExecutionException;
 // import java.util.Deque; // only API-9
 
 // import android.util.SparseArray;
-// import android.util.Log;
+import android.util.Log;
 
 /**
  */
@@ -2743,26 +2743,41 @@ public class DrawingWindow extends ItemDrawer
             //       "DX " + (xs - mCurrentAreaPath.mFirst.x) + " DY " + (ys - mCurrentAreaPath.mFirst.y ) );
             if (    PlotInfo.isVertical( mType )
                  && BrushManager.mAreaLib.isCloseHorizontal( mCurrentArea ) 
-                 && Math.abs( xs - mCurrentAreaPath.mFirst.x ) > 20  // 20 == 1.0 meter
                  && Math.abs( ys - mCurrentAreaPath.mFirst.y ) < 10  // 10 == 0.5 meter
               ) {
-              LinePoint lp = mCurrentAreaPath.mFirst; 
-              float yy = lp.y;
-              mCurrentAreaPath.addPoint( xs, yy-0.001f );
               DrawingAreaPath area = new DrawingAreaPath( mCurrentAreaPath.mAreaType,
                                                           mCurrentAreaPath.mAreaCnt, 
                                                           mCurrentAreaPath.mPrefix, 
                                                           TDSetting.mAreaBorder );
-              area.addStartPoint( lp.x, lp.y );
-              for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
-                if ( lp.y <= yy ) {
-                  area.addPoint( lp.x, yy );
-                  break;
-                } else {
-                  area.addPoint( lp.x, lp.y );
+              if ( xs - mCurrentAreaPath.mFirst.x > 20 ) { // 20 == 1.0 meter // CLOSE BOTTOM SURFACE
+                LinePoint lp = mCurrentAreaPath.mFirst; 
+                float yy = lp.y;
+                mCurrentAreaPath.addPoint( xs, yy-0.001f );
+                area.addStartPoint( lp.x, lp.y );
+                for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
+                  if ( lp.y <= yy ) {
+                    area.addPoint( lp.x, yy );
+                    break;
+                  } else {
+                    area.addPoint( lp.x, lp.y );
+                  }
                 }
+                mCurrentAreaPath = area; // area is empty if not recreated
+              } else if ( mCurrentAreaPath.mFirst.x - xs > 20 ) { // 20 == 1.0 meter // CLOSE TOP SURFACE
+                LinePoint lp = mCurrentAreaPath.mFirst; 
+                float yy = lp.y;
+                mCurrentAreaPath.addPoint( xs, yy-0.001f );
+                area.addStartPoint( lp.x, lp.y );
+                for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
+                  if ( lp.y >= yy ) {
+                    area.addPoint( lp.x, yy );
+                    break;
+                  } else {
+                    area.addPoint( lp.x, lp.y );
+                  }
+                }
+                mCurrentAreaPath = area; // area is empty if not recreated
               }
-              mCurrentAreaPath = area;
             } else {  
               if (    ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2
                    || ( mPointCnt % mLinePointStep ) > 0 ) {

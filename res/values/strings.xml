@@ -336,6 +336,7 @@
     <string name="menu_survey">SURVEY INFO</string>
     <string name="menu_sync">SYNC</string>
     <!-- UNUSED string name="menu_tdr2th2">TH2 SKETCHES</string -->
+    <!-- UPDATES string name="menu_updates">CHECK UPDATES</string -->
     <string name="menu_validate">VALIDATE</string>
     <string name="menu_zoom_fit">ZOOM FIT</string>
 
@@ -766,6 +767,7 @@
     <string name="help_info_shot">Survey statistics</string>
     <string name="help_survey_info">Survey informations</string>
     <string name="help_undelete">Recover deleted items</string>
+    <!-- UPDATES string name="help_updates">Check for app version updates</string -->
     <string name="help_photo">Photos</string>
     <string name="help_sensor">Measurements</string>
     <string name="help_3d">3D view (Cave3D)</string>

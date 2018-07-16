@@ -132,6 +132,7 @@ public class MainWindow extends Activity
                           R.string.menu_palette,
                           R.string.menu_logs,
                           R.string.menu_join_survey,
+			  // R.string.menu_updates, // UPDATES
                           R.string.menu_about,
                           R.string.menu_options,
                           R.string.menu_help
@@ -149,6 +150,7 @@ public class MainWindow extends Activity
                           R.string.help_symbol,
                           R.string.help_log,
                           R.string.help_join_survey,
+                          // R.string.help_updates, // UPDATES
                           R.string.help_info_topodroid,
                           R.string.help_prefs,
                           R.string.help_help
@@ -379,6 +381,7 @@ public class MainWindow extends Activity
     if ( TDLevel.overNormal )   mMenuAdapter.add( res.getString( menus[0] ) ); // PALETTE
     if ( TDLevel.overAdvanced ) mMenuAdapter.add( res.getString( menus[1] ) ); // LOGS
     if ( TDLevel.overExpert && mApp_mCosurvey ) mMenuAdapter.add( res.getString( menus[2] ) ); // CO-SURVEY
+    // if ( TDLevel.overExpert )   mMenuAdapter.add( res.getString( menus[3] ) ); // UPDATES
     mMenuAdapter.add( res.getString( menus[3] ) ); // ABOUT
     mMenuAdapter.add( res.getString( menus[4] ) ); // SETTINGS
     mMenuAdapter.add( res.getString( menus[5] ) ); // HELP
@@ -405,29 +408,22 @@ public class MainWindow extends Activity
         // (new SymbolEnableDialog( mActivity, mApp )).show();
 
         (new SymbolReload( mActivity, mApp, TDLevel.overExpert )).show();
-      } else 
-      if ( TDLevel.overAdvanced && p++ == pos ) { // LOGS
+      } else if ( TDLevel.overAdvanced && p++ == pos ) { // LOGS
         intent = new Intent( mActivity, TopoDroidPreferences.class );
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_LOG );
         startActivity( intent );
-      } else {  
-        if ( TDLevel.overExpert && mApp_mCosurvey && p++ == pos ) {  // CO-SURVEY
-          (new ConnectDialog( mActivity, mApp )).show();
-        } else { 
-          if ( p++ == pos ) { // ABOUT
-            (new TopoDroidAbout( mActivity, this, -2 )).show();
-          } else { 
-            if ( p++ == pos ) { // SETTINGS
-              intent = new Intent( mActivity, TopoDroidPreferences.class );
-              intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_ALL );
-              startActivity( intent );
-            } else { 
-              if ( p++ == pos ) { // HELP
-                new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, menus.length, getResources().getString( HELP_PAGE )).show();
-              }
-            }
-          }
-        }
+      } else if ( TDLevel.overExpert && mApp_mCosurvey && p++ == pos ) {  // CO-SURVEY
+        (new ConnectDialog( mActivity, mApp )).show();
+      // } else if ( TDLevel.overExpert && p++ == pos ) {  // UPDATES
+      //   // (new TDUpdatesDialog( mActivity, mApp )).show();
+      } else if ( p++ == pos ) { // ABOUT
+        (new TopoDroidAbout( mActivity, this, -2 )).show();
+      } else if ( p++ == pos ) { // SETTINGS
+        intent = new Intent( mActivity, TopoDroidPreferences.class );
+        intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_ALL );
+        startActivity( intent );
+      } else if ( p++ == pos ) { // HELP
+        new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, menus.length, getResources().getString( HELP_PAGE )).show();
       }
     // }
     // updateDisplay();

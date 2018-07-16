@@ -1541,6 +1541,19 @@ class TDSetting
     // FIXME_23 editor.commit();
   }
 
+  static void setPreference( SharedPreferences sp, String name, long value )
+  {
+    Editor editor = sp.edit();
+    editor.putLong( name, value );
+    editor.apply(); 
+    // FIXME_23 editor.commit();
+  }
+
+  static long getLongPreference( SharedPreferences sp, String name, long def_value )
+  {
+    return sp.getLong( name, def_value ); 
+  }
+
   // static void setPreference( SharedPreferences sp, String name, int val )
   // {
   //   Editor editor = sp.edit();
