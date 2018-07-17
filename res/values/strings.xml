@@ -994,10 +994,10 @@
   <string name="pref_svg_linedirstroke_summary">Width of line orientation in SVG</string>
   <string name="pref_svg_line_dir_title">SVG line orientation</string>
   <string name="pref_svg_line_dir_summary">Add line orientation-ticks to SVG export</string>
-  <string name="pref_kml_stations_title">KML stations</string>
-  <string name="pref_kml_stations_summary">Add stations to KML export</string>
-  <string name="pref_kml_splays_title">KML splays</string>
-  <string name="pref_kml_splays_summary">Add splays to KML export</string>
+  <string name="pref_kml_stations_title">KML/JSON stations</string>
+  <string name="pref_kml_stations_summary">Add stations to KML/GeoJSON export</string>
+  <string name="pref_kml_splays_title">KML/JSON splays</string>
+  <string name="pref_kml_splays_summary">Add splays to KML/GeoJSON export</string>
 
   <string name="pref_sock_type_title">Socket</string>
   <string name="pref_sock_type_summary">Socket create</string>

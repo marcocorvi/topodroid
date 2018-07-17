@@ -547,7 +547,7 @@ public class OverviewWindow extends ItemDrawer
     protected synchronized void onStop()
     {
       super.onStop();
-      mOverviewSurface.setDisplayMode( mOverviewSurface.getDisplayMode() & DisplayMode.DISPLAY_ALL );
+      mOverviewSurface.setDisplayMode( mOverviewSurface.getDisplayMode() & DisplayMode.DISPLAY_OVERVIEW );
     }
 
     private void doResume()

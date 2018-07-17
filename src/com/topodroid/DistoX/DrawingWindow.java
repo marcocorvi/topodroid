@@ -1500,7 +1500,8 @@ public class DrawingWindow extends ItemDrawer
     mAzimuth = azimuth;
     mClino   = clino;
     mSavedMode = mDrawingSurface.getDisplayMode();
-    mDrawingSurface.setDisplayMode( DisplayMode.DISPLAY_SECTION | ( mSavedMode & DisplayMode.DISPLAY_SCALEBAR ) );
+    // mDrawingSurface.setDisplayMode( DisplayMode.DISPLAY_SECTION | ( mSavedMode & DisplayMode.DISPLAY_SCALEBAR ) );
+    mDrawingSurface.setDisplayMode( DisplayMode.DISPLAY_SECTION & mSavedMode );
     resetStatus();
     doStart( true, tt );
     updateSplays( mApp.mSplayMode );
@@ -1874,9 +1875,12 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on destroy done");
   }
 
-  private void doResume()
+  private void doResume() // restoreInstanceFromData
   {
     // Log.v("DistoX", "doResume()" );
+    String mode = mApp_mData.getValue( "DISTOX_PLOT_MODE" );
+    DrawingCommandManager.setDisplayMode( DisplayMode.parseString( mode ) );
+
     PlotInfo info = mApp_mData.getPlotInfo( mSid, mName );
     mOffset.x = info.xoffset;
     mOffset.y = info.yoffset;
@@ -1898,6 +1902,7 @@ public class DrawingWindow extends ItemDrawer
         TDLog.Error("cannot save plot state: " + e.getMessage() );
       }
     }
+    mApp_mData.setValue( "DISTOX_PLOT_MODE", DisplayMode.toString( DrawingCommandManager.getDisplayMode() ) );
     doSaveTdr( ); // do not alert-dialog on mAllSymbols
   }
 

@@ -42,6 +42,7 @@ class TDPath
   final static String GTX = ".gtx";
   final static String DXF = ".dxf";
   final static String KML = ".kml";
+  final static String JSON = ".json";
   final static String PLT = ".plt";
   final static String PNG = ".png";
   final static String SRV = ".srv";
@@ -93,6 +94,7 @@ class TDPath
   private static String PATH_DUMP;   //  = PATH_BASE + "dump/";  // DistoX memory dumps
   private static String PATH_DXF;    //  = PATH_BASE + "dxf/";
   private static String PATH_KML;    //  = PATH_BASE + "kml/";
+  private static String PATH_JSON;   //  = PATH_BASE + "json/";
   private static String PATH_PLT;    //  = PATH_BASE + "plt/";
   private static String APP_FOTO_PATH;   //  = PATH_BASE + "photo/";
   private static String APP_AUDIO_PATH;   //  = PATH_BASE + "audio/";
@@ -236,6 +238,9 @@ class TDPath
     PATH_KML = PATH_BASE + "kml/";
     // FIXME checkDirs( PATH_KML );
 
+    PATH_JSON = PATH_BASE + "json/";
+    // FIXME checkDirs( PATH_JSON );
+
     PATH_PLT = PATH_BASE + "plt/";
     // FIXME checkDirs( PATH_PLT );
 
@@ -332,15 +337,16 @@ class TDPath
   static String getSymbolFile( String name ) { return APP_SYMBOL_PATH + name; }
   static String getSymbolSaveFile( String name ) { return APP_SYMBOL_SAVE_PATH + name; }
 
-  static boolean hasTdrDir() { return (new File( PATH_TDR )).exists(); }
+  // static boolean hasTdrDir() { return (new File( PATH_TDR )).exists(); }
   static boolean hasTdr3Dir() { return (new File( PATH_TDR3 )).exists(); }
-  static boolean hasTh2Dir() { return (new File( PATH_TH2 )).exists(); }
+  // static boolean hasTh2Dir() { return (new File( PATH_TH2 )).exists(); }
   static boolean hasTh3Dir() { return (new File( PATH_TH3 )).exists(); }
-  static boolean hasPngDir() { return (new File( PATH_PNG )).exists(); }
-  static boolean hasDxfDir() { return (new File( PATH_DXF )).exists(); }
-  static boolean hasKmlDir() { return (new File( PATH_KML )).exists(); }
-  static boolean hasPltDir() { return (new File( PATH_PLT )).exists(); }
-  static boolean hasSvgDir() { return (new File( PATH_SVG )).exists(); }
+  // static boolean hasPngDir() { return (new File( PATH_PNG )).exists(); }
+  //static boolean hasDxfDir() { return (new File( PATH_DXF )).exists(); }
+  // static boolean hasKmlDir() { return (new File( PATH_KML )).exists(); }
+  // static boolean hasJsonDir() { return (new File( PATH_JSON )).exists(); }
+  // static boolean hasPltDir() { return (new File( PATH_PLT )).exists(); }
+  // static boolean hasSvgDir() { return (new File( PATH_SVG )).exists(); }
 
   static String getDirFile( String name )    { return PATH_BASE + name; }
   static String getImportFile( String name ) { return PATH_IMPORT + name; }
@@ -358,6 +364,7 @@ class TDPath
   static String getGtxFile( String name )    { return PATH_GTX + name; }
   static String getDxfFile( String name )    { return PATH_DXF + name; }
   static String getKmlFile( String name )    { return PATH_KML + name; }
+  static String getJsonFile( String name )   { return PATH_JSON + name; }
   static String getPltFile( String name )    { return PATH_PLT + name; }
   static String getSrvFile( String name )    { return PATH_SRV + name; }
   static String getSurFile( String name )    { return PATH_SUR + name; }
@@ -433,6 +440,7 @@ class TDPath
   static String getSurveyGtxFile( String survey ) { return getFile( PATH_GTX, survey, GTX ); }
   static String getSurveyDxfFile( String survey ) { return getFile( PATH_DXF, survey, DXF ); }
   static String getSurveyKmlFile( String survey ) { return getFile( PATH_KML, survey, KML ); }
+  static String getSurveyJsonFile( String survey ) { return getFile( PATH_JSON, survey, JSON ); }
   static String getSurveyPltFile( String survey ) { return getFile( PATH_PLT, survey, PLT ); }
   static String getSurveySrvFile( String survey ) { return getFile( PATH_SRV, survey, SRV ); }
   static String getSurveySurFile( String survey ) { return getFile( PATH_SUR, survey, SUR ); }
@@ -553,6 +561,7 @@ class TDPath
     TopoDroidUtil.deleteFile( getGtxFile( survey + GTX ) );
     TopoDroidUtil.deleteFile( getDxfFile( survey + DXF ) );
     TopoDroidUtil.deleteFile( getKmlFile( survey + KML ) );
+    TopoDroidUtil.deleteFile( getJsonFile( survey + JSON ) );
     TopoDroidUtil.deleteFile( getPltFile( survey + PLT ) );
     TopoDroidUtil.deleteFile( getSvxFile( survey + SVX ) );
     TopoDroidUtil.deleteFile( getSrvFile( survey + SRV ) );

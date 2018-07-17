@@ -909,6 +909,7 @@ public class TopoDroidApp extends Application
         TopoDroidUtil.renameFile( TDPath.getSurveyDatFile( mySurvey ), TDPath.getSurveyDatFile( name ) );
         TopoDroidUtil.renameFile( TDPath.getSurveyDxfFile( mySurvey ), TDPath.getSurveyDxfFile( name ) );
         TopoDroidUtil.renameFile( TDPath.getSurveyKmlFile( mySurvey ), TDPath.getSurveyKmlFile( name ) );
+        TopoDroidUtil.renameFile( TDPath.getSurveyJsonFile( mySurvey ), TDPath.getSurveyJsonFile( name ) );
         TopoDroidUtil.renameFile( TDPath.getSurveyPltFile( mySurvey ), TDPath.getSurveyPltFile( name ) );
         TopoDroidUtil.renameFile( TDPath.getSurveySrvFile( mySurvey ), TDPath.getSurveySrvFile( name ) );
         TopoDroidUtil.renameFile( TDPath.getSurveySvxFile( mySurvey ), TDPath.getSurveySvxFile( name ) );
@@ -1448,6 +1449,17 @@ public class TopoDroidApp extends Application
     }
     String filename = TDPath.getSurveyKmlFile( mySurvey );
     return TDExporter.exportSurveyAsKml( mSID, mData, info, filename );
+  }
+
+  String exportSurveyAsJson( )
+  {
+    SurveyInfo info = mData.selectSurveyInfo( mSID );
+    if ( info == null ) {
+      TDLog.Error("Export GeoJSON null survey info. sid " + mSID );
+      return null;
+    }
+    String filename = TDPath.getSurveyJsonFile( mySurvey );
+    return TDExporter.exportSurveyAsJson( mSID, mData, info, filename );
   }
 
   String exportSurveyAsPlt( )
@@ -2212,6 +2224,9 @@ public class TopoDroidApp extends Application
           break;
         case TDConst.DISTOX_EXPORT_KML: // KML
           filename = exportSurveyAsKml( ); // can return ""
+          break;
+        case TDConst.DISTOX_EXPORT_JSON: // GeoJSON
+          filename = exportSurveyAsJson( ); // can return ""
           break;
         case TDConst.DISTOX_EXPORT_PLT: // Track file
           filename = exportSurveyAsPlt( ); // can return ""

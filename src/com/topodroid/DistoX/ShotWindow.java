@@ -189,10 +189,13 @@ public class ShotWindow extends Activity
   private DataDownloader mDataDownloader;
   private DistoXAccuracy mDistoXAccuracy;
 
+  // TODO replace flags with DisplayMode-flag 
+  //      N.B. id is in the data adapter
   boolean mFlagSplay  = true;  //!< whether to hide splay shots
   boolean mFlagLatest = false; //!< whether to show the latest splay shots
   boolean mFlagLeg    = true;  //!< whether to hide leg extra shots
   boolean mFlagBlank  = false; //!< whether to hide blank shots
+
   // private Bundle mSavedState = null;
   // long mSecondLastShotId = 0L;
   // long mLastShotId;

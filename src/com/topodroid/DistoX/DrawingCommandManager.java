@@ -50,7 +50,7 @@ class DrawingCommandManager
 {
   private static final int BORDER = 20;
 
-  static private int mDisplayMode = DisplayMode.DISPLAY_ALL; // this display mode is shared among command managers
+  static private int mDisplayMode = DisplayMode.DISPLAY_PLOT; // this display mode is shared among command managers
   private RectF mBBox;
   boolean mIsExtended = false;
 
@@ -105,8 +105,8 @@ class DrawingCommandManager
   private float mEraserY = 0;
   private float mEraserR = 0; // eraser radius
 
-  void setDisplayMode( int mode ) { mDisplayMode = mode; }
-  int getDisplayMode( ) { return mDisplayMode; }
+  static void setDisplayMode( int mode ) { mDisplayMode = mode; }
+  static int getDisplayMode( ) { return mDisplayMode; }
 
   void highlights( TopoDroidApp app ) 
   {

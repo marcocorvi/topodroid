@@ -18,6 +18,7 @@
  *   Walls
  *   Polygon
  *   KML
+ *   GeoJSON
  *   Track file (OziExplorer)
  *   DXF
  *   CSV
@@ -498,13 +499,13 @@ class TDExporter
   }
 
   // =======================================================================
-  // KML export
+  // KML export Keyhole Markup Language
   // shot flags are ignored
 
   static private final float EARTH_RADIUS1 = (float)(6378137 * Math.PI / 180.0f); // semimajor axis [m]
   static private final float EARTH_RADIUS2 = (float)(6356752 * Math.PI / 180.0f);
 
-  static private List<DistoXNum> getGeolocalizedData( long sid, DataHelper data, float decl, float asl_factor )
+  static private List<DistoXNum> getGeolocalizedData( long sid, DataHelper data, float decl, float asl_factor, boolean ellipsoid_altitude )
   {
     List< FixedInfo > fixeds = data.selectAllFixed( sid, 0 );
     // Log.v("DistoX", "get geoloc. data. Decl " + decl + " fixeds " + fixeds.size() );
@@ -517,7 +518,7 @@ class TDExporter
       DistoXNum num = new DistoXNum( shots_data, fixed.name, null, null, decl );
       // Log.v("DistoX", "Num shots " + num.getShots().size() );
       if ( num.getShots().size() > 0 ) {
-        makeGeolocalizedData( num, fixed, decl, asl_factor );
+        makeGeolocalizedData( num, fixed, decl, asl_factor, ellipsoid_altitude );
 	nums.add( num );
       } 
     }
@@ -525,12 +526,13 @@ class TDExporter
     return nums;
   }
 
-  static private void makeGeolocalizedData( DistoXNum num, FixedInfo origin, float decl, float asl_factor )
+  static private void makeGeolocalizedData( DistoXNum num, FixedInfo origin, float decl, float asl_factor, boolean ellipsoid_altitude )
   {
 
     float lat = (float)origin.lat;
     float lng = (float)origin.lng;
-    float asl = (float)origin.asl; // KML uses Geoid altitude (unless altitudeMode is set)
+    float asl = ellipsoid_altitude ? (float)origin.alt 
+                                   : (float)origin.asl; // KML uses Geoid altitude (unless altitudeMode is set)
     float alat = TDMath.abs( lat );
 
     float s_radius = ((90 - alat) * EARTH_RADIUS1 + alat * EARTH_RADIUS2)/90;
@@ -586,9 +588,9 @@ class TDExporter
     final String coordinates3 = "    <coordinates>%f,%f,%f</coordinates>\n";
     final String coordinates6 = "    %f,%f,%f %f,%f,%f\n";
     // Log.v("DistoX", "export as KML " + filename );
-    List<DistoXNum> nums = getGeolocalizedData( sid, data, info.declination, 1.0f );
+    List<DistoXNum> nums = getGeolocalizedData( sid, data, info.declination, 1.0f, false ); // false: Geoid altitude
     if ( nums == null || nums.size() == 0 ) {
-      TDLog.Error( "Failed PLT export: no geolocalized station");
+      TDLog.Error( "Failed KML export: no geolocalized station");
       return "";
     }
 
@@ -711,6 +713,93 @@ class TDExporter
       return null;
     }
   }
+  // =======================================================================
+  // GEO JASON GeoJSON export
+  // shot flags are ignored
+
+  static String exportSurveyAsJson( long sid, DataHelper data, SurveyInfo info, String filename )
+  {
+    final String name    = "\"name\": ";
+    final String type    = "\"type\": ";
+    final String item    = "\"item\": ";
+    final String geom    = "\"geometry\": ";
+    final String coords  = "\"coordinates\": ";
+    final String feature = "\"Feature\"";
+    // Log.v("DistoX", "export as KML " + filename );
+    List<DistoXNum> nums = getGeolocalizedData( sid, data, info.declination, 1.0f, true ); // true: ellipsoid altitude
+    if ( nums == null || nums.size() == 0 ) {
+      TDLog.Error( "Failed GeoJSON export: no geolocalized station");
+      return "";
+    }
+
+    // now write the GeoJSON
+    try {
+      TDPath.checkPath( filename );
+      FileWriter fw  = new FileWriter( filename );
+      PrintWriter pw = new PrintWriter( fw );
+
+      pw.format("const geojsonObject = {\n");
+      pw.format("  \"name\": \"%s\",\n", info.name );
+      pw.format("  \"created\": \"%s - TopoDroid v %s\",\n",  TopoDroidUtil.getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
+      pw.format("  %s \"FeatureCollection\",\n", type );
+      pw.format("  \"features\": [\n");
+      
+      for ( DistoXNum num : nums ) {
+        List<NumShot>    shots = num.getShots();
+        for ( NumShot sh : shots ) {
+          NumStation from = sh.from;
+          NumStation to   = sh.to;
+          if ( from.mHasCoords && to.mHasCoords ) {
+            pw.format("    {\n");
+            pw.format("      %s %s,\n", type, feature );
+            pw.format("      %s \"centerline\",\n", item );
+            pw.format("      %s \"%s %s\",\n", name, from.name, to.name );
+            pw.format("      %s \"LineString\",\n", geom );
+            pw.format(Locale.US, "      %s [ [ %.6f, %.6f, %.1f ], [ %.6f, %.6f, %.1f ] ]\n", coords, from.e, from.s, from.v, to.e, to.s, to.v );
+            pw.format("    },\n");
+          }
+        }
+      }
+      if ( TDSetting.mKmlSplays ) {
+        for ( DistoXNum num : nums ) {
+          List<NumSplay>   splays = num.getSplays();
+          for ( NumSplay sp : splays ) {
+            NumStation from = sp.from;
+            pw.format("    {\n");
+            pw.format("      %s %s,\n", type, feature );
+            pw.format("      %s \"splay\",\n", item );
+            pw.format("      %s \"%s\",\n", name, from.name );
+            pw.format("      %s \"LineString\",\n", geom );
+            pw.format(Locale.US, "     %s [ [ %.6f, %.6f, %.1f ], [ %.6f, %.6f, %.1f ] ]\n", coords, from.e, from.s, from.v, sp.e, sp.s, sp.v );
+            pw.format("    },\n");
+          }
+        }
+      }
+      if ( TDSetting.mKmlStations ) {
+        for ( DistoXNum num : nums ) {
+          List<NumStation> stations = num.getStations();
+          for ( NumStation st : stations ) {
+            pw.format("    {\n");
+            pw.format("      %s %s,\n", type, feature );
+            pw.format("      %s \"station\",\n", item );
+            pw.format("      %s \"%s\",\n", name, st.name );
+            pw.format("      %s \"Point\",\n", geom );
+            pw.format("      %s [ %.6f %.6f %.1f ]\n", coords, st.e, st.s, st.v );
+            pw.format("    },\n");
+          }
+        }
+      }
+      pw.format("    { }\n"); // add a null feature
+      pw.format("  ]\n");     // close features array
+      pw.format("};\n");      // close geojson object
+      fw.flush();
+      fw.close();
+      return filename;
+    } catch ( IOException e ) {
+      TDLog.Error( "Failed GeoJSON export: " + e.getMessage() );
+      return null;
+    }
+  }
 
   // -------------------------------------------------------------------
   // TRACK FILE OZIEXPLORER
@@ -719,7 +808,7 @@ class TDExporter
   static String exportSurveyAsPlt( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     // Log.v("DistoX", "export as trackfile: " + filename );
-    List<DistoXNum> nums = getGeolocalizedData( sid, data, info.declination, TopoDroidUtil.M2FT );
+    List<DistoXNum> nums = getGeolocalizedData( sid, data, info.declination, TopoDroidUtil.M2FT, false );
     if ( nums == null || nums.size() == 0 ) {
       TDLog.Error( "Failed PLT export: no geolocalized station");
       return "";
