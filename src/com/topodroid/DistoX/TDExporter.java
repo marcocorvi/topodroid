@@ -562,8 +562,8 @@ class TDExporter
 
   static String exportSurveyAsKml( long sid, DataHelper data, SurveyInfo info, String filename )
   {
-    final String name          = "<name>%s</name\n";
-    final String name2         = "  <name>%s</name\n";
+    final String name          = "<name>%s</name>\n";
+    final String name2         = "  <name>%s</name>\n";
     final String placemark     = "<Placemark>\n";
     final String placemark_end = "</Placemark>\n";
     final String linestyle     = "  <LineStyle>\n";
