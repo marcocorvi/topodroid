@@ -94,22 +94,25 @@ class StationName
     mCurrentStationName = null;
   }
 
+  // ------------------------------------------------------------------------------------------------
+  // setting the leg extend automatically, sets also stretch to 0
+
   private void setLegExtend( DataHelper data_helper, long sid, DBlock blk )
   {
     // FIXME_EXTEND what has "splay extend" to do with "leg extend" ???
     // if ( ! TDSetting.mSplayExtend ) 
     {
       long extend = TDAzimuth.computeLegExtend( blk.mBearing );
-      blk.setExtend( (int)extend );
-      data_helper.updateShotExtend( blk.mId, sid, extend, true );
+      blk.setExtend( (int)extend, DBlock.STRETCH_NONE ); 
+      data_helper.updateShotExtend( blk.mId, sid, extend, DBlock.STRETCH_NONE, true );
     }
   }
 
   // used to set block extend "fixed"
   private void setLegFixedExtend( DataHelper data_helper, long sid, DBlock blk, long extend )
   {
-    blk.setExtend( (int)extend );
-    data_helper.updateShotExtend( blk.mId, sid, extend, true );
+    blk.setExtend( (int)extend, DBlock.STRETCH_NONE );
+    data_helper.updateShotExtend( blk.mId, sid, extend, DBlock.STRETCH_NONE, true );
   }
 
   // ------------------------------------------------------------------------------------------------

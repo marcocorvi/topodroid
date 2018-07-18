@@ -47,8 +47,8 @@ import java.util.HashMap;
 class DataHelper extends DataSetObservable
 {
 
-  static final String DB_VERSION = "35";
-  static final int DATABASE_VERSION = 35;
+  static final String DB_VERSION = "36";
+  static final int DATABASE_VERSION = 36;
   static final int DATABASE_VERSION_MIN = 21; // was 14
 
   private static final String CONFIG_TABLE = "configs";
@@ -135,22 +135,29 @@ class DataHelper extends DataSetObservable
   // private SQLiteStatement dropPlotStmt = null;
   // private SQLiteStatement dropFixedStmt = null;
 
-  private String[] mShotFields; // select shot fields
+  static private String[] mShotFields =
+    { "id", "fStation", "tStation", "distance", "bearing", "clino", "acceleration", "magnetic", "dip",
+      "extend", "flag", "leg", "comment", "type", "millis", "color", "stretch"
+    };
 
   static final private String[] mPlotFieldsFull =
     { "id", "name", "type", "status", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide", "nick" };
   static final private String[] mPlotFields =
     { "id", "name", "type", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide", "nick", "orientation" };
 
-  private String[] mSketchFields; // select sketch fields
-
-  private DataListenerSet mListeners;
+  static private String[] mSketchFields =
+    { "id", "name", "start", "st1", "st2",
+      "xoffsettop", "yoffsettop", "zoomtop", "xoffsetside", "yoffsetside", "zoomside", "xoffset3d", "yoffset3d", "zoom3d",
+      "east", "south", "vert", "azimuth", "clino" 
+    };
 
   // N.B. "source" comes after "status" although it is after "cs_altitude" in the table
   private static final String[] mFixedFields = {
     "id", "station", "longitude", "latitude", "altitude", "altimetric", "comment", "status", "source",
     "cs_name", "cs_longitude", "cs_latitude", "cs_altitude", "cs_decimals"
   };
+
+  private DataListenerSet mListeners;
 
   // ----------------------------------------------------------------------
   // DATABASE
@@ -165,19 +172,6 @@ class DataHelper extends DataSetObservable
   {
     mContext = context;
     mApp     = app;
-    mShotFields = new String[] { 
-         "id", "fStation", "tStation", "distance", "bearing",
-         "clino", "acceleration", "magnetic", "dip", "extend",
-         "flag", "leg", "comment", "type", "millis", "color"
-    };
-    mSketchFields =
-    new String[] {
-         "id", "name", "start", "st1", "st2",
-         "xoffsettop", "yoffsettop", "zoomtop",
-         "xoffsetside", "yoffsetside", "zoomside",
-         "xoffset3d", "yoffset3d", "zoom3d",
-         "east", "south", "vert", "azimuth", "clino" 
-    };
     mListeners = listeners;
     openDatabase();
   }
@@ -226,7 +220,7 @@ class DataHelper extends DataSetObservable
      block.mMagnetic     = (float)( cursor.getDouble(7) );
      block.mDip          = (float)( cursor.getDouble(8) );
      
-     block.setExtend( (int)(cursor.getLong(9) ) );
+     block.setExtend( (int)(cursor.getLong(9) ), (float)( cursor.getDouble(16) ) );
      block.resetFlag( cursor.getLong(10) );
      if ( leg == LegType.EXTRA ) {
        block.setBlockType( DBlock.BLOCK_SEC_LEG );
@@ -487,7 +481,7 @@ class DataHelper extends DataSetObservable
       updateAudioStmt      = myDB.compileStatement( "UPDATE audios SET date=? WHERE surveyId=? AND shotId=?" );
 
       // updateShotNameStmt    = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=? WHERE surveyId=? AND id=?" );
-      // updateShotExtendStmt  = myDB.compileStatement( "UPDATE shots SET extend=? WHERE surveyId=? AND id=?" );
+      // updateShotExtendStmt  = myDB.compileStatement( "UPDATE shots SET extend=?, stretch=? WHERE surveyId=? AND id=?" );
       // updateShotCommentStmt = myDB.compileStatement( "UPDATE shots SET comment=? WHERE surveyId=? AND id=?" );
       // shiftShotsIdStmt   = myDB.compileStatement( "UPDATE shots SET id=id+1 where surveyId=? and id>=?" );
       // updateShotLegStmt  = myDB.compileStatement( "UPDATE shots SET leg=? WHERE surveyId=? AND id=?" );
@@ -975,16 +969,16 @@ class DataHelper extends DataSetObservable
     return LegType.INVALID;
   }
 
-  void updateShotExtend( long id, long sid, long extend, boolean forward )
+  void updateShotExtend( long id, long sid, long extend, float stretch, boolean forward )
   {
     // if ( myDB == null ) return;
 
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
-    pw.format( Locale.US, "UPDATE shots SET extend=%d WHERE surveyId=%d AND id=%d", extend, sid, id );
+    pw.format( Locale.US, "UPDATE shots SET extend=%d, stretch=%.2f WHERE surveyId=%d AND id=%d", extend, stretch, sid, id );
     if ( doExecShotSQL( id, sw ) ) {
       if ( forward && mListeners != null ) { // synchronized( mListeners )
-        mListeners.onUpdateShotExtend( id, sid, extend );
+        mListeners.onUpdateShotExtend( id, sid, extend, stretch );
       }
     } 
   }
@@ -4356,7 +4350,8 @@ class DataHelper extends DataSetObservable
              +   " comment TEXT, "
              +   " type INTEGER, "     // DISTOX MANUAL
              +   " millis INTEGER, "   // timestamp
-	     +   " color INTEGER "     // custom color
+	     +   " color INTEGER, "     // custom color
+	     +   " stretch REAL default 0 " // extend strech, default DBlock.STRETCH_NONE
              // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
              // +   " ON DELETE CASCADE "
              +   ")"
@@ -4575,6 +4570,8 @@ class DataHelper extends DataSetObservable
 	   case 34:
              db.execSQL( "ALTER TABLE fixeds ADD COLUMN cs_decimals INTEGER default 2" );
 	   case 35:
+             db.execSQL( "ALTER TABLE shots ADD COLUMN stretch REAL default 0" );
+	   case 36:
              /* current version */
            default:
              break;

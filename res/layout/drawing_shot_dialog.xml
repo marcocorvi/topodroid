@@ -49,11 +49,21 @@
     android:layout_below="@id/layout1"
     />
 
+  <SeekBar android:id="@+id/stretchbar"
+    android:layout_width="fill_parent"
+    android:layout_height="20sp" 
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_below="@id/shot_comment"
+    android:max="200"
+    android:background="#666666"
+    android:progressDrawable="@drawable/progress2"
+    />
+
   <LinearLayout android:id="@+id/layout2"
     android:layout_marginTop="@dimen/marginv"
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
-    android:layout_below="@id/shot_comment"
+    android:layout_below="@id/stretchbar"
     android:orientation="horizontal" 
     >
     <CheckBox android:id="@+id/left"

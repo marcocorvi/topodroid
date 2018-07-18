@@ -347,7 +347,7 @@ class ConnectionHandler extends Handler
          app_data.updateShotLeg( Integer.parseInt(data[0]), mSID, Integer.parseInt(data[2]), false );
          break;
        case DataListener.SHOT_EXTEND:
-         app_data.updateShotExtend( Integer.parseInt(data[0]), mSID, Integer.parseInt(data[2]), false );
+         app_data.updateShotExtend( Integer.parseInt(data[0]), mSID, Integer.parseInt(data[2]), Float.parseFloat(data[3]), false );
          break;
        case DataListener.SHOT_FLAG:
          app_data.updateShotFlag( Integer.parseInt(data[0]), mSID, Integer.parseInt(data[2]), false );
@@ -492,9 +492,9 @@ class ConnectionHandler extends Handler
   {
     enqueue( DataListener.SHOT_LEG, String.format(Locale.US,"%d|%d|%d|", (int)id, (int)sid, (int)leg ) );
   }
-  public void onUpdateShotExtend( long id, long sid, long extend ) 
+  public void onUpdateShotExtend( long id, long sid, long extend, float stretch ) 
   {
-    enqueue( DataListener.SHOT_EXTEND, String.format(Locale.US,"%d|%d|%d|", (int)id, (int)sid, (int)extend ) );
+    enqueue( DataListener.SHOT_EXTEND, String.format(Locale.US,"%d|%d|%d|%.2f|", (int)id, (int)sid, (int)extend, stretch ) );
   }
 
   public void onUpdateShotFlag( long id, long sid, long flag )

@@ -1282,25 +1282,25 @@ public class ShotWindow extends Activity
           }
         }
 
-      } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // LEFT
+      } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // LEFT reset stretch
         for ( DBlock blk : mDataAdapter.mSelect ) {
-          blk.setExtend( DBlock.EXTEND_LEFT );
-          mApp_mData.updateShotExtend( blk.mId, mApp.mSID, DBlock.EXTEND_LEFT, true );
+          blk.setExtend( DBlock.EXTEND_LEFT, DBlock.STRETCH_NONE );
+          mApp_mData.updateShotExtend( blk.mId, mApp.mSID, DBlock.EXTEND_LEFT, DBlock.STRETCH_NONE, true );
         }
         clearMultiSelect( );
         updateDisplay();
       } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // FLIP
         for ( DBlock blk : mDataAdapter.mSelect ) {
-          if ( blk.flipExtend() ) {
-            mApp_mData.updateShotExtend( blk.mId, mApp.mSID, blk.getExtend(), true );
+          if ( blk.flipExtendAndStretch() ) {
+            mApp_mData.updateShotExtend( blk.mId, mApp.mSID, blk.getExtend(), blk.getStretch(), true );
           }
         }
         clearMultiSelect( );
         updateDisplay();
-      } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // RIGHT
+      } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // RIGHT reset stretch
         for ( DBlock blk : mDataAdapter.mSelect ) {
-          blk.setExtend( DBlock.EXTEND_RIGHT );
-          mApp_mData.updateShotExtend( blk.mId, mApp.mSID, DBlock.EXTEND_RIGHT, true );
+          blk.setExtend( DBlock.EXTEND_RIGHT, DBlock.STRETCH_NONE );
+          mApp_mData.updateShotExtend( blk.mId, mApp.mSID, DBlock.EXTEND_RIGHT, DBlock.STRETCH_NONE, true );
         }
         clearMultiSelect( );
         updateDisplay();
@@ -1645,7 +1645,7 @@ public class ShotWindow extends Activity
   }
 
   // @param leg leg data-helper value (0 normal, 1 sec, 2 x-splay, 3 back)
-  void updateShot( String from, String to, int extend, long flag, long leg, String comment, DBlock blk )
+  void updateShot( String from, String to, int extend, float stretch, long flag, long leg, String comment, DBlock blk )
   {
     // TDLog.Log( TDLog.LOG_SHOT, "update Shot From >" + from + "< To >" + to + "< comment " + comment );
     blk.setBlockName( from, to, (leg == LegType.BACK) );
@@ -1676,7 +1676,7 @@ public class ShotWindow extends Activity
     DBlock blk3 = mDataAdapter.updateBlockView( blk.mId );
     if ( blk3 != blk && blk3 != null ) {
       blk3.setBlockName( from, to, (leg == LegType.BACK) );
-      blk3.setExtend( extend );
+      blk3.setExtend( extend, stretch );
       blk3.resetFlag( flag );
       blk3.mComment = comment;
       // FIXME if ( leg == LegType.EXTRA ) blk3.setBlockType( DBlock.BLOCK_SEC_LEG );

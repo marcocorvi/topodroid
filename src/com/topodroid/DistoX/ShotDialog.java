@@ -135,6 +135,7 @@ class ShotDialog extends MyDialog
   private String shot_bearing;
   private String shot_clino;
   private boolean shot_manual;
+  private float shot_stretch; // FIXME_STRETCH
 
   private String shot_extra;
   private int  shot_extend;
@@ -212,6 +213,7 @@ class ShotDialog extends MyDialog
     // shot_extra   = blk.extraString( mParent.mDistoXAccuracy );
     shot_extra   = mParent.getBlockExtraString( blk );
     shot_extend  = blk.getExtend();
+    shot_stretch = blk.getStretch(); // FIXME_STRETCH
     shot_flag    = blk.getFlag();
     shot_secleg  = blk.isSecLeg(); // DBlock.BLOCK_SEC_LEG;
     shot_backleg = blk.isBackLeg();
@@ -572,10 +574,10 @@ class ShotDialog extends MyDialog
     boolean stlen = shot_to.length() > 0;
     if ( mBlk.getExtend() != shot_extend ) {
       if ( leg_next || ( sflen && stlen ) ) { // leg
-        mBlk.setExtend( extend );
+        mBlk.setExtend( extend, DBlock.STRETCH_NONE ); // FIXME_STRETCH
       } else if ( ( sflen && ! stlen ) || ( stlen && ! sflen ) ) { // splay
         // extend = shot_extend + DBlock.EXTEND_FVERT;
-        mBlk.setExtend( extend );
+        mBlk.setExtend( extend, DBlock.STRETCH_NONE ); // FIXME_STRETCH
       }
     }
 
@@ -609,7 +611,7 @@ class ShotDialog extends MyDialog
       if ( do_backleg && backleg_val ) {
         leg = LegType.BACK;
       }
-      mParent.updateShot( shot_from, shot_to, extend, shot_flag, leg, comment, mBlk );
+      mParent.updateShot( shot_from, shot_to, extend, shot_stretch, shot_flag, leg, comment, mBlk );
     }
     // mParent.scrollTo( mPos );
 

@@ -27,11 +27,13 @@ import android.widget.EditText;
 // import android.widget.RadioButton;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 
 // import android.text.InputType;
 import android.inputmethodservice.KeyboardView;
 
-// import android.util.Log;
+import android.util.Log;
 
 class DrawingShotDialog extends MyDialog
                                implements View.OnClickListener
@@ -50,6 +52,7 @@ class DrawingShotDialog extends MyDialog
   private CheckBox mRBvert;
   private CheckBox mRBright;
   // private RadioButton mRBignore;
+  private SeekBar mStretchBar;
 
   // private RadioButton mRBsurvey;
   private MyCheckBox mRBdup  = null;
@@ -65,6 +68,8 @@ class DrawingShotDialog extends MyDialog
   private int mColor;    // bock color
   private DrawingPath mPath;
   private int mFlag; // can barrier/hidden FROM and TO
+  private float mStretch; // FXIME_STRETCH use a slider
+
   // 0x01 can barrier FROM
   // 0x02 can hidden  FROM
   // 0x04 can barrier TO
@@ -80,6 +85,7 @@ class DrawingShotDialog extends MyDialog
     mColor   = ( mBlock.mPaint == null )? 0 : mBlock.mPaint.getColor();
     mPath    = shot;
     mFlag    = flag;
+    mStretch = mBlock.getStretch();
     // Log.v("DistoX", "FLAG " + mFlag + " FROM " + mBlock.mFrom + " TO " + mBlock.mTo );
   }
 
@@ -89,7 +95,6 @@ class DrawingShotDialog extends MyDialog
     super.onCreate(savedInstanceState);
     initLayout( R.layout.drawing_shot_dialog,
       String.format( mContext.getResources().getString( R.string.shot_title ), mBlock.mFrom, mBlock.mTo ) );
-    
 
     mLabel     = (TextView) findViewById(R.id.shot_label);
     mETfrom    = (EditText) findViewById(R.id.shot_from );
@@ -109,6 +114,7 @@ class DrawingShotDialog extends MyDialog
     mRBvert    = (CheckBox) findViewById( R.id.vert );
     mRBright   = (CheckBox) findViewById( R.id.right );
     // mRBignore  = (RadioButton) findViewById( R.id.ignore );
+    mStretchBar = (SeekBar) findViewById(R.id.stretchbar );
 
     // mRBsurvey    = (RadioButton) findViewById( R.id.survey );
     // mRBdup  = (CheckBox) findViewById( R.id.duplicate );
@@ -116,11 +122,31 @@ class DrawingShotDialog extends MyDialog
     // mRBbackshot  = (CheckBox) findViewById( R.id.backshot );
 
     mBtnColor  = (Button) findViewById( R.id.btn_color );
-    if ( TDLevel.overExpert && mBlock.isSplay() ) {
-      mBtnColor.setBackgroundColor( mColor ); 
-      mBtnColor.setOnClickListener( this );
-    } else {
-      mBtnColor.setVisibility( View.GONE );
+    if ( TDLevel.overExpert ) {
+      if ( mBlock.isSplay() ) {
+        mBtnColor.setBackgroundColor( mColor ); 
+        mBtnColor.setOnClickListener( this );
+        mStretchBar.setVisibility( View.GONE );
+      } else if ( mParent.isExtendedProfile() && mBlock.isMainLeg() ) {
+        mBtnColor.setVisibility( View.GONE );
+        mStretchBar.setProgress( (int)(100+mStretch*200) );
+        mStretchBar.setOnSeekBarChangeListener( new OnSeekBarChangeListener() {
+            public void onProgressChanged( SeekBar stretchbar, int progress, boolean fromUser) {
+              if ( fromUser ) {
+                mStretch = (progress-100)/200.0f;
+                if ( mStretch < -0.5f ) mStretch = -0.5f;
+                if ( mStretch >  0.5f ) mStretch =  0.5f;
+              }
+            }
+            public void onStartTrackingTouch(SeekBar stretchbar) { }
+            public void onStopTrackingTouch(SeekBar stretchbar) { }
+        } );
+        mStretchBar.setEnabled( true );
+      } else {
+        mBtnColor.setVisibility( View.GONE );
+        mStretchBar.setVisibility( View.GONE );
+        // mStretchBar.setEnabled( false );
+      }
     }
 
     LinearLayout layout3  = (LinearLayout) findViewById( R.id.layout3 );
@@ -192,7 +218,7 @@ class DrawingShotDialog extends MyDialog
     mBtnOK.setOnClickListener( this );
     mBtnCancel.setOnClickListener( this );
 
-    if ( mBlock != null ) {
+    if ( mBlock != null ) { // block cannot be null 
       mETfrom.setText( mBlock.mFrom );
       mETto.setText( mBlock.mTo );
       mETcomment.setText( mBlock.mComment );
@@ -331,7 +357,8 @@ class DrawingShotDialog extends MyDialog
       if ( mRBleft.isChecked() )       { extend = DBlock.EXTEND_LEFT; }
       else if ( mRBvert.isChecked() )  { extend = DBlock.EXTEND_VERT; }
       else if ( mRBright.isChecked() ) { extend = DBlock.EXTEND_RIGHT; }
-      mParent.updateBlockExtend( mBlock, extend ); // equal extend checked by the method
+      // Log.v("DistoX", "Extend " + extend + " Stretch " + mStretch );
+      mParent.updateBlockExtend( mBlock, extend, mStretch ); // FIXME_STRETCH equal extend checked by the method
 
       if ( TDLevel.overNormal ) {
         long flag  = mBlock.getFlag();

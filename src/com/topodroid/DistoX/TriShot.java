@@ -22,6 +22,7 @@ class TriShot
   String from;
   String to;
   int extend;
+  float stretch;
   int reversed;  // -1 reversed, +1 normal
                         // NOTE splay temp-shot can be reversed - leg temp-shot are always normal
                         // this is checked only in makeShotFromTmp to detect errors
@@ -34,12 +35,13 @@ class TriShot
   AverageLeg mAvgLeg;
   TriCluster cluster;
 
-  TriShot( DBlock blk, String f, String t, int e, int r )
+  TriShot( DBlock blk, String f, String t, int e, float s, int r )
   { 
     used = false;
     from = f;
     to   = t;
-    extend = e;
+    extend  = e;
+    stretch = s;
     reversed = r;
     duplicate = false;
     surface   = false;
@@ -56,6 +58,9 @@ class TriShot
   double length()  { return mAvgLeg.length(); } 
   double bearing() { return mAvgLeg.bearing(); } 
   double clino()   { return mAvgLeg.clino(); } 
+
+  int   getIntExtend()   { return extend; }
+  float getFloatExtend() { return extend + stretch; }
 
   void addBlock( DBlock blk )
   {

@@ -571,6 +571,8 @@ public class DrawingWindow extends ItemDrawer
 
   long getPlotType()   { return mType; }
 
+  boolean isExtendedProfile() { return mType == PlotInfo.PLOT_EXTENDED; }
+
   boolean isAnySection() { return PlotInfo.isAnySection( mType ); }
 
   boolean isLandscape() { return mLandscape; }
@@ -2376,12 +2378,12 @@ public class DrawingWindow extends ItemDrawer
     }
 
     // called only be DrawingShotDialog
-    void updateBlockExtend( DBlock block, int extend )
+    void updateBlockExtend( DBlock block, int extend, float stretch )
     {
       // if ( ! block.isSplay() ) extend -= DBlock.EXTEND_FVERT;
-      if ( block.getExtend() == extend ) return;
-      block.setExtend( extend );
-      mApp_mData.updateShotExtend( block.mId, mSid, extend, true );
+      if ( block.getExtend() == extend && block.hasStretch( stretch ) ) return;
+      block.setExtend( extend, stretch );
+      mApp_mData.updateShotExtend( block.mId, mSid, extend, stretch, true );
       recomputeProfileReference();
     }
 
@@ -2951,7 +2953,7 @@ public class DrawingWindow extends ItemDrawer
     	          // Log.v("DistoX", "blk scene " + x + " " + y + " tap " + xs + " " + ys);
     	          if ( Math.abs( x + ys ) < 2.5f*msz ) {
     	            int extend = (-ys + msz < x)? -1 : (-ys - msz > x)? 1 : 0;
-                    updateBlockExtend( blk, extend ); // equal extend checked by the method
+                    updateBlockExtend( blk, extend, DBlock.STRETCH_NONE ); // FIXME_STRETCH equal extend checked by the method
     	          }
     	        }
     	      } else {
@@ -2962,7 +2964,7 @@ public class DrawingWindow extends ItemDrawer
     	          // Log.v("DistoX", "blk scene dx " + dx + " msz " + msz + " zoom " + mZoom );
     	          if ( Math.abs( x - xs ) < 2.5f*msz ) {
     	            int extend = (xs + msz < x)? -1 : (xs - msz > x)? 1 : 0;
-                    updateBlockExtend( blk, extend ); // equal extend checked by the method
+                    updateBlockExtend( blk, extend, DBlock.STRETCH_NONE ); // FIXME_STRETCH equal extend checked by the method
     	          }
     	        }
     	      }
@@ -4199,8 +4201,8 @@ public class DrawingWindow extends ItemDrawer
 
     private void flipBlock( DBlock blk )
     {
-      if ( blk != null && blk.flipExtend() ) {
-        mApp_mData.updateShotExtend( blk.mId, mSid, blk.getFullExtend(), true );
+      if ( blk != null && blk.flipExtendAndStretch() ) {
+        mApp_mData.updateShotExtend( blk.mId, mSid, blk.getFullExtend(), blk.getStretch(), true );
       }
     }
 

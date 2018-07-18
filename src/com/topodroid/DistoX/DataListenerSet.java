@@ -77,8 +77,8 @@ class DataListenerSet
   void onUpdateShotLeg( long id, long sid, long leg )
   { for ( DataListener l : mListeners ) l.onUpdateShotLeg( id, sid, leg ); }
 
-  void onUpdateShotExtend( long id, long sid, long extend )
-  { for ( DataListener l : mListeners ) l.onUpdateShotExtend( id, sid, extend ); }
+  void onUpdateShotExtend( long id, long sid, long extend, float stretch )
+  { for ( DataListener l : mListeners ) l.onUpdateShotExtend( id, sid, extend, stretch ); }
 
   void onUpdateShotFlag( long id, long sid, long flag )
   { for ( DataListener l : mListeners ) l.onUpdateShotFlag( id, sid, flag ); }

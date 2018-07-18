@@ -463,7 +463,7 @@ class DistoXNum
   //           mLength += block.mLength;
   //           if ( st != null ) { // close loop
   //             if ( /* TopoDroidApp.mAutoStations || */ TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) {
-  //               NumStation st1 = new NumStation( block.mTo, sf, block.mLength, block.mBearing+ mDecl , block.mClino, block.getExtend() );
+  //               NumStation st1 = new NumStation( block.mTo, sf, block.mLength, block.mBearing+ mDecl , block.mClino, block.getStretchedExtend() );
   //               mStations.add( st1 );
   //               st1.addAzimuth( (block.mBearing+ mDecl +180)%360, block.getNegExtend() );
   //               st1.mDuplicate = true;
@@ -490,7 +490,7 @@ class DistoXNum
   //           else
   //           { // add regular from-->to leg' first shot
   //             // FIXME temporary "st" coordinates
-  //             st = new NumStation( block.mTo, sf, block.mLength, block.mBearing+ mDecl , block.mClino, block.getExtend() );
+  //             st = new NumStation( block.mTo, sf, block.mLength, block.mBearing+ mDecl , block.mClino, block.getStretchedExtend() );
   //             mStations.add( st );
   //             st.addAzimuth( (block.mBearing+ mDecl +180)%360, block.getNegExtend() );
   //             updateBBox( st );
@@ -508,9 +508,9 @@ class DistoXNum
   //         }
   //         else if ( st != null )
   //         { // sf == null && st != null
-  //           sf = new NumStation( block.mFrom, st, -block.mLength, block.mBearing+ mDecl , block.mClino, block.getExtend() );
+  //           sf = new NumStation( block.mFrom, st, -block.mLength, block.mBearing+ mDecl , block.mClino, block.getStretchedExtend() );
   //           mStations.add( sf );
-  //           sf.addLeg( block.mBearing+ mDecl , block.getExtend() );
+  //           sf.addLeg( block.mBearing+ mDecl , block.getStretchedExtend() );
   //           updateBBox( sf );
   //           // if ( ts.duplicate ) {
   //           //   ++mDupNr;
@@ -562,7 +562,7 @@ class DistoXNum
   //         sf = getStation( f ); // find station with name "f"
   //         if ( sf != null ) {              // add splay at station
   //           mSplays.add( new NumSplay( sf, rev*block.mLength, block.mBearing+ mDecl , block.mClino,
-  //                                     block.getExtend(), block, mDecl ) );
+  //                                     block.getStretchedExtend(), block, mDecl ) );
   //         }
   //       } else {
   //         ret = false;
@@ -727,7 +727,7 @@ class DistoXNum
           break;
 
         case DBlock.BLOCK_MAIN_LEG:
-          lastLeg = new TriShot( blk, blk.mFrom, blk.mTo, blk.getExtend(), +1 );
+          lastLeg = new TriShot( blk, blk.mFrom, blk.mTo, blk.getExtend(), blk.getStretch(), +1 );
           lastLeg.duplicate = ( blk.isDuplicate() );
           lastLeg.surface   = ( blk.isSurface() );
           lastLeg.commented = ( blk.isCommented() );
@@ -737,7 +737,7 @@ class DistoXNum
           break;
 
         case DBlock.BLOCK_BACK_LEG:
-          lastLeg = new TriShot( blk, blk.mFrom, blk.mTo, blk.getExtend(), +1 );
+          lastLeg = new TriShot( blk, blk.mFrom, blk.mTo, blk.getExtend(), blk.getStretch(), +1 );
           lastLeg.duplicate = true;
           lastLeg.surface   = ( blk.isSurface() );
           lastLeg.commented = false;
@@ -934,7 +934,7 @@ class DistoXNum
           // }
 
           boolean has_coords = (DBlock.getExtend(ts.extend) <= 1);
-          int ext = DBlock.getReducedExtend( ts.extend );
+          float ext = DBlock.getReducedExtend( ts.extend, ts.stretch );
           if ( sf != null ) {
             sf.addAzimuth( ts.b(), ext );
 

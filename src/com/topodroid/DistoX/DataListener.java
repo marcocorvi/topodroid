@@ -76,7 +76,7 @@ interface DataListener
 
   void onUpdateShotLeg( long id, long sid, long leg );
 
-  void onUpdateShotExtend( long id, long sid, long extend );
+  void onUpdateShotExtend( long id, long sid, long extend, float stretch );
 
   void onUpdateShotFlag( long id, long sid, long flag );
 

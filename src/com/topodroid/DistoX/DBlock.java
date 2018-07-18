@@ -33,6 +33,8 @@ class DBlock
   static final int EXTEND_HIDE   = 3;
   static final int EXTEND_START  = 4;
 
+  static final float STRETCH_NONE = 0.0f;
+
   static final int EXTEND_UNSET  = 5;
   // public static final int EXTEND_FLEFT  = 6; // LEFT = FLEFT - FVERT
   // public static final int EXTEND_FVERT  = 7;
@@ -67,6 +69,7 @@ class DBlock
   int mShotType;  // 0: DistoX, 1: manual
   boolean mWithPhoto;
   boolean mMultiBad; // whether it disagree with siblings
+  float mStretch;
 
   static final int BLOCK_BLANK      = 0;
   static final int BLOCK_MAIN_LEG   = 1; // primary leg shot
@@ -147,30 +150,36 @@ class DBlock
 
   // static int getExtend( int ext ) { return ( ext < EXTEND_UNSET )? ext : ext - EXTEND_FVERT; }
   static int getExtend( int ext ) { return ext; }
-  static int getReducedExtend( int ext ) 
+  static float getReducedExtend( int ext, float stretch ) 
   {
     // if ( ext >= EXTEND_UNSET ) { ext -= EXTEND_FVERT; }
-    return ( ext < 2 )? ext : 0;
+    return ( ext < 2 )? ext + stretch : 0;
   }
 
   // int getExtend() { return ( mExtend < EXTEND_UNSET )? mExtend : mExtend - EXTEND_FVERT; }
   int getExtend() { return mExtend; }
-  int getReducedExtend() 
+  float getReducedExtend() 
   {
     // int ret = ( mExtend < EXTEND_UNSET )? mExtend : mExtend - EXTEND_FVERT;
-    int ret = mExtend;
-    return ( ret < 2 )? ret : 0;
+    return ( mExtend < 2 )? mExtend + mStretch : 0.0f;
   }
   int getFullExtend() { return mExtend; }
-  void setExtend( int ext ) { mExtend = ext; }
-  boolean flipExtend()
+  void setExtend( int ext, float stretch ) { mExtend = ext; mStretch = stretch; }
+  boolean hasStretch( float stretch ) { return Math.abs( mStretch - stretch ) < 0.01f; }
+  float getStretch() { return mStretch; }
+  float getStretchedExtend() { return mExtend + mStretch; }
+
+  // called only by ShotWindow
+  boolean flipExtendAndStretch()
   {
+    mStretch = - mStretch;
     switch ( mExtend ) {
       case EXTEND_LEFT:   mExtend = EXTEND_RIGHT;  return true;
       case EXTEND_RIGHT:  mExtend = EXTEND_LEFT;   return true;
       // case EXTEND_FLEFT:  mExtend = EXTEND_FRIGHT; return true;
       // case EXTEND_FRIGHT: mExtend = EXTEND_FLEFT;  return true;
     }
+    if ( Math.abs( mStretch ) > 0.01f ) return true;
     return false;
   }
 
@@ -216,6 +225,7 @@ class DBlock
     mShotType = shot_type; // distox or manual
     mWithPhoto = false;
     mMultiBad = false;
+    mStretch  = 0.0f;
   }
 
   DBlock()
@@ -245,6 +255,7 @@ class DBlock
     mShotType = 0;  // distox
     mWithPhoto = false;
     mMultiBad = false;
+    mStretch  = 0.0f;
   }
 
   void setId( long shot_id, long survey_id )
@@ -386,7 +397,7 @@ class DBlock
     if ( show_id ) pw.format("%d ", mId );
     pw.format(Locale.US, "<%s-%s> %.2f %.1f %.1f [%c",
       mFrom, mTo,
-      mLength*ul, mBearing*ua, mClino*ua, mExtendTag[ mExtend + 1 ] );
+      mLength*ul, mBearing*ua, mClino*ua, mExtendTag[ mExtend + 1 ] ); // FIXME mStretch
     formatFlagPhoto( pw );
     formatComment( pw );
     // TDLog.Log( TDLog.LOG_DATA, sw.getBuffer().toString() );
@@ -408,7 +419,7 @@ class DBlock
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
-    pw.format("[%c", mExtendTag[ mExtend + 1 ] );
+    pw.format("[%c", mExtendTag[ mExtend + 1 ] ); // FIXME mStretch
     formatFlagPhoto( pw );
     formatComment( pw );
     return sw.getBuffer().toString();
