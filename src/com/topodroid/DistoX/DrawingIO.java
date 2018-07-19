@@ -128,7 +128,7 @@ class DrawingIO
           // TDLog.Log( TDLog.LOG_PLOT, "  line: >>" + line + "<<");
           line = line.replaceAll("\\s+", " ");
           String[] vals = line.split( " " );
-          // FIXME assert( vals.length > 0 );
+          if ( vals.length == 0 ) continue;
           if ( vals[0].equals( "scrap" ) ) {
             if ( vals.length < 4 ) {
               TDLog.Error( "bad scrap cmd: " + line );

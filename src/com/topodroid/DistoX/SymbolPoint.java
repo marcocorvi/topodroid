@@ -95,9 +95,9 @@ class SymbolPoint extends Symbol
   SymbolPoint( String n1, String tn1, String fname, int c1, String path, boolean orientable )
   {
     super( tn1, fname );
-    mName = n1;
-    mDxf    = null;
-    makePaint( c1, Paint.Style.STROKE ); // FIXME style
+    mName  = n1;
+    mDxf   = null;
+    mPaint = makePaint( c1, Paint.Style.STROKE ); // FIXME style
     if ( path != null ) {
       makePath( path );
     } else {
@@ -113,9 +113,9 @@ class SymbolPoint extends Symbol
   SymbolPoint( String n1, String tn1, String fname, int c1, String path, boolean orientable, int has_text )
   {
     super( tn1, fname ); // FIXME fname
-    mName = n1;
-    mDxf    = null;
-    makePaint( c1, Paint.Style.STROKE ); //FIXME style
+    mName  = n1;
+    mDxf   = null;
+    mPaint = makePaint( c1, Paint.Style.STROKE ); //FIXME style
     if ( path != null ) {
       makePath( path );
     } else {
@@ -279,9 +279,9 @@ class SymbolPoint extends Symbol
               TDLog.Error("NULL path " + pathname);
             } else {
               if ( cnt == 0 ) {
-                mName = name;
+                mName   = name;
                 mThName = th_name;
-                makePaint( color, style );
+                mPaint  = makePaint( color, style );
                 makePath( path );
                 mOrigPath = new Path( mPath );
                 // mPoint1 = new SymbolPointBasic( name, th_name, fname, color, path );
@@ -654,14 +654,15 @@ class SymbolPoint extends Symbol
     mSvg = "<path d=\"" + sv1.getBuffer().toString() + "\"/> " + sv3.getBuffer().toString();
   }
 
-  private void makePaint( int color, Paint.Style style )
+  static Paint makePaint( int color, Paint.Style style )
   {
-    mPaint = new Paint();
-    mPaint.setDither(true);
-    mPaint.setColor( color );
-    mPaint.setStyle( style );
-    mPaint.setStrokeJoin(Paint.Join.ROUND);
-    mPaint.setStrokeCap(Paint.Cap.ROUND);
-    mPaint.setStrokeWidth( 1 );
+    Paint ret = new Paint();
+    ret.setDither(true);
+    ret.setColor( color );
+    ret.setStyle( style );
+    ret.setStrokeJoin(Paint.Join.ROUND);
+    ret.setStrokeCap(Paint.Cap.ROUND);
+    ret.setStrokeWidth( 1 );
+    return ret;
   }
 }

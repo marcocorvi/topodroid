@@ -28,7 +28,8 @@ import android.view.View;
 
 
 class PlotRenameDialog extends MyDialog
-                              implements View.OnClickListener
+                       implements View.OnClickListener
+                       , View.OnLongClickListener
 {
   private EditText mEtName;
   private EditText mEtStation;
@@ -75,6 +76,7 @@ class PlotRenameDialog extends MyDialog
     if ( TDLevel.overExpert ) {
       // mBtnMerge.setOnClickListener( this );
       mBtnSplit.setOnClickListener( this );
+      mBtnSplit.setOnLongClickListener( this );
       mEtStation.setInputType( android.text.InputType.TYPE_NULL );
     } else {
       mCBcopy.setVisibility( View.GONE );
@@ -90,13 +92,12 @@ class PlotRenameDialog extends MyDialog
     // When the user clicks, just finish this activity.
     // onPause will be called, and we save our data there.
     Button b = (Button) v;
-    INewPlot maker = mApp.mShotWindow; // FIXME
 
     if ( b == mBtnRename ) {
       String name = mEtName.getText().toString();
+      INewPlot maker = mApp.mShotWindow; // FIXME
       if ( maker.hasSurveyPlot( name ) ) {
-        String error = mContext.getResources().getString( R.string.plot_duplicate_name );
-        mEtName.setError( error );
+        mEtName.setError( mContext.getResources().getString( R.string.plot_duplicate_name ) );
         return;
       }
       mParent.renamePlot( mEtName.getText().toString() );
@@ -105,23 +106,35 @@ class PlotRenameDialog extends MyDialog
     } else if ( b == mBtnDelete ) {
       mParent.askDelete();
     } else if ( b == mBtnSplit ) {
-      String name = mEtName.getText().toString();
-      if ( maker.hasSurveyPlot( name ) ) {
-        String error = mContext.getResources().getString( R.string.plot_duplicate_name );
-        mEtName.setError( error );
-        return;
-      }
-      String station = mEtStation.getText().toString();
-      if ( ! maker.hasSurveyStation( station ) ) {
-        String error = mContext.getResources().getString( R.string.error_station_non_existing );
-        mEtStation.setError( error );
-        return;
-      }
-      mParent.splitPlot( name, station, ! mCBcopy.isChecked() ); // not mCBcopy == remove
+      if ( ! handleSplit( true ) ) return;
     // } else if ( b == mBtnMerge ) {
     //   mParent.mergePlot();
     }
     dismiss();
+  }
+
+  @Override
+  public boolean onLongClick(View v) // called only on mBtnSplit
+  {
+    handleSplit( false );
+    return true;
+  }
+
+  private boolean handleSplit( boolean warning )
+  {
+    INewPlot maker = mApp.mShotWindow; // FIXME
+    String name = mEtName.getText().toString();
+    if ( maker.hasSurveyPlot( name ) ) {
+      mEtName.setError( mContext.getResources().getString( R.string.plot_duplicate_name ) );
+      return false;
+    }
+    String station = mEtStation.getText().toString();
+    if ( warning && ! maker.hasSurveyStation( station ) ) {
+      mEtStation.setError( mContext.getResources().getString( R.string.error_station_non_existing ) );
+      return false;
+    }
+    mParent.splitPlot( name, station, ! mCBcopy.isChecked() ); // not mCBcopy == remove
+    return true;
   }
 
 }

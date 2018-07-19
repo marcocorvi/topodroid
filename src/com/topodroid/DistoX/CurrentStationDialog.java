@@ -178,7 +178,6 @@ class CurrentStationDialog extends MyDialog
     // TDLog.Log(  TDLog.LOG_INPUT, "CurrentStationDialog onClick() " );
     Button b = (Button) v;
     String name = mName.getText().toString().trim();
-    String error = mContext.getResources().getString( R.string.error_name_required );
     if ( b == mBtnFixed ) {
       mBtnPainted.setChecked( false );
       return;
@@ -188,25 +187,29 @@ class CurrentStationDialog extends MyDialog
 
     } else if ( b == mBtnPush ) { // STORE
       if ( name.length() == 0 ) {
-        mName.setError( error );
+        mName.setError( mContext.getResources().getString( R.string.error_name_required ) );
         return;
       }
       
-      error = mContext.getResources().getString( R.string.error_comment_required );
-      if ( mComment.getText() == null ) {
-        mComment.setError( error );
-        return;
-      } 
       int flag = CurrentStation.STATION_NONE;
       if ( mBtnFixed.isChecked() ) {
         flag = CurrentStation.STATION_FIXED;
       } else if ( mBtnPainted.isChecked() ) {
         flag = CurrentStation.STATION_PAINTED;
       }
-      String comment = mComment.getText().toString().trim();
-      if ( comment.length() == 0 && flag == CurrentStation.STATION_NONE ) {
-        mComment.setError( error );
-        return;
+
+      String comment;
+      // String error = mContext.getResources().getString( R.string.error_comment_required );
+      if ( mComment.getText() == null ) {
+        // mComment.setError( error );
+        // return;
+	comment = "";
+      } else {
+        comment = mComment.getText().toString().trim();
+        // if ( comment.length() == 0 && flag == CurrentStation.STATION_NONE ) {
+        //   mComment.setError( error );
+        //   return;
+        // }
       }
 
       // mApp.pushCurrentStation( name, comment );
@@ -216,7 +219,7 @@ class CurrentStationDialog extends MyDialog
 
     } else if ( b == mBtnPop ) { // DELETE
       if ( name.length() == 0 ) {
-        mName.setError( error );
+        mName.setError( mContext.getResources().getString( R.string.error_name_required ) );
         return;
       }
       TopoDroidApp.mData.deleteStation( mApp.mSID, name );

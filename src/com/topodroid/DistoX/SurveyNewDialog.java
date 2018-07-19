@@ -141,14 +141,12 @@ class SurveyNewDialog extends MyDialog
     // if ( mEditName.getText() == null ) return;
     String name = mEditName.getText().toString();
     if ( /* name == null || */ name.length() == 0 ) { // ALWAYS false
-      String error = mContext.getResources().getString( R.string.error_name_required );
-      mEditName.setError( error );
+      mEditName.setError( mContext.getResources().getString( R.string.error_name_required ) );
       return;
     }
     name = TopoDroidUtil.noSpaces( name );
     if ( ! saveSurvey( name ) ) {
-      String error = mContext.getResources().getString( R.string.survey_exists );
-      mEditName.setError( error );
+      mEditName.setError( mContext.getResources().getString( R.string.survey_exists ) );
       return;
     }
 

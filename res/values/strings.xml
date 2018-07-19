@@ -20,9 +20,8 @@
     <string name="setup_buttonsize">Set the button size.\nYou can always change this later through the main window settings.</string>
     <string name="setup_drawingunit">Set the sketch icon size.\nYou can always change this later through the sketch window settings.</string>
     <string name="setup_done">The basic setup is done.\n\n
-	    If you experience problems with the DistoX connection, try and set the insecure socket.\n\n
-	    Other settings concern the presentation in the sketching window (icon size, label size, line width etc.) 
-        and you should set them according to your needs./n/n
+If you experience problems with the DistoX connection, try and set the insecure socket.\n\n
+There are other settings for the presentation of the sketchs (icon size, label size, line width etc.); you can set them later.\n
     </string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet</string>
 

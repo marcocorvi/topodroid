@@ -66,8 +66,14 @@ class SetupDrawingUnitDialog extends MyDialog
     mParent = parent;
     mSetup  = setup;
     mSize   = size;
-    mPaint  = BrushManager.fixedShotPaint; // FIXME
-    mPath   = BrushManager.mPointLib.getPointPath( 0 );
+    mPaint  = SymbolPoint.makePaint( 0xffffffff, Paint.Style.STROKE );
+    // mPath   = BrushManager.mPointLib.getPointPath( 0 );
+    float unit = TDSetting.mUnitIcons;
+    mPath   = new Path();
+    mPath.moveTo( 0*unit,  3*unit );
+    mPath.lineTo( 0*unit, -6*unit );
+    mPath.lineTo(-3*unit, -6*unit );
+    mPath.lineTo( 3*unit, -6*unit );
   }
 
   @Override

@@ -107,12 +107,10 @@ class StationSearchDialog extends MyDialog
 
     // TDLog.Log(  TDLog.LOG_INPUT, "StationSearchDialog onClick() " );
     Button b = (Button) v;
-    String name = mName.getText().toString().trim();
-    String error = mContext.getResources().getString( R.string.error_name_required );
-
     if ( b == mBtnSearch ) { // SEARCH
+      String name = mName.getText().toString().trim();
       if ( name.length() == 0 ) {
-        mName.setError( error );
+        mName.setError( mContext.getResources().getString( R.string.error_name_required ) );
         return;
       }
       mParent.searchStation( name, mBtnSplays.isChecked() );

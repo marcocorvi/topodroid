@@ -81,6 +81,7 @@ class PlotNewDialog extends MyDialog
     mBtnOK = (Button) findViewById(R.id.button_ok );
     mBtnBack = (Button) findViewById(R.id.button_back );
     mBtnOK.setOnClickListener( this );
+    mBtnOK.setOnLongClickListener( this );
     mBtnBack.setOnClickListener( this );
     mCBextended = (CheckBox)findViewById( R.id.button_extended );
     mCBextended.setChecked( true );
@@ -112,7 +113,11 @@ class PlotNewDialog extends MyDialog
   @Override
   public boolean onLongClick(View v) 
   {
-    CutNPaste.makePopup( mContext, (EditText)v );
+    if ( v.getId() == R.id.button_ok ) {  // mBtnOK
+      handleOK( false );
+    } else if ( v.getId() == R.id.edit_plot_start ) { // mEditStart
+      CutNPaste.makePopup( mContext, (EditText)v );
+    }
     return true;
   }
 
@@ -130,66 +135,66 @@ class PlotNewDialog extends MyDialog
 
     if ( /* notDone && */ b == mBtnOK ) {
       // notDone = false;
-      String name  = mEditName.getText().toString().trim();
-      String start = mEditStart.getText().toString().trim();
-      // String view  = mEditView.getText().toString();
-      // String view = null;
-
-      // if ( name == null ) { // CANNOT HAPPEN
-      //   String error = mContext.getResources().getString( R.string.error_name_required );
-      //   mEditName.setError( error );
-      //   return;
-      // }
-      name = TopoDroidUtil.noSpaces( name );
-      if ( name.length() == 0 ) {
-        String error = mContext.getResources().getString( R.string.error_name_required );
-        mEditName.setError( error );
-        return;
-      } 
-      // if ( start == null ) { // CANNOT HAPPEN
-      //   String error = mContext.getResources().getString( R.string.error_start_required );
-      //   mEditStart.setError( error );
-      //   return;
-      // }
-      
-      // start = TopoDroidUtil.noSpaces( start );
-      start = start.trim();
-      if ( start.length() == 0 ) {
-        String error = mContext.getResources().getString( R.string.error_start_required );
-        mEditStart.setError( error );
-        return;
-      } 
-      if ( mMaker.hasSurveyPlot( name ) ) {
-        String error = mContext.getResources().getString( R.string.plot_duplicate_name );
-        mEditName.setError( error );
-        return;
-      }
-      if ( ! mMaker.hasSurveyStation( start ) ) {
-        String error = mContext.getResources().getString( R.string.error_station_non_existing );
-        mEditStart.setError( error );
-        return;
-      }
-
-      boolean extended = true;
-      // int project = 0;
-      if ( TDLevel.overAdvanced ) {
-        extended = mCBextended.isChecked();
-        // if ( ! extended ) {
-        //   try {
-        //     project = Integer.parseInt( mEditProject.getText().toString() );
-        //   } catch ( NumberFormatException e ) {  }
-        // }
-      }
-
-      if ( extended ) {
-        mMaker.makeNewPlot( name, start, true, 0 ); // true = extended
-      } else {
-        mMaker.doProjectionDialog( name, start );
-      }
+      if ( ! handleOK( true ) ) return;
     } else if ( b == mBtnBack ) {
       /* nothing */
     }
     dismiss();
+  }
+
+  private boolean handleOK( boolean warning )
+  {
+    String name  = mEditName.getText().toString().trim();
+    String start = mEditStart.getText().toString().trim();
+    // String view  = mEditView.getText().toString();
+    // String view = null;
+
+    // if ( name == null ) { // CANNOT HAPPEN
+    //   mEditName.setError( mContext.getResources().getString( R.string.error_name_required ) );
+    //   return false;
+    // }
+    name = TopoDroidUtil.noSpaces( name );
+    if ( name.length() == 0 ) {
+      mEditName.setError( mContext.getResources().getString( R.string.error_name_required ) );
+      return false;
+    } 
+    // if ( start == null ) { // CANNOT HAPPEN
+    //   mEditStart.setError( mContext.getResources().getString( R.string.error_start_required ) );
+    //   return false;
+    // }
+    
+    // start = TopoDroidUtil.noSpaces( start );
+    start = start.trim();
+    if ( start.length() == 0 ) {
+      mEditStart.setError( mContext.getResources().getString( R.string.error_start_required ) );
+      return false;
+    } 
+    if ( mMaker.hasSurveyPlot( name ) ) {
+      mEditName.setError( mContext.getResources().getString( R.string.plot_duplicate_name ) );
+      return false;
+    }
+    if ( warning && ! mMaker.hasSurveyStation( start ) ) {
+      mEditStart.setError( mContext.getResources().getString( R.string.error_station_non_existing ) );
+      return false;
+    }
+
+    boolean extended = true;
+    // int project = 0;
+    if ( TDLevel.overAdvanced ) {
+      extended = mCBextended.isChecked();
+      // if ( ! extended ) {
+      //   try {
+      //     project = Integer.parseInt( mEditProject.getText().toString() );
+      //   } catch ( NumberFormatException e ) {  }
+      // }
+    }
+
+    if ( extended ) {
+      mMaker.makeNewPlot( name, start, true, 0 ); // true = extended
+    } else {
+      mMaker.doProjectionDialog( name, start );
+    }
+    return true;
   }
 
   @Override
