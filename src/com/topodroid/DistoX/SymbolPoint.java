@@ -178,6 +178,7 @@ class SymbolPoint extends Symbol
 
     try {
       // FileReader fr = new FileReader( pathname );
+      // TDLog.Log( TDLog.LOG_IO, "read symbol point file <" + filename + ">" );
       FileInputStream fr = new FileInputStream( pathname );
       BufferedReader br = new BufferedReader( new InputStreamReader( fr, iso ) );
       String line;

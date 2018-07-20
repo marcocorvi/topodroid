@@ -66,6 +66,7 @@ class TDLog
   static boolean LOG_UNITS  = false;
   static boolean LOG_SYNC   = false;
   static boolean LOG_PERM   = false;
+  static boolean LOG_IO     = false;
 
 
   // --------------- LOG PREFERENCES ----------------------
@@ -97,7 +98,8 @@ class TDLog
     "DISTOX_LOG_ZIP",
     "DISTOX_LOG_UNITS",
     "DISTOX_LOG_SYNC",
-    "DISTOX_LOG_PERM"             // permissions
+    "DISTOX_LOG_PERM",            // permissions
+    "DISTOX_LOG_IO"               // filesystem i/o
   };
 
   // static void Profile( String msg )
@@ -218,6 +220,7 @@ class TDLog
     LOG_UNITS   = prefs.getBoolean( log_key[lk++], false );
     LOG_SYNC    = prefs.getBoolean( log_key[lk++], false );
     LOG_PERM    = prefs.getBoolean( log_key[lk++], false );
+    LOG_IO      = prefs.getBoolean( log_key[lk++], false );
   }
     
   static void checkLogPreferences( SharedPreferences sp, String k ) 
@@ -282,6 +285,8 @@ class TDLog
       LOG_SYNC = sp.getBoolean( k, false );
     } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_PERM"
       LOG_PERM = sp.getBoolean( k, false );
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_IO"
+      LOG_IO = sp.getBoolean( k, false );
     } 
   }
 

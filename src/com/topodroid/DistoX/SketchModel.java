@@ -872,6 +872,7 @@ class SketchModel
     // Log.v( "DistoX", "load Th3 " + filename );
     BrushManager.resetPointOrientations();
     try {
+      // TDLog.Log( TDLog.LOG_IO, "read sketch file <" + filename + ">" );
       FileReader fr = new FileReader( filename );
       BufferedReader br = new BufferedReader( fr );
       String line = null;
@@ -1363,6 +1364,7 @@ class SketchModel
     // Log.v( "DistoX", "load Tdr3 " + filename );
     BrushManager.resetPointOrientations();
     try {
+      // TDLog.Log( TDLog.LOG_IO, "read sketch file " + filename );
       FileInputStream fis = new FileInputStream( filename );
       BufferedInputStream bis = new BufferedInputStream( fis );
 

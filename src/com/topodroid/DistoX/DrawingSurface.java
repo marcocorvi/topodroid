@@ -89,10 +89,15 @@ class DrawingSurface extends SurfaceView
 
   static private HashMap<String, DrawingCommandManager> mCache = new HashMap<String, DrawingCommandManager>();
 
-  static void clearCache() { mCache.clear(); }
+  static void clearCache()
+  {
+    TDLog.Log( TDLog.LOG_IO, "clear managers cache" );
+    mCache.clear();
+  }
 
   static void addManagerToCache( String fullname ) 
   { 
+    TDLog.Log( TDLog.LOG_IO, "add manager to cache " + fullname );
     if ( commandManager != null ) mCache.put( fullname, commandManager );
   }
 
@@ -109,6 +114,7 @@ class DrawingSurface extends SurfaceView
     DrawingCommandManager manager = null;
 
     // Log.v("DistoX", "cache size " + mCache.size() );
+    TDLog.Log( TDLog.LOG_IO, "check out manager from cache " + fullname );
 
     if ( mode == DRAWING_PLAN ) {
       if ( fullname != null ) manager = mCache.get( fullname );

@@ -37,19 +37,19 @@ class PlotInfo
   long id;       // plot id
   String name;   // name of the plot
   int type;      // type of the plot
-  String start;  // base station
-  String view;   // viewed station (barrier)
-  String hide;   // hiding stations / parent plot (xsections)
+  String start;  // reference station (origin)
+  String view;   // viewed station [xsections], barrier [plan/profile]
+  String hide;   // hiding stations [plan/profile], parent plot [xsections]
   String nick;   // nickname (xsections)
   float xoffset; // display X-offset
   float yoffset; // display Y-offset
   float zoom;    // display zoom
-  float azimuth; // vertical cross-section azimuth / profile projection azimuth
-  float clino;   // inclination (0 for plan cross-sections)
+  float azimuth; // vertical x-section azimuth / profile projection azimuth
+  float clino;   // inclination (0 for plan x-sections)
   int csxIndex = -1;  // numerical index for cSurvey xsection exports
   int orientation = ORIENTATION_PORTRAIT;
 
-  boolean isPortrait()  { return orientation == ORIENTATION_PORTRAIT; }
+  // boolean isPortrait()  { return orientation == ORIENTATION_PORTRAIT; }
   boolean isLandscape() { return orientation == ORIENTATION_LANDSCAPE; }
 
   static boolean isVertical( long type ) 

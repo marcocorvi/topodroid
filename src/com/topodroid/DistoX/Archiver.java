@@ -57,6 +57,7 @@ class Archiver
     boolean ret = false;
     BufferedInputStream bis = null;
     try { 
+      // TDLog.Log( TDLog.LOG_IO, "zip add file " + name.getPath() );
       bis = new BufferedInputStream( new FileInputStream( name ), BUF_SIZE );
       ZipEntry entry = new ZipEntry( name.getName() );
       int cnt;
@@ -202,6 +203,7 @@ class Archiver
       TDLog.Log( TDLog.LOG_ZIP, "un-archive manifest " + ok_manifest );
       if ( ok_manifest < 0 ) return ok_manifest;
 
+      // TDLog.Log( TDLog.LOG_IO, "unzip file " + filename );
       FileInputStream fis = new FileInputStream( filename );
       ZipInputStream zin = new ZipInputStream( fis );
       while ( ( ze = zin.getNextEntry() ) != null ) {

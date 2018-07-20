@@ -54,6 +54,7 @@ class FirmwareUtils
   static int readFirmwareFirmware( File fp )
   {
     try {
+      // TDLog.Log( TDLog.LOG_IO, "read firmware file " + file.getPath() );
       FileInputStream fis = new FileInputStream( fp );
       DataInputStream dis = new DataInputStream( fis );
       if ( dis.skipBytes( 2048 ) != 2048 ) {

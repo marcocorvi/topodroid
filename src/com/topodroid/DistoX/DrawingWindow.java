@@ -5176,6 +5176,7 @@ public class DrawingWindow extends ItemDrawer
     float z = mZoom;
     String tdr  = TDPath.getTdrFile( filename );
     String th2  = TDPath.getTh2File( filename );
+    TDLog.Log( TDLog.LOG_IO, "reload tdr " + filename + " file " + tdr );
     // Log.v("DistoX", "recover " + type + " <" + filename + "> TRD " + tdr + " TH2 " + th2 );
     if ( type == PlotInfo.PLOT_PLAN ) {
       mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, null, false );

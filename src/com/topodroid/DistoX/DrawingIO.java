@@ -80,6 +80,7 @@ class DrawingIO
     // Log.v("DistoX", "drawing I/O load therion " + filename );
     synchronized( TDPath.mTherionLock ) {
       try {
+        // TDLog.Log( TDLog.LOG_IO, "load plot from Therion file " + filename );
         FileReader fr = new FileReader( filename );
         BufferedReader br = new BufferedReader( fr );
         String line = null;
@@ -492,7 +493,7 @@ class DrawingIO
   static void exportTherion( // DataHelper dh, long sid,
                        DrawingSurface surface, int type, File file, String fullname, String projname, int proj_dir )
   {
-    // Log.v("DistoX", "Export Therion file " + file.getPath() );
+    // TDLog.Log( TDLog.LOG_IO, "export Therion file " + file.getPath() );
     try {
       FileWriter fw = new FileWriter( file );
       BufferedWriter bw = new BufferedWriter( fw );
@@ -500,7 +501,7 @@ class DrawingIO
       bw.flush();
       bw.close();
     } catch ( IOException e ) {
-      TDLog.Error( "Export Therion i/o: " + e.getMessage() );
+      TDLog.Error( "Export Therion i/o error: " + e.getMessage() );
     }
   }
 
@@ -661,6 +662,7 @@ class DrawingIO
         // CACHE check if filename is in the cache: if so use the cache byte array
         // ByteArrayOutputStream bos = mTdrCache.get( file.getName() );
         // if ( bos == null ) {
+          TDLog.Log( TDLog.LOG_IO, "load tdr file " + filename );
           fis = new FileInputStream( filename );
           BufferedInputStream bfis = new BufferedInputStream( fis );
           dis = new DataInputStream( bfis );
@@ -796,6 +798,7 @@ class DrawingIO
         // CACHE check if filename is in the cache: if so use the cache byte array
         // ByteArrayOutputStream bos = mTdrCache.get( file.getName() );
         // if ( bos == null ) {
+          // TDLog.Log( TDLog.LOG_IO, "load outline tdr file " + filename );
           fis = new FileInputStream( filename );
           BufferedInputStream bfis = new BufferedInputStream( fis );
           dis = new DataInputStream( bfis );
@@ -1258,6 +1261,7 @@ class DrawingIO
     // synchronized( TDPath.mTherionLock ) 
     {
       try {
+        // TDLog.Log( TDLog.LOG_IO, "tdr to Therion. file " + file.getPath() );
         FileInputStream fis = new FileInputStream( file );
         DataInputStream dis = new DataInputStream( fis );
         boolean todo = true;
@@ -1374,6 +1378,7 @@ class DrawingIO
     // synchronized( TDPath.mTherionLock ) 
     {
       try {
+        // TDLog.Log( TDLog.LOG_IO, "export cSurvey. X-section file " + filename );
         FileInputStream fis = new FileInputStream( file );
         DataInputStream dis = new DataInputStream( fis );
         boolean todo = true;

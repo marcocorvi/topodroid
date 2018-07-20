@@ -177,6 +177,7 @@ class ParserTherion
       if ( i > 0 ) dirname = filename.substring(0, i+1);
       // System.out.println("readFile dir " + dirname + " filename " + filename );
       // TDLog.Log( TDLog.LOG_THERION, "reading file " + filename + " dir " + dirname );
+      // TDLog.Log( TDLog.LOG_IO, "import read Therion file <" + filename + ">" );
 
       FileReader fr = new FileReader( filename );
       BufferedReader br = new BufferedReader( fr );

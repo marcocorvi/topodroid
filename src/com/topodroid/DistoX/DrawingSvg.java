@@ -411,6 +411,7 @@ class DrawingSvg
   static private void tdrToSvg( PrintWriter pw, String scrapfile, float dx, float dy, float xoff, float yoff )
   {
     try {
+      // TDLog.Log( TDLog.LOG_IO, "trd to svg. scrap file " + scrapfile );
       FileInputStream fis = new FileInputStream( TDPath.getTdrFile( scrapfile ) );
       BufferedInputStream bfis = new BufferedInputStream( fis );
       DataInputStream dis = new DataInputStream( bfis );

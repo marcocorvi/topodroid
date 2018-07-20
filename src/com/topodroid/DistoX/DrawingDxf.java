@@ -1163,6 +1163,7 @@ class DrawingDxf
                                float scale, float dx, float dy, float xoff, float yoff )
   {
     try {
+      // TDLog.Log( TDLog.LOG_IO, "tdr to dxf. scrapfile " + scrapfile );
       FileInputStream fis = new FileInputStream( TDPath.getTdrFile( scrapfile ) );
       BufferedInputStream bfis = new BufferedInputStream( fis );
       DataInputStream dis = new DataInputStream( bfis );

@@ -63,6 +63,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
         // Log.v("DistoX", "Export to File: " + filename );
         if ( filename != null ) {
           // final FileOutputStream out = new FileOutputStream( filename );
+          TDLog.Log( TDLog.LOG_IO, "export plot to file " + filename );
           TDPath.checkPath( filename );
           final FileWriter fw = new FileWriter( filename );
           BufferedWriter bw = new BufferedWriter( fw );

@@ -47,6 +47,12 @@
      />
 
      <CheckBoxPreference
+       android:key="DISTOX_LOG_IO"
+       android:title="@string/pref_log_io"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
        android:key="DISTOX_LOG_BT"
        android:summary="@string/pref_log_bt"
        android:title="@string/pref_log_bt"

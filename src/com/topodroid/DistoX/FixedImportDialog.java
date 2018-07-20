@@ -161,6 +161,7 @@ class FixedImportDialog extends MyDialog
     // Log.v("DistoX", "reading file " + filename );
     boolean ret = false;
     try {
+      // TDLog.Log( TDLog.LOG_IO, "read GPS points file " + filename );
       File file = new File( dir, filename );
       FileReader fr = new FileReader( file );
       BufferedReader br = new BufferedReader( fr );

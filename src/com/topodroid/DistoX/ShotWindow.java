@@ -324,7 +324,9 @@ public class ShotWindow extends Activity
       
       setTheTitle( );
     } else {
-      TDToast.make( mActivity, R.string.no_survey );
+      mApp.clearSurveyReferences();
+      finish();
+      // TDToast.make( mActivity, R.string.no_survey );
     }
   }
 

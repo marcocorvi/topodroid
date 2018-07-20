@@ -86,7 +86,7 @@ class ImportParser
    */
   void readFile( String filename ) throws ParserException
   {
-    TDLog.Log( TDLog.LOG_THERION, "ImportParser file <" + filename + ">" );
+    // TDLog.Log( TDLog.LOG_IO, "import parse file <" + filename + ">" );
     try {
       FileReader fr = new FileReader( filename );
       BufferedReader br = new BufferedReader( fr );

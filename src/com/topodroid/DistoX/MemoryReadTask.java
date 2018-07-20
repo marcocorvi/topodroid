@@ -84,6 +84,7 @@ class MemoryReadTask extends AsyncTask<Void, Integer, Integer>
     if ( dumpfile.length() == 0 ) return;
     try { 
       String dumppath = TDPath.getDumpFile( dumpfile );
+      // TDLog.Log( TDLog.LOG_IO, "dump memory to file " + dumppath );
       TDPath.checkPath( dumppath );
       FileWriter fw = new FileWriter( dumppath );
       PrintWriter pw = new PrintWriter( fw );

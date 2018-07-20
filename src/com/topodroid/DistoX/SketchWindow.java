@@ -571,6 +571,7 @@ public class SketchWindow extends ItemDrawer
     {
       try {
         String filename = TDPath.getTh3FileWithExt( mFullName );
+	// TDLog.Log( TDLog.LOG_IO, "save sketch th3 file " + filename );
         TDPath.checkPath( filename );
         FileWriter writer = new FileWriter( filename );
         BufferedWriter out = new BufferedWriter( writer );

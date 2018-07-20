@@ -51,7 +51,7 @@ class DistoXAnnotations extends MyDialog // Activity
 
   private void load( )
   {
-    // TDLog.Log( TDLog.LOG_NOTE, "reading from file " + mFilename );
+    // TDLog.Log( TDLog.LOG_IO, "annotations read from file " + mFilename );
     try {
       FileReader fr = new FileReader( mFilename );
       BufferedReader br = new BufferedReader( fr );
@@ -68,6 +68,7 @@ class DistoXAnnotations extends MyDialog // Activity
 
   private void save( )
   {
+    // TDLog.Log( TDLog.LOG_IO, "annotations save to file " + mFilename );
     try {
       TDPath.checkPath( mFilename );
       FileWriter fw = new FileWriter( mFilename, false );
@@ -83,6 +84,7 @@ class DistoXAnnotations extends MyDialog // Activity
   public static void append( String title, String text )
   {
     String filename = TDPath.getSurveyNoteFile( title );
+    // TDLog.Log( TDLog.LOG_IO, "annotations append to file " + filename );
     try {
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename, true );

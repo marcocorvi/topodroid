@@ -833,7 +833,7 @@ class DistoXProtocol
 
   int uploadFirmware( String filepath )
   {
-    TDLog.LogFile( "Firmware upload: protocol starts" );
+    TDLog.LogFile( "Firmware upload: protocol starts. file " + filepath );
     byte[] buf = new byte[259];
     buf[0] = (byte)0x3b;
     buf[1] = (byte)0;

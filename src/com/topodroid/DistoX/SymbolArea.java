@@ -198,6 +198,7 @@ class SymbolArea extends Symbol
 
     try {
       // FileReader fr = new FileReader( filename );
+      // TDLog.Log( TDLog.LOG_IO, "read symbol area file <" + filename + ">" );
       FileInputStream fr = new FileInputStream( filename );
       BufferedReader br = new BufferedReader( new InputStreamReader( fr, iso ) );
       String line;

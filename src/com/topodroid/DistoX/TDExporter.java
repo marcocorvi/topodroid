@@ -64,6 +64,7 @@ class TDExporter
       byte[] buf = new byte[ len ];
       int read = 0;
       try {
+        // TDLog.Log( TDLog.LOG_IO, "read file bytes: " + file.getPath() );
         FileInputStream fis = new FileInputStream( file );
         BufferedInputStream bis = new BufferedInputStream( fis );
         while ( read < len ) {
@@ -596,6 +597,7 @@ class TDExporter
 
     // now write the KML
     try {
+      // TDLog.Log( TDLog.LOG_IO, "export KML " + filename );
       TDPath.checkPath( filename );
       FileWriter fw  = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
@@ -734,6 +736,7 @@ class TDExporter
 
     // now write the GeoJSON
     try {
+      // TDLog.Log( TDLog.LOG_IO, "export GeoJSON " + filename );
       TDPath.checkPath( filename );
       FileWriter fw  = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
@@ -816,6 +819,7 @@ class TDExporter
 
     // now write the PLT file
     try {
+      // TDLog.Log( TDLog.LOG_IO, "export PLT " + filename );
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
@@ -1010,6 +1014,7 @@ class TDExporter
     List< PlotInfo > plots  = data.selectAllPlots( sid, TDStatus.NORMAL );
     List< CurrentStation > stations = data.getStations( sid );
     try {
+      // TDLog.Log( TDLog.LOG_IO, "export Therion " + filename );
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       BufferedWriter bw = new BufferedWriter( fw );
@@ -1345,6 +1350,7 @@ class TDExporter
 
     // float decl = info.declination; // DECLINATION not used
     try {
+      // TDLog.Log( TDLog.LOG_IO, "export Survex " + filename );
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
@@ -1654,6 +1660,7 @@ class TDExporter
     String uls = ( ul < 1.01f )? "meters"  : "feet"; // FIXME
     String uas = ( ua < 1.01f )? "degrees" : "grads";
     try {
+      // TDLog.Log( TDLog.LOG_IO, "export CSV " + filename );
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
@@ -2076,6 +2083,7 @@ class TDExporter
     // Log.v("DistoX", "export as compass: " + filename + " swap LR " + TDSetting.mSwapLR );
     List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
     try {
+      // TDLog.Log( TDLog.LOG_IO, "export Compass " + filename );
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
@@ -2239,6 +2247,7 @@ class TDExporter
     // Log.v("DistoX", "export as TopoRobot: " + filename + " data " + list.size() );
     char[] line = new char[ TRB_LINE_LENGTH ];
     try {
+      // TDLog.Log( TDLog.LOG_IO, "export TopoRobot " + filename );
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
@@ -2475,6 +2484,7 @@ class TDExporter
     // Log.v("DistoX", "export as winkarst: " + filename + " swap LR " + TDSetting.mSwapLR );
     List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
     try {
+      // TDLog.Log( TDLog.LOG_IO, "export WinKarst " + filename );
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
@@ -2597,6 +2607,7 @@ class TDExporter
   {
     String date = info.date.replace( '.', '-' );
     try {
+      // TDLog.Log( TDLog.LOG_IO, "export GHTopo " + filename );
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
@@ -2766,6 +2777,7 @@ class TDExporter
   static String exportSurveyAsGrt( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     try {
+      // TDLog.Log( TDLog.LOG_IO, "export Grottolf " + filename );
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
@@ -2875,6 +2887,7 @@ class TDExporter
     String uas = ( ua < 1.01f )? "Degrees" : "Grads";
 
     try {
+      // TDLog.Log( TDLog.LOG_IO, "export Walls " + filename );
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
@@ -3119,6 +3132,7 @@ class TDExporter
     ArrayList< String > ents = null;
 
     try {
+      // TDLog.Log( TDLog.LOG_IO, "export Topo " + filename );
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
@@ -3251,6 +3265,7 @@ class TDExporter
     // String uas = ( ua < 1.01f )? "Degrees" : "Grads";
 
     try {
+      // TDLog.Log( TDLog.LOG_IO, "export Polygon " + filename );
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
@@ -3391,6 +3406,7 @@ class TDExporter
     // Log.v("DistoX", "export as DXF: " + filename );
     // Log.v( TAG, "export SurveyAsDxf " + filename );
     try {
+      // TDLog.Log( TDLog.LOG_IO, "export DXF " + filename );
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter out = new PrintWriter( fw );
@@ -3604,6 +3620,7 @@ class TDExporter
     List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
     List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
     try {
+      // TDLog.Log( TDLog.LOG_IO, "export VisualTopo " + filename );
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
@@ -3720,6 +3737,7 @@ class TDExporter
   static String exportCalibAsCsv( long cid, DeviceHelper data, CalibInfo ci, String filename )
   {
     try {
+      // TDLog.Log( TDLog.LOG_IO, "export calibration " + filename );
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
@@ -3752,6 +3770,7 @@ class TDExporter
   {
     int ret = 0;
     try {
+      // TDLog.Log( TDLog.LOG_IO, "import calibration file " + filename );
       TDPath.checkPath( filename );
       FileReader fr = new FileReader( filename );
       BufferedReader br = new BufferedReader( fr );

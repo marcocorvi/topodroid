@@ -3753,7 +3753,7 @@ class DataHelper extends DataSetObservable
 
    void dumpToFile( String filename, long sid )
    {
-     // TDLog.Log( TDLog.LOG_DB, "dumpToFile " + filename );
+     // TDLog.Log( TDLog.LOG_IO, "dump DB to file " + filename );
      // String where = "surveyId=" + Long.toString(sid);
      if ( myDB == null ) return;
      try {
@@ -4006,6 +4006,7 @@ class DataHelper extends DataSetObservable
      String station, title, date, name, comment;
      String line;
      try {
+       // TDLog.Log( TDLog.LOG_IO, "load survey from sql file " + filename );
        FileReader fr = new FileReader( filename );
        BufferedReader br = new BufferedReader( fr );
        // first line is survey

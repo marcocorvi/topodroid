@@ -46,6 +46,7 @@ class ParserPocketTopo extends ImportParser
   private void readPocketTopoFile( String filename ) throws ParserException
   {
     PTFile ptfile = new PTFile();
+    // TDLog.Log( TDLog.LOG_IO, "read PocketTopo file " + filename );
     TDLog.Log( TDLog.LOG_PTOPO, "PT survey " + mName + " read file " + filename );
     // Log.v( "PTDistoX", "PT survey " + mName + " read file " + filename );
     try {
@@ -170,7 +171,7 @@ class ParserPocketTopo extends ImportParser
     if ( drawing == null ) return false;
     int elem_count = drawing.elementNumber();
     // Log.v( "PTDistoX", "off " + xoff + " " + yoff );
-    TDLog.Log( TDLog.LOG_PTOPO, "Therion file " + filename + " elems " + elem_count );
+    // TDLog.Log( TDLog.LOG_IO, "PocketTopo to Therion: file " + filename + " elems " + elem_count );
 
     TDPath.checkPath( filename );
     File file = new File( filename );
