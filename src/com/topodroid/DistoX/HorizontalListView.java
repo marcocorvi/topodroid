@@ -242,17 +242,21 @@ public class HorizontalListView extends AdapterView<ListAdapter>
   {
     while ( rightEdge + dx < getWidth() && mRightViewIndex < mAdapter.getCount()) {
       View child = mAdapter.getView(mRightViewIndex, mRemovedViewQueue.poll(), this);
-      addAndMeasureChild(child, -1);
-      rightEdge += child.getMeasuredWidth();
-         
-      if ( mRightViewIndex == mAdapter.getCount()-1) {
-        mMaxX = mCurrentX + rightEdge - getWidth();
+      if ( child != null ) {
+        addAndMeasureChild(child, -1);
+        rightEdge += child.getMeasuredWidth();
+           
+        if ( mRightViewIndex == mAdapter.getCount()-1) {
+          mMaxX = mCurrentX + rightEdge - getWidth();
+        }
+           
+        if ( mMaxX < 0 ) {
+          mMaxX = 0;
+        }
+        mRightViewIndex++;
+      } else {
+        TDLog.Error("Horizontal list view: fill right, null child. Size " + mAdapter.getCount() );
       }
-         
-      if ( mMaxX < 0 ) {
-        mMaxX = 0;
-      }
-      mRightViewIndex++;
     }
   }
  
@@ -260,10 +264,14 @@ public class HorizontalListView extends AdapterView<ListAdapter>
   {
     while(leftEdge + dx > 0 && mLeftViewIndex >= 0) {
       View child = mAdapter.getView(mLeftViewIndex, mRemovedViewQueue.poll(), this);
-      addAndMeasureChild(child, 0);
-      leftEdge -= child.getMeasuredWidth();
-      mLeftViewIndex--;
-      mDisplayOffset -= child.getMeasuredWidth();
+      if ( child != null ) {
+        addAndMeasureChild(child, 0);
+        leftEdge -= child.getMeasuredWidth();
+        mLeftViewIndex--;
+        mDisplayOffset -= child.getMeasuredWidth();
+      } else {
+        TDLog.Error("Horizontal list view: fill right, null child. Size " + mAdapter.getCount() );
+      }
     }
   }
 

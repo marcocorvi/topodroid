@@ -17,7 +17,7 @@ class NumShot
 {
   NumStation from;
   NumStation to;
-  // DBlock block;
+  DBlock firstBlock;
   ArrayList<DBlock> blocks;
   int mBranchDir; // branch direction
   int mDirection; // direction of the block (1 same, -1 opposite)
@@ -25,7 +25,7 @@ class NumShot
   NumBranch branch;
   boolean mUsed;  // whether the shot has been used in the station coords recomputation after loop-closure
   boolean mIgnoreExtend;
-  int mExtend;
+  // int mExtend;
   // float mLength;
   // float mBearing;
   // float mClino;
@@ -39,7 +39,9 @@ class NumShot
   // reset the average leg values
   void reset( float d, float b, float c ) { mAvgLeg.set( d, b, c ); }
 
-  DBlock getFirstBlock() { return blocks.get(0); }
+  DBlock getFirstBlock() { return firstBlock; /* blocks.get(0); */ }
+
+  float getReducedExtend() { return firstBlock.getReducedExtend(); }
 
   NumShot( NumStation f, NumStation t, DBlock blk, int dir, float anomaly, float decl )
   {
@@ -59,7 +61,8 @@ class NumShot
     mAvgLeg  = new AverageLeg( decl );
     mAvgLeg.set( blk );
     mAnomaly = anomaly;
-    mExtend  = blk.getExtend();
+    // mExtend  = blk.getExtend();
+    firstBlock = blk;
   }
 
   void addBlock( DBlock blk )
@@ -97,7 +100,7 @@ class NumShot
     float dv = l * TDMath.sind( c );
     float dh = l * TDMath.cosd( c );
     st.v = sf.v - dv; // v is downward
-    st.h = sf.h + mExtend * dh;
+    st.h = sf.h + firstBlock.getReducedExtend() * dh;
     // float dn = dh * TDMath.cos( (mBearing-mAnomaly) * TDMath.M_PI / 180 );
     // float de = dh * TDMath.sin( (mBearing-mAnomaly) * TDMath.M_PI / 180 );
     float dn = dh * TDMath.cosd( b - mAnomaly );

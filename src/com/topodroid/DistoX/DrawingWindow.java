@@ -1074,7 +1074,7 @@ public class DrawingWindow extends ItemDrawer
         NumStation st1 = sh.from;
         NumStation st2 = sh.to;
         if ( st1.show() && st2.show() ) {
-          addFixedLine( type, sh.getFirstBlock(), st1.e, st1.s, st2.e, st2.s, sh.mExtend, false, true );
+          addFixedLine( type, sh.getFirstBlock(), st1.e, st1.s, st2.e, st2.s, sh.getReducedExtend(), false, true );
                         // xoff, yoff, false, true );
         }
       }
@@ -1084,7 +1084,7 @@ public class DrawingWindow extends ItemDrawer
           if ( st.show() ) {
             DBlock blk = sp.getBlock();
             if ( ! blk.isNoPlan() ) {
-              addFixedLine( type, blk, st.e, st.s, sp.e, sp.s, sp.mExtend, true, true );
+              addFixedLine( type, blk, st.e, st.s, sp.e, sp.s, sp.getReducedExtend(), true, true );
                           // xoff, yoff, true, true );
             }
           }
@@ -1107,7 +1107,7 @@ public class DrawingWindow extends ItemDrawer
           NumStation st2 = sh.to;
 	  DBlock blk = sh.getFirstBlock();
           if ( blk != null && st1.mHasCoords && st2.mHasCoords && st1.show() && st2.show() ) {
-            addFixedLine( type, blk, st1.h, st1.v, st2.h, st2.v, sh.mExtend, false, true );
+            addFixedLine( type, blk, st1.h, st1.v, st2.h, st2.v, sh.getReducedExtend(), false, true );
                           // xoff, yoff, false, true );
           }
         }
@@ -1117,7 +1117,7 @@ public class DrawingWindow extends ItemDrawer
         if ( st.mHasCoords && st.show() ) {
           DBlock blk = sp.getBlock();
           if ( ! blk.isNoProfile() ) {
-            addFixedLine( type, blk, st.h, st.v, sp.h, sp.v, sp.mExtend, true, true );
+            addFixedLine( type, blk, st.h, st.v, sp.h, sp.v, sp.getReducedExtend(), true, true );
                         // xoff, yoff, true, true );
           }
         }
@@ -1139,8 +1139,8 @@ public class DrawingWindow extends ItemDrawer
         if ( st1.show() && st2.show() ) {
           h1 = st1.e * cosp + st1.s * sinp;
           h2 = st2.e * cosp + st2.s * sinp;
-          // addFixedLine( type, sh.getFirstBlock(), h1, (float)(st1.v), h2, (float)(st2.v), xoff, yoff, sh.mExtend, false, true );
-          addFixedLine( type, sh.getFirstBlock(), h1, st1.v, h2, st2.v, sh.mExtend, false, true );
+          // addFixedLine( type, sh.getFirstBlock(), h1, (float)(st1.v), h2, (float)(st2.v), xoff, yoff, sh.getReducedExtend(), false, true );
+          addFixedLine( type, sh.getFirstBlock(), h1, st1.v, h2, st2.v, sh.getReducedExtend(), false, true );
         }
       } 
       for ( NumSplay sp : splays ) {
@@ -1150,8 +1150,8 @@ public class DrawingWindow extends ItemDrawer
           if ( ! blk.isNoProfile() ) {
             h1 = st.e * cosp + st.s * sinp;
             h2 = sp.e * cosp + sp.s * sinp;
-            // addFixedLine( type, sp.getBlock(), h1, (float)(st.v), h2, (float)(sp.v), xoff, yoff, sp.mExtend, true, true );
-            addFixedLine( type, blk, h1, st.v, h2, sp.v, sp.mExtend, true, true );
+            // addFixedLine( type, sp.getBlock(), h1, (float)(st.v), h2, (float)(sp.v), xoff, yoff, sp.getReducedExtend(), true, true );
+            addFixedLine( type, blk, h1, st.v, h2, sp.v, sp.getReducedExtend(), true, true );
           }
         }
       }
@@ -2372,7 +2372,7 @@ public class DrawingWindow extends ItemDrawer
       if ( TDSetting.mDashSplay || PlotInfo.isProfile( mType ) ) {
         setSplayPaintClino( shot, blk ); // really necessary only if flag || mFlag is FLAG_COMMENTED
       } else {
-        setSplayPaintExtend( shot, blk, blk.getReducedExtend() ); // really necessary only if flag || mFlag is FLAG_COMMENTED
+        setSplayPaintExtend( shot, blk, blk.getReducedIntExtend() ); // really necessary only if flag || mFlag is FLAG_COMMENTED
       }
       mApp_mData.updateShotFlag( blk.mId, mSid, flag, true );
     }

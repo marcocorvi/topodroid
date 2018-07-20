@@ -18,7 +18,7 @@ class NumSplay extends NumSurveyPoint
   public NumStation from;
   private DBlock block;
   private float mDecl;
-  float mExtend;
+  private float mExtend;
 
   DBlock getBlock() { return block; }
 
@@ -34,4 +34,6 @@ class NumSplay extends NumSurveyPoint
     mDecl = decl;
     mExtend = extend;
   }
+
+  float getReducedExtend() { return mExtend; }
 }

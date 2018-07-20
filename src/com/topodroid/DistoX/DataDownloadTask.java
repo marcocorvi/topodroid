@@ -25,19 +25,34 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
   private static DataDownloadTask running = null;
   // private ILister mLister;
   private final ListerHandler mLister; // FIXME_LISTER
+  private final GMActivity mGMactivity;
 
-  DataDownloadTask( TopoDroidApp app, ListerHandler /* ILister */ lister ) // FIXME_LISTER
+  DataDownloadTask( TopoDroidApp app, ListerHandler /* ILister */ lister, GMActivity gm_activity ) // FIXME_LISTER
   {
     // TDLog.Error( "DataDownloadTask cstr" );
     // Log.v("DistoX", "data download task cstr");
     mApp = app;
     mLister = lister;
+    mGMactivity = gm_activity;
   }
 
 // -------------------------------------------------------------------
   @Override
   protected Integer doInBackground( String... statuses )
   {
+    if ( mGMactivity != null ) {
+      int algo = mGMactivity.getAlgo();
+      if ( algo == CalibInfo.ALGO_AUTO ) { 
+        algo = mApp.getCalibAlgoFromDevice();
+        if ( algo < CalibInfo.ALGO_AUTO ) {
+          // TDToast.make( this, R.string.device_algo_failed );
+          algo = CalibInfo.ALGO_LINEAR; 
+        }
+        mApp.updateCalibAlgo( algo );
+        mGMactivity.setAlgo( algo );
+      }
+    }
+
     if ( ! lock() ) return null;
     // long time = System.currentTimeMillis();
     return mApp.downloadDataBatch( mLister );

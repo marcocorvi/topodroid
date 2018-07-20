@@ -141,7 +141,7 @@ class DataDownloader
     if ( mApp.mDevice != null && mApp.mBTAdapter.isEnabled() ) {
       notifyConnectionStatus( true );
       // TDLog.Log( TDLog.LOG_COMM, "shot menu DOWNLOAD" );
-      new DataDownloadTask( mApp, mApp.mListerSet ).execute();
+      new DataDownloadTask( mApp, mApp.mListerSet, null ).execute();
     } else {
       mDownload = false;
       notifyConnectionStatus( false );

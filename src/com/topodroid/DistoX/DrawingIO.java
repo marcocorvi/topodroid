@@ -1217,7 +1217,7 @@ class DrawingIO
                   float d = blk.mLength;
                   float b = blk.mBearing;
                   float c = blk.mClino;
-                  long  e = blk.getReducedExtend();
+                  float e = blk.getReducedExtend();
                 }
               }
             }

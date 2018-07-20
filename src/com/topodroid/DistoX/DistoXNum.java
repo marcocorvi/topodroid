@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Stack;
 import java.util.Locale;
 
-// import android.util.Log;
+import android.util.Log;
 
 class DistoXNum
 {
@@ -678,7 +678,8 @@ class DistoXNum
     if ( ts.reversed != 1 ) {
       TDLog.Error( "making shot from reversed temp " + sf.name + " " + st.name );
     }
-    // Log.v("DistoX", "make shot " + sf.name + "-" + st.name + " blocks " + ts.blocks.size() );
+    DBlock blk = ts.getFirstBlock();
+    // Log.v("DistoX", "make shot " + sf.name + "-" + st.name + " blocks " + ts.blocks.size() + " E " + blk.getExtend() + " S " + blk.getStretch() );
     // NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), 1, anomaly, mDecl ); // FIXME DIRECTION
     NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), direction, anomaly, mDecl );
     ArrayList<DBlock> blks = ts.getBlocks();
@@ -933,10 +934,11 @@ class DistoXNum
           //     ( ( sf == null )? "null" : sf.name ) + " " + (( st == null )? "null" : st.name ) );
           // }
 
-          boolean has_coords = (DBlock.getExtend(ts.extend) <= 1);
+          int  iext = DBlock.getExtend( ts.extend );
+          boolean has_coords = (iext <= 1);
           float ext = DBlock.getReducedExtend( ts.extend, ts.stretch );
           if ( sf != null ) {
-            sf.addAzimuth( ts.b(), ext );
+            sf.addAzimuth( ts.b(), iext );
 
             if ( st != null ) { // loop-closure
               if ( /* TDSetting.mAutoStations || */ TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) { // do not close loop
@@ -946,7 +948,7 @@ class DistoXNum
                 NumStation st1 = new NumStation( ts.to, sf, ts.d(), bearing, ts.c(), ext, has_coords );
                 if ( ! mStations.addStation( st1 ) ) mClosureStations.add( st1 );
 
-                st1.addAzimuth( (ts.b()+180)%360, -ext );
+                st1.addAzimuth( (ts.b()+180)%360, -iext );
                 st1.mAnomaly = anomaly + sf.mAnomaly;
 	        // Log.v("DistoXX", "station " + st1.name + " anomaly " + st1.mAnomaly );
                 updateBBox( st1 );
@@ -962,8 +964,8 @@ class DistoXNum
                 addShotToStations( sh, sf, st );
               }
               // float length = ts.d();
-	      // if ( ext == 0 ) length = TDMath.sqrt( length*length - ts.h()*ts.h() );
-              addToStats( ts.duplicate, ts.surface, ts.d(), ((ext == 0)? Math.abs(ts.v()) : ts.d()), ts.h() );
+	      // if ( iext == 0 ) length = TDMath.sqrt( length*length - ts.h()*ts.h() );
+              addToStats( ts.duplicate, ts.surface, ts.d(), ((iext == 0)? Math.abs(ts.v()) : ts.d()), ts.h() );
 
               // do close loop also on duplicate shots
               // need the loop length to compute the fractional closure error
@@ -979,11 +981,11 @@ class DistoXNum
               st = new NumStation( ts.to, sf, ts.d(), bearing, ts.c(), ext, has_coords );
               if ( ! mStations.addStation( st ) ) mClosureStations.add( st );
 
-              st.addAzimuth( (ts.b()+180)%360, -ext );
+              st.addAzimuth( (ts.b()+180)%360, -iext );
               st.mAnomaly = anomaly + sf.mAnomaly;
 	      // Log.v("DistoXX", "station " + st.name + " anomaly " + st.mAnomaly );
               updateBBox( st );
-              addToStats( ts.duplicate, ts.surface, ts.d(), ((ext == 0)? Math.abs(ts.v()) : ts.d()), ts.h(), st.v );
+              addToStats( ts.duplicate, ts.surface, ts.d(), ((iext == 0)? Math.abs(ts.v()) : ts.d()), ts.h(), st.v );
 
               // if ( TDLog.LOG_DEBUG ) {
               //   Log.v( TDLog.TAG, "new station F->T id= " + ts.to + " from= " + sf.name + " anomaly " + anomaly + " d " + ts.d() ); 
@@ -999,12 +1001,12 @@ class DistoXNum
           else if ( st != null ) 
           { // sf == null: reversed shot only difference is '-' sign in new NumStation, and the new station is sf
             // if ( TDLog.LOG_DEBUG ) Log.v( TDLog.TAG, "reversed shot " + ts.from + " " + ts.to + " id " + ts.blocks.get(0).mId );
-            st.addAzimuth( (ts.b()+180)%360, -ext );
+            st.addAzimuth( (ts.b()+180)%360, -iext );
             float bearing = ts.b() - st.mAnomaly;
             sf = new NumStation( ts.from, st, - ts.d(), bearing, ts.c(), ext, has_coords );
             if ( ! mStations.addStation( sf ) ) mClosureStations.add( sf );
 
-            sf.addAzimuth( ts.b(), ext );
+            sf.addAzimuth( ts.b(), iext );
             sf.mAnomaly = anomaly + st.mAnomaly; // FIXME
 	    // Log.v("DistoXX", "station " + sf.name + " anomaly " + sf.mAnomaly );
             // if ( TDLog.LOG_DEBUG ) {

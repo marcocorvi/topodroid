@@ -158,11 +158,9 @@ class DBlock
 
   // int getExtend() { return ( mExtend < EXTEND_UNSET )? mExtend : mExtend - EXTEND_FVERT; }
   int getExtend() { return mExtend; }
-  float getReducedExtend() 
-  {
-    // int ret = ( mExtend < EXTEND_UNSET )? mExtend : mExtend - EXTEND_FVERT;
-    return ( mExtend < 2 )? mExtend + mStretch : 0.0f;
-  }
+  float getReducedExtend() { return ( mExtend < 2 )? mExtend + mStretch : 0.0f; }
+  int   getReducedIntExtend() { return ( mExtend < 2 )? mExtend : 0; }
+
   int getFullExtend() { return mExtend; }
   void setExtend( int ext, float stretch ) { mExtend = ext; mStretch = stretch; }
   boolean hasStretch( float stretch ) { return Math.abs( mStretch - stretch ) < 0.01f; }

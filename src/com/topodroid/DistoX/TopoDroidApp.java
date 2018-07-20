@@ -42,6 +42,7 @@ import java.util.ArrayList;
 // import android.widget.ArrayAdapter;
 
 // import android.os.Environment;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
@@ -67,6 +68,7 @@ import android.content.res.Configuration;
 import android.content.ActivityNotFoundException;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+// import android.content.FileProvider;
 
 // import android.provider.Settings.System;
 // import android.provider.Settings.SettingNotFoundException;
@@ -1853,14 +1855,24 @@ public class TopoDroidApp extends Application
     // Log.v("DistoX", "photo <" + filename + ">" );
     File file = new File( filename );
     if ( file.exists() ) {
+      // FIXME create a dialog like QCam that displays the JPEG file
+      //
       // Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("file://" + filename ) );
-      Intent intent = new Intent(Intent.ACTION_VIEW );
-      intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
-      intent.setDataAndType( Uri.fromFile( file ), "image/jpeg" );
-      try {
-        ctx.startActivity( intent );
-      } catch ( ActivityNotFoundException e ) {
-        // gracefully fail without saying anything
+      if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.N ) {
+        Intent intent = new Intent(Intent.ACTION_VIEW );
+        intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+        intent.setDataAndType( Uri.fromFile( file ), "image/jpeg" ); // pre Nougat
+        // } else {
+        //   URI apkURI = FileProvider.getUriForFile( ctx, ctx.getApplicationContext().getPackageName() + ".provider", file );
+        //   intent.setDataAndType( apkURI, "image/jpeg" );
+        //   intent.addFlags( Intent.FLAG_GRANT_READ_URI_PERMISSION );
+        try {
+          ctx.startActivity( intent );
+        } catch ( ActivityNotFoundException e ) {
+          // gracefully fail without saying anything
+        }
+      } else {
+        TDToast.make( ctx, "Photo display not yet implemented" );
       }
     } else {
       TDToast.make( ctx, "ERROR file not found: " + filename );

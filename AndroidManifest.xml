@@ -189,7 +189,16 @@
                <action android:name="android.bluetooth.device.action.PAIRING_REQUEST" /> 
                <action android:name="android.bluetooth.device.action.PAIRING_CANCEL" /> 
            </intent-filter>
-        </receiver -->
+	</receiver -->
+
+        <!-- provider android:name="FileProvider"
+		  android:authorities="${application}.provider"
+		  android:exported="false"
+		  android:grantUriPermissions="true">
+		  <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
+			     android:resources="@xml/provider_paths"
+			     />
+	</provider -->
 
 
     <!-- service

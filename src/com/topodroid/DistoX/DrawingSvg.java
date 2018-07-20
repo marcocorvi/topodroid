@@ -191,7 +191,7 @@ class DrawingSvg
             //     float x = xoff + mDrawingUtil.toSceneX( f.h, f.v );
             //     float y = yoff + mDrawingUtil.toSceneY( f.h, f.v );
             //     float dv = - blk.mLength * (float)Math.sin( blk.mClino * TDMath.DEG2RAD )*SCALE_FIX;
-            //     int ext = blk.getReducedExtend();
+            //     float ext = blk.getReducedExtend();
             //     pw41.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x+dh*ext, (y+dv) );
             //   }
             // // }

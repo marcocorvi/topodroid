@@ -1865,8 +1865,7 @@ public class SketchWindow extends ItemDrawer
         //      if there is an empty shot assign it
         mActivity.setTitleColor( TDColor.CONNECTED );
         ListerHandler handler = new ListerHandler( this ); // FIXME_LISTER
-        new DataDownloadTask( mApp, handler ).execute();
-        // new DataDownloadTask( mApp, this ).execute();
+        new DataDownloadTask( mApp, handler, null ).execute();
       } else {
         TDToast.make( mActivity, R.string.device_none );
       }

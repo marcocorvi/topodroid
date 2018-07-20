@@ -174,6 +174,11 @@ public class GMActivity extends Activity
 
   // -------------------------------------------------------------
 
+  int getAlgo() { return mAlgo; }
+
+  void setAlgo( int algo ) { mAlgo = algo; }
+
+
   /** called by CalibComputer Task
    * @return nr of iterations (neg. error)
    * note run on an AsyncTask
@@ -864,17 +869,8 @@ public class GMActivity extends Activity
       } else {
         enableWrite( false );
         setTitleColor( TDColor.CONNECTED );
-        if ( mAlgo == CalibInfo.ALGO_AUTO ) { 
-          mAlgo = mApp.getCalibAlgoFromDevice();
-          if ( mAlgo < CalibInfo.ALGO_AUTO ) {
-            TDToast.make( this, R.string.device_algo_failed );
-            mAlgo = CalibInfo.ALGO_LINEAR; 
-          }
-          mApp.updateCalibAlgo( mAlgo );
-        }
         ListerHandler handler = new ListerHandler( this ); // FIXME_LISTER
-        new DataDownloadTask( mApp, handler ).execute();
-        // new DataDownloadTask( mApp, this ).execute();
+        new DataDownloadTask( mApp, handler, this ).execute();
         mButton1[ BTN_DOWNLOAD ].setBackgroundDrawable( mBMdownload_on );
         enableButtons( false );
       }
