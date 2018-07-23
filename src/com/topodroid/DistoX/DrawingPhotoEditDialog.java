@@ -50,10 +50,18 @@ class DrawingPhotoEditDialog extends MyDialog
   // private Button   mButtonOK;
   // private Button   mButtonDelete;
   // private Button   mButtonCancel;
+  private TDImage mTdImage;
+
   private float mAzimuth = 0;
   private float mClino   = 0;
   private int mOrientation = 0;
   private String mDate = "";
+
+  private int mImageWidth;
+  private int mImageHeight;
+  private View     mContentView;
+  private boolean  mOnView2;
+  private ImageView mView2;
 
   /**
    * @param context   context
@@ -65,28 +73,9 @@ class DrawingPhotoEditDialog extends MyDialog
     mApp    = app;
     mPhoto  = photo;
     mFilename = TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString(mPhoto.mId) );
-    TDLog.Log(TDLog.LOG_PHOTO, "DrawingPhotoEditDialog " + mFilename);
-
-    mAzimuth = mClino = 0;
-    try {
-      ExifInterface exif = new ExifInterface( mFilename );
-      // mAzimuth = exif.getAttribute( "GPSImgDirection" );
-      mOrientation = exif.getAttributeInt( ExifInterface.TAG_ORIENTATION, 0 );
-      // Log.v("DistoX", "Photo edit orientation " + mOrientation );
-      String b = exif.getAttribute( ExifInterface.TAG_GPS_LONGITUDE );
-      String c = exif.getAttribute( ExifInterface.TAG_GPS_LATITUDE );
-      mDate = exif.getAttribute( ExifInterface.TAG_DATETIME );
-      if ( mDate == null ) mDate = "";
-      if ( b != null && c != null ) {
-        int k = b.indexOf('/');
-        mAzimuth = Integer.parseInt( b.substring(0,k) ) / 100.0f;
-        k = c.indexOf('/');
-        mClino = Integer.parseInt( c.substring(0,k) ) / 100.0f;
-        // Log.v("DistoX", "Long <" + bearing + "> Lat <" + clino + ">" );
-      }
-    } catch ( IOException e ) {
-      TDLog.Error("failed exif interface " + mFilename );
-    }
+    // TDLog.Log(TDLog.LOG_PHOTO, "DrawingPhotoEditDialog " + mFilename);
+    
+    mTdImage = new TDImage( mFilename );
   }
 
 // -------------------------------------------------------------------
@@ -97,54 +86,30 @@ class DrawingPhotoEditDialog extends MyDialog
     // TDLog.Log( TDLog.LOG_PHOTO, "onCreate" );
     initLayout( R.layout.drawing_photo_edit_dialog, R.string.title_photo_comment );
 
-    ImageView iVimage      = (ImageView) findViewById( R.id.photo_image );
-    mETcomment    = (EditText) findViewById( R.id.photo_comment );
-    Button buttonOK     = (Button) findViewById( R.id.photo_ok );
+    ImageView iVimage = (ImageView) findViewById( R.id.photo_image );
+    mETcomment        = (EditText) findViewById( R.id.photo_comment );
+    Button buttonOK   = (Button) findViewById( R.id.photo_ok );
     // mButtonDelete = (Button) findViewById( R.id.photo_delete );
     // mButtonCancel = (Button) findViewById( R.id.photo_cancel );
 
     ((TextView) findViewById( R.id.photo_azimuth )).setText(
-       String.format( mContext.getResources().getString( R.string.photo_azimuth_clino ), mAzimuth, mClino ) );
-    ((TextView) findViewById( R.id.photo_date )).setText( mDate );
+       String.format( mContext.getResources().getString( R.string.photo_azimuth_clino ), mTdImage.azimuth(), mTdImage.clino() ) );
+    ((TextView) findViewById( R.id.photo_date )).setText( mTdImage.date() );
 
     if ( mPhoto.mPointText != null ) {
       mETcomment.setText( mPhoto.mPointText );
     }
-    try {
-      // public String getSurveyJpgFile( String name )
-      // public String name;    // photo filename without extension ".jpg" and survey prefix dir
-      // String filename = TopoDroidApp.APP_FOTO_PATH + mPhoto.name + ".jpg";
-      BitmapFactory.Options bfo = new BitmapFactory.Options();
-      bfo.inJustDecodeBounds = true;
-      BitmapFactory.decodeFile( mFilename, bfo );
-      int required_size = TDSetting.mThumbSize;
-      int scale = 1;
-      while ( bfo.outWidth/scale/2 > required_size || bfo.outHeight/scale/2 > required_size ) {
-        scale *= 2;
-      }
-      bfo.inJustDecodeBounds = false;
-      bfo.inSampleSize = scale;
-      Bitmap image = BitmapFactory.decodeFile( mFilename, bfo );
-      if ( image != null ) {
-        int w2 = image.getWidth() / 8;
-        int h2 = image.getHeight() / 8;
-        Bitmap image2 = Bitmap.createScaledBitmap( image, w2, h2, true );
-        if ( image2 != null ) {
-          MyBearingAndClino.applyOrientation( iVimage, image2, mOrientation );
-          // mIVimage.setHeight( h2 );
-          // mIVimage.setWidth( w2 );
-          iVimage.setOnClickListener( this );
-        } else {
-          iVimage.setVisibility( View.GONE );
-        }
-      }
-    } catch ( OutOfMemoryError e ) {
-      TDToast.make( mParent, R.string.null_bitmap );
+    if ( mTdImage.fillImageView( iVimage, mTdImage.width()/8 ) ) {
+      iVimage.setOnClickListener( this );
+    } else {
+      iVimage.setVisibility( View.GONE );
     }
 
     buttonOK.setOnClickListener( this );
     // mButtonDelete.setOnClickListener( this );
     // mButtonCancel.setOnClickListener( this );
+
+    mContentView = (View) findViewById( R.id.content_view );
   }
 
   @Override
@@ -163,8 +128,28 @@ class DrawingPhotoEditDialog extends MyDialog
       //   mParent.dropPhoto( mPhoto );
       //   break;
       case R.id.photo_image:
-        TopoDroidApp.viewPhoto( mContext, mFilename );
+        // TopoDroidApp.viewPhoto( mContext, mFilename );
+	if ( mTdImage != null ) {
+	  if ( mView2 == null ) {
+            mView2 = new ImageView( mContext );
+  	  }
+	  if ( mTdImage.fillImageView( mView2 ) ) {
+	    setContentView( mView2 );
+	    mOnView2 = true;
+	  }
+	}
         return;
+    }
+    dismiss();
+  }
+
+  @Override
+  public void onBackPressed()
+  {
+    if ( mOnView2 ) {
+      mOnView2 = false;
+      setContentView( mContentView );
+      return;
     }
     dismiss();
   }

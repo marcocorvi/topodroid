@@ -140,7 +140,7 @@ class SetupTextSizeDialog extends MyDialog
   {
     mSize = a;
     if ( mSize < 10 ) { mSize = 10; edit_text = true; }
-    else if ( mSize >= 128 ) { mSize = 128; edit_text = true; }
+    else if ( mSize > 128 ) { mSize = 128; edit_text = true; }
     mETsizeChanged = ! edit_text;
     // mSeekBar.setProgress( mSize );
     if ( edit_text ) updateEditSize();

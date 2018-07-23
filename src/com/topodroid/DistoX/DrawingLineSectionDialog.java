@@ -28,10 +28,6 @@ import android.view.View;
 // import android.view.ViewGroup.LayoutParams;
 
 import android.widget.ImageView;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
-import android.media.ExifInterface;
 
 // import android.util.Log;
 
@@ -52,7 +48,10 @@ class DrawingLineSectionDialog extends MyDialog
   private String  mNick;
   private float   mAzimuth;
   private float   mClino;
-  private int mOrientation = 0;
+
+  private View     mContentView;
+  private boolean  mOnView2;
+  private ImageView mView2;
 
   // private Button   mBtnFoto;
   // private Button   mBtnDraw;
@@ -68,13 +67,15 @@ class DrawingLineSectionDialog extends MyDialog
   private ImageView mIVimage;   // photo image
   private boolean mHSection;
   private boolean mExists;
-  private String  mFilename;
   private boolean hasPhoto;
   private float mTT; // intersection abscissa
+
+  private TDImage mTdImage = null;
+
   
   DrawingLineSectionDialog( Context context,
-                                   DrawingWindow parent, TopoDroidApp app, boolean h_section, boolean exists, String id,
-                                   DrawingLinePath line, String from, String to, float azimuth, float clino, float tt0 )
+                            DrawingWindow parent, TopoDroidApp app, boolean h_section, boolean exists, String id,
+                            DrawingLinePath line, String from, String to, float azimuth, float clino, float tt0 )
   {
     super( context, R.string.DrawingLineSectionDialog );
     mParent = parent;
@@ -88,7 +89,6 @@ class DrawingLineSectionDialog extends MyDialog
     mAzimuth = azimuth;
     mClino = clino;
     mTT = tt0;
-    mFilename = null;
     hasPhoto = FeatureChecker.checkCamera( context );
 
     // read section id from the line options
@@ -165,59 +165,19 @@ class DrawingLineSectionDialog extends MyDialog
     mBtnDraw.setOnClickListener( this );
 
     if ( mPlotInfo != null ) { // check the photo
-      mFilename = TDPath.getSurveyJpgFile( mApp.mySurvey, mPlotInfo.name );
-      File imagefile = new File( mFilename );
+      String filename = TDPath.getSurveyJpgFile( mApp.mySurvey, mPlotInfo.name );
+      File imagefile = new File( filename );
       if ( imagefile.exists() ) {
-        try {
-          ExifInterface exif = new ExifInterface( mFilename );
-          mOrientation = exif.getAttributeInt( ExifInterface.TAG_ORIENTATION, 0 );
-          float bearing = 0;
-          float clino = 0;
-          // mAzimuth = exif.getAttribute( "GPSImgDirection" );
-          String b = exif.getAttribute( ExifInterface.TAG_GPS_LONGITUDE );
-          if ( b != null ) {
-            int k = b.indexOf('/');
-            if ( k > 0 ) bearing = Integer.parseInt( b.substring(0,k) ) / 100.0f;
-          }
-          String c = exif.getAttribute( ExifInterface.TAG_GPS_LATITUDE );
-          if ( c != null ) {
-            int k = c.indexOf('/');
-            if ( k > 0 ) clino = Integer.parseInt( c.substring(0,k) ) / 100.0f;
-          }
-          // Log.v("DistoX", "Long <" + bearing + "> Lat <" + clino + ">" );
-          tv_azimuth.setText(
-            String.format( mContext.getResources().getString( R.string.photo_azimuth_clino ), bearing, clino ) );
-          String date = exif.getAttribute( ExifInterface.TAG_DATETIME );
-          tv_date.setText( (date != null)? date : "" );
-        } catch ( IOException e ) {
-          // should not happen
-        }
+	mTdImage = new TDImage( filename );
+        tv_azimuth.setText( String.format( mContext.getResources().getString( R.string.photo_azimuth_clino ), mTdImage.azimuth(), mTdImage.clino() ) );
+        String date = mTdImage.date();
+        tv_date.setText( (date != null)? date : "" );
 
-        BitmapFactory.Options bfo = new BitmapFactory.Options();
-        bfo.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile( mFilename, bfo );
-        int required_size = TDSetting.mThumbSize;
-        int scale = 1;
-        while ( bfo.outWidth/scale/2 > required_size || bfo.outHeight/scale/2 > required_size ) {
-          scale *= 2;
+	if ( mTdImage.fillImageView( mIVimage, mTdImage.width()/8 ) ) {
+          mIVimage.setOnClickListener( this );
+        } else {
+          mIVimage.setVisibility( View.GONE );
         }
-        bfo.inJustDecodeBounds = false;
-        bfo.inSampleSize = scale;
-        Bitmap image = BitmapFactory.decodeFile( mFilename, bfo );
-        if ( image != null ) {
-          int w2 = image.getWidth() / 8;
-          int h2 = image.getHeight() / 8;
-          Bitmap image2 = Bitmap.createScaledBitmap( image, w2, h2, true );
-          if ( image2 != null ) {
-            MyBearingAndClino.applyOrientation( mIVimage, image2, mOrientation );
-            // mIVimage.setHeight( h2 );
-            // mIVimage.setWidth( w2 );
-            mIVimage.setOnClickListener( this );
-          } else {
-            mIVimage.setVisibility( View.GONE );
-          }
-        }
-
         // mBtnFoto.setBackgroundResource( R.drawable.ic_camera_no );
       } else {
         tv_azimuth.setVisibility( View.GONE );
@@ -241,6 +201,8 @@ class DrawingLineSectionDialog extends MyDialog
     }
     // mBtnCancel = (Button) findViewById( R.id.button_cancel );
     // mBtnCancel.setOnClickListener( this );
+
+    mContentView = (View) findViewById( R.id.content_view );
   }
 
   public void onClick(View v) 
@@ -248,7 +210,16 @@ class DrawingLineSectionDialog extends MyDialog
     // TDLog.Log( TDLog.LOG_INPUT, "Drawing Line Section Dialog onClick() " + b.getText().toString() );
 
     if ( v.getId() == R.id.line_image ) {
-      TopoDroidApp.viewPhoto( mContext, mFilename );
+      // TopoDroidApp.viewPhoto( mContext, mTdImage.filname() );
+      if ( mTdImage != null ) {
+        if ( mView2 == null ) {
+          mView2 = new ImageView( mContext );
+        }
+        mTdImage.fillImageView( mView2 );
+        setContentView( mView2 );
+	mOnView2 = true;
+      }
+      return;
     } else {
       long type = mHSection ? PlotInfo.PLOT_H_SECTION : PlotInfo.PLOT_SECTION;
       mNick = ( mETnick.getText() != null )? mETnick.getText().toString() : "";
@@ -279,7 +250,7 @@ class DrawingLineSectionDialog extends MyDialog
     //     mParent.updatePlotNick( mPlotInfo, mNick );
     //     break;
     //   case R.id.line_image:
-    //     TopoDroidApp.viewPhoto( mContext, mFilename );
+    //     TopoDroidApp.viewPhoto( mContext, mTdImage.filname() );
     //     break;
     //   default: // R.id.button_cancel
     //     /* nothing */
@@ -289,7 +260,12 @@ class DrawingLineSectionDialog extends MyDialog
 
   @Override
   public void onBackPressed()
-  {
+  {    
+    if ( mOnView2 ) {
+      mOnView2 = false;
+      setContentView( mContentView );
+      return;
+    }
     if ( ! mExists ) {
       // if pressed BACK and the section did not exist, tell the parent to delete the "section" line
       mParent.deleteLine( mLine );
