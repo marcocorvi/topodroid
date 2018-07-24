@@ -1306,6 +1306,7 @@
   <string name="pref_log_err">Erreurs</string>
   <string name="pref_log_fixed">Points fixes</string>
   <string name="pref_log_input">Entrées utilisateur</string>
+  <!-- TODO string name="pref_log_io">Sketch i/o</string -->
   <string name="pref_log_loc">Géocalisation</string>
   <string name="pref_log_num">Réduction données</string>
   <string name="pref_log_path">Chemins de fichiers</string>

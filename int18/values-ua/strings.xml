@@ -1310,6 +1310,7 @@
   <string name="pref_log_err">Помилка</string>
   <string name="pref_log_fixed">Точки с GPS координатами</string>
   <string name="pref_log_input">Вхідні дані</string>
+  <!-- TODO string name="pref_log_io">Sketch i/o</string -->
   <string name="pref_log_loc">Місцеположення</string>
   <string name="pref_log_num">Стиснення даних</string>
   <!-- TODO string name="pref_log_path">File paths</string -->

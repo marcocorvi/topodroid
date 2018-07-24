@@ -1321,6 +1321,7 @@
   <string name="pref_log_err">Eroare</string>
   <string name="pref_log_fixed">Puncte GPS points</string>
   <string name="pref_log_input">Introducere utilizator</string>
+  <!-- TODO string name="pref_log_io">Sketch i/o</string -->
   <string name="pref_log_loc">Locație</string>
   <string name="pref_log_num">Reducere/simpl. date</string>
   <string name="pref_log_path">Căi fișiere</string>

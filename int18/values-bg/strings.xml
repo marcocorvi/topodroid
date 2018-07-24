@@ -1308,6 +1308,7 @@
   <string name="pref_log_err">Грешки</string>
   <string name="pref_log_fixed">GPS точки</string>
   <string name="pref_log_input">Входни данни</string>
+  <!-- TODO string name="pref_log_io">Sketch i/o</string -->
   <string name="pref_log_loc">Местоположение</string>
   <string name="pref_log_num">Редуциране на данни</string>
   <string name="pref_log_path">Пътища към файловете</string>

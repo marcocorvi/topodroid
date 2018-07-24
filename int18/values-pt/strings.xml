@@ -1305,6 +1305,7 @@
   <string name="pref_log_err">Erro</string>
   <string name="pref_log_fixed">Pontos GPS</string>
   <string name="pref_log_input">Entrada pelo usuário</string>
+  <!-- TODO string name="pref_log_io">Sketch i/o</string -->
   <string name="pref_log_loc">Localização</string>
   <string name="pref_log_num">Redução de dados</string>
   <string name="pref_log_path">Arquivos</string>

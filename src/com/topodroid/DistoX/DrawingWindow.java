@@ -900,7 +900,7 @@ public class DrawingWindow extends ItemDrawer
 
   void switchExistingPlot( String plot_name, long plot_type ) // context of current SID
   {
-    doSaveTdr();
+    doSaveTdr( );
   }
 
   // called by doPause 
@@ -969,9 +969,9 @@ public class DrawingWindow extends ItemDrawer
     int azimuth = 0;
     long tt     = type;
     if ( type == -1 ) {
+      DrawingCommandManager manager2 = mDrawingSurface.getManager( mPlot2.type );
       try { 
-        (new SavePlotFileTask( mActivity, this, saveHandler, mApp, mDrawingSurface, mFullName2, mPlot2.type,
-                              (int)mPlot2.azimuth, suffix, rotate )).execute();
+        (new SavePlotFileTask( mActivity, this, saveHandler, mApp, manager2, mFullName2, mPlot2.type, (int)mPlot2.azimuth, suffix, rotate )).execute();
       } catch ( RejectedExecutionException e ) { 
         TDLog.Error("rejected exec save plot " + mFullName2 );
         // Log.v("DistoX", "rejected exec save plot " + mFullName2 );
@@ -986,9 +986,9 @@ public class DrawingWindow extends ItemDrawer
     } else {
       name = mFullName3;
     }
+    DrawingCommandManager manager1 = mDrawingSurface.getManager( tt );
     try { 
-      (new SavePlotFileTask( mActivity, this, saveHandler, mApp, mDrawingSurface, name, tt, azimuth, suffix, rotate )
-      ).execute();
+      (new SavePlotFileTask( mActivity, this, saveHandler, mApp, manager1, name, tt, azimuth, suffix, rotate )).execute();
     } catch ( RejectedExecutionException e ) { 
       TDLog.Error("rejected exec save plot " + name );
       // Log.v("DistoX", "rejected exec save plot " + name );
@@ -1782,14 +1782,23 @@ public class DrawingWindow extends ItemDrawer
   // ==============================================================
 
   // called by PlotListDialog
-  void switchNameAndType( String name, long t ) // SWITCH
+  void switchNameAndType( String name, long tt ) // SWITCH
   {
+    PlotInfo p1 = mApp_mData.getPlotInfo( mApp.mSID, name+"p" );
+    if ( mPid1 == p1.id ) {
+      if ( tt != mType ) { // switch plot type
+        startSaveTdrTask( mType, PlotSave.TOGGLE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP ); 
+        // mDrawingSurface.clearDrawing();
+        switchPlotType();
+      }
+      return;
+    }
+    startSaveTdrTask( mType, PlotSave.SAVE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP );
     // if necessary save default export
     //
     mZoom     = TopoDroidApp.mScaleFactor;    // canvas zoom
     mOffset.x = 0;
     mOffset.y = 0;
-    PlotInfo p1 = mApp_mData.getPlotInfo( mApp.mSID, name+"p" );
     if ( p1 != null ) {
       // PlotInfo plot2 =  mApp_mData.getPlotInfo( mApp.mSID, name+"s" );
       mName1 = name+"p";
@@ -1797,7 +1806,7 @@ public class DrawingWindow extends ItemDrawer
       mFullName1 = mApp.mySurvey + "-" + mName1;
       mFullName2 = mApp.mySurvey + "-" + mName2;
       mFullName3 = null;
-      mType      = t;
+      mType      = tt;
       mLandscape = p1.isLandscape();
       // mDrawingUtil = mLandscape ? (new DrawingUtilLandscape()) : ( new DrawingUtilPortrait());
       mDrawingUtil = new DrawingUtilPortrait();
@@ -4679,23 +4688,33 @@ public class DrawingWindow extends ItemDrawer
     private void savePng( boolean toast )
     {
       if ( PlotInfo.isAnySection( mType ) ) { 
-        doSavePng( mType, mFullName3, toast );
+	String fullname = mFullName3;
+        DrawingCommandManager manager = mDrawingSurface.getManager( mType );
+        doSavePng( manager, mType, fullname, toast );
       } else {
-        doSavePng( (int)PlotInfo.PLOT_PLAN, mFullName1, toast );
+	String fullname1 = mFullName1;
+	String fullname2 = mFullName2;
         // FIXME OK PROFILE (to check)
-        doSavePng( (int)PlotInfo.PLOT_EXTENDED, mFullName2, toast );
+        DrawingCommandManager manager1 = mDrawingSurface.getManager( PlotInfo.PLOT_PLAN );
+        DrawingCommandManager manager2 = mDrawingSurface.getManager( PlotInfo.PLOT_EXTENDED );
+        doSavePng( manager1, (int)PlotInfo.PLOT_PLAN, fullname1, toast );
+        doSavePng( manager2, (int)PlotInfo.PLOT_EXTENDED, fullname2, toast );
       }
     }
 
-    private void doSavePng( long type, final String filename, boolean toast )
+    private void doSavePng( DrawingCommandManager manager, long type, final String filename, boolean toast )
     {
-      Bitmap bitmap = mDrawingSurface.getBitmap( type );
-      if ( bitmap != null ) {
-        float scale = mDrawingSurface.getBitmapScale();
-        new ExportBitmapToFile( mActivity, bitmap, scale, filename, toast ).execute();
-      } else if ( toast ) {
-        TDToast.make( mActivity, R.string.null_bitmap );
+      if ( manager == null ) {
+	if ( toast ) TDToast.make( mActivity, R.string.null_bitmap );
+	return;
       }
+      Bitmap bitmap = manager.getBitmap( );
+      if ( bitmap == null ) {
+        if ( toast ) TDToast.make( mActivity, R.string.null_bitmap );
+	return;
+      }
+      float scale = manager.getBitmapScale();
+      new ExportBitmapToFile( mActivity, bitmap, scale, filename, toast ).execute();
     }
 
     // used by SavePlotFileTask
@@ -4710,14 +4729,20 @@ public class DrawingWindow extends ItemDrawer
     private void saveWithExt( String ext, boolean toast )
     {
       if ( PlotInfo.isAnySection( mType ) ) { 
+	DrawingCommandManager manager = mDrawingSurface.getManager( mType );
+	String fullname = mFullName3;
         if ( "csx".equals( ext ) ) {
-          doSavePng( mType, mFullName3, toast );
+          doSavePng( manager, mType, fullname, toast );
         } else {
-          doSaveWithExt( mType, mFullName3, ext, toast );
+          doSaveWithExt( manager, mType, fullname, ext, toast );
         }
       } else {
-        doSaveWithExt( mPlot1.type, mFullName1, ext, toast );
-        doSaveWithExt( mPlot2.type, mFullName2, ext, toast );
+	DrawingCommandManager manager1 = mDrawingSurface.getManager( mPlot1.type );
+	DrawingCommandManager manager2 = mDrawingSurface.getManager( mPlot2.type );
+	String fullname1 = mFullName1;
+	String fullname2 = mFullName2;
+        doSaveWithExt( manager1, mPlot1.type, fullname1, ext, toast );
+        doSaveWithExt( manager2, mPlot2.type, fullname2, ext, toast );
       }
     }
 
@@ -4725,16 +4750,10 @@ public class DrawingWindow extends ItemDrawer
     // ext can be dxf, svg
     // FIXME OK PROFILE
     // used by SavePlotFileTask
-    void doSaveWithExt( long type, final String filename, final String ext, boolean toast )
+    void doSaveWithExt( DrawingCommandManager manager, long type, final String filename, final String ext, boolean toast )
     {
       // Log.v("DistoX", "save with ext: " + filename + " ext " + ext );
-      if ( PlotInfo.isProfile( type ) ) {
-        new ExportPlotToFile( mActivity, mDrawingSurface.mCommandManager2, mDrawingUtil, mNum, type, filename, ext, toast ).execute();
-      } else if ( type == PlotInfo.PLOT_PLAN ) {
-        new ExportPlotToFile( mActivity, mDrawingSurface.mCommandManager1, mDrawingUtil, mNum, type, filename, ext, toast ).execute();
-      } else {
-        new ExportPlotToFile( mActivity, mDrawingSurface.mCommandManager3, mDrawingUtil, mNum, type, filename, ext, toast ).execute();
-      }
+      new ExportPlotToFile( mActivity, manager, mDrawingUtil, mNum, type, filename, ext, toast ).execute();
     }
 
     // private rotateBackups( String filename )
@@ -4779,9 +4798,12 @@ public class DrawingWindow extends ItemDrawer
         }
       }
     };
-    try { 
-      (new SavePlotFileTask( mActivity, this, th2Handler, mApp, mDrawingSurface, name, mType, azimuth, suffix, 0 )).execute();
-    } catch ( RejectedExecutionException e ) { }
+    DrawingCommandManager manager = mDrawingSurface.getManager( mType );
+    if ( manager != null )  {
+      try { 
+        (new SavePlotFileTask( mActivity, this, th2Handler, mApp, manager, name, mType, azimuth, suffix, 0 )).execute();
+      } catch ( RejectedExecutionException e ) { }
+    }
   }
 
   
@@ -5192,7 +5214,7 @@ public class DrawingWindow extends ItemDrawer
     } else {
       mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null, false );
       mDrawingSurface.modeloadDataStream( tdr, th2, null );
-      DrawingSurface.addManagerToCache( mFullName2 );
+      // DrawingSurface.addManagerToCache( mFullName2 ); // sections are not cached
       setPlotType3( );
       mDrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
       makeSectionReferences( mApp_mData.selectAllShots( mSid, TDStatus.NORMAL ), -1, 0 );

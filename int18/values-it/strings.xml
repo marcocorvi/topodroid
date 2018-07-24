@@ -1312,6 +1312,7 @@
   <string name="pref_log_err">Errori</string>
   <string name="pref_log_fixed">Punti GPS</string>
   <string name="pref_log_input">Input utente</string>
+  <!-- TODO string name="pref_log_io">Sketch i/o</string -->
   <string name="pref_log_loc">Posizioni GPS</string>
   <string name="pref_log_num">Riduzione poligonale</string>
   <string name="pref_log_path">Percorso file</string>

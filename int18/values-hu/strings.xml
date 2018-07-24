@@ -1305,6 +1305,7 @@
   <string name="pref_log_err">Hiba</string>
   <string name="pref_log_fixed">GPS pontok</string>
   <string name="pref_log_input">Felhasználói adatbevitel</string>
+  <!-- TODO string name="pref_log_io">Sketch i/o</string -->
   <string name="pref_log_loc">Helyszín</string>
   <string name="pref_log_num">Adat redukció</string>
   <!-- TODO string name="pref_log_path">File paths</string -->

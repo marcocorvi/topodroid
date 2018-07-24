@@ -1309,6 +1309,7 @@
   <string name="pref_log_err">错误</string>
   <string name="pref_log_fixed">GPS 点</string>
   <string name="pref_log_input">用户输入</string>
+  <!-- TODO string name="pref_log_io">Sketch i/o</string -->
   <string name="pref_log_loc">位置坐标</string>
   <string name="pref_log_num">数据压缩</string>
   <!-- TODO string name="pref_log_path">File paths</string -->

@@ -80,7 +80,7 @@ class DrawingIO
     // Log.v("DistoX", "drawing I/O load therion " + filename );
     synchronized( TDPath.mTherionLock ) {
       try {
-        // TDLog.Log( TDLog.LOG_IO, "load plot from Therion file " + filename );
+        TDLog.Log( TDLog.LOG_IO, "load plot from Therion file " + filename );
         FileReader fr = new FileReader( filename );
         BufferedReader br = new BufferedReader( fr );
         String line = null;
@@ -490,14 +490,13 @@ class DrawingIO
   // which calls the full method exportTherion with the list of sketch items
   //
   // FIXME DataHelper and SID are necessary to export splays by the station
-  static void exportTherion( // DataHelper dh, long sid,
-                       DrawingSurface surface, int type, File file, String fullname, String projname, int proj_dir )
+  static void exportTherion( DrawingCommandManager manager, int type, File file, String fullname, String projname, int proj_dir )
   {
-    // TDLog.Log( TDLog.LOG_IO, "export Therion file " + file.getPath() );
+    TDLog.Log( TDLog.LOG_IO, "export Therion file " + file.getPath() );
     try {
       FileWriter fw = new FileWriter( file );
       BufferedWriter bw = new BufferedWriter( fw );
-      surface.exportTherion( /* dh, sid, */ type, bw, fullname, projname, proj_dir );
+      manager.exportTherion( type, bw, fullname, projname, proj_dir );
       bw.flush();
       bw.close();
     } catch ( IOException e ) {
@@ -505,7 +504,7 @@ class DrawingIO
     }
   }
 
-  static void exportDataStream( DrawingSurface surface, int type, File file, String fullname, int proj_dir )
+  static void exportDataStream( DrawingCommandManager manager, int type, File file, String fullname, int proj_dir )
   {
     try {
       FileOutputStream fos = new FileOutputStream( file );
@@ -513,7 +512,7 @@ class DrawingIO
       // ByteArrayOutputStream bos = new ByteArrayOutputStream( 4096 );
       BufferedOutputStream bfos = new BufferedOutputStream( fos );
       DataOutputStream dos = new DataOutputStream( bfos );
-      surface.exportDataStream( type, dos, fullname, proj_dir );
+      manager.exportDataStream( type, dos, fullname, proj_dir );
       dos.close();
 
       // CACHE add filename/bos.toByteArray to cache
@@ -798,7 +797,7 @@ class DrawingIO
         // CACHE check if filename is in the cache: if so use the cache byte array
         // ByteArrayOutputStream bos = mTdrCache.get( file.getName() );
         // if ( bos == null ) {
-          // TDLog.Log( TDLog.LOG_IO, "load outline tdr file " + filename );
+          TDLog.Log( TDLog.LOG_IO, "load outline tdr file " + filename );
           fis = new FileInputStream( filename );
           BufferedInputStream bfis = new BufferedInputStream( fis );
           dis = new DataInputStream( bfis );
@@ -1093,8 +1092,7 @@ class DrawingIO
   }
 
   // FIXME DataHelper and SID are necessary to export splays by the station
-  static void exportTherion( // DataHelper dh, long sid,
-                      int type, BufferedWriter out, String scrap_name, String proj_name, int project_dir,
+  static void exportTherion( int type, BufferedWriter out, String scrap_name, String proj_name, int project_dir,
         RectF bbox,
         DrawingPath north,
         final List<ICanvasCommand> cstack,
@@ -1261,7 +1259,7 @@ class DrawingIO
     // synchronized( TDPath.mTherionLock ) 
     {
       try {
-        // TDLog.Log( TDLog.LOG_IO, "tdr to Therion. file " + file.getPath() );
+        TDLog.Log( TDLog.LOG_IO, "tdr to Therion. file " + file.getPath() );
         FileInputStream fis = new FileInputStream( file );
         DataInputStream dis = new DataInputStream( fis );
         boolean todo = true;
@@ -1378,7 +1376,7 @@ class DrawingIO
     // synchronized( TDPath.mTherionLock ) 
     {
       try {
-        // TDLog.Log( TDLog.LOG_IO, "export cSurvey. X-section file " + filename );
+        TDLog.Log( TDLog.LOG_IO, "export cSurvey. X-section file " + filename );
         FileInputStream fis = new FileInputStream( file );
         DataInputStream dis = new DataInputStream( fis );
         boolean todo = true;

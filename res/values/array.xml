@@ -169,6 +169,9 @@
      <item name="winkarst">Winkarst</item>
      <item name="csv">CSV</item>
      <item name="dxf">DXF</item>
+     <!-- item name="kml">KML</item -->
+     <!-- item name="track">Track file</item -->
+     <!-- item name="json">GeoJSON</item -->
   </string-array>
   <string-array name="exportShotsValue" translatable="false">
      <item name="none">-1</item>
@@ -187,6 +190,9 @@
      <item name="winkarst">20</item>
      <item name="csv">5</item>
      <item name="dxf">6</item>
+     <!-- item name="kml">10</item -->
+     <!-- item name="track">11</item -->
+     <!-- item name="json">22</item -->
   </string-array>
 
   <string-array name="exportPlot">

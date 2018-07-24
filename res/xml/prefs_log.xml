@@ -35,14 +35,14 @@
      />
 
      <CheckBoxPreference
-       android:key="DISTOX_LOG_PATH"
-       android:title="@string/pref_log_path"
+       android:key="DISTOX_LOG_INPUT"
+       android:title="@string/pref_log_input"
        android:defaultValue="false"
      />
 
      <CheckBoxPreference
-       android:key="DISTOX_LOG_INPUT"
-       android:title="@string/pref_log_input"
+       android:key="DISTOX_LOG_PATH"
+       android:title="@string/pref_log_path"
        android:defaultValue="false"
      />
 
@@ -66,14 +66,14 @@
      />
 
      <CheckBoxPreference
-       android:key="DISTOX_LOG_PROTO"
-       android:title="@string/pref_log_proto"
+       android:key="DISTOX_LOG_DISTOX"
+       android:title="@string/pref_log_distox"
        android:defaultValue="false"
      />
 
      <CheckBoxPreference
-       android:key="DISTOX_LOG_DISTOX"
-       android:title="@string/pref_log_distox"
+       android:key="DISTOX_LOG_PROTO"
+       android:title="@string/pref_log_proto"
        android:defaultValue="false"
      />
 
@@ -84,8 +84,8 @@
      />
 
      <CheckBoxPreference
-       android:key="DISTOX_LOG_DATA"
-       android:title="@string/pref_log_data"
+       android:key="DISTOX_LOG_CALIB"
+       android:title="@string/pref_log_calib"
        android:defaultValue="false"
      />
 
@@ -96,8 +96,32 @@
      />
 
      <CheckBoxPreference
-       android:key="DISTOX_LOG_CALIB"
-       android:title="@string/pref_log_calib"
+       android:key="DISTOX_LOG_UNITS"
+       android:title="@string/pref_log_units"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_DATA"
+       android:title="@string/pref_log_data"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_SHOT"
+       android:title="@string/pref_log_shot"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_SURVEY"
+       android:title="@string/pref_log_survey"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_NUM"
+       android:title="@string/pref_log_num"
        android:defaultValue="false"
      />
 
@@ -126,30 +150,6 @@
      />
 
      <CheckBoxPreference
-       android:key="DISTOX_LOG_SHOT"
-       android:title="@string/pref_log_shot"
-       android:defaultValue="false"
-     />
-
-     <CheckBoxPreference
-       android:key="DISTOX_LOG_SURVEY"
-       android:title="@string/pref_log_survey"
-       android:defaultValue="false"
-     />
-
-     <CheckBoxPreference
-       android:key="DISTOX_LOG_NUM"
-       android:title="@string/pref_log_num"
-       android:defaultValue="false"
-     />
-
-     <CheckBoxPreference
-       android:key="DISTOX_LOG_THERION"
-       android:title="@string/pref_log_therion"
-       android:defaultValue="false"
-     />
-
-     <CheckBoxPreference
        android:key="DISTOX_LOG_PLOT"
        android:title="@string/pref_log_plot"
        android:defaultValue="false"
@@ -158,6 +158,12 @@
      <CheckBoxPreference
        android:key="DISTOX_LOG_BEZIER"
        android:title="@string/pref_log_bezier"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_THERION"
+       android:title="@string/pref_log_therion"
        android:defaultValue="false"
      />
 
@@ -176,12 +182,6 @@
      <CheckBoxPreference
        android:key="DISTOX_LOG_ZIP"
        android:title="@string/pref_log_zip"
-       android:defaultValue="false"
-     />
-
-     <CheckBoxPreference
-       android:key="DISTOX_LOG_UNITS"
-       android:title="@string/pref_log_units"
        android:defaultValue="false"
      />
 

@@ -1315,6 +1315,7 @@
   <string name="pref_log_err">Error</string>
   <string name="pref_log_fixed">Puntos fijos</string>
   <string name="pref_log_input">Entrada usuario</string>
+  <!-- TODO string name="pref_log_io">Sketch i/o</string -->
   <string name="pref_log_loc">Posicionamiento</string>
   <string name="pref_log_num">Reducción de datos</string>
   <!-- TODO string name="pref_log_path">File paths</string -->

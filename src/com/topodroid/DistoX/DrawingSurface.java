@@ -91,21 +91,27 @@ class DrawingSurface extends SurfaceView
 
   static void clearCache()
   {
-    TDLog.Log( TDLog.LOG_IO, "clear managers cache" );
     mCache.clear();
+    // TDLog.Log( TDLog.LOG_IO, "clear managers cache");
   }
+
+  // static void dumpCacheKeys()
+  // {
+  //   for ( String key : mCache.keySet() ) TDLog.Log( TDLog.LOG_IO, "Key: " + key );
+  // }
 
   static void addManagerToCache( String fullname ) 
   { 
-    TDLog.Log( TDLog.LOG_IO, "add manager to cache " + fullname );
-    if ( commandManager != null ) mCache.put( fullname, commandManager );
+    if ( commandManager != null ) {
+      // if ( mCache.get( fullname ) != null ) {
+      //   TDLog.Log( TDLog.LOG_IO, "replace manager into cache " + fullname );
+      // } else {
+      //   TDLog.Log( TDLog.LOG_IO, "add manager to cache " + fullname );
+      // }
+      mCache.put( fullname, commandManager );
+      // if ( TDLog.LOG_IO ) dumpCacheKeys();
+    }
   }
-
-  void setSelectMode( int mode )
-  { 
-    if ( commandManager != null ) commandManager.setSelectMode( mode );
-  }
-
 
   // return true if saved manager can be used
   boolean resetManager( int mode, String fullname, boolean is_extended )
@@ -114,10 +120,10 @@ class DrawingSurface extends SurfaceView
     DrawingCommandManager manager = null;
 
     // Log.v("DistoX", "cache size " + mCache.size() );
-    TDLog.Log( TDLog.LOG_IO, "check out manager from cache " + fullname );
 
     if ( mode == DRAWING_PLAN ) {
       if ( fullname != null ) manager = mCache.get( fullname );
+      TDLog.Log( TDLog.LOG_IO, "check out PLAN from cache " + fullname + " found: " + (manager!=null) );
       if ( manager == null ) {
         mCommandManager1 = new DrawingCommandManager();
       } else {
@@ -128,6 +134,7 @@ class DrawingSurface extends SurfaceView
       commandManager = mCommandManager1;
     } else if ( mode == DRAWING_PROFILE ) {
       if ( fullname != null ) manager = mCache.get( fullname );
+      TDLog.Log( TDLog.LOG_IO, "check out PROFILE from cache " + fullname + " found: " + (manager!=null) );
       if ( manager == null ) {
         mCommandManager2 = new DrawingCommandManager();
 	if ( is_extended ) mCommandManager2.mIsExtended = true;
@@ -146,6 +153,13 @@ class DrawingSurface extends SurfaceView
       commandManager = mCommandManager3;
     }
     return ret;
+  }
+
+  // -----------------------------------------------------
+
+  void setSelectMode( int mode )
+  { 
+    if ( commandManager != null ) commandManager.setSelectMode( mode );
   }
 
   void setManager( int mode, int type )
@@ -494,24 +508,6 @@ class DrawingSurface extends SurfaceView
     return commandManager.getBitmapBounds();
   }
 
-  float getBitmapScale() 
-  { 
-    if ( commandManager == null ) return -1;
-    return commandManager.getBitmapScale();
-  }
-
-  Bitmap getBitmap( long type )
-  {
-    if ( commandManager == null ) return null;
-    if ( PlotInfo.isProfile( type ) ) {
-      return mCommandManager2.getBitmap();
-    } else if ( type == PlotInfo.PLOT_PLAN ) {
-      return mCommandManager1.getBitmap();
-    } else {
-      return mCommandManager3.getBitmap();
-    }
-  }
-
   // @param lp   point
   // @param type line type
   // @param zoom canvas zoom
@@ -619,29 +615,11 @@ class DrawingSurface extends SurfaceView
     mDrawThread = null;
   }
 
-  void exportTherion( // DataHelper dh, long sid,
-                int type, BufferedWriter out, String sketch_name, String plot_name, int proj_dir )
+  DrawingCommandManager getManager( long type )
   {
-    // Log.v("DistoX", sketch_name + " export th2 type " + type );
-    if ( PlotInfo.isProfile( type ) ) {
-      mCommandManager2.exportTherion( /* dh, sid, */ type, out, sketch_name, plot_name, proj_dir );
-    } else if ( type == PlotInfo.PLOT_PLAN ) {
-      mCommandManager1.exportTherion( /* dh, sid, */ type, out, sketch_name, plot_name, 0 );
-    } else {
-      mCommandManager3.exportTherion( /* dh, sid, */ type, out, sketch_name, plot_name, 0 );
-    }
-  }
-
-  void exportDataStream( int type, DataOutputStream dos, String sketch_name, int proj_dir )
-  {
-    // Log.v("DistoX", sketch_name + " export stream type " + type );
-    if ( PlotInfo.isProfile( type ) ) {
-      mCommandManager2.exportDataStream( type, dos, sketch_name, proj_dir );
-    } else if ( type == PlotInfo.PLOT_PLAN ) {
-      mCommandManager1.exportDataStream( type, dos, sketch_name, 0 );
-    } else {
-      mCommandManager3.exportDataStream( type, dos, sketch_name, 0 );
-    }
+    if ( PlotInfo.isProfile( type ) ) return mCommandManager2;
+    if ( type == PlotInfo.PLOT_PLAN ) return mCommandManager1;
+    return mCommandManager3;
   }
 
   private SymbolsPalette preparePalette()

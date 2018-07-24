@@ -33,7 +33,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   private Handler mHandler;
   // private TopoDroidApp mApp;
   private final DrawingWindow mParent;
-  private final DrawingSurface mSurface;
+  private final DrawingCommandManager mManager;
   private List<DrawingPath> mPaths;
   private String mFullName;
   private int mType;    // plot type
@@ -42,14 +42,14 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   private int mRotate;  // nr. backups to rotate
 
   SavePlotFileTask( Context context, DrawingWindow parent, Handler handler,
-                           TopoDroidApp app, DrawingSurface surface, 
+                           TopoDroidApp app, DrawingCommandManager manager, 
                            String fullname, long type, int proj_dir, int suffix, int rotate )
   {
      mContext  = context;
      mParent   = parent;
      mHandler  = handler;
      // mApp      = app;
-     mSurface  = surface;
+     mManager  = manager;
      mPaths    = null;
      mFullName = fullname;
      mType     = (int)type;
@@ -69,7 +69,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      mParent   = parent;
      mHandler  = handler;
      // mApp      = app;
-     mSurface  = null;
+     mManager  = null;
      mPaths    = paths;
      mFullName = fullname;
      mType     = (int)type;
@@ -93,25 +93,23 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
 
       // first pass: export
       if ( mSuffix == PlotSave.EXPORT ) {
-        if ( mSurface != null ) {
+        if ( mManager != null ) {
           File file2 = new File( TDPath.getTh2FileWithExt( mFullName ) );
-          DrawingIO.exportTherion( // mApp.mData, mApp.mSID,
-              mSurface, mType, file2, mFullName, PlotInfo.projName[ mType ], mProjDir );
+          DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotInfo.projName[ mType ], mProjDir );
         }
       } else if ( mSuffix == PlotSave.SAVE ) {
         switch ( TDSetting.mExportPlotFormat ) {
           case TDConst.DISTOX_EXPORT_TH2:
-            if ( mSurface != null ) {
+            if ( mManager != null ) {
               File file2 = new File( TDPath.getTh2FileWithExt( mFullName ) );
-              DrawingIO.exportTherion( // mApp.mData, mApp.mSID,
-                  mSurface, mType, file2, mFullName, PlotInfo.projName[ mType ], mProjDir );
+              DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotInfo.projName[ mType ], mProjDir );
             }
             break;
           case TDConst.DISTOX_EXPORT_DXF:
-            mParent.doSaveWithExt( mType, mFullName, "dxf", false );
+            mParent.doSaveWithExt( mManager, mType, mFullName, "dxf", false );
             break;
           case TDConst.DISTOX_EXPORT_SVG:
-            mParent.doSaveWithExt( mType, mFullName, "svg", false );
+            mParent.doSaveWithExt( mManager, mType, mFullName, "svg", false );
             break;
           case TDConst.DISTOX_EXPORT_CSX: // IMPORTANT CSX must come before PNG
             if ( PlotInfo.isSketch2D( mType ) ) {
@@ -121,13 +119,13 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
               // fall-through
             }
           case TDConst.DISTOX_EXPORT_PNG:
-            if ( mSurface != null ) {
-              Bitmap bitmap = mSurface.getBitmap( mType );
+            if ( mManager != null ) {
+              Bitmap bitmap = mManager.getBitmap();
               if (bitmap == null) {
                 TDLog.Error( "cannot save PNG: null bitmap" );
                 ret1 = false;
               } else {
-                float scale = mSurface.getBitmapScale();
+                float scale = mManager.getBitmapScale();
                 if (scale > 0) {
                   new ExportBitmapToFile( mContext, bitmap, scale, mFullName, false ).execute();
                 } else {
@@ -167,8 +165,8 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         if ( mSuffix == PlotSave.CREATE ) {
           DrawingIO.exportDataStream( mPaths, mType, file1, mFullName, mProjDir );
         } else {
-          if ( mSurface != null ) {
-            DrawingIO.exportDataStream( mSurface, mType, file1, mFullName, mProjDir );
+          if ( mManager != null ) {
+            DrawingIO.exportDataStream( mManager, mType, file1, mFullName, mProjDir );
           }
         }
 

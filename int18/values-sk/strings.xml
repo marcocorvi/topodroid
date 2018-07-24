@@ -1324,6 +1324,7 @@
   <string name="pref_log_err">Chyby</string>
   <string name="pref_log_fixed">GPS body</string>
   <string name="pref_log_input">Vstup užívateľa</string>
+  <!-- TODO string name="pref_log_io">Sketch i/o</string -->
   <string name="pref_log_loc">Polohy GPS</string>
   <string name="pref_log_num">Kompresia dát</string>
   <string name="pref_log_path">Cesta súboru</string>

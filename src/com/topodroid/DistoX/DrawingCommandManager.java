@@ -2589,13 +2589,10 @@ class DrawingCommandManager
   }
 
   // FIXME DataHelper and SID are necessary to export splays by the station
-  void exportTherion( // DataHelper dh, long sid,
-                             int type, BufferedWriter out, String scrap_name, String proj_name, int proj_dir )
+  void exportTherion( int type, BufferedWriter out, String scrap_name, String proj_name, int proj_dir )
   {
     RectF bbox = computeBBox();
-    DrawingIO.exportTherion( // dh, sid,
-                             type, out, scrap_name, proj_name, proj_dir, bbox, mNorthLine,
-                             mCurrentStack, mUserStations, mStations, mSplaysStack );
+    DrawingIO.exportTherion( type, out, scrap_name, proj_name, proj_dir, bbox, mNorthLine, mCurrentStack, mUserStations, mStations, mSplaysStack );
   }
    
   void exportDataStream( int type, DataOutputStream dos, String scrap_name, int proj_dir )
