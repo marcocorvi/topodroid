@@ -126,11 +126,19 @@ class NumStationSet
       if ( right != null ) right.setAzimuths();
     }
 
+    /* traverse the tree and put on the stack all the NuMStation that have parent st
+     * @param st    hiding station
+     * @param dh    variation of "hidden" field
+     * @param stack changed stations [output]
+     */
     void updateHidden( NumStation st, int dh, Stack<NumStation> stack )
     {
       if ( value.mParent == st ) {
+	// Log.v("DistoXX", "hide station " + value.name );
         value.mHidden += dh;
         stack.push( value );
+      // } else {
+      // Log.v("DistoXX", "show station " + value.name );
       }
       if ( left != null ) left.updateHidden( st, dh, stack );
       if ( right != null ) right.updateHidden( st, dh, stack );

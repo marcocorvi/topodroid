@@ -150,13 +150,13 @@ class SymbolEnableDialog extends MyDialog
     // Log.v( TopoDroidApp.TAG, "SymbolEnableDialog ... updateList type " + mType );
     switch ( old_type ) {
       case Symbol.POINT:
-        mBTpoint.setTextColor( 0xffffffff );
+        mBTpoint.setTextColor( TDColor.WHITE );
         break;
       case Symbol.LINE:
-        mBTline.setTextColor( 0xffffffff );
+        mBTline.setTextColor( TDColor.WHITE );
         break;
       case Symbol.AREA:
-        mBTarea.setTextColor( 0xffffffff );
+        mBTarea.setTextColor( TDColor.WHITE );
         break;
     }
     switch ( new_type ) {
@@ -166,7 +166,7 @@ class SymbolEnableDialog extends MyDialog
           mBTpoint.getBackground().setColorFilter( TDColor.LIGHT_BLUE, PorterDuff.Mode.LIGHTEN );
           mBTline.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
           mBTarea.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
-          mBTpoint.setTextColor( 0xff333333 );
+          mBTpoint.setTextColor( TDColor.VERYDARK_GRAY );
         }
         break;
       case Symbol.LINE:
@@ -174,7 +174,7 @@ class SymbolEnableDialog extends MyDialog
         mBTpoint.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
         mBTline.getBackground().setColorFilter( TDColor.LIGHT_BLUE, PorterDuff.Mode.LIGHTEN );
         mBTarea.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
-        mBTline.setTextColor( 0xff333333 );
+        mBTline.setTextColor( TDColor.VERYDARK_GRAY );
         break;
       case Symbol.AREA:
         if ( TDLevel.overBasic ) {
@@ -182,7 +182,7 @@ class SymbolEnableDialog extends MyDialog
           mBTpoint.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
           mBTline.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
           mBTarea.getBackground().setColorFilter( TDColor.LIGHT_BLUE, PorterDuff.Mode.LIGHTEN );
-          mBTarea.setTextColor( 0xff333333 );
+          mBTarea.setTextColor( TDColor.VERYDARK_GRAY );
         }
         break;
     }

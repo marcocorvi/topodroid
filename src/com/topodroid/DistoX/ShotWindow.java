@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import java.lang.reflect.Method;
+
 import java.io.File;
 // import java.io.IOException;
 // import java.io.EOFException;
@@ -25,36 +27,29 @@ import java.util.ArrayList;
 // import java.util.Stack;
 import java.util.Locale;
 
-// import android.os.Parcelable;
-
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-// import android.os.Message;
+import android.os.StrictMode;
+// import android.os.Parcelable;
 // import android.os.Debug;
-
 // import android.os.SystemClock;
 // import android.os.PowerManager;
-import android.content.res.Resources;
 
-// import android.graphics.Rect;
-
-// import android.app.Application;
 import android.app.Activity;
+// import android.app.Application;
+// import android.app.Dialog;
 
+// import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 // import android.content.DialogInterface.OnCancelListener;
 // import android.content.DialogInterface.OnDismissListener;
 // import android.content.res.ColorStateList;
 
-// import android.provider.Settings.System;
-
 // import android.location.LocationManager;
-
-// import android.content.Context;
-import android.content.Intent;
-
-// import android.app.Dialog;
 
 // import android.view.WindowManager;
 import android.view.View;
@@ -82,11 +77,14 @@ import android.widget.Toast;
 // import android.preference.PreferenceManager;
 
 import android.provider.MediaStore;
+// import android.provider.Settings.System;
+
 import android.graphics.Bitmap;
 // import android.graphics.Bitmap.CompressFormat;
 // import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 // import android.graphics.Paint.FontMetrics;
+// import android.graphics.Rect;
 
 import android.net.Uri;
 
@@ -690,14 +688,25 @@ public class ShotWindow extends Activity
                        this,
                        false, false).show();  // false = with_box, false=with_delay
     } else {
-      try {
-        Uri outfileuri = Uri.fromFile( imagefile );
-        Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
-        intent.putExtra( MediaStore.EXTRA_OUTPUT, outfileuri );
-        intent.putExtra( "outputFormat", Bitmap.CompressFormat.JPEG.toString() );
-        startActivityForResult( intent, TDRequest.CAPTURE_IMAGE_SHOTWINDOW );
-      } catch ( ActivityNotFoundException e ) {
-        TDToast.make( mActivity, R.string.no_capture_app );
+      boolean ok = true;
+      if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ) { // build version 24
+        try {
+          Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposed");
+          m.invoke( null );
+        } catch ( Exception e ) { ok = false; }
+      }
+      if ( ok ) {
+        try {
+          Uri outfileuri = Uri.fromFile( imagefile );
+          Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
+          intent.putExtra( MediaStore.EXTRA_OUTPUT, outfileuri );
+          intent.putExtra( "outputFormat", Bitmap.CompressFormat.JPEG.toString() );
+          startActivityForResult( intent, TDRequest.CAPTURE_IMAGE_SHOTWINDOW );
+        } catch ( ActivityNotFoundException e ) {
+          TDToast.make( mActivity, R.string.no_capture_app );
+        }
+      } else {
+        TDToast.make( mActivity, "NOT IMPLEMENTED YET" );
       }
     }
   }

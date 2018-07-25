@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="400039"
-      android:versionName="4.0.1t"
+      android:versionCode="401001"
+      android:versionName="4.1.0a"
     >
     <uses-sdk
        android:minSdkVersion="16"
@@ -185,29 +185,28 @@
         </activity>
 
         <!-- receiver android:name=".PairingRequest">
-           <intent-filter>
-               <action android:name="android.bluetooth.device.action.PAIRING_REQUEST" /> 
-               <action android:name="android.bluetooth.device.action.PAIRING_CANCEL" /> 
-           </intent-filter>
+          <intent-filter>
+            <action android:name="android.bluetooth.device.action.PAIRING_REQUEST" /> 
+            <action android:name="android.bluetooth.device.action.PAIRING_CANCEL" /> 
+          </intent-filter>
 	</receiver -->
 
-        <!-- provider android:name="FileProvider"
-		  android:authorities="${application}.provider"
-		  android:exported="false"
-		  android:grantUriPermissions="true">
-		  <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
-			     android:resources="@xml/provider_paths"
-			     />
+        <!-- provider android:name=".MyFileProvider"
+          android:authorities="com.topodroid.DistoX.provider"
+          android:exported="false"
+          android:grantUriPermissions="true">
+          <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/provider_paths"
+            />
 	</provider -->
 
-
-    <!-- service
-      android:name="TD_DistoX"
-      android:icon="@drawable/icon3"
-      android:label="TD_DistoX"
-      android:process=":td_distox_process"
-      >
-    </service -->
+        <!-- service
+          android:name="TD_DistoX"
+          android:icon="@drawable/icon3"
+          android:label="TD_DistoX"
+          android:process=":td_distox_process"
+          >
+        </service -->
 
     </application>
 </manifest> 

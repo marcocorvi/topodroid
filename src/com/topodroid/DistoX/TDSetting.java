@@ -1524,29 +1524,33 @@ class TDSetting
   //   editor.clear();
   //   editor.apply();
   // }
+
+  // centralize api-23 changes
+  static void applyEditor( Editor editor )
+  {
+    editor.apply(); 
+    // FIXME_23 editor.commit();
+  }
   
   static private void setPreference( SharedPreferences sp, String name, String value )
   {
     Editor editor = sp.edit();
     editor.putString( name, value );
-    editor.apply(); 
-    // FIXME_23 editor.commit();
+    applyEditor( editor );
   }
 
   static private void setPreference( SharedPreferences sp, String name, boolean value )
   {
     Editor editor = sp.edit();
     editor.putBoolean( name, value );
-    editor.apply(); 
-    // FIXME_23 editor.commit();
+    applyEditor( editor );
   }
 
   static void setPreference( SharedPreferences sp, String name, long value )
   {
     Editor editor = sp.edit();
     editor.putLong( name, value );
-    editor.apply(); 
-    // FIXME_23 editor.commit();
+    applyEditor( editor );
   }
 
   static long getLongPreference( SharedPreferences sp, String name, long def_value )
@@ -1558,14 +1562,14 @@ class TDSetting
   // {
   //   Editor editor = sp.edit();
   //   editor.putString( name, Integer.toString(val) );
-  //   editor.apply();
+  //   applyEditor( editor );
   // }
 
   // static void setPreference( SharedPreferences sp, String name, float val )
   // {
   //   Editor editor = sp.edit();
   //   editor.putString( name, Float.toString(val) );
-  //   editor.apply();
+  //   applyEditor( editor );
   // }
 
   // ===================================================================

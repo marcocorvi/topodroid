@@ -988,9 +988,9 @@ public class OverviewWindow extends ItemDrawer
     myTextView.setHeight( 42 );
 
     myTextView.setText( text );
-    myTextView.setTextColor( 0xffffffff );
+    myTextView.setTextColor( TDColor.WHITE );
     myTextView.setTextSize( TypedValue.COMPLEX_UNIT_DIP, 16 );
-    myTextView.setBackgroundColor( 0xff333333 );
+    myTextView.setBackgroundColor( TDColor.VERYDARK_GRAY );
     myTextView.setSingleLine( true );
     myTextView.setGravity( 0x03 ); // left
     myTextView.setPadding( 4, 4, 4, 4 );

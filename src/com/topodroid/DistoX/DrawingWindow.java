@@ -11,54 +11,8 @@
  */
 package com.topodroid.DistoX;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.ActivityNotFoundException;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.res.Resources;
+import java.lang.reflect.Method;
 
-import android.graphics.Paint;
-import android.graphics.Paint.FontMetrics;
-import android.graphics.PointF;
-import android.graphics.RectF;
-// import android.graphics.Path;
-// import android.graphics.Path.Direction;
-
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-// import android.view.Menu;
-// import android.view.SubMenu;
-// import android.view.MenuItem;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-//  android.view.ViewGroup;
-// import android.view.Display;
-// import android.util.DisplayMetrics;
-// import android.view.ContextMenu;
-// import android.view.ContextMenu.ContextMenuInfo;
-import android.widget.Button;
-// import android.widget.ZoomControls;
-// import android.widget.ZoomButton;
-import android.widget.ZoomButtonsController;
-import android.widget.ZoomButtonsController.OnZoomListener;
-import android.widget.ListView;
-import android.widget.ArrayAdapter;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Toast;
-
-import android.provider.MediaStore;
-import android.graphics.Bitmap;
-// import android.graphics.Bitmap.CompressFormat;
-// import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-
-import android.net.Uri;
 
 import java.io.File;
 // import java.io.FileWriter;
@@ -71,6 +25,60 @@ import java.util.ArrayList;
 
 import java.util.concurrent.RejectedExecutionException;
 // import java.util.Deque; // only API-9
+//
+import android.app.Activity;
+
+import android.content.Context;
+import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.Resources;
+
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.StrictMode;
+
+// import android.view.Menu;
+// import android.view.SubMenu;
+// import android.view.MenuItem;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.View;
+// import android.view.ViewGroup;
+// import android.view.Display;
+// import android.util.DisplayMetrics;
+// import android.view.ContextMenu;
+// import android.view.ContextMenu.ContextMenuInfo;
+//
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.Button;
+// import android.widget.ZoomControls;
+// import android.widget.ZoomButton;
+import android.widget.ZoomButtonsController;
+import android.widget.ZoomButtonsController.OnZoomListener;
+import android.widget.ListView;
+import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
+
+import android.provider.MediaStore;
+
+import android.graphics.Bitmap;
+// import android.graphics.Bitmap.CompressFormat;
+// import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.Paint;
+import android.graphics.Paint.FontMetrics;
+import android.graphics.PointF;
+import android.graphics.RectF;
+// import android.graphics.Path;
+// import android.graphics.Path.Direction;
+
+import android.net.Uri;
 
 // import android.util.SparseArray;
 import android.util.Log;
@@ -3409,18 +3417,29 @@ public class DrawingWindow extends ItemDrawer
           	         ( insert ? this : null), // ImageInserter
           	         true, false).show();  // true = with_box, false=with_delay
       } else {
-        try {
-          Uri outfileuri = Uri.fromFile( imagefile );
-          Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
-          intent.putExtra( MediaStore.EXTRA_OUTPUT, outfileuri );
-          intent.putExtra( "outputFormat", Bitmap.CompressFormat.JPEG.toString() );
-          if ( insert ) {
-            mActivity.startActivityForResult( intent, TDRequest.CAPTURE_IMAGE_DRAWWINDOW );
-          } else {
-            mActivity.startActivity( intent );
+	boolean ok = true;
+        if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ) { // build version 24
+          try {
+            Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposed");
+	    m.invoke( null );
+	  } catch ( Exception e ) { ok = false; }
+	}
+	if ( ok ) {
+          try {
+            Uri outfileuri = Uri.fromFile( imagefile );
+            Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
+            intent.putExtra( MediaStore.EXTRA_OUTPUT, outfileuri );
+            intent.putExtra( "outputFormat", Bitmap.CompressFormat.JPEG.toString() );
+            if ( insert ) {
+              mActivity.startActivityForResult( intent, TDRequest.CAPTURE_IMAGE_DRAWWINDOW );
+            } else {
+              mActivity.startActivity( intent );
+            }
+          } catch ( ActivityNotFoundException e ) {
+            TDToast.make( mActivity, R.string.no_capture_app );
           }
-        } catch ( ActivityNotFoundException e ) {
-          TDToast.make( mActivity, R.string.no_capture_app );
+        } else {
+          TDToast.make( mActivity, "NOT IMPLEMENTED YET" );
         }
       }
     }

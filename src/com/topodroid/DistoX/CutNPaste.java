@@ -123,7 +123,7 @@ class CutNPaste
     // THIS CRASHES THE APP
     // button.setBackgroundResource( R.drawable.popup_bgcolor );
     button.setTextColor( color );
-    button.setBackgroundColor( 0xff333333 );
+    button.setBackgroundColor( TDColor.VERYDARK_GRAY );
 
     button.setHeight( 3*size );
     button.setText( text );
@@ -137,11 +137,11 @@ class CutNPaste
   static Button makePopupButton( Context context, String text,
                                  LinearLayout layout, int w, int h, View.OnClickListener listener )
   {
-    Button button = makeButton( context, text, 0xffffffff, BUTTON_HEIGHT );
+    Button button = makeButton( context, text, TDColor.WHITE, BUTTON_HEIGHT );
     layout.addView( button, new LinearLayout.LayoutParams(h, w));
     button.setOnClickListener( listener );
     button.setOnTouchListener( new View.OnTouchListener( ) {
-      @Override public boolean onTouch( View v, MotionEvent ev ) { v.setBackgroundColor( 0xffff6600 ); return false; }
+      @Override public boolean onTouch( View v, MotionEvent ev ) { v.setBackgroundColor( TDColor.DARK_ORANGE ); return false; }
     } );
     return button;
   }
