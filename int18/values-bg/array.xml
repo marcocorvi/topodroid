@@ -46,10 +46,7 @@
      <item>- -</item>
   </string-array -->
 
-  <!-- OK string-array name="legShots">
-     <item name="two">2</item>
-     <item name="three">3</item>
-     <item name="four">4</item>
+  <!-- DO NOT TRANSLATE string-array name="legShots">
   </string-array -->
 
   <!-- FIXME string-array name="exportShots">
@@ -86,7 +83,7 @@
      <item name="advanced">Пълни</item>
      <item name="expert">Експертни</item>
      <item name="tester">Тестови</item>
-     <!-- item name="complete">Complete</item -->
+     <!-- DO NOT TRANSLATE item name="complete">Complete</item -->
   </string-array>
 
   <string-array name="sizeButtons">

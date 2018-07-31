@@ -57,33 +57,11 @@
      <item>Fără</item>
   </string-array -->
 
-  <!-- DISTOX_LOCALE -->
-  <string-array name="locale">
-     <item name="default">default</item>
-     <item name="english">Engleză</item>
-     <item name="french">Franceză</item>
-     <item name="spanish">Spaniolă</item>
-     <item name="italian">Italiană</item>
-     <item name="russian">Rusă</item>
-     <item name="german">Germană</item>
-     <item name="portuguese">Portugheză</item>
-     <item name="slovak">Slovacă</item>
-     <item name="slovenian">Slovenă</item>
-     <item name="bulgarian">Bulgară</item>
-	 <item name="romanian">Română</item>
-     <item name="chinese">Chineză</item>
-     <item name="ukrainian">Ucraineană</item>
-     <item name="hungarian">Maghiară</item>
-  </string-array>
+  <!-- DO NOT TRANSLATE string-array name="locale">
+  </string-array -->
 
-  <!-- DISTOX_LOCAL_HELP -->
-  <string-array name="localUserMan">
-     <item name="english">English</item>
-     <item name="french">Français</item>
-     <item name="spanish">Español</item>
-     <item name="italian">Italiano</item>
-     <item name="russian">Русский</item>
-  </string-array>
+  <!-- DO NOT TRANSLATE string-array name="localUserMan">
+  </string-array -->
 
   <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
   <string-array name="exportShots">
@@ -123,19 +101,11 @@
      <item name="svg">SVG</item>
   </string-array -->
 
-  <string-array name="legShots">
-     <item name="two">2</item>
-     <item name="three">3</item>
-     <item name="four">4</item>
-  </string-array>
+  <!-- DO NOT TRANSLATE string-array name="legShots">
+  </string-array -->
 
-  <string-array name="backupNumber">
-     <item name="four">4</item>
-     <item name="five">5</item>
-     <item name="six">6</item>
-     <item name="seven">7</item>
-     <item name="eight">8</item>
-  </string-array>
+  <!-- DO NOT TRANSLATE string-array name="backupNumber">
+  </string-array -->
 
   <string-array name="extraButtons">
      <item name="basic">De bază</item>
@@ -143,7 +113,7 @@
      <item name="advanced">Avansat</item>
      <item name="expert">Expert</item>
      <item name="tester">Tester</item>
-     <!-- item name="complete">Complete</item -->
+     <!-- DO NOT TRANSLATE item name="complete">Complete</item -->
   </string-array>
 
   <string-array name="sizeButtons">
@@ -226,12 +196,8 @@
      <item name="to">În față</item>
   </string-array>
 
-  <string-array name="recentNr">
-     <item name="3">3</item>
-     <item name="4">4</item>
-     <item name="5">5</item>
-     <item name="6">6</item>
-  </string-array>
+  <!-- DO NOT TRANSLATE string-array name="recentNr">
+  </string-array -->
 
   <!-- string-array name="deviceType">
      <item name="none">None</item>

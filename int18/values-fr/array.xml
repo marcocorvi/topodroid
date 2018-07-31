@@ -63,10 +63,7 @@
   </string-array -->
 
 
-  <!-- OK string-array name="legShots">
-     <item name="two">2</item>
-     <item name="three">3</item>
-     <item name="four">4</item>
+  <!-- DO NOT TRANSLATE string-array name="legShots">
   </string-array -->
 
   <string-array name="exportShots">

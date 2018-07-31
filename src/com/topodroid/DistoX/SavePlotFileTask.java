@@ -33,6 +33,8 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   private Handler mHandler;
   // private TopoDroidApp mApp;
   private final DrawingWindow mParent;
+  private final DistoXNum mNum;
+  private final DrawingUtil mUtil;
   private final DrawingCommandManager mManager;
   private List<DrawingPath> mPaths;
   private String mFullName;
@@ -40,15 +42,20 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   private int mProjDir;
   private int mSuffix;
   private int mRotate;  // nr. backups to rotate
+  private String origin = null;
+  private PlotSaveData psd1 = null;
+  private PlotSaveData psd2 = null;
 
   SavePlotFileTask( Context context, DrawingWindow parent, Handler handler,
-                           TopoDroidApp app, DrawingCommandManager manager, 
-                           String fullname, long type, int proj_dir, int suffix, int rotate )
+		    DistoXNum num, DrawingUtil util, DrawingCommandManager manager, 
+                    String fullname, long type, int proj_dir, int suffix, int rotate )
   {
      mContext  = context;
      mParent   = parent;
      mHandler  = handler;
      // mApp      = app;
+     mNum      = num;
+     mUtil     = util;
      mManager  = manager;
      mPaths    = null;
      mFullName = fullname;
@@ -59,16 +66,24 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      if ( mRotate > TDPath.NR_BACKUP ) mRotate = TDPath.NR_BACKUP;
      // TDLog.Log( TDLog.LOG_PLOT, "Save Plot File Task " + mFullName + " type " + mType );
      // Log.v( "DistoX", "save plot file task [1] " + mFullName + " type " + mType );
+     if ( mSuffix == PlotSave.SAVE && TDSetting.mExportPlotFormat == TDConst.DISTOX_EXPORT_CSX ) { // auto-export format cSurvey
+       origin = parent.getOrigin();
+       psd1 = parent.makePlotSaveData( 1, suffix, rotate );
+       psd2 = parent.makePlotSaveData( 2, suffix, rotate );
+     }
   }
 
   SavePlotFileTask( Context context, DrawingWindow parent, Handler handler,
-                           TopoDroidApp app, List<DrawingPath> paths,
-                           String fullname, long type, int proj_dir )
+                    // TopoDroidApp app,
+		    DistoXNum num, DrawingUtil util, List<DrawingPath> paths,
+                    String fullname, long type, int proj_dir )
   {
      mContext  = context;
      mParent   = parent;
      mHandler  = handler;
      // mApp      = app;
+     mNum      = num;
+     mUtil     = util;
      mManager  = null;
      mPaths    = paths;
      mFullName = fullname;
@@ -83,8 +98,8 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   @Override
   protected Boolean doInBackground(Intent... arg0)
   {
-    boolean ret1 = true;
-    boolean ret2 = true;
+    boolean ret1 = true; // false = png failed
+    boolean ret2 = true; // false = binary cancelled
     // boolean do_binary = (TDSetting.mBinaryTh2 && mSuffix != PlotSave.EXPORT ); // TDR BINARY
 
     // Log.v( "DistoX", "save plot file task bkgr start");
@@ -98,7 +113,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
           DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotInfo.projName[ mType ], mProjDir );
         }
       } else if ( mSuffix == PlotSave.SAVE ) {
-        switch ( TDSetting.mExportPlotFormat ) {
+        switch ( TDSetting.mExportPlotFormat ) { // auto-export format
           case TDConst.DISTOX_EXPORT_TH2:
             if ( mManager != null ) {
               File file2 = new File( TDPath.getTh2FileWithExt( mFullName ) );
@@ -106,14 +121,14 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
             }
             break;
           case TDConst.DISTOX_EXPORT_DXF:
-            mParent.doSaveWithExt( mManager, mType, mFullName, "dxf", false );
+            mParent.doSaveWithExt( mNum, mUtil, mManager, mType, mFullName, "dxf", false );
             break;
           case TDConst.DISTOX_EXPORT_SVG:
-            mParent.doSaveWithExt( mManager, mType, mFullName, "svg", false );
+            mParent.doSaveWithExt( mNum, mUtil, mManager, mType, mFullName, "svg", false );
             break;
           case TDConst.DISTOX_EXPORT_CSX: // IMPORTANT CSX must come before PNG
             if ( PlotInfo.isSketch2D( mType ) ) {
-              mParent.saveCsx( false );
+              mParent.doSaveCsx( origin, psd1, psd2 );
               break;
             } else { // X-Section cSurvey are exported as PNG
               // fall-through

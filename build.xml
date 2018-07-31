@@ -51,10 +51,27 @@
 
 <!-- extension targets. Uncomment the ones where you want to do custom work
      in between standard targets -->
+
+<!--
+    <target name="kotlin-compile">
+	<path id="project.javac.classpath">
+		<path refid="project.all.jars.path" />
+		<path refid="tested.project.classpath" />
+		<path path="${java.compiler.classpath}" />
+		<path path="${project.target.android.jar}" />
+		<path path="${out.classes.absolute.dir}" />
+	</path>
+	<kotlinc src="src" output="bin/classes"
+                 classpathref="project.javac.classpath" >
+	</kotlinc>
+    </target>
+
+    <target name="-pre-compile" depends="kotlin-compile">
+    </target>
+-->
+
 <!--
     <target name="-pre-build">
-    </target>
-    <target name="-pre-compile">
     </target>
 
     /* This is typically used for code obfuscation.

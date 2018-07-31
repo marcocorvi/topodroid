@@ -441,6 +441,7 @@ public class SurveyWindow extends Activity
     mApp_mData.updateSurveyInfo( mApp.mSID, date, team, decl, comment, mInitStation, mXSections, true );
   }
 
+  // interface IExporter
   public void doExport( String type )
   {
     saveSurvey();

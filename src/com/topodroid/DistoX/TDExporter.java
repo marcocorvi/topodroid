@@ -176,7 +176,7 @@ class TDExporter
     pw.format("      </attachments>\n");
   }
 
-  static String exportSurveyAsCsx( long sid, DataHelper data, SurveyInfo info, DrawingWindow sketch,
+  static String exportSurveyAsCsx( long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2,
                                    String origin, String filename )
   {
     // Log.v("DistoX", "export as csurvey: " + filename );
@@ -185,8 +185,8 @@ class TDExporter
 
     // String prefix = "";
     String branch = "";
-    if ( sketch != null && sketch.getName() != null ) {
-      branch = sketch.getName();
+    if ( psd1 != null && psd1.name != null ) { // if ( sketch != null && sketch.getName() != null ) 
+      branch  = psd1.name; // sketch.getName();
       int len = branch.length();
       if ( len > 1 ) branch = branch.substring(0, len-1);
     }
@@ -200,7 +200,7 @@ class TDExporter
     //   }
     // }
 
-    List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+    List<DBlock> list  = data.selectAllShots( sid, TDStatus.NORMAL );
     List<DBlock> clist = data.selectAllShots( sid, TDStatus.CHECK );
 
     List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
@@ -478,8 +478,8 @@ class TDExporter
       pw.format("  </trigpoints>\n");
 
       // ============= SKETCHES
-      if ( sketch != null ) {
-        sketch.exportAsCsx( pw, survey, cave, branch /*, session */ );
+      if ( psd1 != null ) {
+        DrawingWindow.exportAsCsx( sid, pw, survey, cave, branch /*, session */, psd1, psd2 );
       } else {
         pw.format("  <plan>\n");
         exportEmptyCsxSketch( pw );

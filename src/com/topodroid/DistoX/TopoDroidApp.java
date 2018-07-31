@@ -221,10 +221,10 @@ public class TopoDroidApp extends Application
   static boolean mDeviceActivityVisible = false;
   static boolean mGMActivityVisible = false;
 
-  long mSID   = -1;   // id of the current survey
-  long mCID   = -1;   // id of the current calib
-  String mySurvey;   // current survey name
-  String myCalib;    // current calib name
+  static long mSID   = -1;   // id of the current survey
+  static long mCID   = -1;   // id of the current calib
+  static String mySurvey;   // current survey name
+  static String myCalib;    // current calib name
   static long mSecondLastShotId = 0L;
 
   public long lastShotId( ) { return mData.getLastShotId( mSID ); }
@@ -331,7 +331,7 @@ public class TopoDroidApp extends Application
     return ( mDevice == null || ( info != null && info.device.equals( mDevice.mAddress ) ) );
   }
 
-  public SurveyInfo getSurveyInfo()
+  public static SurveyInfo getSurveyInfo()
   {
     if ( mSID <= 0 ) return null;
     if ( mData == null ) return null;
@@ -1277,20 +1277,23 @@ public class TopoDroidApp extends Application
   // ================================================================
   // EXPORTS
 
-  String exportSurveyAsCsx( DrawingWindow sketch, String origin )
+  static String exportSurveyAsCsx( String origin, PlotSaveData psd1, PlotSaveData psd2 )
   {
     SurveyInfo info = getSurveyInfo();
     if ( info == null ) return null;
-    return exportSurveyAsCsx( info, sketch, origin );
+    return doExportSurveyAsCsx( info, psd1, psd2, origin );
   }
 
-  private String exportSurveyAsCsx( SurveyInfo info, DrawingWindow sketch, String origin )
+
+  // FIXME_SYNC might be a problem with big sketches
+  private static String doExportSurveyAsCsx( SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2, String origin )
   {
-    String filename = ( sketch == null )? TDPath.getSurveyCsxFile(mySurvey)
-                                        : TDPath.getSurveyCsxFile(mySurvey, sketch.mName1);
-    return TDExporter.exportSurveyAsCsx( mSID, mData, info, sketch, origin, filename );
+    String filename = ( psd1 == null )? TDPath.getSurveyCsxFile(mySurvey)
+                                      : TDPath.getSurveyCsxFile(mySurvey, psd1.name /* = sketch.mName1 */ );
+    return TDExporter.exportSurveyAsCsx( mSID, mData, info, psd1, psd2, origin, filename );
   }
 
+  // FIXME_SYNC might be a problem with big surveys
   String exportSurveyAsTh( )
   {
     SurveyInfo info = getSurveyInfo();
@@ -1298,6 +1301,7 @@ public class TopoDroidApp extends Application
     return TDExporter.exportSurveyAsTh( mSID, mData, info, TDPath.getSurveyThFile( mySurvey ) );
   }
 
+  // FIXME_SYNC ok because calib files are small
   String exportCalibAsCsv( )
   {
     if ( mCID < 0 ) return null;
@@ -2016,6 +2020,7 @@ public class TopoDroidApp extends Application
     }
   }
   
+  // called by ShotWindow and SurveyWindow on export
   void doExportData( int exportType, boolean warn )
   {
     if ( exportType < 0 ) return;
@@ -2024,89 +2029,9 @@ public class TopoDroidApp extends Application
     } else {
       SurveyInfo info = getSurveyInfo( );
       if ( info == null ) return;
-      String filename = null;
-      switch ( exportType ) {
-        // case TDConst.DISTOX_EXPORT_TLX:
-        //   filename = exportSurveyAsTlx();
-        //   break;
-        case TDConst.DISTOX_EXPORT_DAT:
-          filename = TDExporter.exportSurveyAsDat( mSID, mData, info, TDPath.getSurveyDatFile( mySurvey ) );
-          break;
-        case TDConst.DISTOX_EXPORT_SVX:
-          filename = TDExporter.exportSurveyAsSvx( mSID, mData, info, mDevice, TDPath.getSurveySvxFile( mySurvey ) );
-          break;
-        case TDConst.DISTOX_EXPORT_TRO:
-          filename = TDExporter.exportSurveyAsTro( mSID, mData, info, TDPath.getSurveyTroFile( mySurvey ) );
-          break;
-        case TDConst.DISTOX_EXPORT_CSV:
-          filename = TDExporter.exportSurveyAsCsv( mSID, mData, info, TDPath.getSurveyCsvFile( mySurvey ) );
-          break;
-        case TDConst.DISTOX_EXPORT_DXF:
-          List<DBlock> list = mData.selectAllShots( mSID, TDStatus.NORMAL );
-          if ( list.size() > 0 ) {
-            DBlock blk = list.get( 0 );
-            // Log.v( TopoDroidApp.TAG, "DISTOX_EXPORT_DXF from " + blk.mFrom );
-            float decl = mData.getSurveyDeclination( mSID );
-            DistoXNum num = new DistoXNum( list, blk.mFrom, null, null, decl );
-            filename = TDExporter.exportSurveyAsDxf( mSID, mData, info, num, TDPath.getSurveyDxfFile( mySurvey ) );
-          }
-          break;
-        case TDConst.DISTOX_EXPORT_KML: // KML
-          filename = TDExporter.exportSurveyAsKml( mSID, mData, info, TDPath.getSurveyKmlFile( mySurvey ) );
-          break;
-        case TDConst.DISTOX_EXPORT_JSON: // GeoJSON
-          filename = TDExporter.exportSurveyAsJson( mSID, mData, info, TDPath.getSurveyJsonFile( mySurvey ) );
-          break;
-        case TDConst.DISTOX_EXPORT_PLT: // Track file
-          filename = TDExporter.exportSurveyAsPlt( mSID, mData, info, TDPath.getSurveyPltFile( mySurvey ) );
-          break;
-        case TDConst.DISTOX_EXPORT_CSX: // cSurvey
-          filename = exportSurveyAsCsx( info, null, null );
-          break;
-        case TDConst.DISTOX_EXPORT_TOP: // PocketTopo
-          filename = TDExporter.exportSurveyAsTop( mSID, mData, info, null, null, TDPath.getSurveyTopFile( mySurvey ) );
-          break;
-        case TDConst.DISTOX_EXPORT_SRV: // Walls
-          filename = TDExporter.exportSurveyAsSrv( mSID, mData, info, TDPath.getSurveySrvFile( mySurvey ) );
-          break;
-        case TDConst.DISTOX_EXPORT_PLG: // Polygon
-          filename = TDExporter.exportSurveyAsPlg( mSID, mData, info, TDPath.getSurveyCaveFile( mySurvey ) );
-          break;
-        case TDConst.DISTOX_EXPORT_CAV: // Topo
-          filename = TDExporter.exportSurveyAsCav( mSID, mData, info, TDPath.getSurveyCavFile( mySurvey ) );
-          break;
-        case TDConst.DISTOX_EXPORT_GRT: // Grottolf
-          // TDToast.make( this, "WARNING Grottolf export is untested" );
-          filename = TDExporter.exportSurveyAsGrt( mSID, mData, info, TDPath.getSurveyGrtFile( mySurvey ) );
-          break;
-        case TDConst.DISTOX_EXPORT_GTX: // GHTopo
-          // TDToast.make( this, "WARNING GHTopo export is untested" );
-          filename = TDExporter.exportSurveyAsGtx( mSID, mData, info, TDPath.getSurveyGtxFile( mySurvey ) );
-          break;
-        case TDConst.DISTOX_EXPORT_SUR: // WinKarst
-          // TDToast.make( this, "WARNING WinKarst export is untested" );
-          filename = TDExporter.exportSurveyAsSur( mSID, mData, info, TDPath.getSurveySurFile( mySurvey ) );
-          break;
-        case TDConst.DISTOX_EXPORT_TRB: // TopoRobot
-          // TDToast.make( this, "WARNING TopoRobot export is untested" );
-          filename = TDExporter.exportSurveyAsTrb( mSID, mData, info, TDPath.getSurveyTrbFile( mySurvey ) );
-          break;
-
-        case TDConst.DISTOX_EXPORT_TH:
-        default:
-          filename = TDExporter.exportSurveyAsTh( mSID, mData, info, TDPath.getSurveyThFile( mySurvey ) );
-          break;
-      }
-      if ( warn ) { 
-        if ( filename == null ) {
-          TDToast.make( this, R.string.saving_file_failed );
-        } else if ( filename.length() == 0 ) {
-          TDToast.make( this, R.string.no_geo_station );
-        } else {
-          TDToast.make( this, mActivity.getString(R.string.saving_) + filename );
-        }
-      }
+      (new SaveDataFileTask( this, mSID, info, mData, mySurvey, mDevice, exportType, true )).execute();
     }
+
   }
 
 }

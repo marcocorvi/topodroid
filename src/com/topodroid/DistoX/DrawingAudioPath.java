@@ -93,6 +93,7 @@ class DrawingAudioPath extends DrawingPointPath
     return sw.getBuffer().toString();
   }
 
+  // FIXME_SYNC might be a problem with a long audio recording !!!
   @Override
   void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil )
   { 

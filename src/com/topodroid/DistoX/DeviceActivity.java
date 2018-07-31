@@ -850,6 +850,7 @@ public class DeviceActivity extends Activity
     if ( ! file.exists() ) {
       TDToast.make(this, R.string.file_not_found );
     } else {
+      // FIXME_SYNC this is sync ... ok because calib file is small
       switch ( TDExporter.importCalibFromCsv( mApp_mDData, filename, mDevice.mAddress ) ) {
         case 0:
           TDToast.make(this, R.string.import_calib_ok );

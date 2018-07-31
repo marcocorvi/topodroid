@@ -80,6 +80,7 @@
      <item name="advanced">Avanzado</item>
      <item name="expert">Experto</item>
      <item name="tester">Test</item>
+     <!-- DO NOT TRANSLATE item name="complete">Complete</item -->
   </string-array>
 
   <string-array name="sizeButtons">

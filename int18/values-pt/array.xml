@@ -79,10 +79,7 @@
      <item name="svg">SVG</item>
   </string-array -->
 
-  <!-- UNUSED string-array name="legShots">
-     <item name="two">2</item>
-     <item name="three">3</item>
-     <item name="four">4</item>
+  <!-- DO NOT TRANSLATE string-array name="legShots">
   </string-array -->
 
   <string-array name="extraButtons">
@@ -172,11 +169,7 @@
      <item name="to">Para</item>
   </string-array -->
 
-  <!-- OK string-array name="recentNr">
-     <item name="3">3</item>
-     <item name="4">4</item>
-     <item name="5">5</item>
-     <item name="6">6</item>
+  <!-- DO NOT TRANSLATE string-array name="recentNr">
   </string-array -->
 
   <string-array name="deviceBT">

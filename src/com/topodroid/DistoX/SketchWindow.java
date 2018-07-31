@@ -2096,6 +2096,7 @@ public class SketchWindow extends ItemDrawer
     } );
   }
 
+  // interface IExporter
   public void doExport( String type )
   {
     int index = TDConst.sketchExportIndex( type );
