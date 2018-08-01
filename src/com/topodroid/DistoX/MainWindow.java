@@ -314,7 +314,7 @@ public class MainWindow extends Activity
   void setTheTitle()
   {
     // String title = getResources().getString( R.string.app_name );
-    setTitle( mApp.getConnectionStateTitleStr() + mApp.mCWD );
+    setTitle( mApp.getConnectionStateTitleStr() + TDInstance.cwd );
     setTitleColor( TDColor.TITLE_NORMAL );
     // Log.v("DistoX", "TopoDroid activity set the title <" + mApp.getConnectionStateTitleStr() + title + ">" );
   }
@@ -551,7 +551,7 @@ public class MainWindow extends Activity
 
   void resetButtonBar()
   {
-    int size = mApp.setListViewHeight( mListView );
+    int size = TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
     MyButton.resetCache( /* mApp, */ size );
     // TDToast.make( this, "SIZE " + size );
 

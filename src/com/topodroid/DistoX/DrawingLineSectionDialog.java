@@ -100,7 +100,7 @@ class DrawingLineSectionDialog extends MyDialog
       // Log.v( "DistoX", "Drawing Line Section Dialog ID was null: set to " + mId );
     } else {
       // Log.v( "DistoX", "Drawing Line Section Dialog ID: " + mId );
-      mPlotInfo = TopoDroidApp.mData.getPlotInfo( mParent.getSID(), mId );
+      mPlotInfo = TopoDroidApp.mData.getPlotInfo( TDInstance.sid, mId );
       if ( mPlotInfo != null ) { // extra careful
         mFrom     = mPlotInfo.start;
         mTo       = mPlotInfo.view;
@@ -165,7 +165,7 @@ class DrawingLineSectionDialog extends MyDialog
     mBtnDraw.setOnClickListener( this );
 
     if ( mPlotInfo != null ) { // check the photo
-      String filename = TDPath.getSurveyJpgFile( mApp.mySurvey, mPlotInfo.name );
+      String filename = TDPath.getSurveyJpgFile( TDInstance.survey, mPlotInfo.name );
       File imagefile = new File( filename );
       if ( imagefile.exists() ) {
 	mTdImage = new TDImage( filename );

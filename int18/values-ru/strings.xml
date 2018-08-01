@@ -403,7 +403,7 @@
     <string name="read_failed">Ошибка чтения DistoX</string>
     <!-- UNUSED string name="reading_file_failed">Чтение файла не удалось</string -->
 
-    <string name="saved_file_1">Сохраненный файл</string>
+    <string name="saved_file_1">Сохраненный файл %1$s</string>
     <string name="saved_file_2">Масштаб %2$.2f Сохраненного файла %1$s</string>
     <string name="saving_">Сохранение </string>
     <string name="saving_file_failed">Ошибка сохранения файла</string>

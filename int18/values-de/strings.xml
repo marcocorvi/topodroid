@@ -410,7 +410,7 @@
     <string name="read_failed">Fehler beim Lesen vom DistoX</string>
     <!-- UNUSED string name="reading_file_failed">Failed file-read</string -->
 
-    <string name="saved_file_1">Gespeicherte Datei</string>
+    <string name="saved_file_1">Gespeicherte Datei %1$s</string>
     <string name="saved_file_2">Datei %1$s gespeichert mit Faktor %2$.2f</string>
     <string name="saving_">Speichern </string>
     <string name="saving_file_failed">Datei konnten nicht gespeichert werden</string>

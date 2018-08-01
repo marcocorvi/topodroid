@@ -780,7 +780,7 @@ public class SketchWindow extends ItemDrawer
       mSid = extras.getLong(   TDTag.TOPODROID_SURVEY_ID );
       name = extras.getString( TDTag.TOPODROID_SKETCH_NAME );
     }
-    mFullName    = mApp.mySurvey + "-" + name;
+    mFullName    = TDInstance.survey + "-" + name;
     // mCompass     = null;
     // mDecl = mData.getSurveyDeclination( mSid );
     mDecl = 0.0f;
@@ -822,7 +822,7 @@ public class SketchWindow extends ItemDrawer
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
     mListView.setEmptyPlacholder( true );
-    /* int size = */ mApp.setListViewHeight( mListView );
+    /* int size = */ TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
     Resources res = getResources();
     mButton1 = new Button[ mNrButton1 ];
@@ -1859,7 +1859,7 @@ public class SketchWindow extends ItemDrawer
         TDToast.make( mActivity, R.string.sketch3d_loading );
       }
     } else if ( b == mButton1[k1++] ) { // DOWNLOAD
-      if ( mApp.mDevice != null ) {
+      if ( TDInstance.device != null ) {
         // TODO if there is an empty shot use it, else try to download the data
         //      with the Asynch task that download the data.
         //      if there is an empty shot assign it
@@ -1873,7 +1873,7 @@ public class SketchWindow extends ItemDrawer
       (new DistoXAnnotations( mActivity, mData.getSurveyFromId(mSid) )).show();
     } else if ( b == mButton1[k1++] ) { // INFO
       // float azimuth = -1;
-      new DistoXStatDialog( mActivity, mNum, mInfo.start, -1, mData.getSurveyStat( mApp.mSID ) ).show();
+      new DistoXStatDialog( mActivity, mNum, mInfo.start, -1, mData.getSurveyStat( TDInstance.sid ) ).show();
 
 // MODE_DRAW
     } else if ( b == mButton2[k2++] ) { // UNDO

@@ -177,7 +177,7 @@ class CutNPaste
     Button textview2 = null;
     Button textview3 = null;
     Button textview4 = null;
-    if ( app.distoType() == Device.DISTO_X310 ) {
+    if ( TDInstance.distoType() == Device.DISTO_X310 ) {
       // ----- TURN LASER ON
       //
       text = res.getString(R.string.remote_on);
@@ -250,7 +250,7 @@ class CutNPaste
     int h = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.70);
     // int h = (int)( BUTTON_HEIGHT * 7 * 1.1 ); 
     textview0.setWidth( w );
-    if ( app.distoType() == Device.DISTO_X310 ) {
+    if ( TDInstance.distoType() == Device.DISTO_X310 ) {
       if ( textview1 != null) textview1.setWidth( w );
       if ( textview2 != null) textview2.setWidth( w );
       if ( textview3 != null) textview3.setWidth( w );

@@ -72,7 +72,7 @@ class DrawingCommandManager
   // private List<DrawingPath>     mHighlight;  // highlighted path
   final private List<DrawingStationName> mStations;  // survey stations
   final private List<DrawingLinePath>    mScrap;     // scrap outline
-  private List<DrawingOutlinePath> mXSections; // xsections outlines
+  private List<DrawingOutlinePath> mXSectionOutlines; // xsections outlines
   private int mMaxAreaIndex;                   // max index of areas in this plot
 
   private Selection mSelection;
@@ -195,7 +195,7 @@ class DrawingCommandManager
     synchronized( mSplaysStack ) { flipXAxes( mSplaysStack ); }
     // FIXME 
     synchronized( mScrap ) { mScrap.clear(); }
-    synchronized( TDPath.mXSectionsLock ) { mXSections.clear(); }
+    synchronized( TDPath.mXSectionsLock ) { mXSectionOutlines.clear(); }
  
     synchronized( mStations ) {
       for ( DrawingStationName st : mStations ) {
@@ -300,7 +300,7 @@ class DrawingCommandManager
     mLegsStack    = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mSplaysStack  = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mScrap        = Collections.synchronizedList(new ArrayList<DrawingLinePath>());
-    mXSections    = Collections.synchronizedList(new ArrayList<DrawingOutlinePath>());
+    mXSectionOutlines = Collections.synchronizedList(new ArrayList<DrawingOutlinePath>());
     mCurrentStack = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
     mUserStations = Collections.synchronizedList(new ArrayList<DrawingStationPath>());
     mRedoStack    = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
@@ -344,7 +344,7 @@ class DrawingCommandManager
     synchronized( mLegsStack )   { mLegsStack.clear(); }
     synchronized( mSplaysStack ) { mSplaysStack.clear(); }
     synchronized( mScrap       ) { mScrap.clear(); }
-    synchronized( TDPath.mXSectionsLock   ) { mXSections.clear(); }
+    synchronized( TDPath.mXSectionsLock   ) { mXSectionOutlines.clear(); }
     synchronized( mStations )    { mStations.clear(); }
     clearSelected();
     synchronized( TDPath.mSelectionLock )   { mSelection.clearReferencePoints(); }
@@ -1520,9 +1520,9 @@ class DrawingCommandManager
         }
       }
     }
-    if ( mXSections != null && mXSections.size() > 0 ) {
+    if ( mXSectionOutlines != null && mXSectionOutlines.size() > 0 ) {
       synchronized( TDPath.mXSectionsLock )  {
-        final Iterator i = mXSections.iterator();
+        final Iterator i = mXSectionOutlines.iterator();
         while ( i.hasNext() ){
           final DrawingOutlinePath path = (DrawingOutlinePath) i.next();
           path.mPath.draw( canvas, mMatrix, mScale, null /* mBBox */ );
@@ -2701,13 +2701,13 @@ class DrawingCommandManager
   //   }
   // }
 
-  void clearXSectionsOutline() { synchronized( TDPath.mXSectionsLock ) { mXSections.clear(); } }
+  void clearXSectionsOutline() { synchronized( TDPath.mXSectionsLock ) { mXSectionOutlines.clear(); } }
 
   boolean hasXSectionOutline( String name ) 
   { 
-    if ( mXSections == null || mXSections.size() == 0 ) return false;
+    if ( mXSectionOutlines == null || mXSectionOutlines.size() == 0 ) return false;
     synchronized( TDPath.mXSectionsLock )  {
-      final Iterator i = mXSections.iterator();
+      final Iterator i = mXSectionOutlines.iterator();
       while ( i.hasNext() ){
         final DrawingOutlinePath path = (DrawingOutlinePath) i.next();
         if ( path.isScrap( name ) ) return true;
@@ -2719,28 +2719,28 @@ class DrawingCommandManager
   void addXSectionOutlinePath( DrawingOutlinePath path )
   {
     synchronized( TDPath.mXSectionsLock ) {
-      mXSections.add( path );
+      mXSectionOutlines.add( path );
     }
   }
 
   void clearXSectionOutline( String name )
   {
-    List<DrawingOutlinePath> xsections = Collections.synchronizedList(new ArrayList<DrawingOutlinePath>());
+    List<DrawingOutlinePath> xsection_outlines = Collections.synchronizedList(new ArrayList<DrawingOutlinePath>());
     synchronized( TDPath.mXSectionsLock ) {
-      final Iterator i = mXSections.iterator();
+      final Iterator i = mXSectionOutlines.iterator();
       while ( i.hasNext() ) {
         final DrawingOutlinePath path = (DrawingOutlinePath) i.next();
-        if ( ! path.isScrap( name ) ) xsections.add( path );
+        if ( ! path.isScrap( name ) ) xsection_outlines.add( path );
       }
-      mXSections.clear(); // not necessary
+      mXSectionOutlines.clear(); // not necessary
     }
-    mXSections = xsections;
+    mXSectionOutlines = xsection_outlines;
   }
 
   private void shiftXSectionOutline( String name, float dx, float dy )
   {
     synchronized( TDPath.mXSectionsLock ) {
-      final Iterator i = mXSections.iterator();
+      final Iterator i = mXSectionOutlines.iterator();
       while ( i.hasNext() ) {
         final DrawingOutlinePath path = (DrawingOutlinePath) i.next();
         if ( path.isScrap( name ) ) path.mPath.shiftBy( dx, dy );

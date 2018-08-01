@@ -284,8 +284,9 @@ public class DrawingWindow extends ItemDrawer
   private boolean audioCheck;
   // private DataHelper mData;
   private Activity mActivity = null;
-  long getSID() { return mApp.mSID; }
-  String getSurvey() { return mApp.mySurvey; }
+
+  // long getSID() { return TDInstance.sid; }
+  // String getSurvey() { return TDInstance.survey; }
 
   private DistoXNum mNum;
   private float mDecl;
@@ -510,7 +511,7 @@ public class DrawingWindow extends ItemDrawer
 
   private int mNrSaveTh2Task = 0; // current number of save tasks
 
-  Set<String> getStationNames() { return mApp_mData.selectAllStations( mApp.mSID ); }
+  Set<String> getStationNames() { return mApp_mData.selectAllStations( TDInstance.sid ); }
 
   // ----------------------------------------------------------
   // PLOT NAME(S)
@@ -551,18 +552,18 @@ public class DrawingWindow extends ItemDrawer
       String name2 = name + "s";
       // Log.v("DistoX", "rename plot to: " + name1 + " " + name2 );
       // check if plot name name2 exists
-      if ( mApp_mData.getPlotInfo( mApp.mSID, name2 ) == null &&
-           mApp_mData.getPlotInfo( mApp.mSID, name1 ) == null ) {
-        mApp_mData.updatePlotName( mApp.mSID, mPid1, name1 );
-        mApp_mData.updatePlotName( mApp.mSID, mPid2, name2 );
+      if ( mApp_mData.getPlotInfo( TDInstance.sid, name2 ) == null &&
+           mApp_mData.getPlotInfo( TDInstance.sid, name1 ) == null ) {
+        mApp_mData.updatePlotName( TDInstance.sid, mPid1, name1 );
+        mApp_mData.updatePlotName( TDInstance.sid, mPid2, name2 );
         mName1 = name1;
         mName2 = name2;
         mPlot1.name = name1;
         mPlot2.name = name2;
         mName = ( PlotInfo.isProfile( mType ) )?  mName2 : mName1;
         // rename files
-        String fullName1 = mApp.mySurvey + "-" + mName1;
-        String fullName2 = mApp.mySurvey + "-" + mName2;
+        String fullName1 = TDInstance.survey + "-" + mName1;
+        String fullName2 = TDInstance.survey + "-" + mName2;
 
         TDPath.renamePlotFiles( mFullName1, fullName1 );
         TDPath.renamePlotFiles( mFullName2, fullName2 );
@@ -810,7 +811,7 @@ public class DrawingWindow extends ItemDrawer
     StringBuilder sb = new StringBuilder();
     if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI ) {
       sb.append( "{" );
-      if ( mApp.mDevice != null ) sb.append( mApp.mDevice.getNickname() );
+      if ( TDInstance.device != null ) sb.append( TDInstance.device.getNickname() );
       sb.append( "} " );
     }
     sb.append( mApp.getConnectionStateTitleStr() );
@@ -1093,7 +1094,7 @@ public class DrawingWindow extends ItemDrawer
     List< NumShot > shots       = mNum.getShots();
     List< NumSplay > splays     = mNum.getSplays();
 
-    String parent = (TopoDroidApp.mXSections? null : name);
+    String parent = ( TDInstance.xsections? null : name );
 
     if ( type == PlotInfo.PLOT_PLAN ) {
       for ( NumShot sh : shots ) {
@@ -1116,9 +1117,9 @@ public class DrawingWindow extends ItemDrawer
           }
         }
       }
-      // N.B. this is where mXSections is necessary: to decide which xsections to check for stations
+      // N.B. this is where TDInstance.xsections is necessary: to decide which xsections to check for stations
       //      could use PlotInfo.isXSectionPrivate and PlotInfo.getXSectionParent
-      List< PlotInfo > xsections = mApp_mData.selectAllPlotSectionsWithType( mApp.mSID, 0, PlotInfo.PLOT_X_SECTION, parent );
+      List< PlotInfo > xsections = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotInfo.PLOT_X_SECTION, parent );
       for ( NumStation st : stations ) {
         if ( st.show() ) {
           DrawingStationName dst;
@@ -1148,7 +1149,7 @@ public class DrawingWindow extends ItemDrawer
           }
         }
       }
-      List< PlotInfo > xhsections = mApp_mData.selectAllPlotSectionsWithType( mApp.mSID, 0, PlotInfo.PLOT_XH_SECTION, parent );
+      List< PlotInfo > xhsections = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotInfo.PLOT_XH_SECTION, parent );
       for ( NumStation st : stations ) {
         if ( st.mHasCoords && st.show() ) {
           DrawingStationName dst;
@@ -1181,7 +1182,7 @@ public class DrawingWindow extends ItemDrawer
           }
         }
       }
-      List< PlotInfo > xhsections = mApp_mData.selectAllPlotSectionsWithType( mApp.mSID, 0, PlotInfo.PLOT_XH_SECTION, parent );
+      List< PlotInfo > xhsections = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotInfo.PLOT_XH_SECTION, parent );
       for ( NumStation st : stations ) {
         if ( st.show() ) {
           DrawingStationName dst;
@@ -1521,7 +1522,7 @@ public class DrawingWindow extends ItemDrawer
     // Log.v("DistoX", "push info " + type + " " + name + " from " + from + " " + to + " A " + azimuth + " C " + clino + " TT " + tt );
     mSavedType = mType;
     mName = mName3 = name;
-    mFullName3 = mApp.mySurvey + "-" + mName;
+    mFullName3 = TDInstance.survey + "-" + mName;
     mType    = type;
     mFrom    = from;
     mTo      = to;
@@ -1700,7 +1701,7 @@ public class DrawingWindow extends ItemDrawer
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
     mListView.setEmptyPlacholder(true);
-    mButtonSize = mApp.setListViewHeight( mListView );
+    mButtonSize = TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
@@ -1752,8 +1753,8 @@ public class DrawingWindow extends ItemDrawer
 
       mName1 = extras.getString( TDTag.TOPODROID_PLOT_NAME );
       mName2 = extras.getString( TDTag.TOPODROID_PLOT_NAME2 );
-      mFullName1 = mApp.mySurvey + "-" + mName1;
-      mFullName2 = mApp.mySurvey + "-" + mName2;
+      mFullName1 = TDInstance.survey + "-" + mName1;
+      mFullName2 = TDInstance.survey + "-" + mName2;
       mFullName3 = null;
       mType = extras.getLong( TDTag.TOPODROID_PLOT_TYPE );
 
@@ -1810,7 +1811,7 @@ public class DrawingWindow extends ItemDrawer
   // called by PlotListDialog
   void switchNameAndType( String name, long tt ) // SWITCH
   {
-    PlotInfo p1 = mApp_mData.getPlotInfo( mApp.mSID, name+"p" );
+    PlotInfo p1 = mApp_mData.getPlotInfo( TDInstance.sid, name+"p" );
     if ( mPid1 == p1.id ) {
       if ( tt != mType ) { // switch plot type
         startSaveTdrTask( mType, PlotSave.TOGGLE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP ); 
@@ -1826,11 +1827,11 @@ public class DrawingWindow extends ItemDrawer
     mOffset.x = 0;
     mOffset.y = 0;
     if ( p1 != null ) {
-      // PlotInfo plot2 =  mApp_mData.getPlotInfo( mApp.mSID, name+"s" );
+      // PlotInfo plot2 =  mApp_mData.getPlotInfo( TDInstance.sid, name+"s" );
       mName1 = name+"p";
       mName2 = name+"s";
-      mFullName1 = mApp.mySurvey + "-" + mName1;
-      mFullName2 = mApp.mySurvey + "-" + mName2;
+      mFullName1 = TDInstance.survey + "-" + mName1;
+      mFullName2 = TDInstance.survey + "-" + mName2;
       mFullName3 = null;
       mType      = tt;
       mLandscape = p1.isLandscape();
@@ -2243,9 +2244,9 @@ public class DrawingWindow extends ItemDrawer
           DrawingSurface.addManagerToCache( mFullName2 );
         }
         
-        String parent = (TopoDroidApp.mXSections? null : mName);
-        List<PlotInfo> xsection_plan = mApp_mData.selectAllPlotSectionsWithType( mApp.mSID, 0, PlotInfo.PLOT_X_SECTION,  parent );
-        List<PlotInfo> xsection_ext  = mApp_mData.selectAllPlotSectionsWithType( mApp.mSID, 0, PlotInfo.PLOT_XH_SECTION, parent );
+        String parent = ( TDInstance.xsections? null : mName);
+        List<PlotInfo> xsection_plan = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotInfo.PLOT_X_SECTION,  parent );
+        List<PlotInfo> xsection_ext  = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotInfo.PLOT_XH_SECTION, parent );
 
         computeReferences( mPlot2.type, mPlot2.name, mZoom, true );
         computeReferences( mPlot1.type, mPlot1.name, mZoom, true );
@@ -2438,7 +2439,7 @@ public class DrawingWindow extends ItemDrawer
     private void deleteSplay( DrawingPath p, SelectionPoint sp, DBlock blk )
     {
       mDrawingSurface.deleteSplay( p, sp ); 
-      mApp_mData.deleteShot( blk.mId, mApp.mSID, TDStatus.DELETED, true );
+      mApp_mData.deleteShot( blk.mId, TDInstance.sid, TDStatus.DELETED, true );
       mApp.mShotWindow.updateDisplay(); // FIXME ???
     }
 
@@ -2449,13 +2450,13 @@ public class DrawingWindow extends ItemDrawer
       // Log.v("DistoX", "delete point type " + point.mPointType );
       if ( BrushManager.isPointPhoto( point.mPointType ) ) {
         DrawingPhotoPath photo = (DrawingPhotoPath)point;
-        mApp_mData.deletePhoto( mApp.mSID, photo.mId );
-        TopoDroidUtil.deleteFile( TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString( photo.mId ) ) );
+        mApp_mData.deletePhoto( TDInstance.sid, photo.mId );
+        TopoDroidUtil.deleteFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString( photo.mId ) ) );
       } else if ( BrushManager.isPointAudio( point.mPointType ) ) {
         DrawingAudioPath audio = (DrawingAudioPath)point;
-        mApp_mData.deleteAudio( mApp.mSID, audio.mId );
+        mApp_mData.deleteAudio( TDInstance.sid, audio.mId );
 
-        TopoDroidUtil.deleteFile( TDPath.getSurveyAudioFile( mApp.mySurvey, Long.toString( audio.mId ) ) );
+        TopoDroidUtil.deleteFile( TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString( audio.mId ) ) );
       } else if ( BrushManager.isPointSection( point.mPointType ) ) {
         mDrawingSurface.clearXSectionOutline( point.getOption( "-scrap" ) );
       }
@@ -2493,21 +2494,21 @@ public class DrawingWindow extends ItemDrawer
     private void deleteSectionLine( DrawingLinePath line )
     {
       String xs_id = line.getOption( "-id" );
-      String scrap_name = mApp.mySurvey + "-" + xs_id;
+      String scrap_name = TDInstance.survey + "-" + xs_id;
       mDrawingSurface.deleteSectionLine( line, scrap_name );
       TDPath.deletePlotFileWithBackups( TDPath.getTh2File( scrap_name + ".th2" ) );
       TDPath.deletePlotFileWithBackups( TDPath.getTdrFile( scrap_name + ".tdr" ) );
-      TDPath.deleteFile( TDPath.getJpgFile( mApp.mySurvey, xs_id + ".jpg" ) );
+      TDPath.deleteFile( TDPath.getJpgFile( TDInstance.survey, xs_id + ".jpg" ) );
 
       // section point is deleted automatically
       // deleteSectionPoint( xs_id ); // delete section point and possibly clear section outline
       mDrawingSurface.clearXSectionOutline( scrap_name ); // clear outline if any
      
-      PlotInfo plot = mApp_mData.getPlotInfo( mApp.mSID, xs_id );
+      PlotInfo plot = mApp_mData.getPlotInfo( TDInstance.sid, xs_id );
       if ( plot != null ) {
-        mApp_mData.dropPlot( plot.id, mApp.mSID );
+        mApp_mData.dropPlot( plot.id, TDInstance.sid );
       } else {
-        TDLog.Error("Delete section line. No plot NAME " + xs_id + " SID " + mApp.mSID );
+        TDLog.Error("Delete section line. No plot NAME " + xs_id + " SID " + TDInstance.sid );
       }
     }
 
@@ -3036,7 +3037,7 @@ public class DrawingWindow extends ItemDrawer
             if ( sn != null ) {
               boolean barrier = mNum.isBarrier( sn.mName );
               boolean hidden  = mNum.isHidden( sn.mName );
-              // new DrawingStationDialog( mActivity, this, sn, barrier, hidden, mApp.mXSections ).show();
+              // new DrawingStationDialog( mActivity, this, sn, barrier, hidden, TDInstance.xsections ).show();
               openXSection( sn, sn.mName, mType );
             }
           }
@@ -3362,7 +3363,7 @@ public class DrawingWindow extends ItemDrawer
     if ( nr_legs == 0 ) {
       TDToast.make( mActivity, R.string.no_leg_intersection );
     } else if ( nr_legs == 1 ) {
-      String section_id = mApp_mData.getNextSectionId( mApp.mSID );
+      String section_id = mApp_mData.getNextSectionId( TDInstance.sid );
       currentLine.addOption( "-id " + section_id );
       mDrawingSurface.addDrawingPath( currentLine );
 
@@ -3370,8 +3371,8 @@ public class DrawingWindow extends ItemDrawer
         float x5 = currentLine.mLast.x + currentLine.mDx * 20; 
         float y5 = currentLine.mLast.y + currentLine.mDy * 20; 
         // FIXME_LANDSCAPE if ( mLandscape ) { float t=x5; x5=-y5; y5=t; }
-        // FIXME String scrap_option = "-scrap " /* + mApp.mySurvey + "-" */ + section_id;
-        String scrap_option = "-scrap " + mApp.mySurvey + "-" + section_id;
+        // FIXME String scrap_option = "-scrap " /* + TDInstance.survey + "-" */ + section_id;
+        String scrap_option = "-scrap " + TDInstance.survey + "-" + section_id;
         DrawingPointPath section_pt = new DrawingPointPath( BrushManager.mPointLib.mPointSectionIndex,
                                                         x5, y5, DrawingPointPath.SCALE_M, 
                                                         null, // no text 
@@ -3408,10 +3409,10 @@ public class DrawingWindow extends ItemDrawer
 
     public void insertPhoto( )
     {
-      mApp_mData.insertPhoto( mApp.mSID, mMediaId, -1, "", TopoDroidUtil.currentDate(), mMediaComment ); // FIXME TITLE has to go
+      mApp_mData.insertPhoto( TDInstance.sid, mMediaId, -1, "", TopoDroidUtil.currentDate(), mMediaComment ); // FIXME TITLE has to go
       // FIXME NOTIFY ? no
       // photo file is "survey/id.jpg"
-      // String filename = mApp.mySurvey + "/" + Long.toString( mMediaId ) + ".jpg";
+      // String filename = TDInstance.survey + "/" + Long.toString( mMediaId ) + ".jpg";
       DrawingPhotoPath photo = new DrawingPhotoPath( mMediaComment, mMediaX, mMediaY, mPointScale, null, mMediaId );
       photo.mLandscape = mLandscape;
       mDrawingSurface.addDrawingPath( photo );
@@ -3423,7 +3424,7 @@ public class DrawingWindow extends ItemDrawer
     //      DO NOT USE IT
     // public void notifyAzimuthClino( long pid, float azimuth, float clino )
     // {
-    //   mApp_mData.updatePlotAzimuthClino( mApp.mSID, pid, azimuth, clino );
+    //   mApp_mData.updatePlotAzimuthClino( TDInstance.sid, pid, azimuth, clino );
     // }
 
     private void doTakePhoto( File imagefile, boolean insert, long pid )
@@ -3465,7 +3466,7 @@ public class DrawingWindow extends ItemDrawer
     public void addPhotoPoint( String comment, float x, float y )
     {
       mMediaComment = (comment == null)? "" : comment;
-      mMediaId = mApp_mData.nextPhotoId( mApp.mSID );
+      mMediaId = mApp_mData.nextPhotoId( TDInstance.sid );
       if ( mLandscape ) {
         mMediaX = -y;
         mMediaY = x;
@@ -3473,7 +3474,7 @@ public class DrawingWindow extends ItemDrawer
         mMediaX = x;
         mMediaY = y;
       }
-      File imagefile = new File( TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString(mMediaId) ) );
+      File imagefile = new File( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mMediaId) ) );
       // TODO TD_XSECTION_PHOTO
       doTakePhoto( imagefile, true, -1L ); // with inserter, no pid
     }
@@ -3485,7 +3486,7 @@ public class DrawingWindow extends ItemDrawer
 	// TODO TDToast.make( mActivity, R.string.no_feature_audio );
 	return;
       }
-      mMediaId = mApp_mData.nextAudioNegId( mApp.mSID );
+      mMediaId = mApp_mData.nextAudioNegId( TDInstance.sid );
       if ( mLandscape ) {
         mMediaX = -y;
         mMediaY = x;
@@ -3493,7 +3494,7 @@ public class DrawingWindow extends ItemDrawer
         mMediaX = x;
         mMediaY = y;
       }
-      File file = new File( TDPath.getSurveyAudioFile( mApp.mySurvey, Long.toString(mMediaId) ) );
+      File file = new File( TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString(mMediaId) ) );
       // TODO RECORD AUDIO
       new AudioDialog( this, mApp, this, mMediaId ).show();
     }
@@ -3535,15 +3536,15 @@ public class DrawingWindow extends ItemDrawer
         xs_id = "xh-" + name;
         xtype = PlotInfo.PLOT_XH_SECTION;
       } else {
-	TDLog.Error("No at-station section to delete. Plot type " + type + " Name " + name + " SID "  + mApp.mSID );
+	TDLog.Error("No at-station section to delete. Plot type " + type + " Name " + name + " SID "  + TDInstance.sid );
         return;
       }
 
       st.resetXSection();
-      mApp_mData.deletePlotByName( xs_id, mApp.mSID );
+      mApp_mData.deletePlotByName( xs_id, TDInstance.sid );
       // drop the files
-      TopoDroidUtil.deleteFile( TDPath.getSurveyPlotTdrFile( mApp.mySurvey, xs_id ) );
-      TopoDroidUtil.deleteFile( TDPath.getSurveyPlotTh2File( mApp.mySurvey, xs_id ) );
+      TopoDroidUtil.deleteFile( TDPath.getSurveyPlotTdrFile( TDInstance.survey, xs_id ) );
+      TopoDroidUtil.deleteFile( TDPath.getSurveyPlotTh2File( TDInstance.survey, xs_id ) );
       // TODO delete backup files
 
       deleteSectionPoint( xs_id ); 
@@ -3553,7 +3554,7 @@ public class DrawingWindow extends ItemDrawer
     private void deleteSectionPoint( String xs_id )
     {
       if ( xs_id == null ) return;
-      String scrap_name = mApp.mySurvey + "-" + xs_id;
+      String scrap_name = TDInstance.survey + "-" + xs_id;
       mDrawingSurface.deleteSectionPoint( scrap_name );   // this section-point delete cannot be undone
       mDrawingSurface.clearXSectionOutline( scrap_name ); // clear outline if any
     }
@@ -3579,11 +3580,11 @@ public class DrawingWindow extends ItemDrawer
       // parent name = mName
       String xs_id = getXSectionName( st_name, type );
       if ( xs_id == null ) return "";
-      if ( ! TopoDroidApp.mXSections ) xs_id = xs_id + "-" + mName;
+      if ( ! TDInstance.xsections ) xs_id = xs_id + "-" + mName;
 
       // Log.v("DistoXX", "xsection nick for <" + xs_id + ">" );
 
-      PlotInfo plot = mApp_mData.getPlotInfo( mApp.mSID, xs_id );
+      PlotInfo plot = mApp_mData.getPlotInfo( TDInstance.sid, xs_id );
       if ( plot != null ) return plot.nick;
       return null;
     }
@@ -3609,12 +3610,12 @@ public class DrawingWindow extends ItemDrawer
       // parent plot name = mName
       String xs_id = getXSectionName( st_name, type );
       if ( xs_id == null ) return;
-      if ( ! TopoDroidApp.mXSections ) xs_id = xs_id + "-" + mName;
+      if ( ! TDInstance.xsections ) xs_id = xs_id + "-" + mName;
       long xtype = getXSectionType( type );
 
       // Log.v("DistoXX", "open xsection <" + xs_id + "> nick <" + nick + ">" );
 
-      PlotInfo plot = mApp_mData.getPlotInfo( mApp.mSID, xs_id );
+      PlotInfo plot = mApp_mData.getPlotInfo( TDInstance.sid, xs_id );
 
       if ( plot == null  ) { // if there does not exist xsection xs-name create it
         // TDToast.make( mActivity, R.string.too_many_legs_xsection );
@@ -3632,8 +3633,8 @@ public class DrawingWindow extends ItemDrawer
         }
         // Log.v("DistoXX", "new at-station X-section " + xs_id + " st_name " + st_name + " nick <" + nick + ">" );
 
-        mApp.insert2dSection( mApp.mSID, xs_id, xtype, st_name, "", azimuth, clino, (TopoDroidApp.mXSections? null : mName), nick );
-        plot = mApp_mData.getPlotInfo( mApp.mSID, xs_id );
+        mApp.insert2dSection( TDInstance.sid, xs_id, xtype, st_name, "", azimuth, clino, (TDInstance.xsections? null : mName), nick );
+        plot = mApp_mData.getPlotInfo( TDInstance.sid, xs_id );
 
         // add x-section to station-name
 
@@ -3642,8 +3643,8 @@ public class DrawingWindow extends ItemDrawer
           float x5 = st.getXSectionX( 4 ); // FIXME offset
           float y5 = st.getXSectionY( 4 );
 	  if ( mLandscape ) { float t=x5; x5=-y5; y5=t; }
-	  // FIXME String scrap_option = "-scrap " /* + mApp.mySurvey + "-" */ + xs_id;
-	  String scrap_option = "-scrap " + mApp.mySurvey + "-" + xs_id;
+	  // FIXME String scrap_option = "-scrap " /* + TDInstance.survey + "-" */ + xs_id;
+	  String scrap_option = "-scrap " + TDInstance.survey + "-" + xs_id;
 	  DrawingPointPath section_pt = new DrawingPointPath( BrushManager.mPointLib.mPointSectionIndex,
 							    x5, y5, DrawingPointPath.SCALE_M, 
 							    null, scrap_option ); // no text
@@ -4281,7 +4282,7 @@ public class DrawingWindow extends ItemDrawer
     if ( dismiss == DISMISS_BT ) return;
     if ( ! mDataDownloader.isDownloading() ) {
 	// FIXME
-      if ( TDLevel.overExpert && mApp.distoType() == Device.DISTO_X310 
+      if ( TDLevel.overExpert && TDInstance.distoType() == Device.DISTO_X310 
 	      && TDSetting.mConnectionMode != TDSetting.CONN_MODE_MULTI
 	  ) {
         CutNPaste.showPopupBT( mActivity, this, mApp, b, false );
@@ -4414,8 +4415,8 @@ public class DrawingWindow extends ItemDrawer
         setConnectionStatus( 2 );
         resetFixedPaint();
         updateReference();
-        if ( mApp.mDevice == null ) {
-          // DBlock last_blk = null; // mApp_mData.selectLastLegShot( mApp.mSID );
+        if ( TDInstance.device == null ) {
+          // DBlock last_blk = null; // mApp_mData.selectLastLegShot( TDInstance.sid );
           (new ShotNewDialog( mActivity, mApp, this, null, -1L )).show();
         } else {
           mDataDownloader.toggleDownload();
@@ -4510,8 +4511,8 @@ public class DrawingWindow extends ItemDrawer
               DrawingStationPath path = mDrawingSurface.getStationPath( sn.name() );
               boolean barrier = mNum.isBarrier( sn.name() );
               boolean hidden  = mNum.isHidden( sn.name() );
-              List< DBlock > legs = mApp_mData.selectShotsAt( mApp.mSID, sn.name(), true ); // select "independent" legs
-              new DrawingStationDialog( mActivity, this, sn, path, barrier, hidden, TopoDroidApp.mXSections, legs ).show();
+              List< DBlock > legs = mApp_mData.selectShotsAt( TDInstance.sid, sn.name(), true ); // select "independent" legs
+              new DrawingStationDialog( mActivity, this, sn, path, barrier, hidden, TDInstance.xsections, legs ).show();
               break;
             case DrawingPath.DRAWING_PATH_POINT:
               DrawingPointPath point = (DrawingPointPath)(sp.mItem);
@@ -4663,10 +4664,10 @@ public class DrawingWindow extends ItemDrawer
 
       if ( id == null || id.length() == 0 ) return -1;
       mSectionName = id;
-      long pid = mApp_mData.getPlotId( mApp.mSID, mSectionName );
+      long pid = mApp_mData.getPlotId( TDInstance.sid, mSectionName );
       if ( pid < 0 ) { 
         // Log.v("DistoXX", "prepare xsection <" + mSectionName + "> nick <" + nick + ">" );
-        pid = mApp.insert2dSection( mApp.mSID, mSectionName, type, from, to, azimuth, clino, ( TopoDroidApp.mXSections? null : mName), nick );
+        pid = mApp.insert2dSection( TDInstance.sid, mSectionName, type, from, to, azimuth, clino, ( TDInstance.xsections? null : mName), nick );
       }
       return pid;
     }
@@ -4677,7 +4678,7 @@ public class DrawingWindow extends ItemDrawer
       long pid = prepareXSection( id, type, from, to, nick, azimuth, clino );
       if ( pid >= 0 ) {
         // imageFile := PHOTO_DIR / surveyId / photoId .jpg
-        File imagefile = new File( TDPath.getSurveyJpgFile( mApp.mySurvey, id ) );
+        File imagefile = new File( TDPath.getSurveyJpgFile( TDInstance.survey, id ) );
         // TODO TD_XSECTION_PHOTO
         doTakePhoto( imagefile, false, pid ); // without inserter
       }
@@ -4710,10 +4711,10 @@ public class DrawingWindow extends ItemDrawer
     void openSectionDraw( String scrapname )
     { 
       // remove survey name from scrap-name (if necessary)
-      String name = scrapname.replace( mApp.mySurvey + "-", "" );
+      String name = scrapname.replace( TDInstance.survey + "-", "" );
       // Log.v("DistoX", "scrapname " + scrapname + " plot name " + name );
 
-      PlotInfo pi = mApp_mData.getPlotInfo( mApp.mSID, name );
+      PlotInfo pi = mApp_mData.getPlotInfo( TDInstance.sid, name );
       if ( pi != null ) {
         pushInfo( pi.type, pi.name, pi.start, pi.view, pi.azimuth, pi.clino, -1 );
         zoomFit( mDrawingSurface.getBitmapBounds() );
@@ -4757,10 +4758,7 @@ public class DrawingWindow extends ItemDrawer
     // used also by SavePlotFileTask
     void doSaveCsx( String origin, PlotSaveData psd1, PlotSaveData psd2 )
     {
-      // TODO String filename = mApp.exportSurveyAsCsx( this, plot.start );
-      String filename = TopoDroidApp.exportSurveyAsCsx( origin, psd1, psd2 );
-      TDLog.Log( TDLog.LOG_IO, "export survey as CSX " + filename );
-      TDToast.make( mApp, getString(R.string.saved_file_1) + " " + filename );
+      TopoDroidApp.exportSurveyAsCsxAsync( getApplicationContext(), origin, psd1, psd2 );
     }
 
     // used to save "dxf", "svg"
@@ -4908,7 +4906,7 @@ public class DrawingWindow extends ItemDrawer
         doComputeReferences( false );
       }
       if ( toast ) {
-        if ( mApp.mDevice.mType == Device.DISTO_X310 ) nr /= 2;
+        if ( TDInstance.device.mType == Device.DISTO_X310 ) nr /= 2;
         TDToast.make( mActivity, getResources().getQuantityString(R.plurals.read_data, nr, nr ) );
       }
     } else { // ( nr < 0 )
@@ -5119,7 +5117,7 @@ public class DrawingWindow extends ItemDrawer
       // } else {
       //         float t = mOffset.x; mOffset.x = -mOffset.y;  mOffset.y = t;
       // }
-      mApp_mData.updatePlotOrientation( mApp.mSID, mPid, mLandscape ? 1 : 0 );
+      mApp_mData.updatePlotOrientation( TDInstance.sid, mPid, mLandscape ? 1 : 0 );
       mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
       doZoomFit();
       setTheTitle();
@@ -5156,7 +5154,7 @@ public class DrawingWindow extends ItemDrawer
             if ( mPlot2 !=  null && PlotInfo.PLOT_PROFILE == mPlot2.type ) {
               azimuth = mPlot2.azimuth;
             }
-            new DistoXStatDialog( mActivity, mNum, mPlot1.start, azimuth, mApp_mData.getSurveyStat( mApp.mSID ) ).show();
+            new DistoXStatDialog( mActivity, mNum, mPlot1.start, azimuth, mApp_mData.getSurveyStat( TDInstance.sid ) ).show();
           } else {
             TDToast.make( mActivity, R.string.no_data_reduction );
 	  }
@@ -5327,7 +5325,7 @@ public class DrawingWindow extends ItemDrawer
 
   public void setConnectionStatus( int status )
   { 
-    if ( mApp.mDevice == null ) {
+    if ( TDInstance.device == null ) {
       mButton1[ BTN_DOWNLOAD ].setBackgroundDrawable( mBMadd );
       mButton1[ BTN_BLUETOOTH ].setBackgroundDrawable( mBMbluetooth_no );
     } else {
@@ -5727,7 +5725,7 @@ public class DrawingWindow extends ItemDrawer
       return;
     }
     String name = ( mType == PlotInfo.PLOT_PLAN )? mPlot1.name : mPlot2.name;
-    List< PlotInfo > plots = mApp_mData.selectAllPlotsWithType( mApp.mSID, TDStatus.NORMAL, mType );
+    List< PlotInfo > plots = mApp_mData.selectAllPlotsWithType( TDInstance.sid, TDStatus.NORMAL, mType );
     for ( PlotInfo plot : plots ) {
       if ( plot.name.equals( name ) ) {
         plots.remove( plot );
@@ -5776,7 +5774,7 @@ public class DrawingWindow extends ItemDrawer
     xdelta *= DrawingUtil.SCALE_FIX;
     ydelta *= DrawingUtil.SCALE_FIX;
 
-    String fullName = mApp.mySurvey + "-" + plot.name;
+    String fullName = TDInstance.survey + "-" + plot.name;
     String tdr = TDPath.getTdrFileWithExt( fullName );
     // Log.v("DistoX0", "add outline " + tdr + " delta " + xdelta + " " + ydelta );
     mDrawingSurface.addScrapDataStream( tdr, xdelta, ydelta );
@@ -5826,7 +5824,7 @@ public class DrawingWindow extends ItemDrawer
 
   void mergePlot()
   {
-    List<PlotInfo> plots = mApp_mData.selectAllPlotsWithType( mApp.mSID, TDStatus.NORMAL, mType );
+    List<PlotInfo> plots = mApp_mData.selectAllPlotsWithType( TDInstance.sid, TDStatus.NORMAL, mType );
     if ( plots.size() <= 1 ) { // nothing to merge in
       return;
     }
@@ -5860,7 +5858,7 @@ public class DrawingWindow extends ItemDrawer
     }
     xdelta *= DrawingUtil.SCALE_FIX;
     ydelta *= DrawingUtil.SCALE_FIX;
-    String fullName = mApp.mySurvey + "-" + plt.name;
+    String fullName = TDInstance.survey + "-" + plt.name;
     String tdr = TDPath.getTdrFileWithExt( fullName );
     boolean ret = mDrawingSurface.addloadDataStream( tdr, null, xdelta, ydelta, null );
   }
@@ -5879,10 +5877,10 @@ public class DrawingWindow extends ItemDrawer
     }
     boolean extended = (mPlot2.type == PlotInfo.PLOT_EXTENDED);
     int azimuth = (int)mPlot2.azimuth; 
-    long pid = mApp.insert2dPlot( mApp.mSID, mSplitName, mSplitStationName, extended, azimuth );
+    long pid = mApp.insert2dPlot( TDInstance.sid, mSplitName, mSplitStationName, extended, azimuth );
     String name = mSplitName + ( ( mType == PlotInfo.PLOT_PLAN )? "p" : "s" );
-    String fullname = mApp.mySurvey + "-" + name;
-    // PlotInfo plot = mApp_mData.getPlotInfo( mApp.mSID, name );
+    String fullname = TDInstance.survey + "-" + name;
+    // PlotInfo plot = mApp_mData.getPlotInfo( TDInstance.sid, name );
     (new SavePlotFileTask( mActivity, this, null, /* mApp, */ mNum, mDrawingUtil, paths, fullname, mType, azimuth ) ).execute();
     // TODO
     // [1] create the database record
@@ -5916,7 +5914,7 @@ public class DrawingWindow extends ItemDrawer
         blk.mPaint.setColor( color );
       }
     }
-    mApp_mData.updateShotColor( blk.mId, mApp.mSID, color, false ); // do not forward color
+    mApp_mData.updateShotColor( blk.mId, TDInstance.sid, color, false ); // do not forward color
   }
 
 

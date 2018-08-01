@@ -176,6 +176,7 @@ class TDExporter
     pw.format("      </attachments>\n");
   }
 
+  // @return filename or null on error
   static String exportSurveyAsCsx( long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2,
                                    String origin, String filename )
   {

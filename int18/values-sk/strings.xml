@@ -402,7 +402,7 @@
     <string name="read_failed">Neúspešné načítanie údajov DistoX</string>
     <!-- UNUSED string name="reading_file_failed">Failed file-read</string -->
     
-    <string name="saved_file_1">Súbor uložený</string>
+    <string name="saved_file_1">Súbor uložený %1$s</string>
     <string name="saved_file_2">Súbor uložený %1$s Mierka %2$.2f</string>
     <string name="saving_">Ukladanie </string>
     <string name="saving_file_failed">Neúspešné uloženie súboru</string>

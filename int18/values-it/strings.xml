@@ -400,7 +400,7 @@
     <string name="read_failed">Lettura dati DistoX fallita</string>
     <!-- UNUSED string name="reading_file_failed">Lettura file fallita</string -->
 
-    <string name="saved_file_1">Salvato file</string>
+    <string name="saved_file_1">Salvato file %1$s</string>
     <string name="saved_file_2">Salvato file %1$s Scala %2$.2f</string>
     <string name="saving_">Salvando </string>
     <string name="saving_file_failed">Salvataggio file fallito</string>

@@ -398,7 +398,7 @@
     <string name="read_failed">Error al leer DistoX</string>
     <!-- UNUSED string name="reading_file_failed">Error al leer el archivo</string -->
 
-    <string name="saved_file_1">Guardar archivo</string>
+    <string name="saved_file_1">Guardar archivo %1$s</string>
     <string name="saved_file_2">Guardar archivo %1$s escala %2$.2f</string>
     <string name="saving_">Guardar</string>
     <string name="saving_file_failed">Fallo al guardar archivo</string>

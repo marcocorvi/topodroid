@@ -115,16 +115,16 @@ class PlotListDialog extends MyDialog
 
   private void updateList()
   {
-    if ( TopoDroidApp.mData != null && mApp.mSID >= 0 ) {
+    if ( TopoDroidApp.mData != null && TDInstance.sid >= 0 ) {
       setTitle( R.string.title_scraps );
 
       Resources res = mApp.getResources();
 
-      List< PlotInfo > list = TopoDroidApp.mData.selectAllPlots( mApp.mSID, TDStatus.NORMAL ); 
+      List< PlotInfo > list = TopoDroidApp.mData.selectAllPlots( TDInstance.sid, TDStatus.NORMAL ); 
       List< Sketch3dInfo > slist = null;
       // FIXME_SKETCH_3D
         if ( TopoDroidApp.mSketches ) {
-          slist = TopoDroidApp.mData.selectAllSketches( mApp.mSID, TDStatus.NORMAL );
+          slist = TopoDroidApp.mData.selectAllSketches( TDInstance.sid, TDStatus.NORMAL );
         }
       // END_SKETCH_3D //
       if ( list.size() == 0 && ( slist == null || slist.size() == 0 ) ) {
@@ -154,7 +154,7 @@ class PlotListDialog extends MyDialog
         }
       // END_SKETCH_3D //
     // } else {
-    //   // TDLog.Log( TDLog.LOG_PLOT, "null data or survey (" + mApp.mSID + ")" );
+    //   // TDLog.Log( TDLog.LOG_PLOT, "null data or survey (" + TDInstance.sid + ")" );
     }
   }
  
@@ -166,7 +166,7 @@ class PlotListDialog extends MyDialog
     if ( b == mBtnPlotNew ) {
       hide();
       if ( mParent != null ) {
-        int idx = 1 + TopoDroidApp.mData.maxPlotIndex( mApp.mSID );
+        int idx = 1 + TopoDroidApp.mData.maxPlotIndex( TDInstance.sid );
         new PlotNewDialog( mContext, mApp, mParent, idx ).show();
       }
     } else if ( b == mBtnClose ) {

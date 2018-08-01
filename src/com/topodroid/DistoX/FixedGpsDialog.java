@@ -192,7 +192,7 @@ class FixedGpsDialog extends MyDialog
   //       if ( item != null && item.length() > 0 ) {
   //         String str = item.toString();
   //         // check if station has already a location
-  //         if ( mApp.mData.hasFixedStation( -1L, mApp.mSID, str ) ) {
+  //         if ( mApp.mData.hasFixedStation( -1L, TDInstance.sid, str ) ) {
   //           String error = mContext.getResources().getString( R.string.error_station_already_fixed );
   //           mETstation.setError( error );
   //           return false;

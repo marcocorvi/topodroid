@@ -164,7 +164,7 @@ class VirtualDistoXComm extends TopoDroidComm
       DataInputStream in   = mServer.getInputStream();
       DataOutputStream out = mServer.getOutputStream();
       if ( in != null && out != null ) {
-        mProtocol = new DistoXProtocol( in, out, mApp.mDevice );
+        mProtocol = new DistoXProtocol( in, out, TDInstance.device );
         return true;
       } else {
         clearServer();

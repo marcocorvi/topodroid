@@ -213,11 +213,11 @@ class SurveyNewDialog extends MyDialog
       TDLog.Error( "Failed to set survey name in DB");
       return false;
     }
-    // Note mApp.mSID == sid
-    TopoDroidApp.mData.updateSurveyInfo( mApp.mSID, date, team, decl, comment, init_station, xsections, true );
+    // Note TDInstance.sid == sid
+    TopoDroidApp.mData.updateSurveyInfo( TDInstance.sid, date, team, decl, comment, init_station, xsections, true );
 
     if ( mOldSid >= 0L && mOldId >= 0L ) {  // SPLIT_SURVEY
-      TopoDroidApp.mData.transferShots( mApp.mSID, mOldSid, mOldId );
+      TopoDroidApp.mData.transferShots( TDInstance.sid, mOldSid, mOldId );
       mOldSid = -1L;
       mOldId = -1L;
     }

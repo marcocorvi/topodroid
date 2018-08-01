@@ -453,15 +453,15 @@ class ShotNewDialog extends MyDialog
       if ( blk != null ) {
         if ( mJpegData != null ) { 
           // Log.v("DistoX", "save Jpeg image size " + mJpegData.length );
-          long photo_id = TopoDroidApp.mData.nextPhotoId( mApp.mSID );
-          File imagefile = new File( TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString(photo_id ) ) );
+          long photo_id = TopoDroidApp.mData.nextPhotoId( TDInstance.sid );
+          File imagefile = new File( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(photo_id ) ) );
           try {
             FileOutputStream fos = new FileOutputStream( imagefile );
             fos.write( mJpegData );
             fos.flush();
             fos.close();
 	    MyBearingAndClino.setExifBearingAndClino( imagefile, mBearing, mClino, mOrientation );
-            TopoDroidApp.mData.insertPhoto( mApp.mSID, photo_id, blk.mId,
+            TopoDroidApp.mData.insertPhoto( TDInstance.sid, photo_id, blk.mId,
                                     "",
                                     TopoDroidUtil.currentDate(),
                                     "snap " + shot_from + " " + shot_to ); // FIXME TITLE has to go

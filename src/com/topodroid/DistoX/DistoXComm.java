@@ -333,7 +333,7 @@ class DistoXComm extends TopoDroidComm
         try {
           DataInputStream in   = new DataInputStream( mBTSocket.getInputStream() );
           DataOutputStream out = new DataOutputStream( mBTSocket.getOutputStream() );
-          mProtocol = new DistoXProtocol( in, out, mApp.mDevice );
+          mProtocol = new DistoXProtocol( in, out, TDInstance.device );
           mAddress = address;
         } catch ( IOException e ) {
           TDLog.Error( "[6b] create Socket stream error " + e.getMessage() );
@@ -604,7 +604,7 @@ class DistoXComm extends TopoDroidComm
   String readHeadTail( String address, byte[] command, int[] head_tail )
   {
     String res = null;
-    if ( mApp.distoType() == Device.DISTO_A3 ) {
+    if ( TDInstance.distoType() == Device.DISTO_A3 ) {
       if ( ! checkRfcommThreadNull( "read HeadTail: address " + address ) ) return null;
       if ( connectSocket( address ) ) {
         res = mProtocol.readHeadTail( command, head_tail );
@@ -676,7 +676,7 @@ class DistoXComm extends TopoDroidComm
   int swapHotBit( String address, int from, int to )
   {
     if ( ! checkRfcommThreadNull( "swap hot bit: address " + address ) ) return -1;
-    if ( mApp.distoType() != Device.DISTO_A3 ) return -2;
+    if ( TDInstance.distoType() != Device.DISTO_A3 ) return -2;
 
     from &= 0x7ff8;
     to   &= 0xfff8;
@@ -741,7 +741,7 @@ class DistoXComm extends TopoDroidComm
     int ret = -1; // failure
     if ( connectSocket( address ) ) {
       if ( TDSetting.mHeadTail ) {
-        boolean a3 = ( mApp.distoType() == Device.DISTO_A3 );
+        boolean a3 = ( TDInstance.distoType() == Device.DISTO_A3 );
         byte[] command = ( a3 ? DeviceA3Details.HeadTail : DeviceX310Details.HeadTail );
         int prev_read = -1;
         int to_read = mProtocol.readToRead( command, a3 );

@@ -141,12 +141,12 @@ public class SurveyWindow extends Activity
   private boolean mustOpen;
   private int mNameColor;
 
-  String getSurveyName() { return mApp.mySurvey; }
+  // String getSurveyName() { return TDInstance.survey; }
 
   void renameSurvey( String name ) 
   {
     name = TopoDroidUtil.noSpaces( name );
-    if ( mApp.renameCurrentSurvey( mApp.mSID, name, true ) ) {
+    if ( mApp.renameCurrentSurvey( TDInstance.sid, name, true ) ) {
       mTextName.setText( name );
       mTextName.setTextColor( mNameColor );
     } else {
@@ -159,8 +159,8 @@ public class SurveyWindow extends Activity
   
   boolean updateDisplay()
   {
-    // TDLog.Log( TDLog.LOG_SURVEY, "app mSID " + mApp.mSID );
-    if ( mApp.mSID < 0 ) return false;
+    // TDLog.Log( TDLog.LOG_SURVEY, "app SID " + TDInstance.sid );
+    if ( TDInstance.sid < 0 ) return false;
     SurveyInfo info = mApp.getSurveyInfo();
     mTextName.setText( info.name );
     mTextName.setTextColor( mNameColor );
@@ -236,7 +236,7 @@ public class SurveyWindow extends Activity
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
     mListView.setEmptyPlacholder( true );
-    /* int size = */ mApp.setListViewHeight( mListView );
+    /* int size = */ TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
     Resources res = getResources();
     mNrButton1 = TDLevel.overNormal ? 6 
@@ -271,7 +271,7 @@ public class SurveyWindow extends Activity
   {
     super.onResume();
     mApp.resetLocale();
-    float decl = mApp_mData.getSurveyDeclination( mApp.mSID );
+    float decl = mApp_mData.getSurveyDeclination( TDInstance.sid );
     mEditDecl.setText( String.format(Locale.US, "%.4f", decl ) );
   }
 
@@ -309,7 +309,7 @@ public class SurveyWindow extends Activity
     if ( k < mNrButton1 && b == mButton1[k++] ) {  // NOTES
       doNotes();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // INFO STATISTICS
-      new SurveyStatDialog( mActivity, mApp_mData.getSurveyStat( mApp.mSID ) ).show();
+      new SurveyStatDialog( mActivity, mApp_mData.getSurveyStat( TDInstance.sid ) ).show();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // 3D
       do3D();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // GPS LOCATION
@@ -333,14 +333,15 @@ public class SurveyWindow extends Activity
   {
     while ( ! TopoDroidApp.mEnableZip ) Thread.yield();
 
-    mApp.doExportData( TDSetting.mExportShotsFormat, false );
-    Archiver archiver = new Archiver( mApp );
-    if ( archiver.archive( ) ) {
-      String msg = getResources().getString( R.string.zip_saved ) + " " + archiver.zipname;
-      TDToast.make( mActivity, msg );
-    } else {
-      TDToast.make( mActivity, R.string.zip_failed );
-    }
+    (new ExportZipTask( getApplicationContext(), mApp )).execute();
+    // TopoDroidApp.doExportDataSync( TDSetting.mExportShotsFormat );
+    // Archiver archiver = new Archiver( mApp );
+    // if ( archiver.archive( ) ) {
+    //   String msg = getResources().getString( R.string.zip_saved ) + " " + archiver.zipname;
+    //   TDToast.make( mActivity, msg );
+    // } else {
+    //   TDToast.make( mActivity, R.string.zip_failed );
+    // }
   }
 
   private void askDelete()
@@ -358,10 +359,10 @@ public class SurveyWindow extends Activity
 
   private void do3D()
   {
-    if ( mApp.exportSurveyAsTh() != null ) { // make sure to have survey exported as therion
+    if ( TopoDroidApp.exportSurveyAsThSync( ) ) { // make sure to have survey exported as therion
       try {
         Intent intent = new Intent( "Cave3D.intent.action.Launch" );
-        intent.putExtra( "survey", TDPath.getSurveyThFile( mApp.mySurvey ) );
+        intent.putExtra( "survey", TDPath.getSurveyThFile( TDInstance.survey ) );
         mActivity.startActivity( intent );
       } catch ( ActivityNotFoundException e ) {
         TDToast.make( mActivity, R.string.no_cave3d );
@@ -380,8 +381,8 @@ public class SurveyWindow extends Activity
 
   private void doNotes()
   {
-    if ( mApp.mySurvey != null ) {
-      (new DistoXAnnotations( mActivity, mApp.mySurvey )).show();
+    if ( TDInstance.survey != null ) {
+      (new DistoXAnnotations( mActivity, TDInstance.survey )).show();
     } else { // SHOULD NEVER HAPPEN
       TDToast.make( mActivity, R.string.no_survey );
     }
@@ -390,7 +391,7 @@ public class SurveyWindow extends Activity
   void setDeclination( float decl )
   {
     mEditDecl.setText( String.format(Locale.US, "%.4f", decl ) );
-    mApp_mData.updateSurveyDeclination( mApp.mSID, decl, true );
+    mApp_mData.updateSurveyDeclination( TDInstance.sid, decl, true );
   }
 
   // float getDeclination()
@@ -438,7 +439,7 @@ public class SurveyWindow extends Activity
     /* if ( comment != null ) */ { comment = comment.trim(); } // else { comment = ""; }
 
     // TDLog.Log( TDLog.LOG_SURVEY, "INSERT survey id " + id + " date " + date + " name " + name + " comment " + comment );
-    mApp_mData.updateSurveyInfo( mApp.mSID, date, team, decl, comment, mInitStation, mXSections, true );
+    mApp_mData.updateSurveyInfo( TDInstance.sid, date, team, decl, comment, mInitStation, mXSections, true );
   }
 
   // interface IExporter
@@ -449,19 +450,18 @@ public class SurveyWindow extends Activity
     if ( index == TDConst.DISTOX_EXPORT_ZIP ) {
       doArchive();
     } else if ( index >= 0 ) {
-      mApp.doExportData( index, true );
+      mApp.doExportDataAsync( getApplicationContext(), index, true );
     }
   }
 
   private void doDelete()
   {
-    if ( mApp.mSID < 0 ) return;
-    String survey = mApp.mySurvey;
-
+    if ( TDInstance.sid < 0 ) return;
+    String survey = TDInstance.survey;
     TDPath.deleteSurveyFiles( survey );
 
     for ( int status = 0; status < 2; ++status ) {
-      List< PlotInfo > plots = mApp_mData.selectAllPlots( mApp.mSID, status );
+      List< PlotInfo > plots = mApp_mData.selectAllPlots( TDInstance.sid, status );
       if ( plots.size() > 0 ) {
         TDPath.deleteSurveyPlotFiles( survey, plots );
       }
@@ -469,13 +469,13 @@ public class SurveyWindow extends Activity
 
     // TODO delete 3D-files
     for ( int status = 0; status < 2; ++status ) {
-      List< Sketch3dInfo > sketches = mApp_mData.selectAllSketches( mApp.mSID, status );
+      List< Sketch3dInfo > sketches = mApp_mData.selectAllSketches( TDInstance.sid, status );
       if ( sketches.size() > 0 ) {
         TDPath.deleteSurvey3dFiles( survey, sketches );
       }
     }
 
-    mApp_mData.doDeleteSurvey( mApp.mSID );
+    mApp_mData.doDeleteSurvey( TDInstance.sid );
     mApp.setSurveyFromName( null, false ); // tell app to clear survey name and id
     setResult( RESULT_OK, new Intent() );
     finish();
@@ -557,11 +557,11 @@ public class SurveyWindow extends Activity
     } else if ( TDLevel.overNormal && p++ == pos ) { // DELETE
       askDelete();
     } else if ( TDLevel.overExpert && p++ == pos ) { // CLEAR COLOR
-      mApp_mData.resetShotColor( mApp.mSID );
+      mApp_mData.resetShotColor( TDInstance.sid );
     } else if ( TDLevel.overAdvanced && p++ == pos ) { // INSTRUMENTS CALIBRATION
       new SurveyCalibrationDialog( mActivity, mApp ).show();
     } else if ( TDLevel.overAdvanced && p++ == pos ) { // CALIBRATION CHECK SHOTS
-      List< DBlock > shots = mApp_mData.selectAllShots( mApp.mSID, TDStatus.CHECK );
+      List< DBlock > shots = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.CHECK );
       if ( shots.size() == 0 ) {
         TDToast.make( mActivity, R.string.no_calib_check );
       } else {

@@ -400,7 +400,7 @@
     <string name="read_failed">Грешка при четене от DistoX</string>
     <!-- UNUSED string name="reading_file_failed">Failed file-read</string -->
 
-    <string name="saved_file_1">Файлът е записан</string>
+    <string name="saved_file_1">Файлът е записан %1$s</string>
     <string name="saved_file_2">Файлът е записан %1$s Мащаб %2$.2f</string>
     <string name="saving_">Записване</string>
     <string name="saving_file_failed">Грешка при запис на файл</string>

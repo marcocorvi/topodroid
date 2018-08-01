@@ -72,7 +72,7 @@ class SketchNewShotDialog extends MyDialog
     mFrom   = name;
     mBlk    = null;
     if ( mFrom == null || mFrom.length() == 0 ) {
-      mFrom = mData.getLastStationName( mApp.mSID );
+      mFrom = mData.getLastStationName( TDInstance.sid );
     }
   }
 
@@ -190,7 +190,7 @@ class SketchNewShotDialog extends MyDialog
         if ( updateList != null ) updateList.add( mBlk );
       }
       // TODO mParent update Num
-      // mParent.recreateNum( mData.selectAllShots( mApp.mSID, 0 ) );
+      // mParent.recreateNum( mData.selectAllShots( TDInstance.sid, 0 ) );
       mParent.updateNum( updateList );
     }
     mParent.setMode( SketchDef.MODE_MOVE );

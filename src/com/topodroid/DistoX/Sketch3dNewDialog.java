@@ -93,7 +93,7 @@ class Sketch3dNewDialog extends MyDialog
           // if ( next != null ) {
             next = TopoDroidUtil.noSpaces( next );
             if ( next.length() > 0 ) {
-              if ( ! TopoDroidApp.mData.hasShot( mApp.mSID, start, next ) ) {
+              if ( ! TopoDroidApp.mData.hasShot( TDInstance.sid, start, next ) ) {
                 error = mContext.getResources().getString( R.string.no_shot_between_stations );
                 mEditNext.setError( error );
                 return;

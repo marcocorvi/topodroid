@@ -110,20 +110,20 @@ class TopoDroidComm
           // TDLog.Log( TDLog.LOG_COMM, "DATA PACKET " + d + " " + b + " " + c );
           // NOTE type=0 shot is DistoX-type
           long status = ( d > TDSetting.mMaxShotLength )? TDStatus.OVERSHOOT : TDStatus.NORMAL;
-          mLastShotId = TopoDroidApp.mData.insertDistoXShot( mApp.mSID, -1L, d, b, c, r, DBlock.EXTEND_IGNORE, status, true );
+          mLastShotId = TopoDroidApp.mData.insertDistoXShot( TDInstance.sid, -1L, d, b, c, r, DBlock.EXTEND_IGNORE, status, true );
           if ( mLister != null ) { // FIXME_LISTER sendMessage with mLastShotId only
             Message msg = mLister.obtainMessage( Lister.UPDATE );
             Bundle bundle = new Bundle();
             bundle.putLong( Lister.BLOCK_ID, mLastShotId );
             msg.setData(bundle);
             mLister.sendMessage(msg);
-            if ( mApp.distoType() == Device.DISTO_A3 && TDSetting.mWaitData > 10 ) {
+            if ( TDInstance.distoType() == Device.DISTO_A3 && TDSetting.mWaitData > 10 ) {
               TopoDroidUtil.slowDown( TDSetting.mWaitData );
             }
           }
           // if ( mLister != null ) {
           //   DBlock blk = new DBlock( );
-          //   blk.setId( mLastShotId, mApp.mSID );
+          //   blk.setId( mLastShotId, TDInstance.sid );
           //   blk.mLength  = (float)d;
           //   blk.mBearing = (float)b;
           //   blk.mClino   = (float)c;
@@ -140,7 +140,7 @@ class TopoDroidComm
           // get G and M from mProto and save them to store
           // TDLog.Log( TDLog.LOG_PROTO, "save G " + mProto.mGX + " " + mProto.mGY + " " + mProto.mGZ + 
           //                   " M " + mProto.mMX + " " + mProto.mMY + " " + mProto.mMZ );
-          long cblk = TopoDroidApp.mDData.insertGM( mApp.mCID, mProto.mGX, mProto.mGY, mProto.mGZ, mProto.mMX, mProto.mMY, mProto.mMZ );
+          long cblk = TopoDroidApp.mDData.insertGM( TDInstance.cid, mProto.mGX, mProto.mGY, mProto.mGZ, mProto.mMX, mProto.mMY, mProto.mMZ );
           if ( mLister != null ) {
             Message msg = mLister.obtainMessage( Lister.UPDATE );
             Bundle bundle = new Bundle();
@@ -188,8 +188,8 @@ class TopoDroidComm
           double dip  = mProto.mDip;
           double roll = mProto.mRoll;
           // TDLog.Log( TDLog.LOG_DISTOX, "VECTOR PACKET " + mLastShotId + " " + acc + " " + mag + " " + dip + " " + roll );
-          if ( mApp.distoType() == Device.DISTO_X310 ) {
-            TopoDroidApp.mData.updateShotAMDR( mLastShotId, mApp.mSID, acc, mag, dip, roll, true );
+          if ( TDInstance.distoType() == Device.DISTO_X310 ) {
+            TopoDroidApp.mData.updateShotAMDR( mLastShotId, TDInstance.sid, acc, mag, dip, roll, true );
             if ( TDSetting.mWaitData > 10 ) {
               TopoDroidUtil.slowDown( TDSetting.mWaitData );
             }

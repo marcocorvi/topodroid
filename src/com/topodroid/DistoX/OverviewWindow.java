@@ -130,10 +130,9 @@ public class OverviewWindow extends ItemDrawer
     private DataHelper mData;
     private DrawingUtil mDrawingUtil;
 
-    long getSID() { return mApp.mSID; }
-    String getSurvey() { return mApp.mySurvey; }
-
-    private static BezierInterpolator mBezierInterpolator = new BezierInterpolator();
+    // long getSID() { return TDInstance.sid; }
+    // String getSurvey() { return TDInstance.survey; }
+    // private static BezierInterpolator mBezierInterpolator = new BezierInterpolator();
     private DrawingSurface  mOverviewSurface;
 
     private DistoXNum mNum;
@@ -460,7 +459,7 @@ public class OverviewWindow extends ItemDrawer
 
       mListView = (HorizontalListView) findViewById(R.id.listview);
       mListView.setEmptyPlacholder( true );
-      /* int size = */ mApp.setListViewHeight( mListView );
+      /* int size = */ TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
       mButton1 = new Button[ mNrButton1 + 1 ];
       for ( int k=0; k < mNrButton1; ++k ) {
@@ -636,7 +635,7 @@ public class OverviewWindow extends ItemDrawer
         // Log.v( "DistoX", " delta " + xdelta + " " + ydelta );
 
         // now try to load drawings from therion file
-        String fullName = mApp.mySurvey + "-" + plot.name;
+        String fullName = TDInstance.survey + "-" + plot.name;
         // TDLog.Log( TDLog.LOG_DEBUG, "load th2 file " + fullName );
 
         String th2 = TDPath.getTh2FileWithExt( fullName );

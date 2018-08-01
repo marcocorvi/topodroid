@@ -138,7 +138,7 @@ public class DeviceActivity extends Activity
   private ListView mList;
 
   // private String mAddress;
-  private Device mDevice;
+  private Device mCurrDevice;
 
   private final BroadcastReceiver mPairReceiver = new BroadcastReceiver()
   {
@@ -159,9 +159,9 @@ public class DeviceActivity extends Activity
   private void setState()
   {
     boolean cntd = mApp.isCommConnected();
-    if ( mDevice != null ) { // mAddress.length() > 0 ) {
+    if ( mCurrDevice != null ) { // mAddress.length() > 0 ) {
       mTvAddress.setTextColor( 0xffffffff );
-      mTvAddress.setText( String.format( getResources().getString( R.string.using ), mDevice.toString() ) );
+      mTvAddress.setText( String.format( getResources().getString( R.string.using ), mCurrDevice.toString() ) );
       // setButtonRemote();
     } else {
       mTvAddress.setTextColor( 0xffff0000 );
@@ -188,7 +188,7 @@ public class DeviceActivity extends Activity
   // private void setButtonRemote( )
   // {
   //   if ( TDLevel.overNormal ) {
-  //     if ( mDevice != null && mDevice.mType == Device.DISTO_X310 ) {
+  //     if ( mCurrDevice != null && mCurrDevice.mType == Device.DISTO_X310 ) {
   //       mButton1[ indexButtonRemote ].setEnabled( true );
   //       mButton1[ indexButtonRemote ].setBackgroundResource( icons00[ indexButtonRemote ] );
   //     } else {
@@ -218,8 +218,8 @@ public class DeviceActivity extends Activity
     // TDLog.Debug("device activity on create");
     mApp = (TopoDroidApp) getApplication();
     mApp_mDData = TopoDroidApp.mDData;
-    mDevice  = mApp.mDevice;
-    // mAddress = mDevice.mAddress;
+    mCurrDevice  = TDInstance.device;
+    // mAddress = mCurrDevice.mAddress;
     // mAddress = getIntent().getExtras().getString(   TDTag.TOPODROID_DEVICE_ADDR );
 
     setContentView(R.layout.device_activity);
@@ -227,7 +227,7 @@ public class DeviceActivity extends Activity
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
     mListView.setEmptyPlacholder(true);
-    /* int size = */ mApp.setListViewHeight( mListView );
+    /* int size = */ TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
     Resources res = getResources();
     mNrButton1 = 3;
@@ -351,9 +351,9 @@ public class DeviceActivity extends Activity
 
       // if ( vals.length != 3 ) { TODO } // FIXME
       // Log.v("DistoX", "Addr/Name <" + vals[2] + ">");
-      if ( mDevice == null || ! ( address.equals( mDevice.mAddress ) || address.equals( mDevice.mNickname ) ) ) {
+      if ( mCurrDevice == null || ! ( address.equals( mCurrDevice.mAddress ) || address.equals( mCurrDevice.mNickname ) ) ) {
         mApp.setDevice( address );
-        mDevice = mApp.mDevice;
+        mCurrDevice = TDInstance.device;
         // mAddress = address;
         mApp.disconnectRemoteDevice( true );
         setState();
@@ -363,9 +363,9 @@ public class DeviceActivity extends Activity
 
   private void detachDevice()
   {
-    if ( mDevice == null ) return;
+    if ( mCurrDevice == null ) return;
     mApp.setDevice( null );
-    mDevice = mApp.mDevice;
+    mCurrDevice = TDInstance.device;
     // mAddress = address;
     mApp.disconnectRemoteDevice( true );
     setState();
@@ -375,8 +375,8 @@ public class DeviceActivity extends Activity
 
   private void pairDevice()
   {
-    if ( mDevice == null ) return;
-    BluetoothDevice device = mApp.mBTAdapter.getRemoteDevice( mDevice.mAddress );
+    if ( mCurrDevice == null ) return;
+    BluetoothDevice device = mApp.mBTAdapter.getRemoteDevice( mCurrDevice.mAddress );
     switch ( DeviceUtil.pairDevice( device ) ) {
       case -1: // failure
         // TDToast.make( this, R.string.pairing_failed ); // TODO
@@ -452,36 +452,36 @@ public class DeviceActivity extends Activity
       setState();
       TDToast.make( this, R.string.bt_reset );
     } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // CALIBRATION MODE TOGGLE
-      if ( mDevice == null ) { // mAddress.length() < 1 ) {
+      if ( mCurrDevice == null ) { // mAddress.length() < 1 ) {
         TDToast.make( this, R.string.no_device_address );
       } else {
         enableButtons( false );
         new CalibToggleTask( this, this, mApp ).execute();
       }
     } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // CALIBRATIONS
-      if ( mApp.mDevice == null ) {
+      if ( TDInstance.device == null ) {
         TDToast.make( this, R.string.no_device_address );
       } else {
         (new CalibListDialog( this, this, mApp )).show();
       }
 
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {    // INFO TDLevel.overNormal
-      if ( mDevice == null ) {
+      if ( mCurrDevice == null ) {
         TDToast.make( this, R.string.no_device_address );
       } else {
         // setTitleColor( TDColor.CONNECTED ); // USELESS
-        if ( mDevice.mType == Device.DISTO_A3 ) {
-          new DeviceA3InfoDialog( this, this, mDevice ).show();
-        } else if ( mDevice.mType == Device.DISTO_X310 ) {
-          new DeviceX310InfoDialog( this, this, mDevice ).show();
+        if ( mCurrDevice.mType == Device.DISTO_A3 ) {
+          new DeviceA3InfoDialog( this, this, mCurrDevice ).show();
+        } else if ( mCurrDevice.mType == Device.DISTO_X310 ) {
+          new DeviceX310InfoDialog( this, this, mCurrDevice ).show();
         } else {
-          TDLog.Error( "Unknown DistoX type " + mDevice.mType );
+          TDLog.Error( "Unknown DistoX type " + mCurrDevice.mType );
         }
         // setTitleColor( TDColor.TITLE_NORMAL );
       }
 
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {   // CALIB_READ TDLevel.overNormal
-      if ( mDevice == null ) { // mAddress.length() < 1 ) {
+      if ( mCurrDevice == null ) { // mAddress.length() < 1 ) {
         TDToast.make( this, R.string.no_device_address );
       } else {
         enableButtons( false );
@@ -489,15 +489,15 @@ public class DeviceActivity extends Activity
       }
 
     } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // DISTOX MEMORY TDLevel.overAdvanced
-      if ( mDevice == null ) { // mAddress.length() < 1 ) {
+      if ( mCurrDevice == null ) { // mAddress.length() < 1 ) {
         TDToast.make( this, R.string.no_device_address );
       } else {
-        if ( mDevice.mType == Device.DISTO_A3 ) {
+        if ( mCurrDevice.mType == Device.DISTO_A3 ) {
           new DeviceA3MemoryDialog( this, this ).show();
-        } else if ( mDevice.mType == Device.DISTO_X310 ) {
+        } else if ( mCurrDevice.mType == Device.DISTO_X310 ) {
           new DeviceX310MemoryDialog( this, this ).show();
         } else {
-          TDToast.make( this, "Unknown DistoX type " + mDevice.mType );
+          TDToast.make( this, "Unknown DistoX type " + mCurrDevice.mType );
         }
       }
 
@@ -535,7 +535,7 @@ public class DeviceActivity extends Activity
   void /*boolean*/ readDeviceHeadTail( byte[] command, int[] head_tail )
   {
     // TDLog.Log( TDLog.LOG_DEVICE, "onClick mBtnHeadTail. Is connected " + mApp.isConnected() );
-    String ht = mApp.readHeadTail( mDevice.mAddress, command, head_tail );
+    String ht = mApp.readHeadTail( mCurrDevice.mAddress, command, head_tail );
     if ( ht == null ) {
       TDToast.make( this, R.string.head_tail_failed );
       // return false;
@@ -551,37 +551,37 @@ public class DeviceActivity extends Activity
     int from = head_tail[0];
     int to   = head_tail[1];
     // Log.v(TopoDroidApp.TAG, "do reset from " + from + " to " + to );
-    int n = mApp.swapHotBit( mDevice.mAddress, from, to );
+    int n = mApp.swapHotBit( mCurrDevice.mAddress, from, to );
   }
 
   void storeDeviceHeadTail( int[] head_tail )
   {
-    // Log.v(TopoDroidApp.TAG, "store HeadTail " + mDevice.mAddress + " : " + head_tail[0] + " " + head_tail[1] );
-    if ( ! mApp_mDData.updateDeviceHeadTail( mDevice.mAddress, head_tail ) ) {
+    // Log.v(TopoDroidApp.TAG, "store HeadTail " + mCurrDevice.mAddress + " : " + head_tail[0] + " " + head_tail[1] );
+    if ( ! mApp_mDData.updateDeviceHeadTail( mCurrDevice.mAddress, head_tail ) ) {
       TDToast.make( this, R.string.head_tail_store_failed );
     }
   }
 
   void retrieveDeviceHeadTail( int[] head_tail )
   {
-    // Log.v(TopoDroidApp.TAG, "store HeadTail " + mDevice.mAddress + " : " + head_tail[0] + " " + head_tail[1] );
-    mApp_mDData.getDeviceHeadTail( mDevice.mAddress, head_tail );
+    // Log.v(TopoDroidApp.TAG, "store HeadTail " + mCurrDevice.mAddress + " : " + head_tail[0] + " " + head_tail[1] );
+    mApp_mDData.getDeviceHeadTail( mCurrDevice.mAddress, head_tail );
   }
 
   void readX310Info( DeviceX310InfoDialog dialog )
   {
-    ( new InfoReadX310Task( mApp, dialog, mDevice.mAddress ) ).execute();
+    ( new InfoReadX310Task( mApp, dialog, mCurrDevice.mAddress ) ).execute();
   }
 
   void readA3Info( DeviceA3InfoDialog dialog )
   {
-    ( new InfoReadA3Task( mApp, dialog, mDevice.mAddress ) ).execute();
+    ( new InfoReadA3Task( mApp, dialog, mCurrDevice.mAddress ) ).execute();
   }
 
   // @param head_tail indices
   void readX310Memory( IMemoryDialog dialog, int[] head_tail, String dumpfile )
   {
-    ( new MemoryReadTask( mApp, dialog, Device.DISTO_X310, mDevice.mAddress, head_tail, dumpfile ) ).execute();
+    ( new MemoryReadTask( mApp, dialog, Device.DISTO_X310, mCurrDevice.mAddress, head_tail, dumpfile ) ).execute();
   }
  
   // @param head_tail addresses
@@ -592,13 +592,13 @@ public class DeviceActivity extends Activity
       TDToast.make(this, R.string.device_illegal_addr );
       return;
     }
-    ( new MemoryReadTask( mApp, dialog, Device.DISTO_A3, mDevice.mAddress, head_tail, dumpfile ) ).execute();
+    ( new MemoryReadTask( mApp, dialog, Device.DISTO_A3, mCurrDevice.mAddress, head_tail, dumpfile ) ).execute();
   }
 
   // X310 data memory is read-only
   // void resetX310DeviceHeadTail( final int[] head_tail )
   // {
-  //   int n = mApp.resetX310Memory( mDevice.mAddress, head_tail[0], head_tail[1] );
+  //   int n = mApp.resetX310Memory( mCurrDevice.mAddress, head_tail[0], head_tail[1] );
   //   TDToast.make(this, "X310 memory reset " + n + " data" );
   // }
 
@@ -637,7 +637,7 @@ public class DeviceActivity extends Activity
           // TDLog.Log(TDLog.LOG_DISTOX, "OK " + address );
           if ( address == null ) {
             TDLog.Error( "onActivityResult REQUEST DEVICE: null address");
-          } else if ( mDevice == null || ! address.equals( mDevice.mAddress ) ) { // N.B. address != null
+          } else if ( mCurrDevice == null || ! address.equals( mCurrDevice.mAddress ) ) { // N.B. address != null
             mApp.disconnectRemoteDevice( true );
             mApp.setDevice( address );
 
@@ -655,7 +655,7 @@ public class DeviceActivity extends Activity
               }
             }
 
-            mDevice = mApp.mDevice;
+            mCurrDevice = TDInstance.device;
             // mAddress = address;
             setState();
           }
@@ -785,7 +785,7 @@ public class DeviceActivity extends Activity
   private void doCalibReset( Button b )
   {
     // Log.v("DistoX", "CALIB RESET");
-    if ( mDevice != null ) {
+    if ( mCurrDevice != null ) {
       long one = (long)Math.round( TopoDroidUtil.FM );
       // if (one > TopoDroidUtil.ZERO ) one = TopoDroidUtil.NEG - one;
       byte low  = (byte)( one & 0xff );
@@ -838,7 +838,7 @@ public class DeviceActivity extends Activity
 
   void openCalibrationImportDialog()
   {
-    if ( mDevice != null ) {
+    if ( mCurrDevice != null ) {
       (new CalibImportDialog( this, this )).show();
     }
   }
@@ -851,7 +851,7 @@ public class DeviceActivity extends Activity
       TDToast.make(this, R.string.file_not_found );
     } else {
       // FIXME_SYNC this is sync ... ok because calib file is small
-      switch ( TDExporter.importCalibFromCsv( mApp_mDData, filename, mDevice.mAddress ) ) {
+      switch ( TDExporter.importCalibFromCsv( mApp_mDData, filename, mCurrDevice.mAddress ) ) {
         case 0:
           TDToast.make(this, R.string.import_calib_ok );
           break;

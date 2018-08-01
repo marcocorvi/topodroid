@@ -400,7 +400,7 @@
     <string name="read_failed">Échec lors de lecture du DistoX</string>
     <!-- UNUSED string name="reading_file_failed">Echec lors de la lecture du fichier</string -->
     <!-- UNUSED string name="saved_file_">Fichier enregistré\ </string -->
-    <string name="saved_file_1">Fichier enregistré</string>
+    <string name="saved_file_1">Fichier enregistré %1$s</string>
     <string name="saved_file_2">Fichier enregistré %1$s Échelle %2$.2f</string>
     <string name="saving_">Enregistrement</string>
     <string name="saving_file_failed">Échec de l\'enregistrement du fichier</string>

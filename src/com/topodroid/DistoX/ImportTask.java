@@ -13,7 +13,6 @@ package com.topodroid.DistoX;
 
 import android.os.AsyncTask;
 
-// import android.widget.Toast;
 import android.app.ProgressDialog;
 
 abstract class ImportTask extends AsyncTask< String, Integer, Long >

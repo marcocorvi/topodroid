@@ -72,7 +72,7 @@ class DrawingPhotoEditDialog extends MyDialog
     mParent = parent;
     mApp    = app;
     mPhoto  = photo;
-    mFilename = TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString(mPhoto.mId) );
+    mFilename = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhoto.mId) );
     // TDLog.Log(TDLog.LOG_PHOTO, "DrawingPhotoEditDialog " + mFilename);
     
     mTdImage = new TDImage( mFilename );
@@ -122,7 +122,7 @@ class DrawingPhotoEditDialog extends MyDialog
       case R.id.photo_ok:
         String comment = ( mETcomment.getText() == null )? "" : mETcomment.getText().toString();
         mPhoto.setPointText( comment );
-        TopoDroidApp.mData.updatePhoto( mApp.mSID, mPhoto.mId, comment );
+        TopoDroidApp.mData.updatePhoto( TDInstance.sid, mPhoto.mId, comment );
         break;
       // case R.id.photo_delete:
       //   mParent.dropPhoto( mPhoto );

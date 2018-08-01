@@ -125,7 +125,7 @@ class CurrentStationDialog extends MyDialog
   {
     MyStringAdapter adapter = new MyStringAdapter( mContext, R.layout.message );
     // mApp.fillCurrentStationAdapter( adapter );
-    ArrayList< CurrentStation > stations = TopoDroidApp.mData.getStations( mApp.mSID );
+    ArrayList< CurrentStation > stations = TopoDroidApp.mData.getStations( TDInstance.sid );
     for ( CurrentStation st : stations ) {
       adapter.add( st.toString() );
     }
@@ -145,7 +145,7 @@ class CurrentStationDialog extends MyDialog
       name = token[0];
     }
     // Log.v("DistoX", "get station <" + name + ">" );
-    CurrentStation cs = TopoDroidApp.mData.getStation( mApp.mSID, name );
+    CurrentStation cs = TopoDroidApp.mData.getStation( TDInstance.sid, name );
     mBtnFixed.setChecked( false );
     mBtnPainted.setChecked( false );
     if ( cs == null ) {
@@ -213,7 +213,7 @@ class CurrentStationDialog extends MyDialog
       }
 
       // mApp.pushCurrentStation( name, comment );
-      TopoDroidApp.mData.insertStation( mApp.mSID, name, comment, flag );
+      TopoDroidApp.mData.insertStation( TDInstance.sid, name, comment, flag );
       updateList();
       return;
 
@@ -222,7 +222,7 @@ class CurrentStationDialog extends MyDialog
         mName.setError( mContext.getResources().getString( R.string.error_name_required ) );
         return;
       }
-      TopoDroidApp.mData.deleteStation( mApp.mSID, name );
+      TopoDroidApp.mData.deleteStation( TDInstance.sid, name );
       updateList();
       mName.setText("");
       mComment.setText("");

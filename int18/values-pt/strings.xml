@@ -398,7 +398,7 @@
     <!-- UNUSED string name="read_fail_with_code">Falha na leitura: código erro </string -->
     <string name="read_failed">Falha na leitura da DistoX</string>
     <!-- UNUSED string name="reading_file_failed">Falha leitura do arquivo</string -->
-    <string name="saved_file_1">Arquivo salvo</string>
+    <string name="saved_file_1">Arquivo salvo %1$s</string>
     <string name="saved_file_2">Arquivo salvo %1$s Escala %2$.2f</string>
     <string name="saving_">Salvando </string>
     <string name="saving_file_failed">Falha ao salvar o arquivo</string>

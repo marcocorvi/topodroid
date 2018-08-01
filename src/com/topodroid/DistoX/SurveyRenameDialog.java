@@ -55,7 +55,7 @@ class SurveyRenameDialog extends MyDialog
     mBtnBack.setOnClickListener( this );
 
     mEtName = (EditText) findViewById( R.id.et_name );
-    mEtName.setText( mParent.getSurveyName( ) );
+    mEtName.setText( TDInstance.survey );
   }
 
   @Override

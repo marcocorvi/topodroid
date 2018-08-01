@@ -51,7 +51,7 @@ class MyBearingAndClino implements IBearingAndClino
   {
     // Log.v("DistoX", "Bearing and Clino orientation " + o0 );
     // this is not good for photo because it might alter azimuth/clino of xsection sketch
-    // mApp.mData.updatePlotAzimuthClino( mApp.mSID, mPid, b0, c0 );
+    // mApp.mData.updatePlotAzimuthClino( TDInstance.sid, mPid, b0, c0 );
     mBearing = b0;
     mClino   = c0;
     mOrientation = o0;

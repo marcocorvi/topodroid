@@ -402,7 +402,7 @@
     <string name="read_failed">Eroare la citirea DistoX</string>
     <!-- UNUSED string name="reading_file_failed">Eroare la citirea din fișier</string -->
 
-    <string name="saved_file_1">Fișier salvat</string>
+    <string name="saved_file_1">Fișier salvat %1$s</string>
     <string name="saved_file_2">Fișier salvat %1$s Scara %2$.2f</string>
     <string name="saving_">În curs de salvare </string>
     <string name="saving_file_failed">Eroare la salvarea fișierului</string>

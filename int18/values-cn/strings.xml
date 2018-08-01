@@ -399,7 +399,7 @@
     <string name="read_failed">DistoX-读取失败</string>
     <!-- UNUSED string name="reading_file_failed">文件读取失败</string -->
 
-    <string name="saved_file_1">保存文件</string>
+    <!-- FIXME string name="saved_file_1">保存文件%1$s</string -->
     <string name="saved_file_2">保存 %1$s 比例尺 %2$.2f</string>
     <string name="saving_">保存中 </string>
     <string name="saving_file_failed">文件保存失败</string>

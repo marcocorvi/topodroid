@@ -81,11 +81,11 @@ public class SensorListActivity extends Activity
   private void updateDisplay( )
   {
     // TDLog.Log( TDLog.LOG_SENSOR, "updateDisplay() status: " + StatusName() + " forcing: " + force_update );
-    if ( TopoDroidApp.mData != null && mApp.mSID >= 0 ) {
-      List< SensorInfo > list = TopoDroidApp.mData.selectAllSensors( mApp.mSID, TDStatus.NORMAL );
+    if ( TopoDroidApp.mData != null && TDInstance.sid >= 0 ) {
+      List< SensorInfo > list = TopoDroidApp.mData.selectAllSensors( TDInstance.sid, TDStatus.NORMAL );
       // TDLog.Log( TDLog.LOG_PHOTO, "update shot list size " + list.size() );
       updateSensorList( list );
-      setTitle( mApp.mySurvey );
+      setTitle( TDInstance.survey );
     // } else {
     //   TDToast.make( this, R.string.no_survey );
     }

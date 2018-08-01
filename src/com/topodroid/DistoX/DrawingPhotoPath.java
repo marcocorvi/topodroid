@@ -97,7 +97,7 @@ class DrawingPhotoPath extends DrawingPointPath
     return sw.getBuffer().toString();
   }
 
-  // FIXME_SYNC might be a problem with big photoes !!!
+  // FIXME_SYNC might be a problem with big photoes, but it is called on export, which runs on async task
   @Override
   void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil )
   { 

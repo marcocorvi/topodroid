@@ -501,7 +501,6 @@ class StationName
   // DistoX backshot-mode is handled separately
   void assignStations_Backsight( DataHelper data_helper, long sid, List<DBlock> list, Set<String> sts )
   { 
-    // mSecondLastShotId = lastShotId(); // FIXME this probably not needed
     if ( TDSetting.mDistoXBackshot ) { // if the distox is in backshot mode
       assignStations_BacksightBachshot( data_helper, sid, list, sts );
       return;
@@ -706,8 +705,6 @@ class StationName
       assignStations_DefaultBackshot( data_helper, sid, list, sts );
       return;
     }
-    // mSecondLastShotId = lastShotId(); // FIXME this probably not needed
-
     int survey_stations = TDSetting.mSurveyStations;
     if ( survey_stations <= 0 ) return;
     boolean forward_shots = ( survey_stations == 1 );
@@ -1103,9 +1100,7 @@ class StationName
   //    since topodroid stores the data as they arrive from the distox, the shots have inverted azimuth and clino 
   private void assignStations_BacksightBachshot( DataHelper data_helper, long sid, List<DBlock> list, Set<String> sts )
   { 
-    // mSecondLastShotId = lastShotId(); // FIXME this probably not needed
     // Log.v("DistoX", "Backsight assign stations. Size " + list.size() );
-
     DBlock prev = null;
     String from = DistoXStationName.mInitialStation;
     String to   = DistoXStationName.mSecondStation;
@@ -1213,9 +1208,7 @@ class StationName
   // DistoX backshot-mode default station assignment(s)
   private void assignStations_DefaultBackshot( DataHelper data_helper, long sid, List<DBlock> list, Set<String> sts )
   { 
-    // mSecondLastShotId = lastShotId(); // FIXME this probably not needed
     // Log.v("DistoX", "assign stations default. size " + list.size() );
-
     int survey_stations = TDSetting.mSurveyStations;
     if ( survey_stations <= 0 ) return;
     boolean forward_shots = ( survey_stations == 1 );

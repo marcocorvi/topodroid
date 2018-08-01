@@ -109,11 +109,11 @@ public class PhotoActivity extends Activity
   private void updateDisplay( )
   {
     // TDLog.Log( TDLog.LOG_PHOTO, "updateDisplay() status: " + StatusName() + " forcing: " + force_update );
-    if ( mApp_mData != null && mApp.mSID >= 0 ) {
-      List< PhotoInfo > list = mApp_mData.selectAllPhotos( mApp.mSID, TDStatus.NORMAL );
+    if ( mApp_mData != null && TDInstance.sid >= 0 ) {
+      List< PhotoInfo > list = mApp_mData.selectAllPhotos( TDInstance.sid, TDStatus.NORMAL );
       // TDLog.Log( TDLog.LOG_PHOTO, "update shot list size " + list.size() );
       updatePhotoList( list );
-      setTitle( mApp.mySurvey );
+      setTitle( TDInstance.survey );
     // } else {
     //   TDToast.make( this, R.string.no_survey );
     }
@@ -156,7 +156,7 @@ public class PhotoActivity extends Activity
   private void startPhotoDialog( TextView tv, int pos )
   {
      mSavePhoto = mDataAdapter.get(pos);
-     String filename = TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString(mSavePhoto.id) );
+     String filename = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mSavePhoto.id) );
      (new PhotoEditDialog( this, this, mApp, mSavePhoto, filename )).show();
   }
 
@@ -185,7 +185,7 @@ public class PhotoActivity extends Activity
   public void dropPhoto( PhotoInfo photo )
   {
     mApp_mData.deletePhoto( photo.sid, photo.id );
-    TopoDroidUtil.deleteFile( TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString(photo.id) ) );
+    TopoDroidUtil.deleteFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(photo.id) ) );
     updateDisplay( ); // FIXME
   }
 

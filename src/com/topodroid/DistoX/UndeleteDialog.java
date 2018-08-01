@@ -36,7 +36,7 @@ class UndeleteDialog extends MyDialog
                             implements OnItemClickListener
                             , View.OnClickListener
 {
-  private long mSID;
+  private long mSid;
   private final DataHelper mData;
   private final ShotWindow mParent;
 
@@ -60,7 +60,7 @@ class UndeleteDialog extends MyDialog
     super( context, R.string.UndeleteDialog );
     mParent = parent;
     mData   = data;
-    mSID    = sid;
+    mSid    = sid;
     mShots1 = shots1;
     mShots2 = shots2;
     mShots3 = shots3;
@@ -91,10 +91,10 @@ class UndeleteDialog extends MyDialog
       long id = Long.parseLong( value[1] );
       try {
         if ( value[0].equals( "shot" ) ) {
-          mData.undeleteShot( id, mSID, true );
+          mData.undeleteShot( id, mSid, true );
           mParent.updateDisplay();
         } else {
-          mData.undeletePlot( id, mSID );
+          mData.undeletePlot( id, mSid );
         }
       } catch ( NumberFormatException e ) {
         TDLog.Error( "undelete parse error: item " + item.toString() );

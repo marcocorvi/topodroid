@@ -66,8 +66,8 @@ class AudioDialog extends MyDialog
     mApp = app;
     mParent = parent;
     mBid = bid;
-    // mAudio = mApp.mData.getAudio( mApp.mSID, mBid );
-    mFilepath = TDPath.getSurveyAudioFile( mApp.mySurvey, Long.toString(mBid) );
+    // mAudio = mApp.mData.getAudio( TDInstance.sid, mBid );
+    mFilepath = TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString(mBid) );
     File file = new File( mFilepath );
     hasFile = file.exists();
   }
@@ -124,7 +124,7 @@ class AudioDialog extends MyDialog
           return;
           // File file = new File( mFilepath );
           // file.delete();
-          // mApp.mData.dropAudio( mApp.mSID, mBid );
+          // mApp.mData.dropAudio( TDInstance.sid, mBid );
         }
       } else if ( b == mBtnPlay ) {
         mAction = ACTION_NONE;
@@ -173,7 +173,7 @@ class AudioDialog extends MyDialog
   private void deleteAudio()
   {
     TopoDroidUtil.deleteFile( mFilepath );
-    TopoDroidApp.mData.deleteAudio( mApp.mSID, mBid );
+    TopoDroidApp.mData.deleteAudio( TDInstance.sid, mBid );
     if ( mParent != null ) mParent.deletedAudio( mBid );
   }
 
@@ -209,7 +209,7 @@ class AudioDialog extends MyDialog
       mBtnConfirm.setText( R.string.audio_paused );
       canPlay = true;
       hasFile = true;
-      TopoDroidApp.mData.setAudio( mApp.mSID, mBid, TopoDroidUtil.currentDateTime() );
+      TopoDroidApp.mData.setAudio( TDInstance.sid, mBid, TopoDroidUtil.currentDateTime() );
       if ( mParent != null ) mParent.stopRecordAudio( mBid );
     } catch ( IllegalStateException e ) {
     } catch ( RuntimeException e ) {

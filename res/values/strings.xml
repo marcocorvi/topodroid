@@ -402,7 +402,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="read_failed">Failed DistoX-read</string>
     <!-- UNUSED string name="reading_file_failed">Failed file-read</string -->
 
-    <string name="saved_file_1">Saved file</string>
+    <string name="saved_file_1">Saved file %1$s</string>
     <string name="saved_file_2">Saved file %1$s Scale %2$.2f</string>
     <string name="saving_">Saving </string>
     <string name="saving_file_failed">Failed file-save</string>

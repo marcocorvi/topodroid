@@ -400,7 +400,7 @@
     <string name="read_failed">DistoX kiolvasása nem sikerült</string>
     <!-- UNUSED string name="reading_file_failed">Failed file-read</string -->
 
-    <string name="saved_file_1">Mentett fájl</string>
+    <string name="saved_file_1">Mentett fájl %1$s</string>
     <string name="saved_file_2">Mentett fájl %1$s Méretarány %2$.2f</string>
     <string name="saving_">Mentés</string>
     <string name="saving_file_failed">Fájl mentése nem sikerült</string>

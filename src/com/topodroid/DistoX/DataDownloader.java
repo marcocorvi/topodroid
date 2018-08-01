@@ -111,14 +111,14 @@ class DataDownloader
   void tryConnect()
   {
     // Log.v("DistoX", "try Connect() download " + mDownload + " connected " + mConnected );
-    if ( mApp.mDevice != null && mApp.mBTAdapter.isEnabled() ) {
+    if ( TDInstance.device != null && mApp.mBTAdapter.isEnabled() ) {
       mApp.disconnectComm();
       if ( ! mDownload ) {
         mConnected = false;
         return;
       }
       if ( ! mConnected ) {
-        mConnected = mApp.connectDevice( mApp.mDevice.mAddress );
+        mConnected = mApp.connectDevice( TDInstance.device.mAddress );
         // Log.v( "DistoX", "**** try Connect " + mConnected );
       } else {
         mConnected = false;
@@ -137,8 +137,8 @@ class DataDownloader
   // non-private to allow the DistoX select dialog
   private void tryDownloadData( )
   {
-    // mSecondLastShotId = mApp.lastShotId( );
-    if ( mApp.mDevice != null && mApp.mBTAdapter.isEnabled() ) {
+    // TDInstance.secondLastShotId = TopoDroidApp.lastShotId( );
+    if ( TDInstance.device != null && mApp.mBTAdapter.isEnabled() ) {
       notifyConnectionStatus( true );
       // TDLog.Log( TDLog.LOG_COMM, "shot menu DOWNLOAD" );
       new DataDownloadTask( mApp, mApp.mListerSet, null ).execute();
@@ -146,10 +146,10 @@ class DataDownloader
       mDownload = false;
       notifyConnectionStatus( false );
       TDLog.Error( "download data: no device selected" );
-      if ( mApp.mSID < 0 ) {
+      if ( TDInstance.sid < 0 ) {
         TDLog.Error( "download data: no survey selected" );
       // } else {
-        // DBlock last_blk = mApp.mData.selectLastLegShot( mApp.mSID );
+        // DBlock last_blk = mApp.mData.selectLastLegShot( TDInstance.sid );
         // (new ShotNewDialog( mContext, mApp, lister, last_blk, -1L )).show();
       }
     }

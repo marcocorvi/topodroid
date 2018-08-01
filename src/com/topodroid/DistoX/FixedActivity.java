@@ -129,7 +129,7 @@ public class FixedActivity extends Activity
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
     // mListView.setEmptyPlacholder(true);
-    /* int size = */ mApp.setListViewHeight( mListView );
+    /* int size = */ TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
     mNrButton1 = (hasGps)? 3 : 2;
     mButton1 = new Button[ mNrButton1 ];
     int kz = (hasGps)? 0 : 1; // index of izons
@@ -156,7 +156,7 @@ public class FixedActivity extends Activity
 
   private void refreshList()
   {
-    List< FixedInfo > fxds = TopoDroidApp.mData.selectAllFixed( mApp.mSID, TDStatus.NORMAL );
+    List< FixedInfo > fxds = TopoDroidApp.mData.selectAllFixed( TDInstance.sid, TDStatus.NORMAL );
     mFixedAdapter = new FixedAdapter( mContext, R.layout.message, fxds );
     mList.setAdapter( mFixedAdapter );
   }
@@ -194,7 +194,7 @@ public class FixedActivity extends Activity
   private FixedInfo addLocation( String station, double lng, double lat, double h_ell, double h_geo,
                                  String comment, long source )
   {
-    long id = TopoDroidApp.mData.insertFixed( mApp.mSID, -1L, station, lng, lat, h_ell, h_geo, comment, 0L, source );
+    long id = TopoDroidApp.mData.insertFixed( TDInstance.sid, -1L, station, lng, lat, h_ell, h_geo, comment, 0L, source );
     return new FixedInfo( id, station, lng, lat, h_ell, h_geo, comment, source ); 
   }
 
@@ -233,33 +233,33 @@ public class FixedActivity extends Activity
 
   public boolean hasLocation( String station )
   {
-    return TopoDroidApp.mData.hasFixed( mApp.mSID, station );
+    return TopoDroidApp.mData.hasFixed( TDInstance.sid, station );
   }
 
   void updateFixedData( FixedInfo fxd, double lng, double lat, double alt, double asl )
   {
-    TopoDroidApp.mData.updateFixedData( fxd.id, mApp.mSID, lng, lat, alt, asl );
+    TopoDroidApp.mData.updateFixedData( fxd.id, TDInstance.sid, lng, lat, alt, asl );
     // mList.invalidate();
     refreshList();
   }
  
   void updateFixedNameComment( FixedInfo fxd, String name, String comment )
   {
-    TopoDroidApp.mData.updateFixedStationComment( fxd.id, mApp.mSID, name, comment );
+    TopoDroidApp.mData.updateFixedStationComment( fxd.id, TDInstance.sid, name, comment );
     // mList.invalidate();
     refreshList();
   }
 
   public void dropFixed( FixedInfo fxd )
   {
-    TopoDroidApp.mData.updateFixedStatus( fxd.id, mApp.mSID, TDStatus.DELETED );
+    TopoDroidApp.mData.updateFixedStatus( fxd.id, TDInstance.sid, TDStatus.DELETED );
     refreshList();
   }
 
   void setDeclination( float decl )
   {
     // Log.v( "DistoX", "set declination " + decl );
-    TopoDroidApp.mData.updateSurveyDeclination( mApp.mSID, decl, true );
+    TopoDroidApp.mData.updateSurveyDeclination( TDInstance.sid, decl, true );
   }
 
   // private final static int LOCATION_REQUEST = 1;
@@ -327,7 +327,7 @@ public class FixedActivity extends Activity
             double lat = bundle.getDouble( "latitude");
             double alt = bundle.getDouble( "altitude");
 	    long   n_dec = bundle.containsKey( "decimals" )? bundle.getLong( "decimals" ) : 2;
-            TopoDroidApp.mData.updateFixedCS(  mFixedDialog.getFixedId(), mApp.mSID, cs, lng, lat, alt, n_dec );
+            TopoDroidApp.mData.updateFixedCS(  mFixedDialog.getFixedId(), TDInstance.sid, cs, lng, lat, alt, n_dec );
             mFixedDialog.setConvertedCoords( cs, lng, lat, alt, n_dec );
             mFixedDialog = null;
           }

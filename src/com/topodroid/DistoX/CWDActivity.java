@@ -68,7 +68,7 @@ public class CWDActivity extends Activity
   private boolean setPreference()
   {
     String dir_name  = mETcwd.getText().toString();
-    String base_name = TDLevel.overExpert ? mBaseName : mApp.mCBD ;
+    String base_name = TDLevel.overExpert ? mBaseName : TDInstance.cbd ;
     if ( base_name == null ) {
       base_name = TDPath.PATH_BASEDIR;
     } else {
@@ -132,7 +132,7 @@ public class CWDActivity extends Activity
     mList.setOnItemClickListener( this );
     mList.setDividerHeight( 2 );
 
-    mETcwd.setText( mApp.mCWD );
+    mETcwd.setText( TDInstance.cwd );
     if ( TDLevel.overExpert ) {
       mTVcbd.setText( mBaseName );
     } else{
@@ -170,7 +170,7 @@ public class CWDActivity extends Activity
     super.onCreate( b );
     setContentView(R.layout.cwd_activity);
     mApp = (TopoDroidApp) getApplication();
-    mBaseName = mApp.mCBD;
+    mBaseName = TDInstance.cbd;
 
     getWindow().setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN );
 

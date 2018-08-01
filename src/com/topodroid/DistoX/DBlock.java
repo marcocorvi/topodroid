@@ -187,10 +187,10 @@ class DBlock
   boolean isRecent( )
   {
     if ( TDSetting.isConnectionModeBatch() ) return isTimeRecent( System.currentTimeMillis()/1000 );
-    return mId >= TopoDroidApp.mSecondLastShotId;
+    return mId >= TDInstance.secondLastShotId;
   }
 
-  private boolean isTimeRecent( long time ) { return mId >= TopoDroidApp.mSecondLastShotId && (time-mTime)< TDSetting.mRecentTimeout; }
+  private boolean isTimeRecent( long time ) { return mId >= TDInstance.secondLastShotId && (time-mTime)< TDSetting.mRecentTimeout; }
 
   boolean isMultiBad() { return mMultiBad; }
 
