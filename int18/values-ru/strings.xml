@@ -1322,7 +1322,7 @@
   <string name="pref_log_err">Ошибка</string>
   <string name="pref_log_fixed">Точки с GPS координатами</string>
   <string name="pref_log_input">Входные данные</string>
-  <!-- TODO string name="pref_log_io">Sketch i/o</string -->
+  <string name="pref_log_io">Абрисы i/o</string>
   <string name="pref_log_loc">Местоположение</string>
   <string name="pref_log_num">Сжатие данных</string>
   <string name="pref_log_path">Путь к файлам</string>
