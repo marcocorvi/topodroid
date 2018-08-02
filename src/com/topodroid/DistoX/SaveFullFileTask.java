@@ -38,8 +38,9 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
   private String mOrigin = null;
   private PlotSaveData mPsd1 = null;
   private PlotSaveData mPsd2 = null;
+  private boolean mToast;
 
-  SaveFullFileTask( Context context, long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2, String origin, String filename )
+  SaveFullFileTask( Context context, long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2, String origin, String filename, boolean toast )
   {
     mContext  = context;
      
@@ -50,6 +51,7 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
     mOrigin   = origin;
     mPsd1     = psd1;
     mPsd2     = psd2;
+    mToast    = toast;
   }
 
   protected String doInBackground(Void... arg0)
@@ -67,10 +69,10 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
     // Log.v( "DistoX", "save plot file task post exec");
     if ( filename == null ) {
       TDLog.Log( TDLog.LOG_IO, "failed export as CSX " + mFilename );
-      TDToast.make( mContext, mContext.getResources().getString(R.string.saving_file_failed) );
+      if ( mToast ) TDToast.make( mContext.getResources().getString(R.string.saving_file_failed) );
     } else {
       TDLog.Log( TDLog.LOG_IO, "exported survey as CSX " + filename );
-      TDToast.make( mContext, String.format( mContext.getResources().getString(R.string.saved_file_1), filename ) );
+      if ( mToast ) TDToast.make( String.format( mContext.getResources().getString(R.string.saved_file_1), filename ) );
     }
   }
 }

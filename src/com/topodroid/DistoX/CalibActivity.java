@@ -269,7 +269,7 @@ public class CalibActivity extends Activity
     } else if ( k < mNrButton1 && b == mButton1[k++] ) { // OPEN GM
       if ( ! mApp.checkCalibrationDeviceMatch() ) {
         // FIXME use alert dialog
-        TDToast.make( this, R.string.calib_device_mismatch );
+        TDToast.make( R.string.calib_device_mismatch );
       }
       doOpen();
     // } else if ( k < mNrButton1 && b == mButton1[k++] ) { // EXPORT
@@ -343,22 +343,22 @@ public class CalibActivity extends Activity
 
     if ( isSaved ) { // calib already saved
       TopoDroidApp.mDData.updateCalibInfo( TDInstance.cid, date, device, comment );
-      TDToast.make( this, R.string.calib_updated );
+      TDToast.make( R.string.calib_updated );
     } else { // new calib
       name = TopoDroidUtil.noSpaces( name );
       if ( /* name != null && */ name.length() > 0 ) { // name != null always true
         if ( mApp.hasCalibName( name ) ) { // name already exists
-          // TDToast.make( this, R.string.calib_exists );
+          // TDToast.make( R.string.calib_exists );
           String error = getResources().getString( R.string.calib_exists );
           mEditName.setError( error );
         } else {
           mApp.setCalibFromName( name );
           TopoDroidApp.mDData.updateCalibInfo( TDInstance.cid, date, device, comment );
           setNameEditable( true );
-          TDToast.make( this, R.string.calib_saved );
+          TDToast.make( R.string.calib_saved );
         }
       } else {
-        TDToast.make( this, R.string.calib_no_name );
+        TDToast.make( R.string.calib_no_name );
       }
     }
     int algo = 0;
@@ -448,7 +448,7 @@ public class CalibActivity extends Activity
   private void handleMenu( int pos )
   {
     closeMenu();
-    // TDToast.make(this, item.toString() );
+    // TDToast.make( item.toString() );
     int p = 0;
     if ( TDLevel.overNormal && p++ == pos ) { // EXPORT
       if ( TDInstance.calib != null ) {
@@ -489,7 +489,7 @@ public class CalibActivity extends Activity
   private void doExport( int exportType, boolean warn )
   {
     if ( TDInstance.cid < 0 ) {
-      if ( warn ) TDToast.make( this, R.string.no_calibration );
+      if ( warn ) TDToast.make( R.string.no_calibration );
     } else {
       String filename = null;
       switch ( exportType ) {
@@ -498,9 +498,9 @@ public class CalibActivity extends Activity
       }
       if ( warn ) { 
         if ( filename != null ) {
-          TDToast.make( this, getString(R.string.saving_) + filename );
+          TDToast.make( getString(R.string.saving_) + filename );
         } else {
-          TDToast.make( this, R.string.saving_file_failed );
+          TDToast.make( R.string.saving_file_failed );
         }
       }
     }

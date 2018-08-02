@@ -122,14 +122,14 @@ class FirmwareDialog extends MyDialog
           if ( filename.length() == 0 ) filename = null;
         }
         if ( filename == null ) {
-          TDToast.make( mParent, R.string.firmware_file_missing );
+          TDToast.make( R.string.firmware_file_missing );
           return;
         }
         if ( mBtnDump.isChecked() ) {
           TDLog.LogFile( "Firmware dump to " + filename );
           File fp = new File( TDPath.getBinFile( filename ) );
           if ( fp.exists() ) {
-            TDToast.make( mParent, R.string.firmware_file_exists );
+            TDToast.make( R.string.firmware_file_exists );
             return;    
           }
           askDump( filename );
@@ -145,7 +145,7 @@ class FirmwareDialog extends MyDialog
           // int hw = mApp.readFirmwareHardware();
           // TDLog.LogFile( "Firmware version " + fw + " Hardware version " + hw );
           // // Log.v( "DistoX", "HW " + hw + " FW " + fw );
-          // // TDToast.make( mParent, "HARDWARE " + hw );
+          // // TDToast.make( "HARDWARE " + hw );
           // askUpload( filename, areCompatible(hw,fw) );
           askUpload( filename, (fw == 21 || fw == 22 || fw == 23 || fw == 24 || fw == 25 || fw == 250 ) );
         }
@@ -162,8 +162,7 @@ class FirmwareDialog extends MyDialog
           TDLog.LogFile( "Firmware dumping to file " + filename );
           int ret = mApp.dumpFirmware( filename );
           TDLog.LogFile( "Firmware dump to " + filename + " result: " + ret );
-          TDToast.makeLong( mParent, 
-            String.format( mParent.getResources().getString(R.string.firmware_file_dumped), filename, ret ) );
+          TDToast.makeLong( String.format( mParent.getResources().getString(R.string.firmware_file_dumped), filename, ret ) );
           // finish(); 
         }
       }
@@ -184,8 +183,7 @@ class FirmwareDialog extends MyDialog
           long len = file.length();
           int ret  = mApp.uploadFirmware( filename );
           TDLog.LogFile( "Firmware upload result: written " + ret + " bytes of " + len );
-          TDToast.makeLong( mParent, 
-            String.format( mParent.getResources().getString(R.string.firmware_file_uploaded), filename, ret, len ) );
+          TDToast.makeLong( String.format( mParent.getResources().getString(R.string.firmware_file_uploaded), filename, ret, len ) );
           // finish(); 
         }
       }

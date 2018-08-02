@@ -128,7 +128,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
             break;
           case TDConst.DISTOX_EXPORT_CSX: // IMPORTANT CSX must come before PNG
             if ( PlotInfo.isSketch2D( mType ) ) {
-              mParent.doSaveCsx( origin, psd1, psd2 );
+              mParent.doSaveCsx( origin, psd1, psd2, false );
               break;
             } else { // X-Section cSurvey are exported as PNG
               // fall-through

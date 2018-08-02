@@ -148,7 +148,7 @@ public class DeviceActivity extends Activity
         final int state = intent.getIntExtra( BluetoothDevice.EXTRA_BOND_STATE, BluetoothDevice.ERROR );
         final int prev  = intent.getIntExtra( BluetoothDevice.EXTRA_PREVIOUS_BOND_STATE, BluetoothDevice.ERROR );
         if ( state == BluetoothDevice.BOND_BONDED && prev == BluetoothDevice.BOND_BONDING ) {
-          // FIXME TDToast.make( this, R.string.device_paired );
+          // FIXME TDToast.make( R.string.device_paired );
           updateList();
         }
       }
@@ -293,7 +293,7 @@ public class DeviceActivity extends Activity
     if ( mApp.mBTAdapter != null ) {
       Set<BluetoothDevice> device_set = mApp.mBTAdapter.getBondedDevices(); // get paired devices
       if ( device_set.isEmpty() ) {
-        // TDToast.make(this, R.string.no_paired_device );
+        // TDToast.make(R.string.no_paired_device );
       } else {
         setTitle( R.string.title_device );
         for ( BluetoothDevice device : device_set ) {
@@ -379,10 +379,10 @@ public class DeviceActivity extends Activity
     BluetoothDevice device = mApp.mBTAdapter.getRemoteDevice( mCurrDevice.mAddress );
     switch ( DeviceUtil.pairDevice( device ) ) {
       case -1: // failure
-        // TDToast.make( this, R.string.pairing_failed ); // TODO
+        // TDToast.make( R.string.pairing_failed ); // TODO
         break;
       case 2: // already paired
-        // TDToast.make( this, R.string.device_paired ); 
+        // TDToast.make( R.string.device_paired ); 
         break;
       default: // 0: null device
                // 1: paired ok
@@ -442,7 +442,7 @@ public class DeviceActivity extends Activity
     // FIXME COMMENTED
     // TopoDroidComm comm = mApp.mComm;
     // if ( comm == null ) {
-    //   TDToast.make( this, R.string.connect_failed );
+    //   TDToast.make( R.string.connect_failed );
     //   return;
     // }
 
@@ -450,24 +450,24 @@ public class DeviceActivity extends Activity
     if ( k < mNrButton1 && b == mButton1[k++] ) {         // RESET COMM STATE [This is fast]
       mApp.resetComm();
       setState();
-      TDToast.make( this, R.string.bt_reset );
+      TDToast.make( R.string.bt_reset );
     } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // CALIBRATION MODE TOGGLE
       if ( mCurrDevice == null ) { // mAddress.length() < 1 ) {
-        TDToast.make( this, R.string.no_device_address );
+        TDToast.make( R.string.no_device_address );
       } else {
         enableButtons( false );
         new CalibToggleTask( this, this, mApp ).execute();
       }
     } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // CALIBRATIONS
       if ( TDInstance.device == null ) {
-        TDToast.make( this, R.string.no_device_address );
+        TDToast.make( R.string.no_device_address );
       } else {
         (new CalibListDialog( this, this, mApp )).show();
       }
 
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {    // INFO TDLevel.overNormal
       if ( mCurrDevice == null ) {
-        TDToast.make( this, R.string.no_device_address );
+        TDToast.make( R.string.no_device_address );
       } else {
         // setTitleColor( TDColor.CONNECTED ); // USELESS
         if ( mCurrDevice.mType == Device.DISTO_A3 ) {
@@ -482,7 +482,7 @@ public class DeviceActivity extends Activity
 
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {   // CALIB_READ TDLevel.overNormal
       if ( mCurrDevice == null ) { // mAddress.length() < 1 ) {
-        TDToast.make( this, R.string.no_device_address );
+        TDToast.make( R.string.no_device_address );
       } else {
         enableButtons( false );
         new CalibReadTask( this, this, mApp, CalibReadTask.PARENT_DEVICE ).execute();
@@ -490,14 +490,14 @@ public class DeviceActivity extends Activity
 
     } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // DISTOX MEMORY TDLevel.overAdvanced
       if ( mCurrDevice == null ) { // mAddress.length() < 1 ) {
-        TDToast.make( this, R.string.no_device_address );
+        TDToast.make( R.string.no_device_address );
       } else {
         if ( mCurrDevice.mType == Device.DISTO_A3 ) {
           new DeviceA3MemoryDialog( this, this ).show();
         } else if ( mCurrDevice.mType == Device.DISTO_X310 ) {
           new DeviceX310MemoryDialog( this, this ).show();
         } else {
-          TDToast.make( this, "Unknown DistoX type " + mCurrDevice.mType );
+          TDToast.make( "Unknown DistoX type " + mCurrDevice.mType );
         }
       }
 
@@ -537,11 +537,11 @@ public class DeviceActivity extends Activity
     // TDLog.Log( TDLog.LOG_DEVICE, "onClick mBtnHeadTail. Is connected " + mApp.isConnected() );
     String ht = mApp.readHeadTail( mCurrDevice.mAddress, command, head_tail );
     if ( ht == null ) {
-      TDToast.make( this, R.string.head_tail_failed );
+      TDToast.make( R.string.head_tail_failed );
       // return false;
     }
     // Log.v( TopoDroidApp.TAG, "Head " + head_tail[0] + " tail " + head_tail[1] );
-    // TDToast.make( this, getString(R.string.head_tail) + ht );
+    // TDToast.make( getString(R.string.head_tail) + ht );
     // return true;
   }
 
@@ -558,7 +558,7 @@ public class DeviceActivity extends Activity
   {
     // Log.v(TopoDroidApp.TAG, "store HeadTail " + mCurrDevice.mAddress + " : " + head_tail[0] + " " + head_tail[1] );
     if ( ! mApp_mDData.updateDeviceHeadTail( mCurrDevice.mAddress, head_tail ) ) {
-      TDToast.make( this, R.string.head_tail_store_failed );
+      TDToast.make( R.string.head_tail_store_failed );
     }
   }
 
@@ -589,7 +589,7 @@ public class DeviceActivity extends Activity
   {
     if (    head_tail[0] < 0 || head_tail[0] >= DeviceA3Details.MAX_ADDRESS_A3 
          || head_tail[1] < 0 || head_tail[1] >= DeviceA3Details.MAX_ADDRESS_A3 ) {
-      TDToast.make(this, R.string.device_illegal_addr );
+      TDToast.make(R.string.device_illegal_addr );
       return;
     }
     ( new MemoryReadTask( mApp, dialog, Device.DISTO_A3, mCurrDevice.mAddress, head_tail, dumpfile ) ).execute();
@@ -599,7 +599,7 @@ public class DeviceActivity extends Activity
   // void resetX310DeviceHeadTail( final int[] head_tail )
   // {
   //   int n = mApp.resetX310Memory( mCurrDevice.mAddress, head_tail[0], head_tail[1] );
-  //   TDToast.make(this, "X310 memory reset " + n + " data" );
+  //   TDToast.make("X310 memory reset " + n + " data" );
   // }
 
   // reset device from stored-tail to given tail
@@ -607,7 +607,7 @@ public class DeviceActivity extends Activity
   {
     // Log.v(TopoDroidApp.TAG, "reset device from " + head_tail[0] + " to " + head_tail[1] );
     if ( head_tail[0] < 0 || head_tail[0] >= 0x8000 || head_tail[1] < 0 || head_tail[1] >= 0x8000 ) {
-      TDToast.make(this, R.string.device_illegal_addr );
+      TDToast.make(R.string.device_illegal_addr );
       return;
     } 
     // TODO ask confirm
@@ -669,7 +669,7 @@ public class DeviceActivity extends Activity
       //   if ( result == Activity.RESULT_OK ) {
       //     // nothing to do: scanBTDevices(); is called by menu CONNECT
       //   } else {
-      //     TDToast.make(this, R.string.not_enabled );
+      //     TDToast.make(R.string.not_enabled );
       //     finish();
       //   }
       //   break;
@@ -743,7 +743,7 @@ public class DeviceActivity extends Activity
       Intent scanIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DeviceList.class );
       scanIntent.putExtra( TDTag.TOPODROID_DEVICE_ACTION, DeviceList.DEVICE_SCAN );
       startActivityForResult( scanIntent, TDRequest.REQUEST_DEVICE );
-      TDToast.makeLong(this, R.string.wait_scan );
+      TDToast.makeLong(R.string.wait_scan );
 
     } else if ( TDLevel.overBasic && p++ == pos ) { // PAIR
       pairDevice();
@@ -753,7 +753,7 @@ public class DeviceActivity extends Activity
 
     } else if ( TDLevel.overAdvanced && p++ == pos ) { // FIRMWARE
       if ( TDSetting.mCommType != 0 ) {
-        TDToast.makeLong( this, "Connection mode must be \"on-demand\"" );
+        TDToast.makeLong( "Connection mode must be \"on-demand\"" );
       } else {
         mApp.resetComm();
         (new FirmwareDialog( this, this, mApp )).show();
@@ -848,30 +848,30 @@ public class DeviceActivity extends Activity
     String filename = TDPath.getCCsvFile( name );
     File file = new File( filename );
     if ( ! file.exists() ) {
-      TDToast.make(this, R.string.file_not_found );
+      TDToast.make(R.string.file_not_found );
     } else {
       // FIXME_SYNC this is sync ... ok because calib file is small
       switch ( TDExporter.importCalibFromCsv( mApp_mDData, filename, mCurrDevice.mAddress ) ) {
         case 0:
-          TDToast.make(this, R.string.import_calib_ok );
+          TDToast.make(R.string.import_calib_ok );
           break;
         case -1:
-          TDToast.make(this, R.string.import_calib_no_header );
+          TDToast.make(R.string.import_calib_no_header );
           break;
         case -2:
-          TDToast.make(this, R.string.import_calib_already );
+          TDToast.make(R.string.import_calib_already );
           break;
         case -3:
-          TDToast.make(this, R.string.import_calib_mismatch );
+          TDToast.make(R.string.import_calib_mismatch );
           break;
         case -4:
-          TDToast.make(this, R.string.import_calib_no_data );
+          TDToast.make(R.string.import_calib_no_data );
           break;
         case -5:
-          TDToast.make(this, R.string.import_calib_io_error );
+          TDToast.make(R.string.import_calib_io_error );
           break;
         default:
-          TDToast.make(this, R.string.import_failed );
+          TDToast.make(R.string.import_failed );
       }
     }
   }

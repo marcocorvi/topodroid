@@ -77,7 +77,7 @@ class CutNPaste
             mClipboardText = popup_et.getText().toString();
             popup_et.setText("");
             String str = String.format( context.getResources().getString( R.string.copied ), mClipboardText );
-            TDToast.makeGravity( context, str, Gravity.LEFT | Gravity.TOP );
+            TDToast.makeGravity( str, Gravity.LEFT | Gravity.TOP );
           }
           dismissPopup();
         }
@@ -88,7 +88,7 @@ class CutNPaste
           if ( popup_et != null ) {
             mClipboardText = popup_et.getText().toString();
             String str = String.format( context.getResources().getString( R.string.copied ), mClipboardText );
-            TDToast.makeGravity( context, str, Gravity.LEFT | Gravity.TOP );
+            TDToast.makeGravity( str, Gravity.LEFT | Gravity.TOP );
           }
           dismissPopup();
         }
@@ -169,7 +169,7 @@ class CutNPaste
         public void onClick(View v) {
           app.resetComm();
           dismissPopupBT();
-          TDToast.make( context, R.string.bt_reset );
+          TDToast.make( R.string.bt_reset );
         }
       } );
 

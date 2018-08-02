@@ -39,9 +39,9 @@ class ExportZipTask extends AsyncTask< Void, Void, Boolean >
   protected void onPostExecute( Boolean res )
   {
     if ( res ) {
-      TDToast.make( mContext, mContext.getResources().getString( R.string.zip_saved ) + " " + mArchiver.zipname );
+      TDToast.make( mContext.getResources().getString( R.string.zip_saved ) + " " + mArchiver.zipname );
     } else {
-      TDToast.make( mContext, R.string.zip_failed );
+      TDToast.make( R.string.zip_failed );
     }
   }
 }

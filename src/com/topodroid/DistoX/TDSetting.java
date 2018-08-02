@@ -1379,13 +1379,13 @@ class TDSetting
   {
     if ( ! StationPolicy.setPolicy( policy ) ) {
       if ( policy == StationPolicy.SURVEY_STATION_TOPOROBOT ) {
-        TDToast.make( context, R.string.toporobot_warning );
+        TDToast.make( R.string.toporobot_warning );
       } else if ( policy == StationPolicy.SURVEY_STATION_TRIPOD ) {
-        TDToast.make( context, R.string.tripod_warning );
+        TDToast.make( R.string.tripod_warning );
       } else if ( policy == StationPolicy.SURVEY_STATION_BACKSIGHT ) {
-        // TDToast.make( context, R.string.backsight_warning );
+        // TDToast.make( R.string.backsight_warning );
       } else if ( policy == StationPolicy.SURVEY_STATION_ANOMALY ) {
-        TDToast.make( context, R.string.anomaly_warning );
+        TDToast.make( R.string.anomaly_warning );
       } else {
         //
       }

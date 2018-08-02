@@ -152,7 +152,7 @@ class TopoDroidComm
             TDLog.Error( "data without G packet " + nReadPackets );
             mApp.mActivity.runOnUiThread( new Runnable() {
               public void run() {
-                TDToast.makeBG(mApp, "data without G: " + nReadPackets, TDColor.FIXED_RED );
+                TDToast.makeBG("data without G: " + nReadPackets, TDColor.FIXED_RED );
               }
             } );
           }

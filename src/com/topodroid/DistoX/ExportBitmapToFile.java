@@ -63,9 +63,9 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
       super.onPostExecute(bool);
       if ( mToast ) {
         if ( bool ) {
-          TDToast.make( mContext, String.format( mContext.getResources().getString(R.string.saved_file_2), filename, mScale) );
+          TDToast.make( String.format( mContext.getResources().getString(R.string.saved_file_2), filename, mScale) );
         } else {
-          TDToast.make( mContext, R.string.saving_file_failed );
+          TDToast.make( R.string.saving_file_failed );
         }
       }
     }

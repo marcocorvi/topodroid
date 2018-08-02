@@ -143,7 +143,7 @@ class ConnectDialog extends MyDialog
     if ( mApp.mBTAdapter != null ) {
       mDevices = mApp.mBTAdapter.getBondedDevices(); // get paired devices
       if ( mDevices.isEmpty() ) {
-        // TDToast.make(this, R.string.no_paired_device );
+        // TDToast.make(R.string.no_paired_device );
       } else {
         for ( BluetoothDevice device : mDevices ) {
           // String addr = device.getAddress();
@@ -240,31 +240,31 @@ class ConnectDialog extends MyDialog
     // } else
     if ( b == mBtnConnect ) {
       if ( mApp.getConnectState() != SyncService.STATE_NONE ) {
-        TDToast.make( mContext, R.string.connected_already );
+        TDToast.make( R.string.connected_already );
       } else if ( mName != null ) {
         connectDevice();
         dismiss();
       } else {
-        TDToast.make( mContext, R.string.no_device_address );
+        TDToast.make( R.string.no_device_address );
       } 
     } else if ( b == mBtnDisconnect ) {
       if ( mApp.getConnectState() != SyncService.STATE_CONNECTED ) {
-        TDToast.make( mContext, R.string.connected_none );
+        TDToast.make( R.string.connected_none );
       } else if ( mName != null ) {
         if ( disconnectDevice() ) {
           dismiss();
         }
       } else {
-        TDToast.make( mContext, R.string.no_device_address );
+        TDToast.make( R.string.no_device_address );
       }
     } else if ( b == mBtnSync ) {
       if ( mApp.getConnectState() != SyncService.STATE_CONNECTED ) {
-        TDToast.make( mContext, R.string.connected_none );
+        TDToast.make( R.string.connected_none );
       } else if ( mName != null ) {
         syncDevice();
         dismiss();
       } else {
-        TDToast.make( mContext, R.string.no_device_address );
+        TDToast.make( R.string.no_device_address );
       }
     // } else if ( b == mBtnCancel ) {
     //   /* nothing */

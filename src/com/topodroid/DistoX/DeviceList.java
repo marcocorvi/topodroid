@@ -95,7 +95,7 @@ public class DeviceList extends Activity
       StringBuffer buf = new StringBuffer( item );
       int k = buf.lastIndexOf(" ");
       String address = buf.substring(k+1);
-      // TDToast.make( mApp.getApplicationContext(), address );
+      // TDToast.make( address );
       TDLog.Log( TDLog.LOG_BT, "DeviceList item click Address " + address );
       Intent intent = new Intent();
       intent.putExtra( TDTag.TOPODROID_DEVICE_ACTION, address );
@@ -112,7 +112,7 @@ public class DeviceList extends Activity
     if ( mApp.mBTAdapter != null ) {
       Set<BluetoothDevice> device_set = mApp.mBTAdapter.getBondedDevices();
       if ( device_set.isEmpty() ) {
-        TDToast.make(this, R.string.no_paired_device );
+        TDToast.make(R.string.no_paired_device );
       } else {
         setTitle( R.string.title_device );
         mArrayAdapter.clear();
@@ -123,7 +123,7 @@ public class DeviceList extends Activity
       }
       // TDLog.Log( TDLog.LOG_BT, "showPairedDevices n. " + mArrayAdapter.getCount() );
     } else {
-      TDToast.make(this, R.string.not_available );
+      TDToast.make(R.string.not_available );
     }
   }
 
@@ -150,7 +150,7 @@ public class DeviceList extends Activity
           setTitle( R.string.title_device );
           resetReceiver();
           if ( mArrayAdapter.getCount() < 1 ) { 
-            TDToast.make( mApp.getApplicationContext(), R.string.no_device_found );
+            TDToast.make( R.string.no_device_found );
             finish(); // no need to keep list of scanned distox open
           }
         } else if ( BluetoothDevice.ACTION_FOUND.equals( action ) ) {

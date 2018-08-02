@@ -90,7 +90,7 @@ class CalibImportDialog extends MyDialog
       }
       mList.setAdapter( arrayAdapter );
     } else {
-      TDToast.make( mContext, R.string.import_none );
+      TDToast.make( R.string.import_none );
       dismiss();
     }
   }

@@ -112,7 +112,7 @@ class DistoXStatDialog extends MyDialog
                           mStat.countSurface, mStat.lengthSurface * unit, unit_str ) );
         mTextSplay.setText( String.format( res.getString(R.string.stat_splay), mStat.countSplay ) );
         mTextStation.setText( String.format( res.getString(R.string.stat_station), mStat.countStation ) );
-        mTextLoop.setText( String.format( res.getString(R.string.stat_loop), mStat.countLoop ) );
+        mTextLoop.setText( String.format( res.getString(R.string.stat_cycle), mStat.countLoop ) );
         mTextComponent.setText( String.format( res.getString(R.string.stat_component), mStat.countComponent ) );
 
         mTextAngleErr.setText( String.format( res.getString(R.string.stat_angle_error), 
@@ -121,9 +121,11 @@ class DistoXStatDialog extends MyDialog
    
         // mList.setOnItemClickListener( this );
         List< String > cls = mNum.getClosures();
-        if ( cls.size() == 0 ) {
+	int nr_loop = cls.size();
+        if ( nr_loop == 0 ) {
           ((TextView)findViewById( R.id.text_stat_loops )).setText( R.string.loop_none );
         } else {
+          ((TextView)findViewById( R.id.text_stat_loops )).setText( String.format( res.getString(R.string.stat_loop), nr_loop ) );
           mList = (ListView) findViewById(R.id.list);
           mList.setAdapter( new ArrayAdapter<>( mContext, R.layout.row, cls ) );
         }

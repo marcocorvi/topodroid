@@ -150,7 +150,7 @@ public class SurveyWindow extends Activity
       mTextName.setText( name );
       mTextName.setTextColor( mNameColor );
     } else {
-      TDToast.make( mActivity, R.string.cannot_rename );
+      TDToast.make( R.string.cannot_rename );
     }
   } 
     
@@ -338,9 +338,9 @@ public class SurveyWindow extends Activity
     // Archiver archiver = new Archiver( mApp );
     // if ( archiver.archive( ) ) {
     //   String msg = getResources().getString( R.string.zip_saved ) + " " + archiver.zipname;
-    //   TDToast.make( mActivity, msg );
+    //   TDToast.make( msg );
     // } else {
-    //   TDToast.make( mActivity, R.string.zip_failed );
+    //   TDToast.make( R.string.zip_failed );
     // }
   }
 
@@ -365,7 +365,7 @@ public class SurveyWindow extends Activity
         intent.putExtra( "survey", TDPath.getSurveyThFile( TDInstance.survey ) );
         mActivity.startActivity( intent );
       } catch ( ActivityNotFoundException e ) {
-        TDToast.make( mActivity, R.string.no_cave3d );
+        TDToast.make( R.string.no_cave3d );
       }
     }
   }
@@ -384,7 +384,7 @@ public class SurveyWindow extends Activity
     if ( TDInstance.survey != null ) {
       (new DistoXAnnotations( mActivity, TDInstance.survey )).show();
     } else { // SHOULD NEVER HAPPEN
-      TDToast.make( mActivity, R.string.no_survey );
+      TDToast.make( R.string.no_survey );
     }
   }
 
@@ -563,7 +563,7 @@ public class SurveyWindow extends Activity
     } else if ( TDLevel.overAdvanced && p++ == pos ) { // CALIBRATION CHECK SHOTS
       List< DBlock > shots = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.CHECK );
       if ( shots.size() == 0 ) {
-        TDToast.make( mActivity, R.string.no_calib_check );
+        TDToast.make( R.string.no_calib_check );
       } else {
         new CalibCheckDialog( mActivity, this, shots ).show();
       }
@@ -598,7 +598,7 @@ public class SurveyWindow extends Activity
   //   Handler convert_handler= new Handler(){
   //     @Override
   //     public void handleMessage(Message msg) {
-  //       TDToast.make( mActivity, R.string.converted_tdr2th2 );
+  //       TDToast.make( R.string.converted_tdr2th2 );
   //     }
   //   };
   //   (new ConvertTdr2Th2Task( mActivity, convert_handler, mApp )).execute();

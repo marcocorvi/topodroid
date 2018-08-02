@@ -248,7 +248,7 @@ class FixedGpsDialog extends MyDialog
       }
     }
     if ( do_toast ) {
-      TDToast.make( mContext, R.string.no_location_data );
+      TDToast.make( R.string.no_location_data );
     }
   }
 

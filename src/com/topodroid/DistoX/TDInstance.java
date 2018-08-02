@@ -12,10 +12,13 @@
 package com.topodroid.DistoX;
 
 import android.os.Bundle;
+import android.content.Context;
 
 // static class (singleton) with instance data
 class TDInstance
 {
+  static Context context; // must be the application context
+
   static String cwd;  // current work directory
   static String cbd;  // current base directory
 
@@ -48,8 +51,10 @@ class TDInstance
     return b;
   }
 
-  static void fromBundle( Bundle b )
+  // @param ctx must be the application context
+  static void fromBundle( Context ctx, Bundle b )
   {
+    context = ctx;
     cwd = b.getString( "TOPODROID_CWD" );
     cbd = b.getString( "TOPODROID_CBD" );
     sid = b.getLong( "TOPODROID_SID" );
@@ -65,4 +70,6 @@ class TDInstance
       // device = TopoDroidApp.setDevice( addr ); // FIXME_DEVICE_STATIC
     }
   }
+
+  static void setContext( Context ctx ) { context = ctx; }
 }

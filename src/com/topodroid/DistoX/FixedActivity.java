@@ -287,7 +287,7 @@ public class FixedActivity extends Activity
       startActivityForResult( intent, CRS_CONVERSION_REQUEST );
     } catch ( ActivityNotFoundException e ) {
       mFixedDialog = null;
-      TDToast.make( mContext, R.string.no_proj4 );
+      TDToast.make( R.string.no_proj4 );
     }
   }
 
@@ -303,7 +303,7 @@ public class FixedActivity extends Activity
       startActivityForResult( intent, CRS_INPUT_REQUEST );
     } catch ( ActivityNotFoundException e ) {
       mFixedAddDialog = null;
-      TDToast.make( mContext, R.string.no_proj4 );
+      TDToast.make( R.string.no_proj4 );
     }
   }
 

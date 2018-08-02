@@ -42,7 +42,7 @@ abstract class ImportTask extends AsyncTask< String, Integer, Long >
     if ( result >= 0 ) {
       mMain.updateDisplay( );
     } else {
-      TDToast.make( mMain, R.string.import_already );
+      TDToast.make( R.string.import_already );
     }
   }
 }

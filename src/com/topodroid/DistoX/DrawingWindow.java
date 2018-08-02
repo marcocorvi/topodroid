@@ -572,7 +572,7 @@ public class DrawingWindow extends ItemDrawer
         mFullName2 = fullName2;
         mApp.mShotWindow.setRecentPlot( name, mType );
       } else {
-        TDToast.make( mActivity, R.string.plot_duplicate_name );
+        TDToast.make( R.string.plot_duplicate_name );
         // Log.v("DistoX", "plot name already exists");
       }
     }
@@ -901,7 +901,7 @@ public class DrawingWindow extends ItemDrawer
         super.onBackPressed();
       } else {
         doubleBack = true;
-        doubleBackToast = TDToast.makeToast( mActivity, R.string.double_back );
+        doubleBackToast = TDToast.makeToast( R.string.double_back );
         doubleBackHandler.postDelayed( doubleBackRunnable, 1000 );
       }
     }
@@ -922,10 +922,10 @@ public class DrawingWindow extends ItemDrawer
 
       // if ( not_all_symbols ) AlertMissingSymbols();
       // if ( mAllSymbols ) {
-      //   // TDToast.make( mActivity, R.string.sketch_saving );
+      //   // TDToast.make( R.string.sketch_saving );
       //   startSaveTdrTask( mType, PlotSave.SAVE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP );
       // } else { // mAllSymbols is false: FIXME what to do ?
-      //  TDToast.makeLong( mActivity, "NOT SAVING " + mFullName1 + " " + mFullName2 );
+      //  TDToast.makeLong( "NOT SAVING " + mFullName1 + " " + mFullName2 );
       // }
     }
     resetModified();
@@ -946,7 +946,7 @@ public class DrawingWindow extends ItemDrawer
     return null;
   }
 
-  // called by doSaveTdr and saveTh2
+  // called by doSaveTdr and doSaveTh2
   // @param suffix
   // @param maxTasks
   // @param rotate    backup_rotate
@@ -1198,12 +1198,12 @@ public class DrawingWindow extends ItemDrawer
     if ( can_toast ) {
       if ( (! mNum.surveyAttached) && TDSetting.mCheckAttached ) {
         if ( (! mNum.surveyExtend) && TDSetting.mCheckExtend && type == PlotInfo.PLOT_EXTENDED ) {
-          TDToast.make( mActivity, R.string.survey_not_attached_extend );
+          TDToast.make( R.string.survey_not_attached_extend );
         } else {
-          TDToast.make( mActivity, R.string.survey_not_attached );
+          TDToast.make( R.string.survey_not_attached );
         }
       } else if ( (! mNum.surveyExtend) && TDSetting.mCheckExtend && type == PlotInfo.PLOT_EXTENDED ) {
-        TDToast.make( mActivity, R.string.survey_not_extend );
+        TDToast.make( R.string.survey_not_extend );
       }
     }
   }
@@ -1991,7 +1991,7 @@ public class DrawingWindow extends ItemDrawer
 
     if ( do_load ) {
       if ( ! loadFiles( mType, list ) ) {
-        TDToast.make( mActivity, R.string.plot_not_found );
+        TDToast.make( R.string.plot_not_found );
 	finish();
       }
     }
@@ -2224,7 +2224,7 @@ public class DrawingWindow extends ItemDrawer
 
       if ( PlotInfo.isSketch2D( type ) ) {
         if ( list.size() == 0 ) {
-          TDToast.make( mActivity, R.string.few_data );
+          TDToast.make( R.string.few_data );
           if ( mPid1 >= 0 ) mApp_mData.dropPlot( mPid1, mSid );
           if ( mPid2 >= 0 ) mApp_mData.dropPlot( mPid2, mSid );
           finish();
@@ -2265,7 +2265,7 @@ public class DrawingWindow extends ItemDrawer
       // if ( ! mAllSymbols ) {
       //   String msg = missingSymbols.getMessage( getResources() );
       //   // TDLog.Log( TDLog.LOG_PLOT, "Missing " + msg );
-      //   TDToast.makeLong( mActivity, "Missing symbols \n" + msg );
+      //   TDToast.makeLong( "Missing symbols \n" + msg );
       //   // (new MissingDialog( mActivity, this, msg )).show();
       //   // finish();
       // }
@@ -2948,7 +2948,7 @@ public class DrawingWindow extends ItemDrawer
 	      if ( audioCheck ) {
                 addAudioPoint( xs, ys );
 	      } else {
-                TDToast.make( mActivity, R.string.no_feature_audio );
+                TDToast.make( R.string.no_feature_audio );
               }
             } else {
     	      if ( mLandscape ) {
@@ -3348,7 +3348,7 @@ public class DrawingWindow extends ItemDrawer
           }
         }
       } else if ( nr_legs > 1 ) { // many legs
-        // TDToast.make( mActivity, R.string.too_many_leg_intersection );
+        // TDToast.make( R.string.too_many_leg_intersection );
         if ( h_section ) { // xsection in profile view
           // nothing 
         } else {
@@ -3361,7 +3361,7 @@ public class DrawingWindow extends ItemDrawer
     // Log.v("DistoX", "new section " + from + " - " + to );
     // cross-section does not exists yet
     if ( nr_legs == 0 ) {
-      TDToast.make( mActivity, R.string.no_leg_intersection );
+      TDToast.make( R.string.no_leg_intersection );
     } else if ( nr_legs == 1 ) {
       String section_id = mApp_mData.getNextSectionId( TDInstance.sid );
       currentLine.addOption( "-id " + section_id );
@@ -3384,7 +3384,7 @@ public class DrawingWindow extends ItemDrawer
       new DrawingLineSectionDialog( mActivity, this, mApp, h_section, false, section_id, currentLine, from, to, azimuth, clino, tt ).show();
 
     } else { // many legs in profile view
-      TDToast.make( mActivity, R.string.too_many_leg_intersection );
+      TDToast.make( R.string.too_many_leg_intersection );
     }
   }
 
@@ -3455,10 +3455,10 @@ public class DrawingWindow extends ItemDrawer
               mActivity.startActivity( intent );
             }
           } catch ( ActivityNotFoundException e ) {
-            TDToast.make( mActivity, R.string.no_capture_app );
+            TDToast.make( R.string.no_capture_app );
           }
         } else {
-          TDToast.make( mActivity, "NOT IMPLEMENTED YET" );
+          TDToast.make( "NOT IMPLEMENTED YET" );
         }
       }
     }
@@ -3483,7 +3483,7 @@ public class DrawingWindow extends ItemDrawer
     {
       mMediaComment = "";
       if ( ! audioCheck ) {
-	// TODO TDToast.make( mActivity, R.string.no_feature_audio );
+	// TODO TDToast.make( R.string.no_feature_audio );
 	return;
       }
       mMediaId = mApp_mData.nextAudioNegId( TDInstance.sid );
@@ -3618,7 +3618,7 @@ public class DrawingWindow extends ItemDrawer
       PlotInfo plot = mApp_mData.getPlotInfo( TDInstance.sid, xs_id );
 
       if ( plot == null  ) { // if there does not exist xsection xs-name create it
-        // TDToast.make( mActivity, R.string.too_many_legs_xsection );
+        // TDToast.make( R.string.too_many_legs_xsection );
         if ( azimuth >= 360 ) azimuth -= 360;
 
         if ( PlotInfo.isProfile( type ) ) {
@@ -3960,7 +3960,7 @@ public class DrawingWindow extends ItemDrawer
               if ( mDrawingSurface.moveHotItemToNearestPoint() ) {
                 modified();
               } else {
-                TDToast.make( context, R.string.failed_snap_to_point );
+                TDToast.make( R.string.failed_snap_to_point );
               }
             }
             dismissPopupEdit();
@@ -3984,7 +3984,7 @@ public class DrawingWindow extends ItemDrawer
                   case -1:
                   case -2:
                   case -3: // no splay close enough
-                    TDToast.make( context, R.string.failed_snap_to_splays );
+                    TDToast.make( R.string.failed_snap_to_splays );
                     break;
                   default:
                     break;
@@ -4008,7 +4008,7 @@ public class DrawingWindow extends ItemDrawer
                     modified();
                     break;
                   case -3: // no line close enough
-                    TDToast.make( context, R.string.failed_snap_to_line );
+                    TDToast.make( R.string.failed_snap_to_line );
                     break;
                   default:
                     break;
@@ -4291,7 +4291,7 @@ public class DrawingWindow extends ItemDrawer
         mDataDownloader.stopDownloadData();
         setConnectionStatus( mDataDownloader.getStatus() );
         mApp.resetComm();
-        TDToast.make(mActivity, R.string.bt_reset );
+        TDToast.make(R.string.bt_reset );
       }
     // } else { // downloading: nothing
     }
@@ -4524,7 +4524,7 @@ public class DrawingWindow extends ItemDrawer
                   DrawingAudioPath audio = (DrawingAudioPath)point;
                   new AudioDialog( this, mApp, this, audio.mId ).show();
                 } else {
-	          // TODO TDToast.make( mActivity, R.string.no_feature_audio );
+	          // TODO TDToast.make( R.string.no_feature_audio );
 		}
               } else {
                 new DrawingPointDialog( mActivity, this, point ).show();
@@ -4743,12 +4743,12 @@ public class DrawingWindow extends ItemDrawer
     private void doSavePng( DrawingCommandManager manager, long type, final String filename, boolean toast )
     {
       if ( manager == null ) {
-	if ( toast ) TDToast.make( mActivity, R.string.null_bitmap );
+	if ( toast ) TDToast.make( R.string.null_bitmap );
 	return;
       }
       Bitmap bitmap = manager.getBitmap( );
       if ( bitmap == null ) {
-        if ( toast ) TDToast.make( mActivity, R.string.null_bitmap );
+        if ( toast ) TDToast.make( R.string.null_bitmap );
 	return;
       }
       float scale = manager.getBitmapScale();
@@ -4756,9 +4756,9 @@ public class DrawingWindow extends ItemDrawer
     }
 
     // used also by SavePlotFileTask
-    void doSaveCsx( String origin, PlotSaveData psd1, PlotSaveData psd2 )
+    void doSaveCsx( String origin, PlotSaveData psd1, PlotSaveData psd2, boolean toast )
     {
-      TopoDroidApp.exportSurveyAsCsxAsync( getApplicationContext(), origin, psd1, psd2 );
+      TopoDroidApp.exportSurveyAsCsxAsync( getApplicationContext(), origin, psd1, psd2, toast );
     }
 
     // used to save "dxf", "svg"
@@ -4816,7 +4816,7 @@ public class DrawingWindow extends ItemDrawer
   // called (indirectly) only by ExportDialog: save as th2 even if there are missing symbols
   // no backup_rotate (rotate = 0)
   //
-  private void saveTh2( long type )
+  private void doSaveTh2( long type, final boolean toast )
   {
     DrawingCommandManager manager = mDrawingSurface.getManager( type );
     if ( manager == null ) return;
@@ -4834,15 +4834,21 @@ public class DrawingWindow extends ItemDrawer
     }
     final String filename = name;
     TDLog.Log( TDLog.LOG_IO, "save th2: " + filename );
-    th2Handler = new Handler(){
-      @Override public void handleMessage(Message msg) {
-        if (msg.what == 661 ) {
-          TDToast.make( mActivity, getString(R.string.saved_file_1) + " " + filename + ".th2" );
-        } else {
-          TDToast.make( mActivity, R.string.saving_file_failed );
+    if ( toast ) {
+      th2Handler = new Handler(){
+        @Override public void handleMessage(Message msg) {
+          if (msg.what == 661 ) {
+            TDToast.make( getString(R.string.saved_file_1) + " " + filename + ".th2" );
+          } else {
+            TDToast.make( R.string.saving_file_failed );
+          }
         }
-      }
-    };
+      };
+    } else {
+      th2Handler = new Handler(){
+        @Override public void handleMessage(Message msg) { }
+      };
+    }
     try { 
       (new SavePlotFileTask( mActivity, this, th2Handler, /* mApp, */ mNum, mDrawingUtil, manager, name, type, azimuth, suffix, 0 )).execute();
     } catch ( RejectedExecutionException e ) { }
@@ -4907,12 +4913,12 @@ public class DrawingWindow extends ItemDrawer
       }
       if ( toast ) {
         if ( TDInstance.device.mType == Device.DISTO_X310 ) nr /= 2;
-        TDToast.make( mActivity, getResources().getQuantityString(R.plurals.read_data, nr, nr ) );
+        TDToast.make( getResources().getQuantityString(R.plurals.read_data, nr, nr ) );
       }
     } else { // ( nr < 0 )
       if ( toast ) {
-        // TDToast.make( mActivity, getString(R.string.read_fail_with_code) + nr );
-        TDToast.make( mActivity, mApp.DistoXConnectionError[ -nr ] );
+        // TDToast.make( getString(R.string.read_fail_with_code) + nr );
+        TDToast.make( mApp.DistoXConnectionError[ -nr ] );
       }
     }
   }
@@ -5099,7 +5105,7 @@ public class DrawingWindow extends ItemDrawer
   {
     NumStation st = mNum.getStation( station );
     if ( st == null ) {
-      TDToast.make( mActivity, R.string.missing_station );
+      TDToast.make( R.string.missing_station );
     } else {
       moveTo( mPlot1.type, station );
       moveTo( mPlot2.type, station );
@@ -5156,7 +5162,7 @@ public class DrawingWindow extends ItemDrawer
             }
             new DistoXStatDialog( mActivity, mNum, mPlot1.start, azimuth, mApp_mData.getSurveyStat( TDInstance.sid ) ).show();
           } else {
-            TDToast.make( mActivity, R.string.no_data_reduction );
+            TDToast.make( R.string.no_data_reduction );
 	  }
 	}
       } else if ( TDLevel.overNormal && p++ == pos ) { // RECOVER RELOAD
@@ -5183,7 +5189,7 @@ public class DrawingWindow extends ItemDrawer
 
       } else if ( TDLevel.overBasic && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // OVERVIEW
         if ( mType == PlotInfo.PLOT_PROFILE ) {
-          TDToast.make( mActivity, R.string.no_profile_overview );
+          TDToast.make( R.string.no_profile_overview );
         } else {
           updateReference();
           Intent intent = new Intent( this, OverviewWindow.class );
@@ -5214,7 +5220,7 @@ public class DrawingWindow extends ItemDrawer
   {
     int index = TDConst.plotExportIndex( export_type );
     switch ( index ) {
-      case TDConst.DISTOX_EXPORT_TH2: saveTh2( mType ); break;
+      case TDConst.DISTOX_EXPORT_TH2: doSaveTh2( mType, true ); break;
       case TDConst.DISTOX_EXPORT_CSX: 
         if ( ! PlotInfo.isAnySection( mType ) ) { // FIXME x-sections are saved PNG for CSX
           if ( mPlot1 != null ) {
@@ -5222,7 +5228,7 @@ public class DrawingWindow extends ItemDrawer
 	    int suffix    = PlotSave.EXPORT;
 	    PlotSaveData psd1 = makePlotSaveData( 1, suffix, 0 );
 	    PlotSaveData psd2 = makePlotSaveData( 2, suffix, 0 );
-            doSaveCsx( origin, psd1, psd2 );
+            doSaveCsx( origin, psd1, psd2, true );
 	  }
           break;
         } // else fall-through and savePng
@@ -5802,7 +5808,7 @@ public class DrawingWindow extends ItemDrawer
       mTouchMode = MODE_MOVE;
       // Log.v("DistoX-S", "*** split mode");
     // } else {
-    //   TDToast.make(mActivity, "Missing station " + station );
+    //   TDToast.make("Missing station " + station );
     // }
     // Log.v("DistoX-S", "mode " + mMode + " touch-mode " + mTouchMode );
   }
@@ -5867,12 +5873,12 @@ public class DrawingWindow extends ItemDrawer
   private void doSplitPlot( )
   {
     if ( mSplitBorder.size() <= 3 ) { // too few points: nothing to split
-      TDToast.make( mActivity, R.string.split_nothing );
+      TDToast.make( R.string.split_nothing );
       return;
     }
     List<DrawingPath> paths = mDrawingSurface.splitPlot( mSplitBorder, mSplitRemove );
     if ( paths.size() == 0 ) { // nothing to split
-      TDToast.make( mActivity, R.string.split_nothing );
+      TDToast.make( R.string.split_nothing );
       return;
     }
     boolean extended = (mPlot2.type == PlotInfo.PLOT_EXTENDED);

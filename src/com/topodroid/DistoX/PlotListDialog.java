@@ -128,7 +128,7 @@ class PlotListDialog extends MyDialog
         }
       // END_SKETCH_3D //
       if ( list.size() == 0 && ( slist == null || slist.size() == 0 ) ) {
-        TDToast.make( mContext, R.string.no_plots );
+        TDToast.make( R.string.no_plots );
         dismiss();
       }
       // mList.setAdapter( mArrayAdapter );

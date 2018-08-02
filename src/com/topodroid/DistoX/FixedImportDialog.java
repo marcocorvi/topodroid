@@ -150,7 +150,7 @@ class FixedImportDialog extends MyDialog
     if ( ret ) {
       mList.setAdapter( mArrayAdapter );
     } else {
-      TDToast.make( mContext, R.string.MT_points_none );
+      TDToast.make( R.string.MT_points_none );
       dismiss();
     }
     return ret;
@@ -246,7 +246,7 @@ class FixedImportDialog extends MyDialog
       dismiss();
     }
     if ( do_toast ) {
-      TDToast.make( mContext, R.string.no_location_data );
+      TDToast.make( R.string.no_location_data );
     }
   }
 

@@ -112,7 +112,7 @@ class DistoXNum
   int duplicateNr() { return mDupNr; }
   int surfaceNr()   { return mSurfNr; }
   int splaysNr()    { return mSplays.size(); }
-  // int loopNr()      { return mClosures.size(); }
+  int loopNr()      { return mClosures.size(); }
 
   float surveyLength()  { return mLength; }
   float surveyExtLen()  { return mExtLen; }
@@ -775,6 +775,9 @@ class DistoXNum
       tsh.getFirstBlock().mMultiBad = false;
     }
 
+    // dump tmpshots
+    // for ( TriShot tr : tmpshots ) tr.dump();
+
     for ( int i = 0; i < tmpshots.size(); ++i ) {
       TriShot ts0 = tmpshots.get( i );
       addToStats( ts0 );
@@ -784,6 +787,7 @@ class DistoXNum
       // (1) check if ts0 has siblings
       String from = ts0.from;
       String to   = ts0.to;
+      // Log.v("DistoXL", "working shot " + from + "-" + to );
       // if ( from == null || to == null ) continue; // FIXME
       TriShot ts1 = ts0; // last sibling (head = the shot itself)
       for ( int j=i+1; j < tmpshots.size(); ++j ) {
@@ -800,6 +804,7 @@ class DistoXNum
 	  ++ siblings;
         }
       }
+      // Log.v("DistoXL", "working shot " + from + "-" + to + " siblings " + siblings );
       
       if ( ts0.sibling != null ) { // (2) check sibling shots agreement
         float dmax = 0.0f;
@@ -858,6 +863,8 @@ class DistoXNum
     mStations.addStation( mStartStation );
 
     // if ( TDLog.LOG_DEBUG ) Log.v( TDLog.TAG, "start station " + start +  " shots " + tmpshots.size() );
+    // dump tmpshots
+    // for ( TriShot tr : tmpshots ) tr.dump();
 
     NumShot sh;
 
@@ -942,6 +949,7 @@ class DistoXNum
             sf.addAzimuth( ts.b(), iext );
 
             if ( st != null ) { // loop-closure
+              // Log.v("DistoXL", "loop closure at " + ts.from + "-" + ts.to );
               if ( /* TDSetting.mAutoStations || */ TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) { // do not close loop
                 // if ( TDLog.LOG_DEBUG ) Log.v( TDLog.TAG, "do not close loop");
                 // keep loop open: new station( id=ts.to, from=sf, ... )
@@ -957,10 +965,9 @@ class DistoXNum
 
                 sh = makeShotFromTmp( sf, st1, ts, 1, sf.mAnomaly, mDecl );
                 addShotToStations( sh, st1, sf );
-                // Log.v("DistoX", "open loop at " + ts.to + " " + st.e + " " + st1.e + " " + st.s + " " + st1.s );
+                // Log.v("DistoXL", "open loop at " + sf.name + " " + st.name + " TO " + ts.to );
               } else { // close loop
-                // if ( TDLog.LOG_DEBUG ) Log.v( TDLog.TAG, "close loop");
-
+                // Log.v("DistoXL", "close loop at " + sf.name + " " + st.name );
                 sh = makeShotFromTmp( sf, st, ts, 0, sf.mAnomaly, mDecl ); 
                 addShotToStations( sh, sf, st );
               }
@@ -972,6 +979,7 @@ class DistoXNum
               // need the loop length to compute the fractional closure error
               float length = shortestPath( sf, st) + Math.abs( ts.d() );  // FIXME length
               mClosures.add( getClosureError( st, sf, ts.d(), ts.b(), ts.c(), length ) );
+	      // Log.v("DistoXL", "add closure " + sf.name + " " + st.name + " len " + length );
               
               ts.used = true;
               repeat = true;
@@ -1030,6 +1038,7 @@ class DistoXNum
     }
     // if ( TDLog.LOG_DEBUG ) Log.v( TDLog.TAG, "DistoXNum::compute done leg shots, stations  " + mStations.size() );
 
+    // Log.v("DistoXL", "nr loops " + mClosures.size() );
     if ( TDSetting.mLoopClosure == TDSetting.LOOP_CYCLES ) {
       // TDLog.Log( TDLog.LOG_NUM, "loop compensation");
       doLoopCompensation( mNodes, mShots );

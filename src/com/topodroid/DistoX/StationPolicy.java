@@ -47,8 +47,19 @@ class StationPolicy
 
   static int savedPolicy() { return mSavedPolicy; }
 
+  // static void dump()
+  // {
+  //   Log.v("DistoXP", "Policy " + mSavedPolicy + " " + mSurveyStations + "/" + (mShotAfterSplays?"a ":"b ")
+  //       	    + (mBacksightShot?"B":"-")
+  //       	    + (mTripodShot?"T":"-")
+  //       	    + (mMagAnomaly?"M":"-")
+  //       	    + (mTRobotShot?"R":"-") );
+  // }
+		   
   static boolean policyDowngrade( int level )
   {
+    // Log.v("DistoXP", "policy downgrade " + mSavedPolicy + " for level " + level );
+    // dump();
     // these checks are done with the old level: if level is lowered commit default policy to DB
     return (    ( doMagAnomaly() && level < TDLevel.EXPERT )
              || ( doTopoRobot()  && level < TDLevel.TESTER )
@@ -57,6 +68,8 @@ class StationPolicy
 
   static int policyUpgrade( int level )
   {
+    // Log.v("DistoXP", "policy upgrade " + mSavedPolicy + " for level " + level );
+    // dump();
     // after settin the level, check if it has been raised and the saved policy committed to DB
     switch ( level ) { // order by decreasing level
       case TDLevel.TESTER:
@@ -73,7 +86,8 @@ class StationPolicy
 
   static boolean setPolicy( int policy )
   {
-    // Log.v("DistoX", "set survey stations " + mSurveyStations );
+    // Log.v("DistoXP", "policy set from " + mSavedPolicy + " to " + policy );
+    // dump();
     if ( policy == SURVEY_STATION_TOPOROBOT ) {
       if ( TDLevel.overExpert ) {
         mTRobotShot      = true;
@@ -85,6 +99,7 @@ class StationPolicy
         mTitleColor = TDColor.TITLE_TOPOROBOT;
 	mSavedPolicy = policy;
       } else {
+        // Log.v("DistoXP", "policy set fail: toporobot requires overExpert");
         return false;
       }
     } else if ( policy == SURVEY_STATION_TRIPOD ) {
@@ -98,6 +113,7 @@ class StationPolicy
         mTitleColor = TDColor.TITLE_TRIPOD;
 	mSavedPolicy = policy;
       } else {
+        // Log.v("DistoXP", "policy set fail: tripod requires overNormal");
         return false;
       }
     } else if ( policy == SURVEY_STATION_BACKSIGHT ) {
@@ -124,9 +140,14 @@ class StationPolicy
         mTitleColor = TDColor.TITLE_ANOMALY;
 	mSavedPolicy = policy;
       } else {
+        // Log.v("DistoXP", "policy set fail: anomaly requires overAdvanced");
 	return false;
       }
     } else {
+      mTRobotShot      = false;
+      mBacksightShot   = false;
+      mTripodShot      = false;
+      mMagAnomaly      = false;
       mSurveyStations = policy;
       mShotAfterSplays = ( mSurveyStations <= 2 );
       if ( mSurveyStations > 2 ) {
@@ -135,7 +156,8 @@ class StationPolicy
       }
       if ( mSurveyStations == SURVEY_STATION_FOREWARD ) mTitleColor = TDColor.TITLE_BACKSHOT;
     }
-    // Log.v("DistoX", "set survey stations. policy " + policy );
+    // Log.v("DistoXP", "set survey stations. policy " + policy );
+    // dump();
     return true;
   }
 
@@ -162,7 +184,7 @@ class StationPolicy
   //   //       however this restarts the activity which is not good
   //   // if ( TopoDroidApp.mPrefActivitySurvey != null ) TopoDroidApp.mPrefActivitySurvey.reloadPreferences();
   //   //
-  //   // Log.v("DistoX", "SET Policy " + mSurveyStations + " " + mSavedPolicy + " mag anomlay " + mMagAnomaly );
+  //   // Log.v("DistoXP", "SET Policy " + mSurveyStations + " " + mSavedPolicy + " mag anomlay " + mMagAnomaly );
   // }
 
   // // called only by parseStationPolicy
@@ -172,7 +194,7 @@ class StationPolicy
   //     mMagAnomaly = false;
   //     // setPreference( prefs, "DISTOX_MAG_ANOMALY", false );
   //   }
-  //   // Log.v("DistoX", "CLEAR Policy " + mSurveyStations + " " + mSavedPolicy + " mag anomlay " + mMagAnomaly );
+  //   // Log.v("DistoXP", "CLEAR Policy " + mSurveyStations + " " + mSavedPolicy + " mag anomlay " + mMagAnomaly );
   // }
 
 }

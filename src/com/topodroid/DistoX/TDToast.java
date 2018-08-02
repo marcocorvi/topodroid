@@ -21,7 +21,7 @@ import android.view.View.OnClickListener;
 // import android.view.ViewGroup;
 // import android.view.LayoutInflater;
 
-import android.content.Context;
+// import android.content.Context;
 
 class TDToast
 {
@@ -31,35 +31,35 @@ class TDToast
   static final private int LONG     = Toast.LENGTH_LONG;
 
   @SuppressLint("ShowToast")
-  static void make(Context context, int r ) { show( Toast.makeText( context, r, SHORT ) ); }
+  static void make( int r ) { show( Toast.makeText( TDInstance.context, r, SHORT ) ); }
 
   @SuppressLint("ShowToast")
-  static void make(Context context, String text ) { show( Toast.makeText( context, text, SHORT ) ); }
+  static void make( String text ) { show( Toast.makeText( TDInstance.context, text, SHORT ) ); }
   
-  static Toast makeToast( Context context, int r )
+  static Toast makeToast( int r )
   {
-    Toast toast = Toast.makeText( context, r, SHORT );
+    Toast toast = Toast.makeText( TDInstance.context, r, SHORT );
     show( toast );
     return toast;
   }
 
   @SuppressLint("ShowToast")
-  static void makeLong(Context context, int r ) { show( Toast.makeText( context, r, LONG ) ); }
+  static void makeLong( int r ) { show( Toast.makeText( TDInstance.context, r, LONG ) ); }
 
   @SuppressLint("ShowToast")
-  static void makeLong(Context context, String text ) { show( Toast.makeText( context, text, LONG ) ); }
+  static void makeLong( String text ) { show( Toast.makeText( TDInstance.context, text, LONG ) ); }
 
-  static void makeBG( Context context, int r, int color )
+  static void makeBG( int r, int color )
   {
-    Toast toast = Toast.makeText( context, r, SHORT );
+    Toast toast = Toast.makeText( TDInstance.context, r, SHORT );
     getView( toast, color );
     toast.setGravity( mGravity, 0, 0 );
     toast.show();
   }
 
-  static void makeColor( Context context, int r, int color )
+  static void makeColor( int r, int color )
   {
-    Toast toast = Toast.makeText( context, r, SHORT );
+    Toast toast = Toast.makeText( TDInstance.context, r, SHORT );
     View view = getView( toast );
     toast.setGravity( mGravity, 0, 0 );
     TextView tv = (TextView)view.findViewById( android.R.id.message );
@@ -67,17 +67,17 @@ class TDToast
     toast.show();
   }
 
-  static void makeBG( Context context, String str, int color )
+  static void makeBG( String str, int color )
   {
-    Toast toast = Toast.makeText( context, str, SHORT );
+    Toast toast = Toast.makeText( TDInstance.context, str, SHORT );
     View view = getView( toast, color );
     toast.setGravity( mGravity, 0, 0 );
     toast.show();
   }
 
-  static void makeColor( Context context, String str, int color )
+  static void makeColor( String str, int color )
   {
-    Toast toast = Toast.makeText( context, str, SHORT );
+    Toast toast = Toast.makeText( TDInstance.context, str, SHORT );
     View view = getView( toast, color );
     toast.setGravity( mGravity, 0, 0 );
     TextView tv = (TextView)view.findViewById( android.R.id.message );
@@ -85,9 +85,9 @@ class TDToast
     toast.show();
   }
 
-  static void makeGravity( Context context, String str, int gravity )
+  static void makeGravity( String str, int gravity )
   {
-    Toast toast = Toast.makeText( context, str, SHORT );
+    Toast toast = Toast.makeText( TDInstance.context, str, SHORT );
     View view = getView( toast );
     toast.setGravity( gravity, 10, 10 );
     toast.show();

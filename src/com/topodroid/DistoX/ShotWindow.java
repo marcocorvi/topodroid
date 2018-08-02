@@ -289,15 +289,15 @@ public class ShotWindow extends Activity
       }
       if ( toast ) {
         if ( TDInstance.device.mType == Device.DISTO_X310 ) nr /= 2;
-        TDToast.make( mActivity, getResources().getQuantityString(R.plurals.read_data, nr, nr ) );
-        // TDToast.make( mActivity, " read_data: " + nr );
+        TDToast.make( getResources().getQuantityString(R.plurals.read_data, nr, nr ) );
+        // TDToast.make( " read_data: " + nr );
       }
     } else { // ( nr < 0 )
       if ( toast ) {
         if ( nr <= -5 ) {
-          TDToast.make( mActivity, getString(R.string.read_fail_with_code) + nr );
+          TDToast.make( getString(R.string.read_fail_with_code) + nr );
 	       } else {
-          TDToast.make( mActivity, mApp.DistoXConnectionError[ -nr ] );
+          TDToast.make( mApp.DistoXConnectionError[ -nr ] );
         }
       }
     }
@@ -322,7 +322,7 @@ public class ShotWindow extends Activity
     } else {
       mApp.clearSurveyReferences();
       finish();
-      // TDToast.make( mActivity, R.string.no_survey );
+      // TDToast.make( R.string.no_survey );
     }
   }
 
@@ -403,7 +403,7 @@ public class ShotWindow extends Activity
     mDataAdapter.clear();
     // mList.setAdapter( mDataAdapter );
     if ( list.size() == 0 ) {
-      // TDToast.make( mActivity, R.string.no_shots );
+      // TDToast.make( R.string.no_shots );
       return;
     }
     processShotList( list );
@@ -630,7 +630,7 @@ public class ShotWindow extends Activity
       List< DBlock > shots3 = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.CHECK );
       List< PlotInfo > plots     = mApp_mData.selectAllPlots( TDInstance.sid, TDStatus.DELETED );
       if ( shots1.size() == 0 && shots2.size() == 0 && shots3.size() == 0 && plots.size() == 0 ) {
-        TDToast.make( mActivity, R.string.no_undelete );
+        TDToast.make( R.string.no_undelete );
       } else {
         (new UndeleteDialog(mActivity, this, mApp_mData, TDInstance.sid, shots1, shots2, shots3, plots ) ).show();
       }
@@ -646,7 +646,7 @@ public class ShotWindow extends Activity
           intent.putExtra( "survey", TDPath.getSurveyThFile( TDInstance.survey ) );
           mActivity.startActivity( intent );
         } catch ( ActivityNotFoundException e ) {
-          TDToast.make( mActivity, R.string.no_cave3d );
+          TDToast.make( R.string.no_cave3d );
         }
       }
     } else if ( TDLevel.overNormal && p++ == pos ) { // DEVICE
@@ -701,10 +701,10 @@ public class ShotWindow extends Activity
           intent.putExtra( "outputFormat", Bitmap.CompressFormat.JPEG.toString() );
           startActivityForResult( intent, TDRequest.CAPTURE_IMAGE_SHOTWINDOW );
         } catch ( ActivityNotFoundException e ) {
-          TDToast.make( mActivity, R.string.no_capture_app );
+          TDToast.make( R.string.no_capture_app );
         }
       } else {
-        TDToast.make( mActivity, "NOT IMPLEMENTED YET" );
+        TDToast.make( "NOT IMPLEMENTED YET" );
       }
     }
   }
@@ -1117,7 +1117,7 @@ public class ShotWindow extends Activity
       return;
     }
     doubleBack = true;
-    doubleBackToast = TDToast.makeToast( mActivity, R.string.double_back );
+    doubleBackToast = TDToast.makeToast( R.string.double_back );
     doubleBackHandler.postDelayed( doubleBackRunnable, 1000 );
   }
 
@@ -1160,7 +1160,7 @@ public class ShotWindow extends Activity
         mDataDownloader.stopDownloadData();
         setConnectionStatus( mDataDownloader.getStatus() );
         mApp.resetComm();
-        TDToast.make(mActivity, R.string.bt_reset );
+        TDToast.make(R.string.bt_reset );
       }
     // } else { // downloading: nothing
     }
@@ -1202,7 +1202,7 @@ public class ShotWindow extends Activity
   {
     mSearch.set( name, mDataAdapter.searchStation( name, splays ) );
     if ( ! jumpToPos( mSearch.nextPos() ) ) {
-      TDToast.make( mActivity, R.string.station_not_found );
+      TDToast.make( R.string.station_not_found );
     }
   }
 
@@ -1401,7 +1401,7 @@ public class ShotWindow extends Activity
       long mPIDs = mPIDp + 1L; // FIXME !!! this is true but not guaranteed
       startDrawingWindow( start, name+"p", mPIDp, name+"s", mPIDs, PlotInfo.PLOT_PLAN, start, false ); // default no-landscape
     // } else {
-    //   TDToast.make( mActivity, R.string.plot_duplicate_name );
+    //   TDToast.make( R.string.plot_duplicate_name );
     }
     // updateDisplay( );
   }
@@ -1412,7 +1412,7 @@ public class ShotWindow extends Activity
     // FIXME xoffset yoffset, east south and vert (downwards)
     if ( st2 != null ) {
       if ( ! mApp_mData.hasShot( TDInstance.sid, st1, st2 ) ) {
-        TDToast.make( mActivity, R.string.no_shot_between_stations );
+        TDToast.make( R.string.no_shot_between_stations );
         return;
       }
     } else {
@@ -1433,19 +1433,19 @@ public class ShotWindow extends Activity
         startSketchWindow( name );
       }
     } else {
-      TDToast.make( mActivity, R.string.no_to_station );
+      TDToast.make( R.string.no_to_station );
     }
   }
  
   void startSketchWindow( String name )
   {
     if ( TDInstance.sid < 0 ) {
-      TDToast.make( mActivity, R.string.no_survey );
+      TDToast.make( R.string.no_survey );
       return;
     }
 
     if ( ! mApp_mData.hasSketch3d( TDInstance.sid, name ) ) {
-      TDToast.make( mActivity, R.string.no_sketch );
+      TDToast.make( R.string.no_sketch );
       return;
     }
 
@@ -1490,14 +1490,14 @@ public class ShotWindow extends Activity
       }
 /* END SKETCH_3D */
     }
-    TDToast.make( mActivity, R.string.plot_not_found );
+    TDToast.make( R.string.plot_not_found );
   }
 
   private void startDrawingWindow( String start, String plot1_name, long plot1_id,
                                    String plot2_name, long plot2_id, long type, String station, boolean landscape )
   {
     if ( TDInstance.sid < 0 || plot1_id < 0 || plot2_id < 0 ) {
-      TDToast.make( mActivity, R.string.no_survey );
+      TDToast.make( R.string.no_survey );
       return;
     }
     
@@ -1660,9 +1660,9 @@ public class ShotWindow extends Activity
     int ret = mApp_mData.updateShot( blk.mId, TDInstance.sid, from, to, extend, flag, leg, comment, true );
 
     if ( ret == -1 ) {
-      TDToast.make( mActivity, R.string.no_db );
+      TDToast.make( R.string.no_db );
     // } else if ( ret == -2 ) {
-    //   TDToast.make( mActivity, R.string.makes_cycle );
+    //   TDToast.make( R.string.makes_cycle );
     } else {
       // update same shots of the given block
       List< DBlock > blk_list = mApp_mData.selectShotsAfterId( blk.mId, TDInstance.sid, 0L );
@@ -1718,7 +1718,7 @@ public class ShotWindow extends Activity
       updateDisplay();
       // mList.invalidate();
     } else {
-      TDToast.make( mActivity, R.string.no_leg_first );
+      TDToast.make( R.string.no_leg_first );
     }
     clearMultiSelect( );
   }
@@ -1815,7 +1815,7 @@ public class ShotWindow extends Activity
         float astk = TDMath.atan2d( -n1.y, n1.x );
         float adip = 90 - TDMath.asind( n1.z );
         strike_dip = String.format( strike_fmt, astk, adip );
-        // TDToast.make( mActivity, strike_dip );
+        // TDToast.make( strike_dip );
         if ( b0.mComment != null && b0.mComment.length() > 0 ) {
 	  if ( b0.mComment.matches( ".*" + strike_regex + ".*" ) ) {
 	    // Log.v("DistoX", "Strike regex is contained");
@@ -1847,9 +1847,9 @@ public class ShotWindow extends Activity
         int ret = mApp_mData.updateShot( blk.mId, TDInstance.sid, from, to, extend, flag, leg, comment, true );
 
         if ( ret == -1 ) {
-          TDToast.make( mActivity, R.string.no_db );
+          TDToast.make( R.string.no_db );
         // } else if ( ret == -2 ) {
-        //   TDToast.make( mActivity, R.string.makes_cycle );
+        //   TDToast.make( R.string.makes_cycle );
         // } else {
           // // update same shots of the given block: SHOULD NOT HAPPEN
           // List< DBlock > blk_list = mApp_mData.selectShotsAfterId( blk.mId, TDInstance.sid, 0L );

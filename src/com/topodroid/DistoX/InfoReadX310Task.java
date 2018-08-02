@@ -52,7 +52,7 @@ class InfoReadX310Task extends AsyncTask<Void, Integer, Boolean>
     if ( result && mDialog != null ) {
       mDialog.updateInfo( mInfo );
     } else {
-      TDToast.make( mApp, R.string.read_failed );
+      TDToast.make( R.string.read_failed );
     }
   }
 

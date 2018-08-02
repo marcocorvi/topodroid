@@ -73,7 +73,7 @@ class MemoryReadTask extends AsyncTask<Void, Integer, Integer>
     if ( result > 0 && mDialog != null ) {
       mDialog.updateList( mMemory );
     } else {
-      TDToast.make( mApp, R.string.read_failed );
+      TDToast.make( R.string.read_failed );
     }
   }
 

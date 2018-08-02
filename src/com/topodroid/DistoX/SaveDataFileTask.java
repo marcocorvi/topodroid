@@ -92,11 +92,11 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
           }
           break;
         case TDConst.DISTOX_EXPORT_GRT: // Grottolf
-          // TDToast.make( this, "WARNING Grottolf export is untested" );
+          // TDToast.make( "WARNING Grottolf export is untested" );
           filename = TDExporter.exportSurveyAsGrt( mSid, mData, mInfo, TDPath.getSurveyGrtFile( mSurvey ) );
           break;
         case TDConst.DISTOX_EXPORT_GTX: // GHTopo
-          // TDToast.make( this, "WARNING GHTopo export is untested" );
+          // TDToast.make( "WARNING GHTopo export is untested" );
           filename = TDExporter.exportSurveyAsGtx( mSid, mData, mInfo, TDPath.getSurveyGtxFile( mSurvey ) );
           break;
         case TDConst.DISTOX_EXPORT_KML: // KML
@@ -115,7 +115,7 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
           filename = TDExporter.exportSurveyAsSrv( mSid, mData, mInfo, TDPath.getSurveySrvFile( mSurvey ) );
           break;
         case TDConst.DISTOX_EXPORT_SUR: // WinKarst
-          // TDToast.make( this, "WARNING WinKarst export is untested" );
+          // TDToast.make( "WARNING WinKarst export is untested" );
           filename = TDExporter.exportSurveyAsSur( mSid, mData, mInfo, TDPath.getSurveySurFile( mSurvey ) );
           break;
         case TDConst.DISTOX_EXPORT_SVX:
@@ -125,7 +125,7 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
           filename = TDExporter.exportSurveyAsTro( mSid, mData, mInfo, TDPath.getSurveyTroFile( mSurvey ) );
           break;
         case TDConst.DISTOX_EXPORT_TRB: // TopoRobot
-          // TDToast.make( this, "WARNING TopoRobot export is untested" );
+          // TDToast.make( "WARNING TopoRobot export is untested" );
           filename = TDExporter.exportSurveyAsTrb( mSid, mData, mInfo, TDPath.getSurveyTrbFile( mSurvey ) );
           break;
         case TDConst.DISTOX_EXPORT_TOP: // PocketTopo
@@ -146,11 +146,11 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
   {
     if ( mToast ) { 
       if ( filename == null ) {
-        TDToast.make( mContext, R.string.saving_file_failed );
+        TDToast.make( R.string.saving_file_failed );
       } else if ( filename.length() == 0 ) {
-        TDToast.make( mContext, R.string.no_geo_station );
+        TDToast.make( R.string.no_geo_station );
       } else {
-        TDToast.make( mContext, mContext.getResources().getString(R.string.saving_) + filename ); // FIXME_FORMAT
+        TDToast.make( mContext.getResources().getString(R.string.saving_) + filename ); // FIXME_FORMAT
       }
     }
   }

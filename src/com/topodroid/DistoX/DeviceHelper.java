@@ -136,7 +136,7 @@ class DeviceHelper extends DataSetObservable
     TDLog.Error("DB disk error " + e.getMessage() );
     mApp.mActivity.runOnUiThread( new Runnable() {
       public void run() {
-        TDToast.makeBG( mContext, R.string.disk_io_error, TDColor.BROWN );
+        TDToast.makeBG( R.string.disk_io_error, TDColor.BROWN );
       }
     } );
   }

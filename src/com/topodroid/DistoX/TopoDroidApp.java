@@ -535,6 +535,8 @@ public class TopoDroidApp extends Application
   {
     super.onCreate();
 
+    TDInstance.setContext( getApplicationContext() );
+
     // require large memory pre Honeycomb
     // dalvik.system.VMRuntime.getRuntime().setMinimumHeapSize( 64<<20 );
 
@@ -586,7 +588,7 @@ public class TopoDroidApp extends Application
       // TDLog.Profile("TDApp BT");
       mBTAdapter = BluetoothAdapter.getDefaultAdapter();
       // if ( mBTAdapter == null ) {
-      //   // TDToast.make( this, R.string.not_available );
+      //   // TDToast.make( R.string.not_available );
       //   // finish(); // FIXME
       //   // return;
       // }
@@ -711,13 +713,13 @@ public class TopoDroidApp extends Application
   {
     if ( b != null ) b.setEnabled( false );
     if ( mComm == null || TDInstance.device == null ) {
-      TDToast.make( context, R.string.no_device_address );
+      TDToast.make( R.string.no_device_address );
     } else if ( check && ! checkCalibrationDeviceMatch() ) {
-      TDToast.make( context, R.string.calib_device_mismatch );
+      TDToast.make( R.string.calib_device_mismatch );
     } else if ( ! mComm.writeCoeff( TDInstance.distoAddress(), coeff ) ) {
-      TDToast.make( context, R.string.write_failed );
+      TDToast.make( R.string.write_failed );
     } else {
-      TDToast.make( context, R.string.write_ok );
+      TDToast.make( R.string.write_ok );
     }
     if ( b != null ) b.setEnabled( true );
     resetComm();
@@ -1226,7 +1228,7 @@ public class TopoDroidApp extends Application
     if ( StationPolicy.doTopoRobot() ) {
       // long millis = SystemClock.uptimeMillis(); // FIXME TROBOT
       // if ( millis > trobotmillis + 10000 ) {
-      //   TDToast.make( this, R.string.toporobot_warning );
+      //   TDToast.make( R.string.toporobot_warning );
       //   trobotmillis = millis;
       // }
       mStationName.assignStationsAfter_TRobot( mData, TDInstance.sid, blk0, list, sts );
@@ -1250,7 +1252,7 @@ public class TopoDroidApp extends Application
     if ( StationPolicy.doTopoRobot() ) {
       // long millis = SystemClock.uptimeMillis(); // FIXME TROBOT
       // if ( millis > trobotmillis + 10000 ) {
-      //   TDToast.make( this, R.string.toporobot_warning );
+      //   TDToast.make( R.string.toporobot_warning );
       //   trobotmillis = millis;
       // }
       mStationName.assignStations_TRobot( mData, TDInstance.sid, list, sts );
@@ -1270,7 +1272,7 @@ public class TopoDroidApp extends Application
   // ================================================================
   // EXPORTS
 
-  static void exportSurveyAsCsxAsync( Context context, String origin, PlotSaveData psd1, PlotSaveData psd2 )
+  static void exportSurveyAsCsxAsync( Context context, String origin, PlotSaveData psd1, PlotSaveData psd2, boolean toast )
   {
     SurveyInfo info = getSurveyInfo();
     if ( info == null ) {
@@ -1280,7 +1282,7 @@ public class TopoDroidApp extends Application
     String filename = ( psd1 == null )? TDPath.getSurveyCsxFile(TDInstance.survey)
                                       : TDPath.getSurveyCsxFile(TDInstance.survey, psd1.name /* = sketch.mName1 */ );
     TDLog.Log( TDLog.LOG_IO, "exporting as CSX " + filename );
-    (new SaveFullFileTask( context, TDInstance.sid, mData, info, psd1, psd2, origin, filename )).execute();
+    (new SaveFullFileTask( context, TDInstance.sid, mData, info, psd1, psd2, origin, filename, toast )).execute();
   }
 
   // FIXME_SYNC might be a problem with big surveys
@@ -1693,7 +1695,7 @@ public class TopoDroidApp extends Application
     if ( ( distance < 0.0f ) ||
          ( clino < -90.0f || clino > 90.0f ) ||
          ( b < 0.0f || b >= 360.0f ) ) {
-      TDToast.make( this, R.string.illegal_data_value );
+      TDToast.make( R.string.illegal_data_value );
       return null;
     }
     bearing = (bearing  - ManualCalibration.mAzimuth) / TDSetting.mUnitAngle;
@@ -1702,7 +1704,7 @@ public class TopoDroidApp extends Application
 
     if ( from != null && to != null && from.length() > 0 ) {
       // if ( mData.makesCycle( -1L, TDInstance.sid, from, to ) ) {
-      //   TDToast.make( this, R.string.makes_cycle );
+      //   TDToast.make( R.string.makes_cycle );
       // } else
       {
         // TDLog.Log( TDLog.LOG_SHOT, "manual-shot Data " + distance + " " + bearing + " " + clino );
@@ -1739,7 +1741,7 @@ public class TopoDroidApp extends Application
         ret = mData.selectShot( id, TDInstance.sid );
       }
     } else {
-      TDToast.make( this, R.string.missing_station );
+      TDToast.make( R.string.missing_station );
     }
     return ret;
   }
@@ -1856,10 +1858,10 @@ public class TopoDroidApp extends Application
   //         // gracefully fail without saying anything
   //       }
   //     } else {
-  //       TDToast.make( ctx, "Photo display not yet implemented" );
+  //       TDToast.make( "Photo display not yet implemented" );
   //     }
   //   } else {
-  //     TDToast.make( ctx, "ERROR file not found: " + filename );
+  //     TDToast.make( "ERROR file not found: " + filename );
   //   }
   // }
 
@@ -1970,12 +1972,12 @@ public class TopoDroidApp extends Application
 
   void syncConnectionFailed()
   {
-    TDToast.make( this, "Sync connection failed" );
+    TDToast.make( "Sync connection failed" );
   }
 
   void syncConnectedDevice( String name )
   {
-    TDToast.make( this, "Sync connected " + name );
+    TDToast.make( "Sync connected " + name );
     if ( mSyncConn != null ) registerDataListener( mSyncConn );
   }
 
@@ -2019,7 +2021,7 @@ public class TopoDroidApp extends Application
   {
     if ( exportType < 0 ) return;
     if ( TDInstance.sid < 0 ) {
-      if ( warn ) TDToast.make( context, R.string.no_survey );
+      if ( warn ) TDToast.make( R.string.no_survey );
     } else {
       SurveyInfo info = getSurveyInfo( );
       if ( info == null ) return;

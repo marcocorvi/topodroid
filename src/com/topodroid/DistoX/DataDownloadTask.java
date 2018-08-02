@@ -45,7 +45,7 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
       if ( algo == CalibInfo.ALGO_AUTO ) { 
         algo = mApp.getCalibAlgoFromDevice();
         if ( algo < CalibInfo.ALGO_AUTO ) {
-          // TDToast.make( this, R.string.device_algo_failed );
+          // TDToast.make( R.string.device_algo_failed );
           algo = CalibInfo.ALGO_LINEAR; 
         }
         mApp.updateCalibAlgo( algo );
@@ -60,7 +60,7 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
     // Log.v("DistoX", "READ " + nRead + " data in " + time + " msec");
 
     // if ( nRead < 0 ) {
-    //   TDToast.make( mApp.getApplicationContext(), mApp.DistoXConnectionError[ -nRead ] );
+    //   TDToast.make( mApp.DistoXConnectionError[ -nRead ] );
     // TDLog.Error( "doInBackground read " + nRead );
   }
 

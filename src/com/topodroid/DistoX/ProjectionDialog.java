@@ -426,7 +426,7 @@ class ProjectionDialog extends MyDialog
       mList = TopoDroidApp.mData.selectAllShots( mSid, TDStatus.NORMAL );
       if ( mList.size() == 0 ) {
         dismiss();
-        TDToast.make( mContext, R.string.few_data );
+        TDToast.make( R.string.few_data );
       } else {
         // float decl = mApp.mData.getSurveyDeclination( mSid );
         mNum = new DistoXNum( mList, mFrom, "", "", 0.0f );

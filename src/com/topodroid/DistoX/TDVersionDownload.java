@@ -118,9 +118,9 @@ class TDVersionDownload extends AsyncTask< Void, Integer, String >
         int cmp = play_version.compareTo( this_version );
         if ( cmp > 0 ) {
 	  // NOTE alert dialog could make "now" -1
-          TDToast.make( mContext, "Newer version on Google Play: " + res );
+          TDToast.make( "Newer version on Google Play: " + res );
         // } else {
-        //   TDToast.make( mContext, "Current version on Google Play: " + res );
+        //   TDToast.make( "Current version on Google Play: " + res );
         }
         if ( now > 0 ) {
 	  TDSetting.setPreference( mPrefs, "VERSION_ALERT_TIME", now );

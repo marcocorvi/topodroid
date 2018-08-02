@@ -360,7 +360,7 @@ public class OverviewWindow extends ItemDrawer
 
     // FIXME mCheckExtend
     // if ( (! mNum.surveyAttached) && TDSetting.mCheckAttached ) {
-    //   TDToast.make( mActivity, R.string.survey_not_attached );
+    //   TDToast.make( R.string.survey_not_attached );
     // }
   }
     
@@ -573,7 +573,7 @@ public class OverviewWindow extends ItemDrawer
       // mBlockList = mData.selectAllLegShots( mSid, TDStatus.NORMAL );
       mBlockList = mData.selectAllShots( mSid, TDStatus.NORMAL );
       if ( mBlockList.size() == 0 ) {
-        TDToast.make( mActivity, R.string.few_data );
+        TDToast.make( R.string.few_data );
         finish();
       } else {
         loadFiles( mType ); 
@@ -590,7 +590,7 @@ public class OverviewWindow extends ItemDrawer
       // Log.v( "DistoX", "Overview plots " + plots.size() );
 
       // if ( plots.size() < 1 ) { // N.B. this should never happpen
-      //   TDToast.make( this, R.string.few_plots );
+      //   TDToast.make( R.string.few_plots );
       //   finish();
       //   return;
       // }
@@ -651,7 +651,7 @@ public class OverviewWindow extends ItemDrawer
       // if ( ! mAllSymbols ) {
       //   String msg = missingSymbols.getMessage( getResources() );
       //   TDLog.Log( TDLog.LOG_PLOT, "Missing " + msg );
-      //   TDToast.make( this, "Missing symbols \n" + msg );
+      //   TDToast.make( "Missing symbols \n" + msg );
       //   // (new MissingDialog( this, this, msg )).show();
       //   // finish();
       // }

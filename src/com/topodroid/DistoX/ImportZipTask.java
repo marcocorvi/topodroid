@@ -38,20 +38,20 @@ class ImportZipTask extends ImportTask
     mMain.setTheTitle( );
     mProgress.dismiss();
     if ( result < -5 ) {
-      TDToast.make( mMain, R.string.unzip_fail );
+      TDToast.make( R.string.unzip_fail );
     } else if ( result == -5 ) {
-      TDToast.make( mMain, R.string.unzip_fail_sqlite );
+      TDToast.make( R.string.unzip_fail_sqlite );
     } else if ( result == -4 ) {
-      TDToast.make( mMain, R.string.unzip_fail_survey );
+      TDToast.make( R.string.unzip_fail_survey );
     } else if ( result == -3 ) {
-      TDToast.make( mMain, R.string.unzip_fail_db );
+      TDToast.make( R.string.unzip_fail_db );
     } else if ( result == -2 ) {
-      TDToast.make( mMain, R.string.unzip_fail_td );
+      TDToast.make( R.string.unzip_fail_td );
     } else if ( result == -1 ) {
-      TDToast.make( mMain, R.string.import_already );
+      TDToast.make( R.string.import_already );
     } else {
       mMain.updateDisplay( );
-      TDToast.make( mMain, R.string.import_zip_ok );
+      TDToast.make( R.string.import_zip_ok );
     }
   }
 }

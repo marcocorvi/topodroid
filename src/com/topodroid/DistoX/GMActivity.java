@@ -258,7 +258,7 @@ public class GMActivity extends Activity
     int size  = list.size();
     int size1 = list1.size();
     if ( size < 16 || size1 < 16 ) {
-      TDToast.make( this, R.string.few_data );
+      TDToast.make( R.string.few_data );
       return;
     }
 
@@ -415,12 +415,12 @@ public class GMActivity extends Activity
         resetTitle( );
         // Log.v("DistoX", "compute result " + result );
         if ( result >= TDSetting.mCalibMaxIt ) {
-          TDToast.make( this, R.string.few_iter );
+          TDToast.make( R.string.few_iter );
           return;
         } else if ( result > 0 ) {
           boolean saturated = mCalibration.hasSaturatedCoeff();
           if ( saturated ) {
-            TDToast.make( this, R.string.saturated_coeffs );
+            TDToast.make( R.string.saturated_coeffs );
           }
           // enableWrite( ! saturated );
           enableWrite( true );
@@ -436,18 +436,18 @@ public class GMActivity extends Activity
                                  mCalibration.Delta(), mCalibration.Delta2(), mCalibration.MaxError(), 
                                  result, coeff /* , saturated */ ) ).show();
         } else if ( result == 0 ) {
-          TDToast.make( this, R.string.few_iter );
+          TDToast.make( R.string.few_iter );
           return;
         } else if ( result == -1 ) {
-          TDToast.make( this, R.string.few_data );
+          TDToast.make( R.string.few_data );
           return;
         } else if ( result == -2 ) {
           return;
         } else if ( result == -3 ) {
-          TDToast.make( this, R.string.few_groups );
+          TDToast.make( R.string.few_groups );
           return;
         } else {
-          TDToast.make( this, R.string.few_data );
+          TDToast.make( R.string.few_data );
           return;
         }
         break;
@@ -456,9 +456,9 @@ public class GMActivity extends Activity
       case CalibComputer.CALIB_COMPUTE_GROUPS:
       case CalibComputer.CALIB_RESET_AND_COMPUTE_GROUPS:
         if ( result < 0 ) {
-          TDToast.make( this, R.string.few_data );
+          TDToast.make( R.string.few_data );
         } else {
-          TDToast.make( this, String.format( getResources().getString( R.string.found_groups ), result ) );
+          TDToast.make( String.format( getResources().getString( R.string.found_groups ), result ) );
         }
         break;
       default:
@@ -560,12 +560,12 @@ public class GMActivity extends Activity
     if ( nr >= 0 ) {
       if ( nr > 0 ) updateDisplay( );
       if ( toast ) {
-        TDToast.make( this, getResources().getQuantityString(R.plurals.read_calib_data, nr/2, nr/2, nr ) );
+        TDToast.make( getResources().getQuantityString(R.plurals.read_calib_data, nr/2, nr/2, nr ) );
       }
     } else { // ( nr < 0 )
       if ( toast ) {
         // TDToast.make( this, getString(R.string.read_fail_with_code) + nr );
-        TDToast.make( this, mApp.DistoXConnectionError[ -nr ] );
+        TDToast.make( mApp.DistoXConnectionError[ -nr ] );
       }
     }
     mButton1[BTN_DOWNLOAD].setBackgroundDrawable( mBMdownload );
@@ -618,7 +618,7 @@ public class GMActivity extends Activity
   {
     int n_saturated = 0;
     if ( list.size() == 0 ) {
-      TDToast.make( this, R.string.no_gms );
+      TDToast.make( R.string.no_gms );
       return;
     }
     for ( CalibCBlock item : list ) {
@@ -627,9 +627,7 @@ public class GMActivity extends Activity
     }
     // mList.setAdapter( mDataAdapter );
     if ( n_saturated > 0 ) {
-      TDToast.makeBG( this, 
-        getResources().getQuantityString( R.plurals.calib_saturated_values, n_saturated, n_saturated), 
-        TDColor.BROWN );
+      TDToast.makeBG( getResources().getQuantityString( R.plurals.calib_saturated_values, n_saturated, n_saturated), TDColor.BROWN );
     }
   }
 
@@ -811,7 +809,7 @@ public class GMActivity extends Activity
       CutNPaste.showPopupBT( this, this, mApp, b, true );
     } else {
       mApp.resetComm();
-      TDToast.make( this, R.string.bt_reset );
+      TDToast.make( R.string.bt_reset );
     }
   }
 
@@ -865,7 +863,7 @@ public class GMActivity extends Activity
 
     } else if ( b == mButton1[BTN_DOWNLOAD] ) { // DOWNLOAD
       if ( ! mApp.checkCalibrationDeviceMatch() ) {
-        TDToast.make( this, R.string.calib_device_mismatch );
+        TDToast.make( R.string.calib_device_mismatch );
       } else {
         enableWrite( false );
         setTitleColor( TDColor.CONNECTED );
@@ -890,11 +888,11 @@ public class GMActivity extends Activity
           // new CalibComputer( this, -1L, CalibComputer.CALIB_COMPUTE_GROUPS ).execute();
         } else {
           resetTitle( );
-          TDToast.make( this, R.string.few_data );
+          TDToast.make( R.string.few_data );
         }
       } else {
         resetTitle( );
-        TDToast.make( this, R.string.no_calibration );
+        TDToast.make( R.string.no_calibration );
       }
 
     } else if ( b == mButton1[BTN_COMPUTE] ) { // COMPUTE
@@ -907,18 +905,18 @@ public class GMActivity extends Activity
         }
         new CalibComputer( this, -1L, CalibComputer.CALIB_COMPUTE_CALIB ).execute();
       } else {
-        TDToast.make( this, R.string.no_calibration );
+        TDToast.make( R.string.no_calibration );
       }
 
     } else if ( TDLevel.overBasic && b == mButton1[BTN_COVER] ) { // COVER
       // if ( mCalibration == null ) {
-      //   TDToast.make( this, R.string.no_calibration );
+      //   TDToast.make( R.string.no_calibration );
       // } else {
         List< CalibCBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, 0 );
         if ( list.size() >= 16 ) {
           ( new CalibCoverageDialog( this, list, mCalibration ) ).show();
         } else {
-          TDToast.make( this, R.string.few_data );
+          TDToast.make( R.string.few_data );
         }
       // }
 
@@ -929,14 +927,14 @@ public class GMActivity extends Activity
     } else if (TDLevel.overNormal &&  b == mButton1[BTN_WRITE] ) { // WRITE
       // if ( mEnableWrite ) {
         if ( mCalibration == null ) {
-          TDToast.make( this, R.string.no_calibration );
+          TDToast.make( R.string.no_calibration );
         } else {
           setTitle( R.string.calib_write_coeffs );
           setTitleColor( TDColor.CONNECTED );
 
           byte[] coeff = mCalibration.GetCoeff();
           if ( coeff == null ) {
-            TDToast.make( this, R.string.no_calibration );
+            TDToast.make( R.string.no_calibration );
           } else {
             mApp.uploadCalibCoeff( this, coeff, true, b );
           }
@@ -1139,7 +1137,7 @@ public class GMActivity extends Activity
         }
       }
       if ( list.size() == 0 ) {
-        TDToast.make( this, R.string.few_calibs );
+        TDToast.make( R.string.few_calibs );
       } else {
         (new CalibValidateListDialog( this, this, list )).show();
       }
