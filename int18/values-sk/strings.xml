@@ -766,6 +766,7 @@
     <string name="help_info_shot">Štatistiky meraní mapovania</string>
     <string name="help_survey_info">Nastavenie údajov o Jaskyni</string>
     <string name="help_undelete">Obnoviť odstránené položky zo zálohy</string>
+    <!-- UPDATES string name="help_updates">Check for app version updates</string -->	
     <string name="help_photo">Zobraziť nasnímané fotografie</string>
     <string name="help_sensor">Zobraziť merania z interných senzorov</string>
     <string name="help_3d">3D zobrazenie (Cave3D)</string>
