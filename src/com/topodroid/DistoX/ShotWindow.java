@@ -374,7 +374,7 @@ public class ShotWindow extends Activity
       // FIXME 3.3.0
       if ( mDataAdapter.addDataBlock( blk ) ) {
         mDistoXAccuracy.addBlock( blk );
-        if ( TDSetting.doBacksight() || TDSetting.doTripod() ) {
+        if ( StationPolicy.doBacksight() || StationPolicy.doTripod() ) {
           mApp.assignStationsAll( mDataAdapter.mItems );
         } else {
           mApp.assignStationsAll( mDataAdapter.getItemsForAssign() );
@@ -1997,7 +1997,7 @@ public class ShotWindow extends Activity
  
     List< DBlock > shots;
     // backsight and tripod seem o be OK
-    // if ( TDSetting.dpTripod() || TDSetting.doBacksight() ) {
+    // if ( StationPolicy.doTripod() || StationPolicy.doBacksight() ) {
     //   shots = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.NORMAL );
     // } else {
       shots = mApp_mData.selectAllShotsAfter( blk.mId, TDInstance.sid, TDStatus.NORMAL );

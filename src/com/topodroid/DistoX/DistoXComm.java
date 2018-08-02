@@ -482,7 +482,7 @@ class DistoXComm extends TopoDroidComm
         case 2: // MEASURE
         case 3: // MEASURE and DOWNLAOD
           sendCommand( 0x38 );
-          if ( what == 3 ) {
+          if ( what == 3 ) { // FIXME_ASYNC or not slow-down
             if ( mRfcommThread == null ) {
               // Log.v("DistoX", "RF comm thread start ... ");
               startRfcommThread( -1, lister );

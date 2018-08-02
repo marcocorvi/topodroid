@@ -482,14 +482,14 @@ class PTFile
       if ( from.length() == 0 || from.equals("-") ) {
         shot.setFromUndefined();
       } else {
-        if ( ! TDSetting.doTopoRobot() || ! shot.setFrom( from ) ) {
+        if ( ! StationPolicy.doTopoRobot() || ! shot.setFrom( from ) ) {
           shot.setFrom( getId( from ) );
         }
       }
       if ( to.length() == 0 || to.equals("-") ) {
         shot.setToUndefined();
       } else {
-        if ( ! TDSetting.doTopoRobot() || ! shot.setTo( to ) ) {
+        if ( ! StationPolicy.doTopoRobot() || ! shot.setTo( to ) ) {
           shot.setTo( getId( to ) );
         }
       }

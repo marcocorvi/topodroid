@@ -769,8 +769,9 @@ class DistoXNum
     //   Log.v( TDLog.TAG, "DistoXNum::compute tmp-shots " + tmpshots.size() + " tmp-splays " + tmpsplays.size() );
     //   for ( TriShot ts : tmpshots ) ts.Dump();
     // }
-    for ( TriShot tsh : tmpshots ) { // clear backshot and multibad
+    for ( TriShot tsh : tmpshots ) { // clear backshot, sibling, and multibad
       tsh.backshot = 0;
+      tsh.sibling  = null;
       tsh.getFirstBlock().mMultiBad = false;
     }
 
@@ -784,7 +785,7 @@ class DistoXNum
       String from = ts0.from;
       String to   = ts0.to;
       // if ( from == null || to == null ) continue; // FIXME
-      TriShot ts1 = ts0;
+      TriShot ts1 = ts0; // last sibling (head = the shot itself)
       for ( int j=i+1; j < tmpshots.size(); ++j ) {
         TriShot ts2 = tmpshots.get( j );
         if ( from.equals( ts2.from ) && to.equals( ts2.to ) ) { // chain a positive sibling
@@ -820,12 +821,12 @@ class DistoXNum
           if ( d > dmax ) dmax = d;
           ts1 = ts1.sibling;
         }
-        if ( ( ! TDSetting.doMagAnomaly() ) && ( dmax > TDSetting.mCloseDistance ) ) {
+        if ( ( ! StationPolicy.doMagAnomaly() ) && ( dmax > TDSetting.mCloseDistance ) ) {
           blk0.mMultiBad = true;
         }
         // Log.v( "DistoX", "DMAX " + from + "-" + to + " " + dmax );
         
-        if ( ! TDSetting.doMagAnomaly() ) { // (3) remove siblings
+        if ( ! StationPolicy.doMagAnomaly() ) { // (3) remove siblings
           ts1 = ts0.sibling;
           while ( ts1 != null ) {
             TriShot ts2 = ts1.sibling;
@@ -872,7 +873,7 @@ class DistoXNum
           if ( pass == 0 && DBlock.getExtend(ts.extend) > 1 ) continue; // first pass skip non-extended
 
           float anomaly = 0;
-          if ( TDSetting.doMagAnomaly() ) {
+          if ( StationPolicy.doMagAnomaly() ) {
             // if ( ts.backshot == 0 ) 
             {
               // TDLog.Log(TDLog.LOG_NUM, "shot " + ts.from + " " + ts.to + " <" + ts.backshot + ">" );

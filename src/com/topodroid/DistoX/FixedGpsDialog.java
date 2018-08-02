@@ -159,16 +159,17 @@ class FixedGpsDialog extends MyDialog
   }
 
 
-  private void addFixedPoint( )
+  private boolean addFixedPoint( )
   {
     String name = mETstation.getText().toString();
     if ( name.length() == 0 ) {
       mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
-      return;
+      return false;
     }
     String comment = mETcomment.getText().toString();
     // if ( comment == null ) comment = "";
     mParent.addFixedPoint( name, mLng, mLat, mHEll, mHGeo, comment, FixedInfo.SRC_TOPODROID );
+    return true;
   }
 
   @Override
@@ -228,8 +229,7 @@ class FixedGpsDialog extends MyDialog
         setGPSoff();
       }
       if ( mHasLocation ) {
-        addFixedPoint();
-        dismiss();
+        if ( addFixedPoint() ) dismiss();
       } else {
         do_toast = true;
       }

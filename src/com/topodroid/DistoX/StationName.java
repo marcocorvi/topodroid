@@ -53,7 +53,7 @@ class StationName
     //   }
     //   if ( last == null ) return "0";
     //   if ( last.mFrom == null || last.mFrom.length() == 0 ) return last.mTo;
-    //   if ( TDSetting.mSurveyStations == 1 ) return last.mFrom;  // forward-shot
+    //   if ( StationPolicy.mSurveyStations == 1 ) return last.mFrom;  // forward-shot
     //   return last.mTo;
     // } else {
     //   for ( DBlock blk : list ) {
@@ -61,18 +61,18 @@ class StationName
     //   }
     //   if ( last == null ) return "0";
     //   if ( last.mTo == null || last.mTo.length() == 0 ) return last.mFrom;
-    //   if ( TDSetting.mSurveyStations == 1 ) return last.mTo;  // forward-shot
+    //   if ( StationPolicy.mSurveyStations == 1 ) return last.mTo;  // forward-shot
     //   return last.mFrom;
     // }
     DBlock last = data_helper.selectLastNonBlankShot( sid, TDStatus.NORMAL, TDSetting.mDistoXBackshot );
     if ( last == null ) return TDSetting.mInitStation;
     if ( TDSetting.mDistoXBackshot ) {
       if ( last.mFrom == null || last.mFrom.length() == 0 ) return last.mTo;
-      if ( TDSetting.mSurveyStations == 1 ) return last.mFrom;  // forward-shot
+      if ( StationPolicy.mSurveyStations == 1 ) return last.mFrom;  // forward-shot
       return last.mTo;
     } else {
       if ( last.mTo == null || last.mTo.length() == 0 ) return last.mFrom;
-      if ( TDSetting.mSurveyStations == 1 ) return last.mTo;  // forward-shot
+      if ( StationPolicy.mSurveyStations == 1 ) return last.mTo;  // forward-shot
       return last.mFrom;
     }
     // return "0";
@@ -97,7 +97,7 @@ class StationName
   // ------------------------------------------------------------------------------------------------
   // setting the leg extend automatically, sets also stretch to 0
 
-  private void setLegExtend( DataHelper data_helper, long sid, DBlock blk )
+  private static void setLegExtend( DataHelper data_helper, long sid, DBlock blk )
   {
     // FIXME_EXTEND what has "splay extend" to do with "leg extend" ???
     // if ( ! TDSetting.mSplayExtend ) 
@@ -109,7 +109,7 @@ class StationName
   }
 
   // used to set block extend "fixed"
-  private void setLegFixedExtend( DataHelper data_helper, long sid, DBlock blk, long extend )
+  private static void setLegFixedExtend( DataHelper data_helper, long sid, DBlock blk, long extend )
   {
     blk.setExtend( (int)extend, DBlock.STRETCH_NONE );
     data_helper.updateShotExtend( blk.mId, sid, extend, DBlock.STRETCH_NONE, true );
@@ -118,13 +118,13 @@ class StationName
   // ------------------------------------------------------------------------------------------------
   // station assignments
 
-  private void setBlockName( DataHelper data_helper, long sid, DBlock blk, String from, String to, boolean is_backleg ) 
+  private static void setBlockName( DataHelper data_helper, long sid, DBlock blk, String from, String to, boolean is_backleg ) 
   {
     blk.setBlockName( from, to, is_backleg );
     data_helper.updateShotName( blk.mId, sid, from, to, true );
   }
 
-  private void setBlockName( DataHelper data_helper, long sid, DBlock blk, String from, String to )
+  private static void setBlockName( DataHelper data_helper, long sid, DBlock blk, String from, String to )
   {
     blk.setBlockName( from, to );
     data_helper.updateShotName( blk.mId, sid, from, to, true );
@@ -132,7 +132,7 @@ class StationName
 
 
   // @param list list of dblock to assign
-  void assignStationsAfter_Tripod( DataHelper data_helper, long sid, DBlock blk0, List<DBlock> list, Set<String> sts )
+  static void assignStationsAfter_Tripod( DataHelper data_helper, long sid, DBlock blk0, List<DBlock> list, Set<String> sts )
   { 
     // Log.v("DistoX-SN", "assign stations after - tripod");
     boolean bs = TDSetting.mDistoXBackshot;
@@ -354,7 +354,7 @@ class StationName
   //           assignStations_Backsight
   // note backsight-shot is a shot taken backsight (ie backward)
   //      backshot is a distox mode, in which direction data are stored reversed
-  private boolean checkBacksightShot( DBlock blk, float length, float bearing, float clino )
+  private static boolean checkBacksightShot( DBlock blk, float length, float bearing, float clino )
   {
     float d_thr = TDSetting.mCloseDistance * (blk.mLength+length);
     if ( Math.abs( length - blk.mLength ) > d_thr ) {
@@ -366,7 +366,7 @@ class StationName
       // Log.v("DistoXX", "backshot check fails on clino " + clino + " " + blk.mClino + " thr " + a_thr );
       return false;
     }
-    if ( ! TDSetting.doMagAnomaly() ) {
+    if ( ! StationPolicy.doMagAnomaly() ) {
       if ( Math.abs( ( bearing < blk.mBearing )? blk.mBearing - bearing - 180 : bearing - blk.mBearing - 180 ) > a_thr ) {
         // Log.v("DistoXX", "backshot check fails on bearing " + bearing + " " + blk.mBearing + " thr " + a_thr );
         return false;
@@ -377,7 +377,7 @@ class StationName
 
   // @param list list of dblock to assign
   // called by TopoDroidApp
-  void assignStationsAfter_Backsight( DataHelper data_helper, long sid, DBlock blk0, List<DBlock> list, Set<String> sts )
+  static void assignStationsAfter_Backsight( DataHelper data_helper, long sid, DBlock blk0, List<DBlock> list, Set<String> sts )
   { 
     // Log.v("DistoX-SN", "assign stations after - backsight");
     boolean bs = TDSetting.mDistoXBackshot; // whether distox is in backshot mode
@@ -618,16 +618,16 @@ class StationName
   // @param blk0         reference dblock
   // @param list         list of dblock to assign
   // @param sts          station names already in use
-  void assignStationsAfter_Default( DataHelper data_helper, long sid, DBlock blk0, List<DBlock> list, Set<String> sts )
+  static void assignStationsAfter_Default( DataHelper data_helper, long sid, DBlock blk0, List<DBlock> list, Set<String> sts )
   {
     Log.v("DistoX-SN", "assign stations after - default");
     boolean bs = TDSetting.mDistoXBackshot;
 
     // Log.v("DistoX", "assign stations after.  size " + list.size() );
-    int survey_stations = TDSetting.mSurveyStations;
+    int survey_stations = StationPolicy.mSurveyStations;
     if ( survey_stations <= 0 ) return;
     boolean forward_shots = ( survey_stations == 1 );
-    boolean shot_after_splays = TDSetting.mShotAfterSplays;
+    boolean shot_after_splays = StationPolicy.mShotAfterSplays;
 
     String main_from = null;
     String main_to   = null;
@@ -705,10 +705,10 @@ class StationName
       assignStations_DefaultBackshot( data_helper, sid, list, sts );
       return;
     }
-    int survey_stations = TDSetting.mSurveyStations;
+    int survey_stations = StationPolicy.mSurveyStations;
     if ( survey_stations <= 0 ) return;
     boolean forward_shots = ( survey_stations == 1 );
-    boolean shot_after_splay = TDSetting.mShotAfterSplays;
+    boolean shot_after_splay = StationPolicy.mShotAfterSplays;
 
     // TDLog.Log( TDLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
 
@@ -808,12 +808,12 @@ class StationName
   // ---------------------------------- TopoRobot policy -----------------------------------
   // TopoRobot policy is splay-first then forward leg 
 
-  private String getTRobotStation( int sr, int pt )
+  private static String getTRobotStation( int sr, int pt )
   {
     return Integer.toString( sr ) + "." + Integer.toString( pt );
   }
 
-  private int getMaxTRobotSeries( List<DBlock> list )
+  private static int getMaxTRobotSeries( List<DBlock> list )
   {
     int ret = 1;
     for ( DBlock blk : list ) {
@@ -842,7 +842,7 @@ class StationName
 
   // WARNING TopoRobot renumbering consider all the shots in a single series
   // @param list list of dblock to assign
-  void assignStationsAfter_TRobot( DataHelper data_helper, long sid, DBlock blk0, List<DBlock> list, Set<String> sts )
+  static void assignStationsAfter_TRobot( DataHelper data_helper, long sid, DBlock blk0, List<DBlock> list, Set<String> sts )
   {
     // Log.v("DistoX-SN", "assign stations after - TRobot");
     if ( TDSetting.mDistoXBackshot ) return;
@@ -1209,10 +1209,10 @@ class StationName
   private void assignStations_DefaultBackshot( DataHelper data_helper, long sid, List<DBlock> list, Set<String> sts )
   { 
     // Log.v("DistoX", "assign stations default. size " + list.size() );
-    int survey_stations = TDSetting.mSurveyStations;
+    int survey_stations = StationPolicy.mSurveyStations;
     if ( survey_stations <= 0 ) return;
     boolean forward_shots = ( survey_stations == 1 );
-    boolean shot_after_splay = TDSetting.mShotAfterSplays;
+    boolean shot_after_splay = StationPolicy.mShotAfterSplays;
 
     // TDLog.Log( TDLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
 

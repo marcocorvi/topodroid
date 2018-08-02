@@ -119,7 +119,11 @@ class TDLog
   static void LogFile( String msg )
   {
     mMillis = System.currentTimeMillis() % 600000;
-    mLog.format( "%d: %s\n", mMillis, msg );
+    if ( mLogStream == 0 || mLog == null ) {
+      Log.v( TAG, mMillis + " " + msg );
+    } else {
+      mLog.format( "%d: %s\n", mMillis, msg );
+    }
   }
 
   static void Debug( String msg )

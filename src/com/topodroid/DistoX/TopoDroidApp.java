@@ -1223,16 +1223,16 @@ public class TopoDroidApp extends Application
     Set<String> sts = mData.selectAllStationsBefore( blk0.mId, TDInstance.sid, TDStatus.NORMAL  );
     // Log.v("DistoX", "assign stations after " + blk0.Name() + " size " + list.size() );
     // if ( TDSetting.mSurveyStations < 0 ) return;
-    if ( TDSetting.doTopoRobot() ) {
-      long millis = SystemClock.uptimeMillis(); // FIXME TROBOT
-      if ( millis > trobotmillis + 10000 ) {
-        TDToast.make( this, R.string.toporobot_warning );
-        trobotmillis = millis;
-      }
+    if ( StationPolicy.doTopoRobot() ) {
+      // long millis = SystemClock.uptimeMillis(); // FIXME TROBOT
+      // if ( millis > trobotmillis + 10000 ) {
+      //   TDToast.make( this, R.string.toporobot_warning );
+      //   trobotmillis = millis;
+      // }
       mStationName.assignStationsAfter_TRobot( mData, TDInstance.sid, blk0, list, sts );
-    } else  if ( TDSetting.doBacksight() ) {
+    } else  if ( StationPolicy.doBacksight() ) {
       mStationName.assignStationsAfter_Backsight( mData, TDInstance.sid, blk0, list, sts );
-    } else if ( TDSetting.doTripod() ) {
+    } else if ( StationPolicy.doTripod() ) {
       mStationName.assignStationsAfter_Tripod( mData, TDInstance.sid, blk0, list, sts );
     } else {
       mStationName.assignStationsAfter_Default( mData, TDInstance.sid, blk0, list, sts );
@@ -1247,20 +1247,20 @@ public class TopoDroidApp extends Application
     Set<String> sts = mData.selectAllStations( TDInstance.sid );
     // Log.v("DistoX", "assign stations size " + list.size() );
     // if ( TDSetting.mSurveyStations < 0 ) return;
-    if ( TDSetting.doTopoRobot() ) {
-      long millis = SystemClock.uptimeMillis(); // FIXME TROBOT
-      if ( millis > trobotmillis + 10000 ) {
-        TDToast.make( this, R.string.toporobot_warning );
-        trobotmillis = millis;
-      }
+    if ( StationPolicy.doTopoRobot() ) {
+      // long millis = SystemClock.uptimeMillis(); // FIXME TROBOT
+      // if ( millis > trobotmillis + 10000 ) {
+      //   TDToast.make( this, R.string.toporobot_warning );
+      //   trobotmillis = millis;
+      // }
       mStationName.assignStations_TRobot( mData, TDInstance.sid, list, sts );
       return;
     } 
-    if ( TDSetting.doBacksight() ) {
+    if ( StationPolicy.doBacksight() ) {
       mStationName.assignStations_Backsight( mData, TDInstance.sid, list, sts );
       return;
     } 
-    if ( TDSetting.doTripod() ) {
+    if ( StationPolicy.doTripod() ) {
       mStationName.assignStations_Tripod( mData, TDInstance.sid, list, sts );
       return;
     }
@@ -1708,7 +1708,7 @@ public class TopoDroidApp extends Application
         // TDLog.Log( TDLog.LOG_SHOT, "manual-shot Data " + distance + " " + bearing + " " + clino );
         boolean horizontal = ( Math.abs( clino ) > TDSetting.mVThreshold );
         // TDLog.Log( TDLog.LOG_SHOT, "manual-shot SID " + TDInstance.sid + " LRUD " + left + " " + right + " " + up + " " + down);
-        if ( TDSetting.mShotAfterSplays ) {
+        if ( StationPolicy.mShotAfterSplays ) {
           at = addManualSplays( at, splay_station, left, right, up, down, bearing, horizontal );
 
           if ( at >= 0L ) {

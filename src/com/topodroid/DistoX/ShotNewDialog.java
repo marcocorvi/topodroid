@@ -184,7 +184,7 @@ class ShotNewDialog extends MyDialog
     if ( mAt < 0 ) {
       // prev blk is the last leg block of the survey
       if ( mPrevBlk != null ) {
-        if ( TDSetting.mSurveyStations == 1 ) {
+        if ( StationPolicy.isSurveyForward() ) { // if ( StationPolicy.mSurveyStations == 1 ) FIXME_POLICY
           mETfrom.setText( mPrevBlk.mTo );
           mETto.setText( DistoXStationName.incrementName( mPrevBlk.mTo, mApp.getStationNames() ) );
         } else {
@@ -192,7 +192,7 @@ class ShotNewDialog extends MyDialog
           mETfrom.setText( DistoXStationName.incrementName( mPrevBlk.mFrom, mApp.getStationNames() ) );
         }
       } else {
-        if ( TDSetting.mSurveyStations == 1 ) {
+        if ( StationPolicy.isSurveyForward() ) { // if ( StationPolicy.mSurveyStations == 1 ) FIXME_POLICY
           mETfrom.setText( DistoXStationName.mInitialStation );
           mETto.setText( DistoXStationName.mSecondStation );
         } else {
@@ -202,7 +202,7 @@ class ShotNewDialog extends MyDialog
       }
       String current_name = mApp.getCurrentStationName();
       if ( current_name != null ) {
-        if ( TDSetting.isSurveyForward() ) {
+        if ( StationPolicy.isSurveyForward() ) {
           mETfrom.setText( current_name );
         } else {
           mETto.setText( current_name );
@@ -210,7 +210,7 @@ class ShotNewDialog extends MyDialog
       }
     } else {
       // prev blk is the leg after which to add the new shot
-      if ( TDSetting.mSurveyStations == 1 ) {
+      if ( StationPolicy.isSurveyForward() ) { // if ( StationPolicy.mSurveyStations == 1 ) FIXME_POLICY
         mETfrom.setText( mPrevBlk.mTo );
         mETto.setText( "" );
       } else {
