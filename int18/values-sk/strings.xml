@@ -335,6 +335,7 @@
     <string name="menu_survey">JASKYŇA</string>
     <string name="menu_sync">SYNCHONIZOVAŤ</string>
     <!-- UNUSED string name="menu_tdr2th2">RISEB TH2</string -->
+    <!-- UPDATES string name="menu_updates">CHECK UPDATES</string -->	
     <string name="menu_validate">POROVNAŤ</string>
     <string name="menu_zoom_fit">ORIENTÁCIA</string>
 
