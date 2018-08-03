@@ -116,39 +116,39 @@
      <item name="no">Žiadna</item>
      <item name="for">Pomocné zámery; Hlavná zámera dopredu</item>
      <item name="back">Pomocné zámery; Hlavná zámera naspäť</item>
-     <item name="backsight">Hlavná zámera naspäť; Pomocné zámery; Hlavná zámera dopredu</item>
-     <item name="tripod">STATÍV-STENA</item>
-     <item name="anomaly">Kompenzácia Magnetickej anomálie</item>
+     <item name="backsight">Spätné Zámery</item>
+     <item name="tripod">Statív - Stena</item>
+     <item name="anomaly">Kompenzácia Magnetickej Anomálie</item>
      <item name="for2">Hlavná zámera dopredu; Pomocné zámery</item>
      <item name="back2">Hlavná zámera naspäť; Pomocné zámery</item>
-     <item name="toporobot">Číslovanie ako v programe TopoRobot</item>
+     <item name="toporobot">TopoRobot</item>
   </string-array>
   <string-array name="surveyStationsB">
      <item name="no">Žiadna</item>
      <item name="for">Pomocné zámery; Hlavná zámera dopredu</item>
      <item name="back">Pomocné zámery; Hlavná zámera naspäť</item>
-     <item name="backsight">Hlavná zámera naspäť; Pomocné zámery; Hlavná zámera dopredu</item>
+     <item name="backsight">Spätné Zámery</item>
   </string-array>
   <string-array name="surveyStationsN">
      <item name="no">Žiadna</item>
      <item name="for">Pomocné zámery; Hlavná zámera dopredu</item>
      <item name="back">Pomocné zámery; Hlavná zámera naspäť</item>
-     <item name="backsight">Hlavná zámera naspäť; Pomocné zámery; Hlavná zámera dopredu</item>
+     <item name="backsight">Spätné Zámery</item>
   </string-array>
   <string-array name="surveyStationsA">
      <item name="no">Žiadna</item>
      <item name="for">Pomocné zámery; Hlavná zámera dopredu</item>
      <item name="back">Pomocné zámery; Hlavná zámera naspäť</item>
-     <item name="backsight">Hlavná zámera naspäť; Pomocné zámery; Hlavná zámera dopredu</item>
-     <item name="tripod">STATÍV-STENA</item>
+     <item name="backsight">Spätné Zámery</item>
+     <item name="tripod">Statív - Stena</item>
   </string-array>
   <string-array name="surveyStationsE">
      <item name="no">Žiadna</item>
      <item name="for">Pomocné zámery; Hlavná zámera dopredu</item>
      <item name="back">Pomocné zámery; Hlavná zámera naspäť</item>
-     <item name="backsight">Hlavná zámera naspäť; Pomocné zámery; Hlavná zámera dopredu</item>
-     <item name="tripod">STATÍV-STENA</item>
-     <item name="anomaly">Kompenzácia Magnetickej anomálie</item>
+     <item name="backsight">Spätné Zámery</item>
+     <item name="tripod">Statív - Stena</item>
+     <item name="anomaly">Kompenzácia Magnetickej Anomálie</item>
      <item name="for2">Hlavná zámera dopredu; Pomocné zámery</item>
      <item name="back2">Hlavná zámera naspäť; Pomocné zámery</item>
   </string-array>
