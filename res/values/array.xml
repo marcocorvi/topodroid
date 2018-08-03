@@ -9,7 +9,7 @@
      <item name="both">join with both ends</item>
      <item name="continue">continue</item>
   </string-array>
-  <string-array name="lineContinueValue"> <!-- must agree with DrawingWindow.CONT_XXX -->
+  <string-array name="lineContinueValue" translatale="false"> <!-- must agree with DrawingWindow.CONT_XXX -->
      <item name="none">0</item>
      <item name="start">1</item>
      <item name="end">2</item>
@@ -288,7 +288,7 @@
      <item name="huge">2</item>
   </string-array>
 
-  <string-array name="logStream">
+  <string-array name="logStream" translatale="false">
      <item name="android">System log</item>
      <item name="file">File log</item>
   </string-array>
@@ -397,7 +397,7 @@
      <item name="from">Behind</item>
      <item name="to">In front</item>
   </string-array>
-  <string-array name="sectionStationsValue">
+  <string-array name="sectionStationsValue" translatale="false">
      <item name="both">3</item>
      <item name="from">1</item>
      <item name="to">2</item>
@@ -415,7 +415,7 @@
      <item name="A3">A3</item>
      <item name="X310">X310</item>
   </string-array>
-  <string-array name="deviceTypeValue">
+  <string-array name="deviceTypeValue" translatale="false">
      <item name="none">0</item>
      <item name="A3">1</item>
      <item name="X310">2</item>
@@ -438,7 +438,7 @@
      <item name="svx">Survex</item>
      <item name="tro">VisualTopo</item>
   </string-array>
-  <string-array name="exportTypeValue">
+  <string-array name="exportTypeValue" translatale="false">
      <item name="th">th</item>
      <item name="dat">dat</item>
      <item name="svx">svx</item>

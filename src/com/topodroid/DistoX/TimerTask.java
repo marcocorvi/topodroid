@@ -25,7 +25,7 @@ import android.hardware.SensorEventListener;
 // import android.util.Log;
 
 class TimerTask extends AsyncTask<String, Integer, Long >
-                       implements SensorEventListener
+                implements SensorEventListener
 {
   final static int X_AXIS = 1; // short side of phone heading right
   final static int Y_AXIS = 2; // long side of phone heading top
@@ -36,22 +36,20 @@ class TimerTask extends AsyncTask<String, Integer, Long >
   private float mValAcc[] = new float[3];
   private float mValMag[] = new float[3];
   private SensorManager mSensorManager;
-  // Context mContext; // FIXME LEAK
   private IBearingAndClino mParent;
   boolean mRun;
   private int mAxis;
   private int mWait;  // secs to wait
   private int mCount; // measures to count
 
-  TimerTask( Context context, IBearingAndClino parent, int axis, int wait, int count )
+  TimerTask( IBearingAndClino parent, int axis, int wait, int count )
   {
-    // mContext = context;
     mParent  = parent;
     mRun     = true;
     mAxis    = axis;
     mWait    = wait;
     mCount   = count;
-    mSensorManager = (SensorManager)context.getSystemService( Context.SENSOR_SERVICE );
+    mSensorManager = (SensorManager)TDInstance.context.getSystemService( Context.SENSOR_SERVICE );
     // Log.v("DistoX", "timer task axis " + axis );
   }
 

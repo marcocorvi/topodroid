@@ -94,10 +94,10 @@
      <item name="huge">特大</item>
   </string-array>
 
-  <string-array name="logStream">
+  <!-- DO NOT TRANSLATE string-array name="logStream">
      <item name="android">系统载入</item>
      <item name="file">文件载入</item>
-  </string-array>
+  </string-array -->
 
   <!-- TODO string-array name="connMode">
      <item name="batch">按需</item>

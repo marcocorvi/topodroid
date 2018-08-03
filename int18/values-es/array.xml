@@ -91,10 +91,10 @@
      <item name="huge">Enorme</item>
   </string-array>
 
-  <string-array name="logStream">
+  <!-- DO NOT TRANSLATE string-array name="logStream">
      <item name="android">Registro del sistema</item>
      <item name="file">Archivo de registro</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="connMode">
      <item name="batch">Demanda</item>

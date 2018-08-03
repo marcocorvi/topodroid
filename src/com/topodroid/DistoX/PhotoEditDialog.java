@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-import java.io.IOException;
+// import java.io.IOException;
 
 // import android.app.Dialog;
 import android.os.Bundle;

@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Stack;
 import java.util.Locale;
 
-import android.util.Log;
+// import android.util.Log;
 
 class DistoXNum
 {

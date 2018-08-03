@@ -151,7 +151,7 @@ class DrawingScaleReference
           canvas.drawLine( x-arrowlen+arrowtip, y-arrowtip, x - arrowlen, y, mPaint);
           canvas.drawLine( x-arrowlen+arrowtip, y+arrowtip, x - arrowlen, y, mPaint);
 	  } else {
-	         float x = locX;
+          float x = locX;
           float y = locY - 4 * HEIGHT_BARS;
           canvas.drawLine( x, y, x, y - arrowlen, mPaint);
           canvas.drawLine( x-arrowtip, y-arrowlen+arrowtip, x, y - arrowlen, mPaint);

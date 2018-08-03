@@ -102,7 +102,7 @@
     <string name="non_linear">非线性</string>
     <!-- NO string name="algo_minimum">最小量</string -->
    
-    <string name="device_algo_failed">自动算法失败\n使用线性算法&#8230;</string>
+    <!-- UNUSED string name="device_algo_failed">自动算法失败\n使用线性算法&#8230;</string -->
     <!-- TODO string name="device_address">Address %1$s</string -->
     <!-- UNUSED string name="device_busy">设备忙&#8230;</string -->
     <string name="device_illegal_addr">非法的存储地址</string>
@@ -202,7 +202,7 @@
     <string name="error_azimuth_required">需输入方位角</string>
     <string name="error_length_required">需输入距离</string>
     <string name="error_clino_required">需输入倾角</string>
-    <string name="error_comment_required">需输入注释</string>
+    <!-- UNUSED string name="error_comment_required">需输入注释</string -->
     <string name="error_begin_required">输入起点</string>
     <string name="error_declination_number">磁偏角必须是数字</string>
     <string name="error_end_required">输入终点</string>
@@ -1285,14 +1285,13 @@
   <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
   <!-- NO string name="pref_algo_min_delta_message">Min-algo group G^M.x weight</string -->
 
-<!-- FIXME are these or the following ???
+<!-- LEAVE LOG STUFF IN ENGLISH
   <string name="pref_log_stream_summary">记录输出流</string>
   <string name="pref_log_stream_title">记录数据流</string>
   <string name="pref_log_bt">蓝牙</string>
   <string name="pref_log_bezier">贝塞尔曲线</string>
   <string name="pref_log_calib">校准</string>
   <string name="pref_log_comm">蓝牙通信</string>
--->
 
   <string name="pref_log_stream_summary">日志输出流</string>
   <string name="pref_log_stream_title">日志流</string>
@@ -1300,20 +1299,20 @@
   <string name="pref_log_bezier">贝塞尔曲线</string>
   <string name="pref_log_calib">校准</string>
   <string name="pref_log_comm">蓝牙通讯</string>
-  <!-- OK string name="pref_log_csurvey">cSurvey</string -->
+  <string name="pref_log_csurvey">cSurvey</string>
   <string name="pref_log_data">测量数据</string>
   <string name="pref_log_db">数据库</string>
   <string name="pref_log_debug">故障排除</string>
   <string name="pref_log_device">设备窗口</string>
-  <!-- OK string name="pref_log_distox">DistoX</string -->
+  <string name="pref_log_distox">DistoX</string>
   <string name="pref_log_err">错误</string>
   <string name="pref_log_fixed">GPS 点</string>
   <string name="pref_log_input">用户输入</string>
-  <!-- TODO string name="pref_log_io">Sketch i/o</string -->
+  <string name="pref_log_io">Sketch i/o</string>
   <string name="pref_log_loc">位置坐标</string>
   <string name="pref_log_num">数据压缩</string>
-  <!-- TODO string name="pref_log_path">File paths</string -->
-  <!-- TODO string name="pref_log_perm">Permissions</string -->
+  <string name="pref_log_path">File paths</string>
+  <string name="pref_log_perm">Permissions</string>
   <string name="pref_log_photo">照片</string>
   <string name="pref_log_plot">草图</string>
   <string name="pref_log_proto">DistoX 协议</string>
@@ -1325,6 +1324,7 @@
   <string name="pref_log_therion">Therion</string>
   <string name="pref_log_units">Units</string>
   <string name="pref_log_zip">ZIP</string>
+-->
 
   <!-- UNUSED string name="line_bezier">贝塞尔曲线</string -->
   <!-- UNUSED string name="line_fine">好</string -->

@@ -24,7 +24,7 @@
 	   Ďalšie nastavenia  (veľkosť ikon, šírky čiary, veľkosti poznámok&#8230;) viete meniť neskôr v nastaveniach
 	    podľa Vašich potrieb.
     </string>
-    <string name="lorem_ipsum">Lorem ipsum dolor sit amet</string>
+    <!-- DO NOT TRANSLATE string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
 
     <string name="POINT">BOD</string>
     <string name="LINE">ČIARA</string>
@@ -102,7 +102,7 @@
     <string name="non_linear">Nelineárny</string>
     <string name="algo_minimum">Minimum</string>
    
-    <string name="device_algo_failed">Zlyhala automatická detekcia algoritmu\nPoužitý lineárny algoritmus</string>
+    <!-- UNUSED string name="device_algo_failed">Zlyhala automatická detekcia algoritmu\nPoužitý lineárny algoritmus</string -->
     <string name="device_address">Adresa %1$s</string>
     <!-- UNUSED string name="device_busy">Zariadenie je zaneprázdnené</string -->
     <string name="device_illegal_addr">Neplatná adresa pamäte</string>
@@ -204,7 +204,7 @@
     <string name="error_azimuth_required">Vyžaduje sa azimut</string>
     <string name="error_length_required">Vyžaduje sa dĺžka</string>
     <string name="error_clino_required">Vyžaduje sa sklon</string>
-    <string name="error_comment_required">Vyžaduje sa komentár</string>
+    <!-- UNUSED string name="error_comment_required">Vyžaduje sa komentár</string -->
     <string name="error_begin_required">Vyžaduje sa počiatočná adresa</string>
     <string name="error_declination_number">Deklinácia musí byť číslo</string>
     <string name="error_end_required">Vyžaduje sa koncová adresa</string>
@@ -1309,6 +1309,7 @@
   <string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string>
   <string name="pref_algo_min_delta_message">Min-algo group G^M.x weight</string>
 
+<!-- LEAVE LOG STUFF IN ENGLISH
   <string name="pref_log_stream_summary">Výstupný systémový log</string>
   <string name="pref_log_stream_title">Systémový log</string>
   <string name="pref_log_bt">Bluetooth</string>
@@ -1324,7 +1325,7 @@
   <string name="pref_log_err">Chyby</string>
   <string name="pref_log_fixed">GPS body</string>
   <string name="pref_log_input">Vstup užívateľa</string>
-  <!-- TODO string name="pref_log_io">Sketch i/o</string -->
+  <string name="pref_log_io">Sketch i/o</string>
   <string name="pref_log_loc">Polohy GPS</string>
   <string name="pref_log_num">Kompresia dát</string>
   <string name="pref_log_path">Cesta súboru</string>
@@ -1340,6 +1341,7 @@
   <string name="pref_log_therion">Therion</string>
   <string name="pref_log_units">Jednotky</string>
   <string name="pref_log_zip">ZIP</string>
+-->
 
   <!-- UNUSED string name="line_bezier">Bezier</string -->
   <!-- UNUSED string name="line_fine">fine</string -->

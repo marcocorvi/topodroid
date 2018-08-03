@@ -26,14 +26,14 @@ class TDSetting
 
   static void setTextSize( TopoDroidApp app, int ts )
   {
-    float ds = app.getDisplayDensity() / 3.0f;
+    float ds = TopoDroidApp.getDisplayDensity() / 3.0f;
     mTextSize = (int)( ( ds * ts ) );
   }
 
   // get tentative text size
   static int getTextSize( TopoDroidApp app, int ts )
   {
-    float ds = app.getDisplayDensity() / 3.0f;
+    float ds = TopoDroidApp.getDisplayDensity() / 3.0f;
     return (int)( ( ds * ts ) );
   }
 
@@ -674,7 +674,7 @@ class TDSetting
     }
     if ( sz != mSizeBtns ) {
       mSizeBtns = sz;
-      mSizeButtons = (int)( mSizeBtns * app.getDisplayDensity() * 0.86f );
+      mSizeButtons = (int)( mSizeBtns * TopoDroidApp.getDisplayDensity() * 0.86f );
       // Log.v("DistoX", "Size " + size + " Btns " + mSizeBtns + " " + mSizeButtons );
       if ( mSizeButtons < MIN_SIZE_BUTTONS ) mSizeButtons = MIN_SIZE_BUTTONS;
       return true;
@@ -693,7 +693,7 @@ class TDSetting
       case 4: sz = BTN_SIZE_LARGE;  break;
       case 2: sz = BTN_SIZE_HUGE;   break;
     }
-    return (int)( sz * app.getDisplayDensity() * 0.86f );
+    return (int)( sz * TopoDroidApp.getDisplayDensity() * 0.86f );
   }
 
   static void loadPrimaryPreferences( TopoDroidApp app, SharedPreferences prefs )

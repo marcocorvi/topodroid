@@ -53,20 +53,15 @@ class SymbolEnableDialog extends MyDialog
   // private  Button mBTcancel;
   // private  Button mBTok;
 
-  // private Activity mParent;
-  // private TopoDroidApp mApp; // NOT USED
-
   private ListView    mList;
   private SymbolAdapter mPointAdapter;
   private SymbolAdapter mLineAdapter;
   private SymbolAdapter mAreaAdapter;
 
 
-  SymbolEnableDialog( Context context, /* Activity parent, */ TopoDroidApp app )
+  SymbolEnableDialog( Context context )
   {
     super( context, R.string.SymbolEnableDialog );
-    // mParent  = parent;
-    // mApp     = app;
     mType    = Symbol.LINE; // default symbols are lines
   }
 
@@ -103,7 +98,7 @@ class SymbolEnableDialog extends MyDialog
       mBTarea.setOnClickListener( this );
     }
 
-    // Log.v( TopoDroidApp.TAG, "SymbolEnableDialog ... createAdapters" );
+    // Log.v( TopoDroidApp.TAG, "Symbol-Enable dialog ... create adapters" );
     if ( ! createAdapters() ) dismiss();
 
     // mList.setAdapter( mPointAdapter );
@@ -141,13 +136,13 @@ class SymbolEnableDialog extends MyDialog
       }
     }
 
-    // Log.v( TopoDroidApp.TAG, "SymbolEnableDialog ... symbols " + np + " " + nl + " " + na );
+    // Log.v( TopoDroidApp.TAG, "Symbol-Enable dialog ... symbols " + np + " " + nl + " " + na );
     return true;
   }
 
   private void updateList( int old_type, int new_type )
   {
-    // Log.v( TopoDroidApp.TAG, "SymbolEnableDialog ... updateList type " + mType );
+    // Log.v( TopoDroidApp.TAG, "Symbol-Enable dialog ... updateList type " + mType );
     switch ( old_type ) {
       case Symbol.POINT:
         mBTpoint.setTextColor( TDColor.WHITE );

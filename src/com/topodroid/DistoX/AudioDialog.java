@@ -33,7 +33,7 @@ import android.widget.Button;
 // import android.widget.Toast;
 
 class AudioDialog extends MyDialog
-                         implements View.OnClickListener
+                  implements View.OnClickListener
 {
   private static final int ACTION_NONE = 0;
   private static final int ACTION_DELETE = 1;
@@ -50,7 +50,7 @@ class AudioDialog extends MyDialog
   private Button mBtnConfirm;
   private Button mBtnClose;
 
-  private final TopoDroidApp mApp;
+  // private final TopoDroidApp mApp;
   private final IAudioInserter mParent;
   private final long mBid;
   private final String mFilepath;
@@ -59,11 +59,11 @@ class AudioDialog extends MyDialog
   private boolean canPlay;
   // AudioInfo mAudio;
 
-  AudioDialog( Context ctx, TopoDroidApp app, IAudioInserter parent, long bid )
+  AudioDialog( Context ctx, /* TopoDroidApp app, */ IAudioInserter parent, long bid )
   {
     super( ctx, R.string.AudioDialog );
 
-    mApp = app;
+    // mApp = app;
     mParent = parent;
     mBid = bid;
     // mAudio = mApp.mData.getAudio( TDInstance.sid, mBid );

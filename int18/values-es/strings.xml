@@ -102,7 +102,7 @@
     <string name="non_linear">No lineal</string>
     <!-- NO string name="algo_minimum">minimum</string -->
    
-    <string name="device_algo_failed">No se pudo obtener el formulario algoritmo dispositivo\ Use el algoritmo lineal</string>
+    <!-- UNUSED string name="device_algo_failed">No se pudo obtener el formulario algoritmo dispositivo\ Use el algoritmo lineal</string -->
     <string name="device_address">Dirección %1$s</string>
     <!-- UNUSED string name="device_busy">Dispositivo ocupado</string -->
     <string name="device_illegal_addr">Dirección de memoria no válida</string>
@@ -202,7 +202,7 @@
     <string name="error_azimuth_required">Introducir rumbo</string>
     <string name="error_length_required">Introducir Longitud</string>
     <string name="error_clino_required">Introducir Clino</string>
-    <string name="error_comment_required">Introducir comentario</string>
+    <!-- UNUSED string name="error_comment_required">Introducir comentario</string -->
     <string name="error_begin_required">Introducir dirección de inicio</string>
     <string name="error_declination_number">La declinación debe ser un número</string>
     <string name="error_end_required">Introducir dirección final</string>
@@ -1300,6 +1300,7 @@
   <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
   <!-- NO string name="pref_algo_min_delta_message">Min-algo group G^M.x weight</string -->
 
+<!-- LEAVE LOG STUFF IN ENGLISH
   <string name="pref_log_stream_summary">Salida secuencia de registros</string>
   <string name="pref_log_stream_title">Secuencia de registros</string>
   <string name="pref_log_bt">Bluetooth</string>
@@ -1315,22 +1316,23 @@
   <string name="pref_log_err">Error</string>
   <string name="pref_log_fixed">Puntos fijos</string>
   <string name="pref_log_input">Entrada usuario</string>
-  <!-- TODO string name="pref_log_io">Sketch i/o</string -->
+  <string name="pref_log_io">Sketch i/o</string>
   <string name="pref_log_loc">Posicionamiento</string>
   <string name="pref_log_num">Reducción de datos</string>
-  <!-- TODO string name="pref_log_path">File paths</string -->
-  <!-- TODO string name="pref_log_perm">Permissions</string -->
+  <string name="pref_log_path">File paths</string>
+  <string name="pref_log_perm">Permissions</string>
   <string name="pref_log_photo">Foto</string>
   <string name="pref_log_plot">Dibujo</string>
   <string name="pref_log_proto">Protocolo DistoX</string>
   <string name="pref_log_ptopo">PocketTopo</string>
   <string name="pref_log_sensor">Sensores</string>
   <string name="pref_log_shot">Toma</string>
-  <!-- NO string name="pref_log_sync">Cosurveying</string -->
+  <string name="pref_log_sync">Cosurveying</string>
   <string name="pref_log_survey">Topografía</string>
   <string name="pref_log_therion">Therion</string>
   <string name="pref_log_units">Unidades</string>
   <string name="pref_log_zip">Zip</string>
+-->
 
   <!-- UNUSED string name="line_bezier">Bezier</string -->
   <!-- UNUSED string name="line_fine">fina</string -->

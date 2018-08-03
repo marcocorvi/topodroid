@@ -105,7 +105,7 @@ class TDVersionDownload extends AsyncTask< Void, Integer, String >
       if ( time >= 0 ) {
         now  = System.currentTimeMillis();
 	if ( now >= time ) {
-	  now += 3600 * 24 * 30 * 1000; // 30 days
+	  now += 3600L * 24L * 30L * 1000L; // 30 days
 	  check = true;
 	}
       }

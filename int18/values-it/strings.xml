@@ -102,7 +102,7 @@
     <string name="non_linear">non-lineare</string>
     <!-- NO string name="algo_minimum">minimum</string -->
    
-    <string name="device_algo_failed">Fallita determinazione automatica algoritmo\nUso algoritmo lineare</string>
+    <!-- UNUSED string name="device_algo_failed">Fallita determinazione automatica algoritmo\nUso algoritmo lineare</string -->
     <string name="device_address">Indirizzo %1$s</string>
     <!-- UNUSED string name="device_busy">Dispositivo occupato</string -->
     <string name="device_illegal_addr">Indirizzo di memoria illegale</string>
@@ -203,7 +203,7 @@
     <string name="error_azimuth_required">Azimuth mancante</string>
     <string name="error_length_required">Lunghezza mancante</string>
     <string name="error_clino_required">Inclinazione mancante</string>
-    <string name="error_comment_required">Commento mancante</string>
+    <!-- UNUSED string name="error_comment_required">Commento mancante</string -->
     <string name="error_begin_required">Indirizzo iniziale mancante</string>
     <string name="error_declination_number">La declinazione deve esser un numero</string>
     <string name="error_end_required">Indirizzo finale mancante</string>
@@ -1297,13 +1297,14 @@
   <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
   <!-- NO string name="pref_algo_min_delta_message">Min-algo group G^M.x weight</string -->
 
-  <!-- OK string name="pref_log_stream_summary">Log output stream</string -->
-  <!-- OK string name="pref_log_stream_title">Log stream</string -->
+<!-- LEAVE LOG STUFF IN ENGLISH
+  <string name="pref_log_stream_summary">Log output stream</string>
+  <string name="pref_log_stream_title">Log stream</string>
   <string name="pref_log_bt">Bluetooth</string>
   <string name="pref_log_bezier">Curve Bezier</string>
   <string name="pref_log_calib">Calibrazione</string>
   <string name="pref_log_comm">Comunicazione BT</string>
-  <!-- OK string name="pref_log_csurvey">cSurvey</string -->
+  <string name="pref_log_csurvey">cSurvey</string>
   <string name="pref_log_data">Dati</string>
   <string name="pref_log_db">Database</string>
   <string name="pref_log_debug">Debug</string>
@@ -1312,7 +1313,7 @@
   <string name="pref_log_err">Errori</string>
   <string name="pref_log_fixed">Punti GPS</string>
   <string name="pref_log_input">Input utente</string>
-  <!-- TODO string name="pref_log_io">Sketch i/o</string -->
+  <string name="pref_log_io">Sketch i/o</string>
   <string name="pref_log_loc">Posizioni GPS</string>
   <string name="pref_log_num">Riduzione poligonale</string>
   <string name="pref_log_path">Percorso file</string>
@@ -1320,14 +1321,15 @@
   <string name="pref_log_photo">Foto</string>
   <string name="pref_log_plot">Disegni</string>
   <string name="pref_log_proto">Protocollo DistoX</string>
-  <!-- OK string name="pref_log_ptopo">PocketTopo</string -->
+  <string name="pref_log_ptopo">PocketTopo</string>
   <string name="pref_log_sensor">Sensori</string>
   <string name="pref_log_shot">Tiri</string>
-  <!-- OK string name="pref_log_sync">Cosurveying</string -->
+  <string name="pref_log_sync">Cosurveying</string>
   <string name="pref_log_survey">Rilievi</string>
   <string name="pref_log_therion">Therion</string>
   <string name="pref_log_units">Unità</string>
   <string name="pref_log_zip">ZIP</string>
+-->
 
   <!-- UNUSED string name="line_bezier">Bezier</string -->
   <!-- UNUSED string name="line_fine">fine</string -->

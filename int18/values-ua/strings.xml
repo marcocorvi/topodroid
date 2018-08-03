@@ -102,7 +102,7 @@
     <string name="non_linear">нелінійний</string>
     <!-- NO string name="algo_minimum">minimum</string -->
 
-    <string name="device_algo_failed">Алгоритм автовизначення не спрацював\nВикористовую лінійний алгоритм</string>
+    <!-- UNUSED string name="device_algo_failed">Алгоритм автовизначення не спрацював\nВикористовую лінійний алгоритм</string -->
     <string name="device_address">Адреса %1$s</string>
     <!-- UNUSED string name="device_busy">Пристрій зайнятий</string -->
     <string name="device_illegal_addr">Недопустима адреса пам\'яті</string>
@@ -205,7 +205,7 @@
     <string name="error_azimuth_required">Вимагається азимут</string>
     <string name="error_length_required">Вимагається довжина</string>
     <string name="error_clino_required">Вимагається кут</string>
-    <string name="error_comment_required">Вимагається коментар</string>
+    <!-- UNUSED string name="error_comment_required">Вимагається коментар</string -->
     <string name="error_begin_required">Вимагається початкова адреса</string>
     <string name="error_declination_number">Нахил повинен бути задани числом</string>
     <string name="error_end_required">Вимагається кінцева адреса</string>
@@ -1295,6 +1295,7 @@
   <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
   <!-- NO string name="pref_algo_min_delta_message">Min-algo group G^M.x weight</string -->
 
+<!-- LEAVE LOG STUFF IN ENGLISH
   <string name="pref_log_stream_summary">Лог потоку виводу</string>
   <string name="pref_log_stream_title">Лог потоку</string>
   <string name="pref_log_bt">Bluetooth</string>
@@ -1310,11 +1311,11 @@
   <string name="pref_log_err">Помилка</string>
   <string name="pref_log_fixed">Точки с GPS координатами</string>
   <string name="pref_log_input">Вхідні дані</string>
-  <!-- TODO string name="pref_log_io">Sketch i/o</string -->
+  <string name="pref_log_io">Sketch i/o</string>
   <string name="pref_log_loc">Місцеположення</string>
   <string name="pref_log_num">Стиснення даних</string>
-  <!-- TODO string name="pref_log_path">File paths</string -->
-  <!-- TODO string name="pref_log_perm">Permissions</string -->
+  <string name="pref_log_path">File paths</string>
+  <string name="pref_log_perm">Permissions</string>
   <string name="pref_log_photo">Фото</string>
   <string name="pref_log_plot">Абриси</string>
   <string name="pref_log_proto">Протокол DistoX</string>
@@ -1326,6 +1327,7 @@
   <string name="pref_log_therion">Therion</string>
   <string name="pref_log_units">Одиниці</string>
   <string name="pref_log_zip">ZIP</string>
+-->
 
   <!-- UNUSED string name="line_bezier">Безьє</string -->
   <!-- UNUSED string name="line_fine">точний</string -->

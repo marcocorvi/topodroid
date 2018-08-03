@@ -102,7 +102,7 @@
     <string name="non_linear">нелинеен</string>
     <!-- NO string name="algo_minimum">minimum</string -->
 
-    <string name="device_algo_failed">Невъзможно автоматично определяне на алгоритъма\nЩе бъде използван линеен</string>
+    <!-- UNUSED string name="device_algo_failed">Невъзможно автоматично определяне на алгоритъма\nЩе бъде използван линеен</string -->
     <string name="device_address">Адрес %1$s</string>
     <!-- UNUSED string name="device_busy">Устройството е заето</string -->
     <string name="device_illegal_addr">Грешен адрес в паметта</string>
@@ -203,7 +203,7 @@
     <string name="error_azimuth_required">Необходим азимут</string>
     <string name="error_length_required">Необходима дължина</string>
     <string name="error_clino_required">Необходим наклон</string>
-    <string name="error_comment_required">Необходим коментар</string>
+    <!-- UNUSED string name="error_comment_required">Необходим коментар</string -->
     <string name="error_begin_required">Необходим начален адрес</string>
     <string name="error_declination_number">Деклинацията трябва да е число</string>
     <string name="error_end_required">Необходим краен адрес</string>
@@ -1293,6 +1293,7 @@
   <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
   <!-- NO string name="pref_algo_min_delta_message">Min-algo group G^M.x weight</string -->
 
+<!-- LEAVE LOG STUFF IN ENGLISH
   <string name="pref_log_stream_summary">Лог файл</string>
   <string name="pref_log_stream_title">Лог файл</string>
   <string name="pref_log_bt">Bluetooth</string>
@@ -1308,11 +1309,11 @@
   <string name="pref_log_err">Грешки</string>
   <string name="pref_log_fixed">GPS точки</string>
   <string name="pref_log_input">Входни данни</string>
-  <!-- TODO string name="pref_log_io">Sketch i/o</string -->
+  <string name="pref_log_io">Sketch i/o</string>
   <string name="pref_log_loc">Местоположение</string>
   <string name="pref_log_num">Редуциране на данни</string>
   <string name="pref_log_path">Пътища към файловете</string>
-  <!-- TODO string name="pref_log_perm">Permissions</string -->
+  <string name="pref_log_perm">Permissions</string>
   <string name="pref_log_photo">Снимки</string>
   <string name="pref_log_plot">Скици</string>
   <string name="pref_log_proto">DistoX протокол</string>
@@ -1324,6 +1325,7 @@
   <string name="pref_log_therion">Therion</string>
   <string name="pref_log_units">Мерни единици</string>
   <string name="pref_log_zip">ZIP</string>
+-->
 
   <!-- UNUSED string name="line_bezier">"Безие"</string -->
   <!-- UNUSED string name="line_fine">фини</string -->

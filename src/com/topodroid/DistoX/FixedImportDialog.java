@@ -72,12 +72,17 @@ class FixedImportDialog extends MyDialog
   private boolean isSet;
 
   private MyKeyboard mKeyboard;
+  private int mNrPts; // number of geo points
 
   FixedImportDialog( Context context, FixedActivity parent )
   {
     super( context, R.string.FixedImportDialog );
     mParent  = parent;
+    mArrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
+    mNrPts = readPoints();
   }
+
+  int getNrPoints() { return mNrPts; }
 
   @Override
   public void onCreate(Bundle savedInstanceState)
@@ -86,11 +91,10 @@ class FixedImportDialog extends MyDialog
 
     initLayout( R.layout.fixed_import_dialog, R.string.title_fixed_import );
 
-    mArrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
     mList = (ListView) findViewById(R.id.list);
     mList.setOnItemClickListener( this );
     mList.setDividerHeight( 2 );
-    readPoints();
+    mList.setAdapter( mArrayAdapter );
 
     mETstation = (EditText) findViewById( R.id.station );
     mETcomment = (EditText) findViewById( R.id.comment );
@@ -128,38 +132,33 @@ class FixedImportDialog extends MyDialog
     isSet = false;
   }
 
-  private boolean readPoints() // UNUSED return
+  // @return number of read points
+  private int readPoints() 
   {
     mArrayAdapter.clear();
 
     File dir = new File( POINTLISTS );
     if ( ! dir.exists() ) dir = new File( POINTLISTS_PRO );
-    if ( ! dir.exists() ) return false;
+    if ( ! dir.exists() ) return 0;
 
     File[] files = dir.listFiles();
-    if ( files == null || files.length == 0 ) return false;
+    if ( files == null || files.length == 0 ) return 0;
     // Log.v("DistoX", "number of files " + files.length );
 
-    boolean ret = false;
+    int ret = 0;
     for ( File f : files ) {
       // Log.v("DistoX", "file " + f.getName() + " is dir " + f.isDirectory() );
       if ( ! f.isDirectory() ) {
-        ret = readPointFile( dir, f.getName() ) || ret; // N.B. read file before oring with ret
+        ret += readPointFile( dir, f.getName() ); // N.B. read file before oring with ret
       }
-    }
-    if ( ret ) {
-      mList.setAdapter( mArrayAdapter );
-    } else {
-      TDToast.make( R.string.MT_points_none );
-      dismiss();
     }
     return ret;
   }
 
-  private boolean readPointFile( File dir, String filename )
+  private int readPointFile( File dir, String filename )
   {
     // Log.v("DistoX", "reading file " + filename );
-    boolean ret = false;
+    int ret = 0;
     try {
       // TDLog.Log( TDLog.LOG_IO, "read GPS points file " + filename );
       File file = new File( dir, filename );
@@ -173,7 +172,6 @@ class FixedImportDialog extends MyDialog
         String[] vals = line.split(",");
         int len = vals.length;
         if ( len >= 4 ) {
-          ret = true;
           // StringBuilder sb = new StringBuilder();
           // sb.append( vals[len-3].trim() );
           // sb.append( " " );
@@ -188,6 +186,7 @@ class FixedImportDialog extends MyDialog
           // while ( ++k < len-4 ) {
           //    name = name + "," + vals[k];
           // }
+          // mArrayAdapter.add( sb.toString() );
           String sb = vals[ len - 3 ].trim() +
               " " +
               vals[ len - 4 ].trim() +
@@ -196,7 +195,7 @@ class FixedImportDialog extends MyDialog
               " " +
               vals[ len - 1 ].trim();
           mArrayAdapter.add( sb );
-		  // mArrayAdapter.add( sb.toString() );
+          ret ++;
         }
       }
     } catch ( IOException e ) { 

@@ -113,10 +113,10 @@
   </string-array>
  
 
-  <string-array name="logStream">
+  <!-- DO NOT TRANSLATE string-array name="logStream">
      <item name="android">Journal système</item>
      <item name="file">Journal fichiers</item>
-  </string-array>
+  </string-array -->
 
 
   <string-array name="connMode">

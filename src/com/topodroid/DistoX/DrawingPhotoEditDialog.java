@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-import java.io.IOException;
+// import java.io.IOException;
 
 // import android.app.Dialog;
 import android.os.Bundle;
@@ -30,10 +30,10 @@ import android.view.View;
 // import android.view.View.OnKeyListener;
 // import android.view.KeyEvent;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+// import android.graphics.Bitmap;
+// import android.graphics.BitmapFactory;
 
-import android.media.ExifInterface;
+// import android.media.ExifInterface;
 
 // import android.util.Log;
 

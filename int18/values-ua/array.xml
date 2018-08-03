@@ -92,10 +92,10 @@
      <item name="huge">Величезні</item>
   </string-array>
 
-  <string-array name="logStream">
+  <!-- DO NOT TRANSLATE string-array name="logStream">
      <item name="android">Системний журнал</item>
      <item name="file">Файл журналу</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="connMode">
      <item name="batch">На вимогу</item>

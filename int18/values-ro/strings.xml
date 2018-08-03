@@ -24,7 +24,7 @@
 	    Alte setări controlează prezentarea în fereastra de schițare (mărimea pictogramelor și etichetelor, Lățimea liniei etc.)
         și poți să le schimbi după nevoile proprii.
     </string>
-    <string name="lorem_ipsum">Lorem ipsum dolor sit amet</string>
+    <!-- DO NOT TRANSLATE string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
 
     <string name="POINT">PUNCT</string>
     <string name="LINE">LINIE</string>
@@ -102,7 +102,7 @@
     <string name="non_linear">ne-liniar</string>
     <string name="algo_minimum">minim</string>
    
-    <string name="device_algo_failed">Auto-determinarea algoritmului a eșuat\nSe folosește algoritmul linear</string>
+    <!-- UNUSED string name="device_algo_failed">Auto-determinarea algoritmului a eșuat\nSe folosește algoritmul linear</string -->
     <string name="device_address">Adresa %1$s</string>
     <!-- UNUSED string name="device_busy">Dispozivul e ocupat</string -->
     <string name="device_illegal_addr">Adresă de memorie ilegală</string>
@@ -149,7 +149,7 @@
     <string name="found_groups">Au fost gasite %1$d grupuri</string>
     <!-- UNUSED string name="few_plots">Schițe?? insuficiente</string -->
     <string name="few_calibs">Calibrari insufficiente</string>
-    <string name="getting_info">Se descarcă informații din DistoX ...</string>
+    <string name="getting_info">Se descarcă informații din DistoX &#8230;</string>
 
     <string name="calib_import_title">Importare calibrare</string>
     <string name="import_title">Importare cartare</string>
@@ -204,7 +204,7 @@
     <string name="error_azimuth_required">Azimutul este obligatoriu</string>
     <string name="error_length_required">Lungimea este obligatorie</string>
     <string name="error_clino_required">Unghiul vertical este obligatoriu</string>
-    <string name="error_comment_required">Comentariul este obligatoriu</string>
+    <!-- UNUSED string name="error_comment_required">Comentariul este obligatoriu</string -->
     <string name="error_begin_required">Adresa de start este obligatorie</string>
     <string name="error_declination_number">Declinația trebuie sa fie un număr</string>
     <string name="error_end_required">Adresa finală este obligatorie</string>
@@ -448,7 +448,7 @@
     <string name="sketch3d_name">numele</string>
     <string name="sketch3d_new">Model nou</string>
     <string name="sketch3d_next">următoarea stație</string>
-    <string name="sketch3d_loading">se încarcă modelul ...</string>
+    <string name="sketch3d_loading">se încarcă modelul &#8230;</string>
     <!-- UNUSED string name="sketch3d_null_name">Lipsește numele schiței 3D</string -->
     <!-- UNUSED string name="sketch3d_null_next">Lipsește stația următoare(p. viză) a schiței 3D</string -->
     <!-- UNUSED string name="sketch3d_null_start">Lipsește stația bază(p. stație) a schiței 3D</string -->
@@ -512,7 +512,7 @@
     <string name="stat_component">Componentele %1$d</string>
     <string name="stat_depth">Adâncime %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Măsurători duplicate %1$d %2$.1f %3$s</string>
-    <string name="stat_leg">Vize(seg. drum.) %1$d %2$.1f %3$s %4$.1f %5$s</string>
+    <string name="stat_leg">Vize(seg. drum.) %1$d %2$.1f %3$.1f %4$.1f %5$s</string>
     <string name="stat_length">Lungime %1$.1f %2$s</string>
     <string name="stat_extlen">Lungime 3D %1$.1f %2$s</string>
     <string name="stat_projlen">Lungime în plan %1$.1f %2$s</string>
@@ -1306,6 +1306,7 @@
   <string name="pref_algo_min_delta_summary">Pondere(weight) grup G^M.x în min-algo</string>
   <string name="pref_algo_min_delta_message">Pondere(weight) grup G^M.x în min-algo</string>
 
+<!-- LEAVE LOG STUFF IN ENGLISH
   <string name="pref_log_stream_summary">Flux scriere jurnal</string>
   <string name="pref_log_stream_title">Flux jurnal</string>
   <string name="pref_log_bt">Bluetooth</string>
@@ -1321,7 +1322,7 @@
   <string name="pref_log_err">Eroare</string>
   <string name="pref_log_fixed">Puncte GPS points</string>
   <string name="pref_log_input">Introducere utilizator</string>
-  <!-- TODO string name="pref_log_io">Sketch i/o</string -->
+  <string name="pref_log_io">Sketch i/o</string>
   <string name="pref_log_loc">Locație</string>
   <string name="pref_log_num">Reducere/simpl. date</string>
   <string name="pref_log_path">Căi fișiere</string>
@@ -1337,6 +1338,7 @@
   <string name="pref_log_therion">Therion</string>
   <string name="pref_log_units">Unități</string>
   <string name="pref_log_zip">ZIP</string>
+-->
 
   <!-- UNUSED string name="line_bezier">Bezier</string -->
   <!-- UNUSED string name="line_fine">fină</string -->

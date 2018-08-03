@@ -81,7 +81,7 @@ import android.graphics.RectF;
 import android.net.Uri;
 
 // import android.util.SparseArray;
-import android.util.Log;
+// import android.util.Log;
 
 /**
  */
@@ -931,7 +931,7 @@ public class DrawingWindow extends ItemDrawer
     resetModified();
   }
 
-  static Handler saveHandler = null;
+  static private Handler saveHandler = null;
 
   String getOrigin() { return mPlot1.start; }
 
@@ -3496,7 +3496,7 @@ public class DrawingWindow extends ItemDrawer
       }
       File file = new File( TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString(mMediaId) ) );
       // TODO RECORD AUDIO
-      new AudioDialog( this, mApp, this, mMediaId ).show();
+      new AudioDialog( mActivity, this, mMediaId ).show();
     }
 
     public void deletedAudio( long bid )
@@ -4522,7 +4522,7 @@ public class DrawingWindow extends ItemDrawer
               } else if ( BrushManager.isPointAudio( point.mPointType ) ) {
                 if ( audioCheck ) {
                   DrawingAudioPath audio = (DrawingAudioPath)point;
-                  new AudioDialog( this, mApp, this, audio.mId ).show();
+                  new AudioDialog( mActivity, this, audio.mId ).show();
                 } else {
 	          // TODO TDToast.make( R.string.no_feature_audio );
 		}
@@ -4752,13 +4752,14 @@ public class DrawingWindow extends ItemDrawer
 	return;
       }
       float scale = manager.getBitmapScale();
-      new ExportBitmapToFile( mActivity, bitmap, scale, filename, toast ).execute();
+      String format = getResources().getString( R.string.saved_file_2 );
+      new ExportBitmapToFile( format, bitmap, scale, filename, toast ).execute();
     }
 
     // used also by SavePlotFileTask
     void doSaveCsx( String origin, PlotSaveData psd1, PlotSaveData psd2, boolean toast )
     {
-      TopoDroidApp.exportSurveyAsCsxAsync( getApplicationContext(), origin, psd1, psd2, toast );
+      TopoDroidApp.exportSurveyAsCsxAsync( mActivity, origin, psd1, psd2, toast );
     }
 
     // used to save "dxf", "svg"
@@ -4838,7 +4839,7 @@ public class DrawingWindow extends ItemDrawer
       th2Handler = new Handler(){
         @Override public void handleMessage(Message msg) {
           if (msg.what == 661 ) {
-            TDToast.make( getString(R.string.saved_file_1) + " " + filename + ".th2" );
+            TDToast.make( String.format( getString(R.string.saved_file_1), (filename + ".th2") ) );
           } else {
             TDToast.make( R.string.saving_file_failed );
           }
@@ -5185,7 +5186,7 @@ public class DrawingWindow extends ItemDrawer
 
       } else if ( p++ == pos ) { // PALETTE
         BrushManager.makePaths( mApp, getResources() );
-        (new SymbolEnableDialog( mActivity, mApp )).show();
+        (new SymbolEnableDialog( mActivity )).show();
 
       } else if ( TDLevel.overBasic && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // OVERVIEW
         if ( mType == PlotInfo.PLOT_PROFILE ) {
@@ -5302,21 +5303,21 @@ public class DrawingWindow extends ItemDrawer
     pw.format("  </profile>\n");
 
     pw.format("    <crosssections>\n");
-    for ( PlotInfo section1 : sections1 ) {
-      pw.format("    <crosssection id=\"%s\" design=\"0\" crosssection=\"%d\">\n", section1.name, section1.csxIndex );
-      // exportCsxXSection( pw, section1, survey, cave, branch, /* session, */ mDrawingUtil );
-      if ( psd2 != null ) {
+    if ( psd1 != null ) {
+      for ( PlotInfo section1 : sections1 ) {
+        pw.format("    <crosssection id=\"%s\" design=\"0\" crosssection=\"%d\">\n", section1.name, section1.csxIndex );
+        // exportCsxXSection( pw, section1, survey, cave, branch, /* session, */ mDrawingUtil );
         exportCsxXSection( pw, section1, survey, cave, branch, /* session, */ psd1.util );
+        pw.format("    </crosssection>\n" );
       }
-      pw.format("    </crosssection>\n" );
     }
-    for ( PlotInfo section2 : sections2 ) {
-      pw.format("    <crosssection id=\"%s\" design=\"1\" crosssection=\"%d\">\n", section2.name, section2.csxIndex );
-      // exportCsxXSection( pw, section2, survey, cave, branch, /* session, */ mDrawingUtil );
-      if ( psd2 != null ) {
+    if ( psd2 != null ) {
+      for ( PlotInfo section2 : sections2 ) {
+        pw.format("    <crosssection id=\"%s\" design=\"1\" crosssection=\"%d\">\n", section2.name, section2.csxIndex );
+        // exportCsxXSection( pw, section2, survey, cave, branch, /* session, */ mDrawingUtil );
         exportCsxXSection( pw, section2, survey, cave, branch, /* session, */ psd2.util );
+        pw.format("    </crosssection>\n" );
       }
-      pw.format("    </crosssection>\n" );
     }
     pw.format("    </crosssections>\n");
   }
@@ -5598,8 +5599,8 @@ public class DrawingWindow extends ItemDrawer
     } else if ( size == 1 ) {
       PointF p = pts.get(0);
       if ( p.x > 0 && p.x < len ) { // wall from--p--to
-	float x2 = x0 + uu.x * p.x + vv.x * p.y;
-	float y2 = y0 + uu.y * p.x + vv.y * p.y;
+	    float x2 = x0 + uu.x * p.x + vv.x * p.y;
+	    float y2 = y0 + uu.y * p.x + vv.y * p.y;
         xx = mDrawingUtil.toSceneX( x2, y2 ); 
         yy = mDrawingUtil.toSceneY( x2, y2 );
         x0 = mDrawingUtil.toSceneX( x0, y0 );

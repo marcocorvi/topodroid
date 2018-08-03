@@ -69,7 +69,7 @@ class DBlock
   int mShotType;  // 0: DistoX, 1: manual
   boolean mWithPhoto;
   boolean mMultiBad; // whether it disagree with siblings
-  float mStretch;
+  private float mStretch;
 
   static final int BLOCK_BLANK      = 0;
   static final int BLOCK_MAIN_LEG   = 1; // primary leg shot
@@ -177,8 +177,7 @@ class DBlock
       // case EXTEND_FLEFT:  mExtend = EXTEND_FRIGHT; return true;
       // case EXTEND_FRIGHT: mExtend = EXTEND_FLEFT;  return true;
     }
-    if ( Math.abs( mStretch ) > 0.01f ) return true;
-    return false;
+    return ( Math.abs( mStretch ) > 0.01f );
   }
 
   // a block is recent if

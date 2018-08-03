@@ -856,7 +856,7 @@ public class GMActivity extends Activity
 
     if ( b == mButton1[BTN_TOGGLE] ) { // TOGGLE
       enableButtons( false );
-      new CalibToggleTask( this, this, mApp ).execute();
+      new CalibToggleTask( this, mApp ).execute();
 
     } else if ( b == mButton1[BTN_BT] ) { // BLUETOOTH
       doBluetooth( b );

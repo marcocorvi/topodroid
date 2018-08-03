@@ -480,7 +480,7 @@ class ShotNewDialog extends MyDialog
         dismiss();
       }
     } else if ( b == mBtnSensor ) {
-      mTimer = new TimerTask( mContext, this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
+      mTimer = new TimerTask( this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
       mTimer.execute();
     } else if ( b == mBtnCamera && cameraCheck && TDLevel.overAdvanced ) {
       new QCamCompass( mContext, this, /* null, -1L, */ null, true, true).show();

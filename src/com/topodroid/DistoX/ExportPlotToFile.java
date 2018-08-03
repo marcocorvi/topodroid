@@ -25,7 +25,6 @@ import android.os.AsyncTask;
 
 class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
 {
-    private final Context mContext;  // FIXME LEAK used by Toast
     private final DrawingCommandManager mCommand;
     private final DistoXNum mNum;
     private long mType;
@@ -34,13 +33,14 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     private String filename = null;
     private boolean mToast;
     private final DrawingUtil mUtil;
+    private String mFormat;
 
     ExportPlotToFile( Context context, DistoXNum num, DrawingUtil util, DrawingCommandManager command,
                          long type, String name, String ext, boolean toast )
     {
       // Log.v("DistoX", "export plot to file cstr. " + name );
       // FIXME assert( ext != null );
-      mContext  = context;
+      mFormat   = context.getResources().getString(R.string.saved_file_1);
       mCommand  = command;
       mUtil     = util;
       mNum      = num;
@@ -90,7 +90,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
       super.onPostExecute(bool);
       if ( mToast ) {
         if ( bool ) {
-          TDToast.make( mContext.getResources().getString(R.string.saved_file_1) + " " + filename );
+          TDToast.make( String.format( mFormat, filename ) );
         } else {
           TDToast.make( R.string.saving_file_failed );
         }

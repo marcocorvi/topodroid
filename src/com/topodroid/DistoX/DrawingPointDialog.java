@@ -31,7 +31,7 @@ import android.view.View;
 // import android.util.Log;
 
 class DrawingPointDialog extends MyDialog
-                               implements View.OnClickListener
+                         implements View.OnClickListener
 {
   private final DrawingPointPath mPoint;
   private final DrawingWindow  mParent;

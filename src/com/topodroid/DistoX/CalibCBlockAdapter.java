@@ -45,7 +45,7 @@ class CalibCBlockAdapter extends ArrayAdapter< CalibCBlock >
     View v = convertView;
     if ( v == null ) {
       LayoutInflater li = (LayoutInflater)context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-      v = li.inflate( R.layout.row, parent, false ); // FIXME inflate may produce NUllPointerException
+      v = li.inflate( R.layout.row, parent, false ); // FIXME inflate may produce NullPointerException
     }
 
     CalibCBlock b = items.get( pos );

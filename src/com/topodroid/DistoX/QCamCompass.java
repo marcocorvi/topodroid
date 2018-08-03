@@ -185,7 +185,7 @@ class QCamCompass extends Dialog
         }
         enableButtons( false );
         enableButtonSave( false );
-        TimerTask timer = new TimerTask( mContext, this, -TimerTask.Z_AXIS, wait, count );
+        TimerTask timer = new TimerTask( this, -TimerTask.Z_AXIS, wait, count );
         timer.execute();
       }
       return;

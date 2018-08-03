@@ -203,7 +203,7 @@ class AzimuthDialDialog extends MyDialog
       updateView();
       updateEditText();
     } else if ( b == mBTsensor ) {
-      mTimer = new TimerTask( mContext, this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
+      mTimer = new TimerTask( this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
       mTimer.execute();
     } else if ( b == mBTok ) {
       mParent.setRefAzimuth( mAzimuth, 0 );

@@ -42,13 +42,13 @@ import java.util.ArrayList;
 // import android.widget.ArrayAdapter;
 
 // import android.os.Environment;
-import android.os.Build;
+// import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
 // import android.os.Debug;
-import android.os.SystemClock; // FIXME TROBOT
+// import android.os.SystemClock; // FIXME TROBOT
 
 import android.app.Application;
 // import android.app.KeyguardManager;
@@ -61,11 +61,11 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.SharedPreferences.Editor;
 import android.content.Context;
-import android.content.Intent;
+// import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.content.res.Configuration;
-import android.content.ActivityNotFoundException;
+// import android.content.ActivityNotFoundException;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 // import android.content.FileProvider;
@@ -83,7 +83,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 // import android.graphics.drawable.BitmapDrawable;
 
-import android.net.Uri;
+// import android.net.Uri;
 
 // import android.util.Log;
 import android.util.DisplayMetrics;
@@ -1231,13 +1231,13 @@ public class TopoDroidApp extends Application
       //   TDToast.make( R.string.toporobot_warning );
       //   trobotmillis = millis;
       // }
-      mStationName.assignStationsAfter_TRobot( mData, TDInstance.sid, blk0, list, sts );
+      StationName.assignStationsAfter_TRobot( mData, TDInstance.sid, blk0, list, sts );
     } else  if ( StationPolicy.doBacksight() ) {
-      mStationName.assignStationsAfter_Backsight( mData, TDInstance.sid, blk0, list, sts );
+      StationName.assignStationsAfter_Backsight( mData, TDInstance.sid, blk0, list, sts );
     } else if ( StationPolicy.doTripod() ) {
-      mStationName.assignStationsAfter_Tripod( mData, TDInstance.sid, blk0, list, sts );
+      StationName.assignStationsAfter_Tripod( mData, TDInstance.sid, blk0, list, sts );
     } else {
-      mStationName.assignStationsAfter_Default( mData, TDInstance.sid, blk0, list, sts );
+      StationName.assignStationsAfter_Default( mData, TDInstance.sid, blk0, list, sts );
     }
   }
 
@@ -1292,7 +1292,8 @@ public class TopoDroidApp extends Application
     SurveyInfo info = getSurveyInfo();
     if ( info == null ) return false;
     // if ( async ) {
-    //   (new SaveDataFileTask( context, TDInstance.sid, info, mData, TDInstance.survey, null, TDConst.DISTOX_EXPORT_TH, toast )).execute();
+    //   String saving = context.getResources().getString(R.string.saving_);
+    //   (new SaveDataFileTask( saving, TDInstance.sid, info, mData, TDInstance.survey, null, TDConst.DISTOX_EXPORT_TH, toast )).execute();
     //   return true;
     // }
     return ( TDExporter.exportSurveyAsTh( TDInstance.sid, mData, info, TDPath.getSurveyThFile( TDInstance.survey ) ) != null );
@@ -2026,19 +2027,21 @@ public class TopoDroidApp extends Application
       SurveyInfo info = getSurveyInfo( );
       if ( info == null ) return;
       TDLog.Log( TDLog.LOG_IO, "async-export survey " + TDInstance.survey + " type " + exportType );
-      (new SaveDataFileTask( context, TDInstance.sid, info, mData, TDInstance.survey, TDInstance.device, exportType, true )).execute();
+      String saving = context.getResources().getString(R.string.saving_);
+      (new SaveDataFileTask( saving, TDInstance.sid, info, mData, TDInstance.survey, TDInstance.device, exportType, true )).execute();
     }
   }
 
   // called by zip archiver
-  static void doExportDataSync( Context context, int exportType )
+  static void doExportDataSync( int exportType )
   {
     if ( exportType < 0 ) return;
     if ( TDInstance.sid >= 0 ) {
       SurveyInfo info = getSurveyInfo( );
       if ( info == null ) return;
       TDLog.Log( TDLog.LOG_IO, "sync-export survey " + TDInstance.survey + " type " + exportType );
-      (new SaveDataFileTask( context, TDInstance.sid, info, mData, TDInstance.survey, TDInstance.device, exportType, false )).immed_exec();
+      // String saving = null; // because toast is false
+      (new SaveDataFileTask( null, TDInstance.sid, info, mData, TDInstance.survey, TDInstance.device, exportType, false )).immed_exec();
     }
   }
 }

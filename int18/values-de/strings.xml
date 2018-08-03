@@ -100,7 +100,7 @@
     <string name="non_linear">nicht-linear</string>
     <string name="algo_minimum">minimum</string>
 <!-- DistoX DEVICE STUFF -->
-    <string name="device_algo_failed">Bestimmung fehlgeschlagen.\nVerwendung von linearem Algorithmus</string>
+    <!-- UNUSED string name="device_algo_failed">Bestimmung fehlgeschlagen.\nVerwendung von linearem Algorithmus</string -->
     <string name="device_address">Adresse %1$s</string>
     <!-- UNUSED string name="device_busy">Gerät arbeitet</string -->
     <string name="device_illegal_addr">Ungültige Speicheradresse</string>
@@ -207,7 +207,7 @@
     <string name="error_azimuth_required">Azimut erforderlich</string>
     <string name="error_length_required">Länge erforderlich</string>
     <string name="error_clino_required">Neigung erforderlich</string>
-    <string name="error_comment_required">Kommentar erforderlich</string>
+    <!-- UNUSED string name="error_comment_required">Kommentar erforderlich</string -->
     <string name="error_begin_required">Startaddresse erforderlich</string>
     <string name="error_declination_number">Deklination muss eine Zahl sein</string>
     <string name="error_end_required">Letzte Adresse erforderlich</string>
@@ -1318,6 +1318,7 @@
   <string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string>
   <string name="pref_algo_min_delta_message">Min-algo group G^M.x weight</string>
 
+<!-- LEAVE LOG STUFF IN ENGLISH
   <string name="pref_log_stream_summary">Log Output</string>
   <string name="pref_log_stream_title">Log Output</string>
   <string name="pref_log_bt">Bluetooth</string>
@@ -1333,7 +1334,7 @@
   <string name="pref_log_err">Fehler</string>
   <string name="pref_log_fixed">GPS Punkt</string>
   <string name="pref_log_input">Benutzereingaben</string>
-  <!-- TODO string name="pref_log_io">Sketch i/o</string -->
+  <string name="pref_log_io">Sketch i/o</string>
   <string name="pref_log_loc">Position</string>
   <string name="pref_log_num">Daten Reduktion</string>
   <string name="pref_log_path">Dateipfade</string>
@@ -1349,6 +1350,7 @@
   <string name="pref_log_therion">Therion</string>
   <string name="pref_log_units">Einheiten</string>
   <string name="pref_log_zip">ZIP</string>
+-->
 
   <!-- UNUSED string name="line_bezier">Bezier</string -->
   <!-- UNUSED string name="line_fine">Fein</string -->

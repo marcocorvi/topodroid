@@ -102,7 +102,7 @@
     <string name="non_linear">nem lineáris</string>
     <string name="algo_minimum">minimum</string>
    
-    <string name="device_algo_failed">Az algoritmus automatikus kiválasztása nem sikerült\nLineáris eljárás használata</string>
+    <!-- UNUSED string name="device_algo_failed">Az algoritmus automatikus kiválasztása nem sikerült\nLineáris eljárás használata</string -->
     <string name="device_address">Cím %1$s</string>
     <!-- UNUSED string name="device_busy">Az eszköz használatban</string -->
     <string name="device_illegal_addr">Helytelen memória cím</string>
@@ -203,7 +203,7 @@
     <string name="error_azimuth_required">Azimut szükséges</string>
     <string name="error_length_required">Hossz szükséges</string>
     <string name="error_clino_required">Lejtszög szükséges</string>
-    <string name="error_comment_required">Megjegyzés szükséges</string>
+    <!-- UNUSED string name="error_comment_required">Megjegyzés szükséges</string -->
     <string name="error_begin_required">Kezdő hivatkozás szükséges</string>
     <string name="error_declination_number">A deklinációt számként kell megadni</string>
     <string name="error_end_required">Vépont szükséges</string>
@@ -1290,6 +1290,7 @@
   <string name="pref_algo_min_delta_summary">Min-algo group G^M.x súlyozása</string>
   <string name="pref_algo_min_delta_message">Min-algo group G^M.x súlyozása</string>
 
+<!-- LEAVE LOG STUFF IN ENGLISH
   <string name="pref_log_stream_summary">Naplózás a system log-ba</string>
   <string name="pref_log_stream_title">Naplózás</string>
   <string name="pref_log_bt">Bluetooth</string>
@@ -1305,11 +1306,11 @@
   <string name="pref_log_err">Hiba</string>
   <string name="pref_log_fixed">GPS pontok</string>
   <string name="pref_log_input">Felhasználói adatbevitel</string>
-  <!-- TODO string name="pref_log_io">Sketch i/o</string -->
+  <string name="pref_log_io">Sketch i/o</string>
   <string name="pref_log_loc">Helyszín</string>
   <string name="pref_log_num">Adat redukció</string>
-  <!-- TODO string name="pref_log_path">File paths</string -->
-  <!-- TODO string name="pref_log_perm">Permissions</string -->
+  <string name="pref_log_path">File paths</string>
+  <string name="pref_log_perm">Permissions</string>
   <string name="pref_log_photo">Fotó</string>
   <string name="pref_log_plot">Vázlatok</string>
   <string name="pref_log_proto">DistoX protokol</string>
@@ -1321,6 +1322,7 @@
   <string name="pref_log_therion">Therion</string>
   <string name="pref_log_units">Mértékegységek</string>
   <string name="pref_log_zip">ZIP</string>
+-->
 
   <!-- UNUSED string name="line_bezier">Bezier</string -->
   <!-- UNUSED string name="line_fine">fine</string -->

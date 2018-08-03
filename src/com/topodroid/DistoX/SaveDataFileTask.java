@@ -11,26 +11,25 @@
  */
 package com.topodroid.DistoX;
 
-import java.io.File;
+// import java.io.File;
 
 import java.util.List;
 
-import android.content.Intent;
-import android.content.Context;
+// import android.content.Intent;
+// import android.content.Context;
 
 import android.os.AsyncTask;
 // import android.os.Bundle;
-import android.os.Handler;
+// import android.os.Handler;
 
-import android.graphics.Bitmap;
+// import android.graphics.Bitmap;
 // import android.graphics.Bitmap.CompressFormat;
 
 // import android.util.Log;
 
 class SaveDataFileTask extends AsyncTask<Void, Void, String >
 {
-  private final Context mContext; // FIXME LEAK
-  // private TopoDroidApp mApp;
+  private String mSaving; // for the toast
   private long  mSid;
   private DataHelper mData;
   private SurveyInfo mInfo;
@@ -39,9 +38,9 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
   private int mType;      // export type
   private boolean mToast;
 
-  SaveDataFileTask( Context context, long sid, SurveyInfo info, DataHelper data, String survey, Device device, int type, boolean toast )
+  SaveDataFileTask( String saving, long sid, SurveyInfo info, DataHelper data, String survey, Device device, int type, boolean toast )
   {
-     mContext = context;
+     mSaving  = saving;
      mSid     = sid;
      mInfo    = info;
      mData    = data;
@@ -150,7 +149,7 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
       } else if ( filename.length() == 0 ) {
         TDToast.make( R.string.no_geo_station );
       } else {
-        TDToast.make( mContext.getResources().getString(R.string.saving_) + filename ); // FIXME_FORMAT
+        TDToast.make( mSaving + filename ); // FIXME_FORMAT
       }
     }
   }

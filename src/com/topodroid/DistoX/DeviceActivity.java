@@ -200,13 +200,13 @@ public class DeviceActivity extends Activity
 
   void setDeviceModel( Device device, int model )
   {
-    mApp.setDeviceModel( device, model );
+    TopoDroidApp.setDeviceModel( device, model );
     updateList();
   }
 
   void setDeviceName( Device device, String nickname )
   {
-    mApp.setDeviceName( device, nickname );
+    TopoDroidApp.setDeviceName( device, nickname );
     updateList();
   }
 
@@ -456,7 +456,7 @@ public class DeviceActivity extends Activity
         TDToast.make( R.string.no_device_address );
       } else {
         enableButtons( false );
-        new CalibToggleTask( this, this, mApp ).execute();
+        new CalibToggleTask( this, mApp ).execute();
       }
     } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // CALIBRATIONS
       if ( TDInstance.device == null ) {

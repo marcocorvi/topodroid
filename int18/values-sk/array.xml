@@ -91,7 +91,7 @@
      <item name="huge">Obrovské</item>
   </string-array>
 
-  <!-- OK string-array name="logStream">
+  <!-- DO NOT TRANSLATE string-array name="logStream">
      <item name="android">System log</item>
      <item name="file">File log</item>
   </string-array -->

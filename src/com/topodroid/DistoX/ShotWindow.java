@@ -611,7 +611,7 @@ public class ShotWindow extends Activity
     int p = 0;
     if ( p++ == pos ) { // CLOSE
       if ( TDSetting.mDataBackup ) {
-        mApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false ); // try_save
+        TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false ); // try_save
       }
       super.onBackPressed();
 
@@ -640,7 +640,7 @@ public class ShotWindow extends Activity
     } else if ( TDLevel.overNormal && p++ == pos ) { // SENSORS
       mActivity.startActivity( new Intent( mActivity, SensorListActivity.class ) );
     } else if ( TDLevel.overBasic && p++ == pos ) { // 3D
-      if ( mApp.exportSurveyAsThSync( ) ) { // make sure to have survey exported as therion
+      if ( TopoDroidApp.exportSurveyAsThSync( ) ) { // make sure to have survey exported as therion
         try {
           Intent intent = new Intent( "Cave3D.intent.action.Launch" );
           intent.putExtra( "survey", TDPath.getSurveyThFile( TDInstance.survey ) );
@@ -764,7 +764,7 @@ public class ShotWindow extends Activity
     // Log.v( TopoDroidApp.TAG, "split survey " + old_sid + " " + old_id );
     if ( mApp.mShotWindow != null ) {
       if ( TDSetting.mDataBackup ) {
-        mApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false ); // try_save
+        TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false ); // try_save
       }
       mApp.mShotWindow.finish();
       mApp.mShotWindow = null;
@@ -852,7 +852,7 @@ public class ShotWindow extends Activity
       case TDRequest.INFO_ACTIVITY_SHOTWINDOW:
         if ( resCode == Activity.RESULT_OK ) {
           if ( TDSetting.mDataBackup ) {
-            mApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false ); // try_save
+            TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false ); // try_save
 	  }
           finish();
         }
@@ -1111,7 +1111,7 @@ public class ShotWindow extends Activity
       doubleBackToast = null;
       DrawingSurface.clearCache();
       if ( TDSetting.mDataBackup ) {
-        mApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false ); // try_save
+        TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false ); // try_save
       }
       super.onBackPressed();
       return;
@@ -1747,7 +1747,7 @@ public class ShotWindow extends Activity
   String computeBedding( List<DBlock> blks ) // BEDDING
   {
     String strike_dip = getResources().getString(R.string.few_data);
-    if ( blks != null || blks.size() > 2 ) {
+    if ( blks != null && blks.size() > 2 ) {
       DBlock b0 = blks.get(0);
       String st = b0.mFrom;
       float xx = 0, xy = 0, yy = 0, xz = 0, zz = 0, yz = 0, xn = 0, yn = 0, zn = 0;
@@ -2039,7 +2039,7 @@ public class ShotWindow extends Activity
 
   void startAudio( DBlock blk )
   {
-    (new AudioDialog( this, mApp, /* this */ null, blk.mId )).show();
+    (new AudioDialog( mActivity, /* this */ null, blk.mId )).show();
   }
 
 }

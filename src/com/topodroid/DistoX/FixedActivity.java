@@ -225,7 +225,12 @@ public class FixedActivity extends Activity
     } else if ( b == mButton1[k++] ) { // ADD
       new FixedAddDialog( mContext, this ).show();
     } else if ( b == mButton1[k++] ) { // IMPORT MOBILE TOPOGRAPHER
-      new FixedImportDialog( mContext, this ).show();
+      FixedImportDialog dialog = new FixedImportDialog( mContext, this );
+      if ( dialog.getNrPoints() > 0 ) {
+	dialog.show();
+      } else {
+        TDToast.make( R.string.MT_points_none );
+      }
     }
     // refreshList();
   }

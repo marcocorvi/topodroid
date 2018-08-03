@@ -14,7 +14,7 @@ package com.topodroid.DistoX;
 import java.io.IOException;
 
 import android.widget.ImageView;
-import android.view.View;
+// import android.view.View;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

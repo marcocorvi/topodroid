@@ -238,7 +238,7 @@ public class MainWindow extends Activity
         (new ImportDialog( mActivity, this, mApp )).show();
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // PALETTE
         BrushManager.makePaths( mApp, getResources() );
-        (new SymbolEnableDialog( mActivity, mApp )).show();
+        (new SymbolEnableDialog( mActivity )).show();
 
       // FIXME THMANAGER
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // THERION MANAGER ThManager
@@ -405,7 +405,7 @@ public class MainWindow extends Activity
       Intent intent;
       if ( TDLevel.overNormal && p++ == pos ) { // PALETTE EXTRA SYMBOLS
         // BrushManager.makePaths( getResources() );
-        // (new SymbolEnableDialog( mActivity, mApp )).show();
+        // (new SymbolEnableDialog( mActivity )).show();
 
         (new SymbolReload( mActivity, mApp, TDLevel.overExpert )).show();
       } else if ( TDLevel.overAdvanced && p++ == pos ) { // LOGS

@@ -102,7 +102,7 @@
     <string name="non_linear">нелинейный</string>
     <!-- NO string name="algo_minimum">минимум</string -->
    
-    <string name="device_algo_failed">Алгоритм автоопределения не сработал\nИспользую линейный алгоритм</string>
+    <!-- UNUSED string name="device_algo_failed">Алгоритм автоопределения не сработал\nИспользую линейный алгоритм</string -->
     <string name="device_address">Адрес %1$s</string>
     <!-- UNUSED string name="device_busy">Устройство занято</string -->
     <string name="device_illegal_addr">Недопустимый адрес памяти</string>
@@ -205,7 +205,7 @@
     <string name="error_azimuth_required">Требуется азимут</string>
     <string name="error_length_required">Требуется длина</string>
     <string name="error_clino_required">Требуется угол</string>
-    <string name="error_comment_required">Требуется комментарий</string>
+    <!-- UNUSED string name="error_comment_required">Требуется комментарий</string -->
     <string name="error_begin_required">Требуется начальный адрес</string>
     <string name="error_declination_number">Наклон должен быть задан числом</string>
     <string name="error_end_required">Требуется конечный адрес</string>
@@ -1307,18 +1307,19 @@
   <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
   <!-- NO string name="pref_algo_min_delta_message">Min-algo group G^M.x weight</string -->
 
+<!-- LEAVE LOG STUFF IN ENGLISH
   <string name="pref_log_stream_summary">Лог потока вывода</string>
   <string name="pref_log_stream_title">Лог потока</string>
-  <!-- OK string name="pref_log_bt">Bluetooth</string -->
+  <string name="pref_log_bt">Bluetooth</string>
   <string name="pref_log_bezier">Кривые Безье</string>
   <string name="pref_log_calib">Калибровка</string>
   <string name="pref_log_comm">BT соединение</string>
-  <!-- OK string name="pref_log_csurvey">cSurvey</string -->
+  <string name="pref_log_csurvey">cSurvey</string>
   <string name="pref_log_data">Данные съёмки</string>
   <string name="pref_log_db">База данных</string>
   <string name="pref_log_debug">Debug</string>
   <string name="pref_log_device">Окно прибора</string>
-  <!-- OK string name="pref_log_distox">DistoX</string -->
+  <string name="pref_log_distox">DistoX</string>
   <string name="pref_log_err">Ошибка</string>
   <string name="pref_log_fixed">Точки с GPS координатами</string>
   <string name="pref_log_input">Входные данные</string>
@@ -1330,14 +1331,15 @@
   <string name="pref_log_photo">Фото</string>
   <string name="pref_log_plot">Абрисы</string>
   <string name="pref_log_proto">Протокол DistoX</string>
-  <!-- OK string name="pref_log_ptopo">PocketTopo</string -->
+  <string name="pref_log_ptopo">PocketTopo</string>
   <string name="pref_log_sensor">Датчики</string>
   <string name="pref_log_shot">Пикеты</string>
   <string name="pref_log_sync">Совм. съёмка</string>
   <string name="pref_log_survey">Съёмки</string>
-  <!-- OK string name="pref_log_therion">Therion</string -->
+  <string name="pref_log_therion">Therion</string>
   <string name="pref_log_units">Единицы</string>
-  <!-- OK string name="pref_log_zip">ZIP</string -->
+  <string name="pref_log_zip">ZIP</string>
+-->
 
   <!-- UNUSED string name="line_bezier">Безье</string -->
   <!-- UNUSED string name="line_fine">точный</string -->

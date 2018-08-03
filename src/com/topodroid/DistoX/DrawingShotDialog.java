@@ -33,7 +33,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 // import android.text.InputType;
 import android.inputmethodservice.KeyboardView;
 
-import android.util.Log;
+// import android.util.Log;
 
 class DrawingShotDialog extends MyDialog
                                implements View.OnClickListener

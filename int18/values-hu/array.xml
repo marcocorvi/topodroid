@@ -117,10 +117,10 @@
      <item name="huge">Óriási</item>
   </string-array>
 
-  <string-array name="logStream">
+  <!-- DO NOT TRANSLATE string-array name="logStream">
      <item name="android">Rendszer napló</item>
      <item name="file">File napló</item>
-  </string-array>
+  </string-array -->
 
   <!-- TODO string-array name="connMode">
      <item name="batch">Ha szükséges</item>

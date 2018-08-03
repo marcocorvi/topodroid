@@ -502,7 +502,7 @@ public class SketchWindow extends ItemDrawer
   //     TDToast.make( R.string.null_bitmap );
   //   } else {
   //     new ExportBitmapToFile( mActivity, mSaveHandler, mSketchSurface.getBitmap(), mFullName ).execute();
-  //     TDToast.make( getString(R.string.saved_file_1) + mFullName + ".png" );
+  //     TDToast.make( String.format( getString(R.string.saved_file_1), (mFullName + ".png") ) );
   //   }
   // }
 
@@ -2031,7 +2031,7 @@ public class SketchWindow extends ItemDrawer
       }
     } else if ( p++ == pos ) { // PALETTE 
       BrushManager.makePaths( mApp, getResources() );
-      (new SymbolEnableDialog( mActivity, mApp )).show();
+      (new SymbolEnableDialog( mActivity )).show();
     } else if ( p++ == pos ) { // ZOOM ONE
       mInfo.resetDirection(); // azi = 0, clino = 0, and compute triad versors
       resetZoom();
@@ -2039,7 +2039,7 @@ public class SketchWindow extends ItemDrawer
       setMode( SketchDef.MODE_MOVE );
       // SensorManager sm = (SensorManager)getSystemService( Context.SENSOR_SERVICE );
       // mCompass = new SketchCompassSensor( mActivity, sm, TDSetting.mCompassReadings );
-      mTimer = new TimerTask( mActivity, this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
+      mTimer = new TimerTask( this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
       mTimer.execute();
     } else if ( p++ == pos ) { // DELETE
       if ( mLoaded ) {

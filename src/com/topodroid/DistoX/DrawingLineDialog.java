@@ -31,7 +31,8 @@ import android.widget.ArrayAdapter;
 import android.view.View;
 
 class DrawingLineDialog extends MyDialog
-                               implements View.OnClickListener, AdapterView.OnItemSelectedListener
+                        implements View.OnClickListener
+			         , AdapterView.OnItemSelectedListener
 {
   private DrawingLinePath mLine;
   private DrawingWindow mParent;

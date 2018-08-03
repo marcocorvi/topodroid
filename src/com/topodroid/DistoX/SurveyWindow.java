@@ -161,7 +161,8 @@ public class SurveyWindow extends Activity
   {
     // TDLog.Log( TDLog.LOG_SURVEY, "app SID " + TDInstance.sid );
     if ( TDInstance.sid < 0 ) return false;
-    SurveyInfo info = mApp.getSurveyInfo();
+    SurveyInfo info = TopoDroidApp.getSurveyInfo();
+    if ( info == null ) return false;
     mTextName.setText( info.name );
     mTextName.setTextColor( mNameColor );
     mInitStation = info.initStation;
@@ -450,7 +451,7 @@ public class SurveyWindow extends Activity
     if ( index == TDConst.DISTOX_EXPORT_ZIP ) {
       doArchive();
     } else if ( index >= 0 ) {
-      mApp.doExportDataAsync( getApplicationContext(), index, true );
+      TopoDroidApp.doExportDataAsync( getApplicationContext(), index, true );
     }
   }
 

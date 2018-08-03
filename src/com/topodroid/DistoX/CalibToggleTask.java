@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-import android.app.Activity;
+// import android.app.Activity;
 import android.os.AsyncTask;
 
 // import android.widget.Button;
@@ -19,13 +19,11 @@ import android.os.AsyncTask;
 
 class CalibToggleTask extends AsyncTask<Void, Integer, Boolean>
 {
-  private final Activity   mActivity; // FIXME LEAK
   private final TopoDroidApp mApp;    // FIXME LEAK
   private final IEnableButtons mEnableButtons;
 
-  CalibToggleTask( Activity act, IEnableButtons eb, TopoDroidApp app )
+  CalibToggleTask( IEnableButtons eb, TopoDroidApp app )
   {
-    mActivity = act;
     mApp      = app;
     mEnableButtons = eb;
   }

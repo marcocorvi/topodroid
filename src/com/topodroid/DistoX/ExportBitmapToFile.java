@@ -13,7 +13,7 @@ package com.topodroid.DistoX;
 
 import java.io.FileOutputStream;
 
-import android.content.Context;
+// import android.content.Context;
 
 import android.os.AsyncTask;
 // import android.os.Handler;
@@ -24,16 +24,16 @@ import android.graphics.Bitmap;
 
 class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean> 
 {
-    private final Context mContext; // FIXME LEAK: used to Toast
     private Bitmap mBitmap;
     private float  mScale;
     private String mFullName;
     private String filename = null;
     private boolean mToast;
+    private String  mFormat;
 
-    ExportBitmapToFile( Context context, Bitmap bitmap, float scale, String name, boolean toast )
+    ExportBitmapToFile( String format, Bitmap bitmap, float scale, String name, boolean toast )
     {
-       mContext  = context;
+       mFormat   = format;
        mBitmap   = bitmap;
        mScale    = scale;
        mFullName = name;
@@ -63,7 +63,7 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
       super.onPostExecute(bool);
       if ( mToast ) {
         if ( bool ) {
-          TDToast.make( String.format( mContext.getResources().getString(R.string.saved_file_2), filename, mScale) );
+          TDToast.make( String.format( mFormat, filename, mScale) );
         } else {
           TDToast.make( R.string.saving_file_failed );
         }

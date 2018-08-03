@@ -101,7 +101,7 @@
     <string name="non_linear">não linear</string>
     <string name="algo_minimum">mínimo</string>
    
-    <string name="device_algo_failed">Determinação automática do algoritmo mal sucedida\nUtilizando algoritmo linear</string>
+    <!-- UNUSED string name="device_algo_failed">Determinação automática do algoritmo mal sucedida\nUtilizando algoritmo linear</string -->
     <string name="device_address">Endereço %1$s</string>
     <!-- UNUSED string name="device_busy">Dispositivo indisponível</string -->
     <string name="device_illegal_addr">Endereço de memória inválido</string>
@@ -202,7 +202,7 @@
     <string name="error_azimuth_required">Azimute exigido</string>
     <string name="error_length_required">Comprimento exigido</string>
     <string name="error_clino_required">Inclinação exigida</string>
-    <string name="error_comment_required">Comentário exigido</string>
+    <!-- UNUSED string name="error_comment_required">Comentário exigido</string -->
     <string name="error_begin_required">Endereço inicial exigido</string>
     <string name="error_declination_number">A declinação deve ser um número</string>
     <string name="error_end_required">Endereço final exigido</string>
@@ -294,7 +294,7 @@
     <!-- UNUSED string name="no_db_viewer">DB_viewer não encontrado</string -->
     <string name="no_undelete">Nenhum item a ser restaurado</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Azimute %5$.1f"</string>
-    <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Inclinação %4$.1f"</string>
+    <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Inclinação %5$.1f"</string>
 
     <string name="menu_3d">3D</string>
     <string name="menu_about">SOBRE</string>
@@ -1290,6 +1290,7 @@
   <string name="pref_algo_min_delta_summary">Fator de correção para min-algo do peso do grupo G^M.x</string>
   <string name="pref_algo_min_delta_message">Fator de correção para min-algo do peso do grupo G^M.x</string>
 
+<!-- LEAVE LOG STUFF IN ENGLISH
   <string name="pref_log_stream_summary">Fluxo do log de saída</string>
   <string name="pref_log_stream_title">Fluxo do log</string>
   <string name="pref_log_bt">Bluetooth</string>
@@ -1305,7 +1306,7 @@
   <string name="pref_log_err">Erro</string>
   <string name="pref_log_fixed">Pontos GPS</string>
   <string name="pref_log_input">Entrada pelo usuário</string>
-  <!-- TODO string name="pref_log_io">Sketch i/o</string -->
+  <string name="pref_log_io">Sketch i/o</string>
   <string name="pref_log_loc">Localização</string>
   <string name="pref_log_num">Redução de dados</string>
   <string name="pref_log_path">Arquivos</string>
@@ -1321,6 +1322,7 @@
   <string name="pref_log_therion">Therion</string>
   <string name="pref_log_units">Unidades</string>
   <string name="pref_log_zip">ZIP</string>
+-->
 
   <!-- UNUSED string name="line_bezier">Bézier</string -->
   <!-- UNUSED string name="line_fine">fino</string -->

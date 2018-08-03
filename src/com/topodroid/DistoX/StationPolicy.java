@@ -12,7 +12,7 @@
  */
 package com.topodroid.DistoX;
 
-import android.util.Log;
+// import android.util.Log;
 
 class StationPolicy
 {
@@ -27,7 +27,7 @@ class StationPolicy
   static int SURVEY_STATION_TOPOROBOT = 7;
   static int SURVEY_STATION_ANOMALY   = 8;
 
-  static boolean mShotAfterSplays = true;;
+  static boolean mShotAfterSplays = true;
   private static boolean mBacksightShot = false;    // backsight shooting policy
   private static boolean mTripodShot = false;    // tripod shooting policy
   private static boolean mTRobotShot = false;    // TopoRobot shooting policy

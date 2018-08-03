@@ -29,7 +29,7 @@ import android.graphics.Bitmap;
 
 class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
 {
-  private final Context mContext; // FIXME LEAK
+  private String mFormat; 
   private Handler mHandler;
   // private TopoDroidApp mApp;
   private final DrawingWindow mParent;
@@ -50,7 +50,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
 		    DistoXNum num, DrawingUtil util, DrawingCommandManager manager, 
                     String fullname, long type, int proj_dir, int suffix, int rotate )
   {
-     mContext  = context;
+     mFormat   = context.getResources().getString(R.string.saved_file_2);
      mParent   = parent;
      mHandler  = handler;
      // mApp      = app;
@@ -78,7 +78,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
 		    DistoXNum num, DrawingUtil util, List<DrawingPath> paths,
                     String fullname, long type, int proj_dir )
   {
-     mContext  = context;
+     mFormat   = context.getResources().getString(R.string.saved_file_2);
      mParent   = parent;
      mHandler  = handler;
      // mApp      = app;
@@ -142,7 +142,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
               } else {
                 float scale = mManager.getBitmapScale();
                 if (scale > 0) {
-                  new ExportBitmapToFile( mContext, bitmap, scale, mFullName, false ).execute();
+                  new ExportBitmapToFile( mFormat, bitmap, scale, mFullName, false ).execute();
                 } else {
                   TDLog.Error( "cannot save PNG: negative scale" );
                   ret1 = false;
