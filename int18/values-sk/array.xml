@@ -117,7 +117,7 @@
      <item name="for">Pomocné zámery; Hlavná zámera dopredu</item>
      <item name="back">Pomocné zámery; Hlavná zámera naspäť</item>
      <item name="backsight">Hlavná zámera naspäť; Pomocné zámery; Hlavná zámera dopredu</item>
-     <item name="tripod">STATÍV-STENA - Hlavná zámera naspäť; Pomocné zámery; Hlavná zámera dopredu</item>
+     <item name="tripod">STATÍV-STENA</item>
      <item name="anomaly">Kompenzácia Magnetickej anomálie</item>
      <item name="for2">Hlavná zámera dopredu; Pomocné zámery</item>
      <item name="back2">Hlavná zámera naspäť; Pomocné zámery</item>
@@ -140,14 +140,14 @@
      <item name="for">Pomocné zámery; Hlavná zámera dopredu</item>
      <item name="back">Pomocné zámery; Hlavná zámera naspäť</item>
      <item name="backsight">Hlavná zámera naspäť; Pomocné zámery; Hlavná zámera dopredu</item>
-     <item name="tripod">STATÍV-STENA - Hlavná zámera naspäť; Pomocné zámery; Hlavná zámera dopredu</item>
+     <item name="tripod">STATÍV-STENA</item>
   </string-array>
   <string-array name="surveyStationsE">
      <item name="no">Žiadna</item>
      <item name="for">Pomocné zámery; Hlavná zámera dopredu</item>
      <item name="back">Pomocné zámery; Hlavná zámera naspäť</item>
      <item name="backsight">Hlavná zámera naspäť; Pomocné zámery; Hlavná zámera dopredu</item>
-     <item name="tripod">STATÍV-STENA - Hlavná zámera naspäť; Pomocné zámery; Hlavná zámera dopredu</item>
+     <item name="tripod">STATÍV-STENA</item>
      <item name="anomaly">Kompenzácia Magnetickej anomálie</item>
      <item name="for2">Hlavná zámera dopredu; Pomocné zámery</item>
      <item name="back2">Hlavná zámera naspäť; Pomocné zámery</item>

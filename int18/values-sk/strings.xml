@@ -21,8 +21,7 @@
     <string name="setup_drawingunit">Nastavte veľkosť ikoniek.\nMožete to zmeniť aj neskôr v nastaveniach cez menu kreslenia.</string>
     <string name="setup_done">Základné nastavenie je ukončené.\n\n
 	   Pokiaľ zistíte problém s pripojením DistoX skúste použiť Nezabezpečené pripojenie.\n\n
-	   Ďalšie nastavenia  (veľkosť ikon, šírky čiary, veľkosti poznámok&#8230;) viete meniť neskôr v nastaveniach
-	    podľa Vašich potrieb.
+	   Nastavenia viete meniť aj neskôr podľa Vašich potrieb.
     </string>
     <!-- DO NOT TRANSLATE string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
 
@@ -336,6 +335,7 @@
     <string name="menu_survey">JASKYŇA</string>
     <string name="menu_sync">SYNCHONIZOVAŤ</string>
     <!-- UNUSED string name="menu_tdr2th2">RISEB TH2</string -->
+    <!-- UPDATES string name="menu_updates">CHECK UPDATES</string -->	
     <string name="menu_validate">POROVNAŤ</string>
     <string name="menu_zoom_fit">ORIENTÁCIA</string>
 
@@ -766,6 +766,7 @@
     <string name="help_info_shot">Štatistiky meraní mapovania</string>
     <string name="help_survey_info">Nastavenie údajov o Jaskyni</string>
     <string name="help_undelete">Obnoviť odstránené položky zo zálohy</string>
+    <!-- UPDATES string name="help_updates">Check for app version updates</string -->	
     <string name="help_photo">Zobraziť nasnímané fotografie</string>
     <string name="help_sensor">Zobraziť merania z interných senzorov</string>
     <string name="help_3d">3D zobrazenie (Cave3D)</string>
@@ -1325,7 +1326,7 @@
   <string name="pref_log_err">Chyby</string>
   <string name="pref_log_fixed">GPS body</string>
   <string name="pref_log_input">Vstup užívateľa</string>
-  <string name="pref_log_io">Sketch i/o</string>
+  <string name="pref_log_io">Nákres i/o</string>
   <string name="pref_log_loc">Polohy GPS</string>
   <string name="pref_log_num">Kompresia dát</string>
   <string name="pref_log_path">Cesta súboru</string>
@@ -1383,7 +1384,6 @@
 \n   NAHRATIE NEKOMPATIBILNÉHO FIRMWARU MÔŽE VÁŽNE POŠKODIŤ DISTOX!!!
 \n	  
    </string>
-
    <string name="firmware_none">Žiadny firmware súbor</string>
    <string name="firmware_file">Firmware súbor</string>
    <string name="firmware_file_exists">Existujúci firmware súbor</string>
