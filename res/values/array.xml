@@ -397,7 +397,7 @@
      <item name="from">Behind</item>
      <item name="to">In front</item>
   </string-array>
-  <string-array name="sectionStationsValue" translatale="false">
+  <string-array name="sectionStationsValue" translatable="false">
      <item name="both">3</item>
      <item name="from">1</item>
      <item name="to">2</item>
@@ -415,7 +415,7 @@
      <item name="A3">A3</item>
      <item name="X310">X310</item>
   </string-array>
-  <string-array name="deviceTypeValue" translatale="false">
+  <string-array name="deviceTypeValue" translatable="false">
      <item name="none">0</item>
      <item name="A3">1</item>
      <item name="X310">2</item>
@@ -438,7 +438,7 @@
      <item name="svx">Survex</item>
      <item name="tro">VisualTopo</item>
   </string-array>
-  <string-array name="exportTypeValue" translatale="false">
+  <string-array name="exportTypeValue" translatable="false">
      <item name="th">th</item>
      <item name="dat">dat</item>
      <item name="svx">svx</item>

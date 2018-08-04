@@ -106,7 +106,7 @@ class SurveyStatDialog extends MyDialog
                         mStat.countSurface, mStat.lengthSurface * unit, unit_str ) );
       mTextSplay.setText( String.format( res.getString(R.string.stat_splay), mStat.countSplay ) );
       mTextStation.setText( String.format( res.getString(R.string.stat_station), mStat.countStation ) );
-      mTextLoop.setText( String.format( res.getString(R.string.stat_loop), mStat.countLoop ) );
+      mTextLoop.setText( String.format( res.getString(R.string.stat_cycle), mStat.countLoop ) );
       mTextComponent.setText( String.format( res.getString(R.string.stat_component), mStat.countComponent ) );
 
       mTextStddevM.setText( String.format( res.getString(R.string.stat_stddev_m), mStat.stddevM ) );

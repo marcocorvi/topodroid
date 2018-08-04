@@ -34,7 +34,7 @@ import android.view.View;
 import android.util.Log;
 
 class CalibCheckDialog extends MyDialog
-                              implements OnItemClickListener
+                       implements OnItemClickListener
 {
   // private SurveyWindow mParent;
   private List< DBlock > mShots;

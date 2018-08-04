@@ -450,7 +450,7 @@ public class ShotWindow extends Activity
             if ( ! prev_is_leg ) {
               mDataAdapter.add( prev );
               prev_is_leg = true;
-            } else {
+            // } else {
               /* nothing */
             }
           // } else {
@@ -826,7 +826,7 @@ public class ShotWindow extends Activity
         if ( resCode == Activity.RESULT_OK ) { // RESULT_OK = -1 (0xffffffff)
           // (new PhotoCommentDialog(this, this) ).show();
           insertPhoto();
-        } else {
+        // } else {
           // mApp_mData.deletePhoto( TDInstance.sid, mPhotoId );
         }
         break;
@@ -1637,7 +1637,7 @@ public class ShotWindow extends Activity
         return b;
       }
     }
-    if ( mPrevPos < 0 ) mPrevPos = 0;
+    /* if ( mPrevPos < 0 ) */ mPrevPos = 0;
     return null;
   }
 

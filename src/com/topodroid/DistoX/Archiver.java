@@ -286,7 +286,7 @@ class Archiver
             pathname = TDPath.getJpgDir( surveyname );
             TopoDroidUtil.makeDir( pathname );
             pathname = TDPath.getJpgFile( surveyname, ze.getName() );
-          } else {
+          // } else {
             // unexpected file type
             // pathname = null; // already null
           }

@@ -50,7 +50,6 @@ class AudioDialog extends MyDialog
   private Button mBtnConfirm;
   private Button mBtnClose;
 
-  // private final TopoDroidApp mApp;
   private final IAudioInserter mParent;
   private final long mBid;
   private final String mFilepath;
@@ -59,11 +58,10 @@ class AudioDialog extends MyDialog
   private boolean canPlay;
   // AudioInfo mAudio;
 
-  AudioDialog( Context ctx, /* TopoDroidApp app, */ IAudioInserter parent, long bid )
+  AudioDialog( Context ctx, IAudioInserter parent, long bid )
   {
     super( ctx, R.string.AudioDialog );
 
-    // mApp = app;
     mParent = parent;
     mBid = bid;
     // mAudio = mApp.mData.getAudio( TDInstance.sid, mBid );

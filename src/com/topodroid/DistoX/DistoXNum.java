@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Stack;
 import java.util.Locale;
 
-// import android.util.Log;
+import android.util.Log;
 
 class DistoXNum
 {
@@ -697,7 +697,7 @@ class DistoXNum
     resetBBox();
     resetStats();
     mStartStation = null;
-    int siblings = 0;
+    int nrSiblings = 0;
 
     // long millis_start = System.currentTimeMillis();
     
@@ -776,6 +776,7 @@ class DistoXNum
     }
 
     // dump tmpshots
+    // Log.v("DistoXL", "tmp shots " + tmpshots.size() );
     // for ( TriShot tr : tmpshots ) tr.dump();
 
     for ( int i = 0; i < tmpshots.size(); ++i ) {
@@ -796,15 +797,15 @@ class DistoXNum
           ts1.sibling = ts2;
           ts1 = ts2;
           ts2.backshot = +1;
-	  ++ siblings;
+	  ++ nrSiblings;
         } else if ( from.equals( ts2.to ) && to.equals( ts2.from ) ) { // chain a negative sibling
           ts1.sibling = ts2;
           ts1 = ts2;
           ts2.backshot = -1;
-	  ++ siblings;
+	  ++ nrSiblings;
         }
       }
-      // Log.v("DistoXL", "working shot " + from + "-" + to + " siblings " + siblings );
+      // Log.v("DistoXL", "worked shot " + from + "-" + to + " siblings " + nrSiblings );
       
       if ( ts0.sibling != null ) { // (2) check sibling shots agreement
         float dmax = 0.0f;
@@ -834,6 +835,8 @@ class DistoXNum
         if ( ! StationPolicy.doMagAnomaly() ) { // (3) remove siblings
           ts1 = ts0.sibling;
           while ( ts1 != null ) {
+	    -- nrSiblings;
+            // Log.v( "DistoXL", "removing sibling " + ts1.from + "-" + ts1.to + " : " + nrSiblings );
             TriShot ts2 = ts1.sibling;
             tmpshots.remove( ts1 );
             ts1 = ts2;
@@ -864,6 +867,7 @@ class DistoXNum
 
     // if ( TDLog.LOG_DEBUG ) Log.v( TDLog.TAG, "start station " + start +  " shots " + tmpshots.size() );
     // dump tmpshots
+    // Log.v("DistoXL", "after sibling processing: " + tmpshots.size() );
     // for ( TriShot tr : tmpshots ) tr.dump();
 
     NumShot sh;
@@ -986,6 +990,7 @@ class DistoXNum
             }
             else // st null || st isBarrier
             { // forward shot: from --> to
+              // Log.v("DistoXL", "forward leg " + ts.from + "-" + ts.to );
               float bearing = ts.b() - sf.mAnomaly;
               st = new NumStation( ts.to, sf, ts.d(), bearing, ts.c(), ext, has_coords );
               if ( ! mStations.addStation( st ) ) mClosureStations.add( st );
@@ -1010,6 +1015,7 @@ class DistoXNum
           else if ( st != null ) 
           { // sf == null: reversed shot only difference is '-' sign in new NumStation, and the new station is sf
             // if ( TDLog.LOG_DEBUG ) Log.v( TDLog.TAG, "reversed shot " + ts.from + " " + ts.to + " id " + ts.blocks.get(0).mId );
+            // Log.v("DistoXL", "reversed leg " + ts.from + "-" + ts.to );
             st.addAzimuth( (ts.b()+180)%360, -iext );
             float bearing = ts.b() - st.mAnomaly;
             sf = new NumStation( ts.from, st, - ts.d(), bearing, ts.c(), ext, has_coords );
@@ -1038,7 +1044,7 @@ class DistoXNum
     }
     // if ( TDLog.LOG_DEBUG ) Log.v( TDLog.TAG, "DistoXNum::compute done leg shots, stations  " + mStations.size() );
 
-    // Log.v("DistoXL", "nr loops " + mClosures.size() );
+    // Log.v("DistoXL", "shots " + mShots.size() + " loops " + mClosures.size() + " siblings " + nrSiblings + " tmp " + tmpshots.size() );
     if ( TDSetting.mLoopClosure == TDSetting.LOOP_CYCLES ) {
       // TDLog.Log( TDLog.LOG_NUM, "loop compensation");
       doLoopCompensation( mNodes, mShots );
@@ -1113,7 +1119,7 @@ class DistoXNum
     // long millis_end = System.currentTimeMillis() - millis_start;
     // Log.v("DistoX", "Data reduction " + millis_end + " msec" );
 
-    return (mShots.size() + siblings == tmpshots.size() );
+    return (mShots.size() + nrSiblings == tmpshots.size() );
   }
 
   
