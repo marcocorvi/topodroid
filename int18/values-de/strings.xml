@@ -275,14 +275,14 @@
     <string name="no_calibration">Keine Kalibrierung gewählt</string>
     <string name="no_capture_app">Keine Kamera-App vorhanden</string>
     <string name="no_cave3d">Cave3D nicht installiert</string>
-    <!-- TODO string name="no_data_reduction">No data reduction</string -->
+    <string name="no_data_reduction">Datenreduktion nicht möglich</string>
     <string name="no_db">Keine Datenbank</string>
     <string name="no_device_address">Kein Gerät gewählt</string>
     <string name="no_device_found">Kein Gerät gefunden</string>
     <string name="no_feature_audio">Audio nicht unterstützt</string>
     <string name="no_gms">Kalibrierung mit keinen Daten</string>
     <string name="no_geo_station">Fehler: keine geolokalisierte Station</string>
-    <!-- TODO string name="no_leg_first">Selection does not start with a leg</string -->
+    <string name="no_leg_first">Auswahl muss mit Messlinie starten</string>
     <string name="no_leg_intersection">Schnittlinie kreuzt keine Vermessung</string>
     <string name="no_location_data">Keine Ortsdaten</string>
     <string name="no_paired_device">Kein gekoppeltes DistoX Gerät</string>
@@ -410,7 +410,7 @@
     <string name="read_failed">Fehler beim Lesen vom DistoX</string>
     <!-- UNUSED string name="reading_file_failed">Failed file-read</string -->
 
-    <string name="saved_file_1">Gespeicherte Datei %1$s</string>
+    <string name="saved_file_1">Datei gespeichert: %1$s</string>
     <string name="saved_file_2">Datei %1$s gespeichert mit Faktor %2$.2f</string>
     <string name="saving_">Speichern </string>
     <string name="saving_file_failed">Datei konnten nicht gespeichert werden</string>
@@ -478,10 +478,10 @@
     <string name="saturated_coeffs">WARNUNG: Kalibrierungs-Koeffizienten nicht berechenbar</string>
     <string name="out_of_memory">WARNUNG: Zuwenig Arbeitsspeicher!</string>
     <string name="disk_io_error">FEHLER: Lese-/Schreibfehler!</string>
-    
-    <!-- TODO string name="toporobot_warning">TopoRobot policy is exterimental !</string -->
-    <!-- TODO string name="anomaly_warning">Magnatic anomaly compensation is expert !</string -->
-    <!-- TODO string name="tripod_warning">Tripod policy is advanced !</string -->
+
+    <string name="toporobot_warning">WARNUNG: TopoRobot ist experimentell !</string>
+    <string name="anomaly_warning">Magnetische Anomalie-Kompensation ist Expertenlevel!</string>
+    <string name="tripod_warning">Stativmessungen sind Fortgeschrittenenlevel!</string>
 
     <string name="cannot_rename">Kann Vermessung nicht umbenennen</string>
     <string name="declination">Magnetische Deklination</string>
@@ -576,8 +576,8 @@
     <string name="button_current"   >Hier fortsetzen   </string>
     <string name="button_delete"    >Löschen    </string>
     <string name="button_eval"      >Auswerten </string>
-    <!-- TODO string name="button_evalg"     >G      </string -->
-    <!-- TODO string name="button_evalm"     >M      </string -->
+    <string name="button_evalg"     >Beschleunigung      </string>
+    <string name="button_evalm"     >Magnetisches Feld      </string>
     <string name="button_eval_cal"  >Auswerten mit Kalibr.</string>
     <string name="button_gps_start" >GPS</string>
     <!-- UNUSED string name="button_gps_stop"  >Anhalten      </string -->
@@ -602,9 +602,9 @@
     <!-- UNUSED string name="button_regroup"   >Umgruppieren   </string -->
     <string name="button_dump"      >Lesen</string>
     <string name="button_rename"    >Umbenennen    </string>
-    <!-- TODO string name="button_renumber"  >Renumber</string -->
-    <!-- TODO string name="button_bedding"   >Bedding plane</string -->
-    <!-- TODO string name="button_highlight" >Highlight</string -->
+    <string name="button_renumber"  >Neu nummerieren</string>
+    <string name="button_bedding"   >Streichen und Fallen</string>
+    <string name="button_highlight" >Zeigen</string>
     <string name="button_replace"   >Ersetzen   </string>
     <string name="button_reset"     >Zurücksetzen</string>
     <string name="button_left"      >LINKS</string>
@@ -615,7 +615,7 @@
     <string name="button_search"    >Suche    </string>
     <string name="button_merge"     >Zusammenführen     </string>
     <string name="button_split"     >Aufteilen     </string>
-    <!-- TODO string name="button_station"   >Center at</string -->
+    <string name="button_station"   >Zentrieren bei</string>
     <string name="button_store"     >Speichern</string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
@@ -631,7 +631,7 @@
 
     <string name="mode_leg">Messstrecken</string>
     <string name="mode_splay">Hilfszüge</string>
-    <!-- TODO string name="mode_latest">Latest splays</string -->
+    <string name="mode_latest">Letzte Hilfszüge</string>
     <string name="mode_station">Messpunkte</string>
     <string name="mode_grid">Gitter</string>
     <string name="mode_fixed">Fester Rahmen</string>
@@ -872,7 +872,7 @@
     <string name="title_draw">Zeichnen</string>
     <string name="title_draw_area">FLÄCHE %1$s</string>
     <string name="title_draw_line">LINIE %1$s</string>
-    <!-- TODO string name="title_draw_line_no_stations">LINE %1$s: no stations</string -->
+    <string name="title_draw_line_no_stations">LINIE %1$s: kein Messpunkt</string>
     <string name="title_draw_point">PUNKT %1$s</string>
     <string name="title_edit">Element:</string>
     <string name="title_edit_user_station">Benutzer-Messpunkt</string>
@@ -962,8 +962,8 @@
   <string name="pref_bezier_step_summary">Abstand zwischen Punkten auf exportierter Linie [m]</string>
   <string name="pref_leg_shots_title">Min. Messungen für Messzüge</string>
   <string name="pref_leg_shots_summary">Minimale Anzahl Messungen zur Erkennung als Messzug</string>
-  <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
-  <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent</string -->
+  <string name="pref_recent_timeout_title">Zeitdauer für neue Daten</string>
+  <string name="pref_recent_timeout_summary">Zeit nach welcher Daten nicht mehr als 'neu' markiert werden</string>
   <string name="pref_station_prefix_title">Exportiere Messpunkt Prefix</string>
   <string name="pref_station_prefix_summary">Exportiere Messpunkt Prefix (compass)</string>
   <string name="pref_compass_splays_title">Exportiere Hilfszüge</string>
@@ -1003,10 +1003,10 @@
   <string name="pref_svg_linedirstroke_summary">Dicke der Ausrichtungslinie in SVG</string>
   <string name="pref_svg_line_dir_title">SVG Ausrichtungslinie</string>
   <string name="pref_svg_line_dir_summary">Ausrichtungslinienpfeile in SVG Export</string>
-  <string name="pref_kml_stations_title">KML Stationen</string>
-  <string name="pref_kml_stations_summary">Stationen zu KML Export hinzufügen</string>
-  <string name="pref_kml_splays_title">KML Hilfslinien</string>
-  <string name="pref_kml_splays_summary">Hilfslinien zu KML Export hinzufügen</string>
+  <string name="pref_kml_stations_title">Messpunkte in KML/GeoJson</string>
+  <string name="pref_kml_stations_summary">Messpunkte zu KML/GeoJson Export hinzufügen</string>
+  <string name="pref_kml_splays_title">Hilfslinien in KML/GeoJson</string>
+  <string name="pref_kml_splays_summary">Hilfslinien zu KML/GeoJson Export hinzufügen</string>
 
   <string name="pref_sock_type_title">Anschlussart</string>
   <string name="pref_sock_type_summary">Socket erzeugen</string>
@@ -1175,8 +1175,8 @@
   <string name="pref_segment_message">Minimaler Abstand zwischen Punkten auf einer Linie</string>
   <string name="pref_linestyle_title">Linientyp</string>
   <string name="pref_linestyle_summary">Linientyp</string>
-  <!-- TODO string name="pref_linecontinue_title">Line continue</string -->
-  <!-- TODO string name="pref_linecontinue_summary">Line default continue-mode</string -->
+  <string name="pref_linecontinue_title">Line fortsetzen</string>
+  <string name="pref_linecontinue_summary">Standard Fortsetzungs-Modus von Linien</string>
   <string name="pref_lineacc_title">Interpolations-Genauigkeit</string>
   <string name="pref_lineacc_summary">Interpolationsgenauigkeit</string>
   <string name="pref_lineacc_message">Interpolationsgenauigkeit</string>
