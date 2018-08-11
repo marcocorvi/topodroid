@@ -300,7 +300,7 @@ class Archiver
             }
             fout.close();
             if ( sql ) {
-              TDLog.Log( TDLog.LOG_ZIP, "Zip sqlfile \"" + pathname + "\"" );
+              TDLog.Log( TDLog.LOG_ZIP, "Zip sqlfile \"" + pathname + "\" DB version " + mApp.mManifestDbVersion );
               sql_success = ( app_data.loadFromFile( pathname, mApp.mManifestDbVersion ) >= 0 );
               TopoDroidUtil.deleteFile( pathname );
             }
@@ -317,7 +317,7 @@ class Archiver
     }
     if ( ok_manifest == 0 && ! sql_success ) {
       TDLog.Error( "ERROR SQL" );
-      // TODO tell user that there was a problem
+      // tell user that there was a problem
       return -5;
     }
 

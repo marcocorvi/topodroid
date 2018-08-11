@@ -381,14 +381,16 @@ class ConnectionHandler extends Handler
          app_data.doInsertShot( mSid, Integer.parseInt(data[1]), Long.parseLong(data[2]), Long.parseLong(data[3]),
            data[4], data[5],
            Double.parseDouble(data[6]), Double.parseDouble(data[7]), Double.parseDouble(data[8]), Double.parseDouble(data[9]),
-           Integer.parseInt(data[10]), Integer.parseInt(data[11]), Integer.parseInt(data[12]), Integer.parseInt(data[13]),
-           Integer.parseInt(data[14]), data[15], false );
+           Integer.parseInt(data[10]), Double.parseDouble(data[11]),
+	   Integer.parseInt(data[12]), Integer.parseInt(data[13]), Integer.parseInt(data[14]),
+           Integer.parseInt(data[15]), data[16], false );
          break;
        case DataListener.SHOT_INSERTAT:
          app_data.insertShotAt( mSid, Integer.parseInt(data[1]), Long.parseLong(data[2]), Long.parseLong(data[3]),
            Double.parseDouble(data[4]), Double.parseDouble(data[5]), Double.parseDouble(data[6]), Double.parseDouble(data[7]),
-           Long.parseLong(data[8]), Long.parseLong(data[9]),
-           Integer.parseInt(data[10]),
+           Long.parseLong(data[8]), Double.parseDouble(data[9]),
+	   Long.parseLong(data[10]),
+           Integer.parseInt(data[11]),
            false );
          break;
 
@@ -541,17 +543,18 @@ class ConnectionHandler extends Handler
 
   public void onInsertShot( long sid, long id, long millis, long color, String from, String to, 
                           double d, double b, double c, double r, 
-                          long extend, long flag, long leg, long status, long shot_type, String comment ) 
+                          long extend, double stretch, long flag, long leg, long status, long shot_type, String comment ) 
   {
     enqueue( DataListener.SHOT_INSERT, 
-      String.format(Locale.US, "%d|%d|%d|%d|%s|%s|%.2f|%.1f|%.1f|%.1f|%d|%d|%d|%d|%d|%s|",
-      (int)sid, (int)id, millis, color, from, to, d, b, c, r, (int)extend, (int)flag, (int)leg, (int)status, (int)shot_type, comment ) );
+      String.format(Locale.US, "%d|%d|%d|%d|%s|%s|%.2f|%.1f|%.1f|%.1f|%d|%.2f|%d|%d|%d|%d|%s|",
+      (int)sid, (int)id, millis, color, from, to, d, b, c, r, (int)extend, stretch, (int)flag, (int)leg, (int)status, (int)shot_type, comment ) );
   }
 
-  public void onInsertShotAt( long sid, long at, long millis, long color, double d, double b, double c, double r, long e, long leg, long t ) 
+  public void onInsertShotAt( long sid, long at, long millis, long color, double d, double b, double c, double r, long e, 
+		  double stretch, long leg, long t ) 
   {
     enqueue( DataListener.SHOT_INSERTAT, 
-      String.format(Locale.US, "%d|%d|%d|%d|%.2f|%.1f|%.1f|%.1f|%d|%d|%d", (int)sid, (int)at, millis, color, d, b, c, r, (int)e, (int)leg, (int)t ) );
+      String.format(Locale.US, "%d|%d|%d|%d|%.2f|%.1f|%.1f|%.1f|%d|i%.2f|%d|%d", (int)sid, (int)at, millis, color, d, b, c, r, (int)e, stretch, (int)leg, (int)t ) );
   }
 
   // public void transferShots( long sid, long old_sid, long old_id ) { }

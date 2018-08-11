@@ -112,16 +112,17 @@ class DataListenerSet
 
   void onInsertShot( long sid, long id, long millis, long color, String from, String to,
                             double d, double b, double c, double r, 
-                            long extend, long flag, long leg, long status, long shot_type, String comment )
+                            long extend, double stretch, long flag, long leg, long status, long shot_type, String comment )
   {
     for ( DataListener l : mListeners )
-      l.onInsertShot( sid, id, millis, color, from, to, d, b, c, r, extend, flag, leg, status, shot_type, comment );
+      l.onInsertShot( sid, id, millis, color, from, to, d, b, c, r, extend, stretch, flag, leg, status, shot_type, comment );
   }
 
   // @param e extend
   // @param t type
-  void onInsertShotAt( long sid, long at, long millis, long color, double d, double b, double c, double r, long e, long leg, long t )
-  { for ( DataListener l : mListeners ) l.onInsertShotAt( sid, at, millis, color, d, b, c, r, e, leg, t ); }
+  void onInsertShotAt( long sid, long at, long millis, long color, double d, double b, double c, double r,
+		  long e, double stretch, long leg, long t )
+  { for ( DataListener l : mListeners ) l.onInsertShotAt( sid, at, millis, color, d, b, c, r, e, stretch, leg, t ); }
 
   // public void transferShots( long sid, long old_sid, long old_id );
 

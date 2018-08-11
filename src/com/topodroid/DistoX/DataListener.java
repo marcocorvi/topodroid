@@ -102,11 +102,12 @@ interface DataListener
 
   void onInsertShot( long sid, long id, long millis, long color, String from, String to, 
                           double d, double b, double c, double r, 
-                          long extend, long flag, long leg, long status, long shot_type, String comment );
+                          long extend, double stretch, long flag, long leg, long status, long shot_type, String comment );
 
   // @param e extend
   // @param t type
-  void onInsertShotAt( long sid, long at, long millis, long color, double d, double b, double c, double r, long e, long leg, long t );
+  void onInsertShotAt( long sid, long at, long millis, long color, double d, double b, double c, double r,
+		  long e, double stretch, long leg, long t );
 
   // void transferShots( long sid, long old_sid, long old_id );
 

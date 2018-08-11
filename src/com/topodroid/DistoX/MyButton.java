@@ -40,7 +40,7 @@ class MyButton
   static private int mSize = 42;
   private final static boolean USE_CACHE = true;
 
-  static Random rand = new Random();
+  // static Random rand = new Random();
 
   // CACHE : using a cache for the BitmapDrawing does not dramatically improve perfoormanaces
   static private SparseArray<BitmapDrawable> mBitmapCache = USE_CACHE ? new SparseArray<BitmapDrawable>()
