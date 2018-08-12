@@ -963,7 +963,7 @@
   <string name="pref_leg_shots_title">Min. Messungen für Messzüge</string>
   <string name="pref_leg_shots_summary">Minimale Anzahl Messungen zur Erkennung als Messzug</string>
   <string name="pref_recent_timeout_title">Zeitdauer für neue Daten</string>
-  <string name="pref_recent_timeout_summary">Zeit nach welcher Daten nicht mehr als 'neu' markiert werden</string>
+  <string name="pref_recent_timeout_summary">Zeit nach welcher Daten nicht mehr als \'neu\' markiert werden</string>
   <string name="pref_station_prefix_title">Exportiere Messpunkt Prefix</string>
   <string name="pref_station_prefix_summary">Exportiere Messpunkt Prefix (compass)</string>
   <string name="pref_compass_splays_title">Exportiere Hilfszüge</string>

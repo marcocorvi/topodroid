@@ -8,6 +8,10 @@
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
+ *
+ *  Note: variables
+ *     String[] vals for String.split
+ *     ContentValues cv
  */
 package com.topodroid.DistoX;
 
@@ -71,6 +75,7 @@ class DataHelper extends DataSetObservable
   private final static String WHERE_SID_NAME    = "surveyId=? AND name=?";
   private final static String WHERE_SID_STATUS  = "surveyId=? AND status=?";
   private final static String WHERE_SID_STATUS_LEG  = "surveyId=? AND status=? AND fStation > \"\" AND tStation > \"\"";
+  private final static String WHERE_SID_LEG     = "surveyId=? AND fStation > \"\" AND tStation > \"\"";
   private final static String WHERE_SID_SHOTID  = "surveyId=? AND shotId=?";
   private final static String WHERE_SID_START   = "surveyId=? AND start=?";
 
@@ -552,11 +557,11 @@ class DataHelper extends DataSetObservable
   boolean renameSurvey( long id, String name, boolean forward )
   {
     boolean ret = true;
-    ContentValues vals = new ContentValues();
-    vals.put("name", name );
+    ContentValues cv = new ContentValues();
+    cv.put("name", name );
     try {
       myDB.beginTransaction();
-      myDB.update( SURVEY_TABLE, vals, "id=?", new String[]{ Long.toString(id) } );
+      myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(id) } );
       myDB.setTransactionSuccessful();
       if ( forward && mListeners != null ) { // synchronized( mListeners )
         mListeners.onUpdateSurveyName( id, name );
@@ -568,21 +573,27 @@ class DataHelper extends DataSetObservable
     return ret;
   }
 
+  private ContentValues makeSurveyInfoCcontentValues( String date, String team, double decl, String comment,
+                                String init_station, int xsections )
+  {
+    ContentValues cv = new ContentValues();
+    cv.put( "day", date );
+    cv.put( "team", ((team != null)? team : "") );
+    cv.put( "declination", decl );
+    cv.put( "comment", ((comment != null)? comment : "") );
+    cv.put( "init_station", ((init_station != null)? init_station : "") );
+    cv.put( "xsections", xsections );
+    return cv;
+  }
+
   boolean updateSurveyInfo( long id, String date, String team, double decl, String comment,
                                 String init_station, int xsections, boolean forward )
   {
     boolean ret = false;
-    ContentValues vals = new ContentValues();
-    vals.put( "day", date );
-    vals.put( "team", ((team != null)? team : "") );
-    vals.put( "declination", decl );
-    vals.put( "comment", ((comment != null)? comment : "") );
-    vals.put( "init_station", ((init_station != null)? init_station : "") );
-    vals.put( "xsections", xsections );
-
+    ContentValues cv = makeSurveyInfoCcontentValues( date, team, decl, comment, init_station, xsections );
     try {
       myDB.beginTransaction();
-      myDB.update( SURVEY_TABLE, vals, "id=?", new String[]{ Long.toString(id) } );
+      myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(id) } );
       myDB.setTransactionSuccessful();
       if ( forward && mListeners != null ) { // synchronized( mListeners )
         mListeners.onUpdateSurveyInfo( id, date, team, decl, comment, init_station, xsections );
@@ -605,12 +616,12 @@ class DataHelper extends DataSetObservable
     return ret;
   }
 
-  private boolean doUpdateSurvey( long id, ContentValues vals, String msg )
+  private boolean doUpdateSurvey( long id, ContentValues cv, String msg )
   {
     boolean ret = false;
     try {
       myDB.beginTransaction();
-      myDB.update( SURVEY_TABLE, vals, "id=?", new String[]{ Long.toString(id) } );
+      myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(id) } );
       myDB.setTransactionSuccessful();
       ret = true;
     } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
@@ -620,12 +631,12 @@ class DataHelper extends DataSetObservable
     return ret;
   }
 
-  private boolean doUpdate( String table, ContentValues vals, long sid, long id, String msg )
+  private boolean doUpdate( String table, ContentValues cv, long sid, long id, String msg )
   {
     boolean ret = false;
     try {
       myDB.beginTransaction();
-      myDB.update( table, vals, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
+      myDB.update( table, cv, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
       myDB.setTransactionSuccessful();
       ret = true;
     } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
@@ -670,11 +681,11 @@ class DataHelper extends DataSetObservable
   private boolean updateStatus( String table, long id, long sid, long status )
   {
     boolean ret = false;
-    ContentValues vals = new ContentValues();
-    vals.put( "status", status );
+    ContentValues cv = new ContentValues();
+    cv.put( "status", status );
     try {
       myDB.beginTransaction();
-      myDB.update( table, vals, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
+      myDB.update( table, cv, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
       myDB.setTransactionSuccessful();
       ret = true;
     } catch ( SQLiteDiskIOException e )  {  handleDiskIOError( e );
@@ -704,10 +715,10 @@ class DataHelper extends DataSetObservable
   boolean updateSurveyDayAndComment( long id, String date, String comment, boolean forward )
   {
     if ( date == null ) return false;
-    ContentValues vals = new ContentValues();
-    vals.put( "day", date );
-    vals.put( "comment", (comment != null)? comment : "" );
-    if ( doUpdateSurvey( id, vals, "survey day+cmt" ) ) {
+    ContentValues cv = new ContentValues();
+    cv.put( "day", date );
+    cv.put( "comment", (comment != null)? comment : "" );
+    if ( doUpdateSurvey( id, cv, "survey day+cmt" ) ) {
       if ( forward && mListeners != null ) { // synchronized( mListeners )
         mListeners.onUpdateSurveyDayAndComment( id, date, comment );
       }
@@ -717,9 +728,9 @@ class DataHelper extends DataSetObservable
 
   void updateSurveyTeam( long id, String team, boolean forward )
   {
-    ContentValues vals = new ContentValues();
-    vals.put( "team", team );
-    if ( doUpdateSurvey( id, vals, "survey team" ) ) {
+    ContentValues cv = new ContentValues();
+    cv.put( "team", team );
+    if ( doUpdateSurvey( id, cv, "survey team" ) ) {
       if ( forward && mListeners != null ) { // synchronized( mListeners )
         mListeners.onUpdateSurveyTeam( id, team );
       }
@@ -728,9 +739,9 @@ class DataHelper extends DataSetObservable
 
   void updateSurveyInitStation( long id, String station, boolean forward )
   {
-    ContentValues vals = new ContentValues();
-    vals.put( "init_station", station );
-    if ( doUpdateSurvey( id, vals, "survey init_station" ) ) {
+    ContentValues cv = new ContentValues();
+    cv.put( "init_station", station );
+    if ( doUpdateSurvey( id, cv, "survey init_station" ) ) {
       if ( forward && mListeners != null ) { // synchronized( mListeners )
         mListeners.onUpdateSurveyInitStation( id, station );
       }
@@ -738,9 +749,9 @@ class DataHelper extends DataSetObservable
   }
   void updateSurveyDeclination( long id, double decl, boolean forward )
   {
-    ContentValues vals = new ContentValues();
-    vals.put( "declination", decl );
-    if ( doUpdateSurvey( id, vals, "survey decl" ) ) {
+    ContentValues cv = new ContentValues();
+    cv.put( "declination", decl );
+    if ( doUpdateSurvey( id, cv, "survey decl" ) ) {
       if ( forward && mListeners != null ) { // synchronized( mListeners )
         mListeners.onUpdateSurveyDeclination( id, decl );
       }
@@ -1320,21 +1331,21 @@ class DataHelper extends DataSetObservable
           transferSketches( old_survey.name, new_survey.name, sid, old_sid, blk.mFrom );
         }
 
-        ContentValues vals = new ContentValues();
-        vals.put( "surveyId", sid );
-        vals.put( "shotId",   myNextId );
+        ContentValues cv = new ContentValues();
+        cv.put( "surveyId", sid );
+        cv.put( "shotId",   myNextId );
         String where[] = new String[2];
         where[0] = Long.toString( old_sid );
         List< SensorInfo > sensors = selectSensorsAtShot( old_sid, old_id ); // transfer sensors
         for ( SensorInfo sensor : sensors ) {
           where[1] = Long.toString( sensor.id );
-          myDB.update( SENSOR_TABLE, vals, WHERE_SID_ID, where );
+          myDB.update( SENSOR_TABLE, cv, WHERE_SID_ID, where );
         }
 
         AudioInfo audio = getAudio( old_sid, old_id ); // transfer audio
         if ( audio != null ) {
           where[1] = Long.toString( audio.shotid );
-          myDB.update( AUDIO_TABLE, vals, WHERE_SID_SHOTID, where );
+          myDB.update( AUDIO_TABLE, cv, WHERE_SID_SHOTID, where );
           File oldfile = new File( TDPath.getSurveyAudioFile( old_survey.name, Long.toString(audio.shotid) ) );
           File newfile = new File( TDPath.getSurveyAudioFile( new_survey.name, Long.toString(audio.shotid) ) );
           if ( oldfile.exists() && ! newfile.exists() ) {
@@ -1347,7 +1358,7 @@ class DataHelper extends DataSetObservable
         List< PhotoInfo > photos = selectPhotoAtShot( old_sid, old_id ); // transfer photos
         for ( PhotoInfo photo : photos ) {
           where[1] = Long.toString( photo.id );
-          myDB.update( PHOTO_TABLE, vals, WHERE_SID_ID, where );
+          myDB.update( PHOTO_TABLE, cv, WHERE_SID_ID, where );
           File oldfile = new File( TDPath.getSurveyJpgFile( old_survey.name, Long.toString(photo.id) ) );
           File newfile = new File( TDPath.getSurveyJpgFile( new_survey.name, Long.toString(photo.id) ) );
           if ( oldfile.exists() && ! newfile.exists() ) {
@@ -1401,6 +1412,35 @@ class DataHelper extends DataSetObservable
     return at;
   }
 
+  private ContentValues makeShotContentValues( long sid, long id, long millis, long color, String from, String to, 
+                          double d, double b, double c, double r, double acc, double mag, double dip,
+                          long extend, double stretch, long flag, long leg, long status, long shot_type,
+                          String comment )
+  {
+    ContentValues cv = new ContentValues();
+    cv.put( "surveyId", sid );
+    cv.put( "id",       id );
+    cv.put( "fStation", from );
+    cv.put( "tStation", to );
+    cv.put( "distance", d );
+    cv.put( "bearing",  b );
+    cv.put( "clino",    c );
+    cv.put( "roll",     r );
+    cv.put( "acceleration", acc );
+    cv.put( "magnetic", mag );
+    cv.put( "dip",      dip );
+    cv.put( "extend",   extend );
+    cv.put( "flag",     flag );
+    cv.put( "leg",      leg );
+    cv.put( "status",   status );
+    cv.put( "comment",  comment );
+    cv.put( "type",     shot_type );
+    cv.put( "millis",   millis );
+    cv.put( "color",    color );
+    cv.put( "stretch",  stretch );
+    return cv;
+  }
+
   // return the new-shot id
   // called by ConnectionHandler too
   long doInsertShot( long sid, long id, long millis, long color, String from, String to, 
@@ -1417,28 +1457,8 @@ class DataHelper extends DataSetObservable
     } else {
       myNextId = id;
     }
-    ContentValues cv = new ContentValues();
-    cv.put( "surveyId", sid );
-    cv.put( "id",       id );
-    cv.put( "fStation", from );
-    cv.put( "tStation", to );
-    cv.put( "distance", d );
-    cv.put( "bearing",  b );
-    cv.put( "clino",    c );
-    cv.put( "roll",     r );
-    cv.put( "acceleration", 0.0 );
-    cv.put( "magnetic", 0.0 );
-    cv.put( "dip",      0.0 );
-    cv.put( "extend",   extend );
-    cv.put( "flag",     flag );
-    cv.put( "leg",      leg );
-    cv.put( "status",   status );
-    cv.put( "comment",  comment );
-    cv.put( "type",     shot_type );
-    cv.put( "millis",   millis );
-    cv.put( "color",    color );
-    cv.put( "stretch",  stretch );
-
+    ContentValues cv = makeShotContentValues( sid, id, millis, color, from, to, d, b, c, r, 0.0, 0.0, 0.0,
+		    extend, stretch, flag, leg, status, shot_type, comment );
     if ( doInsert( SHOT_TABLE, cv, "insert" ) ) {
       if ( forward && mListeners != null ) { // synchronized( mListeners )
         mListeners.onInsertShot( sid,  id, millis, color, from, to, d, b, c, r, extend, stretch, flag, leg, status, shot_type, comment );
@@ -1690,15 +1710,21 @@ class DataHelper extends DataSetObservable
     return minId( AUDIO_TABLE, sid );
   }
 
-  private long insertAudio( long sid, long id, long bid, String date )
+  private ContentValues makeAudioContentValues( long sid, long id, long bid, String date )
   {
-    if ( myDB == null ) return -1L;
-    if ( id == -1L ) id = maxId( AUDIO_TABLE, sid );
     ContentValues cv = new ContentValues();
     cv.put( "surveyId", sid );
     cv.put( "id",       id );
     cv.put( "shotId",   bid );
     cv.put( "date",     date );
+    return cv;
+  }
+
+  private long insertAudio( long sid, long id, long bid, String date )
+  {
+    if ( myDB == null ) return -1L;
+    if ( id == -1L ) id = maxId( AUDIO_TABLE, sid );
+    ContentValues cv = makeAudioContentValues( sid, id, bid, date );
     if ( ! doInsert( AUDIO_TABLE, cv, "insert audio" ) ) return -1L;
     return id;
   }
@@ -2567,12 +2593,13 @@ class DataHelper extends DataSetObservable
      Set<String> set = new TreeSet<String>();
      if ( myDB == null ) return set;
      Cursor cursor = myDB.query(SHOT_TABLE, new String[] { "fStation", "tStation" },
-                     WHERE_SID, new String[]{ Long.toString(sid) },
+                     WHERE_SID_LEG, new String[]{ Long.toString(sid) },
                      null, null, null );
      if (cursor.moveToFirst()) {
        do {
          String f = cursor.getString( 0 );
          String t = cursor.getString( 1 );
+	 // if ( f == null || t == null ) continue;
          if ( f.length() > 0 && t.length() > 0 ) {
            set.add( f );
            set.add( t );
@@ -3020,18 +3047,24 @@ class DataHelper extends DataSetObservable
     * @param title     photo title
     * @param comment   comment
     */
-   long insertPhoto( long sid, long id, long shotid, String title, String date, String comment )
+   private ContentValues makePhotoContentValues( long sid, long id, long shotid, long status, String title, String date, String comment )
    {
-     if ( myDB == null ) return -1L;
-     if ( id == -1L ) id = maxId( PHOTO_TABLE, sid );
      ContentValues cv = new ContentValues();
      cv.put( "surveyId",  sid );
      cv.put( "id",        id );
      cv.put( "shotId",    shotid );
-     cv.put( "status",    TDStatus.NORMAL );
+     cv.put( "status",    status );
      cv.put( "title",     title );
      cv.put( "date",      date );
      cv.put( "comment",   (comment == null)? "" : comment );
+     return cv;
+   }
+
+   long insertPhoto( long sid, long id, long shotid, String title, String date, String comment )
+   {
+     if ( myDB == null ) return -1L;
+     if ( id == -1L ) id = maxId( PHOTO_TABLE, sid );
+     ContentValues cv = makePhotoContentValues( sid, id, shotid, TDStatus.NORMAL, title, date, comment );
      if ( ! doInsert( PHOTO_TABLE, cv, "photo insert" ) ) return -1L;
      return id;
    }
@@ -3044,11 +3077,11 @@ class DataHelper extends DataSetObservable
    boolean updatePhoto( long sid, long id, String comment )
    {
      if ( myDB == null ) return false;
-     ContentValues vals = new ContentValues();
-     vals.put( "comment", comment );
+     ContentValues cv = new ContentValues();
+     cv.put( "comment", comment );
      myDB.beginTransaction();
      try {
-       myDB.update( PHOTO_TABLE, vals, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
+       myDB.update( PHOTO_TABLE, cv, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
        myDB.setTransactionSuccessful();
      } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
      } catch (SQLiteException e) { logError("photo update", e); 
@@ -3078,21 +3111,28 @@ class DataHelper extends DataSetObservable
     * @param type      sensor type
     * @param value     sensor value
     */
-   long insertSensor( long sid, long id, long shotid, String title, String date, String comment,
-   String type, String value )
+   private ContentValues makeSensorContentValues( long sid, long id, long shotid, long status,
+		   String title, String date, String comment, String type, String value )
    {
-     if ( id == -1L ) id = maxId( SENSOR_TABLE, sid );
-     if ( myDB == null ) return -1L;
      ContentValues cv = new ContentValues();
      cv.put( "surveyId",  sid );
      cv.put( "id",        id );
      cv.put( "shotId",    shotid );
-     cv.put( "status",    TDStatus.NORMAL );
+     cv.put( "status",    status );
      cv.put( "title",     title );
      cv.put( "date",      date );
      cv.put( "comment",   (comment == null)? "" : comment );
      cv.put( "type",      type );
      cv.put( "value",     value );
+     return cv;
+   }
+
+   long insertSensor( long sid, long id, long shotid, String title, String date, String comment,
+   String type, String value )
+   {
+     if ( id == -1L ) id = maxId( SENSOR_TABLE, sid );
+     if ( myDB == null ) return -1L;
+     ContentValues cv = makeSensorContentValues( sid, id, shotid, TDStatus.NORMAL, title, date, comment, type, value );
      if ( ! doInsert( SENSOR_TABLE, cv, "sensor insert" ) ) return -1L;
      return id;
    }
@@ -3111,11 +3151,11 @@ class DataHelper extends DataSetObservable
    boolean updateSensor( long sid, long id, String comment )
    {
      if ( myDB == null ) return false;
-     ContentValues vals = new ContentValues();
-     vals.put( "comment", comment );
+     ContentValues cv = new ContentValues();
+     cv.put( "comment", comment );
      myDB.beginTransaction();
      try {
-       myDB.update( SENSOR_TABLE, vals, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
+       myDB.update( SENSOR_TABLE, cv, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
        myDB.setTransactionSuccessful();
      } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
      } catch ( SQLiteException e ) { logError("sensor update", e); 
@@ -3209,19 +3249,10 @@ class DataHelper extends DataSetObservable
      return insertFixed( sid, id, station, lng, lat, alt, asl, comment, status, source, "", 0, 0, 0, 2 );
    }
 
-   private long insertFixed( long sid, long id, String station, double lng, double lat, double alt, double asl,
+   private ContentValues makeFixedContentValues( long sid, long id, String station, double lng, double lat, double alt, double asl,
                             String comment, long status, long source,
                             String cs, double cs_lng, double cs_lat, double cs_alt, long cs_n_dec )
    {
-     // Log.v("DistoX", "insert fixed id " + id + " station " + station );
-     if ( id != -1L ) return id;
-     if ( myDB == null ) return -1L;
-     long fid = getFixedId( sid, station );
-     if ( fid != -1L ) return fid;     // check non-deleted fixeds
-     dropDeletedFixed( sid, station ); // drop deleted fixed if any
-
-     id = maxId( FIXED_TABLE, sid );
-     // TDLog.Log( TDLog.LOG_DB, "insert Fixed id " + id );
      ContentValues cv = new ContentValues();
      cv.put( "surveyId",  sid );
      cv.put( "id",        id );
@@ -3238,21 +3269,32 @@ class DataHelper extends DataSetObservable
      cv.put( "cs_altitude",  cs_alt );
      cv.put( "source",     source );
      cv.put( "cs_decimals", cs_n_dec );
+     return cv;
+   }
+
+   private long insertFixed( long sid, long id, String station, double lng, double lat, double alt, double asl,
+                            String comment, long status, long source,
+                            String cs, double cs_lng, double cs_lat, double cs_alt, long cs_n_dec )
+   {
+     // Log.v("DistoX", "insert fixed id " + id + " station " + station );
+     if ( id != -1L ) return id;
+     if ( myDB == null ) return -1L;
+     long fid = getFixedId( sid, station );
+     if ( fid != -1L ) return fid;     // check non-deleted fixeds
+     dropDeletedFixed( sid, station ); // drop deleted fixed if any
+
+     id = maxId( FIXED_TABLE, sid );
+     // TDLog.Log( TDLog.LOG_DB, "insert Fixed id " + id );
+     ContentValues cv = makeFixedContentValues( sid, id, station, lng, lat, alt, asl, comment, status, source,
+		     cs, cs_lng, cs_lat, cs_alt, cs_n_dec );
      if ( ! doInsert( FIXED_TABLE, cv, "insert fixed" ) ) return -1L;
      return id;
    }
 
-   long insertPlot( long sid, long id, String name, long type, long status, String start, String view,
+   private ContentValues makePlotContentValues( long sid, long id, String name, long type, long status, String start, String view,
                            double xoffset, double yoffset, double zoom, double azimuth, double clino,
-                           String hide, String nick, int orientation, boolean forward )
+                           String hide, String nick, int orientation )
    {
-     // Log.v( TopoDroidApp.TAG, "insert plot " + name + " start " + start + " azimuth " + azimuth );
-     // Log.v("DistoXX", "insert plot <" + name + "> hide <" + hide + "> nick <" + nick + ">" );
-     if ( myDB == null ) return -1L;
-     long ret = getPlotId( sid, name );
-     if ( ret >= 0 ) return -1;
-     if ( view == null ) view = "";
-     if ( id == -1L ) id = maxId( PLOT_TABLE, sid );
      ContentValues cv = new ContentValues();
      cv.put( "surveyId", sid );
      cv.put( "id",       id );
@@ -3269,6 +3311,22 @@ class DataHelper extends DataSetObservable
      cv.put( "hide",     hide );
      cv.put( "nick",     nick );
      cv.put( "orientation", orientation );
+     return cv;
+   }
+
+   long insertPlot( long sid, long id, String name, long type, long status, String start, String view,
+                           double xoffset, double yoffset, double zoom, double azimuth, double clino,
+                           String hide, String nick, int orientation, boolean forward )
+   {
+     // Log.v( TopoDroidApp.TAG, "insert plot " + name + " start " + start + " azimuth " + azimuth );
+     // Log.v("DistoXX", "insert plot <" + name + "> hide <" + hide + "> nick <" + nick + ">" );
+     if ( myDB == null ) return -1L;
+     long ret = getPlotId( sid, name );
+     if ( ret >= 0 ) return -1;
+     if ( view == null ) view = "";
+     if ( id == -1L ) id = maxId( PLOT_TABLE, sid );
+     ContentValues cv = makePlotContentValues( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, 
+		     azimuth, clino, hide, nick, orientation );
      if ( doInsert( PLOT_TABLE, cv, "plot insert" ) ) {
        if ( forward && mListeners != null ) { // synchronized( mListeners )
          mListeners.onInsertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation );
@@ -3393,9 +3451,9 @@ class DataHelper extends DataSetObservable
     if ( ! hasFixedStation( id, sid, station ) ) {
       dropDeletedFixed( sid, station ); // drop deleted fixed at station, if any
 
-      ContentValues vals = new ContentValues();
-      vals.put( "station", station );
-      ret = doUpdate( FIXED_TABLE, vals, sid, id, "fixed update" );
+      ContentValues cv = new ContentValues();
+      cv.put( "station", station );
+      ret = doUpdate( FIXED_TABLE, cv, sid, id, "fixed update" );
     }
     return ret;
   }
@@ -3407,60 +3465,60 @@ class DataHelper extends DataSetObservable
 
   void updateFixedStationComment( long id, long sid, String station, String comment )
   {
-    ContentValues vals = new ContentValues();
-    vals.put( "station", station );
-    vals.put( "comment", comment );
-    doUpdate( FIXED_TABLE, vals, sid, id, "fixed cmt" );
+    ContentValues cv = new ContentValues();
+    cv.put( "station", station );
+    cv.put( "comment", comment );
+    doUpdate( FIXED_TABLE, cv, sid, id, "fixed cmt" );
   }
 
   void updateFixedAltitude( long id, long sid, double alt, double asl )
   {
     if ( myDB == null ) return;
-    ContentValues vals = new ContentValues();
-    vals.put( "altitude",   alt );
-    vals.put( "altimetric", asl );
-    doUpdate( FIXED_TABLE, vals, sid, id, "fixed alt" );
+    ContentValues cv = new ContentValues();
+    cv.put( "altitude",   alt );
+    cv.put( "altimetric", asl );
+    doUpdate( FIXED_TABLE, cv, sid, id, "fixed alt" );
   }
 
   void updateFixedData( long id, long sid, double lng, double lat, double alt )
   {
     if ( myDB == null ) return;
-    ContentValues vals = new ContentValues();
-    vals.put( "longitude", lng );
-    vals.put( "latitude",  lat );
-    vals.put( "altitude",  alt );
-    doUpdate( FIXED_TABLE, vals, sid, id, "fixed data" );
+    ContentValues cv = new ContentValues();
+    cv.put( "longitude", lng );
+    cv.put( "latitude",  lat );
+    cv.put( "altitude",  alt );
+    doUpdate( FIXED_TABLE, cv, sid, id, "fixed data" );
   }
 
   void updateFixedData( long id, long sid, double lng, double lat, double alt, double asl )
   {
     if ( myDB == null ) return;
-    ContentValues vals = new ContentValues();
-    vals.put( "longitude", lng );
-    vals.put( "latitude",  lat );
-    vals.put( "altitude",  alt );
-    vals.put( "altimetric", asl );
-    doUpdate( FIXED_TABLE, vals, sid, id, "fixed data" );
+    ContentValues cv = new ContentValues();
+    cv.put( "longitude", lng );
+    cv.put( "latitude",  lat );
+    cv.put( "altitude",  alt );
+    cv.put( "altimetric", asl );
+    doUpdate( FIXED_TABLE, cv, sid, id, "fixed data" );
   }
 
   void updateFixedCS( long id, long sid, String cs, double lng, double lat, double alt, long n_dec )
   {
     if ( myDB == null ) return;
-    ContentValues vals = new ContentValues();
+    ContentValues cv = new ContentValues();
     if ( cs != null && cs.length() > 0 ) {
-      vals.put( "cs_name", cs );
-      vals.put( "cs_longitude", lng );
-      vals.put( "cs_latitude",  lat );
-      vals.put( "cs_altitude",  alt );
-      vals.put( "cs_decimals",  n_dec );
+      cv.put( "cs_name", cs );
+      cv.put( "cs_longitude", lng );
+      cv.put( "cs_latitude",  lat );
+      cv.put( "cs_altitude",  alt );
+      cv.put( "cs_decimals",  n_dec );
     } else {
-      vals.put( "cs_name", "" );
-      vals.put( "cs_longitude", 0 );
-      vals.put( "cs_latitude",  0 );
-      vals.put( "cs_altitude",  0 );
-      vals.put( "cs_decimals",  2 );
+      cv.put( "cs_name", "" );
+      cv.put( "cs_longitude", 0 );
+      cv.put( "cs_latitude",  0 );
+      cv.put( "cs_altitude",  0 );
+      cv.put( "cs_decimals",  2 );
     }
-    doUpdate( FIXED_TABLE, vals, sid, id, "fixed cs" );
+    doUpdate( FIXED_TABLE, cv, sid, id, "fixed cs" );
   }
 
   boolean hasSurveyName( String name )  { return hasName( name, SURVEY_TABLE ); }
@@ -3706,19 +3764,12 @@ class DataHelper extends DataSetObservable
      return ret;
    }
 
-
-   long insertSketch3d( long sid, long id, String name, long status, String start, String st1, String st2,
+   private ContentValues makeSketch3dContentValues( long sid, long id, String name, long status, String start, String st1, String st2,
                            double xoffsettop, double yoffsettop, double zoomtop,
                            double xoffsetside, double yoffsetside, double zoomside,
                            double xoffset3d, double yoffset3d, double zoom3d,
                            double x, double y, double z, double azimuth, double clino )
    {
-     if ( myDB == null ) return -1L;
-     long ret = getSketch3dId( sid, name );
-     if ( ret >= 0 ) return -1;
-     if ( id == -1L ) id = maxId( SKETCH_TABLE, sid );
-     // Log.v( TopoDroidApp.TAG, "Survey ID " + sid + " Sketch ID " + id );
-
      ContentValues cv = new ContentValues();
      cv.put( "surveyId", sid );
      cv.put( "id",       id );
@@ -3741,6 +3792,22 @@ class DataHelper extends DataSetObservable
      cv.put( "vert",     z );
      cv.put( "azimuth",  azimuth );
      cv.put( "clino",    clino );
+     return cv;
+   }
+
+   long insertSketch3d( long sid, long id, String name, long status, String start, String st1, String st2,
+                           double xoffsettop, double yoffsettop, double zoomtop,
+                           double xoffsetside, double yoffsetside, double zoomside,
+                           double xoffset3d, double yoffset3d, double zoom3d,
+                           double x, double y, double z, double azimuth, double clino )
+   {
+     if ( myDB == null ) return -1L;
+     long ret = getSketch3dId( sid, name );
+     if ( ret >= 0 ) return -1;
+     if ( id == -1L ) id = maxId( SKETCH_TABLE, sid );
+     // Log.v( TopoDroidApp.TAG, "Survey ID " + sid + " Sketch ID " + id );
+     ContentValues cv = makeSketch3dContentValues( sid, id, name, status, start, st1, st2, xoffsettop, yoffsettop, zoomtop,
+		     xoffsetside, yoffsetside, zoomside, xoffset3d, yoffset3d, zoom3d, x, y, z, azimuth, clino );
      if ( ! doInsert( SKETCH_TABLE, cv, "sketch insert" ) ) return -1L;
      return id;
    }
@@ -4008,7 +4075,7 @@ class DataHelper extends DataSetObservable
     */
    long loadFromFile( String filename, int db_version )
    {
-     boolean success = true; // whether the load is successful
+     boolean success = false; // whether the load is successful
      long sid = -1;
      long id, status, shotid;
      String station, title, date, name, comment;
@@ -4032,7 +4099,7 @@ class DataHelper extends DataSetObservable
        if ( table.equals(SURVEY_TABLE) ) { 
          long skip_sid = scanline0.longValue( );
          name          = scanline0.stringValue( );
-         String day    = scanline0.stringValue( );
+         date          = scanline0.stringValue( );
          String team   = scanline0.stringValue( );
          double decl   = 0; if ( db_version > 14 ) scanline0.doubleValue( );
          comment       = scanline0.stringValue( );
@@ -4041,173 +4108,226 @@ class DataHelper extends DataSetObservable
          if ( db_version > 29) xsections = (int)( scanline0.longValue( ) );
 
          sid = setSurvey( name, false );
-         success &= updateSurveyInfo( sid, day, team, decl, comment, init_station, xsections, false );
-         // Log.v( "DistoX_DB", "updateSurveyInfo: " + success );
 
-         while ( (line = br.readLine()) != null ) {
-           TDLog.Log( TDLog.LOG_DB, "loadFromFile: " + line );
-           vals = line.split(" ", 4);
-           table = vals[2];
-           v = vals[3];
-           Scanline scanline1 = new Scanline( v, v.indexOf('(')+1, v.lastIndexOf(')') );
-           // pos = v.indexOf( '(' ) + 1;
-           // len = v.lastIndexOf( ')' );
-           // scanline1.skipSpaces( );
-           // TDLog.Log( TDLog.LOG_DB, "loafFromFile " + table + " " + v );
+         try {
+           myDB.beginTransaction();
+           // success &= updateSurveyInfo( sid, date, team, decl, comment, init_station, xsections, false );
+           ContentValues cv = makeSurveyInfoCcontentValues( date, team, decl, comment, init_station, xsections );
+           myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(sid) } );
+           // Log.v( "DistoX_DB", "updateSurveyInfo: " + success );
 
-           skip_sid = scanline1.longValue( );
-           id = scanline1.longValue( );
-           // Log.v("DistoX", "table " + table + " id " + id + " v " + v );
+           while ( (line = br.readLine()) != null ) {
+             TDLog.Log( TDLog.LOG_DB, "loadFromFile: " + line );
+             vals = line.split(" ", 4);
+             table = vals[2];
+             v = vals[3];
+             Scanline scanline1 = new Scanline( v, v.indexOf('(')+1, v.lastIndexOf(')') );
+             skip_sid = scanline1.longValue( );
+             id = scanline1.longValue( );
+             // Log.v("DistoX_DB", "table " + table + " id " + id + " v " + v );
 
-           if ( table.equals(AUDIO_TABLE) ) { // FIXME AUDIO
-             shotid  = scanline1.longValue( );
-             date    = scanline1.stringValue( );
-             if ( shotid >= 0 ) {
-               if ( insertAudio( sid, id, shotid, date ) < 0 ) { success = false; }
-               // TDLog.Log( TDLog.LOG_DB, "loadFromFile photo " + sid + " " + id + " " + title + " " + name );
+             if ( table.equals(AUDIO_TABLE) ) // ---------------- FIXME_AUDIO
+	     {
+               shotid = scanline1.longValue( );
+               date   = scanline1.stringValue( );
+               if ( shotid >= 0 ) {
+                 // if ( insertAudio( sid, id, shotid, date ) < 0 ) { success = false; }
+                 cv = makeAudioContentValues( sid, id, shotid, date );
+                 myDB.insert( AUDIO_TABLE, null, cv ); 
+                 // TDLog.Log( TDLog.LOG_DB, "loadFromFile photo " + sid + " " + id + " " + title + " " + name );
+               }
+
              }
+	     else if ( table.equals(SENSOR_TABLE) ) // ------------ FIXME_SENSORS
+	     {
+               id      = scanline1.longValue( );
+               shotid  = scanline1.longValue( );
+               status  = scanline1.longValue( );
+               title   = scanline1.stringValue( );
+               date    = scanline1.stringValue( );
+               comment = scanline1.stringValue( );
+               String type  = scanline1.stringValue( );
+               String value = scanline1.stringValue( );
+               if ( shotid >= 0 ) {
+                 // if ( insertSensor( sid, id, shotid, title, date, comment, type, value ) >= 0 ) {
+                 //   success &= updateStatus( SENSOR_TABLE, id, sid, status );
+	         // } else {
+	         //   success = false;
+	         // }
+                 cv = makeSensorContentValues( sid, id, shotid, status, title, date, comment, type, value );
+                 myDB.insert( SENSOR_TABLE, null, cv ); 
+                 // TDLog.Log( TDLog.LOG_DB, "loadFromFile photo " + sid + " " + id + " " + title + " " + name );
+               }
 
-           } else if ( table.equals(SENSOR_TABLE) ) { // FIXME SENSORS
-             // "id", "shotId", "status", "title", "date", "comment", "type", "value" 
-             id      = scanline1.longValue( );
-             shotid  = scanline1.longValue( );
-             status  = scanline1.longValue( );
-             title   = scanline1.stringValue( );
-             date    = scanline1.stringValue( );
-             comment = scanline1.stringValue( );
-             String type  = scanline1.stringValue( );
-             String value = scanline1.stringValue( );
-             if ( shotid >= 0 ) {
-               if ( insertSensor( sid, id, shotid, title, date, comment, type, value ) >= 0 ) {
-                 success &= updateStatus( SENSOR_TABLE, id, sid, status );
-	       } else {
-		 success = false;
-	       }
-               // TDLog.Log( TDLog.LOG_DB, "loadFromFile photo " + sid + " " + id + " " + title + " " + name );
              }
-
-           } else if ( table.equals(PHOTO_TABLE) ) { // FIXME PHOTO
-             shotid  = scanline1.longValue( );
-             title   = scanline1.stringValue( );
-             date    = scanline1.stringValue( );
-             comment = scanline1.stringValue( );
-             if ( shotid >= 0 ) {
-               if ( insertPhoto( sid, id, shotid, title, date, comment ) < 0 ) { success = false; }
-               // TDLog.Log( TDLog.LOG_DB, "loadFromFile photo " + sid + " " + id + " " + title + " " + name );
+	     else if ( table.equals(PHOTO_TABLE) ) // --------------- FIXME_PHOTO
+             {
+               shotid  = scanline1.longValue( );
+               title   = scanline1.stringValue( );
+               date    = scanline1.stringValue( );
+               comment = scanline1.stringValue( );
+               if ( shotid >= 0 ) {
+                 // if ( insertPhoto( sid, id, shotid, title, date, comment ) < 0 ) { success = false; }
+                 cv = makePhotoContentValues( sid, id, shotid, TDStatus.NORMAL, title, date, comment );
+                 myDB.insert( PHOTO_TABLE, null, cv ); 
+                 // TDLog.Log( TDLog.LOG_DB, "loadFromFile photo " + sid + " " + id + " " + title + " " + name );
+               }
              }
-           } else if ( table.equals(PLOT_TABLE) ) { // ***** PLOTS
-             name         = scanline1.stringValue( );
-             long type    = scanline1.longValue( ); if ( db_version <= 20 ) if ( type == 3 ) type = 5;
-             status       = scanline1.longValue( );
-             String start = scanline1.stringValue( );
-             String view  = scanline1.stringValue( );
-             double xoffset = scanline1.doubleValue( );
-             double yoffset = scanline1.doubleValue( );
-             double zoom  = scanline1.doubleValue( );
-             double azimuth = scanline1.doubleValue( );
-             double clino = ( db_version > 20 )? scanline1.doubleValue( ) : 0;
-             String hide  = ( db_version > 24 )? scanline1.stringValue( ) : "";
-             String nick  = ( db_version > 30 )? scanline1.stringValue( ) : "";
-	     int orientation = (db_version > 32 )? (int)(scanline1.longValue()) : 0; // default PlotInfo.ORIENTATION_PORTRAIT
-             if ( insertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation, false ) < 0 ) { success = false; }
-             // TDLog.Log( TDLog.LOG_DB, "loadFromFile plot " + sid + " " + id + " " + start + " " + name );
+	     else if ( table.equals(PLOT_TABLE) ) // ---------- PLOTS
+	     {
+               name         = scanline1.stringValue( );
+               long type    = scanline1.longValue( ); if ( db_version <= 20 ) if ( type == 3 ) type = 5;
+               status       = scanline1.longValue( );
+               String start = scanline1.stringValue( );
+               String view  = scanline1.stringValue( );
+               double xoffset = scanline1.doubleValue( );
+               double yoffset = scanline1.doubleValue( );
+               double zoom  = scanline1.doubleValue( );
+               double azimuth = scanline1.doubleValue( );
+               double clino = ( db_version > 20 )? scanline1.doubleValue( ) : 0;
+               String hide  = ( db_version > 24 )? scanline1.stringValue( ) : "";
+               String nick  = ( db_version > 30 )? scanline1.stringValue( ) : "";
+	       int orientation = (db_version > 32 )? (int)(scanline1.longValue()) : 0; // default PlotInfo.ORIENTATION_PORTRAIT
+               // if ( insertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation, false ) < 0 ) { success = false; }
+               cv = makePlotContentValues( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, 
+			       azimuth, clino, hide, nick, orientation );
+               myDB.insert( PLOT_TABLE, null, cv ); 
+               // TDLog.Log( TDLog.LOG_DB, "loadFromFile plot " + sid + " " + id + " " + start + " " + name );
+               // Log.v( "DistoX_DB", "loadFromFile plot " + sid + " " + id + " " + start + " " + name + " success " + success );
    
-/* FIXME BEGIN SKETCH_3D */
-           } else if ( table.equals(SKETCH_TABLE) ) { // ***** SKETCHES
-             name         = scanline1.stringValue( );
-             status       = scanline1.longValue( );
-             String start = scanline1.stringValue( );
-             String st1   = scanline1.stringValue( );
-             String st2   = scanline1.stringValue( );
-             double xofft  = scanline1.doubleValue( );
-             double yofft  = scanline1.doubleValue( );
-             double zoomt  = scanline1.doubleValue( );
-             double xoffs  = scanline1.doubleValue( );
-             double yoffs  = scanline1.doubleValue( );
-             double zooms  = scanline1.doubleValue( );
-             double xoff3  = scanline1.doubleValue( );
-             double yoff3  = scanline1.doubleValue( );
-             double zoom3  = scanline1.doubleValue( );
-             double east   = scanline1.doubleValue( );
-             double south  = scanline1.doubleValue( );
-             double vert   = scanline1.doubleValue( );
-             double azimuth= scanline1.doubleValue( );
-             double clino  = scanline1.doubleValue( );
-             if ( insertSketch3d( sid, id, name, status, start, st1, st2, xofft, yofft, zoomt, xoffs, yoffs, zooms, xoff3, yoff3, zoom3, east, south, vert, azimuth, clino ) < 0 ) { success = false; }
-/* END SKETCH_3D */
-           } else if ( table.equals(SHOT_TABLE) ) { // ***** SHOTS
-             String from = scanline1.stringValue( );
-             String to   = scanline1.stringValue( );
-             double d    = scanline1.doubleValue( );
-             double b    = scanline1.doubleValue( );
-             double c    = scanline1.doubleValue( );
-             double r    = scanline1.doubleValue( );
-             double acc  = scanline1.doubleValue( );
-             double mag  = scanline1.doubleValue( );
-             double dip  = scanline1.doubleValue( );
-             long extend = scanline1.longValue( );
-             long flag   = scanline1.longValue( );
-             long leg    = scanline1.longValue( );
-             status      = scanline1.longValue( );
-             comment     = scanline1.stringValue( );
-             // FIXME N.B. shot_type is not saved before 22
-             long type   = 0; if ( db_version > 21 ) type   = scanline1.longValue( );
-	     long millis = 0; if ( db_version > 31 ) millis = scanline1.longValue( );
-	     long color  = 0; if ( db_version > 33 ) color  = scanline1.longValue( );
-	     double stretch = 0; if ( db_version > 35 ) stretch = scanline1.doubleValue( );
-
-             if ( doInsertShot( sid, id, millis, color, from, to, d, b, c, r, extend, stretch, flag, leg, status, type, comment, false ) >= 0 ) {
-               success &= updateShotAMDR( id, sid, acc, mag, dip, r, false );
-	     } else {
-	       success = false;
-	     }
-             // Log.v( "DistoX_DB", "insertShot " + from + "-" + to + ": " + success );
-             // TDLog.Log( TDLog.LOG_DB, "insert shot " + sid + " " + id + " " + from + " " + to );
-           } else if ( table.equals(FIXED_TABLE) ) {
-             station    = scanline1.stringValue( );
-             double lng = scanline1.doubleValue( );
-             double lat = scanline1.doubleValue( );
-             double alt = scanline1.doubleValue( );
-             double asl = scanline1.doubleValue( );
-             comment    = scanline1.stringValue( );
-             status     = scanline1.longValue( );
-             long source = scanline1.longValue( );
-             double cs_lng = 0;
-             double cs_lat = 0;
-             double cs_alt = 0;
-	     long cs_n_dec = 2;
-             String cs = scanline1.stringValue( );
-             if ( cs.length() > 0 ) {
-               cs_lng = scanline1.doubleValue( );
-               cs_lat = scanline1.doubleValue( );
-               cs_alt = scanline1.doubleValue( );
-	       if ( db_version > 34 ) cs_n_dec = scanline1.longValue( );
+/* FIXME   BEGIN SKETCH_3D */
              }
-             // use id == -1L to force DB get a new id
-             if ( insertFixed( sid, -1L, station, lng, lat, alt, asl, comment, status, source, cs, cs_lng, cs_lat, cs_alt, cs_n_dec ) < 0 ) {
-	       success = false;
-	     }
-             // TDLog.Log( TDLog.LOG_DB, "loadFromFile fixed " + sid + " " + id + " " + station  );
-           } else if ( table.equals(STATION_TABLE) ) {
-             // N.B. ONLY IF db_version > 19
-             // TDLog.Error( "v <" + v + ">" );
-             // TDLog.Log( TDLog.LOG_DB, "loadFromFile station " + sid + " " + name + " " + comment + " " + flag  );
-             name    = scanline1.stringValue( );
-             comment = scanline1.stringValue( );
-             long flag = ( db_version > 25 )? scanline1.longValue() : 0;
-             success &= insertStation( sid, name, comment, flag );
+	     else if ( table.equals(SKETCH_TABLE) ) // -------------- SKETCHES
+	     {
+               name         = scanline1.stringValue( );
+               status       = scanline1.longValue( );
+               String start = scanline1.stringValue( );
+               String st1   = scanline1.stringValue( );
+               String st2   = scanline1.stringValue( );
+               double xofft  = scanline1.doubleValue( );
+               double yofft  = scanline1.doubleValue( );
+               double zoomt  = scanline1.doubleValue( );
+               double xoffs  = scanline1.doubleValue( );
+               double yoffs  = scanline1.doubleValue( );
+               double zooms  = scanline1.doubleValue( );
+               double xoff3  = scanline1.doubleValue( );
+               double yoff3  = scanline1.doubleValue( );
+               double zoom3  = scanline1.doubleValue( );
+               double east   = scanline1.doubleValue( );
+               double south  = scanline1.doubleValue( );
+               double vert   = scanline1.doubleValue( );
+               double azimuth= scanline1.doubleValue( );
+               double clino  = scanline1.doubleValue( );
+               // if ( insertSketch3d( sid, id, name, status, start, st1, st2, xofft, yofft, zoomt, xoffs, yoffs, zooms, xoff3, yoff3, zoom3, east, south, vert, azimuth, clino ) < 0 ) { success = false; }
+               cv = makeSketch3dContentValues( sid, id, name, status, start, st1, st2, xofft, yofft, zoomt,
+		     xoffs, yoffs, zooms, xoff3, yoff3, zoom3, east, south, vert, azimuth, clino );
+               myDB.insert( SKETCH_TABLE, null, cv ); 
+/* END SK  ETCH_3D */
+             }
+	     else if ( table.equals(SHOT_TABLE) ) // ------------ SHOTS
+             {
+               String from = scanline1.stringValue( );
+               String to   = scanline1.stringValue( );
+               double d    = scanline1.doubleValue( );
+               double b    = scanline1.doubleValue( );
+               double c    = scanline1.doubleValue( );
+               double r    = scanline1.doubleValue( );
+               double acc  = scanline1.doubleValue( );
+               double mag  = scanline1.doubleValue( );
+               double dip  = scanline1.doubleValue( );
+               long extend = scanline1.longValue( );
+               long flag   = scanline1.longValue( );
+               long leg    = scanline1.longValue( );
+               status      = scanline1.longValue( );
+               comment     = scanline1.stringValue( );
+               // FIXME N.B. shot_type is not saved before 22
+               long type   = 0; if ( db_version > 21 ) type   = scanline1.longValue( );
+	       long millis = 0; if ( db_version > 31 ) millis = scanline1.longValue( );
+	       long color  = 0; if ( db_version > 33 ) color  = scanline1.longValue( );
+	       double stretch = 0; if ( db_version > 35 ) stretch = scanline1.doubleValue( );
+
+               // if ( doInsertShot( sid, id, millis, color, from, to, d, b, c, r, extend, stretch, flag, leg, status, type, comment, false ) >= 0 ) {
+               //   success &= updateShotAMDR( id, sid, acc, mag, dip, r, false );
+	       // } else {
+	       //   success = false;
+	       // }
+               cv = makeShotContentValues( sid, id, millis, color, from, to, d, b, c, r, acc, mag, dip, extend, stretch, flag, leg, status,
+		      type, comment );
+               myDB.insert( SHOT_TABLE, null, cv ); 
+
+               // Log.v( "DistoX_DB", "insertShot " + from + "-" + to + ": " + success );
+               // TDLog.Log( TDLog.LOG_DB, "insert shot " + sid + " " + id + " " + from + " " + to );
+             }
+	     else if ( table.equals(FIXED_TABLE) )
+	     {
+               station    = scanline1.stringValue( );
+               double lng = scanline1.doubleValue( );
+               double lat = scanline1.doubleValue( );
+               double alt = scanline1.doubleValue( );
+               double asl = scanline1.doubleValue( );
+               comment    = scanline1.stringValue( );
+               status     = scanline1.longValue( );
+               long source = scanline1.longValue( );
+               double cs_lng = 0;
+               double cs_lat = 0;
+               double cs_alt = 0;
+	       long cs_n_dec = 2;
+               String cs = scanline1.stringValue( );
+               if ( cs.length() > 0 ) {
+                 cs_lng = scanline1.doubleValue( );
+                 cs_lat = scanline1.doubleValue( );
+                 cs_alt = scanline1.doubleValue( );
+	         if ( db_version > 34 ) cs_n_dec = scanline1.longValue( );
+               }
+               // use id == -1L to force DB get a new id
+               // if ( insertFixed( sid, -1L, station, lng, lat, alt, asl, comment, status, source, cs, cs_lng, cs_lat, cs_alt, cs_n_dec ) < 0 ) {
+	       //   success = false;
+	       // }
+               cv = makeFixedContentValues( sid, -1L, station, lng, lat, alt, asl, comment, status, source,
+		     cs, cs_lng, cs_lat, cs_alt, cs_n_dec );
+               myDB.insert( FIXED_TABLE, null, cv ); 
+               // TDLog.Log( TDLog.LOG_DB, "loadFromFile fixed " + sid + " " + id + " " + station  );
+             } 
+	     else if ( table.equals(STATION_TABLE) )
+	     {
+               // N.B. ONLY IF db_version > 19
+               // TDLog.Error( "v <" + v + ">" );
+               // TDLog.Log( TDLog.LOG_DB, "loadFromFile station " + sid + " " + name + " " + comment + " " + flag  );
+               name    = scanline1.stringValue( );
+               comment = scanline1.stringValue( );
+               long flag = ( db_version > 25 )? scanline1.longValue() : 0;
+               // success &= insertStation( sid, name, comment, flag );
+               cv = makeStationContentValues( sid, name, comment, flag );
+               myDB.insert( STATION_TABLE, null, cv ); 
+             }
            }
-         }
+           myDB.setTransactionSuccessful();
+	   success = true;
+         } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
+         } catch ( SQLiteException e1 )       { logError("survey info", e1 ); 
+         } catch ( IllegalStateException e2 ) { logError("survey info", e2 );
+         } finally { myDB.endTransaction(); }
        }
        fr.close();
      } catch ( FileNotFoundException e ) {
      } catch ( IOException e ) {
      }
+     // Log.v( "DistoX_DB", "success: " + success + " SID " + sid );
 
      return (success ? sid : -sid );
    }
 
    // ----------------------------------------------------------------------
+   private ContentValues makeStationContentValues( long sid, String name, String comment, long flag )
+   {
+     ContentValues cv = new ContentValues();
+     cv.put( "surveyId",  sid );
+     cv.put( "name",      name );
+     cv.put( "comment",   comment );
+     cv.put( "flag",      flag );
+     return cv;
+   }
+
    boolean insertStation( long sid, String name, String comment, long flag )
    {
      if ( myDB == null ) return false;
@@ -4233,11 +4353,7 @@ class DataHelper extends DataSetObservable
        updateStationCommentStmt.bindString( 4, name );
        ret = doStatement( updateStationCommentStmt, "station update" );
      } else {
-       ContentValues cv = new ContentValues();
-       cv.put( "surveyId",  sid );
-       cv.put( "name",      name );
-       cv.put( "comment",   comment );
-       cv.put( "flag",      flag );
+       ContentValues cv = makeStationContentValues( sid, name, comment, flag );
        ret = doInsert( STATION_TABLE, cv, "station insert" );
      }
      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
