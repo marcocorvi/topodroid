@@ -58,6 +58,14 @@ public class MyListPreference extends ListPreference
   }
 
   @Override
-  public CharSequence getSummary() { return super.getEntry(); }
+  public CharSequence getSummary()
+  {
+    try {
+      return getEntry();
+    } catch ( ArrayIndexOutOfBoundsException e ) {
+      /* nothing */
+    }
+    return "Index out of bounds";
+  }
 }
 

@@ -85,7 +85,7 @@ import android.graphics.BitmapFactory;
 
 // import android.net.Uri;
 
-// import android.util.Log;
+import android.util.Log;
 import android.util.DisplayMetrics;
 
 import android.bluetooth.BluetoothAdapter;
@@ -579,7 +579,7 @@ public class TopoDroidApp extends Application
       mData  = new DataHelper( this, this, mDataListeners );
       mDData = new DeviceHelper( this, this, null ); 
 
-      mStationName = new StationName();
+      // mStationName = new StationName();
 
       // TDLog.Profile("TDApp prefs");
       // LOADING THE SETTINGS IS RATHER EXPENSIVE !!!
@@ -928,7 +928,7 @@ public class TopoDroidApp extends Application
   { 
     TDInstance.sid = -1;       // no survey by default
     TDInstance.survey = null;
-    clearCurrentStations();
+    StationName.clearCurrentStation();
     // resetManualCalibrations();
     ManualCalibration.reset();
 
@@ -1202,15 +1202,15 @@ public class TopoDroidApp extends Application
   }
 
   // =======================================================
-  StationName mStationName;
+  // StationName mStationName;
 
-  // void resetCurrentStationName( String name ) { mStationName.resetCurrentStationName( name ); }
-  boolean setCurrentStationName( String name ) { return mStationName.setCurrentStationName( name ); }
-  String getCurrentStationName() { return mStationName.getCurrentStationName(); }
-  boolean isCurrentStationName( String name ) { return mStationName.isCurrentStationName( name ); }
-  void clearCurrentStations() { mStationName.clearCurrentStations(); }
-  String getCurrentOrLastStation( ) { return mStationName.getCurrentOrLastStation( mData, TDInstance.sid); }
-  private void resetCurrentOrLastStation( ) { mStationName.resetCurrentOrLastStation( mData, TDInstance.sid); }
+  // void resetCurrentStationName( String name ) { StationName.resetCurrentStationName( name ); }
+  boolean setCurrentStationName( String name ) { return StationName.setCurrentStationName( name ); }
+  String getCurrentStationName() { return StationName.getCurrentStationName(); }
+  boolean isCurrentStationName( String name ) { return StationName.isCurrentStationName( name ); }
+  // void clearCurrentStation() { StationName.clearCurrentStation(); }
+  String getCurrentOrLastStation( ) { return StationName.getCurrentOrLastStation( mData, TDInstance.sid); }
+  private void resetCurrentOrLastStation( ) { StationName.resetCurrentOrLastStation( mData, TDInstance.sid); }
 
   // FIXME TROBOT
   static long trobotmillis = 0L;
@@ -1223,8 +1223,9 @@ public class TopoDroidApp extends Application
   void assignStationsAfter( DBlock blk0, List<DBlock> list )
   { 
     Set<String> sts = mData.selectAllStationsBefore( blk0.mId, TDInstance.sid, TDStatus.NORMAL  );
-    // Log.v("DistoX", "assign stations after " + blk0.Name() + " size " + list.size() );
+    // Log.v("DistoX", "assign stations after " + blk0.Name() + " size " + list.size() + " stations " + sts.size() );
     // if ( TDSetting.mSurveyStations < 0 ) return;
+    StationName.clearCurrentStation();
     if ( StationPolicy.doTopoRobot() ) {
       // long millis = SystemClock.uptimeMillis(); // FIXME TROBOT
       // if ( millis > trobotmillis + 10000 ) {
@@ -1255,18 +1256,18 @@ public class TopoDroidApp extends Application
       //   TDToast.make( R.string.toporobot_warning );
       //   trobotmillis = millis;
       // }
-      mStationName.assignStations_TRobot( mData, TDInstance.sid, list, sts );
+      StationName.assignStations_TRobot( mData, TDInstance.sid, list, sts );
       return;
     } 
     if ( StationPolicy.doBacksight() ) {
-      mStationName.assignStations_Backsight( mData, TDInstance.sid, list, sts );
+      StationName.assignStations_Backsight( mData, TDInstance.sid, list, sts );
       return;
     } 
     if ( StationPolicy.doTripod() ) {
-      mStationName.assignStations_Tripod( mData, TDInstance.sid, list, sts );
+      StationName.assignStations_Tripod( mData, TDInstance.sid, list, sts );
       return;
     }
-    mStationName.assignStations_Default( mData, TDInstance.sid, list, sts );
+    StationName.assignStations_Default( mData, TDInstance.sid, list, sts );
   }
 
   // ================================================================

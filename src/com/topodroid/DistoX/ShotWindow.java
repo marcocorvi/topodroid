@@ -88,7 +88,7 @@ import android.graphics.drawable.BitmapDrawable;
 
 import android.net.Uri;
 
-// import android.util.Log;
+import android.util.Log;
 
 public class ShotWindow extends Activity
                           implements OnItemClickListener
@@ -2003,6 +2003,7 @@ public class ShotWindow extends Activity
       shots = mApp_mData.selectAllShotsAfter( blk.mId, TDInstance.sid, TDStatus.NORMAL );
     // }
     // Set<String> stations = mApp_mData.selectAllStationsBefore( blk.mId, TDInstance.sid, TDStatus.NORMAL );
+    // Log.v("DistoX", "shots " + shots.size() );
     mApp.assignStationsAfter( blk, shots /*, stations */ );
 
     // DEBUG re-assign all the stations

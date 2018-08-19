@@ -35,11 +35,11 @@ class TriShot
   AverageLeg mAvgLeg;
   TriCluster cluster;
 
-  void dump()
-  {
-    Log.v("DistoXL", from + "-" + to + " " + (used?"u":"-") + (duplicate?"d":"-") + (surface?"s":"-") + (commented?"c ":"- ") + backshot
-		    + " blks " + blocks.size() );
-  }
+  // void dump()
+  // {
+  //   Log.v("DistoXL", from + "-" + to + " " + (used?"u":"-") + (duplicate?"d":"-") + (surface?"s":"-") + (commented?"c ":"- ") + backshot
+  //       	    + " blks " + blocks.size() );
+  // }
 
   TriShot( DBlock blk, String f, String t, int e, float s, int r )
   { 
