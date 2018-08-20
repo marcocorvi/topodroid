@@ -287,6 +287,7 @@ class DistoXNum
    */
   private float shortestPath( NumStation s1, NumStation s2 )
   {
+    // Log.v("DistoX-LOOP", "shortest path " + s1.name + " " + s2.name );
     Stack<NumStation> stack = new Stack<NumStation>();
     mStations.setShortestPath( 100000.0f );
     // for ( NumStation s : mStations ) {
@@ -299,9 +300,12 @@ class DistoXNum
     while ( ! stack.empty() ) {
       NumStation s = stack.pop();
       for ( NumShot e : mShots ) {
+        if ( e.from == s1 && e.to == s2 ) continue;
+        if ( e.from == s2 && e.to == s1 ) continue;
         if ( e.from == s && e.to != null ) {
           float d = s.mShortpathDist + e.length();
           if ( d < e.to.mShortpathDist ) {
+	    // Log.v("DistoX-LOOP", "set short dist T " + e.to.name + " : " + d );
             e.to.mShortpathDist = d;
             // e.to.path = from;
             stack.push( e.to );
@@ -309,6 +313,7 @@ class DistoXNum
         } else if ( e.to == s && e.from != null ) {
           float d = s.mShortpathDist + e.length();
           if ( d < e.from.mShortpathDist ) {
+	    // Log.v("DistoX-LOOP", "set short dist F " + e.from.name + " : " + d );
             e.from.mShortpathDist = d;
             // e.from.path = from;
             stack.push( e.from );
@@ -951,9 +956,18 @@ class DistoXNum
           float ext = DBlock.getReducedExtend( ts.extend, ts.stretch );
           if ( sf != null ) {
             sf.addAzimuth( ts.b(), iext );
+	    // Log.v("DistoX-LOOP", "process " + ts.from + " " + ts.to + " using " + sf.name ); 
 
             if ( st != null ) { // loop-closure
-              // Log.v("DistoXL", "loop closure at " + ts.from + "-" + ts.to );
+              // Log.v("DistoX-LOOP", "loop closure at " + ts.from + "-" + ts.to + " TO " + st.name );
+	     
+              // do close loop also on duplicate shots
+              // need the loop length to compute the fractional closure error
+              float length = shortestPath( sf, st) + Math.abs( ts.d() );  // FIXME length
+              // Log.v("DistoX-LOOP", "loop length " + length + " closure " + ts.d() + " " + ts.b() + " " + ts.c() );
+              mClosures.add( getClosureError( st, sf, ts.d(), ts.b(), ts.c(), length ) );
+	      // Log.v("DistoXL", "add closure " + sf.name + " " + st.name + " len " + length );
+              
               if ( /* TDSetting.mAutoStations || */ TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) { // do not close loop
                 // if ( TDLog.LOG_DEBUG ) Log.v( TDLog.TAG, "do not close loop");
                 // keep loop open: new station( id=ts.to, from=sf, ... )
@@ -969,7 +983,7 @@ class DistoXNum
 
                 sh = makeShotFromTmp( sf, st1, ts, 1, sf.mAnomaly, mDecl );
                 addShotToStations( sh, st1, sf );
-                // Log.v("DistoXL", "open loop at " + sf.name + " " + st.name + " TO " + ts.to );
+                // Log.v("DistoX-LOOP", "open loop at " + sf.name + " " + st.name + " TO " + st1.name + " " + st1.e + " " + st1.s + " " + st1.v );
               } else { // close loop
                 // Log.v("DistoXL", "close loop at " + sf.name + " " + st.name );
                 sh = makeShotFromTmp( sf, st, ts, 0, sf.mAnomaly, mDecl ); 
@@ -979,18 +993,11 @@ class DistoXNum
 	      // if ( iext == 0 ) length = TDMath.sqrt( length*length - ts.h()*ts.h() );
               addToStats( ts.duplicate, ts.surface, ts.d(), ((iext == 0)? Math.abs(ts.v()) : ts.d()), ts.h() );
 
-              // do close loop also on duplicate shots
-              // need the loop length to compute the fractional closure error
-              float length = shortestPath( sf, st) + Math.abs( ts.d() );  // FIXME length
-              mClosures.add( getClosureError( st, sf, ts.d(), ts.b(), ts.c(), length ) );
-	      // Log.v("DistoXL", "add closure " + sf.name + " " + st.name + " len " + length );
-              
               ts.used = true;
               repeat = true;
             }
             else // st null || st isBarrier
             { // forward shot: from --> to
-              // Log.v("DistoXL", "forward leg " + ts.from + "-" + ts.to );
               float bearing = ts.b() - sf.mAnomaly;
               st = new NumStation( ts.to, sf, ts.d(), bearing, ts.c(), ext, has_coords );
               if ( ! mStations.addStation( st ) ) mClosureStations.add( st );
@@ -1010,12 +1017,12 @@ class DistoXNum
               addShotToStations( sh, st, sf );
               ts.used = true;
               repeat = true;
+              // Log.v("DistoX-LOOP", "forward leg " + ts.from + "-" + ts.to + ": " + st.name + " " + st.e + " " + st.s + " " + st.v );
             }
           }
           else if ( st != null ) 
           { // sf == null: reversed shot only difference is '-' sign in new NumStation, and the new station is sf
             // if ( TDLog.LOG_DEBUG ) Log.v( TDLog.TAG, "reversed shot " + ts.from + " " + ts.to + " id " + ts.blocks.get(0).mId );
-            // Log.v("DistoXL", "reversed leg " + ts.from + "-" + ts.to );
             st.addAzimuth( (ts.b()+180)%360, -iext );
             float bearing = ts.b() - st.mAnomaly;
             sf = new NumStation( ts.from, st, - ts.d(), bearing, ts.c(), ext, has_coords );
@@ -1038,6 +1045,7 @@ class DistoXNum
             addShotToStations( sh, sf, st );
             ts.used = true;
             repeat = true;
+            // Log.v("DistoX-LOOP", "reversed leg " + ts.from + "-" + ts.to + ": " + sf.name + " " + sf.e + " " + sf.s + " " + sf.v );
           }
         }
       }
@@ -1557,6 +1565,15 @@ class DistoXNum
    */
   private String getClosureError( NumStation at, NumStation fr, float d, float b, float c, float len )
   {
+    // float tv = - d * TDMath.sind( c );
+    // float th =   d * TDMath.cosd( c );
+    // float te =   th * TDMath.sind( b );
+    // float ts = - th * TDMath.cosd( b );
+    // // FROM + T - AT
+    // Log.v("DistoX-LOOP", "closure at   " + at.name + " " + at.e + " " + at.s + " " + at.v );
+    // Log.v("DistoX-LOOP", "closure from " + fr.name + " " + fr.e + " " + fr.s + " " + fr.v );
+    // Log.v("DistoX-LOOP", "closure diff " + (fr.e-at.e) + " " + (fr.s-at.s) + " " + (fr.v-at.v) );
+    // Log.v("DistoX-LOOP", "closure " + te + " " + ts + " " + tv );
     float dv = TDMath.abs( fr.v - d * TDMath.sind(c) - at.v );
     float h0 = d * TDMath.abs( TDMath.cosd(c) );
     float ds = TDMath.abs( fr.s - h0 * TDMath.cosd( b ) - at.s );

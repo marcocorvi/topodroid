@@ -1212,8 +1212,7 @@ public class TopoDroidApp extends Application
   String getCurrentOrLastStation( ) { return StationName.getCurrentOrLastStation( mData, TDInstance.sid); }
   private void resetCurrentOrLastStation( ) { StationName.resetCurrentOrLastStation( mData, TDInstance.sid); }
 
-  // FIXME TROBOT
-  static long trobotmillis = 0L;
+  // static long trobotmillis = 0L; // TROBOT_MILLIS
 
   // called also by ShotWindow::updataBlockList
   // this re-assign stations to shots with station(s) already set
@@ -1227,7 +1226,7 @@ public class TopoDroidApp extends Application
     // if ( TDSetting.mSurveyStations < 0 ) return;
     StationName.clearCurrentStation();
     if ( StationPolicy.doTopoRobot() ) {
-      // long millis = SystemClock.uptimeMillis(); // FIXME TROBOT
+      // long millis = SystemClock.uptimeMillis(); // TROBOT_MILLIS
       // if ( millis > trobotmillis + 10000 ) {
       //   TDToast.make( R.string.toporobot_warning );
       //   trobotmillis = millis;
@@ -1251,7 +1250,7 @@ public class TopoDroidApp extends Application
     // Log.v("DistoX", "assign stations size " + list.size() );
     // if ( TDSetting.mSurveyStations < 0 ) return;
     if ( StationPolicy.doTopoRobot() ) {
-      // long millis = SystemClock.uptimeMillis(); // FIXME TROBOT
+      // long millis = SystemClock.uptimeMillis(); // TROBOT_MILLIS
       // if ( millis > trobotmillis + 10000 ) {
       //   TDToast.make( R.string.toporobot_warning );
       //   trobotmillis = millis;
