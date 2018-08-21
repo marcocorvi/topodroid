@@ -81,7 +81,7 @@ import android.graphics.RectF;
 import android.net.Uri;
 
 // import android.util.SparseArray;
-// import android.util.Log;
+import android.util.Log;
 
 /**
  */
@@ -479,10 +479,14 @@ public class DrawingWindow extends ItemDrawer
   private BitmapDrawable mBMadd;
   private BitmapDrawable mBMleft;
   private BitmapDrawable mBMright;
-  private BitmapDrawable mBMsplayNone;
+  private BitmapDrawable mBMsplayNone;       // grey bg
   private BitmapDrawable mBMsplayFront;
   private BitmapDrawable mBMsplayBack;
   private BitmapDrawable mBMsplayBoth;
+  private BitmapDrawable mBMsplayNoneBlack;  // black bg
+  private BitmapDrawable mBMsplayFrontBlack;
+  private BitmapDrawable mBMsplayBackBlack;
+  private BitmapDrawable mBMsplayBothBlack;
   private BitmapDrawable mBMeraseAll;
   private BitmapDrawable mBMerasePoint;
   private BitmapDrawable mBMeraseLine;
@@ -766,33 +770,38 @@ public class DrawingWindow extends ItemDrawer
   // used for splays in x-sections
   // the DBlock comes from a query in the DB and it is not the DBlock in the plan/profile
   //     therefore coloring the splays of those blocks does not affect the X-Section splay coloring
+  //
+  // @param a    angle between splay and normal to the plane
+  // @param blue true for splays at TO station
+  //
   private void addFixedSectionSplay( DBlock blk, float x1, float y1, float x2, float y2, float a,
                                      // float xoff, float yoff, 
                                      boolean blue )
   {
     // Log.v("DistoX", "Section splay angle " + a + " " + TDSetting.mVertSplay );
     DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
+    dpath.mExtend = a; 
     if ( blk.mPaint != null ) {
       dpath.setPathPaint( blk.mPaint );
     } else if ( blue ) {
       if ( blk.isXSplay() ) {
-        dpath.setPathPaint( BrushManager.fixedGreenPaint );
+        dpath.setPathPaint( BrushManager.fixedGreenPaint );    // GREEN
       } else if ( a > TDSetting.mSectionSplay ) {
-        dpath.setPathPaint( BrushManager.fixedSplay24Paint );
+        dpath.setPathPaint( BrushManager.fixedSplay24Paint );  // BLUE dashed-4  -- -- -- --
       } else if ( a < -TDSetting.mSectionSplay ) {
-        dpath.setPathPaint( BrushManager.fixedSplay23Paint );
+        dpath.setPathPaint( BrushManager.fixedSplay23Paint );  // BLUE dashed-3  --- --- ---
       } else {
-        dpath.setPathPaint( BrushManager.fixedSplay2Paint );
+        dpath.setPathPaint( BrushManager.fixedSplay2Paint );   // BLUE
       }
     } else {
       if ( blk.isXSplay() ) {
-        dpath.setPathPaint( BrushManager.fixedGreenPaint );
+        dpath.setPathPaint( BrushManager.fixedGreenPaint );    // GREEN
       } else if ( a > TDSetting.mSectionSplay ) {
-        dpath.setPathPaint( BrushManager.fixedSplay4Paint );
+        dpath.setPathPaint( BrushManager.fixedSplay4Paint );   // LIGHT_BLUE dashed-4
       } else if ( a < -TDSetting.mSectionSplay ) {
-        dpath.setPathPaint( BrushManager.fixedSplay3Paint );
+        dpath.setPathPaint( BrushManager.fixedSplay3Paint );   // LIGHT_BLUE dashed-3
       } else {
-        dpath.setPathPaint( BrushManager.fixedSplayPaint );
+        dpath.setPathPaint( BrushManager.fixedSplayPaint );    // LIGHT_BLUE
       }
     }
     // dpath.setPathPaint( blue? BrushManager.fixedSplay2Paint : BrushManager.fixedSplayPaint );
@@ -1485,7 +1494,7 @@ public class DrawingWindow extends ItemDrawer
     // FIXME_SK mButton1[ BTN_BLUETOOTH ].setVisibility( View.VISIBLE );
 
     // mButton1[ BTN_PLOT ].setVisibility( View.VISIBLE );
-    mButton1[BTN_PLOT].setOnLongClickListener( this );
+    if ( ! TDLevel.overExpert ) mButton1[BTN_PLOT].setOnLongClickListener( this );
     if ( TDLevel.overNormal && BTN_DIAL < mButton1.length ) mButton1[ BTN_DIAL ].setVisibility( View.VISIBLE );
   }
 
@@ -1494,26 +1503,27 @@ public class DrawingWindow extends ItemDrawer
     mApp.mSplayMode = mode;
     switch ( mode ) {
       case 0:
-        mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMsplayNone );
+        mButton1[ BTN_PLOT ].setBackgroundDrawable( mApp.mShowSectionSplays? mBMsplayNone : mBMsplayNoneBlack );
         if ( PlotInfo.isSection( mType ) ) mDrawingSurface.hideStationSplays( mTo );
         mDrawingSurface.hideStationSplays( mFrom );
         break;
       case 1:
-        mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMsplayFront );
+        mButton1[ BTN_PLOT ].setBackgroundDrawable( mApp.mShowSectionSplays? mBMsplayFront : mBMsplayFrontBlack );
         if ( PlotInfo.isSection( mType ) ) mDrawingSurface.showStationSplays( mTo );
         mDrawingSurface.hideStationSplays( mFrom );
         break;
       case 2:
-        mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMsplayBoth );
+        mButton1[ BTN_PLOT ].setBackgroundDrawable( mApp.mShowSectionSplays? mBMsplayBoth : mBMsplayBothBlack );
         if ( PlotInfo.isSection( mType ) ) mDrawingSurface.showStationSplays( mTo );
         mDrawingSurface.showStationSplays( mFrom );
         break;
       case 3:
-        mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMsplayBack );
+        mButton1[ BTN_PLOT ].setBackgroundDrawable( mApp.mShowSectionSplays? mBMsplayBack : mBMsplayBackBlack );
         if ( PlotInfo.isSection( mType ) ) mDrawingSurface.hideStationSplays( mTo );
         mDrawingSurface.showStationSplays( mFrom );
         break;
     }
+    mDrawingSurface.setSplayAlpha( mApp.mShowSectionSplays ); // not necessary ?
   }
 
 
@@ -1539,7 +1549,7 @@ public class DrawingWindow extends ItemDrawer
     // FIXME_SK mButton1[ BTN_BLUETOOTH ].setVisibility( View.GONE );
 
     // mButton1[ BTN_PLOT ].setVisibility( View.GONE );
-    mButton1[BTN_PLOT].setOnLongClickListener( null );
+    if ( ! TDLevel.overExpert ) mButton1[BTN_PLOT].setOnLongClickListener( null );
     if ( TDLevel.overNormal && BTN_DIAL < mButton1.length ) mButton1[ BTN_DIAL ].setVisibility( View.GONE );
   }
 
@@ -1572,6 +1582,10 @@ public class DrawingWindow extends ItemDrawer
     mBMsplayFront    = MyButton.getButtonBackground( mApp, res, R.drawable.iz_splay_front );
     mBMsplayBack     = MyButton.getButtonBackground( mApp, res, R.drawable.iz_splay_back );
     mBMsplayBoth     = MyButton.getButtonBackground( mApp, res, R.drawable.iz_splay_both );
+    mBMsplayNoneBlack  = MyButton.getButtonBackground( mApp, res, R.drawable.iz_splay_none_black );
+    mBMsplayFrontBlack = MyButton.getButtonBackground( mApp, res, R.drawable.iz_splay_front_black );
+    mBMsplayBackBlack  = MyButton.getButtonBackground( mApp, res, R.drawable.iz_splay_back_black );
+    mBMsplayBothBlack  = MyButton.getButtonBackground( mApp, res, R.drawable.iz_splay_both_black );
 
     if ( ! TDLevel.overNormal ) -- mNrButton2;
     mButton2 = new Button[ mNrButton2 + 1 ]; // DRAW
@@ -4310,12 +4324,19 @@ public class DrawingWindow extends ItemDrawer
           setConnectionStatus( mDataDownloader.getStatus() );
           mDataDownloader.doDataDownload( );
         }
-      } else if ( TDLevel.overBasic && b == mButton1[ BTN_PLOT ] ) {
-        if ( mType == PlotInfo.PLOT_EXTENDED ) {
-          new DrawingProfileFlipDialog( mActivity, this ).show();
-        } else {
-          return false; // not consumed
-        }
+      } else if ( b == mButton1[ BTN_PLOT ] ) {
+	if ( PlotInfo.isSketch2D( mType ) ) {
+          if ( TDLevel.overBasic && mType == PlotInfo.PLOT_EXTENDED ) {
+            new DrawingProfileFlipDialog( mActivity, this ).show();
+          } else {
+            return false; // not consumed
+	  }
+	} else if ( TDLevel.overExpert ) {
+	  mApp.mShowSectionSplays = ! mApp.mShowSectionSplays;
+	  // Log.v("DistoX", "toggle section splays " + mShowSectionSplays );
+	  mDrawingSurface.setSplayAlpha( mApp.mShowSectionSplays );
+          updateSplays( mApp.mSplayMode );
+	}
       } else if ( TDLevel.overBasic && b == mButton3[ BTN_REMOVE ] ) {
         SelectionPoint sp = mDrawingSurface.hotItem();
         if ( sp != null ) {

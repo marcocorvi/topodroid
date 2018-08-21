@@ -793,6 +793,8 @@ class DrawingSurface extends SurfaceView
     /* if ( mSplayStationsOff.contains( station ) ) */ mSplayStationsOff.remove( station );
     if ( ! mSplayStationsOn.contains( station ) ) mSplayStationsOn.add( station );
   }
+
+  void setSplayAlpha( boolean on ) { if ( mCommandManager3 != null ) mCommandManager3.setSplayAlpha(on); }
   
   
   void setStationXSections( List<PlotInfo> xsection_plan, List<PlotInfo> xsection_ext, long type2 )

@@ -58,7 +58,8 @@ class DrawingPath extends RectF
   // private int dir; // 0 x1 < x2, 1 y1 < y2, 2 x2 < x1, 3 y2 < y1
   DBlock mBlock;
   boolean mLandscape;
-  float mExtend;  // extend value for splays (= cos of angle splay-leg)
+  float mExtend;  // extend value for splays (= cos of angle between splay and leg)
+                  // x-sections: angle between splay and plane-normal
 
   protected float cx, cy; // midpoint scene coords
   // RectF mBBox;   // path boundig box (scene coords)
@@ -82,6 +83,8 @@ class DrawingPath extends RectF
   // {
   //   return mType >= DRAWING_PATH_STATION && mType <= DRAWING_PATH_AREA; 
   // }
+
+  void setPaintAlpha( boolean on ) { mPaint.setAlpha( (on ? 0xff : 0) ); }
 
   static boolean isReferenceType( int type ) 
   {

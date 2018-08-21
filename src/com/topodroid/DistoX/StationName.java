@@ -135,7 +135,7 @@ class StationName
   static void assignStationsAfter_Tripod( DataHelper data_helper, long sid, DBlock blk0, List<DBlock> list, Set<String> sts )
   { 
     ArrayList<DBlock> unassigned = new ArrayList<DBlock>();
-    boolean started = false;
+    // boolean started = false;
 
     // Log.v("DistoX-SN", "assign stations after - tripod");
     boolean bs = TDSetting.mDistoXBackshot;
@@ -144,7 +144,7 @@ class StationName
     boolean flip = false; // whether to swap leg-stations (backsight backward shot)
     // TDLog.Log( TDLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
 
-    DBlock prev = null;
+    DBlock prev = blk0;
     String from = null;
     String back = null;
     if ( bs ) {
@@ -193,6 +193,7 @@ class StationName
 	sts.add( station );
         // Log.v("DistoX", "S:"+ station + "   " + oldFrom + " " + from + "-" + back + "-" + next + ":" + station + " flip=" + (flip?"y":"n") );
       } else if ( blk.isMainLeg() ) { // tripod renumber includes only main legs
+        prev = blk;
         String p_from = from;
         String p_to   = next;
         if ( flip ) { // backward
@@ -222,6 +223,7 @@ class StationName
         // Log.v("DistoX", "L:"+from+"-"+ p_to + " " + oldFrom + " " + from + "-" + back + "-" + next + ":" + station + " flip=" + (flip?"y":"n") );
       } else if ( blk.isBackLeg() ) {
 	if ( main_from != null /* && main_to != null */ ) {
+          prev = blk;
 	  if ( bs ) {
             setBlockName( data_helper, sid, blk, main_from, main_to );
 	  } else {
@@ -230,13 +232,13 @@ class StationName
 	}
 	main_from = main_to = null;
       } else {
-	if ( started || ! blk0.isRelativeDistance( blk ) ) {
+	if ( /* started || */ ! blk.isRelativeDistance( prev ) ) {
 	  unassigned.add( blk );
-	  started = true;
+	  // started = true;
 	}
       }
     }
-    if ( started ) assignStations_Tripod( data_helper, sid, unassigned, sts );
+    if ( unassigned.size() > 0 ) assignStations_Tripod( data_helper, sid, unassigned, sts );
   }
 
   static void assignStations_Tripod( DataHelper data_helper, long sid, List<DBlock> list, Set<String> sts )
@@ -392,7 +394,7 @@ class StationName
   static void assignStationsAfter_Backsight( DataHelper data_helper, long sid, DBlock blk0, List<DBlock> list, Set<String> sts )
   { 
     ArrayList<DBlock> unassigned = new ArrayList<DBlock>();
-    boolean started = false;
+    // boolean started = false;
 
     // Log.v("DistoX-SN", "assign stations after - backsight");
     boolean bs = TDSetting.mDistoXBackshot; // whether distox is in backshot mode
@@ -402,7 +404,7 @@ class StationName
     // boolean flip = false; // whether to swap leg-stations (backsight backward shot)
     // TDLog.Log( TDLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
 
-    DBlock prev = null;
+    DBlock prev = blk0;
     String from = null;
     String to   = null;
     String next;
@@ -480,6 +482,7 @@ class StationName
 	}
 	sts.add( station );
       } else if ( blk.isLeg() ) {
+	prev = blk;
         String p_to;
         boolean is_backsight_shot = checkBacksightShot( blk, fore_length, fore_bearing, fore_clino ); 
         // Log.v("DistoX-SN", blk.mFrom + " " + blk.mTo + " backsight? " + is_backsight_shot );
@@ -513,13 +516,13 @@ class StationName
 	sts.add( from );
 	sts.add( p_to );
       } else {
-	if ( started || ! blk0.isRelativeDistance( blk ) ) {
+	if ( /* started || */ ! blk.isRelativeDistance( prev ) ) {
 	  unassigned.add( blk );
-	  started = true;
+	  // started = true;
 	}
       } 
     }
-    if ( started ) assignStations_Backsight( data_helper, sid, unassigned, sts );
+    if ( unassigned.size() > 0 ) assignStations_Backsight( data_helper, sid, unassigned, sts );
   }
 
   // DistoX backshot-mode is handled separately
@@ -645,7 +648,7 @@ class StationName
   static void assignStationsAfter_Default( DataHelper data_helper, long sid, DBlock blk0, List<DBlock> list, Set<String> sts )
   {
     ArrayList<DBlock> unassigned = new ArrayList<DBlock>();
-    boolean started = false;
+    // boolean started = false;
 
     boolean bs = TDSetting.mDistoXBackshot;
 
@@ -663,7 +666,7 @@ class StationName
     // boolean flip = false; // whether to swap leg-stations (backsight backward shot)
     // TDLog.Log( TDLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
 
-    DBlock prev = null;
+    DBlock prev = blk0;
     String from = bs ? blk0.mTo   : blk0.mFrom;
     String to   = bs ? blk0.mFrom : blk0.mTo;
     String next;
@@ -688,6 +691,7 @@ class StationName
 	}
 	sts.add( station );
       } else if ( blk.isMainLeg() ) {
+	prev = blk;
         if ( forward_shots ) {
           from = to;
           to   = next;
@@ -714,6 +718,7 @@ class StationName
 	sts.add( to );
       } else if ( blk.isBackLeg() ) {
 	if ( main_from != null /* && main_to != null */ ) {
+	  prev = blk;
 	  if ( bs ) {
             setBlockName( data_helper, sid, blk, main_from, main_to );
 	  } else {
@@ -723,14 +728,14 @@ class StationName
 	main_from = main_to = null;
       } else {
         // Log.v("DistoX-SN", "blk is skipped" + blk.mId );
-	if ( started || ! blk0.isRelativeDistance( blk ) ) {
+	if ( /* started || */ ! blk.isRelativeDistance( prev ) ) {
 	  unassigned.add( blk );
-	  started = true;
+	  // started = true;
 	}
       }
     }
    
-    if ( started ) assignStations_Default( data_helper, sid, unassigned, sts );
+    if ( unassigned.size() > 0 ) assignStations_Default( data_helper, sid, unassigned, sts );
   }
 
   // DistoX backshot-mode is handled separatedly
@@ -884,13 +889,13 @@ class StationName
   static void assignStationsAfter_TRobot( DataHelper data_helper, long sid, DBlock blk0, List<DBlock> list, Set<String> sts )
   {
     ArrayList<DBlock> unassigned = new ArrayList<DBlock>();
-    boolean started = false;
+    // boolean started = false;
 
     // Log.v("DistoX-SN", "assign stations after - TRobot");
     if ( TDSetting.mDistoXBackshot ) return;
     boolean bs = TDSetting.mDistoXBackshot;
 
-    DBlock prev = null;
+    DBlock prev = blk0;
     String from = blk0.mFrom;
     String to   = blk0.mTo;
     String next = DistoXStationName.incrementName( to, sts );
@@ -910,6 +915,7 @@ class StationName
 	}
 	sts.add( from );
       } else if ( blk.isMainLeg() ) { 
+        prev = blk;
         from = to;
         to   = next;
         next = DistoXStationName.incrementName( to, sts );
@@ -927,6 +933,7 @@ class StationName
 	sts.add( to );
       } else if ( blk.isBackLeg() ) {
 	if ( main_from != null /* && main_to != null */ ) {
+          prev = blk;
 	  if ( bs ) {
             setBlockName( data_helper, sid, blk, main_from, main_to );
 	  } else {
@@ -935,13 +942,13 @@ class StationName
 	}
 	main_from = main_to = null;
       } else {
-	if ( started || ! blk0.isRelativeDistance( blk ) ) {
+	if ( /* started || */ ! blk.isRelativeDistance( prev ) ) {
 	  unassigned.add( blk );
-	  started = true;
+	  // started = true;
 	}
       }
     }
-    if ( started ) assignStations_TRobot( data_helper, sid, unassigned, sts );
+    if ( unassigned.size() > 0 ) assignStations_TRobot( data_helper, sid, unassigned, sts );
   }
 
   static void assignStations_TRobot( DataHelper data_helper, long sid, List<DBlock> list, Set<String> sts )

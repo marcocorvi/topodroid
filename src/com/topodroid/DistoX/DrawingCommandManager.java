@@ -126,6 +126,13 @@ class DrawingCommandManager
     }
   }
 
+  void setSplayAlpha( boolean on ) 
+  {
+    for ( DrawingPath p : mSplaysStack ) {
+      if ( p.mExtend > TDSetting.mSectionSplay || p.mExtend < -TDSetting.mSectionSplay ) p.setPaintAlpha( on );
+    }
+  }
+
   /* Check if any line overlaps another of the same type
    * In case of overlap the overlapped line is removed
    */

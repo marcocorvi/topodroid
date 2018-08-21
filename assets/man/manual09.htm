@@ -25,8 +25,9 @@ If the splay clino is above the dash clino-threshold, it is dotted (positive cli
 In <u>profile</u> view the splay is dashed/dotted if the angle with the "closest" leg in azimuth is above the dash azimuth-threshold.
 However is the splay dash-coherence is checked the splays are dash/dotted as in plan view.<br><p>
 
-For <u>x-sections</u> the x-splays are green, the others are blue (or light blue), and dashed (or dotted) if the splay
-angle with the section plane is over the dash angle-threshold.<br><p>
+For <u>x-sections</u> the x-splays are green, the others are blue (TO station) or light blue (FROM station), and dotted or dashed
+if the angle between the splay and the normal to the section plane is below the dash angle-threshold [default 60 deg.] (dotted if in the 
+direction of the normal, dashed if opposite).<br><p>
 
 
 
@@ -54,7 +55,7 @@ The remaining buttons differ by the mode. In the <b>move</b> mode they are
 <li><a href="page_bluetooth.htm">Bluetooth</a> reset/controls</li>
 <li><a href="page_survey_notes.htm">Notes</a></li>
 <li>Drawing <a href="page_drawing_refs.htm">references</a>: legs, splays, stations, metric grid, and scalebar.</li>
-<li><u>Plan/Profile</u> switch.</li>
+<li><u>Plan/Profile</u> switch. (<u>splay-display mode</u>, for x-sections)</li>
 <li><a href="page_azimuth.htm">"extend" reference</a></li>
 </ul><br><p>
 
@@ -91,6 +92,14 @@ In the <b>move</b> mode the buttons "download", "bluetooth", "switch", and azimu
 is a button to select which splay to show. It cycles thru four states: "both", "viewed station", "behind station", "none".
 Accordingly, the drawing references dialog has no box for the splays.
 <br><p>
+
+<b>Long tap actions</b><br>
+A long tap on the active mode button opens the settings dialog [A].<br>
+The download button switches among the DistoXs [E].<br>
+In the extended profile view, a long tap on the display mode button flips the sketch [N].<br>
+With x-sections it toggles the display of splays that are off the section plane [T].<br>
+A long tap on the delete button removes the selected line/area point [N].<br>
+<p>
 
 
 <h4>MENUS</h4>

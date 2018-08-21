@@ -158,7 +158,9 @@ public class TopoDroidApp extends Application
     return false;
   }
 
-  int mSplayMode = 2; // cross-section splay display mode
+  // cross-section splay display mode
+  int mSplayMode = 2; 
+  boolean mShowSectionSplays = true;
   
   // ----------------------------------------------------------------------
   // data lister
