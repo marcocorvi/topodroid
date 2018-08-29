@@ -4,4 +4,10 @@
 TopoDroid code base
 
 This is the TopoDroid app (com.topodroid.DistoX) repository.
-All the code is provided under GNU Public Licence v. 3 
+
+TopoDroid is a productivity Android app for cave surveying.
+It is specially designed to do cave surveying with the DistoX, although it can be profitably used even without it.
+
+Visit the website sites.google.com/site/speleoapp for more informations about TopoDroid, and in particular for the version changes doc.
+
+All the code is provided under GNU General Public Licence v. 3 
