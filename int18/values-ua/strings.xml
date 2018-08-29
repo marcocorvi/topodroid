@@ -950,13 +950,10 @@
   <!-- UNUSED string name="pref_trobot_names_summary">Номера пікетів в стилі TopoRobot</string -->
   <string name="pref_ortho_lrud_title">Мін. кут бок. заміру для ЛПВН</string>
   <string name="pref_ortho_lrud_summary">Мін. кут між бок. заміром і вектором для розрахунку ЛПВН при експорті</string>
-  <string name="pref_ortho_lrud_message">мін. кут між бок. заміром і вектором для розрахунку ЛПВН</string>
   <!-- TODO string name="pref_lrud_vertical_title">UD min splay clino</string -->
   <!-- TODO string name="pref_lrud_vertical_summary">LRUD up/down minimum splay clino</string -->
-  <!-- TODO string name="pref_lrud_vertical_message">LRUD up/down minimum splay clino</string -->
   <!-- TODO string name="pref_lrud_horizontal_title">LR max splay clino</string -->
   <!-- TODO string name="pref_lrud_horizontal_summary">LRUD left/right maximum splay clino</string -->
-  <!-- TODO string name="pref_lrud_horizontal_message">LRUD left/right maximum splay clino</string -->
   <string name="pref_survex_eol_title">Закінчення рядка для Survex/Topo</string>
   <string name="pref_survex_eol_summary">Формат кінця рядка Survex/Topo</string>
   <string name="pref_survex_splay_title">Кінцевий пікет променя Survex</string>
@@ -992,8 +989,6 @@
   <!-- UNUSED string name="pref_device_type_summary">Модель DistoX</string -->
   <!-- UNUSED string name="pref_comm_retry_title">Спроб підключення</string  -->
   <!-- UNUSED string name="pref_comm_retry_summary">Число спроб підключення</string -->
-  <!-- UNUSED string name="pref_comm_retry_dialogtitle">К-сть спроб підключення</string -->
-  <!-- UNUSED string name="pref_comm_retry_message">К-сть спроб підключення</string -->
   <string name="pref_wait_laser_title">Пауза вкл. лазеру [мс]</string>
   <string name="pref_wait_laser_summary">Пауза після включення лазеру [мс]</string>
   <string name="pref_wait_shot_title">Пауза після заміра [мс]</string>
@@ -1012,13 +1007,11 @@
   <!-- TODO string name="pref_head_tail_summary">Get the number of data before downloading them</string -->
   <string name="pref_socket_delay_title">Затримка підключення</string>
   <string name="pref_socket_delay_summary">Затримка підключення при спряженні [0.1 сек]</string>
-  <string name="pref_socket_delay_dialogtitle">Затримка підключення при спряженні</string>
-  <string name="pref_socket_delay_message">Затримка підключення для спряження [0.1 сек]</string>
   <string name="pref_z6_workaround_title">Рішення для Z6</string>
   <string name="pref_z6_workaround_summary">Рішення для завантаження даних з телефонів Z6</string>
   <string name="pref_crs_title">CRS система координат </string>
   <string name="pref_crs_summary">CRS назва</string>
-  <string name="pref_crs_message">Введіть назву CRS як в Proj4</string>
+  <!-- FIXME string name="pref_crs_message">Введіть назву CRS як в Proj4</string -->
   <!-- UNUSED string name="pref_gps_averaging_title">Eсереднення даних GPS </string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Використовувати GPS Averaging?</string -->
 
@@ -1031,7 +1024,6 @@
   <string name="pref_shot_units_title">ОДИНИЦІ ВИМІРУ</string>
   <string name="pref_cwd_title">Робочий каталог</string>
   <!-- UNUSED string name="pref_cwd_summary">TopoDroid кореневий каталог</string -->
-  <!-- UNUSED string name="pref_cwd_message">Введіть кореневий каталог TopoDroid</string -->
   <string name="pref_pt_color_map_title">перетворення кольорів PocketTopo</string>
   <string name="pref_pt_color_map_summary">Відповідність кольорів PocketTopo типам об\'єктів (PocketTopo імпорт)</string>
   <string name="pref_text_size_title">Розмір текста</string>
@@ -1092,14 +1084,11 @@
   <string name="pref_team_summary">Группа зйомки за замовчуванням</string>
 
   <string name="pref_ethr_title">Поріг вертикальності бокового заміру</string>
-  <string name="pref_ethr_summary">Кутовий діапазон проекції (бок. замір)</string>
-  <string name="pref_ethr_message">Кут близько 90 для верт. проекції бок. заміру на вертикальній площині [град]</string>
+  <string name="pref_ethr_summary">Кут близько 90 для верт. проекції бок. заміру на вертикальній площині [град]</string>
   <string name="pref_vthr_title">Поріг вертикальності для відрізків</string>
-  <string name="pref_vthr_summary">Кутовий поріг ЛПВН/ЗВСЮ</string>
-  <string name="pref_vthr_message">Допустимий кут відрізка між ЛПВН/ЗВСЮ</string>
+  <string name="pref_vthr_summary">Допустимий кут відрізка між ЛПВН/ЗВСЮ</string>
 
   <string name="pref_plan_vthr_title">Поріг кута бок. замірів в плані</string>
-  <!-- UNUSED string name="pref_plan_vthr_summary">Поріг кута  бок. заміру в плані</string -->
   <string name="pref_plan_vthr_message">Поріг кута  бок. замірів які відображаються в плані</string>
   <string name="pref_init_station_title">Початковий пікет</string>
   <string name="pref_init_station_summary">Початковий пікет за замовчанням</string>
@@ -1129,7 +1118,6 @@
   <string name="pref_unscaled_points_title">Не-масштабовані значки точок</string>
   <string name="pref_unscaled_points_summary">Не масштабувати знаки точок</string>
   <string name="pref_segment_title">Крок точок в лінію</string>
-  <!-- UNUSED string name="pref_segment_summary">Крок точок на лінії</string -->
   <string name="pref_segment_message">Мінімальна відстань між точками в лінії</string>
   <string name="pref_linestyle_title">Стиль рмалювання ліній</string>
   <string name="pref_linestyle_summary">Спосіб відрисовки ліній</string>
@@ -1145,19 +1133,15 @@
   <string name="pref_group_by_summary">Групування даних калібрування</string>
   <string name="pref_group_title">Допуск в групі</string>
   <string name="pref_group_summary">Допуск для замірів в одній групі</string>
-  <string name="pref_group_message">Допуск для замірів в одній групі</string>
   <string name="pref_error_title">Помилка</string>
   <string name="pref_error_summary">Мінімальна помилка калібрування</string>
   <string name="pref_iter_title">Ітерації</string>
   <string name="pref_iter_summary">Мінімальне число ітерацій</string>
   <string name="pref_label_size_title">Розмір підписів</string>
   <string name="pref_label_size_summary">Розмір підписів</string>
-  <string name="pref_label_size_message">Розмір шрифта підписів</string>
   <string name="pref_arrow_length_title">Бергштрих перерізу</string>
-  <!-- UNUSED string name="pref_arrow_length_summary">Розмір бергштриха лінії перерізів</string -->
   <string name="pref_arrow_length_message">Розмір штриха направлення лінії перерізів</string>
   <string name="pref_dot_radius_title">Радіус зелених точок</string>
-  <!-- UNUSED string name="pref_dot_radius_summary">Розмір зелених точок</string -->
   <string name="pref_dot_radius_message">Розмір зелених точок</string>
   <string name="pref_line_thickness_title">Товщина ліній</string>
   <string name="pref_line_thickness_summary">Товщина ліній</string>

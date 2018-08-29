@@ -932,7 +932,6 @@
   <string name="pref_extra_buttons_summary">Ниво на показваните менюта: основни, нормални, пълни…</string>
   <string name="pref_size_buttons_title">Размер бутони</string>
   <string name="pref_size_buttons_summary">Размер на бутоните за главните функции</string>
-  <!-- UNUSED string name="pref_size_buttons_message">Въведете размер на бутоните (в пиксели)</string -->
 
   <!-- TODO string name="pref_bezier_step_title">Point spacing</string -->
   <!-- TODO string name="pref_bezier_step_summary">Distance between points on an export line [m]</string -->
@@ -948,7 +947,6 @@
   <!-- UNUSED string name="pref_trobot_names_summary">Имената на реперите са в стил TopoRobot</string -->
   <string name="pref_ortho_lrud_title">ЛДГД ъгъл на странично изм.</string>
   <string name="pref_ortho_lrud_summary">Минимален ъгъл м/у отсечка и странично за ГДЛД</string>
-  <string name="pref_ortho_lrud_message">Минимален ъгъл м/у отсечка и странично за ГДЛД</string>
   <string name="pref_survex_eol_title">Край на ред в Survex/Topo</string>
   <string name="pref_survex_eol_summary">Край на ред в Survex/Topo експорт</string>
   <string name="pref_survex_splay_title">Странични измервания в Survex</string>
@@ -984,8 +982,6 @@
   <!-- UNUSED string name="pref_device_type_summary">Модел на DistoX</string -->
   <!-- UNUSED string name="pref_comm_retry_title">Опити за връзка</string -->
   <!-- UNUSED string name="pref_comm_retry_summary">Брой опити за връзка при грешка</string -->
-  <!-- UNUSED string name="pref_comm_retry_dialogtitle">Брой опити за връзка при грешка</string -->
-  <!-- UNUSED string name="pref_comm_retry_message">Брой опити за връзка при грешка</string -->
   <string name="pref_wait_laser_title">Пауза след лазер [ms]</string>
   <string name="pref_wait_laser_summary">Пауза след включване на лазера [ms]</string>
   <string name="pref_wait_shot_title">Пауза след измерване [ms]</string>
@@ -1004,13 +1000,10 @@
   <string name="pref_head_tail_summary">Проверка на броя измервания преди тяхното сваляне</string>
   <string name="pref_socket_delay_title">Изчакване преди сдвояване</string>
   <string name="pref_socket_delay_summary">Изчакване преди опит за сдвояване [0.1 сек]</string>
-  <string name="pref_socket_delay_dialogtitle">Изчакване преди сдвояване</string>
-  <string name="pref_socket_delay_message">Изчакване преди опит за сдвояване [0.1 сек]</string>
   <string name="pref_z6_workaround_title">Z6 корекция</string>
   <string name="pref_z6_workaround_summary">Корекция на блокиране при сваляне на данни от някои устройства</string>
   <string name="pref_crs_title">C R S </string>
   <string name="pref_crs_summary">CRS име</string>
-  <string name="pref_crs_message">Въведете CRS име както в Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS усредняване</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Да се използва ли усредняване на GPS координати</string -->
 
@@ -1023,7 +1016,6 @@
   <string name="pref_shot_units_title">Мерни единици</string>
   <string name="pref_cwd_title">Работна директория</string>
   <!-- UNUSED string name="pref_cwd_summary">Работна директория за данните на TopoDroid</string -->
-  <!-- UNUSED string name="pref_cwd_message">Въведете директория на TopoDroid</string -->
   <string name="pref_pt_color_map_title">PocketTopo карта на цветовете</string>
   <string name="pref_pt_color_map_summary">PocketTopo карта на цветовете (импорт)</string>
   <string name="pref_text_size_title">Размер на текста</string>
@@ -1048,10 +1040,8 @@
   <string name="pref_data_backup_summary">Автоматично експортиране на измервания (необходим е зададен формат)</string>
   <string name="pref_lrud_vertical_title">Мин. наклон Горе/Долу</string>
   <string name="pref_lrud_vertical_summary">Минимален наклон на стр. изм. Горе/Долу</string>
-  <string name="pref_lrud_vertical_message">Минимален наклон на стр. изм. Горе/Долу</string>
   <string name="pref_lrud_horizontal_title">Макс. наклон Ляво/Дясно</string>
   <string name="pref_lrud_horizontal_summary">Максимален наклон на стр. изм. Ляво/Дясно</string>
-  <string name="pref_lrud_horizontal_message">Максимален наклон на стр. изм. Ляво/Дясно</string>
   <string name="pref_shared_xsections_title">Споделени сечения в репери</string>
   <string name="pref_shared_xsections_summary">Сеченията в реперите са споделени между скиците</string>
   <string name="xsections_shared">Споделени сечения в репери</string>
@@ -1090,14 +1080,11 @@
   <string name="pref_team_summary">Екип картировачи по подразбиране</string>
 
   <string name="pref_ethr_title">Граница на вертикално измерване</string>
-  <string name="pref_ethr_summary">Граница за верт. разгъване на странични отсечки</string>
-  <string name="pref_ethr_message">Отклонение [спрямо 90], в което стран. отсечка се разгъва вертикално</string>
+  <string name="pref_ethr_summary">Отклонение [спрямо 90], в което стран. отсечка се разгъва вертикално</string>
   <string name="pref_vthr_title">Вертикална граница на отсечка</string>
   <string name="pref_vthr_summary">Граница за считане на мерки за Ляво/Дясно/Горе/Долу или Зап/Изт/Сев/Юг</string>
-  <string name="pref_vthr_message">Граница за считане на мерки за Ляво/Дясно/Горе/Долу или Зап/Изт/Сев/Юг</string>
 
   <string name="pref_plan_vthr_title">Скриване на наклонени измервания</string>
-  <!-- UNUSED string name="pref_plan_vthr_summary">Граница за скриване на странични измервания в хор. план</string -->
   <string name="pref_plan_vthr_message">Странични измервания с по-голям наклон не се показват в скицата на плана</string>
   <string name="pref_init_station_title">Начален репер</string>
   <string name="pref_init_station_summary">Име на първия репер в картировката</string>
@@ -1127,7 +1114,6 @@
   <string name="pref_unscaled_points_title">Фиксиран размер на точките</string>
   <string name="pref_unscaled_points_summary">Точките не се променят при приближаване</string>
   <string name="pref_segment_title">Отстояния между точки на линия</string>
-  <!-- UNUSED string name="pref_segment_summary">Минимално разстояние м/у точките в "линия"</string -->
   <string name="pref_segment_message">Минимално разстояние м/у точките в "линия"</string>
   <string name="pref_linestyle_title">Стил на линии</string>
   <string name="pref_linestyle_summary">Стил на линиите за рисуване</string>
@@ -1143,19 +1129,15 @@
   <string name="pref_group_by_summary">Метод за групиране на измерванията в калибрацията</string>
   <string name="pref_group_title">Толеранс на групата</string>
   <string name="pref_group_summary">Толеранс между отсечките в една и съща група</string>
-  <string name="pref_group_message">Толеранс между отсечките в една и съща група</string>
   <string name="pref_error_title">Грешка</string>
   <string name="pref_error_summary">Минимална грешка при калибрация</string>
   <string name="pref_iter_title">Повторения</string>
   <string name="pref_iter_summary">Макс. брой повторения</string>
   <string name="pref_label_size_title">Размер на надписи</string>
   <string name="pref_label_size_summary">Размер на надписи в скиците</string>
-  <string name="pref_label_size_message">Размер на надписи в скиците</string>
   <string name="pref_arrow_length_title">Размер на стрелка в сечение</string>
-  <!-- UNUSED string name="pref_arrow_length_summary">Размер на помощната стрелка за посока на сечение</string -->
   <string name="pref_arrow_length_message">Размер на помощната стрелка за посока на сечение</string>
   <string name="pref_dot_radius_title">Размер на зелена точка</string>
-  <!-- UNUSED string name="pref_dot_radius_summary">Размер на зелена точка</string -->
   <string name="pref_dot_radius_message">Размер на зелена точка при избор на елементи в скицата</string>
   <string name="pref_line_thickness_title">Широчина на линия</string>
   <string name="pref_line_thickness_summary">Широчина на линията за рисуване</string>

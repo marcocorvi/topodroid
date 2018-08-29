@@ -418,7 +418,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
     ret[ 0] = makeBtn( cat, key[0], R.string.pref_cwd_title, -1, N, "TopoDroid", res, hlp );
     ret[ 1] = makeEdt( cat, key[1], R.string.pref_text_size_title, R.string.pref_text_size_summary, B, INTEGER, R.string.default_textsize, res, hlp );
     ret[ 2] = makeLst( cat, key[2], R.string.pref_size_buttons_title, R.string.pref_size_buttons_summary, B, R.string.default_buttonsize, R.array.sizeButtons, R.array.sizeButtonsValue, res, hlp );
-    ret[ 3] = makeLst( cat, key[3], R.string.pref_extra_buttons_summary, R.string.pref_extra_buttons_title, B, "1", R.array.extraButtons, R.array.extraButtonsValue, res, hlp );
+    ret[ 3] = makeLst( cat, key[3], R.string.pref_extra_buttons_title, R.string.pref_extra_buttons_summary, B, "1", R.array.extraButtons, R.array.extraButtonsValue, res, hlp );
     ret[ 4] = makeCbx( cat, key[4], R.string.pref_mkeyboard_title, R.string.pref_mkeyboard_summary, B, true, res, hlp );
     ret[ 5] = makeCbx( cat, key[5], R.string.pref_no_cursor_title, R.string.pref_no_cursor_summary, T, false, res, hlp );
     ret[ 6] = makeLst( cat, key[6], R.string.pref_local_help_title, R.string.pref_local_help_summary, A, "0", R.array.localUserMan, R.array.localUserManValue, res, hlp );

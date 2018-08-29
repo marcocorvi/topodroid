@@ -925,8 +925,7 @@
   <string name="pref_extra_buttons_title">Niveau d\'utilisation</string>
   <string name="pref_extra_buttons_summary">Active des options supplémentaires</string>
   <string name="pref_size_buttons_title">Taille des boutons</string>
-  <string name="pref_size_buttons_summary">Taille de la barre d\'action des boutons</string>
-  <!-- UNUSED string name="pref_size_buttons_message">Entrez la taille de la barre d\'action des boutons [pixels]</string -->
+  <string name="pref_size_buttons_summary">Taille de la barre d\'action des boutons [pixels]</string>
 
   <string name="pref_bezier_step_title">Espacement des points</string>
   <string name="pref_bezier_step_summary">Distance entre les points lors de l\'export ligne [m]</string>
@@ -942,13 +941,10 @@
   <!-- UNUSED string name="pref_trobot_names_summary">Les noms de station sont de style TopoRobot</string -->
   <string name="pref_ortho_lrud_title">Angle visée chem. LRUD</string>
   <string name="pref_ortho_lrud_summary">Angle minimum visée de cheminement pour une cheminement LRUD</string>
-  <string name="pref_ortho_lrud_message">Angle minimum LRUD</string>
   <string name="pref_lrud_vertical_title">HB habillage pente mini</string>
   <string name="pref_lrud_vertical_summary">GDHB visée lat. haut/bas pente mini</string>
-  <string name="pref_lrud_vertical_message">GDHB pente minimum des visées latérales d\'habillage dir. haut/bas</string>
   <string name="pref_lrud_horizontal_title">GD habillage pente maxi</string>
   <string name="pref_lrud_horizontal_summary">GDHB visée lat. gauche/droite pente maxi</string>
-  <string name="pref_lrud_horizontal_message">GDHB pente maximum des visées latérales d\'habillage dir. gauche/droite</string>
   <string name="pref_survex_eol_title">Caract. de fin de ligne Survex</string>
   <string name="pref_survex_eol_summary">Caractère de fin de ligne Survex</string>
   <string name="pref_survex_splay_title">Stations de cheminement Survex</string>
@@ -987,8 +983,6 @@
   <!-- UNUSED string name="pref_device_type_summary">Modele de DistoX</string -->
   <!-- UNUSED string name="pref_comm_retry_title">Tentative de communication</string -->
   <!-- UNUSED string name="pref_comm_retry_summary">Nombre max. de tentatives</string -->
-  <!-- UNUSED string name="pref_comm_retry_dialogtitle">Nombre max. de tentatives</string -->
-  <!-- UNUSED string name="pref_comm_retry_message">Nombre max. de tentatives</string -->
   <string name="pref_wait_laser_title">Pause laser [ms]</string>
   <string name="pref_wait_laser_summary">Temporisation après allumage du laser [ms]</string>
   <string name="pref_wait_shot_title">Pause visée [ms]</string>
@@ -1007,13 +1001,11 @@
   <string name="pref_head_tail_summary">Voir le nombre de données avant de les télécharger</string>
   <string name="pref_socket_delay_title">Délai de connexion</string>
   <string name="pref_socket_delay_summary">Délai de connexion pour assoc. [0.1 sec]</string>
-  <string name="pref_socket_delay_dialogtitle">Délai de connection pour permettre association</string>
-  <string name="pref_socket_delay_message">Délai de connexion pour association [0.1 sec]</string>
   <string name="pref_z6_workaround_title">Contournement Z6</string>
   <string name="pref_z6_workaround_summary">Contournement Z6 téléchargement données</string>
   <string name="pref_crs_title">C R S </string>
   <string name="pref_crs_summary">Nom du Système de Coordonnées de Référence (UTM, WGS84&#8230;)</string>
-  <string name="pref_crs_message">Saisissez le nom CRS tel que dans Proj4</string>
+  <!-- FIXME string name="pref_crs_message">Saisissez le nom CRS tel que dans Proj4</string -->
   <!-- UNUSED string name="pref_gps_averaging_title">Utilizer GPSAveraging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Utiliser GPSAveraging</string -->
 
@@ -1026,7 +1018,6 @@
   <string name="pref_shot_units_title">UNITÉS</string>
   <string name="pref_cwd_title">Répertoire TopoDroid</string>
   <!-- UNUSED string name="pref_cwd_summary">Répertoire TopoDroid</string -->
-  <!-- UNUSED string name="pref_cwd_message">Saisissez le répertoire de TopoDroid</string -->
   <string name="pref_pt_color_map_title">Couleur carte PocketTopo</string>
   <string name="pref_pt_color_map_summary">Couleur carte PocketTopo (PocketTopo import)</string>
   <string name="pref_text_size_title">Taille du texte</string>
@@ -1086,14 +1077,11 @@
   <string name="pref_team_summary">Noms des spéléos topographes de l\'équipe</string>
 
   <string name="pref_ethr_title">Seuil vertical vis. lat.</string>
-  <string name="pref_ethr_summary">Seuil de verticalité des visées latérales</string>
-  <string name="pref_ethr_message">Seuil d\'angle aux alentours des 90 deg pour définir l\'extension verticale des visées de cheminement</string>
+  <string name="pref_ethr_summary">Seuil d\'angle aux alentours des 90 deg pour définir l\'extension verticale des visées de cheminement</string>
   <string name="pref_vthr_title">Seuil visées verticales</string>
-  <string name="pref_vthr_summary">Seuil vertical GDHB/WENS</string>
-  <string name="pref_vthr_message">Seuil inclinaison cheminement entre GDHB/WENS</string>
+  <string name="pref_vthr_summary">Seuil inclinaison cheminement entre GDHB/WENS</string>
   
   <string name="pref_plan_vthr_title">Seuil visées verticales</string>
-  <!-- UNUSED string name="pref_plan_vthr_summary">Seuil visées verticales mode plan</string -->
   <string name="pref_plan_vthr_message">Seuil visées verticales en mode plan</string>
   <string name="pref_init_station_title">Nom par défaut première station</string>
   <string name="pref_init_station_summary">Nom par défaut de la première station</string>
@@ -1123,7 +1111,6 @@
   <string name="pref_unscaled_points_title">Zoom icônes désactivé</string>
   <string name="pref_unscaled_points_summary">Désactivation du zoom sur les icônes</string>
   <string name="pref_segment_title">Espacement points de ligne</string>
-  <!-- UNUSED string name="pref_segment_summary">Distance mini entre points d\'une ligne</string -->
   <string name="pref_segment_message">Distance mini entre les points d\'une ligne</string>
   <string name="pref_linestyle_title">Style de ligne</string>
   <string name="pref_linestyle_summary">Style de ligne</string>
@@ -1139,19 +1126,15 @@
   <string name="pref_group_by_summary">Politique de groupage de données d\'étalonnage</string>
   <string name="pref_group_title">Groupe de tolérance</string>
   <string name="pref_group_summary">Tolérance au long des visées du même groupe</string>
-  <string name="pref_group_message">Tolérance au long des visées du même groupe</string>
   <string name="pref_error_title">Erreur</string>
   <string name="pref_error_summary">Erreur d\'étalonnage mini</string>
   <string name="pref_iter_title">Répétitions</string>
   <string name="pref_iter_summary">Nombre de répétitions max</string>
   <string name="pref_label_size_title">Taille des étiquettes</string>
   <string name="pref_label_size_summary">Taille des étiquettes</string>
-  <string name="pref_label_size_message">Taille des étiquettes</string>
   <string name="pref_arrow_length_title">Ligne de section pointillé</string>
-  <!-- UNUSED string name="pref_arrow_length_summary">Épaisseur ligne de section en pointillé</string -->
   <string name="pref_arrow_length_message">Épaisseur ligne de section en pointillé</string>
   <string name="pref_dot_radius_title">Points mode édition</string>
-  <!-- UNUSED string name="pref_dot_radius_summary">Taille des points de sélection en mode édition de ligne</string -->
   <string name="pref_dot_radius_message">Taille des points</string>
   <string name="pref_line_thickness_title">Épaisseur de ligne</string>
   <string name="pref_line_thickness_summary">Épaisseur de ligne</string>

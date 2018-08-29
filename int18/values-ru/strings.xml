@@ -960,13 +960,10 @@
   <!-- UNUSED string name="pref_trobot_names_summary">Номера пикетов в стиле TopoRobot</string -->
   <string name="pref_ortho_lrud_title">Мин. угол бок. замера для ЛПВН</string>
   <string name="pref_ortho_lrud_summary">Минимальный угол между бок. замером и вектором для расчета ЛПВН при экспорте</string>
-  <string name="pref_ortho_lrud_message">Мин. угол между бок. замером и вектором для расчета ЛПВН </string>
   <string name="pref_lrud_vertical_title">ВН мин. наклон боковых замеров</string>
   <string name="pref_lrud_vertical_summary">ЛПВН вверх/вниз  минимальный наклон боковых замеров</string>
-  <string name="pref_lrud_vertical_message">ЛПВН вверх/вниз  минимальный наклон боковых замеров</string>
   <string name="pref_lrud_horizontal_title">ЛП макс. наклон боковых замеров</string>
   <string name="pref_lrud_horizontal_summary">ЛПВН лево/право максимальный наклон боковых замеров</string>
-  <string name="pref_lrud_horizontal_message">ЛПВН лево/право максимальный наклон боковых замеров</string>
   <string name="pref_survex_eol_title">Окончание строки для Survex/Topo</string>
   <string name="pref_survex_eol_summary">Формат окончания строки Survex/Topo</string>
   <string name="pref_survex_splay_title">Конечный пикет луча Survex</string>
@@ -1002,8 +999,6 @@
   <!-- UNUSED string name="pref_device_type_summary">Модель DistoX</string -->
   <!-- UNUSED string name="pref_comm_retry_title">Попыток подключения</string  -->
   <!-- UNUSED string name="pref_comm_retry_summary">Число попыток подключения</string -->
-  <!-- UNUSED string name="pref_comm_retry_dialogtitle">Кол-во попыток подключения</string -->
-  <!-- UNUSED string name="pref_comm_retry_message">Кол-во попыток подключения</string -->
   <string name="pref_wait_laser_title">Пауза вкл. лазера [мс]</string>
   <string name="pref_wait_laser_summary">Пауза после включения лазера [мс]</string>
   <string name="pref_wait_shot_title">Пауза после замера [мс]</string>
@@ -1022,13 +1017,10 @@
   <string name="pref_head_tail_summary">Выяснить кол-во новых измерений перед их скачиванием</string>
   <string name="pref_socket_delay_title">Задержка подключения</string>
   <string name="pref_socket_delay_summary">Задержка подключения при сопряжении [0.1 сек]</string>
-  <string name="pref_socket_delay_dialogtitle">Задержка подключения при сопряжении</string>
-  <string name="pref_socket_delay_message">Задержка подключения для сопряжении [0.1 сек]</string>
   <string name="pref_z6_workaround_title">Решение для Z6</string>
   <string name="pref_z6_workaround_summary">Решение для загрузки данных с телефонов Z6</string>
   <string name="pref_crs_title">CRS - система координат </string>
-  <string name="pref_crs_summary">CRS название</string>
-  <string name="pref_crs_message">Введите название CRS как в Proj4</string>
+  <string name="pref_crs_summary">Введите название CRS как в Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">Осреднение данных GPS </string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Использовать GPSAveraging?</string -->
 
@@ -1041,7 +1033,6 @@
   <string name="pref_shot_units_title">ЕДИНИЦЫ ИЗМЕРЕНИЯ</string>
   <string name="pref_cwd_title">Рабочий каталог</string>
   <!-- UNUSED string name="pref_cwd_summary">TopoDroid корневой каталог</string -->
-  <!-- UNUSED string name="pref_cwd_message">Введите корневой каталог TopoDroid</string -->
   <string name="pref_pt_color_map_title">Преобразование цветов PocketTopo</string>
   <string name="pref_pt_color_map_summary">Соответствие цветов PocketTopo типам объектов (PocketTopo импорт)</string>
   <string name="pref_text_size_title">Размер текста</string>
@@ -1103,14 +1094,11 @@
   <string name="pref_team_summary">Группа съёмки по умолчанию</string>
 
   <string name="pref_ethr_title">Порог вертикальности бокового замера</string>
-  <string name="pref_ethr_summary">Угловой диапазон верт. проекции (бок. замер)</string>
-  <string name="pref_ethr_message">Угол около 90 для проекции бок. замера на верт. плоскость [град]</string>
+  <string name="pref_ethr_summary">Угол около 90 для проекции бок. замера на верт. плоскость [град]</string>
   <string name="pref_vthr_title">Порог вертикальности для отрезков</string>
-  <string name="pref_vthr_summary">Угловой. порог ЛПВН/ЗВСЮ</string>
-  <string name="pref_vthr_message">Допустимый угол отрезка для перехода от ЛПВН к ЗВСЮ</string>
+  <string name="pref_vthr_summary">Допустимый угол отрезка для перехода от ЛПВН к ЗВСЮ</string>
 
   <string name="pref_plan_vthr_title">Порог угла бок. замеров в плане</string>
-  <!-- UNUSED string name="pref_plan_vthr_summary">Порог угла  бок. замера в плане</string -->
   <string name="pref_plan_vthr_message">Порог угла  бок. замеров отображаемых в плане</string>
   <string name="pref_init_station_title">Начальный пикет</string>
   <string name="pref_init_station_summary">Начальный пикет по умолчаниию</string>
@@ -1140,7 +1128,6 @@
   <string name="pref_unscaled_points_title">Немасштабируемые значки точек</string>
   <string name="pref_unscaled_points_summary">Не масштабировать значки точек</string>
   <string name="pref_segment_title">Шаг точек в линии</string>
-  <!-- UNUSED string name="pref_segment_summary">Шаг точек на линии</string -->
   <string name="pref_segment_message">Минимальное расстояние между точками в линии</string>
   <string name="pref_linestyle_title">Стиль рисования линий</string>
   <string name="pref_linestyle_summary">Способ отрисовки линий</string>
@@ -1156,19 +1143,15 @@
   <string name="pref_group_by_summary">Группирование данных калибровки</string>
   <string name="pref_group_title">Допуск в группе</string>
   <string name="pref_group_summary">Допуск для измерений в одной группе</string>
-  <string name="pref_group_message">Допуск для измерений в одной группе</string>
   <string name="pref_error_title">Ошибка</string>
   <string name="pref_error_summary">Минимальная ошибка калибровки</string>
   <string name="pref_iter_title">Итерации</string>
   <string name="pref_iter_summary">Минимальное число итераций</string>
   <string name="pref_label_size_title">Размер подписей</string>
   <string name="pref_label_size_summary">Размер подписей</string>
-  <string name="pref_label_size_message">Размер шрифта подписей</string>
   <string name="pref_arrow_length_title">Бергштрих сечения</string>
-  <!-- UNUSED string name="pref_arrow_length_summary">Размер бергштриха линии сечений</string -->
   <string name="pref_arrow_length_message">Размер штриха направления линии сечений</string>
   <string name="pref_dot_radius_title">Радиус зеленых точек</string>
-  <!-- UNUSED string name="pref_dot_radius_summary">Размер зеленых точек</string -->
   <string name="pref_dot_radius_message">Размер зеленых точек</string>
   <string name="pref_line_thickness_title">Толщина линий</string>
   <string name="pref_line_thickness_summary">Толщина линий</string>

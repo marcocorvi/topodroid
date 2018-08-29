@@ -938,8 +938,7 @@
   <string name="pref_extra_buttons_title">Nivel de usuario</string>
   <string name="pref_extra_buttons_summary">Habilitar botones opcionales ventana principal</string>
   <string name="pref_size_buttons_title">Tamaño botones</string>
-  <string name="pref_size_buttons_summary">Tamaño de los botones de la barra</string>
-  <!-- UNUSED string name="pref_size_buttons_message">Introduzca el tamaño de los botones de la barra [pixels]</string -->
+  <string name="pref_size_buttons_summary">Introduzca el tamaño de los botones de la barra [pixels]</string>
 
   <!-- TODO string name="pref_bezier_step_title">Point spacing</string -->
   <!-- TODO string name="pref_bezier_step_summary">Distance between points on an export line [m]</string -->
@@ -955,13 +954,10 @@
   <!-- UNUSED string name="pref_trobot_names_summary">Los nombres de las estaciones están en el estilo TopoRobot</string -->
   <string name="pref_ortho_lrud_title">LRUD ángulo de apertura</string>
   <string name="pref_ortho_lrud_summary">Ángulo tomas radiales</string>
-  <string name="pref_ortho_lrud_message">Ángulo mínimo de tomas radiales</string>
   <string name="pref_lrud_vertical_title">UD inclinación mínima de toma radial</string>
   <string name="pref_lrud_vertical_summary">LRUD arriba/abajo, inclinación mínima de toma radial</string>
-  <string name="pref_lrud_vertical_message">LRUD arriba/abajo, inclinación mínima de toma radial</string>
   <string name="pref_lrud_horizontal_title">LR máxima horizontal</string>
   <string name="pref_lrud_horizontal_summary">LRUD Izquierda/derecha, inclinación máxima de toma radial</string>
-  <string name="pref_lrud_horizontal_message">LRUD Izquierda/derecha, inclinación máxima de toma radial</string>
   <string name="pref_survex_eol_title">Terminación de línea Survex/Topo</string>
   <string name="pref_survex_eol_summary">Terminación de línea Survex/Topo</string>
   <string name="pref_survex_splay_title">Estación toma radial Survex</string>
@@ -997,8 +993,6 @@
   <!-- UNUSED string name="pref_device_type_summary">Modelo de DistoX</string -->
   <!-- UNUSED string name="pref_comm_retry_title">Reiniciar comunicación</string -->
   <!-- UNUSED string name="pref_comm_retry_summary">Reintentar comunicación</string -->
-  <!-- UNUSED string name="pref_comm_retry_dialogtitle">Números de intentos de comunicación</string -->
-  <!-- UNUSED string name="pref_comm_retry_message">Números de intentos de comunicación</string -->
   <string name="pref_wait_laser_title">Tiempo de espera de láser [ms]</string>
   <string name="pref_wait_laser_summary">el tiempo de espera después de girar el láser [ms]</string>
   <string name="pref_wait_shot_title">Tiempo de espera de disparo [ms]</string>
@@ -1017,13 +1011,10 @@
   <string name="pref_head_tail_summary">Obtener el número de datos antes de descargarlos</string>
   <string name="pref_socket_delay_title">Retardo en la conexión</string>
   <string name="pref_socket_delay_summary">La conexión tarda mucho para emparejarse [0.1 sec]</string>
-  <string name="pref_socket_delay_dialogtitle">La conexión tarda mucho para emparejarse</string>
-  <string name="pref_socket_delay_message">La conexión tarda mucho para emparejarse [0.1 sec]</string>
   <string name="pref_z6_workaround_title">Solución Z6</string>
   <string name="pref_z6_workaround_summary">Descarga de datos de solución Z6</string>
   <string name="pref_crs_title">CRS</string>
-  <string name="pref_crs_summary">Nombre CRS</string>
-  <string name="pref_crs_message">Introducir el CRS nombrar como en Proj4</string>
+  <string name="pref_crs_summary">Introducir el CRS nombrar como en Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">Promedio GPS</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Uso promedio GPS</string -->
 
@@ -1035,8 +1026,7 @@
   <string name="pref_shot_data_title">Ajustes de visuales</string>
   <string name="pref_shot_units_title">Unidades de medida</string>
   <string name="pref_cwd_title">Directorio principal</string>
-  <!-- UNUSED string name="pref_cwd_summary">Directorio principal TopoDroid</string -->
-  <!-- UNUSED string name="pref_cwd_message">Introducir el directorio principal TopoDroid</string -->
+  <!-- UNUSED string name="pref_cwd_summary">Introducir el directorio principal TopoDroid</string -->
   <string name="pref_pt_color_map_title">PocketTopo color mapa</string>
   <string name="pref_pt_color_map_summary">Mapa de colores PocketTopo (Importación PocketTopo)</string>
   <string name="pref_text_size_title">Tamaño del texto</string>
@@ -1098,13 +1088,10 @@
 
   <string name="pref_ethr_title">Precisión toma lateral</string>
   <string name="pref_ethr_summary">Ampliar límites de la toma lateral</string>
-  <string name="pref_ethr_message">Cálculo del límite de la toma lateral</string>
   <string name="pref_vthr_title">Precisión toma vertical</string>
   <string name="pref_vthr_summary">Cáculo del límite de la toma vertical</string>
-  <string name="pref_vthr_message">Límite visual vertical por LRUD/WENS</string>
 
   <string name="pref_plan_vthr_title">Límite visual vertical</string>
-  <!-- UNUSED string name="pref_plan_vthr_summary">Límite vertical de la visual en planta</string -->
   <string name="pref_plan_vthr_message">límite vertical de la visual en planta</string>
   <string name="pref_init_station_title">Estación de inicio</string>
   <string name="pref_init_station_summary">Estación inicio por defecto</string>
@@ -1134,7 +1121,6 @@
   <string name="pref_unscaled_points_title">Símbolos de punto sin zoom</string>
   <string name="pref_unscaled_points_summary">Símbolos de punto sin aumentar</string>
   <string name="pref_segment_title">Precisión de la línea</string>
-  <!-- UNUSED string name="pref_segment_summary">Mínimo distancia línea-punto</string -->
   <string name="pref_segment_message">Distancia Mínima entre dos puntos de una línea en el dibujo</string>
   <string name="pref_linestyle_title">Nº de puntos en línea</string>
   <string name="pref_linestyle_summary">Número de puntos en la línea dibujada</string>
@@ -1150,19 +1136,15 @@
   <string name="pref_group_by_summary">Política de grupo de datos calibración</string>
   <string name="pref_group_title">Precisión grupo</string>
   <string name="pref_group_summary">Precisión entre mediciones del mismo grupo</string>
-  <string name="pref_group_message">Precisión entre mediciones del mismo grupo</string>
   <string name="pref_error_title">Error</string>
   <string name="pref_error_summary">Error mínimo de la calibración</string>
   <string name="pref_iter_title">Iteraciones</string>
   <string name="pref_iter_summary">Número máximo de iteraciones</string>
   <string name="pref_label_size_title">Tamaño del texto</string>
   <string name="pref_label_size_summary">Tamaño del texto</string>
-  <string name="pref_label_size_message">Tamaño del texto</string>
   <string name="pref_arrow_length_title">Corte seccional</string>
-  <!-- UNUSED string name="pref_arrow_length_summary">tamaño de la línea del corte de sección</string -->
   <string name="pref_arrow_length_message">Tamaño de la línea del corte de sección</string>
   <string name="pref_dot_radius_title">Puntos de nodo</string>
-  <!-- UNUSED string name="pref_dot_radius_summary">Tamaño de los puntos verdes</string -->
   <string name="pref_dot_radius_message">Tamaño de los puntos verdes (Nodos)</string>
   <string name="pref_line_thickness_title">Grosor de la línea</string>
   <string name="pref_line_thickness_summary">Grosor de la línea</string>

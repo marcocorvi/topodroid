@@ -943,7 +943,6 @@
   <string name="pref_extra_buttons_summary">Nivelul funcțiilor activate</string>
   <string name="pref_size_buttons_title">Mărimea butoanelor</string>
   <string name="pref_size_buttons_summary">Mărimea butoanelor de pe bara de acțiune</string>
-  <!-- UNUSED string name="pref_size_buttons_message">Introdu mărimea butoanelor de pe bara de acțiune [pixeli]</string -->
 
   <string name="pref_bezier_step_title">Spațierea punctelor</string>
   <string name="pref_bezier_step_summary">Distanța între puncte pe o linie export [m]</string>
@@ -959,13 +958,10 @@
   <!-- UNUSED string name="pref_trobot_names_summary">Numele stațiilor sunt în stil TopoRobot</string -->
   <string name="pref_ortho_lrud_title">Unghi radieri LRUD</string>
   <string name="pref_ortho_lrud_summary">Unghi minim radiere-viză pentru radieri LRUD</string>
-  <string name="pref_ortho_lrud_message">Unghi minim radiere-viză LRUD</string>
   <string name="pref_lrud_vertical_title">Clino(unghi v.) sus-jos pt. radieri</string>
   <string name="pref_lrud_vertical_summary">Unghi min. pentru radieri sus/jos LRUD</string>
-  <string name="pref_lrud_vertical_message">Unghi min. radieri sus/jos</string>
   <string name="pref_lrud_horizontal_title">St./Dr.(LR) unghi radiere</string>
   <string name="pref_lrud_horizontal_summary">LRUD unghi max. pentru radieri stânga/dreapta</string>
-  <string name="pref_lrud_horizontal_message">Unghi max. radieri stânga/dreapta</string>
   <string name="pref_survex_eol_title">Terminație linie Survex/Topo</string>
   <string name="pref_survex_eol_summary">Terminație linie Survex/Topo</string>
   <string name="pref_survex_splay_title">Survex radieri stație</string>
@@ -1001,8 +997,6 @@
   <!-- UNUSED string name="pref_device_type_summary">Modelul DistoX-ului</string -->
   <!-- UNUSED string name="pref_comm_retry_title">Reîncearcă conexiunea</string -->
   <!-- UNUSED string name="pref_comm_retry_summary">Nr. reîncercări conexiune</string -->
-  <!-- UNUSED string name="pref_comm_retry_dialogtitle">Reîncercări conexiune</string -->
-  <!-- UNUSED string name="pref_comm_retry_message">Număr reîncercări conexiune</string -->
   <string name="pref_wait_laser_title">Pauză laser [ms]</string>
   <string name="pref_wait_laser_summary">Pauză după aprinderea laser-ului [ms]</string>
   <string name="pref_wait_shot_title">Pauză măsuratoare [ms]</string>
@@ -1021,13 +1015,10 @@
   <string name="pref_head_tail_summary">Citește numărul de date/măsurători înainte de a le descarca</string>
   <string name="pref_socket_delay_title">Întârziere conexiune</string>
   <string name="pref_socket_delay_summary">Întârziere conexiune pentru a permite împerecherea [0.1 sec]</string>
-  <string name="pref_socket_delay_dialogtitle">Întârziere conexiune la împerechere</string>
-  <string name="pref_socket_delay_message">Întârziere conexiune pentru a permite împerecherea [0.1 sec]</string>
   <string name="pref_z6_workaround_title">Evitare problemă Z6</string>
   <string name="pref_z6_workaround_summary">Evitare problemă Z6 la descărcarea datelor</string>
   <string name="pref_crs_title">C R S </string>
-  <string name="pref_crs_summary">Nume CRS</string>
-  <string name="pref_crs_message">Introdu numele CRS ca în Proj4</string>
+  <string name="pref_crs_summary">Nume CRS ca în Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">Medierea valorilor GPS</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Activează medierea valorilor GPS</string -->
 
@@ -1040,7 +1031,6 @@
   <string name="pref_shot_units_title">UNITĂȚI</string>
   <string name="pref_cwd_title">Director de lucru</string>
   <!-- UNUSED string name="pref_cwd_summary">Director de lucru TopoDroid</string -->
-  <!-- UNUSED string name="pref_cwd_message">Introdu director de lucru TopoDroid</string -->
   <string name="pref_pt_color_map_title">Asociere culori PocketTopo</string>
   <string name="pref_pt_color_map_summary">PocketTopo grilă asociere(mapare) culori (import PocketTopo)</string>
   <string name="pref_text_size_title">Mărime text</string>
@@ -1101,14 +1091,11 @@
   <string name="pref_team_summary">Echipa de cartare prestabilită</string>
 
   <string name="pref_ethr_title">Limită verticală radiere</string>
-  <string name="pref_ethr_summary">Regiunea extensiei verticale (radieri)</string>
-  <string name="pref_ethr_message">Unghi apropiat de 90° pentru extensie verticala (echerare vert.) [deg]</string>
+  <string name="pref_ethr_summary">Unghi apropiat de 90° pentru extensie verticala (echerare vert.) [deg]</string>
   <string name="pref_vthr_title">Limită viză verticală</string>
-  <string name="pref_vthr_summary">Limită verticală LRUD/WENS~</string>
-  <string name="pref_vthr_message">Limită înclinare viză între LRUD/WENS~</string>
+  <string name="pref_vthr_summary">Limită înclinare viză între LRUD/WENS~</string>
 
   <string name="pref_plan_vthr_title">Limită radiere în vizualizare plan</string>
-  <!-- UNUSED string name="pref_plan_vthr_summary">Limită radiere în vizualizare plan</string -->
   <string name="pref_plan_vthr_message">Ascunde radierile cu înclinație mare în vizualizarea în plan orizontal</string>
   <string name="pref_init_station_title">Numele inițial al stației</string>
   <string name="pref_init_station_summary">Numele inițial implicit al stației</string>
@@ -1138,7 +1125,6 @@
   <string name="pref_unscaled_points_title">Simboluri puncte ne-scalate</string>
   <string name="pref_unscaled_points_summary">Simbolurilor punctelor nu sunt scalate</string>
   <string name="pref_segment_title">Spațiere linie-punct</string>
-  <!-- UNUSED string name="pref_segment_summary">Distanță minimă linie-punct</string -->
   <string name="pref_segment_message">Distanță minimă între punctele pe o linie</string>
   <string name="pref_linestyle_title">Stil linie</string>
   <string name="pref_linestyle_summary">Stil desenare linie</string>  
@@ -1154,19 +1140,15 @@
   <string name="pref_group_by_summary">Metodă de grupare a datelor calibrării</string>
   <string name="pref_group_title">Toleranță grup</string>
   <string name="pref_group_summary">Toleranța între măsurătorile din același grup</string>
-  <string name="pref_group_message">Toleranța între măsurătorile din același grup</string>
   <string name="pref_error_title">Eroare algoritm</string>
   <string name="pref_error_summary">Eroare terminație algoritm de calibrare</string>
   <string name="pref_iter_title">Iterații algoritm</string>
   <string name="pref_iter_summary">Nr. maxim de iterații ale algoritmului de calibrare</string>
   <string name="pref_label_size_title">Mărime etichete</string>
   <string name="pref_label_size_summary">Mărime etichetelor</string>
-  <string name="pref_label_size_message">Mărime etichetelor</string>
   <string name="pref_arrow_length_title">Grosimea liniilor de secțiune</string>
-  <!-- UNUSED string name="pref_arrow_length_summary">Grosimea liniilor de secțiune</string -->
   <string name="pref_arrow_length_message">Grosimea liniilor secțiunii</string>
   <string name="pref_dot_radius_title">Mărimea punctelor verzi</string>
-  <!-- UNUSED string name="pref_dot_radius_summary">Mărimea punctelor verzi</string -->
   <string name="pref_dot_radius_message">Mărimea punctelor verzi</string>
   <string name="pref_line_thickness_title">Lățimea liniei</string>
   <string name="pref_line_thickness_summary">Lățimea liniei de desen</string>

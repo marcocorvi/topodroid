@@ -930,7 +930,6 @@
   <string name="pref_extra_buttons_summary">Engedélyezett funkciók minősítése</string>
   <string name="pref_size_buttons_title">Gombok mérete</string>
   <string name="pref_size_buttons_summary">Fejléc gombok mérete</string>
-  <!-- UNUSED string name="pref_size_buttons_message">Enter the size of action-bar buttons [pixels]</string -->
 
   <!-- TODO string name="pref_bezier_step_title">Point spacing</string -->
   <!-- TODO string name="pref_bezier_step_summary">Distance between points on an export line [m]</string -->
@@ -946,13 +945,10 @@
   <!-- UNUSED string name="pref_trobot_names_summary">Pontnevek a TopoRobot program stílusában</string -->
   <string name="pref_ortho_lrud_title">BJFL segédpontok szöge</string>
   <string name="pref_ortho_lrud_summary">A segédmérések és poligonmérések minmális szöge BJFL felmérésnél</string>
-  <string name="pref_ortho_lrud_message">Minimális poligon-segédmérés szög BJFL</string>
   <!-- TODO string name="pref_lrud_vertical_title">UD min splay clino</string -->
   <!-- TODO string name="pref_lrud_vertical_summary">LRUD up/down minimum splay clino</string -->
-  <!-- TODO string name="pref_lrud_vertical_message">LRUD up/down minimum splay clino</string -->
   <!-- TODO string name="pref_lrud_horizontal_title">LR max splay clino</string -->
   <!-- TODO string name="pref_lrud_horizontal_summary">LRUD left/right maximum splay clino</string -->
-  <!-- TODO string name="pref_lrud_horizontal_message">LRUD left/right maximum splay clino</string -->
   <string name="pref_survex_eol_title">Survex/Topo line vonalvégződés</string>
   <string name="pref_survex_eol_summary">Survex/Topo line vonalvégződés</string>
   <string name="pref_survex_splay_title">Survex segédpontok</string>
@@ -988,8 +984,6 @@
   <!-- UNUSED string name="pref_device_type_summary">Model of the DistoX</string -->
   <!-- UNUSED string name="pref_comm_retry_title">Connection retry</string -->
   <!-- UNUSED string name="pref_comm_retry_summary">Connection retries number</string -->
-  <!-- UNUSED string name="pref_comm_retry_dialogtitle">Connection retries number</string -->
-  <!-- UNUSED string name="pref_comm_retry_message">Connection retries number</string -->
   <string name="pref_wait_laser_title">Lézer szünet[ms]</string>
   <string name="pref_wait_laser_summary">Szünet a lézer bekapcsolása után [ms]</string>
   <string name="pref_wait_shot_title">Mérési szünet [ms]</string>
@@ -1008,13 +1002,10 @@
   <!-- TODO string name="pref_head_tail_summary">Get the number of data before downloading them</string -->
   <string name="pref_socket_delay_title">Kapcsolódási késleltetés</string>
   <string name="pref_socket_delay_summary">Kapcsolódási késleltetés a párosításhoz [0.1 sec]</string>
-  <string name="pref_socket_delay_dialogtitle">Kapcsolódási késleltetés párosításnál</string>
-  <string name="pref_socket_delay_message">Kapcsolódási késleltetés a párosításhoz [0.1 sec]</string>
   <string name="pref_z6_workaround_title">Áthidaló megoldás Z6-hoz</string>
   <string name="pref_z6_workaround_summary">Áthidaló megoldás adatletöltéshez Z6-ból</string>
   <string name="pref_crs_title">Koordinátarendszer</string>
-  <string name="pref_crs_summary">Koordinátarendszer neve</string>
-  <string name="pref_crs_message">Írd be a koordinátarendszer nevét Proj.4 szerint</string>
+  <string name="pref_crs_summary">Írd be a koordinátarendszer nevét Proj.4 szerint</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Whether to use GPSAveraging</string -->
 
@@ -1027,7 +1018,6 @@
   <string name="pref_shot_units_title">MÉRTÉKEGYSÉGEK</string>
   <string name="pref_cwd_title">Munkakönyvtár</string>
   <!-- UNUSED string name="pref_cwd_summary">TopoDroid work directory</string -->
-  <!-- UNUSED string name="pref_cwd_message">Enter TopoDroid work directory</string -->
   <string name="pref_pt_color_map_title">PocketTopo színes térkép</string>
   <string name="pref_pt_color_map_summary">PocketTopo színes térkép (PocketTopo import)</string>
   <string name="pref_text_size_title">Betűméret</string>
@@ -1087,14 +1077,11 @@
   <string name="pref_team_summary">Alapértelmezett felmérő csoport</string>
     
   <string name="pref_ethr_title">Segédmérések függőleges küszöbértéke</string>
-  <string name="pref_ethr_summary">Segédmérések függőleges kiterjesztésének térrésze</string>
-  <string name="pref_ethr_message">szögtartomány 90 fok körül a függőleges kiterjesztéshez [fok]</string>
+  <string name="pref_ethr_summary">szögtartomány 90 fok körül a függőleges kiterjesztéshez [fok]</string>
   <string name="pref_vthr_title">Poligon függőleges küszöbértéke </string>
-  <string name="pref_vthr_summary">Függőleges BJFL/NyKÉD küszöbérték</string>
-  <string name="pref_vthr_message">Poligon lejtszögének küszöbértéke BJFL és NyKÉD között</string>
+  <string name="pref_vthr_summary">Poligon lejtszögének küszöbértéke BJFL és NyKÉD között</string>
 
   <string name="pref_plan_vthr_title">Segédmérések alaprajzi vetületének küszöbértéke</string>
-  <!-- UNUSED string name="pref_plan_vthr_summary">Splay vertical threshold in plan-view</string -->
   <string name="pref_plan_vthr_message">Magas lejtszögértékű segédmérések elrejtése az alaprajzi vetületen</string>
   <string name="pref_init_station_title">Kezdőpont neve</string>
   <string name="pref_init_station_summary">Alapértelmezett Kezdőpont név</string>
@@ -1124,7 +1111,6 @@
   <string name="pref_unscaled_points_title">Pont jelkulcsok nem nagyíthatóak</string>
   <string name="pref_unscaled_points_summary">A pont tipusú jelkulcs elemek nem nagyíthatóak</string>
   <string name="pref_segment_title">Vonal-pont távolság</string>
-  <!-- UNUSED string name="pref_segment_summary">Minimum line-point distance</string -->
   <string name="pref_segment_message">Minimális távolság egy vonalon lévő pontok között</string>
   <string name="pref_linestyle_title">Vonalstílus</string>
   <string name="pref_linestyle_summary">Vonal rajzstílusa</string>
@@ -1140,19 +1126,15 @@
   <string name="pref_group_by_summary">Szabály a kalibrációs adatok csoportosításához</string>
   <string name="pref_group_title">Csoport elemek tűrése</string>
   <string name="pref_group_summary">A csoporton belüli mérések különbségének tűréshatára</string>
-  <string name="pref_group_message">A csoporton belüli mérések különbségének tűréshatára</string>
   <string name="pref_error_title">Algoritmus hiba</string>
   <string name="pref_error_summary">Kalibrációs algoritmus lezárásának hibája</string>
   <string name="pref_iter_title">Algoritmus iterációi</string>
   <string name="pref_iter_summary">Iterációk maximális száma</string>
   <string name="pref_label_size_title">Címke méret</string>
   <string name="pref_label_size_summary">Címkék mérete</string>
-  <string name="pref_label_size_message">Címkék mérete</string>
   <string name="pref_arrow_length_title">Keresztszelvény-jelölő mérete</string>
-  <!-- UNUSED string name="pref_arrow_length_summary">Size of the section line tick</string -->
   <string name="pref_arrow_length_message">Keresztszelvény-jelölő mérete</string>
   <string name="pref_dot_radius_title">Zöld pontok mérete</string>
-  <!-- UNUSED string name="pref_dot_radius_summary">Green dots size</string -->
   <string name="pref_dot_radius_message">Zöld pontok mérete</string>
   <string name="pref_line_thickness_title">Vonalvastagság</string>
   <string name="pref_line_thickness_summary">Rajzolt vonal vastagsága</string>

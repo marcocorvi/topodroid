@@ -946,13 +946,10 @@
   <!-- UNUSED string name="pref_trobot_names_summary">Os nomes das bases usam o estilo do TopoRobot</string -->
   <string name="pref_ortho_lrud_title">Ângulo med. aux. EDTC Compass</string>
   <string name="pref_ortho_lrud_summary">Ângulo mínimo entre uma medida auxiliar e uma visada para ser uma medida auxiliar EDTC</string>
-  <string name="pref_ortho_lrud_message">Ângulo mínimo entre uma medida auxiliar e uma visada para ser EDTC</string>
   <string name="pref_lrud_vertical_title">Incl. mín. TC</string>
   <string name="pref_lrud_vertical_summary">Incl. mín. medidas auxiliares Teto/Chão</string>
-  <string name="pref_lrud_vertical_message">Inclinação mínima de medidas auxiliares Teto/Chão</string>
   <string name="pref_lrud_horizontal_title">Incl. máx. ED</string>
   <string name="pref_lrud_horizontal_summary">Incl. máx. medidas auxiliares Esquerda/Direita</string>
-  <string name="pref_lrud_horizontal_message">Inclinação máxima de medidas auxiliares Esquerda/Direita</string>
   <string name="pref_survex_eol_title">Terminação linha Survex/Topo</string>
   <string name="pref_survex_eol_summary">Terminação de linha Survex/Topo</string>
   <string name="pref_survex_splay_title">Base med. aux. Survex</string>
@@ -988,8 +985,6 @@
   <!-- UNUSED string name="pref_device_type_summary">Modelo de DistoX</string -->
   <!-- UNUSED string name="pref_comm_retry_title">Tentar nova conexão</string -->
   <!-- UNUSED string name="pref_comm_retry_summary">Número de tentativas de conexão</string -->
-  <!-- UNUSED string name="pref_comm_retry_dialogtitle">Número de tentativas de conexão</string -->
-  <!-- UNUSED string name="pref_comm_retry_message">Número de tentativas de conexãor</string -->
   <string name="pref_wait_laser_title">Pausa do laser [ms]</string>
   <string name="pref_wait_laser_summary">Pausa após a ligação do laser [ms]</string>
   <string name="pref_wait_shot_title">Pausa da medida [ms]</string>
@@ -1008,13 +1003,10 @@
   <string name="pref_head_tail_summary">Obtenha a quantidade de novos dados antes de baixá-los</string>
   <string name="pref_socket_delay_title">Atraso conexão</string>
   <string name="pref_socket_delay_summary">Tempo de espera da conexão para permitir o pareamento [0.1 sec]</string>
-  <string name="pref_socket_delay_dialogtitle">Atraso da conexão durante o pareamento</string>
-  <string name="pref_socket_delay_message">Tempo de espera da conexão para permitir o pareamento [0.1 sec]</string>
   <string name="pref_z6_workaround_title">Gambiara Z6</string>
   <string name="pref_z6_workaround_summary">Gambiarra Z6 para download dos dados</string>
   <string name="pref_crs_title">C R S </string>
-  <string name="pref_crs_summary">Nome CRS</string>
-  <string name="pref_crs_message">Inserir o nome do CRS como no Proj4</string>
+  <string name="pref_crs_summary">Nome do CRS como no Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">MédiaGPS</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Utilizar a média para produzir coordenadas GPS</string -->
 
@@ -1027,7 +1019,6 @@
   <string name="pref_shot_units_title">UNIDADES</string>
   <string name="pref_cwd_title">Diretório de trabalho</string>
   <!-- UNUSED string name="pref_cwd_summary">Diretório de trabalho do Topodroid</string -->
-  <!-- UNUSED string name="pref_cwd_message">Definir o diretório de trabalho do Topodroid</string -->
   <string name="pref_pt_color_map_title">Esquema cores PocketTopo</string>
   <string name="pref_pt_color_map_summary">Esquema de cores do PocketTopo (importação PocketTopo)</string>
   <string name="pref_text_size_title">Tamanho texto</string>
@@ -1088,13 +1079,10 @@
   <string name="pref_team_summary">Equipe padrão para novas topos</string>
 
   <string name="pref_ethr_title">Limite vertical med. aux.</string>
-  <string name="pref_ethr_summary">Região de medidas auxiliares verticais</string>
-  <string name="pref_ethr_message">Ângulo máximo a partir dos 90° para considerar como vertical uma medida auxiliar [deg]</string>
+  <string name="pref_ethr_summary">Ângulo máximo a partir dos 90° para considerar como vertical uma medida auxiliar [deg]</string>
   <string name="pref_vthr_title">Limite vertical medidas</string>
-  <string name="pref_vthr_summary">Limite vertical EDTC/NSLO</string>
-  <string name="pref_vthr_message">Limite inclinação vertical de medidas para definição EDTC/NSLO</string>
+  <string name="pref_vthr_summary">Limite inclinação vertical de medidas para definição EDTC/NSLO</string>
   <string name="pref_plan_vthr_title">Limite medida planta baixa</string>
-  <!-- UNUSED string name="pref_plan_vthr_summary">Limite de medida auxiliar na visualização da planta baixa</string -->
   <string name="pref_plan_vthr_message">Esconder medidas auxiliares com grande inclinação na visualização da planta baixa</string>
   <string name="pref_init_station_title">Nome base inicial</string>
   <string name="pref_init_station_summary">Nome padrão da base inicial</string>
@@ -1124,7 +1112,6 @@
   <string name="pref_unscaled_points_title">Ícones pontos sem zoom</string>
   <string name="pref_unscaled_points_summary">Ícones de pontos não são alterados pelo zoom</string>
   <string name="pref_segment_title">Espaçamento entre pontos de linhas</string>
-  <!-- UNUSED string name="pref_segment_summary">Distância mínima pontos de linhas</string -->
   <string name="pref_segment_message">Distância mínima entre pontos de linhas</string>
   <string name="pref_linestyle_title">Estilo linha</string>
   <string name="pref_linestyle_summary">Estilo de desenho da linha</string>
@@ -1140,19 +1127,15 @@
   <string name="pref_group_by_summary">Regra para agrupamento dos dados de calibração</string>
   <string name="pref_group_title">Tolerância grupos</string>
   <string name="pref_group_summary">Tolerância entre medidas de um mesmo grupo</string>
-  <string name="pref_group_message">Tolerância entre medidas de um mesmo grupo</string>
   <string name="pref_error_title">Erro algoritmo</string>
   <string name="pref_error_summary">Limite erro interrupção de calib.</string>
   <string name="pref_iter_title">Iterações algoritmo</string>
   <string name="pref_iter_summary">Máximo de iterações</string>
   <string name="pref_label_size_title">Tamanho rótulos</string>
   <string name="pref_label_size_summary">Tamanho dos rótulos</string>
-  <string name="pref_label_size_message">Tamanho dos rótulos</string>
   <string name="pref_arrow_length_title">Tamanho linha corte</string>
-  <!-- UNUSED string name="pref_arrow_length_summary">Tamanho do tracejado das linhas de corte</string -->
   <string name="pref_arrow_length_message">Tamanho do tracejado das linhas de corte</string>
   <string name="pref_dot_radius_title">Raio pontos verdes</string>
-  <!-- UNUSED string name="pref_dot_radius_summary">Raio dos pontos verdes</string -->
   <string name="pref_dot_radius_message">Raio dos pontos verdes</string>
   <string name="pref_line_thickness_title">Espessura linha</string>
   <string name="pref_line_thickness_summary">Espessura das linhas do desenho</string>

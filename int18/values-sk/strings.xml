@@ -964,13 +964,10 @@
   <!-- UNUSED string name="pref_trobot_names_summary">Názvy staníc sú v štýle TopoRobot</string -->
   <string name="pref_ortho_lrud_title">LRUD uhol pomocnej zámery</string>
   <string name="pref_ortho_lrud_summary">Minimálny uhol medzi pomocnou/hlavnou zámerou na export LRUD merania</string>
-  <string name="pref_ortho_lrud_message">Minimálny uhol medzi pomocnou/hlavnou zámerou na export LRUD merania</string> 
   <string name="pref_lrud_vertical_title">UD uhol pomocnej zámery</string> 
   <string name="pref_lrud_vertical_summary">Minimálny uhol pomocnej zámery na export UD merania</string>
-  <string name="pref_lrud_vertical_message">Minimálny uhol pomocnej zámery na export UD merania</string>
   <string name="pref_lrud_horizontal_title">LR uhol pomocnej zámery</string>
   <string name="pref_lrud_horizontal_summary">Maximálny uhol pomocnej zámery na export LR merania</string>
-  <string name="pref_lrud_horizontal_message">Maximálny uhol pomocnej zámery na export LR merania</string>
   <string name="pref_survex_eol_title">Prípona Survex / Topo</string>
   <string name="pref_survex_eol_summary">Survex / topo - prípona</string>
   <string name="pref_survex_splay_title">Body pomocných zámer programu Survex</string>
@@ -1006,8 +1003,6 @@
   <!-- UNUSED string name="pref_device_type_summary">Modello DistoX</string -->
   <!-- UNUSED string name="pref_comm_retry_title">Tentativi connesione</string -->
   <!-- UNUSED string name="pref_comm_retry_summary">Numero tentativi di connessione</string -->
-  <!-- UNUSED string name="pref_comm_retry_dialogtitle">Numero tentativi di connessione</string -->
-  <!-- UNUSED string name="pref_comm_retry_message">Numero tentativi di connessione</string -->
   <string name="pref_wait_laser_title">Pauza lasera [ms]</string>
   <string name="pref_wait_laser_summary">Doba za ktorú zasvieti laser pri ovládaní cez Bluetooth [ms]</string>
   <string name="pref_wait_shot_title">Pauza zámery [ms]</string>
@@ -1026,13 +1021,10 @@
   <string name="pref_head_tail_summary">Pred stiahnutím stiahne aj počet zameraných dát</string>
   <string name="pref_socket_delay_title">Oneskorenie pripojenia</string>
   <string name="pref_socket_delay_summary">Oneskorenie pred pokusom o pripojenie k DistoX [0.1 sec]</string>
-  <string name="pref_socket_delay_dialogtitle">Oneskorenie pripojenia</string>
-  <string name="pref_socket_delay_message">Oneskorenie pripojenia pred pokusom pripojiť sa k DistoX [0.1 sec]</string>
   <string name="pref_z6_workaround_title">Dátová cesta Z6</string>
   <string name="pref_z6_workaround_summary">Nastavenie pre telefóny Z6</string>
   <string name="pref_crs_title">C R S </string>
-  <string name="pref_crs_summary">Názov CRS</string>
-  <string name="pref_crs_message">Napíšte názov CRS ako v Proj4</string>
+  <string name="pref_crs_summary">Názov CRS ako v Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Se usare GPSAveraging</string -->
     
@@ -1045,7 +1037,6 @@
   <string name="pref_shot_units_title">NASTAVENIE JEDNOTIEK</string>
   <string name="pref_cwd_title">Pracovný adresár</string>
   <!-- UNUSED string name="pref_cwd_summary">Directory di lavoro di TopoDroid</string -->
-  <!-- UNUSED string name="pref_cwd_message">Scrivi la directory di lavoro di TopoDroid</string -->
   <string name="pref_pt_color_map_title">Farebná mapa PocketTopo</string>
   <string name="pref_pt_color_map_summary">Import podľa farieb z PocketTopo</string>
   <string name="pref_text_size_title">Veľkosť textu</string>
@@ -1107,13 +1098,10 @@
 
   <string name="pref_ethr_title">Prahová hodnota pomocnej zámery</string>
   <string name="pref_ethr_summary">Uhol +- od 90 stupnov pre ktorý má pomocná zámera vertikálnu Smerovú orientáciu [stupne]</string>
-  <string name="pref_ethr_message">Uhol +- od 90 stupnov pre ktorý má pomocná zámera vertikálnu Smerovú orientáciu [stupne]</string>
   <string name="pref_vthr_title">Prahová hodnota hlavnej zámery</string>
   <string name="pref_vthr_summary">Prah sklonu hlavnej zámery medzi LRUD / WENS - Therion "vthreshold"</string>
-  <string name="pref_vthr_message">Prah sklonu hlavnej zámery medzi LRUD / WENS - Therion "vthreshold"</string>
 
   <string name="pref_plan_vthr_title">Prahová hodnota pomocnej zámery v pôdoryse - skryté</string>
-  <!-- UNUSED string name="pref_plan_vthr_summary">Pomocné meranie vertikálnej prahovej hodnoty v pôdoryse</string -->
   <string name="pref_plan_vthr_message">Skryje pomocné zámery s vyšším sklonom v pôdoryse</string>
   <string name="pref_init_station_title">Počiatočný meračský bod</string>
   <string name="pref_init_station_summary">Predvolené číslo počiatočného meračského bodu</string>
@@ -1143,7 +1131,6 @@
   <string name="pref_unscaled_points_title">Približovanie Symbolov Bod v nákrese</string>
   <string name="pref_unscaled_points_summary">Približovanie bodov v Režime Posunu pri kreslení. Nezaškrtnuté = povolený zoom bodov</string>
   <string name="pref_segment_title">Rozstupové body na čiarach</string>
-  <!-- UNUSED string name="pref_segment_summary">Minimálna vzdialenosť bodov na čiarach</string -->
   <string name="pref_segment_message">Minimálna vzdialenosť medzi bodmi čiary</string>
   <string name="pref_linestyle_title">Štýl Symbolu Čiary</string>
   <string name="pref_linestyle_summary">Štýl Symbolu Čiary</string>
@@ -1159,19 +1146,15 @@
   <string name="pref_group_by_summary">Pravidlá zoskupovania údajov kalibrácie</string>
   <string name="pref_group_title">Skupinová tolerancia</string>
   <string name="pref_group_summary">Tolerancia medzi údajmi tej istej skupiny - maximálna uhlová odchýlka</string>
-  <string name="pref_group_message">Tolerancia medzi údajmi tej istej skupiny - maximálna uhlová odchýlka</string>
   <string name="pref_error_title">Chyba</string>
   <string name="pref_error_summary">Minimálna chyba odchýliek koeficientov kalibrácie</string>
   <string name="pref_iter_title">Opakovanie</string>
   <string name="pref_iter_summary">Maximálny počet opakovaní kalibračného algoritmu</string>
   <string name="pref_label_size_title">Veľkosť písmen v Poznámke priamo na nákrese</string>
   <string name="pref_label_size_summary">Veľkosť písmen v symbole BOD - Poznámka</string>
-  <string name="pref_label_size_message">Veľkosť písmen v symbole BOD - Poznámka</string>
   <string name="pref_arrow_length_title">Šírka čiary priečneho rezu</string>
-  <!-- UNUSED string name="pref_arrow_length_summary">Dĺžka smeru sekcie</string -->
   <string name="pref_arrow_length_message">Šírka čiary, ktorá indikuje vytvorený priečny rez</string>
   <string name="pref_dot_radius_title">Veľkosť zelených bodov výberu v Režime Editácie</string>
-  <!-- UNUSED string name="pref_dot_radius_summary">Výberové body polomeru</string -->
   <string name="pref_dot_radius_message">Veľkosť zelených bodov výberu v Režime Editácie pri kreslení</string>
   <string name="pref_line_thickness_title">Hrúbka Symbolu Čiary</string>
   <string name="pref_line_thickness_summary">Hrúbka nakreslenej čiary</string>

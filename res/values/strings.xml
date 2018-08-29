@@ -969,7 +969,6 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_extra_buttons_summary">Level of enabled features</string>
   <string name="pref_size_buttons_title">Buttons size</string>
   <string name="pref_size_buttons_summary">Size of action-bar buttons</string>
-  <!-- UNUSED string name="pref_size_buttons_message">Enter the size of action-bar buttons [pixels]</string -->
 
   <string name="pref_bezier_step_title">Point spacing</string>
   <string name="pref_bezier_step_summary">Distance between points on an export line [m]</string>
@@ -985,13 +984,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <!-- UNUSED string name="pref_trobot_names_summary">Station names are in TopoRobot style</string -->
   <string name="pref_ortho_lrud_title">LRUD splay angle</string>
   <string name="pref_ortho_lrud_summary">Minimum splay-leg angle for LRUD splays</string>
-  <string name="pref_ortho_lrud_message">LRUD minimum splay-leg angle</string>
   <string name="pref_lrud_vertical_title">UD splay clino</string>
   <string name="pref_lrud_vertical_summary">LRUD minimum clino for up/down splays</string>
-  <string name="pref_lrud_vertical_message">Up/Down minimum splay clino</string>
   <string name="pref_lrud_horizontal_title">LR splay clino</string>
   <string name="pref_lrud_horizontal_summary">LRUD maximum clino for left/right splays</string>
-  <string name="pref_lrud_horizontal_message">Left/Right maximum splay clino</string>
   <string name="pref_survex_eol_title">Survex/Topo line termination</string>
   <string name="pref_survex_eol_summary">Survex/Topo line termination</string>
   <string name="pref_survex_splay_title">Survex splays station</string>
@@ -1028,7 +1024,6 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <!-- UNUSED string name="pref_comm_retry_title">Connection retry</string -->
   <!-- UNUSED string name="pref_comm_retry_summary">Connection retries number</string -->
   <!-- UNUSED string name="pref_comm_retry_dialogtitle">Connection retries number</string -->
-  <!-- UNUSED string name="pref_comm_retry_message">Connection retries number</string -->
   <string name="pref_wait_laser_title">Laser pause [ms]</string>
   <string name="pref_wait_laser_summary">Pause after turning laser on [ms]</string>
   <string name="pref_wait_shot_title">Shot pause [ms]</string>
@@ -1047,13 +1042,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_head_tail_summary">Get the number of new data before downloading them</string>
   <string name="pref_socket_delay_title">Connection delay</string>
   <string name="pref_socket_delay_summary">Connection delay to allow pairing [0.1 sec]</string>
-  <string name="pref_socket_delay_dialogtitle">Connection delay on pairing</string>
-  <string name="pref_socket_delay_message">Connection delay to allow pairing [0.1 sec]</string>
   <string name="pref_z6_workaround_title">Z6 workaround</string>
   <string name="pref_z6_workaround_summary">Z6 workaround data-download</string>
   <string name="pref_crs_title">C R S </string>
   <string name="pref_crs_summary">CRS name, as in Proj4</string>
-  <string name="pref_crs_message">Enter the CRS name as in Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Whether to use GPSAveraging</string -->
 
@@ -1127,13 +1119,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
   <string name="pref_ethr_title">Splay vertical threshold</string>
   <string name="pref_ethr_summary">Region of vert. extend (splays)</string>
-  <string name="pref_ethr_message">Angle around 90 for splay vert. extend [deg]</string>
   <string name="pref_vthr_title">Leg vertical threshold</string>
   <string name="pref_vthr_summary">Vertical LRUD/WENS threshold</string>
-  <string name="pref_vthr_message">Leg inclination threshold between LRUD/WENS</string>
 
   <string name="pref_plan_vthr_title">Splay plan-view threshold</string>
-  <!-- UNUSED string name="pref_plan_vthr_summary">Splay vertical threshold in plan-view</string -->
   <string name="pref_plan_vthr_message">Hide splays with high inclination in the plan-view</string>
   <string name="pref_init_station_title">Initial station name</string>
   <string name="pref_init_station_summary">Default initial station name</string>
@@ -1163,7 +1152,6 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_unscaled_points_title">Non-zoomed point icons</string>
   <string name="pref_unscaled_points_summary">Point icons are not zoomed</string>
   <string name="pref_segment_title">Line-point spacing</string>
-  <!-- UNUSED string name="pref_segment_summary">Minimum line-point distance</string -->
   <string name="pref_segment_message">Minimum distance between points on a line</string>
   <string name="pref_linestyle_title">Line style</string>
   <string name="pref_linestyle_summary">Line drawing style</string>
@@ -1179,19 +1167,15 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_group_by_summary">Policy to group calibration data</string>
   <string name="pref_group_title">Group tolerance</string>
   <string name="pref_group_summary">Tolerance among shots in the same group</string>
-  <string name="pref_group_message">Tolerance among shots in the same group</string>
   <string name="pref_error_title">Algorithm error</string>
   <string name="pref_error_summary">Calib. algorithm termination error</string>
   <string name="pref_iter_title">Algorithm iterations</string>
   <string name="pref_iter_summary">Maximum number of iterations</string>
   <string name="pref_label_size_title">Labels size</string>
   <string name="pref_label_size_summary">Size of labels</string>
-  <string name="pref_label_size_message">Size of labels</string>
   <string name="pref_arrow_length_title">Section line tick size</string>
-  <!-- UNUSED string name="pref_arrow_length_summary">Size of the section line tick</string -->
   <string name="pref_arrow_length_message">Size of the section line tick</string>
   <string name="pref_dot_radius_title">Green dots size</string>
-  <!-- UNUSED string name="pref_dot_radius_summary">Green dots size</string -->
   <string name="pref_dot_radius_message">Size of the green dots</string>
   <string name="pref_line_thickness_title">Line width</string>
   <string name="pref_line_thickness_summary">Drawing line width</string>

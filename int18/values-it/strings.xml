@@ -935,8 +935,7 @@
   <string name="pref_extra_buttons_title">Livello di comandi</string>
   <string name="pref_extra_buttons_summary">Seleziona il livello di comandi</string>
   <string name="pref_size_buttons_title">Dimensione bottoni</string>
-  <string name="pref_size_buttons_summary">Dimensione bottoni barra superiore</string>
-  <!-- UNUSED string name="pref_size_buttons_message">Scrivi la dimensione dei bottoni della barra superiore [pixels]</string -->
+  <string name="pref_size_buttons_summary">Dimensione bottoni barra superiore [pixels]</string>
 
   <string name="pref_bezier_step_title">Spaziatura punti</string>
   <string name="pref_bezier_step_summary">Distanza tra punti in una linea di export [m]</string>
@@ -952,13 +951,10 @@
   <!-- UNUSED string name="pref_trobot_names_summary">I nomi capisaldi sono in stile TopoRobot</string -->
   <string name="pref_ortho_lrud_title">Angolo di splay di tipo LRUD</string>
   <string name="pref_ortho_lrud_summary">Minimo angolo tra splay e battuta per uno splay di tipo LRUD</string>
-  <string name="pref_ortho_lrud_message">LRUD: minimo angolo splay-battuta</string>
   <string name="pref_lrud_vertical_title">UD min inclin. splay </string>
   <string name="pref_lrud_vertical_summary">LRUD Su/Giù min inclin. splay </string>
-  <string name="pref_lrud_vertical_message">LRUD Su/Giù min inclin. splay </string>
   <string name="pref_lrud_horizontal_title">LR max inclin. splay</string>
   <string name="pref_lrud_horizontal_summary">LRUD Sx/Dx max inclin. splay</string>
-  <string name="pref_lrud_horizontal_message">LRUD Sx/Dx max inclin. splay</string>
   <string name="pref_survex_eol_title">Survex/Topo terminazione linea</string>
   <string name="pref_survex_eol_summary">Survex/Topo - terminazione linea</string>
   <string name="pref_survex_splay_title">Survex - stazioni splay</string>
@@ -994,8 +990,6 @@
   <!-- UNUSED string name="pref_device_type_summary">Modello DistoX</string -->
   <!-- UNUSED string name="pref_comm_retry_title">Tentativi connesione</string -->
   <!-- UNUSED string name="pref_comm_retry_summary">Numero tentativi di connessione</string -->
-  <!-- UNUSED string name="pref_comm_retry_dialogtitle">Numero tentativi di connessione</string -->
-  <!-- UNUSED string name="pref_comm_retry_message">Numero tentativi di connessione</string -->
   <string name="pref_wait_laser_title">Attesa dopo laser [ms]</string>
   <string name="pref_wait_laser_summary">Tempo di attesa dopo accensione laser [ms]</string>
   <string name="pref_wait_shot_title">Attesa dopo tiro [ms]</string>
@@ -1014,13 +1008,10 @@
   <string name="pref_head_tail_summary">Ottieni il numero di dati prima di scaricarli</string>
   <string name="pref_socket_delay_title">Ritardo di connessione</string>
   <string name="pref_socket_delay_summary">Ritardo di connessione per permettere la associazione [0.1 sec]</string>
-  <string name="pref_socket_delay_dialogtitle">Ritardo di connessione durante la associazione</string>
-  <string name="pref_socket_delay_message">Ritardo di connessione per permettere la associazione [0.1 sec]</string>
   <string name="pref_z6_workaround_title">Dati modo Z6</string>
   <string name="pref_z6_workaround_summary">Scaricamento dati modo Z6</string>
   <string name="pref_crs_title">C R S </string>
-  <string name="pref_crs_summary">Nome CRS</string>
-  <string name="pref_crs_message">Scrivi il CRS come in Proj4</string>
+  <string name="pref_crs_summary">Nome CRS, come in Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Se usare GPSAveraging</string -->
 
@@ -1033,7 +1024,6 @@
   <string name="pref_shot_units_title">OPZIONI UNITA\'</string>
   <string name="pref_cwd_title">Directory di lavoro</string>
   <!-- UNUSED string name="pref_cwd_summary">Directory di lavoro di TopoDroid</string -->
-  <!-- UNUSED string name="pref_cwd_message">Scrivi la directory di lavoro di TopoDroid</string -->
   <string name="pref_pt_color_map_title">Mappa di colori di PocketTopo</string>
   <string name="pref_pt_color_map_summary">Mappa colori di PocketTopo (PocketTopo import)</string>
   <string name="pref_text_size_title">Dimensione testo</string>
@@ -1095,13 +1085,10 @@
 
   <string name="pref_ethr_title">Angolo vert. extend</string>
   <string name="pref_ethr_summary">Angolo di vert. extend per splay</string>
-  <string name="pref_ethr_message">Angolo di vert. extend per splay</string>
   <string name="pref_vthr_title">Soglia vert.</string>
-  <string name="pref_vthr_summary">Soglia inclinazione LRUD/WENS</string>
-  <string name="pref_vthr_message">Soglia inclinazione battuta per LRUD/WENS</string>
+  <string name="pref_vthr_summary">Soglia inclinazione battuta per LRUD/WENS</string>
 
   <string name="pref_plan_vthr_title">Splay soglia verticale</string>
-  <!-- UNUSED string name="pref_plan_vthr_summary">soglia verticale per splay in pianta</string -->
   <string name="pref_plan_vthr_message">Soglia verticale per splay in pianta</string>
   <string name="pref_init_station_title">Caposaldo iniziale</string>
   <string name="pref_init_station_summary">Caposaldo iniziale di default</string>
@@ -1131,7 +1118,6 @@
   <string name="pref_unscaled_points_title">Punti icona senza zoom</string>
   <string name="pref_unscaled_points_summary">I punti icona non sono ingranditi</string>
   <string name="pref_segment_title">Spaziatura punti sulle linee</string>
-  <!-- UNUSED string name="pref_segment_summary">Minima spaziatura dei punti sulle linee</string -->
   <string name="pref_segment_message">Minima distanza fra punti di una linea</string>
   <string name="pref_linestyle_title">Stile linee</string>
   <string name="pref_linestyle_summary">Stile linee</string>
@@ -1147,19 +1133,15 @@
   <string name="pref_group_by_summary">Politica raggruppamento dati di calibrazione</string>
   <string name="pref_group_title">Tolleranza gruppi</string>
   <string name="pref_group_summary">Tolleranza fra dati di uno stesso gruppo</string>
-  <string name="pref_group_message">Tolleranza fra dati di uno stesso gruppo</string>
   <string name="pref_error_title">Errore</string>
   <string name="pref_error_summary">Minimo errore calibrazione</string>
   <string name="pref_iter_title">Iterazioni</string>
   <string name="pref_iter_summary">Massimo numero iterazioni</string>
   <string name="pref_label_size_title">Dimensione scritte</string>
   <string name="pref_label_size_summary">Dimensione delle scritte</string>
-  <string name="pref_label_size_message">Dimensione delle scritte</string>
   <string name="pref_arrow_length_title">Direzione di sezione</string>
-  <!-- UNUSED string name="pref_arrow_length_summary">Lunghezza direzione di sezione</string -->
   <string name="pref_arrow_length_message">Lunghezza direzione di sezione</string>
   <string name="pref_dot_radius_title">Raggio punti selezione</string>
-  <!-- UNUSED string name="pref_dot_radius_summary">Raggio punti selezione</string -->
   <string name="pref_dot_radius_message">Raggio dei punti di selezione</string>
   <string name="pref_line_thickness_title">Spessore linee</string>
   <string name="pref_line_thickness_summary">Spessore linee disegno</string>

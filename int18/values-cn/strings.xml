@@ -929,7 +929,6 @@
   <string name="pref_extra_buttons_summary">激活特殊模式</string>
   <string name="pref_size_buttons_title">按键尺寸</string>
   <string name="pref_size_buttons_summary">活动按钮尺寸</string>
-  <!-- UNUSED string name="pref_size_buttons_message">输入活动按钮尺寸 [pixels]</string -->
 
   <!-- TODO string name="pref_bezier_step_title">Point spacing</string -->
   <!-- TODO string name="pref_bezier_step_summary">Distance between points on an export line [m]</string -->
@@ -945,13 +944,10 @@
   <!-- TODO string name="pref_trobot_names_summary">Station names are in TopoRobot style</string -->
   <string name="pref_ortho_lrud_title">LRUD 侧线的角度</string>
   <string name="pref_ortho_lrud_summary">每组LRUD侧线与主线的最小测量角度</string>
-  <string name="pref_ortho_lrud_message">LRUD最小的侧线主线角度</string>
   <!-- TODO string name="pref_lrud_vertical_title">UD min splay clino</string -->
   <!-- TODO string name="pref_lrud_vertical_summary">LRUD up/down minimum splay clino</string -->
-  <!-- TODO string name="pref_lrud_vertical_message">LRUD up/down minimum splay clino</string -->
   <!-- TODO string name="pref_lrud_horizontal_title">LR max splay clino</string -->
   <!-- TODO string name="pref_lrud_horizontal_summary">LRUD left/right maximum splay clino</string -->
-  <!-- TODO string name="pref_lrud_horizontal_message">LRUD left/right maximum splay clino</string -->
   <string name="pref_survex_eol_title">Survex/Topo 线终端</string>
   <string name="pref_survex_eol_summary">Survex/Topo 线终端</string>
   <string name="pref_survex_splay_title">Survex 侧线测量点</string>
@@ -988,8 +984,6 @@
   <!-- UNUSED string name="pref_device_type_summary">DistoX型号</string -->
   <!-- UNUSED string name="pref_comm_retry_title">重试连接</string -->
   <!-- UNUSED string name="pref_comm_retry_summary">重试连接数</string -->
-  <!-- UNUSED string name="pref_comm_retry_dialogtitle">重试连接数</string -->
-  <!-- UNUSED string name="pref_comm_retry_message">重试连接数</string -->
   <string name="pref_wait_laser_title">等待激光 [毫秒]</string>
   <string name="pref_wait_laser_summary">延迟等待设备通电 [毫秒]</string>
   <string name="pref_wait_shot_title">测射后等待 [毫秒]</string>
@@ -1008,13 +1002,10 @@
   <!-- TODO string name="pref_head_tail_summary">Get the number of data before downloading them</string -->
   <string name="pref_socket_delay_title">连接延时</string>
   <string name="pref_socket_delay_summary">准许配对延时 [0.1 秒]</string>
-  <string name="pref_socket_delay_dialogtitle">配对连接延时</string>
-  <string name="pref_socket_delay_message">准许配对延时 [0.1 秒]</string>
   <string name="pref_z6_workaround_title">Z6 工作区</string>
   <string name="pref_z6_workaround_summary">Z6 工作区数据下载</string>
   <string name="pref_crs_title">C R S </string>
   <string name="pref_crs_summary">CRS 名称</string>
-  <string name="pref_crs_message">输入 CRS 名称如同Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS 平均值</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">都使用 GPS平均值</string -->
 
@@ -1027,7 +1018,6 @@
   <string name="pref_shot_units_title">单位</string>
   <string name="pref_cwd_title">工作目录</string>
   <!-- UNUSED string name="pref_cwd_summary">TopoDroid 工作目录</string -->
-  <!-- UNUSED string name="pref_cwd_message">输入TopoDroid工作目录</string -->
   <string name="pref_pt_color_map_title">PocketTopo 地图颜色</string>
   <string name="pref_pt_color_map_summary">PocketTopo 地图颜色 (PocketTopo 输入)</string>
   <string name="pref_text_size_title">字体大小</string>
@@ -1088,14 +1078,11 @@
   <string name="pref_team_summary">默认测量队伍名称</string>
 
   <string name="pref_ethr_title">侧线垂直极限值</string>
-  <string name="pref_ethr_summary">侧线垂直延展区域</string>
-  <string name="pref_ethr_message">围绕侧线垂直延展90度环绕</string>
+  <string name="pref_ethr_summary">围绕侧线垂直延展90度环绕</string>
   <string name="pref_vthr_title">主线垂直极限值</string>
-  <string name="pref_vthr_summary">LRSD/WENS垂直的极限值</string>
-  <string name="pref_vthr_message">主线在LRSD/WENS倾斜的临界值</string>
+  <string name="pref_vthr_summary">主线在LRSD/WENS倾斜的临界值</string>
 
   <string name="pref_plan_vthr_title">平面视图侧线的极限值</string>
-  <!-- UNUSED string name="pref_plan_vthr_summary">平面视图中的侧线垂直极限值</string -->
   <string name="pref_plan_vthr_message">在平面视图中隐藏高斜度的侧线</string>
   <string name="pref_init_station_title">起始测量点的名称</string>
   <string name="pref_init_station_summary">默认起始测量点名称</string>
@@ -1125,7 +1112,6 @@
   <string name="pref_unscaled_points_title">非缩放点图标</string>
   <string name="pref_unscaled_points_summary">点图标不能缩放</string>
   <string name="pref_segment_title">线点间隔</string>
-  <!-- UNUSED string name="pref_segment_summary">线点间隔最小值</string -->
   <string name="pref_segment_message">线上的点之间的最小距离</string>
   <string name="pref_linestyle_title">线类型</string>
   <string name="pref_linestyle_summary">线绘制类型</string>
@@ -1141,19 +1127,15 @@
   <string name="pref_group_by_summary">校准数据组策略</string>
   <string name="pref_group_title">组公差</string>
   <string name="pref_group_summary">同一组中测量的公差</string>
-  <string name="pref_group_message">同一组中测量的公差</string>
   <string name="pref_error_title">错误</string>
   <string name="pref_error_summary">最小校准错误</string>
   <string name="pref_iter_title">迭代次数</string>
   <string name="pref_iter_summary">迭代次数最小值</string>
   <string name="pref_label_size_title">标签大小</string>
   <string name="pref_label_size_summary">标签大小</string>
-  <string name="pref_label_size_message">标签大小</string>
   <string name="pref_arrow_length_title">截面线最小单位</string>
-  <!-- UNUSED string name="pref_arrow_length_summary">截面线的大小</string -->
   <string name="pref_arrow_length_message">截面线的大小</string>
   <string name="pref_dot_radius_title">绿色点大小</string>
-  <!-- UNUSED string name="pref_dot_radius_summary">绿色点大小</string -->
   <string name="pref_dot_radius_message">绿色点大小</string>
   <string name="pref_line_thickness_title">线宽</string>
   <string name="pref_line_thickness_summary">绘图线宽</string>
