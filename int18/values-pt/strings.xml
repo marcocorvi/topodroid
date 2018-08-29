@@ -1032,9 +1032,7 @@
   <string name="pref_pt_color_map_summary">Esquema de cores do PocketTopo (importação PocketTopo)</string>
   <string name="pref_text_size_title">Tamanho texto</string>
   <string name="pref_text_size_summary">Tamanho do texto dos itens de lista</string>
-  <string name="pref_text_size_message">Tamanho do texto nas listas</string>
   <string name="pref_closeness_title">Raio de seleção</string>
-  <!-- UNUSED string name="pref_closeness_summary">Raio da ferramenta de seleção do croqui</string -->
   <string name="pref_closeness_message">Raio da ferramenta de seleção do croqui</string>
   <string name="pref_eraseness_title">Tamanho da borracha</string>
   <string name="pref_eraseness_message">Raio da borracha no desenho</string>
@@ -1045,7 +1043,6 @@
   <string name="pref_dash_splay_title">Coerência pont. med. aux.</string>
   <string name="pref_dash_splay_message">Pontilhamento coerente entre medidas auxiliares na planta baixa e nos perfis</string>
   <string name="pref_vert_splay_title">Limite med. aux. tracejadas</string>
-  <!-- UNUSED string name="pref_vert_splay_summary">Medidas auxiliares acima desta inclinação serão tracejadas</string -->
   <string name="pref_vert_splay_message">Medidas auxiliares acima dessa inclinação serão tracejadas</string>
   <string name="pref_horiz_splay_title">Limite pontilhamento de med. aux. X azimute</string>
   <string name="pref_horiz_splay_message">Medida auxiliar divergindo do azimute acima deste limite será pontilhada</string>
@@ -1059,30 +1056,23 @@
   <string name="xsections_private">Cortes X não compartilhados</string>
   <string name="pref_reduce_angle_title">Ângulo endireitar</string>
   <string name="pref_reduce_angle_summary">Ângulo mínimo do segmento a endireitar</string>
-  <string name="pref_reduce_angle_message">Ângulo mínimo do segmento a endireitar</string>
 
 
   <string name="pref_survey_stations_title">Regras para bases</string>
   <string name="pref_survey_stations_summary">Regras para nomes de bases criados automaticamente</string>
   <string name="pref_accel_thr_title">Tolerância aceleração</string>
   <string name="pref_accel_thr_summary">Percentual de tolerância para valores de aceleração</string>
-  <string name="pref_accel_thr_message">Percentual de tolerância para valores de aceleração</string>
   <string name="pref_mag_thr_title">Tolerância campo magnético</string>
   <string name="pref_mag_thr_summary">Percentual de tolerância para valores do campo magnético</string>
-  <string name="pref_mag_thr_message">Percentual de tolerância para valores do campo magnético</string>
   <string name="pref_dip_thr_title">Tolerância declinação magnética</string>
   <string name="pref_dip_thr_summary">Percentual de tolerância para valores da declinação magnética</string>
-  <string name="pref_dip_thr_message">Percentual de tolerância para valores da declinação magnética</string>
 
   <string name="pref_leg_title">Tolerância visadas</string>
   <string name="pref_leg_summary">Tolerância entre as medições de uma visada</string>
-  <string name="pref_leg_message">Tolerância entre as medições de uma visada</string>
   <string name="pref_max_shot_title">Comprimento máximo visada</string>
   <string name="pref_max_shot_summary">Comprimento máximo para visadas [m]</string>
-  <string name="pref_max_shot_message">Visadas com comprimento maior do que este serão marcadas como excessivamente longas</string>
   <string name="pref_min_leg_title">Comprimento mínimo visada</string>
   <string name="pref_min_leg_summary">Comprimeto mínimo de visadas [m]</string>
-  <string name="pref_min_leg_message">Visadas menores que este valor mínimo tem fundo laranja</string>
   <string name="pref_backsight_title">Medida contra</string>
   <string name="pref_backsight_summary">Campos de contra azimute e inclinação invertida para inserção manual de medida</string>
   <string name="pref_backshot_title">Contramedida DistoX</string>
@@ -1095,8 +1085,7 @@
   <string name="pref_azimuth_manual_summary">Referência fixa para retificação de perfil</string>
 
   <string name="pref_team_title">Equipe</string>
-  <string name="pref_team_summary">Equipe da topo</string>
-  <string name="pref_team_message">Equipe padrão para novas topos</string>
+  <string name="pref_team_summary">Equipe padrão para novas topos</string>
 
   <string name="pref_ethr_title">Limite vertical med. aux.</string>
   <string name="pref_ethr_summary">Região de medidas auxiliares verticais</string>
@@ -1109,38 +1098,29 @@
   <string name="pref_plan_vthr_message">Esconder medidas auxiliares com grande inclinação na visualização da planta baixa</string>
   <string name="pref_init_station_title">Nome base inicial</string>
   <string name="pref_init_station_summary">Nome padrão da base inicial</string>
-  <string name="pref_init_station_message">Nome padrão da base inicial</string>
   <string name="pref_station_names_title">Nomes bases</string>
   <string name="pref_station_names_summary">Tipo de nome das bases</string>
 
   <string name="pref_hthr_title">Limite hor. corte h</string>
   <string name="pref_hthr_summary">Limite horizontal para cortes horizontais</string>
-  <string name="pref_hthr_message">Inclinação da medida acima da qual cortes são horizontais</string>
   <string name="pref_bitmap_scale_title">Resolução PNG</string>
   <string name="pref_bitmap_scale_summary">Resolução imagem PNG croquis</string>
-  <string name="pref_bitmap_scale_message">Resolução de imagem PNG de croqui exportado</string>
   <string name="pref_bitmap_bgcolor_title">Cor fundo PNG</string>
   <string name="pref_bitmap_bgcolor_summary">Cor de fundo imagem PNG croquis</string>
-  <string name="pref_bitmap_bgcolor_message">Cor de fundo de imagem PNG de croqui exportado</string>
   <string name="pref_acad_version_title">Versão AutoCAD</string>
   <string name="pref_acad_version_summary">Versão AutoCAD</string>
   <!-- UNUSED string name="pref_dxf_scale_title">Escala croqui DXF</string -->
   <!-- UNUSED string name="pref_dxf_scale_summary">Fator de escala croqui DXF</string -->
-  <!-- UNUSED string name="pref_dxf_scale_message">Fator de escala na exportação de croqui em DXF</string -->
   <string name="pref_dxf_blocks_title">Ponto final med. aux. DXF</string>
   <string name="pref_dxf_blocks_summary">Ponto final de medida auxiliar DXF</string>
   <string name="pref_thumbnail_title">Tamanho Thumbnails</string>
   <string name="pref_thumbnail_summary">Tamanho das fotos miniatura</string>
-  <string name="pref_thumbnail_message">Tamanho das fotos miniatura</string>
   <string name="pref_shot_timer_title">Temporização direção medidas</string>
   <string name="pref_shot_timer_summary">Segundos de espera antes de capturar a direção da medida</string>
-  <string name="pref_shot_timer_message">Segundos antes de capturar direção da medida</string>
   <string name="pref_beep_volume_title">Volume bip temporizador</string>
   <string name="pref_beep_volume_summary">Percentual de volume do bip do temporizador</string>
-  <string name="pref_beep_volume_message">Percentual de volume do bip do temporizador</string>
   <string name="pref_drawing_unit_title">Escala símbolos pontos</string>
   <string name="pref_drawing_unit_summary">Escala dos símbolos dos pontos</string>
-  <string name="pref_drawing_unit_message">Escala dos símbolos dos pontos no desenho</string>
   <string name="pref_unscaled_points_title">Ícones pontos sem zoom</string>
   <string name="pref_unscaled_points_summary">Ícones de pontos não são alterados pelo zoom</string>
   <string name="pref_segment_title">Espaçamento entre pontos de linhas</string>
@@ -1151,11 +1131,9 @@
   <!-- TODO string name="pref_linecontinue_title">Line continue</string -->
   <!-- TODO string name="pref_linecontinue_summary">Line default continue-mode</string -->
   <string name="pref_lineacc_title">Precisão interpolação</string>
-  <string name="pref_lineacc_summary">Precisão da interpolação Bézier</string>
-  <string name="pref_lineacc_message">Exatidão da interpolação cúbica das curvas Bézier</string>
+  <string name="pref_lineacc_summary">Exatidão da interpolação cúbica das curvas Bézier</string>
   <string name="pref_linecorner_title">Limite quinas Bézier</string>
-  <string name="pref_linecorner_summary">Limite das quinas Bézier</string>
-  <string name="pref_linecorner_message">Limite para detecção de quinas nas curvas Bézier</string>
+  <string name="pref_linecorner_summary">Limite para detecção de quinas nas curvas Bézier</string>
   <string name="pref_calib_algo_title">Algoritmo</string>
   <string name="pref_calib_algo_summary">Algoritmo de calibração</string>
   <string name="pref_group_by_title">Regra agrupamento</string>
@@ -1165,12 +1143,8 @@
   <string name="pref_group_message">Tolerância entre medidas de um mesmo grupo</string>
   <string name="pref_error_title">Erro algoritmo</string>
   <string name="pref_error_summary">Limite erro interrupção de calib.</string>
-  <string name="pref_error_dialogtitle">Limite de erro para interrupção de calibração</string>
-  <string name="pref_error_message">Limite de erro para interrupção de calibração</string>
   <string name="pref_iter_title">Iterações algoritmo</string>
   <string name="pref_iter_summary">Máximo de iterações</string>
-  <string name="pref_iter_dialogtitle">Máximo de iterações do algoritmo de calibração</string>
-  <string name="pref_iter_message">Número máximo de iterações do algoritmo de calibração</string>
   <string name="pref_label_size_title">Tamanho rótulos</string>
   <string name="pref_label_size_summary">Tamanho dos rótulos</string>
   <string name="pref_label_size_message">Tamanho dos rótulos</string>
@@ -1182,13 +1156,10 @@
   <string name="pref_dot_radius_message">Raio dos pontos verdes</string>
   <string name="pref_line_thickness_title">Espessura linha</string>
   <string name="pref_line_thickness_summary">Espessura das linhas do desenho</string>
-  <string name="pref_line_thickness_message">Espessura das linhas do desenho</string>
   <string name="pref_fixed_thickness_title">Espessura linha trena</string>
   <string name="pref_fixed_thickness_summary">Espessura das linhas de trena</string>
-  <string name="pref_fixed_thickness_message">Espessura das linhas de trena</string>
   <!-- UNUSED string name="pref_device_title">Dispositivo</string -->
   <!-- UNUSED string name="pref_device_summary">Nome do endereço da DistoX</string -->
-  <!-- UNUSED string name="pref_device_message">Nome do endereço da DistoX</string -->
   <string name="pref_checkBT_title">Bluetooth</string>
   <string name="pref_checkBT_summary">Habilitar verificação do Bluetooth na abertura do aplicativo</string>
   <string name="pref_checkAttached_title">Verificação linha de trena</string>
@@ -1220,7 +1191,6 @@
   <!-- UNUSED string name="pref_section_stations_summary">Bases de referência cortes X</string -->
   <string name="pref_station_size_title">Tamanho nome bases</string>
   <string name="pref_station_size_summary">Tamanho do nome das bases</string>
-  <string name="pref_station_size_message">Tamanho do nome das bases</string>
   <string name="pref_zoom_controls_title">Controle zoom</string>
   <string name="pref_zoom_controls_summary">Controle do zoom em telas multitoque</string>
   <string name="pref_side_drag_title">Arrasto lateral</string>
@@ -1238,19 +1208,14 @@
   <!-- UNUSED string name="pref_sketchUsesSplays_summary">Superfícies no croqui usas medidas auxiliares</string -->
   <string name="pref_sketchLineStep_title">Lado máximo</string>
   <string name="pref_sketchLineStep_summary">Tamanho máximo do lado do triângulo</string>
-  <string name="pref_sketchLineStep_message">Tamanho máximo do lado do triângulo [m]</string>
   <!-- UNUSED string name="pref_sketchBorderStep_title">Intervalo bordas</string -->
   <!-- UNUSED string name="pref_sketchBorderStep_summary">Distância entre pontos da linha editada</string -->
-  <!-- UNUSED string name="pref_sketchBorderStep_message">Distância entre pontos da linha editada</string -->
   <!-- UNUSED string name="pref_sketchSectionStep_title">Intervalo cortes</string -->
   <!-- UNUSED string name="pref_sketchSectionStep_summary">Distância entre cortes</string -->
-  <!-- UNUSED string name="pref_sketchSectionStep_message">Distância entre cortes consecutivos</string -->
   <string name="pref_sketchDeltaExtrude_title">Escala extrusão</string>
   <string name="pref_sketchDeltaExtrude_summary">Fator escala de extrusão</string>
-  <string name="pref_sketchDeltaExtrude_message">Fator escala de extrusão</string>
   <string name="pref_sketchCompassReadings_title">Leituras bússola</string>
   <string name="pref_sketchCompassReadings_summary">Número de leituras para fazer a média</string>
-  <string name="pref_sketchCompassReadings_message">Número de leituras da bússula para fazer a média</string>
 
   <string name="pref_unit_length_title">Unidade distâncias</string>
   <string name="pref_unit_length_summary">Unidade para visualização de distâncias</string>
@@ -1263,33 +1228,24 @@
   <string name="pref_walls_type_title">Tipo paredes</string>
   <string name="pref_walls_type_summary">Tipo das paredes</string>
   <string name="pref_walls_plan_thr_title">Inclinação medidas planta</string>
-  <string name="pref_walls_plan_thr_summary">Inclinação máxima de medidas auxiliares para paredes de plantas baixas</string>
-  <string name="pref_walls_plan_thr_message">Inclinação máxima de medidas auxiliares para paredes de plantas baixas [deg]</string>
+  <string name="pref_walls_plan_thr_summary">Inclinação máxima de medidas auxiliares para paredes de plantas baixas [deg]</string>
   <string name="pref_walls_extended_thr_title">Inclinação medidas corte</string>
-  <string name="pref_walls_extended_thr_summary">Inclinação máxima de medidas auxiliares para paredes de cortes</string>
-  <string name="pref_walls_extended_thr_message">Inclinação máxima de medidas auxiliares para paredes de cortes [deg]</string>
+  <string name="pref_walls_extended_thr_summary">Inclinação máxima de medidas auxiliares para paredes de cortes [deg]</string>
   <string name="pref_walls_xclose_title">Espaçamento</string>
-  <string name="pref_walls_xclose_summary">Separação mínima dos pontos ao longo da medida</string>
-  <string name="pref_walls_xclose_message">Separação mínima de pontos de paredes ao longo da medida [m]</string>
+  <string name="pref_walls_xclose_summary">Separação mínima de pontos de paredes ao longo da medida [m]</string>
   <string name="pref_walls_concave_title">Concavidade</string>
-  <string name="pref_walls_concave_summary">Concavidade máxima</string>
-  <string name="pref_walls_concave_message">Concavidade máxima [percentual]</string>
+  <string name="pref_walls_concave_summary">Concavidade máxima [percentual]</string>
   <string name="pref_walls_xstep_title">Passo</string>
-  <string name="pref_walls_xstep_summary">Separação dos pontos ao longo das paredes</string>
-  <string name="pref_walls_xstep_message">Separação dos pontos ao longo das paredes [m]</string>
+  <string name="pref_walls_xstep_summary">Separação dos pontos ao longo das paredes [m]</string>
 
   <string name="pref_algo_min_alpha_title">Min-algo alpha</string>
-  <string name="pref_algo_min_alpha_summary">Fator de correção para min-algo</string>
-  <string name="pref_algo_min_alpha_message">ator de correção para min-algo (em [0,1])</string>
+  <string name="pref_algo_min_alpha_summary">ator de correção para min-algo (em [0,1])</string>
   <string name="pref_algo_min_beta_title">Min-algo beta</string>
   <string name="pref_algo_min_beta_summary">Fator de correção para min-algo do peso dip M</string>
-  <string name="pref_algo_min_beta_message">Fator de correção para min-algo do peso dip M</string>
   <string name="pref_algo_min_gamma_title">Min-algo gamma</string>
   <string name="pref_algo_min_gamma_summary">Fator de correção para min-algo do peso do grupo G.x M.x</string>
-  <string name="pref_algo_min_gamma_message">Fator de correção para min-algo do peso do grupo G.x M.x</string>
   <string name="pref_algo_min_delta_title">Min-algo delta</string>
   <string name="pref_algo_min_delta_summary">Fator de correção para min-algo do peso do grupo G^M.x</string>
-  <string name="pref_algo_min_delta_message">Fator de correção para min-algo do peso do grupo G^M.x</string>
 
 <!-- LEAVE LOG STUFF IN ENGLISH
   <string name="pref_log_stream_summary">Fluxo do log de saída</string>

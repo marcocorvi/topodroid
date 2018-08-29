@@ -1046,9 +1046,7 @@
   <string name="pref_pt_color_map_summary">Соответствие цветов PocketTopo типам объектов (PocketTopo импорт)</string>
   <string name="pref_text_size_title">Размер текста</string>
   <string name="pref_text_size_summary">Размер текста в списках</string>
-  <string name="pref_text_size_message">Размер текста в списках</string>
   <string name="pref_closeness_title">Радиус выбора</string>
-  <!-- UNUSED string name="pref_closeness_summary">Радиус выбора элемента абриса</string -->
   <string name="pref_closeness_message">Радиус зоны выбора элемента абриса</string>
   <string name="pref_eraseness_title">Размер ластика</string>
   <string name="pref_eraseness_message">Радиус инструмента стирания</string>
@@ -1059,7 +1057,6 @@
   <string name="pref_dash_splay_title">Боковые замеры пунктиром на плане как на разрезе</string>
   <string name="pref_dash_splay_message">Боковые замеры показаны пунктиром на плане и разрезе по одинаковым критериям</string>
   <string name="pref_vert_splay_title">Порог угла бок. замеров пунктиром на плане</string>
-  <!-- UNUSED string name="pref_vert_splay_summary">Порог угла бок. замеров показаных пунктиром</string -->
   <string name="pref_vert_splay_message">Бок. замеры с наклоном больше порогового показаны на плане пунктиром</string>
   <string name="pref_horiz_splay_title">Порог азимута бок. замеров отображаемых пунктиром на разрезе</string>
   <string name="pref_horiz_splay_message">Боковые замеры с разницей азимута к нитке хода больше заданого значения показаны пунктиром</string>
@@ -1073,7 +1070,6 @@
   <string name="xsections_private">НЕ Общие поперечные разрезы</string>
   <string name="pref_reduce_angle_title">Угол спрямления линии</string>
   <string name="pref_reduce_angle_summary">Минимальный угол между сегментами для спрямления линии</string>
-  <string name="pref_reduce_angle_message">Минимальный угол между сегментами для спрямления линии</string>
   <!-- UNUSED string name="pref_list_refresh_title">Обновить список</string -->
   <!-- UNUSED string name="pref_list_refresh_summary">Принудительно обновить список</string -->	
 	
@@ -1081,23 +1077,17 @@
   <string name="pref_survey_stations_summary">Авто нумерация пикетов</string>
   <string name="pref_accel_thr_title">Максимальное допустимое ускорение</string>
   <string name="pref_accel_thr_summary">Максимальное допустимое ускорение при замере</string>
-  <string name="pref_accel_thr_message">Максимальное допустимое ускорение при замере</string>
   <string name="pref_mag_thr_title">Максимальная допустимая намагниченность</string>
   <string name="pref_mag_thr_summary">Максимальное допустимое магнитное поле при замере</string>
-  <string name="pref_mag_thr_message">Максимальное допустимое магнитное поле при замере</string>
   <string name="pref_dip_thr_title">Максимально допустимый магнитный угол</string>
   <string name="pref_dip_thr_summary">Максимальное допустимое отклонениие угла магнитного поля при замере</string>
-  <string name="pref_dip_thr_message">Максимальное допустимое отклонениие угла магнитного поля при замере</string>
 
   <string name="pref_leg_title">Допустимое расхождение повторных измерений</string>
   <string name="pref_leg_summary">Допустимое расхождение в повторных измерениях между пикетами</string>
-  <string name="pref_leg_message">Допустимое расхождение в повторных измерениях между пикетами</string>
   <string name="pref_max_shot_title">Максимальная длина замера</string>
   <string name="pref_max_shot_summary">Максимальная длина измерения [м]</string>
-  <string name="pref_max_shot_message">Замеры, превышающие это значение, будут помечены как слишком длинные</string>
   <string name="pref_min_leg_title">Минимальная длина замера</string>
   <string name="pref_min_leg_summary">Минимальная длина замеров [м]</string>
-  <string name="pref_min_leg_message">Замеры, короче минимальной длинны будут подцвечены оранжевым</string>
   <string name="pref_backsight_title">Обратный замер</string>
   <string name="pref_backsight_summary">Поле для ввода обратного замера в диалоге ручного ввода замера</string>
   <string name="pref_backshot_title">Обратный замер DistoX</string>
@@ -1110,8 +1100,7 @@
   <string name="pref_azimuth_manual_summary">Задавать направление развёртки отрезков вручную</string>
 
   <string name="pref_team_title">Группа съёмки</string>
-  <string name="pref_team_summary">Группа съёмки</string>
-  <string name="pref_team_message">Группа съёмки по умолчанию</string>
+  <string name="pref_team_summary">Группа съёмки по умолчанию</string>
 
   <string name="pref_ethr_title">Порог вертикальности бокового замера</string>
   <string name="pref_ethr_summary">Угловой диапазон верт. проекции (бок. замер)</string>
@@ -1125,38 +1114,29 @@
   <string name="pref_plan_vthr_message">Порог угла  бок. замеров отображаемых в плане</string>
   <string name="pref_init_station_title">Начальный пикет</string>
   <string name="pref_init_station_summary">Начальный пикет по умолчаниию</string>
-  <string name="pref_init_station_message">Начальный пикет по умолчаниию</string>
   <string name="pref_station_names_title">Номера пикетов</string>
   <string name="pref_station_names_summary">Тип нумерации пикетов</string>
 
   <string name="pref_hthr_title">Порог угла горизонтального сечения</string>
   <string name="pref_hthr_summary">ППорог угла горизонтального сечения</string>
-  <string name="pref_hthr_message">Угол при превышении которого сечение становится горизонтальным</string>
   <string name="pref_bitmap_scale_title">Масштаб PNG</string>
   <string name="pref_bitmap_scale_summary">Масштабный коэффициент абриса при экспорте в PNG</string>
-  <string name="pref_bitmap_scale_message">Масштабный коэффициент абриса при экспорте в PNG</string>
   <string name="pref_bitmap_bgcolor_title">Цвет фона PNG</string>
   <string name="pref_bitmap_bgcolor_summary">Цвет фона PNG для абрисов</string>
-  <string name="pref_bitmap_bgcolor_message">Цвет фона PNG при экспорте абрисов</string>
   <string name="pref_acad_version_title">Версия AutoCAD</string>
   <string name="pref_acad_version_summary">Версия AutoCAD</string>
   <!-- UNUSED string name="pref_dxf_scale_title">Масштаб абриса в DXF</string -->
   <!-- UNUSED string name="pref_dxf_scale_summary">Фактор масштаба абриса DXF</string -->
-  <!-- UNUSED string name="pref_dxf_scale_message">Масштабирующий фактор при экспорте абриса в DXF</string -->
   <string name="pref_dxf_blocks_title">Точки бок. замеров в DXF</string>
   <string name="pref_dxf_blocks_summary">Точки окончаний боковых замеров в экскорте в DXF</string>
   <string name="pref_thumbnail_title">Размер миниатюры</string>
   <string name="pref_thumbnail_summary">Размер картинки миниатюры</string>
-  <string name="pref_thumbnail_message">Размер картинки миниатюры</string>
   <string name="pref_shot_timer_title">Таймер задержки измерения</string>
   <string name="pref_shot_timer_summary">Секунд до замера направления на пикет</string>
-  <string name="pref_shot_timer_message">Секунд до замера направления на пикет</string>
   <string name="pref_beep_volume_title">Громкость сигнала таймера</string>
   <string name="pref_beep_volume_summary">Проценты громкости сигнала таймера</string>
-  <string name="pref_beep_volume_message">Проценты громкости сигнала таймера</string>
   <string name="pref_drawing_unit_title">Размер символов точек</string>
-  <string name="pref_drawing_unit_summary">Размер символов точек</string>
-  <string name="pref_drawing_unit_message">Базовый размер символов точек [требуется перезапуск программы]</string>
+  <string name="pref_drawing_unit_summary">Базовый размер символов точек [требуется перезапуск программы]</string>
   <string name="pref_unscaled_points_title">Немасштабируемые значки точек</string>
   <string name="pref_unscaled_points_summary">Не масштабировать значки точек</string>
   <string name="pref_segment_title">Шаг точек в линии</string>
@@ -1167,11 +1147,9 @@
   <string name="pref_linecontinue_title">Продолжить линию</string>
   <string name="pref_linecontinue_summary">Способ продолжения рисования линий по-умолчанию</string>
   <string name="pref_lineacc_title">Точность кривых Безье</string>
-  <string name="pref_lineacc_summary">Точность кривых Безье</string>
-  <string name="pref_lineacc_message">Точность кубической интерполяции в отрисовке кривых Безье</string>
+  <string name="pref_lineacc_summary">Точность кубической интерполяции в отрисовке кривых Безье</string>
   <string name="pref_linecorner_title">Угол Безье</string>
-  <string name="pref_linecorner_summary">Порог угла Безье</string>
-  <string name="pref_linecorner_message">Порог чувствительности угла Безье</string>
+  <string name="pref_linecorner_summary">Порог чувствительности угла Безье</string>
   <string name="pref_calib_algo_title">Алгоритм</string>
   <string name="pref_calib_algo_summary">Алгоритм калибровки</string>
   <string name="pref_group_by_title">Группирование данных калибровки</string>
@@ -1181,12 +1159,8 @@
   <string name="pref_group_message">Допуск для измерений в одной группе</string>
   <string name="pref_error_title">Ошибка</string>
   <string name="pref_error_summary">Минимальная ошибка калибровки</string>
-  <string name="pref_error_dialogtitle">Ошибка калибровки</string>
-  <string name="pref_error_message">Минимальная ошибка калибровки</string>
   <string name="pref_iter_title">Итерации</string>
   <string name="pref_iter_summary">Минимальное число итераций</string>
-  <string name="pref_iter_dialogtitle">Число итераций калибровки</string>
-  <string name="pref_iter_message">Число итераций калибровки</string>
   <string name="pref_label_size_title">Размер подписей</string>
   <string name="pref_label_size_summary">Размер подписей</string>
   <string name="pref_label_size_message">Размер шрифта подписей</string>
@@ -1198,13 +1172,10 @@
   <string name="pref_dot_radius_message">Размер зеленых точек</string>
   <string name="pref_line_thickness_title">Толщина линий</string>
   <string name="pref_line_thickness_summary">Толщина линий</string>
-  <string name="pref_line_thickness_message">Толщина линий</string>
   <string name="pref_fixed_thickness_title">Толщина нитки хода</string>
   <string name="pref_fixed_thickness_summary">Толщина нитки хода</string>
-  <string name="pref_fixed_thickness_message">Толщина нитки хода</string>
   <!-- UNUSED string name="pref_device_title">Устройство</string -->
   <!-- UNUSED string name="pref_device_summary">DistoX наименование адреса</string -->
-  <!-- UNUSED string name="pref_device_message">DistoX наименование адреса</string -->
   <string name="pref_checkBT_title">Bluetooth</string>
   <string name="pref_checkBT_summary">Вкл/Выкл bluetooth</string>
   <string name="pref_checkAttached_title">Проверка нитки хода</string>
@@ -1236,7 +1207,6 @@
   <!-- UNUSED string name="pref_section_stations_summary">Пикеты привязки поперечных сечений</string -->
   <string name="pref_station_size_title">Размер номеров пикетов</string>
   <string name="pref_station_size_summary">Размер номеров пикетов</string>
-  <string name="pref_station_size_message">Размер подписи пикетов</string>
   <string name="pref_zoom_controls_title">Отображение кнопки зума</string>
   <string name="pref_zoom_controls_summary">Управление зумом через мультитач</string>
   <string name="pref_side_drag_title">Перетаскивание за край</string>
@@ -1254,19 +1224,14 @@
   <!-- UNUSED string name="pref_sketchUsesSplays_summary">Поверхность абриса использует боковые замеры</string -->
   <string name="pref_sketchLineStep_title">Макс размер стороны</string>
   <string name="pref_sketchLineStep_summary">Макс размер стороны треугольников</string>
-  <string name="pref_sketchLineStep_message">Макс размер стороны треугольников [м]</string>
   <!-- UNUSED string name="pref_sketchBorderStep_title">Шаг границы</string -->
   <!-- UNUSED string name="pref_sketchBorderStep_summary">Расстоние между точками редактирования линии</string -->
-  <!-- UNUSED string name="pref_sketchBorderStep_message">Расстоние между точками редактирования линии</string -->
   <!-- UNUSED string name="pref_sketchSectionStep_title">Шаг сечений</string -->
   <!-- UNUSED string name="pref_sketchSectionStep_summary">Расстоние между сечениями</string -->
-  <!-- UNUSED string name="pref_sketchSectionStep_message">Расстоние между промежуточными сечениями</string -->
   <string name="pref_sketchDeltaExtrude_title">Масштаб вырезки</string>
   <string name="pref_sketchDeltaExtrude_summary">Масштаб вырезок</string>
-  <string name="pref_sketchDeltaExtrude_message">Масштаб вырезок</string>
   <string name="pref_sketchCompassReadings_title">Значения азимута</string>
   <string name="pref_sketchCompassReadings_summary">Кол-во осредняемых значений азимутов</string>
-  <string name="pref_sketchCompassReadings_message">Кол-во осредняемых значений азимутов</string>
   <string name="pref_sketchModelType_title">Тип модели стен</string>
   <string name="pref_sketchModelType_summary">Модель для построения стен</string>
 
@@ -1281,32 +1246,24 @@
   <string name="pref_walls_type_title">Тип стен</string>
   <string name="pref_walls_type_summary">Тип стен</string>
   <string name="pref_walls_plan_thr_title">Угол луча в плане</string>
-  <string name="pref_walls_plan_thr_summary">Максимальный угол луча для стен в плане</string>
-  <string name="pref_walls_plan_thr_message">Максимальный угол луча для стен в плане [град]</string>
+  <string name="pref_walls_plan_thr_summary">Максимальный угол луча для стен в плане [град]</string>
   <string name="pref_walls_extended_thr_title">Угол луча в разрезе</string>
-  <string name="pref_walls_extended_thr_summary">Максимальный угол луча для стен в разрезе</string>
-  <string name="pref_walls_extended_thr_message">Максимальный угол луча для стен в разрезе [град]</string>
+  <string name="pref_walls_extended_thr_summary">Максимальный угол луча для стен в разрезе [град]</string>
   <string name="pref_walls_xclose_title">Интервалы</string>
-  <string name="pref_walls_xclose_summary">Минимальный интервал между точками вдоль луча</string>
-  <string name="pref_walls_xclose_message">Минимальный интервал между точками вдоль луча [м]</string>
+  <string name="pref_walls_xclose_summary">Минимальный интервал между точками вдоль луча [м]</string>
   <string name="pref_walls_concave_title">Вогнутость</string>
-  <string name="pref_walls_concave_summary">Максимальная вогнутость</string>
-  <string name="pref_walls_concave_message">Максимальная вогнутость [проценты]</string>
+  <string name="pref_walls_concave_summary">Максимальная вогнутость [проценты]</string>
   <string name="pref_walls_xstep_title">Шаг</string>
-  <string name="pref_walls_xstep_summary">Интервал между точками вдоль стены</string>
-  <string name="pref_walls_xstep_message">Интервал между точками вдоль стены [м]</string>
+  <string name="pref_walls_xstep_summary">Интервал между точками вдоль стены [м]</string>
+
   <!-- NO string name="pref_algo_min_alpha_title">Min-algo alpha</string -->
-  <!-- NO string name="pref_algo_min_alpha_summary">Min-algo adjustment factor</string -->
-  <!-- NO string name="pref_algo_min_alpha_message">Min-algo adjustment factor (in [0,1])</string -->
+  <!-- NO string name="pref_algo_min_alpha_summary">Min-algo adjustment factor (in [0,1])</string -->
   <!-- NO string name="pref_algo_min_beta_title">Min-algo beta</string -->
   <!-- NO string name="pref_algo_min_beta_summary">Min-algo M dip weight</string -->
-  <!-- NO string name="pref_algo_min_beta_message">Min-algo M dip weight</string -->
   <!-- NO string name="pref_algo_min_gamma_title">Min-algo gamma</string -->
   <!-- NO string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x weight</string -->
-  <!-- NO string name="pref_algo_min_gamma_message">Min-algo group G.x M.x weight</string -->
   <!-- NO string name="pref_algo_min_delta_title">Min-algo delta</string -->
   <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
-  <!-- NO string name="pref_algo_min_delta_message">Min-algo group G^M.x weight</string -->
 
 <!-- LEAVE LOG STUFF IN ENGLISH
   <string name="pref_log_stream_summary">Лог потока вывода</string>

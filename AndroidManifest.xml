@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="401014"
-      android:versionName="4.1.0q"
+      android:versionCode="401015"
+      android:versionName="4.1.0r"
     >
     <uses-sdk
        android:minSdkVersion="16"
@@ -156,12 +156,6 @@
 
 	<activity android:name=".TDPrefActivity"
 		  android:windowSoftInputMode="stateHidden"
-                  android:theme="@style/Theme.FullScreen"
-                  android:screenOrientation="portrait"
-                  android:label="@string/app_name">
-        </activity>
-
-	<activity android:name=".TopoDroidPreferences"
                   android:theme="@style/Theme.FullScreen"
                   android:screenOrientation="portrait"
                   android:label="@string/app_name">

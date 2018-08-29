@@ -143,6 +143,11 @@ public class TDPrefActivity extends Activity
   {
     if (mPrefCategory == PREF_CATEGORY_ALL )    { mPrefActivityAll    = null; }
     if (mPrefCategory == PREF_CATEGORY_SURVEY ) { mPrefActivitySurvey = null; }
+    if ( mPrefs != null ) {
+      for ( TDPref pref : mPrefs ) if ( pref.wtype == TDPref.EDITTEXT ) {
+        pref.commitValueString();
+      }
+    }
     finish();
   }
 

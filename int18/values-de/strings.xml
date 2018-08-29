@@ -1059,9 +1059,7 @@
   <string name="pref_pt_color_map_summary">PocketTopo Import Farbzuweisung</string>
   <string name="pref_text_size_title">Schriftgröße</string>
   <string name="pref_text_size_summary">Liste der Text-Elementengröße</string>
-  <string name="pref_text_size_message">Textgröße in Listen</string>
   <string name="pref_closeness_title">Auswahl Radius</string>
-  <!-- UNUSED string name="pref_closeness_summary">Skizzenelement Auswahl Radius</string -->
   <string name="pref_closeness_message">Skizzenelement Auswahl Radius</string>
   <string name="pref_eraseness_title">Löschradius</string>
   <string name="pref_eraseness_message">Radius des Lösch-Tools (Standard: 36px)</string>
@@ -1072,7 +1070,6 @@
   <string name="pref_dash_splay_title">Hilfslinien Kohärenz</string>
   <string name="pref_dash_splay_message">Hilfslinien kohärent gestrichelt zwischen Skizzen</string>
   <string name="pref_vert_splay_title">Vertikale Neigung für gestrichelte Hilfslinien</string>
-  <!-- UNUSED string name="pref_vert_splay_summary">Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string -->
   <string name="pref_vert_splay_message">Vertikaler Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string>
   <string name="pref_horiz_splay_title">Horizontale Neigung für gestrichelte Hilflinien</string>
   <string name="pref_horiz_splay_message">Horizontaler Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string>
@@ -1086,30 +1083,23 @@
   <string name="xsections_private">Nur auf einer Skizze</string>
   <string name="pref_reduce_angle_title">Minimaler Begradigungswinkel</string>
   <string name="pref_reduce_angle_summary">Minimaler Winkel um Linien zu begradigen</string>
-  <string name="pref_reduce_angle_message">Minimaler Winkel um Linien zu begradigen</string>
 
 
   <string name="pref_survey_stations_title">Strategie Vermessung</string>
   <string name="pref_survey_stations_summary">Automatische Vermessungs-Messpunkte</string>
   <string name="pref_accel_thr_title">Beschleunigungstoleranz (%%)</string>
   <string name="pref_accel_thr_summary">Toleranz gegenüber Durchschnittswert der Beschleunigung um Messung als anomal zu markieren</string>
-  <string name="pref_accel_thr_message">Toleranz gegenüber Durchschnittswert der Beschleunigung um Messung als anomal zu markieren</string>
   <string name="pref_mag_thr_title">Magnetfeldtoleranz (%%)</string>
   <string name="pref_mag_thr_summary">Toleranz gegenüber Durchschnittswert des Magnetfeldes um Messung als anomal zu markieren</string>
-  <string name="pref_mag_thr_message">Toleranz gegenüber Durchschnittswert der Magnetfeldes um Messung als anomal zu markieren</string>
   <string name="pref_dip_thr_title">Magnetische Neigungs-Toleranz (%%)</string>
   <string name="pref_dip_thr_summary">Toleranz gegenüber Durchschnittswert der magnetischen Inklination um Messung als anomal zu markieren</string>
-  <string name="pref_dip_thr_message">Toleranz gegenüber Durchschnittswert der magnetischen Inklination um Messung als anomal zu markieren</string>
 
   <string name="pref_leg_title">Messzug Toleranz</string>
   <string name="pref_leg_summary">Toleranz zwischen Messungen eines Messzugs</string>
-  <string name="pref_leg_message">Toleranz zwischen Messungen eines Messzugs</string>
   <string name="pref_max_shot_title">Maximale Messlänge</string>
   <string name="pref_max_shot_summary">Maximale Messlänge[m]</string>
-  <string name="pref_max_shot_message">Längere Messungen werden als Fehler behandelt.</string>
   <string name="pref_min_leg_title">Minimale Messlänge</string>
   <string name="pref_min_leg_summary">Minimale Messlänge [m]</string>
-  <string name="pref_min_leg_message">Kürzere Messtrecken werden orange dargestellt</string>
   <string name="pref_backsight_title">Rückmessungs-Feld anzeigen</string>
   <string name="pref_backsight_summary">Rückmessungs-Feld im Dialog bei neuem manuellen Messzug anzeigen</string>
   <string name="pref_backshot_title">Rückwärtsmessung DistoX</string>
@@ -1122,8 +1112,7 @@
   <string name="pref_azimuth_manual_summary">Azimut des Seitenrisses wählbar</string>
 
   <string name="pref_team_title">Vermessungsteam</string>
-  <string name="pref_team_summary">Messteam</string>
-  <string name="pref_team_message">Standard-Messteam</string>
+  <string name="pref_team_summary">Standard-Messteam</string>
 
   <string name="pref_ethr_title">Winkel für vertikalen Seitenriss</string>
   <string name="pref_ethr_summary">Grenzwert für vertikale Darstellung</string>
@@ -1137,38 +1126,29 @@
   <string name="pref_plan_vthr_message">Winkelgrenzwert für Anzeige der Hilfslinien auf Plan</string>
   <string name="pref_init_station_title">Name Startmesspunkt</string>
   <string name="pref_init_station_summary">Standard Startmesspunkt</string>
-  <string name="pref_init_station_message">Standard Startmesspunkt</string>
   <string name="pref_station_names_title">Messpunktnamen</string>
   <string name="pref_station_names_summary">Art der Messpunktnamen</string>
 
   <string name="pref_hthr_title">Winkelgrenzwert für hor. Schnitte</string>
   <string name="pref_hthr_summary">Winkelgrenzwert ab welchem Querschnitte horizontal sind</string>
-  <string name="pref_hthr_message">Winkelgrenzwert ab welchem Querschnitte horizontal sind</string>
   <string name="pref_bitmap_scale_title">PNG Massstab</string>
   <string name="pref_bitmap_scale_summary">Skalierungsfaktor in PNG-Skizzen Export</string>
-  <string name="pref_bitmap_scale_message">Skalierungsfaktor in PNG-Skizzen Export</string>
   <string name="pref_bitmap_bgcolor_title">PNG Hintergrundfarbe</string>
   <string name="pref_bitmap_bgcolor_summary">PNG Hintergrundfarbe Skizze</string>
-  <string name="pref_bitmap_bgcolor_message">PNG Hintergrundfarbe Export</string>
   <string name="pref_acad_version_title">AutoCAD-Version</string>
   <string name="pref_acad_version_summary">AutoCAD-Version</string>
   <!-- UNUSED string name="pref_dxf_scale_title">Massstab DXF-Skizze</string -->
   <!-- UNUSED string name="pref_dxf_scale_summary">Massstab-Faktor DXF-Skizze</string -->
-  <!-- UNUSED string name="pref_dxf_scale_message">Massstab-Faktor DXF-Export</string -->
   <string name="pref_dxf_blocks_title">DXF: Hilfszüge markieren</string>
   <string name="pref_dxf_blocks_summary">DXF: Enden der Hilfszüge markieren</string>
   <string name="pref_thumbnail_title">Thumbnails Größe</string>
   <string name="pref_thumbnail_summary">Thumbnails Größe</string>
-  <string name="pref_thumbnail_message">Thumbnails Größe</string>
   <string name="pref_shot_timer_title">Richtungsmesser Verzögerung</string>
   <string name="pref_shot_timer_summary">Sekunden Verzögerung bis zur Messung wenn Richtung von Topodroid ermittelt wird</string>
-  <string name="pref_shot_timer_message">Sekunden Verzögerung bis zur Messung wenn Richtung von Topodroid ermittelt wird</string>
   <string name="pref_beep_volume_title">Piep Lautstärke</string>
   <string name="pref_beep_volume_summary">Lautstärke des Pieptones bei Messung von Topodroid</string>
-  <string name="pref_beep_volume_message">Lautstärke des Pieptones bei Messung von Topodroid</string>
   <string name="pref_drawing_unit_title">Punktsymbole Massstab</string>
   <string name="pref_drawing_unit_summary">Massstab der Punktsymbole</string>
-  <string name="pref_drawing_unit_message">Massstab der Punktsymbole</string>
   <string name="pref_unscaled_points_title">Punktsymbole nicht zoomen</string>
   <string name="pref_unscaled_points_summary">Punktsymbole sind nicht gezoomt</string>
   <string name="pref_segment_title">Punkteabstand</string>
@@ -1180,10 +1160,8 @@
   <string name="pref_linecontinue_summary">Standard Fortsetzungs-Modus von Linien</string>
   <string name="pref_lineacc_title">Interpolations-Genauigkeit</string>
   <string name="pref_lineacc_summary">Interpolationsgenauigkeit</string>
-  <string name="pref_lineacc_message">Interpolationsgenauigkeit</string>
   <string name="pref_linecorner_title">Bezier Eckenerkennung</string>
   <string name="pref_linecorner_summary">Bezier Ecken Schwellwert</string>
-  <string name="pref_linecorner_message">Bezier Ecken Schwellwert</string>
   <string name="pref_calib_algo_title">Algorithmus</string>
   <string name="pref_calib_algo_summary">Kalibrierung-Algorithmus</string>
   <string name="pref_group_by_title">Gruppierung</string>
@@ -1193,12 +1171,8 @@
   <string name="pref_group_message">Toleranz zwischen Messungen in derselben Gruppe</string>
   <string name="pref_error_title">Kalibrierungsfehler</string>
   <string name="pref_error_summary">Minimaler Kalibrierungsfehler</string>
-  <string name="pref_error_dialogtitle">Kalibrierungsfehler</string>
-  <string name="pref_error_message">Minimaler Kalibrierungsfehler</string>
   <string name="pref_iter_title">Kalibrierungs-Iterationen</string>
   <string name="pref_iter_summary">Max. Iterationen für die Kalibrierung</string>
-  <string name="pref_iter_dialogtitle">Max. Kalibrierungs-Iterationen</string>
-  <string name="pref_iter_message">Max. Kalibrierungs-Iterationen</string>
   <string name="pref_label_size_title">Beschriftung Schriftgröße</string>
   <string name="pref_label_size_summary">Beschriftung Schriftgröße</string>
   <string name="pref_label_size_message">Beschriftung Schriftgröße</string>
@@ -1210,13 +1184,10 @@
   <string name="pref_dot_radius_message">Größe der Punkte während dem bearbeiten einer Linie</string>
   <string name="pref_line_thickness_title">Liniendicke</string>
   <string name="pref_line_thickness_summary">Dicke der gezeichneten Linien</string>
-  <string name="pref_line_thickness_message">Dicke der gezeichneten Linien</string>
   <string name="pref_fixed_thickness_title">Liniendicke der Messstrecke</string>
   <string name="pref_fixed_thickness_summary">Liniendicke der Messstrecke</string>
-  <string name="pref_fixed_thickness_message">Liniendicke der Messstrecke</string>
   <!-- UNUSED string name="pref_device_title">Device</string -->
   <!-- UNUSED string name="pref_device_summary">DistoX address name</string -->
-  <!-- UNUSED string name="pref_device_message">DistoX address name</string -->
   <string name="pref_checkBT_title">Bluetooth</string>
   <string name="pref_checkBT_summary">Bluetooth (de)aktivieren</string>
   <string name="pref_checkAttached_title">Messlinien-Check</string>
@@ -1248,7 +1219,6 @@
   <!-- UNUSED string name="pref_section_stations_summary">Querschnitts-Referenz-Stationen</string -->
   <string name="pref_station_size_title">Messpunkt Schriftgröße</string>
   <string name="pref_station_size_summary">Messpunkt Beschriftung Schriftgröße</string>
-  <string name="pref_station_size_message">Messpunkt Beschriftung Schriftgröße</string>
   <string name="pref_zoom_controls_title">Zoom-Steuerung</string>
   <string name="pref_zoom_controls_summary">Zoom-Steuerung auf Multitouch-Geräten</string>
   <string name="pref_side_drag_title">Verschieben beim skizzieren</string>
@@ -1266,19 +1236,14 @@
   <!-- NO string name="pref_sketchUsesSplays_summary">Sketch surface uses splays</string -->
   <!-- NO string name="pref_sketchLineStep_title">Max side</string -->
   <!-- NO string name="pref_sketchLineStep_summary">Maximum size of a triangle side</string -->
-  <!-- NO string name="pref_sketchLineStep_message">Distance between line points</string -->
   <!-- NO string name="pref_sketchBorderStep_title">Border step</string -->
   <!-- NO string name="pref_sketchBorderStep_summary">Distance between edit-line points</string -->
-  <!-- NO string name="pref_sketchBorderStep_message">Distance between edit-line points</string -->
   <!-- NO string name="pref_sketchSectionStep_title">Section step</string -->
   <!-- NO string name="pref_sketchSectionStep_summary">Distance between sections</string -->
-  <!-- NO string name="pref_sketchSectionStep_message">Distance between intermediate sections</string -->
   <!-- NO string name="pref_sketchDeltaExtrude_title">Extrude delta</string -->
   <!-- NO string name="pref_sketchDeltaExtrude_summary">Extrude delta</string -->
-  <!-- NO string name="pref_sketchDeltaExtrude_message">Extrude delta</string -->
   <!-- NO string name="pref_sketchCompassReadings_title">Compass readings</string -->
   <!-- NO string name="pref_sketchCompassReadings_summary">Number of readings to average</string -->
-  <!-- NO string name="pref_sketchCompassReadings_message">Number of compass readings to average</string -->
 
   <string name="pref_unit_length_title">Längeneinheit</string>
   <string name="pref_unit_length_summary">Masseinheit für Längen</string>
@@ -1292,32 +1257,23 @@
   <string name="pref_walls_type_summary">Wandtyp</string>
   <string name="pref_walls_plan_thr_title">Max. Hilfszug-Neigung Plan</string>
   <string name="pref_walls_plan_thr_summary">Maximale Neigung eines Hilfszugs für Wände [°]</string>
-  <string name="pref_walls_plan_thr_message">Maximale Neigung eines Hilfszugs für Wände [°]</string>
   <string name="pref_walls_extended_thr_title">Max. Hilfszug-Neigung für Seitenriss</string>
   <string name="pref_walls_extended_thr_summary">Maximale Neigung eines Hilfszugs für Wände [°]</string>
-  <string name="pref_walls_extended_thr_message">Maximale Neigung eines Hilfszugs für Wände [°]</string>
   <string name="pref_walls_xclose_title">Min. Punkteabstand</string>
-  <string name="pref_walls_xclose_summary">Minimaler Punktabstand der Wände</string>
-  <string name="pref_walls_xclose_message">Minimaler Punktabstand der Wände [m]</string>
+  <string name="pref_walls_xclose_summary">Minimaler Punktabstand der Wände [m]</string>
   <string name="pref_walls_concave_title">Konkavität</string>
-  <string name="pref_walls_concave_summary">Maximale Konkavität</string>
-  <string name="pref_walls_concave_message">Maximale Konkavität [%%]</string>
+  <string name="pref_walls_concave_summary">Maximale Konkavität [%%]</string>
   <string name="pref_walls_xstep_title">Abstand Zwischenpunkte</string>
-  <string name="pref_walls_xstep_summary">Abstand der automatischen Zwischenpunkte</string>
-  <string name="pref_walls_xstep_message">Abstand der automatischen Zwischenpunkte [m]</string>
+  <string name="pref_walls_xstep_summary">Abstand der automatischen Zwischenpunkte [m]</string>
 
   <string name="pref_algo_min_alpha_title">Min-algo alpha</string>
-  <string name="pref_algo_min_alpha_summary">Min-algo Factor</string>
-  <string name="pref_algo_min_alpha_message">Min-algo Factor (in [0,1])</string>
+  <string name="pref_algo_min_alpha_summary">Min-algo Factor (in [0,1])</string>
   <string name="pref_algo_min_beta_title">Min-algo beta</string>
   <string name="pref_algo_min_beta_summary">Min-algo M dip weight</string>
-  <string name="pref_algo_min_beta_message">Min-algo M dip weight</string>
   <string name="pref_algo_min_gamma_title">Min-algo gamma</string>
   <string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x weight</string>
-  <string name="pref_algo_min_gamma_message">Min-algo group G.x M.x weight</string>
   <string name="pref_algo_min_delta_title">Min-algo delta</string>
   <string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string>
-  <string name="pref_algo_min_delta_message">Min-algo group G^M.x weight</string>
 
 <!-- LEAVE LOG STUFF IN ENGLISH
   <string name="pref_log_stream_summary">Log Output</string>

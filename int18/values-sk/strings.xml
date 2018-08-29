@@ -1050,9 +1050,7 @@
   <string name="pref_pt_color_map_summary">Import podľa farieb z PocketTopo</string>
   <string name="pref_text_size_title">Veľkosť textu</string>
   <string name="pref_text_size_summary">Nastaviť veľkosť textu v hlavnom okne a v okne merania</string>
-  <string name="pref_text_size_message">Nastaviť veľkosť textu v hlavnom okne a v okne merania</string>
   <string name="pref_closeness_title">Veľkosť výberu objektov v Režime Editácie</string>
-  <!-- UNUSED string name="pref_closeness_summary">Raggio di selezione oggetti disegno</string -->
   <string name="pref_closeness_message">Prednastavená veľkosť pri výbere objektov v Režime Editácie</string>
   <string name="pref_eraseness_title">Rozsah veľkosti gumy</string>
   <string name="pref_eraseness_message">Prednastavená veľkosť nástroja na vymazávanie (guma)</string>
@@ -1063,7 +1061,6 @@
   <string name="pref_dash_splay_title">Vzťah čiarkovaných zámer</string>
   <string name="pref_dash_splay_message">Čiarkované pomocné zámery sú zobrazené adekvátne medzi pôdorysom a rezom</string>
   <string name="pref_vert_splay_title">Prahová hodnota pomocnej zámery v pôdoryse - čiarkované</string>
-  <!-- UNUSED string name="pref_vert_splay_summary">Soglia clino splay tratteggiati</string -->
   <string name="pref_vert_splay_message">Pomocné zámery s uhlom nad prahovú hodnotu sú v pôdoryse čiarkované</string>
   <string name="pref_horiz_splay_title">Prahová hodnota azimutu pomocnej zámery v profile</string>
   <string name="pref_horiz_splay_message">Pomocné zámery azimutu nad prahovú hodnotu sú v profile čiarkované </string>
@@ -1077,30 +1074,23 @@
   <string name="xsections_private">Priečne rezy nezdielané medzi nákresmi</string>
   <string name="pref_reduce_angle_title">Minimálny uhol pre vyhladenie čiar</string>
   <string name="pref_reduce_angle_summary">Odstraňuje stredné body ČIARY medzi dvoma "rohovými" pri editácii</string>
-  <string name="pref_reduce_angle_message">Odstraňuje stredné body ČIARY medzi dvoma "rohovými" pri editácii</string>
    
 	
   <string name="pref_survey_stations_title">Politika číslovania bodov</string>
   <string name="pref_survey_stations_summary">Politika číslovania bodov</string>
   <string name="pref_accel_thr_title">Tolerancia chvenia - A</string>
   <string name="pref_accel_thr_summary">Tolerancia hodnôt chvenia DistoX - A</string>
-  <string name="pref_accel_thr_message">Tolerancia hodnôt chvenia - A</string>
   <string name="pref_mag_thr_title">Tolerancia magnetického poľa - M</string>
   <string name="pref_mag_thr_summary">Tolerancia hodnôt magnetického poľa - M</string>
-  <string name="pref_mag_thr_message">Tolerancia hodnôt magnetického poľa - M</string>
   <string name="pref_dip_thr_title">Tolerancia magnetického uhla - D</string>
   <string name="pref_dip_thr_summary">Hodnoty tolerancie magnetického uhla - D</string>
-  <string name="pref_dip_thr_message">Tolerancia hodnôt magnetického uhla - D</string>
 
   <string name="pref_leg_title">Tolerancia merania</string>
   <string name="pref_leg_summary">Tolerancia medzi jednotlivými zámerami hlavnej zámery</string>
-  <string name="pref_leg_message">Tolerancia medzi jednotlivými zámerami hlavnej zámery</string>
   <string name="pref_max_shot_title">Maximálna dĺžka zámery</string>
   <string name="pref_max_shot_summary">Maximálna dĺžka zámery [m]</string>
-  <string name="pref_max_shot_message">Merania nad túto dĺžku sa nepoužívajú v programe a sú skryté</string>
   <string name="pref_min_leg_title">Minimalna dĺžka hlavnej zámery</string>
   <string name="pref_min_leg_summary">Minimalna dĺžka hlavnej zámery [m]</string>
-  <string name="pref_min_leg_message">Hlavné zámery pod týmto minimom sú oranžovo podfarbené</string>
   <string name="pref_backsight_title">Polia Spätnej zámery</string>
   <string name="pref_backsight_summary">Zobrazí Polia spätnej zámery v MENU bodu merania pri manuálnom zadávaní bodu</string>
   <string name="pref_backshot_title">Režim spätného merania DistoX - číslovanie bodov NAOPAK</string>
@@ -1113,8 +1103,7 @@
   <string name="pref_azimuth_manual_summary">Zaškrtnuté = Fixná / Nezašktnuté = Nastavitelná Smerová orientácia</string>
 
   <string name="pref_team_title">Predvolený meračský Tím</string>
-  <string name="pref_team_summary">Prieskumná skupina</string>
-  <string name="pref_team_message">Predvolená meračská skupina</string>
+  <string name="pref_team_summary">Predvolená meračská skupina</string>
 
   <string name="pref_ethr_title">Prahová hodnota pomocnej zámery</string>
   <string name="pref_ethr_summary">Uhol +- od 90 stupnov pre ktorý má pomocná zámera vertikálnu Smerovú orientáciu [stupne]</string>
@@ -1128,38 +1117,29 @@
   <string name="pref_plan_vthr_message">Skryje pomocné zámery s vyšším sklonom v pôdoryse</string>
   <string name="pref_init_station_title">Počiatočný meračský bod</string>
   <string name="pref_init_station_summary">Predvolené číslo počiatočného meračského bodu</string>
-  <string name="pref_init_station_message">Predvolené číslo počiatočného meračského bodu</string>
   <string name="pref_station_names_title">Názvy meračských bodov</string>
   <string name="pref_station_names_summary">Názvy meračských bodov</string>
 
   <string name="pref_hthr_title">Prahová hodnota priečneho rezu Vert/Horizont</string>
   <string name="pref_hthr_summary">Uhol hlavných zámer cez ktorý priečne rezy sú horizontálne</string>
-  <string name="pref_hthr_message">Uhol hlavných zámer cez ktorý priečne rezy sú horizontálne</string>
   <string name="pref_bitmap_scale_title">Rozlíšenie PNG</string>
   <string name="pref_bitmap_scale_summary">Rozlíšenie pri exporte výkresov PNG</string>
-  <string name="pref_bitmap_scale_message">Rozlíšenie pri exporte výkresov PNG</string>
   <string name="pref_bitmap_bgcolor_title">Farba pozadia pre PNG</string>
   <string name="pref_bitmap_bgcolor_summary">Nastavenie farby pozadia pre expotr nákresov vo formáte PNG</string>
-  <string name="pref_bitmap_bgcolor_message">Nastavenie farby pozadia pre expotr nákresov vo formáte PNG</string>
   <string name="pref_acad_version_title"> Verzia AutoCADu</string>
   <string name="pref_acad_version_summary">Verzia AutoCADu</string>
   <!-- UNUSED string name="pref_dxf_scale_title">Fakror mierky nákresu DXF</string -->
   <!-- UNUSED string name="pref_dxf_scale_summary">Faktor mierky DXF</string -->
-  <!-- UNUSED string name="pref_dxf_scale_message">Faktor na nastavenie podrobnosti pre export nákresu vo formáte DXF</string -->
   <string name="pref_dxf_blocks_title">DXF konce pomocných zámer</string>
   <string name="pref_dxf_blocks_summary">Koncové body pomocných zámer pre export DXF </string>
   <string name="pref_thumbnail_title">Veľkosť Náhľadov</string>
   <string name="pref_thumbnail_summary">Veľkosť náhľadov fotiek</string>
-  <string name="pref_thumbnail_message">Veľkosť náhľadov fotiek</string>
   <string name="pref_shot_timer_title">Časovač zámery smeru</string>
   <string name="pref_shot_timer_summary">Sekundy pred meraním zámery smeru pomocou senzorov mobilu</string>
-  <string name="pref_shot_timer_message">Sekundy pred meraním zámery smeru pomocou senzorov mobilu</string>
   <string name="pref_beep_volume_title">Nastavenie hlasitosti</string>
   <string name="pref_beep_volume_summary">Percento hlasitosti pípania</string>
-  <string name="pref_beep_volume_message">Percento hlasitosti pípania</string>
   <string name="pref_drawing_unit_title">Veľkosť Symbolov Bod</string>
-  <string name="pref_drawing_unit_summary">Veľkosť Symbolov Bod</string>
-  <string name="pref_drawing_unit_message">Mierka veľkosti Symbolov BOD</string>
+  <string name="pref_drawing_unit_summary">Mierka veľkosti Symbolov BOD</string>
   <string name="pref_unscaled_points_title">Približovanie Symbolov Bod v nákrese</string>
   <string name="pref_unscaled_points_summary">Približovanie bodov v Režime Posunu pri kreslení. Nezaškrtnuté = povolený zoom bodov</string>
   <string name="pref_segment_title">Rozstupové body na čiarach</string>
@@ -1171,10 +1151,8 @@
   <string name="pref_linecontinue_summary">Predvolené nastavenie možností nadpájania Čiar v režime kreslenia</string>
   <string name="pref_lineacc_title">Presnosť Bezierových kriviek</string>
   <string name="pref_lineacc_summary">Presnosť interpolácie pre Bezierove krivky (čím menšie číslo tým viac bodov)</string>
-  <string name="pref_lineacc_message">Presnosť interpolácie pre Bezierove krivky (čím menšie číslo tým viac bodov)</string>
   <string name="pref_linecorner_title">Ostrosť Bezierového uhla</string>
   <string name="pref_linecorner_summary">Menšie číslo (0,2 robí rohy ostrejšie; väčšie číslo (20) ich viac vyhladzuje</string>
-  <string name="pref_linecorner_message">Menšie číslo (0,2 robí rohy ostrejšie; väčšie číslo (20) ich viac vyhladzuje</string>
   <string name="pref_calib_algo_title">Algoritmus</string>
   <string name="pref_calib_algo_summary">Kalibračný algoritmus</string>
   <string name="pref_group_by_title">Pravidlá zoskupovania údajov kalibrácie</string>
@@ -1184,12 +1162,8 @@
   <string name="pref_group_message">Tolerancia medzi údajmi tej istej skupiny - maximálna uhlová odchýlka</string>
   <string name="pref_error_title">Chyba</string>
   <string name="pref_error_summary">Minimálna chyba odchýliek koeficientov kalibrácie</string>
-  <string name="pref_error_dialogtitle">Chyba kalibrácie</string>
-  <string name="pref_error_message">Minimálna chyba odchýliek koeficientov kalibrácie</string>
   <string name="pref_iter_title">Opakovanie</string>
   <string name="pref_iter_summary">Maximálny počet opakovaní kalibračného algoritmu</string>
-  <string name="pref_iter_dialogtitle">Opakovanie kalibrácie</string>
-  <string name="pref_iter_message">Maximálny počet opakovaní kalibračného algoritmu</string>
   <string name="pref_label_size_title">Veľkosť písmen v Poznámke priamo na nákrese</string>
   <string name="pref_label_size_summary">Veľkosť písmen v symbole BOD - Poznámka</string>
   <string name="pref_label_size_message">Veľkosť písmen v symbole BOD - Poznámka</string>
@@ -1201,13 +1175,10 @@
   <string name="pref_dot_radius_message">Veľkosť zelených bodov výberu v Režime Editácie pri kreslení</string>
   <string name="pref_line_thickness_title">Hrúbka Symbolu Čiary</string>
   <string name="pref_line_thickness_summary">Hrúbka nakreslenej čiary</string>
-  <string name="pref_line_thickness_message">Hrúbka nakreslenej čiary</string>
   <string name="pref_fixed_thickness_title">Šírka meračskej zámery</string>
   <string name="pref_fixed_thickness_summary">Hrúbka meračskej zámery v nákrese</string>
-  <string name="pref_fixed_thickness_message">Hrúbka meračskej zámery v nákrese</string>
   <!-- UNUSED string name="pref_device_title">Zariadenie</string -->
   <!-- UNUSED string name="pref_device_summary">Adresa BT DistoX</string -->
-  <!-- UNUSED string name="pref_device_message">Adresa BT DistoX</string -->
   <string name="pref_checkBT_title">Bluetooth</string>
   <string name="pref_checkBT_summary">Aktivovať / deaktivovať Bluetooth</string>
   <string name="pref_checkAttached_title">Kontrola meračských bodov</string>
@@ -1239,7 +1210,6 @@
   <!-- UNUSED string name="pref_section_stations_summary">Referenčné základy pre X-sekciu</string -->
   <string name="pref_station_size_title">Veľkosť názvu meračského bodu</string>
   <string name="pref_station_size_summary">Veľkosť názvu meračského bodu</string>
-  <string name="pref_station_size_message">Veľkosť názvu meračského bodu</string>
   <string name="pref_zoom_controls_title">Nastavenie tlačidla Zoom-u</string>
   <string name="pref_zoom_controls_summary">Nastavenia tlačidla zoomu</string>
   <string name="pref_side_drag_title">Posun krezby v nákrese</string>
@@ -1257,19 +1227,14 @@
   <!-- UNUSED string name="pref_sketchUsesSplays_summary">Nákresový povrch používa pomocné meranie</string -->
   <string name="pref_sketchLineStep_title">Maxinálna strana</string>
   <string name="pref_sketchLineStep_summary">Maximálna veľkosť strany trojuholníka</string>
-  <string name="pref_sketchLineStep_message">Maximálna veľkosť strany trojuholníka</string>
   <!-- UNUSED string name="pref_sketchBorderStep_title">Hraničný krok</string -->
   <!-- UNUSED string name="pref_sketchBorderStep_summary">Vzdialenosť medzi bodmi editovacieho riadku</string -->
-  <!-- UNUSED string name="pref_sketchBorderStep_message">Vzdialenosť medzi bodmi editovacieho riadku</string -->
   <!-- UNUSED string name="pref_sketchSectionStep_title">Krok sekcie</string -->
   <!-- UNUSED string name="pref_sketchSectionStep_summary">Vzdialenosť medzi sekciami</string -->
-  <!-- UNUSED string name="pref_sketchSectionStep_message">Vzdialenosť medzi strednými časťami</string -->
   <string name="pref_sketchDeltaExtrude_title">Extrude mierka</string>
   <string name="pref_sketchDeltaExtrude_summary">Extrude mierka</string>
-  <string name="pref_sketchDeltaExtrude_message">Extrude mierka</string>
   <string name="pref_sketchCompassReadings_title">Čítania kompasu</string>
   <string name="pref_sketchCompassReadings_summary">Počet čítaní na výpočet priemeru</string>
-  <string name="pref_sketchCompassReadings_message">Počet čítaní kompasu na výpočet priemer</string>
   <string name="pref_sketchModelType_title">Typ modelu</string>
   <string name="pref_sketchModelType_summary">Model rekonštrukcie steny</string>	
 
@@ -1284,33 +1249,24 @@
   <string name="pref_walls_type_title">Typ stien</string>
   <string name="pref_walls_type_summary">Typ stien</string>
   <string name="pref_walls_plan_thr_title">Uhol kreslenia pomocných zámer v pôdoryse</string>
-  <string name="pref_walls_plan_thr_summary">Maximálny uhol pomocnej zámery pre kreslenie v pôdoryse</string>
-  <string name="pref_walls_plan_thr_message">Maximálny uhol pomocnej zámery pre kreslenie v pôdoryse [stupne]</string>
+  <string name="pref_walls_plan_thr_summary">Maximálny uhol pomocnej zámery pre kreslenie v pôdoryse [stupne]</string>
   <string name="pref_walls_extended_thr_title">Uhol kreslenia pomocných zámer v profile</string>
-  <string name="pref_walls_extended_thr_summary">Minimálny uhol pomocnej zámery pre kreslenie v profile</string>
-  <string name="pref_walls_extended_thr_message">Minimálny uhol pomocnej zámery pre kreslenie v profile [stupne]</string>
+  <string name="pref_walls_extended_thr_summary">Minimálny uhol pomocnej zámery pre kreslenie v profile [stupne]</string>
   <string name="pref_walls_xclose_title">Správa priestoru min.</string>
-  <string name="pref_walls_xclose_summary">Minimálna vzdialenosť bodov na kreslenie stien</string>
-  <string name="pref_walls_xclose_message">Minimálna vzdialenosť bodov na kreslenie stien [m]</string>
+  <string name="pref_walls_xclose_summary">Minimálna vzdialenosť bodov na kreslenie stien [m]</string>
   <string name="pref_walls_concave_title">Konkávnosť</string>
-  <string name="pref_walls_concave_summary">Maximálna konkávnosť</string>
-  <string name="pref_walls_concave_message">Maximálna konkávnosť [percent]</string>
+  <string name="pref_walls_concave_summary">Maximálna konkávnosť [percent]</string>
   <string name="pref_walls_xstep_title">Správa priestoru max.</string>
-  <string name="pref_walls_xstep_summary">Maximálna vzdialenosť bodov na kreslenie stien</string>
-  <string name="pref_walls_xstep_message">Maximálna vzdialenosť bodov na kreslenie stien [m]</string>
+  <string name="pref_walls_xstep_summary">Maximálna vzdialenosť bodov na kreslenie stien [m]</string>
 
   <string name="pref_algo_min_alpha_title">Min-algo alpha</string>
-  <string name="pref_algo_min_alpha_summary">Min-algo nastaviteľný faktor</string>
-  <string name="pref_algo_min_alpha_message">Min-algo nastaviteľný faktor (in [0,1])</string>
+  <string name="pref_algo_min_alpha_summary">Min-algo nastaviteľný faktor (in [0,1])</string>
   <string name="pref_algo_min_beta_title">Min-algo beta</string>
   <string name="pref_algo_min_beta_summary">Min-algo M dip weight</string>
-  <string name="pref_algo_min_beta_message">Min-algo M dip weight</string>
   <string name="pref_algo_min_gamma_title">Min-algo gamma</string>
   <string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x weight</string>
-  <string name="pref_algo_min_gamma_message">Min-algo group G.x M.x weight</string>
   <string name="pref_algo_min_delta_title">Min-algo delta</string>
   <string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string>
-  <string name="pref_algo_min_delta_message">Min-algo group G^M.x weight</string>
 
 <!-- LEAVE LOG STUFF IN ENGLISH
   <string name="pref_log_stream_summary">Výstupný systémový log</string>

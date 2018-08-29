@@ -39,6 +39,7 @@ import android.util.Log;
 
 class TDPref implements AdapterView.OnItemSelectedListener
                       , View.OnClickListener
+		      , View.OnFocusChangeListener
 		      // , TextWatcher
 		      , OnKeyListener
 {
@@ -68,6 +69,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
   int     ivalue = 0;
   float   fvalue = 0;
   int     category;
+  boolean commit = false; // whether need to commit value to DB
 
   String[] options;
   String[] values;
@@ -88,6 +90,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
     values  = null;
     helper  = hlp;
     category = cat;
+    commit   = false;
   }
 
   View getView( Context context, LayoutInflater li, ViewGroup parent )
@@ -127,6 +130,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
         }
         // mEdittext.addTextChangedListener( this );
         mEdittext.setOnKeyListener(this);
+        mEdittext.setOnFocusChangeListener(this);
 
         break;
       case LIST:
@@ -138,6 +142,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
         break;
     }
     textview = (TextView) v.findViewById( R.id.title );
+    textview.setMaxWidth( (int)(0.70f * TopoDroidApp.mDisplayWidth) );
     textview.setText( title );
     if ( summary == null ) {
       ((TextView) v.findViewById( R.id.summary )).setVisibility( View.GONE );
@@ -164,6 +169,25 @@ class TDPref implements AdapterView.OnItemSelectedListener
 
   // @Override
   // public void onTextChanged( CharSequence cs, int start, int before, int cnt ) {  Log.v("DistoXPref", "edit on text changed"); }
+  
+  void commitValueString()
+  {
+    if ( commit && mEdittext != null ) {
+      String val = mEdittext.getText().toString();
+      if ( ! value.equals( val ) ) {
+        setValue( val );
+        // Log.v( "DistoXPref", "[*] " + name + " Keycode " + keyCode + " value " + value );
+        TDSetting.updatePreference( helper, category, name, value );
+      }
+      commit = false;
+    }
+  }
+
+  @Override
+  public void onFocusChange( View v, boolean has_focus )
+  {
+    if ( (! has_focus) && ( v == mEdittext ) ) commitValueString();
+  }
 
   @Override
   public void onClick(View v) 
@@ -203,13 +227,9 @@ class TDPref implements AdapterView.OnItemSelectedListener
   @Override
   public boolean onKey( View view, int keyCode, KeyEvent event)
   {
-    if ( view == mEdittext && keyCode == 66 ) {
-      String v = mEdittext.getText().toString();
-      if ( ! value.equals( v ) ) {
-        setValue( v );
-        // Log.v( "DistoXPref", "[*] " + name + " Keycode " + keyCode + " value " + value );
-        TDSetting.updatePreference( helper, category, name, value );
-      }
+    if ( view == mEdittext ) {
+      commit = true;
+      if ( keyCode == 66 ) commitValueString();
     }
     return false;
   }

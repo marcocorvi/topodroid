@@ -419,8 +419,6 @@ public class MainWindow extends Activity
       } else if ( p++ == pos ) { // ABOUT
         (new TopoDroidAbout( mActivity, this, -2 )).show();
       } else if ( p++ == pos ) { // SETTINGS
-        // intent = new Intent( mActivity, TopoDroidPreferences.class );
-        // intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_ALL );
         intent = new Intent( mActivity, TDPrefActivity.class );
         intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_ALL );
         startActivity( intent );

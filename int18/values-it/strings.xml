@@ -1038,9 +1038,7 @@
   <string name="pref_pt_color_map_summary">Mappa colori di PocketTopo (PocketTopo import)</string>
   <string name="pref_text_size_title">Dimensione testo</string>
   <string name="pref_text_size_summary">Dimensione testo liste</string>
-  <string name="pref_text_size_message">Dimensione testo liste</string>
   <string name="pref_closeness_title">Raggio di selezione</string>
-  <!-- UNUSED string name="pref_closeness_summary">Raggio di selezione oggetti disegno</string -->
   <string name="pref_closeness_message">Raggio di selezione oggetti disegno</string>
   <string name="pref_eraseness_title">Raggio del cancellino</string>
   <string name="pref_eraseness_message">Raggio di cancellazione di un elemento del disegno</string>
@@ -1051,7 +1049,6 @@
   <string name="pref_dash_splay_title">Coerenza tratteggio Splay</string>
   <string name="pref_dash_splay_message">Splay tratteggiati coerentemente tra pianta e sezione</string>
   <string name="pref_vert_splay_title">Soglia splay tratteggiati</string>
-  <!-- UNUSED string name="pref_vert_splay_summary">Soglia clino splay tratteggiati</string -->
   <string name="pref_vert_splay_message">Soglia clino splay tratteggiati</string>
   <string name="pref_horiz_splay_title">Azimut di soglia tratteggio splay</string>
   <string name="pref_horiz_splay_message">Splay con azimut maggiore di questo sono tratteggiati</string>
@@ -1064,31 +1061,24 @@
   <string name="xsections_shared">X-section condivise</string>
   <string name="xsections_private">X-section private</string>
   <string name="pref_reduce_angle_title">Angolo di raddrizzamento</string>
-  <string name="pref_reduce_angle_summary">Minimo angolo in un punto per eliminarlo</string>
-  <string name="pref_reduce_angle_message">Minimo angolo della linea in un punto per eliminarlo</string>
+  <string name="pref_reduce_angle_summary">Minimo angolo della linea in un punto per eliminarlo</string>
 
 
   <string name="pref_survey_stations_title">Capisaldi rilievo</string>
   <string name="pref_survey_stations_summary">Capisaldi rilievo automatici</string>
   <string name="pref_accel_thr_title">Tolleranza accelerazione</string>
   <string name="pref_accel_thr_summary">Tolleranza valori di accelerazione</string>
-  <string name="pref_accel_thr_message">Tolleranza valori di accelerazione</string>
   <string name="pref_mag_thr_title">Tolleranza campo magnetico</string>
   <string name="pref_mag_thr_summary">Tolleranza valori di campo magnetico</string>
-  <string name="pref_mag_thr_message">Tolleranza valori di campo magnetico</string>
   <string name="pref_dip_thr_title">Tolleranza immersione magnetica</string>
   <string name="pref_dip_thr_summary">Tolleranza valori di immersione magnetica</string>
-  <string name="pref_dip_thr_message">Tolleranza valori di immersione magnetica</string>
 
   <string name="pref_leg_title">Tolleranza battute</string>
   <string name="pref_leg_summary">Tolleranza tra tiri di una battuta</string>
-  <string name="pref_leg_message">Tolleranza tra tiri di una battuta</string>
   <string name="pref_max_shot_title">Massima lunghezza tiro</string>
   <string name="pref_max_shot_summary">Massima lunghezza tiro [m]</string>
-  <string name="pref_max_shot_message">I tiri oltre questa lunghezza sono marcati come fuori-misura</string>
   <string name="pref_min_leg_title">Minima lunghezza battuta</string>
   <string name="pref_min_leg_summary">Minima lunghezza battuta [m]</string>
-  <string name="pref_min_leg_message">Battute meno lunghe del minimo hanno uno sfondo arancio</string>
   <string name="pref_backsight_title">Backsight</string>
   <string name="pref_backsight_summary">Campi backsight nel dialogo Nuova Battuta</string>
   <string name="pref_backshot_title">Modo Backshot</string>
@@ -1101,8 +1091,7 @@
   <string name="pref_azimuth_manual_summary">Fissa "extend" delle battute manualmente</string>
 
   <string name="pref_team_title">Squadra</string>
-  <string name="pref_team_summary">Squadra topo</string>
-  <string name="pref_team_message">Squadra di topografia</string>
+  <string name="pref_team_summary">Squadra di topografia</string>
 
   <string name="pref_ethr_title">Angolo vert. extend</string>
   <string name="pref_ethr_summary">Angolo di vert. extend per splay</string>
@@ -1116,38 +1105,29 @@
   <string name="pref_plan_vthr_message">Soglia verticale per splay in pianta</string>
   <string name="pref_init_station_title">Caposaldo iniziale</string>
   <string name="pref_init_station_summary">Caposaldo iniziale di default</string>
-  <string name="pref_init_station_message">Caposaldo iniziale di default</string>
   <string name="pref_station_names_title">Nomi capisaldi</string>
   <string name="pref_station_names_summary">Tipo nomi capisaldi</string>
 
   <string name="pref_hthr_title">Soglia sezione orizzontale</string>
   <string name="pref_hthr_summary">Soglia inclinazione per sezioni orizzontali</string>
-  <string name="pref_hthr_message">Soglia inclinazione battuta per sezioni orizzontali</string>
   <string name="pref_bitmap_scale_title">Risoluzione PNG</string>
   <string name="pref_bitmap_scale_summary">Risoluzione nei PNG dei disegni</string>
-  <string name="pref_bitmap_scale_message">Risoluzione nell\'esportazione PNG dei disegni</string>
   <string name="pref_bitmap_bgcolor_title">Colore di sfondo per PNG</string>
   <string name="pref_bitmap_bgcolor_summary">Colore di sfondo della immagine PNG dei rilievi</string>
-  <string name="pref_bitmap_bgcolor_message">Colore di sfondo per export rilievo in formato PNG</string>
   <string name="pref_acad_version_title"> Versione di AutoCAD</string>
   <string name="pref_acad_version_summary">Versione di AutoCAD</string>
   <!-- UNUSED string name="pref_dxf_scale_title">Scala rilievo DXF</string -->
   <!-- UNUSED string name="pref_dxf_scale_summary">Fattore di scala rilievo DXF</string -->
-  <!-- UNUSED string name="pref_dxf_scale_message">Fattore di scala per export rilievo in formato DXF</string -->
   <string name="pref_dxf_blocks_title">splay endpoint DXF </string>
   <string name="pref_dxf_blocks_summary">splay endpoint DXF </string>
   <string name="pref_thumbnail_title">Dimensione thumbnails</string>
   <string name="pref_thumbnail_summary">Dimensione immagini thumbnail</string>
-  <string name="pref_thumbnail_message">Dimensione immagini thumbnail</string>
   <string name="pref_shot_timer_title">Timer direzioni</string>
   <string name="pref_shot_timer_summary">Secondi di attesa prima della misura</string>
-  <string name="pref_shot_timer_message">Secondi di attesa prima della misura</string>
   <string name="pref_beep_volume_title">Volume timer</string>
   <string name="pref_beep_volume_summary">Percent timer-beep volume</string>
-  <string name="pref_beep_volume_message">Percent timer-beep volume</string>
   <string name="pref_drawing_unit_title">Scala simboli grafici</string>
   <string name="pref_drawing_unit_summary">Scala simboli grafici</string>
-  <string name="pref_drawing_unit_message">Scala simboli grafici</string>
   <string name="pref_unscaled_points_title">Punti icona senza zoom</string>
   <string name="pref_unscaled_points_summary">I punti icona non sono ingranditi</string>
   <string name="pref_segment_title">Spaziatura punti sulle linee</string>
@@ -1159,10 +1139,8 @@
   <!-- TODO string name="pref_linecontinue_summary">Line default continue-mode</string -->
   <string name="pref_lineacc_title">Accuratezza curve Bezier</string>
   <string name="pref_lineacc_summary">Accuratezza di interpolazione per le curve Bezier</string>
-  <string name="pref_lineacc_message">Accuratezza di interpolazione per le curve Bezier</string>
   <string name="pref_linecorner_title">Angolatura Bezier</string>
   <string name="pref_linecorner_summary">Soglia angolatura curve Bezier</string>
-  <string name="pref_linecorner_message">Soglia angolatura curve Bezier</string>
   <string name="pref_calib_algo_title">Algoritmo</string>
   <string name="pref_calib_algo_summary">Algortimo di calibrazione</string>
   <string name="pref_group_by_title">Politica gruppi</string>
@@ -1172,12 +1150,8 @@
   <string name="pref_group_message">Tolleranza fra dati di uno stesso gruppo</string>
   <string name="pref_error_title">Errore</string>
   <string name="pref_error_summary">Minimo errore calibrazione</string>
-  <string name="pref_error_dialogtitle">Errore calibrazione</string>
-  <string name="pref_error_message">Minimo errore calibrazione</string>
   <string name="pref_iter_title">Iterazioni</string>
   <string name="pref_iter_summary">Massimo numero iterazioni</string>
-  <string name="pref_iter_dialogtitle">Iterazioni calibrazione</string>
-  <string name="pref_iter_message">Massimo numero iterazioni</string>
   <string name="pref_label_size_title">Dimensione scritte</string>
   <string name="pref_label_size_summary">Dimensione delle scritte</string>
   <string name="pref_label_size_message">Dimensione delle scritte</string>
@@ -1189,13 +1163,10 @@
   <string name="pref_dot_radius_message">Raggio dei punti di selezione</string>
   <string name="pref_line_thickness_title">Spessore linee</string>
   <string name="pref_line_thickness_summary">Spessore linee disegno</string>
-  <string name="pref_line_thickness_message">Spessore linee disegno</string>
   <string name="pref_fixed_thickness_title">Spessore poligonale</string>
   <string name="pref_fixed_thickness_summary">Spessore linee di poligonale</string>
-  <string name="pref_fixed_thickness_message">Spessore linee della poligonale</string>
   <!-- UNUSED string name="pref_device_title">Dispositivo</string -->
   <!-- UNUSED string name="pref_device_summary">Indirizzo BT del DistoX</string -->
-  <!-- UNUSED string name="pref_device_message">Indirizzo BT del DistoX</string -->
   <string name="pref_checkBT_title">Bluetooth</string>
   <string name="pref_checkBT_summary">Attiva/disattiva bluetooth</string>
   <string name="pref_checkAttached_title">Controllo poligonale</string>
@@ -1227,7 +1198,6 @@
   <!-- UNUSED string name="pref_section_stations_summary">Capisaldi di riferimento per X-Section</string -->
   <string name="pref_station_size_title">Dimensione nome capisaldi</string>
   <string name="pref_station_size_summary">Dimensione nome capisaldi</string>
-  <string name="pref_station_size_message">Size of the station labels</string>
   <string name="pref_zoom_controls_title">Regolazioni Zoom</string>
   <string name="pref_zoom_controls_summary">Regolazioni Zoom su multitouch</string>
   <string name="pref_side_drag_title">Side-drag</string>
@@ -1245,19 +1215,13 @@
   <!-- UNUSED string name="pref_sketchUsesSplays_summary">Sketch surface uses splays</string -->
   <string name="pref_sketchLineStep_title">Line step</string>
   <string name="pref_sketchLineStep_summary">Distance between line points</string>
-  <string name="pref_sketchLineStep_message">Distance between line points</string>
   <!-- UNUSED string name="pref_sketchBorderStep_title">Border step</string -->
   <!-- UNUSED string name="pref_sketchBorderStep_summary">Distance between edit-line points</string -->
-  <!-- UNUSED string name="pref_sketchBorderStep_message">Distance between edit-line points</string -->
-  <!-- UNUSED string name="pref_sketchSectionStep_title">Section step</string -->
   <!-- UNUSED string name="pref_sketchSectionStep_summary">Distance between sections</string -->
-  <!-- UNUSED string name="pref_sketchSectionStep_message">Distance between intermediate sections</string -->
   <string name="pref_sketchDeltaExtrude_title">Extrude delta</string>
   <string name="pref_sketchDeltaExtrude_summary">Extrude delta</string>
-  <string name="pref_sketchDeltaExtrude_message">Extrude delta</string>
   <string name="pref_sketchCompassReadings_title">Compass readings</string>
   <string name="pref_sketchCompassReadings_summary">Number of readings to average</string>
-  <string name="pref_sketchCompassReadings_message">Number of compass readings to average</string>
 
   <string name="pref_unit_length_title">Unità lunghezze</string>
   <string name="pref_unit_length_summary">Unità lunghezze</string>
@@ -1270,33 +1234,24 @@
   <string name="pref_walls_type_title">Tipo pareti</string>
   <string name="pref_walls_type_summary">Tipo pareti</string>
   <string name="pref_walls_plan_thr_title">Inclinazione per Splay in pianta</string>
-  <string name="pref_walls_plan_thr_summary">Massima inclinazione di splay per pareti in pianta</string>
-  <string name="pref_walls_plan_thr_message">Massima inclinazione di splay per pareti in pianta [deg]</string>
+  <string name="pref_walls_plan_thr_summary">Massima inclinazione di splay per pareti in pianta [deg]</string>
   <string name="pref_walls_extended_thr_title">Inclinazione per Splay in sezione</string>
-  <string name="pref_walls_extended_thr_summary">Massima inclinazione di splay per pareti in sezione</string>
-  <string name="pref_walls_extended_thr_message">Massima inclinazione di splay per pareti in sezione [deg]</string>
+  <string name="pref_walls_extended_thr_summary">Massima inclinazione di splay per pareti in sezione [deg]</string>
   <string name="pref_walls_xclose_title">Gestione spazio</string>
-  <string name="pref_walls_xclose_summary">Minimo di distanza tra punti lungo il tiro</string>
-  <string name="pref_walls_xclose_message">Minimo di distanza tra punti lungo il tiro [m]</string>
+  <string name="pref_walls_xclose_summary">Minimo di distanza tra punti lungo il tiro [m]</string>
   <string name="pref_walls_concave_title">Concavita\'</string>
-  <string name="pref_walls_concave_summary">Massima concavita\'</string>
-  <string name="pref_walls_concave_message">Massima concavita\' [percent]</string>
+  <string name="pref_walls_concave_summary">Massima concavita\' [percent]</string>
   <string name="pref_walls_xstep_title">Passo</string>
-  <string name="pref_walls_xstep_summary">Distanza tra punti lungo il tiro</string>
-  <string name="pref_walls_xstep_message">Distanza tra punti lungo il tiro [m]</string>
+  <string name="pref_walls_xstep_summary">Distanza tra punti lungo il tiro [m]</string>
 
   <!-- NO string name="pref_algo_min_alpha_title">Min-algo alpha</string -->
-  <!-- NO string name="pref_algo_min_alpha_summary">Min-algo adjustment factor</string -->
-  <!-- NO string name="pref_algo_min_alpha_message">Min-algo adjustment factor (in [0,1])</string -->
+  <!-- NO string name="pref_algo_min_alpha_summary">Min-algo adjustment factor (in [0,1])</string -->
   <!-- NO string name="pref_algo_min_beta_title">Min-algo beta</string -->
   <!-- NO string name="pref_algo_min_beta_summary">Min-algo M dip weight</string -->
-  <!-- NO string name="pref_algo_min_beta_message">Min-algo M dip weight</string -->
   <!-- NO string name="pref_algo_min_gamma_title">Min-algo gamma</string -->
   <!-- NO string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x weight</string -->
-  <!-- NO string name="pref_algo_min_gamma_message">Min-algo group G.x M.x weight</string -->
   <!-- NO string name="pref_algo_min_delta_title">Min-algo delta</string -->
   <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
-  <!-- NO string name="pref_algo_min_delta_message">Min-algo group G^M.x weight</string -->
 
 <!-- LEAVE LOG STUFF IN ENGLISH
   <string name="pref_log_stream_summary">Log output stream</string>

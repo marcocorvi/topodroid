@@ -1032,9 +1032,7 @@
   <string name="pref_pt_color_map_summary">PocketTopo 地图颜色 (PocketTopo 输入)</string>
   <string name="pref_text_size_title">字体大小</string>
   <string name="pref_text_size_summary">列表项目字体大小</string>
-  <string name="pref_text_size_message">列表中字体大小</string>
   <string name="pref_closeness_title">选择半径</string>
-  <!-- UNUSED string name="pref_closeness_summary">草图项目选择半径</string -->
   <string name="pref_closeness_message">草图项目选择半径</string>
   <string name="pref_eraseness_title">橡皮擦半径</string>
   <string name="pref_eraseness_message">草图项目擦除半径</string>
@@ -1045,7 +1043,6 @@
   <!-- TODO string name="pref_dash_splay_title">Splay dash coherence</string -->
   <!-- TODO string name="pref_dash_splay_message">Splays dashed coherently between plan and profile</string -->
   <string name="pref_vert_splay_title">侧线虚线倾斜极限</string>
-  <!-- UNUSED string name="pref_vert_splay_summary">侧线虚线倾斜极限</string -->
   <string name="pref_vert_splay_message">侧线虚线倾斜极限</string>
   <!-- TODO string name="pref_horiz_splay_title">Splay dash azimuth threshold</string -->
   <!-- TODO string name="pref_horiz_splay_message">Splay off azimuth more than this are dashed</string -->
@@ -1059,30 +1056,23 @@
   <!-- TODO string name="xsections_private">Private X-sections</string -->
   <!-- TODO string name="pref_reduce_angle_title">Straightening angle</string -->
   <!-- TODO string name="pref_reduce_angle_summary">Minimal segment-angle straightening lines</string -->
-  <!-- TODO string name="pref_reduce_angle_message">Minimal segment-angle straightening lines</string -->
 
 
   <string name="pref_survey_stations_title">测量点方案</string>
   <string name="pref_survey_stations_summary">测量点自动命名方案</string>
   <string name="pref_accel_thr_title">加速度容差</string>
   <string name="pref_accel_thr_summary">加速度测量容差</string>
-  <string name="pref_accel_thr_message">加速度测量容差</string>
   <string name="pref_mag_thr_title">地磁公差</string>
   <string name="pref_mag_thr_summary">磁场测量容差</string>
-  <string name="pref_mag_thr_message">磁场测量容差</string>
   <string name="pref_dip_thr_title">磁场降容差</string>
   <string name="pref_dip_thr_summary">磁场测量降容差</string>
-  <string name="pref_dip_thr_message">磁场测量降容差</string>
 
   <string name="pref_leg_title">主线容差</string>
   <string name="pref_leg_summary">主线测量间容差</string>
-  <string name="pref_leg_message">主线测量间容差</string>
   <!-- TODO string name="pref_max_shot_title">Maximum shot length</string -->
   <!-- TODO string name="pref_max_shot_summary">Maximum length of shooting [m]</string -->
-  <!-- TODO string name="pref_max_shot_message">Shots over this length are marked as overshoot</string -->
   <!-- TODO string name="pref_min_leg_title">Minimum leg length</string -->
   <!-- TODO string name="pref_min_leg_summary">Minimum length of legs [m]</string -->
-  <!-- TODO string name="pref_min_leg_message">Legs shorter than the minimum have orange background</string -->
   <string name="pref_backsight_title">后测</string>
   <string name="pref_backsight_summary">新测量对话框里的后测字段</string>
   <!-- TODO string name="pref_backshot_title">Backshot DistoX</string -->
@@ -1095,8 +1085,7 @@
   <string name="pref_azimuth_manual_summary">可设定或固定左/右延展参考</string>
 
   <string name="pref_team_title">团队</string>
-  <string name="pref_team_summary">测量队伍名称</string>
-  <string name="pref_team_message">默认测量队伍名称</string>
+  <string name="pref_team_summary">默认测量队伍名称</string>
 
   <string name="pref_ethr_title">侧线垂直极限值</string>
   <string name="pref_ethr_summary">侧线垂直延展区域</string>
@@ -1110,38 +1099,29 @@
   <string name="pref_plan_vthr_message">在平面视图中隐藏高斜度的侧线</string>
   <string name="pref_init_station_title">起始测量点的名称</string>
   <string name="pref_init_station_summary">默认起始测量点名称</string>
-  <string name="pref_init_station_message">默认起始测量点名称</string>
   <string name="pref_station_names_title">测量点名称</string>
   <string name="pref_station_names_summary">测量点名称类型</string>
 
   <string name="pref_hthr_title">横断面水平极限值</string>
   <string name="pref_hthr_summary">水平横断面极限值</string>
-  <string name="pref_hthr_message">主线倾斜超过横断面视为水平</string>
   <string name="pref_bitmap_scale_title">PNG 分辨率</string>
   <string name="pref_bitmap_scale_summary">草图中PNG图片分辨率</string>
-  <string name="pref_bitmap_scale_message">草图输出PNG图片分辨率</string>
   <string name="pref_bitmap_bgcolor_title">PNG背景颜色</string>
   <string name="pref_bitmap_bgcolor_summary">草图输出中PNG图像背景颜色</string>
-  <string name="pref_bitmap_bgcolor_message">草图输出中PNG图像背景颜色</string>
   <string name="pref_acad_version_title">AutoCAD 版本</string>
   <string name="pref_acad_version_summary">AutoCAD 版本</string>
   <!-- UNUSED string name="pref_dxf_scale_title">DXF 草图比例</string -->
   <!-- UNUSED string name="pref_dxf_scale_summary">DXF 草图比例系数</string -->
-  <!-- UNUSED string name="pref_dxf_scale_message">草图输出中DXF比例系数</string -->
   <string name="pref_dxf_blocks_title">DXF 侧线终点</string>
   <string name="pref_dxf_blocks_summary">DXF 侧线终点</string>
   <string name="pref_thumbnail_title">缩略图大小</string>
   <string name="pref_thumbnail_summary">照片缩略图尺寸</string>
-  <string name="pref_thumbnail_message">照片缩略图尺寸</string>
   <string name="pref_shot_timer_title">测量放向定时器</string>
   <string name="pref_shot_timer_summary">第二次在第一次方向测量之前需等待</string>
-  <string name="pref_shot_timer_message">第二次在第一次方向测量之前</string>
   <string name="pref_beep_volume_title">定时器嗡鸣声</string>
   <string name="pref_beep_volume_summary">定时器嗡鸣声百分比</string>
-  <string name="pref_beep_volume_message">定时器嗡鸣声百分比</string>
   <string name="pref_drawing_unit_title">绘点工具大小</string>
   <string name="pref_drawing_unit_summary">绘点工具大小</string>
-  <string name="pref_drawing_unit_message">点绘画工具大小</string>
   <string name="pref_unscaled_points_title">非缩放点图标</string>
   <string name="pref_unscaled_points_summary">点图标不能缩放</string>
   <string name="pref_segment_title">线点间隔</string>
@@ -1152,11 +1132,9 @@
   <!-- TODO string name="pref_linecontinue_title">Line continue</string -->
   <!-- TODO string name="pref_linecontinue_summary">Line default continue-mode</string -->
   <string name="pref_lineacc_title">贝塞尔线精度</string>
-  <string name="pref_lineacc_summary">贝塞尔线插值精度</string>
-  <string name="pref_lineacc_message">贝塞尔线三次插值精度</string>
+  <string name="pref_lineacc_summary">贝塞尔线三次插值精度</string>
   <string name="pref_linecorner_title">贝塞尔线转角临界值</string>
-  <string name="pref_linecorner_summary">贝塞尔线转角临界值</string>
-  <string name="pref_linecorner_message">贝塞尔线转角侦测临界值</string>
+  <string name="pref_linecorner_summary">贝塞尔线转角侦测临界值</string>
   <string name="pref_calib_algo_title">算法</string>
   <string name="pref_calib_algo_summary">校准算法</string>
   <string name="pref_group_by_title">组策略</string>
@@ -1166,12 +1144,8 @@
   <string name="pref_group_message">同一组中测量的公差</string>
   <string name="pref_error_title">错误</string>
   <string name="pref_error_summary">最小校准错误</string>
-  <string name="pref_error_dialogtitle">校准错误</string>
-  <string name="pref_error_message">最小校准错误</string>
   <string name="pref_iter_title">迭代次数</string>
   <string name="pref_iter_summary">迭代次数最小值</string>
-  <string name="pref_iter_dialogtitle">校准迭代次数</string>
-  <string name="pref_iter_message">校准迭代次数</string>
   <string name="pref_label_size_title">标签大小</string>
   <string name="pref_label_size_summary">标签大小</string>
   <string name="pref_label_size_message">标签大小</string>
@@ -1183,13 +1157,10 @@
   <string name="pref_dot_radius_message">绿色点大小</string>
   <string name="pref_line_thickness_title">线宽</string>
   <string name="pref_line_thickness_summary">绘图线宽</string>
-  <string name="pref_line_thickness_message">绘图线宽</string>
   <string name="pref_fixed_thickness_title">测量线线宽</string>
   <string name="pref_fixed_thickness_summary">测量线线宽</string>
-  <string name="pref_fixed_thickness_message">测量线线宽</string>
   <!-- UNUSED string name="pref_device_title">设备</string -->
   <!-- UNUSED string name="pref_device_summary">DistoX 地址 名称</string -->
-  <!-- UNUSED string name="pref_device_message">DistoX 地址 名称</string -->
   <string name="pref_checkBT_title">蓝牙</string>
   <string name="pref_checkBT_summary">启用/停用 蓝牙</string>
   <string name="pref_checkAttached_title">中间线检查</string>
@@ -1221,7 +1192,6 @@
   <!-- UNUSED string name="pref_section_stations_summary">X-截面参考系</string -->
   <string name="pref_station_size_title">测量点名称尺寸</string>
   <string name="pref_station_size_summary">测量点名称尺寸</string>
-  <string name="pref_station_size_message">测量点名称尺寸</string>
   <string name="pref_zoom_controls_title">缩放控制</string>
   <string name="pref_zoom_controls_summary">多点控制缩放</string>
   <string name="pref_side_drag_title">拖动</string>
@@ -1239,19 +1209,14 @@
   <!-- UNUSED string name="pref_sketchUsesSplays_summary">草图的外表面使用侧线</string -->
   <string name="pref_sketchLineStep_title">最大尺寸</string>
   <string name="pref_sketchLineStep_summary">三角形最大尺寸</string>
-  <string name="pref_sketchLineStep_message">三角形最大尺寸 [m]</string>
   <!-- UNUSED string name="pref_sketchBorderStep_title">边框步骤</string -->
   <!-- UNUSED string name="pref_sketchBorderStep_summary">编辑的线点间的距离</string -->
-  <!-- UNUSED string name="pref_sketchBorderStep_message">编辑的线点间的距离</string -->
   <!-- UNUSED string name="pref_sketchSectionStep_title">截面步骤</string -->
   <!-- UNUSED string name="pref_sketchSectionStep_summary">截面间的距离</string -->
-  <!-- UNUSED string name="pref_sketchSectionStep_message">中间截面的距离</string -->
   <string name="pref_sketchDeltaExtrude_title">拉伸比例</string>
   <string name="pref_sketchDeltaExtrude_summary">拉伸比例系数</string>
-  <string name="pref_sketchDeltaExtrude_message">拉伸比例系数</string>
   <string name="pref_sketchCompassReadings_title">方位角读取</string>
   <string name="pref_sketchCompassReadings_summary">读取的平均值</string>
-  <string name="pref_sketchCompassReadings_message">读取的方位角平均值</string>
 
   <string name="pref_unit_length_title">长度单位</string>
   <string name="pref_unit_length_summary">显示长度单位</string>
@@ -1264,27 +1229,20 @@
   <string name="pref_walls_type_title">洞壁类型</string>
   <string name="pref_walls_type_summary">洞壁类型</string>
   <string name="pref_walls_plan_thr_title">侧线平面倾角</string>
-  <string name="pref_walls_plan_thr_summary">平面洞壁中最大 侧线倾角</string>
-  <string name="pref_walls_plan_thr_message">平面洞壁中最大 侧线倾角 [度]</string>
+  <string name="pref_walls_plan_thr_summary">平面洞壁中最大 侧线倾角 [度]</string>
   <string name="pref_walls_extended_thr_title">侧线绘制轮廓时的倾斜度</string>
-  <string name="pref_walls_extended_thr_summary">洞壁轮廓侧线最大倾斜角</string>
-  <string name="pref_walls_extended_thr_message">洞壁轮廓侧线最大倾斜角 [度]</string>
+  <string name="pref_walls_extended_thr_summary">洞壁轮廓侧线最大倾斜角 [度]</string>
   <string name="pref_walls_xclose_title">分离</string>
-  <string name="pref_walls_xclose_summary">沿着测量线分割点的最小值</string>
-  <string name="pref_walls_xclose_message">沿着测量线分割点的最小值 [m]</string>
+  <string name="pref_walls_xclose_summary">沿着测量线分割点的最小值 [m]</string>
   <string name="pref_walls_concave_title">凹度</string>
-  <string name="pref_walls_concave_summary">最大凹度</string>
-  <string name="pref_walls_concave_message">最大凹度 [百分比]</string>
+  <string name="pref_walls_concave_summary">最大凹度 [百分比]</string>
   <string name="pref_walls_xstep_title">步骤</string>
-  <string name="pref_walls_xstep_summary">沿着洞壁分割点</string>
-  <string name="pref_walls_xstep_message">沿着洞壁分割点 [m]</string>
+  <string name="pref_walls_xstep_summary">沿着洞壁分割点 [m]</string>
 
   <!-- NO string name="pref_algo_min_gamma_title">Min-algo gamma</string -->
   <!-- NO string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x weight</string -->
-  <!-- NO string name="pref_algo_min_gamma_message">Min-algo group G.x M.x weight</string -->
   <!-- NO string name="pref_algo_min_delta_title">Min-algo delta</string -->
   <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
-  <!-- NO string name="pref_algo_min_delta_message">Min-algo group G^M.x weight</string -->
 
 <!-- LEAVE LOG STUFF IN ENGLISH
   <string name="pref_log_stream_summary">记录输出流</string>

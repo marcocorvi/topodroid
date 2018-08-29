@@ -1028,9 +1028,7 @@
   <string name="pref_pt_color_map_summary">PocketTopo карта на цветовете (импорт)</string>
   <string name="pref_text_size_title">Размер на текста</string>
   <string name="pref_text_size_summary">Размер на шрифта в текстове</string>
-  <string name="pref_text_size_message">Размер на шрифта в текстове</string>
   <string name="pref_closeness_title">Радиус при избиране</string>
-  <!-- UNUSED string name="pref_closeness_summary">Радиус за избиране на елемент от скицата</string -->
   <string name="pref_closeness_message">Радиус за избиране на елемент от скицата</string>
   <string name="pref_eraseness_title">Радиус за изтриване</string>
   <string name="pref_eraseness_message">Радиус на гумата при триене в скицата</string>
@@ -1041,7 +1039,6 @@
   <string name="pref_dash_splay_title">Съгласуване на пунктир в стран. изм.</string>
   <string name="pref_dash_splay_message">Еднакъв пунктир в страничните измервания в плана и разреза</string>
   <string name="pref_vert_splay_title">Наклонени измервания с пунктир</string>
-  <!-- UNUSED string name="pref_vert_splay_summary">Странични измервания с по-голям наклон са с пунктир в плана</string -->
   <string name="pref_vert_splay_message">Странични измервания с по-голям наклон са с пунктир в плана</string>
   <string name="pref_horiz_splay_title">Азимут граница за пунктирани стр. изм.</string>
   <string name="pref_horiz_splay_message">Стр. изм. с по-голямо отклонение от антената са пунктирани</string>
@@ -1061,30 +1058,23 @@
   <string name="xsections_private">Индивидуални сечения в репери</string>
   <!-- TODO string name="pref_reduce_angle_title">Straightening angle</string -->
   <!-- TODO string name="pref_reduce_angle_summary">Minimal segment-angle straightening lines</string -->
-  <!-- TODO string name="pref_reduce_angle_message">Minimal segment-angle straightening lines</string -->
 
 
   <string name="pref_survey_stations_title">Репери</string>
   <string name="pref_survey_stations_summary">Автоматични репери</string>
   <string name="pref_accel_thr_title">Толеранс на акселерометъра</string>
   <string name="pref_accel_thr_summary">Толеранс на акселерометричните данни за отсечките</string>
-  <string name="pref_accel_thr_message">Толеранс на акселерометричните данни за отсечките</string>
   <string name="pref_mag_thr_title">Магнитен толеранс</string>
   <string name="pref_mag_thr_summary">Толеранс на магнитното поле на отсечките</string>
-  <string name="pref_mag_thr_message">Толеранс на магнитното поле на отсечките</string>
   <string name="pref_dip_thr_title">Толеранс на магнитния наклон</string>
   <string name="pref_dip_thr_summary">Толеранс на наклона на магн. поле за отсечките</string>
-  <string name="pref_dip_thr_message">Толеранс на наклона на магн. поле за отсечките</string>
 
   <string name="pref_leg_title">Толеранс на отсечките</string>
   <string name="pref_leg_summary">Толеранс между измерванията за отсечка на антената</string>
-  <string name="pref_leg_message">Толеранс между измерванията за отсечка на антената</string>
   <string name="pref_max_shot_title">Макс. дължина на измерване [m]</string>
   <string name="pref_max_shot_summary">Максимално приемлива дължина на измерване [m]</string>
-  <string name="pref_max_shot_message">Измервания над тази дължина се маркират като прекалено дълги и вероятно грешни</string>
   <string name="pref_min_leg_title">Мин. дължина на отсечка [m]</string>
   <string name="pref_min_leg_summary">Минимална приемлива дължина на отсечка [m]</string>
-  <string name="pref_min_leg_message">Отсечки под тази дължина се маркират като вероятно грешни</string>
   <string name="pref_backsight_title">Обратна отсечка</string>
   <string name="pref_backsight_summary">Въвеждане на обр. азимут/накл/разст при ръчно добавяне на отсечка</string>
   <string name="pref_backshot_title">DistoX в обратен режим</string>
@@ -1097,8 +1087,7 @@
   <string name="pref_azimuth_manual_summary">Ръчно разгъване на отсечки в разреза</string>
 
   <string name="pref_team_title">Картировачи</string>
-  <string name="pref_team_summary">Екип картировачи</string>
-  <string name="pref_team_message">Екип картировачи по подразбиране</string>
+  <string name="pref_team_summary">Екип картировачи по подразбиране</string>
 
   <string name="pref_ethr_title">Граница на вертикално измерване</string>
   <string name="pref_ethr_summary">Граница за верт. разгъване на странични отсечки</string>
@@ -1112,38 +1101,29 @@
   <string name="pref_plan_vthr_message">Странични измервания с по-голям наклон не се показват в скицата на плана</string>
   <string name="pref_init_station_title">Начален репер</string>
   <string name="pref_init_station_summary">Име на първия репер в картировката</string>
-  <string name="pref_init_station_message">Име на първия репер в картировката</string>
   <string name="pref_station_names_title">Именоване на реперите</string>
   <string name="pref_station_names_summary">Тип на имената на реперите</string>
 
   <string name="pref_hthr_title">Граница за хор. сечения</string>
   <string name="pref_hthr_summary">Граница, за считане на сечение за хоризонтално или вертикално</string>
-  <string name="pref_hthr_message">Наклон, над който сеч. във вертикалния план са хоризонтални</string>
   <string name="pref_bitmap_scale_title">PNG резолюция</string>
   <string name="pref_bitmap_scale_summary">Резолюция на експортирани скици в PNG формат</string>
-  <string name="pref_bitmap_scale_message">Резолюция на експортирани скици в PNG формат</string>
   <string name="pref_bitmap_bgcolor_title">PNG фон</string>
   <string name="pref_bitmap_bgcolor_summary">Цвят на фона на PNG експортирани скици</string>
-  <string name="pref_bitmap_bgcolor_message">Цвят на фона на PNG експортирани скици</string>
   <string name="pref_acad_version_title">AutoCAD версия</string>
   <string name="pref_acad_version_summary">AutoCAD версия</string>
   <!-- UNUSED string name="pref_dxf_scale_title">Мащаб на DXF скици</string -->
   <!-- UNUSED string name="pref_dxf_scale_summary">Мащабен фактор на DXF скици</string -->
-  <!-- UNUSED string name="pref_dxf_scale_message">Фактор за мащабиране на експортиране на DXF скици</string -->
   <string name="pref_dxf_blocks_title">DXF странични краища</string>
   <string name="pref_dxf_blocks_summary">DXF краища на странични измервания</string>
   <string name="pref_thumbnail_title">Резолюция на мини-картинки</string>
   <string name="pref_thumbnail_summary">Резолюция на мини-картинки</string>
-  <string name="pref_thumbnail_message">Резолюция на мини-картинки</string>
   <string name="pref_shot_timer_title">Таймер на измерването</string>
   <string name="pref_shot_timer_summary">Секунди за изчакване преди измерване на отсечка</string>
-  <string name="pref_shot_timer_message">Секунди за изчакване преди измерване на отсечка</string>
   <string name="pref_beep_volume_title">Сила на звука при таймер-измерване</string>
   <string name="pref_beep_volume_summary">Сила на звука в проценти при измерване с таймер</string>
-  <string name="pref_beep_volume_message">Сила на звука в проценти при измерване с таймер</string>
   <string name="pref_drawing_unit_title">Размер на елемент "точка"</string>
   <string name="pref_drawing_unit_summary">Размер на нарисуван елемент тип "точка"</string>
-  <string name="pref_drawing_unit_message">Размер на нарисуван елемент тип "точка"</string>
   <string name="pref_unscaled_points_title">Фиксиран размер на точките</string>
   <string name="pref_unscaled_points_summary">Точките не се променят при приближаване</string>
   <string name="pref_segment_title">Отстояния между точки на линия</string>
@@ -1154,11 +1134,9 @@
   <!-- TODO string name="pref_linecontinue_title">Line continue</string -->
   <!-- TODO string name="pref_linecontinue_summary">Line default continue-mode</string -->
   <string name="pref_lineacc_title">"Безие" точност</string>
-  <string name="pref_lineacc_summary">Точност на интерполация на криви "Безие"</string>
-  <string name="pref_lineacc_message">Точност на кубична интерполация на криви "Безие"</string>
+  <string name="pref_lineacc_summary">Точност на кубична интерполация на криви "Безие"</string>
   <string name="pref_linecorner_title">Граница на ъгъл "Безие"</string>
-  <string name="pref_linecorner_summary">Граница на ъгъл при криви "Безие"</string>
-  <string name="pref_linecorner_message">Граница на отчитане на ъгъл при криви "Безие"</string>
+  <string name="pref_linecorner_summary">Граница на отчитане на ъгъл при криви "Безие"</string>
   <string name="pref_calib_algo_title">Алгоритъм</string>
   <string name="pref_calib_algo_summary">Алгоритъм за калибрация</string>
   <string name="pref_group_by_title">Метод на групиране</string>
@@ -1168,12 +1146,8 @@
   <string name="pref_group_message">Толеранс между отсечките в една и съща група</string>
   <string name="pref_error_title">Грешка</string>
   <string name="pref_error_summary">Минимална грешка при калибрация</string>
-  <string name="pref_error_dialogtitle">Грешка при калибрация</string>
-  <string name="pref_error_message">Минимална грешка при калибрация</string>
   <string name="pref_iter_title">Повторения</string>
   <string name="pref_iter_summary">Макс. брой повторения</string>
-  <string name="pref_iter_dialogtitle">Повторения при калибрация</string>
-  <string name="pref_iter_message">Повторения при калибрация</string>
   <string name="pref_label_size_title">Размер на надписи</string>
   <string name="pref_label_size_summary">Размер на надписи в скиците</string>
   <string name="pref_label_size_message">Размер на надписи в скиците</string>
@@ -1185,13 +1159,10 @@
   <string name="pref_dot_radius_message">Размер на зелена точка при избор на елементи в скицата</string>
   <string name="pref_line_thickness_title">Широчина на линия</string>
   <string name="pref_line_thickness_summary">Широчина на линията за рисуване</string>
-  <string name="pref_line_thickness_message">Широчина на линията за рисуване</string>
   <string name="pref_fixed_thickness_title">Широчина на линия от антената</string>
   <string name="pref_fixed_thickness_summary">Широчина на линия от антената</string>
-  <string name="pref_fixed_thickness_message">Широчина на линия от антената</string>
   <!-- UNUSED string name="pref_device_title">Устройство</string -->
   <!-- UNUSED string name="pref_device_summary">Адрес на DistoX</string -->
-  <!-- UNUSED string name="pref_device_message">Адрес на DistoX</string -->
   <string name="pref_checkBT_title">Bluetooth</string>
   <string name="pref_checkBT_summary">Разрешаване/забраняване на Bluetooth</string>
   <string name="pref_checkAttached_title">Проверка на антена</string>
@@ -1223,7 +1194,6 @@
   <!-- UNUSED string name="pref_section_stations_summary">Показване на измервания в репер на сечение</string -->
   <string name="pref_station_size_title">Размер на име на репер</string>
   <string name="pref_station_size_summary">Размер на име на репер</string>
-  <string name="pref_station_size_message">Размер на име на репер в скицата</string>
   <string name="pref_zoom_controls_title">Бутони за приближаване</string>
   <string name="pref_zoom_controls_summary">Показване на контролите за приближаване при "мултитъч" екрани</string>
   <string name="pref_side_drag_title">Странично скролиране</string>
@@ -1241,19 +1211,14 @@
   <!-- UNUSED string name="pref_sketchUsesSplays_summary">Повърхността използва страничните измервания</string -->
   <string name="pref_sketchLineStep_title">Максимална страна</string>
   <string name="pref_sketchLineStep_summary">Максимален размер на страна на триъгълник (метри)</string>
-  <string name="pref_sketchLineStep_message">Максимален размер на страна на триъгълник (метри)</string>
   <!-- UNUSED string name="pref_sketchBorderStep_title">Стъпка</string -->
   <!-- UNUSED string name="pref_sketchBorderStep_summary">Разстояние между точки в линията</string -->
-  <!-- UNUSED string name="pref_sketchBorderStep_message">Разстояние между точки в линията</string -->
   <!-- UNUSED string name="pref_sketchSectionStep_title">Стъпка в секцията</string -->
   <!-- UNUSED string name="pref_sketchSectionStep_summary">Разстояние между секциите</string -->
-  <!-- UNUSED string name="pref_sketchSectionStep_message">Разстояние между междинните секции</string -->
   <string name="pref_sketchDeltaExtrude_title">Екструд. мащаб</string>
   <string name="pref_sketchDeltaExtrude_summary">Мащабиращ фактор за екструдиране</string>
-  <string name="pref_sketchDeltaExtrude_message">Мащабиращ фактор за екструдиране</string>
   <string name="pref_sketchCompassReadings_title">Отчет на компаса</string>
   <string name="pref_sketchCompassReadings_summary">Брой отчитания за усредняване</string>
-  <string name="pref_sketchCompassReadings_message">Брой отчитания на азимут за усредняване</string>
 
   <string name="pref_unit_length_title">Мерни единици за дължина</string>
   <string name="pref_unit_length_summary">Мерни единици за дължина</string>
@@ -1266,33 +1231,24 @@
   <string name="pref_walls_type_title">Тип стени</string>
   <string name="pref_walls_type_summary">Тип стени</string>
   <string name="pref_walls_plan_thr_title">Странични изм. в плана</string>
-  <string name="pref_walls_plan_thr_summary">Макс. наклон на странични изм. за стени в плана</string>
-  <string name="pref_walls_plan_thr_message">Макс. наклон на странични изм. за стени в плана [°]</string>
+  <string name="pref_walls_plan_thr_summary">Макс. наклон на странични изм. за стени в плана [°]</string>
   <string name="pref_walls_extended_thr_title">Странични изм. в разреза</string>
-  <string name="pref_walls_extended_thr_summary">Макс. наклон на странични изм. за стени в разреза</string>
-  <string name="pref_walls_extended_thr_message">Макс. наклон на странични изм. за стени в плана [°]</string>
+  <string name="pref_walls_extended_thr_summary">Макс. наклон на странични изм. за стени в плана [°]</string>
   <string name="pref_walls_xclose_title">Минимално разстояние</string>
-  <string name="pref_walls_xclose_summary">Минимално разстояние м/у точките по отсечката</string>
-  <string name="pref_walls_xclose_message">Минимално разстояние м/у точките по отсечката [m]</string>
+  <string name="pref_walls_xclose_summary">Минимално разстояние м/у точките по отсечката [m]</string>
   <string name="pref_walls_concave_title">Вдлъбнатост</string>
-  <string name="pref_walls_concave_summary">Максимална вдлъбнатост</string>
-  <string name="pref_walls_concave_message">Максимална вдлъбнатост [процент]</string>
+  <string name="pref_walls_concave_summary">Максимална вдлъбнатост [процент]</string>
   <string name="pref_walls_xstep_title">Максимално разстояние</string>
-  <string name="pref_walls_xstep_summary">Максимално разстояние м/у точки на стената</string>
-  <string name="pref_walls_xstep_message">Максимално разстояние м/у точки на стената [m]</string>
+  <string name="pref_walls_xstep_summary">Максимално разстояние м/у точки на стената [m]</string>
 
   <!-- NO string name="pref_algo_min_alpha_title">Min-algo alpha</string -->
-  <!-- NO string name="pref_algo_min_alpha_summary">Min-algo adjustment factor</string -->
-  <!-- NO string name="pref_algo_min_alpha_message">Min-algo adjustment factor (in [0,1])</string -->
+  <!-- NO string name="pref_algo_min_alpha_summary">Min-algo adjustment factor (in [0,1])</string -->
   <!-- NO string name="pref_algo_min_beta_title">Min-algo beta</string -->
   <!-- NO string name="pref_algo_min_beta_summary">Min-algo M dip weight</string -->
-  <!-- NO string name="pref_algo_min_beta_message">Min-algo M dip weight</string -->
   <!-- NO string name="pref_algo_min_gamma_title">Min-algo gamma</string -->
   <!-- NO string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x weight</string -->
-  <!-- NO string name="pref_algo_min_gamma_message">Min-algo group G.x M.x weight</string -->
   <!-- NO string name="pref_algo_min_delta_title">Min-algo delta</string -->
   <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
-  <!-- NO string name="pref_algo_min_delta_message">Min-algo group G^M.x weight</string -->
 
 <!-- LEAVE LOG STUFF IN ENGLISH
   <string name="pref_log_stream_summary">Лог файл</string>

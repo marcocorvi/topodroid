@@ -1045,9 +1045,7 @@
   <string name="pref_pt_color_map_summary">PocketTopo grilă asociere(mapare) culori (import PocketTopo)</string>
   <string name="pref_text_size_title">Mărime text</string>
   <string name="pref_text_size_summary">Mărime text elemente liste</string>
-  <string name="pref_text_size_message">Mărimea textului în liste</string>
   <string name="pref_closeness_title">Rază selecție</string>
-  <!-- UNUSED string name="pref_closeness_summary">Rază selecție a elementelor schiței</string -->
   <string name="pref_closeness_message">Rază selecție a elementelor schiței</string>
   <string name="pref_eraseness_title">Mărime gumă</string>
   <string name="pref_eraseness_message">Mărime gumă de șters a elementelor din schiță</string>
@@ -1058,7 +1056,6 @@
   <string name="pref_dash_splay_title">Coerență liniuțe radieri</string>
   <string name="pref_dash_splay_message">Radierile punctate coerent între plan și profile</string>
   <string name="pref_vert_splay_title">Unghi limită puncte radieri~</string>
-  <!-- UNUSED string name="pref_vert_splay_summary">Radierile peste înclinația aceasta sunt marcate cu linie intreruptă</string -->
   <string name="pref_vert_splay_message">Radierile peste înclinația limită sunt marcate cu linie intreruptă</string>
   <string name="pref_horiz_splay_title">Limită azimut radieri întrerupte</string>
   <string name="pref_horiz_splay_message">Radierile cu azimutul mai mare ca acesta sunt marcate cu linie întreruptă</string>
@@ -1072,30 +1069,23 @@
   <string name="xsections_private">Secțiuni-X (trans.) private</string>
   <string name="pref_reduce_angle_title">Unghi de îndreptare</string>
   <string name="pref_reduce_angle_summary">Unghi-segment minim pt. îndreptarea liniilor~</string>
-  <string name="pref_reduce_angle_message">Unghi-segment minim pt. îndreptarea liniilor~</string>
 
 
   <string name="pref_survey_stations_title">Metodă stații</string>
   <string name="pref_survey_stations_summary">Metodă de denumire automată a stațiilor</string>
   <string name="pref_accel_thr_title">Toleranță accelerare</string>
   <string name="pref_accel_thr_summary">Procentaj toleranță pentru valoarea accelerării măsurătorilor</string>
-  <string name="pref_accel_thr_message">Procentaj toleranță pentru valoarea accelerării măsurătorilor</string>
   <string name="pref_mag_thr_title">Toleranță câmp magnetic</string>
   <string name="pref_mag_thr_summary">Procentaj toleranță pentru valoarea câmpului magnetic al măsurătorilor</string>
-  <string name="pref_mag_thr_message">Procentaj toleranță pentru valoarea câmpului magnetic al măsurătorilor</string>
   <string name="pref_dip_thr_title">Toleranță unghi înclinație magnetică</string>
   <string name="pref_dip_thr_summary">Toleranță pentru unghiul înclinației magnetice a măsurătorilor</string>
-  <string name="pref_dip_thr_message">Toleranță pentru unghiul înclinației magnetice a măsurătorilor</string>
 
   <string name="pref_leg_title">Toleranță vize</string>
   <string name="pref_leg_summary">Toleranța între măsurătorile pentru o viză (segment drumuire)</string>
-  <string name="pref_leg_message">Toleranța între măsurătorile pentru o viză (segment drumuire)</string>
   <string name="pref_max_shot_title">Lungime maximă măsuratoare</string>
   <string name="pref_max_shot_summary">Lungimea maximă a unei măsuratori [m]</string>
-  <string name="pref_max_shot_message">Măsurătorile mai lungi decât această valoare sunt marcate ca "depășite"</string>
   <string name="pref_min_leg_title">Lungime minimă viză</string>
   <string name="pref_min_leg_summary">Lungimea maximă a unei vize [m]</string>
-  <string name="pref_min_leg_message">Vizele mai scurte decât valoarea minimă au fundal portocaliu</string>
   <string name="pref_backsight_title">Vize inverse</string>
   <string name="pref_backsight_summary">Câmpurile pt viză inversă în fereastra unei măsuratori noi</string>
   <string name="pref_backshot_title">Mod DistoX viză inversă</string>
@@ -1108,8 +1098,7 @@
   <string name="pref_azimuth_manual_summary">Dreapta/Stânga fixată sau Referință extensie configurabilă~</string>
 
   <string name="pref_team_title">Echipa</string>
-  <string name="pref_team_summary">Echipa de cartare</string>
-  <string name="pref_team_message">Echipa de cartare prestabilită</string>
+  <string name="pref_team_summary">Echipa de cartare prestabilită</string>
 
   <string name="pref_ethr_title">Limită verticală radiere</string>
   <string name="pref_ethr_summary">Regiunea extensiei verticale (radieri)</string>
@@ -1123,38 +1112,29 @@
   <string name="pref_plan_vthr_message">Ascunde radierile cu înclinație mare în vizualizarea în plan orizontal</string>
   <string name="pref_init_station_title">Numele inițial al stației</string>
   <string name="pref_init_station_summary">Numele inițial implicit al stației</string>
-  <string name="pref_init_station_message">Numele inițial implicit al stației</string>
   <string name="pref_station_names_title">Numele stațiilor</string>
   <string name="pref_station_names_summary">Tipul numelor stațiilor</string>
 
   <string name="pref_hthr_title">Limită orizontală - secțiune transversală Cross-section h-threshold</string>
   <string name="pref_hthr_summary">Limită pentru secțiuni transversală orizontale</string>
-  <string name="pref_hthr_message">Unghi vertical al vizei mai mic de care secțiunile transversale sunt orizontale</string>
   <string name="pref_bitmap_scale_title">Rezoluție PNG</string>
   <string name="pref_bitmap_scale_summary">Rezoluție imaginilor schițelor în PNG</string>
-  <string name="pref_bitmap_scale_message">Rezoluție imaginilor ale schițelor exportate în format PNG</string>
   <string name="pref_bitmap_bgcolor_title">Culoare fundal PNG</string>
   <string name="pref_bitmap_bgcolor_summary">Culoarea fundal schițe PNG</string>
-  <string name="pref_bitmap_bgcolor_message">Culoarea de fundal a imaginilor schițelor exportate în format PNG</string>
   <string name="pref_acad_version_title">Versiune AutoCAD</string>
   <string name="pref_acad_version_summary">Versiune AutoCAD</string>
   <!-- UNUSED string name="pref_dxf_scale_title">Scară schiță DXF</string -->
   <!-- UNUSED string name="pref_dxf_scale_summary">Factor scară schiță DXF</string -->
-  <!-- UNUSED string name="pref_dxf_scale_message">Factor de mărire a schițelor exportate în format DXF</string -->
   <string name="pref_dxf_blocks_title">Capete radieri DXF</string>
   <string name="pref_dxf_blocks_summary">Capete radieri DXF</string>
   <string name="pref_thumbnail_title">Mărime imagini miniatură</string>
   <string name="pref_thumbnail_summary">Mărimea miniaturilor de fotografie(thumbnails)</string>
-  <string name="pref_thumbnail_message">Mărimea miniaturilor de fotografie(thumbnails)</string>
   <string name="pref_shot_timer_title">Întârziere măsurare direcție</string>
   <string name="pref_shot_timer_summary">Timp de așteaptare înaintea măsurării direcției [sec]</string>
-  <string name="pref_shot_timer_message">Timp de așteaptare înaintea măsurării direcției [sec]</string>
   <string name="pref_beep_volume_title">Volum sunet timer</string>
   <string name="pref_beep_volume_summary">Procentaj volum sunet de avertizare timer</string>
-  <string name="pref_beep_volume_message">Procentaj volum sunet de avertizare timer</string>
   <string name="pref_drawing_unit_title">Scară unelte punct</string>
   <string name="pref_drawing_unit_summary">Scara uneltelor de desenare tip punct</string>
-  <string name="pref_drawing_unit_message">Scara uneltelor de desenare tip punct</string>
   <string name="pref_unscaled_points_title">Simboluri puncte ne-scalate</string>
   <string name="pref_unscaled_points_summary">Simbolurilor punctelor nu sunt scalate</string>
   <string name="pref_segment_title">Spațiere linie-punct</string>
@@ -1165,11 +1145,9 @@
   <string name="pref_linecontinue_title">Continuare linie</string>
   <string name="pref_linecontinue_summary">Mod implicit continuare linie</string>  
   <string name="pref_lineacc_title">Acuratețe interpolare</string>
-  <string name="pref_lineacc_summary">Acuratețe interpolare Bezier</string>
-  <string name="pref_lineacc_message">Acuratețe interpolare cubică Bezier</string>
+  <string name="pref_lineacc_summary">Acuratețe interpolare cubică Bezier</string>
   <string name="pref_linecorner_title">Limită colțuri Bezier~</string>
-  <string name="pref_linecorner_summary">Limită colțuri Bezier~</string>
-  <string name="pref_linecorner_message">Limită detecție colțuri Bezier~</string>
+  <string name="pref_linecorner_summary">Limită detecție colțuri Bezier~</string>
   <string name="pref_calib_algo_title">Algoritm</string>
   <string name="pref_calib_algo_summary">Algoritm calibrare</string>
   <string name="pref_group_by_title">Metodă grupare</string>
@@ -1179,12 +1157,8 @@
   <string name="pref_group_message">Toleranța între măsurătorile din același grup</string>
   <string name="pref_error_title">Eroare algoritm</string>
   <string name="pref_error_summary">Eroare terminație algoritm de calibrare</string>
-  <string name="pref_error_dialogtitle">Eroare terminație algoritm de calibrare</string>
-  <string name="pref_error_message">Eroare terminație algoritm de calibrare</string>
   <string name="pref_iter_title">Iterații algoritm</string>
   <string name="pref_iter_summary">Nr. maxim de iterații ale algoritmului de calibrare</string>
-  <string name="pref_iter_dialogtitle">Nr. maxim de iterații algoritm</string>
-  <string name="pref_iter_message">Nr. maxim de iterații ale algoritmului de calibrare</string>
   <string name="pref_label_size_title">Mărime etichete</string>
   <string name="pref_label_size_summary">Mărime etichetelor</string>
   <string name="pref_label_size_message">Mărime etichetelor</string>
@@ -1196,13 +1170,10 @@
   <string name="pref_dot_radius_message">Mărimea punctelor verzi</string>
   <string name="pref_line_thickness_title">Lățimea liniei</string>
   <string name="pref_line_thickness_summary">Lățimea liniei de desen</string>
-  <string name="pref_line_thickness_message">Lățimea liniei de desen</string>
   <string name="pref_fixed_thickness_title">Lățime linie cartare</string>
   <string name="pref_fixed_thickness_summary">Lățimea liniei de cartare</string>
-  <string name="pref_fixed_thickness_message">Lățimea liniei de cartare</string>
   <!-- UNUSED string name="pref_device_title">Dispoziv</string -->
   <!-- UNUSED string name="pref_device_summary">Numele adresei DistoX</string -->
-  <!-- UNUSED string name="pref_device_message">Numele adresei DistoX</string -->
   <string name="pref_checkBT_title">Bluetooth</string>
   <string name="pref_checkBT_summary">Acrivează verificarea bluetooth la pornire</string>
   <string name="pref_checkAttached_title">Verificare drumuire</string>
@@ -1234,7 +1205,6 @@
   <!-- UNUSED string name="pref_section_stations_summary">Stații de referință Secțiuni-X (transversale)</string -->
   <string name="pref_station_size_title">Mărime nume stații</string>
   <string name="pref_station_size_summary">Mărimea numelor stațiilor</string>
-  <string name="pref_station_size_message">Mărimea numelor stațiilor</string>
   <string name="pref_zoom_controls_title">Comenzi redimensionare</string>
   <string name="pref_zoom_controls_summary">Comenzi redimensionare(zoom) pe ecran multiatingere(multitouch)</string>
   <string name="pref_side_drag_title">Tragere pe margini</string>
@@ -1252,19 +1222,14 @@
   <!-- UNUSED string name="pref_sketchUsesSplays_summary">Pentru suprafață (schiță) se folosesc radieri~</string -->
   <string name="pref_sketchLineStep_title">Mărime maximă laturi</string>
   <string name="pref_sketchLineStep_summary">Mărime maximă a laturii triunghiului</string>
-  <string name="pref_sketchLineStep_message">Mărime maximă a laturii triunghiului [m]</string>
   <!-- UNUSED string name="pref_sketchBorderStep_title">Pas limită~</string -->
   <!-- UNUSED string name="pref_sketchBorderStep_summary">Distanța dintre punctele de editare ale liniei</string -->
-  <!-- UNUSED string name="pref_sketchBorderStep_message">Distanța dintre punctele de editare ale liniei</string -->
   <!-- UNUSED string name="pref_sketchSectionStep_title">Pas secțiune</string -->
   <!-- UNUSED string name="pref_sketchSectionStep_summary">Distanța dintre secțiuni</string -->
-  <!-- UNUSED string name="pref_sketchSectionStep_message">Distanța dintre secțiuni intermediare</string -->
   <string name="pref_sketchDeltaExtrude_title">Scară extruziune~</string>
   <string name="pref_sketchDeltaExtrude_summary">Factor scară extruziune~</string>
-  <string name="pref_sketchDeltaExtrude_message">Factor scară extruziune~</string>
   <string name="pref_sketchCompassReadings_title">Citiri compas</string>
   <string name="pref_sketchCompassReadings_summary">Număr de citiri pentru mediere</string>
-  <string name="pref_sketchCompassReadings_message">Număr de citiri pentru mediere</string>
   <string name="pref_sketchModelType_title">Tip model</string>
   <string name="pref_sketchModelType_summary">Model reconstrucție pereți</string>
 
@@ -1279,33 +1244,24 @@
   <string name="pref_walls_type_title">Tip pereți</string>
   <string name="pref_walls_type_summary">Tip pereți</string>
   <string name="pref_walls_plan_thr_title">Unghi radieri în plan</string>
-  <string name="pref_walls_plan_thr_summary">Unghiul maxim al radierilor pentru pereți în plan</string>
-  <string name="pref_walls_plan_thr_message">Unghiul maxim al radierilor pentru pereți în plan [deg]</string>
+  <string name="pref_walls_plan_thr_summary">Unghiul maxim al radierilor pentru pereți în plan [deg]</string>
   <string name="pref_walls_extended_thr_title">Unghi radieri în profil</string>
-  <string name="pref_walls_extended_thr_summary">Unghiul maxim al radierilor pentru pereți în profil</string>
-  <string name="pref_walls_extended_thr_message">Unghiul maxim al radierilor pentru pereți în plan [deg]</string>
+  <string name="pref_walls_extended_thr_summary">Unghiul maxim al radierilor pentru pereți în plan [deg]</string>
   <string name="pref_walls_xclose_title">Separare</string>
-  <string name="pref_walls_xclose_summary">Separare minimă a punctelor de-a lungul vizei/radierii</string>
-  <string name="pref_walls_xclose_message">Separare minimă a punctelor peretelui de-a lungul vizei/radierii[m]</string>
+  <string name="pref_walls_xclose_summary">Separare minimă a punctelor peretelui de-a lungul vizei/radierii[m]</string>
   <string name="pref_walls_concave_title">Concavitate</string>
-  <string name="pref_walls_concave_summary">Concavitate maximă</string>
-  <string name="pref_walls_concave_message">Concavitate maximă [percent]</string>
+  <string name="pref_walls_concave_summary">Concavitate maximă [percent]</string>
   <string name="pref_walls_xstep_title">Pas</string>
-  <string name="pref_walls_xstep_summary">Separare puncte de-a lungul peretelui</string>
-  <string name="pref_walls_xstep_message">Separarea punctelor de-a lungul peretelui [m]</string>
+  <string name="pref_walls_xstep_summary">Separarea punctelor de-a lungul peretelui [m]</string>
 
   <string name="pref_algo_min_alpha_title">Alpha min-algo</string>
-  <string name="pref_algo_min_alpha_summary">Factor ajustare min-algo</string>
-  <string name="pref_algo_min_alpha_message">Factor ajustare min-algo (in [0,1])</string>
+  <string name="pref_algo_min_alpha_summary">Factor ajustare min-algo (in [0,1])</string>
   <string name="pref_algo_min_beta_title">Beta min-algo</string>
   <string name="pref_algo_min_beta_summary">Min-algo M dip weight~</string>
-  <string name="pref_algo_min_beta_message">Min-algo M dip weight~</string>
   <string name="pref_algo_min_gamma_title">Gamma min-algo</string>
   <string name="pref_algo_min_gamma_summary">Pondere(weight) grup G.x M.x în min-algo</string>
-  <string name="pref_algo_min_gamma_message">Pondere(weight) grup G.x M.x în min-algo</string>
   <string name="pref_algo_min_delta_title">Delta min-algo</string>
   <string name="pref_algo_min_delta_summary">Pondere(weight) grup G^M.x în min-algo</string>
-  <string name="pref_algo_min_delta_message">Pondere(weight) grup G^M.x în min-algo</string>
 
 <!-- LEAVE LOG STUFF IN ENGLISH
   <string name="pref_log_stream_summary">Flux scriere jurnal</string>
