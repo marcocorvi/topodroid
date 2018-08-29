@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="pref_category">#ff33ccff</color>
     <color name="menu_foreground">#ff33ccff</color>
     <color name="menu_background">#ff333333</color>
     <!-- color name="menu_highlight">#ffff9900</color -->
@@ -13,6 +12,10 @@
     <color name="text">#ffffffff</color>
     <color name="hint">#ff999999</color>
     <!-- color name="bg">#ff333333</color --> 
+
+    <color name="pref_divider">#ff666666</color>
+    <color name="pref_text">#ff33ccff</color>
+    <color name="pref_category">#ff6699ff</color>
 
 <!-- MATERIAL
     <color name="colorPrimary">#33ccff</color>

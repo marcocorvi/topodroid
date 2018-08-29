@@ -1065,8 +1065,8 @@ public class GMActivity extends Activity
   public boolean onSearchRequested()
   {
     // TDLog.Error( "search requested" );
-    Intent intent = new Intent( this, TopoDroidPreferences.class );
-    intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_CALIB );
+    Intent intent = new Intent( this, TDPrefActivity.class );
+    intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_CALIB );
     startActivity( intent );
     return true;
   }
@@ -1142,8 +1142,8 @@ public class GMActivity extends Activity
         (new CalibValidateListDialog( this, this, list )).show();
       }
     } else if ( p++ == pos ) { // OPTIONS
-      Intent intent = new Intent( this, TopoDroidPreferences.class );
-      intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_CALIB );
+      Intent intent = new Intent( this, TDPrefActivity.class );
+      intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_CALIB );
       startActivity( intent );
     } else if ( p++ == pos ) { // HELP
       new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, menus.length, getResources().getString( HELP_PAGE ) ).show();

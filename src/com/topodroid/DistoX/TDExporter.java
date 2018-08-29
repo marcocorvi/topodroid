@@ -517,7 +517,7 @@ class TDExporter
     List<DBlock> shots_data = data.selectAllShots( sid, 0 );
     FixedInfo origin = null;
     for ( FixedInfo fixed : fixeds ) {
-      DistoXNum num = new DistoXNum( shots_data, fixed.name, null, null, decl );
+      DistoXNum num = new DistoXNum( shots_data, fixed.name, null, null, decl, null ); // null formatClosure
       // Log.v("DistoX", "Num shots " + num.getShots().size() );
       if ( num.getShots().size() > 0 ) {
         makeGeolocalizedData( num, fixed, decl, asl_factor, ellipsoid_altitude );
@@ -1506,7 +1506,7 @@ class TDExporter
         }
         if ( from != null ) {
           boolean do_header = true;
-          DistoXNum num = new DistoXNum( list, from, null, null, 0.0f ); // no declination
+          DistoXNum num = new DistoXNum( list, from, null, null, 0.0f, null ); // no declination, null formatClosure
           List<NumBranch> branches = num.makeBranches( true );
           // Log.v("DistoX", "Station " + from + " shots " + num.shotsNr() + " splays " + num.splaysNr()
           //               + " branches " + branches.size() );

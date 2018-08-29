@@ -30,7 +30,9 @@ class TDLog
   static final private String TAG = "DistoX";
 
   static private int mLogStream = 0;    // log stream
+  static private boolean mLogAppend = false;
   static private PrintWriter mLog = null;
+  static private FileWriter  mLogFile = null;
   static private long mMillis;
 
   static boolean LOG_BEZIER = false;
@@ -176,25 +178,36 @@ class TDLog
     }
   }
 
-  static void setLogTarget()
+  private static void setLogTarget( )
   {
+    if ( mLogFile != null ) {
+      try {
+        mLogFile.close();
+      } catch ( IOException e ) {
+        Log.e("DistoX", "close log file error: " + e.getMessage() );
+      }
+      mLogFile = null;
+      mLog = null;
+    }
     if ( mLog == null ) {
       try {
         File log_file = TDPath.getLogFile();
-        FileWriter fw = new FileWriter( log_file );
-        mLog = new PrintWriter( fw, true ); // true = autoflush
+        mLogFile = new FileWriter( log_file, mLogAppend ); // true = append
+        mLog = new PrintWriter( mLogFile, true ); // true = autoflush
         mLog.format( "TopoDroid version %s\n", TopoDroidApp.VERSION );
       } catch ( IOException e ) {
-        Log.e("DistoX", "cannot create log file" );
+        Log.e("DistoX", "create log file error: " + e.getMessage() );
       }
     }
   }
   
-  static void loadLogPreferences( SharedPreferences prefs )
+  static void loadLogPreferences( TDPrefHelper prefs )
   {
     int lk = 0;
     
     mLogStream  = Integer.parseInt( prefs.getString("DISTOX_LOG_STREAM", "0") );
+    mLogAppend = prefs.getBoolean( "DISTOX_LOG_APPEND", false );
+    setLogTarget();
     
     LOG_DEBUG   = prefs.getBoolean( log_key[lk++], false );
     LOG_ERR     = prefs.getBoolean( log_key[lk++], true );
@@ -232,6 +245,9 @@ class TDLog
     int lk = 0;
     if ( k.equals( "DISTOX_LOG_STREAM" ) ) { // "DISTOX_LOG_STREAM",
       mLogStream = Integer.parseInt( sp.getString(k, "0") );
+    } else if ( k.equals( "DISTOX_LOG_APPEND" ) ) {
+      mLogAppend = sp.getBoolean( k, false );
+      setLogTarget();
 
     } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_DEBUG",
       LOG_DEBUG = sp.getBoolean( k, false );

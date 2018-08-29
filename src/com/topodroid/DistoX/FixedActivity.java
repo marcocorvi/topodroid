@@ -354,8 +354,8 @@ public class FixedActivity extends Activity
   // public boolean onSearchRequested()
   // {
   //   // TDLog.Error( "search requested" );
-  //   Intent intent = new Intent( this, TopoDroidPreferences.class );
-  //   intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SURVEY );
+  //   Intent intent = new Intent( this, TDPrefActivity.class );
+  //   intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_SURVEY );
   //   startActivity( intent );
   //   return true;
   // }

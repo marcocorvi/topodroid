@@ -300,6 +300,7 @@
     <string name="no_undelete">Nichts wiederherzustellen</string>
     <string name="format_measure_plan">Dist %1$.2f (Total %2$.2f) &#8736; %5$.1f° Dx %3$.2f Dy %4$.2f</string>
     <string name="format_measure_profile">Dist %1$.2f (Total %2$.2f) &#8736; %5$.1f° Dx %3$.2f Dy %4$.2f</string>
+    <!-- TODO string name="format_closure">%1$s-%2$s: %3$.1f / %4$.1f m [%5$.1f %6$.1f] %7$.1f (%8$.1f \u00b0)</string -->
     
 <!-- MENUS 
  detach: disconnect from the DistoX device

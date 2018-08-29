@@ -290,6 +290,7 @@ public class SketchWindow extends ItemDrawer
 
   private float mSelectSize;
 
+  private String mFormatClosure;
 
   // ---------------------------------------------------------------------------
   // helper private methods 
@@ -748,6 +749,8 @@ public class SketchWindow extends ItemDrawer
 
     mPainter = new SketchPainter();
 
+    mFormatClosure = getResources().getString(R.string.format_closure );
+
     setContentView(R.layout.sketch_activity);
     mApp = (TopoDroidApp)getApplication();
     mDataDownloader = null; // FIXME set the DataDownloader
@@ -1131,7 +1134,7 @@ public class SketchWindow extends ItemDrawer
   private void prepareReferences( List<DBlock> list )
   {
     // mSketchSurface.clearReferences();
-    mNum = new DistoXNum( list, mInfo.start, null, null, mDecl ); // FIXME null: no barrier no hiding
+    mNum = new DistoXNum( list, mInfo.start, null, null, mDecl, mFormatClosure ); // FIXME null: no barrier no hiding
     // N.B. mCheckExtend does not metter for 3D
     if ( (! mNum.surveyAttached) && TDSetting.mCheckAttached ) {
       TDToast.make( R.string.survey_not_attached );
@@ -1142,7 +1145,7 @@ public class SketchWindow extends ItemDrawer
 
   void recreateNum( List<DBlock> list )
   {
-    mNum = new DistoXNum( list, mInfo.start, null, null, mDecl ); // FIXME null: no barrier no hiding
+    mNum = new DistoXNum( list, mInfo.start, null, null, mDecl, mFormatClosure ); // FIXME null: no barrier no hiding
     mModel.setNum( mNum );
   }
 
@@ -2054,8 +2057,8 @@ public class SketchWindow extends ItemDrawer
         TDToast.make( R.string.sketch3d_loading );
       }
     } else if ( p++ == pos ) { // SETTINGS
-      Intent optionsIntent = new Intent( mActivity, TopoDroidPreferences.class );
-      optionsIntent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SKETCH );
+      Intent optionsIntent = new Intent( mActivity, TDPrefActivity.class );
+      optionsIntent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_SKETCH );
       mActivity.startActivity( optionsIntent );
     } else if ( p++ == pos ) { // HELP
       int nn = mNrButton1 + mNrButton2 - GREEN_BTN + /* mNrButton3 - GREEN_BTN */ + mNrButton4 - GREEN_BTN;
@@ -2200,8 +2203,8 @@ public class SketchWindow extends ItemDrawer
   public boolean onSearchRequested()
   {
     // TDLog.Error( "search requested" );
-    Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
-    intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SKETCH );
+    Intent intent = new Intent( mActivity, TDPrefActivity.class );
+    intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_SKETCH );
     mActivity.startActivity( intent );
     return true;
   }

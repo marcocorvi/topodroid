@@ -614,7 +614,7 @@ public class OverviewWindow extends ItemDrawer
           // mPid = plot.id;
           // NOTE Overview only for plan or extended plots
           // float decl = mData.getSurveyDeclination( mSid );
-          mNum = new DistoXNum( mBlockList, start, null, null, 0.0f );
+          mNum = new DistoXNum( mBlockList, start, null, null, 0.0f, null ); // null formatClosure
           mStartStation = mNum.getStation( start );
           // computeReferences( (int)type, mOffset.x, mOffset.y, mZoom );
           computeReferences( (int)type, mZoom );
@@ -1117,8 +1117,8 @@ public class OverviewWindow extends ItemDrawer
   public boolean onSearchRequested()
   {
     // TDLog.Error( "search requested" );
-    Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
-    intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_PLOT );
+    Intent intent = new Intent( mActivity, TDPrefActivity.class );
+    intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_PLOT );
     mActivity.startActivity( intent );
     return true;
   }
@@ -1172,8 +1172,8 @@ public class OverviewWindow extends ItemDrawer
     if ( p++ == pos ) { // CLOSE
       super.onBackPressed();
     } else if ( p++ == pos ) { // OPTIONS
-      Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
-      intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_PLOT );
+      Intent intent = new Intent( mActivity, TDPrefActivity.class );
+      intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_PLOT );
       mActivity.startActivity( intent );
     } else if ( p++ == pos ) { // HELP
       new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, menus.length, getResources().getString( HELP_PAGE ) ).show();

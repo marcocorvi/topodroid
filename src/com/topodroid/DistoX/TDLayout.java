@@ -16,6 +16,13 @@ import android.widget.Button;
 
 class TDLayout
 {
+  static LayoutParams getLayoutParamsFill( int l, int t, int r, int b )
+  {
+    LayoutParams lp = new LayoutParams( LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT );
+    lp.setMargins( l, t, r, b );
+    return lp;
+  }
+
   static LayoutParams getLayoutParams( int l, int t, int r, int b )
   {
     LayoutParams lp = new LayoutParams( LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT );

@@ -757,7 +757,7 @@ class DrawingIO
               break;
             default:
               todo = false;
-              TDLog.Error( "ERROR bad input (1) " + what );
+              TDLog.Error( "ERROR " + filename + " bad input (1) " + what );
               break;
           } 
           if ( path != null && in_scrap ) {
@@ -868,7 +868,7 @@ class DrawingIO
             case 'E':
             default:
               todo = false;
-              // TDLog.Error( "ERROR bad input (1) " + (int)what );
+              // TDLog.Error( "ERROR " + filename + " bad input (3) " + (int)what );
               break;
           } 
           if (    in_scrap && path != null 
@@ -1340,7 +1340,7 @@ class DrawingIO
               break;
             default:
               todo = false;
-              TDLog.Error( "ERROR bad input (2) " + what );
+              TDLog.Error( "ERROR " + file.getName() + " bad input (2) " + what );
               break;
           } 
         }
@@ -1445,7 +1445,7 @@ class DrawingIO
               break;
             default:
               todo = false;
-              TDLog.Error( "ERROR bad input (2) " + what );
+              TDLog.Error( "ERROR " + filename + " bad input (4) " + what );
               break;
           } 
         }

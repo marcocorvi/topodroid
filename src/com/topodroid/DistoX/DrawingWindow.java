@@ -290,6 +290,7 @@ public class DrawingWindow extends ItemDrawer
 
   private DistoXNum mNum;
   private float mDecl;
+  private String mFormatClosure;
 
   private String mSectionName;
   private String mMoveTo; // station of highlighted splay
@@ -574,7 +575,8 @@ public class DrawingWindow extends ItemDrawer
 
         mFullName1 = fullName1;
         mFullName2 = fullName2;
-        mApp.mShotWindow.setRecentPlot( name, mType );
+        // mApp.mShotWindow.setRecentPlot( name, mType );
+        TDInstance.setRecentPlot( name, mType );
       } else {
         TDToast.make( R.string.plot_duplicate_name );
         // Log.v("DistoX", "plot name already exists");
@@ -1673,6 +1675,8 @@ public class DrawingWindow extends ItemDrawer
     mActivity = this;
     mApp_mData = TopoDroidApp.mData; // new DataHelper( this ); 
 
+    mFormatClosure = getResources().getString(R.string.format_closure );
+
     audioCheck = FeatureChecker.checkMicrophone( mActivity );
 
     mZoomBtnsCtrlOn = (TDSetting.mZoomCtrl > 1);  // do before setting content
@@ -1825,6 +1829,9 @@ public class DrawingWindow extends ItemDrawer
   // called by PlotListDialog
   void switchNameAndType( String name, long tt ) // SWITCH
   {
+    // mApp.mShotWindow.setRecentPlot( name, tt );
+    TDInstance.setRecentPlot( name, tt );
+
     PlotInfo p1 = mApp_mData.getPlotInfo( TDInstance.sid, name+"p" );
     if ( mPid1 == p1.id ) {
       if ( tt != mType ) { // switch plot type
@@ -2243,7 +2250,7 @@ public class DrawingWindow extends ItemDrawer
           if ( mPid2 >= 0 ) mApp_mData.dropPlot( mPid2, mSid );
           finish();
         } else {
-          mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl );
+          mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
 	  // Log.v("DistoX", "recomputed num");
         }
 
@@ -2443,7 +2450,7 @@ public class DrawingWindow extends ItemDrawer
     {
       if ( mType == PlotInfo.PLOT_EXTENDED ) { 
         List<DBlock> list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
-        mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl ); 
+        mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure ); 
         computeReferences( (int)mType, mName, TopoDroidApp.mScaleFactor, true );
         mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
         modified();
@@ -3833,7 +3840,8 @@ public class DrawingWindow extends ItemDrawer
     {
       mApp_mData.deletePlot( mPid1, mSid );
       if ( mPid2 >= 0 ) mApp_mData.deletePlot( mPid2, mSid );
-      mApp.mShotWindow.setRecentPlot( null, 0 );
+      // mApp.mShotWindow.setRecentPlot( null, 0 );
+      TDInstance.setRecentPlot( null, 0 );
       finish();
     }
 
@@ -4235,7 +4243,8 @@ public class DrawingWindow extends ItemDrawer
       }
       resetReference( mPlot2 );
       if ( mApp.mShotWindow != null ) {
-        mApp.mShotWindow.mRecentPlotType = mType;
+        // mApp.mShotWindow.mRecentPlotType = mType;
+        TDInstance.recentPlotType = mType;
       } else {
         TDLog.Error("Null app mShotWindow on recent plot type2");
       }
@@ -4254,7 +4263,8 @@ public class DrawingWindow extends ItemDrawer
       }
       resetReference( mPlot1 );
       if ( mApp.mShotWindow != null ) {
-        mApp.mShotWindow.mRecentPlotType = mType;
+        // mApp.mShotWindow.mRecentPlotType = mType;
+        TDInstance.recentPlotType = mType;
       } else {
         TDLog.Error("Null app mShotWindow on recent plot type1");
       }
@@ -4366,16 +4376,16 @@ public class DrawingWindow extends ItemDrawer
           }
         }
       } else if ( TDLevel.overNormal && b == mButton2[0] ) { // drawing properties
-        Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
-        intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_PLOT_DRAW );
+        Intent intent = new Intent( mActivity, TDPrefActivity.class );
+        intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_PLOT_DRAW );
         mActivity.startActivity( intent );
       } else if ( TDLevel.overNormal && b == mButton5[1] ) { // erase properties
-        Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
-        intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_PLOT_ERASE );
+        Intent intent = new Intent( mActivity, TDPrefActivity.class );
+        intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_PLOT_ERASE );
         mActivity.startActivity( intent );
       } else if ( TDLevel.overNormal && b == mButton3[2] ) { // edit properties
-        Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
-        intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_PLOT_EDIT );
+        Intent intent = new Intent( mActivity, TDPrefActivity.class );
+        intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_PLOT_EDIT );
         mActivity.startActivity( intent );
       }
       return true;
@@ -4912,7 +4922,7 @@ public class DrawingWindow extends ItemDrawer
   {
     // Log.v("DistoX", "doComputeReferences() type " + mType );
     List<DBlock> list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
-    mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl );
+    mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
     // doMoveTo();
     if ( mType == (int)PlotInfo.PLOT_PLAN ) {
       computeReferences( mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, true );
@@ -4950,7 +4960,7 @@ public class DrawingWindow extends ItemDrawer
     // Log.v("DistoX", "updateDisplay() type " + mType + " reference " + reference );
     // if ( compute ) {
       // List<DBlock> list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
-      // mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl );
+      // mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
       // // doMoveTo();
       // computeReferences( (int)mPlot1.type, mPlot1.name 0.0f, 0.0f, mApp.mScaleFactor, false );
       // if ( mPlot2 != null ) {
@@ -4964,7 +4974,7 @@ public class DrawingWindow extends ItemDrawer
       updateSplays( mApp.mSplayMode );
     } else {
       List<DBlock> list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
-      mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl );
+      mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
       recomputeReferences( TopoDroidApp.mScaleFactor, false );
       // if ( mType == (int)PlotInfo.PLOT_PLAN ) {
       //   if ( mPlot2 != null ) {
@@ -5044,8 +5054,8 @@ public class DrawingWindow extends ItemDrawer
   public boolean onSearchRequested()
   {
     // TDLog.Error( "search requested" );
-    Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
-    intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_PLOT );
+    Intent intent = new Intent( mActivity, TDPrefActivity.class );
+    intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_PLOT );
     mActivity.startActivity( intent );
     return true;
   }
@@ -5226,8 +5236,8 @@ public class DrawingWindow extends ItemDrawer
         }
       } else if ( p++ == pos ) { // OPTIONS
         updateReference();
-        Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
-        intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_PLOT );
+        Intent intent = new Intent( mActivity, TDPrefActivity.class );
+        intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_PLOT );
         mActivity.startActivity( intent );
       } else if ( p++ == pos ) { // HELP
         // 1 for select-tool

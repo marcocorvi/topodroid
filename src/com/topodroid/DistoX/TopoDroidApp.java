@@ -98,6 +98,8 @@ public class TopoDroidApp extends Application
 {
   static final String EMPTY = "";
 
+  static TDPrefHelper mPrefHlp = null;
+
   static final String SYMBOL_VERSION = "35";
   static String VERSION = "0.0.0"; 
   static int VERSION_CODE = 0;
@@ -187,19 +189,9 @@ public class TopoDroidApp extends Application
   }
 
 
-  // ----------------------------------------------------------------------
-  // DataListener (co-surveying)
-  private DataListenerSet mDataListeners;
-
-  // synchronized( mDataListener )
-  void registerDataListener( DataListener listener ) { mDataListeners.registerDataListener( listener ); }
-
-  // synchronized( mDataListener )
-  void unregisterDataListener( DataListener listener ) { mDataListeners.unregisterDataListener( listener ); }
 
   // -----------------------------------------------------
 
-  private SharedPreferences mPrefs;
   // FIXME INSTALL_SYMBOL boolean askSymbolUpdate = false; // by default do not ask
 
   String[] DistoXConnectionError;
@@ -209,12 +201,10 @@ public class TopoDroidApp extends Application
   static DataHelper mData = null;         // database 
   static DeviceHelper mDData = null;      // device/calib database
 
-  SurveyWindow mSurveyWindow = null;
-  ShotWindow   mShotWindow   = null;
+  static SurveyWindow mSurveyWindow = null;
+  static ShotWindow   mShotWindow   = null;
   // static DrawingWindow mDrawingWindow = null; // FIXME currently not used
-  MainWindow mActivity = null; 
-  TopoDroidPreferences mPrefActivityAll    = null;
-  static TopoDroidPreferences mPrefActivitySurvey = null;
+  static MainWindow mActivity = null; 
 
   static boolean mDeviceActivityVisible = false;
   static boolean mGMActivityVisible = false;
@@ -464,8 +454,7 @@ public class TopoDroidApp extends Application
 
     // ret = readMemory( address, 0xc044 );
     // if ( ret != null ) {
-    //   Log.v("DistoX", "X310 info C044 " + 
-    //     String.format( getResources().getString( R.string.device_memory ), ret[0], ret[1] ) );
+    //   Log.v("DistoX", "X310 info C044 " + String.format( getResources().getString( R.string.device_memory ), ret[0], ret[1] ) );
     // }
 
     resetComm();
@@ -497,17 +486,18 @@ public class TopoDroidApp extends Application
 
   // ---------------------------------------------------------
 
+  // TDPrefHelper getPrefHelper() { return mPrefHlp; }
+
   void startupStep2()
   {
     // ***** LOG FRAMEWORK
-    TDLog.setLogTarget();
-    TDLog.loadLogPreferences( mPrefs );
+    TDLog.loadLogPreferences( mPrefHlp );
 
     mData.compileStatements();
 
-    PtCmapActivity.setMap( mPrefs.getString( "DISTOX_PT_CMAP", null ) );
+    PtCmapActivity.setMap( mPrefHlp.getString( "DISTOX_PT_CMAP", null ) );
 
-    TDSetting.loadSecondaryPreferences( this, mPrefs );
+    TDSetting.loadSecondaryPreferences( this, mPrefHlp );
     checkAutoPairing();
 
     // if ( TDLog.LOG_DEBUG ) {
@@ -515,7 +505,7 @@ public class TopoDroidApp extends Application
     //   Debug.startMethodTracing("DISTOX");
     // }
 
-    mPrefs.registerOnSharedPreferenceChangeListener( this );
+    mPrefHlp.getSharedPrefs().registerOnSharedPreferenceChangeListener( this ); // FIXME_PREF
     // TDLog.Debug("ready");
   }
 
@@ -557,12 +547,14 @@ public class TopoDroidApp extends Application
       e.printStackTrace();
     }
 
-    mPrefs = PreferenceManager.getDefaultSharedPreferences( this );
-    mWelcomeScreen = mPrefs.getBoolean( "DISTOX_WELCOME_SCREEN", true ); // default: WelcomeScreen = true
+    mPrefHlp = new TDPrefHelper( this, this );
+    // mPrefs = PreferenceManager.getDefaultSharedPreferences( this );
+    //
+    mWelcomeScreen = mPrefHlp.getBoolean( "DISTOX_WELCOME_SCREEN", true ); // default: WelcomeScreen = true
     if ( mWelcomeScreen ) {
       setDefaultSocketType();
     }
-    mSetupScreen = mPrefs.getBoolean( "DISTOX_SETUP_SCREEN", true ); // default: SetupScreen = true
+    mSetupScreen = mPrefHlp.getBoolean( "DISTOX_SETUP_SCREEN", true ); // default: SetupScreen = true
 
     mCheckPerms = FeatureChecker.checkPermissions( this );
 
@@ -571,12 +563,13 @@ public class TopoDroidApp extends Application
       TDPath.setDefaultPaths();
 
       // TDLog.Profile("TDApp cwd");
-      TDInstance.cwd = mPrefs.getString( "DISTOX_CWD", "TopoDroid" );
-      TDInstance.cbd = mPrefs.getString( "DISTOX_CBD", TDPath.PATH_BASEDIR );
+      TDInstance.cwd = mPrefHlp.getString( "DISTOX_CWD", "TopoDroid" );
+      TDInstance.cbd = mPrefHlp.getString( "DISTOX_CBD", TDPath.PATH_BASEDIR );
       TDPath.setPaths( TDInstance.cwd, TDInstance.cbd );
 
       // TDLog.Profile("TDApp DB");
       mDataListeners = new DataListenerSet( );
+      
       // ***** DATABASE MUST COME BEFORE PREFERENCES
       mData  = new DataHelper( this, this, mDataListeners );
       mDData = new DeviceHelper( this, this, null ); 
@@ -585,7 +578,7 @@ public class TopoDroidApp extends Application
 
       // TDLog.Profile("TDApp prefs");
       // LOADING THE SETTINGS IS RATHER EXPENSIVE !!!
-      TDSetting.loadPrimaryPreferences( this, mPrefs );
+      TDSetting.loadPrimaryPreferences( this, mPrefHlp );
 
       // TDLog.Profile("TDApp BT");
       mBTAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -631,7 +624,7 @@ public class TopoDroidApp extends Application
         String value = mDData.getValue("cosurvey");
         mCosurvey =  value != null && value.equals("on");
         setCoSurvey( false );
-        setBooleanPreference( "DISTOX_COSURVEY", false );
+        mPrefHlp.update( "DISTOX_COSURVEY", false );
         if ( mCosurvey ) {
           mSyncConn = new ConnectionHandler( this );
           mConnListener = new ArrayList<>();
@@ -639,7 +632,7 @@ public class TopoDroidApp extends Application
       }
 
       // TDLog.Profile("TDApp device etc.");
-      TDInstance.device = mDData.getDevice( mPrefs.getString( TDSetting.keyDeviceName(), EMPTY ) );
+      TDInstance.device = mDData.getDevice( mPrefHlp.getString( TDSetting.keyDeviceName(), EMPTY ) );
 
       if ( TDInstance.device != null ) {
         createComm();
@@ -668,33 +661,34 @@ public class TopoDroidApp extends Application
     // mManual = getResources().getString( R.string.topodroid_man );
   }
 
-  void resetLocale()
+  static void resetLocale()
   {
     // Log.v("DistoX", "reset locale to " + mLocaleStr );
     // mLocale = (mLocaleStr.equals(EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
-    Resources res = getResources();
+    Resources res = TDInstance.context.getResources();
     DisplayMetrics dm = res.getDisplayMetrics();
     Configuration conf = res.getConfiguration();
     conf.locale = mLocale; // setLocale API-17
     res.updateConfiguration( conf, dm );
   }
 
-  void setLocale( String locale, boolean load_symbols )
+  static void setLocale( String locale, boolean load_symbols )
   {
     mLocaleStr = locale;
     mLocale = (mLocaleStr.equals(EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
+    // Log.v("DistoXPref", "set locale str <" + locale + "> " + mLocale.toString() );
     resetLocale();
-    Resources res = getResources();
+    Resources res = TDInstance.context.getResources();
     if ( load_symbols ) {
-      BrushManager.reloadPointLibrary( this, res ); // reload symbols
+      BrushManager.reloadPointLibrary( TDInstance.context, res ); // reload symbols
       BrushManager.reloadLineLibrary( res );
       BrushManager.reloadAreaLibrary( res );
     }
     if ( mActivity != null ) mActivity.setMenuAdapter( res );
-    if ( mPrefActivityAll != null ) mPrefActivityAll.reloadPreferences();
+    if ( TDPrefActivity.mPrefActivityAll != null ) TDPrefActivity.mPrefActivityAll.reloadPreferences();
   }
 
-  void setCWD( String cwd, String cbd )
+  static void setCWD( String cwd, String cbd )
   {
     if ( cwd == null || cwd.length() == 0 ) cwd = TDInstance.cwd;
     if ( cbd == null || cbd.length() == 0 ) cbd = TDInstance.cbd;
@@ -1010,19 +1004,15 @@ public class TopoDroidApp extends Application
   private void setDefaultSocketType()
   {
     String defaultSockType = ( android.os.Build.MANUFACTURER.equals("samsung") ) ? "1" : "0";
-    Editor editor = mPrefs.edit();
-    editor.putString( "DISTOX_SOCK_TYPE", defaultSockType ); 
-    TDSetting.applyEditor( editor );
+    mPrefHlp.update( "DISTOX_SOCK_TYPE", defaultSockType ); 
   }
 
   private void updateDefaultPreferences()
   {
-    if ( mPrefs != null ) {
-      Editor editor = mPrefs.edit();
-      if ( ! "1".equals( mPrefs.getString( "DISTOX_GROUP_BY", "1" ) ) ) {
-        editor.putString( "DISTOX_GROUP_BY", "1" ); 
+    if ( mPrefHlp != null ) {
+      if ( ! "1".equals( mPrefHlp.getString( "DISTOX_GROUP_BY", "1" ) ) ) {
+        mPrefHlp.update( "DISTOX_GROUP_BY", "1" ); 
       }
-      TDSetting.applyEditor( editor );
     }
   }
 
@@ -1030,128 +1020,57 @@ public class TopoDroidApp extends Application
   { 
     if ( TDInstance.cwd.equals( cwd ) && TDInstance.cbd.equals( cbd ) ) return;
     // Log.v("DistoX", "setCWDPreference " + cwd );
-    if ( mPrefs != null ) {
-      Editor editor = mPrefs.edit();
-      editor.putString( "DISTOX_CWD", cwd ); 
-      editor.putString( "DISTOX_CBD", cbd ); 
-      TDSetting.applyEditor( editor );
+    if ( mPrefHlp != null ) {
+      mPrefHlp.update( "DISTOX_CWD", cwd, "DISTOX_CBD", cbd ); 
     }
     setCWD( cwd, cbd ); 
   }
 
   void setPtCmapPreference( String cmap )
   {
-    if ( mPrefs != null ) {
-      Editor editor = mPrefs.edit();
-      editor.putString( "DISTOX_PT_CMAP", cmap ); 
-      TDSetting.applyEditor( editor );
+    if ( mPrefHlp != null ) {
+      mPrefHlp.update( "DISTOX_PT_CMAP", cmap ); 
     }
     PtCmapActivity.setMap( cmap );
   }
 
-  void setAccuracyPreference( float acceleration, float magnetic, float dip )
-  {
-    SharedPreferences.Editor editor = mPrefs.edit();
-    editor.putString( "DISTOX_ACCEL_THR", Float.toString( acceleration ) ); 
-    editor.putString( "DISTOX_MAG_THR", Float.toString( magnetic ) ); 
-    editor.putString( "DISTOX_DIP_THR", Float.toString( dip ) ); 
-    TDSetting.applyEditor( editor );
-  }
+  // unused
+  // void setAccuracyPreference( float acceleration, float magnetic, float dip )
+  // {
+  //   mPrefHlp.update( "DISTOX_ACCEL_THR", Float.toString( acceleration ), "DISTOX_MAG_THR", Float.toString( magnetic ), "DISTOX_DIP_THR", Float.toString( dip ) ); 
+  // }
 
   void setTextSize( int ts )
   {
-    TDSetting.setTextSize( this, ts );
-    TDSetting.setLabelSize( ts*3 );
-    TDSetting.setStationSize( ts*2 );
-    SharedPreferences.Editor editor = mPrefs.edit();
-    editor.putString( "DISTOX_TEXT_SIZE", Integer.toString(ts) );
-    editor.putString( "DISTOX_LABEL_SIZE", Float.toString(ts*3) );
-    editor.putString( "DISTOX_STATION_SIZE", Float.toString(ts*2) );
-    TDSetting.applyEditor( editor );
+    TDSetting.setTextSize( ts );
+    if ( TDSetting.setLabelSize( ts*3, false ) || TDSetting.setStationSize( ts*2, false ) ) { // false: do not update brush
+      BrushManager.setTextSizes( );
+    }
+    mPrefHlp.update( "DISTOX_TEXT_SIZE", Integer.toString(ts), "DISTOX_LABEL_SIZE", Float.toString(ts*3), "DISTOX_STATION_SIZE", Float.toString(ts*2) );
   }
 
   void setButtonSize( int bs )
   {
-    TDSetting.setSizeButtons( this, bs );
-    SharedPreferences.Editor editor = mPrefs.edit();
-    editor.putString( "DISTOX_SIZE_BUTTONS", Integer.toString(bs) );
-    TDSetting.applyEditor( editor );
+    TDSetting.setSizeButtons( bs );
+    mPrefHlp.update( "DISTOX_SIZE_BUTTONS", Integer.toString(bs) );
   }
 
   void setDrawingUnit( float u )
   {
-    TDSetting.setDrawingUnit( this, u );
-    SharedPreferences.Editor editor = mPrefs.edit();
-    editor.putString( "DISTOX_DRAWING_UNIT", Float.toString(u) );
-    TDSetting.applyEditor( editor );
+    TDSetting.setDrawingUnits( u );
+    mPrefHlp.update( "DISTOX_DRAWING_UNIT", Float.toString(u) );
   }
 
-
-  void setShotDataPreference( float leg_tolerance, int leg_shots, float extend_thr,
-                              float vthreshold, boolean splay_extend, int timer, int volume )
-  {
-    SharedPreferences.Editor editor = mPrefs.edit();
-    editor.putString( "DISTOX_CLOSE_DISTANCE", Float.toString( leg_tolerance ) ); 
-    editor.putString( "DISTOX_LEG_SHOTS",   Integer.toString( leg_shots ) ); 
-    editor.putString( "DISTOX_EXTEND_THR2", Float.toString( extend_thr ) ); 
-    editor.putString( "DISTOX_VTHRESHOLD",  Float.toString( vthreshold ) ); 
-    editor.putBoolean( "DISTOX_SPLAY_EXTEND", splay_extend );
-    editor.putString( "DISTOX_SHOT_TIMER",  Integer.toString( timer ) ); 
-    editor.putString( "DISTOX_BEEP_VOLUME", Integer.toString( volume ) ); 
-    TDSetting.applyEditor( editor );
-  }
-
-  void setPlotScreenPreference( float line_width, float survey_width, float station_size, float label_size, 
-                                float dot_size, float selection_radius )
-  {
-    SharedPreferences.Editor editor = mPrefs.edit();
-    editor.putString( "DISTOX_LINE_THICKNESS",  Float.toString( line_width ) ); 
-    editor.putString( "DISTOX_FIXED_THICKNESS", Float.toString( survey_width ) ); 
-    editor.putString( "DISTOX_STATION_SIZE",    Float.toString( station_size ) ); 
-    editor.putString( "DISTOX_LABEL_SIZE",      Float.toString( label_size ) ); 
-    editor.putString( "DISTOX_DOT_RADIUS",      Float.toString( dot_size ) ); 
-    editor.putString( "DISTOX_CLOSENESS",       Float.toString( selection_radius ) ); 
-    TDSetting.applyEditor( editor );
-  }
-
-  void setToolScreenPreference( float point_scale, float section_line_tick, int line_style,
-                                float line_point_spacing, float bezier_accuracy, float bezier_corner )
-  {
-    SharedPreferences.Editor editor = mPrefs.edit();
-    editor.putString( "DISTOX_DRAWING_UNIT",  Float.toString( point_scale ) ); 
-    editor.putString( "DISTOX_ARROW_LENGTH",  Float.toString( section_line_tick ) ); 
-    editor.putString( "DISTOX_LINE_STYLE",    Integer.toString( line_style) ); 
-    editor.putString( "DISTOX_LINE_SEGMENT",  Float.toString( line_point_spacing ) ); 
-    editor.putString( "DISTOX_LINE_ACCURACY", Float.toString( bezier_accuracy ) ); 
-    editor.putString( "DISTOX_LINE_CORNER",   Float.toString( bezier_corner ) ); 
-    TDSetting.applyEditor( editor );
-  }
-  
-  void setSurveyLocationPreference( String crs, boolean gps_averaging, String units, int alt, boolean alt_lookup )
-  {
-    SharedPreferences.Editor editor = mPrefs.edit();
-    // editor.putString( "DISTOX_CRS",  crs );
-    editor.putBoolean( "DISTOX_GPS_AVERAGING",  gps_averaging );
-    editor.putString( "DISTOX_UNIT_LOCATION", units ); 
-    editor.putString( "DISTOX_ALTITUDE", Integer.toString( alt ) ); 
-    editor.putBoolean( "DISTOX_ALTIMETRIC", alt_lookup );
-    TDSetting.applyEditor( editor );
-  }
 
 
   public void onSharedPreferenceChanged( SharedPreferences sp, String k ) 
   {
-    // TDLog.Error("shared pref changed " + k );
-    TDSetting.checkPreference( sp, k, mActivity, this );
+    Log.v("DistoPref", "shared pref changed " + k );
+    // TDSetting.checkPreference( sp, k, this );
   }
 
   // used for "DISTOX_WELCOME_SCREEN" and "DISTOX_TD_SYMBOL"
-  void setBooleanPreference( String preference, boolean val )
-  {
-    SharedPreferences.Editor editor = mPrefs.edit();
-    editor.putBoolean( preference, val );
-    TDSetting.applyEditor( editor ); 
-  }
+  void setBooleanPreference( String preference, boolean val ) { mPrefHlp.update( preference, val ); }
 
   // FIXME_DEVICE_STATIC
   void setDevice( String address ) 
@@ -1174,10 +1093,8 @@ public class TopoDroidApp extends Application
       TDInstance.device = mDData.getDevice( address );
       if ( create ) createComm();
     }
-    if ( mPrefs != null ) {
-      Editor editor = mPrefs.edit();
-      editor.putString( TDSetting.keyDeviceName(), address ); 
-      TDSetting.applyEditor( editor ); 
+    if ( mPrefHlp != null ) {
+      mPrefHlp.update( TDSetting.keyDeviceName(), address ); 
     }
   }
 
@@ -1869,17 +1786,27 @@ public class TopoDroidApp extends Application
   // }
 
   // ---------------------------------------------------------------------
-  // SYNC
+  // SYNC (COSURVEY)
+  
+  // DataListener (co-surveying)
+  private DataListenerSet mDataListeners;
+
+  // synchronized( mDataListener )
+  void registerDataListener( DataListener listener ) { mDataListeners.registerDataListener( listener ); }
+
+  // synchronized( mDataListener )
+  void unregisterDataListener( DataListener listener ) { mDataListeners.unregisterDataListener( listener ); }
 
   static boolean mCosurvey = false;       // whether co-survey is enable by the DB
   static boolean mCoSurveyServer = false; // whether co-survey server is on
-  ConnectionHandler mSyncConn = null;
+  static ConnectionHandler mSyncConn = null;
+
 
   void setCoSurvey( boolean co_survey ) // FIXME interplay with TDSetting
   {
     if ( ! mCosurvey ) {
       mCoSurveyServer = false;
-      setBooleanPreference( "DISTOX_COSURVEY", false );
+      mPrefHlp.update( "DISTOX_COSURVEY", false );
       return;
     } 
     mCoSurveyServer = co_survey;
@@ -1890,44 +1817,87 @@ public class TopoDroidApp extends Application
     }
   }
 
-
-  int getConnectionType() 
+  static int getConnectionType() 
   {
     return ( mSyncConn == null )? SyncService.STATE_NONE : mSyncConn.getType();
   }
 
-  int getAcceptState()
+  static int getAcceptState()
   {
     return ( mSyncConn == null )? SyncService.STATE_NONE : mSyncConn.getAcceptState();
   }
 
-  int getConnectState()
+  static int getConnectState()
   {
     return ( mSyncConn == null )? SyncService.STATE_NONE : mSyncConn.getConnectState();
   }
 
-  String getConnectionStateStr()
+  static String getConnectionStateStr()
   {
     return ( mSyncConn == null )? "NONE": mSyncConn.getConnectStateStr();
   }
 
-  String getConnectedDeviceName()
+  static String getConnectedDeviceName()
   {
     return ( mSyncConn == null )? null : mSyncConn.getConnectedDeviceName();
   }
 
-  String getConnectionStateTitleStr()
+  static String getConnectionStateTitleStr()
   {
     return ( mSyncConn == null )? EMPTY : mSyncConn.getConnectionStateTitleStr();
   }
 
-  void connStateChanged()
+  static void connStateChanged()
   {
     // Log.v( "DistoX", "connStateChanged()" );
     if ( mSurveyWindow != null ) mSurveyWindow.setTheTitle();
     if ( mShotWindow  != null) mShotWindow.setTheTitle();
     if ( mActivity != null ) mActivity.setTheTitle();
   }
+
+  static void connectRemoteTopoDroid( BluetoothDevice device )
+  { 
+    if ( mSyncConn != null ) mSyncConn.connect( device );
+  }
+
+  void disconnectRemoteTopoDroid( BluetoothDevice device )
+  { 
+    if ( mSyncConn != null ) {
+      unregisterDataListener( mSyncConn );
+      mSyncConn.disconnect( device );
+    }
+  }
+
+  static void syncRemoteTopoDroid( BluetoothDevice device )
+  { 
+    if ( mSyncConn != null ) mSyncConn.syncDevice( device );
+  }
+
+  static void startRemoteTopoDroid( )
+  { 
+    if ( mSyncConn != null ) mSyncConn.start( );
+  }
+
+  void stopRemoteTopoDroid( )
+  { 
+    if ( mSyncConn != null ) {
+      unregisterDataListener( mSyncConn );
+      mSyncConn.stop( );
+    }
+  }
+
+  static void syncConnectionFailed()
+  {
+    TDToast.make( "Sync connection failed" );
+  }
+
+  void syncConnectedDevice( String name )
+  {
+    TDToast.make( "Sync connected " + name );
+    if ( mSyncConn != null ) registerDataListener( mSyncConn );
+  }
+
+  // --------------------------------------------------------------
 
   void refreshUI()
   {
@@ -1942,52 +1912,10 @@ public class TopoDroidApp extends Application
     mShotWindow   = null;
   }
 
-  void connectRemoteTopoDroid( BluetoothDevice device )
-  { 
-    if ( mSyncConn != null ) mSyncConn.connect( device );
-  }
-
-  void disconnectRemoteTopoDroid( BluetoothDevice device )
-  { 
-    if ( mSyncConn != null ) {
-      unregisterDataListener( mSyncConn );
-      mSyncConn.disconnect( device );
-    }
-  }
-
-  void syncRemoteTopoDroid( BluetoothDevice device )
-  { 
-    if ( mSyncConn != null ) mSyncConn.syncDevice( device );
-  }
-
-  void startRemoteTopoDroid( )
-  { 
-    if ( mSyncConn != null ) mSyncConn.start( );
-  }
-
-  void stopRemoteTopoDroid( )
-  { 
-    if ( mSyncConn != null ) {
-      unregisterDataListener( mSyncConn );
-      mSyncConn.stop( );
-    }
-  }
-
-  void syncConnectionFailed()
-  {
-    TDToast.make( "Sync connection failed" );
-  }
-
-  void syncConnectedDevice( String name )
-  {
-    TDToast.make( "Sync connected " + name );
-    if ( mSyncConn != null ) registerDataListener( mSyncConn );
-  }
-
   // ---------------------------------------------------------------
   // DISTOX PAIRING
 
-  static PairingRequest mPairingRequest = null;
+  PairingRequest mPairingRequest = null;
 
   void checkAutoPairing()
   {
@@ -2018,6 +1946,8 @@ public class TopoDroidApp extends Application
       registerReceiver( mPairingRequest, filter );
     }
   }
+
+  // ==================================================================
   
   // called by ShotWindow and SurveyWindow on export
   static void doExportDataAsync( Context context, int exportType, boolean warn )

@@ -42,6 +42,11 @@
       <item name="android:textColor">@color/text</item>
     </style -->
 
+    <style name="checkBoxStyle" parent="@android:style/Widget.Holo.CompoundButton.CheckBox">
+      <item name="android:buttonTint">@color/pref_text</item>
+      <item name="android:textColorSecondary">#ff000000</item>
+    </style>
+
 <!-- MATERIAL
     <style name="TDMaterialTheme" parent="Theme.AppCompat.Light.DarkActionBar">
       <item name="android:windowFullscreen">true</item>

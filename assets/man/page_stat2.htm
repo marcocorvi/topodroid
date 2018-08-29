@@ -8,11 +8,11 @@ This dialog is opened tapping the <u>Statistics</u> menu of the <i>Sketch</i> wi
 The survey statistics are
 <ul>
 <li>number of (regular) legs, their total, profile, and plan lengths</li>
-<li>number of duplicate legs</li>
-<li>number of surface leg</li>
+<li>number of duplicate legs, and their total length</li>
+<li>number of surface leg, and their total length</li>
 <li>number of splay shots</li>
 <li>number of stations</li>
-<li>number of loops (including the backshot-loops)</li>
+<li>number of cycles (including the backshot-cycles)</li>
 <li>number of disconnected surveys (this is 1 if the legs are all attached together in one survey)</li>
 </ul>
 
@@ -20,12 +20,25 @@ The sketch related statistics are
 <ul>
 <li>origin station (zero station)</li>
 <li>the survey length</li>
-<li>the survey extension (East, West, North and South)</li>
+<li>3D length</li>
+<li>lentth of the plan-projection</li>
+<li>the survey extension (West, East, North and South)</li>
 <li>the survey depths, both positive (above the zero station) and negative (below the zero station)</li>
 <li>the  number of stations</li>
 <li>the number of shots (regular, duplicate, and surface)</li>
 <li>the number of splays</li>
+<li>average angle error between shots of the same leg [degrees]</li>
 <li>the number of loops</li>
+</ul>
+<br><p>
+
+For each loop:
+<ul>
+<li>closing shot</li>
+<li>closing error: 3d length over total loop length</li>
+<li>horizontal and vertical error lengths</li>
+<li>parcent error: ratio between error and loop length</li>
+<li>average angular error [degrres]</li>
 </ul>
 <br><p>
 

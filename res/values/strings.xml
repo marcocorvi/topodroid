@@ -297,6 +297,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="no_undelete">No item to recover</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f X %3$.2f Y %4$.2f A. %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f X %3$.2f Y %4$.2f C. %5$.1f"</string>
+    <string name="format_closure">%1$s-%2$s: %3$.1f / %4$.1f m [%5$.1f %6$.1f] %7$.1f (%8$.1f \u00b0)</string>
 
     <string name="menu_3d">3D</string>
     <string name="menu_about">ABOUT</string>
@@ -895,6 +896,27 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_scraps">Survey sketches</string>
     <string name="title_scraps_outline">Sketch outlines</string>
     <string name="title_select">Select</string>
+
+    <string name="title_settings_main">TopoDroid main settings</string>
+    <string name="title_settings_export">TopoDroid import/export settings</string>
+    <string name="title_settings_sketch">TopoDroid 3d sketch settings</string>
+    <string name="title_settings_survey">TopoDroid survey settings</string>
+    <string name="title_settings_shot">TopoDroid shot data settings</string>
+    <string name="title_settings_units">TopoDroid units settings</string>
+    <string name="title_settings_location">TopoDroid location settings</string>
+    <string name="title_settings_accuracy">TopoDroid accuracy settings</string>
+    <string name="title_settings_plot">TopoDroid sketch settings</string>
+    <string name="title_settings_screen">TopoDroid canvas settings</string>
+    <string name="title_settings_point">TopoDroid point settings</string>
+    <string name="title_settings_line">TopoDroid line settings</string>
+    <string name="title_settings_walls">TopoDroid autowalls settings</string>
+    <string name="title_settings_draw">TopoDroid drawing settings</string>
+    <string name="title_settings_erase">TopoDroid erasing settings</string>
+    <string name="title_settings_edit">TopoDroid editing settings</string>
+    <string name="title_settings_device">TopoDroid device settings</string>
+    <string name="title_settings_calib">TopoDroid calibration settings</string>
+    <string name="title_settings_log">TopoDroid log settings</string>
+
     <string name="title_shift">Shift</string>
     <string name="title_shot_delete">Delete shot ?</string>
     <string name="title_sensor_edit">Sensor</string>
@@ -1313,6 +1335,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
   <string name="pref_log_stream_summary" translatable="false">Log output stream</string>
   <string name="pref_log_stream_title" translatable="false">Log stream</string>
+  <string name="pref_log_append" translatable="false">append logs</string>
   <string name="pref_log_bt" translatable="false">Bluetooth</string>
   <string name="pref_log_bezier" translatable="false">Bezier curves</string>
   <string name="pref_log_calib" translatable="false">Calibration</string>

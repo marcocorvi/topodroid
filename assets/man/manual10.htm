@@ -21,8 +21,16 @@ Lines have an orientation (when a line is selected, in edit mode, its orientatio
 
 The line thickness is one of the <u>Settings</u>. There are separate options for the centerline/splays and the drawing line thickness.<br><p>
 
+<b>Section lines</b><br>
 The "section" line is special as it is always made into a straight segment with a short tick showing the direction of view.
 A "section" point is automatically added near the end of the section line. This point has the "scrap" option preset to the line scrap and is deleted when you delete the section line.<br><p>
+
+"Section" lines cannot be erased with the <u>eraser</u> tool.
+To remove a "section" line, select it with the <u>edit</u> tool and delete it with the "delete" button.<br><p>
+
+Its points cannot be moved in the canvas, like for points of other lines, neither they can be removed.<br><p>
+
+The pointwise actions do not apply to the endpoints of "section" lines.<br><p>
 
 <b>Area tools</b><br>
 Area tools are region shaders. To draw an area trace its contour. You do not need to be very precise as TopoDroid will close it.<br>
@@ -32,9 +40,12 @@ The water area is special because it is "closed horizontally" in the profile ske
 
 Drawing mistakes can be corrected. The <u>Undo</u> button removes the last item. To erase a line or a symbol drawn long ago, without loosing all the intermediate work, there are two choices: the <u>Erase</u> mode and the <u>Edit</u> mode.<br><p>
 
-The <u>Eraser</u> is very intuitive: it cancels everything you pass your finger over, except stations, shots, and section lines. Just like a real eraser on the paper: if you pass it in the middle of a line it erases only the central portion (thus leaving two lines). However the erasing can be filtered to erase only items of one class: points, lines, or areas.<br><p>
+The <u>Eraser</u> is very intuitive: it cancels everything you pass your finger over, except stations, shots, and section lines. Just like a real eraser on the paper: if you pass it in the middle of a line it erases only the central portion (thus leaving two lines). However the erasing can be filtered to erase only items of one class: points, lines, or areas.<br>
+<p>
 
-The <u>Edit</u> [A] button is not so intuitive, but it is very powerful, as it allows pointwise editing operations. In this mode all the drawn items are shown as little green dots. To select the item to edit tap on one of its green dots (icons have only one dot). If there are several dots close together, they will all be selected (and shown with a pink circle), but only one will be chosen for editing (big green circle). If it is not what you wanted, move among the selected points with the <u>Prev</u>-<u>Next</u> buttons.<br>
+The <u>Edit</u> [A] button is not so intuitive, but it is very powerful, as it allows pointwise editing operations. In this mode all the drawn items are shown as little green dots. To select the item to edit tap on one of its green dots (icons have only one dot). If there are several dots close together, they will all be selected (and shown with a pink circle), but only one will be chosen for editing (big green circle). If it is not what you wanted, cycle through the selected points with the <u>Prev</u>-<u>Next</u> buttons.<br>
+
+Except for the endpoints of "section" lines, the points of the the drawn items can be moved on the canvas by dragging them.<br>
 
 The edit tool can be filtered to select only dots of one class: points, lines, areas, shots, or stations.<br><p>
 
@@ -42,16 +53,17 @@ The size of the green dots and the selection radius are two <u>Settings</u>.<br>
 
 Segments of Bezier lines have two control points. These are stored with the segment end-point and when this is the selected editing point the two control points are shown as pink circles. Each of them can be moved around by dragging it with the finger.<br><p>
 
-To clear the selection tap somewhere else in the canvas. To move the editing point, drag it with the finger. The item can be deleted (removed) or its <a href="page_item_edit.htm">properties</a> changed ("tool" button). Editing applies also to shots and stations.
+To clear the selection tap somewhere else in the canvas. The item can be deleted (removed) or its <a href="page_item_edit.htm">properties</a> changed ("tool" button). Editing applies also to shots and stations.
 <br><p>
 
-Once selected an orientable point icons can be rotated also with side-drag.<br><p>
+Once selected an orientable point icons can be rotated also with side-drag, if this is enabled.<br><p>
 
 A survey shot (leg or splay) has a green dot in the middle to select it. If selected a horizontal yellow segment appear and the shot extend can be set by dragging the green dot towards the left or right end, or to the middle.<br><p>
 
 <h4>Point-wise edit actions [A]</h4>
 
-The second to the right button applies only to drawing items and has a drop-down menu of advanced editing actions, for either points [P], or lines [L], or areas [A]
+The second to the right button applies only to drawing items and has a drop-down menu of advanced editing actions, for either points [P],
+or lines (except "section" lines) [L], or areas [A].
 <ul style="margin-top=0">
 <li><i>Snap to nearby point</i> [P,L,A]: move the point to coincide with the closest nearby point (no action if there is no nearby point)</li>
 <li><i>Snap to nearby splays/line</i> [L,A]. Lines are deformed to pass through the splay endpoints that are close enough. For areas the point is moved to coincide with the closest line point, and the pieces of the area border before and after it are replaced with pieces of border that follow the line path</li>

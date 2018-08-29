@@ -295,6 +295,7 @@
     <string name="no_undelete">Nenhum item a ser restaurado</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Azimute %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Inclinação %5$.1f"</string>
+    <!-- TODO string name="format_closure">%1$s-%2$s: %3$.1f / %4$.1f m [%5$.1f %6$.1f] %7$.1f (%8$.1f \u00b0)</string -->
 
     <string name="menu_3d">3D</string>
     <string name="menu_about">SOBRE</string>

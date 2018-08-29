@@ -82,6 +82,7 @@ class BrushManager
 
   // LINE CLOSED
   static boolean isLineClosed( int index ) { return mLineLib.isClosed( index ); }
+  static boolean isLineSection( int index ) { return index == mLineLib.mLineSectionIndex; }
 
   // FIXME AREA_ORIENT
   static void resetAreaOrientations( ) { mAreaLib.resetOrientations(); }

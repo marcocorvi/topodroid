@@ -133,7 +133,7 @@ class SetupTextSizeDialog extends MyDialog
     } );
 
     // mSeekBar.setProgress( mSize );
-    mSample.setTextSize( TDSetting.getTextSize(mParent.getApp(), mSize) );
+    mSample.setTextSize( TDSetting.getTextSize( mSize ) );
   }
 
   private void setSize( int a, boolean edit_text )
@@ -144,7 +144,7 @@ class SetupTextSizeDialog extends MyDialog
     mETsizeChanged = ! edit_text;
     // mSeekBar.setProgress( mSize );
     if ( edit_text ) updateEditSize();
-    mSample.setTextSize( TDSetting.getTextSize(mParent.getApp(), mSize) );
+    mSample.setTextSize( TDSetting.getTextSize( mSize ) );
   }
 
 // ----------------------------------------------------------------------------

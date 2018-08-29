@@ -120,7 +120,7 @@ class TDPath
   final static Object mTherionLock   = new Object();
   final static Object mXSectionsLock = new Object();
   final static Object mSelectionLock = new Object();
-  final static Object mSelectedLock  = new Object();
+  // final static Object mSelectedLock  = new Object();
 
   static String getDatabase() { return getDirFile( "distox14.sqlite" ); }
   static String getDeviceDatabase() { return PATH_DEFAULT + "device10.sqlite"; }

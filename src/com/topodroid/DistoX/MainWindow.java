@@ -104,7 +104,7 @@ public class MainWindow extends Activity
 {
   private TopoDroidApp mApp;
   private DataHelper mApp_mData;
-  private boolean mApp_mCosurvey;
+  private boolean mApp_mCosurvey = false;
   private int mApp_mCheckPerms;
 
   private Activity mActivity = null;
@@ -409,8 +409,8 @@ public class MainWindow extends Activity
 
         (new SymbolReload( mActivity, mApp, TDLevel.overExpert )).show();
       } else if ( TDLevel.overAdvanced && p++ == pos ) { // LOGS
-        intent = new Intent( mActivity, TopoDroidPreferences.class );
-        intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_LOG );
+        intent = new Intent( mActivity, TDPrefActivity.class );
+        intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_LOG );
         startActivity( intent );
       } else if ( TDLevel.overExpert && mApp_mCosurvey && p++ == pos ) {  // CO-SURVEY
         (new ConnectDialog( mActivity, mApp )).show();
@@ -419,8 +419,10 @@ public class MainWindow extends Activity
       } else if ( p++ == pos ) { // ABOUT
         (new TopoDroidAbout( mActivity, this, -2 )).show();
       } else if ( p++ == pos ) { // SETTINGS
-        intent = new Intent( mActivity, TopoDroidPreferences.class );
-        intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_ALL );
+        // intent = new Intent( mActivity, TopoDroidPreferences.class );
+        // intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_ALL );
+        intent = new Intent( mActivity, TDPrefActivity.class );
+        intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_ALL );
         startActivity( intent );
       } else if ( p++ == pos ) { // HELP
         new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, menus.length, getResources().getString( HELP_PAGE )).show();
@@ -780,8 +782,8 @@ public class MainWindow extends Activity
   public boolean onSearchRequested()
   {
     // TDLog.Error( "search requested" );
-    Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
-    intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_ALL );
+    Intent intent = new Intent( mActivity, TDPrefActivity.class );
+    intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_ALL );
     startActivity( intent );
     return true;
   }

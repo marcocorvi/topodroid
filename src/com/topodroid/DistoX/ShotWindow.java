@@ -195,8 +195,8 @@ public class ShotWindow extends Activity
   boolean mFlagBlank  = false; //!< whether to hide blank shots
 
   // private Bundle mSavedState = null;
-  private String mRecentPlot     = null;
-  long   mRecentPlotType = PlotInfo.PLOT_PLAN;
+  // private String mRecentPlot     = null; // moved to TDInstance
+  // long   mRecentPlotType = PlotInfo.PLOT_PLAN;
 
   private int mButtonSize = 42;
   private Button[] mButton1;
@@ -654,8 +654,8 @@ public class ShotWindow extends Activity
         mActivity.startActivity( new Intent( Intent.ACTION_VIEW ).setClass( mActivity, DeviceActivity.class ) );
       }
     } else  if ( p++ == pos ) { // OPTIONS
-      Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
-      intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SURVEY );
+      Intent intent = new Intent( mActivity, TDPrefActivity.class );
+      intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_SURVEY );
       mActivity.startActivity( intent );
     } else if ( p++ == pos ) { // HELP
       // int nn = mNrButton1; //  + ( TDLevel.overNormal ?  mNrButton2 : 0 );
@@ -1184,8 +1184,8 @@ public class ShotWindow extends Activity
         mDataDownloader.doDataDownload( );
       }
     } else if ( b == mButton1[ BTN_PLOT ] ) {
-      if ( mRecentPlot != null ) {
-        startExistingPlot( mRecentPlot, mRecentPlotType, null );
+      if ( TDInstance.recentPlot != null ) {
+        startExistingPlot( TDInstance.recentPlot, TDInstance.recentPlotType, null );
       } else {
         // onClick( view ); // fall back to onClick
         new PlotListDialog( mActivity, this, mApp, null ).show();
@@ -1460,12 +1460,6 @@ public class ShotWindow extends Activity
   }
 /* END SKETCH_3D */
 
-  void setRecentPlot( String name, long type )
-  {
-    mRecentPlot     = name;
-    mRecentPlotType = type;
-  }
-
   // called either by a long-tap on plot button 
   //        or a highlights
   void startExistingPlot( String name, long type, String station ) // name = plot/sketch3d name
@@ -1474,12 +1468,12 @@ public class ShotWindow extends Activity
     if ( type != PlotInfo.PLOT_SKETCH_3D ) {
       PlotInfo plot1 =  mApp_mData.getPlotInfo( TDInstance.sid, name+"p" );
       if ( plot1 != null ) {
-        setRecentPlot( name, type );
+        TDInstance.setRecentPlot( name, type );
         PlotInfo plot2 =  mApp_mData.getPlotInfo( TDInstance.sid, name+"s" );
         startDrawingWindow( plot1.start, plot1.name, plot1.id, plot2.name, plot2.id, type, station, plot1.isLandscape() );
         return;
       } else {
-        setRecentPlot( null, 0L );
+        TDInstance.setRecentPlot( null, 0L );
       }
 /* FIXME BEGIN SKETCH_3D */
     } else {
@@ -1699,8 +1693,8 @@ public class ShotWindow extends Activity
     // Log.v("DistoX", "highlight blocks [0] " + ( (blks==null)? "null" : blks.size() ) );
     if ( blks == null || blks.size() == 0 ) return;
     // now if there is a plot open it
-    if ( mRecentPlot != null ) {
-      startExistingPlot( mRecentPlot, mRecentPlotType, blks.get(0).mFrom );
+    if ( TDInstance.recentPlot != null ) {
+      startExistingPlot( TDInstance.recentPlot, TDInstance.recentPlotType, blks.get(0).mFrom );
     }
     clearMultiSelect( );
   }
@@ -1872,8 +1866,8 @@ public class ShotWindow extends Activity
   public boolean onSearchRequested()
   {
     // TDLog.Error( "search requested" );
-    Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
-    intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SURVEY );
+    Intent intent = new Intent( mActivity, TDPrefActivity.class );
+    intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_SURVEY );
     mActivity.startActivity( intent );
     return true;
   }

@@ -429,7 +429,7 @@ class ProjectionDialog extends MyDialog
         TDToast.make( R.string.few_data );
       } else {
         // float decl = mApp.mData.getSurveyDeclination( mSid );
-        mNum = new DistoXNum( mList, mFrom, "", "", 0.0f );
+        mNum = new DistoXNum( mList, mFrom, "", "", 0.0f, null ); // null formatClosure
         mSeekBar.setProgress( 200 );
         float de = - mNum.surveyEmin();
         if ( mNum.surveyEmax() > de ) de = mNum.surveyEmax();

@@ -260,11 +260,11 @@ class DistoXNum
    * @param view     barriers list
    * @param hide     hiding list
    */
-  DistoXNum( List<DBlock> data, String start, String view, String hide, float decl )
+  DistoXNum( List<DBlock> data, String start, String view, String hide, float decl, String format )
   {
     mDecl = decl;
     surveyExtend   = true;
-    surveyAttached = computeNum( data, start );
+    surveyAttached = computeNum( data, start, format );
     setStationsHide( hide );
     setStationsBarr( view );
   }
@@ -285,36 +285,37 @@ class DistoXNum
    * @param s1  first station
    * @param s2  second station
    */
-  private float shortestPath( NumStation s1, NumStation s2 )
+  private NumShortpath shortestPath( NumStation s1, NumStation s2 )
   {
     // Log.v("DistoX-LOOP", "shortest path " + s1.name + " " + s2.name );
     Stack<NumStation> stack = new Stack<NumStation>();
     mStations.setShortestPath( 100000.0f );
     // for ( NumStation s : mStations ) {
-    //   s.mShortpathDist = 100000.0f;
+    //   s.mShortpathDist = new NumShortpath( 100000.0f, 0 );
     //   // s.path = null;
     // }
 
-    s1.mShortpathDist = 0.0f;
+    s1.mShortpathDist.reset( 0, 0 ); // clear 
     stack.push( s1 );
     while ( ! stack.empty() ) {
       NumStation s = stack.pop();
       for ( NumShot e : mShots ) {
         if ( e.from == s1 && e.to == s2 ) continue;
         if ( e.from == s2 && e.to == s1 ) continue;
+        float len = e.length();
         if ( e.from == s && e.to != null ) {
-          float d = s.mShortpathDist + e.length();
-          if ( d < e.to.mShortpathDist ) {
+          float d = s.mShortpathDist.mDist + len;
+          if ( d < e.to.mShortpathDist.mDist ) {
 	    // Log.v("DistoX-LOOP", "set short dist T " + e.to.name + " : " + d );
-            e.to.mShortpathDist = d;
+            e.to.mShortpathDist.reset( d, s.mShortpathDist.mDist2 + len*len );
             // e.to.path = from;
             stack.push( e.to );
           }
         } else if ( e.to == s && e.from != null ) {
-          float d = s.mShortpathDist + e.length();
-          if ( d < e.from.mShortpathDist ) {
+          float d = s.mShortpathDist.mDist + len;
+          if ( d < e.from.mShortpathDist.mDist ) {
 	    // Log.v("DistoX-LOOP", "set short dist F " + e.from.name + " : " + d );
-            e.from.mShortpathDist = d;
+            e.from.mShortpathDist.reset( d, s.mShortpathDist.mDist2 + len*len );
             // e.from.path = from;
             stack.push( e.from );
           }
@@ -697,7 +698,7 @@ class DistoXNum
   /** survey data reduction 
    * return true if all shots are attached
    */
-  private boolean computeNum( List<DBlock> data, String start )
+  private boolean computeNum( List<DBlock> data, String start, String format )
   {
     resetBBox();
     resetStats();
@@ -963,10 +964,10 @@ class DistoXNum
 	     
               // do close loop also on duplicate shots
               // need the loop length to compute the fractional closure error
-              float length = shortestPath( sf, st) + Math.abs( ts.d() );  // FIXME length
-              // Log.v("DistoX-LOOP", "loop length " + length + " closure " + ts.d() + " " + ts.b() + " " + ts.c() );
-              mClosures.add( getClosureError( st, sf, ts.d(), ts.b(), ts.c(), length ) );
-	      // Log.v("DistoXL", "add closure " + sf.name + " " + st.name + " len " + length );
+              NumShortpath short_path = shortestPath( sf, st); 
+              // Log.v("DistoX-LOOP", "loop length " + short_path.mDist + " closure " + ts.d() + " " + ts.b() + " " + ts.c() );
+              mClosures.add( getClosureError( format, st, sf, ts.d(), ts.b(), ts.c(), short_path, Math.abs( ts.d() ) ) );
+	      // Log.v("DistoXL", "add closure " + sf.name + " " + st.name + " len " + short_path.mDist + " " + short_path.mDist2 );
               
               if ( /* TDSetting.mAutoStations || */ TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) { // do not close loop
                 // if ( TDLog.LOG_DEBUG ) Log.v( TDLog.TAG, "do not close loop");
@@ -1563,7 +1564,7 @@ class DistoXNum
   /** get the string description of the loop closure error(s)
    * need the loop length to compute the percent error
    */
-  private String getClosureError( NumStation at, NumStation fr, float d, float b, float c, float len )
+  private String getClosureError( String format, NumStation at, NumStation fr, float d, float b, float c, NumShortpath short_path, float length )
   {
     // float tv = - d * TDMath.sind( c );
     // float th =   d * TDMath.cosd( c );
@@ -1581,8 +1582,13 @@ class DistoXNum
     float dh = ds*ds + de*de;
     float dl = TDMath.sqrt( dh + dv*dv );
     dh = TDMath.sqrt( dh );
+
+    float len  = length + short_path.mDist;
+    float len2 = length*length + short_path.mDist2;
     float error = (dl*100) / len;
-    return String.format(Locale.US, "%s-%s %.2f [%.2f %.2f] %.2f%%", fr.name, at.name,  dl, dh, dv, error );
+    float angle = dl / TDMath.sqrt( len2 ) * TDMath.RAD2DEG;
+    // return String.format(Locale.US, "%s-%s %.1f/%.1f m [%.1f %.1f] %.1f%% (%.2f &#00b0;)", fr.name, at.name,  dl, len, dh, dv, error, angle );
+    return String.format(Locale.US, format, fr.name, at.name,  dl, len, dh, dv, error, angle );
   }
 }
 

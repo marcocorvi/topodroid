@@ -334,7 +334,8 @@ class DrawingCommandManager
   //                                   + mCurrentStack.toArray().length );
   // }
 
-  void clearSelected() { synchronized( TDPath.mSelectedLock ) { mSelected.clear(); } }
+  // void clearSelected() { synchronized( TDPath.mSelectedLock ) { mSelected.clear(); } }
+  void clearSelected() { synchronized( TDPath.mSelectionLock ) { mSelected.clear(); } }
 
   void clearReferences()
   {
@@ -542,6 +543,14 @@ class DrawingCommandManager
     canvas.drawPath( path, BrushManager.highlightPaint2 );
   }
 
+  final static String remove_line = "remove line completely";
+  final static String remove_line_first = "remove line first point";
+  final static String remove_line_second = "remove line second point";
+  final static String remove_line_middle = "remove line middle point";
+  final static String remove_line_last = "remove line last points";
+  final static String remove_area_point = "remove area point";
+  final static String remove_area = "remove area completely";
+
   /** 
    * @return result code:
    *    0  no erasing
@@ -583,6 +592,7 @@ class DrawingCommandManager
               int size = line.size();
               if ( size <= 2 || ( size == 3 && pt.mPoint == first.mNext ) ) // 2-point line OR erase midpoint of a 3-point line 
               {
+                TDLog.Log( TDLog.LOG_PLOT, remove_line );
                 ret = 2; 
                 eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
                 mCurrentStack.remove( path );
@@ -592,6 +602,7 @@ class DrawingCommandManager
               } 
               else if ( pt.mPoint == first ) // erase first point of the multi-point line (2016-05-14)
               {
+                TDLog.Log( TDLog.LOG_PLOT, remove_line_first );
                 ret = 3;
                 eraseCmd.addAction( EraseAction.ERASE_MODIFY, path );
                 // LinePoint lp = points.get(0);
@@ -605,6 +616,7 @@ class DrawingCommandManager
               }
               else if ( pt.mPoint == first.mNext ) // erase second point of the multi-point line
               {
+                TDLog.Log( TDLog.LOG_PLOT, remove_line_second );
                 ret = 3;
                 eraseCmd.addAction( EraseAction.ERASE_MODIFY, path );
                 // LinePoint lp = points.get(0);
@@ -619,6 +631,7 @@ class DrawingCommandManager
               } 
               else if ( pt.mPoint == last.mPrev ) // erase second-to-last of multi-point line
               {
+                TDLog.Log( TDLog.LOG_PLOT, remove_line_last );
                 ret = 4;
                 eraseCmd.addAction( EraseAction.ERASE_MODIFY, path );
                 // LinePoint lp = points.get(size-1);
@@ -631,6 +644,7 @@ class DrawingCommandManager
                 }
                 line.retracePath();
               } else { // erase a point in the middle of multi-point line
+                TDLog.Log( TDLog.LOG_PLOT, remove_line_middle );
                 ret = 5;
                 doSplitLine( line, pt.mPoint, eraseCmd );
                 break; // IMPORTANT break the for-loop
@@ -640,6 +654,7 @@ class DrawingCommandManager
             if ( erase_mode == Drawing.FILTER_ALL || erase_mode == Drawing.FILTER_AREA ) {
               DrawingAreaPath area = (DrawingAreaPath)path;
               if ( area.size() <= 3 ) {
+                TDLog.Log( TDLog.LOG_PLOT, remove_area );
                 ret = 6;
                 eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
                 mCurrentStack.remove( path );
@@ -647,6 +662,7 @@ class DrawingCommandManager
                   mSelection.removePath( path );
                 }
               } else {
+                TDLog.Log( TDLog.LOG_PLOT, remove_area_point );
                 ret = 7;
                 eraseCmd.addAction( EraseAction.ERASE_MODIFY, path );
                 doRemoveLinePoint( area, pt.mPoint, pt );
@@ -756,12 +772,12 @@ class DrawingCommandManager
       if ( lp == point ) {
         synchronized( mCurrentStack ) {
           line.remove( point );
-          synchronized( TDPath.mSelectionLock ) {
-            mSelection.removePoint( sp );
-          }
-          // checkLines();
-          return true;
+	}
+        synchronized( TDPath.mSelectionLock ) {
+          mSelection.removePoint( sp );
         }
+        // checkLines();
+        return true;
       }
     }
     // checkLines();
@@ -1595,11 +1611,9 @@ class DrawingCommandManager
     }
 
     if ( mDisplayPoints ) {
+      float dot_radius = TDSetting.mDotRadius/zoom;
       synchronized( TDPath.mSelectionLock ) {
-        float radius = TDSetting.mDotRadius/zoom;
-        final Iterator i = mSelection.mBuckets.iterator();
-        while ( i.hasNext() ) {
-          final SelectionBucket bucket = (SelectionBucket) i.next();
+        for ( SelectionBucket bucket: mSelection.mBuckets ) {
           if ( bucket.intersects( mBBox ) ) {
             for ( SelectionPoint pt : bucket.mPoints ) { 
               int type = pt.type();
@@ -1617,16 +1631,12 @@ class DrawingCommandManager
                   if ( ! containsStation( pt.mItem, splays_on ) ) continue;
 		}
 	      }
-              float x, y;
-              if ( pt.mPoint != null ) { // line-point
-                x = pt.mPoint.x;
-                y = pt.mPoint.y;
-              } else {  
-                x = pt.mItem.cx;
-                y = pt.mItem.cy;
-              }
               Path path = new Path();
-              path.addCircle( x, y, radius, Path.Direction.CCW );
+              if ( pt.mPoint != null ) { // line-point
+                path.addCircle( pt.mPoint.x, pt.mPoint.y, dot_radius, Path.Direction.CCW );
+              } else {  
+                path.addCircle( pt.mItem.cx, pt.mItem.cy, dot_radius, Path.Direction.CCW );
+              }
               path.transform( mMatrix );
               canvas.drawPath( path, BrushManager.highlightPaint2 );
             }
@@ -1642,13 +1652,14 @@ class DrawingCommandManager
         //     y = pt.mItem.cy;
         //   }
         //   Path path = new Path();
-        //   path.addCircle( x, y, radius, Path.Direction.CCW );
+        //   path.addCircle( x, y, dot_radius, Path.Direction.CCW );
         //   path.transform( mMatrix );
         //   canvas.drawPath( path, BrushManager.highlightPaint2 );
         // }
 
       }
-      synchronized( TDPath.mSelectedLock ) {
+      // synchronized( TDPath.mSelectedLock ) {
+      synchronized( TDPath.mSelectionLock ) {
         if ( mSelected.mPoints.size() > 0 ) { // FIXME SELECTION
           float radius = 4*TDSetting.mDotRadius/zoom;
           Path path;
@@ -1739,21 +1750,18 @@ class DrawingCommandManager
           }
           radius = radius/3; // 2/zoom;
           for ( SelectionPoint pt : mSelected.mPoints ) {
-            float x, y;
-            if ( pt.mPoint != null ) { // line-point
-              x = pt.mPoint.x;
-              y = pt.mPoint.y;
-            } else {
-              x = pt.mItem.cx;
-              y = pt.mItem.cy;
-            }
+            // float x, y;
             path = new Path();
-            path.addCircle( x, y, radius, Path.Direction.CCW );
+            if ( pt.mPoint != null ) { // line-point
+              path.addCircle( pt.mPoint.x, pt.mPoint.y, radius, Path.Direction.CCW );
+            } else {
+              path.addCircle( pt.mItem.cx, pt.mItem.cy, radius, Path.Direction.CCW );
+            }
             path.transform( mMatrix );
             canvas.drawPath( path, BrushManager.highlightPaint );
           }
         }
-      } 
+      }  // synch( mSelectedLock ) mSelectionLock
     }
     synchronized( mGridStack1 ) {
       if ( mFirstReference != null )  mFirstReference.draw( canvas, mMatrix, mScale, null );
@@ -1863,7 +1871,8 @@ class DrawingCommandManager
     }
     float radius = TDSetting.mCloseCutoff + size / zoom;
     SelectionPoint sp2 = null;
-    synchronized ( TDPath.mSelectedLock ) {
+    // synchronized ( TDPath.mSelectedLock ) {
+    synchronized ( TDPath.mSelectionLock ) {
       sp2 = mSelection.selectOnItemAt( item, x, y, 4*radius );
     }
     if ( sp2 == null ) {
@@ -1926,7 +1935,8 @@ class DrawingCommandManager
     boolean splays = (mDisplayMode & DisplayMode.DISPLAY_SPLAY ) != 0;
     // boolean latest = (mDisplayMode & DisplayMode.DISPLAY_LATEST ) != 0;
     boolean stations = (mDisplayMode & DisplayMode.DISPLAY_STATION ) != 0;
-    synchronized ( TDPath.mSelectedLock ) {
+    // synchronized ( TDPath.mSelectedLock ) {
+    synchronized ( TDPath.mSelectionLock ) {
       mSelected.clear();
       // FIXME_LATEST latests splays are not considered in the selection
       mSelection.selectAt( mSelected, x, y, radius, mode, legs, splays, stations, splays_on, splays_off );
@@ -1954,7 +1964,8 @@ class DrawingCommandManager
       sp1 = mSelection.insertPathPoint( line, p1 );
     }
     if ( sp1 != null ) {
-      synchronized( TDPath.mSelectedLock ) {
+      // synchronized( TDPath.mSelectedLock ) {
+      synchronized( TDPath.mSelectionLock ) {
         mSelected.mPoints.add( sp1 );
       }
     }
@@ -2535,17 +2546,19 @@ class DrawingCommandManager
     synchronized( TDPath.mSelectionLock ) {
       // SelectionPoint sp = mSelected.shiftHotItem( dx, dy, range );
       SelectionPoint sp = mSelected.shiftHotItem( dx, dy );
-      DrawingPath path = sp.mItem;
-      if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
-        DrawingPointPath pt = (DrawingPointPath)path;
-        if ( pt.mPointType == BrushManager.mPointLib.mPointSectionIndex ) {
-          String scrap_name = pt.getOption( "-scrap" );
-          if ( scrap_name != null ) {
-            shiftXSectionOutline( scrap_name, dx, dy );
+      if ( sp != null ) {
+        DrawingPath path = sp.mItem;
+        if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
+          DrawingPointPath pt = (DrawingPointPath)path;
+          if ( pt.mPointType == BrushManager.mPointLib.mPointSectionIndex ) {
+            String scrap_name = pt.getOption( "-scrap" );
+            if ( scrap_name != null ) {
+              shiftXSectionOutline( scrap_name, dx, dy );
+            }
           }
         }
+        mSelection.checkBucket( sp );
       }
-      mSelection.checkBucket( sp );
     }
   }
 

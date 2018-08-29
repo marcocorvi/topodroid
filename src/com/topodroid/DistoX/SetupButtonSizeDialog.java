@@ -107,7 +107,7 @@ class SetupButtonSizeDialog extends MyDialog
   private void setSize( int sz )
   {
     mSize = sz;
-    int bs = TDSetting.getSizeButtons(mParent.getApp(), sz );
+    int bs = TDSetting.getSizeButtons( sz );
     mSample.setImageDrawable( MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_topodroid, bs ) );
     mLayout.invalidate();
   }

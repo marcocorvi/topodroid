@@ -18,7 +18,7 @@ import java.util.ArrayList;
 class NumStation extends NumSurveyPoint
 {
   String name;  // station name
-  float   mShortpathDist; // loop closure distance (shortest-path algo)
+  NumShortpath mShortpathDist;  // loop closure distance (shortest-path algo)
   boolean mDuplicate; // whether this is a duplicate station
   boolean mHasCoords; // whether the station has got coords after loop-closure
   NumShot s1;

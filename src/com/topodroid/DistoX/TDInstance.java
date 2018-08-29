@@ -36,6 +36,9 @@ class TDInstance
   static boolean isDeviceAddress( String addr ) { return device != null && device.mAddress.equals( addr ); }
   static boolean isDeviceZeroAddress( ) { return ( device == null || device.mAddress.equals( Device.ZERO_ADDRESS ) ); }
 
+  static String recentPlot = null;
+  static long   recentPlotType = PlotInfo.PLOT_PLAN;
+
   static Bundle toBundle()
   {
     Bundle b = new Bundle();
@@ -69,7 +72,16 @@ class TDInstance
     } else {
       // device = TopoDroidApp.setDevice( addr ); // FIXME_DEVICE_STATIC
     }
+    recentPlot = null;
+    recentPlotType = PlotInfo.PLOT_PLAN;
   }
 
   static void setContext( Context ctx ) { context = ctx; }
+
+  static void setRecentPlot( String name, long type )
+  {
+    recentPlot     = name;
+    recentPlotType = type;
+  }
+
 }

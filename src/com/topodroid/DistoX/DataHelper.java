@@ -1138,7 +1138,7 @@ class DataHelper extends DataSetObservable
       // synchronized( mListeners )
       for ( ParserShot s : shots ) {
         mListeners.onInsertShot( sid, id, millis, color, s.from, s.to, s.len, s.ber, s.cln, s.rol,
-		       	s.extend, 0.0, // stretch = 0.0
+                        s.extend, 0.0, // stretch = 0.0
                         s.duplicate ? DBlock.FLAG_DUPLICATE    // flag
                           : s.surface ? DBlock.FLAG_SURFACE 
                           // : s.commented ? DBlock.FLAG_COMMENTED 

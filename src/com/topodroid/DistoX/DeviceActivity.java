@@ -680,8 +680,8 @@ public class DeviceActivity extends Activity
   public boolean onSearchRequested()
   {
     // TDLog.Error( "search requested" );
-    Intent intent = new Intent( this, TopoDroidPreferences.class );
-    intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_DEVICE );
+    Intent intent = new Intent( this, TDPrefActivity.class );
+    intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_DEVICE );
     startActivity( intent );
     return true;
   }
@@ -760,8 +760,8 @@ public class DeviceActivity extends Activity
       }
 
     } else if ( p++ == pos ) { // OPTIONS
-      Intent intent = new Intent( this, TopoDroidPreferences.class );
-      intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_DEVICE );
+      Intent intent = new Intent( this, TDPrefActivity.class );
+      intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_DEVICE );
       startActivity( intent );
     } else if ( p++ == pos ) { // HELP
       new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE ) ).show();

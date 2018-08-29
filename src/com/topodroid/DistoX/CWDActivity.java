@@ -65,7 +65,7 @@ public class CWDActivity extends Activity
     updateDisplay();
   }
 
-  private boolean setPreference()
+  private boolean setCwdPreference()
   {
     String dir_name  = mETcwd.getText().toString();
     String base_name = TDLevel.overExpert ? mBaseName : TDInstance.cbd ;
@@ -155,7 +155,7 @@ public class CWDActivity extends Activity
   {
     Button b = (Button)v;
     if ( b == mBtnOK ) {
-      setPreference();
+      setCwdPreference();
       finish();
     } else if ( b == mBtnCancel ) {
       finish();
@@ -201,7 +201,7 @@ public class CWDActivity extends Activity
   // @Override
   // public void onBackPressed()
   // {
-  //   // setPreference();
+  //   // setCwdPreference();
   //   finish();
   // }
 

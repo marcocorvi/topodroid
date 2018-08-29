@@ -74,7 +74,6 @@ class DrawingAreaDialog extends MyDialog
     eTtype.setSelection( mType );
     eTtype.setOnItemSelectedListener( this );
 
-
     mCBvisible = (CheckBox) findViewById( R.id.area_visible );
     mCBvisible.setChecked( mArea.isVisible() );
 

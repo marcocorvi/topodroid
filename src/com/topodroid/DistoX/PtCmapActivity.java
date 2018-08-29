@@ -73,7 +73,7 @@ public class PtCmapActivity extends Activity
     }
   }
 
-  private boolean setPreference()
+  private boolean setCmapPreference()
   {
     StringBuilder sb = new StringBuilder();
     for ( int k=0; k<7; ++k ) {
@@ -175,7 +175,7 @@ public class PtCmapActivity extends Activity
   public void onClick( View v )
   {
     if ( (Button)v == mBtOk ) {
-      if ( setPreference() ) {
+      if ( setCmapPreference() ) {
         finish();
       }
     }

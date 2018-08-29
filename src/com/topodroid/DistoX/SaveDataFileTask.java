@@ -86,7 +86,7 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
             DBlock blk = list.get( 0 );
             // Log.v( TopoDroidApp.TAG, "DISTOX_EXPORT_DXF from " + blk.mFrom );
             float decl = mData.getSurveyDeclination( mSid );
-            DistoXNum num = new DistoXNum( list, blk.mFrom, null, null, decl );
+            DistoXNum num = new DistoXNum( list, blk.mFrom, null, null, decl, null ); // null formatClosure
             filename = TDExporter.exportSurveyAsDxf( mSid, mData, mInfo, num, TDPath.getSurveyDxfFile( mSurvey ) );
           }
           break;

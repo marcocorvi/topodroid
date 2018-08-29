@@ -107,7 +107,7 @@ class NumStationSet
 
     void setShortPathDist( float p ) 
     { 
-      value.mShortpathDist = p;
+      value.mShortpathDist = new NumShortpath( p, 0 );
       if ( left  != null ) left.setShortPathDist( p );
       if ( right != null ) right.setShortPathDist( p );
     }

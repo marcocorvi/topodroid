@@ -48,6 +48,11 @@ class SelectionSet
   SelectionPoint shiftHotItem( float dx, float dy )
   {
     if ( mHotItem == null ) return null;
+    DrawingPath path = mHotItem.mItem;
+    if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
+      DrawingLinePath line = (DrawingLinePath)path;
+      if ( BrushManager.isLineSection( line.mLineType ) ) return null;
+    }
     // mHotItem.shiftBy( dx, dy, range );
     mHotItem.shiftBy( dx, dy );
     return mHotItem;
