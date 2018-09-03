@@ -98,6 +98,15 @@
         android:layout_marginTop="@dimen/marginv"
       />
 
+      <TextView android:id="@+id/survey_datamode" 
+        android:layout_width="match_parent"
+      	android:ems="25"
+        android:layout_height="wrap_content" 
+        android:singleLine="true"
+	android:text="@string/empty"
+        android:layout_marginTop="@dimen/marginv"
+      />
+
     </LinearLayout>
 
     <ListView android:id="@+id/menu"

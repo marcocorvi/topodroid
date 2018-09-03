@@ -176,6 +176,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="head_tail_store_failed">Failed to store DistoX memory index</string>
     <!-- UNUSED string name="pairing_failed">Pairing failed</string -->
 
+    <string name="datamode_normal">Normal data-mode</string>
+    <string name="datamode_diving">Diving data-mode</string>
     <string name="illegal_data_value">Illegal data value</string>
 
     <string name="photo_title">PHOTO</string>
@@ -202,6 +204,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
     <string name="error_azimuth_required">Azimuth required</string>
     <string name="error_length_required">Length required</string>
+    <string name="error_depth_required">Depth required</string>
     <string name="error_clino_required">Clino required</string>
     <!-- UNUSED string name="error_comment_required">Comment required</string -->
     <string name="error_begin_required">Start address required</string>

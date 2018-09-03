@@ -16,6 +16,9 @@ class SurveyInfo
   final static int XSECTION_SHARED  = 0;
   final static int XSECTION_PRIVATE = 1;
 
+  final static int DATAMODE_NORMAL  = 0;
+  final static int DATAMODE_DIVING  = 1;
+
   long id;
   String name;
   String date;
@@ -24,4 +27,5 @@ class SurveyInfo
   String comment;
   String initStation;
   int xsections; // 0: shared, 1: private
+  int datamode;
 }

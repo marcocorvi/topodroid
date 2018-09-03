@@ -746,8 +746,18 @@ class DistoXComm extends TopoDroidComm
         int prev_read = -1;
         int to_read = mProtocol.readToRead( command, a3 );
         // TDLog.Log( TDLog.LOG_COMM, "download data HT: A3 " + a3 + " to-read " + to_read );
-        if ( to_read <= 0 ) {
+        if ( to_read == 0 ) {
           ret = to_read;
+	} else if ( to_read < 0 ) {
+	  if ( mProtocol.mError < 0 ) {
+            ret = mProtocol.mError;
+	  } else { // read with timeout
+            startRfcommThread( -1, lister );
+            while ( mRfcommThread != null ) {
+              TopoDroidUtil.slowDown( 100 );
+            }
+            ret = nReadPackets;
+	  }
         } else {
           // FIXME asyncTask ?
           // nReadPackets = 0; // done in RfcommThread cstr

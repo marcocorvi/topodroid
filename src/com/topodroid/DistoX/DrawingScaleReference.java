@@ -23,7 +23,7 @@ import android.graphics.Paint;
 import android.graphics.Point;
 // import android.util.FloatMath;
 
-// import android.util.Log;
+import android.util.Log;
 
 class DrawingScaleReference
 {
@@ -59,9 +59,9 @@ class DrawingScaleReference
    * @param widthPercent maximum width of scale reference in percentage of screen width
    *                     (valid value are in range [0.2, 1.0]
    */
-  DrawingScaleReference(Paint p, Point loc, float widthPercent) {
+  DrawingScaleReference( Paint p, Point loc, float widthPercent) {
 
-    if(p == null)
+    if (p == null)
     {
       mPaint = new Paint();
       // mPaint.setColor(0xff33ccff); /* Android Blue */
@@ -69,6 +69,8 @@ class DrawingScaleReference
       mPaint.setStrokeWidth(2);
       mPaint.setTextAlign(Paint.Align.CENTER);
       mPaint.setTextSize( TDSetting.mStationSize );
+    } else {
+      mPaint = p;
     }
 
     if(widthPercent < MIN_WIDTH_PERCENT) mMaxWidthPercent = MIN_WIDTH_PERCENT;
@@ -91,12 +93,20 @@ class DrawingScaleReference
   /**
    * Set new paint to be used to draw the scale reference.
    *
-   * @param paint th new paint to be used. If null, the setting is ignored.
+   * @param paint the new paint to be used. If null, the setting is ignored.
    */
   void setPaint( Paint paint ) {
     if ( paint != null ) {
       mPaint = paint;
     }
+  }
+
+  /** set text size
+   * @param size   text size
+   */
+  void setTextSize( int size )
+  {
+    if ( size > 0 ) mPaint.setTextSize( size );
   }
 
   /**
@@ -132,17 +142,15 @@ class DrawingScaleReference
         if ( TDSetting.mUnitGrid < 0.2f ) { } // using m instead of dm
 	else if ( TDSetting.mUnitGrid < 0.8f ) canvasLen /= 2;
 
+        String refstr = (( referenceLen < 1 )?  Float.toString(referenceLen) : Integer.toString((int)referenceLen)) + mUnits;
         float locX = (mLocation.x > 0) ? mLocation.x : canvas.getWidth() + mLocation.x - referenceLen;
         float locY = (mLocation.y > 0) ? mLocation.y : canvas.getHeight() + mLocation.y;
+	// Log.v("DistoX", "reference " + referenceLen + mUnits );
 
-        canvas.drawLine(locX, locY, locX + canvasLen, locY, mPaint);
-        canvas.drawLine(locX, locY, locX, locY - HEIGHT_BARS, mPaint);
-        canvas.drawLine(locX + canvasLen, locY, locX + canvasLen, locY - HEIGHT_BARS, mPaint);
-        if(referenceLen < 1) {
-          canvas.drawText(referenceLen + mUnits, locX + canvasLen / 2, locY - HEIGHT_BARS, mPaint);
-        } else {
-          canvas.drawText((int)referenceLen + mUnits, locX + canvasLen / 2, locY - HEIGHT_BARS, mPaint);
-        }
+        canvas.drawLine( locX, locY, locX + canvasLen, locY, mPaint);
+        canvas.drawLine( locX, locY, locX, locY - HEIGHT_BARS, mPaint);
+        canvas.drawLine( locX + canvasLen, locY, locX + canvasLen, locY - HEIGHT_BARS, mPaint);
+        canvas.drawText( refstr, locX + canvasLen / 2, locY - HEIGHT_BARS, mPaint);
 
 	if ( landscape ) {
 	  float x = locX + arrowlen;
@@ -156,7 +164,7 @@ class DrawingScaleReference
           canvas.drawLine( x, y, x, y - arrowlen, mPaint);
           canvas.drawLine( x-arrowtip, y-arrowlen+arrowtip, x, y - arrowlen, mPaint);
           canvas.drawLine( x+arrowtip, y-arrowlen+arrowtip, x, y - arrowlen, mPaint);
-	       }
+        }
       }
     }
   }

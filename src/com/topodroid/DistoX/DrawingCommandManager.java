@@ -321,7 +321,7 @@ class DrawingCommandManager
 
   void addScaleRef() 
   {
-    mScaleRef = new DrawingScaleReference(new Point(20,-20), 0.33f);
+    mScaleRef = new DrawingScaleReference( BrushManager.referencePaint, new Point(20,-20), 0.33f);
   }
 
   // void debug()

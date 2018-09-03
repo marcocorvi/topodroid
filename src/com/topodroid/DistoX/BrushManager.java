@@ -133,6 +133,7 @@ class BrushManager
   static Paint borderPaint = null;
   static Paint duplicateStationPaint = null;
   static Paint mSectionPaint = null;
+  static Paint referencePaint = null;
   // static Paint stationPaint = null;
 
   // static BitmapDrawable mSymbolHighlight = null;
@@ -254,6 +255,7 @@ class BrushManager
       borderPaint = makePaint( 0x99ffffff, WIDTH_FIXED, Paint.Style.STROKE);
       // stationPaint = makePaint( 0xFFFF6666, WIDTH_FIXED, Paint.Style.STROKE);
       duplicateStationPaint = makePaint( 0xFFFF66FF, WIDTH_FIXED, Paint.Style.STROKE);
+      referencePaint = makePaint( 0xFFffffff, WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
       // DEBUG
       // debugRed = makePaint( TDColor.FULL_RED, WIDTH_FIXED, Paint.Style.STROKE);
       // debugGreen = makePaint( TDColor.FULL_GREEN, WIDTH_FIXED, Paint.Style.STROKE);
@@ -284,6 +286,7 @@ class BrushManager
     if ( fixedStationBarrierPaint != null ) fixedStationBarrierPaint.setTextSize( TDSetting.mStationSize );
     if ( fixedStationHiddenPaint != null )  fixedStationHiddenPaint.setTextSize( TDSetting.mStationSize );
     if ( duplicateStationPaint != null )    duplicateStationPaint.setTextSize( TDSetting.mStationSize );
+    if ( referencePaint != null )           referencePaint.setTextSize( TDSetting.mStationSize );
   }
 
 }

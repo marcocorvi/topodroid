@@ -89,16 +89,21 @@ class TriShot
     return mAvgLeg.length();
   }
 
-  // horizontal length
+  // horizontal length (good only for DATAMODE_NORMAL)
   float h()
   {
     return mAvgLeg.length() * TDMath.cosd( mAvgLeg.clino() );
   }
 
-  // vertical length - with sign
+  // vertical length - with sign (only for DATAMODE_NORMAL)
+  // depth           for DATAMODE_DIVING
   float v()
   {
-    return mAvgLeg.length() * TDMath.sind( mAvgLeg.clino() );
+    if ( TDInstance.datamode == SurveyInfo.DATAMODE_NORMAL ) {
+      return mAvgLeg.length() * TDMath.sind( mAvgLeg.clino() );
+    } else { // SUrveyInfo.DATAMODE_DIVING
+      return mAvgLeg.clino();
+    }
   }
 
 
@@ -122,6 +127,10 @@ class TriShot
     return ret;
   }
 
+  /** 
+   * @return clino if DATAMODE_NORMAL
+   *         depth if DATAMODE_DIVING
+   */
   float c()
   {
     // float ret = 0.0f;

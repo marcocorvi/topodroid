@@ -919,24 +919,30 @@ public class TopoDroidApp extends Application
     return false;
   }
     
-
-  long setSurveyFromName( String survey, boolean forward )
+  /**
+   * @param name      survey name
+   * @param datamode  survey datamode
+   */
+  long setSurveyFromName( String name, int datamode, boolean forward )
   { 
-    TDInstance.sid = -1;       // no survey by default
-    TDInstance.survey = null;
+    TDInstance.sid      = -1;       // no survey by default
+    TDInstance.survey   = null;
+    TDInstance.datamode = 0;
     StationName.clearCurrentStation();
     // resetManualCalibrations();
     ManualCalibration.reset();
 
-    if ( survey != null && mData != null ) {
-      // Log.v( "DistoX", "set SurveyFromName <" + survey + "> forward " + forward );
+    if ( name != null && mData != null ) {
+      // Log.v( "DistoX", "set SurveyFromName <" + name + "> forward " + forward );
 
-      TDInstance.sid = mData.setSurvey( survey, forward );
+      TDInstance.sid = mData.setSurvey( name, datamode, forward );
       // mFixed.clear();
       TDInstance.survey = null;
       if ( TDInstance.sid > 0 ) {
         DistoXStationName.setInitialStation( mData.getSurveyInitailStation( TDInstance.sid ) );
-        TDInstance.survey = survey;
+        TDInstance.survey = name;
+	TDInstance.datamode = mData.getSurveyDataMode( TDInstance.sid );
+	Log.v("DistoX", "set survey from name: <" + name + "> datamode " + datamode + " " + TDInstance.datamode );
         TDInstance.secondLastShotId = lastShotId();
         // restoreFixed();
         if ( mShotWindow != null) {
@@ -980,6 +986,7 @@ public class TopoDroidApp extends Application
   // {
   //   if ( mData != null ) {
   //     TDInstance.survey = mData.getSurveyFromId( id );
+  //     TDInstance.datamode = mData.getSurveyDataMode( id );
   //     TDInstance.sid = 0;
   //     // mFixed.clear();
   //     if ( TDInstance.survey != null ) {

@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Locale;
 
-// import android.util.Log;
+import android.util.Log;
 
 class DBlockAdapter extends ArrayAdapter< DBlock >
                           implements OnLongClickListener
@@ -38,6 +38,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   ArrayList< DBlock > mSelect;
   boolean show_ids;  //!< whether to show data ids
   private LayoutInflater mLayoutInflater;
+  private boolean diving;
 
   // private ArrayList< View > mViews;
 
@@ -50,6 +51,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     mSelect  = new ArrayList<>();
     mLayoutInflater = (LayoutInflater)ctx.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
     // mViews = new ArrayList<>();
+    diving = (TDInstance.datamode == SurveyInfo.DATAMODE_DIVING);
+    // Log.v("DistoX", "DBlock Adapter, diving " + diving );
   }
 
   int[] searchStation( String name, boolean splays )
@@ -246,11 +249,19 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       tvId.setText( String.format(Locale.US, "%1$d", b.mId ) );
       tvFrom.setText( b.mFrom );
       tvTo.setText( b.mTo );
-      tvLength.setText(  String.format(Locale.US, "%1$6.2f %2$5.1f %3$5.1f %4$s", 
-        b.mLength * TDSetting.mUnitLength,
-        b.mBearing * TDSetting.mUnitAngle,
-        b.mClino * TDSetting.mUnitAngle,
-        b.toNote() ) );
+      if ( diving ) {
+        tvLength.setText(  String.format(Locale.US, "%1$6.2f %2$5.1f %3$6.2f %4$s", 
+          b.mDepth   * TDSetting.mUnitLength,
+          b.mBearing * TDSetting.mUnitAngle,
+          b.mLength  * TDSetting.mUnitLength,
+          b.toNote() ) );
+      } else { // normal
+        tvLength.setText(  String.format(Locale.US, "%1$6.2f %2$5.1f %3$5.1f %4$s", 
+          b.mLength  * TDSetting.mUnitLength,
+          b.mBearing * TDSetting.mUnitAngle,
+          b.mClino   * TDSetting.mUnitAngle,
+          b.toNote() ) );
+      }
 
       OnClickListener toggle = new OnClickListener() {
         public void onClick( View v ) { mParent.recomputeItems( ((TextView)v).getText().toString(), pos ); }

@@ -120,6 +120,7 @@ public class SurveyWindow extends Activity
   private EditText mEditDecl;
   private EditText mEditComment;
   private TextView mTVxsections;
+  private TextView mTVdatamode;
 
   private MyDateSetListener mDateListener;
 
@@ -135,6 +136,7 @@ public class SurveyWindow extends Activity
   private boolean onMenu;
   private String mInitStation = null;
   private int mXSections;
+  private int mDatamode;
 
   private TopoDroidApp mApp;
   private DataHelper   mApp_mData;
@@ -167,6 +169,7 @@ public class SurveyWindow extends Activity
     mTextName.setTextColor( mNameColor );
     mInitStation = info.initStation;
     mXSections   = info.xsections;
+    mDatamode    = info.datamode;
 
     mEditDate.setText( info.date );
     if ( info.comment != null && info.comment.length() > 0 ) {
@@ -182,6 +185,7 @@ public class SurveyWindow extends Activity
     setDeclination( info.declination );
 
     mTVxsections.setText( (mXSections == SurveyInfo.XSECTION_SHARED)? R.string.xsections_shared : R.string.xsections_private );
+    mTVdatamode.setText( (mDatamode == SurveyInfo.DATAMODE_NORMAL)? R.string.datamode_normal : R.string.datamode_diving );
     return true;
   }
 
@@ -217,6 +221,7 @@ public class SurveyWindow extends Activity
     mEditDecl    = (EditText) findViewById(R.id.survey_decl);
     mEditComment = (EditText) findViewById(R.id.survey_comment);
     mTVxsections = (TextView) findViewById(R.id.survey_xsections);
+    mTVdatamode  = (TextView) findViewById(R.id.survey_datamode);
 
     mDateListener = new MyDateSetListener( mEditDate );
     mEditDate.setOnClickListener( this );
@@ -477,7 +482,7 @@ public class SurveyWindow extends Activity
     }
 
     mApp_mData.doDeleteSurvey( TDInstance.sid );
-    mApp.setSurveyFromName( null, false ); // tell app to clear survey name and id
+    mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, false ); // tell app to clear survey name and id
     setResult( RESULT_OK, new Intent() );
     finish();
     // dismiss();

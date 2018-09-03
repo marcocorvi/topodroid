@@ -50,8 +50,8 @@ import java.util.HashMap;
 @SuppressWarnings("SyntaxError")
 class DataHelper extends DataSetObservable
 {
-  static final String DB_VERSION = "36";
-  static final int DATABASE_VERSION = 36;
+  static final String DB_VERSION = "37";
+  static final int DATABASE_VERSION = 37;
   static final int DATABASE_VERSION_MIN = 21; // was 14
 
   private static final String CONFIG_TABLE = "configs";
@@ -219,10 +219,18 @@ class DataHelper extends DataSetObservable
      block.mLength       = (float)( cursor.getDouble(3) );  // length [meters]
      // block.setBearing( (float)( cursor.getDouble(4) ) ); 
      block.mBearing      = (float)( cursor.getDouble(4) );  // bearing [degrees]
-     block.mClino        = (float)( cursor.getDouble(5) );  // clino [degrees]
+     float clino         = (float)( cursor.getDouble(5) );  // clino [degrees], o depth
      block.mAcceleration = (float)( cursor.getDouble(6) );
      block.mMagnetic     = (float)( cursor.getDouble(7) );
      block.mDip          = (float)( cursor.getDouble(8) );
+
+     if ( TDInstance.datamode == SurveyInfo.DATAMODE_NORMAL ) {
+       block.mClino = clino;
+       block.mDepth = 0;
+     } else { // DATAMODE_DIVING
+       block.mClino = 0;
+       block.mDepth = clino;
+     }
      
      block.setExtend( (int)(cursor.getLong(9) ), (float)( cursor.getDouble(16) ) );
      block.resetFlag( cursor.getLong(10) );
@@ -234,11 +242,11 @@ class DataHelper extends DataSetObservable
        block.setBlockType( DBlock.BLOCK_BACK_LEG );
      }
      // Log.v("DistoXX", "A7 fill block " + cursor.getLong(0) + " leg " + leg + " flag " + cursor.getLong(10) );
-     block.mComment = cursor.getString(12);
+     block.mComment  = cursor.getString(12);
      block.mShotType = (int)cursor.getLong(13);
-     block.mTime = cursor.getLong(14);
-     int color = (int)cursor.getLong(15);
-     block.mPaint = ( color == 0 )? null : BrushManager.makePaint( color );
+     block.mTime     = cursor.getLong(14);
+     int color       = (int)cursor.getLong(15);
+     block.mPaint    = ( color == 0 )? null : BrushManager.makePaint( color );
    }
    
 
@@ -274,6 +282,29 @@ class DataHelper extends DataSetObservable
     if ( myDB == null ) return ret;
     Cursor cursor = myDB.query( SURVEY_TABLE,
 			        new String[] { "xsections" },
+                                "id=? ", 
+                                new String[] { Long.toString(id) },
+                                null,  // groupBy
+                                null,  // having
+                                null ); // order by
+    if ( cursor != null ) {
+      if (cursor.moveToFirst()) {
+        ret = (int)cursor.getLong(0);
+      }
+      if ( ! cursor.isClosed() ) cursor.close();
+    }
+    return ret;
+  }
+
+  // survey data-mode
+  //   0 : normal
+  //   1 : diving
+  int getSurveyDataMode( long id )
+  {
+    int ret = 0;
+    if ( myDB == null ) return ret;
+    Cursor cursor = myDB.query( SURVEY_TABLE,
+			        new String[] { "datamode" },
                                 "id=? ", 
                                 new String[] { Long.toString(id) },
                                 null,  // groupBy
@@ -341,117 +372,214 @@ class DataHelper extends DataSetObservable
 
     if ( myDB == null ) return stat;
 
-    Cursor cursor = myDB.query( SHOT_TABLE,
-			        new String[] { "flag", "acceleration", "magnetic", "dip" },
-                                "surveyId=? AND status=0 AND acceleration > 1 ",
-                                new String[] { Long.toString(sid) },
-                                null, null, null );
-    int nrMGD = 0;
-    if (cursor.moveToFirst()) {
-      int nr = cursor.getCount();
-      stat.G = new float[ nr ];
-      stat.M = new float[ nr ];
-      stat.D = new float[ nr ];
-      do {
-        int k = 0;
-        float a = (float)( cursor.getDouble(1) );
-        if ( a > 0.1f ) {
-          float m = (float)( cursor.getDouble(2) );
-          float d = (float)( cursor.getDouble(3) );
-          stat.averageM += m;
-          stat.averageG += a;
-          stat.averageD += d;
-          stat.stddevM  += m * m;
-          stat.stddevG  += a * a;
-          stat.stddevD  += d * d;
-          stat.G[nrMGD]  = a;
-          stat.M[nrMGD]  = m;
-          stat.D[nrMGD]  = d;
-          ++nrMGD;
+    int datamode = getSurveyDataMode( sid );
+
+    Cursor cursor = null;
+    if ( datamode == 0 ) {
+      cursor = myDB.query( SHOT_TABLE,
+          		        new String[] { "flag", "acceleration", "magnetic", "dip" },
+                                  "surveyId=? AND status=0 AND acceleration > 1 ",
+                                  new String[] { Long.toString(sid) },
+                                  null, null, null );
+      int nrMGD = 0;
+      if (cursor.moveToFirst()) {
+        int nr = cursor.getCount();
+        stat.G = new float[ nr ];
+        stat.M = new float[ nr ];
+        stat.D = new float[ nr ];
+        do {
+          int k = 0;
+          float a = (float)( cursor.getDouble(1) );
+          if ( a > 0.1f ) {
+            float m = (float)( cursor.getDouble(2) );
+            float d = (float)( cursor.getDouble(3) );
+            stat.averageM += m;
+            stat.averageG += a;
+            stat.averageD += d;
+            stat.stddevM  += m * m;
+            stat.stddevG  += a * a;
+            stat.stddevD  += d * d;
+            stat.G[nrMGD]  = a;
+            stat.M[nrMGD]  = m;
+            stat.D[nrMGD]  = d;
+            ++nrMGD;
+          }
+        } while ( cursor.moveToNext() );
+        stat.nrMGD = nrMGD;
+        if ( nrMGD > 0 ) {
+          stat.averageM /= nrMGD;
+          stat.averageG /= nrMGD;
+          stat.averageD /= nrMGD;
+          stat.stddevM   = (float)Math.sqrt( stat.stddevM / nrMGD - stat.averageM * stat.averageM );
+          stat.stddevG   = (float)Math.sqrt( stat.stddevG / nrMGD - stat.averageG * stat.averageG );
+          stat.stddevD   = (float)Math.sqrt( stat.stddevD / nrMGD - stat.averageD * stat.averageD );
+          stat.stddevM  *= 100/stat.averageM;
+          stat.stddevG  *= 100/stat.averageG;
         }
-      } while ( cursor.moveToNext() );
-      stat.nrMGD = nrMGD;
-      if ( nrMGD > 0 ) {
-        stat.averageM /= nrMGD;
-        stat.averageG /= nrMGD;
-        stat.averageD /= nrMGD;
-        stat.stddevM   = (float)Math.sqrt( stat.stddevM / nrMGD - stat.averageM * stat.averageM );
-        stat.stddevG   = (float)Math.sqrt( stat.stddevG / nrMGD - stat.averageG * stat.averageG );
-        stat.stddevD   = (float)Math.sqrt( stat.stddevD / nrMGD - stat.averageD * stat.averageD );
-        stat.stddevM  *= 100/stat.averageM;
-        stat.stddevG  *= 100/stat.averageG;
       }
+      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     }
-    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
     // count components
-    cursor = myDB.query( SHOT_TABLE,
-			 new String[] { "flag", "distance", "fStation", "tStation", "clino", "extend" },
-                         "surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ", 
-                         new String[] { Long.toString(sid) },
-                         null, null, null );
-    if (cursor.moveToFirst()) {
-      do {
-	    float len = (float)( cursor.getDouble(1) );
-        switch ( (int)(cursor.getLong(0)) ) {
-          case 0: // NORMAL SHOT
-	        ++ stat.countLeg;
-            stat.lengthLeg += len;
-	        if ( cursor.getLong(5) == 0 ) {
-              stat.extLength += len * Math.abs( Math.sin( cursor.getDouble(4)*TDMath.DEG2RAD ) );
-	        } else {
-              stat.extLength += len;
-	        }
-            stat.planLength += (float)( len * Math.cos( cursor.getDouble(4)*TDMath.DEG2RAD ) );
-            break;
-          case 1: // SURFACE SHOT
-	        ++ stat.countSurface;
-            stat.lengthSurface += len;
-            break;
-          case 2: // DUPLICATE SHOT
-	        ++ stat.countDuplicate;
-            stat.lengthDuplicate += len;
-            break;
-        }
-        String f = cursor.getString(2);
-        String t = cursor.getString(3);
-        ++ ne;
-        if ( map.containsKey( f ) ) {
-          Integer fi = map.get( f );
-          if ( map.containsKey( t ) ) {
-            Integer ti = map.get( t );
-            if ( fi.equals( ti ) ) {
-              ++ nl;
-            } else { // merge 
-              for ( String k : map.keySet() ) {
-                if ( map.get( k ).equals( ti ) ) {
-                  map.put(k, fi );
-                }
+    if ( datamode == 0 ) {
+      cursor = myDB.query( SHOT_TABLE,
+          		 new String[] { "flag", "distance", "fStation", "tStation", "clino", "extend" },
+                           "surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ", 
+                           new String[] { Long.toString(sid) },
+                           null, null, null );
+      if (cursor.moveToFirst()) {
+        do {
+              float len = (float)( cursor.getDouble(1) );
+          switch ( (int)(cursor.getLong(0)) ) {
+            case 0: // NORMAL SHOT
+              ++ stat.countLeg;
+              stat.lengthLeg += len;
+              if ( cursor.getLong(5) == 0 ) {
+                stat.extLength += len * Math.abs( Math.sin( cursor.getDouble(4)*TDMath.DEG2RAD ) );
+              } else {
+                stat.extLength += len;
               }
-              -- nc;
+              stat.planLength += (float)( len * Math.cos( cursor.getDouble(4)*TDMath.DEG2RAD ) );
+              break;
+            case 1: // SURFACE SHOT
+                  ++ stat.countSurface;
+              stat.lengthSurface += len;
+              break;
+            case 2: // DUPLICATE SHOT
+                  ++ stat.countDuplicate;
+              stat.lengthDuplicate += len;
+              break;
+          }
+          String f = cursor.getString(2);
+          String t = cursor.getString(3);
+          ++ ne;
+          if ( map.containsKey( f ) ) {
+            Integer fi = map.get( f );
+            if ( map.containsKey( t ) ) {
+              Integer ti = map.get( t );
+              if ( fi.equals( ti ) ) {
+                ++ nl;
+              } else { // merge 
+                for ( String k : map.keySet() ) {
+                  if ( map.get( k ).equals( ti ) ) {
+                    map.put(k, fi );
+                  }
+                }
+                -- nc;
+              }
+            } else {
+              map.put( t, fi );
+              ++ nv;
             }
           } else {
-            map.put( t, fi );
-            ++ nv;
+            if ( map.containsKey( t ) ) {
+              Integer ti = map.get( t );
+              map.put( f, ti );
+              ++ nv;
+            } else {
+              ++ n0;
+              Integer fi = Integer.valueOf( n0 );
+              map.put( t, fi );
+              map.put( f, fi );
+              nv += 2;
+              ++ nc;
+            }
           }
-        } else {
-          if ( map.containsKey( t ) ) {
-            Integer ti = map.get( t );
-            map.put( f, ti );
-            ++ nv;
-          } else {
-            ++ n0;
-            Integer fi = Integer.valueOf( n0 );
-            map.put( t, fi );
-            map.put( f, fi );
-            nv += 2;
-            ++ nc;
-          }
-        }
 
-      } while ( cursor.moveToNext() );
+        } while ( cursor.moveToNext() );
+      }
+      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    } else {
+      // select s1.flag, s1.distance, s1.fStation, s1.tStation, s1.clino-s2.clino, "extent" 
+      //        from shots as s1 inner join shots as s2 on s1.tStation = s2.fStation
+      //        where s1.surveyId=? and s2.surveyId=? and s1.tStation != ""
+      //
+      HashMap< String, Float > depths = new HashMap< String, Float >();
+      cursor = myDB.query( SHOT_TABLE,
+          		 new String[] { "fStation", "clino" },
+                           "surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ", 
+                           new String[] { Long.toString(sid) },
+                           null, null, null );
+      if (cursor.moveToFirst()) {
+        do {
+	  String station = cursor.getString(0);
+	  float  depth   = (float)(cursor.getDouble(1));
+	  if ( ! depths.containsKey( station ) ) depths.put( station, new Float(depth) );
+        } while ( cursor.moveToNext() );
+      }
+      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+
+      cursor = myDB.query( SHOT_TABLE,
+          		 new String[] { "flag", "distance", "fStation", "tStation", "clino", "extend" },
+                           "surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ", 
+                           new String[] { Long.toString(sid) },
+                           null, null, null );
+      if (cursor.moveToFirst()) {
+        do {
+          String f = cursor.getString(2);
+          String t = cursor.getString(3);
+          float len = (float)( cursor.getDouble(1) );
+          switch ( (int)(cursor.getLong(0)) ) {
+            case 0: // NORMAL SHOT
+              ++ stat.countLeg;
+              stat.lengthLeg += len;
+	      if ( depths.containsKey( t ) ) {
+	        float dep = (float)( cursor.getDouble(4) ) - depths.get( t ).floatValue();
+                if ( cursor.getLong(5) == 0 ) {
+                  stat.extLength += (float)( Math.abs( dep ) );
+                } else {
+                  stat.extLength += len;
+                }
+		if ( len > dep ) stat.planLength += (float)( Math.sqrt( len*len - dep*dep ) );
+	      }
+              break;
+            case 1: // SURFACE SHOT
+                  ++ stat.countSurface;
+              stat.lengthSurface += len;
+              break;
+            case 2: // DUPLICATE SHOT
+                  ++ stat.countDuplicate;
+              stat.lengthDuplicate += len;
+              break;
+          }
+          ++ ne;
+          if ( map.containsKey( f ) ) {
+            Integer fi = map.get( f );
+            if ( map.containsKey( t ) ) {
+              Integer ti = map.get( t );
+              if ( fi.equals( ti ) ) {
+                ++ nl;
+              } else { // merge 
+                for ( String k : map.keySet() ) {
+                  if ( map.get( k ).equals( ti ) ) {
+                    map.put(k, fi );
+                  }
+                }
+                -- nc;
+              }
+            } else {
+              map.put( t, fi );
+              ++ nv;
+            }
+          } else {
+            if ( map.containsKey( t ) ) {
+              Integer ti = map.get( t );
+              map.put( f, ti );
+              ++ nv;
+            } else {
+              ++ n0;
+              Integer fi = Integer.valueOf( n0 );
+              map.put( t, fi );
+              map.put( f, fi );
+              nv += 2;
+              ++ nc;
+            }
+          }
+
+        } while ( cursor.moveToNext() );
+      }
+      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     }
-    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
     stat.countStation = map.size();
     stat.countLoop = nl;
@@ -574,7 +702,7 @@ class DataHelper extends DataSetObservable
   }
 
   private ContentValues makeSurveyInfoCcontentValues( String date, String team, double decl, String comment,
-                                String init_station, int xsections )
+                                String init_station, int xsections ) // datamode cannot be updated
   {
     ContentValues cv = new ContentValues();
     cv.put( "day", date );
@@ -587,7 +715,7 @@ class DataHelper extends DataSetObservable
   }
 
   boolean updateSurveyInfo( long id, String date, String team, double decl, String comment,
-                                String init_station, int xsections, boolean forward )
+                            String init_station, int xsections, boolean forward )
   {
     boolean ret = false;
     ContentValues cv = makeSurveyInfoCcontentValues( date, team, decl, comment, init_station, xsections );
@@ -2682,7 +2810,7 @@ class DataHelper extends DataSetObservable
      SurveyInfo info = null;
      if ( myDB == null ) return null;
      Cursor cursor = myDB.query( SURVEY_TABLE,
-                                new String[] { "name", "day", "team", "declination", "comment", "init_station", "xsections" }, // columns
+                                new String[] { "name", "day", "team", "declination", "comment", "init_station", "xsections", "datamode" }, // columns
                                 WHERE_ID, new String[] { Long.toString(sid) },
                                 null, null, "name" );
      if (cursor.moveToFirst()) {
@@ -2695,6 +2823,7 @@ class DataHelper extends DataSetObservable
        info.comment = cursor.getString( 4 );
        info.initStation = cursor.getString( 5 );
        info.xsections = (int)cursor.getLong( 6 );
+       info.datamode  = (int)cursor.getLong( 7 );
      }
      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return info;
@@ -2865,7 +2994,7 @@ class DataHelper extends DataSetObservable
      return id;
    }
 
-   private long setName( String table, String name ) 
+   private long setName( String table, String name, int datamode )
    {
      long id = -1;
      if ( myDB == null ) { return 0; }
@@ -2886,12 +3015,13 @@ class DataHelper extends DataSetObservable
          id = 1;
        }
        if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-       // INSERT INTO table VALUES( id, name, "", "" )
+       // Log.v("DistoX", "INSERT INTO " + table + " VALUES: " + id + " " + name + " datamode " + datamode );
        ContentValues cv = new ContentValues();
-       cv.put( "id",      id );
-       cv.put( "name",    name );
-       cv.put( "day",     "" );
-       cv.put( "comment", "" );
+       cv.put( "id",       id );
+       cv.put( "name",     name );
+       cv.put( "day",      "" );
+       cv.put( "comment",  "" );
+       cv.put( "datamode", datamode );
        doInsert( table, cv, "set name" );
      }
      return id;
@@ -3542,11 +3672,11 @@ class DataHelper extends DataSetObservable
     return ret;
   }
 
-   long setSurvey( String name, boolean forward )
+   long setSurvey( String name, int datamode, boolean forward )
    {
      myNextId = 0;
      if ( myDB == null ) return 0L;
-     long sid = setName( SURVEY_TABLE, name );
+     long sid = setName( SURVEY_TABLE, name, datamode );
      Cursor cursor = myDB.query( SHOT_TABLE, new String[] { "max(id)" },
                           "surveyId=?", new String[] { Long.toString(sid) },
                           null, null, null );
@@ -3557,7 +3687,7 @@ class DataHelper extends DataSetObservable
 
      // TDLog.Log( TDLog.LOG_DB, "setSurvey " + name + " forward " + forward + " listeners " + mListeners.size() );
      if ( forward && mListeners != null ) { // synchronized( mListeners )
-       mListeners.onSetSurvey( sid, name );
+       mListeners.onSetSurvey( sid, name, datamode );
      }
      return sid;
    }
@@ -3835,13 +3965,13 @@ class DataHelper extends DataSetObservable
        FileWriter fw = new FileWriter( filename );
        PrintWriter pw = new PrintWriter( fw );
        Cursor cursor = myDB.query( SURVEY_TABLE, 
-                            new String[] { "name", "day", "team", "declination", "comment", "init_station", "xsections" },
+                            new String[] { "name", "day", "team", "declination", "comment", "init_station", "xsections", "datamode" },
                             "id=?", new String[] { Long.toString( sid ) },
                             null, null, null );
        if (cursor.moveToFirst()) {
          do {
            pw.format(Locale.US,
-                     "INSERT into %s values( %d, \"%s\", \"%s\", \"%s\", %.4f, \"%s\", \"%s\", %d );\n",
+                     "INSERT into %s values( %d, \"%s\", \"%s\", \"%s\", %.4f, \"%s\", \"%s\", %d, %d );\n",
                      SURVEY_TABLE,
                      sid,
                      cursor.getString(0),
@@ -3850,7 +3980,8 @@ class DataHelper extends DataSetObservable
                      cursor.getDouble(3),     // declination
                      cursor.getString(4),     // comment
                      cursor.getString(5),     // init_station
-                     (int)cursor.getLong(6)   // xstation
+                     (int)cursor.getLong(6),  // xstation
+                     (int)cursor.getLong(7)   // datamode
            );
          } while (cursor.moveToNext());
        }
@@ -4106,8 +4237,10 @@ class DataHelper extends DataSetObservable
          String init_station = "0"; if ( db_version > 22) init_station = scanline0.stringValue( );
          int xsections = SurveyInfo.XSECTION_SHARED; // old at-sationx-sections were "shared"
          if ( db_version > 29) xsections = (int)( scanline0.longValue( ) );
+	 int datamode  = SurveyInfo.DATAMODE_NORMAL;
+         if ( db_version > 36) datamode = (int)( scanline0.longValue( ) );
 
-         sid = setSurvey( name, false );
+         sid = setSurvey( name, datamode, false );
 
          try {
            myDB.beginTransaction();
@@ -4455,7 +4588,8 @@ class DataHelper extends DataSetObservable
              +   " comment TEXT, "
              +   " declination REAL, "
              +   " init_station TEXT, "
-             +   " xsections INTEGER "
+             +   " xsections INTEGER, "
+	     +   " datamode INTEGER "
              +   ")"
            );
 
@@ -4701,6 +4835,8 @@ class DataHelper extends DataSetObservable
 	   case 35:
              db.execSQL( "ALTER TABLE shots ADD COLUMN stretch REAL default 0" );
 	   case 36:
+             db.execSQL( "ALTER TABLE surveys ADD COLUMN datamode INTEGER default 0" );
+	   case 37:
              /* current version */
            default:
              break;

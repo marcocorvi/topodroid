@@ -36,7 +36,7 @@ import java.nio.channels.ClosedByInterruptException;
 // import android.bluetooth.BluetoothServerSocket;
 // import android.bluetooth.BluetoothSocket;
 
-// import android.util.Log;
+import android.util.Log;
 
 // import android.widget.Toast;
 
@@ -66,6 +66,8 @@ class DistoXProtocol
   static final int DISTOX_PACKET_VECTOR = 4;
   static final int DISTOX_PACKET_REPLY  = 5;
 
+  int  mError; // readToRead error
+  static final int DISTOX_ERR_OK           =  0; // OK: no error
   static final int DISTOX_ERR_HEADTAIL     = -1;
   static final int DISTOX_ERR_HEADTAIL_IO  = -2;
   static final int DISTOX_ERR_HEADTAIL_EOF = -3;
@@ -370,6 +372,7 @@ class DistoXProtocol
     } catch (IOException e ) {
       // this is OK: the DistoX has been turned off
       TDLog.Debug( "Proto read packet IOException " + e.toString() + " OK distox turned off" );
+      // mError = DISTOX_ERR_OFF;
       return DISTOX_ERR_OFF;
     }
     return DISTOX_PACKET_NONE;
@@ -393,12 +396,14 @@ class DistoXProtocol
   int readToRead( byte[] command, boolean a3 ) // number of data-packet to read
   {
     int ret = 0;
+    mError = DISTOX_ERR_OK;
     try {
       mOut.write( command, 0, 3 );
       mIn.readFully( mBuffer, 0, 8 );
-      if ( mBuffer[0] != (byte)( 0x38 ) ) { return DISTOX_ERR_HEADTAIL; }
-      if ( mBuffer[1] != command[1] ) { return DISTOX_ERR_HEADTAIL; }
-      if ( mBuffer[2] != command[2] ) { return DISTOX_ERR_HEADTAIL; }
+      if ( ( mBuffer[0] != (byte)( 0x38 ) ) || ( mBuffer[1] != command[1] ) || ( mBuffer[2] != command[2] ) ) {
+	mError = DISTOX_ERR_HEADTAIL;
+	return DISTOX_ERR_HEADTAIL;
+      }
       int head = MemoryOctet.toInt( mBuffer[4], mBuffer[3] );
       int tail = MemoryOctet.toInt( mBuffer[6], mBuffer[5] );
       if ( a3 ) {
@@ -409,6 +414,7 @@ class DistoXProtocol
         int hp = 2 * head; // head packet index
         ret = ( hp >= tail )? (hp - tail) : (hp + (DeviceX310Details.MAX_INDEX_X310 - tail) );
         // ret can be odd
+	Log.v("DistoX-PROTO", "read to-read: H " + head + " T " + tail + " ret " + ret );
       }
 
       // DEBUG
@@ -421,9 +427,11 @@ class DistoXProtocol
       return ret;
     } catch ( EOFException e ) {
       TDLog.Error( "Proto readToRead Head-Tail read() failed" );
+      mError = DISTOX_ERR_HEADTAIL_EOF;
       return DISTOX_ERR_HEADTAIL_EOF;
     } catch (IOException e ) {
       TDLog.Error( "Proto readToRead Head-Tail read() failed" );
+      mError = DISTOX_ERR_HEADTAIL_IO;
       return DISTOX_ERR_HEADTAIL_IO;
     }
   }

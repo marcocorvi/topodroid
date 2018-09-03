@@ -70,7 +70,11 @@ class ShotDeleteDialog extends MyDialog
     mTVstations = (TextView) findViewById( R.id.shot_shot_stations );
     mTVdata = (TextView) findViewById( R.id.shot_shot_data );
     mTVstations.setText( mBlk.Name() );
-    mTVdata.setText( mBlk.dataString( mContext.getResources().getString(R.string.shot_data) ) );
+    if ( TDInstance.datamode == SurveyInfo.DATAMODE_NORMAL ) {
+      mTVdata.setText( mBlk.dataStringNormal( mContext.getResources().getString(R.string.shot_data) ) );
+    } else { // TDInstance.datamode == SurveyInfo.DATAMODE_NORMAL
+      mTVdata.setText( mBlk.dataStringDiving( mContext.getResources().getString(R.string.shot_data) ) );
+    }
 
     mButtonDelete.setOnClickListener( this );
     // mButtonCancel.setOnClickListener( this );

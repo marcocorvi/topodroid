@@ -39,14 +39,13 @@ class DataListenerSet
 
 
   // only the sync-layer need be notified of this
-  void onSetSurvey( long id, String name )
-  { for ( DataListener l : mListeners ) l.onSetSurvey( id, name ); }
+  void onSetSurvey( long id, String name, int datamode )
+  { for ( DataListener l : mListeners ) l.onSetSurvey( id, name, datamode ); }
 
   void onUpdateSurveyName( long id, String name )
   { for ( DataListener l : mListeners ) l.onUpdateSurveyName( id, name ); }
 
-  void onUpdateSurveyInfo( long id, String date, String team, double decl,
-                                  String comment, String station, int xsections )
+  void onUpdateSurveyInfo( long id, String date, String team, double decl, String comment, String station, int xsections )
   { for ( DataListener l : mListeners ) l.onUpdateSurveyInfo( id, date, team, decl, comment, station, xsections ); }
 
   void onUpdateSurveyDayAndComment( long id, String date, String comment )

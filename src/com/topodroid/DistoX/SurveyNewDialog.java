@@ -53,6 +53,7 @@ class SurveyNewDialog extends MyDialog
   private EditText mEditStation;
   private EditText mEditComment;
   private CheckBox mCBxsections;
+  private CheckBox mCBdatamode;
 
   private MyDateSetListener mDateListener;
 
@@ -91,6 +92,8 @@ class SurveyNewDialog extends MyDialog
     mEditComment = (EditText) findViewById(R.id.survey_comment);
     mCBxsections = (CheckBox) findViewById(R.id.survey_xsections);
     mCBxsections.setChecked( TDSetting.mSharedXSections );
+    mCBdatamode  = (CheckBox) findViewById(R.id.survey_datamode);
+    if ( ! TDLevel.overExpert ) mCBdatamode.setVisibility( View.GONE );
 
     mDateListener = new MyDateSetListener( mEditDate );
     mEditDate.setOnClickListener( this );
@@ -207,8 +210,10 @@ class SurveyNewDialog extends MyDialog
 
     int xsections = mCBxsections.isChecked() ? SurveyInfo.XSECTION_PRIVATE
                                              : SurveyInfo.XSECTION_SHARED;
+    int datamode  = mCBdatamode.isChecked() ? SurveyInfo.DATAMODE_DIVING
+                                            : SurveyInfo.DATAMODE_NORMAL;
 
-    long sid = mApp.setSurveyFromName( name, true ); // save survey name: tell app to set it into the database
+    long sid = mApp.setSurveyFromName( name, datamode, true ); // save survey name: tell app to set it into the database
     if ( sid <= 0 ) {
       TDLog.Error( "Failed to set survey name in DB");
       return false;

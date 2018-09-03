@@ -649,7 +649,7 @@ public class ShotWindow extends Activity
           TDToast.make( R.string.no_cave3d );
         }
       }
-    } else if ( TDLevel.overNormal && p++ == pos ) { // DEVICE
+    } else if ( TDLevel.overNormal && TDInstance.datamode == SurveyInfo.DATAMODE_NORMAL && p++ == pos ) { // DEVICE
       if ( mApp.mBTAdapter.isEnabled() ) {
         mActivity.startActivity( new Intent( Intent.ACTION_VIEW ).setClass( mActivity, DeviceActivity.class ) );
       }
@@ -943,6 +943,11 @@ public class ShotWindow extends Activity
     mBMleft          = MyButton.getButtonBackground( mApp, res, R.drawable.iz_left );
     mBMright         = MyButton.getButtonBackground( mApp, res, R.drawable.iz_right );
     mBMbluetooth_no  = MyButton.getButtonBackground( mApp, res, R.drawable.iz_bt_no );
+
+    if ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING ) {
+      mButton1[ BTN_DOWNLOAD ].setVisibility( View.GONE );
+      mButton1[ BTN_BLUETOOTH ].setVisibility( View.GONE );
+    }
 
     if ( TDLevel.overBasic ) {
       mButton1[ BTN_DOWNLOAD ].setOnLongClickListener( this );
@@ -1907,7 +1912,7 @@ public class ShotWindow extends Activity
     if ( TDLevel.overNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_photo  
     if ( TDLevel.overNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_sensor
     if ( TDLevel.overBasic  ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_3d
-    if ( TDLevel.overNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_distox
+    if ( TDLevel.overNormal && TDInstance.datamode == SurveyInfo.DATAMODE_NORMAL ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_distox
     mMenuAdapter.add( res.getString( menus[k++] ) );  // menu_options
     mMenuAdapter.add( res.getString( menus[k++] ) );  // menu_help
     mMenu.setAdapter( mMenuAdapter );

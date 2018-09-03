@@ -310,7 +310,7 @@ class ConnectionHandler extends Handler
      switch ( key ) {
        case DataListener.SURVEY_SET:
          if ( ! data[0].equals( TDInstance.survey ) ) { // N.B. data[0] not null
-           mSid = mApp.setSurveyFromName( data[0], false );
+           mSid = mApp.setSurveyFromName( data[0], Integer.parseInt(data[1]), false ); // -1 datamode not set
          } else {
            mSid = TDInstance.sid;
          }
@@ -432,10 +432,9 @@ class ConnectionHandler extends Handler
   }
 
   // only the sync-layer need be notified of this
-  public void onSetSurvey( long id, String name ) 
+  public void onSetSurvey( long id, String name, int datamode ) 
   {
-    String data = name + "|";
-    enqueue( DataListener.SURVEY_SET, data );
+    enqueue( DataListener.SURVEY_SET, String.format(Locale.US, "%s|%d|", name, datamode ) );
   }
 
   public void onUpdateSurveyName( long id, String name )

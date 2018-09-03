@@ -29,6 +29,7 @@ class TDInstance
   static long secondLastShotId = 0L;
 
   static boolean xsections = false; // current value of mSharedSections
+  static int     datamode = 0;      // current value of survey datamode
   static Device  device = null;
 
   static int distoType() { return (device == null)? 0 : device.mType; }

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 import java.util.Locale;
+import java.util.HashMap;
 
 import android.util.Log;
 
@@ -695,11 +696,43 @@ class DistoXNum
     return sh;
   }
 
+  private NumShot makeShotFromTmpDiving( NumStation sf, NumStation st, TriShot ts, int direction, float anomaly, float mDecl, float tdepth )
+  {
+    if ( ts.reversed != 1 ) {
+      TDLog.Error( "making shot from reversed temp " + sf.name + " " + st.name );
+    }
+    DBlock blk = ts.getFirstBlock();
+    // Log.v("DistoX", "make shot " + sf.name + "-" + st.name + " blocks " + ts.blocks.size() + " E " + blk.getExtend() + " S " + blk.getStretch() );
+    // NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), 1, anomaly, mDecl ); // FIXME DIRECTION
+    NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), direction, anomaly, mDecl );
+    ArrayList<DBlock> blks = ts.getBlocks();
+    for ( int k = 1; k < blks.size(); ++k ) {
+      sh.addBlock( blks.get(k) );
+    }
+    return sh;
+  }
+
   /** survey data reduction 
    * return true if all shots are attached
    */
   private boolean computeNum( List<DBlock> data, String start, String format )
   {
+    if ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING ) {
+      HashMap< String, Float > depths = new HashMap< String, Float >();
+      for ( DBlock blk : data ) { // prepare stations depths
+	if ( blk.mFrom != null && blk.mFrom.length() > 0 ) {
+          // Log.v("DistoX", blk.mFrom + " depth " + blk.mDepth );
+          if ( ! depths.containsKey( blk.mFrom ) ) depths.put( blk.mFrom, new Float( blk.mDepth ) );
+        }
+      }
+      for ( DBlock blk : data ) { // set dblock clino
+	if ( blk.mTo != null && blk.mTo.length() > 0 && depths.containsKey( blk.mTo ) ) {
+          float tdepth = depths.get( blk.mTo ).floatValue();
+	  blk.makeClick( tdepth );
+        }
+      }
+    }
+
     resetBBox();
     resetStats();
     mStartStation = null;
@@ -812,7 +845,6 @@ class DistoXNum
         }
       }
       // Log.v("DistoXL", "worked shot " + from + "-" + to + " siblings " + nrSiblings );
-      
       if ( ts0.sibling != null ) { // (2) check sibling shots agreement
         float dmax = 0.0f;
         float cc = TDMath.cosd( blk0.mClino );
@@ -841,7 +873,7 @@ class DistoXNum
         if ( ! StationPolicy.doMagAnomaly() ) { // (3) remove siblings
           ts1 = ts0.sibling;
           while ( ts1 != null ) {
-	    -- nrSiblings;
+            -- nrSiblings;
             // Log.v( "DistoXL", "removing sibling " + ts1.from + "-" + ts1.to + " : " + nrSiblings );
             TriShot ts2 = ts1.sibling;
             tmpshots.remove( ts1 );
@@ -1131,8 +1163,7 @@ class DistoXNum
     return (mShots.size() + nrSiblings == tmpshots.size() );
   }
 
-  
-
+ 
   // =============================================================================
   // loop closure-error compensation
   class NumStep

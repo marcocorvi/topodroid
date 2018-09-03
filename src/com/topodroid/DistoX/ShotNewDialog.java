@@ -90,6 +90,7 @@ class ShotNewDialog extends MyDialog
 
   private TimerTask mTimer;
   private MyKeyboard mKeyboard = null;
+  private boolean diving;
 
   ShotNewDialog( Context context, TopoDroidApp app, ILister lister, DBlock last_blk, long at )
   {
@@ -102,6 +103,7 @@ class ShotNewDialog extends MyDialog
     mTimer   = null;
     mJpegData = null;
     cameraCheck = FeatureChecker.checkCamera( mApp );
+    diving = (TDInstance.datamode == SurveyInfo.DATAMODE_DIVING);
   }
 
 
@@ -149,12 +151,22 @@ class ShotNewDialog extends MyDialog
       MyKeyboard.registerEditText( mKeyboard, mETfrom, flag);
       MyKeyboard.registerEditText( mKeyboard, mETto,   flag);
       
-      MyKeyboard.registerEditText( mKeyboard, mETdistance,     MyKeyboard.FLAG_POINT );
+      if ( diving ) {
+        MyKeyboard.registerEditText( mKeyboard, mETclino,        MyKeyboard.FLAG_POINT ); // diving length
+        MyKeyboard.registerEditText( mKeyboard, mETdistance,     MyKeyboard.FLAG_POINT ); // diving depth 
+        mETbackclino.setVisibility( View.GONE );
+        mETbackdistance.setVisibility( View.GONE );
+        mETbackbearing.setVisibility( View.GONE );
+	mETdistance.setHint( R.string.input_depth );
+	mETclino.setHint( R.string.input_length );
+      } else {
+        MyKeyboard.registerEditText( mKeyboard, mETdistance,     MyKeyboard.FLAG_POINT );
+        MyKeyboard.registerEditText( mKeyboard, mETclino,        MyKeyboard.FLAG_POINT_SIGN );
+        MyKeyboard.registerEditText( mKeyboard, mETbackclino,    MyKeyboard.FLAG_POINT_SIGN );
+        MyKeyboard.registerEditText( mKeyboard, mETbackdistance, MyKeyboard.FLAG_POINT );
+        MyKeyboard.registerEditText( mKeyboard, mETbackbearing,  MyKeyboard.FLAG_POINT );
+      }
       MyKeyboard.registerEditText( mKeyboard, mETbearing,      MyKeyboard.FLAG_POINT );
-      MyKeyboard.registerEditText( mKeyboard, mETclino,        MyKeyboard.FLAG_POINT_SIGN );
-      MyKeyboard.registerEditText( mKeyboard, mETbackdistance, MyKeyboard.FLAG_POINT );
-      MyKeyboard.registerEditText( mKeyboard, mETbackbearing,  MyKeyboard.FLAG_POINT );
-      MyKeyboard.registerEditText( mKeyboard, mETbackclino,    MyKeyboard.FLAG_POINT_SIGN );
       MyKeyboard.registerEditText( mKeyboard, mETleft,         MyKeyboard.FLAG_POINT );
       MyKeyboard.registerEditText( mKeyboard, mETright,        MyKeyboard.FLAG_POINT );
       MyKeyboard.registerEditText( mKeyboard, mETup,           MyKeyboard.FLAG_POINT );
@@ -165,12 +177,22 @@ class ShotNewDialog extends MyDialog
         mETfrom.setInputType( TDConst.NUMBER_DECIMAL );
         mETto.setInputType( TDConst.NUMBER_DECIMAL );
       }
-      mETdistance.setInputType( TDConst.NUMBER_DECIMAL );
+      if ( diving ) {
+        mETclino.setInputType( TDConst.NUMBER_DECIMAL );    // diving length
+        mETdistance.setInputType( TDConst.NUMBER_DECIMAL ); // diving depth
+        mETbackclino.setVisibility( View.GONE );
+        mETbackdistance.setVisibility( View.GONE );
+        mETbackbearing.setVisibility( View.GONE );
+	mETdistance.setHint( R.string.input_depth );
+	mETclino.setHint( R.string.input_length );
+      } else {
+        mETdistance.setInputType( TDConst.NUMBER_DECIMAL );
+        mETclino.setInputType( TDConst.NUMBER_DECIMAL_SIGNED );
+        mETbackdistance.setInputType( TDConst.NUMBER_DECIMAL );
+        mETbackbearing.setInputType( TDConst.NUMBER_DECIMAL );
+        mETbackclino.setInputType( TDConst.NUMBER_DECIMAL_SIGNED );
+      }
       mETbearing.setInputType( TDConst.NUMBER_DECIMAL );
-      mETclino.setInputType( TDConst.NUMBER_DECIMAL_SIGNED );
-      mETbackdistance.setInputType( TDConst.NUMBER_DECIMAL );
-      mETbackbearing.setInputType( TDConst.NUMBER_DECIMAL );
-      mETbackclino.setInputType( TDConst.NUMBER_DECIMAL_SIGNED );
       mETleft.setInputType( TDConst.NUMBER_DECIMAL );
       mETright.setInputType( TDConst.NUMBER_DECIMAL );
       mETup.setInputType( TDConst.NUMBER_DECIMAL );
@@ -277,9 +299,11 @@ class ShotNewDialog extends MyDialog
     mETdistance.setText("");
     mETbearing.setText("");
     mETclino.setText("");
-    mETbackdistance.setText("");
-    mETbackbearing.setText("");
-    mETbackclino.setText("");
+    if ( ! diving ) {
+      mETbackdistance.setText("");
+      mETbackbearing.setText("");
+      mETbackclino.setText("");
+    }
     mETleft.setText("");
     mETright.setText("");
     mETup.setText("");
@@ -344,22 +368,24 @@ class ShotNewDialog extends MyDialog
         return;
       }
 
-      String distance = mETdistance.getText().toString().trim();
+      String distance     = mETdistance.getText().toString().trim();
       String backdistance = mETbackdistance.getText().toString().trim();
       if ( distance.length() == 0 && backdistance.length() == 0 ) { 
-        mETdistance.setError( mContext.getResources().getString( R.string.error_length_required ) );
+        mETdistance.setError( mContext.getResources().getString( (diving? R.string.error_depth_required : R.string.error_length_required) ) );
         return;
       }
+
       String bearing = mETbearing.getText().toString().trim();
       String backbearing = mETbackbearing.getText().toString().trim();
       if ( bearing.length() == 0 && backbearing.length() == 0 ) {
         mETbearing.setError( mContext.getResources().getString( R.string.error_azimuth_required ) );
         return;
       }
+
       String clino = mETclino.getText().toString().trim();
       String backclino = mETbackclino.getText().toString().trim();
       if ( clino.length() == 0 && backclino.length() == 0 ) {
-        mETclino.setError( mContext.getResources().getString( R.string.error_clino_required ) );
+        mETclino.setError( mContext.getResources().getString( (diving? R.string.error_length_required : R.string.error_clino_required) ) );
         return;
       }
 
@@ -397,7 +423,7 @@ class ShotNewDialog extends MyDialog
             backdistance = distance;
           }
           if ( bearing.length() > 0 && clino.length() > 0 ) {
-            if ( backbearing.length() > 0 && backclino.length() > 0 ) {
+            if ( (! diving) && backbearing.length() > 0 && backclino.length() > 0 ) {
               blk = mApp.insertManualShot( mAt, shot_to, shot_from,
                              Float.parseFloat(backdistance.replace(',','.') ),
                              Float.parseFloat(backbearing.replace(',','.') ),
@@ -405,18 +431,31 @@ class ShotNewDialog extends MyDialog
                              back_extend, DBlock.FLAG_SURVEY,
                              null, null, null, null, null );
             }
-            blk = mApp.insertManualShot( mAt, shot_from, shot_to,
-                             Float.parseFloat( distance.replace(',','.') ),
-                             Float.parseFloat( bearing.replace(',','.') ),
-                             Float.parseFloat( clino.replace(',','.') ),
-                             shot_extend, DBlock.FLAG_SURVEY,
-                             mETleft.getText().toString().replace(',','.') ,
-                             mETright.getText().toString().replace(',','.') ,
-                             mETup.getText().toString().replace(',','.') ,
-                             mETdown.getText().toString().replace(',','.') ,
-                             splay_station );
+	    if ( diving ) {
+              blk = mApp.insertManualShot( mAt, shot_from, shot_to,
+                               Float.parseFloat( clino.replace(',','.') ),    // diving length
+                               Float.parseFloat( bearing.replace(',','.') ),
+                               Float.parseFloat( distance.replace(',','.') ), // diving depth
+                               shot_extend, DBlock.FLAG_SURVEY,
+                               mETleft.getText().toString().replace(',','.') ,
+                               mETright.getText().toString().replace(',','.') ,
+                               mETup.getText().toString().replace(',','.') ,
+                               mETdown.getText().toString().replace(',','.') ,
+                               splay_station );
+	    } else {
+              blk = mApp.insertManualShot( mAt, shot_from, shot_to,
+                               Float.parseFloat( distance.replace(',','.') ),
+                               Float.parseFloat( bearing.replace(',','.') ),
+                               Float.parseFloat( clino.replace(',','.') ),
+                               shot_extend, DBlock.FLAG_SURVEY,
+                               mETleft.getText().toString().replace(',','.') ,
+                               mETright.getText().toString().replace(',','.') ,
+                               mETup.getText().toString().replace(',','.') ,
+                               mETdown.getText().toString().replace(',','.') ,
+                               splay_station );
+	    }
           } else {
-            if ( backbearing.length() > 0 && backclino.length() > 0 ) {
+            if ( (! diving) && backbearing.length() > 0 && backclino.length() > 0 ) {
               blk = mApp.insertManualShot( mAt, shot_to, shot_from,
                              Float.parseFloat( backdistance.replace(',','.') ),
                              Float.parseFloat( backbearing.replace(',','.') ),
@@ -431,13 +470,22 @@ class ShotNewDialog extends MyDialog
           }
         } else { // SPLAY SHOT
           if ( bearing.length() > 0 && clino.length() > 0 ) {
-            blk = mApp.insertManualShot( mAt, shot_from, shot_to,
-                             Float.parseFloat(distance.replace(',','.') ),
-                             Float.parseFloat(bearing.replace(',','.') ),
-                             Float.parseFloat(clino.replace(',','.') ),
-                             shot_extend, DBlock.FLAG_SURVEY,
-                             null, null, null, null, null );
-          } else if ( backbearing.length() > 0 && backclino.length() > 0 ) {
+            if ( diving ) {
+              blk = mApp.insertManualShot( mAt, shot_from, shot_to,
+                               Float.parseFloat(clino.replace(',','.') ),    // diving length
+                               Float.parseFloat(bearing.replace(',','.') ),
+                               Float.parseFloat(distance.replace(',','.') ), // diving depth
+                               shot_extend, DBlock.FLAG_SURVEY,
+                               null, null, null, null, null );
+            } else {
+              blk = mApp.insertManualShot( mAt, shot_from, shot_to,
+                               Float.parseFloat(distance.replace(',','.') ),
+                               Float.parseFloat(bearing.replace(',','.') ),
+                               Float.parseFloat(clino.replace(',','.') ),
+                               shot_extend, DBlock.FLAG_SURVEY,
+                               null, null, null, null, null );
+	    }
+          } else if ( (! diving) && backbearing.length() > 0 && backclino.length() > 0 ) {
             blk = mApp.insertManualShot( mAt, shot_to, shot_from,
                              Float.parseFloat(backdistance.replace(',','.') ),
                              Float.parseFloat(backbearing.replace(',','.') ),

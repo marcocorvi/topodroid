@@ -75,8 +75,9 @@ class CalibCheckDialog extends MyDialog
     list.setDividerHeight( 2 );
     
     // setTitle( R.string.title_calib_check );
+    // NOTE no calib ceck for DATAMODE_DIVING
     for ( DBlock blk : mShots ) {
-      array_adapter.add( blk.toShortString(true) );
+      array_adapter.add( blk.toShortStringNormal(true) );
     }
   }
 

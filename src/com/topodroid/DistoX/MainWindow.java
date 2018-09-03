@@ -232,7 +232,7 @@ public class MainWindow extends Activity
           }
         }
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // NEW SURVEY/CALIB
-        mApp.setSurveyFromName( null, true ); // new-survey dialog: tell app to clear survey name and id
+        mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true ); // new-survey dialog: tell app to clear survey name and id
         (new SurveyNewDialog( mActivity, this, -1, -1 )).show(); 
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // IMPORT
         (new ImportDialog( mActivity, this, mApp )).show();
@@ -260,7 +260,7 @@ public class MainWindow extends Activity
   //
   private void startSurvey( String value, int mustOpen ) // , long old_sid, long old_id )
   {
-    mApp.setSurveyFromName( value, false ); // open survey activity: tell app to update survey name+id, no forward
+    mApp.setSurveyFromName( value, -1, false ); // open survey activity: tell app to update survey name+id, no forward
     Intent surveyIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, SurveyWindow.class );
     surveyIntent.putExtra( TDTag.TOPODROID_SURVEY, mustOpen );
     // surveyIntent.putExtra( TDTag.TOPODROID_OLDSID, old_sid );
@@ -270,7 +270,7 @@ public class MainWindow extends Activity
 
   void startSplitSurvey( long old_sid, long old_id )
   {
-    mApp.setSurveyFromName( null, false ); // FIXME JOIN-SURVEY
+    mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, false ); // FIXME JOIN-SURVEY
     (new SurveyNewDialog( mActivity, this, old_sid, old_id )).show(); // WITH SPLIT
   }
 
@@ -288,7 +288,7 @@ public class MainWindow extends Activity
 
   void doOpenSurvey( String name )
   {
-    mApp.setSurveyFromName( name, false ); // open survey: tell app to update survey name+id, no forward
+    mApp.setSurveyFromName( name, -1, false ); // open survey: tell app to update survey name+id, no forward
     Intent openIntent = new Intent( this, ShotWindow.class );
     startActivity( openIntent );
   }
@@ -306,7 +306,7 @@ public class MainWindow extends Activity
       return;
     }
 
-    mApp.setSurveyFromName( item.toString(), true ); 
+    mApp.setSurveyFromName( item.toString(), -1, true ); 
     Intent openIntent = new Intent( this, ShotWindow.class );
     startActivity( openIntent );
   }

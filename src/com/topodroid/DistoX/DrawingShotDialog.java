@@ -198,8 +198,11 @@ class DrawingShotDialog extends MyDialog
     //   mRBignore.setClickable( false );
     //   mRBignore.setTextColor( TDColor.MID_GRAY );
     // }
-
-    mLabel.setText( mBlock.dataString( mContext.getResources().getString(R.string.shot_data) ) );
+    if ( TDInstance.datamode == SurveyInfo.DATAMODE_NORMAL ) {
+      mLabel.setText( mBlock.dataStringNormal( mContext.getResources().getString(R.string.shot_data) ) );
+    } else { // SurveyInfo.DATAMODE_DIVING
+      mLabel.setText( mBlock.dataStringDiving( mContext.getResources().getString(R.string.shot_data) ) );
+    }
 
     mRBleft.setOnClickListener( this );
     mRBvert.setOnClickListener( this );

@@ -32,7 +32,7 @@ class ImportCaveSniperTask extends ImportTask
       if ( app_data.hasSurveyName( parser.mName ) ) {
         return -1L;
       }
-      sid = mApp.setSurveyFromName( parser.mName, false ); // IMPORT DAT no forward
+      sid = mApp.setSurveyFromName( parser.mName, SurveyInfo.DATAMODE_NORMAL, false ); // IMPORT DAT no forward
       app_data.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle, false );
       // app_data.updateSurveyDeclination( sid, parser.mDeclination, false );
       app_data.updateSurveyInitStation( sid, parser.initStation(), false );

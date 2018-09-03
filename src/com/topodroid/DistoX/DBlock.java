@@ -62,6 +62,7 @@ class DBlock
   float mAcceleration;
   float mMagnetic;
   float mDip;
+  float mDepth;     // depth at from station
   String mComment;
   private int  mExtend;
   private long mFlag;     
@@ -211,6 +212,7 @@ class DBlock
     mLength = d;
     mBearing = b;
     mClino = c;
+    mDepth = 0.0f;
     mRoll = r;
     mAcceleration = 0.0f;
     mMagnetic = 0.0f;
@@ -241,6 +243,7 @@ class DBlock
     mLength = 0.0f;
     mBearing = 0.0f;
     mClino = 0.0f;
+    mDepth = 0.0f;
     mRoll = 0.0f;
     mAcceleration = 0.0f;
     mMagnetic = 0.0f;
@@ -253,6 +256,12 @@ class DBlock
     mWithPhoto = false;
     mMultiBad = false;
     mStretch  = 0.0f;
+  }
+
+  void makeClick( float tdepth )
+  {
+    float v = mDepth - tdepth;
+    mClino = TDMath.asind( v / mLength );
   }
 
   void setId( long shot_id, long survey_id )
@@ -348,13 +357,26 @@ class DBlock
     return (v1.minus(v2)).Length();
   }
 
+  private float relativeDistanceDiving( DBlock b )
+  {
+    float cb, sb, len;
+    len = mLength;
+    cb = TDMath.cosd( mBearing ); 
+    sb = TDMath.sind( mBearing ); 
+    Vector v1 = new Vector( len * sb, len * cb, mDepth );
+    len = b.mLength;
+    cb = TDMath.cosd( b.mBearing ); 
+    sb = TDMath.sind( b.mBearing ); 
+    Vector v2 = new Vector( len * sb, len * cb, b.mDepth );
+    return (v1.minus(v2)).Length();
+  }
+
   boolean isRelativeDistance( DBlock b )
   {
     if ( b == null ) return false;
-    float dist = relativeDistance( b );
+    float dist = ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING )? relativeDistanceDiving( b ) : relativeDistance( b );
     return ( dist/mLength + dist/b.mLength ) < TDSetting.mCloseDistance;
   }
-
   
   private void formatFlagPhoto( PrintWriter pw )
   {
@@ -382,7 +404,7 @@ class DBlock
     pw.format(" %s", mComment);
   }
 
-  String toString( boolean show_id )
+  String toStringNormal( boolean show_id )
   {
     float ul = TDSetting.mUnitLength;
     float ua = TDSetting.mUnitAngle;
@@ -401,7 +423,26 @@ class DBlock
     return sw.getBuffer().toString();
   }
 
-  String toShortString( boolean show_id )
+  String toStringDiving( boolean show_id )
+  {
+    float ul = TDSetting.mUnitLength;
+    float ua = TDSetting.mUnitAngle;
+
+    // TDLog.Log( TDLog.LOG_DATA,
+    //   "DBlock::toString From " + mFrom + " To " + mTo + " data " + mLength + " " + mBearing + " " + mClino );
+    StringWriter sw = new StringWriter();
+    PrintWriter pw  = new PrintWriter(sw);
+    if ( show_id ) pw.format("%d ", mId );
+    pw.format(Locale.US, "<%s-%s> %.2f %.1f %.2f [%c",
+      mFrom, mTo,
+      mLength*ul, mBearing*ua, mDepth*ul, mExtendTag[ mExtend + 1 ] ); // FIXME mStretch
+    formatFlagPhoto( pw );
+    formatComment( pw );
+    // TDLog.Log( TDLog.LOG_DATA, sw.getBuffer().toString() );
+    return sw.getBuffer().toString();
+  }
+
+  String toShortStringNormal( boolean show_id )
   {
     float ul = TDSetting.mUnitLength;
     float ua = TDSetting.mUnitAngle;
@@ -409,6 +450,17 @@ class DBlock
     PrintWriter pw  = new PrintWriter(sw);
     if ( show_id ) pw.format("%d ", mId );
     pw.format(Locale.US, "<%s-%s> %.2f %.1f %.1f", mFrom, mTo, mLength*ul, mBearing*ua, mClino*ua );
+    return sw.getBuffer().toString();
+  }
+
+  String toShortStringDiving( boolean show_id )
+  {
+    float ul = TDSetting.mUnitLength;
+    float ua = TDSetting.mUnitAngle;
+    StringWriter sw = new StringWriter();
+    PrintWriter pw  = new PrintWriter(sw);
+    if ( show_id ) pw.format("%d ", mId );
+    pw.format(Locale.US, "<%s-%s> %.2f %.1f %.2f", mFrom, mTo, mLength*ul, mBearing*ua, mDepth*ul );
     return sw.getBuffer().toString();
   }
 
@@ -422,11 +474,18 @@ class DBlock
     return sw.getBuffer().toString();
   }
 
-  String dataString( String fmt )
+  String dataStringNormal( String fmt )
   {
     float ul = TDSetting.mUnitLength;
     float ua = TDSetting.mUnitAngle;
     return String.format(Locale.US, fmt, mLength*ul, mBearing*ua, mClino*ua );
+  }
+
+  String dataStringDiving( String fmt )
+  {
+    float ul = TDSetting.mUnitLength;
+    float ua = TDSetting.mUnitAngle;
+    return String.format(Locale.US, fmt, mLength*ul, mBearing*ua, mDepth*ul );
   }
 
   String distanceString()
@@ -442,6 +501,11 @@ class DBlock
   String clinoString()
   {
     return String.format(Locale.US, "%.1f", mClino * TDSetting.mUnitAngle );
+  }
+
+  String depthString()
+  {
+    return String.format(Locale.US, "%.1f", mDepth * TDSetting.mUnitLength );
   }
 
   // public String extraString( DistoXAccuracy accu )
