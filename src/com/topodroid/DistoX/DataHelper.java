@@ -253,17 +253,29 @@ class DataHelper extends DataSetObservable
    // ----------------------------------------------------------------------
    // SURVEY DATA
 
-  String getSurveyInitailStation( long id )
+  // private static String qInitStation  = "select init_station from surveys where id=?";
+  // private static String qXSections    = "select xsections from surveys where id=?";
+  private static String qSurveysField = "select ? from surveys where id=?";
+  private static String qSurveysStat1 = "select flag, acceleration, magnetic, dip from shots where surveyId=? AND status=0 AND acceleration > 1 ";
+  private static String qSurveysStat2 =
+    "select flag, distance, fStation, tStation, clino, extend from shots where surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ";
+  private static String qSurveysStat3 = "select fStation, clino from shots where surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ";
+  private static String qSurveysStat4 =
+    "select flag, distance, fStation, tStation, clino, extend from shots where surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ";
+  private static String qSurveysStat5 = " select count() from shots where surveyId=? AND status=0 AND flag=0 AND fStation!=\"\" AND tStation=\"\" ";
+
+  String getSurveyInitStation( long sid )
   {
-    String ret = "";
+    String ret = TDSetting.mInitStation; 
     if ( myDB == null ) return ret;
-    Cursor cursor = myDB.query( SURVEY_TABLE,
-			        new String[] { "init_station" },
-                                "id=? ", 
-                                new String[] { Long.toString(id) },
-                                null,  // groupBy
-                                null,  // having
-                                null ); // order by
+    // Cursor cursor = myDB.query( SURVEY_TABLE,
+    //     		        new String[] { "init_station" },
+    //                             "id=? ", 
+    //                             new String[] { Long.toString(sid) },
+    //                             null,  // groupBy
+    //                             null,  // having
+    //                             null ); // order by
+    Cursor cursor = myDB.rawQuery( qSurveysField, new String[] { "init_station", Long.toString(sid) } );
     if ( cursor != null ) {
       if (cursor.moveToFirst()) {
         ret = cursor.getString(0);
@@ -276,17 +288,18 @@ class DataHelper extends DataSetObservable
   // at-station xsextions type
   //   0 : shared
   //   1 : private
-  int getSurveyXSections( long id )
+  int getSurveyXSections( long sid )
   {
     int ret = 0;
     if ( myDB == null ) return ret;
-    Cursor cursor = myDB.query( SURVEY_TABLE,
-			        new String[] { "xsections" },
-                                "id=? ", 
-                                new String[] { Long.toString(id) },
-                                null,  // groupBy
-                                null,  // having
-                                null ); // order by
+    // Cursor cursor = myDB.query( SURVEY_TABLE,
+    //     		        new String[] { "xsections" },
+    //                             "id=? ", 
+    //                             new String[] { Long.toString(sid) },
+    //                             null,  // groupBy
+    //                             null,  // having
+    //                             null ); // order by
+    Cursor cursor = myDB.rawQuery( qSurveysField, new String[] { "xstations", Long.toString(sid) } );
     if ( cursor != null ) {
       if (cursor.moveToFirst()) {
         ret = (int)cursor.getLong(0);
@@ -299,17 +312,18 @@ class DataHelper extends DataSetObservable
   // survey data-mode
   //   0 : normal
   //   1 : diving
-  int getSurveyDataMode( long id )
+  int getSurveyDataMode( long sid )
   {
     int ret = 0;
     if ( myDB == null ) return ret;
-    Cursor cursor = myDB.query( SURVEY_TABLE,
-			        new String[] { "datamode" },
-                                "id=? ", 
-                                new String[] { Long.toString(id) },
-                                null,  // groupBy
-                                null,  // having
-                                null ); // order by
+    // Cursor cursor = myDB.query( SURVEY_TABLE,
+    //     		        new String[] { "datamode" },
+    //                             "id=? ", 
+    //                             new String[] { Long.toString(sid) },
+    //                             null,  // groupBy
+    //                             null,  // having
+    //                             null ); // order by
+    Cursor cursor = myDB.rawQuery( qSurveysField, new String[] { "datamode", Long.toString(sid) } );
     if ( cursor != null ) {
       if (cursor.moveToFirst()) {
         ret = (int)cursor.getLong(0);
@@ -323,13 +337,14 @@ class DataHelper extends DataSetObservable
   {
     float ret = 0;
     if ( myDB == null ) return 0;
-    Cursor cursor = myDB.query( SURVEY_TABLE,
-			        new String[] { "declination" },
-                                "id=?", 
-                                new String[] { Long.toString(sid) },
-                                null,  // groupBy
-                                null,  // having
-                                null ); // order by
+    // Cursor cursor = myDB.query( SURVEY_TABLE,
+    //     		        new String[] { "declination" },
+    //                             "id=?", 
+    //                             new String[] { Long.toString(sid) },
+    //                             null,  // groupBy
+    //                             null,  // having
+    //                             null ); // order by
+    Cursor cursor = myDB.rawQuery( qSurveysField, new String[] { "declination", Long.toString(sid) } );
     if (cursor.moveToFirst()) {
       ret = (float)(cursor.getDouble( 0 ));
     }
@@ -373,14 +388,17 @@ class DataHelper extends DataSetObservable
     if ( myDB == null ) return stat;
 
     int datamode = getSurveyDataMode( sid );
+    String[] args = new String[1];
+    args[0] = Long.toString( sid );
 
     Cursor cursor = null;
     if ( datamode == 0 ) {
-      cursor = myDB.query( SHOT_TABLE,
-          		        new String[] { "flag", "acceleration", "magnetic", "dip" },
-                                  "surveyId=? AND status=0 AND acceleration > 1 ",
-                                  new String[] { Long.toString(sid) },
-                                  null, null, null );
+      // cursor = myDB.query( SHOT_TABLE,
+      //     		   new String[] { "flag", "acceleration", "magnetic", "dip" },
+      //                      "surveyId=? AND status=0 AND acceleration > 1 ",
+      //                      new String[] { Long.toString(sid) },
+      //                      null, null, null );
+      cursor = myDB.rawQuery( qSurveysStat1, args );
       int nrMGD = 0;
       if (cursor.moveToFirst()) {
         int nr = cursor.getCount();
@@ -422,11 +440,12 @@ class DataHelper extends DataSetObservable
 
     // count components
     if ( datamode == 0 ) {
-      cursor = myDB.query( SHOT_TABLE,
-          		 new String[] { "flag", "distance", "fStation", "tStation", "clino", "extend" },
-                           "surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ", 
-                           new String[] { Long.toString(sid) },
-                           null, null, null );
+      // cursor = myDB.query( SHOT_TABLE,
+      //                      new String[] { "flag", "distance", "fStation", "tStation", "clino", "extend" },
+      //                      "surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ", 
+      //                      new String[] { Long.toString(sid) },
+      //                      null, null, null );
+      cursor = myDB.rawQuery( qSurveysStat2, args );
       if (cursor.moveToFirst()) {
         do {
               float len = (float)( cursor.getDouble(1) );
@@ -495,11 +514,12 @@ class DataHelper extends DataSetObservable
       //        where s1.surveyId=? and s2.surveyId=? and s1.tStation != ""
       //
       HashMap< String, Float > depths = new HashMap< String, Float >();
-      cursor = myDB.query( SHOT_TABLE,
-          		 new String[] { "fStation", "clino" },
-                           "surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ", 
-                           new String[] { Long.toString(sid) },
-                           null, null, null );
+      // cursor = myDB.query( SHOT_TABLE,
+      //                      new String[] { "fStation", "clino" },
+      //                      "surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ", 
+      //                      new String[] { Long.toString(sid) },
+      //                      null, null, null );
+      cursor = myDB.rawQuery( qSurveysStat3, args );
       if (cursor.moveToFirst()) {
         do {
 	  String station = cursor.getString(0);
@@ -510,11 +530,12 @@ class DataHelper extends DataSetObservable
       }
       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
-      cursor = myDB.query( SHOT_TABLE,
-          		 new String[] { "flag", "distance", "fStation", "tStation", "clino", "extend" },
-                           "surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ", 
-                           new String[] { Long.toString(sid) },
-                           null, null, null );
+      // cursor = myDB.query( SHOT_TABLE,
+      //                      new String[] { "flag", "distance", "fStation", "tStation", "clino", "extend" },
+      //                      "surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ", 
+      //                      new String[] { Long.toString(sid) },
+      //                      null, null, null );
+      cursor = myDB.rawQuery( qSurveysStat4, args );
       if (cursor.moveToFirst()) {
         do {
           String f = cursor.getString(2);
@@ -587,13 +608,14 @@ class DataHelper extends DataSetObservable
     stat.countComponent = nc;
     // TDLog.Log( TDLog.LOG_DB, "Get Survey Stats NV " + nv + " NE " + ne + " NL " + nl + " NC " + nc);
 
-    cursor = myDB.query( SHOT_TABLE,
-                         new String[] { "count()" },
-                         "surveyId=? AND status=0 AND flag=0 AND fStation!=\"\" AND tStation=\"\" ",
-                         new String[] { Long.toString(sid) },
-                         null,  // groupBy
-                         null,  // having
-                         null ); // order by
+    // cursor = myDB.query( SHOT_TABLE,
+    //                      new String[] { "count()" },
+    //                      "surveyId=? AND status=0 AND flag=0 AND fStation!=\"\" AND tStation=\"\" ",
+    //                      new String[] { Long.toString(sid) },
+    //                      null,  // groupBy
+    //                      null,  // having
+    //                      null ); // order by
+    cursor = myDB.rawQuery( qSurveysStat4, args );
     if (cursor.moveToFirst()) {
       stat.countSplay = (int)( cursor.getLong(0) );
     }
@@ -1794,57 +1816,33 @@ class DataHelper extends DataSetObservable
   // ----------------------------------------------------------------------
   // SELECT STATEMENTS
 
+  private static String qShotStations = "select fStation, tStation from shots where surveyId=? AND id=? ";
+  private static String qSensors1   = "select id, shotId, title, date, comment, type, value from sensors where surveyId=? AND status=? ";
+  private static String qSensors2   = "select id, shotId, title, date, comment, type, value from sensors where surveyId=? AND shotId=? ";
+  private static String qShotAudio  = "select id, date from audios where surveId=? AND shotId=? ";
+  private static String qAudios     = "select id, shotId, date from audios where surveId=? ";
+  private static String qPhotos     = "select id, shotId, title, date, comment from photos where surveyId=? AND status=? ";
+  private static String qShotPhoto  = "select id, shotId, title, date, comment from photos where surveyId=? AND shotId=? ";
+  private static String qFirstStation = "select fStation from shots where surveyId=? AND fStation!=\"\" AND tStation!=\"\" limit 1 ";
+  private static String qHasStation   = "select id, fStation, tStation from shots where surveyId=? and ( fStation=? or tStation=? ) order by id ";
+  private static String qHasPlot      = "select id, name from plots where surveyId=? AND name=? order by id ";
+  private static String qMaxPlotIndex = "select id, name from plots where surveyId=? AND type=? order by id ";
+  private static String qHasShot      = "select fStation, tStation from shots where surveyId=? aND ( ( fStation=? AND tStation=? ) OR ( fStation=? AND tStation=? ) )"; 
+  private static String qNextStation  = "select tStation from shots where surveyId=? AND fStation=? ";
+  private static String qLastStation  = "select fStation, tStation from shots where surveyId=? order by id DESC ";
+
   List< SensorInfo > selectAllSensors( long sid, long status )
   {
     List< SensorInfo > list = new ArrayList<>();
     if ( myDB == null ) return list;
-    Cursor cursor = myDB.query( SENSOR_TABLE,
-       		         new String[] { "id", "shotId", "title", "date", "comment", "type", "value" }, // columns
-                                WHERE_SID_STATUS,
-                                new String[] { Long.toString(sid), Long.toString(status) },
-                                null,  // groupBy
-                                null,  // having
-                                null ); // order by
-    if (cursor.moveToFirst()) {
-      do {
-        list.add( new SensorInfo( sid, 
-                                 cursor.getLong(0), // id
-                                 cursor.getLong(1), // shot-id
-                                 cursor.getString(2), // title
-                                 null,                // shot name
-                                 cursor.getString(3), // date
-                                 cursor.getString(4), // comment
-                                 cursor.getString(5), // shot_type
-                                 cursor.getString(6) ) ); // value
-      } while (cursor.moveToNext());
-    }
-    // TDLog.Log( TDLog.LOG_DB, "select All Sensors list size " + list.size() );
-    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-    for ( SensorInfo si : list ) { // set shot-names to the sensor infos
-      cursor = myDB.query( SHOT_TABLE, 
-                           new String[] { "fStation", "tStation" },
-                           WHERE_SID_ID,
-                           new String[] { Long.toString(sid), Long.toString(si.shotid) },
-                           null, null, null );
-      if (cursor.moveToFirst()) {
-        si.mShotName = cursor.getString(0) + "-" + cursor.getString(1);
-      }
-      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-    }
-    return list;
-  }
-
-  private List< SensorInfo > selectSensorsAtShot( long sid, long shotid )
-  {
-    List< SensorInfo > list = new ArrayList<>();
-    if ( myDB == null ) return list;
-    Cursor cursor = myDB.query( SENSOR_TABLE,
-       		         new String[] { "id", "shotId", "title", "date", "comment", "type", "value" }, // columns
-                                "surveyId=? AND shotId=?", 
-                                new String[] { Long.toString(sid), Long.toString(shotid) },
-                                null,  // groupBy
-                                null,  // having
-                                null ); // order by
+    // Cursor cursor = myDB.query( SENSOR_TABLE,
+    //    		         new String[] { "id", "shotId", "title", "date", "comment", "type", "value" }, // columns
+    //                             WHERE_SID_STATUS,
+    //                             new String[] { Long.toString(sid), Long.toString(status) },
+    //                             null,  // groupBy
+    //                             null,  // having
+    //                             null ); // order by
+    Cursor cursor = myDB.rawQuery( qSensors1, new String[] { Long.toString(sid), Long.toString(status) } );
     if (cursor.moveToFirst()) {
       do {
         list.add( new SensorInfo( sid, 
@@ -1864,9 +1862,49 @@ class DataHelper extends DataSetObservable
     where[0] = Long.toString(sid);
     for ( SensorInfo si : list ) { // set shot-names to the sensor infos
       where[1] = Long.toString( si.shotid );
-      cursor = myDB.query( SHOT_TABLE, 
-                           new String[] { "fStation", "tStation" },
-                           WHERE_SID_ID, where, null, null, null );
+      // cursor = myDB.query( SHOT_TABLE, new String[] { "fStation", "tStation" }, WHERE_SID_ID, where, null, null, null );
+      cursor = myDB.rawQuery( qShotStations, where );
+      if (cursor.moveToFirst()) {
+        si.mShotName = cursor.getString(0) + "-" + cursor.getString(1);
+      }
+      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    }
+    return list;
+  }
+
+  private List< SensorInfo > selectSensorsAtShot( long sid, long shotid )
+  {
+    List< SensorInfo > list = new ArrayList<>();
+    if ( myDB == null ) return list;
+    // Cursor cursor = myDB.query( SENSOR_TABLE,
+    //                             new String[] { "id", "shotId", "title", "date", "comment", "type", "value" }, // columns
+    //                             "surveyId=? AND shotId=?", 
+    //                             new String[] { Long.toString(sid), Long.toString(shotid) },
+    //                             null,  // groupBy
+    //                             null,  // having
+    //                             null ); // order by
+    Cursor cursor = myDB.rawQuery( qSensors1, new String[] { Long.toString(sid), Long.toString(shotid) } );
+    if (cursor.moveToFirst()) {
+      do {
+        list.add( new SensorInfo( sid, 
+                                 cursor.getLong(0), // id
+                                 cursor.getLong(1), // shot-id
+                                 cursor.getString(2), // title
+                                 null,                // shot name
+                                 cursor.getString(3), // date
+                                 cursor.getString(4), // comment
+                                 cursor.getString(5), // shot_type
+                                 cursor.getString(6) ) ); // value
+      } while (cursor.moveToNext());
+    }
+    // TDLog.Log( TDLog.LOG_DB, "select All Sensors list size " + list.size() );
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    String[] where = new String[2];
+    where[0] = Long.toString(sid);
+    for ( SensorInfo si : list ) { // set shot-names to the sensor infos
+      where[1] = Long.toString( si.shotid );
+      // cursor = myDB.query( SHOT_TABLE, new String[] { "fStation", "tStation" }, WHERE_SID_ID, where, null, null, null );
+      cursor = myDB.rawQuery( qShotStations, where );
       if (cursor.moveToFirst()) {
         si.mShotName = cursor.getString(0) + "-" + cursor.getString(1);
       }
@@ -1880,10 +1918,11 @@ class DataHelper extends DataSetObservable
   {
     if ( myDB == null ) return null;
     AudioInfo ret = null;
-    Cursor cursor = myDB.query( AUDIO_TABLE,
-       		         new String[] { "id", "date" }, // columns
-                                WHERE_SID_SHOTID, new String[] { Long.toString(sid), Long.toString(bid) },
-                                null, null,  null ); 
+    // Cursor cursor = myDB.query( AUDIO_TABLE,
+    //                             new String[] { "id", "date" }, // columns
+    //                             WHERE_SID_SHOTID, new String[] { Long.toString(sid), Long.toString(bid) },
+    //                             null, null,  null ); 
+    Cursor cursor = myDB.rawQuery( qShotAudio, new String[] { Long.toString(sid), Long.toString(bid) } );
     if (cursor.moveToFirst()) { // update
       ret = new AudioInfo( sid, 
                            cursor.getLong(0), // id
@@ -1947,10 +1986,11 @@ class DataHelper extends DataSetObservable
   {
     List< AudioInfo > list = new ArrayList<>();
     if ( myDB == null ) return list;
-    Cursor cursor = myDB.query( AUDIO_TABLE,
-       		                new String[] { "id", "shotId", "date" }, // columns
-                                WHERE_SID, new String[] { Long.toString(sid) },
-                                null, null,  null ); 
+    // Cursor cursor = myDB.query( AUDIO_TABLE,
+    //                             new String[] { "id", "shotId", "date" }, // columns
+    //                             WHERE_SID, new String[] { Long.toString(sid) },
+    //                             null, null,  null ); 
+    Cursor cursor = myDB.rawQuery( qAudios, new String[] { Long.toString(sid) } );
     if (cursor.moveToFirst()) {
       do {
         list.add( new AudioInfo( sid, 
@@ -1978,10 +2018,11 @@ class DataHelper extends DataSetObservable
   {
     List< PhotoInfo > list = new ArrayList<>();
     if ( myDB == null ) return list;
-    Cursor cursor = myDB.query( PHOTO_TABLE,
-       		         new String[] { "id", "shotId", "title", "date", "comment" }, // columns
-                                WHERE_SID_STATUS, new String[] { Long.toString(sid), Long.toString(status) },
-                                null, null,  null ); 
+    // Cursor cursor = myDB.query( PHOTO_TABLE,
+    //                             new String[] { "id", "shotId", "title", "date", "comment" }, // columns
+    //                             WHERE_SID_STATUS, new String[] { Long.toString(sid), Long.toString(status) },
+    //                             null, null,  null ); 
+    Cursor cursor = myDB.rawQuery( qPhotos, new String[] { Long.toString(sid), Long.toString(status) } );
     if (cursor.moveToFirst()) {
       do {
         list.add( new PhotoInfo( sid, 
@@ -2000,9 +2041,8 @@ class DataHelper extends DataSetObservable
     where[0] = Long.toString(sid);
     for ( PhotoInfo pi : list ) { // fill in the shot-name of the photos
       where[1] = Long.toString( pi.shotid );
-      cursor = myDB.query( SHOT_TABLE, 
-                           new String[] { "fStation", "tStation" },
-                           WHERE_SID_ID, where, null, null, null );
+      // cursor = myDB.query( SHOT_TABLE, new String[] { "fStation", "tStation" }, WHERE_SID_ID, where, null, null, null );
+      cursor = myDB.rawQuery( qShotStations, where );
       if (cursor.moveToFirst()) {
         pi.mShotName = cursor.getString(0) + "-" + cursor.getString(1);
       }
@@ -2015,10 +2055,11 @@ class DataHelper extends DataSetObservable
   {
     List< PhotoInfo > list = new ArrayList<>();
     if ( myDB == null ) return list;
-    Cursor cursor = myDB.query( PHOTO_TABLE,
-                                new String[] { "id", "shotId", "title", "date", "comment" }, // columns
-                                WHERE_SID_SHOTID, new String[] { Long.toString(sid), Long.toString(shotid) },
-                                null, null, null ); 
+    // Cursor cursor = myDB.query( PHOTO_TABLE,
+    //                             new String[] { "id", "shotId", "title", "date", "comment" }, // columns
+    //                             WHERE_SID_SHOTID, new String[] { Long.toString(sid), Long.toString(shotid) },
+    //                             null, null, null ); 
+    Cursor cursor = myDB.rawQuery( qShotPhoto, new String[] { Long.toString(sid), Long.toString(shotid) } );
     if (cursor.moveToFirst()) {
       do {
         list.add( new PhotoInfo( sid, 
@@ -2037,8 +2078,8 @@ class DataHelper extends DataSetObservable
     where[0] = Long.toString(sid);
     for ( PhotoInfo pi : list ) { // fill in the shot-name of the photos
       where[1] = Long.toString( pi.shotid );
-      cursor = myDB.query( SHOT_TABLE, new String[] { "fStation", "tStation" },
-                           WHERE_SID_ID, where, null, null, null );
+      // cursor = myDB.query( SHOT_TABLE, new String[] { "fStation", "tStation" }, WHERE_SID_ID, where, null, null, null );
+      cursor = myDB.rawQuery( qShotStations, where );
       if (cursor.moveToFirst()) {
         pi.mShotName = cursor.getString(0) + "-" + cursor.getString(1);
       }
@@ -2118,9 +2159,10 @@ class DataHelper extends DataSetObservable
    {
      boolean ret = false;
      if ( myDB != null ) {
-       Cursor cursor = myDB.query( PLOT_TABLE, new String[]{ "id", "name" },
-           WHERE_SID_NAME, new String[]{ Long.toString( sid ), name },
-           null, null, "id" );
+       // Cursor cursor = myDB.query( PLOT_TABLE, new String[]{ "id", "name" },
+       //     WHERE_SID_NAME, new String[]{ Long.toString( sid ), name },
+       //     null, null, "id" );
+       Cursor cursor = myDB.rawQuery( qHasPlot, new String[]{ Long.toString( sid ), name } );
        if (cursor.moveToFirst()) ret = true;
        if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      }
@@ -2131,11 +2173,12 @@ class DataHelper extends DataSetObservable
    {
      boolean ret = false;
      if ( myDB != null ) {
-       Cursor cursor = myDB.query( SHOT_TABLE,
-           new String[]{ "id", "fStation", "tStation" },
-           "surveyId=? and ( fStation=? or tStation=? )",
-           new String[]{ Long.toString( sid ), start, start },
-           null, null, "id" );
+       // Cursor cursor = myDB.query( SHOT_TABLE,
+       //     new String[]{ "id", "fStation", "tStation" },
+       //     "surveyId=? and ( fStation=? or tStation=? )",
+       //     new String[]{ Long.toString( sid ), start, start },
+       //     null, null, "id" );
+       Cursor cursor = myDB.rawQuery( qHasStation, new String[]{ Long.toString( sid ), start, start } );
        if (cursor.moveToFirst()) ret = true;
        if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      }
@@ -2146,11 +2189,12 @@ class DataHelper extends DataSetObservable
    {
      String ret = null;
      if ( myDB != null ) {
-       Cursor cursor = myDB.query( SHOT_TABLE,
-           new String[]{ "fStation" },
-           "surveyId=? and ( fStation!=\"\" and tStation!=\"\" )",
-           new String[]{ Long.toString( sid ) },
-           null, null, null ); // count = 1
+       // Cursor cursor = myDB.query( SHOT_TABLE,
+       //     new String[]{ "fStation" },
+       //     "surveyId=? and ( fStation!=\"\" and tStation!=\"\" )",
+       //     new String[]{ Long.toString( sid ) },
+       //     null, null, null ); // limit 1
+       Cursor cursor = myDB.rawQuery( qFirstStation, new String[]{ Long.toString( sid ) } );
        if (cursor.moveToFirst()) ret = cursor.getString( 0 );
        if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      }
@@ -2162,13 +2206,14 @@ class DataHelper extends DataSetObservable
    {
      int ret = 0;
      if ( myDB == null ) return ret;
-     Cursor cursor = myDB.query(PLOT_TABLE, new String[] { "id", "name", "type" },
-                                WHERE_SID, new String[] { Long.toString(sid) }, 
-                                null, null, "id" );
+     // Cursor cursor = myDB.query(PLOT_TABLE, new String[] { "id", "name", "type" },
+     //                            WHERE_SID, new String[] { Long.toString(sid) }, 
+     //                            null, null, "id" );
+     Cursor cursor = myDB.rawQuery( qMaxPlotIndex, new String[] { Long.toString(sid), "1" } ); // type == 1 (PLOT_PLAN)
      if (cursor.moveToFirst()) {
        do {
-         int type = cursor.getInt(2);
-         if ( type == PlotInfo.PLOT_PLAN ) { // FIXME || type == PlotInfo.PLOT_EXTENDED || type == PlotInfo.PLOT_PROFILE
+         // int type = cursor.getInt(2);     
+         // if ( type == PlotInfo.PLOT_PLAN ) { // FIXME || type == PlotInfo.PLOT_EXTENDED || type == PlotInfo.PLOT_PROFILE
            int r = 0;
            byte[] name = cursor.getString(1).getBytes();
            for ( int k=0; k<name.length; ++k ) {
@@ -2179,7 +2224,7 @@ class DataHelper extends DataSetObservable
              }
            }
            if ( r > ret ) ret = r;
-         }
+         // }
        } while (cursor.moveToNext());
      }
      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
@@ -2294,13 +2339,14 @@ class DataHelper extends DataSetObservable
    boolean hasShot( long sid, String fStation, String tStation )
    {
      if ( myDB == null ) return false;
-     Cursor cursor = myDB.query( SHOT_TABLE,
-       new String[] { "fStation", "tStation" }, // columns
-       "surveyId=? and ( ( fStation=? and tStation=? ) or ( fStation=? and tStation=? ) )", 
-       new String[] { Long.toString(sid), fStation, tStation, tStation, fStation },
-       null,   // groupBy
-       null,   // having
-       null ); // order by
+     // Cursor cursor = myDB.query( SHOT_TABLE,
+     //   new String[] { "fStation", "tStation" }, // columns
+     //   "surveyId=? and ( ( fStation=? and tStation=? ) or ( fStation=? and tStation=? ) )", 
+     //   new String[] { Long.toString(sid), fStation, tStation, tStation, fStation },
+     //   null,   // groupBy
+     //   null,   // having
+     //   null ); // order by
+     Cursor cursor = myDB.rawQuery( qHasShot, new String[] { Long.toString(sid), fStation, tStation, tStation, fStation } );
      boolean ret = cursor.moveToFirst();
      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return ret;
@@ -2309,13 +2355,12 @@ class DataHelper extends DataSetObservable
    String nextStation( long sid, String fStation )
    {
      if ( myDB == null ) return null;
-     Cursor cursor = myDB.query( SHOT_TABLE,
-       new String[] { "tStation" }, // columns
-       "surveyId=? and fStation=? ", 
-       new String[] { Long.toString(sid), fStation },
-       null,   // groupBy
-       null,   // having
-       null ); // order by
+     // Cursor cursor = myDB.query( SHOT_TABLE,
+     //       new String[] { "tStation" }, // columns
+     //       "surveyId=? and fStation=? ", 
+     //       new String[] { Long.toString(sid), fStation },
+     //       null, null, null );  // groupBy, having, order by
+     Cursor cursor = myDB.rawQuery( qNextStation, new String[] { Long.toString(sid), fStation } );
      String ret = null;
      if ( cursor.moveToFirst() ) {
        do {
@@ -2423,14 +2468,14 @@ class DataHelper extends DataSetObservable
    String getLastStationName( long sid )
    {
      if ( myDB == null ) return null;
-     Cursor cursor = myDB.query(SHOT_TABLE,
-       new String[] { "fStation", "tStation" },
-       WHERE_SID,
-       new String[] { Long.toString(sid) },
-       null,  // groupBy
-       null,  // having
-       "id DESC" // order by
-     );
+     // Cursor cursor = myDB.query(SHOT_TABLE,
+     //   new String[] { "fStation", "tStation" },
+     //   WHERE_SID, new String[] { Long.toString(sid) },
+     //   null,  // groupBy
+     //   null,  // having
+     //   "id DESC" // order by
+     // );
+     Cursor cursor = myDB.rawQuery( qLastStation, new String[] { Long.toString(sid) } );
      String ret = DistoXStationName.mInitialStation;
      if (cursor.moveToFirst()) {
        do {

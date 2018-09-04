@@ -53,8 +53,9 @@ class TDImage
     bfo.inJustDecodeBounds = true;
     BitmapFactory.decodeFile( mFilename, bfo );
     int required_size = TDSetting.mThumbSize;
+    // Log.v("DistoX", "photo: file " + mFilename + " " + bfo.outWidth + "x" + bfo.outHeight + " req. size " + required_size );
     int scale = 1;
-    while ( bfo.outWidth/scale/2 > required_size || bfo.outHeight/scale/2 > required_size ) {
+    while ( bfo.outWidth/scale > required_size || bfo.outHeight/scale > required_size ) {
       scale *= 2;
     }
     bfo.inJustDecodeBounds = false;
@@ -64,6 +65,7 @@ class TDImage
       mImageWidth   = mImage.getWidth();
       mImageHeight  = mImage.getHeight();
     }  
+    // Log.v("DistoX", "photo: file " + mFilename + " image " + mImageWidth + "x" + mImageHeight + " req. size " + required_size + " scale " + scale );
   }
 
   private void readExif()
@@ -98,6 +100,8 @@ class TDImage
     if ( mImage == null ) return false;
     int ww = width;
     int hh = (int)( mImageHeight * ww / mImageWidth );
+    // Log.v("DistoX", "fill image view w " + ww + " h " + hh );
+    if ( ww <= 0 || hh <= 0 ) return false;
     Bitmap image2 = Bitmap.createScaledBitmap( mImage, ww, hh, true );
     if ( image2 == null ) return false;
     MyBearingAndClino.applyOrientation( view, image2, mOrientation );

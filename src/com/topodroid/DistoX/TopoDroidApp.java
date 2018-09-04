@@ -939,7 +939,7 @@ public class TopoDroidApp extends Application
       // mFixed.clear();
       TDInstance.survey = null;
       if ( TDInstance.sid > 0 ) {
-        DistoXStationName.setInitialStation( mData.getSurveyInitailStation( TDInstance.sid ) );
+        DistoXStationName.setInitialStation( mData.getSurveyInitStation( TDInstance.sid ) );
         TDInstance.survey = name;
 	TDInstance.datamode = mData.getSurveyDataMode( TDInstance.sid );
 	Log.v("DistoX", "set survey from name: <" + name + "> datamode " + datamode + " " + TDInstance.datamode );
