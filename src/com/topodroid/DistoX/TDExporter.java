@@ -1176,9 +1176,8 @@ class TDExporter
               }
               // write LRUD for ref_item
               if ( TDSetting.mSurvexLRUD ) {
-                if ( ! lruds.containsKey( ref_item.mFrom ) ) {
-                  lruds.put( ref_item.mFrom, computeLRUD( ref_item, list, true ) );
-                }
+                // lruds.putIfAbsent( ref_item.mFrom, computeLRUD( ref_item, list, true ) );
+                if ( ! lruds.containsKey( ref_item.mFrom) ) lruds.put( ref_item.mFrom, computeLRUD( ref_item, list, true ) );
               }
               ref_item = null; 
             }

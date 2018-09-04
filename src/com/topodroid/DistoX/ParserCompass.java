@@ -49,6 +49,8 @@ class ParserCompass extends ImportParser
   @Override
   void readFile( BufferedReader br ) throws ParserException
   {
+    // lengths in meters
+    // angles  in degrees
     float mLength, mBearing, mClino, mLeft, mUp, mDown, mRight;
     String mFlag=null, mComment=null, mFrom=null, mTo=null;
 
@@ -94,7 +96,7 @@ class ParserCompass extends ImportParser
             mLeft = mRight = mUp = mDown = -1;
 
             mFrom = vals[k]; ++k;
-            mTo = vals[k]; ++k;
+            mTo   = vals[k]; ++k;
             try {
               mLength  = Float.parseFloat(vals[k]) * TopoDroidUtil.FT2M; ++k;
               mBearing = Float.parseFloat(vals[k]); ++k;

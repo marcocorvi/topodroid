@@ -219,7 +219,7 @@ class DataHelper extends DataSetObservable
      block.mLength       = (float)( cursor.getDouble(3) );  // length [meters]
      // block.setBearing( (float)( cursor.getDouble(4) ) ); 
      block.mBearing      = (float)( cursor.getDouble(4) );  // bearing [degrees]
-     float clino         = (float)( cursor.getDouble(5) );  // clino [degrees], o depth
+     float clino         = (float)( cursor.getDouble(5) );  // clino [degrees], or depth [meters]
      block.mAcceleration = (float)( cursor.getDouble(6) );
      block.mMagnetic     = (float)( cursor.getDouble(7) );
      block.mDip          = (float)( cursor.getDouble(8) );
@@ -504,7 +504,8 @@ class DataHelper extends DataSetObservable
         do {
 	  String station = cursor.getString(0);
 	  float  depth   = (float)(cursor.getDouble(1));
-	  if ( ! depths.containsKey( station ) ) depths.put( station, new Float(depth) );
+	  // depths.putIfAbsent( station, new Float(depth) );
+	  if ( ! depths.containsKey(station) ) depths.put( station, new Float(depth) );
         } while ( cursor.moveToNext() );
       }
       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
@@ -1293,6 +1294,55 @@ class DataHelper extends DataSetObservable
       }
     }
     return id;
+  }
+  
+  // called by the importXXXTask's
+  long insertShotsDiving( long sid, long id, ArrayList< ParserShot > shots )
+  {
+    // [1] compute stations depth
+    ArrayList< ParserShot > stack   = new ArrayList< ParserShot >();
+    HashMap< String, Float > depths = new HashMap< String, Float >();
+    String start = shots.get(0).from; // FIXME
+    depths.put( start, new Float(0) );
+    for ( ParserShot sh : shots ) {
+      String s1 = sh.from;
+      String s2 = sh.to;
+      if ( s1.length() > 0 && s2.length() > 0 && ( start.equals( s1 ) || start.equals( s2 ) ) ) stack.add( sh );
+    }
+    // Log.v("DistoX", "start station <" + start + "> shots " + stack.size() );
+    for ( int k = 0; k < stack.size(); ++k ) {
+      ParserShot shot = stack.get(k);
+      String from = shot.from;
+      String to   = shot.to;
+      if ( from != null && from.length() > 0 && depths.containsKey( from ) && to != null && to.length() > 0 && ! depths.containsKey( to ) ) { // can add TO station
+        for ( ParserShot sh : shots ) {
+	  String s1 = sh.from;
+	  String s2 = sh.to;
+          if ( s1.length() > 0 && s2.length() > 0 && ( to.equals( s1 ) || to.equals( s2 ) ) ) stack.add( sh );
+        }
+        float depth = depths.get( from ).floatValue() - shot.len * TDMath.sind( shot.cln );
+        depths.put( to, new Float( depth ) );
+        // Log.v("DistoX", "processed shot <" + from + "-" + to + "> shots " + stack.size() + "add station <" + to + "> depth " + depth );
+      }
+      if ( to != null && to.length() > 0 && depths.containsKey( to ) && from != null && from.length() > 0 && ! depths.containsKey( from ) ) { // can add FROM station
+        for ( ParserShot sh : shots ) {
+	  String s1 = sh.from;
+	  String s2 = sh.to;
+          if ( s1.length() > 0 && s2.length() > 0 && ( from.equals( s1 ) || from.equals( s2 ) ) ) stack.add( sh );
+        }
+        float depth = depths.get( to ).floatValue() + shot.len * TDMath.sind( shot.cln );
+        depths.put( from, new Float( depth ) );
+        // Log.v("DistoX", "processed shot <" + from + "-" + to + "> shots " + stack.size() + "add station <" + from + "> depth " + depth );
+      }
+    }
+    //   [2] override shots clino with from-station depth (depth refers to the FROM station)
+    for ( ParserShot sh : shots ) {
+      Float f = depths.get( sh.from );
+      sh.cln = ( f == null )? 0 : f.floatValue();
+      // Log.v("DistoX", "update shot " + sh.from + "-" + sh.to + " depth " + sh.cln + " azimuth " + sh.ber + " length " + sh.len );
+    }
+    // [3] call the insertShots
+    return insertShots( sid, id, shots );
   }
 
   long insertDistoXShot( long sid, long id, double d, double b, double c, double r, long extend, long status, boolean forward )
@@ -4628,9 +4678,9 @@ class DataHelper extends DataSetObservable
              +   " id INTEGER, " //  PRIMARY KEY AUTOINCREMENT, "
              +   " fStation TEXT, "
              +   " tStation TEXT, "
-             +   " distance REAL, "
-             +   " bearing REAL, "
-             +   " clino REAL, "
+             +   " distance REAL, "   // distance 
+             +   " bearing REAL, "    // azimuth
+             +   " clino REAL, "      // clino | depth
              +   " roll REAL, "
              +   " acceleration REAL, "
              +   " magnetic REAL, "

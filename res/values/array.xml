@@ -151,6 +151,16 @@
       <!-- item name="slovak">5</item -->
   </string-array>
 
+  <string-array name="importDatamode">
+     <item name="normal">normal</item>
+     <item name="diving">diving</item>
+  </string-array>
+
+  <string-array name="importDatamodeValue"> <!-- see SurveyInfo.DATAMODE_xxx -->
+     <item name="normal">0</item>
+     <item name="diving">1</item>
+  </string-array>
+
   <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
   <string-array name="exportShots">
      <item name="none">none</item>

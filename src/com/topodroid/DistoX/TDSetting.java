@@ -203,6 +203,7 @@ class TDSetting
   static boolean mDistoXBackshot = false;
   static int mTitleColor = TDColor.TITLE_NORMAL;
 
+  static int mImportDatamode    = 0;  // SurveyInfo.DATAMODE_NORMAL
   static int mExportShotsFormat = -1; // DISTOX_EXPORT_NONE
   static int mExportPlotFormat  = -1; // DISTOX_EXPORT_NONE
   static boolean mTherionMaps   = false;
@@ -614,41 +615,42 @@ class TDSetting
 
     String[] keyExport = TDPrefKey.EXPORT;
     String[] defExport = TDPrefKey.EXPORTdef;
-    mLRExtend          = prefs.getBoolean(     keyExport[1], bool(defExport[1]) );  // DISTOX_SPLAY_EXTEND
-    mExportShotsFormat = tryInt(   prefs,      keyExport[2], defExport[ 2] );  // DISTOX_EXPORT_SHOTS choice: 
-    mExportPlotFormat  = tryInt(   prefs,      keyExport[3], defExport[ 3] );  // DISTOX_EXPORT_PLOT choice: 14, 2, 11, 12, 13
-    mTherionMaps       = prefs.getBoolean(     keyExport[4], bool(defExport[4]) ); // DISTOX_THERION_MAPS
-    mAutoStations      = prefs.getBoolean(     keyExport[5], bool(defExport[5]) );  // DISTOX_AUTO_STATIONS 
-    // mXTherionAreas  = prefs.getBoolean(     keyExport[], bool(defExport[]) );  // DISTOX_XTHERION_AREAS
-    mTherionSplays     = prefs.getBoolean(     keyExport[6], bool(defExport[6]) ); // DISTOX_THERION_SPLAYS
-    mExportStationsPrefix =  prefs.getBoolean( keyExport[7], bool(defExport[7]) ); // DISTOX_STATION_PREFIX
-    mCompassSplays     = prefs.getBoolean(     keyExport[8], bool(defExport[8]) );  // DISTOX_COMPASS_SPLAYS
-    mOrthogonalLRUDAngle = tryFloat( prefs,    keyExport[9], defExport[ 9] ); // DISTOX_ORTHO_LRUD
+    mLRExtend          = prefs.getBoolean(     keyExport[ 1], bool(defExport[ 1]) ); // DISTOX_SPLAY_EXTEND
+    mImportDatamode    = tryInt(   prefs,      keyExport[ 2],      defExport[ 2] );  // DISTOX_IMPORT_DATAMODE
+    mExportShotsFormat = tryInt(   prefs,      keyExport[ 3],      defExport[ 3] );  // DISTOX_EXPORT_SHOTS choice: 
+    mExportPlotFormat  = tryInt(   prefs,      keyExport[ 4],      defExport[ 4] );  // DISTOX_EXPORT_PLOT choice: 14, 2, 11, 12, 13
+    mTherionMaps       = prefs.getBoolean(     keyExport[ 5], bool(defExport[ 5]) ); // DISTOX_THERION_MAPS
+    mAutoStations      = prefs.getBoolean(     keyExport[ 6], bool(defExport[ 6]) ); // DISTOX_AUTO_STATIONS 
+    // mXTherionAreas  = prefs.getBoolean(     keyExport[  ], bool(defExport[  ]) ); // DISTOX_XTHERION_AREAS
+    mTherionSplays     = prefs.getBoolean(     keyExport[ 7], bool(defExport[ 7]) ); // DISTOX_THERION_SPLAYS
+    mExportStationsPrefix =  prefs.getBoolean( keyExport[ 8], bool(defExport[ 8]) ); // DISTOX_STATION_PREFIX
+    mCompassSplays     = prefs.getBoolean(     keyExport[ 9], bool(defExport[ 9]) ); // DISTOX_COMPASS_SPLAYS
+    mOrthogonalLRUDAngle = tryFloat( prefs,    keyExport[10],      defExport[10] );  // DISTOX_ORTHO_LRUD
     mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
     mOrthogonalLRUD       = ( mOrthogonalLRUDAngle > 0.000001f ); 
-    mLRUDvertical      = tryFloat( prefs,      keyExport[10], defExport[10] );   // DISTOX_LRUD_VERTICAL
-    mLRUDhorizontal    = tryFloat( prefs,      keyExport[11], defExport[11] );  // DISTOX_LRUD_HORIZONTAL
-    mSwapLR            = prefs.getBoolean(     keyExport[12], bool(defExport[12]) ); // DISTOX_SWAP_LR
-    mSurvexEol         = ( prefs.getString(    keyExport[13], defExport[13] ).equals("LF") )? "\n" : "\r\n";  // DISTOX_SURVEX_EOL
-    mSurvexSplay       =   prefs.getBoolean(   keyExport[14], bool(defExport[14]) ); // DISTOX_SURVEX_SPLAY
-    mSurvexLRUD        =   prefs.getBoolean(   keyExport[15], bool(defExport[15]) ); // DISTOX_SURVEX_LRUD
-    mBezierStep        = tryFloat( prefs,      keyExport[16], defExport[16] ); // DISTOX_BEZIER_STEP
-    mSvgGrid           = prefs.getBoolean(     keyExport[17], bool(defExport[17]) ); // DISTOX_SVG_GRID
-    mSvgLineDirection  = prefs.getBoolean(     keyExport[18], bool(defExport[18]) ); // DISTOX_SVG_LINE_DIR
-    // mSvgInHtml      = prefs.getBoolean(     keyExport[], bool(defExport[]) );     // DISTOX_SVG_IN_HTML
-    mSvgPointStroke    = tryFloat( prefs,      keyExport[19], defExport[19] );       // DISTOX_SVG_POINT_STROKE
-    mSvgLabelStroke    = tryFloat( prefs,      keyExport[20], defExport[20] );       // DISTOX_SVG_LABEL_STROKE
-    mSvgLineStroke     = tryFloat( prefs,      keyExport[21], defExport[21] );       // DISTOX_SVG_LINE_STROKE
-    mSvgGridStroke     = tryFloat( prefs,      keyExport[22], defExport[22] );       // DISTOX_SVG_GRID_STROKE
-    mSvgShotStroke     = tryFloat( prefs,      keyExport[23], defExport[23] );       // DISTOX_SVG_SHOT_STROKE
-    mSvgLineDirStroke  = tryFloat( prefs,      keyExport[24], defExport[24] );       // DISTOX_SVG_LINEDIR_STROKE
-    mKmlStations       = prefs.getBoolean(     keyExport[25], bool(defExport[25]) ); // DISTOX_KML_STATIONS
-    mKmlSplays         = prefs.getBoolean(     keyExport[26], bool(defExport[26]) ); // DISTOX_KML_SPLAYS
-    mBitmapScale       = tryFloat( prefs,      keyExport[27], defExport[27] );       // DISTOX_BITMAP_SCALE 
-    setBitmapBgcolor( prefs.getString(         keyExport[28], defExport[28] ) );     // DISTOX_BITMAP_BGCOLOR
-    // mDxfScale    = tryFloat( prefs,         keyExport[], defExport[27] );         // DISTOX_DXF_SCALE
-    mDxfBlocks        =  prefs.getBoolean(     keyExport[29], bool(defExport[29]) ); // DISTOX_DXF_BLOCKS
-    mAcadVersion = tryInt(   prefs,            keyExport[30], defExport[30] );       // DISTOX_ACAD_VERSION choice: 9, 13
+    mLRUDvertical      = tryFloat( prefs,      keyExport[11],      defExport[11] );  // DISTOX_LRUD_VERTICAL
+    mLRUDhorizontal    = tryFloat( prefs,      keyExport[12],      defExport[12] );  // DISTOX_LRUD_HORIZONTAL
+    mSwapLR            = prefs.getBoolean(     keyExport[13], bool(defExport[13]) ); // DISTOX_SWAP_LR
+    mSurvexEol         = ( prefs.getString(    keyExport[14],      defExport[14] ).equals("LF") )? "\n" : "\r\n";  // DISTOX_SURVEX_EOL
+    mSurvexSplay       =   prefs.getBoolean(   keyExport[15], bool(defExport[15]) ); // DISTOX_SURVEX_SPLAY
+    mSurvexLRUD        =   prefs.getBoolean(   keyExport[16], bool(defExport[16]) ); // DISTOX_SURVEX_LRUD
+    mBezierStep        = tryFloat( prefs,      keyExport[17],      defExport[17] ); // DISTOX_BEZIER_STEP
+    mSvgGrid           = prefs.getBoolean(     keyExport[18], bool(defExport[18]) ); // DISTOX_SVG_GRID
+    mSvgLineDirection  = prefs.getBoolean(     keyExport[19], bool(defExport[19]) ); // DISTOX_SVG_LINE_DIR
+    // mSvgInHtml      = prefs.getBoolean(     keyExport[  ], bool(defExport[  ]) );     // DISTOX_SVG_IN_HTML
+    mSvgPointStroke    = tryFloat( prefs,      keyExport[20],      defExport[20] );       // DISTOX_SVG_POINT_STROKE
+    mSvgLabelStroke    = tryFloat( prefs,      keyExport[21],      defExport[21] );       // DISTOX_SVG_LABEL_STROKE
+    mSvgLineStroke     = tryFloat( prefs,      keyExport[22],      defExport[22] );       // DISTOX_SVG_LINE_STROKE
+    mSvgGridStroke     = tryFloat( prefs,      keyExport[23],      defExport[23] );       // DISTOX_SVG_GRID_STROKE
+    mSvgShotStroke     = tryFloat( prefs,      keyExport[24],      defExport[24] );       // DISTOX_SVG_SHOT_STROKE
+    mSvgLineDirStroke  = tryFloat( prefs,      keyExport[25],      defExport[25] );       // DISTOX_SVG_LINEDIR_STROKE
+    mKmlStations       = prefs.getBoolean(     keyExport[26], bool(defExport[26]) ); // DISTOX_KML_STATIONS
+    mKmlSplays         = prefs.getBoolean(     keyExport[27], bool(defExport[27]) ); // DISTOX_KML_SPLAYS
+    mBitmapScale       = tryFloat( prefs,      keyExport[28],      defExport[28] );       // DISTOX_BITMAP_SCALE 
+    setBitmapBgcolor( prefs.getString(         keyExport[29],      defExport[29] ) );     // DISTOX_BITMAP_BGCOLOR
+    // mDxfScale    = tryFloat( prefs,         keyExport[  ],      defExport[  ] );         // DISTOX_DXF_SCALE
+    mDxfBlocks        =  prefs.getBoolean(     keyExport[30], bool(defExport[30]) ); // DISTOX_DXF_BLOCKS
+    mAcadVersion = tryInt(   prefs,            keyExport[31],      defExport[31] );       // DISTOX_ACAD_VERSION choice: 9, 13
 
     String[] keyData = TDPrefKey.DATA;
     String[] defData = TDPrefKey.DATAdef;
@@ -954,73 +956,75 @@ class TDSetting
     if ( k.equals( key[ 0 ] ) ) {        // DISTOX_PT_CMAP
       // not handled here
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_SPLAY_EXTEND
-      mLRExtend = tryBooleanValue( hlp, k, v, bool(def[1]) ); 
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_EXPORT_SHOTS (choice)
-      mExportShotsFormat = tryIntValue( hlp, k, v, def[2] );
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_EXPORT_PLOT (choice)
-      mExportPlotFormat = tryIntValue( hlp, k, v, def[3] );
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_THERION_MAPS
-      mTherionMaps = tryBooleanValue( hlp, k, v, bool(def[4]) );
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_AUTO_STATIONS
-      mAutoStations = tryBooleanValue( hlp, k, v, bool(def[5]) );
+      mLRExtend = tryBooleanValue( hlp, k, v, bool(def[ 1]) ); 
+    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_IMPORT_DATAMODE
+      mImportDatamode = tryIntValue( hlp, k, v, def[ 2] );
+    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_EXPORT_SHOTS (choice)
+      mExportShotsFormat = tryIntValue( hlp, k, v, def[ 3] );
+    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_EXPORT_PLOT (choice)
+      mExportPlotFormat = tryIntValue( hlp, k, v, def[ 4] );
+    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_THERION_MAPS
+      mTherionMaps = tryBooleanValue( hlp, k, v, bool(def[ 5]) );
+    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_AUTO_STATIONS
+      mAutoStations = tryBooleanValue( hlp, k, v, bool(def[ 6]) );
     // } else if ( k.equals( key[ ? ] ) ) { // DISTOX_XTHERION_AREAS
     //   mXTherionAreas = tryBooleanValue( hlp, k, v, bool(def[ ]) );   
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_THERION_SPLAYS
-      mTherionSplays  = tryBooleanValue( hlp, k, v, bool(def[6]) );   
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_STATION_PREFIX
-      mExportStationsPrefix = tryBooleanValue( hlp, k, v, bool(def[7]) );
-    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_COMPASS_SPLAYS
-      mCompassSplays  = tryBooleanValue( hlp, k, v, bool(def[8]) );   
-    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_ORTHO_LRUD
-      mOrthogonalLRUDAngle  = tryFloatValue( hlp, k, v, def[9] );
+    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_THERION_SPLAYS
+      mTherionSplays  = tryBooleanValue( hlp, k, v, bool(def[ 7]) );   
+    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_STATION_PREFIX
+      mExportStationsPrefix = tryBooleanValue( hlp, k, v, bool(def[ 8]) );
+    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_COMPASS_SPLAYS
+      mCompassSplays  = tryBooleanValue( hlp, k, v, bool(def[ 9]) );   
+    } else if ( k.equals( key[10 ] ) ) { // DISTOX_ORTHO_LRUD
+      mOrthogonalLRUDAngle  = tryFloatValue( hlp, k, v, def[10] );
       mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
       mOrthogonalLRUD       = ( mOrthogonalLRUDAngle > 0.000001f ); 
-    } else if ( k.equals( key[ 10 ] ) ) { // DISTOX_LRUD_VERTICAL
-      mLRUDvertical = tryFloatValue( hlp, k, v, def[10] );
-    } else if ( k.equals( key[ 11 ] ) ) { // DISTOX_LRUD_HORIZONTAL
-      mLRUDhorizontal = tryFloatValue( hlp, k, v, def[11] );
-    } else if ( k.equals( key[ 12 ] ) ) { // DISTOX_SWAP_LR
-      mSwapLR = tryBooleanValue( hlp, k, v, bool(def[12]) );
-    } else if ( k.equals( key[ 13 ] ) ) { // DISTOX_SURVEX_EOL
-      mSurvexEol = ( tryStringValue( hlp, k, v, def[13] ).equals(def[13]) )? "\n" : "\r\n";
-    } else if ( k.equals( key[ 14 ] ) ) { // DISTOX_SURVEX_SPLAY
-      mSurvexSplay = tryBooleanValue( hlp, k, v, bool(def[14]) );
-    } else if ( k.equals( key[ 15 ] ) ) { // DISTOX_SURVEX_LRUD
-      mSurvexLRUD = tryBooleanValue( hlp, k, v, bool(def[15]) );
-    } else if ( k.equals( key[ 16 ] ) ) { // DISTOX_BEZIER_STEP
-      mBezierStep  = tryFloatValue( hlp, k, v, def[16] );
-    } else if ( k.equals( key[ 17 ] ) ) { // DISTOX_SVG_GRID
-      mSvgGrid = tryBooleanValue( hlp, k, v, bool(def[17]) );
-    } else if ( k.equals( key[ 18 ] ) ) { // DISTOX_SVG_LINE_DIR
-      mSvgLineDirection = tryBooleanValue( hlp, k, v, bool(def[18]) );
+    } else if ( k.equals( key[ 11 ] ) ) { // DISTOX_LRUD_VERTICAL
+      mLRUDvertical = tryFloatValue( hlp, k, v, def[11] );
+    } else if ( k.equals( key[ 12 ] ) ) { // DISTOX_LRUD_HORIZONTAL
+      mLRUDhorizontal = tryFloatValue( hlp, k, v, def[12] );
+    } else if ( k.equals( key[ 13 ] ) ) { // DISTOX_SWAP_LR
+      mSwapLR = tryBooleanValue( hlp, k, v, bool(def[13]) );
+    } else if ( k.equals( key[ 14 ] ) ) { // DISTOX_SURVEX_EOL
+      mSurvexEol = ( tryStringValue( hlp, k, v, def[14] ).equals(def[14]) )? "\n" : "\r\n";
+    } else if ( k.equals( key[ 15 ] ) ) { // DISTOX_SURVEX_SPLAY
+      mSurvexSplay = tryBooleanValue( hlp, k, v, bool(def[15]) );
+    } else if ( k.equals( key[ 16 ] ) ) { // DISTOX_SURVEX_LRUD
+      mSurvexLRUD = tryBooleanValue( hlp, k, v, bool(def[16]) );
+    } else if ( k.equals( key[ 17 ] ) ) { // DISTOX_BEZIER_STEP
+      mBezierStep  = tryFloatValue( hlp, k, v, def[17] );
+    } else if ( k.equals( key[ 18 ] ) ) { // DISTOX_SVG_GRID
+      mSvgGrid = tryBooleanValue( hlp, k, v, bool(def[18]) );
+    } else if ( k.equals( key[ 19 ] ) ) { // DISTOX_SVG_LINE_DIR
+      mSvgLineDirection = tryBooleanValue( hlp, k, v, bool(def[19]) );
     // } else if ( k.equals( key[ ? ] ) ) { // DISTOX_SVG_IN_HTML
     //   mSvgInHtml = tryBooleanValue( hlp, k, bool(def[ ]) );
-    } else if ( k.equals( key[ 19 ] ) ) { // DISTOX_SVG_POINT_STROKE
-      mSvgPointStroke    = tryFloatValue( hlp, k, v, def[19] );
-    } else if ( k.equals( key[ 20 ] ) ) { // DISTOX_SVG_LABEL_STROKE
-      mSvgLabelStroke    = tryFloatValue( hlp, k, v, def[20] );
-    } else if ( k.equals( key[ 21 ] ) ) { // DISTOX_SVG_LINE_STROKE
-      mSvgLineStroke     = tryFloatValue( hlp, k, v, def[21] );
-    } else if ( k.equals( key[ 22 ] ) ) { // DISTOX_SVG_GRID_STROKE
-      mSvgGridStroke     = tryFloatValue( hlp, k, v, def[22] );
-    } else if ( k.equals( key[ 23 ] ) ) { // DISTOX_SVG_SHOT_STROKE
-      mSvgShotStroke     = tryFloatValue( hlp, k, v, def[23] );
-    } else if ( k.equals( key[ 24 ] ) ) { // DISTOX_SVG_LINEDIR_STROKE
-      mSvgLineDirStroke  = tryFloatValue( hlp, k, v, def[24] );
-    } else if ( k.equals( key[ 25 ] ) ) { // DISTOX_KML_STATIONS
-      mKmlStations = tryBooleanValue( hlp, k, v, bool(def[25]) );
-    } else if ( k.equals( key[ 26 ] ) ) { // DISTOX_KML_SPLAYS
-      mKmlSplays = tryBooleanValue( hlp, k, v, bool(def[26]) );
-    } else if ( k.equals( key[ 27 ] ) ) { // DISTOX_BITMAP_SCALE
-      mBitmapScale = tryFloatValue( hlp, k, v, def[27] );
-    } else if ( k.equals( key[ 28 ] ) ) { // DISTOX_BITMAP_BGCOLOR
-      setBitmapBgcolor( tryStringValue( hlp, k, v, def[28] ) );
+    } else if ( k.equals( key[ 20 ] ) ) { // DISTOX_SVG_POINT_STROKE
+      mSvgPointStroke    = tryFloatValue( hlp, k, v, def[20] );
+    } else if ( k.equals( key[ 21 ] ) ) { // DISTOX_SVG_LABEL_STROKE
+      mSvgLabelStroke    = tryFloatValue( hlp, k, v, def[21] );
+    } else if ( k.equals( key[ 22 ] ) ) { // DISTOX_SVG_LINE_STROKE
+      mSvgLineStroke     = tryFloatValue( hlp, k, v, def[22] );
+    } else if ( k.equals( key[ 23 ] ) ) { // DISTOX_SVG_GRID_STROKE
+      mSvgGridStroke     = tryFloatValue( hlp, k, v, def[23] );
+    } else if ( k.equals( key[ 24 ] ) ) { // DISTOX_SVG_SHOT_STROKE
+      mSvgShotStroke     = tryFloatValue( hlp, k, v, def[24] );
+    } else if ( k.equals( key[ 25 ] ) ) { // DISTOX_SVG_LINEDIR_STROKE
+      mSvgLineDirStroke  = tryFloatValue( hlp, k, v, def[25] );
+    } else if ( k.equals( key[ 26 ] ) ) { // DISTOX_KML_STATIONS
+      mKmlStations = tryBooleanValue( hlp, k, v, bool(def[26]) );
+    } else if ( k.equals( key[ 27 ] ) ) { // DISTOX_KML_SPLAYS
+      mKmlSplays = tryBooleanValue( hlp, k, v, bool(def[27]) );
+    } else if ( k.equals( key[ 28 ] ) ) { // DISTOX_BITMAP_SCALE
+      mBitmapScale = tryFloatValue( hlp, k, v, def[28] );
+    } else if ( k.equals( key[ 29 ] ) ) { // DISTOX_BITMAP_BGCOLOR
+      setBitmapBgcolor( tryStringValue( hlp, k, v, def[29] ) );
     // } else if ( k.equals( key[ ? ] ) ) { // DISTOX_DXF_SCALE
     //   mDxfScale = tryFloatValue( hlp, k, v, def[ ] );
-    } else if ( k.equals( key[ 29 ] ) ) { // DISTOX_DXF_BLOCKS
-      mDxfBlocks = tryBooleanValue( hlp, k, v, bool(def[29]) );
-    } else if ( k.equals( key[ 30 ] ) ) { // DISTOX_ACAD_VERSION
-      try { mAcadVersion = tryIntValue( hlp, k, v, def[30] ); } catch ( NumberFormatException e) { }
+    } else if ( k.equals( key[ 30 ] ) ) { // DISTOX_DXF_BLOCKS
+      mDxfBlocks = tryBooleanValue( hlp, k, v, bool(def[30]) );
+    } else if ( k.equals( key[ 31 ] ) ) { // DISTOX_ACAD_VERSION
+      try { mAcadVersion = tryIntValue( hlp, k, v, def[31] ); } catch ( NumberFormatException e) { }
     } else {
       TDLog.Error("missing EXPORT key: " + k );
     }

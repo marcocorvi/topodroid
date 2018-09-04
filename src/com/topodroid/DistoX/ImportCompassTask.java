@@ -15,9 +15,12 @@ import java.util.ArrayList;
  
 class ImportCompassTask extends ImportTask
 {
+  private int mDatamode;
+
   ImportCompassTask( MainWindow main )
   {
     super( main );
+    mDatamode = TDSetting.mImportDatamode;
   }
 
   @Override
@@ -32,12 +35,17 @@ class ImportCompassTask extends ImportTask
       if ( app_data.hasSurveyName( parser.mName ) ) {
         return -1L;
       }
-      sid = mApp.setSurveyFromName( parser.mName, SurveyInfo.DATAMODE_NORMAL, false ); // IMPORT DAT no forward
+      sid = mApp.setSurveyFromName( parser.mName, mDatamode, false ); // IMPORT DAT no forward
       app_data.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle, false );
       app_data.updateSurveyDeclination( sid, parser.mDeclination, false );
       app_data.updateSurveyInitStation( sid, parser.initStation(), false );
 
-      long id = app_data.insertShots( sid, 1, shots ); // start id = 1
+      long id = 1; // start id = 1
+      if ( mDatamode == SurveyInfo.DATAMODE_NORMAL ) {
+        id = app_data.insertShots( sid, id, shots );
+      } else { // SurveyInfo.DATAMODE_DIVING
+        id = app_data.insertShotsDiving( sid, id, shots );
+      }
       app_data.insertShots( sid, id, splays );
     } catch ( ParserException e ) {
       // TDToast.make(mActivity, R.string.file_parse_fail );

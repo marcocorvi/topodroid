@@ -720,20 +720,25 @@ class DistoXNum
     if ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING ) {
       HashMap< String, Float > depths = new HashMap< String, Float >();
       for ( DBlock blk : data ) { // prepare stations depths
-	if ( blk.mFrom != null && blk.mFrom.length() > 0 ) {
-          // Log.v("DistoX", blk.mFrom + " depth " + blk.mDepth );
-          if ( ! depths.containsKey( blk.mFrom ) ) depths.put( blk.mFrom, new Float( blk.mDepth ) );
+	if ( blk.mFrom != null && blk.mFrom.length() > 0 && blk.mTo != null && blk.mTo.length() > 0 ) {
+          Log.v("DistoX", blk.mFrom + " depth " + blk.mDepth );
+          // depths.putIfAbsent( blk.mFrom, new Float( blk.mDepth ) );
+          if ( ! depths.containsKey(blk.mFrom) ) depths.put( blk.mFrom, new Float( blk.mDepth ) );
         }
       }
       boolean depth_error = false;
+      String error = "";
       for ( DBlock blk : data ) { // set dblock clino
 	if ( blk.mTo != null && blk.mTo.length() > 0 && depths.containsKey( blk.mTo ) ) {
           float tdepth = depths.get( blk.mTo ).floatValue();
-	  if ( ! blk.makeClino( tdepth ) ) depth_error = true;
+	  if ( ! blk.makeClino( tdepth ) ) {
+	    depth_error = true;
+	    TDLog.Error("Failed make clino: " +  blk.mFrom + "-" + blk.mTo + " (" + tdepth + ") " );
+	  }
         }
       }
       if ( depth_error ) {
-        TDToast.make( R.string.depth_error );
+        // TDToast.make( R.string.depth_error );
       }
     }
 

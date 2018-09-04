@@ -16,10 +16,13 @@ class ParserShot
 {
     String from;
     String to;
-    float len, ber, cln, rol;
+    float len; // length  [meter]
+    float ber; // azimuth [degrees]
+    float cln; // clino [degrees] or depth [meter]
+    float rol; // roll  [degrees]
     int extend;
     int leg;
-    boolean duplicate;
+    boolean duplicate; // flags
     boolean surface;
     boolean backshot;
     String comment;
@@ -36,9 +39,9 @@ class ParserShot
       extend = ex;
       leg    = lg;
       duplicate = d;
-      surface = s;
-      backshot = bs;
-      comment = cmnt;
+      surface   = s;
+      backshot  = bs;
+      comment   = cmnt;
     }
 }
 
