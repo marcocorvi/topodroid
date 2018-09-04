@@ -199,6 +199,7 @@
     <!-- TODO string name="fmt_error_m">Error %1$.1f m</string -->
     <!-- TODO string name="fmt_h_geoid">Error %1$.0f m</string -->
     <!-- TODO string name="fmt_h_ellipsoid">Error %1$.0f m</string -->
+    <!-- TODO string name="depth_error">Waring. Data depth error</string -->
 
 <string name="error_azimuth_required">Azimut nécessaire</string>
 <string name="error_length_required">Longueur nécessaire</string>

@@ -376,6 +376,10 @@ class ConnectionHandler extends Handler
          app_data.updateShotDistanceBearingClino( Integer.parseInt(data[0]), mSid, 
                                 Float.parseFloat(data[2]), Float.parseFloat(data[3]), Float.parseFloat(data[4]), false );
          break;
+       case DataListener.SHOT_PBD_UPDATE:
+         app_data.updateShotDepthBearingDistance( Integer.parseInt(data[0]), mSid, 
+                                Float.parseFloat(data[2]), Float.parseFloat(data[3]), Float.parseFloat(data[4]), false );
+         break;
 
        case DataListener.SHOT_INSERT:
          app_data.doInsertShot( mSid, Integer.parseInt(data[1]), Long.parseLong(data[2]), Long.parseLong(data[3]),
@@ -475,6 +479,11 @@ class ConnectionHandler extends Handler
   public void onUpdateShotDBC( long id, long sid, float d, float b, float c )
   {
     enqueue( DataListener.SHOT_DBC_UPDATE, String.format(Locale.US,"%d|%d|%.2f|%.1f|%.1f|", (int)id, (int)sid, d, b, c ) );
+  }
+
+  public void onUpdateShotPBD( long id, long sid, float p, float b, float d )
+  {
+    enqueue( DataListener.SHOT_PBD_UPDATE, String.format(Locale.US,"%d|%d|%.2f|%.1f|%.1f|", (int)id, (int)sid, p, b, d ) );
   }
 
   public void onUpdateShot( long id, long sid, String fStation, String tStation,

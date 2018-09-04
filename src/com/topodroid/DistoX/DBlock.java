@@ -258,10 +258,11 @@ class DBlock
     mStretch  = 0.0f;
   }
 
-  void makeClick( float tdepth )
+  boolean makeClino( float tdepth )
   {
     float v = mDepth - tdepth;
-    mClino = TDMath.asind( v / mLength );
+    mClino = TDMath.asind( v / mLength ); // nan if |v| > mLength
+    return ( Math.abs(v) <= mLength );
   }
 
   void setId( long shot_id, long survey_id )

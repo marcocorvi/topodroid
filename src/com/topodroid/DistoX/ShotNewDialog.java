@@ -289,6 +289,7 @@ class ShotNewDialog extends MyDialog
     mBtnSave.setOnClickListener( this );
     mBtnBack.setOnClickListener( this );
 
+    mETdistance.requestFocus( );  // try to get focus to distance/depth field
   }
 
   private void resetData( String from )
@@ -308,6 +309,7 @@ class ShotNewDialog extends MyDialog
     mETright.setText("");
     mETup.setText("");
     mETdown.setText("");
+    mETdistance.requestFocus( );  // try to get focus to distance/depth field
   }
 
   // implements

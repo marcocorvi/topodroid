@@ -200,6 +200,7 @@
     <string name="fmt_error_m">Eroare %1$.1f m</string>
     <string name="fmt_h_geoid">Geoid alt. %1$.0f m</string>
     <string name="fmt_h_ellipsoid">Elipsoid alt. %1$.0f m</string>
+    <!-- TODO string name="depth_error">Waring. Data depth error</string -->
 
     <string name="error_azimuth_required">Azimutul este obligatoriu</string>
     <string name="error_length_required">Lungimea este obligatorie</string>

@@ -63,12 +63,14 @@ class DataListenerSet
   // -------------------------------------------------------------------------
   // SHOTS
 
-  void onUpdateShot( long id, long sid, String fStation, String tStation,
-                            long extend, long flag, long leg, String comment )
+  void onUpdateShot( long id, long sid, String fStation, String tStation, long extend, long flag, long leg, String comment )
   { for ( DataListener l : mListeners ) l.onUpdateShot( id, sid, fStation, tStation, extend, flag, leg, comment ); }
 
   void onUpdateShotDBC( long id, long sid, float d, float b, float c )
   { for ( DataListener l : mListeners ) l.onUpdateShotDBC( id, sid, d, b, c ); }
+
+  void onUpdateShotPBD( long id, long sid, float p, float b, float d )
+  { for ( DataListener l : mListeners ) l.onUpdateShotPBD( id, sid, p, b, d ); }
 
   void onUpdateShotName( long id, long sid, String fStation, String tStation )
   { for ( DataListener l : mListeners ) l.onUpdateShotName( id, sid, fStation, tStation ); }

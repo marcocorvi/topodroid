@@ -56,6 +56,18 @@ class TDExporter
   private static final String   therion_flags_surface       = "   flags surface\n";
   private static final String   therion_flags_not_surface   = "   flags not surface\n";
 
+  static void checkShotsClino( List<DBlock> list )
+  {
+    if ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING ) {
+      for ( DBlock blk : list ) {
+	if ( blk.mTo != null && blk.mTo.length() > 0 && blk.mFrom != null && blk.mFrom.length() > 0 ) {
+          // sets the blocks clinos
+          DistoXNum num = new DistoXNum( list, blk.mFrom, null, null, 0.0f, null ); // no declination, null formatClosure
+	  break;
+	}
+      }
+    }
+  }
 
   static byte[] readFileBytes( File file )
   {
@@ -203,6 +215,7 @@ class TDExporter
 
     List<DBlock> list  = data.selectAllShots( sid, TDStatus.NORMAL );
     List<DBlock> clist = data.selectAllShots( sid, TDStatus.CHECK );
+    checkShotsClino( list );
 
     List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
     // List< PlotInfo > plots  = data.selectAllPlots( sid, TDStatus.NORMAL );
@@ -907,8 +920,8 @@ class TDExporter
     }
 
     List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+    checkShotsClino( list );
     long extend = 0;  // current extend
-
     DBlock ref_item = null;
     int fromId, toId;
 
@@ -1010,6 +1023,7 @@ class TDExporter
 
     List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
     List<DBlock> clist = data.selectAllShots( sid, TDStatus.CHECK );
+    checkShotsClino( list );
 
     List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
     List< PlotInfo > plots  = data.selectAllPlots( sid, TDStatus.NORMAL );
@@ -1346,6 +1360,7 @@ class TDExporter
     String uas = ( ua < 1.01f )? "degrees" : "grads";
 
     List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+    checkShotsClino( list );
     List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
     List<DBlock> st_blk = new ArrayList<>(); // blocks with from station (for LRUD)
 
@@ -1655,6 +1670,7 @@ class TDExporter
   {
     // Log.v("DistoX", "export as CSV: " + filename );
     List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+    checkShotsClino( list );
     // List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
     float ul = TDSetting.mUnitLength;
     float ua = TDSetting.mUnitAngle;
@@ -1778,6 +1794,7 @@ class TDExporter
   //   }
   //   String filename = TopoDroidApp.APP_TLX_PATH + info.name + ".tlx";
   //   List<DBlock> list = mData.selectAllShots( sid, TDStatus.NORMAL );
+  //   checkShotsClino( list );
   //   try {
   //     TDPath.checkPath( filename );
   //     FileWriter fw = new FileWriter( filename );
@@ -2083,6 +2100,7 @@ class TDExporter
   {
     // Log.v("DistoX", "export as compass: " + filename + " swap LR " + TDSetting.mSwapLR );
     List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+    checkShotsClino( list );
     try {
       // TDLog.Log( TDLog.LOG_IO, "export Compass " + filename );
       TDPath.checkPath( filename );
@@ -2245,6 +2263,7 @@ class TDExporter
     int trip = 1;
     int code = 1;
     List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+    checkShotsClino( list );
     // Log.v("DistoX", "export as TopoRobot: " + filename + " data " + list.size() );
     char[] line = new char[ TRB_LINE_LENGTH ];
     try {
@@ -2484,6 +2503,7 @@ class TDExporter
   {
     // Log.v("DistoX", "export as winkarst: " + filename + " swap LR " + TDSetting.mSwapLR );
     List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+    checkShotsClino( list );
     try {
       // TDLog.Log( TDLog.LOG_IO, "export WinKarst " + filename );
       TDPath.checkPath( filename );
@@ -2620,6 +2640,7 @@ class TDExporter
       pw.format("  </General>\n");
 
       List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+      checkShotsClino( list );
       TRobot trobot = new TRobot( list );
       // trobot.dump(); // DEBUG
 
@@ -2791,6 +2812,7 @@ class TDExporter
       List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
       boolean first = true; // first station
       List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+      checkShotsClino( list );
       // int extend = 1;
       AverageLeg leg = new AverageLeg(0);
       DBlock ref_item = null;
@@ -2942,6 +2964,7 @@ class TDExporter
       pw.format("#Units %s A=%s\n", uls, uas );
 
       List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+      checkShotsClino( list );
       // int extend = 1;
       AverageLeg leg = new AverageLeg(0);
       DBlock ref_item = null;
@@ -3177,6 +3200,7 @@ class TDExporter
       pw.format("#R0%s", eol);
 
       List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+      checkShotsClino( list );
       AverageLeg leg = new AverageLeg(0);
       DBlock ref_item = null;
 
@@ -3328,6 +3352,7 @@ class TDExporter
       pw.format("From\tTo\tLength\tAzimuth\tVertical\tLabel\tLeft\tRight\tUp\tDown\tNote\n");
 
       List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+      checkShotsClino( list );
 
       AverageLeg leg = new AverageLeg(0);
       DBlock ref_item = null;
@@ -3619,6 +3644,7 @@ class TDExporter
   {
     // Log.v("DistoX", "export as visualtopo: " + filename );
     List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+    checkShotsClino( list );
     List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
     try {
       // TDLog.Log( TDLog.LOG_IO, "export VisualTopo " + filename );

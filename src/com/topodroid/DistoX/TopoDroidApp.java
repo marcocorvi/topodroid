@@ -1136,6 +1136,7 @@ public class TopoDroidApp extends Application
   boolean isCurrentStationName( String name ) { return StationName.isCurrentStationName( name ); }
   // void clearCurrentStation() { StationName.clearCurrentStation(); }
   String getCurrentOrLastStation( ) { return StationName.getCurrentOrLastStation( mData, TDInstance.sid); }
+  String getFirstStation( ) { return StationName.getFirstStation( mData, TDInstance.sid); }
   private void resetCurrentOrLastStation( ) { StationName.resetCurrentOrLastStation( mData, TDInstance.sid); }
 
   // static long trobotmillis = 0L; // TROBOT_MILLIS

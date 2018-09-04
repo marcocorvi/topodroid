@@ -61,9 +61,9 @@ class ShotDialog extends MyDialog
   private Pattern mPattern; // name pattern
 
   // private TextView mTVdata;
-  private EditText mETdistance;
+  private EditText mETdistance; // distance | depth
   private EditText mETbearing;
-  private EditText mETclino;
+  private EditText mETclino;    // clino | distance
 
   private TextView mTVextra;
 
@@ -151,6 +151,7 @@ class ShotDialog extends MyDialog
   private static final int flagDistance = MyKeyboard.FLAG_POINT;
   private static final int flagBearing  = MyKeyboard.FLAG_POINT;
   private static final int flagClino    = MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_SIGN;
+  private static final int flagDepth    = MyKeyboard.FLAG_POINT;
 
   private boolean mFirst;
 
@@ -203,10 +204,17 @@ class ShotDialog extends MyDialog
     }
     
     // shot_data    = blk.dataString();
-    shot_distance = blk.distanceString();
-    shot_bearing  = blk.bearingString();
-    shot_clino    = blk.clinoString();
-    shot_manual   = (blk.mShotType > 0);
+    if ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING ) {
+      shot_distance = blk.depthString();
+      shot_bearing  = blk.bearingString();
+      shot_clino    = blk.distanceString();
+      shot_manual   = (blk.mShotType > 0);
+    } else { // SurveyInfo.DATAMODE_NORMAL
+      shot_distance = blk.distanceString();
+      shot_bearing  = blk.bearingString();
+      shot_clino    = blk.clinoString();
+      shot_manual   = (blk.mShotType > 0);
+    }
 
     // Log.v("DistoX", "shot is manual " + shot_manual + " length " + shot_distance );
 
@@ -289,9 +297,15 @@ class ShotDialog extends MyDialog
     mButtonPrev.setEnabled( mPrevBlk != null );
 
     // do at the very end
-    MyKeyboard.setEditable( mETdistance, mKeyboard, mKLdistance, shot_manual, flagDistance );
-    MyKeyboard.setEditable( mETbearing,  mKeyboard, mKLbearing,  shot_manual, flagBearing );
-    MyKeyboard.setEditable( mETclino,    mKeyboard, mKLclino,    shot_manual, flagClino );
+    if ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING ) {
+      MyKeyboard.setEditable( mETdistance, mKeyboard, mKLdistance, shot_manual, flagDepth );
+      MyKeyboard.setEditable( mETbearing,  mKeyboard, mKLbearing,  shot_manual, flagBearing );
+      MyKeyboard.setEditable( mETclino,    mKeyboard, mKLclino,    shot_manual, flagDistance );
+    } else {
+      MyKeyboard.setEditable( mETdistance, mKeyboard, mKLdistance, shot_manual, flagDistance );
+      MyKeyboard.setEditable( mETbearing,  mKeyboard, mKLbearing,  shot_manual, flagBearing );
+      MyKeyboard.setEditable( mETclino,    mKeyboard, mKLclino,    shot_manual, flagClino );
+    }
 
     mETcomment.requestFocus();
   }
@@ -617,10 +631,17 @@ class ShotDialog extends MyDialog
 
     if ( shot_manual ) {
       try {
-        float d = Float.parseFloat( mETdistance.getText().toString() ) / TDSetting.mUnitLength;
-	float b = Float.parseFloat( mETbearing.getText().toString() )  / TDSetting.mUnitAngle;
-        float c = Float.parseFloat( mETclino.getText().toString() )    / TDSetting.mUnitAngle;
-        mParent.updateShotDistanceBearingClino( d, b, c, mBlk );
+	if ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING ) {
+          float p = Float.parseFloat( mETdistance.getText().toString() ) / TDSetting.mUnitLength;
+	  float b = Float.parseFloat( mETbearing.getText().toString() )  / TDSetting.mUnitAngle;
+          float d = Float.parseFloat( mETclino.getText().toString() )    / TDSetting.mUnitLength;
+          mParent.updateShotDepthBearingDistance( p, b, d, mBlk );
+	} else { // SurveyInfo.DATAMODE_DEPTH
+          float d = Float.parseFloat( mETdistance.getText().toString() ) / TDSetting.mUnitLength;
+	  float b = Float.parseFloat( mETbearing.getText().toString() )  / TDSetting.mUnitAngle;
+          float c = Float.parseFloat( mETclino.getText().toString() )    / TDSetting.mUnitAngle;
+          mParent.updateShotDistanceBearingClino( d, b, c, mBlk );
+	}
       } catch (NumberFormatException e ) { }
     }
 

@@ -70,7 +70,7 @@ class TDPrefKey
 
   static String[] MAINdef = {
      "TopoDroid",
-     "0",
+     "20",
      "1",
      "1",
      TRUE,
@@ -466,8 +466,8 @@ class TDPrefKey
   static String[] EXPORTdef = {
     "",
     TRUE,
-    "none",
-    "none",
+    "-1",
+    "-1",
     FALSE,
     TRUE,
     // FALSE,

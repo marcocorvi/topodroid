@@ -725,11 +725,15 @@ class DistoXNum
           if ( ! depths.containsKey( blk.mFrom ) ) depths.put( blk.mFrom, new Float( blk.mDepth ) );
         }
       }
+      boolean depth_error = false;
       for ( DBlock blk : data ) { // set dblock clino
 	if ( blk.mTo != null && blk.mTo.length() > 0 && depths.containsKey( blk.mTo ) ) {
           float tdepth = depths.get( blk.mTo ).floatValue();
-	  blk.makeClick( tdepth );
+	  if ( ! blk.makeClino( tdepth ) ) depth_error = true;
         }
+      }
+      if ( depth_error ) {
+        TDToast.make( R.string.depth_error );
       }
     }
 

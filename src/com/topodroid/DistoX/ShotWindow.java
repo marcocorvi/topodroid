@@ -1650,6 +1650,16 @@ public class ShotWindow extends Activity
     mDataAdapter.updateBlockView( blk.mId );
   }
 
+  void updateShotDepthBearingDistance( float p, float b, float d, DBlock blk )
+  {
+    // Log.v("DistoX", "update shot DBC length " + d );
+    mApp_mData.updateShotDepthBearingDistance( blk.mId, TDInstance.sid, p, b, d, true );
+    blk.mDepth   = p;
+    blk.mBearing = b;
+    blk.mLength  = d;
+    mDataAdapter.updateBlockView( blk.mId );
+  }
+
   // @param leg leg data-helper value (0 normal, 1 sec, 2 x-splay, 3 back)
   void updateShot( String from, String to, int extend, float stretch, long flag, long leg, String comment, DBlock blk )
   {

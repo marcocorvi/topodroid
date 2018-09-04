@@ -94,6 +94,11 @@ class StationName
     mCurrentStationName = null;
   }
 
+  static String getFirstStation( DataHelper data_helper, long sid )
+  {
+    return data_helper.getFirstStation( sid );
+  }
+  
   // ------------------------------------------------------------------------------------------------
   // setting the leg extend automatically, sets also stretch to 0
 

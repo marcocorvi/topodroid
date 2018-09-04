@@ -952,6 +952,20 @@ class DataHelper extends DataSetObservable
     } 
   }
 
+  void updateShotDepthBearingDistance( long id, long sid, float p, float b, float d, boolean forward )
+  {
+    StringWriter sw = new StringWriter();
+    PrintWriter pw = new PrintWriter( sw );
+    pw.format( Locale.US,
+               "UPDATE shots SET distance=%.6f, bearing=%.4f, clino=%.4f WHERE surveyId=%d AND id=%d",
+               d, b, p, sid, id );
+    if ( doExecShotSQL( id, sw ) ) {
+      if ( forward && mListeners != null ) { // synchronized( mListeners )
+        mListeners.onUpdateShotPBD( id, sid, p, b, d );
+      }
+    } 
+  }
+
   int updateShot( long id, long sid, String fStation, String tStation,
                   long extend, long flag, long leg,
 		  String comment, boolean forward )
@@ -2073,6 +2087,21 @@ class DataHelper extends DataSetObservable
            new String[]{ Long.toString( sid ), start, start },
            null, null, "id" );
        if (cursor.moveToFirst()) ret = true;
+       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+     }
+     return ret;
+   }
+
+   String getFirstStation( long sid )
+   {
+     String ret = null;
+     if ( myDB != null ) {
+       Cursor cursor = myDB.query( SHOT_TABLE,
+           new String[]{ "fStation" },
+           "surveyId=? and ( fStation!=\"\" and tStation!=\"\" )",
+           new String[]{ Long.toString( sid ) },
+           null, null, null ); // count = 1
+       if (cursor.moveToFirst()) ret = cursor.getString( 0 );
        if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      }
      return ret;

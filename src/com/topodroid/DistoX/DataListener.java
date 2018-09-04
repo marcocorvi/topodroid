@@ -59,17 +59,19 @@ interface DataListener
   byte SHOT_UNDELETE = (byte)18;
   byte SHOT_AMDR     = (byte)19;
   byte SHOT_DBC_UPDATE = (byte)20;
+  byte SHOT_PBD_UPDATE = (byte)21;
 
-  byte SHOT_INSERT   = (byte)21;
+  byte SHOT_INSERT   = (byte)22;
   byte SHOT_INSERTAT = (byte)23;
   byte SHOT_STATUS   = (byte)24;
   byte SHOT_COLOR    = (byte)25;
   byte SHOT_LEG_FLAG = (byte)26;
 
-  void onUpdateShot( long id, long sid, String fStation, String tStation,
-                            long extend, long flag, long leg, String comment );
+  void onUpdateShot( long id, long sid, String fStation, String tStation, long extend, long flag, long leg, String comment );
 
   void onUpdateShotDBC( long id, long sid, float d, float b, float c );
+
+  void onUpdateShotPBD( long id, long sid, float p, float b, float d );
 
   void onUpdateShotName( long id, long sid, String fStation, String tStation );
 
