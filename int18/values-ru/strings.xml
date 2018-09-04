@@ -201,7 +201,7 @@
     <string name="fmt_error_m">Ошибка %1$.1f м</string>
     <string name="fmt_h_geoid">Ошибка %1$.0f м</string>
     <string name="fmt_h_ellipsoid">Ошибка %1$.0f м</string>
-    <!-- TODO string name="depth_error">Waring. Data depth error</string -->
+    <string name="depth_error">Внимание. >Ошибка данных глубины.</string>
 
     <string name="error_azimuth_required">Требуется азимут</string>
     <string name="error_length_required">Требуется длина</string>
