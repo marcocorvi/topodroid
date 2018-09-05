@@ -255,7 +255,11 @@ class DataHelper extends DataSetObservable
 
   // private static String qInitStation  = "select init_station from surveys where id=?";
   // private static String qXSections    = "select xsections from surveys where id=?";
-  private static String qSurveysField = "select ? from surveys where id=?";
+  // private static String qSurveysField = "select ? from surveys where id=?";
+  private static String qInitStation  = "select init_station from surveys where id=?";
+  private static String qXSections    = "select xsections from surveys where id=?";
+  private static String qDatamode     = "select datamode from surveys where id=?";
+  private static String qDeclination  = "select declination from surveys where id=?";
   private static String qSurveysStat1 = "select flag, acceleration, magnetic, dip from shots where surveyId=? AND status=0 AND acceleration > 1 ";
   private static String qSurveysStat2 =
     "select flag, distance, fStation, tStation, clino, extend from shots where surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ";
@@ -275,13 +279,14 @@ class DataHelper extends DataSetObservable
     //                             null,  // groupBy
     //                             null,  // having
     //                             null ); // order by
-    Cursor cursor = myDB.rawQuery( qSurveysField, new String[] { "init_station", Long.toString(sid) } );
+    Cursor cursor = myDB.rawQuery( qInitStation, new String[] { Long.toString(sid) } );
     if ( cursor != null ) {
       if (cursor.moveToFirst()) {
         ret = cursor.getString(0);
       }
       if ( ! cursor.isClosed() ) cursor.close();
     }
+    // Log.v("DistoX_DB", "init station <" + ret + ">" );
     return ret;
   }
 
@@ -299,7 +304,7 @@ class DataHelper extends DataSetObservable
     //                             null,  // groupBy
     //                             null,  // having
     //                             null ); // order by
-    Cursor cursor = myDB.rawQuery( qSurveysField, new String[] { "xstations", Long.toString(sid) } );
+    Cursor cursor = myDB.rawQuery( qXSections, new String[] { Long.toString(sid) } );
     if ( cursor != null ) {
       if (cursor.moveToFirst()) {
         ret = (int)cursor.getLong(0);
@@ -323,7 +328,7 @@ class DataHelper extends DataSetObservable
     //                             null,  // groupBy
     //                             null,  // having
     //                             null ); // order by
-    Cursor cursor = myDB.rawQuery( qSurveysField, new String[] { "datamode", Long.toString(sid) } );
+    Cursor cursor = myDB.rawQuery( qDatamode, new String[] { Long.toString(sid) } );
     if ( cursor != null ) {
       if (cursor.moveToFirst()) {
         ret = (int)cursor.getLong(0);
@@ -344,7 +349,7 @@ class DataHelper extends DataSetObservable
     //                             null,  // groupBy
     //                             null,  // having
     //                             null ); // order by
-    Cursor cursor = myDB.rawQuery( qSurveysField, new String[] { "declination", Long.toString(sid) } );
+    Cursor cursor = myDB.rawQuery( qDeclination, new String[] { Long.toString(sid) } );
     if (cursor.moveToFirst()) {
       ret = (float)(cursor.getDouble( 0 ));
     }
@@ -732,22 +737,23 @@ class DataHelper extends DataSetObservable
     cv.put( "team", ((team != null)? team : "") );
     cv.put( "declination", decl );
     cv.put( "comment", ((comment != null)? comment : "") );
-    cv.put( "init_station", ((init_station != null)? init_station : "") );
+    cv.put( "init_station", ((init_station != null)? init_station : "0") );
     cv.put( "xsections", xsections );
     return cv;
   }
 
-  boolean updateSurveyInfo( long id, String date, String team, double decl, String comment,
+  boolean updateSurveyInfo( long sid, String date, String team, double decl, String comment,
                             String init_station, int xsections, boolean forward )
   {
     boolean ret = false;
+    // Log.v("DistoX_DB", "update survey, init station <" + init_station + ">" );
     ContentValues cv = makeSurveyInfoCcontentValues( date, team, decl, comment, init_station, xsections );
     try {
       myDB.beginTransaction();
-      myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(id) } );
+      myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(sid) } );
       myDB.setTransactionSuccessful();
       if ( forward && mListeners != null ) { // synchronized( mListeners )
-        mListeners.onUpdateSurveyInfo( id, date, team, decl, comment, init_station, xsections );
+        mListeners.onUpdateSurveyInfo( sid, date, team, decl, comment, init_station, xsections );
       }
       ret = true;
     } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
@@ -891,6 +897,7 @@ class DataHelper extends DataSetObservable
   void updateSurveyInitStation( long id, String station, boolean forward )
   {
     ContentValues cv = new ContentValues();
+    // Log.v("DistoX_DB", "update survey init_station <" + station + ">" );
     cv.put( "init_station", station );
     if ( doUpdateSurvey( id, cv, "survey init_station" ) ) {
       if ( forward && mListeners != null ) { // synchronized( mListeners )
@@ -1122,8 +1129,7 @@ class DataHelper extends DataSetObservable
         mListeners.onUpdateShotLeg( id, sid, leg );
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-      Log.e( "DistoX", e.getMessage() );
-    } catch (SQLiteException e ) { logError("shot " + id + " leg", e );
+    } catch ( SQLiteException e ) { logError("shot " + id + " leg", e );
     } finally { myDB.endTransaction(); }
    
   }

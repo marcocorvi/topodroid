@@ -148,7 +148,8 @@ public class TDPrefActivity extends Activity
         pref.commitValueString();
       }
     }
-    finish();
+    // finish();
+    super.onBackPressed();
   }
 
   private void setTheTitle()
@@ -202,18 +203,17 @@ public class TDPrefActivity extends Activity
     if ( cnt == 0 ) return false;
 
     if (mPrefCategory == PREF_CATEGORY_ALL ) {
-    mCwdPref = findPreference( "DISTOX_CWD" );
-    if ( mCwdPref != null ) {
-      final Intent cwd_intent = new Intent( mCtx, CWDActivity.class ); // this
-      mCwdPref.setValue( TDInstance.cwd );
-      mCwdPref.getView().setOnClickListener(
-        new OnClickListener() {
-          @Override
-          public void onClick( View v )
-          {
-            startActivityForResult( cwd_intent, REQUEST_CWD );
-          }
-        } );
+      mCwdPref = findPreference( "DISTOX_CWD" );
+      if ( mCwdPref != null ) {
+        mCwdPref.setValue( TDInstance.cwd );
+        View v = mCwdPref.getView();
+        if ( v != null ) {
+          final Intent cwd_intent = new Intent( mCtx, CWDActivity.class ); // this
+          v.setOnClickListener( new OnClickListener() {
+            @Override
+            public void onClick( View v ) { startActivityForResult( cwd_intent, REQUEST_CWD ); }
+          } );
+        }
       }
       
       linkPreference( "DISTOX_SURVEY_PREF", PREF_CATEGORY_SURVEY );
@@ -224,15 +224,15 @@ public class TDPrefActivity extends Activity
     } else if (mPrefCategory == PREF_CATEGORY_EXPORT ) {
       mPtCmapPref = findPreference( "DISTOX_PT_CMAP" );
       if ( mPtCmapPref != null ) {
-        final Intent pt_intent = new Intent( mCtx, PtCmapActivity.class ); // this
-        mPtCmapPref.getView().setOnClickListener( 
-          new OnClickListener() {
-            @Override
-            public void onClick( View v )
-            {
-              startActivityForResult( pt_intent, REQUEST_PT_CMAP );
-            }
-        } );
+        View v = mPtCmapPref.getView();
+	if ( v != null ) {
+          final Intent pt_intent = new Intent( mCtx, PtCmapActivity.class ); // this
+          v.setOnClickListener( 
+            new OnClickListener() {
+              @Override
+              public void onClick( View v ) { startActivityForResult( pt_intent, REQUEST_PT_CMAP ); }
+          } );
+	}
       }
     } else if (mPrefCategory == PREF_CATEGORY_SURVEY ) {
       linkPreference( "DISTOX_LOCATION_SCREEN", PREF_LOCATION );

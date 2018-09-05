@@ -55,11 +55,6 @@ import android.app.Application;
 // import android.app.KeyguardManager.KeyguardLock;
 // import android.app.Activity;
 
-import android.preference.PreferenceManager;
-// import android.preference.Preference;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-import android.content.SharedPreferences.Editor;
 import android.content.Context;
 // import android.content.Intent;
 import android.content.IntentFilter;
@@ -94,7 +89,6 @@ import android.bluetooth.BluetoothDevice;
 // import android.widget.Toast;
 
 public class TopoDroidApp extends Application
-                          implements OnSharedPreferenceChangeListener
 {
   static final String EMPTY = "";
 
@@ -475,12 +469,6 @@ public class TopoDroidApp extends Application
     return ret;
   }
 
-  // FIXME to disappear ...
-  // public long getSurveyId() { return TDInstance.sid; }
-  // public long getCalibId()  { return TDInstance.cid; }
-  // public String getSurvey() { return TDInstance.survey; }
-  // public String getCalib()  { return TDInstance.calib; }
-
   static boolean mEnableZip = true;  // whether zip saving is enabled or must wait (locked by th2. saving thread)
   static boolean mSketches = false;  // whether to use 3D models
 
@@ -505,7 +493,6 @@ public class TopoDroidApp extends Application
     //   Debug.startMethodTracing("DISTOX");
     // }
 
-    mPrefHlp.getSharedPrefs().registerOnSharedPreferenceChangeListener( this ); // FIXME_PREF
     // TDLog.Debug("ready");
   }
 
@@ -548,8 +535,6 @@ public class TopoDroidApp extends Application
     }
 
     mPrefHlp = new TDPrefHelper( this, this );
-    // mPrefs = PreferenceManager.getDefaultSharedPreferences( this );
-    //
     mWelcomeScreen = mPrefHlp.getBoolean( "DISTOX_WELCOME_SCREEN", true ); // default: WelcomeScreen = true
     if ( mWelcomeScreen ) {
       setDefaultSocketType();
@@ -609,7 +594,6 @@ public class TopoDroidApp extends Application
         if ( mDData.getValue( "symbol_version" ) == null ) installSymbols( true );
         installFirmware( false );
         // installUserManual( );
-        // updateDefaultPreferences(); // reset a few default preference values - not needed any more
       }
 
       // ***** CHECK SPECIAL EXPERIMENTAL FEATURES
@@ -942,7 +926,7 @@ public class TopoDroidApp extends Application
         DistoXStationName.setInitialStation( mData.getSurveyInitStation( TDInstance.sid ) );
         TDInstance.survey = name;
 	TDInstance.datamode = mData.getSurveyDataMode( TDInstance.sid );
-	Log.v("DistoX", "set survey from name: <" + name + "> datamode " + datamode + " " + TDInstance.datamode );
+	// Log.v("DistoX", "set survey from name: <" + name + "> datamode " + datamode + " " + TDInstance.datamode );
         TDInstance.secondLastShotId = lastShotId();
         // restoreFixed();
         if ( mShotWindow != null) {
@@ -982,29 +966,6 @@ public class TopoDroidApp extends Application
     // return 0;
   }
 
-  // void setSurveyFromId( long id )
-  // {
-  //   if ( mData != null ) {
-  //     TDInstance.survey = mData.getSurveyFromId( id );
-  //     TDInstance.datamode = mData.getSurveyDataMode( id );
-  //     TDInstance.sid = 0;
-  //     // mFixed.clear();
-  //     if ( TDInstance.survey != null ) {
-  //       TDInstance.sid = id;
-  //       TDInstance.secondLastShotId = lastShotId();
-  //       // restoreFixed();
-  //     }
-  //   }
-  // }
-
-  // void setCalibFromId( long id )
-  // {
-  //  if ( mDData != null ) {
-  //     TDInstance.calib = mDData.getCalibFromId( id );
-  //     TDInstance.cid = ( TDInstance.calib == null )? 0 : id;
-  //   }
-  // }
-
   // -----------------------------------------------------------------
   // PREFERENCES
 
@@ -1012,15 +973,6 @@ public class TopoDroidApp extends Application
   {
     String defaultSockType = ( android.os.Build.MANUFACTURER.equals("samsung") ) ? "1" : "0";
     mPrefHlp.update( "DISTOX_SOCK_TYPE", defaultSockType ); 
-  }
-
-  private void updateDefaultPreferences()
-  {
-    if ( mPrefHlp != null ) {
-      if ( ! "1".equals( mPrefHlp.getString( "DISTOX_GROUP_BY", "1" ) ) ) {
-        mPrefHlp.update( "DISTOX_GROUP_BY", "1" ); 
-      }
-    }
   }
 
   void setCWDPreference( String cwd, String cbd )
@@ -1066,14 +1018,6 @@ public class TopoDroidApp extends Application
   {
     TDSetting.setDrawingUnits( u );
     mPrefHlp.update( "DISTOX_DRAWING_UNIT", Float.toString(u) );
-  }
-
-
-
-  public void onSharedPreferenceChanged( SharedPreferences sp, String k ) 
-  {
-    Log.v("DistoPref", "shared pref changed " + k );
-    // TDSetting.checkPreference( sp, k, this );
   }
 
   // used for "DISTOX_WELCOME_SCREEN" and "DISTOX_TD_SYMBOL"
