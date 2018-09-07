@@ -33,7 +33,7 @@ class StationPolicy
   private static boolean mTRobotShot = false;    // TopoRobot shooting policy
   private static boolean mMagAnomaly = false; // local magnetic anomaly survey, tested with doMagAnomaly
 
-  static long    mTitleColor;
+  static int     mTitleColor = TDColor.TITLE_NORMAL;
   static int     mSurveyStations  = SURVEY_STATION_FOREWARD;
   private static int mSavedPolicy = SURVEY_STATION_ZERO;
 
@@ -88,6 +88,7 @@ class StationPolicy
   {
     // Log.v("DistoXP", "policy set from " + mSavedPolicy + " to " + policy );
     // dump();
+    mTitleColor = TDColor.TITLE_NORMAL;
     if ( policy == SURVEY_STATION_TOPOROBOT ) {
       if ( TDLevel.overExpert ) {
         mTRobotShot      = true;

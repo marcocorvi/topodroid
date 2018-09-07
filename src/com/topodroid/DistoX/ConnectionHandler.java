@@ -310,7 +310,7 @@ class ConnectionHandler extends Handler
      switch ( key ) {
        case DataListener.SURVEY_SET:
          if ( ! data[0].equals( TDInstance.survey ) ) { // N.B. data[0] not null
-           mSid = mApp.setSurveyFromName( data[0], Integer.parseInt(data[1]), false ); // -1 datamode not set
+           mSid = mApp.setSurveyFromName( data[0], Integer.parseInt(data[1]), true, false ); // -1 datamode not set
          } else {
            mSid = TDInstance.sid;
          }

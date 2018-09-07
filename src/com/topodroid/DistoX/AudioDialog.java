@@ -32,6 +32,8 @@ import android.view.View;
 import android.widget.Button;
 // import android.widget.Toast;
 
+import android.util.Log;
+
 class AudioDialog extends MyDialog
                   implements View.OnClickListener
 {
@@ -117,6 +119,7 @@ class AudioDialog extends MyDialog
       MyStateBox b = (MyStateBox)v;
       if ( b == mBtnDelete ) {
         if ( hasFile ) { // delete audio file
+	  // Log.v("DistoX", "audio delete ask confirm");
           mAction = ACTION_DELETE;
           mBtnConfirm.setText(  R.string.audio_delete );
           return;
@@ -124,31 +127,41 @@ class AudioDialog extends MyDialog
           // file.delete();
           // mApp.mData.dropAudio( TDInstance.sid, mBid );
         }
+	Log.v("DistoX", "audio delete has no file");
       } else if ( b == mBtnPlay ) {
         mAction = ACTION_NONE;
         mBtnConfirm.setText( R.string.audio_paused );
         if ( canPlay ) {
           int sp = mBtnPlay.getState();
           if ( sp == 2 ) {
+	    // Log.v("DistoX", "audio play stop");
             stopPlay();
           } else if ( sp == 1 ) {
+	    // Log.v("DistoX", "audio play start");
             startPlay();
           }
-        }
+        // } else {
+	//   Log.v("DistoX", "audio play cannot play");
+	}
         return;
       } else if ( b == mBtnRec ) {
         if ( canRec ) {
           int sr = mBtnRec.getState();
           if ( sr == 1 ) {
+	    // Log.v("DistoX", "audio record stop");
             stopRec();
           } else if ( sr == 0 ) {
             if ( hasFile ) {
+	      // Log.v("DistoX", "audio record ask overwrite");
               mAction = ACTION_OVERWRITE;
               mBtnConfirm.setText( R.string.audio_overwrite );
             } else {
+	      // Log.v("DistoX", "audio record start");
               startRec();
             }
           }
+	// } else {
+	//   Log.v("DistoX", "audio record cannot record");
         }
         return;
       }
@@ -157,12 +170,16 @@ class AudioDialog extends MyDialog
       try {
         if ( (Button)v == mBtnConfirm ) {
           if ( mAction == ACTION_DELETE ) {
+	    // Log.v("DistoX", "audio delete");
             deleteAudio();
           } else if ( mAction == ACTION_OVERWRITE ) {
+	    // Log.v("DistoX", "audio overwrite start record");
             startRec();
             return;
           }
-        }
+        // } else {
+	//   Log.v("DistoX", "audio confirm undefined");
+	}
       } catch ( ClassCastException e ) { }
     }
     dismiss();

@@ -105,6 +105,8 @@ public class ShotWindow extends Activity
   final static private int BTN_MANUAL    = 5;
   final static private int BTN_SEARCH    = 7;
   final static private int BTN_AZIMUTH   = 8;
+  private int boff = 0;
+  private boolean diving = false;
 
   private DataHelper mApp_mData;
 
@@ -249,7 +251,7 @@ public class ShotWindow extends Activity
   public void setRefAzimuthButton()
   {
     if ( ! TDLevel.overNormal ) return;
-    if ( BTN_AZIMUTH >= mButton1.length ) return;
+    if ( BTN_AZIMUTH - boff >= mButton1.length ) return;
     if ( TDAzimuth.mFixedExtend == 0 ) {
       // android.graphics.Matrix m = new android.graphics.Matrix();
       // m.postRotate( TDAzimuth.mRefAzimuth - 90 );
@@ -258,12 +260,12 @@ public class ShotWindow extends Activity
         // Bitmap bm1 = Bitmap.createScaledBitmap( mBMdial, mButtonSize, mButtonSize, true );
         // Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, mButtonSize, mButtonSize, m, true);
 	Bitmap bm2 = mDialBitmap.getBitmap( TDAzimuth.mRefAzimuth, mButtonSize );
-        mButton1[ BTN_AZIMUTH ].setBackgroundDrawable( new BitmapDrawable( getResources(), bm2 ) );
+        mButton1[ BTN_AZIMUTH - boff ].setBackgroundDrawable( new BitmapDrawable( getResources(), bm2 ) );
       }
     } else if ( TDAzimuth.mFixedExtend == -1L ) {
-      mButton1[ BTN_AZIMUTH ].setBackgroundDrawable( mBMleft );
+      mButton1[ BTN_AZIMUTH - boff ].setBackgroundDrawable( mBMleft );
     } else {
-      mButton1[ BTN_AZIMUTH ].setBackgroundDrawable( mBMright );
+      mButton1[ BTN_AZIMUTH - boff ].setBackgroundDrawable( mBMright );
     } 
   }
 
@@ -338,7 +340,7 @@ public class ShotWindow extends Activity
     sb.append( mApp.getConnectionStateTitleStr() );
     sb.append( TDInstance.survey );
 
-    setTitleColor( TDSetting.mTitleColor );
+    setTitleColor( StationPolicy.mTitleColor );
     mActivity.setTitle( sb.toString() );
   }
 
@@ -649,7 +651,7 @@ public class ShotWindow extends Activity
           TDToast.make( R.string.no_cave3d );
         }
       }
-    } else if ( TDLevel.overNormal && TDInstance.datamode == SurveyInfo.DATAMODE_NORMAL && p++ == pos ) { // DEVICE
+    } else if ( TDLevel.overNormal && (! diving) && p++ == pos ) { // DEVICE
       if ( mApp.mBTAdapter.isEnabled() ) {
         mActivity.startActivity( new Intent( Intent.ACTION_VIEW ).setClass( mActivity, DeviceActivity.class ) );
       }
@@ -924,37 +926,43 @@ public class ShotWindow extends Activity
     mNrButton1 = TDLevel.overExpert ? 9
                : TDLevel.overNormal ? 8
                : TDLevel.overBasic ?  6 : 5;
+    diving = ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING );
+    if ( diving ) {
+      mNrButton1 -= 2;
+      boff = 2;
+    } else {
+      boff = 0;
+    }
     mButton1 = new Button[ mNrButton1 + 1 ];
     for ( int k=0; k < mNrButton1; ++k ) {
-      mButton1[k] = MyButton.getButton( this, this, izons[k] );
-      if ( k == BTN_DOWNLOAD )  { mBMdownload = MyButton.getButtonBackground( mApp, res, izons[k] ); }
-      else if ( k == BTN_BLUETOOTH ) { mBMbluetooth = MyButton.getButtonBackground( mApp, res, izons[k] ); }
-      else if ( k == BTN_PLOT ) { mBMplot     = MyButton.getButtonBackground( mApp, res, izons[k] ); }
+      int kk = k+boff;
+      mButton1[k] = MyButton.getButton( this, this, izons[kk] );
     }
     mButton1[mNrButton1] = MyButton.getButton( this, this, R.drawable.iz_empty );
     // mBMdial          = BitmapFactory.decodeResource( res, R.drawable.iz_dial_transp ); // FIXME AZIMUTH_DIAL
     // mBMdial_transp   = BitmapFactory.decodeResource( res, R.drawable.iz_dial_transp );
     mDialBitmap      = TopoDroidApp.getDialBitmap( res );
 
-    mBMplot_no       = MyButton.getButtonBackground( mApp, res, R.drawable.iz_plot_no );
-    mBMdownload_on   = MyButton.getButtonBackground( mApp, res, R.drawable.iz_download_on );
-    mBMdownload_wait = MyButton.getButtonBackground( mApp, res, R.drawable.iz_download_wait );
-    mBMdownload_no   = MyButton.getButtonBackground( mApp, res, R.drawable.iz_download_no );
-    mBMleft          = MyButton.getButtonBackground( mApp, res, R.drawable.iz_left );
-    mBMright         = MyButton.getButtonBackground( mApp, res, R.drawable.iz_right );
-    mBMbluetooth_no  = MyButton.getButtonBackground( mApp, res, R.drawable.iz_bt_no );
-
-    if ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING ) {
-      mButton1[ BTN_DOWNLOAD ].setVisibility( View.GONE );
-      mButton1[ BTN_BLUETOOTH ].setVisibility( View.GONE );
+    mBMplot     = MyButton.getButtonBackground( mApp, res, izons[BTN_PLOT] );
+    mBMplot_no  = MyButton.getButtonBackground( mApp, res, R.drawable.iz_plot_no );
+    mBMleft     = MyButton.getButtonBackground( mApp, res, R.drawable.iz_left );
+    mBMright    = MyButton.getButtonBackground( mApp, res, R.drawable.iz_right );
+    if ( ! diving ) {
+      mBMdownload = MyButton.getButtonBackground( mApp, res, izons[BTN_DOWNLOAD] );
+      mBMbluetooth = MyButton.getButtonBackground( mApp, res, izons[BTN_BLUETOOTH] );
+      mBMdownload_on   = MyButton.getButtonBackground( mApp, res, R.drawable.iz_download_on );
+      mBMdownload_wait = MyButton.getButtonBackground( mApp, res, R.drawable.iz_download_wait );
+      mBMdownload_no   = MyButton.getButtonBackground( mApp, res, R.drawable.iz_download_no );
+      mBMbluetooth_no  = MyButton.getButtonBackground( mApp, res, R.drawable.iz_bt_no );
     }
 
+
     if ( TDLevel.overBasic ) {
-      mButton1[ BTN_DOWNLOAD ].setOnLongClickListener( this );
-      mButton1[ BTN_PLOT ].setOnLongClickListener( this );
-      mButton1[ BTN_MANUAL ].setOnLongClickListener( this );
+      if ( ! diving ) mButton1[ BTN_DOWNLOAD ].setOnLongClickListener( this );
+      mButton1[ BTN_PLOT - boff ].setOnLongClickListener( this );
+      mButton1[ BTN_MANUAL - boff ].setOnLongClickListener( this );
       if ( TDLevel.overExpert ) {
-        mButton1[ BTN_SEARCH ].setOnLongClickListener( this );
+        mButton1[ BTN_SEARCH - boff ].setOnLongClickListener( this );
       }
     }
 
@@ -1017,8 +1025,8 @@ public class ShotWindow extends Activity
   // void enableSketchButton( boolean enabled )
   // {
   //   mApp.mEnableZip = enabled;
-  //   mButton1[ BTN_PLOT ].setEnabled( enabled ); // FIXME SKETCH BUTTON 
-  //   mButton1[ BTN_PLOT ].setBackgroundDrawable( enabled ? mBMplot : mBMplot_no );
+  //   mButton1[ BTN_PLOT - boff ].setEnabled( enabled ); // FIXME SKETCH BUTTON 
+  //   mButton1[ BTN_PLOT - boff ].setBackgroundDrawable( enabled ? mBMplot : mBMplot_no );
   // }
 
   // @Override
@@ -1178,7 +1186,7 @@ public class ShotWindow extends Activity
     if ( CutNPaste.dismissPopupBT() ) return true;
 
     Button b = (Button)view;
-    if ( b == mButton1[ BTN_DOWNLOAD ] ) { // MULTI-DISTOX
+    if ( ! diving && b == mButton1[ BTN_DOWNLOAD ] ) { // MULTI-DISTOX
       if (   TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI
           && ! mDataDownloader.isDownloading() 
           && TopoDroidApp.mDData.getDevices().size() > 1 ) {
@@ -1188,16 +1196,16 @@ public class ShotWindow extends Activity
         setConnectionStatus( mDataDownloader.getStatus() );
         mDataDownloader.doDataDownload( );
       }
-    } else if ( b == mButton1[ BTN_PLOT ] ) {
+    } else if ( b == mButton1[ BTN_PLOT - boff ] ) {
       if ( TDInstance.recentPlot != null ) {
         startExistingPlot( TDInstance.recentPlot, TDInstance.recentPlotType, null );
       } else {
         // onClick( view ); // fall back to onClick
         new PlotListDialog( mActivity, this, mApp, null ).show();
       }
-    } else if ( b == mButton1[ BTN_MANUAL ] ) {
+    } else if ( b == mButton1[ BTN_MANUAL - boff ] ) {
       new SurveyCalibrationDialog( mActivity, mApp ).show();
-    } else if ( b == mButton1[ BTN_SEARCH ] ) { // next search pos
+    } else if ( b == mButton1[ BTN_SEARCH - boff ] ) { // next search pos
       jumpToPos( mSearch.nextPos() );
     }
     return true;
@@ -1250,17 +1258,22 @@ public class ShotWindow extends Activity
       int k1 = 0;
       int kf = 0;
       // int k2 = 0;
-      if ( k1 < mNrButton1 && b == mButton1[k1++] ) {        // DOWNLOAD
-        if ( TDInstance.device != null ) {
-          setConnectionStatus( 2 ); // turn arrow orange
-          // TDLog.Log( TDLog.LOG_INPUT, "Download button, mode " + TDSetting.mConnectionMode );
-          mDataDownloader.toggleDownload();
-          setConnectionStatus( mDataDownloader.getStatus() );
-          mDataDownloader.doDataDownload( );
+      if ( ! diving ) {
+        if ( k1 < mNrButton1 && b == mButton1[k1++] ) {        // DOWNLOAD
+          if ( TDInstance.device != null ) {
+            setConnectionStatus( 2 ); // turn arrow orange
+            // TDLog.Log( TDLog.LOG_INPUT, "Download button, mode " + TDSetting.mConnectionMode );
+            mDataDownloader.toggleDownload();
+            setConnectionStatus( mDataDownloader.getStatus() );
+            mDataDownloader.doDataDownload( );
+          }
+	  return;
+        } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // BT RESET
+          doBluetooth( b );
+	  return;
         }
-      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // BT RESET
-        doBluetooth( b );
-      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // DISPLAY 
+      }
+      if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // DISPLAY 
         new ShotDisplayDialog( mActivity, this ).show();
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // SKETCH
         new PlotListDialog( mActivity, this, mApp, null ).show();
@@ -1922,7 +1935,7 @@ public class ShotWindow extends Activity
     if ( TDLevel.overNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_photo  
     if ( TDLevel.overNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_sensor
     if ( TDLevel.overBasic  ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_3d
-    if ( TDLevel.overNormal && TDInstance.datamode == SurveyInfo.DATAMODE_NORMAL ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_distox
+    if ( TDLevel.overNormal && ! diving ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_distox
     mMenuAdapter.add( res.getString( menus[k++] ) );  // menu_options
     mMenuAdapter.add( res.getString( menus[k++] ) );  // menu_help
     mMenu.setAdapter( mMenuAdapter );
@@ -1971,6 +1984,7 @@ public class ShotWindow extends Activity
 
   public void setConnectionStatus( int status )
   { 
+    if ( diving ) return;
     if ( TDInstance.device == null ) {
       // mButton1[ BTN_DOWNLOAD ].setVisibility( View.GONE );
       mButton1[BTN_DOWNLOAD].setBackgroundDrawable( mBMdownload_no );
@@ -1995,6 +2009,7 @@ public class ShotWindow extends Activity
 
   public void enableBluetoothButton( boolean enable )
   {
+    if ( diving ) return;
     mButton1[BTN_BLUETOOTH].setBackgroundDrawable( enable ? mBMbluetooth : mBMbluetooth_no );
     mButton1[BTN_BLUETOOTH].setEnabled( enable );
   }

@@ -41,27 +41,33 @@ public class TDPrefActivity extends Activity
   static final int REQUEST_PT_CMAP     = 7;
 
   static final String PREF_CATEGORY = "PrefCategory";
-  static final int PREF_CATEGORY_ALL    = 0;
-  static final int PREF_CATEGORY_SURVEY = 1;
-  static final int PREF_CATEGORY_PLOT   = 2;
-  static final int PREF_CATEGORY_CALIB  = 3;
-  static final int PREF_CATEGORY_DEVICE = 4;
-  static final int PREF_CATEGORY_SKETCH = 5;
-  static final int PREF_CATEGORY_EXPORT = 6;
+  static final int PREF_CATEGORY_ALL       = 0;
+  static final int PREF_CATEGORY_SURVEY    = 1;
+  static final int PREF_CATEGORY_PLOT      = 2;
+  static final int PREF_CATEGORY_CALIB     = 3;
+  static final int PREF_CATEGORY_DEVICE    = 4;
+  static final int PREF_CATEGORY_SKETCH    = 5;
+  static final int PREF_CATEGORY_EXPORT    = 6;
+  static final int PREF_CATEGORY_EXPORT_TH  = 7;
+  static final int PREF_CATEGORY_EXPORT_DAT = 8;
+  static final int PREF_CATEGORY_EXPORT_SVG = 9;
+  static final int PREF_CATEGORY_EXPORT_DXF = 10;
+  static final int PREF_CATEGORY_EXPORT_PNG = 11;
+  static final int PREF_CATEGORY_EXPORT_KML = 12;
 
-  static final int PREF_SHOT_DATA       = 7; 
-  static final int PREF_SHOT_UNITS      = 8; 
-  static final int PREF_ACCURACY        = 9; 
-  static final int PREF_LOCATION        = 10; 
-  static final int PREF_PLOT_SCREEN     = 11; 
-  static final int PREF_TOOL_LINE       = 12; 
-  static final int PREF_TOOL_POINT      = 13; 
-  static final int PREF_PLOT_WALLS      = 14; 
-  static final int PREF_PLOT_DRAW       = 15; 
-  static final int PREF_PLOT_ERASE      = 16; 
-  static final int PREF_PLOT_EDIT       = 17; 
+  static final int PREF_SHOT_DATA          = 13; 
+  static final int PREF_SHOT_UNITS         = 14; 
+  static final int PREF_ACCURACY           = 15; 
+  static final int PREF_LOCATION           = 16; 
+  static final int PREF_PLOT_SCREEN        = 17; 
+  static final int PREF_TOOL_LINE          = 18; 
+  static final int PREF_TOOL_POINT         = 19; 
+  static final int PREF_PLOT_WALLS         = 20; 
+  static final int PREF_PLOT_DRAW          = 21; 
+  static final int PREF_PLOT_ERASE         = 22; 
+  static final int PREF_PLOT_EDIT          = 23; 
 
-  static final int PREF_CATEGORY_LOG    = 18; // this must be the last
+  static final int PREF_CATEGORY_LOG       = 24; // this must be the last
 
   static int mTitleRes[] = {
     R.string.title_settings_main,
@@ -169,26 +175,32 @@ public class TDPrefActivity extends Activity
 
     // Log.v("DistoX", "Pref create. category " + mPrefCategory );
     switch ( mPrefCategory ) {
-      case PREF_CATEGORY_ALL:    mPrefs = TDPref.makeMainPrefs( res, hlp );   break;
-      case PREF_CATEGORY_SURVEY: mPrefs = TDPref.makeSurveyPrefs( res, hlp ); break;
-      case PREF_CATEGORY_PLOT:   mPrefs = TDPref.makePlotPrefs( res, hlp );   break;
-      case PREF_CATEGORY_CALIB:  mPrefs = TDPref.makeCalibPrefs( res, hlp );  break;
-      case PREF_CATEGORY_DEVICE: mPrefs = TDPref.makeDevicePrefs( res, hlp ); break;
-      case PREF_CATEGORY_EXPORT: mPrefs = TDPref.makeExportPrefs( res, hlp ); break;
-      case PREF_SHOT_DATA:       mPrefs = TDPref.makeShotPrefs( res, hlp );   break;
-      case PREF_SHOT_UNITS:      mPrefs = TDPref.makeUnitsPrefs( res, hlp );  break;
-      case PREF_ACCURACY:        mPrefs = TDPref.makeAccuracyPrefs( res, hlp ); break;
-      case PREF_LOCATION:        mPrefs = TDPref.makeLocationPrefs( res, hlp ); break;
-      case PREF_PLOT_SCREEN:     mPrefs = TDPref.makeScreenPrefs( res, hlp ); break;
-      case PREF_TOOL_LINE:       mPrefs = TDPref.makeLinePrefs( res, hlp );   break;
-      case PREF_TOOL_POINT:      mPrefs = TDPref.makePointPrefs( res, hlp );  break;
-      case PREF_PLOT_WALLS:      mPrefs = TDPref.makeWallsPrefs( res, hlp );  break;
-      case PREF_PLOT_DRAW:       mPrefs = TDPref.makeDrawPrefs( res, hlp );   break;
-      case PREF_PLOT_ERASE:      mPrefs = TDPref.makeErasePrefs( res, hlp );  break;
-      case PREF_PLOT_EDIT:       mPrefs = TDPref.makeEditPrefs( res, hlp );   break;
-      case PREF_CATEGORY_SKETCH: mPrefs = TDPref.makeSketchPrefs( res, hlp ); break;
-      case PREF_CATEGORY_LOG:    mPrefs = TDPref.makeLogPrefs( res, hlp );    break;
-      default:                   mPrefs = TDPref.makeMainPrefs( res, hlp );   break;
+      case PREF_CATEGORY_ALL:       mPrefs = TDPref.makeMainPrefs( res, hlp );   break;
+      case PREF_CATEGORY_SURVEY:    mPrefs = TDPref.makeSurveyPrefs( res, hlp ); break;
+      case PREF_CATEGORY_PLOT:      mPrefs = TDPref.makePlotPrefs( res, hlp );   break;
+      case PREF_CATEGORY_CALIB:     mPrefs = TDPref.makeCalibPrefs( res, hlp );  break;
+      case PREF_CATEGORY_DEVICE:    mPrefs = TDPref.makeDevicePrefs( res, hlp ); break;
+      case PREF_CATEGORY_EXPORT:    mPrefs = TDPref.makeExportPrefs( res, hlp ); break;
+      case PREF_CATEGORY_EXPORT_TH:  mPrefs = TDPref.makeExportThPrefs( res, hlp ); break;
+      case PREF_CATEGORY_EXPORT_DAT: mPrefs = TDPref.makeExportDatPrefs( res, hlp ); break;
+      case PREF_CATEGORY_EXPORT_SVG: mPrefs = TDPref.makeExportSvgPrefs( res, hlp ); break;
+      case PREF_CATEGORY_EXPORT_DXF: mPrefs = TDPref.makeExportDxfPrefs( res, hlp ); break;
+      case PREF_CATEGORY_EXPORT_PNG: mPrefs = TDPref.makeExportPngPrefs( res, hlp ); break;
+      case PREF_CATEGORY_EXPORT_KML: mPrefs = TDPref.makeExportKmlPrefs( res, hlp ); break;
+      case PREF_SHOT_DATA:          mPrefs = TDPref.makeShotPrefs( res, hlp );   break;
+      case PREF_SHOT_UNITS:         mPrefs = TDPref.makeUnitsPrefs( res, hlp );  break;
+      case PREF_ACCURACY:           mPrefs = TDPref.makeAccuracyPrefs( res, hlp ); break;
+      case PREF_LOCATION:           mPrefs = TDPref.makeLocationPrefs( res, hlp ); break;
+      case PREF_PLOT_SCREEN:        mPrefs = TDPref.makeScreenPrefs( res, hlp ); break;
+      case PREF_TOOL_LINE:          mPrefs = TDPref.makeLinePrefs( res, hlp );   break;
+      case PREF_TOOL_POINT:         mPrefs = TDPref.makePointPrefs( res, hlp );  break;
+      case PREF_PLOT_WALLS:         mPrefs = TDPref.makeWallsPrefs( res, hlp );  break;
+      case PREF_PLOT_DRAW:          mPrefs = TDPref.makeDrawPrefs( res, hlp );   break;
+      case PREF_PLOT_ERASE:         mPrefs = TDPref.makeErasePrefs( res, hlp );  break;
+      case PREF_PLOT_EDIT:          mPrefs = TDPref.makeEditPrefs( res, hlp );   break;
+      case PREF_CATEGORY_SKETCH:    mPrefs = TDPref.makeSketchPrefs( res, hlp ); break;
+      case PREF_CATEGORY_LOG:       mPrefs = TDPref.makeLogPrefs( res, hlp );    break;
+      default:                      mPrefs = TDPref.makeMainPrefs( res, hlp );   break;
     }
     int cnt = 0;
     if ( mPrefs != null ) {
@@ -234,6 +246,12 @@ public class TDPrefActivity extends Activity
           } );
 	}
       }
+      linkPreference( "DISTOX_EXPORT_TH_PREF",  PREF_CATEGORY_EXPORT_TH );
+      linkPreference( "DISTOX_EXPORT_DAT_PREF", PREF_CATEGORY_EXPORT_DAT );
+      linkPreference( "DISTOX_EXPORT_SVG_PREF", PREF_CATEGORY_EXPORT_SVG );
+      linkPreference( "DISTOX_EXPORT_DXF_PREF", PREF_CATEGORY_EXPORT_DXF );
+      linkPreference( "DISTOX_EXPORT_PNG_PREF", PREF_CATEGORY_EXPORT_PNG );
+      linkPreference( "DISTOX_EXPORT_KML_PREF", PREF_CATEGORY_EXPORT_KML );
     } else if (mPrefCategory == PREF_CATEGORY_SURVEY ) {
       linkPreference( "DISTOX_LOCATION_SCREEN", PREF_LOCATION );
       linkPreference( "DISTOX_ACCURACY_SCREEN", PREF_ACCURACY );

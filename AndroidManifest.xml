@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
+      android:debuggable="true"
       android:installLocation="auto"
-      android:versionCode="401018"
-      android:versionName="4.1.0u"
+      android:versionCode="401020"
+      android:versionName="4.1.0w"
     >
     <uses-sdk
        android:minSdkVersion="16"

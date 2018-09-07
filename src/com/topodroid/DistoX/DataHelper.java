@@ -1823,12 +1823,12 @@ class DataHelper extends DataSetObservable
   // SELECT STATEMENTS
 
   private static String qShotStations = "select fStation, tStation from shots where surveyId=? AND id=? ";
-  private static String qSensors1   = "select id, shotId, title, date, comment, type, value from sensors where surveyId=? AND status=? ";
-  private static String qSensors2   = "select id, shotId, title, date, comment, type, value from sensors where surveyId=? AND shotId=? ";
-  private static String qShotAudio  = "select id, date from audios where surveId=? AND shotId=? ";
-  private static String qAudios     = "select id, shotId, date from audios where surveId=? ";
-  private static String qPhotos     = "select id, shotId, title, date, comment from photos where surveyId=? AND status=? ";
-  private static String qShotPhoto  = "select id, shotId, title, date, comment from photos where surveyId=? AND shotId=? ";
+  private static String qSensors1     = "select id, shotId, title, date, comment, type, value from sensors where surveyId=? AND status=? ";
+  private static String qSensors2     = "select id, shotId, title, date, comment, type, value from sensors where surveyId=? AND shotId=? ";
+  private static String qShotAudio    = "select id, date from audios where surveyId=? AND shotId=? ";
+  private static String qAudios       = "select id, shotId, date from audios where surveyId=? ";
+  private static String qPhotos       = "select id, shotId, title, date, comment from photos where surveyId=? AND status=? ";
+  private static String qShotPhoto    = "select id, shotId, title, date, comment from photos where surveyId=? AND shotId=? ";
   private static String qFirstStation = "select fStation from shots where surveyId=? AND fStation!=\"\" AND tStation!=\"\" limit 1 ";
   private static String qHasStation   = "select id, fStation, tStation from shots where surveyId=? and ( fStation=? or tStation=? ) order by id ";
   private static String qHasPlot      = "select id, name from plots where surveyId=? AND name=? order by id ";

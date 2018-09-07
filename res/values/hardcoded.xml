@@ -23,7 +23,7 @@
   <string name="arrow_up" translatable="false">&#x21a5;</string>
   <string name="arrow_down" translatable="false">&#x21a7;</string>
   <string name="input_length" translatable="false">&#x2190;&#x2192;</string>
-  <string name="input_depth" translatable="false">&#x21a7;</string>
+  <string name="input_depth" translatable="false">&#x21d3;</string>
   <string name="input_azimuth" translatable="false">&#x2191;N</string>
   <string name="input_clino" translatable="false">/_</string>
   <string name="less_than" translatable="false">&lt;</string>

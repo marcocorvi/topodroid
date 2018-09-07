@@ -940,6 +940,13 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_cat_survey">SURVEY DATA</string>
   <string name="pref_cat_drawing">SKETCHING</string>
   <string name="pref_cat_import_export">IMPORT_EXPORT</string>
+  <string name="pref_cat_exportth">Therion</string>
+  <string name="pref_cat_exportdat">Compass</string>
+  <string name="pref_cat_exportsvg">SVG</string>
+  <string name="pref_cat_exportdxf">DXF</string>
+  <string name="pref_cat_exportpng">PNG</string>
+  <string name="pref_cat_exportkml">KML/GeoJSON</string>
+
   <string name="pref_cat_calib">CALIBRATIONS</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
   <string name="pref_cat_device">DEVICES</string>
@@ -977,7 +984,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_size_buttons_summary">Size of action-bar buttons</string>
 
   <string name="pref_bezier_step_title">Point spacing</string>
-  <string name="pref_bezier_step_summary">Distance between points on an export line [m]</string>
+  <string name="pref_bezier_step_summary">Max. point spacing (polyline approx. of curves) [m]</string>
   <string name="pref_leg_shots_title">Minimum leg shots</string>
   <string name="pref_leg_shots_summary">Minimum number of shots for a leg</string>
   <string name="pref_recent_timeout_title">Recent data timeout</string>

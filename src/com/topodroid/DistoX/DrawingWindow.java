@@ -181,7 +181,7 @@ public class DrawingWindow extends ItemDrawer
                         R.drawable.iz_back,          // 13 EDIT Nr 3+6
                         R.drawable.iz_forw,
                         R.drawable.iz_join,
-                        R.drawable.iz_properties,          
+                        R.drawable.iz_attrib,          
                         R.drawable.iz_delete_off,    // 17
                         R.drawable.iz_range_no,      // 18
 

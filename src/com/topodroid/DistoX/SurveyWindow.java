@@ -482,7 +482,7 @@ public class SurveyWindow extends Activity
     }
 
     mApp_mData.doDeleteSurvey( TDInstance.sid );
-    mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, false ); // tell app to clear survey name and id
+    mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true, false ); // tell app to clear survey name and id
     setResult( RESULT_OK, new Intent() );
     finish();
     // dismiss();

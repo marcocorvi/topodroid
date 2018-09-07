@@ -132,7 +132,7 @@ class ShotNewDialog extends MyDialog
     mETbackbearing  = (EditText) findViewById(R.id.shot_backbearing );
     mETbackclino    = (EditText) findViewById(R.id.shot_backclino );
 
-    if ( ! TDSetting.mBacksightInput ) {
+    if ( ( ! TDSetting.mBacksightInput ) || diving ) {
       TextView forsight = (TextView) findViewById(R.id.shot_forsight );
       forsight.setVisibility( View.GONE );
       mLbacksight.setVisibility( View.GONE );
@@ -154,9 +154,6 @@ class ShotNewDialog extends MyDialog
       if ( diving ) {
         MyKeyboard.registerEditText( mKeyboard, mETclino,        MyKeyboard.FLAG_POINT ); // diving length
         MyKeyboard.registerEditText( mKeyboard, mETdistance,     MyKeyboard.FLAG_POINT ); // diving depth 
-        mETbackclino.setVisibility( View.GONE );
-        mETbackdistance.setVisibility( View.GONE );
-        mETbackbearing.setVisibility( View.GONE );
 	mETdistance.setHint( R.string.input_depth );
 	mETclino.setHint( R.string.input_length );
       } else {
@@ -180,9 +177,6 @@ class ShotNewDialog extends MyDialog
       if ( diving ) {
         mETclino.setInputType( TDConst.NUMBER_DECIMAL );    // diving length
         mETdistance.setInputType( TDConst.NUMBER_DECIMAL ); // diving depth
-        mETbackclino.setVisibility( View.GONE );
-        mETbackdistance.setVisibility( View.GONE );
-        mETbackbearing.setVisibility( View.GONE );
 	mETdistance.setHint( R.string.input_depth );
 	mETclino.setHint( R.string.input_length );
       } else {
@@ -254,7 +248,7 @@ class ShotNewDialog extends MyDialog
     TDLayout.setMargins( mBtnSensor, 0, -10, 40, 10 );
     mBtnSensor.setOnClickListener( this );
 
-    if ( cameraCheck && TDLevel.overAdvanced ) {
+    if ( cameraCheck && TDLevel.overAdvanced && ! diving ) {
       mBtnCamera = new MyCheckBox( mContext, size, R.drawable.iz_camera_transp, R.drawable.iz_camera_transp ); 
       layout4.addView( mBtnCamera );
       TDLayout.setMargins( mBtnCamera, 0, -10, 40, 10 );

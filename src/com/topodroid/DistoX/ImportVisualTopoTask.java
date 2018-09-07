@@ -35,7 +35,7 @@ class ImportVisualTopoTask extends ImportTask
         return -1L;
       }
 
-      sid = mApp.setSurveyFromName( parser.mName, SurveyInfo.DATAMODE_NORMAL, false );
+      sid = mApp.setSurveyFromName( parser.mName, SurveyInfo.DATAMODE_NORMAL, false, false );
       app_data.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle, false );
       app_data.updateSurveyDeclination( sid, parser.mDeclination, false );
       app_data.updateSurveyInitStation( sid, parser.initStation(), false );

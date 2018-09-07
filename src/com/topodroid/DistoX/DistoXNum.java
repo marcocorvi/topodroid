@@ -300,26 +300,34 @@ class DistoXNum
     stack.push( s1 );
     while ( ! stack.empty() ) {
       NumStation s = stack.pop();
+      NumShortpath sp = s.mShortpathDist;
+
       for ( NumShot e : mShots ) {
         if ( e.from == s1 && e.to == s2 ) continue;
         if ( e.from == s2 && e.to == s1 ) continue;
         float len = e.length();
         if ( e.from == s && e.to != null ) {
-          float d = s.mShortpathDist.mDist + len;
-          if ( d < e.to.mShortpathDist.mDist ) {
-	    // Log.v("DistoX-LOOP", "set short dist T " + e.to.name + " : " + d );
-            e.to.mShortpathDist.reset( d, s.mShortpathDist.mDist2 + len*len );
-            // e.to.path = from;
-            stack.push( e.to );
-          }
+          NumShortpath etp = e.to.mShortpathDist;
+          if ( etp != null ) {
+            float d = sp.mDist + len;
+            if ( d < etp.mDist ) {
+	      // Log.v("DistoX-LOOP", "set short dist T " + e.to.name + " : " + d );
+              etp.reset( d, sp.mDist2 + len*len );
+              // e.to.path = from;
+              stack.push( e.to );
+            }
+	  }
         } else if ( e.to == s && e.from != null ) {
-          float d = s.mShortpathDist.mDist + len;
-          if ( d < e.from.mShortpathDist.mDist ) {
-	    // Log.v("DistoX-LOOP", "set short dist F " + e.from.name + " : " + d );
-            e.from.mShortpathDist.reset( d, s.mShortpathDist.mDist2 + len*len );
-            // e.from.path = from;
-            stack.push( e.from );
-          }
+          NumShortpath efp = e.from.mShortpathDist;
+	  if ( efp != null ) {
+            float d = sp.mDist + len;
+            if ( d < efp.mDist ) {
+	      // Log.v("DistoX-LOOP", "set short dist F " + e.from.name + " : " + d );
+              efp.reset( d, sp.mDist2 + len*len );
+              // e.from.path = from;
+              stack.push( e.from );
+            }
+	  }
         }
       }
     }
@@ -1007,7 +1015,9 @@ class DistoXNum
               // need the loop length to compute the fractional closure error
               NumShortpath short_path = shortestPath( sf, st); 
               // Log.v("DistoX-LOOP", "loop length " + short_path.mDist + " closure " + ts.d() + " " + ts.b() + " " + ts.c() );
-              mClosures.add( getClosureError( format, st, sf, ts.d(), ts.b(), ts.c(), short_path, Math.abs( ts.d() ) ) );
+	      if ( format != null ) {
+                mClosures.add( getClosureError( format, st, sf, ts.d(), ts.b(), ts.c(), short_path, Math.abs( ts.d() ) ) );
+	      }
 	      // Log.v("DistoXL", "add closure " + sf.name + " " + st.name + " len " + short_path.mDist + " " + short_path.mDist2 );
               
               if ( /* TDSetting.mAutoStations || */ TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) { // do not close loop

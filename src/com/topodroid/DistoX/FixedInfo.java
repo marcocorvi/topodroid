@@ -70,7 +70,7 @@ class FixedInfo extends MagLatLong
     cs_lng  = lng_cs;
     cs_lat  = lat_cs;
     cs_alt  = alt_cs;
-    cs_n_dec = n_dec;
+    cs_n_dec = (n_dec >= 0)? n_dec : 0;
   }
 
   void setCSCoords( String name_cs, double lng_cs, double lat_cs, double alt_cs, long n_dec )
@@ -80,7 +80,7 @@ class FixedInfo extends MagLatLong
       cs_lng = lng_cs;
       cs_lat = lat_cs;
       cs_alt = alt_cs;
-      cs_n_dec = n_dec;
+      cs_n_dec = (n_dec >= 0)? n_dec : 0;
     }
   }
 

@@ -907,7 +907,7 @@ public class TopoDroidApp extends Application
    * @param name      survey name
    * @param datamode  survey datamode
    */
-  long setSurveyFromName( String name, int datamode, boolean forward )
+  long setSurveyFromName( String name, int datamode, boolean update, boolean forward )
   { 
     TDInstance.sid      = -1;       // no survey by default
     TDInstance.survey   = null;
@@ -929,14 +929,16 @@ public class TopoDroidApp extends Application
 	// Log.v("DistoX", "set survey from name: <" + name + "> datamode " + datamode + " " + TDInstance.datamode );
         TDInstance.secondLastShotId = lastShotId();
         // restoreFixed();
-        if ( mShotWindow != null) {
-          mShotWindow.setTheTitle();
-          mShotWindow.updateDisplay();
-        }
-        if ( mSurveyWindow != null ) {
-          mSurveyWindow.setTheTitle();
-          mSurveyWindow.updateDisplay();
-        }
+	if ( update ) {
+          if ( mShotWindow != null) {
+            mShotWindow.setTheTitle();
+            mShotWindow.updateDisplay();
+          }
+          if ( mSurveyWindow != null ) {
+            mSurveyWindow.setTheTitle();
+            mSurveyWindow.updateDisplay();
+          }
+	}
         TDInstance.xsections = ( SurveyInfo.XSECTION_SHARED == mData.getSurveyXSections( TDInstance.sid ) );
       }
       return TDInstance.sid;
