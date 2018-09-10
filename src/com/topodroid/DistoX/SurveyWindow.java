@@ -482,10 +482,11 @@ public class SurveyWindow extends Activity
     }
 
     mApp_mData.doDeleteSurvey( TDInstance.sid );
-    mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true, false ); // tell app to clear survey name and id
+    mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, false, false ); // tell app to clear survey name and id
     setResult( RESULT_OK, new Intent() );
-    finish();
-    // dismiss();
+    TopoDroidApp.mSurveyWindow = null;
+    super.onBackPressed();
+    // finish();
   }
 
 
@@ -505,6 +506,7 @@ public class SurveyWindow extends Activity
     switch ( code ) {
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         // saveSurvey(); 
+        TopoDroidApp.mSurveyWindow = null;
         super.onBackPressed();
         return true;
       case KeyEvent.KEYCODE_SEARCH:
@@ -555,6 +557,7 @@ public class SurveyWindow extends Activity
     int p = 0;
     if ( p++ == pos ) { // CLOSE
       // saveSurvey();
+      TopoDroidApp.mSurveyWindow = null;
       super.onBackPressed();
     } else if ( p++ == pos ) { // EXPORT
       new ExportDialog( mActivity, this, TDConst.mSurveyExportTypes, R.string.title_survey_export ).show();

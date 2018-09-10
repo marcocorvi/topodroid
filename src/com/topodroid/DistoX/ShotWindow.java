@@ -615,6 +615,7 @@ public class ShotWindow extends Activity
       if ( TDSetting.mDataBackup ) {
         TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false ); // try_save
       }
+      TopoDroidApp.mShotWindow = null;
       super.onBackPressed();
 
     } else if ( p++ == pos ) { // SURVEY ACTIVITY
@@ -1126,6 +1127,7 @@ public class ShotWindow extends Activity
       if ( TDSetting.mDataBackup ) {
         TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false ); // try_save
       }
+      TopoDroidApp.mShotWindow = null;
       super.onBackPressed();
       return;
     }

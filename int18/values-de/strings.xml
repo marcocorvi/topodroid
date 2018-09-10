@@ -900,6 +900,35 @@
     <string name="title_scraps">Skizzen</string>
     <string name="title_scraps_outline">Skizzenumriss</string>
     <string name="title_select">Auswählen</string>
+
+    <!-- TODO string name="title_settings_main">TopoDroid main settings</string -->
+    <!-- TODO string name="title_settings_export">TopoDroid import/export settings</string -->
+    <!-- TODO string name="title_settings_import">TopoDroid import settings</string -->
+    <!-- TODO string name="title_settings_th">Therion export settings</string -->
+    <!-- TODO string name="title_settings_dat">Compass export settings</string -->
+    <!-- TODO string name="title_settings_svg">SVG export settings</string -->
+    <!-- TODO string name="title_settings_dxf">DXF export settings</string -->
+    <!-- TODO string name="title_settings_png">PNG export settings</string -->
+    <!-- TODO string name="title_settings_kml">KML export settings</string -->
+
+    <!-- TODO string name="title_settings_sketch">TopoDroid 3d sketch settings</string -->
+    <!-- TODO string name="title_settings_survey">TopoDroid survey settings</string -->
+    <!-- TODO string name="title_settings_shot">TopoDroid shot data settings</string -->
+    <!-- TODO string name="title_settings_units">TopoDroid units settings</string -->
+    <!-- TODO string name="title_settings_location">TopoDroid location settings</string -->
+    <!-- TODO string name="title_settings_accuracy">TopoDroid accuracy settings</string -->
+    <!-- TODO string name="title_settings_plot">TopoDroid sketch settings</string -->
+    <!-- TODO string name="title_settings_screen">TopoDroid canvas settings</string -->
+    <!-- TODO string name="title_settings_point">TopoDroid point settings</string -->
+    <!-- TODO string name="title_settings_line">TopoDroid line settings</string -->
+    <!-- TODO string name="title_settings_walls">TopoDroid autowalls settings</string -->
+    <!-- TODO string name="title_settings_draw">TopoDroid drawing settings</string -->
+    <!-- TODO string name="title_settings_erase">TopoDroid erasing settings</string -->
+    <!-- TODO string name="title_settings_edit">TopoDroid editing settings</string -->
+    <!-- TODO string name="title_settings_device">TopoDroid device settings</string -->
+    <!-- TODO string name="title_settings_calib">TopoDroid calibration settings</string -->
+    <!-- TODO string name="title_settings_log">TopoDroid log settings</string -->
+
     <string name="title_shift">Verschieben</string>
     <string name="title_shot_delete">Messung löschen ?</string>
     <string name="title_sensor_edit">Sensordaten</string>
@@ -926,6 +955,14 @@
   <string name="pref_cat_survey">Vermessung</string>
   <string name="pref_cat_drawing">Skizzen</string>
   <string name="pref_cat_import_export">Import/Export</string>
+  <!-- TODO string name="pref_cat_exportimport">IMPORT</string -->
+  <!-- OK string name="pref_cat_exportth">Therion</string -->
+  <!-- OK string name="pref_cat_exportdat">Compass</string -->
+  <!-- OK string name="pref_cat_exportsvg">SVG</string -->
+  <!-- OK string name="pref_cat_exportdxf">DXF</string -->
+  <!-- OK string name="pref_cat_exportpng">PNG</string -->
+  <!-- OK string name="pref_cat_exportkml">KML/GeoJSON</string -->
+
   <string name="pref_cat_calib">Kalibrierung</string>
   <string name="pref_cat_device">Verbindung</string>
   <string name="pref_cat_sketch">3D-Modell</string>

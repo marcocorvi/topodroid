@@ -903,6 +903,14 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
     <string name="title_settings_main">TopoDroid main settings</string>
     <string name="title_settings_export">TopoDroid import/export settings</string>
+    <string name="title_settings_import">TopoDroid import settings</string>
+    <string name="title_settings_th">Therion export settings</string>
+    <string name="title_settings_dat">Compass export settings</string>
+    <string name="title_settings_svg">SVG export settings</string>
+    <string name="title_settings_dxf">DXF export settings</string>
+    <string name="title_settings_png">PNG export settings</string>
+    <string name="title_settings_kml">KML export settings</string>
+
     <string name="title_settings_sketch">TopoDroid 3d sketch settings</string>
     <string name="title_settings_survey">TopoDroid survey settings</string>
     <string name="title_settings_shot">TopoDroid shot data settings</string>
@@ -940,12 +948,13 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_cat_survey">SURVEY DATA</string>
   <string name="pref_cat_drawing">SKETCHING</string>
   <string name="pref_cat_import_export">IMPORT_EXPORT</string>
-  <string name="pref_cat_exportth">Therion</string>
-  <string name="pref_cat_exportdat">Compass</string>
-  <string name="pref_cat_exportsvg">SVG</string>
-  <string name="pref_cat_exportdxf">DXF</string>
-  <string name="pref_cat_exportpng">PNG</string>
-  <string name="pref_cat_exportkml">KML/GeoJSON</string>
+  <string name="pref_cat_exportimport">IMPORT</string>
+  <string name="pref_cat_exportth" translatable="false">Therion</string>
+  <string name="pref_cat_exportdat" translatable="false">Compass</string>
+  <string name="pref_cat_exportsvg" translatable="false">SVG</string>
+  <string name="pref_cat_exportdxf" translatable="false">DXF</string>
+  <string name="pref_cat_exportpng" translatable="false">PNG</string>
+  <string name="pref_cat_exportkml" translatable="false">KML/GeoJSON</string>
 
   <string name="pref_cat_calib">CALIBRATIONS</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->

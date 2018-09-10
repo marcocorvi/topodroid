@@ -263,9 +263,9 @@ class DataHelper extends DataSetObservable
   private static String qSurveysStat1 = "select flag, acceleration, magnetic, dip from shots where surveyId=? AND status=0 AND acceleration > 1 ";
   private static String qSurveysStat2 =
     "select flag, distance, fStation, tStation, clino, extend from shots where surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ";
-  private static String qSurveysStat3 = "select fStation, clino from shots where surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ";
-  private static String qSurveysStat4 =
-    "select flag, distance, fStation, tStation, clino, extend from shots where surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ";
+  // private static String qSurveysStat3 = "select fStation, clino from shots where surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ";
+  // private static String qSurveysStat4 =
+  //   "select flag, distance, fStation, tStation, clino, extend from shots where surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ";
   private static String qSurveysStat5 = " select count() from shots where surveyId=? AND status=0 AND flag=0 AND fStation!=\"\" AND tStation=\"\" ";
 
   String getSurveyInitStation( long sid )
@@ -453,7 +453,7 @@ class DataHelper extends DataSetObservable
       cursor = myDB.rawQuery( qSurveysStat2, args );
       if (cursor.moveToFirst()) {
         do {
-              float len = (float)( cursor.getDouble(1) );
+          float len = (float)( cursor.getDouble(1) );
           switch ( (int)(cursor.getLong(0)) ) {
             case 0: // NORMAL SHOT
               ++ stat.countLeg;
@@ -466,11 +466,11 @@ class DataHelper extends DataSetObservable
               stat.planLength += (float)( len * Math.cos( cursor.getDouble(4)*TDMath.DEG2RAD ) );
               break;
             case 1: // SURFACE SHOT
-                  ++ stat.countSurface;
+              ++ stat.countSurface;
               stat.lengthSurface += len;
               break;
             case 2: // DUPLICATE SHOT
-                  ++ stat.countDuplicate;
+              ++ stat.countDuplicate;
               stat.lengthDuplicate += len;
               break;
           }
@@ -514,33 +514,38 @@ class DataHelper extends DataSetObservable
       }
       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     } else {
-      // select s1.flag, s1.distance, s1.fStation, s1.tStation, s1.clino-s2.clino, "extent" 
-      //        from shots as s1 inner join shots as s2 on s1.tStation = s2.fStation
-      //        where s1.surveyId=? and s2.surveyId=? and s1.tStation != ""
-      //
-      HashMap< String, Float > depths = new HashMap< String, Float >();
-      // cursor = myDB.query( SHOT_TABLE,
-      //                      new String[] { "fStation", "clino" },
-      //                      "surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ", 
-      //                      new String[] { Long.toString(sid) },
-      //                      null, null, null );
-      cursor = myDB.rawQuery( qSurveysStat3, args );
-      if (cursor.moveToFirst()) {
-        do {
-	  String station = cursor.getString(0);
-	  float  depth   = (float)(cursor.getDouble(1));
-	  // depths.putIfAbsent( station, new Float(depth) );
-	  if ( ! depths.containsKey(station) ) depths.put( station, new Float(depth) );
-        } while ( cursor.moveToNext() );
-      }
-      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+      // // select s1.flag, s1.distance, s1.fStation, s1.tStation, s1.clino-s2.clino, "extent" 
+      // //        from shots as s1 inner join shots as s2 on s1.tStation = s2.fStation
+      // //        where s1.surveyId=? and s2.surveyId=? and s1.tStation != ""
+      // //
+      // HashMap< String, Float > depths = new HashMap< String, Float >();
+      // // cursor = myDB.query( SHOT_TABLE,
+      // //                      new String[] { "fStation", "clino" },
+      // //                      "surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ", 
+      // //                      new String[] { Long.toString(sid) },
+      // //                      null, null, null );
+      // cursor = myDB.rawQuery( qSurveysStat3, args );
+      // if (cursor.moveToFirst()) {
+      //   do {
+      //     String station = cursor.getString(0);
+      //     float  depth   = (float)(cursor.getDouble(1));
+      //     // depths.putIfAbsent( station, new Float(depth) );
+      //     if ( ! depths.containsKey(station) ) depths.put( station, new Float(depth) );
+      //   } while ( cursor.moveToNext() );
+      // }
+      // if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
-      // cursor = myDB.query( SHOT_TABLE,
-      //                      new String[] { "flag", "distance", "fStation", "tStation", "clino", "extend" },
-      //                      "surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ", 
-      //                      new String[] { Long.toString(sid) },
-      //                      null, null, null );
-      cursor = myDB.rawQuery( qSurveysStat4, args );
+      // // select s.flag, s.distance, s.fStation, s.tStation, s.clino, z.clino, s.extend 
+      // //        from shots as s join shots as z on z.fStation=s.tStation
+      // //        where s.surveyId=? AND z.surveyId=? AND s.fStation!="" AND s.tStation!="" AND s.status=0
+      // // cursor = myDB.query( SHOT_TABLE,
+      // //                      new String[] { "flag", "distance", "fStation", "tStation", "clino", "extend" },
+      // //                      "surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ", 
+      // //                      new String[] { Long.toString(sid) },
+      // //                      null, null, null );
+      // cursor = myDB.rawQuery( qSurveysStat4, args );
+
+      cursor = myDB.rawQuery( qjShots, new String[] { Long.toString(sid), Long.toString(sid) } );
       if (cursor.moveToFirst()) {
         do {
           String f = cursor.getString(2);
@@ -550,22 +555,23 @@ class DataHelper extends DataSetObservable
             case 0: // NORMAL SHOT
               ++ stat.countLeg;
               stat.lengthLeg += len;
-	      if ( depths.containsKey( t ) ) {
-	        float dep = (float)( cursor.getDouble(4) ) - depths.get( t ).floatValue();
-                if ( cursor.getLong(5) == 0 ) {
+	      // if ( depths.containsKey( t ) ) {
+	        // float dep = (float)( cursor.getDouble(4) ) - depths.get( t ).floatValue();
+	        float dep = (float)( cursor.getDouble(4) - cursor.getDouble(5) );
+                if ( cursor.getLong(6) == 0 ) {
                   stat.extLength += (float)( Math.abs( dep ) );
                 } else {
                   stat.extLength += len;
                 }
 		if ( len > dep ) stat.planLength += (float)( Math.sqrt( len*len - dep*dep ) );
-	      }
+	      // }
               break;
             case 1: // SURFACE SHOT
-                  ++ stat.countSurface;
+              ++ stat.countSurface;
               stat.lengthSurface += len;
               break;
             case 2: // DUPLICATE SHOT
-                  ++ stat.countDuplicate;
+              ++ stat.countDuplicate;
               stat.lengthDuplicate += len;
               break;
           }
@@ -620,7 +626,7 @@ class DataHelper extends DataSetObservable
     //                      null,  // groupBy
     //                      null,  // having
     //                      null ); // order by
-    cursor = myDB.rawQuery( qSurveysStat4, args );
+    cursor = myDB.rawQuery( qSurveysStat5, args );
     if (cursor.moveToFirst()) {
       stat.countSplay = (int)( cursor.getLong(0) );
     }
@@ -1826,9 +1832,14 @@ class DataHelper extends DataSetObservable
   private static String qSensors1     = "select id, shotId, title, date, comment, type, value from sensors where surveyId=? AND status=? ";
   private static String qSensors2     = "select id, shotId, title, date, comment, type, value from sensors where surveyId=? AND shotId=? ";
   private static String qShotAudio    = "select id, date from audios where surveyId=? AND shotId=? ";
-  private static String qAudios       = "select id, shotId, date from audios where surveyId=? ";
-  private static String qPhotos       = "select id, shotId, title, date, comment from photos where surveyId=? AND status=? ";
-  private static String qShotPhoto    = "select id, shotId, title, date, comment from photos where surveyId=? AND shotId=? ";
+  private static String qAudiosAll    = "select id, shotId, date from audios where surveyId=? ";
+  private static String qPhotosAll    = "select id, shotId, status, title, date, comment from photos where surveyId=? ";
+  private static String qjPhotos      =
+    "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment from photos as p join shots as s on p.shotId=s.id where p.surveyId=? and s.surveyId=? and p.status=? ";
+  // private static String qShotPhoto    = "select id, shotId, title, date, comment from photos where surveyId=? AND shotId=? ";
+  private static String qjShotPhoto   =
+    "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment from photosi as p join shots as s on p.shotId=s.id where p.surveyId=? AND s.surveyId=? AND p.shotId=? ";
+
   private static String qFirstStation = "select fStation from shots where surveyId=? AND fStation!=\"\" AND tStation!=\"\" limit 1 ";
   private static String qHasStation   = "select id, fStation, tStation from shots where surveyId=? and ( fStation=? or tStation=? ) order by id ";
   private static String qHasPlot      = "select id, name from plots where surveyId=? AND name=? order by id ";
@@ -1836,6 +1847,9 @@ class DataHelper extends DataSetObservable
   private static String qHasShot      = "select fStation, tStation from shots where surveyId=? aND ( ( fStation=? AND tStation=? ) OR ( fStation=? AND tStation=? ) )"; 
   private static String qNextStation  = "select tStation from shots where surveyId=? AND fStation=? ";
   private static String qLastStation  = "select fStation, tStation from shots where surveyId=? order by id DESC ";
+  private static String qHasFixedStation = "select id from fixeds where surveyId=? and station=? and id!=? and status=0 ";
+  private static String qjShots       =
+    "select s.flag, s.distance, s.fStation, s.tStation, s.clino, z.clino, s.extend from shots as s join shots as z on z.fStation=s.tStation where s.surveyId=? AND z.surveyId=? AND s.fStation!=\"\" AND s.tStation!=\"\" AND s.status=0 ";
 
   List< SensorInfo > selectAllSensors( long sid, long status )
   {
@@ -1996,7 +2010,7 @@ class DataHelper extends DataSetObservable
     //                             new String[] { "id", "shotId", "date" }, // columns
     //                             WHERE_SID, new String[] { Long.toString(sid) },
     //                             null, null,  null ); 
-    Cursor cursor = myDB.rawQuery( qAudios, new String[] { Long.toString(sid) } );
+    Cursor cursor = myDB.rawQuery( qAudiosAll, new String[] { Long.toString(sid) } );
     if (cursor.moveToFirst()) {
       do {
         list.add( new AudioInfo( sid, 
@@ -2020,6 +2034,9 @@ class DataHelper extends DataSetObservable
     } catch (SQLiteException e) { logError("photo delete", e); }
   }
 
+  //
+  // select p.id, p.shotId, p.title, s.fStation, s.tStation, p.date, p.comment from photos as p join shots as s on p.shotId=s.id where p.surveyId=? and s.surveyId=? and p.status=?
+  //
   List< PhotoInfo > selectAllPhotos( long sid, long status )
   {
     List< PhotoInfo > list = new ArrayList<>();
@@ -2028,32 +2045,34 @@ class DataHelper extends DataSetObservable
     //                             new String[] { "id", "shotId", "title", "date", "comment" }, // columns
     //                             WHERE_SID_STATUS, new String[] { Long.toString(sid), Long.toString(status) },
     //                             null, null,  null ); 
-    Cursor cursor = myDB.rawQuery( qPhotos, new String[] { Long.toString(sid), Long.toString(status) } );
+    Cursor cursor = myDB.rawQuery( qjPhotos, new String[] { Long.toString(sid), Long.toString(sid), Long.toString(status) } );
     if (cursor.moveToFirst()) {
       do {
+        String name = cursor.getString(3) + "-" + cursor.getString(4);
         list.add( new PhotoInfo( sid, 
                                  cursor.getLong(0), // id
                                  cursor.getLong(1),
                                  cursor.getString(2),
-                                 null,              // shot name
-                                 cursor.getString(3),
-                                 cursor.getString(4) ) );
+                                 name,              // shot name
+                                 cursor.getString(5),
+                                 cursor.getString(6) ) );
       } while (cursor.moveToNext());
     }
     // TDLog.Log( TDLog.LOG_DB, "select All Photos list size " + list.size() );
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
-    String[] where = new String[2];
-    where[0] = Long.toString(sid);
-    for ( PhotoInfo pi : list ) { // fill in the shot-name of the photos
-      where[1] = Long.toString( pi.shotid );
-      // cursor = myDB.query( SHOT_TABLE, new String[] { "fStation", "tStation" }, WHERE_SID_ID, where, null, null, null );
-      cursor = myDB.rawQuery( qShotStations, where );
-      if (cursor.moveToFirst()) {
-        pi.mShotName = cursor.getString(0) + "-" + cursor.getString(1);
-      }
-      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-    }
+    // String[] where = new String[2];
+    // where[0] = Long.toString(sid);
+    // for ( PhotoInfo pi : list ) { // fill in the shot-name of the photos
+    //   where[1] = Long.toString( pi.shotid );
+    //   // cursor = myDB.query( SHOT_TABLE, new String[] { "fStation", "tStation" }, WHERE_SID_ID, where, null, null, null );
+    //   cursor = myDB.rawQuery( qShotStations, where );
+    //   if (cursor.moveToFirst()) {
+    //     pi.mShotName = cursor.getString(0) + "-" + cursor.getString(1);
+    //   }
+    //   if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    // }
+
     return list;
   }
 
@@ -2065,32 +2084,34 @@ class DataHelper extends DataSetObservable
     //                             new String[] { "id", "shotId", "title", "date", "comment" }, // columns
     //                             WHERE_SID_SHOTID, new String[] { Long.toString(sid), Long.toString(shotid) },
     //                             null, null, null ); 
-    Cursor cursor = myDB.rawQuery( qShotPhoto, new String[] { Long.toString(sid), Long.toString(shotid) } );
+    Cursor cursor = myDB.rawQuery( qjShotPhoto, new String[] { Long.toString(sid), Long.toString(sid), Long.toString(shotid) } );
     if (cursor.moveToFirst()) {
       do {
+        String name = cursor.getString(3) + "-" + cursor.getString(4);
         list.add( new PhotoInfo( sid, 
                                  cursor.getLong(0), // id
                                  cursor.getLong(1),
                                  cursor.getString(2),
-                                 null,              // shot name
-                                 cursor.getString(3),
-                                 cursor.getString(4) ) );
+                                 name,              // shot name
+                                 cursor.getString(5),
+                                 cursor.getString(6) ) );
       } while (cursor.moveToNext());
     }
     // TDLog.Log( TDLog.LOG_DB, "select All Photos list size " + list.size() );
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
-    String[] where = new String[2];
-    where[0] = Long.toString(sid);
-    for ( PhotoInfo pi : list ) { // fill in the shot-name of the photos
-      where[1] = Long.toString( pi.shotid );
-      // cursor = myDB.query( SHOT_TABLE, new String[] { "fStation", "tStation" }, WHERE_SID_ID, where, null, null, null );
-      cursor = myDB.rawQuery( qShotStations, where );
-      if (cursor.moveToFirst()) {
-        pi.mShotName = cursor.getString(0) + "-" + cursor.getString(1);
-      }
-      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-    }
+    // String[] where = new String[2];
+    // where[0] = Long.toString(sid);
+    // for ( PhotoInfo pi : list ) { // fill in the shot-name of the photos
+    //   where[1] = Long.toString( pi.shotid );
+    //   // cursor = myDB.query( SHOT_TABLE, new String[] { "fStation", "tStation" }, WHERE_SID_ID, where, null, null, null );
+    //   cursor = myDB.rawQuery( qShotStations, where );
+    //   if (cursor.moveToFirst()) {
+    //     pi.mShotName = cursor.getString(0) + "-" + cursor.getString(1);
+    //   }
+    //   if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    // }
+
     return list;
   }
 
@@ -3646,16 +3667,18 @@ class DataHelper extends DataSetObservable
   {
     boolean ret = false;
     if ( myDB != null ) {
-      Cursor cursor = myDB.query( FIXED_TABLE,
-          new String[]{ "id" },
-          "surveyId=? and station=? and status=0",  // 0 == TDStatus.NORMAL
-          new String[]{ Long.toString( sid ), station },
-          null, null, null );
+      // Cursor cursor = myDB.query( FIXED_TABLE,
+      //     new String[]{ "id" },
+      //     "surveyId=? and station=? and id!=? and status=0",  // 0 == TDStatus.NORMAL
+      //     new String[]{ Long.toString( sid ), station, Long.toString(id) },
+      //     null, null, null );
+      Cursor cursor = myDB.rawQuery( qHasFixedStation, new String[]{ Long.toString( sid ), station, Long.toString(id) } );
       if (cursor != null) {
         if (cursor.moveToFirst()) {
-          do {
-            if (cursor.getLong( 0 ) != id) ret = true;
-          } while (cursor.moveToNext());
+          // do {
+          //   if (cursor.getLong( 0 ) != id) ret = true;
+          // } while (cursor.moveToNext());
+	  ret = true;
         }
         if (!cursor.isClosed()) cursor.close();
       }
@@ -4117,10 +4140,11 @@ class DataHelper extends DataSetObservable
        }
        if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
-       cursor = myDB.query( AUDIO_TABLE, // SELECT ALL AUDIO RECORD
-                            new String[] { "id", "shotId", "date" },
-                            "surveyId=?", new String[] { Long.toString(sid) },
-                            null, null, null );
+       // cursor = myDB.query( AUDIO_TABLE, // SELECT ALL AUDIO RECORD
+       //                      new String[] { "id", "shotId", "date" },
+       //                      "surveyId=?", new String[] { Long.toString(sid) },
+       //                      null, null, null );
+       cursor = myDB.rawQuery( qAudiosAll, new String[] { Long.toString(sid) } );
        if (cursor.moveToFirst()) {
          do {
            pw.format(Locale.US,
@@ -4134,10 +4158,11 @@ class DataHelper extends DataSetObservable
        }
        if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
-       cursor = myDB.query( PHOTO_TABLE, // SELECT ALL PHOTO RECORD
-  			    new String[] { "id", "shotId", "status", "title", "date", "comment" },
-                            "surveyId=?", new String[] { Long.toString(sid) },
-                            null, null, null );
+       // cursor = myDB.query( PHOTO_TABLE, // SELECT ALL PHOTO RECORD
+       //  		    new String[] { "id", "shotId", "status", "title", "date", "comment" },
+       //                      "surveyId=?", new String[] { Long.toString(sid) },
+       //                      null, null, null );
+       cursor = myDB.rawQuery( qPhotosAll, new String[] { Long.toString(sid) } );
        if (cursor.moveToFirst()) {
          do {
            pw.format(Locale.US,

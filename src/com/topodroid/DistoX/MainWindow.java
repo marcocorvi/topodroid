@@ -231,7 +231,7 @@ public class MainWindow extends Activity
             TDToast.make( R.string.not_enabled );
           }
         }
-      } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // NEW SURVEY/CALIB
+      } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // NEW SURVEY
         mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true, true ); // new-survey dialog: tell app to clear survey name and id
         (new SurveyNewDialog( mActivity, this, -1, -1 )).show(); 
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // IMPORT

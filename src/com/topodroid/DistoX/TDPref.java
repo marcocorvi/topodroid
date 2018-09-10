@@ -544,12 +544,12 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] tit = TDPrefKey.EXPORTtitle;
     int[] dsc = TDPrefKey.EXPORTdesc;
     String[] def = TDPrefKey.EXPORTdef;
-    TDPref[] ret = new TDPref[ 18 ];
-    ret[ 0] = makeBtn( cat, key[ 0], tit[ 0], dsc[ 0], B, def[ 0],         res, hlp );
-    ret[ 1] = makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], A, def[ 1],         res, hlp );
-    ret[ 2] = makeLst( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2], R.array.importDatamode, R.array.importDatamodeValue, res, hlp );
-    ret[ 3] = makeLst( cat, key[ 3], tit[ 3], dsc[ 3], B, def[ 3], R.array.exportShots, R.array.exportShotsValue, res, hlp );
-    ret[ 4] = makeLst( cat, key[ 4], tit[ 4], dsc[ 4], B, def[ 4], R.array.exportPlot, R.array.exportPlotValue, res, hlp );
+    TDPref[] ret = new TDPref[ 16 ];
+    // ret[ 0] = makeBtn( cat, key[ 0], tit[ 0], dsc[ 0], B, def[ 0],         res, hlp );
+    // ret[ 1] = makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], A, def[ 1],         res, hlp );
+    // ret[ 2] = makeLst( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2], R.array.importDatamode, R.array.importDatamodeValue, res, hlp );
+    ret[ 0] = makeLst( cat, key[ 0], tit[ 0], dsc[ 0], B, def[ 0], R.array.exportShots, R.array.exportShotsValue, res, hlp );
+    ret[ 1] = makeLst( cat, key[ 1], tit[ 1], dsc[ 1], B, def[ 1], R.array.exportPlot, R.array.exportPlotValue, res, hlp );
 
     // ret[ 5] = makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], A, def[ 5],         res, hlp );
     // ret[ 6] = makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], N, def[ 6],         res, hlp );
@@ -560,13 +560,13 @@ class TDPref implements AdapterView.OnItemSelectedListener
     // ret[ 9] = makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9],         res, hlp );
     // ret[10] = makeCbx( cat, key[10], tit[10], dsc[10], N, def[10],         res, hlp );
                                                                 
-    ret[ 5] = makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], A, def[ 5], FLOAT,  res, hlp );
-    ret[ 6] = makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], A, def[ 6], FLOAT,  res, hlp );
-    ret[ 7] = makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7], FLOAT,  res, hlp );
-    ret[ 8] = makeLst( cat, key[ 8], tit[ 8], dsc[ 8], N, def[ 8], R.array.survexEol, R.array.survexEolValue, res, hlp );
-    ret[ 9] = makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9],         res, hlp );
-    ret[10] = makeCbx( cat, key[10], tit[10], dsc[10], A, def[10],         res, hlp );
-    ret[11] = makeEdt( cat, key[11], tit[11], dsc[11], E, def[11], FLOAT,  res, hlp );
+    ret[2] = makeEdt( cat, key[2], tit[2], dsc[2], A, def[2], FLOAT,  res, hlp );
+    ret[3] = makeEdt( cat, key[3], tit[3], dsc[3], A, def[3], FLOAT,  res, hlp );
+    ret[4] = makeEdt( cat, key[4], tit[4], dsc[4], A, def[4], FLOAT,  res, hlp );
+    ret[5] = makeLst( cat, key[5], tit[5], dsc[5], N, def[5], R.array.survexEol, R.array.survexEolValue, res, hlp );
+    ret[6] = makeCbx( cat, key[6], tit[6], dsc[6], A, def[6],         res, hlp );
+    ret[7] = makeCbx( cat, key[7], tit[7], dsc[7], A, def[7],         res, hlp );
+    ret[8] = makeEdt( cat, key[8], tit[8], dsc[8], E, def[8], FLOAT,  res, hlp );
     // ret[18] = makeCbx( cat, key[18], tit[18], dsc[18], N, def[18],         res, hlp );
     // ret[19] = makeCbx( cat, key[19], tit[19], dsc[19], E, def[19],         res, hlp );
     // // r  ] = makeCbx( cat, key[  ], tit[  ], dsc[  ], X, def[  ],         res, hlp );
@@ -587,18 +587,33 @@ class TDPref implements AdapterView.OnItemSelectedListener
     // ret[22] = makeCbx( cat, key[22], tit[22], dsc[22], N, def[22],         res, hlp );
     // ret[23] = makeLst( cat, key[23], tit[23], dsc[23], E, def[23], R.array.acadVersion, R.array.acadVersionValue, res, hlp );
 
+    ret[ 9] = makeFwd( cat, key[ 9], tit[ 9],          N,                   res, hlp );
+    ret[10] = makeFwd( cat, key[10], tit[10],          N,                   res, hlp );
+    ret[11] = makeFwd( cat, key[11], tit[11],          N,                   res, hlp );
     ret[12] = makeFwd( cat, key[12], tit[12],          N,                   res, hlp );
     ret[13] = makeFwd( cat, key[13], tit[13],          N,                   res, hlp );
     ret[14] = makeFwd( cat, key[14], tit[14],          N,                   res, hlp );
     ret[15] = makeFwd( cat, key[15], tit[15],          N,                   res, hlp );
-    ret[16] = makeFwd( cat, key[16], tit[16],          N,                   res, hlp );
-    ret[17] = makeFwd( cat, key[17], tit[17],          N,                   res, hlp );
     return ret;
   }
 
-  static TDPref[] makeExportThPrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makeImportPrefs( Resources res, TDPrefHelper hlp )
   {
-    int cat = TDPrefActivity.PREF_CATEGORY_EXPORT_TH;
+    int cat = TDPrefActivity.PREF_CATEGORY_IMPORT;
+    String[] key = TDPrefKey.EXPORT_import;
+    int[] tit = TDPrefKey.EXPORT_importtitle;
+    int[] dsc = TDPrefKey.EXPORT_importdesc;
+    String[] def = TDPrefKey.EXPORT_importdef;
+    TDPref[] ret = new TDPref[ 3 ];
+    ret[ 0] = makeBtn( cat, key[ 0], tit[ 0], dsc[ 0], B, def[ 0],         res, hlp );
+    ret[ 1] = makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], A, def[ 1],         res, hlp );
+    ret[ 2] = makeLst( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2], R.array.importDatamode, R.array.importDatamodeValue, res, hlp );
+    return ret;
+  }
+
+  static TDPref[] makeThPrefs( Resources res, TDPrefHelper hlp )
+  {
+    int cat = TDPrefActivity.PREF_CATEGORY_TH;
     String[] key = TDPrefKey.EXPORT_TH;
     int[] tit = TDPrefKey.EXPORT_THtitle;
     int[] dsc = TDPrefKey.EXPORT_THdesc;
@@ -611,9 +626,9 @@ class TDPref implements AdapterView.OnItemSelectedListener
     return ret;
   }
 
-  static TDPref[] makeExportDatPrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makeDatPrefs( Resources res, TDPrefHelper hlp )
   {
-    int cat = TDPrefActivity.PREF_CATEGORY_EXPORT_DAT;
+    int cat = TDPrefActivity.PREF_CATEGORY_DAT;
     String[] key = TDPrefKey.EXPORT_DAT;
     int[] tit = TDPrefKey.EXPORT_DATtitle;
     int[] dsc = TDPrefKey.EXPORT_DATdesc;
@@ -626,9 +641,9 @@ class TDPref implements AdapterView.OnItemSelectedListener
     return ret;
   }
 
-  static TDPref[] makeExportSvgPrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makeSvgPrefs( Resources res, TDPrefHelper hlp )
   {
-    int cat = TDPrefActivity.PREF_CATEGORY_EXPORT_SVG;
+    int cat = TDPrefActivity.PREF_CATEGORY_SVG;
     String[] key = TDPrefKey.EXPORT_SVG;
     int[] tit = TDPrefKey.EXPORT_SVGtitle;
     int[] dsc = TDPrefKey.EXPORT_SVGdesc;
@@ -646,9 +661,9 @@ class TDPref implements AdapterView.OnItemSelectedListener
     return ret;
   }
 
-  static TDPref[] makeExportDxfPrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makeDxfPrefs( Resources res, TDPrefHelper hlp )
   {
-    int cat = TDPrefActivity.PREF_CATEGORY_EXPORT_DXF;
+    int cat = TDPrefActivity.PREF_CATEGORY_DXF;
     String[] key = TDPrefKey.EXPORT_DXF;
     int[] tit = TDPrefKey.EXPORT_DXFtitle;
     int[] dsc = TDPrefKey.EXPORT_DXFdesc;
@@ -660,9 +675,9 @@ class TDPref implements AdapterView.OnItemSelectedListener
     return ret;
   }
 
-  static TDPref[] makeExportPngPrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makePngPrefs( Resources res, TDPrefHelper hlp )
   {
-    int cat = TDPrefActivity.PREF_CATEGORY_EXPORT_PNG;
+    int cat = TDPrefActivity.PREF_CATEGORY_PNG;
     String[] key = TDPrefKey.EXPORT_PNG;
     int[] tit = TDPrefKey.EXPORT_PNGtitle;
     int[] dsc = TDPrefKey.EXPORT_PNGdesc;
@@ -673,9 +688,9 @@ class TDPref implements AdapterView.OnItemSelectedListener
     return ret;
   }
 
-  static TDPref[] makeExportKmlPrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makeKmlPrefs( Resources res, TDPrefHelper hlp )
   {
-    int cat = TDPrefActivity.PREF_CATEGORY_EXPORT_KML;
+    int cat = TDPrefActivity.PREF_CATEGORY_KML;
     String[] key = TDPrefKey.EXPORT_KML;
     int[] tit = TDPrefKey.EXPORT_KMLtitle;
     int[] dsc = TDPrefKey.EXPORT_KMLdesc;

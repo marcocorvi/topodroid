@@ -903,6 +903,20 @@ public class TopoDroidApp extends Application
     return false;
   }
     
+  /** update windows title and display
+   */
+  private static void updateWindows()
+  {
+    if ( mShotWindow != null) {
+      mShotWindow.setTheTitle();
+      mShotWindow.updateDisplay();
+    }
+    if ( mSurveyWindow != null ) {
+      mSurveyWindow.setTheTitle();
+      mSurveyWindow.updateDisplay();
+    }
+  }
+
   /**
    * @param name      survey name
    * @param datamode  survey datamode
@@ -929,16 +943,7 @@ public class TopoDroidApp extends Application
 	// Log.v("DistoX", "set survey from name: <" + name + "> datamode " + datamode + " " + TDInstance.datamode );
         TDInstance.secondLastShotId = lastShotId();
         // restoreFixed();
-	if ( update ) {
-          if ( mShotWindow != null) {
-            mShotWindow.setTheTitle();
-            mShotWindow.updateDisplay();
-          }
-          if ( mSurveyWindow != null ) {
-            mSurveyWindow.setTheTitle();
-            mSurveyWindow.updateDisplay();
-          }
-	}
+	if ( update ) updateWindows();
         TDInstance.xsections = ( SurveyInfo.XSECTION_SHARED == mData.getSurveyXSections( TDInstance.sid ) );
       }
       return TDInstance.sid;

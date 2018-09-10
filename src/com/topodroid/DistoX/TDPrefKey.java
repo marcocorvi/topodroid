@@ -349,13 +349,12 @@ class TDPrefKey
     ""
   };
 
-
-  // ------------------------------------------------------------------------------
-  static String[] EXPORT = { // [18] [32]
-    "DISTOX_PT_CMAP",         // 0
-    "DISTOX_SPLAY_EXTEND",         // whether to set L/R extend to LRUD splay shots (Compass, VTopo import)
-    "DISTOX_IMPORT_DATAMODE",
-    "DISTOX_EXPORT_SHOTS",    // 3 // default data export
+  // ==============================================================================
+  static String[] EXPORT = { // [16] [32]
+    // "DISTOX_PT_CMAP",         // 0
+    // "DISTOX_SPLAY_EXTEND",         // whether to set L/R extend to LRUD splay shots (Compass, VTopo import)
+    // "DISTOX_IMPORT_DATAMODE",
+    "DISTOX_EXPORT_SHOTS",    // 0 // default data export
     "DISTOX_EXPORT_PLOT",          // default plot export
 
     // "DISTOX_THERION_MAPS",         // whether to put map commands before centerline in therion
@@ -367,11 +366,11 @@ class TDPrefKey
     // "DISTOX_COMPASS_SPLAYS",       // whether to add splays to Compass dat export
     // "DISTOX_SWAP_LR",               // whether to swap Left-Right in Compass export
 
-    "DISTOX_ORTHO_LRUD",      // 10 // orthogonal LRUD ( >=1 disable, min 0 )
+    "DISTOX_ORTHO_LRUD",      // 2 // orthogonal LRUD ( >=1 disable, min 0 )
     "DISTOX_LRUD_VERTICAL", 
-    "DISTOX_LRUD_HORIZONTAL", // 12 
+    "DISTOX_LRUD_HORIZONTAL", // 4 
     "DISTOX_SURVEX_EOL",            // survex end of line [either Linux or Windows]
-    "DISTOX_SURVEX_SPLAY",    // 15 // whether to name endpoint of splays in Survex export
+    "DISTOX_SURVEX_SPLAY",    // 6  // whether to name endpoint of splays in Survex export
     "DISTOX_SURVEX_LRUD",           // whether to add LRUD to Survex export
     "DISTOX_BEZIER_STEP",           // max step between interpolating points for bezier in export (cSurvey)
 
@@ -395,19 +394,20 @@ class TDPrefKey
     // "DISTOX_DXF_BLOCKS",             // whether to export point items as Blocks in DXF export
     // "DISTOX_ACAD_VERSION",     // 23 31 
 
+    "DISTOX_EXPORT_IMPORT_PREF", // 9
     "DISTOX_EXPORT_TH_PREF",
     "DISTOX_EXPORT_DAT_PREF",
-    "DISTOX_EXPORT_SVG_PREF",
+    "DISTOX_EXPORT_SVG_PREF",    // 12
     "DISTOX_EXPORT_DXF_PREF",
     "DISTOX_EXPORT_PNG_PREF",
-    "DISTOX_EXPORT_KML_PREF",
+    "DISTOX_EXPORT_KML_PREF",    // 15
     null
   };
 
   static int[] EXPORTtitle = {
-    R.string.pref_pt_color_map_title,
-    R.string.pref_LRExtend_title,
-    R.string.pref_import_datamode_title,
+    // R.string.pref_pt_color_map_title,
+    // R.string.pref_LRExtend_title,
+    // R.string.pref_import_datamode_title,
     R.string.pref_export_shots_title,
     R.string.pref_export_plot_title,
 
@@ -447,6 +447,7 @@ class TDPrefKey
     // R.string.pref_dxf_blocks_title,
     // R.string.pref_acad_version_title,
 
+    R.string.pref_cat_exportimport,
     R.string.pref_cat_exportth,
     R.string.pref_cat_exportdat,
     R.string.pref_cat_exportsvg,
@@ -456,9 +457,9 @@ class TDPrefKey
   };
 
   static int[] EXPORTdesc = {
-    R.string.pref_pt_color_map_summary,
-    R.string.pref_LRExtend_summary,
-    R.string.pref_import_datamode_summary,
+    // R.string.pref_pt_color_map_summary,
+    // R.string.pref_LRExtend_summary,
+    // R.string.pref_import_datamode_summary,
     R.string.pref_export_shots_summary,
     R.string.pref_export_plot_summary,
 
@@ -501,9 +502,9 @@ class TDPrefKey
   };
 
   static String[] EXPORTdef = {
-    "",
-    TRUE,
-    "0", // SurveyInfo.DATAMODE_NORMAL
+    // "",
+    // TRUE,
+    // "0", // SurveyInfo.DATAMODE_NORMAL
     "-1",
     "-1",
 
@@ -545,6 +546,28 @@ class TDPrefKey
     ""
   };
 
+  // ------------------------------------------------------------------------------
+  static String[] EXPORT_import = { // [3]
+    "DISTOX_PT_CMAP",         // 0
+    "DISTOX_SPLAY_EXTEND",    // whether to set L/R extend to LRUD splay shots (Compass, VTopo import)
+    "DISTOX_IMPORT_DATAMODE" 
+  };
+  static int[] EXPORT_importtitle = {
+    R.string.pref_pt_color_map_title,
+    R.string.pref_LRExtend_title,
+    R.string.pref_import_datamode_title
+  };
+  static int[] EXPORT_importdesc = {
+    R.string.pref_pt_color_map_summary,
+    R.string.pref_LRExtend_summary,
+    R.string.pref_import_datamode_summary
+  };
+  static String[] EXPORT_importdef = { 
+    "",
+    TRUE,
+    "0"  // SurveyInfo.DATAMODE_NORMAL
+  };
+  // ------------------------------------------------------------------------------
   static String[] EXPORT_TH = { // [8]
     "DISTOX_THERION_MAPS",         // whether to put map commands before centerline in therion
     "DISTOX_AUTO_STATIONS",   // 6 // whether to add stations to thetion th2 exports
@@ -570,6 +593,7 @@ class TDPrefKey
     FALSE,
   };
 
+  // ------------------------------------------------------------------------------
   static String[] EXPORT_SVG = { // [8]
     "DISTOX_SVG_GRID",        // 0 // whether to export grid in SVG 
     "DISTOX_SVG_LINE_DIR",          // whether to add line orientation ticks in SVG export
@@ -616,6 +640,7 @@ class TDPrefKey
     "2.0",
   };
 
+  // ------------------------------------------------------------------------------
   static String[] EXPORT_DAT = {
     "DISTOX_STATION_PREFIX",       // whether to add cave-name prefix to stations (cSurvey/Compass export)
     "DISTOX_COMPASS_SPLAYS",       // whether to add splays to Compass dat export
@@ -637,6 +662,7 @@ class TDPrefKey
     FALSE,
   };
 
+  // ------------------------------------------------------------------------------
   static String[] EXPORT_KML = {
     "DISTOX_KML_STATIONS",     // 26 // whether to add station points to KML export
     "DISTOX_KML_SPLAYS"              // whether to add splay lines to KML export
@@ -654,6 +680,7 @@ class TDPrefKey
     FALSE
   };
 
+  // ------------------------------------------------------------------------------
   static String[] EXPORT_PNG = {
     "DISTOX_BITMAP_SCALE",           // default bitmap scale PNG
     "DISTOX_BITMAP_BGCOLOR",   // 21 29 // bitmap background color [RGB]
@@ -671,6 +698,7 @@ class TDPrefKey
     "0 0 0",
   };
 
+  // ------------------------------------------------------------------------------
   static String[] EXPORT_DXF = {
     // "DISTOX_DXF_SCALE",           // default DXF scale (export)
     "DISTOX_DXF_BLOCKS",             // whether to export point items as Blocks in DXF export
@@ -692,7 +720,7 @@ class TDPrefKey
     "9",
   };
 
-  // ------------------------------------------------------------------------------
+  // ==============================================================================
   static String[] DATA = { // [14]
     "DISTOX_CLOSE_DISTANCE",  // 0 // tolerance among leg shots [%]
     "DISTOX_MAX_SHOT_LENGTH",      // maximum length of a shot data
