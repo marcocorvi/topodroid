@@ -242,7 +242,7 @@
     <string name="in">внутренний</string>
     <!-- UNUSED string name="none">none</string -->
     <!-- UNUSED string name="barrier_add">Скрыть нитку хода после этого пикета</string -->
-    <string name="hide_from">Скрыть от</string>
+    <string name="hide_from">Скрыть нитку хода до ... от</string>
     <!-- UNUSED string name="barrier_del">Показать нитку хода после этого пикета</string -->
     <!-- UNUSED string name="hidden_add">Скрыть нитку хода до этого пикета</string -->
     <!-- UNUSED string name="hidden_del">Показать нитку хода до этого пикета</string -->
