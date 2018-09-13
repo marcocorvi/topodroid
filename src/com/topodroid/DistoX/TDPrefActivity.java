@@ -41,34 +41,33 @@ public class TDPrefActivity extends Activity
   static final int REQUEST_PT_CMAP     = 7;
 
   static final String PREF_CATEGORY = "PrefCategory";
-  static final int PREF_CATEGORY_ALL       = 0;
-  static final int PREF_CATEGORY_SURVEY    = 1;
-  static final int PREF_CATEGORY_PLOT      = 2;
-  static final int PREF_CATEGORY_CALIB     = 3;
-  static final int PREF_CATEGORY_DEVICE    = 4;
-  static final int PREF_CATEGORY_SKETCH    = 5;
-  static final int PREF_CATEGORY_EXPORT    = 6;
-  static final int PREF_CATEGORY_IMPORT    = 7;
-  static final int PREF_CATEGORY_TH        = 8;
-  static final int PREF_CATEGORY_DAT       = 9;
-  static final int PREF_CATEGORY_SVG       = 10;
-  static final int PREF_CATEGORY_DXF       = 11;
-  static final int PREF_CATEGORY_PNG       = 12;
-  static final int PREF_CATEGORY_KML       = 13;
-
-  static final int PREF_SHOT_DATA          = 14; 
-  static final int PREF_SHOT_UNITS         = 15; 
-  static final int PREF_ACCURACY           = 16; 
-  static final int PREF_LOCATION           = 17; 
-  static final int PREF_PLOT_SCREEN        = 18; 
-  static final int PREF_TOOL_LINE          = 19; 
-  static final int PREF_TOOL_POINT         = 20; 
-  static final int PREF_PLOT_WALLS         = 21; 
-  static final int PREF_PLOT_DRAW          = 22; 
-  static final int PREF_PLOT_ERASE         = 23; 
-  static final int PREF_PLOT_EDIT          = 24; 
-
-  static final int PREF_CATEGORY_LOG       = 25; // this must be the last
+  static final int PREF_CATEGORY_ALL       =  0;
+  static final int PREF_CATEGORY_SURVEY    =  1;
+  static final int PREF_CATEGORY_PLOT      =  2;
+  static final int PREF_CATEGORY_CALIB     =  3;
+  static final int PREF_CATEGORY_DEVICE    =  4;
+  static final int PREF_CATEGORY_SKETCH    =  5;
+  static final int PREF_CATEGORY_EXPORT    =  6;
+  static final int PREF_CATEGORY_IMPORT    =  7;
+  static final int PREF_CATEGORY_SVX       =  8;
+  static final int PREF_CATEGORY_TH        =  9;
+  static final int PREF_CATEGORY_DAT       = 10;
+  static final int PREF_CATEGORY_SVG       = 11;
+  static final int PREF_CATEGORY_DXF       = 12;
+  static final int PREF_CATEGORY_PNG       = 13;
+  static final int PREF_CATEGORY_KML       = 14;
+  static final int PREF_SHOT_DATA          = 15; 
+  static final int PREF_SHOT_UNITS         = 16; 
+  static final int PREF_ACCURACY           = 17; 
+  static final int PREF_LOCATION           = 18; 
+  static final int PREF_PLOT_SCREEN        = 19; 
+  static final int PREF_TOOL_LINE          = 20; 
+  static final int PREF_TOOL_POINT         = 21; 
+  static final int PREF_PLOT_WALLS         = 22; 
+  static final int PREF_PLOT_DRAW          = 23; 
+  static final int PREF_PLOT_ERASE         = 24; 
+  static final int PREF_PLOT_EDIT          = 25; 
+  static final int PREF_CATEGORY_LOG       = 26; // this must be the last
 
   static int mTitleRes[] = {
     R.string.title_settings_main,
@@ -190,6 +189,7 @@ public class TDPrefActivity extends Activity
       case PREF_CATEGORY_DEVICE:    mPrefs = TDPref.makeDevicePrefs( res, hlp ); break;
       case PREF_CATEGORY_EXPORT:    mPrefs = TDPref.makeExportPrefs( res, hlp ); break;
       case PREF_CATEGORY_IMPORT:    mPrefs = TDPref.makeImportPrefs( res, hlp ); break;
+      case PREF_CATEGORY_SVX:       mPrefs = TDPref.makeSvxPrefs( res, hlp ); break;
       case PREF_CATEGORY_TH:        mPrefs = TDPref.makeThPrefs( res, hlp ); break;
       case PREF_CATEGORY_DAT:       mPrefs = TDPref.makeDatPrefs( res, hlp ); break;
       case PREF_CATEGORY_SVG:       mPrefs = TDPref.makeSvgPrefs( res, hlp ); break;
@@ -257,12 +257,13 @@ public class TDPrefActivity extends Activity
       }
     } else if (mPrefCategory == PREF_CATEGORY_EXPORT ) {
       linkPreference( "DISTOX_EXPORT_IMPORT_PREF",  PREF_CATEGORY_IMPORT );
-      linkPreference( "DISTOX_EXPORT_TH_PREF",  PREF_CATEGORY_TH );
-      linkPreference( "DISTOX_EXPORT_DAT_PREF", PREF_CATEGORY_DAT );
-      linkPreference( "DISTOX_EXPORT_SVG_PREF", PREF_CATEGORY_SVG );
-      linkPreference( "DISTOX_EXPORT_DXF_PREF", PREF_CATEGORY_DXF );
-      linkPreference( "DISTOX_EXPORT_PNG_PREF", PREF_CATEGORY_PNG );
-      linkPreference( "DISTOX_EXPORT_KML_PREF", PREF_CATEGORY_KML );
+      linkPreference( "DISTOX_EXPORT_SVX_PREF",  PREF_CATEGORY_SVX );
+      linkPreference( "DISTOX_EXPORT_TH_PREF",   PREF_CATEGORY_TH );
+      linkPreference( "DISTOX_EXPORT_DAT_PREF",  PREF_CATEGORY_DAT );
+      linkPreference( "DISTOX_EXPORT_SVG_PREF",  PREF_CATEGORY_SVG );
+      linkPreference( "DISTOX_EXPORT_DXF_PREF",  PREF_CATEGORY_DXF );
+      linkPreference( "DISTOX_EXPORT_PNG_PREF",  PREF_CATEGORY_PNG );
+      linkPreference( "DISTOX_EXPORT_KML_PREF",  PREF_CATEGORY_KML );
     } else if (mPrefCategory == PREF_CATEGORY_SURVEY ) {
       linkPreference( "DISTOX_LOCATION_SCREEN", PREF_LOCATION );
       linkPreference( "DISTOX_ACCURACY_SCREEN", PREF_ACCURACY );

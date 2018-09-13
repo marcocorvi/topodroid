@@ -65,6 +65,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
   int level;
   int ptype;   // preference type
   String value = null;
+  String def_value = null;
   boolean bvalue = false;
   int     ivalue = 0;
   float   fvalue = 0;
@@ -77,7 +78,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
   View mView = null;
   EditText mEdittext = null;
 
-  private TDPref( int cat, String nm, int wt, int tit, int sum, int lvl, int pt, String val, Resources res, TDPrefHelper hlp )
+  private TDPref( int cat, String nm, int wt, int tit, int sum, int lvl, int pt, String val, String def_val, Resources res, TDPrefHelper hlp )
   {
     name  = nm;
     wtype = wt;
@@ -86,6 +87,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
     level = lvl;
     ptype = pt;
     value = val;
+    def_value = def_val;
     options = null;
     values  = null;
     helper  = hlp;
@@ -172,7 +174,11 @@ class TDPref implements AdapterView.OnItemSelectedListener
       String val = mEdittext.getText().toString();
       if ( ! value.equals( val ) ) {
         setValue( val );
-        TDSetting.updatePreference( helper, category, name, value );
+        String text = TDSetting.updatePreference( helper, category, name, value );
+	if ( text != null ) {
+	  Log.v("DistoX", "commit value <" + text + ">" );
+	  mEdittext.setText( text );
+	}
       }
       commit = false;
     }
@@ -258,19 +264,19 @@ class TDPref implements AdapterView.OnItemSelectedListener
   
   static private TDPref makeFwd( int cat, String nm, int tit, int lvl, Resources res, TDPrefHelper hlp )
   { 
-    return new TDPref( cat, nm, FORWARD, tit, -1, lvl, PREF, null, res, hlp );
+    return new TDPref( cat, nm, FORWARD, tit, -1, lvl, PREF, null, null, res, hlp );
   }
 
   static private TDPref makeBtn( int cat, String nm, int tit, int sum, int lvl, String def_val, Resources res, TDPrefHelper hlp )
   { 
     String val = hlp.getString( nm, def_val );
-    return new TDPref( cat, nm, BUTTON, tit, sum, lvl, PREF, val, res, hlp );
+    return new TDPref( cat, nm, BUTTON, tit, sum, lvl, PREF, val, def_val, res, hlp );
   }
 
   static private TDPref makeCbx( int cat, String nm, int tit, int sum, int lvl, boolean def_val, Resources res, TDPrefHelper hlp )
   { 
     boolean val = hlp.getBoolean( nm, def_val );
-    TDPref ret = new TDPref( cat, nm, CHECKBOX, tit, sum, lvl, BOOLEAN, (val? "true" : "false"), res, hlp );
+    TDPref ret = new TDPref( cat, nm, CHECKBOX, tit, sum, lvl, BOOLEAN, (val? "true" : "false"), (def_val? "true" : "false"), res, hlp );
     ret.bvalue = val;
     return ret;
   }
@@ -278,7 +284,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
   static private TDPref makeCbx( int cat, String nm, int tit, int sum, int lvl, String def_str, Resources res, TDPrefHelper hlp )
   { 
     boolean val = hlp.getBoolean( nm, def_str.startsWith("t") );
-    TDPref ret = new TDPref( cat, nm, CHECKBOX, tit, sum, lvl, BOOLEAN, (val? "true" : "false"), res, hlp );
+    TDPref ret = new TDPref( cat, nm, CHECKBOX, tit, sum, lvl, BOOLEAN, (val? "true" : "false"), def_str, res, hlp );
     ret.bvalue = val;
     return ret;
   }
@@ -286,7 +292,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
   static private TDPref makeEdt( int cat, String nm, int tit, int sum, int lvl, String def_val, int pt, Resources res, TDPrefHelper hlp )
   { 
     String val = hlp.getString( nm, def_val );
-    TDPref ret = new TDPref( cat, nm, EDITTEXT, tit, sum, lvl, pt, val, res, hlp );
+    TDPref ret = new TDPref( cat, nm, EDITTEXT, tit, sum, lvl, pt, val, def_val, res, hlp );
     if ( pt == INTEGER ) {
       ret.ivalue = Integer.parseInt( ret.value );
     } else if ( pt == FLOAT ) {
@@ -314,7 +320,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
     String[] options = res.getStringArray( opts );
     String[] values  = res.getStringArray( vals );
     // String opt = getOptionFromValue( val, options, values );
-    TDPref ret = new TDPref( cat, nm, LIST, tit, sum, lvl, OPTIONS, val, res, hlp );
+    TDPref ret = new TDPref( cat, nm, LIST, tit, sum, lvl, OPTIONS, val, def_val, res, hlp );
     ret.options = options;
     ret.values  = values;
     int idx = ret.makeLstIndex( );
@@ -328,7 +334,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
     String[] options = res.getStringArray( opts );
     String[] values  = res.getStringArray( vals );
     // String opt = getOptionFromValue( val, options, values );
-    TDPref ret = new TDPref( cat, nm, LIST, tit, sum, lvl, OPTIONS, val, res, hlp );
+    TDPref ret = new TDPref( cat, nm, LIST, tit, sum, lvl, OPTIONS, val, values[0], res, hlp );
     ret.options = options;
     ret.values  = values;
     int idx = ret.makeLstIndex( );
@@ -544,7 +550,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] tit = TDPrefKey.EXPORTtitle;
     int[] dsc = TDPrefKey.EXPORTdesc;
     String[] def = TDPrefKey.EXPORTdef;
-    TDPref[] ret = new TDPref[ 16 ];
+    TDPref[] ret = new TDPref[ 14 ];
     // ret[ 0] = makeBtn( cat, key[ 0], tit[ 0], dsc[ 0], B, def[ 0],         res, hlp );
     // ret[ 1] = makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], A, def[ 1],         res, hlp );
     // ret[ 2] = makeLst( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2], R.array.importDatamode, R.array.importDatamodeValue, res, hlp );
@@ -563,10 +569,10 @@ class TDPref implements AdapterView.OnItemSelectedListener
     ret[2] = makeEdt( cat, key[2], tit[2], dsc[2], A, def[2], FLOAT,  res, hlp );
     ret[3] = makeEdt( cat, key[3], tit[3], dsc[3], A, def[3], FLOAT,  res, hlp );
     ret[4] = makeEdt( cat, key[4], tit[4], dsc[4], A, def[4], FLOAT,  res, hlp );
-    ret[5] = makeLst( cat, key[5], tit[5], dsc[5], N, def[5], R.array.survexEol, R.array.survexEolValue, res, hlp );
-    ret[6] = makeCbx( cat, key[6], tit[6], dsc[6], A, def[6],         res, hlp );
-    ret[7] = makeCbx( cat, key[7], tit[7], dsc[7], A, def[7],         res, hlp );
-    ret[8] = makeEdt( cat, key[8], tit[8], dsc[8], E, def[8], FLOAT,  res, hlp );
+    // ret[5] = makeLst( cat, key[5], tit[5], dsc[5], N, def[5], R.array.survexEol, R.array.survexEolValue, res, hlp );
+    // ret[6] = makeCbx( cat, key[6], tit[6], dsc[6], A, def[6],         res, hlp );
+    // ret[7] = makeCbx( cat, key[7], tit[7], dsc[7], A, def[7],         res, hlp );
+    ret[5] = makeEdt( cat, key[5], tit[5], dsc[5], E, def[5], FLOAT,  res, hlp );
     // ret[18] = makeCbx( cat, key[18], tit[18], dsc[18], N, def[18],         res, hlp );
     // ret[19] = makeCbx( cat, key[19], tit[19], dsc[19], E, def[19],         res, hlp );
     // // r  ] = makeCbx( cat, key[  ], tit[  ], dsc[  ], X, def[  ],         res, hlp );
@@ -587,13 +593,14 @@ class TDPref implements AdapterView.OnItemSelectedListener
     // ret[22] = makeCbx( cat, key[22], tit[22], dsc[22], N, def[22],         res, hlp );
     // ret[23] = makeLst( cat, key[23], tit[23], dsc[23], E, def[23], R.array.acadVersion, R.array.acadVersionValue, res, hlp );
 
+    ret[ 6] = makeFwd( cat, key[ 6], tit[ 6],          N,                   res, hlp );
+    ret[ 7] = makeFwd( cat, key[ 7], tit[ 7],          N,                   res, hlp );
+    ret[ 8] = makeFwd( cat, key[ 8], tit[ 8],          N,                   res, hlp );
     ret[ 9] = makeFwd( cat, key[ 9], tit[ 9],          N,                   res, hlp );
     ret[10] = makeFwd( cat, key[10], tit[10],          N,                   res, hlp );
     ret[11] = makeFwd( cat, key[11], tit[11],          N,                   res, hlp );
     ret[12] = makeFwd( cat, key[12], tit[12],          N,                   res, hlp );
     ret[13] = makeFwd( cat, key[13], tit[13],          N,                   res, hlp );
-    ret[14] = makeFwd( cat, key[14], tit[14],          N,                   res, hlp );
-    ret[15] = makeFwd( cat, key[15], tit[15],          N,                   res, hlp );
     return ret;
   }
 
@@ -611,6 +618,20 @@ class TDPref implements AdapterView.OnItemSelectedListener
     return ret;
   }
 
+  static TDPref[] makeSvxPrefs( Resources res, TDPrefHelper hlp )
+  {
+    int cat = TDPrefActivity.PREF_CATEGORY_SVX;
+    String[] key = TDPrefKey.EXPORT_SVX;
+    int[] tit = TDPrefKey.EXPORT_SVXtitle;
+    int[] dsc = TDPrefKey.EXPORT_SVXdesc;
+    String[] def = TDPrefKey.EXPORT_SVXdef;
+    TDPref[] ret = new TDPref[ 3 ];
+    ret[0] = makeLst( cat, key[0], tit[0], dsc[0], N, def[0], R.array.survexEol, R.array.survexEolValue, res, hlp );
+    ret[1] = makeCbx( cat, key[1], tit[1], dsc[1], A, def[1],         res, hlp );
+    ret[2] = makeCbx( cat, key[2], tit[2], dsc[2], A, def[2],         res, hlp );
+    return ret;
+  }
+
   static TDPref[] makeThPrefs( Resources res, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_CATEGORY_TH;
@@ -618,11 +639,12 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] tit = TDPrefKey.EXPORT_THtitle;
     int[] dsc = TDPrefKey.EXPORT_THdesc;
     String[] def = TDPrefKey.EXPORT_THdef;
-    TDPref[] ret = new TDPref[ 3 ];
+    TDPref[] ret = new TDPref[ 4 ];
     ret[0] = makeCbx( cat, key[0], tit[0], dsc[0], A, def[0], res, hlp );
     ret[1] = makeCbx( cat, key[1], tit[1], dsc[1], N, def[1], res, hlp );
     // r ] = makeCbx( cat, key[ ], tit[ ], dsc[ ], X, def[ ], res, hlp );
     ret[2] = makeCbx( cat, key[2], tit[2], dsc[2], A, def[2], res, hlp );
+    ret[3] = makeCbx( cat, key[3], tit[3], dsc[3], A, def[3], res, hlp );
     return ret;
   }
 

@@ -53,12 +53,21 @@ Fixed points ("fix") are parsed but not taken into account as "cs" is not suppor
 <b>Compass</b> (.dat)<br>
 <i>Compass</i> data file are supported both in import and in export.<br>
 Import compass files must have extension either ".dat" or ".DAT".<br>
+Supported data format are "normal" and "diving".<br>
 Data units are 'feet' and 'degrees' (converted to meters and degrees inside TopoDroid).<br><p>
+
+Settings:
+<ul style="margin-top=0">
+<li><u>Station prefix</u></li>
+<li><u>splays</u></li>
+<li><u>L/R swap</u></li>
+</ul>
+<br><p>
 
 <b>PocketTopo</b> (.top)<br>
 TopoDroid supports <i>PocketTopo</i> both in import and in export.<br><p>
 
-The exports contain only the survey data.<br><p>
+PocketTopo export contains only the survey data.<br><p>
 If the station naming policy is set to "TopoRobot" and the station names follow TopoRobot convention "series.number"
 these are used in the export, otherwise the names are converted to numbers.
 Alphabetic characters are replaces each character with two digits. More precisely 'a' goes to '00', 'b' to '01' and so on, 'A' to '50', 'B' to '51', and so on. Every other character (i.e., non-alphanumeric) goes to '99'.<br><p>
@@ -96,7 +105,8 @@ Settings:<ul style="margin-top=0">
 <b>Topo</b> (.cav)<br>
 Survey data can be exported as <i>Topo</i> files.<br><p>
 
-Settings:<ul style="margin-top=0">
+Settings (under "Survex"settings):
+<ul style="margin-top=0">
 <li><u>line termination</u> can be either Unix or Windows</li>
 </ul><p>
 
@@ -173,7 +183,6 @@ Data are corrected with magnetic declination.<br><p>
 Sketches are exported to therion format with a scale 1:39.37<br><p>
 
 Settings:<ul style="margin-top=0">
-<li>extra point to <u>close area borders</u>.  By default TopoDroid, unlike "xtherion", does not add an extra point coinciding with the first point, to closed area borders.</li>
 <li>automatic <u>station-points</u>. [default: on].</li>
 <li>add <u>splays</u> to the scrap (as lines of type "u:splay") [default: off].</li>
 <li><u>point spacing</u> minimum distance between points on polylines. Intermediate points are not exported. Default 20 cm</li>

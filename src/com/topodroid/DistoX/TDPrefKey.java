@@ -369,9 +369,9 @@ class TDPrefKey
     "DISTOX_ORTHO_LRUD",      // 2 // orthogonal LRUD ( >=1 disable, min 0 )
     "DISTOX_LRUD_VERTICAL", 
     "DISTOX_LRUD_HORIZONTAL", // 4 
-    "DISTOX_SURVEX_EOL",            // survex end of line [either Linux or Windows]
-    "DISTOX_SURVEX_SPLAY",    // 6  // whether to name endpoint of splays in Survex export
-    "DISTOX_SURVEX_LRUD",           // whether to add LRUD to Survex export
+    // "DISTOX_SURVEX_EOL",            // survex end of line [either Linux or Windows]
+    // "DISTOX_SURVEX_SPLAY",    // 6  // whether to name endpoint of splays in Survex export
+    // "DISTOX_SURVEX_LRUD",           // whether to add LRUD to Survex export
     "DISTOX_BEZIER_STEP",           // max step between interpolating points for bezier in export (cSurvey)
 
     // "DISTOX_SVG_GRID",        // 18 // whether to export grid in SVG 
@@ -395,6 +395,7 @@ class TDPrefKey
     // "DISTOX_ACAD_VERSION",     // 23 31 
 
     "DISTOX_EXPORT_IMPORT_PREF", // 9
+    "DISTOX_EXPORT_SVX_PREF",
     "DISTOX_EXPORT_TH_PREF",
     "DISTOX_EXPORT_DAT_PREF",
     "DISTOX_EXPORT_SVG_PREF",    // 12
@@ -423,9 +424,9 @@ class TDPrefKey
     R.string.pref_ortho_lrud_title,
     R.string.pref_lrud_vertical_title,
     R.string.pref_lrud_horizontal_title,
-    R.string.pref_survex_eol_title,
-    R.string.pref_survex_splay_title,
-    R.string.pref_survex_lrud_title,
+    // R.string.pref_survex_eol_title,
+    // R.string.pref_survex_splay_title,
+    // R.string.pref_survex_lrud_title,
     R.string.pref_bezier_step_title,
     // R.string.pref_svg_grid_title,
     // R.string.pref_svg_line_dir_title,
@@ -448,6 +449,7 @@ class TDPrefKey
     // R.string.pref_acad_version_title,
 
     R.string.pref_cat_exportimport,
+    R.string.pref_cat_exportsvx,
     R.string.pref_cat_exportth,
     R.string.pref_cat_exportdat,
     R.string.pref_cat_exportsvg,
@@ -475,9 +477,9 @@ class TDPrefKey
     R.string.pref_ortho_lrud_summary,
     R.string.pref_lrud_vertical_summary,
     R.string.pref_lrud_horizontal_summary,
-    R.string.pref_survex_eol_summary,
-    R.string.pref_survex_splay_summary,
-    R.string.pref_survex_lrud_summary,
+    // R.string.pref_survex_eol_summary,
+    // R.string.pref_survex_splay_summary,
+    // R.string.pref_survex_lrud_summary,
     R.string.pref_bezier_step_summary,
     // R.string.pref_svg_grid_summary,
     // R.string.pref_svg_line_dir_summary,
@@ -520,9 +522,9 @@ class TDPrefKey
     "0",
     "0",
     "90",
-    "lf",
-    FALSE,
-    FALSE,
+    // "lf",
+    // FALSE,
+    // FALSE,
     "0.2",
     // FALSE,    // SVG
     // FALSE,
@@ -568,29 +570,54 @@ class TDPrefKey
     "0"  // SurveyInfo.DATAMODE_NORMAL
   };
   // ------------------------------------------------------------------------------
+  static String[] EXPORT_SVX = { // [8]
+    "DISTOX_SURVEX_EOL",            // survex end of line [either Linux or Windows]
+    "DISTOX_SURVEX_SPLAY",    // 6  // whether to name endpoint of splays in Survex export
+    "DISTOX_SURVEX_LRUD"            // whether to add LRUD to Survex export
+  };
+  static int[] EXPORT_SVXtitle = {
+    R.string.pref_survex_eol_title,
+    R.string.pref_survex_splay_title,
+    R.string.pref_survex_lrud_title,
+  };
+  static int[] EXPORT_SVXdesc = {
+    R.string.pref_survex_eol_summary,
+    R.string.pref_survex_splay_summary,
+    R.string.pref_survex_lrud_summary,
+  };
+  static String[] EXPORT_SVXdef = {
+    "lf",
+    FALSE,
+    FALSE
+  };
+
   static String[] EXPORT_TH = { // [8]
     "DISTOX_THERION_MAPS",         // whether to put map commands before centerline in therion
     "DISTOX_AUTO_STATIONS",   // 6 // whether to add stations to thetion th2 exports
     // "DISTOX_XTHERION_AREAS",    // save areas a-la xtherion
     "DISTOX_THERION_SPLAYS",  // 7 // whether to add u:splay lines to Therion th2 export
+    "DISTOX_SURVEX_LRUD"            // whether to add LRUD to Survex export
   };
   static int[] EXPORT_THtitle = {
     R.string.pref_therion_maps_title,
     R.string.pref_autoStations_title,
     // R.string.pref_xtherion_areas_title,
     R.string.pref_therion_splays_title,
+    R.string.pref_survex_lrud_title,
   };
   static int[] EXPORT_THdesc = {
     R.string.pref_therion_maps_summary,
     R.string.pref_autoStations_summary,
     // R.string.pref_xtherion_areas_summary,
     R.string.pref_therion_splays_summary,
+    R.string.pref_survex_lrud_summary,
   };
   static String[] EXPORT_THdef = {
     FALSE,
     TRUE,
     // FALSE,
     FALSE,
+    FALSE
   };
 
   // ------------------------------------------------------------------------------

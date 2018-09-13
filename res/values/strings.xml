@@ -949,7 +949,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_cat_drawing">SKETCHING</string>
   <string name="pref_cat_import_export">IMPORT_EXPORT</string>
   <string name="pref_cat_exportimport">IMPORT</string>
-  <string name="pref_cat_exportth" translatable="false">Therion</string>
+  <string name="pref_cat_exportsvx" translatable="false">Survex</string>
+  <string name="pref_cat_exportth"  translatable="false">Therion</string>
   <string name="pref_cat_exportdat" translatable="false">Compass</string>
   <string name="pref_cat_exportsvg" translatable="false">SVG</string>
   <string name="pref_cat_exportdxf" translatable="false">DXF</string>
@@ -975,8 +976,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_mkeyboard_summary">Enable custom keyboards</string>
   <string name="pref_no_cursor_title">No keyboard cursor</string>
   <string name="pref_no_cursor_summary">Disable custom-keyboard cursor</string>
-  <string name="pref_local_help_title">Translated manual</string>
-  <string name="pref_local_help_summary">Enable translated manual [internet required]</string>
+  <string name="pref_local_help_title">User manual</string>
+  <string name="pref_local_help_summary">Optional translated manual [internet required]</string>
   <string name="pref_cosurvey_title">Co-surveying service</string>
   <string name="pref_cosurvey_summary">Enable co-surveying service</string>
   <string name="pref_import_datamode_title">Import datamode</string>
