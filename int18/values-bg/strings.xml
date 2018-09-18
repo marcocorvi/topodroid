@@ -2,8 +2,8 @@
 <resources>
     <!-- OK string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     <string name="no_manual">Ръководството не може да бъде изтеглено</string>
-    <!-- TODO string name="user_man_ok">Installed user manual translation</string -->
-    <!-- TODO string name="user_man_fail">Failed to install user manual translation</string -->
+    <string name="user_man_ok">Инсталирано е преведеното ръководство</string>
+    <string name="user_man_fail">Грешка при инсталиране на ръководството</string>
 
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Натиснете отново за да излезете</string>
@@ -11,18 +11,18 @@
     <!-- UNUSED string name="version_ask">Обновяване на версията на TopoDroid.\nИскате ли да преинсталирате елементите за рисуване?</string -->
     <string name="symbols_ask">Инсталиране на елементи за рисуване v.%1$s?\n(Текущи v.%2$s)</string>
 
-    <!-- TODO string name="setup_textsize_title">TopoDroid setup. Text size</string -->
-    <!-- TODO string name="setup_buttonsize_title">TopoDroid setup. Button size</string -->
-    <!-- TODO string name="setup_drawingunit_title">TopoDroid setup. Icons size</string -->
-    <!-- TODO string name="setup_done_title">TopoDroid setup. Done</string -->
+    <string name="setup_textsize_title">TopoDroid настройки. Размер текст</string>
+    <string name="setup_buttonsize_title">TopoDroid настройки. Размер бутони</string>
+    <string name="setup_drawingunit_title">TopoDroid настройки. Размер икони</string>
+    <string name="setup_done_title">TopoDroid настройки. Готово</string>
 
-    <!-- TODO string name="setup_textsize">Set the text size.\nYou can always change this later thru the main window settings.</string -->
-    <!-- TODO string name="setup_buttonsize">Set the button size.\nYou can always change this later thru the main window settings.</string -->
-    <!-- TODO string name="setup_drawingunit">Set the sketch icon size.\nYou can always change this later thru the sketch window settings.</string -->
-    <!-- TODO string name="setup_done">The basic setup in done.\n\n
-	    If you experience problems with the DistoX connection, try and set the insecure socket.\n\n
-	    Other settings concern the presentation in the sketching window (icon size, label size, line width, etc.)
-	    you should set them to your needs./n/n
+    <string name="setup_textsize">Настройка на размера на текста.\nМоже да го промените по-късно от настройките.</string>
+    <string name="setup_buttonsize">Настройка на размера на бутоните.\nМоже да го промените по-късно от настройките.</string>
+    <string name="setup_drawingunit">Настройка на размера на иконите.\nМоже да го промените по-късно от настройките.</string>
+    <string name="setup_done">Основните настройки са направени.\n\n
+	    Ако имате проблеми с връзката с DistoX, опитайте връзка "без парола".\n\n
+	    Има и други настройки за скиците (размер на икони, надписи, широчина на линии и др.),
+	    които може да нагласите според нуждите ви./n/n
     </string -->
     <!-- OK string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
 
@@ -31,8 +31,8 @@
     <string name="AREA">Площ</string>
     <string name="HELP">Помощ</string>
     <string name="STATION">Репер </string>
-    <!-- TODO string name="UP">UPWARD</string -->
-    <!-- TODO string name="DOWN">DOWNWARD</string -->
+    <string name="UP">Нагоре</string>
+    <string name="DOWN">Надолу</string>
 
     <string name="cut">Изрязване</string>
     <string name="copy">Копиране</string>
@@ -168,8 +168,8 @@
     <!-- UNUSED string name="sketch_saving">Записване на скица… Моля изчакайте…</string -->
     <string name="MT_points_none">Няма точки на MobileTopographer</string>
 
-    <!-- TODO string name="pleasewait">Please wait</string -->
-    <!-- TODO string name="processing">processing &#8230;</string -->
+    <string name="pleasewait">Моля изчакайте</string>
+    <string name="processing">обработване &#8230;</string>
 
     <!-- UNUSED string name="head_tail">Памет: </string -->
     <string name="head_tail_failed">Неуспешен прочит на индекс от DistoX паметта</string>
@@ -195,10 +195,10 @@
     <string name="loop_none">няма полигон loop</string>
     <!-- UNUSED string name="long_lat">Дълж.-Шир.</string -->
 
-    <!-- TODO string name="error_m">Error [m]</string -->
-    <!-- TODO string name="fmt_error_m">Error %1$.1f m</string -->
-    <!-- TODO string name="fmt_h_geoid">Error %1$.0f m</string -->
-    <!-- TODO string name="fmt_h_ellipsoid">Error %1$.0f m</string -->
+    <string name="error_m">Грешка [m]</string>
+    <string name="fmt_error_m">Грешка %1$.1f m</string>
+    <string name="fmt_h_geoid">Грешка %1$.0f m</string>
+    <string name="fmt_h_ellipsoid">Грешка %1$.0f m</string>
     <!-- TODO string name="depth_error">Waring. Data depth error</string -->
 
     <string name="error_azimuth_required">Необходим азимут</string>
@@ -246,15 +246,15 @@
     <!-- UNUSED string name="hidden_del">Показване на предишни репери</string -->
     <string name="hidden_show">Показване на измервания след репер</string>
     <!-- UNUSED string name="splays_toggle">Показване/скриване на странични изм.</string -->
-    <!-- TODO string name="splays_on_off">Splays</string -->
+    <string name="splays_on_off">Странични изм.</string>
     <string name="splays">Странични изм.</string>
-    <!-- TODO string name="splays_show">Show splays</string -->
+    <string name="splays_show">Показване на странични изм.</string>
     <!-- TODO string name="foresurface_show">Show fore surface</string -->
     <!-- TODO string name="fmt_listen">LISTEN | %1$s</string -->
     <!-- TODO string name="fmt_id">ID %1$s</string -->
-    <!-- TODO string name="fmt_latitude">Latitude %1$s</string -->
-    <!-- TODO string name="fmt_longitude">Longitude %1$s</string -->
-    <!-- TODO string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string --> 
+    <string name="fmt_latitude">Геогр. шир. %1$s</string>
+    <string name="fmt_longitude">Геогр. дълж. %1$s</string>
+    <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string> 
     <string name="fixed">Фиксиран</string>
     <string name="painted">Боядисан</string>
 
@@ -307,8 +307,8 @@
     <!-- UNUSED string name="menu_ready">ready</string -->
     <string name="menu_calib_check">Проверка калибрация</string>
     <string name="menu_close">Затваряне</string>
-    <!-- TODO string name="menu_clear">CLEAR</string -->
-    <!-- TODO string name="menu_color">CLEAR COLOR</string -->
+    <string name="menu_clear">Изчистване</string>
+    <string name="menu_color">Изчистване цвят</string>
     <string name="menu_delete">Изтриване</string>
     <string name="menu_detach">Прек. на връзката</string>
     <string name="menu_display">Дисплей</string>
@@ -471,9 +471,9 @@
     <string name="out_of_memory">Внимание: недостатъчна памет!</string>
     <string name="disk_io_error">Грешка при четене/запис на диска!</string>
     
-    <!-- TODO string name="toporobot_warning">TopoRobot policy is exterimental !</string -->
-    <!-- TODO string name="anomaly_warning">Magnatic anomaly compensation is expert !</string -->
-    <!-- TODO string name="tripod_warning">Tripod policy is advanced !</string -->
+    <string name="toporobot_warning">Настройка TopoRobot е експериментална!</string>
+    <string name="anomaly_warning">Компенсиране на магн. аномалия е експертна настройка!</string>
+    <string name="tripod_warning">Настройка Статив е разширена!</string>
 
     <string name="cannot_rename">Не може да се преименува картировката</string>
     <string name="declination">Магн. деклинация</string>
@@ -512,7 +512,7 @@
     <string name="stat_duplicate">Дублирани отсечки %1$d %2$.1f %3$s</string>
     <string name="stat_leg">Отсечки %1$d %2$.1f %3$.1f %4$.1f %5$s</string>
     <string name="stat_length">Дължина %1$.1f %2$s</string>
-    <!-- TODO string name="stat_extlen">3D length %1$.1f %2$s</string -->
+    <string name="stat_extlen">3D дължина %1$.1f %2$s</string>
     <string name="stat_projlen">Редуцирана дължина %1$.1f %2$s</string>
     <string name="stat_loop">Полигони %1$d</string>
     <string name="stat_origin">Начален репер: %1$s</string>
@@ -557,7 +557,7 @@
     <string name="button_change"    >Промяна   </string>
     <string name="button_close"     >Затваряне </string>
     <string name="button_create"    >Създаване </string>
-    <!-- TODO string name="button_color"     >Color</string -->
+    <string name="button_color"     >Цвят</string>
     <string name="button_convert"   >Конверт.  </string>
     <string name="button_current"   >Направи текущ</string>
     <string name="button_delete"    >Изтриване </string>
@@ -575,9 +575,9 @@
     <!-- UNUSED string name="button_azimuth">Азимут</string -->
     <string name="button_plot"    >Скица</string>
     <string name="button_more"    >Още</string>
-    <!-- TODO string name="button_next"    >Next</string -->
-    <!-- TODO string name="button_skip"    >Skip</string -->
-    <!-- TODO string name="button_done"    >Done</string -->
+    <string name="button_next"    >Следващ</string>
+    <string name="button_skip"    >Пропусни</string>
+    <string name="button_done"    >Готово</string>
     <string name="button_lrud"    >Добавяне на ЛДГД</string>
     <string name="button_ok"        >OK        </string>
     <!-- TODO string name="button_off"       >off</string -->
@@ -588,7 +588,7 @@
     <!-- UNUSED string name="button_regroup"   >Прегрупиране</string -->
     <string name="button_dump"      >Запис     </string>
     <string name="button_rename"    >Преименуване</string>
-    <!-- TODO string name="button_renumber"  >Renumber</string -->
+    <string name="button_renumber"  >Преномериране</string>
     <!-- TODO string name="button_bedding"   >Bedding plane</string -->
     <!-- TODO string name="button_highlight" >Highlight</string -->
     <string name="button_replace"   >Подмяна   </string>
@@ -601,7 +601,7 @@
     <string name="button_search"    >Търсене   </string>
     <string name="button_merge"     >Сливане   </string>
     <string name="button_split"     >Разделяне</string>
-    <!-- TODO string name="button_station"   >Center at</string -->
+    <string name="button_station"   >Центриране в</string>
     <string name="button_store"     >Съхраняване</string>
     <!-- UNUSED string name="button_start"     >Старт     </string -->
     <!-- UNUSED string name="button_stop"      >Стоп      </string -->
@@ -618,7 +618,7 @@
 
     <string name="mode_leg">Отсечки</string>
     <string name="mode_splay">Странични</string>
-    <!-- TODO string name="mode_latest">Latest splays</string -->
+    <string name="mode_latest">Последни стр. изм.</string>
     <string name="mode_station">Реперни точки</string>
     <string name="mode_grid">Мащабна мрежа</string>
     <string name="mode_fixed">Преместване на скица</string>
@@ -732,7 +732,7 @@
     <string name="help_calib_check">Контролни измервания</string>
     <string name="help_close">Затваряне на прозореца</string>
     <string name="help_coeff">Показване на коеф. на калибрация</string>
-    <!-- TODO string name="help_color">Clear splay colors</string -->
+    <string name="help_color">Изчистване цвета на стран. изм.</string>
     <string name="help_continue">Продължаване на линия</string>
     <!-- NO string name="help_contour">Contour editing</string -->
     <string name="help_current_station">Записани репери</string>
@@ -845,7 +845,7 @@
     <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Разпределение на данните от калибрацията</string>
     <string name="title_coeff">Коефициенти на калибрацията</string>
-    <!-- TODO string name="title_color_picker">Pick a color</string -->
+    <string name="title_color_picker">Изберете цвят</string>
     <!-- NO string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Въведете координати на точката:</string -->
     <string name="title_current_station">Записани репери</string>
@@ -856,7 +856,7 @@
     <string name="title_draw">Рисуване</string>
     <string name="title_draw_area">Площ %1$s</string>
     <string name="title_draw_line">Линия %1$s</string>
-    <!-- TODO string name="title_draw_line_no_stations">LINE %1$s: no stations</string -->
+    <string name="title_draw_line_no_stations">Линия %1$s: няма репери</string>
     <string name="title_draw_point">Точка %1$s</string>
     <string name="title_edit">Редакция</string>
     <string name="title_edit_user_station">Редактиране на (user) репер</string>
