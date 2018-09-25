@@ -23,7 +23,7 @@
 	    Ако имате проблеми с връзката с DistoX, опитайте връзка "без парола".\n\n
 	    Има и други настройки за скиците (размер на икони, надписи, широчина на линии и др.),
 	    които може да нагласите според нуждите ви./n/n
-    </string -->
+    </string>
     <!-- OK string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
 
     <string name="POINT">Точка</string>

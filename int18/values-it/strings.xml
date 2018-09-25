@@ -472,8 +472,8 @@
     <string name="disk_io_error">CRITICAL: Errore disco !</string>
     
     <string name="toporobot_warning">TopoRobot e\' sperimentale !</string>
-    <string name="anomaly_warning">La compensazione di anomalia magnetica e' liv. esperto !</string>
-    <string name="tripod_warning">Tripod e' liv. avanzato !</string>
+    <string name="anomaly_warning">La compensazione di anomalia magnetica e\' liv. esperto !</string>
+    <string name="tripod_warning">Tripod e\' liv. avanzato !</string>
 
     <string name="cannot_rename">Rinomina rilievo non riuscita</string>
     <string name="declination">decl. magn.</string>
