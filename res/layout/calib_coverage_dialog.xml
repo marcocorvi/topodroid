@@ -15,10 +15,13 @@
   <GridLayout 
     android:layout_width="wrap_content" 
     android:layout_height="wrap_content"
+    android:orientation="horizontal"
     android:rowCount="2"
     android:columnCount="2"
-    android:orientation="horizontal"
-    >
+    ><!-- FIXME-23
+    android:rowCount="2"
+    android:columnCount="2"
+    -->
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"

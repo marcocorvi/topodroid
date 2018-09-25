@@ -100,8 +100,9 @@ class TDPrefHelper
 
   static void applyEditor( Editor editor )
   {
+    // FIXME-23 
     editor.apply(); 
-    // FIXME_23 editor.commit();
+    // FIXME-16 editor.commit();
   }
   
 }

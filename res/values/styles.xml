@@ -16,8 +16,9 @@
 
 <!--suppress AndroidDomInspection -->
 <resources>
+    <!-- FIXME-23 style name="Theme.FullScreen" parent="@android:Theme.Material.NoActionBar" -->
+    <!-- FIXME-16 style name="Theme.FullScreen" parent="@android:Theme.Black" -->
     <style name="Theme.FullScreen" parent="@android:Theme.Material.NoActionBar">
-    <!-- FIXME-23 style name="Theme.FullScreen" parent="@android:Theme.Black" -->
       <item name="android:windowNoTitle">false</item>
       <item name="android:windowTitleSize">40dp</item>
       <item name="android:windowTitleStyle">@style/titleTextStyle</item>
@@ -45,8 +46,11 @@
       <item name="android:textColor">@color/text</item>
     </style -->
 
+    <!-- FIXME-23 style name="checkBoxStyle" parent="@android:style/Widget.Holo.CompoundButton.CheckBox" -->
+    <!-- FIXME-16 style name="checkBoxStyle" parent="@android:style/Widget.CompoundButton.CheckBox" -->
     <style name="checkBoxStyle" parent="@android:style/Widget.Holo.CompoundButton.CheckBox">
       <item name="android:buttonTint">@color/pref_text</item>
+
       <item name="android:textColorSecondary">#ff000000</item>
     </style>
 
@@ -62,8 +66,9 @@
     </style>
 -->
 
+    <!-- FIXME-23 style name="button_default" parent="@android:style/Widget.Holo.Button.Small" -->
+    <!-- FIXME-16 style name="button_default" parent="@android:style/Widget.Button.Small" -->
     <style name="button_default" parent="@android:style/Widget.Holo.Button.Small">
-    <!-- FIXME-23 style name="button_default" parent="@android:style/Widget.Button.Small" -->
        <item name="android:layout_width">wrap_content</item>
        <item name="android:layout_height">wrap_content</item>
        <item name="android:textColor">#ffffff</item>

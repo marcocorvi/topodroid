@@ -38,6 +38,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+/* FIXME-23 */
 import android.os.StrictMode;
 
 // import android.view.Menu;
@@ -3458,12 +3459,14 @@ public class DrawingWindow extends ItemDrawer
           	         true, false).show();  // true = with_box, false=with_delay
       } else {
 	boolean ok = true;
+	/* FIXME-23 */
         if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ) { // build version 24
           try {
             Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposed");
 	    m.invoke( null );
 	  } catch ( Exception e ) { ok = false; }
 	}
+	/* */
 	if ( ok ) {
           try {
             Uri outfileuri = Uri.fromFile( imagefile );
