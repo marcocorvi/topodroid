@@ -42,7 +42,7 @@ class SurveyNewDialog extends MyDialog
                              implements View.OnClickListener
                              , View.OnLongClickListener
 {
-  private final static String EMPTY = "";
+  // private final static String EMPTY = "";
 
   private final MainWindow mParent;
 
@@ -196,17 +196,17 @@ class SurveyNewDialog extends MyDialog
 
     String init_station = TDSetting.mInitStation;
     if ( mEditStation.getText() != null ) {
-      String station = mEditStation.getText().toString().replaceAll("\\s+", EMPTY);
+      String station = mEditStation.getText().toString().replaceAll("\\s+", TDString.EMPTY);
       if ( station.length() > 0 ) {
         init_station = station;
       }
     }
-    if ( init_station == null || init_station.length() == 0 ) init_station = "0";
+    if ( init_station == null || init_station.length() == 0 ) init_station = TDString.ZERO;
 
     // date, team, comment always non-null
-    /* if ( date != null ) */ { date = date.trim(); } // else { date = EMPTY; }
-    /* if ( team != null ) */ { team = team.trim(); } // else { team = EMPTY; }
-    /* if ( comment != null ) */ { comment = comment.trim(); } // else { comment = EMPTY; }
+    /* if ( date != null ) */ { date = date.trim(); } // else { date = TDString.EMPTY; }
+    /* if ( team != null ) */ { team = team.trim(); } // else { team = TDString.EMPTY; }
+    /* if ( comment != null ) */ { comment = comment.trim(); } // else { comment = TDString.EMPTY; }
 
     int xsections = mCBxsections.isChecked() ? SurveyInfo.XSECTION_PRIVATE
                                              : SurveyInfo.XSECTION_SHARED;

@@ -23,8 +23,8 @@ import android.util.Log;
 
 class TDSetting
 {
-  static private String defaultTextSize = "16";
-  static private String defaultButtonSize = "1";
+  static private String defaultTextSize   = "16";
+  static private String defaultButtonSize = TDString.ONE;
 
   static String setTextSize( int ts )
   {
@@ -153,7 +153,7 @@ class TDSetting
   static final int GROUP_BY_DISTANCE = 0;
   static final int GROUP_BY_FOUR     = 1;
   static final int GROUP_BY_ONLY_16  = 2;
-  // static final String GROUP_BY  = "1";     // GROUP_BY_FOUR
+  // static final String GROUP_BY  = TDString.ONE;     // GROUP_BY_FOUR
   static int mGroupBy = GROUP_BY_FOUR;  // how to group calib data
 
   // static boolean mRawData = false;   // whether to display calibration raw data as well
@@ -186,7 +186,7 @@ class TDSetting
   static final int TD_SOCK_INSEC_PORT   = 3;
   // static final int TD_SOCK_INSEC_INVOKE = 4;
   // static int mDefaultSockType = (android.os.Build.MANUFACTURER.equals("samsung") ) ? TD_SOCK_INSEC : TD_SOCK_DEFAULT;
-  static String mDefaultSockStrType = (android.os.Build.MANUFACTURER.equals("samsung") ) ? "1" : "0";
+  static String mDefaultSockStrType = (android.os.Build.MANUFACTURER.equals("samsung") ) ? TDString.ONE : TDString.ZERO;
   static int mSockType = TD_SOCK_DEFAULT;
 
   static int mCommRetry = 1; 
@@ -229,7 +229,7 @@ class TDSetting
   // static final String CLOSE_DISTANCE = "0.05"; // 50 cm / 1000 cm
   static float   mCloseDistance = 0.05f; 
   static int     mMinNrLegShots = 3;
-  static String  mInitStation   = "0";
+  static String  mInitStation   = TDString.ZERO;
   static boolean mBacksightInput = false;   // whether to add backsight fields in shot anual-input dialog
   static float   mSplayVertThrs = 80;
   static boolean mAzimuthManual = false;    // whether to manually set extend / or use reference azimuth
@@ -256,7 +256,7 @@ class TDSetting
   static String mUnitLengthStr = "m";    // N.B. Therion syntax: "m", "ft"
   static String mUnitAngleStr  = "deg";  // N.B. Therion syntax: "deg", "grad"
 
-  // static final String EXTEND_THR = "10"; 
+  // static final String EXTEND_THR = TDString.TEN; 
   static float mExtendThr = 10;             // extend vertically splays in [90-30, 90+30] of the leg
 
   static int mThumbSize = 200;               // thumbnail size
@@ -295,7 +295,7 @@ class TDSetting
   static final private int LINE_STYLE_ONE    = 1;
   static final private int LINE_STYLE_TWO    = 2;
   static final private int LINE_STYLE_THREE  = 3;
-  static final private String LINE_STYLE     = "2";     // LINE_STYLE_TWO NORMAL
+  static final private String LINE_STYLE     = TDString.TWO;     // LINE_STYLE_TWO NORMAL
   static int   mLineStyle = LINE_STYLE_BEZIER;    
   static int   mLineType;        // line type:  1       1     2    3
   static int   mLineSegment   = 10;
@@ -496,7 +496,7 @@ class TDSetting
   static private String setSelectness( float s ) 
   {
     String ret = null;
-    if ( s < 1 ) { s = 1; ret = "1"; }
+    if ( s < 1 ) { s = 1; ret = TDString.ONE; }
     mSelectness = s;
     return ret;
   }
@@ -504,7 +504,7 @@ class TDSetting
   static private String setEraseness( float s ) 
   {
     String ret = null;
-    if ( s < 1 ) { s = 1; ret = "1"; }
+    if ( s < 1 ) { s = 1; ret = TDString.ONE; }
     mEraseness = s;
     return ret;
   }
@@ -512,7 +512,7 @@ class TDSetting
   static private String setDotRadius( float s ) 
   {
     String ret = null;
-    if ( s < 1 ) { s = 1; ret = "1"; }
+    if ( s < 1 ) { s = 1; ret = TDString.ONE; }
     if ( s > 100 ) { s = 100; ret = "100"; }
     mDotRadius = s;
     return ret;
@@ -521,7 +521,7 @@ class TDSetting
   static private String setMinShift( int s ) 
   {
     String ret = null;
-    if ( s < 10 ) { s = 10; ret = "10"; }
+    if ( s < 10 ) { s = 10; ret = TDString.TEN; }
     mMinShift = s;
     return ret;
   }
@@ -529,7 +529,7 @@ class TDSetting
   static private String setPointingRadius( int s ) 
   {
     String ret = null;
-    if ( s < 1 ) { s = 1; ret = "1"; }
+    if ( s < 1 ) { s = 1; ret = TDString.ONE; }
     mPointingRadius = s;
     return ret;
   }
@@ -664,10 +664,10 @@ class TDSetting
     mZ6Workaround   = prefs.getBoolean( keyDevice[ 5], bool(defDevice[ 5])  ); // DISTOX_Z6_WORKAROUND
     mConnectSocketDelay = tryInt(prefs, keyDevice[ 6],      defDevice[ 6] );   // DISTOX_SOCKET_DELAY
     mAutoPair       = prefs.getBoolean( keyDevice[ 7], bool(defDevice[ 7]) );  // DISTOX_AUTO_PAIR
-    mWaitLaser      = tryInt( prefs,    keyDevice[ 8],      defDevice[ 8] );   // DISTOX_WAIT_LASER
-    mWaitShot       = tryInt( prefs,    keyDevice[ 9],      defDevice[ 9] );   // DISTOX_WAIT_SHOT
-    mWaitData       = tryInt( prefs,    keyDevice[10],      defDevice[10] );   // DISTOX_WAIT_DATA
-    mWaitConn       = tryInt( prefs,    keyDevice[11],      defDevice[11] );   // DISTOX_WAIT_CONN
+    mWaitData       = tryInt( prefs,    keyDevice[ 8],      defDevice[ 8] );   // DISTOX_WAIT_DATA
+    mWaitConn       = tryInt( prefs,    keyDevice[ 9],      defDevice[ 9] );   // DISTOX_WAIT_CONN
+    mWaitLaser      = tryInt( prefs,    keyDevice[10],      defDevice[10] );   // DISTOX_WAIT_LASER
+    mWaitShot       = tryInt( prefs,    keyDevice[11],      defDevice[11] );   // DISTOX_WAIT_SHOT
 
     String[] keyImport = TDPrefKey.EXPORT_import;
     String[] defImport = TDPrefKey.EXPORT_importdef;
@@ -929,21 +929,21 @@ class TDSetting
 	}
       }
     } else if ( k.equals( key[ 3 ] ) ) {             // DISTOX_EXTRA_BUTTONS (choice)
-      int level = tryIntValue( hlp, k, v, "1" );
+      int level = tryIntValue( hlp, k, v, TDString.ONE );
       setActivityBooleans( hlp.getSharedPrefs(), level );
     } else if ( k.equals( key[ 4 ] ) ) {           // DISTOX_MKEYBOARD (bool)
       mKeyboard = tryBooleanValue( hlp, k, v, true );
     } else if ( k.equals( key[ 5 ] ) ) {           // DISTOX_NO_CURSOR(bool)
       mNoCursor = tryBooleanValue( hlp, k, v, false );
     } else if ( k.equals( key[ 6 ] ) ) {           // DISTOX_LOCAL_MAN (choice)
-      mLocalManPages = handleLocalUserMan( hlp.getApp(), tryStringValue( hlp, k, v, "0" ), true );
+      mLocalManPages = handleLocalUserMan( hlp.getApp(), tryStringValue( hlp, k, v, TDString.ZERO ), true );
     } else if ( k.equals( key[ 7 ] ) ) {           // DISTOX_COSURVEY (bool)
       boolean co_survey = tryBooleanValue( hlp, k, v, false );
       if ( co_survey != TopoDroidApp.mCoSurveyServer ) {
         hlp.getApp().setCoSurvey( co_survey ); // set flag and start/stop server
       }
     } else if ( k.equals( key[ 8 ] ) ) {           // DISTOX_LOCALE (choice)
-      TopoDroidApp.setLocale( tryStringValue( hlp, k, v, "" ), true );
+      TopoDroidApp.setLocale( tryStringValue( hlp, k, v, TDString.EMPTY ), true );
     } else {
       TDLog.Error("missing MAIN key: " + k );
     }
@@ -1030,13 +1030,13 @@ class TDSetting
       mGroupBy       = tryIntValue(   hlp, k, v, def[0] );  // DISTOX_GROUP_BY (choice)
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_GROUP_DISTANCE
       mGroupDistance = tryFloatValue( hlp, k, v, def[1] );
-      if ( mGroupDistance < 0 ) { mGroupDistance = 0; ret = "0"; }
+      if ( mGroupDistance < 0 ) { mGroupDistance = 0; ret = TDString.ZERO; }
     } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_CALIB_EPS
       mCalibEps      = tryFloatValue( hlp, k, v, def[2] );
       if ( mCalibEps < 0.000001f ) { mCalibEps = 0.000001f; ret = "0.000001"; }
     } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_CALIB_MAX_IT
       mCalibMaxIt    = tryIntValue(   hlp, k, v, def[3] );
-      if ( mCalibMaxIt < 10 ) { mCalibMaxIt = 10; ret = "10"; }
+      if ( mCalibMaxIt < 10 ) { mCalibMaxIt = 10; ret = TDString.TEN; }
     } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_CALIB_SHOT_DOWNLOAD (bool)
       mCalibShotDownload = tryBooleanValue( hlp, k, v, bool(def[4]) );
     } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_RAW_CDATA
@@ -1046,14 +1046,14 @@ class TDSetting
       mCalibAlgo     = tryIntValue( hlp, k, v, def[6] );
     } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_ALGO_MIN_ALPHA
       mAlgoMinAlpha   = tryFloatValue( hlp, k, v, def[7] );
-      if ( mAlgoMinAlpha < 0 ) { mAlgoMinAlpha = 0; ret = "0"; }
-      if ( mAlgoMinAlpha > 1 ) { mAlgoMinAlpha = 1; ret = "1"; }
+      if ( mAlgoMinAlpha < 0 ) { mAlgoMinAlpha = 0; ret = TDString.ZERO; }
+      if ( mAlgoMinAlpha > 1 ) { mAlgoMinAlpha = 1; ret = TDString.ONE; }
     } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_ALGO_MIN_BETA
       mAlgoMinBeta    = tryFloatValue( hlp, k, v, def[8] );
-      if ( mAlgoMinBeta  < 0 ) { mAlgoMinBeta  = 0; ret = "0"; }
+      if ( mAlgoMinBeta  < 0 ) { mAlgoMinBeta  = 0; ret = TDString.ZERO; }
     } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_ALGO_MIN_GAMMA
       mAlgoMinGamma   = tryFloatValue( hlp, k, v, def[9] );
-      if ( mAlgoMinGamma < 0 ) { mAlgoMinGamma = 0; ret = "0"; }
+      if ( mAlgoMinGamma < 0 ) { mAlgoMinGamma = 0; ret = TDString.ZERO; }
     } else if ( k.equals( key[ 10 ] ) ) { // DISTOX_ALGO_MIN_DELTA
       mAlgoMinDelta   = tryFloatValue( hlp, k, v, def[10] ); 
       if ( mAlgoMinDelta < -10 ) { mAlgoMinDelta = -10; ret = "-10"; }
@@ -1090,8 +1090,8 @@ class TDSetting
       mZ6Workaround = tryBooleanValue( hlp, k, v, bool(def[5]) );
     } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_SOCKET_DELAY
       mConnectSocketDelay = tryIntValue( hlp, k, v, def[6] );  
-      if ( mConnectSocketDelay < 0  ) { mConnectSocketDelay = 0; ret = "0"; }
-      if ( mConnectSocketDelay > 60 ) { mConnectSocketDelay = 60; ret = "60"; } // was 100
+      if ( mConnectSocketDelay < 0  ) { mConnectSocketDelay =  0; ret = TDString.ZERO; }
+      if ( mConnectSocketDelay > 60 ) { mConnectSocketDelay = 60; ret = TDString.SIXTY; } // was 100
     } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_AUTO_PAIR (bool)
       mAutoPair = tryBooleanValue( hlp, k, v, bool(def[7]) );
       hlp.getApp().checkAutoPairing();
@@ -1105,11 +1105,11 @@ class TDSetting
       if ( mWaitConn > 2000 ) { mWaitConn = 2000; ret = Integer.toString( mWaitConn ); }
     } else if ( k.equals( key[ 10 ] ) ) { // DISTOX_WAIT_LASER
       mWaitLaser = tryIntValue( hlp, k, v, def[10] );
-      if ( mWaitLaser <  100 ) { mWaitLaser =  100; ret = Integer.toString( mWaitLaser ); }
+      if ( mWaitLaser <  500 ) { mWaitLaser =  500; ret = Integer.toString( mWaitLaser ); }
       if ( mWaitLaser > 5000 ) { mWaitLaser = 5000; ret = Integer.toString( mWaitLaser ); }
     } else if ( k.equals( key[ 11 ] ) ) { // DISTOX_WAIT_SHOT
       mWaitShot  = tryIntValue( hlp, k, v, def[11] );
-      if ( mWaitShot <   100 ) { mWaitShot =   100; ret = Integer.toString( mWaitShot ); }
+      if ( mWaitShot <   500 ) { mWaitShot =   500; ret = Integer.toString( mWaitShot ); }
       if ( mWaitShot > 10000 ) { mWaitShot = 10000; ret = Integer.toString( mWaitShot ); }
     } else {
       TDLog.Error("missing DEVICE key: " + k );
@@ -1160,18 +1160,18 @@ class TDSetting
     //   mCompassSplays  = tryBooleanValue( hlp, k, v, bool(def[ 9]) );   
     } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_ORTHO_LRUD
       mOrthogonalLRUDAngle  = tryFloatValue( hlp, k, v, def[ 2] );
-      if ( mOrthogonalLRUDAngle <  0 ) { mOrthogonalLRUDAngle =  0;  ret = "0"; }
-      if ( mOrthogonalLRUDAngle > 90 ) { mOrthogonalLRUDAngle = 90;  ret = "90"; }
+      if ( mOrthogonalLRUDAngle <  0 ) { mOrthogonalLRUDAngle =  0;  ret = TDString.ZERO; }
+      if ( mOrthogonalLRUDAngle > 90 ) { mOrthogonalLRUDAngle = 90;  ret = TDString.NINETY; }
       mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
       mOrthogonalLRUD       = ( mOrthogonalLRUDAngle > 0.000001f ); 
     } else if ( k.equals( key[  3 ] ) ) { // DISTOX_LRUD_VERTICAL
       mLRUDvertical = tryFloatValue( hlp, k, v, def[ 3] );
-      if ( mLRUDvertical <  0 ) { mLRUDvertical =  0; ret =  "0"; }
-      if ( mLRUDvertical > 91 ) { mLRUDvertical = 91; ret = "91"; }
+      if ( mLRUDvertical <  0 ) { mLRUDvertical =  0; ret = TDString.ZERO; }
+      if ( mLRUDvertical > 91 ) { mLRUDvertical = 91; ret = TDString.NINETYONE; }
     } else if ( k.equals( key[  4 ] ) ) { // DISTOX_LRUD_HORIZONTAL
       mLRUDhorizontal = tryFloatValue( hlp, k, v, def[ 4] );
-      if ( mLRUDhorizontal <  0 ) { mLRUDhorizontal =  0; ret =  "0"; }
-      if ( mLRUDhorizontal > 91 ) { mLRUDhorizontal = 91; ret = "91"; }
+      if ( mLRUDhorizontal <  0 ) { mLRUDhorizontal =  0; ret = TDString.ZERO; }
+      if ( mLRUDhorizontal > 91 ) { mLRUDhorizontal = 91; ret = TDString.NINETYONE; }
     // } else if ( k.equals( key[  ] ) ) { // DISTOX_SWAP_LR
     //   mSwapLR = tryBooleanValue( hlp, k, v, bool(def[ ]) );
     // } else if ( k.equals( key[  5 ] ) ) { // DISTOX_SURVEX_EOL
@@ -1182,8 +1182,8 @@ class TDSetting
     //   mSurvexLRUD = tryBooleanValue( hlp, k, v, bool(def[ 7]) );
     } else if ( k.equals( key[  5 ] ) ) { // DISTOX_BEZIER_STEP
       mBezierStep  = tryFloatValue( hlp, k, v, def[ 5] );
-      if ( mBezierStep < 0 ) { mBezierStep = 0; ret = "0"; }
-      if ( mBezierStep > 3 ) { mBezierStep = 3; ret = "3"; } // was 2
+      if ( mBezierStep < 0 ) { mBezierStep = 0; ret = TDString.ZERO; }
+      if ( mBezierStep > 3 ) { mBezierStep = 3; ret = TDString.THREE; } // was 2
     // } else if ( k.equals( key[ 18 ] ) ) { // DISTOX_SVG_GRID
     //   mSvgGrid = tryBooleanValue( hlp, k, v, bool(def[18]) );
     // } else if ( k.equals( key[ 19 ] ) ) { // DISTOX_SVG_LINE_DIR
@@ -1319,7 +1319,7 @@ class TDSetting
     if ( k.equals( key[ 0 ] ) ) { // DISTOX_BITMAP_SCALE
       mBitmapScale = tryFloatValue( hlp, k, v, def[0] );
       if ( mBitmapScale < 0.5f ) { mBitmapScale = 0.5f; ret = "0.5"; }
-      if ( mBitmapScale >  10f ) { mBitmapScale =  10f; ret = "10"; }
+      if ( mBitmapScale >  10f ) { mBitmapScale =  10f; ret = TDString.TEN; }
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_BITMAP_BGCOLOR
       return setBitmapBgcolor( hlp.getSharedPrefs(), k, tryStringValue( hlp, k, v, def[1] ), def[1] );
     } else {
@@ -1379,26 +1379,26 @@ class TDSetting
       if ( mCloseDistance < 0.0001f ) { mCloseDistance = 0.0001f; ret = "0.0001"; }
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_MAX_SHOT_LENGTH
       mMaxShotLength  = tryFloatValue( hlp, k, v, def[1] );  
-      if ( mMaxShotLength < 20 ) { mMaxShotLength = 20; ret = "20"; }
+      if ( mMaxShotLength < 20 ) { mMaxShotLength = 20; ret = TDString.TWENTY; }
     } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_MIN_LEG_LENGTH
       mMinLegLength   = tryFloatValue( hlp, k, v, def[2] );  
-      if ( mMinLegLength < 0 ) { mMinLegLength = 0; ret = "0"; }
-      if ( mMinLegLength > 5 ) { mMinLegLength = 5; ret = "5"; }
+      if ( mMinLegLength < 0 ) { mMinLegLength = 0; ret = TDString.ZERO; }
+      if ( mMinLegLength > 5 ) { mMinLegLength = 5; ret = TDString.FIVE; }
     } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_LEG_SHOTS (choice)
       mMinNrLegShots  = tryIntValue(   hlp, k, v, def[3] );
     } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_RECENT_TIMEOUT
       mRecentTimeout  = tryIntValue(   hlp, k, v, def[4] );
-      if ( mRecentTimeout < 0 ) { mRecentTimeout = 0; ret = "0"; }
+      if ( mRecentTimeout < 0 ) { mRecentTimeout = 0; ret = TDString.ZERO; }
     } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_BACKSHOT (bool)
       mDistoXBackshot = tryBooleanValue( hlp, k, v, bool(def[5]) );
     } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_EXTEND_THR2
       mExtendThr      = tryFloatValue( hlp, k, v, def[6] );
-      if ( mExtendThr <  0 ) { mExtendThr =  0; ret =  "0"; }
-      if ( mExtendThr > 90 ) { mExtendThr = 90; ret = "90"; }
+      if ( mExtendThr <  0 ) { mExtendThr =  0; ret = TDString.ZERO; }
+      if ( mExtendThr > 90 ) { mExtendThr = 90; ret = TDString.NINETY; }
     } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_VTHRESHOLD
       mVThreshold     = tryFloatValue( hlp, k, v, def[7] );
-      if ( mVThreshold <  0 ) { mVThreshold =  0; ret =  "0"; }
-      if ( mVThreshold > 90 ) { mVThreshold = 90; ret = "90"; }
+      if ( mVThreshold <  0 ) { mVThreshold =  0; ret =  TDString.ZERO; }
+      if ( mVThreshold > 90 ) { mVThreshold = 90; ret = TDString.NINETY; }
     } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_AZIMUTH_MANUAL (bool)
       mAzimuthManual  = tryBooleanValue( hlp, k, v, bool(def[8]) ); 
       TDAzimuth.resetRefAzimuth( TopoDroidApp.mShotWindow, TDAzimuth.mRefAzimuth );
@@ -1412,10 +1412,10 @@ class TDSetting
     //   setMagAnomaly( hlp.getSharedPrefs(), tryBooleanValue( hlp, k, v, bool(def[ ]) ) );
     } else if ( k.equals( key[ 12 ] ) ) { // DISTOX_SHOT_TIMER [3 ..)
       mTimerWait        = tryIntValue( hlp, k, v, def[12] );
-      if ( mTimerWait < 0 ) { mTimerWait = 0; ret = "0"; }
+      if ( mTimerWait < 0 ) { mTimerWait = 0; ret = TDString.ZERO; }
     } else if ( k.equals( key[ 13 ] ) ) { // DISTOX_BEEP_VOLUME [0 .. 100]
       mBeepVolume       = tryIntValue( hlp, k, v, def[13] );
-      if ( mBeepVolume <   0 ) { mBeepVolume =   0; ret =   "0"; }
+      if ( mBeepVolume <   0 ) { mBeepVolume =   0; ret =   TDString.ZERO; }
       if ( mBeepVolume > 100 ) { mBeepVolume = 100; ret = "100"; }
     } else {
       TDLog.Error("missing DATA key: " + k );
@@ -1461,13 +1461,13 @@ class TDSetting
     String[] def = TDPrefKey.ACCURACYdef;
     if ( k.equals( key[ 0 ] ) ) {        // DISTOX_ACCEL_PERCENT 
       mAccelerationThr = tryFloatValue( hlp, k, v, def[0] );
-      if ( mAccelerationThr < 0 ) { mAccelerationThr = 0; ret = "0"; }
+      if ( mAccelerationThr < 0 ) { mAccelerationThr = 0; ret = TDString.ZERO; }
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_MAG_PERCENT
       mMagneticThr     = tryFloatValue( hlp, k, v, def[1] );
-      if ( mMagneticThr < 0 ) { mMagneticThr = 0; ret = "0"; }
+      if ( mMagneticThr < 0 ) { mMagneticThr = 0; ret = TDString.ZERO; }
     } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_DIP_THR
       mDipThr          = tryFloatValue( hlp, k, v, def[2] );
-      if ( mDipThr < 0 ) { mDipThr = 0; ret = "0"; }
+      if ( mDipThr < 0 ) { mDipThr = 0; ret = TDString.ZERO; }
     } else {
       TDLog.Error("missing ACCURACY key: " + k );
     }
@@ -1512,7 +1512,7 @@ class TDSetting
           BrushManager.setStrokeWidths();
         }
        	else if ( f < 0.5f ) { f = 0.5f; ret = "0.5"; }
-	else if ( f > 10f )  { f =  10f; ret = "10"; }
+	else if ( f > 10f )  { f =  10f; ret = TDString.TEN; }
       } catch ( NumberFormatException e ) { ret = String.format(Locale.US, "%.2f", mFixedThickness ); }
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_STATION_SIZE
       try {
@@ -1531,27 +1531,27 @@ class TDSetting
       ret = setPointingRadius( tryIntValue( hlp, k, v, def[6] ) );
     } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_SPLAY_VERT_THRS
       mSplayVertThrs = tryFloatValue( hlp, k, v, def[7] );
-      if ( mSplayVertThrs <  0 ) { mSplayVertThrs =  0; ret =  "0"; }
-      if ( mSplayVertThrs > 91 ) { mSplayVertThrs = 91; ret = "91"; }
+      if ( mSplayVertThrs <  0 ) { mSplayVertThrs =  0; ret = TDString.ZERO; }
+      if ( mSplayVertThrs > 91 ) { mSplayVertThrs = 91; ret = TDString.NINETYONE; }
     } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_DASH_SPLAY (bool)
       mDashSplay = tryBooleanValue( hlp, k, v, bool(def[8]) );      
     } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_VERT_SPLAY
       mVertSplay   = tryFloatValue( hlp, k, v, def[9] );
-      if ( mVertSplay <  0 ) { mVertSplay =  0; ret =  "0"; }
-      if ( mVertSplay > 91 ) { mVertSplay = 91; ret = "91"; }
+      if ( mVertSplay <  0 ) { mVertSplay =  0; ret = TDString.ZERO; }
+      if ( mVertSplay > 91 ) { mVertSplay = 91; ret = TDString.NINETYONE; }
     } else if ( k.equals( key[ 10 ] ) ) { // DISTOX_HORIZ_SPLAY
       mHorizSplay  = tryFloatValue( hlp, k, v, def[10] );
-      if ( mHorizSplay <  0 ) { mHorizSplay =  0; ret =  "0"; }
-      if ( mHorizSplay > 91 ) { mHorizSplay = 91; ret = "91"; }
+      if ( mHorizSplay <  0 ) { mHorizSplay =  0; ret = TDString.ZERO; }
+      if ( mHorizSplay > 91 ) { mHorizSplay = 91; ret = TDString.NINETYONE; }
       mCosHorizSplay = TDMath.cosd( mHorizSplay );
     } else if ( k.equals( key[ 11 ] ) ) { // DISTOX_SECTION_SPLAY
       mSectionSplay = tryFloatValue( hlp, k, v, def[11] );
-      if ( mSectionSplay <  0 ) { mSectionSplay =  0; ret =  "0"; }
-      if ( mSectionSplay > 91 ) { mSectionSplay = 91; ret = "91"; }
+      if ( mSectionSplay <  0 ) { mSectionSplay =  0; ret = TDString.ZERO; }
+      if ( mSectionSplay > 91 ) { mSectionSplay = 91; ret = TDString.NINETYONE; }
     } else if ( k.equals( key[ 12 ] ) ) { // DISTOX_HTHRESHOLD
       mHThreshold = tryFloatValue( hlp, k, v, def[12] );
-      if ( mHThreshold <  0 ) { mHThreshold =  0; ret =  "0"; }
-      if ( mHThreshold > 90 ) { mHThreshold = 90; ret = "90"; }
+      if ( mHThreshold <  0 ) { mHThreshold =  0; ret = TDString.ZERO; }
+      if ( mHThreshold > 90 ) { mHThreshold = 90; ret = TDString.NINETY; }
     } else {
       TDLog.Error("missing SCREEN key: " + k );
     }
@@ -1626,21 +1626,21 @@ class TDSetting
       mWallsType = tryIntValue(hlp, k, v, def[0] );
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_WALLS_PLAN_THR
       mWallsPlanThr = tryFloatValue( hlp, k, v, def[1] );
-      if ( mWallsPlanThr < 0 ) { mWallsPlanThr = 0; ret = "0"; }
-      if ( mWallsPlanThr > 90 ) { mWallsPlanThr = 90; ret = "90"; }
+      if ( mWallsPlanThr < 0 ) { mWallsPlanThr  =  0; ret = TDString.ZERO; }
+      if ( mWallsPlanThr > 90 ) { mWallsPlanThr = 90; ret = TDString.NINETY; }
     } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_WALLS_EXTENDED_THR
       mWallsExtendedThr = tryFloatValue( hlp, k, v, def[2] );
-      if ( mWallsExtendedThr < 0 ) { mWallsExtendedThr = 0; ret = "0"; }
-      if ( mWallsExtendedThr > 90 ) { mWallsExtendedThr = 90; ret = "90"; }
+      if ( mWallsExtendedThr < 0 ) { mWallsExtendedThr = 0; ret = TDString.ZERO; }
+      if ( mWallsExtendedThr > 90 ) { mWallsExtendedThr = 90; ret = TDString.NINETY; }
     } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_WALLS_XCLOSE
       mWallsXClose = tryFloatValue( hlp, k, v, def[3] );
-      if ( mWallsXClose < 0 ) { mWallsXClose = 0; ret = "0"; }
+      if ( mWallsXClose < 0 ) { mWallsXClose = 0; ret = TDString.ZERO; }
     } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_WALLS_CONCAVE
       mWallsConcave = tryFloatValue( hlp, k, v, def[4] );
-      if ( mWallsConcave < 0 ) { mWallsConcave = 0; ret = "0"; }
+      if ( mWallsConcave < 0 ) { mWallsConcave = 0; ret = TDString.ZERO; }
     } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_WALLS_XSTEP
       mWallsXStep = tryFloatValue( hlp, k, v, def[5] );
-      if ( mWallsXStep < 0 ) { mWallsXStep = 0; ret = "0"; }
+      if ( mWallsXStep < 0 ) { mWallsXStep = 0; ret = TDString.ZERO; }
     } else {
       TDLog.Error("missing WALLS key: " + k );
     }
@@ -1753,7 +1753,7 @@ class TDSetting
       if ( mDeltaExtrude < 0.01f ) { mDeltaExtrude = 0.01f; ret = "0.01"; }
     // } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_COMPASS_READINGS
     //   mCompassReadings = tryIntValue( hlp, k, v, def[ ] );
-    //   if ( mCompassReadings < 1 ) { mCompassReadings = 1; ret = "1"; }
+    //   if ( mCompassReadings < 1 ) { mCompassReadings = 1; ret = TDString.ONE; }
     } else {
       TDLog.Error("missing SKETCH key: " + k );
     }
@@ -1773,16 +1773,16 @@ class TDSetting
   {
     mLineStyle = LINE_STYLE_TWO; // default
     mLineType  = 1;
-    if ( style.equals( "0" ) ) {
+    if ( style.equals( TDString.ZERO ) ) {
       mLineStyle = LINE_STYLE_BEZIER;
       // mLineType  = 1;                 // alreday assigned
-    } else if ( style.equals( "1" ) ) {
+    } else if ( style.equals( TDString.ONE ) ) {
       mLineStyle = LINE_STYLE_ONE;
       // mLineType  = 1;                 // already assignd
-    } else if ( style.equals( "2" ) ) {
+    } else if ( style.equals( TDString.TWO ) ) {
       // mLineStyle = LINE_STYLE_TWO;    // already assigned
       mLineType  = 2;
-    } else if ( style.equals( "3" ) ) {
+    } else if ( style.equals( TDString.THREE ) ) {
       mLineStyle = LINE_STYLE_THREE;
       mLineType  = 3;
     }
@@ -1806,7 +1806,7 @@ class TDSetting
   private static String setLineSegment( int val )
   {
     String ret = null;
-    if ( val < 1 ) { val = 1; ret = "1"; }
+    if ( val < 1 ) { val = 1; ret = TDString.ONE; }
     mLineSegment  = val;
     mLineSegment2 = mLineSegment * mLineSegment;
     return ret;
@@ -1815,8 +1815,8 @@ class TDSetting
   private static String setReduceAngle( float a )
   {
     String ret = null;
-    if ( a < 0 )  { a = 0; ret = "0"; }    
-    if ( a > 90 ) { a = 90; ret = "90"; }    
+    if ( a < 0 )  { a =  0; ret = TDString.ZERO; }    
+    if ( a > 90 ) { a = 90; ret = TDString.NINETY; }    
     mReduceAngle  = a;
     mReduceCosine = (float)Math.cos( mReduceAngle * TDMath.DEG2RAD );
     return ret;
@@ -1841,7 +1841,7 @@ class TDSetting
   private static String setArrowLength( float len )
   {
     String ret = null;
-    if ( len < 1 )  { len = 1;  ret = "1"; }
+    if ( len < 1 )  { len = 1;  ret = TDString.ONE; }
     if ( len > 40 ) { len = 40; ret = "40"; }
     mArrowLength = len;
     return ret;
@@ -1852,7 +1852,7 @@ class TDSetting
     if ( level == TDLevel.mLevel ) return;
 
     if ( StationPolicy.policyDowngrade( level ) ) {
-      setPreference( prefs, TDPrefKey.SURVEY[1], "1" );
+      setPreference( prefs, TDPrefKey.SURVEY[1], TDString.ONE );
     }
     TDLevel.setLevel( TDInstance.context, level );
     int policy = StationPolicy.policyUpgrade( level );

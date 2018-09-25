@@ -189,7 +189,7 @@ class SymbolLine extends Symbol
   	    name    = null;
   	    th_name = null;
             group   = null;
-  	    color   = 0x00000000;
+  	    color   = TDColor.TRANSPARENT;
   	  } else if ( vals[k].equals("name") || vals[k].equals(locale) ) {
   	    ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	    if ( k < s ) {

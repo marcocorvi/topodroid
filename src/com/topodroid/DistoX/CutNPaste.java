@@ -75,7 +75,7 @@ class CutNPaste
         public void onClick(View v) {
           if ( popup_et != null ) {
             mClipboardText = popup_et.getText().toString();
-            popup_et.setText("");
+            popup_et.setText(TDString.EMPTY);
             String str = String.format( context.getResources().getString( R.string.copied ), mClipboardText );
             TDToast.makeGravity( str, Gravity.LEFT | Gravity.TOP );
           }

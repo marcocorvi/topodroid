@@ -23,11 +23,11 @@ import java.util.regex.Pattern;
 
 class ImportParser
 {
-  final static String EMPTY = "";
+  // final static String EMPTY = "";
   String mName = null;  // survey name
   String mDate = null;  // survey date
-  String mTeam = "";
-  String mTitle = "";
+  String mTeam = TDString.EMPTY;
+  String mTitle = TDString.EMPTY;
   float  mDeclination = 0.0f; // one-survey declination
   protected boolean mApplyDeclination = false;
 
@@ -45,7 +45,7 @@ class ImportParser
     for ( ParserShot sh : shots ) {
       if ( sh.from != null && sh.from.length() > 0 ) return sh.from;
     }
-    return "0";
+    return TDString.ZERO;
   }
 
   int mLineCnt;  // line counter

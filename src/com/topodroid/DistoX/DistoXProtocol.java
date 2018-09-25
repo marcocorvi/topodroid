@@ -381,6 +381,7 @@ class DistoXProtocol
   boolean sendCommand( byte cmd )
   {
     // TDLog.Log( TDLog.LOG_PROTO, "sendCommand " + String.format("Send command %02x", cmd ) );
+    // Log.v( "DistoX", "sendCommand " + String.format("Send command %02x", cmd ) );
 
     try {
       mRequestBuffer[0] = (byte)(cmd);

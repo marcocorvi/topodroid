@@ -89,15 +89,15 @@ class ConnectionHandler extends Handler
 
   String getConnectionStateTitleStr()
   {
-    if ( mSyncService == null ) return "";
+    if ( mSyncService == null ) return TDString.EMPTY;
 
-    String s1 = "";
+    String s1 = TDString.EMPTY;
     if ( mSyncService.getConnectState() == SyncService.STATE_CONNECTING ) {
       s1 = "<.>";
     } else if ( mSyncService.getConnectState() == SyncService.STATE_CONNECTED ) {
       s1 = "<->";
     }
-    String s2 = ( mSyncService.getAcceptState() != SyncService.STATE_LISTEN )? "" : "(*)";
+    String s2 = ( mSyncService.getAcceptState() != SyncService.STATE_LISTEN )? TDString.EMPTY : "(*)";
     return s2 + s1;
   }
 
@@ -296,7 +296,7 @@ class ConnectionHandler extends Handler
      int k0 = 0;
      for ( int k=0; k < data_str.length(); ++k ) if ( data_str.charAt(k) == '|' ) {
        if ( k0 == k ) {
-         data[kk] = "";
+         data[kk] = TDString.EMPTY;
        } else {
          data[kk] = data_str.substring( k0, k );
        }

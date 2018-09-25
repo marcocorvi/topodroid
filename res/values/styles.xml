@@ -22,8 +22,11 @@
       <item name="android:windowTitleSize">40dp</item>
       <item name="android:windowTitleStyle">@style/titleTextStyle</item>
       <item name="android:windowFullscreen">true</item>
+      <item name="android:layout_width">fill_parent</item>
+      <item name="android:layout_height">fill_parent</item>
       <item name="android:screenOrientation">portrait</item>
       <item name="android:buttonStyle">@android:style/Widget.Button.Small</item>
+      <item name="android:label">@string/app_name</item>
       <!-- item name="android:windowFrame">@null</item -->
     </style>
     <style name="titleTextStyle">
@@ -78,6 +81,7 @@
        <item name="android:background">@drawable/button</item>
        <item name="android:minWidth">24dip</item>
        <item name="android:minHeight">12dip</item>
+       <item name="android:singleLine">true</item>
        <!-- item name="android:elevation">20dip</item -->
     </style>
 

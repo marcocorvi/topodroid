@@ -213,7 +213,7 @@ class SymbolArea extends Symbol
   	  if ( vals[k].equals("symbol") ) {
   	    name    = null;
   	    th_name = null;
-  	    mColor   = 0x00000000;
+  	    mColor  = TDColor.TRANSPARENT;
   	  } else if ( vals[k].equals("name") || vals[k].equals(locale) ) {
   	    ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	    if ( k < s ) {

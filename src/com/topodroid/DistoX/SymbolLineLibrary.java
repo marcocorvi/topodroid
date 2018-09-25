@@ -27,7 +27,7 @@ import android.content.res.Resources;
 class SymbolLineLibrary extends SymbolLibrary
 {
   static final private String DefaultLines[] = {
-    "arrow", "border", "pit", "rock-border", "slope"
+    "arrow", "border", "chimney", "pit", "presumed", "rock-border", "slope", "section"
   };
 
   int mLineUserIndex; // PRIVATE

@@ -75,10 +75,10 @@ class DeviceA3InfoDialog extends MyDialog
     tv_address.setText( String.format( res.getString( R.string.device_address ), mDevice.mAddress ) );
 
     tv_serial.setText( res.getString( R.string.getting_info ) );
-    // tv_statusAngle.setText(   "" );
-    // tv_statusCompass.setText( "" );
-    // tv_statusCalib.setText(   "" );
-    // tv_statusSilent.setText(  "" );
+    // tv_statusAngle.setText(   TDString.EMPTY );
+    // tv_statusCompass.setText( TDString.EMPTY );
+    // tv_statusCalib.setText(   TDString.EMPTY );
+    // tv_statusSilent.setText(  TDString.EMPTY );
     mParent.readA3Info( this );
 
     mBTok = (Button) findViewById( R.id.btn_ok );

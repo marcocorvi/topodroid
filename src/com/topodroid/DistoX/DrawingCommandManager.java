@@ -1742,8 +1742,19 @@ class DrawingCommandManager
 	    } else if ( TDLevel.overExpert && mIsExtended && item.mType == DrawingPath.DRAWING_PATH_FIXED ) {
               path = new Path();
 	      float w = mScale * TopoDroidApp.mDisplayWidth / 8; // TDSetting.mMinShift
-	      path.moveTo( x-w, y ); 
-	      path.lineTo( x+w, y );
+	      switch ( item.getBlockExtend() ) {
+                case -1:
+	          path.moveTo( x, y ); 
+	          path.lineTo( x+w, y );
+                  break;
+                case 1:
+	          path.moveTo( x-w, y ); 
+	          path.lineTo( x, y );
+                  break;
+		default:
+	          path.moveTo( x-w, y ); 
+	          path.lineTo( x+w, y );
+              }
               path.transform( mMatrix );
               canvas.drawPath( path, BrushManager.fixedYellowPaint );
             }

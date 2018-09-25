@@ -44,18 +44,18 @@ class DisplayMode
   static String toString( int mode )
   {
     StringBuilder sb = new StringBuilder();
-    sb.append( ( ( mode & DISPLAY_LEG )      == DISPLAY_LEG )? "1" : "0" );
-    sb.append( ( ( mode & DISPLAY_SPLAY )    == DISPLAY_SPLAY )? "1" : "0" );
-    sb.append( ( ( mode & DISPLAY_STATION )  == DISPLAY_STATION )? "1" : "0" );
-    sb.append( ( ( mode & DISPLAY_GRID )     == DISPLAY_GRID )? "1" : "0" );
+    sb.append( ( ( mode & DISPLAY_LEG )      == DISPLAY_LEG )?     TDString.ONE : TDString.ZERO );
+    sb.append( ( ( mode & DISPLAY_SPLAY )    == DISPLAY_SPLAY )?   TDString.ONE : TDString.ZERO );
+    sb.append( ( ( mode & DISPLAY_STATION )  == DISPLAY_STATION )? TDString.ONE : TDString.ZERO );
+    sb.append( ( ( mode & DISPLAY_GRID )     == DISPLAY_GRID )?    TDString.ONE : TDString.ZERO );
 
-    sb.append( ( ( mode & DISPLAY_LATEST )   == DISPLAY_LATEST )? "1" : "0" );
-    sb.append( ( ( mode & DISPLAY_SCALEBAR ) == DISPLAY_SCALEBAR )? "1" : "0" );
+    sb.append( ( ( mode & DISPLAY_LATEST )   == DISPLAY_LATEST )?   TDString.ONE : TDString.ZERO );
+    sb.append( ( ( mode & DISPLAY_SCALEBAR ) == DISPLAY_SCALEBAR )? TDString.ONE : TDString.ZERO );
     sb.append("0");  // sb.append( ( ( mode & DISPLAY_OUTLINE )  == DISPLAY_OUTLINE )? "1" : "0" );
     sb.append("0");
 
-    sb.append( ( ( mode & DISPLAY_ID     )   == DISPLAY_ID     )? "1" : "0" );
-    sb.append( ( ( mode & DISPLAY_BLANK  )   == DISPLAY_BLANK  )? "1" : "0" );
+    sb.append( ( ( mode & DISPLAY_ID     )   == DISPLAY_ID     )? TDString.ONE : TDString.ZERO );
+    sb.append( ( ( mode & DISPLAY_BLANK  )   == DISPLAY_BLANK  )? TDString.ONE : TDString.ZERO );
 
     return sb.toString();
   }

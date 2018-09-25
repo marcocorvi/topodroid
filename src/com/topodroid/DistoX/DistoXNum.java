@@ -735,7 +735,7 @@ class DistoXNum
         }
       }
       boolean depth_error = false;
-      String error = "";
+      // String error = TDString.EMPTY;
       for ( DBlock blk : data ) { // set dblock clino
 	if ( blk.mTo != null && blk.mTo.length() > 0 && depths.containsKey( blk.mTo ) ) {
           float tdepth = depths.get( blk.mTo ).floatValue();

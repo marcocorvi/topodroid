@@ -569,18 +569,18 @@ class DeviceHelper extends DataSetObservable
   // ----------------------------------------------------------------------
   // symbols
 
-  void setSymbolEnabled( String name, boolean enabled ) { setValue( name, enabled? "1" : "0" ); }
+  void setSymbolEnabled( String name, boolean enabled ) { setValue( name, enabled? TDString.ONE : TDString.ZERO ); }
 
   boolean isSymbolEnabled( String name )
   { 
     String enabled = getValue( name );
     if ( enabled != null ) {
-      return enabled.equals("1");
+      return enabled.equals(TDString.ONE);
     }
     if ( myDB != null ) {
       ContentValues cv = new ContentValues();
       cv.put( "key",     name );
-      cv.put( "value",   "1" );     // symbols are enabled by default
+      cv.put( "value",   TDString.ONE );     // symbols are enabled by default
       try {
         myDB.insert( CONFIG_TABLE, null, cv );
       } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -686,8 +686,8 @@ class DeviceHelper extends DataSetObservable
         ContentValues cv = new ContentValues();
         cv.put( "id",      id );
         cv.put( "name",    name );
-        cv.put( "day",     "" );
-        cv.put( "comment", "" );
+        cv.put( "day",     TDString.EMPTY );
+        cv.put( "comment", TDString.EMPTY );
         myDB.insert( CALIB_TABLE, null, cv );
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -851,7 +851,7 @@ class DeviceHelper extends DataSetObservable
           cv.put( "head",    0 );
           cv.put( "tail",    0 );
           cv.put( "name",    name );
-          cv.put( "nickname", "" );  // FIXME empty nickname
+          cv.put( "nickname", TDString.EMPTY );  // FIXME empty nickname
           myDB.insert( DEVICE_TABLE, null, cv );
 	         // ret = true;
         }
@@ -871,7 +871,7 @@ class DeviceHelper extends DataSetObservable
     cv.put( "head",    head_tail[0] );
     cv.put( "tail",    head_tail[1] );
     cv.put( "name",    name );
-    cv.put( "nickname", "" );  // FIXME empty nickname
+    cv.put( "nickname", TDString.EMPTY );  // FIXME empty nickname
     try {
       myDB.insert( DEVICE_TABLE, null, cv );
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -960,8 +960,8 @@ class DeviceHelper extends DataSetObservable
      if ( date == null ) return; // false;
      if ( updateCalibStmt == null )
         updateCalibStmt = myDB.compileStatement( "UPDATE calibs SET day=?, device=?, comment=? WHERE id=?" );
-     String dev = (device != null)? device : "";
-     String cmt = (comment != null)? comment : "";
+     String dev = (device != null)? device : TDString.EMPTY;
+     String cmt = (comment != null)? comment : TDString.EMPTY;
      updateCalibStmt.bindString( 1, date );
      updateCalibStmt.bindString( 2, dev );
      updateCalibStmt.bindString( 3, cmt );

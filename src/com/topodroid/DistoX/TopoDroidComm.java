@@ -22,8 +22,7 @@ import android.os.Message;
 // import android.content.IntentFilter;
 // import android.content.BroadcastReceiver;
 
-// import android.widget.Toast;
-// import android.util.Log;
+import android.util.Log;
 
 class TopoDroidComm
 {
@@ -281,6 +280,7 @@ class TopoDroidComm
       for (int k=0; k<3 && ! ret; ++k ) { // try three times
         ret = mProtocol.sendCommand( (byte)cmd ); // was ret |= ...
         // TDLog.Log( TDLog.LOG_COMM, "sendCommand " + cmd + " " + k + "-ret " + ret );
+        // Log.v( "DistoX", "sendCommand " + cmd + " " + k + "-ret " + ret );
         TopoDroidUtil.slowDown( TDSetting.mWaitCommand, "SendCommand sleep interrupted"); // it is ok to be interrupted
       }
     }

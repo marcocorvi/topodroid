@@ -70,12 +70,12 @@ class TDPrefKey
 
   static String[] MAINdef = {
      "TopoDroid",
-     "20",
-     "1",
-     "1",
-     TRUE,
+     TDString.TWENTY,
+     TDString.ONE,
+     TDString.ONE,
      FALSE,
-     "0",
+     TRUE,
+     TDString.ZERO,
      FALSE,
      "",
      "",
@@ -131,9 +131,9 @@ class TDPrefKey
 
   static String[] SURVEYdef = {
     "",
-    "1",
+    TDString.ONE,
     "alpha",
-    "0",
+    TDString.ZERO,
     "200",
     FALSE,
     FALSE,
@@ -194,19 +194,19 @@ class TDPrefKey
   };
 
   static String[] PLOTdef = {
-    "0", 
-    "4", 
-    FALSE, 
-    "1",
-    // "3",
+    TDString.ZERO, 
+    TDString.FOUR, 
+    TRUE, 
+    TDString.ONE,
+    // TDString.THREE,
     FALSE,
     TRUE,
-    "5",
-    "60",
-    "",
-    "",
-    "",
-    ""
+    TDString.FIVE,
+    TDString.SIXTY,
+    TDString.EMPTY,
+    TDString.EMPTY,
+    TDString.EMPTY,
+    TDString.EMPTY
   };
 
   // ------------------------------------------------------------------------------
@@ -257,14 +257,14 @@ class TDPrefKey
   };
 
   static String[] CALIBdef = {
-    "1",
+    TDString.ONE,
     "40",
     "0.000001",
     "200",
     TRUE,
     // FALSE,
-    "0",
-    "0",
+    TDString.ZERO,
+    TDString.ZERO,
     "0.1",
     "4.0",
     "1.0",
@@ -331,22 +331,22 @@ class TDPrefKey
   };
 
   static String[] DEVICEdef = {
-    // "",
-    // "1",
-    "1",
-    "0",
+    // TDString.EMPTY,
+    // TDString.ONE,
+    TDString.ONE,
+    TDString.ZERO,
     FALSE,
     FALSE,
-    "0",
-    // "1",
+    TDString.ZERO,
+    // TDString.ONE,
     TRUE,
-    "0",
+    TDString.ZERO,
     TRUE,
     "250",
     "500",
     "1000",
-    "4000",
-    ""
+    "2000",
+    TDString.EMPTY
   };
 
   // ==============================================================================
@@ -506,7 +506,7 @@ class TDPrefKey
   static String[] EXPORTdef = {
     // "",
     // TRUE,
-    // "0", // SurveyInfo.DATAMODE_NORMAL
+    // TDString.ZERO, // SurveyInfo.DATAMODE_NORMAL
     "-1",
     "-1",
 
@@ -519,9 +519,9 @@ class TDPrefKey
     // TRUE,
     // FALSE,
 
-    "0",
-    "0",
-    "90",
+    TDString.ZERO,
+    TDString.ZERO,
+    TDString.NINETY,
     // "lf",
     // FALSE,
     // FALSE,
@@ -545,7 +545,7 @@ class TDPrefKey
     // // "1.0", // DXF
     // TRUE,
     // "9",
-    ""
+    TDString.EMPTY
   };
 
   // ------------------------------------------------------------------------------
@@ -565,9 +565,9 @@ class TDPrefKey
     R.string.pref_import_datamode_summary
   };
   static String[] EXPORT_importdef = { 
-    "",
+    TDString.EMPTY,
     TRUE,
-    "0"  // SurveyInfo.DATAMODE_NORMAL
+    TDString.ZERO  // SurveyInfo.DATAMODE_NORMAL
   };
   // ------------------------------------------------------------------------------
   static String[] EXPORT_SVX = { // [8]
@@ -805,20 +805,20 @@ class TDPrefKey
 
   static String[] DATAdef = {
     "0.05",
-    "50",
+    TDString.FIFTY,
     "0.5",
-    "3",
+    TDString.THREE,
     "30",
     FALSE,
-    "10",
+    TDString.TEN,
     "80",
     FALSE, 
-    "0",
+    TDString.ZERO,
     TRUE,
     FALSE,
     // FALSE,
-    "10",
-    "50"
+    TDString.TEN,
+    TDString.FIFTY
   };
 
   // ------------------------------------------------------------------------------
@@ -959,18 +959,18 @@ class TDPrefKey
   };
 
   static String[] SCREENdef = {
-    "1",
-    "20",
-    "5", 
-    "24",
+    TDString.ONE,
+    TDString.TWENTY,
+    TDString.FIVE, 
+    TDString.TWENTYFOUR,
     "36",
-    "60",
-    "24",
+    TDString.SIXTY,
+    TDString.TWENTYFOUR,
     "80",
     TRUE,
-    "50",
-    "60",
-    "60",
+    TDString.FIFTY,
+    TDString.SIXTY,
+    TDString.SIXTY,
     "70"
   };
 
@@ -1017,13 +1017,13 @@ class TDPrefKey
   };
 
   static String[] LINEdef = {
-    "1",
-    "2",
-    "10",
+    TDString.ONE,
+    TDString.TWO,
+    TDString.TEN,
     "8",
     "45",
-    FALSE,
-    "0",
+    TRUE,
+    TDString.ZERO,
     TRUE,
     "1.0",
     "20.0"
@@ -1052,7 +1052,7 @@ class TDPrefKey
   static String[] POINTdef = {
     FALSE,
     "1.2",
-    "24"
+    TDString.TWENTYFOUR
   };
 
 
@@ -1086,7 +1086,7 @@ class TDPrefKey
   };
 
   static String[] WALLSdef = {
-    "0",
+    TDString.ZERO,
     "70",
     "45",
     "0.1",
@@ -1147,14 +1147,14 @@ class TDPrefKey
   static String[] DRAWdef = {
     FALSE,
     "1.2",
-    "24",
-    "1",
-    "2",
-    "10",
+    TDString.TWENTYFOUR,
+    TDString.ONE,
+    TDString.TWO,
+    TDString.TEN,
     "8",
     "45",
     FALSE,
-    "0",
+    TDString.ZERO,
     TRUE,
     "1.0",
     "20.0"
@@ -1181,9 +1181,9 @@ class TDPrefKey
   };
 
   static String[] ERASEdef = {
-    "24",
+    TDString.TWENTYFOUR,
     "36",
-    "24"
+    TDString.TWENTYFOUR
   };
 
   // ------------------------------------------------------------------------------
@@ -1210,10 +1210,10 @@ class TDPrefKey
   };
 
   static String[] EDITdef = {
-    "5",
-    "24",
-    "60",
-    "24"
+    TDString.FIVE,
+    TDString.TWENTYFOUR,
+    TDString.SIXTY,
+    TDString.TWENTYFOUR
   };
 
   // ------------------------------------------------------------------------------
@@ -1250,12 +1250,12 @@ class TDPrefKey
 
   static String[] SKETCHdef = {
     // FALSE, res, hlp );
-    "0",
+    TDString.ZERO,
     "0.5",
     // "0.2",
     // "0.5",
-    "50"
-    // "4"
+    TDString.FIFTY
+    // TDString.FOUR
   };
 
   // ------------------------------------------------------------------------------

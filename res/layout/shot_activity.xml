@@ -4,6 +4,16 @@
   android:layout_height="fill_parent"
   android:orientation="vertical"
   >
+  <!-- FIXME-28 
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recycler_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="PrivateResource" / -->
+
   <RelativeLayout
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
@@ -22,41 +32,13 @@
       />
     </LinearLayout>
 
-    <!-- LinearLayout
+    <com.topodroid.DistoX.HorizontalListView android:id="@+id/listview"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:layout_toLeftOf="@id/right"
-      -->
-      <com.topodroid.DistoX.HorizontalListView android:id="@+id/listview"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/right"
-      />
-    <!-- /LinearLayout -->
+    />
        
   </RelativeLayout>
-
-  <!--
-     THIS IS A SECONDARY BUTTON BAR UNDERNEATH THE TOP ONE. 
-     IT CAN BE SHOWN OR HIDDEN AS NEEDED
-  -->
-  <!-- RelativeLayout android:id="@+id/footer"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom"
-    android:orientation="horizontal"
-    >
-    <LinearLayout
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:layout_toLeftOf="@+id/right"
-      >
-      <com.topodroid.DistoX.HorizontalListView android:id="@+id/footlist"
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-      />
-    </LinearLayout>
-  </RelativeLayout -->
 
   <FrameLayout 
     style="@style/base_padding"
@@ -69,9 +51,6 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
     />  
-    <!--
-      android:listSelector="@drawable/item"
-    -->
     <ListView android:id="@+id/menu"
       style="@style/menu_default"
     />

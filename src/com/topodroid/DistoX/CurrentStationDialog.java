@@ -149,7 +149,7 @@ class CurrentStationDialog extends MyDialog
     mBtnFixed.setChecked( false );
     mBtnPainted.setChecked( false );
     if ( cs == null ) {
-      mName.setText( "" );
+      mName.setText( TDString.EMPTY );
       mComment.setText( null );
     } else {
       mName.setText( cs.mName );
@@ -203,7 +203,7 @@ class CurrentStationDialog extends MyDialog
       if ( mComment.getText() == null ) {
         // mComment.setError( error );
         // return;
-	comment = "";
+	comment = TDString.EMPTY;
       } else {
         comment = mComment.getText().toString().trim();
         // if ( comment.length() == 0 && flag == CurrentStation.STATION_NONE ) {
@@ -224,21 +224,21 @@ class CurrentStationDialog extends MyDialog
       }
       TopoDroidApp.mData.deleteStation( TDInstance.sid, name );
       updateList();
-      mName.setText("");
-      mComment.setText("");
+      mName.setText(TDString.EMPTY);
+      mComment.setText(TDString.EMPTY);
 
       // CurrentStation cs = mApp.popCurrentStation();
       // if ( cs == null ) {
       //   mName.setText("-");
-      //   mComment.setText( "" );
+      //   mComment.setText( TDString.EMPTY );
       // } else {
       //   mName.setText( cs.mName );
       //   mComment.setText( cs.mComment );
       // }
       return;
     } else if ( b == mBtnClear ) {
-      mName.setText("");
-      mComment.setText("");
+      mName.setText(TDString.EMPTY);
+      mComment.setText(TDString.EMPTY);
       mBtnFixed.setChecked( false );
       mBtnPainted.setChecked( false );
       return;

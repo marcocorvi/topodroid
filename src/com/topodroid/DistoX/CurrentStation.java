@@ -26,7 +26,7 @@ class CurrentStation
   CurrentStation( String name, String comment, long flag )
   {
     mName    = name;
-    mComment = (comment == null)? "" : comment;
+    mComment = (comment == null)? TDString.EMPTY : comment;
     mFlag    = (int)flag;
   }
 

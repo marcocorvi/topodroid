@@ -206,7 +206,7 @@ class DBlock
     mId = 0;
     mTime = 0;
     mSurveyId = 0;
-    // mName = "";
+    // mName = TDString.EMPTY;
     mFrom = f;
     mTo   = t;
     mLength = d;
@@ -217,7 +217,7 @@ class DBlock
     mAcceleration = 0.0f;
     mMagnetic = 0.0f;
     mDip = 0.0f;
-    mComment = "";
+    mComment = TDString.EMPTY;
     mExtend = e;
     mFlag   = FLAG_SURVEY;
     mBlockType = type;
@@ -237,9 +237,9 @@ class DBlock
     mId = 0;
     mTime = 0;
     mSurveyId = 0;
-    // mName = "";
-    mFrom = "";
-    mTo   = "";
+    // mName = TDString.EMPTY;
+    mFrom = TDString.EMPTY;
+    mTo   = TDString.EMPTY;
     mLength = 0.0f;
     mBearing = 0.0f;
     mClino = 0.0f;
@@ -248,7 +248,7 @@ class DBlock
     mAcceleration = 0.0f;
     mMagnetic = 0.0f;
     mDip = 0.0f;
-    mComment = "";
+    mComment = TDString.EMPTY;
     mExtend = EXTEND_RIGHT;
     mFlag   = FLAG_SURVEY;
     mBlockType   = BLOCK_BLANK;

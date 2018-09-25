@@ -740,10 +740,10 @@ class DataHelper extends DataSetObservable
   {
     ContentValues cv = new ContentValues();
     cv.put( "day", date );
-    cv.put( "team", ((team != null)? team : "") );
+    cv.put( "team", ((team != null)? team : TDString.EMPTY ) );
     cv.put( "declination", decl );
-    cv.put( "comment", ((comment != null)? comment : "") );
-    cv.put( "init_station", ((init_station != null)? init_station : "0") );
+    cv.put( "comment", ((comment != null)? comment : TDString.EMPTY ) );
+    cv.put( "init_station", ((init_station != null)? init_station : TDString.ZERO ) );
     cv.put( "xsections", xsections );
     return cv;
   }
@@ -880,7 +880,7 @@ class DataHelper extends DataSetObservable
     if ( date == null ) return false;
     ContentValues cv = new ContentValues();
     cv.put( "day", date );
-    cv.put( "comment", (comment != null)? comment : "" );
+    cv.put( "comment", (comment != null)? comment : TDString.EMPTY );
     if ( doUpdateSurvey( id, cv, "survey day+cmt" ) ) {
       if ( forward && mListeners != null ) { // synchronized( mListeners )
         mListeners.onUpdateSurveyDayAndComment( id, date, comment );
@@ -1033,7 +1033,7 @@ class DataHelper extends DataSetObservable
     //   myDB.execSQL( sw.toString() );
     // } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e ); }
 
-    if ( tStation == null ) tStation = "";
+    if ( tStation == null ) tStation = TDString.EMPTY;
     try {
       myDB.beginTransaction();
       if ( comment != null ) {
@@ -1101,8 +1101,8 @@ class DataHelper extends DataSetObservable
   void updateShotName( long id, long sid, String fStation, String tStation, boolean forward )
   {
     if ( myDB == null ) return;
-    if ( fStation == null ) fStation = "";
-    if ( tStation == null ) tStation = "";
+    if ( fStation == null ) fStation = TDString.EMPTY;
+    if ( tStation == null ) tStation = TDString.EMPTY;
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
     pw.format( Locale.US, "UPDATE shots SET fStation=\"%s\", tStation=\"%s\" WHERE surveyId=%d AND id=%d",
@@ -1198,7 +1198,7 @@ class DataHelper extends DataSetObservable
   void updateShotComment( long id, long sid, String comment, boolean forward )
   {
     // if ( myDB == null ) return;
-    if ( comment == null ) comment = "";
+    if ( comment == null ) comment = TDString.EMPTY;
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
     pw.format( Locale.US, "UPDATE shots SET comment=\"%s\" WHERE surveyId=%d AND id=%d", comment, sid, id );
@@ -1720,7 +1720,7 @@ class DataHelper extends DataSetObservable
   {
     if ( myDB == null ) return false;
     // TDLog.Log( TDLog.LOG_DB, "update PlotView: " + pid + "/" + sid + " view " + view );
-    if ( nick == null ) nick = "";
+    if ( nick == null ) nick = TDString.EMPTY;
     // StringWriter sw = new StringWriter();
     // PrintWriter  pw = new PrintWriter( sw );
     // pw.format( Locale.US, "UPDATE plots set view=\"%s\" WHERE surveyId=%d AND id=%d", view, sid, pid );
@@ -1739,7 +1739,7 @@ class DataHelper extends DataSetObservable
   {
     if ( myDB == null ) return false;
     // TDLog.Log( TDLog.LOG_DB, "update PlotView: " + pid + "/" + sid + " view " + view );
-    if ( view == null ) view = "";
+    if ( view == null ) view = TDString.EMPTY;
     // StringWriter sw = new StringWriter();
     // PrintWriter  pw = new PrintWriter( sw );
     // pw.format( Locale.US, "UPDATE plots set view=\"%s\" WHERE surveyId=%d AND id=%d", view, sid, pid );
@@ -1758,7 +1758,7 @@ class DataHelper extends DataSetObservable
   {
     if ( myDB == null ) return false;
     // TDLog.Log( TDLog.LOG_DB, "update PlotHide: " + pid + "/" + sid + " hide " + hide );
-    if ( hide == null ) hide = "";
+    if ( hide == null ) hide = TDString.EMPTY;
     // StringWriter sw = new StringWriter();
     // PrintWriter  pw = new PrintWriter( sw );
     // pw.format( Locale.US, "UPDATE plots set hide=\"%s\" WHERE surveyId=%d AND id=%d", hide, sid, pid );
@@ -1838,7 +1838,7 @@ class DataHelper extends DataSetObservable
     "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment from photos as p join shots as s on p.shotId=s.id where p.surveyId=? and s.surveyId=? and p.status=? ";
   // private static String qShotPhoto    = "select id, shotId, title, date, comment from photos where surveyId=? AND shotId=? ";
   private static String qjShotPhoto   =
-    "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment from photosi as p join shots as s on p.shotId=s.id where p.surveyId=? AND s.surveyId=? AND p.shotId=? ";
+    "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment from photos as p join shots as s on p.shotId=s.id where p.surveyId=? AND s.surveyId=? AND p.shotId=? ";
 
   private static String qFirstStation = "select fStation from shots where surveyId=? AND fStation!=\"\" AND tStation!=\"\" limit 1 ";
   private static String qHasStation   = "select id, fStation, tStation from shots where surveyId=? and ( fStation=? or tStation=? ) order by id ";
@@ -2236,7 +2236,7 @@ class DataHelper extends DataSetObservable
      // Cursor cursor = myDB.query(PLOT_TABLE, new String[] { "id", "name", "type" },
      //                            WHERE_SID, new String[] { Long.toString(sid) }, 
      //                            null, null, "id" );
-     Cursor cursor = myDB.rawQuery( qMaxPlotIndex, new String[] { Long.toString(sid), "1" } ); // type == 1 (PLOT_PLAN)
+     Cursor cursor = myDB.rawQuery( qMaxPlotIndex, new String[] { Long.toString(sid), TDString.ONE } ); // type == 1 (PLOT_PLAN)
      if (cursor.moveToFirst()) {
        do {
          // int type = cursor.getInt(2);     
@@ -2917,7 +2917,7 @@ class DataHelper extends DataSetObservable
      DBlock ret = null;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
                      WHERE_SID_STATUS_LEG, new String[]{ Long.toString(sid), Long.toString(status) },
-                     null, null, "id desc", "1" );
+                     null, null, "id desc", TDString.ONE );
      if (cursor.moveToFirst()) {
        // Log.v("DistoX", "got the last leg " + cursor.getLong(0) + " " + cursor.getString(1) + " - " + cursor.getString(2) );
        DBlock block = new DBlock();
@@ -3082,13 +3082,13 @@ class DataHelper extends DataSetObservable
    // ----------------------------------------------------------------------
    // symbols
 
-   void setSymbolEnabled( String name, boolean enabled ) { setValue( name, enabled? "1" : "0" ); }
+   void setSymbolEnabled( String name, boolean enabled ) { setValue( name, enabled? TDString.ONE : TDString.ZERO ); }
 
    boolean getSymbolEnabled( String name )
    { 
      String enabled = getValue( name );
      if ( enabled != null ) {
-       return enabled.equals("1");
+       return enabled.equals(TDString.ONE);
      }
      return false;
    }
@@ -3098,7 +3098,7 @@ class DataHelper extends DataSetObservable
      if ( myDB != null ) {
        ContentValues cv = new ContentValues();
        cv.put( "key",     name );
-       cv.put( "value",   "0" );     // symbols are enabled by default
+       cv.put( "value",   TDString.ZERO );     // symbols are enabled by default
        try {
          myDB.insert( CONFIG_TABLE, null, cv );
        } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -3337,7 +3337,7 @@ class DataHelper extends DataSetObservable
      cv.put( "status",    status );
      cv.put( "title",     title );
      cv.put( "date",      date );
-     cv.put( "comment",   (comment == null)? "" : comment );
+     cv.put( "comment",   (comment == null)? TDString.EMPTY : comment );
      return cv;
    }
 
@@ -3402,7 +3402,7 @@ class DataHelper extends DataSetObservable
      cv.put( "status",    status );
      cv.put( "title",     title );
      cv.put( "date",      date );
-     cv.put( "comment",   (comment == null)? "" : comment );
+     cv.put( "comment",   (comment == null)? TDString.EMPTY : comment );
      cv.put( "type",      type );
      cv.put( "value",     value );
      return cv;
@@ -3542,7 +3542,7 @@ class DataHelper extends DataSetObservable
      cv.put( "latitude",  lat );
      cv.put( "altitude",  alt );
      cv.put( "altimetric", asl );
-     cv.put( "comment",   (comment == null)? "" : comment );
+     cv.put( "comment",   (comment == null)? TDString.EMPTY : comment );
      cv.put( "status",    status );
      cv.put( "cs_name",   cs );
      cv.put( "cs_longitude", cs_lng );
@@ -3604,7 +3604,7 @@ class DataHelper extends DataSetObservable
      if ( myDB == null ) return -1L;
      long ret = getPlotId( sid, name );
      if ( ret >= 0 ) return -1;
-     if ( view == null ) view = "";
+     if ( view == null ) view = TDString.EMPTY;
      if ( id == -1L ) id = maxId( PLOT_TABLE, sid );
      ContentValues cv = makePlotContentValues( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, 
 		     azimuth, clino, hide, nick, orientation );
@@ -3795,7 +3795,7 @@ class DataHelper extends DataSetObservable
       cv.put( "cs_altitude",  alt );
       cv.put( "cs_decimals",  n_dec );
     } else {
-      cv.put( "cs_name", "" );
+      cv.put( "cs_name", TDString.EMPTY );
       cv.put( "cs_longitude", 0 );
       cv.put( "cs_latitude",  0 );
       cv.put( "cs_altitude",  0 );
@@ -4473,8 +4473,8 @@ class DataHelper extends DataSetObservable
                double zoom  = scanline1.doubleValue( );
                double azimuth = scanline1.doubleValue( );
                double clino = ( db_version > 20 )? scanline1.doubleValue( ) : 0;
-               String hide  = ( db_version > 24 )? scanline1.stringValue( ) : "";
-               String nick  = ( db_version > 30 )? scanline1.stringValue( ) : "";
+               String hide  = ( db_version > 24 )? scanline1.stringValue( ) : TDString.EMPTY;
+               String nick  = ( db_version > 30 )? scanline1.stringValue( ) : TDString.EMPTY;
 	       int orientation = (db_version > 32 )? (int)(scanline1.longValue()) : 0; // default PlotInfo.ORIENTATION_PORTRAIT
                // if ( insertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation, false ) < 0 ) { success = false; }
                cv = makePlotContentValues( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, 
@@ -4620,7 +4620,7 @@ class DataHelper extends DataSetObservable
    {
      if ( myDB == null ) return false;
      boolean ret = false;
-     if ( comment == null ) comment = "";
+     if ( comment == null ) comment = TDString.EMPTY;
      Cursor cursor = myDB.query( STATION_TABLE, 
                             new String[] { "name", "comment", "flag" },
                             "surveyId=? and name=?", new String[] { Long.toString( sid ), name },

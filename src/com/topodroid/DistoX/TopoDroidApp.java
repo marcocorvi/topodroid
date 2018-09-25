@@ -90,7 +90,7 @@ import android.bluetooth.BluetoothDevice;
 
 public class TopoDroidApp extends Application
 {
-  static final String EMPTY = "";
+  // static final String EMPTY = "";
 
   static TDPrefHelper mPrefHlp = null;
 
@@ -117,7 +117,7 @@ public class TopoDroidApp extends Application
   {
     if ( mDialBitmap == null ) {
       Bitmap dial = BitmapFactory.decodeResource( res, R.drawable.iz_dial_transp ); // FIXME AZIMUTH_DIAL
-      mDialBitmap = new MyTurnBitmap( dial, 0x00000000 );
+      mDialBitmap = new MyTurnBitmap( dial, TDColor.TRANSPARENT );
     }
     return mDialBitmap;
   }
@@ -616,7 +616,7 @@ public class TopoDroidApp extends Application
       }
 
       // TDLog.Profile("TDApp device etc.");
-      TDInstance.device = mDData.getDevice( mPrefHlp.getString( TDSetting.keyDeviceName(), EMPTY ) );
+      TDInstance.device = mDData.getDevice( mPrefHlp.getString( TDSetting.keyDeviceName(), TDString.EMPTY ) );
 
       if ( TDInstance.device != null ) {
         createComm();
@@ -648,7 +648,7 @@ public class TopoDroidApp extends Application
   static void resetLocale()
   {
     // Log.v("DistoX", "reset locale to " + mLocaleStr );
-    // mLocale = (mLocaleStr.equals(EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
+    // mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
     Resources res = TDInstance.context.getResources();
     DisplayMetrics dm = res.getDisplayMetrics();
     Configuration conf = res.getConfiguration();
@@ -659,7 +659,7 @@ public class TopoDroidApp extends Application
   static void setLocale( String locale, boolean load_symbols )
   {
     mLocaleStr = locale;
-    mLocale = (mLocaleStr.equals(EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
+    mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
     // Log.v("DistoXPref", "set locale str <" + locale + "> " + mLocale.toString() );
     resetLocale();
     Resources res = TDInstance.context.getResources();
@@ -1037,7 +1037,7 @@ public class TopoDroidApp extends Application
     if ( address == null ) {
       if ( mVirtualDistoX != null ) mVirtualDistoX.stopServer( this );
       TDInstance.device = null;
-      address = EMPTY;
+      address = TDString.EMPTY;
     } else if ( address.equals( Device.ZERO_ADDRESS )  ) {
       if ( mVirtualDistoX != null ) mVirtualDistoX.startServer( this );
       // boolean create = ( TDInstance.device == null || ! address.equals( TDInstance.device.mAddress ) );
@@ -1487,7 +1487,7 @@ public class TopoDroidApp extends Application
           id = mData.insertShot( TDInstance.sid, -1L, millis, 0, l, b, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1, true );
         }
       }
-      mData.updateShotName( id, TDInstance.sid, splay_station, EMPTY, true );
+      mData.updateShotName( id, TDInstance.sid, splay_station, TDString.EMPTY, true );
     }
     if ( r >= 0.0f ) {
       if ( horizontal ) { // WENS
@@ -1509,7 +1509,7 @@ public class TopoDroidApp extends Application
           id = mData.insertShot( TDInstance.sid, -1L, millis, 0, r, b, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1, true );
         }
       }
-      mData.updateShotName( id, TDInstance.sid, splay_station, EMPTY, true );
+      mData.updateShotName( id, TDInstance.sid, splay_station, TDString.EMPTY, true );
     }
     if ( u >= 0.0f ) {  
       if ( horizontal ) {
@@ -1527,7 +1527,7 @@ public class TopoDroidApp extends Application
           id = mData.insertShot( TDInstance.sid, -1L, millis, 0, u, 0.0f, 90.0f, 0.0f, 0L, 0.0, LegType.XSPLAY, 1, true );
         }
       }
-      mData.updateShotName( id, TDInstance.sid, splay_station, EMPTY, true );
+      mData.updateShotName( id, TDInstance.sid, splay_station, TDString.EMPTY, true );
     }
     if ( d >= 0.0f ) {
       if ( horizontal ) {
@@ -1545,7 +1545,7 @@ public class TopoDroidApp extends Application
           id = mData.insertShot( TDInstance.sid, -1L, millis, 0, d, 0.0f, -90.0f, 0.0f, 0L, 0.0, LegType.XSPLAY, 1, true );
         }
       }
-      mData.updateShotName( id, TDInstance.sid, splay_station, EMPTY, true );
+      mData.updateShotName( id, TDInstance.sid, splay_station, TDString.EMPTY, true );
     }
     return at;
   }
@@ -1689,13 +1689,13 @@ public class TopoDroidApp extends Application
     // PlotInfo.ORIENTATION_PORTRAIT = 0
     // TDLog.Log( TDLog.LOG_PLOT, "new plot " + name + " start " + start );
     long pid_p = mData.insertPlot( sid, -1L, name+"p",
-                 PlotInfo.PLOT_PLAN, 0L, start, EMPTY, 0, 0, mScaleFactor, 0, 0, EMPTY, EMPTY, 0, true );
+                 PlotInfo.PLOT_PLAN, 0L, start, TDString.EMPTY, 0, 0, mScaleFactor, 0, 0, TDString.EMPTY, TDString.EMPTY, 0, true );
     if ( extended ) {
       long pid_s = mData.insertPlot( sid, -1L, name+"s",
-                   PlotInfo.PLOT_EXTENDED, 0L, start, EMPTY, 0, 0, mScaleFactor, 0, 0, EMPTY, EMPTY, 0, true );
+                   PlotInfo.PLOT_EXTENDED, 0L, start, TDString.EMPTY, 0, 0, mScaleFactor, 0, 0, TDString.EMPTY, TDString.EMPTY, 0, true );
     } else {
       long pid_s = mData.insertPlot( sid, -1L, name+"s",
-                   PlotInfo.PLOT_PROFILE, 0L, start, EMPTY, 0, 0, mScaleFactor, project, 0, EMPTY, EMPTY, 0, true );
+                   PlotInfo.PLOT_PROFILE, 0L, start, TDString.EMPTY, 0, 0, mScaleFactor, project, 0, TDString.EMPTY, TDString.EMPTY, 0, true );
     }
     return pid_p;
   }
@@ -1708,8 +1708,8 @@ public class TopoDroidApp extends Application
   {
     // FIXME COSURVEY 2d sections are not forwarded
     // 0 0 mScaleFactor : offset and zoom
-    String hide = ( parent == null )? EMPTY : parent;
-    String nick = ( nickname == null )? EMPTY : nickname;
+    String hide = ( parent == null )? TDString.EMPTY : parent;
+    String nick = ( nickname == null )? TDString.EMPTY : nickname;
     return mData.insertPlot( sid, -1L, name, type, 0L, from, to, 0, 0, TopoDroidApp.mScaleFactor, azimuth, clino, hide, nick, 0, false );
   }
 
@@ -1803,7 +1803,7 @@ public class TopoDroidApp extends Application
 
   static String getConnectionStateTitleStr()
   {
-    return ( mSyncConn == null )? EMPTY : mSyncConn.getConnectionStateTitleStr();
+    return ( mSyncConn == null )? TDString.EMPTY : mSyncConn.getConnectionStateTitleStr();
   }
 
   static void connStateChanged()

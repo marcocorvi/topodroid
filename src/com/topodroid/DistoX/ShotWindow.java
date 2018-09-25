@@ -38,25 +38,17 @@ import android.os.StrictMode;
 
 import android.app.Activity;
 // import android.app.Application;
-// import android.app.Dialog;
 
 // import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
-// import android.content.DialogInterface.OnCancelListener;
-// import android.content.DialogInterface.OnDismissListener;
-// import android.content.res.ColorStateList;
-
-// import android.location.LocationManager;
 
 // import android.view.WindowManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
-// import android.view.Menu;
-// import android.view.MenuItem;
 import android.view.KeyEvent;
 // for FRAGMENT
 // import android.view.ViewGroup;
@@ -89,6 +81,10 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 
 import android.util.Log;
+
+// FIXME-28
+// import androidx.recyclerview.widget.RecyclerView;
+// import androidx.recyclerview.widget.LinearLayoutManager;
 
 public class ShotWindow extends Activity
                           implements OnItemClickListener
@@ -231,7 +227,6 @@ public class ShotWindow extends Activity
 
   // ConnHandler mHandler;
 
-  // private RelativeLayout mFooter = null;
   private Button[] mButtonF;
   private int mNrButtonF = 6; // 8;
 
@@ -493,16 +488,11 @@ public class ShotWindow extends Activity
 
   private void multiSelect( int pos )
   {
-    // if ( ! mDataAdapter.isMultiSelect() ) {
-    //   mFooter.setVisibility( View.VISIBLE );
-    // }
     if ( mDataAdapter.multiSelect( pos ) ) {
-      // mFooter.setVisibility( View.VISIBLE );
-      mListView.setAdapter( mFooterView.mAdapter );
+      mListView.setAdapter( mButtonViewF.mAdapter );
       mListView.invalidate();
       onMultiselect = true;
     } else {
-      // mFooter.setVisibility( View.GONE );
       mListView.setAdapter( mButtonView1.mAdapter );
       mListView.invalidate();
       onMultiselect = false;
@@ -513,7 +503,6 @@ public class ShotWindow extends Activity
   {
     mApp.setHighlighted( null );
     mDataAdapter.clearMultiSelect( );
-    // mFooter.setVisibility( View.GONE );
     mListView.setAdapter( mButtonView1.mAdapter );
     mListView.invalidate();
     onMultiselect = false;
@@ -868,8 +857,7 @@ public class ShotWindow extends Activity
   // private Button mButtonHelp;
   private HorizontalListView mListView;
   private HorizontalButtonView mButtonView1;
-  // HorizontalListView mFootList;
-  private HorizontalButtonView mFooterView;
+  private HorizontalButtonView mButtonViewF;
   private ListView   mMenu = null;
   private Button     mImage;
   // HOVER
@@ -913,15 +901,17 @@ public class ShotWindow extends Activity
     mOnOpenDialog = false;
     mDistoXAccuracy = new DistoXAccuracy( ); 
 
+    // FIXME-28
+    // RecyclerView rv = (RecyclerView) findViewById( R.id.recycler_view );
+    // LinearLayoutManager lm = new LinearLayoutManager( this );
+    // rv.setLayoutManager( lm );
+
     mShowSplay   = new ArrayList<>();
-    // mDataAdapter = new DBlockAdapter( this, this, R.layout.row, new ArrayList<DBlock>() );
     mDataAdapter = new DBlockAdapter( this, this, R.layout.dblock_row, new ArrayList<DBlock>() );
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
     mListView.setEmptyPlacholder( true );
-    // mFootList = (HorizontalListView) findViewById(R.id.footlist);
     mButtonSize = TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
-    // mButtonSize = TopoDroidApp.setListViewHeight( getApplicationContext(), mFootList );
 
     Resources res = getResources();
     mNrButton1 = TDLevel.overExpert ? 9
@@ -981,13 +971,9 @@ public class ShotWindow extends Activity
     // setRefAzimuthButton( ); // called by mApp.resetRefAzimuth
 
     mButtonView1 = new HorizontalButtonView( mButton1 );
-    mFooterView  = new HorizontalButtonView( mButtonF );
+    mButtonViewF = new HorizontalButtonView( mButtonF );
     mListView.setAdapter( mButtonView1.mAdapter );
     onMultiselect = false;
-    // mFootList.setAdapter( mFooterView.mAdapter );
-
-    // mFooter = (RelativeLayout)findViewById( R.id.footer );
-    // mFooter.setVisibility( View.GONE );
 
     mList = (ListView) findViewById(R.id.list);
     mList.setAdapter( mDataAdapter );
@@ -1031,7 +1017,7 @@ public class ShotWindow extends Activity
   // }
 
   // @Override
-  // public synchronized void onStart() 
+  // public void onStart() 
   // {
   //   super.onStart();
   //   // Debug.startMethodTracing( "distox" );
@@ -1137,7 +1123,6 @@ public class ShotWindow extends Activity
   }
 
   // --------------------------------------------------------------
-  final String ONE = "1";
 
   // FIXME NOTIFY: the display mode is local - do not notify
   private void restoreInstanceFromData()
@@ -1146,11 +1131,11 @@ public class ShotWindow extends Activity
     if ( shots != null ) {
       String[] vals = shots.split( " " );
       // FIXME assert( vals.length > 3 );
-      mFlagSplay  = vals[0].equals( ONE );
-      mFlagLeg    = vals[1].equals( ONE );
-      mFlagBlank  = vals[2].equals( ONE );
-      setShowIds( vals[3].equals( ONE ) );
-      mFlagLatest = ( vals.length > 4) && vals[4].equals( ONE );
+      mFlagSplay  = vals[0].equals( TDString.ONE );
+      mFlagLeg    = vals[1].equals( TDString.ONE );
+      mFlagBlank  = vals[2].equals( TDString.ONE );
+      setShowIds( vals[3].equals( TDString.ONE ) );
+      mFlagLatest = ( vals.length > 4) && vals[4].equals( TDString.ONE );
       // Log.v("DistoX", "restore from data mFlagSplay " + mFlagSplay );
     }
   }
@@ -1162,7 +1147,7 @@ public class ShotWindow extends Activity
     // Log.v("DistoX", "save to data mFlagSplay " + mFlagSplay );
   }
 
-  void doBluetooth( Button b )
+  void doBluetooth( Button b ) // BLUETOOTH
   {
     if ( ! mDataDownloader.isDownloading() ) {
       if ( TDLevel.overAdvanced

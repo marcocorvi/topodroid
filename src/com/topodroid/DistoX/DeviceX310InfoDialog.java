@@ -69,8 +69,8 @@ class DeviceX310InfoDialog extends MyDialog
 
     tv_address.setText( String.format( res.getString( R.string.device_address ), mDevice.mAddress ) );
     tv_code.setText( res.getString( R.string.getting_info ) );
-    // tv_firmware.setText( "" );
-    // tv_hardware.setText( "" );
+    // tv_firmware.setText( TDString.EMPTY );
+    // tv_hardware.setText( TDString.EMPTY );
     mParent.readX310Info( this );
 
     mBTok = (Button) findViewById( R.id.btn_ok );

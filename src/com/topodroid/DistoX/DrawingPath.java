@@ -348,6 +348,12 @@ class DrawingPath extends RectF
     return mBlock != null && mBlock.isRecent();
   }
 
+  // used in executeAll to draw yellow extend control segnment
+  int getBlockExtend( )
+  {
+    return ( mBlock == null )? 0 : mBlock.getExtend();
+  }
+
   /* FIXME apparently this can be called when mPaint is still null
    *        and when fixedBluePaint is null
    *

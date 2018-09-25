@@ -189,7 +189,7 @@ class PhotoSensorsDialog extends MyDialog
       mRBfrom.setChecked( true );
       if ( mBlk.mTo.length() > 0 ) {
         mRBto.setText( mBlk.mTo );
-        mETat.setText( "0" );
+        mETat.setText( TDString.ZERO );
       } else {
         mRBto.setVisibility( View.GONE );
         mRBat.setVisibility( View.GONE );

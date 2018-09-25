@@ -192,7 +192,7 @@ class SymbolPoint extends Symbol
           if ( vals[k].equals("symbol") ) {
             name = null;
             th_name = null;
-            color = 0x00000000;
+            color = TDColor.TRANSPARENT;
             path = null;
           } else if ( vals[k].equals("name") || vals[k].equals(locale) ) {
             ++k; while ( k < s && vals[k].length() == 0 ) ++k;
@@ -210,23 +210,23 @@ class SymbolPoint extends Symbol
             if ( cnt == 0 ) {
               ++k; while ( k < s && vals[k].length() == 0 ) ++k;
               if ( k < s ) {
-                mOrientable = ( vals[k].equals("yes") || vals[k].equals("1") );
+                mOrientable = ( vals[k].equals("yes") || vals[k].equals( TDString.ONE ) );
               }
             }
           } else if ( vals[k].equals("has_text") ) {
             if ( cnt == 0 ) {
               ++k; while ( k < s && vals[k].length() == 0 ) ++k;
               if ( k < s ) {
-                mHasText = ( vals[k].equals("yes") || vals[k].equals("1") )? 1 : 0;
-                if ( vals[k].equals("2") ) mHasText = 2;
+                mHasText = ( vals[k].equals("yes") || vals[k].equals( TDString.ONE ) )? 1 : 0;
+                if ( vals[k].equals( TDString.TWO ) ) mHasText = 2;
               }
             }
           } else if ( vals[k].equals("has_value") ) {
             if ( cnt == 0 ) {
               ++k; while ( k < s && vals[k].length() == 0 ) ++k;
               if ( k < s ) {
-                mHasText = ( vals[k].equals("yes") || vals[k].equals("1") )? 2 : 0;
-                if ( vals[k].equals("1") ) mHasText = 1;
+                mHasText = ( vals[k].equals("yes") || vals[k].equals( TDString.ONE ) )? 2 : 0;
+                if ( vals[k].equals( TDString.ONE ) ) mHasText = 1;
               }
             }
           } else if ( vals[k].equals("style") ) {

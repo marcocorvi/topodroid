@@ -100,7 +100,7 @@ class DistoXAccuracy
   
   String getBlockExtraString( DBlock blk )
   {
-    if ( blk == null ) return "";
+    if ( blk == null ) return TDString.EMPTY;
     return String.format(Locale.US, "A %.1f  M %.1f  D %.1f", 
       deltaAcc( blk.mAcceleration ), 
       deltaMag( blk.mMagnetic ), 

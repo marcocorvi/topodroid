@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
 
 class ParserTherion
 {
-  final static private String EMPTY = "";
+  // final static private String EMPTY = "";
 
   final static private int DATA_NONE       = 0;
   final static private int DATA_NORMAL     = 1;
@@ -39,8 +39,8 @@ class ParserTherion
 
   String mName = null;  // survey name
   String mDate = null;  // survey date
-  private String mTeam = "";
-  String mTitle = "";
+  private String mTeam = TDString.EMPTY;
+  String mTitle = TDString.EMPTY;
   float  mDeclination = 0.0f; // one-survey declination
   private boolean mApplyDeclination = false;
  
@@ -108,7 +108,7 @@ class ParserTherion
     for ( ParserShot sh : shots ) {
       if ( sh.from != null && sh.from.length() > 0 ) return sh.from;
     }
-    return "0";
+    return TDString.ZERO;
   }
 
   ParserTherion( String filename, boolean apply_declination ) throws ParserException
@@ -627,23 +627,23 @@ class ParserTherion
                     if ( jLeft >= 0 && jLeft < sz ) {
                       dist = Float.parseFloat( vals[jLeft] ) * state.mUnitLeft / state.mScaleLeft;
                       b = ber - 90; if ( b < 0 ) b += 360;
-                      shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, EMPTY,
+                      shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, TDString.EMPTY,
                                  dist, b, 0, 0.0f, state.mExtend, 2, state.mDuplicate, state.mSurface, false, "" ) );
                     }
                     if ( jRight >= 0 && jRight < sz ) {
                       dist = Float.parseFloat( vals[jRight] ) * state.mUnitRight / state.mScaleRight;
                       b = ber + 90; if ( b >= 360 ) b -= 360;
-                      shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, EMPTY,
+                      shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, TDString.EMPTY,
                                  dist, b, 0, 0.0f, state.mExtend, 2, state.mDuplicate, state.mSurface, false, "" ) );
                     }
                     if ( jUp >= 0 && jUp < sz ) {
                       dist = Float.parseFloat( vals[jUp] ) * state.mUnitUp / state.mScaleUp;
-                      shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, EMPTY,
+                      shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, TDString.EMPTY,
                                  dist, 0, 90, 0.0f, state.mExtend, 2, state.mDuplicate, state.mSurface, false, "" ) );
                     }
                     if ( jDown >= 0 && jDown < sz ) {
                       dist = Float.parseFloat( vals[jDown] ) * state.mUnitDown / state.mScaleDown;
-                      shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, EMPTY,
+                      shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, TDString.EMPTY,
                                  dist, 0, -90, 0.0f, state.mExtend, 2, state.mDuplicate, state.mSurface, false, "" ) );
                     }
 
@@ -651,7 +651,7 @@ class ParserTherion
                     if ( to.equals("-") || to.equals(".") ) { // splay shot
                       // from = from + "@" + path;
                       // FIXME splays
-                      shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, EMPTY,
+                      shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, TDString.EMPTY,
                                             len, ber, cln, 0.0f,
                                             state.mExtend, 0, state.mDuplicate, state.mSurface, false, "" ) );
                     } else {

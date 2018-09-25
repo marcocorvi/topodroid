@@ -13,6 +13,8 @@ package com.topodroid.DistoX;
 
 import android.os.AsyncTask;
  
+import android.util.Log;
+
 class DeviceX310TakeShot extends AsyncTask<Integer, Integer, Integer >
 {
   private final ILister mILister;      // lister with BT button
@@ -38,6 +40,7 @@ class DeviceX310TakeShot extends AsyncTask<Integer, Integer, Integer >
   {
     int i = mNr;
     for ( ; i>1; --i ) {
+      // Log.v("DistoX", "take shot " + i + " wait " + TDSetting.mWaitLaser + "/" + TDSetting.mWaitShot );
       mApp.setX310Laser( 1, null );
       TopoDroidUtil.slowDown( TDSetting.mWaitLaser ); 
       mApp.setX310Laser( 2, null );   
@@ -45,6 +48,13 @@ class DeviceX310TakeShot extends AsyncTask<Integer, Integer, Integer >
     }
     mApp.setX310Laser( 1, null );
     TopoDroidUtil.slowDown( TDSetting.mWaitLaser ); 
+    if ( mLister != null ) {
+      mApp.setX310Laser( 3, mLister ); // 3 = measure and download
+      // TopoDroidUtil.slowDown( TDSetting.mWaitShot ); 
+    } else {
+      mApp.setX310Laser( 2, null ); // 2 = measure
+      // TopoDroidUtil.slowDown( TDSetting.mWaitLaser ); 
+    }
     return 0;
   }
 
@@ -60,13 +70,13 @@ class DeviceX310TakeShot extends AsyncTask<Integer, Integer, Integer >
   @Override
   protected void onPostExecute( Integer result ) 
   {
-    if ( mLister != null ) {
-      mApp.setX310Laser( 3, mLister ); // 3 = measure and download
-      // TopoDroidUtil.slowDown( TDSetting.mWaitShot ); 
-    } else {
-      mApp.setX310Laser( 2, null ); // 2 = measure
-      // TopoDroidUtil.slowDown( TDSetting.mWaitLaser ); 
-    }
+    // if ( mLister != null ) {
+    //   mApp.setX310Laser( 3, mLister ); // 3 = measure and download
+    //   // TopoDroidUtil.slowDown( TDSetting.mWaitShot ); 
+    // } else {
+    //   mApp.setX310Laser( 2, null ); // 2 = measure
+    //   // TopoDroidUtil.slowDown( TDSetting.mWaitLaser ); 
+    // }
     mILister.enableBluetoothButton(true);
   }
 }

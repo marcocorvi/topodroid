@@ -44,8 +44,8 @@ class DrawingDxf
   static final private String one  = "1.0";
   // static final String half = "0.5";
   static final private String two_n_half = "2.5";
-  static final String ten  = "10";
-  static final private String empty = "";
+  // static final String ten = "10";
+  static final private String empty = TDString.EMPTY;
   static final private String my_style      = "MyStyle";
   static final private String standard      = "Standard";
   static final private String lt_continuous = "Continuous";
@@ -832,7 +832,7 @@ class DrawingDxf
 
       writeSection( out, "ENTITIES" );
       {
-	String scale_len = "20";
+	String scale_len = TDString.TWENTY;
         float sc1 = 20; // DrawingUtil.SCALE_FIX / 2 = 10;
 
         // reference

@@ -326,7 +326,7 @@ class FixedGpsDialog extends MyDialog
   {
     // mBtnLoc.setText( mContext.getResources().getString( R.string.button_gps_stop ) );
     mHasLocation = false;
-    mBtnStatus.setText( "0" );
+    mBtnStatus.setText( TDString.ZERO );
     mBtnStatus.setBackgroundColor( 0x80ff0000 );
     mErr2 = -1; // restart location averaging
     if ( locManager != null ) {

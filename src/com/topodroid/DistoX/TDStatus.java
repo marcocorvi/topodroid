@@ -21,5 +21,5 @@ class TDStatus
   // static final int CALIB     = 11;  
   // static final int GM        = 12;  
 
-  static final String NORMAL_STR = "0"; // NORMAL as string
+  static final String NORMAL_STR = TDString.ZERO; // NORMAL as string
 }

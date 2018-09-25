@@ -51,7 +51,7 @@ class StationName
     //   for ( DBlock blk : list ) {
     //     if ( blk.mTo != null && blk.mTo.length() > 0 ) { last = blk; }
     //   }
-    //   if ( last == null ) return "0";
+    //   if ( last == null ) return TDString.ZERO;
     //   if ( last.mFrom == null || last.mFrom.length() == 0 ) return last.mTo;
     //   if ( StationPolicy.mSurveyStations == 1 ) return last.mFrom;  // forward-shot
     //   return last.mTo;
@@ -59,7 +59,7 @@ class StationName
     //   for ( DBlock blk : list ) {
     //     if ( blk.mFrom != null && blk.mFrom.length() > 0 ) { last = blk; }
     //   }
-    //   if ( last == null ) return "0";
+    //   if ( last == null ) return TDString.ZERO;
     //   if ( last.mTo == null || last.mTo.length() == 0 ) return last.mFrom;
     //   if ( StationPolicy.mSurveyStations == 1 ) return last.mTo;  // forward-shot
     //   return last.mFrom;
@@ -75,7 +75,7 @@ class StationName
       if ( StationPolicy.mSurveyStations == 1 ) return last.mTo;  // forward-shot
       return last.mFrom;
     }
-    // return "0";
+    // return TDString.ZERO;
   }
 
   static void resetCurrentOrLastStation( DataHelper data_helper, long sid )

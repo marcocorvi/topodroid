@@ -947,7 +947,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] tit    = TDPrefKey.LOGtitle;
     TDPref[] ret = new TDPref[ 31 ];
     ret[0] = makeLst( cat, key[0],
-               R.string.pref_log_stream_title, R.string.pref_log_stream_summary, T, "0", R.array.logStream, R.array.logStreamValue, res, hlp );
+      R.string.pref_log_stream_title, R.string.pref_log_stream_summary, T, "0", R.array.logStream, R.array.logStreamValue, res, hlp );
     ret[ 1] = makeCbx( cat, key[ 1], tit[ 0], -1, T, false, res, hlp );
     ret[ 2] = makeCbx( cat, key[ 2], tit[ 1], -1, T, false, res, hlp );
     ret[ 3] = makeCbx( cat, key[ 3], tit[ 2], -1, T, true,  res, hlp );

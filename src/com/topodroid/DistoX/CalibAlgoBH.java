@@ -27,7 +27,7 @@ import java.lang.Math;
 // import java.util.Locale;
 
 // used by logCoeff
-// import android.util.Log;
+import android.util.Log;
 
 class CalibAlgoBH extends CalibAlgo
 {
@@ -67,8 +67,7 @@ class CalibAlgoBH extends CalibAlgo
   public int Calibrate()
   {
     mDelta = 0.0f;
-    TDLog.Log( TDLog.LOG_CALIB, "Calibrate: data nr. " + idx 
-                      + " algo " + (mNonLinear? "non-" : "") + "linear" );
+    TDLog.Log( TDLog.LOG_CALIB, "Calibrate: data nr. " + idx + " algo " + (mNonLinear? "non-" : "") + "linear" );
     if ( idx < 16 ) return -1;
     return Optimize( idx, g, m );
   }
@@ -119,6 +118,7 @@ class CalibAlgoBH extends CalibAlgo
   {
     int max_it = TDSetting.mCalibMaxIt;
     float eps  = TDSetting.mCalibEps;
+    // Log.v("DistoX", "Calib Algo BH eps " + eps + " iter " + max_it );
 
     // int num = g.Length();
     Vector[] gr = new Vector[nn];

@@ -93,7 +93,7 @@ class CalibCoeffDialog extends MyDialog
     if ( nl != null ) {
       nlx = String.format(Locale.US, "nL   %8.4f %8.4f %8.4f", nl.x, nl.y, nl.z );
     } else {
-      nlx = ""; // new String("");
+      nlx = TDString.EMPTY; // new String(TDString.EMPTY);
     }
 
     delta0  = String.format( mContext.getResources().getString( R.string.calib_error ), delta );

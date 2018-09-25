@@ -63,7 +63,7 @@ class Sketch3dInfo extends SketchShot
     super(null, null);
     p1 = new PointF();
     p2 = new PointF();
-    start = "0";
+    start = TDString.ZERO;
   }
 
   Vector shotUnit()
