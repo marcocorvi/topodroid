@@ -11,19 +11,19 @@
     <!-- UNUSED string name="version_ask">Stai aggiornando ad una nuova versione di TopoDroid.\nVuoi reinstallare prototipi grafici?</string -->
     <string name="symbols_ask">Installare gli strumenti di disegno v.%1$s?\n(Current v.%2$s)</string>
 
-    <!-- TODO string name="setup_textsize_title">TopoDroid setup. Text size</string -->
-    <!-- TODO string name="setup_buttonsize_title">TopoDroid setup. Button size</string -->
-    <!-- TODO string name="setup_drawingunit_title">TopoDroid setup. Icons size</string -->
-    <!-- TODO string name="setup_done_title">TopoDroid setup. Done</string -->
+    <string name="setup_textsize_title">Configura TopoDroid. Dimensione testo</string>
+    <string name="setup_buttonsize_title">Configura TopoDroid. Dimensione pulsanti</string>
+    <string name="setup_drawingunit_title">Configura TopoDroid. Dimensione Icone</string>
+    <string name="setup_done_title">Configura TopoDroid. Fatto</string>
 
-    <!-- TODO string name="setup_textsize">Set the text size.\nYou can always change this later thru the main window settings.</string -->
-    <!-- TODO string name="setup_buttonsize">Set the button size.\nYou can always change this later thru the main window settings.</string -->
-    <!-- TODO string name="setup_drawingunit">Set the sketch icon size.\nYou can always change this later thru the sketch window settings.</string -->
-    <!-- TODO string name="setup_done">The basic setup in done.\n\n
-	    If you experience problems with the DistoX connection, try and set the insecure socket.\n\n
-	    Other settings concern the presentation in the sketching window (icon size, label size, line width, etc.)
-	    you should set them to your needs./n/n
-    </string -->
+    <string name="setup_textsize">Imposta la dimensione testo.\nPuoi sempre cambiarla in seguito dalla finestra di configurazione.</string>
+    <string name="setup_buttonsize">Imposta la dimensione pulsanti.\nPuoi sempre cambiarla in seguito dalla finestra di configurazione..</string>
+    <string name="setup_drawingunit">Imposta la dimensione delle icone disegno.\nPuoi sempre cambiarla in seguito dalla finestra di configurazione.</string>
+    <string name="setup_done">Fine delle impostazioni di base.\n\n
+	    Se hai problemi con la connessione al DistoX, prova ad impostare il socket non sicuro.\n\n
+	    Altre impostazioni riguardano la presentazione nella finestra di disegno (dimensione icone ed etichette, larghezza linee, etc.). 
+	    Puoi impostarle come preferisci./n/n
+    </string>
     <!-- OK string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
 
     <string name="POINT">PUNTO</string>
@@ -31,8 +31,8 @@
     <string name="AREA">AREA</string>
     <string name="HELP">AIUTO</string>
     <string name="STATION">CAPOSALDO </string>
-    <!-- TODO string name="UP">UPWARD</string -->
-    <!-- TODO string name="DOWN">DOWNWARD</string -->
+    <string name="UP">IN SU</string>
+    <string name="DOWN">IN GIU\'</string>
 
     <string name="cut">TAGLIA</string>
     <string name="copy">COPIA</string>
@@ -168,8 +168,8 @@
     <!-- UNUSED string name="sketch_saving">Salvataggio disegno &#8230; attendi &#8230;</string -->
     <string name="MT_points_none">Punto GPS mancante</string>
 
-    <!-- TODO string name="pleasewait">Please wait</string -->
-    <!-- TODO string name="processing">processing &#8230;</string -->
+    <string name="pleasewait">Attendere...</string>
+    <string name="processing">elaborazione &#8230;</string>
 
     <!-- UNUSED string name="head_tail">Memoria: </string -->
     <string name="head_tail_failed">Lettura memoria DistoX fallita</string>
@@ -199,7 +199,7 @@
     <string name="fmt_error_m">Errore %1$.1f m</string>
     <string name="fmt_h_geoid">Errore %1$.0f m</string>
     <string name="fmt_h_ellipsoid">Errore %1$.0f m</string>
-    <!-- TODO string name="depth_error">Waring. Data depth error</string -->
+    <string name="depth_error">WARNING. Errore nella profondita\' dei dati</string>
 
     <string name="error_azimuth_required">Azimuth mancante</string>
     <string name="error_length_required">Lunghezza mancante</string>
@@ -250,11 +250,11 @@
     <string name="splays">splay</string>
     <string name="splays_show">Mostra splays</string>
     <string name="foresurface_show">Mostra superficie</string>
-    <!-- TODO string name="fmt_listen">LISTEN | %1$s</string -->
-    <!-- TODO string name="fmt_id">ID %1$s</string -->
+    <string name="fmt_listen">ASCOLTA | %1$s</string>
+    <!-- FT_NO_TR string name="fmt_id">ID %1$s</string -->
     <string name="fmt_latitude">Latitudine %1$s</string>
     <string name="fmt_longitude">Longitudine %1$s</string>
-    <!-- TODO string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string --> 
+    <!-- FT_NO_TR string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string --> 
     <string name="fixed">fisso</string>
     <string name="painted">colorato</string>
 
@@ -272,14 +272,14 @@
     <string name="no_calibration">Nessuna calibrazione selezionata</string>
     <string name="no_capture_app">Nessuna app per foto</string>
     <string name="no_cave3d">Cave3D non installato</string>
-    <!-- TODO string name="no_data_reduction">No data reduction</string -->
+    <string name="no_data_reduction">Nessuna riduzione dei dati</string>
     <string name="no_db">Nessun database</string>
     <string name="no_device_address">Dispositivo non selezionato</string>
     <string name="no_device_found">Dispositivo non trovato</string>
     <string name="no_feature_audio">Audio non supportato</string>
     <string name="no_gms">Calibrazione senza data.</string>
     <string name="no_geo_station">Errore: nessun caposaldo geolocalizzato</string>
-    <!-- TODO string name="no_leg_first">Selection does not start with a leg</string -->
+    <string name="no_leg_first">La selezione non parte con una battuta</string>
     <string name="no_leg_intersection">La linea di sezione non interseca alcuna battuta</string>
     <string name="no_location_data">Nessun dato di posizione</string>
     <string name="no_paired_device">Nessun DistoX accoppiato.</string>
@@ -297,7 +297,7 @@
     <string name="no_undelete">Nessun oggetto da riprendere</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Posizione %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Inclinazione %5$.1f"</string>
-    <!-- TODO string name="format_closure">%1$s-%2$s: %3$.1f / %4$.1f m [%5$.1f %6$.1f] %7$.1f (%8$.1f \u00b0)</string -->
+    <!-- FT_NO_TR string name="format_closure">%1$s-%2$s: %3$.1f / %4$.1f m [%5$.1f %6$.1f] %7$.1f (%8$.1f \u00b0)</string -->
 
     <!-- OK string name="menu_3d">3D</string -->
     <string name="menu_about">INFO</string>
@@ -471,9 +471,9 @@
     <string name="out_of_memory">WARNING: Memoria terminata !</string>
     <string name="disk_io_error">CRITICAL: Errore disco !</string>
     
-    <!-- TODO string name="toporobot_warning">TopoRobot policy is exterimental !</string -->
-    <!-- TODO string name="anomaly_warning">Magnatic anomaly compensation is expert !</string -->
-    <!-- TODO string name="tripod_warning">Tripod policy is advanced !</string -->
+    <string name="toporobot_warning">TopoRobot e\' sperimentale !</string>
+    <string name="anomaly_warning">La compensazione di anomalia magnetica e' liv. esperto !</string>
+    <string name="tripod_warning">Tripod e' liv. avanzato !</string>
 
     <string name="cannot_rename">Rinomina rilievo non riuscita</string>
     <string name="declination">decl. magn.</string>
@@ -512,7 +512,7 @@
     <string name="stat_duplicate">Battute doppie %1$d %2$.1f %3$s</string>
     <string name="stat_leg">Battute %1$d %2$.1f %3$.1f %4$.1f %5$s</string>
     <string name="stat_length">Sviluppo %1$.1f %2$s</string>
-    <!-- TODO string name="stat_extlen">3D length %1$.1f %2$s</string -->
+    <string name="stat_extlen">Lunghezza 3D %1$.1f %2$s</string>
     <string name="stat_projlen">Lunghezza piano %1$.1f %2$s</string>
     <string name="stat_loop">Anelli %1$d</string>
     <string name="stat_origin">Caposaldo zero: %1$s</string>
@@ -562,8 +562,8 @@
     <string name="button_current"   >Corrente   </string>
     <string name="button_delete"    >Elimina   </string>
     <string name="button_eval"      >Calcola   </string>
-    <!-- TODO string name="button_evalg"     >G      </string -->
-    <!-- TODO string name="button_evalm"     >M      </string -->
+    <!-- FT_NO_TR string name="button_evalg"     >G      </string -->
+    <!-- FT_NO_TR string name="button_evalm"     >M      </string -->
     <string name="button_eval_cal"  >Calcola con calibr.</string>
     <!-- OK string name="button_gps_start" >GPS       </string -->
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
@@ -575,22 +575,22 @@
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Disegno</string>
     <string name="button_more"    >Altro</string>
-    <!-- TODO string name="button_next"    >Next</string -->
-    <!-- TODO string name="button_skip"    >Skip</string -->
-    <!-- TODO string name="button_done"    >Done</string -->
+    <string name="button_next"    >Prossimo</string>
+    <string name="button_skip"    >Salta</string>
+    <string name="button_done"    >Fatto</string>
     <string name="button_lrud"    >Aggiungi LRUD</string>
     <string name="button_ok"        >OK        </string>
-    <!-- TODO string name="button_off"       >off</string -->
-    <!-- TODO string name="button_on"        >on</string -->
+    <string name="button_off"       >spento</string>
+    <string name="button_on"        >acceso</string>
     <string name="button_open"      >Apri      </string>
     <string name="button_read"      >Leggi     </string>
     <!-- UNUSED string name="button_redo"      >Ripeti azione</string -->
     <!-- UNUSED string name="button_regroup"   >Raggruppare   </string -->
     <string name="button_dump"      >Scarica   </string>
     <string name="button_rename"    >Rinomina    </string>
-    <!-- TODO string name="button_renumber"  >Renumber</string -->
-    <!-- TODO string name="button_bedding"   >Bedding plane</string -->
-    <!-- TODO string name="button_highlight" >Highlight</string -->
+    <string name="button_renumber"  >Rinumera</string>
+    <string name="button_bedding"   >Piano base</string>
+    <string name="button_highlight" >Evidenzia</string>
     <string name="button_replace"   >Sostituisci</string>
     <string name="button_reset"     >Resetta   </string>
     <string name="button_left"      >SINISTRA</string>
@@ -601,7 +601,7 @@
     <string name="button_search"    >Cerca     </string>
     <string name="button_merge"     >Unisci    </string>
     <string name="button_split"     >Dividi    </string>
-    <!-- TODO string name="button_station"   >Center at</string -->
+    <string name="button_station"   >Centra</string>
     <string name="button_store"     >Scrivi    </string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
@@ -618,7 +618,7 @@
 
     <string name="mode_leg">Battute</string>
     <string name="mode_splay">Splay</string>
-    <!-- TODO string name="mode_latest">Latest splays</string -->
+    <string name="mode_latest">Ultimi splay</string>
     <string name="mode_station">Capisaldi</string>
     <string name="mode_grid">Griglia</string>
     <string name="mode_fixed">[ Bloccati ]</string>
@@ -855,7 +855,7 @@
     <string name="title_draw">Disegno</string>
     <string name="title_draw_area">AREA %1$s</string>
     <string name="title_draw_line">LINEA %1$s</string>
-    <!-- TODO string name="title_draw_line_no_stations">LINE %1$s: no stations</string -->
+    <string name="title_draw_line_no_stations">LINEA %1$s: no capisaldi</string>
     <string name="title_draw_point">PUNTO %1$s</string>
     <string name="title_edit">Edita</string>
     <string name="title_edit_user_station">Modifica caposaldo utente</string>
@@ -882,33 +882,33 @@
     <string name="title_scraps_outline">Contorno disegno</string>
     <string name="title_select">Seleziona</string>
 
-    <!-- TODO string name="title_settings_main">TopoDroid main settings</string -->
-    <!-- TODO string name="title_settings_export">TopoDroid import/export settings</string -->
-    <!-- TODO string name="title_settings_import">TopoDroid import settings</string -->
-    <!-- TODO string name="title_settings_th">Therion export settings</string -->
-    <!-- TODO string name="title_settings_dat">Compass export settings</string -->
-    <!-- TODO string name="title_settings_svg">SVG export settings</string -->
-    <!-- TODO string name="title_settings_dxf">DXF export settings</string -->
-    <!-- TODO string name="title_settings_png">PNG export settings</string -->
-    <!-- TODO string name="title_settings_kml">KML export settings</string -->
+    <string name="title_settings_main">TopoDroid: Impostazioni principali</string>
+    <string name="title_settings_export">Impostazione import/export</string>
+    <string name="title_settings_import">Impostazione import</string>
+    <string name="title_settings_th">Therion: Imposta export</string>
+    <string name="title_settings_dat">Compass: Imposta export</string>
+    <string name="title_settings_svg">SVG: Imposta export</string>
+    <string name="title_settings_dxf">DXF: Imposta export</string>
+    <string name="title_settings_png">PNG: Imposta export</string>
+    <string name="title_settings_kml">KML: Imposta export</string>
 
-    <!-- TODO string name="title_settings_sketch">TopoDroid 3d sketch settings</string -->
-    <!-- TODO string name="title_settings_survey">TopoDroid survey settings</string -->
-    <!-- TODO string name="title_settings_shot">TopoDroid shot data settings</string -->
-    <!-- TODO string name="title_settings_units">TopoDroid units settings</string -->
-    <!-- TODO string name="title_settings_location">TopoDroid location settings</string -->
-    <!-- TODO string name="title_settings_accuracy">TopoDroid accuracy settings</string -->
-    <!-- TODO string name="title_settings_plot">TopoDroid sketch settings</string -->
-    <!-- TODO string name="title_settings_screen">TopoDroid canvas settings</string -->
-    <!-- TODO string name="title_settings_point">TopoDroid point settings</string -->
-    <!-- TODO string name="title_settings_line">TopoDroid line settings</string -->
-    <!-- TODO string name="title_settings_walls">TopoDroid autowalls settings</string -->
-    <!-- TODO string name="title_settings_draw">TopoDroid drawing settings</string -->
-    <!-- TODO string name="title_settings_erase">TopoDroid erasing settings</string -->
-    <!-- TODO string name="title_settings_edit">TopoDroid editing settings</string -->
-    <!-- TODO string name="title_settings_device">TopoDroid device settings</string -->
-    <!-- TODO string name="title_settings_calib">TopoDroid calibration settings</string -->
-    <!-- TODO string name="title_settings_log">TopoDroid log settings</string -->
+    <string name="title_settings_sketch">Impostazione disegno 3D</string>
+    <string name="title_settings_survey">Impostazione rilievo</string>
+    <string name="title_settings_shot">Impostazione dati battute</string>
+    <string name="title_settings_units">Impostazione unita\'</string>
+    <string name="title_settings_location">Impostazione posizione</string>
+    <string name="title_settings_accuracy">Impostazione accuratezza</string>
+    <string name="title_settings_plot">Impostazione disegno</string>
+    <string name="title_settings_screen">Impostazione canvas</string>
+    <string name="title_settings_point">Impostazione punti</string>
+    <string name="title_settings_line">Impostazione linee</string>
+    <string name="title_settings_walls">Impostazione autowalls</string>
+    <string name="title_settings_draw">Impostazione disegni</string>
+    <string name="title_settings_erase">Impostazione cancellazione</string>
+    <string name="title_settings_edit">Impostazione editing</string>
+    <string name="title_settings_device">Impostazione device</string>
+    <string name="title_settings_calib">Impostazione calibrazione</string>
+    <string name="title_settings_log">Impostazione log</string>
 
     <string name="title_shift">Sposta</string>
     <string name="title_shot_delete">Rimuovi battuta ?</string>
@@ -934,7 +934,7 @@
   <string name="pref_cat_survey">OPZIONI RILIEVO</string>
   <string name="pref_cat_drawing">OPZIONI DISEGNO</string>
   <string name="pref_cat_import_export">OPZIONI IMPORT/EXPORT</string>
-  <!-- TODO string name="pref_cat_exportimport">IMPORT</string -->
+  <!-- FT_NO_TR string name="pref_cat_exportimport">IMPORT</string -->
   <!-- OK string name="pref_cat_exportth">Therion</string -->
   <!-- OK string name="pref_cat_exportdat">Compass</string -->
   <!-- OK string name="pref_cat_exportsvg">SVG</string -->
@@ -979,8 +979,8 @@
   <string name="pref_bezier_step_summary">Distanza tra punti in una linea di export [m]</string>
   <string name="pref_leg_shots_title">Misure per battuta</string>
   <string name="pref_leg_shots_summary">Minimo numero di misure per tiro di poligonale</string>
-  <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
-  <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent</string -->
+  <string name="pref_recent_timeout_title">Dati Timeout recenti</string>
+  <string name="pref_recent_timeout_summary">Timeout dopo dopo i quali un dato non e\' piu\' recente</string>
   <string name="pref_station_prefix_title">Esporta il prefisso dei caposaldi</string>
   <string name="pref_station_prefix_summary">Esporta in cSurvey il prefisso dei caposaldi</string>
   <string name="pref_compass_splays_title">Splay Compass</string>
@@ -1159,8 +1159,8 @@
   <string name="pref_segment_message">Minima distanza fra punti di una linea</string>
   <string name="pref_linestyle_title">Stile linee</string>
   <string name="pref_linestyle_summary">Stile linee</string>
-  <!-- TODO string name="pref_linecontinue_title">Line continue</string -->
-  <!-- TODO string name="pref_linecontinue_summary">Line default continue-mode</string -->
+  <string name="pref_linecontinue_title">Continua la linea</string>
+  <string name="pref_linecontinue_summary">Default modo continuazione linea</string>
   <string name="pref_lineacc_title">Accuratezza curve Bezier</string>
   <string name="pref_lineacc_summary">Accuratezza di interpolazione per le curve Bezier</string>
   <string name="pref_linecorner_title">Angolatura Bezier</string>

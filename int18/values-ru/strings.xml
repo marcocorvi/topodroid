@@ -940,7 +940,7 @@
   <string name="pref_cat_survey">НАСТРОЙКИ ТОПОСЪЁМКИ </string>
   <string name="pref_cat_drawing">НАСТРОЙКИ РИСОВАНИЯ </string>
   <string name="pref_cat_import_export">НАСТРОЙКИ ИМПОРТА-ЭКСПОРТА</string>
-  <!-- TODO string name="pref_cat_exportimport">IMPORT</string -->
+  <string name="pref_cat_exportimport">ИМПОРТ</string>
   <!-- OK string name="pref_cat_exportth">Therion</string -->
   <!-- OK string name="pref_cat_exportdat">Compass</string -->
   <!-- OK string name="pref_cat_exportsvg">SVG</string -->
