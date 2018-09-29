@@ -353,6 +353,52 @@ class DrawingPath extends RectF
   {
     return ( mBlock == null )? 0 : mBlock.getExtend();
   }
+ 
+  // setSplayExtend is used for the plan view
+  // extend = cos(angle_splay-leg)
+  // called by DrawingCommandManager
+  void setSplayPaintExtend( DBlock blk, float extend )
+  {
+    if ( blk == null ) {
+      mPaint = BrushManager.fixedSplayPaint;
+    } else {
+      if ( blk.isCommented() ) {
+        mPaint = BrushManager.fixedSplay0Paint;
+      } else if ( blk.isXSplay() ) {
+        mPaint = BrushManager.fixedGreenPaint;
+      } else {
+        if (extend >= 0 && extend < TDSetting.mCosHorizSplay) {
+          mPaint = BrushManager.fixedSplay4Paint;
+        } else if (extend < 0 && extend > -TDSetting.mCosHorizSplay) {
+          mPaint = BrushManager.fixedSplay3Paint;
+        } else {
+          mPaint = BrushManager.fixedSplayPaint;
+        }
+      }
+    }
+  }
+  
+  // setSplayClino is used for the profile view
+  void setSplayPaintClino( DBlock blk )
+  {
+    if ( blk == null ) {
+      mPaint= BrushManager.fixedSplayPaint;
+    } else {
+      if ( blk.isCommented() ) {
+        mPaint= BrushManager.fixedSplay0Paint;
+      } else if ( blk.isXSplay() ) {
+        mPaint= BrushManager.fixedGreenPaint;
+      } else {
+        if (blk.mClino > TDSetting.mVertSplay) {
+          mPaint= BrushManager.fixedSplay4Paint;
+        } else if (blk.mClino < -TDSetting.mVertSplay) {
+          mPaint= BrushManager.fixedSplay3Paint;
+        } else {
+          mPaint= BrushManager.fixedSplayPaint;
+        }
+      }
+    }
+  }
 
   /* FIXME apparently this can be called when mPaint is still null
    *        and when fixedBluePaint is null

@@ -66,13 +66,15 @@ class DistoXProtocol
   static final int DISTOX_PACKET_VECTOR = 4;
   static final int DISTOX_PACKET_REPLY  = 5;
 
-  int  mError; // readToRead error
+  private int  mError; // readToRead error
   static final int DISTOX_ERR_OK           =  0; // OK: no error
   static final int DISTOX_ERR_HEADTAIL     = -1;
   static final int DISTOX_ERR_HEADTAIL_IO  = -2;
   static final int DISTOX_ERR_HEADTAIL_EOF = -3;
   static final int DISTOX_ERR_CONNECTED    = -4;
   static final int DISTOX_ERR_OFF          = -5; // distox has turned off
+
+  int getErrorCode() { return mError; }
 
   double mDistance;
   double mBearing;

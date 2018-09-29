@@ -988,7 +988,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_export_plot_summary">Default sketch export format</string>
   <string name="pref_therion_maps_title">Therion maps first</string>
   <string name="pref_therion_maps_summary">Put Therion maps before survey data</string>
-  <string name="pref_extra_buttons_title">Level of features</string>
+  <string name="pref_extra_buttons_title">Activity level</string>
   <string name="pref_extra_buttons_summary">Level of enabled features</string>
   <string name="pref_size_buttons_title">Buttons size</string>
   <string name="pref_size_buttons_summary">Size of action-bar buttons</string>

@@ -972,9 +972,9 @@ class DrawingCommandManager
           if ( path.mBlock == null || ( ! path.mBlock.mMultiBad ) ) {
             // path.setPathPaint( paint );
 	    if ( TDSetting.mDashSplay || profile ) {
-              DrawingWindow.setSplayPaintClino( path, path.mBlock );
+              path.setSplayPaintClino( path.mBlock );
 	    } else {
-              DrawingWindow.setSplayPaintExtend( path, path.mBlock, path.mExtend );
+              path.setSplayPaintExtend( path.mBlock, path.mExtend );
 	    }
           }
         }

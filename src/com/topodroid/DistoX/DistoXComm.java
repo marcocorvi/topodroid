@@ -749,8 +749,9 @@ class DistoXComm extends TopoDroidComm
         if ( to_read == 0 ) {
           ret = to_read;
 	} else if ( to_read < 0 ) {
-	  if ( mProtocol.mError < 0 ) {
-            ret = mProtocol.mError;
+	  int error_code = mProtocol.getErrorCode();
+	  if ( error_code < 0 ) {
+            ret = error_code;
 	  } else { // read with timeout
             startRfcommThread( -1, lister );
             while ( mRfcommThread != null ) {

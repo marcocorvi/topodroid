@@ -3,8 +3,8 @@
       package="com.topodroid.DistoX"
       android:debuggable="true"
       android:installLocation="auto"
-      android:versionCode="401025"
-      android:versionName="4.1.0B"
+      android:versionCode="401026"
+      android:versionName="4.1.1"
     >
     <!-- FIXME-23 -->
     <uses-sdk
@@ -48,7 +48,7 @@
           android:label="@string/app_name"
           android:screenOrientation="portrait"
           android:allowBackup="false"
-	  android:icon="@drawable/icon3"
+	  android:icon="@drawable/icon4"
 	  android:largeHeap="true"
 	  ><!-- FIXME-23
 	  android:largeHeap="true"
@@ -191,7 +191,7 @@
 
         <!-- service
           android:name="TD_DistoX"
-          android:icon="@drawable/icon3"
+          android:icon="@drawable/icon4"
           android:label="TD_DistoX"
           android:process=":td_distox_process"
           >

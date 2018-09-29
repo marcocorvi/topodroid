@@ -322,7 +322,7 @@ public class DrawingWindow extends ItemDrawer
   private int mEraseMode  = Drawing.FILTER_ALL;
   private int mSelectMode = Drawing.FILTER_ALL;
 
-  private int mEraseScale = 0;
+  private int mEraseScale  = 0;
   private int mSelectScale = 0;
 
   private float mEraseSize  = 1.0f * TDSetting.mEraseness;
@@ -336,9 +336,9 @@ public class DrawingWindow extends ItemDrawer
   boolean mShiftDrawing;        // whether to shift the drawing
   private EraseCommand mEraseCommand = null;
 
-  private int mHotItemType = -1;
+  private int mHotItemType     = -1;
   private boolean mHasSelected = false;
-  private boolean inLinePoint = false;
+  private boolean inLinePoint  = false;
 
   // ZOOM
   static final float ZOOM_INC = 1.4f;
@@ -690,50 +690,53 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.setNorthPath( dpath );
   }
 
+  // N.B. moved to DrawingPath
+  //
   // setSplayExtend is used for the plan view
   // extend = cos(angle_splay-leg)
-  static void setSplayPaintExtend( DrawingPath path, DBlock blk, float extend )
-  {
-    if ( blk == null ) {
-      path.setPathPaint( BrushManager.fixedSplayPaint );
-    } else {
-      if ( blk.isCommented() ) {
-        path.setPathPaint( BrushManager.fixedSplay0Paint );
-      } else if ( blk.isXSplay() ) {
-        path.setPathPaint( BrushManager.fixedGreenPaint );
-      } else {
-        if (extend >= 0 && extend < TDSetting.mCosHorizSplay) {
-          path.setPathPaint( BrushManager.fixedSplay4Paint );
-        } else if (extend < 0 && extend > -TDSetting.mCosHorizSplay) {
-          path.setPathPaint( BrushManager.fixedSplay3Paint );
-        } else {
-          path.setPathPaint( BrushManager.fixedSplayPaint );
-        }
-      }
-    }
-  }
-  
+  // called by DrawingCommandManager 
+  // static void setSplayPaintExtend( DrawingPath path, DBlock blk, float extend )
+  // {
+  //   if ( blk == null ) {
+  //     path.setPathPaint( BrushManager.fixedSplayPaint );
+  //   } else {
+  //     if ( blk.isCommented() ) {
+  //       path.setPathPaint( BrushManager.fixedSplay0Paint );
+  //     } else if ( blk.isXSplay() ) {
+  //       path.setPathPaint( BrushManager.fixedGreenPaint );
+  //     } else {
+  //       if (extend >= 0 && extend < TDSetting.mCosHorizSplay) {
+  //         path.setPathPaint( BrushManager.fixedSplay4Paint );
+  //       } else if (extend < 0 && extend > -TDSetting.mCosHorizSplay) {
+  //         path.setPathPaint( BrushManager.fixedSplay3Paint );
+  //       } else {
+  //         path.setPathPaint( BrushManager.fixedSplayPaint );
+  //       }
+  //     }
+  //   }
+  // }
+  //
   // setSplayClino is used for the profile view
-  static void setSplayPaintClino( DrawingPath path, DBlock blk )
-  {
-    if ( blk == null ) {
-      path.setPathPaint( BrushManager.fixedSplayPaint );
-    } else {
-      if ( blk.isCommented() ) {
-        path.setPathPaint( BrushManager.fixedSplay0Paint );
-      } else if ( blk.isXSplay() ) {
-        path.setPathPaint( BrushManager.fixedGreenPaint );
-      } else {
-        if (blk.mClino > TDSetting.mVertSplay) {
-          path.setPathPaint( BrushManager.fixedSplay4Paint );
-        } else if (blk.mClino < -TDSetting.mVertSplay) {
-          path.setPathPaint( BrushManager.fixedSplay3Paint );
-        } else {
-          path.setPathPaint( BrushManager.fixedSplayPaint );
-        }
-      }
-    }
-  }
+  // static void setSplayPaintClino( DrawingPath path, DBlock blk )
+  // {
+  //   if ( blk == null ) {
+  //     path.setPathPaint( BrushManager.fixedSplayPaint );
+  //   } else {
+  //     if ( blk.isCommented() ) {
+  //       path.setPathPaint( BrushManager.fixedSplay0Paint );
+  //     } else if ( blk.isXSplay() ) {
+  //       path.setPathPaint( BrushManager.fixedGreenPaint );
+  //     } else {
+  //       if (blk.mClino > TDSetting.mVertSplay) {
+  //         path.setPathPaint( BrushManager.fixedSplay4Paint );
+  //       } else if (blk.mClino < -TDSetting.mVertSplay) {
+  //         path.setPathPaint( BrushManager.fixedSplay3Paint );
+  //       } else {
+  //         path.setPathPaint( BrushManager.fixedSplayPaint );
+  //       }
+  //     }
+  //   }
+  // }
       
 
   // used to add legs and splays
@@ -747,9 +750,9 @@ public class DrawingWindow extends ItemDrawer
       dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
       dpath.mExtend = extend; // save extend into path
       if ( TDSetting.mDashSplay || PlotInfo.isProfile( type ) ) {
-        setSplayPaintClino( dpath, blk );
+        dpath.setSplayPaintClino( blk );
       } else {
-        setSplayPaintExtend( dpath, blk, extend );
+        dpath.setSplayPaintExtend( blk, extend );
       }
     } else {
       dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );
@@ -2428,9 +2431,9 @@ public class DrawingWindow extends ItemDrawer
       if ( blk.getFlag() == flag ) return;
       blk.resetFlag( flag );
       if ( TDSetting.mDashSplay || PlotInfo.isProfile( mType ) ) {
-        setSplayPaintClino( shot, blk ); // really necessary only if flag || mFlag is FLAG_COMMENTED
+        shot.setSplayPaintClino( blk ); // really necessary only if flag || mFlag is FLAG_COMMENTED
       } else {
-        setSplayPaintExtend( shot, blk, blk.getReducedIntExtend() ); // really necessary only if flag || mFlag is FLAG_COMMENTED
+        shot.setSplayPaintExtend( blk, blk.getReducedIntExtend() ); // really necessary only if flag || mFlag is FLAG_COMMENTED
       }
       mApp_mData.updateShotFlag( blk.mId, mSid, flag, true );
     }
@@ -2725,6 +2728,25 @@ public class DrawingWindow extends ItemDrawer
   }
 
   // -------------------------------------------------------------------------
+  private void startErasing( float xs, float ys, float xc, float yc )
+  {
+    // Log.v("DistoX", "Erase at " + xs + " " + ys );
+    if ( mTouchMode == MODE_MOVE ) {
+      mEraseCommand =  new EraseCommand();
+      mDrawingSurface.setEraser( xc, yc, mEraseSize );
+      doEraseAt( xs, ys );
+    }
+  }
+
+  private void finishErasing()
+  {
+    mDrawingSurface.endEraser();
+    if ( mEraseCommand != null && mEraseCommand.size() > 0 ) {
+      mEraseCommand.completeCommand();
+      mDrawingSurface.addEraseCommand( mEraseCommand );
+      mEraseCommand = null;
+    }
+  }
 
   private boolean pointerDown = false;
   private boolean threePointers = false;
@@ -2745,6 +2767,11 @@ public class DrawingWindow extends ItemDrawer
 
     if (action == MotionEvent.ACTION_POINTER_DOWN) {
       threePointers = (event.getPointerCount() >= 3);
+      if ( mTouchMode == MODE_MOVE ) {
+        if ( mMode == MODE_ERASE ) {
+	  finishErasing();
+	}
+      }
       mTouchMode = MODE_ZOOM;
       oldDist = spacing( event );
       saveEventPoint( event );
@@ -3038,12 +3065,7 @@ public class DrawingWindow extends ItemDrawer
         }
         mShiftMove = false;
       } else if ( mMode == MODE_ERASE ) {
-        mDrawingSurface.endEraser();
-        if ( mEraseCommand != null && mEraseCommand.size() > 0 ) {
-          mEraseCommand.completeCommand();
-          mDrawingSurface.addEraseCommand( mEraseCommand );
-          mEraseCommand = null;
-        }
+	finishErasing();
       } else if ( mMode == MODE_SPLIT ) {
         mDrawingSurface.resetPreviewPath();
         mSplitBorder.add( new PointF( xs, ys ) );
@@ -3127,13 +3149,7 @@ public class DrawingWindow extends ItemDrawer
       return false;
 
     } else if ( mMode == MODE_ERASE ) {
-      // Log.v("DistoX", "Erase at " + xs + " " + ys );
-      if ( mTouchMode == MODE_MOVE ) {
-        mEraseCommand =  new EraseCommand();
-        mDrawingSurface.setEraser( xc, yc, mEraseSize );
-        doEraseAt( xs, ys );
-      }
-
+      startErasing( xs, ys, xc, yc );
     } else if ( mMode == MODE_EDIT ) {
       mStartX = xc;
       mStartY = yc;
@@ -3234,8 +3250,10 @@ public class DrawingWindow extends ItemDrawer
         mStartY = ys;
         modified();
       } else if ( mMode == MODE_ERASE ) {
-        mDrawingSurface.setEraser( xc, yc, mEraseSize );
-        doEraseAt( xs, ys );
+        if ( mEraseCommand != null ) {
+          mDrawingSurface.setEraser( xc, yc, mEraseSize );
+          doEraseAt( xs, ys );
+	}
       } else if ( mMode == MODE_SPLIT ) {
         if ( ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2 ) {
           mCurrentBrush.mouseMove( mDrawingSurface.getPreviewPath(), xc, yc );
