@@ -677,7 +677,7 @@ public class DrawingWindow extends ItemDrawer
 
   private void resetFixedPaint( )
   {
-    mDrawingSurface.resetFixedPaint( BrushManager.fixedShotPaint );
+    mDrawingSurface.resetFixedPaint( mApp, BrushManager.fixedShotPaint );
   }
   
   // used for the North line
@@ -690,55 +690,6 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.setNorthPath( dpath );
   }
 
-  // N.B. moved to DrawingPath
-  //
-  // setSplayExtend is used for the plan view
-  // extend = cos(angle_splay-leg)
-  // called by DrawingCommandManager 
-  // static void setSplayPaintExtend( DrawingPath path, DBlock blk, float extend )
-  // {
-  //   if ( blk == null ) {
-  //     path.setPathPaint( BrushManager.fixedSplayPaint );
-  //   } else {
-  //     if ( blk.isCommented() ) {
-  //       path.setPathPaint( BrushManager.fixedSplay0Paint );
-  //     } else if ( blk.isXSplay() ) {
-  //       path.setPathPaint( BrushManager.fixedGreenPaint );
-  //     } else {
-  //       if (extend >= 0 && extend < TDSetting.mCosHorizSplay) {
-  //         path.setPathPaint( BrushManager.fixedSplay4Paint );
-  //       } else if (extend < 0 && extend > -TDSetting.mCosHorizSplay) {
-  //         path.setPathPaint( BrushManager.fixedSplay3Paint );
-  //       } else {
-  //         path.setPathPaint( BrushManager.fixedSplayPaint );
-  //       }
-  //     }
-  //   }
-  // }
-  //
-  // setSplayClino is used for the profile view
-  // static void setSplayPaintClino( DrawingPath path, DBlock blk )
-  // {
-  //   if ( blk == null ) {
-  //     path.setPathPaint( BrushManager.fixedSplayPaint );
-  //   } else {
-  //     if ( blk.isCommented() ) {
-  //       path.setPathPaint( BrushManager.fixedSplay0Paint );
-  //     } else if ( blk.isXSplay() ) {
-  //       path.setPathPaint( BrushManager.fixedGreenPaint );
-  //     } else {
-  //       if (blk.mClino > TDSetting.mVertSplay) {
-  //         path.setPathPaint( BrushManager.fixedSplay4Paint );
-  //       } else if (blk.mClino < -TDSetting.mVertSplay) {
-  //         path.setPathPaint( BrushManager.fixedSplay3Paint );
-  //       } else {
-  //         path.setPathPaint( BrushManager.fixedSplayPaint );
-  //       }
-  //     }
-  //   }
-  // }
-      
-
   // used to add legs and splays
   // @param extend  used only for splays
   private void addFixedLine( long type, DBlock blk, float x1, float y1, float x2, float y2,
@@ -749,10 +700,14 @@ public class DrawingWindow extends ItemDrawer
     if ( splay ) {
       dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
       dpath.mExtend = extend; // save extend into path
-      if ( TDSetting.mDashSplay || PlotInfo.isProfile( type ) ) {
-        dpath.setSplayPaintClino( blk );
+      if ( PlotInfo.isProfile( type ) ) {
+        if ( TDSetting.mDashSplay ) {
+          dpath.setSplayPaintPlan( blk, extend, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+        } else {
+          dpath.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+        }
       } else {
-        dpath.setSplayPaintExtend( blk, extend );
+        dpath.setSplayPaintPlan( blk, extend, BrushManager.deepBluePaint, BrushManager.darkBluePaint );
       }
     } else {
       dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );
@@ -787,8 +742,9 @@ public class DrawingWindow extends ItemDrawer
     // Log.v("DistoX", "Section splay angle " + a + " " + TDSetting.mVertSplay );
     DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
     dpath.mExtend = a; 
-    if ( blk.mPaint != null ) {
-      dpath.setPathPaint( blk.mPaint );
+    Paint paint = blk.getPaint();
+    if ( paint != null ) {
+      dpath.setPathPaint( paint );
     } else if ( blue ) {
       if ( blk.isXSplay() ) {
         dpath.setPathPaint( BrushManager.fixedGreenPaint );    // GREEN
@@ -1819,11 +1775,11 @@ public class DrawingWindow extends ItemDrawer
       mApp.registerLister( this );
     } 
 
-    if ( mApp.hasHighlighted() ) {
-      // Log.v("DistoX", "drawing window [2] highlighted " + mApp.getHighlightedSize() );
-      mDrawingSurface.highlights( mApp );
-      mApp.mShotWindow.clearMultiSelect();
-    }
+    // if ( mApp.hasHighlighted() ) {
+    //   // Log.v("DistoX", "drawing window [2] highlighted " + mApp.getHighlightedSize() );
+    //   mDrawingSurface.highlights( mApp );
+    //   mApp.mShotWindow.clearMultiSelect();
+    // }
 
     // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on create done");
   }
@@ -2430,12 +2386,35 @@ public class DrawingWindow extends ItemDrawer
     {
       if ( blk.getFlag() == flag ) return;
       blk.resetFlag( flag );
-      if ( TDSetting.mDashSplay || PlotInfo.isProfile( mType ) ) {
-        shot.setSplayPaintClino( blk ); // really necessary only if flag || mFlag is FLAG_COMMENTED
+      // the next is really necessary only if flag || mFlag is FLAG_COMMENTED:
+      if ( PlotInfo.isProfile( mType ) ) {
+        if ( TDSetting.mDashSplay ) {
+          shot.setSplayPaintPlan( blk, blk.getReducedIntExtend(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+        } else {
+          shot.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+        }
       } else {
-        shot.setSplayPaintExtend( blk, blk.getReducedIntExtend() ); // really necessary only if flag || mFlag is FLAG_COMMENTED
+        shot.setSplayPaintPlan( blk, blk.getReducedIntExtend(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
       }
       mApp_mData.updateShotFlag( blk.mId, mSid, flag, true );
+    }
+    
+    void clearBlockSplayLeg( DBlock blk, DrawingPath shot )
+    {
+      // Log.v("DistoX", "clear splay leg " + blk.mId + "/" + mSid + " reset shot paint ");
+      blk.setTypeSplay();
+      if ( shot.mBlock != null ) shot.mBlock.setTypeSplay();
+      mApp_mData.updateShotLeg( blk.mId, mSid, LegType.NORMAL, false );
+      // the next is really necessary only if flag || mFlag is FLAG_COMMENTED:
+      if ( PlotInfo.isProfile( mType ) ) {
+        if ( TDSetting.mDashSplay ) {
+          shot.setSplayPaintPlan( blk, blk.getReducedIntExtend(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+        } else {
+          shot.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+        }
+      } else {
+        shot.setSplayPaintPlan( blk, blk.getReducedIntExtend(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
+      }
     }
 
     // called only be DrawingShotDialog
@@ -5962,17 +5941,12 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  // called by DrawingShotDialog to change shot color
+  //   @param blk   data block
+  //   @param color color (0 to clear)
   void updateBlockColor( DBlock blk, int color )
   {
-    if ( color == 0 ) { // clear color is 0
-      blk.mPaint= null;
-    } else {
-      if ( blk.mPaint == null ) {
-        blk.mPaint = BrushManager.makePaint( color );
-      } else {
-        blk.mPaint.setColor( color );
-      }
-    }
+    blk.setPaint( color );
     mApp_mData.updateShotColor( blk.mId, TDInstance.sid, color, false ); // do not forward color
   }
 

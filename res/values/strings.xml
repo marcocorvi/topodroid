@@ -33,6 +33,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="UP">UP</string>
     <string name="DOWN">DOWN</string>
 
+    <string name="xsplay">X</string>
+    <string name="hsplay">H</string>
+    <string name="vsplay">V</string>
+
     <string name="cut">CUT</string>
     <string name="copy">COPY</string>
     <string name="paste">PASTE</string>
@@ -619,6 +623,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="button_zoomfit"   >Zoom fit  </string -->
     <!-- UNUSED string name="button_landscape" >Landscape </string --> 
     <!-- UNUSED string name="button_portrait"  >Portrait  </string -->
+    <string name="button_splays">Splays</string>
 
 
     <string name="button_write"     >Upload</string>
@@ -904,6 +909,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_settings_main">TopoDroid main settings</string>
     <string name="title_settings_export">TopoDroid import/export settings</string>
     <string name="title_settings_import">TopoDroid import settings</string>
+    <string name="title_settings_svx">Survex export settings</string>
     <string name="title_settings_th">Therion export settings</string>
     <string name="title_settings_dat">Compass export settings</string>
     <string name="title_settings_svg">SVG export settings</string>

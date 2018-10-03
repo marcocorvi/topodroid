@@ -3478,6 +3478,8 @@ class TDExporter
           out.printf("0\nLAYER\n2\nREF\n70\n%d\n62\n%d\n6\n%s\n",     flag, 4, style );
           out.printf("0\nLAYER\n2\nPOINT\n70\n%d\n62\n%d\n6\n%s\n",   flag, 5, style );
           out.printf("0\nLAYER\n2\nXSPLAY\n70\n%d\n62\n%d\n6\n%s\n",  flag, 6, style );
+          out.printf("0\nLAYER\n2\nHSPLAY\n70\n%d\n62\n%d\n6\n%s\n",  flag, 7, style );
+          out.printf("0\nLAYER\n2\nVSPLAY\n70\n%d\n62\n%d\n6\n%s\n",  flag, 8, style );
         out.printf("0\nENDTAB\n");
 
         out.printf("0\nTABLE\n2\nSTYLE\n70\n0\n");
@@ -3539,6 +3541,10 @@ class TDExporter
 	  DBlock blk = sh.getBlock();
           if ( blk.isXSplay() ) {
             out.printf("0\nLINE\n8\nXSPLAY\n");
+	  } else if ( blk.isHSplay() ) {         // FIXME_X3_SPLAY
+            out.printf("0\nLINE\n8\nHSPLAY\n");
+	  } else if ( blk.isVSplay() ) {
+            out.printf("0\nLINE\n8\nVSPLAY\n");
           } else {
             out.printf("0\nLINE\n8\nSPLAY\n");
 	  }

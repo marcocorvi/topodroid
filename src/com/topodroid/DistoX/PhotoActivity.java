@@ -11,14 +11,6 @@
  */
 package com.topodroid.DistoX;
 
-// import java.io.File;
-// import java.io.IOException;
-// import java.io.EOFException;
-// import java.io.DataInputStream;
-// import java.io.DataOutputStream;
-// import java.io.BufferedReader;
-// import java.io.FileReader;
-// import java.io.FileWriter;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -36,14 +28,6 @@ import android.app.Activity;
 import android.view.View;
 // import android.view.View.OnClickListener;
 import android.view.KeyEvent;
-// import android.view.Menu;
-// import android.view.MenuItem;
-// import android.view.SubMenu;
-// import android.view.MenuInflater;
-// import android.content.res.ColorStateList;
-
-// import android.location.LocationManager;
-
 
 // import android.widget.ArrayAdapter;
 import android.widget.TextView;
@@ -54,9 +38,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 // import android.preference.PreferenceManager;
 
-// import android.provider.MediaStore;
-// import android.graphics.Bitmap;
-// import android.graphics.Bitmap.CompressFormat;
+import android.util.Log;
 
 public class PhotoActivity extends Activity
                            implements OnItemClickListener, ILister
@@ -65,14 +47,12 @@ public class PhotoActivity extends Activity
   private DataHelper mApp_mData;
 
   private ListView mList;
-  // private int mListPos = -1;
-  // private int mListTop = 0;
-  private PhotoAdapter   mDataAdapter;
+  private PhotoAdapter mDataAdapter;
   private long mShotId = -1;   // id of the shot
 
   private String mSaveData = "";
   private TextView mSaveTextView = null;
-  private PhotoInfo mSavePhoto = null;
+  // private PhotoInfo mSavePhoto = null;
 
   String mPhotoStation;
   String mPhotoComment;
@@ -124,15 +104,15 @@ public class PhotoActivity extends Activity
   private void updatePhotoList( List< PhotoInfo > list )
   {
     // TDLog.Log(TDLog.LOG_PHOTO, "updatePhotoList size " + list.size() );
-    mDataAdapter.clear();
-    mList.setAdapter( mDataAdapter );
+    // Log.v("DistoX", "photo activity, update photo list " );
+    // Log.v("DistoX", "photo activity, update photo list. size " + list.size() );
     if ( list.size() == 0 ) {
       TDToast.make( R.string.no_photos );
       finish();
     }
-    for ( PhotoInfo item : list ) {
-      mDataAdapter.add( item );
-    }
+    mDataAdapter.clear();
+    for ( PhotoInfo info : list ) mDataAdapter.add( info );
+    // mList.setAdapter( mDataAdapter );
   }
 
   // ---------------------------------------------------------------
@@ -150,14 +130,18 @@ public class PhotoActivity extends Activity
     //   return;
     // }
     // // setListPos( position  );
-    startPhotoDialog( (TextView)view, position );
+    // Log.v("DistoX", "photo activity click item. pos " + position );
+    startPhotoDialog( position );
   }
 
-  private void startPhotoDialog( TextView tv, int pos )
+  private void startPhotoDialog( int pos )
   {
-     mSavePhoto = mDataAdapter.get(pos);
-     String filename = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mSavePhoto.id) );
-     (new PhotoEditDialog( this, this, mApp, mSavePhoto, filename )).show();
+    PhotoInfo info = mDataAdapter.get(pos); // mSavePhoto
+    // String filename = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(info.id) );
+    // Log.v("DistoX", "Photo file <" + filename + "> id " + info.id );
+    PhotoEditDialog ped = (new PhotoEditDialog( this, this, info ));
+    ped.show();
+    // Log.v("DistoX", "photo activity started photo edit dialog");
   }
 
 
@@ -170,7 +154,7 @@ public class PhotoActivity extends Activity
     setContentView(R.layout.main_photo);
     mApp = (TopoDroidApp) getApplication();
     mApp_mData = TopoDroidApp.mData;
-    mDataAdapter = new PhotoAdapter( this, R.layout.row, new ArrayList< PhotoInfo >() );
+    mDataAdapter = new PhotoAdapter( this, R.layout.row, new ArrayList<PhotoInfo>() );
 
     mList = (ListView) findViewById(R.id.list);
     mList.setAdapter( mDataAdapter );
@@ -179,6 +163,20 @@ public class PhotoActivity extends Activity
 
     updateDisplay( );
   }
+
+  // @Override
+  // public void onPause()
+  // {
+  //   // Log.v("DistoX", "photo activity on pause");
+  //   super.onPause();
+  // }
+
+  // @Override
+  // public void onResume()
+  // {
+  //   // Log.v("DistoX", "photo activity on resume");
+  //   super.onResume();
+  // }
 
   // ------------------------------------------------------------------
 
@@ -212,6 +210,7 @@ public class PhotoActivity extends Activity
   @Override
   public boolean onKeyDown( int code, KeyEvent event )
   {
+    // Log.v("DistoX", "photo activity on key down, code: " + code );
     switch ( code ) {
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
         String help_page = getResources().getString( R.string.PhotoActivity );

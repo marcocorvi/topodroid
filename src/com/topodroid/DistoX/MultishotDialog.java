@@ -35,6 +35,7 @@ import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 // import android.widget.Toast;
 
 import android.view.View;
@@ -45,6 +46,7 @@ import android.view.View;
 
 class MultishotDialog extends MyDialog
                       implements View.OnClickListener
+			       , MyColorPicker.IColorChanged
 {
   private final ShotWindow mParent;
   private List<DBlock> mBlks;
@@ -59,7 +61,9 @@ class MultishotDialog extends MyDialog
   private TextView mTVstrikeDip;
   
   private Button   mButtonRenumber;
-  private Button   mButtonHighlight;
+  // private Button   mButtonHighlight; FIXME_HIGHLIGHT
+  private Button   mButtonColor;
+  private Button   mButtonSplays;
   private Button   mButtonBedding;
   private Button   mButtonBack;
 
@@ -120,7 +124,9 @@ class MultishotDialog extends MyDialog
     // layout4.setMinimumHeight( size + 20 );
 
     mButtonRenumber  = (Button) findViewById(R.id.renumber );
-    mButtonHighlight = (Button) findViewById(R.id.highlight );
+    // mButtonHighlight = (Button) findViewById(R.id.highlight ); FIXME_HIGHLIGHT
+    mButtonColor     = (Button) findViewById(R.id.color );
+    mButtonSplays    = (Button) findViewById(R.id.splays );
     mButtonBedding   = (Button) findViewById(R.id.bedding );
     mButtonBack      = (Button) findViewById(R.id.btn_back );
 
@@ -141,9 +147,13 @@ class MultishotDialog extends MyDialog
       }
     }
     if ( highlight ) {
-      mButtonHighlight.setOnClickListener( this );
+      // mButtonHighlight.setOnClickListener( this ); FIXME_HIGHIGHT
+      mButtonColor.setOnClickListener( this );
+      mButtonSplays.setOnClickListener( this );
     } else {
-      ((LinearLayout) findViewById( R.id.layout_highlight )).setVisibility( View.GONE );
+      // ((LinearLayout) findViewById( R.id.layout_highlight )).setVisibility( View.GONE ); FIXME_HIGHIGHT
+      ((LinearLayout) findViewById( R.id.layout_color )).setVisibility( View.GONE );
+      ((LinearLayout) findViewById( R.id.layout_splays )).setVisibility( View.GONE );
     }
 
     String from = mBlk.mFrom;
@@ -195,8 +205,22 @@ class MultishotDialog extends MyDialog
       //
       // FROM and TO can be empty, but this means no renumbering is made (anly station assignment to first block)
       mParent.renumberBlocks( mBlks, from, to );
-    } else if ( b == mButtonHighlight ) {
-      mParent.highlightBlocks( mBlks );
+    // } else if ( b == mButtonHighlight ) { FIXME_HIGHLIGHT
+    //   mParent.highlightBlocks( mBlks );
+    } else if ( b == mButtonColor ) {
+      hide();
+      (new MyColorPicker( mContext, this, 0 )).show();
+      return;
+    } else if ( b == mButtonSplays ) {
+      int leg_type = LegType.NORMAL;
+      if ( ((RadioButton)findViewById( R.id.rb_xsplay )).isChecked() ) {
+        leg_type = LegType.XSPLAY;
+      } else if ( ((RadioButton)findViewById( R.id.rb_hsplay )).isChecked() ) {
+        leg_type = LegType.HSPLAY;
+      } else if ( ((RadioButton)findViewById( R.id.rb_vsplay )).isChecked() ) {
+        leg_type = LegType.VSPLAY;
+      }
+      mParent.updateSplaysLegType( mBlks, leg_type );
     } else if ( b == mButtonBedding ) {
       mTVstrikeDip.setText( mParent.computeBedding( mBlks ) );
       return;
@@ -210,6 +234,13 @@ class MultishotDialog extends MyDialog
   {
     // if ( CutNPaste.dismissPopup() ) return;
     if ( MyKeyboard.close( mKeyboard ) ) return;
+    dismiss();
+  }
+
+  @Override
+  public void colorChanged( int color )
+  {
+    mParent.colorBlocks( mBlks, color );
     dismiss();
   }
 

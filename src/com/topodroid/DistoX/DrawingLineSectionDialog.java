@@ -255,6 +255,7 @@ class DrawingLineSectionDialog extends MyDialog
     //   default: // R.id.button_cancel
     //     /* nothing */
     // }
+    if ( mTdImage != null ) mTdImage.recycleImages();
     dismiss();
   }
 
@@ -270,6 +271,7 @@ class DrawingLineSectionDialog extends MyDialog
       // if pressed BACK and the section did not exist, tell the parent to delete the "section" line
       mParent.deleteLine( mLine );
     }
+    if ( mTdImage != null ) mTdImage.recycleImages();
     dismiss();
   }
 

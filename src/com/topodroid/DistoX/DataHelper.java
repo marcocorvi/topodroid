@@ -211,42 +211,34 @@ class DataHelper extends DataSetObservable
      }
    }
 
-   private void fillBlock( long sid, DBlock block, Cursor cursor )
+   private void fillBlock( long sid, DBlock blk, Cursor cursor )
    {
      long leg = cursor.getLong(11);
-     block.setId( cursor.getLong(0), sid );
-     block.setBlockName( cursor.getString(1), cursor.getString(2), (leg == LegType.BACK) );  // from - to
-     block.mLength       = (float)( cursor.getDouble(3) );  // length [meters]
-     // block.setBearing( (float)( cursor.getDouble(4) ) ); 
-     block.mBearing      = (float)( cursor.getDouble(4) );  // bearing [degrees]
-     float clino         = (float)( cursor.getDouble(5) );  // clino [degrees], or depth [meters]
-     block.mAcceleration = (float)( cursor.getDouble(6) );
-     block.mMagnetic     = (float)( cursor.getDouble(7) );
-     block.mDip          = (float)( cursor.getDouble(8) );
+     blk.setId( cursor.getLong(0), sid );
+     blk.setBlockName( cursor.getString(1), cursor.getString(2), (leg == LegType.BACK) );  // from - to
+     blk.mLength       = (float)( cursor.getDouble(3) );  // length [meters]
+     // blk.setBearing( (float)( cursor.getDouble(4) ) ); 
+     blk.mBearing      = (float)( cursor.getDouble(4) );  // bearing [degrees]
+     float clino       = (float)( cursor.getDouble(5) );  // clino [degrees], or depth [meters]
+     blk.mAcceleration = (float)( cursor.getDouble(6) );
+     blk.mMagnetic     = (float)( cursor.getDouble(7) );
+     blk.mDip          = (float)( cursor.getDouble(8) );
 
      if ( TDInstance.datamode == SurveyInfo.DATAMODE_NORMAL ) {
-       block.mClino = clino;
-       block.mDepth = 0;
+       blk.mClino = clino;
+       blk.mDepth = 0;
      } else { // DATAMODE_DIVING
-       block.mClino = 0;
-       block.mDepth = clino;
+       blk.mClino = 0;
+       blk.mDepth = clino;
      }
      
-     block.setExtend( (int)(cursor.getLong(9) ), (float)( cursor.getDouble(16) ) );
-     block.resetFlag( cursor.getLong(10) );
-     if ( leg == LegType.EXTRA ) {
-       block.setBlockType( DBlock.BLOCK_SEC_LEG );
-     } else if ( leg == LegType.XSPLAY ) {
-       block.setBlockType( DBlock.BLOCK_X_SPLAY );
-     } else if ( leg == LegType.BACK ) {
-       block.setBlockType( DBlock.BLOCK_BACK_LEG );
-     }
-     // Log.v("DistoXX", "A7 fill block " + cursor.getLong(0) + " leg " + leg + " flag " + cursor.getLong(10) );
-     block.mComment  = cursor.getString(12);
-     block.mShotType = (int)cursor.getLong(13);
-     block.mTime     = cursor.getLong(14);
-     int color       = (int)cursor.getLong(15);
-     block.mPaint    = ( color == 0 )? null : BrushManager.makePaint( color );
+     blk.setExtend( (int)(cursor.getLong(9) ), (float)( cursor.getDouble(16) ) );
+     blk.resetFlag( cursor.getLong(10) );
+     blk.setBlockType( (int)leg );
+     blk.mComment  = cursor.getString(12);
+     blk.mShotType = (int)cursor.getLong(13);
+     blk.mTime     = cursor.getLong(14);
+     blk.setPaint( (int)cursor.getLong(15) ); // color
    }
    
 
@@ -1137,24 +1129,36 @@ class DataHelper extends DataSetObservable
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch ( SQLiteException e ) { logError("shot " + id + " leg", e );
     } finally { myDB.endTransaction(); }
-   
   }
 
-  // FIXME_X_SPLAY
-  long updateSplayLeg( long id, long sid, boolean forward )
-  {
-    // if ( myDB == null ) return;
-    // get the shot sid/id
-    DBlock blk = selectShot( id, sid );
-    if ( blk.isPlainSplay() ) {
-      updateShotLeg( id, sid, LegType.XSPLAY, forward );
-      return LegType.XSPLAY;
-    } else if ( blk.isXSplay() ) {
-      updateShotLeg( id, sid, LegType.NORMAL, forward );
-      return LegType.NORMAL;
-    }
-    return LegType.INVALID;
-  }
+  // void updateShotLeg( long id, long sid, long leg, boolean forward )
+  // {
+  //   // Log.v("DistoXX", "A2 update shot leg. id " + id + " leg " + leg ); 
+  //   StringWriter sw = new StringWriter();
+  //   PrintWriter pw = new PrintWriter( sw );
+  //   pw.format( Locale.US, "UPDATE shots SET leg=%d WHERE surveyId=%d AND id=%d", leg, sid, id );
+  //   if ( doExecShotSQL( id, sw ) ) {
+  //     if ( forward && mListeners != null ) { // synchronized( mListeners )
+  //       mListeners.onUpdateShotLeg( id, sid, leg );
+  //     }
+  //   } 
+  // }
+
+  // FIXME_X2_SPLAY
+  // long updateSplayLeg( long id, long sid, boolean forward )
+  // {
+  //   // if ( myDB == null ) return;
+  //   // get the shot sid/id
+  //   DBlock blk = selectShot( id, sid );
+  //   if ( blk.isPlainSplay() ) {
+  //     updateShotLeg( id, sid, LegType.XSPLAY, forward );
+  //     return LegType.XSPLAY;
+  //   } else if ( blk.isXSplay() ) {
+  //     updateShotLeg( id, sid, LegType.NORMAL, forward );
+  //     return LegType.NORMAL;
+  //   }
+  //   return LegType.INVALID;
+  // }
 
   void updateShotExtend( long id, long sid, long extend, float stretch, boolean forward )
   {

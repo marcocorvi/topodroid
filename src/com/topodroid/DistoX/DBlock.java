@@ -47,7 +47,7 @@ class DBlock
   // private int    mPos;     // position in the list
   int    mVisible; // whether is visible in the list
   boolean mMultiSelected; // whether the block is in multiselect list
-  Paint  mPaint;
+  private Paint  mPaint;
 
   long   mId;
   long   mTime;
@@ -72,29 +72,55 @@ class DBlock
   boolean mMultiBad; // whether it disagree with siblings
   private float mStretch;
 
-  static final int BLOCK_BLANK      = 0;
-  static final int BLOCK_MAIN_LEG   = 1; // primary leg shot
-  static final int BLOCK_SPLAY      = 2;
-  static final int BLOCK_SEC_LEG    = 3; // additional shot of a centerline leg
-  static final int BLOCK_BLANK_LEG  = 4; // blank centerline leg-shot
-  static final int BLOCK_X_SPLAY    = 5; // FIXME_X_SPLAY cross splay
-  static final int BLOCK_BACK_LEG   = 6; // 
+  static final private int BLOCK_BLANK      = 0;
+  static final private int BLOCK_MAIN_LEG   = 1; // primary leg shot
+  static final private int BLOCK_SEC_LEG    = 2; // additional shot of a centerline leg
+  static final private int BLOCK_BLANK_LEG  = 3; // blank centerline leg-shot
+  static final private int BLOCK_BACK_LEG   = 4; // 
+  // splays must come last
+  static final private int BLOCK_SPLAY      = 5;
+  static final private int BLOCK_X_SPLAY    = 6; // FIXME_X_SPLAY cross splay
+  static final private int BLOCK_H_SPLAY    = 7; // FIXME_H_SPLAY horizontal splay
+  static final private int BLOCK_V_SPLAY    = 8; // FIXME_V_SPLAY vertical splay
+
+  static final long legOfBlockType[] = {
+    LegType.NORMAL,
+    LegType.NORMAL,
+    LegType.EXTRA,
+    LegType.NORMAL, // BLANK_LEG
+    LegType.BACK,
+    LegType.NORMAL, // SPLAY
+    LegType.XSPLAY,
+    LegType.HSPLAY,
+    LegType.VSPLAY,
+  };
+
+  static final int blockOfSplayLegType[] = {
+    BLOCK_SPLAY,
+    -1, // BLOCK_SEC_LEG, // should never occor
+    BLOCK_X_SPLAY,
+    -1, //  BLOCK_BACK_LEG, // should never occor
+    BLOCK_H_SPLAY,
+    BLOCK_V_SPLAY,
+  };
 
   private static final int[] colors = {
     TDColor.LIGHT_PINK,   // 0 blank
     TDColor.WHITE,        // 1 midline
-    TDColor.LIGHT_BLUE,   // 2 splay
     TDColor.LIGHT_GRAY,   // 3 sec. leg
     TDColor.VIOLET,       // 4 blank leg
-    TDColor.GREEN,        // 5 FIXME_X_SPLAY X splay
     TDColor.LIGHT_YELLOW, // 6 back leg
+    TDColor.LIGHT_BLUE,   // 2 splay
+    TDColor.GREEN,        // 5 FIXME_X_SPLAY X splay
+    TDColor.DARK_BLUE,    // 7 H_SPLAY
+    TDColor.DEEP_BLUE,    // 8 V_SPLAY
     TDColor.GREEN
   };
 
   static final long FLAG_SURVEY     =  0; // flags
   static final long FLAG_SURFACE    =  1;
   static final long FLAG_DUPLICATE  =  2;
-  static final long FLAG_COMMENTED  =  4;
+  static final long FLAG_COMMENTED  =  4; // unused // FIXME_COMMENTED
   static final long FLAG_NO_PLAN    =  8;
   static final long FLAG_NO_PROFILE = 16;
   // static final long FLAG_BACKSHOT   = 32;
@@ -102,7 +128,7 @@ class DBlock
   boolean isSurvey()    { return mFlag == FLAG_SURVEY; }
   boolean isSurface()   { return (mFlag & FLAG_SURFACE)    == FLAG_SURFACE; }
   boolean isDuplicate() { return (mFlag & FLAG_DUPLICATE)  == FLAG_DUPLICATE; }
-  boolean isCommented() { return (mFlag & FLAG_COMMENTED)  == FLAG_COMMENTED; }
+  boolean isCommented() { return (mFlag & FLAG_COMMENTED)  == FLAG_COMMENTED; } // FIXME_COMMENTED
   boolean isNoPlan()    { return (mFlag & FLAG_NO_PLAN)    == FLAG_NO_PLAN; }
   boolean isNoProfile() { return (mFlag & FLAG_NO_PROFILE) == FLAG_NO_PROFILE; }
   // boolean isBackshot()  { return (mFlag & FLAG_BACKSHOT)   == FLAG_BACKSHOT; }
@@ -110,7 +136,7 @@ class DBlock
   // static boolean isSurvey(int flag) { return flag == FLAG_SURVEY; }
   static boolean isSurface(long flag)   { return (flag & FLAG_SURFACE)    == FLAG_SURFACE; }
   static boolean isDuplicate(long flag) { return (flag & FLAG_DUPLICATE)  == FLAG_DUPLICATE; }
-  static boolean isCommented(long flag) { return (flag & FLAG_COMMENTED)  == FLAG_COMMENTED; }
+  static boolean isCommented(long flag) { return (flag & FLAG_COMMENTED)  == FLAG_COMMENTED; } // FIXME_COMMENTED
   static boolean isNoPlan(long flag)    { return (flag & FLAG_NO_PLAN)    == FLAG_NO_PLAN; }
   static boolean isNoProfile(long flag) { return (flag & FLAG_NO_PROFILE) == FLAG_NO_PROFILE; }
   // static boolean isBackshot(int flag) { return (flag & FLAG_BACKSHOT) == FLAG_BACKSHOT; }
@@ -124,30 +150,49 @@ class DBlock
   int getBlockType() { return mBlockType; }
 
   void setTypeBlankLeg( ) { if ( mBlockType == BLOCK_BLANK ) mBlockType = BLOCK_BLANK_LEG; }
+  void setTypeSecLeg()  { mBlockType = BLOCK_SEC_LEG; }
+  void setTypeBackLeg() { mBlockType = BLOCK_BACK_LEG; }
+  // void setTypeMainLeg()  { mBlockType = BLOCK_MAIN_LEG; }
+  void setTypeSplay()   { mBlockType = BLOCK_SPLAY; }
+
   boolean isTypeBlank() { return mBlockType == BLOCK_BLANK || mBlockType == BLOCK_BLANK_LEG; }
   static boolean isTypeBlank( int t ) { return t == BLOCK_BLANK || t == BLOCK_BLANK_LEG; }
-
-  static boolean isSplay( int t ) { return t == BLOCK_SPLAY || t == BLOCK_X_SPLAY; }
-
   boolean isBlank()      { return mBlockType == BLOCK_BLANK; }
-  boolean isSplay()      { return mBlockType == BLOCK_SPLAY || mBlockType == BLOCK_X_SPLAY; }
-  boolean isPlainSplay() { return mBlockType == BLOCK_SPLAY; }
-  boolean isXSplay()     { return mBlockType == BLOCK_X_SPLAY; }
   boolean isLeg()        { return mBlockType == BLOCK_MAIN_LEG || mBlockType == BLOCK_BACK_LEG; }
   boolean isMainLeg()    { return mBlockType == BLOCK_MAIN_LEG; }
   boolean isBackLeg()    { return mBlockType == BLOCK_BACK_LEG; }
   boolean isSecLeg()     { return mBlockType == BLOCK_SEC_LEG; }
 
-  long getLegType()
-  {
-    if ( mBlockType == BLOCK_SEC_LEG )  return LegType.EXTRA;
-    if ( mBlockType == BLOCK_X_SPLAY )  return LegType.XSPLAY;
-    if ( mBlockType == BLOCK_BACK_LEG ) return LegType.BACK;
-    // if ( mBlockType == BLOCK_BLANK    ) return LegType.INVALID;
-    return LegType.NORMAL;
-  }
+  static boolean isSplay( int t ) { return t >= BLOCK_SPLAY; }
+  boolean isSplay()      { return mBlockType >= BLOCK_SPLAY; }
+  boolean isOtherSplay() { return mBlockType >  BLOCK_SPLAY; }
+  boolean isPlainSplay() { return mBlockType == BLOCK_SPLAY; }
+  boolean isXSplay()     { return mBlockType == BLOCK_X_SPLAY; }
+  boolean isHSplay()     { return mBlockType == BLOCK_H_SPLAY; }
+  boolean isVSplay()     { return mBlockType == BLOCK_V_SPLAY; }
 
-  void setBlockType( int type ) { mBlockType = type; }
+  long getLegType() { return legOfBlockType[ mBlockType ]; }
+  // {
+  //   if ( mBlockType == BLOCK_SEC_LEG )  return LegType.EXTRA;
+  //   if ( mBlockType == BLOCK_X_SPLAY )  return LegType.XSPLAY;
+  //   if ( mBlockType == BLOCK_H_SPLAY )  return LegType.HSPLAY;
+  //   if ( mBlockType == BLOCK_V_SPLAY )  return LegType.VSPLAY;
+  //   if ( mBlockType == BLOCK_BACK_LEG ) return LegType.BACK;
+  //   // if ( mBlockType == BLOCK_BLANK    ) return LegType.INVALID;
+  //   return LegType.NORMAL;
+  // }
+
+  void setBlockType( int leg_type )
+  {
+     switch ( leg_type ) {
+       case LegType.EXTRA:  mBlockType = BLOCK_SEC_LEG;  break;
+       case LegType.XSPLAY: mBlockType = BLOCK_X_SPLAY;  break;
+       case LegType.BACK:   mBlockType = BLOCK_BACK_LEG; break;
+       case LegType.HSPLAY: mBlockType = BLOCK_H_SPLAY;  break;
+       case LegType.VSPLAY: mBlockType = BLOCK_V_SPLAY;  break;
+       default: /* nothing */
+     }
+  }
 
   // static int getExtend( int ext ) { return ( ext < EXTEND_UNSET )? ext : ext - EXTEND_FVERT; }
   static int getExtend( int ext ) { return ext; }
@@ -193,6 +238,22 @@ class DBlock
   private boolean isTimeRecent( long time ) { return mId >= TDInstance.secondLastShotId && (time-mTime)< TDSetting.mRecentTimeout; }
 
   boolean isMultiBad() { return mMultiBad; }
+
+  Paint getPaint() { return mPaint; }
+
+  int getPaintColor() { return (mPaint==null)? 0 : mPaint.getColor(); }
+
+  void clearPaint() { mPaint = null; }
+
+  void setPaint( int color )
+  {
+    if ( color == 0 ) { mPaint = null; return; }
+    if ( mPaint == null ) { 
+      mPaint = BrushManager.makePaint( color );
+    } else {
+      mPaint.setColor( color );
+    }
+  }
 
   // used by PocketTopo parser only
   DBlock( String f, String t, float d, float b, float c, float r, int e, int type, int shot_type )
@@ -389,7 +450,7 @@ class DBlock
       pw.format( "]\u00B2" );     // superscript 2
     } else if ( isSurface() ) {
       pw.format( "]\u00F7" );     // division sign
-    // } else if ( isCommented() ) {
+    // } else if ( isCommented() ) { // commented = gray background
     //   pw.format( "^" );
     // } else if ( isBackshot() ) {
     //   pw.format( "+" );

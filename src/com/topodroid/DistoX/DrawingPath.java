@@ -357,37 +357,51 @@ class DrawingPath extends RectF
   // setSplayExtend is used for the plan view
   // extend = cos(angle_splay-leg)
   // called by DrawingCommandManager
-  void setSplayPaintExtend( DBlock blk, float extend )
+  void setSplayPaintPlan( DBlock blk, float extend, Paint h_paint, Paint v_paint )
   {
     if ( blk == null ) {
       mPaint = BrushManager.fixedSplayPaint;
     } else {
-      if ( blk.isCommented() ) {
-        mPaint = BrushManager.fixedSplay0Paint;
-      } else if ( blk.isXSplay() ) {
-        mPaint = BrushManager.fixedGreenPaint;
-      } else {
-        if (extend >= 0 && extend < TDSetting.mCosHorizSplay) {
-          mPaint = BrushManager.fixedSplay4Paint;
-        } else if (extend < 0 && extend > -TDSetting.mCosHorizSplay) {
-          mPaint = BrushManager.fixedSplay3Paint;
-        } else {
-          mPaint = BrushManager.fixedSplayPaint;
-        }
-      }
-    }
-  }
+     // if ( blk.isHighlighted() ) {
+     //   mPaint = BrushManager.highlightPaint;
+     // } else
+     if ( blk.isCommented() ) { // FIXME_COMMENTED
+       mPaint = BrushManager.fixedSplay0Paint;
+     } else if ( blk.isXSplay() ) {
+       mPaint = BrushManager.fixedGreenPaint;
+     } else if ( blk.isHSplay() ) {
+       mPaint = h_paint;
+     } else if ( blk.isVSplay() ) {
+       mPaint = v_paint;
+     } else {
+       if (extend >= 0 && extend < TDSetting.mCosHorizSplay) {
+         mPaint = BrushManager.fixedSplay4Paint;
+       } else if (extend < 0 && extend > -TDSetting.mCosHorizSplay) {
+         mPaint = BrushManager.fixedSplay3Paint;
+       } else {
+         mPaint = BrushManager.fixedSplayPaint;
+       }
+     }
+   }
+ }
   
   // setSplayClino is used for the profile view
-  void setSplayPaintClino( DBlock blk )
+  void setSplayPaintProfile( DBlock blk, Paint h_paint, Paint v_paint )
   {
     if ( blk == null ) {
       mPaint= BrushManager.fixedSplayPaint;
     } else {
-      if ( blk.isCommented() ) {
+      // if ( blk.isHighlighted() ) {
+      //   mPaint = BrushManager.highlightPaint;
+      // } else
+      if ( blk.isCommented() ) { // FIXME_COMMENTED
         mPaint= BrushManager.fixedSplay0Paint;
       } else if ( blk.isXSplay() ) {
         mPaint= BrushManager.fixedGreenPaint;
+      } else if ( blk.isHSplay() ) {
+        mPaint = h_paint;
+      } else if ( blk.isVSplay() ) {
+        mPaint = v_paint;
       } else {
         if (blk.mClino > TDSetting.mVertSplay) {
           mPaint= BrushManager.fixedSplay4Paint;
@@ -407,32 +421,26 @@ class DrawingPath extends RectF
    */
   void drawPath( Path path, Canvas canvas )
   {
-    // if ( mType == DRAWING_PATH_AREA ) {
-    //   if ( mPaint != null ) {
-    //     canvas.save();
-    //     canvas.clipPath( path );
-    //     canvas.drawPaint( mPaint );
-    //     canvas.drawPath( path, mPaint );
-    //     canvas.restore();
-    //   }
-    // } else {
-      if (    mType == DRAWING_PATH_SPLAY  // FIXME_X_SPLAY
-           && mBlock != null ) {
-	if ( mBlock.isRecent( ) ) { // if ( mBlock.isTimeRecent( System.currentTimeMillis()/1000 ) ) 
-          if ( mBlock.isPlainSplay() && BrushManager.lightBluePaint != null ) {
-            canvas.drawPath( path, BrushManager.lightBluePaint );
-          } else if ( mBlock.isXSplay() && BrushManager.fixedSplay2Paint != null ) {
-            canvas.drawPath( path, BrushManager.fixedSplay2Paint );
-          }
-	} else if ( mBlock.mPaint != null ) {
-          canvas.drawPath( path, mBlock.mPaint );
-	} else if ( mPaint != null ) {
-          canvas.drawPath( path, mPaint );
-	}
-      } else if ( mPaint != null ) {
-        canvas.drawPath( path, mPaint );
+    if (    mType == DRAWING_PATH_SPLAY  // FIXME_X_SPLAY
+         && mBlock != null ) {
+      if ( mBlock.isRecent( ) ) { // if ( mBlock.isTimeRecent( System.currentTimeMillis()/1000 ) ) 
+        // if ( mBlock.isPlainSplay() && BrushManager.lightBluePaint != null ) {
+        //   canvas.drawPath( path, BrushManager.lightBluePaint );
+        // } else if ( mBlock.isXSplay() && BrushManager.fixedSplay2Paint != null ) {
+        //   canvas.drawPath( path, BrushManager.fixedSplay2Paint );
+        // }
+        // if ( BrushManager.lightBluePaint != null ) {
+          canvas.drawPath( path, BrushManager.lightBluePaint );
+          return;
+	// }
       }
-    // }
+      Paint paint = mBlock.getPaint();
+      if ( paint != null ) {
+        canvas.drawPath( path, paint );
+        return;
+      } 
+    } 
+    if ( mPaint != null ) canvas.drawPath( path, mPaint );
   }
 
 

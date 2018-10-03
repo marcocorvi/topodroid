@@ -108,23 +108,31 @@ class DrawingCommandManager
   static void setDisplayMode( int mode ) { mDisplayMode = mode; }
   static int getDisplayMode( ) { return mDisplayMode; }
 
+  /* FIXME_HIGHLIGHT
   void highlights( TopoDroidApp app ) 
   {
-    synchronized( mSplaysStack ) {
-      for ( DrawingPath path : mSplaysStack ) {
-        if ( app.hasHighlightedId( path.mBlock.mId ) ) { 
-          path.setPathPaint( BrushManager.errorPaint );
-        }
-      }
-    }
-    synchronized( mLegsStack ) {
-      for ( DrawingPath path : mLegsStack ) {
-        if ( app.hasHighlightedId( path.mBlock.mId ) ) { 
-          path.setPathPaint( BrushManager.errorPaint );
-        }
+    synchronized( mSplaysStack ) { highlightsSplays( app ); }
+    synchronized( mLegsStack )   { highlightsLegs( app ); }
+  }
+
+  private void highlightsSplays( TopoDroidApp app )
+  {
+    for ( DrawingPath path : mSplaysStack ) {
+      if ( app.hasHighlightedId( path.mBlock.mId ) ) { 
+        path.setPathPaint( BrushManager.errorPaint );
       }
     }
   }
+
+  private void highlightsLegs( TopoDroidApp app )
+  {
+    for ( DrawingPath path : mLegsStack ) {
+      if ( app.hasHighlightedId( path.mBlock.mId ) ) { 
+        path.setPathPaint( BrushManager.errorPaint );
+      }
+    }
+  }
+  */
 
   void setSplayAlpha( boolean on ) 
   {
@@ -951,7 +959,7 @@ class DrawingCommandManager
   // } 
 
   // FIXME LEGS_SPLAYS
-  void resetFixedPaint( boolean profile, Paint paint )
+  void resetFixedPaint( TopoDroidApp app, boolean profile, Paint paint )
   {
     if( mLegsStack != null ) { 
       synchronized( mLegsStack ) {
@@ -962,6 +970,7 @@ class DrawingCommandManager
             path.setPathPaint( paint );
           }
         }
+	// highlightsLegs( app ); // FIXME_HIGHLIGHT
       }
     }
     if( mSplaysStack != null ) { 
@@ -971,13 +980,18 @@ class DrawingCommandManager
           final DrawingPath path = (DrawingPath) i.next();
           if ( path.mBlock == null || ( ! path.mBlock.mMultiBad ) ) {
             // path.setPathPaint( paint );
-	    if ( TDSetting.mDashSplay || profile ) {
-              path.setSplayPaintClino( path.mBlock );
+	    if ( profile ) {
+	      if ( TDSetting.mDashSplay ) {
+                path.setSplayPaintPlan( path.mBlock, path.mExtend, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+	      } else {
+                path.setSplayPaintProfile( path.mBlock, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+	      }
 	    } else {
-              path.setSplayPaintExtend( path.mBlock, path.mExtend );
+              path.setSplayPaintPlan( path.mBlock, path.mExtend, BrushManager.deepBluePaint, BrushManager.darkBluePaint );
 	    }
           }
         }
+	// highlightsSplays( app ); // FIXME_HIGHLIGHT
       }
     }
   }

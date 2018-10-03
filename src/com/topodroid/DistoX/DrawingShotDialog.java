@@ -17,7 +17,7 @@ import android.os.Bundle;
 import android.content.Context;
 // import android.content.Intent;
 
-// import android.graphics.Paint;
+import android.graphics.Paint;
 
 import android.view.View;
 // import android.view.ViewGroup.LayoutParams;
@@ -33,7 +33,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 // import android.text.InputType;
 import android.inputmethodservice.KeyboardView;
 
-// import android.util.Log;
+import android.util.Log;
 
 class DrawingShotDialog extends MyDialog
                                implements View.OnClickListener
@@ -58,10 +58,13 @@ class DrawingShotDialog extends MyDialog
   private MyCheckBox mRBdup  = null;
   private MyCheckBox mRBsurf = null;
   private MyCheckBox mRBcmtd = null;
+  private MyCheckBox mCBxSplay = null;
+
   private CheckBox mCBfrom   = null;
   private CheckBox mCBto     = null;
   // private CheckBox mRBbackshot;
   private Button mRBwalls;
+
 
   private final DrawingWindow mParent;
   private DBlock mBlock;
@@ -82,11 +85,10 @@ class DrawingShotDialog extends MyDialog
     super(context, R.string.DrawingShotDialog );
     mParent  = parent;
     mBlock   = shot.mBlock;
-    mColor   = ( mBlock.mPaint == null )? 0 : mBlock.mPaint.getColor();
+    mColor   = mBlock.getPaintColor();
     mPath    = shot;
     mFlag    = flag;
     mStretch = mBlock.getStretch();
-    // Log.v("DistoX", "FLAG " + mFlag + " FROM " + mBlock.mFrom + " TO " + mBlock.mTo );
   }
 
   @Override
@@ -167,6 +169,12 @@ class DrawingShotDialog extends MyDialog
       mRBdup.setOnClickListener( this );
       mRBsurf.setOnClickListener( this );
       mRBcmtd.setOnClickListener( this );
+      if ( TDLevel.overAdvanced && mBlock.isOtherSplay() ) {
+        mCBxSplay = new MyCheckBox( mContext, size, R.drawable.iz_xsplays_ok, R.drawable.iz_ysplays_no );
+        mCBxSplay.setChecked( false );
+        layout3.addView( mCBxSplay, lp );
+        mCBxSplay.setOnClickListener( this );
+      }
     } else {
       layout3.setVisibility( View.GONE );
     }
@@ -247,7 +255,7 @@ class DrawingShotDialog extends MyDialog
           mRBdup.setChecked( true );
         } else if ( mBlock.isSurface() ) {
           mRBsurf.setChecked( true );
-        } else if ( mBlock.isCommented() ) {
+        } else if ( mBlock.isCommented() ) { // FIXME_COMMENTED
           mRBcmtd.setChecked( true );
         // } else if ( mBlock.isBackshot() ) {
         //   mRBbackshot.setChecked( true );
@@ -325,6 +333,9 @@ class DrawingShotDialog extends MyDialog
         mRBdup.setState( false );
         mRBsurf.setState( false );
       }
+    } else if ( TDLevel.overNormal && b == mCBxSplay ) {
+      mCBxSplay.toggleState();
+
     // } else if ( b == mRBbackshot ) {
     //   mRBdup.setChecked( false );
     //   mRBsurf.setChecked( false );
@@ -371,6 +382,12 @@ class DrawingShotDialog extends MyDialog
         // else if ( mRBbackshot.isChecked() ) { flag = DBlock.FLAG_BACKSHOT; }
         else /* if ( mRBsurvey.isChecked() ) */ { flag = DBlock.FLAG_SURVEY; }
         mParent.updateBlockFlag( mBlock, flag, mPath ); // equal flag is checked by the method
+      }
+
+      if ( TDLevel.overAdvanced && mCBxSplay != null ) {
+	if ( mCBxSplay.isChecked() ) {
+          mParent.clearBlockSplayLeg( mBlock, mPath );
+	}
       }
 
       String from = mETfrom.getText().toString().trim();

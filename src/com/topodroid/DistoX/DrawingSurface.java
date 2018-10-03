@@ -230,6 +230,7 @@ class DrawingSurface extends SurfaceView
     return commandManager.getIntersectionShot(p1, p2);
   }
 
+  /* FIXME_HIGHLIGHT
   void highlights( TopoDroidApp app ) { 
     // Log.v("DistoX", "surface [3] highlight: nr. " + app.getHighlightedSize() );
     if ( mCommandManager2 != null ) {
@@ -237,6 +238,7 @@ class DrawingSurface extends SurfaceView
       mCommandManager2.highlights( app );
     }
   }
+  */
 
   // -----------------------------------------------------------
 
@@ -421,10 +423,10 @@ class DrawingSurface extends SurfaceView
     return st;
   }
 
-  void resetFixedPaint( Paint paint )
+  void resetFixedPaint( TopoDroidApp app, Paint paint )
   {
-    mCommandManager1.resetFixedPaint( false, paint );
-    mCommandManager2.resetFixedPaint( true,  paint ); 
+    mCommandManager1.resetFixedPaint( app, false, paint );
+    mCommandManager2.resetFixedPaint( app, true,  paint ); 
   }
 
   // called by DarwingActivity::addFixedLine

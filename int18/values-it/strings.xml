@@ -34,6 +34,10 @@
     <string name="UP">IN SU</string>
     <string name="DOWN">IN GIU\'</string>
 
+    <!-- TODO string name="xsplay">X</string -->
+    <!-- TODO string name="hsplay">H</string -->
+    <!-- TODO string name="vsplay">V</string -->
+
     <string name="cut">TAGLIA</string>
     <string name="copy">COPIA</string>
     <string name="paste">INCOLLA</string>
@@ -610,6 +614,7 @@
     <!-- UNUSED string name="button_zoomfit"   >Adatta zoom</string -->
     <!-- UNUSED string name="button_landscape" >Panorama  </string -->
     <!-- UNUSED string name="button_portrait"  >Ritratto  </string -->
+    <!-- TODO string name="button_splays">Splays</string -->
 
 
     <string name="button_write"     >Installa</string>
@@ -885,6 +890,7 @@
     <string name="title_settings_main">TopoDroid: Impostazioni principali</string>
     <string name="title_settings_export">Impostazione import/export</string>
     <string name="title_settings_import">Impostazione import</string>
+    <!-- TODO string name="title_settings_svx">Survex export settings</string -->
     <string name="title_settings_th">Therion: Imposta export</string>
     <string name="title_settings_dat">Compass: Imposta export</string>
     <string name="title_settings_svg">SVG: Imposta export</string>

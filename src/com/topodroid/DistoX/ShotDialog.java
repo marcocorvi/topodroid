@@ -73,8 +73,8 @@ class ShotDialog extends MyDialog
   
   private MyCheckBox mRBdup   = null;
   private MyCheckBox mRBsurf  = null;
-  private MyCheckBox mRBcmtd  = null;
-  private MyStateBox mRBsplay = null;
+  private MyCheckBox mRBcmtd  = null;  // FIXME_COMMENTED 
+  private MyStateBox mRBsplay = null;  // inhibit splay plan/profile display
 
   private MyCheckBox mCBlegPrev;
   private MyCheckBox mCBlegNext;
@@ -127,9 +127,9 @@ class ShotDialog extends MyDialog
 
   private String shot_from;
   private String shot_to;
-  private boolean shot_secleg;
-  private boolean shot_backleg;
-  private boolean shot_xsplay;
+  // private boolean shot_secleg;
+  // private boolean shot_backleg;
+  // private boolean shot_xsplay;
   // private String shot_data;
   private String shot_distance;
   private String shot_bearing;
@@ -223,9 +223,9 @@ class ShotDialog extends MyDialog
     shot_extend  = blk.getExtend();
     shot_stretch = blk.getStretch(); // FIXME_STRETCH
     shot_flag    = blk.getFlag();
-    shot_secleg  = blk.isSecLeg(); // DBlock.BLOCK_SEC_LEG;
-    shot_backleg = blk.isBackLeg();
-    shot_xsplay  = blk.isXSplay(); // DBlock.BLOCK_X_SPLAY;
+    // shot_secleg  = blk.isSecLeg(); // DBlock.BLOCK_SEC_LEG;
+    // shot_backleg = blk.isBackLeg();
+    // shot_xsplay  = blk.isOtherSplay(); // DBlock.BLOCK_X_SPLAY | H_SPLAY | V_SPLAY
     shot_comment = blk.mComment;
 
     // if ( blk.type() != DBlock.BLOCK_MAIN_LEG ) mCBdeleteLeg.setVisibility( View.GONE );
@@ -262,19 +262,27 @@ class ShotDialog extends MyDialog
     if ( TDLevel.overNormal ) {
       mRBdup.setState(  false );
       mRBsurf.setState( false );
-      mRBcmtd.setState( false );
+      mRBcmtd.setState( false ); // FIXME_COMMENTED
       if ( DBlock.isDuplicate(shot_flag) )      { mRBdup.setState(  true ); }
       else if ( DBlock.isSurface(shot_flag) )   { mRBsurf.setState( true ); }
-      else if ( DBlock.isCommented(shot_flag) ) { mRBcmtd.setState( true ); }
+      else if ( DBlock.isCommented(shot_flag) ) { mRBcmtd.setState( true ); } // FIXME_COMMENTED
       else if ( TDLevel.overExpert ) {
         if ( DBlock.isNoProfile(shot_flag) )   { mRBsplay.setState( 1 ); }
         else if ( DBlock.isNoPlan(shot_flag) ) { mRBsplay.setState( 2 ); }
       }
       // else if ( DBlock.isBackshot(shot_flag) ) { mRBback.setChecked( true ); }
     }
+    if ( TDLevel.overAdvanced && mCBxSplay != null ) {
+      if ( mBlk.isOtherSplay() ) {
+        mCBxSplay.setState( false ); // other-splay type can only be cleared (from this dialog), not set
+      } else {
+        mCBxSplay.setVisibility( View.GONE );
+      }
+    } 
+    
 
-    mCBlegPrev.setChecked( shot_secleg );
-    if ( mCBbackLeg != null ) mCBbackLeg.setState( shot_backleg );
+    mCBlegPrev.setChecked( mBlk.isSecLeg() );
+    if ( mCBbackLeg != null ) mCBbackLeg.setState( mBlk.isBackLeg() );
 
     mRBleft.setChecked(  false );
     mRBvert.setChecked(  false );
@@ -387,46 +395,51 @@ class ShotDialog extends MyDialog
     // LinearLayout layout9 = (LinearLayout) findViewById( R.id.layout9 );
     layout4.setMinimumHeight( size + 20 );
     // layout9.setMinimumHeight( size + 20 );
-
-    if ( TDLevel.overNormal ) {
-      mRBdup       = new MyCheckBox( mContext, size, R.drawable.iz_dup_ok, R.drawable.iz_dup_no );
-      mRBsurf      = new MyCheckBox( mContext, size, R.drawable.iz_surface_ok, R.drawable.iz_surface_no );
-      mRBcmtd      = new MyCheckBox( mContext, size, R.drawable.iz_comment_ok, R.drawable.iz_comment_no );
-      mRBdup.setOnClickListener( this );
-      mRBsurf.setOnClickListener( this );
-      mRBcmtd.setOnClickListener( this );
-    }
-
+    
     mCBlegPrev   = new MyCheckBox( mContext, size, R.drawable.iz_leg2_ok, R.drawable.iz_leg2_no );
     mCBlegNext   = new MyCheckBox( mContext, size, R.drawable.iz_legnext_ok, R.drawable.iz_legnext_no );
     mCBrenumber  = new MyCheckBox( mContext, size, R.drawable.iz_numbers_ok, R.drawable.iz_numbers_no );
     mCBallSplay  = new MyCheckBox( mContext, size, R.drawable.iz_splays_ok, R.drawable.iz_splays_no );
+    int nr_buttons = 4;
 
+    if ( TDLevel.overNormal ) {
+      mRBdup  = new MyCheckBox( mContext, size, R.drawable.iz_dup_ok, R.drawable.iz_dup_no );
+      mRBsurf = new MyCheckBox( mContext, size, R.drawable.iz_surface_ok, R.drawable.iz_surface_no );
+      mRBcmtd = new MyCheckBox( mContext, size, R.drawable.iz_comment_ok, R.drawable.iz_comment_no );
+      mRBdup.setOnClickListener( this );
+      mRBsurf.setOnClickListener( this );
+      mRBcmtd.setOnClickListener( this );
+      nr_buttons += 3;
+    }
+
+    // FIXME_X2_SPLAY
+    // if ( TDLevel.overAdvanced ) {
+    //   if ( shot_xsplay ) {
+    //     mCBxSplay = new MyCheckBox( mContext, size, R.drawable.iz_xsplays_ok, R.drawable.iz_ysplays_no );
+    //   } else {
+    //     mCBxSplay = new MyCheckBox( mContext, size, R.drawable.iz_ysplays_ok, R.drawable.iz_xsplays_no );
+    //   }
+    //   mCBxSplay.setOnClickListener( this );
+    // }
     if ( TDLevel.overAdvanced ) {
-      if ( shot_xsplay ) {
-        mCBxSplay = new MyCheckBox( mContext, size, R.drawable.iz_xsplays_ok, R.drawable.iz_ysplays_no );
-      } else {
-        mCBxSplay = new MyCheckBox( mContext, size, R.drawable.iz_ysplays_ok, R.drawable.iz_xsplays_no );
-      }
+      mCBxSplay = new MyCheckBox( mContext, size, R.drawable.iz_xsplays_ok, R.drawable.iz_ysplays_no );
       mCBxSplay.setOnClickListener( this );
+      nr_buttons ++;
     }
 
     if ( TDLevel.overBasic ) {
       mCBbackLeg = new MyCheckBox( mContext, size, R.drawable.iz_backleg_ok, R.drawable.iz_backleg_no );
       mCBbackLeg.setOnClickListener( this );
+      nr_buttons ++;
     }
 
     if ( TDLevel.overExpert ) {
       mRBsplay = new MyStateBox( mContext, R.drawable.iz_plan_profile, R.drawable.iz_plan, R.drawable.iz_extended );
       mRBsplay.setOnClickListener( this );
+      nr_buttons ++;
     }
     // mCBhighlight = new MyCheckBox( mContext, size, R.drawable.iz_highlight_ok, R.drawable.iz_highlight_no );
 
-    int nr_buttons = 4;
-    if ( TDLevel.overBasic    ) nr_buttons += 1;
-    if ( TDLevel.overNormal   ) nr_buttons += 3;
-    if ( TDLevel.overAdvanced ) nr_buttons += 1;
-    if ( TDLevel.overExpert   ) nr_buttons += 1;
     mButton = new Button[nr_buttons];
 
     int k = 0;
@@ -438,8 +451,8 @@ class ShotDialog extends MyDialog
     if ( mCBbackLeg != null ) mButton[k++] = mCBbackLeg;
     mButton[k++] = mCBrenumber;
     mButton[k++] = mCBallSplay;
-    if ( mCBxSplay != null ) mButton[k++] = mCBxSplay;
     if ( mRBsplay  != null ) mButton[k++] = mRBsplay;
+    if ( mCBxSplay != null ) mButton[k++] = mCBxSplay;
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
     // mListView.setEmptyPlacholder( true );
@@ -525,27 +538,28 @@ class ShotDialog extends MyDialog
     boolean do_backleg = false;
     boolean backleg_val = mCBbackLeg != null && mCBbackLeg.isChecked();
     boolean all_splay = mCBallSplay.isChecked();
-    boolean x_splay = (mCBxSplay != null) && mCBxSplay.isChecked();
+    // FIXME_X2_SPLAY boolean x_splay = (mCBxSplay != null) && mCBxSplay.isChecked();
+    boolean clear_xsplay = ( mCBxSplay != null ) && mCBxSplay.isChecked(); // FIXME_X3_SPLAY whether to clear other-splay value
     boolean leg_next = false;
+    boolean shot_secleg = false;
     if ( mCBlegPrev.isChecked() ) {
       shot_from = "";
       shot_to   = "";
       shot_secleg  = true;
       // do_backleg = false;
       all_splay = false;
-      x_splay   = false;
+      clear_xsplay = false;
     } else if ( mCBlegNext.isChecked() ) {
       leg_next  = true;
-      shot_secleg  = false;
+      // shot_secleg  = false;
       // do_backleg = false;
       all_splay = false;
-      x_splay   = false;
+      clear_xsplay = false;
     } else {
       shot_from = TopoDroidUtil.noSpaces( mETfrom.getText().toString() );
       // if ( shot_from == null ) { shot_from = ""; }
-
       shot_to = TopoDroidUtil.noSpaces( mETto.getText().toString() );
-      shot_secleg = false;
+      // shot_secleg = false;
       do_backleg = ( shot_from.length() > 0 ) && ( shot_to.length() > 0 );
     }
     // Log.v("DistoXX", "do backleg " + do_backleg + " value " + backleg_val );
@@ -554,7 +568,7 @@ class ShotDialog extends MyDialog
     if ( TDLevel.overNormal ) {
       if ( mRBdup.isChecked() )       { shot_flag = DBlock.FLAG_DUPLICATE; }
       else if ( mRBsurf.isChecked() ) { shot_flag = DBlock.FLAG_SURFACE; }
-      else if ( mRBcmtd.isChecked() ) { shot_flag = DBlock.FLAG_COMMENTED; }
+      else if ( mRBcmtd.isChecked() ) { shot_flag = DBlock.FLAG_COMMENTED; } // FIXME_COMMENTED
       else if ( TDLevel.overExpert ) {
         if ( mRBsplay.getState() == 1 )      { shot_flag = DBlock.FLAG_NO_PROFILE; }
         else if ( mRBsplay.getState() == 2 ) { shot_flag = DBlock.FLAG_NO_PLAN; }
@@ -573,7 +587,7 @@ class ShotDialog extends MyDialog
     mBlk.resetFlag( shot_flag );
 
     if ( shot_secleg ) {
-      mBlk.setBlockType( DBlock.BLOCK_SEC_LEG );
+      mBlk.setTypeSecLeg();
     } else if ( leg_next ) {
       // do_backleg = false; // not neceessary
       long id = mParent.mergeToNextLeg( mBlk );
@@ -604,7 +618,7 @@ class ShotDialog extends MyDialog
       if ( shot_to.length() > 0 ) {
         renumber = mCBrenumber.isChecked();
         all_splay = false;
-        x_splay   = false;
+        clear_xsplay   = false;
       // } else { // this is useless: replaced by long-tap on shot list 
       //   if ( mCBhighlight.isChecked() ) {
       //     Log.v("DistoX", "parent to highlight " + mBlk.mFrom + " " + mBlk.mTo );
@@ -617,11 +631,14 @@ class ShotDialog extends MyDialog
     long leg = shot_secleg ? LegType.EXTRA : LegType.NORMAL;
     if ( all_splay ) {
       mParent.updateSplayShots( shot_from, shot_to, extend, shot_flag, leg, comment, mBlk );
-    } else if ( x_splay ) {
-      mParent.updateSplayLeg( mPos );
+    // FIXME_X2_SPLAY
+    // } else if ( x_splay ) {
+    //   mParent.updateSplayLeg( mPos );
+    } else if ( clear_xsplay ) {
+      mParent.updateSplayLegType( mBlk, LegType.NORMAL );
     } else {
       // mBlk.setName( shot_from, shot_to ); // done by parent.updateShot
-      // if ( shot_secleg ) mBlk.setBlockType( DBlock.BLOCK_SEC_LEG ); // FIXME maybe not necessary
+      // if ( shot_secleg ) mBlk.setTypeSecLeg(); // FIXME maybe not necessary
       if ( do_backleg && backleg_val ) {
         leg = LegType.BACK;
       }
@@ -713,16 +730,16 @@ class ShotDialog extends MyDialog
     } else if ( TDLevel.overNormal && b == mRBdup ) {
       if ( mRBdup.toggleState() ) {
         mRBsurf.setState( false );
-        mRBcmtd.setState( false );
+        mRBcmtd.setState( false ); // FIXME_COMMENTED
         if ( TDLevel.overExpert ) mRBsplay.setState( 0 );
       }
     } else if ( TDLevel.overNormal && b == mRBsurf ) {
       if ( mRBsurf.toggleState() ) {
         mRBdup.setState( false );
-        mRBcmtd.setState( false );
+        mRBcmtd.setState( false ); // FIXME_COMMENTED
         if ( TDLevel.overExpert ) mRBsplay.setState( 0 );
       }
-    } else if ( TDLevel.overNormal && b == mRBcmtd ) {
+    } else if ( TDLevel.overNormal && b == mRBcmtd ) { // FIXME_COMMENTED
       if ( mRBcmtd.toggleState() ) {
         mRBdup.setState( false );
         mRBsurf.setState( false );
@@ -733,7 +750,7 @@ class ShotDialog extends MyDialog
       if ( mRBsplay.getState() > 0 ) {
         mRBdup.setState( false );
         mRBsurf.setState( false );
-        mRBcmtd.setState( false );
+        mRBcmtd.setState( false ); // FIXME_COMMENTED
       }
 
     } else if ( b == mButtonBack ) {

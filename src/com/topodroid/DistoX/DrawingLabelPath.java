@@ -14,6 +14,7 @@ package com.topodroid.DistoX;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Matrix;
 
@@ -47,7 +48,8 @@ class DrawingLabelPath extends DrawingPointPath
     // paint.setStrokeCap(Paint.Cap.ROUND);
     // paint.setStrokeWidth( WIDTH_CURRENT );
 
-    makeStraightPath( 0, 0, 20*mPointText.length(), 0, cx, cy );
+    // makeStraightPath( 0, 0, 20*mPointText.length(), 0, cx, cy );
+    doSetScale( mScale );
   }
 
   static DrawingLabelPath loadDataStream( int version, DataInputStream dis, float x, float y )
@@ -117,7 +119,11 @@ class DrawingLabelPath extends DrawingPointPath
 
   private void makeLabelPath( float f )
   {
-    float len = 20 * f * mPointText.length();
+    Rect r = new Rect();
+    mPaint.getTextBounds( mPointText, 0, mPointText.length(), r );
+    // float len = 20 * f * mPointText.length();
+    float len = 10 * r.width(); // FIXME multiplying by 10 is a hack
+
     float a = (float)(mOrientation) * TDMath.DEG2RAD;
     float ca = len * TDMath.cos( a );
     float sa = len * TDMath.sin( a );
@@ -127,13 +133,16 @@ class DrawingLabelPath extends DrawingPointPath
   @Override
   void setScale( int scale )
   {
-    if ( scale != mScale ) {
-      mScale = scale;
-      float f = fontSize();
-      mPaint = new Paint( BrushManager.labelPaint );
-      mPaint.setTextSize( TDSetting.mLabelSize * f );
-      makeLabelPath( f );
-    }
+    if ( scale != mScale ) doSetScale( scale );
+  }
+
+  private void doSetScale( int scale )
+  {
+    mScale = scale;
+    float f = fontSize();
+    mPaint = new Paint( BrushManager.labelPaint );
+    mPaint.setTextSize( TDSetting.mLabelSize * f );
+    makeLabelPath( f );
   }
 
   @Override

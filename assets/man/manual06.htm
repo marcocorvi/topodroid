@@ -17,7 +17,7 @@ The title color depends on the current station assignment policy:
 TopoDroid distinguishes four kinds of shots (displayed with different colors):
 <ol>
 <li>[red] "blank" shots, i.e, shots with the stations not set yet</li>
-<li>[blue] "splay": it has only one station, usually the "From" station</li>
+<li>[blue] "splay": it has only one station, usually the "From" station. Splays can further be marked as X-splay (green), or H/V-splay (dark blue).</li>
 <li>[white] "leg" (the first shot of a group of repeated measurements): this shot has both the "From" and the "To" station set</li>
 <li>[yellow]: "backsight leg"</li>
 <li>[grey] "repeated-leg" (the following shots of a group of leg shots): these shots do not need to have the stations set</li>
@@ -27,6 +27,7 @@ Background colors:
 <li>blueish (station): last downloaded shots</li>
 <li>reddish (data): <a href="page_accuracy.htm">unreliable</a> shots, i.e. shots with "abnormal" field intensities (only DistoX2)</li>
 <li>orange (data): short leg</li>
+<li>gray: commented shot</li>
 </ul><br>
 <img src="shots_list.png" alt="shots list"/><p>
 
@@ -65,7 +66,7 @@ Multi-shot selection buttons:<br>
 <li>set shots extend to <u>left</u></li>
 <li>flip shots extend</li>
 <li>set shots extend to <u>right</u></li>
-<li>open last sketch with the shots <u>highlighted</u></li>
+<li>sketch <u>color</u> for a set of splay shots</li>
 <li><u>renumber</u> the shots (the first must be a leg)</li>
 <li>compute the <u>bedding plane</u> of the shots</li>
 <li><u>delete</u> the shots</li>

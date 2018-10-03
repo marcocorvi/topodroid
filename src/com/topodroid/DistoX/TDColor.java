@@ -24,6 +24,7 @@ class TDColor
   static final int LIGHT_PINK   = 0xffffb677;
   static final int DARK_VIOLET  = 0xff490092;
   static final int DARK_BLUE    = 0xff006ddb;
+  static final int DEEP_BLUE    = 0xff3b40db;
   static final int VIOLET       = 0xffb66dff;
   static final int BLUE         = 0xff6db6ff;
   static final int LIGHT_BLUE   = 0xffb6dbff;

@@ -143,6 +143,7 @@ public class TopoDroidApp extends Application
   //   mManualCalibrationLRUD    = false;
   // }
 
+  /* FIXME_HIGHLIGHT
   private List<DBlock> mHighlighted = null;
   void    setHighlighted( List<DBlock> blks ) { mHighlighted = blks; }
   // int     getHighlightedSize() { return (mHighlighted != null)? -1 : mHighlighted.size(); }
@@ -153,6 +154,7 @@ public class TopoDroidApp extends Application
     for ( DBlock b : mHighlighted ) if ( b.mId == id ) return true;
     return false;
   }
+  */
 
   // cross-section splay display mode
   int mSplayMode = 2; 
@@ -621,7 +623,7 @@ public class TopoDroidApp extends Application
       if ( TDInstance.device != null ) {
         createComm();
       }
-      mHighlighted = null;
+      // mHighlighted = null; FIXME_HIGHLIGHT
     }
 
     DistoXConnectionError = new String[5];
@@ -1466,7 +1468,7 @@ public class TopoDroidApp extends Application
       d -= calib;
     }
 
-    if ( l >= 0.0f ) {
+    if ( l >= 0.0f ) { // FIXME_X_SPLAY
       if ( horizontal ) { // WENS
         extend = TDAzimuth.computeSplayExtend( 270 );
         if ( at >= 0L ) {

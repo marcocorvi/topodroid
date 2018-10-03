@@ -46,14 +46,15 @@ The button bar changes to buttons for the multi-shot actions:
 The special actions dialog includes:
 <ul>
 <li>renumber the selected shots</li>
-<li>highlight the selected shots in the last sketch</li>
+<li>set the sketch color of the selected splay shots</li>
+<li>mark the splays as X-splay or H/V-splay (or make them normal)</li>
 <li>compute the strike and dip of the plane containing the shots</li>
 </ul>
 
 Shot renumbering is possible only if the first selected shot is a leg, otherwise it is disabled. Renumbering follows the order of selection of the shots.
 The stations of the first leg are used to seed the renumbering. They can be set in the dialog.<br>
 
-Highlighting opens the most recent sketch highlighting the selected splays. Only splays must have been selected, otherwise it is disabled.<br>
+Setting the color of splays is enabled if only splays have been selected, otherwise it is disabled.<br>
 The computation of strike and dip of the bedding plane requires that all the selected shots have the same FROM station. Otherwise it is disabled.
 The result is shown in the dialog and added to (replaced if already present) the comment of the first selected shot.<br><p>
 

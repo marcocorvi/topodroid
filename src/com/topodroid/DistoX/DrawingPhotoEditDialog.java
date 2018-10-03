@@ -50,7 +50,7 @@ class DrawingPhotoEditDialog extends MyDialog
   // private Button   mButtonOK;
   // private Button   mButtonDelete;
   // private Button   mButtonCancel;
-  private TDImage mTdImage;
+  private TDImage mTdImage = null;
 
   private float mAzimuth = 0;
   private float mClino   = 0;
@@ -140,6 +140,7 @@ class DrawingPhotoEditDialog extends MyDialog
 	}
         return;
     }
+    if ( mTdImage != null ) mTdImage.recycleImages();
     dismiss();
   }
 
@@ -151,6 +152,7 @@ class DrawingPhotoEditDialog extends MyDialog
       setContentView( mContentView );
       return;
     }
+    if ( mTdImage != null ) mTdImage.recycleImages();
     dismiss();
   }
 

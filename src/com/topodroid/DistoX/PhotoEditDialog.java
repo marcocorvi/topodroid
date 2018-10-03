@@ -30,12 +30,11 @@ import android.view.View;
 // import android.view.View.OnKeyListener;
 // import android.view.KeyEvent;
 
-// import android.util.Log;
+import android.util.Log;
 
 class PhotoEditDialog extends MyDialog
                       implements View.OnClickListener
 {
-  private final TopoDroidApp  mApp;
   private final PhotoActivity mParent;
   private PhotoInfo mPhoto;
   private String mFilename;
@@ -53,22 +52,22 @@ class PhotoEditDialog extends MyDialog
   private String mDate = "";
   private boolean mAtShot;
 
-  private TDImage mTdImage;
+  private TDImage mTdImage = null;
 
   /**
    * @param context   context
    */
-  PhotoEditDialog( Context context, PhotoActivity parent, TopoDroidApp app, PhotoInfo photo, String filename )
+  PhotoEditDialog( Context context, PhotoActivity parent, PhotoInfo photo )
   {
     super( context, R.string.PhotoEditDialog );
     mParent = parent;
-    mApp    = app;
     mPhoto  = photo;
-    mFilename = filename;
+    // mFilename = filename;
+    mFilename = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhoto.id) );
     mAtShot   = (mPhoto.shotid >= 0);
     // TDLog.Log(TDLog.LOG_PHOTO, "PhotoEditDialog " + mFilename);
-    
-    mTdImage = new TDImage( filename );
+    mTdImage = new TDImage( mFilename );
+    // Log.v("DistoX", "photo edit dialog: " + photo.debugString() + " image width " + mTdImage.width() );
   }
 
 // -------------------------------------------------------------------
@@ -79,14 +78,21 @@ class PhotoEditDialog extends MyDialog
     // TDLog.Log( TDLog.LOG_PHOTO, "onCreate" );
     initLayout( R.layout.photo_edit_dialog, R.string.title_photo_comment );
 
+    // Log.v("DistoX", "photo edit dialog on create");
     mIVimage      = (ImageView) findViewById( R.id.photo_image );
     mETcomment    = (EditText) findViewById( R.id.photo_comment );
     mButtonOK     = (Button) findViewById( R.id.photo_ok );
     mButtonDelete = (Button) findViewById( R.id.photo_delete );
     // mButtonCancel = (Button) findViewById( R.id.photo_cancel );
+    
+    float a = mTdImage.azimuth();
+    float c = mTdImage.clino();
+
+    // Log.v("DistoX", "photo edit dialog on create. Azimuth " + a + " Clino " + c );
+
 
     ((TextView) findViewById( R.id.photo_azimuth )).setText(
-       String.format( mContext.getResources().getString( R.string.photo_azimuth_clino ), mTdImage.azimuth(), mTdImage.clino() ) );
+       String.format( mContext.getResources().getString( R.string.photo_azimuth_clino ), a, c ) );
     ((TextView) findViewById( R.id.photo_date )).setText( mDate );
 
     if ( mPhoto.mComment != null ) {
@@ -108,6 +114,7 @@ class PhotoEditDialog extends MyDialog
     
     mContentView = findViewById( R.id.view_one );
     mOnView2 = false;
+    // Log.v("DistoX", "photo edit dialog on create done");
   }
 
   public void onClick(View v) 
@@ -137,6 +144,7 @@ class PhotoEditDialog extends MyDialog
           return;
 	}
     }
+    if ( mTdImage != null ) mTdImage.recycleImages();
     dismiss();
   }
 
@@ -148,6 +156,7 @@ class PhotoEditDialog extends MyDialog
       setContentView( mContentView );
       return;
     }
+    if ( mTdImage != null ) mTdImage.recycleImages();
     dismiss();
   }
 

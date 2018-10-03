@@ -771,51 +771,40 @@ class DistoXNum
 
     for ( DBlock blk : data ) {
       // Log.v("DistoX", "NUM blk type " + blk.mType );
-      switch ( blk.getBlockType() ) {
-
-        case DBlock.BLOCK_SPLAY:
-        case DBlock.BLOCK_X_SPLAY:
-          lastLeg = null;  // clear last-leg
-          if ( blk.mFrom != null && blk.mFrom.length() > 0 ) { // normal splay
-            tmpsplays.add( new TriSplay( blk, blk.mFrom, blk.getFullExtend(), +1 ) );
-          } else if ( blk.mTo != null && blk.mTo.length() > 0 ) { // reversed splay
-            tmpsplays.add( new TriSplay( blk, blk.mTo, blk.getFullExtend(), -1 ) );
+      if ( blk.isSplay() ) {
+        lastLeg = null;  // clear last-leg
+        if ( blk.mFrom != null && blk.mFrom.length() > 0 ) { // normal splay
+          tmpsplays.add( new TriSplay( blk, blk.mFrom, blk.getFullExtend(), +1 ) );
+        } else if ( blk.mTo != null && blk.mTo.length() > 0 ) { // reversed splay
+          tmpsplays.add( new TriSplay( blk, blk.mTo, blk.getFullExtend(), -1 ) );
+        }
+      } else if ( blk.isMainLeg() ) {
+        lastLeg = new TriShot( blk, blk.mFrom, blk.mTo, blk.getExtend(), blk.getStretch(), +1 );
+        lastLeg.duplicate = ( blk.isDuplicate() );
+        lastLeg.surface   = ( blk.isSurface() );
+        lastLeg.commented = ( blk.isCommented() ); // FIXME_COMMENTED
+        // lastLeg.backshot  = 0;
+        if ( blk.getExtend() > 1 ) surveyExtend = false;
+        tmpshots.add( lastLeg );
+      } else if ( blk.isBackLeg() ) {
+        lastLeg = new TriShot( blk, blk.mFrom, blk.mTo, blk.getExtend(), blk.getStretch(), +1 );
+        lastLeg.duplicate = true;
+        lastLeg.surface   = ( blk.isSurface() );
+        lastLeg.commented = false;
+        // lastLeg.backshot  = 0;
+        if ( blk.getExtend() > 1 ) surveyExtend = false;
+        tmpshots.add( lastLeg );
+      } else if ( blk.isSecLeg() ) {
+        if (lastLeg != null) lastLeg.addBlock( blk );
+      } else if ( blk.isTypeBlank() ) {
+        if (lastLeg != null ) {
+          if ( blk.isRelativeDistance( lastLeg.getFirstBlock() ) ) {
+            lastLeg.addBlock( blk );
           }
-          break;
-
-        case DBlock.BLOCK_MAIN_LEG:
-          lastLeg = new TriShot( blk, blk.mFrom, blk.mTo, blk.getExtend(), blk.getStretch(), +1 );
-          lastLeg.duplicate = ( blk.isDuplicate() );
-          lastLeg.surface   = ( blk.isSurface() );
-          lastLeg.commented = ( blk.isCommented() );
-          // lastLeg.backshot  = 0;
-          if ( blk.getExtend() > 1 ) surveyExtend = false;
-          tmpshots.add( lastLeg );
-          break;
-
-        case DBlock.BLOCK_BACK_LEG:
-          lastLeg = new TriShot( blk, blk.mFrom, blk.mTo, blk.getExtend(), blk.getStretch(), +1 );
-          lastLeg.duplicate = true;
-          lastLeg.surface   = ( blk.isSurface() );
-          lastLeg.commented = false;
-          // lastLeg.backshot  = 0;
-          if ( blk.getExtend() > 1 ) surveyExtend = false;
-          tmpshots.add( lastLeg );
-          break;
-
-        case DBlock.BLOCK_SEC_LEG:
-          if (lastLeg != null) lastLeg.addBlock( blk );
-          break;
-        case DBlock.BLOCK_BLANK_LEG:
-        case DBlock.BLOCK_BLANK:
-          if (lastLeg != null ) {
-            if ( blk.isRelativeDistance( lastLeg.getFirstBlock() ) ) {
-              lastLeg.addBlock( blk );
-            }
-          }
-          break;
+        }
       }
     }
+    // Log.v("DistoX", "data " + data.size() + " shots " + tmpshots.size() + " splays " + tmpsplays.size() );
 
     if ( TDSetting.mLoopClosure == TDSetting.LOOP_TRIANGLES ) {
       makeTrilateration( tmpshots );

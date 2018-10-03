@@ -20,7 +20,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.ExifInterface;
 
-// import android.util.Log;
+import android.util.Log;
 
 class TDImage
 {
@@ -30,7 +30,8 @@ class TDImage
   private int mOrientation = 0;
   private String mDate = "";
 
-  private Bitmap mImage;
+  private Bitmap mImage    = null;
+  private Bitmap mImage2   = null;
   private int mImageWidth  = 0;
   private int mImageHeight = 0;
 
@@ -39,6 +40,7 @@ class TDImage
     mFilename = filename;
     readExif();
     decodeImage();
+    // Log.v("DistoX", "TD image " + filename );
   }
 
   float azimuth() { return mAzimuth; }
@@ -102,12 +104,18 @@ class TDImage
     int hh = (int)( mImageHeight * ww / mImageWidth );
     // Log.v("DistoX", "fill image view w " + ww + " h " + hh );
     if ( ww <= 0 || hh <= 0 ) return false;
-    Bitmap image2 = Bitmap.createScaledBitmap( mImage, ww, hh, true );
-    if ( image2 == null ) return false;
-    MyBearingAndClino.applyOrientation( view, image2, mOrientation );
-    image2.recycle();
+    if ( mImage2 != null ) mImage2.recycle();
+    mImage2 = Bitmap.createScaledBitmap( mImage, ww, hh, true );
+    if ( mImage2 == null ) return false;
+    MyBearingAndClino.applyOrientation( view, mImage2, mOrientation );
     return true;
   }
 
   boolean fillImageView( ImageView view ) { return fillImageView( view, (int)(TopoDroidApp.mDisplayWidth) ); }
+
+  void recycleImages()
+  {
+    if ( mImage != null ) mImage.recycle();
+    if ( mImage2 != null ) mImage2.recycle();
+  }
 }

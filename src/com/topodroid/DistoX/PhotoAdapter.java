@@ -21,6 +21,8 @@ import android.view.LayoutInflater;
 
 import java.util.ArrayList;
 
+// import android.util.Log;
+
 class PhotoAdapter extends ArrayAdapter< PhotoInfo >
 {
   private ArrayList< PhotoInfo > items;
@@ -33,6 +35,8 @@ class PhotoAdapter extends ArrayAdapter< PhotoInfo >
     this.items = items;
   }
 
+  // items are guaranteed non-null
+  // throws if pos < 0 or pos >= items.size()
   public PhotoInfo get( int pos ) { return items.get(pos); }
  
   @Override
@@ -44,7 +48,7 @@ class PhotoAdapter extends ArrayAdapter< PhotoInfo >
       v = li.inflate( R.layout.row, parent, false ); // NullPointerException
     }
 
-    PhotoInfo b = items.get( pos );
+    PhotoInfo b = get( pos );
     if ( b != null ) {
       TextView tw = (TextView) v.findViewById( R.id.row_text );
       tw.setText( b.toString() );

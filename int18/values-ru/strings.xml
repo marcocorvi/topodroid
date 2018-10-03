@@ -34,6 +34,10 @@
     <string name="UP">ВВЕРХ</string>
     <string name="DOWN">ВНИЗ</string>
 
+    <!-- TODO string name="xsplay">X</string -->
+    <!-- TODO string name="hsplay">H</string -->
+    <!-- TODO string name="vsplay">V</string -->
+
     <string name="cut">ВЫРЕЗАТЬ</string>
     <string name="copy">КОПИРОВАТЬ</string>
     <string name="paste">ВСТАВИТЬ</string>
@@ -613,6 +617,7 @@
     <!-- UNUSED string name="button_zoomfit"   >Вместить  </string -->
     <!-- UNUSED string name="button_landscape" >Альбомная </string -->
     <!-- UNUSED string name="button_portrait"  >Портретная</string -->
+    <!-- TODO string name="button_splays">Splays</string -->
 
 
     <string name="button_write"     >Передать в Disto</string>
@@ -896,6 +901,7 @@
     <string name="title_settings_main">TopoDroid Основные настройки</string>
     <string name="title_settings_export">TopoDroid настройки импорта/экспорта</string>
     <string name="title_settings_import">TopoDroid настройки импорта</string>
+    <!-- TODO string name="title_settings_svx">Survex export settings</string -->
     <string name="title_settings_th">Therion настройки экспорта</string>
     <string name="title_settings_dat">Compass настройки экспорта</string>
     <string name="title_settings_svg">SVG настройки экспорта</string>

@@ -45,4 +45,11 @@ class PhotoInfo
            + "> " + mComment; 
   }
 
+  String debugString()
+  {
+    return id  
+           + " <" + ( (mShotName == null)? "-" : mShotName )
+           + "> " + mComment + " " + ((mTitle == null)? "-" : mTitle); 
+  }
+
 }

@@ -111,8 +111,10 @@ class BrushManager
   static Paint highlightPaint3 = null;
   static Paint fixedShotPaint  = null;
   static Paint fixedBluePaint  = null;
+  static Paint deepBluePaint   = null;
+  static Paint darkBluePaint   = null;
   static Paint lightBluePaint  = null;
-  static Paint fixedRedPaint  = null;
+  static Paint fixedRedPaint   = null;
   static Paint fixedGreenPaint  = null;
   static Paint fixedYellowPaint  = null;
   static Paint fixedOrangePaint  = null;
@@ -216,7 +218,9 @@ class BrushManager
       highlightPaint3  = makePaint( TDColor.HIGH_RED,     WIDTH_CURRENT, Paint.Style.STROKE );
       fixedShotPaint   = makePaint( 0xffbbbbbb,           WIDTH_CURRENT, Paint.Style.STROKE);
       fixedBluePaint   = makePaint( 0xff9999ff,           WIDTH_CURRENT, Paint.Style.STROKE);
-      lightBluePaint   = makePaint( 0xff99ffff,           WIDTH_CURRENT, Paint.Style.STROKE);
+      deepBluePaint    = makePaint( 0xff3366ff,           WIDTH_CURRENT, Paint.Style.STROKE);
+      darkBluePaint    = makePaint( 0x663366ff,           WIDTH_CURRENT, Paint.Style.STROKE); // same as deepBluePaint but with alpha
+      lightBluePaint   = makePaint( 0xff66ccff,           WIDTH_CURRENT, Paint.Style.STROKE);
       fixedRedPaint    = makePaint( TDColor.FIXED_RED,    WIDTH_CURRENT, Paint.Style.STROKE);
       fixedYellowPaint = makePaint( TDColor.FIXED_YELLOW, WIDTH_CURRENT, Paint.Style.STROKE);
       fixedGreenPaint  = makePaint( TDColor.GREEN,        WIDTH_CURRENT, Paint.Style.STROKE);
@@ -275,6 +279,8 @@ class BrushManager
     if (fixedShotPaint != null)   fixedShotPaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
     if (fixedBluePaint != null)   fixedBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
     if (lightBluePaint != null)   lightBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
+    if (darkBluePaint != null)    darkBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
+    if (deepBluePaint != null)    deepBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
     if (fixedSplayPaint != null)  fixedSplayPaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
     if (fixedSplay2Paint != null) fixedSplay2Paint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
   }

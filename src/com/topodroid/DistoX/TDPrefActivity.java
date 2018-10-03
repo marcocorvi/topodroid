@@ -70,27 +70,28 @@ public class TDPrefActivity extends Activity
   static final int PREF_CATEGORY_LOG       = 26; // this must be the last
 
   static int mTitleRes[] = {
-    R.string.title_settings_main,
+    R.string.title_settings_main,     // 0
     R.string.title_settings_survey,
     R.string.title_settings_plot,
     R.string.title_settings_calib,
     R.string.title_settings_device,
-    R.string.title_settings_sketch,
+    R.string.title_settings_sketch,   // 5
     R.string.title_settings_export,
     R.string.title_settings_import,
+    R.string.title_settings_svx,
     R.string.title_settings_th,
     R.string.title_settings_dat,
-    R.string.title_settings_svg,
+    R.string.title_settings_svg,      // 11
     R.string.title_settings_dxf,
     R.string.title_settings_png,
     R.string.title_settings_kml,
-    R.string.title_settings_shot,
-    R.string.title_settings_units,
+    R.string.title_settings_shot,     
+    R.string.title_settings_units,    // 16
     R.string.title_settings_accuracy,
     R.string.title_settings_location,
     R.string.title_settings_screen,
     R.string.title_settings_line,
-    R.string.title_settings_point,
+    R.string.title_settings_point,    // 21
     R.string.title_settings_walls,
     R.string.title_settings_draw,
     R.string.title_settings_erase,

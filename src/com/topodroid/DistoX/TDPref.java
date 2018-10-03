@@ -293,11 +293,13 @@ class TDPref implements AdapterView.OnItemSelectedListener
   { 
     String val = hlp.getString( nm, def_val );
     TDPref ret = new TDPref( cat, nm, EDITTEXT, tit, sum, lvl, pt, val, def_val, res, hlp );
-    if ( pt == INTEGER ) {
-      ret.ivalue = Integer.parseInt( ret.value );
-    } else if ( pt == FLOAT ) {
-      ret.fvalue = Float.parseFloat( ret.value );
-    }
+    try {
+      if ( pt == INTEGER ) {
+        ret.ivalue = Integer.parseInt( ret.value );
+      } else if ( pt == FLOAT ) {
+        ret.fvalue = Float.parseFloat( ret.value );
+      }
+    } catch ( NumberFormatException e ) { }
     return ret;
   }
 

@@ -423,7 +423,7 @@ public class ShotWindow extends Activity
       if ( cur.isSecLeg() || cur.isRelativeDistance( prev ) ) {
         // Log.v( "DistoX", "item close " + cur.type() + " " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
         if ( cur.isBlank() ) {   // FIXME 20140612
-          cur.setBlockType( DBlock.BLOCK_SEC_LEG );
+          cur.setTypeSecLeg();
           mApp_mData.updateShotLeg( cur.mId, TDInstance.sid, LegType.EXTRA, true ); // cur.mType ); // FIXME 20140616
         }
 
@@ -503,7 +503,7 @@ public class ShotWindow extends Activity
 
   void clearMultiSelect( )
   {
-    mApp.setHighlighted( null );
+    // mApp.setHighlighted( null ); // FIXME_HIGHLIGHT
     mDataAdapter.clearMultiSelect( );
     mListView.setAdapter( mButtonView1.mAdapter );
     mListView.invalidate();
@@ -566,24 +566,48 @@ public class ShotWindow extends Activity
     return true;
   }
 
-  void updateSplayLeg( int pos ) // pos = mDataAdapter pos
+  // FIXME_X2_SPLAY
+  // void updateSplayLeg( int pos ) // pos = mDataAdapter pos
+  // {
+  //   DBlock blk = mDataAdapter.get(pos);
+  //   for ( ; blk != null; ) {
+  //     long leg = mApp_mData.updateSplayLeg( blk.mId, TDInstance.sid, true );
+  //     // Log.v("DistoX", "toggle splay type " + pos + " new leg " + leg );
+  //     if ( leg == LegType.NORMAL ) {
+  //       blk.setBlockType( DBlock.BLOCK_SPLAY );
+  //     } else if ( leg == LegType.XSPLAY ) {
+  //       blk.setBlockType( DBlock.BLOCK_X_SPLAY );
+  //     } else {
+  //       break;
+  //     }
+  //     // if ( blk.mView != null ) blk.mView.invalidate();
+  //     mDataAdapter.updateBlockView( blk.mId );
+  //     if ( (--pos) < 0 ) break;
+  //     blk = mDataAdapter.get(pos);
+  //   }
+  // }
+
+  // FIXME_X3_SPLAY from ShotDialog
+  void updateSplayLegType( DBlock blk, int leg_type )
   {
-    DBlock blk = mDataAdapter.get(pos);
-    for ( ; blk != null; ) {
-      long leg = mApp_mData.updateSplayLeg( blk.mId, TDInstance.sid, true );
-      // Log.v("DistoX", "toggle splay type " + pos + " new leg " + leg );
-      if ( leg == LegType.NORMAL ) {
-        blk.setBlockType( DBlock.BLOCK_SPLAY );
-      } else if ( leg == LegType.XSPLAY ) {
-        blk.setBlockType( DBlock.BLOCK_X_SPLAY );
-      } else {
-        break;
-      }
-      // if ( blk.mView != null ) blk.mView.invalidate();
-      mDataAdapter.updateBlockView( blk.mId );
-      if ( (--pos) < 0 ) break;
-      blk = mDataAdapter.get(pos);
+    int block_type = DBlock.blockOfSplayLegType[ leg_type ];
+    // long leg_type = DBlock.legOfBlockType[ block_type ];
+    mApp_mData.updateShotLeg( blk.mId, TDInstance.sid, leg_type, false ); // do not forward
+    blk.setBlockType( block_type );
+    updateDisplay();
+  }
+
+  // from MultiselectDialog
+  void updateSplaysLegType( List<DBlock> blks, int leg_type )
+  {
+    for ( DBlock blk : blks ) {
+      int block_type = DBlock.blockOfSplayLegType[ leg_type ];
+      // long leg_type = DBlock.legOfBlockType[ block_type ];
+      mApp_mData.updateShotLeg( blk.mId, TDInstance.sid, leg_type, false ); // do not forward
+      blk.setBlockType( block_type );
     }
+    updateDisplay();
+    clearMultiSelect();
   }
 
   // called by ShotDialog "More" button
@@ -1686,11 +1710,11 @@ public class ShotWindow extends Activity
     }
 
     if ( leg == LegType.EXTRA ) {
-      blk.setBlockType( DBlock.BLOCK_SEC_LEG );
+      blk.setTypeSecLeg();
     } else if ( leg == LegType.BACK ) {
-      blk.setBlockType( DBlock.BLOCK_BACK_LEG );
+      blk.setTypeBackLeg();
     // } else if ( blk.isBackLeg() ) {
-    //   blk.setBlockType( DBlock.BLOCK_MAIN_LEG );
+    //   blk.setTypeMainLeg();
     }
 
     DBlock blk3 = mDataAdapter.updateBlockView( blk.mId );
@@ -1704,6 +1728,7 @@ public class ShotWindow extends Activity
     }
   }
 
+  /* FIXME_HIGHLIGHT
   // open the sketch and highlight block in the sketch
   // called by MultishotDialog
   void highlightBlocks( List<DBlock> blks )  // HIGHLIGHT
@@ -1715,6 +1740,23 @@ public class ShotWindow extends Activity
     if ( TDInstance.recentPlot != null ) {
       startExistingPlot( TDInstance.recentPlot, TDInstance.recentPlotType, blks.get(0).mFrom );
     }
+    clearMultiSelect( );
+  }
+  */
+
+  // open the sketch and highlight block in the sketch
+  // called by MultishotDialog
+  void colorBlocks( List<DBlock> blks, int color )  // HIGHLIGHT
+  {
+    // Log.v("DistoX", "highlight blocks [0] " + ( (blks==null)? "null" : blks.size() ) );
+    if ( blks == null || blks.size() == 0 ) return;
+    for ( DBlock blk : blks ) {
+      blk.clearPaint();
+      mApp_mData.updateShotColor( blk.mId, TDInstance.sid, color, false ); // do not forward color
+    }
+    // if ( TDInstance.recentPlot != null ) {
+    //   startExistingPlot( TDInstance.recentPlot, TDInstance.recentPlotType, blks.get(0).mFrom );
+    // }
     clearMultiSelect( );
   }
 

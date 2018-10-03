@@ -11,7 +11,8 @@
        android:minSdkVersion="16"
        android:targetSdkVersion="26"
     />
-    <!-- FIXME-16 uses-sdk
+    <!--  FIXME-16 -->
+    <!-- uses-sdk
        android:minSdkVersion="8"
        android:targetSdkVersion="8"
     / -->

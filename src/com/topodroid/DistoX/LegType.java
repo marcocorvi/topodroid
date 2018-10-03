@@ -13,9 +13,11 @@ package com.topodroid.DistoX;
 
 class LegType
 {
-  static final long INVALID = -1L;
-  static final long NORMAL  = 0L;
-  static final long EXTRA   = 1L; // additional leg shots
-  static final long XSPLAY  = 2L;
-  static final long BACK    = 3L; 
+  static final int INVALID = -1;
+  static final int NORMAL  = 0;
+  static final int EXTRA   = 1; // additional leg shots
+  static final int XSPLAY  = 2; // cross splay
+  static final int BACK    = 3; 
+  static final int HSPLAY  = 4; // horizontal splay
+  static final int VSPLAY  = 5; // vertical splay
 }
