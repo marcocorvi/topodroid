@@ -238,7 +238,7 @@ class DataHelper extends DataSetObservable
      blk.mComment  = cursor.getString(12);
      blk.mShotType = (int)cursor.getLong(13);
      blk.mTime     = cursor.getLong(14);
-     blk.setPaint( (int)cursor.getLong(15) ); // color
+     blk.setPaintColor( (int)cursor.getLong(15) ); // color
    }
    
 

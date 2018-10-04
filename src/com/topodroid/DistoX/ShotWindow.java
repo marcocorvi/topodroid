@@ -1688,10 +1688,11 @@ public class ShotWindow extends Activity
     mDataAdapter.updateBlockView( blk.mId );
   }
 
-  // @param leg leg data-helper value (0 normal, 1 sec, 2 x-splay, 3 back)
+  // @param leg leg data-helper value (0 normal, 1 sec, 2 x-splay, 3 back, 4 h-splay, 5 v-splay
   void updateShot( String from, String to, int extend, float stretch, long flag, long leg, String comment, DBlock blk )
   {
     // TDLog.Log( TDLog.LOG_SHOT, "update Shot From >" + from + "< To >" + to + "< comment " + comment );
+    // Log.v("DistoX", "update shot " + from + "-" + to + " leg " + leg + "/" + blk.getLegType() + " blk type " + blk.getBlockType() );
     blk.setBlockName( from, to, (leg == LegType.BACK) );
 
     int ret = mApp_mData.updateShot( blk.mId, TDInstance.sid, from, to, extend, flag, leg, comment, true );
@@ -1892,6 +1893,12 @@ public class ShotWindow extends Activity
   }
   
   // NOTE called only by ShotDialog.saveDBlock() with to.length() == 0 ie to == "" and blk splay shot
+  // update stations for all splay blocks with sme from as this block
+  // @param extend   this block new extend
+  // @param flag     this block new flag
+  // ...
+  // @param blk      this block
+  //
   public void updateSplayShots( String from, String to, long extend, long flag, long leg, String comment, DBlock blk )
   {
     ArrayList< DBlock > splays = mDataAdapter.getSplaysAtId( blk.mId, blk.mFrom );

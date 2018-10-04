@@ -107,7 +107,7 @@
       <RadioButton android:id="@+id/rb_hsplay"
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
-	    android:text="@string/xsplay"
+	    android:text="@string/hsplay"
             />
       <RadioButton android:id="@+id/rb_vsplay"
             android:layout_width="wrap_content" 

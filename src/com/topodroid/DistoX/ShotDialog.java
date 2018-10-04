@@ -272,14 +272,13 @@ class ShotDialog extends MyDialog
       }
       // else if ( DBlock.isBackshot(shot_flag) ) { mRBback.setChecked( true ); }
     }
-    if ( TDLevel.overAdvanced && mCBxSplay != null ) {
+    if ( /* TDLevel.overAdvanced && */  mCBxSplay != null ) {
       if ( mBlk.isOtherSplay() ) {
         mCBxSplay.setState( false ); // other-splay type can only be cleared (from this dialog), not set
       } else {
         mCBxSplay.setVisibility( View.GONE );
       }
     } 
-    
 
     mCBlegPrev.setChecked( mBlk.isSecLeg() );
     if ( mCBbackLeg != null ) mCBbackLeg.setState( mBlk.isBackLeg() );
@@ -441,6 +440,7 @@ class ShotDialog extends MyDialog
     // mCBhighlight = new MyCheckBox( mContext, size, R.drawable.iz_highlight_ok, R.drawable.iz_highlight_no );
 
     mButton = new Button[nr_buttons];
+    // Log.v("DistoX", "nr buttons " + nr_buttons );
 
     int k = 0;
     if ( mRBdup  != null ) mButton[k++] = mRBdup;
@@ -540,6 +540,7 @@ class ShotDialog extends MyDialog
     boolean all_splay = mCBallSplay.isChecked();
     // FIXME_X2_SPLAY boolean x_splay = (mCBxSplay != null) && mCBxSplay.isChecked();
     boolean clear_xsplay = ( mCBxSplay != null ) && mCBxSplay.isChecked(); // FIXME_X3_SPLAY whether to clear other-splay value
+    // Log.v("DistoX", "clear xsplay = " + clear_xsplay );
     boolean leg_next = false;
     boolean shot_secleg = false;
     if ( mCBlegPrev.isChecked() ) {
@@ -587,6 +588,7 @@ class ShotDialog extends MyDialog
     mBlk.resetFlag( shot_flag );
 
     if ( shot_secleg ) {
+      // Log.v("DistoX", "block set sec-leg type ");
       mBlk.setTypeSecLeg();
     } else if ( leg_next ) {
       // do_backleg = false; // not neceessary
@@ -618,7 +620,7 @@ class ShotDialog extends MyDialog
       if ( shot_to.length() > 0 ) {
         renumber = mCBrenumber.isChecked();
         all_splay = false;
-        clear_xsplay   = false;
+        clear_xsplay = false;
       // } else { // this is useless: replaced by long-tap on shot list 
       //   if ( mCBhighlight.isChecked() ) {
       //     Log.v("DistoX", "parent to highlight " + mBlk.mFrom + " " + mBlk.mTo );
@@ -628,20 +630,25 @@ class ShotDialog extends MyDialog
       }
     }
 
-    long leg = shot_secleg ? LegType.EXTRA : LegType.NORMAL;
     if ( all_splay ) {
-      mParent.updateSplayShots( shot_from, shot_to, extend, shot_flag, leg, comment, mBlk );
+      long leg1 = clear_xsplay ? LegType.NORMAL : mBlk.getLegType();
+      mParent.updateSplayShots( shot_from, shot_to, extend, shot_flag, leg1, comment, mBlk );
     // FIXME_X2_SPLAY
     // } else if ( x_splay ) {
     //   mParent.updateSplayLeg( mPos );
     } else if ( clear_xsplay ) {
+      // Log.v("DistoX", "clear leg type");
       mParent.updateSplayLegType( mBlk, LegType.NORMAL );
     } else {
       // mBlk.setName( shot_from, shot_to ); // done by parent.updateShot
       // if ( shot_secleg ) mBlk.setTypeSecLeg(); // FIXME maybe not necessary
+      long leg = mBlk.isSplay() ? mBlk.getLegType()  // HERE clear_xsplay = false 
+               : shot_secleg ? LegType.EXTRA 
+               : LegType.NORMAL ;
       if ( do_backleg && backleg_val ) {
         leg = LegType.BACK;
       }
+      // Log.v("DistoX", "Block is splay " + mBlk.isSplay() + " leg " + leg + " blk type " + mBlk.getBlockType() );
       mParent.updateShot( shot_from, shot_to, extend, shot_stretch, shot_flag, leg, comment, mBlk );
     }
     // mParent.scrollTo( mPos );
@@ -663,6 +670,7 @@ class ShotDialog extends MyDialog
     }
 
     if ( renumber ) {
+      // Log.v("DistoX", "renumber shots after block id " + mBlk.mId );
       mParent.renumberShotsAfter( mBlk );
     }
   }

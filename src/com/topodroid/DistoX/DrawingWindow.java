@@ -5946,7 +5946,7 @@ public class DrawingWindow extends ItemDrawer
   //   @param color color (0 to clear)
   void updateBlockColor( DBlock blk, int color )
   {
-    blk.setPaint( color );
+    blk.setPaintColor( color );
     mApp_mData.updateShotColor( blk.mId, TDInstance.sid, color, false ); // do not forward color
   }
 

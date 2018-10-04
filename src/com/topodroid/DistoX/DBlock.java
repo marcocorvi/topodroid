@@ -20,7 +20,7 @@ import android.view.View;
 
 import android.graphics.Paint; // custom paint
 
-// import android.util.Log;
+import android.util.Log;
 
 class DBlock
 {
@@ -47,7 +47,7 @@ class DBlock
   // private int    mPos;     // position in the list
   int    mVisible; // whether is visible in the list
   boolean mMultiSelected; // whether the block is in multiselect list
-  private Paint  mPaint;
+  private Paint mPaint;
 
   long   mId;
   long   mTime;
@@ -243,10 +243,14 @@ class DBlock
 
   int getPaintColor() { return (mPaint==null)? 0 : mPaint.getColor(); }
 
-  void clearPaint() { mPaint = null; }
+  void clearPaint() { 
+    // Log.v("DistoX", "Block " + mId + " clear paint");
+    mPaint = null;
+  }
 
-  void setPaint( int color )
+  void setPaintColor( int color )
   {
+    // Log.v("DistoX", "Block " + mId + " set paint color " + color );
     if ( color == 0 ) { mPaint = null; return; }
     if ( mPaint == null ) { 
       mPaint = BrushManager.makePaint( color );
@@ -345,14 +349,14 @@ class DBlock
     if ( mFrom.length() > 0 ) {
       if ( mTo.length() > 0 ) {
         mBlockType = is_backleg ? BLOCK_BACK_LEG : BLOCK_MAIN_LEG;
-      } else {
+      } else if ( ! isSplay() ) {
         mBlockType = BLOCK_SPLAY;
       }
     } else {
-      if ( mTo.length() > 0 ) {
-        mBlockType = BLOCK_SPLAY;
-      } else {
+      if ( mTo.length() == 0 /* && mBlockType != BLOCK_EXTRA */ ) {
         mBlockType = BLOCK_BLANK;
+      } else if ( ! isSplay() ) {
+        mBlockType = BLOCK_SPLAY;
       }
     }
   }
@@ -382,7 +386,10 @@ class DBlock
   //   return BLOCK_MAIN_LEG;
   // }
 
-  int color() { return colors[ mBlockType ]; }
+  int color() { 
+    // Log.v("DistoX", "Block " + mId + " color() block type " + mBlockType );
+    return colors[ mBlockType ];
+  }
 
   // compute relative angle in radians
   float relativeAngle( DBlock b )
