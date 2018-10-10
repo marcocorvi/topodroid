@@ -220,8 +220,8 @@ class DeviceA3MemoryDialog extends MyDialog
           mETto.setError( error );
           return;
         }
-        askReset( ht );
-        // mParent.resetA3DeviceHeadTail( ht );
+        // askReset( ht ); // already done by DeviceActivity::resetA3DeviceHeadTail
+        mParent.resetA3DeviceHeadTail( ht );
         break;
       // case R.id.button_cancel:
       //   dismiss();
@@ -230,18 +230,17 @@ class DeviceA3MemoryDialog extends MyDialog
   }
 
   // @param ht[] head-tail addresses
-  private void askReset( final int ht[] )
-  {
-    TopoDroidAlertDialog.makeAlert( mContext, mParent.getResources(), R.string.ask_reset,
-      new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick( DialogInterface dialog, int btn ) {
-          mParent.resetA3DeviceHeadTail( ht );
-          // finish(); 
-        }
-      }
-    );
-  }
-
+  // private void askReset( final int ht[] )
+  // {
+  //   TopoDroidAlertDialog.makeAlert( mContext, mParent.getResources(), R.string.ask_reset,
+  //     new DialogInterface.OnClickListener() {
+  //       @Override
+  //       public void onClick( DialogInterface dialog, int btn ) {
+  //         mParent.resetA3DeviceHeadTail( ht );
+  //         // finish(); 
+  //       }
+  //     }
+  //   );
+  // }
 
 }

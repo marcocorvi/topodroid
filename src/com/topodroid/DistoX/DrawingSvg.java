@@ -171,37 +171,41 @@ class DrawingSvg
             out.write( sw4.getBuffer().toString() );
             out.flush();
           }
-          for ( DrawingPath sh : plot.getSplays() ) {
-            DBlock blk = sh.mBlock;
-            if ( blk == null ) continue;
-
-            StringWriter sw41 = new StringWriter();
-            PrintWriter pw41  = new PrintWriter(sw41);
-            // // if ( sh.mType == DrawingPath.DRAWING_PATH_SPLAY ) {
-            //   NumStation f = num.getStation( blk.mFrom );
-            //   pw41.format("  <path stroke-width=\"%.2f\" stroke=\"grey\" d=\"", TDSetting.mSvgShotStroke );
-            //   float dh = blk.mLength * (float)Math.cos( blk.mClino * TDMath.DEG2RAD )*SCALE_FIX;
-            //   if ( type == PlotInfo.PLOT_PLAN ) {
-            //     float x = xoff + util.toSceneX( f.e, f.s ); 
-            //     float y = yoff + util.toSceneY( f.e, f.s );
-            //     float de =   dh * (float)Math.sin( blk.mBearing * TDMath.DEG2RAD);
-            //     float ds = - dh * (float)Math.cos( blk.mBearing * TDMath.DEG2RAD);
-            //     pw41.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x + de, (y+ds) );
-            //   } else if ( PlotInfo.isProfile( type ) ) { // FIXME OK PROFILE
-            //     float x = xoff + util.toSceneX( f.h, f.v );
-            //     float y = yoff + util.toSceneY( f.h, f.v );
-            //     float dv = - blk.mLength * (float)Math.sin( blk.mClino * TDMath.DEG2RAD )*SCALE_FIX;
-            //     float ext = blk.getReducedExtend();
-            //     pw41.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x+dh*ext, (y+dv) );
-            //   }
-            // // }
-            pw41.format("  <path stroke-width=\"%.2f\" stroke=\"grey\" d=\"", TDSetting.mSvgShotStroke );
-            pw41.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
-
-            out.write( sw41.getBuffer().toString() );
-            out.flush();
-          }
           out.write("</g>\n");
+          if ( TDSetting.mSvgSplays ) {
+            out.write("<g style=\"fill:none;stroke-opacity:0.4;stroke:orange\" >\n");
+            for ( DrawingPath sh : plot.getSplays() ) {
+              DBlock blk = sh.mBlock;
+              if ( blk == null ) continue;
+
+              StringWriter sw41 = new StringWriter();
+              PrintWriter pw41  = new PrintWriter(sw41);
+              // // if ( sh.mType == DrawingPath.DRAWING_PATH_SPLAY ) {
+              //   NumStation f = num.getStation( blk.mFrom );
+              //   pw41.format("  <path stroke-width=\"%.2f\" stroke=\"grey\" d=\"", TDSetting.mSvgShotStroke );
+              //   float dh = blk.mLength * (float)Math.cos( blk.mClino * TDMath.DEG2RAD )*SCALE_FIX;
+              //   if ( type == PlotInfo.PLOT_PLAN ) {
+              //     float x = xoff + util.toSceneX( f.e, f.s ); 
+              //     float y = yoff + util.toSceneY( f.e, f.s );
+              //     float de =   dh * (float)Math.sin( blk.mBearing * TDMath.DEG2RAD);
+              //     float ds = - dh * (float)Math.cos( blk.mBearing * TDMath.DEG2RAD);
+              //     pw41.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x + de, (y+ds) );
+              //   } else if ( PlotInfo.isProfile( type ) ) { // FIXME OK PROFILE
+              //     float x = xoff + util.toSceneX( f.h, f.v );
+              //     float y = yoff + util.toSceneY( f.h, f.v );
+              //     float dv = - blk.mLength * (float)Math.sin( blk.mClino * TDMath.DEG2RAD )*SCALE_FIX;
+              //     float ext = blk.getReducedExtend();
+              //     pw41.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x+dh*ext, (y+dv) );
+              //   }
+              // // }
+              pw41.format("  <path stroke-width=\"%.2f\" stroke=\"grey\" d=\"", TDSetting.mSvgShotStroke );
+              pw41.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
+
+              out.write( sw41.getBuffer().toString() );
+              out.flush();
+            }
+            out.write("</g>\n");
+	  }
         }
 
         if ( TDSetting.mSvgLineDirection ) {

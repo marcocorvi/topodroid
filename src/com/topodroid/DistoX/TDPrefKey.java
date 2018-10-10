@@ -376,6 +376,7 @@ class TDPrefKey
 
     // "DISTOX_SVG_GRID",        // 18 // whether to export grid in SVG 
     // "DISTOX_SVG_LINE_DIR",          // whether to add line orientation ticks in SVG export
+    // "DISTOX_SVG_SPLAYS",
     // // "DISTOX_SVG_IN_HTML",        // whether to export SVG embedded in HTML
     // "DISTOX_SVG_POINT_STROKE", // 20 
     // "DISTOX_SVG_LABEL_STROKE", 
@@ -624,6 +625,7 @@ class TDPrefKey
   static String[] EXPORT_SVG = { // [8]
     "DISTOX_SVG_GRID",        // 0 // whether to export grid in SVG 
     "DISTOX_SVG_LINE_DIR",          // whether to add line orientation ticks in SVG export
+    "DISTOX_SVG_SPLAYS",
     // "DISTOX_SVG_IN_HTML",        // whether to export SVG embedded in HTML
     "DISTOX_SVG_POINT_STROKE", // 2
     "DISTOX_SVG_LABEL_STROKE", 
@@ -636,6 +638,7 @@ class TDPrefKey
   static int[] EXPORT_SVGtitle = {
     R.string.pref_svg_grid_title,
     R.string.pref_svg_line_dir_title,
+    R.string.pref_svg_splays_title,
     // R.string.pref_svg_in_html_title,
     R.string.pref_svg_pointstroke_title,
     R.string.pref_svg_labelstroke_title,
@@ -647,6 +650,7 @@ class TDPrefKey
   static int[] EXPORT_SVGdesc = {
     R.string.pref_svg_grid_summary,
     R.string.pref_svg_line_dir_summary,
+    R.string.pref_svg_splays_summary,
     // R.string.pref_svg_in_html_summary,
     R.string.pref_svg_pointstroke_summary,
     R.string.pref_svg_labelstroke_summary,
@@ -658,6 +662,7 @@ class TDPrefKey
   static String[] EXPORT_SVGdef = {
     FALSE,
     FALSE,
+    TRUE,
     // FALSE,
     "0.1",
     "0.3",

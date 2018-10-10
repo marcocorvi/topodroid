@@ -545,13 +545,25 @@ public class DeviceActivity extends Activity
     // return true;
   }
 
+  private boolean checkA3headtail( int[] ht )
+  {
+    if ( ht[0] < 0 || ht[0] >= DeviceA3Details.MAX_ADDRESS_A3 || ht[1] < 0 || ht[1] >= DeviceA3Details.MAX_ADDRESS_A3 ) {
+      TDToast.make(R.string.device_illegal_addr );
+      return false;
+    }
+    return true;
+  }
+
   // reset data from stored-tail (inclusive) to current-tail (exclusive)
   private void doResetA3DeviceHeadTail( int[] head_tail )
   {
-    int from = head_tail[0];
-    int to   = head_tail[1];
-    // Log.v(TopoDroidApp.TAG, "do reset from " + from + " to " + to );
-    int n = mApp.swapHotBit( mCurrDevice.mAddress, from, to );
+    // int from = head_tail[0];
+    // int to   = head_tail[1];
+    // // Log.v(TopoDroidApp.TAG, "do reset from " + from + " to " + to );
+    // int n = mApp.swapHotBit( mCurrDevice.mAddress, from, to );
+    if ( checkA3headtail( head_tail ) ) {
+      ( new SwapHotBitTask( mApp, Device.DISTO_A3, mCurrDevice.mAddress, head_tail ) ).execute();
+    }
   }
 
   void storeDeviceHeadTail( int[] head_tail )
@@ -587,12 +599,9 @@ public class DeviceActivity extends Activity
   // @param head_tail addresses
   void readA3Memory( IMemoryDialog dialog, int[] head_tail, String dumpfile )
   {
-    if (    head_tail[0] < 0 || head_tail[0] >= DeviceA3Details.MAX_ADDRESS_A3 
-         || head_tail[1] < 0 || head_tail[1] >= DeviceA3Details.MAX_ADDRESS_A3 ) {
-      TDToast.make(R.string.device_illegal_addr );
-      return;
+    if ( checkA3headtail( head_tail ) ) {
+      ( new MemoryReadTask( mApp, dialog, Device.DISTO_A3, mCurrDevice.mAddress, head_tail, dumpfile ) ).execute();
     }
-    ( new MemoryReadTask( mApp, dialog, Device.DISTO_A3, mCurrDevice.mAddress, head_tail, dumpfile ) ).execute();
   }
 
   // X310 data memory is read-only
@@ -606,20 +615,17 @@ public class DeviceActivity extends Activity
   void resetA3DeviceHeadTail( final int[] head_tail )
   {
     // Log.v(TopoDroidApp.TAG, "reset device from " + head_tail[0] + " to " + head_tail[1] );
-    if ( head_tail[0] < 0 || head_tail[0] >= 0x8000 || head_tail[1] < 0 || head_tail[1] >= 0x8000 ) {
-      TDToast.make(R.string.device_illegal_addr );
-      return;
-    } 
-    // TODO ask confirm
-    TopoDroidAlertDialog.makeAlert( this, getResources(),
-                              getResources().getString( R.string.device_reset ) + " ?",
-      new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick( DialogInterface dialog, int btn ) {
-          doResetA3DeviceHeadTail( head_tail );
+    if ( checkA3headtail( head_tail ) ) {
+      // TODO ask confirm
+      TopoDroidAlertDialog.makeAlert( this, getResources(), getResources().getString( R.string.device_reset ) + " ?",
+        new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick( DialogInterface dialog, int btn ) {
+            doResetA3DeviceHeadTail( head_tail );
+          }
         }
-      }
-    );
+      );
+    }
   }
 
 

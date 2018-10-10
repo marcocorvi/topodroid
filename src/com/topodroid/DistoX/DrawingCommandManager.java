@@ -1229,6 +1229,7 @@ class DrawingCommandManager
    
     Bitmap bitmap = null;
     while ( bitmap == null && mBitmapScale > 0.05 ) {
+      if ( width <= 0 || height <= 0 ) return null; 
       try {
         // bitmap =  Bitmap.createBitmap (width, height, Bitmap.Config.ARGB_8888);
         bitmap =  Bitmap.createBitmap (width, height, Bitmap.Config.RGB_565);
@@ -1241,8 +1242,11 @@ class DrawingCommandManager
         return null;
       }
     }
-    if ( mBitmapScale <= 0.05 ) return null;
     if ( bitmap == null ) return null;
+    if ( mBitmapScale <= 0.05 ) {
+      bitmap.recycle();
+      return null;
+    }
     // Log.v( "DistoX", "PNG mBitmapScale " + mBitmapScale + "/" + TDSetting.mBitmapScale + " " + width + "x" + height );
     Canvas c = new Canvas (bitmap);
     // c.drawColor(TDSetting.mBitmapBgcolor, PorterDuff.Mode.CLEAR);

@@ -672,16 +672,17 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] tit = TDPrefKey.EXPORT_SVGtitle;
     int[] dsc = TDPrefKey.EXPORT_SVGdesc;
     String[] def = TDPrefKey.EXPORT_SVGdef;
-    TDPref[] ret = new TDPref[ 8 ];
+    TDPref[] ret = new TDPref[ 9 ];
     ret[0] = makeCbx( cat, key[0], tit[0], dsc[0], N, def[0],         res, hlp );
     ret[1] = makeCbx( cat, key[1], tit[1], dsc[1], E, def[1],         res, hlp );
+    ret[2] = makeCbx( cat, key[2], tit[2], dsc[2], E, def[2],         res, hlp );
     // r ] = makeCbx( cat, key[ ], tit[ ], dsc[ ], X, def[ ],         res, hlp );
-    ret[2] = makeEdt( cat, key[2], tit[2], dsc[2], A, def[2], FLOAT,  res, hlp );
     ret[3] = makeEdt( cat, key[3], tit[3], dsc[3], A, def[3], FLOAT,  res, hlp );
     ret[4] = makeEdt( cat, key[4], tit[4], dsc[4], A, def[4], FLOAT,  res, hlp );
     ret[5] = makeEdt( cat, key[5], tit[5], dsc[5], A, def[5], FLOAT,  res, hlp );
     ret[6] = makeEdt( cat, key[6], tit[6], dsc[6], A, def[6], FLOAT,  res, hlp );
     ret[7] = makeEdt( cat, key[7], tit[7], dsc[7], A, def[7], FLOAT,  res, hlp );
+    ret[8] = makeEdt( cat, key[8], tit[8], dsc[8], A, def[8], FLOAT,  res, hlp );
     return ret;
   }
 
