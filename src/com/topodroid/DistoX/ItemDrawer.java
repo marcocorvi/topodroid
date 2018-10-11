@@ -73,7 +73,8 @@ public class ItemDrawer extends Activity
 
   static void updateRecentArea( Symbol area ) { updateRecent( area, mRecentArea ); }
 
-  private static void updateRecent( Symbol symbol, Symbol symbols[] )
+  // used by RecentSymbolTask
+  static void updateRecent( Symbol symbol, Symbol symbols[] )
   {
     if ( symbol == null ) return;
     for ( int k=0; k<NR_RECENT; ++k ) {
@@ -93,85 +94,13 @@ public class ItemDrawer extends Activity
   //
   protected void loadRecentSymbols( DataHelper data )
   {
-    // Log.v("DistoX", "load recent tools");
-    BrushManager.mPointLib.setRecentSymbols( mRecentPoint );
-    BrushManager.mLineLib.setRecentSymbols( mRecentLine );
-    BrushManager.mAreaLib.setRecentSymbols( mRecentArea );
+    ( new RecentSymbolsTask( this, data, mRecentPoint, mRecentLine, mRecentArea, NR_RECENT, RecentSymbolsTask.LOAD ) ).execute();
 
-    String names = data.getValue( "recent_points" );
-    if ( names != null ) {
-      String points[] = names.split(" ");
-      for ( String point : points ) {
-        updateRecent( BrushManager.mPointLib.getSymbolByFilename( point ), mRecentPoint );
-      }
-    }
-    names = data.getValue( "recent_lines" );
-    if ( names != null ) {
-      String lines[] = names.split(" ");
-      for ( String line : lines ) {
-        updateRecent( BrushManager.mLineLib.getSymbolByFilename( line ), mRecentLine );
-      }
-    }
-    names = data.getValue( "recent_areas" );
-    if ( names != null ) {
-      String areas[] = names.split(" ");
-      for ( String area : areas ) {
-        updateRecent( BrushManager.mAreaLib.getSymbolByFilename( area ), mRecentArea );
-      }
-    }
   }
 
   protected void saveRecentSymbols( DataHelper data )
   {
-    // Log.v("DistoX", "save recent tools");
-    boolean first = false;
-    if ( mRecentPoint[0] != null ) {
-      StringBuilder points = new StringBuilder( );
-      // first = false;
-      for ( int k=NR_RECENT-1; k>=0; --k ) {
-        if ( mRecentPoint[k] != null ) {
-          if ( first ) {
-            points.append(" ").append(mRecentPoint[k].mThName);
-          } else {
-            first = true;
-            points.append( mRecentPoint[k].mThName );
-          }
-        }
-      }
-      data.setValue( "recent_points", points.toString() );
-    }
-
-    if ( mRecentLine[0] != null ) {
-      StringBuilder lines = new StringBuilder( );
-      first = false;
-      for ( int k=NR_RECENT-1; k>=0; --k ) {
-        if ( mRecentLine[k] != null ) {
-          if ( first ) {
-            lines.append(" ").append(mRecentLine[k].mThName);
-          } else {
-            first = true;
-            lines.append( mRecentLine[k].mThName );
-          }
-        }
-      }
-      data.setValue( "recent_lines", lines.toString() );
-    }
-
-    if ( mRecentArea[0] != null ) { 
-      StringBuilder areas = new StringBuilder( );
-      first = false;
-      for ( int k=NR_RECENT-1; k>=0; --k ) {
-        if ( mRecentArea[k] != null ) {
-          if ( first ) {
-            areas.append(" ").append(mRecentArea[k].mThName);
-          } else {
-            first = true;
-            areas.append( mRecentArea[k].mThName );
-          }
-        }
-      }
-      data.setValue( "recent_areas", areas.toString() );
-    }
+    ( new RecentSymbolsTask( this, data, mRecentPoint, mRecentLine, mRecentArea, NR_RECENT, RecentSymbolsTask.SAVE ) ).execute();
   }
 
   // ----------------------------------------------------------------------
