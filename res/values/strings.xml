@@ -478,6 +478,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="survey_not_attached">WARNING: unattached shots</string>
     <string name="survey_not_extend">WARNING: unset shot extends</string>
     <string name="survey_not_attached_extend">WARNING: unattached shots and unset extends</string>
+    <string name="survey_no_data_reduction">WARNING: no data reduction</string>
     <string name="saturated_coeffs">WARNING: saturated calibration coefficients</string>
     <string name="out_of_memory">WARNING: out of memory !</string>
     <string name="disk_io_error">CRITICAL: disk i/o error !</string>
