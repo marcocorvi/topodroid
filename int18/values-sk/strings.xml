@@ -179,7 +179,9 @@
     <string name="head_tail_failed">Neúspešné čitanie pamäte DistoX</string>
     <string name="head_tail_store_failed">Neúspešné uloženie pamäte DistoX</string>
     <!-- UNUSED string name="pairing_failed">Pairing failed</string -->
-
+ 
+    <string name="datamode_normal">Normálny data-mód</string>
+    <string name="datamode_diving">Ptápačský data-mód</string>	
     <string name="illegal_data_value">Nesprávne hodnoty údajov</string>
 
     <string name="photo_title">FOTO</string>
@@ -966,7 +968,7 @@
   <string name="pref_cat_log">NASTAVENIE ZÁZNAMU</string>
 
   <string name="pref_locale_title">Jazyk</string>
-  <string name="pref_locale_summary">Jazyk</string>
+  <string name="pref_locale_summary">Výber Jazyka aplikácie</string>
 
   <string name="pref_raw_data_title">Surové dáta</string>
   <string name="pref_raw_data_summary">Zobrazuje nespracované dáta</string>
@@ -979,18 +981,20 @@
   <string name="pref_no_cursor_title">Kurzory na klávesnici</string>
   <string name="pref_no_cursor_summary">Povoliť / zakázať tlačidlá kurzoru na základnej klávesnici</string>
   <string name="pref_local_help_title">Prekladateľská príručka</string>
-  <string name="pref_local_help_summary">Povolí prekladateľskú príručku</string>
+  <string name="pref_local_help_summary">Výber jazyka prekladateľskej príručky</string>
   <string name="pref_cosurvey_title">Spoločný priekum</string>
   <string name="pref_cosurvey_summary">Aktivovať / deaktivovať funkciu Spoločného prieskumu</string>
-  <string name="pref_export_shots_title">Predvolený formát exportu dát</string>
+  <string name="pref_import_datamode_title">Datamód Importu</string>
+  <string name="pref_import_datamode_summary">Výber Datamódu pre import meraní</string>	
+  <string name="pref_export_shots_title">Formát exportu - dát</string>
   <string name="pref_export_shots_summary">Predvolený formát exportu dát</string>
-  <string name="pref_export_plot_title"> Predvolený formát exportu nákresu</string>
+  <string name="pref_export_plot_title"> Formát exportu - nákresu</string>
   <string name="pref_export_plot_summary">Predvolený formát exportu nákresu</string>
   <string name="pref_therion_maps_title">Therion mapy ako prvé</string>
   <string name="pref_therion_maps_summary">Therion mapy pred dátami</string>
   <string name="pref_extra_buttons_title">Úroveň príkazov</string>
-  <string name="pref_extra_buttons_summary">Vyberte Úroveň príkazov</string>
-  <string name="pref_size_buttons_title">Veľkosť ikon tlačidiel</string>
+  <string name="pref_extra_buttons_summary">Výber Úrovne príkazov</string>
+  <string name="pref_size_buttons_title">Veľkosť tlačidiel</string>
   <string name="pref_size_buttons_summary">Veľkosť ikon tlačidiel</string>
   <!-- UNUSED string name="pref_size_buttons_message">Scrivi la dimensione dei bottoni della barra superiore [pixels]</string -->
 
@@ -1000,9 +1004,9 @@
   <string name="pref_leg_shots_summary">Minimálny počet jednotlivých zámer, ktoré program vyhodnotí ako hlavnú zámeru</string>
   <string name="pref_recent_timeout_title">Posledne stiahnuté dáta - časovač</string>
   <string name="pref_recent_timeout_summary">Čas po ktorom dáta už nie sú označené ako Posledne stiahnuté</string>
-  <string name="pref_station_prefix_title">Predčíslie bodu v programe Compass</string>
+  <string name="pref_station_prefix_title">Predčíslie bodu</string>
   <string name="pref_station_prefix_summary">Export predčíslia bodov Compass</string>
-  <string name="pref_compass_splays_title">Pomocné zámery programu Compass</string>
+  <string name="pref_compass_splays_title">Pomocné zámery</string>
   <string name="pref_compass_splays_summary">Export pomocných zámer do programu Compass</string>
   <!-- UNUSED string name="pref_trobot_names_title">Názvy staníc TopoRobot</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Názvy staníc sú v štýle TopoRobot</string -->
@@ -1014,14 +1018,14 @@
   <string name="pref_lrud_horizontal_summary">Maximálny uhol pomocnej zámery na export LR merania</string>
   <string name="pref_survex_eol_title">Prípona Survex / Topo</string>
   <string name="pref_survex_eol_summary">Survex / topo - prípona</string>
-  <string name="pref_survex_splay_title">Body pomocných zámer programu Survex</string>
-  <string name="pref_survex_splay_summary">Pridá koncový bod do pomocných zámer v Survex</string>
+  <string name="pref_survex_splay_title">Body pomocných zámer</string>
+  <string name="pref_survex_splay_summary">Pridanie koncového bodu do pomocných zámer v Survex</string>
   <string name="pref_survex_lrud_title">Survex / Therion - LRUD</string>
-  <string name="pref_survex_lrud_summary">Pridá LRUD do programu Survex/Therion </string>
+  <string name="pref_survex_lrud_summary">Pridanie LRUD do programu Survex/Therion </string>
   <string name="pref_svg_grid_title">SVG mriežka</string>
-  <string name="pref_svg_grid_summary">Pridá mriežku do exportu SVG</string>
-  <!-- TODO string name="pref_svg_splays_title">SVG splays</string -->
-  <!-- TODO string name="pref_svg_splays_summary">Include splays into SVG export</string -->
+  <string name="pref_svg_grid_summary">Pridanie mriežky do exportu SVG</string>
+  <string name="pref_svg_splays_title">SVG pomocné zámery</string>
+  <string name="pref_svg_splays_summary">Zahrnutie pomocných zámer do exportu SVG</string>	
   <!-- UNUSED string name="pref_svg_in_html_title">SVG v \'HTML</string -->
   <!-- UNUSED string name="pref_svg_in_html_summary">Zadajte export SVG v HTML</string -->
   <string name="pref_svg_pointstroke_title">SVG, šírka bodov</string>
@@ -1038,10 +1042,10 @@
   <string name="pref_svg_linedirstroke_summary">SVG: orientation stroke</string>
   <string name="pref_svg_line_dir_title">SVG line orientation</string>
   <string name="pref_svg_line_dir_summary">SVG: line orientation</string>
-  <string name="pref_kml_stations_title">KML meracie body</string>
-  <string name="pref_kml_stations_summary">Pridať meracie body do exportu KML</string>
+  <string name="pref_kml_stations_title">KML staničenia</string>
+  <string name="pref_kml_stations_summary">Pridanie staničení do exportu KML</string>
   <string name="pref_kml_splays_title">KML pomocné zámery</string>
-  <string name="pref_kml_splays_summary">Pridať pomocné zámery do KML exportu</string>
+  <string name="pref_kml_splays_summary">Pridanie pomocných zámer do KML exportu</string>
 
   <string name="pref_sock_type_title">Zabezpečenie</string>
   <string name="pref_sock_type_summary">Vytvorte zabezpečenie</string>
@@ -1086,7 +1090,7 @@
   <string name="pref_pt_color_map_title">Farebná mapa PocketTopo</string>
   <string name="pref_pt_color_map_summary">Import podľa farieb z PocketTopo</string>
   <string name="pref_text_size_title">Veľkosť textu</string>
-  <string name="pref_text_size_summary">Nastaviť veľkosť textu v hlavnom okne a v okne merania</string>
+  <string name="pref_text_size_summary">Veľkosť textu v hlavnom okne a v okne merania</string>
   <string name="pref_closeness_title">Veľkosť výberu objektov v Režime Editácie</string>
   <string name="pref_closeness_message">Prednastavená veľkosť pri výbere objektov v Režime Editácie</string>
   <string name="pref_eraseness_title">Rozsah veľkosti gumy</string>
@@ -1159,13 +1163,13 @@
   <string name="pref_bitmap_scale_title">Rozlíšenie PNG</string>
   <string name="pref_bitmap_scale_summary">Rozlíšenie pri exporte výkresov PNG</string>
   <string name="pref_bitmap_bgcolor_title">Farba pozadia pre PNG</string>
-  <string name="pref_bitmap_bgcolor_summary">Nastavenie farby pozadia pre expotr nákresov vo formáte PNG</string>
+  <string name="pref_bitmap_bgcolor_summary">Nastavenie farby pozadia pre export nákresov vo formáte PNG</string>
   <string name="pref_acad_version_title"> Verzia AutoCADu</string>
-  <string name="pref_acad_version_summary">Verzia AutoCADu</string>
+  <string name="pref_acad_version_summary">Vybratie verzie AutoCADu</string>
   <!-- UNUSED string name="pref_dxf_scale_title">Fakror mierky nákresu DXF</string -->
   <!-- UNUSED string name="pref_dxf_scale_summary">Faktor mierky DXF</string -->
-  <string name="pref_dxf_blocks_title">DXF konce pomocných zámer</string>
-  <string name="pref_dxf_blocks_summary">Koncové body pomocných zámer pre export DXF </string>
+  <string name="pref_dxf_blocks_title">Koncové body pomocných zámer</string>
+  <string name="pref_dxf_blocks_summary">Zahrnie Koncové body pomocných zámer pre export DXF</string>
   <string name="pref_thumbnail_title">Veľkosť Náhľadov</string>
   <string name="pref_thumbnail_summary">Veľkosť náhľadov fotiek</string>
   <string name="pref_shot_timer_title">Časovač zámery smeru</string>
@@ -1221,14 +1225,14 @@
   <!-- UNUSED string name="pref_xtherion_areas_title">Aree xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Salva le aree in modo xtherion</string -->
   <string name="pref_therion_splays_title">Therion pomocné zámery</string>
-  <string name="pref_therion_splays_summary">Pridať u:pomocné zámery do súborov th2</string>
+  <string name="pref_therion_splays_summary">Pridanie u:pomocných zámer do súborov th2</string>
   <string name="pref_autoStations_title">Staničenie Therionu</string>
-  <string name="pref_autoStations_summary">Pridanie staničení automaticky do Therionu</string>
+  <string name="pref_autoStations_summary">Automatické pridanie staničení do Therionu</string>
   <string name="pref_loopClosure_title">Vyrovnanie polygoného ťahu</string>
   <string name="pref_loopClosure_summary">Vyrovnanie polygoného ťahu</string>
   <!-- UNUSED string name="pref_splayExtend_title">Stima extend per splay</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Stima del extend degli splay</string -->
-  <string name="pref_swapLR_title">Prepnúť na LR</string>
+  <string name="pref_swapLR_title">Prepnutie na LR</string>
   <string name="pref_swapLR_summary">v programe Compass</string>
   <string name="pref_LRExtend_title">Odhadnúť Smerovú orientáciu vľavo/vpravo</string>
   <string name="pref_LRExtend_summary">Odhadnúť Smerovú orientáciu vľavo/vpravo (len pre import Compass VisualTopo)</string>
