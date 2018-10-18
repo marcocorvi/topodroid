@@ -625,7 +625,7 @@
     <!-- UNUSED string name="button_zoomfit"   >Adatta zoom</string -->
     <!-- UNUSED string name="button_landscape" >Panorama  </string -->
     <!-- UNUSED string name="button_portrait"  >Ritratto  </string -->
-    <!-- TODO string name="button_splays">Splays</string -->
+    <string name="button_splays">Pomocné zámery</string>
     
     
     <string name="button_write"     >Nahrať koeficienty do DistaX</string>
