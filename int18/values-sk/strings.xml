@@ -209,6 +209,7 @@
 
     <string name="error_azimuth_required">Vyžaduje sa azimut</string>
     <string name="error_length_required">Vyžaduje sa dĺžka</string>
+    <string name="error_depth_required">Vyžaduje sa hĺbka</string>
     <string name="error_clino_required">Vyžaduje sa sklon</string>
     <!-- UNUSED string name="error_comment_required">Vyžaduje sa komentár</string -->
     <string name="error_begin_required">Vyžaduje sa počiatočná adresa</string>
