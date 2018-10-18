@@ -33,9 +33,9 @@
     <string name="UP">DOHORA</string>
     <string name="DOWN">DODOLA</string>
 
-    <!-- TODO string name="xsplay">X</string -->
-    <!-- TODO string name="hsplay">H</string -->
-    <!-- TODO string name="vsplay">V</string -->
+    <string name="xsplay">X</string>
+    <string name="hsplay">H</string>
+    <string name="vsplay">V</string>
 
     <string name="cut">VYSTRIHNÚŤ</string>
     <string name="copy">KOPÍROVAŤ</string>
@@ -205,7 +205,7 @@
     <string name="fmt_error_m">Chyba %1$.1f m</string>
     <string name="fmt_h_geoid">Geoid výška %1$.0f m</string>
     <string name="fmt_h_ellipsoid">Ellipsoid výška %1$.0f m</string>
-    <!-- TODO string name="depth_error">Waring. Data depth error</string -->
+    <string name="depth_error">Varov. Chyba hĺbky</string>
 
     <string name="error_azimuth_required">Vyžaduje sa azimut</string>
     <string name="error_length_required">Vyžaduje sa dĺžka</string>
@@ -305,7 +305,7 @@
     <string name="no_undelete">Žiadna položka na Obnovenie </string>
     <string name="format_measure_plan">D %1$.2f %2$.2f X %3$.2f Y %4$.2f A. %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f X %3$.2f Y %4$.2f C. %5$.1f"</string>
-    <!-- TODO string name="format_closure">%1$s-%2$s: %3$.1f / %4$.1f m [%5$.1f %6$.1f] %7$.1f (%8$.1f \u00b0)</string -->
+    <string name="format_closure">%1$s-%2$s: %3$.1f / %4$.1f m [%5$.1f %6$.1f] %7$.1f (%8$.1f \u00b0)</string>
 
     <string name="menu_3d">3D</string>
     <string name="menu_about">O PROGRAME</string>
@@ -1305,39 +1305,38 @@
   <string name="pref_algo_min_delta_title">Min-algo delta</string>
   <string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string>
 
-<!-- LEAVE LOG STUFF IN ENGLISH
-  <string name="pref_log_stream_summary">Výstupný systémový log</string>
-  <string name="pref_log_stream_title">Systémový log</string>
-  <string name="pref_log_bt">Bluetooth</string>
-  <string name="pref_log_bezier">Bezierova krivka</string>
-  <string name="pref_log_calib">Kalibrácia</string>
-  <string name="pref_log_comm">Komunikácia BT</string>
-  <string name="pref_log_csurvey">cSurvey</string>
-  <string name="pref_log_data">Dáta</string>
-  <string name="pref_log_db">Databázy</string>
-  <string name="pref_log_debug">Ladiť</string>
-  <string name="pref_log_device">Okno DistoX</string>
-  <string name="pref_log_distox">DistoX</string>
-  <string name="pref_log_err">Chyby</string>
-  <string name="pref_log_fixed">GPS body</string>
-  <string name="pref_log_input">Vstup užívateľa</string>
-  <string name="pref_log_io">Nákres i/o</string>
-  <string name="pref_log_loc">Polohy GPS</string>
-  <string name="pref_log_num">Kompresia dát</string>
-  <string name="pref_log_path">Cesta súboru</string>
-  <string name="pref_log_perm">Povolenia</string>	
-  <string name="pref_log_photo">Fotografovanie</string>
-  <string name="pref_log_plot">Nákresy</string>
-  <string name="pref_log_proto">Protokol DistoX</string>
-  <string name="pref_log_ptopo">PocketTopo</string>
-  <string name="pref_log_sensor">Senzory</string>
-  <string name="pref_log_shot">Zámery</string>
-  <string name="pref_log_sync">Spoločný prieskum</string>
-  <string name="pref_log_survey">Merania</string>
-  <string name="pref_log_therion">Therion</string>
-  <string name="pref_log_units">Jednotky</string>
-  <string name="pref_log_zip">ZIP</string>
--->
+  <string name="pref_log_stream_summary" translatable="false">Log output stream</string>
+  <string name="pref_log_stream_title" translatable="false">Log stream</string>
+  <string name="pref_log_append" translatable="false">append logs</string>
+  <string name="pref_log_bt" translatable="false">Bluetooth</string>
+  <string name="pref_log_bezier" translatable="false">Bezier curves</string>
+  <string name="pref_log_calib" translatable="false">Calibration</string>
+  <string name="pref_log_comm" translatable="false">BT communication</string>
+  <string name="pref_log_csurvey" translatable="false">cSurvey</string>
+  <string name="pref_log_data" translatable="false">Survey data</string>
+  <string name="pref_log_db" translatable="false">Database</string>
+  <string name="pref_log_debug" translatable="false">Debug</string>
+  <string name="pref_log_device" translatable="false">Device window</string>
+  <string name="pref_log_distox" translatable="false">DistoX</string>
+  <string name="pref_log_err" translatable="false">Error</string>
+  <string name="pref_log_fixed" translatable="false">GPS points</string>
+  <string name="pref_log_input" translatable="false">User input</string>
+  <string name="pref_log_io" translatable="false">Sketch i/o</string>
+  <string name="pref_log_loc" translatable="false">Location</string>
+  <string name="pref_log_num" translatable="false">Data reduction</string>
+  <string name="pref_log_path" translatable="false">File paths</string>
+  <string name="pref_log_perm" translatable="false">Permissions</string>
+  <string name="pref_log_photo" translatable="false">Photo</string>
+  <string name="pref_log_plot" translatable="false">Sketches</string>
+  <string name="pref_log_proto" translatable="false">DistoX protocol</string>
+  <string name="pref_log_ptopo" translatable="false">PocketTopo</string>
+  <string name="pref_log_sensor" translatable="false">Sensors</string>
+  <string name="pref_log_shot" translatable="false">Shots</string>
+  <string name="pref_log_sync" translatable="false">Cosurveying</string>
+  <string name="pref_log_survey" translatable="false">Surveys</string>
+  <string name="pref_log_therion" translatable="false">Therion</string>
+  <string name="pref_log_units" translatable="false">Units</string>
+  <string name="pref_log_zip" translatable="false">ZIP</string>
 
   <!-- UNUSED string name="line_bezier">Bezier</string -->
   <!-- UNUSED string name="line_fine">fine</string -->
