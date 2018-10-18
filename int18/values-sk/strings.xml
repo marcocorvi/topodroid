@@ -409,6 +409,7 @@
     <!-- UNUSED string name="plot_view">Caposaldo puntato</string -->
     <string name="read_fail_with_code">Načítanie zlyhalo: chybový kód </string>
     <string name="read_failed">Neúspešné načítanie údajov DistoX</string>
+    <string name="swap_hotbit_ok">Prehodené dáta hot bit</string>
     <!-- UNUSED string name="reading_file_failed">Failed file-read</string -->
     
     <string name="saved_file_1">Súbor uložený %1$s</string>
