@@ -45,6 +45,15 @@
      <item>Destra</item>
      <item>- -</item>
   </string-array -->
+  
+  <string-array name="importDatamode">
+     <item name="normal">Normálny</item>
+     <item name="diving">Potápanie</item>
+    
+  <string-array name="importDatamodeValue"> <!-- see SurveyInfo.DATAMODE_xxx -->
+     <item name="normal">0</item>
+     <item name="diving">1</item>
+  </string-array>
 
   <string-array name="exportShots">
      <item name="none">Žiadny</item>
