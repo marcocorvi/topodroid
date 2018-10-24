@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <resources>
 
   <string-array name="lineContinue">
@@ -49,6 +48,7 @@
   <string-array name="importDatamode">
      <item name="normal">Normálny</item>
      <item name="diving">Potápanie</item>
+  </string-array>
     
   <string-array name="importDatamodeValue"> <!-- see SurveyInfo.DATAMODE_xxx -->
      <item name="normal">0</item>

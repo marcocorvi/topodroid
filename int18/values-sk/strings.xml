@@ -959,6 +959,7 @@
   <string name="pref_cat_drawing">NASTAVENIE KRESLENIA</string>
   <string name="pref_cat_import_export">NASTAVENIE IMPORT/EXPORT</string>
   <string name="pref_cat_exportimport">IMPORT</string>
+<!-- PROGRAM NAMES AND FILE TYPES SHOULD NOT BE TRANSLATED
   <string name="pref_cat_exportsvx" translatable="false">Survex</string>
   <string name="pref_cat_exportth"  translatable="false">Therion</string>
   <string name="pref_cat_exportdat" translatable="false">Compass</string>
@@ -966,6 +967,7 @@
   <string name="pref_cat_exportdxf" translatable="false">DXF</string>
   <string name="pref_cat_exportpng" translatable="false">PNG</string>
   <string name="pref_cat_exportkml" translatable="false">KML/GeoJSON</string>
+-->
 
   <string name="pref_cat_calib">NASTAVENIE KALIBRÁCIE</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->  
@@ -1307,6 +1309,7 @@
   <string name="pref_algo_min_delta_title">Min-algo delta</string>
   <string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string>
 
+<!-- LOG STRINGS MUST NOT BE TRANSLATED (they are used to communicate with developers to solve problems)
   <string name="pref_log_stream_summary" translatable="false">Log output stream</string>
   <string name="pref_log_stream_title" translatable="false">Log stream</string>
   <string name="pref_log_append" translatable="false">append logs</string>
@@ -1339,6 +1342,7 @@
   <string name="pref_log_therion" translatable="false">Therion</string>
   <string name="pref_log_units" translatable="false">Units</string>
   <string name="pref_log_zip" translatable="false">ZIP</string>
+-->
 
   <!-- UNUSED string name="line_bezier">Bezier</string -->
   <!-- UNUSED string name="line_fine">fine</string -->
