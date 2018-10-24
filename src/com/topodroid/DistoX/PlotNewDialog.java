@@ -48,6 +48,7 @@ class PlotNewDialog extends MyDialog
   private Button   mBtnOK;
   private Button   mBtnBack;
   private CheckBox mCBextended;
+  private CheckBox mCBdangling;
   private int mIndex;
   private MyKeyboard mKeyboard = null;
 
@@ -90,6 +91,11 @@ class PlotNewDialog extends MyDialog
     mBtnBack.setOnClickListener( this );
     mCBextended = (CheckBox)findViewById( R.id.button_extended );
     mCBextended.setChecked( true );
+    mCBdangling = (CheckBox)findViewById( R.id.button_dangling );
+    mCBdangling.setChecked( false );
+    if ( ! TDLevel.overExpert ) {
+      mCBdangling.setVisibility( View.GONE );
+    }
 
     // mEditProject.setVisibility( View.INVISIBLE );
     // mCBextended.setOnClickListener( new View.OnClickListener() {
@@ -118,12 +124,11 @@ class PlotNewDialog extends MyDialog
   @Override
   public boolean onLongClick(View v) 
   {
-    if ( v.getId() == R.id.button_ok ) {  // mBtnOK
-      handleOK( false );
-    } else if ( v.getId() == R.id.edit_plot_start ) { // mEditStart
+    if ( v.getId() == R.id.edit_plot_start ) { // mEditStart
       CutNPaste.makePopup( mContext, (EditText)v );
+      return true;
     }
-    return true;
+    return false;
   }
 
   // FIXME synchronized ?
@@ -140,14 +145,14 @@ class PlotNewDialog extends MyDialog
 
     if ( /* notDone && */ b == mBtnOK ) {
       // notDone = false;
-      if ( ! handleOK( true ) ) return;
+      if ( ! handleOK( ) ) return;
     } else if ( b == mBtnBack ) {
       /* nothing */
     }
     dismiss();
   }
 
-  private boolean handleOK( boolean warning )
+  private boolean handleOK( )
   {
     String name  = mEditName.getText().toString().trim();
     String start = mEditStart.getText().toString().trim();
@@ -178,7 +183,8 @@ class PlotNewDialog extends MyDialog
       mEditName.setError( mContext.getResources().getString( R.string.plot_duplicate_name ) );
       return false;
     }
-    if ( warning && ! mMaker.hasSurveyStation( start ) ) {
+    boolean dangling = TDLevel.overExpert && mCBdangling.isChecked();
+    if ( ! ( dangling || mMaker.hasSurveyStation( start ) ) ) {
       mEditStart.setError( mContext.getResources().getString( R.string.error_station_non_existing ) );
       return false;
     }

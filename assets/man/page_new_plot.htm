@@ -11,6 +11,7 @@ It has two text field and a confirmation button.
 <li><b>reference station</b></li>
 <li><b>landscape</b> mode [T] [default no]</li>
 <li><b>extended</b> checkbox and <b>projection azimuth</b></li>
+<li><b>dangling</b> sketch (origin not attached to midline)</li>
 </ul><br><p>
 
 You can use either the <b>name</b> suggested by TopoDroid
@@ -26,8 +27,9 @@ The sketch reference the survey midline defines the sketch scale and rotation, b
 how the drawing is translated with respect to the midline. This uncertainty is resolved by specifying the
 reference station to be at (0,0) in the reference frame of the sketch canvas.<br><p>
 
-The reference station also determines the survey midline <b>data reduction</b> for the sketch. From the sketch point of view
-the midline is built starting from the reference station and continuing as long as data can be attached. The resulting midline
+The reference station also determines the survey midline <b>data reduction</b> for the sketch.
+From the sketch point of view the midline is built starting from the reference station and continuing
+as long as data can be attached. The resulting midline
 forms a tree, rooted at the reference station. In order to make the canvas less cluttered, 
 is possible to hide the display of portion of the midline, either
 after a station, or before it (i.e., between the reference station and the station).
@@ -37,8 +39,8 @@ TopoDroid fills the "reference station" with the last station or the active stat
 You can change it if you want another station as sketch reference.<br><p>
 
 The app signals an error if the reference station does not exist in the survey data.
-It can be forced to use an non-existing station with a long tap on the "OK" button. 
-In this case the sketch does not have a midline reference.<br><p>
+It can be forced to use an non-existing station by checking the "dangling" checkbox.<br>
+In this case the sketch may not have a midline reference, neither splays nor stations.<br><p>
 
 If the <b>extended</b> checkbox is checked the sketch profile is extended, and <b>projection azimuth</b> is not shown.
 Otherwise the sketch profile is projected with direction of view the projection azimuth.<br><p>

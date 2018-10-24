@@ -32,17 +32,17 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     private String mExt; // extension
     private String filename = null;
     private boolean mToast;
-    private final DrawingUtil mUtil;
+    // private final DrawingUtil mUtil;
     private String mFormat;
 
-    ExportPlotToFile( Context context, DistoXNum num, DrawingUtil util, DrawingCommandManager command,
+    ExportPlotToFile( Context context, DistoXNum num, /* DrawingUtil util, */ DrawingCommandManager command,
                          long type, String name, String ext, boolean toast )
     {
       // Log.v("DistoX", "export plot to file cstr. " + name );
       // FIXME assert( ext != null );
       mFormat   = context.getResources().getString(R.string.saved_file_1);
       mCommand  = command;
-      mUtil     = util;
+      // mUtil     = util;
       mNum      = num;
       mType     = type;
       mFullName = name;
@@ -68,9 +68,9 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
           final FileWriter fw = new FileWriter( filename );
           BufferedWriter bw = new BufferedWriter( fw );
           if ( mExt.equals("dxf") ) {
-            DrawingDxf.write( bw, mNum, mUtil, mCommand, mType );
+            DrawingDxf.write( bw, mNum, /* mUtil, */ mCommand, mType );
           } else if ( mExt.equals("svg") ) {
-            DrawingSvg.write( bw, mNum, mUtil, mCommand, mType );
+            DrawingSvg.write( bw, mNum, /* mUtil, */ mCommand, mType );
           }
           fw.flush();
           fw.close();

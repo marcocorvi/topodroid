@@ -61,6 +61,7 @@ class MultishotDialog extends MyDialog
   private TextView mTVstrikeDip;
   
   private Button   mButtonRenumber;
+  private Button   mButtonSwap;
   // private Button   mButtonHighlight; FIXME_HIGHLIGHT
   private Button   mButtonColor;
   private Button   mButtonSplays;
@@ -124,6 +125,7 @@ class MultishotDialog extends MyDialog
     // layout4.setMinimumHeight( size + 20 );
 
     mButtonRenumber  = (Button) findViewById(R.id.renumber );
+    mButtonSwap      = (Button) findViewById(R.id.swap );
     // mButtonHighlight = (Button) findViewById(R.id.highlight ); FIXME_HIGHLIGHT
     mButtonColor     = (Button) findViewById(R.id.color );
     mButtonSplays    = (Button) findViewById(R.id.splays );
@@ -134,6 +136,7 @@ class MultishotDialog extends MyDialog
     // mBlk = mBlks.get(0);
     // if ( mBlk != null && mBlk.isLeg() ) {
       mButtonRenumber.setOnClickListener( this );
+      mButtonSwap.setOnClickListener( this );
     // } else {
     //   renumber = false;
     //   ((LinearLayout) findViewById( R.id.layout_renumber )).setVisibility( View.GONE );
@@ -207,6 +210,8 @@ class MultishotDialog extends MyDialog
       mParent.renumberBlocks( mBlks, from, to );
     // } else if ( b == mButtonHighlight ) { FIXME_HIGHLIGHT
     //   mParent.highlightBlocks( mBlks );
+    } else if ( b == mButtonSwap ) {
+      mParent.swapBlocksName( mBlks );
     } else if ( b == mButtonColor ) {
       hide();
       (new MyColorPicker( mContext, this, 0 )).show();

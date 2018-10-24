@@ -34,7 +34,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   // private TopoDroidApp mApp;
   private final DrawingWindow mParent;
   private final DistoXNum mNum;
-  private final DrawingUtil mUtil;
+  // private final DrawingUtil mUtil;
   private final DrawingCommandManager mManager;
   private List<DrawingPath> mPaths;
   private String mFullName;
@@ -47,7 +47,9 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   private PlotSaveData psd2 = null;
 
   SavePlotFileTask( Context context, DrawingWindow parent, Handler handler,
-		    DistoXNum num, DrawingUtil util, DrawingCommandManager manager, 
+		    DistoXNum num,
+		    // DrawingUtil util, 
+		    DrawingCommandManager manager, 
                     String fullname, long type, int proj_dir, int suffix, int rotate )
   {
      mFormat   = context.getResources().getString(R.string.saved_file_2);
@@ -55,7 +57,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      mHandler  = handler;
      // mApp      = app;
      mNum      = num;
-     mUtil     = util;
+     // mUtil     = util;
      mManager  = manager;
      mPaths    = null;
      mFullName = fullname;
@@ -75,7 +77,9 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
 
   SavePlotFileTask( Context context, DrawingWindow parent, Handler handler,
                     // TopoDroidApp app,
-		    DistoXNum num, DrawingUtil util, List<DrawingPath> paths,
+		    DistoXNum num,
+		    // DrawingUtil util,
+		    List<DrawingPath> paths,
                     String fullname, long type, int proj_dir )
   {
      mFormat   = context.getResources().getString(R.string.saved_file_2);
@@ -83,7 +87,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      mHandler  = handler;
      // mApp      = app;
      mNum      = num;
-     mUtil     = util;
+     // mUtil     = util;
      mManager  = null;
      mPaths    = paths;
      mFullName = fullname;
@@ -103,7 +107,8 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
     // boolean do_binary = (TDSetting.mBinaryTh2 && mSuffix != PlotSave.EXPORT ); // TDR BINARY
 
     // Log.v( "DistoX", "save plot file task bkgr start");
-    synchronized( TDPath.mTherionLock ) {
+    // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
+    {
       // Log.v("DistoX", "save scrap files " + mFullName + " suffix " + mSuffix );
 
       // first pass: export
@@ -121,10 +126,10 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
             }
             break;
           case TDConst.DISTOX_EXPORT_DXF:
-            mParent.doSaveWithExt( mNum, mUtil, mManager, mType, mFullName, "dxf", false );
+            mParent.doSaveWithExt( mNum, /* mUtil, */ mManager, mType, mFullName, "dxf", false );
             break;
           case TDConst.DISTOX_EXPORT_SVG:
-            mParent.doSaveWithExt( mNum, mUtil, mManager, mType, mFullName, "svg", false );
+            mParent.doSaveWithExt( mNum, /* mUtil, */ mManager, mType, mFullName, "svg", false );
             break;
           case TDConst.DISTOX_EXPORT_CSX: // IMPORTANT CSX must come before PNG
             if ( PlotInfo.isSketch2D( mType ) ) {

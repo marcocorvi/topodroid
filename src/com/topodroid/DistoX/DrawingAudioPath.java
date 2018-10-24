@@ -96,7 +96,7 @@ class DrawingAudioPath extends DrawingPointPath
   // FIXME_SYNC might be a problem with a long audio recording, but the method is called on export, 
   // which runs on asynch task 
   @Override
-  void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil )
+  void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
   { 
     // Log.v("DistoX", "audio point " + mId + " survey " + survey );
     File audiofile = new File( TDPath.getSurveyAudioFile( survey, Long.toString( mId ) ) );
@@ -111,8 +111,8 @@ class DrawingAudioPath extends DrawingPointPath
         // pw.format("  <brush type=\"7\" />\n");
         pw.format(" <attachment dataformat\"0\" data=\"%s\" name=\"\" note=\"\" type=\"audio/x-wav\" />\n", 
           Base64.encodeToString( buf, Base64.NO_WRAP ) );
-        float x = mDrawingUtil.sceneToWorldX( cx, cy ); // convert to world coords.
-        float y = mDrawingUtil.sceneToWorldY( cx, cy );
+        float x = DrawingUtil.sceneToWorldX( cx, cy ); // convert to world coords.
+        float y = DrawingUtil.sceneToWorldY( cx, cy );
         pw.format(Locale.US, " <points data=\"%.2f %.2f \" />\n", x, y );
         // pw.format("  <font type=\"0\" />\n");
         pw.format("</item>\n");

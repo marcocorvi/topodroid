@@ -15,7 +15,7 @@ package com.topodroid.DistoX;
  */
 class NumSplay extends NumSurveyPoint
 {
-  public NumStation from;
+  final NumStation from;
   private DBlock block;
   private float mDecl;
   private float mExtend;

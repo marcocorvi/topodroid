@@ -250,7 +250,7 @@ class DrawingLinePath extends DrawingPointLinePath
   }
   
   @Override
-  void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil )
+  void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
   {
     float bezier_step = TDSetting.getBezierStep();
     int layer  = BrushManager.getLineCsxLayer( mLineType );
@@ -273,20 +273,20 @@ class DrawingLinePath extends DrawingPointLinePath
       // NOTE do not skip tick-point if want to save section with tick
       // if ( mLineType == BrushManager.mLineLib.mLineSectionIndex && size() > 2 ) pt = pt.mNext; // skip first point (tick)
       LinePoint pt = mFirst; 
-      x0 = mDrawingUtil.sceneToWorldX( pt.x, pt.y );
-      y0 = mDrawingUtil.sceneToWorldY( pt.x, pt.y );
+      x0 = DrawingUtil.sceneToWorldX( pt.x, pt.y );
+      y0 = DrawingUtil.sceneToWorldY( pt.x, pt.y );
       pw.format(Locale.US, "%.2f %.2f ", x0, y0 );
       // Log.v("DistoX", "X " + x0 + " Y " + y0 );
       if ( b ) { pw.format("B "); b = false; }
       for ( pt = pt.mNext; pt != null; pt = pt.mNext ) 
       {
-        x3 = mDrawingUtil.sceneToWorldX( pt.x, pt.y );
-        y3 = mDrawingUtil.sceneToWorldY( pt.x, pt.y );
+        x3 = DrawingUtil.sceneToWorldX( pt.x, pt.y );
+        y3 = DrawingUtil.sceneToWorldY( pt.x, pt.y );
 	if ( pt.has_cp ) {
-          x1 = mDrawingUtil.sceneToWorldX( pt.x1, pt.y1 );
-          y1 = mDrawingUtil.sceneToWorldY( pt.x1, pt.y1 );
-          x2 = mDrawingUtil.sceneToWorldX( pt.x2, pt.y2 );
-          y2 = mDrawingUtil.sceneToWorldY( pt.x2, pt.y2 );
+          x1 = DrawingUtil.sceneToWorldX( pt.x1, pt.y1 );
+          y1 = DrawingUtil.sceneToWorldY( pt.x1, pt.y1 );
+          x2 = DrawingUtil.sceneToWorldX( pt.x2, pt.y2 );
+          y2 = DrawingUtil.sceneToWorldY( pt.x2, pt.y2 );
 	  float len = (x1-x0)*(x1-x0) + (x2-x1)*(x2-x1) + (x3-x2)*(x3-x2) + (x3-x0)*(x3-x0)
 	            + (y1-y0)*(y1-y0) + (y2-y1)*(y2-y1) + (y3-y2)*(y3-y2) + (y3-y0)*(y3-y0);
 	  int np = (int)( TDMath.sqrt( len ) * bezier_step + 0.5f );
@@ -307,20 +307,20 @@ class DrawingLinePath extends DrawingPointLinePath
       }
     } else {
       LinePoint pt = mLast;
-      x0 = mDrawingUtil.sceneToWorldX( pt.x, pt.y );
-      y0 = mDrawingUtil.sceneToWorldY( pt.x, pt.y );
+      x0 = DrawingUtil.sceneToWorldX( pt.x, pt.y );
+      y0 = DrawingUtil.sceneToWorldY( pt.x, pt.y );
       pw.format(Locale.US, "%.2f %.2f ", x0, y0 );
       // Log.v("DistoX", "X " + x0 + " Y " + y0 );
       if ( b ) { pw.format("B "); b = false; }
       for ( pt = pt.mPrev; pt != null; pt = pt.mPrev ) 
       {
-        x3 = mDrawingUtil.sceneToWorldX( pt.x, pt.y );
-        y3 = mDrawingUtil.sceneToWorldY( pt.x, pt.y );
+        x3 = DrawingUtil.sceneToWorldX( pt.x, pt.y );
+        y3 = DrawingUtil.sceneToWorldY( pt.x, pt.y );
 	if ( pt.has_cp ) {
-          x1 = mDrawingUtil.sceneToWorldX( pt.x2, pt.y2 );
-          y1 = mDrawingUtil.sceneToWorldY( pt.x2, pt.y2 );
-          x2 = mDrawingUtil.sceneToWorldX( pt.x1, pt.y1 );
-          y2 = mDrawingUtil.sceneToWorldY( pt.x1, pt.y1 );
+          x1 = DrawingUtil.sceneToWorldX( pt.x2, pt.y2 );
+          y1 = DrawingUtil.sceneToWorldY( pt.x2, pt.y2 );
+          x2 = DrawingUtil.sceneToWorldX( pt.x1, pt.y1 );
+          y2 = DrawingUtil.sceneToWorldY( pt.x1, pt.y1 );
 	  float len = (x1-x0)*(x1-x0) + (x2-x1)*(x2-x1) + (x3-x2)*(x3-x2) + (x3-x0)*(x3-x0)
 	            + (y1-y0)*(y1-y0) + (y2-y1)*(y2-y1) + (y3-y2)*(y3-y2) + (y3-y0)*(y3-y0);
 	  int np = (int)( TDMath.sqrt( len ) * bezier_step + 0.5f );

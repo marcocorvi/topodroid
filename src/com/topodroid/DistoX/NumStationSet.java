@@ -39,6 +39,9 @@ class NumStationSet
     return 0;
   }
 
+  // stations are put on a list 
+  // but they have references for the parent and the left/right children (that form an RB tree)
+  //
   private class NumStationNode
   {
     NumStationNode parent;
@@ -233,6 +236,8 @@ class NumStationSet
   }
 
   // -----------------------------------------------------
+  // private helper methods
+  //
   private void insert_case1( NumStationNode n ) 
   {
     if ( n.parent == null ) {

@@ -394,6 +394,7 @@
     <string name="item_delete">Изтриване на елемент %1$s ?</string>
     <string name="splay_delete">Изтриване на стр. измерване %1$s ?</string>
     <string name="plot_duplicate_name">Дублирано име на скица</string>
+    <!-- TODO string name="plot_dangling">Dangling sketch</string -->
     <!-- UNUSED string name="plot_name">Име на скица</string -->
     <string name="plot_new">Нова скица</string>
     <string name="plot_not_found">Скицата не е намерена</string>
@@ -607,6 +608,7 @@
     <string name="button_split"     >Разделяне</string>
     <string name="button_station"   >Центриране в</string>
     <string name="button_store"     >Съхраняване</string>
+    <!-- TODO string name="button_swap"      >Swap      </string -->
     <!-- UNUSED string name="button_start"     >Старт     </string -->
     <!-- UNUSED string name="button_stop"      >Стоп      </string -->
     <string name="button_upload"    >Качване   </string>

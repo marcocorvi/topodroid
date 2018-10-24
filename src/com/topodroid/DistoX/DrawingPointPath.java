@@ -338,8 +338,8 @@ class DrawingPointPath extends DrawingPath
     setCenter( x, y );
   }
 
-  // @Override
-  void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil )
+  @Override
+  void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
   { 
     int size = mScale - SCALE_XS;
     int layer  = BrushManager.getPointCsxLayer( mPointType );
@@ -355,8 +355,8 @@ class DrawingPointPath extends DrawingPath
     pw.format(Locale.US, "dataformat=\"0\" signsize=\"%d\" angle=\"%.2f\" >\n", size, mOrientation );
     pw.format("  <pen type=\"10\" />\n");
     pw.format("  <brush type=\"7\" />\n");
-    float x = mDrawingUtil.sceneToWorldX( cx, cy ); // convert to world coords.
-    float y = mDrawingUtil.sceneToWorldY( cx, cy );
+    float x = DrawingUtil.sceneToWorldX( cx, cy ); // convert to world coords.
+    float y = DrawingUtil.sceneToWorldY( cx, cy );
     pw.format(Locale.US, " <points data=\"%.2f %.2f \" />\n", x, y );
     pw.format("  <datarow>\n");
     pw.format("  </datarow>\n");

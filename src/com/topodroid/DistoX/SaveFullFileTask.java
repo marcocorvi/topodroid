@@ -43,7 +43,7 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
   {
     mSid      = sid;
     mData     = data;
-    mInfo     = info;
+    mInfo     = info.copy();
     mFilename = filename;
     mOrigin   = origin;
     mPsd1     = psd1;
@@ -55,7 +55,8 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
   protected String doInBackground(Void... arg0)
   {
     String ret = null;
-    synchronized( TDPath.mTherionLock ) {
+    // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
+    {
       ret = TDExporter.exportSurveyAsCsx( mSid, mData, mInfo, mPsd1, mPsd2, mOrigin, mFilename );
     }
     return ret;

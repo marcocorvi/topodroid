@@ -181,7 +181,7 @@ class DrawingLabelPath extends DrawingPointPath
   }
 
   @Override
-  void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil )
+  void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
   { 
     // int size = mScale - SCALE_XS;
     // int layer  = 6;
@@ -193,8 +193,8 @@ class DrawingLabelPath extends DrawingPointPath
     pw.format(" text=\"%s\" textrotatemode=\"1\" >\n", mPointText );
     pw.format("  <pen type=\"10\" />\n");
     pw.format("  <brush type=\"7\" />\n");
-    float x = mDrawingUtil.sceneToWorldX( cx, cy ); // convert to world coords.
-    float y = mDrawingUtil.sceneToWorldY( cx, cy );
+    float x = DrawingUtil.sceneToWorldX( cx, cy ); // convert to world coords.
+    float y = DrawingUtil.sceneToWorldY( cx, cy );
     pw.format(Locale.US, " <points data=\"%.2f %.2f \" />\n", x, y );
     pw.format("  <font type=\"0\" />\n");
     pw.format("</item>\n");

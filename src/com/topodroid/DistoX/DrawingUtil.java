@@ -8,6 +8,8 @@
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
+ *  @note this is actually DrawingUtilPortrait.java as the Landscape is never used
+ *        and it is made all static (state-less)
  */
 package com.topodroid.DistoX;
 
@@ -34,15 +36,22 @@ class DrawingUtil
   static float sceneToWorldX( Point2D p ) { return (p.x - CENTER_X) / SCALE_FIX; }
   static float sceneToWorldY( Point2D p ) { return (p.y - CENTER_Y) / SCALE_FIX; }
 
-  float toSceneX( float x, float y ) { return x; } // CENTER_X + x * SCALE_FIX; }
-  float toSceneY( float x, float y ) { return y; } // CENTER_Y + y * SCALE_FIX; }
+  // float toSceneX( float x, float y ) { return x; } 
+  // float toSceneY( float x, float y ) { return y; } 
+  static float toSceneX( float x, float y ) { return CENTER_X + x * SCALE_FIX; }
+  static float toSceneY( float x, float y ) { return CENTER_Y + y * SCALE_FIX; }
 
-  float sceneToWorldX( float x, float y ) { return x; } // (x - CENTER_X)/SCALE_FIX; }
-  float sceneToWorldY( float x, float y ) { return y; } // (y - CENTER_Y)/SCALE_FIX; }
+  // float sceneToWorldX( float x, float y ) { return x; } 
+  // float sceneToWorldY( float x, float y ) { return y; }
+  static float sceneToWorldX( float x, float y ) { return (x - CENTER_X)/SCALE_FIX; }
+  static float sceneToWorldY( float x, float y ) { return (y - CENTER_Y)/SCALE_FIX; }
     
-  int toBoundX( float x, float y ) { return Math.round(x); } 
-  int toBoundY( float x, float y ) { return Math.round(y); }
+  // int toBoundX( float x, float y ) { return Math.round(x); } 
+  // int toBoundY( float x, float y ) { return Math.round(y); }
+  static int toBoundX( float x, float y ) { return Math.round(x); } 
+  static int toBoundY( float x, float y ) { return Math.round(y); }
 
+  static
   void makePath( DrawingPath dpath, float xx1, float yy1, float xx2, float yy2 )
   {
     dpath.mPath = new Path();
@@ -55,6 +64,7 @@ class DrawingUtil
     dpath.mPath.lineTo( x2, y2 );
   }
 
+  static
   void makePath( DrawingPath dpath, float xx1, float yy1, float xx2, float yy2, float xoff, float yoff )
   {
     dpath.mPath = new Path();
@@ -91,6 +101,7 @@ class DrawingUtil
     surface.addGridPath( dpath, k );
   }
 
+  static
   void addGrid( float xmin, float xmax, float ymin, float ymax, DrawingSurface surface )
   {
     if ( xmin > xmax ) { float x = xmin; xmin = xmax; xmax = x; }
@@ -127,6 +138,7 @@ class DrawingUtil
     }
   }
 
+  static
   void addGrid( float xmin, float xmax, float ymin, float ymax, float xoff, float yoff, DrawingSurface surface )
   {
     if ( xmin > xmax ) { float x = xmin; xmin = xmax; xmax = x; }

@@ -1753,8 +1753,9 @@ public class ShotWindow extends Activity
     if ( blks == null || blks.size() == 0 ) return;
     for ( DBlock blk : blks ) {
       blk.clearPaint();
-      mApp_mData.updateShotColor( blk.mId, TDInstance.sid, color, false ); // do not forward color
+      // mApp_mData.updateShotColor( blk.mId, TDInstance.sid, color, false ); // do not forward color
     }
+    mApp_mData.updateShotsColor( blks, TDInstance.sid, color, false ); // do not forward color
     // if ( TDInstance.recentPlot != null ) {
     //   startExistingPlot( TDInstance.recentPlot, TDInstance.recentPlotType, blks.get(0).mFrom );
     // }
@@ -1773,10 +1774,31 @@ public class ShotWindow extends Activity
       mApp.assignStationsAfter( blk, blks /*, stations */ );
       updateDisplay();
       // mList.invalidate();
+    // } else if ( blk.isSplay() ) { // FIXME RENUMBER ONLY SPLAYS
+    //   for ( DBlock b : blks ) {
+    //     if ( b == blk ) continue;
+    //     b.setBlockName( from, to );
+    //     mApp_mData.updateShotName( b.mId, TDInstance.sid, from, to, true );
+    //   }
+    //   updateDisplay();
     } else {
       TDToast.make( R.string.no_leg_first );
     }
     clearMultiSelect( );
+  }
+
+  void swapBlocksName( List<DBlock> blks )  // SWAP SELECTED BLOCKS STATIONS
+  {
+    Log.v("DistoX", "swap list size " + blks.size() );
+    for ( DBlock blk : blks ) {
+      String from = blk.mTo;
+      String to   = blk.mFrom;
+      Log.v("DistoX", "swap block to <" + from + "-" + to + ">" );
+      blk.setBlockName( from, to );
+      // mApp_mData.updateShotName( blk.mId, TDInstance.sid, from, to, true );
+    }
+    mApp_mData.updateShotsName( blks, TDInstance.sid, true );
+    updateDisplay();
   }
 
   /** bedding: solve Sum (A*x + B*y + C*z + 1)^2 minimum
@@ -1922,7 +1944,8 @@ public class ShotWindow extends Activity
         }
       } else {
         b.setBlockName( from, to );
-        mApp_mData.updateShotName( b.mId, TDInstance.sid, from, to, true );
+        mApp_mData.updateShotName( b.mId, TDInstance.sid, from, to, true ); // FIXME use
+	// mApp_mData.updateShotNames( splays, TDInstance.sid, false );
       }
       mDataAdapter.updateBlockView( b.mId );
     }

@@ -394,6 +394,7 @@
     <string name="item_delete">Törlöd az %1$s elemet?</string>
     <string name="splay_delete">Törlöd a %1$s segédmérést?</string>
     <string name="plot_duplicate_name">Vázlat nevének megkettőzése</string>
+    <!-- TODO string name="plot_dangling">Dangling sketch</string -->
     <!-- UNUSED string name="plot_name">Sketch name</string -->
     <string name="plot_new">Új vázlat</string>
     <string name="plot_not_found">Vázlat nem található</string>
@@ -607,6 +608,7 @@
     <string name="button_split"     >Megoszt     </string>
     <!-- TODO string name="button_station"   >Center at</string -->
     <string name="button_store"     >Tárol</string>
+    <!-- TODO string name="button_swap"      >Swap      </string -->
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
     <string name="button_upload"    >Feltölt</string>

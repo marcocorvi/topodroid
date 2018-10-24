@@ -396,6 +396,7 @@
     <string name="item_delete">Șterge elementul %1$s ?</string>
     <string name="splay_delete">Șterge radierea %1$s ?</string>
     <string name="plot_duplicate_name">Duplică numele schiței</string>
+    <!-- TODO string name="plot_dangling">Dangling sketch</string -->
     <!-- UNUSED string name="plot_name"> Numele schiței</string -->
     <string name="plot_new">Schiță</string>
     <string name="plot_not_found">Schiță negasită</string>
@@ -609,6 +610,7 @@
     <string name="button_split"     >Desparte   </string>
     <!-- TODO string name="button_station"   >Centrează la</string -->
     <string name="button_store"     >Stochează  </string>
+    <!-- TODO string name="button_swap"      >Swap      </string -->
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
     <string name="button_upload"    >Încarcă    </string>

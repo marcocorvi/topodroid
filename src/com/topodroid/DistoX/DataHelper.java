@@ -1111,6 +1111,30 @@ class DataHelper extends DataSetObservable
     } finally { myDB.endTransaction(); }
   }
 
+  void updateShotsName( List<DBlock> blks, long sid, boolean forward )
+  {
+    if ( myDB == null ) return;
+    myDB.beginTransaction();
+    try {
+      for ( DBlock blk : blks ) {
+        String from = blk.mFrom;
+        String to   = blk.mTo;
+        if ( from == null ) from = TDString.EMPTY;
+        if ( to   == null ) to   = TDString.EMPTY;
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter( sw );
+        pw.format( Locale.US, "UPDATE shots SET fStation=\"%s\", tStation=\"%s\" WHERE surveyId=%d AND id=%d", from, to, sid, blk.mId );
+        myDB.execSQL( sw.toString() );
+        // if ( forward && mListeners != null ) { // synchronized( mListeners )
+        //   mListeners.onUpdateShotName( blk.mId, sid, from, to );
+        // }
+      }
+      myDB.setTransactionSuccessful();
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } catch ( SQLiteException e ) { logError("update shots name failed", e );
+    } finally { myDB.endTransaction(); }
+  }
+
   // "leg" flag: 0 splay, 1 leg, 2 x-splay
   void updateShotLeg( long id, long sid, long leg, boolean forward )
   {
@@ -1431,6 +1455,24 @@ class DataHelper extends DataSetObservable
       return true;
     }
     return false;
+  }
+
+  void updateShotsColor( List<DBlock> blks, long sid, int color, boolean forward )
+  {
+    if ( myDB == null ) return;
+    myDB.beginTransaction();
+    try {
+      String stmt = "UPDATE shots SET color=" + color + " WHERE surveyId=" + sid + " AND id=";
+      for ( DBlock blk : blks ) {
+        myDB.execSQL( stmt + blk.mId );
+        // if ( forward && mListeners != null ) { // synchronized( mListeners )
+        //   mListeners.onUpdateShotColor( sid, id, color );
+        // }
+      }
+      myDB.setTransactionSuccessful();
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } catch (SQLiteException e) { logError("update shots color", e);
+    } finally { myDB.endTransaction(); }
   }
 
   boolean updateShotAMDR( long id, long sid, double acc, double mag, double dip, double r, boolean forward )

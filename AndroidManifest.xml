@@ -3,8 +3,8 @@
       package="com.topodroid.DistoX"
       android:debuggable="true"
       android:installLocation="auto"
-      android:versionCode="401032"
-      android:versionName="4.1.1b"
+      android:versionCode="401034"
+      android:versionName="4.1.1e"
     >
     <!-- FIXME-23 -->
     <uses-sdk

@@ -392,6 +392,7 @@
     <string name="item_delete">¿Quiere eliminar elemento %1$s?</string>
     <string name="splay_delete">¿Quiere eliminar tomas radiales %1$s ?</string>
     <string name="plot_duplicate_name">Nombre de croquis duplicado</string>
+    <!-- TODO string name="plot_dangling">Dangling sketch</string -->
     <!-- UNUSED string name="plot_name">Nombre dibujo</string -->
     <string name="plot_new">Nuevo croquis</string>
     <string name="plot_not_found">No hay croquis</string>
@@ -604,6 +605,7 @@
     <string name="button_split"     >Dividir     </string>
     <!-- TODO string name="button_station"   >Center at</string -->
     <string name="button_store"     >Recibir   </string>
+    <!-- TODO string name="button_swap"      >Swap      </string -->
     <!-- UNUSED string name="button_start"     >Inicio</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
     <string name="button_upload"    >Cargar    </string>

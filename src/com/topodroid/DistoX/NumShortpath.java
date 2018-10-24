@@ -4,6 +4,8 @@
  * @date jan 2013
  *
  * @brief TopoDroid survey reduction shortest path (loop closure error)
+ *        stores the sum of the lengths
+ *        and the sum of the squared lengths
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.

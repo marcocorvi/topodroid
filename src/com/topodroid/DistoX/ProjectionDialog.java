@@ -70,7 +70,7 @@ class ProjectionDialog extends MyDialog
 
   private final TopoDroidApp mApp;
   private final ShotWindow mParent;
-  private final DrawingUtil mDrawingUtil;
+  // private final DrawingUtil mDrawingUtil;
 
   private ProjectionSurface mDrawingSurface;
   private SeekBar mSeekBar;
@@ -115,7 +115,7 @@ class ProjectionDialog extends MyDialog
   {
     super( context, R.string.ProjectionDialog ); // FIXME
     mParent = parent;
-    mDrawingUtil = new DrawingUtilPortrait();
+    // mDrawingUtil = new DrawingUtilPortrait();
     mSid    = sid;
     mName   = name;
     mFrom   = from;
@@ -218,10 +218,10 @@ class ProjectionDialog extends MyDialog
 	float x2 = (float)( st2.e * cosp + st2.s * sinp ); // - dx;
 	float y1 =(float)( st1.v ); // - dy;
 	float y2 = (float)( st2.v ); // - dy;
-        h1 = mDrawingUtil.toSceneX( x1, y1 );
-        h2 = mDrawingUtil.toSceneX( x2, y2 );
-        v1 = mDrawingUtil.toSceneY( x1, y1 );
-        v2 = mDrawingUtil.toSceneY( x2, y2 );
+        h1 = DrawingUtil.toSceneX( x1, y1 );
+        h2 = DrawingUtil.toSceneX( x2, y2 );
+        v1 = DrawingUtil.toSceneY( x1, y1 );
+        v2 = DrawingUtil.toSceneY( x2, y2 );
         addFixedLine( sh.getFirstBlock(), h1, v1, h2, v2, false );
       }
     } 
@@ -232,10 +232,10 @@ class ProjectionDialog extends MyDialog
 	float x2 = (float)( sp.e * cosp + sp.s * sinp ); // - dx;
 	float y1 = (float)( st.v ); // - dy;
 	float y2 = (float)( sp.v ); // - dy;
-        h1 = mDrawingUtil.toSceneX( x1, y1 );
-        h2 = mDrawingUtil.toSceneX( x2, y2 );
-        v1 = mDrawingUtil.toSceneY( x1, y1 );
-        v2 = mDrawingUtil.toSceneY( x2, y2 );
+        h1 = DrawingUtil.toSceneX( x1, y1 );
+        h2 = DrawingUtil.toSceneX( x2, y2 );
+        v1 = DrawingUtil.toSceneY( x1, y1 );
+        v2 = DrawingUtil.toSceneY( x2, y2 );
         addFixedLine( sp.getBlock(), h1, v1, h2, v2, true );
       }
     }
@@ -243,8 +243,8 @@ class ProjectionDialog extends MyDialog
       if ( st.show() ) {
 	float x1 = (float)( st.e * cosp + st.s * sinp ); // - dx;
 	float y1 = (float)( st.v ); // - dy;
-        h1 = mDrawingUtil.toSceneX( x1, y1 );
-        v1 = mDrawingUtil.toSceneY( x1, y1 );
+        h1 = DrawingUtil.toSceneX( x1, y1 );
+        v1 = DrawingUtil.toSceneY( x1, y1 );
         mDrawingSurface.addDrawingStationName( st, h1, v1 );
       }
     }
@@ -436,8 +436,8 @@ class ProjectionDialog extends MyDialog
         float ds = - mNum.surveySmin();
         if ( mNum.surveySmax() > ds ) ds = mNum.surveySmax();
         mZoom *= 2 / (float)Math.sqrt( de*de + ds*ds );
-        // mOffset.x = 2 * mDisplayCenter.x; // + (mNum.surveyEmax() + mNum.surveyEmin()) * mDrawingUtil.SCALE_FIX/2;
-        // mOffset.y = 2 * mDisplayCenter.y; // - (mNum.surveySmax() + mNum.surveySmin()) * mDrawingUtil.SCALE_FIX/2;
+        // mOffset.x = 2 * mDisplayCenter.x; // + (mNum.surveyEmax() + mNum.surveyEmin()) * DrawingUtil.SCALE_FIX/2;
+        // mOffset.y = 2 * mDisplayCenter.y; // - (mNum.surveySmax() + mNum.surveySmin()) * DrawingUtil.SCALE_FIX/2;
         // Log.v("DistoX", "start " + de + " " + ds + " " + dr + " off " + mOffset.x + " " + mOffset.y + " " + mZoom );
 
         computeReferences();

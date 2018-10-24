@@ -176,7 +176,8 @@ class ParserPocketTopo extends ImportParser
     TDPath.checkPath( filename );
     File file = new File( filename );
     boolean ret = false;
-    synchronized( TDPath.mTherionLock ) {
+    // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
+    {
       try {
         FileWriter fw = new FileWriter( file );
         PrintWriter pw = new PrintWriter( fw );

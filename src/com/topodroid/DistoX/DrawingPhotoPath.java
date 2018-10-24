@@ -99,7 +99,7 @@ class DrawingPhotoPath extends DrawingPointPath
 
   // FIXME_SYNC might be a problem with big photoes, but it is called on export, which runs on async task
   @Override
-  void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil )
+  void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
   { 
     File photofile = new File( TDPath.getSurveyJpgFile( survey, Long.toString(mId) ) );
     if ( photofile.exists() ) {
@@ -115,8 +115,8 @@ class DrawingPhotoPath extends DrawingPointPath
           Base64.encodeToString( buf, Base64.NO_WRAP ),
           ((mPointText==null)?"":mPointText)
         );
-        float x = mDrawingUtil.sceneToWorldX( cx, cy ); // convert to world coords.
-        float y = mDrawingUtil.sceneToWorldY( cx, cy );
+        float x = DrawingUtil.sceneToWorldX( cx, cy ); // convert to world coords.
+        float y = DrawingUtil.sceneToWorldY( cx, cy );
         pw.format(Locale.US, " <points data=\"%.2f %.2f \" />\n", x, y );
         // pw.format("  <font type=\"0\" />\n");
         pw.format("</item>\n");

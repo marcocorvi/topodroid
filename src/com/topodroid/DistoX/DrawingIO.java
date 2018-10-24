@@ -78,7 +78,8 @@ class DrawingIO
     //                      + " 7: " + BrushManager.mOrientation[7] );
 
     // Log.v("DistoX", "drawing I/O load therion " + filename );
-    synchronized( TDPath.mTherionLock ) {
+    // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
+    {
       try {
         TDLog.Log( TDLog.LOG_IO, "load plot from Therion file " + filename );
         FileReader fr = new FileReader( filename );
@@ -656,7 +657,8 @@ class DrawingIO
     }
 
     // Log.v("DistoX", "drawing I/O load stream " + filename );
-    synchronized( TDPath.mTherionLock ) {
+    // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
+    {
       try {
         // CACHE check if filename is in the cache: if so use the cache byte array
         // ByteArrayOutputStream bos = mTdrCache.get( file.getName() );
@@ -792,7 +794,8 @@ class DrawingIO
     DataInputStream dis = null;
 
     // Log.v("DistoXX", "drawing I/O load outline stream " + filename + " name " + ((name == null)? "null" : name) );
-    synchronized( TDPath.mTherionLock ) {
+    // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
+    {
       try {
         // CACHE check if filename is in the cache: if so use the cache byte array
         // ByteArrayOutputStream bos = mTdrCache.get( file.getName() );
@@ -1256,7 +1259,7 @@ class DrawingIO
     String areas  = "";
     String th_str;
 
-    // synchronized( TDPath.mTherionLock ) 
+    // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
     {
       try {
         TDLog.Log( TDLog.LOG_IO, "tdr to Therion. file " + file.getPath() );
@@ -1359,7 +1362,7 @@ class DrawingIO
   // CSURVEY
 
   static void doExportCsxXSection( PrintWriter pw, String filename,
-                                   String survey, String cave, String branch, /* String session, */ String bind, DrawingUtil drawingUtil )
+                                   String survey, String cave, String branch, /* String session, */ String bind /* , DrawingUtil drawingUtil */ )
   {
     File file = new File( filename );
     if ( ! file.exists() ) return;
@@ -1373,7 +1376,7 @@ class DrawingIO
 
     ArrayList<DrawingPath> paths = new ArrayList<>();
 
-    // synchronized( TDPath.mTherionLock ) 
+    // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
     {
       try {
         TDLog.Log( TDLog.LOG_IO, "export cSurvey. X-section file " + filename );
@@ -1457,12 +1460,12 @@ class DrawingIO
         e.printStackTrace();
       }
     }
-    doExportAsCsx( pw, survey, cave, branch, /* session, */ bind, paths, null, null, drawingUtil ); // all_sections=null, sections=null
+    doExportAsCsx( pw, survey, cave, branch, /* session, */ bind, paths, null, null /* , drawingUtil */ ); // all_sections=null, sections=null
   }
 
   static void doExportAsCsx( PrintWriter pw, String survey, String cave, String branch, /* String session, */ String bind,
-                             List<DrawingPath> paths, List< PlotInfo > all_sections, List< PlotInfo > sections,
-			     DrawingUtil mDrawingUtil )
+                             List<DrawingPath> paths, List< PlotInfo > all_sections, List< PlotInfo > sections
+			     /* , DrawingUtil mDrawingUtil */ )
   {
     int csxIndex = 0;
     pw.format("    <layers>\n");
@@ -1480,7 +1483,7 @@ class DrawingIO
       if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
         DrawingAreaPath ap = (DrawingAreaPath)p;
         if ( BrushManager.getAreaCsxLayer( ap.mAreaType ) != 1 ) continue;
-        ap.toCsurvey( pw, survey, cave, branch, bind, mDrawingUtil ); 
+        ap.toCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ ); 
       }
     }
     pw.format("        </items>\n");
@@ -1493,11 +1496,11 @@ class DrawingIO
       if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
         DrawingLinePath lp = (DrawingLinePath)p;
         if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 2 ) continue;
-        lp.toCsurvey( pw, survey, cave, branch, bind, mDrawingUtil );
+        lp.toCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ );
       } else if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
         DrawingAreaPath ap = (DrawingAreaPath)p;
         if ( BrushManager.getAreaCsxLayer( ap.mAreaType ) != 2 ) continue;
-        ap.toCsurvey( pw, survey, cave, branch, bind, mDrawingUtil ); 
+        ap.toCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ ); 
       } 
     }
     pw.format("        </items>\n");
@@ -1510,7 +1513,7 @@ class DrawingIO
       if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
         DrawingLinePath lp = (DrawingLinePath)p;
         if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 3 ) continue;
-        lp.toCsurvey( pw, survey, cave, branch, bind, mDrawingUtil );
+        lp.toCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ );
       }
     }
     pw.format("        </items>\n");
@@ -1523,7 +1526,7 @@ class DrawingIO
       if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
         DrawingLinePath lp = (DrawingLinePath)p;
         if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 4 ) continue;
-        lp.toCsurvey( pw, survey, cave, branch, bind, mDrawingUtil );
+        lp.toCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ );
       }
     }
     pw.format("        </items>\n");
@@ -1536,7 +1539,7 @@ class DrawingIO
       if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
         DrawingLinePath lp = (DrawingLinePath)p;
         if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 5 ) continue;
-        lp.toCsurvey( pw, survey, cave, branch, bind, mDrawingUtil );
+        lp.toCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ );
       }
       // if ( lp.lineType() == BrushManager.mLineLib.mLineWallIndex ) {
       //   // linetype: 0 line, 1 spline, 2 bezier
@@ -1609,8 +1612,8 @@ class DrawingIO
         if ( section != null ) {
           // Log.v("DistoX", "section " + section.name + " " + section.nick );
           // special toCsurvey for cross-section points
-          float x = mDrawingUtil.sceneToWorldX( pp.cx, pp.cy ); // convert to world coords.
-          float y = mDrawingUtil.sceneToWorldY( pp.cx, pp.cy );
+          float x = DrawingUtil.sceneToWorldX( pp.cx, pp.cy ); // convert to world coords.
+          float y = DrawingUtil.sceneToWorldY( pp.cx, pp.cy );
           String text = ( section.nick == null || section.nick.length() == 0 )? section.name : section.nick;
           pw.format("  <item layer=\"6\" cave=\"%s\" branch=\"%s\" type=\"9\" category=\"96\" direction=\"0\" ", cave, branch );
           pw.format("text=\"%s\" textdistance=\"2\" crosswidth=\"4\" crossheight=\"4\" name=\"%s\" ", text, section.name );
@@ -1630,7 +1633,7 @@ class DrawingIO
           // Log.v("DistoX", "section not found");
         }
       } else {
-        pp.toCsurvey( pw, survey, cave, branch, bind, mDrawingUtil );
+        pp.toCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ );
       }
       ++ csxIndex;
       

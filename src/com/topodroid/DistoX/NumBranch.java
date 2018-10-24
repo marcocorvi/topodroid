@@ -23,10 +23,10 @@ class NumBranch
   static final int BRANCH_CROSS_CROSS = 3;
   static final int BRANCH_LOOP = 4;
  
-  public int type; // branch type
-  public int use;  // tag for loop identification
-  public NumNode n1;
-  public NumNode n2;
+  int type; // branch type
+  int use;  // tag for loop identification
+  NumNode n1;
+  NumNode n2;
   ArrayList< NumShot > shots;
   float e, s, v; // east, south, vert closure-error
   float len;     // branch length

@@ -393,6 +393,7 @@
     <string name="item_delete">Apagar item %1$s?</string>
     <string name="splay_delete">Apagar medida auxiliar %1$s ?</string>
     <string name="plot_duplicate_name">Nome de croqui repetido</string>
+    <!-- TODO string name="plot_dangling">Dangling sketch</string -->
     <!-- UNUSED string name="plot_name">Nome do croqui</string -->
     <string name="plot_new">Novo croqui</string>
     <string name="plot_not_found">Croqui não encontrado</string>
@@ -605,6 +606,7 @@
     <string name="button_split"     >Dividir   </string>
     <!-- TODO string name="button_station"   >Center at</string -->
     <string name="button_store"     >Armazenar </string>
+    <!-- TODO string name="button_swap"      >Swap      </string -->
     <!-- UNUSED string name="button_start"     >Iniciar</string -->
     <!-- UNUSED string name="button_stop"      >Parar</string -->
     <string name="button_upload"    >Enviar     </string>

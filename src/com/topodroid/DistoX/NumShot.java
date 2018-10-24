@@ -15,10 +15,11 @@ import java.util.ArrayList;
 
 class NumShot
 {
-  NumStation from;
-  NumStation to;
-  DBlock firstBlock;
-  ArrayList<DBlock> blocks;
+  final NumStation from;
+  final NumStation to;
+  final DBlock firstBlock;
+  final ArrayList<DBlock> blocks;
+
   int mBranchDir; // branch direction
   int mDirection; // direction of the block (1 same, -1 opposite)
                   // this is used only to decide between barrier and hidden

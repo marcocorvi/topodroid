@@ -28,4 +28,19 @@ class SurveyInfo
   String initStation;
   int xsections; // 0: shared, 1: private
   int datamode;
+
+  SurveyInfo copy() 
+  {
+    SurveyInfo ret = new SurveyInfo();
+    ret.id    = id;
+    ret.name  = name;
+    ret.date  = date;
+    ret.team  = team;
+    ret.declination = declination;
+    ret.comment = comment;
+    ret.initStation = initStation;
+    ret.xsections   = xsections;
+    ret.datamode    = datamode;
+    return ret;
+  }
 }

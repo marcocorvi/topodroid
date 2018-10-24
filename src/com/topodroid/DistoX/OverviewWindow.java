@@ -128,7 +128,7 @@ public class OverviewWindow extends ItemDrawer
 
     private TopoDroidApp mApp;
     private DataHelper mData;
-    private DrawingUtil mDrawingUtil;
+    // private DrawingUtil mDrawingUtil;
 
     // long getSID() { return TDInstance.sid; }
     // String getSurvey() { return TDInstance.survey; }
@@ -265,8 +265,8 @@ public class OverviewWindow extends ItemDrawer
         dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );
         dpath.setPathPaint( BrushManager.fixedShotPaint );
       }
-      // mDrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
-      mDrawingUtil.makePath( dpath, x1, y1, x2, y2 );
+      // DrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
+      DrawingUtil.makePath( dpath, x1, y1, x2, y2 );
       mOverviewSurface.addFixedPath( dpath, splay, false ); // false: non-selectable
     }
 
@@ -304,10 +304,10 @@ public class OverviewWindow extends ItemDrawer
     // float xoff = 0; float yoff = 0;
 
     if ( type == PlotInfo.PLOT_PLAN ) {
-      mDrawingUtil.addGrid( mNum.surveyEmin(), mNum.surveyEmax(), mNum.surveySmin(), mNum.surveySmax(), mOverviewSurface );
+      DrawingUtil.addGrid( mNum.surveyEmin(), mNum.surveyEmax(), mNum.surveySmin(), mNum.surveySmax(), mOverviewSurface );
                            // xoff, yoff, mOverviewSurface );
     } else {
-      mDrawingUtil.addGrid( mNum.surveyHmin(), mNum.surveyHmax(), mNum.surveyVmin(), mNum.surveyVmax(), mOverviewSurface );
+      DrawingUtil.addGrid( mNum.surveyHmin(), mNum.surveyHmax(), mNum.surveyVmin(), mNum.surveyVmax(), mOverviewSurface );
                            // xoff, yoff, mOverviewSurface );
     }
 
@@ -332,9 +332,9 @@ public class OverviewWindow extends ItemDrawer
       }
       for ( NumStation st : stations ) {
         DrawingStationName dst;
-        // dst = mOverviewSurface.addDrawingStationName( null, st, mDrawingUtil.toSceneX(st.e,st.s) - xoff,
-        //                                                   mDrawingUtil.toSceneY(st.e,st.s) - yoff, true, null );
-        dst = mOverviewSurface.addDrawingStationName( null, st, mDrawingUtil.toSceneX(st.e,st.s), mDrawingUtil.toSceneY(st.e,st.s), true, null );
+        // dst = mOverviewSurface.addDrawingStationName( null, st, DrawingUtil.toSceneX(st.e,st.s) - xoff,
+        //                                                   DrawingUtil.toSceneY(st.e,st.s) - yoff, true, null );
+        dst = mOverviewSurface.addDrawingStationName( null, st, DrawingUtil.toSceneX(st.e,st.s), DrawingUtil.toSceneY(st.e,st.s), true, null );
       }
     } else { // if ( PlotInfo.isProfile( type ) // FIXME OK PROFILE
       for ( NumShot sh : shots ) {
@@ -352,9 +352,9 @@ public class OverviewWindow extends ItemDrawer
       }
       for ( NumStation st : stations ) {
         DrawingStationName dst;
-        // dst = mOverviewSurface.addDrawingStationName( null, st, mDrawingUtil.toSceneX(st.h,st.v) - xoff,
-        //                                                   mDrawingUtil.toSceneY(st.h,st.v) - yoff, true, null );
-        dst = mOverviewSurface.addDrawingStationName( null, st, mDrawingUtil.toSceneX(st.h,st.v), mDrawingUtil.toSceneY(st.h,st.v), true, null );
+        // dst = mOverviewSurface.addDrawingStationName( null, st, DrawingUtil.toSceneX(st.h,st.v) - xoff,
+        //                                                   DrawingUtil.toSceneY(st.h,st.v) - yoff, true, null );
+        dst = mOverviewSurface.addDrawingStationName( null, st, DrawingUtil.toSceneX(st.h,st.v), DrawingUtil.toSceneY(st.h,st.v), true, null );
       }
     }
 
@@ -490,8 +490,8 @@ public class OverviewWindow extends ItemDrawer
       mZoom         = extras.getFloat( TDTag.TOPODROID_PLOT_ZOOM );
       mType         = (int)extras.getLong( TDTag.TOPODROID_PLOT_TYPE );
       mLandscape    = extras.getBoolean( TDTag.TOPODROID_PLOT_LANDSCAPE );
-      // mDrawingUtil = mLandscape ? (new DrawingUtilLandscape()) : (new DrawingUtilPortrait());
-      mDrawingUtil = new DrawingUtilPortrait();
+      // // mDrawingUtil = mLandscape ? (new DrawingUtilLandscape()) : (new DrawingUtilPortrait());
+      // mDrawingUtil = new DrawingUtilPortrait();
 
       mBorderRight      = TopoDroidApp.mDisplayWidth * 15 / 16;
       mBorderLeft       = TopoDroidApp.mDisplayWidth / 16;

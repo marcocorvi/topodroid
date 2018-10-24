@@ -29,20 +29,20 @@ import android.os.AsyncTask;
 
 class SaveDataFileTask extends AsyncTask<Void, Void, String >
 {
-  private String mSaving; // for the toast
+  private String mSaving;   // for the toast
   private long  mSid;
   private DataHelper mData;
   private SurveyInfo mInfo;
   private String mSurvey;
-  private Device mDevice; // only for SVX
-  private int mType;      // export type
+  private Device mDevice;   // only for SVX
+  private int mType;        // export type
   private boolean mToast;
 
   SaveDataFileTask( String saving, long sid, SurveyInfo info, DataHelper data, String survey, Device device, int type, boolean toast )
   {
      mSaving  = saving;
      mSid     = sid;
-     mInfo    = info;
+     mInfo    = info.copy();
      mData    = data;
      mSurvey  = survey;
      mDevice  = device;
@@ -63,7 +63,8 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
   String immed_exec() 
   {
     String filename = null;
-    synchronized( TDPath.mTherionLock ) {
+    // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
+    { 
       switch ( mType ) {
         // case TDConst.DISTOX_EXPORT_TLX:
         //   filename = exportSurveyAsTlx();

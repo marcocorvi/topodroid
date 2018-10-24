@@ -73,7 +73,7 @@ class DrawingSvg
     return String.format( "#%02x%02x%02x", red, grn, blu );
   }
 
-  static void write( BufferedWriter out, DistoXNum num, DrawingUtil util, DrawingCommandManager plot, long type )
+  static void write( BufferedWriter out, DistoXNum num, /* DrawingUtil util, */ DrawingCommandManager plot, long type )
   {
     String wall_group = BrushManager.getLineGroup( BrushManager.mLineLib.mLineWallIndex );
 
@@ -155,16 +155,16 @@ class DrawingSvg
  
               pw4.format("  <path stroke-width=\"%.2f\" stroke=\"black\" d=\"", TDSetting.mSvgShotStroke );
               if ( type == PlotInfo.PLOT_PLAN ) {
-                float x  = xoff + util.toSceneX( f.e, f.s ); 
-                float y  = yoff + util.toSceneY( f.e, f.s );
-                float x1 = xoff + util.toSceneX( t.e, t.s );
-                float y1 = yoff + util.toSceneY( t.e, t.s );
+                float x  = xoff + DrawingUtil.toSceneX( f.e, f.s ); 
+                float y  = yoff + DrawingUtil.toSceneY( f.e, f.s );
+                float x1 = xoff + DrawingUtil.toSceneX( t.e, t.s );
+                float y1 = yoff + DrawingUtil.toSceneY( t.e, t.s );
                 pw4.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x1, y1 );
               } else if ( PlotInfo.isProfile( type ) ) { // FIXME OK PROFILE
-                float x  = xoff + util.toSceneX( f.h, f.v );
-                float y  = yoff + util.toSceneY( f.h, f.v );
-                float x1 = xoff + util.toSceneX( t.h, t.v );
-                float y1 = yoff + util.toSceneY( t.h, t.v );
+                float x  = xoff + DrawingUtil.toSceneX( f.h, f.v );
+                float y  = yoff + DrawingUtil.toSceneY( f.h, f.v );
+                float x1 = xoff + DrawingUtil.toSceneX( t.h, t.v );
+                float y1 = yoff + DrawingUtil.toSceneY( t.h, t.v );
                 pw4.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x1, y1 );
               }
             // }
@@ -185,14 +185,14 @@ class DrawingSvg
               //   pw41.format("  <path stroke-width=\"%.2f\" stroke=\"grey\" d=\"", TDSetting.mSvgShotStroke );
               //   float dh = blk.mLength * (float)Math.cos( blk.mClino * TDMath.DEG2RAD )*SCALE_FIX;
               //   if ( type == PlotInfo.PLOT_PLAN ) {
-              //     float x = xoff + util.toSceneX( f.e, f.s ); 
-              //     float y = yoff + util.toSceneY( f.e, f.s );
+              //     float x = xoff + DrawingUtil.toSceneX( f.e, f.s ); 
+              //     float y = yoff + DrawingUtil.toSceneY( f.e, f.s );
               //     float de =   dh * (float)Math.sin( blk.mBearing * TDMath.DEG2RAD);
               //     float ds = - dh * (float)Math.cos( blk.mBearing * TDMath.DEG2RAD);
               //     pw41.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x + de, (y+ds) );
               //   } else if ( PlotInfo.isProfile( type ) ) { // FIXME OK PROFILE
-              //     float x = xoff + util.toSceneX( f.h, f.v );
-              //     float y = yoff + util.toSceneY( f.h, f.v );
+              //     float x = xoff + DrawingUtil.toSceneX( f.h, f.v );
+              //     float y = yoff + DrawingUtil.toSceneY( f.h, f.v );
               //     float dv = - blk.mLength * (float)Math.sin( blk.mClino * TDMath.DEG2RAD )*SCALE_FIX;
               //     float ext = blk.getReducedExtend();
               //     pw41.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x+dh*ext, (y+dv) );

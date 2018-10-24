@@ -396,6 +396,7 @@
     <string name="item_delete">Видалити пункт %1$s ?</string>
     <string name="splay_delete">Видалити бок. замір %1$s ?</string>
     <string name="plot_duplicate_name">Дублювати назву абрису</string>
+    <!-- TODO string name="plot_dangling">Dangling sketch</string -->
     <!-- UNUSED string name="plot_name">Назва абрису</string -->
     <string name="plot_new">Новий абрис</string>
     <string name="plot_not_found">Абрис не виявлено</string>
@@ -609,6 +610,8 @@
     <!-- TODO string name="button_split"     >Split     </string -->
     <!-- TODO string name="button_station"   >Center at</string -->
     <string name="button_store"     >Записати   </string>
+    <!-- TODO string name="button_swap"      >Swap      </string -->
+    <!-- TODO string name="button_swap"      >Swap      </string -->
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
     <string name="button_upload"    >Вигрузити  </string>

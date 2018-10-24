@@ -399,6 +399,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="item_delete">Delete item %1$s ?</string>
     <string name="splay_delete">Delete splay %1$s ?</string>
     <string name="plot_duplicate_name">Duplicate sketch name</string>
+    <string name="plot_dangling">Dangling sketch</string>
     <!-- UNUSED string name="plot_name">Sketch name</string -->
     <string name="plot_new">New sketch</string>
     <string name="plot_not_found">Sketch not found</string>
@@ -618,6 +619,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="button_split"     >Split     </string>
     <string name="button_station"   >Center at</string>
     <string name="button_store"     >Store     </string>
+    <string name="button_swap"      >Swap      </string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
     <string name="button_upload"    >Upload    </string>

@@ -280,7 +280,7 @@ public class DrawingWindow extends ItemDrawer
   private TopoDroidApp mApp;
   private DataHelper   mApp_mData;
   private DataDownloader mDataDownloader;
-  private DrawingUtil mDrawingUtil;
+  // private DrawingUtil mDrawingUtil;
   private boolean mLandscape;
   private boolean audioCheck;
   // private DataHelper mData;
@@ -685,8 +685,8 @@ public class DrawingWindow extends ItemDrawer
   {
     DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null );
     dpath.setPathPaint( BrushManager.highlightPaint );
-    // mDrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
-    mDrawingUtil.makePath( dpath, x1, y1, x2, y2 );
+    // DrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
+    DrawingUtil.makePath( dpath, x1, y1, x2, y2 );
     mDrawingSurface.setNorthPath( dpath );
   }
 
@@ -722,8 +722,8 @@ public class DrawingWindow extends ItemDrawer
 	}
       }
     }
-    // mDrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
-    mDrawingUtil.makePath( dpath, x1, y1, x2, y2 );
+    // DrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
+    DrawingUtil.makePath( dpath, x1, y1, x2, y2 );
     mDrawingSurface.addFixedPath( dpath, splay, selectable );
   }
 
@@ -767,8 +767,8 @@ public class DrawingWindow extends ItemDrawer
       }
     }
     // dpath.setPathPaint( blue? BrushManager.fixedSplay2Paint : BrushManager.fixedSplayPaint );
-    // mDrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
-    mDrawingUtil.makePath( dpath, x1, y1, x2, y2 );
+    // DrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
+    DrawingUtil.makePath( dpath, x1, y1, x2, y2 );
     mDrawingSurface.addFixedPath( dpath, true, false ); // true SPLAY false SELECTABLE
   }
 
@@ -909,11 +909,11 @@ public class DrawingWindow extends ItemDrawer
   PlotSaveData makePlotSaveData( int tt, int suffix, int rotate )
   {
     if ( tt == 1 && mPlot1 != null )
-      return new PlotSaveData( mNum, mDrawingUtil, mPlot1, mDrawingSurface.getManager( mPlot1.type ), mName1, mFullName1, 0, suffix, rotate );
+      return new PlotSaveData( mNum, /* mDrawingUtil, */ mPlot1, mDrawingSurface.getManager( mPlot1.type ), mName1, mFullName1, 0, suffix, rotate );
     if ( tt == 2 && mPlot2 != null )
-      return new PlotSaveData( mNum, mDrawingUtil, mPlot2, mDrawingSurface.getManager( mPlot2.type ), mName2, mFullName2, (int)mPlot2.azimuth, suffix, rotate );
+      return new PlotSaveData( mNum, /* mDrawingUtil, */ mPlot2, mDrawingSurface.getManager( mPlot2.type ), mName2, mFullName2, (int)mPlot2.azimuth, suffix, rotate );
     if ( tt == 3 && mPlot3 != null )
-      return new PlotSaveData( mNum, mDrawingUtil, mPlot3, mDrawingSurface.getManager( mPlot3.type ), mName3, mFullName3, 0, suffix, rotate );
+      return new PlotSaveData( mNum, /* mDrawingUtil, */ mPlot3, mDrawingSurface.getManager( mPlot3.type ), mName3, mFullName3, 0, suffix, rotate );
     return null;
   }
 
@@ -980,14 +980,14 @@ public class DrawingWindow extends ItemDrawer
     if ( psd2 != null ) {
       TDLog.Log( TDLog.LOG_IO, "save plot [2] " + psd2.fname );
       try { 
-        (new SavePlotFileTask( mActivity, this, null, psd2.num, psd2.util, psd2.cm, psd2.fname, psd2.type, psd2.azimuth, psd2.suffix, r )).execute();
+        (new SavePlotFileTask( mActivity, this, null, psd2.num, /* psd2.util, */ psd2.cm, psd2.fname, psd2.type, psd2.azimuth, psd2.suffix, r )).execute();
       } catch ( RejectedExecutionException e ) { 
         TDLog.Error("rejected exec save plot " + psd2.fname );
       }
     }
     try { 
       TDLog.Log( TDLog.LOG_IO, "save plot [1] " + psd1.fname );
-      (new SavePlotFileTask( mActivity, this, saveHandler, psd1.num, psd1.util, psd1.cm, psd1.fname, psd1.type, psd1.azimuth, psd1.suffix, r )).execute();
+      (new SavePlotFileTask( mActivity, this, saveHandler, psd1.num, /* psd1.util, */ psd1.cm, psd1.fname, psd1.type, psd1.azimuth, psd1.suffix, r )).execute();
     } catch ( RejectedExecutionException e ) { 
       TDLog.Error("rejected exec save plot " + psd1.fname );
       -- mNrSaveTh2Task;
@@ -1003,16 +1003,16 @@ public class DrawingWindow extends ItemDrawer
     if ( st != null ) {
       if ( type == PlotInfo.PLOT_PLAN ) {
         mZoom     = mPlot1.zoom;
-        mOffset.x = TopoDroidApp.mDisplayWidth/(2 * mZoom)  - mDrawingUtil.toSceneX( st.e, st.s );
-        mOffset.y = TopoDroidApp.mDisplayHeight/(2 * mZoom) - mDrawingUtil.toSceneY( st.e, st.s );
+        mOffset.x = TopoDroidApp.mDisplayWidth/(2 * mZoom)  - DrawingUtil.toSceneX( st.e, st.s );
+        mOffset.y = TopoDroidApp.mDisplayHeight/(2 * mZoom) - DrawingUtil.toSceneY( st.e, st.s );
         saveReference( mPlot1, mPid1 );
         // resetReference( mPlot1 );
         // mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
         // return;
       } else if ( type == PlotInfo.PLOT_EXTENDED ) {
         mZoom     = mPlot2.zoom;
-        mOffset.x = TopoDroidApp.mDisplayWidth/(2 * mZoom)  - mDrawingUtil.toSceneX( st.h, st.v );
-        mOffset.y = TopoDroidApp.mDisplayHeight/(2 * mZoom) - mDrawingUtil.toSceneY( st.h, st.v );
+        mOffset.x = TopoDroidApp.mDisplayWidth/(2 * mZoom)  - DrawingUtil.toSceneX( st.h, st.v );
+        mOffset.y = TopoDroidApp.mDisplayHeight/(2 * mZoom) - DrawingUtil.toSceneY( st.h, st.v );
         saveReference( mPlot2, mPid2 );
         // resetReference( mPlot2 );
         // return;
@@ -1021,8 +1021,8 @@ public class DrawingWindow extends ItemDrawer
         float sinp = TDMath.sind( mPlot2.azimuth );
         mZoom     = mPlot2.zoom;
 	float xx = st.e * cosp + st.s * sinp;
-        mOffset.x = TopoDroidApp.mDisplayWidth/(2 * mZoom)  - mDrawingUtil.toSceneX( xx, st.v );
-        mOffset.y = TopoDroidApp.mDisplayHeight/(2 * mZoom) - mDrawingUtil.toSceneY( xx, st.v );
+        mOffset.x = TopoDroidApp.mDisplayWidth/(2 * mZoom)  - DrawingUtil.toSceneX( xx, st.v );
+        mOffset.y = TopoDroidApp.mDisplayHeight/(2 * mZoom) - DrawingUtil.toSceneY( xx, st.v );
         saveReference( mPlot2, mPid2 );
         // return;
       }
@@ -1046,17 +1046,17 @@ public class DrawingWindow extends ItemDrawer
     if ( type == PlotInfo.PLOT_PLAN ) {
       mDrawingSurface.setManager( DrawingSurface.DRAWING_PLAN, type );
       if ( mNum != null ) {
-        mDrawingUtil.addGrid( mNum.surveyEmin(), mNum.surveyEmax(), mNum.surveySmin(), mNum.surveySmax(), mDrawingSurface );
+        DrawingUtil.addGrid( mNum.surveyEmin(), mNum.surveyEmax(), mNum.surveySmin(), mNum.surveySmax(), mDrawingSurface );
       } else {
-        mDrawingUtil.addGrid( -50, 50, -50 , 50, mDrawingSurface );
+        DrawingUtil.addGrid( -50, 50, -50 , 50, mDrawingSurface );
       }
       mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_PLAN, type );
     } else {
       mDrawingSurface.setManager( DrawingSurface.DRAWING_PROFILE, type );
       if ( mNum != null ) {
-        mDrawingUtil.addGrid( mNum.surveyHmin(), mNum.surveyHmax(), mNum.surveyVmin(), mNum.surveyVmax(), mDrawingSurface );
+        DrawingUtil.addGrid( mNum.surveyHmin(), mNum.surveyHmax(), mNum.surveyVmin(), mNum.surveyVmax(), mDrawingSurface );
       } else {
-        mDrawingUtil.addGrid( -50, 50, -50 , 50, mDrawingSurface );
+        DrawingUtil.addGrid( -50, 50, -50 , 50, mDrawingSurface );
       }
       mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_PROFILE, type );
       if ( type == PlotInfo.PLOT_PROFILE ) {
@@ -1100,7 +1100,7 @@ public class DrawingWindow extends ItemDrawer
         if ( st.show() ) {
           DrawingStationName dst;
           dst = mDrawingSurface.addDrawingStationName( name, st,
-                  mDrawingUtil.toSceneX(st.e, st.s), mDrawingUtil.toSceneY(st.e, st.s), true, xsections );
+                  DrawingUtil.toSceneX(st.e, st.s), DrawingUtil.toSceneY(st.e, st.s), true, xsections );
         }
       }
     } else if ( type == PlotInfo.PLOT_EXTENDED ) {
@@ -1130,7 +1130,7 @@ public class DrawingWindow extends ItemDrawer
         if ( st.mHasCoords && st.show() ) {
           DrawingStationName dst;
           dst = mDrawingSurface.addDrawingStationName( name, st,
-                  mDrawingUtil.toSceneX(st.h, st.v), mDrawingUtil.toSceneY(st.h, st.v), true, xhsections );
+                  DrawingUtil.toSceneX(st.h, st.v), DrawingUtil.toSceneY(st.h, st.v), true, xhsections );
         }
       }
     } else { // if ( type == PlotInfo.PLOT_PROFILE ) 
@@ -1164,7 +1164,7 @@ public class DrawingWindow extends ItemDrawer
           DrawingStationName dst;
           h1 = st.e * cosp + st.s * sinp;
           dst = mDrawingSurface.addDrawingStationName( name, st,
-                  mDrawingUtil.toSceneX(h1, st.v), mDrawingUtil.toSceneY(h1, st.v), true, xhsections );
+                  DrawingUtil.toSceneX(h1, st.v), DrawingUtil.toSceneY(h1, st.v), true, xhsections );
         // } else {
         //   Log.v("DistoX", "station not showing " + st.name );
         }
@@ -1750,8 +1750,8 @@ public class DrawingWindow extends ItemDrawer
       mMoveTo  = extras.getString( TDTag.TOPODROID_PLOT_MOVE_TO );
       mLandscape = extras.getBoolean( TDTag.TOPODROID_PLOT_LANDSCAPE );
     } 
-    // mDrawingUtil = mLandscape ? (new DrawingUtilLandscape()) : ( new DrawingUtilPortrait());
-    mDrawingUtil = new DrawingUtilPortrait();
+    // // mDrawingUtil = mLandscape ? (new DrawingUtilLandscape()) : ( new DrawingUtilPortrait());
+    // mDrawingUtil = new DrawingUtilPortrait();
 
     if ( mMoveTo.length() == 0 ) mMoveTo = null;
     mSectionName  = null; // resetStatus
@@ -1822,8 +1822,8 @@ public class DrawingWindow extends ItemDrawer
       mFullName3 = null;
       mType      = tt;
       mLandscape = p1.isLandscape();
-      // mDrawingUtil = mLandscape ? (new DrawingUtilLandscape()) : ( new DrawingUtilPortrait());
-      mDrawingUtil = new DrawingUtilPortrait();
+      // // mDrawingUtil = mLandscape ? (new DrawingUtilLandscape()) : ( new DrawingUtilPortrait());
+      // mDrawingUtil = new DrawingUtilPortrait();
       mName      = (mType == PlotInfo.PLOT_PLAN)? mName1 : mName2;
 
       mFrom    = p1.start;
@@ -1991,7 +1991,7 @@ public class DrawingWindow extends ItemDrawer
     // X_SECTION, XH_SECTION: mFrom != null, mTo == null, splays only 
 
     if ( PlotInfo.isAnySection( mType ) ) {
-      mDrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
+      DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
       makeSectionReferences( list, tt, 0 );
     // } else {
     //   Log.v("DistoX", "try to highlight [1] ");
@@ -2004,14 +2004,14 @@ public class DrawingWindow extends ItemDrawer
 
   // private void makeXSectionLegPoint( float x, float y )
   // {
-  //   DrawingSpecialPath path = new DrawingSpecialPath( DrawingSpecialPath.SPECIAL_DOT, mDrawingUtil.toSceneX(x,y), mDrawingUtil.toSceneY(x,y) );
+  //   DrawingSpecialPath path = new DrawingSpecialPath( DrawingSpecialPath.SPECIAL_DOT, DrawingUtil.toSceneX(x,y), DrawingUtil.toSceneY(x,y) );
   //   mDrawingSurface.addDrawingPath( path );
   // }
   
   private void makeSectionReferences( List<DBlock> list, float tt, int skip )
   {
     // Log.v("DistoX", "Section " + mClino + " " + mAzimuth );
-    // mDrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface ); // FIXME_SK moved out
+    // DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface ); // FIXME_SK moved out
     float xfrom=0;
     float yfrom=0;
     float xto=0;
@@ -2100,20 +2100,20 @@ public class DrawingWindow extends ItemDrawer
           }
           // addFixedLine( mType, blk, xfrom, yfrom, xto, yto, 0, 0, false, false ); // not-splay, not-selecteable
           addFixedLine( mType, blk, xfrom, yfrom, xto, yto, blk.getReducedExtend(), false, false ); // not-splay, not-selecteable
-          mDrawingSurface.addDrawingStationName( mFrom, mDrawingUtil.toSceneX(xfrom, yfrom), mDrawingUtil.toSceneY(xfrom, yfrom) );
-          mDrawingSurface.addDrawingStationName( mTo, mDrawingUtil.toSceneX(xto, yto), mDrawingUtil.toSceneY(xto, yto) );
+          mDrawingSurface.addDrawingStationName( mFrom, DrawingUtil.toSceneX(xfrom, yfrom), DrawingUtil.toSceneY(xfrom, yfrom) );
+          mDrawingSurface.addDrawingStationName( mTo, DrawingUtil.toSceneX(xto, yto), DrawingUtil.toSceneY(xto, yto) );
           if ( tt >= 0 && tt <= 1 ) {
             float xtt = xfrom + tt * ( xto - xfrom );
             float ytt = yfrom + tt * ( yto - yfrom );
             if ( mLandscape ) { float t=xtt; xtt=-ytt; ytt=t; }
             // Log.v("DistoX", "TT " + tt + " " + xtt + " " + xfrom + " " + xto );
             // makeXSectionLegPoint( xtt, ytt );
-            DrawingSpecialPath path = new DrawingSpecialPath( DrawingSpecialPath.SPECIAL_DOT, mDrawingUtil.toSceneX(xtt,ytt), mDrawingUtil.toSceneY(xtt,ytt) );
+            DrawingSpecialPath path = new DrawingSpecialPath( DrawingSpecialPath.SPECIAL_DOT, DrawingUtil.toSceneX(xtt,ytt), DrawingUtil.toSceneY(xtt,ytt) );
             mDrawingSurface.addDrawingPath( path );
           }
         }
       } else { // if ( PlotInfo.isXSection( mType ) ) 
-        mDrawingSurface.addDrawingStationName( mFrom, mDrawingUtil.toSceneX(xfrom, yfrom), mDrawingUtil.toSceneY(xfrom, yfrom) );
+        mDrawingSurface.addDrawingStationName( mFrom, DrawingUtil.toSceneX(xfrom, yfrom), DrawingUtil.toSceneY(xfrom, yfrom) );
       }
     }
 
@@ -4809,7 +4809,6 @@ public class DrawingWindow extends ItemDrawer
     private void saveWithExt( long type, String ext, boolean toast )
     {
       DistoXNum num = mNum;
-      DrawingUtil util = mDrawingUtil;
       TDLog.Log( TDLog.LOG_IO, "export plot type " + type + " with extension " + ext );
       if ( PlotInfo.isAnySection( type ) ) { 
 	DrawingCommandManager manager = mDrawingSurface.getManager( type );
@@ -4817,15 +4816,15 @@ public class DrawingWindow extends ItemDrawer
         if ( "csx".equals( ext ) ) {
           doSavePng( manager, type, fullname, toast );
         } else {
-          doSaveWithExt( num, util, manager, type, fullname, ext, toast );
+          doSaveWithExt( num, /* mDrawingUtil, */ manager, type, fullname, ext, toast );
         }
       } else {
 	DrawingCommandManager manager1 = mDrawingSurface.getManager( mPlot1.type );
 	DrawingCommandManager manager2 = mDrawingSurface.getManager( mPlot2.type );
 	String fullname1 = mFullName1;
 	String fullname2 = mFullName2;
-        doSaveWithExt( num, util, manager1, mPlot1.type, fullname1, ext, toast );
-        doSaveWithExt( num, util, manager2, mPlot2.type, fullname2, ext, toast );
+        doSaveWithExt( num, /* mDrawingUtil, */ manager1, mPlot1.type, fullname1, ext, toast );
+        doSaveWithExt( num, /* mDrawingUtil, */ manager2, mPlot2.type, fullname2, ext, toast );
       }
     }
 
@@ -4833,11 +4832,11 @@ public class DrawingWindow extends ItemDrawer
     // ext can be dxf, svg
     // FIXME OK PROFILE
     // used also by SavePlotFileTask
-    void doSaveWithExt( DistoXNum num, DrawingUtil util, DrawingCommandManager manager, long type, final String filename, final String ext, boolean toast )
+    void doSaveWithExt( DistoXNum num, /* DrawingUtil util, */ DrawingCommandManager manager, long type, final String filename, final String ext, boolean toast )
     {
       TDLog.Log( TDLog.LOG_IO, "save with ext: " + filename + " ext " + ext );
       // mActivity = context (only to toast)
-      new ExportPlotToFile( mActivity, num, util, manager, type, filename, ext, toast ).execute();
+      new ExportPlotToFile( mActivity, num, /* util, */ manager, type, filename, ext, toast ).execute();
     }
 
     // private rotateBackups( String filename )
@@ -4893,7 +4892,7 @@ public class DrawingWindow extends ItemDrawer
       };
     }
     try { 
-      (new SavePlotFileTask( mActivity, this, th2Handler, /* mApp, */ mNum, mDrawingUtil, manager, name, type, azimuth, suffix, 0 )).execute();
+      (new SavePlotFileTask( mActivity, this, th2Handler, /* mApp, */ mNum, /* mDrawingUtil, */ manager, name, type, azimuth, suffix, 0 )).execute();
     } catch ( RejectedExecutionException e ) { }
   }
 
@@ -5317,7 +5316,7 @@ public class DrawingWindow extends ItemDrawer
       mDrawingSurface.modeloadDataStream( tdr, th2, null );
       // DrawingSurface.addManagerToCache( mFullName2 ); // sections are not cached
       setPlotType3( );
-      mDrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
+      DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
       makeSectionReferences( mApp_mData.selectAllShots( mSid, TDStatus.NORMAL ), -1, 0 );
     }
     mOffset.x = x;
@@ -5335,14 +5334,14 @@ public class DrawingWindow extends ItemDrawer
 
     pw.format("  <plan>\n");
     if ( psd1 != null ) {
-      DrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_PLAN, survey, cave, branch, /* session, */ psd1.cm, all_sections, sections1, psd1.util /* mDrawingUtil */ );
+      DrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_PLAN, survey, cave, branch, /* session, */ psd1.cm, all_sections, sections1 /* , psd1.util */ );
     }
     pw.format("    <plot />\n");
     pw.format("  </plan>\n");
     
     pw.format("  <profile>\n");
     if ( psd2 != null ) {
-      DrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_EXTENDED, survey, cave, branch, /* session, */ psd2.cm, all_sections, sections2, psd2.util /* mDrawingUtil */ ); 
+      DrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_EXTENDED, survey, cave, branch, /* session, */ psd2.cm, all_sections, sections2 /* , psd2.util */ ); 
     }
     pw.format("    <plot />\n");
     pw.format("  </profile>\n");
@@ -5352,7 +5351,7 @@ public class DrawingWindow extends ItemDrawer
       for ( PlotInfo section1 : sections1 ) {
         pw.format("    <crosssection id=\"%s\" design=\"0\" crosssection=\"%d\">\n", section1.name, section1.csxIndex );
         // exportCsxXSection( pw, section1, survey, cave, branch, /* session, */ mDrawingUtil );
-        exportCsxXSection( pw, section1, survey, cave, branch, /* session, */ psd1.util );
+        exportCsxXSection( pw, section1, survey, cave, branch /* , session */ /* , psd1.util */ );
         pw.format("    </crosssection>\n" );
       }
     }
@@ -5360,19 +5359,20 @@ public class DrawingWindow extends ItemDrawer
       for ( PlotInfo section2 : sections2 ) {
         pw.format("    <crosssection id=\"%s\" design=\"1\" crosssection=\"%d\">\n", section2.name, section2.csxIndex );
         // exportCsxXSection( pw, section2, survey, cave, branch, /* session, */ mDrawingUtil );
-        exportCsxXSection( pw, section2, survey, cave, branch, /* session, */ psd2.util );
+        exportCsxXSection( pw, section2, survey, cave, branch /* , session */ /* , psd2.util */ );
         pw.format("    </crosssection>\n" );
       }
     }
     pw.format("    </crosssections>\n");
   }
 
-  private static void exportCsxXSection( PrintWriter pw, PlotInfo section, String survey, String cave, String branch, /* String session, */ DrawingUtil drawingUtil )
+  private static void exportCsxXSection( PrintWriter pw, PlotInfo section, String survey, String cave, String branch
+		  /* , String session */ /* , DrawingUtil drawingUtil */ )
   {
     // String name = section.name; // binding name
     // open xsection file
     String filename = TDPath.getSurveyPlotTdrFile( survey, section.name );
-    DrawingIO.doExportCsxXSection( pw, filename, survey, cave, branch, /* session, */ section.name, drawingUtil ); // bind=section.name
+    DrawingIO.doExportCsxXSection( pw, filename, survey, cave, branch, /* session, */ section.name /* , drawingUtil */ ); // bind=section.name
   }
 
   public void setConnectionStatus( int status )
@@ -5571,14 +5571,14 @@ public class DrawingWindow extends ItemDrawer
     if ( dln_wall.mPosHull.size() > 0 ) {
       DLNSideList hpos = dln_wall.mPosHull.get(0);
       DLNSide side = hpos.side;
-      float xx = mDrawingUtil.toSceneX( side.mP1.x, side.mP1.y );
-      float yy = mDrawingUtil.toSceneY( side.mP1.x, side.mP1.y );
+      float xx = DrawingUtil.toSceneX( side.mP1.x, side.mP1.y );
+      float yy = DrawingUtil.toSceneY( side.mP1.x, side.mP1.y );
       DrawingLinePath path = new DrawingLinePath( BrushManager.mLineLib.mLineWallIndex );
       path.addStartPoint( xx, yy );
       for ( DLNSideList hp : dln_wall.mPosHull ) {
         side = hp.side;
-        float xx2 = mDrawingUtil.toSceneX( side.mP2.x, side.mP2.y );
-        float yy2 = mDrawingUtil.toSceneY( side.mP2.x, side.mP2.y );
+        float xx2 = DrawingUtil.toSceneX( side.mP2.x, side.mP2.y );
+        float yy2 = DrawingUtil.toSceneY( side.mP2.x, side.mP2.y );
         addPointsToLine( path, xx, yy, xx2, yy2 );
         xx = xx2;
         yy = yy2;
@@ -5590,14 +5590,14 @@ public class DrawingWindow extends ItemDrawer
     if ( dln_wall.mNegHull.size() > 0 ) {
       DLNSideList hneg = dln_wall.mNegHull.get(0);
       DLNSide side = hneg.side;
-      float xx = mDrawingUtil.toSceneX( side.mP1.x, side.mP1.y );
-      float yy = mDrawingUtil.toSceneY( side.mP1.x, side.mP1.y );
+      float xx = DrawingUtil.toSceneX( side.mP1.x, side.mP1.y );
+      float yy = DrawingUtil.toSceneY( side.mP1.x, side.mP1.y );
       DrawingLinePath path = new DrawingLinePath( BrushManager.mLineLib.mLineWallIndex );
       path.addStartPoint( xx, yy );
       for ( DLNSideList hn : dln_wall.mNegHull ) {
         side = hn.side;
-        float xx2 = mDrawingUtil.toSceneX( side.mP2.x, side.mP2.y );
-        float yy2 = mDrawingUtil.toSceneY( side.mP2.x, side.mP2.y );
+        float xx2 = DrawingUtil.toSceneX( side.mP2.x, side.mP2.y );
+        float yy2 = DrawingUtil.toSceneY( side.mP2.x, side.mP2.y );
         addPointsToLine( path, xx, yy, xx2, yy2 );
         xx = xx2;
         yy = yy2;
@@ -5615,14 +5615,14 @@ public class DrawingWindow extends ItemDrawer
     dln_wall.compute( sites );
     DLNSideList hull = dln_wall.getBorderHead();
     DLNSide side = hull.side;
-    float xx = mDrawingUtil.toSceneX( side.mP1.x, side.mP1.y );
-    float yy = mDrawingUtil.toSceneY( side.mP1.x, side.mP1.y );
+    float xx = DrawingUtil.toSceneX( side.mP1.x, side.mP1.y );
+    float yy = DrawingUtil.toSceneY( side.mP1.x, side.mP1.y );
     DrawingLinePath path = new DrawingLinePath( BrushManager.mLineLib.mLineWallIndex );
     path.addStartPoint( xx, yy );
     int size = dln_wall.hullSize();
     for ( int k=0; k<size; ++k ) {
-      float xx2 = mDrawingUtil.toSceneX( side.mP2.x, side.mP2.y );
-      float yy2 = mDrawingUtil.toSceneY( side.mP2.x, side.mP2.y );
+      float xx2 = DrawingUtil.toSceneX( side.mP2.x, side.mP2.y );
+      float yy2 = DrawingUtil.toSceneY( side.mP2.x, side.mP2.y );
       addPointsToLine( path, xx, yy, xx2, yy2 );
       xx = xx2;
       yy = yy2;
@@ -5646,12 +5646,12 @@ public class DrawingWindow extends ItemDrawer
       if ( p.x > 0 && p.x < len ) { // wall from--p--to
 	    float x2 = x0 + uu.x * p.x + vv.x * p.y;
 	    float y2 = y0 + uu.y * p.x + vv.y * p.y;
-        xx = mDrawingUtil.toSceneX( x2, y2 ); 
-        yy = mDrawingUtil.toSceneY( x2, y2 );
-        x0 = mDrawingUtil.toSceneX( x0, y0 );
-        y0 = mDrawingUtil.toSceneY( x0, y0 );
-        x1 = mDrawingUtil.toSceneX( x1, y1 );
-        y1 = mDrawingUtil.toSceneY( x1, y1 );
+        xx = DrawingUtil.toSceneX( x2, y2 ); 
+        yy = DrawingUtil.toSceneY( x2, y2 );
+        x0 = DrawingUtil.toSceneX( x0, y0 );
+        y0 = DrawingUtil.toSceneY( x0, y0 );
+        x1 = DrawingUtil.toSceneX( x1, y1 );
+        y1 = DrawingUtil.toSceneY( x1, y1 );
         DrawingLinePath path = new DrawingLinePath( BrushManager.mLineLib.mLineWallIndex );
         path.addStartPoint( x0, y0 );
         addPointsToLine( path, x0, y0, xx, yy );
@@ -5665,16 +5665,16 @@ public class DrawingWindow extends ItemDrawer
       PointF p1 = pts.get(0);
       float x2 = x0 + uu.x * p1.x + vv.x * p1.y;
       float y2 = y0 + uu.y * p1.x + vv.y * p1.y;
-      xx = mDrawingUtil.toSceneX( x2, y2 );
-      yy = mDrawingUtil.toSceneY( x2, y2 );
+      xx = DrawingUtil.toSceneX( x2, y2 );
+      yy = DrawingUtil.toSceneY( x2, y2 );
       DrawingLinePath path = new DrawingLinePath( BrushManager.mLineLib.mLineWallIndex );
       path.addStartPoint( xx, yy );
       for ( int k=1; k<pts.size(); ++k ) {
         p1 = pts.get(k);
 	x2 = x0 + uu.x * p1.x + vv.x * p1.y;
 	y2 = y0 + uu.y * p1.x + vv.y * p1.y;
-        float xx2 = mDrawingUtil.toSceneX( x2, y2 );
-        float yy2 = mDrawingUtil.toSceneY( x2, y2 );
+        float xx2 = DrawingUtil.toSceneX( x2, y2 );
+        float yy2 = DrawingUtil.toSceneY( x2, y2 );
         addPointsToLine( path, xx, yy, xx2, yy2 );
         xx = xx2;
         yy = yy2;
@@ -5933,7 +5933,7 @@ public class DrawingWindow extends ItemDrawer
     String name = mSplitName + ( ( mType == PlotInfo.PLOT_PLAN )? "p" : "s" );
     String fullname = TDInstance.survey + "-" + name;
     // PlotInfo plot = mApp_mData.getPlotInfo( TDInstance.sid, name );
-    (new SavePlotFileTask( mActivity, this, null, /* mApp, */ mNum, mDrawingUtil, paths, fullname, mType, azimuth ) ).execute();
+    (new SavePlotFileTask( mActivity, this, null, /* mApp, */ mNum, /* mDrawingUtil, */ paths, fullname, mType, azimuth ) ).execute();
     // TODO
     // [1] create the database record
     // [2] save the Tdr for the new plot and remove the items from the commandManager

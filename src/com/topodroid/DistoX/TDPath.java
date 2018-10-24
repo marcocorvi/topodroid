@@ -117,7 +117,7 @@ class TDPath
   private static String PATH_ZIP;    //  = PATH_BASE + "zip/";
   // private static String APP_TLX_PATH ; //  = PATH_BASE + "tlx/";
 
-  final static Object mTherionLock   = new Object();
+  // final static Object mTherionLock   = new Object(); // FIXME-THREAD_SAFE
   final static Object mXSectionsLock = new Object();
   final static Object mSelectionLock = new Object();
   // final static Object mSelectedLock  = new Object();

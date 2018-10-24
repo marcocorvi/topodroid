@@ -309,18 +309,32 @@ class DrawingCommandManager
     mNorthLine       = null;
     mFirstReference  = null;
     mSecondReference = null;
-    mGridStack1   = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    mGridStack10  = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    mGridStack100 = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    mLegsStack    = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    mSplaysStack  = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    mScrap        = Collections.synchronizedList(new ArrayList<DrawingLinePath>());
-    mXSectionOutlines = Collections.synchronizedList(new ArrayList<DrawingOutlinePath>());
-    mCurrentStack = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
-    mUserStations = Collections.synchronizedList(new ArrayList<DrawingStationPath>());
-    mRedoStack    = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
-    // mHighlight = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    mStations     = Collections.synchronizedList(new ArrayList<DrawingStationName>());
+    // mGridStack1   = Collections.synchronizedList(new ArrayList<DrawingPath>());
+    // mGridStack10  = Collections.synchronizedList(new ArrayList<DrawingPath>());
+    // mGridStack100 = Collections.synchronizedList(new ArrayList<DrawingPath>());
+    // mLegsStack    = Collections.synchronizedList(new ArrayList<DrawingPath>());
+    // mSplaysStack  = Collections.synchronizedList(new ArrayList<DrawingPath>());
+    // mScrap        = Collections.synchronizedList(new ArrayList<DrawingLinePath>());
+    // mXSectionOutlines = Collections.synchronizedList(new ArrayList<DrawingOutlinePath>());
+    // // mCurrentStack = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
+    // mUserStations = Collections.synchronizedList(new ArrayList<DrawingStationPath>());
+    // mRedoStack    = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
+    // // mHighlight = Collections.synchronizedList(new ArrayList<DrawingPath>());
+    // mStations     = Collections.synchronizedList(new ArrayList<DrawingStationName>());
+
+    mGridStack1   = new ArrayList<DrawingPath>();
+    mGridStack10  = new ArrayList<DrawingPath>();
+    mGridStack100 = new ArrayList<DrawingPath>();
+    mLegsStack    = new ArrayList<DrawingPath>();
+    mSplaysStack  = new ArrayList<DrawingPath>();
+    mScrap        = new ArrayList<DrawingLinePath>();
+    mXSectionOutlines = new ArrayList<DrawingOutlinePath>();
+    mCurrentStack = new ArrayList<ICanvasCommand>();
+    mUserStations = new ArrayList<DrawingStationPath>();
+    mRedoStack    = new ArrayList<ICanvasCommand>();
+    // mHighlight = new ArrayList<DrawingPath>();
+    mStations     = new ArrayList<DrawingStationName>();
+
     mMatrix       = new Matrix(); // identity
     mSelection    = new Selection();
     mSelected     = new SelectionSet();
@@ -2651,14 +2665,14 @@ class DrawingCommandManager
   }
 
   void exportAsCsx( PrintWriter pw, String survey, String cave, String branch, /* String session, */
-                    List<PlotInfo> all_sections, List<PlotInfo> sections, DrawingUtil drawingUtil )
+                    List<PlotInfo> all_sections, List<PlotInfo> sections /* , DrawingUtil drawingUtil */ )
   {
     ArrayList< DrawingPath > paths = new ArrayList<>();
     synchronized( mCurrentStack ) {
       for ( ICanvasCommand cmd : mCurrentStack ) {
         if ( cmd.commandType() == 0 ) paths.add( (DrawingPath) cmd );
       }
-      DrawingIO.doExportAsCsx( pw, survey, cave, branch, /* session, */ null, paths, all_sections, sections, drawingUtil ); // bind=null
+      DrawingIO.doExportAsCsx( pw, survey, cave, branch, /* session, */ null, paths, all_sections, sections /* , drawingUtil */ ); // bind=null
     }
   }
 

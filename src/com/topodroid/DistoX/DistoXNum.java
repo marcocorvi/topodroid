@@ -1285,7 +1285,7 @@ class DistoXNum
   {
     for ( NumShot shot : shots ) {
       if ( shot.branch != null ) continue;
-      // start a branch END_END or LOOP
+      // start a branch BRANCH_END_END or BRANCH_LOOP
       NumBranch branch = new NumBranch( NumBranch.BRANCH_LOOP, null );
       NumShot sh0 = shot;
       NumStation sf0 = sh0.from;
@@ -1297,7 +1297,7 @@ class DistoXNum
         sh0.branch = branch;
         NumShot sh1 = st0.s1;
         if ( sh1 == sh0 ) { sh1 = st0.s2; }
-        if ( sh1 == null ) { // dangling station: END_END branch --> drop
+        if ( sh1 == null ) { // dangling station: BRANCH_END_END branch --> drop
           // mEndBranches.add( branch );
           break;
         }
@@ -1399,7 +1399,7 @@ class DistoXNum
             }
             NumShot sh1 = st0.s1;
             if ( sh1 == sh0 ) { sh1 = st0.s2; }
-            if ( sh1 == null ) { // dangling station: CROSS_END branch --> drop
+            if ( sh1 == null ) { // dangling station: BRANCH_CROSS_END branch --> drop
               // mEndBranches.add( branch );
               if ( also_cross_end ) {
                 branch.setLastNode( st0.node ); // st0.node always null
