@@ -399,7 +399,7 @@
     <string name="item_delete">Odstrániť položku %1$s ?</string>
     <string name="splay_delete">Odstrániť pomocnú zámeru %1$s ?</string>
     <string name="plot_duplicate_name">Názov nákresu už existuje</string>
-    <!-- TODO string name="plot_dangling">Dangling sketch</string -->
+    <string name="plot_dangling">Voľný nákres</string>
     <!-- UNUSED string name="plot_name">Sketch name</string -->
     <string name="plot_new">Nový nákres</string>
     <string name="plot_not_found">Nákres sa nenašiel</string>
@@ -551,7 +551,7 @@
     <string name="plan">Pôdorys</string>
     <string name="extended">Rozvinutý rez</string>
     <string name="profile">Priemet</string>
-    <string name="extended_profile">Zaškrtnuté = Rozvinutý rez; Nezaškrtnuté = Priemet</string>
+    <string name="extended_profile">Zaškrtnuté=Rozvinutý rez Nezaškrtnuté=Priemet</string>
     <!-- UNUSED string name="v_section">SEZIONE VERT.</string -->
     <string name="h_section">HORIZONTÁLNY</string>
     <!-- UNUSED string name="landscape">Viditeľná hranica</string -->
@@ -619,7 +619,7 @@
     <string name="button_split"     >Rozdeliť   </string>
     <string name="button_station"   >Vycentrovať na</string>
     <string name="button_store"     >Zapísať    </string>
-    <!-- TODO string name="button_swap"      >Swap      </string -->
+    <string name="button_swap"      >Vymeniť      </string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
     <string name="button_upload"    >Nahrať    </string>
