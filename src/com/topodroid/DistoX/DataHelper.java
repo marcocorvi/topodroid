@@ -161,7 +161,7 @@ class DataHelper extends DataSetObservable
     "cs_name", "cs_longitude", "cs_latitude", "cs_altitude", "cs_decimals"
   };
 
-  private DataListenerSet mListeners;
+  // private DataListenerSet mListeners; // IF_COSURVEY
 
   // ----------------------------------------------------------------------
   // DATABASE
@@ -172,11 +172,12 @@ class DataHelper extends DataSetObservable
   public SQLiteDatabase getDb() { return myDB; }
 
 
-  public DataHelper( Context context, TopoDroidApp app, DataListenerSet listeners )
+  // public DataHelper( Context context, TopoDroidApp app, DataListenerSet listeners ) // IF_COSURVEY
+  public DataHelper( Context context, TopoDroidApp app )
   {
     mContext = context;
     mApp     = app;
-    mListeners = listeners;
+    // mListeners = listeners; // IF_COSURVEY
     openDatabase();
   }
 
@@ -717,9 +718,9 @@ class DataHelper extends DataSetObservable
       myDB.beginTransaction();
       myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(id) } );
       myDB.setTransactionSuccessful();
-      if ( forward && mListeners != null ) { // synchronized( mListeners )
-        mListeners.onUpdateSurveyName( id, name );
-      }
+      // if ( forward && mListeners != null ) { // synchronized( mListeners )
+      //   mListeners.onUpdateSurveyName( id, name );
+      // }
     } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e ); ret = false;
     } catch ( SQLiteException e1 )       { logError("survey rename " + name, e1 ); ret =false;
     } catch ( IllegalStateException e2 ) { logError("survey rename", e2 ); ret = false;
@@ -750,9 +751,9 @@ class DataHelper extends DataSetObservable
       myDB.beginTransaction();
       myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(sid) } );
       myDB.setTransactionSuccessful();
-      if ( forward && mListeners != null ) { // synchronized( mListeners )
-        mListeners.onUpdateSurveyInfo( sid, date, team, decl, comment, init_station, xsections );
-      }
+      // if ( forward && mListeners != null ) { // synchronized( mListeners )
+      //   mListeners.onUpdateSurveyInfo( sid, date, team, decl, comment, init_station, xsections );
+      // }
       ret = true;
     } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
     } catch ( SQLiteException e1 )       { logError("survey info", e1 ); 
@@ -874,9 +875,9 @@ class DataHelper extends DataSetObservable
     cv.put( "day", date );
     cv.put( "comment", (comment != null)? comment : TDString.EMPTY );
     if ( doUpdateSurvey( id, cv, "survey day+cmt" ) ) {
-      if ( forward && mListeners != null ) { // synchronized( mListeners )
-        mListeners.onUpdateSurveyDayAndComment( id, date, comment );
-      }
+      // if ( forward && mListeners != null ) { // synchronized( mListeners )
+      //   mListeners.onUpdateSurveyDayAndComment( id, date, comment );
+      // }
     }
     return true;
   }
@@ -886,9 +887,9 @@ class DataHelper extends DataSetObservable
     ContentValues cv = new ContentValues();
     cv.put( "team", team );
     if ( doUpdateSurvey( id, cv, "survey team" ) ) {
-      if ( forward && mListeners != null ) { // synchronized( mListeners )
-        mListeners.onUpdateSurveyTeam( id, team );
-      }
+      // if ( forward && mListeners != null ) { // synchronized( mListeners )
+      //   mListeners.onUpdateSurveyTeam( id, team );
+      // }
     }
   }
 
@@ -898,9 +899,9 @@ class DataHelper extends DataSetObservable
     // Log.v("DistoX_DB", "update survey init_station <" + station + ">" );
     cv.put( "init_station", station );
     if ( doUpdateSurvey( id, cv, "survey init_station" ) ) {
-      if ( forward && mListeners != null ) { // synchronized( mListeners )
-        mListeners.onUpdateSurveyInitStation( id, station );
-      }
+      // if ( forward && mListeners != null ) { // synchronized( mListeners )
+      //   mListeners.onUpdateSurveyInitStation( id, station );
+      // }
     }
   }
   void updateSurveyDeclination( long id, double decl, boolean forward )
@@ -908,9 +909,9 @@ class DataHelper extends DataSetObservable
     ContentValues cv = new ContentValues();
     cv.put( "declination", decl );
     if ( doUpdateSurvey( id, cv, "survey decl" ) ) {
-      if ( forward && mListeners != null ) { // synchronized( mListeners )
-        mListeners.onUpdateSurveyDeclination( id, decl );
-      }
+      // if ( forward && mListeners != null ) { // synchronized( mListeners )
+      //   mListeners.onUpdateSurveyDeclination( id, decl );
+      // }
     } 
   }
 
@@ -952,9 +953,9 @@ class DataHelper extends DataSetObservable
   //   clearStationsStmt.bindLong( 1, id );
   //   clearStationsStmt.bindLong( 2, sid );
   //   try { clearStationsStmt.execute(); } catch (SQLiteException e ) { logError("clear station after", e); }
-  //   if ( forward ) {
-  //     // no need to forward ?
-  //   }
+  //   // if ( forward ) {
+  //   //   // no need to forward ?
+  //   // }
   // }
 
 
@@ -974,9 +975,9 @@ class DataHelper extends DataSetObservable
                "UPDATE shots SET distance=%.6f, bearing=%.4f, clino=%.4f WHERE surveyId=%d AND id=%d",
                d, b, c, sid, id );
     if ( doExecShotSQL( id, sw ) ) {
-      if ( forward && mListeners != null ) { // synchronized( mListeners )
-        mListeners.onUpdateShotDBC( id, sid, d, b, c );
-      }
+      // if ( forward && mListeners != null ) { // synchronized( mListeners )
+      //   mListeners.onUpdateShotDBC( id, sid, d, b, c );
+      // }
     } 
   }
 
@@ -988,9 +989,9 @@ class DataHelper extends DataSetObservable
                "UPDATE shots SET distance=%.6f, bearing=%.4f, clino=%.4f WHERE surveyId=%d AND id=%d",
                d, b, p, sid, id );
     if ( doExecShotSQL( id, sw ) ) {
-      if ( forward && mListeners != null ) { // synchronized( mListeners )
-        mListeners.onUpdateShotPBD( id, sid, p, b, d );
-      }
+      // if ( forward && mListeners != null ) { // synchronized( mListeners )
+      //   mListeners.onUpdateShotPBD( id, sid, p, b, d );
+      // }
     } 
   }
 
@@ -1060,9 +1061,9 @@ class DataHelper extends DataSetObservable
     }
 
     // Log.v("DistoX", "update shot " + fStation + " " + tStation + " success " + success );
-    if ( success && forward && mListeners != null ) { // synchronized( mListeners )
-      mListeners.onUpdateShot( id, sid, fStation, tStation, extend, flag, leg, comment );
-    }
+    // if ( success && forward && mListeners != null ) { // synchronized( mListeners )
+    //   mListeners.onUpdateShot( id, sid, fStation, tStation, extend, flag, leg, comment );
+    // }
     return 0;
   }
 
@@ -1102,9 +1103,9 @@ class DataHelper extends DataSetObservable
     myDB.beginTransaction();
     try {
       myDB.execSQL( sw.toString() );
-      if ( forward && mListeners != null ) { // synchronized( mListeners )
-        mListeners.onUpdateShotName( id, sid, fStation, tStation );
-      }
+      // if ( forward && mListeners != null ) { // synchronized( mListeners )
+      //   mListeners.onUpdateShotName( id, sid, fStation, tStation );
+      // }
       myDB.setTransactionSuccessful();
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch ( SQLiteException e ) { logError("shot " + id + " name " + fStation + " " + tStation, e );
@@ -1147,9 +1148,9 @@ class DataHelper extends DataSetObservable
     try {
       myDB.execSQL( sw.toString() );
       myDB.setTransactionSuccessful();
-      if ( forward && mListeners != null ) { // synchronized( mListeners )
-        mListeners.onUpdateShotLeg( id, sid, leg );
-      }
+      // if ( forward && mListeners != null ) { // synchronized( mListeners )
+      //   mListeners.onUpdateShotLeg( id, sid, leg );
+      // }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch ( SQLiteException e ) { logError("shot " + id + " leg", e );
     } finally { myDB.endTransaction(); }
@@ -1162,9 +1163,9 @@ class DataHelper extends DataSetObservable
   //   PrintWriter pw = new PrintWriter( sw );
   //   pw.format( Locale.US, "UPDATE shots SET leg=%d WHERE surveyId=%d AND id=%d", leg, sid, id );
   //   if ( doExecShotSQL( id, sw ) ) {
-  //     if ( forward && mListeners != null ) { // synchronized( mListeners )
-  //       mListeners.onUpdateShotLeg( id, sid, leg );
-  //     }
+  //     // if ( forward && mListeners != null ) { // synchronized( mListeners )
+  //     //   mListeners.onUpdateShotLeg( id, sid, leg );
+  //     // }
   //   } 
   // }
 
@@ -1192,9 +1193,9 @@ class DataHelper extends DataSetObservable
     PrintWriter pw = new PrintWriter( sw );
     pw.format( Locale.US, "UPDATE shots SET extend=%d, stretch=%.2f WHERE surveyId=%d AND id=%d", extend, stretch, sid, id );
     if ( doExecShotSQL( id, sw ) ) {
-      if ( forward && mListeners != null ) { // synchronized( mListeners )
-        mListeners.onUpdateShotExtend( id, sid, extend, stretch );
-      }
+      // if ( forward && mListeners != null ) { // synchronized( mListeners )
+      //   mListeners.onUpdateShotExtend( id, sid, extend, stretch );
+      // }
     } 
   }
 
@@ -1204,9 +1205,9 @@ class DataHelper extends DataSetObservable
     PrintWriter pw = new PrintWriter( sw );
     pw.format( Locale.US, "UPDATE shots SET flag=%d WHERE surveyId=%d AND id=%d", flag, sid, id );
     if ( doExecShotSQL( id, sw ) ) {
-      if ( forward && mListeners != null ) { // synchronized( mListeners )
-        mListeners.onUpdateShotFlag( id, sid, flag );
-      }
+      // if ( forward && mListeners != null ) { // synchronized( mListeners )
+      //   mListeners.onUpdateShotFlag( id, sid, flag );
+      // }
     } 
   }
 
@@ -1217,9 +1218,9 @@ class DataHelper extends DataSetObservable
     PrintWriter pw = new PrintWriter( sw );
     pw.format( Locale.US, "UPDATE shots SET leg=%d, flag=%d WHERE surveyId=%d AND id=%d", leg, flag, sid, id );
     if ( doExecShotSQL( id, sw ) ) {
-      if ( forward && mListeners != null ) { // synchronized( mListeners )
-        mListeners.onUpdateShotLegFlag( id, sid, leg, flag );
-      }
+      // if ( forward && mListeners != null ) { // synchronized( mListeners )
+      //   mListeners.onUpdateShotLegFlag( id, sid, leg, flag );
+      // }
     } 
   }
 
@@ -1231,9 +1232,9 @@ class DataHelper extends DataSetObservable
     PrintWriter pw = new PrintWriter( sw );
     pw.format( Locale.US, "UPDATE shots SET comment=\"%s\" WHERE surveyId=%d AND id=%d", comment, sid, id );
     if ( doExecShotSQL( id, sw ) ) {
-      if ( forward && mListeners != null ) { // synchronized( mListeners )
-        mListeners.onUpdateShotComment( id, sid, comment );
-      }
+      // if ( forward && mListeners != null ) { // synchronized( mListeners )
+      //   mListeners.onUpdateShotComment( id, sid, comment );
+      // }
     } 
   }
 
@@ -1243,9 +1244,9 @@ class DataHelper extends DataSetObservable
     PrintWriter pw = new PrintWriter( sw );
     pw.format( Locale.US, "UPDATE shots SET status=%d WHERE surveyId=%d AND id=%d", status, sid, id );
     if ( doExecShotSQL( id, sw ) ) {
-      if ( forward && mListeners != null ) { // synchronized( mListeners )
-        mListeners.onUpdateShotStatus( id, sid, status );
-      }
+      // if ( forward && mListeners != null ) { // synchronized( mListeners )
+      //   mListeners.onUpdateShotStatus( id, sid, status );
+      // }
     } 
   }
 
@@ -1253,9 +1254,9 @@ class DataHelper extends DataSetObservable
   {
     // if ( myDB == null ) return;
     if ( updateStatus( SHOT_TABLE, id, sid, status ) ) {
-      if ( forward && mListeners != null ) { // synchronized( mListeners )
-        mListeners.onDeleteShot( id, sid, status );
-      }
+      // if ( forward && mListeners != null ) { // synchronized( mListeners )
+      //   mListeners.onDeleteShot( id, sid, status );
+      // }
     }
   }
 
@@ -1263,9 +1264,9 @@ class DataHelper extends DataSetObservable
   {
     // if ( myDB == null ) return;
     if ( updateStatus( SHOT_TABLE, id, sid, TDStatus.NORMAL ) ) {
-      if ( forward && mListeners != null ) { // synchronized( mListeners )
-        mListeners.onUndeleteShot( id, sid );
-      }
+      // if ( forward && mListeners != null ) { // synchronized( mListeners )
+      //   mListeners.onUndeleteShot( id, sid );
+      // }
     }
   }
   
@@ -1339,6 +1340,7 @@ class DataHelper extends DataSetObservable
       myDB.setLockingEnabled( true );
       // myDB.execSQL("PRAGMA synchronous=NORMAL");
     }
+    /* ---- IF_COSURVEY
     if ( mListeners != null ) {
       // synchronized( mListeners )
       for ( ParserShot s : shots ) {
@@ -1355,6 +1357,7 @@ class DataHelper extends DataSetObservable
                         s.comment );
       }
     }
+    */
     return id;
   }
   
@@ -1449,9 +1452,9 @@ class DataHelper extends DataSetObservable
     updateShotColorStmt.bindLong( 2, sid );
     updateShotColorStmt.bindLong( 3, id );
     if ( doStatement( updateShotColorStmt, "Color" ) ) {
-      if ( forward && mListeners != null ) { // synchronized( mListeners )
-        mListeners.onUpdateShotColor( sid, id, color );
-      }
+      // if ( forward && mListeners != null ) { // synchronized( mListeners )
+      //   mListeners.onUpdateShotColor( sid, id, color );
+      // }
       return true;
     }
     return false;
@@ -1465,9 +1468,9 @@ class DataHelper extends DataSetObservable
       String stmt = "UPDATE shots SET color=" + color + " WHERE surveyId=" + sid + " AND id=";
       for ( DBlock blk : blks ) {
         myDB.execSQL( stmt + blk.mId );
-        // if ( forward && mListeners != null ) { // synchronized( mListeners )
-        //   mListeners.onUpdateShotColor( sid, id, color );
-        // }
+        // // if ( forward && mListeners != null ) { // synchronized( mListeners )
+        // //   mListeners.onUpdateShotColor( sid, id, color );
+        // // }
       }
       myDB.setTransactionSuccessful();
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -1497,9 +1500,9 @@ class DataHelper extends DataSetObservable
     updateShotAMDRStmt.bindLong( 5, sid );
     updateShotAMDRStmt.bindLong( 6, id );
     if ( doStatement( updateShotAMDRStmt, "AMDR" ) ) {
-      if ( forward && mListeners != null ) { // synchronized( mListeners )
-        mListeners.onUpdateShotAMDR( sid, id, acc, mag, dip, r );
-      }
+      // if ( forward && mListeners != null ) { // synchronized( mListeners )
+      //   mListeners.onUpdateShotAMDR( sid, id, acc, mag, dip, r );
+      // }
       return true;
     }
     return false;
@@ -1677,9 +1680,9 @@ class DataHelper extends DataSetObservable
     cv.put( "stretch",  stretch );
 
     if ( doInsert( SHOT_TABLE, cv, "insert at" ) ) {
-      if ( forward && mListeners != null ) { // synchronized( mListeners )
-        mListeners.onInsertShotAt( sid, at, millis, color, d, b, c, r, extend, stretch, leg, DBlock.FLAG_SURVEY );
-      }
+      // if ( forward && mListeners != null ) { // synchronized( mListeners )
+      //   mListeners.onInsertShotAt( sid, at, millis, color, d, b, c, r, extend, stretch, leg, DBlock.FLAG_SURVEY );
+      // }
     }
     return at;
   }
@@ -1732,9 +1735,9 @@ class DataHelper extends DataSetObservable
     ContentValues cv = makeShotContentValues( sid, id, millis, color, from, to, d, b, c, r, 0.0, 0.0, 0.0,
 		    extend, stretch, flag, leg, status, shot_type, comment );
     if ( doInsert( SHOT_TABLE, cv, "insert" ) ) {
-      if ( forward && mListeners != null ) { // synchronized( mListeners )
-        mListeners.onInsertShot( sid,  id, millis, color, from, to, d, b, c, r, extend, stretch, flag, leg, status, shot_type, comment );
-      }
+      // if ( forward && mListeners != null ) { // synchronized( mListeners )
+      //   mListeners.onInsertShot( sid,  id, millis, color, from, to, d, b, c, r, extend, stretch, flag, leg, status, shot_type, comment );
+      // }
     } 
     return id;
   }
@@ -3655,9 +3658,9 @@ class DataHelper extends DataSetObservable
      ContentValues cv = makePlotContentValues( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, 
 		     azimuth, clino, hide, nick, orientation );
      if ( doInsert( PLOT_TABLE, cv, "plot insert" ) ) {
-       if ( forward && mListeners != null ) { // synchronized( mListeners )
-         mListeners.onInsertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation );
-       }
+       // if ( forward && mListeners != null ) { // synchronized( mListeners )
+       //   mListeners.onInsertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation );
+       // }
      } else { // failed
        id = -1L;
      }
@@ -3885,9 +3888,9 @@ class DataHelper extends DataSetObservable
      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
      // TDLog.Log( TDLog.LOG_DB, "setSurvey " + name + " forward " + forward + " listeners " + mListeners.size() );
-     if ( forward && mListeners != null ) { // synchronized( mListeners )
-       mListeners.onSetSurvey( sid, name, datamode );
-     }
+     // if ( forward && mListeners != null ) { // synchronized( mListeners )
+     //   mListeners.onSetSurvey( sid, name, datamode );
+     // }
      return sid;
    }
 

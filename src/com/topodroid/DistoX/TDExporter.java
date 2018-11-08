@@ -533,7 +533,7 @@ class TDExporter
       DistoXNum num = new DistoXNum( shots_data, fixed.name, null, null, decl, null ); // null formatClosure
       // Log.v("DistoX", "Num shots " + num.getShots().size() );
       if ( num.getShots().size() > 0 ) {
-        makeGeolocalizedData( num, fixed, decl, asl_factor, ellipsoid_altitude );
+        makeGeolocalizedData( num, fixed, asl_factor, ellipsoid_altitude );
 	nums.add( num );
       } 
     }
@@ -541,7 +541,7 @@ class TDExporter
     return nums;
   }
 
-  static private void makeGeolocalizedData( DistoXNum num, FixedInfo origin, float decl, float asl_factor, boolean ellipsoid_altitude )
+  static private void makeGeolocalizedData( DistoXNum num, FixedInfo origin, float asl_factor, boolean ellipsoid_altitude )
   {
 
     float lat = (float)origin.lat;
@@ -3554,12 +3554,13 @@ class TDExporter
             out.printf("0\nINSERT\n8\nPOINT\n2\npoint\n");
             // out.printf("41\n1\n42\n1\n") // point scale
             // out.printf("50\n0\n");  // orientation
-            out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n40\n0.3\n", sh.e, -sh.s, -sh.v );
+            // out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n40\n0.3\n", sh.e, -sh.s, -sh.v );
+            out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", sh.e, -sh.s, -sh.v );
           }
         }
    
         for ( NumStation st : num.getStations() ) {
-          // FIXME station scale is 0.3
+          // FIXME station scale is 0.3 (code 40=text height)
           out.printf("0\nTEXT\n8\nSTATION\n");
           out.printf("1\n%s\n", st.name );
           out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n40\n0.3\n", st.e, -st.s, -st.v );

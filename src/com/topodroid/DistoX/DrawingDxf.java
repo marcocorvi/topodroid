@@ -29,11 +29,14 @@ import java.io.IOException;
 
 import android.graphics.RectF;
 
-// import android.util.Log;
+import android.util.Log;
 
 class DrawingDxf
 {
   private static boolean mVersion13 = false;
+  private static boolean doHandle   = true;
+
+  static int inc( int h ) { ++h; if ( h == 0x0105 ) ++h; return h; }
 
   static final private float POINT_SCALE   = 10.0f; // scale of point icons: only ACAD_6
   // the next three are for text
@@ -42,7 +45,8 @@ class DrawingDxf
   static final private float AXIS_SCALE    = 10.0f / DrawingUtil.SCALE_FIX; // scale of text on the axes
   static final private String zero = "0.0";
   static final private String one  = "1.0";
-  // static final String half = "0.5";
+  static final private String two  = "2.0";
+  static final private String half = "0.5";
   static final private String two_n_half = "2.5";
   // static final String ten = "10";
   static final private String empty = TDString.EMPTY;
@@ -50,6 +54,9 @@ class DrawingDxf
   static final private String standard      = "Standard";
   static final private String lt_continuous = "Continuous";
   static final private String lt_byBlock    = "ByBlock";
+  static final private String lt_byLayer    = "ByLayer";
+  static final private String lt_center     = "Center";
+  static final private String lt_ticks      = "Ticks";
   
   static final private String AcDbSymbolTR = "AcDbSymbolTableRecord";
   static final private String AcDbEntity   = "AcDbEntity";
@@ -71,7 +78,7 @@ class DrawingDxf
 
   static private void writeHex( BufferedWriter out, int code, int handle ) throws IOException // mVersion13
   {
-    if ( mVersion13 ) {
+    if ( mVersion13 && doHandle ) {
       StringWriter sw = new StringWriter();
       PrintWriter pw  = new PrintWriter(sw);
       pw.printf("  %d%s%X%s", code, EOL, handle, EOL );
@@ -81,7 +88,7 @@ class DrawingDxf
 
   static private void printHex( PrintWriter pw, int code, int handle ) // mVersion13
   {
-    if ( mVersion13 ) {
+    if ( mVersion13 && doHandle ) {
       pw.printf("  %d%s%X%s", code, EOL, handle, EOL );
     }
   }
@@ -211,13 +218,13 @@ class DrawingDxf
     printInt( pw2, 70, flag );    // layer flag
     printInt( pw2, 62, color );   // layer color
     printString( pw2, 6, linetype ); // linetype name
-    if ( mVersion13 ) {
-      printInt( pw2, 330, 2 );       // softpointer id/handle to owner dictionary 
-      printInt( pw2, 370, -3 );      // lineweight enum value
-      printString( pw2, 390, "F" );  // hardpointer id/handle or plotstylename object
-      // printInt( pw2, 347, 46 );
-      // printInt( pw2, 348, 0 );
-    }
+    // if ( mVersion13 ) {
+    //   printInt( pw2, 330, 2 );       // softpointer id/handle to owner dictionary 
+    //   printInt( pw2, 370, -3 );      // lineweight enum value
+    //   printString( pw2, 390, "F" );  // hardpointer id/handle or plotstylename object
+    //   // printInt( pw2, 347, 46 );
+    //   // printInt( pw2, 348, 0 );
+    // }
   }
 
   // static void printEndText( PrintWriter pw, String style )
@@ -229,7 +236,7 @@ class DrawingDxf
   {
     printString( pw, 0, "VERTEX" );
     if ( mVersion13 ) {
-      ++handle;
+      handle = inc(handle);
       printAcDb( pw, handle, "AcDbVertex", "AcDb3dPolylineVertex" );
       printInt( pw, 70, 32 ); // flag 32 = 3D polyline vertex
     }
@@ -241,7 +248,7 @@ class DrawingDxf
   static private int printLine(PrintWriter pw, float scale, int handle, String layer, float x1, float y1, float x2, float y2)
   {
     printString( pw, 0, "LINE" );
-    ++handle;
+    handle = inc(handle);
     printAcDb( pw, handle, AcDbEntity, AcDbLine );
     printString( pw, 8, layer );
     // printInt(  pw, 39, 0 );         // line thickness
@@ -256,7 +263,7 @@ class DrawingDxf
     float bezier_step = TDSetting.getBezierStep();
     int close = (closed ? 1 : 0 );
     printString( pw, 0, "POLYLINE" );
-    ++handle;
+    handle = inc(handle);
     printAcDb( pw, handle, AcDbEntity, AcDbPolyline );
     printString( pw, 8, layer );
     // printInt(  pw, 39, 1 ); // line thickness
@@ -299,8 +306,8 @@ class DrawingDxf
     }
     pw.printf("  0%sSEQEND%s", EOL, EOL );
     if ( mVersion13 ) {
-      ++handle;
-          printHex( pw, 5, handle );
+      handle = inc(handle);
+      printHex( pw, 5, handle );
     }
     return handle;
   }
@@ -310,7 +317,7 @@ class DrawingDxf
   // {
   //   int close = (closed ? 1 : 0 );
   //   printString( pw, 0, "LWPOLYLINE" );
-  //   ++handle;
+  //   handle = inc(handle);
   //       printAcDb( pw, handle, AcDbEntity, AcDbPolyline );
   //   printString( pw, 8, layer );
   //   printInt( pw, 38, 0 ); // elevation
@@ -339,8 +346,9 @@ class DrawingDxf
   static private int printSpline( PrintWriter pw, DrawingPointLinePath line, float scale, int handle, String layer, boolean closed,
                           float xoff, float yoff )
   {
+    Log.v("DistoX", "print spline");
     printString( pw, 0, "SPLINE" );
-    ++handle; printAcDb( pw, handle, AcDbEntity, "AcDbSpline" );
+    handle = inc(handle); printAcDb( pw, handle, AcDbEntity, "AcDbSpline" );
     printString( pw, 8, layer );
     printString( pw, 6, lt_continuous );
     printFloat( pw, 48, 1.0f ); // scale 
@@ -424,7 +432,7 @@ class DrawingDxf
     // if ( false && mVersion13 ) { // FIXME TEXT in AC1012
     //   // int idx = 1 + point.mPointType;
     //   printString( pw, 0, "INSERT" );
-    //   ++handle; printAcDb( pw, handle, "AcDbBlockReference" );
+    //   handle = inc(handle); printAcDb( pw, handle, "AcDbBlockReference" );
     //   printString( pw, 8, "POINT" );
     //   printString( pw, 2, "P_label" ); // block_name );
     //   printFloat( pw, 41, POINT_SCALE );
@@ -434,7 +442,7 @@ class DrawingDxf
     // } else {
       printString( pw, 0, "TEXT" );
       // printString( pw, 2, block );
-      ++handle; printAcDb( pw, handle, AcDbEntity, AcDbText );
+      handle = inc(handle); printAcDb( pw, handle, AcDbEntity, AcDbText );
       printString( pw, 8, layer );
       // printString( pw, 7, my_style ); // style (optional)
       // pw.printf("%s\%s 0%s", "\"10\"", EOL, EOL );
@@ -450,7 +458,7 @@ class DrawingDxf
       // printFloat( pw, 72, 0 );      // H-align (optional 0)
       // printFloat( pw, 73, 0 );      // V-align
       printString( pw, 1, label );
-      printString( pw, 7, style );
+      // printString( pw, 7, style );  // style, optional (dftl STANDARD)
       printString( pw, 100, "AcDbText");
     // }
     return handle;
@@ -538,10 +546,10 @@ class DrawingDxf
       writeSection( out, "TABLES" );
       {
         if ( mVersion13 ) {
-          ++handle; writeBeginTable( out, "VPORT", handle, 1 ); // 1 VPORT
+          handle = inc(handle); writeBeginTable( out, "VPORT", handle, 1 ); // 1 VPORT
           {
             writeString( out, 0, "VPORT" );
-            ++handle; writeAcDb( out, handle, AcDbSymbolTR, "AcDbViewportTableRecord" );
+            handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbViewportTableRecord" );
             writeString( out, 2, "*Active" ); // name
             writeInt( out, 70, 0 );  // flags:
             writeXY( out, (int)xmin, -(int)ymax, 0 ); // lower-left cormer
@@ -590,34 +598,108 @@ class DrawingDxf
           }
           writeEndTable( out );
         }
-        if ( mVersion13 ) { ++handle; } else { handle = 5; }
-        writeBeginTable( out, "LTYPE", handle, 2 ); // 2 linetypes
+        if ( mVersion13 ) { handle = inc(handle); } else { handle = 5; }
+	int ltypeowner = handle;
+	int ltypenr    = mVersion13 ? 5 : 1; // linetype number
+        writeBeginTable( out, "LTYPE", handle, ltypenr ); 
+	writeInt( out, 330, 0 ); // table has no owner
         {
           // int flag = 64;
-          writeString( out, 0, "LTYPE" );
           if ( mVersion13 ) {
-            ++handle;
-            writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
+            writeString( out, 0, "LTYPE" );
+            handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
             writeString( out, 2, lt_byBlock );
+	    writeInt( out, 330, ltypeowner );
             writeInt( out, 70, 0 );
-            writeString( out, 3, "" );
+            writeString( out, 3, "Std by block" );
+            writeInt( out, 72, 65 );
+            writeInt( out, 73, 0 );
+            writeString( out, 40, zero );
+
+	    writeString( out, 0, "LTYPE" );
+            handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
+            writeString( out, 2, lt_byLayer );
+	    writeInt( out, 330, ltypeowner );
+            writeInt( out, 70, 0 );
+            writeString( out, 3, "Std by layer" );
             writeInt( out, 72, 65 );
             writeInt( out, 73, 0 );
             writeString( out, 40, zero );
 
             writeString( out, 0, "LTYPE" );
-            ++handle; writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
+            handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
             writeString( out, 2, lt_continuous );
+	    writeInt( out, 330, ltypeowner );
             writeInt( out, 70, 0 );
+            writeString( out, 3, "Solid line ------" );
+            writeInt( out, 72, 65 );
+            writeInt( out, 73, 0 );
+            writeString( out, 40, zero );
+
+	    writeString( out, 0, "LTYPE" );
+            handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
+            writeString( out, 2, lt_center );
+	    writeInt( out, 330, ltypeowner );
+            writeInt( out, 70, 0 );
+            writeString( out, 3, "Center ____ _ ____ _ ____ _ ____" ); // description
+            writeInt( out, 72, 65 );
+            writeInt( out, 73, 4 );         // number of elements
+            writeString( out, 40, two );  // pattern length
+            writeString( out, 49, "1.25" );  writeInt( out, 74, 0 ); // segment
+            writeString( out, 49, "-0.25" ); writeInt( out, 74, 0 ); // gap
+            writeString( out, 49, "0.25" );  writeInt( out, 74, 0 );
+            writeString( out, 49, "-0.25" ); writeInt( out, 74, 0 );
+
+	    writeString( out, 0, "LTYPE" );
+            handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
+            writeString( out, 2, lt_ticks );
+	    writeInt( out, 330, ltypeowner );
+            writeInt( out, 70, 0 );
+            writeString( out, 3, "Ticks ____|____|____|____" ); // description
+            writeInt( out, 72, 65 );
+            writeInt( out, 73, 3 );        // number of elements
+            writeString( out, 40, one ); // pattern length
+            writeString( out, 49, half );  writeInt( out, 74, 0 ); // segment
+            writeString( out, 49, "-0.2" ); writeInt( out, 74, 2 ); // embedded text
+	      // writeInt( out, 75, 0 );   // SHAPE number FIXME
+	      // writeInt( out, 340, 1 );  // STYLE pointer FIXME
+	      writeString( out, 46, "0.1" );  // scale
+	      writeString( out, 50, zero );   // rotation
+	      writeString( out, 44, "-0.1" ); // X offset
+	      writeString( out, 45, "-0.1" ); // Y offset
+	      writeString( out, 9, "|" ); // text
+            writeString( out, 49, "-0.25" ); writeInt( out, 74, 0 ); // gap
+
+	    // writeString( out, 0, "LTYPE" );
+            // handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
+            // writeString( out, 2, lt_tick );
+	    // writeInt( out, 330, ltypeowner );
+            // writeInt( out, 70, 0 );
+            // writeString( out, 3, "Ticks ____|____|____|____" ); // description
+            // writeInt( out, 72, 65 );
+            // writeInt( out, 73, 4 );
+            // writeString( out, 40, "1.45" ); // pattern length
+            // writeString( out, 49, "0.25" ); writeInt( out, 74, 0 ); // segment
+            // writeString( out, 49, "-0.1" ); writeInt( out, 74, 4 ); // embedded shape
+	    //   writeInt( out, 75, 1 );   // SHAPE number
+	    //   writeInt( out, 340, 1 );  // STYLE pointer
+	    //   writeString( out, 46, "0.1" );  // scale
+	    //   writeString( out, 50, zero );   // rotation
+	    //   writeString( out, 44, "-0.1" ); // X offset
+	    //   writeString( out, 45, zero );   // Y offset
+            // writeString( out, 49, "-0.1" ); writeInt( out, 74, 0 );
+            // writeString( out, 49, "1.0" );  writeInt( out, 74, 0 );
+
           } else {
+            writeString( out, 0, "LTYPE" );
             writeAcDb( out, 14, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
             writeString( out, 2, lt_continuous );
             writeInt( out, 70, 64 );
+            writeString( out, 3, "Solid line" );
+            writeInt( out, 72, 65 );
+            writeInt( out, 73, 0 );
+            writeString( out, 40, zero );
           }
-          writeString( out, 3, "Solid line" );
-          writeInt( out, 72, 65 );
-          writeInt( out, 73, 0 );
-          writeString( out, 40, zero );
         }
         writeEndTable( out );
         int nr_layers = 7;
@@ -625,8 +707,8 @@ class DrawingDxf
         SymbolPointLibrary pointlib = BrushManager.mPointLib;
         SymbolLineLibrary linelib = BrushManager.mLineLib;
         SymbolAreaLibrary arealib = BrushManager.mAreaLib;
-        nr_layers += linelib.mSymbolNr + arealib.mSymbolNr;
-        if ( mVersion13 ) { ++handle; } else { handle = 2; }
+        nr_layers += 1 + linelib.mSymbolNr + arealib.mSymbolNr;
+        if ( mVersion13 ) { handle = inc(handle); } else { handle = 2; }
         writeBeginTable( out, "LAYER", handle, nr_layers );
         {
           StringWriter sw2 = new StringWriter();
@@ -635,20 +717,25 @@ class DrawingDxf
           // 2 layer name, 70 flag (64), 62 color code, 6 line type
           int flag = 0;
           int color = 1;
-          if ( ! mVersion13 ) { handle = 40; }
-          ++handle; printLayer( pw2, handle, "LEG",     flag, color, lt_continuous ); ++color; // red
-          ++handle; printLayer( pw2, handle, "SPLAY",   flag, color, lt_continuous ); ++color; // yellow
-          ++handle; printLayer( pw2, handle, "STATION", flag, color, lt_continuous ); ++color; // green
-          ++handle; printLayer( pw2, handle, "LINE",    flag, color, lt_continuous ); ++color; // cyan
-          ++handle; printLayer( pw2, handle, "POINT",   flag, color, lt_continuous ); ++color; // blue
-          ++handle; printLayer( pw2, handle, "AREA",    flag, color, lt_continuous ); ++color; // magenta
-          ++handle; printLayer( pw2, handle, "REF",     flag, color, lt_continuous ); ++color; // white
+          // if ( ! mVersion13 ) { handle = 40; }
+          handle = inc(handle); printLayer( pw2, handle, "0",       flag, 0, lt_continuous ); // LAYER "0"
+          handle = inc(handle); printLayer( pw2, handle, "LEG",     flag, color, lt_continuous ); ++color; // red
+          handle = inc(handle); printLayer( pw2, handle, "SPLAY",   flag, color, lt_continuous ); ++color; // yellow
+          handle = inc(handle); printLayer( pw2, handle, "STATION", flag, color, lt_continuous ); ++color; // green
+          handle = inc(handle); printLayer( pw2, handle, "LINE",    flag, color, lt_continuous ); ++color; // cyan
+          handle = inc(handle); printLayer( pw2, handle, "POINT",   flag, color, lt_continuous ); ++color; // blue
+          handle = inc(handle); printLayer( pw2, handle, "AREA",    flag, color, lt_continuous ); ++color; // magenta
+          handle = inc(handle); printLayer( pw2, handle, "REF",     flag, color, lt_continuous ); ++color; // white
           
           color = 10;
           // if ( linelib != null ) { // always true
             for ( Symbol line : linelib.getSymbols() ) {
               String lname = "L_" + line.getThName().replace(':','-');
-              ++handle; printLayer( pw2, handle, lname, flag, color, lt_continuous ); ++color;
+	      String ltype = lname.equals("L_pit") ? lt_ticks 
+			   : lname.equals("L_border" ) ? lt_center
+		           : lt_continuous;
+              handle = inc(handle); printLayer( pw2, handle, lname, flag, color, ltype ); 
+	      if ( ++color >= 256 ) color = 1;
             }
           // }
 
@@ -656,14 +743,16 @@ class DrawingDxf
           // if ( arealib != null ) { // always true
             for ( Symbol s : arealib.getSymbols() ) {
               String aname = "A_" + s.getThName().replace(':','-');
-              ++handle; printLayer( pw2, handle, aname, flag, color, lt_continuous ); ++color;
+              handle = inc(handle); printLayer( pw2, handle, aname, flag, color, lt_continuous ); 
+	      if ( ++color >= 256 ) color = 1;
             }
           // }
           color = 80;
           // if ( pointlib != null ) { // always true
             for ( Symbol point : pointlib.getSymbols() ) {
               String pname = "P_" + point.getThName().replace(':','-');
-              ++handle; printLayer( pw2, handle, pname, flag, color, lt_continuous ); ++color;
+              handle = inc(handle); printLayer( pw2, handle, pname, flag, color, lt_continuous ); 
+	      if ( ++color >= 256 ) color = 1;
             }
           // }
           out.write( sw2.getBuffer().toString() );
@@ -671,10 +760,11 @@ class DrawingDxf
         writeEndTable( out );
 
         if ( mVersion13 ) {
-          ++handle; writeBeginTable( out, "STYLE", handle, 2 );  // 2 style
+	  int nr_styles = 2;
+          handle = inc(handle); writeBeginTable( out, "STYLE", handle, nr_styles );  // 2 style
           {
             writeString( out, 0, "STYLE" );
-            ++handle; writeAcDb( out, handle, AcDbSymbolTR, "AcDbTextStyleTableRecord" );
+            handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbTextStyleTableRecord" );
             writeString( out, 2, standard );  // name
             writeInt( out, 70, 0 );              // flag
             writeString( out, 40, zero );
@@ -686,7 +776,7 @@ class DrawingDxf
             writeString( out, 4, empty );
 
             writeString( out, 0, "STYLE" );
-            ++handle; writeAcDb( out, handle, AcDbSymbolTR, "AcDbTextStyleTableRecord" );
+            handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbTextStyleTableRecord" );
             writeString( out, 2, my_style );  // name
             writeInt( out, 70, 0 );              // flag
             writeString( out, 40, zero );
@@ -703,19 +793,19 @@ class DrawingDxf
           writeEndTable( out );
         }
 
-        ++handle;
+        handle = inc(handle);
         writeBeginTable( out, "VIEW", handle, 0 ); // no VIEW
         writeEndTable( out );
 
-        ++handle;
+        handle = inc(handle);
         writeBeginTable( out, "UCS", handle, 0 ); // no UCS
         writeEndTable( out );
         
-        ++handle;
+        handle = inc(handle);
         writeBeginTable( out, "APPID", handle, 1 );
         {
           writeString( out, 0, "APPID" );
-          if ( mVersion13 ) { ++handle; } else { handle = 12; }
+          if ( mVersion13 ) { handle = inc(handle); } else { handle = 12; }
           writeAcDb( out, handle, AcDbSymbolTR, "AcDbRegAppTableRecord" );
           writeString( out, 2, "ACAD" ); // applic. name
           writeInt( out, 70, 0 );        // flag
@@ -723,12 +813,13 @@ class DrawingDxf
         writeEndTable( out );
 
         if ( mVersion13 ) {
-          ++handle; writeBeginTable( out, "DIMSTYLE", handle, 1 );
-          writeString( out, 100, "AcDbDimStyleTable" );
-          writeInt( out, 71, 0 );
+          handle = inc(handle); writeBeginTable( out, "DIMSTYLE", handle, 1 );
+          // writeString( out, 100, "AcDbDimStyleTable" );
+          // writeInt( out, 71, 0 ); // DIMTOL
           {
             writeString( out, 0, "DIMSTYLE" );
-            ++handle; writeHex( out, 105, handle ); 
+            handle = inc(handle);
+	    writeHex( out, 105, handle ); 
             writeAcDb( out, -1, AcDbSymbolTR, "AcDbDimStyleTableRecord" );
             writeString( out, 2, standard );
             writeString( out, 3, empty );
@@ -782,13 +873,13 @@ class DrawingDxf
           }
           writeEndTable( out );
 
-          ++handle;
+          handle = inc(handle);
           writeBeginTable( out, "BLOCK_RECORD", handle, BrushManager.mPointLib.mSymbolNr );
           {
             for ( int n = 0; n < BrushManager.mPointLib.mSymbolNr; ++ n ) {
               String th_name = BrushManager.mPointLib.getSymbolThName(n).replace(':','-');
               writeString( out, 0, "BLOCK_RECORD" );
-              ++handle;
+              handle = inc(handle);
               writeAcDb( out, handle, AcDbSymbolTR, "AcDbBlockTableRecord" );
               writeString( out, 8, "P_" + th_name );
               writeString( out, 2, "B_" + th_name );
@@ -808,7 +899,7 @@ class DrawingDxf
           SymbolPoint pt = (SymbolPoint)BrushManager.mPointLib.getSymbolByIndex(n);
 	  String th_name = pt.getThName().replace(':','-');
           writeString( out, 0, "BLOCK" );
-          ++handle;
+          handle = inc(handle);
           writeAcDb( out, handle, AcDbEntity, "AcDbBlockBegin" );
           // writeString( out, 8, "P_" + th_name );
           writeString( out, 2, "B_" + th_name ); // block name, can be repeated with '3'
@@ -820,7 +911,7 @@ class DrawingDxf
 
           writeString( out, 0, "ENDBLK" );
           if ( mVersion13 ) {
-            ++handle;
+            handle = inc(handle);
             writeAcDb( out, handle, AcDbEntity, "AcDbBlockEnd");
             // writeString( out, 8, "POINT" );
             writeString( out, 8, "P_" + th_name );
@@ -848,7 +939,7 @@ class DrawingDxf
         // out.write( sw9.getBuffer().toString() );
 	
         // printString( pw9, 0, "LINE" );
-        // ++handle;
+        // handle = inc(handle);
         // printAcDb( pw9, handle, AcDbEntity, AcDbLine );
         // printString( pw9, 8, "REF" );
         // // printInt(  pw9, 39, 0 );         // line thickness
@@ -859,7 +950,7 @@ class DrawingDxf
         // StringWriter sw8 = new StringWriter();
         // PrintWriter pw8  = new PrintWriter(sw8);
         // printString( pw8, 0, "LINE" );
-        // ++handle;
+        // handle = inc(handle);
         // printAcDb( pw8, handle, AcDbEntity, AcDbLine );
         // printString( pw8, 8, "REF" );
         // // printInt(  pw8, 39, 0 );         // line thickness
@@ -890,7 +981,7 @@ class DrawingDxf
               NumStation t = num.getStation( blk.mTo );
  
               printString( pw4, 0, "LINE" );
-              ++handle;
+              handle = inc(handle);
                           printAcDb( pw4, handle, AcDbEntity, AcDbLine );
               printString( pw4, 8, "LEG" );
               // printInt( pw4, 39, 2 );         // line thickness
@@ -926,7 +1017,7 @@ class DrawingDxf
             //   NumStation f = num.getStation( blk.mFrom );
 
             //   printString( pw41, 0, "LINE" );
-            //   ++handle; printAcDb( pw41, handle, AcDbEntity, AcDbLine );
+            //   handle = inc(handle); printAcDb( pw41, handle, AcDbEntity, AcDbLine );
             //   printString( pw41, 8, "SPLAY" );
             //   // printInt( pw41, 39, 1 );         // line thickness
 
@@ -950,7 +1041,7 @@ class DrawingDxf
             // // }
 
             printString( pw41, 0, "LINE" );
-            ++handle;
+            handle = inc(handle);
             printAcDb( pw41, handle, AcDbEntity, AcDbLine );
             printString( pw41, 8, "SPLAY" );
             // printInt( pw41, 39, 1 );         // line thickness
@@ -1002,12 +1093,14 @@ class DrawingDxf
                 handle = toDxf( pw5, handle, point, scale, xoff, yoff );
               }
             } else {
+              String th_name = BrushManager.mPointLib.getSymbolThName( point.mPointType ).replace(':','-');
               printString( pw5, 0, "INSERT" );
-              printString( pw5, 8, "POINT" );
-              printInt( pw5, 2, idx );
-              printFloat( pw5, 41, POINT_SCALE );
-              printFloat( pw5, 42, POINT_SCALE );
-              printXYZ( pw5, point.cx, -point.cy, 0.0f, 0 );
+              printString( pw5, 8, "P_" + th_name );
+              printString( pw5, 2, "B_" + th_name );
+              printFloat( pw5, 41, point.getScaleValue()*1.4f ); // FIX Asenov
+              printFloat( pw5, 42, point.getScaleValue()*1.4f );
+              printFloat( pw5, 50, 360.0f-(float)(point.mOrientation) );
+              printXYZ( pw5, (point.cx+xoff)*scale, -(point.cy+yoff)*scale, 0, 0 );
             }
           }
           out.write( sw5.getBuffer().toString() );
@@ -1069,7 +1162,7 @@ class DrawingDxf
     String th_name = BrushManager.mPointLib.getSymbolThName( point.mPointType ).replace(':','-');
     // int idx = 1 + point.mPointType;
     printString( pw, 0, "INSERT" );
-    ++handle; printAcDb( pw, handle, "AcDbBlockReference" );
+    handle = inc(handle); printAcDb( pw, handle, "AcDbBlockReference" );
     printString( pw, 8, "P_" + th_name );
     printString( pw, 2, "B_" + th_name );
     printFloat( pw, 41, point.getScaleValue()*1.4f ); // FIX Asenov
@@ -1104,7 +1197,7 @@ class DrawingDxf
     }
     if ( mVersion13 ) {
       printString( pw, 0, "HATCH" );    // entity type HATCH
-      ++handle;
+      handle = inc(handle);
       printAcDb( pw, handle, AcDbEntity, "AcDbHatch" );
       // printString( pw5, 8, "AREA" );  // layer (color BYLAYER)
       printString( pw, 8, layer );      // layer (color BYLAYER)
@@ -1218,15 +1311,15 @@ class DrawingDxf
     PrintWriter pwx  = new PrintWriter(swx);
 
     printString( pwx, 0, "DICTIONARY" );
-    int saved = ++handle;
+    int saved = handle = inc(handle);
     printAcDb( pwx, handle, AcDbDictionary );
     // printInt( pwx, 280, 0 );
     printInt( pwx, 281, 1 );
     printString( pwx, 3, "ACAD_GROUP" );
-    ++handle; printHex( pwx, 350, handle );
+    handle = inc(handle); printHex( pwx, 350, handle );
 
     printString( pwx, 0, "DICTIONARY" );
-    ++handle; printAcDb( pwx, handle, AcDbDictionary );
+    handle = inc(handle); printAcDb( pwx, handle, AcDbDictionary );
     // printInt( pwx, 280, 0 );
     printInt( pwx, 281, 1 );
     printHex( pwx, 330, saved );
@@ -1246,41 +1339,41 @@ class DrawingDxf
       StringWriter swx = new StringWriter();
       PrintWriter pwx  = new PrintWriter(swx);
       printString( pwx, 0, "DICTIONARY" );
-      ++handle; printAcDb( pwx, handle, AcDbDictionary );
+      handle = inc(handle); printAcDb( pwx, handle, AcDbDictionary );
       printInt( pwx, 280, 0 );
       printInt( pwx, 281, 1 );
-      printString( pwx, 3, "ACAD_GROUP" );         ++handle; printHex( pwx, 350, handle );
-      printString( pwx, 3, "ACAD_LAYOUT" );        ++handle; printHex( pwx, 350, handle );
-      printString( pwx, 3, "ACAD_MLINESTYLE" );    ++handle; printHex( pwx, 350, handle );
-      printString( pwx, 3, "ACAD_PLOTSETTING" );   ++handle; printHex( pwx, 350, handle );
-      printString( pwx, 3, "ACAD_PLOTSTYLENAME" ); ++handle; printHex( pwx, 350, handle );
-      printString( pwx, 3, "AcDbVariableDictionary" ); ++handle; printHex( pwx, 350, handle );
+      printString( pwx, 3, "ACAD_GROUP" );         handle = inc(handle); printHex( pwx, 350, handle );
+      printString( pwx, 3, "ACAD_LAYOUT" );        handle = inc(handle); printHex( pwx, 350, handle );
+      printString( pwx, 3, "ACAD_MLINESTYLE" );    handle = inc(handle); printHex( pwx, 350, handle );
+      printString( pwx, 3, "ACAD_PLOTSETTING" );   handle = inc(handle); printHex( pwx, 350, handle );
+      printString( pwx, 3, "ACAD_PLOTSTYLENAME" ); handle = inc(handle); printHex( pwx, 350, handle );
+      printString( pwx, 3, "AcDbVariableDictionary" ); handle = inc(handle); printHex( pwx, 350, handle );
 
       printString( pwx, 0, "DICTIONARY" );
-      ++handle; printAcDb( pwx, handle, AcDbDictionary );
+      handle = inc(handle); printAcDb( pwx, handle, AcDbDictionary );
       printInt( pwx, 280, 0 );
       printInt( pwx, 281, 1 );
 
       printString( pwx, 0, "ACDBDICTIONARYWDFLT" );
-      ++handle; printAcDb( pwx, handle, AcDbDictionary );
+      handle = inc(handle); printAcDb( pwx, handle, AcDbDictionary );
       printInt( pwx, 281, 1 );
       printString( pwx, 3, "Normal" );
-      ++handle; printHex( pwx, 350, handle );
+      handle = inc(handle); printHex( pwx, 350, handle );
       printString( pwx, 100, "AcDbDictionaryWithDefault");
-      ++handle; printHex( pwx, 340, handle );
+      handle = inc(handle); printHex( pwx, 340, handle );
 
       printString( pwx, 0, "ACDBPLACEHOLDER");
-      ++handle; printHex( pwx, 5, handle );
+      handle = inc(handle); printHex( pwx, 5, handle );
 
       printString( pwx, 0, "DICTIONARY" );
-      ++handle; printAcDb( pwx, handle, AcDbDictionary );
+      handle = inc(handle); printAcDb( pwx, handle, AcDbDictionary );
       printInt( pwx, 280, 0 );
       printInt( pwx, 281, 1 );
       printString( pwx, 3, "Standard" );
-      ++handle; printHex( pwx, 350, handle );
+      handle = inc(handle); printHex( pwx, 350, handle );
 
       printString( pwx, 0, "MLINESTYLE" );
-      ++handle; printAcDb( pwx, handle, "AcDbMlineStyle" );
+      handle = inc(handle); printAcDb( pwx, handle, "AcDbMlineStyle" );
       printString( pwx, 2, "STANDARD" );
       printInt( pwx, 70, 0 );
       printString( pwx, 3, empty );
@@ -1296,19 +1389,19 @@ class DrawingDxf
       printString( pwx, 6, "BYLAYER" );
     
       printString( pwx, 0, "DICTIONARY" );
-      ++handle; printAcDb( pwx, handle, AcDbDictionary );
+      handle = inc(handle); printAcDb( pwx, handle, AcDbDictionary );
       printInt( pwx, 280, 0 );
       printInt( pwx, 281, 1 );
 
       printString( pwx, 0, "DICTIONARY" );
-      ++handle; printAcDb( pwx, handle, AcDbDictionary );
+      handle = inc(handle); printAcDb( pwx, handle, AcDbDictionary );
       printInt( pwx, 281, 1 );
-      printString( pwx, 3, "Layout1" ); ++handle; printHex( pwx, 350, handle );
-      printString( pwx, 3, "Layout2" ); ++handle; printHex( pwx, 350, handle );
-      printString( pwx, 3, "Model" );   ++handle; printHex( pwx, 350, handle );
+      printString( pwx, 3, "Layout1" ); handle = inc(handle); printHex( pwx, 350, handle );
+      printString( pwx, 3, "Layout2" ); handle = inc(handle); printHex( pwx, 350, handle );
+      printString( pwx, 3, "Model" );   handle = inc(handle); printHex( pwx, 350, handle );
 
       printString( pwx, 0, "LAYOUT" );
-      ++handle; printAcDb( pwx, handle, "AcDbPlotSetting" );
+      handle = inc(handle); printAcDb( pwx, handle, "AcDbPlotSetting" );
       printString( pwx, 1, empty );
       printString( pwx, 2, "" );
       printString( pwx, 4, empty );
@@ -1341,10 +1434,10 @@ class DrawingDxf
       printXYZ( pwx, 1, 0, 0, 6 );
       printXYZ( pwx, 0, 1, 0, 7 );
       printInt( pwx, 76, 0 );
-      ++handle; printHex( pwx, 330, handle );
+      handle = inc(handle); printHex( pwx, 330, handle );
   
       printString( pwx, 0, "LAYOUT" );
-      ++handle; printAcDb( pwx, handle, "AcDbPlotSetting" );
+      handle = inc(handle); printAcDb( pwx, handle, "AcDbPlotSetting" );
       printString( pwx, 1, empty );
       printString( pwx, 2, "" );
       printString( pwx, 4, empty );
@@ -1370,10 +1463,10 @@ class DrawingDxf
       printXY( pwx, 0, 0, 0 );
       printXY( pwx, 12, 9, 1 );
       print245_367( pwx );
-      ++handle; printHex( pwx, 330, handle );
+      handle = inc(handle); printHex( pwx, 330, handle );
 
       printString( pwx, 0, "LAYOUT" );
-      ++handle; printAcDb( pwx, handle, "AcDbPlotSetting" );
+      handle = inc(handle); printAcDb( pwx, handle, "AcDbPlotSetting" );
       printString( pwx, 1, empty );
       printString( pwx, 2, "" );
       printString( pwx, 4, empty );
@@ -1399,21 +1492,21 @@ class DrawingDxf
       printXY( pwx, 0, 0, 0 );
       printXY( pwx, 12, 9, 1 );
       print245_367( pwx );
-      ++handle; printHex( pwx, 330, handle );
+      handle = inc(handle); printHex( pwx, 330, handle );
 
       printString( pwx, 0, "DICTIONARY" );
-      ++handle; printAcDb( pwx, handle, AcDbDictionary );
+      handle = inc(handle); printAcDb( pwx, handle, AcDbDictionary );
       printInt( pwx, 281, 1 );
       printString( pwx, 3, "DIMASSOC" );
-      ++handle; printHex( pwx, 350, handle );
+      handle = inc(handle); printHex( pwx, 350, handle );
       printString( pwx, 3, "HIDETEXT" );
-      ++handle; printHex( pwx, 350, handle );
+      handle = inc(handle); printHex( pwx, 350, handle );
       printString( pwx, 0, "DICTIONARYVAR" );
-      ++handle; printAcDb( pwx, handle, "DictionaryVariables" );
+      handle = inc(handle); printAcDb( pwx, handle, "DictionaryVariables" );
       printInt( pwx, 280, 0 );
       printInt( pwx, 1, 2 );
       printString( pwx, 0, "DICTIONARYVAR" );
-      ++handle; printAcDb( pwx, handle, "DictionaryVariables" );
+      handle = inc(handle); printAcDb( pwx, handle, "DictionaryVariables" );
       printInt( pwx, 280, 0 );
       printInt( pwx, 1, 1 );
 

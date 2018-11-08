@@ -57,12 +57,41 @@ class DrawingPath extends RectF
   float x1, y1, x2, y2; // endpoint scene coords  (not private just to write the scrap scale using mNorthLine )
   // private int dir; // 0 x1 < x2, 1 y1 < y2, 2 x2 < x1, 3 y2 < y1
   DBlock mBlock;
-  boolean mLandscape;
+  boolean mLandscape; // whether the canvas is in landscape presentation mode or not
   float mExtend;  // extend value for splays (= cos of angle between splay and leg)
                   // x-sections: angle between splay and plane-normal
 
   protected float cx, cy; // midpoint scene coords
   // RectF mBBox;   // path boundig box (scene coords)
+  
+  // overridable
+  DrawingPath copy()
+  {
+    DrawingPath ret = new DrawingPath( mType, mBlock );
+    copyTo( ret );
+    return ret;
+  }
+
+  // copy utility
+  protected void copyTo( DrawingPath ret )
+  {
+    ret.left    = left; // RectF
+    ret.right   = right;
+    ret.bottom  = bottom;
+    ret.top     = top; 
+    ret.mOptions   = mOptions;
+    ret.mPaint     = mPaint;
+    ret.mLandscape = mLandscape;
+    ret.mExtend    = mExtend;
+    ret.x1 = x1;
+    ret.y1 = y1;
+    ret.x2 = x2;
+    ret.y2 = y2;
+    ret.cx = cx;
+    ret.cy = cy;
+    mPath = null;
+    mTransformedPath = null;
+  }
 
   DrawingPath( int type, DBlock blk )
   {

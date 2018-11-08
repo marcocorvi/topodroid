@@ -268,7 +268,7 @@ public class SurveyWindow extends Activity
 
   void setTheTitle()
   {
-    setTitle( mApp.getConnectionStateTitleStr() +
+    setTitle( // mApp.getConnectionStateTitleStr() + // IF_COSURVEY
               getResources().getString( R.string.title_survey ) );
   }
 

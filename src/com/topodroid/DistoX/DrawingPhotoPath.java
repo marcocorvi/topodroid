@@ -37,6 +37,14 @@ class DrawingPhotoPath extends DrawingPointPath
   long mId; // id of the photo 
   // private Paint paint;
 
+  @Override
+  DrawingPath copy()
+  {
+    DrawingPhotoPath ret = new DrawingPhotoPath( mPointText, cx, cy, mScale, mOptions, mId );
+    copyTo( ret );
+    return ret;
+  }
+
   DrawingPhotoPath( String text, float off_x, float off_y, int scale, String options, long id )
   {
     super( BrushManager.mPointLib.mPointPhotoIndex, off_x, off_y, scale, text, options );

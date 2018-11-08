@@ -554,12 +554,17 @@ public class TopoDroidApp extends Application
       TDInstance.cbd = mPrefHlp.getString( "DISTOX_CBD", TDPath.PATH_BASEDIR );
       TDPath.setPaths( TDInstance.cwd, TDInstance.cbd );
 
-      // TDLog.Profile("TDApp DB");
-      mDataListeners = new DataListenerSet( );
-      
+      // TDLog.Profile("TDApp DB"); 
       // ***** DATABASE MUST COME BEFORE PREFERENCES
-      mData  = new DataHelper( this, this, mDataListeners );
-      mDData = new DeviceHelper( this, this, null ); 
+
+      // ---- IF_COSURVEY
+      // mDataListeners = new DataListenerSet( );
+      // mData  = new DataHelper( this, this, mDataListeners );
+      // mDData = new DeviceHelper( this, this, null ); 
+      //
+      // ---- ELSE ----
+      mData  = new DataHelper( this, this ); 
+      mDData = new DeviceHelper( this, this );
 
       // mStationName = new StationName();
 
@@ -606,6 +611,7 @@ public class TopoDroidApp extends Application
                 && getPackageManager().hasSystemFeature( PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH );
       }
 
+      /* ---- IF_COSURVEY
       if ( TDLevel.overExpert ) {
         String value = mDData.getValue("cosurvey");
         mCosurvey =  value != null && value.equals("on");
@@ -616,6 +622,7 @@ public class TopoDroidApp extends Application
           mConnListener = new ArrayList<>();
         }
       }
+      */
 
       // TDLog.Profile("TDApp device etc.");
       TDInstance.device = mDData.getDevice( mPrefHlp.getString( TDSetting.keyDeviceName(), TDString.EMPTY ) );
@@ -662,7 +669,8 @@ public class TopoDroidApp extends Application
   {
     mLocaleStr = locale;
     mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
-    // Log.v("DistoXPref", "set locale str <" + locale + "> " + mLocale.toString() );
+    Log.v("DistoXPref", "set locale str <" + locale + "> " + mLocale.toString() );
+
     resetLocale();
     Resources res = TDInstance.context.getResources();
     if ( load_symbols ) {
@@ -1747,8 +1755,8 @@ public class TopoDroidApp extends Application
   // }
 
   // ---------------------------------------------------------------------
-  // SYNC (COSURVEY)
-  
+  /* ---- IF_COSURVEY
+
   // DataListener (co-surveying)
   private DataListenerSet mDataListeners;
 
@@ -1762,7 +1770,7 @@ public class TopoDroidApp extends Application
   static boolean mCoSurveyServer = false; // whether co-survey server is on
   static ConnectionHandler mSyncConn = null;
 
-
+  // used by TDSetting
   void setCoSurvey( boolean co_survey ) // FIXME interplay with TDSetting
   {
     if ( ! mCosurvey ) {
@@ -1857,6 +1865,8 @@ public class TopoDroidApp extends Application
     TDToast.make( "Sync connected " + name );
     if ( mSyncConn != null ) registerDataListener( mSyncConn );
   }
+
+  */
 
   // --------------------------------------------------------------
 

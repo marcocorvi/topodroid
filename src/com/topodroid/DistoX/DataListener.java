@@ -13,6 +13,8 @@ package com.topodroid.DistoX;
 
 // import java.util.ArrayList;
 
+/* ---- IF_COSURVEY
+
 interface DataListener 
 {
   byte SHUTDOWN = (byte)0;
@@ -163,4 +165,6 @@ interface DataListener
   // void onDeletedFixed( long sid, String station ); 
 
 }
+
+*/
 

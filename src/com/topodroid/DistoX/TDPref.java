@@ -392,12 +392,18 @@ class TDPref implements AdapterView.OnItemSelectedListener
     value = val;
     if ( ptype == OPTIONS ) {
       makeLstIndex();
-    } else if ( ptype == INTEGER ) {
-      ivalue = Integer.parseInt( value );
-    } else if ( ptype == FLOAT ) {
-      fvalue = Float.parseFloat( value );
-    } else if ( ptype == BOOLEAN ) {
-      bvalue = Boolean.parseBoolean( value );
+    } else {
+      try {
+	if ( ptype == INTEGER ) {
+          ivalue = Integer.parseInt( value );
+        } else if ( ptype == FLOAT ) {
+          fvalue = Float.parseFloat( value );
+        } else if ( ptype == BOOLEAN ) {
+          bvalue = Boolean.parseBoolean( value );
+        }
+      } catch ( NumberFormatException e ) {
+	TDLog.Error("FIXME number format exception " + e.getMessage() );
+      }
     }
   }
 
@@ -430,7 +436,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] tit = TDPrefKey.MAINtitle;
     int[] dsc = TDPrefKey.MAINdesc;
     String[] def = TDPrefKey.MAINdef;
-    TDPref[] ret = new TDPref[ 14 ];
+    TDPref[] ret = new TDPref[ 13 ];
     ret[ 0] = makeBtn( cat, key[ 0], tit[ 0], dsc[ 0], N, def[ 0], res, hlp );
     ret[ 1] = makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], B, def[ 1], INTEGER, res, hlp );
     ret[ 2] = makeLst( cat, key[ 2], tit[ 2], dsc[ 2], B, def[ 2], R.array.sizeButtons, R.array.sizeButtonsValue, res, hlp );
@@ -438,13 +444,13 @@ class TDPref implements AdapterView.OnItemSelectedListener
     ret[ 4] = makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], B, def[ 4], res, hlp );
     ret[ 5] = makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5], res, hlp );
     ret[ 6] = makeLst( cat, key[ 6], tit[ 6], dsc[ 6], A, def[ 6], R.array.localUserMan, R.array.localUserManValue, res, hlp );
-    ret[ 7] = makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], D, def[ 7], res, hlp );
-    ret[ 8] = makeLst( cat, key[ 8], tit[ 8], dsc[ 8], N, def[ 8], R.array.locale, R.array.localeValue, res, hlp );
+    ret[ 7] = makeLst( cat, key[ 7], tit[ 7], dsc[ 7], N, def[ 7], R.array.locale, R.array.localeValue, res, hlp );
+    // ret[ 8] = makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], D, def[ 8], res, hlp ); // IF_COSURVEY
+    ret[ 8] = makeFwd( cat, key[ 8], tit[ 8],          B,          res, hlp );
     ret[ 9] = makeFwd( cat, key[ 9], tit[ 9],          B,          res, hlp );
     ret[10] = makeFwd( cat, key[10], tit[10],          B,          res, hlp );
-    ret[11] = makeFwd( cat, key[11], tit[11],          B,          res, hlp );
-    ret[12] = makeFwd( cat, key[12], tit[12],          D,          res, hlp );
-    ret[13] = makeFwd( cat, key[13], tit[13],          B,          res, hlp );
+    ret[11] = makeFwd( cat, key[11], tit[11],          D,          res, hlp );
+    ret[12] = makeFwd( cat, key[12], tit[12],          B,          res, hlp );
     return ret;
   }
 

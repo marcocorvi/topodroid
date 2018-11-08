@@ -39,6 +39,14 @@ class DrawingSpecialPath extends DrawingPath
 
   private int mType; // type of special path
 
+  @Override
+  DrawingPath copy()
+  {
+    DrawingSpecialPath ret = new DrawingSpecialPath( mType, cx, cy );
+    copyTo( ret );
+    return ret;
+  }
+
   DrawingSpecialPath( int t, float x, float y )
   {
     super( DrawingPath.DRAWING_PATH_NORTH, null );

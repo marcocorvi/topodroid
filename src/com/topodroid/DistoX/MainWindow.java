@@ -104,7 +104,7 @@ public class MainWindow extends Activity
 {
   private TopoDroidApp mApp;
   private DataHelper mApp_mData;
-  private boolean mApp_mCosurvey = false;
+  // private boolean mApp_mCosurvey = false; // IF_COSURVEY
   private int mApp_mCheckPerms;
 
   private Activity mActivity = null;
@@ -314,7 +314,8 @@ public class MainWindow extends Activity
   void setTheTitle()
   {
     // String title = getResources().getString( R.string.app_name );
-    setTitle( mApp.getConnectionStateTitleStr() + TDInstance.cwd );
+    setTitle( // mApp.getConnectionStateTitleStr() + // IF_COSURVEY
+              TDInstance.cwd ); 
     setTitleColor( TDColor.TITLE_NORMAL );
     // Log.v("DistoX", "TopoDroid activity set the title <" + mApp.getConnectionStateTitleStr() + title + ">" );
   }
@@ -380,7 +381,7 @@ public class MainWindow extends Activity
 
     if ( TDLevel.overNormal )   mMenuAdapter.add( res.getString( menus[0] ) ); // PALETTE
     if ( TDLevel.overAdvanced ) mMenuAdapter.add( res.getString( menus[1] ) ); // LOGS
-    if ( TDLevel.overExpert && mApp_mCosurvey ) mMenuAdapter.add( res.getString( menus[2] ) ); // CO-SURVEY
+    // if ( TDLevel.overExpert && mApp_mCosurvey ) mMenuAdapter.add( res.getString( menus[2] ) ); // IF_COSURVEY
     // if ( TDLevel.overExpert )   mMenuAdapter.add( res.getString( menus[3] ) ); // UPDATES
     mMenuAdapter.add( res.getString( menus[3] ) ); // ABOUT
     mMenuAdapter.add( res.getString( menus[4] ) ); // SETTINGS
@@ -412,8 +413,8 @@ public class MainWindow extends Activity
         intent = new Intent( mActivity, TDPrefActivity.class );
         intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_LOG );
         startActivity( intent );
-      } else if ( TDLevel.overExpert && mApp_mCosurvey && p++ == pos ) {  // CO-SURVEY
-        (new ConnectDialog( mActivity, mApp )).show();
+      // } else if ( TDLevel.overExpert && mApp_mCosurvey && p++ == pos ) {  // IF_COSURVEY
+      //   (new ConnectDialog( mActivity, mApp )).show();
       // } else if ( TDLevel.overExpert && p++ == pos ) {  // UPDATES
       //   // (new TDUpdatesDialog( mActivity, mApp )).show();
       } else if ( p++ == pos ) { // ABOUT
@@ -440,7 +441,7 @@ public class MainWindow extends Activity
     mActivity = this;
     mApp.mActivity = this;
     mApp_mData       = TopoDroidApp.mData;
-    mApp_mCosurvey   = TopoDroidApp.mCosurvey;
+    // mApp_mCosurvey   = TopoDroidApp.mCosurvey; // IF_COSURVEY
     mApp_mCheckPerms = TopoDroidApp.mCheckPerms;
 
     FeatureChecker.createPermissions( mApp, mActivity );
@@ -643,7 +644,7 @@ public class MainWindow extends Activity
   {
     super.onStart();
     // restoreInstanceFromFile();
-    // TDLog.Log( TopoDroidLoLogOG_MAIN, "onStart check BT " + mApp.mCheckBT + " enabled " + mApp.mBTAdapter.isEnabled() );
+    // TDLog.Log( TDLog.LOG_MAIN, "onStart check BT " + mApp.mCheckBT + " enabled " + mApp.mBTAdapter.isEnabled() );
 
     // TDLog.Profile("TDActivity onStart");
     if ( do_check_bt ) {

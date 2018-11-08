@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+  <string-array name="lineContinue">
+     <item name="none">none</item>
+     <item name="start">join with start point</item>
+     <item name="end">join with end point</item>
+     <item name="both">join with both ends</item>
+     <item name="continue">continue</item>
+  </string-array>
+
+  <string-array name="unitGrid">
+     <item name="meter">meter</item>
+     <item name="yard">yard</item>
+     <item name="two_tf">2 feet</item>
+     <item name="ten_cm">10 cm</item>
+  </string-array>
+
+  <string-array name="loopClosure">
+     <item name="none">None</item>
+     <item name="normal">Normal</item>
+     <item name="triangles">Triangles</item>
+  </string-array>
+
+  <string-array name="survexEol">
+     <item name="lf">Linux</item>
+     <item name="lfcr">Windows</item>
+  </string-array>
+
+  <string-array name="wallsType">
+     <item name="none">None</item>
+     <item name="convex">Convex</item>
+     <item name="delaunay">Delaunay</item>
+  </string-array>
+
+  <string-array name="acadVersion" translatable="false">
+     <item name="9">AutoCAD 6</item>
+     <item name="13">AutoCAD 12</item>
+  </string-array>
+
+  <string-array name="zoomCtrl">
+     <item name="0">Off</item>
+     <item name="1">Temporary</item>
+     <item name="2">Permanent</item>
+  </string-array>
+
+  <string-array name="stationNames">
+     <item name="alpha">Alphanumeric</item>
+     <item name="number">Numeric</item>
+  </string-array>
+
+  <!-- UNUSED string-array name="extend_name">
+     <item>Left</item>
+     <item>Vertical</item>
+     <item>Right</item>
+     <item>None</item>
+  </string-array -->
+
+  <string-array name="importDatamode">
+     <item name="normal">normal</item>
+     <item name="diving">diving</item>
+  </string-array>
+
+  <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
+  <string-array name="exportShots">
+     <item name="none">none</item>
+     <item name="therion">Therion</item>
+     <item name="compass">Compass</item>
+     <item name="csurvey">cSurvey</item>
+     <item name="ghtopo">GHTopo</item>
+     <item name="grottolf">Grottolf</item>
+     <item name="pockettopo">PocketTopo</item>
+     <item name="polygon">Polygon</item>
+     <item name="survex">Survex</item>
+     <item name="topo">Topo</item>
+     <item name="toporobot">TopoRobot</item>
+     <item name="visualtopo">VisualTopo</item>
+     <item name="walls">Walls</item>
+     <item name="winkarst">Winkarst</item>
+     <item name="csv">CSV</item>
+     <item name="dxf">DXF</item>
+     <!-- item name="kml">KML</item -->
+     <!-- item name="track">Track file</item -->
+     <!-- item name="json">GeoJSON</item -->
+  </string-array>
+
+  <string-array name="exportPlot">
+     <item name="none">none</item>
+     <item name="therion">Therion</item>
+     <item name="csurvey">cSurvey</item>
+     <item name="dxf">DXF</item>
+     <item name="svg">SVG</item>
+     <item name="png">PNG</item>
+  </string-array>
+
+  <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
+  <!-- UNUSED string-array name="exportSketch">
+     <item name="therion">Therion</item>
+     <item name="csurvey">cSurvey</item>
+     <item name="dxf">DXF</item>
+     <item name="png">PNG</item>
+     <item name="svg">SVG</item>
+  </string-array -->
+
+  <string-array name="extraButtons">
+     <item name="basic">Basic</item>
+     <item name="normal">Normal</item>
+     <item name="advanced">Advanced</item>
+     <item name="expert">Expert</item>
+     <item name="tester">Tester</item>
+     <!-- item name="complete">Complete</item -->
+  </string-array>
+
+  <string-array name="sizeButtons">
+     <item name="small">Small</item>
+     <item name="normal">Normal</item>
+     <item name="medium">Medium</item>
+     <item name="large">Large</item>
+     <item name="huge">Huge</item>
+  </string-array>
+
+  <string-array name="connMode">
+     <item name="batch">On-demand</item>
+     <item name="continuous">Continuous</item>
+     <item name="multi">Multi</item>
+  </string-array>
+
+  <string-array name="sockType">
+     <item name="default">Default</item>
+     <item name="Insecure">Insecure</item>
+     <!-- item name="Port">Port</item -->
+     <!-- item name="InsecurePort">Insecure/Port</item -->
+  </string-array>
+
+  <!--
+       the order of options must be increasing with the enabling level
+       and consistent thru all the arrays on the names
+  -->
+  <string-array name="surveyStations">
+     <item name="no">No</item>
+     <item name="for">Splays, forward leg</item>
+     <item name="back">Splays, backward leg</item>
+     <item name="backsight">Backsight</item>
+     <item name="tripod">Tripod</item>
+     <item name="anomaly">Magn. anomaly</item>
+     <item name="for2">Forward leg, splays</item>
+     <item name="back2">Backward leg, splays</item>
+     <item name="toporobot">TopoRobot</item>
+  </string-array>
+
+  <string-array name="surveyStationsB">
+     <item name="no">No</item>
+     <item name="for">Splays, forward leg</item>
+     <item name="back">Splays, backward leg</item>
+     <item name="backsight">Backsight</item>
+  </string-array>
+  <string-array name="surveyStationsN">
+     <item name="no">No</item>
+     <item name="for">Splays, forward leg</item>
+     <item name="back">Splays, backward leg</item>
+     <item name="backsight">Backsight</item>
+  </string-array>
+  <string-array name="surveyStationsA">
+     <item name="no">No</item>
+     <item name="for">Splays, forward leg</item>
+     <item name="back">Splays, backward leg</item>
+     <item name="backsight">Backsight</item>
+     <item name="tripod">Tripod</item>
+  </string-array>
+  <string-array name="surveyStationsE">
+     <item name="no">No</item>
+     <item name="for">Splays, forward leg</item>
+     <item name="back">Splays, backward leg</item>
+     <item name="backsight">Backsight</item>
+     <item name="tripod">Tripod</item>
+     <item name="anomaly">Magn. anomaly</item>
+     <item name="for2">Forward leg, splays</item>
+     <item name="back2">Backward leg, splays</item>
+  </string-array>
+
+  <string-array name="pickerType">
+     <item name="recent">Most recent</item>
+     <item name="list">List</item>
+     <item name="grid">Grid</item>
+     <item name="grid3">Triple grid</item>
+  </string-array>
+
+  <!-- string-array name="sectionStations">
+     <item name="both">Both</item>
+     <item name="from">Behind</item>
+     <item name="to">In front</item>
+  </string-array -->
+
+  <string-array name="recentNr" translatable="false">
+     <item name="3">3</item>
+     <item name="4">4</item>
+     <item name="5">5</item>
+     <item name="6">6</item>
+  </string-array>
+
+  <!-- string-array name="deviceType">
+     <item name="none">None</item>
+     <item name="A3">A3</item>
+     <item name="X310">X310</item>
+  </string-array -->
+
+  <string-array name="deviceBT">
+     <item name="0">Disabled</item>
+     <item name="1">Check on start</item>
+     <item name="2">Enabled</item>
+  </string-array>
+
+  <!-- string-array name="exportType">
+     <item name="th">Therion</item>
+     <item name="dat">Compass</item>
+     <item name="svx">Survex</item>
+     <item name="tro">VisualTopo</item>
+  </string-array -->
+
+  <string-array name="lineStyle">
+     <item name="none">Fine</item>
+     <item name="two">Normal</item>
+     <item name="three">Coarse</item>
+     <item name="bezier">Bezier</item>
+  </string-array>
+
+  <string-array name="groupBy">
+     <item name="distance">Distance</item>
+     <item name="four">Four at a time</item>
+     <item name="only16">Only first 16</item>
+  </string-array>
+
+  <string-array name="unitLength">
+     <item name="meters">meters</item>
+     <item name="feet">feet</item>
+  </string-array>
+  <!-- string-array name="unitLengthNumber">
+     <item name="meters">1</item>
+     <item name="feet">3.28084</item>
+  </string-array -->
+
+  <string-array name="unitAngle">
+     <item name="degrees">decimal degrees</item>
+     <item name="grads">decimal grads</item>
+  </string-array>
+
+  <string-array name="unitLocation">
+     <item name="degrees">decimal degrees</item>
+     <item name="ddmmss">degree, minute, seconds</item>
+  </string-array>
+
+  <string-array name="calibAlgo">
+     <item name="auto">Auto</item>
+     <item name="linear">Linear</item>
+     <item name="nonlinear">Non-linear</item>
+     <!-- item name="minimum">Minimum</item -->
+  </string-array>
+
+  <string-array name="rawCData">
+     <item name="none">None</item>
+     <item name="dec">Decimal</item>
+     <item name="hex">Hex</item>
+  </string-array>
+
+  <string-array name="modelType">
+     <item name="none">None</item>
+     <item name="convexhull">Convex Hull</item>
+     <item name="powercrust">Powercrust</item>
+  </string-array>
+
+</resources>

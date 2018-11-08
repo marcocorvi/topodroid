@@ -334,7 +334,7 @@ public class ShotWindow extends Activity
       if ( TDInstance.device != null ) sb.append( TDInstance.device.getNickname() );
       sb.append( "} " );
     }
-    sb.append( mApp.getConnectionStateTitleStr() );
+    // sb.append( mApp.getConnectionStateTitleStr() ); // IF_COSURVEY
     sb.append( TDInstance.survey );
 
     setTitleColor( StationPolicy.mTitleColor );
@@ -1774,13 +1774,13 @@ public class ShotWindow extends Activity
       mApp.assignStationsAfter( blk, blks /*, stations */ );
       updateDisplay();
       // mList.invalidate();
-    // } else if ( blk.isSplay() ) { // FIXME RENUMBER ONLY SPLAYS
-    //   for ( DBlock b : blks ) {
-    //     if ( b == blk ) continue;
-    //     b.setBlockName( from, to );
-    //     mApp_mData.updateShotName( b.mId, TDInstance.sid, from, to, true );
-    //   }
-    //   updateDisplay();
+    } else if ( blk.isSplay() ) { // FIXME RENUMBER ONLY SPLAYS
+      for ( DBlock b : blks ) {
+        if ( b == blk ) continue;
+        b.setBlockName( from, to );
+        mApp_mData.updateShotName( b.mId, TDInstance.sid, from, to, true );
+      }
+      updateDisplay();
     } else {
       TDToast.make( R.string.no_leg_first );
     }

@@ -37,6 +37,14 @@ class DrawingStationPath extends DrawingPath
   private int mScale;         //! symbol scale
   private String mName;       // station name
 
+  @Override
+  DrawingPath copy()
+  {
+    DrawingStationPath ret = new DrawingStationPath( mName, cx, cy, mScale );
+    copyTo( ret );
+    return ret;
+  }
+
 
   public DrawingStationPath( String name, float x, float y, int scale )
   {

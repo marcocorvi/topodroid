@@ -785,7 +785,7 @@ public class DrawingWindow extends ItemDrawer
       if ( TDInstance.device != null ) sb.append( TDInstance.device.getNickname() );
       sb.append( "} " );
     }
-    sb.append( mApp.getConnectionStateTitleStr() );
+    // sb.append( mApp.getConnectionStateTitleStr() ); // IF_COSURVEY
     // sb.append( mLandscape ? titleLandscape : titlePortrait );
     sb.append(" ");
     
@@ -998,7 +998,8 @@ public class DrawingWindow extends ItemDrawer
 
   private void moveTo( int type, String move_to )
   {
-    // if ( move_to == null ) return;
+    // if ( move_to == null ) return; // move_to guaranteed non-null
+    if ( mNum == null ) return; // WHY ??? unexpected crash report
     NumStation st = mNum.getStation( move_to );
     if ( st != null ) {
       if ( type == PlotInfo.PLOT_PLAN ) {

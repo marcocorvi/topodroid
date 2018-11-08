@@ -24,8 +24,8 @@ class TDPrefKey
     "DISTOX_MKEYBOARD",     // 4 * // whether to use TopoDroid keypads
     "DISTOX_NO_CURSOR",     // 5 * // no cursor for custom keyboard
     "DISTOX_LOCAL_MAN",     // 6 * // enable local man pages
-    "DISTOX_COSURVEY",      // 7 * // whether to enable co-surveying
-    "DISTOX_LOCALE",        // 8 * // language
+    "DISTOX_LOCALE",        // 7 * // language
+    // "DISTOX_COSURVEY",      // 8 * // whether to enable co-surveying // IF_COSURVEY
     "DISTOX_EXPORT_PREF",   // 9  FORWARD
     "DISTOX_SURVEY_PREF",   //    FORWARD
     "DISTOX_PLOT_PREF",     //    FORWARD
@@ -42,8 +42,8 @@ class TDPrefKey
     R.string.pref_mkeyboard_title,
     R.string.pref_no_cursor_title,
     R.string.pref_local_help_title,
-    R.string.pref_cosurvey_title,
     R.string.pref_locale_title,
+    // R.string.pref_cosurvey_title, // IF_COSURVEY
     R.string.pref_cat_import_export,
     R.string.pref_cat_survey,
     R.string.pref_cat_drawing,
@@ -59,8 +59,8 @@ class TDPrefKey
     R.string.pref_mkeyboard_summary,
     R.string.pref_no_cursor_summary,
     R.string.pref_local_help_summary,
-    R.string.pref_cosurvey_summary,
     R.string.pref_locale_summary,
+    // R.string.pref_cosurvey_summary, // IF_COSURVEY
     -1,
     -1,
     -1,
@@ -76,7 +76,8 @@ class TDPrefKey
      FALSE,
      TRUE,
      TDString.ZERO,
-     FALSE,
+     TDString.ZERO,
+     // FALSE, // IF_COSURVEY
      "",
      "",
      "",

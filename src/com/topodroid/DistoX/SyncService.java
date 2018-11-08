@@ -24,6 +24,8 @@ import android.os.Message;
 
 import android.util.Log;
 
+/* ---- IF_COSURVEY
+
 class SyncService
 {
     // Name for the SDP record when creating server socket
@@ -68,7 +70,8 @@ class SyncService
 
     static final String DEVICE = "DEVICE";
 
-  SyncService( /* Context context, */ TopoDroidApp app, Handler handler )
+  SyncService( // Context context, 
+               TopoDroidApp app, Handler handler )
   {
     // mContext = context;
     mApp     = app;
@@ -150,10 +153,10 @@ class SyncService
     setAcceptState(STATE_LISTEN);
   }
 
-  /**
-   * Start the ConnectingThread to initiate a connection to a remote device.
-   * @param device  The BluetoothDevice to connect
-   */
+  //
+  // Start the ConnectingThread to initiate a connection to a remote device.
+  // @param device  The BluetoothDevice to connect
+  //
   synchronized void connect( BluetoothDevice device )
   {
     TDLog.Log( TDLog.LOG_SYNC, "sync connect to " + device.getName() );
@@ -180,11 +183,11 @@ class SyncService
     setConnectState(STATE_CONNECTING);
   }
 
-  /**
-   * Start the ConnectedThread to begin managing a Bluetooth connection
-   * @param socket  The BluetoothSocket on which the connection was made
-   * @param device  The BluetoothDevice that has been connected
-   */
+  //
+  // Start the ConnectedThread to begin managing a Bluetooth connection
+  // @param socket  The BluetoothSocket on which the connection was made
+  // @param device  The BluetoothDevice that has been connected
+  //
   synchronized void connected(BluetoothSocket socket, BluetoothDevice device)
   {
     TDLog.Log( TDLog.LOG_SYNC, "sync connected. remote device " + device.getName() );
@@ -274,11 +277,10 @@ class SyncService
     mHandler.sendMessage(msg);
   }
 
-  /**
-   * This thread runs while listening for incoming connections. It behaves
-   * like a server-side client. It runs until a connection is accepted
-   * (or until cancelled).
-   */
+  //
+  // This thread runs while listening for incoming connections. It behaves
+  // like a server-side client. It runs until a connection is accepted (or until cancelled).
+  //
   private class AcceptThread extends Thread 
   {
     private BluetoothServerSocket mmServerSocket;
@@ -354,11 +356,10 @@ class SyncService
   }
 
 
-  /**
-   * This thread runs while attempting to make an outgoing connection
-   * with a device. It runs straight through; the connection either
-   * succeeds or fails.
-   */
+  //
+  // This thread runs while attempting to make an outgoing connection
+  // with a device. It runs straight through; the connection either succeeds or fails.
+  // 
   private class ConnectingThread extends Thread
   {
     private final BluetoothSocket mmSocket;
@@ -420,10 +421,10 @@ class SyncService
     }
   }
 
-  /**
-   * This thread runs during a connection with a remote device.
-   * It handles all incoming and outgoing transmissions.
-   */
+  //
+  // This thread runs during a connection with a remote device.
+  // It handles all incoming and outgoing transmissions.
+  //
   private class ConnectedThread extends Thread
   {
     private final BluetoothSocket mmSocket;
@@ -504,10 +505,10 @@ class SyncService
       }
     }
 
-    /**
-     * Write to the connected OutStream.
-     * @param buffer  The bytes to write
-     */
+    //
+    // Write to the connected OutStream.
+    // @param buffer  The bytes to write
+    //
     boolean doWriteBuffer( byte[] buffer )
     {
       Log.v("DistoX", "sync connected write " + buffer.length + ": <" + buffer[0] + "|" + buffer[1] + ">" );
@@ -535,3 +536,5 @@ class SyncService
     }
   }
 }
+
+*/

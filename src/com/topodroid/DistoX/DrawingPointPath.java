@@ -54,6 +54,14 @@ class DrawingPointPath extends DrawingPath
   double mOrientation;
   String mPointText;
 
+  @Override
+  DrawingPath copy()
+  {
+    DrawingPointPath ret = new DrawingPointPath( mPointType, cx, cy, mScale, mPointText, mOptions );
+    copyTo( ret );
+    return ret;
+  }
+
   // FIXME SECTION_RENAME
   DrawingPointPath fixScrap( String survey_name )
   {

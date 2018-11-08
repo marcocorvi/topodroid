@@ -591,9 +591,10 @@ class TDSetting
     mKeyboard      = prefs.getBoolean( keyMain[4], bool(defMain[4]) );  // DISTOX_MKEYBOARD
     mNoCursor      = prefs.getBoolean( keyMain[5], bool(defMain[5]) );  // DISTOX_NO_CURSOR
     mLocalManPages = handleLocalUserMan( my_app, prefs.getString( keyMain[6], defMain[6] ), false ); // DISTOX_LOCAL_MAN
-    boolean co_survey = prefs.getBoolean( keyMain[7], bool(defMain[7]) );        // DISTOX_COSURVEY 
+    TopoDroidApp.setLocale( prefs.getString( keyMain[7], TDString.EMPTY ), false ); // DISTOX_LOCALE
+    // TopoDroidApp.setLocale( prefs.getString( keyMain[7], defMain[7] ), false ); // DISTOX_LOCALE
     // TDLog.Profile("locale");
-    TopoDroidApp.setLocale( prefs.getString( keyMain[8], defMain[8] ), false ); // DISTOX_LOCALE
+    // boolean co_survey = prefs.getBoolean( keyMain[8], bool(defMain[8]) );        // DISTOX_COSURVEY 
 
     String[] keySurvey = TDPrefKey.SURVEY;
     String[] defSurvey = TDPrefKey.SURVEYdef;;
@@ -940,13 +941,15 @@ class TDSetting
       mNoCursor = tryBooleanValue( hlp, k, v, false );
     } else if ( k.equals( key[ 6 ] ) ) {           // DISTOX_LOCAL_MAN (choice)
       mLocalManPages = handleLocalUserMan( hlp.getApp(), tryStringValue( hlp, k, v, TDString.ZERO ), true );
-    } else if ( k.equals( key[ 7 ] ) ) {           // DISTOX_COSURVEY (bool)
+    } else if ( k.equals( key[ 7 ] ) ) {           // DISTOX_LOCALE (choice)
+      TopoDroidApp.setLocale( tryStringValue( hlp, k, v, TDString.EMPTY ), true );
+    /* ---- IF_COSURVEY
+    } else if ( k.equals( key[ 8 ] ) ) {           // DISTOX_COSURVEY (bool)
       boolean co_survey = tryBooleanValue( hlp, k, v, false );
       if ( co_survey != TopoDroidApp.mCoSurveyServer ) {
         hlp.getApp().setCoSurvey( co_survey ); // set flag and start/stop server
       }
-    } else if ( k.equals( key[ 8 ] ) ) {           // DISTOX_LOCALE (choice)
-      TopoDroidApp.setLocale( tryStringValue( hlp, k, v, TDString.EMPTY ), true );
+    */
     } else {
       TDLog.Error("missing MAIN key: " + k );
     }

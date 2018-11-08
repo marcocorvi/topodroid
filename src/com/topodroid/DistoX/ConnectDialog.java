@@ -39,6 +39,8 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import android.bluetooth.BluetoothDevice;
 
+/* ---- IF_COSURVEY
+
 class ConnectDialog extends MyDialog
                            implements View.OnClickListener
                            , OnItemClickListener
@@ -267,10 +269,11 @@ class ConnectDialog extends MyDialog
         TDToast.make( R.string.no_device_address );
       }
     // } else if ( b == mBtnCancel ) {
-    //   /* nothing */
+    //   // nothing 
     //   dismiss();
     } 
   }
-
 }
+
+*/
 

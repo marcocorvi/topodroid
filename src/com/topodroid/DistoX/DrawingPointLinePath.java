@@ -44,6 +44,22 @@ class DrawingPointLinePath extends DrawingPath
 
   int size() { return mSize; }
 
+  @Override
+  DrawingPath copy()
+  {
+    DrawingPointLinePath ret = new DrawingPointLinePath( mType, mVisible, mClosed );
+    copyTo( ret );
+    return ret;
+  }
+
+  @Override
+  protected void copyTo( DrawingPath p )
+  {
+    DrawingPointLinePath path = (DrawingPointLinePath)p;
+    super.copyTo( path );
+    path.append( this );
+  }
+
   /* DEBUG
    * counts how many points this line overlaps with another line
    */

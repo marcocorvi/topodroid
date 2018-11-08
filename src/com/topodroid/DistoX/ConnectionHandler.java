@@ -26,6 +26,8 @@ import java.util.Locale;
 // import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 
+/* ---- IF_COSURVEY
+
 class ConnectionHandler extends Handler
                         implements DataListener
 {
@@ -130,7 +132,8 @@ class ConnectionHandler extends Handler
        }
      }
      mDevice = device;
-     /* if ( mDevice != null ) */ { // always true
+     // if ( mDevice != null ) // always true
+     { 
        mClient = true;
        mSyncService.connect( mDevice );
      }
@@ -723,3 +726,4 @@ class ConnectionHandler extends Handler
 
 }
 
+*/

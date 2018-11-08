@@ -75,7 +75,7 @@ class DeviceHelper extends DataSetObservable
   private SQLiteStatement updateDeviceModelStmt = null;
   private SQLiteStatement updateDeviceNicknameStmt = null;
 
-  private ArrayList<DataListener> mListeners;
+  // private ArrayList<DataListener> mListeners; // IF_COSURVEY
   // ----------------------------------------------------------------------
   // DATABASE
 
@@ -84,11 +84,12 @@ class DeviceHelper extends DataSetObservable
 
   SQLiteDatabase getDb() { return myDB; }
 
-  DeviceHelper( Context context, TopoDroidApp app, ArrayList<DataListener> listeners )
+  // DeviceHelper( Context context, TopoDroidApp app, ArrayList<DataListener> listeners ) // IF_COSURVEY
+  DeviceHelper( Context context, TopoDroidApp app )
   {
     mContext = context;
     mApp     = app;
-    mListeners = listeners;
+    // mListeners = listeners; // IF_COSURVEY
     openDatabase();
   }
 
