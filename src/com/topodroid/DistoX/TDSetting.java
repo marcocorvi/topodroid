@@ -586,8 +586,8 @@ class TDSetting
     int level = Integer.parseInt( prefs.getString( keyMain[3], defMain[3] ) ); // DISTOX_EXTRA_BUTTONS choice: 0, 1, 2, 3
     setActivityBooleans( prefs, level );
 
-    setTextSize( tryInt(    prefs,     keyMain[1], defMain[1] ) );          // DISTOX_TEXT_SIZE
-    setSizeButtons( tryInt( prefs,     keyMain[2], defMain[2] ) );          // DISTOX_SIZE_BUTTONS
+    setTextSize( tryInt(    prefs,     keyMain[1], defMain[1] ) );      // DISTOX_TEXT_SIZE
+    setSizeButtons( tryInt( prefs,     keyMain[2], defMain[2] ) );      // DISTOX_SIZE_BUTTONS
     mKeyboard      = prefs.getBoolean( keyMain[4], bool(defMain[4]) );  // DISTOX_MKEYBOARD
     mNoCursor      = prefs.getBoolean( keyMain[5], bool(defMain[5]) );  // DISTOX_NO_CURSOR
     mLocalManPages = handleLocalUserMan( my_app, prefs.getString( keyMain[6], defMain[6] ), false ); // DISTOX_LOCAL_MAN
@@ -1772,9 +1772,19 @@ class TDSetting
     return ret;
   }
 
+  // @param k   key
+  // @param v   value (either "true" of "false" for checkboxes)
   private static String updatePrefLog( TDPrefHelper hlp, String k, String v )
   {
-    TDLog.checkLogPreferences( hlp.getSharedPrefs(), k ); // FIXME_PREF
+    String[] key = TDPrefKey.LOG;
+    if ( k.equals( key[0] ) ) { // DISTOX_LOG_STREAM
+      hlp.update( k, v );
+      TDLog.checkLogPreferences( hlp.getSharedPrefs(), k, v ); // FIXME_PREF
+    } else {
+      boolean def = k.equals( key[3] ); // DSITOX_LOG_ERR
+      boolean b = tryBooleanValue( hlp, k, v, def );
+      TDLog.checkLogPreferences( hlp.getSharedPrefs(), k, b ); // FIXME_PREF
+    }
     return null;
   }
 

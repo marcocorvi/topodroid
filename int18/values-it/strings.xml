@@ -69,6 +69,7 @@
     <string name="failed_snap_to_line">Nessuna linea su cui deformare il bordo area</string>
     <string name="failed_snap_to_point">Nessun punto vicino su cui muovere il punto</string>
     <string name="failed_snap_to_splays">Nessun splay vicino su cui agganciare il bordo</string>
+    <!-- TODO string name="failed_append_to_line">Failed to append to another line</string -->
 
     <string name="calibration_title">Strumenti di calibrazione</string>
     <string name="calibration_length">Fettuccia</string>
@@ -351,6 +352,7 @@
     <string name="popup_sharp_pt">Rendi diritto</string>
     <string name="popup_curve_pt">Rendi curvo</string>
     <string name="popup_remove_pt">Elimina punto</string>
+    <!-- TODO string name="popup_append_line">Append to line</string -->
 
     <string name="popup_erase_all">Cancella tutto</string>
     <string name="popup_erase_point">Cancella punti</string>

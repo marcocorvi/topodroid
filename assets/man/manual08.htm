@@ -4,6 +4,21 @@
 The "survey" menu of the shot window opens the "Survey Info" window. Alternatively you can open it with a
 long tap on the survey entry in the main window.<br><p>
 
+The window displays the survey info:
+<ul>
+<li>name (not editable)</li>
+<li>date</li>
+<li>team names</li>
+<li>magmnetic declination (if set)</li>
+<li>survey description</li>
+<li>whether the x-sections are <i>shared</i> among sketches or not</li>
+<li>whether the data-mode is <i>normal</i> or <i>diving</i></li>
+</ul>
+<br>
+
+The allowed values for the magnetic declination is [-360, 360]. Values outside this range are considered as "unset".<br><p>
+
+
 <h4>BUTTONS</h4>
 <ul style="margin-top=0">
 <li><u>Notes</u>: survey annotations dialog</li>
@@ -37,8 +52,6 @@ With this dialog you can rename the survey. Renaming fails if there is already a
 The info in the database, the file of the notes, the binary sketch file, and the image and audio directory are renamed.
 However reference to section "scrap" in the sketch files are not updated until the files are opened again.
 Therefore it is advisable to go over and "open and close" all the sketches.<br><p>
-
-
 
 <h4>Delete dialog</h4>
 The delete dialog ask for confirmation to delete the survey. Deleting the survey is unrecoverable: the survey and all associated data (photos, notes, sketch files, etc. ) except the zip archive. Make sure to export a backup ZIP archive before you delete the survey.<br><p>

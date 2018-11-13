@@ -3833,7 +3833,9 @@ public class DrawingWindow extends ItemDrawer
       }
     }
    
-    // add a therion station point
+    /** add a therion station point
+     * @param st    (user) station point
+     */
     public void addStationPoint( DrawingStationName st )
     {
       DrawingStationPath path = new DrawingStationPath( st, DrawingPointPath.SCALE_M );
@@ -3841,6 +3843,10 @@ public class DrawingWindow extends ItemDrawer
       modified();
     }
 
+    /** delete a station point
+     * @param st    (user) station point
+     * @param path  path to drop
+     */
     public void removeStationPoint( DrawingStationName st, DrawingStationPath path )
     {
       mDrawingSurface.removeDrawingStationPath( path );
@@ -3857,6 +3863,8 @@ public class DrawingWindow extends ItemDrawer
       finish();
     }
 
+    /** delete confirmation dialog
+     */
     void askDelete()
     {
       TopoDroidAlertDialog.makeAlert( mActivity, getResources(), R.string.plot_delete,
@@ -3869,6 +3877,9 @@ public class DrawingWindow extends ItemDrawer
       );
     }
 
+    /** set the drawing window mode (change the list of buttons)
+     * @param mode    drawing window mode
+     */
     private void setMode( int mode )
     {
       mMode = mode;
@@ -3904,6 +3915,11 @@ public class DrawingWindow extends ItemDrawer
     }
 
     /** erase mode popup menu
+     * @param b     button
+     * @param modes ...
+     * @param nr    number of modes
+     * @param code  code of the filter-listener 
+     * @param dismiss
      */
     private void makePopupJoin( View b, int[] modes, int nr, final int code, int dismiss )
     {
@@ -3935,6 +3951,13 @@ public class DrawingWindow extends ItemDrawer
       mPopupJoin.showAsDropDown(b); 
     }
 
+    /** filter dropdown menu
+     * @param b     button
+     * @param modes ...
+     * @param nr    number of modes
+     * @param code  code of the filter-listener 
+     * @param dismiss
+     */
     private void makePopupFilter( View b, int[] modes, int nr, final int code, int dismiss )
     {
       if ( dismiss == DISMISS_FILTER ) return;
@@ -3952,8 +3975,7 @@ public class DrawingWindow extends ItemDrawer
       for ( int k=0; k<nr; ++k ) {
         text = getString( modes[k] );
         len = text.length();
-        tv[k] = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight, 
-                new FilterClickListener( this, k, code ) );
+        tv[k] = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight, new FilterClickListener( this, k, code ) );
         if ( k == 0 ) {
           FontMetrics fm = tv[0].getPaint().getFontMetrics();
           // Log.v("DistoX", "metrics TOP " + fm.top + " ASC. " + fm.ascent + " BOT " + fm.bottom + " LEAD " + fm.leading ); 
@@ -3969,7 +3991,8 @@ public class DrawingWindow extends ItemDrawer
     }
 
     /** line/area editing
-     * @param b button
+     * @param b       button
+     * @param dismiss ...
      */
     private void makePopupEdit( View b, int dismiss )
     {
@@ -4001,9 +4024,15 @@ public class DrawingWindow extends ItemDrawer
           }
         } );
   
+      Button myTextView1 = null;
+      Button myTextView2 = null;
+      Button myTextView3 = null;
+      Button myTextView4 = null;
+      Button myTextView5 = null;
+      Button myTextView6 = null;
+      Button myTextView7 = null;
       // ----- SNAP LINE to splays AREA BORDER to close line
       //
-      Button myTextView1 = null;
       if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE ) {
         text = getString( R.string.popup_snap_to_splays );
         if ( len < text.length() ) len = text.length();
@@ -4027,7 +4056,7 @@ public class DrawingWindow extends ItemDrawer
               dismissPopupEdit();
             }
           } );
-      } else {
+      } else if ( mHotItemType == DrawingPath.DRAWING_PATH_AREA ) {
         text = getString( R.string.popup_snap_ln );
         if ( len < text.length() ) len = text.length();
         myTextView1 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
@@ -4052,128 +4081,152 @@ public class DrawingWindow extends ItemDrawer
             }
           } );
       } 
-      // ----- SPLIT LINE/AREA POINT IN TWO
-      //
-      text = getString(R.string.popup_split_pt);
-      if ( len > text.length() ) len = text.length();
-      Button myTextView2 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
-        new View.OnClickListener( ) {
-          public void onClick(View v) {
-            if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // split point LINE/AREA
-              mDrawingSurface.splitHotItem();
-              modified();
-            }
-            dismissPopupEdit();
-          }
-        } );
 
-      // ----- CUT LINE AT SELECTED POINT AND SPLIT IT IN TWO LINES
-      //
-      text = getString(R.string.popup_split_ln);
-      if ( len < text.length() ) len = text.length();
-      Button myTextView3 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
-        new View.OnClickListener( ) {
-          public void onClick(View v) {
-            if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE ) { // split-line LINE
-              SelectionPoint sp = mDrawingSurface.hotItem();
-              if ( sp != null && sp.type() == DrawingPath.DRAWING_PATH_LINE ) {
-                splitLine( (DrawingLinePath)(sp.mItem), sp.mPoint );
+      if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) {
+        // ----- DUPLICATE LINE/AREA POINT
+        //
+        text = getString(R.string.popup_split_pt);
+        if ( len > text.length() ) len = text.length();
+        myTextView2 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
+          new View.OnClickListener( ) {
+            public void onClick(View v) {
+              if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // split point LINE/AREA
+                mDrawingSurface.splitHotItem();
                 modified();
               }
+              dismissPopupEdit();
             }
-            dismissPopupEdit();
-          }
-        } );
+          } );
 
-      // ----- MAKE LINE SEGMENT STRAIGHT
-      //
-      text = getString(R.string.popup_sharp_pt);
-      if ( len < text.length() ) len = text.length();
-      Button myTextView4 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
-        new View.OnClickListener( ) {
-          public void onClick(View v) {
-            if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) {
-              // make segment straight LINE/AREA
-              SelectionPoint sp = mDrawingSurface.hotItem();
-              if ( sp != null && ( sp.type() == DrawingPath.DRAWING_PATH_LINE || sp.type() == DrawingPath.DRAWING_PATH_AREA ) ) {
-                sp.mPoint.has_cp = false;
-                DrawingPointLinePath line = (DrawingPointLinePath)sp.mItem;
-                line.retracePath();
-                modified();
-              }
-            }
-            dismissPopupEdit();
-          }
-        } );
-
-      // ----- MAKE LINE SEGMENT SMOOTH (CURVED, WITH CONTROL POINTS)
-      //
-      text = getString(R.string.popup_curve_pt);
-      if ( len < text.length() ) len = text.length();
-      Button myTextView5 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
-        new View.OnClickListener( ) {
-          public void onClick(View v) {
-            if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) {
-              // make segment curved LINE/AREA
-              SelectionPoint sp = mDrawingSurface.hotItem();
-              if ( sp != null && ( sp.type() == DrawingPath.DRAWING_PATH_LINE || sp.type() == DrawingPath.DRAWING_PATH_AREA ) ) {
-                LinePoint lp0 = sp.mPoint;
-                LinePoint lp2 = lp0.mPrev; 
-                if ( ! lp0.has_cp && lp2 != null ) {
-                  float dx = (lp0.x - lp2.x)/3;
-                  float dy = (lp0.y - lp2.y)/3;
-                  if ( Math.abs(dx) > 0.01 || Math.abs(dy) > 0.01 ) {
-                    lp0.x1 = lp2.x + dx;
-                    lp0.y1 = lp2.y + dy;
-                    lp0.x2 = lp0.x - dx;
-                    lp0.y2 = lp0.y - dy;
-                    lp0.has_cp = true;
-                    DrawingPointLinePath line = (DrawingPointLinePath)sp.mItem;
+        // ----- REMOVE LINE/AREA POINT
+        //
+        text = getString(R.string.popup_remove_pt);
+        if ( len < text.length() ) len = text.length();
+        myTextView6 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
+          new View.OnClickListener( ) {
+            public void onClick(View v) {
+              if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // remove pt
+                SelectionPoint sp = mDrawingSurface.hotItem();
+                if ( sp != null && ( sp.type() == DrawingPath.DRAWING_PATH_LINE || sp.type() == DrawingPath.DRAWING_PATH_AREA ) ) {
+                  DrawingPointLinePath line = (DrawingPointLinePath)sp.mItem;
+                  if ( line.size() > 2 ) {
+                    removeLinePoint( line, sp.mPoint, sp );
                     line.retracePath();
+                    modified();
                   }
                 }
-                modified();
               }
+              dismissPopupEdit();
             }
-            dismissPopupEdit();
-          }
-        } );
+          } );
 
-      // ----- REMOVE LINE/AREA POINT
-      //
-      text = getString(R.string.popup_remove_pt);
-      if ( len < text.length() ) len = text.length();
-      Button myTextView6 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
-        new View.OnClickListener( ) {
-          public void onClick(View v) {
-            if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // remove pt
-              SelectionPoint sp = mDrawingSurface.hotItem();
-              if ( sp != null && ( sp.type() == DrawingPath.DRAWING_PATH_LINE || sp.type() == DrawingPath.DRAWING_PATH_AREA ) ) {
-                DrawingPointLinePath line = (DrawingPointLinePath)sp.mItem;
-                if ( line.size() > 2 ) {
-                  removeLinePoint( line, sp.mPoint, sp );
+        // ----- MAKE LINE/AREA SEGMENT STRAIGHT
+        //
+        text = getString(R.string.popup_sharp_pt);
+        if ( len < text.length() ) len = text.length();
+        myTextView4 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
+          new View.OnClickListener( ) {
+            public void onClick(View v) {
+              if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) {
+                // make segment straight LINE/AREA
+                SelectionPoint sp = mDrawingSurface.hotItem();
+                if ( sp != null && ( sp.type() == DrawingPath.DRAWING_PATH_LINE || sp.type() == DrawingPath.DRAWING_PATH_AREA ) ) {
+                  sp.mPoint.has_cp = false;
+                  DrawingPointLinePath line = (DrawingPointLinePath)sp.mItem;
                   line.retracePath();
                   modified();
                 }
               }
+              dismissPopupEdit();
             }
-            dismissPopupEdit();
-          }
-        } );
+          } );
 
+        // ----- MAKE LINE/AREA SEGMENT SMOOTH (CURVED, WITH CONTROL POINTS)
+        //
+        text = getString(R.string.popup_curve_pt);
+        if ( len < text.length() ) len = text.length();
+        myTextView5 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
+          new View.OnClickListener( ) {
+            public void onClick(View v) {
+              if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) {
+                // make segment curved LINE/AREA
+                SelectionPoint sp = mDrawingSurface.hotItem();
+                if ( sp != null && ( sp.type() == DrawingPath.DRAWING_PATH_LINE || sp.type() == DrawingPath.DRAWING_PATH_AREA ) ) {
+                  LinePoint lp0 = sp.mPoint;
+                  LinePoint lp2 = lp0.mPrev; 
+                  if ( ! lp0.has_cp && lp2 != null ) {
+                    float dx = (lp0.x - lp2.x)/3;
+                    float dy = (lp0.y - lp2.y)/3;
+                    if ( Math.abs(dx) > 0.01 || Math.abs(dy) > 0.01 ) {
+                      lp0.x1 = lp2.x + dx;
+                      lp0.y1 = lp2.y + dy;
+                      lp0.x2 = lp0.x - dx;
+                      lp0.y2 = lp0.y - dy;
+                      lp0.has_cp = true;
+                      DrawingPointLinePath line = (DrawingPointLinePath)sp.mItem;
+                      line.retracePath();
+                    }
+                  }
+                  modified();
+                }
+              }
+              dismissPopupEdit();
+            }
+          } );
+
+      }
+
+      if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE ) {
+        // ----- CUT LINE AT SELECTED POINT AND SPLIT IT IN TWO LINES
+        //
+        text = getString(R.string.popup_split_ln);
+        if ( len < text.length() ) len = text.length();
+        myTextView3 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
+          new View.OnClickListener( ) {
+            public void onClick(View v) {
+              if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE ) { // split-line LINE
+                SelectionPoint sp = mDrawingSurface.hotItem();
+                if ( sp != null && sp.type() == DrawingPath.DRAWING_PATH_LINE ) {
+                  splitLine( (DrawingLinePath)(sp.mItem), sp.mPoint );
+                  modified();
+                }
+              }
+              dismissPopupEdit();
+            }
+          } );
+
+        // ATTACH LINE TO LINE
+        text = getString(R.string.popup_append_line);
+        if ( len < text.length() ) len = text.length();
+        myTextView7 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
+          new View.OnClickListener( ) {
+            public void onClick(View v) {
+              if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE ) {
+                if ( mDrawingSurface.appendHotItemToNearestLine() ) {
+                  modified();
+                } else {
+                  TDToast.make( R.string.failed_append_to_line );
+                }
+              }
+              dismissPopupEdit();
+            }
+          } );
+      }
+ 
       FontMetrics fm = myTextView0.getPaint().getFontMetrics();
       // Log.v("DistoX", "font metrics TOP " + fm.top + " ASC. " + fm.ascent + " BOT " + fm.bottom + " LEAD " + fm.leading ); 
       int w = (int)( Math.abs( ( len + 1 ) * fm.ascent ) * 0.6);
       int h = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.70);
       // int h1 = (int)( myTextView0.getHeight() * 7 * 1.1 ); this is 0
       myTextView0.setWidth( w );
-      myTextView1.setWidth( w );
-      myTextView2.setWidth( w );
-      myTextView3.setWidth( w );
-      myTextView4.setWidth( w );
-      myTextView5.setWidth( w );
-      myTextView6.setWidth( w );
-      // Log.v( TopoDroidApp.TAG, "popup width " + w );
+      if ( myTextView1 != null ) myTextView1.setWidth( w );
+      if ( myTextView2 != null ) myTextView2.setWidth( w );
+      if ( myTextView3 != null ) myTextView3.setWidth( w );
+      if ( myTextView4 != null ) myTextView4.setWidth( w );
+      if ( myTextView5 != null ) myTextView5.setWidth( w );
+      if ( myTextView6 != null ) myTextView6.setWidth( w );
+      if ( myTextView7 != null ) myTextView7.setWidth( w ); // APPEND LINE TO LINE
+      
       mPopupEdit = new PopupWindow( popup_layout, w, h ); 
       // mPopupEdit = new PopupWindow( popup_layout, popup_layout.getHeight(), popup_layout.getWidth() );
       mPopupEdit.showAsDropDown(b); 

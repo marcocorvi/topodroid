@@ -2077,6 +2077,61 @@ class DrawingCommandManager
     return true;
   }
 
+  boolean appendHotItemToNearestLine()
+  {
+    SelectionPoint sp = mSelected.mHotItem;
+    if ( sp == null ) return false;
+    if ( sp.type() != DrawingPath.DRAWING_PATH_LINE ) return false;
+    if ( BrushManager.isLineSection( sp.type() ) ) return false; // NOT for "section" lines
+    LinePoint pt1 = sp.mPoint;
+    DrawingLinePath line1 = (DrawingLinePath)sp.mItem;
+    if ( pt1 != line1.mFirst && pt1 != line1.mLast ) return false;
+
+    int linetype = line1.mLineType;
+
+    float x = 0.0f;
+    float y = 0.0f;
+    x = sp.mPoint.x;
+    y = sp.mPoint.y;
+    
+    SelectionPoint spmin = mSelection.getNearestLineEndPoint( sp, x, y, 10f, linetype );
+    if ( spmin == null ) return false;
+
+    LinePoint pt2 = spmin.mPoint; // MERGE this line with "linemin"
+    DrawingLinePath line2 = (DrawingLinePath)spmin.mItem;
+    synchronized ( TDPath.mSelectionLock ) {
+      mSelection.removePath( line2 );
+      mSelection.removePath( line1 );
+    }
+
+    boolean reverse1 = ( pt1 == line1.mLast );
+    boolean reverse2 = ( pt2 == line2.mFirst );
+    synchronized( mCurrentStack ) {
+      if ( reverse2 ) line2.reversePath();
+      if ( reverse1 ) line1.reversePath();
+      LinePoint pt = line1.mFirst; // append to end
+      while ( pt != null ) {
+        if ( pt.has_cp ) {
+          line2.addPoint3( pt.x1, pt.y1, pt.x2, pt.y2, pt.x, pt.y );
+        } else {
+          line2.addPoint( pt.x, pt.y );
+        }
+        pt = pt.mNext;
+      }
+      if ( reverse1 ) line1.reversePath();
+      mCurrentStack.remove( line1 );
+      if ( reverse2 ) {
+        line2.reversePath();
+        line2.retracePath();
+      }
+    }
+    synchronized ( TDPath.mSelectionLock ) {
+      mSelection.insertPath( line2 );
+      mSelected.clear();
+    }
+    return true;
+  }
+
   class NearbySplay
   {
     final float dx, dy;

@@ -24,7 +24,8 @@ The <b>date</b> is written with format "yyyy.mm.dd". For example January 6, 2015
 
 <b>Team</b> and <b>description</b> are empty (unless you have set a default team in the app settings). They can safely be left so, although it is a good practice to take the time to fill them.<br><p>
 
-The <b>magnetic declination</b> is 0.0 by default. If you know it you can enter it here, otherwise you can look it up in the web after you have found the coordinates of a fixed point (say, the cave entrance) with the GPS [A].<br><p>
+The <b>magnetic declination</b> is unset by default. If you know it you can enter it here, otherwise you can look it up in the web after you have found the coordinates of a fixed point (say, the cave entrance) with the GPS [A].
+The accepted range of values is [-360, 360]. Any value outside this interval is considered as "unset".<br><p>
 
 At-station <b>x-sections</b> can be either shared among the survey sketches, or private to each sketch.
 This choice must be made when the survey is created and cannot be modified later because

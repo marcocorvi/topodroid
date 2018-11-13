@@ -1296,7 +1296,7 @@ class TDPrefKey
     "DISTOX_LOG_CSURVEY",
     "DISTOX_LOG_PTOPO",
     "DISTOX_LOG_ZIP",
-    "DISTOX_LOG_SYNC", 
+    // "DISTOX_LOG_SYNC", 
     null
   };
 
@@ -1330,6 +1330,6 @@ class TDPrefKey
      R.string.pref_log_csurvey, 
      R.string.pref_log_ptopo,   
      R.string.pref_log_zip,     
-     R.string.pref_log_sync
+     // R.string.pref_log_sync
   };
 }

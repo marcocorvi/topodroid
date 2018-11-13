@@ -68,6 +68,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="failed_snap_to_line">No close line-point to snap the area border to</string>
     <string name="failed_snap_to_point">No close point to snap the point to</string>
     <string name="failed_snap_to_splays">No close splay to snap the line to</string>
+    <!-- TODO string name="failed_append_to_line">Failed to append to another line</string -->
 
     <string name="calibration_title">Instruments calibration</string>
     <string name="calibration_length">Tape</string>
@@ -356,6 +357,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="popup_sharp_pt">Straighten segment</string>
     <string name="popup_curve_pt">Smoothen segment</string>
     <string name="popup_remove_pt">Remove point</string>
+    <!-- TODO string name="popup_append_line">Append to line</string -->
 
     <string name="popup_erase_all">Erase all</string>
     <string name="popup_erase_point">Erase points</string>

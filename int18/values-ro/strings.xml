@@ -69,6 +69,7 @@
     <string name="failed_snap_to_line">Nici o linie-punct apropiată la care să se fixeze/alipească suprafața</string>
     <string name="failed_snap_to_point">Nici un punct apropiat la care să se fixeze/alipească punctul</string>
     <string name="failed_snap_to_splays">Nici o radiere apropiată la care să se fixeze/alipească linia</string>
+    <!-- TODO string name="failed_append_to_line">Failed to append to another line</string -->
 
     <string name="calibration_title">Calibrare instrumente</string>
     <string name="calibration_length">Distanță</string>
@@ -353,6 +354,7 @@
     <string name="popup_sharp_pt">Îndreaptă segmentul</string>
     <string name="popup_curve_pt">Netezește segmentul</string>
     <string name="popup_remove_pt">Șterge punctul</string>
+    <!-- TODO string name="popup_append_line">Append to line</string -->
 
     <string name="popup_erase_all">Șterge tot</string>
     <string name="popup_erase_point">Șterge punctele</string>

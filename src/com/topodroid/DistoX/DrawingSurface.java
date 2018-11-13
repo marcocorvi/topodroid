@@ -550,6 +550,7 @@ class DrawingSurface extends SurfaceView
   DrawingAudioPath getAudioPoint( long bid ) { return commandManager.getAudioPoint( bid ); }
 
   boolean moveHotItemToNearestPoint() { return commandManager.moveHotItemToNearestPoint(); }
+  boolean appendHotItemToNearestLine() { return commandManager.appendHotItemToNearestLine(); }
   
   int snapHotItemToNearestLine() { return commandManager.snapHotItemToNearestLine(); }
   int snapHotItemToNearestSplays( float dthr ) { return commandManager.snapHotItemToNearestSplays( dthr ); }

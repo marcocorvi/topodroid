@@ -72,37 +72,42 @@ class TDLog
 
 
   // --------------- LOG PREFERENCES ----------------------
+/*
   static final private String[] log_key = {
+    // "DISTOX_LOG_STREAM"
+    // "DISTOX_LOG_APPEND"
     "DISTOX_LOG_DEBUG",           // + 0
     "DISTOX_LOG_ERR",
+    "DISTOX_LOG_PERM",            // permissions
     "DISTOX_LOG_INPUT",           // + 2
+    "DISTOX_LOG_PATH",
+    "DISTOX_LOG_IO",               // filesystem i/o
     "DISTOX_LOG_BT",              // + 3
     "DISTOX_LOG_COMM",
-    "DISTOX_LOG_PROTO",
     "DISTOX_LOG_DISTOX",
+    "DISTOX_LOG_PROTO",
     "DISTOX_LOG_DEVICE",          // + 7
-    "DISTOX_LOG_DATA",
-    "DISTOX_LOG_DB",              // + 9
     "DISTOX_LOG_CALIB",
+    "DISTOX_LOG_DB",              // + 9
+    "DISTOX_LOG_UNITS",
+    "DISTOX_LOG_DATA",
+    "DISTOX_LOG_SHOT",
+    "DISTOX_LOG_SURVEY",
+    "DISTOX_LOG_NUM",             // +17
     "DISTOX_LOG_FIXED",
     "DISTOX_LOG_LOC",             // +12
     "DISTOX_LOG_PHOTO",
     "DISTOX_LOG_SENSOR",          // +14
-    "DISTOX_LOG_SHOT",
-    "DISTOX_LOG_SURVEY",
-    "DISTOX_LOG_NUM",             // +17
-    "DISTOX_LOG_THERION",
-    "DISTOX_LOG_PATH",
     "DISTOX_LOG_PLOT",            // +19
     "DISTOX_LOG_BEZIER",
+    "DISTOX_LOG_THERION",
     "DISTOX_LOG_CSURVEY",         // +21
     "DISTOX_LOG_PTOPO",           // +22
     "DISTOX_LOG_ZIP",
-    "DISTOX_LOG_UNITS",
     "DISTOX_LOG_SYNC",
-    "DISTOX_LOG_PERM",            // permissions
-    "DISTOX_LOG_IO"               // filesystem i/o
+    null
   };
+*/
 
   // static void Profile( String msg )
   // {
@@ -203,110 +208,119 @@ class TDLog
   
   static void loadLogPreferences( TDPrefHelper prefs )
   {
-    int lk = 0;
-    
     mLogStream  = Integer.parseInt( prefs.getString("DISTOX_LOG_STREAM", "0") );
     mLogAppend = prefs.getBoolean( "DISTOX_LOG_APPEND", false );
     setLogTarget();
+    int lk = 2;
+    final String[] log_key = TDPrefKey.LOG;
     
     LOG_DEBUG   = prefs.getBoolean( log_key[lk++], false );
     LOG_ERR     = prefs.getBoolean( log_key[lk++], true );
+    LOG_PERM    = prefs.getBoolean( log_key[lk++], false );
     LOG_INPUT   = prefs.getBoolean( log_key[lk++], false );
+    LOG_PATH    = prefs.getBoolean( log_key[lk++], false );
+    LOG_IO      = prefs.getBoolean( log_key[lk++], false );
     LOG_BT      = prefs.getBoolean( log_key[lk++], false );
     LOG_COMM    = prefs.getBoolean( log_key[lk++], false );
-    LOG_PROTO   = prefs.getBoolean( log_key[lk++], false );
     LOG_DISTOX  = prefs.getBoolean( log_key[lk++], false );
+    LOG_PROTO   = prefs.getBoolean( log_key[lk++], false );
     LOG_DEVICE  = prefs.getBoolean( log_key[lk++], false );
-    LOG_DATA    = prefs.getBoolean( log_key[lk++], false );
-    LOG_DB      = prefs.getBoolean( log_key[lk++], false );
     LOG_CALIB   = prefs.getBoolean( log_key[lk++], false );
+    LOG_DB      = prefs.getBoolean( log_key[lk++], false );
+    LOG_UNITS   = prefs.getBoolean( log_key[lk++], false );
+    LOG_DATA    = prefs.getBoolean( log_key[lk++], false );
+    LOG_SHOT    = prefs.getBoolean( log_key[lk++], false );
+    LOG_SURVEY  = prefs.getBoolean( log_key[lk++], false );
+    LOG_NUM     = prefs.getBoolean( log_key[lk++], false );
     LOG_FIXED   = prefs.getBoolean( log_key[lk++], false );
     LOG_LOC     = prefs.getBoolean( log_key[lk++], false );
     LOG_PHOTO   = prefs.getBoolean( log_key[lk++], false );
     LOG_SENSOR  = prefs.getBoolean( log_key[lk++], false );
-    LOG_SHOT    = prefs.getBoolean( log_key[lk++], false );
-    LOG_SURVEY  = prefs.getBoolean( log_key[lk++], false );
-    LOG_NUM     = prefs.getBoolean( log_key[lk++], false );
-    LOG_THERION = prefs.getBoolean( log_key[lk++], false );
-    LOG_PATH    = prefs.getBoolean( log_key[lk++], false );
     LOG_PLOT    = prefs.getBoolean( log_key[lk++], false );
     LOG_BEZIER  = prefs.getBoolean( log_key[lk++], false );
+    LOG_THERION = prefs.getBoolean( log_key[lk++], false );
     LOG_CSURVEY = prefs.getBoolean( log_key[lk++], false );
     LOG_PTOPO   = prefs.getBoolean( log_key[lk++], false );
     LOG_ZIP     = prefs.getBoolean( log_key[lk++], false );
-    LOG_UNITS   = prefs.getBoolean( log_key[lk++], false );
-    LOG_SYNC    = prefs.getBoolean( log_key[lk++], false );
-    LOG_PERM    = prefs.getBoolean( log_key[lk++], false );
-    LOG_IO      = prefs.getBoolean( log_key[lk++], false );
+    // LOG_SYNC    = prefs.getBoolean( log_key[lk++], false );
   }
     
-  static void checkLogPreferences( SharedPreferences sp, String k ) 
+  static void checkLogPreferences( SharedPreferences sp, String k, String v )
   {
-    int lk = 0;
+    // Log.v("DistoX", "Log key " + k + " value " + v );
     if ( k.equals( "DISTOX_LOG_STREAM" ) ) { // "DISTOX_LOG_STREAM",
-      mLogStream = Integer.parseInt( sp.getString(k, "0") );
-    } else if ( k.equals( "DISTOX_LOG_APPEND" ) ) {
-      mLogAppend = sp.getBoolean( k, false );
+      mLogStream = Integer.parseInt( v ); // ( sp.getString(k, "0") );
+    }
+  }
+
+  static void checkLogPreferences( SharedPreferences sp, String k, boolean b )
+  {
+    // Log.v("DistoX", "Log key " + k + " value " + b );
+    final String[] log_key = TDPrefKey.LOG;
+    int lk = 2;
+    // b = sp.getBoolean( k, false );
+    if ( k.equals( "DISTOX_LOG_APPEND" ) ) {
+      mLogAppend = b;
       setLogTarget();
 
     } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_DEBUG",
-      LOG_DEBUG = sp.getBoolean( k, false );
+      LOG_DEBUG = b;
     } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_ERR",
-      LOG_ERR = sp.getBoolean( k, true );
-    } else if ( k.equals( log_key[ lk++ ] )) { // "DISTOX_LOG_INPUT",        
-      LOG_INPUT = sp.getBoolean( k, false );
-    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_BT",
-      LOG_BT = sp.getBoolean( k, false );
-    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_COMM",
-      LOG_COMM = sp.getBoolean( k, false );
-    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_PROTO",
-      LOG_PROTO = sp.getBoolean( k, false );
-    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_DISTOX",
-      LOG_DISTOX = sp.getBoolean( k, false );
-    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_DEVICE",       // 40
-      LOG_DEVICE = sp.getBoolean( k, false );
-    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_DATA",
-      LOG_DATA = sp.getBoolean( k, false );
-    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_DB",
-      LOG_DB = sp.getBoolean( k, false );
-    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_CALIB",
-      LOG_CALIB = sp.getBoolean( k, false );
-    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_FIXED",
-      LOG_FIXED = sp.getBoolean( k, false );
-    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_LOC",          // 45
-      LOG_LOC = sp.getBoolean( k, false );
-    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_PHOTO",
-      LOG_PHOTO = sp.getBoolean( k, false );
-    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_SENSOR"        // 47
-      LOG_SENSOR = sp.getBoolean( k, false );
-    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_SHOT"        
-      LOG_SHOT = sp.getBoolean( k, false );
-    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_SURVEY"
-      LOG_SURVEY = sp.getBoolean( k, false );
-    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_NUM"
-      LOG_NUM = sp.getBoolean( k, false );
-    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_THERION"
-      LOG_THERION = sp.getBoolean( k, false );
-    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_PATH"
-      LOG_PATH = sp.getBoolean( k, false );
-    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_PLOT"
-      LOG_PLOT = sp.getBoolean( k, false );
-    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_BEZIER"
-      LOG_BEZIER = sp.getBoolean( k, false );
-    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_CSURVEY"
-      LOG_CSURVEY = sp.getBoolean( k, false );
-    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_PTOPO"
-      LOG_PTOPO = sp.getBoolean( k, false );
-    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_ZIP"
-      LOG_ZIP = sp.getBoolean( k, false );
-    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_UNITS"
-      LOG_UNITS = sp.getBoolean( k, false );
-    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_SYNC"
-      LOG_SYNC = sp.getBoolean( k, false );
+      LOG_ERR = b;
     } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_PERM"
-      LOG_PERM = sp.getBoolean( k, false );
+      LOG_PERM = b;
+    } else if ( k.equals( log_key[ lk++ ] )) { // "DISTOX_LOG_INPUT",        
+      LOG_INPUT = b;
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_PATH"
+      LOG_PATH = b;
     } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_IO"
-      LOG_IO = sp.getBoolean( k, false );
+      LOG_IO = b;
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_BT",
+      LOG_BT = b;
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_COMM",
+      LOG_COMM = b;
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_DISTOX",
+      LOG_DISTOX = b;
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_PROTO",
+      LOG_PROTO = b;
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_DEVICE",       // 40
+      LOG_DEVICE = b;
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_CALIB",
+      LOG_CALIB = b;
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_DB",
+      LOG_DB = b;
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_UNITS"
+      LOG_UNITS = b;
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_DATA",
+      LOG_DATA = b;
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_SHOT"        
+      LOG_SHOT = b;
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_SURVEY"
+      LOG_SURVEY = b;
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_NUM"
+      LOG_NUM = b;
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_FIXED",
+      LOG_FIXED = b;
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_LOC",          // 45
+      LOG_LOC = b;
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_PHOTO",
+      LOG_PHOTO = b;
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_SENSOR"        // 47
+      LOG_SENSOR = b;
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_PLOT"
+      LOG_PLOT = b;
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_BEZIER"
+      LOG_BEZIER = b;
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_THERION"
+      LOG_THERION = b;
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_CSURVEY"
+      LOG_CSURVEY = b;
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_PTOPO"
+      LOG_PTOPO = b;
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_ZIP"
+      LOG_ZIP = b;
+    // } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_SYNC"
+    //   LOG_SYNC = b;
     } 
   }
 

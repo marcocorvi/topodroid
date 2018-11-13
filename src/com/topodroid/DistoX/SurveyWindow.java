@@ -45,9 +45,10 @@ import android.widget.AdapterView.OnItemClickListener;
 
 // import android.widget.Toast;
 
-// import android.util.Log;
+import android.util.Log;
 
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 // import android.view.View.OnClickListener;
 import android.view.KeyEvent;
 // for FRAGMENT
@@ -223,6 +224,17 @@ public class SurveyWindow extends Activity
     mTVxsections = (TextView) findViewById(R.id.survey_xsections);
     mTVdatamode  = (TextView) findViewById(R.id.survey_datamode);
 
+    mEditDecl.setOnFocusChangeListener( new OnFocusChangeListener() {
+      @Override
+      public void onFocusChange( View v, boolean hasfocus ) {
+        if ( ! hasfocus ) {
+          if ( SurveyInfo.declinationOutOfRange( mEditDecl ) ) {
+            mEditDecl.setText("");
+	  }
+	} 
+      }
+    } );
+
     mDateListener = new MyDateSetListener( mEditDate );
     mEditDate.setOnClickListener( this );
 
@@ -277,8 +289,7 @@ public class SurveyWindow extends Activity
   {
     super.onResume();
     mApp.resetLocale();
-    float decl = mApp_mData.getSurveyDeclination( TDInstance.sid );
-    mEditDecl.setText( String.format(Locale.US, "%.4f", decl ) );
+    doSetDeclination( mApp_mData.getSurveyDeclination( TDInstance.sid ) );
   }
 
   // ------------------------------------------
@@ -394,9 +405,21 @@ public class SurveyWindow extends Activity
     }
   }
 
+  // set the text/hint of mEditDecl 
+  // @param decl   declination value
+  private void doSetDeclination( float decl )
+  {
+    if ( decl < SurveyInfo.DECLINATION_MAX ) {
+      mEditDecl.setText( String.format(Locale.US, "%.2f", decl ) );
+    } else {
+      mEditDecl.setHint( getResources().getString( R.string.declination ) );
+      decl = SurveyInfo.DECLINATION_UNSET;
+    }
+  }
+
   void setDeclination( float decl )
   {
-    mEditDecl.setText( String.format(Locale.US, "%.4f", decl ) );
+    doSetDeclination( decl );
     mApp_mData.updateSurveyDeclination( TDInstance.sid, decl, true );
   }
 
@@ -425,17 +448,8 @@ public class SurveyWindow extends Activity
     String date = mEditDate.getText().toString();
     String team = mEditTeam.getText().toString();
     String comment = mEditComment.getText().toString();
-    float decl = 0.0f;
-    if ( mEditDecl.getText() != null ) {
-      String decl_str = mEditDecl.getText().toString();
-      if ( /* decl_str != null && */ decl_str.length() > 0 ) { // ALWAYS true
-        try {
-          decl = Float.parseFloat( decl_str );
-        } catch ( NumberFormatException e ) {
-          TDLog.Error( "parse Float error: declination " + decl_str );
-        }
-      }
-    }
+    float decl = SurveyInfo.declination( mEditDecl );
+    doSetDeclination( decl );
 
     // FORCE NAMES WITHOUT SPACES
     // name = TopoDroidUtil.noSpaces( name );

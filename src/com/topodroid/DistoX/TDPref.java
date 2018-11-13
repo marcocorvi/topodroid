@@ -954,7 +954,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int cat = TDPrefActivity.PREF_CATEGORY_LOG;
     String[] key = TDPrefKey.LOG;
     int[] tit    = TDPrefKey.LOGtitle;
-    TDPref[] ret = new TDPref[ 31 ];
+    TDPref[] ret = new TDPref[ 30 ];
     ret[0] = makeLst( cat, key[0],
       R.string.pref_log_stream_title, R.string.pref_log_stream_summary, T, "0", R.array.logStream, R.array.logStreamValue, res, hlp );
     ret[ 1] = makeCbx( cat, key[ 1], tit[ 0], -1, T, false, res, hlp );
@@ -986,7 +986,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
     ret[27] = makeCbx( cat, key[27], tit[26], -1, T, false, res, hlp );
     ret[28] = makeCbx( cat, key[28], tit[27], -1, T, false, res, hlp );
     ret[29] = makeCbx( cat, key[29], tit[28], -1, T, false, res, hlp );
-    ret[30] = makeCbx( cat, key[30], tit[29], -1, T, false, res, hlp );
+    // ret[30] = makeCbx( cat, key[30], tit[29], -1, T, false, res, hlp ); // DISTOX_LOG_SYNC
 
     return ret;
   }

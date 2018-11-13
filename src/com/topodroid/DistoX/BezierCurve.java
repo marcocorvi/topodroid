@@ -31,6 +31,7 @@ class BezierCurve
   //   splitIndex = -1;
   // }
 
+  // create a Bezier segment from four 2D points
   BezierCurve( Point2D c0, Point2D c1, Point2D c2, Point2D c3 )
   {
     c = new Point2D[4];
@@ -45,6 +46,7 @@ class BezierCurve
     splitIndex = -1;
   }
 
+  // create a Bezier segment from four 2D coord-pairs
   BezierCurve( float x0, float y0, float x1, float y1, float x2, float y2, float x3, float y3 )
   {
     c = new Point2D[4];
@@ -63,6 +65,7 @@ class BezierCurve
   // void setPoint(int k, Point2D p ) { c[k].set(p); } // UNUSED
   Point2D getPoint( int k ) { return c[k]; }
 
+  // used by BezierInterpolator
   int getSplitIndex() { return splitIndex; }
 
   /**  ComputeMaxError: Find max squared distance of digitized points to fitted curve.

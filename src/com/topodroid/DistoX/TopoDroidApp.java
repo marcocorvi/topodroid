@@ -536,7 +536,8 @@ public class TopoDroidApp extends Application
       e.printStackTrace();
     }
 
-    mPrefHlp = new TDPrefHelper( this, this );
+    mPrefHlp    = new TDPrefHelper( this, this );
+
     mWelcomeScreen = mPrefHlp.getBoolean( "DISTOX_WELCOME_SCREEN", true ); // default: WelcomeScreen = true
     if ( mWelcomeScreen ) {
       setDefaultSocketType();

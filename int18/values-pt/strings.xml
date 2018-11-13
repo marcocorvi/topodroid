@@ -68,6 +68,7 @@
     <string name="failed_snap_to_line">Nenhum ponto de fechamento de linha para atrair a borda da área</string>
     <string name="failed_snap_to_point">Nenhum ponto de fechamento para atrair o ponto</string>
     <string name="failed_snap_to_splays">Nenhuma medida auxiliar próxima onde juntar linha</string>
+    <!-- TODO string name="failed_append_to_line">Failed to append to another line</string -->
 
     <string name="calibration_title">Calibração de instrumentos</string>
     <string name="calibration_length">Trena</string>
@@ -350,6 +351,7 @@
     <string name="popup_sharp_pt">Deixar segmento reto</string>
     <string name="popup_curve_pt">Suavizar segmento</string>
     <string name="popup_remove_pt">Apagar ponto</string>
+    <!-- TODO string name="popup_append_line">Append to line</string -->
 
     <string name="popup_erase_all">Apagar tudo</string>
     <string name="popup_erase_point">Apagar pontos</string>

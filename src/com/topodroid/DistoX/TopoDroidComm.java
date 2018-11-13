@@ -106,7 +106,7 @@ class TopoDroidComm
           double r = mProto.mRoll;
           // extend is unset to start
           // long extend = TDAzimuth.computeLegExtend( b ); // DBlock.EXTEND_UNSET; FIXME_EXTEND 
-          // TDLog.Log( TDLog.LOG_COMM, "DATA PACKET " + d + " " + b + " " + c );
+          TDLog.Log( TDLog.LOG_COMM, "Comm D PACKET " + d + " " + b + " " + c );
           // NOTE type=0 shot is DistoX-type
           long status = ( d > TDSetting.mMaxShotLength )? TDStatus.OVERSHOOT : TDStatus.NORMAL;
           mLastShotId = TopoDroidApp.mData.insertDistoXShot( TDInstance.sid, -1L, d, b, c, r, DBlock.EXTEND_IGNORE, status, true );
@@ -130,15 +130,14 @@ class TopoDroidComm
           //   mLister.updateBlockList( blk );
           // }
         } else if ( res == DistoXProtocol.DISTOX_PACKET_G ) {
-          // TDLog.Log( TDLog.LOG_DISTOX, "G PACKET" );
+          TDLog.Log( TDLog.LOG_COMM, "Comm G PACKET" );
           ++nReadPackets;
           hasG = true;
         } else if ( res == DistoXProtocol.DISTOX_PACKET_M ) {
-          // TDLog.Log( TDLog.LOG_DISTOX, "M PACKET" );
+          TDLog.Log( TDLog.LOG_COMM, "Comm M PACKET" );
           ++nReadPackets;
           // get G and M from mProto and save them to store
-          // TDLog.Log( TDLog.LOG_PROTO, "save G " + mProto.mGX + " " + mProto.mGY + " " + mProto.mGZ + 
-          //                   " M " + mProto.mMX + " " + mProto.mMY + " " + mProto.mMZ );
+          TDLog.Log( TDLog.LOG_COMM, "G " + mProto.mGX + " " + mProto.mGY + " " + mProto.mGZ + " M " + mProto.mMX + " " + mProto.mMY + " " + mProto.mMZ );
           long cblk = TopoDroidApp.mDData.insertGM( TDInstance.cid, mProto.mGX, mProto.mGY, mProto.mGZ, mProto.mMX, mProto.mMY, mProto.mMZ );
           if ( mLister != null ) {
             Message msg = mLister.obtainMessage( Lister.UPDATE );
@@ -186,7 +185,7 @@ class TopoDroidComm
           double mag  = mProto.mMagnetic;
           double dip  = mProto.mDip;
           double roll = mProto.mRoll;
-          // TDLog.Log( TDLog.LOG_DISTOX, "VECTOR PACKET " + mLastShotId + " " + acc + " " + mag + " " + dip + " " + roll );
+          TDLog.Log( TDLog.LOG_COMM, "Comm V PACKET " + mLastShotId + " " + acc + " " + mag + " " + dip + " " + roll );
           if ( TDInstance.distoType() == Device.DISTO_X310 ) {
             TopoDroidApp.mData.updateShotAMDR( mLastShotId, TDInstance.sid, acc, mag, dip, roll, true );
             if ( TDSetting.mWaitData > 10 ) {

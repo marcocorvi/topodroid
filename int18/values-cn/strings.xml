@@ -69,6 +69,7 @@
     <string name="failed_snap_to_line">不能与面边界合并</string>
     <string name="failed_snap_to_point">不能与点合并</string>
     <!-- TODO string name="failed_snap_to_splays">No close splay to snap the line to</string -->
+    <!-- TODO string name="failed_append_to_line">Failed to append to another line</string -->
 
     <string name="calibration_title">设备校准</string>
     <string name="calibration_length">测尺</string>
@@ -350,6 +351,7 @@
     <string name="popup_sharp_pt">分段拉直</string>
     <string name="popup_curve_pt">分段平滑</string>
     <string name="popup_remove_pt">删除点</string>
+    <!-- TODO string name="popup_append_line">Append to line</string -->
 
     <!-- TODO string name="popup_erase_all">Erase all</string -->
     <!-- TODO string name="popup_erase_point">Erase points</string -->

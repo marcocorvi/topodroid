@@ -144,12 +144,10 @@ class SurveyNewDialog extends MyDialog
     // if ( mEditName.getText() == null ) return;
     String name = mEditName.getText().toString();
     if ( /* name == null || */ name.length() == 0 ) { // ALWAYS false
-      mEditName.setError( mContext.getResources().getString( R.string.error_name_required ) );
       return;
     }
     name = TopoDroidUtil.noSpaces( name );
     if ( ! saveSurvey( name ) ) {
-      mEditName.setError( mContext.getResources().getString( R.string.survey_exists ) );
       return;
     }
 
@@ -172,26 +170,22 @@ class SurveyNewDialog extends MyDialog
   {
     if ( name == null ) return false;
     name = TopoDroidUtil.noSpaces( name ).trim(); // FIXME FORCE NAMES WITHOUT SPACES
-    if ( name.length() == 0 ) return false;
+    if ( name.length() == 0 ) {
+      mEditName.setError( mContext.getResources().getString( R.string.error_name_required ) );
+      return false;
+    }
     if ( mApp.hasSurveyName( name ) ) { // name already exists
-      // TDToast.make( mContext, R.string.survey_exists );
+      mEditName.setError( mContext.getResources().getString( R.string.survey_exists ) );
       return false;
     }
 
     String date = mEditDate.getText().toString();
     String team = mEditTeam.getText().toString();
     String comment = mEditComment.getText().toString();
-    double decl = 0.0;
-    if ( mEditDecl.getText() != null ) {
-      String decl_str = mEditDecl.getText().toString();
-      if ( /* decl_str != null && */ decl_str.length() > 0 ) { // ALWAYS true
-        decl_str = decl_str.replace(',', '.');
-        try {
-          decl = Double.parseDouble( decl_str );
-        } catch ( NumberFormatException e ) {
-          TDLog.Error( "parse Double error: declination " + decl_str );
-        }
-      }
+    double decl = SurveyInfo.declination( mEditDecl );
+    if ( decl >= SurveyInfo.DECLINATION_MAX ) {
+      mEditDecl.setError( mContext.getResources().getString( R.string.error_invalid_number ) );
+      return false;
     }
 
     String init_station = TDSetting.mInitStation;

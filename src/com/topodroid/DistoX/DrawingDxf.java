@@ -50,7 +50,7 @@ class DrawingDxf
   static final private String two_n_half = "2.5";
   // static final String ten = "10";
   static final private String empty = TDString.EMPTY;
-  static final private String my_style      = "MyStyle";
+  static final private String style_dejavu  = "DejaVu";
   static final private String standard      = "Standard";
   static final private String lt_continuous = "Continuous";
   static final private String lt_byBlock    = "ByBlock";
@@ -444,7 +444,7 @@ class DrawingDxf
       // printString( pw, 2, block );
       handle = inc(handle); printAcDb( pw, handle, AcDbEntity, AcDbText );
       printString( pw, 8, layer );
-      // printString( pw, 7, my_style ); // style (optional)
+      // printString( pw, 7, style_dejavu ); // style (optional)
       // pw.printf("%s\%s 0%s", "\"10\"", EOL, EOL );
       printXYZ( pw, x, y, 0, 0 );
       // printXYZ( pw, 0, 0, 1, 1 );   // second alignmenmt (otional)
@@ -525,7 +525,7 @@ class DrawingDxf
         writeString( out, 9, "$FILLMODE" );    writeInt( out, 70, 1 ); // 
         writeString( out, 9, "$QTEXTMODE" );   writeInt( out, 70, 0 ); // 
         writeString( out, 9, "$REGENMODE" );   writeInt( out, 70, 1 ); // 
-        writeString( out, 9, "$MIRRMODE" );    writeInt( out, 70, 0 ); // 
+        writeString( out, 9, "$MIRRMODE" );    writeInt( out, 70, 0 ); // not handled by DraftSight
         writeString( out, 9, "$UNITMODE" );    writeInt( out, 70, 0 ); // 
 
         writeString( out, 9, "$TEXTSIZE" );    writeInt( out, 40, 5 ); // default text size
@@ -718,7 +718,7 @@ class DrawingDxf
           int flag = 0;
           int color = 1;
           // if ( ! mVersion13 ) { handle = 40; }
-          handle = inc(handle); printLayer( pw2, handle, "0",       flag, 0, lt_continuous ); // LAYER "0"
+          // handle = inc(handle); printLayer( pw2, handle, "0",       flag, 0, lt_continuous ); // LAYER "0" .. FIXME DraftSight
           handle = inc(handle); printLayer( pw2, handle, "LEG",     flag, color, lt_continuous ); ++color; // red
           handle = inc(handle); printLayer( pw2, handle, "SPLAY",   flag, color, lt_continuous ); ++color; // yellow
           handle = inc(handle); printLayer( pw2, handle, "STATION", flag, color, lt_continuous ); ++color; // green
@@ -761,7 +761,7 @@ class DrawingDxf
 
         if ( mVersion13 ) {
 	  int nr_styles = 2;
-          handle = inc(handle); writeBeginTable( out, "STYLE", handle, nr_styles );  // 2 style
+          handle = inc(handle); writeBeginTable( out, "STYLE", handle, nr_styles );  // 2 styles
           {
             writeString( out, 0, "STYLE" );
             handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbTextStyleTableRecord" );
@@ -777,7 +777,7 @@ class DrawingDxf
 
             writeString( out, 0, "STYLE" );
             handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbTextStyleTableRecord" );
-            writeString( out, 2, my_style );  // name
+            writeString( out, 2, style_dejavu );  // name
             writeInt( out, 70, 0 );              // flag
             writeString( out, 40, zero );
             writeString( out, 41, one  );
@@ -962,8 +962,8 @@ class DrawingDxf
 	// offset axes legends by 1
         // StringWriter sw7 = new StringWriter();
         // PrintWriter pw7  = new PrintWriter(sw7);
-        handle = printText( pw9, handle, scale_len, xmin+sc1, -ymax+1, 0, AXIS_SCALE, "REF", my_style, xoff, yoff );
-        handle = printText( pw9, handle, scale_len, xmin+1, -ymax+sc1, 0, AXIS_SCALE, "REF", my_style, xoff, yoff );
+        handle = printText( pw9, handle, scale_len, xmin+sc1, -ymax+1, 0, AXIS_SCALE, "REF", style_dejavu, xoff, yoff );
+        handle = printText( pw9, handle, scale_len, xmin+1, -ymax+sc1, 0, AXIS_SCALE, "REF", style_dejavu, xoff, yoff );
         out.write( sw9.getBuffer().toString() );
        
         out.flush();
@@ -1065,7 +1065,7 @@ class DrawingDxf
           {
             DrawingStationPath st = (DrawingStationPath)path;
             handle = printText( pw5, handle, st.name(), (st.cx+xoff) * scale, -(st.cy+yoff) * scale,
-                                0, LABEL_SCALE, "STATION", my_style, xoff, yoff );
+                                0, LABEL_SCALE, "STATION", style_dejavu, xoff, yoff );
           } 
           else if ( path.mType == DrawingPath.DRAWING_PATH_LINE )
           {
@@ -1140,14 +1140,14 @@ class DrawingDxf
   { // FIXME point scale factor is 0.3
     if ( sn == null ) return handle;
     return printText( pw, handle, sn.name(),  (sn.cx+xoff)*scale, -(sn.cy+yoff)*scale, 0,
-                        STATION_SCALE, "STATION", my_style, xoff, yoff );
+                        STATION_SCALE, "STATION", style_dejavu, xoff, yoff );
   }
 
   static private int toDxf( PrintWriter pw, int handle, DrawingStationPath st, float scale, float xoff, float yoff )
   { // FIXME point scale factor is 0.3
     if ( st == null ) return handle;
     return printText( pw, handle, st.name(),  (st.cx+xoff)*scale, -(st.cy+yoff)*scale, 0,
-                        STATION_SCALE, "STATION", my_style, xoff, yoff );
+                        STATION_SCALE, "STATION", style_dejavu, xoff, yoff );
   }
 
   static private int toDxf( PrintWriter pw, int handle, DrawingPointPath point, float scale, float xoff, float yoff )
@@ -1156,7 +1156,7 @@ class DrawingDxf
     if ( point.mPointType == BrushManager.getPointLabelIndex() ) {
       DrawingLabelPath label = (DrawingLabelPath)point;
       return printText( pw, handle, label.mPointText,  (point.cx+xoff)*scale, -(point.cy+yoff)*scale, 360.0f-(float)label.mOrientation,
-                        LABEL_SCALE, "POINT", my_style, xoff, yoff );
+                        LABEL_SCALE, "POINT", style_dejavu, xoff, yoff );
     }
 
     String th_name = BrushManager.mPointLib.getSymbolThName( point.mPointType ).replace(':','-');

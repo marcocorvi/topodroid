@@ -51,6 +51,7 @@ class LinePoint extends Point2D
   }
 
   // from ICanvasCommand
+  // @param z   unused
   public void flipXAxis(float z)
   {
     float dx = 2 * DrawingUtil.CENTER_X;
@@ -59,18 +60,25 @@ class LinePoint extends Point2D
     x  = dx - x;
   }
 
+  // shift first control-point
+  // @param dx,dy   shift vector
   void shiftCP1By( float dx, float dy )
   {
      x1 += dx;
      y1 += dy;
   }
 
+  // shift second control-point
+  // @param dx,dy   shift vector
   void shiftCP2By( float dx, float dy )
   {
      x2 += dx;
      y2 += dy;
   }
 
+  // shift the point, and the second control-point
+  // if the next point has control-points shift also its first control-point
+  // @param dx,dy   shift vector
   void shiftBy( float dx, float dy )
   {
     x += dx;
@@ -87,6 +95,9 @@ class LinePoint extends Point2D
     }
   }
 
+  // scale by Z
+  // @param z   scale factor
+  // @param m   unused
   void scaleBy( float z, Matrix m )
   {
     x *= z;
@@ -117,6 +128,9 @@ class LinePoint extends Point2D
     mPrev = null;
   }
 
+  // make a copy LinePoint and append to another point
+  // @param lp   line-point to copy from
+  // @param prev point to append to
   LinePoint( LinePoint lp, LinePoint prev )
   { 
     x  = lp.x;
@@ -131,6 +145,9 @@ class LinePoint extends Point2D
     mPrev = prev;
   }
   
+  // make a linepoint and append to another one
+  // @param x0,y0   linepoint coords (no control-points)
+  // @param prev    point to append to
   LinePoint( float x0, float y0, LinePoint prev )
   {
     super( x0, y0 );
@@ -142,6 +159,10 @@ class LinePoint extends Point2D
     mPrev = prev;
   }
 
+  // make a linepoint and append to another one
+  // @param x10,y10, x20,y20  control-points coords
+  // @param x0,y0   linepoint coords 
+  // @param prev    point to append to
   LinePoint( float x10, float y10, float x20, float y20, float x0, float y0, LinePoint prev )
   {
     super( x0, y0 );
@@ -157,17 +178,21 @@ class LinePoint extends Point2D
     mPrev = prev;
   }
 
+  // distance of the first control-point from a given coord-pair
+  // @param x0,y0   coord-pairs
   float distanceCP1( float x0, float y0 )
   {
     return (float)Math.sqrt( (x0-x1)*(x0-x1) + (y0-y1)*(y0-y1) );
   }
 
+  // distance of the second control-point from a given coord-pair
+  // @param x0,y0   coord-pairs
   float distanceCP2( float x0, float y0 )
   {
     return (float)Math.sqrt( (x0-x2)*(x0-x2) + (y0-y2)*(y0-y2) );
   }
 
-  // return line abscissa of the projection of this point on the line P0-P1
+  // return line-coord of the projection of this point on the line P0-P1
   float orthoProject( LinePoint p0, LinePoint p1 )
   {
     float x01 = p1.x - p0.x;

@@ -23,7 +23,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.util.UUID;
 import java.util.List;
-// import java.util.Locale;
+import java.util.Locale;
 // import java.lang.reflect.Field;
 import java.net.Socket;
 
@@ -114,7 +114,7 @@ class DistoXProtocol
     final IOException[] maybeException = { null };
     final Thread reader = new Thread() {
       public void run() {
-        // TDLog.Log( TDLog.LOG_PROTO, "reader run " + dataRead[0] + "/" + toRead[0] );
+        TDLog.Log( TDLog.LOG_PROTO, "reader thread run " + dataRead[0] + "/" + toRead[0] );
         try {
           // synchronized( dataRead ) 
           {
@@ -127,7 +127,7 @@ class DistoXProtocol
         } catch ( IOException e ) {
           maybeException[0] = e;
         }
-        // TDLog.Log( TDLog.LOG_PROTO, "reader done " + dataRead[0] + "/" + toRead[0] );
+        TDLog.Log( TDLog.LOG_PROTO, "reader thread done " + dataRead[0] + "/" + toRead[0] );
       }
     };
     reader.start();
@@ -226,12 +226,12 @@ class DistoXProtocol
   private int handlePacket( ) 
   {
     byte type = (byte)(mBuffer[0] & 0x3f);
-    // if ( TDLog.LOG_PROTO ) {
-    //   TDLog.Log( TDLog.LOG_PROTO,
-    //     "packet type " + type + " " + 
-    //     String.format("%02x %02x %02x %02x %02x %02x %02x %02x", mBuffer[0], mBuffer[1], mBuffer[2],
-    //     mBuffer[3], mBuffer[4], mBuffer[5], mBuffer[6], mBuffer[7] ) );
-    // }
+    if ( TDLog.LOG_PROTO ) {
+      TDLog.Log( TDLog.LOG_PROTO,
+        "handle packet type " + type + " " + 
+        String.format("%02x %02x %02x %02x %02x %02x %02x %02x", mBuffer[0], mBuffer[1], mBuffer[2],
+        mBuffer[3], mBuffer[4], mBuffer[5], mBuffer[6], mBuffer[7] ) );
+    }
 
     // int high, low;
     switch ( type ) {
@@ -262,10 +262,10 @@ class DistoXProtocol
         if ( c >= 32768 ) { mClino = (65536 - c) * (-90.0) / 16384.0; }
         mRoll = r * 180.0 / 128.0;
 
-        // if ( TDLog.LOG_PROTO ) {
-        //   TDLog.Log( TDLog.LOG_PROTO, "Proto packet data " + 
-        //     String.format(Locale.US, " %7.2f %6.1f %6.1f", mDistance, mBearing, mClino ) );
-        // }
+        if ( TDLog.LOG_PROTO ) {
+          TDLog.Log( TDLog.LOG_PROTO, "Proto packet data " + 
+            String.format(Locale.US, " %7.2f %6.1f %6.1f", mDistance, mBearing, mClino ) );
+        }
 
         return DISTOX_PACKET_DATA;
       case 0x02: // g
@@ -276,7 +276,7 @@ class DistoXProtocol
         if ( mGX > TopoDroidUtil.ZERO ) mGX = mGX - TopoDroidUtil.NEG;
         if ( mGY > TopoDroidUtil.ZERO ) mGY = mGY - TopoDroidUtil.NEG;
         if ( mGZ > TopoDroidUtil.ZERO ) mGZ = mGZ - TopoDroidUtil.NEG;
-        // TDLog.Log( TDLog.LOG_PROTO, "handle Packet G " + String.format(" %x %x %x", mGX, mGY, mGZ ) );
+        TDLog.Log( TDLog.LOG_PROTO, "handle Packet G " + String.format(" %x %x %x", mGX, mGY, mGZ ) );
         return DISTOX_PACKET_G;
       case 0x03: // m
         mMX = MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
@@ -286,7 +286,7 @@ class DistoXProtocol
         if ( mMX > TopoDroidUtil.ZERO ) mMX = mMX - TopoDroidUtil.NEG;
         if ( mMY > TopoDroidUtil.ZERO ) mMY = mMY - TopoDroidUtil.NEG;
         if ( mMZ > TopoDroidUtil.ZERO ) mMZ = mMZ - TopoDroidUtil.NEG;
-        // TDLog.Log( TDLog.LOG_PROTO, "handle Packet M " + String.format(" %x %x %x", mMX, mMY, mMZ ) );
+        TDLog.Log( TDLog.LOG_PROTO, "handle Packet M " + String.format(" %x %x %x", mMX, mMY, mMZ ) );
         return DISTOX_PACKET_M;
       case 0x04: // vector data packet
         if ( mDevice.mType == Device.DISTO_X310 ) {
@@ -299,6 +299,7 @@ class DistoXProtocol
           mDip = dip * 90.0  / 16384.0; // 90/0x4000;
           if ( dip >= 32768 ) { mDip = (65536 - dip) * (-90.0) / 16384.0; }
           mRoll  = rh * 180.0 / 32768.0; // 180/0x8000;
+          TDLog.Log( TDLog.LOG_PROTO, "handle Packet V " + String.format(" %.2f %.2f %.2f roll %.1f", mAcceleration, mMagnetic, mDip, mRoll ) );
         }
         return DISTOX_PACKET_VECTOR;
       case 0x38: 
@@ -308,7 +309,7 @@ class DistoXProtocol
         mReplyBuffer[1] = mBuffer[4];
         mReplyBuffer[2] = mBuffer[5];
         mReplyBuffer[3] = mBuffer[6];
-        // TDLog.Log( TDLog.LOG_PROTO, "handle Packet mReplyBuffer" );
+        TDLog.Log( TDLog.LOG_PROTO, "handle Packet mReplyBuffer" );
         return DISTOX_PACKET_REPLY;
       default:
         TDLog.Error( 
@@ -324,7 +325,7 @@ class DistoXProtocol
   {
     int min_available = ( mDevice.mType == Device.DISTO_X000)? 8 : 1; // FIXME 8 should work in every case
 
-    // TDLog.Log( TDLog.LOG_PROTO, "Proto read packet no-timeout " + (no_timeout?"no":"yes") );
+    TDLog.Log( TDLog.LOG_PROTO, "Protocol read packet no-timeout " + (no_timeout?"no":"yes") );
     // Log.v( "DistoX", "VD Proto read packet no-timeout " + (no_timeout?"no":"yes") );
     try {
       final int maxtimeout = 8;
@@ -345,7 +346,7 @@ class DistoXProtocol
           }
         }
       }
-      // TDLog.Log( TDLog.LOG_PROTO, "Proto read packet available " + available );
+      TDLog.Log( TDLog.LOG_PROTO, "Protocol read packet available " + available );
       // Log.v( "DistoX", "VD Proto read packet available " + available );
       // if ( available > 0 ) 
       if ( available >= min_available ) {
@@ -359,10 +360,10 @@ class DistoXProtocol
         // if ( (mBuffer[0] & 0x0f) != 0 ) // ack every packet
         { 
           mAcknowledge[0] = (byte)(( mBuffer[0] & 0x80 ) | 0x55);
-          // if ( TDLog.LOG_PROTO ) {
-          //   TDLog.Log( TDLog.LOG_PROTO,
-          //     "read packet byte " + String.format(" %02x", mBuffer[0] ) + " ... writing ack" );
-          // }
+          if ( TDLog.LOG_PROTO ) {
+            TDLog.Log( TDLog.LOG_PROTO,
+              "read packet byte " + String.format(" %02x", mBuffer[0] ) + " ... writing ack" );
+          }
           mOut.write( mAcknowledge, 0, 1 );
         }
         if ( ok ) return handlePacket();
@@ -382,7 +383,7 @@ class DistoXProtocol
 
   boolean sendCommand( byte cmd )
   {
-    // TDLog.Log( TDLog.LOG_PROTO, "sendCommand " + String.format("Send command %02x", cmd ) );
+    TDLog.Log( TDLog.LOG_PROTO, "sendCommand " + String.format("Send command %02x", cmd ) );
     // Log.v( "DistoX", "sendCommand " + String.format("Send command %02x", cmd ) );
 
     try {
@@ -421,12 +422,12 @@ class DistoXProtocol
       }
 
       // DEBUG
-      // if ( TDLog.LOG_PROTO ) {
-      //   TDLog.Log( TDLog.LOG_PROTO, 
-      //     "Proto readToRead Head-Tail " + 
-      //     String.format("%02x%02x-%02x%02x", mBuffer[4], mBuffer[3], mBuffer[6], mBuffer[5] )
-      //     + " " + head + " - " + tail + " = " + ret );
-      // }
+      if ( TDLog.LOG_PROTO ) {
+        TDLog.Log( TDLog.LOG_PROTO, 
+          "Proto readToRead Head-Tail " + 
+          String.format("%02x%02x-%02x%02x", mBuffer[4], mBuffer[3], mBuffer[6], mBuffer[5] )
+          + " " + head + " - " + tail + " = " + ret );
+      }
       return ret;
     } catch ( EOFException e ) {
       TDLog.Error( "Proto readToRead Head-Tail read() failed" );

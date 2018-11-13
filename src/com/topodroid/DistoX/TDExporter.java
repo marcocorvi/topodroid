@@ -258,7 +258,12 @@ class TDExporter
       if ( info.team != null && info.team.length() > 0 ) {
         pw.format(" team=\"%s\" ", info.team );
       }
-      pw.format(Locale.US, "nordtype=\"0\" manualdeclination=\"0\" declination=\"%.4f\" ", info.declination );
+      if ( info.hasDeclination() ) { // DECLINATION in CSURVEY
+        pw.format(Locale.US, "nordtype=\"0\" manualdeclination=\"1\" declination=\"%.4f\" ", info.declination ); 
+      } else {
+        pw.format("nordtype=\"0\" manualdeclination=\"0\" ");
+      }
+
       pw.format(">\n");
       pw.format("      </session>\n");
       pw.format("    </sessions>\n");
@@ -603,7 +608,7 @@ class TDExporter
     final String coordinates3 = "    <coordinates>%f,%f,%f</coordinates>\n";
     final String coordinates6 = "    %f,%f,%f %f,%f,%f\n";
     // Log.v("DistoX", "export as KML " + filename );
-    List<DistoXNum> nums = getGeolocalizedData( sid, data, info.declination, 1.0f, false ); // false: Geoid altitude
+    List<DistoXNum> nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false ); // false: Geoid altitude
     if ( nums == null || nums.size() == 0 ) {
       TDLog.Error( "Failed KML export: no geolocalized station");
       return "";
@@ -742,7 +747,7 @@ class TDExporter
     final String coords  = "\"coordinates\": ";
     final String feature = "\"Feature\"";
     // Log.v("DistoX", "export as KML " + filename );
-    List<DistoXNum> nums = getGeolocalizedData( sid, data, info.declination, 1.0f, true ); // true: ellipsoid altitude
+    List<DistoXNum> nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, true ); // true: ellipsoid altitude
     if ( nums == null || nums.size() == 0 ) {
       TDLog.Error( "Failed GeoJSON export: no geolocalized station");
       return "";
@@ -825,7 +830,7 @@ class TDExporter
   static String exportSurveyAsPlt( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     // Log.v("DistoX", "export as trackfile: " + filename );
-    List<DistoXNum> nums = getGeolocalizedData( sid, data, info.declination, TopoDroidUtil.M2FT, false );
+    List<DistoXNum> nums = getGeolocalizedData( sid, data, info.getDeclination(), TopoDroidUtil.M2FT, false );
     if ( nums == null || nums.size() == 0 ) {
       TDLog.Error( "Failed PLT export: no geolocalized station");
       return "";
@@ -913,8 +918,7 @@ class TDExporter
     // _comment
     String[] vals = info.date.split( "\\." );
     try {
-      ptfile.addTrip( Integer.parseInt(vals[0]), Integer.parseInt(vals[1]), Integer.parseInt(vals[2]),
-                      info.declination, info.comment );
+      ptfile.addTrip( Integer.parseInt(vals[0]), Integer.parseInt(vals[1]), Integer.parseInt(vals[2]), info.getDeclination(), info.comment );
     } catch ( NumberFormatException e ) {
       TDLog.Error( "exportSurveyAsTop date parse error " + info.date );
     }
@@ -1075,7 +1079,9 @@ class TDExporter
         pw.format("    # team %s \n", info.team );
       }
 
-      pw.format(Locale.US, "    # declination %.2f degrees\n", info.declination );
+      if ( info.hasDeclination() ) { // DECLINATION in THERION
+        pw.format(Locale.US, "    # declination %.4f degrees\n", info.declination );
+      }
 
       // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
       // mark ... 
@@ -1363,7 +1369,7 @@ class TDExporter
     List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
     List<DBlock> st_blk = new ArrayList<>(); // blocks with from station (for LRUD)
 
-    // float decl = info.declination; // DECLINATION not used
+    // float decl = info.getDeclination(); // DECLINATION not used
     try {
       // TDLog.Log( TDLog.LOG_IO, "export Survex " + filename );
       TDPath.checkPath( filename );
@@ -1392,7 +1398,13 @@ class TDExporter
       writeSurvexLine(pw, "  *units tape " + uls );
       writeSurvexLine(pw, "  *units compass " + uas );
       writeSurvexLine(pw, "  *units clino " + uas );
-      pw.format(Locale.US, "  *calibrate declination %.2f", info.declination ); writeSurvexEOL(pw);
+      if ( info.hasDeclination() ) { // DECLINATION in SURVEX
+        pw.format(Locale.US, "  *calibrate declination %.2f", info.declination ); 
+        writeSurvexEOL(pw);
+      } else {
+        pw.format(Locale.US, "  *calibrate declination auto" );
+        writeSurvexEOL(pw);
+      }
       if ( ! TDSetting.mSurvexSplay ) {
         writeSurvexLine( pw, "  *alias station - .." );
       }
@@ -1689,7 +1701,11 @@ class TDExporter
       //     pw.format("  ; *fix %s\n", fix.toExportString() );
       //   }
       // }
-      pw.format(Locale.US, "# from to tape compass clino (declination %.4f)\n", info.declination );
+      if ( info.hasDeclination() ) { // DECLINATION in CSV
+        pw.format(Locale.US, "# from to tape compass clino (declination %.4f)\n", info.declination ); 
+      } else {
+        pw.format(Locale.US, "# from to tape compass clino\n" );
+      }
       pw.format(Locale.US, "# units tape %s compass clino %s\n", uls, uas );
       
       AverageLeg leg = new AverageLeg(0);
@@ -2136,7 +2152,7 @@ class TDExporter
       } else {
         pw.format("...\r\n");
       }
-      pw.format(Locale.US, "DECLINATION: %.4f  ", info.declination );
+      pw.format(Locale.US, "DECLINATION: %.4f  ", info.getDeclination() ); // FIXME DECLINATION
       pw.format("FORMAT: DMMDLUDRLADN  CORRECTIONS:  0.00 0.00 0.00\r\n" );
       pw.format("\r\n" );
       pw.format("FROM TO LENGTH BEARING INC LEFT UP DOWN RIGHT FLAGS COMMENTS\r\n" );
@@ -2314,7 +2330,7 @@ class TDExporter
       String team = (info.team != null)? info.team : "";
       if ( team.length() > 26 ) team = team.substring(0,26);
       pw.format("%6d%6d%4d%4d%4d %02d/%02d/%02d %26s%4d%8.2f%4d%4d\r\n",
-        -2, 1, 1, 1, 1, d, m, y, team, 0, info.declination, 0, 1 );
+        -2, 1, 1, 1, 1, d, m, y, team, 0, info.getDeclination(), 0, 1 ); // FIXME DECLINATION
 
       //           5 11 15 19 23   31   39   47   55   63   71   79
       pw.format("%6d%6d%4d%4d%4d%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f\r\n",
@@ -2545,7 +2561,7 @@ class TDExporter
         }
       }
       pw.format("\r\n" );
-      pw.format(Locale.US, "#DECLINATION: %.4f\r\n", info.declination );
+      pw.format(Locale.US, "#DECLINATION: %.4f\r\n", info.getDeclination() ); // FIXME DECLINATION
       pw.format("\r\n" );
       pw.format("#SHOT STATION STATION LENGTH AZIMUTH VERTICAL LEFT RIGHT UP DOWN COMMENT\r\n" );
       pw.format("#CODE FROM TO M DEG DEG M M M M\r\n" );
@@ -2806,7 +2822,7 @@ class TDExporter
       pw.format("%s\n", info.name );
       pw.format(";\n");
       pw.format("; %s created by TopoDroid v %s \n", TopoDroidUtil.getDateString("yyyy/MM/dd"), TopoDroidApp.VERSION );
-      pw.format(Locale.US, "360.00 360.00 %.2f 1.00\n", info.declination ); // degrees degrees decl. meters
+      pw.format(Locale.US, "360.00 360.00 %.2f 1.00\n", info.getDeclination() ); // degrees degrees decl. meters
 
       List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
       boolean first = true; // first station
@@ -2916,7 +2932,9 @@ class TDExporter
   
       pw.format("; %s\n", info.name );
       pw.format("; created by TopoDroid v %s - %s \n", TopoDroidApp.VERSION, TopoDroidUtil.getDateString("yyyy.MM.dd") );
-      pw.format(Locale.US, "#Units Decl=%.1f\n", info.declination );
+      if ( info.hasDeclination() ) { // DECLINATION in WALLS
+        pw.format(Locale.US, "#Units Decl=%.1f\n", info.getDeclination() );
+      }
 
       String date = info.date;
       int y = 0;
@@ -3181,7 +3199,7 @@ class TDExporter
       pw.format("#survey_date %02d.%02d.%04d%s", d, m, y, eol ); 
       if ( info.comment != null ) pw.format("#survey_title %s%s", info.comment, eol );
 
-      pw.format(Locale.US, "#declination[%.1f]%s", info.declination, eol );
+      pw.format(Locale.US, "#declination[%.1f]%s", info.getDeclination(), eol ); // FIXME DECLINATION
       
       List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
       if ( fixed.size() > 0 ) {
@@ -3328,7 +3346,7 @@ class TDExporter
       pw.format("Survey team:\n");
       pw.format("%s\n\t\n\t\n\t\n\t\n", (info.team != null)? info.team : "" );
       pw.format(Locale.US, "Survey date: %f\n", TopoDroidUtil.getDatePlg( y, m, d ) );
-      pw.format(Locale.US, "Declination: %.1f\n", info.declination );
+      pw.format(Locale.US, "Declination: %.1f\n", info.getDeclination() ); // FIXME DECLINATION
       pw.format("Instruments:\n\t0\n\t0\n\t0\n");
 
       // if ( info.comment != null ) {
@@ -3437,7 +3455,7 @@ class TDExporter
       PrintWriter out = new PrintWriter( fw );
       // TODO
       out.printf(Locale.US, "999\nDXF created by TopoDroid v %s - %s (declination %.4f)\n",
-        TopoDroidApp.VERSION, TopoDroidUtil.getDateString("yyyy.MM.dd"), info.declination );
+        TopoDroidApp.VERSION, TopoDroidUtil.getDateString("yyyy.MM.dd"), info.getDeclination() ); // FIXME DECLINATION
       out.printf("0\nSECTION\n2\nHEADER\n");
       out.printf("9\n$ACADVER\n1\nAC1006\n");
       out.printf("9\n$INSBASE\n");
@@ -3675,7 +3693,7 @@ class TDExporter
       }
       pw.format("Couleur 0,0,0\r\n\r\n");
       
-      pw.format(Locale.US, "Param Deca Degd Clino Degd %.4f Dir,Dir,Dir Arr Inc 0,0,0\r\n\r\n", info.declination );
+      pw.format(Locale.US, "Param Deca Degd Clino Degd %.4f Dir,Dir,Dir Arr Inc 0,0,0\r\n\r\n", info.getDeclination() ); // FIXME DECLINATION
 
       AverageLeg leg = new AverageLeg(0);
       DBlock ref_item = null;

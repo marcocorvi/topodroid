@@ -69,6 +69,7 @@
     <string name="failed_snap_to_line">Nincs közeli vonal-pont, melyhez a terület határa illeszthető</string>
     <string name="failed_snap_to_point">Nincs közeli pont, amihez a pont illeszthető</string>
     <string name="failed_snap_to_splays">Nincs közeli segédpont, amihez a vonal illeszthető</string>
+    <!-- TODO string name="failed_append_to_line">Failed to append to another line</string -->
 
     <string name="calibration_title">Eszközök kalibrálása</string>
     <string name="calibration_length">Mérőszalag</string>
@@ -351,6 +352,7 @@
     <string name="popup_sharp_pt">Szakasz kiegyenesítése</string>
     <string name="popup_curve_pt">Szakasz simítása</string>
     <string name="popup_remove_pt">Pont eltávolítása</string>
+    <!-- TODO string name="popup_append_line">Append to line</string -->
 
     <string name="popup_erase_all">Minden törlése</string>
     <string name="popup_erase_point">Pontok törlése</string>

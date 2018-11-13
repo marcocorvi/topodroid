@@ -218,6 +218,41 @@ class Selection
     return spmin;
   }
 
+  // get the nearest endpoint of a line having the same type as that of sp
+  // @param sp   selection point (hot item)
+  // @param x,y  point coords
+  // @param dmin maximum acceptable point-distance
+  // @param linetype type of the line
+  // FIXME this is called with dmin = 10f
+  private SelectionPoint getBucketNearestLineEndPoint(SelectionPoint sp, float x, float y, float dmin, int linetype )
+  {
+    if ( sp.type() != DrawingPath.DRAWING_PATH_LINE ) return null;
+    DrawingLinePath line1 = (DrawingLinePath)sp.mItem;
+    SelectionPoint spmin = null;
+    float x0 = sp.X();
+    float y0 = sp.Y();
+    for ( SelectionBucket bucket : mBuckets ) {
+      if ( bucket.contains( x0, y0, dmin, dmin ) ) {
+        for ( SelectionPoint sp2 : bucket.mPoints ) {
+          if ( sp == sp2 ) continue;
+	  if ( sp2.type() != DrawingPath.DRAWING_PATH_LINE ) continue;
+          DrawingLinePath line2 = (DrawingLinePath)sp2.mItem;
+	  if ( line2 == line1 ) continue;
+	  if ( line2.mLineType != linetype ) continue;
+	  LinePoint pt2 = sp2.mPoint;
+	  if ( pt2 != line2.mFirst && pt2 != line2.mLast ) continue;
+
+          float d = sp2.distance( x, y );
+          if ( d < dmin ) {
+            dmin = d;
+            spmin = sp2;
+          }
+        }
+      }
+    }
+    return spmin;
+  }
+
   SelectionPoint getNearestPoint( SelectionPoint sp, float x, float y, float dmin )
   {
     SelectionPoint spmin = getBucketNearestPoint( sp, x, y, dmin );
@@ -225,6 +260,27 @@ class Selection
 
     for ( SelectionPoint sp1 : mPoints ) {
       if ( sp == sp1 ) continue;
+      float d = sp1.distance( x, y );
+      if ( d < dmin ) {
+        dmin = d;
+        spmin = sp1;
+      }
+    }
+    return spmin;
+  }
+
+  SelectionPoint getNearestLineEndPoint( SelectionPoint sp, float x, float y, float dmin, int linetype )
+  {
+    SelectionPoint spmin = getBucketNearestLineEndPoint( sp, x, y, dmin, linetype );
+    if ( spmin != null ) return spmin;
+
+    for ( SelectionPoint sp1 : mPoints ) {
+      if ( sp == sp1 ) continue;
+      if ( sp1.type() != DrawingPath.DRAWING_PATH_LINE ) continue;
+      DrawingLinePath line1 = (DrawingLinePath)sp1.mItem;
+      if ( line1.mLineType != linetype ) continue;
+      LinePoint pt1 = sp1.mPoint;
+      if ( pt1 != line1.mFirst && pt1 != line1.mLast ) continue;
       float d = sp1.distance( x, y );
       if ( d < dmin ) {
         dmin = d;
