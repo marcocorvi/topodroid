@@ -129,6 +129,10 @@
       android:orientation="horizontal" 
       android:layout_marginTop="@dimen/marginvbig"
       >
+      <Button android:id="@+id/button_clipboard"
+        style="@style/button_default"
+        android:text="@string/button_clipboard"
+        />
       <Button android:id="@+id/button_view"
         style="@style/button_default"
         android:text="@string/button_view"

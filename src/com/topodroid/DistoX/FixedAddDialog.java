@@ -28,6 +28,10 @@ import android.view.View;
 // import android.view.ViewGroup.LayoutParams;
 // import android.view.KeyEvent;
 
+import android.text.ClipboardManager;
+import android.content.ClipData;
+import android.content.ClipDescription;
+
 import android.inputmethodservice.KeyboardView;
 // import android.widget.Toast;
 // import android.widget.TextView;
@@ -54,6 +58,7 @@ class FixedAddDialog extends MyDialog
   private Button   mBtnOK;
   private Button   mBtnProj4;
   private Button   mBtnView;
+  private Button   mBtnClipboard;
 
   private double  mLng, mLat, mHEll, mHGeo;
   private boolean mNorth, mEast;
@@ -118,6 +123,8 @@ class FixedAddDialog extends MyDialog
     mBtnProj4.setOnClickListener( this );
     mBtnView = (Button) findViewById(R.id.button_view);
     mBtnView.setOnClickListener( this );
+    mBtnClipboard = (Button) findViewById(R.id.button_clipboard);
+    mBtnClipboard.setOnClickListener( this );
   }
 
   @Override
@@ -184,6 +191,26 @@ class FixedAddDialog extends MyDialog
         Uri uri = Uri.parse( "geo:" + mLat + "," + mLng + "?q=" + mLat + "," + mLng );
         mContext.startActivity( new Intent( Intent.ACTION_VIEW, uri ) );
       }
+    } else if ( b == mBtnClipboard ) {
+      ClipboardManager cm = (ClipboardManager)mContext.getSystemService( Context.CLIPBOARD_SERVICE );
+      boolean toast = true;
+      if ( cm != null ) {
+        CharSequence text = cm.getText();
+	if ( text != null ) {
+          String str = text.toString();
+          String[] val = str.split(",");
+          if ( val.length > 1 ) {
+	    toast = false;
+            mETlng.setText( val[0] );
+            mETlat.setText( val[1] );
+            if ( val.length > 2 ) mEThell.setText( val[2] );
+          }
+        }
+      }
+      if ( toast ) {
+        TDToast.make( R.string.empty_clipboard );
+      }
+      return;
     } else if ( b == mBtnProj4 ) {
       mParent.getProj4Coords( this );
       return;
