@@ -974,16 +974,18 @@
   <string name="pref_calib_shot_download_summary">Скачивать калибровочные замеры сразу после измерений</string>
   <!-- UNUSED string name="pref_bootloader_title">Загрузчик</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Вкл Загрузчик</string -->
-  <string name="pref_mkeyboard_title">Клавиатура</string>
+  <string name="pref_mkeyboard_title">Нестандартная клавиатура</string>
   <string name="pref_mkeyboard_summary">Использовать нестандартные клавиатуры </string>
   <string name="pref_no_cursor_title">Без курсора</string>
   <string name="pref_no_cursor_summary">Отключить отображение курсора для сторонних клавиатур.</string>
   <string name="pref_local_help_title">Язык руководства пользователя</string>
-  <string name="pref_local_help_summary">Переключить язык руководства пользователя</string>
+  <string name="pref_local_help_summary">Переключить язык руководства пользователя [требуется интернет для скачивания]</string>
   <string name="pref_cosurvey_title">Совместная съёмка</string>
   <string name="pref_cosurvey_summary">Вкл/Выкл Совместную съёмку</string>
+  <string name="pref_import_datamode_title">Импортируемый формат</string>
+  <string name="pref_import_datamode_summary">Формат данных импортируемой съёмки</string>
   <string name="pref_export_shots_title">Формат экспорта данных</string>
-  <string name="pref_export_shots_summary">Формат экспорта данных по умолчанию</string>
+  <string name="pref_export_shots_summary">Формат экспорта данных топосъёмки по умолчанию</string>
   <string name="pref_export_plot_title">Формат экспорта абрисов</string>
   <string name="pref_export_plot_summary">Формат экспорта абрисов по умолчанию</string>
   <string name="pref_therion_maps_title"> Карты Therion в до съёмки</string>
@@ -994,8 +996,8 @@
   <string name="pref_size_buttons_summary">Размер кнопок панели на инструментов</string>
   <!-- UNUSED string name="pref_size_buttons_message">Введите размер кнопок панели инструментов [pixels]</string -->
 
-  <string name="pref_bezier_step_title">Расстояние между точками</string>
-  <string name="pref_bezier_step_summary">Расстояние между точками при экспорте линий [м]</string>
+  <string name="pref_bezier_step_title">Макс. расстояние между точками</string>
+  <string name="pref_bezier_step_summary">Маскисмальное расстояние между точками при апроксимации кривых полилиниями [м]</string>
   <string name="pref_leg_shots_title">Мин. кол-во измерений между пикетами</string>
   <string name="pref_leg_shots_summary">Количество одинаковых повторяющихся замеров на отрезке между пикетами</string>
   <string name="pref_recent_timeout_title">Время свежести замеров</string>
@@ -1016,8 +1018,8 @@
   <string name="pref_survex_eol_summary">Формат окончания строки Survex/Topo</string>
   <string name="pref_survex_splay_title">Конечный пикет луча Survex</string>
   <string name="pref_survex_splay_summary">Добавить пикет ДО к боковым замерам при экспорте в формат Survex</string>
-  <string name="pref_survex_lrud_title">Survex ЛПВН</string>
-  <string name="pref_survex_lrud_summary">Добавить ЛПВН в при экспорте в формат Survex</string>
+  <string name="pref_survex_lrud_title">Survex/Therion ЛПВН</string>
+  <string name="pref_survex_lrud_summary">Расчитать ЛПВН в при экспорте в формат Survex/Therion</string>
   <string name="pref_svg_grid_title">Сетка в SVG</string>
   <string name="pref_svg_grid_summary">Добавить сетку в SVG экспорт</string>
   <string name="pref_svg_splays_title">Сплеи в SVG</string>
@@ -1082,7 +1084,7 @@
   <string name="pref_shot_data_title">НАСТРОЙКИ ДАННЫХ ПИКЕТОВ</string>
   <string name="pref_shot_units_title">ЕДИНИЦЫ ИЗМЕРЕНИЯ</string>
   <string name="pref_cwd_title">Рабочий каталог</string>
-  <!-- UNUSED string name="pref_cwd_summary">TopoDroid корневой каталог</string -->
+  <!-- UNUSED string name="pref_cwd_summary">Каталог в котором TopoDroid хранит съёмки</string -->
   <string name="pref_pt_color_map_title">Преобразование цветов PocketTopo</string>
   <string name="pref_pt_color_map_summary">Соответствие цветов PocketTopo типам объектов в TopoDtoid</string>
   <string name="pref_text_size_title">Размер текста</string>
@@ -1119,12 +1121,12 @@
   <string name="pref_accel_thr_title">Максимальное допустимое ускорение</string>
   <string name="pref_accel_thr_summary">Максимальное допустимое ускорение при замере</string>
   <string name="pref_mag_thr_title">Максимальная допустимая намагниченность</string>
-  <string name="pref_mag_thr_summary">Максимальное допустимая величина магнитного поля при замере</string>
-  <string name="pref_dip_thr_title">Максимально допустимый магнитный угол</string>
+  <string name="pref_mag_thr_summary">Процент допустимого отклонения величины магнитного поля при измерении</string>
+  <string name="pref_dip_thr_title">Допустимый отклонения магнитного угла</string>
   <string name="pref_dip_thr_summary">Максимальное допустимое отклонениие угла магнитного поля при замере</string>
 
   <string name="pref_leg_title">Допустимое расхождение повторных измерений</string>
-  <string name="pref_leg_summary">Максимально допустимое расхождение в повторных измерений чтобы считать их замером между пикетами</string>
+  <string name="pref_leg_summary">Максимально допустимое расхождение повторных измерений чтобы считать их замером между пикетами</string>
   <string name="pref_max_shot_title">Максимальная длина замера</string>
   <string name="pref_max_shot_summary">Значение длины измерения при превышении которой отображается предупреждение [м]</string>
   <string name="pref_min_leg_title">Минимальная длина замера</string>
@@ -1134,7 +1136,7 @@
   <string name="pref_backshot_title">Обратный замер DistoX</string>
   <string name="pref_backshot_summary">DistoX в режиме обратных замеров</string>
   <string name="pref_prev_next_title">Кнопки Пред/След</string>
-  <string name="pref_prev_next_summary">Кнопки Предыдущий/Следующий в диалоге измерений</string>
+  <string name="pref_prev_next_summary">Показывать кнопки Предыдущий/Следующий в диалоге замеров</string>
   <!-- UNUSED string name="pref_mag_anomaly_title">Магнитная Аномалия</string -->
   <!-- UNUSED string name="pref_mag_anomaly_summary">Компенсация локальной Магнитной Аномалии</string -->
   <string name="pref_azimuth_manual_title">Устанавливать "развертку" вручную</string>
@@ -1146,7 +1148,7 @@
   <string name="pref_ethr_title">Порог угла вертикальности сплеев</string>
   <string name="pref_ethr_summary">Максимальный угол от вертикали для вертикальной развертки сплея на разрезе [град]</string>
   <string name="pref_vthr_title">Порог вертикальности отрезков</string>
-  <string name="pref_vthr_summary">>Максимальный угол отрезка относительно горизонта для перехода от ЛПВН к ЗВСЮ</string>
+  <string name="pref_vthr_summary">Максимальный угол отрезка относительно горизонта для перехода от ЛПВН к ЗВСЮ</string>
 
   <string name="pref_plan_vthr_title">Порог угла сплеев в плане</string>
   <string name="pref_plan_vthr_message">Максимальный угол от горизонта для отображения сплеев в плане</string>
@@ -1170,7 +1172,7 @@
   <string name="pref_thumbnail_title">Размер миниатюры</string>
   <string name="pref_thumbnail_summary">Размер миниатюры фотографии </string>
   <string name="pref_shot_timer_title">Таймер задержки измерения</string>
-  <string name="pref_shot_timer_summary">Секунд до замера направления на пикет</string>
+  <string name="pref_shot_timer_summary">Время задержки при измерении направления на пикет [c]</string>
   <string name="pref_beep_volume_title">Громкость сигнала таймера</string>
   <string name="pref_beep_volume_summary">Проценты громкости сигнала таймера</string>
   <string name="pref_drawing_unit_title">Размер символов точек</string>
@@ -1184,13 +1186,13 @@
   <string name="pref_linecontinue_title">Продолжить линию</string>
   <string name="pref_linecontinue_summary">Способ продолжения рисования линий по-умолчанию</string>
   <string name="pref_lineacc_title">Точность кривых Безье</string>
-  <string name="pref_lineacc_summary">Точность кубической интерполяции в отрисовке кривых Безье</string>
+  <string name="pref_lineacc_summary">Точность кубической интерполяции при отрисовке кривых Безье</string>
   <string name="pref_linecorner_title">Угол Безье</string>
   <string name="pref_linecorner_summary">Порог чувствительности угла в кривых Безье</string>
   <string name="pref_calib_algo_title">Алгоритм</string>
   <string name="pref_calib_algo_summary">Алгоритм вычисления калибровки</string>
   <string name="pref_group_by_title">Группирование данных калибровки</string>
-  <string name="pref_group_by_summary">Способ группирования замеров калибровки по направдениям</string>
+  <string name="pref_group_by_summary">Способ группирования замеров калибровки по направлениям</string>
   <string name="pref_group_title">Допуск в группе</string>
   <string name="pref_group_summary">Допуск для измерений в одной группе</string>
   <string name="pref_error_title">Ошибка</string>
@@ -1225,8 +1227,8 @@
   <string name="pref_therion_splays_summary">Добавить линии боковых замеров в экспортрованный абрис .th2</string>
   <string name="pref_autoStations_title">Точки пикетов в абрисе Therion</string>
   <string name="pref_autoStations_summary">Добавлять точки пикетов в экспортированный абрис .th2</string>
-  <string name="pref_loopClosure_title">Закрывать петли автоматически</string>
-  <string name="pref_loopClosure_summary">Разбрасывание невязок в петле</string>
+  <string name="pref_loopClosure_title">Закрывать петли</string>
+  <string name="pref_loopClosure_summary">Автоматически компенсировать невязки при закрытии петли</string>
   <!-- UNUSED string name="pref_splayExtend_title">Развертка бокового замера</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Расчитывать развертку бокового замера</string -->
   <string name="pref_swapLR_title">Развернуть ЛП в Compass</string>
