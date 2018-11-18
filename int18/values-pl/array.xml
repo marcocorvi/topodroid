@@ -3,24 +3,24 @@
 <resources>
 
   <string-array name="lineContinue">
-     <item name="none">none</item>
-     <item name="start">join with start point</item>
-     <item name="end">join with end point</item>
-     <item name="both">join with both ends</item>
-     <item name="continue">continue</item>
+     <item name="none">Żaden</item>
+     <item name="start">Poczatek</item>
+     <item name="end">Koniec</item>
+     <item name="both">Oba punkty</item>
+     <item name="continue">Kontynuuj</item>
   </string-array>
 
   <string-array name="unitGrid">
-     <item name="meter">meter</item>
-     <item name="yard">yard</item>
-     <item name="two_tf">2 feet</item>
+     <item name="meter">Metry</item>
+     <item name="yard">Jardy</item>
+     <item name="two_tf">Stopy</item>
      <item name="ten_cm">10 cm</item>
   </string-array>
 
   <string-array name="loopClosure">
-     <item name="none">None</item>
-     <item name="normal">Normal</item>
-     <item name="triangles">Triangles</item>
+     <item name="none">Żaden</item>
+     <item name="normal">Normalny</item>
+     <item name="triangles">Trójkąty</item>
   </string-array>
 
   <string-array name="survexEol">
@@ -29,7 +29,7 @@
   </string-array>
 
   <string-array name="wallsType">
-     <item name="none">None</item>
+     <item name="none">Żaden</item>
      <item name="convex">Convex</item>
      <item name="delaunay">Delaunay</item>
   </string-array>
@@ -40,14 +40,14 @@
   </string-array>
 
   <string-array name="zoomCtrl">
-     <item name="0">Off</item>
-     <item name="1">Temporary</item>
-     <item name="2">Permanent</item>
+     <item name="0">Wyłączony</item>
+     <item name="1">Tymczasowy</item>
+     <item name="2">Stały</item>
   </string-array>
 
   <string-array name="stationNames">
-     <item name="alpha">Alphanumeric</item>
-     <item name="number">Numeric</item>
+     <item name="alpha">Alfanumeryczny</item>
+     <item name="number">Numeryczny</item>
   </string-array>
 
   <!-- UNUSED string-array name="extend_name">
@@ -58,13 +58,13 @@
   </string-array -->
 
   <string-array name="importDatamode">
-     <item name="normal">normal</item>
-     <item name="diving">diving</item>
+     <item name="normal">Normalny</item>
+     <item name="diving">Nurkowy</item>
   </string-array>
 
   <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
   <string-array name="exportShots">
-     <item name="none">none</item>
+     <item name="none">Żaden</item>
      <item name="therion">Therion</item>
      <item name="compass">Compass</item>
      <item name="csurvey">cSurvey</item>
@@ -86,7 +86,7 @@
   </string-array>
 
   <string-array name="exportPlot">
-     <item name="none">none</item>
+     <item name="none">Żaden</item>
      <item name="therion">Therion</item>
      <item name="csurvey">cSurvey</item>
      <item name="dxf">DXF</item>
@@ -104,31 +104,31 @@
   </string-array -->
 
   <string-array name="extraButtons">
-     <item name="basic">Basic</item>
-     <item name="normal">Normal</item>
-     <item name="advanced">Advanced</item>
-     <item name="expert">Expert</item>
-     <item name="tester">Tester</item>
+     <item name="basic">Podstawowy</item>
+     <item name="normal">Normalny</item>
+     <item name="advanced">Zaawansowany</item>
+     <item name="expert">Ekspert</item>
+     <item name="tester">Funkcje testowe</item>
      <!-- item name="complete">Complete</item -->
   </string-array>
 
   <string-array name="sizeButtons">
-     <item name="small">Small</item>
-     <item name="normal">Normal</item>
-     <item name="medium">Medium</item>
-     <item name="large">Large</item>
-     <item name="huge">Huge</item>
+     <item name="small">Małe</item>
+     <item name="normal">Normalne</item>
+     <item name="medium">Średnie</item>
+     <item name="large">Duże</item>
+     <item name="huge">Ogromne</item>
   </string-array>
 
   <string-array name="connMode">
-     <item name="batch">On-demand</item>
-     <item name="continuous">Continuous</item>
+     <item name="batch">Na żądanie</item>
+     <item name="continuous">Ciągły</item>
      <item name="multi">Multi</item>
   </string-array>
 
   <string-array name="sockType">
-     <item name="default">Default</item>
-     <item name="Insecure">Insecure</item>
+     <item name="default">Domyślny</item>
+     <item name="Insecure">Niezabezpeczony</item>
      <!-- item name="Port">Port</item -->
      <!-- item name="InsecurePort">Insecure/Port</item -->
   </string-array>
@@ -138,52 +138,52 @@
        and consistent thru all the arrays on the names
   -->
   <string-array name="surveyStations">
-     <item name="no">No</item>
-     <item name="for">Splays, forward leg</item>
-     <item name="back">Splays, backward leg</item>
-     <item name="backsight">Backsight</item>
-     <item name="tripod">Tripod</item>
-     <item name="anomaly">Magn. anomaly</item>
-     <item name="for2">Forward leg, splays</item>
-     <item name="back2">Backward leg, splays</item>
+     <item name="no">Nie</item>
+     <item name="for">Domiary, w pomiary w przód</item>
+     <item name="back">Domiary, pomiary w tył</item>
+     <item name="backsight">Celownik??</item>
+     <item name="tripod">Statyw</item>
+     <item name="anomaly">Niepewność magnetyczna</item>
+     <item name="for2">Pomiary w przód, domiary</item>
+     <item name="back2">Pomiary w tył, domiary</item>
      <item name="toporobot">TopoRobot</item>
   </string-array>
 
   <string-array name="surveyStationsB">
-     <item name="no">No</item>
-     <item name="for">Splays, forward leg</item>
-     <item name="back">Splays, backward leg</item>
-     <item name="backsight">Backsight</item>
+     <item name="no">Nie</item>
+     <item name="for">Domiary, w pomiary w przód</item>
+     <item name="back">Domiary, pomiary w tyłg</item>
+     <item name="backsight">Celownik??</item>
   </string-array>
   <string-array name="surveyStationsN">
-     <item name="no">No</item>
-     <item name="for">Splays, forward leg</item>
-     <item name="back">Splays, backward leg</item>
-     <item name="backsight">Backsight</item>
+     <item name="no">Nie</item>
+     <item name="for">Domiary, w pomiary w przód</item>
+     <item name="back">Domiary, pomiary w tył</item>
+     <item name="backsight">Celownik??</item>
   </string-array>
   <string-array name="surveyStationsA">
-     <item name="no">No</item>
-     <item name="for">Splays, forward leg</item>
-     <item name="back">Splays, backward leg</item>
-     <item name="backsight">Backsight</item>
-     <item name="tripod">Tripod</item>
+     <item name="no">Nie</item>
+     <item name="for">Domiary, w pomiary w przód</item>
+     <item name="back">Domiary, pomiary w tył</item>
+     <item name="backsight">Celownik??</item>
+     <item name="tripod">Statyw</item>
   </string-array>
   <string-array name="surveyStationsE">
-     <item name="no">No</item>
-     <item name="for">Splays, forward leg</item>
-     <item name="back">Splays, backward leg</item>
-     <item name="backsight">Backsight</item>
-     <item name="tripod">Tripod</item>
-     <item name="anomaly">Magn. anomaly</item>
-     <item name="for2">Forward leg, splays</item>
-     <item name="back2">Backward leg, splays</item>
+     <item name="no">Nie</item>
+     <item name="for">Domiary, w pomiary w przód</item>
+     <item name="back">Domiary, pomiary w tył</item>
+     <item name="backsight">Celownik??</item>
+     <item name="tripod">Statyw</item>
+     <item name="anomaly">Niepewność magnetyczna</item>
+     <item name="for2">Pomiary w przód, domiary</item>
+     <item name="back2">Pomiary w tył, domiary</item>
   </string-array>
 
   <string-array name="pickerType">
-     <item name="recent">Most recent</item>
-     <item name="list">List</item>
-     <item name="grid">Grid</item>
-     <item name="grid3">Triple grid</item>
+     <item name="recent">Najnowszy</item>
+     <item name="list">Lista</item>
+     <item name="grid">Siatka</item>
+     <item name="grid3">Potrójna siatka</item>
   </string-array>
 
   <!-- string-array name="sectionStations">
@@ -206,9 +206,9 @@
   </string-array -->
 
   <string-array name="deviceBT">
-     <item name="0">Disabled</item>
-     <item name="1">Check on start</item>
-     <item name="2">Enabled</item>
+     <item name="0">Nieaktywny</item>
+     <item name="1">Sprawdzaj przy starcie</item>
+     <item name="2">Aktywny</item>
   </string-array>
 
   <!-- string-array name="exportType">
@@ -219,21 +219,21 @@
   </string-array -->
 
   <string-array name="lineStyle">
-     <item name="none">Fine</item>
-     <item name="two">Normal</item>
-     <item name="three">Coarse</item>
-     <item name="bezier">Bezier</item>
+     <item name="none">Dorbna</item>
+     <item name="two">Normalna</item>
+     <item name="three">Zgrubna</item>
+     <item name="bezier">Beziera</item>
   </string-array>
 
   <string-array name="groupBy">
-     <item name="distance">Distance</item>
-     <item name="four">Four at a time</item>
-     <item name="only16">Only first 16</item>
+     <item name="distance">Dystans</item>
+     <item name="four">Cztery na raz</item>
+     <item name="only16">Tylko pierwsze 16</item>
   </string-array>
 
   <string-array name="unitLength">
-     <item name="meters">meters</item>
-     <item name="feet">feet</item>
+     <item name="meters">Metry</item>
+     <item name="feet">Stopy</item>
   </string-array>
   <!-- string-array name="unitLengthNumber">
      <item name="meters">1</item>
@@ -241,32 +241,32 @@
   </string-array -->
 
   <string-array name="unitAngle">
-     <item name="degrees">decimal degrees</item>
-     <item name="grads">decimal grads</item>
+     <item name="degrees">Stopnie dziesiętne</item>
+     <item name="grads">Grady</item>
   </string-array>
 
   <string-array name="unitLocation">
-     <item name="degrees">decimal degrees</item>
-     <item name="ddmmss">degree, minute, seconds</item>
+     <item name="degrees">Stopnie dziesiętne</item>
+     <item name="ddmmss">stopnie, minuty, sekundy</item>
   </string-array>
 
   <string-array name="calibAlgo">
      <item name="auto">Auto</item>
-     <item name="linear">Linear</item>
-     <item name="nonlinear">Non-linear</item>
+     <item name="linear">Liniowy</item>
+     <item name="nonlinear">Nieliniowy</item>
      <!-- item name="minimum">Minimum</item -->
   </string-array>
 
   <string-array name="rawCData">
-     <item name="none">None</item>
-     <item name="dec">Decimal</item>
-     <item name="hex">Hex</item>
+     <item name="none">Żaden</item>
+     <item name="dec">Dziesiętny</item>
+     <item name="hex">Szesnastkowy</item>
   </string-array>
 
   <string-array name="modelType">
-     <item name="none">None</item>
-     <item name="convexhull">Convex Hull</item>
-     <item name="powercrust">Powercrust</item>
+     <item name="none">Żaden</item>
+     <item name="convexhull">Kadłub wypukły</item>
+     <item name="powercrust">Skorupa</item>
   </string-array>
 
 </resources>
