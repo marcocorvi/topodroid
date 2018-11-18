@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string>
-    <string name="no_manual">Cannot retrieve user manual from the web</string>
-    <string name="user_man_ok">Installed user manual translation</string>
-    <string name="user_man_fail">Failed to install user manual translation</string>
+    <string name="no_manual">Nie można pobrać podręcznika użytkownika z Internetu</string>
+    <string name="user_man_ok">Zainstalowane tłumaczenie podręcznika użytkownika</string>
+    <string name="user_man_fail">Nie można zainstalować tłumaczenia instrukcji obsługi</string>
 
     <string name="app_name">TopoDroid</string>
-    <string name="double_back">Click BACK again to exit</string>
+    <string name="double_back">Kliknij ponownie aby zakończyć</string>
 
     <!-- UNUSED string name="version_ask">Updating to a new version of TopoDroid.\nDo you want to reinstall drawing tools?</string -->
-    <string name="symbols_ask">Install drawing tools v.%1$s?\n(Current v.%2$s)</string>
+    <string name="symbols_ask">Zainstaluj narzędzia do rysowania v.%1$s?\n(Obecnie v.%2$s)</string>
 
-    <string name="setup_textsize_title">TopoDroid setup. Text size</string>
-    <string name="setup_buttonsize_title">TopoDroid setup. Button size</string>
-    <string name="setup_drawingunit_title">TopoDroid setup. Icons size</string>
-    <string name="setup_done_title">TopoDroid setup. Done</string>
+    <string name="setup_textsize_title">Konfiguracja TopoDroid. Rozmiar czcionki</string>
+    <string name="setup_buttonsize_title">Konfiguracja TopoDroid. Rozmiar przycisku</string>
+    <string name="setup_drawingunit_title">Konfiguracja TopoDroid. Rozmiar ikon</string>
+    <string name="setup_done_title">Konfiguracja TopoDroid. Gotowe</string>
 
     <string name="setup_textsize">Set the text size.\nYou can always change this later through the main window settings.</string>
     <string name="setup_buttonsize">Set the button size.\nYou can always change this later through the main window settings.</string>
