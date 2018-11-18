@@ -525,13 +525,13 @@
     <string name="stat_length">Длина %1$.1f %2$s</string>
     <string name="stat_extlen">Длина в 3D %1$.1f %2$s</string>
     <string name="stat_projlen">Длина в плане %1$.1f %2$s</string>
-	<string name="stat_cycle">Циклов %1$d</string>
+    <string name="stat_cycle">Циклов %1$d</string>
     <string name="stat_loop">Петли %1$d</string>
     <string name="stat_origin">Нулевой пикет: %1$s</string>
     <string name="stat_azimuth">Азимут проекции разреза-развёртки: %1$.1f</string>
-    <string name="stat_shot">Пикеты  %1$d,   Дублированные %2$d,   Поверхность %3$d</string>
-    <string name="stat_splay">Сплеев%1$d</string>
-    <string name="stat_station">Пикеты %1$d</string>
+    <string name="stat_shot">Замеров:  %1$d,   Дублированные %2$d,   Поверхность %3$d</string>
+    <string name="stat_splay">Сплеев: %1$d</string>
+    <string name="stat_station">Пикетов: %1$d</string>
     <string name="stat_surface">Поверхн. пикеты %1$d длина: %2$.1f %3$s</string>
     <string name="stat_wens">З %1$.0f  В %2$.0f  С %3$.0f  Ю %4$.0f [%5$s]"</string>
     <string name="stat_angle_error">Угловые ошибки %1$.2f ± %2$.2f"</string>
