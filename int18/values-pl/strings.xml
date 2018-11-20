@@ -16,34 +16,34 @@
     <string name="setup_drawingunit_title">Konfiguracja TopoDroid. Rozmiar ikon</string>
     <string name="setup_done_title">Konfiguracja TopoDroid. Gotowe</string>
 
-    <string name="setup_textsize">Set the text size.\nYou can always change this later through the main window settings.</string>
-    <string name="setup_buttonsize">Set the button size.\nYou can always change this later through the main window settings.</string>
-    <string name="setup_drawingunit">Set the sketch icon size.\nYou can always change this later through the sketch window settings.</string>
-    <string name="setup_done">The basic setup is done.\n\n
+    <string name="setup_textsize">Ustaw rozmiar tekstu.\nZawsze możesz to zmienić później poprzez ustawienia głównego okna.</string>
+    <string name="setup_buttonsize">Ustaw rozmiar przycisku.\nYou can always change this later through the main window settings.</string>
+    <string name="setup_drawingunit">Set the sketch icon size.\nZawsze możesz to zmienić później poprzez ustawienia szkicu.</string>
+    <string name="setup_done">Podstawowa konfiguracja została zakończona.\n\n
 If you experience problems with the DistoX connection, try and set the insecure socket.\n\n
 There are other settings for the presentation of the sketchs (icon size, label size, line width etc.); you can set them later.\n
     </string>
     <!-- DO NOT TRANSLATE string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet</string -->
 
-    <string name="POINT">POINT</string>
-    <string name="LINE">LINE</string>
-    <string name="AREA">AREA</string>
-    <string name="HELP">HELP</string>
-    <string name="STATION">STATION </string>
-    <string name="UP">UP</string>
-    <string name="DOWN">DOWN</string>
+    <string name="POINT">Punkt</string>
+    <string name="LINE">Linia</string>
+    <string name="AREA">Obszar</string>
+    <string name="HELP">Pomoc</string>
+    <string name="STATION">Stacja </string>
+    <string name="UP">Do góry</string>
+    <string name="DOWN">Na dół</string>
 
     <string name="xsplay">X</string>
     <string name="hsplay">H</string>
     <string name="vsplay">V</string>
 
-    <string name="cut">CUT</string>
-    <string name="copy">COPY</string>
-    <string name="paste">PASTE</string>
-    <string name="copied">Copied %1$s to clipboard</string>
+    <string name="cut">Wytnij</string>
+    <string name="copy">Kopiuj</string>
+    <string name="paste">Wklej</string>
+    <string name="copied">Skopiowano %1$s do schowka</string>
 
-    <string name="memoryA3">DistoX A3 memory</string>
-    <string name="memoryX310">DistoX X310 memory</string>
+    <string name="memoryA3">pamięć DistoX A3</string>
+    <string name="memoryX310">pamięć DistoX X310</string>
     <!-- UNUSED string name="memory_data">DistoX data</string -->
 
     <string name="thp_user">user</string>
