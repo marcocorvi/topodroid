@@ -252,7 +252,7 @@
     <!-- UNUSED string name="hidden_add">Скрыть нитку хода до этого пикета</string -->
     <!-- UNUSED string name="hidden_del">Показать нитку хода до этого пикета</string -->
     <string name="hidden_show">Показать нитку хода после этого пикета</string>
-    <!-- UNUSED string name="splays_toggle">Показать/скрыть бок. замеры</string -->
+    <!-- UNUSED string name="splays_toggle">Показать/скрыть сплеи</string -->
     <string name="splays_on_off">Вкл/Выкл бок. замер</string>
     <string name="splays">бок. замеры</string>
     <string name="splays_show">Показать бок. замеры</string>
@@ -397,7 +397,7 @@
     <!-- UNUSED string name="picture_no_station">Требуется номер пикета</string -->
     <string name="plot_delete">Удалить абрис ?</string>
     <string name="item_delete">Удалить пункт %1$s ?</string>
-    <string name="splay_delete">Удалить бок. замер %1$s ?</string>
+    <string name="splay_delete">Удалить сплей %1$s ?</string>
     <string name="plot_duplicate_name">Абрис с таким названием уже существует</string>
     <string name="plot_dangling">Непривязанный абрис</string>
     <!-- UNUSED string name="plot_name">Название абриса</string -->
@@ -630,8 +630,8 @@
     <string name="xsection">Сечение</string>
 
     <string name="mode_leg">Нитка хода</string>
-    <string name="mode_splay">Бок. замеры</string>
-    <string name="mode_latest">Последние Бок. замеры</string>
+    <string name="mode_splay">Сплеи</string>
+    <string name="mode_latest">Последние сплеи</string>
     <string name="mode_station">Пикеты</string>
     <string name="mode_grid">Сетка</string>
     <string name="mode_fixed">Сдвиг относительно нитки</string>
@@ -990,12 +990,12 @@
   <string name="pref_export_shots_summary">Формат экспорта данных топосъёмки по умолчанию</string>
   <string name="pref_export_plot_title">Формат экспорта абрисов</string>
   <string name="pref_export_plot_summary">Формат экспорта абрисов по умолчанию</string>
-  <string name="pref_therion_maps_title"> Карты Therion в до съёмки</string>
+  <string name="pref_therion_maps_title"> Карты Therion до данных съёмки</string>
   <string name="pref_therion_maps_summary"> При экспорте ставить блок карт Therion (секция map) до данных съёмки</string>
   <string name="pref_extra_buttons_title">Уровень функционала</string>
   <string name="pref_extra_buttons_summary">Уровень доступного функционала программы</string>
   <string name="pref_size_buttons_title">Размер кнопок</string>
-  <string name="pref_size_buttons_summary">Размер кнопок панели на инструментов</string>
+  <string name="pref_size_buttons_summary">Размер кнопок на панели инструментов</string>
   <!-- UNUSED string name="pref_size_buttons_message">Введите размер кнопок панели инструментов [pixels]</string -->
 
   <string name="pref_bezier_step_title">Макс. расстояние между точками</string>
@@ -1010,7 +1010,7 @@
   <string name="pref_compass_splays_summary">Экспортировать боковые замеры в формат Compass</string>
   <!-- UNUSED string name="pref_trobot_names_title">Номера пикетов TopoRobot</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Номера пикетов в стиле TopoRobot</string -->
-  <string name="pref_ortho_lrud_title">Мин. угол бок. замера для расчета ЛПВН</string>
+  <string name="pref_ortho_lrud_title">Мин. угол сплея для расчета ЛПВН</string>
   <string name="pref_ortho_lrud_summary">Минимальный угол между сплеем и ниткой хода для расчета ЛПВН при экспорте.</string>
   <string name="pref_lrud_vertical_title">В-Н мин. наклон боковых замеров</string>
   <string name="pref_lrud_vertical_summary">Минимальный наклон сплеев относительно горизонта для расчета расстояний вверх/вниз при экспорте.</string>
@@ -1044,7 +1044,7 @@
   <string name="pref_svg_line_dir_summary">Добавить штрихи направления линии в SVG экспорт</string>
   <string name="pref_kml_stations_title">Экспорт пикетов в KML</string>
   <string name="pref_kml_stations_summary">Добавить пикеты в экспорт KML</string>
-  <string name="pref_kml_splays_title">Экспорт бок. замеров в KML</string>
+  <string name="pref_kml_splays_title">Экспорт сплеев в KML</string>
   <string name="pref_kml_splays_summary">Добавить боковые замеры в экспорт KML</string>
 
   <string name="pref_sock_type_title">Тип соединения</string>
@@ -1101,11 +1101,11 @@
   <string name="pref_pointing_message">Допуск касания/подъема для выбора точки</string>
   <string name="pref_dash_splay_title">Боковые замеры пунктиром на плане как на разрезе</string>
   <string name="pref_dash_splay_message">Боковые замеры показаны пунктиром на плане и разрезе по одинаковым критериям</string>
-  <string name="pref_vert_splay_title">Порог угла бок. замеров пунктиром на плане</string>
-  <string name="pref_vert_splay_message">Бок. замеры с наклоном больше порогового показаны на плане пунктиром</string>
-  <string name="pref_horiz_splay_title">Порог азимута бок. замеров пунктиром на разрезе</string>
+  <string name="pref_vert_splay_title">Порог угла сплеев пунктиром на плане</string>
+  <string name="pref_vert_splay_message">Сплеи с наклоном больше порогового показаны на плане пунктиром</string>
+  <string name="pref_horiz_splay_title">Порог азимута сплеев пунктиром на разрезе</string>
   <string name="pref_horiz_splay_message">Боковые замеры с разницей азимута к нитке хода больше заданого значения показаны пунктиром</string>
-  <string name="pref_section_splay_title">Порог угла бок. замеров пунктиром на сечении</string>
+  <string name="pref_section_splay_title">Порог угла сплеев пунктиром на сечении</string>
   <string name="pref_section_splay_message">Боковые замеры с углом к плоскости сечения больше заданого значения показаны пунктиром</string>
   <string name="pref_data_backup_title">Авто-экспорт данных</string>
   <string name="pref_data_backup_summary">Автоматический экспорт данных (требуется установить формат по умолчанию)</string>
@@ -1124,7 +1124,7 @@
   <string name="pref_accel_thr_summary">Максимальное допустимое ускорение при замере</string>
   <string name="pref_mag_thr_title">Максимальная допустимая намагниченность</string>
   <string name="pref_mag_thr_summary">Процент допустимого отклонения величины магнитного поля при измерении</string>
-  <string name="pref_dip_thr_title">Допустимый отклонения магнитного угла</string>
+  <string name="pref_dip_thr_title">Допустимое отклонение магнитного угла</string>
   <string name="pref_dip_thr_summary">Максимальное допустимое отклонениие угла магнитного поля при замере</string>
 
   <string name="pref_leg_title">Допустимое расхождение повторных измерений</string>
@@ -1169,7 +1169,7 @@
   <string name="pref_acad_version_summary">Версия AutoCAD</string>
   <!-- UNUSED string name="pref_dxf_scale_title">Масштаб абриса в DXF</string -->
   <!-- UNUSED string name="pref_dxf_scale_summary">Фактор масштаба абриса DXF</string -->
-  <string name="pref_dxf_blocks_title">Точки бок. замеров в DXF</string>
+  <string name="pref_dxf_blocks_title">Точки сплеев в DXF</string>
   <string name="pref_dxf_blocks_summary">Точки окончаний боковых замеров в экскорте в DXF</string>
   <string name="pref_thumbnail_title">Размер миниатюры</string>
   <string name="pref_thumbnail_summary">Размер миниатюры фотографии </string>
