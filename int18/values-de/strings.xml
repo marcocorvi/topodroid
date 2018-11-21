@@ -32,9 +32,9 @@
     <string name="UP">AUFWÄRTS</string>
     <string name="DOWN">ABWÄRTS</string>
 
-    <!-- TODO string name="xsplay">X</string -->
-    <!-- TODO string name="hsplay">H</string -->
-    <!-- TODO string name="vsplay">V</string -->
+    <string name="xsplay">X</string>
+    <string name="hsplay">H</string>
+    <string name="vsplay">V</string>
 
     <string name="cut">AUSSCHNEIDEN</string>
     <string name="copy">KOPIEREN</string>
@@ -67,7 +67,7 @@
     <string name="failed_snap_to_line">Kein Linienpunkt zum Verbinden gefunden</string>
     <string name="failed_snap_to_point">Kein Punkt zum Verbinden gefunden</string>
     <string name="failed_snap_to_splays">Keine Messstrecke zum Verbinden gefunden</string>
-    <!-- TODO string name="failed_append_to_line">Failed to append to another line</string -->
+    <string name="failed_append_to_line">Linie fortsetzen fehlgeschlagen</string>
 
     <string name="calibration_title">Maßband Kalibrierung</string>
     <string name="calibration_length">Maßband-Länge bis Anfang der Skala</string>
@@ -141,7 +141,7 @@
     <!-- UNUSED string name="regular">regulär</string -->
     <!-- UNUSED string name="surface">Oberfläche</string -->
     <!-- UNUSED string name="extend">Extend</string -->
-    <!-- UNUSED string name="extend_ignore">Kein</string --> 
+    <!-- UNUSED string name="extend_ignore">Kein</string -->
     <string name="extend_left">Links</string>
     <string name="extend_right">Rechts</string>
     <string name="extend_vert">Vertikal</string> <!-- vertikal -->
@@ -208,7 +208,7 @@
     <string name="fmt_error_m">Fehler %1$.1f m</string>
     <string name="fmt_h_geoid">Fehler %1$.0f m</string>
     <string name="fmt_h_ellipsoid">Fehler %1$.0f m</string>
-    <!-- TODO string name="depth_error">Waring. Data depth error</string -->
+    <string name="depth_error">Warnung: Fehler bei der Tiefe</string>
 
     <string name="error_azimuth_required">Azimut erforderlich</string>
     <string name="error_length_required">Länge erforderlich</string>
@@ -234,7 +234,7 @@
     <string name="error_station_non_existing">Messpunkt existiert nicht</string>
     <string name="error_sensor_required">Sensor erforderlich</string>
     <string name="error_value_required">Wert erforderlich</string>
-    
+
     <string name="group_title">Den Kalibrierungsdaten Gruppen zuweisen</string>
     <string name="group_policy_four">Jeweils 4 Messungen</string>
     <string name="group_policy_sixteen">Vier mal 4 Messungen, Rest einzeln</string>
@@ -263,7 +263,7 @@
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Länge %1$s</string>
     <string name="fmt_longitude">Breite %1$s</string>
-    <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string> 
+    <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string>
     <string name="fixed">fixiert</string>
     <string name="painted">gezeichnet</string>
 
@@ -306,9 +306,9 @@
     <string name="no_undelete">Nichts wiederherzustellen</string>
     <string name="format_measure_plan">Dist %1$.2f (Total %2$.2f) &#8736; %5$.1f° Dx %3$.2f Dy %4$.2f</string>
     <string name="format_measure_profile">Dist %1$.2f (Total %2$.2f) &#8736; %5$.1f° Dx %3$.2f Dy %4$.2f</string>
-    <!-- TODO string name="format_closure">%1$s-%2$s: %3$.1f / %4$.1f m [%5$.1f %6$.1f] %7$.1f (%8$.1f \u00b0)</string -->
-    
-<!-- MENUS 
+    <string name="format_closure">%1$s-%2$s: %3$.1f / %4$.1f m [%5$.1f %6$.1f] %7$.1f (%8$.1f \u00b0)</string>
+
+<!-- MENUS
  detach: disconnect from the DistoX device
  palette: drawing tools dialog
  scan: BlueTooth scan
@@ -362,7 +362,7 @@
     <string name="popup_sharp_pt">Linie begradigen</string>
     <string name="popup_curve_pt">Linie rund machen</string>
     <string name="popup_remove_pt">Punkt löschen</string>
-    <!-- TODO string name="popup_append_line">Append to line</string -->
+    <string name="popup_append_line">Linie fortsetzen</string>
 
     <string name="popup_erase_all">Alles löschen</string>
     <string name="popup_erase_point">Punkte löschen</string>
@@ -406,7 +406,7 @@
     <string name="item_delete">Element löschen: %1$s?</string>
     <string name="splay_delete">Hilfszug %1$s löschen?</string>
     <string name="plot_duplicate_name">Doppelter Name</string>
-    <!-- TODO string name="plot_dangling">Dangling sketch</string -->
+    <string name="plot_dangling">Skizze nicht verbunden</string>
     <!-- UNUSED string name="plot_name">Name der Skizze</string -->
     <string name="plot_new">Neue Skizze</string>
     <string name="plot_not_found">Skizze nicht gefunden</string>
@@ -545,7 +545,7 @@
 
 <!-- there are four kinds of measurements, depending on whether they have stations:
      blank: with no station assigned yet
-     leg: with both FROM and TO station 
+     leg: with both FROM and TO station
      splay: with only the FROM station or the TO station (usually it's the FROM one)
      repeated-leg: no station, but values close to immediately preceding shot which is a leg
                    or a repeated-leg
@@ -626,7 +626,7 @@
     <string name="button_split"     >Aufteilen     </string>
     <string name="button_station"   >Zentrieren bei</string>
     <string name="button_store"     >Speichern</string>
-    <!-- TODO string name="button_swap"      >Swap      </string -->
+    <string name="button_swap"      >Stationen vertauschen</string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
     <string name="button_upload"    >Schreiben</string>
@@ -634,7 +634,7 @@
     <!-- UNUSED string name="button_zoomfit"   >Grösse anpassen  </string -->
     <!-- UNUSED string name="button_landscape" >Querformat </string -->
     <!-- UNUSED string name="button_portrait"  >Hochformat  </string -->
-    <!-- TODO string name="button_splays">Splays</string -->
+    <string name="button_splays">Hilfszüge</string>
 
     <string name="button_write"     >Hochladen</string>
     <string name="button_xsection"  >Profil</string>
@@ -676,7 +676,7 @@
     <string name="symbol_reload">Zeichenwerkzeuge</string>
 
 
-<!-- FIXME_SKETCH_3D -->    
+<!-- FIXME_SKETCH_3D -->
     <!-- NO string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
     <!-- NO string name="title_sketch_new">New 3D sketch</string -->
     <!-- NO string name="title_sketch_edit">Edit 3D surface</string -->
@@ -728,7 +728,7 @@
 
     <string name="menu_head">HEAD</string>
     <!-- UNUSED string name="menu_save_th2">SAVE TH2</string -->
-<!-- END_SKETCH_3D -->    
+<!-- END_SKETCH_3D -->
 
     <string name="man_preface">Einführung</string>
     <string name="man_intro">1. Einleitung</string>
@@ -817,7 +817,7 @@
     <string name="help_next">Nächster Punkt</string>
     <string name="help_recover">Die Skizze wiederherstellen</string>
     <string name="help_zoom_fit">Zoomen auf ganze Skizze</string>
-   
+
     <string name="help_line_point">Linienpunkt Aktionen: verbinden, trennen, schneiden, löschen</string>
 
 <!-- UNUSED
@@ -911,34 +911,34 @@
     <string name="title_scraps_outline">Skizzenumriss</string>
     <string name="title_select">Auswählen</string>
 
-    <!-- TODO string name="title_settings_main">TopoDroid main settings</string -->
-    <!-- TODO string name="title_settings_export">TopoDroid import/export settings</string -->
-    <!-- TODO string name="title_settings_import">TopoDroid import settings</string -->
-    <!-- TODO string name="title_settings_svx">Survex export settings</string -->
-    <!-- TODO string name="title_settings_th">Therion export settings</string -->
-    <!-- TODO string name="title_settings_dat">Compass export settings</string -->
-    <!-- TODO string name="title_settings_svg">SVG export settings</string -->
-    <!-- TODO string name="title_settings_dxf">DXF export settings</string -->
-    <!-- TODO string name="title_settings_png">PNG export settings</string -->
-    <!-- TODO string name="title_settings_kml">KML export settings</string -->
+    <string name="title_settings_main">TopoDroid Einstellungen</string>
+    <string name="title_settings_export">Import/Export Einstellungen</string>
+    <string name="title_settings_import">Import Einstellungen</string>
+    <string name="title_settings_svx">Survex-Export Einstellungen</string>
+    <string name="title_settings_th">Therion-Export Einstellungen</string>
+    <string name="title_settings_dat">Compass-Export Einstellungen</string>
+    <string name="title_settings_svg">SVG-Export Einstellungen</string>
+    <string name="title_settings_dxf">DXF-Export Einstellungen</string>
+    <string name="title_settings_png">PNG-Export Einstellungen</string>
+    <string name="title_settings_kml">KML-Export Einstellungen</string>
 
-    <!-- TODO string name="title_settings_sketch">TopoDroid 3d sketch settings</string -->
-    <!-- TODO string name="title_settings_survey">TopoDroid survey settings</string -->
-    <!-- TODO string name="title_settings_shot">TopoDroid shot data settings</string -->
-    <!-- TODO string name="title_settings_units">TopoDroid units settings</string -->
-    <!-- TODO string name="title_settings_location">TopoDroid location settings</string -->
-    <!-- TODO string name="title_settings_accuracy">TopoDroid accuracy settings</string -->
-    <!-- TODO string name="title_settings_plot">TopoDroid sketch settings</string -->
-    <!-- TODO string name="title_settings_screen">TopoDroid canvas settings</string -->
-    <!-- TODO string name="title_settings_point">TopoDroid point settings</string -->
-    <!-- TODO string name="title_settings_line">TopoDroid line settings</string -->
-    <!-- TODO string name="title_settings_walls">TopoDroid autowalls settings</string -->
-    <!-- TODO string name="title_settings_draw">TopoDroid drawing settings</string -->
-    <!-- TODO string name="title_settings_erase">TopoDroid erasing settings</string -->
-    <!-- TODO string name="title_settings_edit">TopoDroid editing settings</string -->
-    <!-- TODO string name="title_settings_device">TopoDroid device settings</string -->
-    <!-- TODO string name="title_settings_calib">TopoDroid calibration settings</string -->
-    <!-- TODO string name="title_settings_log">TopoDroid log settings</string -->
+    <string name="title_settings_sketch">Einstellungen: 3D</string>
+    <string name="title_settings_survey">Einstellungen: Vermessung</string>
+    <string name="title_settings_shot">Einstellungen: Daten</string>
+    <string name="title_settings_units">Einstellungen: Einheiten</string>
+    <string name="title_settings_location">Einstellungen: Koordinaten</string>
+    <string name="title_settings_accuracy">Einstellungen: Genauigkeit</string>
+    <string name="title_settings_plot">Einstellungen: Skizzen</string>
+    <string name="title_settings_screen">Einstellungen: Hintergrund</string>
+    <string name="title_settings_point">Einstellungen: Punkte</string>
+    <string name="title_settings_line">Einstellungen: Linien</string>
+    <string name="title_settings_walls">Einstellungen: Automatische Wände</string>
+    <string name="title_settings_draw">Einstellungen: Zeichnung</string>
+    <string name="title_settings_erase">Einstellungen: Elemente Löschen</string>
+    <string name="title_settings_edit">Einstellungen: Elemente Bearbeiten</string>
+    <string name="title_settings_device">Einstellungen: Gerät</string>
+    <string name="title_settings_calib">Einstellungen: Kalibrierung</string>
+    <string name="title_settings_log">Einstellungen: Log</string>
 
     <string name="title_shift">Verschieben</string>
     <string name="title_shot_delete">Messung löschen ?</string>
@@ -966,7 +966,7 @@
   <string name="pref_cat_survey">Vermessung</string>
   <string name="pref_cat_drawing">Skizzen</string>
   <string name="pref_cat_import_export">Import/Export</string>
-  <!-- TODO string name="pref_cat_exportimport">IMPORT</string -->
+  <string name="pref_cat_exportimport">IMPORT</string>
   <!-- OK string name="pref_cat_exportth">Therion</string -->
   <!-- OK string name="pref_cat_exportdat">Compass</string -->
   <!-- OK string name="pref_cat_exportsvg">SVG</string -->
@@ -980,7 +980,7 @@
   <string name="pref_cat_log">Log Optionen</string>
 
   <string name="pref_locale_title">Sprache</string>
-  <string name="pref_locale_summary">Sprache</string>
+  <string name="pref_locale_summary">Auswahl der Sprache</string>
 
   <string name="pref_raw_data_title">Rohdaten anzeigen</string>
   <string name="pref_raw_data_summary">Rohdaten anzeigen</string>
@@ -989,18 +989,18 @@
   <!-- UNUSED string name="pref_bootloader_title">Bootloader</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Die Bootloader ermöglichen</string -->
   <string name="pref_mkeyboard_title">Tastatur</string>
-  <string name="pref_mkeyboard_summary">Verwendet vereinfachte Tastatur</string>
+  <string name="pref_mkeyboard_summary">Vereinfachte Tastatur verwenden</string>
   <string name="pref_no_cursor_title">Kein Textkursor</string>
   <string name="pref_no_cursor_summary">Kursor in Textfeldern nicht anzeigen</string>
   <string name="pref_local_help_title">Übersetztes Handbuch</string>
   <string name="pref_local_help_summary">Lokale Übersetzung verwenden (falls vorhanden)</string>
   <string name="pref_cosurvey_title">Co-Vermessung</string>
   <string name="pref_cosurvey_summary">Aktivieren/Deaktivieren Co-Vermessung</string>
-  <string name="pref_export_shots_title">Datenexportformat</string>
+  <string name="pref_export_shots_title">Exportformat</string>
   <string name="pref_export_shots_summary">Standarddatenexportformat</string>
-  <string name="pref_export_plot_title">Standard Skizzenformat</string>
+  <string name="pref_export_plot_title">Skizzenformat</string>
   <string name="pref_export_plot_summary">Standardformat für Skizzen-Exporte</string>
-  <string name="pref_therion_maps_title">Therion-Export: "map" vor Messzug</string>
+  <string name="pref_therion_maps_title">Therion: &quot;map&quot; vor Messzug</string>
   <string name="pref_therion_maps_summary">Therion map-Elemente vor den Messungen platzieren</string>
   <string name="pref_extra_buttons_title">Modus</string>
   <string name="pref_extra_buttons_summary">Fortgeschrittenen-Modus</string>
@@ -1008,33 +1008,33 @@
   <string name="pref_size_buttons_summary">Eingabe der Größe der Action-bar Buttons [px]</string>
 
   <string name="pref_bezier_step_title">Punkteabstand</string>
-  <string name="pref_bezier_step_summary">Abstand zwischen Punkten auf exportierter Linie [m]</string>
-  <string name="pref_leg_shots_title">Min. Messungen für Messzüge</string>
+  <string name="pref_bezier_step_summary">Max. Punkteabstand auf exportierter Linie [m]</string>
+  <string name="pref_leg_shots_title">Minimum für Messzüge</string>
   <string name="pref_leg_shots_summary">Minimale Anzahl Messungen zur Erkennung als Messzug</string>
-  <string name="pref_recent_timeout_title">Zeitdauer für neue Daten</string>
+  <string name="pref_recent_timeout_title">Zeitdauer neue Daten</string>
   <string name="pref_recent_timeout_summary">Zeit nach welcher Daten nicht mehr als \'neu\' markiert werden</string>
-  <string name="pref_station_prefix_title">Exportiere Messpunkt Prefix</string>
+  <string name="pref_station_prefix_title">Compass: Prefix</string>
   <string name="pref_station_prefix_summary">Exportiere Messpunkt Prefix (compass)</string>
-  <string name="pref_compass_splays_title">Exportiere Hilfszüge</string>
+  <string name="pref_compass_splays_title">Compass: Hilfszüge</string>
   <string name="pref_compass_splays_summary">Export Hilfszüge (compass)</string>
   <!-- UNUSED string name="pref_trobot_names_title">TopoRobot Namen</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Stationen wie in TopoRobot benennen</string -->
-  <string name="pref_ortho_lrud_title">Min. Winkel für LRUD in Export</string>
-  <string name="pref_ortho_lrud_summary">Minimaler Hilfszug-Winkel für LRUD</string>
-  <string name="pref_lrud_vertical_title">Minimaler Hilfszug-Winkel für UD</string>
+  <string name="pref_ortho_lrud_title">Min. Winkel für LRUD</string>
+  <string name="pref_ortho_lrud_summary">Minimaler Hilfszug-Winkel für LRUD in export</string>
+  <string name="pref_lrud_vertical_title">Min. Hilfszug-Winkel für UD</string>
   <string name="pref_lrud_vertical_summary">LRUD-Ermittlung: Minimaler vertikaler Winkel für UD</string>
-  <string name="pref_lrud_horizontal_title">Maximaler Hilfszug-Winkel für LR</string>
+  <string name="pref_lrud_horizontal_title">Max. Hilfszug-Winkel für LR</string>
   <string name="pref_lrud_horizontal_summary">LRUD-Ermittlung: Maximaler vertikaler Winkel für LR</string>
   <string name="pref_survex_eol_title">Survex/Topo Zeilenumbruch</string>
-  <string name="pref_survex_eol_summary">Survex/Topo Zeilenumbruch</string>
-  <string name="pref_survex_splay_title">Survex Hilfszug-Zielstationen</string>
+  <string name="pref_survex_eol_summary">Survex/Topo Zeilenumbruchformat</string>
+  <string name="pref_survex_splay_title">Survex Hilfszüge</string>
   <string name="pref_survex_splay_summary">Zielstationen zu Hilfszügen zuweisen für Survex-Export</string>
   <string name="pref_survex_lrud_title">Survex LRUD</string>
   <string name="pref_survex_lrud_summary">LRUD-Werte in Survex export</string>
   <string name="pref_svg_grid_title">SVG Gitter</string>
   <string name="pref_svg_grid_summary">Gitter zu SVG hinzufügen</string>
-  <!-- TODO string name="pref_svg_splays_title">SVG splays</string -->
-  <!-- TODO string name="pref_svg_splays_summary">Include splays into SVG export</string -->
+  <string name="pref_svg_splays_title">SVG Hilfszüge</string>
+  <string name="pref_svg_splays_summary">Hilfzüge in SVG Export</string>
   <!-- UNUSED string name="pref_svg_in_html_title">SVG in HTML</string -->
   <!-- UNUSED string name="pref_svg_in_html_summary">SVG export in HTML einbetten</string -->
   <string name="pref_svg_pointstroke_title">SVG Punkt-Dicke</string>
@@ -1051,39 +1051,39 @@
   <string name="pref_svg_linedirstroke_summary">Dicke der Ausrichtungslinie in SVG</string>
   <string name="pref_svg_line_dir_title">SVG Ausrichtungslinie</string>
   <string name="pref_svg_line_dir_summary">Ausrichtungslinienpfeile in SVG Export</string>
-  <string name="pref_kml_stations_title">Messpunkte in KML/GeoJson</string>
+  <string name="pref_kml_stations_title">KML/GeoJson: Messpunkte</string>
   <string name="pref_kml_stations_summary">Messpunkte zu KML/GeoJson Export hinzufügen</string>
-  <string name="pref_kml_splays_title">Hilfslinien in KML/GeoJson</string>
+  <string name="pref_kml_splays_title">KML/GeoJson: Hilfslinien</string>
   <string name="pref_kml_splays_summary">Hilfslinien zu KML/GeoJson Export hinzufügen</string>
 
   <string name="pref_sock_type_title">Anschlussart</string>
-  <string name="pref_sock_type_summary">Socket erzeugen</string>
+  <string name="pref_sock_type_summary">Bei Verbindungsproblemen auf \'Unsicher\' wechseln</string>
   <!-- UNUSED string name="pref_device_type_title">DistoX Modell</string -->
   <!-- UNUSED string name="pref_device_type_summary">DistoX Modell</string -->
   <!-- UNUSED string name="pref_comm_retry_title">Verbindung neu aufbauen</string -->
   <!-- UNUSED string name="pref_comm_retry_summary">Zahl der Verbindungsversuche</string -->
-  <string name="pref_wait_laser_title">Wartezeit nach Laser einschalten [ms]</string>
+  <string name="pref_wait_laser_title">Warten nach einschalten</string>
   <string name="pref_wait_laser_summary">Wartezeit nach Laser einschalten [ms]</string>
-  <string name="pref_wait_shot_title">Wartezeit nach Messung [ms]</string>
+  <string name="pref_wait_shot_title">Warten nach Messung</string>
   <string name="pref_wait_shot_summary">Wartezeit nach einer Messung [ms]</string>
-  <string name="pref_wait_data_title">Wartezeit nach Download [ms]</string>
+  <string name="pref_wait_data_title">Warten nach Download</string>
   <string name="pref_wait_data_summary">Wartezeit nach dem Download von Daten [ms]</string>
-  <string name="pref_wait_conn_title">Wartezeit nach Download-Fehler [ms]</string>
+  <string name="pref_wait_conn_title">Warten nach Fehler</string>
   <string name="pref_wait_conn_summary">Wartezeit nach Download-Fehler [ms] (Standard: 500)</string>
   <string name="pref_conn_mode_title">Verbindungsart</string>
   <string name="pref_conn_mode_summary">Art der Verbindung mit DistoX</string>
-  <string name="pref_auto_reconnect_title">Automatische Verbindung</string>
+  <string name="pref_auto_reconnect_title">Autom. Verbindung</string>
   <string name="pref_auto_reconnect_summary">Wiederverbindung nach Verbindungsverlust</string>
-  <string name="pref_auto_pair_title">Automatische Verbindung</string>
+  <string name="pref_auto_pair_title">Autom. Verbinden</string>
   <string name="pref_auto_pair_summary">Automatische Verbindung nach dem scannen</string>
-  <string name="pref_head_tail_title">Anzahl Datensätze abfragen</string>
-  <string name="pref_head_tail_summary">Anzahl Datensätze abfragen vor dem download</string>
+  <string name="pref_head_tail_title">Anzahl Daten abfragen</string>
+  <string name="pref_head_tail_summary">Anzahl Datensätze abfragen vor dem Download</string>
   <string name="pref_socket_delay_title">Verbindungsverzögerung</string>
   <string name="pref_socket_delay_summary">Verzögerung vor dem verbinden [0.1 sek]</string>
   <string name="pref_z6_workaround_title">Z6 Workaround</string>
-  <string name="pref_z6_workaround_summary">Z6 Workaround Daten-Download</string>
+  <string name="pref_z6_workaround_summary">Bei Problemen mit einem Z6 aktivieren</string>
   <string name="pref_crs_title">Koordinatensystem</string>
-  <string name="pref_crs_summary">Koordinatensystem</string>
+  <string name="pref_crs_summary">Koordinatensystem wie in Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Durchschnitt</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Ob GPSAveraging benutzen</string -->
 
@@ -1100,40 +1100,40 @@
   <string name="pref_pt_color_map_summary">PocketTopo Import Farbzuweisung</string>
   <string name="pref_text_size_title">Schriftgröße</string>
   <string name="pref_text_size_summary">Liste der Text-Elementengröße</string>
-  <string name="pref_closeness_title">Auswahl Radius</string>
+  <string name="pref_closeness_title">Auswählradius</string>
   <string name="pref_closeness_message">Skizzenelement Auswahl Radius</string>
   <string name="pref_eraseness_title">Löschradius</string>
   <string name="pref_eraseness_message">Radius des Lösch-Tools (Standard: 36px)</string>
-  <string name="pref_min_shift_title">Verschieben Sensitivität</string>
+  <string name="pref_min_shift_title">Sensitivität Versch.</string>
   <string name="pref_min_shift_message">Ignoriert Verschiebungen größer als dieser Wert. Verhindert herumspringen bei Multitouch.</string>
   <string name="pref_pointing_title">Radius für Tippen</string>
   <string name="pref_pointing_message">Radius für Objekterkennung beim Antippen</string>
   <string name="pref_dash_splay_title">Hilfslinien Kohärenz</string>
   <string name="pref_dash_splay_message">Hilfslinien kohärent gestrichelt zwischen Skizzen</string>
-  <string name="pref_vert_splay_title">Vertikale Neigung für gestrichelte Hilfslinien</string>
+  <string name="pref_vert_splay_title">Vert. Neigung Hilfslinien</string>
   <string name="pref_vert_splay_message">Vertikaler Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string>
-  <string name="pref_horiz_splay_title">Horizontale Neigung für gestrichelte Hilflinien</string>
+  <string name="pref_horiz_splay_title">Horiz. Neigung Hilflinien</string>
   <string name="pref_horiz_splay_message">Horizontaler Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string>
-  <string name="pref_section_splay_title">Querschnitt: Grenzwert für gestrichelte Hilfslinien</string>
+  <string name="pref_section_splay_title">Grenzwert Querschnitt</string>
   <string name="pref_section_splay_message">Grenzwert in Querschnitten ab welchem Hilfslinien gestrichelt dargestellt werden</string>
-  <string name="pref_data_backup_title">Automatischer Datenexport</string>
+  <string name="pref_data_backup_title">Auto-Datenexport</string>
   <string name="pref_data_backup_summary">Automatischer Datenexport beim Verlassen (benötigt ein Standard Exportformat)</string>
-  <string name="pref_shared_xsections_title">Querschnitt Sichtbarkeit</string>
+  <string name="pref_shared_xsections_title">Querschn. Sichtbarkeit</string>
   <string name="pref_shared_xsections_summary">Querschnitte nur auf einer oder auf allen Skizzen</string>
   <string name="xsections_shared">Auf allen Skizzen</string>
   <string name="xsections_private">Nur auf einer Skizze</string>
-  <string name="pref_reduce_angle_title">Minimaler Begradigungswinkel</string>
+  <string name="pref_reduce_angle_title">Min. Begradigungswinkel</string>
   <string name="pref_reduce_angle_summary">Minimaler Winkel um Linien zu begradigen</string>
 
 
-  <string name="pref_survey_stations_title">Strategie Vermessung</string>
-  <string name="pref_survey_stations_summary">Automatische Vermessungs-Messpunkte</string>
-  <string name="pref_accel_thr_title">Beschleunigungstoleranz (%%)</string>
-  <string name="pref_accel_thr_summary">Toleranz gegenüber Durchschnittswert der Beschleunigung um Messung als anomal zu markieren</string>
-  <string name="pref_mag_thr_title">Magnetfeldtoleranz (%%)</string>
-  <string name="pref_mag_thr_summary">Toleranz gegenüber Durchschnittswert des Magnetfeldes um Messung als anomal zu markieren</string>
-  <string name="pref_dip_thr_title">Magnetische Neigungs-Toleranz (%%)</string>
-  <string name="pref_dip_thr_summary">Toleranz gegenüber Durchschnittswert der magnetischen Inklination um Messung als anomal zu markieren</string>
+  <string name="pref_survey_stations_title">Vermessungs-Strategie</string>
+  <string name="pref_survey_stations_summary">Art der Vermessung und Zuweisung der Messpunkte</string>
+  <string name="pref_accel_thr_title">Beschleunigungstoleranz</string>
+  <string name="pref_accel_thr_summary">Toleranz gegenüber Durchschnittswert der Beschleunigung um Messung als anomal zu markieren (%%)</string>
+  <string name="pref_mag_thr_title">Magnetfeldtoleranz</string>
+  <string name="pref_mag_thr_summary">Toleranz gegenüber Durchschnittswert des Magnetfeldes um Messung als anomal zu markieren (%%)</string>
+  <string name="pref_dip_thr_title">Inklinationstoleranz</string>
+  <string name="pref_dip_thr_summary">Toleranz gegenüber Durchschnittswert der magnetischen Inklination um Messung als anomal zu markieren (%%)</string>
 
   <string name="pref_leg_title">Messzug Toleranz</string>
   <string name="pref_leg_summary">Toleranz zwischen Messungen eines Messzugs</string>
@@ -1141,24 +1141,24 @@
   <string name="pref_max_shot_summary">Maximale Messlänge[m]</string>
   <string name="pref_min_leg_title">Minimale Messlänge</string>
   <string name="pref_min_leg_summary">Minimale Messlänge [m]</string>
-  <string name="pref_backsight_title">Rückmessungs-Feld anzeigen</string>
+  <string name="pref_backsight_title">Rückmessungs-Feld</string>
   <string name="pref_backsight_summary">Rückmessungs-Feld im Dialog bei neuem manuellen Messzug anzeigen</string>
-  <string name="pref_backshot_title">Rückwärtsmessung DistoX</string>
+  <string name="pref_backshot_title">Rückwärtsmessung</string>
   <string name="pref_backshot_summary">DistoX im Rückmessungs-Modus</string>
-  <string name="pref_prev_next_title">Vorherige/Nächste Messtrecke</string>
-  <string name="pref_prev_next_summary">Buttons anzeigen im Messdialog</string>
+  <string name="pref_prev_next_title">Messtrecken-Navigation</string>
+  <string name="pref_prev_next_summary">Buttons anzeigen im Messdialog zur vorherigen/nächsten Messung</string>
   <!-- UNUSED string name="pref_mag_anomaly_title">Magnetische Abweichung</string -->
   <!-- UNUSED string name="pref_mag_anomaly_summary">Kompensiere lokale magnetische Abweichung</string -->
-  <string name="pref_azimuth_manual_title">Seitenriss-Azimut wählbar</string>
+  <string name="pref_azimuth_manual_title">Seitenriss-Azimut</string>
   <string name="pref_azimuth_manual_summary">Azimut des Seitenrisses wählbar</string>
 
   <string name="pref_team_title">Vermessungsteam</string>
   <string name="pref_team_summary">Standard-Messteam</string>
 
-  <string name="pref_ethr_title">Winkel für vertikalen Seitenriss</string>
-  <string name="pref_ethr_summary">Grenzwert für vertikale Darstellung</string>
-  <string name="pref_vthr_title">Vertikaler Grenzwert</string>
-  <string name="pref_vthr_summary">Winkelgrenzwert für LRUD/WENS</string>
+  <string name="pref_ethr_title">Vertikale Hilfszüge</string>
+  <string name="pref_ethr_summary">Winkelgrenzwert für vertikale Darstellung von Hilfszügen</string>
+  <string name="pref_vthr_title">Vertikale Messlinien</string>
+  <string name="pref_vthr_summary">Winkelgrenzwert für vertikale Darstellung von Messlinien</string>
 
   <string name="pref_plan_vthr_title">Hilfslinien vertikaler Grenzwert</string>
   <string name="pref_plan_vthr_message">Winkelgrenzwert für Anzeige der Hilfslinien auf Plan</string>
@@ -1167,7 +1167,7 @@
   <string name="pref_station_names_title">Messpunktnamen</string>
   <string name="pref_station_names_summary">Art der Messpunktnamen</string>
 
-  <string name="pref_hthr_title">Winkelgrenzwert für hor. Schnitte</string>
+  <string name="pref_hthr_title">Grenzwert Schnitte</string>
   <string name="pref_hthr_summary">Winkelgrenzwert ab welchem Querschnitte horizontal sind</string>
   <string name="pref_bitmap_scale_title">PNG Massstab</string>
   <string name="pref_bitmap_scale_summary">Skalierungsfaktor in PNG-Skizzen Export</string>
@@ -1177,19 +1177,19 @@
   <string name="pref_acad_version_summary">AutoCAD-Version</string>
   <!-- UNUSED string name="pref_dxf_scale_title">Massstab DXF-Skizze</string -->
   <!-- UNUSED string name="pref_dxf_scale_summary">Massstab-Faktor DXF-Skizze</string -->
-  <string name="pref_dxf_blocks_title">DXF: Hilfszüge markieren</string>
+  <string name="pref_dxf_blocks_title">DXF: Hilfszüge</string>
   <string name="pref_dxf_blocks_summary">DXF: Enden der Hilfszüge markieren</string>
   <string name="pref_thumbnail_title">Thumbnails Größe</string>
   <string name="pref_thumbnail_summary">Thumbnails Größe</string>
-  <string name="pref_shot_timer_title">Richtungsmesser Verzögerung</string>
-  <string name="pref_shot_timer_summary">Sekunden Verzögerung bis zur Messung wenn Richtung von Topodroid ermittelt wird</string>
+  <string name="pref_shot_timer_title">Auslöseverzögerung</string>
+  <string name="pref_shot_timer_summary">Verzögerung bis zur Messung wenn Richtung von Topodroid ermittelt wird [s]</string>
   <string name="pref_beep_volume_title">Piep Lautstärke</string>
   <string name="pref_beep_volume_summary">Lautstärke des Pieptones bei Messung von Topodroid</string>
   <!-- TODO string name="pref_extend_frac_title">Fractional extend</string -->
   <!-- TODO string name="pref_extend_frac_summary">Whether "extend" can have a decimal part</string -->
   <string name="pref_drawing_unit_title">Punktsymbole Massstab</string>
   <string name="pref_drawing_unit_summary">Massstab der Punktsymbole</string>
-  <string name="pref_unscaled_points_title">Punktsymbole nicht zoomen</string>
+  <string name="pref_unscaled_points_title">Punkte nicht zoomen</string>
   <string name="pref_unscaled_points_summary">Punktsymbole sind nicht gezoomt</string>
   <string name="pref_segment_title">Punkteabstand</string>
   <string name="pref_segment_message">Minimaler Abstand zwischen Punkten auf einer Linie</string>
@@ -1197,7 +1197,7 @@
   <string name="pref_linestyle_summary">Linientyp</string>
   <string name="pref_linecontinue_title">Line fortsetzen</string>
   <string name="pref_linecontinue_summary">Standard Fortsetzungs-Modus von Linien</string>
-  <string name="pref_lineacc_title">Interpolations-Genauigkeit</string>
+  <string name="pref_lineacc_title">Interpol.-Genauigkeit</string>
   <string name="pref_lineacc_summary">Interpolationsgenauigkeit</string>
   <string name="pref_linecorner_title">Bezier Eckenerkennung</string>
   <string name="pref_linecorner_summary">Bezier Ecken Schwellwert</string>
@@ -1209,18 +1209,18 @@
   <string name="pref_group_summary">Toleranz zwischen Messungen in derselben Gruppe</string>
   <string name="pref_error_title">Kalibrierungsfehler</string>
   <string name="pref_error_summary">Minimaler Kalibrierungsfehler</string>
-  <string name="pref_iter_title">Kalibrierungs-Iterationen</string>
+  <string name="pref_iter_title">Iterationen</string>
   <string name="pref_iter_summary">Max. Iterationen für die Kalibrierung</string>
-  <string name="pref_label_size_title">Beschriftung Schriftgröße</string>
-  <string name="pref_label_size_summary">Beschriftung Schriftgröße</string>
-  <string name="pref_arrow_length_title">Querschnittsmarkierung Länge</string>
+  <string name="pref_label_size_title">Schriftgröße</string>
+  <string name="pref_label_size_summary">Schriftgröße der Beschriftung</string>
+  <string name="pref_arrow_length_title">Querschnittslänge</string>
   <string name="pref_arrow_length_message">Länge des Pfeiles einer Querschnitts-Linie</string>
   <string name="pref_dot_radius_title">Größe der Linienpunkte</string>
   <string name="pref_dot_radius_message">Größe der Punkte während dem bearbeiten einer Linie</string>
   <string name="pref_line_thickness_title">Liniendicke</string>
   <string name="pref_line_thickness_summary">Dicke der gezeichneten Linien</string>
-  <string name="pref_fixed_thickness_title">Liniendicke der Messstrecke</string>
-  <string name="pref_fixed_thickness_summary">Liniendicke der Messstrecke</string>
+  <string name="pref_fixed_thickness_title">Liniendicke Messstrecke</string>
+  <string name="pref_fixed_thickness_summary">Liniendicke der Messstrecken</string>
   <!-- UNUSED string name="pref_device_title">Device</string -->
   <!-- UNUSED string name="pref_device_summary">DistoX address name</string -->
   <string name="pref_checkBT_title">Bluetooth</string>
@@ -1243,28 +1243,28 @@
   <string name="pref_loopClosure_summary">Kreisschlussfehler Kompensation</string>
   <!-- UNUSED string name="pref_splayExtend_title">Splay extend</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Whether to estimate the extend of splays</string -->
-  <string name="pref_swapLR_title">Links/Rechts-Werte vertauschen in Compass</string>
+  <string name="pref_swapLR_title">Compass: L/R vertauschen</string>
   <string name="pref_swapLR_summary">Links/Rechts-Werte vertauschen in Compass Export</string>
-  <string name="pref_LRExtend_title">Links/Rechts-Werte abschätzen</string>
+  <string name="pref_LRExtend_title">L/R-Werte abschätzen</string>
   <string name="pref_LRExtend_summary">Links/Rechts-Werte abschätzen (Compass/VisualTopo Import)</string>
 
-  <string name="pref_picker_type_title">Zeichenwerkzeuge Darstellung</string>
-  <string name="pref_picker_type_summary">Zeichenwerkzeug Darstellung</string>
+  <string name="pref_picker_type_title">Zeichenwerkzeuge</string>
+  <string name="pref_picker_type_summary">Darstellung der Zeichenwerkzeuge</string>
   <!-- UNUSED string name="pref_section_stations_title">Querschnitts-Stationen</string -->
   <!-- UNUSED string name="pref_section_stations_summary">Querschnitts-Referenz-Stationen</string -->
   <string name="pref_station_size_title">Messpunkt Schriftgröße</string>
   <string name="pref_station_size_summary">Messpunkt Beschriftung Schriftgröße</string>
   <string name="pref_zoom_controls_title">Zoom-Steuerung</string>
   <string name="pref_zoom_controls_summary">Zoom-Steuerung auf Multitouch-Geräten</string>
-  <string name="pref_side_drag_title">Verschieben beim skizzieren</string>
+  <string name="pref_side_drag_title">Skizze verschieben</string>
   <string name="pref_side_drag_summary">Erlaubt das verschieben vom Rand her</string>
-  <string name="pref_unit_grid_title">Masseinheit Skizzengitter</string>
+  <string name="pref_unit_grid_title">Masseinheit Gitter</string>
   <string name="pref_unit_grid_summary">Masseinheit Skizzengitter</string>
-  <string name="pref_recent_nr_title">Anzahl der häufigsten Werkzeuge</string>
+  <string name="pref_recent_nr_title">Häufigste Werkzeuge</string>
   <string name="pref_recent_nr_summary">Anzahl der am häufigsten verwendeten Werkzeuge in der Auswahl</string>
-  <string name="pref_area_border_title">Flächenumrandung anzeigen</string> 
+  <string name="pref_area_border_title">Flächenumrandung</string>
   <string name="pref_area_border_summary">Linie um Flächen herum anzeigen</string>
-  <string name="pref_auto_section_pt_title">Querschnittspunkte hinzufügen</string>
+  <string name="pref_auto_section_pt_title">Querschnittspunkte</string>
   <string name="pref_auto_section_pt_summary">Querschnittspunkt zu Querschnitten hinzufügen</string>
   <!-- Experimental 3D Drawing Feature: -->
   <!-- NO string name="pref_sketchUsesSplays_title">Sketch splays</string -->
@@ -1284,7 +1284,7 @@
   <string name="pref_unit_length_summary">Masseinheit für Längen</string>
   <string name="pref_unit_angle_title">Winkeleinheit</string>
   <string name="pref_unit_angle_summary">Masseinheit für Winkel</string>
-  <string name="pref_unit_location_title">Koordinatenformat</string>
+  <string name="pref_unit_location_title">Format</string>
   <string name="pref_unit_location_summary">Koordinatenformat</string>
 
   <string name="pref_plot_walls_title">Automatische Wände</string>
@@ -1368,7 +1368,7 @@
 \nWeitere Dokumentation: http://sites.google.com/site/speleoapps
 \nKommentare, Fehlermeldungen, fehlende Funktionen: marco.corvi@gmail.com
 \n
-\nDeutsche Übersetzung von M. Keller (matti@bergwerke.ch) und T. Müller (hoehle@thilomueller.de) 
+\nDeutsche Übersetzung von M. Keller (matti@bergwerke.ch) und T. Müller (hoehle@thilomueller.de)
 \n
     </string>
 

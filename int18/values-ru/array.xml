@@ -85,11 +85,11 @@
   </string-array>
 
   <string-array name="sizeButtons">
-     <item name="small">Маленькие</item>
-     <item name="normal">Нормальные</item>
-     <item name="medium">Средние</item>
-     <item name="large">Большие</item>
-     <item name="huge">Огромные</item>
+     <item name="small">Маленький</item>
+     <item name="normal">Нормальный</item>
+     <item name="medium">Средний</item>
+     <item name="large">Большой</item>
+     <item name="huge">Огромный</item>
   </string-array>
 
   <!-- DO NOT TRANSLATE string-array name="logStream">

@@ -2,13 +2,13 @@
 
 <resources>
 
-  <!-- TODO string-array name="lineContinue">
-     <item name="none">none</item>
-     <item name="start">join with start point</item>
-     <item name="end">join with end point</item>
-     <item name="both">join with both ends</item>
-     <item name="continue">continue</item>
-  </string-array -->
+  <string-array name="lineContinue">
+     <item name="none">nie</item>
+     <item name="start">mit Startpunkten verbinden</item>
+     <item name="end">mit Endpunkten verbinden</item>
+     <item name="both">mit beidem verbinden</item>
+     <item name="continue">fortsetzen</item>
+  </string-array>
   <string-array name="unitGrid">
      <item name="meter">Meter</item>
      <item name="yard">Yard</item>
