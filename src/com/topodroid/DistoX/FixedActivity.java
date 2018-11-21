@@ -314,7 +314,7 @@ public class FixedActivity extends Activity
 
   public void onActivityResult( int reqCode, int resCode, Intent intent )
   {
-    // mApp.resetLocale();
+    // mApp.resetLocale(); // OK-LOCALE
     if ( resCode == RESULT_OK ) {
       if ( reqCode == CRS_CONVERSION_REQUEST ) {
         if ( mFixedDialog != null ) {

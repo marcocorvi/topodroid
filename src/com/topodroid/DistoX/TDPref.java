@@ -740,7 +740,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] tit = TDPrefKey.DATAtitle;
     int[] dsc = TDPrefKey.DATAdesc;
     String[] def = TDPrefKey.DATAdef;
-    TDPref[] ret = new TDPref[ 14 ];
+    TDPref[] ret = new TDPref[ 15 ];
     ret[ 0] = makeEdt( cat, key[ 0], tit[ 0], dsc[ 0], B, def[ 0], FLOAT,   res, hlp );
     ret[ 1] = makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], B, def[ 1], FLOAT,   res, hlp );
     ret[ 2] = makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], B, def[ 2], FLOAT,   res, hlp );
@@ -756,6 +756,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
     // r[ ] = makeCbx( cat, key[  ], tit[  ], dsc[  ], X, def[  ],          res, hlp );
     ret[12] = makeEdt( cat, key[12], tit[12], dsc[12], A, def[12], INTEGER, res, hlp );
     ret[13] = makeEdt( cat, key[13], tit[13], dsc[13], A, def[13], INTEGER, res, hlp );
+    ret[14] = makeCbx( cat, key[14], tit[14], dsc[14], T, def[14],          res, hlp );
     return ret;
   }
 

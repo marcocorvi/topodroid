@@ -744,6 +744,7 @@
     <!-- UNUSED string name="help_contour">Editar Contorno</string -->
     <string name="help_current_station">Última estación guardada</string>
     <string name="help_azimuth">Asistente referencia del rumbo</string>
+    <!-- TODO string name="help_refresh">Refresh display</string -->
     <string name="help_device">Opciones del dispositivo distoX</string>
     <string name="help_add_topodroid">Crear nueva Topografía/calibración</string>
     <string name="help_import">Importar archivo zip o Therion</string>
@@ -1166,6 +1167,8 @@
   <string name="pref_shot_timer_summary">Tiempo en segundos antes de medir la dirección</string>
   <string name="pref_beep_volume_title">Volumen del sonido del contador</string>
   <string name="pref_beep_volume_summary">Nivel %% del volumen del pitido del contador</string>
+  <!-- TODO string name="pref_extend_frac_title">Fractional extend</string -->
+  <!-- TODO string name="pref_extend_frac_summary">Whether "extend" can have a decimal part</string -->
   <string name="pref_drawing_unit_title">Tamaño de los símbolos</string>
   <string name="pref_drawing_unit_summary">Escala de símbolos del dibujo</string>
   <string name="pref_unscaled_points_title">Símbolos de punto sin zoom</string>

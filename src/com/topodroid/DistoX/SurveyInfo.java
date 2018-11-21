@@ -51,6 +51,7 @@ class SurveyInfo
 
   boolean hasDeclination() { return declination < DECLINATION_MAX; }
 
+  // get the declination or 0 if not-defined
   float getDeclination()
   {
     if ( declination < DECLINATION_MAX ) return declination;

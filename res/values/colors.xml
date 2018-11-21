@@ -23,6 +23,8 @@
     <color name="pref_text">#ff33ccff</color>
     <color name="pref_category">#ff6699ff</color>
 
+    <color name="seekbar">#cccccccc</color>
+
 <!-- MATERIAL
     <color name="colorPrimary">#33ccff</color>
     <color name="colorPrimaryDark">#0099cc</color>

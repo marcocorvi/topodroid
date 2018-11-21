@@ -1399,11 +1399,11 @@ class TDExporter
       writeSurvexLine(pw, "  *units compass " + uas );
       writeSurvexLine(pw, "  *units clino " + uas );
       if ( info.hasDeclination() ) { // DECLINATION in SURVEX
-        pw.format(Locale.US, "  *calibrate declination %.2f", info.declination ); 
+        pw.format(Locale.US, "  *calibrate declination %.2f", info.declination ); // units DEGREES
         writeSurvexEOL(pw);
-      } else {
-        pw.format(Locale.US, "  *calibrate declination auto" );
-        writeSurvexEOL(pw);
+      // } else {
+      //   pw.format(Locale.US, "  *calibrate declination auto" );
+      //   writeSurvexEOL(pw);
       }
       if ( ! TDSetting.mSurvexSplay ) {
         writeSurvexLine( pw, "  *alias station - .." );
@@ -2932,9 +2932,6 @@ class TDExporter
   
       pw.format("; %s\n", info.name );
       pw.format("; created by TopoDroid v %s - %s \n", TopoDroidApp.VERSION, TopoDroidUtil.getDateString("yyyy.MM.dd") );
-      if ( info.hasDeclination() ) { // DECLINATION in WALLS
-        pw.format(Locale.US, "#Units Decl=%.1f\n", info.getDeclination() );
-      }
 
       String date = info.date;
       int y = 0;
@@ -2949,7 +2946,13 @@ class TDExporter
           TDLog.Error( "exportSurveyAsSrv date parse error " + date );
         }
       }
+   
       pw.format("#Date %04d-%02d-%02d\n", y, m, d ); // format "YYYY-MM-DD"
+
+      if ( info.hasDeclination() ) { // DECLINATION in WALLS: override declination computed using the date
+        pw.format(Locale.US, "#Units Decl=%.1f\n", info.getDeclination() );
+      }
+
       if ( info.comment != null ) {
         pw.format("; %s\n", info.comment );
       }
@@ -3693,7 +3696,8 @@ class TDExporter
       }
       pw.format("Couleur 0,0,0\r\n\r\n");
       
-      pw.format(Locale.US, "Param Deca Degd Clino Degd %.4f Dir,Dir,Dir Arr Inc 0,0,0\r\n\r\n", info.getDeclination() ); // FIXME DECLINATION
+      // VISUALTOPO: use 0 if declination is undefined
+      pw.format(Locale.US, "Param Deca Degd Clino Degd %.4f Dir,Dir,Dir Arr Inc 0,0,0\r\n\r\n", info.getDeclination() );
 
       AverageLeg leg = new AverageLeg(0);
       DBlock ref_item = null;

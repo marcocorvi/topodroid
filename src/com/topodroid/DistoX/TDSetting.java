@@ -225,6 +225,7 @@ class TDSetting
   // static int mScreenTimeout = 60000; // 60 secs
   static int mTimerWait        = 10;    // Acc/Mag timer countdown (secs)
   static int mBeepVolume       = 50;    // beep volume
+  static boolean mExtendFrac   = false;    // whether to use fractional extends
   // static int mCompassReadings  = 4;     // number of compass readings to average
 
   // static final String CLOSE_DISTANCE = "0.05"; // 50 cm / 1000 cm
@@ -785,6 +786,7 @@ class TDSetting
     // setMagAnomaly( prefs, prefs.getBoolean( keyData[  ], bool(defData[]) ) ); // DISTOX_MAG_ANOMALY
     mTimerWait     = tryInt(   prefs,          keyData[12],      defData[12] );  // DISTOX_SHOT_TIMER
     mBeepVolume    = tryInt(   prefs,          keyData[13],      defData[13] );  // DISTOX_BEEP_VOLUME
+    mExtendFrac    = prefs.getBoolean(         keyData[14], bool(defData[14]) ); // DISTOX_EXTEND_FRAC
 
     String[] keyUnits = TDPrefKey.UNITS;
     String[] defUnits = TDPrefKey.UNITSdef;
@@ -1428,6 +1430,8 @@ class TDSetting
       mBeepVolume       = tryIntValue( hlp, k, v, def[13] );
       if ( mBeepVolume <   0 ) { mBeepVolume =   0; ret =   TDString.ZERO; }
       if ( mBeepVolume > 100 ) { mBeepVolume = 100; ret = "100"; }
+    } else if ( k.equals( key[ 14 ] ) ) { // DISTOX_EXTEND_FRAC
+      mExtendFrac = tryBooleanValue( hlp, k, v, bool(def[14]) );
     } else {
       TDLog.Error("missing DATA key: " + k );
     }

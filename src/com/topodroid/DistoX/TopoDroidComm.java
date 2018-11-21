@@ -111,7 +111,7 @@ class TopoDroidComm
           long status = ( d > TDSetting.mMaxShotLength )? TDStatus.OVERSHOOT : TDStatus.NORMAL;
           mLastShotId = TopoDroidApp.mData.insertDistoXShot( TDInstance.sid, -1L, d, b, c, r, DBlock.EXTEND_IGNORE, status, true );
           if ( mLister != null ) { // FIXME_LISTER sendMessage with mLastShotId only
-            Message msg = mLister.obtainMessage( Lister.UPDATE );
+            Message msg = mLister.obtainMessage( Lister.LIST_UPDATE );
             Bundle bundle = new Bundle();
             bundle.putLong( Lister.BLOCK_ID, mLastShotId );
             msg.setData(bundle);
@@ -140,7 +140,7 @@ class TopoDroidComm
           TDLog.Log( TDLog.LOG_COMM, "G " + mProto.mGX + " " + mProto.mGY + " " + mProto.mGZ + " M " + mProto.mMX + " " + mProto.mMY + " " + mProto.mMZ );
           long cblk = TopoDroidApp.mDData.insertGM( TDInstance.cid, mProto.mGX, mProto.mGY, mProto.mGZ, mProto.mMX, mProto.mMY, mProto.mMZ );
           if ( mLister != null ) {
-            Message msg = mLister.obtainMessage( Lister.UPDATE );
+            Message msg = mLister.obtainMessage( Lister.LIST_UPDATE );
             Bundle bundle = new Bundle();
             bundle.putLong( Lister.BLOCK_ID, cblk );
             msg.setData(bundle);

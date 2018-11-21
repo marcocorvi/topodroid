@@ -20,7 +20,7 @@ interface ILister
    * refreshDisplay is called by
    *   - DataDownloadTask.onPostExecute
    *   - ShotNewDialog.onClick
-   *   - ListerHandler.handleMessage Lister.REFRESH
+   *   - ListerHandler.handleMessage Lister.LIST_REFRESH
    */
   void refreshDisplay( int nr, boolean toast );
 

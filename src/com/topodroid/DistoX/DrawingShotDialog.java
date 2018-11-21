@@ -71,7 +71,8 @@ class DrawingShotDialog extends MyDialog
   private int mColor;    // bock color
   private DrawingPath mPath;
   private int mFlag; // can barrier/hidden FROM and TO
-  private float mStretch; // FXIME_STRETCH use a slider
+  private int mIntExtend;
+  private float mStretch; // FIXME_STRETCH use a slider
 
   // 0x01 can barrier FROM
   // 0x02 can hidden  FROM
@@ -88,6 +89,7 @@ class DrawingShotDialog extends MyDialog
     mColor   = mBlock.getPaintColor();
     mPath    = shot;
     mFlag    = flag;
+    mIntExtend = mBlock.getReducedIntExtend();
     mStretch = mBlock.getStretch();
   }
 
@@ -131,24 +133,50 @@ class DrawingShotDialog extends MyDialog
         mStretchBar.setVisibility( View.GONE );
       } else if ( mParent.isExtendedProfile() && mBlock.isMainLeg() ) {
         mBtnColor.setVisibility( View.GONE );
-        mStretchBar.setProgress( (int)(100+mStretch*200) );
-        mStretchBar.setOnSeekBarChangeListener( new OnSeekBarChangeListener() {
-            public void onProgressChanged( SeekBar stretchbar, int progress, boolean fromUser) {
-              if ( fromUser ) {
-                mStretch = (progress-100)/200.0f;
-                if ( mStretch < -0.5f ) mStretch = -0.5f;
-                if ( mStretch >  0.5f ) mStretch =  0.5f;
+	if ( TDSetting.mExtendFrac ) {
+          mStretchBar.setProgress( (int)(150 + 100 * mIntExtend + 100 * mStretch ) );
+          mStretchBar.setOnSeekBarChangeListener( new OnSeekBarChangeListener() {
+              public void onProgressChanged( SeekBar stretchbar, int progress, boolean fromUser) {
+                if ( fromUser ) {
+	  	if ( progress < 100 )      { 
+                    mIntExtend = -1;
+	  	  mRBleft.setChecked(  true );
+	  	  mRBvert.setChecked(  false );
+	  	  mRBright.setChecked( false );
+	  	  mStretch = (progress- 50)/100.0f; 
+	  	} else if ( progress > 200 ) {
+                    mIntExtend = 1;
+	  	  mRBleft.setChecked(  false );
+	  	  mRBvert.setChecked(  false );
+	  	  mRBright.setChecked( true );
+	  	  mStretch = (progress-250)/100.0f;
+	          } else { 
+                    mIntExtend = 0;
+	  	  mRBleft.setChecked(  false );
+	  	  mRBvert.setChecked(  true );
+	  	  mRBright.setChecked( false );
+	  	  mStretch = (progress-150)/100.0f;
+	         	}
+                  // mStretch = (progress - 100)/200.0f;
+                  if ( mStretch < -0.5f ) mStretch = -0.5f;
+                  if ( mStretch >  0.5f ) mStretch =  0.5f;
+                }
               }
-            }
-            public void onStartTrackingTouch(SeekBar stretchbar) { }
-            public void onStopTrackingTouch(SeekBar stretchbar) { }
-        } );
-        mStretchBar.setEnabled( true );
+              public void onStartTrackingTouch(SeekBar stretchbar) { }
+              public void onStopTrackingTouch(SeekBar stretchbar) { }
+          } );
+          mStretchBar.setEnabled( true );
+	} else {
+          mStretchBar.setVisibility( View.GONE );
+	}
       } else {
         mBtnColor.setVisibility( View.GONE );
         mStretchBar.setVisibility( View.GONE );
         // mStretchBar.setEnabled( false );
       }
+    } else {
+      mBtnColor.setVisibility( View.GONE );
+      mStretchBar.setVisibility( View.GONE );
     }
 
     LinearLayout layout3  = (LinearLayout) findViewById( R.id.layout3 );
@@ -232,7 +260,11 @@ class DrawingShotDialog extends MyDialog
     if ( mBlock != null ) { // block cannot be null 
       mETfrom.setText( mBlock.mFrom );
       mETto.setText( mBlock.mTo );
-      mETcomment.setText( mBlock.mComment );
+      if ( mBlock.mComment != null && mBlock.mComment.length() > 0 ) {
+        mETcomment.setText( mBlock.mComment );
+      } else {
+        mETcomment.setHint( R.string.comment );
+      }
 
       switch ( mBlock.getExtend() ) {
         case DBlock.EXTEND_LEFT:
@@ -308,12 +340,27 @@ class DrawingShotDialog extends MyDialog
     } else if ( b == mRBleft ) {
       mRBvert.setChecked( false );
       mRBright.setChecked( false );
+      if ( TDLevel.overExpert && TDSetting.mExtendFrac ) {
+        mIntExtend = mRBleft.isChecked() ? -1 : 0;
+        mStretch = 0;
+        mStretchBar.setProgress(  150+100*mIntExtend );
+      }
     } else if ( b == mRBvert ) {
       mRBleft.setChecked( false );
       mRBright.setChecked( false );
+      if ( TDLevel.overExpert && TDSetting.mExtendFrac ) {
+        mIntExtend = 0;
+        mStretch = 0;
+        mStretchBar.setProgress( 150 );
+      }
     } else if ( b == mRBright ) {
       mRBleft.setChecked( false );
       mRBvert.setChecked( false );
+      if ( TDLevel.overExpert && TDSetting.mExtendFrac ) {
+        mIntExtend = mRBright.isChecked() ? 1 : 0;
+        mStretch = 0;
+        mStretchBar.setProgress(  150+100*mIntExtend );
+      }
 
     } else if ( TDLevel.overNormal && b == mRBdup ) {
       mRBdup.toggleState();
@@ -392,13 +439,15 @@ class DrawingShotDialog extends MyDialog
 
       String from = mETfrom.getText().toString().trim();
       String to   = mETto.getText().toString().trim();
-      String comment = mETcomment.getText().toString().trim();
 
       if ( ! from.equals( mBlock.mFrom ) || ! to.equals( mBlock.mTo ) ) { // FIXME revert equals
         mParent.updateBlockName( mBlock, from, to );
       }
 
-      mParent.updateBlockComment( mBlock, comment ); // equal comment checked by the method
+      if ( mETcomment.getText() != null ) {
+        String comment = mETcomment.getText().toString().trim();
+        mParent.updateBlockComment( mBlock, comment ); // equal comment checked by the method
+      }
 
       // } else if (view.getId() == R.id.button_cancel ) {
       //   /* nothing */

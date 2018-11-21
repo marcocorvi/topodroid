@@ -745,6 +745,7 @@
     <!-- NO string name="help_contour">Contour editing</string -->
     <string name="help_current_station">Capisaldi salvati</string>
     <string name="help_azimuth">Riferimento per "extend"</string>
+    <!-- TODO string name="help_refresh">Refresh display</string -->
     <string name="help_device">Finestra DistoX</string>
     <string name="help_add_topodroid">Nuovo rilievo/calibr.</string>
     <string name="help_import">Importa zip o file dati rilievo</string>
@@ -1163,6 +1164,8 @@
   <string name="pref_shot_timer_summary">Secondi di attesa prima della misura</string>
   <string name="pref_beep_volume_title">Volume timer</string>
   <string name="pref_beep_volume_summary">Percent timer-beep volume</string>
+  <!-- TODO string name="pref_extend_frac_title">Fractional extend</string -->
+  <!-- TODO string name="pref_extend_frac_summary">Whether "extend" can have a decimal part</string -->
   <string name="pref_drawing_unit_title">Scala simboli grafici</string>
   <string name="pref_drawing_unit_summary">Scala simboli grafici</string>
   <string name="pref_unscaled_points_title">Punti icona senza zoom</string>

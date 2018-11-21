@@ -770,6 +770,7 @@ class TDPrefKey
     // "DISTOX_MAG_ANOMALY",        // whether to compensate magnetic anomaly
     "DISTOX_SHOT_TIMER",      // 12 // bearing-clino timer [1/10 s]
     "DISTOX_BEEP_VOLUME",     // 13 // bearing-clino beep volume [%]
+    "DISTOX_EXTEND_FRAC",     // 14 // fractional extend
     null
   };
 
@@ -788,7 +789,8 @@ class TDPrefKey
     R.string.pref_backsight_title,
     // R.string.pref_mag_anomaly_title,
     R.string.pref_shot_timer_title,
-    R.string.pref_beep_volume_title
+    R.string.pref_beep_volume_title,
+    R.string.pref_extend_frac_title
   };
 
   static int[] DATAdesc = {
@@ -806,7 +808,8 @@ class TDPrefKey
     R.string.pref_backsight_summary,
     // R.string.pref_mag_anomaly_summary,
     R.string.pref_shot_timer_summary,
-    R.string.pref_beep_volume_summary
+    R.string.pref_beep_volume_summary,
+    R.string.pref_extend_frac_summary
   };
 
   static String[] DATAdef = {
@@ -824,7 +827,8 @@ class TDPrefKey
     FALSE,
     // FALSE,
     TDString.TEN,
-    TDString.FIFTY
+    TDString.FIFTY,
+    FALSE
   };
 
   // ------------------------------------------------------------------------------

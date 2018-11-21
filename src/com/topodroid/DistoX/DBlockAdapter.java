@@ -233,6 +233,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     TextView tvFrom;
     TextView tvTo;
     TextView tvLength;
+    // DBlock   mBlock;   // used to make sure blocks do not hold ref to a view, that does not belog to them REVISE_RECENT
 
     ViewHolder( TextView id, TextView from, TextView to, TextView len )
     {
@@ -241,6 +242,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       tvFrom    = from;
       tvTo      = to;
       tvLength  = len;
+      // mBlock    = null; // REVISE_RECENT
     }
 
 
@@ -305,6 +307,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       tvLength.setTextColor( col );
 
       if ( b.isRecent( ) ) { // if ( b.isTimeRecent( System.currentTimeMillis()/1000 ) )
+	// b.mWasRecent = true;
         tvFrom.setBackgroundColor( TDColor.DARK_GREEN );
         tvTo.setBackgroundColor( TDColor.DARK_GREEN );
       } 
@@ -338,7 +341,10 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       holder = (ViewHolder) convertView.getTag();
     }
     holder.pos = pos;
+    // if ( holder.mBlock != null ) holder.mBlock.mView = null; // REVISE_RECENT
+    // holder.mBlock = b;
     b.mView = convertView;
+
     holder.setViewText( b, this );
     b.mView.setBackgroundColor( b.mMultiSelected ? TDColor.GRID : TDColor.TRANSPARENT );
     convertView.setVisibility( b.mVisible );
@@ -429,6 +435,27 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     }
     return false;
   }
+
+  // not used
+  // go over the list and revised background of FROM-TO for recent shots // REVISE_RECENT
+  //
+  // int reviseLatest()
+  // {
+  //   int revised = 0;
+  //   for ( DBlock blk : mItems ) {
+  //     if ( blk.mView != null && blk.mWasRecent ) {
+  //       if ( ! blk.isRecent() ) {
+  //         blk.mWasRecent = false;
+  //         ViewHolder holder = (ViewHolder) blk.mView.getTag();
+  //         holder.tvFrom.setBackgroundColor( TDColor.BLACK );
+  //         holder.tvTo.setBackgroundColor( TDColor.BLACK );
+  //         blk.mView.invalidate();
+  //         ++ revised;
+  //       }
+  //     }
+  //   }
+  //   return revised;
+  // }
 
 }
 

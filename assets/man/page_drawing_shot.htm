@@ -12,11 +12,11 @@ Shot properties:
 <li><b>stations</b></li>
 <li><b>comment</b></li>
 <li>profile <b>extend</b>: "left" (-1), "vertical" (0), or "right" (+1)</li>
-<li>profile <b>fractional extend</b>: an additional extend ranging in [-0.5, 0.5]</li>
+<li>profile <b>fractional extend</b> slidebar (legs only) [T]</li>
 <li><img src="btn_duplicate.png" > "duplicate" flag</li>
 <li><img src="btn_surface.png" > "surface" flag</li>
 <li><img src="btn_comment.png" > "commented" flag</li>
-<li>checkboxes to <b>hide</b> the midline</li>
+<li>checkboxes to <b>hide</b> the midline (legs only)</li>
 </ul>
 <br><p>
 
@@ -28,7 +28,7 @@ Shot properties:
 Leg shots have checkboxes to hide the display of the midline on the side of either stations.
 The hiding stations are displayed either red or violet in the drawing. The hiding is reverted through the edit dialog of the station.<br><p>
 
-<b>Leg extend</b> [T]<br>
+<b>Leg extend</b> [E]<br>
 In the extended profile legs are usually drawn either to the left, or vertical, or to the right (or not drawn at all).
 The choice among these options is the "extend" value, that specifies whether the leg is extended left (-1), vertically (0), or rith (+1).
 When a leg is selected in the extended profile view a horizontal bar is drawn through its middle point.
@@ -36,17 +36,20 @@ by swiping from the midpoint along the bar the user can quickly change the "exte
 <br><p>
 
 <b>Shot fractional extend</b> [T]<br>
-It is also possible to add an additional "fractional extend", a value between -0.5 and 0.5.
-This is set with the slider above the "extend" checkboxes.
-If not modified the fractional extend of a shot is zero.<br><p>
+It is also possible to set a "fractional extend": a value between -1.5 and 1.5, instead of only the integer values -1 (left), 0 (vertical), and
+1 (right).
+By default the "extend" has inteer value and the fractional part is zero.
+The slider below the "extend" checkboxes changes the integer part and the fractional part of the shot "extend".<br><p>
 
-The fractional extend of a shot is set to zero when
+The fractional part of the shot "extend" is set to zero when
 <ul>
 <li>the shot extend is set with a multishot action (except for the "flip" action)</li>
 <li>the shot extend is changed in the drawing window using the yellow extend line</li>
 <li>the shot extend is changed in the shot edit dialog (of the shot window)</li>
 <li>the shot extend is assigned by TopoDroid</li>
-</ul>
+</ul><br><p>
+
+To set a fractional extend you must enable the relative setting.<br><p>
 
 </body>
 </html>

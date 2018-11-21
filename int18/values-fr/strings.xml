@@ -743,6 +743,7 @@
     <string name="help_continue">Continuer une ligne</string>
     <string name="help_current_station">Stations enregistrées</string>
     <string name="help_azimuth">Azimuth Référence Etendue</string>
+    <!-- TODO string name="help_refresh">Refresh display</string -->
     <string name="help_device">Périphériques DistoX</string>
     <string name="help_add_topodroid">Crée un nouveau relevé/étalonnage</string>
     <string name="help_import">Importe une archive Zip ou un fichier Therion</string>
@@ -1156,6 +1157,8 @@
   <string name="pref_shot_timer_summary">Secondes d\'attente avant la prise de l\'azimut</string>
   <string name="pref_beep_volume_title">Volume bip retardateur</string>
   <string name="pref_beep_volume_summary">Volume bip retardateur (pourcent)</string>
+  <!-- TODO string name="pref_extend_frac_title">Fractional extend</string -->
+  <!-- TODO string name="pref_extend_frac_summary">Whether "extend" can have a decimal part</string -->
   <string name="pref_drawing_unit_title">Échelle des symboles</string>
   <string name="pref_drawing_unit_summary">Échelle des symboles de dessin</string>
   <string name="pref_unscaled_points_title">Zoom icônes désactivé</string>

@@ -228,5 +228,15 @@
       <item name="android:paddingBottom">@dimen/paddingv</item>
     </style>
 
+    <style name="lvrseekbar" parent="@android:style/Widget.SeekBar" >
+      <!-- item name="androiid:indeterminateOnly">false</item -->
+      <item name="android:progressDrawable">@drawable/lvrseekbar_selector</item>
+      <!-- item name="android:indeterminateDrawable">@drawable/lrvseekbar_progress</item -->
+      <item name="android:thumb">@drawable/lvrseekbar_thumb</item>
+      <item name="android:focusable">true</item>
+      <item name="android:minHeight">10dp</item>
+      <item name="android:maxHeight">10dp</item>
+    </style>
+
 </resources>
 

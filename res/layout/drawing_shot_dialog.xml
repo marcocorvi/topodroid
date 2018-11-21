@@ -49,46 +49,53 @@
     android:layout_below="@id/layout1"
     />
 
-  <SeekBar android:id="@+id/stretchbar"
-    android:layout_width="fill_parent"
-    android:layout_height="20sp" 
-    android:layout_marginTop="@dimen/marginv"
-    android:layout_below="@id/shot_comment"
-    android:max="200"
-    android:background="#666666"
-    android:progressDrawable="@drawable/progress2"
-    />
-
   <LinearLayout android:id="@+id/layout2"
     android:layout_marginTop="@dimen/marginv"
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
-    android:layout_below="@id/stretchbar"
+    android:layout_below="@id/shot_comment"
     android:orientation="horizontal" 
     >
     <CheckBox android:id="@+id/left"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
+      android:layout_weight="1"
       android:layout_height="wrap_content"
+      android:layout_gravity="center"
       android:text="@string/extend_left" />
     <CheckBox android:id="@+id/vert"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
+      android:layout_weight="1"
       android:layout_height="wrap_content"
+      android:layout_gravity="center"
       android:text="@string/extend_vert" />
     <CheckBox android:id="@+id/right"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
+      android:layout_weight="1"
       android:layout_height="wrap_content"
+      android:layout_gravity="center"
       android:text="@string/extend_right" />
     <!-- RadioButton android:id="@+id/ignore"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/extend_ignore" / -->
   </LinearLayout>
+
+  <SeekBar android:id="@+id/stretchbar"
+    style="@style/lvrseekbar"
+    android:layout_width="fill_parent"
+    android:layout_height="20sp" 
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_below="@id/layout2"
+    android:max="300"
+    android:background="#666666"
+    />
+    <!-- android:progressDrawable="@drawable/progress2" -->
       				  
   <LinearLayout android:id="@+id/layout3"
     android:layout_marginTop="@dimen/marginv"
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
-    android:layout_below="@id/layout2"
+    android:layout_below="@id/stretchbar"
     android:orientation="horizontal" 
     >
     <!-- RadioButton android:id="@+id/survey"

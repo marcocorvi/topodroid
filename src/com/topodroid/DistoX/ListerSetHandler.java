@@ -68,19 +68,19 @@ class ListerSetHandler extends ListerHandler
 
     Bundle bundle = msg.getData();
     switch ( msg.what ) {
-      case Lister.REFRESH:
+      case Lister.LIST_REFRESH:
         int nr = bundle.getInt( Lister.NUMBER );
         for ( ILister lister : mListers ) lister.refreshDisplay( nr, false );
         break;
-      case Lister.STATUS:
+      case Lister.LIST_STATUS:
         int status = bundle.getInt( Lister.STATE );
         for ( ILister lister : mListers ) lister.setConnectionStatus( status );
         break;
-      case Lister.UPDATE:
+      case Lister.LIST_UPDATE:
         long blk_id = bundle.getLong( Lister.BLOCK_ID );
         for ( ILister lister : mListers ) lister.updateBlockList( blk_id );
         break;
-      case Lister.REF_AZIMUTH:
+      case Lister.LIST_REF_AZIMUTH:
         float azimuth =  bundle.getFloat( Lister.AZIMUTH );
         long fixed_extend = bundle.getLong( Lister.FIXED_EXTEND );
         for ( ILister lister : mListers ) lister.setRefAzimuth( azimuth, fixed_extend );

@@ -1845,7 +1845,7 @@ public class DrawingWindow extends ItemDrawer
   protected synchronized void onResume()
   {
     super.onResume();
-    mApp.resetLocale();
+    // mApp.resetLocale(); FIXME-LOCALE
     // Log.v("DistoX", "Drawing Activity onResume " + ((mDataDownloader!=null)?"with DataDownloader":"") );
     doResume();
     if ( mDataDownloader != null ) {

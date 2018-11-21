@@ -760,6 +760,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="help_contour">Contour editing</string -->
     <string name="help_current_station">Saved stations</string>
     <string name="help_azimuth">"Extend" reference</string>
+    <string name="help_refresh">Refresh display</string>
     <string name="help_device">Device activity</string>
     <string name="help_add_topodroid">New survey/calibration</string>
     <string name="help_import">Import zip archive or survey file</string>
@@ -1011,7 +1012,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_leg_shots_title">Minimum leg shots</string>
   <string name="pref_leg_shots_summary">Minimum number of shots for a leg</string>
   <string name="pref_recent_timeout_title">Recent data timeout</string>
-  <string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent</string>
+  <string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent [s]</string>
   <string name="pref_station_prefix_title">Compass station prefix</string>
   <string name="pref_station_prefix_summary">Export station prefix [Compass]</string>
   <string name="pref_compass_splays_title">Compass splays</string>
@@ -1185,6 +1186,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_shot_timer_summary">Seconds to wait before measuring the shot direction</string>
   <string name="pref_beep_volume_title">Timer-beep volume</string>
   <string name="pref_beep_volume_summary">Percent timer-beep volume</string>
+  <string name="pref_extend_frac_title">Fractional extend</string>
+  <string name="pref_extend_frac_summary">Whether "extend" can have a decimal part</string>
   <string name="pref_drawing_unit_title">Point tools scale</string>
   <string name="pref_drawing_unit_summary">Scale of the point tools</string>
   <string name="pref_unscaled_points_title">Non-zoomed point icons</string>

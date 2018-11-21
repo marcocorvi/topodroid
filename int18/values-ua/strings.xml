@@ -748,6 +748,7 @@
     <!-- UNUSED string name="help_contour">Редагувати контури</string -->
     <string name="help_current_station">Збережені пікети</string>
     <string name="help_azimuth">Проекція розгортки на референс-азимут</string>
+    <!-- TODO string name="help_refresh">Refresh display</string -->
     <string name="help_device">Вікно управління пристроями</string>
     <string name="help_add_topodroid">Створити нову зйомку/калібровку</string>
     <string name="help_import">Імпорт zip архіву або файлу зйомки</string>
@@ -1164,6 +1165,8 @@
   <string name="pref_shot_timer_summary">Секунд до заміру направлення на пікет</string>
   <string name="pref_beep_volume_title">Гучність сигналу таймера</string>
   <string name="pref_beep_volume_summary">Відсотки гучності сигналу таймера</string>
+  <!-- TODO string name="pref_extend_frac_title">Fractional extend</string -->
+  <!-- TODO string name="pref_extend_frac_summary">Whether "extend" can have a decimal part</string -->
   <string name="pref_drawing_unit_title">Розмір символів точок</string>
   <string name="pref_drawing_unit_summary">Базовий розмір символів точок [потрібен перезапуск програми]</string>
   <string name="pref_unscaled_points_title">Не-масштабовані значки точок</string>

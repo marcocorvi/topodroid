@@ -750,6 +750,7 @@
     <!-- UNUSED string name="help_contour">Editare contur</string -->
     <string name="help_current_station">Stații salvate</string>
     <string name="help_azimuth">Referință "extinsă"</string>
+    <!-- TODO string name="help_refresh">Refresh display</string -->
     <string name="help_device">Activitate dispozitiv</string>
     <string name="help_add_topodroid">Cartare/calibrare nouă</string>
     <string name="help_import">Importă arhivă zip sau fițier cartare</string>
@@ -1170,6 +1171,8 @@
   <string name="pref_shot_timer_summary">Timp de așteaptare înaintea măsurării direcției [sec]</string>
   <string name="pref_beep_volume_title">Volum sunet timer</string>
   <string name="pref_beep_volume_summary">Procentaj volum sunet de avertizare timer</string>
+  <!-- TODO string name="pref_extend_frac_title">Fractional extend</string -->
+  <!-- TODO string name="pref_extend_frac_summary">Whether "extend" can have a decimal part</string -->
   <string name="pref_drawing_unit_title">Scară unelte punct</string>
   <string name="pref_drawing_unit_summary">Scara uneltelor de desenare tip punct</string>
   <string name="pref_unscaled_points_title">Simboluri puncte ne-scalate</string>

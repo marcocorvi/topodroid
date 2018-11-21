@@ -40,20 +40,20 @@ class ListerHandler extends Handler
     if ( mLister == null ) return;
     Bundle bundle = msg.getData();
     switch ( msg.what ) {
-      case Lister.REFRESH:
+      case Lister.LIST_REFRESH:
         int nr = bundle.getInt( Lister.NUMBER );
         mLister.refreshDisplay( nr, false );
         break;
-      case Lister.STATUS:
+      case Lister.LIST_STATUS:
         int status = bundle.getInt( Lister.STATE );
         mLister.setConnectionStatus( status );
         break;
-      case Lister.UPDATE:
+      case Lister.LIST_UPDATE:
         long blk_id = bundle.getLong( Lister.BLOCK_ID );
         // Log.v("DistoX", "lister handler message blk id " + blk_id );
         mLister.updateBlockList( blk_id );
         break;
-      case Lister.REF_AZIMUTH:
+      case Lister.LIST_REF_AZIMUTH:
         float azimuth =  bundle.getFloat( Lister.AZIMUTH );
         long fixed_extend = bundle.getLong( Lister.FIXED_EXTEND );
         mLister.setRefAzimuth( azimuth, fixed_extend );

@@ -746,6 +746,7 @@
     <!-- UNUSED string name="help_contour">Körvonal szerkesztése</string -->
     <string name="help_current_station">Elmentett mérési pontok</string>
     <string name="help_azimuth">Hivatkozás bővítése</string>
+    <!-- TODO string name="help_refresh">Refresh display</string -->
     <string name="help_device">Eszköz aktivitás bevitele </string>
     <string name="help_add_topodroid">Új felmérés/kalibráció létrehozása</string>
     <string name="help_import">ZIP archívum, vagy felmérés importálása</string>
@@ -1156,6 +1157,8 @@
   <string name="pref_shot_timer_summary">Hány másodpercig várjon, mielőtt megméri az irányszöget</string>
   <string name="pref_beep_volume_title">Időzítő hangereje</string>
   <string name="pref_beep_volume_summary">Időzítő csipogásának hány százalékos a hangereje</string>
+  <!-- TODO string name="pref_extend_frac_title">Fractional extend</string -->
+  <!-- TODO string name="pref_extend_frac_summary">Whether "extend" can have a decimal part</string -->
   <string name="pref_drawing_unit_title">Pont eszközök méretaránya</string>
   <string name="pref_drawing_unit_summary">Pont eszközök méretaránya</string>
   <string name="pref_unscaled_points_title">Pont jelkulcsok nem nagyíthatóak</string>

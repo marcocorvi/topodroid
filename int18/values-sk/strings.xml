@@ -759,6 +759,7 @@
     <!-- UNUSED string name="help_contour">Editovať obrysy</string -->
     <string name="help_current_station">Uložené meračské body</string>
     <string name="help_azimuth">Smerová orientácia</string>
+    <!-- TODO string name="help_refresh">Refresh display</string -->
     <string name="help_device">DistoX</string>
     <string name="help_add_topodroid">Začať nové Mapovanie</string>
     <string name="help_import">Importovať zip súbor alebo meračský súbor</string>
@@ -1186,6 +1187,8 @@
   <string name="pref_shot_timer_summary">Sekundy pred meraním zámery smeru pomocou senzorov mobilu</string>
   <string name="pref_beep_volume_title">Nastavenie hlasitosti</string>
   <string name="pref_beep_volume_summary">Percento hlasitosti pípania</string>
+  <!-- TODO string name="pref_extend_frac_title">Fractional extend</string -->
+  <!-- TODO string name="pref_extend_frac_summary">Whether "extend" can have a decimal part</string -->
   <string name="pref_drawing_unit_title">Veľkosť Symbolov Bod</string>
   <string name="pref_drawing_unit_summary">Mierka veľkosti Symbolov BOD</string>
   <string name="pref_unscaled_points_title">Približovanie Symbolov Bod</string>

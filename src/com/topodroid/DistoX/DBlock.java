@@ -71,6 +71,7 @@ class DBlock
   boolean mWithPhoto;
   boolean mMultiBad; // whether it disagree with siblings
   private float mStretch;
+  // boolean mWasRecent = false; // REVISE_RECENT
 
   static final private int BLOCK_BLANK      = 0;
   static final private int BLOCK_MAIN_LEG   = 1; // primary leg shot
@@ -231,11 +232,11 @@ class DBlock
   //   - its time is no more than 10 seconds before the given time
   boolean isRecent( )
   {
-    if ( TDSetting.isConnectionModeBatch() ) return isTimeRecent( System.currentTimeMillis()/1000 );
+    if ( TDSetting.isConnectionModeContinuous() ) return isTimeRecent( System.currentTimeMillis()/1000 );
     return mId >= TDInstance.secondLastShotId;
   }
 
-  private boolean isTimeRecent( long time ) { return mId >= TDInstance.secondLastShotId && (time-mTime)< TDSetting.mRecentTimeout; }
+  private boolean isTimeRecent( long time ) { return mId >= TDInstance.secondLastShotId && (time-mTime) < TDSetting.mRecentTimeout; }
 
   boolean isMultiBad() { return mMultiBad; }
 

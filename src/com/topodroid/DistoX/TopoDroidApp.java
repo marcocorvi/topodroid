@@ -205,7 +205,7 @@ public class TopoDroidApp extends Application
   static boolean mDeviceActivityVisible = false;
   static boolean mGMActivityVisible = false;
 
-  private static long lastShotId( ) { return mData.getLastShotId( TDInstance.sid ); }
+  static long lastShotId( ) { return mData.getLastShotId( TDInstance.sid ); }
 
   // static Device mDevice = null;
   // static int distoType() { return (mDevice == null)? 0 : mDevice.mType; }
@@ -655,15 +655,38 @@ public class TopoDroidApp extends Application
     // mManual = getResources().getString( R.string.topodroid_man );
   }
 
-  static void resetLocale()
+  @Override
+  protected void attachBaseContext( Context ctx )
+  {
+    TDInstance.context = ctx;
+    super.attachBaseContext( resetLocale( ) );
+  }
+
+  @Override
+  public void onConfigurationChanged( Configuration cfg )
+  {
+    super.onConfigurationChanged( cfg );
+    resetLocale();
+  }
+
+  // called by MainWindow
+  static Context resetLocale()
   {
     // Log.v("DistoX", "reset locale to " + mLocaleStr );
     // mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
     Resources res = TDInstance.context.getResources();
     DisplayMetrics dm = res.getDisplayMetrics();
-    Configuration conf = res.getConfiguration();
-    conf.locale = mLocale; // setLocale API-17
-    res.updateConfiguration( conf, dm );
+    if ( android.os.Build.VERSION.SDK_INT >= 17 ) {
+      Configuration conf = new Configuration( res.getConfiguration() );
+      conf.setLocale( mLocale );
+      // TDInstance.context = TDInstance.context.createConfigurationContext( conf );
+      res.updateConfiguration( conf, dm );
+    } else {
+      Configuration conf = res.getConfiguration();
+      conf.locale = mLocale; 
+      res.updateConfiguration( conf, dm );
+    }
+    return TDInstance.context;
   }
 
   static void setLocale( String locale, boolean load_symbols )

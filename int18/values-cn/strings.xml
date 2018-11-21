@@ -743,6 +743,7 @@
     <!-- UNUSED string name="help_contour">轮廓编辑</string -->
     <string name="help_current_station">保存测量点</string>
     <string name="help_azimuth">"延伸" 参照</string>
+    <!-- TODO string name="help_refresh">Refresh display</string -->
     <string name="help_device">输入设备激活</string>
     <string name="help_add_topodroid">新建测量/新建校准</string>
     <string name="help_import">输入压缩的存档或者测量文件</string>
@@ -1157,6 +1158,8 @@
   <string name="pref_shot_timer_summary">第二次在第一次方向测量之前需等待</string>
   <string name="pref_beep_volume_title">定时器嗡鸣声</string>
   <string name="pref_beep_volume_summary">定时器嗡鸣声百分比</string>
+  <!-- TODO string name="pref_extend_frac_title">Fractional extend</string -->
+  <!-- TODO string name="pref_extend_frac_summary">Whether "extend" can have a decimal part</string -->
   <string name="pref_drawing_unit_title">绘点工具大小</string>
   <string name="pref_drawing_unit_summary">绘点工具大小</string>
   <string name="pref_unscaled_points_title">非缩放点图标</string>

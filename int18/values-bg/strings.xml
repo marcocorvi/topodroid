@@ -746,6 +746,7 @@
     <!-- NO string name="help_contour">Contour editing</string -->
     <string name="help_current_station">Записани репери</string>
     <string name="help_azimuth">Референтен азимут за разгъване</string>
+    <!-- TODO string name="help_refresh">Refresh display</string -->
     <string name="help_device">Управление на устройството</string>
     <string name="help_add_topodroid">Нова картировка/калибрация</string>
     <string name="help_import">Импортиране на архив/картировка</string>
@@ -1159,6 +1160,8 @@
   <string name="pref_shot_timer_summary">Секунди за изчакване преди измерване на отсечка</string>
   <string name="pref_beep_volume_title">Сила на звука при таймер-измерване</string>
   <string name="pref_beep_volume_summary">Сила на звука в проценти при измерване с таймер</string>
+  <!-- TODO string name="pref_extend_frac_title">Fractional extend</string -->
+  <!-- TODO string name="pref_extend_frac_summary">Whether "extend" can have a decimal part</string -->
   <string name="pref_drawing_unit_title">Размер на елемент "точка"</string>
   <string name="pref_drawing_unit_summary">Размер на нарисуван елемент тип "точка"</string>
   <string name="pref_unscaled_points_title">Фиксиран размер на точките</string>

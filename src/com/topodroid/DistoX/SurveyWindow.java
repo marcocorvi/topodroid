@@ -288,7 +288,7 @@ public class SurveyWindow extends Activity
   public synchronized void onResume() 
   {
     super.onResume();
-    mApp.resetLocale();
+    // mApp.resetLocale(); // FIXME-LOCALE
     doSetDeclination( mApp_mData.getSurveyDeclination( TDInstance.sid ) );
   }
 

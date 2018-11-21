@@ -744,6 +744,7 @@
     <!-- UNUSED string name="help_contour">Editar perfil</string -->
     <string name="help_current_station">Bases salvas</string>
     <string name="help_azimuth">Referência para retificar perfil</string>
+    <!-- TODO string name="help_refresh">Refresh display</string -->
     <string name="help_device">Editar dispositivo em uso</string>
     <string name="help_add_topodroid">Criar nova topo/calibração</string>
     <string name="help_import">Importar arquivo zip ou arquivo de topo</string>
@@ -1157,6 +1158,8 @@
   <string name="pref_shot_timer_summary">Segundos de espera antes de capturar a direção da medida</string>
   <string name="pref_beep_volume_title">Volume bip temporizador</string>
   <string name="pref_beep_volume_summary">Percentual de volume do bip do temporizador</string>
+  <!-- TODO string name="pref_extend_frac_title">Fractional extend</string -->
+  <!-- TODO string name="pref_extend_frac_summary">Whether "extend" can have a decimal part</string -->
   <string name="pref_drawing_unit_title">Escala símbolos pontos</string>
   <string name="pref_drawing_unit_summary">Escala dos símbolos dos pontos</string>
   <string name="pref_unscaled_points_title">Ícones pontos sem zoom</string>

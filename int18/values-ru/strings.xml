@@ -750,6 +750,7 @@
     <!-- UNUSED string name="help_contour">Редактировать контуры</string -->
     <string name="help_current_station">Сохраненные пикеты</string>
     <string name="help_azimuth">Направление развёртки разреза</string>
+    <!-- TODO string name="help_refresh">Refresh display</string -->
     <string name="help_device">Окно управления устройствами</string>
     <string name="help_add_topodroid">Создать новую съёмку/калибровку</string>
     <string name="help_import">Импорт zip архива или файла съёмки</string>
@@ -1173,6 +1174,8 @@
   <string name="pref_shot_timer_summary">Секунд до замера направления на пикет</string>
   <string name="pref_beep_volume_title">Громкость сигнала таймера</string>
   <string name="pref_beep_volume_summary">Проценты громкости сигнала таймера</string>
+  <!-- TODO string name="pref_extend_frac_title">Fractional extend</string -->
+  <!-- TODO string name="pref_extend_frac_summary">Whether "extend" can have a decimal part</string -->
   <string name="pref_drawing_unit_title">Размер символов точек</string>
   <string name="pref_drawing_unit_summary">Базовый размер символов точек [требуется перезапуск программы]</string>
   <string name="pref_unscaled_points_title">Немасштабируемые значки точек</string>

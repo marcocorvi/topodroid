@@ -118,6 +118,7 @@ public class ShotWindow extends Activity
                         R.drawable.iz_station,
                         R.drawable.iz_search,
                         R.drawable.iz_dial,
+			R.drawable.iz_refresh,
 			R.drawable.iz_empty
                       };
 
@@ -167,6 +168,7 @@ public class ShotWindow extends Activity
                           R.string.help_current_station,
                           R.string.help_search,
                           R.string.help_azimuth,
+			  R.string.help_refresh,
                         };
    private static final int help_menus[] = {
                           R.string.help_close,
@@ -387,6 +389,8 @@ public class ShotWindow extends Activity
             mList.setSelection( mDataAdapter.getCount() - 1 );
           }
         } );
+	// mList.invalidate();
+	// mDataAdapter.reviseLatest();
       }
     }
   }
@@ -842,7 +846,7 @@ public class ShotWindow extends Activity
     TDLog.Log( TDLog.LOG_DEBUG, "on Activity Result: request " + reqCode + " result " + resCode );
     switch ( reqCode ) {
       case TDRequest.CAPTURE_IMAGE_SHOTWINDOW:
-        mApp.resetLocale();
+        // mApp.resetLocale(); // FIXME-LOCALE
         if ( resCode == Activity.RESULT_OK ) { // RESULT_OK = -1 (0xffffffff)
           // (new PhotoCommentDialog(this, this) ).show();
           insertPhoto();
@@ -942,12 +946,12 @@ public class ShotWindow extends Activity
     mButtonSize = TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
     Resources res = getResources();
-    mNrButton1 = TDLevel.overExpert ? 9
+    mNrButton1 = TDLevel.overExpert ? 10
                : TDLevel.overNormal ? 8
                : TDLevel.overBasic ?  6 : 5;
     diving = ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING );
     if ( diving ) {
-      mNrButton1 -= 2;
+      mNrButton1 -= 3;
       boff = 2;
     } else {
       boff = 0;
@@ -1092,7 +1096,7 @@ public class ShotWindow extends Activity
   public synchronized void onResume() 
   {
     super.onResume();
-    mApp.resetLocale();
+    // mApp.resetLocale(); // FIXME-LOCALE
 
     // FIXME NOTIFY register ILister
     // if ( mApp.mComm != null ) { mApp.mComm.resume(); }
@@ -1321,6 +1325,10 @@ public class ShotWindow extends Activity
             (new AzimuthDialDialog( mActivity, this, TDAzimuth.mRefAzimuth, mDialBitmap )).show();
           }
         }
+      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // REFRESH
+        if ( TDLevel.overExpert ) {
+          updateDisplay();
+	}
 
       } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // LEFT reset stretch
         for ( DBlock blk : mDataAdapter.mSelect ) {

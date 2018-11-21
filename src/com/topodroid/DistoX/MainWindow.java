@@ -50,7 +50,7 @@ import android.bluetooth.BluetoothAdapter;
 
 // import android.location.LocationManager;
 
-// import android.content.Context;
+import android.content.Context;
 import android.content.Intent;
 // import android.content.IntentFilter;
 import android.content.DialogInterface;
@@ -672,10 +672,10 @@ public class MainWindow extends Activity
   public synchronized void onResume() 
   {
     super.onResume();
-    mApp.resetLocale();
+    // mApp.resetLocale(); // FIXME-LOCALE
+
     // TDLog.Profile("TDActivity onResume");
     // TDLog.Log( TDLog.LOG_MAIN, "onResume " );
-    // mApp.resetLocale();
     mApp.resumeComm();
 
     // restoreInstanceFromFile();
@@ -752,6 +752,13 @@ public class MainWindow extends Activity
   }
 
   // ------------------------------------------------------------------
+ 
+  @Override
+  protected void attachBaseContext( Context ctx )
+  {
+    TDInstance.context = ctx;
+    super.attachBaseContext( TopoDroidApp.resetLocale( ) );
+  }
 
 
   public void onActivityResult( int request, int result, Intent intent ) 
@@ -760,7 +767,7 @@ public class MainWindow extends Activity
     Bundle extras = (intent != null )? intent.getExtras() : null;
     switch ( request ) {
       case TDRequest.REQUEST_ENABLE_BT:
-        // mApp.resetLocale(); // apparently this does not affect locale
+        // mApp.resetLocale(); // OK-LOCALE apparently this does not affect locale
         if ( result == Activity.RESULT_OK ) {
           // nothing to do: scanBTDEvices() is called by menu CONNECT
         } else if ( say_not_enabled ) {

@@ -87,6 +87,7 @@ class DataDownloader
       tryDownloadData( );
     } else if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_CONTINUOUS ) {
       if ( TDSetting.mAutoReconnect ) {
+        TDInstance.secondLastShotId = TopoDroidApp.lastShotId( ); // FIXME-LATEST
         new ReconnectTask( this ).execute();
       } else {
         tryConnect();
@@ -137,7 +138,7 @@ class DataDownloader
   // non-private to allow the DistoX select dialog
   private void tryDownloadData( )
   {
-    // TDInstance.secondLastShotId = TopoDroidApp.lastShotId( );
+    TDInstance.secondLastShotId = TopoDroidApp.lastShotId( ); // FIXME-LATEST
     if ( TDInstance.device != null && mApp.mBTAdapter.isEnabled() ) {
       notifyConnectionStatus( true );
       // TDLog.Log( TDLog.LOG_COMM, "shot menu DOWNLOAD" );

@@ -19,9 +19,9 @@ class Lister
   static final String AZIMUTH   = "LISTER_AZIMUTH";
   static final String FIXED_EXTEND  = "LISTER_FIXED_EXTEND";
 
-  static final int REFRESH = 1;
-  static final int UPDATE  = 2;
-  static final int STATUS  = 3;
-  static final int REF_AZIMUTH = 4;
+  static final int LIST_REFRESH = 1;
+  static final int LIST_UPDATE  = 2;
+  static final int LIST_STATUS  = 3;
+  static final int LIST_REF_AZIMUTH = 4;
 
 }
