@@ -45,6 +45,9 @@ class TDPath
   final static String JSON = ".json";
   final static String PLT = ".plt";
   final static String PNG = ".png";
+  final static String SHP = ".shp"; // shapefile
+  final static String SHX = ".shx";
+  final static String DBF = ".dbf";
   final static String SRV = ".srv";
   final static String SUR = ".sur";
   final static String SVG = ".svg";
@@ -101,6 +104,7 @@ class TDPath
   private static String PATH_IMPORT; //  = PATH_BASE + "import/";
   private static String APP_NOTE_PATH;   //  = PATH_BASE + "note/";
   private static String PATH_PNG;    //  = PATH_BASE + "png/";
+  private static String PATH_SHP;    //  = PATH_BASE + "shp/";
   private static String PATH_SRV;    //  = PATH_BASE + "srv/";
   private static String PATH_SUR;    //  = PATH_BASE + "sur/";
   private static String PATH_SVG;    //  = PATH_BASE + "svg/";
@@ -178,98 +182,40 @@ class TDPath
     // APP_TLX_PATH = PATH_BASE + "tlx/";
     // checkDirs( APP_TLX_PATH );
 
-    PATH_CAV = PATH_BASE + "cav/";
-    // FIXME checkDirs( PATH_CAV );
+    PATH_CAV = PATH_BASE + "cav/";      // FIXME checkDirs( PATH_CAV );
+    PATH_DAT = PATH_BASE + "dat/";      // FIXME checkDirs( PATH_DAT );
+    PATH_GRT = PATH_BASE + "grt/";      // FIXME checkDirs( PATH_GRT );
+    PATH_GTX = PATH_BASE + "gtx/";      // FIXME checkDirs( PATH_GTX );
+    PATH_CAVE = PATH_BASE + "cave/";    // FIXME checkDirs( PATH_CAVE );
+    PATH_SHP = PATH_BASE + "shp/";      // FIXME checkDirs( PATH_SHP );
+    PATH_SRV = PATH_BASE + "srv/";      // FIXME checkDirs( PATH_SRV );
+    PATH_SUR = PATH_BASE + "sur/";      // FIXME checkDirs( PATH_SUR );
+    PATH_SVX = PATH_BASE + "svx/";      // FIXME checkDirs( PATH_SVX );
+    PATH_CSV = PATH_BASE + "csv/";      // FIXME checkDirs( PATH_CSV );
+    PATH_CSX = PATH_BASE + "csx/";      // FIXME checkDirs( PATH_CSX );
+    PATH_DUMP = PATH_DEFAULT + "dump/"; // FIXME checkDirs( PATH_DUMP );
+    PATH_TOP  = PATH_BASE + "top/";     // FIXME checkDirs( PATH_TOP );
+    PATH_TH  = PATH_BASE + "th/";       // FIXME checkDirs( PATH_TH );
+    PATH_TDR = PATH_BASE + "tdr/";      checkDirs( PATH_TDR );
+    PATH_TH2 = PATH_BASE + "th2/";      checkDirs( PATH_TH2 );
+    PATH_TH3 = PATH_BASE + "th3/";      checkDirs( PATH_TH3 );
+    PATH_TDR3 = PATH_BASE + "tdr3/";    checkDirs( PATH_TDR3 );
+    APP_TMP_PATH = PATH_BASE + "tmp/";  checkDirs( APP_TMP_PATH );
+    PATH_DXF = PATH_BASE + "dxf/";      // FIXME checkDirs( PATH_DXF );
+    PATH_KML = PATH_BASE + "kml/";      // FIXME checkDirs( PATH_KML );
+    PATH_JSON = PATH_BASE + "json/";    // FIXME checkDirs( PATH_JSON );
+    PATH_PLT = PATH_BASE + "plt/";      // FIXME checkDirs( PATH_PLT );
+    PATH_SVG = PATH_BASE + "svg/";      // FIXME checkDirs( PATH_SVG );
+    PATH_TRO = PATH_BASE + "tro/";      // FIXME checkDirs( PATH_TRO );
+    PATH_TRB = PATH_BASE + "trb/";      // FIXME checkDirs( PATH_TRB );
+    PATH_PNG = PATH_BASE + "png/";      // FIXME checkDirs( PATH_PNG );
 
-    PATH_DAT = PATH_BASE + "dat/";
-    // FIXME checkDirs( PATH_DAT );
+    APP_NOTE_PATH = PATH_BASE + "note/";   checkDirs( APP_NOTE_PATH );
+    APP_FOTO_PATH = PATH_BASE + "photo/";  checkDirs( APP_FOTO_PATH );
+    APP_AUDIO_PATH = PATH_BASE + "audio/"; checkDirs( APP_AUDIO_PATH );
 
-    PATH_GRT = PATH_BASE + "grt/";
-    // FIXME checkDirs( PATH_GRT );
-
-    PATH_GTX = PATH_BASE + "gtx/";
-    // FIXME checkDirs( PATH_GTX );
-
-    PATH_CAVE = PATH_BASE + "cave/";
-    // FIXME checkDirs( PATH_CAVE );
-
-    PATH_SRV = PATH_BASE + "srv/";
-    // FIXME checkDirs( PATH_SRV );
-
-    PATH_SUR = PATH_BASE + "sur/";
-    // FIXME checkDirs( PATH_SUR );
-
-    PATH_SVX = PATH_BASE + "svx/";
-    // FIXME checkDirs( PATH_SVX );
-
-    PATH_CSV = PATH_BASE + "csv/";
-    // FIXME checkDirs( PATH_CSV );
-
-    PATH_CSX = PATH_BASE + "csx/";
-    // FIXME checkDirs( PATH_CSX );
-
-    PATH_DUMP = PATH_DEFAULT + "dump/";
-    // FIXME checkDirs( PATH_DUMP );
-
-    PATH_TOP  = PATH_BASE + "top/";
-    // FIXME checkDirs( PATH_TOP );
-
-    PATH_TH  = PATH_BASE + "th/";
-    // FIXME checkDirs( PATH_TH );
-
-    PATH_TDR = PATH_BASE + "tdr/";
-    checkDirs( PATH_TDR );
-
-    PATH_TH2 = PATH_BASE + "th2/";
-    checkDirs( PATH_TH2 );
-
-    PATH_TH3 = PATH_BASE + "th3/";
-    checkDirs( PATH_TH3 );
-
-    PATH_TDR3 = PATH_BASE + "tdr3/";
-    checkDirs( PATH_TDR3 );
-
-    APP_TMP_PATH = PATH_BASE + "tmp/";
-    checkDirs( APP_TMP_PATH );
-
-    PATH_DXF = PATH_BASE + "dxf/";
-    // FIXME checkDirs( PATH_DXF );
-
-    PATH_KML = PATH_BASE + "kml/";
-    // FIXME checkDirs( PATH_KML );
-
-    PATH_JSON = PATH_BASE + "json/";
-    // FIXME checkDirs( PATH_JSON );
-
-    PATH_PLT = PATH_BASE + "plt/";
-    // FIXME checkDirs( PATH_PLT );
-
-    PATH_SVG = PATH_BASE + "svg/";
-    // FIXME checkDirs( PATH_SVG );
-
-    PATH_TRO = PATH_BASE + "tro/";
-    // FIXME checkDirs( PATH_TRO );
-
-    PATH_TRB = PATH_BASE + "trb/";
-    // FIXME checkDirs( PATH_TRB );
-
-    PATH_PNG = PATH_BASE + "png/";
-    // FIXME checkDirs( PATH_PNG );
-
-    APP_NOTE_PATH = PATH_BASE + "note/";
-    checkDirs( APP_NOTE_PATH );
-
-    APP_FOTO_PATH = PATH_BASE + "photo/";
-    checkDirs( APP_FOTO_PATH );
-
-    APP_AUDIO_PATH = PATH_BASE + "audio/";
-    checkDirs( APP_AUDIO_PATH );
-
-    PATH_IMPORT = PATH_BASE + "import/";
-    checkDirs( PATH_IMPORT );
-
-    PATH_ZIP = PATH_BASE + "zip/";
-    checkDirs( PATH_ZIP );
+    PATH_IMPORT = PATH_BASE + "import/";   checkDirs( PATH_IMPORT );
+    PATH_ZIP = PATH_BASE + "zip/";         checkDirs( PATH_ZIP );
   }
 
   static void setDefaultPaths()
@@ -366,6 +312,7 @@ class TDPath
   static String getKmlFile( String name )    { return PATH_KML + name; }
   static String getJsonFile( String name )   { return PATH_JSON + name; }
   static String getPltFile( String name )    { return PATH_PLT + name; }
+  static String getShpFile( String name )    { return PATH_SHP + name; }
   static String getSrvFile( String name )    { return PATH_SRV + name; }
   static String getSurFile( String name )    { return PATH_SUR + name; }
   static String getSvgFile( String name )    { return PATH_SVG + name; }
@@ -442,6 +389,10 @@ class TDPath
   static String getSurveyKmlFile( String survey ) { return getFile( PATH_KML, survey, KML ); }
   static String getSurveyJsonFile( String survey ) { return getFile( PATH_JSON, survey, JSON ); }
   static String getSurveyPltFile( String survey ) { return getFile( PATH_PLT, survey, PLT ); }
+  static String getSurveyShpFilename( String name ) { return getFile( PATH_SHP, name, "" ); }
+  // static String getSurveyShpFile( String name ) { return getFile( PATH_SHP, name, SHP ); }
+  // static String getSurveyShxFile( String name ) { return getFile( PATH_SHP, name, SHX ); }
+  // static String getSurveyDbfFile( String name ) { return getFile( PATH_SHP, name, DBF ); }
   static String getSurveySrvFile( String survey ) { return getFile( PATH_SRV, survey, SRV ); }
   static String getSurveySurFile( String survey ) { return getFile( PATH_SUR, survey, SUR ); }
   static String getSurveySvxFile( String survey ) { return getFile( PATH_SVX, survey, SVX ); }
@@ -564,12 +515,34 @@ class TDPath
     TopoDroidUtil.deleteFile( getJsonFile( survey + JSON ) );
     TopoDroidUtil.deleteFile( getPltFile( survey + PLT ) );
     TopoDroidUtil.deleteFile( getSvxFile( survey + SVX ) );
+    deleteShpFiles( survey ); // SHP stations/shots/splays shp/shx/dbf
     TopoDroidUtil.deleteFile( getSrvFile( survey + SRV ) );
     TopoDroidUtil.deleteFile( getSurFile( survey + SUR ) );
     TopoDroidUtil.deleteFile( getTopFile( survey + TOP ) );
     TopoDroidUtil.deleteFile( getTroFile( survey + TRO ) );
     TopoDroidUtil.deleteFile( getTrbFile( survey + TRB ) );
   }
+
+  static void deleteShpFiles( String survey )
+  {
+    for ( int k=0; ; ++k ) {
+      String file = getShpFile( survey + "-shots-" + k + SHP );
+      if ( (new File(file)).exists() ) {
+	TopoDroidUtil.deleteFile( file );
+      } else {
+	break;
+      }
+      // test is file exists in TopoDroidUtil.deleteFile
+      file = getShpFile( survey + "-shots-" + k + SHX );    TopoDroidUtil.deleteFile( file );
+      file = getShpFile( survey + "-shots-" + k + DBF );    TopoDroidUtil.deleteFile( file );
+      file = getShpFile( survey + "-stations-" + k + SHP ); TopoDroidUtil.deleteFile( file );
+      file = getShpFile( survey + "-stations-" + k + SHX ); TopoDroidUtil.deleteFile( file );
+      file = getShpFile( survey + "-stations-" + k + DBF ); TopoDroidUtil.deleteFile( file );
+      // file = getShpFile( survey + "-splays-" + k + SHP );   TopoDroidUtil.deleteFile( file );
+      // file = getShpFile( survey + "-splays-" + k + SHX );   TopoDroidUtil.deleteFile( file );
+      // file = getShpFile( survey + "-splays-" + k + DBF );   TopoDroidUtil.deleteFile( file );
+    }
+  } 
 
   static void rotateBackups( String filename, int rotate ) // filename has suffix BCK_SUFFIX
   {

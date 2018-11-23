@@ -160,6 +160,33 @@ Settings:
 </ul>
 <br><p>
 
+
+<b>Shapefile</b> (.shp .shx .dbf)<br>
+Survey data can be exported as shapefile if you have georeferenced at least a station.
+There is a shapefile for the stations and one for the shots (both legs and splays).
+The shapefiles are saved in the folder "shp".
+Each shapefile consists of three files: the data file (shp), the index file (shx), and the attributes file (dbf).
+If the survey contains disjoint pieces, a shapefile is exported for each pieces with a georeferenced station.
+Data are corrected with magnetic declination.<br><p>
+
+The "stations" DBF contains only the field "name".<br><p>
+
+The "shots" DBF contains the fields
+<ul style="margin-top=0">
+<li><i>type</i>: either "leg" or "splay"</li>
+<li><i>from</i> station</li>
+<li><i>to</i> station ("-" for splays)</li>
+<li>shot <i>flag</i> as hex: 1-surface, 2-duplicate, 4-commented</li>
+<li>shot <i>comment</i></li>
+</ul><br>
+
+Settings:
+<ul style="margin-top=0">
+<li><u>stations</u>: whether to export the stations file</li>
+<li><u>splays</u>: wheter to include the splays</li>
+</ul>
+<br><p>
+
 <b>CSV</b> (.csv)<br>
 Survey data can be exported as a list of records with comma-separated fields:
 <ul style="margin-top=0">

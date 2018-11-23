@@ -6,17 +6,18 @@ Here is some background about how the survey data, the calibration data, and the
 
 The app creates its default base directory, named "TopoDroid", in the primary external memory (usually /sdcard). This directory is not removed when you uninstall the app. In this directory the app creates two SQLite databases. The first is "device10.sqlite", where the calibration data, the DistoX informations, and other data are stored. The second is "distox14.sqlite" and stores the surveys data. The app also creates subdirectories for the different types of files. These subdirectories are created only in the "TopoDroid" base directory:
 <ul style="margin-top: 0">
-<li>bin: DistoX2 firmware files</li>
-<li>ccsv: CSV text files of exported calibrations</li>
-<li>dump: DistoX memory dump files</li>
-<li>symbol: drawing tools files (points, lines, areas)</li>
+<li><b>bin</b>: DistoX2 firmware files</li>
+<li><b>ccsv</b>: CSV text files of exported calibrations</li>
+<li><b>dump</b>: DistoX memory dump files</li>
+<li><b>symbol</b>: drawing tools files (points, lines, areas)</li>
+<li>man: user manual translation</li>
 </ul>
 The subdirectory "symbol" contains the drawing tool files.
 "bin" is used to store firmware files, both the factory files included in TopoDroid and the firmware dumps read from a DistoX.<br><p>
 
-The following subdirectories are created in each working directory:
+The following subdirectories can be created in each working directory (in bold those that are always created):
 <ul style="margin-top: 0">
-<li>audio: <i>audio</i> comments</li>
+<li><b>audio</b>: <i>audio</i> comments</li>
 <li>cave: <i>Polygon</i> files</li>
 <li>cav: <i>Topo</i> files</li>
 <li>csv: CSV text files of exported surveys</li>
@@ -25,24 +26,25 @@ The following subdirectories are created in each working directory:
 <li>dxf: DXF files (exported surveys and sketches)</li>
 <li>grt: <i>Grottolf</i> files (exported surveys)</li>
 <li>gtx: <i>GHTopo</i> files (exported surveys)</li>
-<li>import: survey files to import (<i>Therion</i>, <i>Compass</i>, <i>VisualTopo</i>, and <i>PocketTopo</i> format)</li>
+<li><b>import</b>: survey files to import (<i>Therion</i>, <i>Compass</i>, <i>VisualTopo</i>, and <i>PocketTopo</i> format)</li>
 <li>kml: <i>GoogleEarth</i> exports [A]</li>
-<li>note: survey annotations text files</li>
-<li>photo: survey pictures (each survey with its own subdirectory)</li>
+<li><b>note</b>: survey annotations text files</li>
+<li><b>photo</b>: survey pictures (each survey with its own subdirectory)</li>
 <li>plt: <i>OziExplorer</i> track file exports [A]</li>
 <li>png: PNG image files (exported sketches)</li>
+<li>shp: <i>shapefile</i> exports [T]</li>
 <li>srv: <i>Walls</i> files (exported surveys)</li>
 <li>svg: SVG files (exported sketches)</li>
 <li>sur: <i>WinKarst</i> files (exported surveys)</li>
 <li>svx: <i>Survex</i> files (exported surveys)</li>
-<li>tdr: binary sketch files</li>
+<li><b>tdr</b>: binary sketch files</li>
 <li>th: <i>Therion</i> files (exported surveys)</li>
 <li>th2 for <i>Therion</i> scrap files (saved sketches)</li>
 <li>th3 for 3D model files</li>
 <li>tmp: for temporary files. Any file leftover in this directory can be safely deleted.</li>
 <li>top: <i>PocketTopo</i> files (exported surveys)</li>
 <li>tro: <i>VisualTopo</i> files (exported surveys)</li>
-<li>zip: survey ZIP archives (exported and importable)</li>
+<li><b>zip</b>: survey ZIP archives (exported and importable)</li>
 </ul>
 Some of these subdirectories are used only to store exported files (cav, cave, csx, dat, dxf, png, svx, th, th2, top, tro). Others are used to store data (tdr, th3, note, photo). 
 The subdirectory "zip" is used to store zipped archives as well to read them and uncompress in TopoDroid. When you want to import a survey made with another program (<i>Therion</i>, <i>Compass</i>, <i>VisualTopo</i>, or <i>PocketTopo</i>) you must place it in the subdirectory "import".<br><p>

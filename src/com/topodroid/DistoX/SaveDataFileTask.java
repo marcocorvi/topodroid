@@ -105,6 +105,9 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
         case TDConst.DISTOX_EXPORT_JSON: // GeoJSON
           filename = TDExporter.exportSurveyAsJson( mSid, mData, mInfo, TDPath.getSurveyJsonFile( mSurvey ) );
           break;
+        case TDConst.DISTOX_EXPORT_SHP: // Shapefile
+          filename = TDExporter.exportSurveyAsShp( mSid, mData, mInfo, TDPath.getSurveyShpFilename( mSurvey ) );
+          break;
         case TDConst.DISTOX_EXPORT_PLT: // Track file
           filename = TDExporter.exportSurveyAsPlt( mSid, mData, mInfo, TDPath.getSurveyPltFile( mSurvey ) );
           break;

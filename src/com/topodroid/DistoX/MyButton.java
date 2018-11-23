@@ -28,7 +28,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 
 import android.util.SparseArray;
-// import android.util.Log;
+import android.util.Log;
 
 // import java.io.InputStream;
 // import java.io.IOException;
@@ -40,11 +40,25 @@ class MyButton
   static private int mSize = 42;
   private final static boolean USE_CACHE = true;
 
+  static Bitmap mLVRseekbar = null;
+
   // static Random rand = new Random();
 
   // CACHE : using a cache for the BitmapDrawing does not dramatically improve perfoormanaces
   static private SparseArray<BitmapDrawable> mBitmapCache = USE_CACHE ? new SparseArray<BitmapDrawable>()
                                                               : null;
+
+  static Bitmap getLVRseekbarBackGround( Context ctx, int width, int height )
+  {
+    if ( mLVRseekbar == null ) {
+      // Log.v("DistoX", "width " + width + " height " + height );
+      Bitmap bm1 = BitmapFactory.decodeResource( ctx.getResources(), R.drawable.lvrseekbar_background );
+      if ( bm1 != null ) {
+        mLVRseekbar = Bitmap.createScaledBitmap( bm1, width, height, false );
+      }
+    }
+    return mLVRseekbar;
+  }
 
   // called with context = mApp
   static void resetCache( /* Context context, */ int size )

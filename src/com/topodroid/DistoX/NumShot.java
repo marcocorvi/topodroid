@@ -43,6 +43,9 @@ class NumShot
   DBlock getFirstBlock() { return firstBlock; /* blocks.get(0); */ }
 
   float getReducedExtend() { return firstBlock.getReducedExtend(); }
+  int getReducedFlag()     { return firstBlock.getReducedFlag(); }
+  String getComment()      { return firstBlock.mComment; }
+
 
   NumShot( NumStation f, NumStation t, DBlock blk, int dir, float anomaly, float decl )
   {

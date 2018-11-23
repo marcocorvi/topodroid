@@ -16,11 +16,15 @@ package com.topodroid.DistoX;
 class NumSplay extends NumSurveyPoint
 {
   final NumStation from;
-  private DBlock block;
-  private float mDecl;
-  private float mExtend;
+  private DBlock mBlock;
+  private float  mDecl;
+  private float  mExtend;
 
-  DBlock getBlock() { return block; }
+  DBlock getBlock() { return mBlock; }
+
+  float getReducedExtend() { return mExtend; }
+  int getReducedFlag() { return mBlock.getReducedFlag(); }
+  String getComment()  { return mBlock.mComment; }
 
   NumSplay( NumStation f, float d, float b, float c, float extend, DBlock blk, float decl )
   {
@@ -30,10 +34,9 @@ class NumSplay extends NumSurveyPoint
     h = from.h + extend * h0;
     s = from.s - h0 * TDMath.cosd( b + decl );
     e = from.e + h0 * TDMath.sind( b + decl );
-    block = blk;
-    mDecl = decl;
+    mBlock  = blk;
+    mDecl   = decl;
     mExtend = extend;
   }
 
-  float getReducedExtend() { return mExtend; }
 }

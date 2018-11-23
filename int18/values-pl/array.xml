@@ -34,10 +34,10 @@
      <item name="delaunay">Delaunay</item>
   </string-array>
 
-  <string-array name="acadVersion" translatable="false">
+  <!-- string-array name="acadVersion" translatable="false">
      <item name="9">AutoCAD 6</item>
      <item name="13">AutoCAD 12</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="zoomCtrl">
      <item name="0">Wyłączony</item>
@@ -192,12 +192,12 @@
      <item name="to">In front</item>
   </string-array -->
 
-  <string-array name="recentNr" translatable="false">
+  <!-- string-array name="recentNr" translatable="false">
      <item name="3">3</item>
      <item name="4">4</item>
      <item name="5">5</item>
      <item name="6">6</item>
-  </string-array>
+  </string-array -->
 
   <!-- string-array name="deviceType">
      <item name="none">None</item>

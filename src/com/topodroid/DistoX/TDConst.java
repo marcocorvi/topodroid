@@ -41,6 +41,7 @@ class TDConst
   static final int DISTOX_EXPORT_SUR = 20; // WinKarst
   static final int DISTOX_EXPORT_TRB = 21; // TopoRobot
   static final int DISTOX_EXPORT_JSON = 22; // GeoJSON
+  static final int DISTOX_EXPORT_SHP = 23; // Shapefile
 
   static final int DISTOX_EXPORT_ZIP = 30;
 
@@ -62,7 +63,8 @@ class TDConst
     "DXF",
     "KML",
     "OziExplorer",
-    "GeoJSON"
+    "GeoJSON",
+    "Shapefile"
   };
   static final private int[] mSurveyExportIndex = {
     DISTOX_EXPORT_ZIP,
@@ -83,7 +85,8 @@ class TDConst
     DISTOX_EXPORT_DXF,
     DISTOX_EXPORT_KML,
     DISTOX_EXPORT_PLT,
-    DISTOX_EXPORT_JSON
+    DISTOX_EXPORT_JSON,
+    DISTOX_EXPORT_SHP
   };
 
   static final String[] mPlotExportTypes = {

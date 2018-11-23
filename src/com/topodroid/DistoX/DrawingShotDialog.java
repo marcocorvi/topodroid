@@ -18,6 +18,8 @@ import android.content.Context;
 // import android.content.Intent;
 
 import android.graphics.Paint;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 
 import android.view.View;
 // import android.view.ViewGroup.LayoutParams;
@@ -134,6 +136,11 @@ class DrawingShotDialog extends MyDialog
       } else if ( mParent.isExtendedProfile() && mBlock.isMainLeg() ) {
         mBtnColor.setVisibility( View.GONE );
 	if ( TDSetting.mExtendFrac ) {
+	  Bitmap bitmap =  MyButton.getLVRseekbarBackGround( mContext, (int)(TopoDroidApp.mDisplayWidth), (int)(20) );
+	  if ( bitmap != null ) {
+	    BitmapDrawable background = new BitmapDrawable( mContext.getResources(), bitmap );
+            mStretchBar.setBackgroundDrawable( background ); 
+	  }
           mStretchBar.setProgress( (int)(150 + 100 * mIntExtend + 100 * mStretch ) );
           mStretchBar.setOnSeekBarChangeListener( new OnSeekBarChangeListener() {
               public void onProgressChanged( SeekBar stretchbar, int progress, boolean fromUser) {

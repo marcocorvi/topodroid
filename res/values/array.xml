@@ -161,6 +161,7 @@
      <item name="diving">1</item>
   </string-array>
 
+  <!-- shot default export -->
   <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
   <string-array name="exportShots">
      <item name="none">none</item>
@@ -182,6 +183,7 @@
      <!-- item name="kml">KML</item -->
      <!-- item name="track">Track file</item -->
      <!-- item name="json">GeoJSON</item -->
+     <!-- item name="shp">Shapefile</item -->
   </string-array>
   <string-array name="exportShotsValue" translatable="false">
      <item name="none">-1</item>
@@ -203,8 +205,10 @@
      <!-- item name="kml">10</item -->
      <!-- item name="track">11</item -->
      <!-- item name="json">22</item -->
+     <!-- item name="shp">23</item -->
   </string-array>
 
+  <!-- plot default export -->
   <string-array name="exportPlot">
      <item name="none">none</item>
      <item name="therion">Therion</item>

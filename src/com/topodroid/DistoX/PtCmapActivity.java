@@ -117,13 +117,13 @@ public class PtCmapActivity extends Activity
 
     getWindow().setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN );
 
-    ((Button) findViewById( R.id.btn0 ) ).setBackgroundColor( TDColor.DARK_GRAY );
-    ((Button) findViewById( R.id.btn1 ) ).setBackgroundColor( TDColor.LIGHT_GRAY );
-    ((Button) findViewById( R.id.btn2 ) ).setBackgroundColor( TDColor.FIXED_ORANGE );
-    ((Button) findViewById( R.id.btn3 ) ).setBackgroundColor( TDColor.FULL_BLUE );
-    ((Button) findViewById( R.id.btn4 ) ).setBackgroundColor( TDColor.FULL_RED );
-    ((Button) findViewById( R.id.btn5 ) ).setBackgroundColor( TDColor.FULL_GREEN );
-    ((Button) findViewById( R.id.btn6 ) ).setBackgroundColor( TDColor.FIXED_YELLOW );
+    // ((Button) findViewById( R.id.btn0 ) ).setBackgroundColor( TDColor.DARK_GRAY );
+    // ((Button) findViewById( R.id.btn1 ) ).setBackgroundColor( TDColor.LIGHT_GRAY );
+    // ((Button) findViewById( R.id.btn2 ) ).setBackgroundColor( TDColor.FIXED_ORANGE );
+    // ((Button) findViewById( R.id.btn3 ) ).setBackgroundColor( TDColor.FULL_BLUE );
+    // ((Button) findViewById( R.id.btn4 ) ).setBackgroundColor( TDColor.FULL_RED );
+    // ((Button) findViewById( R.id.btn5 ) ).setBackgroundColor( TDColor.FULL_GREEN );
+    // ((Button) findViewById( R.id.btn6 ) ).setBackgroundColor( TDColor.FIXED_YELLOW );
 
     mETline  = new EditText[7];
     mETpoint = new EditText[7];

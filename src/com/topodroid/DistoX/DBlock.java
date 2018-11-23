@@ -147,6 +147,7 @@ class DBlock
   void setFlag( long flag ) { mFlag |= flag; }
   // void clearFlag( long flag ) { mFlag &= ~flag; }
   long getFlag() { return mFlag; }
+  int  getReducedFlag() { return (int)(0x07 & mFlag); } // survey-surface-duplicate-commented part of the flag
 
   int getBlockType() { return mBlockType; }
 

@@ -44,7 +44,7 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.HashMap;
 
-// import android.util.Log;
+import android.util.Log;
 import android.util.Base64;
 
 class TDExporter
@@ -734,6 +734,71 @@ class TDExporter
       return null;
     }
   }
+  // =======================================================================
+
+  // @param sid      survey ID
+  // @param data     database helper object
+  // @param info     survey metadata
+  // @param filename filepath without extension 
+  static String exportSurveyAsShp( long sid, DataHelper data, SurveyInfo info, String filename )
+  {
+    List<DistoXNum> nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false ); // false: Geoid altitude
+    if ( nums == null || nums.size() == 0 ) {
+      TDLog.Error( "Failed SHP export: no geolocalized station");
+      return "";
+    }
+
+    boolean success = true;
+
+    try {
+      // TDLog.Log( TDLog.LOG_IO, "export SHP " + filename );
+      TDPath.checkPath( filename );
+      
+      int nr = 0;
+      if ( TDSetting.mKmlStations ) {
+        for ( DistoXNum num : nums ) {
+          String filepath = filename + "-stations-" + nr;
+          ++ nr;
+          List<NumStation> stations = num.getStations();
+          // Log.v("DistoX", "SHP export " + filepath + " stations " + stations.size() );
+          ShpPointz shp = new ShpPointz( filepath );
+          shp.setYYMMDD( info.date );
+          success |= shp.writeStations( stations ); 
+        }
+      }
+
+      nr = 0;
+      for ( DistoXNum num : nums ) {
+        String filepath = filename + "-shots-" + nr;
+        ++ nr;
+        List<NumShot> shots = num.getShots();
+        List<NumSplay> splays = ( TDSetting.mKmlSplays ? num.getSplays() : null );
+        // Log.v("DistoX", "SHP export " + filepath + " shots " + shots.size() );
+        ShpPolylinez shp = new ShpPolylinez( filepath );
+        shp.setYYMMDD( info.date );
+        success |= shp.writeShots( shots, splays );
+      }
+
+      // if ( TDSetting.mKmlSplays ) {
+      //   nr = 0;
+      //   for ( DistoXNum num : nums ) {
+      //     String filepath = filename + "-splays-" + nr;
+      //     ++ nr;
+      //     List<NumSplay> splays = num.getSplays();
+      //     // Log.v("DistoX", "SHP export " + filepath + " splays " + splays.size() );
+      //     ShpPolylinez shp = new ShpPolylinez( filepath );
+      //     shp.setYYMMDD( info.date );
+      //     shp.writeSplays( splays );
+      //   }
+      // }
+    } catch ( IOException e ) {
+      TDLog.Error( "Failed SHP export: " + e.getMessage() );
+      return null;
+    }
+
+    return filename;
+  }
+
   // =======================================================================
   // GEO JASON GeoJSON export
   // shot flags are ignored
