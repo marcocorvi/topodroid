@@ -46,17 +46,17 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="memoryX310">pamięć DistoX X310</string>
     <!-- UNUSED string name="memory_data">DistoX data</string -->
 
-    <string name="thp_user">user</string>
-    <string name="thp_label">label</string>
+    <string name="thp_user">użytkownik</string>
+    <string name="thp_label">etykieta</string>
     <!-- UNUSED string name="thp_danger">danger</string -->
-    <string name="thl_user">user</string>
-    <string name="thl_wall">wall</string>
-    <string name="tha_user">user</string>
-    <string name="tha_water">water</string>
+    <string name="thl_user">użytkownik</string>
+    <string name="thl_wall">ściana</string>
+    <string name="tha_user">użytkownik</string>
+    <string name="tha_water">woda</string>
 
     <string name="make_walls">Walls</string>
-    <string name="missing_station">Missing station</string>
-    <string name="station_not_found">Station not found</string>
+    <string name="missing_station">Brakująca stacja</string>
+    <string name="station_not_found">Stacja nieznaleziona</string>
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->
     <!-- UNUSED string name="missing_line">LINE</string -->
@@ -65,19 +65,19 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="missing_symbols">There are missing drawing tools.\nSave anyway ?</string -->
     <!-- UNUSED string name="missing_title">MISSING SYMBOLS</string -->
     <!-- UNUSED string name="missing_warning">The following drawing tools are missing.\n</string -->
-    <string name="failed_snap_to_line">No close line-point to snap the area border to</string>
-    <string name="failed_snap_to_point">No close point to snap the point to</string>
-    <string name="failed_snap_to_splays">No close splay to snap the line to</string>
+    <string name="failed_snap_to_line">Brak bliskich linii, aby przyciągnąć granicę obszaru</string>
+    <string name="failed_snap_to_point">Brak bliskiego punktu, aby przyciągnąć do punktu</string>
+    <string name="failed_snap_to_splays">Brak bliskiego domiaru, aby przyciągnąć do linii</string>
     <!-- TODO string name="failed_append_to_line">Failed to append to another line</string -->
 
-    <string name="calibration_title">Instruments calibration</string>
-    <string name="calibration_length">Tape</string>
-    <string name="calibration_azimuth">Compass</string>
-    <string name="calibration_clino">Clino</string>
+    <string name="calibration_title">Kalibracja przyrządów</string>
+    <string name="calibration_length">Długość</string>
+    <string name="calibration_azimuth">Azymut</string>
+    <string name="calibration_clino">Upad</string>
 
-    <string name="calib_new">New calibration</string>
-    <string name="calib_exists">Calibration already exists</string>
-    <string name="calib_delete">Delete calibration </string>
+    <string name="calib_new">Nowa kalibracja</string>
+    <string name="calib_exists">Kalibracja już istnieje</string>
+    <string name="calib_delete"Usuń kalibrację </string>
     <string name="calib_device_mismatch">WARNING: Calibration-Device mismatch</string>
     <string name="calib_no_name">The name is mandatory</string>
     <string name="calib_gm_policy">Policy</string>
