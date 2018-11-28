@@ -258,7 +258,7 @@ class TDExporter
       if ( info.team != null && info.team.length() > 0 ) {
         pw.format(" team=\"%s\" ", info.team );
       }
-      if ( info.hasDeclination() ) { // DECLINATION in CSURVEY
+      if ( info.hasDeclination() ) { // DECLINATION in cSurvey
         pw.format(Locale.US, "nordtype=\"0\" manualdeclination=\"1\" declination=\"%.4f\" ", info.declination ); 
       } else {
         pw.format("nordtype=\"0\" manualdeclination=\"0\" ");
@@ -1144,7 +1144,7 @@ class TDExporter
         pw.format("    # team %s \n", info.team );
       }
 
-      if ( info.hasDeclination() ) { // DECLINATION in THERION
+      if ( info.hasDeclination() ) { // DECLINATION in Therion
         pw.format(Locale.US, "    # declination %.4f degrees\n", info.declination );
       }
 
@@ -1463,7 +1463,7 @@ class TDExporter
       writeSurvexLine(pw, "  *units tape " + uls );
       writeSurvexLine(pw, "  *units compass " + uas );
       writeSurvexLine(pw, "  *units clino " + uas );
-      if ( info.hasDeclination() ) { // DECLINATION in SURVEX
+      if ( info.hasDeclination() ) { // DECLINATION in Survex
         pw.format(Locale.US, "  *calibrate declination %.2f", info.declination ); // units DEGREES
         writeSurvexEOL(pw);
       // } else {
@@ -1769,7 +1769,7 @@ class TDExporter
       if ( info.hasDeclination() ) { // DECLINATION in CSV
         pw.format(Locale.US, "# from to tape compass clino (declination %.4f)\n", info.declination ); 
       } else {
-        pw.format(Locale.US, "# from to tape compass clino\n" );
+        pw.format(Locale.US, "# from to tape compass clino (declination undefined)\n" );
       }
       pw.format(Locale.US, "# units tape %s compass clino %s\n", uls, uas );
       
@@ -2217,7 +2217,7 @@ class TDExporter
       } else {
         pw.format("...\r\n");
       }
-      pw.format(Locale.US, "DECLINATION: %.4f  ", info.getDeclination() ); // FIXME DECLINATION
+      pw.format(Locale.US, "DECLINATION: %.4f  ", info.getDeclination() ); // DECLINATION Compass does not have undefined declination
       pw.format("FORMAT: DMMDLUDRLADN  CORRECTIONS:  0.00 0.00 0.00\r\n" );
       pw.format("\r\n" );
       pw.format("FROM TO LENGTH BEARING INC LEFT UP DOWN RIGHT FLAGS COMMENTS\r\n" );
@@ -2394,8 +2394,9 @@ class TDExporter
 
       String team = (info.team != null)? info.team : "";
       if ( team.length() > 26 ) team = team.substring(0,26);
+      int auto_declination = (info.hasDeclination()? 0 : 1); // DECLINATION TopoRobot: 0 = provided, 1 = to be calculated
       pw.format("%6d%6d%4d%4d%4d %02d/%02d/%02d %26s%4d%8.2f%4d%4d\r\n",
-        -2, 1, 1, 1, 1, d, m, y, team, 0, info.getDeclination(), 0, 1 ); // FIXME DECLINATION
+        -2, 1, 1, 1, 1, d, m, y, team, auto_declination, info.getDeclination(), 0, 1 ); 
 
       //           5 11 15 19 23   31   39   47   55   63   71   79
       pw.format("%6d%6d%4d%4d%4d%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f\r\n",
@@ -2626,7 +2627,11 @@ class TDExporter
         }
       }
       pw.format("\r\n" );
-      pw.format(Locale.US, "#DECLINATION: %.4f\r\n", info.getDeclination() ); // FIXME DECLINATION
+      if ( info.hasDeclination() ) {
+        pw.format(Locale.US, "#DECLINATION: %.4f\r\n", info.getDeclination() ); // DECLINATION WinKarst
+      // } else {
+      //   pw.format(Locale.US, "#DECLINATION: AUTO\r\n" ); // WinKarst calculates the magnetic declination
+      }
       pw.format("\r\n" );
       pw.format("#SHOT STATION STATION LENGTH AZIMUTH VERTICAL LEFT RIGHT UP DOWN COMMENT\r\n" );
       pw.format("#CODE FROM TO M DEG DEG M M M M\r\n" );
@@ -3014,7 +3019,7 @@ class TDExporter
    
       pw.format("#Date %04d-%02d-%02d\n", y, m, d ); // format "YYYY-MM-DD"
 
-      if ( info.hasDeclination() ) { // DECLINATION in WALLS: override declination computed using the date
+      if ( info.hasDeclination() ) { // DECLINATION Walls: override declination computed using the date
         pw.format(Locale.US, "#Units Decl=%.1f\n", info.getDeclination() );
       }
 
@@ -3267,7 +3272,7 @@ class TDExporter
       pw.format("#survey_date %02d.%02d.%04d%s", d, m, y, eol ); 
       if ( info.comment != null ) pw.format("#survey_title %s%s", info.comment, eol );
 
-      pw.format(Locale.US, "#declination[%.1f]%s", info.getDeclination(), eol ); // FIXME DECLINATION
+      pw.format(Locale.US, "#declination[%.1f]%s", info.getDeclination(), eol ); // DECLINATION Topo seems to use 0.0 in general
       
       List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
       if ( fixed.size() > 0 ) {
@@ -3414,7 +3419,7 @@ class TDExporter
       pw.format("Survey team:\n");
       pw.format("%s\n\t\n\t\n\t\n\t\n", (info.team != null)? info.team : "" );
       pw.format(Locale.US, "Survey date: %f\n", TopoDroidUtil.getDatePlg( y, m, d ) );
-      pw.format(Locale.US, "Declination: %.1f\n", info.getDeclination() ); // FIXME DECLINATION
+      pw.format(Locale.US, "Declination: %.1f\n", info.getDeclination() ); // DECLINATION Polygon seems to have 0.0 in general
       pw.format("Instruments:\n\t0\n\t0\n\t0\n");
 
       // if ( info.comment != null ) {
@@ -3522,8 +3527,12 @@ class TDExporter
       FileWriter fw = new FileWriter( filename );
       PrintWriter out = new PrintWriter( fw );
       // TODO
-      out.printf(Locale.US, "999\nDXF created by TopoDroid v %s - %s (declination %.4f)\n",
-        TopoDroidApp.VERSION, TopoDroidUtil.getDateString("yyyy.MM.dd"), info.getDeclination() ); // FIXME DECLINATION
+      out.printf(Locale.US, "999\nDXF created by TopoDroid v %s - %s ", TopoDroidApp.VERSION, TopoDroidUtil.getDateString("yyyy.MM.dd") );
+      if ( info.hasDeclination() ) {
+        out.printf(Locale.US, "(declination %.4f)\n", info.getDeclination() ); // DECLINATION DXF
+      } else {
+        out.printf(Locale.US, "(declination undefined)\n" );
+      }
       out.printf("0\nSECTION\n2\nHEADER\n");
       out.printf("9\n$ACADVER\n1\nAC1006\n");
       out.printf("9\n$INSBASE\n");

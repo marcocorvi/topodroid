@@ -598,7 +598,7 @@ class TDSetting
     // boolean co_survey = prefs.getBoolean( keyMain[8], bool(defMain[8]) );        // DISTOX_COSURVEY 
 
     String[] keySurvey = TDPrefKey.SURVEY;
-    String[] defSurvey = TDPrefKey.SURVEYdef;;
+    String[] defSurvey = TDPrefKey.SURVEYdef;
     mDefaultTeam = prefs.getString( keySurvey[0], defSurvey[0] );               // DISTOX_TEAM
     mInitStation = prefs.getString( keySurvey[3], defSurvey[3] ).replaceAll("\\s+", "");  // DISTOX_INIT_STATION 
     if ( mInitStation.length() == 0 ) mInitStation = defSurvey[3];

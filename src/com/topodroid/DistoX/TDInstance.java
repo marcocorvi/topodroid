@@ -17,7 +17,7 @@ import android.content.Context;
 // static class (singleton) with instance data
 class TDInstance
 {
-  static Context context; // must be the application context
+  static Context context; // must be the application context FIXME LEAK
 
   static String cwd;  // current work directory
   static String cbd;  // current base directory

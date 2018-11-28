@@ -80,7 +80,7 @@ class DrawingLineDialog extends MyDialog
     // mETtype.setText( BrushManager.mLineLib.getSymbolThName( mLine.mLineType ) );
     ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, BrushManager.mLineLib.getSymbolNames() );
     String section = BrushManager.mLineLib.getSymbolName( mTypeSection );
-    if ( section != null ) adapter.remove(section );
+    if ( section != null ) adapter.remove( section );
     mETtype.setAdapter( adapter );
     mETtype.setSelection( ( mType < mTypeSection )? mType : mType-1 );
     mETtype.setOnItemSelectedListener( this );

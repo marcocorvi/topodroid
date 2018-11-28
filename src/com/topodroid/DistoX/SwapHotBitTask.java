@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import java.lang.ref.WeakReference;
+
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
@@ -28,7 +30,7 @@ import android.os.AsyncTask;
 
 class SwapHotBitTask extends AsyncTask<Void, Integer, Integer>
 {
-  private final TopoDroidApp   mApp;
+  private final WeakReference<TopoDroidApp> mApp;
   private int mType; // DistoX type
   private String mAddress;
   private int mFrom;
@@ -37,7 +39,7 @@ class SwapHotBitTask extends AsyncTask<Void, Integer, Integer>
   // @param ht head_tail
   SwapHotBitTask( TopoDroidApp app, int type, String address, int[] ht )
   {
-    mApp     = app;
+    mApp     = new WeakReference<TopoDroidApp>( app );
     mAddress = address;
     mType    = type;
     mFrom    = ht[0];
@@ -51,8 +53,8 @@ class SwapHotBitTask extends AsyncTask<Void, Integer, Integer>
     int res = 0;
     if ( mType == Device.DISTO_X310 ) {
       res = -1;
-    } else if ( mType == Device.DISTO_A3 ) {
-      res = mApp.swapHotBit( mAddress, mFrom, mTo );
+    } else if ( mType == Device.DISTO_A3 && mApp.get() != null ) {
+      res = mApp.get().swapHotBit( mAddress, mFrom, mTo );
     }
     return res;
   }

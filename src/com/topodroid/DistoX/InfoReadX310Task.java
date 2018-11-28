@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import java.lang.ref.WeakReference;
+
 // import android.app.Activity;
 import android.os.AsyncTask;
 // import android.content.Context;
@@ -21,23 +23,24 @@ import android.os.AsyncTask;
 
 class InfoReadX310Task extends AsyncTask<Void, Integer, Boolean>
 {
-  private final TopoDroidApp   mApp; // FIXME LEAK
-  private final DeviceX310InfoDialog  mDialog;
+  private final WeakReference<TopoDroidApp>   mApp; // FIXME LEAK
+  private final WeakReference<DeviceX310InfoDialog>  mDialog;
   private DeviceX310Info mInfo = null;
   // int mType; // DistoX type
   private String mAddress;
 
   InfoReadX310Task( TopoDroidApp app, DeviceX310InfoDialog dialog, String address )
   {
-    mApp      = app;
-    mDialog   = dialog;
+    mApp      = new WeakReference<TopoDroidApp>( app );
+    mDialog   = new WeakReference<DeviceX310InfoDialog>( dialog );
     mAddress  = address;
   }
 
   @Override
   protected Boolean doInBackground(Void... v)
   {
-    mInfo = mApp.readDeviceX310Info( mAddress );
+    if ( mApp.get() == null ) return null;
+    mInfo = mApp.get().readDeviceX310Info( mAddress );
     return ( mInfo != null );
   }
 
@@ -49,8 +52,8 @@ class InfoReadX310Task extends AsyncTask<Void, Integer, Boolean>
   @Override
   protected void onPostExecute( Boolean result )
   {
-    if ( result && mDialog != null ) {
-      mDialog.updateInfo( mInfo );
+    if ( result && mDialog.get() != null ) {
+      mDialog.get().updateInfo( mInfo );
     } else {
       TDToast.make( R.string.read_failed );
     }

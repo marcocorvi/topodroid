@@ -18,17 +18,19 @@
     android:layout_height="wrap_content"
     >
     <Button android:id="@+id/btn"
-      android:layout_width="48dp"
+      android:layout_width="0dp"
       android:layout_height="48dp"
       android:layout_weight="10"
       />
     <TextView
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
       android:layout_weight="45"
       android:text="@string/LINE"
       />
     <TextView
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
       android:layout_weight="45"
       android:text="@string/POINT"
       />
@@ -39,20 +41,22 @@
     android:layout_height="wrap_content"
     >
     <Button android:id="@+id/btn0"
-      android:layout_width="48dp"
+      android:layout_width="0dp"
       android:layout_height="48dp"
       android:layout_weight="10"
       android:background="#ff666666"
       />
     <EditText android:id="@+id/etline0"
       style="@style/edit_text"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
       android:layout_weight="45"
       android:inputType="text"
       />
     <EditText android:id="@+id/etpoint0"
       style="@style/edit_text"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
       android:layout_weight="45"
       android:inputType="text"
       />
@@ -63,20 +67,22 @@
     android:layout_height="wrap_content"
     >
     <Button android:id="@+id/btn1"
-      android:layout_width="48dp"
+      android:layout_width="0dp"
       android:layout_height="48dp"
       android:layout_weight="10"
       android:background="#ffcccccc"
       />
     <EditText android:id="@+id/etline1"
       style="@style/edit_text"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
       android:layout_weight="45"
       android:inputType="text"
       />
     <EditText android:id="@+id/etpoint1"
       style="@style/edit_text"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
       android:layout_weight="45"
       android:inputType="text"
       />
@@ -87,20 +93,22 @@
     android:layout_height="wrap_content"
     >
     <Button android:id="@+id/btn2"
-      android:layout_width="48dp"
+      android:layout_width="0dp"
       android:layout_height="48dp"
       android:layout_weight="10"
       android:background="#ffff9966"
       />
     <EditText android:id="@+id/etline2"
       style="@style/edit_text"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
       android:layout_weight="45"
       android:inputType="text"
       />
     <EditText android:id="@+id/etpoint2"
       style="@style/edit_text"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
       android:layout_weight="45"
       android:inputType="text"
       />
@@ -111,20 +119,22 @@
     android:layout_height="wrap_content"
     >
     <Button android:id="@+id/btn3"
-      android:layout_width="48dp"
+      android:layout_width="0dp"
       android:layout_height="48dp"
       android:layout_weight="10"
       android:background="#ff0000ff"
       />
     <EditText android:id="@+id/etline3"
       style="@style/edit_text"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
       android:layout_weight="45"
       android:inputType="text"
       />
     <EditText android:id="@+id/etpoint3"
       style="@style/edit_text"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
       android:layout_weight="45"
       android:inputType="text"
       />
@@ -135,20 +145,22 @@
     android:layout_height="wrap_content"
     >
     <Button android:id="@+id/btn4"
-      android:layout_width="48dp"
+      android:layout_width="0dp"
       android:layout_height="48dp"
       android:layout_weight="10"
       android:background="#ffff0000"
       />
     <EditText android:id="@+id/etline4"
       style="@style/edit_text"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
       android:layout_weight="45"
       android:inputType="text"
       />
     <EditText android:id="@+id/etpoint4"
       style="@style/edit_text"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
       android:layout_weight="45"
       android:inputType="text"
       />
@@ -159,20 +171,22 @@
     android:layout_height="wrap_content"
     >
     <Button android:id="@+id/btn5"
-      android:layout_width="48dp"
+      android:layout_width="0dp"
       android:layout_height="48dp"
       android:layout_weight="10"
       android:background="#ff00ff00"
       />
     <EditText android:id="@+id/etline5"
       style="@style/edit_text"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
       android:layout_weight="45"
       android:inputType="text"
       />
     <EditText android:id="@+id/etpoint5"
       style="@style/edit_text"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
       android:layout_weight="45"
       android:inputType="text"
       />
@@ -183,20 +197,22 @@
     android:layout_height="wrap_content"
     >
     <Button android:id="@+id/btn6"
-      android:layout_width="48dp"
+      android:layout_width="0dp"
       android:layout_height="48dp"
       android:layout_weight="10"
       android:background="#ffffff33"
       />
     <EditText android:id="@+id/etline6"
       style="@style/edit_text"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
       android:layout_weight="45"
       android:inputType="text"
       />
     <EditText android:id="@+id/etpoint6"
       style="@style/edit_text"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
       android:layout_weight="45"
       android:inputType="text"
       />

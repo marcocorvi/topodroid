@@ -25,7 +25,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Shader.TileMode;
 
-// import android.util.Log;
+import android.util.Log;
 
 class SymbolArea extends Symbol
 {
@@ -220,6 +220,7 @@ class SymbolArea extends Symbol
               // Log.v(  TopoDroidApp.TAG, "found name " + vals[k] );
               name = (new String( vals[k].getBytes(iso) )).replace("_", " ");
   	    }
+	    // Log.v("DistoX", "area name <" + name + "> locale " + locale );
   	  } else if ( vals[k].equals("th_name") ) {
   	    ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	    if ( k < s ) {

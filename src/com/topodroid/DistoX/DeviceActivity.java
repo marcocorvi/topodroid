@@ -68,6 +68,8 @@ public class DeviceActivity extends Activity
   private TopoDroidApp mApp;
   private DeviceHelper mApp_mDData;
 
+  static boolean mDeviceActivityVisible = false;
+
   private TextView mTvAddress;
 
   private static final int izonsno[] = {
@@ -518,7 +520,7 @@ public class DeviceActivity extends Activity
     // TDLog.Debug("device activity on resume" );
     registerReceiver( mPairReceiver, new IntentFilter( BluetoothDevice.ACTION_BOND_STATE_CHANGED ) );
     mApp.resumeComm();
-    TopoDroidApp.mDeviceActivityVisible = true;
+    mDeviceActivityVisible = true;
     // TDLog.Debug("device activity on resume done" );
   }
 
@@ -526,7 +528,7 @@ public class DeviceActivity extends Activity
   public void onPause()
   {
     super.onPause();
-    TopoDroidApp.mDeviceActivityVisible = false;
+    mDeviceActivityVisible = false;
     unregisterReceiver( mPairReceiver );
   }
 

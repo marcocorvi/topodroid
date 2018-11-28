@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import java.lang.ref.WeakReference;
+
 import android.os.AsyncTask;
 import android.content.Context;
 
@@ -20,7 +22,7 @@ import android.content.Context;
 class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
 {
   private DataHelper mData;
-  private Context mContext;  // FIXME LEAK
+  private WeakReference<Context> mContext;  // FIXME LEAK
   private Symbol[] mRecentPoint;
   private Symbol[] mRecentLine;
   private Symbol[] mRecentArea;
@@ -31,7 +33,7 @@ class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
 
   RecentSymbolsTask( Context context, DataHelper data, Symbol[] points, Symbol[] lines, Symbol[] areas, int nr, int what )
   {
-    mContext = context;
+    mContext = new WeakReference<Context>( context );
     mData    = data;
     mRecentPoint = points;
     mRecentLine  = lines;

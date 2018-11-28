@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import java.lang.ref.WeakReference;
+
 // import java.util.ArrayList;
 
 // import android.widget.Toast;
@@ -21,46 +23,47 @@ import android.os.AsyncTask;
 
 class DataDownloadTask extends AsyncTask< String, Integer, Integer >
 {
-  private final TopoDroidApp mApp; // FIXME LEAK
+  private final WeakReference<TopoDroidApp> mApp; // FIXME LEAK
   private static DataDownloadTask running = null;
   // private ILister mLister;
   private final ListerHandler mLister; // FIXME_LISTER
-  private final GMActivity mGMactivity;
+  private final WeakReference<GMActivity> mGMactivity;
 
   DataDownloadTask( TopoDroidApp app, ListerHandler /* ILister */ lister, GMActivity gm_activity ) // FIXME_LISTER
   {
     // TDLog.Error( "DataDownloadTask cstr" );
     // Log.v("DistoX", "data download task cstr");
-    mApp = app;
+    mApp        = new WeakReference<TopoDroidApp>( app );
+    mGMactivity = new WeakReference<GMActivity>( gm_activity );
     mLister = lister;
-    mGMactivity = gm_activity;
   }
 
 // -------------------------------------------------------------------
   @Override
   protected Integer doInBackground( String... statuses )
   {
-    if ( mGMactivity != null ) {
-      int algo = mGMactivity.getAlgo();
+    GMActivity gm = mGMactivity.get();
+    if ( gm != null && ! gm.isFinishing() && mApp.get() != null ) {
+      int algo = gm.getAlgo();
       if ( algo == CalibInfo.ALGO_AUTO ) { 
-        algo = mApp.getCalibAlgoFromDevice();
+        algo = mApp.get().getCalibAlgoFromDevice();
         if ( algo < CalibInfo.ALGO_AUTO ) {
           // TDToast.make( R.string.device_algo_failed );
           algo = CalibInfo.ALGO_LINEAR; 
         }
-        mApp.updateCalibAlgo( algo );
-        mGMactivity.setAlgo( algo );
+        mApp.get().updateCalibAlgo( algo );
+        gm.setAlgo( algo );
       }
     }
 
     if ( ! lock() ) return null;
     // long time = System.currentTimeMillis();
-    return mApp.downloadDataBatch( mLister );
+    return ( mApp.get() == null )? 0 : mApp.get().downloadDataBatch( mLister );
     // time = System.currentTimeMillis() - time;
     // Log.v("DistoX", "READ " + nRead + " data in " + time + " msec");
 
     // if ( nRead < 0 ) {
-    //   TDToast.make( mApp.DistoXConnectionError[ -nRead ] );
+    //   TDToast.make( mApp.get().DistoXConnectionError[ -nRead ] );
     // TDLog.Error( "doInBackground read " + nRead );
   }
 
@@ -79,8 +82,10 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
       int r = res.intValue();
       mLister.refreshDisplay( r, true );  // true: toast a message
     }
-    mApp.mDataDownloader.setDownload( false );
-    mApp.mDataDownloader.notifyConnectionStatus( false );
+    if ( mApp.get() != null ) {
+      mApp.get().mDataDownloader.setDownload( false );
+      mApp.get().mDataDownloader.notifyConnectionStatus( false );
+    }
     unlock();
     // Log.v("DistoX", "data download task post exec");
   }

@@ -11,13 +11,15 @@
  */
 package com.topodroid.DistoX;
 
+import java.lang.ref.WeakReference;
+
 // import android.widget.Toast;
 import android.os.AsyncTask;
 
 
 class SketchLoader extends AsyncTask< String, Integer, Integer >
 {
-  private final SketchWindow  mParent; // FIXME LEAK context
+  private final WeakReference<SketchWindow>  mParent; // FIXME LEAK context
   private final SketchModel   mModel;
   private final String        mFullName;
   private final SketchPainter mPainter;
@@ -25,7 +27,7 @@ class SketchLoader extends AsyncTask< String, Integer, Integer >
 
   SketchLoader( SketchWindow parent, SketchModel model, String fullname, SketchPainter painter )
   {
-    mParent   = parent;
+    mParent   = new WeakReference<SketchWindow>( parent );
     mModel    = model;
     mFullName = fullname;
     mPainter  = painter;
@@ -62,7 +64,8 @@ class SketchLoader extends AsyncTask< String, Integer, Integer >
   {
     if ( res != null ) {
       int r = res.intValue();
-      mParent.handleSketchLoaderResult( r );
+      if ( mParent.get() != null && ! mParent.get().isFinishing() )
+        mParent.get().handleSketchLoaderResult( r );
     }
     unlock();
   }

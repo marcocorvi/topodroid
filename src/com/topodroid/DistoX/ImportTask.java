@@ -11,24 +11,26 @@
  */
 package com.topodroid.DistoX;
 
+import java.lang.ref.WeakReference;
+
 import android.os.AsyncTask;
 
 import android.app.ProgressDialog;
 
 abstract class ImportTask extends AsyncTask< String, Integer, Long >
 {
-  final MainWindow mMain;  // FIXME LEAK
-  final TopoDroidApp mApp; // FIXME LEAK used by inheriting classes
+  final WeakReference<MainWindow> mMain;  // FIXME LEAK
+  final WeakReference<TopoDroidApp> mApp; // FIXME LEAK used by inheriting classes
   ProgressDialog mProgress = null;
 
   ImportTask( MainWindow main )
   {
     super();
-    mMain = main;
-    mApp  = main.getApp();
+    mMain = new WeakReference<MainWindow>( main );
+    mApp  = new WeakReference<TopoDroidApp>( main.getApp() );
     mProgress = ProgressDialog.show( main,
-		    mApp.getResources().getString(R.string.pleasewait),
-		    mApp.getResources().getString(R.string.processing),
+		    mApp.get().getResources().getString(R.string.pleasewait),
+		    mApp.get().getResources().getString(R.string.processing),
 		    true );
   }
 
@@ -36,13 +38,17 @@ abstract class ImportTask extends AsyncTask< String, Integer, Long >
   protected void onProgressUpdate(Integer... progress) { }
 
   @Override
-  protected void onPostExecute(Long result) {
-    mMain.setTheTitle( );
+  protected void onPostExecute(Long result)
+  {
     mProgress.dismiss();
-    if ( result >= 0 ) {
-      mMain.updateDisplay( );
-    } else {
-      TDToast.make( R.string.import_already );
+    MainWindow main = mMain.get();
+    if ( main != null && ! main.isFinishing() ) {
+      main.setTheTitle( );
+      if ( result >= 0 ) {
+        main.updateDisplay( );
+      } else {
+        TDToast.make( R.string.import_already );
+      }
     }
   }
 }

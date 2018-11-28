@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import java.lang.ref.WeakReference;
+
 import android.content.Context;
 import android.os.AsyncTask;
 import android.media.AudioManager;
@@ -36,7 +38,7 @@ class TimerTask extends AsyncTask<String, Integer, Long >
   private float mValAcc[] = new float[3];
   private float mValMag[] = new float[3];
   private SensorManager mSensorManager;
-  private IBearingAndClino mParent;
+  private WeakReference<IBearingAndClino> mParent;
   boolean mRun;
   private int mAxis;
   private int mWait;  // secs to wait
@@ -44,7 +46,7 @@ class TimerTask extends AsyncTask<String, Integer, Long >
 
   TimerTask( IBearingAndClino parent, int axis, int wait, int count )
   {
-    mParent  = parent;
+    mParent  = new WeakReference<IBearingAndClino>( parent );
     mRun     = true;
     mAxis    = axis;
     mWait    = wait;
@@ -186,7 +188,7 @@ class TimerTask extends AsyncTask<String, Integer, Long >
     // if ( r0 < 0.0f ) r0 += TDMath.M_2PI;
     b0 = 360 - b0 * 360.0f / TDMath.M_2PI;
     c0 = 0 - c0 * 360.0f / TDMath.M_2PI;
-    mParent.setBearingAndClino( b0, c0, o0 );
+    if ( mParent.get() != null ) mParent.get().setBearingAndClino( b0, c0, o0 );
   }
 
 }

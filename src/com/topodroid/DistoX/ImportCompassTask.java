@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import java.lang.ref.WeakReference;
+
 import java.util.ArrayList;
  
 class ImportCompassTask extends ImportTask
@@ -28,24 +30,25 @@ class ImportCompassTask extends ImportTask
   {
     long sid = 0;
     try {
-      DataHelper app_data = TopoDroidApp.mData;
       ParserCompass parser = new ParserCompass( str[0], true ); // apply_declination = true
-      ArrayList< ParserShot > shots  = parser.getShots();
-      ArrayList< ParserShot > splays = parser.getSplays();
+      if ( mApp.get() == null ) return -1L;
+      DataHelper app_data = TopoDroidApp.mData;
       if ( app_data.hasSurveyName( parser.mName ) ) {
         return -1L;
       }
-      sid = mApp.setSurveyFromName( parser.mName, mDatamode, false, false ); // IMPORT DAT no update, no forward
+      sid = mApp.get().setSurveyFromName( parser.mName, mDatamode, false, false ); // IMPORT DAT no update, no forward
       app_data.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle, false );
       app_data.updateSurveyDeclination( sid, parser.mDeclination, false );
       app_data.updateSurveyInitStation( sid, parser.initStation(), false );
 
       long id = 1; // start id = 1
+      ArrayList< ParserShot > shots  = parser.getShots();
       if ( mDatamode == SurveyInfo.DATAMODE_NORMAL ) {
         id = app_data.insertShots( sid, id, shots );
       } else { // SurveyInfo.DATAMODE_DIVING
         id = app_data.insertShotsDiving( sid, id, shots );
       }
+      ArrayList< ParserShot > splays = parser.getSplays();
       app_data.insertShots( sid, id, splays );
     } catch ( ParserException e ) {
       // TDToast.make(mActivity, R.string.file_parse_fail );

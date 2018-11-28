@@ -70,13 +70,13 @@ class TDPrefKey
 
   static String[] MAINdef = {
      "TopoDroid",
-     TDString.TWENTY,
-     TDString.ONE,
-     TDString.ONE,
-     FALSE,
-     TRUE,
-     TDString.ZERO,
-     TDString.ZERO,
+     TDString.TWENTY, // TEXT_SIZE
+     TDString.ONE,    // BUTTON_SIZE
+     TDString.ONE,    // SYMBOL_SIZE
+     FALSE,           // CUSTOM KEYBOARD
+     TRUE,            // NO CURSOR
+     TDString.ZERO,   // USER MANUAL
+     TDString.EMPTY,  // LOCALE
      // FALSE, // IF_COSURVEY
      "",
      "",

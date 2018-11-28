@@ -97,10 +97,11 @@ class TDImage
     }
   }
 
-  boolean fillImageView( ImageView view, int width )
+  // @param view
+  // @param ww    width
+  boolean fillImageView( ImageView view, int ww )
   {
     if ( mImage == null ) return false;
-    int ww = width;
     int hh = (int)( mImageHeight * ww / mImageWidth );
     // Log.v("DistoX", "fill image view w " + ww + " h " + hh );
     if ( ww <= 0 || hh <= 0 ) return false;

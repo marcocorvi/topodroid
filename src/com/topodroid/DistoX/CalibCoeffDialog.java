@@ -73,12 +73,12 @@ class CalibCoeffDialog extends MyDialog
   // private boolean mSaturated;
 
   CalibCoeffDialog( Context context, TopoDroidApp app,
-                           Vector bg, Matrix ag, Vector bm, Matrix am, Vector nl, float[] errors,
-                           float delta, float delta2, float error, long iter, byte[] coeff /*, boolean saturated */ )
+                    Vector bg, Matrix ag, Vector bm, Matrix am, Vector nl, float[] errors,
+                    float delta, float delta2, float error, long iter, byte[] coeff /*, boolean saturated */ )
   {
     super( context, R.string.CalibCoeffDialog );
-    mApp     = app;
-    mCoeff   = coeff;
+    mApp   = app;
+    mCoeff = coeff;
 
     bg0 = String.format(Locale.US, "bG   %8.4f %8.4f %8.4f", bg.x, bg.y, bg.z );
     agx = String.format(Locale.US, "aGx  %8.4f %8.4f %8.4f", ag.x.x, ag.x.y, ag.x.z );

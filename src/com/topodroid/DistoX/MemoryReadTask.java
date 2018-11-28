@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import java.lang.ref.WeakReference;
+
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
@@ -28,8 +30,8 @@ import android.os.AsyncTask;
 
 class MemoryReadTask extends AsyncTask<Void, Integer, Integer>
 {
-  private final TopoDroidApp   mApp;
-  private IMemoryDialog  mDialog;
+  private final WeakReference<TopoDroidApp> mApp;
+  private WeakReference<IMemoryDialog>  mDialog;
   private int mType; // DistoX type
   private String mAddress;
   private int[] mHT;
@@ -38,8 +40,8 @@ class MemoryReadTask extends AsyncTask<Void, Integer, Integer>
 
   MemoryReadTask( TopoDroidApp app, IMemoryDialog dialog, int type, String address, int[] ht, String dumpfile )
   {
-    mApp      = app;
-    mDialog   = dialog;
+    mApp      = new WeakReference<TopoDroidApp>( app );
+    mDialog   = new WeakReference<IMemoryDialog>( dialog );
     mType     = type;
     mAddress  = address;
     mHT       = ht;
@@ -51,10 +53,12 @@ class MemoryReadTask extends AsyncTask<Void, Integer, Integer>
   protected Integer doInBackground(Void... v)
   {
     int res = 0;
-    if ( mType == Device.DISTO_X310 ) {
-      res = mApp.readX310Memory( mAddress, mHT[0], mHT[1], mMemory );
-    } else if ( mType == Device.DISTO_A3 ) {
-      res = mApp.readA3Memory( mAddress, mHT[0], mHT[1], mMemory );
+    if ( mApp.get() != null ) {
+      if ( mType == Device.DISTO_X310 ) {
+        res = mApp.get().readX310Memory( mAddress, mHT[0], mHT[1], mMemory );
+      } else if ( mType == Device.DISTO_A3 ) {
+        res = mApp.get().readA3Memory( mAddress, mHT[0], mHT[1], mMemory );
+      }
     }
     if ( res > 0 ) {
       writeMemoryDumpToFile( mDumpfile, mMemory );
@@ -70,8 +74,8 @@ class MemoryReadTask extends AsyncTask<Void, Integer, Integer>
   @Override
   protected void onPostExecute( Integer result )
   {
-    if ( result > 0 && mDialog != null ) {
-      mDialog.updateList( mMemory );
+    if ( result > 0 && mDialog.get() != null ) {
+      mDialog.get().updateList( mMemory );
     } else {
       TDToast.make( R.string.read_failed );
     }

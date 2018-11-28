@@ -33,6 +33,7 @@ import android.widget.CheckBox;
 // import android.util.Log;
 
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 // import android.view.ViewGroup.LayoutParams;
 // import android.view.View.OnClickListener;
 // import android.widget.AdapterView;
@@ -94,6 +95,17 @@ class SurveyNewDialog extends MyDialog
     mCBxsections.setChecked( TDSetting.mSharedXSections );
     mCBdatamode  = (CheckBox) findViewById(R.id.survey_datamode);
     if ( ! TDLevel.overExpert ) mCBdatamode.setVisibility( View.GONE );
+
+    mEditDecl.setOnFocusChangeListener( new OnFocusChangeListener() {
+      @Override
+      public void onFocusChange( View v, boolean hasfocus ) {
+        if ( ! hasfocus ) {
+          if ( SurveyInfo.declinationOutOfRange( mEditDecl ) ) {
+            mEditDecl.setText("");
+	  }
+	} 
+      }
+    } );
 
     mDateListener = new MyDateSetListener( mEditDate );
     mEditDate.setOnClickListener( this );
@@ -183,10 +195,10 @@ class SurveyNewDialog extends MyDialog
     String team = mEditTeam.getText().toString();
     String comment = mEditComment.getText().toString();
     double decl = SurveyInfo.declination( mEditDecl );
-    if ( decl >= SurveyInfo.DECLINATION_MAX ) {
-      mEditDecl.setError( mContext.getResources().getString( R.string.error_invalid_number ) );
-      return false;
-    }
+    // if ( decl >= SurveyInfo.DECLINATION_MAX ) {
+    //   mEditDecl.setError( mContext.getResources().getString( R.string.error_invalid_number ) );
+    //   return false;
+    // }
 
     String init_station = TDSetting.mInitStation;
     if ( mEditStation.getText() != null ) {

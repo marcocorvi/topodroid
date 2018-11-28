@@ -26,7 +26,7 @@ import android.graphics.BitmapShader;
 import android.graphics.Shader.TileMode;
 import android.content.res.Resources;
 
-// import android.util.Log;
+import android.util.Log;
 
 class SymbolAreaLibrary extends SymbolLibrary
 {
@@ -141,6 +141,7 @@ class SymbolAreaLibrary extends SymbolLibrary
     String iso = "ISO-8859-1";
     // String iso = "UTF-8";
     // if ( locale.equals( "name-es" ) ) iso = "ISO-8859-1";
+    // Log.v("DistoX", "area user symbols. locale <" + locale + ">");
 
     File dir = new File( TDPath.APP_AREA_PATH );
     if ( dir.exists() ) {

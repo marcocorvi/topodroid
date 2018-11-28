@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import java.lang.ref.WeakReference;
+
 // import android.app.Activity;
 import android.os.AsyncTask;
 
@@ -19,19 +21,19 @@ import android.os.AsyncTask;
 
 class CalibToggleTask extends AsyncTask<Void, Integer, Boolean>
 {
-  private final TopoDroidApp mApp;    // FIXME LEAK
+  private WeakReference<TopoDroidApp> mApp; // FIXME LEAK
   private final IEnableButtons mEnableButtons;
 
   CalibToggleTask( IEnableButtons eb, TopoDroidApp app )
   {
-    mApp      = app;
+    mApp = new WeakReference<TopoDroidApp>( app );
     mEnableButtons = eb;
   }
 
   @Override
   protected Boolean doInBackground(Void... v)
   {
-    return Boolean.valueOf( mApp.toggleCalibMode( ) );
+    return mApp.get() != null && mApp.get().toggleCalibMode( );
   }
 
   // @Override

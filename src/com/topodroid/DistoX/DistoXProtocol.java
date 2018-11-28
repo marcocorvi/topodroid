@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import java.lang.ref.WeakReference;
+
 import java.io.IOException;
 import java.io.EOFException;
 import java.io.FileNotFoundException;
@@ -42,7 +44,7 @@ import android.util.Log;
 
 class DistoXProtocol
 {
-  private final Device mDevice;
+  private int  mDeviceType;
   // private DistoX mDistoX;
   // private BluetoothDevice  mBTDevice;
   // private BluetoothSocket  mSocket = null;
@@ -173,7 +175,7 @@ class DistoXProtocol
 
   DistoXProtocol( DataInputStream in, DataOutputStream out, Device device )
   {
-    mDevice = device;
+    mDeviceType = device.mType;
     // mSocket = socket;
     // mDistoX = distox;
     mSeqBit = (byte)0xff;
@@ -247,9 +249,9 @@ class DistoXProtocol
         // double r = (mBuffer[7] & 0xff);
         double r = r7;
 
-        if ( mDevice.mType == Device.DISTO_A3 || mDevice.mType == Device.DISTO_X000) {
+        if ( mDeviceType == Device.DISTO_A3 || mDeviceType == Device.DISTO_X000) {
           mDistance = d / 1000.0;
-        } else if ( mDevice.mType == Device.DISTO_X310 ) {
+        } else if ( mDeviceType == Device.DISTO_X310 ) {
           if ( d < 99999 ) {
             mDistance = d / 1000.0;
           } else {
@@ -289,7 +291,7 @@ class DistoXProtocol
         TDLog.Log( TDLog.LOG_PROTO, "handle Packet M " + String.format(" %x %x %x", mMX, mMY, mMZ ) );
         return DISTOX_PACKET_M;
       case 0x04: // vector data packet
-        if ( mDevice.mType == Device.DISTO_X310 ) {
+        if ( mDeviceType == Device.DISTO_X310 ) {
           double acc = MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
           double mag = MemoryOctet.toInt( mBuffer[4], mBuffer[3] );
           double dip = MemoryOctet.toInt( mBuffer[6], mBuffer[5] );
@@ -299,7 +301,7 @@ class DistoXProtocol
           mDip = dip * 90.0  / 16384.0; // 90/0x4000;
           if ( dip >= 32768 ) { mDip = (65536 - dip) * (-90.0) / 16384.0; }
           mRoll  = rh * 180.0 / 32768.0; // 180/0x8000;
-          TDLog.Log( TDLog.LOG_PROTO, "handle Packet V " + String.format(" %.2f %.2f %.2f roll %.1f", mAcceleration, mMagnetic, mDip, mRoll ) );
+          TDLog.Log( TDLog.LOG_PROTO, "handle Packet V " + String.format(Locale.US, " %.2f %.2f %.2f roll %.1f", mAcceleration, mMagnetic, mDip, mRoll ) );
         }
         return DISTOX_PACKET_VECTOR;
       case 0x38: 
@@ -323,7 +325,7 @@ class DistoXProtocol
 
   int readPacket( boolean no_timeout )
   {
-    int min_available = ( mDevice.mType == Device.DISTO_X000)? 8 : 1; // FIXME 8 should work in every case
+    int min_available = ( mDeviceType == Device.DISTO_X000)? 8 : 1; // FIXME 8 should work in every case
 
     TDLog.Log( TDLog.LOG_PROTO, "Protocol read packet no-timeout " + (no_timeout?"no":"yes") );
     // Log.v( "DistoX", "VD Proto read packet no-timeout " + (no_timeout?"no":"yes") );

@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import java.lang.ref.WeakReference;
+
 import java.util.ArrayList;
 
 class ImportPocketTopoTask extends ImportTask
@@ -25,33 +27,34 @@ class ImportPocketTopoTask extends ImportTask
   {
     long sid = 0;
     try {
-      DataHelper app_data = TopoDroidApp.mData;
       // import PocketTopo (only data for the first trip)
       ParserPocketTopo parser = new ParserPocketTopo( str[0], str[1], true ); // apply_declination = true
-      ArrayList< ParserShot > shots  = parser.getShots();
+      if ( mApp.get() == null ) return -1L;
+      DataHelper app_data = TopoDroidApp.mData;
       if ( app_data.hasSurveyName( parser.mName ) ) {
         return -1L;
       }
 
-      sid = mApp.setSurveyFromName( parser.mName, SurveyInfo.DATAMODE_NORMAL, false, false ); // no update, no forward
+      sid = mApp.get().setSurveyFromName( parser.mName, SurveyInfo.DATAMODE_NORMAL, false, false ); // no update, no forward
       app_data.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle, false );
       app_data.updateSurveyDeclination( sid, parser.mDeclination, false );
       app_data.updateSurveyInitStation( sid, parser.initStation(), false );
 
+      ArrayList< ParserShot > shots  = parser.getShots();
       long id = app_data.insertShots( sid, 1, shots ); // start id = 1
       TDLog.Log( TDLog.LOG_PTOPO, "SID " + sid + " inserted shots. return " + id );
 
       if ( parser.mStartFrom != null ) {
-        mApp.insert2dPlot( sid, "1", parser.mStartFrom, true, 0 ); // true = plan-extended plot, 0 = proj_dir
+        mApp.get().insert2dPlot( sid, "1", parser.mStartFrom, true, 0 ); // true = plan-extended plot, 0 = proj_dir
       }
 
-      // DBlock blk = mApp.mData.selectShot( 1, sid );
+      // DBlock blk = mApp.get().mData.selectShot( 1, sid );
       // String plan = parser.mOutline;
       // String extended = parser.mSideview;
       // if ( blk != null /* && plan != null || extended != null */ ) {
       //   // insert plot in DB
       //   // long pid = 
-      //     mApp.insert2dPlot( sid, "1", blk.mFrom );
+      //     mApp.get().insert2dPlot( sid, "1", blk.mFrom );
 
       //   if ( plan == null ) plan = "";
       //   if ( extended == null ) extended = "";
@@ -74,6 +77,7 @@ class ImportPocketTopoTask extends ImportTask
       //     TDLog.Error( "SID " + sid + " scraps IO error " + e );
       //   }
       // }
+      
     } catch ( ParserException e ) {
       // TDToast.make(mActivity, R.string.file_parse_fail );
     }

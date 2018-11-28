@@ -11,6 +11,7 @@
  */
 package com.topodroid.DistoX;
 
+import java.lang.ref.WeakReference;
 // import java.util.List;
 
 // import android.app.Activity;
@@ -30,16 +31,16 @@ class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
   static final int PARENT_GM     = 2;
 
   private byte[]   coeff;
-  private TopoDroidApp mApp; // FIXME LEAK
-  private Context mContext;  // FIXME LEAK
+  private WeakReference<TopoDroidApp> mApp; // FIXME LEAK
+  private WeakReference<Context> mContext;  // FIXME LEAK
   private IEnableButtons mEnableButtons;
   private int mParentType;
   // String comp_name;
 
   CalibReadTask( Context context, IEnableButtons eb, TopoDroidApp app, int parent_type )
   {
-    mContext = context;
-    mApp      = app;
+    mContext = new WeakReference<Context>( context );
+    mApp     = new WeakReference<TopoDroidApp>( app );
     mEnableButtons = eb;
     coeff = new byte[52]; // always read 52 bytes
     mParentType = parent_type;
@@ -49,7 +50,7 @@ class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
   @Override
   protected Boolean doInBackground(Void... v)
   {
-    return mApp.readCalibCoeff( coeff );
+    return mApp.get() != null && mApp.get().readCalibCoeff( coeff );
   }
 
   // @Override
@@ -74,13 +75,13 @@ class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
 
       switch ( mParentType ) {
         case PARENT_DEVICE:
-          if ( TopoDroidApp.mDeviceActivityVisible ) {
-            (new CalibCoeffDialog( mContext, mApp, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
+          if ( DeviceActivity.mDeviceActivityVisible && mContext.get() != null && mApp.get() != null ) {
+            (new CalibCoeffDialog( mContext.get(), mApp.get(), bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
           }
           break;
         case PARENT_GM:
-          if ( TopoDroidApp.mGMActivityVisible ) {
-            (new CalibCoeffDialog( mContext, mApp, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
+          if ( TopoDroidApp.mGMActivityVisible && mContext.get() != null && mApp.get() != null ) {
+            (new CalibCoeffDialog( mContext.get(), mApp.get(), bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
           }
           break;
       }

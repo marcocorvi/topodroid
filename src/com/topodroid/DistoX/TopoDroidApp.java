@@ -202,7 +202,6 @@ public class TopoDroidApp extends Application
   // static DrawingWindow mDrawingWindow = null; // FIXME currently not used
   static MainWindow mActivity = null; 
 
-  static boolean mDeviceActivityVisible = false;
   static boolean mGMActivityVisible = false;
 
   static long lastShotId( ) { return mData.getLastShotId( TDInstance.sid ); }
@@ -693,7 +692,7 @@ public class TopoDroidApp extends Application
   {
     mLocaleStr = locale;
     mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
-    Log.v("DistoXPref", "set locale str <" + locale + "> " + mLocale.toString() );
+    // Log.v("DistoXPref", "set locale str <" + locale + "> " + mLocale.toString() );
 
     resetLocale();
     Resources res = TDInstance.context.getResources();

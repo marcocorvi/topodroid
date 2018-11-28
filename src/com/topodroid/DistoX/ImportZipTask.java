@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import java.lang.ref.WeakReference;
+
 // import java.util.ArrayList;
 
 // import android.widget.Toast;
@@ -24,7 +26,8 @@ class ImportZipTask extends ImportTask
   protected Long doInBackground( String... str )
   {
     String filename = str[0];
-    Archiver archiver = new Archiver( mApp );
+    if ( mApp.get() == null ) return -6L;
+    Archiver archiver = new Archiver( mApp.get() );
 
     int ret = archiver.unArchive( TDPath.getZipFile( filename ), filename.replace(".zip", ""));
     return (long)ret;
@@ -34,24 +37,27 @@ class ImportZipTask extends ImportTask
   // protected void onProgressUpdate(Integer... progress) { }
 
   @Override
-  protected void onPostExecute(Long result) {
-    mMain.setTheTitle( );
+  protected void onPostExecute(Long result)
+  {
     mProgress.dismiss();
-    if ( result < -5 ) {
-      TDToast.make( R.string.unzip_fail );
-    } else if ( result == -5 ) {
-      TDToast.make( R.string.unzip_fail_sqlite );
-    } else if ( result == -4 ) {
-      TDToast.make( R.string.unzip_fail_survey );
-    } else if ( result == -3 ) {
-      TDToast.make( R.string.unzip_fail_db );
-    } else if ( result == -2 ) {
-      TDToast.make( R.string.unzip_fail_td );
-    } else if ( result == -1 ) {
-      TDToast.make( R.string.import_already );
-    } else {
-      mMain.updateDisplay( );
-      TDToast.make( R.string.import_zip_ok );
+    if ( mMain.get() != null && ! mMain.get().isFinishing() ) {
+      mMain.get().setTheTitle( );
+      if ( result < -5 ) {
+        TDToast.make( R.string.unzip_fail );
+      } else if ( result == -5 ) {
+        TDToast.make( R.string.unzip_fail_sqlite );
+      } else if ( result == -4 ) {
+        TDToast.make( R.string.unzip_fail_survey );
+      } else if ( result == -3 ) {
+        TDToast.make( R.string.unzip_fail_db );
+      } else if ( result == -2 ) {
+        TDToast.make( R.string.unzip_fail_td );
+      } else if ( result == -1 ) {
+        TDToast.make( R.string.import_already );
+      } else {
+        mMain.get().updateDisplay( );
+        TDToast.make( R.string.import_zip_ok );
+      }
     }
   }
 }

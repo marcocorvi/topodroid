@@ -118,7 +118,7 @@
       <RadioButton android:id="@+id/rb_nsplay"
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
-            android:text="-"
+            android:text="@string/dash"
             />
       <RadioButton android:id="@+id/rb_xsplay"
             android:layout_width="wrap_content" 
