@@ -69,7 +69,7 @@ public class TDPrefActivity extends Activity
   static final int PREF_PLOT_EDIT          = 25; 
   static final int PREF_CATEGORY_LOG       = 26; // this must be the last
 
-  static int mTitleRes[] = {
+  static int[] mTitleRes = {
     R.string.title_settings_main,     // 0
     R.string.title_settings_survey,
     R.string.title_settings_plot,

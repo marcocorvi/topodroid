@@ -26,7 +26,7 @@ import android.content.res.Resources;
 
 class SymbolLineLibrary extends SymbolLibrary
 {
-  static final private String DefaultLines[] = {
+  static final private String[] DefaultLines = {
     "arrow", "border", "chimney", "pit", "presumed", "rock-border", "slope", "section"
   };
 
@@ -178,5 +178,14 @@ class SymbolLineLibrary extends SymbolLibrary
   {
     makeEnabledListFromStrings( palette.mPaletteLine ); 
   }
+
+  // ArrayList<String> getSymbolNamesNoSection()
+  // {
+  //   ArrayList<String> ret = new ArrayList<>();
+  //   for ( int k = 0; k < mSymbols.size(); ++ k ) {
+  //     if ( k != mTypeSection ) ret.add( s.getName() );
+  //   }
+  //   return ret;
+  // }
 
 }    

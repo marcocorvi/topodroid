@@ -30,7 +30,7 @@
   <string name="CalibListDialog" translatable="false">page_calib_dialog.htm</string>
   <string name="CalibValidateListDialog" translatable="false">page_validation.htm</string>
   <string name="CalibValidateResultDialog" translatable="false">page_validation.htm</string>
-  <string name="ConnectDialog" translatable="false">page_connect.htm</string>
+  <!-- string name="ConnectDialog" translatable="false">page_connect.htm</string -->
   <string name="CurrentStationDialog" translatable="false">page_saved_station.htm</string>
   <string name="StationSearchDialog" translatable="false">page_station_search.htm</string>
   <string name="DeviceA3InfoDialog" translatable="false">page_a3_info.htm</string>

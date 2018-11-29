@@ -254,7 +254,7 @@
     <!-- TODO string name="splays">splays</string -->
     <!-- TODO string name="splays_show">Show splays</string -->
     <!-- TODO string name="foresurface_show">Show fore surface</string -->
-    <!-- TODO string name="fmt_listen">LISTEN | %1$s</string -->
+    <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <!-- TODO string name="fmt_id">ID %1$s</string -->
     <!-- TODO string name="fmt_latitude">Latitude %1$s</string -->
     <!-- TODO string name="fmt_longitude">Longitude %1$s</string -->
@@ -306,7 +306,7 @@
     <string name="menu_3d">3D</string>
     <string name="menu_about">关于</string>
     <string name="menu_area">范围</string>
-    <string name="menu_attach">连接</string>
+    <!-- UNUSED string name="menu_attach">连接</string -->
     <!-- UNUSED string name="menu_attached">连接</string -->
     <!-- UNUSED string name="menu_ready">就绪</string -->
     <!-- TODO string name="menu_calib_check">CALIBR. CHECK</string -->
@@ -338,7 +338,7 @@
     <!-- UNUSED string name="menu_station">测量点</string -->
     <string name="menu_stats">统计</string>
     <string name="menu_survey">测量信息</string>
-    <string name="menu_sync">同步</string>
+    <!-- UNUSED string name="menu_sync">同步</string -->
     <!-- UNUSED string name="menu_tdr2th2">TH2 草图</string -->
     <string name="menu_validate">验证</string>
     <string name="menu_zoom_fit">适合屏幕</string>
@@ -371,8 +371,8 @@
     <!-- TODO string name="popup_cont_both">Both points</string -->
     <!-- TODO string name="popup_cont_continue">Continue</string -->
 
-    <string name="connected_none">未连接</string>
-    <string name="connected_already">已连接</string>
+    <!-- UNUSED string name="connected_none">未连接</string -->
+    <!-- UNUSED string name="connected_already">已连接</string -->
 
     <string name="not_available">蓝牙无法使用</string>
     <string name="not_enabled">蓝牙未激活</string>
@@ -966,8 +966,8 @@
   <!-- TODO string name="pref_no_cursor_summary">Disable custom-keyboard cursor</string -->
   <!-- TODO string name="pref_local_help_title">Translated manual</string -->
   <!-- TODO string name="pref_local_help_summary">Enable translated manual</string -->
-  <string name="pref_cosurvey_title">联合测量服务</string>
-  <string name="pref_cosurvey_summary">启用/停用 联合测量服务</string>
+  <!-- UNUSED string name="pref_cosurvey_title">联合测量服务</string -->
+  <!-- UNUSED string name="pref_cosurvey_summary">启用/停用 联合测量服务</string -->
   <string name="pref_export_shots_title">默认数据导出</string>
   <string name="pref_export_shots_summary">默认数据导出格式</string>
   <string name="pref_export_plot_title">默认草图输出</string>

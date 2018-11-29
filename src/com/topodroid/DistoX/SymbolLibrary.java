@@ -221,7 +221,7 @@ class SymbolLibrary
     makeEnabledList( );
   }
 
-  void setRecentSymbols( Symbol recent[] )
+  void setRecentSymbols( Symbol[] recent )
   {
     int k = 0;
     for ( Symbol symbol : mSymbols ) {

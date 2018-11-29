@@ -11,6 +11,7 @@
  */
 package com.topodroid.DistoX;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import android.graphics.Paint;
@@ -26,6 +27,7 @@ import android.widget.Button;
 /**
  * note this class must be public
  */
+@SuppressLint("AppCompatCustomView")
 public class ItemButton extends Button
 {
   private Paint mPaint;

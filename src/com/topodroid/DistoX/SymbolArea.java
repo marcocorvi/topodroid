@@ -141,7 +141,7 @@ class SymbolArea extends Symbol
     if ( w1 > 0 && h1 > 0 ) {
       int w2 = w1 * 2;
       int h2 = h1 * 2;
-      int pxl2[] = new int[ w2 * h2 ];
+      int[] pxl2 = new int[ w2 * h2 ];
       for ( int j=0; j<h1; ++j ) {
         for ( int i=0; i < w1; ++i ) {
           pxl2[j*w2+i] = pxl2[j*w2+i+w1] = pxl2[(j+h1)*w2+i] = pxl2[(j+h1)*w2+i+w1] = pxl[j*w1+i];
@@ -194,7 +194,7 @@ class SymbolArea extends Symbol
     int height = 0;
     mXMode = TileMode.REPEAT;
     mYMode = TileMode.REPEAT;
-    int pxl[] = null;
+    int[] pxl = null;
 
     try {
       // FileReader fr = new FileReader( filename );

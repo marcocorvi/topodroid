@@ -16,8 +16,8 @@ import java.util.ArrayList;
 
 class BezierCurve
 {
-  private Point2D c[];      // control points of the cubic spline
-  private Point2D Vtemp[];  // work vector of four points
+  private Point2D[] c;      // control points of the cubic spline
+  private Point2D[] Vtemp;  // work vector of four points
   private int splitIndex;       // Point of split (criteria: maximum error)	
 
   // BezierCurve() // UNUSED
@@ -136,8 +136,8 @@ class BezierCurve
    */
   private float findRootNewtonRaphson( Point2D P, float u)
   {
-    Point2D Q1[] = new Point2D[3]; // Q'
-    Point2D Q2[] = new Point2D[2]; // Q"
+    Point2D[] Q1 = new Point2D[3]; // Q'
+    Point2D[] Q2 = new Point2D[2]; // Q"
     
     /* Generate control vertices for Q'	*/
     for (int i = 0; i < 3; i++) {

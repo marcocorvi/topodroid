@@ -2212,7 +2212,7 @@ class DrawingCommandManager
     float len = 0.001f;
     LinePoint lp1 = line.mFirst;
     int size = line.size();
-    float dist[ ] = new float[ size ]; 
+    float[] dist = new float[ size ];
     int k0 = 0;
     for ( LinePoint lp2 = line.mFirst; lp2 != null; lp2 = lp2.mNext ) {
       dist[k0] = lp1.distance( lp2 );

@@ -61,7 +61,7 @@ class CalibCoverageDialog extends MyDialog
   private int[] t_size;
   private int[] t_offset;
   private int t_dim;
-  private Direction angles[];
+  private Direction[] angles;
   private float mCoverage;
 
   private Bitmap mBitmapUp;

@@ -31,14 +31,14 @@ import android.content.Context;
 
 class UserManDownload extends AsyncTask< String, Integer, Integer >
 {
-  private final Context mContext; // used to toast
+  // private final Context mContext; // unused 
   private String  mUrl;
   // private static UserManDownload running = null; // WARNING do not place context in a static field
   private static boolean running = false; 
 
   UserManDownload( Context context, String url )
   {
-    mContext = context;
+    // mContext = context;
     mUrl     = url;
   }
 
@@ -55,7 +55,7 @@ class UserManDownload extends AsyncTask< String, Integer, Integer >
       HttpURLConnection http = (HttpURLConnection) connection;
       int response = http.getResponseCode();
       if ( response == HttpURLConnection.HTTP_OK ) {
-        byte buffer[] = new byte[4096];
+        byte[] buffer = new byte[4096];
         InputStream in = http.getInputStream();
         ZipInputStream zin = new ZipInputStream( in );
         ZipEntry ze = null;

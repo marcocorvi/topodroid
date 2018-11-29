@@ -226,19 +226,25 @@ class SymbolEnableDialog extends MyDialog
     // dismiss();
   }
 
+  // static SaveSymbols mSaveSymbols = new SaveSymbols();
+
   public void onBackPressed()
   {
-    new SaveSymbols( mPointAdapter, mLineAdapter, mAreaAdapter ).execute();
+    SaveSymbols save = new SaveSymbols();
+    save.setAdapters( mPointAdapter, mLineAdapter, mAreaAdapter );
+    save.execute();
+    // mSaveSymbols.setAdapters( mPointAdapter, mLineAdapter, mAreaAdapter );
+    // mSaveSymbols.execute();
     dismiss();
   }
 
   private class SaveSymbols extends AsyncTask< Void, Void, Void > // FIXME LEAK
   {
-    SymbolAdapter mPtAdapter;
-    SymbolAdapter mLnAdapter;
-    SymbolAdapter mArAdapter;
+    SymbolAdapter mPtAdapter = null;
+    SymbolAdapter mLnAdapter = null;
+    SymbolAdapter mArAdapter = null;
 
-    SaveSymbols( SymbolAdapter pt_adapter, SymbolAdapter ln_adapter, SymbolAdapter ar_adapter )
+    void setAdapters( SymbolAdapter pt_adapter, SymbolAdapter ln_adapter, SymbolAdapter ar_adapter )
     {
       mPtAdapter = pt_adapter;
       mLnAdapter = ln_adapter;

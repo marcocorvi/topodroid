@@ -78,12 +78,18 @@ class DrawingLineDialog extends MyDialog
 
     mETtype = (Spinner) findViewById( R.id.line_type );
     // mETtype.setText( BrushManager.mLineLib.getSymbolThName( mLine.mLineType ) );
-    ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, BrushManager.mLineLib.getSymbolNames() );
-    String section = BrushManager.mLineLib.getSymbolName( mTypeSection );
-    if ( section != null ) adapter.remove( section );
-    mETtype.setAdapter( adapter );
-    mETtype.setSelection( ( mType < mTypeSection )? mType : mType-1 );
-    mETtype.setOnItemSelectedListener( this );
+
+    // FIXME TODO simplify using getSymbolNamesNoSection()
+    try {
+      ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, BrushManager.mLineLib.getSymbolNames() );
+      String section = BrushManager.mLineLib.getSymbolName( mTypeSection );
+      if ( section != null ) adapter.remove( section );
+      mETtype.setAdapter( adapter );
+      mETtype.setSelection( ( mType < mTypeSection )? mType : mType-1 );
+      mETtype.setOnItemSelectedListener( this );
+    } catch ( UnsupportedOperationException e ) {
+      TDLog.Error( e.getMessage() );
+    }
 
     mEToptions = (EditText) findViewById( R.id.line_options );
     mEToptions.setText( mLine.getOptionString() );

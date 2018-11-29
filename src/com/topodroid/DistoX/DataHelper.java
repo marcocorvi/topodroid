@@ -1609,7 +1609,7 @@ class DataHelper extends DataSetObservable
         ContentValues cv = new ContentValues();
         cv.put( "surveyId", sid );
         cv.put( "shotId",   myNextId );
-        String where[] = new String[2];
+        String[] where = new String[2];
         where[0] = Long.toString( old_sid );
         List< SensorInfo > sensors = selectSensorsAtShot( old_sid, old_id ); // transfer sensors
         for ( SensorInfo sensor : sensors ) {

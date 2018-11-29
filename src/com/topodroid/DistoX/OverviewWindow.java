@@ -71,7 +71,7 @@ public class OverviewWindow extends ItemDrawer
                                       , OnZoomListener
                                       , IZoomer
 {
-  private static final int izons[] = {
+  private static final int[] izons = {
                         R.drawable.iz_measure,       // 0
                         R.drawable.iz_mode,          // 1
                         R.drawable.iz_angle,   // 2
@@ -84,20 +84,20 @@ public class OverviewWindow extends ItemDrawer
                       };
   // FIXME_OVER private static int BTN_PLOT = 2;
 
-  private static final int menus[] = {
+  private static final int[] menus = {
                         R.string.menu_close,
                         R.string.menu_options,
                         R.string.menu_help
                      };
 
-  private static final int help_icons[] = {
+  private static final int[] help_icons = {
                         R.string.help_measure,
                         R.string.help_refs,
                         R.string.help_measure_type,
                         // FIXME_OVER R.string.help_toggle_plot,
                         R.string.help_measure_undo,
                       };
-  private static final int help_menus[] = {
+  private static final int[] help_menus = {
                         R.string.help_close,
                         R.string.help_prefs,
                         R.string.help_help

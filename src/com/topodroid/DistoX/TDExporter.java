@@ -2415,10 +2415,10 @@ class TDExporter
       }
       max_series ++;
     
-      int nr_st[]    = new int[ max_series ];
-      int start_sr[] = new int[ max_series ];
-      int start_st[] = new int[ max_series ];
-      int end_st[]   = new int[ max_series ];
+      int[] nr_st    = new int[ max_series ];
+      int[] start_sr = new int[ max_series ];
+      int[] start_st = new int[ max_series ];
+      int[] end_st   = new int[ max_series ];
       for ( int k=0; k<max_series; ++k ) {
         nr_st[k] = 0;
         start_sr[k] = 0;

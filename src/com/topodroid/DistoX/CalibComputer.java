@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import java.lang.ref.WeakReference;
+
 // import android.widget.Toast;
 import android.os.AsyncTask;
 
@@ -22,14 +24,14 @@ class CalibComputer extends AsyncTask< String, Integer, Integer >
   static final int CALIB_RESET_GROUPS   = 2;
   static final int CALIB_RESET_AND_COMPUTE_GROUPS = 3;
 
-  private final GMActivity mParent; // FIXME LEAK
+  private final WeakReference<GMActivity> mParent; // FIXME LEAK
   private static CalibComputer running = null;
   private final long mStartId;
   private final int mJob;
 
   CalibComputer( GMActivity parent, long start, int job )
   {
-    mParent  = parent;
+    mParent  = new WeakReference<GMActivity>( parent );
     mStartId = start;
     mJob     = job;
   }
@@ -39,16 +41,19 @@ class CalibComputer extends AsyncTask< String, Integer, Integer >
   protected Integer doInBackground( String... statuses )
   {
     if ( ! lock() ) return null;
+    GMActivity parent = mParent.get();
+    if ( parent == null || parent.isFinishing() ) return 0;
+
     int ret = 0;
     if ( mJob == CALIB_RESET_GROUPS ) {
-      mParent.doResetGroups( mStartId );
+      parent.doResetGroups( mStartId );
     } else if ( mJob == CALIB_COMPUTE_GROUPS ) {
-      ret = mParent.doComputeGroups( mStartId );
+      ret = parent.doComputeGroups( mStartId );
     } else if ( mJob == CALIB_RESET_AND_COMPUTE_GROUPS ) {
-      mParent.doResetGroups( mStartId );
-      ret = mParent.doComputeGroups( mStartId );
+      parent.doResetGroups( mStartId );
+      ret = parent.doComputeGroups( mStartId );
     } else if ( mJob == CALIB_COMPUTE_CALIB ) {
-      ret = mParent.computeCalib();
+      ret = parent.computeCalib();
     }
     return ret;
   }
@@ -64,7 +69,9 @@ class CalibComputer extends AsyncTask< String, Integer, Integer >
   {
     if ( res != null ) {
       int r = res.intValue();
-      mParent.handleComputeCalibResult( mJob, r );
+      if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
+        mParent.get().handleComputeCalibResult( mJob, r );
+      }
     }
     unlock();
   }

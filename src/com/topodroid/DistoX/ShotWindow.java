@@ -108,7 +108,7 @@ public class ShotWindow extends Activity
 
   private DataHelper mApp_mData;
 
-  private static final int izons[] = {
+  private static final int[] izons = {
                         R.drawable.iz_download,
                         R.drawable.iz_bt,
                         R.drawable.iz_mode,
@@ -122,7 +122,7 @@ public class ShotWindow extends Activity
 			R.drawable.iz_empty
                       };
 
-  private static final int izonsno[] = {
+  private static final int[] izonsno = {
                         0,
                         0,
                         0,
@@ -132,7 +132,7 @@ public class ShotWindow extends Activity
                         0
                       };
 
-  private static final int izonsF[] = {
+  private static final int[] izonsF = {
                         R.drawable.iz_left,       // extend LEFT
                         R.drawable.iz_flip,       // extend flip
                         R.drawable.iz_right,      // extend RIGHT
@@ -146,7 +146,7 @@ public class ShotWindow extends Activity
                       };
   private static final int BTN_HIGHLIGHT = 3; // index of iz_highlight
 
-  private static final int menus[] = {
+  private static final int[] menus = {
                         R.string.menu_close,
                         R.string.menu_survey,
                         R.string.menu_recover,
@@ -158,7 +158,7 @@ public class ShotWindow extends Activity
                         R.string.menu_help
                      };
 
-  private static final int help_icons[] = {
+  private static final int[] help_icons = {
                           R.string.help_download,
                           R.string.help_remote,
                           R.string.help_display,
@@ -170,7 +170,7 @@ public class ShotWindow extends Activity
                           R.string.help_azimuth,
 			  R.string.help_refresh,
                         };
-   private static final int help_menus[] = {
+   private static final int[] help_menus = {
                           R.string.help_close,
                           R.string.help_survey_info,
                           R.string.help_undelete,

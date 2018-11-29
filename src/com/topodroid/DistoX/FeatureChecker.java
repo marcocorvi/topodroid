@@ -59,7 +59,7 @@ class FeatureChecker
 
   /** permissions string codes
    */ 
-  static final private String perms[] = {
+  static final private String[] perms = {
       android.Manifest.permission.BLUETOOTH,            // Bluetooth permissions are normal - no need to request at runtime
       android.Manifest.permission.BLUETOOTH_ADMIN,
       // android.Manifest.permission.INTERNET,
@@ -78,7 +78,7 @@ class FeatureChecker
   static final int REQUEST_PERMISSIONS = 1;
 
   private static boolean MustRestart = false; // whether need to restart app
-  static boolean GrantedPermission[] = { false, false, false, false, false, false };
+  static boolean[] GrantedPermission = { false, false, false, false, false, false };
 
   static void createPermissions( Context context, Activity activity )
   {

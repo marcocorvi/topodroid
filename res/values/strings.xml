@@ -258,7 +258,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="splays">splays</string>
     <string name="splays_show">Show splays</string>
     <string name="foresurface_show">Show fore surface</string>
-    <string name="fmt_listen">LISTEN | %1$s</string>
+    <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Latitude %1$s</string>
     <string name="fmt_longitude">Longitude %1$s</string>
@@ -311,7 +311,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="menu_3d">3D</string>
     <string name="menu_about">ABOUT</string>
     <string name="menu_area">AREA</string>
-    <string name="menu_attach">CONNECT</string>
+    <!-- UNUSED string name="menu_attach">CONNECT</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
     <string name="menu_calib_check">CALIB. CHECK</string>
@@ -343,7 +343,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="menu_station">STATIONS</string -->
     <string name="menu_stats">STATS</string>
     <string name="menu_survey">SURVEY INFO</string>
-    <string name="menu_sync">SYNC</string>
+    <!-- UNUSED string name="menu_sync">SYNC</string -->
     <!-- UNUSED string name="menu_tdr2th2">TH2 SKETCHES</string -->
     <!-- UPDATES string name="menu_updates">CHECK UPDATES</string -->
     <string name="menu_validate">VALIDATE</string>
@@ -377,8 +377,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="popup_cont_both">Both points</string>
     <string name="popup_cont_continue">Continue</string>
 
-    <string name="connected_none">Not connected</string>
-    <string name="connected_already">Already connected</string>
+    <!-- UNUSED string name="connected_none">Not connected</string -->
+    <!-- UNUSED string name="connected_already">Already connected</string -->
 
     <string name="not_available">BT not available</string>
     <string name="not_enabled">BT not enabled</string>
@@ -992,8 +992,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_no_cursor_summary">Disable custom-keyboard cursor</string>
   <string name="pref_local_help_title">User manual</string>
   <string name="pref_local_help_summary">Optional translated manual [internet required]</string>
-  <string name="pref_cosurvey_title">Co-surveying service</string>
-  <string name="pref_cosurvey_summary">Enable co-surveying service</string>
+  <!-- UNUSED string name="pref_cosurvey_title">Co-surveying service</string -->
+  <!-- UNUSED string name="pref_cosurvey_summary">Enable co-surveying service</string -->
   <string name="pref_import_datamode_title">Import datamode</string>
   <string name="pref_import_datamode_summary">Datamode for importing surveys</string>
   <string name="pref_export_shots_title">Default data export</string>

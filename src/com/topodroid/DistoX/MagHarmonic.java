@@ -23,9 +23,9 @@ package com.topodroid.DistoX;
 class MagHarmonic
 {
   private int nMax;
-  double RelativeRadiusPower[];
-  double cos_mlambda[];
-  double sin_mlambda[]; 
+  double[] RelativeRadiusPower;
+  double[] cos_mlambda;
+  double[] sin_mlambda;
 
   MagHarmonic( int nm )
   { 

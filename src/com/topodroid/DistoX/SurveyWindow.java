@@ -66,7 +66,7 @@ public class SurveyWindow extends Activity
                             , OnItemClickListener
                             , View.OnClickListener
 {
-  private static final int izons[] = {
+  private static final int[] izons = {
                         R.drawable.iz_note,
                         R.drawable.iz_info, // ic_details,
                         R.drawable.iz_3d,
@@ -75,7 +75,7 @@ public class SurveyWindow extends Activity
                         R.drawable.iz_sensor,
 			R.drawable.iz_empty
                      };
-  private static final int menus[] = {
+  private static final int[] menus = {
                         R.string.menu_close,
                         R.string.menu_export,
                         R.string.menu_rename,
@@ -87,7 +87,7 @@ public class SurveyWindow extends Activity
                         R.string.menu_help
                       };
 
-  private static final int help_icons[] = {
+  private static final int[] help_icons = {
                         R.string.help_note,
                         R.string.help_info_shot,
                         R.string.help_3d,
@@ -95,7 +95,7 @@ public class SurveyWindow extends Activity
                         R.string.help_photo,
                         R.string.help_sensor
                         };
-  private static final int help_menus[] = {
+  private static final int[] help_menus = {
                         R.string.help_close,
                         R.string.help_export_survey,
                         R.string.help_rename,

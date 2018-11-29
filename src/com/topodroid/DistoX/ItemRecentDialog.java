@@ -75,9 +75,9 @@ class ItemRecentDialog extends MyDialog
   private ItemAdapter mAdapter = null;
 
   // private LinearLayout mRecentLayout;
-  private ItemButton mRecentP[];
-  private ItemButton mRecentL[];
-  private ItemButton mRecentA[];
+  private ItemButton[] mRecentP;
+  private ItemButton[] mRecentL;
+  private ItemButton[] mRecentA;
 
   private Button mBTsize;
   private int mScale;
@@ -213,7 +213,7 @@ class ItemRecentDialog extends MyDialog
     // symbol = ItemDrawer.mRecentArea[0];
   }
 
-  private void setRecentButtons( ItemButton recent[], Symbol symbols[], float sx, float sy )
+  private void setRecentButtons( ItemButton[] recent, Symbol[] symbols, float sx, float sy )
   {
     for ( int k=0; k<nrRecent; ++k ) {
       Symbol p = symbols[k];

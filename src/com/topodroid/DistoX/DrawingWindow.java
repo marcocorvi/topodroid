@@ -102,7 +102,7 @@ public class DrawingWindow extends ItemDrawer
                                       , IPhotoInserter
                                       , IAudioInserter
 {
-  private static final int izons_ok[] = {
+  private static final int[] izons_ok = {
                         R.drawable.iz_edit_ok, // 0
                         R.drawable.iz_eraser_ok,
                         R.drawable.iz_select_ok };
@@ -162,7 +162,7 @@ public class DrawingWindow extends ItemDrawer
   private static final int BTN_ERASE_MODE = 5; // erase-mode button
   private static final int BTN_ERASE_SIZE = 6; // erase-size button
 
-  private static final int izons[] = {
+  private static final int[] izons = {
                         R.drawable.iz_edit,          // 0
                         R.drawable.iz_eraser,
                         R.drawable.iz_select,
@@ -214,7 +214,7 @@ public class DrawingWindow extends ItemDrawer
                         R.drawable.iz_cont_off,       // 21+22 continuation off
 			R.drawable.iz_delete,         // 21+23 do delete
                       };
-  private static final int menus[] = {
+  private static final int[] menus = {
                         R.string.menu_switch,
                         R.string.menu_export,     // 0
                         R.string.menu_stats,      // 1
@@ -232,7 +232,7 @@ public class DrawingWindow extends ItemDrawer
   private static final int MENU_AREA  = 10;
   private static final int MENU_CLOSE = 11;
 
-  private static final int help_icons[] = {
+  private static final int[] help_icons = {
                         R.string.help_draw,
                         R.string.help_eraser,
                         R.string.help_edit,
@@ -256,7 +256,7 @@ public class DrawingWindow extends ItemDrawer
                         R.string.help_erase_mode,
                         R.string.help_erase_size
                       };
-  private static final int help_menus[] = {
+  private static final int[] help_menus = {
                         R.string.help_plot_switch,
                         R.string.help_save_plot,
                         R.string.help_stats,

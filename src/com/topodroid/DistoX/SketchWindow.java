@@ -164,7 +164,7 @@ public class SketchWindow extends ItemDrawer
   private BitmapDrawable mBMselectShot;
   private BitmapDrawable mBMselectStation;
 
-  private static int izons[] = { 
+  private static int[] izons = {
                         R.drawable.iz_edit,   // DRAW
                         R.drawable.iz_select, // SELECT / STEP
                         // R.drawable.iz_move,  
@@ -194,14 +194,14 @@ public class SketchWindow extends ItemDrawer
                         // R.drawable.iz_note           // 21 Point: delete(cut), Leg: step
                      };
 
-  private static int izons_ok[] = { 
+  private static int[] izons_ok = {
                         R.drawable.iz_edit_ok, 
                         // R.drawable.iz_eraser_ok,
                         R.drawable.iz_select_ok };
 
   private static int GREEN_BTN = 2;
 
-  private static int menus[] = {
+  private static int[] menus = {
                         R.string.menu_export,       // 21 <-- menus
                         R.string.menu_palette, 
                         R.string.menu_zoom_fit,
@@ -212,7 +212,7 @@ public class SketchWindow extends ItemDrawer
                         R.string.menu_help           // 26
                       };
 
-  private static int help_icons[] = {
+  private static int[] help_icons = {
                         R.string.help_draw,          // GREEN_BTN
                         // R.string.help_contour,
                         R.string.help_edit,
@@ -240,7 +240,7 @@ public class SketchWindow extends ItemDrawer
                         // R.string.help_note_plot
                       };
 
-  private static int help_menus[] = {
+  private static int[] help_menus = {
                         R.string.help_save_model,   
                         R.string.help_symbol,      
                         R.string.help_one_model,   

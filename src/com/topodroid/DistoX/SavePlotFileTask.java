@@ -34,7 +34,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   private String mFormat; 
   private Handler mHandler;
   // private TopoDroidApp mApp;
-  private final DrawingWindow mParent;
+  private final WeakReference<DrawingWindow> mParent;
   private final DistoXNum mNum;
   // private final DrawingUtil mUtil;
   private final DrawingCommandManager mManager;
@@ -55,7 +55,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
                     String fullname, long type, int proj_dir, int suffix, int rotate )
   {
      mFormat   = context.getResources().getString(R.string.saved_file_2);
-     mParent   = parent;
+     mParent   = new WeakReference<DrawingWindow>( parent );
      mHandler  = handler;
      // mApp      = app;
      mNum      = num;
@@ -85,7 +85,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
                     String fullname, long type, int proj_dir )
   {
      mFormat   = context.getResources().getString(R.string.saved_file_2);
-     mParent   = parent;
+     mParent   = new WeakReference<DrawingWindow>( parent );
      mHandler  = handler;
      // mApp      = app;
      mNum      = num;
@@ -128,14 +128,20 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
             }
             break;
           case TDConst.DISTOX_EXPORT_DXF:
-            mParent.doSaveWithExt( mNum, /* mUtil, */ mManager, mType, mFullName, "dxf", false );
+	    if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
+              mParent.get().doSaveWithExt( mNum, /* mUtil, */ mManager, mType, mFullName, "dxf", false );
+	    }
             break;
           case TDConst.DISTOX_EXPORT_SVG:
-            mParent.doSaveWithExt( mNum, /* mUtil, */ mManager, mType, mFullName, "svg", false );
+	    if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
+              mParent.get().doSaveWithExt( mNum, /* mUtil, */ mManager, mType, mFullName, "svg", false );
+	    }
             break;
           case TDConst.DISTOX_EXPORT_CSX: // IMPORTANT CSX must come before PNG
             if ( PlotInfo.isSketch2D( mType ) ) {
-              mParent.doSaveCsx( origin, psd1, psd2, false );
+	      if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
+                mParent.get().doSaveCsx( origin, psd1, psd2, false );
+	      }
               break;
             } else { // X-Section cSurvey are exported as PNG
               // fall-through
@@ -149,6 +155,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
               } else {
                 float scale = mManager.getBitmapScale();
                 if (scale > 0) {
+                  // FIXME execute must be called from the main thread, current thread is working thread
                   new ExportBitmapToFile( mFormat, bitmap, scale, mFullName, false ).execute();
                 } else {
                   TDLog.Error( "cannot save PNG: negative scale" );

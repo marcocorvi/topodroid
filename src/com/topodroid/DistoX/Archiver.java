@@ -186,7 +186,7 @@ class Archiver
     String pathname;
     try {
       // byte buffer[] = new byte[36768];
-      byte buffer[] = new byte[4096];
+      byte[] buffer = new byte[4096];
 
       TDLog.Log( TDLog.LOG_ZIP, "unzip " + filename );
       ZipFile zip = new ZipFile( filename );

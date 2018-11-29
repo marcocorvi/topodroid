@@ -87,7 +87,7 @@ class ItemPickerDialog extends MyDialog
   private ItemAdapter mAdapter = null;
 
   private LinearLayout mRecentLayout = null;
-  private ItemButton mRecent[] = null;
+  private ItemButton[] mRecent = null;
 
   // static int mLinePos;
   // static int mAreaPos;
@@ -317,7 +317,7 @@ class ItemPickerDialog extends MyDialog
     return index;
   }
 
-  private void setRecentButtons( Symbol symbols[], float sx, float sy )
+  private void setRecentButtons( Symbol[] symbols, float sx, float sy )
   {
     if ( mRecent == null ) return;
     for ( int k=0; k<TDSetting.mRecentNr; ++k ) {

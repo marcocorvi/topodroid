@@ -773,19 +773,19 @@ class CalibAlgoMin extends CalibAlgo
    *               must have size as g1, m1
    */
   @Override
-  public void addStatErrors( Vector g1[], Vector m1[], float[] errors )
+  public void addStatErrors( Vector[] g1, Vector[] m1, float[] errors )
   {
     int size = g1.length;
-    Vector g2[] = new Vector[ size ];
-    Vector m2[] = new Vector[ size ];
+    Vector[] g2 = new Vector[ size ];
+    Vector[] m2 = new Vector[ size ];
     for ( int k=0; k<size; ++k ) {
       g2[k] = scaledVector( g1[k] );
       m2[k] = scaledVector( m1[k] );
     }
     // Log.v("DistoX", "add stat errors: size " + size );
 
-    Vector gr[] = new Vector[size];
-    Vector mr[] = new Vector[size];
+    Vector[] gr = new Vector[size];
+    Vector[] mr = new Vector[size];
     Vector vx = new Vector();
     for ( int i=0; i<size; ++i ) {
       gr[i] = bG.plus( aG.timesV(g2[i]) );

@@ -258,7 +258,7 @@
     <string name="splays">pomocné zámery</string>
     <string name="splays_show">Zobraziť pomocné zámery</string>
     <string name="foresurface_show">Zobraz povrch</string>
-    <string name="fmt_listen">POČÚVAJ | %1$s</string>
+    <!-- UNUSED string name="fmt_listen">POČÚVAJ | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Zemepisná šírka %1$s</string>
     <string name="fmt_longitude">Zemepisná dĺžka %1$s</string>
@@ -311,7 +311,7 @@
     <string name="menu_3d">3D</string>
     <string name="menu_about">O PROGRAME</string>
    <string name="menu_area">OBLASŤ</string>
-    <string name="menu_attach">PRIPOJIŤ</string>
+    <!-- UNUSED string name="menu_attach">PRIPOJIŤ</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
     <string name="menu_calib_check">KALIB. KONTROLA</string>
@@ -343,7 +343,7 @@
     <!-- UNUSED string name="menu_station">CAPISALDI</string -->
     <string name="menu_stats">ŠTATISTIKA</string>
     <string name="menu_survey">JASKYŇA</string>
-    <string name="menu_sync">SYNCHONIZOVAŤ</string>
+    <!-- UNUSED string name="menu_sync">SYNCHONIZOVAŤ</string -->
     <!-- UNUSED string name="menu_tdr2th2">RISEB TH2</string -->
     <!-- UPDATES string name="menu_updates">CHECK UPDATES</string -->	
     <string name="menu_validate">POROVNAŤ</string>
@@ -377,8 +377,8 @@
     <string name="popup_cont_both">Obidva body</string>
     <string name="popup_cont_continue">Pokračovanie</string>
     
-    <string name="connected_none">Nepripojené</string>
-    <string name="connected_already">Už pripojené</string>
+    <!-- UNUSED string name="connected_none">Nepripojené</string -->
+    <!-- UNUSED string name="connected_already">Už pripojené</string -->
 
     <string name="not_available">Bluetooth nie je k dispozícii</string>
     <string name="not_enabled">Bluetooth nie je povolený</string>
@@ -993,8 +993,8 @@
   <string name="pref_no_cursor_summary">Zaškrtnuté zobrazí kurzor pri písaní pri používaní základnej klávesnice</string>
   <string name="pref_local_help_title">Prekladateľská príručka</string>
   <string name="pref_local_help_summary">Výber jazyka prekladateľskej príručky</string>
-  <string name="pref_cosurvey_title">Spoločný priekum</string>
-  <string name="pref_cosurvey_summary">Aktivovať / deaktivovať funkciu Spoločného prieskumu</string>
+  <!-- UNUSED string name="pref_cosurvey_title">Spoločný priekum</string -->
+  <!-- UNUSED string name="pref_cosurvey_summary">Aktivovať / deaktivovať funkciu Spoločného prieskumu</string -->
   <string name="pref_import_datamode_title">Datamód Importu</string>
   <string name="pref_import_datamode_summary">Výber Datamódu pre import meraní</string>	
   <string name="pref_export_shots_title">Formát exportu - dát</string>

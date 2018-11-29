@@ -18,7 +18,7 @@ class TDLayout
 {
   static LayoutParams getLayoutParamsFill( int l, int t, int r, int b )
   {
-    LayoutParams lp = new LayoutParams( LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT );
+    LayoutParams lp = new LayoutParams( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
     lp.setMargins( l, t, r, b );
     return lp;
   }

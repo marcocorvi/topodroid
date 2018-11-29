@@ -254,7 +254,7 @@
     <string name="splays">Tomas laterales</string>
     <!-- TODO string name="splays_show">Show splays</string -->
     <!-- TODO string name="foresurface_show">Show fore surface</string -->
-    <!-- TODO string name="fmt_listen">LISTEN | %1$s</string -->
+    <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <!-- TODO string name="fmt_id">ID %1$s</string -->
     <!-- TODO string name="fmt_latitude">Latitude %1$s</string -->
     <!-- TODO string name="fmt_longitude">Longitude %1$s</string -->
@@ -306,7 +306,7 @@
     <string name="menu_3d">Cave3D</string>
     <string name="menu_about">Acerca de..</string>
     <string name="menu_area">Área</string>
-    <string name="menu_attach">Conectar</string>
+    <!-- UNUSED string name="menu_attach">Conectar</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
     <string name="menu_calib_check">Verificar calibración</string>
@@ -338,7 +338,7 @@
     <!-- UNUSED string name="menu_station">Estación</string -->
     <string name="menu_stats">Estadísticas</string>
     <string name="menu_survey">Info. topografía</string>
-    <string name="menu_sync">Sincro</string>
+    <!-- UNUSED string name="menu_sync">Sincro</string -->
     <!-- UNUSED string name="menu_tdr2th2">Dibujos Th2</string -->
     <string name="menu_validate">Validar</string>
     <string name="menu_zoom_fit">Ajustar a pantalla</string>
@@ -370,8 +370,8 @@
     <string name="popup_cont_both">Ambos puntos</string>
     <string name="popup_cont_continue">Continuar</string>
 
-    <string name="connected_none">No conctado</string>
-    <string name="connected_already">Ya esta conectado</string>
+    <!-- UNUSED string name="connected_none">No conctado</string -->
+    <!-- UNUSED string name="connected_already">Ya esta conectado</string -->
 
     <string name="not_available">BT No disponible</string>
     <string name="not_enabled">BT No habilitado</string>
@@ -976,8 +976,8 @@
   <!-- TODO string name="pref_no_cursor_summary">Disable custom-keyboard cursor</string -->
   <string name="pref_local_help_title">Traducción del Manual</string>
   <string name="pref_local_help_summary">Activar la traducción del Manual</string>
-  <string name="pref_cosurvey_title">Cosurvey</string>
-  <string name="pref_cosurvey_summary">Activar/Desactivar topografías compartidas</string>
+  <!-- UNUSED string name="pref_cosurvey_title">Cosurvey</string -->
+  <!-- UNUSED string name="pref_cosurvey_summary">Activar/Desactivar topografías compartidas</string -->
   <string name="pref_export_shots_title">Formato de exportación de datos</string>
   <string name="pref_export_shots_summary">Formato de exportación de datos por defecto</string>
   <string name="pref_export_plot_title">Exportación de dibujo por defecto</string>

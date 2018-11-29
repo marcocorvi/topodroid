@@ -1280,7 +1280,7 @@ public class TopoDroidApp extends Application
 
   static private void deleteObsoleteSymbols()
   {
-    String lines[] = { "blocks", "debris", "clay", "presumed", "sand", "ice" };
+    String[] lines = { "blocks", "debris", "clay", "presumed", "sand", "ice" };
     for ( String line : lines ) {
       TopoDroidUtil.deleteFile( TDPath.APP_LINE_PATH + line );
     }
@@ -1336,7 +1336,7 @@ public class TopoDroidApp extends Application
     TDPath.symbolsCheckDirs();
     try {
       // byte buffer[] = new byte[36768];
-      byte buffer[] = new byte[4096];
+      byte[] buffer = new byte[4096];
       ZipEntry ze = null;
       ZipInputStream zin = new ZipInputStream( fis );
       while ( ( ze = zin.getNextEntry() ) != null ) {
@@ -1390,7 +1390,7 @@ public class TopoDroidApp extends Application
     TDPath.checkBinDir( );
     try {
       // byte buffer[] = new byte[36768];
-      byte buffer[] = new byte[4096];
+      byte[] buffer = new byte[4096];
       ZipEntry ze = null;
       ZipInputStream zin = new ZipInputStream( fis );
       while ( ( ze = zin.getNextEntry() ) != null ) {

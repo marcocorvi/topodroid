@@ -116,7 +116,7 @@ class MyColorPicker extends MyDialog
       
       private int ave(int s, int d, float p) { return s + Math.round(p * (d - s)); }
       
-      private int interpColor(int colors[], float unit)
+      private int interpColor(int[] colors, float unit)
       {
         if (unit <= 0) {
             return colors[0];

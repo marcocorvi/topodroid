@@ -328,7 +328,7 @@ class PTFile
     void write( FileOutputStream fs ) 
     {
       try {
-        byte header[] = { 'T', 'o', 'p', (byte)3 };
+        byte[] header = { 'T', 'o', 'p', (byte)3 };
         fs.write( header, 0, 4 );
       } catch( IOException e ) {
       }

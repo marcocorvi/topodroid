@@ -171,7 +171,8 @@ class DrawingPath extends RectF
       // Log.v("DistoX", "x0 " + x0 + " offx " + offx + " Cx " + oldcx + " -> " + cx);
       if ( mPath != null ) {
         if ( flip_path ) {
-          float m[] = new float[9]; // { -1, 0, 0, 0, 1, 0, 0, 0, 1 };
+          float[] m; // { -1, 0, 0, 0, 1, 0, 0, 0, 1 };
+          m = new float[9];
           android.graphics.Matrix mat = new android.graphics.Matrix();
           mat.getValues( m );
           m[0] = -m[0];
@@ -513,7 +514,7 @@ class DrawingPath extends RectF
   String getOption( String key )
   {
     if ( mOptions == null ) return null;
-    String vals[] = mOptions.split(" ");
+    String[] vals = mOptions.split(" ");
     int len = vals.length;
     for ( int k = 0; k < len; ++k ) {
       if ( key.equals( vals[k] ) ) {

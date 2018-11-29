@@ -256,7 +256,7 @@
     <string name="splays">radieri</string>
     <string name="splays_show">Arată radierile</string>
     <string name="foresurface_show">Arată suprafața din față (3D)</string>
-    <string name="fmt_listen">ASCULTĂ | %1$s</string>
+    <!-- UNUSED string name="fmt_listen">ASCULTĂ | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Latitudine %1$s</string>
     <string name="fmt_longitude">Longitudine %1$s</string>
@@ -309,7 +309,7 @@
     <string name="menu_3d">3D</string>
     <string name="menu_about">DESPRE</string>
     <string name="menu_area">SUPRAFAȚA</string>
-    <string name="menu_attach">CONECTEAZĂ</string>
+    <!-- UNUSED string name="menu_attach">CONECTEAZĂ</string -->
     <!-- UNUSED string name="menu_attached">Conectat</string -->
     <!-- UNUSED string name="menu_ready">Pregătit</string -->
     <string name="menu_calib_check">VERIFICARE CALIBRARE</string>
@@ -341,7 +341,7 @@
     <!-- UNUSED string name="menu_station">STAȚII</string -->
     <string name="menu_stats">STATISTICI</string>
     <string name="menu_survey">INFO CARTARE</string>
-    <string name="menu_sync">SINCRONIZEAZĂ</string>
+    <!-- UNUSED string name="menu_sync">SINCRONIZEAZĂ</string -->
     <!-- UNUSED string name="menu_tdr2th2">SCHIȚE TH2</string -->
     <string name="menu_validate">VALIDEAZĂ</string>
     <string name="menu_zoom_fit">ÎNCADREAZĂ</string>
@@ -374,8 +374,8 @@
     <string name="popup_cont_both">Ambele puncte</string>
     <string name="popup_cont_continue">Continuă</string>
 
-    <string name="connected_none">Neconectat</string>
-    <string name="connected_already">Deja conectat</string>
+    <!-- UNUSED string name="connected_none">Neconectat</string -->
+    <!-- UNUSED string name="connected_already">Deja conectat</string -->
 
     <string name="not_available">BT indisponibil</string>
     <string name="not_enabled">BT dezactivat</string>
@@ -980,8 +980,8 @@
   <string name="pref_no_cursor_summary">Dezactivează cursorul tastaturii personalizate</string>
   <string name="pref_local_help_title">Manual tradus</string>
   <string name="pref_local_help_summary">Activează manualul tradus</string>
-  <string name="pref_cosurvey_title">Serviciu de co-cartare</string>
-  <string name="pref_cosurvey_summary">Activează serviciul de co-cartare</string>
+  <!-- UNUSED string name="pref_cosurvey_title">Serviciu de co-cartare</string -->
+  <!-- UNUSED string name="pref_cosurvey_summary">Activează serviciul de co-cartare</string -->
   <string name="pref_export_shots_title">Export de date implicit</string>
   <string name="pref_export_shots_summary">Formatul implicit pentru export de date</string>
   <string name="pref_export_plot_title">Export schiță implicit</string>

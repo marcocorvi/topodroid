@@ -35,8 +35,8 @@ class WorldMagneticModel
   // private int numTerms;
   private MagModel mModel;
   private static MagDate  mStartEpoch = null;
-  private static float    mGeoidHeightBuffer[] = null;
-  private static WMMcoeff mWmmCoeff[] = null;
+  private static float[]    mGeoidHeightBuffer = null;
+  private static WMMcoeff[] mWmmCoeff = null;
   private MagEllipsoid mEllip;
   private MagGeoid     mGeoid;
 
@@ -170,7 +170,7 @@ class WorldMagneticModel
   final static private int ND = 7002;
 
   // this is correct
-  static private int byteToInt( byte b[] )
+  static private int byteToInt( byte[] b )
   {
     int i3 = (int)b[3]; 
     int i2 = (int)b[2]; if ( (b[2] & 0x80) == 0x80 ) i2 = 256+i2;
@@ -179,12 +179,12 @@ class WorldMagneticModel
     return ( (i3 << 24) | (i2 << 16) | (i1 << 8) | (i0) );
   }
   
-  static private int byteToFirst( byte b[] )
+  static private int byteToFirst( byte[] b )
   {
     return (((int)b[0]) << 4) | (((int)b[1] & 0xF0)>>4);
   }
   
-  static private int byteToSecond( byte b[] )
+  static private int byteToSecond( byte[] b )
   {
     return (int)( (((int)b[2]) << 4) | ((int)b[1] & 0x0F) );
   }
@@ -207,12 +207,12 @@ class WorldMagneticModel
         // }
         // fis.close();
   
-        byte b4[] = new byte[4];
-        byte b3[] = new byte[3];
-        byte b2[] = new byte[2];
+        byte[] b4 = new byte[4];
+        byte[] b3 = new byte[3];
+        byte[] b2 = new byte[2];
   
-        int res[]   = new int[ N ];
-        int delta[] = new int[ ND ];
+        int[] res   = new int[ N ];
+        int[] delta = new int[ ND ];
         int dval1, dval2;
 
         DataInputStream fis = new DataInputStream( context.getAssets().open( "wmm/egm9615.1024" ) );

@@ -351,6 +351,7 @@
      <item name="toporobot">TopoRobot</item>
   </string-array>
 
+<!--
   <string-array name="surveyStationsB">
      <item name="no">No</item>
      <item name="for">Splays, forward leg</item>
@@ -380,6 +381,7 @@
      <item name="for2">Forward leg, splays</item>
      <item name="back2">Backward leg, splays</item>
   </string-array>
+-->
 
   <string-array name="surveyStationsValue" translatable="false">
      <item name="no">0</item>

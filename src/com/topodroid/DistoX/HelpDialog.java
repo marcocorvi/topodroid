@@ -39,10 +39,10 @@ class HelpDialog extends MyDialog
   private ListView    mList;
   private HelpAdapter mAdapter;
 
-  private int mIcons[];
-  private int mMenus[];
-  private int mIconTexts[];
-  private int mMenuTexts[];
+  private int[] mIcons;
+  private int[] mMenus;
+  private int[] mIconTexts;
+  private int[] mMenuTexts;
   private int mNr0;
   private int mNr1;
   private String mPage;
@@ -50,7 +50,7 @@ class HelpDialog extends MyDialog
   private Button mBtnManual;
 
   // TODO list of help entries
-  HelpDialog( Context context, int icons[], int menus[], int texts1[], int texts2[], int n0, int n1, String page )
+  HelpDialog( Context context, int[] icons, int[] menus, int[] texts1, int[] texts2, int n0, int n1, String page )
   {
     super( context, R.string.HelpDialog ); 
     mIcons = icons;

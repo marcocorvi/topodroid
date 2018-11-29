@@ -255,7 +255,7 @@
     <string name="splays">splay</string>
     <string name="splays_show">Mostra splays</string>
     <string name="foresurface_show">Mostra superficie</string>
-    <string name="fmt_listen">ASCOLTA | %1$s</string>
+    <!-- UNUSED string name="fmt_listen">ASCOLTA | %1$s</string -->
     <!-- FT_NO_TR string name="fmt_id">ID %1$s</string -->
     <string name="fmt_latitude">Latitudine %1$s</string>
     <string name="fmt_longitude">Longitudine %1$s</string>
@@ -307,7 +307,7 @@
     <!-- OK string name="menu_3d">3D</string -->
     <string name="menu_about">INFO</string>
     <!-- OK string name="menu_area">AREA</string -->
-    <string name="menu_attach">CONNETTI</string>
+    <!-- UNUSED string name="menu_attach">CONNETTI</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
     <string name="menu_calib_check">VERIFICA CALIBR.</string>
@@ -339,7 +339,7 @@
     <!-- UNUSED string name="menu_station">CAPISALDI</string -->
     <string name="menu_stats">STATISTICHE</string>
     <string name="menu_survey">INFORMAZIONI</string>
-    <string name="menu_sync">SINC</string>
+    <!-- UNUSED string name="menu_sync">SINC</string -->
     <!-- UNUSED string name="menu_tdr2th2">DISEGNI TH2</string -->
     <string name="menu_validate">CONVALIDA</string>
     <string name="menu_zoom_fit">ADATTA ZOOM</string>
@@ -372,8 +372,8 @@
     <string name="popup_cont_both">Entrambi i punti</string>
     <string name="popup_cont_continue">Continua</string>
 
-    <string name="connected_none">Non connesso</string>
-    <string name="connected_already">Gia\' connesso</string>
+    <!-- UNUSED string name="connected_none">Non connesso</string -->
+    <!-- UNUSED string name="connected_already">Gia\' connesso</string -->
 
     <string name="not_available">Bluetooth non disponibile</string>
     <string name="not_enabled">BT non attivo</string>
@@ -974,7 +974,7 @@
   <string name="pref_local_help_title">Manuale tradotto</string>
   <string name="pref_local_help_summary">Abilita manuale tradotto</string>
   <!-- OK string name="pref_cosurvey_title">Co-surveying</string -->
-  <string name="pref_cosurvey_summary">Attiva/disattiva il servizio co-surveying</string>
+  <!-- UNUSED string name="pref_cosurvey_summary">Attiva/disattiva il servizio co-surveying</string -->
   <string name="pref_export_shots_title">Formato esportazione dati</string>
   <string name="pref_export_shots_summary">Formato esportazione dati preferenziale</string>
   <string name="pref_export_plot_title">Default export disegno</string>

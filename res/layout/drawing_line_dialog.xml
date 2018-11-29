@@ -17,7 +17,7 @@
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:hint="@string/options"
-      />
+    />
 
     <!-- CheckBox android:id="@+id/line_reversed"
       android:layout_width="fill_parent" 

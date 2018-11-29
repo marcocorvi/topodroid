@@ -405,12 +405,12 @@ class CalibAlgoBH extends CalibAlgo
    *               must have size as g1, m1
    */
   @Override
-  public void addStatErrors( Vector g1[], Vector m1[], float[] errors )
+  public void addStatErrors( Vector[] g1, Vector[] m1, float[] errors )
   {
     int size = g1.length;
-    Vector g[] = new Vector[ size ];
-    Vector m[] = new Vector[ size ];
-    Vector gl[] = new Vector[ size ];
+    Vector[] g = new Vector[ size ];
+    Vector[] m = new Vector[ size ];
+    Vector[] gl = new Vector[ size ];
     for ( int k=0; k<size; ++k ) {
       g[k] = scaledVector( g1[k] );
       m[k] = scaledVector( m1[k] );
@@ -430,8 +430,8 @@ class CalibAlgoBH extends CalibAlgo
     }
     Vector grp = new Vector();
     Vector mrp = new Vector();
-    Vector gr[] = new Vector[size];
-    Vector mr[] = new Vector[size];
+    Vector[] gr = new Vector[size];
+    Vector[] mr = new Vector[size];
     for ( int i=0; i<size; ++i ) {
       if ( mNonLinear ) {
         gr[i] = bG.plus( aG.timesV(gl[i]) );

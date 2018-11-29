@@ -85,7 +85,7 @@ public class GMActivity extends Activity
   private String mCalibName;
   // private ConnHandler mHandler;
 
-  static final private int izons[] = {
+  static final private int[] izons = {
                         R.drawable.iz_toggle,
                         R.drawable.iz_bt,
                         R.drawable.iz_download,
@@ -105,7 +105,7 @@ public class GMActivity extends Activity
   final static private int BTN_READ     = 6;
   final static private int BTN_WRITE    = 7;
 
-  static final private int izonsno[] = {
+  static final private int[] izonsno = {
                         R.drawable.iz_toggle_no,
                         R.drawable.iz_bt_no,
                         R.drawable.iz_download_on,
@@ -116,14 +116,14 @@ public class GMActivity extends Activity
                         R.drawable.iz_write_no
                      };
 
-  static final private int menus[] = {
+  static final private int[] menus = {
                         R.string.menu_display,
                         R.string.menu_validate,
                         R.string.menu_options, 
                         R.string.menu_help
                      };
 
-  static final private int help_icons[] = {
+  static final private int[] help_icons = {
                         R.string.help_toggle,
                         R.string.help_bluetooth,
                         R.string.help_download,
@@ -133,7 +133,7 @@ public class GMActivity extends Activity
                         R.string.help_read,
                         R.string.help_write
                       };
-  static final private int help_menus[] = {
+  static final private int[] help_menus = {
                         R.string.help_display_calib,
                         R.string.help_validate,
                         R.string.help_prefs,
@@ -363,9 +363,9 @@ public class GMActivity extends Activity
       if ( list.get(j).mGroup > 0 ) {
         if ( list.get(j).mGroup != group ) {
           if ( cnt > 0 ) {
-            Vector g[] = new Vector[cnt];
-            Vector m[] = new Vector[cnt];
-            float  e[] = new float[cnt];
+            Vector[] g = new Vector[cnt];
+            Vector[] m = new Vector[cnt];
+            float[]  e = new float[cnt];
             int i=0;
             for ( ; k<j; ++k ) {
               CalibCBlock b = list.get(k);
@@ -387,9 +387,9 @@ public class GMActivity extends Activity
       }
     } 
     if ( cnt > 0 ) {
-      Vector g[] = new Vector[cnt];
-      Vector m[] = new Vector[cnt];
-      float  e[] = new float[cnt];
+      Vector[] g = new Vector[cnt];
+      Vector[] m = new Vector[cnt];
+      float[]  e = new float[cnt];
       int i=0;
       for ( ; k<list.size(); ++k ) {
         CalibCBlock b = list.get(k);

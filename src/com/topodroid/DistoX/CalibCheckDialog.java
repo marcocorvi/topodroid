@@ -152,7 +152,7 @@ class CalibCheckDialog extends MyDialog
         ++k;
       }
 
-      float errors1[] = new float[n1]; // angle differences between data in leg and leg average [radians]
+      float[] errors1 = new float[n1]; // angle differences between data in leg and leg average [radians]
       for ( k = 0; k<n1; ++k ) {
         DBlock b = mShots.get( k1 + k );
         float h = b.mLength * TDMath.cosd( b.mClino );
@@ -164,7 +164,7 @@ class CalibCheckDialog extends MyDialog
 
       if ( n2 > 0 ) {
 	// Log.v("DistoX", "found opposite block: n2 " + n2 );
-        float errors2[] = new float[n2*n1];
+        float[] errors2 = new float[n2*n1];
         for ( k = 0; k<n1; ++k ) {
           DBlock bb = mShots.get( k1 + k );
           float h = bb.mLength * TDMath.cosd( bb.mClino );
@@ -279,7 +279,7 @@ class CalibCheckDialog extends MyDialog
 	}
 	if ( n2 > 0 && n3 > 0 ) {
           // Log.v("DistoX", "found block3 k1 " + k1 + " k2 " + k2 + " k3 " + k3 );
-          float errors3[] = new float[n3*n2*n1];
+          float[] errors3 = new float[n3*n2*n1];
           for ( int h1 = 0; h1<n1; ++h1 ) {
             DBlock bb = mShots.get( k1 + h1 );
             float h = bb.mLength * TDMath.cosd( bb.mClino );

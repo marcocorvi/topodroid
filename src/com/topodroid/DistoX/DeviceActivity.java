@@ -72,7 +72,7 @@ public class DeviceActivity extends Activity
 
   private TextView mTvAddress;
 
-  private static final int izonsno[] = {
+  private static final int[] izonsno = {
                         0,
                         R.drawable.iz_toggle_no,
                         R.drawable.iz_compute_no,
@@ -82,7 +82,7 @@ public class DeviceActivity extends Activity
                         // R.drawable.iz_remote_no
                      };
 
-  private static final int izons[] = {
+  private static final int[] izons = {
                         R.drawable.iz_bt,
                         R.drawable.iz_toggle,
                         R.drawable.iz_compute,
@@ -105,7 +105,7 @@ public class DeviceActivity extends Activity
   static final private int IDX_READ   = 4;
   // static final private int IDX_MEMORY = 5;
 
-  private static final int menus[] = {
+  private static final int[] menus = {
                         R.string.menu_scan,
                         R.string.menu_pair,
                         R.string.menu_detach,
@@ -115,7 +115,7 @@ public class DeviceActivity extends Activity
                         // CALIB_RESET , R.string.menu_calib_reset
                      };
 
-  private static final int help_icons[] = {
+  private static final int[] help_icons = {
                         R.string.help_bluetooth,
                         R.string.help_toggle,
                         R.string.title_calib,
@@ -124,7 +124,7 @@ public class DeviceActivity extends Activity
                         R.string.help_sdcard
                         // R.string.help_remote
                      };
-  private static final int help_menus[] = {
+  private static final int[] help_menus = {
                         R.string.help_scan,
                         R.string.help_pair,
                         R.string.help_detach,
@@ -826,7 +826,7 @@ public class DeviceActivity extends Activity
   {
     String item_str = mArrayAdapter.getItem(pos); // "model name addr"
     if ( item_str == null || item_str.equals("X000") ) return true;
-    String vals[] = item_str.split(" ", 3);
+    String[] vals = item_str.split(" ", 3);
     String address = vals[2]; // address or nickname
     Device device = mApp_mDData.getDevice( address );
     if ( device != null ) {

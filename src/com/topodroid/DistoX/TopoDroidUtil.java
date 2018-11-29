@@ -162,7 +162,7 @@ class TopoDroidUtil
     return getDatePlg( y, m, d );
   }
 
-  static final private int mDaysByMonth[] = { 0, 31, 59, 90, 120, 151, 181,  212, 243, 273, 284, 294, 324 };
+  static final private int[] mDaysByMonth = { 0, 31, 59, 90, 120, 151, 181,  212, 243, 273, 284, 294, 324 };
   // m: 1 .. 12
   static float getDatePlg( int y, int m, int d )
   {

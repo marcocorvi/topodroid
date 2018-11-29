@@ -42,11 +42,11 @@ public class PtCmapActivity extends Activity
 {
   private TopoDroidApp mApp;
 
-  static private String mCmapLine[] = { "wall", "border", "pit", "rock-border", "arrow", "contour", "user" };
-  static private String mCmapPoint[] = { "air-draught", "water-flow", "stalactite", "blocks", "debris", "pebbles", "clay" };
+  static private String[] mCmapLine = { "wall", "border", "pit", "rock-border", "arrow", "contour", "user" };
+  static private String[] mCmapPoint = { "air-draught", "water-flow", "stalactite", "blocks", "debris", "pebbles", "clay" };
 
-  private EditText mETline[];
-  private EditText mETpoint[];
+  private EditText[] mETline;
+  private EditText[] mETpoint;
 
   private Button mBtOk;
 
@@ -65,7 +65,7 @@ public class PtCmapActivity extends Activity
   static void setMap( String cmap )
   {
     if ( cmap == null ) return;
-    String vals[] = cmap.split(" ");
+    String[] vals = cmap.split(" ");
     if ( vals.length < 14 ) return;
     for ( int k=0; k<7; ++k ) {
       mCmapLine[k] = vals[k];

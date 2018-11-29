@@ -259,7 +259,7 @@
     <string name="splays">Hilfszüge</string>
     <string name="splays_show">Hilfszüge anzeigen</string>
     <string name="foresurface_show">Vorderfläche zeigen</string>
-    <string name="fmt_listen">WARTEN | %1$s</string>
+    <!-- UNUSED string name="fmt_listen">WARTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Länge %1$s</string>
     <string name="fmt_longitude">Breite %1$s</string>
@@ -317,7 +317,7 @@
     <string name="menu_3d">3D</string>
     <string name="menu_about">ÜBER</string>
     <string name="menu_area">FLÄCHE</string>
-    <string name="menu_attach">VERBINDEN</string>
+    <!-- UNUSED string name="menu_attach">VERBINDEN</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
     <string name="menu_calib_check">KALIB. TEST</string>
@@ -349,7 +349,7 @@
     <!-- UNUSED string name="menu_station">MESSPUNKTE</string -->
     <string name="menu_stats">STATISTIK</string>
     <string name="menu_survey">INFO</string>
-    <string name="menu_sync">SYNCHRONISIEREN</string>
+    <!-- UNUSED string name="menu_sync">SYNCHRONISIEREN</string -->
     <!-- UNUSED string name="menu_tdr2th2">TH2 SKIZZEN</string -->
     <string name="menu_validate">VALIDIEREN</string>
     <string name="menu_zoom_fit">AUF SKIZZE ZOOMEN</string>
@@ -382,8 +382,8 @@
     <string name="popup_cont_both">Start- und Endpunkt</string>
     <string name="popup_cont_continue">Fortsetzen</string>
 
-    <string name="connected_none">Nicht verbunden</string>
-    <string name="connected_already">Bereits verbunden</string>
+    <!-- UNUSED string name="connected_none">Nicht verbunden</string -->
+    <!-- UNUSED string name="connected_already">Bereits verbunden</string -->
     <string name="not_available">Bluetooth nicht verfügbar</string>
     <!-- UNUSED string name="not_connected">Nicht verbinden</string -->
     <string name="not_enabled">Bluetooth nicht aktiviert</string>
@@ -994,8 +994,8 @@
   <string name="pref_no_cursor_summary">Kursor in Textfeldern nicht anzeigen</string>
   <string name="pref_local_help_title">Übersetztes Handbuch</string>
   <string name="pref_local_help_summary">Lokale Übersetzung verwenden (falls vorhanden)</string>
-  <string name="pref_cosurvey_title">Co-Vermessung</string>
-  <string name="pref_cosurvey_summary">Aktivieren/Deaktivieren Co-Vermessung</string>
+  <!-- UNUSED string name="pref_cosurvey_title">Co-Vermessung</string -->
+  <!-- UNUSED string name="pref_cosurvey_summary">Aktivieren/Deaktivieren Co-Vermessung</string -->
   <string name="pref_export_shots_title">Exportformat</string>
   <string name="pref_export_shots_summary">Standarddatenexportformat</string>
   <string name="pref_export_plot_title">Skizzenformat</string>

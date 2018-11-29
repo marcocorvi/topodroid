@@ -11,7 +11,7 @@
     android:background="@color/pref_divider"
     />
 
-  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+  <LinearLayout 
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal">
@@ -26,7 +26,7 @@
       android:padding="@dimen/padding"
       android:gravity="left"
     />
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    <LinearLayout 
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:layout_alignParentRight="true"

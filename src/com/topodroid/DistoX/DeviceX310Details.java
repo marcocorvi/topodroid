@@ -17,7 +17,7 @@ class DeviceX310Details
   static final int MAX_INDEX_X310 = 1064;
 
   // address of status word in DistoX2 memory
-  final static int mStatusAddress[] = {  
+  final static int[] mStatusAddress = {
     0xc006, 0xc006, 0xc006, 0xc034, 0xc044, 0xc044,
   };
 

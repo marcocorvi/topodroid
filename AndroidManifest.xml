@@ -51,6 +51,7 @@
           android:allowBackup="false"
 	  android:icon="@drawable/icon4"
 	  android:largeHeap="true"
+	  android:extractNativeLibs="false"
 	  ><!-- FIXME-23
 	  android:largeHeap="true"
           -->

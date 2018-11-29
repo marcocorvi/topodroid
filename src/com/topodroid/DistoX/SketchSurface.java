@@ -1152,7 +1152,7 @@ class SketchSurface extends SketchShot
         int kc = vtx[ pc.faceVertex(2) ];
         addTriangle( ka, kb, kc );
       } else if ( sz > 3 ) {
-        int idx[] = new int[sz];
+        int[] idx = new int[sz];
         float x = 0;
         float y = 0;
         float z = 0;

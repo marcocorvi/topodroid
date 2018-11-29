@@ -255,7 +255,7 @@
     <string name="splays">Странични изм.</string>
     <string name="splays_show">Показване на странични изм.</string>
     <!-- TODO string name="foresurface_show">Show fore surface</string -->
-    <!-- TODO string name="fmt_listen">LISTEN | %1$s</string -->
+    <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <!-- TODO string name="fmt_id">ID %1$s</string -->
     <string name="fmt_latitude">Геогр. шир. %1$s</string>
     <string name="fmt_longitude">Геогр. дълж. %1$s</string>
@@ -307,7 +307,7 @@
     <!-- OK string name="menu_3d">3D</string -->
     <string name="menu_about">За програмата</string>
     <string name="menu_area">Площ</string>
-    <string name="menu_attach">Свързване</string>
+    <!-- UNUSED string name="menu_attach">Свързване</string -->
     <!-- UNUSED string name="menu_attached">connected</string -->
     <!-- UNUSED string name="menu_ready">ready</string -->
     <string name="menu_calib_check">Проверка калибрация</string>
@@ -339,7 +339,7 @@
     <!-- UNUSED string name="menu_station">Репери</string -->
     <string name="menu_stats">Статистика</string>
     <string name="menu_survey">Инфо за картировката</string>
-    <string name="menu_sync">Синхронизиране</string>
+    <!-- UNUSED string name="menu_sync">Синхронизиране</string -->
     <!-- UNUSED string name="menu_tdr2th2">TH2 скици</string -->
     <string name="menu_validate">Проверка</string>
     <string name="menu_zoom_fit">Оптимално прибл.</string>
@@ -372,8 +372,8 @@
     <string name="popup_cont_both">Двете точки</string>
     <string name="popup_cont_continue">Продължаване</string>
 
-    <string name="connected_none">Няма връзка</string>
-    <string name="connected_already">Вече има връзка</string>
+    <!-- UNUSED string name="connected_none">Няма връзка</string -->
+    <!-- UNUSED string name="connected_already">Вече има връзка</string -->
 
     <string name="not_available">Bluetooth не е достъпен</string>
     <string name="not_enabled">Bluetooth не е разрешен</string>
@@ -969,8 +969,8 @@
   <!-- TODO string name="pref_no_cursor_summary">Disable custom-keyboard cursor</string -->
   <string name="pref_local_help_title">Преведено ръководство</string>
   <string name="pref_local_help_summary">Включване на преведено ръководство</string>
-  <string name="pref_cosurvey_title">Ко-картиране</string>
-  <string name="pref_cosurvey_summary">Разрешаване на едновременно картиране</string>
+  <!-- UNUSED string name="pref_cosurvey_title">Ко-картиране</string -->
+  <!-- UNUSED string name="pref_cosurvey_summary">Разрешаване на едновременно картиране</string -->
   <string name="pref_export_shots_title">Експортиране на измервания</string>
   <string name="pref_export_shots_summary">Формат на експортираните измервания</string>
   <string name="pref_export_plot_title">Експортиране на скици</string>

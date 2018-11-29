@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import java.lang.ref.WeakReference;
+
 import android.content.Context;
 import android.content.res.Resources;
 
@@ -35,14 +37,14 @@ class CutNPaste
   final static private int BUTTON_HEIGHT = 22;
 
   static private String mClipboardText = null;
-  static private PopupWindow popup = null;
-  static private EditText    popup_et = null;
+  static private PopupWindow mPopup = null;
+  static private WeakReference<EditText> mEditText;
 
   static boolean dismissPopup()
   {
-    if ( popup != null ) {
-      popup.dismiss();
-      popup = null;
+    if ( mPopup != null ) {
+      mPopup.dismiss();
+      mPopup = null;
       return true;
     }
     return false;
@@ -50,12 +52,12 @@ class CutNPaste
 
   static void makePopup( final Context context, EditText et )
   {
-    if ( popup != null ) {
-      popup.dismiss();
-      popup = null;
+    if ( mPopup != null ) {
+      mPopup.dismiss();
+      mPopup = null;
       return;
     }
-    popup_et = et;
+    mEditText = new WeakReference<EditText>( et );
 
     LinearLayout layout = new LinearLayout( context );
     layout.setOrientation(LinearLayout.VERTICAL);
@@ -73,9 +75,9 @@ class CutNPaste
     Button btn_cut = makePopupButton( context, cut, layout, lWidth, lHeight,
       new View.OnClickListener( ) {
         public void onClick(View v) {
-          if ( popup_et != null ) {
-            mClipboardText = popup_et.getText().toString();
-            popup_et.setText(TDString.EMPTY);
+          if ( mEditText.get() != null ) {
+            mClipboardText = mEditText.get().getText().toString();
+            mEditText.get().setText(TDString.EMPTY);
             String str = String.format( context.getResources().getString( R.string.copied ), mClipboardText );
             TDToast.makeGravity( str, Gravity.LEFT | Gravity.TOP );
           }
@@ -85,8 +87,8 @@ class CutNPaste
     Button btn_copy = makePopupButton( context, copy, layout, lWidth, lHeight,
       new View.OnClickListener( ) {
         public void onClick(View v) {
-          if ( popup_et != null ) {
-            mClipboardText = popup_et.getText().toString();
+          if ( mEditText.get() != null ) {
+            mClipboardText = mEditText.get().getText().toString();
             String str = String.format( context.getResources().getString( R.string.copied ), mClipboardText );
             TDToast.makeGravity( str, Gravity.LEFT | Gravity.TOP );
           }
@@ -96,8 +98,8 @@ class CutNPaste
     Button btn_paste = makePopupButton( context, paste, layout, lWidth, lHeight,
       new View.OnClickListener( ) {
         public void onClick(View v) {
-          if ( mClipboardText != null && popup_et != null ) {
-            popup_et.setText( mClipboardText );
+          if ( mClipboardText != null && mEditText.get() != null ) {
+            mEditText.get().setText( mClipboardText );
           }
           dismissPopup();
         }
@@ -111,8 +113,8 @@ class CutNPaste
     btn_copy.setWidth( w );
     btn_paste.setWidth( w );
 
-    popup = new PopupWindow( layout, w, h );
-    popup.showAsDropDown( popup_et );
+    mPopup = new PopupWindow( layout, w, h );
+    mPopup.showAsDropDown( et );
   }
 
   static private Button makeButton( Context context, String text, int color, int size )
@@ -148,7 +150,7 @@ class CutNPaste
 
   static private PopupWindow mPopupBT = null;
 
-  /** show BT popup under button b
+  /** show BT mPopup under button b
    * @param b button
    */
   static PopupWindow showPopupBT( final Context context, final ILister ilister, final TopoDroidApp app, View b, boolean gm_data )

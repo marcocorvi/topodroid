@@ -254,7 +254,7 @@
     <string name="splays">medidas auxiliares</string>
     <string name="splays_show">Mostrar medidas auxiliares</string>
     <string name="foresurface_show">Mostrar toda a superfície</string>
-    <string name="fmt_listen">OUVIR | %1$s</string>
+    <!-- UNUSED string name="fmt_listen">OUVIR | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Latitude %1$s</string>
     <string name="fmt_longitude">Longitude %1$s</string>
@@ -306,7 +306,7 @@
     <string name="menu_3d">3D</string>
     <string name="menu_about">SOBRE</string>
     <string name="menu_area">ÁREA</string>
-    <string name="menu_attach">CONECTAR</string>
+    <!-- UNUSED string name="menu_attach">CONECTAR</string -->
     <!-- UNUSED string name="menu_attached">Conectado</string -->
     <!-- UNUSED string name="menu_ready">Pronto</string -->
     <string name="menu_calib_check">VERIF. CALIB.</string>
@@ -338,7 +338,7 @@
     <!-- UNUSED string name="menu_station">BASES</string -->
     <string name="menu_stats">ESTATÍSTICAS</string>
     <string name="menu_survey">INFO TOPO</string>
-    <string name="menu_sync">SINCRONIZAÇÃO</string>
+    <!-- UNUSED string name="menu_sync">SINCRONIZAÇÃO</string -->
     <!-- UNUSED string name="menu_tdr2th2">CROQUIS TH2</string -->
     <string name="menu_validate">VALIDAR</string>
     <string name="menu_zoom_fit">ZOOM GERAL</string>
@@ -371,8 +371,8 @@
     <string name="popup_cont_both">Ambos pontos</string>
     <string name="popup_cont_continue">Continuar</string>
 
-    <string name="connected_none">Não conectado</string>
-    <string name="connected_already">Já conectado</string>
+    <!-- UNUSED string name="connected_none">Não conectado</string -->
+    <!-- UNUSED string name="connected_already">Já conectado</string -->
 
     <string name="not_available">Bluetooth indisponível</string>
     <string name="not_enabled">Bluetooth desabilitado</string>
@@ -967,8 +967,8 @@
   <string name="pref_no_cursor_summary">Desabilitar o cursor do teclado especial</string>
   <string name="pref_local_help_title">Manual traduzido</string>
   <string name="pref_local_help_summary">Habilitar manual traduzido</string>
-  <string name="pref_cosurvey_title">Topo colaborativa</string>
-  <string name="pref_cosurvey_summary">Habilitar topo colaborativa</string>
+  <!-- UNUSED string name="pref_cosurvey_title">Topo colaborativa</string -->
+  <!-- UNUSED string name="pref_cosurvey_summary">Habilitar topo colaborativa</string -->
   <string name="pref_export_shots_title">Exportação padrão de dados</string>
   <string name="pref_export_shots_summary">Formato padrão de dados para exportação</string>
   <string name="pref_export_plot_title">Exportação padrão de croqui</string>

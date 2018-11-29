@@ -101,7 +101,7 @@ public class FixedActivity extends Activity
   // MyMenuAdapter mMenuAdapter;
   // boolean onMenu;
 
-  private static final int izons[] = {
+  private static final int[] izons = {
                         R.drawable.iz_gps,
                         R.drawable.iz_plus,
                         R.drawable.iz_import

@@ -633,7 +633,7 @@ class CalibAlgo
   }
 
   // must be overridden
-  public void addStatErrors( Vector g1[], Vector m1[], float[] errors ) 
+  public void addStatErrors( Vector[] g1, Vector[] m1, float[] errors )
   {
     TDLog.Error("calib algo add error stats not overridden");
   }

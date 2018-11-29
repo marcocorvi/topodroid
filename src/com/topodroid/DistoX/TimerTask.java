@@ -35,8 +35,8 @@ class TimerTask extends AsyncTask<String, Integer, Long >
 
   private int mCntAcc;
   private int mCntMag;
-  private float mValAcc[] = new float[3];
-  private float mValMag[] = new float[3];
+  private float[] mValAcc = new float[3];
+  private float[] mValMag = new float[3];
   private SensorManager mSensorManager;
   private WeakReference<IBearingAndClino> mParent;
   boolean mRun;

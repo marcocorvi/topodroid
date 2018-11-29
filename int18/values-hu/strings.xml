@@ -255,7 +255,7 @@
     <string name="splays">segédpontok</string>
     <!-- TODO string name="splays_show">Show splays</string -->
     <!-- TODO string name="foresurface_show">Show fore surface</string -->
-    <!-- TODO string name="fmt_listen">LISTEN | %1$s</string -->
+    <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <!-- TODO string name="fmt_id">ID %1$s</string -->
     <!-- TODO string name="fmt_latitude">Latitude %1$s</string -->
     <!-- TODO string name="fmt_longitude">Longitude %1$s</string -->
@@ -307,7 +307,7 @@
     <string name="menu_3d">3D</string>
     <string name="menu_about">INFO</string>
     <string name="menu_area">TERÜLET</string>
-    <string name="menu_attach">KAPCSOL</string>
+    <!-- UNUSED string name="menu_attach">KAPCSOL</string -->
     <!-- UNUSED string name="menu_attached">ÖSSZEKAPCSOLT</string -->
     <!-- UNUSED string name="menu_ready">KÉSZ</string -->
     <string name="menu_calib_check">KALIBR. ELLENŐRZÉS</string>
@@ -339,7 +339,7 @@
     <!-- UNUSED string name="menu_station">STATIONS</string -->
     <string name="menu_stats">STATISZTIKA</string>
     <string name="menu_survey">FELMÉRÉSI INFORMÁCIÓK</string>
-    <string name="menu_sync">SZINKRONIZÁLÁS</string>
+    <!-- UNUSED string name="menu_sync">SZINKRONIZÁLÁS</string -->
     <!-- UNUSED string name="menu_tdr2th2">TH2 SKETCHES</string -->
     <string name="menu_validate">ELLENŐRZÉS</string>
     <string name="menu_zoom_fit">ABLAK KITÖLTÉSE</string>
@@ -372,8 +372,8 @@
     <string name="popup_cont_both">Mindkét pont</string>
     <string name="popup_cont_continue">Folytat</string>
 
-    <string name="connected_none">Nincs kapcsolat</string>
-    <string name="connected_already">Már összekapcsolt</string>
+    <!-- UNUSED string name="connected_none">Nincs kapcsolat</string -->
+    <!-- UNUSED string name="connected_already">Már összekapcsolt</string -->
 
     <string name="not_available">BT nem elérhető</string>
     <string name="not_enabled">BT nincs bekapcsolva</string>
@@ -967,8 +967,8 @@
   <!-- TODO string name="pref_no_cursor_summary">Disable custom-keyboard cursor</string -->
   <!-- TODO string name="pref_local_help_title">Translated manual</string -->
   <!-- TODO string name="pref_local_help_summary">Enable translated manual</string -->
-  <string name="pref_cosurvey_title">Együttes felmérés</string>
-  <string name="pref_cosurvey_summary">Együttes felmérés engedélyezése</string>
+  <!-- UNUSED string name="pref_cosurvey_title">Együttes felmérés</string -->
+  <!-- UNUSED string name="pref_cosurvey_summary">Együttes felmérés engedélyezése</string -->
   <string name="pref_export_shots_title">Adat export alapbeállítás</string>
   <string name="pref_export_shots_summary">Adat export formátum alapbeállítása</string>
   <string name="pref_export_plot_title">Vázlat export alapbeállítás</string>

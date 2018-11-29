@@ -118,7 +118,7 @@ public class MainWindow extends Activity
   private ListItemAdapter mArrayAdapter;
 
   private Button[] mButton1;
-  private static final int izons[] = {
+  private static final int[] izons = {
                           R.drawable.iz_disto2b, // iz_disto,
                           R.drawable.iz_plus,
                           R.drawable.iz_import,
@@ -128,7 +128,7 @@ public class MainWindow extends Activity
 			  R.drawable.iz_empty
                           };
 
-  private static final int menus[] = {
+  private static final int[] menus = {
                           R.string.menu_palette,
                           R.string.menu_logs,
                           R.string.menu_join_survey,
@@ -138,7 +138,7 @@ public class MainWindow extends Activity
                           R.string.menu_help
                           };
 
-  private static final int help_icons[] = { R.string.help_device,
+  private static final int[] help_icons = { R.string.help_device,
                           R.string.help_add_topodroid,
                           R.string.help_import,
                           R.string.help_symbol,
@@ -146,7 +146,7 @@ public class MainWindow extends Activity
                           // FIXME THMANAGER
                           // R.string.help_database
                           };
-  private static final int help_menus[] = {
+  private static final int[] help_menus = {
                           R.string.help_symbol,
                           R.string.help_log,
                           R.string.help_join_survey,

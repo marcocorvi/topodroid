@@ -53,13 +53,13 @@ public class CalibActivity extends Activity
                            , View.OnClickListener
                            , IExporter
 {
-  private static final int izonsno[] = {
+  private static final int[] izonsno = {
                         0, // R.drawable.iz_save_no,
                         R.drawable.iz_open_no,
                         R.drawable.iz_read_no
                         // R.drawable.iz_export0_no
                      };
-  private static final int izons[] = {
+  private static final int[] izons = {
                         R.drawable.iz_save,
                         R.drawable.iz_open,
                         R.drawable.iz_read,
@@ -71,19 +71,19 @@ public class CalibActivity extends Activity
   private BitmapDrawable mBMread;
   private BitmapDrawable mBMread_no;
   
-  private static final int menus[] = {
+  private static final int[] menus = {
                         R.string.menu_export,
                         R.string.menu_delete,
                         R.string.menu_options,
                         R.string.menu_help
                      };
 
-  private static final int help_icons[] = {
+  private static final int[] help_icons = {
                         R.string.help_save_calib,
                         R.string.help_open_calib,
                         R.string.help_coeff
                       };
-  private static final int help_menus[] = {
+  private static final int[] help_menus = {
                         R.string.help_export_calib,
                         R.string.help_delete_calib,
                         R.string.help_prefs,

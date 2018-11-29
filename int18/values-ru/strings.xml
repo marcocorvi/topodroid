@@ -257,7 +257,7 @@
     <string name="splays">бок. замеры</string>
     <string name="splays_show">Показать бок. замеры</string>
     <string name="foresurface_show">Показать переднюю поверхность</string>
-    <string name="fmt_listen">СЛУШАТЬ | %1$s</string>
+    <!-- UNUSED string name="fmt_listen">СЛУШАТЬ | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Широта %1$s</string>
     <string name="fmt_longitude">Долгота %1$s</string>
@@ -309,7 +309,7 @@
     <!-- OK string name="menu_3d">3D</string -->
     <string name="menu_about">Описание</string>
     <string name="menu_area">ОБЛАСТЬ</string>
-    <string name="menu_attach">СОЕДИНИТЬ</string>
+    <!-- UNUSED string name="menu_attach">СОЕДИНИТЬ</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
     <string name="menu_calib_check">КОНТРОЛЬ КАЛИБ.</string>
@@ -342,7 +342,7 @@
     <!-- UNUSED string name="menu_station">ПИКЕТЫ</string -->
     <string name="menu_stats">СТАТИСТИКА</string>
     <string name="menu_survey">Свойства съёмки</string>
-    <string name="menu_sync">СИНХР.</string>
+    <!-- UNUSED string name="menu_sync">СИНХР.</string -->
     <!-- UNUSED string name="menu_tdr2th2">TH2 Абрисы</string -->
     <string name="menu_validate">ВАЛИДАЦИЯ</string>
     <string name="menu_zoom_fit">ВМЕСТИТЬ</string>
@@ -375,8 +375,8 @@
     <string name="popup_cont_both">Обе точки</string>
     <string name="popup_cont_continue">Продолжить</string>
 
-    <string name="connected_none">Не соединено</string>
-    <string name="connected_already">Уже соединено</string>
+    <!-- UNUSED string name="connected_none">Не соединено</string -->
+    <!-- UNUSED string name="connected_already">Уже соединено</string -->
 
     <string name="not_available">Bluetooth недоступен</string>
     <string name="not_enabled">Bluetooth выключен</string>
@@ -982,8 +982,8 @@
   <string name="pref_no_cursor_summary">Отключить отображение курсора для сторонних клавиатур.</string>
   <string name="pref_local_help_title">Язык руководства пользователя</string>
   <string name="pref_local_help_summary">Переключить язык руководства пользователя [требуется интернет для скачивания]</string>
-  <string name="pref_cosurvey_title">Совместная съёмка</string>
-  <string name="pref_cosurvey_summary">Вкл/Выкл Совместную съёмку</string>
+  <!-- UNUSED string name="pref_cosurvey_title">Совместная съёмка</string -->
+  <!-- UNUSED string name="pref_cosurvey_summary">Вкл/Выкл Совместную съёмку</string -->
   <string name="pref_import_datamode_title">Импортируемый формат</string>
   <string name="pref_import_datamode_summary">Формат данных импортируемой съёмки</string>
   <string name="pref_export_shots_title">Формат экспорта данных</string>

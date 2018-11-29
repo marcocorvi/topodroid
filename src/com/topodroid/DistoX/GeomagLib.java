@@ -232,7 +232,7 @@ class GeomagLib
     double Epssq  = 0.0066943799901413169961;
     double K0R4   = 6367449.1458234153093;
     double K0R4oa = 0.99832429843125277950;
-    double Acoeff[] = {
+    double[] Acoeff = {
       8.37731820624469723600E-04,
       7.60852777357248641400E-07,
       1.19764550324249124400E-09,
@@ -338,7 +338,7 @@ class GeomagLib
    *       CoM          Convergence-of-meridians in radians
    */
   private MagUTMParams MAG_TMfwd4(double Eps, double Epssq, double K0R4, double K0R4oa,
-        double Acoeff[], MagUTMParams utm0, double K0, double falseE,
+        double[] Acoeff, MagUTMParams utm0, double K0, double falseE,
         double falseN, boolean XYonly, double Lambda, double Phi )
   {
     /* Ellipsoid to sphere

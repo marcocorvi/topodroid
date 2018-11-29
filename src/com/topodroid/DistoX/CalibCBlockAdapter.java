@@ -57,11 +57,13 @@ class CalibCBlockAdapter extends ArrayAdapter< CalibCBlock >
       if ( b.isSaturated() ) {
         tw.setBackgroundColor( TDColor.DARK_BROWN );
       } else if ( b.isGZero() ) {
-        tw.setBackgroundColor( TDColor.PINK );
-      } else if ( b.mStatus == 0 ) {
-        tw.setBackgroundColor( TDColor.BLACK );
-      } else {
+        tw.setBackgroundColor( TDColor.DARK_VIOLET );
+      } else if ( b.mStatus != 0 ) {
         tw.setBackgroundColor( TDColor.DARK_GRAY );
+      } else if ( b.mError > TDMath.DEG2RAD ) { // 1 degree
+        tw.setBackgroundColor( TDColor.MID_RED );
+      } else {
+        tw.setBackgroundColor( TDColor.BLACK );
       }
     }
     return v;

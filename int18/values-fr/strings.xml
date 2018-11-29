@@ -255,7 +255,7 @@
 <string name="splays">Visées d\'habillage</string>
     <!-- TODO string name="splays_show">Show splays</string -->
     <!-- TODO string name="foresurface_show">Show fore surface</string -->
-    <!-- TODO string name="fmt_listen">LISTEN | %1$s</string -->
+    <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <!-- TODO string name="fmt_id">ID %1$s</string -->
     <!-- TODO string name="fmt_latitude">Latitude %1$s</string -->
     <!-- TODO string name="fmt_longitude">Longitude %1$s</string -->
@@ -307,7 +307,7 @@
 <string name="menu_3d">3D</string>
 <string name="menu_about">A PROPOS</string>
 <string name="menu_area">ZONE</string>
-<string name="menu_attach">CONNECTER</string>
+<!-- UNUSED string name="menu_attach">CONNECTER</string -->
 <!-- UNUSED string name="menu_attached">Connecté</string -->
 <!-- UNUSED string name="menu_ready">Prêt</string -->
     <string name="menu_calib_check">VERIF ÉTALON.</string>
@@ -339,7 +339,7 @@
     <!-- UNUSED string name="menu_station">STATIONS</string -->
     <string name="menu_stats">STATS</string>
     <string name="menu_survey">INFO RELEVÉ</string>
-    <string name="menu_sync">SYNCHRONISATION</string>
+    <!-- UNUSED string name="menu_sync">SYNCHRONISATION</string -->
     <!-- UNUSED string name="menu_tdr2th2">DESSIN TH2</string -->
     <string name="menu_validate">VALIDATION</string>
     <string name="menu_zoom_fit">ZOOM</string>
@@ -372,8 +372,8 @@
     <string name="popup_cont_both">Les deux points</string>
     <string name="popup_cont_continue">Continuer</string>
 
-    <string name="connected_none">Non connecté</string>
-    <string name="connected_already">Déjà Connecté</string>
+    <!-- UNUSED string name="connected_none">Non connecté</string -->
+    <!-- UNUSED string name="connected_already">Déjà Connecté</string -->
 
     <string name="not_available">Bluetooth indisponible</string>
     <string name="not_enabled">Bluetooth désactivé</string>
@@ -963,8 +963,8 @@
   <string name="pref_mkeyboard_summary">Activer/Désactiver le clavier optionnel</string>
   <string name="pref_local_help_title">Manuel traduit</string>
   <string name="pref_local_help_summary">Activer la traduction du manuel</string>
-  <string name="pref_cosurvey_title">Co-relevé topographique</string>
-  <string name="pref_cosurvey_summary">Activer/désactiver co-relevé topographique</string>
+  <!-- UNUSED string name="pref_cosurvey_title">Co-relevé topographique</string -->
+  <!-- UNUSED string name="pref_cosurvey_summary">Activer/désactiver co-relevé topographique</string -->
   <string name="pref_export_shots_title">Format export des données</string>
   <string name="pref_export_shots_summary">Format export des données par défaut</string>
   <string name="pref_export_plot_title">Format export dessins</string>
